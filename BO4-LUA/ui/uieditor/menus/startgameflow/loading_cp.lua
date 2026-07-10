@@ -23,11 +23,11 @@ LUI.createMenu.Loading_CP = function(f1_arg0, f1_arg1)
 		end
 		return f2_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ESCAPE", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ESCAPE", function(element, menu, controller, model)
 		CoD.HUDUtility.StartPlay(element, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ESCAPE")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ESCAPE")
 		return false
 	end, false)
 	LoadingScreenSharedCPZM.id = "LoadingScreenSharedCPZM"

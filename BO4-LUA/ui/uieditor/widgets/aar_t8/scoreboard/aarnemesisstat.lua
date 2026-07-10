@@ -8,18 +8,18 @@ CoD.AARNemesisStat.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	self.soundSet = "none"
 	local Label = LUI.UIText.new(0.5, 0.5, -100, 100, 0, 0, 0, 16)
 	Label:setAlpha(0.8)
-	Label:setText(Engine[0xF9F1239CFD921FE](0x93E719493E9E18F))
+	Label:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	Label:setTTF("ttmussels_regular")
-	Label:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	Label:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Label:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	Label:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(Label)
 	self.Label = Label
 	local Stat = LUI.UIText.new(0.5, 0.5, -100, 100, 0, 0, 18, 48)
 	Stat:setAlpha(0.8)
-	Stat:setText(Engine[0xF9F1239CFD921FE](0x93E719493E9E18F))
+	Stat:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	Stat:setTTF("ttmussels_demibold")
-	Stat:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	Stat:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Stat:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	Stat:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(Stat)
 	self.Stat = Stat
 	if PostLoadFunc then

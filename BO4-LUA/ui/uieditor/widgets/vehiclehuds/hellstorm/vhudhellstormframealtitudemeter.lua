@@ -8,8 +8,8 @@ CoD.vhudHellstormFrameAltitudeMeter.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Image = LUI.UIImage.new(0, 1, 0, 0, 0, 0, 0, 450)
-	Image:setImage(RegisterImage(0xE9913D04CD0D41))
-	Image:setMaterial(LUI.UIImage.GetCachedMaterial(0x73D72BCD14C2AAD))
+	Image:setImage(RegisterImage(@"uie_ui_hud_vehicle_hellstorm_meterverticle"))
+	Image:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_tile_scroll_normal"))
 	Image:setShaderVector(0, 1, 1, 0, 0)
 	Image:setShaderVector(1, 0, 0.09, 0, 0)
 	self:addElement(Image)

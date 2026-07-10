@@ -7,7 +7,7 @@ CoD.SwipeTak5.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 	self:setClass(CoD.SwipeTak5)
 	self.id = "SwipeTak5"
 	self.soundSet = "none"
-	Engine[0xF0AF2C4A29D15D7](f1_arg1, 3, 750, 450)
+	Engine[@"setupui3dwindow"](f1_arg1, 3, 750, 450)
 	self:setUI3DWindow(3)
 	self.anyChildUsesUpdateState = true
 	local SwipeTak5Internal = CoD.SwipeTak5_Internal.new(f1_arg0, f1_arg1, 0, 0, 0, 750, 0, 0, 0, 450)

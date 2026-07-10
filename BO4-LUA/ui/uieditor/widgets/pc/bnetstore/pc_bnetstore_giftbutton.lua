@@ -54,8 +54,8 @@ CoD.PC_BnetStore_GiftButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 			end,
 		},
 	})
-	ButtonTitle.GiftSalePrice:setText(Engine[0xF9F1239CFD921FE](0xCAF60F095239BED))
-	ButtonTitle.GiftPrice:setText(Engine[0xF9F1239CFD921FE](0xCAF60F095239BED))
+	ButtonTitle.GiftSalePrice:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_6CAF60F095239BED"))
+	ButtonTitle.GiftPrice:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_6CAF60F095239BED"))
 	self:addElement(ButtonTitle)
 	self.ButtonTitle = ButtonTitle
 	LUI.OverrideFunction_CallOriginalFirst(self, "setState", function(element, controller, f3_arg2, f3_arg3, f3_arg4)

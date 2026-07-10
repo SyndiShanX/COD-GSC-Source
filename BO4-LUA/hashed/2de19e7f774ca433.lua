@@ -9,12 +9,12 @@ CoD.PositionDraft_AttackDefend.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Text = LUI.UIText.new(0, 1, 0, 0, 0, 0, 11, 29)
 	Text:setRGB(ColorSet.FriendlyBlue.r, ColorSet.FriendlyBlue.g, ColorSet.FriendlyBlue.b)
-	Text:setText(Engine[0xF9F1239CFD921FE](0xB24A4CDDBB668DB))
+	Text:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_1B24A4CDDBB668DB"))
 	Text:setTTF("ttmussels_regular")
-	Text:setMaterial(LUI.UIImage.GetCachedMaterial(0x71E049B161CD00A))
+	Text:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_171E049B161CD00A"))
 	Text:setLetterSpacing(5)
-	Text:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
-	Text:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Text:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
+	Text:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(Text)
 	self.Text = Text
 	self:mergeStateConditions({
@@ -39,7 +39,7 @@ CoD.PositionDraft_AttackDefend.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	})
 	local f1_local2 = self
 	local f1_local3 = self.subscribeToModel
-	local f1_local4 = Engine[0x8DF2E5447F384B9]()
+	local f1_local4 = Engine[@"getglobalmodel"]()
 	f1_local3(f1_local2, f1_local4["hudItems.war.attackingTeam"], function(f4_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -69,7 +69,7 @@ end
 CoD.PositionDraft_AttackDefend.__resetProperties = function(f6_arg0)
 	f6_arg0.Text:completeAnimation()
 	f6_arg0.Text:setAlpha(1)
-	f6_arg0.Text:setText(Engine[0xF9F1239CFD921FE](0xB24A4CDDBB668DB))
+	f6_arg0.Text:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_1B24A4CDDBB668DB"))
 end
 CoD.PositionDraft_AttackDefend.__clipsPerState = {
 	DefaultState = {
@@ -86,7 +86,7 @@ CoD.PositionDraft_AttackDefend.__clipsPerState = {
 			f8_arg0:__resetProperties()
 			f8_arg0:setupElementClipCounter(1)
 			f8_arg0.Text:completeAnimation()
-			f8_arg0.Text:setText(Engine[0xF9F1239CFD921FE](0xF803B470392D1C7))
+			f8_arg0.Text:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_5F803B470392D1C7"))
 			f8_arg0.clipFinished(f8_arg0.Text)
 		end,
 	},

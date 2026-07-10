@@ -22,19 +22,19 @@ CoD.KillcamKilledByAttachments.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	AttachmentsFirstThree:subscribeToGlobalModel(f1_arg1, "HUDItems", "killcamWeapon.attachment0", function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
-			AttachmentsFirstThree.Attachment0.Attachment:setText(Engine[0xF9F1239CFD921FE](f3_local0))
+			AttachmentsFirstThree.Attachment0.Attachment:setText(Engine[@"hash_4F9F1239CFD921FE"](f3_local0))
 		end
 	end)
 	AttachmentsFirstThree:subscribeToGlobalModel(f1_arg1, "HUDItems", "killcamWeapon.attachment1", function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
-			AttachmentsFirstThree.Attachment1.Attachment:setText(Engine[0xF9F1239CFD921FE](f4_local0))
+			AttachmentsFirstThree.Attachment1.Attachment:setText(Engine[@"hash_4F9F1239CFD921FE"](f4_local0))
 		end
 	end)
 	AttachmentsFirstThree:subscribeToGlobalModel(f1_arg1, "HUDItems", "killcamWeapon.attachment2", function(model)
 		local f5_local0 = model:get()
 		if f5_local0 ~= nil then
-			AttachmentsFirstThree.Attachment2.Attachment:setText(Engine[0xF9F1239CFD921FE](f5_local0))
+			AttachmentsFirstThree.Attachment2.Attachment:setText(Engine[@"hash_4F9F1239CFD921FE"](f5_local0))
 		end
 	end)
 	self:addElement(AttachmentsFirstThree)
@@ -51,19 +51,19 @@ CoD.KillcamKilledByAttachments.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	AttachmentsLastThree:subscribeToGlobalModel(f1_arg1, "HUDItems", "killcamWeapon.attachment3", function(model)
 		local f7_local0 = model:get()
 		if f7_local0 ~= nil then
-			AttachmentsLastThree.Attachment0.Attachment:setText(Engine[0xF9F1239CFD921FE](f7_local0))
+			AttachmentsLastThree.Attachment0.Attachment:setText(Engine[@"hash_4F9F1239CFD921FE"](f7_local0))
 		end
 	end)
 	AttachmentsLastThree:subscribeToGlobalModel(f1_arg1, "HUDItems", "killcamWeapon.attachment4", function(model)
 		local f8_local0 = model:get()
 		if f8_local0 ~= nil then
-			AttachmentsLastThree.Attachment1.Attachment:setText(Engine[0xF9F1239CFD921FE](f8_local0))
+			AttachmentsLastThree.Attachment1.Attachment:setText(Engine[@"hash_4F9F1239CFD921FE"](f8_local0))
 		end
 	end)
 	AttachmentsLastThree:subscribeToGlobalModel(f1_arg1, "HUDItems", "killcamWeapon.attachment5", function(model)
 		local f9_local0 = model:get()
 		if f9_local0 ~= nil then
-			AttachmentsLastThree.Attachment2.Attachment:setText(Engine[0xF9F1239CFD921FE](f9_local0))
+			AttachmentsLastThree.Attachment2.Attachment:setText(Engine[@"hash_4F9F1239CFD921FE"](f9_local0))
 		end
 	end)
 	self:addElement(AttachmentsLastThree)

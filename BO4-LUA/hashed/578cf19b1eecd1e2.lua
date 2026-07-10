@@ -8,11 +8,11 @@ CoD.Tak5Reticle_Bracket.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	self.soundSet = "default"
 	local right = LUI.UIImage.new(0, 0, 700, 762, 0.5, 0.5, -193, 193)
 	right:setZRot(180)
-	right:setImage(RegisterImage(0xCC7E616487C4EC4))
+	right:setImage(RegisterImage(@"uie_ui_hud_tak5_bracket"))
 	self:addElement(right)
 	self.right = right
 	local left = LUI.UIImage.new(0, 0, 38, 100, 0.5, 0.5, -193, 193)
-	left:setImage(RegisterImage(0xCC7E616487C4EC4))
+	left:setImage(RegisterImage(@"uie_ui_hud_tak5_bracket"))
 	self:addElement(left)
 	self.left = left
 	if PostLoadFunc then

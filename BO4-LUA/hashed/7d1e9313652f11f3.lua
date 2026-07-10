@@ -20,8 +20,8 @@ CoD.GameEndScore_PlayerIndentity.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	local ClanTag = LUI.UIText.new(0, 0, 110, 206, 0.5, 0.5, -16, 17)
 	ClanTag:setRGB(0.92, 0.92, 0.92)
 	ClanTag:setTTF("notosans_regular")
-	ClanTag:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	ClanTag:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	ClanTag:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	ClanTag:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	ClanTag:linkToElementModel(self, "clanTag", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -33,8 +33,8 @@ CoD.GameEndScore_PlayerIndentity.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	local ClientName = LUI.UIText.new(0, 0, 206, 514, 0.5, 0.5, -16, 17)
 	ClientName:setRGB(0.92, 0.92, 0.92)
 	ClientName:setTTF("notosans_bold")
-	ClientName:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	ClientName:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	ClientName:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	ClientName:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	ClientName:linkToElementModel(self, "playerName", true, function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
@@ -44,11 +44,11 @@ CoD.GameEndScore_PlayerIndentity.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	self:addElement(ClientName)
 	self.ClientName = ClientName
 	local WithLabel = LUI.UIText.new(0, 0, 514, 626, 0, 0, 39, 72)
-	WithLabel:setText(Engine[0xF9F1239CFD921FE](0x3406303D9338A94))
+	WithLabel:setText(Engine[@"hash_4F9F1239CFD921FE"](@"ui/with"))
 	WithLabel:setTTF("ttmussels_regular")
 	WithLabel:setLetterSpacing(2)
-	WithLabel:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	WithLabel:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	WithLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	WithLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(WithLabel)
 	self.WithLabel = WithLabel
 	self:mergeStateConditions({

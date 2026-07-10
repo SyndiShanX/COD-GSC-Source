@@ -8,7 +8,7 @@ CoD.grapple_reticle_prong.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local validProngTop = LUI.UIImage.new(0.5, 0.5, -23, 23, 0, 0, 0, 28)
-	validProngTop:setImage(RegisterImage(0xCF5B3262CCC34E3))
+	validProngTop:setImage(RegisterImage(@"uie_ui_hud_reticles_grapple_valid_prong"))
 	self:addElement(validProngTop)
 	self.validProngTop = validProngTop
 	if PostLoadFunc then

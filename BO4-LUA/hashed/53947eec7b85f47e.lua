@@ -8,7 +8,7 @@ CoD.Prestige_PrestigeTierIndicator.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local PrestigeMasterTierIcon = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	PrestigeMasterTierIcon:setImage(RegisterImage(0x6E9D8C84CAF99DA))
+	PrestigeMasterTierIcon:setImage(RegisterImage(@"uie_t7_arena_diamond_small_yellow"))
 	self:addElement(PrestigeMasterTierIcon)
 	self.PrestigeMasterTierIcon = PrestigeMasterTierIcon
 	self:mergeStateConditions({
@@ -33,7 +33,7 @@ CoD.Prestige_PrestigeTierIndicator.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	})
 	local f1_local2 = self
 	local f1_local3 = self.subscribeToModel
-	local f1_local4 = Engine[0x8DF2E5447F384B9]()
+	local f1_local4 = Engine[@"getglobalmodel"]()
 	f1_local3(f1_local2, f1_local4["lobbyRoot.lobbyNav"], function(f5_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -60,7 +60,7 @@ end
 CoD.Prestige_PrestigeTierIndicator.__resetProperties = function(f7_arg0)
 	f7_arg0.PrestigeMasterTierIcon:completeAnimation()
 	f7_arg0.PrestigeMasterTierIcon:setAlpha(1)
-	f7_arg0.PrestigeMasterTierIcon:setImage(RegisterImage(0x6E9D8C84CAF99DA))
+	f7_arg0.PrestigeMasterTierIcon:setImage(RegisterImage(@"uie_t7_arena_diamond_small_yellow"))
 end
 CoD.Prestige_PrestigeTierIndicator.__clipsPerState = {
 	DefaultState = {
@@ -75,7 +75,7 @@ CoD.Prestige_PrestigeTierIndicator.__clipsPerState = {
 			f9_arg0:setupElementClipCounter(1)
 			f9_arg0.PrestigeMasterTierIcon:completeAnimation()
 			f9_arg0.PrestigeMasterTierIcon:setAlpha(1)
-			f9_arg0.PrestigeMasterTierIcon:setImage(RegisterImage(0xA31DCE18D890305))
+			f9_arg0.PrestigeMasterTierIcon:setImage(RegisterImage(@"uie_ui_icon_ranks_wz_paragon_star_container"))
 			f9_arg0.clipFinished(f9_arg0.PrestigeMasterTierIcon)
 		end,
 	},
@@ -84,7 +84,7 @@ CoD.Prestige_PrestigeTierIndicator.__clipsPerState = {
 			f10_arg0:__resetProperties()
 			f10_arg0:setupElementClipCounter(1)
 			f10_arg0.PrestigeMasterTierIcon:completeAnimation()
-			f10_arg0.PrestigeMasterTierIcon:setImage(RegisterImage(0x21DF4971B308B05))
+			f10_arg0.PrestigeMasterTierIcon:setImage(RegisterImage(@"uie_ui_icon_ranks_wz_paragon_star_small"))
 			f10_arg0.clipFinished(f10_arg0.PrestigeMasterTierIcon)
 		end,
 	},

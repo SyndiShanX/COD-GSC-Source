@@ -11,8 +11,8 @@ CoD.EmblemEditorColorMixerBar.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Frame = LUI.UIImage.new(0, 1, -2, 2, 0, 1, -2, 2)
 	Frame:setAlpha(0.5)
-	Frame:setImage(RegisterImage(0x185E11D74ECA3D7))
-	Frame:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	Frame:setImage(RegisterImage(@"uie_ui_menu_store_common_frame"))
+	Frame:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	Frame:setShaderVector(0, 0, 0, 0, 0)
 	Frame:setupNineSliceShader(4, 4)
 	self:addElement(Frame)
@@ -22,7 +22,7 @@ CoD.EmblemEditorColorMixerBar.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self:addElement(barBg)
 	self.barBg = barBg
 	local bar = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	bar:setMaterial(LUI.UIImage.GetCachedMaterial(0x28C8EA936A933BE))
+	bar:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_628C8EA936A933BE"))
 	bar:setShaderVector(0, 0, 0, 0, 1)
 	bar:setShaderVector(1, 1, 1, 1, 1)
 	self:addElement(bar)
@@ -31,12 +31,12 @@ CoD.EmblemEditorColorMixerBar.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self:addElement(pointer)
 	self.pointer = pointer
 	local RightArrow = LUI.UIImage.new(1, 1, 10, 20, 0, 0, 0, 20)
-	RightArrow:setImage(RegisterImage(0x1226A0CC6137EEE))
+	RightArrow:setImage(RegisterImage(@"uie_ui_hud_common_triangle"))
 	self:addElement(RightArrow)
 	self.RightArrow = RightArrow
 	local LeftArrow = LUI.UIImage.new(0, 0, -20, -10, 0, 0, 0, 20)
 	LeftArrow:setZRot(180)
-	LeftArrow:setImage(RegisterImage(0x1226A0CC6137EEE))
+	LeftArrow:setImage(RegisterImage(@"uie_ui_hud_common_triangle"))
 	self:addElement(LeftArrow)
 	self.LeftArrow = LeftArrow
 	local CommonCornerPips = CoD.CommonCornerPips01.new(f1_arg0, f1_arg1, 0, 0, -2, 554, 0, 0, -2, 22)

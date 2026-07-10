@@ -7,17 +7,17 @@ CoD.CodCasterAnnouncementFeedText.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	self.id = "CodCasterAnnouncementFeedText"
 	self.soundSet = "default"
 	local AnnouncementFeedHeader = LUI.UIText.new(0.5, 0.5, -302.5, 302.5, 0.5, 0.5, -9.5, 8.5)
-	AnnouncementFeedHeader:setText(Engine[0xF9F1239CFD921FE](0x89BC51ECA1CF2FF))
+	AnnouncementFeedHeader:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_689BC51ECA1CF2FF"))
 	AnnouncementFeedHeader:setTTF("notosans_bold")
-	AnnouncementFeedHeader:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	AnnouncementFeedHeader:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	AnnouncementFeedHeader:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	AnnouncementFeedHeader:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(AnnouncementFeedHeader)
 	self.AnnouncementFeedHeader = AnnouncementFeedHeader
 	local AnnouncementFeed = LUI.UIText.new(0.5, 0.5, -302.5, 302.5, 0.5, 0.5, -9.5, 8.5)
-	AnnouncementFeed:setText(Engine[0xF9F1239CFD921FE](0x89BC51ECA1CF2FF))
+	AnnouncementFeed:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_689BC51ECA1CF2FF"))
 	AnnouncementFeed:setTTF("notosans_bold")
-	AnnouncementFeed:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	AnnouncementFeed:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	AnnouncementFeed:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	AnnouncementFeed:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(AnnouncementFeed)
 	self.AnnouncementFeed = AnnouncementFeed
 	if PostLoadFunc then

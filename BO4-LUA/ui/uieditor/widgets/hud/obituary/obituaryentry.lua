@@ -10,13 +10,13 @@ CoD.ObituaryEntry.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Blur = LUI.UIImage.new(-0.01, 1.01, -5, 5, 0.09, 1.09, -4, -2)
 	Blur:setRGB(0, 0, 0)
-	Blur:setMaterial(LUI.UIImage.GetCachedMaterial(0x81EEB1F96D4BE0A))
+	Blur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_381EEB1F96D4BE0A"))
 	Blur:setShaderVector(0, 0, 0.68, 0, 0)
 	self:addElement(Blur)
 	self.Blur = Blur
 	local Attacker = LUI.UIText.new(0, 0, 0, 168, 0.48, 0.48, -13, 13)
 	Attacker:setTTF("notosans_regular")
-	Attacker:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	Attacker:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	Attacker.__Color = function(f2_arg0)
 		local f2_local0 = f2_arg0:get()
 		if f2_local0 ~= nil then
@@ -55,7 +55,7 @@ CoD.ObituaryEntry.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 	self.FixedAspectRatioImage = FixedAspectRatioImage
 	local Victim = LUI.UIText.new(0, 0, 240, 424, 0.48, 0.48, -12.5, 12.5)
 	Victim:setTTF("notosans_regular")
-	Victim:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	Victim:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	Victim.__Color = function(f6_arg0)
 		local f6_local0 = f6_arg0:get()
 		if f6_local0 ~= nil then
@@ -83,11 +83,11 @@ CoD.ObituaryEntry.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 	self.Victim = Victim
 	local f1_local5 = Attacker
 	local f1_local6 = Attacker.subscribeToModel
-	local f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local6(f1_local5, f1_local7["profile.colorblindMode"], Attacker.__Color_FullPath)
 	f1_local5 = Victim
 	f1_local6 = Victim.subscribeToModel
-	f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local6(f1_local5, f1_local7["profile.colorblindMode"], Victim.__Color_FullPath)
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)
 	if PreLoadFunc then

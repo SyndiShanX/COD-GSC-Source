@@ -17,13 +17,13 @@ CoD.GeneralAttachmentContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	AttachmentList:setHorizontalCount(4)
 	AttachmentList:setVerticalCount(2)
 	AttachmentList:setSpacing(10)
-	AttachmentList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	AttachmentList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	AttachmentList:setDataSource("WeaponAttachments")
 	AttachmentList:linkToElementModel(AttachmentList, "isUberAttachment", true, function(model, f2_arg1)
-		CoD.Menu.UpdateButtonShownState(f2_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f2_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	AttachmentList:linkToElementModel(AttachmentList, "itemIndex", true, function(model, f3_arg1)
-		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	AttachmentList:registerEventHandler("list_item_gain_focus", function(element, event)
 		local f4_local0 = nil
@@ -44,10 +44,10 @@ CoD.GeneralAttachmentContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 		elseif element.super.gainFocus then
 			f6_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f6_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(AttachmentList, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(AttachmentList, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if not CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "isUberAttachment") and not IsListElementChildInState(element, "AttachmentSlot", "NotAvailable") and not CoD.CACUtility.IsCACAttachmentItemLocked(menu, element, controller) then
 			CoD.CACUtility.SetWeaponAttachmentItem(menu, self, element, controller, true)
 			CoD.BreadcrumbUtility.UpdateWeaponOpticBreadcrumbs(menu, controller)
@@ -59,10 +59,10 @@ CoD.GeneralAttachmentContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 		end
 	end, function(element, menu, controller)
 		if not CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "isUberAttachment") and not IsListElementChildInState(element, "AttachmentSlot", "NotAvailable") and not CoD.CACUtility.IsCACAttachmentItemLocked(menu, element, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		elseif CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "isUberAttachment") and CoD.WeaponAttachmentsUtility.CanEquipUberAttachmentInSlot(menu) and not CoD.CACUtility.IsCACAttachmentItemLocked(menu, element, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false

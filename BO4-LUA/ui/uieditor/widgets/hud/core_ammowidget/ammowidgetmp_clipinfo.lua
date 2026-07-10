@@ -67,7 +67,7 @@ CoD.AmmoWidgetMP_ClipInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	end, false)
 	ClipHero = Clip
 	ClipDual = Clip.subscribeToModel
-	TotalAmmoLabel = Engine[0x8DF2E5447F384B9]()
+	TotalAmmoLabel = Engine[@"getglobalmodel"]()
 	ClipDual(ClipHero, TotalAmmoLabel["lobbyRoot.lobbyNav"], function(f7_arg0)
 		f1_arg0:updateElementState(Clip, {
 			name = "model_validation",
@@ -194,7 +194,7 @@ CoD.AmmoWidgetMP_ClipInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 		{
 			stateName = "Weapon",
 			condition = function(menu, element, event)
-				return CoD.HUDUtility.UsingPlayerGadgetWithBar(f1_arg1) and CoD.ModelUtility.IsGlobalDataSourceModelValueEqualToEnum(f1_arg1, "PlayerAbilities", "playerGadget3.state", Enum[0xF0447219F15F7F3][0x1873A43E9D1620E])
+				return CoD.HUDUtility.UsingPlayerGadgetWithBar(f1_arg1) and CoD.ModelUtility.IsGlobalDataSourceModelValueEqualToEnum(f1_arg1, "PlayerAbilities", "playerGadget3.state", Enum[@"weapongadgetstates"][@"player_ability_state_inuse"])
 			end,
 		},
 		{
@@ -249,8 +249,8 @@ CoD.AmmoWidgetMP_ClipInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	TotalAmmoLabel:setAlpha(0)
 	TotalAmmoLabel:setTTF("0arame_mono_stencil")
 	TotalAmmoLabel:setLetterSpacing(2)
-	TotalAmmoLabel:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	TotalAmmoLabel:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	TotalAmmoLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	TotalAmmoLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	TotalAmmoLabel:linkToElementModel(self, "ammoStock", true, function(model)
 		local f25_local0 = model:get()
 		if f25_local0 ~= nil then
@@ -306,7 +306,7 @@ CoD.AmmoWidgetMP_ClipInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	})
 	f1_local6 = self
 	f1_local5 = self.subscribeToModel
-	local f1_local7 = Engine[0x8DF2E5447F384B9]()
+	local f1_local7 = Engine[@"getglobalmodel"]()
 	f1_local5(f1_local6, f1_local7["lobbyRoot.lobbyNav"], function(f32_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

@@ -9,7 +9,7 @@ CoD.Battlenet_Checkout_CloseButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Image = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	Image:setRGB(0.39, 0.44, 0.54)
-	Image:setImage(RegisterImage(0x5023C927DE406D2))
+	Image:setImage(RegisterImage(@"uie_pc_checkoutclose_button"))
 	self:addElement(Image)
 	self.Image = Image
 	self:mergeStateConditions({
@@ -34,7 +34,7 @@ CoD.Battlenet_Checkout_CloseButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	})
 	local f1_local2 = self
 	local f1_local3 = self.subscribeToModel
-	local f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local3(f1_local2, f1_local4.battlenetCheckoutStatus, function(f5_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -46,7 +46,7 @@ CoD.Battlenet_Checkout_CloseButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	end, false)
 	f1_local2 = self
 	f1_local3 = self.subscribeToModel
-	f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local3(f1_local2, f1_local4["KeyPressBits.MOUSE1"], function(f6_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

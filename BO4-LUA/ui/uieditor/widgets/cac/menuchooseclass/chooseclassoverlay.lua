@@ -10,7 +10,7 @@ CoD.ChooseClassOverlay.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	local BgOverlayTopWildcard = LUI.UIImage.new(-0.12, 1.12, 0, 0, 0, 1, 0, 0)
 	BgOverlayTopWildcard:setRGB(0, 0, 0)
 	BgOverlayTopWildcard:setAlpha(0)
-	BgOverlayTopWildcard:setMaterial(LUI.UIImage.GetCachedMaterial(0x655565C7B387234))
+	BgOverlayTopWildcard:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_multiply"))
 	BgOverlayTopWildcard:registerEventHandler("menu_loaded", function(element, event)
 		local f2_local0 = nil
 		if element.menuLoaded then
@@ -31,79 +31,79 @@ CoD.ChooseClassOverlay.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	local BgOverlayRightPerks = LUI.UIImage.new(0.5, 0.5, 707, 1201, 1, 1, -515, 1)
 	BgOverlayRightPerks:setRGB(0, 0, 0)
 	BgOverlayRightPerks:setAlpha(0)
-	BgOverlayRightPerks:setMaterial(LUI.UIImage.GetCachedMaterial(0x655565C7B387234))
+	BgOverlayRightPerks:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_multiply"))
 	self:addElement(BgOverlayRightPerks)
 	self.BgOverlayRightPerks = BgOverlayRightPerks
 	local BgOverlayBottomPerks = LUI.UIImage.new(0.5, 0.5, 325, 707, 1, 1, -295, 1)
 	BgOverlayBottomPerks:setRGB(0, 0, 0)
 	BgOverlayBottomPerks:setAlpha(0)
-	BgOverlayBottomPerks:setMaterial(LUI.UIImage.GetCachedMaterial(0x655565C7B387234))
+	BgOverlayBottomPerks:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_multiply"))
 	self:addElement(BgOverlayBottomPerks)
 	self.BgOverlayBottomPerks = BgOverlayBottomPerks
 	local BgOverlayLeftPerks = LUI.UIImage.new(0.5, 0.5, -1200, 325, 1, 1, -515, 1)
 	BgOverlayLeftPerks:setRGB(0, 0, 0)
 	BgOverlayLeftPerks:setAlpha(0)
-	BgOverlayLeftPerks:setMaterial(LUI.UIImage.GetCachedMaterial(0x655565C7B387234))
+	BgOverlayLeftPerks:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_multiply"))
 	self:addElement(BgOverlayLeftPerks)
 	self.BgOverlayLeftPerks = BgOverlayLeftPerks
 	local BgOverlayMiddlePerks = LUI.UIImage.new(0.5, 0.5, 325, 707, 1, 1, -515, -295)
 	BgOverlayMiddlePerks:setRGB(0, 0, 0)
 	BgOverlayMiddlePerks:setAlpha(0)
-	BgOverlayMiddlePerks:setMaterial(LUI.UIImage.GetCachedMaterial(0x655565C7B387234))
+	BgOverlayMiddlePerks:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_multiply"))
 	self:addElement(BgOverlayMiddlePerks)
 	self.BgOverlayMiddlePerks = BgOverlayMiddlePerks
 	local BgOverlayLeftSecondary = LUI.UIImage.new(0.5, 0.5, -1200, -305, 1, 1, -515, 1)
 	BgOverlayLeftSecondary:setRGB(0, 0, 0)
 	BgOverlayLeftSecondary:setAlpha(0)
-	BgOverlayLeftSecondary:setMaterial(LUI.UIImage.GetCachedMaterial(0x655565C7B387234))
+	BgOverlayLeftSecondary:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_multiply"))
 	self:addElement(BgOverlayLeftSecondary)
 	self.BgOverlayLeftSecondary = BgOverlayLeftSecondary
 	local BgOverlayRightSecondary = LUI.UIImage.new(0.5, 0.5, 66, 1200, 1, 1, -515, 1)
 	BgOverlayRightSecondary:setRGB(0, 0, 0)
 	BgOverlayRightSecondary:setAlpha(0)
-	BgOverlayRightSecondary:setMaterial(LUI.UIImage.GetCachedMaterial(0x655565C7B387234))
+	BgOverlayRightSecondary:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_multiply"))
 	self:addElement(BgOverlayRightSecondary)
 	self.BgOverlayRightSecondary = BgOverlayRightSecondary
 	local BgOverlayBottomSecondary = LUI.UIImage.new(0.5, 0.5, -305, 66, 1, 1, -91, 1)
 	BgOverlayBottomSecondary:setRGB(0, 0, 0)
 	BgOverlayBottomSecondary:setAlpha(0)
-	BgOverlayBottomSecondary:setMaterial(LUI.UIImage.GetCachedMaterial(0x655565C7B387234))
+	BgOverlayBottomSecondary:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_multiply"))
 	self:addElement(BgOverlayBottomSecondary)
 	self.BgOverlayBottomSecondary = BgOverlayBottomSecondary
 	local BgOverlayMiddleSecondary = LUI.UIImage.new(0.5, 0.5, -305, 66, 1, 1, -515, -91)
 	BgOverlayMiddleSecondary:setRGB(0, 0, 0)
 	BgOverlayMiddleSecondary:setAlpha(0)
-	BgOverlayMiddleSecondary:setMaterial(LUI.UIImage.GetCachedMaterial(0x655565C7B387234))
+	BgOverlayMiddleSecondary:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_multiply"))
 	self:addElement(BgOverlayMiddleSecondary)
 	self.BgOverlayMiddleSecondary = BgOverlayMiddleSecondary
 	local BgOverlayLeftPrimary = LUI.UIImage.new(0.5, 0.5, -1200, -685, 1, 1, -515, 1)
 	BgOverlayLeftPrimary:setRGB(0, 0, 0)
 	BgOverlayLeftPrimary:setAlpha(0)
-	BgOverlayLeftPrimary:setMaterial(LUI.UIImage.GetCachedMaterial(0x655565C7B387234))
+	BgOverlayLeftPrimary:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_multiply"))
 	self:addElement(BgOverlayLeftPrimary)
 	self.BgOverlayLeftPrimary = BgOverlayLeftPrimary
 	local BgOverlayMiddlePrimary = LUI.UIImage.new(0.5, 0.5, -685, -317, 1, 1, -515, -91)
 	BgOverlayMiddlePrimary:setRGB(0, 0, 0)
 	BgOverlayMiddlePrimary:setAlpha(0)
-	BgOverlayMiddlePrimary:setMaterial(LUI.UIImage.GetCachedMaterial(0x655565C7B387234))
+	BgOverlayMiddlePrimary:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_multiply"))
 	self:addElement(BgOverlayMiddlePrimary)
 	self.BgOverlayMiddlePrimary = BgOverlayMiddlePrimary
 	local BgOverlayBottomPrimary = LUI.UIImage.new(0.5, 0.5, -685, -317, 1, 1, -91, 1)
 	BgOverlayBottomPrimary:setRGB(0, 0, 0)
 	BgOverlayBottomPrimary:setAlpha(0)
-	BgOverlayBottomPrimary:setMaterial(LUI.UIImage.GetCachedMaterial(0x655565C7B387234))
+	BgOverlayBottomPrimary:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_multiply"))
 	self:addElement(BgOverlayBottomPrimary)
 	self.BgOverlayBottomPrimary = BgOverlayBottomPrimary
 	local BgOverlayRightPrimary = LUI.UIImage.new(0.5, 0.5, -317.5, 1199.5, 1, 1, -515, 1)
 	BgOverlayRightPrimary:setRGB(0, 0, 0)
 	BgOverlayRightPrimary:setAlpha(0)
-	BgOverlayRightPrimary:setMaterial(LUI.UIImage.GetCachedMaterial(0x655565C7B387234))
+	BgOverlayRightPrimary:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_multiply"))
 	self:addElement(BgOverlayRightPrimary)
 	self.BgOverlayRightPrimary = BgOverlayRightPrimary
 	local BgOverlayTop = LUI.UIImage.new(-0.12, 1.12, 0, 0, 1, 1, -1080, -515)
 	BgOverlayTop:setRGB(0, 0, 0)
 	BgOverlayTop:setAlpha(0)
-	BgOverlayTop:setMaterial(LUI.UIImage.GetCachedMaterial(0x655565C7B387234))
+	BgOverlayTop:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_multiply"))
 	BgOverlayTop:registerEventHandler("menu_loaded", function(element, event)
 		local f3_local0 = nil
 		if element.menuLoaded then
@@ -149,7 +149,7 @@ CoD.ChooseClassOverlay.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	})
 	local f1_local15 = self
 	local f1_local16 = self.subscribeToModel
-	local f1_local17 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local17 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local16(f1_local15, f1_local17.WildcardMenuOpen, function(f8_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -161,7 +161,7 @@ CoD.ChooseClassOverlay.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	end, false)
 	f1_local15 = self
 	f1_local16 = self.subscribeToModel
-	f1_local17 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local17 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local16(f1_local15, f1_local17.BonuscardModifiedSlotEnum, function(f9_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

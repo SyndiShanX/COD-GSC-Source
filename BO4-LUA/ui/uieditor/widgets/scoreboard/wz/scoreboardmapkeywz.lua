@@ -19,7 +19,7 @@ CoD.ScoreboardMapKeyWZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	local gameInfoBackingTint = LUI.UIImage.new(1, 1, -313, -42, 1, 1, -354, -59)
 	gameInfoBackingTint:setRGB(0, 0, 0)
 	gameInfoBackingTint:setAlpha(0.8)
-	gameInfoBackingTint:setMaterial(LUI.UIImage.GetCachedMaterial(0xF755127C95CF5B6))
+	gameInfoBackingTint:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_F755127C95CF5B6"))
 	gameInfoBackingTint:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(gameInfoBackingTint)
 	self.gameInfoBackingTint = gameInfoBackingTint
@@ -50,7 +50,7 @@ CoD.ScoreboardMapKeyWZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	end)
 	local Drag = MoveMarker
 	local BringCursor = MoveMarker.subscribeToModel
-	local ZoomOut = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local ZoomOut = Engine[@"getmodelforcontroller"](f1_arg1)
 	BringCursor(Drag, ZoomOut.LastInput, function(f5_arg0)
 		f1_arg0:updateElementState(MoveMarker, {
 			name = "model_validation",
@@ -60,7 +60,7 @@ CoD.ScoreboardMapKeyWZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 			modelName = "LastInput",
 		})
 	end, false)
-	MoveMarker.Action:setText(Engine[0xF9F1239CFD921FE](0x84898F9A62F37B4))
+	MoveMarker.Action:setText(Engine[@"hash_4F9F1239CFD921FE"](@"warzone/move_marker"))
 	MoveMarker:subscribeToGlobalModel(f1_arg1, "Controller", "move_right_stick_button_image", function(model)
 		local f6_local0 = model:get()
 		if f6_local0 ~= nil then
@@ -91,7 +91,7 @@ CoD.ScoreboardMapKeyWZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	end)
 	ZoomOut = BringCursor
 	Drag = BringCursor.subscribeToModel
-	local ZoomIn = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local ZoomIn = Engine[@"getmodelforcontroller"](f1_arg1)
 	Drag(ZoomOut, ZoomIn.LastInput, function(f10_arg0)
 		f1_arg0:updateElementState(BringCursor, {
 			name = "model_validation",
@@ -102,8 +102,8 @@ CoD.ScoreboardMapKeyWZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 		})
 	end, false)
 	BringCursor:setAlpha(0)
-	BringCursor.ControllerDependentTextBox.KBMText:setText(Engine[0xF9F1239CFD921FE](0x179672091387CD6))
-	BringCursor.Action:setText(Engine[0xF9F1239CFD921FE](0xE2C616EB9F5BBF6))
+	BringCursor.ControllerDependentTextBox.KBMText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_7179672091387CD6"))
+	BringCursor.Action:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_5E2C616EB9F5BBF6"))
 	BringCursor:subscribeToGlobalModel(f1_arg1, "Controller", "left_stick_button_image", function(model)
 		local f11_local0 = model:get()
 		if f11_local0 ~= nil then
@@ -140,7 +140,7 @@ CoD.ScoreboardMapKeyWZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	end)
 	ZoomIn = Drag
 	ZoomOut = Drag.subscribeToModel
-	local PlaceWaypoint = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local PlaceWaypoint = Engine[@"getmodelforcontroller"](f1_arg1)
 	ZoomOut(ZoomIn, PlaceWaypoint.LastInput, function(f15_arg0)
 		f1_arg0:updateElementState(Drag, {
 			name = "model_validation",
@@ -163,8 +163,8 @@ CoD.ScoreboardMapKeyWZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 		})
 	end, false)
 	Drag:setAlpha(0)
-	Drag.ControllerDependentTextBox.KBMText:setText(Engine[0xF9F1239CFD921FE](0x179672091387CD6))
-	Drag.Action:setText(Engine[0xF9F1239CFD921FE](0xFDAFCBF8344BA2A))
+	Drag.ControllerDependentTextBox.KBMText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_7179672091387CD6"))
+	Drag.Action:setText(Engine[@"hash_4F9F1239CFD921FE"](@"warzone/drag"))
 	Drag:subscribeToGlobalModel(f1_arg1, "Controller", "left_trigger_button_image", function(model)
 		local f17_local0 = model:get()
 		if f17_local0 ~= nil then
@@ -200,7 +200,7 @@ CoD.ScoreboardMapKeyWZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	end)
 	PlaceWaypoint = ZoomOut
 	ZoomIn = ZoomOut.subscribeToModel
-	local DeleteWaypoint = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local DeleteWaypoint = Engine[@"getmodelforcontroller"](f1_arg1)
 	ZoomIn(PlaceWaypoint, DeleteWaypoint.LastInput, function(f21_arg0)
 		f1_arg0:updateElementState(ZoomOut, {
 			name = "model_validation",
@@ -222,8 +222,8 @@ CoD.ScoreboardMapKeyWZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 			modelName = "mapZoom",
 		})
 	end, false)
-	ZoomOut.ControllerDependentTextBox.KBMText:setText(Engine[0xF9F1239CFD921FE](0xF802FE61568E12F))
-	ZoomOut.Action:setText(Engine[0xF9F1239CFD921FE](0x9D22E69EC9D8FA8))
+	ZoomOut.ControllerDependentTextBox.KBMText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_7F802FE61568E12F"))
+	ZoomOut.Action:setText(Engine[@"hash_4F9F1239CFD921FE"](@"warzone/zoom_out"))
 	ZoomOut:subscribeToGlobalModel(f1_arg1, "Controller", "left_trigger_button_image", function(model)
 		local f23_local0 = model:get()
 		if f23_local0 ~= nil then
@@ -259,7 +259,7 @@ CoD.ScoreboardMapKeyWZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	end)
 	DeleteWaypoint = ZoomIn
 	PlaceWaypoint = ZoomIn.subscribeToModel
-	local CloseMap = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local CloseMap = Engine[@"getmodelforcontroller"](f1_arg1)
 	PlaceWaypoint(DeleteWaypoint, CloseMap.LastInput, function(f27_arg0)
 		f1_arg0:updateElementState(ZoomIn, {
 			name = "model_validation",
@@ -281,8 +281,8 @@ CoD.ScoreboardMapKeyWZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 			modelName = "mapZoom",
 		})
 	end, false)
-	ZoomIn.ControllerDependentTextBox.KBMText:setText(Engine[0xF9F1239CFD921FE](0x6B0AA0A6A3C2DC6))
-	ZoomIn.Action:setText(Engine[0xF9F1239CFD921FE](0x270755047C71A5B))
+	ZoomIn.ControllerDependentTextBox.KBMText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_76B0AA0A6A3C2DC6"))
+	ZoomIn.Action:setText(Engine[@"hash_4F9F1239CFD921FE"](@"warzone/zoom_in"))
 	ZoomIn:subscribeToGlobalModel(f1_arg1, "Controller", "right_trigger_button_image", function(model)
 		local f29_local0 = model:get()
 		if f29_local0 ~= nil then
@@ -326,7 +326,7 @@ CoD.ScoreboardMapKeyWZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	end)
 	CloseMap = PlaceWaypoint
 	DeleteWaypoint = PlaceWaypoint.subscribeToModel
-	local CenterCursor = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local CenterCursor = Engine[@"getmodelforcontroller"](f1_arg1)
 	DeleteWaypoint(CloseMap, CenterCursor.LastInput, function(f33_arg0)
 		f1_arg0:updateElementState(PlaceWaypoint, {
 			name = "model_validation",
@@ -342,7 +342,7 @@ CoD.ScoreboardMapKeyWZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	end)
 	CloseMap = PlaceWaypoint
 	DeleteWaypoint = PlaceWaypoint.subscribeToModel
-	CenterCursor = Engine[0x4DF5CFBC1771947](f1_arg1)
+	CenterCursor = Engine[@"getmodelforcontroller"](f1_arg1)
 	DeleteWaypoint(CloseMap, CenterCursor["hudItems.waypointStatus"], function(f35_arg0)
 		f1_arg0:updateElementState(PlaceWaypoint, {
 			name = "model_validation",
@@ -352,8 +352,8 @@ CoD.ScoreboardMapKeyWZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 			modelName = "hudItems.waypointStatus",
 		})
 	end, false)
-	PlaceWaypoint.ControllerDependentTextBox.KBMText:setText(Engine[0xF9F1239CFD921FE](0x179662091387B23))
-	PlaceWaypoint.Action:setText(Engine[0xF9F1239CFD921FE](0x6C43AD61EB5EC33))
+	PlaceWaypoint.ControllerDependentTextBox.KBMText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_7179662091387B23"))
+	PlaceWaypoint.Action:setText(Engine[@"hash_4F9F1239CFD921FE"](@"warzone/place_waypoint"))
 	PlaceWaypoint:subscribeToGlobalModel(f1_arg1, "Controller", "right_shoulder_button_image", function(model)
 		local f36_local0 = model:get()
 		if f36_local0 ~= nil then
@@ -399,7 +399,7 @@ CoD.ScoreboardMapKeyWZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	end)
 	CenterCursor = DeleteWaypoint
 	CloseMap = DeleteWaypoint.subscribeToModel
-	local frame = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local frame = Engine[@"getmodelforcontroller"](f1_arg1)
 	CloseMap(CenterCursor, frame.LastInput, function(f40_arg0)
 		f1_arg0:updateElementState(DeleteWaypoint, {
 			name = "model_validation",
@@ -411,7 +411,7 @@ CoD.ScoreboardMapKeyWZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	end, false)
 	CenterCursor = DeleteWaypoint
 	CloseMap = DeleteWaypoint.subscribeToModel
-	frame = Engine[0x4DF5CFBC1771947](f1_arg1)
+	frame = Engine[@"getmodelforcontroller"](f1_arg1)
 	CloseMap(CenterCursor, frame["hudItems.waypointStatus"], function(f41_arg0)
 		f1_arg0:updateElementState(DeleteWaypoint, {
 			name = "model_validation",
@@ -425,8 +425,8 @@ CoD.ScoreboardMapKeyWZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 		f42_arg1.menu = f42_arg1.menu or f1_arg0
 		f1_arg0:updateElementState(DeleteWaypoint, f42_arg1)
 	end)
-	DeleteWaypoint.ControllerDependentTextBox.KBMText:setText(Engine[0xF9F1239CFD921FE](0x179682091387E89))
-	DeleteWaypoint.Action:setText(Engine[0xF9F1239CFD921FE](0x7C293686973A52B))
+	DeleteWaypoint.ControllerDependentTextBox.KBMText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_7179682091387E89"))
+	DeleteWaypoint.Action:setText(Engine[@"hash_4F9F1239CFD921FE"](@"warzone/delete_waypoint"))
 	DeleteWaypoint:subscribeToGlobalModel(f1_arg1, "Controller", "left_shoulder_button_image", function(model)
 		local f43_local0 = model:get()
 		if f43_local0 ~= nil then
@@ -450,7 +450,7 @@ CoD.ScoreboardMapKeyWZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	end)
 	frame = CloseMap
 	CenterCursor = CloseMap.subscribeToModel
-	local HeaderBacking = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local HeaderBacking = Engine[@"getmodelforcontroller"](f1_arg1)
 	CenterCursor(frame, HeaderBacking.LastInput, function(f46_arg0)
 		f1_arg0:updateElementState(CloseMap, {
 			name = "model_validation",
@@ -460,7 +460,7 @@ CoD.ScoreboardMapKeyWZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 			modelName = "LastInput",
 		})
 	end, false)
-	CloseMap.Action:setText(Engine[0xF9F1239CFD921FE](0x4D31C3720790EA5))
+	CloseMap.Action:setText(Engine[@"hash_4F9F1239CFD921FE"](@"warzone/close_map"))
 	CloseMap:subscribeToGlobalModel(f1_arg1, "Controller", "secondary_button_image", function(model)
 		local f47_local0 = model:get()
 		if f47_local0 ~= nil then
@@ -496,7 +496,7 @@ CoD.ScoreboardMapKeyWZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	end)
 	HeaderBacking = CenterCursor
 	frame = CenterCursor.subscribeToModel
-	local RepeatDotline01 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local RepeatDotline01 = Engine[@"getmodelforcontroller"](f1_arg1)
 	frame(HeaderBacking, RepeatDotline01.LastInput, function(f51_arg0)
 		f1_arg0:updateElementState(CenterCursor, {
 			name = "model_validation",
@@ -506,7 +506,7 @@ CoD.ScoreboardMapKeyWZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 			modelName = "LastInput",
 		})
 	end, false)
-	CenterCursor.Action:setText(Engine[0xF9F1239CFD921FE](0xE8D860773E7F262))
+	CenterCursor.Action:setText(Engine[@"hash_4F9F1239CFD921FE"](@"warzone/marker_to"))
 	CenterCursor:subscribeToGlobalModel(f1_arg1, "Controller", "left_stick_button_image", function(model)
 		local f52_local0 = model:get()
 		if f52_local0 ~= nil then
@@ -516,8 +516,8 @@ CoD.ScoreboardMapKeyWZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	self:addElement(CenterCursor)
 	self.CenterCursor = CenterCursor
 	frame = LUI.UIImage.new(1, 1, -318, -38, 1, 1, -374, -54)
-	frame:setImage(RegisterImage(0x3D54BC53A40189A))
-	frame:setMaterial(LUI.UIImage.GetCachedMaterial(0x44484DDFAF5C093))
+	frame:setImage(RegisterImage(@"hash_33D54BC53A40189A"))
+	frame:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_normal"))
 	frame:setShaderVector(0, 0, 0, 0, 0)
 	frame:setupNineSliceShader(16, 16)
 	self:addElement(frame)
@@ -528,48 +528,48 @@ CoD.ScoreboardMapKeyWZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	self.HeaderBacking = HeaderBacking
 	RepeatDotline01 = LUI.UIImage.new(1, 1, -313, -42, 1, 1, -304, -300)
 	RepeatDotline01:setAlpha(0.2)
-	RepeatDotline01:setImage(RegisterImage(0xF5E8F1B8586D9C5))
-	RepeatDotline01:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	RepeatDotline01:setImage(RegisterImage(@"hash_6F5E8F1B8586D9C5"))
+	RepeatDotline01:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	RepeatDotline01:setShaderVector(0, 0, 0, 0, 0)
 	RepeatDotline01:setupNineSliceShader(8, 4)
 	self:addElement(RepeatDotline01)
 	self.RepeatDotline01 = RepeatDotline01
 	local RepeatDotline02 = LUI.UIImage.new(1, 1, -313, -42, 1, 1, -263, -259)
 	RepeatDotline02:setAlpha(0.2)
-	RepeatDotline02:setImage(RegisterImage(0xF5E8F1B8586D9C5))
-	RepeatDotline02:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	RepeatDotline02:setImage(RegisterImage(@"hash_6F5E8F1B8586D9C5"))
+	RepeatDotline02:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	RepeatDotline02:setShaderVector(0, 0, 0, 0, 0)
 	RepeatDotline02:setupNineSliceShader(8, 4)
 	self:addElement(RepeatDotline02)
 	self.RepeatDotline02 = RepeatDotline02
 	local RepeatDotline03 = LUI.UIImage.new(1, 1, -313, -42, 1, 1, -223, -219)
 	RepeatDotline03:setAlpha(0.2)
-	RepeatDotline03:setImage(RegisterImage(0xF5E8F1B8586D9C5))
-	RepeatDotline03:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	RepeatDotline03:setImage(RegisterImage(@"hash_6F5E8F1B8586D9C5"))
+	RepeatDotline03:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	RepeatDotline03:setShaderVector(0, 0, 0, 0, 0)
 	RepeatDotline03:setupNineSliceShader(8, 4)
 	self:addElement(RepeatDotline03)
 	self.RepeatDotline03 = RepeatDotline03
 	local RepeatDotline04 = LUI.UIImage.new(1, 1, -313, -42, 1, 1, -182, -178)
 	RepeatDotline04:setAlpha(0.2)
-	RepeatDotline04:setImage(RegisterImage(0xF5E8F1B8586D9C5))
-	RepeatDotline04:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	RepeatDotline04:setImage(RegisterImage(@"hash_6F5E8F1B8586D9C5"))
+	RepeatDotline04:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	RepeatDotline04:setShaderVector(0, 0, 0, 0, 0)
 	RepeatDotline04:setupNineSliceShader(8, 4)
 	self:addElement(RepeatDotline04)
 	self.RepeatDotline04 = RepeatDotline04
 	local RepeatDotline05 = LUI.UIImage.new(1, 1, -313, -42, 1, 1, -142, -138)
 	RepeatDotline05:setAlpha(0.2)
-	RepeatDotline05:setImage(RegisterImage(0xF5E8F1B8586D9C5))
-	RepeatDotline05:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	RepeatDotline05:setImage(RegisterImage(@"hash_6F5E8F1B8586D9C5"))
+	RepeatDotline05:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	RepeatDotline05:setShaderVector(0, 0, 0, 0, 0)
 	RepeatDotline05:setupNineSliceShader(8, 4)
 	self:addElement(RepeatDotline05)
 	self.RepeatDotline05 = RepeatDotline05
 	local RepeatDotline06 = LUI.UIImage.new(1, 1, -313, -42, 1, 1, -101, -97)
 	RepeatDotline06:setAlpha(0.2)
-	RepeatDotline06:setImage(RegisterImage(0xF5E8F1B8586D9C5))
-	RepeatDotline06:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	RepeatDotline06:setImage(RegisterImage(@"hash_6F5E8F1B8586D9C5"))
+	RepeatDotline06:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	RepeatDotline06:setShaderVector(0, 0, 0, 0, 0)
 	RepeatDotline06:setupNineSliceShader(8, 4)
 	self:addElement(RepeatDotline06)
@@ -577,10 +577,10 @@ CoD.ScoreboardMapKeyWZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	local ControlHeader = LUI.UIText.new(0, 0, -28, 172, 0, 0, -113, -98)
 	ControlHeader:setRGB(0.92, 0.92, 0.92)
 	ControlHeader:setAlpha(0.2)
-	ControlHeader:setText(LocalizeToUpperString(0x19352A5A4C9CAC9))
+	ControlHeader:setText(LocalizeToUpperString(@"menu/controls"))
 	ControlHeader:setTTF("ttmussels_demibold")
-	ControlHeader:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	ControlHeader:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	ControlHeader:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	ControlHeader:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(ControlHeader)
 	self.ControlHeader = ControlHeader
 	self:mergeStateConditions({
@@ -597,7 +597,7 @@ CoD.ScoreboardMapKeyWZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	end)
 	local f1_local21 = self
 	local f1_local22 = self.subscribeToModel
-	local f1_local23 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local23 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local22(f1_local21, f1_local23.LastInput, function(f55_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -632,13 +632,13 @@ CoD.ScoreboardMapKeyWZ.__resetProperties = function(f56_arg0)
 	f56_arg0.CloseMap:setLeftRight(1, 1, -298, -42)
 	f56_arg0.CloseMap:setTopBottom(1, 1, -100, -60)
 	f56_arg0.CloseMap:setAlpha(1)
-	f56_arg0.CloseMap.ControllerDependentTextBox.KBMText:setText(Engine[0xF9F1239CFD921FE](0x93E719493E9E18F))
+	f56_arg0.CloseMap.ControllerDependentTextBox.KBMText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	f56_arg0.DeleteWaypoint:setLeftRight(1, 1, -298, -42)
 	f56_arg0.DeleteWaypoint:setTopBottom(1, 1, -181, -141)
-	f56_arg0.DeleteWaypoint.ControllerDependentTextBox.KBMText:setText(Engine[0xF9F1239CFD921FE](0x179682091387E89))
+	f56_arg0.DeleteWaypoint.ControllerDependentTextBox.KBMText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_7179682091387E89"))
 	f56_arg0.PlaceWaypoint:setLeftRight(1, 1, -298, -42)
 	f56_arg0.PlaceWaypoint:setTopBottom(1, 1, -221.5, -181.5)
-	f56_arg0.PlaceWaypoint.ControllerDependentTextBox.KBMText:setText(Engine[0xF9F1239CFD921FE](0x179662091387B23))
+	f56_arg0.PlaceWaypoint.ControllerDependentTextBox.KBMText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_7179662091387B23"))
 	f56_arg0.ZoomOut:setLeftRight(1, 1, -298, -42)
 	f56_arg0.ZoomOut:setTopBottom(1, 1, -262, -222)
 	f56_arg0.ZoomIn:setLeftRight(1, 1, -298, -42)
@@ -647,8 +647,8 @@ CoD.ScoreboardMapKeyWZ.__resetProperties = function(f56_arg0)
 	f56_arg0.MoveMarker:setAlpha(1)
 	f56_arg0.BringCursor:setTopBottom(1, 1, -340, -300)
 	f56_arg0.BringCursor:setAlpha(0)
-	f56_arg0.BringCursor.ControllerDependentTextBox.KBMText:setText(Engine[0xF9F1239CFD921FE](0x179672091387CD6))
-	f56_arg0.BringCursor.Action:setText(Engine[0xF9F1239CFD921FE](0xE2C616EB9F5BBF6))
+	f56_arg0.BringCursor.ControllerDependentTextBox.KBMText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_7179672091387CD6"))
+	f56_arg0.BringCursor.Action:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_5E2C616EB9F5BBF6"))
 	f56_arg0.RepeatDotline06:setTopBottom(1, 1, -101, -97)
 	f56_arg0.RepeatDotline05:setTopBottom(1, 1, -142, -138)
 	f56_arg0.RepeatDotline04:setTopBottom(1, 1, -182, -178)
@@ -680,8 +680,8 @@ CoD.ScoreboardMapKeyWZ.__clipsPerState = {
 			f58_arg0.BringCursor.Action:completeAnimation()
 			f58_arg0.BringCursor:setTopBottom(1, 1, -105, -65)
 			f58_arg0.BringCursor:setAlpha(0)
-			f58_arg0.BringCursor.ControllerDependentTextBox.KBMText:setText(Engine[0xF9F1239CFD921FE](0x179672091387CD6))
-			f58_arg0.BringCursor.Action:setText(Engine[0xF9F1239CFD921FE](0xE2C616EB9F5BBF6))
+			f58_arg0.BringCursor.ControllerDependentTextBox.KBMText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_7179672091387CD6"))
+			f58_arg0.BringCursor.Action:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_5E2C616EB9F5BBF6"))
 			f58_arg0.clipFinished(f58_arg0.BringCursor)
 			f58_arg0.Drag:completeAnimation()
 			f58_arg0.Drag:setTopBottom(1, 1, -135, -95)
@@ -699,20 +699,20 @@ CoD.ScoreboardMapKeyWZ.__clipsPerState = {
 			f58_arg0.PlaceWaypoint.ControllerDependentTextBox.KBMText:completeAnimation()
 			f58_arg0.PlaceWaypoint:setLeftRight(1, 1, -314, -58)
 			f58_arg0.PlaceWaypoint:setTopBottom(1, 1, -331.5, -291.5)
-			f58_arg0.PlaceWaypoint.ControllerDependentTextBox.KBMText:setText(Engine[0xF9F1239CFD921FE](0x179662091387B23))
+			f58_arg0.PlaceWaypoint.ControllerDependentTextBox.KBMText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_7179662091387B23"))
 			f58_arg0.clipFinished(f58_arg0.PlaceWaypoint)
 			f58_arg0.DeleteWaypoint:completeAnimation()
 			f58_arg0.DeleteWaypoint.ControllerDependentTextBox.KBMText:completeAnimation()
 			f58_arg0.DeleteWaypoint:setLeftRight(1, 1, -314, -58)
 			f58_arg0.DeleteWaypoint:setTopBottom(1, 1, -281, -241)
-			f58_arg0.DeleteWaypoint.ControllerDependentTextBox.KBMText:setText(Engine[0xF9F1239CFD921FE](0x179682091387E89))
+			f58_arg0.DeleteWaypoint.ControllerDependentTextBox.KBMText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_7179682091387E89"))
 			f58_arg0.clipFinished(f58_arg0.DeleteWaypoint)
 			f58_arg0.CloseMap:completeAnimation()
 			f58_arg0.CloseMap.ControllerDependentTextBox.KBMText:completeAnimation()
 			f58_arg0.CloseMap:setLeftRight(1, 1, -314, -58)
 			f58_arg0.CloseMap:setTopBottom(1, 1, -104, -64)
 			f58_arg0.CloseMap:setAlpha(0)
-			f58_arg0.CloseMap.ControllerDependentTextBox.KBMText:setText(Engine[0xF9F1239CFD921FE](0x3949D949A3E82CF))
+			f58_arg0.CloseMap.ControllerDependentTextBox.KBMText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/map"))
 			f58_arg0.clipFinished(f58_arg0.CloseMap)
 			f58_arg0.CenterCursor:completeAnimation()
 			f58_arg0.CenterCursor:setAlpha(0)

@@ -15,10 +15,10 @@ CoD.TrialInfoBannerWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	self:addElement(Backing)
 	self.Backing = Backing
 	local InfoText = LUI.UIText.new(0, 0, 35, 535, 0, 0, 8, 28)
-	InfoText:setText(Engine[0xF9F1239CFD921FE](0x62486486346EC3F))
+	InfoText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_262486486346EC3F"))
 	InfoText:setTTF("dinnext_regular")
-	InfoText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	InfoText:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	InfoText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	InfoText:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	self:addElement(InfoText)
 	self.InfoText = InfoText
 	local TrialWidget = CoD.TrialWidget.new(f1_arg0, f1_arg1, 0, 0, 5, 30, 0.5, 0.5, -12.5, 12.5)
@@ -70,7 +70,7 @@ CoD.TrialInfoBannerWidget.__resetProperties = function(f7_arg0)
 	f7_arg0.Backing:completeAnimation()
 	f7_arg0.InfoText:setLeftRight(0, 0, 35, 535)
 	f7_arg0.InfoText:setAlpha(1)
-	f7_arg0.InfoText:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	f7_arg0.InfoText:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	f7_arg0.TrialWidget:setAlpha(1)
 	f7_arg0.Backing:setAlpha(0)
 end
@@ -111,7 +111,7 @@ CoD.TrialInfoBannerWidget.__clipsPerState = {
 			f11_arg0:setupElementClipCounter(1)
 			f11_arg0.InfoText:completeAnimation()
 			f11_arg0.InfoText:setLeftRight(0, 0, 35, 547)
-			f11_arg0.InfoText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+			f11_arg0.InfoText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 			f11_arg0.clipFinished(f11_arg0.InfoText)
 		end,
 	},
@@ -121,7 +121,7 @@ CoD.TrialInfoBannerWidget.__clipsPerState = {
 			f12_arg0:setupElementClipCounter(1)
 			f12_arg0.InfoText:completeAnimation()
 			f12_arg0.InfoText:setLeftRight(0, 0, 35, 807)
-			f12_arg0.InfoText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+			f12_arg0.InfoText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 			f12_arg0.clipFinished(f12_arg0.InfoText)
 		end,
 	},

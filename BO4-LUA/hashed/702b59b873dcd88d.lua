@@ -48,26 +48,26 @@ LUI.createMenu.ItemShopConfirmation = function(f1_arg0, f1_arg1)
 		},
 	})
 	FullscreenPopupTemplate.ButtonList:setWidgetType(CoD.ItemShopButton)
-	FullscreenPopupTemplate.Subtitle:setText(CoD.BlackMarketUtility.FreePromptDescIfPriceIsZero(self:getModel(), 0x90DD4B440AD5949))
-	FullscreenPopupTemplate.ErrorSubtitle:setText(LocalizeToUpperString(0x306208DB7BBE129))
-	FullscreenPopupTemplate.WorkingTitle:setText(LocalizeToUpperString(0x9D00A7D3D969F6E))
-	FullscreenPopupTemplate.DoneTitle:setText(LocalizeToUpperString(0x83048BBBD98FC6A))
+	FullscreenPopupTemplate.Subtitle:setText(CoD.BlackMarketUtility.FreePromptDescIfPriceIsZero(self:getModel(), @"hash_490DD4B440AD5949"))
+	FullscreenPopupTemplate.ErrorSubtitle:setText(LocalizeToUpperString(@"menu/purchase_error"))
+	FullscreenPopupTemplate.WorkingTitle:setText(LocalizeToUpperString(@"menu/purchase_processing"))
+	FullscreenPopupTemplate.DoneTitle:setText(LocalizeToUpperString(@"menu/purchase_complete"))
 	FullscreenPopupTemplate:linkToElementModel(self, nil, false, function(model)
 		FullscreenPopupTemplate:setModel(model, f1_arg0)
 	end)
 	FullscreenPopupTemplate:linkToElementModel(self, "name", true, function(model)
 		local f7_local0 = model:get()
 		if f7_local0 ~= nil then
-			FullscreenPopupTemplate.Title:setText(CoD.BlackMarketUtility.FreePromptTitleIfPriceIsZero(self:getModel(), LocalizeIntoString(0x63FCD1B0849669E, f7_local0)))
+			FullscreenPopupTemplate.Title:setText(CoD.BlackMarketUtility.FreePromptTitleIfPriceIsZero(self:getModel(), LocalizeIntoString(@"hash_663FCD1B0849669E", f7_local0)))
 		end
 	end)
 	LUI.OverrideFunction_CallOriginalFirst(FullscreenPopupTemplate, "setState", function(element, controller, f8_arg2, f8_arg3, f8_arg4)
 		if IsPC() and IsElementInState(element, "FinishedState") then
-			CoD.PCUtility.LinkPCSmallCloseButtonToInput(f1_local1, controller, element, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+			CoD.PCUtility.LinkPCSmallCloseButtonToInput(f1_local1, controller, element, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		elseif IsPC() and IsElementInState(element, "ErrorState") then
-			CoD.PCUtility.LinkPCSmallCloseButtonToInput(f1_local1, controller, element, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+			CoD.PCUtility.LinkPCSmallCloseButtonToInput(f1_local1, controller, element, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		elseif IsPC() then
-			CoD.PCUtility.LinkPCSmallCloseButtonToInput(f1_local1, controller, element, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A])
+			CoD.PCUtility.LinkPCSmallCloseButtonToInput(f1_local1, controller, element, Enum[@"luibutton"][@"lui_key_xbb_pscircle"])
 		end
 	end)
 	self:addElement(FullscreenPopupTemplate)
@@ -82,33 +82,33 @@ LUI.createMenu.ItemShopConfirmation = function(f1_arg0, f1_arg1)
 	local Linker = LUI.UIImage.new(0.5, 0.5, -330, -326, 0.5, 0.5, -192, 205)
 	Linker:setRGB(ColorSet.T8__BEIGE__HEADER.r, ColorSet.T8__BEIGE__HEADER.g, ColorSet.T8__BEIGE__HEADER.b)
 	Linker:setAlpha(0.35)
-	Linker:setImage(RegisterImage(0xC49B0C8991A541F))
-	Linker:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	Linker:setImage(RegisterImage(@"hash_C49B0C8991A541F"))
+	Linker:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	Linker:setShaderVector(0, 0, 0, 0, 0)
 	Linker:setupNineSliceShader(4, 8)
 	self:addElement(Linker)
 	self.Linker = Linker
 	local CornerPip = LUI.UIImage.new(0.5, 0.5, -802.5, -786.5, 0.5, 0.5, -187, -171)
 	CornerPip:setAlpha(0.4)
-	CornerPip:setImage(RegisterImage(0x8DC834094E7A02C))
+	CornerPip:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_window_corner"))
 	self:addElement(CornerPip)
 	self.CornerPip = CornerPip
 	local CornerPip2 = LUI.UIImage.new(0.5, 0.5, -494.5, -478.5, 0.5, 0.5, -187, -171)
 	CornerPip2:setAlpha(0.4)
 	CornerPip2:setZRot(270)
-	CornerPip2:setImage(RegisterImage(0x8DC834094E7A02C))
+	CornerPip2:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_window_corner"))
 	self:addElement(CornerPip2)
 	self.CornerPip2 = CornerPip2
 	local CornerPip3 = LUI.UIImage.new(0.5, 0.5, -803.5, -787.5, 0.5, 0.5, 122, 138)
 	CornerPip3:setAlpha(0.4)
 	CornerPip3:setZRot(90)
-	CornerPip3:setImage(RegisterImage(0x8DC834094E7A02C))
+	CornerPip3:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_window_corner"))
 	self:addElement(CornerPip3)
 	self.CornerPip3 = CornerPip3
 	local CornerPip4 = LUI.UIImage.new(0.5, 0.5, -494.5, -478.5, 0.5, 0.5, 121, 137)
 	CornerPip4:setAlpha(0.4)
 	CornerPip4:setZRot(180)
-	CornerPip4:setImage(RegisterImage(0x8DC834094E7A02C))
+	CornerPip4:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_window_corner"))
 	self:addElement(CornerPip4)
 	self.CornerPip4 = CornerPip4
 	local f1_local9 = nil
@@ -116,7 +116,7 @@ LUI.createMenu.ItemShopConfirmation = function(f1_arg0, f1_arg1)
 	local BlackPC = nil
 	BlackPC = LUI.UIImage.new(0.5, 0.5, -960, -330, 0.5, 0.5, -214.5, 230.5)
 	BlackPC:setRGB(0, 0, 0)
-	BlackPC:setMaterial(LUI.UIImage.GetCachedMaterial(0xE992BD5A540E2D))
+	BlackPC:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_delta_normal"))
 	BlackPC:setShaderVector(0, 0, 1, 0, 0)
 	BlackPC:setShaderVector(1, 0.16, 0.16, 0, 0)
 	BlackPC:setShaderVector(2, 0, 1, 0, 0)
@@ -133,12 +133,12 @@ LUI.createMenu.ItemShopConfirmation = function(f1_arg0, f1_arg1)
 	local CostText = LUI.UIText.new(0.5, 0.5, -960, -330, 0.5, 0.5, 196, 226)
 	CostText:setRGB(ColorSet.CodPointsNumber.r, ColorSet.CodPointsNumber.g, ColorSet.CodPointsNumber.b)
 	CostText:setTTF("ttmussels_demibold")
-	CostText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	CostText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	CostText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	CostText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	CostText:linkToElementModel(self, "price", true, function(model)
 		local f11_local0 = model:get()
 		if f11_local0 ~= nil then
-			CostText:setText(LocalizeIntoStringIfNotEmpty(0x6A3CC7BE3008989, f11_local0))
+			CostText:setText(LocalizeIntoStringIfNotEmpty(@"hash_56A3CC7BE3008989", f11_local0))
 		end
 	end)
 	self:addElement(CostText)
@@ -169,22 +169,22 @@ LUI.createMenu.ItemShopConfirmation = function(f1_arg0, f1_arg1)
 	local TextBox = LUI.UIText.new(0.5, 0.5, -269, 471, 0.5, 0.5, -132, -110)
 	TextBox:setRGB(ColorSet.T8__OFF__GRAY.r, ColorSet.T8__OFF__GRAY.g, ColorSet.T8__OFF__GRAY.b)
 	TextBox:setAlpha(0)
-	TextBox:setText(Engine[0xF9F1239CFD921FE](0x5F5E0C5965105B7))
+	TextBox:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_65F5E0C5965105B7"))
 	TextBox:setTTF("dinnext_regular")
-	TextBox:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	TextBox:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	TextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	TextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(TextBox)
 	self.TextBox = TextBox
 	self:linkToElementModel(self, "includesTiers", true, function(model, f14_arg1)
-		CoD.Menu.UpdateButtonShownState(f14_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f14_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	self:linkToElementModel(self, "price", true, function(model, f15_arg1)
-		CoD.Menu.UpdateButtonShownState(f15_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f15_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	self:linkToElementModel(self, "openCrate", true, function(model, f16_arg1)
-		CoD.Menu.UpdateButtonShownState(f16_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f16_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		if not IsElementInState(self.FullscreenPopupTemplate, "WorkingState") and not IsElementInState(self.FullscreenPopupTemplate, "FinishedState") then
 			GoBack(self, controller)
 			return true
@@ -192,13 +192,13 @@ LUI.createMenu.ItemShopConfirmation = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if not IsElementInState(self.FullscreenPopupTemplate, "WorkingState") and not IsElementInState(self.FullscreenPopupTemplate, "FinishedState") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if IsElementInState(self.FullscreenPopupTemplate, "FinishedState") and MenuPropertyIsTrue(menu, "_isContract") then
 			DelayCloseAndGoBack(menu, controller, 0)
 			ForceNotifyGlobalModel(controller, "ContractsForceUpdate")
@@ -253,25 +253,25 @@ LUI.createMenu.ItemShopConfirmation = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if IsElementInState(self.FullscreenPopupTemplate, "FinishedState") and MenuPropertyIsTrue(menu, "_isContract") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x6393FF34EA56966, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/continue", nil, nil)
 			return true
 		elseif IsElementInState(self.FullscreenPopupTemplate, "ErrorState") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, nil)
 			return false
 		elseif not IsElementInState(self.FullscreenPopupTemplate, "WorkingState") and not IsElementInState(self.FullscreenPopupTemplate, "FinishedState") and not CoD.ModelUtility.IsSelfModelValueTrue(self, controller, "includesTiers") and CoD.ModelUtility.IsSelfModelValueGreaterThan(self, controller, "price", 0) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x85952ACC6D0C1B0, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/purchase", nil, nil)
 			return true
 		elseif not IsElementInState(self.FullscreenPopupTemplate, "WorkingState") and not IsElementInState(self.FullscreenPopupTemplate, "FinishedState") and CoD.ModelUtility.IsSelfModelValueGreaterThanOrEqualTo(self, controller, "openCrate", 1) and CoD.ModelUtility.IsSelfModelValueGreaterThan(self, controller, "price", 0) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x85952ACC6D0C1B0, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/purchase", nil, nil)
 			return true
 		elseif not IsElementInState(self.FullscreenPopupTemplate, "WorkingState") and not IsElementInState(self.FullscreenPopupTemplate, "FinishedState") and CoD.ModelUtility.IsSelfModelValueGreaterThanOrEqualTo(self, controller, "openCrate", 1) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x867BE59364DD53B, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/redeem", nil, nil)
 			return true
 		elseif not IsElementInState(self.FullscreenPopupTemplate, "WorkingState") and not IsElementInState(self.FullscreenPopupTemplate, "FinishedState") and CoD.ModelUtility.IsSelfModelValueTrue(self, controller, "includesTiers") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x85952ACC6D0C1B0, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/purchase", nil, nil)
 			return true
 		elseif not IsElementInState(self.FullscreenPopupTemplate, "WorkingState") and not IsElementInState(self.FullscreenPopupTemplate, "FinishedState") and not CoD.ModelUtility.IsSelfModelValueTrue(self, controller, "includesTiers") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x867BE59364DD53B, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/redeem", nil, nil)
 			return true
 		else
 			return false

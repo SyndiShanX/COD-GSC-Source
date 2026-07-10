@@ -13,18 +13,18 @@ CoD.FallMeter_PlayerInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	self:addElement(PositionLine)
 	self.PositionLine = PositionLine
 	local PositionLineTextureOverlay = LUI.UIImage.new(0.5, 0.5, -20.5, 20.5, 0.5, 0.5, -16, 16)
-	PositionLineTextureOverlay:setImage(RegisterImage(0x582530AE1BD7758))
+	PositionLineTextureOverlay:setImage(RegisterImage(@"uie_ui_hud_wz_indicatorbar"))
 	self:addElement(PositionLineTextureOverlay)
 	self.PositionLineTextureOverlay = PositionLineTextureOverlay
 	local PositionLineGlow = LUI.UIImage.new(0.5, 0.5, -20.5, 20.5, 0.5, 0.5, -10, 10)
-	PositionLineGlow:setImage(RegisterImage(0x582530AE1BD7758))
-	PositionLineGlow:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	PositionLineGlow:setImage(RegisterImage(@"uie_ui_hud_wz_indicatorbar"))
+	PositionLineGlow:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(PositionLineGlow)
 	self.PositionLineGlow = PositionLineGlow
 	local Bloom = LUI.UIImage.new(0.5, 0.5, -40, 40, 0.5, 0.5, -10, 10)
 	Bloom:setAlpha(0.5)
-	Bloom:setImage(RegisterImage(0x658B1F463FE7860))
-	Bloom:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Bloom:setImage(RegisterImage(@"uie_ui_menu_cac_preview_class_highlight_glow"))
+	Bloom:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Bloom)
 	self.Bloom = Bloom
 	local PositionDot = LUI.UIImage.new(1.08, 1.08, 0, 2, 0.5, 0.5, -1, 1)
@@ -134,13 +134,13 @@ CoD.FallMeter_PlayerInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	ArrowFrameL = LUI.UIImage.new(0, 0, -19.5, -4.5, 0, 0, -3.5, 11.5)
 	ArrowFrameL:setRGB(0, 0, 0)
 	ArrowFrameL:setZRot(-45)
-	ArrowFrameL:setImage(RegisterImage(0x62E760CB652A6EE))
+	ArrowFrameL:setImage(RegisterImage(@"hash_662E760CB652A6EE"))
 	self:addElement(ArrowFrameL)
 	self.ArrowFrameL = ArrowFrameL
 	ArrowL = LUI.UIImage.new(0, 0, -15, -10, 0.5, 0.5, -5.5, 5.5)
 	ArrowL:setRGB(0, 0, 0)
 	ArrowL:setScale(1.4, 1.4)
-	ArrowL:setImage(RegisterImage(0x1226A0CC6137EEE))
+	ArrowL:setImage(RegisterImage(@"uie_ui_hud_common_triangle"))
 	self:addElement(ArrowL)
 	self.ArrowL = ArrowL
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)

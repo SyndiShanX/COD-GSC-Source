@@ -17,16 +17,16 @@ CoD.CallingCards_BlackMarketMasterCardWidgetInternal.new = function(f1_arg0, f1_
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local NoiseTiledBacking = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	NoiseTiledBacking:setAlpha(0.1)
-	NoiseTiledBacking:setImage(RegisterImage(0x34839E8065B1E53))
-	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	NoiseTiledBacking:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	NoiseTiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	NoiseTiledBacking:setupNineSliceShader(196, 88)
 	self:addElement(NoiseTiledBacking)
 	self.NoiseTiledBacking = NoiseTiledBacking
 	local FocusGlow = LUI.UIImage.new(-0.04, 1.04, -100, 100, 0.5, 0.5, -80, 80)
 	FocusGlow:setAlpha(0)
-	FocusGlow:setImage(RegisterImage(0x8E79E4E42B6714C))
-	FocusGlow:setMaterial(LUI.UIImage.GetCachedMaterial(0xDAB59B2CAE01851))
+	FocusGlow:setImage(RegisterImage(@"uie_ui_menu_common_focus_glow_large"))
+	FocusGlow:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_6DAB59B2CAE01851"))
 	FocusGlow:setShaderVector(0, 0, 0, 0.25, 0.25)
 	FocusGlow:setShaderVector(1, 1.2, 0, 0, 0)
 	FocusGlow:setupNineSliceShader(300, 300)
@@ -39,8 +39,8 @@ CoD.CallingCards_BlackMarketMasterCardWidgetInternal.new = function(f1_arg0, f1_
 	self.SelectorOverlay = SelectorOverlay
 	local FrameBorder = LUI.UIImage.new(0, 1, -1, 1, 0, 1, -1, 1)
 	FrameBorder:setAlpha(0.15)
-	FrameBorder:setImage(RegisterImage(0x185E11D74ECA3D7))
-	FrameBorder:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	FrameBorder:setImage(RegisterImage(@"uie_ui_menu_store_common_frame"))
+	FrameBorder:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	FrameBorder:setShaderVector(0, 0, 0, 0, 0)
 	FrameBorder:setupNineSliceShader(12, 12)
 	self:addElement(FrameBorder)
@@ -52,8 +52,8 @@ CoD.CallingCards_BlackMarketMasterCardWidgetInternal.new = function(f1_arg0, f1_
 	local FocusBorder = LUI.UIImage.new(0, 1, -4, 4, 0, 1, -4, 4)
 	FocusBorder:setRGB(0.96, 0.94, 0.78)
 	FocusBorder:setAlpha(0)
-	FocusBorder:setImage(RegisterImage(0xCB07CCC28498CB2))
-	FocusBorder:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	FocusBorder:setImage(RegisterImage(@"uie_ui_menu_store_focus_frame"))
+	FocusBorder:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	FocusBorder:setShaderVector(0, 0, 0, 0, 0)
 	FocusBorder:setupNineSliceShader(10, 10)
 	self:addElement(FocusBorder)
@@ -78,8 +78,8 @@ CoD.CallingCards_BlackMarketMasterCardWidgetInternal.new = function(f1_arg0, f1_
 	self.DotTiledBacking = DotTiledBacking
 	local ProgressBarFrameBorder = LUI.UIImage.new(0, 0.67, 3, 5, 0.05, 0.95, -1, 1)
 	ProgressBarFrameBorder:setAlpha(0.1)
-	ProgressBarFrameBorder:setImage(RegisterImage(0x185E11D74ECA3D7))
-	ProgressBarFrameBorder:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	ProgressBarFrameBorder:setImage(RegisterImage(@"uie_ui_menu_store_common_frame"))
+	ProgressBarFrameBorder:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	ProgressBarFrameBorder:setShaderVector(0, 0, 0, 0, 0)
 	ProgressBarFrameBorder:setupNineSliceShader(12, 12)
 	self:addElement(ProgressBarFrameBorder)
@@ -88,8 +88,8 @@ CoD.CallingCards_BlackMarketMasterCardWidgetInternal.new = function(f1_arg0, f1_
 	EmblemSubtitle:setRGB(ColorSet.T8__OFF__GRAY.r, ColorSet.T8__OFF__GRAY.g, ColorSet.T8__OFF__GRAY.b)
 	EmblemSubtitle:setTTF("dinnext_regular")
 	EmblemSubtitle:setLetterSpacing(2)
-	EmblemSubtitle:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	EmblemSubtitle:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	EmblemSubtitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	EmblemSubtitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	EmblemSubtitle:linkToElementModel(self, "setInfo", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -102,7 +102,7 @@ CoD.CallingCards_BlackMarketMasterCardWidgetInternal.new = function(f1_arg0, f1_
 	EmblemNameNew:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	EmblemNameNew:setTTF("ttmussels_regular")
 	EmblemNameNew:setLetterSpacing(4)
-	EmblemNameNew:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	EmblemNameNew:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	EmblemNameNew:linkToElementModel(self, "displayName", true, function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
@@ -122,7 +122,7 @@ CoD.CallingCards_BlackMarketMasterCardWidgetInternal.new = function(f1_arg0, f1_
 	local EquippedMarkerTick = LUI.UIImage.new(1, 1, -41, 3, 0, 0, -6, 38)
 	EquippedMarkerTick:setAlpha(0)
 	EquippedMarkerTick:setZoom(4)
-	EquippedMarkerTick:setImage(RegisterImage(0x9A8B26C9B001758))
+	EquippedMarkerTick:setImage(RegisterImage(@"uie_ui_menu_cac_equipped_marker_tick"))
 	self:addElement(EquippedMarkerTick)
 	self.EquippedMarkerTick = EquippedMarkerTick
 	local BMGoldBar = CoD.BM_GoldBarMed.new(f1_arg0, f1_arg1, 1, 1, -371, -1, 0.5, 0.5, -15, 15)
@@ -190,7 +190,7 @@ CoD.CallingCards_BlackMarketMasterCardWidgetInternal.new = function(f1_arg0, f1_
 	end)
 	local f1_local18 = self
 	local f1_local19 = self.subscribeToModel
-	local f1_local20 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local20 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local19(f1_local18, f1_local20["hudItems.evalEquippedCard"], function(f12_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

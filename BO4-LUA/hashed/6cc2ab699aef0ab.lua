@@ -11,7 +11,7 @@ CoD.ItemShopPreviewButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Button = CoD.ItemShopPreviewButtonInternal.new(f1_arg0, f1_arg1, 0.5, 0.5, -113, 112, 0.5, 0.5, -156, 153)
-	Button.Text:setText(LocalizeToUpperString(0xDE6A90417A1818A))
+	Button.Text:setText(LocalizeToUpperString(@"hash_3DE6A90417A1818A"))
 	Button:linkToElementModel(self, nil, false, function(model)
 		Button:setModel(model, f1_arg1)
 	end)

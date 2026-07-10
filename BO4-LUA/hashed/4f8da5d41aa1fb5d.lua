@@ -31,10 +31,10 @@ CoD.PositionDraft_CasterControls.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	self:addElement(RBButton)
 	self.RBButton = RBButton
 	local Text = LUI.UIText.new(0.15, 0.85, 0, 0, 0.01, 0.98, 0, 0)
-	Text:setText(Engine[0xF9F1239CFD921FE](0x17F100F5B75E648))
+	Text:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/spectate_team"))
 	Text:setTTF("default")
-	Text:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	Text:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Text:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	Text:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(Text)
 	self.Text = Text
 	local rightButton = nil
@@ -82,7 +82,7 @@ CoD.PositionDraft_CasterControls.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	})
 	local f1_local7 = self
 	local f1_local8 = self.subscribeToModel
-	local f1_local9 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local9 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local8(f1_local7, f1_local9["factions.isCoDCaster"], function(f8_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -98,7 +98,7 @@ CoD.PositionDraft_CasterControls.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	end)
 	f1_local7 = self
 	f1_local8 = self.subscribeToModel
-	f1_local9 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local9 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local8(f1_local7, f1_local9.LastInput, function(f10_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

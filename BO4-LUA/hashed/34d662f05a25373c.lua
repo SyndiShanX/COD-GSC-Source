@@ -13,7 +13,7 @@ CoD.ButtonFrame_Progress.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local RankInfo = CoD.ButtonFrame_RankInfo.new(f1_arg0, f1_arg1, 0.5, 0.5, -200, 200, 0.5, 0.5, -165, 35)
-	RankInfo.LevelText:setText(LocalizeToUpperString(0x87EBD31A8B55EAF))
+	RankInfo.LevelText:setText(LocalizeToUpperString(@"menu/level"))
 	RankInfo:subscribeToGlobalModel(f1_arg1, "PrestigeMenuInfo", "hasPrestiged", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -137,7 +137,7 @@ CoD.ButtonFrame_Progress.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	})
 	local f1_local5 = self
 	local f1_local6 = self.subscribeToModel
-	local f1_local7 = Engine[0x8DF2E5447F384B9]()
+	local f1_local7 = Engine[@"getglobalmodel"]()
 	f1_local6(f1_local5, f1_local7["lobbyRoot.lobbyNav"], function(f18_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

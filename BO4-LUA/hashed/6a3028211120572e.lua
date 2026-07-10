@@ -10,12 +10,12 @@ CoD.PaintCanCost.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 	PaintCanCost:setRGB(0.8, 0.79, 0.78)
 	PaintCanCost:setTTF("ttmussels_regular")
 	PaintCanCost:setLetterSpacing(1)
-	PaintCanCost:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	PaintCanCost:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	PaintCanCost:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	PaintCanCost:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	PaintCanCost:linkToElementModel(self, "paintCanCost", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			PaintCanCost:setText(LocalizeIntoString(0xDF564F24968E2DB, f2_local0))
+			PaintCanCost:setText(LocalizeIntoString(@"hash_3DF564F24968E2DB", f2_local0))
 		end
 	end)
 	self:addElement(PaintCanCost)

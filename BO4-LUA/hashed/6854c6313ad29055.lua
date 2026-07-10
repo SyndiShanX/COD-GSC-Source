@@ -9,7 +9,7 @@ CoD.Tcm_Splash.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_ar
 	local EnterTheArenaTextShadow = LUI.UIText.new(0, 0, 4, 1009, 0, 0, 134, 240)
 	EnterTheArenaTextShadow:setRGB(0, 0, 0)
 	EnterTheArenaTextShadow:setTTF("skorzhen")
-	EnterTheArenaTextShadow:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	EnterTheArenaTextShadow:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	EnterTheArenaTextShadow:subscribeToGlobalModel(f1_arg1, "ZMHudGlobal", "tcm.active", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -21,7 +21,7 @@ CoD.Tcm_Splash.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_ar
 	local EnterTheArenaText = LUI.UIText.new(0, 0, 0, 1005, 0, 0, 130, 236)
 	EnterTheArenaText:setRGB(ColorSet.T8__OCHRE.r, ColorSet.T8__OCHRE.g, ColorSet.T8__OCHRE.b)
 	EnterTheArenaText:setTTF("skorzhen")
-	EnterTheArenaText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	EnterTheArenaText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	EnterTheArenaText:subscribeToGlobalModel(f1_arg1, "ZMHudGlobal", "tcm.active", function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -32,20 +32,20 @@ CoD.Tcm_Splash.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_ar
 	self.EnterTheArenaText = EnterTheArenaText
 	local TcmTextShadow = LUI.UIText.new(0, 0, 186, 823, 0, 0, 260, 297)
 	TcmTextShadow:setRGB(0, 0, 0)
-	TcmTextShadow:setText(Engine[0xF9F1239CFD921FE](0x2F7BDC1E839FE4F))
+	TcmTextShadow:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_12F7BDC1E839FE4F"))
 	TcmTextShadow:setTTF("default")
-	TcmTextShadow:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	TcmTextShadow:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	self:addElement(TcmTextShadow)
 	self.TcmTextShadow = TcmTextShadow
 	local TcmText = LUI.UIText.new(0, 0, 184, 821, 0, 0, 258, 295)
 	TcmText:setRGB(ColorSet.ZombiePlayerDown.r, ColorSet.ZombiePlayerDown.g, ColorSet.ZombiePlayerDown.b)
-	TcmText:setText(Engine[0xF9F1239CFD921FE](0x2F7BDC1E839FE4F))
+	TcmText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_12F7BDC1E839FE4F"))
 	TcmText:setTTF("default")
-	TcmText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	TcmText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	self:addElement(TcmText)
 	self.TcmText = TcmText
 	local Medal = LUI.UIImage.new(0, 0, 438.5, 566.5, 0, 0, 0, 128)
-	Medal:setImage(RegisterImage(0x7C4737D3F6488AE))
+	Medal:setImage(RegisterImage(@"ui_icon_gamemode_zm_treyarchmutations"))
 	self:addElement(Medal)
 	self.Medal = Medal
 	local DescriptionDivider = LUI.UIImage.new(0.5, 0.5, -352, 348, 0, 0, 247, 249)

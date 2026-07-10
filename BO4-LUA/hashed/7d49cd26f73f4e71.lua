@@ -15,7 +15,7 @@ CoD.Menu.NewFromState = function ( f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	end
 	local self = LUI.UIElement.new( f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9 )
 	if LUI.DEV then
-		self.__priorModelCount = Engine[0x8FF1EF004DBDA9B]() or 0
+		self.__priorModelCount = Engine[@"getmodelusage"]() or 0
 	end
 	self:setClass( CoD.Menu )
 	if nil ~= CoD.Menu.ModelToUse then
@@ -35,7 +35,7 @@ CoD.Menu.NewFromState = function ( f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	CoD.Menu.AddToCurrMenuNameList( self.menuName )
 	CoD.FreeCursorUtility.SetAllowFreeCursorSnappingWithinDistance( self, 100 )
 	if not f1_arg1 then
-		f1_arg1 = Engine[0xA5B9C0111291A8B]()
+		f1_arg1 = Engine[@"getprimarycontroller"]()
 	end
 	if CursorInputEnabledForBuild( f1_arg1 ) then
 		self.__focusableElementPaths = {}
@@ -100,8 +100,8 @@ CoD.Menu.ChangeFocusedElement = function ( f3_arg0, f3_arg1, f3_arg2, f3_arg3 )
 		local f3_local0 = CoD.GetMouseFocus( f3_arg1 )
 		LUI.lastFocusByKeyboard = f3_arg3
 		local f3_local1 = CoD.isPC and f3_arg2 ~= nil
-		if IsMouseOrKeyboard( f3_arg1 ) and f3_arg0.buttonModel and f3_arg0.buttonModel[Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F]] and f3_arg0.buttonModel[Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F]].flags then
-			f3_arg0.buttonModel[Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F]].flags:set( 0 )
+		if IsMouseOrKeyboard( f3_arg1 ) and f3_arg0.buttonModel and f3_arg0.buttonModel[Enum[@"luibutton"][@"lui_key_xba_pscross"]] and f3_arg0.buttonModel[Enum[@"luibutton"][@"lui_key_xba_pscross"]].flags then
+			f3_arg0.buttonModel[Enum[@"luibutton"][@"lui_key_xba_pscross"]].flags:set( 0 )
 		end
 		if f3_arg2 then
 			local f3_local2 = f3_arg2:processEvent( {
@@ -147,9 +147,9 @@ CoD.Menu.CaptureMouseAndLockFocus = function ( f4_arg0, f4_arg1, f4_arg2 )
 			f4_arg0:removeSubscription( f4_arg0.__mouseCaptureSubscription )
 		end
 		f4_arg0.__mouseCaptureSubscription = nil
-		Engine[0xD1619221CBAF878]( f4_arg1, false )
+		Engine[@"hash_4D1619221CBAF878"]( f4_arg1, false )
 	elseif f4_arg2 and not f4_arg0.__lockedFocus then
-		f4_local0 = Engine[0xA798E4552F5E872]( Engine[0x4DF5CFBC1771947]( f4_arg1 ), "MouseCaptured" )
+		f4_local0 = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f4_arg1 ), "MouseCaptured" )
 		if f4_local0:get() == nil then
 			f4_local0:set( false )
 		end
@@ -165,7 +165,7 @@ CoD.Menu.CaptureMouseAndLockFocus = function ( f4_arg0, f4_arg1, f4_arg2 )
 				} )
 			end
 		end, false )
-		Engine[0xD1619221CBAF878]( f4_arg1, true )
+		Engine[@"hash_4D1619221CBAF878"]( f4_arg1, true )
 	end
 	f4_arg0.__lockedFocus = f4_arg2
 end
@@ -184,13 +184,13 @@ end
 CoD.Menu.ChangeMouseCursorType = function ( f8_arg0, f8_arg1 )
 	local f8_local0 = CoD.GetMouseFocus( f8_arg1 )
 	if not f8_local0 or f8_local0.__forceCursorTypeNormal then
-		Engine[0x7F4312C70B4D5E4]( Enum[0xA6E5DCD01C0B57][0x17CEDA982668284] )
+		Engine[@"setmousecursor"]( Enum[@"cursortype"][@"hash_17CEDA982668284"] )
 	elseif f8_local0.__xcamRotationWidget then
-		Engine[0x7F4312C70B4D5E4]( Enum[0xA6E5DCD01C0B57][0x8DDB59390F48283] )
+		Engine[@"setmousecursor"]( Enum[@"cursortype"][@"hash_68DDB59390F48283"] )
 	elseif CoD.PCUtility.HasContextualMenuActionInStack( f8_local0, f8_arg0, f8_arg1 ) then
-		Engine[0x7F4312C70B4D5E4]( Enum[0xA6E5DCD01C0B57][0x2BC29F6508402B0] )
+		Engine[@"setmousecursor"]( Enum[@"cursortype"][@"hash_22BC29F6508402B0"] )
 	else
-		Engine[0x7F4312C70B4D5E4]( Enum[0xA6E5DCD01C0B57][0xB16AEBDF3238E15] )
+		Engine[@"setmousecursor"]( Enum[@"cursortype"][@"hash_4B16AEBDF3238E15"] )
 	end
 end
 CoD.Menu.setInputOverrideElement = function ( f9_arg0, f9_arg1, f9_arg2 )
@@ -221,7 +221,7 @@ CoD.Menu.FreeCursorPositionUpdateFn = function ( f11_arg0, f11_arg1 )
 	return function ( f12_arg0 )
 		if not IsFreeCursorActiveAndVisible( f11_arg1 ) and IsGamepad( f11_arg1 ) then
 			return 
-		elseif f11_arg0.occludedBy or Engine[0xC55011C00F7272D]( f11_arg1 ) or f11_arg0.ignoreCursor then
+		elseif f11_arg0.occludedBy or Engine[@"waitingforkeybind"]( f11_arg1 ) or f11_arg0.ignoreCursor then
 			return 
 		elseif CoD.isPC and CoD.Menu.IsPriorityMenuOpen( f11_arg1 ) and not f11_arg0._isPriorityMenu then
 			return 
@@ -263,11 +263,11 @@ CoD.Menu.FreeCursorPositionUpdateFn = function ( f11_arg0, f11_arg1 )
 					if f11_arg0:isParentOf( f12_local6 ) then
 						f12_local7, f12_local8 = f12_local6:cursorDistanceToElement( f11_arg1, f12_local2.name, f12_local0, f12_local1 )
 						if f11_arg0.__freeCursorSnapDistance ~= CoD.Menu.__infiniteFreeCursorSnapDistance and f11_arg0.__freeCursorSnapDistance < f12_local7 then
-							Engine[0x18F7786899BA625]( f11_arg1 )
+							Engine[@"hash_718F7786899BA625"]( f11_arg1 )
 							f12_local6 = nil
 						end
 					else
-						Engine[0x18F7786899BA625]( f11_arg1 )
+						Engine[@"hash_718F7786899BA625"]( f11_arg1 )
 						f12_local6 = nil
 					end
 				end
@@ -282,7 +282,7 @@ CoD.Menu.FreeCursorPositionUpdateFn = function ( f11_arg0, f11_arg1 )
 			f11_arg0:cursorMoved( f11_arg1, f12_local0, f12_local1, f11_arg0.__focusableElementPaths, f12_local2.name, f12_local3, f12_local4 )
 			if f12_local3.elem ~= f12_local5 and not f11_arg0.__lockedFocus then
 				f12_local5 = f12_local3.elem
-				if not IsUsingKeyboardNavigation( f11_arg1 ) or Dvar[0x6A8F90E2C78062E]:get() then
+				if not IsUsingKeyboardNavigation( f11_arg1 ) or Dvar[@"hash_26A8F90E2C78062E"]:get() then
 					f11_arg0:ChangeFocusedElement( f11_arg1, f12_local3.elem, false )
 				end
 			end
@@ -292,17 +292,17 @@ CoD.Menu.FreeCursorPositionUpdateFn = function ( f11_arg0, f11_arg1 )
 					f12_local7 = f12_local4.elem
 				end
 				if f12_local7 and f12_local7 ~= f12_local6 then
-					Engine[0xF160A977AB91A46]( f11_arg1, f12_local7 )
+					Engine[@"hash_3F160A977AB91A46"]( f11_arg1, f12_local7 )
 				end
 			end
 			local f12_local7 = CoD.GetMouseFocus( f11_arg1 )
 			if CoD.isPC and f12_local7 ~= nil and not f11_arg0.__ignoreNextMouseDrag then
-				local f12_local8 = Engine[0x4DF5CFBC1771947]( f11_arg1 )
-				local f12_local9 = CoD.BitUtility.IsBitwiseAndNonZero( f12_local8["KeyPressBits.MOUSE1"]:get(), Enum[0xE29E259801BC1A4][0x253A6F6CAAAE464] )
-				local f12_local10 = Engine[0x4DF5CFBC1771947]( f11_arg1 )
-				local f12_local11 = CoD.BitUtility.IsBitwiseAndNonZero( f12_local10["KeyPressBits.MOUSE2"]:get(), Enum[0xE29E259801BC1A4][0x253A6F6CAAAE464] )
-				local f12_local12 = Engine[0x4DF5CFBC1771947]( f11_arg1 )
-				if f12_local7.m_eventHandlers.leftmousedrag ~= nil and (f12_local9 or CoD.BitUtility.IsBitwiseAndNonZero( f12_local12.ButtonBits[Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F]]:get(), Enum[0xE29E259801BC1A4][0x253A6F6CAAAE464] )) then
+				local f12_local8 = Engine[@"getmodelforcontroller"]( f11_arg1 )
+				local f12_local9 = CoD.BitUtility.IsBitwiseAndNonZero( f12_local8["KeyPressBits.MOUSE1"]:get(), Enum[@"luibuttonflags"][@"flag_down"] )
+				local f12_local10 = Engine[@"getmodelforcontroller"]( f11_arg1 )
+				local f12_local11 = CoD.BitUtility.IsBitwiseAndNonZero( f12_local10["KeyPressBits.MOUSE2"]:get(), Enum[@"luibuttonflags"][@"flag_down"] )
+				local f12_local12 = Engine[@"getmodelforcontroller"]( f11_arg1 )
+				if f12_local7.m_eventHandlers.leftmousedrag ~= nil and (f12_local9 or CoD.BitUtility.IsBitwiseAndNonZero( f12_local12.ButtonBits[Enum[@"luibutton"][@"lui_key_xba_pscross"]]:get(), Enum[@"luibuttonflags"][@"flag_down"] )) then
 					f12_local7.m_eventHandlers:leftmousedrag( {
 						name = "leftmousedrag",
 						controller = f11_arg1,
@@ -343,15 +343,15 @@ CoD.Menu.MouseButtonCallbackFunction = function ( f13_arg0, f13_arg1, f13_arg2, 
 	
 	if not f13_local0( f13_arg2 ) then
 		return false
-	elseif f13_arg0.occludedBy or Engine[0xC55011C00F7272D]( f13_arg1 ) or f13_arg0.ignoreCursor or f13_arg0.m_disableAllButtonActions then
+	elseif f13_arg0.occludedBy or Engine[@"waitingforkeybind"]( f13_arg1 ) or f13_arg0.ignoreCursor or f13_arg0.m_disableAllButtonActions then
 		return false
 	elseif CoD.Menu.SpinnerIsActive or CoD.Menu.IsPriorityMenuOpen( f13_arg1 ) and not f13_arg0._isPriorityMenu then
 		return false
 	end
 	f13_local0 = DataSources.FreeCursor.getModel( f13_arg1 )
 	local f13_local0, f13_local1 = f13_local0.position:get()
-	local f13_local2 = CoD.BitUtility.IsBitwiseAndNonZero( f13_arg3:get(), Enum[0xE29E259801BC1A4][0x253A6F6CAAAE464] )
-	local f13_local3 = CoD.BitUtility.IsBitwiseAndNonZero( f13_arg3:get(), Enum[0xE29E259801BC1A4][0x3DC8FC0E6AB543F] )
+	local f13_local2 = CoD.BitUtility.IsBitwiseAndNonZero( f13_arg3:get(), Enum[@"luibuttonflags"][@"flag_down"] )
+	local f13_local3 = CoD.BitUtility.IsBitwiseAndNonZero( f13_arg3:get(), Enum[@"luibuttonflags"][@"flag_isrepeat"] )
 	local f13_local4 = "mouseup"
 	if f13_local2 then
 		f13_local4 = "mousedown"
@@ -372,7 +372,7 @@ CoD.Menu.MouseButtonCallbackFunction = function ( f13_arg0, f13_arg1, f13_arg2, 
 			return true
 		end
 	end
-	if f13_arg0.inputFocusSupport and f13_local2 and not CoD.BitUtility.IsBitwiseAndNonZero( f13_arg3:get(), Enum[0xE29E259801BC1A4][0x715085B24AAB606] ) then
+	if f13_arg0.inputFocusSupport and f13_local2 and not CoD.BitUtility.IsBitwiseAndNonZero( f13_arg3:get(), Enum[@"luibuttonflags"][@"hash_4715085B24AAB606"] ) then
 		local f13_local7 = true
 		local f13_local8 = CoD.GetMouseFocus( f13_arg1 )
 		if f13_local8 and f13_arg0:isParentOf( f13_local8 ) then
@@ -382,7 +382,7 @@ CoD.Menu.MouseButtonCallbackFunction = function ( f13_arg0, f13_arg1, f13_arg2, 
 			if f13_local8 and f13_local8:canTakeInputFocus() then
 				if f13_arg0.currentInputFocus and f13_local8:isParentOf( f13_arg0.currentInputFocus ) then
 					local f13_local9 = f13_arg0:getRoot()
-					if Engine[0x879C9464C18718]( f13_arg1, f13_arg0, f13_local9.name, f13_local0, f13_local1 ) then
+					if Engine[@"ismouseinsideelement"]( f13_arg1, f13_arg0, f13_local9.name, f13_local0, f13_local1 ) then
 						f13_arg0:ChangeInputFocus( f13_arg1, f13_arg0.currentInputFocus )
 						f13_local7 = false
 					else
@@ -481,16 +481,16 @@ CoD.Menu.IsPriorityMenuOpen = function ( f17_arg0 )
 end
 CoD.Menu.NewForUIEditor = function ( f18_arg0, f18_arg1 )
 	local f18_local0 = CoD.Menu.NewFromState( f18_arg0, f18_arg1 )
-	f18_local0.buttonModel = Engine[0xA798E4552F5E872]( Engine[0x4DF5CFBC1771947]( f18_arg1 ), f18_local0.menuName .. ".buttonPrompts" )
+	f18_local0.buttonModel = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f18_arg1 ), f18_local0.menuName .. ".buttonPrompts" )
 	if CoD.isPC or CoD.IsShoutcaster( f18_arg1 ) then
-		f18_local0.keyModel = Engine[0xA798E4552F5E872]( Engine[0x4DF5CFBC1771947]( f18_arg1 ), f18_local0.menuName .. ".keyPrompts" )
+		f18_local0.keyModel = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f18_arg1 ), f18_local0.menuName .. ".keyPrompts" )
 	end
 	return f18_local0
 end
 CoD.Menu.close = function ( f19_arg0 )
 	local f19_local0 = f19_arg0:getOwner()
 	if not f19_local0 then
-		f19_local0 = Engine[0xA5B9C0111291A8B]()
+		f19_local0 = Engine[@"getprimarycontroller"]()
 	end
 	if f19_arg0.menuName == "DOA_INGAME_PAUSE" then
 		CoD.isDOAPauseMenuOpen = false
@@ -509,7 +509,7 @@ CoD.Menu.close = function ( f19_arg0 )
 		if f19_arg0.occludedBy ~= nil then
 			f19_arg0.occludedMenu.occludedBy = f19_arg0.occludedBy
 		else
-			if IsGameTypeDOA() and Engine[0xBC62B0E988DCCAF]() then
+			if IsGameTypeDOA() and Engine[@"issplitscreen"]() then
 				f19_arg0.occludedMenu:setOwner( f19_arg0:getOwner() )
 			end
 			f19_arg0.occludedMenu:processEvent( {
@@ -530,29 +530,29 @@ CoD.Menu.close = function ( f19_arg0 )
 	end
 	CoD.MetricsUtility.CloseMenu( f19_arg0 )
 	CoD.Menu.super.close( f19_arg0 )
-	Engine[0x8C7A8C4C5FD9892]( Engine[0xA798E4552F5E872]( Engine[0x4DF5CFBC1771947]( f19_local0 ), f19_arg0.menuName .. ".buttonPrompts" ) )
+	Engine[@"unsubscribeandfreemodel"]( Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f19_local0 ), f19_arg0.menuName .. ".buttonPrompts" ) )
 	f19_arg0.buttonModel = nil
 	if CoD.isPC then
 		if f19_arg0.__lockedFocus then
 			f19_arg0:DispatchMouseCaptureLostEvent( f19_local0 )
 		end
-		Engine[0x8C7A8C4C5FD9892]( Engine[0xA798E4552F5E872]( Engine[0x4DF5CFBC1771947]( f19_local0 ), f19_arg0.menuName .. ".keyPrompts" ) )
+		Engine[@"unsubscribeandfreemodel"]( Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f19_local0 ), f19_arg0.menuName .. ".keyPrompts" ) )
 		f19_arg0.keyModel = nil
 		local f19_local1 = f19_arg0
 		local f19_local2 = f19_arg0.removeSubscription
-		local f19_local3 = Engine[0x4DF5CFBC1771947]( f19_local0 )
+		local f19_local3 = Engine[@"getmodelforcontroller"]( f19_local0 )
 		f19_local2( f19_local1, f19_local3["KeyPressBits.MOUSE1"] )
 		f19_local1 = f19_arg0
 		f19_local2 = f19_arg0.removeSubscription
-		f19_local3 = Engine[0x4DF5CFBC1771947]( f19_local0 )
+		f19_local3 = Engine[@"getmodelforcontroller"]( f19_local0 )
 		f19_local2( f19_local1, f19_local3["KeyPressBits.MOUSE2"] )
 		f19_local1 = f19_arg0
 		f19_local2 = f19_arg0.removeSubscription
-		f19_local3 = Engine[0x4DF5CFBC1771947]( f19_local0 )
+		f19_local3 = Engine[@"getmodelforcontroller"]( f19_local0 )
 		f19_local2( f19_local1, f19_local3["KeyPressBits.MOUSE3"] )
 	end
 	if LUI.DEV then
-		DebugPrint( "Menu " .. f19_arg0.menuName .. " model change = " .. Engine[0x8FF1EF004DBDA9B]() or 0 - f19_arg0.__priorModelCount )
+		DebugPrint( "Menu " .. f19_arg0.menuName .. " model change = " .. Engine[@"getmodelusage"]() or 0 - f19_arg0.__priorModelCount )
 		for f19_local2 = 1, #LUI.currentMouseFocus, 1 do
 			assert( not CoD.Menu.IsAncestorOf( f19_arg0, LUI.currentMouseFocus[f19_local2] ) )
 		end
@@ -565,20 +565,20 @@ CoD.Menu.DoesMenuExist = function ( f21_arg0 )
 	return LUI.createMenu[f21_arg0] ~= nil
 end
 CoD.Menu.safeCreateMenu = function ( f22_arg0, f22_arg1, f22_arg2 )
-	Engine[0x9E4A351824F9207]()
-	Engine[0x6E447857BE70BC1]( "createMenu('" .. f22_arg0 .. "')" )
+	Engine[@"gcstop"]()
+	Engine[@"beginpixevent"]( "createMenu('" .. f22_arg0 .. "')" )
 	local f22_local0 = LUI.createMenu[f22_arg0]
 	if f22_local0 == nil then
 		if LUI.DEV then
 			error( "LUI Error: no createMenu function for menu '" .. f22_arg0 .. "'" )
 		end
-		Engine[0x66E2713AD003565]()
+		Engine[@"endpixevent"]()
 		return nil
 	else
 		local f22_local1 = f22_local0( f22_arg1, f22_arg2 )
 		CoD.MetricsUtility.OpenMenu( f22_local1 )
-		Engine[0x67C1198992E2A96]()
-		Engine[0x66E2713AD003565]()
+		Engine[@"gcrestart"]()
+		Engine[@"endpixevent"]()
 		return f22_local1
 	end
 end
@@ -593,7 +593,7 @@ CoD.Menu.DebugReload = function ( f24_arg0, f24_arg1 )
 	end
 	local f24_local0 = f24_arg0.m_ownerController
 	if not f24_local0 then
-		f24_local0 = Engine[0xA5B9C0111291A8B]()
+		f24_local0 = Engine[@"getprimarycontroller"]()
 	end
 	local f24_local1 = f24_arg0:getNextSibling()
 	local f24_local2 = f24_arg0:getParent()
@@ -633,7 +633,7 @@ CoD.Menu.OcclusionChange = function ( f26_arg0, f26_arg1 )
 		f26_local0 = f26_arg0:getOwner()
 	end
 	if f26_local0 == nil then
-		f26_local0 = Engine[0xA5B9C0111291A8B]()
+		f26_local0 = Engine[@"getprimarycontroller"]()
 	end
 	if CoD.PCWidgetUtility then
 		CoD.PCWidgetUtility.CloseContextualMenu( f26_arg0, f26_local0 )
@@ -642,7 +642,7 @@ CoD.Menu.OcclusionChange = function ( f26_arg0, f26_arg1 )
 		CoD.PCBattlenetUtility.CloseBattlenetMenu( f26_arg0, f26_arg0, f26_local0, false )
 	end
 	if f26_arg1.occluded then
-		if not f26_arg0.occludedBy and Engine[0x8069F5969D47DEF]() then
+		if not f26_arg0.occludedBy and Engine[@"usingfreecursor"]() then
 			f26_arg0:saveState( f26_local0 )
 			f26_arg0:ChangeFocusedElement( f26_local0, nil, true )
 		end
@@ -699,7 +699,7 @@ CoD.Menu.OcclusionChange = function ( f26_arg0, f26_arg1 )
 		if f26_arg0.updateBlur then
 			f26_arg0:updateBlur()
 		end
-		if Engine[0x8069F5969D47DEF]() then
+		if Engine[@"usingfreecursor"]() then
 			DataSources.FreeCursor.registerButtonPrompts( f26_arg0:getOwner(), f26_arg0.buttonModel )
 			CoD.FreeCursorUtility.RetriggerCursorPosition( f26_arg0, f26_arg0:getOwner() )
 		end
@@ -709,14 +709,14 @@ CoD.Menu.OcclusionChange = function ( f26_arg0, f26_arg1 )
 	end
 end
 CoD.Menu.AddButtonPromptModel = function ( f27_arg0, f27_arg1, f27_arg2, f27_arg3 )
-	local f27_local0 = Engine[0x40E824FE270E174]( f27_arg0.buttonModel, f27_arg2 )
+	local f27_local0 = Engine[@"getmodel"]( f27_arg0.buttonModel, f27_arg2 )
 	if not f27_local0 then
-		f27_local0 = Engine[0xA798E4552F5E872]( f27_arg0.buttonModel, f27_arg2 )
-		Engine[0x83C9B5DE1D9371]( f27_local0, f27_arg3 or Enum[0xF4865E3551C3835][0x901DFC093ED4187] )
+		f27_local0 = Engine[@"createmodel"]( f27_arg0.buttonModel, f27_arg2 )
+		Engine[@"setmodelvalue"]( f27_local0, f27_arg3 or Enum[@"luibuttonpromptstates"][@"flag_enable_prompts"] )
 	end
 	if CoD.isPC and f27_local0 then
-		if not Engine[0x40E824FE270E174]( f27_local0, "Button" ) then
-			Engine[0x83C9B5DE1D9371]( Engine[0xA798E4552F5E872]( f27_local0, "Button" ), f27_arg2 )
+		if not Engine[@"getmodel"]( f27_local0, "Button" ) then
+			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f27_local0, "Button" ), f27_arg2 )
 		end
 		if not f27_local0.TooltipLabel then
 			local f27_local1 = f27_local0:create( "TooltipLabel" )
@@ -732,7 +732,7 @@ CoD.Menu.AddButtonPromptModel = function ( f27_arg0, f27_arg1, f27_arg2, f27_arg
 		f27_local1:set( 0 )
 	end
 	if not f27_local0.buttonBit then
-		local f27_local1 = Engine[0x4DF5CFBC1771947]( f27_arg1 )
+		local f27_local1 = Engine[@"getmodelforcontroller"]( f27_arg1 )
 		f27_local1 = f27_local1.ButtonBits[f27_arg2]
 		if f27_local1.progress ~= nil then
 			local f27_local2 = f27_local0:create( "buttonBit" )
@@ -742,18 +742,18 @@ CoD.Menu.AddButtonPromptModel = function ( f27_arg0, f27_arg1, f27_arg2, f27_arg
 end
 CoD.Menu.AddPCKeyPromptModel = function ( f28_arg0, f28_arg1, f28_arg2, f28_arg3 )
 	if CoD.IsShoutcaster( f28_arg1 ) and f28_arg0.menuName == "hud_safearea" and f28_arg0.keyModel == nil then
-		f28_arg0.keyModel = Engine[0xA798E4552F5E872]( Engine[0x4DF5CFBC1771947]( f28_arg1 ), f28_arg0.menuName .. ".keyPrompts" )
+		f28_arg0.keyModel = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f28_arg1 ), f28_arg0.menuName .. ".keyPrompts" )
 	end
 	if not f28_arg0.keyModel then
 		return 
 	end
-	local f28_local0 = Engine[0x40E824FE270E174]( f28_arg0.keyModel, f28_arg2 )
+	local f28_local0 = Engine[@"getmodel"]( f28_arg0.keyModel, f28_arg2 )
 	if not f28_local0 then
-		f28_local0 = Engine[0xA798E4552F5E872]( f28_arg0.keyModel, f28_arg2 )
-		Engine[0x83C9B5DE1D9371]( f28_local0, f28_arg3 or Enum[0xF4865E3551C3835][0x901DFC093ED4187] )
+		f28_local0 = Engine[@"createmodel"]( f28_arg0.keyModel, f28_arg2 )
+		Engine[@"setmodelvalue"]( f28_local0, f28_arg3 or Enum[@"luibuttonpromptstates"][@"flag_enable_prompts"] )
 	end
-	if CoD.isPC and f28_local0 and not Engine[0x40E824FE270E174]( f28_local0, "Button" ) then
-		Engine[0x83C9B5DE1D9371]( Engine[0xA798E4552F5E872]( f28_local0, "Button" ), f28_arg2 )
+	if CoD.isPC and f28_local0 and not Engine[@"getmodel"]( f28_local0, "Button" ) then
+		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f28_local0, "Button" ), f28_arg2 )
 	end
 	if not f28_local0.Label then
 		local f28_local1 = f28_local0:create( "Label" )
@@ -764,7 +764,7 @@ CoD.Menu.AddPCKeyPromptModel = function ( f28_arg0, f28_arg1, f28_arg2, f28_arg3
 		f28_local1:set( 0 )
 	end
 	if not f28_local0.buttonBit then
-		local f28_local1 = Engine[0x4DF5CFBC1771947]( f28_arg1 )
+		local f28_local1 = Engine[@"getmodelforcontroller"]( f28_arg1 )
 		f28_local1 = f28_local1.KeyPressBits[f28_arg2]
 		if f28_local1 and f28_local1.progress ~= nil then
 			local f28_local2 = f28_local0:create( "buttonBit" )
@@ -773,16 +773,16 @@ CoD.Menu.AddPCKeyPromptModel = function ( f28_arg0, f28_arg1, f28_arg2, f28_arg3
 	end
 end
 CoD.Menu.SetButtonPromptState = function ( f29_arg0, f29_arg1, f29_arg2, f29_arg3 )
-	if f29_arg0 and f29_arg0.buttonModel and f29_arg2 ~= Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8] then
+	if f29_arg0 and f29_arg0.buttonModel and f29_arg2 ~= Enum[@"luibutton"][@"lui_key_none"] then
 		local f29_local0 = f29_arg0.buttonModel:create( f29_arg2 )
 		if f29_local0:set( f29_arg3 ) and f29_local0.flags then
 			local f29_local1 = f29_local0.flags:get()
-			if CoD.BitUtility.IsBitwiseAndNonZero( f29_local1, Enum[0xBEBDBAEEB3ECCCA][0x2919C98A7A845F0] ) or CoD.BitUtility.IsBitwiseAndNonZero( f29_local1, Enum[0xBEBDBAEEB3ECCCA][0x71B04FAC5BE0E35] ) then
-				Engine[0x7CD221DF1911DD1]( f29_arg1, f29_arg2 )
+			if CoD.BitUtility.IsBitwiseAndNonZero( f29_local1, Enum[@"luibuttonpromptflags"][@"hash_72919C98A7A845F0"] ) or CoD.BitUtility.IsBitwiseAndNonZero( f29_local1, Enum[@"luibuttonpromptflags"][@"hash_771B04FAC5BE0E35"] ) then
+				Engine[@"hash_27CD221DF1911DD1"]( f29_arg1, f29_arg2 )
 			end
 		end
 	end
-	if Engine[0x8069F5969D47DEF]() then
+	if Engine[@"usingfreecursor"]() then
 		DataSources.FreeCursor.updateActivePrompts( f29_arg0:getOwner() )
 	end
 end
@@ -847,7 +847,7 @@ CoD.Menu.GetElementAndFunctionTableForButton = function ( f32_arg0, f32_arg1, f3
 	local f32_local1 = {}
 	local f32_local2 = f32_arg0
 	local f32_local3 = f32_arg0.lastFocusedElemEvent
-	if (CoD.isPC or f32_arg4 ~= nil and CoD.IsShoutcaster( f32_arg4 )) and f32_arg3 and f32_arg0.lastPCInputFocusElemEvent ~= nil and (not f32_arg0.letMouse1Through or f32_arg1 ~= "MOUSE1") and (Engine[0x6C1F6DEE7AF457B]( f32_arg4 ) or Engine[0x267ACA658A43FBD]( f32_arg4 )) then
+	if (CoD.isPC or f32_arg4 ~= nil and CoD.IsShoutcaster( f32_arg4 )) and f32_arg3 and f32_arg0.lastPCInputFocusElemEvent ~= nil and (not f32_arg0.letMouse1Through or f32_arg1 ~= "MOUSE1") and (Engine[@"lastinput_mouse"]( f32_arg4 ) or Engine[@"hash_267ACA658A43FBD"]( f32_arg4 )) then
 		f32_local3 = f32_arg0.lastPCInputFocusElemEvent
 	end
 	if f32_local3 and f32_local3.idStack then
@@ -894,9 +894,9 @@ CoD.Menu.AnyButtonConditionTrue = function ( f34_arg0, f34_arg1, f34_arg2, f34_a
 end
 CoD.Menu.UpdateButtonShownState = function ( f35_arg0, f35_arg1, f35_arg2, f35_arg3 )
 	local f35_local0 = f35_arg1:GetElementAndFunctionTableForButton( f35_arg3, "conditionFunctions" )
-	local f35_local1 = Enum[0xF4865E3551C3835][0xC3FAFD8EBE94438]
+	local f35_local1 = Enum[@"luibuttonpromptstates"][@"flag_hide_prompts"]
 	if f35_arg1.showButtonDisabled and f35_arg1.showButtonDisabled[f35_arg3] then
-		f35_local1 = Enum[0xF4865E3551C3835][0x42F62C12777D074]
+		f35_local1 = Enum[@"luibuttonpromptstates"][@"flag_disable_prompts"]
 	end
 	for f35_local6, f35_local7 in ipairs( f35_local0 ) do
 		local f35_local5 = f35_local7.fn
@@ -904,24 +904,24 @@ CoD.Menu.UpdateButtonShownState = function ( f35_arg0, f35_arg1, f35_arg2, f35_a
 			f35_local5 = f35_local7.fn( f35_local7.element, f35_arg1, f35_arg2 )
 		end
 		if f35_local5 then
-			f35_local1 = Enum[0xF4865E3551C3835][0x901DFC093ED4187]
+			f35_local1 = Enum[@"luibuttonpromptstates"][@"flag_enable_prompts"]
 			break
-		elseif f35_local1 ~= Enum[0xF4865E3551C3835][0x42F62C12777D074] and f35_local7.element and f35_local7.element.showButtonDisabled and f35_local7.element.showButtonDisabled[f35_arg3] then
-			f35_local1 = Enum[0xF4865E3551C3835][0x42F62C12777D074]
+		elseif f35_local1 ~= Enum[@"luibuttonpromptstates"][@"flag_disable_prompts"] and f35_local7.element and f35_local7.element.showButtonDisabled and f35_local7.element.showButtonDisabled[f35_arg3] then
+			f35_local1 = Enum[@"luibuttonpromptstates"][@"flag_disable_prompts"]
 		end
 	end
-	if f35_local1 == Enum[0xF4865E3551C3835][0x901DFC093ED4187] and f35_arg1.occludedBy and f35_arg1.occludedBy.animateInFromOffset then
-		f35_local1 = Enum[0xF4865E3551C3835][0x42F62C12777D074]
+	if f35_local1 == Enum[@"luibuttonpromptstates"][@"flag_enable_prompts"] and f35_arg1.occludedBy and f35_arg1.occludedBy.animateInFromOffset then
+		f35_local1 = Enum[@"luibuttonpromptstates"][@"flag_disable_prompts"]
 	end
 	f35_arg1:SetButtonPromptState( f35_arg2, f35_arg3, f35_local1 )
 end
 CoD.Menu.SetButtonLabel = function ( f36_arg0, f36_arg1, f36_arg2, f36_arg3, f36_arg4 )
 	local f36_local0 = f36_arg0.buttonModel[f36_arg1]
-	if f36_arg1 ~= Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8] and f36_local0 then
+	if f36_arg1 ~= Enum[@"luibutton"][@"lui_key_none"] and f36_local0 then
 		local f36_local1 = f36_local0.Label
 		if f36_local1 then
-			if f36_arg2 == 0x28080D5840E11B2 then
-				f36_local1:set( 0x7E8A8BFFB7D0CD4 )
+			if f36_arg2 == @"hash_128080D5840E11B2" then
+				f36_local1:set( @"menu/overlay_label" )
 			else
 				f36_local1:set( f36_arg2 or 0x0 )
 				if CoD.isPC then
@@ -932,14 +932,14 @@ CoD.Menu.SetButtonLabel = function ( f36_arg0, f36_arg1, f36_arg2, f36_arg3, f36
 		if not f36_arg3 then
 			f36_arg3 = 0
 		end
-		if not Engine[0x8069F5969D47DEF]() then
-			f36_arg3 = CoD.BitUtility.ClearBit( f36_arg3, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3] )
+		if not Engine[@"usingfreecursor"]() then
+			f36_arg3 = CoD.BitUtility.ClearBit( f36_arg3, Enum[@"luibuttonpromptflags"][@"bpf_contextual"] )
 		end
 		local f36_local2 = f36_local0.flags
 		if f36_local2 then
 			f36_local2:set( f36_arg3 or 0 )
 		end
-		if Engine[0x8069F5969D47DEF]() then
+		if Engine[@"usingfreecursor"]() then
 			DataSources.FreeCursor.updateActivePrompts( f36_arg0:getOwner() )
 		end
 	end
@@ -948,20 +948,20 @@ CoD.Menu.SetButtonLabel = function ( f36_arg0, f36_arg1, f36_arg2, f36_arg3, f36
 		if not f36_arg3 then
 			f36_arg3 = 0
 		end
-		if not Engine[0x8069F5969D47DEF]() then
-			f36_arg3 = CoD.BitUtility.ClearBit( f36_arg3, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3] )
+		if not Engine[@"usingfreecursor"]() then
+			f36_arg3 = CoD.BitUtility.ClearBit( f36_arg3, Enum[@"luibuttonpromptflags"][@"bpf_contextual"] )
 		end
-		if f36_arg3 & Enum[0xBEBDBAEEB3ECCCA][0x2919C98A7A845F0] > 0 then
-			f36_arg3 = f36_arg3 - Enum[0xBEBDBAEEB3ECCCA][0x2919C98A7A845F0]
+		if f36_arg3 & Enum[@"luibuttonpromptflags"][@"hash_72919C98A7A845F0"] > 0 then
+			f36_arg3 = f36_arg3 - Enum[@"luibuttonpromptflags"][@"hash_72919C98A7A845F0"]
 		end
-		if f36_arg3 & Enum[0xBEBDBAEEB3ECCCA][0x71B04FAC5BE0E35] > 0 then
-			f36_arg3 = f36_arg3 - Enum[0xBEBDBAEEB3ECCCA][0x71B04FAC5BE0E35]
+		if f36_arg3 & Enum[@"luibuttonpromptflags"][@"hash_771B04FAC5BE0E35"] > 0 then
+			f36_arg3 = f36_arg3 - Enum[@"luibuttonpromptflags"][@"hash_771B04FAC5BE0E35"]
 		end
 		local f36_local2 = f36_local1.flags
 		if f36_local2 then
 			f36_local2:set( f36_arg3 or 0 )
 		end
-		if Engine[0x8069F5969D47DEF]() then
+		if Engine[@"usingfreecursor"]() then
 			DataSources.FreeCursor.updateActivePrompts( f36_arg0:getOwner() )
 		end
 	end
@@ -982,7 +982,7 @@ CoD.Menu.ClearButtonLabel = function ( f37_arg0, f37_arg1, f37_arg2 )
 	if f37_local1 then
 		f37_local1:set( 0 )
 	end
-	if Engine[0x8069F5969D47DEF]() then
+	if Engine[@"usingfreecursor"]() then
 		DataSources.FreeCursor.updateActivePrompts( f37_arg0:getOwner() )
 	end
 end
@@ -1005,7 +1005,7 @@ CoD.Menu.LeftNavigationChoose = function ( f38_arg0, f38_arg1, f38_arg2 )
 		local f38_local3 = 3
 		local f38_local4 = f38_arg0:getCenter()
 		local f38_local5, f38_local6, f38_local7, f38_local8 = nil
-		f38_local5, f38_local6, f38_local7, f38_local8 = Engine[0x695399A0E06EC35]( f38_arg2, f38_arg0 )
+		f38_local5, f38_local6, f38_local7, f38_local8 = Engine[@"hash_3695399A0E06EC35"]( f38_arg2, f38_arg0 )
 		local f38_local9 = 0.1
 		f38_local5 = f38_local5 - 1
 		f38_local7 = f38_local7 + 1
@@ -1014,7 +1014,7 @@ CoD.Menu.LeftNavigationChoose = function ( f38_arg0, f38_arg1, f38_arg2 )
 		for f38_local30, f38_local31 in pairs( f38_arg1 ) do
 			if f38_local31 ~= f38_arg0 then
 				local f38_local15, f38_local16, f38_local17, f38_local18 = nil
-				f38_local15, f38_local16, f38_local17, f38_local18 = Engine[0x695399A0E06EC35]( f38_arg2, f38_local31 )
+				f38_local15, f38_local16, f38_local17, f38_local18 = Engine[@"hash_3695399A0E06EC35"]( f38_arg2, f38_local31 )
 				local f38_local19 = f38_local16 - (f38_local16 - f38_local18) * f38_local9
 				local f38_local20 = f38_local18 + (f38_local16 - f38_local18) * f38_local9
 				local f38_local21 = f38_local31:getCenter()
@@ -1093,7 +1093,7 @@ CoD.Menu.RightNavigationChoose = function ( f39_arg0, f39_arg1, f39_arg2 )
 		local f39_local3 = 3
 		local f39_local4 = f39_arg0:getCenter()
 		local f39_local5, f39_local6, f39_local7, f39_local8 = nil
-		f39_local5, f39_local6, f39_local7, f39_local8 = Engine[0x695399A0E06EC35]( f39_arg2, f39_arg0 )
+		f39_local5, f39_local6, f39_local7, f39_local8 = Engine[@"hash_3695399A0E06EC35"]( f39_arg2, f39_arg0 )
 		local f39_local9 = 0.1
 		f39_local5 = f39_local5 - 1
 		f39_local7 = f39_local7 + 1
@@ -1102,7 +1102,7 @@ CoD.Menu.RightNavigationChoose = function ( f39_arg0, f39_arg1, f39_arg2 )
 		for f39_local30, f39_local31 in pairs( f39_arg1 ) do
 			if f39_local31 ~= f39_arg0 then
 				local f39_local15, f39_local16, f39_local17, f39_local18 = nil
-				f39_local15, f39_local16, f39_local17, f39_local18 = Engine[0x695399A0E06EC35]( f39_arg2, f39_local31 )
+				f39_local15, f39_local16, f39_local17, f39_local18 = Engine[@"hash_3695399A0E06EC35"]( f39_arg2, f39_local31 )
 				local f39_local19 = f39_local16 - (f39_local16 - f39_local18) * f39_local9
 				local f39_local20 = f39_local18 + (f39_local16 - f39_local18) * f39_local9
 				local f39_local21 = f39_local31:getCenter()
@@ -1183,7 +1183,7 @@ CoD.Menu.UpNavigationChoose = function ( f40_arg0, f40_arg1, f40_arg2 )
 		local f40_local5 = nil
 		local f40_local6 = f40_arg0:getCenter()
 		local f40_local7, f40_local8, f40_local9, f40_local10 = nil
-		f40_local7, f40_local8, f40_local9, f40_local10 = Engine[0x695399A0E06EC35]( f40_arg2, f40_arg0 )
+		f40_local7, f40_local8, f40_local9, f40_local10 = Engine[@"hash_3695399A0E06EC35"]( f40_arg2, f40_arg0 )
 		local f40_local11 = {
 			x = (f40_local7 + f40_local9) / 2,
 			y = f40_local8
@@ -1193,7 +1193,7 @@ CoD.Menu.UpNavigationChoose = function ( f40_arg0, f40_arg1, f40_arg2 )
 				local f40_local15 = f40_local30:getCenter()
 				if f40_local15 then
 					local f40_local16, f40_local17, f40_local18, f40_local19 = nil
-					f40_local16, f40_local17, f40_local18, f40_local19 = Engine[0x695399A0E06EC35]( f40_arg2, f40_local30 )
+					f40_local16, f40_local17, f40_local18, f40_local19 = Engine[@"hash_3695399A0E06EC35"]( f40_arg2, f40_local30 )
 					local f40_local20 = {
 						x = f40_local16,
 						y = f40_local19
@@ -1274,7 +1274,7 @@ CoD.Menu.DownNavigationChoose = function ( f41_arg0, f41_arg1, f41_arg2 )
 			return 
 		end
 		local f41_local7, f41_local8, f41_local9, f41_local10 = nil
-		f41_local7, f41_local8, f41_local9, f41_local10 = Engine[0x695399A0E06EC35]( f41_arg2, f41_arg0 )
+		f41_local7, f41_local8, f41_local9, f41_local10 = Engine[@"hash_3695399A0E06EC35"]( f41_arg2, f41_arg0 )
 		local f41_local11 = {
 			x = (f41_local7 + f41_local9) / 2,
 			y = f41_local10
@@ -1284,7 +1284,7 @@ CoD.Menu.DownNavigationChoose = function ( f41_arg0, f41_arg1, f41_arg2 )
 				local f41_local15 = f41_local30:getCenter()
 				if f41_local15 ~= nil then
 					local f41_local16, f41_local17, f41_local18, f41_local19 = nil
-					f41_local16, f41_local17, f41_local18, f41_local19 = Engine[0x695399A0E06EC35]( f41_arg2, f41_local30 )
+					f41_local16, f41_local17, f41_local18, f41_local19 = Engine[@"hash_3695399A0E06EC35"]( f41_arg2, f41_local30 )
 					local f41_local20 = {
 						x = f41_local16,
 						y = f41_local17
@@ -1488,7 +1488,7 @@ CoD.Menu.handleDefaultNavigation = function ( f44_arg0, f44_arg1, f44_arg2, f44_
 	end
 end
 CoD.Menu.CanHandleNavigationInput = function ( f47_arg0 )
-	if f47_arg0.__lastInputChangeFrame == Engine[0xC60FB88F484616D]() and f47_arg0.lastFocusedElemEvent and f47_arg0.lastFocusedElemEvent.idStack then
+	if f47_arg0.__lastInputChangeFrame == Engine[@"hash_4C60FB88F484616D"]() and f47_arg0.lastFocusedElemEvent and f47_arg0.lastFocusedElemEvent.idStack then
 		return false
 	else
 		return true
@@ -1501,28 +1501,28 @@ CoD.Menu.AddPCNavigationHandler = function ( f48_arg0, f48_arg1 )
 	if f48_arg0.buttonModel == nil then
 		return 
 	else
-		CoD.Menu.AddButtonCallbackFunction( f48_arg0, f48_arg0, f48_arg1, Enum[0x3DD78803F918E9D][0x4B11D2B20C75A7F], "ui_navup", function ( element, menu, controller, f49_arg3 )
+		CoD.Menu.AddButtonCallbackFunction( f48_arg0, f48_arg0, f48_arg1, Enum[@"luibutton"][@"lui_key_up"], "ui_navup", function ( element, menu, controller, f49_arg3 )
 			if not menu.m_disableNavigation and menu:AcceptGamePadButtonInputFromModelCallback( controller ) and CoD.Menu.CanHandleNavigationInput( menu ) then
 				return menu:handleDefaultNavigation( element, controller, "up" )
 			else
 				return false
 			end
 		end )
-		CoD.Menu.AddButtonCallbackFunction( f48_arg0, f48_arg0, f48_arg1, Enum[0x3DD78803F918E9D][0xD4C15FE32148D3A], "ui_navdown", function ( element, menu, controller, f50_arg3 )
+		CoD.Menu.AddButtonCallbackFunction( f48_arg0, f48_arg0, f48_arg1, Enum[@"luibutton"][@"lui_key_down"], "ui_navdown", function ( element, menu, controller, f50_arg3 )
 			if not menu.m_disableNavigation and menu:AcceptGamePadButtonInputFromModelCallback( controller ) and CoD.Menu.CanHandleNavigationInput( menu ) then
 				return menu:handleDefaultNavigation( element, controller, "down" )
 			else
 				return false
 			end
 		end )
-		CoD.Menu.AddButtonCallbackFunction( f48_arg0, f48_arg0, f48_arg1, Enum[0x3DD78803F918E9D][0x57783F8DA4AAEF], "ui_navleft", function ( element, menu, controller, f51_arg3 )
+		CoD.Menu.AddButtonCallbackFunction( f48_arg0, f48_arg0, f48_arg1, Enum[@"luibutton"][@"lui_key_left"], "ui_navleft", function ( element, menu, controller, f51_arg3 )
 			if not menu.m_disableNavigation and menu:AcceptGamePadButtonInputFromModelCallback( controller ) and CoD.Menu.CanHandleNavigationInput( menu ) then
 				return menu:handleDefaultNavigation( element, controller, "left" )
 			else
 				return false
 			end
 		end )
-		CoD.Menu.AddButtonCallbackFunction( f48_arg0, f48_arg0, f48_arg1, Enum[0x3DD78803F918E9D][0x571F08AD84807E0], "ui_navright", function ( element, menu, controller, f52_arg3 )
+		CoD.Menu.AddButtonCallbackFunction( f48_arg0, f48_arg0, f48_arg1, Enum[@"luibutton"][@"lui_key_right"], "ui_navright", function ( element, menu, controller, f52_arg3 )
 			if not menu.m_disableNavigation and menu:AcceptGamePadButtonInputFromModelCallback( controller ) and CoD.Menu.CanHandleNavigationInput( menu ) then
 				return menu:handleDefaultNavigation( element, controller, "right" )
 			else
@@ -1555,18 +1555,18 @@ CoD.Menu.SendButtonPressToParent = function ( f55_arg0, f55_arg1, f55_arg2, f55_
 end
 CoD.Menu.HandleButtonPress = function ( f56_arg0, f56_arg1, f56_arg2, f56_arg3, f56_arg4 )
 	if CoD.isPC then
-		if f56_arg0.ContextualMenu and (f56_arg2 == Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A] or f56_arg2 == Enum[0x3DD78803F918E9D][0x4D2505E19049444]) then
+		if f56_arg0.ContextualMenu and (f56_arg2 == Enum[@"luibutton"][@"lui_key_xbb_pscircle"] or f56_arg2 == Enum[@"luibutton"][@"hash_64D2505E19049444"]) then
 			CoD.PCWidgetUtility.CloseContextualMenu( f56_arg0, f56_arg1 )
-			Engine[0x83C9B5DE1D9371]( f56_arg3, 0 )
+			Engine[@"setmodelvalue"]( f56_arg3, 0 )
 			return true
-		elseif CoD.PCUtility.ChatClientContainer and f56_arg2 == Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A] then
+		elseif CoD.PCUtility.ChatClientContainer and f56_arg2 == Enum[@"luibutton"][@"lui_key_xbb_pscircle"] then
 			local f56_local0 = CoD.ChatClientUtility.GetCurrentChattingModel( f56_arg1 )
 			if f56_local0 and f56_local0:get() then
 				f56_local0:set( false )
 				return true
 			end
 		end
-		if CoD.PCUtility.FrontendBattlenetContainer and f56_arg2 == Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A] and f56_arg0.id ~= "Menu.Social_PlayerDetailsPopup" and f56_arg0.id ~= "Menu.ReportPlayer" then
+		if CoD.PCUtility.FrontendBattlenetContainer and f56_arg2 == Enum[@"luibutton"][@"lui_key_xbb_pscircle"] and f56_arg0.id ~= "Menu.Social_PlayerDetailsPopup" and f56_arg0.id ~= "Menu.ReportPlayer" then
 			local f56_local0 = CoD.PCBattlenetUtility.GetBattlenetMenuVisibilityModel( f56_arg1 )
 			if f56_local0 and f56_local0:get() then
 				CoD.PCBattlenetUtility.ToggleBattlenetMenuVisibility( f56_arg0, f56_arg0, f56_arg1 )
@@ -1574,7 +1574,7 @@ CoD.Menu.HandleButtonPress = function ( f56_arg0, f56_arg1, f56_arg2, f56_arg3, 
 			end
 		end
 	end
-	if Engine[0xF285055A1A895A1]( f56_arg1 ) or f56_arg0.unusedControllerAllowed then
+	if Engine[@"iscontrollerbeingused"]( f56_arg1 ) or f56_arg0.unusedControllerAllowed then
 		local f56_local0 = f56_arg0:GetElementAndFunctionTableForButton( f56_arg2, "buttonFunctions" )
 		local f56_local1 = 0
 		local f56_local2 = 0
@@ -1584,25 +1584,25 @@ CoD.Menu.HandleButtonPress = function ( f56_arg0, f56_arg1, f56_arg2, f56_arg3, 
 		end
 		for f56_local7, f56_local8 in ipairs( f56_local0 ) do
 			local f56_local9 = f56_arg0.buttonModel[f56_arg2].flags:get()
-			local f56_local10 = CoD.BitUtility.IsBitwiseAndNonZero( f56_local9, Enum[0xBEBDBAEEB3ECCCA][0x2919C98A7A845F0] )
-			local f56_local11 = CoD.BitUtility.IsBitwiseAndNonZero( f56_local9, Enum[0xBEBDBAEEB3ECCCA][0x71B04FAC5BE0E35] )
-			local f56_local12 = CoD.BitUtility.IsBitwiseAndNonZero( f56_arg3:get() | f56_arg4, Enum[0xE29E259801BC1A4][0x715085B24AAB606] )
-			local f56_local13 = CoD.BitUtility.IsBitwiseAndNonZero( f56_arg3:get() | f56_arg4, Enum[0xE29E259801BC1A4][0xDD6E7E17ACBF288] )
-			if (f56_local10 or f56_local11) and not f56_local12 and not f56_local13 and not CoD.BitUtility.IsBitwiseAndNonZero( f56_arg3:get() | f56_arg4, Enum[0xE29E259801BC1A4][0x3DC8FC0E6AB543F] ) then
+			local f56_local10 = CoD.BitUtility.IsBitwiseAndNonZero( f56_local9, Enum[@"luibuttonpromptflags"][@"hash_72919C98A7A845F0"] )
+			local f56_local11 = CoD.BitUtility.IsBitwiseAndNonZero( f56_local9, Enum[@"luibuttonpromptflags"][@"hash_771B04FAC5BE0E35"] )
+			local f56_local12 = CoD.BitUtility.IsBitwiseAndNonZero( f56_arg3:get() | f56_arg4, Enum[@"luibuttonflags"][@"hash_4715085B24AAB606"] )
+			local f56_local13 = CoD.BitUtility.IsBitwiseAndNonZero( f56_arg3:get() | f56_arg4, Enum[@"luibuttonflags"][@"hash_5DD6E7E17ACBF288"] )
+			if (f56_local10 or f56_local11) and not f56_local12 and not f56_local13 and not CoD.BitUtility.IsBitwiseAndNonZero( f56_arg3:get() | f56_arg4, Enum[@"luibuttonflags"][@"flag_isrepeat"] ) then
 				f56_local1 = f56_local1 + 1
-				Engine[0xAD22E2D5C97FC6B]( f56_arg1, f56_local9 >> Enum[0xBEBDBAEEB3ECCCA][0x76ADD225D738C93], f56_arg2, f56_local11 )
+				Engine[@"hash_7AD22E2D5C97FC6B"]( f56_arg1, f56_local9 >> Enum[@"luibuttonpromptflags"][@"hash_176ADD225D738C93"], f56_arg2, f56_local11 )
 			end
 			if not (f56_local10 ~= f56_local12 or f56_local11 ~= f56_local13) or f56_local11 and f56_local12 then
 				if not f56_local3 and f56_arg0:isInputOverridenForElement( f56_local8.sourceElement or f56_local8.element ) then
 					f56_local3 = true
 					if f56_arg0.__inputOverrideElement:__overrideFn( f56_arg0, f56_arg1, nil, f56_arg2 ) then
-						Engine[0x83C9B5DE1D9371]( f56_arg3, 0 )
+						Engine[@"setmodelvalue"]( f56_arg3, 0 )
 						break
 					end
 				end
 				if f56_local8.fn( f56_local8.element, f56_arg0, f56_arg1, f56_arg3 ) then
 					if f56_arg0.preserveLuiButton == nil or f56_arg0.preserveLuiButton[f56_arg2] == nil then
-						Engine[0x83C9B5DE1D9371]( f56_arg3, 0 )
+						Engine[@"setmodelvalue"]( f56_arg3, 0 )
 						break
 					end
 				end
@@ -1614,10 +1614,10 @@ CoD.Menu.HandleButtonPress = function ( f56_arg0, f56_arg1, f56_arg2, f56_arg3, 
 			f56_arg0.__inputOverrideElement:__overrideFn( f56_arg0, f56_arg1, nil, f56_arg2 )
 		end
 		if f56_local1 + f56_local2 < #f56_local0 and (f56_arg0.preserveLuiButton == nil or f56_arg0.preserveLuiButton[f56_arg2] == nil) then
-			Engine[0x83C9B5DE1D9371]( f56_arg3, 0 )
+			Engine[@"setmodelvalue"]( f56_arg3, 0 )
 		end
 	else
-		if IsGameTypeDOA() and Engine[0xBC62B0E988DCCAF]() then
+		if IsGameTypeDOA() and Engine[@"issplitscreen"]() then
 			f56_arg0:setOwner( f56_arg1 )
 		end
 		f56_arg0:processEvent( {
@@ -1640,7 +1640,7 @@ CoD.Menu.HandlePCKeyPress = function ( f57_arg0, f57_arg1, f57_arg2, f57_arg3, f
 			local f57_local0 = CoD.ChatClientUtility.GetCurrentChattingModel( f57_arg1 )
 			if f57_local0 and f57_local0:get() then
 				f57_local0:set( false )
-				Engine[0x83C9B5DE1D9371]( f57_arg3, 0 )
+				Engine[@"setmodelvalue"]( f57_arg3, 0 )
 				return true
 			end
 		end
@@ -1652,7 +1652,7 @@ CoD.Menu.HandlePCKeyPress = function ( f57_arg0, f57_arg1, f57_arg2, f57_arg3, f
 				else
 					CoD.PCBattlenetUtility.ToggleBattlenetMenuVisibility( f57_arg0, f57_arg0, f57_arg1 )
 				end
-				Engine[0x83C9B5DE1D9371]( f57_arg3, 0 )
+				Engine[@"setmodelvalue"]( f57_arg3, 0 )
 				return true
 			end
 		end
@@ -1663,7 +1663,7 @@ CoD.Menu.HandlePCKeyPress = function ( f57_arg0, f57_arg1, f57_arg2, f57_arg3, f
 	end
 	local f57_local0 = false
 	local f57_local1 = false
-	if Engine[0xF285055A1A895A1]( f57_arg1 ) or f57_arg0.unusedControllerAllowed then
+	if Engine[@"iscontrollerbeingused"]( f57_arg1 ) or f57_arg0.unusedControllerAllowed then
 		local f57_local2 = f57_arg0:GetElementAndFunctionTableForButton( f57_arg2, "buttonFunctions", true, f57_arg1 )
 		local f57_local3 = 0
 		local f57_local4 = 0
@@ -1673,17 +1673,17 @@ CoD.Menu.HandlePCKeyPress = function ( f57_arg0, f57_arg1, f57_arg2, f57_arg3, f
 				local f57_local9 = f57_arg0.keyModel[f57_arg2].flags:get()
 			end
 			local f57_local10 = f57_local8 and f57_local9 or 0
-			local f57_local11 = CoD.BitUtility.IsBitwiseAndNonZero( f57_local10, Enum[0xBEBDBAEEB3ECCCA][0x2919C98A7A845F0] )
-			local f57_local12 = CoD.BitUtility.IsBitwiseAndNonZero( f57_local10, Enum[0xBEBDBAEEB3ECCCA][0x71B04FAC5BE0E35] )
-			local f57_local13 = CoD.BitUtility.IsBitwiseAndNonZero( f57_arg3:get() | f57_arg5, Enum[0xE29E259801BC1A4][0x715085B24AAB606] )
-			local f57_local14 = CoD.BitUtility.IsBitwiseAndNonZero( f57_arg3:get() | f57_arg5, Enum[0xE29E259801BC1A4][0xDD6E7E17ACBF288] )
-			if f57_local11 and not Engine[0x795EC9C818FACDF]( f57_arg1, f57_arg2 ) then
+			local f57_local11 = CoD.BitUtility.IsBitwiseAndNonZero( f57_local10, Enum[@"luibuttonpromptflags"][@"hash_72919C98A7A845F0"] )
+			local f57_local12 = CoD.BitUtility.IsBitwiseAndNonZero( f57_local10, Enum[@"luibuttonpromptflags"][@"hash_771B04FAC5BE0E35"] )
+			local f57_local13 = CoD.BitUtility.IsBitwiseAndNonZero( f57_arg3:get() | f57_arg5, Enum[@"luibuttonflags"][@"hash_4715085B24AAB606"] )
+			local f57_local14 = CoD.BitUtility.IsBitwiseAndNonZero( f57_arg3:get() | f57_arg5, Enum[@"luibuttonflags"][@"hash_5DD6E7E17ACBF288"] )
+			if f57_local11 and not Engine[@"hash_4795EC9C818FACDF"]( f57_arg1, f57_arg2 ) then
 				f57_local11 = false
 			end
 			if (f57_local11 or f57_local12) and not f57_local13 and not f57_local14 then
 				f57_local0 = true
 				f57_local3 = f57_local3 + 1
-				Engine[0x959D466B3459B3A]( f57_arg1, f57_local10 >> Enum[0xBEBDBAEEB3ECCCA][0x76ADD225D738C93], f57_arg2, f57_local12, f57_arg4 )
+				Engine[@"hash_7959D466B3459B3A"]( f57_arg1, f57_local10 >> Enum[@"luibuttonpromptflags"][@"hash_176ADD225D738C93"], f57_arg2, f57_local12, f57_arg4 )
 			end
 			if not (f57_local11 ~= f57_local13 or f57_local12 ~= f57_local14) or f57_local12 and f57_local13 then
 				if not f57_local1 then
@@ -1696,7 +1696,7 @@ CoD.Menu.HandlePCKeyPress = function ( f57_arg0, f57_arg1, f57_arg2, f57_arg3, f
 					if f57_local16( f57_local15, f57_local17 ) then
 						f57_local1 = true
 						if f57_arg0.__inputOverrideElement:__overrideFn( f57_arg0, f57_arg1, f57_arg2, f57_arg4 ) then
-							Engine[0x83C9B5DE1D9371]( f57_arg3, 0 )
+							Engine[@"setmodelvalue"]( f57_arg3, 0 )
 							f57_local0 = true
 							break
 						end
@@ -1705,7 +1705,7 @@ CoD.Menu.HandlePCKeyPress = function ( f57_arg0, f57_arg1, f57_arg2, f57_arg3, f
 				if f57_local19.fn( f57_local19.element, f57_arg0, f57_arg1, f57_arg3 ) then
 					f57_local0 = true
 					if f57_arg0.preserveLuiButton == nil or f57_arg0.preserveLuiButton[f57_arg2] == nil then
-						Engine[0x83C9B5DE1D9371]( f57_arg3, 0 )
+						Engine[@"setmodelvalue"]( f57_arg3, 0 )
 						break
 					end
 				end
@@ -1717,7 +1717,7 @@ CoD.Menu.HandlePCKeyPress = function ( f57_arg0, f57_arg1, f57_arg2, f57_arg3, f
 			f57_arg0.__inputOverrideElement:__overrideFn( f57_arg0, f57_arg1, f57_arg2, f57_arg4 )
 		end
 		if f57_local3 + f57_local4 < #f57_local2 and (f57_arg0.preserveLuiButton == nil or f57_arg0.preserveLuiButton[f57_arg2] == nil) then
-			Engine[0x83C9B5DE1D9371]( f57_arg3, 0 )
+			Engine[@"setmodelvalue"]( f57_arg3, 0 )
 		end
 	end
 	return f57_local0
@@ -1795,7 +1795,7 @@ CoD.Menu.AddButtonCallbackFunction = function ( f60_arg0, f60_arg1, f60_arg2, f6
 			elementIsMenu = f60_local0
 		} )
 	end
-	if f60_arg3 ~= Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8] then
+	if f60_arg3 ~= Enum[@"luibutton"][@"lui_key_none"] then
 		f60_arg1.buttonFunctions[f60_arg3] = f60_arg5
 		f60_arg1.conditionFunctions[f60_arg3] = f60_arg6
 		f60_arg1.showButtonDisabled[f60_arg3] = f60_arg7
@@ -1809,21 +1809,21 @@ CoD.Menu.AddButtonCallbackFunction = function ( f60_arg0, f60_arg1, f60_arg2, f6
 		local f60_local1 = f60_arg2
 		if f60_arg0.anyControllerAllowed then
 			f60_local0 = 0
-			f60_local1 = Engine[0x370E918BE7B2017]() - 1
+			f60_local1 = Engine[@"getmaxlocalcontrollers"]() - 1
 		end
 		if not f60_arg0.buttonSubscriptions[f60_arg3] then
 			for f60_local2 = f60_local0, f60_local1, 1 do
 				local f60_local5 = f60_local2
 				f60_arg0.buttonSubscriptions[f60_arg3] = true
-				local f60_local6 = Engine[0x4DF5CFBC1771947]( f60_local5 )
+				local f60_local6 = Engine[@"getmodelforcontroller"]( f60_local5 )
 				f60_local6 = f60_local6.ButtonBits[f60_arg3]
 				local f60_local7 = f60_local6
 				table.insert( f60_arg0.controllerSubscriptions, {
 					element = f60_arg1,
 					subscription = f60_arg0:subscribeToModel( f60_local6, function ( f61_arg0 )
-						if f60_arg3 == Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F] and f60_arg0:MouseButtonCallbackFunction( f60_arg2, "MOUSE1", f61_arg0 ) then
+						if f60_arg3 == Enum[@"luibutton"][@"lui_key_xba_pscross"] and f60_arg0:MouseButtonCallbackFunction( f60_arg2, "MOUSE1", f61_arg0 ) then
 							return 
-						elseif (not f60_arg0.occludedBy or f60_arg0._isPriorityMenu) and not CoD.Menu.SpinnerIsActive and (not CoD.Menu.IsPriorityMenuOpen( f60_local5 ) or f60_arg0._isPriorityMenu) and CoD.BitUtility.IsBitwiseAndNonZero( Engine[0x614D394F6F9A18D]( f61_arg0 ), Enum[0xE29E259801BC1A4][0x253A6F6CAAAE464] ) and not f60_arg0.m_disableAllButtonActions then
+						elseif (not f60_arg0.occludedBy or f60_arg0._isPriorityMenu) and not CoD.Menu.SpinnerIsActive and (not CoD.Menu.IsPriorityMenuOpen( f60_local5 ) or f60_arg0._isPriorityMenu) and CoD.BitUtility.IsBitwiseAndNonZero( Engine[@"getmodelvalue"]( f61_arg0 ), Enum[@"luibuttonflags"][@"flag_down"] ) and not f60_arg0.m_disableAllButtonActions then
 							CoD.Menu.HandleButtonPress( f60_arg0, f60_local5, f60_arg3, f61_arg0, 0 )
 						end
 					end
@@ -1843,9 +1843,9 @@ CoD.Menu.AddButtonCallbackFunction = function ( f60_arg0, f60_arg1, f60_arg2, f6
 		f60_arg1.conditionFunctions[f60_arg4] = f60_arg6
 		f60_arg1.showButtonDisabled[f60_arg4] = f60_arg7
 		f60_arg0.showButtonDisabled[f60_arg4] = f60_arg0.showButtonDisabled[f60_arg4] or f60_arg7
-		local f60_local0 = Engine[0x40E824FE270E174]( f60_arg0.buttonModel, f60_arg3 )
+		local f60_local0 = Engine[@"getmodel"]( f60_arg0.buttonModel, f60_arg3 )
 		if f60_local0 then
-			Engine[0x83C9B5DE1D9371]( Engine[0xA798E4552F5E872]( f60_local0, "KeyShortcut" ), f60_arg4 )
+			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f60_local0, "KeyShortcut" ), f60_arg4 )
 		end
 		f60_arg0:AddPCKeyPromptModel( f60_arg2, f60_arg4 )
 		local f60_local1 = {
@@ -1863,9 +1863,9 @@ CoD.Menu.AddButtonCallbackFunction = function ( f60_arg0, f60_arg1, f60_arg2, f6
 		end
 		if not f60_arg0.keyPressSubscriptions[f60_arg4] then
 			f60_arg0.keyPressSubscriptions[f60_arg4] = true
-			f60_local3 = Engine[0x40E824FE270E174]( Engine[0x4DF5CFBC1771947]( f60_arg2 ), "KeyPressBits." .. f60_arg4 )
+			f60_local3 = Engine[@"getmodel"]( Engine[@"getmodelforcontroller"]( f60_arg2 ), "KeyPressBits." .. f60_arg4 )
 			if not f60_local3 then
-				f60_local3 = Engine[0xA9FCAD7BE6FA349]( f60_arg4, f60_arg2 )
+				f60_local3 = Engine[@"hash_7A9FCAD7BE6FA349"]( f60_arg4, f60_arg2 )
 			end
 			if f60_local3 ~= nil then
 				table.insert( f60_arg0.controllerSubscriptions, {
@@ -1884,16 +1884,16 @@ CoD.Menu.AddButtonCallbackFunction = function ( f60_arg0, f60_arg1, f60_arg2, f6
 		end
 	end
 	if CoD.isPC then
-		if f60_arg3 == Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A] and (not f60_arg1.buttonFunctions.ESCAPE or not f60_arg1.__autoButtonCallback or f60_arg1.__autoButtonCallback.ESCAPE) and not f60_arg1.__disableAutoButtonCallback then
-			f60_arg0:AddButtonCallbackFunction( f60_arg1, f60_arg2, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "ESCAPE", f60_arg5, f60_arg6, f60_arg7 )
+		if f60_arg3 == Enum[@"luibutton"][@"lui_key_xbb_pscircle"] and (not f60_arg1.buttonFunctions.ESCAPE or not f60_arg1.__autoButtonCallback or f60_arg1.__autoButtonCallback.ESCAPE) and not f60_arg1.__disableAutoButtonCallback then
+			f60_arg0:AddButtonCallbackFunction( f60_arg1, f60_arg2, Enum[@"luibutton"][@"lui_key_none"], "ESCAPE", f60_arg5, f60_arg6, f60_arg7 )
 			f60_arg1.__autoButtonCallback.ESCAPE = true
 		end
-		if f60_arg3 == Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F] and (not f60_arg1.buttonFunctions.ui_confirm or not f60_arg1.__autoButtonCallback or f60_arg1.__autoButtonCallback.ui_confirm) and not f60_arg1.__disableAutoButtonCallback then
-			f60_arg0:AddButtonCallbackFunction( f60_arg1, f60_arg2, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "ui_confirm", f60_arg5, f60_arg6, f60_arg7 )
+		if f60_arg3 == Enum[@"luibutton"][@"lui_key_xba_pscross"] and (not f60_arg1.buttonFunctions.ui_confirm or not f60_arg1.__autoButtonCallback or f60_arg1.__autoButtonCallback.ui_confirm) and not f60_arg1.__disableAutoButtonCallback then
+			f60_arg0:AddButtonCallbackFunction( f60_arg1, f60_arg2, Enum[@"luibutton"][@"lui_key_none"], "ui_confirm", f60_arg5, f60_arg6, f60_arg7 )
 			f60_arg1.__autoButtonCallback.ui_confirm = true
 		end
-		if f60_arg3 == Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F] and f60_arg1 ~= f60_arg0 and (not f60_arg1.buttonFunctions.MOUSE1 or not f60_arg1.__autoButtonCallback or f60_arg1.__autoButtonCallback.MOUSE1) and not f60_arg1.__disableAutoButtonCallback then
-			f60_arg0:AddButtonCallbackFunction( f60_arg1, f60_arg2, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "MOUSE1", f60_arg5, f60_arg6, f60_arg7 )
+		if f60_arg3 == Enum[@"luibutton"][@"lui_key_xba_pscross"] and f60_arg1 ~= f60_arg0 and (not f60_arg1.buttonFunctions.MOUSE1 or not f60_arg1.__autoButtonCallback or f60_arg1.__autoButtonCallback.MOUSE1) and not f60_arg1.__disableAutoButtonCallback then
+			f60_arg0:AddButtonCallbackFunction( f60_arg1, f60_arg2, Enum[@"luibutton"][@"lui_key_none"], "MOUSE1", f60_arg5, f60_arg6, f60_arg7 )
 			f60_arg1.__autoButtonCallback.MOUSE1 = true
 		end
 	end
@@ -1901,7 +1901,7 @@ end
 CoD.Menu.GamepadButton = function ( f63_arg0, f63_arg1 )
 	if f63_arg0.m_inputDisabled then
 		return 
-	elseif (f63_arg0.anyControllerAllowed or Engine[0xF285055A1A895A1]( f63_arg1.controller ) or f63_arg0.unusedControllerAllowed) and (not f63_arg0.m_ownerController or f63_arg0.m_ownerController == f63_arg1.controller) then
+	elseif (f63_arg0.anyControllerAllowed or Engine[@"iscontrollerbeingused"]( f63_arg1.controller ) or f63_arg0.unusedControllerAllowed) and (not f63_arg0.m_ownerController or f63_arg0.m_ownerController == f63_arg1.controller) then
 		return f63_arg0:dispatchEventToChildren( f63_arg1 )
 	else
 		local f63_local0 = f63_arg1.name
@@ -1915,7 +1915,7 @@ CoD.Menu.RemoveFromCurrMenuNameList = function ( f64_arg0 )
 	if f64_arg0 == nil or f64_arg0 == "" then
 		return 
 	end
-	local f64_local0 = Dvar[0x7FEB365B406388]:get()
+	local f64_local0 = Dvar[@"ui_currmenunamelist"]:get()
 	if not f64_local0 then
 		return 
 	end
@@ -1928,15 +1928,15 @@ CoD.Menu.RemoveFromCurrMenuNameList = function ( f64_arg0 )
 			f64_local1 = f64_local1 .. f64_local5
 		end
 	end
-	Dvar[0x7FEB365B406388]:set( f64_local1 )
+	Dvar[@"ui_currmenunamelist"]:set( f64_local1 )
 end
 CoD.Menu.AddToCurrMenuNameList = function ( f65_arg0 )
 	if LUI.DEV == nil or f65_arg0 == nil or f65_arg0 == "" then
 		return 
 	end
-	local f65_local0 = Dvar[0x7FEB365B406388]:get()
+	local f65_local0 = Dvar[@"ui_currmenunamelist"]:get()
 	if not f65_local0 or f65_local0 == "" then
-		Dvar[0x7FEB365B406388]:set( f65_arg0 )
+		Dvar[@"ui_currmenunamelist"]:set( f65_arg0 )
 		return 
 	end
 	for f65_local4 in string.gmatch( f65_local0, "[^%s,]+" ) do
@@ -1944,7 +1944,7 @@ CoD.Menu.AddToCurrMenuNameList = function ( f65_arg0 )
 			return 
 		end
 	end
-	Dvar[0x7FEB365B406388]:set( f65_local0 .. ", " .. f65_arg0 )
+	Dvar[@"ui_currmenunamelist"]:set( f65_local0 .. ", " .. f65_arg0 )
 end
 CoD.Menu.openMenuAsChild = function ( f66_arg0, f66_arg1, f66_arg2, f66_arg3 )
 	local f66_local0 = CoD.Menu.safeCreateMenu( f66_arg1, f66_arg2, f66_arg3 )
@@ -2023,7 +2023,7 @@ CoD.Menu.returnToPreviousMenu = function ( f71_arg0, f71_arg1 )
 			f71_local0:menuOpened( f71_arg1, f71_local0 )
 		end
 	elseif f71_arg0.occludedMenu then
-		if IsGameTypeDOA() and Engine[0xBC62B0E988DCCAF]() then
+		if IsGameTypeDOA() and Engine[@"issplitscreen"]() then
 			f71_arg0.occludedMenu:setOwner( f71_arg1 )
 		end
 		f71_arg0.occludedMenu:processEvent( {
@@ -2074,25 +2074,25 @@ CoD.Menu.setPreviousMenu = function ( f75_arg0, f75_arg1, f75_arg2 )
 end
 CoD.Menu.updateBlur = function ( f76_arg0 )
 	local f76_local0 = f76_arg0:getOwner() or 0
-	if Engine[0x7B48C1ABFF0F764]() then
+	if Engine[@"isingame"]() then
 		if f76_arg0.occludedMenu then
 			if f76_arg0.disableBlur == true then
-				Engine[0x1B838140C123BAC]( f76_local0, 0 )
+				Engine[@"blurworld"]( f76_local0, 0 )
 			else
-				Engine[0x1B838140C123BAC]( f76_local0, 2 )
+				Engine[@"blurworld"]( f76_local0, 2 )
 			end
 			if not f76_arg0.disableInputLock then
-				Engine[0x10BF7D7C03EECE6]( f76_local0, true )
-				Engine[0x9B8C02E7F47BDE3]( f76_local0, true )
+				Engine[@"lockinput"]( f76_local0, true )
+				Engine[@"setuiactive"]( f76_local0, true )
 			end
 		else
-			if CoD.isMultiplayer and not Engine[0xA55C3ACD0D2BCF0]() and not CoD.PlayerRoleUtility.IsPositionDraftStage( f76_local0, CoD.PlayerRoleUtility.DraftStage.DRAFT_STAGE_NONE ) then
+			if CoD.isMultiplayer and not Engine[@"isdemoplaying"]() and not CoD.PlayerRoleUtility.IsPositionDraftStage( f76_local0, CoD.PlayerRoleUtility.DraftStage.DRAFT_STAGE_NONE ) then
 				return 
 			end
-			Engine[0x1B838140C123BAC]( f76_local0, 0 )
+			Engine[@"blurworld"]( f76_local0, 0 )
 			if not f76_arg0.disableInputLock then
-				Engine[0x10BF7D7C03EECE6]( f76_local0, false )
-				Engine[0x9B8C02E7F47BDE3]( f76_local0, false )
+				Engine[@"lockinput"]( f76_local0, false )
+				Engine[@"setuiactive"]( f76_local0, false )
 			end
 		end
 	elseif f76_arg0.disableBlur ~= nil and f76_arg0.disableBlur == true then
@@ -2174,7 +2174,7 @@ end
 CoD.Menu.OpenPlayercard = function ( f84_arg0, f84_arg1 )
 	if f84_arg0.occludedBy then
 		return 
-	elseif Engine[0xE91B1452CB6FBE6]( f84_arg1.controller ) then
+	elseif Engine[@"isuserguest"]( f84_arg1.controller ) then
 		f84_arg0:openPopup( "popup_guest_contentrestricted", f84_arg1.controller )
 		return 
 	elseif f84_arg0.menuName ~= "FriendPopup" and f84_arg0.menuName ~= "MainMenu" then
@@ -2190,7 +2190,7 @@ end
 CoD.Menu.CanProcessPCKeyPress = function ( f86_arg0, f86_arg1, f86_arg2, f86_arg3, f86_arg4 )
 	local f86_local0
 	if not f86_arg0.occludedBy and (not CoD.Menu.IsPriorityMenuOpen( f86_arg2 ) or f86_arg0._isPriorityMenu) and not CoD.Menu.SpinnerIsActive then
-		f86_local0 = CoD.BitUtility.IsBitwiseAndNonZero( Engine[0x614D394F6F9A18D]( f86_arg1 ), Enum[0xE29E259801BC1A4][0x253A6F6CAAAE464] )
+		f86_local0 = CoD.BitUtility.IsBitwiseAndNonZero( Engine[@"getmodelvalue"]( f86_arg1 ), Enum[@"luibuttonflags"][@"flag_down"] )
 		if f86_local0 then
 			f86_local0 = not f86_arg0.m_disableAllButtonActions
 		end
@@ -2198,8 +2198,8 @@ CoD.Menu.CanProcessPCKeyPress = function ( f86_arg0, f86_arg1, f86_arg2, f86_arg
 		f86_local0 = false
 	end
 	if f86_local0 then
-		local f86_local1 = CoD.BitUtility.IsBitwiseAndNonZero( f86_arg1:get(), Enum[0xE29E259801BC1A4][0x3DC8FC0E6AB543F] )
-		local f86_local2 = Engine[0xC60FB88F484616D]()
+		local f86_local1 = CoD.BitUtility.IsBitwiseAndNonZero( f86_arg1:get(), Enum[@"luibuttonflags"][@"flag_isrepeat"] )
+		local f86_local2 = Engine[@"hash_4C60FB88F484616D"]()
 		if not f86_arg3 then
 			f86_local0 = not f86_local1
 		elseif f86_local1 then
@@ -2214,10 +2214,10 @@ CoD.Menu.CanProcessPCKeyPress = function ( f86_arg0, f86_arg1, f86_arg2, f86_arg
 	return f86_local0
 end
 CoD.Menu.OpenFrontendSaveGameWarningPopup = function ( f87_arg0, f87_arg1 )
-	f87_arg0:openPopup( "FrontendSaveGameWarningPopup", Engine[0xA5B9C0111291A8B](), f87_arg1 )
+	f87_arg0:openPopup( "FrontendSaveGameWarningPopup", Engine[@"getprimarycontroller"](), f87_arg1 )
 end
 CoD.Menu.OpenFrontendSaveGameErrorPopup = function ( f88_arg0, f88_arg1 )
-	f88_arg0:openPopup( "FrontendSaveGameErrorPopup", Engine[0xA5B9C0111291A8B](), f88_arg1 )
+	f88_arg0:openPopup( "FrontendSaveGameErrorPopup", Engine[@"getprimarycontroller"](), f88_arg1 )
 end
 CoD.Menu.addElementToPendingUpdateStateList = function ( f89_arg0, f89_arg1 )
 	table.insert( f89_arg0.__elementsPendingUpdateState, f89_arg1 )
@@ -2349,7 +2349,7 @@ CoD.Menu.RecordCurrFocusedElemID = function ( f100_arg0, f100_arg1 )
 		f100_local0 = f100_arg0:getOwner()
 	end
 	if f100_local0 == nil then
-		f100_local0 = Engine[0xA5B9C0111291A8B]()
+		f100_local0 = Engine[@"getprimarycontroller"]()
 	end
 	local f100_local1 = "childFocusLost"
 	local f100_local2 = "isInFocus"
@@ -2455,7 +2455,7 @@ CoD.Menu.RecordCurrFocusedElemID = function ( f100_arg0, f100_arg1 )
 	end
 	if nil ~= LUI.DEV and f100_arg1.name == "record_curr_focused_elem_id" then
 		local f100_local11 = ""
-		if Dvar[0x3B8B4D0064475D4]:exists() then
+		if Dvar[@"ui_currfocuslist"]:exists() then
 			local f100_local12 = ""
 			if f100_arg0.lastFocusedElemEvent and f100_arg0.lastFocusedElemEvent.idStack then
 				local f100_local13 = f100_arg0.lastFocusedElemEvent
@@ -2480,10 +2480,10 @@ CoD.Menu.RecordCurrFocusedElemID = function ( f100_arg0, f100_arg1 )
 					f100_local15 = 1
 				end
 			end
-			Dvar[0x3B8B4D0064475D4]:set( f100_local12 )
+			Dvar[@"ui_currfocuslist"]:set( f100_local12 )
 		end
-		if Dvar[0x196FDA5E89973C6]:exists() then
-			Dvar[0x196FDA5E89973C6]:set( f100_local11 )
+		if Dvar[@"ui_currfocusstates"]:exists() then
+			Dvar[@"ui_currfocusstates"]:set( f100_local11 )
 		end
 	end
 	if f100_arg1.controller ~= nil then
@@ -2676,8 +2676,8 @@ CoD.Menu.CheckDefaultFocusInternal = function ( f117_arg0, f117_arg1, f117_arg2,
 	f117_arg0:CheckDefaultFocusInternal( f117_local0, f117_arg2, f117_arg3 )
 end
 CoD.Menu.subscribeToCurrAnimationModel = function ( f118_arg0 )
-	f118_arg0:subscribeToModel( Engine[0xA798E4552F5E872]( f118_arg0:getModel(), "current_animation" ), function ( model )
-		local f119_local0 = Engine[0x614D394F6F9A18D]( model )
+	f118_arg0:subscribeToModel( Engine[@"createmodel"]( f118_arg0:getModel(), "current_animation" ), function ( model )
+		local f119_local0 = Engine[@"getmodelvalue"]( model )
 		if f119_local0 then
 			if f119_local0 == "" and f118_arg0.lastAnimPlayed then
 				f119_local0 = f118_arg0.lastAnimPlayed
@@ -2689,11 +2689,11 @@ CoD.Menu.subscribeToCurrAnimationModel = function ( f118_arg0 )
 	end )
 end
 CoD.Menu.subscribeToCloseMenuModel = function ( f120_arg0 )
-	local f120_local0 = Engine[0xA5B9C0111291A8B]()
+	local f120_local0 = Engine[@"getprimarycontroller"]()
 	local f120_local1 = f120_arg0:getModel( f120_local0, "close_current_menu" )
 	if f120_local1 then
 		f120_arg0:subscribeToModel( f120_local1, function ( model )
-			local f121_local0 = Engine[0x614D394F6F9A18D]( model )
+			local f121_local0 = Engine[@"getmodelvalue"]( model )
 			if f121_local0 and f121_local0 == 1 then
 				if CoD.isPC and f120_arg0.menuName == "BountyHunterBuy" then
 					CoD.ChatClientUtility.SetIsInBountyHunterMenu( false )
@@ -2711,7 +2711,7 @@ CoD.Menu.subscribeToStateModel = function ( f122_arg0, f122_arg1 )
 	f122_local0 = f122_local0._state
 	if f122_local0 and f122_arg0.__stateMap then
 		f122_arg0:subscribeToModel( f122_local0, function ( model )
-			local f123_local0 = (Engine[0x614D394F6F9A18D]( model ) or 0) + 1
+			local f123_local0 = (Engine[@"getmodelvalue"]( model ) or 0) + 1
 			if f122_arg0.__stateMap[f123_local0] then
 				f122_arg0:setState( f122_arg1, f122_arg0.__stateMap[f123_local0] )
 			end
@@ -2786,7 +2786,7 @@ CoD.Menu.UnregisterFocusableElement = function ( f127_arg0, f127_arg1 )
 	end
 end
 CoD.Menu.IntersectElementRect = function ( f128_arg0, f128_arg1, f128_arg2 )
-	local f128_local0, f128_local1, f128_local2, f128_local3 = Engine[0x695399A0E06EC35]( f128_arg2, f128_arg0 )
+	local f128_local0, f128_local1, f128_local2, f128_local3 = Engine[@"hash_3695399A0E06EC35"]( f128_arg2, f128_arg0 )
 	local f128_local4 = math.max( f128_local0, f128_arg1.left )
 	local f128_local5 = math.min( f128_local2, f128_arg1.right )
 	if f128_local5 <= f128_local4 then
@@ -2842,7 +2842,7 @@ CoD.Menu.saveState = function ( f131_arg0, f131_arg1 )
 	LUI.savedMenuStates[f131_arg0.id] = f131_arg0:getSaveStateTable( f131_arg1 )
 end
 CoD.Menu.restoreState = function ( f132_arg0, f132_arg1 )
-	if Engine[0x9E5BE3B4BBA4E0E]( "rat_playback_enabled" ) then
+	if Engine[@"getdvarbool"]( "rat_playback_enabled" ) then
 		return 
 	elseif CoD.isPC and f132_arg1 == nil then
 		local f132_local0 = f132_arg0:getMenu()
@@ -2851,7 +2851,7 @@ CoD.Menu.restoreState = function ( f132_arg0, f132_arg1 )
 	local f132_local0 = LUI.savedMenuStates[f132_arg0.id]
 	if f132_local0 then
 		if f132_local0.x and not f132_arg0.ignoreCursor and IsGamepad( f132_arg1 ) and IsFreeCursorActiveAndVisible( f132_arg1 ) then
-			Engine[0x300AA5B40C6FE50]( f132_arg1, f132_local0.x, f132_local0.y )
+			Engine[@"hash_6300AA5B40C6FE50"]( f132_arg1, f132_local0.x, f132_local0.y )
 			return true
 		elseif f132_local0.id then
 			return f132_arg0:processEvent( {
@@ -2898,7 +2898,7 @@ CoD.Menu:registerEventHandler( "menu_loaded", CoD.Menu.menuLoaded )
 CoD.Menu:registerEventHandler( "register_focusable_element", CoD.Menu.RegisterFocusableElement )
 CoD.Menu:registerEventHandler( "unregister_focusable_element", CoD.Menu.UnregisterFocusableElement )
 CoD.InGameMenu.CloseAllInGameMenus = function ( f134_arg0, f134_arg1 )
-	if Engine[0xA1D8D9E5D79905F]() and not Engine[0xA55C3ACD0D2BCF0]() then
+	if Engine[@"canpausegame"]() and not Engine[@"isdemoplaying"]() then
 		if CoD.InGameMenu.m_unpauseDisabled == nil then
 			CoD.InGameMenu.m_unpauseDisabled = {}
 		end

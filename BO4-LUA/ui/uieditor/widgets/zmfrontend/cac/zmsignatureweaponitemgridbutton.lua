@@ -100,7 +100,7 @@ CoD.ZMSignatureWeaponItemGridButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	end)
 	local f1_local3 = MastercraftDetailsHintText
 	local f1_local4 = MastercraftDetailsHintText.subscribeToModel
-	local f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local4(f1_local3, f1_local5.LastInput, function(f16_arg0)
 		f1_arg0:updateElementState(MastercraftDetailsHintText, {
 			name = "model_validation",
@@ -120,7 +120,7 @@ CoD.ZMSignatureWeaponItemGridButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 		})
 	end)
 	MastercraftDetailsHintText:setAlpha(0)
-	MastercraftDetailsHintText.textCenterAlign:setText(Engine[0xF9F1239CFD921FE](0xD087E4011D7527C))
+	MastercraftDetailsHintText.textCenterAlign:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/details_button"))
 	MastercraftDetailsHintText:linkToElementModel(self, nil, false, function(model)
 		MastercraftDetailsHintText:setModel(model, f1_arg1)
 	end)

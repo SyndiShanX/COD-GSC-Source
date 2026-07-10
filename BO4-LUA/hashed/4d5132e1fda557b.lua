@@ -21,13 +21,13 @@ CoD.SpecialistHeadquartersSelectSpecialistInternal.new = function(f1_arg0, f1_ar
 	Specialists:setHorizontalCount(5)
 	Specialists:setVerticalCount(2)
 	Specialists:setSpacing(10)
-	Specialists:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	Specialists:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	Specialists:setDataSource("SpecialistHeadquartersLoadoutList")
 	local SpecialistInfoSelected = Specialists
 	local SpecialistInfo = Specialists.subscribeToModel
-	local DossierProgress = Engine[0x8DF2E5447F384B9]()
+	local DossierProgress = Engine[@"getglobalmodel"]()
 	SpecialistInfo(SpecialistInfoSelected, DossierProgress["MapVote.timerActive"], function(f2_arg0, f2_arg1)
-		CoD.Menu.UpdateButtonShownState(f2_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f2_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	Specialists:registerEventHandler("gain_list_focus", function(element, event)
 		local f3_local0 = nil
@@ -47,10 +47,10 @@ CoD.SpecialistHeadquartersSelectSpecialistInternal.new = function(f1_arg0, f1_ar
 		elseif element.super.gainFocus then
 			f5_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f5_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(Specialists, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ENTER", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(Specialists, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ENTER", function(element, menu, controller, model)
 		if not CoD.LobbyUtility.MapVoteTimerActive() then
 			CoD.CTUtility.SetChosenSpecialist(controller, element)
 			PlaySoundAlias("uin_start_char_select")
@@ -59,7 +59,7 @@ CoD.SpecialistHeadquartersSelectSpecialistInternal.new = function(f1_arg0, f1_ar
 		end
 	end, function(element, menu, controller)
 		if not CoD.LobbyUtility.MapVoteTimerActive() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xAC3B80C833B60E1, nil, "ENTER")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_3AC3B80C833B60E1", nil, "ENTER")
 			return true
 		else
 			return false
@@ -221,35 +221,35 @@ CoD.SpecialistHeadquartersSelectSpecialistInternal.new = function(f1_arg0, f1_ar
 	end)
 	PlayButton:appendEventHandler("on_session_start", function(f23_arg0, f23_arg1)
 		f23_arg1.menu = f23_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f23_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f23_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	PlayButton:appendEventHandler("on_session_end", function(f24_arg0, f24_arg1)
 		f24_arg1.menu = f24_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f24_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f24_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	local f1_local9 = PlayButton
 	ReplayTutorial = PlayButton.subscribeToModel
-	local f1_local10 = Engine[0x8DF2E5447F384B9]()
+	local f1_local10 = Engine[@"getglobalmodel"]()
 	ReplayTutorial(f1_local9, f1_local10["lobbyRoot.lobbyNav"], function(f25_arg0, f25_arg1)
-		CoD.Menu.UpdateButtonShownState(f25_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f25_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	f1_local9 = PlayButton
 	ReplayTutorial = PlayButton.subscribeToModel
-	f1_local10 = Engine[0x8DF2E5447F384B9]()
+	f1_local10 = Engine[@"getglobalmodel"]()
 	ReplayTutorial(f1_local9, f1_local10["lobbyRoot.gameClient.update"], function(f26_arg0, f26_arg1)
-		CoD.Menu.UpdateButtonShownState(f26_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f26_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	f1_local9 = PlayButton
 	ReplayTutorial = PlayButton.subscribeToModel
-	f1_local10 = Engine[0x8DF2E5447F384B9]()
+	f1_local10 = Engine[@"getglobalmodel"]()
 	ReplayTutorial(f1_local9, f1_local10["lobbyRoot.privateClient.update"], function(f27_arg0, f27_arg1)
-		CoD.Menu.UpdateButtonShownState(f27_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f27_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	f1_local9 = PlayButton
 	ReplayTutorial = PlayButton.subscribeToModel
-	f1_local10 = Engine[0x8DF2E5447F384B9]()
+	f1_local10 = Engine[@"getglobalmodel"]()
 	ReplayTutorial(f1_local9, f1_local10["MapVote.timerActive"], function(f28_arg0, f28_arg1)
-		CoD.Menu.UpdateButtonShownState(f28_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f28_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	PlayButton:registerEventHandler("gain_focus", function(element, event)
 		local f29_local0 = nil
@@ -258,10 +258,10 @@ CoD.SpecialistHeadquartersSelectSpecialistInternal.new = function(f1_arg0, f1_ar
 		elseif element.super.gainFocus then
 			f29_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f29_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(PlayButton, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(PlayButton, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if IsLobbyHostOfCurrentMenu() and not CoD.LobbyUtility.MapVoteTimerActive() then
 			CoD.CTUtility.RefreshChosenSpecialistParams(controller)
 			CoD.CTUtility.LaunchGame(menu, self, element, controller)
@@ -270,7 +270,7 @@ CoD.SpecialistHeadquartersSelectSpecialistInternal.new = function(f1_arg0, f1_ar
 		end
 	end, function(element, menu, controller)
 		if IsLobbyHostOfCurrentMenu() and not CoD.LobbyUtility.MapVoteTimerActive() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 			return false
 		else
 			return false
@@ -280,38 +280,38 @@ CoD.SpecialistHeadquartersSelectSpecialistInternal.new = function(f1_arg0, f1_ar
 	self.PlayButton = PlayButton
 	ReplayTutorial = CoD.SpecialistHeadquartersButton.new(f1_arg0, f1_arg1, 0.5, 0.5, -510, -110, 0.5, 0.5, 68, 138)
 	ReplayTutorial:setAlpha(0)
-	ReplayTutorial.Header:setText(LocalizeToUpperString(0xEDF0CD4F8E56F3B))
+	ReplayTutorial.Header:setText(LocalizeToUpperString(@"hash_4EDF0CD4F8E56F3B"))
 	ReplayTutorial:appendEventHandler("on_session_start", function(f32_arg0, f32_arg1)
 		f32_arg1.menu = f32_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f32_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f32_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	ReplayTutorial:appendEventHandler("on_session_end", function(f33_arg0, f33_arg1)
 		f33_arg1.menu = f33_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f33_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f33_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	f1_local10 = ReplayTutorial
 	f1_local9 = ReplayTutorial.subscribeToModel
-	local f1_local11 = Engine[0x8DF2E5447F384B9]()
+	local f1_local11 = Engine[@"getglobalmodel"]()
 	f1_local9(f1_local10, f1_local11["lobbyRoot.lobbyNav"], function(f34_arg0, f34_arg1)
-		CoD.Menu.UpdateButtonShownState(f34_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f34_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	f1_local10 = ReplayTutorial
 	f1_local9 = ReplayTutorial.subscribeToModel
-	f1_local11 = Engine[0x8DF2E5447F384B9]()
+	f1_local11 = Engine[@"getglobalmodel"]()
 	f1_local9(f1_local10, f1_local11["lobbyRoot.gameClient.update"], function(f35_arg0, f35_arg1)
-		CoD.Menu.UpdateButtonShownState(f35_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f35_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	f1_local10 = ReplayTutorial
 	f1_local9 = ReplayTutorial.subscribeToModel
-	f1_local11 = Engine[0x8DF2E5447F384B9]()
+	f1_local11 = Engine[@"getglobalmodel"]()
 	f1_local9(f1_local10, f1_local11["lobbyRoot.privateClient.update"], function(f36_arg0, f36_arg1)
-		CoD.Menu.UpdateButtonShownState(f36_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f36_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	f1_local10 = ReplayTutorial
 	f1_local9 = ReplayTutorial.subscribeToModel
-	f1_local11 = Engine[0x8DF2E5447F384B9]()
+	f1_local11 = Engine[@"getglobalmodel"]()
 	f1_local9(f1_local10, f1_local11["MapVote.timerActive"], function(f37_arg0, f37_arg1)
-		CoD.Menu.UpdateButtonShownState(f37_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f37_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	ReplayTutorial:registerEventHandler("gain_focus", function(element, event)
 		local f38_local0 = nil
@@ -320,10 +320,10 @@ CoD.SpecialistHeadquartersSelectSpecialistInternal.new = function(f1_arg0, f1_ar
 		elseif element.super.gainFocus then
 			f38_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f38_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(ReplayTutorial, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(ReplayTutorial, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if IsLobbyHostOfCurrentMenu() and not CoD.LobbyUtility.MapVoteTimerActive() then
 			CoD.CTUtility.SetReplayTutorial(controller)
 			CoD.CTUtility.LaunchGame(menu, self, element, controller)
@@ -332,7 +332,7 @@ CoD.SpecialistHeadquartersSelectSpecialistInternal.new = function(f1_arg0, f1_ar
 		end
 	end, function(element, menu, controller)
 		if IsLobbyHostOfCurrentMenu() and not CoD.LobbyUtility.MapVoteTimerActive() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 			return false
 		else
 			return false

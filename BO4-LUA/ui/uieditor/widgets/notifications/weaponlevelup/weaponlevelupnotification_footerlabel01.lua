@@ -8,14 +8,14 @@ CoD.WeaponLevelUpNotification_FooterLabel01.new = function(f1_arg0, f1_arg1, f1_
 	self.id = "WeaponLevelUpNotification_FooterLabel01"
 	self.soundSet = "HUD"
 	local WeaponLevelUpNotificationFooterBacking = CoD.WeaponLevelUpNotification_FooterBacking01.new(f1_arg0, f1_arg1, 0, 1, 0, 0, 0, 1, 0, 0)
-	WeaponLevelUpNotificationFooterBacking:setRFTMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	WeaponLevelUpNotificationFooterBacking:setRFTMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(WeaponLevelUpNotificationFooterBacking)
 	self.WeaponLevelUpNotificationFooterBacking = WeaponLevelUpNotificationFooterBacking
 	local SubText = LUI.UIText.new(0.5, 0.5, -270, 270, 0, 0, 1, 46)
 	SubText:setRGB(0, 0, 0)
 	SubText:setTTF("default")
-	SubText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	SubText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	SubText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	SubText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	LUI.OverrideFunction_CallOriginalFirst(SubText, "setText", function(element, controller)
 		ScaleWidgetToLabelCenteredWrapped(self, element, 20, 0)
 	end)

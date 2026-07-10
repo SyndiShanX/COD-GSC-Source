@@ -1,50 +1,50 @@
-CoD[0x3E8AA265071E59F] = InheritFrom(LUI.UIElement)
-CoD[0x3E8AA265071E59F].__defaultWidth = 960
-CoD[0x3E8AA265071E59F].__defaultHeight = 240
-CoD[0x3E8AA265071E59F].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+CoD[@"hash_43E8AA265071E59F"] = InheritFrom(LUI.UIElement)
+CoD[@"hash_43E8AA265071E59F"].__defaultWidth = 960
+CoD[@"hash_43E8AA265071E59F"].__defaultHeight = 240
+CoD[@"hash_43E8AA265071E59F"].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
 	local self = LUI.UIElement.new(f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
-	self:setClass(CoD[0x3E8AA265071E59F])
+	self:setClass(CoD[@"hash_43E8AA265071E59F"])
 	self.id = "CallingCards_Zombies_100percent"
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local bg = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	bg:setImage(RegisterImage(0x9ABFB66F1DCB665))
-	bg:setMaterial(LUI.UIImage.GetCachedMaterial(0x73D72BCD14C2AAD))
+	bg:setImage(RegisterImage(@"uie_ui_icon_callingcards_zombies_100percent_background"))
+	bg:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_tile_scroll_normal"))
 	bg:setShaderVector(0, 1, 1, 0, 0)
 	bg:setShaderVector(1, 0.03, 0, 0, 0)
 	self:addElement(bg)
 	self.bg = bg
 	local earthlive = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	earthlive:setImage(RegisterImage(0xB535F535FE3052))
+	earthlive:setImage(RegisterImage(@"uie_ui_icon_callingcards_zombies_100percent_earth_live"))
 	self:addElement(earthlive)
 	self.earthlive = earthlive
 	local earthdead = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	earthdead:setImage(RegisterImage(0x326E8B3834F5E5E))
+	earthdead:setImage(RegisterImage(@"uie_ui_icon_callingcards_zombies_100percent_earth_dead"))
 	self:addElement(earthdead)
 	self.earthdead = earthdead
 	local zombiehand1 = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	zombiehand1:setImage(RegisterImage(0x131BCB3A0FD940D))
+	zombiehand1:setImage(RegisterImage(@"uie_ui_icon_callingcards_zombies_100percent_zombiehand1"))
 	self:addElement(zombiehand1)
 	self.zombiehand1 = zombiehand1
 	local zombiehand2 = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	zombiehand2:setImage(RegisterImage(0x131B9B3A0FD8EF4))
+	zombiehand2:setImage(RegisterImage(@"uie_ui_icon_callingcards_zombies_100percent_zombiehand2"))
 	self:addElement(zombiehand2)
 	self.zombiehand2 = zombiehand2
 	local zombiehand3 = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	zombiehand3:setImage(RegisterImage(0x131BAB3A0FD90A7))
+	zombiehand3:setImage(RegisterImage(@"uie_ui_icon_callingcards_zombies_100percent_zombiehand3"))
 	self:addElement(zombiehand3)
 	self.zombiehand3 = zombiehand3
 	local zombiehand4 = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	zombiehand4:setImage(RegisterImage(0x131B7B3A0FD8B8E))
+	zombiehand4:setImage(RegisterImage(@"uie_ui_icon_callingcards_zombies_100percent_zombiehand4"))
 	self:addElement(zombiehand4)
 	self.zombiehand4 = zombiehand4
 	local zombiehand5 = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	zombiehand5:setImage(RegisterImage(0x131B8B3A0FD8D41))
+	zombiehand5:setImage(RegisterImage(@"uie_ui_icon_callingcards_zombies_100percent_zombiehand5"))
 	self:addElement(zombiehand5)
 	self.zombiehand5 = zombiehand5
 	local cropper = LUI.UIImage.new(0, 0, -32, 992, 0, 0, -392, 632)
 	cropper:setAlpha(0)
-	cropper:setImage(RegisterImage(0x7EEE1693E39382A))
+	cropper:setImage(RegisterImage(@"uie_stage_crop_prop"))
 	self:addElement(cropper)
 	self.cropper = cropper
 	if PostLoadFunc then
@@ -52,7 +52,7 @@ CoD[0x3E8AA265071E59F].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	end
 	return self
 end
-CoD[0x3E8AA265071E59F].__resetProperties = function(f2_arg0)
+CoD[@"hash_43E8AA265071E59F"].__resetProperties = function(f2_arg0)
 	f2_arg0.zombiehand5:completeAnimation()
 	f2_arg0.zombiehand4:completeAnimation()
 	f2_arg0.zombiehand3:completeAnimation()
@@ -66,7 +66,7 @@ CoD[0x3E8AA265071E59F].__resetProperties = function(f2_arg0)
 	f2_arg0.zombiehand1:setAlpha(1)
 	f2_arg0.earthdead:setAlpha(1)
 end
-CoD[0x3E8AA265071E59F].__clipsPerState = {
+CoD[@"hash_43E8AA265071E59F"].__clipsPerState = {
 	DefaultState = {
 		DefaultClip = function(f3_arg0, f3_arg1)
 			f3_arg0:__resetProperties()

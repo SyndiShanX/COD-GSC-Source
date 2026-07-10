@@ -7,7 +7,7 @@ CoD.CallingCards_Asset_superheroes_speed_rightarm.new = function(f1_arg0, f1_arg
 	self.id = "CallingCards_Asset_superheroes_speed_rightarm"
 	self.soundSet = "default"
 	local rightarm = LUI.UIImage.new(0, 0, -294, 34, 0, 0, -24, 136)
-	rightarm:setImage(RegisterImage(0xB6095FD1CC47F34))
+	rightarm:setImage(RegisterImage(@"hash_7B6095FD1CC47F34"))
 	self:addElement(rightarm)
 	self.rightarm = rightarm
 	if PostLoadFunc then

@@ -26,7 +26,7 @@ CoD.WaypointIconSimple.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	self.waypointCenterImage = waypointCenterImage
 	local waypointLowProgressPulse = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	waypointLowProgressPulse:setAlpha(0)
-	waypointLowProgressPulse:setMaterial(LUI.UIImage.GetCachedMaterial(0xE992BD5A540E2D))
+	waypointLowProgressPulse:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_delta_normal"))
 	waypointLowProgressPulse:setShaderVector(0, 0, 1, 0, 0)
 	waypointLowProgressPulse:setShaderVector(1, 0, 0, 0, 0)
 	waypointLowProgressPulse:setShaderVector(3, 0, 0, 0, 0)
@@ -46,7 +46,7 @@ CoD.WaypointIconSimple.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	self:addElement(waypointLowProgressPulse)
 	self.waypointLowProgressPulse = waypointLowProgressPulse
 	local waypointCenterImageDarkWipe = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	waypointCenterImageDarkWipe:setMaterial(LUI.UIImage.GetCachedMaterial(0xE992BD5A540E2D))
+	waypointCenterImageDarkWipe:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_delta_normal"))
 	waypointCenterImageDarkWipe:setShaderVector(0, 0, 1, 0, 0)
 	waypointCenterImageDarkWipe:setShaderVector(1, 0, 0, 0, 0)
 	waypointCenterImageDarkWipe:setShaderVector(3, 0, 0, 0, 0)
@@ -132,26 +132,26 @@ CoD.WaypointIconSimple.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	end)
 	local f1_local5 = self
 	local f1_local6 = self.subscribeToModel
-	local f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local6(f1_local5, f1_local7["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xABEA46F8DE7F02F]], function(f17_arg0)
+	local f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local6(f1_local5, f1_local7["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_bomb_timer_a"]], function(f17_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f17_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xABEA46F8DE7F02F],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_bomb_timer_a"],
 		})
 	end, false)
 	f1_local5 = self
 	f1_local6 = self.subscribeToModel
-	f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local6(f1_local5, f1_local7["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xABEA56F8DE7F1E2]], function(f18_arg0)
+	f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local6(f1_local5, f1_local7["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_bomb_timer_b"]], function(f18_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f18_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xABEA56F8DE7F1E2],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_bomb_timer_b"],
 		})
 	end, false)
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)

@@ -10,14 +10,14 @@ CoD.EmblemLayerArrows.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	local leftArrow = LUI.UIImage.new(0.5, 0.5, -115.5, -67.5, 0.5, 0.5, -32, 32)
 	leftArrow:setRGB(0.93, 0.45, 0.05)
 	leftArrow:setAlpha(0)
-	leftArrow:setImage(RegisterImage(0xB74F856BFDB37C1))
+	leftArrow:setImage(RegisterImage(@"uie_ui_hud_tak5_data_arrow01"))
 	self:addElement(leftArrow)
 	self.leftArrow = leftArrow
 	local rightArrow = LUI.UIImage.new(0.5, 0.5, 67.5, 115.5, 0.5, 0.5, -32, 32)
 	rightArrow:setRGB(0.93, 0.45, 0.05)
 	rightArrow:setAlpha(0)
 	rightArrow:setZRot(180)
-	rightArrow:setImage(RegisterImage(0xB74F856BFDB37C1))
+	rightArrow:setImage(RegisterImage(@"uie_ui_hud_tak5_data_arrow01"))
 	self:addElement(rightArrow)
 	self.rightArrow = rightArrow
 	if PostLoadFunc then

@@ -14,12 +14,12 @@ CoD.DirectorCharacterButtonZM.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local DirectorDraftSelectLoadout = CoD.DirectorDraftSelectLoadout.new(f1_arg0, f1_arg1, 0.5, 0.5, -15.5, 59.5, 1, 1, -320, -245)
 	DirectorDraftSelectLoadout:setAlpha(0)
-	DirectorDraftSelectLoadout.DirectorDraftSelectLoadoutInternal.LoadoutText:setText(LocalizeToUpperString(0x2CD058C9967F620))
+	DirectorDraftSelectLoadout.DirectorDraftSelectLoadoutInternal.LoadoutText:setText(LocalizeToUpperString(@"menu/select_loadout"))
 	local f1_local2 = DirectorDraftSelectLoadout
 	local ZMLoadoutPreview = DirectorDraftSelectLoadout.subscribeToModel
-	local f1_local4 = Engine[0x8DF2E5447F384B9]()
+	local f1_local4 = Engine[@"getglobalmodel"]()
 	ZMLoadoutPreview(f1_local2, f1_local4["lobbyRoot.lobbyNav"], function(f2_arg0, f2_arg1)
-		CoD.Menu.UpdateButtonShownState(f2_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f2_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	DirectorDraftSelectLoadout:registerEventHandler("gain_focus", function(element, event)
 		local f3_local0 = nil
@@ -28,10 +28,10 @@ CoD.DirectorCharacterButtonZM.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 		elseif element.super.gainFocus then
 			f3_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f3_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(DirectorDraftSelectLoadout, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(DirectorDraftSelectLoadout, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if CoD.DirectorUtility.ShowDirectorPrivate(element, controller) then
 			CoD.ZombieUtility.ShowZMLoadoutPreviewPrivate(controller)
 			PlaySoundAlias("uin_toggle_generic")
@@ -49,13 +49,13 @@ CoD.DirectorCharacterButtonZM.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 		end
 	end, function(element, menu, controller)
 		if CoD.DirectorUtility.ShowDirectorPrivate(element, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x2CD058C9967F620, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select_loadout", nil, nil)
 			return true
 		elseif CoD.DirectorUtility.ShowDirectorPublic(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x2CD058C9967F620, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select_loadout", nil, nil)
 			return true
 		elseif CoD.DirectorUtility.ShowDirectorCustom(element, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x2CD058C9967F620, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select_loadout", nil, nil)
 			return true
 		else
 			return false

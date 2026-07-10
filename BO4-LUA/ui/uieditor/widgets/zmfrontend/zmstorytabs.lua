@@ -16,7 +16,7 @@ CoD.ZMStoryTabs.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_a
 	ZMStoryList:registerEventHandler("list_active_changed", function(element, event)
 		local f2_local0 = nil
 		CoD.ZMStoryUtility.UpdateSelectedStory(element, f1_arg1)
-		UpdateButtonPromptState(f1_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x22361E23588705A])
+		UpdateButtonPromptState(f1_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_start"])
 		return f2_local0
 	end)
 	self:addElement(ZMStoryList)

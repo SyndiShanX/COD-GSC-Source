@@ -16,10 +16,10 @@ CoD.RadiationBlastHealthBar.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.HealthBar = HealthBar
 	local HealthValue = LUI.UIText.new(0, 0, 140, 204, 0, 0, -7.5, 18.5)
 	HealthValue:setTTF("0arame_mono_stencil")
-	HealthValue:setRFTMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	HealthValue:setRFTMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	HealthValue:setLetterSpacing(2)
-	HealthValue:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	HealthValue:setAlignment(Enum[0x7A5123B654282D2][0x70510683C22104B])
+	HealthValue:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	HealthValue:setAlignment(Enum[@"luialignment"][@"lui_alignment_bottom"])
 	HealthValue:linkToElementModel(self, "health.healthValue", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then

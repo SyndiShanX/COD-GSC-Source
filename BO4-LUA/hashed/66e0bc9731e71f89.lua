@@ -11,7 +11,7 @@ CoD.ZMInvWonderWeaponComponent.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Backing = LUI.UIImage.new(0.05, 0.05, 7.5, 107.5, 0, 0, 14, 114)
 	Backing:setAlpha(0)
-	Backing:setImage(RegisterImage(0x198E62429893867))
+	Backing:setImage(RegisterImage(@"hash_5198E62429893867"))
 	self:addElement(Backing)
 	self.Backing = Backing
 	local Stage7Image = CoD.ZMInvStageImage.new(f1_arg0, f1_arg1, 0, 1, 0, 0, 0, 1, 0, 0)

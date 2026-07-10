@@ -13,11 +13,11 @@ CoD.GameEndScore_GameStatusPlayerKills.new = function(f1_arg0, f1_arg1, f1_arg2,
 	self.DotCorner9Slice = DotCorner9Slice
 	local PlayerKills = LUI.UIText.new(1, 1, -90, -8, 0, 0, 7.5, 42.5)
 	PlayerKills:setTTF("0arame_mono_stencil")
-	PlayerKills:setMaterial(LUI.UIImage.GetCachedMaterial(0x90D57B1E92D39D7))
+	PlayerKills:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_90D57B1E92D39D7"))
 	PlayerKills:setShaderVector(0, 0.8, 0, 0, 0)
 	PlayerKills:setShaderVector(1, 0, 0, 0, 0)
 	PlayerKills:setShaderVector(2, 1, 1, 1, 0.35)
-	PlayerKills:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	PlayerKills:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	PlayerKills:subscribeToGlobalModel(f1_arg1, "HUDItems", "playerKills", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -27,7 +27,7 @@ CoD.GameEndScore_GameStatusPlayerKills.new = function(f1_arg0, f1_arg1, f1_arg2,
 	self:addElement(PlayerKills)
 	self.PlayerKills = PlayerKills
 	local playerKillsIcon = LUI.UIImage.new(1, 1, -128, -82, 0, 0, 0, 50)
-	playerKillsIcon:setImage(RegisterImage(0x5EFE28D1E8EB917))
+	playerKillsIcon:setImage(RegisterImage(@"uie_ui_hud_wz_hud_core_icon_kills"))
 	self:addElement(playerKillsIcon)
 	self.playerKillsIcon = playerKillsIcon
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)

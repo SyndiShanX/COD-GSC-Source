@@ -13,13 +13,13 @@ CoD.rocketLauncherLockon.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 		{
 			stateName = "LockedOn",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEnumBitSet(element, f1_arg1, "status", Enum[0xF041D1802ECFE69][0x86864C292F49B19])
+				return CoD.ModelUtility.IsSelfModelValueEnumBitSet(element, f1_arg1, "status", Enum[@"rocketlaunchertargetstatesflags"][@"rocket_launcher_target_locked"])
 			end,
 		},
 		{
 			stateName = "AcquiringLock",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEnumBitSet(element, f1_arg1, "status", Enum[0xF041D1802ECFE69][0x8C8B89F7D1690F0])
+				return CoD.ModelUtility.IsSelfModelValueEnumBitSet(element, f1_arg1, "status", Enum[@"rocketlaunchertargetstatesflags"][@"rocket_launcher_target_locking"])
 			end,
 		},
 	})

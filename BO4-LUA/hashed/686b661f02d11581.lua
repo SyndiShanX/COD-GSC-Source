@@ -13,7 +13,7 @@ CoD.ZMTalismanSlot.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Blur = LUI.UIImage.new(0, 0, -20, 112, 0, 0, -23, 109)
 	Blur:setZRot(45)
-	Blur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	Blur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	Blur:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(Blur)
 	self.Blur = Blur
@@ -25,7 +25,7 @@ CoD.ZMTalismanSlot.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	self.Tint = Tint
 	local Box = LUI.UIImage.new(0, 0, -63, 153, 0, 0, -63, 153)
 	Box:setAlpha(0.5)
-	Box:setImage(RegisterImage(0x3BCBBC8226622A5))
+	Box:setImage(RegisterImage(@"hash_3BCBBC8226622A5"))
 	self:addElement(Box)
 	self.Box = Box
 	local PerkPreviewIcon = CoD.TalentPreviewIcon.new(f1_arg0, f1_arg1, 0.1, 0.9, 0, 0, 0.1, 0.9, 0, 0)
@@ -70,17 +70,17 @@ CoD.ZMTalismanSlot.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	EmptyText = LUI.UIText.new(0.5, 0.5, -100, 100, 0, 0, 114, 138)
 	EmptyText:setRGB(0.56, 0.56, 0.56)
 	EmptyText:setAlpha(0)
-	EmptyText:setText(Engine[0xF9F1239CFD921FE](0xB67F7FB585D594C))
+	EmptyText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/empty"))
 	EmptyText:setTTF("dinnext_regular")
-	EmptyText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	EmptyText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	EmptyText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	EmptyText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(EmptyText)
 	self.EmptyText = EmptyText
 	EmptyIcon = LUI.UIImage.new(0.5, 0.5, -40, 40, 0.5, 0.5, -43, 37)
 	EmptyIcon:setRGB(ColorSet.T8__BEIGE__HEADER.r, ColorSet.T8__BEIGE__HEADER.g, ColorSet.T8__BEIGE__HEADER.b)
 	EmptyIcon:setAlpha(0)
-	EmptyIcon:setImage(RegisterImage(0x8813AFA41490306))
-	EmptyIcon:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	EmptyIcon:setImage(RegisterImage(@"hash_8813AFA41490306"))
+	EmptyIcon:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(EmptyIcon)
 	self.EmptyIcon = EmptyIcon
 	local Selected = CoD.uie_Border.new(f1_arg0, f1_arg1, 0, 0, 0, 90, 0, 0, 0, 90)

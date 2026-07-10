@@ -15,14 +15,14 @@ CoD.FirstTimeBrightnessPreview.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	self.OverlaySmall = OverlaySmall
 	local DescText = LUI.UIText.new(0.5, 0.5, -306, 306, 0, 0, 19.5, 40.5)
 	DescText:setRGB(0.6, 0.6, 0.6)
-	DescText:setText(Engine[0xF9F1239CFD921FE](0x39538A6EEE7239A))
+	DescText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_639538A6EEE7239A"))
 	DescText:setTTF("ttmussels_regular")
-	DescText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	DescText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	DescText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	DescText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(DescText)
 	self.DescText = DescText
 	local Logo = LUI.UIImage.new(0.5, 0.5, -210.5, 210.5, 0, 0, 104, 556)
-	Logo:setImage(RegisterImage(0xD50708E11EDBD06))
+	Logo:setImage(RegisterImage(@"uie_ui_icon_startmenu_option_brightnesslogo"))
 	Logo:setupUIStreamedImage(0)
 	Logo:subscribeToGlobalModel(f1_arg1, "PerController", "profile.brightnessPreviewColor", function(model)
 		local f2_local0 = model:get()

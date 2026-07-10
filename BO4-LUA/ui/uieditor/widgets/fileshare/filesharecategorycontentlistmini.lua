@@ -13,12 +13,12 @@ CoD.FileshareCategoryContentListMini.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local MiddleText = LUI.UIText.new(0, 1, 3, -3, 0.5, 0.5, -212.5, -187.5)
 	MiddleText:setRGB(ColorSet.T8__OCHRE.r, ColorSet.T8__OCHRE.g, ColorSet.T8__OCHRE.b)
-	MiddleText:setText(LocalizeToUpperString(0xA43B10D9DA121A))
+	MiddleText:setText(LocalizeToUpperString(@"hash_A43B10D9DA121A"))
 	MiddleText:setTTF("ttmussels_regular")
-	MiddleText:setMaterial(LUI.UIImage.GetCachedMaterial(0x71E049B161CD00A))
+	MiddleText:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_171E049B161CD00A"))
 	MiddleText:setLetterSpacing(3)
-	MiddleText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	MiddleText:setAlignment(Enum[0x7A5123B654282D2][0x6ED4298C93DC5ED])
+	MiddleText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	MiddleText:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
 	self:addElement(MiddleText)
 	self.MiddleText = MiddleText
 	local FileshareSpinner = CoD.FileshareSpinner.new(f1_arg0, f1_arg1, 0.5, 0.5, -48, 48, 0.55, 0.55, -48, 48)
@@ -26,17 +26,17 @@ CoD.FileshareCategoryContentListMini.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	self.FileshareSpinner = FileshareSpinner
 	local EmptyText = LUI.UIText.new(0.01, 0.49, 0, 0, 0.5, 0.5, -90, -70)
 	EmptyText:setRGB(0.36, 0.35, 0.35)
-	EmptyText:setText(Engine[0xF9F1239CFD921FE](0x9E740AD10EEAD80))
+	EmptyText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/not_available"))
 	EmptyText:setTTF("ttmussels_regular")
-	EmptyText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	EmptyText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	EmptyText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	EmptyText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(EmptyText)
 	self.EmptyText = EmptyText
 	local FrameBorder1 = LUI.UIImage.new(0.91, 0.91, -611, -282, 0.29, 0.29, -81, 105)
 	FrameBorder1:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	FrameBorder1:setAlpha(0.15)
-	FrameBorder1:setImage(RegisterImage(0x185E11D74ECA3D7))
-	FrameBorder1:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	FrameBorder1:setImage(RegisterImage(@"uie_ui_menu_store_common_frame"))
+	FrameBorder1:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	FrameBorder1:setShaderVector(0, 0, 0, 0, 0)
 	FrameBorder1:setupNineSliceShader(12, 12)
 	self:addElement(FrameBorder1)
@@ -44,8 +44,8 @@ CoD.FileshareCategoryContentListMini.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	local FrameBorder2 = LUI.UIImage.new(0.91, 0.91, -264, 65, 0.29, 0.29, -81, 105)
 	FrameBorder2:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	FrameBorder2:setAlpha(0.15)
-	FrameBorder2:setImage(RegisterImage(0x185E11D74ECA3D7))
-	FrameBorder2:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	FrameBorder2:setImage(RegisterImage(@"uie_ui_menu_store_common_frame"))
+	FrameBorder2:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	FrameBorder2:setShaderVector(0, 0, 0, 0, 0)
 	FrameBorder2:setupNineSliceShader(12, 12)
 	self:addElement(FrameBorder2)
@@ -53,8 +53,8 @@ CoD.FileshareCategoryContentListMini.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	local FrameBorder3 = LUI.UIImage.new(0.91, 0.91, -611, -282, 0.29, 0.29, 125, 311)
 	FrameBorder3:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	FrameBorder3:setAlpha(0.15)
-	FrameBorder3:setImage(RegisterImage(0x185E11D74ECA3D7))
-	FrameBorder3:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	FrameBorder3:setImage(RegisterImage(@"uie_ui_menu_store_common_frame"))
+	FrameBorder3:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	FrameBorder3:setShaderVector(0, 0, 0, 0, 0)
 	FrameBorder3:setupNineSliceShader(12, 12)
 	self:addElement(FrameBorder3)
@@ -62,8 +62,8 @@ CoD.FileshareCategoryContentListMini.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	local FrameBorder4 = LUI.UIImage.new(0.91, 0.91, -264, 65, 0.29, 0.29, 125, 311)
 	FrameBorder4:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	FrameBorder4:setAlpha(0.15)
-	FrameBorder4:setImage(RegisterImage(0x185E11D74ECA3D7))
-	FrameBorder4:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	FrameBorder4:setImage(RegisterImage(@"uie_ui_menu_store_common_frame"))
+	FrameBorder4:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	FrameBorder4:setShaderVector(0, 0, 0, 0, 0)
 	FrameBorder4:setupNineSliceShader(12, 12)
 	self:addElement(FrameBorder4)
@@ -75,7 +75,7 @@ CoD.FileshareCategoryContentListMini.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	contentList:setHorizontalCount(2)
 	contentList:setVerticalCount(2)
 	contentList:setSpacing(20)
-	contentList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	contentList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	contentList:setDataSource("FilesharePublishedList")
 	contentList:registerEventHandler("menu_loaded", function(element, event)
 		local f2_local0 = nil
@@ -102,8 +102,8 @@ CoD.FileshareCategoryContentListMini.new = function(f1_arg0, f1_arg1, f1_arg2, f
 		if not ListElementHasElements(self.contentList) then
 			SetLoseFocusToElement(self, "contentList", f1_arg1)
 		else
-			CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-			CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x22361E23588705A])
+			CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+			CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_start"])
 		end
 		return f3_local0
 	end)
@@ -115,14 +115,14 @@ CoD.FileshareCategoryContentListMini.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	contentList:registerEventHandler("list_item_lose_focus", function(element, event)
 		return nil
 	end)
-	f1_arg0:AddButtonCallbackFunction(contentList, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(contentList, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		ProcessListAction(self, element, controller, menu)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 		return true
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(contentList, f1_arg1, Enum[0x3DD78803F918E9D][0x22361E23588705A], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(contentList, f1_arg1, Enum[@"luibutton"][@"lui_key_start"], nil, function(element, menu, controller, model)
 		if FileshareCanShowOptionsMenu(controller) then
 			PreserveThumbnails(controller, true)
 			return true
@@ -130,7 +130,7 @@ CoD.FileshareCategoryContentListMini.new = function(f1_arg0, f1_arg1, f1_arg2, f
 		end
 	end, function(element, menu, controller)
 		if FileshareCanShowOptionsMenu(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x22361E23588705A], 0x8E7772DFD9BBDEB, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_start"], @"menu/options", nil, nil)
 			return true
 		else
 			return false
@@ -171,7 +171,7 @@ CoD.FileshareCategoryContentListMini.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	})
 	local f1_local9 = self
 	local f1_local10 = self.subscribeToModel
-	local f1_local11 = Engine[0x8DF2E5447F384B9]()
+	local f1_local11 = Engine[@"getglobalmodel"]()
 	f1_local10(f1_local9, f1_local11["fileshareRoot.ready"], function(f14_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -183,7 +183,7 @@ CoD.FileshareCategoryContentListMini.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	end, false)
 	f1_local9 = self
 	f1_local10 = self.subscribeToModel
-	f1_local11 = Engine[0x8DF2E5447F384B9]()
+	f1_local11 = Engine[@"getglobalmodel"]()
 	f1_local10(f1_local9, f1_local11["fileshareRoot.dirty"], function(f15_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

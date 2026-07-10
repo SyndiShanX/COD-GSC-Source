@@ -14,7 +14,7 @@ require("x64:794f27988d07830")
 require("x64:c0887595cfb6bb1")
 local f0_local0 = function(f1_arg0, f1_arg1)
 	if IsSplitscreenAndInGame() then
-		local f1_local0, f1_local1, f1_local2, f1_local3 = Engine[0x26E31A9FDAA85EB](f1_arg1, true)
+		local f1_local0, f1_local1, f1_local2, f1_local3 = Engine[@"getusersafeareaforcontroller"](f1_arg1, true)
 		f1_arg0.CalloutItems.BGDarkening:setLeftRight(false, false, f1_local0 * 1.5, f1_local2 * 1.5)
 		f1_arg0.CalloutItems.BGDarkening:setTopBottom(false, false, f1_local1 * 1.5, f1_local3 * 1.5)
 	end
@@ -53,11 +53,11 @@ LUI.createMenu.Hud_WZ = function(f2_arg0, f2_arg1)
 	ReadyEvents:setAlpha(0)
 	ReadyEvents:subscribeToGlobalModel(f2_arg0, "PerController", "scriptNotify", function(model)
 		local f3_local0 = ReadyEvents
-		if CoD.ModelUtility.IsParamModelEqualToHashString(model, 0x3A74DE8C2726B98) then
+		if CoD.ModelUtility.IsParamModelEqualToHashString(model, @"hero_weapon_received") then
 			AddHeroAbilityReceivedNotification(self, f3_local0, f2_arg0, model)
-		elseif CoD.ModelUtility.IsParamModelEqualToHashString(model, 0x31187DD9C484333) then
+		elseif CoD.ModelUtility.IsParamModelEqualToHashString(model, @"killstreak_received") then
 			AddKillstreakReceivedNotification(self, f3_local0, f2_arg0, model)
-		elseif CoD.ModelUtility.IsParamModelEqualToHashString(model, 0xE93575172DBE858) then
+		elseif CoD.ModelUtility.IsParamModelEqualToHashString(model, @"levelup") then
 			AddSlotUnlockedNotification(self, f3_local0, f2_arg0, model)
 		end
 	end)
@@ -94,7 +94,7 @@ LUI.createMenu.Hud_WZ = function(f2_arg0, f2_arg1)
 	MPObjectiveNotificationWidget:subscribeToGlobalModel(f2_arg0, "PerController", "gametypeObjective", function(model)
 		local f7_local0 = model:get()
 		if f7_local0 ~= nil then
-			MPObjectiveNotificationWidget.GameTypeText:setText(Engine[0xF9F1239CFD921FE](f7_local0))
+			MPObjectiveNotificationWidget.GameTypeText:setText(Engine[@"hash_4F9F1239CFD921FE"](f7_local0))
 		end
 	end)
 	self:addElement(MPObjectiveNotificationWidget)
@@ -116,7 +116,7 @@ LUI.createMenu.Hud_WZ = function(f2_arg0, f2_arg1)
 	})
 	local PCNotifContainer = MPHintTextContainer
 	local SpraysAndGestures = MPHintTextContainer.subscribeToModel
-	local CalloutItems = Engine[0x4DF5CFBC1771947](f2_arg0)
+	local CalloutItems = Engine[@"getmodelforcontroller"](f2_arg0)
 	SpraysAndGestures(PCNotifContainer, CalloutItems.MPHintText, function(f9_arg0)
 		f2_local1:updateElementState(MPHintTextContainer, {
 			name = "model_validation",
@@ -145,17 +145,17 @@ LUI.createMenu.Hud_WZ = function(f2_arg0, f2_arg1)
 						not CoD.HUDUtility.HideWheelInPrematch(f2_arg0)
 						and not CoD.ModelUtility.IsClientModelValueTrue(f2_arg0, "isInLastStand")
 						and not CoD.WZUtility.IsQuickInventoryOpen(f2_arg0)
-						and not CoD.ModelUtility.IsGlobalDataSourceModelValueEqualToEnum(f2_arg0, "MultiItemPickup", "status", Enum[0x163CDAE6010C493][0xC9FADA56582F80F])
-						and not Engine[0xDD333420C49E6D0](f2_arg0, Enum[0x7F032C2EF103A1A][0x23CD9BAB9B9F4C8])
-						and not Engine[0xDD333420C49E6D0](f2_arg0, Enum[0x7F032C2EF103A1A][0x7B52A87BC9AA4C7])
-						and not Engine[0xDD333420C49E6D0](f2_arg0, Enum[0x7F032C2EF103A1A][0x49AC9E07ED19EB6])
-						and not Engine[0xDD333420C49E6D0](f2_arg0, Enum[0x7F032C2EF103A1A][0x6668F0686232679])
-						and not Engine[0xDD333420C49E6D0](f2_arg0, Enum[0x7F032C2EF103A1A][0xD567EDB5609CCEC])
-						and not Engine[0xDD333420C49E6D0](f2_arg0, Enum[0x7F032C2EF103A1A][0x534C7B2375D2D47])
-						and not Engine[0xDD333420C49E6D0](f2_arg0, Enum[0x7F032C2EF103A1A][0x4828BED794DA0A5])
-						and not Engine[0xDD333420C49E6D0](f2_arg0, Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04])
+						and not CoD.ModelUtility.IsGlobalDataSourceModelValueEqualToEnum(f2_arg0, "MultiItemPickup", "status", Enum[@"hash_163CDAE6010C493"][@"hash_5C9FADA56582F80F"])
+						and not Engine[@"isvisibilitybitset"](f2_arg0, Enum[@"uivisibilitybit"][@"bit_in_guided_missile"])
+						and not Engine[@"isvisibilitybitset"](f2_arg0, Enum[@"uivisibilitybit"][@"bit_in_remote_killstreak_static"])
+						and not Engine[@"isvisibilitybitset"](f2_arg0, Enum[@"uivisibilitybit"][@"bit_in_remote_missile"])
+						and not Engine[@"isvisibilitybitset"](f2_arg0, Enum[@"uivisibilitybit"][@"bit_in_vehicle"])
+						and not Engine[@"isvisibilitybitset"](f2_arg0, Enum[@"uivisibilitybit"][@"bit_is_demo_playing"])
+						and not Engine[@"isvisibilitybitset"](f2_arg0, Enum[@"uivisibilitybit"][@"bit_player_dead"])
+						and not Engine[@"isvisibilitybitset"](f2_arg0, Enum[@"uivisibilitybit"][@"bit_round_end_killcam"])
+						and not Engine[@"isvisibilitybitset"](f2_arg0, Enum[@"uivisibilitybit"][@"bit_scoreboard_open"])
 					then
-						f11_local0 = not Engine[0xDD333420C49E6D0](f2_arg0, Enum[0x7F032C2EF103A1A][0x6FFF566DCC09BBD])
+						f11_local0 = not Engine[@"isvisibilitybitset"](f2_arg0, Enum[@"uivisibilitybit"][@"bit_spectating_client"])
 					else
 						f11_local0 = false
 					end
@@ -166,7 +166,7 @@ LUI.createMenu.Hud_WZ = function(f2_arg0, f2_arg1)
 	})
 	CalloutItems = SpraysAndGestures
 	PCNotifContainer = SpraysAndGestures.subscribeToModel
-	local FrontendBattlenetContainer = Engine[0x4DF5CFBC1771947](f2_arg0)
+	local FrontendBattlenetContainer = Engine[@"getmodelforcontroller"](f2_arg0)
 	PCNotifContainer(CalloutItems, FrontendBattlenetContainer["ButtonBits.actionSlots.Sprays_Boasts"], function(f12_arg0)
 		f2_local1:updateElementState(SpraysAndGestures, {
 			name = "model_validation",
@@ -178,7 +178,7 @@ LUI.createMenu.Hud_WZ = function(f2_arg0, f2_arg1)
 	end, false)
 	CalloutItems = SpraysAndGestures
 	PCNotifContainer = SpraysAndGestures.subscribeToModel
-	FrontendBattlenetContainer = Engine[0x4DF5CFBC1771947](f2_arg0)
+	FrontendBattlenetContainer = Engine[@"getmodelforcontroller"](f2_arg0)
 	PCNotifContainer(CalloutItems, FrontendBattlenetContainer["hudItems.PCWheels.sprayGestureWheelKeyPressed"], function(f13_arg0)
 		f2_local1:updateElementState(SpraysAndGestures, {
 			name = "model_validation",
@@ -190,7 +190,7 @@ LUI.createMenu.Hud_WZ = function(f2_arg0, f2_arg1)
 	end, false)
 	CalloutItems = SpraysAndGestures
 	PCNotifContainer = SpraysAndGestures.subscribeToModel
-	FrontendBattlenetContainer = Engine[0x4DF5CFBC1771947](f2_arg0)
+	FrontendBattlenetContainer = Engine[@"getmodelforcontroller"](f2_arg0)
 	PCNotifContainer(CalloutItems, FrontendBattlenetContainer["hudItems.PCWheels.calloutWheelKeyPressed"], function(f14_arg0)
 		f2_local1:updateElementState(SpraysAndGestures, {
 			name = "model_validation",
@@ -202,7 +202,7 @@ LUI.createMenu.Hud_WZ = function(f2_arg0, f2_arg1)
 	end, false)
 	CalloutItems = SpraysAndGestures
 	PCNotifContainer = SpraysAndGestures.subscribeToModel
-	FrontendBattlenetContainer = Engine[0xE4D2F32833CFA6C](Engine[0x761955642304848](f2_arg0))
+	FrontendBattlenetContainer = Engine[@"getmodelforclient"](Engine[@"getclientnum"](f2_arg0))
 	PCNotifContainer(CalloutItems, FrontendBattlenetContainer.isInLastStand, function(f15_arg0)
 		f2_local1:updateElementState(SpraysAndGestures, {
 			name = "model_validation",
@@ -214,7 +214,7 @@ LUI.createMenu.Hud_WZ = function(f2_arg0, f2_arg1)
 	end, false)
 	CalloutItems = SpraysAndGestures
 	PCNotifContainer = SpraysAndGestures.subscribeToModel
-	FrontendBattlenetContainer = Engine[0x4DF5CFBC1771947](f2_arg0)
+	FrontendBattlenetContainer = Engine[@"getmodelforcontroller"](f2_arg0)
 	PCNotifContainer(CalloutItems, FrontendBattlenetContainer["hudItems.inventory.open"], function(f16_arg0)
 		f2_local1:updateElementState(SpraysAndGestures, {
 			name = "model_validation",
@@ -238,110 +238,110 @@ LUI.createMenu.Hud_WZ = function(f2_arg0, f2_arg1)
 	end, false)
 	CalloutItems = SpraysAndGestures
 	PCNotifContainer = SpraysAndGestures.subscribeToModel
-	FrontendBattlenetContainer = Engine[0x4DF5CFBC1771947](f2_arg0)
-	PCNotifContainer(CalloutItems, FrontendBattlenetContainer["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x23CD9BAB9B9F4C8]], function(f18_arg0)
+	FrontendBattlenetContainer = Engine[@"getmodelforcontroller"](f2_arg0)
+	PCNotifContainer(CalloutItems, FrontendBattlenetContainer["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_guided_missile"]], function(f18_arg0)
 		f2_local1:updateElementState(SpraysAndGestures, {
 			name = "model_validation",
 			menu = f2_local1,
 			controller = f2_arg0,
 			modelValue = f18_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x23CD9BAB9B9F4C8],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_guided_missile"],
 		})
 	end, false)
 	CalloutItems = SpraysAndGestures
 	PCNotifContainer = SpraysAndGestures.subscribeToModel
-	FrontendBattlenetContainer = Engine[0x4DF5CFBC1771947](f2_arg0)
-	PCNotifContainer(CalloutItems, FrontendBattlenetContainer["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x7B52A87BC9AA4C7]], function(f19_arg0)
+	FrontendBattlenetContainer = Engine[@"getmodelforcontroller"](f2_arg0)
+	PCNotifContainer(CalloutItems, FrontendBattlenetContainer["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_remote_killstreak_static"]], function(f19_arg0)
 		f2_local1:updateElementState(SpraysAndGestures, {
 			name = "model_validation",
 			menu = f2_local1,
 			controller = f2_arg0,
 			modelValue = f19_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x7B52A87BC9AA4C7],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_remote_killstreak_static"],
 		})
 	end, false)
 	CalloutItems = SpraysAndGestures
 	PCNotifContainer = SpraysAndGestures.subscribeToModel
-	FrontendBattlenetContainer = Engine[0x4DF5CFBC1771947](f2_arg0)
-	PCNotifContainer(CalloutItems, FrontendBattlenetContainer["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x49AC9E07ED19EB6]], function(f20_arg0)
+	FrontendBattlenetContainer = Engine[@"getmodelforcontroller"](f2_arg0)
+	PCNotifContainer(CalloutItems, FrontendBattlenetContainer["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_remote_missile"]], function(f20_arg0)
 		f2_local1:updateElementState(SpraysAndGestures, {
 			name = "model_validation",
 			menu = f2_local1,
 			controller = f2_arg0,
 			modelValue = f20_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x49AC9E07ED19EB6],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_remote_missile"],
 		})
 	end, false)
 	CalloutItems = SpraysAndGestures
 	PCNotifContainer = SpraysAndGestures.subscribeToModel
-	FrontendBattlenetContainer = Engine[0x4DF5CFBC1771947](f2_arg0)
-	PCNotifContainer(CalloutItems, FrontendBattlenetContainer["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x6668F0686232679]], function(f21_arg0)
+	FrontendBattlenetContainer = Engine[@"getmodelforcontroller"](f2_arg0)
+	PCNotifContainer(CalloutItems, FrontendBattlenetContainer["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_vehicle"]], function(f21_arg0)
 		f2_local1:updateElementState(SpraysAndGestures, {
 			name = "model_validation",
 			menu = f2_local1,
 			controller = f2_arg0,
 			modelValue = f21_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x6668F0686232679],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_vehicle"],
 		})
 	end, false)
 	CalloutItems = SpraysAndGestures
 	PCNotifContainer = SpraysAndGestures.subscribeToModel
-	FrontendBattlenetContainer = Engine[0x4DF5CFBC1771947](f2_arg0)
-	PCNotifContainer(CalloutItems, FrontendBattlenetContainer["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xD567EDB5609CCEC]], function(f22_arg0)
+	FrontendBattlenetContainer = Engine[@"getmodelforcontroller"](f2_arg0)
+	PCNotifContainer(CalloutItems, FrontendBattlenetContainer["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_is_demo_playing"]], function(f22_arg0)
 		f2_local1:updateElementState(SpraysAndGestures, {
 			name = "model_validation",
 			menu = f2_local1,
 			controller = f2_arg0,
 			modelValue = f22_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xD567EDB5609CCEC],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_is_demo_playing"],
 		})
 	end, false)
 	CalloutItems = SpraysAndGestures
 	PCNotifContainer = SpraysAndGestures.subscribeToModel
-	FrontendBattlenetContainer = Engine[0x4DF5CFBC1771947](f2_arg0)
-	PCNotifContainer(CalloutItems, FrontendBattlenetContainer["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x534C7B2375D2D47]], function(f23_arg0)
+	FrontendBattlenetContainer = Engine[@"getmodelforcontroller"](f2_arg0)
+	PCNotifContainer(CalloutItems, FrontendBattlenetContainer["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_player_dead"]], function(f23_arg0)
 		f2_local1:updateElementState(SpraysAndGestures, {
 			name = "model_validation",
 			menu = f2_local1,
 			controller = f2_arg0,
 			modelValue = f23_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x534C7B2375D2D47],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_player_dead"],
 		})
 	end, false)
 	CalloutItems = SpraysAndGestures
 	PCNotifContainer = SpraysAndGestures.subscribeToModel
-	FrontendBattlenetContainer = Engine[0x4DF5CFBC1771947](f2_arg0)
-	PCNotifContainer(CalloutItems, FrontendBattlenetContainer["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x4828BED794DA0A5]], function(f24_arg0)
+	FrontendBattlenetContainer = Engine[@"getmodelforcontroller"](f2_arg0)
+	PCNotifContainer(CalloutItems, FrontendBattlenetContainer["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_round_end_killcam"]], function(f24_arg0)
 		f2_local1:updateElementState(SpraysAndGestures, {
 			name = "model_validation",
 			menu = f2_local1,
 			controller = f2_arg0,
 			modelValue = f24_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x4828BED794DA0A5],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_round_end_killcam"],
 		})
 	end, false)
 	CalloutItems = SpraysAndGestures
 	PCNotifContainer = SpraysAndGestures.subscribeToModel
-	FrontendBattlenetContainer = Engine[0x4DF5CFBC1771947](f2_arg0)
-	PCNotifContainer(CalloutItems, FrontendBattlenetContainer["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04]], function(f25_arg0)
+	FrontendBattlenetContainer = Engine[@"getmodelforcontroller"](f2_arg0)
+	PCNotifContainer(CalloutItems, FrontendBattlenetContainer["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]], function(f25_arg0)
 		f2_local1:updateElementState(SpraysAndGestures, {
 			name = "model_validation",
 			menu = f2_local1,
 			controller = f2_arg0,
 			modelValue = f25_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"],
 		})
 	end, false)
 	CalloutItems = SpraysAndGestures
 	PCNotifContainer = SpraysAndGestures.subscribeToModel
-	FrontendBattlenetContainer = Engine[0x4DF5CFBC1771947](f2_arg0)
-	PCNotifContainer(CalloutItems, FrontendBattlenetContainer["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x6FFF566DCC09BBD]], function(f26_arg0)
+	FrontendBattlenetContainer = Engine[@"getmodelforcontroller"](f2_arg0)
+	PCNotifContainer(CalloutItems, FrontendBattlenetContainer["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_spectating_client"]], function(f26_arg0)
 		f2_local1:updateElementState(SpraysAndGestures, {
 			name = "model_validation",
 			menu = f2_local1,
 			controller = f2_arg0,
 			modelValue = f26_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x6FFF566DCC09BBD],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_spectating_client"],
 		})
 	end, false)
 	self:addElement(SpraysAndGestures)
@@ -359,8 +359,8 @@ LUI.createMenu.Hud_WZ = function(f2_arg0, f2_arg1)
 				if f27_local0 then
 					f27_local0 = CoD.HUDUtility.EnableCalloutWheel()
 					if f27_local0 then
-						if not CoD.HUDUtility.HideWheelInPrematch(f2_arg0) and not IsInTheaterMode() and not CoD.ModelUtility.IsClientModelValueTrue(f2_arg0, "isInLastStand") and not CoD.WZUtility.IsQuickInventoryOpen(f2_arg0) and not CoD.ModelUtility.IsGlobalDataSourceModelValueEqualToEnum(f2_arg0, "MultiItemPickup", "status", Enum[0x163CDAE6010C493][0xC9FADA56582F80F]) and not Engine[0xDD333420C49E6D0](f2_arg0, Enum[0x7F032C2EF103A1A][0x534C7B2375D2D47]) and not Engine[0xDD333420C49E6D0](f2_arg0, Enum[0x7F032C2EF103A1A][0x4828BED794DA0A5]) and not Engine[0xDD333420C49E6D0](f2_arg0, Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04]) then
-							f27_local0 = not Engine[0xDD333420C49E6D0](f2_arg0, Enum[0x7F032C2EF103A1A][0x6FFF566DCC09BBD])
+						if not CoD.HUDUtility.HideWheelInPrematch(f2_arg0) and not IsInTheaterMode() and not CoD.ModelUtility.IsClientModelValueTrue(f2_arg0, "isInLastStand") and not CoD.WZUtility.IsQuickInventoryOpen(f2_arg0) and not CoD.ModelUtility.IsGlobalDataSourceModelValueEqualToEnum(f2_arg0, "MultiItemPickup", "status", Enum[@"hash_163CDAE6010C493"][@"hash_5C9FADA56582F80F"]) and not Engine[@"isvisibilitybitset"](f2_arg0, Enum[@"uivisibilitybit"][@"bit_player_dead"]) and not Engine[@"isvisibilitybitset"](f2_arg0, Enum[@"uivisibilitybit"][@"bit_round_end_killcam"]) and not Engine[@"isvisibilitybitset"](f2_arg0, Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]) then
+							f27_local0 = not Engine[@"isvisibilitybitset"](f2_arg0, Enum[@"uivisibilitybit"][@"bit_spectating_client"])
 						else
 							f27_local0 = false
 						end
@@ -372,7 +372,7 @@ LUI.createMenu.Hud_WZ = function(f2_arg0, f2_arg1)
 	})
 	local f2_local16 = CalloutItems
 	FrontendBattlenetContainer = CalloutItems.subscribeToModel
-	local f2_local17 = Engine[0x4DF5CFBC1771947](f2_arg0)
+	local f2_local17 = Engine[@"getmodelforcontroller"](f2_arg0)
 	FrontendBattlenetContainer(f2_local16, f2_local17["ButtonBits.actionSlots.Flourish_Callouts"], function(f28_arg0)
 		f2_local1:updateElementState(CalloutItems, {
 			name = "model_validation",
@@ -384,7 +384,7 @@ LUI.createMenu.Hud_WZ = function(f2_arg0, f2_arg1)
 	end, false)
 	f2_local16 = CalloutItems
 	FrontendBattlenetContainer = CalloutItems.subscribeToModel
-	f2_local17 = Engine[0x4DF5CFBC1771947](f2_arg0)
+	f2_local17 = Engine[@"getmodelforcontroller"](f2_arg0)
 	FrontendBattlenetContainer(f2_local16, f2_local17["hudItems.PCWheels.calloutWheelKeyPressed"], function(f29_arg0)
 		f2_local1:updateElementState(CalloutItems, {
 			name = "model_validation",
@@ -396,7 +396,7 @@ LUI.createMenu.Hud_WZ = function(f2_arg0, f2_arg1)
 	end, false)
 	f2_local16 = CalloutItems
 	FrontendBattlenetContainer = CalloutItems.subscribeToModel
-	f2_local17 = Engine[0x4DF5CFBC1771947](f2_arg0)
+	f2_local17 = Engine[@"getmodelforcontroller"](f2_arg0)
 	FrontendBattlenetContainer(f2_local16, f2_local17["hudItems.PCWheels.sprayGestureWheelKeyPressed"], function(f30_arg0)
 		f2_local1:updateElementState(CalloutItems, {
 			name = "model_validation",
@@ -408,7 +408,7 @@ LUI.createMenu.Hud_WZ = function(f2_arg0, f2_arg1)
 	end, false)
 	f2_local16 = CalloutItems
 	FrontendBattlenetContainer = CalloutItems.subscribeToModel
-	f2_local17 = Engine[0x8DF2E5447F384B9]()
+	f2_local17 = Engine[@"getglobalmodel"]()
 	FrontendBattlenetContainer(f2_local16, f2_local17["lobbyRoot.lobbyNav"], function(f31_arg0)
 		f2_local1:updateElementState(CalloutItems, {
 			name = "model_validation",
@@ -420,7 +420,7 @@ LUI.createMenu.Hud_WZ = function(f2_arg0, f2_arg1)
 	end, false)
 	f2_local16 = CalloutItems
 	FrontendBattlenetContainer = CalloutItems.subscribeToModel
-	f2_local17 = Engine[0xE4D2F32833CFA6C](Engine[0x761955642304848](f2_arg0))
+	f2_local17 = Engine[@"getmodelforclient"](Engine[@"getclientnum"](f2_arg0))
 	FrontendBattlenetContainer(f2_local16, f2_local17.isInLastStand, function(f32_arg0)
 		f2_local1:updateElementState(CalloutItems, {
 			name = "model_validation",
@@ -432,7 +432,7 @@ LUI.createMenu.Hud_WZ = function(f2_arg0, f2_arg1)
 	end, false)
 	f2_local16 = CalloutItems
 	FrontendBattlenetContainer = CalloutItems.subscribeToModel
-	f2_local17 = Engine[0x4DF5CFBC1771947](f2_arg0)
+	f2_local17 = Engine[@"getmodelforcontroller"](f2_arg0)
 	FrontendBattlenetContainer(f2_local16, f2_local17["hudItems.inventory.open"], function(f33_arg0)
 		f2_local1:updateElementState(CalloutItems, {
 			name = "model_validation",
@@ -456,50 +456,50 @@ LUI.createMenu.Hud_WZ = function(f2_arg0, f2_arg1)
 	end, false)
 	f2_local16 = CalloutItems
 	FrontendBattlenetContainer = CalloutItems.subscribeToModel
-	f2_local17 = Engine[0x4DF5CFBC1771947](f2_arg0)
-	FrontendBattlenetContainer(f2_local16, f2_local17["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x534C7B2375D2D47]], function(f35_arg0)
+	f2_local17 = Engine[@"getmodelforcontroller"](f2_arg0)
+	FrontendBattlenetContainer(f2_local16, f2_local17["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_player_dead"]], function(f35_arg0)
 		f2_local1:updateElementState(CalloutItems, {
 			name = "model_validation",
 			menu = f2_local1,
 			controller = f2_arg0,
 			modelValue = f35_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x534C7B2375D2D47],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_player_dead"],
 		})
 	end, false)
 	f2_local16 = CalloutItems
 	FrontendBattlenetContainer = CalloutItems.subscribeToModel
-	f2_local17 = Engine[0x4DF5CFBC1771947](f2_arg0)
-	FrontendBattlenetContainer(f2_local16, f2_local17["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x4828BED794DA0A5]], function(f36_arg0)
+	f2_local17 = Engine[@"getmodelforcontroller"](f2_arg0)
+	FrontendBattlenetContainer(f2_local16, f2_local17["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_round_end_killcam"]], function(f36_arg0)
 		f2_local1:updateElementState(CalloutItems, {
 			name = "model_validation",
 			menu = f2_local1,
 			controller = f2_arg0,
 			modelValue = f36_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x4828BED794DA0A5],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_round_end_killcam"],
 		})
 	end, false)
 	f2_local16 = CalloutItems
 	FrontendBattlenetContainer = CalloutItems.subscribeToModel
-	f2_local17 = Engine[0x4DF5CFBC1771947](f2_arg0)
-	FrontendBattlenetContainer(f2_local16, f2_local17["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04]], function(f37_arg0)
+	f2_local17 = Engine[@"getmodelforcontroller"](f2_arg0)
+	FrontendBattlenetContainer(f2_local16, f2_local17["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]], function(f37_arg0)
 		f2_local1:updateElementState(CalloutItems, {
 			name = "model_validation",
 			menu = f2_local1,
 			controller = f2_arg0,
 			modelValue = f37_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"],
 		})
 	end, false)
 	f2_local16 = CalloutItems
 	FrontendBattlenetContainer = CalloutItems.subscribeToModel
-	f2_local17 = Engine[0x4DF5CFBC1771947](f2_arg0)
-	FrontendBattlenetContainer(f2_local16, f2_local17["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x6FFF566DCC09BBD]], function(f38_arg0)
+	f2_local17 = Engine[@"getmodelforcontroller"](f2_arg0)
+	FrontendBattlenetContainer(f2_local16, f2_local17["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_spectating_client"]], function(f38_arg0)
 		f2_local1:updateElementState(CalloutItems, {
 			name = "model_validation",
 			menu = f2_local1,
 			controller = f2_arg0,
 			modelValue = f38_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x6FFF566DCC09BBD],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_spectating_client"],
 		})
 	end, false)
 	self:addElement(CalloutItems)
@@ -512,13 +512,13 @@ LUI.createMenu.Hud_WZ = function(f2_arg0, f2_arg1)
 		{
 			stateName = "HideAllButScoreboard",
 			condition = function(menu, element, event)
-				return Engine[0xDD333420C49E6D0](f2_arg0, Enum[0x7F032C2EF103A1A][0x1E59914E91E423A])
+				return Engine[@"isvisibilitybitset"](f2_arg0, Enum[@"uivisibilitybit"][@"bit_stage_ended"])
 			end,
 		},
 		{
 			stateName = "SpeedBoost",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsModelValueEqualTo(f2_arg0, "playerAbilities.playerGadget2.id", "gadget_speed_burst") and CoD.ModelUtility.IsModelValueEqualToEnum(f2_arg0, "playerAbilities.playerGadget2.state", Enum[0xF0447219F15F7F3][0x1873A43E9D1620E])
+				return CoD.ModelUtility.IsModelValueEqualTo(f2_arg0, "playerAbilities.playerGadget2.id", "gadget_speed_burst") and CoD.ModelUtility.IsModelValueEqualToEnum(f2_arg0, "playerAbilities.playerGadget2.state", Enum[@"weapongadgetstates"][@"player_ability_state_inuse"])
 			end,
 		},
 		{
@@ -530,19 +530,19 @@ LUI.createMenu.Hud_WZ = function(f2_arg0, f2_arg1)
 	})
 	f2_local17 = self
 	f2_local16 = self.subscribeToModel
-	local f2_local18 = Engine[0x4DF5CFBC1771947](f2_arg0)
-	f2_local16(f2_local17, f2_local18["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x1E59914E91E423A]], function(f42_arg0)
+	local f2_local18 = Engine[@"getmodelforcontroller"](f2_arg0)
+	f2_local16(f2_local17, f2_local18["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_stage_ended"]], function(f42_arg0)
 		f2_local1:updateElementState(self, {
 			name = "model_validation",
 			menu = f2_local1,
 			controller = f2_arg0,
 			modelValue = f42_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x1E59914E91E423A],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_stage_ended"],
 		})
 	end, false)
 	f2_local17 = self
 	f2_local16 = self.subscribeToModel
-	f2_local18 = Engine[0x4DF5CFBC1771947](f2_arg0)
+	f2_local18 = Engine[@"getmodelforcontroller"](f2_arg0)
 	f2_local16(f2_local17, f2_local18["playerAbilities.playerGadget2.id"], function(f43_arg0)
 		f2_local1:updateElementState(self, {
 			name = "model_validation",
@@ -554,7 +554,7 @@ LUI.createMenu.Hud_WZ = function(f2_arg0, f2_arg1)
 	end, false)
 	f2_local17 = self
 	f2_local16 = self.subscribeToModel
-	f2_local18 = Engine[0x4DF5CFBC1771947](f2_arg0)
+	f2_local18 = Engine[@"getmodelforcontroller"](f2_arg0)
 	f2_local16(f2_local17, f2_local18["playerAbilities.playerGadget2.state"], function(f44_arg0)
 		f2_local1:updateElementState(self, {
 			name = "model_validation",
@@ -566,7 +566,7 @@ LUI.createMenu.Hud_WZ = function(f2_arg0, f2_arg1)
 	end, false)
 	f2_local17 = self
 	f2_local16 = self.subscribeToModel
-	f2_local18 = Engine[0x4DF5CFBC1771947](f2_arg0)
+	f2_local18 = Engine[@"getmodelforcontroller"](f2_arg0)
 	f2_local16(f2_local17, f2_local18["factions.isCoDCaster"], function(f45_arg0)
 		f2_local1:updateElementState(self, {
 			name = "model_validation",
@@ -590,209 +590,209 @@ LUI.createMenu.Hud_WZ = function(f2_arg0, f2_arg1)
 	end, false)
 	f2_local17 = self
 	f2_local16 = self.subscribeToModel
-	f2_local18 = Engine[0x4DF5CFBC1771947](f2_arg0)
-	f2_local16(f2_local17, f2_local18["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04]], function(f47_arg0, f47_arg1)
-		CoD.Menu.UpdateButtonShownState(f47_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A])
+	f2_local18 = Engine[@"getmodelforcontroller"](f2_arg0)
+	f2_local16(f2_local17, f2_local18["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]], function(f47_arg0, f47_arg1)
+		CoD.Menu.UpdateButtonShownState(f47_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"])
 	end, false)
 	f2_local17 = self
 	f2_local16 = self.subscribeToModel
-	f2_local18 = Engine[0x4DF5CFBC1771947](f2_arg0)
-	f2_local16(f2_local17, f2_local18["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x198075B069840DC]], function(f48_arg0, f48_arg1)
-		CoD.Menu.UpdateButtonShownState(f48_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0x4B11D2B20C75A7F])
-		CoD.Menu.UpdateButtonShownState(f48_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
-		CoD.Menu.UpdateButtonShownState(f48_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+	f2_local18 = Engine[@"getmodelforcontroller"](f2_arg0)
+	f2_local16(f2_local17, f2_local18["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_game_ended"]], function(f48_arg0, f48_arg1)
+		CoD.Menu.UpdateButtonShownState(f48_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_up"])
+		CoD.Menu.UpdateButtonShownState(f48_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+		CoD.Menu.UpdateButtonShownState(f48_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	f2_local17 = self
 	f2_local16 = self.subscribeToModel
-	f2_local18 = Engine[0x4DF5CFBC1771947](f2_arg0)
-	f2_local16(f2_local17, f2_local18["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xD567EDB5609CCEC]], function(f49_arg0, f49_arg1)
-		CoD.Menu.UpdateButtonShownState(f49_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0x4B11D2B20C75A7F])
-		CoD.Menu.UpdateButtonShownState(f49_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0xD4C15FE32148D3A])
+	f2_local18 = Engine[@"getmodelforcontroller"](f2_arg0)
+	f2_local16(f2_local17, f2_local18["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_is_demo_playing"]], function(f49_arg0, f49_arg1)
+		CoD.Menu.UpdateButtonShownState(f49_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_up"])
+		CoD.Menu.UpdateButtonShownState(f49_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_down"])
 	end, false)
 	f2_local17 = self
 	f2_local16 = self.subscribeToModel
-	f2_local18 = Engine[0x4DF5CFBC1771947](f2_arg0)
-	f2_local16(f2_local17, f2_local18["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x534C7B2375D2D47]], function(f50_arg0, f50_arg1)
-		CoD.Menu.UpdateButtonShownState(f50_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0x4B11D2B20C75A7F])
-		CoD.Menu.UpdateButtonShownState(f50_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
-		CoD.Menu.UpdateButtonShownState(f50_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+	f2_local18 = Engine[@"getmodelforcontroller"](f2_arg0)
+	f2_local16(f2_local17, f2_local18["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_player_dead"]], function(f50_arg0, f50_arg1)
+		CoD.Menu.UpdateButtonShownState(f50_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_up"])
+		CoD.Menu.UpdateButtonShownState(f50_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+		CoD.Menu.UpdateButtonShownState(f50_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	f2_local17 = self
 	f2_local16 = self.subscribeToModel
-	f2_local18 = Engine[0x4DF5CFBC1771947](f2_arg0)
-	f2_local16(f2_local17, f2_local18["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04]], function(f51_arg0, f51_arg1)
-		CoD.Menu.UpdateButtonShownState(f51_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0x4B11D2B20C75A7F])
-		CoD.Menu.UpdateButtonShownState(f51_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0xD4C15FE32148D3A])
+	f2_local18 = Engine[@"getmodelforcontroller"](f2_arg0)
+	f2_local16(f2_local17, f2_local18["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]], function(f51_arg0, f51_arg1)
+		CoD.Menu.UpdateButtonShownState(f51_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_up"])
+		CoD.Menu.UpdateButtonShownState(f51_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_down"])
 	end, false)
 	f2_local17 = self
 	f2_local16 = self.subscribeToModel
-	f2_local18 = Engine[0x4DF5CFBC1771947](f2_arg0)
-	f2_local16(f2_local17, f2_local18["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x6FFF566DCC09BBD]], function(f52_arg0, f52_arg1)
-		CoD.Menu.UpdateButtonShownState(f52_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0x4B11D2B20C75A7F])
-		CoD.Menu.UpdateButtonShownState(f52_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0xD4C15FE32148D3A])
-		CoD.Menu.UpdateButtonShownState(f52_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
-		CoD.Menu.UpdateButtonShownState(f52_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+	f2_local18 = Engine[@"getmodelforcontroller"](f2_arg0)
+	f2_local16(f2_local17, f2_local18["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_spectating_client"]], function(f52_arg0, f52_arg1)
+		CoD.Menu.UpdateButtonShownState(f52_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_up"])
+		CoD.Menu.UpdateButtonShownState(f52_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_down"])
+		CoD.Menu.UpdateButtonShownState(f52_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+		CoD.Menu.UpdateButtonShownState(f52_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	f2_local17 = self
 	f2_local16 = self.subscribeToModel
-	f2_local18 = Engine[0x4DF5CFBC1771947](f2_arg0)
-	f2_local16(f2_local17, f2_local18["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]], function(f53_arg0, f53_arg1)
-		CoD.Menu.UpdateButtonShownState(f53_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0x4B11D2B20C75A7F])
-		CoD.Menu.UpdateButtonShownState(f53_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0xD4C15FE32148D3A])
+	f2_local18 = Engine[@"getmodelforcontroller"](f2_arg0)
+	f2_local16(f2_local17, f2_local18["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_ui_active"]], function(f53_arg0, f53_arg1)
+		CoD.Menu.UpdateButtonShownState(f53_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_up"])
+		CoD.Menu.UpdateButtonShownState(f53_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_down"])
 	end, false)
 	f2_local17 = self
 	f2_local16 = self.subscribeToModel
-	f2_local18 = Engine[0x4DF5CFBC1771947](f2_arg0)
-	f2_local16(f2_local17, f2_local18["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xBB045E46E88E762]], function(f54_arg0, f54_arg1)
-		CoD.Menu.UpdateButtonShownState(f54_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0x4B11D2B20C75A7F])
-		CoD.Menu.UpdateButtonShownState(f54_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0xD4C15FE32148D3A])
+	f2_local18 = Engine[@"getmodelforcontroller"](f2_arg0)
+	f2_local16(f2_local17, f2_local18["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_weapon_hud_visible"]], function(f54_arg0, f54_arg1)
+		CoD.Menu.UpdateButtonShownState(f54_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_up"])
+		CoD.Menu.UpdateButtonShownState(f54_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_down"])
 	end, false)
 	f2_local17 = self
 	f2_local16 = self.subscribeToModel
-	f2_local18 = Engine[0x4DF5CFBC1771947](f2_arg0)
+	f2_local18 = Engine[@"getmodelforcontroller"](f2_arg0)
 	f2_local16(f2_local17, f2_local18["hudItems.lastStand.progress"], function(f55_arg0, f55_arg1)
-		CoD.Menu.UpdateButtonShownState(f55_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0x4B11D2B20C75A7F])
-		CoD.Menu.UpdateButtonShownState(f55_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0xD4C15FE32148D3A])
+		CoD.Menu.UpdateButtonShownState(f55_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_up"])
+		CoD.Menu.UpdateButtonShownState(f55_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_down"])
 	end, false)
 	f2_local17 = self
 	f2_local16 = self.subscribeToModel
-	f2_local18 = Engine[0x4DF5CFBC1771947](f2_arg0)
+	f2_local18 = Engine[@"getmodelforcontroller"](f2_arg0)
 	f2_local16(f2_local17, f2_local18["hudItems.lastStand.beingRevived"], function(f56_arg0, f56_arg1)
-		CoD.Menu.UpdateButtonShownState(f56_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0x4B11D2B20C75A7F])
-		CoD.Menu.UpdateButtonShownState(f56_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0xD4C15FE32148D3A])
+		CoD.Menu.UpdateButtonShownState(f56_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_up"])
+		CoD.Menu.UpdateButtonShownState(f56_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_down"])
 	end, false)
 	f2_local17 = self
 	f2_local16 = self.subscribeToModel
-	f2_local18 = Engine[0x4DF5CFBC1771947](f2_arg0)
+	f2_local18 = Engine[@"getmodelforcontroller"](f2_arg0)
 	f2_local16(f2_local17, f2_local18["hudItems.inventory.canUseQuickInventory"], function(f57_arg0, f57_arg1)
-		CoD.Menu.UpdateButtonShownState(f57_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0x4B11D2B20C75A7F])
+		CoD.Menu.UpdateButtonShownState(f57_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_up"])
 	end, false)
 	f2_local17 = self
 	f2_local16 = self.subscribeToModel
-	f2_local18 = Engine[0x4DF5CFBC1771947](f2_arg0)
+	f2_local18 = Engine[@"getmodelforcontroller"](f2_arg0)
 	f2_local16(f2_local17, f2_local18["vehicle.hidePlayerInfo"], function(f58_arg0, f58_arg1)
-		CoD.Menu.UpdateButtonShownState(f58_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0x4B11D2B20C75A7F])
+		CoD.Menu.UpdateButtonShownState(f58_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_up"])
 	end, false)
 	f2_local17 = self
 	f2_local16 = self.subscribeToModel
-	f2_local18 = Engine[0x4DF5CFBC1771947](f2_arg0)
+	f2_local18 = Engine[@"getmodelforcontroller"](f2_arg0)
 	f2_local16(f2_local17, f2_local18["hudItems.inventory.open"], function(f59_arg0, f59_arg1)
-		CoD.Menu.UpdateButtonShownState(f59_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0xD4C15FE32148D3A])
-		CoD.Menu.UpdateButtonShownState(f59_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0x493152B20AE4F58])
-		CoD.Menu.UpdateButtonShownState(f59_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0x49A252B20B48936])
-		CoD.Menu.UpdateButtonShownState(f59_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC])
-		CoD.Menu.UpdateButtonShownState(f59_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA])
-		CoD.Menu.UpdateButtonShownState(f59_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f59_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_down"])
+		CoD.Menu.UpdateButtonShownState(f59_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_lb"])
+		CoD.Menu.UpdateButtonShownState(f59_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_rb"])
+		CoD.Menu.UpdateButtonShownState(f59_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_ltrig"])
+		CoD.Menu.UpdateButtonShownState(f59_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_rtrig"])
+		CoD.Menu.UpdateButtonShownState(f59_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	f2_local17 = self
 	f2_local16 = self.subscribeToModel
-	f2_local18 = Engine[0x8DF2E5447F384B9]()
+	f2_local18 = Engine[@"getglobalmodel"]()
 	f2_local16(f2_local17, f2_local18["lobbyRoot.lobbyNav"], function(f60_arg0, f60_arg1)
-		CoD.Menu.UpdateButtonShownState(f60_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(f60_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_none"])
 	end, false)
 	f2_local17 = self
 	f2_local16 = self.subscribeToModel
 	f2_local18 = DataSources.WarzoneInventory.getModel(f2_arg0)
 	f2_local16(f2_local17, f2_local18.isOpen, function(f61_arg0, f61_arg1)
-		CoD.Menu.UpdateButtonShownState(f61_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(f61_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_none"])
 	end, false)
 	f2_local17 = self
 	f2_local16 = self.subscribeToModel
-	f2_local18 = Engine[0x4DF5CFBC1771947](f2_arg0)
+	f2_local18 = Engine[@"getmodelforcontroller"](f2_arg0)
 	f2_local16(f2_local17, f2_local18["gameScore.currentState"], function(f62_arg0, f62_arg1)
-		CoD.Menu.UpdateButtonShownState(f62_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f62_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
-		CoD.Menu.UpdateButtonShownState(f62_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f62_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f62_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+		CoD.Menu.UpdateButtonShownState(f62_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	f2_local17 = self
 	f2_local16 = self.subscribeToModel
-	f2_local18 = Engine[0x4DF5CFBC1771947](f2_arg0)
+	f2_local18 = Engine[@"getmodelforcontroller"](f2_arg0)
 	f2_local16(f2_local17, f2_local18["hudItems.warzone.aarViewed"], function(f63_arg0, f63_arg1)
-		CoD.Menu.UpdateButtonShownState(f63_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f63_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
-		CoD.Menu.UpdateButtonShownState(f63_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f63_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f63_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+		CoD.Menu.UpdateButtonShownState(f63_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	f2_local17 = self
 	f2_local16 = self.subscribeToModel
-	f2_local18 = Engine[0x4DF5CFBC1771947](f2_arg0)
-	f2_local16(f2_local17, f2_local18["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2]], function(f64_arg0, f64_arg1)
-		CoD.Menu.UpdateButtonShownState(f64_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+	f2_local18 = Engine[@"getmodelforcontroller"](f2_arg0)
+	f2_local16(f2_local17, f2_local18["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"]], function(f64_arg0, f64_arg1)
+		CoD.Menu.UpdateButtonShownState(f64_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 	end, false)
 	f2_local17 = self
 	f2_local16 = self.subscribeToModel
-	f2_local18 = Engine[0x4DF5CFBC1771947](f2_arg0)
+	f2_local18 = Engine[@"getmodelforcontroller"](f2_arg0)
 	f2_local16(f2_local17, f2_local18["huditems.warzone.aarVisible"], function(f65_arg0, f65_arg1)
-		CoD.Menu.UpdateButtonShownState(f65_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
+		CoD.Menu.UpdateButtonShownState(f65_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
 	end, false)
 	self:appendEventHandler("input_source_changed", function(f66_arg0, f66_arg1)
 		f66_arg1.menu = f66_arg1.menu or f2_local1
-		CoD.Menu.UpdateButtonShownState(f66_arg0, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
-		CoD.Menu.UpdateButtonShownState(f66_arg0, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f66_arg0, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+		CoD.Menu.UpdateButtonShownState(f66_arg0, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	f2_local17 = self
 	f2_local16 = self.subscribeToModel
-	f2_local18 = Engine[0x4DF5CFBC1771947](f2_arg0)
+	f2_local18 = Engine[@"getmodelforcontroller"](f2_arg0)
 	f2_local16(f2_local17, f2_local18.LastInput, function(f67_arg0, f67_arg1)
-		CoD.Menu.UpdateButtonShownState(f67_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
-		CoD.Menu.UpdateButtonShownState(f67_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f67_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+		CoD.Menu.UpdateButtonShownState(f67_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	f2_local17 = self
 	f2_local16 = self.subscribeToModel
 	f2_local18 = DataSources.HUDItems.getModel(f2_arg0)
 	f2_local16(f2_local17, f2_local18.aliveTeammateCount, function(f68_arg0, f68_arg1)
-		CoD.Menu.UpdateButtonShownState(f68_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
-		CoD.Menu.UpdateButtonShownState(f68_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f68_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+		CoD.Menu.UpdateButtonShownState(f68_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	f2_local17 = self
 	f2_local16 = self.subscribeToModel
-	f2_local18 = Engine[0x4DF5CFBC1771947](f2_arg0)
+	f2_local18 = Engine[@"getmodelforcontroller"](f2_arg0)
 	f2_local16(f2_local17, f2_local18["gameScore.hasPlayedDeathCam"], function(f69_arg0, f69_arg1)
-		CoD.Menu.UpdateButtonShownState(f69_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
-		CoD.Menu.UpdateButtonShownState(f69_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f69_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+		CoD.Menu.UpdateButtonShownState(f69_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	f2_local17 = self
 	f2_local16 = self.subscribeToModel
-	f2_local18 = Engine[0x4DF5CFBC1771947](f2_arg0)
-	f2_local16(f2_local17, f2_local18["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]], function(f70_arg0, f70_arg1)
-		CoD.Menu.UpdateButtonShownState(f70_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
-		CoD.Menu.UpdateButtonShownState(f70_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+	f2_local18 = Engine[@"getmodelforcontroller"](f2_arg0)
+	f2_local16(f2_local17, f2_local18["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_ui_active"]], function(f70_arg0, f70_arg1)
+		CoD.Menu.UpdateButtonShownState(f70_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+		CoD.Menu.UpdateButtonShownState(f70_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	f2_local17 = self
 	f2_local16 = self.subscribeToModel
-	f2_local18 = Engine[0x8DF2E5447F384B9]()
+	f2_local18 = Engine[@"getglobalmodel"]()
 	f2_local16(f2_local17, f2_local18["storageGlobalRoot.user_settings"], function(f71_arg0, f71_arg1)
-		CoD.Menu.UpdateButtonShownState(f71_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0x493152B20AE4F58])
-		CoD.Menu.UpdateButtonShownState(f71_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0x49A252B20B48936])
-		CoD.Menu.UpdateButtonShownState(f71_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC])
-		CoD.Menu.UpdateButtonShownState(f71_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA])
-		CoD.Menu.UpdateButtonShownState(f71_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f71_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_lb"])
+		CoD.Menu.UpdateButtonShownState(f71_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_rb"])
+		CoD.Menu.UpdateButtonShownState(f71_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_ltrig"])
+		CoD.Menu.UpdateButtonShownState(f71_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_rtrig"])
+		CoD.Menu.UpdateButtonShownState(f71_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	f2_local17 = self
 	f2_local16 = self.subscribeToModel
-	f2_local18 = Engine[0x4DF5CFBC1771947](f2_arg0)
+	f2_local18 = Engine[@"getmodelforcontroller"](f2_arg0)
 	f2_local16(f2_local17, f2_local18.PlayerSettingsUpdate, function(f72_arg0, f72_arg1)
-		CoD.Menu.UpdateButtonShownState(f72_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0x493152B20AE4F58])
-		CoD.Menu.UpdateButtonShownState(f72_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0x49A252B20B48936])
-		CoD.Menu.UpdateButtonShownState(f72_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC])
-		CoD.Menu.UpdateButtonShownState(f72_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA])
-		CoD.Menu.UpdateButtonShownState(f72_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f72_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_lb"])
+		CoD.Menu.UpdateButtonShownState(f72_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_rb"])
+		CoD.Menu.UpdateButtonShownState(f72_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_ltrig"])
+		CoD.Menu.UpdateButtonShownState(f72_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_rtrig"])
+		CoD.Menu.UpdateButtonShownState(f72_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
-	f2_local1:AddButtonCallbackFunction(self, f2_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
-		if IsVisibilityBitSet(controller, Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04]) then
+	f2_local1:AddButtonCallbackFunction(self, f2_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
+		if IsVisibilityBitSet(controller, Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]) then
 			CoD.ScoreboardUtility.HideScoreboard(menu, controller)
 			BlockGameFromKeyEvent(controller)
 			return true
 		else
 		end
 	end, function(element, menu, controller)
-		if IsVisibilityBitSet(controller, Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04]) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x0, nil, nil)
+		if IsVisibilityBitSet(controller, Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"hash_0", nil, nil)
 			return false
 		else
 			return false
 		end
 	end, false)
-	f2_local1:AddButtonCallbackFunction(self, f2_arg0, Enum[0x3DD78803F918E9D][0x93AB4C84F113EE1], nil, function(element, menu, controller, model)
+	f2_local1:AddButtonCallbackFunction(self, f2_arg0, Enum[@"luibutton"][@"lui_key_back"], nil, function(element, menu, controller, model)
 		if CoD.ScoreboardUtility.CanHideScoreboard(controller) then
 			CoD.ScoreboardUtility.HideScoreboard(menu, controller)
 			BlockGameFromKeyEvent(controller)
@@ -801,41 +801,41 @@ LUI.createMenu.Hud_WZ = function(f2_arg0, f2_arg1)
 		end
 	end, function(element, menu, controller)
 		if CoD.ScoreboardUtility.CanHideScoreboard(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x93AB4C84F113EE1], 0x0, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_back"], @"hash_0", nil, nil)
 			return false
 		else
 			return false
 		end
 	end, false)
-	f2_local1:AddButtonCallbackFunction(self, f2_arg0, Enum[0x3DD78803F918E9D][0x4B11D2B20C75A7F], nil, function(element, menu, controller, model)
-		if not Engine[0xDD333420C49E6D0](controller, Enum[0x7F032C2EF103A1A][0x198075B069840DC]) and not Engine[0xDD333420C49E6D0](controller, Enum[0x7F032C2EF103A1A][0xD567EDB5609CCEC]) and not Engine[0xDD333420C49E6D0](controller, Enum[0x7F032C2EF103A1A][0x534C7B2375D2D47]) and not Engine[0xDD333420C49E6D0](controller, Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04]) and not Engine[0xDD333420C49E6D0](controller, Enum[0x7F032C2EF103A1A][0x6FFF566DCC09BBD]) and not Engine[0xDD333420C49E6D0](controller, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) and Engine[0xDD333420C49E6D0](controller, Enum[0x7F032C2EF103A1A][0xBB045E46E88E762]) and not CoD.WZUtility.IsInLastStand(controller, "hudItems.lastStand") and CoD.ModelUtility.IsModelValueTrue(controller, "hudItems.inventory.canUseQuickInventory") and not CoD.ModelUtility.IsModelValueTrue(controller, "vehicle.hidePlayerInfo") and not IsGametypeSettingsValue("wzDisableQuickEquipUI", 1) then
+	f2_local1:AddButtonCallbackFunction(self, f2_arg0, Enum[@"luibutton"][@"lui_key_up"], nil, function(element, menu, controller, model)
+		if not Engine[@"isvisibilitybitset"](controller, Enum[@"uivisibilitybit"][@"bit_game_ended"]) and not Engine[@"isvisibilitybitset"](controller, Enum[@"uivisibilitybit"][@"bit_is_demo_playing"]) and not Engine[@"isvisibilitybitset"](controller, Enum[@"uivisibilitybit"][@"bit_player_dead"]) and not Engine[@"isvisibilitybitset"](controller, Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]) and not Engine[@"isvisibilitybitset"](controller, Enum[@"uivisibilitybit"][@"bit_spectating_client"]) and not Engine[@"isvisibilitybitset"](controller, Enum[@"uivisibilitybit"][@"bit_ui_active"]) and Engine[@"isvisibilitybitset"](controller, Enum[@"uivisibilitybit"][@"bit_weapon_hud_visible"]) and not CoD.WZUtility.IsInLastStand(controller, "hudItems.lastStand") and CoD.ModelUtility.IsModelValueTrue(controller, "hudItems.inventory.canUseQuickInventory") and not CoD.ModelUtility.IsModelValueTrue(controller, "vehicle.hidePlayerInfo") and not IsGametypeSettingsValue("wzDisableQuickEquipUI", 1) then
 			CoD.WZUtility.OpenQuickAccessInventory(menu, controller)
 			return true
 		else
 		end
 	end, function(element, menu, controller)
-		if not Engine[0xDD333420C49E6D0](controller, Enum[0x7F032C2EF103A1A][0x198075B069840DC]) and not Engine[0xDD333420C49E6D0](controller, Enum[0x7F032C2EF103A1A][0xD567EDB5609CCEC]) and not Engine[0xDD333420C49E6D0](controller, Enum[0x7F032C2EF103A1A][0x534C7B2375D2D47]) and not Engine[0xDD333420C49E6D0](controller, Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04]) and not Engine[0xDD333420C49E6D0](controller, Enum[0x7F032C2EF103A1A][0x6FFF566DCC09BBD]) and not Engine[0xDD333420C49E6D0](controller, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) and Engine[0xDD333420C49E6D0](controller, Enum[0x7F032C2EF103A1A][0xBB045E46E88E762]) and not CoD.WZUtility.IsInLastStand(controller, "hudItems.lastStand") and CoD.ModelUtility.IsModelValueTrue(controller, "hudItems.inventory.canUseQuickInventory") and not CoD.ModelUtility.IsModelValueTrue(controller, "vehicle.hidePlayerInfo") and not IsGametypeSettingsValue("wzDisableQuickEquipUI", 1) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x4B11D2B20C75A7F], 0x0, nil, nil)
+		if not Engine[@"isvisibilitybitset"](controller, Enum[@"uivisibilitybit"][@"bit_game_ended"]) and not Engine[@"isvisibilitybitset"](controller, Enum[@"uivisibilitybit"][@"bit_is_demo_playing"]) and not Engine[@"isvisibilitybitset"](controller, Enum[@"uivisibilitybit"][@"bit_player_dead"]) and not Engine[@"isvisibilitybitset"](controller, Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]) and not Engine[@"isvisibilitybitset"](controller, Enum[@"uivisibilitybit"][@"bit_spectating_client"]) and not Engine[@"isvisibilitybitset"](controller, Enum[@"uivisibilitybit"][@"bit_ui_active"]) and Engine[@"isvisibilitybitset"](controller, Enum[@"uivisibilitybit"][@"bit_weapon_hud_visible"]) and not CoD.WZUtility.IsInLastStand(controller, "hudItems.lastStand") and CoD.ModelUtility.IsModelValueTrue(controller, "hudItems.inventory.canUseQuickInventory") and not CoD.ModelUtility.IsModelValueTrue(controller, "vehicle.hidePlayerInfo") and not IsGametypeSettingsValue("wzDisableQuickEquipUI", 1) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_up"], @"hash_0", nil, nil)
 			return false
 		else
 			return false
 		end
 	end, false)
-	f2_local1:AddButtonCallbackFunction(self, f2_arg0, Enum[0x3DD78803F918E9D][0xD4C15FE32148D3A], nil, function(element, menu, controller, model)
-		if not Engine[0xDD333420C49E6D0](controller, Enum[0x7F032C2EF103A1A][0xD567EDB5609CCEC]) and not Engine[0xDD333420C49E6D0](controller, Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04]) and not Engine[0xDD333420C49E6D0](controller, Enum[0x7F032C2EF103A1A][0x6FFF566DCC09BBD]) and not Engine[0xDD333420C49E6D0](controller, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) and Engine[0xDD333420C49E6D0](controller, Enum[0x7F032C2EF103A1A][0xBB045E46E88E762]) and not CoD.WZUtility.IsInLastStand(controller, "hudItems.lastStand") and CoD.ModelUtility.IsModelValueTrue(controller, "hudItems.inventory.open") then
+	f2_local1:AddButtonCallbackFunction(self, f2_arg0, Enum[@"luibutton"][@"lui_key_down"], nil, function(element, menu, controller, model)
+		if not Engine[@"isvisibilitybitset"](controller, Enum[@"uivisibilitybit"][@"bit_is_demo_playing"]) and not Engine[@"isvisibilitybitset"](controller, Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]) and not Engine[@"isvisibilitybitset"](controller, Enum[@"uivisibilitybit"][@"bit_spectating_client"]) and not Engine[@"isvisibilitybitset"](controller, Enum[@"uivisibilitybit"][@"bit_ui_active"]) and Engine[@"isvisibilitybitset"](controller, Enum[@"uivisibilitybit"][@"bit_weapon_hud_visible"]) and not CoD.WZUtility.IsInLastStand(controller, "hudItems.lastStand") and CoD.ModelUtility.IsModelValueTrue(controller, "hudItems.inventory.open") then
 			CoD.WZUtility.CloseQuickAccessInventory(menu, controller)
 			return true
 		else
 		end
 	end, function(element, menu, controller)
-		if not Engine[0xDD333420C49E6D0](controller, Enum[0x7F032C2EF103A1A][0xD567EDB5609CCEC]) and not Engine[0xDD333420C49E6D0](controller, Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04]) and not Engine[0xDD333420C49E6D0](controller, Enum[0x7F032C2EF103A1A][0x6FFF566DCC09BBD]) and not Engine[0xDD333420C49E6D0](controller, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) and Engine[0xDD333420C49E6D0](controller, Enum[0x7F032C2EF103A1A][0xBB045E46E88E762]) and not CoD.WZUtility.IsInLastStand(controller, "hudItems.lastStand") and CoD.ModelUtility.IsModelValueTrue(controller, "hudItems.inventory.open") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xD4C15FE32148D3A], 0x0, nil, nil)
+		if not Engine[@"isvisibilitybitset"](controller, Enum[@"uivisibilitybit"][@"bit_is_demo_playing"]) and not Engine[@"isvisibilitybitset"](controller, Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]) and not Engine[@"isvisibilitybitset"](controller, Enum[@"uivisibilitybit"][@"bit_spectating_client"]) and not Engine[@"isvisibilitybitset"](controller, Enum[@"uivisibilitybit"][@"bit_ui_active"]) and Engine[@"isvisibilitybitset"](controller, Enum[@"uivisibilitybit"][@"bit_weapon_hud_visible"]) and not CoD.WZUtility.IsInLastStand(controller, "hudItems.lastStand") and CoD.ModelUtility.IsModelValueTrue(controller, "hudItems.inventory.open") then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_down"], @"hash_0", nil, nil)
 			return false
 		else
 			return false
 		end
 	end, false)
-	f2_local1:AddButtonCallbackFunction(self, f2_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "weapnext", function(element, menu, controller, model)
+	f2_local1:AddButtonCallbackFunction(self, f2_arg0, Enum[@"luibutton"][@"lui_key_none"], "weapnext", function(element, menu, controller, model)
 		if IsWarzone() and CoD.WZUtility.IsInventoryOpen(controller) and not IsDemoPlaying() then
 			CoD.WZUtility.NextWeapon(controller)
 			return true
@@ -843,13 +843,13 @@ LUI.createMenu.Hud_WZ = function(f2_arg0, f2_arg1)
 		end
 	end, function(element, menu, controller)
 		if IsWarzone() and CoD.WZUtility.IsInventoryOpen(controller) and not IsDemoPlaying() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "weapnext")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "weapnext")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f2_local1:AddButtonCallbackFunction(self, f2_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "weapprev", function(element, menu, controller, model)
+	f2_local1:AddButtonCallbackFunction(self, f2_arg0, Enum[@"luibutton"][@"lui_key_none"], "weapprev", function(element, menu, controller, model)
 		if IsWarzone() and CoD.WZUtility.IsInventoryOpen(controller) and not IsDemoPlaying() then
 			CoD.WZUtility.PrevWeapon(controller)
 			return true
@@ -857,13 +857,13 @@ LUI.createMenu.Hud_WZ = function(f2_arg0, f2_arg1)
 		end
 	end, function(element, menu, controller)
 		if IsWarzone() and CoD.WZUtility.IsInventoryOpen(controller) and not IsDemoPlaying() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "weapprev")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "weapprev")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f2_local1:AddButtonCallbackFunction(self, f2_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "weapswitchprimary", function(element, menu, controller, model)
+	f2_local1:AddButtonCallbackFunction(self, f2_arg0, Enum[@"luibutton"][@"lui_key_none"], "weapswitchprimary", function(element, menu, controller, model)
 		if IsWarzone() and CoD.WZUtility.IsInventoryOpen(controller) and not IsDemoPlaying() then
 			CoD.WZUtility.SwitchToWeaponInSlot(controller, 0)
 			return true
@@ -871,13 +871,13 @@ LUI.createMenu.Hud_WZ = function(f2_arg0, f2_arg1)
 		end
 	end, function(element, menu, controller)
 		if IsWarzone() and CoD.WZUtility.IsInventoryOpen(controller) and not IsDemoPlaying() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "weapswitchprimary")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "weapswitchprimary")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f2_local1:AddButtonCallbackFunction(self, f2_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "weapswitchsecondary", function(element, menu, controller, model)
+	f2_local1:AddButtonCallbackFunction(self, f2_arg0, Enum[@"luibutton"][@"lui_key_none"], "weapswitchsecondary", function(element, menu, controller, model)
 		if IsWarzone() and CoD.WZUtility.IsInventoryOpen(controller) and not IsDemoPlaying() then
 			CoD.WZUtility.SwitchToWeaponInSlot(controller, 1)
 			return true
@@ -885,34 +885,34 @@ LUI.createMenu.Hud_WZ = function(f2_arg0, f2_arg1)
 		end
 	end, function(element, menu, controller)
 		if IsWarzone() and CoD.WZUtility.IsInventoryOpen(controller) and not IsDemoPlaying() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "weapswitchsecondary")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "weapswitchsecondary")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f2_local1:AddButtonCallbackFunction(self, f2_arg0, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], "ui_confirm", function(element, menu, controller, model)
-		if IsPC() and CoD.GameEndScoreUtility.CanShowWarzoneSpectate(controller) and not IsVisibilityBitSet(controller, Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2]) and not IsDemoPlaying() then
+	f2_local1:AddButtonCallbackFunction(self, f2_arg0, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], "ui_confirm", function(element, menu, controller, model)
+		if IsPC() and CoD.GameEndScoreUtility.CanShowWarzoneSpectate(controller) and not IsVisibilityBitSet(controller, Enum[@"uivisibilitybit"][@"bit_in_killcam"]) and not IsDemoPlaying() then
 			SetControllerModelValue(controller, "huditems.warzone.aarVisible", false)
 			LockInput(self, controller, false)
 			SetAllowCursorMovement(menu, false)
 			SendMenuResponse(self, "GameEndScore", "skip_deathcam", controller)
 			CoD.GameEndScoreUtility.ClearTransition(controller)
 			SetFocusToElement(self, "emptyFocusablePC", controller)
-			CoD.LobbyUtility.SetPlayerLocation(controller, Enum[0xC0AB9543C5C440B][0x9B478094C85DBBB])
+			CoD.LobbyUtility.SetPlayerLocation(controller, Enum[@"hash_C0AB9543C5C440B"][@"hash_49B478094C85DBBB"])
 			CoD.PCWidgetUtility.CloseChat(menu, controller)
 			return true
 		else
 		end
 	end, function(element, menu, controller)
-		if IsPC() and CoD.GameEndScoreUtility.CanShowWarzoneSpectate(controller) and not IsVisibilityBitSet(controller, Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2]) and not IsDemoPlaying() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0xF8E8360C903175B, nil, "ui_confirm")
+		if IsPC() and CoD.GameEndScoreUtility.CanShowWarzoneSpectate(controller) and not IsVisibilityBitSet(controller, Enum[@"uivisibilitybit"][@"bit_in_killcam"]) and not IsDemoPlaying() then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"ui/spectate", nil, "ui_confirm")
 			return true
 		else
 			return false
 		end
 	end, false)
-	f2_local1:AddButtonCallbackFunction(self, f2_arg0, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], "ui_contextual_3", function(element, menu, controller, model)
+	f2_local1:AddButtonCallbackFunction(self, f2_arg0, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], "ui_contextual_3", function(element, menu, controller, model)
 		if IsPC() and CoD.ModelUtility.IsModelValueTrue(controller, "huditems.warzone.aarVisible") and IsOnlineGame() and IsBooleanDvarSet("ui_showWZAAR") and not IsElementInState(self.GameEndScoreWZ, "EliminationPC") and not CoD.GameEndScoreUtility.CanShowWarzoneSpectate(controller) then
 			SetControllerModelValue(controller, "huditems.warzone.aarVisible", false)
 			BlockGameFromKeyEvent(controller)
@@ -921,14 +921,14 @@ LUI.createMenu.Hud_WZ = function(f2_arg0, f2_arg1)
 		end
 	end, function(element, menu, controller)
 		if IsPC() and CoD.ModelUtility.IsModelValueTrue(controller, "huditems.warzone.aarVisible") and IsOnlineGame() and IsBooleanDvarSet("ui_showWZAAR") and not IsElementInState(self.GameEndScoreWZ, "EliminationPC") and not CoD.GameEndScoreUtility.CanShowWarzoneSpectate(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], 0xB914F387B0A33A9, nil, "ui_contextual_3")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], @"hash_4B914F387B0A33A9", nil, "ui_contextual_3")
 			return true
 		else
 			return false
 		end
 	end, false)
-	f2_local1:AddButtonCallbackFunction(self, f2_arg0, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], "ui_contextual_1", function(element, menu, controller, model)
-		if IsPC() and IsMouseOrKeyboard(controller) and CoD.GameEndScoreUtility.CanShowWarzoneKillcam(controller) and not IsVisibilityBitSet(controller, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) and not IsDemoPlaying() and not IsInDefaultState(self.GameEndScoreWZ) and CoD.GameEndScoreUtility.HasViewedInGameReport(controller) then
+	f2_local1:AddButtonCallbackFunction(self, f2_arg0, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], "ui_contextual_1", function(element, menu, controller, model)
+		if IsPC() and IsMouseOrKeyboard(controller) and CoD.GameEndScoreUtility.CanShowWarzoneKillcam(controller) and not IsVisibilityBitSet(controller, Enum[@"uivisibilitybit"][@"bit_ui_active"]) and not IsDemoPlaying() and not IsInDefaultState(self.GameEndScoreWZ) and CoD.GameEndScoreUtility.HasViewedInGameReport(controller) then
 			LockInput(self, controller, false)
 			SetAllowCursorMovement(menu, false)
 			SendMenuResponse(self, "GameEndScore", "play_deathcam", controller)
@@ -939,107 +939,107 @@ LUI.createMenu.Hud_WZ = function(f2_arg0, f2_arg1)
 		else
 		end
 	end, function(element, menu, controller)
-		if IsPC() and IsMouseOrKeyboard(controller) and CoD.GameEndScoreUtility.CanShowWarzoneKillcam(controller) and not IsVisibilityBitSet(controller, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) and not IsDemoPlaying() and not IsInDefaultState(self.GameEndScoreWZ) and CoD.GameEndScoreUtility.HasViewedInGameReport(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], 0xA8BAC035CE51600, nil, "ui_contextual_1")
+		if IsPC() and IsMouseOrKeyboard(controller) and CoD.GameEndScoreUtility.CanShowWarzoneKillcam(controller) and not IsVisibilityBitSet(controller, Enum[@"uivisibilitybit"][@"bit_ui_active"]) and not IsDemoPlaying() and not IsInDefaultState(self.GameEndScoreWZ) and CoD.GameEndScoreUtility.HasViewedInGameReport(controller) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], @"wz/deathcam", nil, "ui_contextual_1")
 			return true
 		else
 			return false
 		end
 	end, false)
-	f2_local1:AddButtonCallbackFunction(self, f2_arg0, Enum[0x3DD78803F918E9D][0x493152B20AE4F58], nil, function(element, menu, controller, model)
-		if CoD.ModelUtility.IsModelValueTrue(controller, "hudItems.inventory.open") and CoD.OptionsUtility.IsProfileIntValue(controller, "warzoneCycleItems", 1) and CoD.OptionsUtility.IsButtonHeal(controller, Enum[0x3DD78803F918E9D][0x493152B20AE4F58]) then
+	f2_local1:AddButtonCallbackFunction(self, f2_arg0, Enum[@"luibutton"][@"lui_key_lb"], nil, function(element, menu, controller, model)
+		if CoD.ModelUtility.IsModelValueTrue(controller, "hudItems.inventory.open") and CoD.OptionsUtility.IsProfileIntValue(controller, "warzoneCycleItems", 1) and CoD.OptionsUtility.IsButtonHeal(controller, Enum[@"luibutton"][@"lui_key_lb"]) then
 			CoD.WZUtility.CycleHealthQuickAccessInventory(menu, controller, model)
 			BlockGameFromKeyEvent(controller)
 			return true
-		elseif CoD.ModelUtility.IsModelValueTrue(controller, "hudItems.inventory.open") and CoD.OptionsUtility.IsProfileIntValue(controller, "warzoneCycleItems", 1) and CoD.OptionsUtility.IsButtonUseEquipment(controller, Enum[0x3DD78803F918E9D][0x493152B20AE4F58]) then
+		elseif CoD.ModelUtility.IsModelValueTrue(controller, "hudItems.inventory.open") and CoD.OptionsUtility.IsProfileIntValue(controller, "warzoneCycleItems", 1) and CoD.OptionsUtility.IsButtonUseEquipment(controller, Enum[@"luibutton"][@"lui_key_lb"]) then
 			CoD.WZUtility.CycleEquipmentQuickAccessInventory(menu, controller, model)
 			BlockGameFromKeyEvent(controller)
 			return true
 		else
 		end
 	end, function(element, menu, controller)
-		if CoD.ModelUtility.IsModelValueTrue(controller, "hudItems.inventory.open") and CoD.OptionsUtility.IsProfileIntValue(controller, "warzoneCycleItems", 1) and CoD.OptionsUtility.IsButtonHeal(controller, Enum[0x3DD78803F918E9D][0x493152B20AE4F58]) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x493152B20AE4F58], 0x0, nil, nil)
+		if CoD.ModelUtility.IsModelValueTrue(controller, "hudItems.inventory.open") and CoD.OptionsUtility.IsProfileIntValue(controller, "warzoneCycleItems", 1) and CoD.OptionsUtility.IsButtonHeal(controller, Enum[@"luibutton"][@"lui_key_lb"]) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_lb"], @"hash_0", nil, nil)
 			return false
-		elseif CoD.ModelUtility.IsModelValueTrue(controller, "hudItems.inventory.open") and CoD.OptionsUtility.IsProfileIntValue(controller, "warzoneCycleItems", 1) and CoD.OptionsUtility.IsButtonUseEquipment(controller, Enum[0x3DD78803F918E9D][0x493152B20AE4F58]) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x493152B20AE4F58], 0x0, nil, nil)
+		elseif CoD.ModelUtility.IsModelValueTrue(controller, "hudItems.inventory.open") and CoD.OptionsUtility.IsProfileIntValue(controller, "warzoneCycleItems", 1) and CoD.OptionsUtility.IsButtonUseEquipment(controller, Enum[@"luibutton"][@"lui_key_lb"]) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_lb"], @"hash_0", nil, nil)
 			return false
 		else
 			return false
 		end
 	end, false)
-	f2_local1:AddButtonCallbackFunction(self, f2_arg0, Enum[0x3DD78803F918E9D][0x49A252B20B48936], nil, function(element, menu, controller, model)
-		if CoD.ModelUtility.IsModelValueTrue(controller, "hudItems.inventory.open") and CoD.OptionsUtility.IsProfileIntValue(controller, "warzoneCycleItems", 1) and CoD.OptionsUtility.IsButtonHeal(controller, Enum[0x3DD78803F918E9D][0x49A252B20B48936]) then
+	f2_local1:AddButtonCallbackFunction(self, f2_arg0, Enum[@"luibutton"][@"lui_key_rb"], nil, function(element, menu, controller, model)
+		if CoD.ModelUtility.IsModelValueTrue(controller, "hudItems.inventory.open") and CoD.OptionsUtility.IsProfileIntValue(controller, "warzoneCycleItems", 1) and CoD.OptionsUtility.IsButtonHeal(controller, Enum[@"luibutton"][@"lui_key_rb"]) then
 			CoD.WZUtility.CycleHealthQuickAccessInventory(menu, controller, model)
 			BlockGameFromKeyEvent(controller)
 			return true
-		elseif CoD.ModelUtility.IsModelValueTrue(controller, "hudItems.inventory.open") and CoD.OptionsUtility.IsProfileIntValue(controller, "warzoneCycleItems", 1) and CoD.OptionsUtility.IsButtonUseEquipment(controller, Enum[0x3DD78803F918E9D][0x49A252B20B48936]) then
+		elseif CoD.ModelUtility.IsModelValueTrue(controller, "hudItems.inventory.open") and CoD.OptionsUtility.IsProfileIntValue(controller, "warzoneCycleItems", 1) and CoD.OptionsUtility.IsButtonUseEquipment(controller, Enum[@"luibutton"][@"lui_key_rb"]) then
 			CoD.WZUtility.CycleEquipmentQuickAccessInventory(menu, controller, model)
 			BlockGameFromKeyEvent(controller)
 			return true
 		else
 		end
 	end, function(element, menu, controller)
-		if CoD.ModelUtility.IsModelValueTrue(controller, "hudItems.inventory.open") and CoD.OptionsUtility.IsProfileIntValue(controller, "warzoneCycleItems", 1) and CoD.OptionsUtility.IsButtonHeal(controller, Enum[0x3DD78803F918E9D][0x49A252B20B48936]) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x49A252B20B48936], 0x0, nil, nil)
+		if CoD.ModelUtility.IsModelValueTrue(controller, "hudItems.inventory.open") and CoD.OptionsUtility.IsProfileIntValue(controller, "warzoneCycleItems", 1) and CoD.OptionsUtility.IsButtonHeal(controller, Enum[@"luibutton"][@"lui_key_rb"]) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_rb"], @"hash_0", nil, nil)
 			return false
-		elseif CoD.ModelUtility.IsModelValueTrue(controller, "hudItems.inventory.open") and CoD.OptionsUtility.IsProfileIntValue(controller, "warzoneCycleItems", 1) and CoD.OptionsUtility.IsButtonUseEquipment(controller, Enum[0x3DD78803F918E9D][0x49A252B20B48936]) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x49A252B20B48936], 0x0, nil, nil)
+		elseif CoD.ModelUtility.IsModelValueTrue(controller, "hudItems.inventory.open") and CoD.OptionsUtility.IsProfileIntValue(controller, "warzoneCycleItems", 1) and CoD.OptionsUtility.IsButtonUseEquipment(controller, Enum[@"luibutton"][@"lui_key_rb"]) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_rb"], @"hash_0", nil, nil)
 			return false
 		else
 			return false
 		end
 	end, false)
-	f2_local1:AddButtonCallbackFunction(self, f2_arg0, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC], nil, function(element, menu, controller, model)
-		if CoD.ModelUtility.IsModelValueTrue(controller, "hudItems.inventory.open") and CoD.OptionsUtility.IsProfileIntValue(controller, "warzoneCycleItems", 1) and CoD.OptionsUtility.IsButtonHeal(controller, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC]) then
+	f2_local1:AddButtonCallbackFunction(self, f2_arg0, Enum[@"luibutton"][@"lui_key_ltrig"], nil, function(element, menu, controller, model)
+		if CoD.ModelUtility.IsModelValueTrue(controller, "hudItems.inventory.open") and CoD.OptionsUtility.IsProfileIntValue(controller, "warzoneCycleItems", 1) and CoD.OptionsUtility.IsButtonHeal(controller, Enum[@"luibutton"][@"lui_key_ltrig"]) then
 			CoD.WZUtility.CycleHealthQuickAccessInventory(menu, controller, model)
 			BlockGameFromKeyEvent(controller)
 			return true
-		elseif CoD.ModelUtility.IsModelValueTrue(controller, "hudItems.inventory.open") and CoD.OptionsUtility.IsProfileIntValue(controller, "warzoneCycleItems", 1) and CoD.OptionsUtility.IsButtonUseEquipment(controller, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC]) then
+		elseif CoD.ModelUtility.IsModelValueTrue(controller, "hudItems.inventory.open") and CoD.OptionsUtility.IsProfileIntValue(controller, "warzoneCycleItems", 1) and CoD.OptionsUtility.IsButtonUseEquipment(controller, Enum[@"luibutton"][@"lui_key_ltrig"]) then
 			CoD.WZUtility.CycleEquipmentQuickAccessInventory(menu, controller, model)
 			BlockGameFromKeyEvent(controller)
 			return true
 		else
 		end
 	end, function(element, menu, controller)
-		if CoD.ModelUtility.IsModelValueTrue(controller, "hudItems.inventory.open") and CoD.OptionsUtility.IsProfileIntValue(controller, "warzoneCycleItems", 1) and CoD.OptionsUtility.IsButtonHeal(controller, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC]) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC], 0x0, nil, nil)
+		if CoD.ModelUtility.IsModelValueTrue(controller, "hudItems.inventory.open") and CoD.OptionsUtility.IsProfileIntValue(controller, "warzoneCycleItems", 1) and CoD.OptionsUtility.IsButtonHeal(controller, Enum[@"luibutton"][@"lui_key_ltrig"]) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_ltrig"], @"hash_0", nil, nil)
 			return false
-		elseif CoD.ModelUtility.IsModelValueTrue(controller, "hudItems.inventory.open") and CoD.OptionsUtility.IsProfileIntValue(controller, "warzoneCycleItems", 1) and CoD.OptionsUtility.IsButtonUseEquipment(controller, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC]) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC], 0x0, nil, nil)
+		elseif CoD.ModelUtility.IsModelValueTrue(controller, "hudItems.inventory.open") and CoD.OptionsUtility.IsProfileIntValue(controller, "warzoneCycleItems", 1) and CoD.OptionsUtility.IsButtonUseEquipment(controller, Enum[@"luibutton"][@"lui_key_ltrig"]) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_ltrig"], @"hash_0", nil, nil)
 			return false
 		else
 			return false
 		end
 	end, false)
-	f2_local1:AddButtonCallbackFunction(self, f2_arg0, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA], nil, function(element, menu, controller, model)
-		if CoD.ModelUtility.IsModelValueTrue(controller, "hudItems.inventory.open") and CoD.OptionsUtility.IsProfileIntValue(controller, "warzoneCycleItems", 1) and CoD.OptionsUtility.IsButtonHeal(controller, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA]) then
+	f2_local1:AddButtonCallbackFunction(self, f2_arg0, Enum[@"luibutton"][@"lui_key_rtrig"], nil, function(element, menu, controller, model)
+		if CoD.ModelUtility.IsModelValueTrue(controller, "hudItems.inventory.open") and CoD.OptionsUtility.IsProfileIntValue(controller, "warzoneCycleItems", 1) and CoD.OptionsUtility.IsButtonHeal(controller, Enum[@"luibutton"][@"lui_key_rtrig"]) then
 			CoD.WZUtility.CycleHealthQuickAccessInventory(menu, controller, model)
 			BlockGameFromKeyEvent(controller)
 			return true
-		elseif CoD.ModelUtility.IsModelValueTrue(controller, "hudItems.inventory.open") and CoD.OptionsUtility.IsProfileIntValue(controller, "warzoneCycleItems", 1) and CoD.OptionsUtility.IsButtonUseEquipment(controller, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA]) then
+		elseif CoD.ModelUtility.IsModelValueTrue(controller, "hudItems.inventory.open") and CoD.OptionsUtility.IsProfileIntValue(controller, "warzoneCycleItems", 1) and CoD.OptionsUtility.IsButtonUseEquipment(controller, Enum[@"luibutton"][@"lui_key_rtrig"]) then
 			CoD.WZUtility.CycleEquipmentQuickAccessInventory(menu, controller, model)
 			BlockGameFromKeyEvent(controller)
 			return true
 		else
 		end
 	end, function(element, menu, controller)
-		if CoD.ModelUtility.IsModelValueTrue(controller, "hudItems.inventory.open") and CoD.OptionsUtility.IsProfileIntValue(controller, "warzoneCycleItems", 1) and CoD.OptionsUtility.IsButtonHeal(controller, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA]) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA], 0x0, nil, nil)
+		if CoD.ModelUtility.IsModelValueTrue(controller, "hudItems.inventory.open") and CoD.OptionsUtility.IsProfileIntValue(controller, "warzoneCycleItems", 1) and CoD.OptionsUtility.IsButtonHeal(controller, Enum[@"luibutton"][@"lui_key_rtrig"]) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_rtrig"], @"hash_0", nil, nil)
 			return false
-		elseif CoD.ModelUtility.IsModelValueTrue(controller, "hudItems.inventory.open") and CoD.OptionsUtility.IsProfileIntValue(controller, "warzoneCycleItems", 1) and CoD.OptionsUtility.IsButtonUseEquipment(controller, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA]) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA], 0x0, nil, nil)
+		elseif CoD.ModelUtility.IsModelValueTrue(controller, "hudItems.inventory.open") and CoD.OptionsUtility.IsProfileIntValue(controller, "warzoneCycleItems", 1) and CoD.OptionsUtility.IsButtonUseEquipment(controller, Enum[@"luibutton"][@"lui_key_rtrig"]) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_rtrig"], @"hash_0", nil, nil)
 			return false
 		else
 			return false
 		end
 	end, false)
-	f2_local1:AddButtonCallbackFunction(self, f2_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
-		if CoD.ModelUtility.IsModelValueTrue(controller, "hudItems.inventory.open") and CoD.OptionsUtility.IsProfileIntValue(controller, "warzoneCycleItems", 1) and CoD.OptionsUtility.IsButtonHeal(controller, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F]) then
+	f2_local1:AddButtonCallbackFunction(self, f2_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
+		if CoD.ModelUtility.IsModelValueTrue(controller, "hudItems.inventory.open") and CoD.OptionsUtility.IsProfileIntValue(controller, "warzoneCycleItems", 1) and CoD.OptionsUtility.IsButtonHeal(controller, Enum[@"luibutton"][@"lui_key_xba_pscross"]) then
 			CoD.WZUtility.CycleHealthQuickAccessInventory(menu, controller, model)
 			BlockGameFromKeyEvent(controller)
 			return true
-		elseif IsPC() and IsGamepad(controller) and CoD.GameEndScoreUtility.CanShowWarzoneKillcam(controller) and not IsVisibilityBitSet(controller, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) and not IsDemoPlaying() and not IsInDefaultState(self.GameEndScoreWZ) and CoD.GameEndScoreUtility.HasViewedInGameReport(controller) then
+		elseif IsPC() and IsGamepad(controller) and CoD.GameEndScoreUtility.CanShowWarzoneKillcam(controller) and not IsVisibilityBitSet(controller, Enum[@"uivisibilitybit"][@"bit_ui_active"]) and not IsDemoPlaying() and not IsInDefaultState(self.GameEndScoreWZ) and CoD.GameEndScoreUtility.HasViewedInGameReport(controller) then
 			LockInput(self, controller, false)
 			SetAllowCursorMovement(menu, false)
 			SendMenuResponse(self, "GameEndScore", "play_deathcam", controller)
@@ -1050,17 +1050,17 @@ LUI.createMenu.Hud_WZ = function(f2_arg0, f2_arg1)
 		else
 		end
 	end, function(element, menu, controller)
-		if CoD.ModelUtility.IsModelValueTrue(controller, "hudItems.inventory.open") and CoD.OptionsUtility.IsProfileIntValue(controller, "warzoneCycleItems", 1) and CoD.OptionsUtility.IsButtonHeal(controller, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F]) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, nil)
+		if CoD.ModelUtility.IsModelValueTrue(controller, "hudItems.inventory.open") and CoD.OptionsUtility.IsProfileIntValue(controller, "warzoneCycleItems", 1) and CoD.OptionsUtility.IsButtonHeal(controller, Enum[@"luibutton"][@"lui_key_xba_pscross"]) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, nil)
 			return false
-		elseif IsPC() and IsGamepad(controller) and CoD.GameEndScoreUtility.CanShowWarzoneKillcam(controller) and not IsVisibilityBitSet(controller, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) and not IsDemoPlaying() and not IsInDefaultState(self.GameEndScoreWZ) and CoD.GameEndScoreUtility.HasViewedInGameReport(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, nil)
+		elseif IsPC() and IsGamepad(controller) and CoD.GameEndScoreUtility.CanShowWarzoneKillcam(controller) and not IsVisibilityBitSet(controller, Enum[@"uivisibilitybit"][@"bit_ui_active"]) and not IsDemoPlaying() and not IsInDefaultState(self.GameEndScoreWZ) and CoD.GameEndScoreUtility.HasViewedInGameReport(controller) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, nil)
 			return false
 		else
 			return false
 		end
 	end, false)
-	f2_local1:AddButtonCallbackFunction(self, f2_arg0, Enum[0x3DD78803F918E9D][0x6CE8023188D673F], "ui_remove", function(element, menu, controller, model)
+	f2_local1:AddButtonCallbackFunction(self, f2_arg0, Enum[@"luibutton"][@"lui_key_lstick_pressed"], "ui_remove", function(element, menu, controller, model)
 		if IsPC() and CanReportPlayerEndGameWarzone(self, controller) and not IsElementInState(self.GameEndScoreWZ, "DefaultState") then
 			ShowReportPlayerDialogTargetingKiller(self, controller)
 			return true
@@ -1068,7 +1068,7 @@ LUI.createMenu.Hud_WZ = function(f2_arg0, f2_arg1)
 		end
 	end, function(element, menu, controller)
 		if IsPC() and CanReportPlayerEndGameWarzone(self, controller) and not IsElementInState(self.GameEndScoreWZ, "DefaultState") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x6CE8023188D673F], 0x74834ABE9827A3, nil, "ui_remove")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_lstick_pressed"], @"menu/report_player", nil, "ui_remove")
 			return true
 		else
 			return false
@@ -1082,7 +1082,7 @@ LUI.createMenu.Hud_WZ = function(f2_arg0, f2_arg1)
 	end)
 	self:subscribeToGlobalModel(f2_arg0, "PerController", "scriptNotify", function(model)
 		local f108_local0 = self
-		if CoD.ModelUtility.IsParamModelEqualToHashString(model, 0xABC0876FC41CC7F) then
+		if CoD.ModelUtility.IsParamModelEqualToHashString(model, @"character_unlock_update") then
 			CoD.WZUtility.UpdateUnlockQuestState(f2_arg0, model)
 		end
 	end)
@@ -1117,7 +1117,7 @@ LUI.createMenu.Hud_WZ = function(f2_arg0, f2_arg1)
 	f2_local16 = self
 	if IsPC() then
 		SetProperty(self, "preserveLuiButton", {
-			[Enum[0x3DD78803F918E9D][0x93AB4C84F113EE1]] = true,
+			[Enum[@"luibutton"][@"lui_key_back"]] = true,
 		})
 		SetAllowCursorMovement(f2_local1, false)
 		CoD.HUDUtility.SetupGrenadeWarningIndicators(self, f2_arg0)
@@ -1132,7 +1132,7 @@ LUI.createMenu.Hud_WZ = function(f2_arg0, f2_arg1)
 		SizeToHudArea(self.ReadyEvents, f2_arg0)
 	else
 		SetProperty(self, "preserveLuiButton", {
-			[Enum[0x3DD78803F918E9D][0x93AB4C84F113EE1]] = true,
+			[Enum[@"luibutton"][@"lui_key_back"]] = true,
 		})
 		SetAllowCursorMovement(f2_local1, false)
 		CoD.HUDUtility.SetupGrenadeWarningIndicators(self, f2_arg0)

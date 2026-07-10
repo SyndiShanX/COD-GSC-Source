@@ -11,11 +11,11 @@ CoD.LeaguePlayYouPlaced.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	YouPlacedText:setRGB(ColorSet.T8__OFF__GRAY.r, ColorSet.T8__OFF__GRAY.g, ColorSet.T8__OFF__GRAY.b)
 	YouPlacedText:setTTF("ttmussels_regular")
 	YouPlacedText:setLetterSpacing(4)
-	YouPlacedText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	YouPlacedText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	YouPlacedText:linkToElementModel(self, "lastLadderRank", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			YouPlacedText:setText(ConvertToUpperString(LocalizeIntoString(0xFCF27ACCC4CD185, f2_local0)))
+			YouPlacedText:setText(ConvertToUpperString(LocalizeIntoString(@"hash_1FCF27ACCC4CD185", f2_local0)))
 		end
 	end)
 	self:addElement(YouPlacedText)
@@ -24,7 +24,7 @@ CoD.LeaguePlayYouPlaced.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	YouPlacedText2:setRGB(ColorSet.T8__OFF__GRAY.r, ColorSet.T8__OFF__GRAY.g, ColorSet.T8__OFF__GRAY.b)
 	YouPlacedText2:setTTF("ttmussels_regular")
 	YouPlacedText2:setLetterSpacing(4)
-	YouPlacedText2:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	YouPlacedText2:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	YouPlacedText2:linkToElementModel(self, "lastLadderRank", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then

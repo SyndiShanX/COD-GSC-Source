@@ -47,7 +47,7 @@ CoD.AARSummaryTab.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 	})
 	local f1_local4 = self
 	local f1_local5 = self.subscribeToModel
-	local f1_local6 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local6 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local5(f1_local4, f1_local6["AAR.activeTab"], function(f6_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -59,7 +59,7 @@ CoD.AARSummaryTab.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 	end, false)
 	f1_local4 = self
 	f1_local5 = self.subscribeToModel
-	f1_local6 = Engine[0x8DF2E5447F384B9]()
+	f1_local6 = Engine[@"getglobalmodel"]()
 	f1_local5(f1_local4, f1_local6["lobbyRoot.lobbyNav"], function(f7_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -109,7 +109,7 @@ CoD.AARSummaryTab.__clipsPerState = {
 			f11_arg0:__resetProperties()
 			f11_arg0:setupElementClipCounter(2)
 			local f11_local0 = function(f12_arg0)
-				f11_arg0.AarMpBacking:beginAnimation(150, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f11_arg0.AarMpBacking:beginAnimation(150, Enum[@"luitween"][@"luitween_ease_in"])
 				f11_arg0.AarMpBacking:setAlpha(1)
 				f11_arg0.AarMpBacking:registerEventHandler("interrupted_keyframe", f11_arg0.clipInterrupted)
 				f11_arg0.AarMpBacking:registerEventHandler("transition_complete_keyframe", f11_arg0.clipFinished)
@@ -140,7 +140,7 @@ CoD.AARSummaryTab.__clipsPerState = {
 			f15_arg0:__resetProperties()
 			f15_arg0:setupElementClipCounter(2)
 			local f15_local0 = function(f16_arg0)
-				f15_arg0.AarMpBacking:beginAnimation(150, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f15_arg0.AarMpBacking:beginAnimation(150, Enum[@"luitween"][@"luitween_ease_in"])
 				f15_arg0.AarMpBacking:setAlpha(1)
 				f15_arg0.AarMpBacking:registerEventHandler("interrupted_keyframe", f15_arg0.clipInterrupted)
 				f15_arg0.AarMpBacking:registerEventHandler("transition_complete_keyframe", f15_arg0.clipFinished)

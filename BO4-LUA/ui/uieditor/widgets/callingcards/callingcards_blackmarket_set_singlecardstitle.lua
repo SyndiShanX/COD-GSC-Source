@@ -36,10 +36,10 @@ CoD.CallingCards_BlackMarket_Set_SingleCardsTitle.new = function(f1_arg0, f1_arg
 	self:addElement(newIcon)
 	self.newIcon = newIcon
 	local SingleCardsTitle = LUI.UIText.new(0, 0, 0, 350, 0, 0, 0, 37)
-	SingleCardsTitle:setText(LocalizeToUpperString(0xDB6CD62FFFD0EEF))
+	SingleCardsTitle:setText(LocalizeToUpperString(@"hash_7DB6CD62FFFD0EEF"))
 	SingleCardsTitle:setTTF("ttmussels_demibold")
-	SingleCardsTitle:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	SingleCardsTitle:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	SingleCardsTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	SingleCardsTitle:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	self:addElement(SingleCardsTitle)
 	self.SingleCardsTitle = SingleCardsTitle
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)

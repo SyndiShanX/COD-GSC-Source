@@ -32,8 +32,8 @@ CoD.ScoreboardGameStatusScores.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	self.LightBarHero = LightBarHero
 	local stripeHero = LUI.UIImage.new(0.5, 0.5, -6460, -460, 0, 0, 161, 169)
 	stripeHero:setAlpha(0.5)
-	stripeHero:setImage(RegisterImage(0x87FBA6ED8287E8B))
-	stripeHero:setMaterial(LUI.UIImage.GetCachedMaterial(0x6E9593DF28749F2))
+	stripeHero:setImage(RegisterImage(@"hash_287FBA6ED8287E8B"))
+	stripeHero:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_6E9593DF28749F2"))
 	stripeHero:setShaderVector(0, 12.82, 1, 0, 0)
 	stripeHero:setShaderVector(1, 0, 1, 0, 1)
 	self:addElement(stripeHero)
@@ -80,7 +80,7 @@ CoD.ScoreboardGameStatusScores.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	self:addElement(GameTypeStat1)
 	self.GameTypeStat1 = GameTypeStat1
 	local CoreStat2 = CoD.ScoreboardCoreStat.new(f1_arg0, f1_arg1, 0, 0, 664.5, 740.5, 0, 0, 76.5, 127.5)
-	CoreStat2.StatName:setText(Engine[0xF9F1239CFD921FE](0x297A0D6FB981600))
+	CoreStat2.StatName:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_5297A0D6FB981600"))
 	CoreStat2:linkToElementModel(self, "scoreboard.deaths", true, function(model)
 		local f7_local0 = model:get()
 		if f7_local0 ~= nil then
@@ -90,7 +90,7 @@ CoD.ScoreboardGameStatusScores.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	self:addElement(CoreStat2)
 	self.CoreStat2 = CoreStat2
 	local CoreStat1 = CoD.ScoreboardCoreStat.new(f1_arg0, f1_arg1, 0, 0, 558.5, 634.5, 0, 0, 76.5, 127.5)
-	CoreStat1.StatName:setText(Engine[0xF9F1239CFD921FE](0xB2C7E74787B96E9))
+	CoreStat1.StatName:setText(Engine[@"hash_4F9F1239CFD921FE"](@"mpui/ekia"))
 	CoreStat1:linkToElementModel(self, "scoreboard.ekia", true, function(model)
 		local f8_local0 = model:get()
 		if f8_local0 ~= nil then
@@ -104,7 +104,7 @@ CoD.ScoreboardGameStatusScores.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	StatValue:setAlpha(0.7)
 	StatValue:setTTF("0arame_mono_stencil")
 	StatValue:setLetterSpacing(2)
-	StatValue:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	StatValue:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	StatValue:setBackingType(2)
 	StatValue:setBackingColor(0.05, 0.05, 0.05)
 	StatValue:setBackingAlpha(0.6)
@@ -123,7 +123,7 @@ CoD.ScoreboardGameStatusScores.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	StatValueSas:setAlpha(0)
 	StatValueSas:setTTF("0arame_mono_stencil")
 	StatValueSas:setLetterSpacing(2)
-	StatValueSas:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	StatValueSas:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	StatValueSas:setBackingType(2)
 	StatValueSas:setBackingColor(0.05, 0.05, 0.05)
 	StatValueSas:setBackingAlpha(0.6)
@@ -142,7 +142,7 @@ CoD.ScoreboardGameStatusScores.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	StatValueBounty:setAlpha(0)
 	StatValueBounty:setTTF("0arame_mono_stencil")
 	StatValueBounty:setLetterSpacing(2)
-	StatValueBounty:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	StatValueBounty:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	StatValueBounty:setBackingType(2)
 	StatValueBounty:setBackingColor(0.05, 0.05, 0.05)
 	StatValueBounty:setBackingAlpha(0.6)
@@ -161,7 +161,7 @@ CoD.ScoreboardGameStatusScores.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	StatValueHardpoint:setAlpha(0)
 	StatValueHardpoint:setTTF("0arame_mono_stencil")
 	StatValueHardpoint:setLetterSpacing(2)
-	StatValueHardpoint:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	StatValueHardpoint:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	StatValueHardpoint:setBackingType(2)
 	StatValueHardpoint:setBackingColor(0.05, 0.05, 0.05)
 	StatValueHardpoint:setBackingAlpha(0.6)
@@ -177,17 +177,17 @@ CoD.ScoreboardGameStatusScores.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	self.StatValueHardpoint = StatValueHardpoint
 	local StatName = LUI.UIText.new(0, 0, 866.5, 942.5, 0, 0, 76.5, 97.5)
 	StatName:setRGB(0.92, 0.89, 0.72)
-	StatName:setText(Engine[0xF9F1239CFD921FE](0x4478A903275510A))
+	StatName:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_24478A903275510A"))
 	StatName:setTTF("ttmussels_regular")
 	StatName:setLetterSpacing(2)
-	StatName:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	StatName:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	self:addElement(StatName)
 	self.StatName = StatName
 	local SpecialistName = LUI.UIText.new(0, 0, 243, 443, 0, 0, 95, 116)
 	SpecialistName:setTTF("ttmussels_demibold")
 	SpecialistName:setLetterSpacing(2)
-	SpecialistName:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	SpecialistName:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	SpecialistName:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	SpecialistName:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	SpecialistName:setBackingType(2)
 	SpecialistName:setBackingColor(0, 0, 0)
 	SpecialistName:setBackingAlpha(0.9)
@@ -196,22 +196,22 @@ CoD.ScoreboardGameStatusScores.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	SpecialistName:linkToElementModel(self, "scoreboard.characterIndex", true, function(model)
 		local f13_local0 = model:get()
 		if f13_local0 ~= nil then
-			SpecialistName:setText(Engine[0xF9F1239CFD921FE](GetCharacterDisplayNameByIndex(f13_local0)))
+			SpecialistName:setText(Engine[@"hash_4F9F1239CFD921FE"](GetCharacterDisplayNameByIndex(f13_local0)))
 		end
 	end)
 	self:addElement(SpecialistName)
 	self.SpecialistName = SpecialistName
 	local PipRT = LUI.UIImage.new(0.5, 0.5, 920, 936, 0, 0, 77.5, 93.5)
 	PipRT:setScale(2, 2)
-	PipRT:setImage(RegisterImage(0x34B575F15CDD376))
-	PipRT:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	PipRT:setImage(RegisterImage(@"hash_634B575F15CDD376"))
+	PipRT:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(PipRT)
 	self.PipRT = PipRT
 	local PipLT = LUI.UIImage.new(0.5, 0.5, -940, -924, 0, 0, 77.5, 93.5)
 	PipLT:setZRot(90)
 	PipLT:setScale(2, 2)
-	PipLT:setImage(RegisterImage(0x34B575F15CDD376))
-	PipLT:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	PipLT:setImage(RegisterImage(@"hash_634B575F15CDD376"))
+	PipLT:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(PipLT)
 	self.PipLT = PipLT
 	local ScoreboardButtonPrompts = CoD.ScoreboardButtonPrompts.new(f1_arg0, f1_arg1, 0, 0, 1624, 1880, 0, 0, 65.5, 154.5)
@@ -228,18 +228,18 @@ CoD.ScoreboardGameStatusScores.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	self:addElement(PlayerName)
 	self.PlayerName = PlayerName
 	local InfoDivider1 = LUI.UIImage.new(0, 0, 498, 502, 0, 0, 64, 156)
-	InfoDivider1:setImage(RegisterImage(0x6DDA4086EA0EF02))
-	InfoDivider1:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	InfoDivider1:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_info_divider"))
+	InfoDivider1:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(InfoDivider1)
 	self.InfoDivider1 = InfoDivider1
 	local InfoDivider3 = LUI.UIImage.new(0, 0, 1003, 1007, 0, 0, 64, 156)
-	InfoDivider3:setImage(RegisterImage(0x6DDA4086EA0EF02))
-	InfoDivider3:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	InfoDivider3:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_info_divider"))
+	InfoDivider3:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(InfoDivider3)
 	self.InfoDivider3 = InfoDivider3
 	local InfoDivider2 = LUI.UIImage.new(0, 0, 801, 805, 0, 0, 64, 156)
-	InfoDivider2:setImage(RegisterImage(0x6DDA4086EA0EF02))
-	InfoDivider2:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	InfoDivider2:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_info_divider"))
+	InfoDivider2:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(InfoDivider2)
 	self.InfoDivider2 = InfoDivider2
 	self:mergeStateConditions({
@@ -355,7 +355,7 @@ CoD.ScoreboardGameStatusScores.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	})
 	local f1_local24 = self
 	local f1_local25 = self.subscribeToModel
-	local f1_local26 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local26 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local25(f1_local24, f1_local26["factions.isCoDCaster"], function(f33_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -367,7 +367,7 @@ CoD.ScoreboardGameStatusScores.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	end, false)
 	f1_local24 = self
 	f1_local25 = self.subscribeToModel
-	f1_local26 = Engine[0x8DF2E5447F384B9]()
+	f1_local26 = Engine[@"getglobalmodel"]()
 	f1_local25(f1_local24, f1_local26["scoreboard.team1.count"], function(f34_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -379,7 +379,7 @@ CoD.ScoreboardGameStatusScores.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	end, false)
 	f1_local24 = self
 	f1_local25 = self.subscribeToModel
-	f1_local26 = Engine[0x8DF2E5447F384B9]()
+	f1_local26 = Engine[@"getglobalmodel"]()
 	f1_local25(f1_local24, f1_local26["scoreboard.team2.count"], function(f35_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -452,7 +452,7 @@ CoD.ScoreboardGameStatusScores.__resetProperties = function(f38_arg0, f38_arg1)
 	f38_arg0.SpecialistName:setAlpha(1)
 	f38_arg0.StatName:setLeftRight(0, 0, 866.5, 942.5)
 	f38_arg0.StatName:setAlpha(1)
-	f38_arg0.StatName:setText(Engine[0xF9F1239CFD921FE](0x4478A903275510A))
+	f38_arg0.StatName:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_24478A903275510A"))
 	f38_arg0.StatValueHardpoint:setAlpha(0)
 	f38_arg0.StatValueBounty:setAlpha(0)
 	f38_arg0.StatValue:setLeftRight(0, 0, 866.5, 942.5)
@@ -643,7 +643,7 @@ CoD.ScoreboardGameStatusScores.__clipsPerState = {
 			f43_arg0.GameTypeStat1:setTopBottom(0, 0, 97.5, 118.5)
 			f43_arg0.clipFinished(f43_arg0.GameTypeStat1)
 			f43_arg0.StatName:completeAnimation()
-			f43_arg0.StatName:setText(Engine[0xF9F1239CFD921FE](0x9B521FC58C6C10A))
+			f43_arg0.StatName:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_49B521FC58C6C10A"))
 			f43_arg0.clipFinished(f43_arg0.StatName)
 		end,
 	},
@@ -697,7 +697,7 @@ CoD.ScoreboardGameStatusScores.__clipsPerState = {
 			f46_arg0.StatValueHardpoint:setAlpha(0.7)
 			f46_arg0.clipFinished(f46_arg0.StatValueHardpoint)
 			f46_arg0.StatName:completeAnimation()
-			f46_arg0.StatName:setText(Engine[0xF9F1239CFD921FE](0xEAAF992DCD56393))
+			f46_arg0.StatName:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_3EAAF992DCD56393"))
 			f46_arg0.clipFinished(f46_arg0.StatName)
 		end,
 	},
@@ -745,7 +745,7 @@ CoD.ScoreboardGameStatusScores.__clipsPerState = {
 			f49_arg0.clipFinished(f49_arg0.StatValue)
 			f49_arg0.StatName:completeAnimation()
 			f49_arg0.StatName:setLeftRight(0, 0, 565.5, 641.5)
-			f49_arg0.StatName:setText(Engine[0xF9F1239CFD921FE](0x9B521FC58C6C10A))
+			f49_arg0.StatName:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_49B521FC58C6C10A"))
 			f49_arg0.clipFinished(f49_arg0.StatName)
 			f49_arg0.InfoDivider3:completeAnimation()
 			f49_arg0.InfoDivider3:setLeftRight(0, 0, 702, 706)
@@ -781,7 +781,7 @@ CoD.ScoreboardGameStatusScores.__clipsPerState = {
 			f50_arg0.clipFinished(f50_arg0.StatValue)
 			f50_arg0.StatName:completeAnimation()
 			f50_arg0.StatName:setLeftRight(0, 0, 565.5, 641.5)
-			f50_arg0.StatName:setText(Engine[0xF9F1239CFD921FE](0x9B521FC58C6C10A))
+			f50_arg0.StatName:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_49B521FC58C6C10A"))
 			f50_arg0.clipFinished(f50_arg0.StatName)
 			f50_arg0.InfoDivider3:completeAnimation()
 			f50_arg0.InfoDivider3:setLeftRight(0, 0, 702, 706)
@@ -826,7 +826,7 @@ CoD.ScoreboardGameStatusScores.__clipsPerState = {
 			f52_arg0.GameTypeStat1:setAlpha(0)
 			f52_arg0.clipFinished(f52_arg0.GameTypeStat1)
 			f52_arg0.StatName:completeAnimation()
-			f52_arg0.StatName:setText(Engine[0xF9F1239CFD921FE](0x9B521FC58C6C10A))
+			f52_arg0.StatName:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_49B521FC58C6C10A"))
 			f52_arg0.clipFinished(f52_arg0.StatName)
 		end,
 	},
@@ -850,7 +850,7 @@ CoD.ScoreboardGameStatusScores.__clipsPerState = {
 			f53_arg0.StatValueSas:setAlpha(0.7)
 			f53_arg0.clipFinished(f53_arg0.StatValueSas)
 			f53_arg0.StatName:completeAnimation()
-			f53_arg0.StatName:setText(Engine[0xF9F1239CFD921FE](0x9B521FC58C6C10A))
+			f53_arg0.StatName:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_49B521FC58C6C10A"))
 			f53_arg0.clipFinished(f53_arg0.StatName)
 		end,
 	},
@@ -896,7 +896,7 @@ CoD.ScoreboardGameStatusScores.__clipsPerState = {
 			f55_arg0.StatValueHardpoint:setAlpha(0.7)
 			f55_arg0.clipFinished(f55_arg0.StatValueHardpoint)
 			f55_arg0.StatName:completeAnimation()
-			f55_arg0.StatName:setText(Engine[0xF9F1239CFD921FE](0x9B521FC58C6C10A))
+			f55_arg0.StatName:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_49B521FC58C6C10A"))
 			f55_arg0.clipFinished(f55_arg0.StatName)
 		end,
 	},
@@ -927,7 +927,7 @@ CoD.ScoreboardGameStatusScores.__clipsPerState = {
 			f56_arg0.StatValueHardpoint:setAlpha(0.7)
 			f56_arg0.clipFinished(f56_arg0.StatValueHardpoint)
 			f56_arg0.StatName:completeAnimation()
-			f56_arg0.StatName:setText(Engine[0xF9F1239CFD921FE](0x9B521FC58C6C10A))
+			f56_arg0.StatName:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_49B521FC58C6C10A"))
 			f56_arg0.clipFinished(f56_arg0.StatName)
 		end,
 	},

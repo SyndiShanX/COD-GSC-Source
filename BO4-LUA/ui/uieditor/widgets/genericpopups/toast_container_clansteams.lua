@@ -30,13 +30,13 @@ CoD.Toast_Container_ClansTeams.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	NotifText:linkToElementModel(self, "description", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
-			NotifText.NotifText:setText(Engine[0xF9F1239CFD921FE](f3_local0))
+			NotifText.NotifText:setText(Engine[@"hash_4F9F1239CFD921FE"](f3_local0))
 		end
 	end)
 	NotifText:linkToElementModel(self, "kicker", true, function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
-			NotifText.NotifTextMain:setText(Engine[0xF9F1239CFD921FE](f4_local0))
+			NotifText.NotifTextMain:setText(Engine[@"hash_4F9F1239CFD921FE"](f4_local0))
 		end
 	end)
 	self:addElement(NotifText)

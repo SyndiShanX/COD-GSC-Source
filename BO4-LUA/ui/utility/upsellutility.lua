@@ -28,7 +28,7 @@ local f0_local0 = {
 	},
 }
 local f0_local1 = function(f1_arg0)
-	return Engine[0x527869BC50E125D](f1_arg0)
+	return Engine[@"hash_6527869BC50E125D"](f1_arg0)
 end
 local f0_local2 = function(f2_arg0)
 	local f2_local0 = f0_local1(f2_arg0)

@@ -38,7 +38,7 @@ CoD.AARSquadSummary.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	SquadList:setTopBottom(0, 0, 227, 513)
 	SquadList:setWidgetType(CoD.AARSquadRow)
 	SquadList:setVerticalCount(4)
-	SquadList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	SquadList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	SquadList:setDataSource("AARSquadStats")
 	self:addElement(SquadList)
 	self.SquadList = SquadList
@@ -58,16 +58,16 @@ CoD.AARSquadSummary.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	local TopBracket = LUI.UIImage.new(0.5, 0.5, -641, 641, 0, 0, 215, 224)
 	TopBracket:setAlpha(0)
 	TopBracket:setZRot(180)
-	TopBracket:setImage(RegisterImage(0xC325BED3F226657))
-	TopBracket:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	TopBracket:setImage(RegisterImage(@"hash_4C325BED3F226657"))
+	TopBracket:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	TopBracket:setShaderVector(0, 0, 0, 0, 0)
 	TopBracket:setupNineSliceShader(16, 4)
 	self:addElement(TopBracket)
 	self.TopBracket = TopBracket
 	local BottomBracket = LUI.UIImage.new(0.5, 0.5, -641, 641, 0, 0, 517, 526)
 	BottomBracket:setAlpha(0)
-	BottomBracket:setImage(RegisterImage(0xC325BED3F226657))
-	BottomBracket:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	BottomBracket:setImage(RegisterImage(@"hash_4C325BED3F226657"))
+	BottomBracket:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	BottomBracket:setShaderVector(0, 0, 0, 0, 0)
 	BottomBracket:setupNineSliceShader(16, 4)
 	self:addElement(BottomBracket)
@@ -75,8 +75,8 @@ CoD.AARSquadSummary.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	local dotline = LUI.UIImage.new(0, 0, 320, 1600, 0, 0, 141, 145)
 	dotline:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	dotline:setAlpha(0)
-	dotline:setImage(RegisterImage(0xF9C7F41C631866E))
-	dotline:setMaterial(LUI.UIImage.GetCachedMaterial(0x6E9593DF28749F2))
+	dotline:setImage(RegisterImage(@"uie_ui_menu_social_emblem_dotline"))
+	dotline:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_6E9593DF28749F2"))
 	dotline:setShaderVector(0, 1.8, 1, 0, 0)
 	dotline:setShaderVector(1, 0, 1, 0, 1)
 	self:addElement(dotline)
@@ -91,7 +91,7 @@ CoD.AARSquadSummary.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	})
 	local f1_local11 = self
 	local f1_local12 = self.subscribeToModel
-	local f1_local13 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local13 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local12(f1_local11, f1_local13["AAR.activeTab"], function(f4_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

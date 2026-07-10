@@ -15,14 +15,14 @@ CoD.DirectorCustomGameMember.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local SceneBlur = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	SceneBlur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	SceneBlur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	SceneBlur:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(SceneBlur)
 	self.SceneBlur = SceneBlur
 	local PixelGrid = LUI.UIImage.new(0, 1, 0, 0, -0.31, 1, 12, 0)
 	PixelGrid:setAlpha(0.35)
-	PixelGrid:setImage(RegisterImage(0x311E811A3183347))
-	PixelGrid:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	PixelGrid:setImage(RegisterImage(@"uie_ui_hud_notifications_pixelpattern"))
+	PixelGrid:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	PixelGrid:setShaderVector(0, 0, 0, 0, 0)
 	PixelGrid:setupNineSliceShader(128, 128)
 	self:addElement(PixelGrid)
@@ -37,7 +37,7 @@ CoD.DirectorCustomGameMember.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	self.EmptyBacking = EmptyBacking
 	local TeamColorBacking = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	TeamColorBacking:setAlpha(0.05)
-	TeamColorBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	TeamColorBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	TeamColorBacking.__Color = function(f3_arg0)
 		local f3_local0 = f3_arg0:get()
 		if f3_local0 ~= nil then
@@ -188,8 +188,8 @@ CoD.DirectorCustomGameMember.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	self.emptyFocusable = emptyFocusable
 	local FrontendFrame02 = LUI.UIImage.new(0, 1, -2, 2, 0, 1, -2, 2)
 	FrontendFrame02:setAlpha(0.2)
-	FrontendFrame02:setImage(RegisterImage(0x185E11D74ECA3D7))
-	FrontendFrame02:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	FrontendFrame02:setImage(RegisterImage(@"uie_ui_menu_store_common_frame"))
+	FrontendFrame02:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	FrontendFrame02:setShaderVector(0, 0, 0, 0, 0)
 	FrontendFrame02:setupNineSliceShader(12, 12)
 	self:addElement(FrontendFrame02)
@@ -198,16 +198,16 @@ CoD.DirectorCustomGameMember.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	SelectedOverlay = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	SelectedOverlay:setRGB(ColorSet.T8__BEIGE__HEADER.r, ColorSet.T8__BEIGE__HEADER.g, ColorSet.T8__BEIGE__HEADER.b)
 	SelectedOverlay:setAlpha(0)
-	SelectedOverlay:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	SelectedOverlay:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(SelectedOverlay)
 	self.SelectedOverlay = SelectedOverlay
 	local f1_local20 = EmptyBacking
 	local f1_local21 = EmptyBacking.subscribeToModel
-	local f1_local22 = Engine[0x8DF2E5447F384B9]()
+	local f1_local22 = Engine[@"getglobalmodel"]()
 	f1_local21(f1_local20, f1_local22["MapVote.mapVoteGameModeNext"], EmptyBacking.__Color)
 	f1_local20 = TeamColorBacking
 	f1_local21 = TeamColorBacking.subscribeToModel
-	f1_local22 = Engine[0x8DF2E5447F384B9]()
+	f1_local22 = Engine[@"getglobalmodel"]()
 	f1_local21(f1_local20, f1_local22["MapVote.mapVoteGameModeNext"], TeamColorBacking.__Color_FullPath)
 	self:mergeStateConditions({
 		{
@@ -234,7 +234,7 @@ CoD.DirectorCustomGameMember.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	end)
 	f1_local20 = self
 	f1_local21 = self.subscribeToModel
-	f1_local22 = Engine[0x8DF2E5447F384B9]()
+	f1_local22 = Engine[@"getglobalmodel"]()
 	f1_local21(f1_local20, f1_local22["lobbyRoot.lobbyNav"], function(f17_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -444,7 +444,7 @@ CoD.DirectorCustomGameMember.__clipsPerState = {
 			f27_arg0.VoipWaves:setAlpha(0)
 			f27_arg0.clipFinished(f27_arg0.VoipWaves)
 			local f27_local0 = function(f28_arg0)
-				f27_arg0.DirectorCustomStartButton:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f27_arg0.DirectorCustomStartButton:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f27_arg0.DirectorCustomStartButton:setScale(1.05, 1.05)
 				f27_arg0.DirectorCustomStartButton:registerEventHandler("interrupted_keyframe", f27_arg0.clipInterrupted)
 				f27_arg0.DirectorCustomStartButton:registerEventHandler("transition_complete_keyframe", f27_arg0.clipFinished)
@@ -491,7 +491,7 @@ CoD.DirectorCustomGameMember.__clipsPerState = {
 			f29_arg0.VoipWaves:setAlpha(0)
 			f29_arg0.clipFinished(f29_arg0.VoipWaves)
 			local f29_local0 = function(f30_arg0)
-				f29_arg0.DirectorCustomStartButton:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f29_arg0.DirectorCustomStartButton:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f29_arg0.DirectorCustomStartButton:setScale(1, 1)
 				f29_arg0.DirectorCustomStartButton:registerEventHandler("interrupted_keyframe", f29_arg0.clipInterrupted)
 				f29_arg0.DirectorCustomStartButton:registerEventHandler("transition_complete_keyframe", f29_arg0.clipFinished)

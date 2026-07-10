@@ -18,7 +18,7 @@ CoD.CodCasterButtonPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	self:addElement(progressRing)
 	self.progressRing = progressRing
 	local buttonPromptImage = LUI.UIImage.new(0, 0, 42, 72, 0, 0, 9, 39)
-	buttonPromptImage:setMaterial(LUI.UIImage.GetCachedMaterial(0x67D1E3A3D2D1BF))
+	buttonPromptImage:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_saturation_normal"))
 	buttonPromptImage:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(buttonPromptImage)
 	self.buttonPromptImage = buttonPromptImage
@@ -29,7 +29,7 @@ CoD.CodCasterButtonPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	local label = LUI.UIText.new(0, 0, 108, 177, 0, 0, 14, 34)
 	label:setTTF("ttmussels_regular")
 	label:setLetterSpacing(6)
-	label:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	label:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	label:linkToElementModel(self, "Label", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -45,13 +45,13 @@ CoD.CodCasterButtonPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 		{
 			stateName = "Disabled",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "", Enum[0xF4865E3551C3835][0x42F62C12777D074]) and not CoD.FreeCursorUtility.ShowingContextualPromptForFlags(element, f1_arg1)
+				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "", Enum[@"luibuttonpromptstates"][@"flag_disable_prompts"]) and not CoD.FreeCursorUtility.ShowingContextualPromptForFlags(element, f1_arg1)
 			end,
 		},
 		{
 			stateName = "Enabled",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "", Enum[0xF4865E3551C3835][0x901DFC093ED4187]) and not CoD.FreeCursorUtility.ShowingContextualPromptForFlags(element, f1_arg1)
+				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "", Enum[@"luibuttonpromptstates"][@"flag_enable_prompts"]) and not CoD.FreeCursorUtility.ShowingContextualPromptForFlags(element, f1_arg1)
 			end,
 		},
 		{
@@ -63,7 +63,7 @@ CoD.CodCasterButtonPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 		{
 			stateName = "Gamepad",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "", Enum[0xF4865E3551C3835][0x901DFC093ED4187]) and not CoD.FreeCursorUtility.ShowingContextualPromptForFlags(element, f1_arg1)
+				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "", Enum[@"luibuttonpromptstates"][@"flag_enable_prompts"]) and not CoD.FreeCursorUtility.ShowingContextualPromptForFlags(element, f1_arg1)
 			end,
 		},
 	})
@@ -102,7 +102,7 @@ CoD.CodCasterButtonPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	end, false)
 	f1_local5 = self
 	f1_local6 = self.subscribeToModel
-	f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local6(f1_local5, f1_local7.activeKeys, function(f12_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -169,7 +169,7 @@ CoD.CodCasterButtonPrompt.__resetProperties = function(f18_arg0)
 	f18_arg0.KeyPrompt:completeAnimation()
 	f18_arg0.buttonPromptImage:setRGB(1, 1, 1)
 	f18_arg0.buttonPromptImage:setAlpha(1)
-	f18_arg0.buttonPromptImage:setMaterial(LUI.UIImage.GetCachedMaterial(0x67D1E3A3D2D1BF))
+	f18_arg0.buttonPromptImage:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_saturation_normal"))
 	f18_arg0.buttonPromptImage:setShaderVector(0, 1, 0, 0, 0)
 	f18_arg0.label:setLeftRight(0, 0, 108, 177)
 	f18_arg0.label:setRGB(1, 1, 1)
@@ -204,7 +204,7 @@ CoD.CodCasterButtonPrompt.__clipsPerState = {
 			f20_arg0.buttonPromptImage:completeAnimation()
 			f20_arg0.buttonPromptImage:setRGB(0.5, 0.5, 0.5)
 			f20_arg0.buttonPromptImage:setAlpha(0.5)
-			f20_arg0.buttonPromptImage:setMaterial(LUI.UIImage.GetCachedMaterial(0x67D1E3A3D2D1BF))
+			f20_arg0.buttonPromptImage:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_saturation_normal"))
 			f20_arg0.buttonPromptImage:setShaderVector(0, 0, 0, 0, 0)
 			f20_arg0.clipFinished(f20_arg0.buttonPromptImage)
 			f20_arg0.label:completeAnimation()

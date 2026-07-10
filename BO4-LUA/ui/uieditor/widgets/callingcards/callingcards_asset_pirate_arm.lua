@@ -8,7 +8,7 @@ CoD.CallingCards_Asset_pirate_arm.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	self.soundSet = "default"
 	local captainArm = LUI.UIImage.new(0, 0, 0, 407, 0, 0, 0, 128)
 	captainArm:setAlpha(0.9)
-	captainArm:setImage(RegisterImage(0x9BA2438245E911C))
+	captainArm:setImage(RegisterImage(@"uie_captain_arm"))
 	self:addElement(captainArm)
 	self.captainArm = captainArm
 	if PostLoadFunc then

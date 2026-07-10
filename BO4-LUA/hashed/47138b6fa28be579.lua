@@ -84,9 +84,9 @@ CoD.WarzoneUseTimer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 			condition = function(menu, element, event)
 				local f4_local0 = CoD.ModelUtility.IsModelValueGreaterThan(f1_arg1, "playerAbilities.PlayerGadget1.powerRatio", 0)
 				if f4_local0 then
-					f4_local0 = CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg1, "playerAbilities.playerGadget1.state", Enum[0xF0447219F15F7F3][0x1873A43E9D1620E])
+					f4_local0 = CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg1, "playerAbilities.playerGadget1.state", Enum[@"weapongadgetstates"][@"player_ability_state_inuse"])
 					if f4_local0 then
-						f4_local0 = not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x534C7B2375D2D47])
+						f4_local0 = not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_player_dead"])
 					end
 				end
 				return f4_local0
@@ -111,7 +111,7 @@ CoD.WarzoneUseTimer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 				if f7_local0 then
 					f7_local0 = CoD.WZUtility.IsInLastStand(f1_arg1, "hudItems.lastStand")
 					if f7_local0 then
-						if not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x198075B069840DC]) then
+						if not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_game_ended"]) then
 							f7_local0 = CoD.ModelUtility.IsModelValueEqualTo(f1_arg1, "hudItems.beingFinished", 0)
 						else
 							f7_local0 = false
@@ -130,7 +130,7 @@ CoD.WarzoneUseTimer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	})
 	local f1_local11 = self
 	local f1_local12 = self.subscribeToModel
-	local f1_local13 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local13 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local12(f1_local11, f1_local13["playerAbilities.PlayerGadget1.powerRatio"], function(f9_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -142,7 +142,7 @@ CoD.WarzoneUseTimer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	end, false)
 	f1_local11 = self
 	f1_local12 = self.subscribeToModel
-	f1_local13 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local13 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local12(f1_local11, f1_local13["playerAbilities.playerGadget1.state"], function(f10_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -154,19 +154,19 @@ CoD.WarzoneUseTimer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	end, false)
 	f1_local11 = self
 	f1_local12 = self.subscribeToModel
-	f1_local13 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local12(f1_local11, f1_local13["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x534C7B2375D2D47]], function(f11_arg0)
+	f1_local13 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local12(f1_local11, f1_local13["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_player_dead"]], function(f11_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f11_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x534C7B2375D2D47],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_player_dead"],
 		})
 	end, false)
 	f1_local11 = self
 	f1_local12 = self.subscribeToModel
-	f1_local13 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local13 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local12(f1_local11, f1_local13["hudItems.laststand.reviveProgress"], function(f12_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -178,7 +178,7 @@ CoD.WarzoneUseTimer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	end, false)
 	f1_local11 = self
 	f1_local12 = self.subscribeToModel
-	f1_local13 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local13 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local12(f1_local11, f1_local13["hudItems.laststand.beingRevived"], function(f13_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -190,7 +190,7 @@ CoD.WarzoneUseTimer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	end, false)
 	f1_local11 = self
 	f1_local12 = self.subscribeToModel
-	f1_local13 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local13 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local12(f1_local11, f1_local13["hudItems.lastStand.progress"], function(f14_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -202,7 +202,7 @@ CoD.WarzoneUseTimer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	end, false)
 	f1_local11 = self
 	f1_local12 = self.subscribeToModel
-	f1_local13 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local13 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local12(f1_local11, f1_local13["hudItems.lastStand.beingRevived"], function(f15_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -214,19 +214,19 @@ CoD.WarzoneUseTimer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	end, false)
 	f1_local11 = self
 	f1_local12 = self.subscribeToModel
-	f1_local13 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local12(f1_local11, f1_local13["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x198075B069840DC]], function(f16_arg0)
+	f1_local13 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local12(f1_local11, f1_local13["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_game_ended"]], function(f16_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f16_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x198075B069840DC],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_game_ended"],
 		})
 	end, false)
 	f1_local11 = self
 	f1_local12 = self.subscribeToModel
-	f1_local13 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local13 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local12(f1_local11, f1_local13["hudItems.beingFinished"], function(f17_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -238,7 +238,7 @@ CoD.WarzoneUseTimer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	end, false)
 	f1_local11 = self
 	f1_local12 = self.subscribeToModel
-	f1_local13 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local13 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local12(f1_local11, f1_local13["hudItems.dynEntUseHoldProgress"], function(f18_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -250,7 +250,7 @@ CoD.WarzoneUseTimer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	end, false)
 	f1_local11 = self
 	f1_local12 = self.subscribeToModel
-	f1_local13 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local13 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local12(f1_local11, f1_local13["hudItems.depositing"], function(f19_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

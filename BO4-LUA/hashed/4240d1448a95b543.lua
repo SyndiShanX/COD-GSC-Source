@@ -10,16 +10,16 @@ CoD.PlayerWidgetWZBleedIndicator.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local BleedIcon = LUI.UIImage.new(0, 0, 3.5, 19.5, 0, 0, 1, 17)
 	BleedIcon:setRGB(ColorSet.ZombiePlayerDown.r, ColorSet.ZombiePlayerDown.g, ColorSet.ZombiePlayerDown.b)
-	BleedIcon:setImage(RegisterImage(0x89F4B429D029556))
+	BleedIcon:setImage(RegisterImage(@"uie_ui_wz_hud_bleddicon"))
 	self:addElement(BleedIcon)
 	self.BleedIcon = BleedIcon
 	local TextBox = LUI.UIText.new(0, 0, 21.5, 146.5, 0, 0, 1.5, 16.5)
 	TextBox:setRGB(ColorSet.ZombiePlayerDown.r, ColorSet.ZombiePlayerDown.g, ColorSet.ZombiePlayerDown.b)
-	TextBox:setText(LocalizeToUpperString(0x639EA59611B378C))
+	TextBox:setText(LocalizeToUpperString(@"ui/bleeding"))
 	TextBox:setTTF("ttmussels_demibold")
 	TextBox:setLetterSpacing(1)
-	TextBox:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	TextBox:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	TextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	TextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(TextBox)
 	self.TextBox = TextBox
 	self:mergeStateConditions({

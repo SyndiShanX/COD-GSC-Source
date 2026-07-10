@@ -18,12 +18,12 @@ CoD.SpecialEventRewardWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	self.RewardIcon = RewardIcon
 	local RewardQuantityText = LUI.UIText.new(0, 0, 58, 144, 0, 0, 22, 36)
 	RewardQuantityText:setTTF("dinnext_regular")
-	RewardQuantityText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	RewardQuantityText:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	RewardQuantityText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	RewardQuantityText:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	RewardQuantityText:linkToElementModel(self, "rewardText", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
-			RewardQuantityText:setText(Engine[0xF9F1239CFD921FE](f3_local0))
+			RewardQuantityText:setText(Engine[@"hash_4F9F1239CFD921FE"](f3_local0))
 		end
 	end)
 	self:addElement(RewardQuantityText)

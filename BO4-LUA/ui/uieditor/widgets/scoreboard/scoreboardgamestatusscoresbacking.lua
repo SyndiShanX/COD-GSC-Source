@@ -7,7 +7,7 @@ CoD.ScoreboardGameStatusScoresBacking.new = function(f1_arg0, f1_arg1, f1_arg2, 
 	self.id = "ScoreboardGameStatusScoresBacking"
 	self.soundSet = "default"
 	local Blur = LUI.UIImage.new(0, 1, 0, 0, 0, 0, 0, 150)
-	Blur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	Blur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	Blur:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(Blur)
 	self.Blur = Blur

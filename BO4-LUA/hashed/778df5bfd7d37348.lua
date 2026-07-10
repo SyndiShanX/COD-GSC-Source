@@ -8,21 +8,21 @@ CoD.IGRPerkElement.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	self.soundSet = "none"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local PerkLogo = LUI.UIFixedAspectRatioImage.new(0.04, 0.04, 0, 48, 0.5, 0.5, -24, 24)
-	PerkLogo:setImage(RegisterImage(0x6DC0330DA89BE10))
-	PerkLogo:setMaterial(LUI.UIImage.GetCachedMaterial(0x98A2728B4675FB5))
+	PerkLogo:setImage(RegisterImage(@"ui_icon_hud_zb_power_up_double_points"))
+	PerkLogo:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_glint"))
 	PerkLogo:setShaderVector(0, 0, 0, 0, 0)
 	PerkLogo:setShaderVector(1, -46.8, 0, 0, 0)
 	self:addElement(PerkLogo)
 	self.PerkLogo = PerkLogo
 	local PerkText = LUI.UIText.new(1, 1, -279, -7, 0.5, 0.5, -9, 4)
-	PerkText:setText(Engine[0xF9F1239CFD921FE](0xA2F4D3BF4BFC6E7))
+	PerkText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/double_xp"))
 	PerkText:setTTF("ttmussels_demibold")
-	PerkText:setMaterial(LUI.UIImage.GetCachedMaterial(0x90D57B1E92D39D7))
+	PerkText:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_90D57B1E92D39D7"))
 	PerkText:setShaderVector(0, 1, 0, 0, 0)
 	PerkText:setShaderVector(1, 1, 0, 0, 0)
 	PerkText:setShaderVector(2, 1, 0.78, 0, 0.3)
-	PerkText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	PerkText:setAlignment(Enum[0x7A5123B654282D2][0x6ED4298C93DC5ED])
+	PerkText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	PerkText:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
 	self:addElement(PerkText)
 	self.PerkText = PerkText
 	self:mergeStateConditions({

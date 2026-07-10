@@ -6,21 +6,21 @@ if LUI.DEV ~= nil then
 	require("x64:501c64f03fcbffe")
 end
 DataSources.InitControllerModelsAndSubscriptions()
-local f0_local0 = Engine[0x8DF2E5447F384B9]()
+local f0_local0 = Engine[@"getglobalmodel"]()
 f0_local0:create("lobbyRoot.gameClient.update", true)
-f0_local0 = Engine[0x8DF2E5447F384B9]()
+f0_local0 = Engine[@"getglobalmodel"]()
 f0_local0:create("lobbyRoot.gameClient.isHost", true)
 if CoD.isFrontend then
 	require("x64:2dd4ff313102b79")
 	require("x64:6eee5926f63b60b")
 	LUI.createMenu.main = function()
-		local f1_local0 = Engine[0xB686A0A723E6442]()
+		local f1_local0 = Engine[@"getmaxcontrollercount"]()
 		for f1_local1 = 0, f1_local0 - 1, 1 do
-			Engine[0x10BF7D7C03EECE6](f1_local1, true)
-			Engine[0x9B8C02E7F47BDE3](f1_local1, true)
+			Engine[@"lockinput"](f1_local1, true)
+			Engine[@"setuiactive"](f1_local1, true)
 		end
 		CoD.VideoStreamingUtility.StartLiveEventFromData({
-			liveEventStreamerIndex = Dvar[0x52B10FD54D7DBE8]:get(),
+			liveEventStreamerIndex = Dvar[@"currentliveevent"]:get(),
 		})
 		local f1_local1 = CoD.Menu.NewFromState("main", nil, 0, 1, 0, 0, 0, 1, 0, 0)
 		f1_local1._elementsThatCloseOnReload = {}
@@ -40,7 +40,7 @@ if CoD.isFrontend then
 		f1_local1:processEvent({
 			name = "menu_loaded",
 		})
-		Engine[0xA798E4552F5E872](Engine[0xA798E4552F5E872](Engine[0x8DF2E5447F384B9](), "MapVote", true), "mapVoteMapNext", true)
+		Engine[@"createmodel"](Engine[@"createmodel"](Engine[@"getglobalmodel"](), "MapVote", true), "mapVoteMapNext", true)
 		local f1_local3 = function(f4_arg0, f4_arg1, f4_arg2)
 			f4_arg0:closeElementsThatCloseOnReload()
 			local f4_local0 = CoD.ToastNotification.new(f4_arg0, f4_arg1, 0.5, 0.5, -960, 960, 0, 1, 0, 0)
@@ -63,12 +63,12 @@ if CoD.isFrontend then
 				f4_arg0:addElementThatClosesOnReload(f4_local2)
 				f4_arg0:sendInitializationEvents(f4_arg1, f4_local2)
 			end
-			if Engine[0x8069F5969D47DEF]() then
+			if Engine[@"usingfreecursor"]() then
 				local f4_local2 = LUI.createMenu.FreeCursor(f4_arg1)
 				f4_local2:setPriority(1000)
 				f4_local2:menuOpened(f4_arg1, f4_local2)
 				if f4_arg2 then
-					local f4_local3 = Engine[0x4DF5CFBC1771947](f4_arg1)
+					local f4_local3 = Engine[@"getmodelforcontroller"](f4_arg1)
 					f4_local3.FreeCursor.hidden:set(1)
 					local f4_local4 = f4_local3.FreeCursor:create("ignoreNextMenuHides")
 					f4_local4:set(true)
@@ -82,7 +82,7 @@ if CoD.isFrontend then
 			f4_arg0:addElementThatClosesOnReload(f4_arg0.MainOverlay)
 			f4_arg0:sendInitializationEvents(f4_arg1, f4_arg0.MainOverlay)
 			f4_arg0.waitForUI3DTimer = LUI.UITimer.newElementTimer(200, false, function()
-				if Engine[0x7D6FD4F19566B8A]() then
+				if Engine[@"hash_17D6FD4F19566B8A"]() then
 					f4_arg0:addElementThatClosesOnReload(CoD.DirectorTagsUI3D.new(f4_arg0, f4_arg1, 0, 0, 0, CoD.DirectorTagsUI3D.__defaultWidth, 0, 0, 0, CoD.DirectorTagsUI3D.__defaultHeight))
 					f4_arg0.waitForUI3DTimer:close()
 					f4_arg0.waitForUI3DTimer = nil
@@ -94,7 +94,7 @@ if CoD.isFrontend then
 			end
 			local f4_local3 = f4_arg0
 			local f4_local2 = f4_arg0.subscribeToModel
-			local f4_local4 = Engine[0x4DF5CFBC1771947](f4_arg1)
+			local f4_local4 = Engine[@"getmodelforcontroller"](f4_arg1)
 			f4_arg0._menuMusicSub = f4_local2(f4_local3, f4_local4.MenuMusic, function(f6_arg0)
 				local f6_local0 = f6_arg0.musicStateName:get()
 				local f6_local1 = f6_arg0.delayInMS:get()
@@ -104,7 +104,7 @@ if CoD.isFrontend then
 						f4_arg0._menuMusicTimer = nil
 					end
 					f4_arg0._menuMusicTimer = LUI.UITimer.newElementTimer(f6_local1, true, function()
-						Engine[0x39E704619FEB20F](f6_local0)
+						Engine[@"playmenumusic"](f6_local0)
 					end)
 					f4_arg0:addElement(f4_arg0._menuMusicTimer)
 				elseif f4_arg0._menuMusicTimer then
@@ -113,7 +113,7 @@ if CoD.isFrontend then
 				end
 			end, false)
 		end
-		local f1_local4 = Engine[0xA5B9C0111291A8B]()
+		local f1_local4 = Engine[@"getprimarycontroller"]()
 		f1_local3(f1_local1, f1_local4, true)
 		f1_local1:registerEventHandler("debug_reload", function(element, event)
 			element:closeElementsThatCloseOnReload()
@@ -153,18 +153,18 @@ else
 			require("x64:cb5bf4e094259d8")
 			require("x64:19c89699d4ccb93")
 			require("x64:9aedfb02e1b42ad")
-			if Engine[0xB87231BF773995E]() == "zm_zod" then
+			if Engine[@"getcurrentmap"]() == "zm_zod" then
 				require("x64:2532ef6b6f817cc")
 				require("x64:e78fa14df4f0af7")
 				require("x64:5f43e319e75b4d8")
 				require("x64:bba34780c0a9b3e")
 				require("x64:14acbde4348bf2e")
 				require("x64:813c164dd9d9b1d")
-			elseif Engine[0xB87231BF773995E]() == "zm_factory" then
+			elseif Engine[@"getcurrentmap"]() == "zm_factory" then
 				require("x64:e096ca64b60431f")
-			elseif Engine[0xB87231BF773995E]() == "zm_castle" then
+			elseif Engine[@"getcurrentmap"]() == "zm_castle" then
 				require("x64:82fa79a45ef9936")
-			elseif Engine[0xB87231BF773995E]() == "zm_island" then
+			elseif Engine[@"getcurrentmap"]() == "zm_island" then
 				require("x64:e00202699294517")
 			else
 				require("x64:1824fcd24cd5764")
@@ -184,7 +184,7 @@ else
 			require("x64:ad86e26de1fa54e")
 		end
 	end
-	if CoD.isCampaign or Engine[0xB87231BF773995E]() == "zm_zod" then
+	if CoD.isCampaign or Engine[@"getcurrentmap"]() == "zm_zod" then
 		HUD_DelayLoadMenus()
 	end
 	local f0_local11 = function(f12_arg0, f12_arg1, f12_arg2, f12_arg3)
@@ -197,12 +197,12 @@ else
 			end
 			f12_arg0.vehicleHUD:close()
 			f12_arg0.vehicleHUD = nil
-			Engine[0x248DE419A8FA473](f12_arg0:getOwner(), 4)
+			Engine[@"disablescenefilter"](f12_arg0:getOwner(), 4)
 			DataSources.VehicleInfo.resetVehicleModels(f12_arg1)
 		end
 		if not f12_arg2 or f12_arg2 == "" then
 			return
-		elseif Engine[0xDD333420C49E6D0](f12_arg1, Enum[0x7F032C2EF103A1A][0xD3ABF9A2753CE40]) then
+		elseif Engine[@"isvisibilitybitset"](f12_arg1, Enum[@"uivisibilitybit"][@"bit_demo_camera_mode_moviecam"]) then
 			return
 		elseif CoD.CodCasterUtility.CodCasterIsInAerialCam(f12_arg1) then
 			return
@@ -235,7 +235,7 @@ else
 		local f13_local0 = true
 		if IsCampaign() then
 			local f13_local1 = false
-			local f13_local2 = Engine[0x40E824FE270E174](Engine[0x4DF5CFBC1771947](f13_arg1), "safehouse")
+			local f13_local2 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f13_arg1), "safehouse")
 			if f13_local2 then
 				f13_local1 = CoD.SafeGetModelValue(f13_local2, "inTrainingSim") == 1
 			end
@@ -244,7 +244,7 @@ else
 		if f13_local1.vehicleType:get() == "killcamVehicle" then
 			f13_local0 = false
 		end
-		if Engine[0xDD333420C49E6D0](f13_arg1, Enum[0x7F032C2EF103A1A][0xD3ABF9A2753CE40]) then
+		if Engine[@"isvisibilitybitset"](f13_arg1, Enum[@"uivisibilitybit"][@"bit_demo_camera_mode_moviecam"]) then
 			f13_local0 = false
 		end
 		f13_arg0.reticleVisible = f13_local0
@@ -284,9 +284,9 @@ else
 			f16_arg0.lockOnWidget = nil
 		end
 		if f16_arg2 and f16_arg2 ~= "" and CoD[f16_arg2] and CoD[f16_arg2].new then
-			local f16_local0 = Engine[0xA798E4552F5E872](Engine[0x4DF5CFBC1771947](f16_arg1), "lockOnModel")
-			Engine[0x83C9B5DE1D9371](Engine[0xA798E4552F5E872](f16_local0, "status"), 0)
-			Engine[0x83C9B5DE1D9371](Engine[0xA798E4552F5E872](f16_local0, "lockOnPercent"), 0)
+			local f16_local0 = Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f16_arg1), "lockOnModel")
+			Engine[@"setmodelvalue"](Engine[@"createmodel"](f16_local0, "status"), 0)
+			Engine[@"setmodelvalue"](Engine[@"createmodel"](f16_local0, "lockOnPercent"), 0)
 			f16_arg0.lockOnWidget = CoD[f16_arg2].new(f16_arg0, f16_arg1, 0, 0, 0, CoD[f16_arg2].__defaultWidth, 0, 0, 0, CoD[f16_arg2].__defaultWidth)
 			f16_arg0.lockOnWidget:setModel(f16_local0, f16_arg1)
 			f16_arg0:addForceClosedChild(f16_arg0.lockOnWidget, "lockOnWidget")
@@ -305,7 +305,7 @@ else
 				f18_arg0.T7HudMenuGameMode.m_disableAllButtonActions = f18_arg1.occluded
 			end
 		end)
-		if not CoD.isCampaign and Engine[0xB87231BF773995E]() ~= "zm_zod" then
+		if not CoD.isCampaign and Engine[@"getcurrentmap"]() ~= "zm_zod" then
 			f17_local0:registerEventHandler("delay_load_menus", HUD_DelayLoadMenus)
 		end
 		f17_local0:addElement(LUI.UITimer.new(3000, "delay_load_menus", true))
@@ -358,10 +358,10 @@ else
 		f0_local1(f17_local0)
 		f17_local0:registerEventHandler("debug_reload", HUD_DebugReload)
 		if CoD.isPC then
-			Engine[0x7C75E608EA39B5C](f17_arg0, "ui_keyboard_cancel")
+			Engine[@"exec"](f17_arg0, "ui_keyboard_cancel")
 			CoD.PCUtility.RegisterPlaytimeLeftWatcher(f17_local0)
 		end
-		Engine[0x39E704619FEB20F]("")
+		Engine[@"playmenumusic"]("")
 		if f17_arg0 == 0 then
 			if (not CoD.isCampaign or not "Loading_CP") and (not CoD.isZombie or not "Loading_ZM") then
 				local f17_local3 = CoD.isWarzone
@@ -376,7 +376,7 @@ else
 			end
 			f17_local0.loadingMenu:menuOpened(f17_arg0, f17_local0.loadingMenu)
 		end
-		if CoD.isWarzone and Engine[0xBC62B0E988DCCAF]() then
+		if CoD.isWarzone and Engine[@"issplitscreen"]() then
 			f17_local0.splitscreenLoading = LUI.createMenu.Loading_WZ_Splitscreen(f17_arg0)
 			if f17_local0:getFirstChild() then
 				f17_local0.splitscreenLoading:addElementBefore(f17_local0:getFirstChild())
@@ -400,7 +400,7 @@ else
 		end
 	end
 	function UpdateHUDVisibility(f25_arg0, f25_arg1)
-		if Engine[0xDD333420C49E6D0](f25_arg1.controller, Enum[0x7F032C2EF103A1A][0xF1E7A0F1975796E]) then
+		if Engine[@"isvisibilitybitset"](f25_arg1.controller, Enum[@"uivisibilitybit"][@"bit_camera_anim_hiding_hud"]) then
 			if f25_arg0.T7HudMenu then
 				f25_arg0.T7HudMenu:setAlpha(0)
 			end
@@ -439,15 +439,15 @@ else
 		end
 	end
 	local f0_local16 = function(f29_arg0, f29_arg1)
-		Engine[0x70B0A2EF2A81722](f29_arg1.controller, Enum[0x52E616D9ABDBF0E][0xA1CE036AEF3710F])
+		Engine[@"setactivemenu"](f29_arg1.controller, Enum[@"uimenucommand_t"][@"uimenu_none"])
 	end
 	local f0_local17 = function(f30_arg0, f30_arg1)
 		local f30_local0 = f30_arg1.isError
 		local f30_local1 = f30_arg1.gamertag
 		if f30_local0 == false then
-			CoD.OverlayUtility.ShowToast("Invite", Engine[0xF9F1239CFD921FE](0x513526C1CA23EB9), f30_local1, LuaDefine.INVITE_TOAST_POPUP_ICON)
+			CoD.OverlayUtility.ShowToast("Invite", Engine[@"hash_4F9F1239CFD921FE"](@"hash_5513526C1CA23EB9"), f30_local1, LuaDefine.INVITE_TOAST_POPUP_ICON)
 		else
-			CoD.OverlayUtility.ShowToast("Invite", Engine[0xB03220D3A4F3E38](Engine[0xF9F1239CFD921FE](0x248E1604D27C8DA)), f30_local1, LuaDefine.INVITE_TOAST_POPUP_ERROR_ICON)
+			CoD.OverlayUtility.ShowToast("Invite", Engine[@"toupper"](Engine[@"hash_4F9F1239CFD921FE"](@"hash_3248E1604D27C8DA")), f30_local1, LuaDefine.INVITE_TOAST_POPUP_ERROR_ICON)
 		end
 		return true
 	end
@@ -459,22 +459,22 @@ else
 			CoD.PCUtility.SetupUIMenuShortcuts(f31_arg0, f31_arg0.controller)
 		end
 		f31_arg0:registerEventHandler("open_toaster_popup", f0_local17)
-		f31_arg0:subscribeToModel(Engine[0x40E824FE270E174](Engine[0x4DF5CFBC1771947](f31_arg0.controller), "scriptNotify"), function(model)
-			local f32_local0 = Engine[0x614D394F6F9A18D](model)
-			if f32_local0 == 0x4F971799B2C4D3F then
+		f31_arg0:subscribeToModel(Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f31_arg0.controller), "scriptNotify"), function(model)
+			local f32_local0 = Engine[@"getmodelvalue"](model)
+			if f32_local0 == @"show_outcome" then
 				f0_local16(f31_arg0, {
 					controller = f31_arg0.controller,
 					name = f32_local0,
 					data = CoD.GetScriptNotifyData(model),
 				})
-			elseif f32_local0 == 0x3F755C31BEFD708 then
+			elseif f32_local0 == @"track_victim_death" then
 				f0_local5(f31_arg0, {
 					controller = f31_arg0.controller,
 					name = f32_local0,
 					data = CoD.GetScriptNotifyData(model),
 				})
-			elseif f32_local0 == 0x4AEDFEF39E0B097 then
-				if Engine[0xA55C3ACD0D2BCF0]() == false or CoD.isZombie == false then
+			elseif f32_local0 == @"force_scoreboard" then
+				if Engine[@"isdemoplaying"]() == false or CoD.isZombie == false then
 					local f32_local1 = 1
 					if CoD.isZombie == true then
 						local f32_local2 = CoD.GetScriptNotifyData(model)
@@ -482,27 +482,27 @@ else
 							f32_local1 = f32_local2[1]
 						end
 					end
-					Engine[0x83C9B5DE1D9371](Engine[0xA798E4552F5E872](Engine[0x4DF5CFBC1771947](f31_arg0.controller), "forceScoreboard"), f32_local1)
+					Engine[@"setmodelvalue"](Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f31_arg0.controller), "forceScoreboard"), f32_local1)
 				end
-			elseif f32_local0 == 0xB524C1480EF80A7 then
+			elseif f32_local0 == @"open_ingame_menu" then
 				f0_local0(f31_arg0, {
 					controller = f31_arg0.controller,
 					name = f32_local0,
 					data = CoD.GetScriptNotifyData(model),
 				})
-			elseif f32_local0 == 0x9A890CD62D64C85 then
+			elseif f32_local0 == @"close_ingame_menu" then
 				HUD_CloseSpecificInGameMenu(f31_arg0, {
 					controller = f31_arg0.controller,
 					name = f32_local0,
 					data = CoD.GetScriptNotifyData(model),
 				})
-			elseif f32_local0 == 0x9AB42B593C66ED then
+			elseif f32_local0 == @"hash_9AB42B593C66ED" then
 				f0_local6(f31_arg0, {
 					controller = f31_arg0.controller,
 					name = f32_local0,
 					data = CoD.GetScriptNotifyData(model),
 				})
-			elseif f32_local0 == 0x55F54E72449F4E3 then
+			elseif f32_local0 == @"potm_client" then
 				local f32_local1 = CoD.GetScriptNotifyData(model)
 				if f32_local1 ~= nil then
 					local f32_local2 = f32_local1[1]
@@ -511,7 +511,7 @@ else
 						f32_local3.potmClient:set(f32_local2)
 					end
 				end
-			elseif f32_local0 == 0xEE32E40C182320B then
+			elseif f32_local0 == @"hash_EE32E40C182320B" then
 				assert(CoD.isWarzone)
 				f31_arg0.downButNotOutHUD = LUI.createMenu.DownButNotOut(f31_arg0.controller)
 				local f32_local1 = f31_arg0:getParent()
@@ -520,8 +520,8 @@ else
 				f31_arg0.downButNotOutHUD:menuOpened(f31_arg0.controller, f31_arg0.downButNotOutHUD)
 			end
 		end)
-		f31_arg0:subscribeToModel(Engine[0x40E824FE270E174](Engine[0x4DF5CFBC1771947](f31_arg0.controller), "engineLoadoutSelect"), function(model)
-			local f33_local0 = Engine[0x614D394F6F9A18D](model)
+		f31_arg0:subscribeToModel(Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f31_arg0.controller), "engineLoadoutSelect"), function(model)
+			local f33_local0 = Engine[@"getmodelvalue"](model)
 			local f33_local1 = f33_local0
 			local f33_local2 = CoD.CACUtility.classModels
 			if f33_local2 then
@@ -535,7 +535,7 @@ else
 				CoD.CACUtility.ChangeClass(f31_arg0.controller, f33_local0, nil)
 			end
 		end)
-		local f31_local0 = Engine[0x4DF5CFBC1771947](f31_arg0.controller)
+		local f31_local0 = Engine[@"getmodelforcontroller"](f31_arg0.controller)
 		f31_local0 = f31_local0:create("open_ingame_menu_update")
 		f31_local0:set(0)
 		f31_arg0:registerEventHandler("open_migration_menu", HUD_StartMigration)
@@ -550,10 +550,10 @@ else
 		f31_arg0:registerEventHandler("update_scoreboard_columns", HUD_UpdateScoreboardColumns)
 		f31_local0 = f31_arg0:getOwner()
 		if f31_local0 == nil then
-			f31_local0 = Engine[0xA5B9C0111291A8B]()
+			f31_local0 = Engine[@"getprimarycontroller"]()
 		end
-		local f31_local1 = Engine[0x4DF5CFBC1771947](f31_local0)
-		f31_arg0:subscribeToModel(Engine[0x40E824FE270E174](f31_local1, "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF1E7A0F1975796E]), function(model)
+		local f31_local1 = Engine[@"getmodelforcontroller"](f31_local0)
+		f31_arg0:subscribeToModel(Engine[@"getmodel"](f31_local1, "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_camera_anim_hiding_hud"]), function(model)
 			UpdateHUDVisibility(f31_arg0, {
 				controller = f31_local0,
 			})
@@ -563,7 +563,7 @@ else
 		f31_local2 = DataSources.CurrentWeapon.getModel(f31_local0)
 		f31_local2:create("lockOnWidget")
 		f31_arg0:subscribeToGlobalModel(f31_local0, "VehicleInfo", "vehicleType", function(model)
-			local f35_local0 = Engine[0x614D394F6F9A18D](model)
+			local f35_local0 = Engine[@"getmodelvalue"](model)
 			if f35_local0 then
 				f0_local11(f31_arg0, f31_local0, f35_local0, false)
 				f0_local12(f31_arg0, f31_local0)
@@ -580,7 +580,7 @@ else
 			end
 		end, true)
 		if not CoD.isZombie then
-			Engine[0xA798E4552F5E872](f31_local1, "vehicle.vehicleAttackMode")
+			Engine[@"createmodel"](f31_local1, "vehicle.vehicleAttackMode")
 			f31_arg0:subscribeToGlobalModel(f31_local0, "PerController", "vehicle.vehicleAttackMode", function(model)
 				if f31_arg0.vehicleHUD then
 					f0_local11(f31_arg0, f31_local0, f31_arg0.vehicleHUD.vehicleType, true)
@@ -589,26 +589,26 @@ else
 		end
 		if CoD.isPC and not CoD.isWarzone then
 			f31_arg0:subscribeToModel(f31_local1.LastInput, function()
-				if f31_arg0.vehicleHUD and Engine[0xA11C376CCDCBA5A](f31_local0) then
+				if f31_arg0.vehicleHUD and Engine[@"hash_1A11C376CCDCBA5A"](f31_local0) then
 					f0_local11(f31_arg0, f31_local0, f31_arg0.vehicleHUD.vehicleType, true)
 				end
 			end)
 		end
 		f31_arg0.reticleVisible = true
 		f31_arg0:subscribeToGlobalModel(f31_local0, "CurrentWeapon", "weaponReticle", function(model)
-			local f40_local0 = Engine[0x614D394F6F9A18D](model)
+			local f40_local0 = Engine[@"getmodelvalue"](model)
 			if f40_local0 then
 				f0_local13(f31_arg0, f31_local0, f40_local0, false)
 			end
 		end)
 		f31_arg0:subscribeToGlobalModel(f31_local0, "CurrentWeapon", "lockOnWidget", function(model)
-			local f41_local0 = Engine[0x614D394F6F9A18D](model)
+			local f41_local0 = Engine[@"getmodelvalue"](model)
 			if f41_local0 then
 				f0_local14(f31_arg0, f31_local0, f41_local0)
 			end
 		end)
 		CoD.DemoUtility.RegisterEventHandlers(f31_arg0, f31_local0)
-		if Engine[0xA55C3ACD0D2BCF0]() then
+		if Engine[@"isdemoplaying"]() then
 			f31_arg0:subscribeToGlobalModel(f31_local0, "Demo", "cameraMode", function(model)
 				local f42_local0 = DataSources.VehicleInfo.getModel(f31_local0)
 				f0_local11(f31_arg0, f31_local0, f42_local0.vehicleType:get(), true)
@@ -620,45 +620,45 @@ else
 		f43_arg0:registerEventHandler("hud_force_kill_killstreak_hud", f0_local3)
 		local f43_local0 = f43_arg0:getOwner()
 		if f43_local0 == nil then
-			f43_local0 = Engine[0xA5B9C0111291A8B]()
+			f43_local0 = Engine[@"getprimarycontroller"]()
 		end
 		local f43_local1 = function(f44_arg0)
 			HUD_UpdateRefresh(f43_arg0, {
 				controller = f43_local0,
 			})
 		end
-		local f43_local2 = Engine[0x4DF5CFBC1771947](f43_local0)
-		f43_arg0:subscribeToModel(Engine[0x40E824FE270E174](f43_local2, "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x6FFF566DCC09BBD]), f43_local1)
-		f43_arg0:subscribeToModel(Engine[0x40E824FE270E174](f43_local2, "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xC57360571B0917E]), f43_local1)
-		f43_arg0:subscribeToModel(Engine[0x40E824FE270E174](f43_local2, "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]), f43_local1)
-		f43_arg0:subscribeToModel(Engine[0x40E824FE270E174](f43_local2, "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x198075B069840DC]), f43_local1)
-		f43_arg0:subscribeToModel(Engine[0x40E824FE270E174](f43_local2, "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2]), f43_local1)
-		f43_arg0:subscribeToModel(Engine[0x40E824FE270E174](f43_local2, "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x1CDCB451655ABCF]), f43_local1)
-		f43_arg0:subscribeToModel(Engine[0x40E824FE270E174](f43_local2, "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x4828BED794DA0A5]), f43_local1)
-		f43_arg0:subscribeToModel(Engine[0x40E824FE270E174](f43_local2, "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F]), f43_local1)
-		f43_arg0:subscribeToModel(Engine[0x40E824FE270E174](f43_local2, "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xDA8E6697A56A554]), f43_local1)
-		f43_arg0:subscribeToModel(Engine[0x40E824FE270E174](f43_local2, "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x7EAF988DDEB83EA]), f43_local1)
-		f43_arg0:subscribeToModel(Engine[0x40E824FE270E174](f43_local2, "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x1999FA50941A83B]), function(model)
+		local f43_local2 = Engine[@"getmodelforcontroller"](f43_local0)
+		f43_arg0:subscribeToModel(Engine[@"getmodel"](f43_local2, "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_spectating_client"]), f43_local1)
+		f43_arg0:subscribeToModel(Engine[@"getmodel"](f43_local2, "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_team_spectator"]), f43_local1)
+		f43_arg0:subscribeToModel(Engine[@"getmodel"](f43_local2, "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_ui_active"]), f43_local1)
+		f43_arg0:subscribeToModel(Engine[@"getmodel"](f43_local2, "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_game_ended"]), f43_local1)
+		f43_arg0:subscribeToModel(Engine[@"getmodel"](f43_local2, "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"]), f43_local1)
+		f43_arg0:subscribeToModel(Engine[@"getmodel"](f43_local2, "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_final_killcam"]), f43_local1)
+		f43_arg0:subscribeToModel(Engine[@"getmodel"](f43_local2, "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_round_end_killcam"]), f43_local1)
+		f43_arg0:subscribeToModel(Engine[@"getmodel"](f43_local2, "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_play_of_the_match"]), f43_local1)
+		f43_arg0:subscribeToModel(Engine[@"getmodel"](f43_local2, "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_migrating_host"]), f43_local1)
+		f43_arg0:subscribeToModel(Engine[@"getmodel"](f43_local2, "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"hash_57EAF988DDEB83EA"]), f43_local1)
+		f43_arg0:subscribeToModel(Engine[@"getmodel"](f43_local2, "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_selecting_location"]), function(model)
 			f0_local4(f43_arg0, {
 				controller = f43_local0,
 			})
 		end)
 		f43_arg0:subscribeToModel(f43_local2.heldWeapons[0]:create("viewmodelWeaponName"), function(model)
-			CoD.HUDUtility[0xDCC62D0D0DCD91E](f43_arg0, f43_arg0.safeArea, model:get(), f43_local0)
+			CoD.HUDUtility[@"updateicepick"](f43_arg0, f43_arg0.safeArea, model:get(), f43_local0)
 		end)
-		if Engine[0x40E824FE270E174](f43_local2, "team") == nil then
-			Engine[0x83C9B5DE1D9371](Engine[0xA798E4552F5E872](f43_local2, "team"), 0)
+		if Engine[@"getmodel"](f43_local2, "team") == nil then
+			Engine[@"setmodelvalue"](Engine[@"createmodel"](f43_local2, "team"), 0)
 		end
 		if CoD.isPC then
 			f43_arg0:registerEventHandler("chooseclass_hotkey", HUD_Handle_ChooseClass_HotKey)
 			f43_arg0:subscribeToModel(f43_local2.LastInput, function()
-				if Engine[0xA11C376CCDCBA5A](f43_local0) then
+				if Engine[@"hash_1A11C376CCDCBA5A"](f43_local0) then
 					CoD.ScoreboardUtility.HideScoreboard(f43_arg0, f43_local0)
-					CoD.ModelUtility.SetGlobalDatasourceModelValueToEnum(f43_local0, "MultiItemPickup", "status", Enum[0x163CDAE6010C493][0xE16E7DEBC8823D8])
+					CoD.ModelUtility.SetGlobalDatasourceModelValueToEnum(f43_local0, "MultiItemPickup", "status", Enum[@"hash_163CDAE6010C493"][@"hash_1E16E7DEBC8823D8"])
 				end
 			end)
 		end
-		Engine[0x83C9B5DE1D9371](Engine[0xA798E4552F5E872](Engine[0x4DF5CFBC1771947](f43_local0), "forceScoreboard"), 0)
+		Engine[@"setmodelvalue"](Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f43_local0), "forceScoreboard"), 0)
 	end
 	function HUD_RemoveAllChildren(f48_arg0)
 		while #f48_arg0.forceCloseChildren > 0 do
@@ -696,8 +696,8 @@ else
 		if f49_arg0.loadingMenu then
 			local f49_local0 = function(f50_arg0)
 				if f50_arg0.loadingMenu then
-					Engine[0xB3B13569A733293]()
-					if f50_arg0.loadingMenu:hasClip("Close") and not Engine[0xBC62B0E988DCCAF]() then
+					Engine[@"hash_2B3B13569A733293"]()
+					if f50_arg0.loadingMenu:hasClip("Close") and not Engine[@"issplitscreen"]() then
 						f50_arg0.loadingMenu:playClip("Close")
 						f50_arg0.loadingMenu:registerEventHandler("clip_over", function(element, event)
 							element:close()
@@ -725,7 +725,7 @@ else
 				end))
 			end
 		else
-			Engine[0xB3B13569A733293]()
+			Engine[@"hash_2B3B13569A733293"]()
 		end
 		if CoD.isWarzone and f49_arg0.splitscreenLoading then
 			local f49_local0 = DataSources.HUDItems.getModel(f49_arg1.controller)
@@ -742,7 +742,7 @@ else
 		f49_arg0:setOwner(f49_arg1.controller)
 		f49_arg0.controller = f49_arg1.controller
 		HUD_DelayLoadMenus()
-		if Engine[0x8069F5969D47DEF]() then
+		if Engine[@"usingfreecursor"]() then
 			if not f49_arg0.freeCursor then
 				f49_arg0.freeCursor = LUI.createMenu.FreeCursor(f49_arg0.controller)
 				f49_arg0.freeCursor:setPriority(1000)
@@ -770,7 +770,7 @@ else
 			elseif f55_arg0.__defaultFocus then
 				CoD.FreeCursorUtility.GiveFocusToElementsDefaultFocus(f55_arg0, f55_arg0, f55_arg1)
 			end
-			local f55_local0 = Engine[0x4DF5CFBC1771947](f55_arg1)
+			local f55_local0 = Engine[@"getmodelforcontroller"](f55_arg1)
 			f55_local0.open_ingame_menu_update:forceNotifySubscriptions()
 		end
 		f49_arg0.startMenu.onStartMenuClosed = function(f56_arg0, f56_arg1) end
@@ -789,7 +789,7 @@ else
 			HUD_FirstSnapshot_NotZombie(f49_arg0, f49_arg1)
 			if CoD.isCampaign == true then
 				HUD_FirstSnapshot_Campaign(f49_arg0, f49_arg1)
-			elseif Engine[0x17B32C04C4BE462](Engine[0xC3DF042E7492B66](Enum[0x7CA2DE5266A94BF][0xC46B73E8E18BA2])) == Enum[0x8409AA0F01B5DBC][0xB3A1BBF18C0B176] or IsSimulateCT() then
+			elseif Engine[@"getlobbymode"](Engine[@"lobbygetcontrollinglobbysession"](Enum[@"lobbymodule"][@"lobby_module_client"])) == Enum[@"lobbymode"][@"hash_3B3A1BBF18C0B176"] or IsSimulateCT() then
 				HUD_FirstSnapshot_CombatTraining(f49_arg0, f49_arg1)
 			end
 		else
@@ -800,7 +800,7 @@ else
 					controller = f49_arg1.controller,
 				})
 			end
-			Engine[0x83C9B5DE1D9371](Engine[0xA798E4552F5E872](Engine[0x4DF5CFBC1771947](f49_arg1.controller), "forceScoreboard"), 0)
+			Engine[@"setmodelvalue"](Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f49_arg1.controller), "forceScoreboard"), 0)
 			HUD_FirstSnapshot_Zombie(f49_arg0, f49_arg1)
 		end
 		if f49_arg0.safeArea then
@@ -811,7 +811,7 @@ else
 			})
 			f49_arg0.safeArea:menuOpened(f49_arg0.controller, f49_arg0.startMenu)
 		end
-		Engine[0x104A34FF9CC8614](f49_arg1.controller)
+		Engine[@"forcehudrefresh"](f49_arg1.controller)
 		HUD_UpdateRefresh(f49_arg0, f49_arg1)
 		f49_arg0.firstSnapshotProcessed = true
 		if f49_arg0.pendingInGameMenuEvents then
@@ -836,7 +836,7 @@ else
 		end
 	end
 	function HUD_FirstSnapshot_Common(f58_arg0, f58_arg1)
-		CoD.scoreInfoTable = CoD.GameTypeUtility.GetGameTypeValue(Engine[0x69811927938FCD7](), "scoreInfoFile", CoD.scoreInfoTable)
+		CoD.scoreInfoTable = CoD.GameTypeUtility.GetGameTypeValue(Engine[@"lobbygetgametype"](), "scoreInfoFile", CoD.scoreInfoTable)
 		if not CoD.isMultiplayer and not CoD.isWarzone then
 			f58_arg0.cinematicSubtitles = CoD.MovieSubtitles.new(f58_arg0, f58_arg1.controller, 0.5, 0.5, -640, 640, 0.5, 0.5, -360, 360)
 			f58_arg0:addForceClosedChild(f58_arg0.cinematicSubtitles, "cinematicSubtitles")
@@ -855,18 +855,18 @@ else
 		f58_arg0:addElement(f58_local1)
 		if f58_arg0.safeArea and f58_arg0.safeArea.buttonModel then
 			if LUI.DEV then
-				local f58_local2 = LUI.DEV.ErrorIfModelsDoNotMatch(f58_arg0.safeArea.buttonModel, Engine[0xA798E4552F5E872](Engine[0x4DF5CFBC1771947](f58_local0), "HUDSafeArea.buttonPrompts"))
+				local f58_local2 = LUI.DEV.ErrorIfModelsDoNotMatch(f58_arg0.safeArea.buttonModel, Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f58_local0), "HUDSafeArea.buttonPrompts"))
 			end
-			Engine[0x8C7A8C4C5FD9892](f58_arg0.safeArea.buttonModel)
+			Engine[@"unsubscribeandfreemodel"](f58_arg0.safeArea.buttonModel)
 			f58_arg0.safeArea:close()
 		end
 		f58_arg0.safeArea = f58_local1
 		CoD.HUDUtility.AddCustomGainFocusWidget(f58_arg0, f58_arg0.safeArea)
-		f58_arg0.safeArea.buttonModel = Engine[0xA798E4552F5E872](Engine[0x4DF5CFBC1771947](f58_local0), "HUDSafeArea.buttonPrompts")
+		f58_arg0.safeArea.buttonModel = Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f58_local0), "HUDSafeArea.buttonPrompts")
 	end
 	function HUD_AddHintTextElements(f59_arg0, f59_arg1)
-		local f59_local0 = Engine[0x40E824FE270E174](Engine[0x4DF5CFBC1771947](f59_arg1), "profile.colorblindMode")
-		local f59_local1 = Engine[0x69811927938FCD7]()
+		local f59_local0 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f59_arg1), "profile.colorblindMode")
+		local f59_local1 = Engine[@"lobbygetgametype"]()
 		if f59_local1 == "codfu" then
 			return
 		elseif f59_local1 == "doa" then
@@ -907,7 +907,7 @@ else
 				local f59_local8 = LUI.UIElement.new()
 				f59_local8:setLeftRight(true, true, 0, 0)
 				f59_local8:setTopBottom(true, true, 0, 0)
-				f59_local8:setImage(RegisterMaterial(0xD76836DED6B251B))
+				f59_local8:setImage(RegisterMaterial(@"compassping_enemy_diamond_bottom"))
 				f59_local8:setRGB(CoD.ColorUtility.ExplodeColor(CoD.ColorUtility.GetColorBlindColorForPlayer(f59_arg1, "EnemyScorestreakTarget")))
 				f59_arg0:addForceClosedChild(f59_local8)
 				f59_local8:setupTargetHighlights_Enemy()
@@ -920,7 +920,7 @@ else
 			local f59_local8 = LUI.UIElement.new()
 			f59_local8:setLeftRight(true, true, 0, 0)
 			f59_local8:setTopBottom(true, true, 0, 0)
-			f59_local8:setImage(RegisterMaterial(0xD76836DED6B251B))
+			f59_local8:setImage(RegisterMaterial(@"compassping_enemy_diamond_bottom"))
 			f59_local8:setRGB(CoD.ColorUtility.ExplodeColor(CoD.ColorUtility.GetColorBlindColorForPlayer(f59_arg1, "PlayerYellow")))
 			f59_arg0:addForceClosedChild(f59_local8)
 			f59_local8:setupTargetHighlights_Friendly()
@@ -932,7 +932,7 @@ else
 			local f59_local9 = LUI.UIElement.new()
 			f59_local9:setLeftRight(true, true, 0, 0)
 			f59_local9:setTopBottom(true, true, 0, 0)
-			f59_local9:setImage(RegisterMaterial(0xEA85353DDCA6682))
+			f59_local9:setImage(RegisterMaterial(@"compassping_enemysatellite_diamond"))
 			f59_local9:setRGB(CoD.ColorUtility.ExplodeColor(CoD.ColorUtility.GetColorBlindColorForPlayer(f59_arg1, "PlayerYellow")))
 			f59_arg0:addForceClosedChild(f59_local9)
 			f59_local9:setupTargetHighlights_Friendly()
@@ -944,7 +944,7 @@ else
 			local f59_local10 = LUI.UIElement.new()
 			f59_local10:setLeftRight(true, true, 0, 0)
 			f59_local10:setTopBottom(true, true, 0, 0)
-			f59_local10:setImage(RegisterMaterial(0xEA85353DDCA6682))
+			f59_local10:setImage(RegisterMaterial(@"compassping_enemysatellite_diamond"))
 			f59_local10:setRGB(1, 0, 0)
 			f59_arg0:addForceClosedChild(f59_local10)
 			f59_local10:setupPlayerPivotTargetting()
@@ -959,7 +959,7 @@ else
 			local f59_local9 = LUI.UIElement.new()
 			f59_local9:setLeftRight(true, true, 0, 0)
 			f59_local9:setTopBottom(true, true, 0, 0)
-			f59_local9:setImage(RegisterMaterial(0xEA85353DDCA6682))
+			f59_local9:setImage(RegisterMaterial(@"compassping_enemysatellite_diamond"))
 			f59_local9:setRGB(CoD.ColorUtility.ExplodeColor(CoD.ColorUtility.GetColorBlindColorForPlayer(f59_arg1, "EnemyScorestreakTarget")))
 			f59_arg0:addForceClosedChild(f59_local9)
 			f59_local9:setupLockonHighlights()
@@ -976,7 +976,7 @@ else
 			f59_arg0:addForceClosedChild(f59_local9)
 			f59_local9:setupFriendlyArrows()
 			if CoD.isZombie == true then
-				local f59_local10 = Engine[0x8DF2E5447F384B9]()
+				local f59_local10 = Engine[@"getglobalmodel"]()
 				f59_local10 = f59_local10["ZMHudGlobal.trials.hudDeactivated"]
 				if f59_local10 then
 					f59_local9:subscribeToModel(f59_local10, function(model)
@@ -991,7 +991,7 @@ else
 		end
 	end
 	local f0_local18 = function(f65_arg0, f65_arg1, f65_arg2)
-		if CoD.isMultiplayer and not Engine[0xA55C3ACD0D2BCF0]() then
+		if CoD.isMultiplayer and not Engine[@"isdemoplaying"]() then
 			local f65_local0 = CoD.SpawnSelectKillcam.new(f65_arg1, f65_arg2, 0.5, 0.5, -960, 960, 0.5, 0.5, -540, 540)
 			f65_local0:setState(f65_arg2, "Hidden")
 			LUI.roots["UIRoot" .. f65_arg2].addElement(REG4["UIRoot" .. f65_arg2], f65_local0)
@@ -1007,12 +1007,12 @@ else
 		f66_arg0.killcamHUD:menuOpened(f66_arg2, f66_arg0.killcamHUD)
 	end
 	local f0_local20 = function(f67_arg0, f67_arg1)
-		if Engine[0xA55C3ACD0D2BCF0]() then
+		if Engine[@"isdemoplaying"]() then
 			return
 		else
-			local f67_local0 = Engine[0x40E824FE270E174](Engine[0x4DF5CFBC1771947](f67_arg1), "team")
+			local f67_local0 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f67_arg1), "team")
 			local f67_local1 = function(f68_arg0)
-				if Engine[0x614D394F6F9A18D](f68_arg0) == Enum[0x13A4717E5AC547][0xE4DDAC9C5C45556] then
+				if Engine[@"getmodelvalue"](f68_arg0) == Enum[@"team_t"][@"team_spectator"] then
 					if f67_arg0.safeArea and f67_arg0.safeArea.CodCaster == nil then
 						if CoD.isWarzone then
 							f67_arg0.safeArea.CodCaster = CoD.CodCaster_WZ.new(f67_arg0.safeArea, f67_arg1, 0, 1, 0, 0, 0, 1, 0, 0)
@@ -1022,7 +1022,7 @@ else
 						f67_arg0:addForceClosedSafeAreaChild(f67_arg0.safeArea.CodCaster)
 						f67_arg0.safeArea:sendInitializationEvents(f67_arg1, f67_arg0.safeArea.CodCaster)
 						f67_arg0.safeArea.buttonFunctions = f67_arg0.safeArea.CodCaster.buttonFunctions
-						if not Engine[0xDD333420C49E6D0](f67_arg1, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) then
+						if not Engine[@"isvisibilitybitset"](f67_arg1, Enum[@"uivisibilitybit"][@"bit_ui_active"]) then
 							f67_arg0.safeArea.CodCaster:processEvent({
 								name = "gain_focus",
 								controller = f67_arg1,
@@ -1072,15 +1072,15 @@ else
 			f70_local0:addElement(f70_arg0.toastNotification)
 			f70_arg0:addCustomForceClosedWidget(f70_arg0.toastNotification, "toastNotification")
 		end
-		local f70_local1 = Engine[0x4DF5CFBC1771947](f70_arg1.controller)
+		local f70_local1 = Engine[@"getmodelforcontroller"](f70_arg1.controller)
 		if f70_local1 then
-			f70_local1 = Engine[0x40E824FE270E174](f70_local1, "hudItems.playerSpawned")
+			f70_local1 = Engine[@"getmodel"](f70_local1, "hudItems.playerSpawned")
 		end
-		local f70_local2 = f70_local1 and Engine[0x614D394F6F9A18D](f70_local1)
+		local f70_local2 = f70_local1 and Engine[@"getmodelvalue"](f70_local1)
 		if f70_local2 then
-			Engine[0x83C9B5DE1D9371](f70_local1, false)
+			Engine[@"setmodelvalue"](f70_local1, false)
 		end
-		local f70_local3 = Engine[0x69811927938FCD7]()
+		local f70_local3 = Engine[@"lobbygetgametype"]()
 		if f70_arg0.T7HudMenu then
 			f70_arg0.T7HudMenu.SafeAreaContainerBack.Notifications.NotificationQueueWidget:clearNotificationQueue()
 			f70_arg0.T7HudMenu.hasBooted = false
@@ -1126,13 +1126,13 @@ else
 				f70_arg0.InGameTalkersWidget = f70_local6
 			end
 			if f70_local2 then
-				Engine[0x83C9B5DE1D9371](f70_local1, true)
+				Engine[@"setmodelvalue"](f70_local1, true)
 			end
 			f70_arg0.T7HudMenuGameMode = f70_local5
 		else
 			f70_arg0.T7HudMenuGameMode:setAlpha(1)
 			if f70_local2 then
-				Engine[0x83C9B5DE1D9371](f70_local1, true)
+				Engine[@"setmodelvalue"](f70_local1, true)
 			end
 		end
 		f70_arg0:addElement(f70_arg0.T7HudMenuGameMode)
@@ -1172,7 +1172,7 @@ else
 			if CoD.isMultiplayer then
 				local f70_local7 = f70_arg0
 				local f70_local6 = f70_arg0.subscribeToModel
-				local f70_local8 = Engine[0x4DF5CFBC1771947](f70_arg1.controller)
+				local f70_local8 = Engine[@"getmodelforcontroller"](f70_arg1.controller)
 				f70_arg0.positionDraftSub = f70_local6(f70_local7, f70_local8:create("PositionDraft.stage"), function(f73_arg0)
 					if f73_arg0 then
 						local f73_local0 = f70_arg0
@@ -1291,13 +1291,13 @@ else
 		f0_local22(f86_arg0, f86_arg1)
 	end
 	function HUD_FirstSnapshot_CombatTraining(f87_arg0, f87_arg1)
-		local f87_local0 = Engine[0x8DF2E5447F384B9]()
+		local f87_local0 = Engine[@"getglobalmodel"]()
 		local f87_local1 = f87_local0:create("isIntroTutorialMovie")
 		local f87_local2 = 0
 		if f87_local1 and f87_local1:get() then
 			f87_local2 = 1
 		end
-		Engine[0xC554A8C36EF7EFF](f87_arg1.controller, f87_arg0.menuName, "isIntroTutorialMovie", f87_local2)
+		Engine[@"sendmenuresponse"](f87_arg1.controller, f87_arg0.menuName, "isIntroTutorialMovie", f87_local2)
 	end
 	function HUD_FirstSnapshot_Zombie(f88_arg0, f88_arg1)
 		CoD.CodCasterUtility.SetupUIModels(f88_arg1.controller)
@@ -1316,7 +1316,7 @@ else
 			f88_arg0:addCustomForceClosedWidget(f88_arg0.toastNotification, "toastNotification")
 		end
 		if f88_arg0.T7HudMenuGameMode == nil then
-			local f88_local2 = LUI.createMenu["T7Hud_" .. Engine[0xB87231BF773995E]()]
+			local f88_local2 = LUI.createMenu["T7Hud_" .. Engine[@"getcurrentmap"]()]
 			if f88_local2 then
 				f88_arg0.T7HudMenuGameMode = f88_local2(f88_arg1.controller)
 			else
@@ -1324,12 +1324,12 @@ else
 			end
 		else
 			f88_arg0.T7HudMenuGameMode:setAlpha(1)
-			local f88_local3 = Engine[0x4DF5CFBC1771947](f88_arg1.controller)
+			local f88_local3 = Engine[@"getmodelforcontroller"](f88_arg1.controller)
 			if f88_local3 then
-				f88_local3 = Engine[0x40E824FE270E174](f88_local3, "hudItems.playerSpawned")
+				f88_local3 = Engine[@"getmodel"](f88_local3, "hudItems.playerSpawned")
 			end
-			if f88_local3 and Engine[0x614D394F6F9A18D](f88_local3) then
-				Engine[0x83C9B5DE1D9371](f88_local3, true)
+			if f88_local3 and Engine[@"getmodelvalue"](f88_local3) then
+				Engine[@"setmodelvalue"](f88_local3, true)
 			end
 		end
 		f88_arg0:addElement(f88_arg0.T7HudMenuGameMode)
@@ -1343,7 +1343,7 @@ else
 			end
 			local f88_local2 = f88_arg0
 			local f88_local3 = f88_arg0.subscribeToModel
-			local f88_local4 = Engine[0x4DF5CFBC1771947](f88_arg1.controller)
+			local f88_local4 = Engine[@"getmodelforcontroller"](f88_arg1.controller)
 			f88_arg0.positionDraftSub = f88_local3(f88_local2, f88_local4:create("PositionDraft.stage"), function(f89_arg0)
 				if f89_arg0 then
 					local f89_local0 = f88_arg0
@@ -1376,14 +1376,14 @@ else
 		elseif type(f91_arg1.menuName) == "xhash" then
 			local f91_local0 = nil
 			for f91_local4, f91_local5 in pairs(LUI.createMenu) do
-				if Engine[0xC53F8D38DF9042B](f91_local4) == f91_arg1.menuName then
+				if Engine[@"converttoxhash"](f91_local4) == f91_arg1.menuName then
 					f91_local0 = f91_local4
 					break
 				end
 			end
 			if not f91_local0 then
 				for f91_local4, f91_local5 in pairs(CoD.OverlayUtility.Overlays) do
-					if Engine[0xC53F8D38DF9042B](f91_local4) == f91_arg1.menuName then
+					if Engine[@"converttoxhash"](f91_local4) == f91_arg1.menuName then
 						f91_local0 = f91_local4
 						break
 					end
@@ -1397,7 +1397,7 @@ else
 		if f91_arg1.menuName == "DOA_INGAME_PAUSE" and CoD.isDOAPauseMenuOpen ~= nil and CoD.isDOAPauseMenuOpen == true then
 			return
 		elseif f91_arg1.menuName == "StartMenu_Main" then
-			if Engine[0x6F48406A3601C39](f91_arg1.controller) == true then
+			if Engine[@"ismigrating"](f91_arg1.controller) == true then
 				return
 			end
 			local f91_local0 = f91_arg0:getParent()
@@ -1405,7 +1405,7 @@ else
 				return
 			end
 		end
-		if Engine[0xA1D8D9E5D79905F]() then
+		if Engine[@"canpausegame"]() then
 			if CoD.InGameMenu.m_unpauseDisabled == nil then
 				CoD.InGameMenu.m_unpauseDisabled = {}
 			end
@@ -1415,7 +1415,7 @@ else
 			end
 		end
 		if f91_arg1.data ~= nil then
-			f91_arg1.menuName = Engine[0xEFE2F6436680CF3](f91_arg1.data[1], "CS_SCRIPT_MENUS")
+			f91_arg1.menuName = Engine[@"getistring"](f91_arg1.data[1], "CS_SCRIPT_MENUS")
 		end
 		local f91_local0 = nil
 		CoD.Menu.ModelToUse = f91_arg1.model
@@ -1423,18 +1423,18 @@ else
 			local f91_local2 = function(f92_arg0)
 				if not CoD.isPC or not CoD.isWarzone then
 					return false
-				elseif Engine[0xA55C3ACD0D2BCF0]() then
+				elseif Engine[@"isdemoplaying"]() then
 					return false
 				end
-				local f92_local0 = Engine[0x4DF5CFBC1771947](f92_arg0)
+				local f92_local0 = Engine[@"getmodelforcontroller"](f92_arg0)
 				f92_local0 = f92_local0.gameScore
 				if f92_local0 then
-					f92_local0 = Engine[0x4DF5CFBC1771947](f92_arg0)
+					f92_local0 = Engine[@"getmodelforcontroller"](f92_arg0)
 					f92_local0 = f92_local0.gameScore.currentState:get()
 				end
 				if f92_local0 ~= nil and f92_local0 ~= "" then
 					return true
-				elseif IsVisibilityBitSet(f92_arg0, Enum[0x7F032C2EF103A1A][0x6FFF566DCC09BBD]) then
+				elseif IsVisibilityBitSet(f92_arg0, Enum[@"uivisibilitybit"][@"bit_spectating_client"]) then
 					return true
 				end
 				return false
@@ -1497,7 +1497,7 @@ else
 			end
 		end
 		if f91_local0 and f91_local0:getModel() then
-			Engine[0x83C9B5DE1D9371](Engine[0xA798E4552F5E872](f91_local0:getModel(), "close_current_menu"), 0)
+			Engine[@"setmodelvalue"](Engine[@"createmodel"](f91_local0:getModel(), "close_current_menu"), 0)
 			f91_local0:subscribeToCloseMenuModel()
 			f91_local0:subscribeToStateModel(f91_arg1.controller)
 			f91_local0:subscribeToCurrAnimationModel()
@@ -1516,7 +1516,7 @@ else
 			end
 			f94_arg0:dispatchEventToRoot({
 				name = "close_menu",
-				menuName = Engine[0xEFE2F6436680CF3](f94_arg1.data[1], "CS_SCRIPT_MENUS"),
+				menuName = Engine[@"getistring"](f94_arg1.data[1], "CS_SCRIPT_MENUS"),
 				controller = f94_arg1.controller,
 			})
 		end
@@ -1539,9 +1539,9 @@ else
 	function HUD_Close(f97_arg0, f97_arg1)
 		if f97_arg0.safeArea and f97_arg0.safeArea.buttonModel then
 			if LUI.DEV then
-				local f97_local0 = LUI.DEV.ErrorIfModelsDoNotMatch(f97_arg0.safeArea.buttonModel, Engine[0xA798E4552F5E872](Engine[0x4DF5CFBC1771947](f97_arg0:getOwner() or 0), "HUDSafeArea.buttonPrompts"))
+				local f97_local0 = LUI.DEV.ErrorIfModelsDoNotMatch(f97_arg0.safeArea.buttonModel, Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f97_arg0:getOwner() or 0), "HUDSafeArea.buttonPrompts"))
 			end
-			Engine[0x8C7A8C4C5FD9892](f97_arg0.safeArea.buttonModel)
+			Engine[@"unsubscribeandfreemodel"](f97_arg0.safeArea.buttonModel)
 		end
 		f97_arg0.safeArea.buttonModel = nil
 		f97_arg0:close()
@@ -1551,15 +1551,15 @@ else
 		return true
 	end
 	function HUD_CloseInGameMenu(f99_arg0, f99_arg1)
-		if Engine[0xA1D8D9E5D79905F]() then
+		if Engine[@"canpausegame"]() then
 			if CoD.InGameMenu.m_unpauseDisabled == nil then
 				CoD.InGameMenu.m_unpauseDisabled = {}
 			end
 			CoD.InGameMenu.m_unpauseDisabled[f99_arg1.controller + 1] = 0
 		end
 		f0_local9 = nil
-		if Engine[0xA1D8D9E5D79905F]() then
-			Engine[0x70B0A2EF2A81722](f99_arg1.controller, Enum[0x52E616D9ABDBF0E][0xA1CE036AEF3710F])
+		if Engine[@"canpausegame"]() then
+			Engine[@"setactivemenu"](f99_arg1.controller, Enum[@"uimenucommand_t"][@"uimenu_none"])
 		end
 	end
 	function HUD_DebugReload(f100_arg0, f100_arg1)
@@ -1574,12 +1574,12 @@ else
 				controller = f100_arg0.controller,
 				debugReload = true,
 			})
-			Engine[0x104A34FF9CC8614](f100_arg0.controller)
+			Engine[@"forcehudrefresh"](f100_arg0.controller)
 			f100_arg0:processEvent({
 				name = "hud_boot",
 				controller = f100_arg0.controller,
 			})
-			Engine[0x83C9B5DE1D9371](Engine[0x40E824FE270E174](Engine[0x4DF5CFBC1771947](f100_arg0.controller), "scriptNotify"), 0x9FB0A7FE2E8EC41)
+			Engine[@"setmodelvalue"](Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f100_arg0.controller), "scriptNotify"), @"player_spawned")
 		end
 	end
 	function HUD_UpdateRefresh(f101_arg0, f101_arg1)
@@ -1606,8 +1606,8 @@ else
 	function HUD_UpdateScoreboardColumns(f104_arg0, f104_arg1) end
 	function HUD_StartKillcamHud(f105_arg0, f105_arg1)
 		if f105_arg0.T7HudMenu and not f105_arg0._isKillcamHUDOpen then
-			if Engine[0xBE2801A433561F] then
-				Engine[0xBE2801A433561F](f105_arg1.controller, Engine[0x869E84B826141D2](f105_arg1.controller))
+			if Engine[@"updatekillcamuimodels"] then
+				Engine[@"updatekillcamuimodels"](f105_arg1.controller, Engine[@"getpredictedclientnum"](f105_arg1.controller))
 			end
 			if f105_arg0.killcamHUD and f105_arg0.killcamHUD.persistent then
 				f105_arg0.killcamHUD:setAlpha(1)
@@ -1638,7 +1638,7 @@ else
 		end
 	end
 	f0_local2 = function(f107_arg0, f107_arg1)
-		if Engine[0xDD333420C49E6D0](f107_arg1.controller, Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2]) or Engine[0xDD333420C49E6D0](f107_arg1.controller, Enum[0x7F032C2EF103A1A][0x4828BED794DA0A5]) or Engine[0xDD333420C49E6D0](f107_arg1.controller, Enum[0x7F032C2EF103A1A][0x1CDCB451655ABCF]) or Engine[0xDD333420C49E6D0](f107_arg1.controller, Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F]) then
+		if Engine[@"isvisibilitybitset"](f107_arg1.controller, Enum[@"uivisibilitybit"][@"bit_in_killcam"]) or Engine[@"isvisibilitybitset"](f107_arg1.controller, Enum[@"uivisibilitybit"][@"bit_round_end_killcam"]) or Engine[@"isvisibilitybitset"](f107_arg1.controller, Enum[@"uivisibilitybit"][@"bit_final_killcam"]) or Engine[@"isvisibilitybitset"](f107_arg1.controller, Enum[@"uivisibilitybit"][@"bit_play_of_the_match"]) then
 			HUD_StartKillcamHud(f107_arg0, f107_arg1)
 		else
 			HUD_StopKillcamHud(f107_arg0, f107_arg1)
@@ -1646,14 +1646,14 @@ else
 	end
 	local f0_local23 = function(f108_arg0)
 		local f108_local0
-		if Engine[0xBC62B0E988DCCAF]() == false then
-			if Engine[0x15858452493DB17]() ~= true then
-				f108_local0 = Engine[0xDD333420C49E6D0](f108_arg0, Enum[0x7F032C2EF103A1A][0x6FFF566DCC09BBD])
+		if Engine[@"issplitscreen"]() == false then
+			if Engine[@"isdemoshoutcaster"]() ~= true then
+				f108_local0 = Engine[@"isvisibilitybitset"](f108_arg0, Enum[@"uivisibilitybit"][@"bit_spectating_client"])
 				if f108_local0 then
-					f108_local0 = Engine[0xDD333420C49E6D0](f108_arg0, Enum[0x7F032C2EF103A1A][0xC57360571B0917E])
+					f108_local0 = Engine[@"isvisibilitybitset"](f108_arg0, Enum[@"uivisibilitybit"][@"bit_team_spectator"])
 					if f108_local0 then
-						if not Engine[0xDD333420C49E6D0](f108_arg0, Enum[0x7F032C2EF103A1A][0x198075B069840DC]) then
-							f108_local0 = not Engine[0xDD333420C49E6D0](f108_arg0, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6])
+						if not Engine[@"isvisibilitybitset"](f108_arg0, Enum[@"uivisibilitybit"][@"bit_game_ended"]) then
+							f108_local0 = not Engine[@"isvisibilitybitset"](f108_arg0, Enum[@"uivisibilitybit"][@"bit_ui_active"])
 						else
 							f108_local0 = false
 						end
@@ -1668,7 +1668,7 @@ else
 		return f108_local0
 	end
 	local f0_local24 = function(f109_arg0)
-		return Engine[0xDD333420C49E6D0](f109_arg0, Enum[0x7F032C2EF103A1A][0x1999FA50941A83B]) and not Engine[0xDD333420C49E6D0](f109_arg0, Enum[0x7F032C2EF103A1A][0xD567EDB5609CCEC])
+		return Engine[@"isvisibilitybitset"](f109_arg0, Enum[@"uivisibilitybit"][@"bit_selecting_location"]) and not Engine[@"isvisibilitybitset"](f109_arg0, Enum[@"uivisibilitybit"][@"bit_is_demo_playing"])
 	end
 	if not CoD.isZombie then
 		require("x64:d923ab4f5b48d75")
@@ -1692,15 +1692,15 @@ else
 		if f112_arg0 ~= nil then
 			local f112_local0 = f112_arg0:getOwner()
 			if f112_local0 ~= nil then
-				Engine[0x248DE419A8FA473](f112_local0, 4)
+				Engine[@"disablescenefilter"](f112_local0, 4)
 			end
 		end
 	end
 	f0_local5 = function(f113_arg0, f113_arg1)
 		local f113_local0 = f113_arg1.data[1]
 		local f113_local1 = f113_arg1.data[2]
-		Engine[0x83C9B5DE1D9371](Engine[0xA798E4552F5E872](Engine[0xA798E4552F5E872](Engine[0x4DF5CFBC1771947](f113_arg1.controller), "Attacker"), "kills"), f113_local0)
-		Engine[0x83C9B5DE1D9371](Engine[0xA798E4552F5E872](Engine[0xA798E4552F5E872](Engine[0x4DF5CFBC1771947](f113_arg1.controller), "Victim"), "kills"), f113_local1)
+		Engine[@"setmodelvalue"](Engine[@"createmodel"](Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f113_arg1.controller), "Attacker"), "kills"), f113_local0)
+		Engine[@"setmodelvalue"](Engine[@"createmodel"](Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f113_arg1.controller), "Victim"), "kills"), f113_local1)
 	end
 	f0_local6 = function(f114_arg0, f114_arg1)
 		local f114_local0 = f114_arg1.data[1]
@@ -1708,7 +1708,7 @@ else
 		local f114_local2 = f114_arg1.data[3]
 		local f114_local3 = f114_arg1.data[4]
 		local f114_local4 = f114_arg1.data[5]
-		local f114_local5 = Engine[0xE4D2F32833CFA6C](f114_local0)
+		local f114_local5 = Engine[@"getmodelforclient"](f114_local0)
 		local f114_local6 = f114_local5.scoreboard.killStats[f114_local1]
 		if f114_local6 then
 			f114_local6.clientNum:set(f114_local2)
@@ -1718,7 +1718,7 @@ else
 	end
 	function HUD_IsFFA()
 		if f0_local7 == nil then
-			local f115_local0 = Engine[0x69811927938FCD7]()
+			local f115_local0 = Engine[@"lobbygetgametype"]()
 			local f115_local1
 			if f115_local0 ~= "dm" and f115_local0 ~= "hcdm" and f115_local0 ~= "hack" then
 				f115_local1 = false
@@ -1730,7 +1730,7 @@ else
 		return f0_local7
 	end
 	function HUD_Handle_ChooseClass_HotKey(f116_arg0, f116_arg1)
-		if UIExpression.Team(f116_arg1.controller, "name") ~= "TEAM_SPECTATOR" and CoD.IsWagerMode() == false and not (Engine[0xDBC2AD5002B261B](0xC78F5F54144DEA5) == 1) then
+		if UIExpression.Team(f116_arg1.controller, "name") ~= "TEAM_SPECTATOR" and CoD.IsWagerMode() == false and not (Engine[@"getgametypesetting"](@"disableclassselection") == 1) then
 			f0_local0(f116_arg0, {
 				menuName = "changeclass",
 				controller = f116_arg1.controller,
@@ -1739,4 +1739,4 @@ else
 	end
 end
 DisableGlobals()
-Engine[0x624185ED5FB5050]()
+Engine[@"stopeditingpresetclass"]()

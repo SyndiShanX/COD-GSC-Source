@@ -54,7 +54,7 @@ CoD.WeaponPickupWeaponIcon.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	end, false)
 	f1_local3 = self
 	f1_local4 = self.subscribeToModel
-	f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local4(f1_local3, f1_local5["hudItems.inventory.filledSlots"], function(f7_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

@@ -13,11 +13,11 @@ CoD.ReservesMeterInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Title = LUI.UIText.new(0, 0, 21, 456, 0, 0, 13.5, 33.5)
 	Title:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
-	Title:setText(LocalizeToUpperString(0x4112D432F3F5906))
+	Title:setText(LocalizeToUpperString(@"hash_44112D432F3F5906"))
 	Title:setTTF("ttmussels_demibold")
 	Title:setLetterSpacing(2)
-	Title:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Title:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Title:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Title:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(Title)
 	self.Title = Title
 	local RewardName = LUI.UIText.new(0, 0, 188.5, 433.5, 0, 0, 15.5, 33.5)
@@ -26,8 +26,8 @@ CoD.ReservesMeterInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	RewardName:setText(LocalizeToUpperString(0x0))
 	RewardName:setTTF("ttmussels_demibold")
 	RewardName:setLetterSpacing(4)
-	RewardName:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	RewardName:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	RewardName:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	RewardName:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	self:addElement(RewardName)
 	self.RewardName = RewardName
 	local ProgressBar = CoD.ReservesSpecialContractProgressBar.new(f1_arg0, f1_arg1, 0, 0, 12, 503, 0, 0, 33.5, 51.5)
@@ -45,8 +45,8 @@ CoD.ReservesMeterInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 			end,
 		},
 	})
-	ProgressBar.Progress:setImage(RegisterImage(0x6D2FBF31F53910C))
-	ProgressBar.ProgressGlow:setImage(RegisterImage(0xA7D61A3302B55D0))
+	ProgressBar.Progress:setImage(RegisterImage(@"uie_ui_menu_aar_levelup_bar"))
+	ProgressBar.ProgressGlow:setImage(RegisterImage(@"uie_ui_menu_aar_levelup_bar_glow"))
 	ProgressBar:subscribeToGlobalModel(f1_arg1, "LootStreamProgress", "reservesRngPercentage", function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
@@ -113,7 +113,7 @@ CoD.ReservesMeterInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	ItemHintText:linkToElementModel(self, "toolTip", true, function(model)
 		local f12_local0 = model:get()
 		if f12_local0 ~= nil then
-			ItemHintText.textCenterAlign:setText(Engine[0xF9F1239CFD921FE](f12_local0))
+			ItemHintText.textCenterAlign:setText(Engine[@"hash_4F9F1239CFD921FE"](f12_local0))
 		end
 	end)
 	self:addElement(ItemHintText)

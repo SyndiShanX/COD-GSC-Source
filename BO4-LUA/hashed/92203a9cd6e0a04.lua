@@ -8,8 +8,8 @@ CoD.Hud_ZM_Flare_Multiplier.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local flare12 = LUI.UIImage.new(0, 0, -253, 984, 0, 0, -190, 571)
-	flare12:setImage(RegisterImage(0x7615068F50B3D66))
-	flare12:setMaterial(LUI.UIImage.GetCachedMaterial(0x32309484D7128AB))
+	flare12:setImage(RegisterImage(@"blacktransparent"))
+	flare12:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_flipbook_animated_add"))
 	flare12:setShaderVector(0, 24, 0, 0, 0)
 	flare12:setShaderVector(1, 0, 0, 0, 0)
 	self:addElement(flare12)
@@ -63,7 +63,7 @@ end
 CoD.Hud_ZM_Flare_Multiplier.__resetProperties = function(f8_arg0)
 	f8_arg0.flare12:completeAnimation()
 	f8_arg0.flare12:setAlpha(1)
-	f8_arg0.flare12:setImage(RegisterImage(0x7615068F50B3D66))
+	f8_arg0.flare12:setImage(RegisterImage(@"blacktransparent"))
 	f8_arg0.flare12:setShaderVector(0, 24, 0, 0, 0)
 	f8_arg0.flare12:setShaderVector(1, 0, 0, 0, 0)
 end
@@ -104,7 +104,7 @@ CoD.Hud_ZM_Flare_Multiplier.__clipsPerState = {
 				f12_arg0.flare12:registerEventHandler("transition_complete_keyframe", f12_arg0.clipFinished)
 			end
 			f12_arg0.flare12:completeAnimation()
-			f12_arg0.flare12:setImage(RegisterImage(0x7615068F50B3D66))
+			f12_arg0.flare12:setImage(RegisterImage(@"blacktransparent"))
 			f12_arg0.flare12:setShaderVector(0, 24, 0, 0, 0)
 			f12_arg0.flare12:setShaderVector(1, 0, 0, 0, 0)
 			f12_local0(f12_arg0.flare12)

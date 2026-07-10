@@ -29,8 +29,8 @@ CoD.PC_StartMenu_OptionsTabs.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	self:addElement(Background)
 	self.Background = Background
 	local LB = CoD.BumperButtonWithKeyMouseText.new(f1_arg0, f1_arg1, 0, 0, 58, 258, 0, 0, 53, 87)
-	LB.GamepadPrompt:setText(Engine[0xF9F1239CFD921FE](0xBDCD5292604F434))
-	LB.GamepadPrompt:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
+	LB.GamepadPrompt:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_5BDCD5292604F434"))
+	LB.GamepadPrompt:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
 	self:addElement(LB)
 	self.LB = LB
 	local OptionsTabList = LUI.GridLayout.new(f1_arg0, f1_arg1, false, 0, 0, 0, 0, nil, nil, false, false, false, false)
@@ -39,7 +39,7 @@ CoD.PC_StartMenu_OptionsTabs.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	OptionsTabList:setWidgetType(CoD.DirectorSelectTextTab)
 	OptionsTabList:setHorizontalCount(6)
 	OptionsTabList:setSpacing(0)
-	OptionsTabList:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	OptionsTabList:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	OptionsTabList:setStaggeredIntroTime(50)
 	OptionsTabList:setDataSource("OptionTabs")
 	OptionsTabList:registerEventHandler("gain_focus", function(element, event)
@@ -49,14 +49,14 @@ CoD.PC_StartMenu_OptionsTabs.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 		elseif element.super.gainFocus then
 			f3_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f3_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(OptionsTabList, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(OptionsTabList, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		SelectItemIfPossible(self, element, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 		return false
 	end, false)
 	LUI.OverrideFunction_CallOriginalFirst(OptionsTabList, "setModel", function(element, controller)
@@ -70,7 +70,7 @@ CoD.PC_StartMenu_OptionsTabs.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	self:addElement(OptionsTabList)
 	self.OptionsTabList = OptionsTabList
 	local RB = CoD.BumperButtonWithKeyMouseText.new(f1_arg0, f1_arg1, 0, 0, 1662, 1862, 0, 0, 53, 87)
-	RB.GamepadPrompt:setText(Engine[0xF9F1239CFD921FE](0xBFED5292621DA9A))
+	RB.GamepadPrompt:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_5BFED5292621DA9A"))
 	self:addElement(RB)
 	self.RB = RB
 	OptionsTabList.id = "OptionsTabList"

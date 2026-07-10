@@ -8,7 +8,7 @@ CoD.SupplyChainItemGlint.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Glint = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	Glint:setMaterial(LUI.UIImage.GetCachedMaterial(0x98A2728B4675FB5))
+	Glint:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_glint"))
 	Glint:setShaderVector(0, 1.12, 0, 0, 0)
 	Glint:setShaderVector(1, -46.8, 0, 0, 0)
 	Glint:linkToElementModel(self, "rarity", true, function(model)

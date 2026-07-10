@@ -31,7 +31,7 @@ CoD.BlackjackReserveFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 		SpecialContract:setModel(model, f1_arg1)
 	end)
 	SpecialContract:linkToElementModel(SpecialContract, "active", true, function(model, f3_arg1)
-		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	SpecialContract:registerEventHandler("gain_focus", function(element, event)
 		local f4_local0 = nil
@@ -40,10 +40,10 @@ CoD.BlackjackReserveFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 		elseif element.super.gainFocus then
 			f4_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f4_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(SpecialContract, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(SpecialContract, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "active") then
 			OpenOverlay(self, "ReservesSpecialContractMenu", controller, {
 				_model = element:getModel(),
@@ -53,7 +53,7 @@ CoD.BlackjackReserveFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 		end
 	end, function(element, menu, controller)
 		if CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "active") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		else
 			return false

@@ -21,17 +21,17 @@ CoD.EquippedBGBInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	local DiamondBacking = LUI.UIImage.new(0.5, 0.5, -102, 102, 0.5, 0.5, -102, 102)
 	DiamondBacking:setRGB(ColorSet.T8__BEIGE__HEADER.r, ColorSet.T8__BEIGE__HEADER.g, ColorSet.T8__BEIGE__HEADER.b)
 	DiamondBacking:setAlpha(0.5)
-	DiamondBacking:setImage(RegisterImage(0xB548E386E78802E))
+	DiamondBacking:setImage(RegisterImage(@"uie_ui_menu_zombies_cac_elixir_loadout_box"))
 	self:addElement(DiamondBacking)
 	self.DiamondBacking = DiamondBacking
 	local EmptyHighlight = LUI.UIImage.new(0.5, 0.5, -102, 102, 0.5, 0.5, -102, 102)
 	EmptyHighlight:setAlpha(0)
-	EmptyHighlight:setImage(RegisterImage(0xFA49018B8B7B52D))
+	EmptyHighlight:setImage(RegisterImage(@"uie_ui_menu_zombies_cac_elixir_loadout_empty_highlight"))
 	self:addElement(EmptyHighlight)
 	self.EmptyHighlight = EmptyHighlight
 	local Dots = LUI.UIImage.new(0.5, 0.5, -102, 102, 0.5, 0.5, -102, 102)
 	Dots:setRGB(0.49, 0.09, 0.09)
-	Dots:setImage(RegisterImage(0x233E2450B088E37))
+	Dots:setImage(RegisterImage(@"uie_ui_menu_zombies_cac_elixir_loadout_box_dots"))
 	self:addElement(Dots)
 	self.Dots = Dots
 	local ElixirImage = LUI.UIImage.new(0.5, 0.5, -45, 45, 0.5, 0.5, -45, 45)
@@ -49,7 +49,7 @@ CoD.EquippedBGBInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 		{
 			stateName = "Hidden",
 			condition = function(menu, element, event)
-				return not CoD.CACUtility.IsCACItemConsumable(menu, element, Enum[0x6EB546760F890D2][0x48CD0338EE0B3AE])
+				return not CoD.CACUtility.IsCACItemConsumable(menu, element, Enum[@"statindexoffset"][@"hash_648CD0338EE0B3AE"])
 			end,
 		},
 	})
@@ -69,7 +69,7 @@ CoD.EquippedBGBInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	ElixirCount:linkToElementModel(self, "itemIndex", true, function(model)
 		local f6_local0 = model:get()
 		if f6_local0 ~= nil then
-			ElixirCount.Count:setText(CoD.CACUtility.GetConsumableCountFromIndex(f1_arg1, f1_arg0, Enum[0x6EB546760F890D2][0x48CD0338EE0B3AE], f6_local0))
+			ElixirCount.Count:setText(CoD.CACUtility.GetConsumableCountFromIndex(f1_arg1, f1_arg0, Enum[@"statindexoffset"][@"hash_648CD0338EE0B3AE"], f6_local0))
 		end
 	end)
 	self:addElement(ElixirCount)

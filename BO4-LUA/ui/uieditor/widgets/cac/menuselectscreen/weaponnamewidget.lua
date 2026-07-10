@@ -10,13 +10,13 @@ CoD.WeaponNameWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	local weaponNameLabel = LUI.UIText.new(0, 1, 0, 0, 0.5, 0.5, -22, 23)
 	weaponNameLabel:setRGB(0.92, 0.92, 0.92)
 	weaponNameLabel:setTTF("ttmussels_demibold")
-	weaponNameLabel:setMaterial(LUI.UIImage.GetCachedMaterial(0x71E049B161CD00A))
+	weaponNameLabel:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_171E049B161CD00A"))
 	weaponNameLabel:setLetterSpacing(5.6)
-	weaponNameLabel:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	weaponNameLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	weaponNameLabel:linkToElementModel(self, "name", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			weaponNameLabel:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			weaponNameLabel:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	LUI.OverrideFunction_CallOriginalFirst(weaponNameLabel, "setText", function(element, controller)

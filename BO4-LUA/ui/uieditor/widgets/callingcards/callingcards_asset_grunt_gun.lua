@@ -10,20 +10,20 @@ CoD.CallingCards_Asset_grunt_gun.new = function ( f1_arg0, f1_arg1, f1_arg2, f1_
 	f1_arg0:addElementToPendingUpdateStateList( self )
 	
 	local gun = LUI.UIImage.new( 0, 0, 0, 304, 0, 0, 0, 240 )
-	gun:setImage( RegisterImage( 0xC8821A94C606596 ) )
+	gun:setImage( RegisterImage( @"uie_grunt_gun" ) )
 	self:addElement( gun )
 	self.gun = gun
 	
 	local gunFirelight = LUI.UIImage.new( 0, 0, 0, 304, 0, 0, 0, 240 )
 	gunFirelight:setAlpha( 0 )
-	gunFirelight:setImage( RegisterImage( 0x6B63DA301EF5F55 ) )
+	gunFirelight:setImage( RegisterImage( @"uie_grunt_gun_light" ) )
 	self:addElement( gunFirelight )
 	self.gunFirelight = gunFirelight
 	
 	local bullets = LUI.UIImage.new( 0, 0, -211, 180, 0, 0, -81, 180 )
 	bullets:setAlpha( 0 )
-	bullets:setImage( RegisterImage( 0x9395081C1C3E0B1 ) )
-	bullets:setMaterial( LUI.UIImage.GetCachedMaterial( 0xFD526D3FD71F281 ) )
+	bullets:setImage( RegisterImage( @"uie_grunt_bullet_shot" ) )
+	bullets:setMaterial( LUI.UIImage.GetCachedMaterial( @"uie_flipbook" ) )
 	bullets:setShaderVector( 0, 0, 6, 0, 0 )
 	bullets:setShaderVector( 1, 12, 0, 0, 0 )
 	self:addElement( bullets )

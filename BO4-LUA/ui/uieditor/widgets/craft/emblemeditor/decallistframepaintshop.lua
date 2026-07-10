@@ -19,15 +19,15 @@ CoD.DecalListFramePaintshop.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	emblemIconList:setHorizontalCount(6)
 	emblemIconList:setVerticalCount(4)
 	emblemIconList:setSpacing(18)
-	emblemIconList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	emblemIconList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	emblemIconList:setVerticalCounter(CoD.verticalCounter)
 	emblemIconList:setDataSource("EmblemIconList")
 	emblemIconList:linkToElementModel(emblemIconList, "owned", true, function(model, f2_arg1)
-		CoD.Menu.UpdateButtonShownState(f2_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f2_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	emblemIconList:appendEventHandler("record_curr_focused_elem_id", function(f3_arg0, f3_arg1)
 		f3_arg1.menu = f3_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f3_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f3_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	emblemIconList:registerEventHandler("list_item_gain_focus", function(element, event)
 		local f4_local0 = nil
@@ -47,10 +47,10 @@ CoD.DecalListFramePaintshop.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 		elseif element.super.gainFocus then
 			f6_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f6_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(emblemIconList, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(emblemIconList, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if IsEmblemEditor(controller) and CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "owned") and CoD.BaseUtility.DoesElementOrChildHaveFocus(self, "emblemIconList") then
 			CoD.CraftUtility.EmblemChooseIcon_SelectionAccepted(self, element, controller)
 			CoD.CraftUtility.EmblemEditor_SetEditMode(controller)
@@ -68,10 +68,10 @@ CoD.DecalListFramePaintshop.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 		end
 	end, function(element, menu, controller)
 		if IsEmblemEditor(controller) and CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "owned") and CoD.BaseUtility.DoesElementOrChildHaveFocus(self, "emblemIconList") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		elseif IsPaintshop(controller) and CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "owned") and CoD.BaseUtility.DoesElementOrChildHaveFocus(self, "emblemIconList") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		else
 			return false

@@ -8,13 +8,13 @@ CoD.ScorestreakInGameUtility.ArrowState = {
 }
 CoD.ScorestreakInGameUtility.HealthBoostPlayerSelected = function(f1_arg0, f1_arg1, f1_arg2)
 	local f1_local0 = f1_arg1:getModel()
-	local f1_local1 = Engine[0x761955642304848](f1_arg2)
+	local f1_local1 = Engine[@"getclientnum"](f1_arg2)
 	if f1_local0 then
-		Engine[0xC554A8C36EF7EFF](f1_arg2, CoD.ScorestreakInGameUtility.HealthBoostMenuResponseName, "select_player", f1_local0.clientNum:get())
+		Engine[@"sendmenuresponse"](f1_arg2, CoD.ScorestreakInGameUtility.HealthBoostMenuResponseName, "select_player", f1_local0.clientNum:get())
 	end
 end
 CoD.ScorestreakInGameUtility.AddScorestreakListNavigation = function(f2_arg0, f2_arg1, f2_arg2)
-	if Engine[0xA55C3ACD0D2BCF0]() then
+	if Engine[@"isdemoplaying"]() then
 		return
 	end
 	local f2_local0 = 0
@@ -34,13 +34,13 @@ CoD.ScorestreakInGameUtility.AddScorestreakListNavigation = function(f2_arg0, f2
 	end
 	f2_arg1:appendEventHandler("register_focusable_element", f2_local1)
 	f2_arg1:appendEventHandler("unregister_focusable_element", f2_local1)
-	CoD.Menu.AddButtonCallbackFunction(f2_arg0, f2_arg1, f2_arg2, Enum[0x3DD78803F918E9D][0x4B11D2B20C75A7F], "ui_navup", function(element, menu, controller, f5_arg3)
+	CoD.Menu.AddButtonCallbackFunction(f2_arg0, f2_arg1, f2_arg2, Enum[@"luibutton"][@"lui_key_up"], "ui_navup", function(element, menu, controller, f5_arg3)
 		if not element.m_disableNavigation and (not (not f2_arg1.dpadDisabled or not IsDpadButton(f5_arg3)) or f2_arg1:navigateItemUp(f2_local0)) then
 			return true
 		else
 		end
 	end)
-	CoD.Menu.AddButtonCallbackFunction(f2_arg0, f2_arg1, f2_arg2, Enum[0x3DD78803F918E9D][0xD4C15FE32148D3A], "ui_navdown", function(element, menu, controller, f6_arg3)
+	CoD.Menu.AddButtonCallbackFunction(f2_arg0, f2_arg1, f2_arg2, Enum[@"luibutton"][@"lui_key_down"], "ui_navdown", function(element, menu, controller, f6_arg3)
 		if not element.m_disableNavigation and (not (not f2_arg1.dpadDisabled or not IsDpadButton(f6_arg3)) or f2_arg1:navigateItemDown(f2_local0)) then
 			return true
 		else
@@ -51,11 +51,11 @@ CoD.ScorestreakInGameUtility.SetScorestreakSelectedSlot = function(f7_arg0, f7_a
 	local f7_local0 = f7_arg0:getModel(f7_arg1, "rewardSlot")
 	local f7_local1 = f7_local0 and f7_local0:get()
 	if f7_local1 then
-		Engine[0x75CDE04C84A5613](f7_arg1, f7_local1)
+		Engine[@"actionslotselectweapon"](f7_arg1, f7_local1)
 	else
-		Engine[0x75CDE04C84A5613](f7_arg1, -1)
+		Engine[@"actionslotselectweapon"](f7_arg1, -1)
 	end
-	local f7_local2 = Engine[0x4DF5CFBC1771947](f7_arg1)
+	local f7_local2 = Engine[@"getmodelforcontroller"](f7_arg1)
 	local f7_local3 = f7_local2.hudItems.currentHCStreakName
 	local f7_local4 = f7_local3
 	f7_local3 = f7_local3.set
@@ -103,10 +103,10 @@ CoD.ScorestreakInGameUtility.InitScorestreakUpdateListener = function(f9_arg0, f
 end
 CoD.ScorestreakInGameUtility.EarningTowardsThisScorestreak = function(f11_arg0, f11_arg1)
 	local f11_local0 = f11_arg1:getModel()
-	local f11_local1 = Engine[0x4DF5CFBC1771947](f11_arg0)
-	local f11_local2 = Engine[0x40E824FE270E174](f11_local1, "rewardMomentum")
-	local f11_local3 = Engine[0x40E824FE270E174](f11_local0, "momentumCost")
-	local f11_local4 = Engine[0x40E824FE270E174](f11_local1, "killstreaks")
+	local f11_local1 = Engine[@"getmodelforcontroller"](f11_arg0)
+	local f11_local2 = Engine[@"getmodel"](f11_local1, "rewardMomentum")
+	local f11_local3 = Engine[@"getmodel"](f11_local0, "momentumCost")
+	local f11_local4 = Engine[@"getmodel"](f11_local1, "killstreaks")
 	if not f11_local3 or not f11_local2 or not f11_local4 then
 		return false
 	end
@@ -127,12 +127,12 @@ end
 CoD.ScorestreakInGameUtility.ScorestreakIsUsable = function(f12_arg0, f12_arg1)
 	local f12_local0 = f12_arg1:getModel()
 	f12_local0 = f12_local0.rewardImage:get()
-	local f12_local1 = Engine[0x40E824FE270E174](Engine[0x4DF5CFBC1771947](f12_arg0), "killstreaks")
+	local f12_local1 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f12_arg0), "killstreaks")
 	return f12_local0 == f12_local1.killstreak3.rewardImage:get()
 end
 CoD.ScorestreakInGameUtility.IsScorestreakDiscountActive = function(f13_arg0)
 	if IsMultiplayer() then
-		return (Engine[0x330A0AE3BC3A6E9](f13_arg0) or 1) < 0.99
+		return (Engine[@"hash_4330A0AE3BC3A6E9"](f13_arg0) or 1) < 0.99
 	else
 		return false
 	end
@@ -149,17 +149,17 @@ DataSources.HealthBoostPlayerList = {
 	prepare = function(f15_arg0, f15_arg1, f15_arg2)
 		local f15_local0 = nil
 		f15_arg1.clients = {}
-		local f15_local1 = Engine[0x4DF5CFBC1771947](f15_arg0)
+		local f15_local1 = Engine[@"getmodelforcontroller"](f15_arg0)
 		if CoD.IsShoutcaster(f15_arg0) then
-			local f15_local2 = Engine[0x40E824FE270E174](f15_local1, "deadSpectator.playerIndex")
+			local f15_local2 = Engine[@"getmodel"](f15_local1, "deadSpectator.playerIndex")
 			f15_local0 = f15_local2:get()
 		else
-			f15_local0 = Engine[0x761955642304848](f15_arg0)
+			f15_local0 = Engine[@"getclientnum"](f15_arg0)
 		end
-		local f15_local2 = Engine[0x2C6B07FD023877B](f15_arg0, f15_local0)
-		for f15_local9, f15_local10 in pairs(Engine[0xF9C4C8A66F9CB02](f15_arg0)) do
+		local f15_local2 = Engine[@"getteamid"](f15_arg0, f15_local0)
+		for f15_local9, f15_local10 in pairs(Engine[@"hash_F9C4C8A66F9CB02"](f15_arg0)) do
 			if f15_local2 == f15_local10 and f15_local9 ~= f15_local0 then
-				local f15_local6 = Engine[0xE4D2F32833CFA6C](f15_local9)
+				local f15_local6 = Engine[@"getmodelforclient"](f15_local9)
 				if f15_local6.health then
 					local f15_local7 = f15_local6.health.healthValue
 					local f15_local8 = f15_local6.health.healthValue:get()
@@ -184,7 +184,7 @@ DataSources.HealthBoostPlayerList = {
 		if not f15_arg1.clientCountSubscription then
 			f15_local4 = f15_arg1
 			f15_local3 = f15_arg1.subscribeToModel
-			f15_local5 = Engine[0x4DF5CFBC1771947](f15_arg0)
+			f15_local5 = Engine[@"getmodelforcontroller"](f15_arg0)
 			f15_arg1.clientCountSubscription = f15_local3(f15_local4, f15_local5:create("Clients.clientCount"), function()
 				f15_arg1:updateDataSource(true, true)
 			end, false)
@@ -192,7 +192,7 @@ DataSources.HealthBoostPlayerList = {
 		if not f15_arg1.clientChangedTeamSubscription then
 			f15_local4 = f15_arg1
 			f15_local3 = f15_arg1.subscribeToModel
-			f15_local5 = Engine[0x4DF5CFBC1771947](f15_arg0)
+			f15_local5 = Engine[@"getmodelforcontroller"](f15_arg0)
 			f15_arg1.clientChangedTeamSubscription = f15_local3(f15_local4, f15_local5:create("Clients.clientChangedTeam"), function()
 				f15_arg1:updateDataSource(true, true)
 			end, false)
@@ -203,9 +203,9 @@ DataSources.HealthBoostPlayerList = {
 	end,
 	getItem = function(f19_arg0, f19_arg1, f19_arg2)
 		if f19_arg1.clients[f19_arg2] and f19_arg1.clients[f19_arg2].clientNum then
-			return Engine[0xE4D2F32833CFA6C](f19_arg1.clients[f19_arg2].clientNum)
+			return Engine[@"getmodelforclient"](f19_arg1.clients[f19_arg2].clientNum)
 		else
-			return Engine[0xE4D2F32833CFA6C](-1)
+			return Engine[@"getmodelforclient"](-1)
 		end
 	end,
 }

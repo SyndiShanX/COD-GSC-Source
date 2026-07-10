@@ -17,7 +17,7 @@ CoD.SafeAreaContainer_LobbyServerBrwoserOverlay.new = function(f1_arg0, f1_arg1,
 	self:addElement(TabBacking)
 	self.TabBacking = TabBacking
 	local CommonHeader = CoD.CommonHeader.new(f1_arg0, f1_arg1, 0, 1, 0, 0, 0, 0, 0, 67)
-	CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(0x97DF1A82E7BB536))
+	CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(@"hash_797DF1A82E7BB536"))
 	CommonHeader.subtitle.subtitle:setText("")
 	self:addElement(CommonHeader)
 	self.CommonHeader = CommonHeader
@@ -32,7 +32,7 @@ CoD.SafeAreaContainer_LobbyServerBrwoserOverlay.new = function(f1_arg0, f1_arg1,
 	})
 	local f1_local4 = FETabBar
 	local HeaderStripe = FETabBar.subscribeToModel
-	local f1_local6 = Engine[0x8DF2E5447F384B9]()
+	local f1_local6 = Engine[@"getglobalmodel"]()
 	HeaderStripe(f1_local4, f1_local6["lobbyRoot.lobbyNav"], function(f3_arg0)
 		f1_arg0:updateElementState(FETabBar, {
 			name = "model_validation",

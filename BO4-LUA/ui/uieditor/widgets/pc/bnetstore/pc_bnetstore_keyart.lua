@@ -7,12 +7,12 @@ CoD.PC_BnetStore_Keyart.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	self.id = "PC_BnetStore_Keyart"
 	self.soundSet = "default"
 	local KeyArtBG = LUI.UIFixedAspectRatioImage.new(0, 1, 0, 0, 0, 0, 224.5, 1304.5)
-	KeyArtBG:setImage(RegisterImage(0xA994C621186678C))
+	KeyArtBG:setImage(RegisterImage(@"hash_1A994C621186678C"))
 	self:addElement(KeyArtBG)
 	self.KeyArtBG = KeyArtBG
 	local KeyArtfix = nil
 	KeyArtfix = LUI.UIImage.new(0, 1.09, -87.5, -87.5, 0, 0, -2, 448)
-	KeyArtfix:setImage(RegisterImage(0xBBEA8E879C76D6F))
+	KeyArtfix:setImage(RegisterImage(@"hash_7BBEA8E879C76D6F"))
 	self:addElement(KeyArtfix)
 	self.KeyArtfix = KeyArtfix
 	if PostLoadFunc then

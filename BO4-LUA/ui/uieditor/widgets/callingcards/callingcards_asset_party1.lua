@@ -10,7 +10,7 @@ CoD.CallingCards_Asset_party1.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	local party1 = LUI.UIImage.new(0, 0, 0, 624, 0, 0, 0, 240)
 	party1:setRGB(0.29, 0, 0)
 	party1:setAlpha(0.5)
-	party1:setImage(RegisterImage(0xF3BB6C7DE031B4))
+	party1:setImage(RegisterImage(@"uie_ui_icon_callingcards_prestige_master_lightlaser_party1"))
 	self:addElement(party1)
 	self.party1 = party1
 	if PostLoadFunc then

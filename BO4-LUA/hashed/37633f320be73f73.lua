@@ -18,14 +18,14 @@ CoD.WarzoneInventoryNag.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	self:addElement(InventoryPromptImazge)
 	self.InventoryPromptImazge = InventoryPromptImazge
 	local InventoryNag = LUI.UIText.new(0, 0, 31, 217, 0, 0, 17, 35)
-	InventoryNag:setText(LocalizeToUpperString(0x1346019482BDC3C))
+	InventoryNag:setText(LocalizeToUpperString(@"warzone/inventory"))
 	InventoryNag:setTTF("ttmussels_regular")
-	InventoryNag:setMaterial(LUI.UIImage.GetCachedMaterial(0x90D57B1E92D39D7))
+	InventoryNag:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_90D57B1E92D39D7"))
 	InventoryNag:setShaderVector(0, 0.6, 0, 0, 0)
 	InventoryNag:setShaderVector(1, 0.3, 0, 0, 0)
 	InventoryNag:setShaderVector(2, 0, 0, 0, 1)
 	InventoryNag:setLetterSpacing(2)
-	InventoryNag:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	InventoryNag:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(InventoryNag)
 	self.InventoryNag = InventoryNag
 	self:mergeStateConditions({
@@ -34,7 +34,7 @@ CoD.WarzoneInventoryNag.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 			condition = function(menu, element, event)
 				local f3_local0 = CoD.WZUtility.ShouldShowInventoryNag(f1_arg1)
 				if f3_local0 then
-					if not CoD.ModelUtility.IsModelValueGreaterThan(f1_arg1, "hudItems.laststand.reviveProgress", 0) and not CoD.ModelUtility.IsModelValueEqualTo(f1_arg1, "hudItems.laststand.beingRevived", 1) and not CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg1, "playerAbilities.playerGadget1.state", Enum[0xF0447219F15F7F3][0x1873A43E9D1620E]) then
+					if not CoD.ModelUtility.IsModelValueGreaterThan(f1_arg1, "hudItems.laststand.reviveProgress", 0) and not CoD.ModelUtility.IsModelValueEqualTo(f1_arg1, "hudItems.laststand.beingRevived", 1) and not CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg1, "playerAbilities.playerGadget1.state", Enum[@"weapongadgetstates"][@"player_ability_state_inuse"]) then
 						f3_local0 = IsMouseOrKeyboard(f1_arg1)
 					else
 						f3_local0 = false
@@ -49,7 +49,7 @@ CoD.WarzoneInventoryNag.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 				local f4_local0 = CoD.WZUtility.ShouldShowInventoryNag(f1_arg1)
 				if f4_local0 then
 					if not CoD.ModelUtility.IsModelValueGreaterThan(f1_arg1, "hudItems.laststand.reviveProgress", 0) and not CoD.ModelUtility.IsModelValueEqualTo(f1_arg1, "hudItems.laststand.beingRevived", 1) then
-						f4_local0 = not CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg1, "playerAbilities.playerGadget1.state", Enum[0xF0447219F15F7F3][0x1873A43E9D1620E])
+						f4_local0 = not CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg1, "playerAbilities.playerGadget1.state", Enum[@"weapongadgetstates"][@"player_ability_state_inuse"])
 					else
 						f4_local0 = false
 					end
@@ -60,7 +60,7 @@ CoD.WarzoneInventoryNag.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	})
 	local f1_local3 = self
 	local f1_local4 = self.subscribeToModel
-	local f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local4(f1_local3, f1_local5["hudItems.inventory.inventoryNag"], function(f5_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -72,7 +72,7 @@ CoD.WarzoneInventoryNag.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	end, false)
 	f1_local3 = self
 	f1_local4 = self.subscribeToModel
-	f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local4(f1_local3, f1_local5["hudItems.laststand.reviveProgress"], function(f6_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -84,7 +84,7 @@ CoD.WarzoneInventoryNag.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	end, false)
 	f1_local3 = self
 	f1_local4 = self.subscribeToModel
-	f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local4(f1_local3, f1_local5["hudItems.laststand.beingRevived"], function(f7_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -96,7 +96,7 @@ CoD.WarzoneInventoryNag.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	end, false)
 	f1_local3 = self
 	f1_local4 = self.subscribeToModel
-	f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local4(f1_local3, f1_local5["playerAbilities.playerGadget1.state"], function(f8_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -112,7 +112,7 @@ CoD.WarzoneInventoryNag.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	end)
 	f1_local3 = self
 	f1_local4 = self.subscribeToModel
-	f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local4(f1_local3, f1_local5.LastInput, function(f10_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -134,8 +134,8 @@ CoD.WarzoneInventoryNag.__resetProperties = function(f11_arg0)
 	f11_arg0.InventoryPromptImazge:setAlpha(1)
 	f11_arg0.InventoryNag:setLeftRight(0, 0, 31, 217)
 	f11_arg0.InventoryNag:setAlpha(1)
-	f11_arg0.InventoryNag:setText(LocalizeToUpperString(0x1346019482BDC3C))
-	f11_arg0.InventoryNag:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	f11_arg0.InventoryNag:setText(LocalizeToUpperString(@"warzone/inventory"))
+	f11_arg0.InventoryNag:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 end
 CoD.WarzoneInventoryNag.__clipsPerState = {
 	DefaultState = {
@@ -189,8 +189,8 @@ CoD.WarzoneInventoryNag.__clipsPerState = {
 			f18_arg0.clipFinished(f18_arg0.InventoryPromptImazge)
 			f18_arg0.InventoryNag:completeAnimation()
 			f18_arg0.InventoryNag:setLeftRight(0, 0, 24, 210)
-			f18_arg0.InventoryNag:setText(LocalizeToUpperString(0x9BB6384237A40B8))
-			f18_arg0.InventoryNag:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+			f18_arg0.InventoryNag:setText(LocalizeToUpperString(@"warzone/inventory_pc"))
+			f18_arg0.InventoryNag:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 			f18_arg0.clipFinished(f18_arg0.InventoryNag)
 		end,
 	},

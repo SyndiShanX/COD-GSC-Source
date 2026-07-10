@@ -15,11 +15,11 @@ CoD.WarzoneArmorStashCount_PC.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 		{
 			stateName = "Hidden",
 			condition = function(menu, element, event)
-				local f2_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2])
+				local f2_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_in_killcam"])
 				if not f2_local0 then
-					f2_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F])
+					f2_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_play_of_the_match"])
 					if not f2_local0 then
-						f2_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xC57360571B0917E])
+						f2_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_team_spectator"])
 					end
 				end
 				return f2_local0
@@ -58,38 +58,38 @@ CoD.WarzoneArmorStashCount_PC.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	})
 	local Count = UseArmorPrompt
 	local Icon = UseArmorPrompt.subscribeToModel
-	local f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	Icon(Count, f1_local4["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2]], function(f8_arg0)
+	local f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
+	Icon(Count, f1_local4["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"]], function(f8_arg0)
 		f1_arg0:updateElementState(UseArmorPrompt, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f8_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"],
 		})
 	end, false)
 	Count = UseArmorPrompt
 	Icon = UseArmorPrompt.subscribeToModel
-	f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	Icon(Count, f1_local4["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F]], function(f9_arg0)
+	f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
+	Icon(Count, f1_local4["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_play_of_the_match"]], function(f9_arg0)
 		f1_arg0:updateElementState(UseArmorPrompt, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f9_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_play_of_the_match"],
 		})
 	end, false)
 	Count = UseArmorPrompt
 	Icon = UseArmorPrompt.subscribeToModel
-	f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	Icon(Count, f1_local4["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xC57360571B0917E]], function(f10_arg0)
+	f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
+	Icon(Count, f1_local4["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_team_spectator"]], function(f10_arg0)
 		f1_arg0:updateElementState(UseArmorPrompt, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f10_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xC57360571B0917E],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_team_spectator"],
 		})
 	end, false)
 	UseArmorPrompt:appendEventHandler("input_source_changed", function(f11_arg0, f11_arg1)
@@ -98,7 +98,7 @@ CoD.WarzoneArmorStashCount_PC.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	end)
 	Count = UseArmorPrompt
 	Icon = UseArmorPrompt.subscribeToModel
-	f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	Icon(Count, f1_local4.LastInput, function(f12_arg0)
 		f1_arg0:updateElementState(UseArmorPrompt, {
 			name = "model_validation",
@@ -111,20 +111,20 @@ CoD.WarzoneArmorStashCount_PC.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	UseArmorPrompt:setAlpha(0)
 	UseArmorPrompt.KBMText:setText(CoD.BaseUtility.AlreadyLocalized("[{+armorrepair}]"))
 	UseArmorPrompt.GamepadText:setText("")
-	UseArmorPrompt.GamepadText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	UseArmorPrompt.GamepadText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	self:addElement(UseArmorPrompt)
 	self.UseArmorPrompt = UseArmorPrompt
 	Icon = LUI.UIImage.new(0, 0, 0, 24, 0, 0, 0, 24)
 	Icon:setAlpha(0)
-	Icon:setImage(RegisterImage(0xC919F9E1839F796))
+	Icon:setImage(RegisterImage(@"uie_ui_icon_inventory_armor_scrap"))
 	self:addElement(Icon)
 	self.Icon = Icon
 	Count = LUI.UIText.new(0, 0, 24, 112, 0, 0, 0, 24)
 	Count:setAlpha(0)
 	Count:setTTF("ttmussels_regular")
 	Count:setLetterSpacing(1)
-	Count:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Count:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Count:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Count:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	Count:linkToElementModel(self, "stackCount", true, function(model)
 		local f13_local0 = model:get()
 		if f13_local0 ~= nil then

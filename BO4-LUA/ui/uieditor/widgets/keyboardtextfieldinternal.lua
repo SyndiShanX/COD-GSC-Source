@@ -14,42 +14,42 @@ CoD.KeyboardTextFieldInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	local popupBG = LUI.UIImage.new(0, 1, -76, 0, 0, 1, -67, -37)
 	popupBG:setRGB(0, 0, 0)
 	popupBG:setAlpha(0)
-	popupBG:setImage(RegisterImage(0x6440978352789DB))
+	popupBG:setImage(RegisterImage(@"menu_mp_popup_bg"))
 	self:addElement(popupBG)
 	self.popupBG = popupBG
 	local bottomFade = LUI.UIImage.new(0, 1, 0, 0, 1, 1, -141, -45)
 	bottomFade:setXRot(180)
-	bottomFade:setImage(RegisterImage(0xDB6A7927DB7D288))
+	bottomFade:setImage(RegisterImage(@"dots_top_bottom_fade"))
 	self:addElement(bottomFade)
 	self.bottomFade = bottomFade
 	local middleTile = LUI.UIImage.new(0, 1, 0, 0, 0, 0, 96, 288)
-	middleTile:setImage(RegisterImage(0xBCECD4DFF70A017))
-	middleTile:setMaterial(LUI.UIImage.GetCachedMaterial(0x73D72BCD14C2AAD))
+	middleTile:setImage(RegisterImage(@"dots_middle_repeat"))
+	middleTile:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_tile_scroll_normal"))
 	middleTile:setShaderVector(0, 1, 32, 0, 0)
 	middleTile:setShaderVector(1, 0, 0, 0, 0)
 	self:addElement(middleTile)
 	self.middleTile = middleTile
 	local topFade = LUI.UIImage.new(0, 1, 0, 0, 0, 0, 0, 96)
-	topFade:setImage(RegisterImage(0xDB6A7927DB7D288))
+	topFade:setImage(RegisterImage(@"dots_top_bottom_fade"))
 	self:addElement(topFade)
 	self.topFade = topFade
 	local bottomPart = LUI.UIImage.new(0, 1, 0, 0, 1, 1, -24, 0)
-	bottomPart:setImage(RegisterImage(0xE17B1790A885DBD))
+	bottomPart:setImage(RegisterImage(@"popup_bottom"))
 	self:addElement(bottomPart)
 	self.bottomPart = bottomPart
 	local middleStretch = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 48, -24)
-	middleStretch:setImage(RegisterImage(0x1D100BFEEA8C973))
+	middleStretch:setImage(RegisterImage(@"popup_stretch"))
 	self:addElement(middleStretch)
 	self.middleStretch = middleStretch
 	local topPart = LUI.UIImage.new(0, 1, 0, 0, 0, 0, 0, 48)
-	topPart:setImage(RegisterImage(0xCDA15E059EDF3D1))
+	topPart:setImage(RegisterImage(@"popup_top"))
 	self:addElement(topPart)
 	self.topPart = topPart
 	local header = LUI.UIText.new(0, 1, 24, -24, 0, 0, 0, 72)
 	header:setText("")
 	header:setTTF("default")
-	header:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	header:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	header:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	header:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(header)
 	self.header = header
 	local inputContainer = CoD.KeyboardTextFieldInputContainer.new(f1_arg0, f1_arg1, 0, 1, 24, -24, 0, 0, 120, 192)
@@ -66,10 +66,10 @@ CoD.KeyboardTextFieldInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	options:setWidgetType(CoD.CommonListButtonGenericShort)
 	options:setHorizontalCount(2)
 	options:setSpacing(10)
-	options:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	options:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	options:setDataSource("ClanTagPromptList")
 	options:linkToElementModel(options, "disabled", true, function(model, f2_arg1)
-		CoD.Menu.UpdateButtonShownState(f2_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(f2_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_none"])
 	end)
 	options:registerEventHandler("gain_focus", function(element, event)
 		local f3_local0 = nil
@@ -78,10 +78,10 @@ CoD.KeyboardTextFieldInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 		elseif element.super.gainFocus then
 			f3_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_none"])
 		return f3_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(options, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "MOUSE1", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(options, f1_arg1, Enum[@"luibutton"][@"lui_key_none"], "MOUSE1", function(element, menu, controller, model)
 		if not IsDisabled(element, controller) then
 			ProcessListAction(self, element, controller, menu)
 			return true
@@ -89,7 +89,7 @@ CoD.KeyboardTextFieldInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 		end
 	end, function(element, menu, controller)
 		if not IsDisabled(element, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0xD0BB36CD318F55F, nil, "MOUSE1")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"menu/select", nil, "MOUSE1")
 			return true
 		else
 			return false
@@ -107,7 +107,7 @@ CoD.KeyboardTextFieldInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	})
 	local f1_local14 = self
 	local f1_local15 = self.subscribeToModel
-	local f1_local16 = Engine[0x8DF2E5447F384B9]()
+	local f1_local16 = Engine[@"getglobalmodel"]()
 	f1_local15(f1_local14, f1_local16["lobbyRoot.lobbyNav"], function(f7_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

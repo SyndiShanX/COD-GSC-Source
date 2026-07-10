@@ -14,7 +14,7 @@ CoD.Voip_Container_EnemiesOnly.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 		{
 			stateName = "Invisible",
 			condition = function(menu, element, event)
-				return not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "status", Enum[0x67D1AB56CFA8F00][0xC827FF88A41C5F9])
+				return not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "status", Enum[@"evoipstatus"][@"voip_enemy_talking"])
 			end,
 		},
 		{
@@ -43,7 +43,7 @@ CoD.Voip_Container_EnemiesOnly.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 		{
 			stateName = "Invisible",
 			condition = function(menu, element, event)
-				return not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "status", Enum[0x67D1AB56CFA8F00][0xC827FF88A41C5F9])
+				return not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "status", Enum[@"evoipstatus"][@"voip_enemy_talking"])
 			end,
 		},
 		{
@@ -72,7 +72,7 @@ CoD.Voip_Container_EnemiesOnly.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 		{
 			stateName = "Invisible",
 			condition = function(menu, element, event)
-				return not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "status", Enum[0x67D1AB56CFA8F00][0xC827FF88A41C5F9])
+				return not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "status", Enum[@"evoipstatus"][@"voip_enemy_talking"])
 			end,
 		},
 		{
@@ -101,7 +101,7 @@ CoD.Voip_Container_EnemiesOnly.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 		{
 			stateName = "Invisible",
 			condition = function(menu, element, event)
-				return not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "status", Enum[0x67D1AB56CFA8F00][0xC827FF88A41C5F9])
+				return not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "status", Enum[@"evoipstatus"][@"voip_enemy_talking"])
 			end,
 		},
 		{
@@ -141,7 +141,7 @@ CoD.Voip_Container_EnemiesOnly.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	})
 	local f1_local5 = self
 	local f1_local6 = self.subscribeToModel
-	local f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local6(f1_local5, f1_local7["factions.isCoDCaster"], function(f20_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

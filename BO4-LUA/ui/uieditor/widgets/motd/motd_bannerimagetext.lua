@@ -16,8 +16,8 @@ CoD.MOTD_BannerImageText.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	Title:setText("")
 	Title:setTTF("ttmussels_regular")
 	Title:setLetterSpacing(4)
-	Title:setAlignment(Engine[0x7F8853DC3581AA4](Enum[0x7A5123B654282D2][0x58C8A85F2048829]))
-	Title:setAlignment(Engine[0x7F8853DC3581AA4](Enum[0x7A5123B654282D2][0x6ED4298C93DC5ED]))
+	Title:setAlignment(Engine[@"hash_67F8853DC3581AA4"](Enum[@"luialignment"][@"lui_alignment_left"]))
+	Title:setAlignment(Engine[@"hash_67F8853DC3581AA4"](Enum[@"luialignment"][@"lui_alignment_middle"]))
 	self:addElement(Title)
 	self.Title = Title
 	self:mergeStateConditions({

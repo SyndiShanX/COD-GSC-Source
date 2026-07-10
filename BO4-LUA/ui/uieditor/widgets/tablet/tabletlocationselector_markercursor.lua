@@ -8,7 +8,7 @@ CoD.TabletLocationSelector_MarkerCursor.new = function(f1_arg0, f1_arg1, f1_arg2
 	self.soundSet = "none"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Crosshair = LUI.UIImage.new(0.5, 0.5, -50, 50, 0.5, 0.5, -50, 50)
-	Crosshair:setImage(RegisterImage(0x4BC0BAC90BB7F56))
+	Crosshair:setImage(RegisterImage(@"uie_ui_hud_cp_hud_tacmode_crosshair"))
 	self:addElement(Crosshair)
 	self.Crosshair = Crosshair
 	if PostLoadFunc then

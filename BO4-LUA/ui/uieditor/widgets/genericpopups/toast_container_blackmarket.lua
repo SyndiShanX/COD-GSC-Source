@@ -18,12 +18,12 @@ CoD.Toast_Container_BlackMarket.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	local FooterText = LUI.UIText.new(0.5, 1.5, -170, -170, 0, 0.26, 50, 50)
 	FooterText:setRGB(ColorSet.T8__OFF__GRAY.r, ColorSet.T8__OFF__GRAY.g, ColorSet.T8__OFF__GRAY.b)
 	FooterText:setTTF("ttmussels_regular")
-	FooterText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	FooterText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	FooterText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	FooterText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	FooterText:linkToElementModel(self, "description", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			FooterText:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			FooterText:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	self:addElement(FooterText)
@@ -33,7 +33,7 @@ CoD.Toast_Container_BlackMarket.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	ContentIconInternal:linkToElementModel(self, "kicker", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
-			ContentIconInternal.NotifTextMain:setText(Engine[0xF9F1239CFD921FE](f3_local0))
+			ContentIconInternal.NotifTextMain:setText(Engine[@"hash_4F9F1239CFD921FE"](f3_local0))
 		end
 	end)
 	self:addElement(ContentIconInternal)

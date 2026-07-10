@@ -15,17 +15,17 @@ CoD.OverCapacityList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	itemList:setWidgetType(CoD.OverCapacityItem)
 	itemList:setHorizontalCount(10)
 	itemList:setSpacing(8)
-	itemList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	itemList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	itemList:setDataSource("OverCapacityList")
 	itemList:appendEventHandler("input_source_changed", function(f2_arg0, f2_arg1)
 		f2_arg1.menu = f2_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f2_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f2_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	local f1_local2 = itemList
 	local f1_local3 = itemList.subscribeToModel
-	local f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local3(f1_local2, f1_local4.LastInput, function(f3_arg0, f3_arg1)
-		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	itemList:registerEventHandler("gain_focus", function(element, event)
 		local f4_local0 = nil
@@ -34,10 +34,10 @@ CoD.OverCapacityList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 		elseif element.super.gainFocus then
 			f4_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f4_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(itemList, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "MOUSE1", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(itemList, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "MOUSE1", function(element, menu, controller, model)
 		if IsMouseOrKeyboard(controller) then
 			RemoveOverflowItemFromClass(menu, self, element, controller)
 			CoD.CACUtility.EquippedItemsChanged(menu, controller)
@@ -47,13 +47,13 @@ CoD.OverCapacityList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 		end
 	end, function(element, menu, controller)
 		if IsMouseOrKeyboard(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "MOUSE1")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "MOUSE1")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(itemList, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(itemList, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if IsMouseOrKeyboard(controller) then
 			RemoveOverflowItemFromClass(menu, self, element, controller)
 			CoD.CACUtility.EquippedItemsChanged(menu, controller)
@@ -63,13 +63,13 @@ CoD.OverCapacityList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 		end
 	end, function(element, menu, controller)
 		if IsMouseOrKeyboard(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "ui_confirm")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(itemList, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(itemList, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if IsGamepad(controller) then
 			RemoveOverflowItemFromClass(menu, self, element, controller)
 			CoD.CACUtility.EquippedItemsChanged(menu, controller)
@@ -79,7 +79,7 @@ CoD.OverCapacityList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 		end
 	end, function(element, menu, controller)
 		if IsGamepad(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x679ACA6FFC6C8F3, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/remove", nil, nil)
 			return true
 		else
 			return false

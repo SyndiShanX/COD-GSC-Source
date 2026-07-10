@@ -10,7 +10,7 @@ CoD.PC_BattlenetFriend_NameAndRealId.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	local TXTPlayerTag = LUI.UIText.new(0.23, 0.23, -69, 184, 0.17, 0.17, -3.5, 17.5)
 	TXTPlayerTag:setRGB(ColorSet.EnemyOrange_Protanopia.r, ColorSet.EnemyOrange_Protanopia.g, ColorSet.EnemyOrange_Protanopia.b)
 	TXTPlayerTag:setTTF("notosans_light")
-	TXTPlayerTag:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	TXTPlayerTag:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	TXTPlayerTag:linkToElementModel(self, "identityBadge.gamertag", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -21,7 +21,7 @@ CoD.PC_BattlenetFriend_NameAndRealId.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	self.TXTPlayerTag = TXTPlayerTag
 	local TXTRealId = LUI.UIText.new(0.23, 0.23, 189, 442, 0.17, 0.17, -3.5, 17.5)
 	TXTRealId:setTTF("notosans_light")
-	TXTRealId:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	TXTRealId:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	TXTRealId:linkToElementModel(self, "identityBadge.realName", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then

@@ -8,7 +8,7 @@ CoD.ZMTalismanEquipSlot.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	self.soundSet = "none"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local SlotIcon = LUI.UIImage.new(0, 0, 0, 50, 0, 0, 0, 50)
-	SlotIcon:setImage(RegisterImage(CoD.ZMTalismanUtility.GetTalismanSlotIcon(CoD.ZMTalismanUtility.TalismanTypes.NONE, 0x621DB435A480979)))
+	SlotIcon:setImage(RegisterImage(CoD.ZMTalismanUtility.GetTalismanSlotIcon(CoD.ZMTalismanUtility.TalismanTypes.NONE, @"hash_5621DB435A480979")))
 	self:addElement(SlotIcon)
 	self.SlotIcon = SlotIcon
 	local EquippedTalismanIcon = LUI.UIImage.new(0, 0, 0, 50, 0, 0, 0, 50)

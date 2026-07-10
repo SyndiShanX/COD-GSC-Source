@@ -8,7 +8,7 @@ CoD.prestigeRewardWidget_v2.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.id = "prestigeRewardWidget_v2"
 	self.soundSet = "CAC_EditLoadout"
 	local internal = CoD.prestigeRewardWidget_UI3D_v2.new(f1_arg0, f1_arg1, 0, 0, 0, 230, 0, 0, 0, 38)
-	Engine[0xF0AF2C4A29D15D7](f1_arg1, 5, 230, 38)
+	Engine[@"setupui3dwindow"](f1_arg1, 5, 230, 38)
 	internal:setUI3DWindow(5)
 	internal:setRGB(0.78, 0.99, 0.99)
 	self:addElement(internal)

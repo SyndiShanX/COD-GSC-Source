@@ -23,18 +23,18 @@ CoD.ButtonFrame_WorldLeagueProgress.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	self.ArenaRankWidget = ArenaRankWidget
 	local RankNumber = LUI.UIText.new(0.5, 0.5, 6, 206, 0, 0, 86.5, 116.5)
 	RankNumber:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
-	RankNumber:setText(LocalizeToUpperString(0x3370355189B42A7))
+	RankNumber:setText(LocalizeToUpperString(@"arena/rank"))
 	RankNumber:setTTF("ttmussels_regular")
 	RankNumber:setLetterSpacing(4)
-	RankNumber:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	RankNumber:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	RankNumber:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	RankNumber:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	self:addElement(RankNumber)
 	self.RankNumber = RankNumber
 	local RankText = LUI.UIText.new(0.5, 0.5, 36, 176, 0.5, 0.5, -60, 60)
 	RankText:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
 	RankText:setTTF("0arame_mono_stencil")
-	RankText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	RankText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	RankText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	RankText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	RankText:subscribeToGlobalModel(f1_arg1, "LeaguePlay", "leaguePlayRank", function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then

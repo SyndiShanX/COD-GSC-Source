@@ -8,7 +8,7 @@ CoD.ui_icon_callingcards_invasion_lamb3.new = function(f1_arg0, f1_arg1, f1_arg2
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local lamb3 = LUI.UIImage.new(0, 0, 0, 48, 0, 0, 0, 48)
-	lamb3:setImage(RegisterImage(0x91848772BCA81AB))
+	lamb3:setImage(RegisterImage(@"uie_ui_menu_callingcards_invasion_lamb3"))
 	self:addElement(lamb3)
 	self.lamb3 = lamb3
 	if PostLoadFunc then
@@ -27,11 +27,11 @@ CoD.ui_icon_callingcards_invasion_lamb3.__clipsPerState = {
 			f3_arg0:setupElementClipCounter(1)
 			local f3_local0 = function(f4_arg0)
 				local f4_local0 = function(f5_arg0)
-					f5_arg0:beginAnimation(1500, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f5_arg0:beginAnimation(1500, Enum[@"luitween"][@"luitween_ease_both"])
 					f5_arg0:setZRot(0)
 					f5_arg0:registerEventHandler("transition_complete_keyframe", f3_arg0.clipFinished)
 				end
-				f3_arg0.lamb3:beginAnimation(1500, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f3_arg0.lamb3:beginAnimation(1500, Enum[@"luitween"][@"luitween_ease_in"])
 				f3_arg0.lamb3:setZRot(53)
 				f3_arg0.lamb3:registerEventHandler("interrupted_keyframe", f3_arg0.clipInterrupted)
 				f3_arg0.lamb3:registerEventHandler("transition_complete_keyframe", f4_local0)

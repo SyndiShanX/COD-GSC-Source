@@ -22,44 +22,44 @@ LUI.createMenu.DemoSaveSegmentPopup = function(f1_arg0, f1_arg1)
 	self:addElement(emptyFocusableNoCursorUpdate)
 	self.emptyFocusableNoCursorUpdate = emptyFocusableNoCursorUpdate
 	local FullscreenPopupTemplate = CoD.FullscreenPopupTemplate.new(f1_local1, f1_arg0, 0, 1, 0, 0, 0, 1, 0, 0)
-	FullscreenPopupTemplate.Subtitle:setText(Engine[0xF9F1239CFD921FE](0x7BDC7223FDD20A0))
-	FullscreenPopupTemplate.ErrorSubtitle:setText(Engine[0xF9F1239CFD921FE](0x9C62D3C1C35DC01))
-	FullscreenPopupTemplate.WorkingTitle:setText(Engine[0xF9F1239CFD921FE](0xC76223999D97EC9))
-	FullscreenPopupTemplate.Title:setText(Engine[0xF9F1239CFD921FE](0x471098B0579A24C))
-	FullscreenPopupTemplate.DoneTitle:setText(LocalizeToUpperString(0x93E719493E9E18F))
+	FullscreenPopupTemplate.Subtitle:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_57BDC7223FDD20A0"))
+	FullscreenPopupTemplate.ErrorSubtitle:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_39C62D3C1C35DC01"))
+	FullscreenPopupTemplate.WorkingTitle:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_5C76223999D97EC9"))
+	FullscreenPopupTemplate.Title:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/keep_segment"))
+	FullscreenPopupTemplate.DoneTitle:setText(LocalizeToUpperString(@"menu/new"))
 	self:addElement(FullscreenPopupTemplate)
 	self.FullscreenPopupTemplate = FullscreenPopupTemplate
 	local TitleText = LUI.UIText.new(0.5, 0.5, -267, 835, 0.5, 0.5, -93, -72)
 	TitleText:setRGB(ColorSet.T8__OFF__GRAY.r, ColorSet.T8__OFF__GRAY.g, ColorSet.T8__OFF__GRAY.b)
-	TitleText:setText(Engine[0xF9F1239CFD921FE](0x6C2F065A6AA8DA7))
+	TitleText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/title"))
 	TitleText:setTTF("ttmussels_regular")
 	TitleText:setLetterSpacing(2)
-	TitleText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	TitleText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	TitleText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	TitleText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(TitleText)
 	self.TitleText = TitleText
 	local TitlePreview = LUI.UIText.new(0.5, 0.5, -267, 835, 0.5, 0.5, 0, 21)
 	TitlePreview:setRGB(ColorSet.T8__OFF__GRAY.r, ColorSet.T8__OFF__GRAY.g, ColorSet.T8__OFF__GRAY.b)
-	TitlePreview:setText(Engine[0xF9F1239CFD921FE](0x9E22C6CE275ABC3))
+	TitlePreview:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/preview_segment"))
 	TitlePreview:setTTF("ttmussels_regular")
 	TitlePreview:setLetterSpacing(2)
-	TitlePreview:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	TitlePreview:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	TitlePreview:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	TitlePreview:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(TitlePreview)
 	self.TitlePreview = TitlePreview
 	local LblPermissions = LUI.UIText.new(0.5, 0.5, -267, -217, 0.5, 0.5, 88, 126)
 	LblPermissions:setAlpha(0)
-	LblPermissions:setText(Engine[0xF9F1239CFD921FE](0x843FACDBE21C207))
+	LblPermissions:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/fileshare_permissions"))
 	LblPermissions:setTTF("default")
-	LblPermissions:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	LblPermissions:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	LblPermissions:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	LblPermissions:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(LblPermissions)
 	self.LblPermissions = LblPermissions
 	local leftButtonBar = CoD.fe_LeftContainer_NOTLobby.new(f1_local1, f1_arg0, 0.5, 0.5, -350, 298, 0.5, 0.5, 188, 236)
 	self:addElement(leftButtonBar)
 	self.leftButtonBar = leftButtonBar
 	local ButtonSave = CoD.EmblemOptionsButton.new(f1_local1, f1_arg0, 0.5, 0.5, -267, 133, 0.5, 0.5, 114, 174)
-	ButtonSave.Button.Title:setText(Engine[0xF9F1239CFD921FE](0x3B7168B75575032))
+	ButtonSave.Button.Title:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/name_segment"))
 	ButtonSave:registerEventHandler("gain_focus", function(element, event)
 		local f2_local0 = nil
 		if element.gainFocus then
@@ -67,20 +67,20 @@ LUI.createMenu.DemoSaveSegmentPopup = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f2_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f2_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(ButtonSave, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ENTER", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(ButtonSave, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ENTER", function(element, menu, controller, model)
 		CoD.DemoUtility.SaveSegment(menu, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ENTER")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ENTER")
 		return true
 	end, false)
 	self:addElement(ButtonSave)
 	self.ButtonSave = ButtonSave
 	local ButtonPreview = CoD.EmblemOptionsButton.new(f1_local1, f1_arg0, 0.5, 0.5, -267, 133, 0.5, 0.5, 24, 84)
-	ButtonPreview.Button.Title:setText(Engine[0xF9F1239CFD921FE](0x9E22C6CE275ABC3))
+	ButtonPreview.Button.Title:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/preview_segment"))
 	ButtonPreview:registerEventHandler("gain_focus", function(element, event)
 		local f5_local0 = nil
 		if element.gainFocus then
@@ -88,14 +88,14 @@ LUI.createMenu.DemoSaveSegmentPopup = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f5_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f5_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(ButtonPreview, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(ButtonPreview, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		CoD.DemoUtility.PreviewSegment(menu, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 		return true
 	end, false)
 	self:addElement(ButtonPreview)
@@ -115,7 +115,7 @@ LUI.createMenu.DemoSaveSegmentPopup = function(f1_arg0, f1_arg1)
 	})
 	local f1_local12 = TitleTextBox
 	local f1_local13 = TitleTextBox.subscribeToModel
-	local f1_local14 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	local f1_local14 = Engine[@"getmodelforcontroller"](f1_arg0)
 	f1_local13(f1_local12, f1_local14.DemoTitleText, function(f9_arg0)
 		f1_local1:updateElementState(TitleTextBox, {
 			name = "model_validation",
@@ -134,7 +134,7 @@ LUI.createMenu.DemoSaveSegmentPopup = function(f1_arg0, f1_arg1)
 	LUI.OverrideFunction_CallOriginalFirst(TitleTextBox, "childFocusLost", function(element)
 		if CoD.ModelUtility.IsControllerModelValueNonEmptyString(f1_arg0, "DemoTitleText") then
 			SetElementState(self, element, f1_arg0, "DefaultState")
-			CoD.DemoUtility.SaveFileProperty(element, Enum[0xEAFC1D0E771FFBD][0x107B30313EA4156])
+			CoD.DemoUtility.SaveFileProperty(element, Enum[@"demokeyboardmodes"][@"demo_keyboard_segment_name"])
 		end
 	end)
 	LUI.OverrideFunction_CallOriginalFirst(TitleTextBox, "close", function(element)

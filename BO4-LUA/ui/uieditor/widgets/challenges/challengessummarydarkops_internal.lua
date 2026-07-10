@@ -14,14 +14,14 @@ CoD.ChallengesSummaryDarkOps_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, 
 	local SceneBlur = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	SceneBlur:setRGB(0, 0, 0)
 	SceneBlur:setAlpha(0)
-	SceneBlur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	SceneBlur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	SceneBlur:setShaderVector(0, 0, 0.4, 0, 0)
 	self:addElement(SceneBlur)
 	self.SceneBlur = SceneBlur
 	local NoiseTiledBacking = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	NoiseTiledBacking:setAlpha(0.8)
-	NoiseTiledBacking:setImage(RegisterImage(0x34839E8065B1E53))
-	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	NoiseTiledBacking:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	NoiseTiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	NoiseTiledBacking:setupNineSliceShader(196, 88)
 	self:addElement(NoiseTiledBacking)
@@ -39,21 +39,21 @@ CoD.ChallengesSummaryDarkOps_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, 
 	Classfied:setAlpha(0.8)
 	Classfied:setText("")
 	Classfied:setTTF("dinnext_regular")
-	Classfied:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	Classfied:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	Classfied:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	Classfied:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	self:addElement(Classfied)
 	self.Classfied = Classfied
 	local Icon = LUI.UIImage.new(0.5, 0.5, -85, 85, 0.5, 0.5, -111, 59)
 	Icon:setScale(0.75, 0.75)
-	Icon:setImage(RegisterImage(0xDF1AC892A896FAF))
+	Icon:setImage(RegisterImage(@"t7_icons_challenges_mp_darkops"))
 	self:addElement(Icon)
 	self.Icon = Icon
 	local Name = LUI.UIText.new(0.5, 0.5, -94, 94, 0.5, 0.5, 53.5, 71.5)
 	Name:setRGB(ColorSet.T8__OFF__GRAY.r, ColorSet.T8__OFF__GRAY.g, ColorSet.T8__OFF__GRAY.b)
-	Name:setText(Engine[0xF9F1239CFD921FE](0xD3B373F67B75C3D))
+	Name:setText(Engine[@"hash_4F9F1239CFD921FE"](@"challenge/darkops"))
 	Name:setTTF("ttmussels_regular")
 	Name:setLetterSpacing(2)
-	Name:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	Name:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	self:addElement(Name)
 	self.Name = Name
 	local ButtonOutline = CoD.CommonButtonOutline.new(f1_arg0, f1_arg1, 0, 1, 0, 0, 0, 1, 0, 0)
@@ -75,7 +75,7 @@ CoD.ChallengesSummaryDarkOps_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, 
 	})
 	local f1_local9 = self
 	local f1_local10 = self.subscribeToModel
-	local f1_local11 = Engine[0x8DF2E5447F384B9]()
+	local f1_local11 = Engine[@"getglobalmodel"]()
 	f1_local10(f1_local9, f1_local11["lobbyRoot.lobbyNav"], function(f4_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

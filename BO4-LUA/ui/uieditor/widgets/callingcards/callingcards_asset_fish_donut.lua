@@ -8,7 +8,7 @@ CoD.CallingCards_Asset_fish_donut.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local fishdonut = LUI.UIImage.new(0, 0, 0, 239, 0, 0, 0, 239)
-	fishdonut:setImage(RegisterImage(0x325C76D84C4EDE))
+	fishdonut:setImage(RegisterImage(@"uie_ui_icon_callingcards_loot_cowboysandmonsters_donut"))
 	self:addElement(fishdonut)
 	self.fishdonut = fishdonut
 	if PostLoadFunc then

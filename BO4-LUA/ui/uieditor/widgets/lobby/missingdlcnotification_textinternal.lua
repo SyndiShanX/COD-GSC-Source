@@ -8,11 +8,11 @@ CoD.MissingDLCNotification_TextInternal.new = function(f1_arg0, f1_arg1, f1_arg2
 	self.soundSet = "none"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local label = LUI.UIText.new(0, 1, 0, 0, 0, 0, 0, 14)
-	label:setText(Engine[0xF9F1239CFD921FE](0xA201C5CBA235AA1))
+	label:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_3A201C5CBA235AA1"))
 	label:setTTF("ttmussels_demibold")
 	label:setLetterSpacing(2)
-	label:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	label:setAlignment(Enum[0x7A5123B654282D2][0x6ED4298C93DC5ED])
+	label:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	label:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
 	self:addElement(label)
 	self.label = label
 	self:mergeStateConditions({

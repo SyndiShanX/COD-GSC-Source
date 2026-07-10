@@ -27,9 +27,9 @@ CoD.StartMenu_Barracks_WL.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 			end,
 		},
 	})
-	ProgressUnlocks.ButtonInternal.ImageContainer.ImageContainer:setImage(RegisterImage(0xCB7B28E1ED13921))
+	ProgressUnlocks.ButtonInternal.ImageContainer.ImageContainer:setImage(RegisterImage(@"uie_ui_menu_start_menu_grid"))
 	ProgressUnlocks.ButtonInternal.StartMenuButtonFrame:changeFrameWidget(CoD.ButtonFrame_WorldLeagueProgress)
-	ProgressUnlocks.ButtonInternal.ButtonTitle.HeaderText:setText(LocalizeToUpperString(0x4ACCE4091313402))
+	ProgressUnlocks.ButtonInternal.ButtonTitle.HeaderText:setText(LocalizeToUpperString(@"hash_24ACCE4091313402"))
 	ProgressUnlocks:registerEventHandler("gain_focus", function(element, event)
 		local f3_local0 = nil
 		if element.gainFocus then
@@ -37,10 +37,10 @@ CoD.StartMenu_Barracks_WL.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 		elseif element.super.gainFocus then
 			f3_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f3_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(ProgressUnlocks, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(ProgressUnlocks, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if IsInDefaultState(element) then
 			OpenOverlay(self, "Prestige_PlayerLevel", controller)
 			PlaySoundAlias("uin_toggle_generic")
@@ -49,7 +49,7 @@ CoD.StartMenu_Barracks_WL.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 		end
 	end, function(element, menu, controller)
 		if IsInDefaultState(element) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false
@@ -80,7 +80,7 @@ CoD.StartMenu_Barracks_WL.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	})
 	local StatsOverview = Leaderboards
 	local CommonBgLayoutElement = Leaderboards.subscribeToModel
-	local LeaguePlayMedals = Engine[0x8DF2E5447F384B9]()
+	local LeaguePlayMedals = Engine[@"getglobalmodel"]()
 	CommonBgLayoutElement(StatsOverview, LeaguePlayMedals["lobbyRoot.lobbyNav"], function(f9_arg0)
 		f1_arg0:updateElementState(Leaderboards, {
 			name = "model_validation",
@@ -90,8 +90,8 @@ CoD.StartMenu_Barracks_WL.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 			modelName = "lobbyRoot.lobbyNav",
 		})
 	end, false)
-	Leaderboards.ButtonInternal.ImageContainer.ImageContainer:setImage(RegisterImage(0x225DF4C37296C0B))
-	Leaderboards.ButtonInternal.ButtonTitle.HeaderText:setText(Engine[0xF9F1239CFD921FE](0xFCAADB087BF022D))
+	Leaderboards.ButtonInternal.ImageContainer.ImageContainer:setImage(RegisterImage(@"ui_menu_start_menu_leaderboards"))
+	Leaderboards.ButtonInternal.ButtonTitle.HeaderText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_5FCAADB087BF022D"))
 	Leaderboards:registerEventHandler("gain_focus", function(element, event)
 		local f10_local0 = nil
 		if element.gainFocus then
@@ -99,10 +99,10 @@ CoD.StartMenu_Barracks_WL.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 		elseif element.super.gainFocus then
 			f10_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f10_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(Leaderboards, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(Leaderboards, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if IsInDefaultState(element) then
 			CoD.StartMenuUtility.OpenLeaderboardMain(self, menu, controller, "Leaderboard_Main")
 			PlaySoundAlias("uin_toggle_generic")
@@ -111,7 +111,7 @@ CoD.StartMenu_Barracks_WL.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 		end
 	end, function(element, menu, controller)
 		if IsInDefaultState(element) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false
@@ -126,9 +126,9 @@ CoD.StartMenu_Barracks_WL.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	self:addElement(StatsOverview)
 	self.StatsOverview = StatsOverview
 	LeaguePlayMedals = CoD.StartMenu_Button_LG.new(f1_arg0, f1_arg1, 0.5, 0.5, -836.5, -367.5, 0.5, 0.5, 66.5, 336.5)
-	LeaguePlayMedals.ButtonInternal.ImageContainer.ImageContainer:setImage(RegisterImage(0xCB7B28E1ED13921))
+	LeaguePlayMedals.ButtonInternal.ImageContainer.ImageContainer:setImage(RegisterImage(@"uie_ui_menu_start_menu_grid"))
 	LeaguePlayMedals.ButtonInternal.StartMenuButtonFrame:changeFrameWidget(CoD.ButtonFrame_ArenaMedals)
-	LeaguePlayMedals.ButtonInternal.ButtonTitle.HeaderText:setText(LocalizeHash(0x8F69F5BDD4F7C26))
+	LeaguePlayMedals.ButtonInternal.ButtonTitle.HeaderText:setText(LocalizeHash(@"hash_8F69F5BDD4F7C26"))
 	LeaguePlayMedals:subscribeToGlobalModel(f1_arg1, "PlayerShowcase", "medal", function(model)
 		LeaguePlayMedals.ButtonInternal.ButtonTitle.NewIcon:setModel(model, f1_arg1)
 	end)
@@ -139,10 +139,10 @@ CoD.StartMenu_Barracks_WL.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 		elseif element.super.gainFocus then
 			f14_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f14_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(LeaguePlayMedals, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(LeaguePlayMedals, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if IsInDefaultState(element) then
 			CoD.StartMenuUtility.OpenStartMenuOverlay(self, menu, controller, "Barracks_Medals")
 			PlaySoundAlias("uin_toggle_generic")
@@ -151,7 +151,7 @@ CoD.StartMenu_Barracks_WL.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 		end
 	end, function(element, menu, controller)
 		if IsInDefaultState(element) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false
@@ -161,9 +161,9 @@ CoD.StartMenu_Barracks_WL.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	self.LeaguePlayMedals = LeaguePlayMedals
 	local LeaguePlayCareer = CoD.StartMenu_Button_LG.new(f1_arg0, f1_arg1, 0.5, 0.5, -836.5, -367.5, 0.5, 0.5, -336.5, -58.5)
 	LeaguePlayCareer:setAlpha(0)
-	LeaguePlayCareer.ButtonInternal.ImageContainer.ImageContainer:setImage(RegisterImage(0xCB7B28E1ED13921))
+	LeaguePlayCareer.ButtonInternal.ImageContainer.ImageContainer:setImage(RegisterImage(@"uie_ui_menu_start_menu_grid"))
 	LeaguePlayCareer.ButtonInternal.StartMenuButtonFrame:changeFrameWidget(CoD.ButtonFrame_ArenaBarracksStats)
-	LeaguePlayCareer.ButtonInternal.ButtonTitle.HeaderText:setText(LocalizeHash(0xEED2099B101A416))
+	LeaguePlayCareer.ButtonInternal.ButtonTitle.HeaderText:setText(LocalizeHash(@"hash_6EED2099B101A416"))
 	self:addElement(LeaguePlayCareer)
 	self.LeaguePlayCareer = LeaguePlayCareer
 	local CommonDetailPanel2 = CoD.CommonDetailPanel02.new(f1_arg0, f1_arg1, 0.5, 0.5, -835.5, -366.5, 0.5, 0.5, -337.5, 33.5)

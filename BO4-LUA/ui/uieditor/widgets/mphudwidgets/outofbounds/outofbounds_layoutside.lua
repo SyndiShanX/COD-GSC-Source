@@ -10,12 +10,12 @@ CoD.outofbounds_layoutSide.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	local layoutElementRight02 = LUI.UIImage.new(0, 0, -2, 76, 0, 0, 0, 684)
 	layoutElementRight02:setAlpha(0.15)
 	layoutElementRight02:setZoom(-10)
-	layoutElementRight02:setImage(RegisterImage(0x7788CCF4E11DACA))
+	layoutElementRight02:setImage(RegisterImage(@"hash_7788CCF4E11DACA"))
 	self:addElement(layoutElementRight02)
 	self.layoutElementRight02 = layoutElementRight02
 	local layoutElementRight01 = LUI.UIImage.new(0, 0, 0, 78, 0, 0, 0, 684)
 	layoutElementRight01:setAlpha(0.3)
-	layoutElementRight01:setImage(RegisterImage(0x7788CCF4E11DACA))
+	layoutElementRight01:setImage(RegisterImage(@"hash_7788CCF4E11DACA"))
 	self:addElement(layoutElementRight01)
 	self.layoutElementRight01 = layoutElementRight01
 	if PostLoadFunc then
@@ -38,7 +38,7 @@ CoD.outofbounds_layoutSide.__clipsPerState = {
 					f5_arg0:setZoom(-10)
 					f5_arg0:registerEventHandler("transition_complete_keyframe", f3_arg0.clipFinished)
 				end
-				f3_arg0.layoutElementRight02:beginAnimation(700, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f3_arg0.layoutElementRight02:beginAnimation(700, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_both"])
 				f3_arg0.layoutElementRight02:setZoom(30)
 				f3_arg0.layoutElementRight02:registerEventHandler("interrupted_keyframe", f3_arg0.clipInterrupted)
 				f3_arg0.layoutElementRight02:registerEventHandler("transition_complete_keyframe", f4_local0)

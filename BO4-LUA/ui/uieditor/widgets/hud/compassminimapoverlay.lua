@@ -7,7 +7,7 @@ CoD.CompassMinimapOverlay.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	self.id = "CompassMinimapOverlay"
 	self.soundSet = "default"
 	local CompassMinimapOverlay = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	CompassMinimapOverlay:setupCompassOverlay(Enum[0x398581F68B3E097][0x87B41F155A4F8BA])
+	CompassMinimapOverlay:setupCompassOverlay(Enum[@"compasstype"][@"compass_type_partial"])
 	self:addElement(CompassMinimapOverlay)
 	self.CompassMinimapOverlay = CompassMinimapOverlay
 	if PostLoadFunc then

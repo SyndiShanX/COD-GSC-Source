@@ -16,8 +16,8 @@ CoD.DirectorFindGamePlaylistInfoDescriptionPanel.new = function(f1_arg0, f1_arg1
 	self.CommonDetailPanel = CommonDetailPanel
 	local TiledBacking = LUI.UIImage.new(0, 0, 0, 540, 0, 1, 0, 0)
 	TiledBacking:setAlpha(0.5)
-	TiledBacking:setImage(RegisterImage(0x34839E8065B1E53))
-	TiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	TiledBacking:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	TiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	TiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	TiledBacking:setupNineSliceShader(196, 88)
 	self:addElement(TiledBacking)
@@ -31,8 +31,8 @@ CoD.DirectorFindGamePlaylistInfoDescriptionPanel.new = function(f1_arg0, f1_arg1
 	local LayoutElementBR2 = LUI.UIImage.new(1, 1, -52, -20, 1, 1, -52, -20)
 	LayoutElementBR2:setAlpha(0.2)
 	LayoutElementBR2:setZRot(-90)
-	LayoutElementBR2:setImage(RegisterImage(0x34B575F15CDD376))
-	LayoutElementBR2:setMaterial(LUI.UIImage.GetCachedMaterial(0xF755127C95CF5B6))
+	LayoutElementBR2:setImage(RegisterImage(@"hash_634B575F15CDD376"))
+	LayoutElementBR2:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_F755127C95CF5B6"))
 	LayoutElementBR2:setShaderVector(0, 2, 0, 0, 0)
 	self:addElement(LayoutElementBR2)
 	self.LayoutElementBR2 = LayoutElementBR2

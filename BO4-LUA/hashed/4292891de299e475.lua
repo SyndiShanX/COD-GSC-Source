@@ -83,28 +83,28 @@ CoD.DiscountTiersContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	DiscountList:setTopBottom(0, 0, 832, 948)
 	DiscountList:setWidgetType(CoD.DiscountTiersWidget)
 	DiscountList:setSpacing(8)
-	DiscountList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	DiscountList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	DiscountList:setDataSource("DiscountList")
 	DiscountList:linkToElementModel(DiscountList, "bundle", true, function(model, f9_arg1)
-		CoD.Menu.UpdateButtonShownState(f9_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f9_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	DiscountList:linkToElementModel(DiscountList, "reservesButton", true, function(model, f10_arg1)
-		CoD.Menu.UpdateButtonShownState(f10_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f10_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	DiscountList:linkToElementModel(DiscountList, "purchaseReservesItem", true, function(model, f11_arg1)
-		CoD.Menu.UpdateButtonShownState(f11_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f11_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	local DiscountDetailsWidget = DiscountList
 	local ReserveDeals = DiscountList.subscribeToModel
-	local ReserveDealsDetails = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local ReserveDealsDetails = Engine[@"getmodelforcontroller"](f1_arg1)
 	ReserveDeals(DiscountDetailsWidget, ReserveDealsDetails["LootStreamProgress.allRngUnlocked"], function(f12_arg0, f12_arg1)
-		CoD.Menu.UpdateButtonShownState(f12_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f12_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	DiscountDetailsWidget = DiscountList
 	ReserveDeals = DiscountList.subscribeToModel
-	ReserveDealsDetails = Engine[0x4DF5CFBC1771947](f1_arg1)
+	ReserveDealsDetails = Engine[@"getmodelforcontroller"](f1_arg1)
 	ReserveDeals(DiscountDetailsWidget, ReserveDealsDetails["LootStreamProgress.codPoints"], function(f13_arg0, f13_arg1)
-		CoD.Menu.UpdateButtonShownState(f13_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f13_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	DiscountList:registerEventHandler("occlusion_change", function(element, event)
 		local f14_local0 = nil
@@ -138,10 +138,10 @@ CoD.DiscountTiersContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 		elseif element.super.gainFocus then
 			f16_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f16_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(DiscountList, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(DiscountList, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if CoD.ModelUtility.IsSelfModelValueNonEmptyString(element, controller, "bundle") then
 			SetControllerModelValue(controller, "LootStreamProgress.playAnimation", false)
 			CoD.BlackMarketUtility.SetHighlightedPurchaseTierForSpecialDeal(controller, menu, element)
@@ -173,7 +173,7 @@ CoD.DiscountTiersContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 			return true
 		end
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 		return true
 	end, false)
 	DiscountList:linkToElementModel(self, "percentOff", true, function(model)
@@ -188,7 +188,7 @@ CoD.DiscountTiersContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	ReserveDeals:setWidgetType(CoD.ReserveDealsWidget)
 	ReserveDeals:setHorizontalCount(2)
 	ReserveDeals:setSpacing(8)
-	ReserveDeals:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	ReserveDeals:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	ReserveDeals:setDataSource("ReserveDealsList")
 	ReserveDeals:registerEventHandler("occlusion_change", function(element, event)
 		local f20_local0 = nil
@@ -222,17 +222,17 @@ CoD.DiscountTiersContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 		elseif element.super.gainFocus then
 			f22_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f22_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(ReserveDeals, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(ReserveDeals, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		OpenOverlay(self, "ItemShopDetails", controller, {
 			_model = element:getModel(),
 		})
 		PlaySoundAlias("uin_toggle_generic")
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 		return true
 	end, false)
 	self:addElement(ReserveDeals)

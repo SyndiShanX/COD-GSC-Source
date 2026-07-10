@@ -28,11 +28,11 @@ LUI.createMenu.ContractDetails = function(f1_arg0, f1_arg1)
 	self.anyChildUsesUpdateState = true
 	f1_local1:addElementToPendingUpdateStateList(self)
 	local GenericMenuFrameIdentity = CoD.GenericMenuFrameIdentity.new(f1_local1, f1_arg0, 0.5, 0.5, -960, 960, 0, 1, 0, 0)
-	GenericMenuFrameIdentity.CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(0x29C903C6DF90D6F))
+	GenericMenuFrameIdentity.CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(@"menu/black_market"))
 	GenericMenuFrameIdentity:subscribeToGlobalModel(f1_arg0, "LobbyRoot", "lobbyTitle", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			GenericMenuFrameIdentity.CommonHeader.subtitle.subtitle:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			GenericMenuFrameIdentity.CommonHeader.subtitle.subtitle:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	self:addElement(GenericMenuFrameIdentity)
@@ -43,19 +43,19 @@ LUI.createMenu.ContractDetails = function(f1_arg0, f1_arg1)
 	end)
 	ContractDetailsPanel:appendEventHandler("input_source_changed", function(f4_arg0, f4_arg1)
 		f4_arg1.menu = f4_arg1.menu or f1_local1
-		CoD.Menu.UpdateButtonShownState(f4_arg0, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f4_arg0, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	local f1_local4 = ContractDetailsPanel
 	local Strip = ContractDetailsPanel.subscribeToModel
-	local f1_local6 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	local f1_local6 = Engine[@"getmodelforcontroller"](f1_arg0)
 	Strip(f1_local4, f1_local6.LastInput, function(f5_arg0, f5_arg1)
-		CoD.Menu.UpdateButtonShownState(f5_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f5_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	ContractDetailsPanel:linkToElementModel(ContractDetailsPanel, "allowFrozenMoment", true, function(model, f6_arg1)
-		CoD.Menu.UpdateButtonShownState(f6_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f6_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	ContractDetailsPanel:linkToElementModel(ContractDetailsPanel, "movieName", true, function(model, f7_arg1)
-		CoD.Menu.UpdateButtonShownState(f7_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f7_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	ContractDetailsPanel:registerEventHandler("gain_focus", function(element, event)
 		local f8_local0 = nil
@@ -64,10 +64,10 @@ LUI.createMenu.ContractDetails = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f8_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f8_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(ContractDetailsPanel, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "MOUSE1", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(ContractDetailsPanel, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "MOUSE1", function(element, menu, controller, model)
 		if IsMouse(controller) then
 			SetElementModelToFocusedElementModel(controller, self, element, "SupplyChainDetails")
 			CoD.BlackMarketUtility.ChangeSupplyChainCameraBySelection(menu, controller, self)
@@ -80,13 +80,13 @@ LUI.createMenu.ContractDetails = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if IsMouse(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "MOUSE1")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "MOUSE1")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(ContractDetailsPanel, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_remove", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(ContractDetailsPanel, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_remove", function(element, menu, controller, model)
 		if CoD.ModelUtility.IsSelfModelValueEqualTo(element, controller, "allowFrozenMoment", true) and IsMouseOrKeyboard(controller) then
 			OpenOverlay(self, "MPSpecialistHUBPreviewMoment", controller)
 			return true
@@ -101,10 +101,10 @@ LUI.createMenu.ContractDetails = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if CoD.ModelUtility.IsSelfModelValueEqualTo(element, controller, "allowFrozenMoment", true) and IsMouseOrKeyboard(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x52FB29ED3A3CA79, nil, "ui_remove")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/preview", nil, "ui_remove")
 			return true
 		elseif CoD.ModelUtility.IsSelfModelValueNonEmptyString(element, controller, "movieName") and IsMouseOrKeyboard(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x52FB29ED3A3CA79, nil, "ui_remove")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/preview", nil, "ui_remove")
 			return true
 		else
 			return false
@@ -122,7 +122,7 @@ LUI.createMenu.ContractDetails = function(f1_arg0, f1_arg1)
 	Strip = LUI.UIImage.new(0.5, 0.5, -839, -65, 0, 0, 676.5, 850.5)
 	Strip:setRGB(0.09, 0.14, 0.19)
 	Strip:setAlpha(0.8)
-	Strip:setMaterial(LUI.UIImage.GetCachedMaterial(0x67D1E3A3D2D1BF))
+	Strip:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_saturation_normal"))
 	Strip:setShaderVector(0, 0.7, 0, 0, 0)
 	self:addElement(Strip)
 	self.Strip = Strip
@@ -136,20 +136,20 @@ LUI.createMenu.ContractDetails = function(f1_arg0, f1_arg1)
 	RewardGridPC:setWidgetType(CoD.SupplyChainItem)
 	RewardGridPC:setHorizontalCount(5)
 	RewardGridPC:setSpacing(11)
-	RewardGridPC:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	RewardGridPC:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	RewardGridPC:setDataSource("ContractTierItems")
 	RewardGridPC:appendEventHandler("input_source_changed", function(f14_arg0, f14_arg1)
 		f14_arg1.menu = f14_arg1.menu or f1_local1
-		CoD.Menu.UpdateButtonShownState(f14_arg0, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f14_arg0, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	local ContractInfoPanel = RewardGridPC
 	local SupplyChainDetails = RewardGridPC.subscribeToModel
-	local StartMenuCODpoints = Engine[0x4DF5CFBC1771947](f1_arg0)
+	local StartMenuCODpoints = Engine[@"getmodelforcontroller"](f1_arg0)
 	SupplyChainDetails(ContractInfoPanel, StartMenuCODpoints.LastInput, function(f15_arg0, f15_arg1)
-		CoD.Menu.UpdateButtonShownState(f15_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f15_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	RewardGridPC:linkToElementModel(RewardGridPC, "allowFrozenMoment", true, function(model, f16_arg1)
-		CoD.Menu.UpdateButtonShownState(f16_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f16_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	RewardGridPC:registerEventHandler("list_item_gain_focus", function(element, event)
 		local f17_local0 = nil
@@ -187,12 +187,12 @@ LUI.createMenu.ContractDetails = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f20_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x57783F8DA4AAEF])
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x571F08AD84807E0])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_left"])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_right"])
 		return f20_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(RewardGridPC, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(RewardGridPC, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if IsMouseOrKeyboard(controller) then
 			SetElementModelToFocusedElementModel(controller, self, element, "SupplyChainDetails")
 			CoD.BlackMarketUtility.ChangeSupplyChainCameraBySelection(menu, controller, element)
@@ -206,13 +206,13 @@ LUI.createMenu.ContractDetails = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if IsMouseOrKeyboard(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(RewardGridPC, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "MOUSE1", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(RewardGridPC, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "MOUSE1", function(element, menu, controller, model)
 		if IsMouseOrKeyboard(controller) then
 			SetElementModelToFocusedElementModel(controller, self, element, "SupplyChainDetails")
 			CoD.BlackMarketUtility.ChangeSupplyChainCameraBySelection(menu, controller, element)
@@ -221,19 +221,19 @@ LUI.createMenu.ContractDetails = function(f1_arg0, f1_arg1)
 			CoD.PlayerRoleUtility.StopGesturePreview(menu, controller)
 			CoD.BlackMarketUtility.AutoPlayGestureIfApplicable(menu, element, controller)
 			SetElementState(self, self.SupplyChainDetails, controller, "DefaultState")
-			UpdateButtonPromptState(menu, element, controller, Enum[0x3DD78803F918E9D][0x29E5695FF1401AD])
+			UpdateButtonPromptState(menu, element, controller, Enum[@"luibutton"][@"lui_key_rstick_pressed"])
 			return true
 		else
 		end
 	end, function(element, menu, controller)
 		if IsMouseOrKeyboard(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "MOUSE1")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "MOUSE1")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(RewardGridPC, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(RewardGridPC, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "allowFrozenMoment") and IsGamepad(controller) then
 			SetControllerModelValue(controller, "LootStreamProgress.playAnimation", false)
 			OpenOverlay(self, "MPSpecialistHUBPreviewMoment", controller)
@@ -242,13 +242,13 @@ LUI.createMenu.ContractDetails = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "allowFrozenMoment") and IsGamepad(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, nil)
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(RewardGridPC, f1_arg0, Enum[0x3DD78803F918E9D][0x57783F8DA4AAEF], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(RewardGridPC, f1_arg0, Enum[@"luibutton"][@"lui_key_left"], nil, function(element, menu, controller, model)
 		if IsDpadButton(model) and CoD.GridAndListUtility.IsElementAtColumnIndex(element, 1) then
 			SetFocusedTierModelValue(controller, "1", "decrement")
 			return true
@@ -256,13 +256,13 @@ LUI.createMenu.ContractDetails = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if IsDpadButton(nil) and CoD.GridAndListUtility.IsElementAtColumnIndex(element, 1) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x57783F8DA4AAEF], 0x0, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_left"], @"hash_0", nil, nil)
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(RewardGridPC, f1_arg0, Enum[0x3DD78803F918E9D][0x571F08AD84807E0], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(RewardGridPC, f1_arg0, Enum[@"luibutton"][@"lui_key_right"], nil, function(element, menu, controller, model)
 		if IsDpadButton(model) and CoD.GridAndListUtility.IsElementAtColumnIndex(element, 5) then
 			SetFocusedTierModelValue(controller, "1", "increment")
 			return true
@@ -270,7 +270,7 @@ LUI.createMenu.ContractDetails = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if IsDpadButton(nil) and CoD.GridAndListUtility.IsElementAtColumnIndex(element, 5) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x571F08AD84807E0], 0x0, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_right"], @"hash_0", nil, nil)
 			return false
 		else
 			return false
@@ -309,7 +309,7 @@ LUI.createMenu.ContractDetails = function(f1_arg0, f1_arg1)
 	})
 	StartMenuCODpoints = SupplyChainDetails
 	ContractInfoPanel = SupplyChainDetails.subscribeToModel
-	local XCamMouseControl = Engine[0x4DF5CFBC1771947](f1_arg0)
+	local XCamMouseControl = Engine[@"getmodelforcontroller"](f1_arg0)
 	ContractInfoPanel(StartMenuCODpoints, XCamMouseControl.contractDetailsShowItemInfo, function(f35_arg0)
 		f1_local1:updateElementState(SupplyChainDetails, {
 			name = "model_validation",
@@ -325,7 +325,7 @@ LUI.createMenu.ContractDetails = function(f1_arg0, f1_arg1)
 	end)
 	StartMenuCODpoints = SupplyChainDetails
 	ContractInfoPanel = SupplyChainDetails.subscribeToModel
-	XCamMouseControl = Engine[0x4DF5CFBC1771947](f1_arg0)
+	XCamMouseControl = Engine[@"getmodelforcontroller"](f1_arg0)
 	ContractInfoPanel(StartMenuCODpoints, XCamMouseControl.LastInput, function(f37_arg0)
 		f1_local1:updateElementState(SupplyChainDetails, {
 			name = "model_validation",
@@ -366,7 +366,7 @@ LUI.createMenu.ContractDetails = function(f1_arg0, f1_arg1)
 	})
 	XCamMouseControl = ContractInfoPanel
 	StartMenuCODpoints = ContractInfoPanel.subscribeToModel
-	local Prompts = Engine[0x4DF5CFBC1771947](f1_arg0)
+	local Prompts = Engine[@"getmodelforcontroller"](f1_arg0)
 	StartMenuCODpoints(XCamMouseControl, Prompts.contractDetailsShowItemInfo, function(f41_arg0)
 		f1_local1:updateElementState(ContractInfoPanel, {
 			name = "model_validation",
@@ -391,7 +391,7 @@ LUI.createMenu.ContractDetails = function(f1_arg0, f1_arg1)
 	end)
 	XCamMouseControl = ContractInfoPanel
 	StartMenuCODpoints = ContractInfoPanel.subscribeToModel
-	Prompts = Engine[0x4DF5CFBC1771947](f1_arg0)
+	Prompts = Engine[@"getmodelforcontroller"](f1_arg0)
 	StartMenuCODpoints(XCamMouseControl, Prompts.LastInput, function(f44_arg0)
 		f1_local1:updateElementState(ContractInfoPanel, {
 			name = "model_validation",
@@ -452,7 +452,7 @@ LUI.createMenu.ContractDetails = function(f1_arg0, f1_arg1)
 	end)
 	local f1_local13 = XCamMouseControl
 	Prompts = XCamMouseControl.subscribeToModel
-	local f1_local14 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	local f1_local14 = Engine[@"getmodelforcontroller"](f1_arg0)
 	Prompts(f1_local13, f1_local14.contractDetailsShowItemInfo, function(f50_arg0)
 		f1_local1:updateElementState(XCamMouseControl, {
 			name = "model_validation",
@@ -483,21 +483,21 @@ LUI.createMenu.ContractDetails = function(f1_arg0, f1_arg1)
 		end
 	end)
 	self:linkToElementModel(self, "allowFrozenMoment", true, function(model, f54_arg1)
-		CoD.Menu.UpdateButtonShownState(f54_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f54_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	self:linkToElementModel(self, "movieName", true, function(model, f55_arg1)
-		CoD.Menu.UpdateButtonShownState(f55_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f55_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		CoD.BlackMarketUtility.SendItemShopViewEvent(controller, menu, "")
 		GoBack(self, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 		return true
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA], "MWHEELDOWN", function(element, menu, controller, model)
-		if CoD.BlackMarketUtility.IsPageStreamHoldActionReady(menu, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA]) then
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_rtrig"], "MWHEELDOWN", function(element, menu, controller, model)
+		if CoD.BlackMarketUtility.IsPageStreamHoldActionReady(menu, Enum[@"luibutton"][@"lui_key_rtrig"]) then
 			CoD.BlackMarketUtility.PageStreamHoldUpdateAction(menu)
 			PlaySoundAlias("uin_trigger_slide")
 			SetFocusedTierModelValue(controller, "5", "increment")
@@ -505,15 +505,15 @@ LUI.createMenu.ContractDetails = function(f1_arg0, f1_arg1)
 		else
 		end
 	end, function(element, menu, controller)
-		if CoD.BlackMarketUtility.IsPageStreamHoldActionReady(menu, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA]) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA], 0x0, nil, "MWHEELDOWN")
+		if CoD.BlackMarketUtility.IsPageStreamHoldActionReady(menu, Enum[@"luibutton"][@"lui_key_rtrig"]) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_rtrig"], @"hash_0", nil, "MWHEELDOWN")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC], "MWHEELUP", function(element, menu, controller, model)
-		if CoD.BlackMarketUtility.IsPageStreamHoldActionReady(menu, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC]) then
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_ltrig"], "MWHEELUP", function(element, menu, controller, model)
+		if CoD.BlackMarketUtility.IsPageStreamHoldActionReady(menu, Enum[@"luibutton"][@"lui_key_ltrig"]) then
 			CoD.BlackMarketUtility.PageStreamHoldUpdateAction(menu)
 			PlaySoundAlias("uin_trigger_slide")
 			SetFocusedTierModelValue(controller, "5", "decrement")
@@ -521,14 +521,14 @@ LUI.createMenu.ContractDetails = function(f1_arg0, f1_arg1)
 		else
 		end
 	end, function(element, menu, controller)
-		if CoD.BlackMarketUtility.IsPageStreamHoldActionReady(menu, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC]) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC], 0x0, nil, "MWHEELUP")
+		if CoD.BlackMarketUtility.IsPageStreamHoldActionReady(menu, Enum[@"luibutton"][@"lui_key_ltrig"]) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_ltrig"], @"hash_0", nil, "MWHEELUP")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "MWHEELDOWN", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_none"], "MWHEELDOWN", function(element, menu, controller, model)
 		if not IsRepeatButtonPress(model) then
 			PlaySoundAlias("uin_trigger_slide")
 			SetFocusedTierModelValue(controller, "5", "increment")
@@ -537,13 +537,13 @@ LUI.createMenu.ContractDetails = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if not IsRepeatButtonPress(nil) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "MWHEELDOWN")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "MWHEELDOWN")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "MWHEELUP", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_none"], "MWHEELUP", function(element, menu, controller, model)
 		if not IsRepeatButtonPress(model) then
 			PlaySoundAlias("uin_trigger_slide")
 			SetFocusedTierModelValue(controller, "5", "decrement")
@@ -552,34 +552,34 @@ LUI.createMenu.ContractDetails = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if not IsRepeatButtonPress(nil) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "MWHEELUP")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "MWHEELUP")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x93AB4C84F113EE1], "ui_contextual_1", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_back"], "ui_contextual_1", function(element, menu, controller, model)
 		if CoD.BlackMarketUtility.CanToggleSignatureWeapon(menu) then
 			PlaySoundAlias("uin_toggle_generic")
 			CoD.BlackMarketUtility.ToggleSignatureWeapon(menu, controller, menu)
 			return true
-		elseif CoD.BlackMarketUtility.IsSupplyChainActiveWidgetModelValueEqualTo(element, controller, "allowTogglePreview", true) and not CoD.BlackMarketUtility.IsSupplyChainActiveWidgetModelValueEqualTo(element, controller, "itemCategory", 0xCC13B0F8EEFF726) then
+		elseif CoD.BlackMarketUtility.IsSupplyChainActiveWidgetModelValueEqualTo(element, controller, "allowTogglePreview", true) and not CoD.BlackMarketUtility.IsSupplyChainActiveWidgetModelValueEqualTo(element, controller, "itemCategory", @"signature_weapon") then
 			CoD.BlackMarketUtility.ToggleCharacterModelCamera(menu, element, controller)
 			return true
 		else
 		end
 	end, function(element, menu, controller)
 		if CoD.BlackMarketUtility.CanToggleSignatureWeapon(menu) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x93AB4C84F113EE1], 0x0, nil, "ui_contextual_1")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_back"], @"hash_0", nil, "ui_contextual_1")
 			return false
-		elseif CoD.BlackMarketUtility.IsSupplyChainActiveWidgetModelValueEqualTo(element, controller, "allowTogglePreview", true) and not CoD.BlackMarketUtility.IsSupplyChainActiveWidgetModelValueEqualTo(element, controller, "itemCategory", 0xCC13B0F8EEFF726) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x93AB4C84F113EE1], 0x0, nil, "ui_contextual_1")
+		elseif CoD.BlackMarketUtility.IsSupplyChainActiveWidgetModelValueEqualTo(element, controller, "allowTogglePreview", true) and not CoD.BlackMarketUtility.IsSupplyChainActiveWidgetModelValueEqualTo(element, controller, "itemCategory", @"signature_weapon") then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_back"], @"hash_0", nil, "ui_contextual_1")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x29E5695FF1401AD], "ui_contextual_2", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_rstick_pressed"], "ui_contextual_2", function(element, menu, controller, model)
 		if CoD.BlackMarketUtility.CanPlayGesture(menu) then
 			PlaySoundAlias("uin_toggle_generic")
 			CoD.BlackMarketUtility.PlayGesture(self, menu, controller)
@@ -588,13 +588,13 @@ LUI.createMenu.ContractDetails = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if CoD.BlackMarketUtility.CanPlayGesture(menu) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x29E5695FF1401AD], 0x52FB29ED3A3CA79, nil, "ui_contextual_2")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_rstick_pressed"], @"menu/preview", nil, "ui_contextual_2")
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_remove", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_remove", function(element, menu, controller, model)
 		if CoD.BlackMarketUtility.IsSupplyChainActiveWidgetModelValueEqualTo(menu, controller, "allowFrozenMoment", true) and not CoD.BlackMarketUtility.IsMenuOccluded(menu) then
 			SetControllerModelValue(controller, "LootStreamProgress.playAnimation", false)
 			OpenOverlay(self, "MPSpecialistHUBPreviewMoment", controller)
@@ -620,26 +620,26 @@ LUI.createMenu.ContractDetails = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if CoD.BlackMarketUtility.IsSupplyChainActiveWidgetModelValueEqualTo(menu, controller, "allowFrozenMoment", true) and not CoD.BlackMarketUtility.IsMenuOccluded(menu) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_remove")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_remove")
 			return false
 		elseif not CoD.BlackMarketUtility.IsSupplyChainActiveWidgetModelValueNil(menu, controller, "movieName") and not CoD.BlackMarketUtility.IsSupplyChainActiveWidgetModelValueEqualTo(menu, controller, "movieName", "") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_remove")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_remove")
 			return false
 		elseif CoD.ModelUtility.IsSelfModelValueEqualTo(element, controller, "allowFrozenMoment", true) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x52FB29ED3A3CA79, nil, "ui_remove")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/preview", nil, "ui_remove")
 			return true
 		elseif CoD.ModelUtility.IsSelfModelValueNonEmptyString(element, controller, "movieName") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x52FB29ED3A3CA79, nil, "ui_remove")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/preview", nil, "ui_remove")
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], "ui_contextual_3", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], "ui_contextual_3", function(element, menu, controller, model)
 		OpenPopup(self, "PurchaseCodPoints", controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], 0x63D5409DEC36DFA, nil, "ui_contextual_3")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], @"hash_263D5409DEC36DFA", nil, "ui_contextual_3")
 		return true
 	end, false)
 	LUI.OverrideFunction_CallOriginalFirst(self, "close", function(element)
@@ -683,12 +683,12 @@ LUI.createMenu.ContractDetails = function(f1_arg0, f1_arg1)
 	f1_local13 = self
 	if not CoD.ModelUtility.IsSelfModelValueTrue(f1_local13, f1_arg0, "purchased") then
 		CoD.BlackMarketUtility.EnableLiveCountDownTimer(self)
-		CoD.BlackMarketUtility.SetupPageStreamHoldActionReadyCheck(f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC], Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA])
+		CoD.BlackMarketUtility.SetupPageStreamHoldActionReadyCheck(f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_ltrig"], Enum[@"luibutton"][@"lui_key_rtrig"])
 		CoD.BlackMarketUtility.EnableItemshopTick(f1_arg0, self)
 	else
 		CoD.BlackMarketUtility.ChangeSupplyChainCameraBySelection(f1_local1, f1_arg0, f1_local13)
 		CoD.BlackMarketUtility.AutoPlayGestureIfApplicable(f1_local1, f1_local13, f1_arg0)
-		CoD.BlackMarketUtility.SetupPageStreamHoldActionReadyCheck(f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC], Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA])
+		CoD.BlackMarketUtility.SetupPageStreamHoldActionReadyCheck(f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_ltrig"], Enum[@"luibutton"][@"lui_key_rtrig"])
 	end
 	f1_local13 = ContractDetailsPanel
 	if IsPC() then

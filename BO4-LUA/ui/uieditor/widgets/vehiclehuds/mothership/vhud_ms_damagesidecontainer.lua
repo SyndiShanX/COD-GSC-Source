@@ -13,17 +13,17 @@ CoD.vhud_ms_DamageSideContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 		{
 			stateName = "Invisible",
 			condition = function(menu, element, event)
-				return not CoD.ModelUtility.IsSelfEnumModelValueTrue(element, f1_arg1, Enum[0x76254DAF867D1BD][0x97458278F61A801])
+				return not CoD.ModelUtility.IsSelfEnumModelValueTrue(element, f1_arg1, Enum[@"vehiclepartdestroyed"][@"vehicle_part_destroyed_1"])
 			end,
 		},
 	})
-	vhudmsDamageIconSideLeft:linkToElementModel(vhudmsDamageIconSideLeft, Enum[0x76254DAF867D1BD][0x97458278F61A801], true, function(model)
+	vhudmsDamageIconSideLeft:linkToElementModel(vhudmsDamageIconSideLeft, Enum[@"vehiclepartdestroyed"][@"vehicle_part_destroyed_1"], true, function(model)
 		f1_arg0:updateElementState(vhudmsDamageIconSideLeft, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = model:get(),
-			modelName = Enum[0x76254DAF867D1BD][0x97458278F61A801],
+			modelName = Enum[@"vehiclepartdestroyed"][@"vehicle_part_destroyed_1"],
 		})
 	end)
 	vhudmsDamageIconSideLeft:setYRot(180)
@@ -37,17 +37,17 @@ CoD.vhud_ms_DamageSideContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 		{
 			stateName = "Invisible",
 			condition = function(menu, element, event)
-				return not CoD.ModelUtility.IsSelfEnumModelValueTrue(element, f1_arg1, Enum[0x76254DAF867D1BD][0x97455278F61A2E8])
+				return not CoD.ModelUtility.IsSelfEnumModelValueTrue(element, f1_arg1, Enum[@"vehiclepartdestroyed"][@"vehicle_part_destroyed_2"])
 			end,
 		},
 	})
-	vhudmsDamageIconSideRight:linkToElementModel(vhudmsDamageIconSideRight, Enum[0x76254DAF867D1BD][0x97455278F61A2E8], true, function(model)
+	vhudmsDamageIconSideRight:linkToElementModel(vhudmsDamageIconSideRight, Enum[@"vehiclepartdestroyed"][@"vehicle_part_destroyed_2"], true, function(model)
 		f1_arg0:updateElementState(vhudmsDamageIconSideRight, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = model:get(),
-			modelName = Enum[0x76254DAF867D1BD][0x97455278F61A2E8],
+			modelName = Enum[@"vehiclepartdestroyed"][@"vehicle_part_destroyed_2"],
 		})
 	end)
 	vhudmsDamageIconSideRight:linkToElementModel(self, nil, false, function(model)

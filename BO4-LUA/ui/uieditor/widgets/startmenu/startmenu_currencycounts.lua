@@ -19,13 +19,13 @@ CoD.StartMenu_CurrencyCounts.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	self:addElement(StartMenuCODpoints)
 	self.StartMenuCODpoints = StartMenuCODpoints
 	local vial = LUI.UIImage.new(0, 0, 0, 38, 0.5, 0.5, -21.5, 16.5)
-	vial:setImage(RegisterImage(0x5FBFE58B2BB38AC))
+	vial:setImage(RegisterImage(@"uie_t7_hud_zm_vial_aar_256"))
 	self:addElement(vial)
 	self.vial = vial
 	local vialCount = LUI.UIText.new(0, 0, 41, 110, 0.5, 0.5, -16.5, 16.5)
 	vialCount:setText(SetValueIfNumberEqualTo(-1, "-", 0))
 	vialCount:setTTF("default")
-	vialCount:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	vialCount:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(vialCount)
 	self.vialCount = vialCount
 	self:mergeStateConditions({
@@ -50,7 +50,7 @@ CoD.StartMenu_CurrencyCounts.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	})
 	local f1_local4 = self
 	local f1_local5 = self.subscribeToModel
-	local f1_local6 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local6 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local5(f1_local4, f1_local6["LootStreamProgress.currentLootXP"], function(f6_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -62,7 +62,7 @@ CoD.StartMenu_CurrencyCounts.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	end, false)
 	f1_local4 = self
 	f1_local5 = self.subscribeToModel
-	f1_local6 = Engine[0x8DF2E5447F384B9]()
+	f1_local6 = Engine[@"getglobalmodel"]()
 	f1_local5(f1_local4, f1_local6["lobbyRoot.lobbyNetworkMode"], function(f7_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

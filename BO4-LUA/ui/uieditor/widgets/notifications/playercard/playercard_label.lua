@@ -17,8 +17,8 @@ CoD.PlayerCard_Label.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	itemName:setRGB(0.92, 0.92, 0.92)
 	itemName:setTTF("notosans_regular")
 	itemName:setLetterSpacing(1.5)
-	itemName:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	itemName:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	itemName:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	itemName:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	itemName:linkToElementModel(self, "name", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then

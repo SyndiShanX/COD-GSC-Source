@@ -9,8 +9,8 @@ CoD.TabbedScoreboardHeaderScoreFriendly.new = function(f1_arg0, f1_arg1, f1_arg2
 	local FriendlyKills = LUI.UIText.new(0, 0, 0, 157, 0, 0, 0, 64)
 	FriendlyKills:setTTF("0arame_mono_stencil")
 	FriendlyKills:setLetterSpacing(2)
-	FriendlyKills:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
-	FriendlyKills:setAlignment(Enum[0x7A5123B654282D2][0x6ED4298C93DC5ED])
+	FriendlyKills:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
+	FriendlyKills:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
 	FriendlyKills:linkToElementModel(self, "factionScore", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then

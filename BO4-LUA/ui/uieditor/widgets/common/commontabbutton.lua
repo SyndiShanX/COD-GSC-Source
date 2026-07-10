@@ -21,7 +21,7 @@ CoD.CommonTabButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	})
 	local f1_local2 = internal
 	local newIcon = internal.subscribeToModel
-	local f1_local4 = Engine[0x8DF2E5447F384B9]()
+	local f1_local4 = Engine[@"getglobalmodel"]()
 	newIcon(f1_local2, f1_local4["lobbyRoot.lobbyNav"], function(f3_arg0)
 		f1_arg0:updateElementState(internal, {
 			name = "model_validation",
@@ -49,13 +49,13 @@ CoD.CommonTabButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	internal:linkToElementModel(self, "tabName", true, function(model)
 		local f7_local0 = model:get()
 		if f7_local0 ~= nil then
-			internal.Text:setText(Engine[0xF9F1239CFD921FE](f7_local0))
+			internal.Text:setText(Engine[@"hash_4F9F1239CFD921FE"](f7_local0))
 		end
 	end)
 	internal:linkToElementModel(self, "tabName", true, function(model)
 		local f8_local0 = model:get()
 		if f8_local0 ~= nil then
-			internal.TextFocus:setText(Engine[0xF9F1239CFD921FE](f8_local0))
+			internal.TextFocus:setText(Engine[@"hash_4F9F1239CFD921FE"](f8_local0))
 		end
 	end)
 	self:addElement(internal)

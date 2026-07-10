@@ -31,13 +31,13 @@ CoD.LoadoutClassItemContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	end)
 	LoadoutClassItemContainerInternal:appendEventHandler("input_source_changed", function(f5_arg0, f5_arg1)
 		f5_arg1.menu = f5_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f5_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x6CE8023188D673F])
+		CoD.Menu.UpdateButtonShownState(f5_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_lstick_pressed"])
 	end)
 	local f1_local3 = LoadoutClassItemContainerInternal
 	local VariantList = LoadoutClassItemContainerInternal.subscribeToModel
-	local f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
 	VariantList(f1_local3, f1_local5.LastInput, function(f6_arg0, f6_arg1)
-		CoD.Menu.UpdateButtonShownState(f6_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x6CE8023188D673F])
+		CoD.Menu.UpdateButtonShownState(f6_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_lstick_pressed"])
 	end, false)
 	LoadoutClassItemContainerInternal:registerEventHandler("gain_focus", function(element, event)
 		local f7_local0 = nil
@@ -50,11 +50,11 @@ CoD.LoadoutClassItemContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 			SetProperty(self, "__hasFocusOnVariantWidget", false)
 			UpdateAllMenuButtonPrompts(f1_arg0, f1_arg1)
 		else
-			CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x6CE8023188D673F])
+			CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_lstick_pressed"])
 		end
 		return f7_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(LoadoutClassItemContainerInternal, f1_arg1, Enum[0x3DD78803F918E9D][0x6CE8023188D673F], "ui_copylayer", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(LoadoutClassItemContainerInternal, f1_arg1, Enum[@"luibutton"][@"lui_key_lstick_pressed"], "ui_copylayer", function(element, menu, controller, model)
 		if IsMouseOrKeyboard(controller) and IsInDefaultState(self) then
 			CoD.GridAndListUtility.NavigateGridItem(self.VariantList, controller, true)
 			CoD.CACUtility.SetSignatureWeaponFromCAC(self.VariantList, controller, menu)
@@ -63,7 +63,7 @@ CoD.LoadoutClassItemContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 		end
 	end, function(element, menu, controller)
 		if IsMouseOrKeyboard(controller) and IsInDefaultState(self) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x6CE8023188D673F], 0x53D10BEF28D6E73, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "ui_copylayer")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_lstick_pressed"], @"hash_353D10BEF28D6E73", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "ui_copylayer")
 			return true
 		else
 			return false
@@ -77,7 +77,7 @@ CoD.LoadoutClassItemContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	VariantList:setAlpha(0)
 	VariantList:setWidgetType(CoD.WeaponVariantPip)
 	VariantList:setHorizontalCount(10)
-	VariantList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	VariantList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	VariantList:linkToElementModel(self, "variantList", true, function(model)
 		local f10_local0 = model:get()
 		if f10_local0 ~= nil then
@@ -98,7 +98,7 @@ CoD.LoadoutClassItemContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 		f12_arg1.menu = f12_arg1.menu or f1_arg0
 		f1_arg0:updateElementState(self, f12_arg1)
 	end)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC], "MWHEELUP", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_ltrig"], "MWHEELUP", function(element, menu, controller, model)
 		if not IsRepeatButtonPress(model) then
 			CoD.GridAndListUtility.NavigateGridItem(self.VariantList, controller, false)
 			CoD.CACUtility.SetSignatureWeaponFromCAC(self.VariantList, controller, menu)
@@ -107,13 +107,13 @@ CoD.LoadoutClassItemContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 		end
 	end, function(element, menu, controller)
 		if not IsRepeatButtonPress(nil) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC], 0x0, nil, "MWHEELUP")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_ltrig"], @"hash_0", nil, "MWHEELUP")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA], "MWHEELDOWN", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_rtrig"], "MWHEELDOWN", function(element, menu, controller, model)
 		if not IsRepeatButtonPress(model) then
 			CoD.GridAndListUtility.NavigateGridItem(self.VariantList, controller, true)
 			CoD.CACUtility.SetSignatureWeaponFromCAC(self.VariantList, controller, menu)
@@ -122,7 +122,7 @@ CoD.LoadoutClassItemContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 		end
 	end, function(element, menu, controller)
 		if not IsRepeatButtonPress(nil) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA], 0x0, nil, "MWHEELDOWN")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_rtrig"], @"hash_0", nil, "MWHEELDOWN")
 			return false
 		else
 			return false

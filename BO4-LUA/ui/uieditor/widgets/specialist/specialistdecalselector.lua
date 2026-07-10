@@ -13,10 +13,10 @@ CoD.SpecialistDecalSelector.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local chooseDecal = LUI.UIText.new(0, 1, 0, 0, 1, 1, -25, 0)
 	chooseDecal:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
-	chooseDecal:setText(LocalizeToUpperString(0xB78039C7686605D))
+	chooseDecal:setText(LocalizeToUpperString(@"hash_6B78039C7686605D"))
 	chooseDecal:setTTF("default")
-	chooseDecal:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	chooseDecal:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	chooseDecal:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	chooseDecal:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(chooseDecal)
 	self.chooseDecal = chooseDecal
 	local leftLine = LUI.UIImage.new(0, 0.45, 0, 0, 1, 1, -46, -45)
@@ -45,7 +45,7 @@ CoD.SpecialistDecalSelector.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	decals:setHorizontalCount(6)
 	decals:setVerticalCount(2)
 	decals:setSpacing(5)
-	decals:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	decals:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	decals:linkToElementModel(self, "decalDataSourceName", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -64,10 +64,10 @@ CoD.SpecialistDecalSelector.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 		elseif element.super.gainFocus then
 			f5_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f5_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(decals, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(decals, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if IsPC() then
 			SetCurrentElementAsActive(self, element, controller)
 			CoD.PlayerRoleUtility.UpdatePersonalizeSpecialistOutfitItem(controller, element)
@@ -77,7 +77,7 @@ CoD.SpecialistDecalSelector.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 		end
 	end, function(element, menu, controller)
 		if IsPC() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 			return false
 		else
 			return false

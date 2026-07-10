@@ -18,12 +18,12 @@ CoD.ZMTalismanSafeAreaContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self:addElement(TabBacking)
 	self.TabBacking = TabBacking
 	local CACHeader = CoD.CommonHeader.new(f1_arg0, f1_arg1, 0.5, 0.5, -960, 960, 0, 0, 0, 67)
-	CACHeader.subtitle.StageTitle:setText(LocalizeToUpperString(0x4813595698C26EB))
+	CACHeader.subtitle.StageTitle:setText(LocalizeToUpperString(@"hash_4813595698C26EB"))
 	CACHeader.subtitle.subtitle:setAlpha(0)
 	CACHeader:subscribeToGlobalModel(f1_arg1, "LobbyRoot", "lobbyTitle", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			CACHeader.subtitle.subtitle:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			CACHeader.subtitle.subtitle:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	self:addElement(CACHeader)

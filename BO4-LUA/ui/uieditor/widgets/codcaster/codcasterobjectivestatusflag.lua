@@ -8,7 +8,7 @@ CoD.CodCasterObjectiveStatusFlag.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	self.soundSet = "none"
 	local FlagIcon = LUI.UIImage.new(0.5, 0.5, -30, 30, 0.5, 0.5, -30, 30)
 	FlagIcon:setScale(0.75, 0.75)
-	FlagIcon:setImage(RegisterImage(0x8EF66C82D8F2305))
+	FlagIcon:setImage(RegisterImage(@"uie_ui_hud_core_waypoint_capture_icon_02"))
 	self:addElement(FlagIcon)
 	self.FlagIcon = FlagIcon
 	if PostLoadFunc then

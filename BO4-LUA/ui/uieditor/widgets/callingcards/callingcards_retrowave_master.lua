@@ -1,51 +1,51 @@
-CoD[0xF9CFD00690D1FA7] = InheritFrom(LUI.UIElement)
-CoD[0xF9CFD00690D1FA7].__defaultWidth = 920
-CoD[0xF9CFD00690D1FA7].__defaultHeight = 240
-CoD[0xF9CFD00690D1FA7].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+CoD[@"hash_7F9CFD00690D1FA7"] = InheritFrom(LUI.UIElement)
+CoD[@"hash_7F9CFD00690D1FA7"].__defaultWidth = 920
+CoD[@"hash_7F9CFD00690D1FA7"].__defaultHeight = 240
+CoD[@"hash_7F9CFD00690D1FA7"].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
 	local self = LUI.UIElement.new(f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
-	self:setClass(CoD[0xF9CFD00690D1FA7])
+	self:setClass(CoD[@"hash_7F9CFD00690D1FA7"])
 	self.id = "CallingCards_Retrowave_Master"
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local BackgroundFlipbook = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	BackgroundFlipbook:setImage(RegisterImage(0xECCD142A8E115F6))
-	BackgroundFlipbook:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD526D3FD71F281))
+	BackgroundFlipbook:setImage(RegisterImage(@"uie_carbackgroud_flipbook"))
+	BackgroundFlipbook:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_flipbook"))
 	BackgroundFlipbook:setShaderVector(0, 0, 4, 0, 0)
 	BackgroundFlipbook:setShaderVector(1, 30, 0, 0, 0)
 	self:addElement(BackgroundFlipbook)
 	self.BackgroundFlipbook = BackgroundFlipbook
 	local streetlights = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	streetlights:setImage(RegisterImage(0x78C08FDFFB8E2B0))
-	streetlights:setMaterial(LUI.UIImage.GetCachedMaterial(0x9227A50BA2B8D21))
+	streetlights:setImage(RegisterImage(@"uie_streetlights_flipbook"))
+	streetlights:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_flipbook_add"))
 	streetlights:setShaderVector(0, 0, 4, 0, 0)
 	streetlights:setShaderVector(1, 24, 0, 0, 0)
 	self:addElement(streetlights)
 	self.streetlights = streetlights
 	local carSmoke = LUI.UIImage.new(0, 0, 766, 920, 0, 0, 42, 196)
-	carSmoke:setImage(RegisterImage(0x40903C2A0783D51))
-	carSmoke:setMaterial(LUI.UIImage.GetCachedMaterial(0x9227A50BA2B8D21))
+	carSmoke:setImage(RegisterImage(@"uie_car_smoke"))
+	carSmoke:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_flipbook_add"))
 	carSmoke:setShaderVector(0, 0, 4, 0, 0)
 	carSmoke:setShaderVector(1, 15, 0, 0, 0)
 	self:addElement(carSmoke)
 	self.carSmoke = carSmoke
 	local car = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	car:setImage(RegisterImage(0xB17AACCC5766687))
+	car:setImage(RegisterImage(@"uie_car"))
 	self:addElement(car)
 	self.car = car
 	local headlights = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	headlights:setImage(RegisterImage(0x13B1AFD923E7205))
-	headlights:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	headlights:setImage(RegisterImage(@"uie_headlights_car"))
+	headlights:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(headlights)
 	self.headlights = headlights
 	local gunfireFlash = LUI.UIImage.new(0, 0, 456, 736, 0, 0, -12, 128)
-	gunfireFlash:setImage(RegisterImage(0x249858C34060648))
-	gunfireFlash:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	gunfireFlash:setImage(RegisterImage(@"uie_gunfire_highlight"))
+	gunfireFlash:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(gunfireFlash)
 	self.gunfireFlash = gunfireFlash
 	local hubcaps = LUI.UIImage.new(0, 0, 697, 851, 0, 0, 119, 232)
 	hubcaps:setScale(0.75, 0.75)
-	hubcaps:setImage(RegisterImage(0xBF478D29875A9B7))
-	hubcaps:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD526D3FD71F281))
+	hubcaps:setImage(RegisterImage(@"uie_hubcaps"))
+	hubcaps:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_flipbook"))
 	hubcaps:setShaderVector(0, 0, 2, 0, 0)
 	hubcaps:setShaderVector(1, 0, 0, 0, 0)
 	self:addElement(hubcaps)
@@ -55,7 +55,7 @@ CoD[0xF9CFD00690D1FA7].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	end
 	return self
 end
-CoD[0xF9CFD00690D1FA7].__resetProperties = function(f2_arg0)
+CoD[@"hash_7F9CFD00690D1FA7"].__resetProperties = function(f2_arg0)
 	f2_arg0.headlights:completeAnimation()
 	f2_arg0.BackgroundFlipbook:completeAnimation()
 	f2_arg0.hubcaps:completeAnimation()
@@ -68,7 +68,7 @@ CoD[0xF9CFD00690D1FA7].__resetProperties = function(f2_arg0)
 	f2_arg0.hubcaps:setShaderVector(1, 0, 0, 0, 0)
 	f2_arg0.gunfireFlash:setAlpha(1)
 end
-CoD[0xF9CFD00690D1FA7].__clipsPerState = {
+CoD[@"hash_7F9CFD00690D1FA7"].__clipsPerState = {
 	DefaultState = {
 		DefaultClip = function(f3_arg0, f3_arg1)
 			f3_arg0:__resetProperties()

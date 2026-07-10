@@ -27,8 +27,8 @@ CoD.ReservesReroll.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	self.Container = Container
 	local TiledBacking = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	TiledBacking:setAlpha(0.25)
-	TiledBacking:setImage(RegisterImage(0x34839E8065B1E53))
-	TiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	TiledBacking:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	TiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	TiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	TiledBacking:setupNineSliceShader(196, 88)
 	self:addElement(TiledBacking)
@@ -40,41 +40,41 @@ CoD.ReservesReroll.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	self.Bar = Bar
 	local TiledBacking2 = LUI.UIImage.new(0, 1, 14, -14, 0, 0, 162, 190)
 	TiledBacking2:setAlpha(0.5)
-	TiledBacking2:setImage(RegisterImage(0x34839E8065B1E53))
-	TiledBacking2:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	TiledBacking2:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	TiledBacking2:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	TiledBacking2:setShaderVector(0, 0, 0, 0, 0)
 	TiledBacking2:setupNineSliceShader(196, 88)
 	self:addElement(TiledBacking2)
 	self.TiledBacking2 = TiledBacking2
 	local LayoutTopBar = LUI.UIImage.new(0, 1, -1, 1, 0, 0, -1, 27)
-	LayoutTopBar:setImage(RegisterImage(0x87C348C36FF085C))
+	LayoutTopBar:setImage(RegisterImage(@"uie_ui_menu_social_popup_menu_bar"))
 	self:addElement(LayoutTopBar)
 	self.LayoutTopBar = LayoutTopBar
 	local LayoutTopBar2 = LUI.UIImage.new(0, 1, -1, 1, 1, 1, -27, 1)
 	LayoutTopBar2:setZRot(180)
-	LayoutTopBar2:setImage(RegisterImage(0x87C348C36FF085C))
+	LayoutTopBar2:setImage(RegisterImage(@"uie_ui_menu_social_popup_menu_bar"))
 	self:addElement(LayoutTopBar2)
 	self.LayoutTopBar2 = LayoutTopBar2
 	local CommonStripes01Tiled = LUI.UIImage.new(0, 1, 0, 0, 0, 0, -1, 15)
 	CommonStripes01Tiled:setAlpha(0.25)
-	CommonStripes01Tiled:setImage(RegisterImage(0x649895CFFA4963D))
-	CommonStripes01Tiled:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	CommonStripes01Tiled:setImage(RegisterImage(@"uie_ui_menu_common_stripes01"))
+	CommonStripes01Tiled:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	CommonStripes01Tiled:setShaderVector(0, 0, 0, 0, 0)
 	CommonStripes01Tiled:setupNineSliceShader(64, 16)
 	self:addElement(CommonStripes01Tiled)
 	self.CommonStripes01Tiled = CommonStripes01Tiled
 	local LayoutElementTL2 = LUI.UIImage.new(1, 1, -40, -24, 0, 0, 168, 184)
 	LayoutElementTL2:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
-	LayoutElementTL2:setImage(RegisterImage(0x34B575F15CDD376))
-	LayoutElementTL2:setMaterial(LUI.UIImage.GetCachedMaterial(0xF755127C95CF5B6))
+	LayoutElementTL2:setImage(RegisterImage(@"hash_634B575F15CDD376"))
+	LayoutElementTL2:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_F755127C95CF5B6"))
 	LayoutElementTL2:setShaderVector(0, 3, 0, 0, 0)
 	self:addElement(LayoutElementTL2)
 	self.LayoutElementTL2 = LayoutElementTL2
 	local LayoutElementTL = LUI.UIImage.new(0, 0, 24, 40, 0, 0, 168, 184)
 	LayoutElementTL:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
 	LayoutElementTL:setZRot(90)
-	LayoutElementTL:setImage(RegisterImage(0x34B575F15CDD376))
-	LayoutElementTL:setMaterial(LUI.UIImage.GetCachedMaterial(0xF755127C95CF5B6))
+	LayoutElementTL:setImage(RegisterImage(@"hash_634B575F15CDD376"))
+	LayoutElementTL:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_F755127C95CF5B6"))
 	LayoutElementTL:setShaderVector(0, 3, 0, 0, 0)
 	self:addElement(LayoutElementTL)
 	self.LayoutElementTL = LayoutElementTL
@@ -118,51 +118,51 @@ CoD.ReservesReroll.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	end
 	local DotPatternTop = RerollButton
 	local ItemName = RerollButton.subscribeToModel
-	local DotPatternBtm = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local DotPatternBtm = Engine[@"getmodelforcontroller"](f1_arg1)
 	ItemName(DotPatternTop, DotPatternBtm.reservesRevealComplete, function(f7_arg0, f7_arg1)
-		CoD.Menu.UpdateButtonShownState(f7_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f7_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	DotPatternTop = RerollButton
 	ItemName = RerollButton.subscribeToModel
-	DotPatternBtm = Engine[0x4DF5CFBC1771947](f1_arg1)
+	DotPatternBtm = Engine[@"getmodelforcontroller"](f1_arg1)
 	ItemName(DotPatternTop, DotPatternBtm["LootStreamProgress.allRngUnlocked"], function(f8_arg0, f8_arg1)
-		CoD.Menu.UpdateButtonShownState(f8_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f8_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	DotPatternTop = RerollButton
 	ItemName = RerollButton.subscribeToModel
-	DotPatternBtm = Engine[0x4DF5CFBC1771947](f1_arg1)
+	DotPatternBtm = Engine[@"getmodelforcontroller"](f1_arg1)
 	ItemName(DotPatternTop, DotPatternBtm["LootRNGResult.streamId"], function(f9_arg0, f9_arg1)
-		CoD.Menu.UpdateButtonShownState(f9_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f9_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	DotPatternTop = RerollButton
 	ItemName = RerollButton.subscribeToModel
 	DotPatternBtm = DataSources.ReservesItemCounts.getModel(f1_arg1)
 	ItemName(DotPatternTop, DotPatternBtm.lootCaseCount, function(f10_arg0, f10_arg1)
-		CoD.Menu.UpdateButtonShownState(f10_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f10_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	RerollButton:linkToElementModel(RerollButton, "isBundleCrate", true, function(model, f11_arg1)
-		CoD.Menu.UpdateButtonShownState(f11_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f11_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	DotPatternTop = RerollButton
 	ItemName = RerollButton.subscribeToModel
 	DotPatternBtm = DataSources.ReservesItemCounts.getModel(f1_arg1)
 	ItemName(DotPatternTop, DotPatternBtm.lootBundleCrateCount, function(f12_arg0, f12_arg1)
-		CoD.Menu.UpdateButtonShownState(f12_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f12_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	RerollButton:linkToElementModel(RerollButton, "name", true, function(model, f13_arg1)
-		CoD.Menu.UpdateButtonShownState(f13_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f13_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	DotPatternTop = RerollButton
 	ItemName = RerollButton.subscribeToModel
-	DotPatternBtm = Engine[0x4DF5CFBC1771947](f1_arg1)
+	DotPatternBtm = Engine[@"getmodelforcontroller"](f1_arg1)
 	ItemName(DotPatternTop, DotPatternBtm["LootStreamProgress.codPoints"], function(f14_arg0, f14_arg1)
-		CoD.Menu.UpdateButtonShownState(f14_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f14_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	DotPatternTop = RerollButton
 	ItemName = RerollButton.subscribeToModel
 	DotPatternBtm = DataSources.ReservesItemCounts.getModel(f1_arg1)
 	ItemName(DotPatternTop, DotPatternBtm.lootBribeCount, function(f15_arg0, f15_arg1)
-		CoD.Menu.UpdateButtonShownState(f15_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f15_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	RerollButton:registerEventHandler("gain_focus", function(element, event)
 		local f16_local0 = nil
@@ -171,10 +171,10 @@ CoD.ReservesReroll.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 		elseif element.super.gainFocus then
 			f16_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f16_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(RerollButton, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(RerollButton, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if CoD.ModelUtility.IsModelValueTrue(controller, "reservesRevealComplete") and CoD.ModelUtility.IsControllerModelValueTrue(controller, "LootStreamProgress.allRngUnlocked") then
 			CoD.BlackMarketUtility.OpenAllReservesOwnedDialog(menu, controller)
 			return true
@@ -194,7 +194,7 @@ CoD.ReservesReroll.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 				},
 			})
 			return true
-		elseif CoD.ModelUtility.IsModelValueTrue(controller, "reservesRevealComplete") and CoD.ModelUtility.IsSelfModelValueEqualToHashString(controller, menu, "name", 0x717FF140F30014C) and CoD.ModelUtility.IsModelValueEqualToEnum(controller, "LootRNGResult.streamId", CoD.BlackMarketUtility.CrateStreams.THREE_PACK) then
+		elseif CoD.ModelUtility.IsModelValueTrue(controller, "reservesRevealComplete") and CoD.ModelUtility.IsSelfModelValueEqualToHashString(controller, menu, "name", @"hash_1717FF140F30014C") and CoD.ModelUtility.IsModelValueEqualToEnum(controller, "LootRNGResult.streamId", CoD.BlackMarketUtility.CrateStreams.THREE_PACK) then
 			OpenOverlay(self, "PurchaseBribeStack", controller, {
 				_model = menu:getModel(),
 				_properties = {
@@ -203,7 +203,7 @@ CoD.ReservesReroll.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 			})
 			PlaySoundAlias("uin_toggle_generic")
 			return true
-		elseif CoD.ModelUtility.IsModelValueTrue(controller, "reservesRevealComplete") and CoD.ModelUtility.IsModelValueEqualToEnum(controller, "LootRNGResult.streamId", CoD.BlackMarketUtility.CrateStreams.THREE_PACK) and CanPurchaseItem(controller, self) and not CoD.ModelUtility.IsSelfModelValueEqualToHashString(controller, menu, "name", 0x717FF140F30014C) and not CoD.ModelUtility.IsSelfModelValueTrue(self, controller, "isBundleCrate") then
+		elseif CoD.ModelUtility.IsModelValueTrue(controller, "reservesRevealComplete") and CoD.ModelUtility.IsModelValueEqualToEnum(controller, "LootRNGResult.streamId", CoD.BlackMarketUtility.CrateStreams.THREE_PACK) and CanPurchaseItem(controller, self) and not CoD.ModelUtility.IsSelfModelValueEqualToHashString(controller, menu, "name", @"hash_1717FF140F30014C") and not CoD.ModelUtility.IsSelfModelValueTrue(self, controller, "isBundleCrate") then
 			OpenPopup(self, "PurchaseReservesItem", controller, {
 				_model = menu:getModel(),
 				_properties = {
@@ -212,7 +212,7 @@ CoD.ReservesReroll.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 			})
 			PlaySoundAlias("uin_toggle_generic")
 			return true
-		elseif CoD.ModelUtility.IsModelValueTrue(controller, "reservesRevealComplete") and CoD.ModelUtility.IsModelValueEqualToEnum(controller, "LootRNGResult.streamId", CoD.BlackMarketUtility.CrateStreams.THREE_PACK) and not CoD.ModelUtility.IsSelfModelValueEqualToHashString(controller, menu, "name", 0x717FF140F30014C) and not CoD.ModelUtility.IsSelfModelValueTrue(self, controller, "isBundleCrate") then
+		elseif CoD.ModelUtility.IsModelValueTrue(controller, "reservesRevealComplete") and CoD.ModelUtility.IsModelValueEqualToEnum(controller, "LootRNGResult.streamId", CoD.BlackMarketUtility.CrateStreams.THREE_PACK) and not CoD.ModelUtility.IsSelfModelValueEqualToHashString(controller, menu, "name", @"hash_1717FF140F30014C") and not CoD.ModelUtility.IsSelfModelValueTrue(self, controller, "isBundleCrate") then
 			OpenPopup(self, "PurchaseCodPoints", controller, self:getModel())
 			return true
 		elseif CoD.ModelUtility.IsModelValueTrue(controller, "reservesRevealComplete") and CoD.BlackMarketUtility.IsBribeStream(controller) and CoD.ModelUtility.IsGlobalDataSourceModelValueGreaterThan(controller, "ReservesItemCounts", "lootBribeCount", 0) and not CoD.BlackMarketUtility.IsBribeStackStream(controller) and not CoD.BlackMarketUtility.IsBribeMenuStream(controller) and not CoD.ModelUtility.IsSelfModelValueTrue(self, controller, "isBundleCrate") then
@@ -231,28 +231,28 @@ CoD.ReservesReroll.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 		end
 	end, function(element, menu, controller)
 		if CoD.ModelUtility.IsModelValueTrue(controller, "reservesRevealComplete") and CoD.ModelUtility.IsControllerModelValueTrue(controller, "LootStreamProgress.allRngUnlocked") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x4E98D63EA5A0BD3, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_4E98D63EA5A0BD3", nil, nil)
 			return true
 		elseif CoD.ModelUtility.IsModelValueTrue(controller, "reservesRevealComplete") and CoD.ModelUtility.IsModelValueEqualToEnum(controller, "LootRNGResult.streamId", CoD.BlackMarketUtility.CrateStreams.CASE) and CoD.ModelUtility.IsGlobalDataSourceModelValueGreaterThan(controller, "ReservesItemCounts", "lootCaseCount", 0) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x4E98D63EA5A0BD3, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_4E98D63EA5A0BD3", nil, nil)
 			return true
 		elseif CoD.ModelUtility.IsModelValueTrue(controller, "reservesRevealComplete") and CoD.ModelUtility.IsModelValueEqualToEnum(controller, "LootRNGResult.streamId", CoD.BlackMarketUtility.CrateStreams.THREE_PACK) and CoD.ModelUtility.IsSelfModelValueTrue(self, controller, "isBundleCrate") and CoD.ModelUtility.IsGlobalDataSourceModelValueGreaterThan(controller, "ReservesItemCounts", "lootBundleCrateCount", 0) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x4E98D63EA5A0BD3, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_4E98D63EA5A0BD3", nil, nil)
 			return true
-		elseif CoD.ModelUtility.IsModelValueTrue(controller, "reservesRevealComplete") and CoD.ModelUtility.IsSelfModelValueEqualToHashString(controller, menu, "name", 0x717FF140F30014C) and CoD.ModelUtility.IsModelValueEqualToEnum(controller, "LootRNGResult.streamId", CoD.BlackMarketUtility.CrateStreams.THREE_PACK) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xC2B10DCD9D6E876, nil, nil)
+		elseif CoD.ModelUtility.IsModelValueTrue(controller, "reservesRevealComplete") and CoD.ModelUtility.IsSelfModelValueEqualToHashString(controller, menu, "name", @"hash_1717FF140F30014C") and CoD.ModelUtility.IsModelValueEqualToEnum(controller, "LootRNGResult.streamId", CoD.BlackMarketUtility.CrateStreams.THREE_PACK) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_C2B10DCD9D6E876", nil, nil)
 			return true
-		elseif CoD.ModelUtility.IsModelValueTrue(controller, "reservesRevealComplete") and CoD.ModelUtility.IsModelValueEqualToEnum(controller, "LootRNGResult.streamId", CoD.BlackMarketUtility.CrateStreams.THREE_PACK) and CanPurchaseItem(controller, self) and not CoD.ModelUtility.IsSelfModelValueEqualToHashString(controller, menu, "name", 0x717FF140F30014C) and not CoD.ModelUtility.IsSelfModelValueTrue(self, controller, "isBundleCrate") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x4E98D63EA5A0BD3, nil, nil)
+		elseif CoD.ModelUtility.IsModelValueTrue(controller, "reservesRevealComplete") and CoD.ModelUtility.IsModelValueEqualToEnum(controller, "LootRNGResult.streamId", CoD.BlackMarketUtility.CrateStreams.THREE_PACK) and CanPurchaseItem(controller, self) and not CoD.ModelUtility.IsSelfModelValueEqualToHashString(controller, menu, "name", @"hash_1717FF140F30014C") and not CoD.ModelUtility.IsSelfModelValueTrue(self, controller, "isBundleCrate") then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_4E98D63EA5A0BD3", nil, nil)
 			return true
-		elseif CoD.ModelUtility.IsModelValueTrue(controller, "reservesRevealComplete") and CoD.ModelUtility.IsModelValueEqualToEnum(controller, "LootRNGResult.streamId", CoD.BlackMarketUtility.CrateStreams.THREE_PACK) and not CoD.ModelUtility.IsSelfModelValueEqualToHashString(controller, menu, "name", 0x717FF140F30014C) and not CoD.ModelUtility.IsSelfModelValueTrue(self, controller, "isBundleCrate") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x4E98D63EA5A0BD3, nil, nil)
+		elseif CoD.ModelUtility.IsModelValueTrue(controller, "reservesRevealComplete") and CoD.ModelUtility.IsModelValueEqualToEnum(controller, "LootRNGResult.streamId", CoD.BlackMarketUtility.CrateStreams.THREE_PACK) and not CoD.ModelUtility.IsSelfModelValueEqualToHashString(controller, menu, "name", @"hash_1717FF140F30014C") and not CoD.ModelUtility.IsSelfModelValueTrue(self, controller, "isBundleCrate") then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_4E98D63EA5A0BD3", nil, nil)
 			return true
 		elseif CoD.ModelUtility.IsModelValueTrue(controller, "reservesRevealComplete") and CoD.BlackMarketUtility.IsBribeStream(controller) and CoD.ModelUtility.IsGlobalDataSourceModelValueGreaterThan(controller, "ReservesItemCounts", "lootBribeCount", 0) and not CoD.BlackMarketUtility.IsBribeStackStream(controller) and not CoD.BlackMarketUtility.IsBribeMenuStream(controller) and not CoD.ModelUtility.IsSelfModelValueTrue(self, controller, "isBundleCrate") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x4E98D63EA5A0BD3, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_4E98D63EA5A0BD3", nil, nil)
 			return true
 		elseif CoD.ModelUtility.IsModelValueTrue(controller, "reservesRevealComplete") and CoD.BlackMarketUtility.IsBribeMenuStream(controller) and IsBooleanDvarSet("loot_weaponBribeMultiPurchaseActive") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xC2B10DCD9D6E876, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_C2B10DCD9D6E876", nil, nil)
 			return true
 		else
 			return false
@@ -271,26 +271,26 @@ CoD.ReservesReroll.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	self:addElement(ItemName)
 	self.ItemName = ItemName
 	DotPatternTop = LUI.UIImage.new(0, 1, 13, -13, 0, 0, 22, 26)
-	DotPatternTop:setImage(RegisterImage(0xB20AD7A31239369))
-	DotPatternTop:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	DotPatternTop:setImage(RegisterImage(@"uie_ui_menu_social_emblem_dotline_tiled"))
+	DotPatternTop:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	DotPatternTop:setShaderVector(0, 0, 0, 0, 0)
 	DotPatternTop:setupNineSliceShader(16, 4)
 	self:addElement(DotPatternTop)
 	self.DotPatternTop = DotPatternTop
 	DotPatternBtm = LUI.UIImage.new(0, 1, 13, -13, 0, 0, 148, 152)
-	DotPatternBtm:setImage(RegisterImage(0xB20AD7A31239369))
-	DotPatternBtm:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	DotPatternBtm:setImage(RegisterImage(@"uie_ui_menu_social_emblem_dotline_tiled"))
+	DotPatternBtm:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	DotPatternBtm:setShaderVector(0, 0, 0, 0, 0)
 	DotPatternBtm:setupNineSliceShader(16, 4)
 	self:addElement(DotPatternBtm)
 	self.DotPatternBtm = DotPatternBtm
 	local f1_local15 = RerollButton
 	local f1_local16 = RerollButton.subscribeToModel
-	local f1_local17 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local17 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local16(f1_local15, f1_local17["LootRNGResult.streamId"], RerollButton.DirectorSelectButtonMiniInternal.MiddleText.__MiddleText_StringReference_FullPath)
 	f1_local15 = RerollButton
 	f1_local16 = RerollButton.subscribeToModel
-	f1_local17 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local17 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local16(f1_local15, f1_local17["LootRNGResult.streamId"], RerollButton.DirectorSelectButtonMiniInternal.MiddleTextFocus.__MiddleTextFocus_String_FullPath)
 	self:mergeStateConditions({
 		{
@@ -332,7 +332,7 @@ CoD.ReservesReroll.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	end, false)
 	f1_local15 = self
 	f1_local16 = self.subscribeToModel
-	f1_local17 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local17 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local16(f1_local15, f1_local17["LootRNGResult.streamId"], function(f25_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

@@ -25,34 +25,34 @@ CoD.PerformanceOptionGrid.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	PerformanceGrid:setHorizontalCount(3)
 	PerformanceGrid:setVerticalCount(3)
 	PerformanceGrid:setSpacing(10)
-	PerformanceGrid:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	PerformanceGrid:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	PerformanceGrid:setDataSource("WeaponOptions")
 	PerformanceGrid:linkToElementModel(PerformanceGrid, "itemIndex", true, function(model, f3_arg1)
-		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	PerformanceGrid:linkToElementModel(PerformanceGrid, "unlockSessionMode", true, function(model, f4_arg1)
-		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	PerformanceGrid:linkToElementModel(PerformanceGrid, "unlockProgressAndTarget", true, function(model, f5_arg1)
-		CoD.Menu.UpdateButtonShownState(f5_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f5_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	local BottomBracket9Slice = PerformanceGrid
 	local Label = PerformanceGrid.subscribeToModel
-	local f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	Label(BottomBracket9Slice, f1_local4.paintCanCount, function(f6_arg0, f6_arg1)
-		CoD.Menu.UpdateButtonShownState(f6_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f6_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	PerformanceGrid:appendEventHandler("input_source_changed", function(f7_arg0, f7_arg1)
 		f7_arg1.menu = f7_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f7_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f7_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x4D2505E19049444])
+		CoD.Menu.UpdateButtonShownState(f7_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f7_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"hash_64D2505E19049444"])
 	end)
 	BottomBracket9Slice = PerformanceGrid
 	Label = PerformanceGrid.subscribeToModel
-	f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	Label(BottomBracket9Slice, f1_local4.LastInput, function(f8_arg0, f8_arg1)
-		CoD.Menu.UpdateButtonShownState(f8_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f8_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x4D2505E19049444])
+		CoD.Menu.UpdateButtonShownState(f8_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f8_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"hash_64D2505E19049444"])
 	end, false)
 	PerformanceGrid:registerEventHandler("list_item_gain_focus", function(element, event)
 		local f9_local0 = nil
@@ -73,13 +73,13 @@ CoD.PerformanceOptionGrid.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 		elseif element.super.gainFocus then
 			f11_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x4D2505E19049444])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"hash_64D2505E19049444"])
 		return f11_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(PerformanceGrid, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
-		if CoD.WeaponOptionsUtility.IsItemWeaponOptionLocked(menu, element, controller) and CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "unlockSessionMode", Enum[0x9C0C2196D8313A0][0xBF1DCC8138A9D39]) and CoD.WeaponOptionsUtility.CanPurchasePaintCanCamo(element, controller) then
+	f1_arg0:AddButtonCallbackFunction(PerformanceGrid, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
+		if CoD.WeaponOptionsUtility.IsItemWeaponOptionLocked(menu, element, controller) and CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "unlockSessionMode", Enum[@"emodes"][@"mode_warzone"]) and CoD.WeaponOptionsUtility.CanPurchasePaintCanCamo(element, controller) then
 			OpenPopup(self, "WZPurchaseCamo", controller, {
 				_model = element:getModel(),
 			})
@@ -99,20 +99,20 @@ CoD.PerformanceOptionGrid.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 		else
 		end
 	end, function(element, menu, controller)
-		if CoD.WeaponOptionsUtility.IsItemWeaponOptionLocked(menu, element, controller) and CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "unlockSessionMode", Enum[0x9C0C2196D8313A0][0xBF1DCC8138A9D39]) and CoD.WeaponOptionsUtility.CanPurchasePaintCanCamo(element, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x867BE59364DD53B, nil, nil)
+		if CoD.WeaponOptionsUtility.IsItemWeaponOptionLocked(menu, element, controller) and CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "unlockSessionMode", Enum[@"emodes"][@"mode_warzone"]) and CoD.WeaponOptionsUtility.CanPurchasePaintCanCamo(element, controller) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/redeem", nil, nil)
 			return true
 		elseif CoD.WeaponOptionsUtility.CanEquipWeaponOption(menu, element, controller) and not CoD.WeaponOptionsUtility.IsWeaponOptionEquipped(menu, element, controller, "camoIndex") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		elseif CoD.WeaponOptionsUtility.IsWeaponOptionEquipped(menu, element, controller, "camoIndex") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(PerformanceGrid, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(PerformanceGrid, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], nil, function(element, menu, controller, model)
 		if CoD.WeaponOptionsUtility.IsWeaponOptionEquipped(menu, element, controller, "camoIndex") and IsGamepad(controller) then
 			PlaySoundAlias("cac_equipment_remove")
 			CoD.WeaponOptionsUtility.ClearWeaponOptionsHelper(self, element, menu, controller)
@@ -123,13 +123,13 @@ CoD.PerformanceOptionGrid.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 		end
 	end, function(element, menu, controller)
 		if CoD.WeaponOptionsUtility.IsWeaponOptionEquipped(menu, element, controller, "camoIndex") and IsGamepad(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x679ACA6FFC6C8F3, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"menu/remove", nil, nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(PerformanceGrid, f1_arg1, Enum[0x3DD78803F918E9D][0x4D2505E19049444], "ui_remove", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(PerformanceGrid, f1_arg1, Enum[@"luibutton"][@"hash_64D2505E19049444"], "ui_remove", function(element, menu, controller, model)
 		if CoD.WeaponOptionsUtility.IsWeaponOptionEquipped(menu, element, controller, "camoIndex") and IsMouseOrKeyboard(controller) then
 			PlaySoundAlias("cac_equipment_remove")
 			CoD.WeaponOptionsUtility.ClearWeaponOptionsHelper(self, element, menu, controller)
@@ -140,7 +140,7 @@ CoD.PerformanceOptionGrid.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 		end
 	end, function(element, menu, controller)
 		if CoD.WeaponOptionsUtility.IsWeaponOptionEquipped(menu, element, controller, "camoIndex") and IsMouseOrKeyboard(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x4D2505E19049444], 0x679ACA6FFC6C8F3, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "ui_remove")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"hash_64D2505E19049444"], @"menu/remove", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "ui_remove")
 			return true
 		else
 			return false
@@ -156,7 +156,7 @@ CoD.PerformanceOptionGrid.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 		CoD.GridAndListUtility.UpdateDataSource(PerformanceGrid, true, false, true)
 		UpdateSelfState(self, f1_arg1)
 	end)
-	PerformanceGrid:AddContextualMenuAction(f1_arg0, f1_arg1, 0x679ACA6FFC6C8F3, function(f20_arg0, f20_arg1, f20_arg2, f20_arg3)
+	PerformanceGrid:AddContextualMenuAction(f1_arg0, f1_arg1, @"menu/remove", function(f20_arg0, f20_arg1, f20_arg2, f20_arg3)
 		if CoD.WeaponOptionsUtility.IsWeaponOptionEquipped(f20_arg1, f20_arg0, f20_arg2, "camoIndex") then
 			return function(f21_arg0, f21_arg1, f21_arg2, f21_arg3)
 				PlaySoundAlias("cac_equipment_remove")
@@ -171,18 +171,18 @@ CoD.PerformanceOptionGrid.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	self.PerformanceGrid = PerformanceGrid
 	Label = LUI.UIText.new(0, 0, 9, 349, 0, 0, 11, 27)
 	Label:setRGB(ColorSet.T8__OFF__GRAY.r, ColorSet.T8__OFF__GRAY.g, ColorSet.T8__OFF__GRAY.b)
-	Label:setText(LocalizeToUpperString(0xE28A07E0C69E9E9))
+	Label:setText(LocalizeToUpperString(@"hash_E28A07E0C69E9E9"))
 	Label:setTTF("default")
 	Label:setLetterSpacing(4)
-	Label:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Label:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Label:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Label:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(Label)
 	self.Label = Label
 	BottomBracket9Slice = LUI.UIImage.new(0, 1, 9, -9, 0, 0, 28, 37)
 	BottomBracket9Slice:setAlpha(0.5)
 	BottomBracket9Slice:setZRot(180)
-	BottomBracket9Slice:setImage(RegisterImage(0xC325BED3F226657))
-	BottomBracket9Slice:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	BottomBracket9Slice:setImage(RegisterImage(@"hash_4C325BED3F226657"))
+	BottomBracket9Slice:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	BottomBracket9Slice:setShaderVector(0, 0, 0, 0, 0)
 	BottomBracket9Slice:setupNineSliceShader(16, 4)
 	self:addElement(BottomBracket9Slice)

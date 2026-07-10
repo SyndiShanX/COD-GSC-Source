@@ -36,14 +36,14 @@ CoD.DropDownList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 	ListItem:linkToElementModel(self, "name", true, function(model)
 		local f5_local0 = model:get()
 		if f5_local0 ~= nil then
-			ListItem.Title:setText(Engine[0xF9F1239CFD921FE](f5_local0))
+			ListItem.Title:setText(Engine[@"hash_4F9F1239CFD921FE"](f5_local0))
 		end
 	end)
 	self:addElement(ListItem)
 	self.ListItem = ListItem
 	local emptyFocusable = CoD.emptyFocusable.new(f1_arg0, f1_arg1, 0, 1, 40, 0, 0, 1, 0, 0)
 	emptyFocusable:linkToElementModel(emptyFocusable, "refreshWidget", true, function(model, f6_arg1)
-		CoD.Menu.UpdateButtonShownState(f6_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(f6_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_none"])
 	end)
 	emptyFocusable:registerEventHandler("gain_focus", function(element, event)
 		local f7_local0 = nil
@@ -52,10 +52,10 @@ CoD.DropDownList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 		elseif element.super.gainFocus then
 			f7_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_none"])
 		return f7_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(emptyFocusable, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(emptyFocusable, f1_arg1, Enum[@"luibutton"][@"lui_key_none"], "ui_confirm", function(element, menu, controller, model)
 		if not CoD.PCUtility.IsUnavailable(self, controller) then
 			CoD.PCWidgetUtility.CreateDropdown(self, self.DropdownList, controller, menu, "DropDown_ItemList")
 			return true
@@ -63,7 +63,7 @@ CoD.DropDownList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 		end
 	end, function(element, menu, controller)
 		if not CoD.PCUtility.IsUnavailable(self, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "ui_confirm")
 			return false
 		else
 			return false

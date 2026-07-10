@@ -25,8 +25,8 @@ CoD.AttachmentDescriptionHeader.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	local Text = LUI.UIText.new(0, 0, 39, 339, 0, 0, 4, 26)
 	Text:setTTF("ttmussels_regular")
 	Text:setLetterSpacing(2)
-	Text:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Text:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Text:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Text:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	Text:setBackingType(2)
 	Text:setBackingColor(0, 0, 0)
 	Text:setBackingAlpha(0.5)
@@ -35,7 +35,7 @@ CoD.AttachmentDescriptionHeader.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	Text:linkToElementModel(self, "displayName", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
-			Text:setText(Engine[0xF9F1239CFD921FE](f3_local0))
+			Text:setText(Engine[@"hash_4F9F1239CFD921FE"](f3_local0))
 		end
 	end)
 	self:addElement(Text)
@@ -69,7 +69,7 @@ CoD.AttachmentDescriptionHeader.__resetProperties = function(f6_arg0)
 	f6_arg0.IconBacking:completeAnimation()
 	f6_arg0.Icon:setLeftRight(0, 0, -4, 41)
 	f6_arg0.Text:setLeftRight(0, 0, 39, 339)
-	f6_arg0.Text:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	f6_arg0.Text:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	f6_arg0.IconBacking:setLeftRight(0, 0, 0, 37)
 end
 CoD.AttachmentDescriptionHeader.__clipsPerState = {
@@ -91,7 +91,7 @@ CoD.AttachmentDescriptionHeader.__clipsPerState = {
 			f8_arg0.clipFinished(f8_arg0.Icon)
 			f8_arg0.Text:completeAnimation()
 			f8_arg0.Text:setLeftRight(0, 0, -134, 166)
-			f8_arg0.Text:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
+			f8_arg0.Text:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
 			f8_arg0.clipFinished(f8_arg0.Text)
 		end,
 	},

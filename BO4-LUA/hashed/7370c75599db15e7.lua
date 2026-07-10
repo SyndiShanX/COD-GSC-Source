@@ -10,7 +10,7 @@ CoD.WarzoneUseTimerUsing.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	self.soundSet = "default"
 	local ItemName = LUI.UIText.new(0, 0, 41.5, 558.5, 0, 0, 3, 33)
 	ItemName:setTTF("ttmussels_regular")
-	ItemName:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	ItemName:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	ItemName:setBackingType(1)
 	ItemName:setBackingWidget(CoD.WarzoneUseTimerRevivePlayerBG, f1_arg0, f1_arg1)
 	ItemName:setBackingXPadding(8)
@@ -18,7 +18,7 @@ CoD.WarzoneUseTimerUsing.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	ItemName:subscribeToGlobalModel(f1_arg1, "PlayerAbilities", "playerGadget1.name", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			ItemName:setText(LocalizeIntoStringIfNotEmpty(0x2F42EC88F0ED2EC, f2_local0))
+			ItemName:setText(LocalizeIntoStringIfNotEmpty(@"warzone/using", f2_local0))
 		end
 	end)
 	self:addElement(ItemName)

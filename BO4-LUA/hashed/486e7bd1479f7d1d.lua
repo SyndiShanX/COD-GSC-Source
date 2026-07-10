@@ -19,13 +19,13 @@ CoD.WeaponOptionInfoInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	self.DotTiledBacking = DotTiledBacking
 	local UnlockProgressBarBG = LUI.UIImage.new(0, 0, -53, 447, 1, 1, -144, -16)
 	UnlockProgressBarBG:setScale(0.8, 1.5)
-	UnlockProgressBarBG:setImage(RegisterImage(0x136CEF79E2CB178))
+	UnlockProgressBarBG:setImage(RegisterImage(@"uie_ui_menu_cac_weapon_select_button_bar"))
 	self:addElement(UnlockProgressBarBG)
 	self.UnlockProgressBarBG = UnlockProgressBarBG
 	local UnlockProgressBar = LUI.UIImage.new(0, 0, -52, 448, 1, 1, -144, -16)
 	UnlockProgressBar:setScale(0.8, 1.5)
-	UnlockProgressBar:setImage(RegisterImage(0xF090ADEC8D52EF0))
-	UnlockProgressBar:setMaterial(LUI.UIImage.GetCachedMaterial(0x316E67E1DF2198E))
+	UnlockProgressBar:setImage(RegisterImage(@"uie_ui_menu_cac_button_bottom_line_lvl"))
+	UnlockProgressBar:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_normal"))
 	UnlockProgressBar:setShaderVector(1, 0, 0, 0, 0)
 	UnlockProgressBar:setShaderVector(2, 1, 0, 0, 0)
 	UnlockProgressBar:setShaderVector(3, 0, 0, 0, 0)
@@ -42,8 +42,8 @@ CoD.WeaponOptionInfoInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	UnlockProgress:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	UnlockProgress:setTTF("ttmussels_regular")
 	UnlockProgress:setLetterSpacing(2)
-	UnlockProgress:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	UnlockProgress:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	UnlockProgress:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	UnlockProgress:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	UnlockProgress:linkToElementModel(self, "unlockProgressAndTarget", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -57,12 +57,12 @@ CoD.WeaponOptionInfoInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	Description:setAlpha(0)
 	Description:setTTF("ttmussels_regular")
 	Description:setLetterSpacing(2)
-	Description:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Description:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Description:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Description:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	Description:linkToElementModel(self, "description", true, function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
-			Description:setText(Engine[0xF9F1239CFD921FE](f4_local0))
+			Description:setText(Engine[@"hash_4F9F1239CFD921FE"](f4_local0))
 		end
 	end)
 	self:addElement(Description)
@@ -71,8 +71,8 @@ CoD.WeaponOptionInfoInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	UnlockDescription:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	UnlockDescription:setTTF("ttmussels_regular")
 	UnlockDescription:setLetterSpacing(2)
-	UnlockDescription:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	UnlockDescription:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	UnlockDescription:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	UnlockDescription:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	UnlockDescription:linkToElementModel(self, "unlockDescription", true, function(model)
 		local f5_local0 = model:get()
 		if f5_local0 ~= nil then
@@ -84,11 +84,11 @@ CoD.WeaponOptionInfoInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	local InsufficientFundsDesc = LUI.UIText.new(0, 0, 0, 481, 0.5, 0.5, 61, 79)
 	InsufficientFundsDesc:setRGB(ColorSet.InsufficientFunds.r, ColorSet.InsufficientFunds.g, ColorSet.InsufficientFunds.b)
 	InsufficientFundsDesc:setAlpha(0)
-	InsufficientFundsDesc:setText(Engine[0xF9F1239CFD921FE](0x693FA85E8E2E0DE))
+	InsufficientFundsDesc:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_5693FA85E8E2E0DE"))
 	InsufficientFundsDesc:setTTF("ttmussels_regular")
 	InsufficientFundsDesc:setLetterSpacing(2)
-	InsufficientFundsDesc:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	InsufficientFundsDesc:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	InsufficientFundsDesc:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	InsufficientFundsDesc:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(InsufficientFundsDesc)
 	self.InsufficientFundsDesc = InsufficientFundsDesc
 	local UnlockBonusAndXPIcon = CoD.NameAndXPBonus.new(f1_arg0, f1_arg1, 0, 0, 0, 500, 0, 0, 8, 64)
@@ -99,8 +99,8 @@ CoD.WeaponOptionInfoInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	self.UnlockBonusAndXPIcon = UnlockBonusAndXPIcon
 	local FramePlaceLeft = LUI.UIImage.new(0, 0, -2, 22, 1, 1, -14, 16)
 	FramePlaceLeft:setAlpha(0.04)
-	FramePlaceLeft:setImage(RegisterImage(0x4AEBE97B7C64301))
-	FramePlaceLeft:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	FramePlaceLeft:setImage(RegisterImage(@"uie_ui_menu_aar_common_open_frame"))
+	FramePlaceLeft:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	FramePlaceLeft:setShaderVector(0, 0, 0, 0, 0)
 	FramePlaceLeft:setupNineSliceShader(24, 24)
 	self:addElement(FramePlaceLeft)
@@ -108,8 +108,8 @@ CoD.WeaponOptionInfoInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	local FramePlaceRight = LUI.UIImage.new(1, 1, -22, 2, 1, 1, -14, 16)
 	FramePlaceRight:setAlpha(0.04)
 	FramePlaceRight:setYRot(180)
-	FramePlaceRight:setImage(RegisterImage(0x4AEBE97B7C64301))
-	FramePlaceRight:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	FramePlaceRight:setImage(RegisterImage(@"uie_ui_menu_aar_common_open_frame"))
+	FramePlaceRight:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	FramePlaceRight:setShaderVector(0, 0, 0, 0, 0)
 	FramePlaceRight:setupNineSliceShader(24, 24)
 	self:addElement(FramePlaceRight)
@@ -201,7 +201,7 @@ CoD.WeaponOptionInfoInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	end)
 	local f1_local13 = self
 	local f1_local14 = self.subscribeToModel
-	local f1_local15 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local15 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local14(f1_local13, f1_local15["WeaponPersonalization.listUpdate"], function(f18_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -222,7 +222,7 @@ CoD.WeaponOptionInfoInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	end)
 	f1_local13 = self
 	f1_local14 = self.subscribeToModel
-	f1_local15 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local15 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local14(f1_local13, f1_local15.paintCanCount, function(f20_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

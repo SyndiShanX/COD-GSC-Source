@@ -24,24 +24,24 @@ CoD.LoadoutClassItemEquipmentTakeTwo.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	EquipmentSlotLarge:linkToElementModel(self, "primarygrenade.name", true, function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
-			EquipmentSlotLarge.ItemName.TextBox:setText(Engine[0xF9F1239CFD921FE](f4_local0))
+			EquipmentSlotLarge.ItemName.TextBox:setText(Engine[@"hash_4F9F1239CFD921FE"](f4_local0))
 		end
 	end)
 	EquipmentSlotLarge:linkToElementModel(EquipmentSlotLarge, "itemIndex", true, function(model, f5_arg1)
-		CoD.Menu.UpdateButtonShownState(f5_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f5_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
+		CoD.Menu.UpdateButtonShownState(f5_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f5_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
 	end)
 	EquipmentSlotLarge:appendEventHandler("input_source_changed", function(f6_arg0, f6_arg1)
 		f6_arg1.menu = f6_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f6_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f6_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
+		CoD.Menu.UpdateButtonShownState(f6_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f6_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
 	end)
 	local EquipmentSlotExtra = EquipmentSlotLarge
 	local EquipmentSlot = EquipmentSlotLarge.subscribeToModel
-	local f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	EquipmentSlot(EquipmentSlotExtra, f1_local4.LastInput, function(f7_arg0, f7_arg1)
-		CoD.Menu.UpdateButtonShownState(f7_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f7_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
+		CoD.Menu.UpdateButtonShownState(f7_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f7_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
 	end, false)
 	EquipmentSlotLarge:registerEventHandler("gain_focus", function(element, event)
 		local f8_local0 = nil
@@ -51,19 +51,19 @@ CoD.LoadoutClassItemEquipmentTakeTwo.new = function(f1_arg0, f1_arg1, f1_arg2, f
 			f8_local0 = element.super:gainFocus(event)
 		end
 		CoD.CACUtility.UpdateClassWeaponModel(f1_arg0, element, f1_arg1)
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
 		return f8_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(EquipmentSlotLarge, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(EquipmentSlotLarge, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		CoD.CACUtility.OpenCACOverlay(self, menu, controller, "SpecialistEquipmentSelect", self, "primarygrenade")
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 		return true
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(EquipmentSlotLarge, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(EquipmentSlotLarge, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], nil, function(element, menu, controller, model)
 		if not CoD.ModelUtility.IsSelfModelValueEqualToEitherValue(element, controller, "itemIndex", CoDShared.EmptyItemIndex, CoD.CACUtility.GetSpecialIssueEquipmentItemIndex()) and IsGamepad(controller) then
 			CoD.CACUtility.EquipSpecialIssueItem(controller, menu, element)
 			return true
@@ -71,13 +71,13 @@ CoD.LoadoutClassItemEquipmentTakeTwo.new = function(f1_arg0, f1_arg1, f1_arg2, f
 		end
 	end, function(element, menu, controller)
 		if not CoD.ModelUtility.IsSelfModelValueEqualToEitherValue(element, controller, "itemIndex", CoDShared.EmptyItemIndex, CoD.CACUtility.GetSpecialIssueEquipmentItemIndex()) and IsGamepad(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x679ACA6FFC6C8F3, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"menu/remove", nil, nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(EquipmentSlotLarge, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], "ui_remove", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(EquipmentSlotLarge, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], "ui_remove", function(element, menu, controller, model)
 		if IsMouseOrKeyboard(controller) and not CoD.ModelUtility.IsSelfModelValueEqualToEitherValue(element, controller, "itemIndex", CoDShared.EmptyItemIndex, CoD.CACUtility.GetSpecialIssueEquipmentItemIndex()) then
 			CoD.CACUtility.EquipSpecialIssueItem(controller, menu, element)
 			return true
@@ -85,13 +85,13 @@ CoD.LoadoutClassItemEquipmentTakeTwo.new = function(f1_arg0, f1_arg1, f1_arg2, f
 		end
 	end, function(element, menu, controller)
 		if IsMouseOrKeyboard(controller) and not CoD.ModelUtility.IsSelfModelValueEqualToEitherValue(element, controller, "itemIndex", CoDShared.EmptyItemIndex, CoD.CACUtility.GetSpecialIssueEquipmentItemIndex()) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], 0x679ACA6FFC6C8F3, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "ui_remove")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], @"menu/remove", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "ui_remove")
 			return true
 		else
 			return false
 		end
 	end, false)
-	EquipmentSlotLarge:AddContextualMenuAction(f1_arg0, f1_arg1, 0x679ACA6FFC6C8F3, function(f15_arg0, f15_arg1, f15_arg2, f15_arg3)
+	EquipmentSlotLarge:AddContextualMenuAction(f1_arg0, f1_arg1, @"menu/remove", function(f15_arg0, f15_arg1, f15_arg2, f15_arg3)
 		if not CoD.ModelUtility.IsSelfModelValueEqualToEitherValue(f15_arg0, f15_arg2, "itemIndex", CoDShared.EmptyItemIndex, CoD.CACUtility.GetSpecialIssueEquipmentItemIndex()) then
 			return function(f16_arg0, f16_arg1, f16_arg2, f16_arg3)
 				CoD.CACUtility.EquipSpecialIssueItem(f16_arg2, f16_arg1, f16_arg0)
@@ -123,24 +123,24 @@ CoD.LoadoutClassItemEquipmentTakeTwo.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	EquipmentSlot:linkToElementModel(self, "primarygrenade.name", true, function(model)
 		local f20_local0 = model:get()
 		if f20_local0 ~= nil then
-			EquipmentSlot.ItemName.TextBox:setText(Engine[0xF9F1239CFD921FE](f20_local0))
+			EquipmentSlot.ItemName.TextBox:setText(Engine[@"hash_4F9F1239CFD921FE"](f20_local0))
 		end
 	end)
 	EquipmentSlot:linkToElementModel(EquipmentSlot, "itemIndex", true, function(model, f21_arg1)
-		CoD.Menu.UpdateButtonShownState(f21_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f21_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
+		CoD.Menu.UpdateButtonShownState(f21_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f21_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
 	end)
 	EquipmentSlot:appendEventHandler("input_source_changed", function(f22_arg0, f22_arg1)
 		f22_arg1.menu = f22_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f22_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f22_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
+		CoD.Menu.UpdateButtonShownState(f22_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f22_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
 	end)
 	f1_local4 = EquipmentSlot
 	EquipmentSlotExtra = EquipmentSlot.subscribeToModel
-	local f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
 	EquipmentSlotExtra(f1_local4, f1_local5.LastInput, function(f23_arg0, f23_arg1)
-		CoD.Menu.UpdateButtonShownState(f23_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f23_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
+		CoD.Menu.UpdateButtonShownState(f23_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f23_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
 	end, false)
 	EquipmentSlot:registerEventHandler("gain_focus", function(element, event)
 		local f24_local0 = nil
@@ -150,19 +150,19 @@ CoD.LoadoutClassItemEquipmentTakeTwo.new = function(f1_arg0, f1_arg1, f1_arg2, f
 			f24_local0 = element.super:gainFocus(event)
 		end
 		CoD.CACUtility.UpdateClassWeaponModel(f1_arg0, element, f1_arg1)
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
 		return f24_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(EquipmentSlot, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(EquipmentSlot, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		CoD.CACUtility.OpenCACOverlay(self, menu, controller, "SpecialistEquipmentSelect", self, "primarygrenade")
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 		return true
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(EquipmentSlot, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(EquipmentSlot, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], nil, function(element, menu, controller, model)
 		if not CoD.ModelUtility.IsSelfModelValueEqualTo(element, controller, "itemIndex", CoDShared.EmptyItemIndex) and IsGamepad(controller) then
 			CoD.CACUtility.EquipSpecialIssueItem(controller, menu, element)
 			return true
@@ -170,13 +170,13 @@ CoD.LoadoutClassItemEquipmentTakeTwo.new = function(f1_arg0, f1_arg1, f1_arg2, f
 		end
 	end, function(element, menu, controller)
 		if not CoD.ModelUtility.IsSelfModelValueEqualTo(element, controller, "itemIndex", CoDShared.EmptyItemIndex) and IsGamepad(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x679ACA6FFC6C8F3, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"menu/remove", nil, nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(EquipmentSlot, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], "ui_remove", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(EquipmentSlot, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], "ui_remove", function(element, menu, controller, model)
 		if IsMouseOrKeyboard(controller) and not CoD.ModelUtility.IsSelfModelValueEqualTo(element, controller, "itemIndex", CoDShared.EmptyItemIndex) then
 			CoD.CACUtility.EquipSpecialIssueItem(controller, menu, element)
 			return true
@@ -184,13 +184,13 @@ CoD.LoadoutClassItemEquipmentTakeTwo.new = function(f1_arg0, f1_arg1, f1_arg2, f
 		end
 	end, function(element, menu, controller)
 		if IsMouseOrKeyboard(controller) and not CoD.ModelUtility.IsSelfModelValueEqualTo(element, controller, "itemIndex", CoDShared.EmptyItemIndex) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], 0x679ACA6FFC6C8F3, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "ui_remove")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], @"menu/remove", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "ui_remove")
 			return true
 		else
 			return false
 		end
 	end, false)
-	EquipmentSlot:AddContextualMenuAction(f1_arg0, f1_arg1, 0x679ACA6FFC6C8F3, function(f31_arg0, f31_arg1, f31_arg2, f31_arg3)
+	EquipmentSlot:AddContextualMenuAction(f1_arg0, f1_arg1, @"menu/remove", function(f31_arg0, f31_arg1, f31_arg2, f31_arg3)
 		if not CoD.ModelUtility.IsSelfModelValueEqualTo(f31_arg0, f31_arg2, "itemIndex", CoDShared.EmptyItemIndex) then
 			return function(f32_arg0, f32_arg1, f32_arg2, f32_arg3)
 				CoD.CACUtility.EquipSpecialIssueItem(f32_arg2, f32_arg1, f32_arg0)
@@ -222,25 +222,25 @@ CoD.LoadoutClassItemEquipmentTakeTwo.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	EquipmentSlotExtra:linkToElementModel(self, "primarygrenadecount.name", true, function(model)
 		local f36_local0 = model:get()
 		if f36_local0 ~= nil then
-			EquipmentSlotExtra.ItemName.TextBox:setText(Engine[0xF9F1239CFD921FE](f36_local0))
+			EquipmentSlotExtra.ItemName.TextBox:setText(Engine[@"hash_4F9F1239CFD921FE"](f36_local0))
 		end
 	end)
 	EquipmentSlotExtra:linkToElementModel(EquipmentSlotExtra, "itemIndex", true, function(model, f37_arg1)
-		CoD.Menu.UpdateButtonShownState(f37_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(f37_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f37_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
+		CoD.Menu.UpdateButtonShownState(f37_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(f37_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f37_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
 	end)
 	EquipmentSlotExtra:appendEventHandler("input_source_changed", function(f38_arg0, f38_arg1)
 		f38_arg1.menu = f38_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f38_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f38_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
+		CoD.Menu.UpdateButtonShownState(f38_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f38_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
 	end)
 	f1_local5 = EquipmentSlotExtra
 	f1_local4 = EquipmentSlotExtra.subscribeToModel
-	local f1_local6 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local6 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local4(f1_local5, f1_local6.LastInput, function(f39_arg0, f39_arg1)
-		CoD.Menu.UpdateButtonShownState(f39_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f39_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
+		CoD.Menu.UpdateButtonShownState(f39_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f39_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
 	end, false)
 	EquipmentSlotExtra:registerEventHandler("gain_focus", function(element, event)
 		local f40_local0 = nil
@@ -250,12 +250,12 @@ CoD.LoadoutClassItemEquipmentTakeTwo.new = function(f1_arg0, f1_arg1, f1_arg2, f
 			f40_local0 = element.super:gainFocus(event)
 		end
 		CoD.CACUtility.UpdateClassWeaponModel(f1_arg0, element, f1_arg1)
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
 		return f40_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(EquipmentSlotExtra, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(EquipmentSlotExtra, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if CoD.ModelUtility.IsSelfModelValueEqualTo(element, controller, "itemIndex", CoDShared.EmptyItemIndex) and CoD.BaseUtility.IsSelfInState(self, "TakeTwo") then
 			CoD.CACUtility.EquipAdditionalEquipment(menu, controller, element)
 			CoD.CACUtility.UpdateButtonPromptStatesForListSlots(menu, element, controller)
@@ -264,13 +264,13 @@ CoD.LoadoutClassItemEquipmentTakeTwo.new = function(f1_arg0, f1_arg1, f1_arg2, f
 		end
 	end, function(element, menu, controller)
 		if CoD.ModelUtility.IsSelfModelValueEqualTo(element, controller, "itemIndex", CoDShared.EmptyItemIndex) and CoD.BaseUtility.IsSelfInState(self, "TakeTwo") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(EquipmentSlotExtra, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(EquipmentSlotExtra, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], nil, function(element, menu, controller, model)
 		if not CoD.ModelUtility.IsSelfModelValueEqualTo(element, controller, "itemIndex", CoDShared.EmptyItemIndex) and IsGamepad(controller) then
 			CoD.CACUtility.RemoveAdditionalEquipment(menu, controller, element)
 			CoD.CACUtility.UpdateButtonPromptStatesForListSlots(menu, element, controller)
@@ -279,13 +279,13 @@ CoD.LoadoutClassItemEquipmentTakeTwo.new = function(f1_arg0, f1_arg1, f1_arg2, f
 		end
 	end, function(element, menu, controller)
 		if not CoD.ModelUtility.IsSelfModelValueEqualTo(element, controller, "itemIndex", CoDShared.EmptyItemIndex) and IsGamepad(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x679ACA6FFC6C8F3, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"menu/remove", nil, nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(EquipmentSlotExtra, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], "ui_remove", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(EquipmentSlotExtra, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], "ui_remove", function(element, menu, controller, model)
 		if IsMouseOrKeyboard(controller) and not CoD.ModelUtility.IsSelfModelValueEqualTo(element, controller, "itemIndex", CoDShared.EmptyItemIndex) then
 			CoD.CACUtility.RemoveAdditionalEquipment(menu, controller, element)
 			CoD.FreeCursorUtility.UpdateSetupContext(element, controller)
@@ -294,13 +294,13 @@ CoD.LoadoutClassItemEquipmentTakeTwo.new = function(f1_arg0, f1_arg1, f1_arg2, f
 		end
 	end, function(element, menu, controller)
 		if IsMouseOrKeyboard(controller) and not CoD.ModelUtility.IsSelfModelValueEqualTo(element, controller, "itemIndex", CoDShared.EmptyItemIndex) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], 0x679ACA6FFC6C8F3, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "ui_remove")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], @"menu/remove", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "ui_remove")
 			return true
 		else
 			return false
 		end
 	end, false)
-	EquipmentSlotExtra:AddContextualMenuAction(f1_arg0, f1_arg1, 0x679ACA6FFC6C8F3, function(f47_arg0, f47_arg1, f47_arg2, f47_arg3)
+	EquipmentSlotExtra:AddContextualMenuAction(f1_arg0, f1_arg1, @"menu/remove", function(f47_arg0, f47_arg1, f47_arg2, f47_arg3)
 		if not CoD.ModelUtility.IsSelfModelValueEqualTo(f47_arg0, f47_arg2, "itemIndex", CoDShared.EmptyItemIndex) then
 			return function(f48_arg0, f48_arg1, f48_arg2, f48_arg3)
 				CoD.CACUtility.RemoveAdditionalEquipment(f48_arg1, f48_arg2, f48_arg0)
@@ -386,7 +386,7 @@ CoD.LoadoutClassItemEquipmentTakeTwo.__clipsPerState = {
 			f54_arg0:__resetProperties()
 			f54_arg0:setupElementClipCounter(1)
 			local f54_local0 = function(f55_arg0)
-				f54_arg0.EquipmentSlotLarge:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f54_arg0.EquipmentSlotLarge:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f54_arg0.EquipmentSlotLarge:setScale(1.05, 1.05)
 				f54_arg0.EquipmentSlotLarge:registerEventHandler("interrupted_keyframe", f54_arg0.clipInterrupted)
 				f54_arg0.EquipmentSlotLarge:registerEventHandler("transition_complete_keyframe", f54_arg0.clipFinished)
@@ -399,7 +399,7 @@ CoD.LoadoutClassItemEquipmentTakeTwo.__clipsPerState = {
 			f56_arg0:__resetProperties()
 			f56_arg0:setupElementClipCounter(1)
 			local f56_local0 = function(f57_arg0)
-				f56_arg0.EquipmentSlotLarge:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f56_arg0.EquipmentSlotLarge:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f56_arg0.EquipmentSlotLarge:setScale(1, 1)
 				f56_arg0.EquipmentSlotLarge:registerEventHandler("interrupted_keyframe", f56_arg0.clipInterrupted)
 				f56_arg0.EquipmentSlotLarge:registerEventHandler("transition_complete_keyframe", f56_arg0.clipFinished)

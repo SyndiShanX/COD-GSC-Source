@@ -26,42 +26,42 @@ CoD.TabletIcePickGadget_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	self.BG = BG
 	local BgGrad = LUI.UIImage.new(0, 0, -10, 1670, 0, 0, -10.5, 929.5)
 	BgGrad:setAlpha(0.25)
-	BgGrad:setImage(RegisterImage(0xF92F0E135E1791D))
+	BgGrad:setImage(RegisterImage(@"hash_7F92F0E135E1791D"))
 	self:addElement(BgGrad)
 	self.BgGrad = BgGrad
 	local CenterFractal05 = LUI.UIImage.new(0, 0, -86, 1115, 0, 0, -230, 380)
 	CenterFractal05:setAlpha(0.15)
 	CenterFractal05:setImage(RegisterImage(0x86F05135B82FD3))
-	CenterFractal05:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	CenterFractal05:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	CenterFractal05:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(CenterFractal05)
 	self.CenterFractal05 = CenterFractal05
 	local CenterFractal03 = LUI.UIImage.new(0, 0, 946, 1846, 0, 0, 707.5, 1127.5)
 	CenterFractal03:setAlpha(0.2)
 	CenterFractal03:setImage(RegisterImage(0x86F65135B83A05))
-	CenterFractal03:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	CenterFractal03:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	CenterFractal03:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(CenterFractal03)
 	self.CenterFractal03 = CenterFractal03
 	local PixelGridTiledBacking = LUI.UIImage.new(0, 0, -10, 1670, 0, 0, -10, 930)
 	PixelGridTiledBacking:setAlpha(0.1)
-	PixelGridTiledBacking:setImage(RegisterImage(0x311E811A3183347))
-	PixelGridTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	PixelGridTiledBacking:setImage(RegisterImage(@"uie_ui_hud_notifications_pixelpattern"))
+	PixelGridTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	PixelGridTiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	PixelGridTiledBacking:setupNineSliceShader(256, 256)
 	self:addElement(PixelGridTiledBacking)
 	self.PixelGridTiledBacking = PixelGridTiledBacking
 	local GridLine = LUI.UIImage.new(0, 0, -10, 1670, 0, 0, -10, 930)
-	GridLine:setImage(RegisterImage(0xF7700E135C91995))
-	GridLine:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	GridLine:setImage(RegisterImage(@"hash_7F7700E135C91995"))
+	GridLine:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	GridLine:setShaderVector(0, 0, 0, 0, 0)
 	GridLine:setupNineSliceShader(144, 144)
 	self:addElement(GridLine)
 	self.GridLine = GridLine
 	local GridLineAdd = LUI.UIImage.new(0, 0, -10, 1670, 0, 0, -10, 930)
 	GridLineAdd:setAlpha(0.5)
-	GridLineAdd:setImage(RegisterImage(0xF7700E135C91995))
-	GridLineAdd:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	GridLineAdd:setImage(RegisterImage(@"hash_7F7700E135C91995"))
+	GridLineAdd:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	GridLineAdd:setShaderVector(0, 0, 0, 0, 0)
 	GridLineAdd:setupNineSliceShader(144, 144)
 	self:addElement(GridLineAdd)
@@ -112,7 +112,7 @@ CoD.TabletIcePickGadget_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	local CenterFractal02 = LUI.UIImage.new(0, 0, 1000, 2000, 0, 0, -320, 160)
 	CenterFractal02:setAlpha(0.2)
 	CenterFractal02:setImage(RegisterImage(0x86F55135B83852))
-	CenterFractal02:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	CenterFractal02:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	CenterFractal02:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(CenterFractal02)
 	self.CenterFractal02 = CenterFractal02
@@ -124,31 +124,31 @@ CoD.TabletIcePickGadget_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	local SectionAGAdd = LUI.UIImage.new(0, 0, 1500, 1568, 0, 0, 59, 75)
 	SectionAGAdd:setRGB(0.22, 0.77, 1)
 	SectionAGAdd:setAlpha(0.5)
-	SectionAGAdd:setImage(RegisterImage(0x62FB754884B9ECE))
-	SectionAGAdd:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	SectionAGAdd:setImage(RegisterImage(@"uie_ui_hud_tak5_layout_common_element01"))
+	SectionAGAdd:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	SectionAGAdd:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(SectionAGAdd)
 	self.SectionAGAdd = SectionAGAdd
 	local HackBg = LUI.UIImage.new(0, 0, 206, 1430, 0, 0, 151.5, 295.5)
 	HackBg:setAlpha(0.02)
-	HackBg:setImage(RegisterImage(0x816694178B99B8A))
-	HackBg:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	HackBg:setImage(RegisterImage(@"hash_2816694178B99B8A"))
+	HackBg:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	HackBg:setShaderVector(0, 0, 0, 0, 0)
 	HackBg:setupNineSliceShader(72, 72)
 	self:addElement(HackBg)
 	self.HackBg = HackBg
 	local DestroyBg = LUI.UIImage.new(0, 0, 205, 1429, 0, 0, 368, 512)
 	DestroyBg:setAlpha(0.02)
-	DestroyBg:setImage(RegisterImage(0x816694178B99B8A))
-	DestroyBg:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	DestroyBg:setImage(RegisterImage(@"hash_2816694178B99B8A"))
+	DestroyBg:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	DestroyBg:setShaderVector(0, 0, 0, 0, 0)
 	DestroyBg:setupNineSliceShader(72, 72)
 	self:addElement(DestroyBg)
 	self.DestroyBg = DestroyBg
 	local PlayersBg = LUI.UIImage.new(0, 0, 205, 1429, 0, 0, 583.5, 727.5)
 	PlayersBg:setAlpha(0.02)
-	PlayersBg:setImage(RegisterImage(0x816694178B99B8A))
-	PlayersBg:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	PlayersBg:setImage(RegisterImage(@"hash_2816694178B99B8A"))
+	PlayersBg:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	PlayersBg:setShaderVector(0, 0, 0, 0, 0)
 	PlayersBg:setupNineSliceShader(72, 72)
 	self:addElement(PlayersBg)
@@ -156,8 +156,8 @@ CoD.TabletIcePickGadget_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	local TiledPlusGrid = LUI.UIImage.new(0, 0, 70.5, 1333.5, 0, 0, 15.5, 704.5)
 	TiledPlusGrid:setRGB(0, 1, 0.92)
 	TiledPlusGrid:setAlpha(0.4)
-	TiledPlusGrid:setImage(RegisterImage(0x6E37BAE22631294))
-	TiledPlusGrid:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	TiledPlusGrid:setImage(RegisterImage(@"uie_ui_hud_vehicle_hellstorm_repeat_plusgrid"))
+	TiledPlusGrid:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	TiledPlusGrid:setShaderVector(0, 0, 0, 0, 0)
 	TiledPlusGrid:setupNineSliceShader(216, 216)
 	self:addElement(TiledPlusGrid)
@@ -173,7 +173,7 @@ CoD.TabletIcePickGadget_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 		return f2_arg0.hackableCategory:get() == CoD.HUDUtility.IcePickCategories.PLAYER
 	end)
 	Players.Entries:setDataSource("IcePickHackables")
-	Players.Category:setText(Engine[0xF9F1239CFD921FE](0x7D0772660420087))
+	Players.Category:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_47D0772660420087"))
 	Players:registerEventHandler("gain_focus", function(element, event)
 		local f3_local0 = nil
 		if element.gainFocus then
@@ -181,25 +181,25 @@ CoD.TabletIcePickGadget_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 		elseif element.super.gainFocus then
 			f3_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x571F08AD84807E0])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_right"])
 		return f3_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(Players, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(Players, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		CoD.BaseUtility.SendCustomMenuResponse(controller, "IcePick", "id", CoD.HUDUtility.IcePickCategories.PLAYER)
 		BlockGameFromKeyEvent(controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, nil)
 		return false
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(Players, f1_arg1, Enum[0x3DD78803F918E9D][0x571F08AD84807E0], "ui_navright", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(Players, f1_arg1, Enum[@"luibutton"][@"lui_key_right"], "ui_navright", function(element, menu, controller, model)
 		BlockGameFromKeyEvent(controller)
 		SetFocusToElement(self, "Equipment", controller)
 		SetLoseFocusToElement(self, "Players", controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x571F08AD84807E0], 0x0, nil, "ui_navright")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_right"], @"hash_0", nil, "ui_navright")
 		return false
 	end, false)
 	self:addElement(Players)
@@ -215,7 +215,7 @@ CoD.TabletIcePickGadget_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	})
 	local HackDetectionBar = Vehicles
 	local Equipment = Vehicles.subscribeToModel
-	local HackingFinished = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local HackingFinished = Engine[@"getmodelforcontroller"](f1_arg1)
 	Equipment(HackDetectionBar, HackingFinished["IcePickInfo.hackVehicleFinished"], function(f9_arg0)
 		f1_arg0:updateElementState(Vehicles, {
 			name = "model_validation",
@@ -229,7 +229,7 @@ CoD.TabletIcePickGadget_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 		return f10_arg0.hackableCategory:get() == CoD.HUDUtility.IcePickCategories.VEHICLE
 	end)
 	Vehicles.Entries:setDataSource("IcePickHackables")
-	Vehicles.Category:setText(Engine[0xF9F1239CFD921FE](0x26CC5EC4EC38576))
+	Vehicles.Category:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_426CC5EC4EC38576"))
 	Vehicles:registerEventHandler("gain_focus", function(element, event)
 		local f11_local0 = nil
 		if element.gainFocus then
@@ -237,25 +237,25 @@ CoD.TabletIcePickGadget_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 		elseif element.super.gainFocus then
 			f11_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x57783F8DA4AAEF])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_left"])
 		return f11_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(Vehicles, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(Vehicles, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		CoD.BaseUtility.SendCustomMenuResponse(controller, "IcePick", "id", CoD.HUDUtility.IcePickCategories.VEHICLE)
 		BlockGameFromKeyEvent(controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, nil)
 		return false
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(Vehicles, f1_arg1, Enum[0x3DD78803F918E9D][0x57783F8DA4AAEF], "ui_navleft", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(Vehicles, f1_arg1, Enum[@"luibutton"][@"lui_key_left"], "ui_navleft", function(element, menu, controller, model)
 		BlockGameFromKeyEvent(controller)
 		SetFocusToElement(self, "Equipment", controller)
 		SetLoseFocusToElement(self, "Vehicles", controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x57783F8DA4AAEF], 0x0, nil, "ui_navleft")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_left"], @"hash_0", nil, "ui_navleft")
 		return false
 	end, false)
 	self:addElement(Vehicles)
@@ -271,7 +271,7 @@ CoD.TabletIcePickGadget_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	})
 	HackingFinished = Equipment
 	HackDetectionBar = Equipment.subscribeToModel
-	local JoinButtonPrompt = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local JoinButtonPrompt = Engine[@"getmodelforcontroller"](f1_arg1)
 	HackDetectionBar(HackingFinished, JoinButtonPrompt["IcePickInfo.hackEquipFinished"], function(f17_arg0)
 		f1_arg0:updateElementState(Equipment, {
 			name = "model_validation",
@@ -285,7 +285,7 @@ CoD.TabletIcePickGadget_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 		return f18_arg0.hackableCategory:get() == CoD.HUDUtility.IcePickCategories.EQUIPMENT
 	end)
 	Equipment.Entries:setDataSource("IcePickHackables")
-	Equipment.Category:setText(Engine[0xF9F1239CFD921FE](0x38CF80EAA40E482))
+	Equipment.Category:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_38CF80EAA40E482"))
 	Equipment:registerEventHandler("gain_focus", function(element, event)
 		local f19_local0 = nil
 		if element.gainFocus then
@@ -293,35 +293,35 @@ CoD.TabletIcePickGadget_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 		elseif element.super.gainFocus then
 			f19_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x571F08AD84807E0])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x57783F8DA4AAEF])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_right"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_left"])
 		return f19_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(Equipment, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(Equipment, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		CoD.BaseUtility.SendCustomMenuResponse(controller, "IcePick", "id", CoD.HUDUtility.IcePickCategories.EQUIPMENT)
 		BlockGameFromKeyEvent(controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, nil)
 		return false
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(Equipment, f1_arg1, Enum[0x3DD78803F918E9D][0x571F08AD84807E0], "ui_navright", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(Equipment, f1_arg1, Enum[@"luibutton"][@"lui_key_right"], "ui_navright", function(element, menu, controller, model)
 		BlockGameFromKeyEvent(controller)
 		SetFocusToElement(self, "Vehicles", controller)
 		SetLoseFocusToElement(self, "Equipment", controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x571F08AD84807E0], 0x0, nil, "ui_navright")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_right"], @"hash_0", nil, "ui_navright")
 		return false
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(Equipment, f1_arg1, Enum[0x3DD78803F918E9D][0x57783F8DA4AAEF], "ui_navleft", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(Equipment, f1_arg1, Enum[@"luibutton"][@"lui_key_left"], "ui_navleft", function(element, menu, controller, model)
 		BlockGameFromKeyEvent(controller)
 		SetFocusToElement(self, "Players", controller)
 		SetLoseFocusToElement(self, "Equipment", controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x57783F8DA4AAEF], 0x0, nil, "ui_navleft")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_left"], @"hash_0", nil, "ui_navleft")
 		return false
 	end, false)
 	self:addElement(Equipment)
@@ -344,8 +344,8 @@ CoD.TabletIcePickGadget_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	self.JoinButtonPrompt = JoinButtonPrompt
 	local windowDotline = LUI.UIImage.new(0, 0, 786, 850, 0, 0, 69, 81)
 	windowDotline:setAlpha(0)
-	windowDotline:setImage(RegisterImage(0xC4E6168A6CB350B))
-	windowDotline:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	windowDotline:setImage(RegisterImage(@"hash_3C4E6168A6CB350B"))
+	windowDotline:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	windowDotline:setShaderVector(0, 0, 0, 0, 0)
 	windowDotline:setupNineSliceShader(36, 12)
 	self:addElement(windowDotline)
@@ -377,7 +377,7 @@ CoD.TabletIcePickGadget_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	local f1_local34 = self
 	DelaySetFocusToElement(self, "JoinButtonPrompt", f1_arg1, 0)
 	f1_local34 = JoinButtonPrompt
-	CoD.HUDUtility[0xE213B828E44EBE4](f1_arg0, self, f1_arg1)
+	CoD.HUDUtility[@"hash_3E213B828E44EBE4"](f1_arg0, self, f1_arg1)
 	return self
 end
 CoD.TabletIcePickGadget_Internal.__resetProperties = function(f30_arg0)
@@ -502,7 +502,7 @@ CoD.TabletIcePickGadget_Internal.__clipsPerState = {
 			f31_arg0.GridLineAdd:setAlpha(0)
 			f31_local2(f31_arg0.GridLineAdd)
 			local f31_local3 = function(f42_arg0)
-				f31_arg0.WindowBg02:beginAnimation(100, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f31_arg0.WindowBg02:beginAnimation(100, Enum[@"luitween"][@"luitween_ease_out"])
 				f31_arg0.WindowBg02:setAlpha(1)
 				f31_arg0.WindowBg02:registerEventHandler("interrupted_keyframe", f31_arg0.clipInterrupted)
 				f31_arg0.WindowBg02:registerEventHandler("transition_complete_keyframe", f31_arg0.clipFinished)
@@ -538,7 +538,7 @@ CoD.TabletIcePickGadget_Internal.__clipsPerState = {
 			f31_local4(f31_arg0.binaryFUI02)
 			local f31_local5 = function(f48_arg0)
 				local f48_local0 = function(f49_arg0)
-					f49_arg0:beginAnimation(100, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f49_arg0:beginAnimation(100, Enum[@"luitween"][@"luitween_ease_out"])
 					f49_arg0:setAlpha(1)
 					f49_arg0:registerEventHandler("transition_complete_keyframe", f31_arg0.clipFinished)
 				end
@@ -652,7 +652,7 @@ CoD.TabletIcePickGadget_Internal.__clipsPerState = {
 			f31_local9(f31_arg0.LineFUI01)
 			local f31_local10 = function(f69_arg0)
 				local f69_local0 = function(f70_arg0)
-					f70_arg0:beginAnimation(199, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f70_arg0:beginAnimation(199, Enum[@"luitween"][@"luitween_ease_out"])
 					f70_arg0:setAlpha(1)
 					f70_arg0:registerEventHandler("transition_complete_keyframe", f31_arg0.clipFinished)
 				end
@@ -687,7 +687,7 @@ CoD.TabletIcePickGadget_Internal.__clipsPerState = {
 			f31_local11(f31_arg0.ProgressFui)
 			local f31_local12 = function(f75_arg0)
 				local f75_local0 = function(f76_arg0)
-					f76_arg0:beginAnimation(100, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f76_arg0:beginAnimation(100, Enum[@"luitween"][@"luitween_ease_out"])
 					f76_arg0:setAlpha(1)
 					f76_arg0:registerEventHandler("transition_complete_keyframe", f31_arg0.clipFinished)
 				end
@@ -927,7 +927,7 @@ CoD.TabletIcePickGadget_Internal.__clipsPerState = {
 			f31_local19(f31_arg0.FuiR01)
 			local f31_local20 = function(f119_arg0)
 				local f119_local0 = function(f120_arg0)
-					f120_arg0:beginAnimation(250, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f120_arg0:beginAnimation(250, Enum[@"luitween"][@"luitween_ease_out"])
 					f120_arg0:setAlpha(1)
 					f120_arg0:registerEventHandler("transition_complete_keyframe", f31_arg0.clipFinished)
 				end
@@ -940,7 +940,7 @@ CoD.TabletIcePickGadget_Internal.__clipsPerState = {
 			f31_local20(f31_arg0.Players)
 			local f31_local21 = function(f121_arg0)
 				local f121_local0 = function(f122_arg0)
-					f122_arg0:beginAnimation(250, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f122_arg0:beginAnimation(250, Enum[@"luitween"][@"luitween_ease_out"])
 					f122_arg0:setAlpha(1)
 					f122_arg0:registerEventHandler("transition_complete_keyframe", f31_arg0.clipFinished)
 				end
@@ -953,7 +953,7 @@ CoD.TabletIcePickGadget_Internal.__clipsPerState = {
 			f31_local21(f31_arg0.Vehicles)
 			local f31_local22 = function(f123_arg0)
 				local f123_local0 = function(f124_arg0)
-					f124_arg0:beginAnimation(250, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f124_arg0:beginAnimation(250, Enum[@"luitween"][@"luitween_ease_out"])
 					f124_arg0:setAlpha(1)
 					f124_arg0:registerEventHandler("transition_complete_keyframe", f31_arg0.clipFinished)
 				end
@@ -970,7 +970,7 @@ CoD.TabletIcePickGadget_Internal.__clipsPerState = {
 						local f127_local0 = function(f128_arg0)
 							local f128_local0 = function(f129_arg0)
 								local f129_local0 = function(f130_arg0)
-									f130_arg0:beginAnimation(599, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+									f130_arg0:beginAnimation(599, Enum[@"luitween"][@"luitween_ease_out"])
 									f130_arg0:setAlpha(1)
 									f130_arg0:registerEventHandler("transition_complete_keyframe", f31_arg0.clipFinished)
 								end
@@ -978,7 +978,7 @@ CoD.TabletIcePickGadget_Internal.__clipsPerState = {
 								f129_arg0:setAlpha(0.5)
 								f129_arg0:registerEventHandler("transition_complete_keyframe", f129_local0)
 							end
-							f128_arg0:beginAnimation(399, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+							f128_arg0:beginAnimation(399, Enum[@"luitween"][@"luitween_ease_out"])
 							f128_arg0:setAlpha(1)
 							f128_arg0:registerEventHandler("transition_complete_keyframe", f128_local0)
 						end
@@ -986,7 +986,7 @@ CoD.TabletIcePickGadget_Internal.__clipsPerState = {
 						f127_arg0:setAlpha(0.2)
 						f127_arg0:registerEventHandler("transition_complete_keyframe", f127_local0)
 					end
-					f126_arg0:beginAnimation(400, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f126_arg0:beginAnimation(400, Enum[@"luitween"][@"luitween_ease_out"])
 					f126_arg0:setAlpha(1)
 					f126_arg0:registerEventHandler("transition_complete_keyframe", f126_local0)
 				end
@@ -1003,7 +1003,7 @@ CoD.TabletIcePickGadget_Internal.__clipsPerState = {
 			f31_arg0.clipFinished(f31_arg0.HackingFinished)
 			local f31_local24 = function(f131_arg0)
 				local f131_local0 = function(f132_arg0)
-					f132_arg0:beginAnimation(100, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f132_arg0:beginAnimation(100, Enum[@"luitween"][@"luitween_ease_out"])
 					f132_arg0:setAlpha(1)
 					f132_arg0:registerEventHandler("transition_complete_keyframe", f31_arg0.clipFinished)
 				end
@@ -1021,7 +1021,7 @@ CoD.TabletIcePickGadget_Internal.__clipsPerState = {
 						f135_arg0:setAlpha(0.3)
 						f135_arg0:registerEventHandler("transition_complete_keyframe", f31_arg0.clipFinished)
 					end
-					f134_arg0:beginAnimation(200, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f134_arg0:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_out"])
 					f134_arg0:setAlpha(1)
 					f134_arg0:registerEventHandler("transition_complete_keyframe", f134_local0)
 				end
@@ -1042,7 +1042,7 @@ CoD.TabletIcePickGadget_Internal.__clipsPerState = {
 			f136_arg0.PixelGridTiledBacking:setAlpha(0.05)
 			f136_arg0.clipFinished(f136_arg0.PixelGridTiledBacking)
 			local f136_local0 = function(f137_arg0)
-				f136_arg0.Players:beginAnimation(100, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f136_arg0.Players:beginAnimation(100, Enum[@"luitween"][@"luitween_ease_out"])
 				f136_arg0.Players:setAlpha(0)
 				f136_arg0.Players:registerEventHandler("interrupted_keyframe", f136_arg0.clipInterrupted)
 				f136_arg0.Players:registerEventHandler("transition_complete_keyframe", f136_arg0.clipFinished)
@@ -1083,7 +1083,7 @@ CoD.TabletIcePickGadget_Internal.__clipsPerState = {
 						f144_arg0:setAlpha(0.5)
 						f144_arg0:registerEventHandler("transition_complete_keyframe", f136_arg0.clipFinished)
 					end
-					f143_arg0:beginAnimation(200, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f143_arg0:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_out"])
 					f143_arg0:setAlpha(1)
 					f143_arg0:registerEventHandler("transition_complete_keyframe", f143_local0)
 				end

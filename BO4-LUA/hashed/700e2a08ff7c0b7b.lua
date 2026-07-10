@@ -14,10 +14,10 @@ CoD.ArenaGauntletLossTracker.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	self.Backing = Backing
 	local LossesLabel = LUI.UIText.new(0.5, 0.5, -100, 100, 0, 0, 3, 27)
 	LossesLabel:setRGB(ColorSet.ResistanceHigh.r, ColorSet.ResistanceHigh.g, ColorSet.ResistanceHigh.b)
-	LossesLabel:setText(LocalizeToUpperString(0x3597821C1906BB1))
+	LossesLabel:setText(LocalizeToUpperString(@"menu/lb_losses"))
 	LossesLabel:setTTF("default")
-	LossesLabel:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	LossesLabel:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	LossesLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	LossesLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(LossesLabel)
 	self.LossesLabel = LossesLabel
 	local LossesList = LUI.UIList.new(f1_arg0, f1_arg1, 10, 0, nil, false, false, false, false)
@@ -43,7 +43,7 @@ CoD.ArenaGauntletLossTracker.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	LossesList:setWidgetType(CoD.ArenaGauntletLossSlot)
 	LossesList:setHorizontalCount(3)
 	LossesList:setSpacing(10)
-	LossesList:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	LossesList:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	self:addElement(LossesList)
 	self.LossesList = LossesList
 	LossesList.id = "LossesList"

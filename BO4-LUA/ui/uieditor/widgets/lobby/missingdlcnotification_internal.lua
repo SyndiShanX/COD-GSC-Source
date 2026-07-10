@@ -81,7 +81,7 @@ CoD.MissingDLCNotification_Internal.__resetProperties = function(f8_arg0)
 	f8_arg0.buttonPromptImage:setRGB(1, 1, 1)
 	f8_arg0.buttonPromptImage:setAlpha(1)
 	f8_arg0.Description:setAlpha(1)
-	f8_arg0.Description.label:setText(Engine[0xF9F1239CFD921FE](0xA201C5CBA235AA1))
+	f8_arg0.Description.label:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_3A201C5CBA235AA1"))
 end
 CoD.MissingDLCNotification_Internal.__clipsPerState = {
 	DefaultState = {
@@ -103,11 +103,11 @@ CoD.MissingDLCNotification_Internal.__clipsPerState = {
 			f10_arg0.buttonPromptImage:completeAnimation()
 			f10_arg0.buttonPromptImage:setRGB(1, 0.92, 0)
 			f10_arg0.buttonPromptImage:setAlpha(1)
-			f10_arg0.buttonPromptImage:setImage(RegisterImage(0x6115AC21B22303A))
+			f10_arg0.buttonPromptImage:setImage(RegisterImage(@"uie_warning_triangle"))
 			f10_arg0.clipFinished(f10_arg0.buttonPromptImage)
 			f10_arg0.Description:completeAnimation()
 			f10_arg0.Description.label:completeAnimation()
-			f10_arg0.Description.label:setText(Engine[0xF9F1239CFD921FE](0x4F58D4AE79E74EA))
+			f10_arg0.Description.label:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_14F58D4AE79E74EA"))
 			f10_arg0.clipFinished(f10_arg0.Description)
 		end,
 	},
@@ -118,11 +118,11 @@ CoD.MissingDLCNotification_Internal.__clipsPerState = {
 			f11_arg0.buttonPromptImage:completeAnimation()
 			f11_arg0.buttonPromptImage:setRGB(1, 0, 0)
 			f11_arg0.buttonPromptImage:setAlpha(1)
-			f11_arg0.buttonPromptImage:setImage(RegisterImage(0x6115AC21B22303A))
+			f11_arg0.buttonPromptImage:setImage(RegisterImage(@"uie_warning_triangle"))
 			f11_arg0.clipFinished(f11_arg0.buttonPromptImage)
 			f11_arg0.Description:completeAnimation()
 			f11_arg0.Description.label:completeAnimation()
-			f11_arg0.Description.label:setText(Engine[0xF9F1239CFD921FE](0x443A3EED032BF80))
+			f11_arg0.Description.label:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_3443A3EED032BF80"))
 			f11_arg0.clipFinished(f11_arg0.Description)
 		end,
 	},
@@ -133,11 +133,11 @@ CoD.MissingDLCNotification_Internal.__clipsPerState = {
 			f12_arg0.buttonPromptImage:completeAnimation()
 			f12_arg0.buttonPromptImage:setRGB(1, 0.92, 0)
 			f12_arg0.buttonPromptImage:setAlpha(1)
-			f12_arg0.buttonPromptImage:setImage(RegisterImage(0x6115AC21B22303A))
+			f12_arg0.buttonPromptImage:setImage(RegisterImage(@"uie_warning_triangle"))
 			f12_arg0.clipFinished(f12_arg0.buttonPromptImage)
 			f12_arg0.Description:completeAnimation()
 			f12_arg0.Description.label:completeAnimation()
-			f12_arg0.Description.label:setText(Engine[0xF9F1239CFD921FE](0xD4EDB8B4FEE365F))
+			f12_arg0.Description.label:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_1D4EDB8B4FEE365F"))
 			f12_arg0.clipFinished(f12_arg0.Description)
 		end,
 	},
@@ -148,12 +148,12 @@ CoD.MissingDLCNotification_Internal.__clipsPerState = {
 			f13_arg0.buttonPromptImage:completeAnimation()
 			f13_arg0.buttonPromptImage:setRGB(1, 0, 0)
 			f13_arg0.buttonPromptImage:setAlpha(1)
-			f13_arg0.buttonPromptImage:setImage(RegisterImage(0x6115AC21B22303A))
+			f13_arg0.buttonPromptImage:setImage(RegisterImage(@"uie_warning_triangle"))
 			f13_arg0.clipFinished(f13_arg0.buttonPromptImage)
 			f13_arg0.Description:completeAnimation()
 			f13_arg0.Description.label:completeAnimation()
 			f13_arg0.Description:setAlpha(1)
-			f13_arg0.Description.label:setText(Engine[0xF9F1239CFD921FE](0xA201C5CBA235AA1))
+			f13_arg0.Description.label:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_3A201C5CBA235AA1"))
 			f13_arg0.clipFinished(f13_arg0.Description)
 		end,
 	},

@@ -122,7 +122,7 @@ CoD.WeaponBribeDetails.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	end)
 	local f1_local5 = self
 	local f1_local6 = self.subscribeToModel
-	local f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local6(f1_local5, f1_local7.LastInput, function(f17_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

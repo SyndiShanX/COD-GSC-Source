@@ -19,7 +19,7 @@ LUI.createMenu.mp_laststand_client = function(f1_arg0, f1_arg1)
 	local bleedout_clock = LUI.UIImage.new(0.5, 0.5, -128, 0, 1, 1, -268.5, -140.5)
 	bleedout_clock:setRGB(1, 0, 0)
 	bleedout_clock:setAlpha(0.9)
-	bleedout_clock:setMaterial(LUI.UIImage.GetCachedMaterial(0xD5CA1A25ED87F4F))
+	bleedout_clock:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_clock_normal"))
 	bleedout_clock:setShaderVector(0, -0.03, 0, 0, 0)
 	bleedout_clock:setShaderVector(1, 0.5, 0, 0, 0)
 	bleedout_clock:setShaderVector(2, 0.5, 0, 0, 0)
@@ -30,7 +30,7 @@ LUI.createMenu.mp_laststand_client = function(f1_arg0, f1_arg1)
 	local revive_clock = LUI.UIImage.new(0.5, 0.5, 0, 136, 1, 1, -268.5, -140.5)
 	revive_clock:setRGB(0.12, 1, 0)
 	revive_clock:setYRot(180)
-	revive_clock:setMaterial(LUI.UIImage.GetCachedMaterial(0xD5CA1A25ED87F4F))
+	revive_clock:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_clock_normal"))
 	revive_clock:setShaderVector(0, -0.21, 0, 0, 0)
 	revive_clock:setShaderVector(1, 0.5, 0, 0, 0)
 	revive_clock:setShaderVector(2, 0.5, 0, 0, 0)
@@ -39,24 +39,24 @@ LUI.createMenu.mp_laststand_client = function(f1_arg0, f1_arg1)
 	self:addElement(revive_clock)
 	self.revive_clock = revive_clock
 	local bleedout_label = LUI.UIText.new(0, 0, 860, 1060, 0, 0, 709.5, 739.5)
-	bleedout_label:setText(Engine[0xF9F1239CFD921FE](0x5F0B7103756F36))
+	bleedout_label:setText(Engine[@"hash_4F9F1239CFD921FE"](0x5F0B7103756F36))
 	bleedout_label:setTTF("0arame_mono_stencil")
-	bleedout_label:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	bleedout_label:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	bleedout_label:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	bleedout_label:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(bleedout_label)
 	self.bleedout_label = bleedout_label
 	local ReviveBarBG2 = LUI.UIImage.new(0.5, 0.5, -148, 148, 0, 0, 760, 788)
 	ReviveBarBG2:setAlpha(0)
 	ReviveBarBG2:setYRot(180)
 	ReviveBarBG2:setScale(0.81, 0.6)
-	ReviveBarBG2:setImage(RegisterImage(0x7B21FDA82833F75))
+	ReviveBarBG2:setImage(RegisterImage(@"uie_zm_hud_revive_meterbg"))
 	self:addElement(ReviveBarBG2)
 	self.ReviveBarBG2 = ReviveBarBG2
 	local revive_bar = LUI.UIImage.new(0.5, 0.5, -148, 148, 0, 0, 760, 788)
 	revive_bar:setAlpha(0)
 	revive_bar:setScale(0.8, 0.6)
-	revive_bar:setImage(RegisterImage(0x7C02FDA828F9801))
-	revive_bar:setMaterial(LUI.UIImage.GetCachedMaterial(0x316E67E1DF2198E))
+	revive_bar:setImage(RegisterImage(@"uie_zm_hud_revive_meterfg"))
+	revive_bar:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_normal"))
 	revive_bar:setShaderVector(1, 0, 0, 0, 0)
 	revive_bar:setShaderVector(2, 1, 0, 0, 0)
 	revive_bar:setShaderVector(3, 0, 0, 0, 0)
@@ -70,12 +70,12 @@ LUI.createMenu.mp_laststand_client = function(f1_arg0, f1_arg1)
 	self:addElement(revive_bar)
 	self.revive_bar = revive_bar
 	local ReviveBarBG = LUI.UIImage.new(0.5, 0.5, -148, 148, 0, 0, 740, 768)
-	ReviveBarBG:setImage(RegisterImage(0x7B21FDA82833F75))
+	ReviveBarBG:setImage(RegisterImage(@"uie_zm_hud_revive_meterbg"))
 	self:addElement(ReviveBarBG)
 	self.ReviveBarBG = ReviveBarBG
 	local bleedout_bar = LUI.UIImage.new(0.5, 0.5, -148, 148, 0, 0, 740, 768)
-	bleedout_bar:setImage(RegisterImage(0x396E2656C26F8BC))
-	bleedout_bar:setMaterial(LUI.UIImage.GetCachedMaterial(0x316E67E1DF2198E))
+	bleedout_bar:setImage(RegisterImage(@"uie_zm_hud_bleedout_meterfg"))
+	bleedout_bar:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_normal"))
 	bleedout_bar:setShaderVector(1, 0, 0, 0, 0)
 	bleedout_bar:setShaderVector(2, 1, 0, 0, 0)
 	bleedout_bar:setShaderVector(3, 0, 0, 0, 0)
@@ -92,20 +92,20 @@ LUI.createMenu.mp_laststand_client = function(f1_arg0, f1_arg1)
 		{
 			stateName = "Hidden",
 			condition = function(menu, element, event)
-				local f4_local0 = Engine[0xDD333420C49E6D0](f1_arg0, Enum[0x7F032C2EF103A1A][0xB8E9B69F4B87954])
+				local f4_local0 = Engine[@"isvisibilitybitset"](f1_arg0, Enum[@"uivisibilitybit"][@"bit_demo_all_game_hud_hidden"])
 				if not f4_local0 then
-					f4_local0 = Engine[0xDD333420C49E6D0](f1_arg0, Enum[0x7F032C2EF103A1A][0xD3ABF9A2753CE40])
+					f4_local0 = Engine[@"isvisibilitybitset"](f1_arg0, Enum[@"uivisibilitybit"][@"bit_demo_camera_mode_moviecam"])
 					if not f4_local0 then
-						f4_local0 = Engine[0xDD333420C49E6D0](f1_arg0, Enum[0x7F032C2EF103A1A][0x198075B069840DC])
+						f4_local0 = Engine[@"isvisibilitybitset"](f1_arg0, Enum[@"uivisibilitybit"][@"bit_game_ended"])
 						if not f4_local0 then
-							if Engine[0xDD333420C49E6D0](f1_arg0, Enum[0x7F032C2EF103A1A][0xADC477DDE486DD7]) then
-								f4_local0 = Engine[0xDD333420C49E6D0](f1_arg0, Enum[0x7F032C2EF103A1A][0x23CD9BAB9B9F4C8])
+							if Engine[@"isvisibilitybitset"](f1_arg0, Enum[@"uivisibilitybit"][@"bit_hud_visible"]) then
+								f4_local0 = Engine[@"isvisibilitybitset"](f1_arg0, Enum[@"uivisibilitybit"][@"bit_in_guided_missile"])
 								if not f4_local0 then
-									f4_local0 = Engine[0xDD333420C49E6D0](f1_arg0, Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2])
+									f4_local0 = Engine[@"isvisibilitybitset"](f1_arg0, Enum[@"uivisibilitybit"][@"bit_in_killcam"])
 									if not f4_local0 then
-										f4_local0 = Engine[0xDD333420C49E6D0](f1_arg0, Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04])
+										f4_local0 = Engine[@"isvisibilitybitset"](f1_arg0, Enum[@"uivisibilitybit"][@"bit_scoreboard_open"])
 										if not f4_local0 then
-											f4_local0 = Engine[0xDD333420C49E6D0](f1_arg0, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6])
+											f4_local0 = Engine[@"isvisibilitybitset"](f1_arg0, Enum[@"uivisibilitybit"][@"bit_ui_active"])
 										end
 									end
 								end
@@ -127,98 +127,98 @@ LUI.createMenu.mp_laststand_client = function(f1_arg0, f1_arg1)
 	})
 	local f1_local10 = self
 	local f1_local11 = self.subscribeToModel
-	local f1_local12 = Engine[0x4DF5CFBC1771947](f1_arg0)
-	f1_local11(f1_local10, f1_local12["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xB8E9B69F4B87954]], function(f6_arg0)
+	local f1_local12 = Engine[@"getmodelforcontroller"](f1_arg0)
+	f1_local11(f1_local10, f1_local12["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_demo_all_game_hud_hidden"]], function(f6_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_local1,
 			controller = f1_arg0,
 			modelValue = f6_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xB8E9B69F4B87954],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_demo_all_game_hud_hidden"],
 		})
 	end, false)
 	f1_local10 = self
 	f1_local11 = self.subscribeToModel
-	f1_local12 = Engine[0x4DF5CFBC1771947](f1_arg0)
-	f1_local11(f1_local10, f1_local12["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xD3ABF9A2753CE40]], function(f7_arg0)
+	f1_local12 = Engine[@"getmodelforcontroller"](f1_arg0)
+	f1_local11(f1_local10, f1_local12["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_demo_camera_mode_moviecam"]], function(f7_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_local1,
 			controller = f1_arg0,
 			modelValue = f7_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xD3ABF9A2753CE40],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_demo_camera_mode_moviecam"],
 		})
 	end, false)
 	f1_local10 = self
 	f1_local11 = self.subscribeToModel
-	f1_local12 = Engine[0x4DF5CFBC1771947](f1_arg0)
-	f1_local11(f1_local10, f1_local12["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x198075B069840DC]], function(f8_arg0)
+	f1_local12 = Engine[@"getmodelforcontroller"](f1_arg0)
+	f1_local11(f1_local10, f1_local12["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_game_ended"]], function(f8_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_local1,
 			controller = f1_arg0,
 			modelValue = f8_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x198075B069840DC],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_game_ended"],
 		})
 	end, false)
 	f1_local10 = self
 	f1_local11 = self.subscribeToModel
-	f1_local12 = Engine[0x4DF5CFBC1771947](f1_arg0)
-	f1_local11(f1_local10, f1_local12["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xADC477DDE486DD7]], function(f9_arg0)
+	f1_local12 = Engine[@"getmodelforcontroller"](f1_arg0)
+	f1_local11(f1_local10, f1_local12["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_hud_visible"]], function(f9_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_local1,
 			controller = f1_arg0,
 			modelValue = f9_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xADC477DDE486DD7],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_hud_visible"],
 		})
 	end, false)
 	f1_local10 = self
 	f1_local11 = self.subscribeToModel
-	f1_local12 = Engine[0x4DF5CFBC1771947](f1_arg0)
-	f1_local11(f1_local10, f1_local12["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x23CD9BAB9B9F4C8]], function(f10_arg0)
+	f1_local12 = Engine[@"getmodelforcontroller"](f1_arg0)
+	f1_local11(f1_local10, f1_local12["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_guided_missile"]], function(f10_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_local1,
 			controller = f1_arg0,
 			modelValue = f10_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x23CD9BAB9B9F4C8],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_guided_missile"],
 		})
 	end, false)
 	f1_local10 = self
 	f1_local11 = self.subscribeToModel
-	f1_local12 = Engine[0x4DF5CFBC1771947](f1_arg0)
-	f1_local11(f1_local10, f1_local12["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2]], function(f11_arg0)
+	f1_local12 = Engine[@"getmodelforcontroller"](f1_arg0)
+	f1_local11(f1_local10, f1_local12["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"]], function(f11_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_local1,
 			controller = f1_arg0,
 			modelValue = f11_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"],
 		})
 	end, false)
 	f1_local10 = self
 	f1_local11 = self.subscribeToModel
-	f1_local12 = Engine[0x4DF5CFBC1771947](f1_arg0)
-	f1_local11(f1_local10, f1_local12["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04]], function(f12_arg0)
+	f1_local12 = Engine[@"getmodelforcontroller"](f1_arg0)
+	f1_local11(f1_local10, f1_local12["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]], function(f12_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_local1,
 			controller = f1_arg0,
 			modelValue = f12_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"],
 		})
 	end, false)
 	f1_local10 = self
 	f1_local11 = self.subscribeToModel
-	f1_local12 = Engine[0x4DF5CFBC1771947](f1_arg0)
-	f1_local11(f1_local10, f1_local12["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]], function(f13_arg0)
+	f1_local12 = Engine[@"getmodelforcontroller"](f1_arg0)
+	f1_local11(f1_local10, f1_local12["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_ui_active"]], function(f13_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_local1,
 			controller = f1_arg0,
 			modelValue = f13_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_ui_active"],
 		})
 	end, false)
 	self:linkToElementModel(self, "revive_progress", true, function(model)
@@ -270,7 +270,7 @@ CoD.mp_laststand_client.__clipsPerState = {
 			f16_arg0:__resetProperties()
 			f16_arg0:setupElementClipCounter(4)
 			local f16_local0 = function(f17_arg0)
-				f16_arg0.DecorativeBGAnim:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f16_arg0.DecorativeBGAnim:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f16_arg0.DecorativeBGAnim:setAlpha(1)
 				f16_arg0.DecorativeBGAnim:setScale(1, 1)
 				f16_arg0.DecorativeBGAnim:registerEventHandler("interrupted_keyframe", f16_arg0.clipInterrupted)
@@ -282,7 +282,7 @@ CoD.mp_laststand_client.__clipsPerState = {
 			f16_local0(f16_arg0.DecorativeBGAnim)
 			local f16_local1 = function(f18_arg0)
 				local f18_local0 = function(f19_arg0)
-					f19_arg0:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f19_arg0:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 					f19_arg0:setAlpha(1)
 					f19_arg0:setScale(1, 1)
 					f19_arg0:registerEventHandler("transition_complete_keyframe", f16_arg0.clipFinished)
@@ -297,7 +297,7 @@ CoD.mp_laststand_client.__clipsPerState = {
 			f16_local1(f16_arg0.bleedout_label)
 			local f16_local2 = function(f20_arg0)
 				local f20_local0 = function(f21_arg0)
-					f21_arg0:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f21_arg0:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 					f21_arg0:setAlpha(1)
 					f21_arg0:setScale(1, 1)
 					f21_arg0:registerEventHandler("transition_complete_keyframe", f16_arg0.clipFinished)
@@ -312,7 +312,7 @@ CoD.mp_laststand_client.__clipsPerState = {
 			f16_local2(f16_arg0.ReviveBarBG)
 			local f16_local3 = function(f22_arg0)
 				local f22_local0 = function(f23_arg0)
-					f23_arg0:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f23_arg0:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 					f23_arg0:setAlpha(1)
 					f23_arg0:setScale(1, 1)
 					f23_arg0:registerEventHandler("transition_complete_keyframe", f16_arg0.clipFinished)
@@ -356,7 +356,7 @@ CoD.mp_laststand_client.__clipsPerState = {
 			f25_arg0:__resetProperties()
 			f25_arg0:setupElementClipCounter(2)
 			local f25_local0 = function(f26_arg0)
-				f25_arg0.ReviveBarBG2:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f25_arg0.ReviveBarBG2:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f25_arg0.ReviveBarBG2:setAlpha(1)
 				f25_arg0.ReviveBarBG2:setScale(0.81, 0.6)
 				f25_arg0.ReviveBarBG2:registerEventHandler("interrupted_keyframe", f25_arg0.clipInterrupted)
@@ -367,7 +367,7 @@ CoD.mp_laststand_client.__clipsPerState = {
 			f25_arg0.ReviveBarBG2:setScale(1.62, 1.2)
 			f25_local0(f25_arg0.ReviveBarBG2)
 			local f25_local1 = function(f27_arg0)
-				f25_arg0.revive_bar:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f25_arg0.revive_bar:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f25_arg0.revive_bar:setAlpha(1)
 				f25_arg0.revive_bar:setScale(0.8, 0.6)
 				f25_arg0.revive_bar:registerEventHandler("interrupted_keyframe", f25_arg0.clipInterrupted)

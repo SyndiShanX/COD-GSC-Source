@@ -14,38 +14,38 @@ CoD.WZKillcamCompass.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local WZBacker = LUI.UIImage.new(0.5, 0.5, -160, 160, 0.5, 0.5, -156, 156)
-	WZBacker:setImage(RegisterImage(0xB2E3E92561D4EB9))
+	WZBacker:setImage(RegisterImage(@"uie_ui_hud_wz_hud_core_map_square_backer"))
 	self:addElement(WZBacker)
 	self.WZBacker = WZBacker
 	local SquareCompassBacking = LUI.UIImage.new(0.5, 0.5, -139, 139, 0.5, 0.5, -139, 139)
 	SquareCompassBacking:setRGB(0, 0, 0)
 	SquareCompassBacking:setScale(0.98, 0.98)
-	SquareCompassBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0xE8F55203998700A))
+	SquareCompassBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_feather_blend"))
 	self:addElement(SquareCompassBacking)
 	self.SquareCompassBacking = SquareCompassBacking
 	local BackgroundNoFog = LUI.UIImage.new(0.5, 0.5, -135, 135, 0.5, 0.5, -135, 135)
 	self:addElement(BackgroundNoFog)
 	self.BackgroundNoFog = BackgroundNoFog
 	local CompassMinimap = CoD.CompassMinimapMap.new(f1_arg0, f1_arg1, 0.5, 0.5, -135, 135, 0.5, 0.5, -135, 135)
-	CompassMinimap.CompassMinimapMap:setupCompassMap(Enum[0x398581F68B3E097][0x8E634AB1C61F897])
-	CompassMinimap.MinimapFogOfWar.MinimapFogOfWar:setupCompassFog(Enum[0x398581F68B3E097][0x8E634AB1C61F897])
-	CompassMinimap.MinimapFogOfWar.CompassMinimapMap:setupCompassMap(Enum[0x398581F68B3E097][0x8E634AB1C61F897])
-	CompassMinimap.MinimapFogOfWar.MinimapDeathZoneMask:setupCompassDeathZoneMask(Enum[0x398581F68B3E097][0x8E634AB1C61F897])
+	CompassMinimap.CompassMinimapMap:setupCompassMap(Enum[@"compasstype"][@"compass_type_partial_worldaligned"])
+	CompassMinimap.MinimapFogOfWar.MinimapFogOfWar:setupCompassFog(Enum[@"compasstype"][@"compass_type_partial_worldaligned"])
+	CompassMinimap.MinimapFogOfWar.CompassMinimapMap:setupCompassMap(Enum[@"compasstype"][@"compass_type_partial_worldaligned"])
+	CompassMinimap.MinimapFogOfWar.MinimapDeathZoneMask:setupCompassDeathZoneMask(Enum[@"compasstype"][@"compass_type_partial_worldaligned"])
 	self:addElement(CompassMinimap)
 	self.CompassMinimap = CompassMinimap
 	local CompassItems0 = CoD.CompassMinimapItems.new(f1_arg0, f1_arg1, 0.5, 0.5, -135, 135, 0.5, 0.5, -135, 135)
 	CompassItems0:setRGB(0, 0, 0)
 	CompassItems0:setAlpha(0.6)
-	CompassItems0.CompassMinimapItems:setupCompassItems(Enum[0x398581F68B3E097][0x8E634AB1C61F897])
+	CompassItems0.CompassMinimapItems:setupCompassItems(Enum[@"compasstype"][@"compass_type_partial_worldaligned"])
 	self:addElement(CompassItems0)
 	self.CompassItems0 = CompassItems0
 	local CompassItems = CoD.CompassMinimapItems.new(f1_arg0, f1_arg1, 0.5, 0.5, -135, 135, 0.5, 0.5, -135, 135)
 	CompassItems:setAlpha(0.9)
-	CompassItems.CompassMinimapItems:setupCompassItems(Enum[0x398581F68B3E097][0x8E634AB1C61F897])
+	CompassItems.CompassMinimapItems:setupCompassItems(Enum[@"compasstype"][@"compass_type_partial_worldaligned"])
 	self:addElement(CompassItems)
 	self.CompassItems = CompassItems
 	local CompassOverlay = CoD.CompassMinimapOverlay.new(f1_arg0, f1_arg1, 0.5, 0.5, -135, 135, 0.5, 0.5, -135, 135)
-	CompassOverlay.CompassMinimapOverlay:setupCompassOverlay(Enum[0x398581F68B3E097][0x8E634AB1C61F897])
+	CompassOverlay.CompassMinimapOverlay:setupCompassOverlay(Enum[@"compasstype"][@"compass_type_partial_worldaligned"])
 	self:addElement(CompassOverlay)
 	self.CompassOverlay = CompassOverlay
 	local smokeGrenadeEffect = CoD.CompassGroupMPSmoke.new(f1_arg0, f1_arg1, 0.5, 0.5, -135, 135, 0.5, 0.5, -135, 135)
@@ -55,7 +55,7 @@ CoD.WZKillcamCompass.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 		{
 			stateName = "Invisible",
 			condition = function(menu, element, event)
-				return not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2])
+				return not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_in_killcam"])
 			end,
 		},
 		{
@@ -67,19 +67,19 @@ CoD.WZKillcamCompass.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	})
 	local f1_local9 = self
 	local f1_local10 = self.subscribeToModel
-	local f1_local11 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local10(f1_local9, f1_local11["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2]], function(f4_arg0)
+	local f1_local11 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local10(f1_local9, f1_local11["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"]], function(f4_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f4_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"],
 		})
 	end, false)
 	f1_local9 = self
 	f1_local10 = self.subscribeToModel
-	f1_local11 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local11 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local10(f1_local9, f1_local11.PlayerSettingsUpdate, function(f5_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

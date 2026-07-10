@@ -17,7 +17,7 @@ CoD.CodCasterPortraitPlayerList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	Team2PortraitList:setWidgetType(CoD.codcaster_player_portraittop_team2)
 	Team2PortraitList:setHorizontalCount(6)
 	Team2PortraitList:setSpacing(-3)
-	Team2PortraitList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	Team2PortraitList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	Team2PortraitList:setDataSource("Clients")
 	self:addElement(Team2PortraitList)
 	self.Team2PortraitList = Team2PortraitList
@@ -27,7 +27,7 @@ CoD.CodCasterPortraitPlayerList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	Team1PortraitList:setWidgetType(CoD.codcaster_player_portraittop_team1)
 	Team1PortraitList:setHorizontalCount(6)
 	Team1PortraitList:setSpacing(-3)
-	Team1PortraitList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	Team1PortraitList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	Team1PortraitList:setDataSource("Clients")
 	self:addElement(Team1PortraitList)
 	self.Team1PortraitList = Team1PortraitList

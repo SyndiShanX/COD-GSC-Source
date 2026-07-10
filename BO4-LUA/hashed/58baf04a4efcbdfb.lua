@@ -10,7 +10,7 @@ CoD.PC_Prestige_Arrow.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	local arrow = LUI.UIImage.new(0, 0, 0, 18, 0.01, 0.01, 0, 22)
 	arrow:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
 	arrow:setAlpha(0.8)
-	arrow:setImage(RegisterImage(0x50F3B2B4549D1B9))
+	arrow:setImage(RegisterImage(@"uie_ui_arrow_up"))
 	self:addElement(arrow)
 	self.arrow = arrow
 	if PostLoadFunc then

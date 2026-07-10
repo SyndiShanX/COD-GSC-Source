@@ -10,7 +10,7 @@ CoD.callingcards_loot2_surrealistlandscapes_stairs.new = function(f1_arg0, f1_ar
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local stairs = LUI.UIImage.new(0, 0, 0, 512, 0, 0, 0, 240)
-	stairs:setImage(RegisterImage(0xE4270E32F580058))
+	stairs:setImage(RegisterImage(@"uie_ui_menu_callingcards_surrealistlandscape_stairs"))
 	self:addElement(stairs)
 	self.stairs = stairs
 	local ball = CoD.callingcards_loot2_surrealistlandscapes_ball.new(f1_arg0, f1_arg1, 0, 0, 208, 256, 0, 0, 76, 124)
@@ -34,7 +34,7 @@ CoD.callingcards_loot2_surrealistlandscapes_stairs.__clipsPerState = {
 			f3_arg0:setupElementClipCounter(1)
 			local f3_local0 = function(f4_arg0)
 				local f4_local0 = function(f5_arg0)
-					f5_arg0:beginAnimation(1500, Enum[0xF50FFF429AB1890][0xE99F3A6467FC0CA] | Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f5_arg0:beginAnimation(1500, Enum[@"luitween"][@"luitween_back"] | Enum[@"luitween"][@"luitween_ease_both"])
 					f5_arg0:setTopBottom(0, 0, 76, 124)
 					f5_arg0:registerEventHandler("transition_complete_keyframe", function(element, event)
 						element:playClip("DefaultClip")
@@ -42,7 +42,7 @@ CoD.callingcards_loot2_surrealistlandscapes_stairs.__clipsPerState = {
 					end)
 				end
 				f3_arg0.ball:playClip("DefaultClip")
-				f3_arg0.ball:beginAnimation(1500, Enum[0xF50FFF429AB1890][0xE99F3A6467FC0CA] | Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f3_arg0.ball:beginAnimation(1500, Enum[@"luitween"][@"luitween_back"] | Enum[@"luitween"][@"luitween_ease_both"])
 				f3_arg0.ball:setTopBottom(0, 0, 32, 80)
 				f3_arg0.ball:registerEventHandler("interrupted_keyframe", f3_arg0.clipInterrupted)
 				f3_arg0.ball:registerEventHandler("transition_complete_keyframe", f4_local0)

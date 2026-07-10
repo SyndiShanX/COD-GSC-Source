@@ -126,7 +126,7 @@ CoD.PositionDraft_ViewTeams_CodCaster_Client.new = function(f1_arg0, f1_arg1, f1
 	end)
 	local BG = PositionDraftCharacterEnemy
 	local PositionDraftCharacter = PositionDraftCharacterEnemy.subscribeToModel
-	local Rank = Engine[0x8DF2E5447F384B9]()
+	local Rank = Engine[@"getglobalmodel"]()
 	PositionDraftCharacter(BG, Rank["hudItems.specialistSwitchIsLethal"], function(f15_arg0)
 		f1_arg0:updateElementState(PositionDraftCharacterEnemy, {
 			name = "model_validation",
@@ -138,14 +138,14 @@ CoD.PositionDraft_ViewTeams_CodCaster_Client.new = function(f1_arg0, f1_arg1, f1
 	end, false)
 	BG = PositionDraftCharacterEnemy
 	PositionDraftCharacter = PositionDraftCharacterEnemy.subscribeToModel
-	Rank = Engine[0x4DF5CFBC1771947](f1_arg1)
-	PositionDraftCharacter(BG, Rank["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x534C7B2375D2D47]], function(f16_arg0)
+	Rank = Engine[@"getmodelforcontroller"](f1_arg1)
+	PositionDraftCharacter(BG, Rank["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_player_dead"]], function(f16_arg0)
 		f1_arg0:updateElementState(PositionDraftCharacterEnemy, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f16_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x534C7B2375D2D47],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_player_dead"],
 		})
 	end, false)
 	PositionDraftCharacterEnemy:linkToElementModel(PositionDraftCharacterEnemy, "characterIndex", true, function(model)
@@ -237,7 +237,7 @@ CoD.PositionDraft_ViewTeams_CodCaster_Client.new = function(f1_arg0, f1_arg1, f1
 	end)
 	Rank = PositionDraftCharacter
 	BG = PositionDraftCharacter.subscribeToModel
-	local ClientClanTag = Engine[0x8DF2E5447F384B9]()
+	local ClientClanTag = Engine[@"getglobalmodel"]()
 	BG(Rank, ClientClanTag["hudItems.specialistSwitchIsLethal"], function(f29_arg0)
 		f1_arg0:updateElementState(PositionDraftCharacter, {
 			name = "model_validation",
@@ -249,14 +249,14 @@ CoD.PositionDraft_ViewTeams_CodCaster_Client.new = function(f1_arg0, f1_arg1, f1
 	end, false)
 	Rank = PositionDraftCharacter
 	BG = PositionDraftCharacter.subscribeToModel
-	ClientClanTag = Engine[0x4DF5CFBC1771947](f1_arg1)
-	BG(Rank, ClientClanTag["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x534C7B2375D2D47]], function(f30_arg0)
+	ClientClanTag = Engine[@"getmodelforcontroller"](f1_arg1)
+	BG(Rank, ClientClanTag["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_player_dead"]], function(f30_arg0)
 		f1_arg0:updateElementState(PositionDraftCharacter, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f30_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x534C7B2375D2D47],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_player_dead"],
 		})
 	end, false)
 	PositionDraftCharacter:setScale(1.31, 1.31)
@@ -285,8 +285,8 @@ CoD.PositionDraft_ViewTeams_CodCaster_Client.new = function(f1_arg0, f1_arg1, f1
 	self.Rank = Rank
 	ClientClanTag = LUI.UIText.new(1, 1, -179, -9, 0.66, 0.66, 48, 68)
 	ClientClanTag:setTTF("notosans_regular")
-	ClientClanTag:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	ClientClanTag:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	ClientClanTag:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	ClientClanTag:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	ClientClanTag:linkToElementModel(self, "clientNum", true, function(model)
 		local f34_local0 = model:get()
 		if f34_local0 ~= nil then

@@ -47,12 +47,12 @@ LUI.createMenu.Armory = function(f1_arg0, f1_arg1)
 	self:addElement(BackgroundSlidePanel)
 	self.BackgroundSlidePanel = BackgroundSlidePanel
 	local CACHeader = CoD.CommonHeader.new(f1_local1, f1_arg0, 0.5, 0.5, -960, 960, 0, 0, 0, 67)
-	CACHeader.subtitle.StageTitle:setText(LocalizeToUpperString(0xD6BF3A3749C31CD))
+	CACHeader.subtitle.StageTitle:setText(LocalizeToUpperString(@"menu/armory"))
 	CACHeader.subtitle.subtitle:setAlpha(0)
 	CACHeader:subscribeToGlobalModel(f1_arg0, "LobbyRoot", "lobbyTitle", function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
-			CACHeader.subtitle.subtitle:setText(Engine[0xF9F1239CFD921FE](f3_local0))
+			CACHeader.subtitle.subtitle:setText(Engine[@"hash_4F9F1239CFD921FE"](f3_local0))
 		end
 	end)
 	CACHeader:linkToElementModel(self, nil, false, function(model)
@@ -159,7 +159,7 @@ LUI.createMenu.Armory = function(f1_arg0, f1_arg1)
 		end
 		return f12_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		if MenuPropertyIsTrue(menu, "_showWeaponVariantList") and IsPC() then
 			CoD.CACUtility.HideWeaponVariantList(menu, controller)
 			return true
@@ -172,7 +172,7 @@ LUI.createMenu.Armory = function(f1_arg0, f1_arg1)
 			return true
 		end
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 		return true
 	end, false)
 	LUI.OverrideFunction_CallOriginalFirst(self, "close", function(element)
@@ -236,7 +236,7 @@ CoD.Armory.__clipsPerState = {
 			f19_arg0:setupElementClipCounter(2)
 			local f19_local0 = function(f20_arg0)
 				local f20_local0 = function(f21_arg0)
-					f21_arg0:beginAnimation(100, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f21_arg0:beginAnimation(100, Enum[@"luitween"][@"luitween_ease_both"])
 					f21_arg0:setTopBottom(0, 0, 672, 1294)
 					f21_arg0:setAlpha(1)
 					f21_arg0:registerEventHandler("transition_complete_keyframe", f19_arg0.clipFinished)
@@ -257,7 +257,7 @@ CoD.Armory.__clipsPerState = {
 					f23_arg0:setAlpha(1)
 					f23_arg0:registerEventHandler("transition_complete_keyframe", f19_arg0.clipFinished)
 				end
-				f19_arg0.WeaponListWidget:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f19_arg0.WeaponListWidget:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f19_arg0.WeaponListWidget:setTopBottom(0, 0, 700, 1190)
 				f19_arg0.WeaponListWidget:registerEventHandler("interrupted_keyframe", f19_arg0.clipInterrupted)
 				f19_arg0.WeaponListWidget:registerEventHandler("transition_complete_keyframe", f22_local0)
@@ -271,7 +271,7 @@ CoD.Armory.__clipsPerState = {
 			f24_arg0:__resetProperties()
 			f24_arg0:setupElementClipCounter(2)
 			local f24_local0 = function(f25_arg0)
-				f24_arg0.BackgroundSlidePanel:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f24_arg0.BackgroundSlidePanel:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f24_arg0.BackgroundSlidePanel:setTopBottom(0, 0, 1072, 1694)
 				f24_arg0.BackgroundSlidePanel:setAlpha(0)
 				f24_arg0.BackgroundSlidePanel:registerEventHandler("interrupted_keyframe", f24_arg0.clipInterrupted)
@@ -282,7 +282,7 @@ CoD.Armory.__clipsPerState = {
 			f24_arg0.BackgroundSlidePanel:setAlpha(1)
 			f24_local0(f24_arg0.BackgroundSlidePanel)
 			local f24_local1 = function(f26_arg0)
-				f24_arg0.WeaponListWidget:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f24_arg0.WeaponListWidget:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f24_arg0.WeaponListWidget:setTopBottom(0, 0, 1080, 1570)
 				f24_arg0.WeaponListWidget:setAlpha(0)
 				f24_arg0.WeaponListWidget:registerEventHandler("interrupted_keyframe", f24_arg0.clipInterrupted)

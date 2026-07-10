@@ -15,19 +15,19 @@ CoD.DemoHighlightReel.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 		{
 			stateName = "CreatingHighlightReel",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsGlobalModelValueEqualToEnum("demo.highlightReelState", Enum[0xEB82E0DD701A3F3][0xF7198EF39E4E502])
+				return CoD.ModelUtility.IsGlobalModelValueEqualToEnum("demo.highlightReelState", Enum[@"hash_4EB82E0DD701A3F3"][@"hash_2F7198EF39E4E502"])
 			end,
 		},
 		{
 			stateName = "PreviewingHighlightReel",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsGlobalModelValueEqualToEnum("demo.highlightReelState", Enum[0xEB82E0DD701A3F3][0xC9A4DA5E1B04A3B])
+				return CoD.ModelUtility.IsGlobalModelValueEqualToEnum("demo.highlightReelState", Enum[@"hash_4EB82E0DD701A3F3"][@"hash_7C9A4DA5E1B04A3B"])
 			end,
 		},
 	})
 	local f1_local2 = self
 	local f1_local3 = self.subscribeToModel
-	local f1_local4 = Engine[0x8DF2E5447F384B9]()
+	local f1_local4 = Engine[@"getglobalmodel"]()
 	f1_local3(f1_local2, f1_local4["demo.highlightReelState"], function(f4_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

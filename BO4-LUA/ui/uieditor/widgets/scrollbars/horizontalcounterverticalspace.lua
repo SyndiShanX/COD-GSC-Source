@@ -14,23 +14,23 @@ CoD.horizontalCounterVerticalSpace.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	currentItem:setAlpha(0.65)
 	currentItem:setText("")
 	currentItem:setTTF("ttmussels_regular")
-	currentItem:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
-	currentItem:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	currentItem:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
+	currentItem:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(currentItem)
 	self.currentItem = currentItem
 	local dividor = LUI.UIText.new(0.5, 0.5, -4.5, 4.5, 0.5, 0.5, 6, 24)
 	dividor:setAlpha(0.65)
-	dividor:setText(Engine[0xF9F1239CFD921FE](0x993C1A7DD3452BA))
+	dividor:setText(Engine[@"hash_4F9F1239CFD921FE"](@"mp/slash"))
 	dividor:setTTF("ttmussels_regular")
-	dividor:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	dividor:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	self:addElement(dividor)
 	self.dividor = dividor
 	local count = LUI.UIText.new(0.5, 0.5, 12, 57, 0.5, 0.5, 6, 24)
 	count:setAlpha(0.65)
 	count:setText(200)
 	count:setTTF("ttmussels_regular")
-	count:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	count:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	count:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	count:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(count)
 	self.count = count
 	local rightArrowBtn = CoD.listCounterButton.new(f1_arg0, f1_arg1, 0.5, 0.5, 50, 100, 0.5, 0.5, -10, 40)
@@ -74,7 +74,7 @@ CoD.horizontalCounterVerticalSpace.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	end, false)
 	f1_local5 = rightArrowBtn
 	leftArrowBtn = rightArrowBtn.subscribeToModel
-	f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
 	leftArrowBtn(f1_local5, f1_local7.activeKeys, function(f6_arg0)
 		f1_arg0:updateElementState(rightArrowBtn, {
 			name = "model_validation",
@@ -87,13 +87,13 @@ CoD.horizontalCounterVerticalSpace.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	rightArrowBtn:setZRot(-90)
 	rightArrowBtn:appendEventHandler("input_source_changed", function(f7_arg0, f7_arg1)
 		f7_arg1.menu = f7_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f7_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f7_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	f1_local5 = rightArrowBtn
 	leftArrowBtn = rightArrowBtn.subscribeToModel
-	f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
 	leftArrowBtn(f1_local5, f1_local7.LastInput, function(f8_arg0, f8_arg1)
-		CoD.Menu.UpdateButtonShownState(f8_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f8_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	rightArrowBtn:registerEventHandler("gain_focus", function(element, event)
 		local f9_local0 = nil
@@ -102,10 +102,10 @@ CoD.horizontalCounterVerticalSpace.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 		elseif element.super.gainFocus then
 			f9_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f9_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(rightArrowBtn, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(rightArrowBtn, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if IsGamepad(controller) then
 			NavigateScrollButtonRight(self)
 			return true
@@ -116,10 +116,10 @@ CoD.horizontalCounterVerticalSpace.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 		end
 	end, function(element, menu, controller)
 		if IsGamepad(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 			return false
 		elseif IsMouseOrKeyboard(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 			return false
 		else
 			return false
@@ -168,7 +168,7 @@ CoD.horizontalCounterVerticalSpace.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	end, false)
 	f1_local7 = leftArrowBtn
 	f1_local5 = leftArrowBtn.subscribeToModel
-	f1_local8 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local8 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local5(f1_local7, f1_local8.activeKeys, function(f16_arg0)
 		f1_arg0:updateElementState(leftArrowBtn, {
 			name = "model_validation",
@@ -181,13 +181,13 @@ CoD.horizontalCounterVerticalSpace.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	leftArrowBtn:setZRot(90)
 	leftArrowBtn:appendEventHandler("input_source_changed", function(f17_arg0, f17_arg1)
 		f17_arg1.menu = f17_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f17_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f17_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	f1_local7 = leftArrowBtn
 	f1_local5 = leftArrowBtn.subscribeToModel
-	f1_local8 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local8 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local5(f1_local7, f1_local8.LastInput, function(f18_arg0, f18_arg1)
-		CoD.Menu.UpdateButtonShownState(f18_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f18_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	leftArrowBtn:registerEventHandler("gain_focus", function(element, event)
 		local f19_local0 = nil
@@ -196,10 +196,10 @@ CoD.horizontalCounterVerticalSpace.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 		elseif element.super.gainFocus then
 			f19_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f19_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(leftArrowBtn, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(leftArrowBtn, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if IsGamepad(controller) then
 			NavigateScrollButtonLeft(self)
 			return true
@@ -210,10 +210,10 @@ CoD.horizontalCounterVerticalSpace.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 		end
 	end, function(element, menu, controller)
 		if IsGamepad(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 			return false
 		elseif IsMouseOrKeyboard(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 			return false
 		else
 			return false

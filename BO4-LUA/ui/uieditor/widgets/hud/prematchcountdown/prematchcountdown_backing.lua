@@ -8,19 +8,19 @@ CoD.PrematchCountdown_Backing.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self.soundSet = "default"
 	local BlurBacking = LUI.UIImage.new(0, 1, 0, 0, 0.13, 0.87, 0, 0)
 	BlurBacking:setRGB(0, 0, 0)
-	BlurBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	BlurBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	BlurBacking:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(BlurBacking)
 	self.BlurBacking = BlurBacking
 	local BlurBacking2 = LUI.UIImage.new(0, 1, 0, 0, 0.13, 0.87, 0, 0)
 	BlurBacking2:setRGB(0, 0, 0)
-	BlurBacking2:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	BlurBacking2:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	BlurBacking2:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(BlurBacking2)
 	self.BlurBacking2 = BlurBacking2
 	local Graphic = LUI.UIImage.new(0, 1, 0, 0, -0, 0.98, 0, 0)
-	Graphic:setImage(RegisterImage(0xF5B05C37854785F))
-	Graphic:setMaterial(LUI.UIImage.GetCachedMaterial(0xF755127C95CF5B6))
+	Graphic:setImage(RegisterImage(@"uie_ui_hud_core_match_begins_banner"))
+	Graphic:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_F755127C95CF5B6"))
 	Graphic:setShaderVector(0, 1.1, 0, 0, 0)
 	self:addElement(Graphic)
 	self.Graphic = Graphic

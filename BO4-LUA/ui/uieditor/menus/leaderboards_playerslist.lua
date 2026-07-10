@@ -44,7 +44,7 @@ LUI.createMenu.Leaderboards_PlayersList = function(f1_arg0, f1_arg1)
 	})
 	local NoiseTiledBacking = tabs
 	local EmptyPlaylistFrame = tabs.subscribeToModel
-	local SelectedCount = Engine[0x8DF2E5447F384B9]()
+	local SelectedCount = Engine[@"getglobalmodel"]()
 	EmptyPlaylistFrame(NoiseTiledBacking, SelectedCount["socialRoot.showPlayersList"], function(f3_arg0)
 		f1_local1:updateElementState(tabs, {
 			name = "model_validation",
@@ -72,8 +72,8 @@ LUI.createMenu.Leaderboards_PlayersList = function(f1_arg0, f1_arg1)
 	self.EmptyPlaylistFrame = EmptyPlaylistFrame
 	NoiseTiledBacking = LUI.UIImage.new(0.5, 0.5, -444.5, 67.5, 0.5, 0.5, -345, 322)
 	NoiseTiledBacking:setAlpha(0)
-	NoiseTiledBacking:setImage(RegisterImage(0x34839E8065B1E53))
-	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	NoiseTiledBacking:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	NoiseTiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	NoiseTiledBacking:setupNineSliceShader(196, 88)
 	self:addElement(NoiseTiledBacking)
@@ -81,8 +81,8 @@ LUI.createMenu.Leaderboards_PlayersList = function(f1_arg0, f1_arg1)
 	SelectedCount = LUI.UIText.new(0.5, 0.5, 93, 396, 0.5, 0.5, -202, -148)
 	SelectedCount:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	SelectedCount:setTTF("0arame_mono_stencil")
-	SelectedCount:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	SelectedCount:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	SelectedCount:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	SelectedCount:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	SelectedCount:subscribeToGlobalModel(f1_arg0, "SocialRoot", "selectedCount", function(model)
 		local f5_local0 = model:get()
 		if f5_local0 ~= nil then
@@ -93,29 +93,29 @@ LUI.createMenu.Leaderboards_PlayersList = function(f1_arg0, f1_arg1)
 	self.SelectedCount = SelectedCount
 	local SelectedCountTitle = LUI.UIText.new(0.5, 0.5, 93, 396, 0.5, 0.5, -227, -205)
 	SelectedCountTitle:setAlpha(0.7)
-	SelectedCountTitle:setText(LocalizeToUpperString(0xF3659CEDAE6509E))
+	SelectedCountTitle:setText(LocalizeToUpperString(@"menu/selected"))
 	SelectedCountTitle:setTTF("ttmussels_regular")
 	SelectedCountTitle:setLetterSpacing(4)
-	SelectedCountTitle:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	SelectedCountTitle:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	SelectedCountTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	SelectedCountTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(SelectedCountTitle)
 	self.SelectedCountTitle = SelectedCountTitle
 	local noPlayersText = LUI.UIText.new(0.5, 0.5, -445.5, 68.5, 0.5, 0.5, -12.5, 12.5)
 	noPlayersText:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	noPlayersText:setAlpha(0)
-	noPlayersText:setText(Engine[0xF9F1239CFD921FE](0xE00774FA3F4A55D))
+	noPlayersText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_6E00774FA3F4A55D"))
 	noPlayersText:setTTF("ttmussels_regular")
 	noPlayersText:setLetterSpacing(2)
-	noPlayersText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	noPlayersText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	noPlayersText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	noPlayersText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(noPlayersText)
 	self.noPlayersText = noPlayersText
 	local GenericMenuFrame = CoD.GenericMenuFrame.new(f1_local1, f1_arg0, 0, 1, 0, 0, 0, 1, 0, 0)
-	GenericMenuFrame.CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(0xDF2A86EB47CCB10))
+	GenericMenuFrame.CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(@"menu/players_list"))
 	GenericMenuFrame:subscribeToGlobalModel(f1_arg0, "LobbyRoot", "lobbyTitle", function(model)
 		local f6_local0 = model:get()
 		if f6_local0 ~= nil then
-			GenericMenuFrame.CommonHeader.subtitle.subtitle:setText(Engine[0xF9F1239CFD921FE](f6_local0))
+			GenericMenuFrame.CommonHeader.subtitle.subtitle:setText(Engine[@"hash_4F9F1239CFD921FE"](f6_local0))
 		end
 	end)
 	self:addElement(GenericMenuFrame)
@@ -131,14 +131,14 @@ LUI.createMenu.Leaderboards_PlayersList = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f7_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f7_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(BTNQuit, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(BTNQuit, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		GoBack(self, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 		return false
 	end, false)
 	self:addElement(BTNQuit)
@@ -163,14 +163,14 @@ LUI.createMenu.Leaderboards_PlayersList = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f11_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f11_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(PCSimpleVScrollList, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(PCSimpleVScrollList, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		CoD.SocialUtility.ToggleAddCheckbox(controller, element)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, nil)
 		return false
 	end, false)
 	self:addElement(PCSimpleVScrollList)
@@ -195,7 +195,7 @@ LUI.createMenu.Leaderboards_PlayersList = function(f1_arg0, f1_arg1)
 	})
 	local HeaderStripe = ActionButton
 	local PlayerListFullText = ActionButton.subscribeToModel
-	local CommonHeader = Engine[0x8DF2E5447F384B9]()
+	local CommonHeader = Engine[@"getglobalmodel"]()
 	PlayerListFullText(HeaderStripe, CommonHeader["socialRoot.showPlayersList"], function(f16_arg0)
 		f1_local1:updateElementState(ActionButton, {
 			name = "model_validation",
@@ -207,9 +207,9 @@ LUI.createMenu.Leaderboards_PlayersList = function(f1_arg0, f1_arg1)
 	end, false)
 	HeaderStripe = ActionButton
 	PlayerListFullText = ActionButton.subscribeToModel
-	CommonHeader = Engine[0x8DF2E5447F384B9]()
+	CommonHeader = Engine[@"getglobalmodel"]()
 	PlayerListFullText(HeaderStripe, CommonHeader["socialRoot.showPlayersList"], function(f17_arg0, f17_arg1)
-		CoD.Menu.UpdateButtonShownState(f17_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f17_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	ActionButton:registerEventHandler("gain_focus", function(element, event)
 		local f18_local0 = nil
@@ -218,10 +218,10 @@ LUI.createMenu.Leaderboards_PlayersList = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f18_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f18_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(ActionButton, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(ActionButton, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if not CoD.ModelUtility.IsGlobalModelValueTrue("socialRoot.showPlayersList") then
 			CoD.SocialUtility.AddPlayers(controller)
 			CoD.SocialUtility.ClearCheckedInvitees()
@@ -238,10 +238,10 @@ LUI.createMenu.Leaderboards_PlayersList = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if not CoD.ModelUtility.IsGlobalModelValueTrue("socialRoot.showPlayersList") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xAC3B80C833B60E1, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_3AC3B80C833B60E1", nil, nil)
 			return true
 		elseif CoD.ModelUtility.IsGlobalModelValueTrue("socialRoot.showPlayersList") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xAC3B80C833B60E1, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_3AC3B80C833B60E1", nil, nil)
 			return true
 		else
 			return false
@@ -252,10 +252,10 @@ LUI.createMenu.Leaderboards_PlayersList = function(f1_arg0, f1_arg1)
 	PlayerListFullText = LUI.UIText.new(0.5, 0.5, 93, 396, 0.5, 0.5, -78, -53)
 	PlayerListFullText:setRGB(ColorSet.InsufficientFunds.r, ColorSet.InsufficientFunds.g, ColorSet.InsufficientFunds.b)
 	PlayerListFullText:setAlpha(0)
-	PlayerListFullText:setText(Engine[0xF9F1239CFD921FE](0xC52261C65F3EF0F))
+	PlayerListFullText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_C52261C65F3EF0F"))
 	PlayerListFullText:setTTF("dinnext_regular")
-	PlayerListFullText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	PlayerListFullText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	PlayerListFullText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	PlayerListFullText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(PlayerListFullText)
 	self.PlayerListFullText = PlayerListFullText
 	HeaderStripe = CoD.header_container_frontend.new(f1_local1, f1_arg0, 0.5, 1.5, -960, -960, 0, 0, 0, 42)
@@ -282,12 +282,12 @@ LUI.createMenu.Leaderboards_PlayersList = function(f1_arg0, f1_arg1)
 	CommonHeader = CoD.CommonHeader.new(f1_local1, f1_arg0, 0.5, 1.5, -960, -960, 0, 0, 0, 67)
 	CommonHeader:setAlpha(0)
 	CommonHeader.BGSceneBlur:setAlpha(0)
-	CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(0xDF2A86EB47CCB10))
+	CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(@"menu/players_list"))
 	CommonHeader.subtitle.subtitle:setAlpha(0)
 	CommonHeader:subscribeToGlobalModel(f1_arg0, "LobbyRoot", "lobbyTitle", function(model)
 		local f22_local0 = model:get()
 		if f22_local0 ~= nil then
-			CommonHeader.subtitle.subtitle:setText(Engine[0xF9F1239CFD921FE](f22_local0))
+			CommonHeader.subtitle.subtitle:setText(Engine[@"hash_4F9F1239CFD921FE"](f22_local0))
 		end
 	end)
 	CommonHeader:registerEventHandler("menu_loaded", function(element, event)
@@ -308,12 +308,12 @@ LUI.createMenu.Leaderboards_PlayersList = function(f1_arg0, f1_arg1)
 	self:addElement(CommonHeader)
 	self.CommonHeader = CommonHeader
 	local PlaylistButton = CoD.LeaderboardListButton.new(f1_local1, f1_arg0, 0.5, 0.5, -773, -470, 0.5, 0.5, -343, -251)
-	PlaylistButton.CommonListButtonShortInternal.Title:setText(Engine[0xF9F1239CFD921FE](0xDF2A86EB47CCB10))
+	PlaylistButton.CommonListButtonShortInternal.Title:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/players_list"))
 	local f1_local18 = PlaylistButton
 	local AddPlayerButton = PlaylistButton.subscribeToModel
-	local PlayerInfoPanePC = Engine[0x8DF2E5447F384B9]()
+	local PlayerInfoPanePC = Engine[@"getglobalmodel"]()
 	AddPlayerButton(f1_local18, PlayerInfoPanePC["socialRoot.showPlayersList"], function(f24_arg0, f24_arg1)
-		CoD.Menu.UpdateButtonShownState(f24_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f24_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	PlaylistButton:registerEventHandler("gain_focus", function(element, event)
 		local f25_local0 = nil
@@ -322,10 +322,10 @@ LUI.createMenu.Leaderboards_PlayersList = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f25_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f25_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(PlaylistButton, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(PlaylistButton, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if not CoD.ModelUtility.IsGlobalModelValueTrue("socialRoot.showPlayersList") then
 			CoD.SocialUtility.ClearCheckedInvitees()
 			SetGlobalModelValueTrue("socialRoot.showPlayersList")
@@ -337,7 +337,7 @@ LUI.createMenu.Leaderboards_PlayersList = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if not CoD.ModelUtility.IsGlobalModelValueTrue("socialRoot.showPlayersList") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xAC3B80C833B60E1, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_3AC3B80C833B60E1", nil, "ui_confirm")
 			return true
 		else
 			return false
@@ -346,12 +346,12 @@ LUI.createMenu.Leaderboards_PlayersList = function(f1_arg0, f1_arg1)
 	self:addElement(PlaylistButton)
 	self.PlaylistButton = PlaylistButton
 	AddPlayerButton = CoD.LeaderboardListButton.new(f1_local1, f1_arg0, 0.5, 0.5, -773, -470, 0.5, 0.5, -235.5, -143.5)
-	AddPlayerButton.CommonListButtonShortInternal.Title:setText(Engine[0xF9F1239CFD921FE](0x8560D39E3DABF67))
+	AddPlayerButton.CommonListButtonShortInternal.Title:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/add_players"))
 	PlayerInfoPanePC = AddPlayerButton
 	f1_local18 = AddPlayerButton.subscribeToModel
-	local AutoAddFriendsButton = Engine[0x8DF2E5447F384B9]()
+	local AutoAddFriendsButton = Engine[@"getglobalmodel"]()
 	f1_local18(PlayerInfoPanePC, AutoAddFriendsButton["socialRoot.showPlayersList"], function(f28_arg0, f28_arg1)
-		CoD.Menu.UpdateButtonShownState(f28_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f28_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	AddPlayerButton:registerEventHandler("gain_focus", function(element, event)
 		local f29_local0 = nil
@@ -360,10 +360,10 @@ LUI.createMenu.Leaderboards_PlayersList = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f29_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f29_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(AddPlayerButton, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(AddPlayerButton, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if CoD.ModelUtility.IsGlobalModelValueTrue("socialRoot.showPlayersList") then
 			CoD.SocialUtility.ClearCheckedInvitees()
 			SetGlobalModelValueFalse("socialRoot.showPlayersList")
@@ -375,7 +375,7 @@ LUI.createMenu.Leaderboards_PlayersList = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if CoD.ModelUtility.IsGlobalModelValueTrue("socialRoot.showPlayersList") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xAC3B80C833B60E1, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_3AC3B80C833B60E1", nil, "ui_confirm")
 			return true
 		else
 			return false
@@ -446,7 +446,7 @@ LUI.createMenu.Leaderboards_PlayersList = function(f1_arg0, f1_arg1)
 	})
 	local f1_local24 = self
 	local f1_local25 = self.subscribeToModel
-	local f1_local26 = Engine[0x8DF2E5447F384B9]()
+	local f1_local26 = Engine[@"getglobalmodel"]()
 	f1_local25(f1_local24, f1_local26["socialRoot.playersListFull"], function(f39_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",
@@ -470,7 +470,7 @@ LUI.createMenu.Leaderboards_PlayersList = function(f1_arg0, f1_arg1)
 	end, false)
 	f1_local24 = self
 	f1_local25 = self.subscribeToModel
-	f1_local26 = Engine[0x8DF2E5447F384B9]()
+	f1_local26 = Engine[@"getglobalmodel"]()
 	f1_local25(f1_local24, f1_local26["socialRoot.showPlayersList"], function(f41_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",
@@ -496,11 +496,11 @@ LUI.createMenu.Leaderboards_PlayersList = function(f1_arg0, f1_arg1)
 		end
 		return f42_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], "ESCAPE", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], "ESCAPE", function(element, menu, controller, model)
 		GoBack(self, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, "ESCAPE")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, "ESCAPE")
 		return true
 	end, false)
 	LUI.OverrideFunction_CallOriginalFirst(self, "close", function(element)

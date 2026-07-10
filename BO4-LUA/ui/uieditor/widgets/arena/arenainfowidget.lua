@@ -20,16 +20,16 @@ CoD.ArenaInfoWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	self.Background = Background
 	local TiledBacking = LUI.UIImage.new(0, 0, 1.5, 350.5, 0, 0, 38, 636)
 	TiledBacking:setAlpha(0.25)
-	TiledBacking:setImage(RegisterImage(0x34839E8065B1E53))
-	TiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	TiledBacking:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	TiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	TiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	TiledBacking:setupNineSliceShader(196, 88)
 	self:addElement(TiledBacking)
 	self.TiledBacking = TiledBacking
 	local TiledwhiteNoiseBacking = LUI.UIImage.new(0, 0, 1.5, 132.5, 0, 0, 469, 600)
 	TiledwhiteNoiseBacking:setAlpha(0.01)
-	TiledwhiteNoiseBacking:setImage(RegisterImage(0x7167D8C33A06020))
-	TiledwhiteNoiseBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	TiledwhiteNoiseBacking:setImage(RegisterImage(@"uie_ui_menu_aar_repeat_white_bg"))
+	TiledwhiteNoiseBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	TiledwhiteNoiseBacking:setShaderVector(0, 0, 0, 0, 0)
 	TiledwhiteNoiseBacking:setupNineSliceShader(64, 64)
 	self:addElement(TiledwhiteNoiseBacking)
@@ -40,8 +40,8 @@ CoD.ArenaInfoWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	self:addElement(Background2)
 	self.Background2 = Background2
 	local BGDotPatternLarge2 = LUI.UIImage.new(0, 0, 2.5, 350.5, 0, 0, 467, 471)
-	BGDotPatternLarge2:setImage(RegisterImage(0xB20AD7A31239369))
-	BGDotPatternLarge2:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	BGDotPatternLarge2:setImage(RegisterImage(@"uie_ui_menu_social_emblem_dotline_tiled"))
+	BGDotPatternLarge2:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	BGDotPatternLarge2:setShaderVector(0, 0, 0, 0, 0)
 	BGDotPatternLarge2:setupNineSliceShader(32, 4)
 	self:addElement(BGDotPatternLarge2)
@@ -52,8 +52,8 @@ CoD.ArenaInfoWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	self:addElement(ArenaRubies)
 	self.ArenaRubies = ArenaRubies
 	local arenaFlameStreak = LUI.UIImage.new(0, 0, -63, 197, 0, 0, 405, 665)
-	arenaFlameStreak:setImage(RegisterImage(0x39CD2A8412A4F6))
-	arenaFlameStreak:setMaterial(LUI.UIImage.GetCachedMaterial(0x9227A50BA2B8D21))
+	arenaFlameStreak:setImage(RegisterImage(@"uie_ui_menu_arena_firestreakflipbook"))
+	arenaFlameStreak:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_flipbook_add"))
 	arenaFlameStreak:setShaderVector(0, 4, 4, 0, 0)
 	arenaFlameStreak:setShaderVector(1, 8, 0, 0, 0)
 	self:addElement(arenaFlameStreak)
@@ -88,16 +88,16 @@ CoD.ArenaInfoWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	local RankTitle = LUI.UIText.new(0, 0, 140.5, 352.5, 0, 0, 492, 510)
 	RankTitle:setRGB(0.92, 0.92, 0.92)
 	RankTitle:setAlpha(0.5)
-	RankTitle:setText(LocalizeToUpperString(0x3370355189B42A7))
+	RankTitle:setText(LocalizeToUpperString(@"arena/rank"))
 	RankTitle:setTTF("ttmussels_regular")
-	RankTitle:setMaterial(LUI.UIImage.GetCachedMaterial(0x90D57B1E92D39D7))
+	RankTitle:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_90D57B1E92D39D7"))
 	RankTitle:setShaderVector(0, 1, 0, 0, 0)
 	RankTitle:setShaderVector(1, 0, 0, 0, 0)
 	RankTitle:setShaderVector(2, 0, 0, 0, 0.5)
 	RankTitle:setLetterSpacing(1)
 	RankTitle:setLineSpacing(1)
-	RankTitle:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	RankTitle:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	RankTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	RankTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(RankTitle)
 	self.RankTitle = RankTitle
 	local Rank = LUI.UIText.new(0, 0, 135.5, 255.5, 0, 0, 504.5, 571.5)
@@ -107,13 +107,13 @@ CoD.ArenaInfoWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	end
 	Rank.__String_Reference()
 	Rank:setTTF("0arame_mono_stencil")
-	Rank:setMaterial(LUI.UIImage.GetCachedMaterial(0x90D57B1E92D39D7))
+	Rank:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_90D57B1E92D39D7"))
 	Rank:setShaderVector(0, 1, 0, 0, 0)
 	Rank:setShaderVector(1, 0, 0, 0, 0)
 	Rank:setShaderVector(2, 0.3, 0.3, 0.3, 0.3)
 	Rank:setLetterSpacing(2)
-	Rank:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Rank:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Rank:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Rank:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(Rank)
 	self.Rank = Rank
 	local WinStreak = CoD.LeaguePlayLeaderboard_InfoPaneWinStreak.new(f1_arg0, f1_arg1, 0, 0, 14, 341, 0, 0, 602, 635)
@@ -135,8 +135,8 @@ CoD.ArenaInfoWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	local infoBracketBot = LUI.UIImage.new(0, 0, 0.5, 351.5, 0, 0, 629, 637)
 	infoBracketBot:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	infoBracketBot:setAlpha(0.5)
-	infoBracketBot:setImage(RegisterImage(0xC325BED3F226657))
-	infoBracketBot:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	infoBracketBot:setImage(RegisterImage(@"hash_4C325BED3F226657"))
+	infoBracketBot:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	infoBracketBot:setShaderVector(0, 0, 0, 0, 0)
 	infoBracketBot:setupNineSliceShader(16, 4)
 	self:addElement(infoBracketBot)
@@ -146,11 +146,11 @@ CoD.ArenaInfoWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	self.CallingCard = CallingCard
 	local Name = LUI.UIText.new(0, 0, 0.5, 348.5, 0.5, 0.5, -317.5, -283.5)
 	Name:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
-	Name:setText(Engine[0xF9F1239CFD921FE](0x93E719493E9E18F))
+	Name:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	Name:setTTF("notosans_regular")
 	Name:setLetterSpacing(2)
-	Name:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Name:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	Name:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Name:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	self:addElement(Name)
 	self.Name = Name
 	local f1_local19 = SkillIcon
@@ -167,7 +167,7 @@ CoD.ArenaInfoWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	f1_local20(f1_local19, f1_local21["gameClient.update"], SkillIcon.__Image_FullPath)
 	f1_local19 = SkillIcon
 	f1_local20 = SkillIcon.subscribeToModel
-	f1_local21 = Engine[0x8DF2E5447F384B9]()
+	f1_local21 = Engine[@"getglobalmodel"]()
 	f1_local20(f1_local19, f1_local21["PartyPrivacy.privacy"], SkillIcon.__Image_FullPath)
 	f1_local19 = Rank
 	f1_local20 = Rank.subscribeToModel
@@ -183,7 +183,7 @@ CoD.ArenaInfoWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	f1_local20(f1_local19, f1_local21["gameClient.update"], Rank.__String_Reference)
 	f1_local19 = Rank
 	f1_local20 = Rank.subscribeToModel
-	f1_local21 = Engine[0x8DF2E5447F384B9]()
+	f1_local21 = Engine[@"getglobalmodel"]()
 	f1_local20(f1_local19, f1_local21["PartyPrivacy.privacy"], Rank.__String_Reference)
 	CallingCard.id = "CallingCard"
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)

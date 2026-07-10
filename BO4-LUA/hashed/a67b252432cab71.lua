@@ -10,8 +10,8 @@ CoD.HVOCardTitle.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 	PlayerName:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	PlayerName:setTTF("ttmussels_regular")
 	PlayerName:setLetterSpacing(4)
-	PlayerName:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	PlayerName:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	PlayerName:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	PlayerName:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	PlayerName.__String_Reference = function(f2_arg0)
 		local f2_local0 = f2_arg0:get()
 		if f2_local0 ~= nil then
@@ -61,8 +61,8 @@ CoD.HVOCardTitle.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 	RankLevel:setRGB(ColorSet.T8__OCHRE.r, ColorSet.T8__OCHRE.g, ColorSet.T8__OCHRE.b)
 	RankLevel:setTTF("ttmussels_regular")
 	RankLevel:setLetterSpacing(4)
-	RankLevel:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
-	RankLevel:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	RankLevel:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
+	RankLevel:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	RankLevel.__String_Reference = function(f6_arg0)
 		local f6_local0 = f6_arg0:get()
 		if f6_local0 ~= nil then

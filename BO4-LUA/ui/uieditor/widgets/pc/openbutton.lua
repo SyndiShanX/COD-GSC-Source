@@ -33,7 +33,7 @@ CoD.OpenButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_ar
 	ListItem:linkToElementModel(self, "name", true, function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
-			ListItem.Title:setText(Engine[0xF9F1239CFD921FE](f4_local0))
+			ListItem.Title:setText(Engine[@"hash_4F9F1239CFD921FE"](f4_local0))
 		end
 	end)
 	self:addElement(ListItem)
@@ -59,7 +59,7 @@ CoD.OpenButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_ar
 			modelName = "refreshWidget",
 		})
 	end)
-	Button.Text:setText(LocalizeToUpperString(0x68F4DC4AFAA11C3))
+	Button.Text:setText(LocalizeToUpperString(@"menu/edit"))
 	self:addElement(Button)
 	self.Button = Button
 	self.Button:linkToElementModel(self, nil, false, function(model)

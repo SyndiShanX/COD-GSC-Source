@@ -40,8 +40,8 @@ CoD.ReservesBribeStackTall.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self:addElement(CommonButtonOutline)
 	self.CommonButtonOutline = CommonButtonOutline
 	local NineSliceBMFrame = LUI.UIImage.new(0, 1, -2, 2, 0, 1, -2, 2)
-	NineSliceBMFrame:setImage(RegisterImage(0x1AC151A09D526DC))
-	NineSliceBMFrame:setMaterial(LUI.UIImage.GetCachedMaterial(0x44484DDFAF5C093))
+	NineSliceBMFrame:setImage(RegisterImage(@"hash_71AC151A09D526DC"))
+	NineSliceBMFrame:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_normal"))
 	NineSliceBMFrame:setShaderVector(0, 0, 0, 0, 0)
 	NineSliceBMFrame:setupNineSliceShader(162, 52)
 	self:addElement(NineSliceBMFrame)
@@ -54,8 +54,8 @@ CoD.ReservesBribeStackTall.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	Title:setRGB(0.11, 0.11, 0.11)
 	Title:setTTF("ttmussels_demibold")
 	Title:setLetterSpacing(2)
-	Title:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Title:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	Title:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Title:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	Title:linkToElementModel(self, "name", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -95,7 +95,7 @@ CoD.ReservesBribeStackTall.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	ItemHintText:linkToElementModel(self, "desc", true, function(model)
 		local f8_local0 = model:get()
 		if f8_local0 ~= nil then
-			ItemHintText.textCenterAlign:setText(Engine[0xF9F1239CFD921FE](f8_local0))
+			ItemHintText.textCenterAlign:setText(Engine[@"hash_4F9F1239CFD921FE"](f8_local0))
 		end
 	end)
 	self:addElement(ItemHintText)
@@ -107,13 +107,13 @@ CoD.ReservesBribeStackTall.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self.Darken = Darken
 	local PurchasedBanner = CoD.ContractPurchasedBanner.new(f1_arg0, f1_arg1, 0.5, 0.5, -75, 75, 1, 1, -46, -21)
 	PurchasedBanner:setAlpha(0)
-	PurchasedBanner.PurchasedTitle:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	PurchasedBanner.PurchasedTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	self:addElement(PurchasedBanner)
 	self.PurchasedBanner = PurchasedBanner
 	local TabBottomLine = LUI.UIImage.new(0, 1, 0, 0, 1, 1, -96, -92)
 	TabBottomLine:setAlpha(0.09)
-	TabBottomLine:setImage(RegisterImage(0x5526CF3733E24C4))
-	TabBottomLine:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	TabBottomLine:setImage(RegisterImage(@"uie_ui_menu_common_tab_line_bottom"))
+	TabBottomLine:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(TabBottomLine)
 	self.TabBottomLine = TabBottomLine
 	self:mergeStateConditions({

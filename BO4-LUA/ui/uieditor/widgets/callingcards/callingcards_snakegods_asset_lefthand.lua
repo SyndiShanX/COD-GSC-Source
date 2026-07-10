@@ -8,7 +8,7 @@ CoD.callingcards_snakegods_asset_lefthand.new = function(f1_arg0, f1_arg1, f1_ar
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local lefthand = LUI.UIImage.new(0, 0, -68, 68, 0, 0, -94, 10)
-	lefthand:setImage(RegisterImage(0x7BEB9FF63AD99C0))
+	lefthand:setImage(RegisterImage(@"uie_ui_menu_callingcards_snake_gods_hand"))
 	self:addElement(lefthand)
 	self.lefthand = lefthand
 	if PostLoadFunc then
@@ -30,21 +30,21 @@ CoD.callingcards_snakegods_asset_lefthand.__clipsPerState = {
 				local f4_local0 = function(f5_arg0)
 					local f5_local0 = function(f6_arg0)
 						local f6_local0 = function(f7_arg0)
-							f7_arg0:beginAnimation(710, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+							f7_arg0:beginAnimation(710, Enum[@"luitween"][@"luitween_ease_both"])
 							f7_arg0:setLeftRight(0, 0, -68, 68)
 							f7_arg0:registerEventHandler("transition_complete_keyframe", f3_arg0.clipFinished)
 						end
-						f6_arg0:beginAnimation(1290, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+						f6_arg0:beginAnimation(1290, Enum[@"luitween"][@"luitween_ease_both"])
 						f6_arg0:setLeftRight(0, 0, -89, 47)
 						f6_arg0:setTopBottom(0, 0, -76, 28)
 						f6_arg0:registerEventHandler("transition_complete_keyframe", f6_local0)
 					end
-					f5_arg0:beginAnimation(500, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f5_arg0:beginAnimation(500, Enum[@"luitween"][@"luitween_ease_out"])
 					f5_arg0:setLeftRight(0, 0, -68, 68)
 					f5_arg0:setTopBottom(0, 0, -80, 24)
 					f5_arg0:registerEventHandler("transition_complete_keyframe", f5_local0)
 				end
-				f3_arg0.lefthand:beginAnimation(500, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f3_arg0.lefthand:beginAnimation(500, Enum[@"luitween"][@"luitween_ease_both"])
 				f3_arg0.lefthand:setLeftRight(0, 0, -88, 48)
 				f3_arg0.lefthand:setTopBottom(0, 0, -94, 10)
 				f3_arg0.lefthand:registerEventHandler("interrupted_keyframe", f3_arg0.clipInterrupted)

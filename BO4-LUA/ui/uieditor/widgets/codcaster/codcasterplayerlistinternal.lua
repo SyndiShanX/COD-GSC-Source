@@ -1,7 +1,7 @@
 require("x64:f1ba750269f9d18")
 require("x64:c8a82e63a9de148")
 local PostLoadFunc = function(self, controller)
-	if Engine[0xA9423CFB94266E8]() < 2 then
+	if Engine[@"getcurrentteamcount"]() < 2 then
 		self.Team2Header:close()
 		self.Team2:close()
 	end
@@ -35,7 +35,7 @@ CoD.CodcasterPlayerlistInternal.new = function(f2_arg0, f2_arg1, f2_arg2, f2_arg
 	})
 	local spacer = Team1Header
 	local Team1 = Team1Header.subscribeToModel
-	local Team2Header = Engine[0x8DF2E5447F384B9]()
+	local Team2Header = Engine[@"getglobalmodel"]()
 	Team1(spacer, Team2Header["scoreboard.team1.count"], function(f5_arg0)
 		f2_arg0:updateElementState(Team1Header, {
 			name = "model_validation",
@@ -47,7 +47,7 @@ CoD.CodcasterPlayerlistInternal.new = function(f2_arg0, f2_arg1, f2_arg2, f2_arg
 	end, false)
 	spacer = Team1Header
 	Team1 = Team1Header.subscribeToModel
-	Team2Header = Engine[0x8DF2E5447F384B9]()
+	Team2Header = Engine[@"getglobalmodel"]()
 	Team1(spacer, Team2Header["scoreboard.team1.shoutcasterListenInActive"], function(f6_arg0)
 		f2_arg0:updateElementState(Team1Header, {
 			name = "model_validation",
@@ -77,7 +77,7 @@ CoD.CodcasterPlayerlistInternal.new = function(f2_arg0, f2_arg1, f2_arg2, f2_arg
 	Team1:setWidgetType(CoD.CodCasterPlayerListRowWidget)
 	Team1:setVerticalCount(18)
 	Team1:setSpacing(0)
-	Team1:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	Team1:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	Team1:setDataSource("Clients")
 	self:addElement(Team1)
 	self.Team1 = Team1
@@ -102,7 +102,7 @@ CoD.CodcasterPlayerlistInternal.new = function(f2_arg0, f2_arg1, f2_arg2, f2_arg
 	})
 	local f2_local5 = Team2Header
 	local Team2 = Team2Header.subscribeToModel
-	local f2_local7 = Engine[0x8DF2E5447F384B9]()
+	local f2_local7 = Engine[@"getglobalmodel"]()
 	Team2(f2_local5, f2_local7["scoreboard.team2.count"], function(f11_arg0)
 		f2_arg0:updateElementState(Team2Header, {
 			name = "model_validation",
@@ -114,7 +114,7 @@ CoD.CodcasterPlayerlistInternal.new = function(f2_arg0, f2_arg1, f2_arg2, f2_arg
 	end, false)
 	f2_local5 = Team2Header
 	Team2 = Team2Header.subscribeToModel
-	f2_local7 = Engine[0x8DF2E5447F384B9]()
+	f2_local7 = Engine[@"getglobalmodel"]()
 	Team2(f2_local5, f2_local7["scoreboard.team2.shoutcasterListenInActive"], function(f12_arg0)
 		f2_arg0:updateElementState(Team2Header, {
 			name = "model_validation",
@@ -144,7 +144,7 @@ CoD.CodcasterPlayerlistInternal.new = function(f2_arg0, f2_arg1, f2_arg2, f2_arg
 	Team2:setWidgetType(CoD.CodCasterPlayerListRowWidget)
 	Team2:setVerticalCount(18)
 	Team2:setSpacing(0)
-	Team2:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	Team2:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	Team2:setDataSource("Clients")
 	self:addElement(Team2)
 	self.Team2 = Team2

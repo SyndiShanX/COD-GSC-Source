@@ -43,7 +43,7 @@ CoD.StartMenu_Options_PC_AudioOptions_SubOptionsNavigation.new = function(f1_arg
 		})
 	end)
 	PCStartMenuOptionsDescription:setAlpha(0)
-	PCStartMenuOptionsDescription.DescriptionTextBox.OptionName:setText(LocalizeToUpperString(0x93E719493E9E18F))
+	PCStartMenuOptionsDescription.DescriptionTextBox.OptionName:setText(LocalizeToUpperString(@"menu/new"))
 	self:addElement(PCStartMenuOptionsDescription)
 	self.PCStartMenuOptionsDescription = PCStartMenuOptionsDescription
 	PCStartMenuOptionsDescription:linkToElementModel(PCStartMenuOptionsList.ScrollList.ScrollView.View, nil, false, function(model)
@@ -52,7 +52,7 @@ CoD.StartMenu_Options_PC_AudioOptions_SubOptionsNavigation.new = function(f1_arg
 	PCStartMenuOptionsDescription:linkToElementModel(PCStartMenuOptionsList.ScrollList.ScrollView.View, "desc", true, function(model)
 		local f7_local0 = model:get()
 		if f7_local0 ~= nil then
-			PCStartMenuOptionsDescription.DescriptionTextBox.detailedDescription:setText(Engine[0xF9F1239CFD921FE](f7_local0))
+			PCStartMenuOptionsDescription.DescriptionTextBox.detailedDescription:setText(Engine[@"hash_4F9F1239CFD921FE"](f7_local0))
 		end
 	end)
 	PCStartMenuOptionsList.id = "PCStartMenuOptionsList"

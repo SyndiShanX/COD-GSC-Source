@@ -9,14 +9,14 @@ CoD.WheelTriangleIndicator.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local PointerImage = LUI.UIImage.new(0, 0, 62, 130, 0.5, 0.5, -12, 8)
 	PointerImage:setZRot(-90)
-	PointerImage:setImage(RegisterImage(0xE08357911B44221))
+	PointerImage:setImage(RegisterImage(@"uie_ui_hud_radial_menu_pointer"))
 	self:addElement(PointerImage)
 	self.PointerImage = PointerImage
 	local PointerImageAdd = LUI.UIImage.new(0, 0, 62, 130, 0.5, 0.5, -12, 8)
 	PointerImageAdd:setAlpha(0)
 	PointerImageAdd:setZRot(-90)
-	PointerImageAdd:setImage(RegisterImage(0xE08357911B44221))
-	PointerImageAdd:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	PointerImageAdd:setImage(RegisterImage(@"uie_ui_hud_radial_menu_pointer"))
+	PointerImageAdd:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(PointerImageAdd)
 	self.PointerImageAdd = PointerImageAdd
 	self:mergeStateConditions({
@@ -33,7 +33,7 @@ CoD.WheelTriangleIndicator.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	end)
 	local f1_local3 = self
 	local f1_local4 = self.subscribeToModel
-	local f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local4(f1_local3, f1_local5.LastInput, function(f4_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -91,7 +91,7 @@ CoD.WheelTriangleIndicator.__clipsPerState = {
 			f9_arg0:__resetProperties()
 			f9_arg0:setupElementClipCounter(2)
 			local f9_local0 = function(f10_arg0)
-				f9_arg0.PointerImage:beginAnimation(100, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f9_arg0.PointerImage:beginAnimation(100, Enum[@"luitween"][@"luitween_ease_in"])
 				f9_arg0.PointerImage:setAlpha(1)
 				f9_arg0.PointerImage:registerEventHandler("interrupted_keyframe", f9_arg0.clipInterrupted)
 				f9_arg0.PointerImage:registerEventHandler("transition_complete_keyframe", f9_arg0.clipFinished)
@@ -113,11 +113,11 @@ CoD.WheelTriangleIndicator.__clipsPerState = {
 			f11_arg0.clipFinished(f11_arg0.PointerImage)
 			local f11_local0 = function(f12_arg0)
 				local f12_local0 = function(f13_arg0)
-					f13_arg0:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f13_arg0:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 					f13_arg0:setAlpha(0)
 					f13_arg0:registerEventHandler("transition_complete_keyframe", f11_arg0.clipFinished)
 				end
-				f11_arg0.PointerImageAdd:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f11_arg0.PointerImageAdd:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 				f11_arg0.PointerImageAdd:setAlpha(0.5)
 				f11_arg0.PointerImageAdd:registerEventHandler("interrupted_keyframe", f11_arg0.clipInterrupted)
 				f11_arg0.PointerImageAdd:registerEventHandler("transition_complete_keyframe", f12_local0)

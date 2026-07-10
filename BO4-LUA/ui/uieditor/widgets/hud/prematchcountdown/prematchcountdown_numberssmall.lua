@@ -8,7 +8,7 @@ CoD.PrematchCountdown_NumbersSmall.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	self.soundSet = "none"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local blur = LUI.UIImage.new(0, 0, 6, 297, 0, 0, 4, 56)
-	blur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	blur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	blur:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(blur)
 	self.blur = blur
@@ -19,13 +19,13 @@ CoD.PrematchCountdown_NumbersSmall.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	self.bg = bg
 	local LED = LUI.UIImage.new(0, 0, -6, 310, 0, 0, -6, 66)
 	LED:setAlpha(0.02)
-	LED:setImage(RegisterImage(0xE8F240771F2A09))
+	LED:setImage(RegisterImage(@"uie_ui_hud_wz_hud_core_led_match_timer"))
 	self:addElement(LED)
 	self.LED = LED
 	local border = LUI.UIImage.new(0, 0, 0, 303, 0, 0, 0, 60)
 	border:setRGB(0, 0, 0)
-	border:setImage(RegisterImage(0xA3C76B80B69874D))
-	border:setMaterial(LUI.UIImage.GetCachedMaterial(0x44484DDFAF5C093))
+	border:setImage(RegisterImage(@"uie_ui_hud_wz_hud_core_chamfer_border"))
+	border:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_normal"))
 	border:setShaderVector(0, 0, 0, 0, 0)
 	border:setupNineSliceShader(18, 24)
 	self:addElement(border)
@@ -34,21 +34,21 @@ CoD.PrematchCountdown_NumbersSmall.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	Timer:setText("")
 	Timer:setTTF("0arame_mono_stencil")
 	Timer:setLetterSpacing(1)
-	Timer:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	Timer:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Timer:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	Timer:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(Timer)
 	self.Timer = Timer
 	local Message = LUI.UIText.new(0, 0, 14, 222, 0, 0, 17, 44)
 	Message:setRGB(0, 0.56, 1)
-	Message:setText(Engine[0xF9F1239CFD921FE](0x8E58CC95DB34427))
+	Message:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_18E58CC95DB34427"))
 	Message:setTTF("ttmussels_regular")
-	Message:setMaterial(LUI.UIImage.GetCachedMaterial(0x90D57B1E92D39D7))
+	Message:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_90D57B1E92D39D7"))
 	Message:setShaderVector(0, 1.02, 0, 0, 0)
 	Message:setShaderVector(1, -0.23, 0, 0, 0)
 	Message:setShaderVector(2, 0, 0, 1, 1)
 	Message:setLetterSpacing(2)
-	Message:setAlignment(Engine[0x7F8853DC3581AA4](Enum[0x7A5123B654282D2][0x58C8A85F2048829]))
-	Message:setAlignment(Engine[0x7F8853DC3581AA4](Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7]))
+	Message:setAlignment(Engine[@"hash_67F8853DC3581AA4"](Enum[@"luialignment"][@"lui_alignment_left"]))
+	Message:setAlignment(Engine[@"hash_67F8853DC3581AA4"](Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"]))
 	self:addElement(Message)
 	self.Message = Message
 	self:mergeStateConditions({

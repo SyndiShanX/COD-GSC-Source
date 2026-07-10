@@ -12,17 +12,17 @@ CoD.ReservesPreview.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	local TitlePC = nil
 	TitlePC = LUI.UIText.new(0.5, 0.5, -115.5, 197.5, 0.5, 0.5, -12, 12)
 	TitlePC:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
-	TitlePC:setText(Engine[0xF9F1239CFD921FE](0xFDCBDCC10C00DC7))
+	TitlePC:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_3FDCBDCC10C00DC7"))
 	TitlePC:setTTF("ttmussels_regular")
-	TitlePC:setMaterial(LUI.UIImage.GetCachedMaterial(0x71E049B161CD00A))
+	TitlePC:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_171E049B161CD00A"))
 	TitlePC:setLetterSpacing(1)
-	TitlePC:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
+	TitlePC:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
 	TitlePC:setBackingType(2)
 	TitlePC:setBackingColor(0, 0, 0)
 	TitlePC:setBackingAlpha(0.8)
 	TitlePC:setBackingXPadding(6)
 	TitlePC:setBackingYPadding(2)
-	TitlePC:setBackingMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	TitlePC:setBackingMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	TitlePC:setBackingShaderVector(0, 0, 0, 0, 0)
 	self:addElement(TitlePC)
 	self.TitlePC = TitlePC
@@ -40,7 +40,7 @@ CoD.ReservesPreview.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	end)
 	local f1_local3 = self
 	local f1_local4 = self.subscribeToModel
-	local f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local4(f1_local3, f1_local5.LastInput, function(f4_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -57,7 +57,7 @@ CoD.ReservesPreview.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 end
 CoD.ReservesPreview.__resetProperties = function(f5_arg0)
 	f5_arg0.TitlePC:completeAnimation()
-	f5_arg0.TitlePC:setText(Engine[0xF9F1239CFD921FE](0xFDCBDCC10C00DC7))
+	f5_arg0.TitlePC:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_3FDCBDCC10C00DC7"))
 end
 CoD.ReservesPreview.__clipsPerState = {
 	DefaultState = {
@@ -71,7 +71,7 @@ CoD.ReservesPreview.__clipsPerState = {
 			f7_arg0:__resetProperties()
 			f7_arg0:setupElementClipCounter(1)
 			f7_arg0.TitlePC:completeAnimation()
-			f7_arg0.TitlePC:setText(Engine[0xF9F1239CFD921FE](0xC1D55F5B0A38AE4))
+			f7_arg0.TitlePC:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_1C1D55F5B0A38AE4"))
 			f7_arg0.clipFinished(f7_arg0.TitlePC)
 		end,
 	},

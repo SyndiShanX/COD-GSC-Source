@@ -7,7 +7,7 @@ CoD.CallingCards_Asset_zombies_arm.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	self.id = "CallingCards_Asset_zombies_arm"
 	self.soundSet = "default"
 	local arm = LUI.UIImage.new(0, 0, -36, 356, 0, 0, -132, 132)
-	arm:setImage(RegisterImage(0x51843256F2F4C18))
+	arm:setImage(RegisterImage(@"uie_ui_icon_callingcard_zombie_arm"))
 	self:addElement(arm)
 	self.arm = arm
 	if PostLoadFunc then

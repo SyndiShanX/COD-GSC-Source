@@ -13,7 +13,7 @@ CoD.DeathCamPlayerKilledBy.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local SpawnSelectBackground = LUI.UIImage.new(0.5, 0.5, -450, 450, 0.5, 0.5, -21, 109)
 	SpawnSelectBackground:setAlpha(0)
-	SpawnSelectBackground:setMaterial(LUI.UIImage.GetCachedMaterial(0xE992BD5A540E2D))
+	SpawnSelectBackground:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_delta_normal"))
 	SpawnSelectBackground:setShaderVector(0, 0, 1, 0, 0)
 	SpawnSelectBackground:setShaderVector(1, 0.8, 0.8, 0, 0)
 	SpawnSelectBackground:setShaderVector(2, 0, 1, 0, 0)
@@ -47,7 +47,7 @@ CoD.DeathCamPlayerKilledBy.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 		{
 			stateName = "SpecSwitchSpawnSelect",
 			condition = function(menu, element, event)
-				return CoD.SpawnSelectionUtility.IsSpawnSelectActive(f1_arg1) and CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg1, "hudItems.killedByMOD", Enum[0x52177B239BFECC1][0x6EF8543A25EF511])
+				return CoD.SpawnSelectionUtility.IsSpawnSelectActive(f1_arg1) and CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg1, "hudItems.killedByMOD", Enum[@"meansofdeath_t"][@"mod_meta"])
 			end,
 		},
 		{
@@ -59,7 +59,7 @@ CoD.DeathCamPlayerKilledBy.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	})
 	local f1_local5 = self
 	local f1_local6 = self.subscribeToModel
-	local f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local6(f1_local5, f1_local7["hudItems.showSpawnSelect"], function(f5_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -71,7 +71,7 @@ CoD.DeathCamPlayerKilledBy.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	end, false)
 	f1_local5 = self
 	f1_local6 = self.subscribeToModel
-	f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local6(f1_local5, f1_local7["hudItems.killedByMOD"], function(f6_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

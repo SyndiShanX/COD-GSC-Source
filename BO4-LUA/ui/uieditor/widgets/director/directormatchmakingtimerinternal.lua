@@ -11,8 +11,8 @@ CoD.DirectorMatchmakingTimerInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	ElapsedTime:setRGB(0.92, 0.92, 0.92)
 	ElapsedTime:setTTF("ttmussels_demibold")
 	ElapsedTime:setLetterSpacing(6)
-	ElapsedTime:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	ElapsedTime:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	ElapsedTime:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	ElapsedTime:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	ElapsedTime:subscribeToGlobalModel(f1_arg1, "LobbyRoot", "publicLobby.matchmakingElapsedTime", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -25,8 +25,8 @@ CoD.DirectorMatchmakingTimerInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	EstimatedTime:setRGB(0.92, 0.92, 0.92)
 	EstimatedTime:setTTF("ttmussels_demibold")
 	EstimatedTime:setLetterSpacing(6)
-	EstimatedTime:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	EstimatedTime:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	EstimatedTime:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	EstimatedTime:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	EstimatedTime:subscribeToGlobalModel(f1_arg1, "LobbyRoot", "publicLobby.matchmakingEstimatedTime", function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then

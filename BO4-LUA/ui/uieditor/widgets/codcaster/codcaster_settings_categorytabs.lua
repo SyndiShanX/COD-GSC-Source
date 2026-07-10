@@ -12,8 +12,8 @@ CoD.CodCaster_Settings_CategoryTabs.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	self.onlyChildrenFocusable = true
 	self.anyChildUsesUpdateState = true
 	local LB = CoD.BumperButtonWithKeyMouseText.new(f1_arg0, f1_arg1, 0, 0, 597.5, 797.5, 0, 0, 0, 34)
-	LB.GamepadPrompt:setText(Engine[0xF9F1239CFD921FE](0xBDCD5292604F434))
-	LB.GamepadPrompt:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
+	LB.GamepadPrompt:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_5BDCD5292604F434"))
+	LB.GamepadPrompt:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
 	self:addElement(LB)
 	self.LB = LB
 	local f1_local2 = nil
@@ -23,7 +23,7 @@ CoD.CodCaster_Settings_CategoryTabs.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	categoryTabsListPC:setWidgetType(CoD.CACTabButtonInternal)
 	categoryTabsListPC:setHorizontalCount(5)
 	categoryTabsListPC:setSpacing(0)
-	categoryTabsListPC:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	categoryTabsListPC:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	categoryTabsListPC:setStaggeredIntroTime(50)
 	categoryTabsListPC:setDataSource("CodCasterSettingsTabs")
 	categoryTabsListPC:registerEventHandler("list_active_changed", function(element, event)
@@ -37,7 +37,7 @@ CoD.CodCaster_Settings_CategoryTabs.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	f1_local4 = LUI.UIElement.createFake()
 	self.categoryTabsList = f1_local4
 	local RB = CoD.BumperButtonWithKeyMouseText.new(f1_arg0, f1_arg1, 1, 1, 357.5, 557.5, 0, 0, 0, 34)
-	RB.GamepadPrompt:setText(Engine[0xF9F1239CFD921FE](0xBFED5292621DA9A))
+	RB.GamepadPrompt:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_5BFED5292621DA9A"))
 	self:addElement(RB)
 	self.RB = RB
 	categoryTabsListPC.id = "categoryTabsListPC"

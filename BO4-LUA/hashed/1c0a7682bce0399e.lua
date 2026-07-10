@@ -24,13 +24,13 @@ CoD.Prestige_LevelProgressBar.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	local topArrowL = LUI.UIImage.new(0, 0, 0, 18, 0, 0, -3, 19)
 	topArrowL:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
 	topArrowL:setZRot(90)
-	topArrowL:setImage(RegisterImage(0x50F3B2B4549D1B9))
+	topArrowL:setImage(RegisterImage(@"uie_ui_arrow_up"))
 	self:addElement(topArrowL)
 	self.topArrowL = topArrowL
 	local topArrowR = LUI.UIImage.new(1, 1, -18, 0, 0, 0, -3, 19)
 	topArrowR:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
 	topArrowR:setZRot(-90)
-	topArrowR:setImage(RegisterImage(0x50F3B2B4549D1B9))
+	topArrowR:setImage(RegisterImage(@"uie_ui_arrow_up"))
 	self:addElement(topArrowR)
 	self.topArrowR = topArrowR
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)

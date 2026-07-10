@@ -13,13 +13,13 @@ CoD.HubTopTab.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 	self.anyChildUsesUpdateState = true
 	local RB = CoD.BumperButtonWithKeyMouseText.new(f1_arg0, f1_arg1, 0.5, 0.5, 103, 303, 0, 0, 17, 51)
 	RB:setZoom(4)
-	RB.GamepadPrompt:setText(Engine[0xF9F1239CFD921FE](0xBFED5292621DA9A))
+	RB.GamepadPrompt:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_5BFED5292621DA9A"))
 	self:addElement(RB)
 	self.RB = RB
 	local LB = CoD.BumperButtonWithKeyMouseText.new(f1_arg0, f1_arg1, 0.5, 0.5, -303, -103, 0, 0, 17, 51)
 	LB:setZoom(4)
-	LB.GamepadPrompt:setText(Engine[0xF9F1239CFD921FE](0xBDCD5292604F434))
-	LB.GamepadPrompt:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
+	LB.GamepadPrompt:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_5BDCD5292604F434"))
+	LB.GamepadPrompt:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
 	self:addElement(LB)
 	self.LB = LB
 	local positions = LUI.GridLayout.new(f1_arg0, f1_arg1, false, 0, 0, -58, 0, nil, nil, true, true, false, false)
@@ -27,7 +27,7 @@ CoD.HubTopTab.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 	positions:setTopBottom(0, 0, 16, 46)
 	positions:setWidgetType(CoD.HubCharacterTabItem)
 	positions:setSpacing(-58)
-	positions:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	positions:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	positions:setHorizontalPips(CoD.CommonScalingListHorizontalPips)
 	positions:setFilter(function(f2_arg0)
 		return f2_arg0.isBMLocked:get() ~= true

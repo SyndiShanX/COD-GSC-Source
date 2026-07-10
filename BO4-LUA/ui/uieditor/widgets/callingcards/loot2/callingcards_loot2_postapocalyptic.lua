@@ -1,29 +1,29 @@
-CoD[0xA9B99FD1C2A5E41] = InheritFrom(LUI.UIElement)
-CoD[0xA9B99FD1C2A5E41].__defaultWidth = 960
-CoD[0xA9B99FD1C2A5E41].__defaultHeight = 240
-CoD[0xA9B99FD1C2A5E41].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+CoD[@"hash_6A9B99FD1C2A5E41"] = InheritFrom(LUI.UIElement)
+CoD[@"hash_6A9B99FD1C2A5E41"].__defaultWidth = 960
+CoD[@"hash_6A9B99FD1C2A5E41"].__defaultHeight = 240
+CoD[@"hash_6A9B99FD1C2A5E41"].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
 	local self = LUI.UIElement.new(f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
-	self:setClass(CoD[0xA9B99FD1C2A5E41])
+	self:setClass(CoD[@"hash_6A9B99FD1C2A5E41"])
 	self.id = "callingcards_loot2_postapocalyptic"
 	self.soundSet = "none"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local bg = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	bg:setImage(RegisterImage(0x575B3AC594FD081))
+	bg:setImage(RegisterImage(@"uie_ui_menu_callingcards_postapocalyptic_bg"))
 	self:addElement(bg)
 	self.bg = bg
 	local light = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	light:setImage(RegisterImage(0x58AEFA5255649BA))
+	light:setImage(RegisterImage(@"uie_ui_menu_callingcards_postapocalyptic_light"))
 	self:addElement(light)
 	self.light = light
 	local smoke = LUI.UIImage.new(0, 0, 150, 1110, 0, 0, 0, 240)
-	smoke:setImage(RegisterImage(0x7984A234B5F0AAF))
-	smoke:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	smoke:setImage(RegisterImage(@"uie_ui_menu_callingcards_postapocalyptic_smoke"))
+	smoke:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(smoke)
 	self.smoke = smoke
 	local smoke2 = LUI.UIImage.new(0, 0, -50, 910, 0, 0, 90, 240)
 	smoke2:setScale(-1, 1)
-	smoke2:setImage(RegisterImage(0x7984A234B5F0AAF))
-	smoke2:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	smoke2:setImage(RegisterImage(@"uie_ui_menu_callingcards_postapocalyptic_smoke"))
+	smoke2:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(smoke2)
 	self.smoke2 = smoke2
 	if PostLoadFunc then
@@ -31,7 +31,7 @@ CoD[0xA9B99FD1C2A5E41].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	end
 	return self
 end
-CoD[0xA9B99FD1C2A5E41].__resetProperties = function(f2_arg0)
+CoD[@"hash_6A9B99FD1C2A5E41"].__resetProperties = function(f2_arg0)
 	f2_arg0.light:completeAnimation()
 	f2_arg0.smoke:completeAnimation()
 	f2_arg0.smoke2:completeAnimation()
@@ -41,7 +41,7 @@ CoD[0xA9B99FD1C2A5E41].__resetProperties = function(f2_arg0)
 	f2_arg0.smoke2:setLeftRight(0, 0, -50, 910)
 	f2_arg0.smoke2:setAlpha(1)
 end
-CoD[0xA9B99FD1C2A5E41].__clipsPerState = {
+CoD[@"hash_6A9B99FD1C2A5E41"].__clipsPerState = {
 	DefaultState = {
 		DefaultClip = function(f3_arg0, f3_arg1)
 			f3_arg0:__resetProperties()
@@ -124,12 +124,12 @@ CoD[0xA9B99FD1C2A5E41].__clipsPerState = {
 			f3_local0(f3_arg0.light)
 			local f3_local1 = function(f19_arg0)
 				local f19_local0 = function(f20_arg0)
-					f20_arg0:beginAnimation(599, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f20_arg0:beginAnimation(599, Enum[@"luitween"][@"luitween_ease_both"])
 					f20_arg0:setLeftRight(0, 0, -50, 910)
 					f20_arg0:setAlpha(0)
 					f20_arg0:registerEventHandler("transition_complete_keyframe", f3_arg0.clipFinished)
 				end
-				f3_arg0.smoke:beginAnimation(1500, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f3_arg0.smoke:beginAnimation(1500, Enum[@"luitween"][@"luitween_ease_both"])
 				f3_arg0.smoke:setLeftRight(0, 0, -31.17, 928.83)
 				f3_arg0.smoke:setAlpha(1)
 				f3_arg0.smoke:registerEventHandler("interrupted_keyframe", f3_arg0.clipInterrupted)
@@ -141,12 +141,12 @@ CoD[0xA9B99FD1C2A5E41].__clipsPerState = {
 			f3_local1(f3_arg0.smoke)
 			local f3_local2 = function(f21_arg0)
 				local f21_local0 = function(f22_arg0)
-					f22_arg0:beginAnimation(1599, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f22_arg0:beginAnimation(1599, Enum[@"luitween"][@"luitween_ease_both"])
 					f22_arg0:setLeftRight(0, 0, 50, 1010)
 					f22_arg0:setAlpha(0)
 					f22_arg0:registerEventHandler("transition_complete_keyframe", f3_arg0.clipFinished)
 				end
-				f3_arg0.smoke2:beginAnimation(500, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f3_arg0.smoke2:beginAnimation(500, Enum[@"luitween"][@"luitween_ease_both"])
 				f3_arg0.smoke2:setLeftRight(0, 0, -36.65, 923.35)
 				f3_arg0.smoke2:setAlpha(0.8)
 				f3_arg0.smoke2:registerEventHandler("interrupted_keyframe", f3_arg0.clipInterrupted)

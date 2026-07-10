@@ -12,8 +12,8 @@ LUI.createMenu.self_revive_visuals_rush = function(f1_arg0, f1_arg1)
 	f1_local1:addElementToPendingUpdateStateList(self)
 	local countdownText = LUI.UIText.new(0, 0, 860, 1060, 0, 0, 586, 623)
 	countdownText:setTTF("skorzhen")
-	countdownText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	countdownText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	countdownText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	countdownText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	countdownText:linkToElementModel(self, "revive_time", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -26,15 +26,15 @@ LUI.createMenu.self_revive_visuals_rush = function(f1_arg0, f1_arg1)
 		{
 			stateName = "Hidden",
 			condition = function(menu, element, event)
-				local f3_local0 = Engine[0xDD333420C49E6D0](f1_arg0, Enum[0x7F032C2EF103A1A][0xDFB7B5BCEFCABF6])
+				local f3_local0 = Engine[@"isvisibilitybitset"](f1_arg0, Enum[@"uivisibilitybit"][@"bit_draw_spectator_messages"])
 				if not f3_local0 then
-					f3_local0 = Engine[0xDD333420C49E6D0](f1_arg0, Enum[0x7F032C2EF103A1A][0x198075B069840DC])
+					f3_local0 = Engine[@"isvisibilitybitset"](f1_arg0, Enum[@"uivisibilitybit"][@"bit_game_ended"])
 					if not f3_local0 then
-						f3_local0 = Engine[0xDD333420C49E6D0](f1_arg0, Enum[0x7F032C2EF103A1A][0x9BF57CE75A8755E])
+						f3_local0 = Engine[@"isvisibilitybitset"](f1_arg0, Enum[@"uivisibilitybit"][@"hash_29BF57CE75A8755E"])
 						if not f3_local0 then
-							f3_local0 = Engine[0xDD333420C49E6D0](f1_arg0, Enum[0x7F032C2EF103A1A][0x6FFF566DCC09BBD])
+							f3_local0 = Engine[@"isvisibilitybitset"](f1_arg0, Enum[@"uivisibilitybit"][@"bit_spectating_client"])
 							if not f3_local0 then
-								f3_local0 = Engine[0xDD333420C49E6D0](f1_arg0, Enum[0x7F032C2EF103A1A][0xC57360571B0917E])
+								f3_local0 = Engine[@"isvisibilitybitset"](f1_arg0, Enum[@"uivisibilitybit"][@"bit_team_spectator"])
 							end
 						end
 					end
@@ -45,62 +45,62 @@ LUI.createMenu.self_revive_visuals_rush = function(f1_arg0, f1_arg1)
 	})
 	local f1_local3 = self
 	local f1_local4 = self.subscribeToModel
-	local f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg0)
-	f1_local4(f1_local3, f1_local5["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xDFB7B5BCEFCABF6]], function(f4_arg0)
+	local f1_local5 = Engine[@"getmodelforcontroller"](f1_arg0)
+	f1_local4(f1_local3, f1_local5["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_draw_spectator_messages"]], function(f4_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_local1,
 			controller = f1_arg0,
 			modelValue = f4_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xDFB7B5BCEFCABF6],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_draw_spectator_messages"],
 		})
 	end, false)
 	f1_local3 = self
 	f1_local4 = self.subscribeToModel
-	f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg0)
-	f1_local4(f1_local3, f1_local5["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x198075B069840DC]], function(f5_arg0)
+	f1_local5 = Engine[@"getmodelforcontroller"](f1_arg0)
+	f1_local4(f1_local3, f1_local5["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_game_ended"]], function(f5_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_local1,
 			controller = f1_arg0,
 			modelValue = f5_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x198075B069840DC],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_game_ended"],
 		})
 	end, false)
 	f1_local3 = self
 	f1_local4 = self.subscribeToModel
-	f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg0)
-	f1_local4(f1_local3, f1_local5["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x9BF57CE75A8755E]], function(f6_arg0)
+	f1_local5 = Engine[@"getmodelforcontroller"](f1_arg0)
+	f1_local4(f1_local3, f1_local5["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"hash_29BF57CE75A8755E"]], function(f6_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_local1,
 			controller = f1_arg0,
 			modelValue = f6_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x9BF57CE75A8755E],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"hash_29BF57CE75A8755E"],
 		})
 	end, false)
 	f1_local3 = self
 	f1_local4 = self.subscribeToModel
-	f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg0)
-	f1_local4(f1_local3, f1_local5["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x6FFF566DCC09BBD]], function(f7_arg0)
+	f1_local5 = Engine[@"getmodelforcontroller"](f1_arg0)
+	f1_local4(f1_local3, f1_local5["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_spectating_client"]], function(f7_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_local1,
 			controller = f1_arg0,
 			modelValue = f7_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x6FFF566DCC09BBD],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_spectating_client"],
 		})
 	end, false)
 	f1_local3 = self
 	f1_local4 = self.subscribeToModel
-	f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg0)
-	f1_local4(f1_local3, f1_local5["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xC57360571B0917E]], function(f8_arg0)
+	f1_local5 = Engine[@"getmodelforcontroller"](f1_arg0)
+	f1_local4(f1_local3, f1_local5["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_team_spectator"]], function(f8_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_local1,
 			controller = f1_arg0,
 			modelValue = f8_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xC57360571B0917E],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_team_spectator"],
 		})
 	end, false)
 	self:processEvent({

@@ -8,12 +8,12 @@ CoD.TabbedScoreboardInfoStripe.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Stripe = LUI.UIImage.new(0, 0, -2, 368, 0, 0, 5, 19)
-	Stripe:setImage(RegisterImage(0x5B21048C4745A5D))
+	Stripe:setImage(RegisterImage(@"hash_65B21048C4745A5D"))
 	self:addElement(Stripe)
 	self.Stripe = Stripe
 	local StripeAdd = LUI.UIImage.new(0, 0, -7, 373, 0, 0, 0, 24)
-	StripeAdd:setImage(RegisterImage(0x70DB561BA588063))
-	StripeAdd:setMaterial(LUI.UIImage.GetCachedMaterial(0xF755127C95CF5B6))
+	StripeAdd:setImage(RegisterImage(@"hash_270DB561BA588063"))
+	StripeAdd:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_F755127C95CF5B6"))
 	StripeAdd:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(StripeAdd)
 	self.StripeAdd = StripeAdd
@@ -28,7 +28,7 @@ CoD.TabbedScoreboardInfoStripe.__resetProperties = function(f2_arg0)
 	f2_arg0.Stripe:completeAnimation()
 	f2_arg0.StripeAdd:completeAnimation()
 	f2_arg0.Stripe:setLeftRight(0, 0, -2, 368)
-	f2_arg0.Stripe:setMaterial(LUI.UIImage.GetCachedMaterial(0x6B34AA3F39208EF))
+	f2_arg0.Stripe:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_normal"))
 	f2_arg0.StripeAdd:setLeftRight(0, 0, -7, 373)
 end
 CoD.TabbedScoreboardInfoStripe.__clipsPerState = {
@@ -44,7 +44,7 @@ CoD.TabbedScoreboardInfoStripe.__clipsPerState = {
 			end
 			f3_arg0.Stripe:completeAnimation()
 			f3_arg0.Stripe:setLeftRight(0, 0, -2, 368)
-			f3_arg0.Stripe:setMaterial(LUI.UIImage.GetCachedMaterial(0x6B34AA3F39208EF))
+			f3_arg0.Stripe:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_normal"))
 			f3_local0(f3_arg0.Stripe)
 			local f3_local1 = function(f5_arg0)
 				f3_arg0.StripeAdd:beginAnimation(1000)

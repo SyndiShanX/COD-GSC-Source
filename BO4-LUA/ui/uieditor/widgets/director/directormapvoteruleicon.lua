@@ -8,15 +8,15 @@ CoD.DirectorMapVoteRuleIcon.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local officialIcon = LUI.UIImage.new(0.5, 0.5, -75, 75, 0.5, 0.5, -75, 75)
-	officialIcon:setImage(RegisterImage(0xA92DF43D53DFABF))
+	officialIcon:setImage(RegisterImage(@"uie_menu_mp_frontend_icon_medal"))
 	self:addElement(officialIcon)
 	self.officialIcon = officialIcon
 	local Custom = LUI.UIText.new(0, 0, -25, 175, 0, 0, 22, 263)
 	Custom:setAlpha(0)
-	Custom:setText(Engine[0xF9F1239CFD921FE](0xB53C6BDCB1662EB))
+	Custom:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_B53C6BDCB1662EB"))
 	Custom:setTTF("default")
-	Custom:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	Custom:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Custom:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	Custom:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(Custom)
 	self.Custom = Custom
 	self:mergeStateConditions({
@@ -35,7 +35,7 @@ CoD.DirectorMapVoteRuleIcon.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	})
 	local f1_local3 = self
 	local f1_local4 = self.subscribeToModel
-	local f1_local5 = Engine[0x8DF2E5447F384B9]()
+	local f1_local5 = Engine[@"getglobalmodel"]()
 	f1_local4(f1_local3, f1_local5["lobbyRoot.lobbyNav"], function(f4_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -47,7 +47,7 @@ CoD.DirectorMapVoteRuleIcon.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	end, false)
 	f1_local3 = self
 	f1_local4 = self.subscribeToModel
-	f1_local5 = Engine[0x8DF2E5447F384B9]()
+	f1_local5 = Engine[@"getglobalmodel"]()
 	f1_local4(f1_local3, f1_local5["MapVote.isOfficialVariant"], function(f5_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

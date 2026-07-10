@@ -11,35 +11,35 @@ CoD.Codcaster_timer_nl.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	GameTimerShadow:setRGB(0, 0, 0)
 	GameTimerShadow:setTTF("ttmussels_demibold")
 	GameTimerShadow:setLineSpacing(-1)
-	GameTimerShadow:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	GameTimerShadow:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	GameTimerShadow:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	GameTimerShadow:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	GameTimerShadow:setupGameTimer()
-	GameTimerShadow:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	GameTimerShadow:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	self:addElement(GameTimerShadow)
 	self.GameTimerShadow = GameTimerShadow
 	local GameTimer = LUI.UIText.new(0, 0, 0, 100, 0, 0, -4, 30)
 	GameTimer:setTTF("ttmussels_demibold")
-	GameTimer:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	GameTimer:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	GameTimer:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	GameTimer:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	GameTimer:setupGameTimer()
-	GameTimer:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	GameTimer:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	self:addElement(GameTimer)
 	self.GameTimer = GameTimer
 	local NotimerShadow = LUI.UIText.new(0, 0, 0.5, 100.5, 0, 0, 5, 21)
 	NotimerShadow:setRGB(0, 0, 0)
-	NotimerShadow:setText(Engine[0xF9F1239CFD921FE](0x8E8304D25283DA6))
+	NotimerShadow:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_18E8304D25283DA6"))
 	NotimerShadow:setTTF("ttmussels_demibold")
 	NotimerShadow:setLetterSpacing(-1)
-	NotimerShadow:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	NotimerShadow:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	NotimerShadow:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	NotimerShadow:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	self:addElement(NotimerShadow)
 	self.NotimerShadow = NotimerShadow
 	local Notimer = LUI.UIText.new(0, 0, 0, 100, 0, 0, 4.5, 20.5)
-	Notimer:setText(Engine[0xF9F1239CFD921FE](0x8E8304D25283DA6))
+	Notimer:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_18E8304D25283DA6"))
 	Notimer:setTTF("ttmussels_demibold")
 	Notimer:setLetterSpacing(-1)
-	Notimer:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	Notimer:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	Notimer:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	Notimer:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	self:addElement(Notimer)
 	self.Notimer = Notimer
 	self:mergeStateConditions({
@@ -64,7 +64,7 @@ CoD.Codcaster_timer_nl.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	})
 	local f1_local5 = self
 	local f1_local6 = self.subscribeToModel
-	local f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local6(f1_local5, f1_local7["gameScore.gameTimeEnd"], function(f5_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -76,7 +76,7 @@ CoD.Codcaster_timer_nl.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	end, false)
 	f1_local5 = self
 	f1_local6 = self.subscribeToModel
-	f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local6(f1_local5, f1_local7["gameScore.gameTimeLow"], function(f6_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -88,7 +88,7 @@ CoD.Codcaster_timer_nl.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	end, false)
 	f1_local5 = self
 	f1_local6 = self.subscribeToModel
-	f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local6(f1_local5, f1_local7["gameScore.gameTimeLimit"], function(f7_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

@@ -19,7 +19,7 @@ CoD.ChallengesGlobalProgressBar.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self.DotTiledBacking = DotTiledBacking
 	local ProgressBar = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	ProgressBar:setRGB(1, 0.36, 0)
-	ProgressBar:setMaterial(LUI.UIImage.GetCachedMaterial(0x910274CA3518744))
+	ProgressBar:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe"))
 	ProgressBar:setShaderVector(1, 0, 0, 0, 0)
 	ProgressBar:setShaderVector(2, 1, 0, 0, 0)
 	ProgressBar:setShaderVector(3, 0, 0, 0, 0)
@@ -35,7 +35,7 @@ CoD.ChallengesGlobalProgressBar.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	local ProgressFraction = LUI.UIText.new(1, 1, -43, -4, 0, 0, 4.5, 22.5)
 	ProgressFraction:setTTF("default")
 	ProgressFraction:setLetterSpacing(2)
-	ProgressFraction:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
+	ProgressFraction:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
 	ProgressFraction:linkToElementModel(self, "statFractionText", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then

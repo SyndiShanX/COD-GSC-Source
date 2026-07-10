@@ -8,22 +8,22 @@ CoD.TabbedScoreboardLayoutRecord.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Record = LUI.UIImage.new(0, 0, 0, 84, 0, 0, 4.5, 20.5)
-	Record:setImage(RegisterImage(0xAD863F5B76345DD))
+	Record:setImage(RegisterImage(@"uie_ui_menu_mp_scoreboard_map_record"))
 	self:addElement(Record)
 	self.Record = Record
 	local RecordAdd = LUI.UIImage.new(0, 0, 0, 84, 0, 0, 4.5, 20.5)
-	RecordAdd:setImage(RegisterImage(0xAD863F5B76345DD))
-	RecordAdd:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	RecordAdd:setImage(RegisterImage(@"uie_ui_menu_mp_scoreboard_map_record"))
+	RecordAdd:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	RecordAdd:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(RecordAdd)
 	self.RecordAdd = RecordAdd
 	local RecordDot = LUI.UIImage.new(0, 0, 86.5, 110.5, 0, 0, 0, 24)
-	RecordDot:setImage(RegisterImage(0xC66A732DA072CFD))
+	RecordDot:setImage(RegisterImage(@"uie_ui_hud_selectspawn_layout_reddot"))
 	self:addElement(RecordDot)
 	self.RecordDot = RecordDot
 	local RecordDotAdd = LUI.UIImage.new(0, 0, 86.5, 110.5, 0, 0, 0, 24)
-	RecordDotAdd:setImage(RegisterImage(0xC66A732DA072CFD))
-	RecordDotAdd:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	RecordDotAdd:setImage(RegisterImage(@"uie_ui_hud_selectspawn_layout_reddot"))
+	RecordDotAdd:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	RecordDotAdd:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(RecordDotAdd)
 	self.RecordDotAdd = RecordDotAdd
@@ -35,9 +35,9 @@ end
 CoD.TabbedScoreboardLayoutRecord.__resetProperties = function(f2_arg0)
 	f2_arg0.RecordAdd:completeAnimation()
 	f2_arg0.RecordDotAdd:completeAnimation()
-	f2_arg0.RecordAdd:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	f2_arg0.RecordAdd:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	f2_arg0.RecordAdd:setShaderVector(0, 1, 0, 0, 0)
-	f2_arg0.RecordDotAdd:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	f2_arg0.RecordDotAdd:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	f2_arg0.RecordDotAdd:setShaderVector(0, 1, 0, 0, 0)
 end
 CoD.TabbedScoreboardLayoutRecord.__clipsPerState = {
@@ -57,7 +57,7 @@ CoD.TabbedScoreboardLayoutRecord.__clipsPerState = {
 				f3_arg0.RecordAdd:registerEventHandler("transition_complete_keyframe", f4_local0)
 			end
 			f3_arg0.RecordAdd:completeAnimation()
-			f3_arg0.RecordAdd:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+			f3_arg0.RecordAdd:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 			f3_arg0.RecordAdd:setShaderVector(0, 0, 0, 0, 0)
 			f3_local0(f3_arg0.RecordAdd)
 			local f3_local1 = function(f6_arg0)
@@ -102,7 +102,7 @@ CoD.TabbedScoreboardLayoutRecord.__clipsPerState = {
 				f3_arg0.RecordDotAdd:registerEventHandler("transition_complete_keyframe", f6_local0)
 			end
 			f3_arg0.RecordDotAdd:completeAnimation()
-			f3_arg0.RecordDotAdd:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+			f3_arg0.RecordDotAdd:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 			f3_arg0.RecordDotAdd:setShaderVector(0, 0, 0, 0, 0)
 			f3_local1(f3_arg0.RecordDotAdd)
 			f3_arg0.nextClip = "DefaultClip"

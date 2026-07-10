@@ -16,8 +16,8 @@ CoD.CustomGames_CatgeoryTabs.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	self:addElement(TabBacking)
 	self.TabBacking = TabBacking
 	local LB = CoD.BumperButtonWithKeyMouseText.new(f1_arg0, f1_arg1, 0, 0, 0, 200, 0, 0, 53, 87)
-	LB.GamepadPrompt:setText(Engine[0xF9F1239CFD921FE](0xBDCD5292604F434))
-	LB.GamepadPrompt:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
+	LB.GamepadPrompt:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_5BDCD5292604F434"))
+	LB.GamepadPrompt:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
 	self:addElement(LB)
 	self.LB = LB
 	local f1_local3 = nil
@@ -30,7 +30,7 @@ CoD.CustomGames_CatgeoryTabs.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	categoryTabsListPC:setWidgetType(CoD.CACTabButtonInternal)
 	categoryTabsListPC:setHorizontalCount(5)
 	categoryTabsListPC:setSpacing(0)
-	categoryTabsListPC:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	categoryTabsListPC:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	categoryTabsListPC:setStaggeredIntroTime(50)
 	categoryTabsListPC:setDataSource("GameSettingsTabs")
 	categoryTabsListPC:registerEventHandler("list_active_changed", function(element, event)
@@ -46,7 +46,7 @@ CoD.CustomGames_CatgeoryTabs.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	self:addElement(categoryTabsListPC)
 	self.categoryTabsListPC = categoryTabsListPC
 	local RB = CoD.BumperButtonWithKeyMouseText.new(f1_arg0, f1_arg1, 0, 0, 1720, 1920, 0, 0, 53, 87)
-	RB.GamepadPrompt:setText(Engine[0xF9F1239CFD921FE](0xBFED5292621DA9A))
+	RB.GamepadPrompt:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_5BFED5292621DA9A"))
 	self:addElement(RB)
 	self.RB = RB
 	f1_local3.id = "categoryTabsList"

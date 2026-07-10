@@ -12,7 +12,7 @@ CoD.PC_Korea_Event_DirectorButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local BlurBg = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	BlurBg:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	BlurBg:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	BlurBg:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(BlurBg)
 	self.BlurBg = BlurBg
@@ -33,27 +33,27 @@ CoD.PC_Korea_Event_DirectorButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	self:addElement(DotTiledBacking)
 	self.DotTiledBacking = DotTiledBacking
 	local HeaderImage = LUI.UIImage.new(0.5, 0.5, -225, 225, 0, 0, 0, 59)
-	HeaderImage:setImage(RegisterImage(0x86BE3E7554B3AA9))
+	HeaderImage:setImage(RegisterImage(@"uie_pc_igrevent_titleweekprogression_image"))
 	self:addElement(HeaderImage)
 	self.HeaderImage = HeaderImage
 	local SpecialEvent = LUI.UIText.new(0.5, 0.5, -219.5, 219.5, 0, 0, 21, 39)
 	SpecialEvent:setRGB(ColorSet.T8__OCHRE.r, ColorSet.T8__OCHRE.g, ColorSet.T8__OCHRE.b)
 	SpecialEvent:setText(LocalizeToUpperString(0x0))
 	SpecialEvent:setTTF("ttmussels_regular")
-	SpecialEvent:setMaterial(LUI.UIImage.GetCachedMaterial(0x71E049B161CD00A))
+	SpecialEvent:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_171E049B161CD00A"))
 	SpecialEvent:setLetterSpacing(6)
-	SpecialEvent:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	SpecialEvent:setAlignment(Enum[0x7A5123B654282D2][0x6ED4298C93DC5ED])
+	SpecialEvent:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	SpecialEvent:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
 	self:addElement(SpecialEvent)
 	self.SpecialEvent = SpecialEvent
 	local EventName = LUI.UIText.new(0.5, 0.5, -220.5, 220.5, 1, 1, -55, -19)
 	EventName:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
 	EventName:setText(LocalizeToUpperString(0x0))
 	EventName:setTTF("ttmussels_demibold")
-	EventName:setMaterial(LUI.UIImage.GetCachedMaterial(0x71E049B161CD00A))
+	EventName:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_171E049B161CD00A"))
 	EventName:setLetterSpacing(3)
-	EventName:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	EventName:setAlignment(Enum[0x7A5123B654282D2][0x6ED4298C93DC5ED])
+	EventName:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	EventName:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
 	self:addElement(EventName)
 	self.EventName = EventName
 	local CommonButtonOutline = CoD.CommonButtonOutline.new(f1_arg0, f1_arg1, 0, 1, 0, 0, 0, 1, 1, -1)

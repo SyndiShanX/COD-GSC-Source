@@ -10,8 +10,8 @@ CoD.MeritBoardItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	ItemLabel:setText("")
 	ItemLabel:setTTF("default")
 	ItemLabel:setLetterSpacing(2)
-	ItemLabel:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
-	ItemLabel:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	ItemLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
+	ItemLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(ItemLabel)
 	self.ItemLabel = ItemLabel
 	local ItemValue = LUI.UIText.new(0, 0, 370, 520, 0.5, 0.5, -18, 18)
@@ -19,8 +19,8 @@ CoD.MeritBoardItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	ItemValue:setText("")
 	ItemValue:setTTF("default")
 	ItemValue:setLetterSpacing(2)
-	ItemValue:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	ItemValue:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	ItemValue:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	ItemValue:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(ItemValue)
 	self.ItemValue = ItemValue
 	if PostLoadFunc then

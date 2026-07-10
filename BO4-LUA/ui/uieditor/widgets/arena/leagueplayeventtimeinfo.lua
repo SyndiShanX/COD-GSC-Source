@@ -13,8 +13,8 @@ CoD.LeaguePlayEventTimeInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	EventName:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
 	EventName:setTTF("ttmussels_demibold")
 	EventName:setLetterSpacing(6)
-	EventName:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	EventName:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	EventName:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	EventName:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	EventName:subscribeToGlobalModel(f1_arg1, "Arena", "arenaEventName", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -25,20 +25,20 @@ CoD.LeaguePlayEventTimeInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.EventName = EventName
 	local Description = LUI.UIText.new(0, 0, 192, 787, 0, 0, 110.5, 131.5)
 	Description:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
-	Description:setText(Engine[0xF9F1239CFD921FE](0x754C899A05E0C7D))
+	Description:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_2754C899A05E0C7D"))
 	Description:setTTF("ttmussels_regular")
 	Description:setLetterSpacing(2)
 	Description:setLineSpacing(1)
-	Description:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Description:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Description:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Description:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(Description)
 	self.Description = Description
 	local LeaguePlayIcon = LUI.UIImage.new(0, 0, -58, 222, 0, 0, -48, 232)
-	LeaguePlayIcon:setImage(RegisterImage(0x7AD0704DD46F27F))
+	LeaguePlayIcon:setImage(RegisterImage(@"uie_ui_icon_gamemode_wl_league"))
 	self:addElement(LeaguePlayIcon)
 	self.LeaguePlayIcon = LeaguePlayIcon
 	local ArenaLeagueEventTimer = CoD.ArenaLeagueEventTimer.new(f1_arg0, f1_arg1, 0, 0, 192, 787, 0, 0, 15, 35)
-	ArenaLeagueEventTimer.event:setText(LocalizeToUpperString(0xFB561925D7F1E7E))
+	ArenaLeagueEventTimer.event:setText(LocalizeToUpperString(@"hash_6FB561925D7F1E7E"))
 	self:addElement(ArenaLeagueEventTimer)
 	self.ArenaLeagueEventTimer = ArenaLeagueEventTimer
 	self:mergeStateConditions({
@@ -51,13 +51,13 @@ CoD.LeaguePlayEventTimeInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 		{
 			stateName = "Scrims",
 			condition = function(menu, element, event)
-				return CoD.ArenaUtility.CurrentArenaEventTypeEquals(self, Enum[0xC0EA92D04BC003B][0x185075D2D3D8497])
+				return CoD.ArenaUtility.CurrentArenaEventTypeEquals(self, Enum[@"hash_6C0EA92D04BC003B"][@"hash_4185075D2D3D8497"])
 			end,
 		},
 	})
 	local f1_local5 = self
 	local f1_local6 = self.subscribeToModel
-	local f1_local7 = Engine[0x8DF2E5447F384B9]()
+	local f1_local7 = Engine[@"getglobalmodel"]()
 	f1_local6(f1_local5, f1_local7["lobbyPlaylist.name"], function(f5_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -69,7 +69,7 @@ CoD.LeaguePlayEventTimeInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	end, false)
 	f1_local5 = self
 	f1_local6 = self.subscribeToModel
-	f1_local7 = Engine[0x8DF2E5447F384B9]()
+	f1_local7 = Engine[@"getglobalmodel"]()
 	f1_local6(f1_local5, f1_local7["lobbyRoot.lobbyNav"], function(f6_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -94,9 +94,9 @@ CoD.LeaguePlayEventTimeInfo.__resetProperties = function(f7_arg0)
 	f7_arg0.ArenaLeagueEventTimer:setTopBottom(0, 0, 15, 35)
 	f7_arg0.ArenaLeagueEventTimer:setAlpha(1)
 	f7_arg0.ArenaLeagueEventTimer:setScale(1, 1)
-	f7_arg0.ArenaLeagueEventTimer.event:setText(LocalizeToUpperString(0xFB561925D7F1E7E))
+	f7_arg0.ArenaLeagueEventTimer.event:setText(LocalizeToUpperString(@"hash_6FB561925D7F1E7E"))
 	f7_arg0.Description:setAlpha(1)
-	f7_arg0.Description:setText(Engine[0xF9F1239CFD921FE](0x754C899A05E0C7D))
+	f7_arg0.Description:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_2754C899A05E0C7D"))
 	f7_arg0.LeaguePlayIcon:setLeftRight(0, 0, -58, 222)
 	f7_arg0.LeaguePlayIcon:setTopBottom(0, 0, -48, 232)
 	f7_arg0.LeaguePlayIcon:setAlpha(1)
@@ -111,7 +111,7 @@ CoD.LeaguePlayEventTimeInfo.__clipsPerState = {
 			f8_arg0:setupElementClipCounter(1)
 			f8_arg0.ArenaLeagueEventTimer:completeAnimation()
 			f8_arg0.ArenaLeagueEventTimer.event:completeAnimation()
-			f8_arg0.ArenaLeagueEventTimer.event:setText(LocalizeToUpperString(0x4567DF5804DC2CC))
+			f8_arg0.ArenaLeagueEventTimer.event:setText(LocalizeToUpperString(@"hash_24567DF5804DC2CC"))
 			f8_arg0.clipFinished(f8_arg0.ArenaLeagueEventTimer)
 		end,
 	},
@@ -137,7 +137,7 @@ CoD.LeaguePlayEventTimeInfo.__clipsPerState = {
 			f9_arg0.ArenaLeagueEventTimer:setLeftRight(0, 0, 140, 540)
 			f9_arg0.ArenaLeagueEventTimer:setTopBottom(0, 0, 72, 93)
 			f9_arg0.ArenaLeagueEventTimer:setScale(1, 1)
-			f9_arg0.ArenaLeagueEventTimer.event:setText(LocalizeToUpperString(0x69234CC3988500E))
+			f9_arg0.ArenaLeagueEventTimer.event:setText(LocalizeToUpperString(@"hash_269234CC3988500E"))
 			f9_arg0.clipFinished(f9_arg0.ArenaLeagueEventTimer)
 		end,
 	},
@@ -146,7 +146,7 @@ CoD.LeaguePlayEventTimeInfo.__clipsPerState = {
 			f10_arg0:__resetProperties()
 			f10_arg0:setupElementClipCounter(2)
 			f10_arg0.Description:completeAnimation()
-			f10_arg0.Description:setText(Engine[0xF9F1239CFD921FE](0xC545762E42A3DBE))
+			f10_arg0.Description:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_C545762E42A3DBE"))
 			f10_arg0.clipFinished(f10_arg0.Description)
 			f10_arg0.ArenaLeagueEventTimer:completeAnimation()
 			f10_arg0.ArenaLeagueEventTimer:setAlpha(1)

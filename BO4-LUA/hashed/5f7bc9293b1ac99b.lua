@@ -59,8 +59,8 @@ CoD.ContractTall.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 	self:addElement(ContractRarityHeaderTile)
 	self.ContractRarityHeaderTile = ContractRarityHeaderTile
 	local ContractCost = CoD.ContractItemCost.new(f1_arg0, f1_arg1, 0.5, 0.5, -92.5, 92.5, 1, 1, -31.5, -10.5)
-	ContractCost.Free:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	ContractCost.ContractCost:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	ContractCost.Free:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	ContractCost.ContractCost:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	ContractCost:linkToElementModel(self, nil, false, function(model)
 		ContractCost:setModel(model, f1_arg1)
 	end)
@@ -108,18 +108,18 @@ CoD.ContractTall.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 	TotalTierCount:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	TotalTierCount:setAlpha(0)
 	TotalTierCount:setTTF("ttmussels_regular")
-	TotalTierCount:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
-	TotalTierCount:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	TotalTierCount:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
+	TotalTierCount:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	TotalTierCount:linkToElementModel(self, "totalRewardCount", true, function(model)
 		local f11_local0 = model:get()
 		if f11_local0 ~= nil then
-			TotalTierCount:setText(LocalizeIntoString(0x36DDA38F04CEAF, f11_local0))
+			TotalTierCount:setText(LocalizeIntoString(@"mpui/x_tiers", f11_local0))
 		end
 	end)
 	self:addElement(TotalTierCount)
 	self.TotalTierCount = TotalTierCount
 	local ActiveBanner = CoD.ContractActiveBanner.new(f1_arg0, f1_arg1, 0.5, 0.5, -75, 75, 1, 1, -33.5, -8.5)
-	ActiveBanner.ActiveTitle:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	ActiveBanner.ActiveTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	ActiveBanner:linkToElementModel(self, nil, false, function(model)
 		ActiveBanner:setModel(model, f1_arg1)
 	end)
@@ -147,8 +147,8 @@ CoD.ContractTall.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 	self.ContractTallSeasonalOverlay = ContractTallSeasonalOverlay
 	local TabBottomLine = LUI.UIImage.new(0, 1, 0, 0, 1, 1, -96, -92)
 	TabBottomLine:setAlpha(0.09)
-	TabBottomLine:setImage(RegisterImage(0x5526CF3733E24C4))
-	TabBottomLine:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	TabBottomLine:setImage(RegisterImage(@"uie_ui_menu_common_tab_line_bottom"))
+	TabBottomLine:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(TabBottomLine)
 	self.TabBottomLine = TabBottomLine
 	local TierBoost = CoD.ItemShopTierBoost.new(f1_arg0, f1_arg1, 0, 0, 36.5, 247.5, 0, 0, 376, 402)
@@ -162,7 +162,7 @@ CoD.ContractTall.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 	})
 	local PurchasedBanner = TierBoost
 	local Darken = TierBoost.subscribeToModel
-	local CompeletedBanner = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local CompeletedBanner = Engine[@"getmodelforcontroller"](f1_arg1)
 	Darken(PurchasedBanner, CompeletedBanner["LootStreamProgress.personalTierBoost"], function(f16_arg0)
 		f1_arg0:updateElementState(TierBoost, {
 			name = "model_validation",
@@ -184,7 +184,7 @@ CoD.ContractTall.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 	self.Darken = Darken
 	PurchasedBanner = CoD.ContractPurchasedBanner.new(f1_arg0, f1_arg1, 0.5, 0.5, -75, 75, 1, 1, -33.5, -8.5)
 	PurchasedBanner:setAlpha(0)
-	PurchasedBanner.PurchasedTitle:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	PurchasedBanner.PurchasedTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	self:addElement(PurchasedBanner)
 	self.PurchasedBanner = PurchasedBanner
 	CompeletedBanner = CoD.ContractCompleteBanner.new(f1_arg0, f1_arg1, 0.5, 0.5, -75, 75, 1, 1, -33.5, -8.5)
@@ -197,7 +197,7 @@ CoD.ContractTall.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 		},
 	})
 	CompeletedBanner:setAlpha(0)
-	CompeletedBanner.CompeletedBanner:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	CompeletedBanner.CompeletedBanner:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	self:addElement(CompeletedBanner)
 	self.CompeletedBanner = CompeletedBanner
 	local ThemeName = CoD.ContractTallDescContainer.new(f1_arg0, f1_arg1, 0, 0, 9, 227, 0, 0, 416, 466)

@@ -12,18 +12,18 @@ CoD.GameEndScoreSubtitle.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	SubtitleText:setText("")
 	SubtitleText:setTTF("0arame_mono_stencil")
 	SubtitleText:setLetterSpacing(4)
-	SubtitleText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	SubtitleText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	SubtitleText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	SubtitleText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(SubtitleText)
 	self.SubtitleText = SubtitleText
 	local SwitchingSidesText = LUI.UIText.new(0.5, 0.5, -460, 460, 0, 0, 2.5, 26.5)
 	SwitchingSidesText:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
 	SwitchingSidesText:setAlpha(0)
-	SwitchingSidesText:setText(Engine[0xF9F1239CFD921FE](0x9034D05CE32DB88))
+	SwitchingSidesText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_29034D05CE32DB88"))
 	SwitchingSidesText:setTTF("0arame_mono_stencil")
 	SwitchingSidesText:setLetterSpacing(4)
-	SwitchingSidesText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	SwitchingSidesText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	SwitchingSidesText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	SwitchingSidesText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(SwitchingSidesText)
 	self.SwitchingSidesText = SwitchingSidesText
 	self:mergeStateConditions({
@@ -93,14 +93,14 @@ CoD.GameEndScoreSubtitle.__clipsPerState = {
 				local f9_local0 = function(f10_arg0)
 					local f10_local0 = function(f11_arg0)
 						local f11_local0 = function(f12_arg0)
-							f12_arg0:beginAnimation(399, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+							f12_arg0:beginAnimation(399, Enum[@"luitween"][@"luitween_ease_both"])
 							f12_arg0:setAlpha(0.8)
 							f12_arg0:registerEventHandler("transition_complete_keyframe", f7_arg0.clipFinished)
 						end
 						f11_arg0:beginAnimation(199)
 						f11_arg0:registerEventHandler("transition_complete_keyframe", f11_local0)
 					end
-					f10_arg0:beginAnimation(199, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f10_arg0:beginAnimation(199, Enum[@"luitween"][@"luitween_ease_in"])
 					f10_arg0:setAlpha(1)
 					f10_arg0:registerEventHandler("transition_complete_keyframe", f10_local0)
 				end
@@ -120,14 +120,14 @@ CoD.GameEndScoreSubtitle.__clipsPerState = {
 			local f13_local0 = function(f14_arg0)
 				local f14_local0 = function(f15_arg0)
 					local f15_local0 = function(f16_arg0)
-						f16_arg0:beginAnimation(400, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+						f16_arg0:beginAnimation(400, Enum[@"luitween"][@"luitween_ease_both"])
 						f16_arg0:setAlpha(0.8)
 						f16_arg0:registerEventHandler("transition_complete_keyframe", f13_arg0.clipFinished)
 					end
 					f15_arg0:beginAnimation(200)
 					f15_arg0:registerEventHandler("transition_complete_keyframe", f15_local0)
 				end
-				f13_arg0.SubtitleText:beginAnimation(200, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f13_arg0.SubtitleText:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_in"])
 				f13_arg0.SubtitleText:setAlpha(1)
 				f13_arg0.SubtitleText:registerEventHandler("interrupted_keyframe", f13_arg0.clipInterrupted)
 				f13_arg0.SubtitleText:registerEventHandler("transition_complete_keyframe", f14_local0)

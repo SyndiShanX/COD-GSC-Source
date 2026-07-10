@@ -20,7 +20,7 @@ CoD.StartMenu_Options_Frame_Controls.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	OptionGroups:setWidgetType(CoD.StartMenu_Options_SettingSlider_Wrapper)
 	OptionGroups:setVerticalCount(18)
 	OptionGroups:setSpacing(10)
-	OptionGroups:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	OptionGroups:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	OptionGroups:setDataSource("PlayerSettingsControlsList")
 	OptionGroups:registerEventHandler("list_item_gain_focus", function(element, event)
 		local f2_local0 = nil
@@ -40,10 +40,10 @@ CoD.StartMenu_Options_Frame_Controls.new = function(f1_arg0, f1_arg1, f1_arg2, f
 		elseif element.super.gainFocus then
 			f3_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f3_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(OptionGroups, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(OptionGroups, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if HasListAction(element, controller) then
 			ProcessListAction(self, element, controller, menu)
 			return true
@@ -51,7 +51,7 @@ CoD.StartMenu_Options_Frame_Controls.new = function(f1_arg0, f1_arg1, f1_arg2, f
 		end
 	end, function(element, menu, controller)
 		if HasListAction(element, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		else
 			return false
@@ -71,11 +71,11 @@ CoD.StartMenu_Options_Frame_Controls.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	ControllerLayout:setScale(0.9, 0.9)
 	self:addElement(ControllerLayout)
 	self.ControllerLayout = ControllerLayout
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], nil, function(element, menu, controller, model)
 		CoD.OptionsUtility.ResetPlayerSettingsGroupListToDefault(controller, self.OptionGroups)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x5D33EEAEB171341, Enum[0xBEBDBAEEB3ECCCA][0x2919C98A7A845F0] | 750 << Enum[0xBEBDBAEEB3ECCCA][0x76ADD225D738C93], nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"menu/all_defaults", Enum[@"luibuttonpromptflags"][@"hash_72919C98A7A845F0"] | 750 << Enum[@"luibuttonpromptflags"][@"hash_176ADD225D738C93"], nil)
 		return true
 	end, false)
 	OptionGroups.id = "OptionGroups"

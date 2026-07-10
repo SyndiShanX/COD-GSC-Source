@@ -19,7 +19,7 @@ CoD.PositionDraft_ViewTeams_Slots.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	local box_line = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	box_line:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	box_line:setAlpha(0.5)
-	box_line:setMaterial(LUI.UIImage.GetCachedMaterial(0xE7BDCB879A5176D))
+	box_line:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_3E7BDCB879A5176D"))
 	box_line:setShaderVector(0, 0, 0, 0, 0)
 	box_line:setShaderVector(1, 0, 0, 0, 0)
 	box_line:setupNineSliceShader(1, 1)

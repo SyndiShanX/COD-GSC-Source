@@ -9,7 +9,7 @@ CoD.WZTeamScoreboard_TeammateNumber.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local IDBacker = LUI.UIImage.new(0.5, 0.5, -17, 17, 0.5, 0.5, -17.5, 16.5)
-	IDBacker:setMaterial(LUI.UIImage.GetCachedMaterial(0xE125638BF94665F))
+	IDBacker:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_feather_edges"))
 	IDBacker:setShaderVector(0, 0.05, 0.05, 0.05, 0.05)
 	IDBacker.__Color = function(f2_arg0)
 		local f2_local0 = f2_arg0:get()
@@ -32,8 +32,8 @@ CoD.WZTeamScoreboard_TeammateNumber.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	self.IDBacker = IDBacker
 	local Tint = LUI.UIImage.new(0, 1, 10, -10, 0, 1, 10, -10)
 	Tint:setAlpha(0.5)
-	Tint:setImage(RegisterImage(0x4B6FFA90272070E))
-	Tint:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	Tint:setImage(RegisterImage(@"uie_ui_menu_store_repeat_dot_pattern"))
+	Tint:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	Tint:setShaderVector(0, 0, 0, 0, 0)
 	Tint:setupNineSliceShader(24, 24)
 	self:addElement(Tint)
@@ -41,9 +41,9 @@ CoD.WZTeamScoreboard_TeammateNumber.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	local IDNumber2 = LUI.UIText.new(0.5, 0.5, -26.5, 25.5, 0.5, 0.5, -13, 14)
 	IDNumber2:setRGB(0.92, 0.92, 0.92)
 	IDNumber2:setTTF("ttmussels_demibold")
-	IDNumber2:setMaterial(LUI.UIImage.GetCachedMaterial(0x336C1AE82B1520A))
-	IDNumber2:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	IDNumber2:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	IDNumber2:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_3336C1AE82B1520A"))
+	IDNumber2:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	IDNumber2:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	IDNumber2:linkToElementModel(self, "teammateIndex", true, function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
@@ -59,13 +59,13 @@ CoD.WZTeamScoreboard_TeammateNumber.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	IDBacker:linkToElementModel(self, "team", true, IDBacker.__Color_FullPath)
 	local f1_local5 = IDBacker
 	local f1_local6 = IDBacker.subscribeToModel
-	local f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local6(f1_local5, f1_local7["profile.colorblindMode"], IDBacker.__Color_FullPath)
 	self:mergeStateConditions({
 		{
 			stateName = "DeadDisconnected",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualToEnumEitherValue(element, f1_arg1, "inGamePlayerStatus", Enum[0x4A07561A78E340B][0xC233F1FA9F35C02], Enum[0x4A07561A78E340B][0x58F9A363F8FBB07])
+				return CoD.ModelUtility.IsSelfModelValueEqualToEnumEitherValue(element, f1_arg1, "inGamePlayerStatus", Enum[@"hash_14A07561A78E340B"][@"hash_3C233F1FA9F35C02"], Enum[@"hash_14A07561A78E340B"][@"hash_358F9A363F8FBB07"])
 			end,
 		},
 	})

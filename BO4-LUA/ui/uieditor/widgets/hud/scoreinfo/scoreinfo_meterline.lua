@@ -9,7 +9,7 @@ CoD.ScoreInfo_MeterLine.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Line = LUI.UIImage.new(0, 0, 0, 76, 0, 0, 0, 34)
 	Line:setRGB(1, 0.76, 0)
-	Line:setMaterial(LUI.UIImage.GetCachedMaterial(0xE8F55203998700A))
+	Line:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_feather_blend"))
 	self:addElement(Line)
 	self.Line = Line
 	self:mergeStateConditions({

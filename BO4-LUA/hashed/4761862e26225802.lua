@@ -51,12 +51,12 @@ LUI.createMenu.PurchaseBribeStack = function(f1_arg0, f1_arg1)
 	FullscreenPopupTemplate.ButtonList:setWidgetType(CoD.PurchaseReservesItemButton)
 	FullscreenPopupTemplate.ButtonList:setDataSource("PurchaseBribeStackButtons")
 	FullscreenPopupTemplate.ErrorSubtitle:setText("")
-	FullscreenPopupTemplate.WorkingTitle:setText(LocalizeToUpperString(0x9D00A7D3D969F6E))
-	FullscreenPopupTemplate.DoneTitle:setText(LocalizeToUpperString(0x83048BBBD98FC6A))
+	FullscreenPopupTemplate.WorkingTitle:setText(LocalizeToUpperString(@"menu/purchase_processing"))
+	FullscreenPopupTemplate.DoneTitle:setText(LocalizeToUpperString(@"menu/purchase_complete"))
 	FullscreenPopupTemplate:linkToElementModel(self, "desc", true, function(model)
 		local f6_local0 = model:get()
 		if f6_local0 ~= nil then
-			FullscreenPopupTemplate.Subtitle:setText(Engine[0xF9F1239CFD921FE](CoD.BlackMarketUtility.CheckForBribePopupDescOverride(self:getModel(), f6_local0)))
+			FullscreenPopupTemplate.Subtitle:setText(Engine[@"hash_4F9F1239CFD921FE"](CoD.BlackMarketUtility.CheckForBribePopupDescOverride(self:getModel(), f6_local0)))
 		end
 	end)
 	self:addElement(FullscreenPopupTemplate)
@@ -81,8 +81,8 @@ LUI.createMenu.PurchaseBribeStack = function(f1_arg0, f1_arg1)
 	local Linker = LUI.UIImage.new(0.5, 0.5, -330, -326, 0.5, 0.5, -192, 205)
 	Linker:setRGB(ColorSet.T8__BEIGE__HEADER.r, ColorSet.T8__BEIGE__HEADER.g, ColorSet.T8__BEIGE__HEADER.b)
 	Linker:setAlpha(0.35)
-	Linker:setImage(RegisterImage(0xC49B0C8991A541F))
-	Linker:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	Linker:setImage(RegisterImage(@"hash_C49B0C8991A541F"))
+	Linker:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	Linker:setShaderVector(0, 0, 0, 0, 0)
 	Linker:setupNineSliceShader(4, 8)
 	self:addElement(Linker)
@@ -109,13 +109,13 @@ LUI.createMenu.PurchaseBribeStack = function(f1_arg0, f1_arg1)
 	local ItemName = LUI.UIText.new(0.5, 0.5, -914.5, -370.5, 0.5, 0.5, 138, 178)
 	ItemName:setRGB(0.5, 0.85, 1)
 	ItemName:setTTF("ttmussels_demibold")
-	ItemName:setMaterial(LUI.UIImage.GetCachedMaterial(0x93F361CC41C94AF))
+	ItemName:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_593F361CC41C94AF"))
 	ItemName:setShaderVector(0, 0.8, 0, 0, 0)
 	ItemName:setShaderVector(1, 0, 0, 0, 0)
 	ItemName:setShaderVector(2, 0, 0.7, 1, 0.2)
 	ItemName:setLetterSpacing(6)
-	ItemName:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	ItemName:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	ItemName:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	ItemName:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	ItemName:linkToElementModel(self, "name", true, function(model)
 		local f11_local0 = model:get()
 		if f11_local0 ~= nil then
@@ -127,12 +127,12 @@ LUI.createMenu.PurchaseBribeStack = function(f1_arg0, f1_arg1)
 	local BracketLeft = LUI.UIImage.new(0.5, 0.5, -926, -902, 0.5, 0.5, 121, 193)
 	BracketLeft:setRGB(0.79, 0.94, 1)
 	BracketLeft:setYRot(180)
-	BracketLeft:setImage(RegisterImage(0xE1C1C55D18A0A1B))
+	BracketLeft:setImage(RegisterImage(@"uie_ui_menu_common_bracket01"))
 	self:addElement(BracketLeft)
 	self.BracketLeft = BracketLeft
 	local BracketRight = LUI.UIImage.new(0.5, 0.5, -383, -359, 0.5, 0.5, 121, 193)
 	BracketRight:setRGB(0.79, 0.94, 1)
-	BracketRight:setImage(RegisterImage(0xE1C1C55D18A0A1B))
+	BracketRight:setImage(RegisterImage(@"uie_ui_menu_common_bracket01"))
 	self:addElement(BracketRight)
 	self.BracketRight = BracketRight
 	local Price = CoD.ContractItemCostMultiCurrency.new(f1_local1, f1_arg0, 0, 0, 225.5, 410.5, 0, 0, 733, 754)
@@ -147,10 +147,10 @@ LUI.createMenu.PurchaseBribeStack = function(f1_arg0, f1_arg1)
 	self.FullscreenPopupTemplate:linkToElementModel(self, "name", true, function(model)
 		local f14_local0 = model:get()
 		if f14_local0 ~= nil then
-			FullscreenPopupTemplate.Title:setText(ToUpper(LocalizeIntoString(0xF3A65B13FE76C91, f14_local0)))
+			FullscreenPopupTemplate.Title:setText(ToUpper(LocalizeIntoString(@"menu/acquire_item", f14_local0)))
 		end
 	end)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		if not IsElementInState(self.FullscreenPopupTemplate, "WorkingState") and not IsElementInState(self.FullscreenPopupTemplate, "ErrorState") then
 			CoD.BlackMarketUtility.SendItemShopViewEvent(controller, menu, "")
 			GoBack(self, controller)
@@ -159,13 +159,13 @@ LUI.createMenu.PurchaseBribeStack = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if not IsElementInState(self.FullscreenPopupTemplate, "WorkingState") and not IsElementInState(self.FullscreenPopupTemplate, "ErrorState") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if IsElementInState(self.FullscreenPopupTemplate, "ErrorState") then
 			CoD.BlackMarketUtility.SendItemShopViewEvent(controller, menu, "")
 			GoBack(self, controller)
@@ -174,7 +174,7 @@ LUI.createMenu.PurchaseBribeStack = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if IsElementInState(self.FullscreenPopupTemplate, "ErrorState") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x70A9FDC87CD3D48, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/back", nil, nil)
 			return true
 		else
 			return false
@@ -214,9 +214,9 @@ LUI.createMenu.PurchaseBribeStack = function(f1_arg0, f1_arg1)
 	local f1_local13 = self
 	f1_local13 = FullscreenPopupTemplate
 	if IsPC() and IsElementInState(self.FullscreenPopupTemplate, "ErrorState") then
-		CoD.PCUtility.LinkPCSmallCloseButtonToInput(f1_local1, f1_arg0, f1_local13, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.PCUtility.LinkPCSmallCloseButtonToInput(f1_local1, f1_arg0, f1_local13, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	elseif IsPC() then
-		CoD.PCUtility.LinkPCSmallCloseButtonToInput(f1_local1, f1_arg0, f1_local13, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A])
+		CoD.PCUtility.LinkPCSmallCloseButtonToInput(f1_local1, f1_arg0, f1_local13, Enum[@"luibutton"][@"lui_key_xbb_pscircle"])
 	end
 	return self
 end

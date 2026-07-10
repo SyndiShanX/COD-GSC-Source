@@ -16,7 +16,7 @@ CoD.PC_BattlenetFriend_Online.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	local IMG_Background = LUI.UIImage.new(0.02, 0.99, 0, 0, 0, 1, 0, 0)
 	IMG_Background:setRGB(0.07, 0.07, 0.07)
 	IMG_Background:setAlpha(0)
-	IMG_Background:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	IMG_Background:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(IMG_Background)
 	self.IMG_Background = IMG_Background
 	local ProgramImage = LUI.UIImage.new(0.11, 0.11, -0.5, 39.5, 0.5, 0.5, -22, 18)
@@ -32,8 +32,8 @@ CoD.PC_BattlenetFriend_Online.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	TXTPlayerStatus:setRGB(0.59, 0.59, 0.59)
 	TXTPlayerStatus:setTTF("notosans_regular")
 	TXTPlayerStatus:setLetterSpacing(1)
-	TXTPlayerStatus:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	TXTPlayerStatus:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	TXTPlayerStatus:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	TXTPlayerStatus:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	TXTPlayerStatus:linkToElementModel(self, "presenceString", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -45,14 +45,14 @@ CoD.PC_BattlenetFriend_Online.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	local TXTPending = LUI.UIText.new(0.23, 0.23, 0, 298, 0.49, 0.49, 0, 15)
 	TXTPending:setRGB(0.59, 0.59, 0.59)
 	TXTPending:setAlpha(0)
-	TXTPending:setText(Engine[0xF9F1239CFD921FE](0x3DD0EE1DB9F6A1C))
+	TXTPending:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_33DD0EE1DB9F6A1C"))
 	TXTPending:setTTF("notosans_regular")
-	TXTPending:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	TXTPending:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	TXTPending:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	TXTPending:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(TXTPending)
 	self.TXTPending = TXTPending
 	local IMG_PlayerStatusIcon = LUI.UIImage.new(0.16, 0.16, 0, 40, 0.44, 0.44, 0, 40)
-	IMG_PlayerStatusIcon:setImage(RegisterImage(0x9B492EAA2070F06))
+	IMG_PlayerStatusIcon:setImage(RegisterImage(@"uie_sliderbar_handle_alt"))
 	IMG_PlayerStatusIcon:linkToElementModel(self, "battlenetPresence", true, function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
@@ -107,15 +107,15 @@ CoD.PC_BattlenetFriend_Online.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	end)
 	self:appendEventHandler("input_source_changed", function(f11_arg0, f11_arg1)
 		f11_arg1.menu = f11_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f11_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+		CoD.Menu.UpdateButtonShownState(f11_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 	end)
 	local f1_local9 = self
 	local f1_local10 = self.subscribeToModel
-	local f1_local11 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local11 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local10(f1_local9, f1_local11.LastInput, function(f12_arg0, f12_arg1)
-		CoD.Menu.UpdateButtonShownState(f12_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+		CoD.Menu.UpdateButtonShownState(f12_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], nil, function(element, menu, controller, model)
 		if IsGamepad(controller) then
 			SetSelectedFriendXUID(self, element, controller)
 			OpenOverlay(self, "Social_PlayerDetailsPopup", controller, nil)
@@ -124,7 +124,7 @@ CoD.PC_BattlenetFriend_Online.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 		end
 	end, function(element, menu, controller)
 		if IsGamepad(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0xE0254269ED8FFD3, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"hash_1E0254269ED8FFD3", nil, nil)
 			return true
 		else
 			return false

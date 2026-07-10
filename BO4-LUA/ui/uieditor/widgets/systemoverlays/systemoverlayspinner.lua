@@ -50,11 +50,11 @@ CoD.SystemOverlaySpinner.__clipsPerState = {
 						f6_arg0:beginAnimation(370)
 						f6_arg0:registerEventHandler("transition_complete_keyframe", f6_local0)
 					end
-					f5_arg0:beginAnimation(100, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f5_arg0:beginAnimation(100, Enum[@"luitween"][@"luitween_ease_in"])
 					f5_arg0:setAlpha(0.7)
 					f5_arg0:registerEventHandler("transition_complete_keyframe", f5_local0)
 				end
-				f3_arg0.Image1:beginAnimation(80, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f3_arg0.Image1:beginAnimation(80, Enum[@"luitween"][@"luitween_ease_in"])
 				f3_arg0.Image1:setAlpha(0.07)
 				f3_arg0.Image1:registerEventHandler("interrupted_keyframe", f3_arg0.clipInterrupted)
 				f3_arg0.Image1:registerEventHandler("transition_complete_keyframe", f4_local0)
@@ -73,7 +73,7 @@ CoD.SystemOverlaySpinner.__clipsPerState = {
 						f10_arg0:beginAnimation(220)
 						f10_arg0:registerEventHandler("transition_complete_keyframe", f10_local0)
 					end
-					f9_arg0:beginAnimation(110, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f9_arg0:beginAnimation(110, Enum[@"luitween"][@"luitween_ease_in"])
 					f9_arg0:setAlpha(0.5)
 					f9_arg0:registerEventHandler("transition_complete_keyframe", f9_local0)
 				end
@@ -95,7 +95,7 @@ CoD.SystemOverlaySpinner.__clipsPerState = {
 						f14_arg0:beginAnimation(130)
 						f14_arg0:registerEventHandler("transition_complete_keyframe", f14_local0)
 					end
-					f13_arg0:beginAnimation(89, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f13_arg0:beginAnimation(89, Enum[@"luitween"][@"luitween_ease_in"])
 					f13_arg0:setAlpha(0.25)
 					f13_arg0:registerEventHandler("transition_complete_keyframe", f13_local0)
 				end

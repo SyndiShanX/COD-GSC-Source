@@ -57,7 +57,7 @@ LUI.createMenu.Loading_WZ = function(f1_arg0, f1_arg1)
 	Team1PlayerList:setWidgetType(CoD.LoadingScreenTalkerWidgetCPZM)
 	Team1PlayerList:setVerticalCount(4)
 	Team1PlayerList:setSpacing(8)
-	Team1PlayerList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	Team1PlayerList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	Team1PlayerList:setDataSource("LoadingScreenPlayerListTeam1")
 	self:addElement(Team1PlayerList)
 	self.Team1PlayerList = Team1PlayerList

@@ -13,7 +13,7 @@ CoD.CombatTrainingSkirmishNames.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self.NamesBacking = NamesBacking
 	local DiffSkirmishName = LUI.UIText.new(0, 0, 5, 234, 0, 0, 6, 24)
 	DiffSkirmishName:setTTF("ttmussels_regular")
-	DiffSkirmishName:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	DiffSkirmishName:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	DiffSkirmishName:linkToElementModel(self, "difficulty", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -25,7 +25,7 @@ CoD.CombatTrainingSkirmishNames.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	local GametypeName = LUI.UIText.new(0, 0, 5, 234, 0, 0, 34, 58)
 	GametypeName:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	GametypeName:setTTF("ttmussels_regular")
-	GametypeName:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	GametypeName:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	GametypeName:linkToElementModel(self, "gametype", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -37,7 +37,7 @@ CoD.CombatTrainingSkirmishNames.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	local MapName = LUI.UIText.new(0, 0, 5, 234, 0, 0, 60, 93)
 	MapName:setRGB(ColorSet.T8__OCHRE.r, ColorSet.T8__OCHRE.g, ColorSet.T8__OCHRE.b)
 	MapName:setTTF("ttmussels_regular")
-	MapName:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	MapName:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	MapName:linkToElementModel(self, "map", true, function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then

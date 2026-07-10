@@ -20,16 +20,16 @@ CoD.CodCasterSettingsSideBarDisplaySettings.new = function(f1_arg0, f1_arg1, f1_
 		elseif element.super.gainFocus then
 			f2_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbb_pscircle"])
 		return f2_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(OptionsListPC, f1_arg1, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], "ESCAPE", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(OptionsListPC, f1_arg1, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], "ESCAPE", function(element, menu, controller, model)
 		CoD.CodCasterUtility.SetFocusToFirstSelectableItemInButtonList(self, self.OptionsListPC)
 		SetControllerModelValue(controller, "customGamesEdit", false)
 		SetFocusToElement(self, "OptionCategoryListPC", controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, "ESCAPE")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, "ESCAPE")
 		return true
 	end, false)
 	self:addElement(OptionsListPC)
@@ -41,17 +41,17 @@ CoD.CodCasterSettingsSideBarDisplaySettings.new = function(f1_arg0, f1_arg1, f1_
 	OptionCategoryListPC:setWidgetType(CoD.CustomGames_OptionCategoryButton)
 	OptionCategoryListPC:setVerticalCount(5)
 	OptionCategoryListPC:setSpacing(8)
-	OptionCategoryListPC:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	OptionCategoryListPC:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	OptionCategoryListPC:setDataSource("CodCasterDisplaySettingsCategories")
 	OptionCategoryListPC:appendEventHandler("input_source_changed", function(f5_arg0, f5_arg1)
 		f5_arg1.menu = f5_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f5_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f5_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	local f1_local4 = OptionCategoryListPC
 	local f1_local5 = OptionCategoryListPC.subscribeToModel
-	local f1_local6 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local6 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local5(f1_local4, f1_local6.LastInput, function(f6_arg0, f6_arg1)
-		CoD.Menu.UpdateButtonShownState(f6_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f6_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	OptionCategoryListPC:registerEventHandler("gain_focus", function(element, event)
 		local f7_local0 = nil
@@ -60,10 +60,10 @@ CoD.CodCasterSettingsSideBarDisplaySettings.new = function(f1_arg0, f1_arg1, f1_
 		elseif element.super.gainFocus then
 			f7_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f7_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(OptionCategoryListPC, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(OptionCategoryListPC, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if not IsMouse(controller) then
 			SetControllerModelValue(controller, "customGamesEdit", true)
 			SetElementState(self, element, controller, "Selected")
@@ -73,7 +73,7 @@ CoD.CodCasterSettingsSideBarDisplaySettings.new = function(f1_arg0, f1_arg1, f1_
 		end
 	end, function(element, menu, controller)
 		if not IsMouse(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false
@@ -115,7 +115,7 @@ CoD.CodCasterSettingsSideBarDisplaySettings.new = function(f1_arg0, f1_arg1, f1_
 	})
 	local f1_local7 = self
 	f1_local6 = self.subscribeToModel
-	local f1_local8 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local8 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local6(f1_local7, f1_local8.customGamesEdit, function(f14_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -125,7 +125,7 @@ CoD.CodCasterSettingsSideBarDisplaySettings.new = function(f1_arg0, f1_arg1, f1_
 			modelName = "customGamesEdit",
 		})
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA], "Y", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_rtrig"], "Y", function(element, menu, controller, model)
 		if not IsRepeatButtonPress(model) then
 			ToggleControllerModelValueNumber(controller, "CodCaster.showSettingsSideBar")
 			CoD.CodCasterUtility.SetFocusToFirstSelectableItemInButtonList(self, self.OptionsList)
@@ -140,7 +140,7 @@ CoD.CodCasterSettingsSideBarDisplaySettings.new = function(f1_arg0, f1_arg1, f1_
 		end
 	end, function(element, menu, controller)
 		if not IsRepeatButtonPress(nil) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA], 0x70A9FDC87CD3D48, nil, "Y")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_rtrig"], @"menu/back", nil, "Y")
 			return true
 		else
 			return false

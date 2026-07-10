@@ -17,7 +17,7 @@ CoD.featureOverlay_Layout.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	self.background = background
 	local blackbkg = LUI.UIImage.new(0, 1, 0, 0, 0, 0, 222, 920)
 	blackbkg:setAlpha(0.8)
-	blackbkg:setImage(RegisterImage(0x4E7CC5D035796F1))
+	blackbkg:setImage(RegisterImage(@"uie_ui_icon_master_overlays_bkg"))
 	self:addElement(blackbkg)
 	self.blackbkg = blackbkg
 	local vlayout = CoD.featureOverlay_frameVLayout.new(f1_arg0, f1_arg1, 0, 0, 0, 1920, 0, 0, 222, 972)

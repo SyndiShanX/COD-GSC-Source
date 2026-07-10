@@ -11,11 +11,11 @@ CoD.KIllcam_Title.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 	self:addElement(DotTiledBacking)
 	self.DotTiledBacking = DotTiledBacking
 	local HeaderLeftEnd = LUI.UIImage.new(0, 0, 0, 100, 0, 0, 0, 100)
-	HeaderLeftEnd:setImage(RegisterImage(0xA7A5D8FCB0D5B8D))
+	HeaderLeftEnd:setImage(RegisterImage(@"uie_ui_hud_tech_design_left"))
 	self:addElement(HeaderLeftEnd)
 	self.HeaderLeftEnd = HeaderLeftEnd
 	local HeaderRightEnd = LUI.UIImage.new(1, 1, -100, 0, 0, 0, 0, 100)
-	HeaderRightEnd:setImage(RegisterImage(0x18F9C87AA0E9086))
+	HeaderRightEnd:setImage(RegisterImage(@"uie_ui_hud_tech_design_right"))
 	self:addElement(HeaderRightEnd)
 	self.HeaderRightEnd = HeaderRightEnd
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)

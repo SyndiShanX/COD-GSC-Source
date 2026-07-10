@@ -7,7 +7,7 @@ CoD.FinalKillcamPlayerInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self.id = "FinalKillcamPlayerInfo"
 	self.soundSet = "default"
 	local blurbackplate = LUI.UIImage.new(-0.05, 1.05, 0, 0, 0, 0, 0, 155)
-	blurbackplate:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	blurbackplate:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	blurbackplate:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(blurbackplate)
 	self.blurbackplate = blurbackplate

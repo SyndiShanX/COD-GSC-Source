@@ -16,17 +16,17 @@ CoD.ZMDailyCallingsTierSkipNotification.new = function(f1_arg0, f1_arg1, f1_arg2
 	self:addElement(AmbientGlowAnim)
 	self.AmbientGlowAnim = AmbientGlowAnim
 	local TierSkipIcon = LUI.UIImage.new(0, 0, 0, 55, 0.5, 0.5, -27.5, 27.5)
-	TierSkipIcon:setImage(RegisterImage(0x3162CFF8BC56A18))
+	TierSkipIcon:setImage(RegisterImage(@"ui_icon_blackmarket_tier_token"))
 	self:addElement(TierSkipIcon)
 	self.TierSkipIcon = TierSkipIcon
 	local Header = LUI.UIText.new(0, 0, 57, 190, 0.5, 0.5, -7, 7)
 	Header:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
-	Header:setText(LocalizeToUpperString(0x59AB2B00A337CBE))
+	Header:setText(LocalizeToUpperString(@"hash_659AB2B00A337CBE"))
 	Header:setTTF("dinnext_regular")
-	Header:setMaterial(LUI.UIImage.GetCachedMaterial(0x71E049B161CD00A))
+	Header:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_171E049B161CD00A"))
 	Header:setLetterSpacing(3)
-	Header:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Header:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	Header:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Header:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	self:addElement(Header)
 	self.Header = Header
 	self:mergeStateConditions({
@@ -45,7 +45,7 @@ CoD.ZMDailyCallingsTierSkipNotification.new = function(f1_arg0, f1_arg1, f1_arg2
 	})
 	local f1_local4 = self
 	local f1_local5 = self.subscribeToModel
-	local f1_local6 = Engine[0x8DF2E5447F384B9]()
+	local f1_local6 = Engine[@"getglobalmodel"]()
 	f1_local5(f1_local4, f1_local6["lobbyRoot.lobbyNav"], function(f4_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

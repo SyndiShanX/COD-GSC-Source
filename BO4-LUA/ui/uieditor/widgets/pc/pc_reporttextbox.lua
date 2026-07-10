@@ -20,18 +20,18 @@ CoD.PC_ReportTextBox.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	ReportText:setText("")
 	ReportText:setTTF("notosans_regular")
 	ReportText:setLetterSpacing(1)
-	ReportText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	ReportText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	ReportText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	ReportText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(ReportText)
 	self.ReportText = ReportText
 	local TextBox = LUI.UIText.new(0, 1, 15, -15, 0, 0, 10, 31)
 	TextBox:setRGB(0.76, 0.76, 0.76)
 	TextBox:setAlpha(0)
-	TextBox:setText(Engine[0xF9F1239CFD921FE](0x93E719493E9E18F))
+	TextBox:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	TextBox:setTTF("notosans_regular")
 	TextBox:setLetterSpacing(1)
-	TextBox:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	TextBox:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	TextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	TextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(TextBox)
 	self.TextBox = TextBox
 	local PCHighlightBorder = CoD.PC_HighlightBorder.new(f1_arg0, f1_arg1, 0, 1, 0, 0, 0, 1, 0, 0)
@@ -47,7 +47,7 @@ CoD.PC_ReportTextBox.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	})
 	local f1_local5 = self
 	local f1_local6 = self.subscribeToModel
-	local f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local6(f1_local5, f1_local7.ReportPlayerText, function(f3_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

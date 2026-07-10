@@ -36,14 +36,14 @@ LUI.createMenu.Prestige_PlayerLevel = function(f1_arg0, f1_arg1)
 	self.BlackBacking = BlackBacking
 	local TiledPlusGrid = LUI.UIImage.new(0, 1.07, -135, -135, 0, 1, 0, 0)
 	TiledPlusGrid:setAlpha(0.05)
-	TiledPlusGrid:setImage(RegisterImage(0x6E37BAE22631294))
-	TiledPlusGrid:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	TiledPlusGrid:setImage(RegisterImage(@"uie_ui_hud_vehicle_hellstorm_repeat_plusgrid"))
+	TiledPlusGrid:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	TiledPlusGrid:setShaderVector(0, 0, 0, 0, 0)
 	TiledPlusGrid:setupNineSliceShader(220, 220)
 	self:addElement(TiledPlusGrid)
 	self.TiledPlusGrid = TiledPlusGrid
 	local GenericMenuFrame = CoD.GenericMenuFrame.new(f1_local1, f1_arg0, 0, 1, 0, 0, 0, 1, 0, 0)
-	GenericMenuFrame.CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(CoD.PrestigeUtility.GetPrestigeMenuTitleString(0x2EB4043431740D3)))
+	GenericMenuFrame.CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(CoD.PrestigeUtility.GetPrestigeMenuTitleString(@"menu/player_level")))
 	GenericMenuFrame.CommonHeader.subtitle.subtitle:setText("")
 	self:addElement(GenericMenuFrame)
 	self.GenericMenuFrame = GenericMenuFrame
@@ -74,10 +74,10 @@ LUI.createMenu.Prestige_PlayerLevel = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f3_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f3_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(PrestigeButton, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(PrestigeButton, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if IsAtXPCap(controller) and not IsMaxPrestigeLevel(controller) then
 			OpenEnterPrestigeModeMenu(self, controller, menu)
 			PlaySoundAlias("uin_press_generic")
@@ -86,7 +86,7 @@ LUI.createMenu.Prestige_PlayerLevel = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if IsAtXPCap(controller) and not IsMaxPrestigeLevel(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		else
 			return false
@@ -127,8 +127,8 @@ LUI.createMenu.Prestige_PlayerLevel = function(f1_arg0, f1_arg1)
 			end,
 		},
 	})
-	FreshStartButton.CommonButtonOutlineThin.ButtonIcon:setImage(RegisterImage(0xEDFCC1D710C02C))
-	FreshStartButton.CommonButtonOutlineThin.MainText:setText(Engine[0xF9F1239CFD921FE](0xF98F72A48A5CFCA))
+	FreshStartButton.CommonButtonOutlineThin.ButtonIcon:setImage(RegisterImage(@"ui_icon_prestige_freshstart"))
+	FreshStartButton.CommonButtonOutlineThin.MainText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_2F98F72A48A5CFCA"))
 	FreshStartButton:registerEventHandler("gain_focus", function(element, event)
 		local f11_local0 = nil
 		if element.gainFocus then
@@ -136,14 +136,14 @@ LUI.createMenu.Prestige_PlayerLevel = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f11_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f11_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(FreshStartButton, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(FreshStartButton, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		OpenPrestigeFreshStartMenu(self, controller, menu)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 		return true
 	end, false)
 	self:addElement(FreshStartButton)
@@ -184,7 +184,7 @@ LUI.createMenu.Prestige_PlayerLevel = function(f1_arg0, f1_arg1)
 			end,
 		},
 	})
-	CustomizePrestigeIconButton.CommonButtonOutlineThin.MainText:setText(LocalizeToUpperString(0x754A8D073F00C06))
+	CustomizePrestigeIconButton.CommonButtonOutlineThin.MainText:setText(LocalizeToUpperString(@"hash_7754A8D073F00C06"))
 	CustomizePrestigeIconButton:registerEventHandler("gain_focus", function(element, event)
 		local f19_local0 = nil
 		if element.gainFocus then
@@ -192,32 +192,32 @@ LUI.createMenu.Prestige_PlayerLevel = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f19_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f19_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(CustomizePrestigeIconButton, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(CustomizePrestigeIconButton, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		PlaySoundAlias("uin_toggle_generic")
 		OpenOverlay(self, "Prestige_CustomizeIcon", controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 		return true
 	end, false)
 	self:addElement(CustomizePrestigeIconButton)
 	self.CustomizePrestigeIconButton = CustomizePrestigeIconButton
 	local PrestigeFanfare = CoD.Prestige_Fanfare.new(f1_local1, f1_arg0, 0.5, 0.5, -350, 350, 0.5, 0.5, -540, 540)
-	PrestigeFanfare.PrestigeImage:setImage(RegisterImage(CoD.PlayerStatsUtility.GetNextPrestigeIcon(f1_local1, true, 0x30F9A21089722D4)))
-	PrestigeFanfare.PrestigeTitle:setText(Engine[0xF9F1239CFD921FE](CoD.PlayerStatsUtility.GetNextPrestigeFanfareText(f1_local1, 0x9E3050512D6C49B)))
-	PrestigeFanfare.PrestigeTitle2:setText(CoD.PlayerStatsUtility.GetNextPrestigeTitle(f1_local1, 0x910399F02006FB7))
+	PrestigeFanfare.PrestigeImage:setImage(RegisterImage(CoD.PlayerStatsUtility.GetNextPrestigeIcon(f1_local1, true, @"t7_icon_rank_mp_level_21")))
+	PrestigeFanfare.PrestigeTitle:setText(Engine[@"hash_4F9F1239CFD921FE"](CoD.PlayerStatsUtility.GetNextPrestigeFanfareText(f1_local1, @"hash_39E3050512D6C49B")))
+	PrestigeFanfare.PrestigeTitle2:setText(CoD.PlayerStatsUtility.GetNextPrestigeTitle(f1_local1, @"hash_4910399F02006FB7"))
 	self:addElement(PrestigeFanfare)
 	self.PrestigeFanfare = PrestigeFanfare
 	local PermanentUnlockTokenText = LUI.UIText.new(0.5, 0.5, -471.5, -125.5, 0, 0, 970.5, 988.5)
 	PermanentUnlockTokenText:setRGB(ColorSet.T8__OFF__GRAY.r, ColorSet.T8__OFF__GRAY.g, ColorSet.T8__OFF__GRAY.b)
-	PermanentUnlockTokenText:setText(Engine[0xF9F1239CFD921FE](CoD.PrestigeUtility.GetPermanentUnlockInfoString(0xE84CE29A8B160AD)))
+	PermanentUnlockTokenText:setText(Engine[@"hash_4F9F1239CFD921FE"](CoD.PrestigeUtility.GetPermanentUnlockInfoString(@"hash_5E84CE29A8B160AD")))
 	PermanentUnlockTokenText:setTTF("ttmussels_regular")
 	PermanentUnlockTokenText:setLetterSpacing(1)
-	PermanentUnlockTokenText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	PermanentUnlockTokenText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	PermanentUnlockTokenText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	PermanentUnlockTokenText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	PermanentUnlockTokenText:subscribeToGlobalModel(f1_arg0, "PerController", "permanentUnlockTokensCount", function(model)
 		local f22_local0 = model:get()
 		if f22_local0 ~= nil then
@@ -258,7 +258,7 @@ LUI.createMenu.Prestige_PlayerLevel = function(f1_arg0, f1_arg1)
 	})
 	local f1_local18 = self
 	local f1_local19 = self.subscribeToModel
-	local f1_local20 = Engine[0x8DF2E5447F384B9]()
+	local f1_local20 = Engine[@"getglobalmodel"]()
 	f1_local19(f1_local18, f1_local20["lobbyRoot.lobbyNav"], function(f26_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",
@@ -268,15 +268,15 @@ LUI.createMenu.Prestige_PlayerLevel = function(f1_arg0, f1_arg1)
 			modelName = "lobbyRoot.lobbyNav",
 		})
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		GoBack(self, controller)
 		ClearMenuSavedState(menu)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 		return true
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC], "ui_prevtab", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_ltrig"], "ui_prevtab", function(element, menu, controller, model)
 		if not IsRepeatButtonPress(model) then
 			PlaySoundAlias("uin_list_horizontal_generic")
 			ClearRecordedFocus(menu, controller)
@@ -286,13 +286,13 @@ LUI.createMenu.Prestige_PlayerLevel = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if not IsRepeatButtonPress(nil) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC], 0x0, nil, "ui_prevtab")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_ltrig"], @"hash_0", nil, "ui_prevtab")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA], "ui_nexttab", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_rtrig"], "ui_nexttab", function(element, menu, controller, model)
 		if not IsRepeatButtonPress(model) then
 			PlaySoundAlias("uin_list_horizontal_generic")
 			ClearRecordedFocus(menu, controller)
@@ -302,28 +302,28 @@ LUI.createMenu.Prestige_PlayerLevel = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if not IsRepeatButtonPress(nil) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA], 0x0, nil, "ui_nexttab")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_rtrig"], @"hash_0", nil, "ui_nexttab")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "MWHEELUP", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_none"], "MWHEELUP", function(element, menu, controller, model)
 		PlaySoundAlias("uin_list_horizontal_generic")
 		ClearRecordedFocus(menu, controller)
 		CoD.PrestigeUtility.UpdateCurrentTargetIndex(self, controller, menu, true)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "MWHEELUP")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "MWHEELUP")
 		return false
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "MWHEELDOWN", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_none"], "MWHEELDOWN", function(element, menu, controller, model)
 		PlaySoundAlias("uin_list_horizontal_generic")
 		ClearRecordedFocus(menu, controller)
 		CoD.PrestigeUtility.UpdateCurrentTargetIndex(self, controller, menu, false)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "MWHEELDOWN")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "MWHEELDOWN")
 		return false
 	end, false)
 	self.__on_menuOpened_self = function(f37_arg0, f37_arg1, f37_arg2, f37_arg3)

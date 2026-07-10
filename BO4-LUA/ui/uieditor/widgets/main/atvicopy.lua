@@ -9,15 +9,15 @@ CoD.AtviCopy.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5
 	local ActivisionIncDurango = LUI.UIImage.new(1, 1, -291, -15, 0, 0, 45, 87)
 	ActivisionIncDurango:setRGB(0.31, 0.34, 0.37)
 	ActivisionIncDurango:setAlpha(0.9)
-	ActivisionIncDurango:setImage(RegisterImage(0xF52811A5826066C))
+	ActivisionIncDurango:setImage(RegisterImage(@"hash_4F52811A5826066C"))
 	self:addElement(ActivisionIncDurango)
 	self.ActivisionIncDurango = ActivisionIncDurango
 	local BuildInfo2 = LUI.UIText.new(1, 1, -215, -15, 0, 0, 76, 90)
 	BuildInfo2:setRGB(0.31, 0.34, 0.37)
 	BuildInfo2:setAlpha(0.7)
 	BuildInfo2:setTTF("0arame_mono_stencil")
-	BuildInfo2:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
-	BuildInfo2:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	BuildInfo2:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
+	BuildInfo2:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	BuildInfo2:linkToElementModel(self, "buildInfo", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then

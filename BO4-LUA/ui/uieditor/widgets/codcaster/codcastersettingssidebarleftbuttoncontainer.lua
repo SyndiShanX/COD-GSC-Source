@@ -17,7 +17,7 @@ CoD.CodCasterSettingsSideBarLeftbuttoncontainer.new = function(f1_arg0, f1_arg1,
 			LTbtn.buttonPromptImage:setImage(RegisterImage(f2_local0))
 		end
 	end)
-	LTbtn:linkToElementModel(self, "" .. Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC], false, function(model)
+	LTbtn:linkToElementModel(self, "" .. Enum[@"luibutton"][@"lui_key_ltrig"], false, function(model)
 		LTbtn:setModel(model, f1_arg1)
 	end)
 	LUI.OverrideFunction_CallOriginalFirst(LTbtn, "setState", function(element, controller, f4_arg2, f4_arg3, f4_arg4)
@@ -36,7 +36,7 @@ CoD.CodCasterSettingsSideBarLeftbuttoncontainer.new = function(f1_arg0, f1_arg1,
 			Xbtn.buttonPromptImage:setImage(RegisterImage(f5_local0))
 		end
 	end)
-	Xbtn:linkToElementModel(self, "" .. Enum[0x3DD78803F918E9D][0xC083113BC81F23F], false, function(model)
+	Xbtn:linkToElementModel(self, "" .. Enum[@"luibutton"][@"lui_key_xbx_pssquare"], false, function(model)
 		Xbtn:setModel(model, f1_arg1)
 	end)
 	LUI.OverrideFunction_CallOriginalFirst(Xbtn, "setState", function(element, controller, f7_arg2, f7_arg3, f7_arg4)
@@ -55,7 +55,7 @@ CoD.CodCasterSettingsSideBarLeftbuttoncontainer.new = function(f1_arg0, f1_arg1,
 			RTbtn.buttonPromptImage:setImage(RegisterImage(f8_local0))
 		end
 	end)
-	RTbtn:linkToElementModel(self, "" .. Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA], false, function(model)
+	RTbtn:linkToElementModel(self, "" .. Enum[@"luibutton"][@"lui_key_rtrig"], false, function(model)
 		RTbtn:setModel(model, f1_arg1)
 	end)
 	LUI.OverrideFunction_CallOriginalFirst(RTbtn, "setState", function(element, controller, f10_arg2, f10_arg3, f10_arg4)

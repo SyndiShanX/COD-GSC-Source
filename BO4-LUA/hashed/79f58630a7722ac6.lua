@@ -13,7 +13,7 @@ CoD.PC_Theater_Keyboard_Shortcut.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	self:addElement(KeyPrompt)
 	self.KeyPrompt = KeyPrompt
 	local Text = CoD.PC_Theater_Keyboard_Shortcut_Text.new(f1_arg0, f1_arg1, 0, 1, 36, 0, 0.5, 0.5, -8, 8)
-	Text.Text:setText(LocalizeToUpperString(0xA61241CD7E3DE2B))
+	Text.Text:setText(LocalizeToUpperString(@"hash_5A61241CD7E3DE2B"))
 	self:addElement(Text)
 	self.Text = Text
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)

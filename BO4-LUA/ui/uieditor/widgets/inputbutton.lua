@@ -13,10 +13,10 @@ CoD.InputButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_a
 	self:addElement(StartMenuframenoBG0)
 	self.StartMenuframenoBG0 = StartMenuframenoBG0
 	local Text = LUI.UIText.new(0, 1, 10.5, -13.5, 0, 0, 13, 43)
-	Text:setText(Engine[0xF9F1239CFD921FE](0x93E719493E9E18F))
+	Text:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	Text:setTTF("dinnext_regular")
-	Text:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Text:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Text:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Text:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(Text)
 	self.Text = Text
 	local FocusBarB = CoD.FE_FocusBarContainer.new(f1_arg0, f1_arg1, 0, 1, 0, 0, 1, 1, -5, 0)

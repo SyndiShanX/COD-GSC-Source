@@ -8,7 +8,7 @@ CoD.StartMenu_Options_PrivacySettings = InheritFrom(CoD.Menu)
 LUI.createMenu.StartMenu_Options_PrivacySettings = function(f1_arg0, f1_arg1)
 	local self = CoD.Menu.NewForUIEditor("StartMenu_Options_PrivacySettings", f1_arg0)
 	local f1_local1 = self
-	CoD.ModelUtility.SetGlobalDatasourceModelValueToEnum(f1_arg0, "PrivacySettingManagementForm", "updateProgressState", Enum[0x65887EAAB38F9F8][0x464A086C0CC2A87])
+	CoD.ModelUtility.SetGlobalDatasourceModelValueToEnum(f1_arg0, "PrivacySettingManagementForm", "updateProgressState", Enum[@"hash_65887EAAB38F9F8"][@"hash_464A086C0CC2A87"])
 	self:setClass(CoD.StartMenu_Options_PrivacySettings)
 	self.soundSet = "default"
 	self:setOwner(f1_arg0)
@@ -28,12 +28,12 @@ LUI.createMenu.StartMenu_Options_PrivacySettings = function(f1_arg0, f1_arg1)
 	self.PrivacySettingsManagementForm = PrivacySettingsManagementForm
 	local CommonHeader = CoD.CommonHeader.new(f1_local1, f1_arg0, 0, 1, 0, 0, 0, 0, 0, 67)
 	CommonHeader.BGSceneBlur:setAlpha(0)
-	CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(0x5EB6FED86163697))
+	CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(@"hash_65EB6FED86163697"))
 	CommonHeader.subtitle.subtitle:setAlpha(0)
 	CommonHeader:subscribeToGlobalModel(f1_arg0, "LobbyRoot", "lobbyTitle", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			CommonHeader.subtitle.subtitle:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			CommonHeader.subtitle.subtitle:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	CommonHeader:registerEventHandler("menu_loaded", function(element, event)
@@ -79,7 +79,7 @@ LUI.createMenu.StartMenu_Options_PrivacySettings = function(f1_arg0, f1_arg1)
 		{
 			stateName = "Updating",
 			condition = function(menu, element, event)
-				return not CoD.ModelUtility.IsGlobalDataSourceModelValueEqualToEnum(f1_arg0, "PrivacySettingManagementForm", "updateProgressState", Enum[0x65887EAAB38F9F8][0x464A086C0CC2A87])
+				return not CoD.ModelUtility.IsGlobalDataSourceModelValueEqualToEnum(f1_arg0, "PrivacySettingManagementForm", "updateProgressState", Enum[@"hash_65887EAAB38F9F8"][@"hash_464A086C0CC2A87"])
 			end,
 		},
 	})
@@ -99,41 +99,41 @@ LUI.createMenu.StartMenu_Options_PrivacySettings = function(f1_arg0, f1_arg1)
 	f1_local9 = self.subscribeToModel
 	f1_local10 = DataSources.PrivacySettingManagementForm.getModel(f1_arg0)
 	f1_local9(f1_local8, f1_local10.updateProgressState, function(f7_arg0, f7_arg1)
-		CoD.Menu.UpdateButtonShownState(f7_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A])
-		CoD.Menu.UpdateButtonShownState(f7_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f7_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"])
+		CoD.Menu.UpdateButtonShownState(f7_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
-		if CoD.ModelUtility.IsGlobalDataSourceModelValueEqualToEnum(controller, "PrivacySettingManagementForm", "updateProgressState", Enum[0x65887EAAB38F9F8][0x464A086C0CC2A87]) then
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
+		if CoD.ModelUtility.IsGlobalDataSourceModelValueEqualToEnum(controller, "PrivacySettingManagementForm", "updateProgressState", Enum[@"hash_65887EAAB38F9F8"][@"hash_464A086C0CC2A87"]) then
 			ClearRecordedFocus(menu, controller)
 			GoBack(self, controller)
 			return true
 		else
 		end
 	end, function(element, menu, controller)
-		if CoD.ModelUtility.IsGlobalDataSourceModelValueEqualToEnum(controller, "PrivacySettingManagementForm", "updateProgressState", Enum[0x65887EAAB38F9F8][0x464A086C0CC2A87]) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x78D439E1B360368, nil, nil)
+		if CoD.ModelUtility.IsGlobalDataSourceModelValueEqualToEnum(controller, "PrivacySettingManagementForm", "updateProgressState", Enum[@"hash_65887EAAB38F9F8"][@"hash_464A086C0CC2A87"]) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"hash_778D439E1B360368", nil, nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
-		if CoD.ModelUtility.IsGlobalDataSourceModelValueEqualToEnum(controller, "PrivacySettingManagementForm", "updateProgressState", Enum[0x65887EAAB38F9F8][0xF100F564F11A910]) and CoD.BaseUtility.IsButtonHoldFinished(model) then
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
+		if CoD.ModelUtility.IsGlobalDataSourceModelValueEqualToEnum(controller, "PrivacySettingManagementForm", "updateProgressState", Enum[@"hash_65887EAAB38F9F8"][@"hash_4F100F564F11A910"]) and CoD.BaseUtility.IsButtonHoldFinished(model) then
 			ClearRecordedFocus(menu, controller)
 			GoBack(self, controller)
 			return true
-		elseif CoD.ModelUtility.IsGlobalDataSourceModelValueEqualToEnum(controller, "PrivacySettingManagementForm", "updateProgressState", Enum[0x65887EAAB38F9F8][0xDE287BA1764B6AE]) and not CoD.BaseUtility.IsButtonHoldFinished(model) then
+		elseif CoD.ModelUtility.IsGlobalDataSourceModelValueEqualToEnum(controller, "PrivacySettingManagementForm", "updateProgressState", Enum[@"hash_65887EAAB38F9F8"][@"hash_1DE287BA1764B6AE"]) and not CoD.BaseUtility.IsButtonHoldFinished(model) then
 			ClearRecordedFocus(menu, controller)
 			GoBack(self, controller)
 			return true
 		else
 		end
 	end, function(element, menu, controller)
-		if CoD.ModelUtility.IsGlobalDataSourceModelValueEqualToEnum(controller, "PrivacySettingManagementForm", "updateProgressState", Enum[0x65887EAAB38F9F8][0xF100F564F11A910]) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x6393FF34EA56966, Enum[0xBEBDBAEEB3ECCCA][0x71B04FAC5BE0E35] | 400 << Enum[0xBEBDBAEEB3ECCCA][0x76ADD225D738C93], nil)
+		if CoD.ModelUtility.IsGlobalDataSourceModelValueEqualToEnum(controller, "PrivacySettingManagementForm", "updateProgressState", Enum[@"hash_65887EAAB38F9F8"][@"hash_4F100F564F11A910"]) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/continue", Enum[@"luibuttonpromptflags"][@"hash_771B04FAC5BE0E35"] | 400 << Enum[@"luibuttonpromptflags"][@"hash_176ADD225D738C93"], nil)
 			return true
-		elseif CoD.ModelUtility.IsGlobalDataSourceModelValueEqualToEnum(controller, "PrivacySettingManagementForm", "updateProgressState", Enum[0x65887EAAB38F9F8][0xDE287BA1764B6AE]) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x6393FF34EA56966, nil, nil)
+		elseif CoD.ModelUtility.IsGlobalDataSourceModelValueEqualToEnum(controller, "PrivacySettingManagementForm", "updateProgressState", Enum[@"hash_65887EAAB38F9F8"][@"hash_1DE287BA1764B6AE"]) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/continue", nil, nil)
 			return true
 		else
 			return false

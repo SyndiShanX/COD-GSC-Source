@@ -40,52 +40,52 @@ CoD.ScrStk_Meter.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 	local Image00 = LUI.UIImage.new(0, 0, 42, 62, 0, 0, 10, 30)
 	Image00:setAlpha(0)
 	Image00:setZRot(84)
-	Image00:setImage(RegisterImage(0x42009933320255D))
-	Image00:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Image00:setImage(RegisterImage(@"uie_t7_core_hud_ammowidget_ringdeplete"))
+	Image00:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Image00)
 	self.Image00 = Image00
 	local Image0 = LUI.UIImage.new(0, 0, 42, 62, 0, 0, 10, 30)
 	Image0:setAlpha(0)
-	Image0:setImage(RegisterImage(0x42009933320255D))
-	Image0:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Image0:setImage(RegisterImage(@"uie_t7_core_hud_ammowidget_ringdeplete"))
+	Image0:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Image0)
 	self.Image0 = Image0
 	local Glow = LUI.UIImage.new(0, 0, 45, 64, 0, 0, -94, 290)
 	Glow:setRGB(0, 0.6, 1)
 	Glow:setAlpha(0)
-	Glow:setImage(RegisterImage(0x1BB2C084812E7B6))
-	Glow:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Glow:setImage(RegisterImage(@"uie_t7_cp_hud_tacmode_glow"))
+	Glow:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Glow)
 	self.Glow = Glow
 	local Glow2 = LUI.UIImage.new(0, 0, -10, 117, 0, 0, -58, 254)
 	Glow2:setRGB(0.16, 0, 1)
 	Glow2:setAlpha(0)
-	Glow2:setImage(RegisterImage(0x5BE416E17DAB33B))
-	Glow2:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Glow2:setImage(RegisterImage(@"uie_t7_core_hud_mapwidget_panelglow"))
+	Glow2:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Glow2)
 	self.Glow2 = Glow2
 	local Glow20 = LUI.UIImage.new(0, 0, 9, 102, 0, 0, -28, 73)
 	Glow20:setRGB(0, 0.3, 1)
 	Glow20:setAlpha(0)
-	Glow20:setImage(RegisterImage(0x5BE416E17DAB33B))
-	Glow20:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Glow20:setImage(RegisterImage(@"uie_t7_core_hud_mapwidget_panelglow"))
+	Glow20:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Glow20)
 	self.Glow20 = Glow20
 	local Glow200 = LUI.UIImage.new(0, 0, -105, 214, 0, 0, 12, 32)
 	Glow200:setRGB(1, 0, 0)
 	Glow200:setAlpha(0)
-	Glow200:setImage(RegisterImage(0x5BE416E17DAB33B))
-	Glow200:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Glow200:setImage(RegisterImage(@"uie_t7_core_hud_mapwidget_panelglow"))
+	Glow200:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Glow200)
 	self.Glow200 = Glow200
 	local Cap = LUI.UIImage.new(0, 0, 49, 56, 0, 0, 187, 197)
 	Cap:setAlpha(0.5)
-	Cap:setImage(RegisterImage(0xF3E81C52AE39D91))
+	Cap:setImage(RegisterImage(@"hash_7F3E81C52AE39D91"))
 	self:addElement(Cap)
 	self.Cap = Cap
 	local Cap2 = LUI.UIImage.new(0, 0, 49, 56, 0, 0, 44.5, 54.5)
 	Cap2:setAlpha(0.5)
-	Cap2:setImage(RegisterImage(0xF3E81C52AE39D91))
+	Cap2:setImage(RegisterImage(@"hash_7F3E81C52AE39D91"))
 	self:addElement(Cap2)
 	self.Cap2 = Cap2
 	self:mergeStateConditions({
@@ -104,7 +104,7 @@ CoD.ScrStk_Meter.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 	})
 	local f1_local13 = self
 	local f1_local14 = self.subscribeToModel
-	local f1_local15 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local15 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local14(f1_local13, f1_local15["killstreaks.momentumPercentage"], function(f7_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -449,7 +449,7 @@ CoD.ScrStk_Meter.__clipsPerState = {
 					f44_arg0:setRGB(0, 0.64, 1)
 					f44_arg0:registerEventHandler("transition_complete_keyframe", f44_local0)
 				end
-				f12_arg0.Glow20:beginAnimation(40, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735])
+				f12_arg0.Glow20:beginAnimation(40, Enum[@"luitween"][@"luitween_bounce"])
 				f12_arg0.Glow20:setLeftRight(0, 0, 30.74, 74.4)
 				f12_arg0.Glow20:setTopBottom(0, 0, -1.93, 45.07)
 				f12_arg0.Glow20:setRGB(0.71, 0.9, 1)

@@ -13,7 +13,7 @@ CoD.WZObituaryCalloutExpandedContainer.new = function(f1_arg0, f1_arg1, f1_arg2,
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local WarzoneKillerIdentity = CoD.WarzoneKillerIdentity.new(f1_arg0, f1_arg1, 0.5, 0.5, -400, 400, 0.5, 0.5, -40, 40)
-	WarzoneKillerIdentity.KillerLabel:setText(LocalizeToUpperString(0x161ED05A4E04839))
+	WarzoneKillerIdentity.KillerLabel:setText(LocalizeToUpperString(@"warzone/killed"))
 	WarzoneKillerIdentity:linkToElementModel(self, nil, false, function(model)
 		WarzoneKillerIdentity:setModel(model, f1_arg1)
 	end)
@@ -41,7 +41,7 @@ CoD.WZObituaryCalloutExpandedContainer.new = function(f1_arg0, f1_arg1, f1_arg2,
 	WarzoneKillerIdentity:linkToElementModel(self, "rank", true, function(model)
 		local f7_local0 = model:get()
 		if f7_local0 ~= nil then
-			WarzoneKillerIdentity.Rank:setText(CoD.PrestigeUtility.LocalizeIfMaxRank(0x4008CE61FE52DCD, SetValueIfEmptyString("1", f7_local0)))
+			WarzoneKillerIdentity.Rank:setText(CoD.PrestigeUtility.LocalizeIfMaxRank(@"hash_54008CE61FE52DCD", SetValueIfEmptyString("1", f7_local0)))
 		end
 	end)
 	WarzoneKillerIdentity:linkToElementModel(self, "rankIcon", true, function(model)

@@ -31,7 +31,7 @@ CoD.ContractDetailsPanel.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	RewardCountPC:setText("")
 	RewardCountPC:setTTF("ttmussels_regular")
 	RewardCountPC:setLetterSpacing(2)
-	RewardCountPC:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	RewardCountPC:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	self:addElement(RewardCountPC)
 	self.RewardCountPC = RewardCountPC
 	local Info = CoD.ContractDetailsPanelInfo.new(f1_arg0, f1_arg1, 0, 0, 0, 804, 0, 0, 54.5, 463.5)
@@ -89,8 +89,8 @@ CoD.ContractDetailsPanel.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 		})
 	end)
 	ActivateContractButton:setAlpha(0)
-	ActivateContractButton.DirectorSelectButtonMiniInternal.MiddleText:setText(LocalizeToUpperString(0x5AB9ECEB1A97273))
-	ActivateContractButton.DirectorSelectButtonMiniInternal.MiddleTextFocus:setText(LocalizeToUpperString(0x5AB9ECEB1A97273))
+	ActivateContractButton.DirectorSelectButtonMiniInternal.MiddleText:setText(LocalizeToUpperString(@"menu/contract_activate"))
+	ActivateContractButton.DirectorSelectButtonMiniInternal.MiddleTextFocus:setText(LocalizeToUpperString(@"menu/contract_activate"))
 	ActivateContractButton:registerEventHandler("gain_focus", function(element, event)
 		local f9_local0 = nil
 		if element.gainFocus then
@@ -98,15 +98,15 @@ CoD.ContractDetailsPanel.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 		elseif element.super.gainFocus then
 			f9_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f9_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(ActivateContractButton, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(ActivateContractButton, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		CoD.ContractUtility.SelectActiveContractAction(self, controller)
 		PlaySoundAlias("uin_toggle_generic")
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 		return true
 	end, false)
 	self:addElement(ActivateContractButton)
@@ -115,12 +115,12 @@ CoD.ContractDetailsPanel.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	ContractPrice:setRGB(ColorSet.CodPointsNumber.r, ColorSet.CodPointsNumber.g, ColorSet.CodPointsNumber.b)
 	ContractPrice:setAlpha(0)
 	ContractPrice:setTTF("ttmussels_demibold")
-	ContractPrice:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	ContractPrice:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	ContractPrice:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	ContractPrice:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	ContractPrice:linkToElementModel(self, "price", true, function(model)
 		local f12_local0 = model:get()
 		if f12_local0 ~= nil then
-			ContractPrice:setText(LocalizeIntoString(0x6A3CC7BE3008989, f12_local0))
+			ContractPrice:setText(LocalizeIntoString(@"hash_56A3CC7BE3008989", f12_local0))
 		end
 	end)
 	self:addElement(ContractPrice)
@@ -142,13 +142,13 @@ CoD.ContractDetailsPanel.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 		},
 	})
 	PurchaseContractButton:setAlpha(0)
-	PurchaseContractButton.DirectorSelectButtonMiniInternal.MiddleText:setText(LocalizeToUpperString(0x85952ACC6D0C1B0))
-	PurchaseContractButton.DirectorSelectButtonMiniInternal.MiddleTextFocus:setText(LocalizeToUpperString(0x85952ACC6D0C1B0))
+	PurchaseContractButton.DirectorSelectButtonMiniInternal.MiddleText:setText(LocalizeToUpperString(@"menu/purchase"))
+	PurchaseContractButton.DirectorSelectButtonMiniInternal.MiddleTextFocus:setText(LocalizeToUpperString(@"menu/purchase"))
 	local TabbedScoreboardFuiBox2 = PurchaseContractButton
 	local TabbedScoreboardFuiBox = PurchaseContractButton.subscribeToModel
-	local Seasonal = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local Seasonal = Engine[@"getmodelforcontroller"](f1_arg1)
 	TabbedScoreboardFuiBox(TabbedScoreboardFuiBox2, Seasonal["LootStreamProgress.codPoints"], function(f15_arg0, f15_arg1)
-		CoD.Menu.UpdateButtonShownState(f15_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f15_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	PurchaseContractButton:registerEventHandler("gain_focus", function(element, event)
 		local f16_local0 = nil
@@ -157,10 +157,10 @@ CoD.ContractDetailsPanel.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 		elseif element.super.gainFocus then
 			f16_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f16_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(PurchaseContractButton, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(PurchaseContractButton, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if CanPurchaseItem(controller, self) then
 			OpenPopup(self, "PurchaseContractConfirmation", controller, {
 				_model = self:getModel(),
@@ -174,7 +174,7 @@ CoD.ContractDetailsPanel.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 			return true
 		end
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 		return true
 	end, false)
 	self:addElement(PurchaseContractButton)
@@ -213,9 +213,9 @@ CoD.ContractDetailsPanel.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	self.Seasonal = Seasonal
 	local TierBoostDisclaimer = LUI.UIText.new(0, 0, 304.5, 714.5, 0, 0, 310, 324)
 	TierBoostDisclaimer:setAlpha(0)
-	TierBoostDisclaimer:setText(Engine[0xF9F1239CFD921FE](0x92255DD4A01A50B))
+	TierBoostDisclaimer:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_692255DD4A01A50B"))
 	TierBoostDisclaimer:setTTF("default")
-	TierBoostDisclaimer:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	TierBoostDisclaimer:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	self:addElement(TierBoostDisclaimer)
 	self.TierBoostDisclaimer = TierBoostDisclaimer
 	local TierBoost = LUI.UIText.new(0, 0, 407.5, 607.5, 0, 0, 285, 304)
@@ -223,7 +223,7 @@ CoD.ContractDetailsPanel.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	TierBoost:setAlpha(0)
 	TierBoost:setTTF("ttmussels_demibold")
 	TierBoost:setLetterSpacing(2)
-	TierBoost:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	TierBoost:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	TierBoost:setBackingType(1)
 	TierBoost:setBackingWidget(CoD.ContractSeasonalPromoBacker, f1_arg0, f1_arg1)
 	TierBoost:setBackingXPadding(7)
@@ -273,7 +273,7 @@ CoD.ContractDetailsPanel.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	end)
 	local f1_local16 = self
 	local f1_local17 = self.subscribeToModel
-	local f1_local18 = Engine[0x8DF2E5447F384B9]()
+	local f1_local18 = Engine[@"getglobalmodel"]()
 	f1_local17(f1_local16, f1_local18.ContractsForceUpdate, function(f28_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -294,7 +294,7 @@ CoD.ContractDetailsPanel.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	end)
 	f1_local16 = self
 	f1_local17 = self.subscribeToModel
-	f1_local18 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local18 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local17(f1_local16, f1_local18["LootStreamProgress.personalTierBoost"], function(f30_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

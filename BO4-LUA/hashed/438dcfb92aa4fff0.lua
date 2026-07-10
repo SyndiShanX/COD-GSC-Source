@@ -21,7 +21,7 @@ Lobby.UGC.OffensiveEmblemAdd = function(f1_arg0)
 			xuid = f1_local1,
 		})
 	end
-	Engine[0xB66FF630A7C6BB1](f1_local0, f1_local1)
+	Engine[@"pcacheinvalidateplayeremblem"](f1_local0, f1_local1)
 end
 Lobby.UGC.EmblemsGenerateForceDefault = function(f2_arg0)
 	local f2_local0 = f2_arg0.xuid

@@ -12,8 +12,8 @@ CoD.EmblemMaterialElement.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local FrontendFrameSelected = LUI.UIImage.new(-1.85, -0.97, 185, 197, -0.18, 0.7, 18, 30)
 	FrontendFrameSelected:setAlpha(0)
-	FrontendFrameSelected:setImage(RegisterImage(0xCB07CCC28498CB2))
-	FrontendFrameSelected:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	FrontendFrameSelected:setImage(RegisterImage(@"uie_ui_menu_store_focus_frame"))
+	FrontendFrameSelected:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	FrontendFrameSelected:setShaderVector(0, 0, 0, 0, 0)
 	FrontendFrameSelected:setupNineSliceShader(14, 14)
 	self:addElement(FrontendFrameSelected)
@@ -34,12 +34,12 @@ CoD.EmblemMaterialElement.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	self.bgImage = bgImage
 	local smallbargold = LUI.UIImage.new(0.5, 0.5, -41, 41, 0, 0, 25, 75)
 	smallbargold:setAlpha(0)
-	smallbargold:setImage(RegisterImage(0xFE2F687C254A523))
+	smallbargold:setImage(RegisterImage(@"uie_t7_blackmarket_brandgoldbar_small"))
 	self:addElement(smallbargold)
 	self.smallbargold = smallbargold
 	local blackMarketBrandIcon = LUI.UIImage.new(0.5, 0.5, -32, 37, 0.5, 0.5, -33, 36)
 	blackMarketBrandIcon:setAlpha(0)
-	blackMarketBrandIcon:setImage(RegisterImage(0xD26541E94E02E90))
+	blackMarketBrandIcon:setImage(RegisterImage(@"uie_t7_icon_blackmarket_encryptedicon"))
 	self:addElement(blackMarketBrandIcon)
 	self.blackMarketBrandIcon = blackMarketBrandIcon
 	local lockedIcon = CoD.cac_lock.new(f1_arg0, f1_arg1, 0.5, 0.5, -18, 18, 0.5, 0.5, -18, 18)

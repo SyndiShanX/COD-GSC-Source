@@ -37,7 +37,7 @@ CoD.CommonRankIconAndRankLarge.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	self.arenaRubiesUnlocked = arenaRubiesUnlocked
 	local arenaFlameStreak = LUI.UIImage.new(0, 0, -54, 186, 0, 0, -52.5, 187.5)
 	arenaFlameStreak:setAlpha(0)
-	arenaFlameStreak:setMaterial(LUI.UIImage.GetCachedMaterial(0x9227A50BA2B8D21))
+	arenaFlameStreak:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_flipbook_add"))
 	arenaFlameStreak:setShaderVector(0, 4, 4, 0, 0)
 	arenaFlameStreak:setShaderVector(1, 8, 0, 0, 0)
 	arenaFlameStreak.__Image = function(f7_arg0)
@@ -70,12 +70,12 @@ CoD.CommonRankIconAndRankLarge.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	self.arenaRankSkillDivisionIcon = arenaRankSkillDivisionIcon
 	local rankText = LUI.UIText.new(0, 0, 142, 342, 0, 0, 48.5, 124.5)
 	rankText:setTTF("0arame_mono_stencil")
-	rankText:setMaterial(LUI.UIImage.GetCachedMaterial(0x90D57B1E92D39D7))
+	rankText:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_90D57B1E92D39D7"))
 	rankText:setShaderVector(0, 1, 0, 0, 0)
 	rankText:setShaderVector(1, 0, 0, 0, 0)
 	rankText:setShaderVector(2, 0.3, 0.3, 0.2, 0.2)
 	rankText:setLetterSpacing(2)
-	rankText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	rankText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	rankText:linkToElementModel(self, "isParagon", true, function(model)
 		local f10_local0 = model:get()
 		if f10_local0 ~= nil then
@@ -94,14 +94,14 @@ CoD.CommonRankIconAndRankLarge.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	rankName:setRGB(0.92, 0.92, 0.92)
 	rankName:setAlpha(0.5)
 	rankName:setTTF("ttmussels_regular")
-	rankName:setMaterial(LUI.UIImage.GetCachedMaterial(0x90D57B1E92D39D7))
+	rankName:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_90D57B1E92D39D7"))
 	rankName:setShaderVector(0, 1, 0, 0, 0)
 	rankName:setShaderVector(1, 0, 0, 0, 0)
 	rankName:setShaderVector(2, 0, 0, 0, 0.5)
 	rankName:setLetterSpacing(1)
 	rankName:setLineSpacing(1)
-	rankName:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	rankName:setAlignment(Enum[0x7A5123B654282D2][0x70510683C22104B])
+	rankName:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	rankName:setAlignment(Enum[@"luialignment"][@"lui_alignment_bottom"])
 	rankName:linkToElementModel(self, "rankTitle", true, function(model)
 		local f12_local0 = model:get()
 		if f12_local0 ~= nil then
@@ -113,16 +113,16 @@ CoD.CommonRankIconAndRankLarge.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	local rank = LUI.UIText.new(-0, 0.57, 145, 145, 0, 0, 32, 50)
 	rank:setRGB(0.92, 0.92, 0.92)
 	rank:setAlpha(0)
-	rank:setText(LocalizeToUpperString(0x3370355189B42A7))
+	rank:setText(LocalizeToUpperString(@"arena/rank"))
 	rank:setTTF("ttmussels_regular")
-	rank:setMaterial(LUI.UIImage.GetCachedMaterial(0x90D57B1E92D39D7))
+	rank:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_90D57B1E92D39D7"))
 	rank:setShaderVector(0, 1, 0, 0, 0)
 	rank:setShaderVector(1, 0, 0, 0, 0)
 	rank:setShaderVector(2, 0, 0, 0, 0.5)
 	rank:setLetterSpacing(1)
 	rank:setLineSpacing(1)
-	rank:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	rank:setAlignment(Enum[0x7A5123B654282D2][0x70510683C22104B])
+	rank:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	rank:setAlignment(Enum[@"luialignment"][@"lui_alignment_bottom"])
 	self:addElement(rank)
 	self.rank = rank
 	local rankIcon = LUI.UIImage.new(0, 0, 2, 130, 0, 0, 3.5, 131.5)
@@ -151,7 +151,7 @@ CoD.CommonRankIconAndRankLarge.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	})
 	local f1_local8 = self
 	local f1_local9 = self.subscribeToModel
-	local f1_local10 = Engine[0x8DF2E5447F384B9]()
+	local f1_local10 = Engine[@"getglobalmodel"]()
 	f1_local9(f1_local8, f1_local10["lobbyRoot.rankMode"], function(f16_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

@@ -9,12 +9,12 @@ CoD.SpawnSelectInfoStripe.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local SpawnWarningStripeLoop2 = LUI.UIImage.new(0, 0, -2, 162, 0, 0, 0, 4)
 	SpawnWarningStripeLoop2:setAlpha(0)
-	SpawnWarningStripeLoop2:setImage(RegisterImage(0x36786600239BB3A))
+	SpawnWarningStripeLoop2:setImage(RegisterImage(@"uie_ui_hud_selectspawn_info_longstripe"))
 	self:addElement(SpawnWarningStripeLoop2)
 	self.SpawnWarningStripeLoop2 = SpawnWarningStripeLoop2
 	local SpawnWarningStripeLoop1 = LUI.UIImage.new(0, 0, 158, 322, 0, 0, 0, 4)
 	SpawnWarningStripeLoop1:setAlpha(0)
-	SpawnWarningStripeLoop1:setImage(RegisterImage(0x36786600239BB3A))
+	SpawnWarningStripeLoop1:setImage(RegisterImage(@"uie_ui_hud_selectspawn_info_longstripe"))
 	self:addElement(SpawnWarningStripeLoop1)
 	self.SpawnWarningStripeLoop1 = SpawnWarningStripeLoop1
 	if PostLoadFunc then

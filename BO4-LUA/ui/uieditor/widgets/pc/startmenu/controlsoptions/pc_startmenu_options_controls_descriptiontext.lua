@@ -21,8 +21,8 @@ CoD.PC_StartMenu_Options_Controls_DescriptionText.new = function(f1_arg0, f1_arg
 	detailedDescription:setTTF("dinnext_regular")
 	detailedDescription:setLetterSpacing(2)
 	detailedDescription:setLineSpacing(3)
-	detailedDescription:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	detailedDescription:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	detailedDescription:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	detailedDescription:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	detailedDescription:setBackingType(1)
 	detailedDescription:setBackingWidget(CoD.PC_StartMenu_Options_Description_TextBacking, f1_arg0, f1_arg1)
 	detailedDescription:setBackingAlpha(0)
@@ -30,10 +30,10 @@ CoD.PC_StartMenu_Options_Controls_DescriptionText.new = function(f1_arg0, f1_arg
 	self.detailedDescription = detailedDescription
 	local OptionName = LUI.UIText.new(0, 0, 0, 200, 0, 0, 0, 21)
 	OptionName:setRGB(0.76, 0.76, 0.76)
-	OptionName:setText(LocalizeToUpperString(0x93E719493E9E18F))
+	OptionName:setText(LocalizeToUpperString(@"menu/new"))
 	OptionName:setTTF("ttmussels_regular")
 	OptionName:setLetterSpacing(3)
-	OptionName:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	OptionName:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(OptionName)
 	self.OptionName = OptionName
 	local noLabelButtonPrompts = CoD.freeCursorNoLabelButtonPromptArea.new(f1_arg0, f1_arg1, 0, 0, 0, 300, 1, 1, 0, 36)
@@ -55,7 +55,7 @@ CoD.PC_StartMenu_Options_Controls_DescriptionText.new = function(f1_arg0, f1_arg
 		{
 			stateName = "Visible",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueNonEmptyString(element, f1_arg1, "detailedDescription") and CoD.ModelUtility.AreButtonModelValueBitsSet(f1_arg1, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA], Enum[0xE29E259801BC1A4][0x253A6F6CAAAE464])
+				return CoD.ModelUtility.IsSelfModelValueNonEmptyString(element, f1_arg1, "detailedDescription") and CoD.ModelUtility.AreButtonModelValueBitsSet(f1_arg1, Enum[@"luibutton"][@"lui_key_rtrig"], Enum[@"luibuttonflags"][@"flag_down"])
 			end,
 		},
 	})
@@ -70,14 +70,14 @@ CoD.PC_StartMenu_Options_Controls_DescriptionText.new = function(f1_arg0, f1_arg
 	end)
 	local f1_local5 = self
 	local f1_local6 = self.subscribeToModel
-	local f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local6(f1_local5, f1_local7["ButtonBits." .. Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA]], function(f6_arg0)
+	local f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local6(f1_local5, f1_local7["ButtonBits." .. Enum[@"luibutton"][@"lui_key_rtrig"]], function(f6_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f6_arg0:get(),
-			modelName = "ButtonBits." .. Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA],
+			modelName = "ButtonBits." .. Enum[@"luibutton"][@"lui_key_rtrig"],
 		})
 	end, false)
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)

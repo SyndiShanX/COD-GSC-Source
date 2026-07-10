@@ -9,15 +9,15 @@ CoD.Codcaster_AnnouncementHighlight.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local ledBL = LUI.UIImage.new(0, 0, 0, 56, 0, 0, 0, 28)
 	ledBL:setAlpha(0)
-	ledBL:setImage(RegisterImage(0x51D7A222189F9E4))
+	ledBL:setImage(RegisterImage(@"uie_codcaster_announcement_blackled"))
 	self:addElement(ledBL)
 	self.ledBL = ledBL
 	local ledBL2 = LUI.UIImage.new(0, 0, -1, 59, 0, 0, 0, 28)
-	ledBL2:setImage(RegisterImage(0xC29E9AF2EE8AF5D))
+	ledBL2:setImage(RegisterImage(@"uie_codcaster_announcement_teamcolorled_01"))
 	self:addElement(ledBL2)
 	self.ledBL2 = ledBL2
 	local separator = LUI.UIImage.new(0, 0, 55, 63, 0, 0, 2, 26)
-	separator:setImage(RegisterImage(0x941AB093A82A1F7))
+	separator:setImage(RegisterImage(@"hash_1941AB093A82A1F7"))
 	self:addElement(separator)
 	self.separator = separator
 	self:mergeStateConditions({

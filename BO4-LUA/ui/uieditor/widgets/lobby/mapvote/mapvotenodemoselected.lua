@@ -21,7 +21,7 @@ CoD.MapVoteNoDemoSelected.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	self.FEMemberBlurPanelContainer0 = FEMemberBlurPanelContainer0
 	local Icon = LUI.UIImage.new(0.5, 0.5, -139.5, 139.5, 0.5, 0.5, -139.5, 139.5)
 	Icon:setScale(0.7, 0.7)
-	Icon:setImage(RegisterImage(0x9426B1DCBEC7B31))
+	Icon:setImage(RegisterImage(@"theater_film"))
 	self:addElement(Icon)
 	self.Icon = Icon
 	local GameModeNew = CoD.MapVoteLabelLower.new(f1_arg0, f1_arg1, 0.5, 0.5, -140, 140, 1, 1, -39.5, -12.5)
@@ -42,7 +42,7 @@ CoD.MapVoteNoDemoSelected.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	})
 	local f1_local6 = self
 	local f1_local7 = self.subscribeToModel
-	local f1_local8 = Engine[0x8DF2E5447F384B9]()
+	local f1_local8 = Engine[@"getglobalmodel"]()
 	f1_local7(f1_local6, f1_local8["lobbyRoot.lobbyNav"], function(f3_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

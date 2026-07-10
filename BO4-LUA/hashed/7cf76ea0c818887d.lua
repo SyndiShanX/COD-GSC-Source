@@ -11,18 +11,18 @@ CoD.FallMeter.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local SceneBlur = LUI.UIImage.new(0.5, 0.5, -10, 10, -0.01, 1.01, 6, -6)
-	SceneBlur:setImage(RegisterImage(0xD7F6A82597E4194))
-	SceneBlur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	SceneBlur:setImage(RegisterImage(@"uie_ui_hud_wz_meter_backer_blur"))
+	SceneBlur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	SceneBlur:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(SceneBlur)
 	self.SceneBlur = SceneBlur
 	local Texture = LUI.UIImage.new(0.5, 0.5, -10, 10, -0.01, 1.01, 6, -6)
-	Texture:setImage(RegisterImage(0xDD4649871844D70))
+	Texture:setImage(RegisterImage(@"uie_ui_hud_wz_meter_backer_texture"))
 	self:addElement(Texture)
 	self.Texture = Texture
 	local GroundFill = LUI.UIImage.new(0.5, 0.5, -10, 10, 1, 1, -500, 0)
 	GroundFill:setRGB(0.63, 0.33, 0.16)
-	GroundFill:setMaterial(LUI.UIImage.GetCachedMaterial(0xE992BD5A540E2D))
+	GroundFill:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_delta_normal"))
 	GroundFill:setShaderVector(0, 0, 1, 0, 0)
 	GroundFill:setShaderVector(1, 0, 0, 0, 0)
 	GroundFill:setShaderVector(3, 0, 0, 0, 0)
@@ -46,7 +46,7 @@ CoD.FallMeter.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 	local ParachuteDeployLine = LUI.UIImage.new(0, 1, 0, 0, 0, 0, -4, 4)
 	ParachuteDeployLine:setRGB(1, 0, 0)
 	ParachuteDeployLine:setAlpha(0)
-	ParachuteDeployLine:setMaterial(LUI.UIImage.GetCachedMaterial(0x9E7CAA1CA4B378C))
+	ParachuteDeployLine:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_59E7CAA1CA4B378C"))
 	ParachuteDeployLine:setShaderVector(0, 1, 3, 0, 0)
 	ParachuteDeployLine.__YOffset_Percent = function(f4_arg0)
 		local f4_local0 = f4_arg0:get()
@@ -66,26 +66,26 @@ CoD.FallMeter.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 	self.ParachuteDeployLine = ParachuteDeployLine
 	local MeterR = LUI.UIImage.new(1, 1, -21, 5, 0.5, 0.5, -245, 245)
 	MeterR:setAlpha(0.3)
-	MeterR:setImage(RegisterImage(0x99527D705709FEE))
-	MeterR:setMaterial(LUI.UIImage.GetCachedMaterial(0x73D72BCD14C2AAD))
+	MeterR:setImage(RegisterImage(@"uie_ui_hud_wz_fallmeter_meterverticle"))
+	MeterR:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_tile_scroll_normal"))
 	MeterR:setShaderVector(0, 1, 1.5, 0, 0)
 	MeterR:setShaderVector(1, 0, 0, 0, 0)
 	self:addElement(MeterR)
 	self.MeterR = MeterR
 	local CornerTR = LUI.UIImage.new(1, 1, -14, -3, 0, 0, -2.5, 8.5)
 	CornerTR:setRGB(0, 0, 0)
-	CornerTR:setImage(RegisterImage(0x62E760CB652A6EE))
+	CornerTR:setImage(RegisterImage(@"hash_662E760CB652A6EE"))
 	self:addElement(CornerTR)
 	self.CornerTR = CornerTR
 	local MidR = LUI.UIImage.new(1, 1, -14, -3, 0.5, 0.5, -240, 240)
 	MidR:setRGB(0, 0, 0)
-	MidR:setImage(RegisterImage(0x8215DDE7C19CAF3))
+	MidR:setImage(RegisterImage(@"hash_18215DDE7C19CAF3"))
 	self:addElement(MidR)
 	self.MidR = MidR
 	local CornerBR = LUI.UIImage.new(1, 1, -14, -3, 1, 1, -7.5, 3.5)
 	CornerBR:setRGB(0, 0, 0)
 	CornerBR:setXRot(180)
-	CornerBR:setImage(RegisterImage(0x62E760CB652A6EE))
+	CornerBR:setImage(RegisterImage(@"hash_662E760CB652A6EE"))
 	self:addElement(CornerBR)
 	self.CornerBR = CornerBR
 	local PlayerInfo = CoD.FallMeter_PlayerInfo.new(f1_arg0, f1_arg1, 0, 0, -3, 35, 0, 0, -2, 6)
@@ -154,7 +154,7 @@ CoD.FallMeter.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 	})
 	f1_local11 = self
 	f1_local12 = self.subscribeToModel
-	f1_local13 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local13 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local12(f1_local11, f1_local13.PlayerSettingsUpdate, function(f12_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

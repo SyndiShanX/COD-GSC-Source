@@ -11,25 +11,25 @@ CoD.vhud_gunship_flare_dock.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.anyChildUsesUpdateState = true
 	local Backing = LUI.UIImage.new(0, 0, 0, 256, 0, 0, 0, 136)
 	Backing:setYRot(180)
-	Backing:setImage(RegisterImage(0x9734312A977FFBE))
+	Backing:setImage(RegisterImage(@"uie_ui_hud_vehicle_ac130_weapon_bg"))
 	self:addElement(Backing)
 	self.Backing = Backing
 	local FlareCounter = CoD.vhud_attack_helicopter_flare_counter.new(f1_arg0, f1_arg1, 0, 0, 92, 240, 0, 0, 7, 125)
-	FlareCounter.FlareName:setText(Engine[0xF9F1239CFD921FE](0x9B0F35B7B023E8F))
+	FlareCounter.FlareName:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_9B0F35B7B023E8F"))
 	FlareCounter:linkToElementModel(self, nil, false, function(model)
 		FlareCounter:setModel(model, f1_arg1)
 	end)
 	self:addElement(FlareCounter)
 	self.FlareCounter = FlareCounter
 	local FlareStatusIndicator = LUI.UIImage.new(0, 0, 16, 80, 0, 0, 45.5, 77.5)
-	FlareStatusIndicator:setImage(RegisterImage(0x782FDD85F2A6EE8))
-	FlareStatusIndicator:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	FlareStatusIndicator:setImage(RegisterImage(@"uie_ui_hud_vehicle_ac130_flare_icon"))
+	FlareStatusIndicator:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(FlareStatusIndicator)
 	self.FlareStatusIndicator = FlareStatusIndicator
 	local FlareStatusIndicator2 = LUI.UIImage.new(0, 0, 16, 80, 0, 0, 45.5, 77.5)
 	FlareStatusIndicator2:setAlpha(0.2)
-	FlareStatusIndicator2:setImage(RegisterImage(0x782FDD85F2A6EE8))
-	FlareStatusIndicator2:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	FlareStatusIndicator2:setImage(RegisterImage(@"uie_ui_hud_vehicle_ac130_flare_icon"))
+	FlareStatusIndicator2:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(FlareStatusIndicator2)
 	self.FlareStatusIndicator2 = FlareStatusIndicator2
 	local FlareStatusText = CoD.vhud_gunship_flare_indicator.new(f1_arg0, f1_arg1, 0, 0, 7, 87, 0, 0, 52, 70)

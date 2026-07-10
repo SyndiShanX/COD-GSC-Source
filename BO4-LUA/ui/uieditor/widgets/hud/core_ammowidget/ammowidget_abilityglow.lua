@@ -7,8 +7,8 @@ CoD.AmmoWidget_AbilityGlow.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self.id = "AmmoWidget_AbilityGlow"
 	self.soundSet = "default"
 	local Image0 = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	Image0:setImage(RegisterImage(0xADB6DDF46BD80B5))
-	Image0:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Image0:setImage(RegisterImage(@"uie_img_t7_hud_cm_heroringglow"))
+	Image0:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Image0)
 	self.Image0 = Image0
 	if PostLoadFunc then

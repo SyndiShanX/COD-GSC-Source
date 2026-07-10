@@ -12,8 +12,8 @@ CoD.ReticleCategoryTabs.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	self.onlyChildrenFocusable = true
 	self.anyChildUsesUpdateState = true
 	local LB = CoD.BumperButtonWithKeyMouseText.new(f1_arg0, f1_arg1, 0.5, 0.5, -660, -460, 0, 0, 61, 91)
-	LB.GamepadPrompt:setText(Engine[0xF9F1239CFD921FE](0xBDCD5292604F434))
-	LB.GamepadPrompt:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
+	LB.GamepadPrompt:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_5BDCD5292604F434"))
+	LB.GamepadPrompt:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
 	LB.KeyPrompt.keybind:setText(CoD.BaseUtility.AlreadyLocalized("Q"))
 	self:addElement(LB)
 	self.LB = LB
@@ -23,7 +23,7 @@ CoD.ReticleCategoryTabs.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	Tabs:setWidgetType(CoD.AARTabButton)
 	Tabs:setHorizontalCount(4)
 	Tabs:setSpacing(0)
-	Tabs:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	Tabs:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	Tabs:setDataSource("ReticleCategoryTabs")
 	Tabs:registerEventHandler("list_active_changed", function(element, event)
 		local f2_local0 = nil
@@ -34,7 +34,7 @@ CoD.ReticleCategoryTabs.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	self:addElement(Tabs)
 	self.Tabs = Tabs
 	local RB = CoD.BumperButtonWithKeyMouseText.new(f1_arg0, f1_arg1, 0.5, 0.5, 460, 660, 0, 0, 61, 95)
-	RB.GamepadPrompt:setText(Engine[0xF9F1239CFD921FE](0xBFED5292621DA9A))
+	RB.GamepadPrompt:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_5BFED5292621DA9A"))
 	RB.KeyPrompt.keybind:setText(CoD.BaseUtility.AlreadyLocalized("E"))
 	self:addElement(RB)
 	self.RB = RB

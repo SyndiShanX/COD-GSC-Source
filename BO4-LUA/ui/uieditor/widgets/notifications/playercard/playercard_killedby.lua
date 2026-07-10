@@ -45,7 +45,7 @@ CoD.PlayerCard_KilledBy.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	self:addElement(LeftPanel)
 	self.LeftPanel = LeftPanel
 	local Top3PlayerScoreBlurBox0 = CoD.Top3PlayerScoreBlurBox.new(f1_arg0, f1_arg1, 0, 0, 0, 136, 0, 0, 3, 85)
-	Top3PlayerScoreBlurBox0:setRFTMaterial(LUI.UIImage.GetCachedMaterial(0x5073BBE3838C63E))
+	Top3PlayerScoreBlurBox0:setRFTMaterial(LUI.UIImage.GetCachedMaterial(@"uie_scene_blur_pass_2_highquality"))
 	Top3PlayerScoreBlurBox0:setShaderVector(0, 10, 10, 0, 0)
 	self:addElement(Top3PlayerScoreBlurBox0)
 	self.Top3PlayerScoreBlurBox0 = Top3PlayerScoreBlurBox0
@@ -80,40 +80,40 @@ CoD.PlayerCard_KilledBy.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	self.ClanTag = ClanTag
 	local HeroBacking = LUI.UIImage.new(0, 0, -3, 93, 0, 0, -12, 96)
 	HeroBacking:setAlpha(0)
-	HeroBacking:setImage(RegisterImage(0x5FA309EA9D3CE14))
-	HeroBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0xE8F55203998700A))
+	HeroBacking:setImage(RegisterImage(@"uie_img_t7_hud_widget_playercard_playerbacking"))
+	HeroBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_feather_blend"))
 	self:addElement(HeroBacking)
 	self.HeroBacking = HeroBacking
 	local PlayerEmblem = LUI.UIImage.new(0, 0, 0, 136, 0, 0, 3, 85)
 	self:addElement(PlayerEmblem)
 	self.PlayerEmblem = PlayerEmblem
 	local TopLeftPip = LUI.UIImage.new(0, 0, -29, -5, 0, 0, -4, 8)
-	TopLeftPip:setImage(RegisterImage(0x6797C01A9EED183))
-	TopLeftPip:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	TopLeftPip:setImage(RegisterImage(@"uie_t7_menu_cac_pixelblurred"))
+	TopLeftPip:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(TopLeftPip)
 	self.TopLeftPip = TopLeftPip
 	local BotLeftPip = LUI.UIImage.new(0, 0, -29, -5, 0, 0, 80, 92)
-	BotLeftPip:setImage(RegisterImage(0x6797C01A9EED183))
-	BotLeftPip:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	BotLeftPip:setImage(RegisterImage(@"uie_t7_menu_cac_pixelblurred"))
+	BotLeftPip:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(BotLeftPip)
 	self.BotLeftPip = BotLeftPip
 	local TopRightPip = LUI.UIImage.new(0, 0, 459, 483, 0, 0, -3, 9)
 	TopRightPip:setZRot(180)
-	TopRightPip:setImage(RegisterImage(0x6797C01A9EED183))
-	TopRightPip:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	TopRightPip:setImage(RegisterImage(@"uie_t7_menu_cac_pixelblurred"))
+	TopRightPip:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(TopRightPip)
 	self.TopRightPip = TopRightPip
 	local BotRightPip = LUI.UIImage.new(0, 0, 459, 483, 0, 0, 80, 92)
 	BotRightPip:setZRot(180)
-	BotRightPip:setImage(RegisterImage(0x6797C01A9EED183))
-	BotRightPip:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	BotRightPip:setImage(RegisterImage(@"uie_t7_menu_cac_pixelblurred"))
+	BotRightPip:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(BotRightPip)
 	self.BotRightPip = BotRightPip
 	local NameText = LUI.UIText.new(0, 0, 139, 339, 0, 0, 5, 35)
 	NameText:setTTF("notosans_bold")
 	NameText:setLetterSpacing(1)
-	NameText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	NameText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	NameText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	NameText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	NameText:subscribeToGlobalModel(f1_arg1, "HUDItems", "killedByEntNum", function(model)
 		local f7_local0 = model:get()
 		if f7_local0 ~= nil then
@@ -144,7 +144,7 @@ CoD.PlayerCard_KilledBy.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	})
 	local f1_local15 = self
 	local f1_local16 = self.subscribeToModel
-	local f1_local17 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local17 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local16(f1_local15, f1_local17["hudItems.showSpawnSelect"], function(f11_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -156,7 +156,7 @@ CoD.PlayerCard_KilledBy.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	end, false)
 	f1_local15 = self
 	f1_local16 = self.subscribeToModel
-	f1_local17 = Engine[0x8DF2E5447F384B9]()
+	f1_local17 = Engine[@"getglobalmodel"]()
 	f1_local16(f1_local15, f1_local17["lobbyRoot.lobbyNav"], function(f12_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

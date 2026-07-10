@@ -13,15 +13,15 @@ CoD.CodCasterMiniMap.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local minimapMap = LUI.UIImage.new(0.5, 0.5, -265, 335, 1, 1, -369, -31)
 	minimapMap:setAlpha(0.8)
-	minimapMap:setupCompassMap(Enum[0x398581F68B3E097][0x72D54007C707EBC])
+	minimapMap:setupCompassMap(Enum[@"compasstype"][@"compass_type_full"])
 	self:addElement(minimapMap)
 	self.minimapMap = minimapMap
 	local minimapItems = LUI.UIImage.new(0.5, 0.5, -265.5, 334.5, 1, 1, -369, -31)
-	minimapItems:setupCompassItems(Enum[0x398581F68B3E097][0x72D54007C707EBC])
+	minimapItems:setupCompassItems(Enum[@"compasstype"][@"compass_type_full"])
 	self:addElement(minimapItems)
 	self.minimapItems = minimapItems
 	local minimapOverlay = LUI.UIImage.new(0.5, 0.5, -265.5, 334.5, 0.5, 0.5, -169, 169)
-	minimapOverlay:setupCompassOverlay(Enum[0x398581F68B3E097][0x72D54007C707EBC])
+	minimapOverlay:setupCompassOverlay(Enum[@"compasstype"][@"compass_type_full"])
 	self:addElement(minimapOverlay)
 	self.minimapOverlay = minimapOverlay
 	local CompassGroupContainer = CoD.CompassGroupMPContainerTransition.new(f1_arg0, f1_arg1, 0, 0, 203, 553, 0, 0, 0, 350)
@@ -55,199 +55,199 @@ CoD.CodCasterMiniMap.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	})
 	local f1_local5 = CompassGroupContainer
 	local CodCasterMiniMapName = CompassGroupContainer.subscribeToModel
-	local f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	CodCasterMiniMapName(f1_local5, f1_local7["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xB8E9B69F4B87954]], function(f4_arg0)
+	local f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
+	CodCasterMiniMapName(f1_local5, f1_local7["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_demo_all_game_hud_hidden"]], function(f4_arg0)
 		f1_arg0:updateElementState(CompassGroupContainer, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f4_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xB8E9B69F4B87954],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_demo_all_game_hud_hidden"],
 		})
 	end, false)
 	f1_local5 = CompassGroupContainer
 	CodCasterMiniMapName = CompassGroupContainer.subscribeToModel
-	f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	CodCasterMiniMapName(f1_local5, f1_local7["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xD3ABF9A2753CE40]], function(f5_arg0)
+	f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
+	CodCasterMiniMapName(f1_local5, f1_local7["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_demo_camera_mode_moviecam"]], function(f5_arg0)
 		f1_arg0:updateElementState(CompassGroupContainer, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f5_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xD3ABF9A2753CE40],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_demo_camera_mode_moviecam"],
 		})
 	end, false)
 	f1_local5 = CompassGroupContainer
 	CodCasterMiniMapName = CompassGroupContainer.subscribeToModel
-	f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	CodCasterMiniMapName(f1_local5, f1_local7["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x59333FC97F7870]], function(f6_arg0)
+	f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
+	CodCasterMiniMapName(f1_local5, f1_local7["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_emp_active"]], function(f6_arg0)
 		f1_arg0:updateElementState(CompassGroupContainer, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f6_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x59333FC97F7870],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_emp_active"],
 		})
 	end, false)
 	f1_local5 = CompassGroupContainer
 	CodCasterMiniMapName = CompassGroupContainer.subscribeToModel
-	f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	CodCasterMiniMapName(f1_local5, f1_local7["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x69C28E2FCA82769]], function(f7_arg0)
+	f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
+	CodCasterMiniMapName(f1_local5, f1_local7["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_hud_hardcore"]], function(f7_arg0)
 		f1_arg0:updateElementState(CompassGroupContainer, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f7_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x69C28E2FCA82769],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_hud_hardcore"],
 		})
 	end, false)
 	f1_local5 = CompassGroupContainer
 	CodCasterMiniMapName = CompassGroupContainer.subscribeToModel
-	f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	CodCasterMiniMapName(f1_local5, f1_local7["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xADC477DDE486DD7]], function(f8_arg0)
+	f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
+	CodCasterMiniMapName(f1_local5, f1_local7["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_hud_visible"]], function(f8_arg0)
 		f1_arg0:updateElementState(CompassGroupContainer, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f8_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xADC477DDE486DD7],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_hud_visible"],
 		})
 	end, false)
 	f1_local5 = CompassGroupContainer
 	CodCasterMiniMapName = CompassGroupContainer.subscribeToModel
-	f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	CodCasterMiniMapName(f1_local5, f1_local7["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x23CD9BAB9B9F4C8]], function(f9_arg0)
+	f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
+	CodCasterMiniMapName(f1_local5, f1_local7["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_guided_missile"]], function(f9_arg0)
 		f1_arg0:updateElementState(CompassGroupContainer, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f9_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x23CD9BAB9B9F4C8],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_guided_missile"],
 		})
 	end, false)
 	f1_local5 = CompassGroupContainer
 	CodCasterMiniMapName = CompassGroupContainer.subscribeToModel
-	f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	CodCasterMiniMapName(f1_local5, f1_local7["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2]], function(f10_arg0)
+	f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
+	CodCasterMiniMapName(f1_local5, f1_local7["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"]], function(f10_arg0)
 		f1_arg0:updateElementState(CompassGroupContainer, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f10_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"],
 		})
 	end, false)
 	f1_local5 = CompassGroupContainer
 	CodCasterMiniMapName = CompassGroupContainer.subscribeToModel
-	f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	CodCasterMiniMapName(f1_local5, f1_local7["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x7B52A87BC9AA4C7]], function(f11_arg0)
+	f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
+	CodCasterMiniMapName(f1_local5, f1_local7["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_remote_killstreak_static"]], function(f11_arg0)
 		f1_arg0:updateElementState(CompassGroupContainer, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f11_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x7B52A87BC9AA4C7],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_remote_killstreak_static"],
 		})
 	end, false)
 	f1_local5 = CompassGroupContainer
 	CodCasterMiniMapName = CompassGroupContainer.subscribeToModel
-	f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	CodCasterMiniMapName(f1_local5, f1_local7["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x9BF57CE75A8755E]], function(f12_arg0)
+	f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
+	CodCasterMiniMapName(f1_local5, f1_local7["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"hash_29BF57CE75A8755E"]], function(f12_arg0)
 		f1_arg0:updateElementState(CompassGroupContainer, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f12_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x9BF57CE75A8755E],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"hash_29BF57CE75A8755E"],
 		})
 	end, false)
 	f1_local5 = CompassGroupContainer
 	CodCasterMiniMapName = CompassGroupContainer.subscribeToModel
-	f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	CodCasterMiniMapName(f1_local5, f1_local7["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x6668F0686232679]], function(f13_arg0)
+	f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
+	CodCasterMiniMapName(f1_local5, f1_local7["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_vehicle"]], function(f13_arg0)
 		f1_arg0:updateElementState(CompassGroupContainer, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f13_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x6668F0686232679],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_vehicle"],
 		})
 	end, false)
 	f1_local5 = CompassGroupContainer
 	CodCasterMiniMapName = CompassGroupContainer.subscribeToModel
-	f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	CodCasterMiniMapName(f1_local5, f1_local7["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x3AEEAA452536E6E]], function(f14_arg0)
+	f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
+	CodCasterMiniMapName(f1_local5, f1_local7["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_is_flash_banged"]], function(f14_arg0)
 		f1_arg0:updateElementState(CompassGroupContainer, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f14_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x3AEEAA452536E6E],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_is_flash_banged"],
 		})
 	end, false)
 	f1_local5 = CompassGroupContainer
 	CodCasterMiniMapName = CompassGroupContainer.subscribeToModel
-	f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	CodCasterMiniMapName(f1_local5, f1_local7["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xD298E43D0B6FEF2]], function(f15_arg0)
+	f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
+	CodCasterMiniMapName(f1_local5, f1_local7["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_is_scoped"]], function(f15_arg0)
 		f1_arg0:updateElementState(CompassGroupContainer, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f15_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xD298E43D0B6FEF2],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_is_scoped"],
 		})
 	end, false)
 	f1_local5 = CompassGroupContainer
 	CodCasterMiniMapName = CompassGroupContainer.subscribeToModel
-	f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	CodCasterMiniMapName(f1_local5, f1_local7["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F]], function(f16_arg0)
+	f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
+	CodCasterMiniMapName(f1_local5, f1_local7["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_play_of_the_match"]], function(f16_arg0)
 		f1_arg0:updateElementState(CompassGroupContainer, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f16_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_play_of_the_match"],
 		})
 	end, false)
 	f1_local5 = CompassGroupContainer
 	CodCasterMiniMapName = CompassGroupContainer.subscribeToModel
-	f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	CodCasterMiniMapName(f1_local5, f1_local7["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04]], function(f17_arg0)
+	f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
+	CodCasterMiniMapName(f1_local5, f1_local7["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]], function(f17_arg0)
 		f1_arg0:updateElementState(CompassGroupContainer, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f17_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"],
 		})
 	end, false)
 	f1_local5 = CompassGroupContainer
 	CodCasterMiniMapName = CompassGroupContainer.subscribeToModel
-	f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	CodCasterMiniMapName(f1_local5, f1_local7["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]], function(f18_arg0)
+	f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
+	CodCasterMiniMapName(f1_local5, f1_local7["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_ui_active"]], function(f18_arg0)
 		f1_arg0:updateElementState(CompassGroupContainer, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f18_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_ui_active"],
 		})
 	end, false)
 	f1_local5 = CompassGroupContainer
 	CodCasterMiniMapName = CompassGroupContainer.subscribeToModel
-	f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	CodCasterMiniMapName(f1_local5, f1_local7["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xBB045E46E88E762]], function(f19_arg0)
+	f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
+	CodCasterMiniMapName(f1_local5, f1_local7["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_weapon_hud_visible"]], function(f19_arg0)
 		f1_arg0:updateElementState(CompassGroupContainer, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f19_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xBB045E46E88E762],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_weapon_hud_visible"],
 		})
 	end, false)
 	f1_local5 = CompassGroupContainer
 	CodCasterMiniMapName = CompassGroupContainer.subscribeToModel
-	f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
 	CodCasterMiniMapName(f1_local5, f1_local7["factions.isCoDCaster"], function(f20_arg0)
 		f1_arg0:updateElementState(CompassGroupContainer, {
 			name = "model_validation",
@@ -259,7 +259,7 @@ CoD.CodCasterMiniMap.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	end, false)
 	f1_local5 = CompassGroupContainer
 	CodCasterMiniMapName = CompassGroupContainer.subscribeToModel
-	f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
 	CodCasterMiniMapName(f1_local5, f1_local7["hudItems.playerSpawned"], function(f21_arg0)
 		f1_arg0:updateElementState(CompassGroupContainer, {
 			name = "model_validation",
@@ -271,7 +271,7 @@ CoD.CodCasterMiniMap.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	end, false)
 	f1_local5 = CompassGroupContainer
 	CodCasterMiniMapName = CompassGroupContainer.subscribeToModel
-	f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
 	CodCasterMiniMapName(f1_local5, f1_local7["hudItems.showSpawnSelect"], function(f22_arg0)
 		f1_arg0:updateElementState(CompassGroupContainer, {
 			name = "model_validation",
@@ -283,14 +283,14 @@ CoD.CodCasterMiniMap.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	end, false)
 	f1_local5 = CompassGroupContainer
 	CodCasterMiniMapName = CompassGroupContainer.subscribeToModel
-	f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	CodCasterMiniMapName(f1_local5, f1_local7["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x7EAF988DDEB83EA]], function(f23_arg0)
+	f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
+	CodCasterMiniMapName(f1_local5, f1_local7["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"hash_57EAF988DDEB83EA"]], function(f23_arg0)
 		f1_arg0:updateElementState(CompassGroupContainer, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f23_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x7EAF988DDEB83EA],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"hash_57EAF988DDEB83EA"],
 		})
 	end, false)
 	CompassGroupContainer:setAlpha(0)

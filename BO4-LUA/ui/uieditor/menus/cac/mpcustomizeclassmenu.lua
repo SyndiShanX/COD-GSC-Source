@@ -42,11 +42,11 @@ LUI.createMenu.MPCustomizeClassMenu = function(f1_arg0, f1_arg1)
 	self.ChooseClassWidget = ChooseClassWidget
 	local GenericMenuFrameCAC = CoD.GenericMenuFrameCAC.new(f1_local1, f1_arg0, 0.5, 0.5, -960, 960, 0, 1, 0, 0)
 	GenericMenuFrameCAC.CommonHeader.BGSceneBlur:setAlpha(1)
-	GenericMenuFrameCAC.CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(0xFE4770705278297))
+	GenericMenuFrameCAC.CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(@"hash_1FE4770705278297"))
 	GenericMenuFrameCAC:subscribeToGlobalModel(f1_arg0, "LobbyRoot", "lobbyTitle", function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
-			GenericMenuFrameCAC.CommonHeader.subtitle.subtitle:setText(Engine[0xF9F1239CFD921FE](f3_local0))
+			GenericMenuFrameCAC.CommonHeader.subtitle.subtitle:setText(Engine[@"hash_4F9F1239CFD921FE"](f3_local0))
 		end
 	end)
 	self:addElement(GenericMenuFrameCAC)
@@ -106,7 +106,7 @@ LUI.createMenu.MPCustomizeClassMenu = function(f1_arg0, f1_arg1)
 	})
 	local f1_local6 = self
 	local f1_local7 = self.subscribeToModel
-	local f1_local8 = Engine[0x8DF2E5447F384B9]()
+	local f1_local8 = Engine[@"getglobalmodel"]()
 	f1_local7(f1_local6, f1_local8["lobbyRoot.lobbyNav"], function(f10_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",
@@ -117,9 +117,9 @@ LUI.createMenu.MPCustomizeClassMenu = function(f1_arg0, f1_arg1)
 		})
 	end, false)
 	self:linkToElementModel(self, nil, true, function(model, f11_arg1)
-		CoD.Menu.UpdateButtonShownState(f11_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x22361E23588705A])
+		CoD.Menu.UpdateButtonShownState(f11_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_start"])
 	end)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x22361E23588705A], "ui_contextual_3", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_start"], "ui_contextual_3", function(element, menu, controller, model)
 		if not CoD.CACUtility.IsCurrentClassLocked(menu, controller) then
 			CoD.CACUtility.OpenClassOptions(self, menu, controller, "ClassOptions")
 			return true
@@ -127,13 +127,13 @@ LUI.createMenu.MPCustomizeClassMenu = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if not CoD.CACUtility.IsCurrentClassLocked(menu, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x22361E23588705A], 0x27F19FF8EF11A44, nil, "ui_contextual_3")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_start"], @"menu/class_options", nil, "ui_contextual_3")
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		GoBack(self, controller)
 		SendClientScriptMenuChangeNotify(controller, menu, false)
 		SaveLoadoutGeneric(controller)
@@ -142,7 +142,7 @@ LUI.createMenu.MPCustomizeClassMenu = function(f1_arg0, f1_arg1)
 		CoD.LobbyUtility.SetMenuControllerRestriction(self, controller, 0)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 		return true
 	end, false)
 	LUI.OverrideFunction_CallOriginalFirst(self, "close", function(element)

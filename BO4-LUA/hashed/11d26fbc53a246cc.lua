@@ -9,7 +9,7 @@ CoD.ui_icon_callingcards_assassin_victim.new = function(f1_arg0, f1_arg1, f1_arg
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local victim = LUI.UIImage.new(0, 0, 0, 384, 0, 0, 0, 496)
-	victim:setImage(RegisterImage(0x8C66603526367D6))
+	victim:setImage(RegisterImage(@"uie_ui_icon_callingcards_assassin_victim"))
 	self:addElement(victim)
 	self.victim = victim
 	local bentarm = CoD.ui_icon_callingcards_assassin_bentarm.new(f1_arg0, f1_arg1, 0, 0, 285, 295, 0, 0, 171.5, 181.5)

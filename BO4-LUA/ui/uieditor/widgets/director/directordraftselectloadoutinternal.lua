@@ -9,14 +9,14 @@ CoD.DirectorDraftSelectLoadoutInternal.new = function(f1_arg0, f1_arg1, f1_arg2,
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Backing = LUI.UIImage.new(0, 0, 0, 75, 0, 0, 0, 75)
 	Backing:setRGB(0.17, 0.17, 0.17)
-	Backing:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	Backing:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	Backing:setShaderVector(0, 0, 0.7, 0, 0)
 	self:addElement(Backing)
 	self.Backing = Backing
 	local InspecReticleCornerDots = LUI.UIImage.new(0, 0, 0, 75, 0, 0, 0, 75)
 	InspecReticleCornerDots:setAlpha(0.1)
-	InspecReticleCornerDots:setImage(RegisterImage(0x23FBEAF2C01C54C))
-	InspecReticleCornerDots:setMaterial(LUI.UIImage.GetCachedMaterial(0x5956C6C1FD41D3C))
+	InspecReticleCornerDots:setImage(RegisterImage(@"uie_ui_menu_inspection_reticle_dots"))
+	InspecReticleCornerDots:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_aberration"))
 	InspecReticleCornerDots:setShaderVector(0, 0.2, 1, 0, 0)
 	InspecReticleCornerDots:setShaderVector(1, 0, 0, 0, 0)
 	InspecReticleCornerDots:setShaderVector(2, 0, 0, 0, 0)
@@ -25,10 +25,10 @@ CoD.DirectorDraftSelectLoadoutInternal.new = function(f1_arg0, f1_arg1, f1_arg2,
 	self:addElement(InspecReticleCornerDots)
 	self.InspecReticleCornerDots = InspecReticleCornerDots
 	local LoadoutText = LUI.UIText.new(0.5, 0.5, -37.5, 37.5, 0.5, 0.5, -15, 0)
-	LoadoutText:setText(Engine[0xF9F1239CFD921FE](0x2CD058C9967F620))
+	LoadoutText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/select_loadout"))
 	LoadoutText:setTTF("default")
-	LoadoutText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	LoadoutText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	LoadoutText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	LoadoutText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(LoadoutText)
 	self.LoadoutText = LoadoutText
 	if PostLoadFunc then

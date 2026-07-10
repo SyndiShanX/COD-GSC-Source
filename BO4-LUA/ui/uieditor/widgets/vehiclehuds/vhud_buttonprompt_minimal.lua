@@ -11,17 +11,17 @@ CoD.vhud_ButtonPrompt_Minimal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local prompt = LUI.UIText.new(0, 0, 58, 358, 0, 0, 16.5, 33.5)
 	prompt:setTTF("ttmussels_regular")
-	prompt:setMaterial(LUI.UIImage.GetCachedMaterial(0xB0AEA8900F97CFB))
+	prompt:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_3B0AEA8900F97CFB"))
 	prompt:setShaderVector(0, 0, 0, 0, 0)
 	prompt:setShaderVector(1, 0, 0, 0, 0)
 	prompt:setShaderVector(2, 0.6, 0, 0, 0)
 	prompt:setLetterSpacing(0.5)
-	prompt:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	prompt:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	prompt:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	prompt:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	prompt:linkToElementModel(self, "text", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			prompt:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			prompt:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	self:addElement(prompt)
@@ -32,7 +32,7 @@ CoD.vhud_ButtonPrompt_Minimal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self.button = button
 	local bind = LUI.UIText.new(0.5, 0.5, -75, -35, 0.5, 0.5, -23, 13)
 	bind:setTTF("default")
-	bind:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	bind:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	bind:linkToElementModel(self, "bind", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -44,7 +44,7 @@ CoD.vhud_ButtonPrompt_Minimal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	local triangle = LUI.UIImage.new(0.5, 0.5, -32, 32, 0, 0, -14, 50)
 	triangle:setRGB(0.62, 0.61, 0.61)
 	triangle:setScale(0.15, 0.15)
-	triangle:setImage(RegisterImage(0xF54DE746A777A9A))
+	triangle:setImage(RegisterImage(@"uie_ui_menu_draft_triangle"))
 	self:addElement(triangle)
 	self.triangle = triangle
 	local ControllerDependentTextBox = nil
@@ -133,7 +133,7 @@ CoD.vhud_ButtonPrompt_Minimal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	end)
 	local f1_local6 = self
 	local f1_local7 = self.subscribeToModel
-	local f1_local8 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local8 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local7(f1_local6, f1_local8["factions.isCoDCaster"], function(f14_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -201,7 +201,7 @@ CoD.vhud_ButtonPrompt_Minimal.__resetProperties = function(f18_arg0)
 	f18_arg0.prompt:setTopBottom(0, 0, 16.5, 33.5)
 	f18_arg0.prompt:setRGB(1, 1, 1)
 	f18_arg0.prompt:setAlpha(1)
-	f18_arg0.prompt:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	f18_arg0.prompt:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	f18_arg0.bind:setRGB(1, 1, 1)
 	f18_arg0.bind:setAlpha(1)
 	f18_arg0.ControllerDependentTextBox:setAlpha(0)
@@ -274,7 +274,7 @@ CoD.vhud_ButtonPrompt_Minimal.__clipsPerState = {
 			f22_arg0.prompt:completeAnimation()
 			f22_arg0.prompt:setLeftRight(0.5, 0.5, -87, 87)
 			f22_arg0.prompt:setTopBottom(0.5, 0.5, -5.5, 11.5)
-			f22_arg0.prompt:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+			f22_arg0.prompt:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 			f22_arg0.clipFinished(f22_arg0.prompt)
 			f22_arg0.button:completeAnimation()
 			f22_arg0.button:setAlpha(0)

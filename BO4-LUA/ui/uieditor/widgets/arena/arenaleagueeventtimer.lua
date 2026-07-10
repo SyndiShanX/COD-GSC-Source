@@ -13,10 +13,10 @@ CoD.ArenaLeagueEventTimer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local event = LUI.UIText.new(0, 0, 0, 111, 0, 0, 0, 25)
 	event:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
-	event:setText(Engine[0xF9F1239CFD921FE](0xFB561925D7F1E7E))
+	event:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_6FB561925D7F1E7E"))
 	event:setTTF("ttmussels_demibold")
 	event:setLetterSpacing(2)
-	event:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	event:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(event)
 	self.event = event
 	local VerticalListSpacer = CoD.VerticalListSpacer.new(f1_arg0, f1_arg1, 0, 0, 112, 137, 0, 0, 0, 25)
@@ -35,13 +35,13 @@ CoD.ArenaLeagueEventTimer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 		{
 			stateName = "Unranked",
 			condition = function(menu, element, event)
-				return CoD.ArenaUtility.CurrentArenaEventTypeEquals(self, Enum[0xC0EA92D04BC003B][0x185075D2D3D8497])
+				return CoD.ArenaUtility.CurrentArenaEventTypeEquals(self, Enum[@"hash_6C0EA92D04BC003B"][@"hash_4185075D2D3D8497"])
 			end,
 		},
 	})
 	local f1_local4 = self
 	local f1_local5 = self.subscribeToModel
-	local f1_local6 = Engine[0x8DF2E5447F384B9]()
+	local f1_local6 = Engine[@"getglobalmodel"]()
 	f1_local5(f1_local4, f1_local6["lobbyPlaylist.name"], function(f4_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -53,7 +53,7 @@ CoD.ArenaLeagueEventTimer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	end, false)
 	f1_local4 = self
 	f1_local5 = self.subscribeToModel
-	f1_local6 = Engine[0x8DF2E5447F384B9]()
+	f1_local6 = Engine[@"getglobalmodel"]()
 	f1_local5(f1_local4, f1_local6["lobbyRoot.lobbyNav"], function(f5_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

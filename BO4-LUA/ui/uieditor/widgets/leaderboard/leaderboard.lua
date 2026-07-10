@@ -17,17 +17,17 @@ CoD.Leaderboard.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_a
 	LeaderboardRows:setWidgetType(CoD.LeaderboardRow)
 	LeaderboardRows:setVerticalCount(18)
 	LeaderboardRows:setSpacing(4)
-	LeaderboardRows:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	LeaderboardRows:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	LeaderboardRows:setDataSource("LeaderboardRows")
 	LeaderboardRows:appendEventHandler("input_source_changed", function(f2_arg0, f2_arg1)
 		f2_arg1.menu = f2_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f2_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f2_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	local LoadingText = LeaderboardRows
 	local LeaderboardHeader = LeaderboardRows.subscribeToModel
-	local LeaderboardEmptyText = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local LeaderboardEmptyText = Engine[@"getmodelforcontroller"](f1_arg1)
 	LeaderboardHeader(LoadingText, LeaderboardEmptyText.LastInput, function(f3_arg0, f3_arg1)
-		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	LeaderboardRows:registerEventHandler("list_item_gain_focus", function(element, event)
 		local f4_local0 = nil
@@ -46,13 +46,13 @@ CoD.Leaderboard.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_a
 		elseif element.super.gainFocus then
 			f6_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_ltrig"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_rtrig"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f6_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(LeaderboardRows, f1_arg1, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(LeaderboardRows, f1_arg1, Enum[@"luibutton"][@"lui_key_ltrig"], nil, function(element, menu, controller, model)
 		if IsSelfInState(self, "DefaultState") and not IsRepeatButtonPress(model) then
 			PlaySoundAlias("uin_paint_decal_nav")
 			CoD.LeaderboardUtility.LeaderboardPageUp(self, element, controller)
@@ -61,13 +61,13 @@ CoD.Leaderboard.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_a
 		end
 	end, function(element, menu, controller)
 		if IsSelfInState(self, "DefaultState") and not IsRepeatButtonPress(nil) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC], 0x7630B08CE7BF317, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_ltrig"], @"hash_77630B08CE7BF317", nil, nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(LeaderboardRows, f1_arg1, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(LeaderboardRows, f1_arg1, Enum[@"luibutton"][@"lui_key_rtrig"], nil, function(element, menu, controller, model)
 		if IsSelfInState(self, "DefaultState") and not IsRepeatButtonPress(model) then
 			PlaySoundAlias("uin_paint_decal_nav")
 			CoD.LeaderboardUtility.LeaderboardPageDown(self, element, controller)
@@ -76,13 +76,13 @@ CoD.Leaderboard.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_a
 		end
 	end, function(element, menu, controller)
 		if IsSelfInState(self, "DefaultState") and not IsRepeatButtonPress(nil) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA], 0x35B6BF6242A52D2, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_rtrig"], @"hash_35B6BF6242A52D2", nil, nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(LeaderboardRows, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(LeaderboardRows, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], nil, function(element, menu, controller, model)
 		if IsSelfInState(self, "DefaultState") then
 			PlaySoundAlias("uin_paint_decal_nav")
 			CoD.LeaderboardUtility.LeaderboardGoToTopOfList(self, element, controller)
@@ -91,13 +91,13 @@ CoD.Leaderboard.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_a
 		end
 	end, function(element, menu, controller)
 		if IsSelfInState(self, "DefaultState") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x973DD79B6545E80, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"hash_5973DD79B6545E80", nil, nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(LeaderboardRows, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(LeaderboardRows, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if IsSelfInState(self, "DefaultState") and IsGamepad(controller) then
 			CoD.LeaderboardUtility.LeaderboardOpenPlayerDetails(self, element, controller)
 			return true
@@ -105,7 +105,7 @@ CoD.Leaderboard.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_a
 		end
 	end, function(element, menu, controller)
 		if IsSelfInState(self, "DefaultState") and IsGamepad(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false
@@ -121,19 +121,19 @@ CoD.Leaderboard.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_a
 	self.LeaderboardHeader = LeaderboardHeader
 	LoadingText = LUI.UIText.new(0.5, 0.5, -82.5, 82.5, 0.5, 0.5, -14, 14)
 	LoadingText:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
-	LoadingText:setText(Engine[0xF9F1239CFD921FE](0x6A50DC52864D7AE))
+	LoadingText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/lb_loading"))
 	LoadingText:setTTF("dinnext_regular")
 	LoadingText:setLetterSpacing(2)
-	LoadingText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	LoadingText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	LoadingText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	LoadingText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(LoadingText)
 	self.LoadingText = LoadingText
 	LeaderboardEmptyText = LUI.UIText.new(0.5, 0.5, -331, 331, 0.5, 0.5, -14, 14)
 	LeaderboardEmptyText:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
-	LeaderboardEmptyText:setText(Engine[0xF9F1239CFD921FE](0x1BBC59F370DA3F))
+	LeaderboardEmptyText:setText(Engine[@"hash_4F9F1239CFD921FE"](0x1BBC59F370DA3F))
 	LeaderboardEmptyText:setTTF("dinnext_regular")
-	LeaderboardEmptyText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	LeaderboardEmptyText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	LeaderboardEmptyText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	LeaderboardEmptyText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(LeaderboardEmptyText)
 	self.LeaderboardEmptyText = LeaderboardEmptyText
 	self:mergeStateConditions({

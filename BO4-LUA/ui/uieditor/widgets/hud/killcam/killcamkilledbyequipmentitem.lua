@@ -8,16 +8,16 @@ CoD.KillcamKilledByEquipmentItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	self.soundSet = "none"
 	local ItemName = LUI.UIText.new(0, 0, 0, 120, 0, 0, 69, 87)
 	ItemName:setTTF("ttmussels_demibold")
-	ItemName:setMaterial(LUI.UIImage.GetCachedMaterial(0x6250C6FCAC36BD4))
+	ItemName:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_56250C6FCAC36BD4"))
 	ItemName:setShaderVector(0, 0.2, 0, 0, 0)
 	ItemName:setShaderVector(1, 0, 0, 0, 1)
 	ItemName:setLetterSpacing(1)
-	ItemName:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	ItemName:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	ItemName:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	ItemName:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	ItemName:linkToElementModel(self, "name", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			ItemName:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			ItemName:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	self:addElement(ItemName)

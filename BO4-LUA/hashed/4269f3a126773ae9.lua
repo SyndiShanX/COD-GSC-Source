@@ -14,22 +14,22 @@ LUI.createMenu.WZTrialUpsellPopup = function(f1_arg0, f1_arg1)
 	local FullscreenPopupTemplate = CoD.FullscreenPopupTemplate.new(f1_local1, f1_arg0, 0.5, 0.5, -960, 960, 0.5, 0.5, -540, 540)
 	FullscreenPopupTemplate.ButtonList:setWidgetType(CoD.ItemShopButton)
 	FullscreenPopupTemplate.ButtonList:setDataSource("WZTrialUpsellOptions")
-	FullscreenPopupTemplate.Subtitle:setText(Engine[0xF9F1239CFD921FE](0xB3101119C59EC6F))
+	FullscreenPopupTemplate.Subtitle:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_1B3101119C59EC6F"))
 	FullscreenPopupTemplate.ErrorSubtitle:setText("")
-	FullscreenPopupTemplate.WorkingTitle:setText(LocalizeToUpperString(0x14DA16A525132B2))
-	FullscreenPopupTemplate.Title:setText(LocalizeToUpperString(0x14DA16A525132B2))
-	FullscreenPopupTemplate.DoneTitle:setText(LocalizeToUpperString(0x14DA16A525132B2))
+	FullscreenPopupTemplate.WorkingTitle:setText(LocalizeToUpperString(@"hash_714DA16A525132B2"))
+	FullscreenPopupTemplate.Title:setText(LocalizeToUpperString(@"hash_714DA16A525132B2"))
+	FullscreenPopupTemplate.DoneTitle:setText(LocalizeToUpperString(@"hash_714DA16A525132B2"))
 	self:addElement(FullscreenPopupTemplate)
 	self.FullscreenPopupTemplate = FullscreenPopupTemplate
 	local PopupImage = LUI.UIImage.new(0.5, 0.5, -960, -324, 0.5, 0.5, -213.5, 230.5)
-	PopupImage:setImage(RegisterImage(0xCDD43147C7EA23E))
+	PopupImage:setImage(RegisterImage(@"uie_ui_menu_blackmarket_popup_image"))
 	self:addElement(PopupImage)
 	self.PopupImage = PopupImage
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		GoBack(self, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x6DA4540B4705513, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"hash_26DA4540B4705513", nil, nil)
 		return true
 	end, false)
 	FullscreenPopupTemplate.buttons:setModel(self.buttonModel, f1_arg0)
@@ -50,7 +50,7 @@ LUI.createMenu.WZTrialUpsellPopup = function(f1_arg0, f1_arg1)
 	local f1_local4 = self
 	f1_local4 = FullscreenPopupTemplate
 	if IsPC() then
-		CoD.PCUtility.LinkPCSmallCloseButtonToInput(f1_local1, f1_arg0, f1_local4, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A])
+		CoD.PCUtility.LinkPCSmallCloseButtonToInput(f1_local1, f1_arg0, f1_local4, Enum[@"luibutton"][@"lui_key_xbb_pscircle"])
 	end
 	return self
 end

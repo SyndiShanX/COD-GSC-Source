@@ -18,7 +18,7 @@ CoD.HUD_PC_Wingsuit.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 			end,
 		},
 	})
-	SpeedUp.label:setText(LocalizeToUpperString(0xDE0EFB7A131D734))
+	SpeedUp.label:setText(LocalizeToUpperString(@"hash_DE0EFB7A131D734"))
 	SpeedUp.HUDVehiclePromptContainer.KBMText:setText(CoD.BaseUtility.AlreadyLocalized(CoD.PCUtility.GetKeybind(f1_arg1, "+forward")))
 	self:addElement(SpeedUp)
 	self.SpeedUp = SpeedUp
@@ -31,7 +31,7 @@ CoD.HUD_PC_Wingsuit.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 			end,
 		},
 	})
-	SlowDown.label:setText(LocalizeToUpperString(0x99B5D0CE4888821))
+	SlowDown.label:setText(LocalizeToUpperString(@"hash_799B5D0CE4888821"))
 	SlowDown.HUDVehiclePromptContainer.KBMText:setText(CoD.BaseUtility.AlreadyLocalized(CoD.PCUtility.GetKeybind(f1_arg1, "+back")))
 	LUI.OverrideFunction_CallOriginalFirst(SlowDown, "setState", function(element, controller, f4_arg2, f4_arg3, f4_arg4)
 		if IsSelfInState(self, "Gamepad") then
@@ -49,7 +49,7 @@ CoD.HUD_PC_Wingsuit.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 			end,
 		},
 	})
-	FreeLook.label:setText(LocalizeToUpperString(0x2A5083EB824A559))
+	FreeLook.label:setText(LocalizeToUpperString(@"warzone/wingsuit_l2"))
 	FreeLook.HUDVehiclePromptContainer.KBMText:setText(CoD.BaseUtility.AlreadyLocalized(CoD.PCUtility.GetKeybind(f1_arg1, "+vehiclealtcontrol")))
 	self:addElement(FreeLook)
 	self.FreeLook = FreeLook
@@ -73,7 +73,7 @@ CoD.HUD_PC_Wingsuit.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	end)
 	local f1_local4 = self
 	local f1_local5 = self.subscribeToModel
-	local f1_local6 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local6 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local5(f1_local4, f1_local6.LastInput, function(f9_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -101,11 +101,11 @@ CoD.HUD_PC_Wingsuit.__resetProperties = function(f10_arg0, f10_arg1)
 	f10_arg0.FreeLook:setAlpha(1)
 	f10_arg0.FreeLook.HUDVehiclePromptContainer.KBMText:setText(CoD.BaseUtility.AlreadyLocalized(CoD.PCUtility.GetKeybind(f10_arg1, "+vehiclealtcontrol")))
 	f10_arg0.SpeedUp:setAlpha(1)
-	f10_arg0.SpeedUp.label:setText(LocalizeToUpperString(0xDE0EFB7A131D734))
+	f10_arg0.SpeedUp.label:setText(LocalizeToUpperString(@"hash_DE0EFB7A131D734"))
 	f10_arg0.SpeedUp.HUDVehiclePromptContainer.KBMText:setText(CoD.BaseUtility.AlreadyLocalized(CoD.PCUtility.GetKeybind(f10_arg1, "+forward")))
 	f10_arg0.SlowDown:setLeftRight(0.5, 0.5, -47.5, 47.5)
 	f10_arg0.SlowDown:setAlpha(1)
-	f10_arg0.SlowDown.label:setText(LocalizeToUpperString(0x99B5D0CE4888821))
+	f10_arg0.SlowDown.label:setText(LocalizeToUpperString(@"hash_799B5D0CE4888821"))
 	f10_arg0.SlowDown.HUDVehiclePromptContainer.KBMText:setText(CoD.BaseUtility.AlreadyLocalized(CoD.PCUtility.GetKeybind(f10_arg1, "+back")))
 end
 CoD.HUD_PC_Wingsuit.__clipsPerState = {
@@ -143,7 +143,7 @@ CoD.HUD_PC_Wingsuit.__clipsPerState = {
 			f13_arg0.SpeedUp.label:completeAnimation()
 			f13_arg0.SpeedUp.HUDVehiclePromptContainer.KBMText:completeAnimation()
 			f13_arg0.SpeedUp:setAlpha(1)
-			f13_arg0.SpeedUp.label:setText(LocalizeToUpperString(0x2A4C73EB82436E6))
+			f13_arg0.SpeedUp.label:setText(LocalizeToUpperString(@"warzone/wingsuit_ls"))
 			f13_arg0.SpeedUp.HUDVehiclePromptContainer.KBMText:setText(CoD.BaseUtility.AlreadyLocalized(CoD.PCUtility.GetKeybind(f13_arg1, "+movestick")))
 			f13_arg0.clipFinished(f13_arg0.SpeedUp)
 			f13_arg0.SlowDown:completeAnimation()
@@ -151,7 +151,7 @@ CoD.HUD_PC_Wingsuit.__clipsPerState = {
 			f13_arg0.SlowDown.HUDVehiclePromptContainer.KBMText:completeAnimation()
 			f13_arg0.SlowDown:setLeftRight(0.5, 0.5, -47.5, 47.5)
 			f13_arg0.SlowDown:setAlpha(0)
-			f13_arg0.SlowDown.label:setText(LocalizeToUpperString(0x2A4C73EB82436E6))
+			f13_arg0.SlowDown.label:setText(LocalizeToUpperString(@"warzone/wingsuit_ls"))
 			f13_arg0.SlowDown.HUDVehiclePromptContainer.KBMText:setText(CoD.BaseUtility.AlreadyLocalized(CoD.PCUtility.GetKeybind(f13_arg1, "+movestick")))
 			f13_arg0.clipFinished(f13_arg0.SlowDown)
 			f13_arg0.FreeLook:completeAnimation()

@@ -26,7 +26,7 @@ CoD.Leaderboard_GameModeButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	LeaderboardGameModeButtonInternal:linkToElementModel(self, "title", true, function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
-			LeaderboardGameModeButtonInternal.ButtonTitle:setText(Engine[0xF9F1239CFD921FE](f4_local0))
+			LeaderboardGameModeButtonInternal.ButtonTitle:setText(Engine[@"hash_4F9F1239CFD921FE"](f4_local0))
 		end
 	end)
 	self:addElement(LeaderboardGameModeButtonInternal)

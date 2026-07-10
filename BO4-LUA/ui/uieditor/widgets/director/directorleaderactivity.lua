@@ -9,14 +9,14 @@ CoD.DirectorLeaderActivity.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local SceneBlur = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	SceneBlur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	SceneBlur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	SceneBlur:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(SceneBlur)
 	self.SceneBlur = SceneBlur
 	local PixelGrid = LUI.UIImage.new(0, 1, 0, 0, 0, 0.99, 0, 0)
 	PixelGrid:setAlpha(0.08)
-	PixelGrid:setImage(RegisterImage(0x311E811A3183347))
-	PixelGrid:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	PixelGrid:setImage(RegisterImage(@"uie_ui_hud_notifications_pixelpattern"))
+	PixelGrid:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	PixelGrid:setShaderVector(0, 0, 0, 0, 0)
 	PixelGrid:setupNineSliceShader(128, 128)
 	self:addElement(PixelGrid)
@@ -25,8 +25,8 @@ CoD.DirectorLeaderActivity.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	LeaderActivityText:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	LeaderActivityText:setTTF("ttmussels_regular")
 	LeaderActivityText:setLetterSpacing(6)
-	LeaderActivityText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	LeaderActivityText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	LeaderActivityText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	LeaderActivityText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	LeaderActivityText:subscribeToGlobalModel(f1_arg1, "LobbyRoot", "leaderActivity", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then

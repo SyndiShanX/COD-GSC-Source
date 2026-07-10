@@ -8,13 +8,13 @@ CoD.CallingCards_Asset_Stingertail.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Stinger = LUI.UIImage.new(0, 0, 0, 264, 0, 0, 0, 232)
-	Stinger:setImage(RegisterImage(0x5B22104BF215939))
+	Stinger:setImage(RegisterImage(@"uie_callingcards_mp_loot_master_lionstinger"))
 	self:addElement(Stinger)
 	self.Stinger = Stinger
 	local StingerShimmer = LUI.UIImage.new(0, 0, 0, 264, 0, 0, 1, 233)
 	StingerShimmer:setAlpha(0.65)
-	StingerShimmer:setImage(RegisterImage(0x2668339DED26C5F))
-	StingerShimmer:setMaterial(LUI.UIImage.GetCachedMaterial(0xE992BD5A540E2D))
+	StingerShimmer:setImage(RegisterImage(@"uie_callingcards_mp_loot_master_lionstinger_sheen"))
+	StingerShimmer:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_delta_normal"))
 	StingerShimmer:setShaderVector(0, -0.03, 0.07, 0, 0)
 	StingerShimmer:setShaderVector(1, 0.03, 0.03, 0, 0)
 	StingerShimmer:setShaderVector(2, 0, 1, 0, 0)
@@ -29,7 +29,7 @@ CoD.CallingCards_Asset_Stingertail.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 end
 CoD.CallingCards_Asset_Stingertail.__resetProperties = function(f2_arg0)
 	f2_arg0.StingerShimmer:completeAnimation()
-	f2_arg0.StingerShimmer:setMaterial(LUI.UIImage.GetCachedMaterial(0xE992BD5A540E2D))
+	f2_arg0.StingerShimmer:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_delta_normal"))
 	f2_arg0.StingerShimmer:setShaderVector(0, -0.03, 0.07, 0, 0)
 	f2_arg0.StingerShimmer:setShaderVector(1, 0.03, 0.03, 0, 0)
 	f2_arg0.StingerShimmer:setShaderVector(2, 0, 1, 0, 0)
@@ -57,7 +57,7 @@ CoD.CallingCards_Asset_Stingertail.__clipsPerState = {
 				f3_arg0.StingerShimmer:registerEventHandler("transition_complete_keyframe", f4_local0)
 			end
 			f3_arg0.StingerShimmer:completeAnimation()
-			f3_arg0.StingerShimmer:setMaterial(LUI.UIImage.GetCachedMaterial(0xE992BD5A540E2D))
+			f3_arg0.StingerShimmer:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_delta_normal"))
 			f3_arg0.StingerShimmer:setShaderVector(0, -0.03, 0.07, 0, 0)
 			f3_arg0.StingerShimmer:setShaderVector(1, 0.03, 0.03, 0, 0)
 			f3_arg0.StingerShimmer:setShaderVector(2, 0, 1, 0, 0)

@@ -15,7 +15,7 @@ CoD.BM_EmptyContractSlotColumn.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	self.Image = Image
 	local DotCorner9Slice3 = CoD.Corner9Slice.new(f1_arg0, f1_arg1, 0, 1, 0, 0, 0, 1, 0, 0)
 	DotCorner9Slice3:setAlpha(0.9)
-	DotCorner9Slice3:setRFTMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	DotCorner9Slice3:setRFTMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(DotCorner9Slice3)
 	self.DotCorner9Slice3 = DotCorner9Slice3
 	self:mergeStateConditions({

@@ -8,13 +8,13 @@ CoD.NewBreadcrumbLarge.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local NewIcon = LUI.UIImage.new(0.5, 0.5, -56, 56, 0.5, 0.5, -12, 12)
-	NewIcon:setImage(RegisterImage(0xEF2F878EFAE7140))
+	NewIcon:setImage(RegisterImage(@"uie_ui_icon_frontend_helptag2"))
 	self:addElement(NewIcon)
 	self.NewIcon = NewIcon
 	local Glow = LUI.UIImage.new(0, 0, 0, 132, 0, 0, 0, 44)
 	Glow:setScale(1.06, 1.12)
-	Glow:setImage(RegisterImage(0xA21849A40A8804C))
-	Glow:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	Glow:setImage(RegisterImage(@"uie_ui_icon_frontend_helptag_glow02"))
+	Glow:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	Glow:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(Glow)
 	self.Glow = Glow
@@ -28,7 +28,7 @@ CoD.NewBreadcrumbLarge.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	})
 	local f1_local3 = self
 	local f1_local4 = self.subscribeToModel
-	local f1_local5 = Engine[0x8DF2E5447F384B9]()
+	local f1_local5 = Engine[@"getglobalmodel"]()
 	f1_local4(f1_local3, f1_local5["lobbyRoot.lobbyNetworkMode"], function(f3_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -40,7 +40,7 @@ CoD.NewBreadcrumbLarge.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	end, false)
 	f1_local3 = self
 	f1_local4 = self.subscribeToModel
-	f1_local5 = Engine[0x8DF2E5447F384B9]()
+	f1_local5 = Engine[@"getglobalmodel"]()
 	f1_local4(f1_local3, f1_local5["lobbyRoot.lobbyNav"], function(f4_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -81,11 +81,11 @@ CoD.NewBreadcrumbLarge.__clipsPerState = {
 			local f7_local0 = function(f8_arg0)
 				local f8_local0 = function(f9_arg0)
 					local f9_local0 = function(f10_arg0)
-						f10_arg0:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+						f10_arg0:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 						f10_arg0:setAlpha(0.6)
 						f10_arg0:registerEventHandler("transition_complete_keyframe", f7_arg0.clipFinished)
 					end
-					f9_arg0:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f9_arg0:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 					f9_arg0:setAlpha(0.2)
 					f9_arg0:registerEventHandler("transition_complete_keyframe", f9_local0)
 				end

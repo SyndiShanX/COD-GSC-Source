@@ -40,8 +40,8 @@ LUI.createMenu.AARMissionRewardOverlay = function(f1_arg0, f1_arg1)
 	local AmbientCornerR = LUI.UIImage.new(0.5, 0.5, 960, 850, 0, 0, 689, 799)
 	AmbientCornerR:setAlpha(0.2)
 	AmbientCornerR:setZRot(-180)
-	AmbientCornerR:setImage(RegisterImage(0xD87B290C1BEDDA0))
-	AmbientCornerR:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	AmbientCornerR:setImage(RegisterImage(@"uie_ui_menu_aar_levelup_ambientcorner"))
+	AmbientCornerR:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(AmbientCornerR)
 	self.AmbientCornerR = AmbientCornerR
 	local FooterContainerFrontendRight = CoD.FooterContainer_Frontend_Right.new(f1_local1, f1_arg0, 0, 1, 0, 0, 1, 1, -48, 0)
@@ -69,16 +69,16 @@ LUI.createMenu.AARMissionRewardOverlay = function(f1_arg0, f1_arg1)
 	local CharacterUnlocked = LUI.UIText.new(0.5, 0.5, -960, 960, 0, 0, 53.5, 104.5)
 	CharacterUnlocked:setRGB(ColorSet.PlayerYellow.r, ColorSet.PlayerYellow.g, ColorSet.PlayerYellow.b)
 	CharacterUnlocked:setTTF("ttmussels_regular")
-	CharacterUnlocked:setMaterial(LUI.UIImage.GetCachedMaterial(0x71E049B161CD00A))
+	CharacterUnlocked:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_171E049B161CD00A"))
 	CharacterUnlocked:setLetterSpacing(12)
-	CharacterUnlocked:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	CharacterUnlocked:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	self:addElement(CharacterUnlocked)
 	self.CharacterUnlocked = CharacterUnlocked
 	local CharacterUnlocks = LUI.UIList.new(f1_local1, f1_arg0, 2, 0, nil, false, false, false, false)
 	CharacterUnlocks:setLeftRight(0.5, 0.5, -50, 50)
 	CharacterUnlocks:setTopBottom(0, 0, 24, 124)
 	CharacterUnlocks:setWidgetType(CoD.AARMissionReward_CharacterListItem)
-	CharacterUnlocks:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	CharacterUnlocks:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	CharacterUnlocks:setHorizontalCounter(CoD.horizontalCounter)
 	CharacterUnlocks:setDataSource("CharacterUnlock")
 	LUI.OverrideFunction_CallOriginalFirst(CharacterUnlocks, "setModel", function(element, controller)
@@ -101,7 +101,7 @@ LUI.createMenu.AARMissionRewardOverlay = function(f1_arg0, f1_arg1)
 			end,
 		},
 	})
-	TrialInfoBannerWidget.InfoText:setText(Engine[0xF9F1239CFD921FE](0x9D0049BA4C6168A))
+	TrialInfoBannerWidget.InfoText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_29D0049BA4C6168A"))
 	self:addElement(TrialInfoBannerWidget)
 	self.TrialInfoBannerWidget = TrialInfoBannerWidget
 	local focusBlocker = nil
@@ -117,14 +117,14 @@ LUI.createMenu.AARMissionRewardOverlay = function(f1_arg0, f1_arg1)
 			CharacterUnlocked:setText(LocalizeToUpperString(f8_local0))
 		end
 	end)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		CoD.AARUtility.CloseMissionRewardOverlay(menu, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x6393FF34EA56966, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/continue", nil, nil)
 		return true
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		if IsPC() then
 			CoD.AARUtility.CloseMissionRewardOverlay(menu, controller)
 			return true
@@ -132,7 +132,7 @@ LUI.createMenu.AARMissionRewardOverlay = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if IsPC() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 			return true
 		else
 			return false
@@ -195,7 +195,7 @@ CoD.AARMissionRewardOverlay.__clipsPerState = {
 			f14_arg0.AmbientCornerR:registerEventHandler("transition_complete_keyframe", f14_local0)
 			local f14_local1 = function(f16_arg0)
 				local f16_local0 = function(f17_arg0)
-					f17_arg0:beginAnimation(200, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f17_arg0:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_out"])
 					f17_arg0:setAlpha(1)
 					f17_arg0:registerEventHandler("transition_complete_keyframe", f14_arg0.clipFinished)
 				end
@@ -220,7 +220,7 @@ CoD.AARMissionRewardOverlay.__clipsPerState = {
 			f14_arg0.DirectorDividerWithGradient:setAlpha(0)
 			f14_local2(f14_arg0.DirectorDividerWithGradient)
 			local f14_local3 = function(f20_arg0)
-				f14_arg0.CharacterUnlocked:beginAnimation(200, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f14_arg0.CharacterUnlocked:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_in"])
 				f14_arg0.CharacterUnlocked:setAlpha(1)
 				f14_arg0.CharacterUnlocked:registerEventHandler("interrupted_keyframe", f14_arg0.clipInterrupted)
 				f14_arg0.CharacterUnlocked:registerEventHandler("transition_complete_keyframe", f14_arg0.clipFinished)

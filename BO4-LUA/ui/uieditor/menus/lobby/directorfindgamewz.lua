@@ -19,7 +19,7 @@ LUI.createMenu.DirectorFindGameWZ = function(f1_arg0, f1_arg1)
 	self.anyChildUsesUpdateState = true
 	local TEMPBlackBGOverlay = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	TEMPBlackBGOverlay:setRGB(0, 0, 0)
-	TEMPBlackBGOverlay:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	TEMPBlackBGOverlay:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	TEMPBlackBGOverlay:setShaderVector(0, 0.01, 0.5, 0, 0)
 	self:addElement(TEMPBlackBGOverlay)
 	self.TEMPBlackBGOverlay = TEMPBlackBGOverlay
@@ -35,9 +35,9 @@ LUI.createMenu.DirectorFindGameWZ = function(f1_arg0, f1_arg1)
 	OptionsList:setHorizontalCount(3)
 	OptionsList:setVerticalCount(4)
 	OptionsList:setSpacing(20)
-	OptionsList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	OptionsList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	OptionsList:linkToElementModel(OptionsList, "locked", true, function(model, f2_arg1)
-		CoD.Menu.UpdateButtonShownState(f2_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f2_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	OptionsList:registerEventHandler("gain_focus", function(element, event)
 		local f3_local0 = nil
@@ -46,10 +46,10 @@ LUI.createMenu.DirectorFindGameWZ = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f3_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f3_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(OptionsList, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(OptionsList, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if CoD.DirectorUtility.PartyExceedsPlaylistMax(element) then
 			return true
 		elseif not CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "locked") then
@@ -60,10 +60,10 @@ LUI.createMenu.DirectorFindGameWZ = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if CoD.DirectorUtility.PartyExceedsPlaylistMax(element) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "ui_confirm")
 			return false
 		elseif not CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "locked") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false
@@ -90,12 +90,12 @@ LUI.createMenu.DirectorFindGameWZ = function(f1_arg0, f1_arg1)
 	self:addElement(FooterContainerFrontendRight)
 	self.FooterContainerFrontendRight = FooterContainerFrontendRight
 	local CACHeader = CoD.CommonHeader.new(f1_local1, f1_arg0, 0.5, 0.5, -960, 960, 0, 0, 0, 67)
-	CACHeader.subtitle.StageTitle:setText(LocalizeToUpperString(0x38A4FBEBCE1E6BE))
+	CACHeader.subtitle.StageTitle:setText(LocalizeToUpperString(@"hash_538A4FBEBCE1E6BE"))
 	CACHeader.subtitle.subtitle:setAlpha(0)
 	CACHeader:subscribeToGlobalModel(f1_arg0, "LobbyRoot", "lobbyTitle", function(model)
 		local f7_local0 = model:get()
 		if f7_local0 ~= nil then
-			CACHeader.subtitle.subtitle:setText(Engine[0xF9F1239CFD921FE](f7_local0))
+			CACHeader.subtitle.subtitle:setText(Engine[@"hash_4F9F1239CFD921FE"](f7_local0))
 		end
 	end)
 	CACHeader:registerEventHandler("menu_loaded", function(element, event)
@@ -148,7 +148,7 @@ LUI.createMenu.DirectorFindGameWZ = function(f1_arg0, f1_arg1)
 	end)
 	local f1_local9 = FETabBar
 	local GridLayout = FETabBar.subscribeToModel
-	local f1_local11 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	local f1_local11 = Engine[@"getmodelforcontroller"](f1_arg0)
 	GridLayout(f1_local9, f1_local11.LastInput, function(f13_arg0)
 		f1_local1:updateElementState(FETabBar, {
 			name = "model_validation",
@@ -183,7 +183,7 @@ LUI.createMenu.DirectorFindGameWZ = function(f1_arg0, f1_arg1)
 	GridLayout = LUI.GridLayout.new(f1_local1, f1_arg0, false, 0, 0, 2, 0, nil, nil, false, false, false, false)
 	GridLayout:setLeftRight(0, 0, 2541.5, 2541.5)
 	GridLayout:setTopBottom(0, 0, -294, -294)
-	GridLayout:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	GridLayout:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(GridLayout)
 	self.GridLayout = GridLayout
 	SelectedPlaylistInfo:linkToElementModel(OptionsList, nil, false, function(model)
@@ -195,11 +195,11 @@ LUI.createMenu.DirectorFindGameWZ = function(f1_arg0, f1_arg1)
 			OptionsList:setDataSource(f17_local0)
 		end
 	end)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		GoBack(self, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 		return true
 	end, false)
 	LUI.OverrideFunction_CallOriginalFirst(self, "close", function(element)

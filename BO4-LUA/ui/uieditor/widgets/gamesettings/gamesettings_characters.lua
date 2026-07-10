@@ -15,19 +15,19 @@ local f0_local0 = function(f1_arg0)
 	return f1_local0
 end
 local f0_local1 = function(f2_arg0)
-	local f2_local0 = CoD.PlayerRoleUtility.GetHeroList(Engine[0x3EAC408F958FF05]())
-	local f2_local1 = Engine[0x1E32FEF495242B8]()
+	local f2_local0 = CoD.PlayerRoleUtility.GetHeroList(Engine[@"currentsessionmode"]())
+	local f2_local1 = Engine[@"getgametypesettings"]()
 	local f2_local2 = function(f3_arg0, f3_arg1, f3_arg2, f3_arg3, f3_arg4)
 		print("Setting ALL Max Character Count:  Max: " .. f3_arg3)
 		if f2_local0 and #f2_local0 > 0 then
 			local f3_local0 = false
 			for f3_local4, f3_local5 in ipairs(f2_local0) do
-				if f2_local1[0x53F3A0F536232FB][f3_local5.bodyIndex]:get() ~= f3_arg3 then
-					f2_local1[0x53F3A0F536232FB][f3_local5.bodyIndex]:set(f3_arg3)
+				if f2_local1[@"maxuniquerolesperteam"][f3_local5.bodyIndex]:get() ~= f3_arg3 then
+					f2_local1[@"maxuniquerolesperteam"][f3_local5.bodyIndex]:set(f3_arg3)
 					f3_local0 = true
 				end
 			end
-			f3_local1 = Engine[0x8DF2E5447F384B9]()
+			f3_local1 = Engine[@"getglobalmodel"]()
 			f3_local1 = f3_local1:create("GametypeSettings.UpdateCharacters")
 			f3_local1:forceNotifySubscriptions()
 		end
@@ -35,9 +35,9 @@ local f0_local1 = function(f2_arg0)
 	local f2_local3 = nil
 	for f2_local7, f2_local8 in ipairs(f2_local0) do
 		if not f2_local3 then
-			f2_local3 = f2_local1[0x53F3A0F536232FB][f2_local8.bodyIndex]:get()
+			f2_local3 = f2_local1[@"maxuniquerolesperteam"][f2_local8.bodyIndex]:get()
 		end
-		if f2_local3 ~= f2_local1[0x53F3A0F536232FB][f2_local8.bodyIndex]:get() then
+		if f2_local3 ~= f2_local1[@"maxuniquerolesperteam"][f2_local8.bodyIndex]:get() then
 			f2_local3 = nil
 			break
 		end
@@ -50,7 +50,7 @@ local f0_local1 = function(f2_arg0)
 		local f4_local2 = f4_local0
 		local f4_local3 = {
 			models = {
-				text = Engine[0xF9F1239CFD921FE](0xEEBDA1A33FABDC),
+				text = Engine[@"hash_4F9F1239CFD921FE"](@"menu/custom"),
 			},
 		}
 		local f4_local4 = {}
@@ -84,8 +84,8 @@ local f0_local1 = function(f2_arg0)
 	f2_local6 = {}
 	table.insert(f2_local6, {
 		models = {
-			name = 0x3F979FF83304183,
-			desc = 0x1403A7CB59B0FED,
+			name = @"hash_13F979FF83304183",
+			desc = @"hash_61403A7CB59B0FED",
 			image = "blacktransparent",
 			optionsDatasource = f2_local5,
 		},
@@ -101,7 +101,7 @@ local f0_local2 = function(f5_arg0, f5_arg1, f5_arg2)
 		if f5_arg1:get() ~= f6_arg3 then
 			f5_arg1:set(f6_arg3)
 			print("Setting Max Character Count: Character:" .. f5_arg2 .. " Max: " .. f6_arg3)
-			local f6_local0 = Engine[0x8DF2E5447F384B9]()
+			local f6_local0 = Engine[@"getglobalmodel"]()
 			f6_local0 = f6_local0:create("GametypeSettings.CharacterUpdated")
 			f6_local0:forceNotifySubscriptions()
 		end
@@ -115,8 +115,8 @@ local f0_local2 = function(f5_arg0, f5_arg1, f5_arg2)
 					text = f7_local1,
 				},
 				properties = {
-					title = 0x0,
-					desc = 0x0,
+					title = @"hash_0",
+					desc = @"hash_0",
 					image = "",
 					value = f7_local1,
 					isDefault = f5_local2 == f7_local1,
@@ -136,18 +136,18 @@ end
 local f0_local3 = function(f8_arg0)
 	local f8_local0 = {}
 	local f8_local1 = nil
-	local f8_local2 = Engine[0x1E32FEF495242B8]()
-	local f8_local3 = Engine[0x1E32FEF495242B8]()
-	local f8_local4 = CoD.PlayerRoleUtility.GetHeroList(Engine[0x3EAC408F958FF05]())
+	local f8_local2 = Engine[@"getgametypesettings"]()
+	local f8_local3 = Engine[@"getgametypesettings"]()
+	local f8_local4 = CoD.PlayerRoleUtility.GetHeroList(Engine[@"currentsessionmode"]())
 	if f8_local4 and #f8_local4 > 0 then
 		for f8_local8, f8_local9 in ipairs(f8_local4) do
 			local f8_local10 = f8_local9.bodyIndex
-			local f8_local11 = f8_local3[0x53F3A0F536232FB][f8_local10]
-			local f8_local12 = f8_local2[0x53F3A0F536232FB][f8_local10]
+			local f8_local11 = f8_local3[@"maxuniquerolesperteam"][f8_local10]
+			local f8_local12 = f8_local2[@"maxuniquerolesperteam"][f8_local10]
 			table.insert(f8_local0, {
 				models = {
-					name = Engine[0xF9F1239CFD921FE](f8_local9.displayName),
-					desc = 0x3F61F4CF743D1BF,
+					name = Engine[@"hash_4F9F1239CFD921FE"](f8_local9.displayName),
+					desc = @"hash_43F61F4CF743D1BF",
 					image = "blacktransparent",
 					optionsDatasource = f0_local2(f8_local11, f8_local12, f8_local10),
 				},
@@ -162,7 +162,7 @@ local f0_local3 = function(f8_arg0)
 	return f8_local0
 end
 local f0_local4 = function(f10_arg0, f10_arg1, f10_arg2)
-	local f10_local0 = Engine[0x8DF2E5447F384B9]()
+	local f10_local0 = Engine[@"getglobalmodel"]()
 	f10_local0 = f10_local0:create("GametypeSettings.CharacterUpdated")
 	if f10_arg1.updateSubscription then
 		f10_arg1:removeSubscription(f10_arg1.updateSubscription)
@@ -172,7 +172,7 @@ local f0_local4 = function(f10_arg0, f10_arg1, f10_arg2)
 	end, false)
 end
 local f0_local5 = function(f12_arg0, f12_arg1, f12_arg2)
-	local f12_local0 = Engine[0xA798E4552F5E872](Engine[0xA798E4552F5E872](Engine[0x8DF2E5447F384B9](), "GametypeSettings"), "UpdateCharacters")
+	local f12_local0 = Engine[@"createmodel"](Engine[@"createmodel"](Engine[@"getglobalmodel"](), "GametypeSettings"), "UpdateCharacters")
 	if f12_arg1.updateSubscription then
 		f12_arg1:removeSubscription(f12_arg1.updateSubscription)
 	end
@@ -205,7 +205,7 @@ CoD.GameSettings_Characters.new = function(f14_arg0, f14_arg1, f14_arg2, f14_arg
 	OptionCategoryGrid:setWidgetType(CoD.CustomGames_OptionCategoryButton)
 	OptionCategoryGrid:setVerticalCount(5)
 	OptionCategoryGrid:setSpacing(8)
-	OptionCategoryGrid:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	OptionCategoryGrid:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	OptionCategoryGrid:setDataSource("SpecialistOptionCategories")
 	OptionCategoryGrid:registerEventHandler("gain_focus", function(element, event)
 		local f15_local0 = nil
@@ -214,16 +214,16 @@ CoD.GameSettings_Characters.new = function(f14_arg0, f14_arg1, f14_arg2, f14_arg
 		elseif element.super.gainFocus then
 			f15_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f14_arg0, f14_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f14_arg0, f14_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f15_local0
 	end)
-	f14_arg0:AddButtonCallbackFunction(OptionCategoryGrid, f14_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f14_arg0:AddButtonCallbackFunction(OptionCategoryGrid, f14_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		ShowWidget(self.SlidersPC)
 		SetCurrentElementAsActive(self, element, controller)
 		SetFocusToElement(self, "SlidersPC", controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 		return true
 	end, false)
 	self:addElement(OptionCategoryGrid)
@@ -235,7 +235,7 @@ CoD.GameSettings_Characters.new = function(f14_arg0, f14_arg1, f14_arg2, f14_arg
 	SlidersPC:setWidgetType(CoD.CustomGames_SettingSlider)
 	SlidersPC:setVerticalCount(12)
 	SlidersPC:setSpacing(8)
-	SlidersPC:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	SlidersPC:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	SlidersPC:setVerticalCounter(CoD.verticalCounter)
 	SlidersPC:registerEventHandler("list_item_gain_focus", function(element, event)
 		local f18_local0 = nil
@@ -252,8 +252,8 @@ CoD.GameSettings_Characters.new = function(f14_arg0, f14_arg1, f14_arg2, f14_arg
 			f19_local0 = element.super:gainFocus(event)
 		end
 		SetElementCanBeNavigatedTo(self.OptionCategoryGrid, false)
-		CoD.Menu.UpdateButtonShownState(element, f14_arg0, f14_arg1, Enum[0x3DD78803F918E9D][0x22361E23588705A])
-		CoD.Menu.UpdateButtonShownState(element, f14_arg0, f14_arg1, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A])
+		CoD.Menu.UpdateButtonShownState(element, f14_arg0, f14_arg1, Enum[@"luibutton"][@"lui_key_start"])
+		CoD.Menu.UpdateButtonShownState(element, f14_arg0, f14_arg1, Enum[@"luibutton"][@"lui_key_xbb_pscircle"])
 		return f19_local0
 	end)
 	SlidersPC:registerEventHandler("lose_focus", function(element, event)
@@ -266,7 +266,7 @@ CoD.GameSettings_Characters.new = function(f14_arg0, f14_arg1, f14_arg2, f14_arg
 		SetElementCanBeNavigatedTo(self.OptionCategoryGrid, true)
 		return f20_local0
 	end)
-	f14_arg0:AddButtonCallbackFunction(SlidersPC, f14_arg1, Enum[0x3DD78803F918E9D][0x22361E23588705A], "ui_contextual_1", function(element, menu, controller, model)
+	f14_arg0:AddButtonCallbackFunction(SlidersPC, f14_arg1, Enum[@"luibutton"][@"lui_key_start"], "ui_contextual_1", function(element, menu, controller, model)
 		if AlwaysFalse() then
 			OpenGameSettingsOptionsMenu(self, element, controller, menu)
 			return true
@@ -274,18 +274,18 @@ CoD.GameSettings_Characters.new = function(f14_arg0, f14_arg1, f14_arg2, f14_arg
 		end
 	end, function(element, menu, controller)
 		if AlwaysFalse() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x22361E23588705A], 0x8E7772DFD9BBDEB, nil, "ui_contextual_1")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_start"], @"menu/options", nil, "ui_contextual_1")
 			return true
 		else
 			return false
 		end
 	end, false)
-	f14_arg0:AddButtonCallbackFunction(SlidersPC, f14_arg1, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f14_arg0:AddButtonCallbackFunction(SlidersPC, f14_arg1, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		SetFocusToElement(self, "OptionCategoryGrid", controller)
 		CoD.OptionsUtility.SetFocusToGrid(self.OptionCategoryGrid)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x0, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"hash_0", nil, nil)
 		return false
 	end, false)
 	self:addElement(SlidersPC)
@@ -324,7 +324,7 @@ CoD.GameSettings_Characters.new = function(f14_arg0, f14_arg1, f14_arg2, f14_arg
 	})
 	local f14_local8 = self
 	local f14_local9 = self.subscribeToModel
-	local f14_local10 = Engine[0x4DF5CFBC1771947](f14_arg1)
+	local f14_local10 = Engine[@"getmodelforcontroller"](f14_arg1)
 	f14_local9(f14_local8, f14_local10.customGamesEdit, function(f29_arg0)
 		f14_arg0:updateElementState(self, {
 			name = "model_validation",

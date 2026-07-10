@@ -15,7 +15,7 @@ CoD.StartMenu_ChangeTeam_ButtonInternal.new = function(f1_arg0, f1_arg1, f1_arg2
 	local Backing = LUI.UIImage.new(0, 1, 0, 0, 0.06, 1, 0, 0)
 	Backing:setRGB(0.13, 0.12, 0.12)
 	Backing:setAlpha(0.9)
-	Backing:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	Backing:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	Backing:setShaderVector(0, 0, 1, 0, 0)
 	self:addElement(Backing)
 	self.Backing = Backing
@@ -27,17 +27,17 @@ CoD.StartMenu_ChangeTeam_ButtonInternal.new = function(f1_arg0, f1_arg1, f1_arg2
 	local FocusBarB = LUI.UIImage.new(0, 1, 0, 0, 1, 1.4, 0, 0)
 	FocusBarB:setAlpha(0)
 	FocusBarB:setZRot(180)
-	FocusBarB:setImage(RegisterImage(0xC46B6584DEF6D00))
+	FocusBarB:setImage(RegisterImage(@"hash_2C46B6584DEF6D00"))
 	self:addElement(FocusBarB)
 	self.FocusBarB = FocusBarB
 	local TextBox = LUI.UIText.new(0.5, 0.5, -100, 100, 0.5, 0.5, -18.5, 11.5)
 	TextBox:setTTF("default")
-	TextBox:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	TextBox:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	TextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	TextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	TextBox:linkToElementModel(self, "displayText", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			TextBox:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			TextBox:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	self:addElement(TextBox)
@@ -81,7 +81,7 @@ CoD.StartMenu_ChangeTeam_ButtonInternal.new = function(f1_arg0, f1_arg1, f1_arg2
 	local GlowAdditive = LUI.UIImage.new(-0.01, 1.03, -2, -2, 0, 0, -84, 44)
 	GlowAdditive:setAlpha(0)
 	GlowAdditive:setZRot(180)
-	GlowAdditive:setImage(RegisterImage(0xAD405802E3EEE94))
+	GlowAdditive:setImage(RegisterImage(@"uie_icon_frontend_navigation_glowmed"))
 	self:addElement(GlowAdditive)
 	self.GlowAdditive = GlowAdditive
 	self:mergeStateConditions({

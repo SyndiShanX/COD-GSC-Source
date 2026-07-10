@@ -12,7 +12,7 @@ CoD.CallingCards_Asset_Pirates_armwithsword.new = function(f1_arg0, f1_arg1, f1_
 	self:addElement(sword)
 	self.sword = sword
 	local armwithsword = LUI.UIImage.new(0, 0, -259, 21, 0, 0, -42, 62)
-	armwithsword:setImage(RegisterImage(0x328F6C59D434D72))
+	armwithsword:setImage(RegisterImage(@"uie_ui_icon_callingcards_pirates_arm1"))
 	self:addElement(armwithsword)
 	self.armwithsword = armwithsword
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)
@@ -32,14 +32,14 @@ CoD.CallingCards_Asset_Pirates_armwithsword.__clipsPerState = {
 			f3_arg0:setupElementClipCounter(1)
 			local f3_local0 = function(f4_arg0)
 				local f4_local0 = function(f5_arg0)
-					f5_arg0:beginAnimation(1300, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f5_arg0:beginAnimation(1300, Enum[@"luitween"][@"luitween_ease_out"])
 					f5_arg0:setZRot(-56)
 					f5_arg0:registerEventHandler("transition_complete_keyframe", function(element, event)
 						element:playClip("DefaultClip")
 						f3_arg0.clipFinished(element, event)
 					end)
 				end
-				f3_arg0.sword:beginAnimation(1700, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f3_arg0.sword:beginAnimation(1700, Enum[@"luitween"][@"luitween_ease_out"])
 				f3_arg0.sword:setZRot(-10)
 				f3_arg0.sword:registerEventHandler("interrupted_keyframe", f3_arg0.clipInterrupted)
 				f3_arg0.sword:registerEventHandler("transition_complete_keyframe", f4_local0)

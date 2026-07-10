@@ -42,15 +42,15 @@ CoD.DossierVoDPreview.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	self.IntroPreview = IntroPreview
 	local Title = LUI.UIText.new(0, 0, 0, 510, 0, 0, 303, 339)
 	Title:setRGB(0.92, 0.89, 0.72)
-	Title:setText(Engine[0xF9F1239CFD921FE](0x93E719493E9E18F))
+	Title:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	Title:setTTF("ttmussels_regular")
-	Title:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Title:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	Title:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Title:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	self:addElement(Title)
 	self.Title = Title
 	local Play = CoD.VodButtonPrompt.new(f1_arg0, f1_arg1, 0, 0, 0, 200, 1, 1, -33, 0)
 	Play:setAlpha(0)
-	Play.Play:setText(LocalizeToUpperString(0xD31D493AE40DA0F))
+	Play.Play:setText(LocalizeToUpperString(@"hash_D31D493AE40DA0F"))
 	Play:subscribeToGlobalModel(f1_arg1, "Controller", "primary_button_image", function(model)
 		local f6_local0 = model:get()
 		if f6_local0 ~= nil then
@@ -61,7 +61,7 @@ CoD.DossierVoDPreview.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	self.Play = Play
 	local Fullscreen = CoD.VodButtonPrompt.new(f1_arg0, f1_arg1, 1, 1, -200, 0, 1, 1, -33, 0)
 	Fullscreen:setAlpha(0)
-	Fullscreen.Play:setText(LocalizeToUpperString(0x23594B6BDE14144))
+	Fullscreen.Play:setText(LocalizeToUpperString(@"hash_323594B6BDE14144"))
 	Fullscreen:subscribeToGlobalModel(f1_arg1, "Controller", "alt2_button_image", function(model)
 		local f7_local0 = model:get()
 		if f7_local0 ~= nil then
@@ -73,10 +73,10 @@ CoD.DossierVoDPreview.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	local Desc = LUI.UIText.new(0, 0, 0, 510, 0, 0, 347, 377)
 	Desc:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	Desc:setAlpha(0)
-	Desc:setText(Engine[0xF9F1239CFD921FE](0x93E719493E9E18F))
+	Desc:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	Desc:setTTF("ttmussels_regular")
-	Desc:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Desc:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Desc:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Desc:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(Desc)
 	self.Desc = Desc
 	self:mergeStateConditions({

@@ -11,7 +11,7 @@ CoD.TimerRight.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_ar
 	TextBox2:setText("")
 	TextBox2:setTTF("dinnext_regular")
 	TextBox2:setLetterSpacing(-1)
-	TextBox2:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
+	TextBox2:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
 	self:addElement(TextBox2)
 	self.TextBox2 = TextBox2
 	if PostLoadFunc then

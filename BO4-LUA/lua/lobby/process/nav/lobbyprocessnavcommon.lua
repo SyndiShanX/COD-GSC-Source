@@ -6,11 +6,11 @@ Lobby.Core.AddProcessForward(LuaEnum.UI.DIRECTOR_ONLINE, LuaEnum.UI.DIRECTOR_LAN
 	return Lobby.ProcessNavigate.ChangeNetworkMode(f2_arg0, f2_arg1, f2_arg2)
 end)
 Lobby.Core.AddProcessForward(LuaEnum.UI.DIRECTOR_LAN_SELECT, LuaEnum.UI.DIRECTOR_ONLINE, function(f3_arg0, f3_arg1, f3_arg2)
-	Dvar[0x4FF45B41C6046F8]:set(f3_arg2[0xEE71E4EE12BC453])
+	Dvar[@"hash_4FF45B41C6046F8"]:set(f3_arg2[@"maxclients"])
 	return Lobby.ProcessNavigate.ChangeNetworkMode(f3_arg0, fromTargeet, f3_arg2)
 end)
 Lobby.Core.AddProcessForward(LuaEnum.UI.MAIN, LuaEnum.UI.DIRECTOR_ONLINE, function(f4_arg0, f4_arg1, f4_arg2)
-	Dvar[0x4FF45B41C6046F8]:set(f4_arg2[0xEE71E4EE12BC453])
+	Dvar[@"hash_4FF45B41C6046F8"]:set(f4_arg2[@"maxclients"])
 	if LuaUtils.SkipDirectorOnlineMenu() then
 		local f4_local0 = Lobby.ProcessNavigate.CreatePrivateLobby(f4_arg0, f4_arg1, f4_arg2)
 		Lobby.Process.AppendProcess(f4_local0, Lobby.ProcessNavigate.PrivateLobbyNavigate(f4_arg0, f4_arg2, LobbyData.GetLobbyMenuByName(LuaEnum.UI.DIRECTOR_ONLINE_MP_PREGAME)))
@@ -42,7 +42,7 @@ for f0_local6, f0_local7 in pairs(LuaUtils.LobbyMainModeData) do
 end
 Lobby.Core.AddProcessForward(LuaEnum.UI.MAIN, LuaEnum.UI.DIRECTOR_LAN_SELECT, function(f10_arg0, f10_arg1, f10_arg2)
 	local f10_local0 = Lobby.ProcessNavigate.CreatePrivateLobby(f10_arg0, f10_arg1, f10_arg2)
-	Engine[0x7778612F9CB9B0D]()
+	Engine[@"hash_57778612F9CB9B0D"]()
 	return f10_local0
 end)
 Lobby.Core.AddProcessBack(LuaEnum.UI.DIRECTOR_LAN_SELECT, LuaEnum.UI.MAIN, function(f11_arg0, f11_arg1, f11_arg2)

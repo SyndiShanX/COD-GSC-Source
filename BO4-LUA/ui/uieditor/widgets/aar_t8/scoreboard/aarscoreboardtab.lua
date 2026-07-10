@@ -29,7 +29,7 @@ CoD.AARScoreboardTab.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	})
 	local AARScoreboardHeader = TabbedScoreboardScores
 	local NemesisList = TabbedScoreboardScores.subscribeToModel
-	local AARTabHeader = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local AARTabHeader = Engine[@"getmodelforcontroller"](f1_arg1)
 	NemesisList(AARScoreboardHeader, AARTabHeader["scoreboardInfo.activeTab"], function(f3_arg0)
 		f1_arg0:updateElementState(TabbedScoreboardScores, {
 			name = "model_validation",
@@ -47,7 +47,7 @@ CoD.AARScoreboardTab.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	NemesisList:setWidgetType(CoD.AARNemesis)
 	NemesisList:setVerticalCount(6)
 	NemesisList:setSpacing(6)
-	NemesisList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	NemesisList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	NemesisList:setDataSource("AARKillStats")
 	self:addElement(NemesisList)
 	self.NemesisList = NemesisList
@@ -59,7 +59,7 @@ CoD.AARScoreboardTab.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	self.AARScoreboardHeader = AARScoreboardHeader
 	AARTabHeader = CoD.AARTabHeader.new(f1_arg0, f1_arg1, 0, 0, 235, 735, 0, 0, 94, 214)
 	AARTabHeader:setAlpha(0)
-	AARTabHeader.TabTitle:setText(Engine[0xF9F1239CFD921FE](0x7BB5E9B11633E3))
+	AARTabHeader.TabTitle:setText(Engine[@"hash_4F9F1239CFD921FE"](@"aar/stats"))
 	AARTabHeader:subscribeToGlobalModel(f1_arg1, "AARSummaryStats", nil, function(model)
 		AARTabHeader:setModel(model, f1_arg1)
 	end)
@@ -78,7 +78,7 @@ CoD.AARScoreboardTab.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	})
 	local f1_local7 = self
 	local f1_local8 = self.subscribeToModel
-	local f1_local9 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local9 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local8(f1_local7, f1_local9["AAR.activeTab"], function(f7_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -146,7 +146,7 @@ CoD.AARScoreboardTab.__clipsPerState = {
 			f10_arg0:__resetProperties()
 			f10_arg0:setupElementClipCounter(5)
 			local f10_local0 = function(f11_arg0)
-				f10_arg0.AarMpBacking:beginAnimation(150, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f10_arg0.AarMpBacking:beginAnimation(150, Enum[@"luitween"][@"luitween_ease_in"])
 				f10_arg0.AarMpBacking:setAlpha(1)
 				f10_arg0.AarMpBacking:registerEventHandler("interrupted_keyframe", f10_arg0.clipInterrupted)
 				f10_arg0.AarMpBacking:registerEventHandler("transition_complete_keyframe", f10_arg0.clipFinished)
@@ -182,7 +182,7 @@ CoD.AARScoreboardTab.__clipsPerState = {
 			f10_local2(f10_arg0.NemesisList)
 			local f10_local3 = function(f16_arg0)
 				local f16_local0 = function(f17_arg0)
-					f17_arg0:beginAnimation(150, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f17_arg0:beginAnimation(150, Enum[@"luitween"][@"luitween_ease_in"])
 					f17_arg0:setAlpha(1)
 					f17_arg0:registerEventHandler("transition_complete_keyframe", f10_arg0.clipFinished)
 				end
@@ -195,7 +195,7 @@ CoD.AARScoreboardTab.__clipsPerState = {
 			f10_local3(f10_arg0.AARScoreboardHeader)
 			local f10_local4 = function(f18_arg0)
 				local f18_local0 = function(f19_arg0)
-					f19_arg0:beginAnimation(150, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f19_arg0:beginAnimation(150, Enum[@"luitween"][@"luitween_ease_out"])
 					f19_arg0:setAlpha(1)
 					f19_arg0:registerEventHandler("transition_complete_keyframe", f10_arg0.clipFinished)
 				end

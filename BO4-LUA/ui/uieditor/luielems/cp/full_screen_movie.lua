@@ -6,14 +6,14 @@ local PreLoadFunc = function(self, controller)
 	end)
 	self.Movie:linkToElementModel(self, "movieName", true, function(model)
 		if not (IsGameTypeCombatTraining() or IsMPTrainingLobby()) or not CoD.isPC or not CoD.PCKoreaUtility.ShowKorea15Plus() then
-			local f3_local0 = Engine[0x614D394F6F9A18D](model)
+			local f3_local0 = Engine[@"getmodelvalue"](model)
 			if f3_local0 then
 				local f3_local1 = CoD.SafeGetModelValue(self:getModel(), "additive")
 				f3_local1 = f3_local1 and f3_local1 ~= 0
 				local f3_local2 = CoD.SafeGetModelValue(self:getModel(), "looping")
 				f3_local2 = f3_local2 and f3_local2 ~= 0
 				local f3_local3 = CoD.SafeGetModelValue(self:getModel(), "movieKey")
-				if f3_local1 and Engine[0xBC62B0E988DCCAF]() then
+				if f3_local1 and Engine[@"issplitscreen"]() then
 					self.SplitscreenSideBarLeft:setAlpha(100)
 					self.SplitscreenSideBarRight:setAlpha(100)
 				end
@@ -25,8 +25,8 @@ local PreLoadFunc = function(self, controller)
 	end)
 	self.Movie:linkToElementModel(self, "playOutroMovie", true, function(model)
 		if not IsGameTypeCombatTraining() or not CoD.isPC or not CoD.PCKoreaUtility.ShowKorea15Plus() then
-			if Engine[0x614D394F6F9A18D](model) then
-				local f4_local0 = CoD.mapsTable[Engine[0xB87231BF773995E]()]
+			if Engine[@"getmodelvalue"](model) then
+				local f4_local0 = CoD.mapsTable[Engine[@"getcurrentmap"]()]
 				if f4_local0 and f4_local0.outroMovie then
 					self.Movie:setupMoviePlayback(f4_local0.outroMovie, false, false)
 				end
@@ -36,7 +36,7 @@ local PreLoadFunc = function(self, controller)
 		end
 	end)
 	self.BlackBg:linkToElementModel(self, "showBlackScreen", true, function(model)
-		local f5_local0 = Engine[0x614D394F6F9A18D](model)
+		local f5_local0 = Engine[@"getmodelvalue"](model)
 		if not f5_local0 or f5_local0 == 0 then
 			self.BlackBg:setAlpha(0)
 		end
@@ -93,7 +93,7 @@ LUI.createMenu.full_screen_movie = function(f7_arg0, f7_arg1)
 	})
 	local f7_local8 = self
 	local f7_local9 = self.subscribeToModel
-	local f7_local10 = Engine[0x8DF2E5447F384B9]()
+	local f7_local10 = Engine[@"getglobalmodel"]()
 	f7_local9(f7_local8, f7_local10.cutsceneSkippable, function(f9_arg0)
 		f7_local1:updateElementState(self, {
 			name = "model_validation",
@@ -104,9 +104,9 @@ LUI.createMenu.full_screen_movie = function(f7_arg0, f7_arg1)
 		})
 	end, false)
 	self:linkToElementModel(self, "skippable", true, function(model, f10_arg1)
-		CoD.Menu.UpdateButtonShownState(f10_arg1, f7_local1, f7_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f10_arg1, f7_local1, f7_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
-	f7_local1:AddButtonCallbackFunction(self, f7_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f7_local1:AddButtonCallbackFunction(self, f7_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if CoD.BaseUtility.IsSelfInState(self, "Skippable") and CoD.ModelUtility.IsSelfModelValueEqualTo(element, controller, "skippable", 1) and not CoD.VideoStreamingUtility.IsMoviePaused(self.Movie) then
 			CoD.VideoStreamingUtility.SkipFullScreenMovie(self, controller)
 			return true
@@ -114,7 +114,7 @@ LUI.createMenu.full_screen_movie = function(f7_arg0, f7_arg1)
 		end
 	end, function(element, menu, controller)
 		if CoD.BaseUtility.IsSelfInState(self, "Skippable") and CoD.ModelUtility.IsSelfModelValueEqualTo(element, controller, "skippable", 1) and not CoD.VideoStreamingUtility.IsMoviePaused(self.Movie) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 			return false
 		else
 			return false

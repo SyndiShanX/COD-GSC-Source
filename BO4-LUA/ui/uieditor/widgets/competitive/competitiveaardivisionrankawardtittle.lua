@@ -12,12 +12,12 @@ CoD.CompetitiveAARDivisionRankAwardTittle.new = function(f1_arg0, f1_arg1, f1_ar
 	self.Image = Image
 	local PlacementMessage = LUI.UIText.new(0.15, 0.15, -77, 523, 0, 0, 7, 37)
 	PlacementMessage:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
-	PlacementMessage:setText(Engine[0xF9F1239CFD921FE](0x80004416A6EAFD0))
+	PlacementMessage:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_680004416A6EAFD0"))
 	PlacementMessage:setTTF("ttmussels_demibold")
-	PlacementMessage:setMaterial(LUI.UIImage.GetCachedMaterial(0x71E049B161CD00A))
+	PlacementMessage:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_171E049B161CD00A"))
 	PlacementMessage:setLetterSpacing(4)
-	PlacementMessage:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	PlacementMessage:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	PlacementMessage:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	PlacementMessage:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(PlacementMessage)
 	self.PlacementMessage = PlacementMessage
 	if PostLoadFunc then

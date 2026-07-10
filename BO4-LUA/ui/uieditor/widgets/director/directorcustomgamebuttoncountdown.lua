@@ -11,8 +11,8 @@ CoD.DirectorCustomGameButtonCountdown.new = function(f1_arg0, f1_arg1, f1_arg2, 
 	local timer = LUI.UIText.new(0, 0, -10, 70, 0.5, 0.5, -22.5, 22.5)
 	timer:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
 	timer:setTTF("ttmussels_demibold")
-	timer:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	timer:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	timer:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	timer:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	timer:subscribeToGlobalModel(f1_arg1, "LobbyRoot", "lobbyTimeRemaining", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -27,7 +27,7 @@ CoD.DirectorCustomGameButtonCountdown.new = function(f1_arg0, f1_arg1, f1_arg2, 
 	local CountdownText = LUI.UIText.new(0, 0, 90, 370, 0.5, 0.5, -12, 12)
 	CountdownText:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
 	CountdownText:setTTF("ttmussels_demibold")
-	CountdownText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	CountdownText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	CountdownText:subscribeToGlobalModel(f1_arg1, "LobbyRoot", "lobbyStatus", function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then

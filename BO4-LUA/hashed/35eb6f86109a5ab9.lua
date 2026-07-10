@@ -20,7 +20,7 @@ CoD.DupeMeterInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	})
 	local Dupe03 = Dupe01
 	local Dupe02 = Dupe01.subscribeToModel
-	local RerollIcon = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local RerollIcon = Engine[@"getmodelforcontroller"](f1_arg1)
 	Dupe02(Dupe03, RerollIcon["LootStreamProgress.dupes"], function(f3_arg0)
 		f1_arg0:updateElementState(Dupe01, {
 			name = "model_validation",
@@ -46,7 +46,7 @@ CoD.DupeMeterInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	})
 	RerollIcon = Dupe02
 	Dupe03 = Dupe02.subscribeToModel
-	local RerollIconPulse = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local RerollIconPulse = Engine[@"getmodelforcontroller"](f1_arg1)
 	Dupe03(RerollIcon, RerollIconPulse["LootStreamProgress.dupes"], function(f6_arg0)
 		f1_arg0:updateElementState(Dupe02, {
 			name = "model_validation",
@@ -67,22 +67,22 @@ CoD.DupeMeterInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	RerollIcon = LUI.UIImage.new(0, 0, 97.5, 117.5, 0, 0, 3, 23)
 	RerollIcon:setRGB(0.54, 0.87, 0.31)
 	RerollIcon:setScale(1.3, 1.3)
-	RerollIcon:setImage(RegisterImage(0xB259D817A83EFDB))
+	RerollIcon:setImage(RegisterImage(@"hash_7B259D817A83EFDB"))
 	self:addElement(RerollIcon)
 	self.RerollIcon = RerollIcon
 	RerollIconPulse = LUI.UIImage.new(0, 0, 97.5, 117.5, 0, 0, 3, 23)
 	RerollIconPulse:setRGB(0.54, 0.87, 0.31)
 	RerollIconPulse:setAlpha(0)
 	RerollIconPulse:setScale(1.3, 1.3)
-	RerollIconPulse:setImage(RegisterImage(0xB259D817A83EFDB))
-	RerollIconPulse:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	RerollIconPulse:setImage(RegisterImage(@"hash_7B259D817A83EFDB"))
+	RerollIconPulse:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(RerollIconPulse)
 	self.RerollIconPulse = RerollIconPulse
 	local Linker = LUI.UIImage.new(0, 0, 82.5, 86.5, 0, 0, 0, 27)
 	Linker:setAlpha(0.6)
 	Linker:setZRot(90)
-	Linker:setImage(RegisterImage(0xC49B0C8991A541F))
-	Linker:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	Linker:setImage(RegisterImage(@"hash_C49B0C8991A541F"))
+	Linker:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	Linker:setShaderVector(0, 0, 0, 0, 0)
 	Linker:setupNineSliceShader(4, 8)
 	self:addElement(Linker)

@@ -45,11 +45,11 @@ CoD.PC_BnetStore_PurchaseButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self.DotTL = DotTL
 	local ButtonTitle = LUI.UIText.new(0, 1, 25, -25, 0.5, 0.5, -11.5, 13.5)
 	ButtonTitle:setRGB(0, 0, 0)
-	ButtonTitle:setText(LocalizeToUpperString(0x802AE8BF3973373))
+	ButtonTitle:setText(LocalizeToUpperString(@"hash_5802AE8BF3973373"))
 	ButtonTitle:setTTF("ttmussels_demibold")
 	ButtonTitle:setLetterSpacing(8)
-	ButtonTitle:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	ButtonTitle:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	ButtonTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	ButtonTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(ButtonTitle)
 	self.ButtonTitle = ButtonTitle
 	self:mergeStateConditions({
@@ -68,7 +68,7 @@ CoD.PC_BnetStore_PurchaseButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	})
 	local f1_local11 = self
 	local f1_local12 = self.subscribeToModel
-	local f1_local13 = Engine[0x8DF2E5447F384B9]()
+	local f1_local13 = Engine[@"getglobalmodel"]()
 	f1_local12(f1_local11, f1_local13["lobbyRoot.lobbyNetworkMode"], function(f4_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

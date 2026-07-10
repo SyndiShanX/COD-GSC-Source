@@ -8,8 +8,8 @@ CoD.HealthBarPulse.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	self.soundSet = "none"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local PulseBar = LUI.UIImage.new(0, 0, -2, 132, 0, 0, 2.5, 12.5)
-	PulseBar:setImage(RegisterImage(0xD5B703C3B0F386D))
-	PulseBar:setMaterial(LUI.UIImage.GetCachedMaterial(0x7EA4827662D4CD4))
+	PulseBar:setImage(RegisterImage(@"hash_2D5B703C3B0F386D"))
+	PulseBar:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_17EA4827662D4CD4"))
 	PulseBar:setShaderVector(0, 4, 1, 0, 0)
 	PulseBar:setShaderVector(1, 0, 1, -0, 1)
 	PulseBar.__Color = function(f2_arg0)
@@ -33,11 +33,11 @@ CoD.HealthBarPulse.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	self.PulseBar = PulseBar
 	local f1_local2 = PulseBar
 	local f1_local3 = PulseBar.subscribeToModel
-	local f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local3(f1_local2, f1_local4["factions.playerFactionTeamEnum"], PulseBar.__Color_FullPath)
 	f1_local2 = PulseBar
 	f1_local3 = PulseBar.subscribeToModel
-	f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local3(f1_local2, f1_local4["profile.colorblindMode"], PulseBar.__Color_FullPath)
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)
 	if PostLoadFunc then

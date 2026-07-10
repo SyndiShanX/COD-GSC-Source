@@ -13,7 +13,7 @@ CoD.PC_StartMenu_Options_Description.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local DescriptionTextBox = CoD.PC_StartMenu_Options_Controls_DescriptionText.new(f1_arg0, f1_arg1, 0, 1, 0, 0, 1, 1, -192, 0)
 	DescriptionTextBox.detailedDescription:setText("")
-	DescriptionTextBox.OptionName:setText(LocalizeToUpperString(0x93E719493E9E18F))
+	DescriptionTextBox.OptionName:setText(LocalizeToUpperString(@"menu/new"))
 	self:addElement(DescriptionTextBox)
 	self.DescriptionTextBox = DescriptionTextBox
 	local Pagination = LUI.UIList.new(f1_arg0, f1_arg1, 15, 0, nil, false, false, false, false)
@@ -23,7 +23,7 @@ CoD.PC_StartMenu_Options_Description.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	Pagination:setWidgetType(CoD.PC_StartMenu_Options_Pagination)
 	Pagination:setHorizontalCount(5)
 	Pagination:setSpacing(15)
-	Pagination:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	Pagination:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(Pagination)
 	self.Pagination = Pagination
 	local DescriptionImage = CoD.PC_StartMenu_Options_Controls_DescriptionImage.new(f1_arg0, f1_arg1, 0, 0, 0, 675, 0, 0, 0, 380)

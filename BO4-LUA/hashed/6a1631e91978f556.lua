@@ -7,7 +7,7 @@ CoD.ui_icon_callingcards_fairytales_finger2.new = function(f1_arg0, f1_arg1, f1_
 	self.id = "ui_icon_callingcards_fairytales_finger2"
 	self.soundSet = "default"
 	local finger2 = LUI.UIImage.new(0, 0, -74, 22, 0, 0, -26, 14)
-	finger2:setImage(RegisterImage(0xDAD3A048BDCE60F))
+	finger2:setImage(RegisterImage(@"uie_ui_icon_callingcards_fairytale_finger2"))
 	self:addElement(finger2)
 	self.finger2 = finger2
 	if PostLoadFunc then

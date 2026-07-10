@@ -12,17 +12,17 @@ CoD.LeaguePlayIntrolLadderTitleText.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	local CurrentSkillPlacementGlowPC = nil
 	CurrentSkillPlacementGlowPC = LUI.UIText.new(0, 0, 0, 1922, 0, 0, 0, 48)
 	CurrentSkillPlacementGlowPC:setTTF("ttmussels_demibold")
-	CurrentSkillPlacementGlowPC:setMaterial(LUI.UIImage.GetCachedMaterial(0x90D57B1E92D39D7))
+	CurrentSkillPlacementGlowPC:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_90D57B1E92D39D7"))
 	CurrentSkillPlacementGlowPC:setShaderVector(0, 0.47, 0, 0, 0)
 	CurrentSkillPlacementGlowPC:setShaderVector(1, 0.05, 0, 0, 0)
 	CurrentSkillPlacementGlowPC:setShaderVector(2, 1, 1, 1, 0.28)
 	CurrentSkillPlacementGlowPC:setLetterSpacing(8)
-	CurrentSkillPlacementGlowPC:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	CurrentSkillPlacementGlowPC:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	CurrentSkillPlacementGlowPC:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	CurrentSkillPlacementGlowPC:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	CurrentSkillPlacementGlowPC:subscribeToGlobalModel(f1_arg1, "LeaguePlay", "leaguePlaySkillDivisionName", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			CurrentSkillPlacementGlowPC:setText(LocalizeToUpperString(LocalizeIntoString(0x7DF5AC7BE07BAF5, f2_local0)))
+			CurrentSkillPlacementGlowPC:setText(LocalizeToUpperString(LocalizeIntoString(@"hash_17DF5AC7BE07BAF5", f2_local0)))
 		end
 	end)
 	self:addElement(CurrentSkillPlacementGlowPC)
@@ -31,12 +31,12 @@ CoD.LeaguePlayIntrolLadderTitleText.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	CurrentSkillPlacement:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
 	CurrentSkillPlacement:setTTF("ttmussels_demibold")
 	CurrentSkillPlacement:setLetterSpacing(8)
-	CurrentSkillPlacement:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	CurrentSkillPlacement:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	CurrentSkillPlacement:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	CurrentSkillPlacement:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	CurrentSkillPlacement:subscribeToGlobalModel(f1_arg1, "LeaguePlay", "leaguePlaySkillDivisionName", function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
-			CurrentSkillPlacement:setText(LocalizeToUpperString(LocalizeIntoString(0x7DF5AC7BE07BAF5, f3_local0)))
+			CurrentSkillPlacement:setText(LocalizeToUpperString(LocalizeIntoString(@"hash_17DF5AC7BE07BAF5", f3_local0)))
 		end
 	end)
 	self:addElement(CurrentSkillPlacement)

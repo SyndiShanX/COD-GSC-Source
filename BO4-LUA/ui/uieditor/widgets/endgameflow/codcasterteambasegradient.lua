@@ -10,7 +10,7 @@ CoD.CODCasterTeamBaseGradient.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	local GradientL = LUI.UIImage.new(0, 0, 0, 1250, 0, 1, 0, 0)
 	GradientL:setAlpha(0)
 	GradientL:setYRot(180)
-	GradientL:setImage(RegisterImage(0x87AA9A2E0B5D9A6))
+	GradientL:setImage(RegisterImage(@"uie_ui_menu_draft_gradient"))
 	GradientL:subscribeToGlobalModel(f1_arg1, "DeadSpectate", "playerIndex", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -29,7 +29,7 @@ CoD.CODCasterTeamBaseGradient.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	})
 	local f1_local2 = self
 	local f1_local3 = self.subscribeToModel
-	local f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local3(f1_local2, f1_local4["factions.isCoDCaster"], function(f4_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

@@ -14,7 +14,7 @@ CoD.EmblemEditorGradient.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local ColorPickerBkgd0 = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	ColorPickerBkgd0:setAlpha(0.5)
-	ColorPickerBkgd0:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	ColorPickerBkgd0:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	ColorPickerBkgd0:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(ColorPickerBkgd0)
 	self.ColorPickerBkgd0 = ColorPickerBkgd0
@@ -25,8 +25,8 @@ CoD.EmblemEditorGradient.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	self.BarBacking = BarBacking
 	local Frame = LUI.UIImage.new(0, 1, -1, 1, 0, 1, -1, 1)
 	Frame:setAlpha(0.2)
-	Frame:setImage(RegisterImage(0x185E11D74ECA3D7))
-	Frame:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	Frame:setImage(RegisterImage(@"uie_ui_menu_store_common_frame"))
+	Frame:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	Frame:setShaderVector(0, 0, 0, 0, 0)
 	Frame:setupNineSliceShader(16, 16)
 	self:addElement(Frame)
@@ -36,19 +36,19 @@ CoD.EmblemEditorGradient.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 		{
 			stateName = "SingleSliderState",
 			condition = function(menu, element, event)
-				return not CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg1, "Emblem.EmblemSelectedLayerProperties.gradient_type", Enum[0xCA0CB02B4A12602][0xA7C637A09DA3D16])
+				return not CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg1, "Emblem.EmblemSelectedLayerProperties.gradient_type", Enum[@"customizationgradienttype"][@"hash_1A7C637A09DA3D16"])
 			end,
 		},
 		{
 			stateName = "ContourState",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg1, "Emblem.EmblemSelectedLayerProperties.gradient_type", Enum[0xCA0CB02B4A12602][0xA7C637A09DA3D16])
+				return CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg1, "Emblem.EmblemSelectedLayerProperties.gradient_type", Enum[@"customizationgradienttype"][@"hash_1A7C637A09DA3D16"])
 			end,
 		},
 	})
 	local gradientColor1 = gradientSliderWidget
 	local gradientColor0 = gradientSliderWidget.subscribeToModel
-	local GradientTypeList = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local GradientTypeList = Engine[@"getmodelforcontroller"](f1_arg1)
 	gradientColor0(gradientColor1, GradientTypeList["Emblem.EmblemSelectedLayerProperties.gradient_type"], function(f4_arg0)
 		f1_arg0:updateElementState(gradientSliderWidget, {
 			name = "model_validation",
@@ -71,7 +71,7 @@ CoD.EmblemEditorGradient.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	})
 	GradientTypeList = gradientColor0
 	gradientColor1 = gradientColor0.subscribeToModel
-	local f1_local8 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local8 = Engine[@"getmodelforcontroller"](f1_arg1)
 	gradientColor1(GradientTypeList, f1_local8["Emblem.EmblemProperties.isColor0NoColor"], function(f6_arg0)
 		f1_arg0:updateElementState(gradientColor0, {
 			name = "model_validation",
@@ -89,15 +89,15 @@ CoD.EmblemEditorGradient.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	end)
 	GradientTypeList = gradientColor0
 	gradientColor1 = gradientColor0.subscribeToModel
-	f1_local8 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local8 = Engine[@"getmodelforcontroller"](f1_arg1)
 	gradientColor1(GradientTypeList, f1_local8["Emblem.EmblemProperties.isGradientMode"], function(f8_arg0, f8_arg1)
-		CoD.Menu.UpdateButtonShownState(f8_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f8_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	GradientTypeList = gradientColor0
 	gradientColor1 = gradientColor0.subscribeToModel
-	f1_local8 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local8 = Engine[@"getmodelforcontroller"](f1_arg1)
 	gradientColor1(GradientTypeList, f1_local8["Emblem.EmblemProperties.colorMode"], function(f9_arg0, f9_arg1)
-		CoD.Menu.UpdateButtonShownState(f9_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f9_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	gradientColor0:registerEventHandler("gain_focus", function(element, event)
 		local f10_local0 = nil
@@ -107,24 +107,24 @@ CoD.EmblemEditorGradient.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 			f10_local0 = element.super:gainFocus(event)
 		end
 		CoD.CraftUtility.EmblemGradient_Color0GainFocus(self, self.gradientColor0, f1_arg1)
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f10_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(gradientColor0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
-		if CoD.ModelUtility.IsModelValueEqualTo(controller, "Emblem.EmblemProperties.isGradientMode", 1) and not CoD.ModelUtility.IsModelValueEqualToEnum(controller, "Emblem.EmblemProperties.colorMode", Enum[0xC594B064FEDD0D6][0x8F7F4A0A6A3678B]) then
+	f1_arg0:AddButtonCallbackFunction(gradientColor0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
+		if CoD.ModelUtility.IsModelValueEqualTo(controller, "Emblem.EmblemProperties.isGradientMode", 1) and not CoD.ModelUtility.IsModelValueEqualToEnum(controller, "Emblem.EmblemProperties.colorMode", Enum[@"customizationcolormode"][@"customization_color_mode_none"]) then
 			CoD.CraftUtility.EmblemGradient_BackFromColorPicker(self, element, menu, controller)
 			return true
-		elseif CoD.ModelUtility.IsModelValueEqualTo(controller, "Emblem.EmblemProperties.isGradientMode", 1) and CoD.ModelUtility.IsModelValueEqualToEnum(controller, "Emblem.EmblemProperties.colorMode", Enum[0xC594B064FEDD0D6][0x8F7F4A0A6A3678B]) then
+		elseif CoD.ModelUtility.IsModelValueEqualTo(controller, "Emblem.EmblemProperties.isGradientMode", 1) and CoD.ModelUtility.IsModelValueEqualToEnum(controller, "Emblem.EmblemProperties.colorMode", Enum[@"customizationcolormode"][@"customization_color_mode_none"]) then
 			CoD.CraftUtility.EmblemGradient_ShowSwatchContainer(self, element, menu, controller)
 			return true
 		else
 		end
 	end, function(element, menu, controller)
-		if CoD.ModelUtility.IsModelValueEqualTo(controller, "Emblem.EmblemProperties.isGradientMode", 1) and not CoD.ModelUtility.IsModelValueEqualToEnum(controller, "Emblem.EmblemProperties.colorMode", Enum[0xC594B064FEDD0D6][0x8F7F4A0A6A3678B]) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+		if CoD.ModelUtility.IsModelValueEqualTo(controller, "Emblem.EmblemProperties.isGradientMode", 1) and not CoD.ModelUtility.IsModelValueEqualToEnum(controller, "Emblem.EmblemProperties.colorMode", Enum[@"customizationcolormode"][@"customization_color_mode_none"]) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
-		elseif CoD.ModelUtility.IsModelValueEqualTo(controller, "Emblem.EmblemProperties.isGradientMode", 1) and CoD.ModelUtility.IsModelValueEqualToEnum(controller, "Emblem.EmblemProperties.colorMode", Enum[0xC594B064FEDD0D6][0x8F7F4A0A6A3678B]) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+		elseif CoD.ModelUtility.IsModelValueEqualTo(controller, "Emblem.EmblemProperties.isGradientMode", 1) and CoD.ModelUtility.IsModelValueEqualToEnum(controller, "Emblem.EmblemProperties.colorMode", Enum[@"customizationcolormode"][@"customization_color_mode_none"]) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		else
 			return false
@@ -143,7 +143,7 @@ CoD.EmblemEditorGradient.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	})
 	f1_local8 = gradientColor1
 	GradientTypeList = gradientColor1.subscribeToModel
-	local f1_local9 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local9 = Engine[@"getmodelforcontroller"](f1_arg1)
 	GradientTypeList(f1_local8, f1_local9["Emblem.EmblemProperties.isColor1NoColor"], function(f14_arg0)
 		f1_arg0:updateElementState(gradientColor1, {
 			name = "model_validation",
@@ -161,15 +161,15 @@ CoD.EmblemEditorGradient.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	end)
 	f1_local8 = gradientColor1
 	GradientTypeList = gradientColor1.subscribeToModel
-	f1_local9 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local9 = Engine[@"getmodelforcontroller"](f1_arg1)
 	GradientTypeList(f1_local8, f1_local9["Emblem.EmblemProperties.isGradientMode"], function(f16_arg0, f16_arg1)
-		CoD.Menu.UpdateButtonShownState(f16_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f16_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	f1_local8 = gradientColor1
 	GradientTypeList = gradientColor1.subscribeToModel
-	f1_local9 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local9 = Engine[@"getmodelforcontroller"](f1_arg1)
 	GradientTypeList(f1_local8, f1_local9["Emblem.EmblemProperties.colorMode"], function(f17_arg0, f17_arg1)
-		CoD.Menu.UpdateButtonShownState(f17_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f17_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	gradientColor1:registerEventHandler("gain_focus", function(element, event)
 		local f18_local0 = nil
@@ -179,24 +179,24 @@ CoD.EmblemEditorGradient.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 			f18_local0 = element.super:gainFocus(event)
 		end
 		CoD.CraftUtility.EmblemGradient_Color1GainFocus(self, self.gradientColor1, f1_arg1)
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f18_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(gradientColor1, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
-		if CoD.ModelUtility.IsModelValueEqualTo(controller, "Emblem.EmblemProperties.isGradientMode", 1) and not CoD.ModelUtility.IsModelValueEqualToEnum(controller, "Emblem.EmblemProperties.colorMode", Enum[0xC594B064FEDD0D6][0x8F7F4A0A6A3678B]) then
+	f1_arg0:AddButtonCallbackFunction(gradientColor1, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
+		if CoD.ModelUtility.IsModelValueEqualTo(controller, "Emblem.EmblemProperties.isGradientMode", 1) and not CoD.ModelUtility.IsModelValueEqualToEnum(controller, "Emblem.EmblemProperties.colorMode", Enum[@"customizationcolormode"][@"customization_color_mode_none"]) then
 			CoD.CraftUtility.EmblemGradient_BackFromColorPicker(self, element, menu, controller)
 			return true
-		elseif CoD.ModelUtility.IsModelValueEqualTo(controller, "Emblem.EmblemProperties.isGradientMode", 1) and CoD.ModelUtility.IsModelValueEqualToEnum(controller, "Emblem.EmblemProperties.colorMode", Enum[0xC594B064FEDD0D6][0x8F7F4A0A6A3678B]) then
+		elseif CoD.ModelUtility.IsModelValueEqualTo(controller, "Emblem.EmblemProperties.isGradientMode", 1) and CoD.ModelUtility.IsModelValueEqualToEnum(controller, "Emblem.EmblemProperties.colorMode", Enum[@"customizationcolormode"][@"customization_color_mode_none"]) then
 			CoD.CraftUtility.EmblemGradient_ShowSwatchContainer(self, element, menu, controller)
 			return true
 		else
 		end
 	end, function(element, menu, controller)
-		if CoD.ModelUtility.IsModelValueEqualTo(controller, "Emblem.EmblemProperties.isGradientMode", 1) and not CoD.ModelUtility.IsModelValueEqualToEnum(controller, "Emblem.EmblemProperties.colorMode", Enum[0xC594B064FEDD0D6][0x8F7F4A0A6A3678B]) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+		if CoD.ModelUtility.IsModelValueEqualTo(controller, "Emblem.EmblemProperties.isGradientMode", 1) and not CoD.ModelUtility.IsModelValueEqualToEnum(controller, "Emblem.EmblemProperties.colorMode", Enum[@"customizationcolormode"][@"customization_color_mode_none"]) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
-		elseif CoD.ModelUtility.IsModelValueEqualTo(controller, "Emblem.EmblemProperties.isGradientMode", 1) and CoD.ModelUtility.IsModelValueEqualToEnum(controller, "Emblem.EmblemProperties.colorMode", Enum[0xC594B064FEDD0D6][0x8F7F4A0A6A3678B]) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+		elseif CoD.ModelUtility.IsModelValueEqualTo(controller, "Emblem.EmblemProperties.isGradientMode", 1) and CoD.ModelUtility.IsModelValueEqualToEnum(controller, "Emblem.EmblemProperties.colorMode", Enum[@"customizationcolormode"][@"customization_color_mode_none"]) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		else
 			return false
@@ -237,7 +237,7 @@ CoD.EmblemEditorGradient.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	end)
 	f1_local9 = GradientTypeList
 	f1_local8 = GradientTypeList.subscribeToModel
-	f1_local10 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local10 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local8(f1_local9, f1_local10.LastInput, function(f25_arg0)
 		f1_arg0:updateElementState(GradientTypeList, {
 			name = "model_validation",
@@ -252,10 +252,10 @@ CoD.EmblemEditorGradient.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	GradientTypeList:setWidgetType(CoD.CraftGradientButton)
 	GradientTypeList:setHorizontalCount(3)
 	GradientTypeList:setSpacing(21)
-	GradientTypeList:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	GradientTypeList:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	GradientTypeList:setDataSource("GradientButtonList")
 	GradientTypeList:linkToElementModel(GradientTypeList, "disabled", true, function(model, f26_arg1)
-		CoD.Menu.UpdateButtonShownState(f26_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f26_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	GradientTypeList:registerEventHandler("gain_focus", function(element, event)
 		local f27_local0 = nil
@@ -264,10 +264,10 @@ CoD.EmblemEditorGradient.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 		elseif element.super.gainFocus then
 			f27_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f27_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(GradientTypeList, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(GradientTypeList, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if not IsDisabled(element, controller) then
 			ProcessListAction(self, element, controller, menu)
 			return true
@@ -275,7 +275,7 @@ CoD.EmblemEditorGradient.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 		end
 	end, function(element, menu, controller)
 		if not IsDisabled(element, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false
@@ -289,9 +289,9 @@ CoD.EmblemEditorGradient.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 			condition = function(menu, element, event)
 				local f30_local0 = CoD.CraftUtility.IsEmblemEditorPropertyEqualTo(f1_arg1, "isGradientMode", 1)
 				if f30_local0 then
-					f30_local0 = CoD.CraftUtility.IsEmblemEditorPropertyEqualToEnum(f1_arg1, "colorContainerState", Enum[0x5B86390D74F3997][0x83372F1C29BD7F3])
+					f30_local0 = CoD.CraftUtility.IsEmblemEditorPropertyEqualToEnum(f1_arg1, "colorContainerState", Enum[@"customizationcolornum"][@"customization_color_gradient"])
 					if f30_local0 then
-						f30_local0 = CoD.CraftUtility.IsEmblemEditorPropertyEqualToEnum(f1_arg1, "colorMode", Enum[0x5B86390D74F3997][0x2EFDD03AB2AE52D])
+						f30_local0 = CoD.CraftUtility.IsEmblemEditorPropertyEqualToEnum(f1_arg1, "colorMode", Enum[@"customizationcolornum"][@"customization_color_0"])
 					end
 				end
 				return f30_local0
@@ -302,9 +302,9 @@ CoD.EmblemEditorGradient.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 			condition = function(menu, element, event)
 				local f31_local0 = CoD.CraftUtility.IsEmblemEditorPropertyEqualTo(f1_arg1, "isGradientMode", 1)
 				if f31_local0 then
-					f31_local0 = CoD.CraftUtility.IsEmblemEditorPropertyEqualToEnum(f1_arg1, "colorContainerState", Enum[0x5B86390D74F3997][0x83372F1C29BD7F3])
+					f31_local0 = CoD.CraftUtility.IsEmblemEditorPropertyEqualToEnum(f1_arg1, "colorContainerState", Enum[@"customizationcolornum"][@"customization_color_gradient"])
 					if f31_local0 then
-						f31_local0 = CoD.CraftUtility.IsEmblemEditorPropertyEqualToEnum(f1_arg1, "colorMode", Enum[0x5B86390D74F3997][0x2EFDC03AB2AE37A])
+						f31_local0 = CoD.CraftUtility.IsEmblemEditorPropertyEqualToEnum(f1_arg1, "colorMode", Enum[@"customizationcolornum"][@"customization_color_1"])
 					end
 				end
 				return f31_local0
@@ -313,7 +313,7 @@ CoD.EmblemEditorGradient.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 		{
 			stateName = "Visible_NotEditing",
 			condition = function(menu, element, event)
-				return CoD.CraftUtility.IsEmblemEditorPropertyEqualTo(f1_arg1, "isGradientMode", 1) and CoD.CraftUtility.IsEmblemEditorPropertyEqualToEnum(f1_arg1, "colorContainerState", Enum[0x5B86390D74F3997][0x83372F1C29BD7F3])
+				return CoD.CraftUtility.IsEmblemEditorPropertyEqualTo(f1_arg1, "isGradientMode", 1) and CoD.CraftUtility.IsEmblemEditorPropertyEqualToEnum(f1_arg1, "colorContainerState", Enum[@"customizationcolornum"][@"customization_color_gradient"])
 			end,
 		},
 	})

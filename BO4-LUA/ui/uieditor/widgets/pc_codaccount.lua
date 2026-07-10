@@ -22,15 +22,15 @@ CoD.PC_CoDAccount.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 	local Border = LUI.UIImage.new(0, 1, -72, 72, 0.5, 0.5, -360, 360)
 	Border:setRGB(0.8, 0.76, 0.7)
 	Border:setAlpha(0.03)
-	Border:setImage(RegisterImage(0xF1E3082B39E99BB))
-	Border:setMaterial(LUI.UIImage.GetCachedMaterial(0x44484DDFAF5C093))
+	Border:setImage(RegisterImage(@"uie_highlight_border_line"))
+	Border:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_normal"))
 	Border:setShaderVector(0, 0, 0, 0, 0)
 	Border:setupNineSliceShader(6, 6)
 	self:addElement(Border)
 	self.Border = Border
 	local Network = CoD.StartMenu_Button_SM.new(f1_arg0, f1_arg1, 0, 0, 703, 943, 0, 0, 222, 462)
-	Network.StartMenuOptionsSubFrame.ImageContainer.ImageContainer:setImage(RegisterImage(0xE8E46047AB4630E))
-	Network.StartMenuOptionsSubFrame.ButtonText:setText(LocalizeToUpperString(0x9F9A830F04564A7))
+	Network.StartMenuOptionsSubFrame.ImageContainer.ImageContainer:setImage(RegisterImage(@"ui_icon_startmenu_option_network"))
+	Network.StartMenuOptionsSubFrame.ButtonText:setText(LocalizeToUpperString(@"menu/network"))
 	Network:registerEventHandler("gain_focus", function(element, event)
 		local f2_local0 = nil
 		if element.gainFocus then
@@ -38,22 +38,22 @@ CoD.PC_CoDAccount.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 		elseif element.super.gainFocus then
 			f2_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f2_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(Network, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(Network, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		OpenOverlay(self, "StartMenu_Options_Network", controller)
 		PlaySoundAlias("uin_toggle_generic")
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 		return true
 	end, false)
 	self:addElement(Network)
 	self.Network = Network
 	local Credits = CoD.StartMenu_Button_SM.new(f1_arg0, f1_arg1, 0, 0, 977, 1217, 0, 0, 222, 462)
-	Credits.StartMenuOptionsSubFrame.ImageContainer.ImageContainer:setImage(RegisterImage(0x151A0DF84A6850A))
-	Credits.StartMenuOptionsSubFrame.ButtonText:setText(LocalizeToUpperString(0x68F4F1BF768E367))
+	Credits.StartMenuOptionsSubFrame.ImageContainer.ImageContainer:setImage(RegisterImage(@"ui_icon_startmenu_option_credits"))
+	Credits.StartMenuOptionsSubFrame.ButtonText:setText(LocalizeToUpperString(@"menu/pc_credits"))
 	Credits:registerEventHandler("gain_focus", function(element, event)
 		local f5_local0 = nil
 		if element.gainFocus then
@@ -61,23 +61,23 @@ CoD.PC_CoDAccount.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 		elseif element.super.gainFocus then
 			f5_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f5_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(Credits, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(Credits, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		OpenOverlay(self, "Credit_Fullscreen", controller)
 		PlaySoundAlias("uin_toggle_generic")
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 		return true
 	end, false)
 	self:addElement(Credits)
 	self.Credits = Credits
 	local CoDaccount = CoD.DirectorSelectButtonMiniInternal.new(f1_arg0, f1_arg1, 0, 0, 703, 1217, 0, 0, 499, 568)
-	CoDaccount.LeaderActivityText:setText(Engine[0xF9F1239CFD921FE](0xE60E694DE8A2F04))
-	CoDaccount.MiddleText:setText(LocalizeToUpperString(0xE60E694DE8A2F04))
-	CoDaccount.MiddleTextFocus:setText(LocalizeToUpperString(0xE60E694DE8A2F04))
+	CoDaccount.LeaderActivityText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_6E60E694DE8A2F04"))
+	CoDaccount.MiddleText:setText(LocalizeToUpperString(@"hash_6E60E694DE8A2F04"))
+	CoDaccount.MiddleTextFocus:setText(LocalizeToUpperString(@"hash_6E60E694DE8A2F04"))
 	CoDaccount:registerEventHandler("gain_focus", function(element, event)
 		local f8_local0 = nil
 		if element.gainFocus then
@@ -85,10 +85,10 @@ CoD.PC_CoDAccount.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 		elseif element.super.gainFocus then
 			f8_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f8_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(CoDaccount, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(CoDaccount, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if CoD.CoDAccountUtility.IsAccountFeatureEnabled(controller) and not IsSignedIntoUno(controller) then
 			OpenOverlay(self, "StartMenu_Options_CoDAccount_CTA", controller)
 			PlaySoundAlias("uin_toggle_generic")
@@ -100,10 +100,10 @@ CoD.PC_CoDAccount.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 		end
 	end, function(element, menu, controller)
 		if CoD.CoDAccountUtility.IsAccountFeatureEnabled(controller) and not IsSignedIntoUno(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		elseif CoD.CoDAccountUtility.IsAccountFeatureEnabled(controller) and IsSignedIntoUno(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false

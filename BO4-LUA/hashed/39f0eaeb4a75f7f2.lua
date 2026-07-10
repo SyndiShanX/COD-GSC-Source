@@ -37,7 +37,7 @@ CoD.ZMInventory.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_a
 	ShieldComponents:setWidgetType(CoD.ZMInvShieldItem)
 	ShieldComponents:setHorizontalCount(3)
 	ShieldComponents:setSpacing(0)
-	ShieldComponents:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	ShieldComponents:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	ShieldComponents:setDataSource("ZMInventoryShieldPieces")
 	self:addElement(ShieldComponents)
 	self.ShieldComponents = ShieldComponents
@@ -68,7 +68,7 @@ CoD.ZMInventory.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_a
 		{
 			stateName = "ScoreboardVisiblePC",
 			condition = function(menu, element, event)
-				local f3_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04])
+				local f3_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_scoreboard_open"])
 				if f3_local0 then
 					f3_local0 = CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg1, "scoreboardInfo.activeTab", CoD.HUDUtility.GameStatusMode.MODE_SHOW_SCORES)
 					if f3_local0 then
@@ -81,25 +81,25 @@ CoD.ZMInventory.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_a
 		{
 			stateName = "Visible",
 			condition = function(menu, element, event)
-				return Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04])
+				return Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_scoreboard_open"])
 			end,
 		},
 	})
 	local f1_local11 = self
 	local f1_local12 = self.subscribeToModel
-	local f1_local13 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local12(f1_local11, f1_local13["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04]], function(f5_arg0)
+	local f1_local13 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local12(f1_local11, f1_local13["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]], function(f5_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f5_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"],
 		})
 	end, false)
 	f1_local11 = self
 	f1_local12 = self.subscribeToModel
-	f1_local13 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local13 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local12(f1_local11, f1_local13["scoreboardInfo.activeTab"], function(f6_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -115,7 +115,7 @@ CoD.ZMInventory.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_a
 	end)
 	f1_local11 = self
 	f1_local12 = self.subscribeToModel
-	f1_local13 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local13 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local12(f1_local11, f1_local13.LastInput, function(f8_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

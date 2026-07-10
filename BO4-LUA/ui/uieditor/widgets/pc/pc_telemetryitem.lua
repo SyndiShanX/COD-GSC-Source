@@ -12,9 +12,9 @@ CoD.PC_TelemetryItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	self.KeyPromptBacking = KeyPromptBacking
 	local Label = LUI.UIText.new(0, 0, 3, 40, 0.5, 0.5, -7.5, 7.5)
 	Label:setRGB(ColorSet.T8__BUTTON_UNSELECTED_MAIN.r, ColorSet.T8__BUTTON_UNSELECTED_MAIN.g, ColorSet.T8__BUTTON_UNSELECTED_MAIN.b)
-	Label:setText(Engine[0xF9F1239CFD921FE](0x93E719493E9E18F))
+	Label:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	Label:setTTF("ttmussels_regular")
-	Label:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	Label:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	LUI.OverrideFunction_CallOriginalFirst(Label, "setText", function(element, controller)
 		if not HasProperty(element, "initialWidthSet") then
 			SetElementProperty(element, "initialWidthSet", true)

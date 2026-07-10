@@ -9,12 +9,12 @@ CoD.BowLauncherReticle_L3.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Line3 = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	Line3:setAlpha(0)
-	Line3:setImage(RegisterImage(0x43FE49993DEC089))
-	Line3:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Line3:setImage(RegisterImage(@"uie_bowlauncher_line3"))
+	Line3:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Line3)
 	self.Line3 = Line3
 	local pip1 = LUI.UIImage.new(0.25, 0.75, 0, 0, 0.25, 0.75, 0, 0)
-	pip1:setImage(RegisterImage(0x62EAE1CA751BEA4))
+	pip1:setImage(RegisterImage(@"uie_ui_hud_reticles_bowlauncher_hipfire_dot"))
 	self:addElement(pip1)
 	self.pip1 = pip1
 	if PostLoadFunc then

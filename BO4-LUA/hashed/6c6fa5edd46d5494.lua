@@ -12,17 +12,17 @@ CoD.Tcm_Pause_Rules.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local TcmText = LUI.UIText.new(0.5, 0.5, -318.5, 318.5, 0, 0, 25, 46)
 	TcmText:setRGB(ColorSet.ZombiePlayerDown.r, ColorSet.ZombiePlayerDown.g, ColorSet.ZombiePlayerDown.b)
-	TcmText:setText(Engine[0xF9F1239CFD921FE](0x2F7BDC1E839FE4F))
+	TcmText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_12F7BDC1E839FE4F"))
 	TcmText:setTTF("skorzhen")
 	TcmText:setLetterSpacing(2)
-	TcmText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	TcmText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	self:addElement(TcmText)
 	self.TcmText = TcmText
 	local EnterTheArenaText = LUI.UIText.new(0.5, 0.5, -502.5, 502.5, 0, 0, 50, 90)
 	EnterTheArenaText:setRGB(ColorSet.T8__OCHRE.r, ColorSet.T8__OCHRE.g, ColorSet.T8__OCHRE.b)
 	EnterTheArenaText:setTTF("skorzhen")
 	EnterTheArenaText:setLetterSpacing(4)
-	EnterTheArenaText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	EnterTheArenaText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	EnterTheArenaText:subscribeToGlobalModel(f1_arg1, "ZMHudGlobal", "tcm.active", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -38,7 +38,7 @@ CoD.Tcm_Pause_Rules.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	TcmRules:setHorizontalCount(2)
 	TcmRules:setVerticalCount(6)
 	TcmRules:setSpacing(-2)
-	TcmRules:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	TcmRules:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	TcmRules:setDataSource("TcmRules")
 	self:addElement(TcmRules)
 	self.TcmRules = TcmRules
@@ -58,7 +58,7 @@ CoD.Tcm_Pause_Rules.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	})
 	local f1_local5 = self
 	local f1_local6 = self.subscribeToModel
-	local f1_local7 = Engine[0x8DF2E5447F384B9]()
+	local f1_local7 = Engine[@"getglobalmodel"]()
 	f1_local6(f1_local5, f1_local7["ZMHudGlobal.tcm.active"], function(f4_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

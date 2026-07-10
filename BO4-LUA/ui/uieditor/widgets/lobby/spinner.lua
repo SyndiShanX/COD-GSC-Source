@@ -23,7 +23,7 @@ CoD.Spinner.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5,
 	})
 	local f1_local2 = self
 	local f1_local3 = self.subscribeToModel
-	local f1_local4 = Engine[0x8DF2E5447F384B9]()
+	local f1_local4 = Engine[@"getglobalmodel"]()
 	f1_local3(f1_local2, f1_local4["lobbyRoot.spinnerActive"], function(f3_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

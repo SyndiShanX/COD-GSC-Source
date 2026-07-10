@@ -7,8 +7,8 @@ CoD.CallingCards_Asset_steampunkwarriors_gunsmoke.new = function(f1_arg0, f1_arg
 	self.id = "CallingCards_Asset_steampunkwarriors_gunsmoke"
 	self.soundSet = "default"
 	local Image = LUI.UIImage.new(0, 0, -33, 39, 0, 0, -283, 37)
-	Image:setImage(RegisterImage(0x94414E3405B163E))
-	Image:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Image:setImage(RegisterImage(@"hash_194414E3405B163E"))
+	Image:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Image)
 	self.Image = Image
 	if PostLoadFunc then

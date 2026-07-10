@@ -1,22 +1,22 @@
 require("x64:47e8440c69c793a")
-CoD[0xA4C1F72F3265625] = InheritFrom(LUI.UIElement)
-CoD[0xA4C1F72F3265625].__defaultWidth = 960
-CoD[0xA4C1F72F3265625].__defaultHeight = 240
-CoD[0xA4C1F72F3265625].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+CoD[@"hash_5A4C1F72F3265625"] = InheritFrom(LUI.UIElement)
+CoD[@"hash_5A4C1F72F3265625"].__defaultWidth = 960
+CoD[@"hash_5A4C1F72F3265625"].__defaultHeight = 240
+CoD[@"hash_5A4C1F72F3265625"].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
 	local self = LUI.UIElement.new(f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
-	self:setClass(CoD[0xA4C1F72F3265625])
+	self:setClass(CoD[@"hash_5A4C1F72F3265625"])
 	self.id = "CallingCards_zm_Strategist"
 	self.soundSet = "default"
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local CardIcon = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	CardIcon:setImage(RegisterImage(0x434A15996B65B48))
-	CardIcon:setMaterial(LUI.UIImage.GetCachedMaterial(0xE8F55203998700A))
+	CardIcon:setImage(RegisterImage(@"uie_t7_icon_callingcard_temp2_lrg"))
+	CardIcon:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_feather_blend"))
 	self:addElement(CardIcon)
 	self.CardIcon = CardIcon
 	local background = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	background:setImage(RegisterImage(0xB1F066E27D6407D))
-	background:setMaterial(LUI.UIImage.GetCachedMaterial(0x73D72BCD14C2AAD))
+	background:setImage(RegisterImage(@"uie_ui_icon_callingcards_zm_strategist_background"))
+	background:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_tile_scroll_normal"))
 	background:setShaderVector(0, 1, 1, 0, 0)
 	background:setShaderVector(1, 0.04, 0, 0, 0)
 	self:addElement(background)
@@ -28,31 +28,31 @@ CoD[0xA4C1F72F3265625].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	self:addElement(warWheel2)
 	self.warWheel2 = warWheel2
 	local construction = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	construction:setImage(RegisterImage(0x5AB8BCECD28864C))
+	construction:setImage(RegisterImage(@"uie_ui_icon_callingcards_zm_strategist_construction"))
 	self:addElement(construction)
 	self.construction = construction
 	local zombie = LUI.UIImage.new(0, 0, 440, 960, 0, 0, 0, 240)
 	zombie:setScale(1.05, 1.06)
-	zombie:setImage(RegisterImage(0xAE7A3DD8718A85F))
+	zombie:setImage(RegisterImage(@"uie_ui_icon_callingcards_zm_strategist_zombie"))
 	self:addElement(zombie)
 	self.zombie = zombie
 	local zombieGlow = LUI.UIImage.new(0, 0, 445, 965, 0, 0, 3, 243)
 	zombieGlow:setRGB(1, 0, 0)
 	zombieGlow:setScale(1.05, 1.05)
-	zombieGlow:setImage(RegisterImage(0x95A166D1F379C99))
-	zombieGlow:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	zombieGlow:setImage(RegisterImage(@"uie_ui_icon_callingcards_zm_strategist_zombie_glow_red"))
+	zombieGlow:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(zombieGlow)
 	self.zombieGlow = zombieGlow
 	local foregroundDust = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	foregroundDust:setImage(RegisterImage(0xE6473876048FFA5))
-	foregroundDust:setMaterial(LUI.UIImage.GetCachedMaterial(0x73D72BCD14C2AAD))
+	foregroundDust:setImage(RegisterImage(@"uie_ui_icon_callingcards_zm_strategist_front_dust"))
+	foregroundDust:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_tile_scroll_normal"))
 	foregroundDust:setShaderVector(0, 1, 1, 0, 0)
 	foregroundDust:setShaderVector(1, 0.03, 0, 0, 0)
 	self:addElement(foregroundDust)
 	self.foregroundDust = foregroundDust
 	local cropper = LUI.UIImage.new(0, 0, -32, 992, 0, 0, -392, 632)
 	cropper:setAlpha(0)
-	cropper:setImage(RegisterImage(0x7EEE1693E39382A))
+	cropper:setImage(RegisterImage(@"uie_stage_crop_prop"))
 	self:addElement(cropper)
 	self.cropper = cropper
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)
@@ -61,7 +61,7 @@ CoD[0xA4C1F72F3265625].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	end
 	return self
 end
-CoD[0xA4C1F72F3265625].__resetProperties = function(f2_arg0)
+CoD[@"hash_5A4C1F72F3265625"].__resetProperties = function(f2_arg0)
 	f2_arg0.warWheel:completeAnimation()
 	f2_arg0.warWheel2:completeAnimation()
 	f2_arg0.zombie:completeAnimation()
@@ -74,7 +74,7 @@ CoD[0xA4C1F72F3265625].__resetProperties = function(f2_arg0)
 	f2_arg0.zombieGlow:setScale(1.05, 1.05)
 	f2_arg0.cropper:setAlpha(0)
 end
-CoD[0xA4C1F72F3265625].__clipsPerState = {
+CoD[@"hash_5A4C1F72F3265625"].__clipsPerState = {
 	DefaultState = {
 		DefaultClip = function(f3_arg0, f3_arg1)
 			f3_arg0:__resetProperties()
@@ -279,7 +279,7 @@ CoD[0xA4C1F72F3265625].__clipsPerState = {
 		end,
 	},
 }
-CoD[0xA4C1F72F3265625].__onClose = function(f31_arg0)
+CoD[@"hash_5A4C1F72F3265625"].__onClose = function(f31_arg0)
 	f31_arg0.warWheel:close()
 	f31_arg0.warWheel2:close()
 end

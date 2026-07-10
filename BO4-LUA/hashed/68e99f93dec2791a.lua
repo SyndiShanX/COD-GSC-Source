@@ -9,11 +9,11 @@ CoD.PositionDraft_AutoDrafted.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local AutoSelected = LUI.UIText.new(-0.02, 0.98, 5, 5, 0, 0, 2, 24)
-	AutoSelected:setText(LocalizeToUpperString(LocalizeToUpperString(0xE19E40808DC7CF1)))
+	AutoSelected:setText(LocalizeToUpperString(LocalizeToUpperString(@"hash_4E19E40808DC7CF1")))
 	AutoSelected:setTTF("ttmussels_demibold")
 	AutoSelected:setLetterSpacing(3)
-	AutoSelected:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	AutoSelected:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	AutoSelected:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	AutoSelected:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	AutoSelected:setBackingType(1)
 	AutoSelected:setBackingWidget(CoD.Corner9Slice, f1_arg0, f1_arg1)
 	AutoSelected:setBackingAlpha(0.4)
@@ -31,7 +31,7 @@ CoD.PositionDraft_AutoDrafted.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	})
 	local f1_local2 = self
 	local f1_local3 = self.subscribeToModel
-	local f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local3(f1_local2, f1_local4["PositionDraft.autoSelected"], function(f3_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

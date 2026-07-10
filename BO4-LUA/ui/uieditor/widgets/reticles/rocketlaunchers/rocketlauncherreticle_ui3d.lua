@@ -14,7 +14,7 @@ CoD.rocketLauncherReticle_UI3D.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 		{
 			stateName = "Locked",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsGlobalDataSourceModelValueEnumBitSet(f1_arg1, "CurrentWeapon", "lockedOnEnemy", Enum[0xF041D1802ECFE69][0x86864C292F49B19])
+				return CoD.ModelUtility.IsGlobalDataSourceModelValueEnumBitSet(f1_arg1, "CurrentWeapon", "lockedOnEnemy", Enum[@"rocketlaunchertargetstatesflags"][@"rocket_launcher_target_locked"])
 			end,
 		},
 	})
@@ -30,7 +30,7 @@ CoD.rocketLauncherReticle_UI3D.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 			modelName = "lockedOnEnemy",
 		})
 	end, false)
-	Engine[0xF0AF2C4A29D15D7](f1_arg1, 3, 768, 768)
+	Engine[@"setupui3dwindow"](f1_arg1, 3, 768, 768)
 	internal:setUI3DWindow(3)
 	self:addElement(internal)
 	self.internal = internal
@@ -38,20 +38,20 @@ CoD.rocketLauncherReticle_UI3D.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 		{
 			stateName = "Hidden",
 			condition = function(menu, element, event)
-				return Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x59333FC97F7870])
+				return Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_emp_active"])
 			end,
 		},
 	})
 	f1_local2 = self
 	f1_local3 = self.subscribeToModel
-	f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local3(f1_local2, f1_local4["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x59333FC97F7870]], function(f5_arg0)
+	f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local3(f1_local2, f1_local4["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_emp_active"]], function(f5_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f5_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x59333FC97F7870],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_emp_active"],
 		})
 	end, false)
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)

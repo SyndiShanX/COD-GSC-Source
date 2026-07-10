@@ -15,12 +15,12 @@ CoD.WarzoneContextualExtraItemsArrow.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	self.emptyFocusable = emptyFocusable
 	local Arrow = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	Arrow:setZRot(90)
-	Arrow:setImage(RegisterImage(0x9D1B20838FA39D4))
+	Arrow:setImage(RegisterImage(@"uie_ui_hud_wz_hud_core_qe_pointer"))
 	self:addElement(Arrow)
 	self.Arrow = Arrow
 	local Arrow2 = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	Arrow2:setZRot(90)
-	Arrow2:setImage(RegisterImage(0x9D1B20838FA39D4))
+	Arrow2:setImage(RegisterImage(@"uie_ui_hud_wz_hud_core_qe_pointer"))
 	self:addElement(Arrow2)
 	self.Arrow2 = Arrow2
 	if CoD.isPC then

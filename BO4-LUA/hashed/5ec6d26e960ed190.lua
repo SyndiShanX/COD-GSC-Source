@@ -15,13 +15,13 @@ CoD.WeaponBribeAcquiredCheck.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	self.CheckBacking = CheckBacking
 	local CheckMark = LUI.UIImage.new(0, 0, 0, 64, 0, 0, 0, 64)
 	CheckMark:setRGB(0.08, 0.65, 0)
-	CheckMark:setImage(RegisterImage(0x661A673636FB8C3))
+	CheckMark:setImage(RegisterImage(@"hash_2661A673636FB8C3"))
 	self:addElement(CheckMark)
 	self.CheckMark = CheckMark
 	local CheckGlow = LUI.UIImage.new(0, 0, 0, 64, 0, 0, 0, 64)
 	CheckGlow:setRGB(0, 1, 0.02)
-	CheckGlow:setImage(RegisterImage(0x13FA817ECDA23A5))
-	CheckGlow:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	CheckGlow:setImage(RegisterImage(@"hash_213FA817ECDA23A5"))
+	CheckGlow:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(CheckGlow)
 	self.CheckGlow = CheckGlow
 	self:mergeStateConditions({
@@ -61,11 +61,11 @@ CoD.WeaponBribeAcquiredCheck.__clipsPerState = {
 			f5_arg0:setupElementClipCounter(1)
 			local f5_local0 = function(f6_arg0)
 				local f6_local0 = function(f7_arg0)
-					f7_arg0:beginAnimation(1520, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f7_arg0:beginAnimation(1520, Enum[@"luitween"][@"luitween_ease_in"])
 					f7_arg0:setAlpha(0.3)
 					f7_arg0:registerEventHandler("transition_complete_keyframe", f5_arg0.clipFinished)
 				end
-				f5_arg0.CheckGlow:beginAnimation(980, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f5_arg0.CheckGlow:beginAnimation(980, Enum[@"luitween"][@"luitween_ease_out"])
 				f5_arg0.CheckGlow:setAlpha(0.8)
 				f5_arg0.CheckGlow:registerEventHandler("interrupted_keyframe", f5_arg0.clipInterrupted)
 				f5_arg0.CheckGlow:registerEventHandler("transition_complete_keyframe", f6_local0)

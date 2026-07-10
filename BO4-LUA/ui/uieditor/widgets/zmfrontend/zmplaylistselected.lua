@@ -10,12 +10,12 @@ CoD.ZMPlaylistSelected.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	local equippedIcon = LUI.UIImage.new(0.5, 0.5, -8.5, 8.5, 0.5, 0.5, -8, 8)
 	equippedIcon:setRGB(0.56, 0.68, 0.27)
 	equippedIcon:setAlpha(0)
-	equippedIcon:setImage(RegisterImage(0xB0337CBFC61A7A2))
+	equippedIcon:setImage(RegisterImage(@"hash_1B0337CBFC61A7A2"))
 	self:addElement(equippedIcon)
 	self.equippedIcon = equippedIcon
 	local EquippedMarkerTick2 = LUI.UIImage.new(1, 1, -146, 14, 0, 0, -21, 139)
 	EquippedMarkerTick2:setAlpha(0)
-	EquippedMarkerTick2:setImage(RegisterImage(0x65F14AD6E4F3F8F))
+	EquippedMarkerTick2:setImage(RegisterImage(@"uie_ui_menu_zombies_cac_elixir_slot_check"))
 	self:addElement(EquippedMarkerTick2)
 	self.EquippedMarkerTick2 = EquippedMarkerTick2
 	self:mergeStateConditions({

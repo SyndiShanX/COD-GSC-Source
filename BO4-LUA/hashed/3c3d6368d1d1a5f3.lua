@@ -18,8 +18,8 @@ CoD.BM_BountyBundleItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	self.BMBountyBundleItemInternal = BMBountyBundleItemInternal
 	local FrontendFrame01 = LUI.UIImage.new(0, 1, -3, 3, 0, 1, -1, 1)
 	FrontendFrame01:setAlpha(0.4)
-	FrontendFrame01:setImage(RegisterImage(0xC2AE59F4FA74812))
-	FrontendFrame01:setMaterial(LUI.UIImage.GetCachedMaterial(0x44484DDFAF5C093))
+	FrontendFrame01:setImage(RegisterImage(@"uie_ui_menu_store_element_frame"))
+	FrontendFrame01:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_normal"))
 	FrontendFrame01:setShaderVector(0, 0, 0, 0, 0)
 	FrontendFrame01:setupNineSliceShader(12, 164)
 	self:addElement(FrontendFrame01)

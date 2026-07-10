@@ -63,7 +63,7 @@ CoD.zm_red_available_item_text.__resetProperties = function(f7_arg0)
 	f7_arg0.CommonCornerPips:setAlpha(1)
 	f7_arg0.AvailableItemText:setAlpha(1)
 	f7_arg0.AvailableItemText.ItemText:setRGB(1, 1, 1)
-	f7_arg0.AvailableItemText.ItemText:setText(Engine[0xF9F1239CFD921FE](0xBF4567204B3D868))
+	f7_arg0.AvailableItemText.ItemText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_7BF4567204B3D868"))
 end
 CoD.zm_red_available_item_text.__clipsPerState = {
 	DefaultState = {
@@ -85,7 +85,7 @@ CoD.zm_red_available_item_text.__clipsPerState = {
 			f9_arg0.AvailableItemText:completeAnimation()
 			f9_arg0.AvailableItemText.ItemText:completeAnimation()
 			f9_arg0.AvailableItemText.ItemText:setRGB(1, 1, 1)
-			f9_arg0.AvailableItemText.ItemText:setText(Engine[0xF9F1239CFD921FE](0xBF4567204B3D868))
+			f9_arg0.AvailableItemText.ItemText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_7BF4567204B3D868"))
 			f9_arg0.clipFinished(f9_arg0.AvailableItemText)
 		end,
 	},
@@ -96,7 +96,7 @@ CoD.zm_red_available_item_text.__clipsPerState = {
 			f10_arg0.AvailableItemText:completeAnimation()
 			f10_arg0.AvailableItemText.ItemText:completeAnimation()
 			f10_arg0.AvailableItemText.ItemText:setRGB(ColorSet.BlackMarketRare.r, ColorSet.BlackMarketRare.g, ColorSet.BlackMarketRare.b)
-			f10_arg0.AvailableItemText.ItemText:setText(Engine[0xF9F1239CFD921FE](0xB6DCC4FBAE3C78B))
+			f10_arg0.AvailableItemText.ItemText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_6B6DCC4FBAE3C78B"))
 			f10_arg0.clipFinished(f10_arg0.AvailableItemText)
 		end,
 	},
@@ -107,7 +107,7 @@ CoD.zm_red_available_item_text.__clipsPerState = {
 			f11_arg0.AvailableItemText:completeAnimation()
 			f11_arg0.AvailableItemText.ItemText:completeAnimation()
 			f11_arg0.AvailableItemText.ItemText:setRGB(ColorSet.BlackMarketLegendary.r, ColorSet.BlackMarketLegendary.g, ColorSet.BlackMarketLegendary.b)
-			f11_arg0.AvailableItemText.ItemText:setText(Engine[0xF9F1239CFD921FE](0xDE5F0AC13FF4A95))
+			f11_arg0.AvailableItemText.ItemText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_DE5F0AC13FF4A95"))
 			f11_arg0.clipFinished(f11_arg0.AvailableItemText)
 		end,
 	},
@@ -118,7 +118,7 @@ CoD.zm_red_available_item_text.__clipsPerState = {
 			f12_arg0.AvailableItemText:completeAnimation()
 			f12_arg0.AvailableItemText.ItemText:completeAnimation()
 			f12_arg0.AvailableItemText.ItemText:setRGB(ColorSet.BlackMarketEpic.r, ColorSet.BlackMarketEpic.g, ColorSet.BlackMarketEpic.b)
-			f12_arg0.AvailableItemText.ItemText:setText(Engine[0xF9F1239CFD921FE](0x128F0307929BE25))
+			f12_arg0.AvailableItemText.ItemText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_6128F0307929BE25"))
 			f12_arg0.clipFinished(f12_arg0.AvailableItemText)
 		end,
 	},

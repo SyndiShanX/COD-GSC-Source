@@ -11,13 +11,13 @@ CoD.WarzoneQuickInventoryPromptInternal.new = function(f1_arg0, f1_arg1, f1_arg2
 	local label = LUI.UIText.new(0.5, 0.5, -103.5, 136.5, 0, 0, 9, 27)
 	label:setRGB(0.92, 0.92, 0.92)
 	label:setTTF("ttmussels_regular")
-	label:setMaterial(LUI.UIImage.GetCachedMaterial(0x90D57B1E92D39D7))
+	label:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_90D57B1E92D39D7"))
 	label:setShaderVector(0, 0.6, 0, 0, 0)
 	label:setShaderVector(1, 0.3, 0, 0, 0)
 	label:setShaderVector(2, 0, 0, 0, 1)
 	label:setLetterSpacing(2)
-	label:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
-	label:setAlignment(Enum[0x7A5123B654282D2][0x70510683C22104B])
+	label:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
+	label:setAlignment(Enum[@"luialignment"][@"lui_alignment_bottom"])
 	label:setBackingType(1)
 	label:setBackingWidget(CoD.WarzoneQuickInventoryPromptBacking, f1_arg0, f1_arg1)
 	label:setBackingXPadding(38)
@@ -52,19 +52,19 @@ CoD.WarzoneQuickInventoryPromptInternal.new = function(f1_arg0, f1_arg1, f1_arg2
 	self.label = label
 	local f1_local2 = label
 	local f1_local3 = label.subscribeToModel
-	local f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local3(f1_local2, f1_local4["hudItems.inventory.selectedItemName"], label.__String_Reference_FullPath)
 	self:mergeStateConditions({
 		{
 			stateName = "Disabled",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "", Enum[0xF4865E3551C3835][0x42F62C12777D074]) and CoD.ModelUtility.IsSelfModelValueEnumFlagSet(element, f1_arg1, "flags", Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3])
+				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "", Enum[@"luibuttonpromptstates"][@"flag_disable_prompts"]) and CoD.ModelUtility.IsSelfModelValueEnumFlagSet(element, f1_arg1, "flags", Enum[@"luibuttonpromptflags"][@"bpf_contextual"])
 			end,
 		},
 		{
 			stateName = "Enabled",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "", Enum[0xF4865E3551C3835][0x901DFC093ED4187]) and CoD.ModelUtility.IsSelfModelValueEnumFlagSet(element, f1_arg1, "flags", Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3])
+				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "", Enum[@"luibuttonpromptstates"][@"flag_enable_prompts"]) and CoD.ModelUtility.IsSelfModelValueEnumFlagSet(element, f1_arg1, "flags", Enum[@"luibuttonpromptflags"][@"bpf_contextual"])
 			end,
 		},
 		{
@@ -98,7 +98,7 @@ CoD.WarzoneQuickInventoryPromptInternal.new = function(f1_arg0, f1_arg1, f1_arg2
 	end)
 	f1_local2 = self
 	f1_local3 = self.subscribeToModel
-	f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local3(f1_local2, f1_local4.LastInput, function(f12_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

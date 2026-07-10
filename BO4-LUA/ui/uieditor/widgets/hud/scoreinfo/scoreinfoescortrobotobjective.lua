@@ -20,7 +20,7 @@ CoD.ScoreInfoEscortRobotObjective.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	self:addElement(HealthBacking)
 	self.HealthBacking = HealthBacking
 	local Health = LUI.UIImage.new(0, 0, 18, 58, 0, 0, 19, 59)
-	Health:setMaterial(LUI.UIImage.GetCachedMaterial(0xD5CA1A25ED87F4F))
+	Health:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_clock_normal"))
 	Health:setShaderVector(1, 0.5, 0, 0, 0)
 	Health:setShaderVector(2, 0.5, 0, 0, 0)
 	Health:setShaderVector(3, 0, 0, 0, 0)
@@ -64,7 +64,7 @@ CoD.ScoreInfoEscortRobotObjective.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	self:addElement(WaypointCenter)
 	self.WaypointCenter = WaypointCenter
 	local WaypointCenterCodcaster = LUI.UIImage.new(0, 0, 27, 49, 0, 0, 28, 50)
-	WaypointCenterCodcaster:setImage(RegisterImage(0x55D86A928138A5C))
+	WaypointCenterCodcaster:setImage(RegisterImage(@"uie_t7_hud_waypoints_baseglow"))
 	WaypointCenterCodcaster:linkToElementModel(self, "color", true, function(model)
 		local f8_local0 = model:get()
 		if f8_local0 ~= nil then
@@ -75,7 +75,7 @@ CoD.ScoreInfoEscortRobotObjective.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	self.WaypointCenterCodcaster = WaypointCenterCodcaster
 	local f1_local5 = Health
 	local f1_local6 = Health.subscribeToModel
-	local f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local6(f1_local5, f1_local7["profile.colorblindMode"], Health.__Color_FullPath)
 	self:mergeStateConditions({
 		{
@@ -87,7 +87,7 @@ CoD.ScoreInfoEscortRobotObjective.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	})
 	f1_local5 = self
 	f1_local6 = self.subscribeToModel
-	f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local6(f1_local5, f1_local7["factions.isCoDCaster"], function(f10_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

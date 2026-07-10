@@ -16,7 +16,7 @@ CoD.ZMTalismanSlotInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	local backgroundBlur = LUI.UIImage.new(0.09, 0.93, 0, 0, 0.11, 0.9, 0, 0)
 	backgroundBlur:setRGB(0, 0, 0)
 	backgroundBlur:setAlpha(0.8)
-	backgroundBlur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	backgroundBlur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	backgroundBlur:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(backgroundBlur)
 	self.backgroundBlur = backgroundBlur
@@ -27,26 +27,26 @@ CoD.ZMTalismanSlotInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self.FocusBackground = FocusBackground
 	local Box = LUI.UIImage.new(0, 0, 0, 160, 0, 0, -0.5, 159.5)
 	Box:setAlpha(0.5)
-	Box:setImage(RegisterImage(0xD17721476B32A9A))
+	Box:setImage(RegisterImage(@"uie_ui_menu_zombies_cac_elixir_slot_box"))
 	self:addElement(Box)
 	self.Box = Box
 	local LightFocus = LUI.UIImage.new(0, 0, 0, 160, 0, 0, 0, 160)
 	LightFocus:setRGB(1, 0, 0)
 	LightFocus:setAlpha(0)
-	LightFocus:setImage(RegisterImage(0x4A90041BA223660))
+	LightFocus:setImage(RegisterImage(@"uie_ui_menu_zombies_cac_elixir_slot_light_focus"))
 	self:addElement(LightFocus)
 	self.LightFocus = LightFocus
 	local Brackets = LUI.UIImage.new(0, 0, 0, 160, 0, 0, 0, 160)
 	Brackets:setRGB(ColorSet.T8__BEIGE__HEADER.r, ColorSet.T8__BEIGE__HEADER.g, ColorSet.T8__BEIGE__HEADER.b)
 	Brackets:setAlpha(0.5)
-	Brackets:setImage(RegisterImage(0x234271742CAD7E8))
+	Brackets:setImage(RegisterImage(@"uie_ui_menu_zombies_cac_elixir_slot_brackets"))
 	self:addElement(Brackets)
 	self.Brackets = Brackets
 	local Brackets2 = LUI.UIImage.new(0, 0, 0, 160, 0, 0, 0, 160)
 	Brackets2:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
 	Brackets2:setAlpha(0)
-	Brackets2:setImage(RegisterImage(0x234271742CAD7E8))
-	Brackets2:setMaterial(LUI.UIImage.GetCachedMaterial(0xD5CA1A25ED87F4F))
+	Brackets2:setImage(RegisterImage(@"uie_ui_menu_zombies_cac_elixir_slot_brackets"))
+	Brackets2:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_clock_normal"))
 	Brackets2:setShaderVector(0, 0.5, 0.5, 0, 0)
 	Brackets2:setShaderVector(1, 0.5, 0, 0, 0)
 	Brackets2:setShaderVector(2, 0.5, 0, 0, 0)
@@ -63,7 +63,7 @@ CoD.ZMTalismanSlotInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 			end,
 		},
 	})
-	EquipIndicator.image:setImage(RegisterImage(0x65F14AD6E4F3F8F))
+	EquipIndicator.image:setImage(RegisterImage(@"uie_ui_menu_zombies_cac_elixir_slot_check"))
 	EquipIndicator:linkToElementModel(self, nil, false, function(model)
 		EquipIndicator:setModel(model, f1_arg1)
 	end)
@@ -81,7 +81,7 @@ CoD.ZMTalismanSlotInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	local Outline = LUI.UIImage.new(0, 0, 0, 160, 0, 0, 0, 160)
 	Outline:setRGB(1, 0, 0)
 	Outline:setAlpha(0)
-	Outline:setImage(RegisterImage(0x41FFC5D8F5AA8C5))
+	Outline:setImage(RegisterImage(@"uie_ui_menu_zombies_cac_elixir_slot_outline"))
 	self:addElement(Outline)
 	self.Outline = Outline
 	local ConsumableCounter = CoD.BGBListItem_ConsumableCounter.new(f1_arg0, f1_arg1, 0, 0, 14, 52, 0, 0, 18, 56)
@@ -89,13 +89,13 @@ CoD.ZMTalismanSlotInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 		{
 			stateName = "Hidden",
 			condition = function(menu, element, event)
-				return not CoD.CACUtility.IsCACItemConsumable(menu, element, Enum[0x6EB546760F890D2][0x5544C104CD15F10])
+				return not CoD.CACUtility.IsCACItemConsumable(menu, element, Enum[@"statindexoffset"][@"hash_15544C104CD15F10"])
 			end,
 		},
 		{
 			stateName = "NoConsumablesRemaining",
 			condition = function(menu, element, event)
-				return not CoD.CACUtility.DoesCACItemHaveConsumablesRemaining(menu, element, f1_arg1, Enum[0x6EB546760F890D2][0x5544C104CD15F10])
+				return not CoD.CACUtility.DoesCACItemHaveConsumablesRemaining(menu, element, f1_arg1, Enum[@"statindexoffset"][@"hash_15544C104CD15F10"])
 			end,
 		},
 	})
@@ -114,7 +114,7 @@ CoD.ZMTalismanSlotInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	ConsumableCounter:linkToElementModel(self, "itemIndex", true, function(model)
 		local f9_local0 = model:get()
 		if f9_local0 ~= nil then
-			ConsumableCounter.ElixirCount:setText(CoD.CACUtility.GetConsumableCountFromIndex(f1_arg1, f1_arg0, Enum[0x6EB546760F890D2][0x5544C104CD15F10], f9_local0))
+			ConsumableCounter.ElixirCount:setText(CoD.CACUtility.GetConsumableCountFromIndex(f1_arg1, f1_arg0, Enum[@"statindexoffset"][@"hash_15544C104CD15F10"], f9_local0))
 		end
 	end)
 	self:addElement(ConsumableCounter)
@@ -123,21 +123,21 @@ CoD.ZMTalismanSlotInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	Corners:setRGB(1, 0, 0)
 	Corners:setAlpha(0)
 	Corners:setScale(0.99, 0.99)
-	Corners:setImage(RegisterImage(0xA53C6718B024581))
+	Corners:setImage(RegisterImage(@"uie_ui_menu_zombies_cac_elixir_slot_corners"))
 	self:addElement(Corners)
 	self.Corners = Corners
 	local Dots = LUI.UIImage.new(0, 0, 0, 160, 0, 0, 0, 160)
 	Dots:setRGB(0.61, 0, 0)
 	Dots:setAlpha(0.3)
-	Dots:setImage(RegisterImage(0xDC0E1914ADE44B1))
+	Dots:setImage(RegisterImage(@"uie_ui_menu_zombies_cac_elixir_slot_dots"))
 	self:addElement(Dots)
 	self.Dots = Dots
 	local itemName = LUI.UIText.new(0.5, 0.5, -62, 65, 1, 1, -33, -17)
 	itemName:setRGB(0.58, 0.58, 0.58)
 	itemName:setTTF("ttmussels_demibold")
 	itemName:setLetterSpacing(1.1)
-	itemName:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	itemName:setAlignment(Enum[0x7A5123B654282D2][0x70510683C22104B])
+	itemName:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	itemName:setAlignment(Enum[@"luialignment"][@"lui_alignment_bottom"])
 	itemName:setBackingType(2)
 	itemName:setBackingColor(0, 0, 0)
 	itemName:setBackingAlpha(0.8)
@@ -145,7 +145,7 @@ CoD.ZMTalismanSlotInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	itemName:linkToElementModel(self, "displayName", true, function(model)
 		local f10_local0 = model:get()
 		if f10_local0 ~= nil then
-			itemName:setText(Engine[0xF9F1239CFD921FE](f10_local0))
+			itemName:setText(Engine[@"hash_4F9F1239CFD921FE"](f10_local0))
 		end
 	end)
 	self:addElement(itemName)
@@ -212,7 +212,7 @@ CoD.ZMTalismanSlotInternal.__resetProperties = function(f16_arg0)
 	f16_arg0.Dots:setAlpha(0.3)
 	f16_arg0.Brackets2:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
 	f16_arg0.Brackets2:setAlpha(0)
-	f16_arg0.Brackets2:setMaterial(LUI.UIImage.GetCachedMaterial(0xD5CA1A25ED87F4F))
+	f16_arg0.Brackets2:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_clock_normal"))
 	f16_arg0.Brackets2:setShaderVector(0, 0.5, 0.5, 0, 0)
 	f16_arg0.Brackets2:setShaderVector(1, 0.5, 0, 0, 0)
 	f16_arg0.Brackets2:setShaderVector(2, 0.5, 0, 0, 0)
@@ -254,7 +254,7 @@ CoD.ZMTalismanSlotInternal.__clipsPerState = {
 			f18_arg0.clipFinished(f18_arg0.LightFocus)
 			f18_arg0.Brackets2:completeAnimation()
 			f18_arg0.Brackets2:setAlpha(1)
-			f18_arg0.Brackets2:setMaterial(LUI.UIImage.GetCachedMaterial(0xD5CA1A25ED87F4F))
+			f18_arg0.Brackets2:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_clock_normal"))
 			f18_arg0.Brackets2:setShaderVector(0, 1, 0, 0, 0)
 			f18_arg0.Brackets2:setShaderVector(1, 0.5, 0, 0, 0)
 			f18_arg0.Brackets2:setShaderVector(2, 0.5, 0, 0, 0)
@@ -303,7 +303,7 @@ CoD.ZMTalismanSlotInternal.__clipsPerState = {
 			end
 			f19_arg0.Brackets2:completeAnimation()
 			f19_arg0.Brackets2:setAlpha(0)
-			f19_arg0.Brackets2:setMaterial(LUI.UIImage.GetCachedMaterial(0xD5CA1A25ED87F4F))
+			f19_arg0.Brackets2:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_clock_normal"))
 			f19_arg0.Brackets2:setShaderVector(0, 0.5, 0.5, 0, 0)
 			f19_arg0.Brackets2:setShaderVector(1, 0.5, 0, 0, 0)
 			f19_arg0.Brackets2:setShaderVector(2, 0.5, 0, 0, 0)
@@ -378,7 +378,7 @@ CoD.ZMTalismanSlotInternal.__clipsPerState = {
 			end
 			f26_arg0.Brackets2:completeAnimation()
 			f26_arg0.Brackets2:setAlpha(1)
-			f26_arg0.Brackets2:setMaterial(LUI.UIImage.GetCachedMaterial(0xD5CA1A25ED87F4F))
+			f26_arg0.Brackets2:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_clock_normal"))
 			f26_arg0.Brackets2:setShaderVector(0, 1, 0, 0, 0)
 			f26_arg0.Brackets2:setShaderVector(1, 0.5, 0, 0, 0)
 			f26_arg0.Brackets2:setShaderVector(2, 0.5, 0, 0, 0)
@@ -527,7 +527,7 @@ CoD.ZMTalismanSlotInternal.__clipsPerState = {
 			f42_arg0.clipFinished(f42_arg0.LightFocus)
 			f42_arg0.Brackets2:completeAnimation()
 			f42_arg0.Brackets2:setAlpha(1)
-			f42_arg0.Brackets2:setMaterial(LUI.UIImage.GetCachedMaterial(0xD5CA1A25ED87F4F))
+			f42_arg0.Brackets2:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_clock_normal"))
 			f42_arg0.Brackets2:setShaderVector(0, 1, 0, 0, 0)
 			f42_arg0.Brackets2:setShaderVector(1, 0.5, 0, 0, 0)
 			f42_arg0.Brackets2:setShaderVector(2, 0.5, 0, 0, 0)
@@ -549,7 +549,7 @@ CoD.ZMTalismanSlotInternal.__clipsPerState = {
 			f43_arg0.clipFinished(f43_arg0.LightFocus)
 			f43_arg0.Brackets2:completeAnimation()
 			f43_arg0.Brackets2:setAlpha(1)
-			f43_arg0.Brackets2:setMaterial(LUI.UIImage.GetCachedMaterial(0xD5CA1A25ED87F4F))
+			f43_arg0.Brackets2:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_clock_normal"))
 			f43_arg0.Brackets2:setShaderVector(0, 1, 0, 0, 0)
 			f43_arg0.Brackets2:setShaderVector(1, 0.5, 0, 0, 0)
 			f43_arg0.Brackets2:setShaderVector(2, 0.5, 0, 0, 0)
@@ -585,7 +585,7 @@ CoD.ZMTalismanSlotInternal.__clipsPerState = {
 			f44_local0(f44_arg0.LightFocus)
 			f44_arg0.Brackets2:completeAnimation()
 			f44_arg0.Brackets2:setAlpha(1)
-			f44_arg0.Brackets2:setMaterial(LUI.UIImage.GetCachedMaterial(0xD5CA1A25ED87F4F))
+			f44_arg0.Brackets2:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_clock_normal"))
 			f44_arg0.Brackets2:setShaderVector(0, 1, 0, 0, 0)
 			f44_arg0.Brackets2:setShaderVector(1, 0.5, 0, 0, 0)
 			f44_arg0.Brackets2:setShaderVector(2, 0.5, 0, 0, 0)
@@ -640,7 +640,7 @@ CoD.ZMTalismanSlotInternal.__clipsPerState = {
 			f49_local0(f49_arg0.LightFocus)
 			f49_arg0.Brackets2:completeAnimation()
 			f49_arg0.Brackets2:setAlpha(1)
-			f49_arg0.Brackets2:setMaterial(LUI.UIImage.GetCachedMaterial(0xD5CA1A25ED87F4F))
+			f49_arg0.Brackets2:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_clock_normal"))
 			f49_arg0.Brackets2:setShaderVector(0, 1, 0, 0, 0)
 			f49_arg0.Brackets2:setShaderVector(1, 0.5, 0, 0, 0)
 			f49_arg0.Brackets2:setShaderVector(2, 0.5, 0, 0, 0)

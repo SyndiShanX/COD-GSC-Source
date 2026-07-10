@@ -9,10 +9,10 @@ CoD.ContextNotification_HealNag.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self.soundSet = "none"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local NotificationText = LUI.UIText.new(0, 0, 0, 300, 0, 0, 0, 30)
-	NotificationText:setText(Engine[0xF9F1239CFD921FE](0xF4432A789BDCA7C))
+	NotificationText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_7F4432A789BDCA7C"))
 	NotificationText:setTTF("ttmussels_regular")
 	NotificationText:setLetterSpacing(1)
-	NotificationText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	NotificationText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	NotificationText:setBackingType(1)
 	NotificationText:setBackingWidget(CoD.FE_ButtonPanel, f1_arg0, f1_arg1)
 	NotificationText:setBackingColor(0, 0, 0)
@@ -31,7 +31,7 @@ CoD.ContextNotification_HealNag.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	})
 	local f1_local2 = self
 	local f1_local3 = self.subscribeToModel
-	local f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local3(f1_local2, f1_local4["hudItems.playerIsShocked"], function(f4_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -100,7 +100,7 @@ CoD.ContextNotification_HealNag.__clipsPerState = {
 													local f20_local0 = function(f21_arg0)
 														local f21_local0 = function(f22_arg0)
 															local f22_local0 = function(f23_arg0)
-																f23_arg0:beginAnimation(250, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+																f23_arg0:beginAnimation(250, Enum[@"luitween"][@"luitween_ease_out"])
 																f23_arg0:setRGB(1, 1, 1)
 																f23_arg0:registerEventHandler("transition_complete_keyframe", f10_arg0.clipFinished)
 															end

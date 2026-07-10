@@ -8,10 +8,10 @@ CoD.PC_EULA_Pages.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 	self.soundSet = "none"
 	local pageText = LUI.UIText.new(0, 0, 0, 160, 0, 0, 0, 30)
 	pageText:setRGB(0.78, 0.74, 0.67)
-	pageText:setText(Engine[0xF9F1239CFD921FE](0xA205700391CF3AD))
+	pageText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_6A205700391CF3AD"))
 	pageText:setTTF("default")
-	pageText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	pageText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	pageText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	pageText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(pageText)
 	self.pageText = pageText
 	if PostLoadFunc then

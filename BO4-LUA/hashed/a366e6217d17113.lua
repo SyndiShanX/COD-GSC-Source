@@ -12,7 +12,7 @@ CoD.ui_icon_callingcards_fairytales_wristgroup.new = function(f1_arg0, f1_arg1, 
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local wrist = LUI.UIImage.new(0, 0, -91, 21, 0, 0, -43.5, 28.5)
-	wrist:setImage(RegisterImage(0x2B1088221AE1D01))
+	wrist:setImage(RegisterImage(@"uie_ui_icon_callingcards_fairytale_wrist"))
 	self:addElement(wrist)
 	self.wrist = wrist
 	local finger2 = CoD.ui_icon_callingcards_fairytales_finger2.new(f1_arg0, f1_arg1, 0, 0, -81, -71, 0, 0, -36, -26)
@@ -51,11 +51,11 @@ CoD.ui_icon_callingcards_fairytales_wristgroup.__clipsPerState = {
 			local f3_local0 = function(f4_arg0)
 				local f4_local0 = function(f5_arg0)
 					local f5_local0 = function(f6_arg0)
-						f6_arg0:beginAnimation(1100, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+						f6_arg0:beginAnimation(1100, Enum[@"luitween"][@"luitween_ease_out"])
 						f6_arg0:setZRot(-20)
 						f6_arg0:registerEventHandler("transition_complete_keyframe", f3_arg0.clipFinished)
 					end
-					f5_arg0:beginAnimation(1200, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f5_arg0:beginAnimation(1200, Enum[@"luitween"][@"luitween_ease_out"])
 					f5_arg0:setZRot(18)
 					f5_arg0:registerEventHandler("transition_complete_keyframe", f5_local0)
 				end
@@ -69,11 +69,11 @@ CoD.ui_icon_callingcards_fairytales_wristgroup.__clipsPerState = {
 			local f3_local1 = function(f7_arg0)
 				local f7_local0 = function(f8_arg0)
 					local f8_local0 = function(f9_arg0)
-						f9_arg0:beginAnimation(1400, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+						f9_arg0:beginAnimation(1400, Enum[@"luitween"][@"luitween_ease_out"])
 						f9_arg0:setZRot(-30)
 						f9_arg0:registerEventHandler("transition_complete_keyframe", f3_arg0.clipFinished)
 					end
-					f8_arg0:beginAnimation(1100, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f8_arg0:beginAnimation(1100, Enum[@"luitween"][@"luitween_ease_out"])
 					f8_arg0:setZRot(15)
 					f8_arg0:registerEventHandler("transition_complete_keyframe", f8_local0)
 				end
@@ -87,11 +87,11 @@ CoD.ui_icon_callingcards_fairytales_wristgroup.__clipsPerState = {
 			local f3_local2 = function(f10_arg0)
 				local f10_local0 = function(f11_arg0)
 					local f11_local0 = function(f12_arg0)
-						f12_arg0:beginAnimation(1700, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+						f12_arg0:beginAnimation(1700, Enum[@"luitween"][@"luitween_ease_out"])
 						f12_arg0:setZRot(-40)
 						f12_arg0:registerEventHandler("transition_complete_keyframe", f3_arg0.clipFinished)
 					end
-					f11_arg0:beginAnimation(999, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f11_arg0:beginAnimation(999, Enum[@"luitween"][@"luitween_ease_out"])
 					f11_arg0:setZRot(14)
 					f11_arg0:registerEventHandler("transition_complete_keyframe", f11_local0)
 				end
@@ -105,11 +105,11 @@ CoD.ui_icon_callingcards_fairytales_wristgroup.__clipsPerState = {
 			local f3_local3 = function(f13_arg0)
 				local f13_local0 = function(f14_arg0)
 					local f14_local0 = function(f15_arg0)
-						f15_arg0:beginAnimation(2000, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+						f15_arg0:beginAnimation(2000, Enum[@"luitween"][@"luitween_ease_out"])
 						f15_arg0:setZRot(-40)
 						f15_arg0:registerEventHandler("transition_complete_keyframe", f3_arg0.clipFinished)
 					end
-					f14_arg0:beginAnimation(900, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f14_arg0:beginAnimation(900, Enum[@"luitween"][@"luitween_ease_out"])
 					f14_arg0:setZRot(20)
 					f14_arg0:registerEventHandler("transition_complete_keyframe", f14_local0)
 				end

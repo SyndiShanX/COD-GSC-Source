@@ -13,15 +13,15 @@ CoD.DirectorTutorialMapSelectItem_Internal.new = function(f1_arg0, f1_arg1, f1_a
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local SceneBlur = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	SceneBlur:setRGB(0, 0, 0)
-	SceneBlur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	SceneBlur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	SceneBlur:setShaderVector(0, 0, 0.4, 0, 0)
 	self:addElement(SceneBlur)
 	self.SceneBlur = SceneBlur
 	local NoiseTiledBacking = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	NoiseTiledBacking:setRGB(0, 0, 0)
 	NoiseTiledBacking:setAlpha(0.8)
-	NoiseTiledBacking:setImage(RegisterImage(0x34839E8065B1E53))
-	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	NoiseTiledBacking:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	NoiseTiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	NoiseTiledBacking:setupNineSliceShader(196, 88)
 	self:addElement(NoiseTiledBacking)
@@ -35,8 +35,8 @@ CoD.DirectorTutorialMapSelectItem_Internal.new = function(f1_arg0, f1_arg1, f1_a
 	self.DotTiledBacking = DotTiledBacking
 	local Highlight = LUI.UIImage.new(0, 1, -52, 52, 0, 1, -60, 60)
 	Highlight:setAlpha(0.03)
-	Highlight:setImage(RegisterImage(0xC9205D0D378F108))
-	Highlight:setMaterial(LUI.UIImage.GetCachedMaterial(0xDAB59B2CAE01851))
+	Highlight:setImage(RegisterImage(@"uie_ui_menu_common_focus_fill_small"))
+	Highlight:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_6DAB59B2CAE01851"))
 	Highlight:setShaderVector(0, 0, 0, 0, 0.25)
 	Highlight:setShaderVector(1, 1, 0, 0, 0)
 	Highlight:setupNineSliceShader(100, 100)
@@ -44,7 +44,7 @@ CoD.DirectorTutorialMapSelectItem_Internal.new = function(f1_arg0, f1_arg1, f1_a
 	self.Highlight = Highlight
 	local MapImage = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	MapImage:setRGB(0.6, 0.6, 0.6)
-	MapImage:setMaterial(LUI.UIImage.GetCachedMaterial(0xA02C44161370F6D))
+	MapImage:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_1A02C44161370F6D"))
 	MapImage:setShaderVector(0, 0, 0, 0, 0)
 	MapImage:setShaderVector(1, 1, 1, 0, 0)
 	MapImage:setShaderVector(2, 0, 0, 0, 0)
@@ -63,24 +63,24 @@ CoD.DirectorTutorialMapSelectItem_Internal.new = function(f1_arg0, f1_arg1, f1_a
 	self.nameBg = nameBg
 	local MapName = LUI.UIText.new(0, 0, 9, 245, 1, 1, -22, -4)
 	MapName:setTTF("skorzhen")
-	MapName:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	MapName:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	MapName:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	MapName:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	MapName:linkToElementModel(self, "name", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
-			MapName:setText(Engine[0xF9F1239CFD921FE](f3_local0))
+			MapName:setText(Engine[@"hash_4F9F1239CFD921FE"](f3_local0))
 		end
 	end)
 	self:addElement(MapName)
 	self.MapName = MapName
 	local TeamName = LUI.UIText.new(1, 1, -204, -4, 1, 1, -22, -4)
 	TeamName:setTTF("skorzhen")
-	TeamName:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
-	TeamName:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	TeamName:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
+	TeamName:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	TeamName:linkToElementModel(self, "id", true, function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
-			TeamName:setText(Engine[0xF9F1239CFD921FE](CoD.MapUtility.GetMapTeamNameFromMapID(f4_local0)))
+			TeamName:setText(Engine[@"hash_4F9F1239CFD921FE"](CoD.MapUtility.GetMapTeamNameFromMapID(f4_local0)))
 		end
 	end)
 	self:addElement(TeamName)
@@ -100,7 +100,7 @@ CoD.DirectorTutorialMapSelectItem_Internal.new = function(f1_arg0, f1_arg1, f1_a
 	self.GamemodeIcon = GamemodeIcon
 	local EquippedMarkerTick2 = LUI.UIImage.new(1, 1, -150, 10, 0, 0, -17, 143)
 	EquippedMarkerTick2:setAlpha(0)
-	EquippedMarkerTick2:setImage(RegisterImage(0x65F14AD6E4F3F8F))
+	EquippedMarkerTick2:setImage(RegisterImage(@"uie_ui_menu_zombies_cac_elixir_slot_check"))
 	self:addElement(EquippedMarkerTick2)
 	self.EquippedMarkerTick2 = EquippedMarkerTick2
 	self:mergeStateConditions({
@@ -113,7 +113,7 @@ CoD.DirectorTutorialMapSelectItem_Internal.new = function(f1_arg0, f1_arg1, f1_a
 	})
 	local f1_local12 = self
 	local f1_local13 = self.subscribeToModel
-	local f1_local14 = Engine[0x8DF2E5447F384B9]()
+	local f1_local14 = Engine[@"getglobalmodel"]()
 	f1_local13(f1_local12, f1_local14["MapVote.mapVoteMapNext"], function(f7_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -134,7 +134,7 @@ CoD.DirectorTutorialMapSelectItem_Internal.new = function(f1_arg0, f1_arg1, f1_a
 	end)
 	f1_local12 = self
 	f1_local13 = self.subscribeToModel
-	f1_local14 = Engine[0x8DF2E5447F384B9]()
+	f1_local14 = Engine[@"getglobalmodel"]()
 	f1_local13(f1_local12, f1_local14.localZMDifficulty, function(f9_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

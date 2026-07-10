@@ -53,7 +53,7 @@ CoD.ZMAARScoreboardTabInternal.__clipsPerState = {
 			f4_local0(f4_arg0.ScoreboardZM)
 			local f4_local1 = function(f7_arg0)
 				local f7_local0 = function(f8_arg0)
-					f8_arg0:beginAnimation(100, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f8_arg0:beginAnimation(100, Enum[@"luitween"][@"luitween_ease_in"])
 					f8_arg0:setAlpha(1)
 					f8_arg0:registerEventHandler("transition_complete_keyframe", f4_arg0.clipFinished)
 				end

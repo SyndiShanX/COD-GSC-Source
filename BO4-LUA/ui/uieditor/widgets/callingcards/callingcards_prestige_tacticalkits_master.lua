@@ -1,30 +1,30 @@
 require("x64:e554beb9f6a35a2")
-CoD[0xAE531861B4F05FA] = InheritFrom(LUI.UIElement)
-CoD[0xAE531861B4F05FA].__defaultWidth = 960
-CoD[0xAE531861B4F05FA].__defaultHeight = 240
-CoD[0xAE531861B4F05FA].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+CoD[@"hash_1AE531861B4F05FA"] = InheritFrom(LUI.UIElement)
+CoD[@"hash_1AE531861B4F05FA"].__defaultWidth = 960
+CoD[@"hash_1AE531861B4F05FA"].__defaultHeight = 240
+CoD[@"hash_1AE531861B4F05FA"].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
 	local self = LUI.UIElement.new(f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
-	self:setClass(CoD[0xAE531861B4F05FA])
+	self:setClass(CoD[@"hash_1AE531861B4F05FA"])
 	self.id = "CallingCards_Prestige_Tacticalkits_Master"
 	self.soundSet = "default"
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local mechBackground = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	mechBackground:setImage(RegisterImage(0x7CA6182AD34268B))
+	mechBackground:setImage(RegisterImage(@"uie_mech_background"))
 	self:addElement(mechBackground)
 	self.mechBackground = mechBackground
 	local mecha = CoD.CallingCards_Asset_mech.new(f1_arg0, f1_arg1, 0, 0, 0, 960, 0, 0, 1, 241)
 	self:addElement(mecha)
 	self.mecha = mecha
 	local smoke = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	smoke:setImage(RegisterImage(0x83C485F153D0720))
-	smoke:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD526D3FD71F281))
+	smoke:setImage(RegisterImage(@"uie_smoke"))
+	smoke:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_flipbook"))
 	smoke:setShaderVector(0, 1, 3.03, 0, 0)
 	smoke:setShaderVector(1, 15, 0, 0, 0)
 	self:addElement(smoke)
 	self.smoke = smoke
 	local rockets = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	rockets:setImage(RegisterImage(0xAAD68088EE64304))
+	rockets:setImage(RegisterImage(@"uie_rockets"))
 	self:addElement(rockets)
 	self.rockets = rockets
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)
@@ -33,12 +33,12 @@ CoD[0xAE531861B4F05FA].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	end
 	return self
 end
-CoD[0xAE531861B4F05FA].__resetProperties = function(f2_arg0)
+CoD[@"hash_1AE531861B4F05FA"].__resetProperties = function(f2_arg0)
 	f2_arg0.rockets:completeAnimation()
 	f2_arg0.mecha:completeAnimation()
 	f2_arg0.rockets:setTopBottom(0, 0, 0, 240)
 end
-CoD[0xAE531861B4F05FA].__clipsPerState = {
+CoD[@"hash_1AE531861B4F05FA"].__clipsPerState = {
 	DefaultState = {
 		DefaultClip = function(f3_arg0, f3_arg1)
 			f3_arg0:__resetProperties()
@@ -74,6 +74,6 @@ CoD[0xAE531861B4F05FA].__clipsPerState = {
 		end,
 	},
 }
-CoD[0xAE531861B4F05FA].__onClose = function(f8_arg0)
+CoD[@"hash_1AE531861B4F05FA"].__onClose = function(f8_arg0)
 	f8_arg0.mecha:close()
 end

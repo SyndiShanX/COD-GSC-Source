@@ -22,15 +22,15 @@ CoD.ChallengesWZSummary.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 		elseif element.super.gainFocus then
 			f2_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f2_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(NearCompletionButton, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(NearCompletionButton, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		PlaySoundAlias("uin_toggle_generic")
 		OpenPopup(self, "Challenges_NearCompletion", controller, nil)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 		return true
 	end, false)
 	self:addElement(NearCompletionButton)
@@ -62,7 +62,7 @@ CoD.ChallengesWZSummary.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 			end,
 		},
 	})
-	TrialWidget.InfoText:setText(Engine[0xF9F1239CFD921FE](0x134CAB251C3EE69))
+	TrialWidget.InfoText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_5134CAB251C3EE69"))
 	self:addElement(TrialWidget)
 	self.TrialWidget = TrialWidget
 	NearCompletionButton.id = "NearCompletionButton"

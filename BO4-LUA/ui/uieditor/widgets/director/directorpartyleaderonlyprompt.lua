@@ -8,11 +8,11 @@ CoD.DirectorPartyLeaderOnlyPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	self.soundSet = "none"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local PartyLeaderOnlyPrompt = LUI.UIText.new(0, 1, 0, 0, 0.5, 0.5, -9, 9)
-	PartyLeaderOnlyPrompt:setText(Engine[0xF9F1239CFD921FE](0xB71C5E80EBFDD82))
+	PartyLeaderOnlyPrompt:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_5B71C5E80EBFDD82"))
 	PartyLeaderOnlyPrompt:setTTF("ttmussels_regular")
 	PartyLeaderOnlyPrompt:setLetterSpacing(2)
-	PartyLeaderOnlyPrompt:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	PartyLeaderOnlyPrompt:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	PartyLeaderOnlyPrompt:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	PartyLeaderOnlyPrompt:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	PartyLeaderOnlyPrompt:setBackingType(2)
 	PartyLeaderOnlyPrompt:setBackingColor(0, 0, 0)
 	PartyLeaderOnlyPrompt:setBackingAlpha(0.5)
@@ -44,7 +44,7 @@ CoD.DirectorPartyLeaderOnlyPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	end)
 	local f1_local2 = self
 	local f1_local3 = self.subscribeToModel
-	local f1_local4 = Engine[0x8DF2E5447F384B9]()
+	local f1_local4 = Engine[@"getglobalmodel"]()
 	f1_local3(f1_local2, f1_local4["lobbyRoot.lobbyNav"], function(f6_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -56,7 +56,7 @@ CoD.DirectorPartyLeaderOnlyPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	end, false)
 	f1_local2 = self
 	f1_local3 = self.subscribeToModel
-	f1_local4 = Engine[0x8DF2E5447F384B9]()
+	f1_local4 = Engine[@"getglobalmodel"]()
 	f1_local3(f1_local2, f1_local4["lobbyRoot.gameClient.update"], function(f7_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -68,7 +68,7 @@ CoD.DirectorPartyLeaderOnlyPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	end, false)
 	f1_local2 = self
 	f1_local3 = self.subscribeToModel
-	f1_local4 = Engine[0x8DF2E5447F384B9]()
+	f1_local4 = Engine[@"getglobalmodel"]()
 	f1_local3(f1_local2, f1_local4["lobbyRoot.privateClient.update"], function(f8_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

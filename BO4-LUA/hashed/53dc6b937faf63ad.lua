@@ -13,13 +13,13 @@ CoD.BGBSelectCategory.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	local CurrentSlot = LUI.UIText.new(0.5, 0.5, -100, 100, 1, 1, 7, 28)
 	CurrentSlot:setRGB(0.58, 0.85, 1)
 	CurrentSlot:setTTF("ttmussels_regular")
-	CurrentSlot:setMaterial(LUI.UIImage.GetCachedMaterial(0x90D57B1E92D39D7))
+	CurrentSlot:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_90D57B1E92D39D7"))
 	CurrentSlot:setShaderVector(0, 1, 0, 0, 0)
 	CurrentSlot:setShaderVector(1, 0, 0, 0, 0)
 	CurrentSlot:setShaderVector(2, 0.2, 0.3, 1, 0.3)
 	CurrentSlot:setLetterSpacing(4)
-	CurrentSlot:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	CurrentSlot:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	CurrentSlot:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	CurrentSlot:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	CurrentSlot:subscribeToGlobalModel(f1_arg1, "BGBLoadout", "selectedIndex", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -38,13 +38,13 @@ CoD.BGBSelectCategory.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	PerkName:linkToElementModel(self, "name", true, function(model)
 		local f5_local0 = model:get()
 		if f5_local0 ~= nil then
-			PerkName.Text:setText(Engine[0xF9F1239CFD921FE](f5_local0))
+			PerkName.Text:setText(Engine[@"hash_4F9F1239CFD921FE"](f5_local0))
 		end
 	end)
 	PerkName:linkToElementModel(self, "name", true, function(model)
 		local f6_local0 = model:get()
 		if f6_local0 ~= nil then
-			PerkName.TextFocus:setText(Engine[0xF9F1239CFD921FE](f6_local0))
+			PerkName.TextFocus:setText(Engine[@"hash_4F9F1239CFD921FE"](f6_local0))
 		end
 	end)
 	self:addElement(PerkName)

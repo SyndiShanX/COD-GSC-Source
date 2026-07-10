@@ -14,8 +14,8 @@ CoD.TabbedScoreboardTab.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	self.TabBacker2 = TabBacker2
 	local TopBar = LUI.UIImage.new(-0.02, 1.03, 0, 0, 1, 1, -7, 2)
 	TopBar:setAlpha(0.1)
-	TopBar:setImage(RegisterImage(0xCE32B5C3D0E9039))
-	TopBar:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	TopBar:setImage(RegisterImage(@"uie_ui_menu_cac_secondary_button_top_bar"))
+	TopBar:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(TopBar)
 	self.TopBar = TopBar
 	local NameNotFocus = LUI.UIText.new(-0, 1, 0, 0, 0.5, 0.5, -11, 10)
@@ -23,12 +23,12 @@ CoD.TabbedScoreboardTab.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	NameNotFocus:setAlpha(0)
 	NameNotFocus:setTTF("ttmussels_regular")
 	NameNotFocus:setLetterSpacing(3)
-	NameNotFocus:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	NameNotFocus:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	NameNotFocus:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	NameNotFocus:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	NameNotFocus:linkToElementModel(self, "tabName", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			NameNotFocus:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			NameNotFocus:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	self:addElement(NameNotFocus)
@@ -37,12 +37,12 @@ CoD.TabbedScoreboardTab.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	NameFocus:setRGB(0.38, 0.38, 0.4)
 	NameFocus:setTTF("ttmussels_demibold")
 	NameFocus:setLetterSpacing(3)
-	NameFocus:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	NameFocus:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	NameFocus:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	NameFocus:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	NameFocus:linkToElementModel(self, "tabName", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
-			NameFocus:setText(Engine[0xF9F1239CFD921FE](f3_local0))
+			NameFocus:setText(Engine[@"hash_4F9F1239CFD921FE"](f3_local0))
 		end
 	end)
 	self:addElement(NameFocus)

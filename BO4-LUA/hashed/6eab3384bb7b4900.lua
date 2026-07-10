@@ -15,7 +15,7 @@ CoD.SupplyChainDetails_InfoPanel.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local SceneBlur = LUI.UIImage.new(0, 0, 6, 552, 0, 0, 6.5, 231.5)
-	SceneBlur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	SceneBlur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	SceneBlur:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(SceneBlur)
 	self.SceneBlur = SceneBlur
@@ -35,24 +35,24 @@ CoD.SupplyChainDetails_InfoPanel.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	self.TitleAndDesc = TitleAndDesc
 	local ButtonTopLine9Slice = LUI.UIImage.new(0, 0, 0, 558, 0, 0, 0, 20)
 	ButtonTopLine9Slice:setAlpha(0.25)
-	ButtonTopLine9Slice:setImage(RegisterImage(0xC752149A1FA1AAE))
-	ButtonTopLine9Slice:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	ButtonTopLine9Slice:setImage(RegisterImage(@"uie_ui_menu_cac_secondary_button_top_line"))
+	ButtonTopLine9Slice:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	ButtonTopLine9Slice:setShaderVector(0, 0, 0, 0, 0)
 	ButtonTopLine9Slice:setupNineSliceShader(120, 10)
 	self:addElement(ButtonTopLine9Slice)
 	self.ButtonTopLine9Slice = ButtonTopLine9Slice
 	local ButtonBottomLine9Slice = LUI.UIImage.new(0, 0, 0, 558, 0, 0, 224, 244)
 	ButtonBottomLine9Slice:setAlpha(0.25)
-	ButtonBottomLine9Slice:setImage(RegisterImage(0xC752149A1FA1AAE))
-	ButtonBottomLine9Slice:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	ButtonBottomLine9Slice:setImage(RegisterImage(@"uie_ui_menu_cac_secondary_button_top_line"))
+	ButtonBottomLine9Slice:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	ButtonBottomLine9Slice:setShaderVector(0, 0, 0, 0, 0)
 	ButtonBottomLine9Slice:setupNineSliceShader(120, 10)
 	self:addElement(ButtonBottomLine9Slice)
 	self.ButtonBottomLine9Slice = ButtonBottomLine9Slice
 	local HeaderGlow = LUI.UIImage.new(0, 0, 2, 556, 0, 0, 12, 44)
 	HeaderGlow:setAlpha(0.1)
-	HeaderGlow:setImage(RegisterImage(0xFAA6C81834660D3))
-	HeaderGlow:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	HeaderGlow:setImage(RegisterImage(@"uie_ui_menu_common_box_glow"))
+	HeaderGlow:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	HeaderGlow:setShaderVector(0, 0, 0, 0, 0)
 	HeaderGlow:setupNineSliceShader(12, 12)
 	HeaderGlow:linkToElementModel(self, "rarity", true, function(model)
@@ -74,8 +74,8 @@ CoD.SupplyChainDetails_InfoPanel.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	self.ContractRarityHeaderBackground = ContractRarityHeaderBackground
 	local PixelGridTiledBacking = LUI.UIImage.new(0, 0, 5.5, 551.5, 0, 0, 16, 40)
 	PixelGridTiledBacking:setAlpha(0.05)
-	PixelGridTiledBacking:setImage(RegisterImage(0x311E811A3183347))
-	PixelGridTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	PixelGridTiledBacking:setImage(RegisterImage(@"uie_ui_hud_notifications_pixelpattern"))
+	PixelGridTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	PixelGridTiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	PixelGridTiledBacking:setupNineSliceShader(128, 128)
 	self:addElement(PixelGridTiledBacking)
@@ -130,9 +130,9 @@ CoD.SupplyChainDetails_InfoPanel.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 				if not MenuPropertyIsTrue(menu, "__hideSupplyChainDetailsButtons") then
 					f11_local0 = CoD.BlackMarketUtility.ShowSupplyChainDetailsButtonPrompts(element, f1_arg1)
 					if f11_local0 then
-						f11_local0 = CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "rarity", Enum[0x704F69F9B0BDCEC][0x8556B83CAD0D180])
+						f11_local0 = CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "rarity", Enum[@"lootraritytype"][@"loot_rarity_type_count"])
 						if f11_local0 then
-							f11_local0 = not CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", 0x4F35AE761BD424)
+							f11_local0 = not CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", @"specialist")
 						end
 					end
 				else
@@ -156,7 +156,7 @@ CoD.SupplyChainDetails_InfoPanel.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 		{
 			stateName = "NoRarity",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "rarity", Enum[0x704F69F9B0BDCEC][0x8556B83CAD0D180]) and not CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", 0x4F35AE761BD424)
+				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "rarity", Enum[@"lootraritytype"][@"loot_rarity_type_count"]) and not CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", @"specialist")
 			end,
 		},
 	})

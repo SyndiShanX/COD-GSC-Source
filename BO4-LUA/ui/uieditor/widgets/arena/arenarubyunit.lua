@@ -7,11 +7,11 @@ CoD.ArenaRubyUnit.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 	self.id = "ArenaRubyUnit"
 	self.soundSet = "default"
 	local RubyFrame = LUI.UIImage.new(0, 0, 0, 50, 0, 0, 0, 50)
-	RubyFrame:setImage(RegisterImage(0x9C0F6B465B31B79))
+	RubyFrame:setImage(RegisterImage(@"ui_menu_arena_rubyframe"))
 	self:addElement(RubyFrame)
 	self.RubyFrame = RubyFrame
 	local Ruby = LUI.UIImage.new(0, 0, 0, 50, 0, 0, 0, 50)
-	Ruby:setImage(RegisterImage(0x17ED8E3A9A3FC36))
+	Ruby:setImage(RegisterImage(@"uie_ui_menu_arena_ruby"))
 	self:addElement(Ruby)
 	self.Ruby = Ruby
 	if PostLoadFunc then

@@ -33,38 +33,38 @@ CoD.WildcardSelectionWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.BackgroundSlidePanel = BackgroundSlidePanel
 	local Primary = LUI.UIText.new(0, 0, 667, 1032, 0, 0, 106, 124)
 	Primary:setRGB(0.39, 0.39, 0.39)
-	Primary:setText(Engine[0xF9F1239CFD921FE](0x63E51BFF17859F1))
+	Primary:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_463E51BFF17859F1"))
 	Primary:setTTF("ttmussels_regular")
 	Primary:setLetterSpacing(4)
-	Primary:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Primary:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Primary:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Primary:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(Primary)
 	self.Primary = Primary
 	local Secondary = LUI.UIText.new(0, 0, 667, 986, 0, 0, 349, 367)
 	Secondary:setRGB(0.39, 0.39, 0.39)
-	Secondary:setText(Engine[0xF9F1239CFD921FE](0xBB44C71D0F6B5C8))
+	Secondary:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_6BB44C71D0F6B5C8"))
 	Secondary:setTTF("ttmussels_regular")
 	Secondary:setLetterSpacing(4)
-	Secondary:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Secondary:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Secondary:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Secondary:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(Secondary)
 	self.Secondary = Secondary
 	local Perk1 = LUI.UIText.new(0, 0, 1296, 1565, 0, 0, 106, 124)
 	Perk1:setRGB(0.39, 0.39, 0.39)
-	Perk1:setText(LocalizeToUpperString(0x583F36DB1309A6E))
+	Perk1:setText(LocalizeToUpperString(@"hash_4583F36DB1309A6E"))
 	Perk1:setTTF("ttmussels_regular")
 	Perk1:setLetterSpacing(4)
-	Perk1:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Perk1:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Perk1:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Perk1:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(Perk1)
 	self.Perk1 = Perk1
 	local Perk2 = LUI.UIText.new(0, 0, 1296, 1612, 0, 0, 349, 367)
 	Perk2:setRGB(0.39, 0.39, 0.39)
-	Perk2:setText(LocalizeToUpperString(0xCBF3641AB9DBF81))
+	Perk2:setText(LocalizeToUpperString(@"hash_CBF3641AB9DBF81"))
 	Perk2:setTTF("ttmussels_regular")
 	Perk2:setLetterSpacing(4)
-	Perk2:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Perk2:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Perk2:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Perk2:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(Perk2)
 	self.Perk2 = Perk2
 	local WildcardList = LUI.UIList.new(f1_arg0, f1_arg1, 0, 0, nil, false, false, false, false)
@@ -75,13 +75,13 @@ CoD.WildcardSelectionWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	WildcardList:setHorizontalCount(8)
 	WildcardList:setVerticalCount(2)
 	WildcardList:setSpacing(0)
-	WildcardList:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	WildcardList:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	WildcardList:setDataSource("Unlockables")
 	WildcardList:linkToElementModel(WildcardList, "canEquipBonuscard", true, function(model, f3_arg1)
-		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	WildcardList:linkToElementModel(WildcardList, "globalItemIndex", true, function(model, f4_arg1)
-		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	WildcardList:registerEventHandler("list_item_gain_focus", function(element, event)
 		local f5_local0 = nil
@@ -101,10 +101,10 @@ CoD.WildcardSelectionWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 		elseif element.super.gainFocus then
 			f7_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f7_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(WildcardList, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(WildcardList, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if IsPC() and CoD.CACUtility.IsItemEquippedInCurrentLoadout(menu, element, controller) and CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "canEquipBonuscard") and not CoD.CACUtility.IsCACItemLocked(menu, element, controller) then
 			CoD.CACUtility.PlayElementXHashSound(element, "equipSound")
 			GoBack(self, controller)
@@ -117,10 +117,10 @@ CoD.WildcardSelectionWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 		end
 	end, function(element, menu, controller)
 		if IsPC() and CoD.CACUtility.IsItemEquippedInCurrentLoadout(menu, element, controller) and CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "canEquipBonuscard") and not CoD.CACUtility.IsCACItemLocked(menu, element, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		elseif not CoD.CACUtility.IsItemEquippedInCurrentLoadout(menu, element, controller) and CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "canEquipBonuscard") and not CoD.CACUtility.IsCACItemLocked(menu, element, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false
@@ -134,8 +134,8 @@ CoD.WildcardSelectionWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.WildcardList = WildcardList
 	local TiledBacking = LUI.UIImage.new(0, 0, 284, 629, 0.08, 0.77, 85, 85)
 	TiledBacking:setAlpha(0.5)
-	TiledBacking:setImage(RegisterImage(0x34839E8065B1E53))
-	TiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	TiledBacking:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	TiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	TiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	TiledBacking:setupNineSliceShader(196, 88)
 	self:addElement(TiledBacking)
@@ -159,33 +159,33 @@ CoD.WildcardSelectionWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 		})
 	end)
 	UnlockDescription:setRGB(0.39, 0.39, 0.39)
-	UnlockDescription.TextBox:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	UnlockDescription.TextBox:setAlignment(Enum[0x7A5123B654282D2][0x70510683C22104B])
+	UnlockDescription.TextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	UnlockDescription.TextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_bottom"])
 	self:addElement(UnlockDescription)
 	self.UnlockDescription = UnlockDescription
 	local Description = LUI.UIText.new(0.5, 0.5, -668, -338, 1, 1, -94, -76)
 	Description:setRGB(0.8, 0.79, 0.78)
 	Description:setTTF("dinnext_regular")
-	Description:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	Description:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Description:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	Description:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(Description)
 	self.Description = Description
 	local InfoBracketTop = LUI.UIImage.new(0, 0, 282, 631, 0, 0, 135, 163)
-	InfoBracketTop:setImage(RegisterImage(0x81D4EAAB75120FF))
-	InfoBracketTop:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	InfoBracketTop:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_info_bracket"))
+	InfoBracketTop:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(InfoBracketTop)
 	self.InfoBracketTop = InfoBracketTop
 	local dotline3 = LUI.UIImage.new(0, 0, 291, 621, 0, 0, 495, 499)
 	dotline3:setAlpha(0.75)
-	dotline3:setImage(RegisterImage(0xF9C7F41C631866E))
-	dotline3:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	dotline3:setImage(RegisterImage(@"uie_ui_menu_social_emblem_dotline"))
+	dotline3:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	dotline3:setShaderVector(0, 1.2, 0, 0, 0)
 	self:addElement(dotline3)
 	self.dotline3 = dotline3
 	local InfoBracketBot = LUI.UIImage.new(0, 0, 282, 631, 0, 0, 522.5, 550.5)
 	InfoBracketBot:setZRot(180)
-	InfoBracketBot:setImage(RegisterImage(0x81D4EAAB75120FF))
-	InfoBracketBot:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	InfoBracketBot:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_info_bracket"))
+	InfoBracketBot:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(InfoBracketBot)
 	self.InfoBracketBot = InfoBracketBot
 	local WildcardImageLarge = LUI.UIFixedAspectRatioImage.new(0.5, 0.5, -589.5, -417.5, 0.5, 0.5, -127, 161)
@@ -197,15 +197,15 @@ CoD.WildcardSelectionWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	WildcardHeaderLarge:setRGB(0.78, 0.78, 0.78)
 	WildcardHeaderLarge:setTTF("ttmussels_regular")
 	WildcardHeaderLarge:setLetterSpacing(3)
-	WildcardHeaderLarge:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	WildcardHeaderLarge:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	WildcardHeaderLarge:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	WildcardHeaderLarge:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(WildcardHeaderLarge)
 	self.WildcardHeaderLarge = WildcardHeaderLarge
 	local SpecialistCornerTL = LUI.UIImage.new(0, 0, 245, 269, 0, 0, 97, 121)
 	SpecialistCornerTL:setAlpha(0.2)
 	SpecialistCornerTL:setScale(0.5, 0.5)
-	SpecialistCornerTL:setImage(RegisterImage(0x8DC834094E7A02C))
-	SpecialistCornerTL:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	SpecialistCornerTL:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_window_corner"))
+	SpecialistCornerTL:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	SpecialistCornerTL:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(SpecialistCornerTL)
 	self.SpecialistCornerTL = SpecialistCornerTL
@@ -213,8 +213,8 @@ CoD.WildcardSelectionWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	SpecialistCornerTR:setAlpha(0.25)
 	SpecialistCornerTR:setZRot(-90)
 	SpecialistCornerTR:setScale(0.5, 0.5)
-	SpecialistCornerTR:setImage(RegisterImage(0x8DC834094E7A02C))
-	SpecialistCornerTR:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	SpecialistCornerTR:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_window_corner"))
+	SpecialistCornerTR:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	SpecialistCornerTR:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(SpecialistCornerTR)
 	self.SpecialistCornerTR = SpecialistCornerTR
@@ -222,8 +222,8 @@ CoD.WildcardSelectionWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	SpecialistCornerTL2:setAlpha(0.2)
 	SpecialistCornerTL2:setXRot(180)
 	SpecialistCornerTL2:setScale(0.5, 0.5)
-	SpecialistCornerTL2:setImage(RegisterImage(0x8DC834094E7A02C))
-	SpecialistCornerTL2:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	SpecialistCornerTL2:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_window_corner"))
+	SpecialistCornerTL2:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	SpecialistCornerTL2:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(SpecialistCornerTL2)
 	self.SpecialistCornerTL2 = SpecialistCornerTL2
@@ -232,8 +232,8 @@ CoD.WildcardSelectionWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	SpecialistCornerTR2:setXRot(180)
 	SpecialistCornerTR2:setZRot(-90)
 	SpecialistCornerTR2:setScale(0.5, 0.5)
-	SpecialistCornerTR2:setImage(RegisterImage(0x8DC834094E7A02C))
-	SpecialistCornerTR2:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	SpecialistCornerTR2:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_window_corner"))
+	SpecialistCornerTR2:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	SpecialistCornerTR2:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(SpecialistCornerTR2)
 	self.SpecialistCornerTR2 = SpecialistCornerTR2
@@ -249,7 +249,7 @@ CoD.WildcardSelectionWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	Description:linkToElementModel(WildcardList, "description", true, function(model)
 		local f15_local0 = model:get()
 		if f15_local0 ~= nil then
-			Description:setText(Engine[0xF9F1239CFD921FE](f15_local0))
+			Description:setText(Engine[@"hash_4F9F1239CFD921FE"](f15_local0))
 		end
 	end)
 	WildcardImageLarge:linkToElementModel(WildcardList, "imageLarge", true, function(model)
@@ -274,7 +274,7 @@ CoD.WildcardSelectionWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	})
 	local f1_local19 = self
 	local f1_local20 = self.subscribeToModel
-	local f1_local21 = Engine[0x8DF2E5447F384B9]()
+	local f1_local21 = Engine[@"getglobalmodel"]()
 	f1_local20(f1_local19, f1_local21["lobbyRoot.lobbyNav"], function(f19_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

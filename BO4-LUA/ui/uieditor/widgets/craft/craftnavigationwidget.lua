@@ -15,7 +15,7 @@ CoD.CraftNavigationWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	self.LeftStickPagination = LeftStickPagination
 	local ChangeLayerPrompt = CoD.PaintshopButtonPrompt.new(f1_arg0, f1_arg1, 0, 0, 0, 400, 0, 0, 7, 43)
 	ChangeLayerPrompt:setAlpha(0)
-	ChangeLayerPrompt.label:setText(Engine[0xF9F1239CFD921FE](0x74E5E31461D378F))
+	ChangeLayerPrompt.label:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_674E5E31461D378F"))
 	ChangeLayerPrompt:subscribeToGlobalModel(f1_arg1, "Controller", "dpad_lr_button_image", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -34,7 +34,7 @@ CoD.CraftNavigationWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	})
 	local f1_local3 = self
 	local f1_local4 = self.subscribeToModel
-	local f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local4(f1_local3, f1_local5["Emblem.EmblemProperties.editorMode"], function(f4_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

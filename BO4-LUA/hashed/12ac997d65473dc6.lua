@@ -16,20 +16,20 @@ CoD.ZMInventoryList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 		{
 			stateName = "Visible",
 			condition = function(menu, element, event)
-				return Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04]) and not CoD.HUDUtility.IsAnyGameType(f1_arg1, "zstandard")
+				return Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]) and not CoD.HUDUtility.IsAnyGameType(f1_arg1, "zstandard")
 			end,
 		},
 	})
 	local f1_local2 = self
 	local f1_local3 = self.subscribeToModel
-	local f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local3(f1_local2, f1_local4["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04]], function(f3_arg0)
+	local f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local3(f1_local2, f1_local4["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]], function(f3_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f3_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"],
 		})
 	end, false)
 	Inventory.id = "Inventory"

@@ -8,8 +8,8 @@ CoD.AmmoWidgetMP_Ultimate_Progress_FillPulse.new = function(f1_arg0, f1_arg1, f1
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local UltimateRadialMeterFillPulse = LUI.UIImage.new(0, 0, 0, 110, 0, 0, 0, 112)
-	UltimateRadialMeterFillPulse:setImage(RegisterImage(0x25ED9C7DA021F0D))
-	UltimateRadialMeterFillPulse:setMaterial(LUI.UIImage.GetCachedMaterial(0x9AD9C230B10C37))
+	UltimateRadialMeterFillPulse:setImage(RegisterImage(@"uie_ui_hud_core_hero_widget_meter_fill"))
+	UltimateRadialMeterFillPulse:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_clock_add"))
 	UltimateRadialMeterFillPulse:setShaderVector(1, 0.5, 0, 0, 0)
 	UltimateRadialMeterFillPulse:setShaderVector(2, 0.5, 0, 0, 0)
 	UltimateRadialMeterFillPulse:setShaderVector(3, 0.2, 0, 0, 0)

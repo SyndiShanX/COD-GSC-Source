@@ -18,12 +18,12 @@ CoD.demo_options_slider_control_item.new = function(f2_arg0, f2_arg1, f2_arg2, f
 	f2_arg0:addElementToPendingUpdateStateList(self)
 	local TextBox = LUI.UIText.new(0, 1, 0, 0, 0.5, 0.5, -15, 15)
 	TextBox:setTTF("dinnext_regular")
-	TextBox:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	TextBox:setAlignment(Enum[0x7A5123B654282D2][0x6ED4298C93DC5ED])
+	TextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	TextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
 	TextBox:linkToElementModel(self, "text", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
-			TextBox:setText(Engine[0xF9F1239CFD921FE](f3_local0))
+			TextBox:setText(Engine[@"hash_4F9F1239CFD921FE"](f3_local0))
 		end
 	end)
 	self:addElement(TextBox)
@@ -37,15 +37,15 @@ CoD.demo_options_slider_control_item.new = function(f2_arg0, f2_arg1, f2_arg2, f
 		elseif element.super.gainFocus then
 			f4_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f2_arg0, f2_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f2_arg0, f2_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f4_local0
 	end)
-	f2_arg0:AddButtonCallbackFunction(left, f2_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "MOUSE1", function(element, menu, controller, model)
+	f2_arg0:AddButtonCallbackFunction(left, f2_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "MOUSE1", function(element, menu, controller, model)
 		CallElementModel(self, self, controller, "prevAction")
-		SendButtonPressToMenuEx(menu, controller, Enum[0x3DD78803F918E9D][0x57783F8DA4AAEF])
+		SendButtonPressToMenuEx(menu, controller, Enum[@"luibutton"][@"lui_key_left"])
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "MOUSE1")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "MOUSE1")
 		return true
 	end, false)
 	self:addElement(left)
@@ -60,15 +60,15 @@ CoD.demo_options_slider_control_item.new = function(f2_arg0, f2_arg1, f2_arg2, f
 		elseif element.super.gainFocus then
 			f7_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f2_arg0, f2_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f2_arg0, f2_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f7_local0
 	end)
-	f2_arg0:AddButtonCallbackFunction(right, f2_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "MOUSE1", function(element, menu, controller, model)
+	f2_arg0:AddButtonCallbackFunction(right, f2_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "MOUSE1", function(element, menu, controller, model)
 		CallElementModel(self, self, controller, "nextAction")
-		SendButtonPressToMenuEx(menu, controller, Enum[0x3DD78803F918E9D][0x571F08AD84807E0])
+		SendButtonPressToMenuEx(menu, controller, Enum[@"luibutton"][@"lui_key_right"])
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "MOUSE1")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "MOUSE1")
 		return true
 	end, false)
 	self:addElement(right)

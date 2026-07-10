@@ -16,10 +16,10 @@ CoD.GameSettings_Options.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	self.VerticalListSpacer0 = VerticalListSpacer0
 	local TextBox0 = LUI.UIText.new(0, 0, 19, 459, 0, 0, 223, 260)
 	TextBox0:setRGB(ColorSet.T8__BEIGE__HEADER.r, ColorSet.T8__BEIGE__HEADER.g, ColorSet.T8__BEIGE__HEADER.b)
-	TextBox0:setText(LocalizeToUpperString(0x8E7772DFD9BBDEB))
+	TextBox0:setText(LocalizeToUpperString(@"menu/options"))
 	TextBox0:setTTF("ttmussels_regular")
-	TextBox0:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	TextBox0:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	TextBox0:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	TextBox0:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(TextBox0)
 	self.TextBox0 = TextBox0
 	local spacer = LUI.UIImage.new(0, 0, 19, 452, 0, 0, 260, 316)
@@ -33,7 +33,7 @@ CoD.GameSettings_Options.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	List0:setWidgetType(CoD.GameSettings_OptionsButton)
 	List0:setVerticalCount(3)
 	List0:setSpacing(10)
-	List0:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	List0:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	List0:setDataSource("GameSettingsOptions")
 	List0:registerEventHandler("gain_focus", function(element, event)
 		local f2_local0 = nil
@@ -42,16 +42,16 @@ CoD.GameSettings_Options.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 		elseif element.super.gainFocus then
 			f2_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f2_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(List0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(List0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		PlaySoundAlias("uin_toggle_generic")
 		ProcessListAction(self, element, controller, menu)
 		GoBack(self, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 		return true
 	end, false)
 	self:addElement(List0)
@@ -62,14 +62,14 @@ CoD.GameSettings_Options.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	local Title = LUI.UIText.new(0, 0, 19, 432, 0, 0, 541, 565)
 	Title:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	Title:setTTF("ttmussels_regular")
-	Title:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Title:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Title:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Title:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(Title)
 	self.Title = Title
 	Title:linkToElementModel(List0, "description", true, function(model)
 		local f5_local0 = model:get()
 		if f5_local0 ~= nil then
-			Title:setText(Engine[0xF9F1239CFD921FE](f5_local0))
+			Title:setText(Engine[@"hash_4F9F1239CFD921FE"](f5_local0))
 		end
 	end)
 	List0.id = "List0"

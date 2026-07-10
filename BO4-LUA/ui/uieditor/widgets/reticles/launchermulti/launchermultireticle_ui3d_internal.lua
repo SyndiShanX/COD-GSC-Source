@@ -13,7 +13,7 @@ CoD.LauncherMultiReticle_UI3D_Internal.new = function(f1_arg0, f1_arg1, f1_arg2,
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local reticle = LUI.UIImage.new(0, 0, 0, 768, 0, 0, 2, 770)
 	reticle:setRGB(0.64, 1, 0.81)
-	reticle:setImage(RegisterImage(0xA9C4C435ACF4EE9))
+	reticle:setImage(RegisterImage(@"uie_mtl_wpn_t7_launch_multi_glass_red"))
 	self:addElement(reticle)
 	self.reticle = reticle
 	local Target = CoD.Target.new(f1_arg0, f1_arg1, 0, 0, 573, 750, 0, 0, 386, 476)
@@ -35,7 +35,7 @@ CoD.LauncherMultiReticle_UI3D_Internal.new = function(f1_arg0, f1_arg1, f1_arg2,
 	local reticlelock = LUI.UIImage.new(0, 0, 0, 768, 0, 0, 2, 770)
 	reticlelock:setRGB(1, 0, 0)
 	reticlelock:setAlpha(0)
-	reticlelock:setImage(RegisterImage(0xADA40E333A7C891))
+	reticlelock:setImage(RegisterImage(@"uie_mtl_wpn_t7_launch_multi_glass"))
 	self:addElement(reticlelock)
 	self.reticlelock = reticlelock
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)

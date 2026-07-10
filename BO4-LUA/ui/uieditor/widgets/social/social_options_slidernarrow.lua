@@ -29,12 +29,12 @@ CoD.Social_Options_SliderNarrow.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	local SettingLabel = LUI.UIText.new(0, 0, 11.5, 193.5, 0, 0, 20.5, 39.5)
 	SettingLabel:setRGB(0.78, 0.74, 0.67)
 	SettingLabel:setTTF("ttmussels_regular")
-	SettingLabel:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	SettingLabel:setAlignment(Enum[0x7A5123B654282D2][0x6ED4298C93DC5ED])
+	SettingLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	SettingLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
 	SettingLabel:linkToElementModel(self, "name", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			SettingLabel:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			SettingLabel:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	self:addElement(SettingLabel)
@@ -51,7 +51,7 @@ CoD.Social_Options_SliderNarrow.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	SettingsList:setLeftRight(0, 0, 202, 526)
 	SettingsList:setTopBottom(0, 0, -1, 59)
 	SettingsList:setWidgetType(CoD.StartMenu_Options_SettingSliderList)
-	SettingsList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	SettingsList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	SettingsList:linkToElementModel(self, "optionsDatasource", true, function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then

@@ -16,7 +16,7 @@ CoD.PC_Korea_Event_Frame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Blur = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	Blur:setRGB(0.38, 0.38, 0.38)
-	Blur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	Blur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	Blur:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(Blur)
 	self.Blur = Blur
@@ -33,17 +33,17 @@ CoD.PC_Korea_Event_Frame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	self.PCKoreaEventTierProgress = PCKoreaEventTierProgress
 	local EventName = LUI.UIText.new(0.5, 0.5, -837, -123, 0.5, 0.5, -366, -336)
 	EventName:setRGB(ColorSet.T8__OCHRE.r, ColorSet.T8__OCHRE.g, ColorSet.T8__OCHRE.b)
-	EventName:setText(Engine[0xF9F1239CFD921FE](0x48B6358827FB817))
+	EventName:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_648B6358827FB817"))
 	EventName:setTTF("ttmussels_regular")
 	EventName:setLetterSpacing(4)
-	EventName:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	EventName:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	EventName:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	EventName:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(EventName)
 	self.EventName = EventName
 	local Bracket = LUI.UIImage.new(0.5, 0.5, -836.5, -123.5, 0.5, 0.5, -319, -307)
 	Bracket:setZRot(180)
-	Bracket:setImage(RegisterImage(0xC325BED3F226657))
-	Bracket:setMaterial(LUI.UIImage.GetCachedMaterial(0x44484DDFAF5C093))
+	Bracket:setImage(RegisterImage(@"hash_4C325BED3F226657"))
+	Bracket:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_normal"))
 	Bracket:setShaderVector(0, 0, 0, 0, 0)
 	Bracket:setupNineSliceShader(20, 8)
 	self:addElement(Bracket)
@@ -51,8 +51,8 @@ CoD.PC_Korea_Event_Frame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	local EventEnding = LUI.UIText.new(0.5, 0.5, -811, -143, 0.5, 0.5, -290.5, -275.5)
 	EventEnding:setTTF("dinnext_regular")
 	EventEnding:setLetterSpacing(3)
-	EventEnding:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	EventEnding:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	EventEnding:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	EventEnding:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	EventEnding:subscribeToGlobalModel(f1_arg1, "PCKoreaEventProgression", "timeRemaining", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -65,8 +65,8 @@ CoD.PC_Korea_Event_Frame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	self:addElement(TierDescription)
 	self.TierDescription = TierDescription
 	local MonthlyRewardDescription = CoD.PC_Korea_Event_Tier_Description.new(f1_arg0, f1_arg1, 0.5, 0.5, 137.5, 838.5, 0.5, 0.5, 265.5, 424.5)
-	MonthlyRewardDescription.TierUpgradeDescription:setText(Engine[0xF9F1239CFD921FE](0x22D499CE14DA97C))
-	MonthlyRewardDescription.TierTitle:setText(Engine[0xF9F1239CFD921FE](0xB1618F7EFE3E57D))
+	MonthlyRewardDescription.TierUpgradeDescription:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_522D499CE14DA97C"))
+	MonthlyRewardDescription.TierTitle:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_3B1618F7EFE3E57D"))
 	MonthlyRewardDescription:subscribeToGlobalModel(f1_arg1, "PCKoreaEventProgression", "currentWeekRewardImage", function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -79,15 +79,15 @@ CoD.PC_Korea_Event_Frame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	self:addElement(WeekTitleImage)
 	self.WeekTitleImage = WeekTitleImage
 	local RewardBG = LUI.UIImage.new(0.5, 0.5, 586.5, 843.5, 0.5, 0.5, -237, -205)
-	RewardBG:setImage(RegisterImage(0xF6E73A318F6EF0D))
+	RewardBG:setImage(RegisterImage(@"uie_pc_igrevent_weekprogression_reward_bg"))
 	self:addElement(RewardBG)
 	self.RewardBG = RewardBG
 	local RewardTitle = LUI.UIText.new(0.5, 0.5, 595.5, 834.5, 0.5, 0.5, -225, -207)
 	RewardTitle:setRGB(0, 0, 0)
-	RewardTitle:setText(Engine[0xF9F1239CFD921FE](0xEBE7E1D4C88CDB1))
+	RewardTitle:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_5EBE7E1D4C88CDB1"))
 	RewardTitle:setTTF("ttmussels_demibold")
-	RewardTitle:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	RewardTitle:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	RewardTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	RewardTitle:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	self:addElement(RewardTitle)
 	self.RewardTitle = RewardTitle
 	local Darkened = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
@@ -106,14 +106,14 @@ CoD.PC_Korea_Event_Frame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	RewardPopUp:subscribeToGlobalModel(f1_arg1, "PCKoreaEventProgression", "rewardPopUpText", function(model)
 		local f5_local0 = model:get()
 		if f5_local0 ~= nil then
-			RewardPopUp.ItemNameTextBox:setText(Engine[0xF9F1239CFD921FE](f5_local0))
+			RewardPopUp.ItemNameTextBox:setText(Engine[@"hash_4F9F1239CFD921FE"](f5_local0))
 		end
 	end)
 	self:addElement(RewardPopUp)
 	self.RewardPopUp = RewardPopUp
 	local MontlhyRewardPopUp = CoD.PC_Korea_Event_PopUp_Reward.new(f1_arg0, f1_arg1, 0.5, 0.5, -362, 362, 0.5, 0.5, -362, 362)
 	MontlhyRewardPopUp:setAlpha(0)
-	MontlhyRewardPopUp.ItemNameTextBox:setText(Engine[0xF9F1239CFD921FE](0x965FE64C4307AD1))
+	MontlhyRewardPopUp.ItemNameTextBox:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_7965FE64C4307AD1"))
 	self:addElement(MontlhyRewardPopUp)
 	self.MontlhyRewardPopUp = MontlhyRewardPopUp
 	local PopUpRewardSound = LUI.UIElement.new(0, 0, 1853, 1885, 0, 0, 1077.5, 1109.5)
@@ -135,7 +135,7 @@ CoD.PC_Korea_Event_Frame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	})
 	local f1_local17 = self
 	local f1_local18 = self.subscribeToModel
-	local f1_local19 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local19 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local18(f1_local17, f1_local19["PCKoreaEventProgression.isCurrentWeekCompleted"], function(f8_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -147,7 +147,7 @@ CoD.PC_Korea_Event_Frame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	end, false)
 	f1_local17 = self
 	f1_local18 = self.subscribeToModel
-	f1_local19 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local19 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local18(f1_local17, f1_local19["PCKoreaEventProgression.showCompletedMonthPopUp"], function(f9_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

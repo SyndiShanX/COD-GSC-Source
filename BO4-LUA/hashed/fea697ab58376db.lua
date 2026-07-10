@@ -24,8 +24,8 @@ CoD.MedalsTabInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	self.MedalPreviewWidget = MedalPreviewWidget
 	local Line = LUI.UIImage.new(0, 0, 670.5, 672.5, 0, 0, 23.5, 740.5)
 	Line:setAlpha(0.05)
-	Line:setImage(RegisterImage(0xC49B0C8991A541F))
-	Line:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	Line:setImage(RegisterImage(@"hash_C49B0C8991A541F"))
+	Line:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	Line:setShaderVector(0, 0, 0, 0, 0)
 	Line:setupNineSliceShader(4, 8)
 	self:addElement(Line)
@@ -49,7 +49,7 @@ CoD.MedalsTabInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	MedalsGrid:setHorizontalCount(4)
 	MedalsGrid:setVerticalCount(3)
 	MedalsGrid:setSpacing(18)
-	MedalsGrid:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	MedalsGrid:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	MedalsGrid:setVerticalCounter(CoD.verticalCounter)
 	MedalsGrid:registerEventHandler("gain_focus", function(element, event)
 		local f2_local0 = nil
@@ -58,10 +58,10 @@ CoD.MedalsTabInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 		elseif element.super.gainFocus then
 			f2_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f2_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(MedalsGrid, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(MedalsGrid, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if IsCurrentMenu(menu, "Barracks_Medals") then
 			CoD.PlayerStatsUtility.SetShowcaseMedal(controller, element)
 			return true
@@ -69,7 +69,7 @@ CoD.MedalsTabInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 		end
 	end, function(element, menu, controller)
 		if IsCurrentMenu(menu, "Barracks_Medals") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		else
 			return false
@@ -118,7 +118,7 @@ CoD.MedalsTabInternal.__clipsPerState = {
 			f8_arg0:setupElementClipCounter(6)
 			local f8_local0 = function(f9_arg0)
 				local f9_local0 = function(f10_arg0)
-					f10_arg0:beginAnimation(140, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f10_arg0:beginAnimation(140, Enum[@"luitween"][@"luitween_ease_out"])
 					f10_arg0:setAlpha(1)
 					f10_arg0:registerEventHandler("transition_complete_keyframe", f8_arg0.clipFinished)
 				end
@@ -183,7 +183,7 @@ CoD.MedalsTabInternal.__clipsPerState = {
 			f8_local4(f8_arg0.EmptyMedalRow1)
 			local f8_local5 = function(f19_arg0)
 				local f19_local0 = function(f20_arg0)
-					f20_arg0:beginAnimation(149, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f20_arg0:beginAnimation(149, Enum[@"luitween"][@"luitween_ease_out"])
 					f20_arg0:setAlpha(1)
 					f20_arg0:registerEventHandler("transition_complete_keyframe", f8_arg0.clipFinished)
 				end

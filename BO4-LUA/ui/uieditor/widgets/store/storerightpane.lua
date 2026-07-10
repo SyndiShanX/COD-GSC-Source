@@ -35,18 +35,18 @@ CoD.StoreRightPane.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	self.verticalScrollingTextBox = verticalScrollingTextBox
 	local featlineleft = LUI.UIImage.new(0, 0, 293, 299, 0, 0, 82, 685)
 	featlineleft:setZRot(-90)
-	featlineleft:setImage(RegisterImage(0x66D91514A5B2C62))
-	featlineleft:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	featlineleft:setImage(RegisterImage(@"uie_t7_menu_frontend_featuredlline"))
+	featlineleft:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(featlineleft)
 	self.featlineleft = featlineleft
 	local ArrowSide0 = LUI.UIImage.new(0.5, 0.5, 260, 268, 0.5, 0.5, 359, 375)
 	ArrowSide0:setZRot(-90)
-	ArrowSide0:setImage(RegisterImage(0x7CFD80C2B1F04F8))
+	ArrowSide0:setImage(RegisterImage(@"uie_t7_mp_hud_scorestreak_arrowhorz"))
 	self:addElement(ArrowSide0)
 	self.ArrowSide0 = ArrowSide0
 	local ArrowSide00 = LUI.UIImage.new(0.5, 0.5, 260, 268, 0.5, 0.5, 11, 27)
 	ArrowSide00:setZRot(90)
-	ArrowSide00:setImage(RegisterImage(0x7CFD80C2B1F04F8))
+	ArrowSide00:setImage(RegisterImage(@"uie_t7_mp_hud_scorestreak_arrowhorz"))
 	self:addElement(ArrowSide00)
 	self.ArrowSide00 = ArrowSide00
 	self.frameWidget:linkToElementModel(self, nil, false, function(model)

@@ -8,7 +8,7 @@ CoD.ChallengeCoin.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 	self.soundSet = "none"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local ChallengeCoinImage = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	ChallengeCoinImage:setMaterial(LUI.UIImage.GetCachedMaterial(0x98A2728B4675FB5))
+	ChallengeCoinImage:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_glint"))
 	ChallengeCoinImage:setShaderVector(0, 0, 0, 0, 0)
 	ChallengeCoinImage:setShaderVector(1, -46.81, 0, 0, 0)
 	ChallengeCoinImage:subscribeToGlobalModel(f1_arg1, "GameScore", "challengeCoinImage", function(model)
@@ -41,7 +41,7 @@ CoD.ChallengeCoin.__clipsPerState = {
 			f5_arg0:__resetProperties()
 			f5_arg0:setupElementClipCounter(1)
 			local f5_local0 = function(f6_arg0)
-				f5_arg0.ChallengeCoinImage:beginAnimation(1590, Enum[0xF50FFF429AB1890][0xC91E32008D731D0] | Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f5_arg0.ChallengeCoinImage:beginAnimation(1590, Enum[@"luitween"][@"luitween_elastic"] | Enum[@"luitween"][@"luitween_ease_both"])
 				f5_arg0.ChallengeCoinImage:setShaderVector(0, 1, 0, 0, 0)
 				f5_arg0.ChallengeCoinImage:registerEventHandler("interrupted_keyframe", f5_arg0.clipInterrupted)
 				f5_arg0.ChallengeCoinImage:registerEventHandler("transition_complete_keyframe", f5_arg0.clipFinished)

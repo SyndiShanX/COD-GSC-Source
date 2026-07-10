@@ -11,8 +11,8 @@ CoD.HubCharacterTabItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	name:setRGB(0.96, 0.93, 0.84)
 	name:setTTF("ttmussels_regular")
 	name:setLetterSpacing(2)
-	name:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	name:setAlignment(Enum[0x7A5123B654282D2][0x6ED4298C93DC5ED])
+	name:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	name:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
 	name:linkToElementModel(self, "name", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -26,8 +26,8 @@ CoD.HubCharacterTabItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	nameBold:setAlpha(0)
 	nameBold:setTTF("ttmussels_demibold")
 	nameBold:setLetterSpacing(3)
-	nameBold:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	nameBold:setAlignment(Enum[0x7A5123B654282D2][0x6ED4298C93DC5ED])
+	nameBold:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	nameBold:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
 	nameBold:linkToElementModel(self, "name", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then

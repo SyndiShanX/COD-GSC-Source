@@ -21,7 +21,7 @@ CoD.DirectorCodCasterTeamSettings.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	ButtonListPC:setTopBottom(0, 0, 52, 98)
 	ButtonListPC:setWidgetType(CoD.StartMenu_Options_SettingSlider)
 	ButtonListPC:setSpacing(6)
-	ButtonListPC:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	ButtonListPC:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	ButtonListPC:setVerticalCounter(CoD.verticalCounter)
 	ButtonListPC:registerEventHandler("list_item_gain_focus", function(element, event)
 		local f2_local0 = nil
@@ -38,7 +38,7 @@ CoD.DirectorCodCasterTeamSettings.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 			f3_local0 = element.super:gainFocus(event)
 		end
 		SetElementCanBeNavigatedTo(self.OptionCategoryListPC, false)
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbb_pscircle"])
 		return f3_local0
 	end)
 	ButtonListPC:registerEventHandler("lose_focus", function(element, event)
@@ -57,13 +57,13 @@ CoD.DirectorCodCasterTeamSettings.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 		CoD.CodCasterUtility.UpdateTeamIdentity(self, f1_arg1, false)
 		return f5_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(ButtonListPC, f1_arg1, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(ButtonListPC, f1_arg1, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		CoD.GridAndListUtility.SetFocusToFirstSelectableItem(self.ButtonListPC)
 		SetControllerModelValue(controller, "customGamesEdit", false)
 		SetFocusToElement(self, "OptionCategoryListPC", controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 		return true
 	end, false)
 	ButtonListPC:subscribeToGlobalModel(f1_arg1, "PerController", "PlayerSettingsUpdate", function(model)
@@ -87,7 +87,7 @@ CoD.DirectorCodCasterTeamSettings.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	})
 	local f1_local5 = OptionCategoryListPC
 	local f1_local6 = OptionCategoryListPC.subscribeToModel
-	local OptionInfo = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local OptionInfo = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local6(f1_local5, OptionInfo.customGamesEdit, function(f10_arg0)
 		f1_arg0:updateElementState(OptionCategoryListPC, {
 			name = "model_validation",
@@ -102,7 +102,7 @@ CoD.DirectorCodCasterTeamSettings.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	OptionCategoryListPC:setWidgetType(CoD.CustomGames_OptionCategoryButton)
 	OptionCategoryListPC:setVerticalCount(3)
 	OptionCategoryListPC:setSpacing(8)
-	OptionCategoryListPC:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	OptionCategoryListPC:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	OptionCategoryListPC:setDataSource("CodCasterTeamSettingsCategories")
 	OptionCategoryListPC:registerEventHandler("gain_focus", function(element, event)
 		local f11_local0 = nil
@@ -111,10 +111,10 @@ CoD.DirectorCodCasterTeamSettings.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 		elseif element.super.gainFocus then
 			f11_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f11_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(OptionCategoryListPC, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(OptionCategoryListPC, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if IsElementPropertyValue(element, "actionTeam", nil) then
 			ShowWidget(self.ButtonListPC)
 			SetCurrentElementAsActive(self, element, controller)
@@ -127,10 +127,10 @@ CoD.DirectorCodCasterTeamSettings.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 		end
 	end, function(element, menu, controller)
 		if IsElementPropertyValue(element, "actionTeam", nil) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		elseif not IsElementPropertyValue(element, "actionTeam", nil) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		else
 			return false
@@ -232,7 +232,7 @@ CoD.DirectorCodCasterTeamSettings.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	})
 	local f1_local10 = self
 	local f1_local11 = self.subscribeToModel
-	local f1_local12 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local12 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local11(f1_local10, f1_local12.customGamesEdit, function(f25_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

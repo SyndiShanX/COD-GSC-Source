@@ -11,8 +11,8 @@ CoD.vhud_ms_Seating.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	self.soundSet = "default"
 	self.anyChildUsesUpdateState = true
 	local msDamageFillBar = LUI.UIImage.new(0.5, 0.5, -58.5, 58.5, 0.5, 0.5, -55, 62)
-	msDamageFillBar:setImage(RegisterImage(0xB7F24D24774A7CD))
-	msDamageFillBar:setMaterial(LUI.UIImage.GetCachedMaterial(0x2EEB1ECF1F211F5))
+	msDamageFillBar:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_mothership_damagefillbar"))
+	msDamageFillBar:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_delta"))
 	msDamageFillBar:setShaderVector(0, 0, 1, 0, 0)
 	msDamageFillBar:setShaderVector(1, 0, 0, 0, 0)
 	msDamageFillBar:setShaderVector(3, 0, 0, 0, 0)
@@ -34,19 +34,19 @@ CoD.vhud_ms_Seating.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	local msSeating1 = LUI.UIImage.new(0.5, 0.5, -58.5, 58.5, 0.5, 0.5, -55, 62)
 	msSeating1:setAlpha(0.3)
 	msSeating1:setZoom(-15)
-	msSeating1:setImage(RegisterImage(0xB4C61C5E1DF1847))
-	msSeating1:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	msSeating1:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_mothership_damageline"))
+	msSeating1:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(msSeating1)
 	self.msSeating1 = msSeating1
 	local msSeating = LUI.UIImage.new(0.5, 0.5, -58.5, 58.5, 0.5, 0.5, -55, 62)
-	msSeating:setImage(RegisterImage(0xB4C61C5E1DF1847))
-	msSeating:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	msSeating:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_mothership_damageline"))
+	msSeating:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(msSeating)
 	self.msSeating = msSeating
 	local msSeating0 = LUI.UIImage.new(0.5, 0.5, -58.5, 58.5, 0.5, 0.5, -55, 62)
 	msSeating0:setAlpha(0.25)
-	msSeating0:setImage(RegisterImage(0xB4C61C5E1DF1847))
-	msSeating0:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	msSeating0:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_mothership_damageline"))
+	msSeating0:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(msSeating0)
 	self.msSeating0 = msSeating0
 	local vhudmsNotificationSeatingSide = CoD.vhud_ms_NotificationSeatingSide.new(f1_arg0, f1_arg1, 0.5, 0.5, 13, 62, 0.5, 0.5, -30, -8)

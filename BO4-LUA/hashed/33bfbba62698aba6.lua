@@ -8,12 +8,12 @@ CoD.WarzonePlayerMarker.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local MarkerImage = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	MarkerImage:setImage(RegisterImage(0x20CAFED954FCC8))
+	MarkerImage:setImage(RegisterImage(@"ui_icon_minimap_warzone_waypoint"))
 	self:addElement(MarkerImage)
 	self.MarkerImage = MarkerImage
 	local MarkerImageAnim = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	MarkerImageAnim:setAlpha(0)
-	MarkerImageAnim:setImage(RegisterImage(0x20CAFED954FCC8))
+	MarkerImageAnim:setImage(RegisterImage(@"ui_icon_minimap_warzone_waypoint"))
 	self:addElement(MarkerImageAnim)
 	self.MarkerImageAnim = MarkerImageAnim
 	self:mergeStateConditions({
@@ -36,7 +36,7 @@ CoD.WarzonePlayerMarker.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	end)
 	local f1_local3 = self
 	local f1_local4 = self.subscribeToModel
-	local f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local4(f1_local3, f1_local5.LastInput, function(f5_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -87,7 +87,7 @@ CoD.WarzonePlayerMarker.__clipsPerState = {
 			f9_arg0:setupElementClipCounter(1)
 			local f9_local0 = function(f10_arg0)
 				local f10_local0 = function(f11_arg0)
-					f11_arg0:beginAnimation(800, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f11_arg0:beginAnimation(800, Enum[@"luitween"][@"luitween_ease_both"])
 					f11_arg0:setAlpha(0)
 					f11_arg0:setScale(1.5, 1.5)
 					f11_arg0:registerEventHandler("transition_complete_keyframe", f9_arg0.clipFinished)

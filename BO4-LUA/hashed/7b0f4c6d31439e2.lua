@@ -8,7 +8,7 @@ CoD.PC_Korea_Event_Day_Progression_Separators.new = function(f1_arg0, f1_arg1, f
 	self.id = "PC_Korea_Event_Day_Progression_Separators"
 	self.soundSet = "default"
 	local Separator01 = LUI.UIImage.new(0.5, 0.5, -6, 6, 0.5, 0.5, -18, 18)
-	Separator01:setImage(RegisterImage(0x72812A6EA679BCD))
+	Separator01:setImage(RegisterImage(@"uie_pc_igrevent_progression_separator"))
 	self:addElement(Separator01)
 	self.Separator01 = Separator01
 	if PostLoadFunc then

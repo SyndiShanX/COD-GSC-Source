@@ -3,7 +3,7 @@ CoD.TalentSelectUtility.GetSlotLevelFromSlotName = function(f1_arg0)
 	return tonumber(string.sub(f1_arg0, string.len("talent") + 1))
 end
 CoD.TalentSelectUtility.UpdateOptionsList = function(f2_arg0)
-	local f2_local0 = Engine[0x40E824FE270E174](Engine[0x4DF5CFBC1771947](f2_arg0), "TalentSelect.UpdateOptions")
+	local f2_local0 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f2_arg0), "TalentSelect.UpdateOptions")
 	if f2_local0 ~= nil then
 		f2_local0:forceNotifySubscriptions()
 	end
@@ -34,7 +34,7 @@ CoD.TalentSelectUtility.GetTalentFilterForEquippedSlot = function(f6_arg0, f6_ar
 	if f6_arg0 then
 		local f6_local0 = f6_arg0[f6_arg1]
 		if f6_local0 then
-			return Engine[0xB8891E0F105C51F](f6_local0.itemIndex:get(), Enum[0x6EB546760F890D2][0x8EA6ADA81FD4511], f6_arg2)
+			return Engine[@"getloadoutslotforitem"](f6_local0.itemIndex:get(), Enum[@"statindexoffset"][@"hash_68EA6ADA81FD4511"], f6_arg2)
 		end
 	end
 end
@@ -103,7 +103,7 @@ CoD.TalentSelectUtility.IsTalentEquippedInCurrentSlot = function(f15_arg0, f15_a
 	return f15_local0 and CoD.CACUtility.EmptyItemIndex < f15_local0
 end
 CoD.TalentSelectUtility.GetMaxAllowedSkills = function()
-	local f16_local0 = Engine[0xDBC2AD5002B261B](0x635A26C94B56725) or 0
+	local f16_local0 = Engine[@"getgametypesetting"](@"hash_4635A26C94B56725") or 0
 	if f16_local0 > 0 and f16_local0 < #CoD.CACUtility.TalentSlotNameList then
 		return f16_local0
 	else
@@ -112,7 +112,7 @@ CoD.TalentSelectUtility.GetMaxAllowedSkills = function()
 end
 DataSources.TalentSelect = {
 	getModel = function(f17_arg0)
-		local f17_local0 = Engine[0x4DF5CFBC1771947](f17_arg0)
+		local f17_local0 = Engine[@"getmodelforcontroller"](f17_arg0)
 		f17_local0 = f17_local0:create("TalentSelect")
 		f17_local0:create("previewImage")
 		f17_local0:create("previewItemIndex")

@@ -17,17 +17,17 @@ Lobby.MatchmakingArena.HandleDedicatedParkedStage = function(f3_arg0)
 		Lobby.MatchmakingArena.DoDedicatedSearch(f3_arg0)
 		return
 	end
-	local f3_local0 = Enum[0x71A76D23911A20E][0x5AED0351BD1CE62]
-	local f3_local1 = Engine[0x7B3B2B73B53EB34]()
-	local f3_local2 = Engine[0x6D46FF33D97B908](f3_local1)
+	local f3_local0 = Enum[@"queryid"][@"queryid_search_session_dedicated_parked"]
+	local f3_local1 = Engine[@"getplaylistid"]()
+	local f3_local2 = Engine[@"getparkingplaylistforrealplaylist"](f3_local1)
 	if f3_local2 ~= Lobby.Matchmaking.INVALID_PARKING_PLAYLIST then
-		Engine[0x8C5711DAACC99F4](Enum[0x7A63DCD561B0FA8][0x59962D5EF982597], "Lobby.MatchmakingArena.HandleDedicatedParkedStage: No sessions found in playlistID<" .. f3_local1 .. ">, looking in parkingPlaylist<" .. f3_local2 .. ">\n")
+		Engine[@"printinfo"](Enum[@"consolelabel_e"][@"con_label_lobbyhost"], "Lobby.MatchmakingArena.HandleDedicatedParkedStage: No sessions found in playlistID<" .. f3_local1 .. ">, looking in parkingPlaylist<" .. f3_local2 .. ">\n")
 		Lobby.Matchmaking.SetMapPacksOriginal()
 		Lobby.Matchmaking.SetPlaylistInfo(f3_local2)
 	end
 	Lobby.Matchmaking.SetIsEmpty(Lobby.Matchmaking.SessionEmpty.IS_EMPTY)
 	if Lobby.Matchmaking.SetServerLocation(f3_local0, f3_arg0) ~= true then
-		Engine[0x5DF86CF48135674](Enum[0x7A63DCD561B0FA8][0xC1DE3DC19B3B20D], "Lobby.MatchmakingArena.HandleDedicatedParkedStage: Failed to set server location, doing a listen search instead\n")
+		Engine[@"printwarning"](Enum[@"consolelabel_e"][@"con_label_lobby"], "Lobby.MatchmakingArena.HandleDedicatedParkedStage: Failed to set server location, doing a listen search instead\n")
 		Lobby.MatchmakingArena.DoListenSearch(f3_arg0)
 	else
 		Lobby.Matchmaking.SetSkillWeight(0)
@@ -38,30 +38,30 @@ Lobby.MatchmakingArena.HandleListenStage = function(f4_arg0)
 	Lobby.MatchmakingArena.DoListenSearch(f4_arg0)
 end
 Lobby.MatchmakingArena.DoDedicatedSearch = function(f5_arg0)
-	local f5_local0 = Enum[0x71A76D23911A20E][0x50431AFB53B1412]
+	local f5_local0 = Enum[@"queryid"][@"queryid_search_session_dedicated"]
 	if Lobby.Matchmaking.SetServerLocation(f5_local0, f5_arg0) == true then
 		Lobby.Matchmaking.SetPingBandWeight(1)
 		Lobby.Matchmaking.SetIsEmpty(Lobby.Matchmaking.SessionEmpty.IS_NOT_EMPTY)
 		Lobby.Matchmaking.SetQueryId(f5_local0)
 	else
-		Engine[0x5DF86CF48135674](Enum[0x7A63DCD561B0FA8][0xC1DE3DC19B3B20D], "Lobby.MatchmakingArena.DoDedicatedSearch: Failed to set server location, doing a listen search instead\n")
-		if Dvar[0x181DF5AA7D92095]:exists() and Dvar[0x181DF5AA7D92095]:get() then
+		Engine[@"printwarning"](Enum[@"consolelabel_e"][@"con_label_lobby"], "Lobby.MatchmakingArena.DoDedicatedSearch: Failed to set server location, doing a listen search instead\n")
+		if Dvar[@"arena_enablelistenhosting"]:exists() and Dvar[@"arena_enablelistenhosting"]:get() then
 			Lobby.MatchmakingArena.DoListenSearch(f5_arg0)
 		end
 	end
 end
 Lobby.MatchmakingArena.DoListenSearch = function(f6_arg0)
-	if Dvar[0x181DF5AA7D92095]:exists() and Dvar[0x181DF5AA7D92095]:get() then
-		Lobby.Matchmaking.SetQueryId(Enum[0x71A76D23911A20E][0x1288E0B9D3852C1])
+	if Dvar[@"arena_enablelistenhosting"]:exists() and Dvar[@"arena_enablelistenhosting"]:get() then
+		Lobby.Matchmaking.SetQueryId(Enum[@"queryid"][@"queryid_search_sessions_all"])
 	else
 		Lobby.MatchmakingArena.DoDedicatedSearch(f6_arg0)
 	end
 end
 Lobby.MatchmakingArena.SetupConnectionInfo = function(f7_arg0)
 	local f7_local0 = Lobby.Matchmaking.GetConnection(f7_arg0)
-	local f7_local1 = Dvar[0x9A8F14A21E7424D]:get()
-	local f7_local2 = Dvar[0x8E0DBD8C71F9D10]:get()
-	local f7_local3 = Dvar[0xB2C59B4EE116AEA]:get()
+	local f7_local1 = Dvar[@"excellentping"]:get()
+	local f7_local2 = Dvar[@"goodping"]:get()
+	local f7_local3 = Dvar[@"terribleping"]:get()
 	if f7_local0 == Lobby.Matchmaking.Connection.BEST then
 		Lobby.Matchmaking.PingRange(1, f7_local1)
 		Lobby.Matchmaking.MinGeoMatch(1)
@@ -72,11 +72,11 @@ Lobby.MatchmakingArena.SetupConnectionInfo = function(f7_arg0)
 		Lobby.Matchmaking.PingRange(f7_local2, 999)
 		Lobby.Matchmaking.MinGeoMatch(0)
 	end
-	Engine[0x8C5711DAACC99F4](Enum[0x7A63DCD561B0FA8][0xC1DE3DC19B3B20D], "Lobby.MatchmakingArena.SetupConnectionInfo: Connection: " .. tostring(f7_local0) .. "\n")
+	Engine[@"printinfo"](Enum[@"consolelabel_e"][@"con_label_lobby"], "Lobby.MatchmakingArena.SetupConnectionInfo: Connection: " .. tostring(f7_local0) .. "\n")
 end
 Lobby.MatchmakingArena.SetupMatchmakingStage = function(f8_arg0)
-	Engine[0x8C5711DAACC99F4](Enum[0x7A63DCD561B0FA8][0xC1DE3DC19B3B20D], "Lobby.MatchmakingArena.SetupMatchmakingStage: Setting up arena matchmaking stage\n")
-	Lobby.Matchmaking.SetShowInMatchmaking(Enum[0x805C82C8BA1B3C9][0xC7A6E94E122CDB2])
+	Engine[@"printinfo"](Enum[@"consolelabel_e"][@"con_label_lobby"], "Lobby.MatchmakingArena.SetupMatchmakingStage: Setting up arena matchmaking stage\n")
+	Lobby.Matchmaking.SetShowInMatchmaking(Enum[@"showinmatchmaking"][@"show_in_matchmaking_true"])
 	Lobby.Matchmaking.SetNetcodeVersion()
 	Lobby.Matchmaking.SetGeoLocation()
 	Lobby.Matchmaking.SetIsEmpty(Lobby.Matchmaking.SessionEmpty.IS_NOT_EMPTY)
@@ -86,8 +86,8 @@ Lobby.MatchmakingArena.SetupMatchmakingStage = function(f8_arg0)
 	if f8_local0 == Lobby.Matchmaking.SearchStage.DONE then
 		return false
 	end
-	Engine[0x8C5711DAACC99F4](Enum[0x7A63DCD561B0FA8][0xC1DE3DC19B3B20D], "Lobby.MatchmakingArena.SetupMatchmakingStage: Next Stage: " .. tostring(f8_local0) .. "\n")
-	Lobby.Matchmaking.SetPlaylistInfo(Engine[0x7B3B2B73B53EB34]())
+	Engine[@"printinfo"](Enum[@"consolelabel_e"][@"con_label_lobby"], "Lobby.MatchmakingArena.SetupMatchmakingStage: Next Stage: " .. tostring(f8_local0) .. "\n")
+	Lobby.Matchmaking.SetPlaylistInfo(Engine[@"getplaylistid"]())
 	if Lobby.Matchmaking.SearchParams.mode == Lobby.Matchmaking.SearchMode.ARENA then
 		if f8_local0 < Lobby.Matchmaking.SearchStage.DEDICATED_PARKED then
 			Lobby.MatchmakingArena.HandleDedicatedSearchStage(f8_local0)
@@ -99,17 +99,17 @@ Lobby.MatchmakingArena.SetupMatchmakingStage = function(f8_arg0)
 	elseif Lobby.Matchmaking.SearchParams.mode == Lobby.Matchmaking.SearchMode.LOBBY_MERGE then
 		Lobby.MatchmakingArena.HandleMerge(f8_local0)
 	else
-		Engine[0x458FE92FEB39D4E](Enum[0x7A63DCD561B0FA8][0xC1DE3DC19B3B20D], "Lobby.MatchmakingArena.SetupMatchmakingStage Called with Unhandled Search Mode.\n")
+		Engine[@"printerror"](Enum[@"consolelabel_e"][@"con_label_lobby"], "Lobby.MatchmakingArena.SetupMatchmakingStage Called with Unhandled Search Mode.\n")
 	end
 	Lobby.Matchmaking.SetTeamSize(Lobby.Matchmaking.GetNumSlotsNeededOnTeam(f8_local0))
-	Dvar[0xFD32115F3E81D0F]:set(Lobby.Matchmaking.GetMapPackBits(Engine[0xEC040B95C0BF471](Enum[0xBF54BE1BB3D618B][0x92676CF5B6FCD43]), Engine[0x7B3B2B73B53EB34]()))
+	Dvar[@"lobbysearchmappacks"]:set(Lobby.Matchmaking.GetMapPackBits(Engine[@"getdlcbitsforlobby"](Enum[@"lobbytype"][@"lobby_type_game"]), Engine[@"getplaylistid"]()))
 	Lobby.MatchmakingArena.SetupConnectionInfo(f8_arg0)
 	return true
 end
 Lobby.MatchmakingArena.CanHostAnyLobby = function()
 	local f9_local0 = 10
-	if Dvar[0xA5FFA081C299437]:exists() then
-		f9_local0 = Dvar[0xA5FFA081C299437]:get()
+	if Dvar[@"arena_minhostskillrange"]:exists() then
+		f9_local0 = Dvar[@"arena_minhostskillrange"]:get()
 	end
 	local f9_local1 = Lobby.Matchmaking.SearchParams.searchInfo.maxQOSedRange
 	if f9_local1 then
@@ -123,30 +123,30 @@ Lobby.MatchmakingArena.GetArenaSkillRange = function(f10_arg0)
 	if f10_local0 == nil then
 		return 0
 	end
-	local f10_local1 = (Engine[0x9D33D652B9B0F3B]() - f10_local0) / 1000
+	local f10_local1 = (Engine[@"milliseconds"]() - f10_local0) / 1000
 	local f10_local2 = 0
-	if Dvar[0x5A4B7E98B04250D]:exists() then
-		f10_local2 = Dvar[0x5A4B7E98B04250D]:get()
+	if Dvar[@"arena_qosskillstart"]:exists() then
+		f10_local2 = Dvar[@"arena_qosskillstart"]:get()
 	end
 	local f10_local3 = 1
-	if Dvar[0x4A22EC68E0798C5]:exists() then
-		f10_local3 = Dvar[0x4A22EC68E0798C5]:get()
+	if Dvar[@"arena_qosbrodenskillstep"]:exists() then
+		f10_local3 = Dvar[@"arena_qosbrodenskillstep"]:get()
 	end
 	local f10_local4 = 2
-	if Dvar[0x5215E81615C6A0F]:exists() then
-		f10_local4 = Dvar[0x5215E81615C6A0F]:get()
+	if Dvar[@"arena_qosbrodenskillfrequency"]:exists() then
+		f10_local4 = Dvar[@"arena_qosbrodenskillfrequency"]:get()
 	end
-	local f10_local5 = math.min(f10_local2 + f10_local1 / f10_local4 * f10_local3, Engine[0xE0CCEEF5541DCD9]())
+	local f10_local5 = math.min(f10_local2 + f10_local1 / f10_local4 * f10_local3, Engine[@"getmaxarenapoints"]())
 	if f10_arg0 == true then
 		Lobby.Matchmaking.SearchParams.searchInfo.maxQOSedRange = f10_local5
 	end
-	Engine[0x8C5711DAACC99F4](Enum[0x7A63DCD561B0FA8][0x59962D5EF982597], "Lobby.MatchmakingArena.GetArenaSkillRange: Search Time " .. tostring(f10_local1) .. " seconds. Skill Range: " .. f10_local5 .. " points\n")
+	Engine[@"printinfo"](Enum[@"consolelabel_e"][@"con_label_lobbyhost"], "Lobby.MatchmakingArena.GetArenaSkillRange: Search Time " .. tostring(f10_local1) .. " seconds. Skill Range: " .. f10_local5 .. " points\n")
 	return f10_local5
 end
 Lobby.MatchmakingArena.GetLobbyArenaSkill = function()
 	local f11_local0 = {}
 	local f11_local1 = 0
-	local f11_local2 = Engine[0x755D55B3813D249](Enum[0x7CA2DE5266A94BF][0x98EA1BB7164D103], Enum[0xBF54BE1BB3D618B][0x92676CF5B6FCD43])
+	local f11_local2 = Engine[@"lobbygetsessionclients"](Enum[@"lobbymodule"][@"lobby_module_host"], Enum[@"lobbytype"][@"lobby_type_game"])
 	for f11_local6, f11_local7 in ipairs(f11_local2.sessionClients) do
 		if not f11_local0[f11_local7.simpleLobbyID] then
 			f11_local0[f11_local7.simpleLobbyID] = f11_local7.arenaPoints

@@ -52,13 +52,13 @@ CoD.ItemDetails.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_a
 			modelName = "purchased",
 		})
 	end)
-	ItemShopButton.DirectorSelectButtonMiniInternal.MiddleText:setText(LocalizeToUpperString(0x85952ACC6D0C1B0))
-	ItemShopButton.DirectorSelectButtonMiniInternal.MiddleTextFocus:setText(LocalizeToUpperString(0x85952ACC6D0C1B0))
+	ItemShopButton.DirectorSelectButtonMiniInternal.MiddleText:setText(LocalizeToUpperString(@"menu/purchase"))
+	ItemShopButton.DirectorSelectButtonMiniInternal.MiddleTextFocus:setText(LocalizeToUpperString(@"menu/purchase"))
 	local ButtonTopLine9Slice2 = ItemShopButton
 	local PriceText = ItemShopButton.subscribeToModel
-	local BundleText = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local BundleText = Engine[@"getmodelforcontroller"](f1_arg1)
 	PriceText(ButtonTopLine9Slice2, BundleText["LootStreamProgress.codPoints"], function(f6_arg0, f6_arg1)
-		CoD.Menu.UpdateButtonShownState(f6_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f6_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	ItemShopButton:registerEventHandler("gain_focus", function(element, event)
 		local f7_local0 = nil
@@ -68,10 +68,10 @@ CoD.ItemDetails.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_a
 			f7_local0 = element.super:gainFocus(event)
 		end
 		CoD.BlackMarketUtility.ChangeSupplyChainCameraBySelection(f1_arg0, f1_arg1, f1_arg0)
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f7_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(ItemShopButton, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(ItemShopButton, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if CanPurchaseItem(controller, self) and IsInDefaultState(self) then
 			OpenPopup(self, "ItemShopConfirmation", controller, {
 				_model = self:getModel(),
@@ -96,16 +96,16 @@ CoD.ItemDetails.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_a
 		end
 	end, function(element, menu, controller)
 		if CanPurchaseItem(controller, self) and IsInDefaultState(self) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		elseif CanPurchaseItem(controller, self) and IsElementInState(self, "SubItems") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		elseif IsInDefaultState(self) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		elseif IsElementInState(self, "SubItems") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		else
 			return false
@@ -115,17 +115,17 @@ CoD.ItemDetails.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_a
 	self.ItemShopButton = ItemShopButton
 	PriceText = LUI.UIText.new(0, 0, 408, 608, 0, 0, 406, 434)
 	PriceText:setRGB(ColorSet.CodPointsNumber.r, ColorSet.CodPointsNumber.g, ColorSet.CodPointsNumber.b)
-	PriceText:setText(Engine[0xF9F1239CFD921FE](0x93F12745A24670F))
+	PriceText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_393F12745A24670F"))
 	PriceText:setTTF("ttmussels_demibold")
 	PriceText:setLetterSpacing(2)
-	PriceText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	PriceText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	PriceText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	PriceText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(PriceText)
 	self.PriceText = PriceText
 	ButtonTopLine9Slice2 = LUI.UIImage.new(0, 0, -5, 781, 0, 0, -6, 14)
 	ButtonTopLine9Slice2:setAlpha(0.25)
-	ButtonTopLine9Slice2:setImage(RegisterImage(0xC752149A1FA1AAE))
-	ButtonTopLine9Slice2:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	ButtonTopLine9Slice2:setImage(RegisterImage(@"uie_ui_menu_cac_secondary_button_top_line"))
+	ButtonTopLine9Slice2:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	ButtonTopLine9Slice2:setShaderVector(0, 0, 0, 0, 0)
 	ButtonTopLine9Slice2:setupNineSliceShader(120, 10)
 	self:addElement(ButtonTopLine9Slice2)
@@ -134,14 +134,14 @@ CoD.ItemDetails.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_a
 	BundleText:setText(LocalizeToUpperString(0x58D2D9BD214127))
 	BundleText:setTTF("ttmussels_regular")
 	BundleText:setLetterSpacing(4)
-	BundleText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	BundleText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	BundleText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	BundleText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(BundleText)
 	self.BundleText = BundleText
 	local ButtonTopLine9Slice = LUI.UIImage.new(0, 0, -5, 781, 0, 0, 461, 481)
 	ButtonTopLine9Slice:setAlpha(0.25)
-	ButtonTopLine9Slice:setImage(RegisterImage(0xC752149A1FA1AAE))
-	ButtonTopLine9Slice:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	ButtonTopLine9Slice:setImage(RegisterImage(@"uie_ui_menu_cac_secondary_button_top_line"))
+	ButtonTopLine9Slice:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	ButtonTopLine9Slice:setShaderVector(0, 0, 0, 0, 0)
 	ButtonTopLine9Slice:setupNineSliceShader(120, 10)
 	self:addElement(ButtonTopLine9Slice)
@@ -156,7 +156,7 @@ CoD.ItemDetails.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_a
 	local Strip = LUI.UIImage.new(0.5, 0.5, -387, 387, 0, 0, 498, 672)
 	Strip:setRGB(0.13, 0.13, 0.13)
 	Strip:setAlpha(0)
-	Strip:setMaterial(LUI.UIImage.GetCachedMaterial(0x67D1E3A3D2D1BF))
+	Strip:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_saturation_normal"))
 	Strip:setShaderVector(0, 0.7, 0, 0, 0)
 	self:addElement(Strip)
 	self.Strip = Strip

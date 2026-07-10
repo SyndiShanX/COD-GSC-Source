@@ -17,7 +17,7 @@ CoD.ItemShopFrameInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	DailyListLabel:subscribeToGlobalModel(f1_arg1, "ItemshopRotation", "loot_itemshop_slot3_timer", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			DailyListLabel.TextBox2:setText(LocalizeIntoStringIfNotEmpty(0xC0CE2452CF87DB1, f2_local0))
+			DailyListLabel.TextBox2:setText(LocalizeIntoStringIfNotEmpty(@"hash_1C0CE2452CF87DB1", f2_local0))
 		end
 	end)
 	self:addElement(DailyListLabel)
@@ -26,7 +26,7 @@ CoD.ItemShopFrameInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	FeaturedListLabel:subscribeToGlobalModel(f1_arg1, "ItemshopRotation", "loot_itemshop_slot1_timer", function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
-			FeaturedListLabel.TextBox2:setText(LocalizeIntoStringIfNotEmpty(0xC0CE2452CF87DB1, f3_local0))
+			FeaturedListLabel.TextBox2:setText(LocalizeIntoStringIfNotEmpty(@"hash_1C0CE2452CF87DB1", f3_local0))
 		end
 	end)
 	self:addElement(FeaturedListLabel)
@@ -35,7 +35,7 @@ CoD.ItemShopFrameInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	FeaturedListLabel2:subscribeToGlobalModel(f1_arg1, "ItemshopRotation", "loot_itemshop_slot2_timer", function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
-			FeaturedListLabel2.TextBox2:setText(LocalizeIntoStringIfNotEmpty(0xC0CE2452CF87DB1, f4_local0))
+			FeaturedListLabel2.TextBox2:setText(LocalizeIntoStringIfNotEmpty(@"hash_1C0CE2452CF87DB1", f4_local0))
 		end
 	end)
 	self:addElement(FeaturedListLabel2)
@@ -47,7 +47,7 @@ CoD.ItemShopFrameInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	DailyItems:setHorizontalCount(2)
 	DailyItems:setVerticalCount(2)
 	DailyItems:setSpacing(30)
-	DailyItems:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	DailyItems:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	DailyItems:setDataSource("ItemShopList")
 	DailyItems:registerEventHandler("list_item_gain_focus", function(element, event)
 		local f5_local0 = nil
@@ -62,17 +62,17 @@ CoD.ItemShopFrameInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 		elseif element.super.gainFocus then
 			f6_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f6_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(DailyItems, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(DailyItems, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		OpenOverlay(self, "ItemShopDetails", controller, {
 			_model = element:getModel(),
 		})
 		PlaySoundAlias("uin_toggle_generic")
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 		return true
 	end, false)
 	DailyItems:subscribeToGlobalModel(f1_arg1, "GlobalModel", "ItemshopRotation.cycled", function(model)
@@ -90,7 +90,7 @@ CoD.ItemShopFrameInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	FeaturedItems:setHorizontalCount(2)
 	FeaturedItems:setVerticalCount(2)
 	FeaturedItems:setSpacing(30)
-	FeaturedItems:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	FeaturedItems:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	FeaturedItems:setDataSource("ItemShopFeaturedList")
 	FeaturedItems:registerEventHandler("list_item_gain_focus", function(element, event)
 		local f10_local0 = nil
@@ -105,17 +105,17 @@ CoD.ItemShopFrameInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 		elseif element.super.gainFocus then
 			f11_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f11_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(FeaturedItems, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(FeaturedItems, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		OpenOverlay(self, "ItemShopDetails", controller, {
 			_model = element:getModel(),
 		})
 		PlaySoundAlias("uin_toggle_generic")
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x85952ACC6D0C1B0, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/purchase", nil, nil)
 		return true
 	end, false)
 	FeaturedItems:subscribeToGlobalModel(f1_arg1, "GlobalModel", "ItemshopRotation.cycled", function(model)
@@ -129,16 +129,16 @@ CoD.ItemShopFrameInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	local BottomBracket9Slice2 = LUI.UIImage.new(0.5, 0.5, -255, 270, 0, 0, 176, 185)
 	BottomBracket9Slice2:setAlpha(0.5)
 	BottomBracket9Slice2:setZRot(180)
-	BottomBracket9Slice2:setImage(RegisterImage(0xC325BED3F226657))
-	BottomBracket9Slice2:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	BottomBracket9Slice2:setImage(RegisterImage(@"hash_4C325BED3F226657"))
+	BottomBracket9Slice2:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	BottomBracket9Slice2:setShaderVector(0, 0, 0, 0, 0)
 	BottomBracket9Slice2:setupNineSliceShader(16, 4)
 	self:addElement(BottomBracket9Slice2)
 	self.BottomBracket9Slice2 = BottomBracket9Slice2
 	local TransactionDeepLinkButton = nil
 	TransactionDeepLinkButton = CoD.DirectorPreGameButton.new(f1_arg0, f1_arg1, 0.5, 0.5, -835, -605, 0, 0, 921, 991)
-	TransactionDeepLinkButton.DirectorCustomStartButton.MiddleText:setText(LocalizeToUpperString(0x4031C820A02E7BA))
-	TransactionDeepLinkButton.DirectorCustomStartButton.MiddleTextFocus:setText(LocalizeToUpperString(0x4031C820A02E7BA))
+	TransactionDeepLinkButton.DirectorCustomStartButton.MiddleText:setText(LocalizeToUpperString(@"hash_44031C820A02E7BA"))
+	TransactionDeepLinkButton.DirectorCustomStartButton.MiddleTextFocus:setText(LocalizeToUpperString(@"hash_44031C820A02E7BA"))
 	TransactionDeepLinkButton:registerEventHandler("gain_focus", function(element, event)
 		local f15_local0 = nil
 		if element.gainFocus then
@@ -146,10 +146,10 @@ CoD.ItemShopFrameInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 		elseif element.super.gainFocus then
 			f15_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_none"])
 		return f15_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(TransactionDeepLinkButton, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(TransactionDeepLinkButton, f1_arg1, Enum[@"luibutton"][@"lui_key_none"], "ui_confirm", function(element, menu, controller, model)
 		if IsPC() and CoD.PCKoreaUtility.IsInKorea() then
 			CoD.PCKoreaUtility.OpenTransactionsDeepLinkBlackmarket(controller)
 			return true
@@ -157,13 +157,13 @@ CoD.ItemShopFrameInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 		end
 	end, function(element, menu, controller)
 		if IsPC() and CoD.PCKoreaUtility.IsInKorea() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "ui_confirm")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(TransactionDeepLinkButton, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "MOUSE1", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(TransactionDeepLinkButton, f1_arg1, Enum[@"luibutton"][@"lui_key_none"], "MOUSE1", function(element, menu, controller, model)
 		if IsPC() and CoD.PCKoreaUtility.IsInKorea() then
 			CoD.PCKoreaUtility.OpenTransactionsDeepLinkBlackmarket(controller)
 			return true
@@ -171,7 +171,7 @@ CoD.ItemShopFrameInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 		end
 	end, function(element, menu, controller)
 		if IsPC() and CoD.PCKoreaUtility.IsInKorea() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "MOUSE1")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "MOUSE1")
 			return false
 		else
 			return false
@@ -183,8 +183,8 @@ CoD.ItemShopFrameInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	infoBracketBot:setRGB(0.98, 1, 0.89)
 	infoBracketBot:setAlpha(0.35)
 	infoBracketBot:setZRot(180)
-	infoBracketBot:setImage(RegisterImage(0xC325BED3F226657))
-	infoBracketBot:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	infoBracketBot:setImage(RegisterImage(@"hash_4C325BED3F226657"))
+	infoBracketBot:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	infoBracketBot:setShaderVector(0, 0, 0, 0, 0)
 	infoBracketBot:setupNineSliceShader(16, 4)
 	self:addElement(infoBracketBot)
@@ -219,7 +219,7 @@ CoD.ItemShopFrameInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	end)
 	local TextBox = SupplyChainDetails
 	local TextBox2 = SupplyChainDetails.subscribeToModel
-	local f1_local12 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local12 = Engine[@"getmodelforcontroller"](f1_arg1)
 	TextBox2(TextBox, f1_local12.LastInput, function(f23_arg0)
 		f1_arg0:updateElementState(SupplyChainDetails, {
 			name = "model_validation",
@@ -251,20 +251,20 @@ CoD.ItemShopFrameInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	self.SupplyChainDetails = SupplyChainDetails
 	TextBox2 = LUI.UIText.new(0.5, 0.5, -835, -480, 0, 0, 152, 170)
 	TextBox2:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
-	TextBox2:setText(LocalizeToUpperString(0x169F716D6484E8A))
+	TextBox2:setText(LocalizeToUpperString(@"menu/featured_items"))
 	TextBox2:setTTF("ttmussels_regular")
 	TextBox2:setLetterSpacing(4)
-	TextBox2:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	TextBox2:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	TextBox2:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	TextBox2:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(TextBox2)
 	self.TextBox2 = TextBox2
 	TextBox = LUI.UIText.new(0.5, 0.5, -249, 106, 0, 0, 152, 170)
 	TextBox:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
-	TextBox:setText(LocalizeToUpperString(0xDE9B59A6E570A4B))
+	TextBox:setText(LocalizeToUpperString(@"menu/daily_items"))
 	TextBox:setTTF("ttmussels_regular")
 	TextBox:setLetterSpacing(4)
-	TextBox:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	TextBox:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	TextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	TextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(TextBox)
 	self.TextBox = TextBox
 	self:subscribeToGlobalModel(f1_arg1, "GlobalModel", "RefreshDWInventoryMenu", function(model)

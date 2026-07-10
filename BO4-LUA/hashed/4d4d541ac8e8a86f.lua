@@ -13,12 +13,12 @@ CoD.ItemShopTitleAndDesc.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	SubExtraText:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	SubExtraText:setTTF("dinnext_regular")
 	SubExtraText:setLetterSpacing(1)
-	SubExtraText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	SubExtraText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	SubExtraText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	SubExtraText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	SubExtraText:linkToElementModel(self, "subExtraText", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			SubExtraText:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			SubExtraText:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	self:addElement(SubExtraText)
@@ -27,8 +27,8 @@ CoD.ItemShopTitleAndDesc.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	MainExtraText:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	MainExtraText:setTTF("ttmussels_regular")
 	MainExtraText:setLetterSpacing(2)
-	MainExtraText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	MainExtraText:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	MainExtraText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	MainExtraText:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	MainExtraText:linkToElementModel(self, "mainExtraText", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -47,8 +47,8 @@ CoD.ItemShopTitleAndDesc.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	Desc:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	Desc:setTTF("dinnext_regular")
 	Desc:setLetterSpacing(1)
-	Desc:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Desc:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Desc:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Desc:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	Desc:linkToElementModel(self, "desc", true, function(model)
 		local f5_local0 = model:get()
 		if f5_local0 ~= nil then
@@ -61,8 +61,8 @@ CoD.ItemShopTitleAndDesc.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	Name:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	Name:setTTF("ttmussels_demibold")
 	Name:setLetterSpacing(4)
-	Name:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Name:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Name:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Name:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	Name:linkToElementModel(self, "name", true, function(model)
 		local f6_local0 = model:get()
 		if f6_local0 ~= nil then

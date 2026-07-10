@@ -9,14 +9,14 @@ CoD.vhud_agr_ReticleFocusFrameRight.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	local agrReticleFocusFrameR0 = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	agrReticleFocusFrameR0:setAlpha(0.15)
 	agrReticleFocusFrameR0:setZoom(-50)
-	agrReticleFocusFrameR0:setImage(RegisterImage(0x58D3A3D902C8C7E))
-	agrReticleFocusFrameR0:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	agrReticleFocusFrameR0:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_agr_reticlefocusframe"))
+	agrReticleFocusFrameR0:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(agrReticleFocusFrameR0)
 	self.agrReticleFocusFrameR0 = agrReticleFocusFrameR0
 	local agrReticleFocusFrameR = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	agrReticleFocusFrameR:setAlpha(0.8)
-	agrReticleFocusFrameR:setImage(RegisterImage(0x58D3A3D902C8C7E))
-	agrReticleFocusFrameR:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	agrReticleFocusFrameR:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_agr_reticlefocusframe"))
+	agrReticleFocusFrameR:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(agrReticleFocusFrameR)
 	self.agrReticleFocusFrameR = agrReticleFocusFrameR
 	if PostLoadFunc then

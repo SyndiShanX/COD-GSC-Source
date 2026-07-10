@@ -9,7 +9,7 @@ CoD.vhud_gunship_105mm_ammocounter.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	self.id = "vhud_gunship_105mm_ammocounter"
 	self.soundSet = "none"
 	local BackingFrame = CoD.vhud_gunship_ammocounterframe.new(f1_arg0, f1_arg1, 0, 1, 0, 0, 0, 1, 0, 0)
-	BackingFrame.AmmoName:setText(Engine[0xF9F1239CFD921FE](0x55EB1B65C9E8E54))
+	BackingFrame.AmmoName:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_55EB1B65C9E8E54"))
 	BackingFrame:linkToElementModel(self, nil, false, function(model)
 		BackingFrame:setModel(model, f1_arg1)
 	end)
@@ -22,8 +22,8 @@ CoD.vhud_gunship_105mm_ammocounter.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	self:addElement(BackingFrame)
 	self.BackingFrame = BackingFrame
 	local AmmoCounterInternal = CoD.vhud_gunship_ammo_count_internal.new(f1_arg0, f1_arg1, 0.5, 0.5, -26, 28, 0.4, 0.4, -32, 42)
-	AmmoCounterInternal.ammoBack:setImage(RegisterImage(0xD439694D568A062))
-	AmmoCounterInternal.ammoFront:setImage(RegisterImage(0xD439694D568A062))
+	AmmoCounterInternal.ammoBack:setImage(RegisterImage(@"uie_ui_hud_vehicle_ac130_105mm_icon"))
+	AmmoCounterInternal.ammoFront:setImage(RegisterImage(@"uie_ui_hud_vehicle_ac130_105mm_icon"))
 	AmmoCounterInternal.ammoFront.__ammoFront_Wipe_X_Start_X_End_Y_Start_Y_End = function(f4_arg0)
 		local f4_local0 = f4_arg0:get()
 		if f4_local0 ~= nil then

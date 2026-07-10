@@ -9,7 +9,7 @@ CoD.rocketLauncherLockon_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Image0 = LUI.UIImage.new(0.5, 0.5, -52.5, 52.5, 0.5, 0.5, -52.5, 52.5)
 	Image0:setRGB(0.64, 1, 0.81)
-	Image0:setMaterial(LUI.UIImage.GetCachedMaterial(0x6ED9AFD16382123))
+	Image0:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_rocket_launcher_lockon"))
 	Image0:setShaderVector(0, 3, 4, 0.07, 0.85)
 	Image0:setShaderVector(1, 3, 4.35, 0.4, 1)
 	Image0:setShaderVector(2, 1.5, 0.09, 180, 0)

@@ -13,12 +13,12 @@ CoD.SurveyResponseListItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self.Background = Background
 	local OptionText = LUI.UIText.new(0, 0, 21, 352, 0, 0, 17, 53)
 	OptionText:setTTF("default")
-	OptionText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	OptionText:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	OptionText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	OptionText:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	OptionText:linkToElementModel(self, "optionText", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			OptionText:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			OptionText:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	self:addElement(OptionText)
@@ -27,9 +27,9 @@ CoD.SurveyResponseListItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	local f1_local4 = self.subscribeToModel
 	local f1_local5 = DataSources.SurveyQuestion.getModel(f1_arg1)
 	f1_local4(f1_local3, f1_local5.answered, function(f3_arg0, f3_arg1)
-		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if not CoD.ModelUtility.IsGlobalDataSourceModelValueTrue(controller, "SurveyQuestion", "answered") then
 			CoD.SurveyUtility.SendSurveyDlogResponse(self, controller)
 			return true
@@ -37,7 +37,7 @@ CoD.SurveyResponseListItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 		end
 	end, function(element, menu, controller)
 		if not CoD.ModelUtility.IsGlobalDataSourceModelValueTrue(controller, "SurveyQuestion", "answered") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		else
 			return false

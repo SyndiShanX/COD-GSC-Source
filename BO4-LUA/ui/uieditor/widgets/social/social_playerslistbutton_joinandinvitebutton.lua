@@ -9,8 +9,8 @@ CoD.Social_PlayersListButton_JoinAndInviteButton.new = function(f1_arg0, f1_arg1
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local joinableIcon = LUI.UIImage.new(1, 1, -24, 0, 0.5, 0.5, -18, 18)
 	joinableIcon:setRGB(0.87, 0.9, 0.9)
-	joinableIcon:setImage(RegisterImage(0xD3145ED87B4F77F))
-	joinableIcon:setMaterial(LUI.UIImage.GetCachedMaterial(0xE8F55203998700A))
+	joinableIcon:setImage(RegisterImage(@"uie_t7_menu_frontend_iconjoinable"))
+	joinableIcon:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_feather_blend"))
 	self:addElement(joinableIcon)
 	self.joinableIcon = joinableIcon
 	self:mergeStateConditions({
@@ -42,7 +42,7 @@ CoD.Social_PlayersListButton_JoinAndInviteButton.new = function(f1_arg0, f1_arg1
 		{
 			stateName = "InviteToParty",
 			condition = function(menu, element, event)
-				return not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "primaryPresence", Enum[0x5904C991C9847C2][0xDB6E2B269A58541])
+				return not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "primaryPresence", Enum[@"presenceprimary"][@"presence_primary_offline"])
 			end,
 		},
 	})
@@ -93,7 +93,7 @@ CoD.Social_PlayersListButton_JoinAndInviteButton.new = function(f1_arg0, f1_arg1
 	end)
 	local f1_local2 = self
 	local f1_local3 = self.subscribeToModel
-	local f1_local4 = Engine[0x8DF2E5447F384B9]()
+	local f1_local4 = Engine[@"getglobalmodel"]()
 	f1_local3(f1_local2, f1_local4["lobbyRoot.lobbyLockedIn"], function(f11_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

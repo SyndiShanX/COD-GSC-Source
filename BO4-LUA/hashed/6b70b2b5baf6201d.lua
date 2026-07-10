@@ -10,32 +10,32 @@ CoD.Hud_ZM_LastStand_Bleedout_Perk_Bar_Item_Perk.new = function(f1_arg0, f1_arg1
 	local StoneTiledBacking = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	StoneTiledBacking:setRGB(1, 0, 0)
 	StoneTiledBacking:setAlpha(0.8)
-	StoneTiledBacking:setImage(RegisterImage(0x33757173B476ACD))
-	StoneTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	StoneTiledBacking:setImage(RegisterImage(@"uie_ui_zm_laboratory_buttonbgtile"))
+	StoneTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	StoneTiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	StoneTiledBacking:setupNineSliceShader(196, 88)
 	self:addElement(StoneTiledBacking)
 	self.StoneTiledBacking = StoneTiledBacking
 	local SkullImage = LUI.UIImage.new(0, 0, 7, 57, 0, 0, 7, 57)
 	SkullImage:setAlpha(0)
-	SkullImage:setImage(RegisterImage(0x46815DFE3BE2F29))
+	SkullImage:setImage(RegisterImage(@"ui_hud_zm_deathperception"))
 	self:addElement(SkullImage)
 	self.SkullImage = SkullImage
 	local PerkIcon = LUI.UIImage.new(0, 0, 7, 57, 0, 0, 7, 57)
 	PerkIcon:setRGB(0.79, 0.79, 0.79)
 	PerkIcon:setAlpha(0.5)
-	PerkIcon:setMaterial(LUI.UIImage.GetCachedMaterial(0x67D1E3A3D2D1BF))
+	PerkIcon:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_saturation_normal"))
 	PerkIcon:setShaderVector(0, 0, 0, 0, 0)
 	PerkIcon:linkToElementModel(self, "itemIndex", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			PerkIcon:setImage(RegisterImage(GetItemImageFromIndex(Enum[0x6EB546760F890D2][0x9AF82A21BAD026D], f2_local0)))
+			PerkIcon:setImage(RegisterImage(GetItemImageFromIndex(Enum[@"statindexoffset"][@"hash_49AF82A21BAD026D"], f2_local0)))
 		end
 	end)
 	self:addElement(PerkIcon)
 	self.PerkIcon = PerkIcon
 	local PerkIcon2 = LUI.UIImage.new(0, 0, 7, 57, 0, 0, 7, 57)
-	PerkIcon2:setMaterial(LUI.UIImage.GetCachedMaterial(0x316E67E1DF2198E))
+	PerkIcon2:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_normal"))
 	PerkIcon2:setShaderVector(1, 0, 0, 0, 0)
 	PerkIcon2:setShaderVector(2, 1, 0, 0, 0)
 	PerkIcon2:setShaderVector(3, 0, 0, 0, 0)
@@ -43,7 +43,7 @@ CoD.Hud_ZM_LastStand_Bleedout_Perk_Bar_Item_Perk.new = function(f1_arg0, f1_arg1
 	PerkIcon2:linkToElementModel(self, "itemIndex", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
-			PerkIcon2:setImage(RegisterImage(GetItemImageFromIndex(Enum[0x6EB546760F890D2][0x9AF82A21BAD026D], f3_local0)))
+			PerkIcon2:setImage(RegisterImage(GetItemImageFromIndex(Enum[@"statindexoffset"][@"hash_49AF82A21BAD026D"], f3_local0)))
 		end
 	end)
 	PerkIcon2:linkToElementModel(self, "bleedoutProgress", true, function(model)

@@ -10,30 +10,30 @@ CoD.ScoreNotificationWaypoint_Capture.new = function(f1_arg0, f1_arg1, f1_arg2, 
 	local BG = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	BG:setRGB(0.35, 0.35, 0.35)
 	BG:setAlpha(0)
-	BG:setImage(RegisterImage(0x3BF343DD71EE04E))
+	BG:setImage(RegisterImage(@"uie_t7_hud_waypoints_neutral_new"))
 	self:addElement(BG)
 	self.BG = BG
 	local WaypointPattern = LUI.UIImage.new(0.5, 0.5, -38, 38, 0.5, 0.5, -37.5, 38.5)
 	WaypointPattern:setAlpha(0.7)
-	WaypointPattern:setImage(RegisterImage(0xD35B12E94483619))
+	WaypointPattern:setImage(RegisterImage(@"uie_ui_hud_core_waypoint_led_small"))
 	self:addElement(WaypointPattern)
 	self.WaypointPattern = WaypointPattern
 	local Ring = LUI.UIImage.new(0.5, 0.5, -38, 38, 0.5, 0.5, -38, 38)
 	Ring:setScale(0.7, 0.7)
-	Ring:setImage(RegisterImage(0x632454E45B21D53))
+	Ring:setImage(RegisterImage(@"uie_ui_hud_core_waypoint_search_ring"))
 	self:addElement(Ring)
 	self.Ring = Ring
 	local CheckIcon = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 2, 2)
 	CheckIcon:setRGB(ColorSet.FriendlyBlue.r, ColorSet.FriendlyBlue.g, ColorSet.FriendlyBlue.b)
 	CheckIcon:setAlpha(0)
 	CheckIcon:setScale(1.5, 1.5)
-	CheckIcon:setImage(RegisterImage(0x92EAA6F7CD84C92))
+	CheckIcon:setImage(RegisterImage(@"uie_t7_hud_waypoints_captured"))
 	self:addElement(CheckIcon)
 	self.CheckIcon = CheckIcon
 	local CrossIcon = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 2, 2)
 	CrossIcon:setRGB(ColorSet.EnemyOrange.r, ColorSet.EnemyOrange.g, ColorSet.EnemyOrange.b)
 	CrossIcon:setScale(1.5, 1.5)
-	CrossIcon:setImage(RegisterImage(0x1CE082E174BE175))
+	CrossIcon:setImage(RegisterImage(@"uie_t7_hud_waypoints_failed"))
 	self:addElement(CrossIcon)
 	self.CrossIcon = CrossIcon
 	if PostLoadFunc then

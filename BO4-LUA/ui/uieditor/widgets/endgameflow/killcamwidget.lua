@@ -16,7 +16,7 @@ CoD.KillcamWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local blackplateblur = LUI.UIImage.new(-0.1, 1.1, 0, 0, 1, 1, -161, 5)
 	blackplateblur:setRGB(0, 0, 0)
-	blackplateblur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	blackplateblur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	blackplateblur:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(blackplateblur)
 	self.blackplateblur = blackplateblur
@@ -27,7 +27,7 @@ CoD.KillcamWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 	self.bottombarblack = bottombarblack
 	local topbarblackblur = LUI.UIImage.new(-0.1, 1.1, 0, 0, 0, 0, -13, 95)
 	topbarblackblur:setRGB(0, 0, 0)
-	topbarblackblur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	topbarblackblur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	topbarblackblur:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(topbarblackblur)
 	self.topbarblackblur = topbarblackblur
@@ -37,7 +37,7 @@ CoD.KillcamWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 	local topbarblack = LUI.UIImage.new(-0.1, 1.1, 0, 0, 0, 0, -13, 95)
 	topbarblack:setRGB(0, 0, 0)
 	topbarblack:setAlpha(0.95)
-	topbarblack:setImage(RegisterImage(0x128E65A576FCBB8))
+	topbarblack:setImage(RegisterImage(@"hash_5128E65A576FCBB8"))
 	self:addElement(topbarblack)
 	self.topbarblack = topbarblack
 	local KillcamHeader = CoD.KillcamHeader.new(f1_arg0, f1_arg1, 0.5, 0.5, -905, 1015, 0, 0, 9, 149)
@@ -54,17 +54,17 @@ CoD.KillcamWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 			stateName = "Killcam",
 			condition = function(menu, element, event)
 				local f2_local0
-				if not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xA77EB9347BE4DFF]) then
-					f2_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2])
+				if not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_nemesis_killcam"]) then
+					f2_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_in_killcam"])
 					if f2_local0 then
-						if not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x1CDCB451655ABCF]) and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x4828BED794DA0A5]) then
-							f2_local0 = not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F])
+						if not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_final_killcam"]) and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_round_end_killcam"]) then
+							f2_local0 = not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_play_of_the_match"])
 						else
 							f2_local0 = false
 						end
 					end
-				elseif not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x1CDCB451655ABCF]) and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x4828BED794DA0A5]) then
-					f2_local0 = not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F])
+				elseif not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_final_killcam"]) and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_round_end_killcam"]) then
+					f2_local0 = not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_play_of_the_match"])
 				else
 					f2_local0 = false
 				end
@@ -74,62 +74,62 @@ CoD.KillcamWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 	})
 	local f1_local9 = self
 	local f1_local10 = self.subscribeToModel
-	local f1_local11 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local10(f1_local9, f1_local11["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xA77EB9347BE4DFF]], function(f3_arg0)
+	local f1_local11 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local10(f1_local9, f1_local11["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_nemesis_killcam"]], function(f3_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f3_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xA77EB9347BE4DFF],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_nemesis_killcam"],
 		})
 	end, false)
 	f1_local9 = self
 	f1_local10 = self.subscribeToModel
-	f1_local11 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local10(f1_local9, f1_local11["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2]], function(f4_arg0)
+	f1_local11 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local10(f1_local9, f1_local11["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"]], function(f4_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f4_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"],
 		})
 	end, false)
 	f1_local9 = self
 	f1_local10 = self.subscribeToModel
-	f1_local11 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local10(f1_local9, f1_local11["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x1CDCB451655ABCF]], function(f5_arg0)
+	f1_local11 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local10(f1_local9, f1_local11["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_final_killcam"]], function(f5_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f5_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x1CDCB451655ABCF],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_final_killcam"],
 		})
 	end, false)
 	f1_local9 = self
 	f1_local10 = self.subscribeToModel
-	f1_local11 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local10(f1_local9, f1_local11["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x4828BED794DA0A5]], function(f6_arg0)
+	f1_local11 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local10(f1_local9, f1_local11["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_round_end_killcam"]], function(f6_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f6_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x4828BED794DA0A5],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_round_end_killcam"],
 		})
 	end, false)
 	f1_local9 = self
 	f1_local10 = self.subscribeToModel
-	f1_local11 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local10(f1_local9, f1_local11["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F]], function(f7_arg0)
+	f1_local11 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local10(f1_local9, f1_local11["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_play_of_the_match"]], function(f7_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f7_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_play_of_the_match"],
 		})
 	end, false)
 	KillcamPlayerInfo.id = "KillcamPlayerInfo"

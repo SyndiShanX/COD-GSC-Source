@@ -31,12 +31,12 @@ CoD.GenericMenuFrameCAC.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	self.FooterContainerFrontendRight = FooterContainerFrontendRight
 	local CommonHeader = CoD.CACHeader.new(f1_arg0, f1_arg1, 0, 1, 0, 0, 0, 0, 0, 67)
 	CommonHeader.BGSceneBlur:setAlpha(0)
-	CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(0xBB7AA7A26F39DFA))
+	CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(@"hash_BB7AA7A26F39DFA"))
 	CommonHeader.subtitle.subtitle:setAlpha(0)
 	CommonHeader:subscribeToGlobalModel(f1_arg1, "LobbyRoot", "lobbyTitle", function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
-			CommonHeader.subtitle.subtitle:setText(Engine[0xF9F1239CFD921FE](f3_local0))
+			CommonHeader.subtitle.subtitle:setText(Engine[@"hash_4F9F1239CFD921FE"](f3_local0))
 		end
 	end)
 	CommonHeader:registerEventHandler("menu_loaded", function(element, event)

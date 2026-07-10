@@ -44,20 +44,20 @@ LUI.createMenu.Hud_MP_Codcaster = function(f1_arg0, f1_arg1)
 	local MPScore = CoD.MPScr.new(f1_local1, f1_arg0, 0.5, 0.5, 84, 234, 0, 0, 492, 530)
 	MPScore:subscribeToGlobalModel(f1_arg0, "PerController", "scriptNotify", function(model)
 		local f3_local0 = MPScore
-		if CoD.ModelUtility.IsParamModelEqualToHashString(model, 0x57A02387D3C368A) and CoD.BountyHunterUtility.GameTypeIsBounty(f1_arg0) then
+		if CoD.ModelUtility.IsParamModelEqualToHashString(model, @"score_event") and CoD.BountyHunterUtility.GameTypeIsBounty(f1_arg0) then
 			SetElementProperty(f1_local1, "_ignoreNextMoneyChange", true)
 			SetMPScoreText(f1_local1, f3_local0, f1_arg0, model)
 			PlayClipOnElement(self, {
 				elementName = "MPScore",
 				clipName = "BountyCash",
 			}, f1_arg0)
-		elseif CoD.ModelUtility.IsParamModelEqualToHashString(model, 0x57A02387D3C368A) and IsSpecificGadgetInUse(f1_arg0, f3_local0, "gadget_combat_efficiency") and not CoD.SpawnSelectionUtility.IsSpawnSelectActive(f1_arg0) then
+		elseif CoD.ModelUtility.IsParamModelEqualToHashString(model, @"score_event") and IsSpecificGadgetInUse(f1_arg0, f3_local0, "gadget_combat_efficiency") and not CoD.SpawnSelectionUtility.IsSpawnSelectActive(f1_arg0) then
 			PlayClipOnElement(self, {
 				elementName = "MPScore",
 				clipName = "CombatEfficiencyScore",
 			}, f1_arg0)
 			SetMPScoreText(f1_local1, f3_local0, f1_arg0, model)
-		elseif CoD.ModelUtility.IsParamModelEqualToHashString(model, 0x57A02387D3C368A) and not CoD.SpawnSelectionUtility.IsSpawnSelectActive(f1_arg0) then
+		elseif CoD.ModelUtility.IsParamModelEqualToHashString(model, @"score_event") and not CoD.SpawnSelectionUtility.IsSpawnSelectActive(f1_arg0) then
 			PlayClipOnElement(self, {
 				elementName = "MPScore",
 				clipName = "NormalScore",
@@ -94,7 +94,7 @@ LUI.createMenu.Hud_MP_Codcaster = function(f1_arg0, f1_arg1)
 	MPObjectiveNotificationWidget:subscribeToGlobalModel(f1_arg0, "PerController", "gametypeObjective", function(model)
 		local f7_local0 = model:get()
 		if f7_local0 ~= nil then
-			MPObjectiveNotificationWidget.GameTypeText:setText(Engine[0xF9F1239CFD921FE](f7_local0))
+			MPObjectiveNotificationWidget.GameTypeText:setText(Engine[@"hash_4F9F1239CFD921FE"](f7_local0))
 		end
 	end)
 	self:addElement(MPObjectiveNotificationWidget)
@@ -113,7 +113,7 @@ LUI.createMenu.Hud_MP_Codcaster = function(f1_arg0, f1_arg1)
 	})
 	local MPHintTextContainer = HighValueOperatives
 	local ScoreboardWidget = HighValueOperatives.subscribeToModel
-	local FrontendBattlenetContainer = Engine[0x4DF5CFBC1771947](f1_arg0)
+	local FrontendBattlenetContainer = Engine[@"getmodelforcontroller"](f1_arg0)
 	ScoreboardWidget(MPHintTextContainer, FrontendBattlenetContainer["gameScore.currentState"], function(f9_arg0)
 		f1_local1:updateElementState(HighValueOperatives, {
 			name = "model_validation",
@@ -139,7 +139,7 @@ LUI.createMenu.Hud_MP_Codcaster = function(f1_arg0, f1_arg1)
 	})
 	local f1_local12 = MPHintTextContainer
 	FrontendBattlenetContainer = MPHintTextContainer.subscribeToModel
-	local f1_local13 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	local f1_local13 = Engine[@"getmodelforcontroller"](f1_arg0)
 	FrontendBattlenetContainer(f1_local12, f1_local13.MPHintText, function(f11_arg0)
 		f1_local1:updateElementState(MPHintTextContainer, {
 			name = "model_validation",
@@ -165,13 +165,13 @@ LUI.createMenu.Hud_MP_Codcaster = function(f1_arg0, f1_arg1)
 		{
 			stateName = "HideAllButScoreboard",
 			condition = function(menu, element, event)
-				local f13_local0 = Engine[0xDD333420C49E6D0](f1_arg0, Enum[0x7F032C2EF103A1A][0x1CDCB451655ABCF])
+				local f13_local0 = Engine[@"isvisibilitybitset"](f1_arg0, Enum[@"uivisibilitybit"][@"bit_final_killcam"])
 				if not f13_local0 then
-					f13_local0 = Engine[0xDD333420C49E6D0](f1_arg0, Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2])
+					f13_local0 = Engine[@"isvisibilitybitset"](f1_arg0, Enum[@"uivisibilitybit"][@"bit_in_killcam"])
 					if not f13_local0 then
-						f13_local0 = Engine[0xDD333420C49E6D0](f1_arg0, Enum[0x7F032C2EF103A1A][0x4828BED794DA0A5])
+						f13_local0 = Engine[@"isvisibilitybitset"](f1_arg0, Enum[@"uivisibilitybit"][@"bit_round_end_killcam"])
 						if not f13_local0 then
-							f13_local0 = Engine[0xDD333420C49E6D0](f1_arg0, Enum[0x7F032C2EF103A1A][0x1E59914E91E423A])
+							f13_local0 = Engine[@"isvisibilitybitset"](f1_arg0, Enum[@"uivisibilitybit"][@"bit_stage_ended"])
 						end
 					end
 				end
@@ -181,7 +181,7 @@ LUI.createMenu.Hud_MP_Codcaster = function(f1_arg0, f1_arg1)
 		{
 			stateName = "SpeedBoost",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsModelValueEqualTo(f1_arg0, "playerAbilities.playerGadget2.id", "gadget_speed_burst") and CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg0, "playerAbilities.playerGadget2.state", Enum[0xF0447219F15F7F3][0x1873A43E9D1620E])
+				return CoD.ModelUtility.IsModelValueEqualTo(f1_arg0, "playerAbilities.playerGadget2.id", "gadget_speed_burst") and CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg0, "playerAbilities.playerGadget2.state", Enum[@"weapongadgetstates"][@"player_ability_state_inuse"])
 			end,
 		},
 		{
@@ -193,55 +193,55 @@ LUI.createMenu.Hud_MP_Codcaster = function(f1_arg0, f1_arg1)
 	})
 	f1_local13 = self
 	f1_local12 = self.subscribeToModel
-	local f1_local14 = Engine[0x4DF5CFBC1771947](f1_arg0)
-	f1_local12(f1_local13, f1_local14["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x1CDCB451655ABCF]], function(f16_arg0)
+	local f1_local14 = Engine[@"getmodelforcontroller"](f1_arg0)
+	f1_local12(f1_local13, f1_local14["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_final_killcam"]], function(f16_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_local1,
 			controller = f1_arg0,
 			modelValue = f16_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x1CDCB451655ABCF],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_final_killcam"],
 		})
 	end, false)
 	f1_local13 = self
 	f1_local12 = self.subscribeToModel
-	f1_local14 = Engine[0x4DF5CFBC1771947](f1_arg0)
-	f1_local12(f1_local13, f1_local14["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2]], function(f17_arg0)
+	f1_local14 = Engine[@"getmodelforcontroller"](f1_arg0)
+	f1_local12(f1_local13, f1_local14["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"]], function(f17_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_local1,
 			controller = f1_arg0,
 			modelValue = f17_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"],
 		})
 	end, false)
 	f1_local13 = self
 	f1_local12 = self.subscribeToModel
-	f1_local14 = Engine[0x4DF5CFBC1771947](f1_arg0)
-	f1_local12(f1_local13, f1_local14["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x4828BED794DA0A5]], function(f18_arg0)
+	f1_local14 = Engine[@"getmodelforcontroller"](f1_arg0)
+	f1_local12(f1_local13, f1_local14["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_round_end_killcam"]], function(f18_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_local1,
 			controller = f1_arg0,
 			modelValue = f18_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x4828BED794DA0A5],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_round_end_killcam"],
 		})
 	end, false)
 	f1_local13 = self
 	f1_local12 = self.subscribeToModel
-	f1_local14 = Engine[0x4DF5CFBC1771947](f1_arg0)
-	f1_local12(f1_local13, f1_local14["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x1E59914E91E423A]], function(f19_arg0)
+	f1_local14 = Engine[@"getmodelforcontroller"](f1_arg0)
+	f1_local12(f1_local13, f1_local14["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_stage_ended"]], function(f19_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_local1,
 			controller = f1_arg0,
 			modelValue = f19_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x1E59914E91E423A],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_stage_ended"],
 		})
 	end, false)
 	f1_local13 = self
 	f1_local12 = self.subscribeToModel
-	f1_local14 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	f1_local14 = Engine[@"getmodelforcontroller"](f1_arg0)
 	f1_local12(f1_local13, f1_local14["playerAbilities.playerGadget2.id"], function(f20_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",
@@ -253,7 +253,7 @@ LUI.createMenu.Hud_MP_Codcaster = function(f1_arg0, f1_arg1)
 	end, false)
 	f1_local13 = self
 	f1_local12 = self.subscribeToModel
-	f1_local14 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	f1_local14 = Engine[@"getmodelforcontroller"](f1_arg0)
 	f1_local12(f1_local13, f1_local14["playerAbilities.playerGadget2.state"], function(f21_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",
@@ -265,7 +265,7 @@ LUI.createMenu.Hud_MP_Codcaster = function(f1_arg0, f1_arg1)
 	end, false)
 	f1_local13 = self
 	f1_local12 = self.subscribeToModel
-	f1_local14 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	f1_local14 = Engine[@"getmodelforcontroller"](f1_arg0)
 	f1_local12(f1_local13, f1_local14["factions.isCoDCaster"], function(f22_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",
@@ -287,7 +287,7 @@ LUI.createMenu.Hud_MP_Codcaster = function(f1_arg0, f1_arg1)
 			modelName = "profileSettingsUpdated",
 		})
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if CoD.HUDUtility.AreXButtonPressesDisallowed(self) then
 			BlockGameFromKeyEvent(controller)
 			return true
@@ -295,7 +295,7 @@ LUI.createMenu.Hud_MP_Codcaster = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if CoD.HUDUtility.AreXButtonPressesDisallowed(self) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, nil)
 			return false
 		else
 			return false
@@ -303,7 +303,7 @@ LUI.createMenu.Hud_MP_Codcaster = function(f1_arg0, f1_arg1)
 	end, false)
 	self:subscribeToGlobalModel(f1_arg0, "PerController", "scriptNotify", function(model)
 		local f26_local0 = self
-		if CoD.ModelUtility.IsParamModelEqualToHashString(model, 0x9FB0A7FE2E8EC41) and not CoD.PlayerRoleUtility.IsPositionDraftStage(f1_arg0, CoD.PlayerRoleUtility.DraftStage.DRAFT_STAGE_DRAFT) then
+		if CoD.ModelUtility.IsParamModelEqualToHashString(model, @"player_spawned") and not CoD.PlayerRoleUtility.IsPositionDraftStage(f1_arg0, CoD.PlayerRoleUtility.DraftStage.DRAFT_STAGE_DRAFT) then
 			CoD.HUDUtility.DisallowXButtonPressForTime(f1_local1, self, 400)
 		end
 	end)
@@ -329,7 +329,7 @@ LUI.createMenu.Hud_MP_Codcaster = function(f1_arg0, f1_arg1)
 	end
 	f1_local12 = self
 	SetProperty(self, "preserveLuiButton", {
-		[Enum[0x3DD78803F918E9D][0x93AB4C84F113EE1]] = true,
+		[Enum[@"luibutton"][@"lui_key_back"]] = true,
 	})
 	CoD.HUDUtility.SetupGrenadeWarningIndicators(self, f1_arg0)
 	SetAllowCursorMovement(f1_local1, false)

@@ -35,8 +35,8 @@ CoD.ScannerReticle_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.Indicator0 = Indicator0
 	local DirectlyOverEnemy = LUI.UIImage.new(0.5, 0.5, -64, 64, 0.5, 0.5, -64, 64)
 	DirectlyOverEnemy:setAlpha(0.8)
-	DirectlyOverEnemy:setImage(RegisterImage(0x62500A592DD74FA))
-	DirectlyOverEnemy:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	DirectlyOverEnemy:setImage(RegisterImage(@"uie_ui_hud_reticle_scanner_circle"))
+	DirectlyOverEnemy:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	DirectlyOverEnemy:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(DirectlyOverEnemy)
 	self.DirectlyOverEnemy = DirectlyOverEnemy
@@ -50,7 +50,7 @@ CoD.ScannerReticle_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	})
 	local f1_local6 = self
 	local f1_local7 = self.subscribeToModel
-	local f1_local8 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local8 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local7(f1_local6, f1_local8["hudItems.traceHitEnemy"], function(f7_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -87,7 +87,7 @@ CoD.ScannerReticle_Internal.__clipsPerState = {
 			f10_arg0:__resetProperties()
 			f10_arg0:setupElementClipCounter(1)
 			local f10_local0 = function(f11_arg0)
-				f10_arg0.DirectlyOverEnemy:beginAnimation(50, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f10_arg0.DirectlyOverEnemy:beginAnimation(50, Enum[@"luitween"][@"luitween_ease_in"])
 				f10_arg0.DirectlyOverEnemy:setScale(1.1, 1.1)
 				f10_arg0.DirectlyOverEnemy:setShaderVector(0, 1.2, 0, 0, 0)
 				f10_arg0.DirectlyOverEnemy:registerEventHandler("interrupted_keyframe", f10_arg0.clipInterrupted)

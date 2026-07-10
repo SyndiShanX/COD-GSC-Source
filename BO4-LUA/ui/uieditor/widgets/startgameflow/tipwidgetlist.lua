@@ -10,10 +10,10 @@ CoD.TipWidgetList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local TipLabel = LUI.UIText.new(0, 1, 1, 1, 0, 0, 15, 60)
 	TipLabel:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
-	TipLabel:setText(LocalizeToUpperString(0x569AC3170B39B58))
+	TipLabel:setText(LocalizeToUpperString(@"mpui/tip"))
 	TipLabel:setTTF("ttmussels_demibold")
 	TipLabel:setLetterSpacing(5.5)
-	TipLabel:setAlignment(Engine[0x7F8853DC3581AA4](Enum[0x7A5123B654282D2][0x58C8A85F2048829]))
+	TipLabel:setAlignment(Engine[@"hash_67F8853DC3581AA4"](Enum[@"luialignment"][@"lui_alignment_left"]))
 	self:addElement(TipLabel)
 	self.TipLabel = TipLabel
 	local TipWidgetBacking = CoD.TipWidgetBacking.new(f1_arg0, f1_arg1, 0, 1, 0, 0, 0, 0, 66, 126)
@@ -35,7 +35,7 @@ CoD.TipWidgetList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 	})
 	local f1_local3 = self
 	local f1_local4 = self.subscribeToModel
-	local f1_local5 = Engine[0x8DF2E5447F384B9]()
+	local f1_local5 = Engine[@"getglobalmodel"]()
 	f1_local4(f1_local3, f1_local5["lobbyRoot.lobbyNav"], function(f4_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

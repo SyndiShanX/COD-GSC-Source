@@ -14,7 +14,7 @@ CoD.ReserveLarge.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 	Category:setAlpha(0.94)
 	Category:setTTF("ttmussels_regular")
 	Category:setLetterSpacing(4)
-	Category:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	Category:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	Category:linkToElementModel(self, "rarity", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -33,7 +33,7 @@ CoD.ReserveLarge.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 	UltraCategory:setAlpha(0)
 	UltraCategory:setTTF("ttmussels_regular")
 	UltraCategory:setLetterSpacing(4)
-	UltraCategory:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	UltraCategory:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	UltraCategory:linkToElementModel(self, "rarity", true, function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
@@ -51,8 +51,8 @@ CoD.ReserveLarge.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 	local Rarity = LUI.UIText.new(0, 0, 10, 223, 0, 0, 410, 427)
 	Rarity:setTTF("ttmussels_demibold")
 	Rarity:setLetterSpacing(4)
-	Rarity:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Rarity:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Rarity:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Rarity:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	Rarity:linkToElementModel(self, "rarity", true, function(model)
 		local f6_local0 = model:get()
 		if f6_local0 ~= nil then
@@ -70,20 +70,20 @@ CoD.ReserveLarge.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 	local Name = LUI.UIText.new(0, 0, 9, 302, 1, 1, -197, -173)
 	Name:setTTF("ttmussels_demibold")
 	Name:setLetterSpacing(2)
-	Name:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Name:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	Name:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Name:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	Name:linkToElementModel(self, "name", true, function(model)
 		local f8_local0 = model:get()
 		if f8_local0 ~= nil then
-			Name:setText(Engine[0xF9F1239CFD921FE](f8_local0))
+			Name:setText(Engine[@"hash_4F9F1239CFD921FE"](f8_local0))
 		end
 	end)
 	self:addElement(Name)
 	self.Name = Name
 	local Desc = LUI.UIText.new(0, 0, 9, 302, 1, 1, -168, -150)
 	Desc:setTTF("dinnext_regular")
-	Desc:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Desc:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Desc:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Desc:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	Desc:linkToElementModel(self, "desc", true, function(model)
 		local f9_local0 = model:get()
 		if f9_local0 ~= nil then
@@ -94,8 +94,8 @@ CoD.ReserveLarge.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 	self.Desc = Desc
 	local mainExtraText = LUI.UIText.new(0, 0, 7, 300, 1, 1, -50, -34)
 	mainExtraText:setTTF("dinnext_regular")
-	mainExtraText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	mainExtraText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	mainExtraText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	mainExtraText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	mainExtraText:linkToElementModel(self, "mainExtraText", true, function(model)
 		local f10_local0 = model:get()
 		if f10_local0 ~= nil then
@@ -106,12 +106,12 @@ CoD.ReserveLarge.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 	self.mainExtraText = mainExtraText
 	local subExtraText = LUI.UIText.new(0, 0, 7, 300, 1, 1, -28, -12)
 	subExtraText:setTTF("dinnext_regular")
-	subExtraText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	subExtraText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	subExtraText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	subExtraText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	subExtraText:linkToElementModel(self, "subExtraText", true, function(model)
 		local f11_local0 = model:get()
 		if f11_local0 ~= nil then
-			subExtraText:setText(Engine[0xF9F1239CFD921FE](f11_local0))
+			subExtraText:setText(Engine[@"hash_4F9F1239CFD921FE"](f11_local0))
 		end
 	end)
 	self:addElement(subExtraText)
@@ -125,7 +125,7 @@ CoD.ReserveLarge.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 				if not IsCurrentMenu(menu, "PaintjobWeaponSelect") then
 					f12_local0 = CoD.CACUtility.IsProgressionEnabledForMenu(menu)
 					if f12_local0 then
-						f12_local0 = CoD.ModelUtility.IsSelfModelValueEqualTo(self, f1_arg1, "itemCategory", 0xCC13B0F8EEFF726)
+						f12_local0 = CoD.ModelUtility.IsSelfModelValueEqualTo(self, f1_arg1, "itemCategory", @"signature_weapon")
 					end
 				else
 					f12_local0 = false
@@ -175,7 +175,7 @@ CoD.ReserveLarge.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 				if not IsCurrentMenu(menu, "PaintjobWeaponSelect") then
 					f17_local0 = CoD.CACUtility.IsProgressionEnabledForMenu(menu)
 					if f17_local0 then
-						f17_local0 = CoD.ModelUtility.IsSelfModelValueEqualTo(self, f1_arg1, "itemCategory", 0x7FB1719175C1461)
+						f17_local0 = CoD.ModelUtility.IsSelfModelValueEqualTo(self, f1_arg1, "itemCategory", @"mk2")
 					end
 				else
 					f17_local0 = false

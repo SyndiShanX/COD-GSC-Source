@@ -10,7 +10,7 @@ CoD.SupplyChainContentImage.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local FixedAspectRatioImage = LUI.UIFixedAspectRatioImage.new(0, 0, 0, 140, 0, 0, 0, 158)
-	FixedAspectRatioImage:setMaterial(LUI.UIImage.GetCachedMaterial(0x67D1E3A3D2D1BF))
+	FixedAspectRatioImage:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_saturation_normal"))
 	FixedAspectRatioImage:setShaderVector(0, 1, 0, 0, 0)
 	FixedAspectRatioImage:setStretchedDimension(6)
 	FixedAspectRatioImage:linkToElementModel(self, "primaryImage", true, function(model)
@@ -36,7 +36,7 @@ CoD.SupplyChainContentImage.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.CallingCardImage = CallingCardImage
 	local OutfitPalette = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	OutfitPalette:setAlpha(0)
-	OutfitPalette:setMaterial(LUI.UIImage.GetCachedMaterial(0xA02C44161370F6D))
+	OutfitPalette:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_1A02C44161370F6D"))
 	OutfitPalette:setShaderVector(0, 0.5, 0, 0, 0)
 	OutfitPalette:setShaderVector(1, 1, 1, 0, 0)
 	OutfitPalette:setShaderVector(2, 0, 0, 0, 0)
@@ -50,7 +50,7 @@ CoD.SupplyChainContentImage.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.OutfitPalette = OutfitPalette
 	local Character = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	Character:setAlpha(0)
-	Character:setMaterial(LUI.UIImage.GetCachedMaterial(0xA02C44161370F6D))
+	Character:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_1A02C44161370F6D"))
 	Character:setShaderVector(0, 0.5, 1, 0, 0)
 	Character:setShaderVector(1, 1, 1, 0, 0)
 	Character:setShaderVector(2, 0, 0, 0, 0)
@@ -64,7 +64,7 @@ CoD.SupplyChainContentImage.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.Character = Character
 	local SignatureWeapon = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	SignatureWeapon:setAlpha(0)
-	SignatureWeapon:setMaterial(LUI.UIImage.GetCachedMaterial(0xA02C44161370F6D))
+	SignatureWeapon:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_1A02C44161370F6D"))
 	SignatureWeapon:setShaderVector(0, 0.5, 0.5, 0, 0)
 	SignatureWeapon:setShaderVector(1, 1, 1, 0, 0)
 	SignatureWeapon:setShaderVector(2, 0, 0, 0, 0)
@@ -80,43 +80,43 @@ CoD.SupplyChainContentImage.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 		{
 			stateName = "CallingCard",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "category", 0xA1163B4DB78960A)
+				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "category", @"hash_5A1163B4DB78960A")
 			end,
 		},
 		{
 			stateName = "OutfitPalette",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", 0xDD691088352B680)
+				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", @"palette")
 			end,
 		},
 		{
 			stateName = "OutfitWarpaint",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", 0xFB8B65946FBF7A2)
+				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", @"war_paint")
 			end,
 		},
 		{
 			stateName = "SignatureWeapon",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", 0xCC13B0F8EEFF726)
+				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", @"signature_weapon")
 			end,
 		},
 		{
 			stateName = "OutfitWarpaintBundle",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", 0x48B82A2276A1CAF)
+				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", @"hash_248B82A2276A1CAF")
 			end,
 		},
 		{
 			stateName = "OutfitBundle",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", 0xC398D8E22A2269B)
+				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", @"outfit_bundle")
 			end,
 		},
 		{
 			stateName = "Character",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", 0x2D79C9016401F0)
+				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", @"character")
 			end,
 		},
 	})

@@ -9,21 +9,21 @@ CoD.CallingCards_Asset_dragon.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local fireGlow = LUI.UIImage.new(0, 0, -6, 122, 0, 0, 256, 349)
 	fireGlow:setRGB(1, 0.44, 0)
-	fireGlow:setImage(RegisterImage(0x299DDAEBACCEECD))
-	fireGlow:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	fireGlow:setImage(RegisterImage(@"uie_fire_glow"))
+	fireGlow:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	fireGlow:setShaderVector(0, 1.69, 0, 0, 0)
 	self:addElement(fireGlow)
 	self.fireGlow = fireGlow
 	local dragonFlame = LUI.UIImage.new(0, 0, 10, 138, 0, 0, 208, 336)
 	dragonFlame:setRGB(0.97, 0.8, 0.53)
-	dragonFlame:setImage(RegisterImage(0x6EA46D64EEC95E0))
-	dragonFlame:setMaterial(LUI.UIImage.GetCachedMaterial(0x9227A50BA2B8D21))
+	dragonFlame:setImage(RegisterImage(@"uie_dragon_flame"))
+	dragonFlame:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_flipbook_add"))
 	dragonFlame:setShaderVector(0, 0, 3, 0, 0)
 	dragonFlame:setShaderVector(1, 12, 0, 0, 0)
 	self:addElement(dragonFlame)
 	self.dragonFlame = dragonFlame
 	local dragon01 = LUI.UIImage.new(0, 0, 114, 338, 0, 0, 12, 220)
-	dragon01:setImage(RegisterImage(0x76C76C966E9315A))
+	dragon01:setImage(RegisterImage(@"uie_dragon_01"))
 	self:addElement(dragon01)
 	self.dragon01 = dragon01
 	if PostLoadFunc then

@@ -4,8 +4,8 @@ local f0_local0 = function(f1_arg0, f1_arg1)
 	f1_arg0:dispatchEventToChildren(f1_arg1)
 end
 local f0_local1 = function(f2_arg0, f2_arg1)
-	Engine[0x9E4A351824F9207]()
-	if f2_arg1.uiMenuCommand == Enum[0x52E616D9ABDBF0E][0x10E7A16D32E06A3] then
+	Engine[@"gcstop"]()
+	if f2_arg1.uiMenuCommand == Enum[@"uimenucommand_t"][@"uimenu_newlobby"] then
 		f2_arg1.menu = "Director"
 	end
 	local f2_local0 = LUI.createMenu[f2_arg1.menu]
@@ -16,7 +16,7 @@ local f0_local1 = function(f2_arg0, f2_arg1)
 	else
 		error("LUI Error: Tried to add nonexistent menu " .. f2_arg1.menu)
 	end
-	Engine[0x67C1198992E2A96]()
+	Engine[@"gcrestart"]()
 	return true
 end
 LUI.UIRoot.new = function(menu, controller)

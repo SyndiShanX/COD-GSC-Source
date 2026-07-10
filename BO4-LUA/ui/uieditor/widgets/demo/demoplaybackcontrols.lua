@@ -31,8 +31,8 @@ CoD.DemoPlaybackControls.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	local ButtonPromptPC = nil
 	ButtonPromptPC = CoD.DemoButtonPrompt.new(f1_arg0, f1_arg1, 0.5, 0.5, -131, 131, 0, 0, 137, 167)
 	ButtonPromptPC.label:setScale(0.85, 0.85)
-	ButtonPromptPC.label:setText(LocalizeString(0x3EE76DC3EE23FA2))
-	ButtonPromptPC.KBMlabel:setText(Engine[0xF9F1239CFD921FE](0x5F062F5AEAAA492))
+	ButtonPromptPC.label:setText(LocalizeString(@"hash_33EE76DC3EE23FA2"))
+	ButtonPromptPC.KBMlabel:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_75F062F5AEAAA492"))
 	ButtonPromptPC:subscribeToGlobalModel(f1_arg1, "Controller", "left_stick_button_image", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -47,17 +47,17 @@ CoD.DemoPlaybackControls.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	ButtonList:setWidgetType(CoD.DemoControlsButton)
 	ButtonList:setHorizontalCount(12)
 	ButtonList:setSpacing(12)
-	ButtonList:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	ButtonList:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	ButtonList:setDataSource("DemoControlsButtons")
 	ButtonList:appendEventHandler("input_source_changed", function(f3_arg0, f3_arg1)
 		f3_arg1.menu = f3_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f3_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f3_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	local f1_local7 = ButtonList
 	local f1_local8 = ButtonList.subscribeToModel
-	local f1_local9 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local9 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local8(f1_local7, f1_local9.LastInput, function(f4_arg0, f4_arg1)
-		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	ButtonList:registerEventHandler("gain_focus", function(element, event)
 		local f5_local0 = nil
@@ -66,10 +66,10 @@ CoD.DemoPlaybackControls.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 		elseif element.super.gainFocus then
 			f5_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f5_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(ButtonList, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(ButtonList, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if IsMouseOrKeyboard(controller) then
 			ProcessListAction(self, element, controller, menu)
 			return true
@@ -77,7 +77,7 @@ CoD.DemoPlaybackControls.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 		end
 	end, function(element, menu, controller)
 		if IsMouseOrKeyboard(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 			return false
 		else
 			return false
@@ -89,20 +89,20 @@ CoD.DemoPlaybackControls.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 		{
 			stateName = "ScoreboardOpen",
 			condition = function(menu, element, event)
-				return Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04])
+				return Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_scoreboard_open"])
 			end,
 		},
 	})
 	f1_local7 = self
 	f1_local8 = self.subscribeToModel
-	f1_local9 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local8(f1_local7, f1_local9["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04]], function(f9_arg0)
+	f1_local9 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local8(f1_local7, f1_local9["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]], function(f9_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f9_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"],
 		})
 	end, false)
 	LUI.OverrideFunction_CallOriginalFirst(self, "setState", function(element, controller, f10_arg2, f10_arg3, f10_arg4)

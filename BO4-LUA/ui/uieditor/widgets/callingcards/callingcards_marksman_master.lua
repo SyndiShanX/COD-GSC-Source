@@ -1,61 +1,61 @@
 require("x64:5cc9b001c3ddd6f")
-CoD[0x3890464C4936BF0] = InheritFrom(LUI.UIElement)
-CoD[0x3890464C4936BF0].__defaultWidth = 960
-CoD[0x3890464C4936BF0].__defaultHeight = 240
-CoD[0x3890464C4936BF0].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+CoD[@"hash_13890464C4936BF0"] = InheritFrom(LUI.UIElement)
+CoD[@"hash_13890464C4936BF0"].__defaultWidth = 960
+CoD[@"hash_13890464C4936BF0"].__defaultHeight = 240
+CoD[@"hash_13890464C4936BF0"].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
 	local self = LUI.UIElement.new(f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
-	self:setClass(CoD[0x3890464C4936BF0])
+	self:setClass(CoD[@"hash_13890464C4936BF0"])
 	self.id = "CallingCards_Marksman_Master"
 	self.soundSet = "default"
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local blueBG = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	blueBG:setImage(RegisterImage(0xD5EC85F06FE943D))
-	blueBG:setMaterial(LUI.UIImage.GetCachedMaterial(0x73D72BCD14C2AAD))
+	blueBG:setImage(RegisterImage(@"uie_ui_icon_callingcards_bootcamp_master_bluebackground"))
+	blueBG:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_tile_scroll_normal"))
 	blueBG:setShaderVector(0, 1, 1, 0, 0)
 	blueBG:setShaderVector(1, 0.03, 0, 0, 0)
 	self:addElement(blueBG)
 	self.blueBG = blueBG
 	local MainBG = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	MainBG:setImage(RegisterImage(0xA24B50D8BFAA5A2))
+	MainBG:setImage(RegisterImage(@"uie_ui_icon_callingcards_marksman_master_background"))
 	self:addElement(MainBG)
 	self.MainBG = MainBG
 	local LightSpin = CoD.CallingCards_Asset_spinburst_container.new(f1_arg0, f1_arg1, 0, 0, -173, 653, 0, 0, -92, 360)
 	LightSpin:setScale(0.5, 0.5)
-	LightSpin:setRFTMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	LightSpin:setRFTMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(LightSpin)
 	self.LightSpin = LightSpin
 	local LightSpin2 = CoD.CallingCards_Asset_spinburst_container.new(f1_arg0, f1_arg1, 0, 0, 246, 1072, 0, 0, -106, 346)
 	LightSpin2:setAlpha(0.5)
 	LightSpin2:setScale(0.5, 0.5)
-	LightSpin2:setRFTMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	LightSpin2:setRFTMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(LightSpin2)
 	self.LightSpin2 = LightSpin2
 	local bgCover = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	bgCover:setImage(RegisterImage(0x24A3B8D35D9220E))
+	bgCover:setImage(RegisterImage(@"uie_ui_icon_callingcards_marksman_master_background_cover"))
 	self:addElement(bgCover)
 	self.bgCover = bgCover
 	local bgGlow = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	bgGlow:setImage(RegisterImage(0x8FC930C4DD7670C))
-	bgGlow:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	bgGlow:setImage(RegisterImage(@"uie_ui_icon_callingcards_marksman_master_background_bg_glow"))
+	bgGlow:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(bgGlow)
 	self.bgGlow = bgGlow
 	local Ghost01 = LUI.UIImage.new(0, 0, 240, 488, 0, 0, -10.5, 181.5)
 	Ghost01:setAlpha(0.8)
 	Ghost01:setZRot(-26)
-	Ghost01:setImage(RegisterImage(0x83442D1FB0F7C1C))
+	Ghost01:setImage(RegisterImage(@"uie_ui_icon_callingcards_marksman_master_background_ghost_01"))
 	self:addElement(Ghost01)
 	self.Ghost01 = Ghost01
 	local Ghost = LUI.UIImage.new(0, 0, 561, 809, 0, 0, -39.5, 152.5)
 	Ghost:setAlpha(0.8)
-	Ghost:setImage(RegisterImage(0x83445D1FB0F8135))
+	Ghost:setImage(RegisterImage(@"uie_ui_icon_callingcards_marksman_master_background_ghost_02"))
 	self:addElement(Ghost)
 	self.Ghost = Ghost
 	local shimmer = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
 	shimmer:setRGB(0.97, 0.96, 0.1)
 	shimmer:setAlpha(0.5)
-	shimmer:setImage(RegisterImage(0x5A9938B5E218CE4))
-	shimmer:setMaterial(LUI.UIImage.GetCachedMaterial(0x9227A50BA2B8D21))
+	shimmer:setImage(RegisterImage(@"uie_ui_icon_callingcards_marksman_master_background_bg_shimmer"))
+	shimmer:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_flipbook_add"))
 	shimmer:setShaderVector(0, 0, 3, 0, 0)
 	shimmer:setShaderVector(1, 12, 0, 0, 0)
 	self:addElement(shimmer)
@@ -66,7 +66,7 @@ CoD[0x3890464C4936BF0].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	end
 	return self
 end
-CoD[0x3890464C4936BF0].__resetProperties = function(f2_arg0)
+CoD[@"hash_13890464C4936BF0"].__resetProperties = function(f2_arg0)
 	f2_arg0.bgGlow:completeAnimation()
 	f2_arg0.Ghost:completeAnimation()
 	f2_arg0.Ghost01:completeAnimation()
@@ -80,7 +80,7 @@ CoD[0x3890464C4936BF0].__resetProperties = function(f2_arg0)
 	f2_arg0.LightSpin2:setAlpha(0.5)
 	f2_arg0.LightSpin:setAlpha(1)
 end
-CoD[0x3890464C4936BF0].__clipsPerState = {
+CoD[@"hash_13890464C4936BF0"].__clipsPerState = {
 	DefaultState = {
 		DefaultClip = function(f3_arg0, f3_arg1)
 			f3_arg0:__resetProperties()
@@ -155,7 +155,7 @@ CoD[0x3890464C4936BF0].__clipsPerState = {
 		end,
 	},
 }
-CoD[0x3890464C4936BF0].__onClose = function(f12_arg0)
+CoD[@"hash_13890464C4936BF0"].__onClose = function(f12_arg0)
 	f12_arg0.LightSpin:close()
 	f12_arg0.LightSpin2:close()
 end

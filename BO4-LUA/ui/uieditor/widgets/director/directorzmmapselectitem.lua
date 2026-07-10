@@ -12,7 +12,7 @@ CoD.DirectorZMMapSelectItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local DirectorZMMapSelectItemInternal = CoD.DirectorZMMapSelectItemInternal.new(f1_arg0, f1_arg1, 0, 1, 0, 0, 0, 1, 0, 0)
-	DirectorZMMapSelectItemInternal.FeaturedTag:setText(LocalizeToUpperString(0x7E251454EDF7A26))
+	DirectorZMMapSelectItemInternal.FeaturedTag:setText(LocalizeToUpperString(@"menu/public_tab"))
 	DirectorZMMapSelectItemInternal:linkToElementModel(self, nil, false, function(model)
 		DirectorZMMapSelectItemInternal:setModel(model, f1_arg1)
 	end)
@@ -49,7 +49,7 @@ CoD.DirectorZMMapSelectItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	end)
 	local f1_local2 = self
 	local f1_local3 = self.subscribeToModel
-	local f1_local4 = Engine[0x8DF2E5447F384B9]()
+	local f1_local4 = Engine[@"getglobalmodel"]()
 	f1_local3(f1_local2, f1_local4["ZMLobbyExclusions.ZMPlaylistTab"], function(f7_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -61,21 +61,21 @@ CoD.DirectorZMMapSelectItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	end, false)
 	self:appendEventHandler("input_source_changed", function(f8_arg0, f8_arg1)
 		f8_arg1.menu = f8_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f8_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x22361E23588705A])
+		CoD.Menu.UpdateButtonShownState(f8_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_start"])
 	end)
 	f1_local2 = self
 	f1_local3 = self.subscribeToModel
-	f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local3(f1_local2, f1_local4.LastInput, function(f9_arg0, f9_arg1)
-		CoD.Menu.UpdateButtonShownState(f9_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x22361E23588705A])
+		CoD.Menu.UpdateButtonShownState(f9_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_start"])
 	end, false)
 	f1_local2 = self
 	f1_local3 = self.subscribeToModel
-	f1_local4 = Engine[0x8DF2E5447F384B9]()
+	f1_local4 = Engine[@"getglobalmodel"]()
 	f1_local3(f1_local2, f1_local4["ZMLobbyExclusions.ZMPlaylistTab"], function(f10_arg0, f10_arg1)
-		CoD.Menu.UpdateButtonShownState(f10_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x22361E23588705A])
+		CoD.Menu.UpdateButtonShownState(f10_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_start"])
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0x22361E23588705A], "ui_contextual_2", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_start"], "ui_contextual_2", function(element, menu, controller, model)
 		if not IsGamepad(controller) and CoD.ZombieUtility.TrialsInfo() then
 			OpenOverlay(self, "DirectorZMTrialsInfo", controller)
 			return true
@@ -83,13 +83,13 @@ CoD.DirectorZMMapSelectItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 		end
 	end, function(element, menu, controller)
 		if not IsGamepad(controller) and CoD.ZombieUtility.TrialsInfo() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x22361E23588705A], 0x41F3D5435B98808, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "ui_contextual_2")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_start"], @"hash_641F3D5435B98808", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "ui_contextual_2")
 			return true
 		else
 			return false
 		end
 	end, false)
-	self:AddContextualMenuAction(f1_arg0, f1_arg1, 0x41F3D5435B98808, function(f13_arg0, f13_arg1, f13_arg2, f13_arg3)
+	self:AddContextualMenuAction(f1_arg0, f1_arg1, @"hash_641F3D5435B98808", function(f13_arg0, f13_arg1, f13_arg2, f13_arg3)
 		if CoD.ZombieUtility.TrialsInfo() then
 			return function(f14_arg0, f14_arg1, f14_arg2, f14_arg3)
 				OpenOverlay(self, "DirectorZMTrialsInfo", f14_arg2)
@@ -134,7 +134,7 @@ CoD.DirectorZMMapSelectItem.__clipsPerState = {
 			f18_arg0:__resetProperties()
 			f18_arg0:setupElementClipCounter(1)
 			local f18_local0 = function(f19_arg0)
-				f18_arg0.DirectorZMMapSelectItemInternal:beginAnimation(200, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f18_arg0.DirectorZMMapSelectItemInternal:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_in"])
 				f18_arg0.DirectorZMMapSelectItemInternal:setScale(1.05, 1.05)
 				f18_arg0.DirectorZMMapSelectItemInternal:registerEventHandler("interrupted_keyframe", f18_arg0.clipInterrupted)
 				f18_arg0.DirectorZMMapSelectItemInternal:registerEventHandler("transition_complete_keyframe", f18_arg0.clipFinished)
@@ -147,7 +147,7 @@ CoD.DirectorZMMapSelectItem.__clipsPerState = {
 			f20_arg0:__resetProperties()
 			f20_arg0:setupElementClipCounter(1)
 			local f20_local0 = function(f21_arg0)
-				f20_arg0.DirectorZMMapSelectItemInternal:beginAnimation(200, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f20_arg0.DirectorZMMapSelectItemInternal:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_out"])
 				f20_arg0.DirectorZMMapSelectItemInternal:setScale(1, 1)
 				f20_arg0.DirectorZMMapSelectItemInternal:registerEventHandler("interrupted_keyframe", f20_arg0.clipInterrupted)
 				f20_arg0.DirectorZMMapSelectItemInternal:registerEventHandler("transition_complete_keyframe", f20_arg0.clipFinished)
@@ -191,7 +191,7 @@ CoD.DirectorZMMapSelectItem.__clipsPerState = {
 			f24_arg0:__resetProperties()
 			f24_arg0:setupElementClipCounter(1)
 			local f24_local0 = function(f25_arg0)
-				f24_arg0.DirectorZMMapSelectItemInternal:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f24_arg0.DirectorZMMapSelectItemInternal:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f24_arg0.DirectorZMMapSelectItemInternal:setScale(1.05, 1.05)
 				f24_arg0.DirectorZMMapSelectItemInternal:registerEventHandler("interrupted_keyframe", f24_arg0.clipInterrupted)
 				f24_arg0.DirectorZMMapSelectItemInternal:registerEventHandler("transition_complete_keyframe", f24_arg0.clipFinished)
@@ -212,7 +212,7 @@ CoD.DirectorZMMapSelectItem.__clipsPerState = {
 			f26_arg0:__resetProperties()
 			f26_arg0:setupElementClipCounter(1)
 			local f26_local0 = function(f27_arg0)
-				f26_arg0.DirectorZMMapSelectItemInternal:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f26_arg0.DirectorZMMapSelectItemInternal:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f26_arg0.DirectorZMMapSelectItemInternal:setScale(1, 1)
 				f26_arg0.DirectorZMMapSelectItemInternal:registerEventHandler("interrupted_keyframe", f26_arg0.clipInterrupted)
 				f26_arg0.DirectorZMMapSelectItemInternal:registerEventHandler("transition_complete_keyframe", f26_arg0.clipFinished)
@@ -256,7 +256,7 @@ CoD.DirectorZMMapSelectItem.__clipsPerState = {
 			f30_arg0:__resetProperties()
 			f30_arg0:setupElementClipCounter(1)
 			local f30_local0 = function(f31_arg0)
-				f30_arg0.DirectorZMMapSelectItemInternal:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f30_arg0.DirectorZMMapSelectItemInternal:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f30_arg0.DirectorZMMapSelectItemInternal:setScale(1.05, 1.05)
 				f30_arg0.DirectorZMMapSelectItemInternal:registerEventHandler("interrupted_keyframe", f30_arg0.clipInterrupted)
 				f30_arg0.DirectorZMMapSelectItemInternal:registerEventHandler("transition_complete_keyframe", f30_arg0.clipFinished)
@@ -273,7 +273,7 @@ CoD.DirectorZMMapSelectItem.__clipsPerState = {
 			f32_arg0:__resetProperties()
 			f32_arg0:setupElementClipCounter(1)
 			local f32_local0 = function(f33_arg0)
-				f32_arg0.DirectorZMMapSelectItemInternal:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f32_arg0.DirectorZMMapSelectItemInternal:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f32_arg0.DirectorZMMapSelectItemInternal:setScale(1, 1)
 				f32_arg0.DirectorZMMapSelectItemInternal:registerEventHandler("interrupted_keyframe", f32_arg0.clipInterrupted)
 				f32_arg0.DirectorZMMapSelectItemInternal:registerEventHandler("transition_complete_keyframe", f32_arg0.clipFinished)
@@ -313,7 +313,7 @@ CoD.DirectorZMMapSelectItem.__clipsPerState = {
 			f36_arg0:__resetProperties()
 			f36_arg0:setupElementClipCounter(1)
 			local f36_local0 = function(f37_arg0)
-				f36_arg0.DirectorZMMapSelectItemInternal:beginAnimation(200, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f36_arg0.DirectorZMMapSelectItemInternal:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_in"])
 				f36_arg0.DirectorZMMapSelectItemInternal:setScale(1.05, 1.05)
 				f36_arg0.DirectorZMMapSelectItemInternal:registerEventHandler("interrupted_keyframe", f36_arg0.clipInterrupted)
 				f36_arg0.DirectorZMMapSelectItemInternal:registerEventHandler("transition_complete_keyframe", f36_arg0.clipFinished)
@@ -330,7 +330,7 @@ CoD.DirectorZMMapSelectItem.__clipsPerState = {
 			f38_arg0:__resetProperties()
 			f38_arg0:setupElementClipCounter(1)
 			local f38_local0 = function(f39_arg0)
-				f38_arg0.DirectorZMMapSelectItemInternal:beginAnimation(200, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f38_arg0.DirectorZMMapSelectItemInternal:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_out"])
 				f38_arg0.DirectorZMMapSelectItemInternal:setScale(1, 1)
 				f38_arg0.DirectorZMMapSelectItemInternal:registerEventHandler("interrupted_keyframe", f38_arg0.clipInterrupted)
 				f38_arg0.DirectorZMMapSelectItemInternal:registerEventHandler("transition_complete_keyframe", f38_arg0.clipFinished)

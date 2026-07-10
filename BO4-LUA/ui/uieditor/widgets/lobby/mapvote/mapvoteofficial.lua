@@ -9,30 +9,30 @@ CoD.MapVoteOfficial.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Official = LUI.UIText.new(0, 1, 0, 0, 0, 1, 0, 0)
 	Official:setRGB(0.63, 0.62, 0.61)
-	Official:setText(Engine[0xF9F1239CFD921FE](0x3428A4FD23FDA2A))
+	Official:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_63428A4FD23FDA2A"))
 	Official:setTTF("ttmussels_regular")
 	Official:setLetterSpacing(4)
-	Official:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Official:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Official:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Official:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(Official)
 	self.Official = Official
 	self:mergeStateConditions({
 		{
 			stateName = "Visible",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsGlobalModelValueTrue("MapVote.isOfficialVariant") and IsLobbyMode(Enum[0x8409AA0F01B5DBC][0xF5EE25D311E5223])
+				return CoD.ModelUtility.IsGlobalModelValueTrue("MapVote.isOfficialVariant") and IsLobbyMode(Enum[@"lobbymode"][@"lobby_mode_custom"])
 			end,
 		},
 		{
 			stateName = "Custom",
 			condition = function(menu, element, event)
-				return IsLobbyMode(Enum[0x8409AA0F01B5DBC][0xF5EE25D311E5223])
+				return IsLobbyMode(Enum[@"lobbymode"][@"lobby_mode_custom"])
 			end,
 		},
 	})
 	local f1_local2 = self
 	local f1_local3 = self.subscribeToModel
-	local f1_local4 = Engine[0x8DF2E5447F384B9]()
+	local f1_local4 = Engine[@"getglobalmodel"]()
 	f1_local3(f1_local2, f1_local4["MapVote.isOfficialVariant"], function(f4_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -44,7 +44,7 @@ CoD.MapVoteOfficial.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	end, false)
 	f1_local2 = self
 	f1_local3 = self.subscribeToModel
-	f1_local4 = Engine[0x8DF2E5447F384B9]()
+	f1_local4 = Engine[@"getglobalmodel"]()
 	f1_local3(f1_local2, f1_local4["lobbyRoot.lobbyNav"], function(f5_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -56,7 +56,7 @@ CoD.MapVoteOfficial.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	end, false)
 	self:subscribeToGlobalModel(f1_arg1, "GametypeSettings", "Update", function(model)
 		local f6_local0 = self
-		CoD.LobbyUtility.UpdateOfficialCustomGame(f1_arg1, Enum[0x7CA2DE5266A94BF][0x98EA1BB7164D103], false)
+		CoD.LobbyUtility.UpdateOfficialCustomGame(f1_arg1, Enum[@"lobbymodule"][@"lobby_module_host"], false)
 	end)
 	if PostLoadFunc then
 		PostLoadFunc(self, f1_arg1, f1_arg0)
@@ -66,7 +66,7 @@ end
 CoD.MapVoteOfficial.__resetProperties = function(f7_arg0)
 	f7_arg0.Official:completeAnimation()
 	f7_arg0.Official:setAlpha(1)
-	f7_arg0.Official:setText(Engine[0xF9F1239CFD921FE](0x3428A4FD23FDA2A))
+	f7_arg0.Official:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_63428A4FD23FDA2A"))
 end
 CoD.MapVoteOfficial.__clipsPerState = {
 	DefaultState = {
@@ -89,7 +89,7 @@ CoD.MapVoteOfficial.__clipsPerState = {
 			f10_arg0:__resetProperties()
 			f10_arg0:setupElementClipCounter(1)
 			f10_arg0.Official:completeAnimation()
-			f10_arg0.Official:setText(Engine[0xF9F1239CFD921FE](0xDD2BE2574C9D2CC))
+			f10_arg0.Official:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_1DD2BE2574C9D2CC"))
 			f10_arg0.clipFinished(f10_arg0.Official)
 		end,
 	},

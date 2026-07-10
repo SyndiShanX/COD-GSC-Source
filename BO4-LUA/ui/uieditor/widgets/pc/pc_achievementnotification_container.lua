@@ -66,7 +66,7 @@ CoD.PC_AchievementNotification_Container.__clipsPerState = {
 					end)
 				end
 				f6_arg0.AchievementNotification:playClip("DefaultClip")
-				f6_arg0.AchievementNotification:beginAnimation(250, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f6_arg0.AchievementNotification:beginAnimation(250, Enum[@"luitween"][@"luitween_ease_both"])
 				f6_arg0.AchievementNotification:setLeftRight(0, 1, 0, 0)
 				f6_arg0.AchievementNotification:setAlpha(1)
 				f6_arg0.AchievementNotification:registerEventHandler("interrupted_keyframe", f6_arg0.clipInterrupted)

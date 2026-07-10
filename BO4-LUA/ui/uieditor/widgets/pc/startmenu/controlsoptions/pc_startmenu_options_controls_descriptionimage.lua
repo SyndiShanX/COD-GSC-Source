@@ -7,7 +7,7 @@ CoD.PC_StartMenu_Options_Controls_DescriptionImage.new = function(f1_arg0, f1_ar
 	self.id = "PC_StartMenu_Options_Controls_DescriptionImage"
 	self.soundSet = "default"
 	local PlaceHolderImage = LUI.UIImage.new(0, 0, 0, 675, 0, 0, 0, 380)
-	PlaceHolderImage:setImage(RegisterImage(0x4994C34D8920091))
+	PlaceHolderImage:setImage(RegisterImage(@"img_t7_menu_mp_preview_ethiopia"))
 	self:addElement(PlaceHolderImage)
 	self.PlaceHolderImage = PlaceHolderImage
 	local TopBorderLine = LUI.UIImage.new(0, 1, 0, 0, 0, 0, 0, 1)
@@ -28,11 +28,11 @@ CoD.PC_StartMenu_Options_Controls_DescriptionImage.new = function(f1_arg0, f1_ar
 	self.BottomBorderLine = BottomBorderLine
 	local WIP = LUI.UIText.new(0.18, 0.18, -11, 489, 0.5, 0.5, -37.5, 37.5)
 	WIP:setAlpha(0)
-	WIP:setText(Engine[0xF9F1239CFD921FE](0x313222972922C54))
+	WIP:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_313222972922C54"))
 	WIP:setTTF("ttmussels_demibold")
 	WIP:setLetterSpacing(10)
-	WIP:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	WIP:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	WIP:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	WIP:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(WIP)
 	self.WIP = WIP
 	if PostLoadFunc then

@@ -18,7 +18,7 @@ CoD.LaboratoryMixAgainButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	Button:linkToElementModel(self, "plasmaPrice", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
-			Button.Cost:setText(ConvertToUpperString(LocalizeIntoStringIfNotEmpty(0x10EE05AA87A5498, f3_local0)))
+			Button.Cost:setText(ConvertToUpperString(LocalizeIntoStringIfNotEmpty(@"hash_310EE05AA87A5498", f3_local0)))
 		end
 	end)
 	self:addElement(Button)

@@ -40,7 +40,7 @@ CoD.KillcamFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 	})
 	local f1_local7 = ButtonPrompt
 	local f1_local8 = ButtonPrompt.subscribeToModel
-	local f1_local9 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local9 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local8(f1_local7, f1_local9["hudItems.killcamActive"], function(f3_arg0)
 		f1_arg0:updateElementState(ButtonPrompt, {
 			name = "model_validation",
@@ -51,7 +51,7 @@ CoD.KillcamFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 		})
 	end, false)
 	ButtonPrompt:setAlpha(0)
-	ButtonPrompt.label:setText(Engine[0xF9F1239CFD921FE](0x70675323ADAA7D6))
+	ButtonPrompt.label:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/fullscreen"))
 	ButtonPrompt:subscribeToGlobalModel(f1_arg1, "Controller", "alt1_button_image", function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then

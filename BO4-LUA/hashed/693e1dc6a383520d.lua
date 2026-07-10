@@ -13,7 +13,7 @@ CoD.vhud_attack_helicopter_flare_counter.new = function(f1_arg0, f1_arg1, f1_arg
 	BackingFillAnim:setRGB(0.13, 0.13, 0.13)
 	BackingFillAnim:setAlpha(0.9)
 	BackingFillAnim:setZRot(180)
-	BackingFillAnim:setMaterial(LUI.UIImage.GetCachedMaterial(0x316E67E1DF2198E))
+	BackingFillAnim:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_normal"))
 	BackingFillAnim:setShaderVector(0, 1, 0, 0, 0)
 	BackingFillAnim:setShaderVector(1, 0, 0, 0, 0)
 	BackingFillAnim:setShaderVector(2, 1, 0, 0, 0)
@@ -26,18 +26,18 @@ CoD.vhud_attack_helicopter_flare_counter.new = function(f1_arg0, f1_arg1, f1_arg
 	self:addElement(DotTiledBacking)
 	self.DotTiledBacking = DotTiledBacking
 	local FlareName = LUI.UIText.new(0.5, 0.5, -41.5, 38.5, 1, 1, -12, 6)
-	FlareName:setText(Engine[0xF9F1239CFD921FE](0x93E719493E9E18F))
+	FlareName:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	FlareName:setTTF("ttmussels_demibold")
-	FlareName:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	FlareName:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	FlareName:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	FlareName:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	self:addElement(FlareName)
 	self.FlareName = FlareName
 	local FlareFrameInuseGlow = LUI.UIImage.new(0, 0, -4, 152, 0, 0, -4, 122)
-	FlareFrameInuseGlow:setImage(RegisterImage(0x40F5EB1A9F978E5))
+	FlareFrameInuseGlow:setImage(RegisterImage(@"uie_ui_hud_vehicle_ac130_weapon_frame_inuse_glow"))
 	self:addElement(FlareFrameInuseGlow)
 	self.FlareFrameInuseGlow = FlareFrameInuseGlow
 	local FlareFrameInuse = LUI.UIImage.new(0, 0, 0, 148, 0, 0, 0, 118)
-	FlareFrameInuse:setImage(RegisterImage(0x83F5377573CDA03))
+	FlareFrameInuse:setImage(RegisterImage(@"uie_ui_hud_vehicle_ac130_weapon_frame_inuse"))
 	self:addElement(FlareFrameInuse)
 	self.FlareFrameInuse = FlareFrameInuse
 	local flare = CoD.vhud_attack_helicopter_flare.new(f1_arg0, f1_arg1, 0, 0, 49.5, 99.5, 0, 0, 14, 94)

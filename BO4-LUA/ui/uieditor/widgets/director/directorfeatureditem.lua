@@ -12,8 +12,8 @@ CoD.DirectorFeaturedItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local GamemodeBackground = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	GamemodeBackground:setImage(RegisterImage(0x42C6A5D3E653E02))
-	GamemodeBackground:setMaterial(LUI.UIImage.GetCachedMaterial(0xA02C44161370F6D))
+	GamemodeBackground:setImage(RegisterImage(@"hash_42C6A5D3E653E02"))
+	GamemodeBackground:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_1A02C44161370F6D"))
 	GamemodeBackground:setShaderVector(0, 0.35, 0.19, 0, 0)
 	GamemodeBackground:setShaderVector(1, 1, 1, 0, 0)
 	GamemodeBackground:setShaderVector(2, 0, 0, 0, 0)
@@ -28,13 +28,13 @@ CoD.DirectorFeaturedItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	Header:setRGB(0.14, 0.14, 0.14)
 	Header:setTTF("ttmussels_demibold")
 	Header:setLetterSpacing(6)
-	Header:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Header:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Header:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Header:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	Header:setBackingType(2)
 	Header:setBackingAlpha(0.7)
 	Header:setBackingXPadding(10)
 	Header:setBackingYPadding(3)
-	Header:setBackingImage(RegisterImage(0xC229CEBABEEAB0E))
+	Header:setBackingImage(RegisterImage(@"hash_7C229CEBABEEAB0E"))
 	Header:linkToElementModel(self, "name", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -60,7 +60,7 @@ CoD.DirectorFeaturedItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	})
 	local FrontendFrameSelected = PartyLeaderOnlyPrompt
 	local DoubleXPCardIconsRightAligned = PartyLeaderOnlyPrompt.subscribeToModel
-	local f1_local8 = Engine[0x8DF2E5447F384B9]()
+	local f1_local8 = Engine[@"getglobalmodel"]()
 	DoubleXPCardIconsRightAligned(FrontendFrameSelected, f1_local8["lobbyRoot.lobbyNav"], function(f5_arg0)
 		f1_arg0:updateElementState(PartyLeaderOnlyPrompt, {
 			name = "model_validation",
@@ -72,7 +72,7 @@ CoD.DirectorFeaturedItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	end, false)
 	FrontendFrameSelected = PartyLeaderOnlyPrompt
 	DoubleXPCardIconsRightAligned = PartyLeaderOnlyPrompt.subscribeToModel
-	f1_local8 = Engine[0x8DF2E5447F384B9]()
+	f1_local8 = Engine[@"getglobalmodel"]()
 	DoubleXPCardIconsRightAligned(FrontendFrameSelected, f1_local8["lobbyRoot.gameClient.update"], function(f6_arg0)
 		f1_arg0:updateElementState(PartyLeaderOnlyPrompt, {
 			name = "model_validation",
@@ -84,7 +84,7 @@ CoD.DirectorFeaturedItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	end, false)
 	FrontendFrameSelected = PartyLeaderOnlyPrompt
 	DoubleXPCardIconsRightAligned = PartyLeaderOnlyPrompt.subscribeToModel
-	f1_local8 = Engine[0x8DF2E5447F384B9]()
+	f1_local8 = Engine[@"getglobalmodel"]()
 	DoubleXPCardIconsRightAligned(FrontendFrameSelected, f1_local8["lobbyRoot.privateClient.update"], function(f7_arg0)
 		f1_arg0:updateElementState(PartyLeaderOnlyPrompt, {
 			name = "model_validation",
@@ -126,8 +126,8 @@ CoD.DirectorFeaturedItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	FrontendFrameSelected = LUI.UIImage.new(0, 1, -4, 4, 0, 1, -4, 4)
 	FrontendFrameSelected:setRGB(0.96, 0.94, 0.78)
 	FrontendFrameSelected:setAlpha(0)
-	FrontendFrameSelected:setImage(RegisterImage(0xCB07CCC28498CB2))
-	FrontendFrameSelected:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	FrontendFrameSelected:setImage(RegisterImage(@"uie_ui_menu_store_focus_frame"))
+	FrontendFrameSelected:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	FrontendFrameSelected:setShaderVector(0, 0, 0, 0, 0)
 	FrontendFrameSelected:setupNineSliceShader(10, 10)
 	self:addElement(FrontendFrameSelected)

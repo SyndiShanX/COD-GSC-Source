@@ -9,7 +9,7 @@ CoD.WarzoneWingsuitOverlay.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local altitudeValue = LUI.UIText.new(0.5, 0.5, -240, -40, 0, 0, 167, 204)
 	altitudeValue:setTTF("default")
-	altitudeValue:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	altitudeValue:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	altitudeValue:setBackingType(2)
 	altitudeValue:setBackingColor(0, 0, 0)
 	altitudeValue:setBackingAlpha(0.4)
@@ -23,9 +23,9 @@ CoD.WarzoneWingsuitOverlay.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self:addElement(altitudeValue)
 	self.altitudeValue = altitudeValue
 	local altitudeTitle = LUI.UIText.new(0.5, 0.5, -240, -40, 0, 0, 130, 167)
-	altitudeTitle:setText(Engine[0xF9F1239CFD921FE](0xBD23A68618982EF))
+	altitudeTitle:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_2BD23A68618982EF"))
 	altitudeTitle:setTTF("default")
-	altitudeTitle:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	altitudeTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	altitudeTitle:setBackingType(2)
 	altitudeTitle:setBackingColor(0, 0, 0)
 	altitudeTitle:setBackingAlpha(0.4)
@@ -33,9 +33,9 @@ CoD.WarzoneWingsuitOverlay.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self:addElement(altitudeTitle)
 	self.altitudeTitle = altitudeTitle
 	local speedTitle = LUI.UIText.new(0.5, 0.5, 40, 240, 0, 0, 130, 167)
-	speedTitle:setText(Engine[0xF9F1239CFD921FE](0x3755C926654C027))
+	speedTitle:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_43755C926654C027"))
 	speedTitle:setTTF("default")
-	speedTitle:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	speedTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	speedTitle:setBackingType(2)
 	speedTitle:setBackingColor(0, 0, 0)
 	speedTitle:setBackingAlpha(0.4)
@@ -44,7 +44,7 @@ CoD.WarzoneWingsuitOverlay.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self.speedTitle = speedTitle
 	local speedValue = LUI.UIText.new(0.5, 0.5, 40, 240, 0, 0, 167, 204)
 	speedValue:setTTF("default")
-	speedValue:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	speedValue:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	speedValue:setBackingType(2)
 	speedValue:setBackingColor(0, 0, 0)
 	speedValue:setBackingAlpha(0.4)
@@ -67,20 +67,20 @@ CoD.WarzoneWingsuitOverlay.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 		{
 			stateName = "Hidden",
 			condition = function(menu, element, event)
-				return not IsVisibilityBitSet(f1_arg1, Enum[0x7F032C2EF103A1A][0x6A5D7E9BC6BF325])
+				return not IsVisibilityBitSet(f1_arg1, Enum[@"uivisibilitybit"][@"hash_76A5D7E9BC6BF325"])
 			end,
 		},
 	})
 	local f1_local5 = self
 	local f1_local6 = self.subscribeToModel
-	local f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local6(f1_local5, f1_local7["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x6A5D7E9BC6BF325]], function(f6_arg0)
+	local f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local6(f1_local5, f1_local7["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"hash_76A5D7E9BC6BF325"]], function(f6_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f6_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x6A5D7E9BC6BF325],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"hash_76A5D7E9BC6BF325"],
 		})
 	end, false)
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)

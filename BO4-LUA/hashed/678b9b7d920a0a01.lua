@@ -52,7 +52,7 @@ CoD.MeritReportWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 			modelName = "rank",
 		})
 	end)
-	XpMeter.maxRankText:setText(Engine[0xF9F1239CFD921FE](0xF80010008304EC0))
+	XpMeter.maxRankText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_4F80010008304EC0"))
 	XpMeter:subscribeToGlobalModel(f1_arg1, "AARMeritReport", "earnedXpProgress", function(model)
 		local f7_local0 = model:get()
 		if f7_local0 ~= nil then
@@ -101,7 +101,7 @@ CoD.MeritReportWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	XpMeter:linkToElementModel(self, "xpNeededForLevelUp", true, function(model)
 		local f15_local0 = model:get()
 		if f15_local0 ~= nil then
-			XpMeter.xpNeededText:setText(LocalizeIntoString(0xF8D3A275EFD4C8A, f15_local0))
+			XpMeter.xpNeededText:setText(LocalizeIntoString(@"hash_F8D3A275EFD4C8A", f15_local0))
 		end
 	end)
 	self:addElement(XpMeter)
@@ -223,7 +223,7 @@ CoD.MeritReportWidget.__clipsPerState = {
 			f29_arg0.clipFinished(f29_arg0.MeritOverlayManualHeader)
 			local f29_local0 = function(f30_arg0)
 				local f30_local0 = function(f31_arg0)
-					f31_arg0:beginAnimation(99, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f31_arg0:beginAnimation(99, Enum[@"luitween"][@"luitween_ease_out"])
 					f31_arg0:setAlpha(1)
 					f31_arg0:registerEventHandler("transition_complete_keyframe", f29_arg0.clipFinished)
 				end
@@ -248,7 +248,7 @@ CoD.MeritReportWidget.__clipsPerState = {
 			f29_arg0.MeritBoard:setAlpha(0)
 			f29_local1(f29_arg0.MeritBoard)
 			local f29_local2 = function(f34_arg0)
-				f29_arg0.Echelon:beginAnimation(100, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f29_arg0.Echelon:beginAnimation(100, Enum[@"luitween"][@"luitween_ease_in"])
 				f29_arg0.Echelon:setAlpha(1)
 				f29_arg0.Echelon:registerEventHandler("interrupted_keyframe", f29_arg0.clipInterrupted)
 				f29_arg0.Echelon:registerEventHandler("transition_complete_keyframe", f29_arg0.clipFinished)
@@ -264,7 +264,7 @@ CoD.MeritReportWidget.__clipsPerState = {
 						f37_arg0:setScale(1, 1)
 						f37_arg0:registerEventHandler("transition_complete_keyframe", f29_arg0.clipFinished)
 					end
-					f36_arg0:beginAnimation(150, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f36_arg0:beginAnimation(150, Enum[@"luitween"][@"luitween_ease_in"])
 					f36_arg0:setAlpha(0.75)
 					f36_arg0:setZRot(7)
 					f36_arg0:setScale(0.97, 0.97)
@@ -339,7 +339,7 @@ CoD.MeritReportWidget.__clipsPerState = {
 						f44_arg0:setScale(1, 1)
 						f44_arg0:registerEventHandler("transition_complete_keyframe", f38_arg0.clipFinished)
 					end
-					f43_arg0:beginAnimation(149, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f43_arg0:beginAnimation(149, Enum[@"luitween"][@"luitween_ease_in"])
 					f43_arg0:setAlpha(0.75)
 					f43_arg0:setScale(0.97, 0.97)
 					f43_arg0:registerEventHandler("transition_complete_keyframe", f43_local0)

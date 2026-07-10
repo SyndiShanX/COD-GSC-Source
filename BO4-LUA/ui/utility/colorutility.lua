@@ -37,16 +37,16 @@ CoD.ColorUtility.UpdateColorSet = function(f3_arg0, f3_arg1)
 	else
 		local f3_local0 = CoD.ColorUtility.GetColorFromFormattedColorString(f3_arg1)
 		ColorSet[f3_arg0] = f3_local0
-		Engine[0xEAC69D1522BB169](f3_arg0, f3_local0)
+		Engine[@"updatecolorset"](f3_arg0, f3_local0)
 	end
 end
 CoD.ColorUtility.GetColorBlindSafeColorNameForSetting = function(f4_arg0, f4_arg1)
 	local f4_local0 = f4_arg0
-	if f4_arg1 == Enum[0xC3EBEB018F9C5ED][0xE801E6959D34B21] then
+	if f4_arg1 == Enum[@"colorvisiondeficiencies"][@"cvd_deuteranomaly"] then
 		f4_local0 = f4_local0 .. "_Deuteranopia"
-	elseif f4_arg1 == Enum[0xC3EBEB018F9C5ED][0xBC3BF25E4E6501D] then
+	elseif f4_arg1 == Enum[@"colorvisiondeficiencies"][@"cvd_protanomaly"] then
 		f4_local0 = f4_local0 .. "_Protanopia"
-	elseif f4_arg1 == Enum[0xC3EBEB018F9C5ED][0xC4F3981BEDAE223] then
+	elseif f4_arg1 == Enum[@"colorvisiondeficiencies"][@"cvd_tritanomaly"] then
 		f4_local0 = f4_local0 .. "_Tritanopia"
 	end
 	if ColorSet[f4_local0] then
@@ -59,10 +59,10 @@ CoD.ColorUtility.GetColorBlindSafeColorForSetting = function(f5_arg0, f5_arg1)
 	return ColorSet[CoD.ColorUtility.GetColorBlindSafeColorNameForSetting(f5_arg0, f5_arg1)]
 end
 CoD.ColorUtility.GetColorBlindColorNameForPlayer = function(f6_arg0, f6_arg1)
-	local f6_local0 = Enum[0xC3EBEB018F9C5ED][0xD44A16999E1790A]
-	local f6_local1 = Engine[0x3745B56C88F5316](f6_arg0)
-	if f6_local1 ~= nil and f6_local1[0xF7EA50ADC77CDD0] ~= nil then
-		f6_local0 = f6_local1[0xF7EA50ADC77CDD0]:get()
+	local f6_local0 = Enum[@"colorvisiondeficiencies"][@"cvd_off"]
+	local f6_local1 = Engine[@"getplayercommongamerprofile"](f6_arg0)
+	if f6_local1 ~= nil and f6_local1[@"colorblindmode"] ~= nil then
+		f6_local0 = f6_local1[@"colorblindmode"]:get()
 	end
 	return CoD.ColorUtility.GetColorBlindSafeColorNameForSetting(f6_arg1, f6_local0)
 end

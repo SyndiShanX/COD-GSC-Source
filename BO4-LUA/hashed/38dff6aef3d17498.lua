@@ -17,13 +17,13 @@ CoD.vhud_gunship_internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	self.layoutDotlineGrid = layoutDotlineGrid
 	local Vignette2 = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	Vignette2:setAlpha(0.5)
-	Vignette2:setImage(RegisterImage(0x230978B05B19B))
+	Vignette2:setImage(RegisterImage(@"uie_ui_hud_vehicle_common_vignette"))
 	self:addElement(Vignette2)
 	self.Vignette2 = Vignette2
 	local TiledShaderImage = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	TiledShaderImage:setAlpha(0.5)
-	TiledShaderImage:setImage(RegisterImage(0xEDF02F55208D0A6))
-	TiledShaderImage:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	TiledShaderImage:setImage(RegisterImage(@"uie_ui_hud_vehicle_dart_scanline"))
+	TiledShaderImage:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	TiledShaderImage:setShaderVector(0, 0, 0, 0, 0)
 	TiledShaderImage:setupNineSliceShader(64, 64)
 	self:addElement(TiledShaderImage)
@@ -33,7 +33,7 @@ CoD.vhud_gunship_internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	local vehicleHudFractal3 = nil
 	vehicleHudFractal3 = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	vehicleHudFractal3:setAlpha(0.8)
-	vehicleHudFractal3:setImage(RegisterImage(0x97F91C840F8AD9D))
+	vehicleHudFractal3:setImage(RegisterImage(@"uie_ui_hud_vehicle_ac130_layout_grid_fractal"))
 	self:addElement(vehicleHudFractal3)
 	self.vehicleHudFractal3 = vehicleHudFractal3
 	local f1_local6 = nil
@@ -62,7 +62,7 @@ CoD.vhud_gunship_internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	})
 	local f1_local10 = self
 	local f1_local11 = self.subscribeToModel
-	local f1_local12 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local12 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local11(f1_local10, f1_local12["factions.isCoDCaster"], function(f5_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

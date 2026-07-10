@@ -20,7 +20,7 @@ CoD.WZTeamPlayerInfoAsian.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	local LblClan = LUI.UIText.new(0, 0, 25, 70, 1, 1, -22.5, -4.5)
 	LblClan:setTTF("notosans_regular")
 	LblClan:setLetterSpacing(1)
-	LblClan:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	LblClan:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	LblClan:linkToElementModel(self, "clanTag", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -32,7 +32,7 @@ CoD.WZTeamPlayerInfoAsian.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	local Gamertag = LUI.UIText.new(0, 0, 72, 180, 0, 0, 7.5, 19.5)
 	Gamertag:setText("")
 	Gamertag:setTTF("notosans_regular")
-	Gamertag:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	Gamertag:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	Gamertag:linkToElementModel(self, "playerName", true, function(model)
 		CoD.ModelUtility.SetTextIfNotNilAndNotEmptyString(Gamertag, model)
 	end)
@@ -62,8 +62,8 @@ CoD.WZTeamPlayerInfoAsian.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 			modelName = "isMarkerIconPlaced",
 		})
 	end)
-	Marker.image:setImage(RegisterImage(0xD7A457D12DA6B12))
-	Marker.image:setMaterial(LUI.UIImage.GetCachedMaterial(0x6B34AA3F39208EF))
+	Marker.image:setImage(RegisterImage(@"hash_1D7A457D12DA6B12"))
+	Marker.image:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_normal"))
 	Marker.__Color = function(f8_arg0)
 		local f8_local0 = f8_arg0:get()
 		if f8_local0 ~= nil then
@@ -89,7 +89,7 @@ CoD.WZTeamPlayerInfoAsian.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	Marker:linkToElementModel(self, "team", true, Marker.__Color_FullPath)
 	local f1_local6 = Marker
 	local f1_local7 = Marker.subscribeToModel
-	local f1_local8 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local8 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local7(f1_local6, f1_local8["profile.colorblindMode"], Marker.__Color_FullPath)
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)
 	if PostLoadFunc then

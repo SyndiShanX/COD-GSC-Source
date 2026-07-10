@@ -10,18 +10,18 @@ CoD.ArchivesIntelPreview.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local ClassifiedImage = LUI.UIImage.new(0, 0, 0, 510, 0, 0, 0, 293)
 	ClassifiedImage:setAlpha(0)
-	ClassifiedImage:setImage(RegisterImage(0xD99F1BA6381BF92))
+	ClassifiedImage:setImage(RegisterImage(@"ui_menu_specialist_hud_poster_frame_locked"))
 	self:addElement(ClassifiedImage)
 	self.ClassifiedImage = ClassifiedImage
 	local Title = LUI.UIText.new(0, 0, 0, 510, 0, 0, 138, 174)
 	Title:setRGB(0.92, 0.89, 0.72)
 	Title:setTTF("ttmussels_regular")
-	Title:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Title:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Title:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Title:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	Title:linkToElementModel(self, "title", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			Title:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			Title:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	self:addElement(Title)
@@ -29,19 +29,19 @@ CoD.ArchivesIntelPreview.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	local Desc2 = LUI.UIText.new(0, 0, 0, 510, 0, 0, 182, 206)
 	Desc2:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	Desc2:setTTF("ttmussels_regular")
-	Desc2:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Desc2:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Desc2:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Desc2:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	Desc2:linkToElementModel(self, "desc", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
-			Desc2:setText(Engine[0xF9F1239CFD921FE](f3_local0))
+			Desc2:setText(Engine[@"hash_4F9F1239CFD921FE"](f3_local0))
 		end
 	end)
 	self:addElement(Desc2)
 	self.Desc2 = Desc2
 	local Play = CoD.VodButtonPrompt.new(f1_arg0, f1_arg1, 0, 0, 0, 200, 1, 1, -198, -165)
 	Play:setAlpha(0)
-	Play.Play:setText(LocalizeToUpperString(0xADE9B10576A7DE2))
+	Play.Play:setText(LocalizeToUpperString(@"hash_3ADE9B10576A7DE2"))
 	Play:subscribeToGlobalModel(f1_arg1, "Controller", "primary_button_image", function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
@@ -84,7 +84,7 @@ CoD.ArchivesIntelPreview.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	end)
 	local f1_local6 = self
 	local f1_local7 = self.subscribeToModel
-	local f1_local8 = Engine[0x8DF2E5447F384B9]()
+	local f1_local8 = Engine[@"getglobalmodel"]()
 	f1_local7(f1_local6, f1_local8["storageGlobalRoot.user_settings"], function(f9_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

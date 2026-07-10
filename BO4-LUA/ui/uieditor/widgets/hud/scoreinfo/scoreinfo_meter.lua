@@ -11,7 +11,7 @@ CoD.ScoreInfo_Meter.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	self:addElement(ImgMeterEnvBack)
 	self.ImgMeterEnvBack = ImgMeterEnvBack
 	local ImgMeterEnvFillLine = LUI.UIImage.new(0, 0, 0, 126, 0, 0, 3, 9)
-	ImgMeterEnvFillLine:setMaterial(LUI.UIImage.GetCachedMaterial(0x910274CA3518744))
+	ImgMeterEnvFillLine:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe"))
 	ImgMeterEnvFillLine:setShaderVector(0, 1, 0, 0, 0)
 	ImgMeterEnvFillLine:setShaderVector(1, 0, 0, 0, 0)
 	ImgMeterEnvFillLine:setShaderVector(2, 1, 0, 0, 0)

@@ -9,8 +9,8 @@ CoD.LaboratoryPlasma_CodPointsCost.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local cost = LUI.UIText.new(0, 0, 0, 171, 0, 0, 0, 37)
 	cost:setTTF("ttmussels_regular")
-	cost:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	cost:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	cost:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	cost:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	cost:linkToElementModel(self, "price", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -29,7 +29,7 @@ CoD.LaboratoryPlasma_CodPointsCost.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	})
 	local f1_local2 = self
 	local f1_local3 = self.subscribeToModel
-	local f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local3(f1_local2, f1_local4["LootStreamProgress.codPoints"], function(f4_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

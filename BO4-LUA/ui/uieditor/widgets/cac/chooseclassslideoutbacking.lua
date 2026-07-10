@@ -10,7 +10,7 @@ CoD.ChooseClassSlideOutBacking.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	local PCCyclingBacking = nil
 	PCCyclingBacking = LUI.UIImage.new(0, 1, 0, 0, 0.5, 0.5, -347, -300)
 	PCCyclingBacking:setRGB(0, 0, 0)
-	PCCyclingBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	PCCyclingBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	PCCyclingBacking:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(PCCyclingBacking)
 	self.PCCyclingBacking = PCCyclingBacking
@@ -22,7 +22,7 @@ CoD.ChooseClassSlideOutBacking.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	self.PCCyclingBacking2 = PCCyclingBacking2
 	local FullBacking = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	FullBacking:setRGB(ColorSet.HealthBarBackgroundEnemy.r, ColorSet.HealthBarBackgroundEnemy.g, ColorSet.HealthBarBackgroundEnemy.b)
-	FullBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	FullBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	FullBacking:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(FullBacking)
 	self.FullBacking = FullBacking
@@ -53,23 +53,23 @@ CoD.ChooseClassSlideOutBacking.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	local TopBar4 = nil
 	TopBar4 = LUI.UIImage.new(-0.1, 1.1, 0, 0, 0, 0, -15, -12)
 	TopBar4:setAlpha(0.12)
-	TopBar4:setImage(RegisterImage(0x42BCCF45B82FBED))
-	TopBar4:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	TopBar4:setImage(RegisterImage(@"uie_ui_menu_cac_primary_button_top_bar"))
+	TopBar4:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(TopBar4)
 	self.TopBar4 = TopBar4
 	local TopBar3 = nil
 	TopBar3 = LUI.UIImage.new(-0.11, 1.09, 0, 0, 0, 0, -47.5, -44.5)
 	TopBar3:setAlpha(0.2)
 	TopBar3:setZoom(2)
-	TopBar3:setImage(RegisterImage(0x42BCCF45B82FBED))
-	TopBar3:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	TopBar3:setImage(RegisterImage(@"uie_ui_menu_cac_primary_button_top_bar"))
+	TopBar3:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(TopBar3)
 	self.TopBar3 = TopBar3
 	local VerticalBGPattern2 = nil
 	VerticalBGPattern2 = LUI.UIImage.new(-0.11, 1.09, 0, 0, 1, 1, -647, -611)
 	VerticalBGPattern2:setAlpha(0.02)
-	VerticalBGPattern2:setImage(RegisterImage(0x5D167EAB3F49E4B))
-	VerticalBGPattern2:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	VerticalBGPattern2:setImage(RegisterImage(@"uie_ui_menu_cac_vertical_pattern_bg"))
+	VerticalBGPattern2:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	VerticalBGPattern2:setShaderVector(0, 0, 0, 0, 0)
 	VerticalBGPattern2:setupNineSliceShader(256, 256)
 	self:addElement(VerticalBGPattern2)

@@ -10,11 +10,11 @@ CoD.KillcamWeaponInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	local WeaponName = LUI.UIText.new(0, 0, 0, 108, 0, 0, 0, 24)
 	WeaponName:setRGB(0.63, 0.63, 0.63)
 	WeaponName:setTTF("default")
-	WeaponName:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	WeaponName:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	WeaponName:subscribeToGlobalModel(f1_arg1, "HUDItems", "killcamWeapon.weaponName", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			WeaponName:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			WeaponName:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	self:addElement(WeaponName)
@@ -22,7 +22,7 @@ CoD.KillcamWeaponInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	local Attachment0 = LUI.UIText.new(0, 0, 108, 216, 0, 0, 0, 24)
 	Attachment0:setRGB(0.63, 0.63, 0.63)
 	Attachment0:setTTF("default")
-	Attachment0:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	Attachment0:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	Attachment0:subscribeToGlobalModel(f1_arg1, "HUDItems", "killcamWeapon.attachment0", function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -40,7 +40,7 @@ CoD.KillcamWeaponInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	local Attachment1 = LUI.UIText.new(0, 0, 216, 324, 0, 0, 0, 24)
 	Attachment1:setRGB(0.63, 0.63, 0.63)
 	Attachment1:setTTF("default")
-	Attachment1:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	Attachment1:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	Attachment1:subscribeToGlobalModel(f1_arg1, "HUDItems", "killcamWeapon.attachment1", function(model)
 		local f5_local0 = model:get()
 		if f5_local0 ~= nil then
@@ -58,7 +58,7 @@ CoD.KillcamWeaponInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	local Attachment2 = LUI.UIText.new(0, 0, 324, 432, 0, 0, 0, 24)
 	Attachment2:setRGB(0.63, 0.63, 0.63)
 	Attachment2:setTTF("default")
-	Attachment2:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	Attachment2:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	Attachment2:subscribeToGlobalModel(f1_arg1, "HUDItems", "killcamWeapon.attachment2", function(model)
 		local f7_local0 = model:get()
 		if f7_local0 ~= nil then
@@ -76,7 +76,7 @@ CoD.KillcamWeaponInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	local Attachment3 = LUI.UIText.new(0, 0, 432, 540, 0, 0, 0, 24)
 	Attachment3:setRGB(0.63, 0.63, 0.63)
 	Attachment3:setTTF("default")
-	Attachment3:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	Attachment3:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	Attachment3:subscribeToGlobalModel(f1_arg1, "HUDItems", "killcamWeapon.attachment3", function(model)
 		local f9_local0 = model:get()
 		if f9_local0 ~= nil then
@@ -94,7 +94,7 @@ CoD.KillcamWeaponInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	local Attachment4 = LUI.UIText.new(0, 0, 540, 648, 0, 0, 0, 24)
 	Attachment4:setRGB(0.78, 0.78, 0.78)
 	Attachment4:setTTF("default")
-	Attachment4:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	Attachment4:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	Attachment4:subscribeToGlobalModel(f1_arg1, "HUDItems", "killcamWeapon.attachment4", function(model)
 		local f11_local0 = model:get()
 		if f11_local0 ~= nil then
@@ -112,7 +112,7 @@ CoD.KillcamWeaponInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	local Attachment5 = LUI.UIText.new(0, 0, 648, 756, 0, 0, 0, 24)
 	Attachment5:setRGB(0.78, 0.78, 0.78)
 	Attachment5:setTTF("default")
-	Attachment5:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	Attachment5:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	Attachment5:subscribeToGlobalModel(f1_arg1, "HUDItems", "killcamWeapon.attachment5", function(model)
 		local f13_local0 = model:get()
 		if f13_local0 ~= nil then

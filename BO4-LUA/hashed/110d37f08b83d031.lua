@@ -40,11 +40,11 @@ LUI.createMenu.BOPassRedemptionPopup = function(f1_arg0, f1_arg1)
 		},
 	})
 	FullscreenPopupTemplate.ButtonList:setWidgetType(CoD.ItemShopButton)
-	FullscreenPopupTemplate.Subtitle:setText(LocalizeHash(0xF4F17BBB50E7AF3))
-	FullscreenPopupTemplate.ErrorSubtitle:setText(Engine[0xF9F1239CFD921FE](0x5D814FC2D8ED37F))
-	FullscreenPopupTemplate.WorkingTitle:setText(LocalizeToUpperString(0x67B9487B8B4E09C))
-	FullscreenPopupTemplate.Title:setText(LocalizeToUpperString(0xEA03240AB35A0F4))
-	FullscreenPopupTemplate.DoneTitle:setText(Engine[0xF9F1239CFD921FE](0xC0C9B30AD418455))
+	FullscreenPopupTemplate.Subtitle:setText(LocalizeHash(@"hash_3F4F17BBB50E7AF3"))
+	FullscreenPopupTemplate.ErrorSubtitle:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_45D814FC2D8ED37F"))
+	FullscreenPopupTemplate.WorkingTitle:setText(LocalizeToUpperString(@"hash_667B9487B8B4E09C"))
+	FullscreenPopupTemplate.Title:setText(LocalizeToUpperString(@"hash_1EA03240AB35A0F4"))
+	FullscreenPopupTemplate.DoneTitle:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_C0C9B30AD418455"))
 	self:addElement(FullscreenPopupTemplate)
 	self.FullscreenPopupTemplate = FullscreenPopupTemplate
 	local StartMenuCODpoints = CoD.StartMenu_CODpoints.new(f1_local1, f1_arg0, 0.5, 0.5, 341, 445, 0, 0, 23.5, 103.5)
@@ -56,7 +56,7 @@ LUI.createMenu.BOPassRedemptionPopup = function(f1_arg0, f1_arg1)
 	end)
 	self:addElement(StartMenuCODpoints)
 	self.StartMenuCODpoints = StartMenuCODpoints
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		if not IsElementInState(self.FullscreenPopupTemplate, "WorkingState") and not IsElementInState(self.FullscreenPopupTemplate, "FinishedState") and not IsElementInState(self.FullscreenPopupTemplate, "ErrorState") then
 			GoBack(self, controller)
 			return true
@@ -64,13 +64,13 @@ LUI.createMenu.BOPassRedemptionPopup = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if not IsElementInState(self.FullscreenPopupTemplate, "WorkingState") and not IsElementInState(self.FullscreenPopupTemplate, "FinishedState") and not IsElementInState(self.FullscreenPopupTemplate, "ErrorState") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if IsElementInState(self.FullscreenPopupTemplate, "FinishedState") and not IsPC() then
 			GoBack(self, controller)
 			return true
@@ -81,10 +81,10 @@ LUI.createMenu.BOPassRedemptionPopup = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if IsElementInState(self.FullscreenPopupTemplate, "FinishedState") and not IsPC() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x6393FF34EA56966, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/continue", nil, nil)
 			return true
 		elseif not IsElementInState(self.FullscreenPopupTemplate, "WorkingState") and not IsElementInState(self.FullscreenPopupTemplate, "ErrorState") and CoD.EntitlementUtility.HasSeasonPassToken(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x867BE59364DD53B, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/redeem", nil, nil)
 			return true
 		else
 			return false
@@ -112,7 +112,7 @@ LUI.createMenu.BOPassRedemptionPopup = function(f1_arg0, f1_arg1)
 	end
 	f1_local4 = FullscreenPopupTemplate
 	if IsPC() then
-		CoD.PCUtility.LinkPCSmallCloseButtonToInput(f1_local1, f1_arg0, f1_local4, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A])
+		CoD.PCUtility.LinkPCSmallCloseButtonToInput(f1_local1, f1_arg0, f1_local4, Enum[@"luibutton"][@"lui_key_xbb_pscircle"])
 	end
 	return self
 end

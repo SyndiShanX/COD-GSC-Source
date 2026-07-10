@@ -18,21 +18,21 @@ CoD.GameEndScoreRoundPip.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	self.BG = BG
 	local InnerShadow = LUI.UIImage.new(0, 1, 1, -1, 0, 1, 1, -1)
 	InnerShadow:setAlpha(0.85)
-	InnerShadow:setImage(RegisterImage(0x96ACD5A9B6E5230))
+	InnerShadow:setImage(RegisterImage(@"hash_196ACD5A9B6E5230"))
 	self:addElement(InnerShadow)
 	self.InnerShadow = InnerShadow
 	local GlowOver = LUI.UIImage.new(0.5, 0.5, -2, 2, 0.5, 0.5, -35, 36)
 	GlowOver:setAlpha(0)
 	GlowOver:setZRot(90)
 	GlowOver:setScale(3.2, 3.2)
-	GlowOver:setImage(RegisterImage(0x5BE416E17DAB33B))
-	GlowOver:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	GlowOver:setImage(RegisterImage(@"uie_t7_core_hud_mapwidget_panelglow"))
+	GlowOver:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(GlowOver)
 	self.GlowOver = GlowOver
 	local Glow = LUI.UIImage.new(-0.25, 1.25, 0, 0, -0.25, 1.25, 0, 0)
 	Glow:setAlpha(0)
-	Glow:setImage(RegisterImage(0x69CF640F22433BA))
-	Glow:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Glow:setImage(RegisterImage(@"hash_569CF640F22433BA"))
+	Glow:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	Glow:linkToElementModel(self, "teamColor", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -43,8 +43,8 @@ CoD.GameEndScoreRoundPip.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	self.Glow = Glow
 	local Glow2 = LUI.UIImage.new(-0.05, 1.05, 0, 0, -0.05, 1.05, 0, 0)
 	Glow2:setAlpha(0)
-	Glow2:setImage(RegisterImage(0x69CF640F22433BA))
-	Glow2:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	Glow2:setImage(RegisterImage(@"hash_569CF640F22433BA"))
+	Glow2:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	Glow2:setShaderVector(0, 1, 0, 0, 0)
 	Glow2:linkToElementModel(self, "teamColor", true, function(model)
 		local f3_local0 = model:get()
@@ -65,7 +65,7 @@ CoD.GameEndScoreRoundPip.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	self.SquarePip = SquarePip
 	local BoxLine = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	BoxLine:setAlpha(0.7)
-	BoxLine:setMaterial(LUI.UIImage.GetCachedMaterial(0xE7BDCB879A5176D))
+	BoxLine:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_3E7BDCB879A5176D"))
 	BoxLine:setShaderVector(0, 0, 0, 0, 0)
 	BoxLine:setShaderVector(1, 0.5, 0.5, 0.5, 0)
 	BoxLine:setupNineSliceShader(1, 1)
@@ -93,8 +93,8 @@ CoD.GameEndScoreRoundPip.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	self.Corner4 = Corner4
 	local Pattern = LUI.UIImage.new(0.67, 1.67, -31, -33, 0.67, 1.67, -31, -33)
 	Pattern:setAlpha(0.25)
-	Pattern:setImage(RegisterImage(0x891DC3183D8B5AF))
-	Pattern:setMaterial(LUI.UIImage.GetCachedMaterial(0xD8EA9FE9B0BCF75))
+	Pattern:setImage(RegisterImage(@"hash_3891DC3183D8B5AF"))
+	Pattern:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_tile_scroll"))
 	Pattern:setShaderVector(0, 1, 1, 0, 0)
 	Pattern:setShaderVector(1, 0, 0, 0, 0)
 	self:addElement(Pattern)
@@ -163,7 +163,7 @@ CoD.GameEndScoreRoundPip.__resetProperties = function(f9_arg0)
 	f9_arg0.GlowOver:setScale(3.2, 3.2)
 	f9_arg0.Glow:setAlpha(0)
 	f9_arg0.Glow:setScale(1, 1)
-	f9_arg0.Glow:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	f9_arg0.Glow:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	f9_arg0.BG:setAlpha(0.15)
 end
 CoD.GameEndScoreRoundPip.__clipsPerState = {
@@ -302,7 +302,7 @@ CoD.GameEndScoreRoundPip.__clipsPerState = {
 						f28_arg0:setAlpha(0.05)
 						f28_arg0:registerEventHandler("transition_complete_keyframe", f11_arg0.clipFinished)
 					end
-					f27_arg0:beginAnimation(99, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f27_arg0:beginAnimation(99, Enum[@"luitween"][@"luitween_ease_in"])
 					f27_arg0:setAlpha(0.25)
 					f27_arg0:registerEventHandler("transition_complete_keyframe", f27_local0)
 				end
@@ -329,7 +329,7 @@ CoD.GameEndScoreRoundPip.__clipsPerState = {
 			f29_arg0.Glow:completeAnimation()
 			f29_arg0.Glow:setAlpha(0)
 			f29_arg0.Glow:setScale(1.1, 1.1)
-			f29_arg0.Glow:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+			f29_arg0.Glow:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 			f29_arg0.clipFinished(f29_arg0.Glow)
 			local f29_local0 = function(f30_arg0)
 				local f30_local0 = function(f31_arg0)

@@ -24,29 +24,29 @@ CoD.DirectorGameSettingList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	end)
 	MapImage:appendEventHandler("on_session_start", function(f3_arg0, f3_arg1)
 		f3_arg1.menu = f3_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f3_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f3_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	MapImage:appendEventHandler("on_session_end", function(f4_arg0, f4_arg1)
 		f4_arg1.menu = f4_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f4_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f4_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	local f1_local2 = MapImage
 	local GameRules = MapImage.subscribeToModel
-	local f1_local4 = Engine[0x8DF2E5447F384B9]()
+	local f1_local4 = Engine[@"getglobalmodel"]()
 	GameRules(f1_local2, f1_local4["lobbyRoot.lobbyNav"], function(f5_arg0, f5_arg1)
-		CoD.Menu.UpdateButtonShownState(f5_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f5_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	f1_local2 = MapImage
 	GameRules = MapImage.subscribeToModel
-	f1_local4 = Engine[0x8DF2E5447F384B9]()
+	f1_local4 = Engine[@"getglobalmodel"]()
 	GameRules(f1_local2, f1_local4["lobbyRoot.gameClient.update"], function(f6_arg0, f6_arg1)
-		CoD.Menu.UpdateButtonShownState(f6_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f6_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	f1_local2 = MapImage
 	GameRules = MapImage.subscribeToModel
-	f1_local4 = Engine[0x8DF2E5447F384B9]()
+	f1_local4 = Engine[@"getglobalmodel"]()
 	GameRules(f1_local2, f1_local4["lobbyRoot.privateClient.update"], function(f7_arg0, f7_arg1)
-		CoD.Menu.UpdateButtonShownState(f7_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f7_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	MapImage:registerEventHandler("gain_focus", function(element, event)
 		local f8_local0 = nil
@@ -55,10 +55,10 @@ CoD.DirectorGameSettingList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 		elseif element.super.gainFocus then
 			f8_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f8_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(MapImage, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(MapImage, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if not IsPC() and IsLobbyHostOfCurrentMenu() then
 			CoD.DirectorUtility.ClearSelectedClient(controller)
 			CoD.LobbyUtility.SetLeaderActivityAndOpenOverlay(self, controller, CoD.LobbyUtility.LeaderActivity.CHOOSING_MAP, "DirectorChooseMapAndGameType")
@@ -73,10 +73,10 @@ CoD.DirectorGameSettingList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 		end
 	end, function(element, menu, controller)
 		if not IsPC() and IsLobbyHostOfCurrentMenu() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		elseif IsPC() and IsLobbyHostOfCurrentMenu() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 			return false
 		else
 			return false
@@ -95,7 +95,7 @@ CoD.DirectorGameSettingList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	})
 	f1_local4 = GameRules
 	f1_local2 = GameRules.subscribeToModel
-	local f1_local5 = Engine[0x8DF2E5447F384B9]()
+	local f1_local5 = Engine[@"getglobalmodel"]()
 	f1_local2(f1_local4, f1_local5["lobbyRoot.lobbyNav"], function(f12_arg0)
 		f1_arg0:updateElementState(GameRules, {
 			name = "model_validation",
@@ -107,29 +107,29 @@ CoD.DirectorGameSettingList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	end, false)
 	GameRules:appendEventHandler("on_session_start", function(f13_arg0, f13_arg1)
 		f13_arg1.menu = f13_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f13_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f13_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	GameRules:appendEventHandler("on_session_end", function(f14_arg0, f14_arg1)
 		f14_arg1.menu = f14_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f14_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f14_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	f1_local4 = GameRules
 	f1_local2 = GameRules.subscribeToModel
-	f1_local5 = Engine[0x8DF2E5447F384B9]()
+	f1_local5 = Engine[@"getglobalmodel"]()
 	f1_local2(f1_local4, f1_local5["lobbyRoot.lobbyNav"], function(f15_arg0, f15_arg1)
-		CoD.Menu.UpdateButtonShownState(f15_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f15_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	f1_local4 = GameRules
 	f1_local2 = GameRules.subscribeToModel
-	f1_local5 = Engine[0x8DF2E5447F384B9]()
+	f1_local5 = Engine[@"getglobalmodel"]()
 	f1_local2(f1_local4, f1_local5["lobbyRoot.gameClient.update"], function(f16_arg0, f16_arg1)
-		CoD.Menu.UpdateButtonShownState(f16_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f16_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	f1_local4 = GameRules
 	f1_local2 = GameRules.subscribeToModel
-	f1_local5 = Engine[0x8DF2E5447F384B9]()
+	f1_local5 = Engine[@"getglobalmodel"]()
 	f1_local2(f1_local4, f1_local5["lobbyRoot.privateClient.update"], function(f17_arg0, f17_arg1)
-		CoD.Menu.UpdateButtonShownState(f17_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f17_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	GameRules:registerEventHandler("gain_focus", function(element, event)
 		local f18_local0 = nil
@@ -138,10 +138,10 @@ CoD.DirectorGameSettingList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 		elseif element.super.gainFocus then
 			f18_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f18_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(GameRules, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(GameRules, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if not IsPC() and IsLobbyHostOfCurrentMenu() and CoD.DirectorUtility.ShowDirectorCustom(element, controller) then
 			CoD.DirectorUtility.ClearSelectedClient(controller)
 			CoD.LobbyUtility.OpenEditGameRules(self, controller)
@@ -156,10 +156,10 @@ CoD.DirectorGameSettingList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 		end
 	end, function(element, menu, controller)
 		if not IsPC() and IsLobbyHostOfCurrentMenu() and CoD.DirectorUtility.ShowDirectorCustom(element, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		elseif IsPC() and IsLobbyHostOfCurrentMenu() and CoD.DirectorUtility.ShowDirectorCustom(element, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 			return false
 		else
 			return false
@@ -177,7 +177,7 @@ CoD.DirectorGameSettingList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	})
 	f1_local4 = self
 	f1_local2 = self.subscribeToModel
-	f1_local5 = Engine[0x8DF2E5447F384B9]()
+	f1_local5 = Engine[@"getglobalmodel"]()
 	f1_local2(f1_local4, f1_local5["lobbyRoot.lobbyNav"], function(f22_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

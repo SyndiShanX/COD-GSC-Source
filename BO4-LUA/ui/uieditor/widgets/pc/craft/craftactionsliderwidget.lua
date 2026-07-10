@@ -11,8 +11,8 @@ CoD.CraftActionSliderWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	local Frame = LUI.UIImage.new(0, 1, -1, 1, 0, 1, -2, 2)
 	Frame:setRGB(0.2, 0.2, 0.2)
 	Frame:setAlpha(0.5)
-	Frame:setImage(RegisterImage(0x185E11D74ECA3D7))
-	Frame:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	Frame:setImage(RegisterImage(@"uie_ui_menu_store_common_frame"))
+	Frame:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	Frame:setShaderVector(0, 0, 0, 0, 0)
 	Frame:setupNineSliceShader(16, 16)
 	self:addElement(Frame)
@@ -21,8 +21,8 @@ CoD.CraftActionSliderWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	actionName:setRGB(0.92, 0.92, 0.92)
 	actionName:setTTF("ttmussels_regular")
 	actionName:setLetterSpacing(2)
-	actionName:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	actionName:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	actionName:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	actionName:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(actionName)
 	self.actionName = actionName
 	local sliderBack = CoD.FE_TitleNumBrdr.new(f1_arg0, f1_arg1, 0, 0, 6, 309, 0, 0, 35, 60)
@@ -31,16 +31,16 @@ CoD.CraftActionSliderWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.sliderBack = sliderBack
 	local dividerH03 = LUI.UIImage.new(0, 0, 0, 315, 0, 0, 31.5, 36.5)
 	dividerH03:setAlpha(0.1)
-	dividerH03:setImage(RegisterImage(0x84B43D5B04D263A))
-	dividerH03:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	dividerH03:setImage(RegisterImage(@"hash_484B43D5B04D263A"))
+	dividerH03:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	dividerH03:setShaderVector(0, 0, 0, 0, 0)
 	dividerH03:setupNineSliceShader(8, 4)
 	self:addElement(dividerH03)
 	self.dividerH03 = dividerH03
 	local dividerH = LUI.UIImage.new(0, 0, 0, 315, 0, 0, 58.5, 63.5)
 	dividerH:setAlpha(0.1)
-	dividerH:setImage(RegisterImage(0x84B43D5B04D263A))
-	dividerH:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	dividerH:setImage(RegisterImage(@"hash_484B43D5B04D263A"))
+	dividerH:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	dividerH:setShaderVector(0, 0, 0, 0, 0)
 	dividerH:setupNineSliceShader(8, 4)
 	self:addElement(dividerH)
@@ -60,7 +60,7 @@ CoD.CraftActionSliderWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.actionName:linkToElementModel(self, "actionName", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			actionName:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			actionName:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	self:mergeStateConditions({

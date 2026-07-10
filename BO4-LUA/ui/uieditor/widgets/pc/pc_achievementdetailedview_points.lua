@@ -25,10 +25,10 @@ CoD.PC_AchievementDetailedView_Points.new = function(f1_arg0, f1_arg1, f1_arg2, 
 	self.Spacer3 = Spacer3
 	local ScoreValue = LUI.UIText.new(0, 0, -20, 48, 0, 0, 4, 37)
 	ScoreValue:setRGB(0.33, 0.33, 0.32)
-	ScoreValue:setText(Engine[0xF9F1239CFD921FE](0x93E719493E9E18F))
+	ScoreValue:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	ScoreValue:setTTF("ttmussels_regular")
 	ScoreValue:setLetterSpacing(3)
-	ScoreValue:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	ScoreValue:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(ScoreValue)
 	self.ScoreValue = ScoreValue
 	local Spacer2 = CoD.VerticalListSpacer.new(f1_arg0, f1_arg1, 0, 0, 48, 58, 0, 1, 0, 0)
@@ -36,10 +36,10 @@ CoD.PC_AchievementDetailedView_Points.new = function(f1_arg0, f1_arg1, f1_arg2, 
 	self.Spacer2 = Spacer2
 	local Points = LUI.UIText.new(0, 0, 58, 155, 0, 0, 15, 32)
 	Points:setRGB(0.33, 0.33, 0.32)
-	Points:setText(LocalizeToUpperString(0xD34BC94F168F56D))
+	Points:setText(LocalizeToUpperString(@"hash_6D34BC94F168F56D"))
 	Points:setTTF("ttmussels_regular")
 	Points:setLetterSpacing(4)
-	Points:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	Points:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(Points)
 	self.Points = Points
 	local Spacer = CoD.VerticalListSpacer.new(f1_arg0, f1_arg1, 0, 0, -60, -40, 0, 1, 0, 0)

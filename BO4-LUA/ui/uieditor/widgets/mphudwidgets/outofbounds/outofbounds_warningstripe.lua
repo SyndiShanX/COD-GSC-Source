@@ -8,8 +8,8 @@ CoD.outofbounds_warningstripe.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local LargeStripe = LUI.UIImage.new(0, 0, -1528, 392, 0, 0, -14, 126)
-	LargeStripe:setImage(RegisterImage(0xD557C1F33123C7C))
-	LargeStripe:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	LargeStripe:setImage(RegisterImage(@"uie_ui_hud_out_of_bounds_stripe"))
+	LargeStripe:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	LargeStripe:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(LargeStripe)
 	self.LargeStripe = LargeStripe

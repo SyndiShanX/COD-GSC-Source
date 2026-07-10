@@ -20,8 +20,8 @@ CoD.SpecialistEquipmentTabListWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	SpecialistEquipmentName:setZoom(3)
 	SpecialistEquipmentName:setTTF("ttmussels_regular")
 	SpecialistEquipmentName:setLetterSpacing(10)
-	SpecialistEquipmentName:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	SpecialistEquipmentName:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	SpecialistEquipmentName:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	SpecialistEquipmentName:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(SpecialistEquipmentName)
 	self.SpecialistEquipmentName = SpecialistEquipmentName
 	local SpecialistName = LUI.UIText.new(0.5, 0.5, -192, 190, 0, 0, 60, 86)
@@ -29,8 +29,8 @@ CoD.SpecialistEquipmentTabListWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	SpecialistName:setZoom(3)
 	SpecialistName:setTTF("ttmussels_regular")
 	SpecialistName:setLetterSpacing(10)
-	SpecialistName:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	SpecialistName:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	SpecialistName:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	SpecialistName:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(SpecialistName)
 	self.SpecialistName = SpecialistName
 	local positions = LUI.GridLayout.new(f1_arg0, f1_arg1, false, 0, 0, -25, 0, nil, nil, false, false, false, false)
@@ -40,7 +40,7 @@ CoD.SpecialistEquipmentTabListWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	positions:setWidgetType(CoD.DirectorFeaturedPip)
 	positions:setHorizontalCount(13)
 	positions:setSpacing(-25)
-	positions:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	positions:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	positions:setDataSource("PositionLoadoutList")
 	positions:registerEventHandler("list_active_changed", function(element, event)
 		local f2_local0 = nil
@@ -55,13 +55,13 @@ CoD.SpecialistEquipmentTabListWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	self.positions = positions
 	local RB = CoD.BumperButtonWithKeyMouseText.new(f1_arg0, f1_arg1, 0.5, 0.5, 186, 386, 0, 0, 14, 48)
 	RB:setZoom(4)
-	RB.GamepadPrompt:setText(Engine[0xF9F1239CFD921FE](0xBFED5292621DA9A))
+	RB.GamepadPrompt:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_5BFED5292621DA9A"))
 	self:addElement(RB)
 	self.RB = RB
 	local LB = CoD.BumperButtonWithKeyMouseText.new(f1_arg0, f1_arg1, 0.5, 0.5, -384, -184, 0, 0, 14, 48)
 	LB:setZoom(4)
-	LB.GamepadPrompt:setText(Engine[0xF9F1239CFD921FE](0xBDCD5292604F434))
-	LB.GamepadPrompt:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
+	LB.GamepadPrompt:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_5BDCD5292604F434"))
+	LB.GamepadPrompt:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
 	self:addElement(LB)
 	self.LB = LB
 	local SpecialIssueInfo = CoD.SpecialistEquipmentNameDesc.new(f1_arg0, f1_arg1, 1, 1, -559, -59, 0, 0, 371, 477)
@@ -98,7 +98,7 @@ CoD.SpecialistEquipmentTabListWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	end)
 	local f1_local10 = left
 	local right = left.subscribeToModel
-	local f1_local12 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local12 = Engine[@"getmodelforcontroller"](f1_arg1)
 	right(f1_local10, f1_local12.LastInput, function(f7_arg0)
 		f1_arg0:updateElementState(left, {
 			name = "model_validation",
@@ -115,14 +115,14 @@ CoD.SpecialistEquipmentTabListWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f
 		elseif element.super.gainFocus then
 			f8_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f8_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(left, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(left, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		CoD.GridAndListUtility.DoBumperGridButton(menu, controller, true)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 		return true
 	end, false)
 	self:addElement(left)
@@ -143,7 +143,7 @@ CoD.SpecialistEquipmentTabListWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	end)
 	f1_local12 = right
 	f1_local10 = right.subscribeToModel
-	local f1_local13 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local13 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local10(f1_local12, f1_local13.LastInput, function(f13_arg0)
 		f1_arg0:updateElementState(right, {
 			name = "model_validation",
@@ -161,14 +161,14 @@ CoD.SpecialistEquipmentTabListWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f
 		elseif element.super.gainFocus then
 			f14_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f14_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(right, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(right, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		CoD.GridAndListUtility.DoBumperGridButton(menu, controller, false)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 		return true
 	end, false)
 	self:addElement(right)

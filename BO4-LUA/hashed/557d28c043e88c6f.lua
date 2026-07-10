@@ -13,7 +13,7 @@ CoD.WZObituaryEntry.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Blur = LUI.UIImage.new(-0.01, 1.01, -5, 5, 0.09, 1.09, -4, -2)
 	Blur:setRGB(0, 0, 0)
-	Blur:setMaterial(LUI.UIImage.GetCachedMaterial(0x81EEB1F96D4BE0A))
+	Blur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_381EEB1F96D4BE0A"))
 	Blur:setShaderVector(0, 0, 0.9, 0, 0)
 	self:addElement(Blur)
 	self.Blur = Blur

@@ -10,7 +10,7 @@ CoD.AmmoWidgetWZ_EquipmentEmpty.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	local ImgIcon = LUI.UIImage.new(0.5, 0.5, -40, 40, 0.5, 0.5, -40, 40)
 	ImgIcon:setRGB(1, 0, 0)
 	ImgIcon:setAlpha(0.31)
-	ImgIcon:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	ImgIcon:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	ImgIcon:linkToElementModel(self, "image", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -22,7 +22,7 @@ CoD.AmmoWidgetWZ_EquipmentEmpty.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	local ImgIconGrow = LUI.UIImage.new(0.5, 0.5, -40, 40, 0.5, 0.5, -41, 39)
 	ImgIconGrow:setRGB(1, 0, 0)
 	ImgIconGrow:setAlpha(0.31)
-	ImgIconGrow:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	ImgIconGrow:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	ImgIconGrow:linkToElementModel(self, "image", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -35,7 +35,7 @@ CoD.AmmoWidgetWZ_EquipmentEmpty.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	Inactive:setRGB(0.88, 0.07, 0.07)
 	Inactive:setAlpha(0.25)
 	Inactive:setScale(1.4, 1.4)
-	Inactive:setImage(RegisterImage(0x8440A4FA2F1A6DC))
+	Inactive:setImage(RegisterImage(@"hash_38440A4FA2F1A6DC"))
 	self:addElement(Inactive)
 	self.Inactive = Inactive
 	self:mergeStateConditions({

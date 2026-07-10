@@ -8,32 +8,32 @@ CoD.WeaponLevelUpTitle.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	self.soundSet = "default"
 	local TitleBacking = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	TitleBacking:setAlpha(0.8)
-	TitleBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	TitleBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	TitleBacking:setShaderVector(0, 0, 1, 0, 0)
 	self:addElement(TitleBacking)
 	self.TitleBacking = TitleBacking
 	local TitlePixels = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	TitlePixels:setAlpha(0.5)
-	TitlePixels:setImage(RegisterImage(0x311E811A3183347))
-	TitlePixels:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	TitlePixels:setImage(RegisterImage(@"uie_ui_hud_notifications_pixelpattern"))
+	TitlePixels:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	TitlePixels:setShaderVector(0, 0, 0, 0, 0)
 	TitlePixels:setupNineSliceShader(100, 100)
 	self:addElement(TitlePixels)
 	self.TitlePixels = TitlePixels
 	local CornerTopLeft = LUI.UIImage.new(0, 0, -2, 2, 0, 0, -2, 2)
-	CornerTopLeft:setImage(RegisterImage(0xCD2D51C614BCB51))
+	CornerTopLeft:setImage(RegisterImage(@"hash_6CD2D51C614BCB51"))
 	self:addElement(CornerTopLeft)
 	self.CornerTopLeft = CornerTopLeft
 	local CornerBottomLeft = LUI.UIImage.new(0, 0, -2, 2, 1, 1, -2, 2)
-	CornerBottomLeft:setImage(RegisterImage(0xCD2D51C614BCB51))
+	CornerBottomLeft:setImage(RegisterImage(@"hash_6CD2D51C614BCB51"))
 	self:addElement(CornerBottomLeft)
 	self.CornerBottomLeft = CornerBottomLeft
 	local CornerBottomRight = LUI.UIImage.new(1, 1, -2, 2, 1, 1, -2, 2)
-	CornerBottomRight:setImage(RegisterImage(0xCD2D51C614BCB51))
+	CornerBottomRight:setImage(RegisterImage(@"hash_6CD2D51C614BCB51"))
 	self:addElement(CornerBottomRight)
 	self.CornerBottomRight = CornerBottomRight
 	local CornerTopRight = LUI.UIImage.new(1, 1, -2, 2, 0, 0, -2, 2)
-	CornerTopRight:setImage(RegisterImage(0xCD2D51C614BCB51))
+	CornerTopRight:setImage(RegisterImage(@"hash_6CD2D51C614BCB51"))
 	self:addElement(CornerTopRight)
 	self.CornerTopRight = CornerTopRight
 	self.TitleBacking:linkToElementModel(self, "color", true, function(model)

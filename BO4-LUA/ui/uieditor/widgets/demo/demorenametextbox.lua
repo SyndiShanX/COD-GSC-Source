@@ -20,8 +20,8 @@ CoD.DemoRenameTextBox.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	RenameText:setText("")
 	RenameText:setTTF("notosans_regular")
 	RenameText:setLetterSpacing(1)
-	RenameText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	RenameText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	RenameText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	RenameText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(RenameText)
 	self.RenameText = RenameText
 	local TextBox = LUI.UIText.new(0, 1, 15, -15, 0, 1, 15, -15)
@@ -30,8 +30,8 @@ CoD.DemoRenameTextBox.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	TextBox:setText("")
 	TextBox:setTTF("notosans_regular")
 	TextBox:setLetterSpacing(1)
-	TextBox:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	TextBox:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	TextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	TextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(TextBox)
 	self.TextBox = TextBox
 	local PCHighlightBorder = CoD.PC_HighlightBorder.new(f1_arg0, f1_arg1, 0, 1, 0, 0, 0, 1, 0, 0)

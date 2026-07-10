@@ -28,14 +28,14 @@ CoD.DemoControlsButtonLightmanParameters.new = function(f1_arg0, f1_arg1, f1_arg
 	self.progressRing = progressRing
 	local buttonPromptImage = LUI.UIImage.new(0.5, 0.5, -16, 14, 0, 0, 42, 72)
 	buttonPromptImage:setScale(0.75, 0.75)
-	buttonPromptImage:setMaterial(LUI.UIImage.GetCachedMaterial(0x67D1E3A3D2D1BF))
+	buttonPromptImage:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_saturation_normal"))
 	buttonPromptImage:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(buttonPromptImage)
 	self.buttonPromptImage = buttonPromptImage
 	local Backing = LUI.UIImage.new(0.5, 0.5, -19, 19, 0.5, 0.5, -14.5, -1.5)
 	Backing:setRGB(0, 0, 0)
 	Backing:setAlpha(0.85)
-	Backing:setMaterial(LUI.UIImage.GetCachedMaterial(0xE125638BF94665F))
+	Backing:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_feather_edges"))
 	Backing:setShaderVector(0, 0.05, 0.05, 0.05, 0.05)
 	self:addElement(Backing)
 	self.Backing = Backing
@@ -43,8 +43,8 @@ CoD.DemoControlsButtonLightmanParameters.new = function(f1_arg0, f1_arg1, f1_arg
 	value:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	value:setScale(0.9, 0.9)
 	value:setTTF("dinnext_regular")
-	value:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	value:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	value:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	value:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(value)
 	self.value = value
 	local emptyFocusable = nil
@@ -116,7 +116,7 @@ CoD.DemoControlsButtonLightmanParameters.new = function(f1_arg0, f1_arg1, f1_arg
 	end)
 	local f1_local8 = self
 	local f1_local9 = self.subscribeToModel
-	local f1_local10 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local10 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local9(f1_local8, f1_local10.LastInput, function(f13_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

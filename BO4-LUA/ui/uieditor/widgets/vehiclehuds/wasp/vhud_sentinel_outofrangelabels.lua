@@ -12,32 +12,32 @@ CoD.vhud_sentinel_outOfRangeLabels.new = function ( f1_arg0, f1_arg1, f1_arg2, f
 	local outOfRangeLabel = LUI.UIText.new( 0.5, 0.5, -395, 395, 0, 0, 323, 368 )
 	outOfRangeLabel:setRGB( 1, 0, 0 )
 	outOfRangeLabel:setAlpha( 0 )
-	outOfRangeLabel:setText( Engine[0xF9F1239CFD921FE]( 0xC247D7EC67112E2 ) )
+	outOfRangeLabel:setText( Engine[@"hash_4F9F1239CFD921FE"]( @"hash_7C247D7EC67112E2" ) )
 	outOfRangeLabel:setTTF( "default" )
-	outOfRangeLabel:setRFTMaterial( LUI.UIImage.GetCachedMaterial( 0xFAEF6B981087FCE ) )
+	outOfRangeLabel:setRFTMaterial( LUI.UIImage.GetCachedMaterial( @"uie_aberration_no_blur" ) )
 	outOfRangeLabel:setShaderVector( 0, 0.2, 0, 0, 0 )
 	outOfRangeLabel:setShaderVector( 1, 0, 0, 0, 0 )
 	outOfRangeLabel:setShaderVector( 2, 0, 0, 0, 0 )
 	outOfRangeLabel:setShaderVector( 3, 0, 0, 0, 0 )
 	outOfRangeLabel:setShaderVector( 4, 0, 0, 0, 0 )
 	outOfRangeLabel:setLetterSpacing( 6.7 )
-	outOfRangeLabel:setAlignment( Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041] )
+	outOfRangeLabel:setAlignment( Enum[@"luialignment"][@"lui_alignment_center"] )
 	self:addElement( outOfRangeLabel )
 	self.outOfRangeLabel = outOfRangeLabel
 	
 	local outOfRangeTitle = LUI.UIText.new( 0.5, 0.5, -176, 176, 0, 0, 0, 45 )
 	outOfRangeTitle:setRGB( 1, 0, 0 )
 	outOfRangeTitle:setAlpha( 0 )
-	outOfRangeTitle:setText( Engine[0xF9F1239CFD921FE]( 0xE08EA7B79681E9C ) )
+	outOfRangeTitle:setText( Engine[@"hash_4F9F1239CFD921FE"]( @"hash_E08EA7B79681E9C" ) )
 	outOfRangeTitle:setTTF( "ttmussels_demibold" )
-	outOfRangeTitle:setRFTMaterial( LUI.UIImage.GetCachedMaterial( 0xFAEF6B981087FCE ) )
+	outOfRangeTitle:setRFTMaterial( LUI.UIImage.GetCachedMaterial( @"uie_aberration_no_blur" ) )
 	outOfRangeTitle:setShaderVector( 0, 0.2, 0, 0, 0 )
 	outOfRangeTitle:setShaderVector( 1, 0, 0, 0, 0 )
 	outOfRangeTitle:setShaderVector( 2, 0, 0, 0, 0 )
 	outOfRangeTitle:setShaderVector( 3, 0, 0, 0, 0 )
 	outOfRangeTitle:setShaderVector( 4, 0, 0, 0, 0 )
 	outOfRangeTitle:setLetterSpacing( 8.6 )
-	outOfRangeTitle:setAlignment( Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041] )
+	outOfRangeTitle:setAlignment( Enum[@"luialignment"][@"lui_alignment_center"] )
 	self:addElement( outOfRangeTitle )
 	self.outOfRangeTitle = outOfRangeTitle
 	
@@ -51,7 +51,7 @@ CoD.vhud_sentinel_outOfRangeLabels.new = function ( f1_arg0, f1_arg1, f1_arg2, f
 	} )
 	local f1_local3 = self
 	local f1_local4 = self.subscribeToModel
-	local f1_local5 = Engine[0x8DF2E5447F384B9]()
+	local f1_local5 = Engine[@"getglobalmodel"]()
 	f1_local4( f1_local3, f1_local5["lobbyRoot.lobbyNav"], function ( f3_arg0 )
 		f1_arg0:updateElementState( self, {
 			name = "model_validation",

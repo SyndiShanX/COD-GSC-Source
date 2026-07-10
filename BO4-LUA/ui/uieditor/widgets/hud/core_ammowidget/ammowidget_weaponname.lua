@@ -11,10 +11,10 @@ CoD.AmmoWidget_WeaponName.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	HeroAbilityUseString:setRGB(0.73, 0.71, 0.64)
 	HeroAbilityUseString:setText("")
 	HeroAbilityUseString:setTTF("ttmussels_demibold")
-	HeroAbilityUseString:setMaterial(LUI.UIImage.GetCachedMaterial(0x71E049B161CD00A))
+	HeroAbilityUseString:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_171E049B161CD00A"))
 	HeroAbilityUseString:setLetterSpacing(1)
-	HeroAbilityUseString:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	HeroAbilityUseString:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	HeroAbilityUseString:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	HeroAbilityUseString:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	self:addElement(HeroAbilityUseString)
 	self.HeroAbilityUseString = HeroAbilityUseString
 	self:subscribeToGlobalModel(f1_arg1, "PerController", "heldWeapons.0.updateWeaponSelect", function(model)

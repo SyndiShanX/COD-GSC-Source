@@ -13,7 +13,7 @@ CoD.StartMenu_TitleHeader.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	HeaderText:setText("")
 	HeaderText:setTTF("ttmussels_regular")
 	HeaderText:setLetterSpacing(1.5)
-	HeaderText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	HeaderText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(HeaderText)
 	self.HeaderText = HeaderText
 	local NewIcon = CoD.NewBreadcrumb.new(f1_arg0, f1_arg1, 0, 0, 108, 126, 0.5, 0.5, -9, 9)
@@ -27,7 +27,7 @@ CoD.StartMenu_TitleHeader.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	})
 	local f1_local3 = NewIcon
 	local f1_local4 = NewIcon.subscribeToModel
-	local f1_local5 = Engine[0x8DF2E5447F384B9]()
+	local f1_local5 = Engine[@"getglobalmodel"]()
 	f1_local4(f1_local3, f1_local5["lobbyRoot.lobbyNetworkMode"], function(f3_arg0)
 		f1_arg0:updateElementState(NewIcon, {
 			name = "model_validation",
@@ -39,7 +39,7 @@ CoD.StartMenu_TitleHeader.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	end, false)
 	f1_local3 = NewIcon
 	f1_local4 = NewIcon.subscribeToModel
-	f1_local5 = Engine[0x8DF2E5447F384B9]()
+	f1_local5 = Engine[@"getglobalmodel"]()
 	f1_local4(f1_local3, f1_local5["lobbyRoot.lobbyNav"], function(f4_arg0)
 		f1_arg0:updateElementState(NewIcon, {
 			name = "model_validation",

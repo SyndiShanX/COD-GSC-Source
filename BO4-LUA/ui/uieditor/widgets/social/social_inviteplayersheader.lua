@@ -100,7 +100,7 @@ CoD.Social_InvitePlayersHeader.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	end, false)
 	f1_local6 = self
 	f1_local7 = self.subscribeToModel
-	f1_local8 = Engine[0x8DF2E5447F384B9]()
+	f1_local8 = Engine[@"getglobalmodel"]()
 	f1_local7(f1_local6, f1_local8["lobbyRoot.lobbyNav"], function(f15_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

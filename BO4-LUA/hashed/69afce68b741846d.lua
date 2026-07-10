@@ -10,14 +10,14 @@ CoD.WarzoneCollapseProgress.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	local meterBacking = LUI.UIImage.new(-0.01, -0.01, 0, 266, -0.5, -0.5, 0, 16)
 	meterBacking:setRGB(0.35, 0.35, 0.35)
 	meterBacking:setAlpha(0.45)
-	meterBacking:setImage(RegisterImage(0x3674F9B5EAEF4ED))
-	meterBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0xE125638BF94665F))
+	meterBacking:setImage(RegisterImage(@"uie_wz_hud_map_danger_bar_empty"))
+	meterBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_feather_edges"))
 	meterBacking:setShaderVector(0, 0.01, 0.02, 0.01, 0.02)
 	self:addElement(meterBacking)
 	self.meterBacking = meterBacking
 	local meterFill = LUI.UIImage.new(0, 1, 0, -16, -0.25, 1.25, 0, 0)
-	meterFill:setImage(RegisterImage(0xE2647433A03242B))
-	meterFill:setMaterial(LUI.UIImage.GetCachedMaterial(0xE992BD5A540E2D))
+	meterFill:setImage(RegisterImage(@"uie_wz_hud_map_danger_bar"))
+	meterFill:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_delta_normal"))
 	meterFill:setShaderVector(1, 0, 0, 0, 0)
 	meterFill:setShaderVector(2, 0, 1, 0, 0)
 	meterFill:setShaderVector(3, 0.2, 0.2, 0, 0)
@@ -31,19 +31,19 @@ CoD.WarzoneCollapseProgress.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self:addElement(meterFill)
 	self.meterFill = meterFill
 	local safeZone2 = LUI.UIImage.new(1, 1, -17.5, 1.5, -1.75, -1.75, 10, 26)
-	safeZone2:setImage(RegisterImage(0xDA0E88765F528A9))
-	safeZone2:setMaterial(LUI.UIImage.GetCachedMaterial(0xE125638BF94665F))
+	safeZone2:setImage(RegisterImage(@"hash_7DA0E88765F528A9"))
+	safeZone2:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_feather_edges"))
 	safeZone2:setShaderVector(0, 0.02, 0.02, 0.02, 0.02)
 	self:addElement(safeZone2)
 	self.safeZone2 = safeZone2
 	local safeZone = LUI.UIImage.new(1, 1, -17.5, 1.5, -1.75, -1.75, 9, 27)
-	safeZone:setImage(RegisterImage(0xDA0E88765F528A9))
-	safeZone:setMaterial(LUI.UIImage.GetCachedMaterial(0xE125638BF94665F))
+	safeZone:setImage(RegisterImage(@"hash_7DA0E88765F528A9"))
+	safeZone:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_feather_edges"))
 	safeZone:setShaderVector(0, 0.02, 0.02, 0.02, 0.02)
 	self:addElement(safeZone)
 	self.safeZone = safeZone
 	local playerPosition = LUI.UIImage.new(0.7, 0.7, -14, 14, 1, 1, -18, 10)
-	playerPosition:setImage(RegisterImage(0xB2752BB1791031B))
+	playerPosition:setImage(RegisterImage(@"ui_icon_global_runningman"))
 	playerPosition:subscribeToGlobalModel(f1_arg1, "HUDItems", "distanceFromDeathCircle", function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -55,8 +55,8 @@ CoD.WarzoneCollapseProgress.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	local vehiclePosition = LUI.UIImage.new(0.4, 0.4, -26, 26, 1, 1, -30, 22)
 	vehiclePosition:setAlpha(0)
 	vehiclePosition:setZRot(270)
-	vehiclePosition:setImage(RegisterImage(0xB024F5E0D917C61))
-	vehiclePosition:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD526D3FD71F281))
+	vehiclePosition:setImage(RegisterImage(@"hash_2B024F5E0D917C61"))
+	vehiclePosition:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_flipbook"))
 	vehiclePosition:setShaderVector(0, 4, 4, 0, 0)
 	vehiclePosition:setShaderVector(1, 30, 0, 0, 0)
 	vehiclePosition:subscribeToGlobalModel(f1_arg1, "HUDItems", "insertionVehicleProgress", function(model)
@@ -77,7 +77,7 @@ CoD.WarzoneCollapseProgress.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	})
 	local f1_local7 = self
 	local f1_local8 = self.subscribeToModel
-	local f1_local9 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local9 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local8(f1_local7, f1_local9["hudItems.infiltrationVehicle"], function(f6_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

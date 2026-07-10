@@ -23,8 +23,8 @@ CoD.Barracks_GauntletStats_ZM.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self.bgBronze = bgBronze
 	local dotline02 = LUI.UIImage.new(0.5, 0.5, -230, 230, 0, 0, 467, 471)
 	dotline02:setAlpha(0.2)
-	dotline02:setImage(RegisterImage(0xF9C7F41C631866E))
-	dotline02:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	dotline02:setImage(RegisterImage(@"uie_ui_menu_social_emblem_dotline"))
+	dotline02:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	dotline02:setShaderVector(0, 1.2, 0, 0, 0)
 	self:addElement(dotline02)
 	self.dotline02 = dotline02
@@ -35,8 +35,8 @@ CoD.Barracks_GauntletStats_ZM.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self.bgSilver = bgSilver
 	local dotline01 = LUI.UIImage.new(0.5, 0.5, -230, 230, 0, 0, 249, 253)
 	dotline01:setAlpha(0.2)
-	dotline01:setImage(RegisterImage(0xF9C7F41C631866E))
-	dotline01:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	dotline01:setImage(RegisterImage(@"uie_ui_menu_social_emblem_dotline"))
+	dotline01:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	dotline01:setShaderVector(0, 1.2, 0, 0, 0)
 	self:addElement(dotline01)
 	self.dotline01 = dotline01
@@ -63,7 +63,7 @@ CoD.Barracks_GauntletStats_ZM.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 			modelName = "bronzeMedals",
 		})
 	end)
-	TrialsBronzeMedal.Medal:setImage(RegisterImage(0x7F007955259155A))
+	TrialsBronzeMedal.Medal:setImage(RegisterImage(@"uie_trial_bronze_medal"))
 	TrialsBronzeMedal:linkToElementModel(self, nil, false, function(model)
 		TrialsBronzeMedal:setModel(model, f1_arg1)
 	end)
@@ -87,7 +87,7 @@ CoD.Barracks_GauntletStats_ZM.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 			modelName = "silverMedals",
 		})
 	end)
-	TrialsSilverMedal.Medal:setImage(RegisterImage(0xC00200D0DF57AA7))
+	TrialsSilverMedal.Medal:setImage(RegisterImage(@"uie_trial_silver_medal"))
 	TrialsSilverMedal:linkToElementModel(self, nil, false, function(model)
 		TrialsSilverMedal:setModel(model, f1_arg1)
 	end)
@@ -111,7 +111,7 @@ CoD.Barracks_GauntletStats_ZM.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 			modelName = "goldMedals",
 		})
 	end)
-	TrialsGoldMedal.Medal:setImage(RegisterImage(0xE504D357F612D50))
+	TrialsGoldMedal.Medal:setImage(RegisterImage(@"uie_trial_gold_medal"))
 	TrialsGoldMedal:linkToElementModel(self, nil, false, function(model)
 		TrialsGoldMedal:setModel(model, f1_arg1)
 	end)
@@ -119,16 +119,16 @@ CoD.Barracks_GauntletStats_ZM.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self.TrialsGoldMedal = TrialsGoldMedal
 	local Header = LUI.UIText.new(0, 1, 0, 0, 0, 0, 10.5, 40.5)
 	Header:setRGB(0.92, 0.92, 0.92)
-	Header:setText(LocalizeToUpperString(0xCF423A9E98ACB09))
+	Header:setText(LocalizeToUpperString(@"hash_5CF423A9E98ACB09"))
 	Header:setTTF("ttmussels_regular")
 	Header:setLetterSpacing(4)
-	Header:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	Header:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	self:addElement(Header)
 	self.Header = Header
 	local GautlentGoldStats = CoD.PlayerStatsGauntlet.new(f1_arg0, f1_arg1, 0, 0, 243.5, 443.5, 0, 0, 93, 195)
-	GautlentGoldStats.StatValue:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	GautlentGoldStats.StatHeaderText:setText(ConvertToUpperString(LocalizeIntoString(0x37E754AE41682EF, 30)))
-	GautlentGoldStats.StatHeaderText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	GautlentGoldStats.StatValue:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	GautlentGoldStats.StatHeaderText:setText(ConvertToUpperString(LocalizeIntoString(@"menu/x_rounds", 30)))
+	GautlentGoldStats.StatHeaderText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	GautlentGoldStats:linkToElementModel(self, "goldMedals", true, function(model)
 		local f11_local0 = model:get()
 		if f11_local0 ~= nil then
@@ -138,9 +138,9 @@ CoD.Barracks_GauntletStats_ZM.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self:addElement(GautlentGoldStats)
 	self.GautlentGoldStats = GautlentGoldStats
 	local GautlentSilverStats = CoD.PlayerStatsGauntlet.new(f1_arg0, f1_arg1, 0, 0, 243.5, 443.5, 0, 0, 309, 411)
-	GautlentSilverStats.StatValue:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	GautlentSilverStats.StatHeaderText:setText(ConvertToUpperString(LocalizeIntoString(0x37E754AE41682EF, 20)))
-	GautlentSilverStats.StatHeaderText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	GautlentSilverStats.StatValue:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	GautlentSilverStats.StatHeaderText:setText(ConvertToUpperString(LocalizeIntoString(@"menu/x_rounds", 20)))
+	GautlentSilverStats.StatHeaderText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	GautlentSilverStats:linkToElementModel(self, "silverMedals", true, function(model)
 		local f12_local0 = model:get()
 		if f12_local0 ~= nil then
@@ -150,9 +150,9 @@ CoD.Barracks_GauntletStats_ZM.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self:addElement(GautlentSilverStats)
 	self.GautlentSilverStats = GautlentSilverStats
 	local GautlentSilverStats2 = CoD.PlayerStatsGauntlet.new(f1_arg0, f1_arg1, 0, 0, 243.5, 443.5, 0, 0, 524, 626)
-	GautlentSilverStats2.StatValue:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	GautlentSilverStats2.StatHeaderText:setText(ConvertToUpperString(LocalizeIntoString(0x37E754AE41682EF, 10)))
-	GautlentSilverStats2.StatHeaderText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	GautlentSilverStats2.StatValue:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	GautlentSilverStats2.StatHeaderText:setText(ConvertToUpperString(LocalizeIntoString(@"menu/x_rounds", 10)))
+	GautlentSilverStats2.StatHeaderText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	GautlentSilverStats2:linkToElementModel(self, "bronzeMedals", true, function(model)
 		local f13_local0 = model:get()
 		if f13_local0 ~= nil then

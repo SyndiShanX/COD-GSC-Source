@@ -30,14 +30,14 @@ CoD.PC_BnetStore_Container.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 		elseif element.super.gainFocus then
 			f2_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f2_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(PurchaseButton, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(PurchaseButton, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		CoD.PCUtility.OpenBattlenetCheckoutMenu(controller, menu, self.List, false)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 		return false
 	end, false)
 	self:addElement(PurchaseButton)
@@ -73,37 +73,37 @@ CoD.PC_BnetStore_Container.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 		elseif element.super.gainFocus then
 			f8_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f8_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(GiftButton, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(GiftButton, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		CoD.PCUtility.OpenBattlenetCheckoutMenu(controller, menu, self.List, true)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 		return false
 	end, false)
 	self:addElement(GiftButton)
 	self.GiftButton = GiftButton
 	local CompatibleOS = LUI.UIText.new(0, 1, 27, -359, 0, 0, 596, 614)
 	CompatibleOS:setRGB(0.42, 0.42, 0.42)
-	CompatibleOS:setText(Engine[0xF9F1239CFD921FE](0xBE61036E8B5ED51))
+	CompatibleOS:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_6BE61036E8B5ED51"))
 	CompatibleOS:setTTF("dinnext_regular")
-	CompatibleOS:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	CompatibleOS:setAlignment(Enum[0x7A5123B654282D2][0x70510683C22104B])
+	CompatibleOS:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	CompatibleOS:setAlignment(Enum[@"luialignment"][@"lui_alignment_bottom"])
 	self:addElement(CompatibleOS)
 	self.CompatibleOS = CompatibleOS
 	local SelectedItemDescription = LUI.UIText.new(0, 1, 299, -27, 0, 0, 458, 475)
 	SelectedItemDescription:setTTF("dinnext_regular")
 	SelectedItemDescription:setLineSpacing(1)
-	SelectedItemDescription:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	SelectedItemDescription:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	SelectedItemDescription:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	SelectedItemDescription:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(SelectedItemDescription)
 	self.SelectedItemDescription = SelectedItemDescription
 	local SelectedItemName = LUI.UIText.new(0, 1, 299, -27, 0, 0, 422, 446)
 	SelectedItemName:setTTF("dinnext_regular")
-	SelectedItemName:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	SelectedItemName:setAlignment(Enum[0x7A5123B654282D2][0x70510683C22104B])
+	SelectedItemName:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	SelectedItemName:setAlignment(Enum[@"luialignment"][@"lui_alignment_bottom"])
 	self:addElement(SelectedItemName)
 	self.SelectedItemName = SelectedItemName
 	local SelectedItemVisual = LUI.UIImage.new(0, 0, 25, 281, 0, 0, 403, 548)
@@ -115,7 +115,7 @@ CoD.PC_BnetStore_Container.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	List:setAutoScaleContent(true)
 	List:setWidgetType(CoD.PC_BnetStore_ItemButton)
 	List:setVerticalCount(3)
-	List:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	List:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	List:setDataSource("BnetStore")
 	LUI.OverrideFunction_CallOriginalFirst(List, "setModel", function(element, controller)
 		CoD.PCUtility.UpdatePurchaseButtonState(f1_arg0, f1_arg1, self.PurchaseButton, self.List)
@@ -124,26 +124,26 @@ CoD.PC_BnetStore_Container.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self.List = List
 	local StageTitle = LUI.UIText.new(0, 0.9, 25, 25, 0, 0, 25, 55)
 	StageTitle:setRGB(1, 0.75, 0.09)
-	StageTitle:setText(LocalizeToUpperString(0x4A067A2D7727CE4))
+	StageTitle:setText(LocalizeToUpperString(@"hash_54A067A2D7727CE4"))
 	StageTitle:setTTF("ttmussels_regular")
 	StageTitle:setLetterSpacing(7)
-	StageTitle:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	StageTitle:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	StageTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	StageTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(StageTitle)
 	self.StageTitle = StageTitle
 	local StandardEdition = LUI.UIImage.new(0, 0, -128, 0, 0, 0, 0, 128)
 	StandardEdition:setAlpha(0)
-	StandardEdition:setImage(RegisterImage(0xC064242DED406C5))
+	StandardEdition:setImage(RegisterImage(@"uie_pc_bnetstore_digitalstandardedition"))
 	self:addElement(StandardEdition)
 	self.StandardEdition = StandardEdition
 	local DeluxeEdition = LUI.UIImage.new(0, 0, -128, 0, 0, 0, 0, 128)
 	DeluxeEdition:setAlpha(0)
-	DeluxeEdition:setImage(RegisterImage(0x4A7C67EA6B0E9FB))
+	DeluxeEdition:setImage(RegisterImage(@"uie_pc_bnetstore_digitaldeluxeedition"))
 	self:addElement(DeluxeEdition)
 	self.DeluxeEdition = DeluxeEdition
 	local DeluxeEnhancedEdition = LUI.UIImage.new(0, 0, -128, 0, 0, 0, 0, 128)
 	DeluxeEnhancedEdition:setAlpha(0)
-	DeluxeEnhancedEdition:setImage(RegisterImage(0x30DE1FDCB76AEAD))
+	DeluxeEnhancedEdition:setImage(RegisterImage(@"uie_pc_bnetstore_digitaldeluxeenhancededition"))
 	self:addElement(DeluxeEnhancedEdition)
 	self.DeluxeEnhancedEdition = DeluxeEnhancedEdition
 	local AnimationLoadingWidget0 = CoD.AnimationLoadingWidget.new(f1_arg0, f1_arg1, 0.5, 0.5, -108, 108, 0.5, 0.5, -148, 68)
@@ -175,13 +175,13 @@ CoD.PC_BnetStore_Container.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	SelectedItemDescription:linkToElementModel(List, "desc", true, function(model)
 		local f16_local0 = model:get()
 		if f16_local0 ~= nil then
-			SelectedItemDescription:setText(Engine[0xF9F1239CFD921FE](f16_local0))
+			SelectedItemDescription:setText(Engine[@"hash_4F9F1239CFD921FE"](f16_local0))
 		end
 	end)
 	SelectedItemName:linkToElementModel(List, "name", true, function(model)
 		local f17_local0 = model:get()
 		if f17_local0 ~= nil then
-			SelectedItemName:setText(Engine[0xF9F1239CFD921FE](f17_local0))
+			SelectedItemName:setText(Engine[@"hash_4F9F1239CFD921FE"](f17_local0))
 		end
 	end)
 	SelectedItemVisual:linkToElementModel(List, "image", true, function(model)

@@ -21,20 +21,20 @@ CoD.WarzoneInventoryUnlockMissionReward.new = function(f1_arg0, f1_arg1, f1_arg2
 	self.unlockableIcon = unlockableIcon
 	local quote = LUI.UIText.new(0, 0, 70, 306, 0, 0, 2, 17)
 	quote:setRGB(ColorSet.T8__BUTTON__UNSELECTED__HEADER.r, ColorSet.T8__BUTTON__UNSELECTED__HEADER.g, ColorSet.T8__BUTTON__UNSELECTED__HEADER.b)
-	quote:setText(Engine[0xF9F1239CFD921FE](0x93E719493E9E18F))
+	quote:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	quote:setTTF("ttmussels_regular")
 	quote:setLetterSpacing(1)
-	quote:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	quote:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	quote:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	quote:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(quote)
 	self.quote = quote
 	local rewardName = LUI.UIText.new(1, 1, -240, -4, 1, 1, -15, 0)
 	rewardName:setRGB(ColorSet.T8__BUTTON__UNSELECTED__HEADER.r, ColorSet.T8__BUTTON__UNSELECTED__HEADER.g, ColorSet.T8__BUTTON__UNSELECTED__HEADER.b)
-	rewardName:setText(Engine[0xF9F1239CFD921FE](0x93E719493E9E18F))
+	rewardName:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	rewardName:setTTF("ttmussels_regular")
 	rewardName:setLetterSpacing(1)
-	rewardName:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
-	rewardName:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	rewardName:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
+	rewardName:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	self:addElement(rewardName)
 	self.rewardName = rewardName
 	self:mergeStateConditions({

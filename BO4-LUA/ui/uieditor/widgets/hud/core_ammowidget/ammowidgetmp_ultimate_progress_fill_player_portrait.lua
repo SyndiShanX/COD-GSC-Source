@@ -12,8 +12,8 @@ CoD.AmmoWidgetMP_Ultimate_Progress_Fill_Player_Portrait.new = function(f1_arg0, 
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local UltimateRadialMeterJumpAhead = LUI.UIImage.new(0, 0, 0, 110, 0, 0, 0, 112)
 	UltimateRadialMeterJumpAhead:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
-	UltimateRadialMeterJumpAhead:setImage(RegisterImage(0xC523E641149E1E1))
-	UltimateRadialMeterJumpAhead:setMaterial(LUI.UIImage.GetCachedMaterial(0x9AD9C230B10C37))
+	UltimateRadialMeterJumpAhead:setImage(RegisterImage(@"hash_1C523E641149E1E1"))
+	UltimateRadialMeterJumpAhead:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_clock_add"))
 	UltimateRadialMeterJumpAhead:setShaderVector(1, 0.5, 0, 0, 0)
 	UltimateRadialMeterJumpAhead:setShaderVector(2, 0.5, 0, 0, 0)
 	UltimateRadialMeterJumpAhead:setShaderVector(3, 0, 0, 0, 0)
@@ -29,8 +29,8 @@ CoD.AmmoWidgetMP_Ultimate_Progress_Fill_Player_Portrait.new = function(f1_arg0, 
 	local UltimateRadialMeterwipe = LUI.UIImage.new(0, 0, 0, 110, 0, 0, -2, 110)
 	UltimateRadialMeterwipe:setRGB(1, 0.78, 0)
 	UltimateRadialMeterwipe:setAlpha(0.2)
-	UltimateRadialMeterwipe:setImage(RegisterImage(0xC523E641149E1E1))
-	UltimateRadialMeterwipe:setMaterial(LUI.UIImage.GetCachedMaterial(0xD5CA1A25ED87F4F))
+	UltimateRadialMeterwipe:setImage(RegisterImage(@"hash_1C523E641149E1E1"))
+	UltimateRadialMeterwipe:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_clock_normal"))
 	UltimateRadialMeterwipe:setShaderVector(1, 0.5, 0, 0, 0)
 	UltimateRadialMeterwipe:setShaderVector(2, 0.5, 0, 0, 0)
 	UltimateRadialMeterwipe:setShaderVector(3, 0, 0, 0, 0)
@@ -46,8 +46,8 @@ CoD.AmmoWidgetMP_Ultimate_Progress_Fill_Player_Portrait.new = function(f1_arg0, 
 	self.UltimateRadialMeterwipe = UltimateRadialMeterwipe
 	local UltimateRadialMeterwipe2 = LUI.UIImage.new(0, 0, 0, 110, 0, 0, 0, 112)
 	UltimateRadialMeterwipe2:setRGB(1, 0.92, 0)
-	UltimateRadialMeterwipe2:setImage(RegisterImage(0xC523E641149E1E1))
-	UltimateRadialMeterwipe2:setMaterial(LUI.UIImage.GetCachedMaterial(0xD5CA1A25ED87F4F))
+	UltimateRadialMeterwipe2:setImage(RegisterImage(@"hash_1C523E641149E1E1"))
+	UltimateRadialMeterwipe2:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_clock_normal"))
 	UltimateRadialMeterwipe2:setShaderVector(1, 0.5, 0, 0, 0)
 	UltimateRadialMeterwipe2:setShaderVector(2, 0.5, 0, 0, 0)
 	UltimateRadialMeterwipe2:setShaderVector(3, 0, 0, 0, 0)
@@ -63,8 +63,8 @@ CoD.AmmoWidgetMP_Ultimate_Progress_Fill_Player_Portrait.new = function(f1_arg0, 
 	self.UltimateRadialMeterwipe2 = UltimateRadialMeterwipe2
 	local UltimateRadialMeterwipe3 = LUI.UIImage.new(0, 0, 0, 110, 0, 0, 0, 112)
 	UltimateRadialMeterwipe3:setRGB(1, 0.92, 0)
-	UltimateRadialMeterwipe3:setImage(RegisterImage(0xC523E641149E1E1))
-	UltimateRadialMeterwipe3:setMaterial(LUI.UIImage.GetCachedMaterial(0xD5CA1A25ED87F4F))
+	UltimateRadialMeterwipe3:setImage(RegisterImage(@"hash_1C523E641149E1E1"))
+	UltimateRadialMeterwipe3:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_clock_normal"))
 	UltimateRadialMeterwipe3:setShaderVector(1, 0.5, 0, 0, 0)
 	UltimateRadialMeterwipe3:setShaderVector(2, 0.5, 0, 0, 0)
 	UltimateRadialMeterwipe3:setShaderVector(3, 0, 0, 0, 0)
@@ -79,7 +79,7 @@ CoD.AmmoWidgetMP_Ultimate_Progress_Fill_Player_Portrait.new = function(f1_arg0, 
 	self:addElement(UltimateRadialMeterwipe3)
 	self.UltimateRadialMeterwipe3 = UltimateRadialMeterwipe3
 	local UltimateRadialMeterPulse = CoD.AmmoWidgetMP_Ultimate_Progress_Pulse.new(f1_arg0, f1_arg1, 0, 0, 0, 110, 0, 0, 0, 112)
-	UltimateRadialMeterPulse:setRFTMaterial(LUI.UIImage.GetCachedMaterial(0x8F44960BEC559BA))
+	UltimateRadialMeterPulse:setRFTMaterial(LUI.UIImage.GetCachedMaterial(@"hash_8F44960BEC559BA"))
 	UltimateRadialMeterPulse:setShaderVector(1, 0.5, 0, 0, 0)
 	UltimateRadialMeterPulse:setShaderVector(2, 0.5, 0, 0, 0)
 	UltimateRadialMeterPulse:setShaderVector(3, 0, 0, 0, 0)
@@ -103,14 +103,14 @@ CoD.AmmoWidgetMP_Ultimate_Progress_Fill_Player_Portrait.new = function(f1_arg0, 
 	self.UltimateRadialMeterFillPulse = UltimateRadialMeterFillPulse
 	local Flare = LUI.UIImage.new(0, 0, -9, 119, 0, 0, -89, 39)
 	Flare:setAlpha(0)
-	Flare:setImage(RegisterImage(0x3C720E22C953683))
-	Flare:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Flare:setImage(RegisterImage(@"uie_ui_hud_core_job_widget_flare"))
+	Flare:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Flare)
 	self.Flare = Flare
 	local Burst = LUI.UIImage.new(0, 0, 0, 110, 0, 0, 0, 112)
 	Burst:setAlpha(0)
-	Burst:setImage(RegisterImage(0xD4F7AA0A4512AE0))
-	Burst:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Burst:setImage(RegisterImage(@"uie_ui_hud_core_hero_widget_glow_hero"))
+	Burst:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Burst)
 	self.Burst = Burst
 	self:mergeStateConditions({
@@ -123,7 +123,7 @@ CoD.AmmoWidgetMP_Ultimate_Progress_Fill_Player_Portrait.new = function(f1_arg0, 
 		{
 			stateName = "InUse",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "state", Enum[0xF0447219F15F7F3][0x1873A43E9D1620E])
+				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "state", Enum[@"weapongadgetstates"][@"player_ability_state_inuse"])
 			end,
 		},
 		{
@@ -135,7 +135,7 @@ CoD.AmmoWidgetMP_Ultimate_Progress_Fill_Player_Portrait.new = function(f1_arg0, 
 		{
 			stateName = "PowerBasedEmptyCharging_CombatEfficiency",
 			condition = function(menu, element, event)
-				local f12_local0 = CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "state", Enum[0xF0447219F15F7F3][0x958A6962CA8F9B7])
+				local f12_local0 = CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "state", Enum[@"weapongadgetstates"][@"player_ability_state_charging"])
 				if f12_local0 then
 					f12_local0 = CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "powerRatio", 0)
 					if f12_local0 then
@@ -148,25 +148,25 @@ CoD.AmmoWidgetMP_Ultimate_Progress_Fill_Player_Portrait.new = function(f1_arg0, 
 		{
 			stateName = "PowerBasedEmptyCharging",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "state", Enum[0xF0447219F15F7F3][0x958A6962CA8F9B7]) and CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "powerRatio", 0)
+				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "state", Enum[@"weapongadgetstates"][@"player_ability_state_charging"]) and CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "powerRatio", 0)
 			end,
 		},
 		{
 			stateName = "PowerBasedCharging_CombatEfficiency",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "state", Enum[0xF0447219F15F7F3][0x958A6962CA8F9B7]) and CoD.ModelUtility.IsGlobalDataSourceModelValueEqualTo(f1_arg1, "HUDItems", "combatEfficiencyActive", 1)
+				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "state", Enum[@"weapongadgetstates"][@"player_ability_state_charging"]) and CoD.ModelUtility.IsGlobalDataSourceModelValueEqualTo(f1_arg1, "HUDItems", "combatEfficiencyActive", 1)
 			end,
 		},
 		{
 			stateName = "PowerBasedCharging",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "state", Enum[0xF0447219F15F7F3][0x958A6962CA8F9B7])
+				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "state", Enum[@"weapongadgetstates"][@"player_ability_state_charging"])
 			end,
 		},
 		{
 			stateName = "PowerBased",
 			condition = function(menu, element, event)
-				return not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "state", Enum[0xF0447219F15F7F3][0x29529861EAA8D1C])
+				return not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "state", Enum[@"weapongadgetstates"][@"player_ability_state_hidden"])
 			end,
 		},
 	})
@@ -244,7 +244,7 @@ CoD.AmmoWidgetMP_Ultimate_Progress_Fill_Player_Portrait.__resetProperties = func
 	f22_arg0.Burst:setRGB(1, 1, 1)
 	f22_arg0.Burst:setAlpha(0)
 	f22_arg0.Burst:setScale(1, 1)
-	f22_arg0.Burst:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	f22_arg0.Burst:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 end
 CoD.AmmoWidgetMP_Ultimate_Progress_Fill_Player_Portrait.__clipsPerState = {
 	DefaultState = {
@@ -472,7 +472,7 @@ CoD.AmmoWidgetMP_Ultimate_Progress_Fill_Player_Portrait.__clipsPerState = {
 			f47_arg0.Burst:setRGB(1, 0.87, 0)
 			f47_arg0.Burst:setAlpha(1)
 			f47_arg0.Burst:setScale(0, 0)
-			f47_arg0.Burst:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+			f47_arg0.Burst:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 			f47_local1(f47_arg0.Burst)
 		end,
 		DefaultState = function(f52_arg0, f52_arg1)

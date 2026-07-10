@@ -9,8 +9,8 @@ CoD.PositionDraft_Cooldown.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local DraftCooldown = LUI.UIText.new(0, 1, 0, 0, 0, 0, 0, 37)
 	DraftCooldown:setTTF("ttmussels_regular")
-	DraftCooldown:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	DraftCooldown:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	DraftCooldown:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	DraftCooldown:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	DraftCooldown:setBackingType(2)
 	DraftCooldown:setBackingColor(0, 0, 0)
 	DraftCooldown:setBackingAlpha(0.8)
@@ -18,16 +18,16 @@ CoD.PositionDraft_Cooldown.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	DraftCooldown:subscribeToGlobalModel(f1_arg1, "PerController", "PositionDraft.cooldown", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			DraftCooldown:setText(LocalizeIntoString(0x3E6EF73850D43D7, f2_local0))
+			DraftCooldown:setText(LocalizeIntoString(@"hash_43E6EF73850D43D7", f2_local0))
 		end
 	end)
 	self:addElement(DraftCooldown)
 	self.DraftCooldown = DraftCooldown
 	local CannotSwitch = LUI.UIText.new(0, 1, 0, 0, 0, 0, 0, 37)
-	CannotSwitch:setText(Engine[0xF9F1239CFD921FE](0x8C90C4B40C26813))
+	CannotSwitch:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_48C90C4B40C26813"))
 	CannotSwitch:setTTF("ttmussels_regular")
-	CannotSwitch:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	CannotSwitch:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	CannotSwitch:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	CannotSwitch:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	CannotSwitch:setBackingType(2)
 	CannotSwitch:setBackingColor(0, 0, 0)
 	CannotSwitch:setBackingAlpha(0.8)
@@ -50,7 +50,7 @@ CoD.PositionDraft_Cooldown.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	})
 	local f1_local3 = self
 	local f1_local4 = self.subscribeToModel
-	local f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local4(f1_local3, f1_local5["PositionDraft.cooldown"], function(f5_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -71,7 +71,7 @@ CoD.PositionDraft_Cooldown.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	end)
 	f1_local3 = self
 	f1_local4 = self.subscribeToModel
-	f1_local5 = Engine[0x8DF2E5447F384B9]()
+	f1_local5 = Engine[@"getglobalmodel"]()
 	f1_local4(f1_local3, f1_local5["hudItems.specialistSwitchIsLethal"], function(f7_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -83,14 +83,14 @@ CoD.PositionDraft_Cooldown.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	end, false)
 	f1_local3 = self
 	f1_local4 = self.subscribeToModel
-	f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local4(f1_local3, f1_local5["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x534C7B2375D2D47]], function(f8_arg0)
+	f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local4(f1_local3, f1_local5["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_player_dead"]], function(f8_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f8_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x534C7B2375D2D47],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_player_dead"],
 		})
 	end, false)
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)

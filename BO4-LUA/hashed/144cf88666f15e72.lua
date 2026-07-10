@@ -25,8 +25,8 @@ CoD.Prestige_LevelRewardsWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self.BodyBg = BodyBg
 	local GridBodyBg = LUI.UIImage.new(0, 0, 0, 128, 0, 0, 199, 506)
 	GridBodyBg:setAlpha(0.02)
-	GridBodyBg:setImage(RegisterImage(0x2F926473EDCBFCA))
-	GridBodyBg:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	GridBodyBg:setImage(RegisterImage(@"uie_ui_hud_vehicle_lightstrike_grid"))
+	GridBodyBg:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	GridBodyBg:setShaderVector(0, 0, 0, 0, 0)
 	GridBodyBg:setupNineSliceShader(22, 22)
 	self:addElement(GridBodyBg)
@@ -55,8 +55,8 @@ CoD.Prestige_LevelRewardsWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	local RewardLevel = LUI.UIText.new(0.5, 0.5, -64, 136, 0, 0, 7, 32)
 	RewardLevel:setRGB(0.92, 0.92, 0.92)
 	RewardLevel:setTTF("ttmussels_demibold")
-	RewardLevel:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	RewardLevel:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	RewardLevel:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	RewardLevel:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	RewardLevel:linkToElementModel(self, "displayLevel", true, function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
@@ -128,8 +128,8 @@ CoD.Prestige_LevelRewardsWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self.Divider = Divider
 	local infoBracketBot = LUI.UIImage.new(0, 0, -1, 129, 0, 0, 498.5, 506.5)
 	infoBracketBot:setAlpha(0.2)
-	infoBracketBot:setImage(RegisterImage(0xC325BED3F226657))
-	infoBracketBot:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	infoBracketBot:setImage(RegisterImage(@"hash_4C325BED3F226657"))
+	infoBracketBot:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	infoBracketBot:setShaderVector(0, 0, 0, 0, 0)
 	infoBracketBot:setupNineSliceShader(16, 4)
 	self:addElement(infoBracketBot)
@@ -137,8 +137,8 @@ CoD.Prestige_LevelRewardsWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	local infoBracketTop = LUI.UIImage.new(0, 0, -1, 129, 0, 0, 39.5, 47.5)
 	infoBracketTop:setAlpha(0.2)
 	infoBracketTop:setZRot(180)
-	infoBracketTop:setImage(RegisterImage(0xC325BED3F226657))
-	infoBracketTop:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	infoBracketTop:setImage(RegisterImage(@"hash_4C325BED3F226657"))
+	infoBracketTop:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	infoBracketTop:setShaderVector(0, 0, 0, 0, 0)
 	infoBracketTop:setupNineSliceShader(16, 4)
 	self:addElement(infoBracketTop)
@@ -223,7 +223,7 @@ CoD.Prestige_LevelRewardsWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	end)
 	local f1_local16 = self
 	local f1_local17 = self.subscribeToModel
-	local f1_local18 = Engine[0x8DF2E5447F384B9]()
+	local f1_local18 = Engine[@"getglobalmodel"]()
 	f1_local17(f1_local16, f1_local18["lobbyRoot.lobbyNav"], function(f18_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

@@ -13,13 +13,13 @@ CoD.PaintjobEditorSafeAreaContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 		{
 			stateName = "KBMEditMode",
 			condition = function(menu, element, event)
-				return IsMouseOrKeyboard(f1_arg1) and CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg1, "Emblem.EmblemProperties.editorMode", Enum[0x3ED85BA45B1D650][0xE2FFAEFF67F59AD])
+				return IsMouseOrKeyboard(f1_arg1) and CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg1, "Emblem.EmblemProperties.editorMode", Enum[@"customizationeditormode"][@"customization_editor_mode_edit"])
 			end,
 		},
 		{
 			stateName = "EditModeLayerProperties",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg1, "Emblem.EmblemProperties.editorMode", Enum[0x3ED85BA45B1D650][0xE2FFAEFF67F59AD])
+				return CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg1, "Emblem.EmblemProperties.editorMode", Enum[@"customizationeditormode"][@"customization_editor_mode_edit"])
 			end,
 		},
 	})
@@ -29,7 +29,7 @@ CoD.PaintjobEditorSafeAreaContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	end)
 	local f1_local2 = layerProperties
 	local f1_local3 = layerProperties.subscribeToModel
-	local f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local3(f1_local2, f1_local4.LastInput, function(f5_arg0)
 		f1_arg0:updateElementState(layerProperties, {
 			name = "model_validation",
@@ -41,7 +41,7 @@ CoD.PaintjobEditorSafeAreaContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	end, false)
 	f1_local2 = layerProperties
 	f1_local3 = layerProperties.subscribeToModel
-	f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local3(f1_local2, f1_local4["Emblem.EmblemProperties.editorMode"], function(f6_arg0)
 		f1_arg0:updateElementState(layerProperties, {
 			name = "model_validation",

@@ -9,8 +9,8 @@ CoD.JobFeedItemBackground.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Glow = LUI.UIImage.new(0.5, 0.5, -64, 64, 0.5, 0.5, -64, 64)
 	Glow:setScale(1.2, 1.2)
-	Glow:setImage(RegisterImage(0xC3CC344D703240E))
-	Glow:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Glow:setImage(RegisterImage(@"uie_ui_hud_jobfeed_multikill_flare"))
+	Glow:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Glow)
 	self.Glow = Glow
 	self:mergeStateConditions({

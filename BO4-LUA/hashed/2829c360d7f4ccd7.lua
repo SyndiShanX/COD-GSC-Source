@@ -13,10 +13,10 @@ CoD.PlayerStatsHeader.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	self.Image = Image
 	local HeaderText = LUI.UIText.new(0, 0, 6, 204, 0.5, 0.5, -9, 9)
 	HeaderText:setRGB(0.14, 0.14, 0.14)
-	HeaderText:setText(LocalizeToUpperString(0x8CA99F2C517036))
+	HeaderText:setText(LocalizeToUpperString(@"menu/efficiency"))
 	HeaderText:setTTF("ttmussels_demibold")
 	HeaderText:setLetterSpacing(1)
-	HeaderText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	HeaderText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(HeaderText)
 	self.HeaderText = HeaderText
 	self:mergeStateConditions({

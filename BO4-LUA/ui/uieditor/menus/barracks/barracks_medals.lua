@@ -34,7 +34,7 @@ LUI.createMenu.Barracks_Medals = function(f1_arg0, f1_arg1)
 	})
 	local CommonIdentityWidgetStreamlinedSafeAreaContainer = MedalsTab
 	local SocialFrame = MedalsTab.subscribeToModel
-	local f1_local7 = Engine[0x8DF2E5447F384B9]()
+	local f1_local7 = Engine[@"getglobalmodel"]()
 	SocialFrame(CommonIdentityWidgetStreamlinedSafeAreaContainer, f1_local7["lobbyRoot.lobbyNav"], function(f3_arg0)
 		f1_local1:updateElementState(MedalsTab, {
 			name = "model_validation",
@@ -54,7 +54,7 @@ LUI.createMenu.Barracks_Medals = function(f1_arg0, f1_arg1)
 	end)
 	CommonIdentityWidgetStreamlinedSafeAreaContainer = MedalsTab
 	SocialFrame = MedalsTab.subscribeToModel
-	f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	f1_local7 = Engine[@"getmodelforcontroller"](f1_arg0)
 	SocialFrame(CommonIdentityWidgetStreamlinedSafeAreaContainer, f1_local7.LastInput, function(f6_arg0)
 		f1_local1:updateElementState(MedalsTab, {
 			name = "model_validation",
@@ -75,11 +75,11 @@ LUI.createMenu.Barracks_Medals = function(f1_arg0, f1_arg1)
 	self:addElement(MedalsTab)
 	self.MedalsTab = MedalsTab
 	SocialFrame = CoD.GenericMenuFrame.new(f1_local1, f1_arg0, 0, 1, 0, 0, 0, 1, 0, 0)
-	SocialFrame.CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(0x8F69F5BDD4F7C26))
+	SocialFrame.CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(@"hash_8F69F5BDD4F7C26"))
 	SocialFrame:subscribeToGlobalModel(f1_arg0, "LobbyRoot", "lobbyTitle", function(model)
 		local f8_local0 = model:get()
 		if f8_local0 ~= nil then
-			SocialFrame.CommonHeader.subtitle.subtitle:setText(Engine[0xF9F1239CFD921FE](f8_local0))
+			SocialFrame.CommonHeader.subtitle.subtitle:setText(Engine[@"hash_4F9F1239CFD921FE"](f8_local0))
 		end
 	end)
 	self:addElement(SocialFrame)
@@ -113,7 +113,7 @@ LUI.createMenu.Barracks_Medals = function(f1_arg0, f1_arg1)
 	})
 	local f1_local8 = self
 	f1_local7 = self.subscribeToModel
-	local f1_local9 = Engine[0x8DF2E5447F384B9]()
+	local f1_local9 = Engine[@"getglobalmodel"]()
 	f1_local7(f1_local8, f1_local9["lobbyRoot.lobbyNav"], function(f12_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",
@@ -123,12 +123,12 @@ LUI.createMenu.Barracks_Medals = function(f1_arg0, f1_arg1)
 			modelName = "lobbyRoot.lobbyNav",
 		})
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], "ESCAPE", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], "ESCAPE", function(element, menu, controller, model)
 		GoBack(self, controller)
 		ClearMenuSavedState(menu)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, "ESCAPE")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, "ESCAPE")
 		return true
 	end, false)
 	MedalTabsInternal.id = "MedalTabsInternal"

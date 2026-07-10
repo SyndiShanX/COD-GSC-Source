@@ -16,8 +16,8 @@ CoD.InspectionTrophyWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	local TrophyTitle = LUI.UIText.new(0.5, 0.5, -115, 115, 0, 0, 3, 30)
 	TrophyTitle:setRGB(0.92, 0.92, 0.92)
 	TrophyTitle:setTTF("ttmussels_demibold")
-	TrophyTitle:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	TrophyTitle:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	TrophyTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	TrophyTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	TrophyTitle:linkToElementModel(self, "catorgry", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -29,8 +29,8 @@ CoD.InspectionTrophyWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	local TrophySubtitle = LUI.UIText.new(0.5, 0.5, -115, 115, 0, 0, 29, 47)
 	TrophySubtitle:setRGB(0.92, 0.92, 0.92)
 	TrophySubtitle:setTTF("ttmussels_regular")
-	TrophySubtitle:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	TrophySubtitle:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	TrophySubtitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	TrophySubtitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	TrophySubtitle:linkToElementModel(self, "description", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -41,8 +41,8 @@ CoD.InspectionTrophyWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self.TrophySubtitle = TrophySubtitle
 	local ValueTitle = LUI.UIText.new(0.5, 0.5, -115, 115, 0, 0, 219.5, 237.5)
 	ValueTitle:setTTF("ttmussels_regular")
-	ValueTitle:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	ValueTitle:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	ValueTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	ValueTitle:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	ValueTitle:linkToElementModel(self, "name", true, function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
@@ -53,8 +53,8 @@ CoD.InspectionTrophyWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self.ValueTitle = ValueTitle
 	local Value = LUI.UIText.new(0, 0, 25, 225, 0, 0, 238.5, 283.5)
 	Value:setTTF("ttmussels_demibold")
-	Value:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	Value:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Value:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	Value:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	Value:linkToElementModel(self, "timesEarned", true, function(model)
 		local f5_local0 = model:get()
 		if f5_local0 ~= nil then
@@ -88,7 +88,7 @@ CoD.InspectionTrophyWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	})
 	local f1_local7 = self
 	local f1_local8 = self.subscribeToModel
-	local f1_local9 = Engine[0x8DF2E5447F384B9]()
+	local f1_local9 = Engine[@"getglobalmodel"]()
 	f1_local8(f1_local7, f1_local9["lobbyRoot.lobbyNav"], function(f9_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

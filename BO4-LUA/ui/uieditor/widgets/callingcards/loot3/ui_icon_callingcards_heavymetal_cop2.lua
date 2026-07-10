@@ -7,7 +7,7 @@ CoD.ui_icon_callingcards_heavymetal_cop2.new = function(f1_arg0, f1_arg1, f1_arg
 	self.id = "ui_icon_callingcards_heavymetal_cop2"
 	self.soundSet = "default"
 	local cop2 = LUI.UIImage.new(0, 0, -88, 216, 0, 0, 0, 248)
-	cop2:setImage(RegisterImage(0x1D1214822BEB0D4))
+	cop2:setImage(RegisterImage(@"uie_ui_menu_callingcards_heavymetal_char1"))
 	self:addElement(cop2)
 	self.cop2 = cop2
 	if PostLoadFunc then

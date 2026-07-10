@@ -15,14 +15,14 @@ CoD.OneInTheChamberLives.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	LifeList:setWidgetType(CoD.OIC_LifePip)
 	LifeList:setHorizontalCount(3)
 	LifeList:setSpacing(-14)
-	LifeList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	LifeList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	LifeList:setDataSource("OneInTheChamberLifeList")
 	self:addElement(LifeList)
 	self.LifeList = LifeList
 	local LifeSurplusText = LUI.UIText.new(0, 0, 10, 140, 0, 0, 6.5, 43.5)
 	LifeSurplusText:setTTF("default")
-	LifeSurplusText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	LifeSurplusText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	LifeSurplusText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	LifeSurplusText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	LifeSurplusText:subscribeToGlobalModel(f1_arg1, "HUDItems", "playerLivesCount", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then

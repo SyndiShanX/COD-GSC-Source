@@ -22,11 +22,11 @@ CoD.MultiItemPickupWaypoint_NavigationPrompt.new = function(f1_arg0, f1_arg1, f1
 	local Backer2 = LUI.UIImage.new(0, 0, 0, 64, 0, 0, 0, 64)
 	Backer2:setRGB(0, 0, 0)
 	Backer2:setAlpha(0.9)
-	Backer2:setImage(RegisterImage(0x30BBCD6E666199B))
+	Backer2:setImage(RegisterImage(@"uie_ui_hud_wz_hud_core_qe_dpad_backer"))
 	self:addElement(Backer2)
 	self.Backer2 = Backer2
 	local Backer = LUI.UIImage.new(0, 0, 0, 64, 0, 0, 0, 64)
-	Backer:setImage(RegisterImage(0xBE388304168E99F))
+	Backer:setImage(RegisterImage(@"uie_ui_hud_wz_hud_core_qe_dpad_down"))
 	self:addElement(Backer)
 	self.Backer = Backer
 	local LeftImage = CoD.WarzoneDpadButton.new(f1_arg0, f1_arg1, 0.5, 0.5, -32, 32, 0.5, 0.5, -32, 32)

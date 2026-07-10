@@ -18,7 +18,7 @@ LUI.createMenu.MPHintText = function(f1_arg0, f1_arg1)
 	self.MPHintTextContainer:linkToElementModel(self, "hint_text_line", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			MPHintTextContainer.MPHintText:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			MPHintTextContainer.MPHintText:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	self:processEvent({

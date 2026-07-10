@@ -12,11 +12,11 @@ CoD.Armory_AttachmentSlotContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local ButtonBGMirrorSelected = LUI.UIImage.new(0, 0, 0, 148, 0, 0, 0, 112)
-	ButtonBGMirrorSelected:setImage(RegisterImage(0x697FCBBE26E245A))
+	ButtonBGMirrorSelected:setImage(RegisterImage(@"uie_ui_menu_cac_attachment_button_bg_mirror_selected"))
 	self:addElement(ButtonBGMirrorSelected)
 	self.ButtonBGMirrorSelected = ButtonBGMirrorSelected
 	local ButtonBGMirror = LUI.UIImage.new(0, 0, 0, 148, 0, 0, 0, 112)
-	ButtonBGMirror:setImage(RegisterImage(0x79FAE70E7559B66))
+	ButtonBGMirror:setImage(RegisterImage(@"uie_ui_menu_cac_attachment_button_bg_mirror"))
 	self:addElement(ButtonBGMirror)
 	self.ButtonBGMirror = ButtonBGMirror
 	local AttachmentSlot = CoD.ZMAttachmentSlotSmall.new(f1_arg0, f1_arg1, 0, 0, 0, 148, 0, 0, 0, 112)
@@ -75,7 +75,7 @@ CoD.Armory_AttachmentSlotContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	end)
 	local f1_local4 = AttachmentSlot
 	local MutuallyExclusiveIcon = AttachmentSlot.subscribeToModel
-	local f1_local6 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local6 = Engine[@"getmodelforcontroller"](f1_arg1)
 	MutuallyExclusiveIcon(f1_local4, f1_local6.armoryAttachmentUpdated, function(f10_arg0)
 		f1_arg0:updateElementState(AttachmentSlot, {
 			name = "model_validation",
@@ -97,7 +97,7 @@ CoD.Armory_AttachmentSlotContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	AttachmentSlot:linkToElementModel(self, "displayName", true, function(model)
 		local f13_local0 = model:get()
 		if f13_local0 ~= nil then
-			AttachmentSlot.AttachmentName:setText(Engine[0xF9F1239CFD921FE](f13_local0))
+			AttachmentSlot.AttachmentName:setText(Engine[@"hash_4F9F1239CFD921FE"](f13_local0))
 		end
 	end)
 	self:addElement(AttachmentSlot)
@@ -113,7 +113,7 @@ CoD.Armory_AttachmentSlotContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	})
 	f1_local6 = MutuallyExclusiveIcon
 	f1_local4 = MutuallyExclusiveIcon.subscribeToModel
-	local f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local4(f1_local6, f1_local7.armoryAttachmentUpdated, function(f15_arg0)
 		f1_arg0:updateElementState(MutuallyExclusiveIcon, {
 			name = "model_validation",
@@ -124,7 +124,7 @@ CoD.Armory_AttachmentSlotContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 		})
 	end, false)
 	MutuallyExclusiveIcon:setRGB(1, 0.41, 0)
-	MutuallyExclusiveIcon.image:setImage(RegisterImage(0x11D4E13C821CCE3))
+	MutuallyExclusiveIcon.image:setImage(RegisterImage(@"hash_111D4E13C821CCE3"))
 	MutuallyExclusiveIcon:linkToElementModel(self, nil, false, function(model)
 		MutuallyExclusiveIcon:setModel(model, f1_arg1)
 	end)
@@ -149,7 +149,7 @@ CoD.Armory_AttachmentSlotContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	end)
 	f1_local6 = self
 	f1_local4 = self.subscribeToModel
-	f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local4(f1_local6, f1_local7.armoryAttachmentUpdated, function(f19_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -227,7 +227,7 @@ CoD.Armory_AttachmentSlotContainer.__clipsPerState = {
 			f26_arg0.ButtonBGMirrorSelected:setAlpha(0)
 			f26_arg0.clipFinished(f26_arg0.ButtonBGMirrorSelected)
 			local f26_local0 = function(f27_arg0)
-				f26_arg0.ButtonBGMirror:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f26_arg0.ButtonBGMirror:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f26_arg0.ButtonBGMirror:setScale(0.95, 0.95)
 				f26_arg0.ButtonBGMirror:registerEventHandler("interrupted_keyframe", f26_arg0.clipInterrupted)
 				f26_arg0.ButtonBGMirror:registerEventHandler("transition_complete_keyframe", f26_arg0.clipFinished)
@@ -237,7 +237,7 @@ CoD.Armory_AttachmentSlotContainer.__clipsPerState = {
 			f26_arg0.ButtonBGMirror:setScale(1, 1)
 			f26_local0(f26_arg0.ButtonBGMirror)
 			local f26_local1 = function(f28_arg0)
-				f26_arg0.AttachmentSlot:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f26_arg0.AttachmentSlot:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f26_arg0.AttachmentSlot:setZoom(20)
 				f26_arg0.AttachmentSlot:setScale(1.05, 1.05)
 				f26_arg0.AttachmentSlot:registerEventHandler("interrupted_keyframe", f26_arg0.clipInterrupted)
@@ -255,7 +255,7 @@ CoD.Armory_AttachmentSlotContainer.__clipsPerState = {
 			f29_arg0.ButtonBGMirrorSelected:setAlpha(0)
 			f29_arg0.clipFinished(f29_arg0.ButtonBGMirrorSelected)
 			local f29_local0 = function(f30_arg0)
-				f29_arg0.ButtonBGMirror:beginAnimation(200, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f29_arg0.ButtonBGMirror:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_out"])
 				f29_arg0.ButtonBGMirror:setScale(1, 1)
 				f29_arg0.ButtonBGMirror:registerEventHandler("interrupted_keyframe", f29_arg0.clipInterrupted)
 				f29_arg0.ButtonBGMirror:registerEventHandler("transition_complete_keyframe", f29_arg0.clipFinished)
@@ -265,7 +265,7 @@ CoD.Armory_AttachmentSlotContainer.__clipsPerState = {
 			f29_arg0.ButtonBGMirror:setScale(0.95, 0.95)
 			f29_local0(f29_arg0.ButtonBGMirror)
 			local f29_local1 = function(f31_arg0)
-				f29_arg0.AttachmentSlot:beginAnimation(200, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f29_arg0.AttachmentSlot:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_out"])
 				f29_arg0.AttachmentSlot:setZoom(0)
 				f29_arg0.AttachmentSlot:setScale(1, 1)
 				f29_arg0.AttachmentSlot:registerEventHandler("interrupted_keyframe", f29_arg0.clipInterrupted)
@@ -304,7 +304,7 @@ CoD.Armory_AttachmentSlotContainer.__clipsPerState = {
 			f34_arg0:__resetProperties()
 			f34_arg0:setupElementClipCounter(3)
 			local f34_local0 = function(f35_arg0)
-				f34_arg0.ButtonBGMirrorSelected:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f34_arg0.ButtonBGMirrorSelected:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f34_arg0.ButtonBGMirrorSelected:setScale(0.95, 0.95)
 				f34_arg0.ButtonBGMirrorSelected:registerEventHandler("interrupted_keyframe", f34_arg0.clipInterrupted)
 				f34_arg0.ButtonBGMirrorSelected:registerEventHandler("transition_complete_keyframe", f34_arg0.clipFinished)
@@ -317,7 +317,7 @@ CoD.Armory_AttachmentSlotContainer.__clipsPerState = {
 			f34_arg0.ButtonBGMirror:setAlpha(0)
 			f34_arg0.clipFinished(f34_arg0.ButtonBGMirror)
 			local f34_local1 = function(f36_arg0)
-				f34_arg0.AttachmentSlot:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f34_arg0.AttachmentSlot:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f34_arg0.AttachmentSlot:setZoom(20)
 				f34_arg0.AttachmentSlot:setScale(1.05, 1.05)
 				f34_arg0.AttachmentSlot:registerEventHandler("interrupted_keyframe", f34_arg0.clipInterrupted)
@@ -332,7 +332,7 @@ CoD.Armory_AttachmentSlotContainer.__clipsPerState = {
 			f37_arg0:__resetProperties()
 			f37_arg0:setupElementClipCounter(3)
 			local f37_local0 = function(f38_arg0)
-				f37_arg0.ButtonBGMirrorSelected:beginAnimation(200, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f37_arg0.ButtonBGMirrorSelected:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_out"])
 				f37_arg0.ButtonBGMirrorSelected:setScale(1, 1)
 				f37_arg0.ButtonBGMirrorSelected:registerEventHandler("interrupted_keyframe", f37_arg0.clipInterrupted)
 				f37_arg0.ButtonBGMirrorSelected:registerEventHandler("transition_complete_keyframe", f37_arg0.clipFinished)
@@ -345,7 +345,7 @@ CoD.Armory_AttachmentSlotContainer.__clipsPerState = {
 			f37_arg0.ButtonBGMirror:setAlpha(0)
 			f37_arg0.clipFinished(f37_arg0.ButtonBGMirror)
 			local f37_local1 = function(f39_arg0)
-				f37_arg0.AttachmentSlot:beginAnimation(200, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f37_arg0.AttachmentSlot:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_out"])
 				f37_arg0.AttachmentSlot:setZoom(0)
 				f37_arg0.AttachmentSlot:setScale(1, 1)
 				f37_arg0.AttachmentSlot:registerEventHandler("interrupted_keyframe", f37_arg0.clipInterrupted)

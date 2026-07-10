@@ -28,7 +28,7 @@ CoD.ChooseClassWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	self:addElement(XCamMouseControl)
 	self.XCamMouseControl = XCamMouseControl
 	local perk1Header = CoD.CategoryHeader.new(f1_arg0, f1_arg1, 0.5, 0.5, 335, 460, 1, 1, -497, -481)
-	perk1Header.header:setText(LocalizeToUpperString(0xCC26359EAAED27A))
+	perk1Header.header:setText(LocalizeToUpperString(@"mpui/perk1"))
 	perk1Header:subscribeToGlobalModel(f1_arg1, "LoadoutBreadcrumbs", "talent1", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -38,7 +38,7 @@ CoD.ChooseClassWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	self:addElement(perk1Header)
 	self.perk1Header = perk1Header
 	local perk2Header = CoD.CategoryHeader.new(f1_arg0, f1_arg1, 0.5, 0.5, 455, 580, 1, 1, -497, -481)
-	perk2Header.header:setText(LocalizeToUpperString(0xCC26259EAAED0C7))
+	perk2Header.header:setText(LocalizeToUpperString(@"mpui/perk2"))
 	perk2Header:subscribeToGlobalModel(f1_arg1, "LoadoutBreadcrumbs", "talent2", function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -48,7 +48,7 @@ CoD.ChooseClassWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	self:addElement(perk2Header)
 	self.perk2Header = perk2Header
 	local perk3Header = CoD.CategoryHeader.new(f1_arg0, f1_arg1, 0.5, 0.5, 575, 700, 1, 1, -497, -481)
-	perk3Header.header:setText(LocalizeToUpperString(0xCC26159EAAECF14))
+	perk3Header.header:setText(LocalizeToUpperString(@"mpui/perk3"))
 	perk3Header:subscribeToGlobalModel(f1_arg1, "LoadoutBreadcrumbs", "talent3", function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
@@ -58,15 +58,15 @@ CoD.ChooseClassWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	self:addElement(perk3Header)
 	self.perk3Header = perk3Header
 	local SecondaryAttachmentHeader = CoD.CategoryHeader.new(f1_arg0, f1_arg1, 0.5, 0.5, -184, -59, 1, 1, -287, -271)
-	SecondaryAttachmentHeader.header:setText(Engine[0xF9F1239CFD921FE](0x56E6F15BA89EEED))
+	SecondaryAttachmentHeader.header:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_56E6F15BA89EEED"))
 	self:addElement(SecondaryAttachmentHeader)
 	self.SecondaryAttachmentHeader = SecondaryAttachmentHeader
 	local SecondaryOpticsHeader = CoD.CategoryHeader.new(f1_arg0, f1_arg1, 0.5, 0.5, -305, -180, 1, 1, -287, -271)
-	SecondaryOpticsHeader.header:setText(Engine[0xF9F1239CFD921FE](0xBB87386985BA15F))
+	SecondaryOpticsHeader.header:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_2BB87386985BA15F"))
 	self:addElement(SecondaryOpticsHeader)
 	self.SecondaryOpticsHeader = SecondaryOpticsHeader
 	local wildcardsHeader = CoD.CategoryHeader.new(f1_arg0, f1_arg1, 0.5, 0.5, 336.5, 528.5, 1, 1, -287, -271)
-	wildcardsHeader.header:setText(LocalizeToUpperString(0x8DEB3201AB34D8E))
+	wildcardsHeader.header:setText(LocalizeToUpperString(@"hash_38DEB3201AB34D8E"))
 	wildcardsHeader:subscribeToGlobalModel(f1_arg1, "LoadoutBreadcrumbs", "bonuscard1", function(model)
 		local f5_local0 = model:get()
 		if f5_local0 ~= nil then
@@ -76,7 +76,7 @@ CoD.ChooseClassWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	self:addElement(wildcardsHeader)
 	self.wildcardsHeader = wildcardsHeader
 	local EquipmentHeader = CoD.CategoryHeader.new(f1_arg0, f1_arg1, 0.5, 0.5, 83, 208, 1, 1, -287, -271)
-	EquipmentHeader.header:setText(Engine[0xF9F1239CFD921FE](0x562BD8EE9E11C5B))
+	EquipmentHeader.header:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_6562BD8EE9E11C5B"))
 	EquipmentHeader:subscribeToGlobalModel(f1_arg1, "LoadoutBreadcrumbs", "primarygrenade", function(model)
 		local f6_local0 = model:get()
 		if f6_local0 ~= nil then
@@ -86,15 +86,15 @@ CoD.ChooseClassWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	self:addElement(EquipmentHeader)
 	self.EquipmentHeader = EquipmentHeader
 	local PrimaryAttachmentHeader = CoD.CategoryHeader.new(f1_arg0, f1_arg1, 0.5, 0.5, -563, -438, 1, 1, -287, -271)
-	PrimaryAttachmentHeader.header:setText(Engine[0xF9F1239CFD921FE](0x56E6F15BA89EEED))
+	PrimaryAttachmentHeader.header:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_56E6F15BA89EEED"))
 	self:addElement(PrimaryAttachmentHeader)
 	self.PrimaryAttachmentHeader = PrimaryAttachmentHeader
 	local PrimaryOpticsHeader = CoD.CategoryHeader.new(f1_arg0, f1_arg1, 0.5, 0.5, -684, -559, 1, 1, -287, -271)
-	PrimaryOpticsHeader.header:setText(Engine[0xF9F1239CFD921FE](0xBB87386985BA15F))
+	PrimaryOpticsHeader.header:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_2BB87386985BA15F"))
 	self:addElement(PrimaryOpticsHeader)
 	self.PrimaryOpticsHeader = PrimaryOpticsHeader
 	local GearHeader = CoD.CategoryHeader.new(f1_arg0, f1_arg1, 0.5, 0.5, 83, 208, 1, 1, -497, -481)
-	GearHeader.header:setText(LocalizeToUpperString(0x305E03714EE77FC))
+	GearHeader.header:setText(LocalizeToUpperString(@"hash_305E03714EE77FC"))
 	GearHeader:subscribeToGlobalModel(f1_arg1, "LoadoutBreadcrumbs", "tacticalgear", function(model)
 		local f7_local0 = model:get()
 		if f7_local0 ~= nil then
@@ -108,20 +108,20 @@ CoD.ChooseClassWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 		tacticalgear:setModel(model, f1_arg1)
 	end)
 	tacticalgear:linkToElementModel(tacticalgear, "itemIndex", true, function(model, f9_arg1)
-		CoD.Menu.UpdateButtonShownState(f9_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f9_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
+		CoD.Menu.UpdateButtonShownState(f9_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f9_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
 	end)
 	tacticalgear:appendEventHandler("input_source_changed", function(f10_arg0, f10_arg1)
 		f10_arg1.menu = f10_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f10_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f10_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
+		CoD.Menu.UpdateButtonShownState(f10_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f10_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
 	end)
 	local primary = tacticalgear
 	local perkTalents = tacticalgear.subscribeToModel
-	local primaryAttachments = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local primaryAttachments = Engine[@"getmodelforcontroller"](f1_arg1)
 	perkTalents(primary, primaryAttachments.LastInput, function(f11_arg0, f11_arg1)
-		CoD.Menu.UpdateButtonShownState(f11_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f11_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
+		CoD.Menu.UpdateButtonShownState(f11_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f11_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
 	end, false)
 	tacticalgear:registerEventHandler("gain_focus", function(element, event)
 		local f12_local0 = nil
@@ -130,19 +130,19 @@ CoD.ChooseClassWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 		elseif element.super.gainFocus then
 			f12_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
 		return f12_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(tacticalgear, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(tacticalgear, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		CoD.CACUtility.OpenCACOverlay(self, menu, controller, "EquipmentSelect", self, "tacticalgear")
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 		return true
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(tacticalgear, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(tacticalgear, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], nil, function(element, menu, controller, model)
 		if not CoD.ModelUtility.IsSelfModelValueEqualTo(element, controller, "itemIndex", CoDShared.EmptyItemIndex) and IsGamepad(controller) then
 			CoD.CACUtility.UnequipItem(controller, menu, element)
 			return true
@@ -150,13 +150,13 @@ CoD.ChooseClassWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 		end
 	end, function(element, menu, controller)
 		if not CoD.ModelUtility.IsSelfModelValueEqualTo(element, controller, "itemIndex", CoDShared.EmptyItemIndex) and IsGamepad(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x679ACA6FFC6C8F3, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"menu/remove", nil, nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(tacticalgear, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], "ui_remove", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(tacticalgear, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], "ui_remove", function(element, menu, controller, model)
 		if IsMouseOrKeyboard(controller) and not CoD.ModelUtility.IsSelfModelValueEqualTo(element, controller, "itemIndex", CoDShared.EmptyItemIndex) then
 			CoD.CACUtility.UnequipItem(controller, menu, element)
 			return true
@@ -164,13 +164,13 @@ CoD.ChooseClassWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 		end
 	end, function(element, menu, controller)
 		if IsMouseOrKeyboard(controller) and not CoD.ModelUtility.IsSelfModelValueEqualTo(element, controller, "itemIndex", CoDShared.EmptyItemIndex) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], 0x679ACA6FFC6C8F3, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "ui_remove")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], @"menu/remove", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "ui_remove")
 			return true
 		else
 			return false
 		end
 	end, false)
-	tacticalgear:AddContextualMenuAction(f1_arg0, f1_arg1, 0x679ACA6FFC6C8F3, function(f19_arg0, f19_arg1, f19_arg2, f19_arg3)
+	tacticalgear:AddContextualMenuAction(f1_arg0, f1_arg1, @"menu/remove", function(f19_arg0, f19_arg1, f19_arg2, f19_arg3)
 		if not CoD.ModelUtility.IsSelfModelValueEqualTo(f19_arg0, f19_arg2, "itemIndex", CoDShared.EmptyItemIndex) then
 			return function(f20_arg0, f20_arg1, f20_arg2, f20_arg3)
 				CoD.CACUtility.UnequipItem(f20_arg2, f20_arg1, f20_arg0)
@@ -191,7 +191,7 @@ CoD.ChooseClassWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	})
 	primaryAttachments = perkTalents
 	primary = perkTalents.subscribeToModel
-	local wildcards = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local wildcards = Engine[@"getmodelforcontroller"](f1_arg1)
 	primary(primaryAttachments, wildcards.BonuscardModifiedSlotEnum, function(f22_arg0)
 		f1_arg0:updateElementState(perkTalents, {
 			name = "model_validation",
@@ -216,7 +216,7 @@ CoD.ChooseClassWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	perkTalents:setHorizontalCount(3)
 	perkTalents:setVerticalCount(2)
 	perkTalents:setSpacing(10)
-	perkTalents:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	perkTalents:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	perkTalents:linkToElementModel(self, "talents", true, function(model)
 		local f24_local0 = model:get()
 		if f24_local0 ~= nil then
@@ -225,9 +225,9 @@ CoD.ChooseClassWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	end)
 	primaryAttachments = perkTalents
 	primary = perkTalents.subscribeToModel
-	wildcards = Engine[0x4DF5CFBC1771947](f1_arg1)
+	wildcards = Engine[@"getmodelforcontroller"](f1_arg1)
 	primary(primaryAttachments, wildcards["CustomClassList.equippedItemsChanged"], function(f25_arg0, f25_arg1)
-		CoD.Menu.UpdateButtonShownState(f25_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f25_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	perkTalents:linkToElementModel(perkTalents, "loadoutListItem", true, function(model, f26_arg1)
 		if perkTalents["__buttonPrompt_loadoutListItem->itemIndex"] then
@@ -241,22 +241,22 @@ CoD.ChooseClassWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 		end
 		if model then
 			perkTalents["__buttonPrompt_loadoutListItem->itemIndex"] = perkTalents:subscribeToModel(model, function(model)
-				CoD.Menu.UpdateButtonShownState(f26_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-				CoD.Menu.UpdateButtonShownState(f26_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
+				CoD.Menu.UpdateButtonShownState(f26_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+				CoD.Menu.UpdateButtonShownState(f26_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
 			end)
 		end
 	end)
 	perkTalents:appendEventHandler("input_source_changed", function(f28_arg0, f28_arg1)
 		f28_arg1.menu = f28_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f28_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f28_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
+		CoD.Menu.UpdateButtonShownState(f28_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f28_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
 	end)
 	primaryAttachments = perkTalents
 	primary = perkTalents.subscribeToModel
-	wildcards = Engine[0x4DF5CFBC1771947](f1_arg1)
+	wildcards = Engine[@"getmodelforcontroller"](f1_arg1)
 	primary(primaryAttachments, wildcards.LastInput, function(f29_arg0, f29_arg1)
-		CoD.Menu.UpdateButtonShownState(f29_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f29_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
+		CoD.Menu.UpdateButtonShownState(f29_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f29_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
 	end, false)
 	perkTalents:registerEventHandler("gain_focus", function(element, event)
 		local f30_local0 = nil
@@ -265,12 +265,12 @@ CoD.ChooseClassWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 		elseif element.super.gainFocus then
 			f30_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
 		return f30_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(perkTalents, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(perkTalents, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if not CoD.BonuscardUtility.IsRequiredGreedWildcardEquipped(menu, element) then
 			CoD.CACUtility.OpenWildcardPopup(self, element, menu, controller, "WildcardSelect", self, "bonuscard", true)
 			return true
@@ -279,10 +279,10 @@ CoD.ChooseClassWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 			return true
 		end
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 		return true
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(perkTalents, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(perkTalents, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], nil, function(element, menu, controller, model)
 		if not CoD.ModelUtility.IsSelfModelPathValueEqualTo(element, controller, "loadoutListItem->itemIndex", CoDShared.EmptyItemIndex) and IsGamepad(controller) then
 			CoD.CACUtility.UnequipLoadoutListItem(element, menu, controller)
 			CoD.CACUtility.UpdateItemListSlotSetupContext(element, controller)
@@ -293,13 +293,13 @@ CoD.ChooseClassWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 		end
 	end, function(element, menu, controller)
 		if not CoD.ModelUtility.IsSelfModelPathValueEqualTo(element, controller, "loadoutListItem->itemIndex", CoDShared.EmptyItemIndex) and IsGamepad(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x679ACA6FFC6C8F3, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"menu/remove", nil, nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(perkTalents, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], "ui_remove", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(perkTalents, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], "ui_remove", function(element, menu, controller, model)
 		if IsMouseOrKeyboard(controller) and not CoD.ModelUtility.IsSelfModelPathValueEqualTo(element, controller, "loadoutListItem->itemIndex", CoDShared.EmptyItemIndex) then
 			CoD.CACUtility.UnequipLoadoutListItem(element, menu, controller)
 			CoD.CACUtility.UpdateItemListSlotSetupContext(element, controller)
@@ -309,13 +309,13 @@ CoD.ChooseClassWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 		end
 	end, function(element, menu, controller)
 		if IsMouseOrKeyboard(controller) and not CoD.ModelUtility.IsSelfModelPathValueEqualTo(element, controller, "loadoutListItem->itemIndex", CoDShared.EmptyItemIndex) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], 0x679ACA6FFC6C8F3, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "ui_remove")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], @"menu/remove", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "ui_remove")
 			return true
 		else
 			return false
 		end
 	end, false)
-	perkTalents:AddContextualMenuAction(f1_arg0, f1_arg1, 0x679ACA6FFC6C8F3, function(f37_arg0, f37_arg1, f37_arg2, f37_arg3)
+	perkTalents:AddContextualMenuAction(f1_arg0, f1_arg1, @"menu/remove", function(f37_arg0, f37_arg1, f37_arg2, f37_arg3)
 		if not CoD.ModelUtility.IsSelfModelPathValueEqualTo(f37_arg0, f37_arg2, "loadoutListItem->itemIndex", CoDShared.EmptyItemIndex) then
 			return function(f38_arg0, f38_arg1, f38_arg2, f38_arg3)
 				CoD.CACUtility.UnequipLoadoutListItem(f38_arg0, f38_arg1, f38_arg2)
@@ -333,41 +333,41 @@ CoD.ChooseClassWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	end)
 	primary:appendEventHandler("input_source_changed", function(f40_arg0, f40_arg1)
 		f40_arg1.menu = f40_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f40_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f40_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
-		CoD.Menu.UpdateButtonShownState(f40_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
-		CoD.Menu.UpdateButtonShownState(f40_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x93AB4C84F113EE1])
-		CoD.Menu.UpdateButtonShownState(f40_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x4D2505E19049444])
+		CoD.Menu.UpdateButtonShownState(f40_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f40_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+		CoD.Menu.UpdateButtonShownState(f40_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"])
+		CoD.Menu.UpdateButtonShownState(f40_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_back"])
+		CoD.Menu.UpdateButtonShownState(f40_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"hash_64D2505E19049444"])
 	end)
 	wildcards = primary
 	primaryAttachments = primary.subscribeToModel
-	local secondary = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local secondary = Engine[@"getmodelforcontroller"](f1_arg1)
 	primaryAttachments(wildcards, secondary.LastInput, function(f41_arg0, f41_arg1)
-		CoD.Menu.UpdateButtonShownState(f41_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f41_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
-		CoD.Menu.UpdateButtonShownState(f41_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
-		CoD.Menu.UpdateButtonShownState(f41_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x93AB4C84F113EE1])
-		CoD.Menu.UpdateButtonShownState(f41_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x4D2505E19049444])
+		CoD.Menu.UpdateButtonShownState(f41_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f41_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+		CoD.Menu.UpdateButtonShownState(f41_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"])
+		CoD.Menu.UpdateButtonShownState(f41_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_back"])
+		CoD.Menu.UpdateButtonShownState(f41_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"hash_64D2505E19049444"])
 	end, false)
 	primary:linkToElementModel(primary, "itemIndex", true, function(model, f42_arg1)
-		CoD.Menu.UpdateButtonShownState(f42_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f42_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
-		CoD.Menu.UpdateButtonShownState(f42_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
-		CoD.Menu.UpdateButtonShownState(f42_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x4D2505E19049444])
+		CoD.Menu.UpdateButtonShownState(f42_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f42_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+		CoD.Menu.UpdateButtonShownState(f42_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"])
+		CoD.Menu.UpdateButtonShownState(f42_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"hash_64D2505E19049444"])
 	end)
 	wildcards = primary
 	primaryAttachments = primary.subscribeToModel
-	secondary = Engine[0x8DF2E5447F384B9]()
+	secondary = Engine[@"getglobalmodel"]()
 	primaryAttachments(wildcards, secondary["lobbyRoot.lobbyNetworkMode"], function(f43_arg0, f43_arg1)
-		CoD.Menu.UpdateButtonShownState(f43_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x93AB4C84F113EE1])
-		CoD.Menu.UpdateButtonShownState(f43_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x4D2505E19049444])
+		CoD.Menu.UpdateButtonShownState(f43_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_back"])
+		CoD.Menu.UpdateButtonShownState(f43_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"hash_64D2505E19049444"])
 	end, false)
 	wildcards = primary
 	primaryAttachments = primary.subscribeToModel
-	secondary = Engine[0x8DF2E5447F384B9]()
+	secondary = Engine[@"getglobalmodel"]()
 	primaryAttachments(wildcards, secondary["lobbyRoot.lobbyNav"], function(f44_arg0, f44_arg1)
-		CoD.Menu.UpdateButtonShownState(f44_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x93AB4C84F113EE1])
-		CoD.Menu.UpdateButtonShownState(f44_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x4D2505E19049444])
+		CoD.Menu.UpdateButtonShownState(f44_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_back"])
+		CoD.Menu.UpdateButtonShownState(f44_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"hash_64D2505E19049444"])
 	end, false)
 	primary:registerEventHandler("gain_focus", function(element, event)
 		local f45_local0 = nil
@@ -376,15 +376,15 @@ CoD.ChooseClassWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 		elseif element.super.gainFocus then
 			f45_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x93AB4C84F113EE1])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x4D2505E19049444])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_back"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"hash_64D2505E19049444"])
 		return f45_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(primary, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(primary, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if not IsElementPropertyValue(element, "__hasFocusOnVariantWidget", true) then
 			CoD.CACUtility.OpenCACOverlay(self, menu, controller, "WeaponSelectFlyout", self, "primary")
 			return true
@@ -392,13 +392,13 @@ CoD.ChooseClassWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 		end
 	end, function(element, menu, controller)
 		if not IsElementPropertyValue(element, "__hasFocusOnVariantWidget", true) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(primary, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], "ui_remove", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(primary, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], "ui_remove", function(element, menu, controller, model)
 		if IsGamepad(controller) and not CoD.ModelUtility.IsSelfModelValueEqualTo(element, controller, "itemIndex", CoDShared.EmptyItemIndex) and not IsElementPropertyValue(element, "__hasFocusOnVariantWidget", true) then
 			CoD.CACUtility.UnequipItem(controller, menu, element)
 			return true
@@ -409,16 +409,16 @@ CoD.ChooseClassWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 		end
 	end, function(element, menu, controller)
 		if IsGamepad(controller) and not CoD.ModelUtility.IsSelfModelValueEqualTo(element, controller, "itemIndex", CoDShared.EmptyItemIndex) and not IsElementPropertyValue(element, "__hasFocusOnVariantWidget", true) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x679ACA6FFC6C8F3, nil, "ui_remove")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"menu/remove", nil, "ui_remove")
 			return true
 		elseif IsMouseOrKeyboard(controller) and not CoD.ModelUtility.IsSelfModelValueEqualTo(element, controller, "itemIndex", CoDShared.EmptyItemIndex) and not IsElementPropertyValue(element, "__hasFocusOnVariantWidget", true) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x679ACA6FFC6C8F3, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "ui_remove")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"menu/remove", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "ui_remove")
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(primary, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(primary, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], nil, function(element, menu, controller, model)
 		if IsGamepad(controller) and not CoD.ModelUtility.IsSelfModelValueEqualTo(element, controller, "itemIndex", CoDShared.EmptyItemIndex) and not IsElementPropertyValue(element, "__hasFocusOnVariantWidget", true) then
 			CoD.CraftUtility.SetupPaintjobPersonalization(self, element, controller)
 			CoD.CACUtility.OpenWeaponPersonalizationOverlay(self, menu, controller, self, element, "primary")
@@ -428,13 +428,13 @@ CoD.ChooseClassWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 		end
 	end, function(element, menu, controller)
 		if IsGamepad(controller) and not CoD.ModelUtility.IsSelfModelValueEqualTo(element, controller, "itemIndex", CoDShared.EmptyItemIndex) and not IsElementPropertyValue(element, "__hasFocusOnVariantWidget", true) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], 0x94122F68876E5D9, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], @"hash_194122F68876E5D9", nil, nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(primary, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB], "ui_contextual_1", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(primary, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"], "ui_contextual_1", function(element, menu, controller, model)
 		if IsMouseOrKeyboard(controller) and not CoD.ModelUtility.IsSelfModelValueEqualTo(element, controller, "itemIndex", CoDShared.EmptyItemIndex) and not IsElementPropertyValue(element, "__hasFocusOnVariantWidget", true) then
 			CoD.CraftUtility.SetupPaintjobPersonalization(self, element, controller)
 			CoD.CACUtility.OpenWeaponPersonalizationOverlay(self, menu, controller, self, element, "primary")
@@ -444,13 +444,13 @@ CoD.ChooseClassWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 		end
 	end, function(element, menu, controller)
 		if IsMouseOrKeyboard(controller) and not CoD.ModelUtility.IsSelfModelValueEqualTo(element, controller, "itemIndex", CoDShared.EmptyItemIndex) and not IsElementPropertyValue(element, "__hasFocusOnVariantWidget", true) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xA86619565BE54DB], 0x94122F68876E5D9, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "ui_contextual_1")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_pckey_2"], @"hash_194122F68876E5D9", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "ui_contextual_1")
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(primary, f1_arg1, Enum[0x3DD78803F918E9D][0x93AB4C84F113EE1], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(primary, f1_arg1, Enum[@"luibutton"][@"lui_key_back"], nil, function(element, menu, controller, model)
 		if IsGamepad(controller) and not IsLocal() and not IsCustomLobby() and not IsElementPropertyValue(element, "__hasFocusOnVariantWidget", true) then
 			CoD.CACUtility.SetShowcaseWeapon(menu, controller, element)
 			PlaySoundAlias("cac_overload_select")
@@ -459,13 +459,13 @@ CoD.ChooseClassWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 		end
 	end, function(element, menu, controller)
 		if IsGamepad(controller) and not IsLocal() and not IsCustomLobby() and not IsElementPropertyValue(element, "__hasFocusOnVariantWidget", true) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x93AB4C84F113EE1], 0xE629850E7968A6E, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_back"], @"hash_4E629850E7968A6E", nil, nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(primary, f1_arg1, Enum[0x3DD78803F918E9D][0x4D2505E19049444], "ui_contextual_2", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(primary, f1_arg1, Enum[@"luibutton"][@"hash_64D2505E19049444"], "ui_contextual_2", function(element, menu, controller, model)
 		if IsMouseOrKeyboard(controller) and not IsLocal() and not IsCustomLobby() and not CoD.ModelUtility.IsSelfModelValueEqualTo(element, controller, "itemIndex", CoDShared.EmptyItemIndex) and not IsElementPropertyValue(element, "__hasFocusOnVariantWidget", true) then
 			CoD.CACUtility.SetShowcaseWeapon(menu, controller, element)
 			PlaySoundAlias("cac_overload_select")
@@ -474,13 +474,13 @@ CoD.ChooseClassWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 		end
 	end, function(element, menu, controller)
 		if IsMouseOrKeyboard(controller) and not IsLocal() and not IsCustomLobby() and not CoD.ModelUtility.IsSelfModelValueEqualTo(element, controller, "itemIndex", CoDShared.EmptyItemIndex) and not IsElementPropertyValue(element, "__hasFocusOnVariantWidget", true) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x4D2505E19049444], 0x2BA0F750E758177, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "ui_contextual_2")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"hash_64D2505E19049444"], @"menu/gun_rack", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "ui_contextual_2")
 			return true
 		else
 			return false
 		end
 	end, false)
-	primary:AddContextualMenuAction(f1_arg0, f1_arg1, 0x679ACA6FFC6C8F3, function(f58_arg0, f58_arg1, f58_arg2, f58_arg3)
+	primary:AddContextualMenuAction(f1_arg0, f1_arg1, @"menu/remove", function(f58_arg0, f58_arg1, f58_arg2, f58_arg3)
 		if not CoD.ModelUtility.IsSelfModelValueEqualTo(f58_arg0, f58_arg2, "itemIndex", CoDShared.EmptyItemIndex) and not IsElementPropertyValue(f58_arg0, "__hasFocusOnVariantWidget", true) then
 			return function(f59_arg0, f59_arg1, f59_arg2, f59_arg3)
 				CoD.CACUtility.UnequipItem(f59_arg2, f59_arg1, f59_arg0)
@@ -488,7 +488,7 @@ CoD.ChooseClassWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 		else
 		end
 	end)
-	primary:AddContextualMenuAction(f1_arg0, f1_arg1, 0xAFF37175F950D17, function(f60_arg0, f60_arg1, f60_arg2, f60_arg3)
+	primary:AddContextualMenuAction(f1_arg0, f1_arg1, @"hash_4AFF37175F950D17", function(f60_arg0, f60_arg1, f60_arg2, f60_arg3)
 		if not CoD.ModelUtility.IsSelfModelValueEqualTo(f60_arg0, f60_arg2, "itemIndex", CoDShared.EmptyItemIndex) and not IsElementPropertyValue(f60_arg0, "__hasFocusOnVariantWidget", true) then
 			return function(f61_arg0, f61_arg1, f61_arg2, f61_arg3)
 				CoD.CraftUtility.SetupPaintjobPersonalization(self, f61_arg0, f61_arg2)
@@ -497,7 +497,7 @@ CoD.ChooseClassWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 		else
 		end
 	end)
-	primary:AddContextualMenuAction(f1_arg0, f1_arg1, 0xE092C2BE5DD4778, function(f62_arg0, f62_arg1, f62_arg2, f62_arg3)
+	primary:AddContextualMenuAction(f1_arg0, f1_arg1, @"hash_E092C2BE5DD4778", function(f62_arg0, f62_arg1, f62_arg2, f62_arg3)
 		if not IsLocal() and not IsCustomLobby() and not CoD.ModelUtility.IsSelfModelValueEqualTo(f62_arg0, f62_arg2, "itemIndex", CoDShared.EmptyItemIndex) and not IsElementPropertyValue(f62_arg0, "__hasFocusOnVariantWidget", true) then
 			return function(f63_arg0, f63_arg1, f63_arg2, f63_arg3)
 				CoD.CACUtility.SetShowcaseWeapon(f63_arg1, f63_arg2, f63_arg0)
@@ -519,7 +519,7 @@ CoD.ChooseClassWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	})
 	secondary = primaryAttachments
 	wildcards = primaryAttachments.subscribeToModel
-	local secondaryAttachments = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local secondaryAttachments = Engine[@"getmodelforcontroller"](f1_arg1)
 	wildcards(secondary, secondaryAttachments.BonuscardModifiedSlotEnum, function(f65_arg0)
 		f1_arg0:updateElementState(primaryAttachments, {
 			name = "model_validation",
@@ -544,7 +544,7 @@ CoD.ChooseClassWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	primaryAttachments:setHorizontalCount(3)
 	primaryAttachments:setVerticalCount(2)
 	primaryAttachments:setSpacing(10)
-	primaryAttachments:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	primaryAttachments:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	primaryAttachments:linkToElementModel(self, "primaryattachments", true, function(model)
 		local f67_local0 = model:get()
 		if f67_local0 ~= nil then
@@ -552,23 +552,23 @@ CoD.ChooseClassWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 		end
 	end)
 	primaryAttachments:linkToElementModel(primaryAttachments, "itemIndex", true, function(model, f68_arg1)
-		CoD.Menu.UpdateButtonShownState(f68_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(f68_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
-		CoD.Menu.UpdateButtonShownState(f68_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
+		CoD.Menu.UpdateButtonShownState(f68_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(f68_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+		CoD.Menu.UpdateButtonShownState(f68_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"])
 	end)
 	primaryAttachments:appendEventHandler("input_source_changed", function(f69_arg0, f69_arg1)
 		f69_arg1.menu = f69_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f69_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f69_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
-		CoD.Menu.UpdateButtonShownState(f69_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
+		CoD.Menu.UpdateButtonShownState(f69_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f69_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+		CoD.Menu.UpdateButtonShownState(f69_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"])
 	end)
 	secondary = primaryAttachments
 	wildcards = primaryAttachments.subscribeToModel
-	secondaryAttachments = Engine[0x4DF5CFBC1771947](f1_arg1)
+	secondaryAttachments = Engine[@"getmodelforcontroller"](f1_arg1)
 	wildcards(secondary, secondaryAttachments.LastInput, function(f70_arg0, f70_arg1)
-		CoD.Menu.UpdateButtonShownState(f70_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f70_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
-		CoD.Menu.UpdateButtonShownState(f70_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
+		CoD.Menu.UpdateButtonShownState(f70_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f70_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+		CoD.Menu.UpdateButtonShownState(f70_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"])
 	end, false)
 	primaryAttachments:linkToElementModel(primaryAttachments, "loadoutListItem", true, function(model, f71_arg1)
 		if primaryAttachments["__buttonPrompt_loadoutListItem->itemIndex"] then
@@ -582,13 +582,13 @@ CoD.ChooseClassWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 		end
 		if model then
 			primaryAttachments["__buttonPrompt_loadoutListItem->itemIndex"] = primaryAttachments:subscribeToModel(model, function(model)
-				CoD.Menu.UpdateButtonShownState(f71_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+				CoD.Menu.UpdateButtonShownState(f71_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 			end)
 		end
 	end)
 	primaryAttachments:linkToElementModel(primaryAttachments, "attachmentSlotIndex", true, function(model, f73_arg1)
-		CoD.Menu.UpdateButtonShownState(f73_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
-		CoD.Menu.UpdateButtonShownState(f73_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
+		CoD.Menu.UpdateButtonShownState(f73_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+		CoD.Menu.UpdateButtonShownState(f73_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"])
 	end)
 	primaryAttachments:registerEventHandler("gain_focus", function(element, event)
 		local f74_local0 = nil
@@ -597,13 +597,13 @@ CoD.ChooseClassWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 		elseif element.super.gainFocus then
 			f74_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"])
 		return f74_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(primaryAttachments, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(primaryAttachments, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if IsListElementChildInState(element, "AttachmentSlot", "WildcardNeeded") then
 			CoD.CACUtility.OpenWildcardPopup(self, element, menu, controller, "WildcardSelect", self, "bonuscard", true)
 			return true
@@ -615,16 +615,16 @@ CoD.ChooseClassWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 		end
 	end, function(element, menu, controller)
 		if IsListElementChildInState(element, "AttachmentSlot", "WildcardNeeded") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		elseif not CoD.ModelUtility.IsSelfModelValueEqualTo(self.primary, controller, "itemIndex", CoDShared.EmptyItemIndex) and CoD.BaseUtility.HasChildElement(element, "AttachmentSlot") and not IsListElementChildInState(element, "AttachmentSlot", "WildcardNotAvailable") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(primaryAttachments, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], "ui_remove", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(primaryAttachments, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], "ui_remove", function(element, menu, controller, model)
 		if IsGamepad(controller) and not CoD.ModelUtility.IsSelfModelPathValueEqualTo(element, controller, "loadoutListItem->itemIndex", CoDShared.EmptyItemIndex) then
 			CoD.CACUtility.RemoveAttachmentFromClass(element, menu, controller, "primary")
 			CoD.CACUtility.UpdateItemListSlotSetupContext(element, controller)
@@ -641,16 +641,16 @@ CoD.ChooseClassWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 		end
 	end, function(element, menu, controller)
 		if IsGamepad(controller) and not CoD.ModelUtility.IsSelfModelPathValueEqualTo(element, controller, "loadoutListItem->itemIndex", CoDShared.EmptyItemIndex) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x679ACA6FFC6C8F3, nil, "ui_remove")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"menu/remove", nil, "ui_remove")
 			return true
 		elseif IsMouseOrKeyboard(controller) and not CoD.ModelUtility.IsSelfModelPathValueEqualTo(element, controller, "loadoutListItem->itemIndex", CoDShared.EmptyItemIndex) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x679ACA6FFC6C8F3, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "ui_remove")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"menu/remove", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "ui_remove")
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(primaryAttachments, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(primaryAttachments, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], nil, function(element, menu, controller, model)
 		if IsGamepad(controller) and not CoD.ModelUtility.IsSelfModelValueEqualTo(self.primary, controller, "itemIndex", CoDShared.EmptyItemIndex) and CoD.ModelUtility.IsSelfModelValueEqualTo(element, controller, "attachmentSlotIndex", CoD.CACUtility.OpticSlotIndex) and IsListElementChildInState(element, "AttachmentSlot", "DefaultStateHiddenName") and CoD.CACUtility.IsAttachmentWithCustomReticle(menu, element) then
 			CoD.CraftUtility.SetUpOpticPersonalization(element, controller)
 			CoD.CACUtility.OpenCACAttachmentOverlay(self, element, menu, controller, "ReticleSelect", self, "primary")
@@ -660,13 +660,13 @@ CoD.ChooseClassWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 		end
 	end, function(element, menu, controller)
 		if IsGamepad(controller) and not CoD.ModelUtility.IsSelfModelValueEqualTo(self.primary, controller, "itemIndex", CoDShared.EmptyItemIndex) and CoD.ModelUtility.IsSelfModelValueEqualTo(element, controller, "attachmentSlotIndex", CoD.CACUtility.OpticSlotIndex) and IsListElementChildInState(element, "AttachmentSlot", "DefaultStateHiddenName") and CoD.CACUtility.IsAttachmentWithCustomReticle(menu, element) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], 0x94122F68876E5D9, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], @"hash_194122F68876E5D9", nil, nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(primaryAttachments, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB], "ui_contextual_1", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(primaryAttachments, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"], "ui_contextual_1", function(element, menu, controller, model)
 		if IsMouseOrKeyboard(controller) and not CoD.ModelUtility.IsSelfModelValueEqualTo(self.primary, controller, "itemIndex", CoDShared.EmptyItemIndex) and CoD.ModelUtility.IsSelfModelValueEqualTo(element, controller, "attachmentSlotIndex", CoD.CACUtility.OpticSlotIndex) and IsListElementChildInState(element, "AttachmentSlot", "DefaultStateHiddenName") and CoD.CACUtility.IsAttachmentWithCustomReticle(menu, element) then
 			CoD.CraftUtility.SetUpOpticPersonalization(element, controller)
 			CoD.CACUtility.OpenCACAttachmentOverlay(self, element, menu, controller, "ReticleSelect", self, "primary")
@@ -676,13 +676,13 @@ CoD.ChooseClassWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 		end
 	end, function(element, menu, controller)
 		if IsMouseOrKeyboard(controller) and not CoD.ModelUtility.IsSelfModelValueEqualTo(self.primary, controller, "itemIndex", CoDShared.EmptyItemIndex) and CoD.ModelUtility.IsSelfModelValueEqualTo(element, controller, "attachmentSlotIndex", CoD.CACUtility.OpticSlotIndex) and IsListElementChildInState(element, "AttachmentSlot", "DefaultStateHiddenName") and CoD.CACUtility.IsAttachmentWithCustomReticle(menu, element) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xA86619565BE54DB], 0x94122F68876E5D9, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "ui_contextual_1")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_pckey_2"], @"hash_194122F68876E5D9", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "ui_contextual_1")
 			return true
 		else
 			return false
 		end
 	end, false)
-	primaryAttachments:AddContextualMenuAction(f1_arg0, f1_arg1, 0x679ACA6FFC6C8F3, function(f83_arg0, f83_arg1, f83_arg2, f83_arg3)
+	primaryAttachments:AddContextualMenuAction(f1_arg0, f1_arg1, @"menu/remove", function(f83_arg0, f83_arg1, f83_arg2, f83_arg3)
 		if not CoD.ModelUtility.IsSelfModelPathValueEqualTo(f83_arg0, f83_arg2, "loadoutListItem->itemIndex", CoDShared.EmptyItemIndex) then
 			return function(f84_arg0, f84_arg1, f84_arg2, f84_arg3)
 				CoD.CACUtility.RemoveAttachmentFromClass(f84_arg0, f84_arg1, f84_arg2, "primary")
@@ -692,7 +692,7 @@ CoD.ChooseClassWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 		else
 		end
 	end)
-	primaryAttachments:AddContextualMenuAction(f1_arg0, f1_arg1, 0xAFF37175F950D17, function(f85_arg0, f85_arg1, f85_arg2, f85_arg3)
+	primaryAttachments:AddContextualMenuAction(f1_arg0, f1_arg1, @"hash_4AFF37175F950D17", function(f85_arg0, f85_arg1, f85_arg2, f85_arg3)
 		if not CoD.ModelUtility.IsSelfModelValueEqualTo(self.primary, f85_arg2, "itemIndex", CoDShared.EmptyItemIndex) and CoD.ModelUtility.IsSelfModelValueEqualTo(f85_arg0, f85_arg2, "attachmentSlotIndex", CoD.CACUtility.OpticSlotIndex) and IsListElementChildInState(f85_arg0, "AttachmentSlot", "DefaultStateHiddenName") and CoD.CACUtility.IsAttachmentWithCustomReticle(f85_arg1, f85_arg0) then
 			return function(f86_arg0, f86_arg1, f86_arg2, f86_arg3)
 				CoD.CraftUtility.SetUpOpticPersonalization(f86_arg0, f86_arg2)
@@ -710,7 +710,7 @@ CoD.ChooseClassWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	wildcards:setWidgetType(CoD.WildcardLoadoutListItem)
 	wildcards:setHorizontalCount(3)
 	wildcards:setSpacing(10)
-	wildcards:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	wildcards:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	wildcards:linkToElementModel(self, "bonuscards", true, function(model)
 		local f87_local0 = model:get()
 		if f87_local0 ~= nil then
@@ -729,22 +729,22 @@ CoD.ChooseClassWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 		end
 		if model then
 			wildcards["__buttonPrompt_loadoutListItem->itemIndex"] = wildcards:subscribeToModel(model, function(model)
-				CoD.Menu.UpdateButtonShownState(f88_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-				CoD.Menu.UpdateButtonShownState(f88_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
+				CoD.Menu.UpdateButtonShownState(f88_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+				CoD.Menu.UpdateButtonShownState(f88_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
 			end)
 		end
 	end)
 	wildcards:appendEventHandler("input_source_changed", function(f90_arg0, f90_arg1)
 		f90_arg1.menu = f90_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f90_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f90_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
+		CoD.Menu.UpdateButtonShownState(f90_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f90_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
 	end)
 	secondaryAttachments = wildcards
 	secondary = wildcards.subscribeToModel
-	local TempSelectedImage = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local TempSelectedImage = Engine[@"getmodelforcontroller"](f1_arg1)
 	secondary(secondaryAttachments, TempSelectedImage.LastInput, function(f91_arg0, f91_arg1)
-		CoD.Menu.UpdateButtonShownState(f91_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f91_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
+		CoD.Menu.UpdateButtonShownState(f91_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f91_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
 	end, false)
 	wildcards:registerEventHandler("gain_focus", function(element, event)
 		local f92_local0 = nil
@@ -753,19 +753,19 @@ CoD.ChooseClassWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 		elseif element.super.gainFocus then
 			f92_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
 		return f92_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(wildcards, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(wildcards, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		CoD.CACUtility.OpenWildcardPopup(self, element, menu, controller, "WildcardSelect", self, "bonuscard", false)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 		return true
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(wildcards, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(wildcards, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], nil, function(element, menu, controller, model)
 		if not CoD.ModelUtility.IsSelfModelPathValueEqualTo(element, controller, "loadoutListItem->itemIndex", CoDShared.EmptyItemIndex) and IsGamepad(controller) then
 			CoD.CACUtility.UnequipLoadoutListItem(element, menu, controller)
 			CoD.CACUtility.EquippedItemsChanged(menu, controller)
@@ -777,13 +777,13 @@ CoD.ChooseClassWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 		end
 	end, function(element, menu, controller)
 		if not CoD.ModelUtility.IsSelfModelPathValueEqualTo(element, controller, "loadoutListItem->itemIndex", CoDShared.EmptyItemIndex) and IsGamepad(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x679ACA6FFC6C8F3, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"menu/remove", nil, nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(wildcards, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], "ui_remove", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(wildcards, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], "ui_remove", function(element, menu, controller, model)
 		if not CoD.ModelUtility.IsSelfModelPathValueEqualTo(element, controller, "loadoutListItem->itemIndex", CoDShared.EmptyItemIndex) and IsMouseOrKeyboard(controller) then
 			CoD.CACUtility.UnequipLoadoutListItem(element, menu, controller)
 			CoD.CACUtility.EquippedItemsChanged(menu, controller)
@@ -794,13 +794,13 @@ CoD.ChooseClassWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 		end
 	end, function(element, menu, controller)
 		if not CoD.ModelUtility.IsSelfModelPathValueEqualTo(element, controller, "loadoutListItem->itemIndex", CoDShared.EmptyItemIndex) and IsMouseOrKeyboard(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], 0x679ACA6FFC6C8F3, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "ui_remove")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], @"menu/remove", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "ui_remove")
 			return true
 		else
 			return false
 		end
 	end, false)
-	wildcards:AddContextualMenuAction(f1_arg0, f1_arg1, 0x679ACA6FFC6C8F3, function(f99_arg0, f99_arg1, f99_arg2, f99_arg3)
+	wildcards:AddContextualMenuAction(f1_arg0, f1_arg1, @"menu/remove", function(f99_arg0, f99_arg1, f99_arg2, f99_arg3)
 		if not CoD.ModelUtility.IsSelfModelPathValueEqualTo(f99_arg0, f99_arg2, "loadoutListItem->itemIndex", CoDShared.EmptyItemIndex) then
 			return function(f100_arg0, f100_arg1, f100_arg2, f100_arg3)
 				CoD.CACUtility.UnequipLoadoutListItem(f100_arg0, f100_arg1, f100_arg2)
@@ -814,47 +814,47 @@ CoD.ChooseClassWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	self:addElement(wildcards)
 	self.wildcards = wildcards
 	secondary = CoD.LoadoutClassItem.new(f1_arg0, f1_arg1, 0.5, 0.5, -304, 46, 1, 1, -475, -271)
-	secondary.PrimaryHeader.header:setText(Engine[0xF9F1239CFD921FE](0x73F876131FB1D9D))
+	secondary.PrimaryHeader.header:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_73F876131FB1D9D"))
 	secondary:linkToElementModel(self, "secondary", false, function(model)
 		secondary:setModel(model, f1_arg1)
 	end)
 	secondary:linkToElementModel(secondary, "itemIndex", true, function(model, f102_arg1)
-		CoD.Menu.UpdateButtonShownState(f102_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
-		CoD.Menu.UpdateButtonShownState(f102_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f102_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
-		CoD.Menu.UpdateButtonShownState(f102_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x4D2505E19049444])
+		CoD.Menu.UpdateButtonShownState(f102_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+		CoD.Menu.UpdateButtonShownState(f102_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f102_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"])
+		CoD.Menu.UpdateButtonShownState(f102_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"hash_64D2505E19049444"])
 	end)
 	secondary:appendEventHandler("input_source_changed", function(f103_arg0, f103_arg1)
 		f103_arg1.menu = f103_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f103_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
-		CoD.Menu.UpdateButtonShownState(f103_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f103_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x93AB4C84F113EE1])
-		CoD.Menu.UpdateButtonShownState(f103_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
-		CoD.Menu.UpdateButtonShownState(f103_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x4D2505E19049444])
+		CoD.Menu.UpdateButtonShownState(f103_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+		CoD.Menu.UpdateButtonShownState(f103_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f103_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_back"])
+		CoD.Menu.UpdateButtonShownState(f103_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"])
+		CoD.Menu.UpdateButtonShownState(f103_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"hash_64D2505E19049444"])
 	end)
 	TempSelectedImage = secondary
 	secondaryAttachments = secondary.subscribeToModel
-	local primarygrenade = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local primarygrenade = Engine[@"getmodelforcontroller"](f1_arg1)
 	secondaryAttachments(TempSelectedImage, primarygrenade.LastInput, function(f104_arg0, f104_arg1)
-		CoD.Menu.UpdateButtonShownState(f104_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
-		CoD.Menu.UpdateButtonShownState(f104_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f104_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x93AB4C84F113EE1])
-		CoD.Menu.UpdateButtonShownState(f104_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
-		CoD.Menu.UpdateButtonShownState(f104_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x4D2505E19049444])
+		CoD.Menu.UpdateButtonShownState(f104_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+		CoD.Menu.UpdateButtonShownState(f104_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f104_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_back"])
+		CoD.Menu.UpdateButtonShownState(f104_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"])
+		CoD.Menu.UpdateButtonShownState(f104_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"hash_64D2505E19049444"])
 	end, false)
 	TempSelectedImage = secondary
 	secondaryAttachments = secondary.subscribeToModel
-	primarygrenade = Engine[0x8DF2E5447F384B9]()
+	primarygrenade = Engine[@"getglobalmodel"]()
 	secondaryAttachments(TempSelectedImage, primarygrenade["lobbyRoot.lobbyNetworkMode"], function(f105_arg0, f105_arg1)
-		CoD.Menu.UpdateButtonShownState(f105_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x93AB4C84F113EE1])
-		CoD.Menu.UpdateButtonShownState(f105_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x4D2505E19049444])
+		CoD.Menu.UpdateButtonShownState(f105_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_back"])
+		CoD.Menu.UpdateButtonShownState(f105_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"hash_64D2505E19049444"])
 	end, false)
 	TempSelectedImage = secondary
 	secondaryAttachments = secondary.subscribeToModel
-	primarygrenade = Engine[0x8DF2E5447F384B9]()
+	primarygrenade = Engine[@"getglobalmodel"]()
 	secondaryAttachments(TempSelectedImage, primarygrenade["lobbyRoot.lobbyNav"], function(f106_arg0, f106_arg1)
-		CoD.Menu.UpdateButtonShownState(f106_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x93AB4C84F113EE1])
-		CoD.Menu.UpdateButtonShownState(f106_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x4D2505E19049444])
+		CoD.Menu.UpdateButtonShownState(f106_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_back"])
+		CoD.Menu.UpdateButtonShownState(f106_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"hash_64D2505E19049444"])
 	end, false)
 	secondary:registerEventHandler("gain_focus", function(element, event)
 		local f107_local0 = nil
@@ -863,15 +863,15 @@ CoD.ChooseClassWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 		elseif element.super.gainFocus then
 			f107_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x93AB4C84F113EE1])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x4D2505E19049444])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_back"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"hash_64D2505E19049444"])
 		return f107_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(secondary, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(secondary, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if not IsElementPropertyValue(element, "__hasFocusOnVariantWidget", true) then
 			CoD.CACUtility.OpenCACOverlay(self, menu, controller, "WeaponSelectFlyout", self, "secondary")
 			return true
@@ -879,13 +879,13 @@ CoD.ChooseClassWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 		end
 	end, function(element, menu, controller)
 		if not IsElementPropertyValue(element, "__hasFocusOnVariantWidget", true) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(secondary, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], "ui_remove", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(secondary, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], "ui_remove", function(element, menu, controller, model)
 		if not CoD.ModelUtility.IsSelfModelValueEqualTo(element, controller, "itemIndex", CoDShared.EmptyItemIndex) and IsGamepad(controller) and not IsElementPropertyValue(element, "__hasFocusOnVariantWidget", true) then
 			CoD.CraftUtility.SetupPaintjobPersonalization(self, element, controller)
 			CoD.CACUtility.OpenWeaponPersonalizationOverlay(self, menu, controller, self, element, "secondary")
@@ -895,13 +895,13 @@ CoD.ChooseClassWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 		end
 	end, function(element, menu, controller)
 		if not CoD.ModelUtility.IsSelfModelValueEqualTo(element, controller, "itemIndex", CoDShared.EmptyItemIndex) and IsGamepad(controller) and not IsElementPropertyValue(element, "__hasFocusOnVariantWidget", true) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], 0x94122F68876E5D9, nil, "ui_remove")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], @"hash_194122F68876E5D9", nil, "ui_remove")
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(secondary, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], "ui_remove", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(secondary, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], "ui_remove", function(element, menu, controller, model)
 		if not CoD.ModelUtility.IsSelfModelValueEqualTo(element, controller, "itemIndex", CoDShared.EmptyItemIndex) and IsGamepad(controller) and not IsElementPropertyValue(element, "__hasFocusOnVariantWidget", true) then
 			CoD.CACUtility.UnequipItem(controller, menu, element)
 			return true
@@ -912,16 +912,16 @@ CoD.ChooseClassWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 		end
 	end, function(element, menu, controller)
 		if not CoD.ModelUtility.IsSelfModelValueEqualTo(element, controller, "itemIndex", CoDShared.EmptyItemIndex) and IsGamepad(controller) and not IsElementPropertyValue(element, "__hasFocusOnVariantWidget", true) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x679ACA6FFC6C8F3, nil, "ui_remove")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"menu/remove", nil, "ui_remove")
 			return true
 		elseif IsMouseOrKeyboard(controller) and not CoD.ModelUtility.IsSelfModelValueEqualTo(element, controller, "itemIndex", CoDShared.EmptyItemIndex) and not IsElementPropertyValue(element, "__hasFocusOnVariantWidget", true) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x679ACA6FFC6C8F3, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "ui_remove")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"menu/remove", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "ui_remove")
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(secondary, f1_arg1, Enum[0x3DD78803F918E9D][0x93AB4C84F113EE1], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(secondary, f1_arg1, Enum[@"luibutton"][@"lui_key_back"], nil, function(element, menu, controller, model)
 		if IsGamepad(controller) and not IsLocal() and not IsCustomLobby() and not IsElementPropertyValue(element, "__hasFocusOnVariantWidget", true) then
 			CoD.CACUtility.SetShowcaseWeapon(menu, controller, element)
 			PlaySoundAlias("cac_overload_select")
@@ -930,13 +930,13 @@ CoD.ChooseClassWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 		end
 	end, function(element, menu, controller)
 		if IsGamepad(controller) and not IsLocal() and not IsCustomLobby() and not IsElementPropertyValue(element, "__hasFocusOnVariantWidget", true) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x93AB4C84F113EE1], 0xE629850E7968A6E, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_back"], @"hash_4E629850E7968A6E", nil, nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(secondary, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB], "ui_contextual_1", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(secondary, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"], "ui_contextual_1", function(element, menu, controller, model)
 		if not CoD.ModelUtility.IsSelfModelValueEqualTo(element, controller, "itemIndex", CoDShared.EmptyItemIndex) and IsMouseOrKeyboard(controller) and not IsElementPropertyValue(element, "__hasFocusOnVariantWidget", true) then
 			CoD.CraftUtility.SetupPaintjobPersonalization(self, element, controller)
 			CoD.CACUtility.OpenWeaponPersonalizationOverlay(self, menu, controller, self, element, "secondary")
@@ -945,13 +945,13 @@ CoD.ChooseClassWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 		end
 	end, function(element, menu, controller)
 		if not CoD.ModelUtility.IsSelfModelValueEqualTo(element, controller, "itemIndex", CoDShared.EmptyItemIndex) and IsMouseOrKeyboard(controller) and not IsElementPropertyValue(element, "__hasFocusOnVariantWidget", true) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xA86619565BE54DB], 0x94122F68876E5D9, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "ui_contextual_1")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_pckey_2"], @"hash_194122F68876E5D9", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "ui_contextual_1")
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(secondary, f1_arg1, Enum[0x3DD78803F918E9D][0x4D2505E19049444], "ui_contextual_2", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(secondary, f1_arg1, Enum[@"luibutton"][@"hash_64D2505E19049444"], "ui_contextual_2", function(element, menu, controller, model)
 		if IsMouseOrKeyboard(controller) and not IsLocal() and not IsCustomLobby() and not CoD.ModelUtility.IsSelfModelValueEqualTo(element, controller, "itemIndex", CoDShared.EmptyItemIndex) and not IsElementPropertyValue(element, "__hasFocusOnVariantWidget", true) then
 			CoD.CACUtility.SetShowcaseWeapon(menu, controller, element)
 			PlaySoundAlias("cac_overload_select")
@@ -960,13 +960,13 @@ CoD.ChooseClassWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 		end
 	end, function(element, menu, controller)
 		if IsMouseOrKeyboard(controller) and not IsLocal() and not IsCustomLobby() and not CoD.ModelUtility.IsSelfModelValueEqualTo(element, controller, "itemIndex", CoDShared.EmptyItemIndex) and not IsElementPropertyValue(element, "__hasFocusOnVariantWidget", true) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x4D2505E19049444], 0x2BA0F750E758177, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "ui_contextual_2")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"hash_64D2505E19049444"], @"menu/gun_rack", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "ui_contextual_2")
 			return true
 		else
 			return false
 		end
 	end, false)
-	secondary:AddContextualMenuAction(f1_arg0, f1_arg1, 0x679ACA6FFC6C8F3, function(f120_arg0, f120_arg1, f120_arg2, f120_arg3)
+	secondary:AddContextualMenuAction(f1_arg0, f1_arg1, @"menu/remove", function(f120_arg0, f120_arg1, f120_arg2, f120_arg3)
 		if not CoD.ModelUtility.IsSelfModelValueEqualTo(f120_arg0, f120_arg2, "itemIndex", CoDShared.EmptyItemIndex) and not IsElementPropertyValue(f120_arg0, "__hasFocusOnVariantWidget", true) then
 			return function(f121_arg0, f121_arg1, f121_arg2, f121_arg3)
 				CoD.CACUtility.UnequipItem(f121_arg2, f121_arg1, f121_arg0)
@@ -974,7 +974,7 @@ CoD.ChooseClassWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 		else
 		end
 	end)
-	secondary:AddContextualMenuAction(f1_arg0, f1_arg1, 0xAFF37175F950D17, function(f122_arg0, f122_arg1, f122_arg2, f122_arg3)
+	secondary:AddContextualMenuAction(f1_arg0, f1_arg1, @"hash_4AFF37175F950D17", function(f122_arg0, f122_arg1, f122_arg2, f122_arg3)
 		if not CoD.ModelUtility.IsSelfModelValueEqualTo(f122_arg0, f122_arg2, "itemIndex", CoDShared.EmptyItemIndex) and not IsElementPropertyValue(f122_arg0, "__hasFocusOnVariantWidget", true) then
 			return function(f123_arg0, f123_arg1, f123_arg2, f123_arg3)
 				CoD.CraftUtility.SetupPaintjobPersonalization(self, f123_arg0, f123_arg2)
@@ -983,7 +983,7 @@ CoD.ChooseClassWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 		else
 		end
 	end)
-	secondary:AddContextualMenuAction(f1_arg0, f1_arg1, 0xE092C2BE5DD4778, function(f124_arg0, f124_arg1, f124_arg2, f124_arg3)
+	secondary:AddContextualMenuAction(f1_arg0, f1_arg1, @"hash_E092C2BE5DD4778", function(f124_arg0, f124_arg1, f124_arg2, f124_arg3)
 		if not IsLocal() and not IsCustomLobby() and not CoD.ModelUtility.IsSelfModelValueEqualTo(f124_arg0, f124_arg2, "itemIndex", CoDShared.EmptyItemIndex) and not IsElementPropertyValue(f124_arg0, "__hasFocusOnVariantWidget", true) then
 			return function(f125_arg0, f125_arg1, f125_arg2, f125_arg3)
 				CoD.CACUtility.SetShowcaseWeapon(f125_arg1, f125_arg2, f125_arg0)
@@ -1004,7 +1004,7 @@ CoD.ChooseClassWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	})
 	primarygrenade = secondaryAttachments
 	TempSelectedImage = secondaryAttachments.subscribeToModel
-	local SpecialistEquipmentWidget = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local SpecialistEquipmentWidget = Engine[@"getmodelforcontroller"](f1_arg1)
 	TempSelectedImage(primarygrenade, SpecialistEquipmentWidget.BonuscardModifiedSlotEnum, function(f127_arg0)
 		f1_arg0:updateElementState(secondaryAttachments, {
 			name = "model_validation",
@@ -1029,7 +1029,7 @@ CoD.ChooseClassWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	secondaryAttachments:setHorizontalCount(3)
 	secondaryAttachments:setVerticalCount(2)
 	secondaryAttachments:setSpacing(10)
-	secondaryAttachments:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	secondaryAttachments:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	secondaryAttachments:linkToElementModel(self, "secondaryattachments", true, function(model)
 		local f129_local0 = model:get()
 		if f129_local0 ~= nil then
@@ -1037,23 +1037,23 @@ CoD.ChooseClassWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 		end
 	end)
 	secondaryAttachments:linkToElementModel(secondaryAttachments, "itemIndex", true, function(model, f130_arg1)
-		CoD.Menu.UpdateButtonShownState(f130_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(f130_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
-		CoD.Menu.UpdateButtonShownState(f130_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
+		CoD.Menu.UpdateButtonShownState(f130_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(f130_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+		CoD.Menu.UpdateButtonShownState(f130_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"])
 	end)
 	secondaryAttachments:appendEventHandler("input_source_changed", function(f131_arg0, f131_arg1)
 		f131_arg1.menu = f131_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f131_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f131_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
-		CoD.Menu.UpdateButtonShownState(f131_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
+		CoD.Menu.UpdateButtonShownState(f131_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f131_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+		CoD.Menu.UpdateButtonShownState(f131_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"])
 	end)
 	primarygrenade = secondaryAttachments
 	TempSelectedImage = secondaryAttachments.subscribeToModel
-	SpecialistEquipmentWidget = Engine[0x4DF5CFBC1771947](f1_arg1)
+	SpecialistEquipmentWidget = Engine[@"getmodelforcontroller"](f1_arg1)
 	TempSelectedImage(primarygrenade, SpecialistEquipmentWidget.LastInput, function(f132_arg0, f132_arg1)
-		CoD.Menu.UpdateButtonShownState(f132_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f132_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
-		CoD.Menu.UpdateButtonShownState(f132_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
+		CoD.Menu.UpdateButtonShownState(f132_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f132_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+		CoD.Menu.UpdateButtonShownState(f132_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"])
 	end, false)
 	secondaryAttachments:linkToElementModel(secondaryAttachments, "loadoutListItem", true, function(model, f133_arg1)
 		if secondaryAttachments["__buttonPrompt_loadoutListItem->itemIndex"] then
@@ -1067,13 +1067,13 @@ CoD.ChooseClassWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 		end
 		if model then
 			secondaryAttachments["__buttonPrompt_loadoutListItem->itemIndex"] = secondaryAttachments:subscribeToModel(model, function(model)
-				CoD.Menu.UpdateButtonShownState(f133_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+				CoD.Menu.UpdateButtonShownState(f133_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 			end)
 		end
 	end)
 	secondaryAttachments:linkToElementModel(secondaryAttachments, "attachmentSlotIndex", true, function(model, f135_arg1)
-		CoD.Menu.UpdateButtonShownState(f135_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
-		CoD.Menu.UpdateButtonShownState(f135_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
+		CoD.Menu.UpdateButtonShownState(f135_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+		CoD.Menu.UpdateButtonShownState(f135_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"])
 	end)
 	secondaryAttachments:registerEventHandler("gain_focus", function(element, event)
 		local f136_local0 = nil
@@ -1082,13 +1082,13 @@ CoD.ChooseClassWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 		elseif element.super.gainFocus then
 			f136_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"])
 		return f136_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(secondaryAttachments, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(secondaryAttachments, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if IsListElementChildInState(element, "AttachmentSlot", "WildcardNeeded") then
 			CoD.CACUtility.OpenWildcardPopup(self, element, menu, controller, "WildcardSelect", self, "bonuscard", true)
 			return true
@@ -1100,16 +1100,16 @@ CoD.ChooseClassWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 		end
 	end, function(element, menu, controller)
 		if IsListElementChildInState(element, "AttachmentSlot", "WildcardNeeded") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		elseif not CoD.ModelUtility.IsSelfModelValueEqualTo(self.secondary, controller, "itemIndex", CoDShared.EmptyItemIndex) and CoD.BaseUtility.HasChildElement(element, "AttachmentSlot") and not IsListElementChildInState(element, "AttachmentSlot", "WildcardNotAvailable") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(secondaryAttachments, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], "ui_remove", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(secondaryAttachments, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], "ui_remove", function(element, menu, controller, model)
 		if IsGamepad(controller) and not CoD.ModelUtility.IsSelfModelPathValueEqualTo(element, controller, "loadoutListItem->itemIndex", CoDShared.EmptyItemIndex) then
 			CoD.CACUtility.RemoveAttachmentFromClass(element, menu, controller, "secondary")
 			CoD.CACUtility.UpdateItemListSlotSetupContext(element, controller)
@@ -1126,16 +1126,16 @@ CoD.ChooseClassWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 		end
 	end, function(element, menu, controller)
 		if IsGamepad(controller) and not CoD.ModelUtility.IsSelfModelPathValueEqualTo(element, controller, "loadoutListItem->itemIndex", CoDShared.EmptyItemIndex) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x679ACA6FFC6C8F3, nil, "ui_remove")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"menu/remove", nil, "ui_remove")
 			return true
 		elseif IsMouseOrKeyboard(controller) and not CoD.ModelUtility.IsSelfModelPathValueEqualTo(element, controller, "loadoutListItem->itemIndex", CoDShared.EmptyItemIndex) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x679ACA6FFC6C8F3, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "ui_remove")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"menu/remove", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "ui_remove")
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(secondaryAttachments, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(secondaryAttachments, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], nil, function(element, menu, controller, model)
 		if IsGamepad(controller) and not CoD.ModelUtility.IsSelfModelValueEqualTo(self.secondary, controller, "itemIndex", CoDShared.EmptyItemIndex) and CoD.ModelUtility.IsSelfModelValueEqualTo(element, controller, "attachmentSlotIndex", CoD.CACUtility.OpticSlotIndex) and IsListElementChildInState(element, "AttachmentSlot", "DefaultStateHiddenName") and CoD.CACUtility.IsAttachmentWithCustomReticle(menu, element) then
 			CoD.CraftUtility.SetUpOpticPersonalization(element, controller)
 			CoD.CACUtility.OpenCACAttachmentOverlay(self, element, menu, controller, "ReticleSelect", self, "secondary")
@@ -1145,13 +1145,13 @@ CoD.ChooseClassWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 		end
 	end, function(element, menu, controller)
 		if IsGamepad(controller) and not CoD.ModelUtility.IsSelfModelValueEqualTo(self.secondary, controller, "itemIndex", CoDShared.EmptyItemIndex) and CoD.ModelUtility.IsSelfModelValueEqualTo(element, controller, "attachmentSlotIndex", CoD.CACUtility.OpticSlotIndex) and IsListElementChildInState(element, "AttachmentSlot", "DefaultStateHiddenName") and CoD.CACUtility.IsAttachmentWithCustomReticle(menu, element) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], 0x94122F68876E5D9, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], @"hash_194122F68876E5D9", nil, nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(secondaryAttachments, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB], "ui_contextual_1", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(secondaryAttachments, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"], "ui_contextual_1", function(element, menu, controller, model)
 		if IsMouseOrKeyboard(controller) and not CoD.ModelUtility.IsSelfModelValueEqualTo(self.secondary, controller, "itemIndex", CoDShared.EmptyItemIndex) and CoD.ModelUtility.IsSelfModelValueEqualTo(element, controller, "attachmentSlotIndex", CoD.CACUtility.OpticSlotIndex) and IsListElementChildInState(element, "AttachmentSlot", "DefaultStateHiddenName") and CoD.CACUtility.IsAttachmentWithCustomReticle(menu, element) then
 			CoD.CraftUtility.SetUpOpticPersonalization(element, controller)
 			CoD.CACUtility.OpenCACAttachmentOverlay(self, element, menu, controller, "ReticleSelect", self, "secondary")
@@ -1161,13 +1161,13 @@ CoD.ChooseClassWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 		end
 	end, function(element, menu, controller)
 		if IsMouseOrKeyboard(controller) and not CoD.ModelUtility.IsSelfModelValueEqualTo(self.secondary, controller, "itemIndex", CoDShared.EmptyItemIndex) and CoD.ModelUtility.IsSelfModelValueEqualTo(element, controller, "attachmentSlotIndex", CoD.CACUtility.OpticSlotIndex) and IsListElementChildInState(element, "AttachmentSlot", "DefaultStateHiddenName") and CoD.CACUtility.IsAttachmentWithCustomReticle(menu, element) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xA86619565BE54DB], 0x94122F68876E5D9, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "ui_contextual_1")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_pckey_2"], @"hash_194122F68876E5D9", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "ui_contextual_1")
 			return true
 		else
 			return false
 		end
 	end, false)
-	secondaryAttachments:AddContextualMenuAction(f1_arg0, f1_arg1, 0x679ACA6FFC6C8F3, function(f145_arg0, f145_arg1, f145_arg2, f145_arg3)
+	secondaryAttachments:AddContextualMenuAction(f1_arg0, f1_arg1, @"menu/remove", function(f145_arg0, f145_arg1, f145_arg2, f145_arg3)
 		if not CoD.ModelUtility.IsSelfModelPathValueEqualTo(f145_arg0, f145_arg2, "loadoutListItem->itemIndex", CoDShared.EmptyItemIndex) then
 			return function(f146_arg0, f146_arg1, f146_arg2, f146_arg3)
 				CoD.CACUtility.RemoveAttachmentFromClass(f146_arg0, f146_arg1, f146_arg2, "secondary")
@@ -1177,7 +1177,7 @@ CoD.ChooseClassWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 		else
 		end
 	end)
-	secondaryAttachments:AddContextualMenuAction(f1_arg0, f1_arg1, 0xAFF37175F950D17, function(f147_arg0, f147_arg1, f147_arg2, f147_arg3)
+	secondaryAttachments:AddContextualMenuAction(f1_arg0, f1_arg1, @"hash_4AFF37175F950D17", function(f147_arg0, f147_arg1, f147_arg2, f147_arg3)
 		if not CoD.ModelUtility.IsSelfModelValueEqualTo(self.primary, f147_arg2, "itemIndex", CoDShared.EmptyItemIndex) and CoD.ModelUtility.IsSelfModelValueEqualTo(f147_arg0, f147_arg2, "attachmentSlotIndex", CoD.CACUtility.OpticSlotIndex) and CoD.CACUtility.IsAttachmentWithCustomReticle(f147_arg1, f147_arg0) and IsListElementChildInState(f147_arg0, "AttachmentSlot", "DefaultStateHiddenName") then
 			return function(f148_arg0, f148_arg1, f148_arg2, f148_arg3)
 				CoD.CraftUtility.SetUpOpticPersonalization(f148_arg0, f148_arg2)

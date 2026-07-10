@@ -11,13 +11,13 @@ LUI.createMenu.interactive_shot = function(f1_arg0, f1_arg1)
 	self.ignoreCursor = true
 	local TextBox = LUI.UIText.new(0.5, 0.5, -960, 960, 0, 0, 681, 741)
 	TextBox:setTTF("default")
-	TextBox:setMaterial(LUI.UIImage.GetCachedMaterial(0x71E049B161CD00A))
-	TextBox:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	TextBox:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	TextBox:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_171E049B161CD00A"))
+	TextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	TextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	TextBox:linkToElementModel(self, "text", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			TextBox:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			TextBox:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	self:addElement(TextBox)

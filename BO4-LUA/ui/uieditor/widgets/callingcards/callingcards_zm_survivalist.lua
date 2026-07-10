@@ -1,26 +1,26 @@
 require("x64:6021906931854d6")
-CoD[0xE9560377C67385F] = InheritFrom(LUI.UIElement)
-CoD[0xE9560377C67385F].__defaultWidth = 960
-CoD[0xE9560377C67385F].__defaultHeight = 240
-CoD[0xE9560377C67385F].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+CoD[@"hash_E9560377C67385F"] = InheritFrom(LUI.UIElement)
+CoD[@"hash_E9560377C67385F"].__defaultWidth = 960
+CoD[@"hash_E9560377C67385F"].__defaultHeight = 240
+CoD[@"hash_E9560377C67385F"].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
 	local self = LUI.UIElement.new(f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
-	self:setClass(CoD[0xE9560377C67385F])
+	self:setClass(CoD[@"hash_E9560377C67385F"])
 	self.id = "CallingCards_zm_Survivalist"
 	self.soundSet = "default"
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local background = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	background:setImage(RegisterImage(0x18DCBF42CBAF395))
+	background:setImage(RegisterImage(@"uie_ui_icon_callingcards_zm_survivalist_background"))
 	self:addElement(background)
 	self.background = background
 	local backwebs = LUI.UIImage.new(0, 0, 6.5, 182.5, 0, 0, 0, 176)
-	backwebs:setImage(RegisterImage(0x199B2EC94CA9246))
-	backwebs:setMaterial(LUI.UIImage.GetCachedMaterial(0xF755127C95CF5B6))
+	backwebs:setImage(RegisterImage(@"uie_ui_icon_callingcards_zm_survivalist_backwebbing"))
+	backwebs:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_F755127C95CF5B6"))
 	backwebs:setShaderVector(0, 1.59, 0, 0, 0)
 	self:addElement(backwebs)
 	self.backwebs = backwebs
 	local spiderbody = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	spiderbody:setImage(RegisterImage(0xA4BEFBDD3D8022C))
+	spiderbody:setImage(RegisterImage(@"uie_ui_icon_callingcards_zm_survivalist_spiderbody"))
 	self:addElement(spiderbody)
 	self.spiderbody = spiderbody
 	local spiderLeg4 = CoD.CallingCards_Asset_spiderleg_animated.new(f1_arg0, f1_arg1, 0, 0, 17, 577, 0, 0, -6.5, 233.5)
@@ -39,51 +39,51 @@ CoD[0xE9560377C67385F].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	self:addElement(spiderLeg)
 	self.spiderLeg = spiderLeg
 	local jawhorn = LUI.UIImage.new(0, 0, 384, 440, 0, 0, 113.5, 225.5)
-	jawhorn:setImage(RegisterImage(0xB63B983D38F526E))
+	jawhorn:setImage(RegisterImage(@"uie_ui_icon_callingcards_zm_survivalist_spiderjaw"))
 	self:addElement(jawhorn)
 	self.jawhorn = jawhorn
 	local dude = LUI.UIImage.new(0, 0, 407, 911, 0, 0, 0, 240)
-	dude:setImage(RegisterImage(0x9701C279EFADC8D))
-	dude:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD526D3FD71F281))
+	dude:setImage(RegisterImage(@"uie_ui_icon_callingcards_zm_survivalist_dude"))
+	dude:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_flipbook"))
 	dude:setShaderVector(0, 0, 3, 0, 0)
 	dude:setShaderVector(1, 3.9, 0, 0, 0)
 	self:addElement(dude)
 	self.dude = dude
 	local dudeCovered = LUI.UIImage.new(0, 0, 553.5, 865.5, 0, 0, 0, 240)
-	dudeCovered:setImage(RegisterImage(0x7068ABAF4D4F91C))
+	dudeCovered:setImage(RegisterImage(@"uie_ui_icon_callingcards_zm_survivalist_dude_covered"))
 	self:addElement(dudeCovered)
 	self.dudeCovered = dudeCovered
 	local venom = LUI.UIImage.new(0, 0, 482, 512, 0, 0, 159, 255)
-	venom:setImage(RegisterImage(0x8B0A7587D1E34B))
-	venom:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD526D3FD71F281))
+	venom:setImage(RegisterImage(@"uie_ui_icon_callingcards_zm_survivalist_dude_venom"))
+	venom:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_flipbook"))
 	venom:setShaderVector(0, 0, 4, 0, 0)
 	venom:setShaderVector(1, 8, 0, 0, 0)
 	self:addElement(venom)
 	self.venom = venom
 	local teeth = LUI.UIImage.new(0, 0, 472, 512, 0, 0, 126, 174)
-	teeth:setImage(RegisterImage(0x7C0C75882E391C6))
+	teeth:setImage(RegisterImage(@"uie_ui_icon_callingcards_zm_survivalist_spiderteeth"))
 	self:addElement(teeth)
 	self.teeth = teeth
 	local frontrocks = LUI.UIImage.new(0, 0, 0, 376, 0, 0, 80, 240)
-	frontrocks:setImage(RegisterImage(0xF76C03DE934112D))
+	frontrocks:setImage(RegisterImage(@"uie_ui_icon_callingcards_zm_survivalist_front_rocks"))
 	self:addElement(frontrocks)
 	self.frontrocks = frontrocks
 	local frontWebs = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	frontWebs:setImage(RegisterImage(0xC92A66217354BDE))
-	frontWebs:setMaterial(LUI.UIImage.GetCachedMaterial(0xF755127C95CF5B6))
+	frontWebs:setImage(RegisterImage(@"uie_ui_icon_callingcards_zm_survivalist_front_webs"))
+	frontWebs:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_F755127C95CF5B6"))
 	frontWebs:setShaderVector(0, 1.61, 0, 0, 0)
 	self:addElement(frontWebs)
 	self.frontWebs = frontWebs
 	local grimaceFace = LUI.UIImage.new(0, 0, 593, 705, 0, 0, -1, 95)
-	grimaceFace:setImage(RegisterImage(0x6CC8E27AF979B2C))
-	grimaceFace:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD526D3FD71F281))
+	grimaceFace:setImage(RegisterImage(@"uie_ui_icon_callingcards_zm_survivalist_dude_grimace"))
+	grimaceFace:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_flipbook"))
 	grimaceFace:setShaderVector(0, 0, 4, 0, 0)
 	grimaceFace:setShaderVector(1, 1, 0, 0, 0)
 	self:addElement(grimaceFace)
 	self.grimaceFace = grimaceFace
 	local cropper = LUI.UIImage.new(0, 0, -32, 992, 0, 0, -392, 632)
 	cropper:setAlpha(0)
-	cropper:setImage(RegisterImage(0x7EEE1693E39382A))
+	cropper:setImage(RegisterImage(@"uie_stage_crop_prop"))
 	self:addElement(cropper)
 	self.cropper = cropper
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)
@@ -92,7 +92,7 @@ CoD[0xE9560377C67385F].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	end
 	return self
 end
-CoD[0xE9560377C67385F].__resetProperties = function(f2_arg0)
+CoD[@"hash_E9560377C67385F"].__resetProperties = function(f2_arg0)
 	f2_arg0.spiderLeg:completeAnimation()
 	f2_arg0.frontWebs:completeAnimation()
 	f2_arg0.backwebs:completeAnimation()
@@ -113,7 +113,7 @@ CoD[0xE9560377C67385F].__resetProperties = function(f2_arg0)
 	f2_arg0.spiderLeg2:setTopBottom(0, 0, 17, 257)
 	f2_arg0.spiderLeg2:setScale(0.9, 0.9)
 end
-CoD[0xE9560377C67385F].__clipsPerState = {
+CoD[@"hash_E9560377C67385F"].__clipsPerState = {
 	DefaultState = {
 		DefaultClip = function(f3_arg0, f3_arg1)
 			f3_arg0:__resetProperties()
@@ -207,7 +207,7 @@ CoD[0xE9560377C67385F].__clipsPerState = {
 		end,
 	},
 }
-CoD[0xE9560377C67385F].__onClose = function(f16_arg0)
+CoD[@"hash_E9560377C67385F"].__onClose = function(f16_arg0)
 	f16_arg0.spiderLeg4:close()
 	f16_arg0.spiderLeg3:close()
 	f16_arg0.spiderLeg2:close()

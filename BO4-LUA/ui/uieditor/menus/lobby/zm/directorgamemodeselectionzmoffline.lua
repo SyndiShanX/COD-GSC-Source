@@ -25,7 +25,7 @@ LUI.createMenu.DirectorGamemodeSelectionZMOffline = function(f1_arg0, f1_arg1)
 	f1_local1:addElementToPendingUpdateStateList(self)
 	local TEMPBlackBGOverlay = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	TEMPBlackBGOverlay:setRGB(0, 0, 0)
-	TEMPBlackBGOverlay:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	TEMPBlackBGOverlay:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	TEMPBlackBGOverlay:setShaderVector(0, 0.01, 0.5, 0, 0)
 	self:addElement(TEMPBlackBGOverlay)
 	self.TEMPBlackBGOverlay = TEMPBlackBGOverlay
@@ -42,34 +42,34 @@ LUI.createMenu.DirectorGamemodeSelectionZMOffline = function(f1_arg0, f1_arg1)
 	Maps:setHorizontalCount(4)
 	Maps:setVerticalCount(5)
 	Maps:setSpacing(20)
-	Maps:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	Maps:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	Maps:setVerticalCounter(CoD.verticalCounter)
 	Maps:setDataSource("DirectorMapList")
 	Maps:appendEventHandler("on_session_start", function(f2_arg0, f2_arg1)
 		f2_arg1.menu = f2_arg1.menu or f1_local1
-		CoD.Menu.UpdateButtonShownState(f2_arg0, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f2_arg0, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	Maps:appendEventHandler("on_session_end", function(f3_arg0, f3_arg1)
 		f3_arg1.menu = f3_arg1.menu or f1_local1
-		CoD.Menu.UpdateButtonShownState(f3_arg0, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f3_arg0, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	local TutorialMaps = Maps
 	local GauntletMaps = Maps.subscribeToModel
-	local CommonHeader = Engine[0x8DF2E5447F384B9]()
+	local CommonHeader = Engine[@"getglobalmodel"]()
 	GauntletMaps(TutorialMaps, CommonHeader["lobbyRoot.lobbyNav"], function(f4_arg0, f4_arg1)
-		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	TutorialMaps = Maps
 	GauntletMaps = Maps.subscribeToModel
-	CommonHeader = Engine[0x8DF2E5447F384B9]()
+	CommonHeader = Engine[@"getglobalmodel"]()
 	GauntletMaps(TutorialMaps, CommonHeader["lobbyRoot.gameClient.update"], function(f5_arg0, f5_arg1)
-		CoD.Menu.UpdateButtonShownState(f5_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f5_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	TutorialMaps = Maps
 	GauntletMaps = Maps.subscribeToModel
-	CommonHeader = Engine[0x8DF2E5447F384B9]()
+	CommonHeader = Engine[@"getglobalmodel"]()
 	GauntletMaps(TutorialMaps, CommonHeader["lobbyRoot.privateClient.update"], function(f6_arg0, f6_arg1)
-		CoD.Menu.UpdateButtonShownState(f6_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f6_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	Maps:registerEventHandler("list_item_gain_focus", function(element, event)
 		local f7_local0 = nil
@@ -83,10 +83,10 @@ LUI.createMenu.DirectorGamemodeSelectionZMOffline = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f8_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f8_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(Maps, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(Maps, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if IsLobbyHostOfCurrentMenu() and not IsElementPropertyValue(element, "purchasable", true) then
 			CoD.ZombieUtility.SelectTutorialMapDifficulty(element, controller)
 			MapSelected(element, controller)
@@ -99,10 +99,10 @@ LUI.createMenu.DirectorGamemodeSelectionZMOffline = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if IsLobbyHostOfCurrentMenu() and not IsElementPropertyValue(element, "purchasable", true) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		elseif IsLobbyHostOfCurrentMenu() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false
@@ -125,34 +125,34 @@ LUI.createMenu.DirectorGamemodeSelectionZMOffline = function(f1_arg0, f1_arg1)
 	GauntletMaps:setHorizontalCount(4)
 	GauntletMaps:setVerticalCount(5)
 	GauntletMaps:setSpacing(20)
-	GauntletMaps:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	GauntletMaps:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	GauntletMaps:setVerticalCounter(CoD.verticalCounter)
 	GauntletMaps:setDataSource("DirectorMapList")
 	GauntletMaps:appendEventHandler("on_session_start", function(f13_arg0, f13_arg1)
 		f13_arg1.menu = f13_arg1.menu or f1_local1
-		CoD.Menu.UpdateButtonShownState(f13_arg0, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f13_arg0, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	GauntletMaps:appendEventHandler("on_session_end", function(f14_arg0, f14_arg1)
 		f14_arg1.menu = f14_arg1.menu or f1_local1
-		CoD.Menu.UpdateButtonShownState(f14_arg0, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f14_arg0, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	CommonHeader = GauntletMaps
 	TutorialMaps = GauntletMaps.subscribeToModel
-	local DifficultyList = Engine[0x8DF2E5447F384B9]()
+	local DifficultyList = Engine[@"getglobalmodel"]()
 	TutorialMaps(CommonHeader, DifficultyList["lobbyRoot.lobbyNav"], function(f15_arg0, f15_arg1)
-		CoD.Menu.UpdateButtonShownState(f15_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f15_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	CommonHeader = GauntletMaps
 	TutorialMaps = GauntletMaps.subscribeToModel
-	DifficultyList = Engine[0x8DF2E5447F384B9]()
+	DifficultyList = Engine[@"getglobalmodel"]()
 	TutorialMaps(CommonHeader, DifficultyList["lobbyRoot.gameClient.update"], function(f16_arg0, f16_arg1)
-		CoD.Menu.UpdateButtonShownState(f16_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f16_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	CommonHeader = GauntletMaps
 	TutorialMaps = GauntletMaps.subscribeToModel
-	DifficultyList = Engine[0x8DF2E5447F384B9]()
+	DifficultyList = Engine[@"getglobalmodel"]()
 	TutorialMaps(CommonHeader, DifficultyList["lobbyRoot.privateClient.update"], function(f17_arg0, f17_arg1)
-		CoD.Menu.UpdateButtonShownState(f17_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f17_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	GauntletMaps:registerEventHandler("list_item_gain_focus", function(element, event)
 		local f18_local0 = nil
@@ -166,10 +166,10 @@ LUI.createMenu.DirectorGamemodeSelectionZMOffline = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f19_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f19_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(GauntletMaps, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(GauntletMaps, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if IsLobbyHostOfCurrentMenu() and not IsElementPropertyValue(element, "purchasable", true) then
 			CoD.ZombieUtility.SelectTutorialMapDifficulty(element, controller)
 			MapSelected(element, controller)
@@ -182,10 +182,10 @@ LUI.createMenu.DirectorGamemodeSelectionZMOffline = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if IsLobbyHostOfCurrentMenu() and not IsElementPropertyValue(element, "purchasable", true) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		elseif IsLobbyHostOfCurrentMenu() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false
@@ -207,34 +207,34 @@ LUI.createMenu.DirectorGamemodeSelectionZMOffline = function(f1_arg0, f1_arg1)
 	TutorialMaps:setWidgetType(CoD.DirectorZMTutorialMapSelectItem)
 	TutorialMaps:setHorizontalCount(2)
 	TutorialMaps:setSpacing(20)
-	TutorialMaps:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	TutorialMaps:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	TutorialMaps:setVerticalCounter(CoD.verticalCounter)
 	TutorialMaps:setDataSource("DirectorMapList")
 	TutorialMaps:appendEventHandler("on_session_start", function(f24_arg0, f24_arg1)
 		f24_arg1.menu = f24_arg1.menu or f1_local1
-		CoD.Menu.UpdateButtonShownState(f24_arg0, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f24_arg0, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	TutorialMaps:appendEventHandler("on_session_end", function(f25_arg0, f25_arg1)
 		f25_arg1.menu = f25_arg1.menu or f1_local1
-		CoD.Menu.UpdateButtonShownState(f25_arg0, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f25_arg0, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	DifficultyList = TutorialMaps
 	CommonHeader = TutorialMaps.subscribeToModel
-	local BackingGrayMediumLeft = Engine[0x8DF2E5447F384B9]()
+	local BackingGrayMediumLeft = Engine[@"getglobalmodel"]()
 	CommonHeader(DifficultyList, BackingGrayMediumLeft["lobbyRoot.lobbyNav"], function(f26_arg0, f26_arg1)
-		CoD.Menu.UpdateButtonShownState(f26_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f26_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	DifficultyList = TutorialMaps
 	CommonHeader = TutorialMaps.subscribeToModel
-	BackingGrayMediumLeft = Engine[0x8DF2E5447F384B9]()
+	BackingGrayMediumLeft = Engine[@"getglobalmodel"]()
 	CommonHeader(DifficultyList, BackingGrayMediumLeft["lobbyRoot.gameClient.update"], function(f27_arg0, f27_arg1)
-		CoD.Menu.UpdateButtonShownState(f27_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f27_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	DifficultyList = TutorialMaps
 	CommonHeader = TutorialMaps.subscribeToModel
-	BackingGrayMediumLeft = Engine[0x8DF2E5447F384B9]()
+	BackingGrayMediumLeft = Engine[@"getglobalmodel"]()
 	CommonHeader(DifficultyList, BackingGrayMediumLeft["lobbyRoot.privateClient.update"], function(f28_arg0, f28_arg1)
-		CoD.Menu.UpdateButtonShownState(f28_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f28_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	TutorialMaps:registerEventHandler("list_item_gain_focus", function(element, event)
 		local f29_local0 = nil
@@ -248,10 +248,10 @@ LUI.createMenu.DirectorGamemodeSelectionZMOffline = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f30_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f30_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(TutorialMaps, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(TutorialMaps, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if IsLobbyHostOfCurrentMenu() and not IsElementPropertyValue(element, "purchasable", true) then
 			CoD.ZombieUtility.SelectTutorialMapDifficulty(element, controller)
 			MapSelected(element, controller)
@@ -264,10 +264,10 @@ LUI.createMenu.DirectorGamemodeSelectionZMOffline = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if IsLobbyHostOfCurrentMenu() and not IsElementPropertyValue(element, "purchasable", true) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		elseif IsLobbyHostOfCurrentMenu() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false
@@ -283,12 +283,12 @@ LUI.createMenu.DirectorGamemodeSelectionZMOffline = function(f1_arg0, f1_arg1)
 	self.TutorialMaps = TutorialMaps
 	CommonHeader = CoD.CommonHeader.new(f1_local1, f1_arg0, 0, 0, 0, 1920, 0, 0, 0, 67)
 	CommonHeader:setAlpha(0)
-	CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(0x4456C22914B29F9))
+	CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(@"menu/zombies_modes"))
 	CommonHeader.subtitle.subtitle:setAlpha(0)
 	CommonHeader:subscribeToGlobalModel(f1_arg0, "LobbyRoot", "lobbyTitle", function(model)
 		local f35_local0 = model:get()
 		if f35_local0 ~= nil then
-			CommonHeader.subtitle.subtitle:setText(Engine[0xF9F1239CFD921FE](f35_local0))
+			CommonHeader.subtitle.subtitle:setText(Engine[@"hash_4F9F1239CFD921FE"](f35_local0))
 		end
 	end)
 	CommonHeader:registerEventHandler("menu_loaded", function(element, event)
@@ -312,7 +312,7 @@ LUI.createMenu.DirectorGamemodeSelectionZMOffline = function(f1_arg0, f1_arg1)
 	DifficultyList:setWidgetType(CoD.ZMDifficultySelectButton)
 	DifficultyList:setHorizontalCount(4)
 	DifficultyList:setSpacing(19)
-	DifficultyList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	DifficultyList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	DifficultyList:setDataSource("ZMDifficultyList")
 	DifficultyList:registerEventHandler("gain_focus", function(element, event)
 		local f37_local0 = nil
@@ -321,14 +321,14 @@ LUI.createMenu.DirectorGamemodeSelectionZMOffline = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f37_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f37_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(DifficultyList, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(DifficultyList, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		CoD.ZombieUtility.SelectDifficulty(element, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xAC3B80C833B60E1, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_3AC3B80C833B60E1", nil, "ui_confirm")
 		return true
 	end, false)
 	self:addElement(DifficultyList)
@@ -372,8 +372,8 @@ LUI.createMenu.DirectorGamemodeSelectionZMOffline = function(f1_arg0, f1_arg1)
 	self:addElement(DirectorInfoPanelZM)
 	self.DirectorInfoPanelZM = DirectorInfoPanelZM
 	local DirectorHeaderTabSafeArea = CoD.DirectorHeaderTabSafeArea.new(f1_local1, f1_arg0, -0, 1, 0, 0, 0, 0, 0, 1080)
-	DirectorHeaderTabSafeArea.CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(0x4456C22914B29F9))
-	DirectorHeaderTabSafeArea.CommonHeader.subtitle.subtitle:setText(LocalizeToUpperString(0x7F5AD3549344EFF))
+	DirectorHeaderTabSafeArea.CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(@"menu/zombies_modes"))
+	DirectorHeaderTabSafeArea.CommonHeader.subtitle.subtitle:setText(LocalizeToUpperString(@"hash_47F5AD3549344EFF"))
 	DirectorHeaderTabSafeArea.Tabs.customClasssList:setDataSource("DirectorGameTypeList")
 	DirectorHeaderTabSafeArea:registerEventHandler("menu_loaded", function(element, event)
 		local f43_local0 = nil
@@ -394,8 +394,8 @@ LUI.createMenu.DirectorGamemodeSelectionZMOffline = function(f1_arg0, f1_arg1)
 	DottedDivider:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	DottedDivider:setAlpha(0)
 	DottedDivider:setZRot(90)
-	DottedDivider:setImage(RegisterImage(0xC49B0C8991A541F))
-	DottedDivider:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	DottedDivider:setImage(RegisterImage(@"hash_C49B0C8991A541F"))
+	DottedDivider:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	DottedDivider:setShaderVector(0, 0, 0, 0, 0)
 	DottedDivider:setupNineSliceShader(4, 8)
 	self:addElement(DottedDivider)
@@ -404,25 +404,25 @@ LUI.createMenu.DirectorGamemodeSelectionZMOffline = function(f1_arg0, f1_arg1)
 		{
 			stateName = "Tutorial",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsGlobalModelValueEqualTo("lobbyRoot.selectedGameType", 0xBC1A39D743DD767)
+				return CoD.ModelUtility.IsGlobalModelValueEqualTo("lobbyRoot.selectedGameType", @"ztutorial")
 			end,
 		},
 		{
 			stateName = "Trials",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsGlobalModelValueEqualTo("lobbyRoot.selectedGameType", 0x8F6A072F8CF2F88)
+				return CoD.ModelUtility.IsGlobalModelValueEqualTo("lobbyRoot.selectedGameType", @"ztrials")
 			end,
 		},
 		{
 			stateName = "Classic",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsGlobalModelValueEqualTo("lobbyRoot.selectedGameType", 0x73B5B4896F886CB)
+				return CoD.ModelUtility.IsGlobalModelValueEqualTo("lobbyRoot.selectedGameType", @"zclassic")
 			end,
 		},
 	})
 	local f1_local14 = self
 	local f1_local15 = self.subscribeToModel
-	local f1_local16 = Engine[0x8DF2E5447F384B9]()
+	local f1_local16 = Engine[@"getglobalmodel"]()
 	f1_local15(f1_local14, f1_local16["lobbyRoot.selectedGameType"], function(f47_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",
@@ -451,12 +451,12 @@ LUI.createMenu.DirectorGamemodeSelectionZMOffline = function(f1_arg0, f1_arg1)
 		end
 		return f48_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		CoD.ZombieUtility.ResolveInvalidMapGametypeSelection(controller)
 		GoBack(self, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 		return true
 	end, false)
 	LUI.OverrideFunction_CallOriginalFirst(self, "setState", function(element, controller, f51_arg2, f51_arg3, f51_arg4)

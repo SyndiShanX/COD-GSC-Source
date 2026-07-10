@@ -16,8 +16,8 @@ CoD.StartMenu_Options_PC_GraphicsOptions_DescriptionTextBox.new = function(f1_ar
 	detailedDescription:setRGB(0.63, 0.62, 0.61)
 	detailedDescription:setTTF("ttmussels_regular")
 	detailedDescription:setLetterSpacing(2)
-	detailedDescription:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	detailedDescription:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	detailedDescription:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	detailedDescription:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(detailedDescription)
 	self.detailedDescription = detailedDescription
 	local LineBottom01 = LUI.UIImage.new(0, 1, 0, 0, 0, 0, 0, 1)
@@ -65,14 +65,14 @@ CoD.StartMenu_Options_PC_GraphicsOptions_DescriptionTextBox.new = function(f1_ar
 	self.detailedDescription:linkToElementModel(self, "desc", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			detailedDescription:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			detailedDescription:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	self:mergeStateConditions({
 		{
 			stateName = "Visible",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueNonEmptyString(element, f1_arg1, "detailedDescription") and CoD.ModelUtility.AreButtonModelValueBitsSet(f1_arg1, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA], Enum[0xE29E259801BC1A4][0x253A6F6CAAAE464])
+				return CoD.ModelUtility.IsSelfModelValueNonEmptyString(element, f1_arg1, "detailedDescription") and CoD.ModelUtility.AreButtonModelValueBitsSet(f1_arg1, Enum[@"luibutton"][@"lui_key_rtrig"], Enum[@"luibuttonflags"][@"flag_down"])
 			end,
 		},
 	})
@@ -87,14 +87,14 @@ CoD.StartMenu_Options_PC_GraphicsOptions_DescriptionTextBox.new = function(f1_ar
 	end)
 	local f1_local13 = self
 	local f1_local14 = self.subscribeToModel
-	local f1_local15 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local14(f1_local13, f1_local15["ButtonBits." .. Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA]], function(f5_arg0)
+	local f1_local15 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local14(f1_local13, f1_local15["ButtonBits." .. Enum[@"luibutton"][@"lui_key_rtrig"]], function(f5_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f5_arg0:get(),
-			modelName = "ButtonBits." .. Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA],
+			modelName = "ButtonBits." .. Enum[@"luibutton"][@"lui_key_rtrig"],
 		})
 	end, false)
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)

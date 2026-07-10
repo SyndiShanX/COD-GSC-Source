@@ -8,7 +8,7 @@ CoD.Support_ButtonInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Icon = LUI.UIImage.new(0.5, 0.5, -18.5, 17.5, 0.5, 0.5, -18, 18)
-	Icon:setMaterial(LUI.UIImage.GetCachedMaterial(0x67D1E3A3D2D1BF))
+	Icon:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_saturation_normal"))
 	Icon:setShaderVector(0, 1, 0, 0, 0)
 	Icon:linkToElementModel(self, "rewardImage", true, function(model)
 		local f2_local0 = model:get()
@@ -70,7 +70,7 @@ CoD.Support_ButtonInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	end)
 	local f1_local2 = self
 	local f1_local3 = self.subscribeToModel
-	local f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local3(f1_local2, f1_local4.rewardMomentum, function(f10_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -82,7 +82,7 @@ CoD.Support_ButtonInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	end, false)
 	f1_local2 = self
 	f1_local3 = self.subscribeToModel
-	f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local3(f1_local2, f1_local4["killstreaks.killstreak3.rewardImage"], function(f11_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -102,7 +102,7 @@ CoD.Support_ButtonInternal.__resetProperties = function(f12_arg0)
 	f12_arg0.Icon:completeAnimation()
 	f12_arg0.Icon:setRGB(1, 1, 1)
 	f12_arg0.Icon:setAlpha(1)
-	f12_arg0.Icon:setMaterial(LUI.UIImage.GetCachedMaterial(0x67D1E3A3D2D1BF))
+	f12_arg0.Icon:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_saturation_normal"))
 	f12_arg0.Icon:setShaderVector(0, 1, 0, 0, 0)
 end
 CoD.Support_ButtonInternal.__clipsPerState = {
@@ -127,7 +127,7 @@ CoD.Support_ButtonInternal.__clipsPerState = {
 			f15_arg0:setupElementClipCounter(1)
 			f15_arg0.Icon:completeAnimation()
 			f15_arg0.Icon:setRGB(0.71, 0.71, 0.71)
-			f15_arg0.Icon:setMaterial(LUI.UIImage.GetCachedMaterial(0x67D1E3A3D2D1BF))
+			f15_arg0.Icon:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_saturation_normal"))
 			f15_arg0.Icon:setShaderVector(0, 0, 0, 0, 0)
 			f15_arg0.clipFinished(f15_arg0.Icon)
 		end,
@@ -138,7 +138,7 @@ CoD.Support_ButtonInternal.__clipsPerState = {
 			f16_arg0:setupElementClipCounter(1)
 			f16_arg0.Icon:completeAnimation()
 			f16_arg0.Icon:setRGB(1, 1, 1)
-			f16_arg0.Icon:setMaterial(LUI.UIImage.GetCachedMaterial(0x67D1E3A3D2D1BF))
+			f16_arg0.Icon:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_saturation_normal"))
 			f16_arg0.Icon:setShaderVector(0, 0, 0, 0, 0)
 			f16_arg0.clipFinished(f16_arg0.Icon)
 		end,

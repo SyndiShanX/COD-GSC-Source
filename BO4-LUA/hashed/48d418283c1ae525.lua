@@ -12,7 +12,7 @@ CoD.ArenaGauntletLossSlot.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	self:addElement(Slot)
 	self.Slot = Slot
 	local Fill = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	Fill:setImage(RegisterImage(0x69BEFB7E55FBA50))
+	Fill:setImage(RegisterImage(@"hash_469BEFB7E55FBA50"))
 	self:addElement(Fill)
 	self.Fill = Fill
 	if PostLoadFunc then

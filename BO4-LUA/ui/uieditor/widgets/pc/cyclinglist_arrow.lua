@@ -27,7 +27,7 @@ CoD.CyclingList_Arrow.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	local Image = LUI.UIImage.new(-0.03, 0.97, 2, 2, 0, 1, 0, 0)
 	Image:setRGB(0.58, 0.58, 0.58)
 	Image:setScale(0.4, 0.4)
-	Image:setImage(RegisterImage(0x5E74D00B45D12B6))
+	Image:setImage(RegisterImage(@"uie_optionswidgets_arrow"))
 	self:addElement(Image)
 	self.Image = Image
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)

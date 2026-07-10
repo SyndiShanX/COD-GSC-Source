@@ -14,8 +14,8 @@ CoD.ZMTalismanStatusButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	PerkDesc:setRGB(0.56, 0.56, 0.56)
 	PerkDesc:setTTF("ttmussels_regular")
 	PerkDesc:setLetterSpacing(6)
-	PerkDesc:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	PerkDesc:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	PerkDesc:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	PerkDesc:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	PerkDesc:linkToElementModel(self, "detailedDesc", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -40,7 +40,7 @@ CoD.ZMTalismanStatusButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	})
 	local f1_local3 = self
 	local f1_local4 = self.subscribeToModel
-	local f1_local5 = Engine[0x8DF2E5447F384B9]()
+	local f1_local5 = Engine[@"getglobalmodel"]()
 	f1_local4(f1_local3, f1_local5["lobbyRoot.lobbyNetworkMode"], function(f5_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -52,7 +52,7 @@ CoD.ZMTalismanStatusButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	end, false)
 	f1_local3 = self
 	f1_local4 = self.subscribeToModel
-	f1_local5 = Engine[0x8DF2E5447F384B9]()
+	f1_local5 = Engine[@"getglobalmodel"]()
 	f1_local4(f1_local3, f1_local5["lobbyRoot.lobbyNav"], function(f6_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -90,7 +90,7 @@ CoD.ZMTalismanStatusButton.__clipsPerState = {
 			f10_arg0:__resetProperties()
 			f10_arg0:setupElementClipCounter(1)
 			local f10_local0 = function(f11_arg0)
-				f10_arg0.ElixirCount:beginAnimation(200, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f10_arg0.ElixirCount:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_in"])
 				f10_arg0.ElixirCount:setScale(1.05, 1.05)
 				f10_arg0.ElixirCount:registerEventHandler("interrupted_keyframe", f10_arg0.clipInterrupted)
 				f10_arg0.ElixirCount:registerEventHandler("transition_complete_keyframe", f10_arg0.clipFinished)
@@ -103,7 +103,7 @@ CoD.ZMTalismanStatusButton.__clipsPerState = {
 			f12_arg0:__resetProperties()
 			f12_arg0:setupElementClipCounter(1)
 			local f12_local0 = function(f13_arg0)
-				f12_arg0.ElixirCount:beginAnimation(200, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f12_arg0.ElixirCount:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_out"])
 				f12_arg0.ElixirCount:setScale(1, 1)
 				f12_arg0.ElixirCount:registerEventHandler("interrupted_keyframe", f12_arg0.clipInterrupted)
 				f12_arg0.ElixirCount:registerEventHandler("transition_complete_keyframe", f12_arg0.clipFinished)

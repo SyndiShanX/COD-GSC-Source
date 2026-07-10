@@ -12,7 +12,7 @@ CoD.LootTierBoostPercentContraband.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	TierBoost:setRGB(0, 0, 0)
 	TierBoost:setTTF("ttmussels_demibold")
 	TierBoost:setLetterSpacing(2)
-	TierBoost:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	TierBoost:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	TierBoost:setBackingType(1)
 	TierBoost:setBackingWidget(CoD.ContractSeasonalPromoBacker, f1_arg0, f1_arg1)
 	TierBoost:setBackingXPadding(7)

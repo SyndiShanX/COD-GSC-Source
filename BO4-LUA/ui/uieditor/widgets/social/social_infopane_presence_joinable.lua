@@ -16,7 +16,7 @@ CoD.Social_InfoPane_Presence_Joinable.new = function(f1_arg0, f1_arg1, f1_arg2, 
 	end)
 	SocialJoinBtn:registerEventHandler("button_action", function(element, event)
 		local f3_local0 = nil
-		SendButtonPressToMenuEx(f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+		SendButtonPressToMenuEx(f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 		if not f3_local0 then
 			f3_local0 = element:dispatchEventToChildren(event)
 		end
@@ -34,12 +34,12 @@ CoD.Social_InfoPane_Presence_Joinable.new = function(f1_arg0, f1_arg1, f1_arg2, 
 	NotJoinableReason:setRGB(ColorSet.T8__OFF__GRAY.r, ColorSet.T8__OFF__GRAY.g, ColorSet.T8__OFF__GRAY.b)
 	NotJoinableReason:setTTF("dinnext_regular")
 	NotJoinableReason:setLetterSpacing(1)
-	NotJoinableReason:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	NotJoinableReason:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	NotJoinableReason:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	NotJoinableReason:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	NotJoinableReason:linkToElementModel(self, "joinable", true, function(model)
 		local f5_local0 = model:get()
 		if f5_local0 ~= nil then
-			NotJoinableReason:setText(Engine[0xF9F1239CFD921FE](LobbyJoinableToString(f5_local0)))
+			NotJoinableReason:setText(Engine[@"hash_4F9F1239CFD921FE"](LobbyJoinableToString(f5_local0)))
 		end
 	end)
 	self:addElement(NotJoinableReason)
@@ -72,7 +72,7 @@ CoD.Social_InfoPane_Presence_Joinable.new = function(f1_arg0, f1_arg1, f1_arg2, 
 	})
 	local f1_local4 = self
 	local f1_local5 = self.subscribeToModel
-	local f1_local6 = Engine[0x8DF2E5447F384B9]()
+	local f1_local6 = Engine[@"getglobalmodel"]()
 	f1_local5(f1_local4, f1_local6["lobbyRoot.lobbyLockedIn"], function(f10_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -84,7 +84,7 @@ CoD.Social_InfoPane_Presence_Joinable.new = function(f1_arg0, f1_arg1, f1_arg2, 
 	end, false)
 	f1_local4 = self
 	f1_local5 = self.subscribeToModel
-	f1_local6 = Engine[0x8DF2E5447F384B9]()
+	f1_local6 = Engine[@"getglobalmodel"]()
 	f1_local5(f1_local4, f1_local6["socialRoot.tab"], function(f11_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

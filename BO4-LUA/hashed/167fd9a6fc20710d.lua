@@ -12,18 +12,18 @@ CoD.EmblemEditorMaterialControls.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local BackingTop = LUI.UIImage.new(0, 0, 0, 420, 0, 0, 0, 190)
-	BackingTop:setImage(RegisterImage(0x34839E8065B1E53))
-	BackingTop:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	BackingTop:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	BackingTop:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	BackingTop:setShaderVector(0, 0, 0, 0, 0)
 	BackingTop:setupNineSliceShader(196, 88)
 	self:addElement(BackingTop)
 	self.BackingTop = BackingTop
 	local rotateText = LUI.UIText.new(0, 0, 82, 360, 0, 0, 117.5, 142.5)
-	rotateText:setText(Engine[0xF9F1239CFD921FE](0xC718AEEBB3E6B97))
+	rotateText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_C718AEEBB3E6B97"))
 	rotateText:setTTF("ttmussels_regular")
 	rotateText:setLetterSpacing(2)
-	rotateText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	rotateText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	rotateText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	rotateText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(rotateText)
 	self.rotateText = rotateText
 	local rightTriggerButton = CoD.EmblemEditorButtonPrompt.new(f1_arg0, f1_arg1, 0, 0, 39, 73, 0, 0, 109, 155)
@@ -47,7 +47,7 @@ CoD.EmblemEditorMaterialControls.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	self:addElement(leftTriggerButton)
 	self.leftTriggerButton = leftTriggerButton
 	local FreeScale = CoD.PaintshopButtonPrompt.new(f1_arg0, f1_arg1, 0, 0, 20, 380, 0, 0, 71, 117)
-	FreeScale.label:setText(Engine[0xF9F1239CFD921FE](0xDD45E7A84A50DF9))
+	FreeScale.label:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_7DD45E7A84A50DF9"))
 	FreeScale:subscribeToGlobalModel(f1_arg1, "Controller", "right_stick_button_image", function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
@@ -58,7 +58,7 @@ CoD.EmblemEditorMaterialControls.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	self.FreeScale = FreeScale
 	local FixedScale = CoD.PaintshopButtonPrompt.new(f1_arg0, f1_arg1, 0, 0, 20, 380, 0, 0, 71, 117)
 	FixedScale:setAlpha(0)
-	FixedScale.label:setText(Engine[0xF9F1239CFD921FE](0xAD2AED6D89BCC15))
+	FixedScale.label:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_6AD2AED6D89BCC15"))
 	FixedScale:subscribeToGlobalModel(f1_arg1, "Controller", "move_right_stick_button_image", function(model)
 		local f5_local0 = model:get()
 		if f5_local0 ~= nil then
@@ -68,7 +68,7 @@ CoD.EmblemEditorMaterialControls.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	self:addElement(FixedScale)
 	self.FixedScale = FixedScale
 	local ChangeColor = CoD.PaintshopButtonPrompt.new(f1_arg0, f1_arg1, 0, 0, 20, 370, 0, 0, 33, 79)
-	ChangeColor.label:setText(Engine[0xF9F1239CFD921FE](0xC74469D97E52F55))
+	ChangeColor.label:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_4C74469D97E52F55"))
 	ChangeColor:subscribeToGlobalModel(f1_arg1, "Controller", "move_left_stick_button_image", function(model)
 		local f6_local0 = model:get()
 		if f6_local0 ~= nil then
@@ -79,22 +79,22 @@ CoD.EmblemEditorMaterialControls.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	self.ChangeColor = ChangeColor
 	local dividerH = LUI.UIImage.new(0, 0, 0, 420, 0, 0, 22.5, 26.5)
 	dividerH:setAlpha(0.2)
-	dividerH:setImage(RegisterImage(0x84B43D5B04D263A))
-	dividerH:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	dividerH:setImage(RegisterImage(@"hash_484B43D5B04D263A"))
+	dividerH:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	dividerH:setShaderVector(0, 0, 0, 0, 0)
 	dividerH:setupNineSliceShader(8, 4)
 	self:addElement(dividerH)
 	self.dividerH = dividerH
 	local Frame01 = LUI.UIImage.new(0, 0, -1, 421, 0, 0, 0, 190)
 	Frame01:setAlpha(0.2)
-	Frame01:setImage(RegisterImage(0x185E11D74ECA3D7))
-	Frame01:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	Frame01:setImage(RegisterImage(@"uie_ui_menu_store_common_frame"))
+	Frame01:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	Frame01:setShaderVector(0, 0, 0, 0, 0)
 	Frame01:setupNineSliceShader(16, 16)
 	self:addElement(Frame01)
 	self.Frame01 = Frame01
 	local PaintshopChooseSide = CoD.PaintshopChooseSide.new(f1_arg0, f1_arg1, 0, 0, 6, 426, 0, 0, 4.5, 36.5)
-	PaintshopChooseSide.text:setText(Engine[0xF9F1239CFD921FE](0xE6011EEF766C653))
+	PaintshopChooseSide.text:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_7E6011EEF766C653"))
 	self:addElement(PaintshopChooseSide)
 	self.PaintshopChooseSide = PaintshopChooseSide
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)

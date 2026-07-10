@@ -21,7 +21,7 @@ CoD.DirectorStageIndicator.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	})
 	local Stage3 = Stage1
 	local Stage2 = Stage1.subscribeToModel
-	local Stage4 = Engine[0x8DF2E5447F384B9]()
+	local Stage4 = Engine[@"getglobalmodel"]()
 	Stage2(Stage3, Stage4["lobbyRoot.publicLobby.stage"], function(f3_arg0)
 		f1_arg0:updateElementState(Stage1, {
 			name = "model_validation",
@@ -44,7 +44,7 @@ CoD.DirectorStageIndicator.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	})
 	Stage4 = Stage2
 	Stage3 = Stage2.subscribeToModel
-	local f1_local5 = Engine[0x8DF2E5447F384B9]()
+	local f1_local5 = Engine[@"getglobalmodel"]()
 	Stage3(Stage4, f1_local5["lobbyRoot.publicLobby.stage"], function(f5_arg0)
 		f1_arg0:updateElementState(Stage2, {
 			name = "model_validation",
@@ -67,7 +67,7 @@ CoD.DirectorStageIndicator.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	})
 	f1_local5 = Stage3
 	Stage4 = Stage3.subscribeToModel
-	local f1_local6 = Engine[0x8DF2E5447F384B9]()
+	local f1_local6 = Engine[@"getglobalmodel"]()
 	Stage4(f1_local5, f1_local6["lobbyRoot.publicLobby.stage"], function(f7_arg0)
 		f1_arg0:updateElementState(Stage3, {
 			name = "model_validation",
@@ -80,7 +80,7 @@ CoD.DirectorStageIndicator.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self:addElement(Stage3)
 	self.Stage3 = Stage3
 	Stage4 = CoD.DirectorStagesPulsing.new(f1_arg0, f1_arg1, 0, 0, 5, 607, 0, 0, 8, 32)
-	Stage4:setRFTMaterial(LUI.UIImage.GetCachedMaterial(0x1DE43899593E67E))
+	Stage4:setRFTMaterial(LUI.UIImage.GetCachedMaterial(@"hash_51DE43899593E67E"))
 	Stage4:setShaderVector(0, 0, 1, 0, 0)
 	Stage4:setShaderVector(1, 1, 1, 1, 0)
 	Stage4:setShaderVector(2, 0, 1, 0, 0)
@@ -103,7 +103,7 @@ CoD.DirectorStageIndicator.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	})
 	f1_local6 = self
 	f1_local5 = self.subscribeToModel
-	local f1_local7 = Engine[0x8DF2E5447F384B9]()
+	local f1_local7 = Engine[@"getglobalmodel"]()
 	f1_local5(f1_local6, f1_local7["lobbyRoot.publicLobby.stage"], function(f10_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -115,7 +115,7 @@ CoD.DirectorStageIndicator.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	end, false)
 	f1_local6 = self
 	f1_local5 = self.subscribeToModel
-	f1_local7 = Engine[0x8DF2E5447F384B9]()
+	f1_local7 = Engine[@"getglobalmodel"]()
 	f1_local5(f1_local6, f1_local7["lobbyRoot.publicLobby.waitingAnimation"], function(f11_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

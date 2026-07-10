@@ -25,7 +25,7 @@ local PostLoadFunc = function(self, controller)
 	self:setPriority(-1)
 	if f3_local0 then
 		self:subscribeToModel(f3_local0, function(model)
-			local f4_local0 = Engine[0x614D394F6F9A18D](model)
+			local f4_local0 = Engine[@"getmodelvalue"](model)
 			if f4_local0 then
 				self.alpha = f4_local0
 				f0_local0(self)
@@ -34,7 +34,7 @@ local PostLoadFunc = function(self, controller)
 	end
 	if f3_local2 then
 		self:subscribeToModel(f3_local2, function(model)
-			local f5_local0 = Engine[0x614D394F6F9A18D](model)
+			local f5_local0 = Engine[@"getmodelvalue"](model)
 			if f5_local0 then
 				self.red = f5_local0
 				f0_local1(self)
@@ -43,7 +43,7 @@ local PostLoadFunc = function(self, controller)
 	end
 	if f3_local3 then
 		self:subscribeToModel(f3_local3, function(model)
-			local f6_local0 = Engine[0x614D394F6F9A18D](model)
+			local f6_local0 = Engine[@"getmodelvalue"](model)
 			if f6_local0 then
 				self.green = f6_local0
 				f0_local1(self)
@@ -52,7 +52,7 @@ local PostLoadFunc = function(self, controller)
 	end
 	if f3_local4 then
 		self:subscribeToModel(f3_local4, function(model)
-			local f7_local0 = Engine[0x614D394F6F9A18D](model)
+			local f7_local0 = Engine[@"getmodelvalue"](model)
 			if f7_local0 then
 				self.blue = f7_local0
 				f0_local1(self)

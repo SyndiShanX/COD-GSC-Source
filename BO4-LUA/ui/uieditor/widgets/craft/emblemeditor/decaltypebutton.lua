@@ -17,8 +17,8 @@ CoD.DecalTypeButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	self.BlackBacking = BlackBacking
 	local NoiseTiledBacking = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	NoiseTiledBacking:setAlpha(0.8)
-	NoiseTiledBacking:setImage(RegisterImage(0x34839E8065B1E53))
-	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	NoiseTiledBacking:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	NoiseTiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	NoiseTiledBacking:setupNineSliceShader(196, 88)
 	self:addElement(NoiseTiledBacking)
@@ -30,18 +30,18 @@ CoD.DecalTypeButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	local DecalTypeName = LUI.UIText.new(0, 1, 10, -10, 0.5, 0.5, -12.5, 12.5)
 	DecalTypeName:setTTF("ttmussels_regular")
 	DecalTypeName:setLetterSpacing(2)
-	DecalTypeName:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	DecalTypeName:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	DecalTypeName:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	DecalTypeName:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	DecalTypeName:linkToElementModel(self, "name", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			DecalTypeName:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			DecalTypeName:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	self:addElement(DecalTypeName)
 	self.DecalTypeName = DecalTypeName
 	local Background = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	Background:setImage(RegisterImage(0x7615068F50B3D66))
+	Background:setImage(RegisterImage(@"blacktransparent"))
 	self:addElement(Background)
 	self.Background = Background
 	local Frame = CoD.StartMenuOptionsMainFrame.new(f1_arg0, f1_arg1, 0, 1, 0, 0, 0, 1, 0, 0)

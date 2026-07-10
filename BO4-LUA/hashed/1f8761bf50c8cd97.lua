@@ -26,7 +26,7 @@ CoD.EmblemEditorMaterialSwatch.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	self.cacButtonBoxLrgInactiveStroke0 = cacButtonBoxLrgInactiveStroke0
 	local ColorPickerBkgd = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	ColorPickerBkgd:setAlpha(0.5)
-	ColorPickerBkgd:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	ColorPickerBkgd:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	ColorPickerBkgd:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(ColorPickerBkgd)
 	self.ColorPickerBkgd = ColorPickerBkgd
@@ -37,8 +37,8 @@ CoD.EmblemEditorMaterialSwatch.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	self.BarBacking = BarBacking
 	local Frame = LUI.UIImage.new(0, 1, -2, 0, 0, 1, -2, 0)
 	Frame:setAlpha(0.2)
-	Frame:setImage(RegisterImage(0x185E11D74ECA3D7))
-	Frame:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	Frame:setImage(RegisterImage(@"uie_ui_menu_store_common_frame"))
+	Frame:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	Frame:setShaderVector(0, 0, 0, 0, 0)
 	Frame:setupNineSliceShader(16, 16)
 	self:addElement(Frame)
@@ -50,11 +50,11 @@ CoD.EmblemEditorMaterialSwatch.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	materialSwatch:setHorizontalCount(8)
 	materialSwatch:setVerticalCount(2)
 	materialSwatch:setSpacing(-4)
-	materialSwatch:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	materialSwatch:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	materialSwatch:setVerticalCounter(CoD.verticalCounter)
 	materialSwatch:setDataSource("EmblemMaterialList")
 	materialSwatch:linkToElementModel(materialSwatch, "isBMClassified", true, function(model, f2_arg1)
-		CoD.Menu.UpdateButtonShownState(f2_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f2_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	materialSwatch:registerEventHandler("list_item_gain_focus", function(element, event)
 		local f3_local0 = nil
@@ -76,10 +76,10 @@ CoD.EmblemEditorMaterialSwatch.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 		elseif element.super.gainFocus then
 			f4_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f4_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(materialSwatch, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(materialSwatch, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if not CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "isBMClassified") then
 			GoBack(self, controller)
 			CoD.CraftUtility.EmblemChooseMaterial_SelectionChanged(self, element, controller)
@@ -89,7 +89,7 @@ CoD.EmblemEditorMaterialSwatch.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 		end
 	end, function(element, menu, controller)
 		if not CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "isBMClassified") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false
@@ -110,23 +110,23 @@ CoD.EmblemEditorMaterialSwatch.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 		end
 		CoD.CraftUtility.EmblemChooseColor_ClearSelectedLayerMaterial(self, element, f1_arg1)
 		CoD.CraftUtility.EmblemChooseColor_SelectionChanged(self, element, f1_arg1)
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f8_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(lastSavedColor, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(lastSavedColor, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		GoBack(self, controller)
 		ClearMenuSavedState(menu)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 		return true
 	end, false)
 	self:addElement(lastSavedColor)
 	self.lastSavedColor = lastSavedColor
 	local FooterStripe1 = LUI.UIImage.new(0, 1, 0, 0, 1, 1, -38, -1)
 	FooterStripe1:setAlpha(0.1)
-	FooterStripe1:setImage(RegisterImage(0xC7A051F5EFC70E5))
-	FooterStripe1:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	FooterStripe1:setImage(RegisterImage(@"hash_2C7A051F5EFC70E5"))
+	FooterStripe1:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	FooterStripe1:setShaderVector(0, 0, 0, 0, 0)
 	FooterStripe1:setupNineSliceShader(245, 40)
 	self:addElement(FooterStripe1)
@@ -137,27 +137,27 @@ CoD.EmblemEditorMaterialSwatch.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	self.optionsVerticalCounter = optionsVerticalCounter
 	local dividerV = LUI.UIImage.new(0.5, 0.5, -353.5, -349.5, 0, 0, 1, 203)
 	dividerV:setAlpha(0.1)
-	dividerV:setImage(RegisterImage(0xC49B0C8991A541F))
-	dividerV:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	dividerV:setImage(RegisterImage(@"hash_C49B0C8991A541F"))
+	dividerV:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	dividerV:setShaderVector(0, 0, 0, 0, 0)
 	dividerV:setupNineSliceShader(4, 8)
 	self:addElement(dividerV)
 	self.dividerV = dividerV
 	local dividerH = LUI.UIImage.new(0, 0, 0, 877, 0, 0, 201, 205)
 	dividerH:setAlpha(0.2)
-	dividerH:setImage(RegisterImage(0x84B43D5B04D263A))
-	dividerH:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	dividerH:setImage(RegisterImage(@"hash_484B43D5B04D263A"))
+	dividerH:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	dividerH:setShaderVector(0, 0, 0, 0, 0)
 	dividerH:setupNineSliceShader(8, 4)
 	self:addElement(dividerH)
 	self.dividerH = dividerH
 	local Materials = LUI.UIText.new(0, 0, 0, 200, 0, 0, -17, -2)
 	Materials:setRGB(0.92, 0.89, 0.72)
-	Materials:setText(LocalizeToUpperString(0xE5BDA73054BDF29))
+	Materials:setText(LocalizeToUpperString(@"menu/material_picker"))
 	Materials:setTTF("ttmussels_demibold")
 	Materials:setLetterSpacing(6)
-	Materials:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Materials:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Materials:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Materials:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(Materials)
 	self.Materials = Materials
 	self:mergeStateConditions({

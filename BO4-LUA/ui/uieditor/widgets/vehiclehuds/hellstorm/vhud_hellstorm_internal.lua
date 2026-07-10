@@ -34,7 +34,7 @@ CoD.vhud_hellstorm_internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	})
 	local f1_local3 = vhudhellstormProximityWarning
 	local vhudhellstormbuttonlayout = vhudhellstormProximityWarning.subscribeToModel
-	local f1_local5 = Engine[0x8DF2E5447F384B9]()
+	local f1_local5 = Engine[@"getglobalmodel"]()
 	vhudhellstormbuttonlayout(f1_local3, f1_local5["lobbyRoot.lobbyNav"], function(f5_arg0)
 		f1_arg0:updateElementState(vhudhellstormProximityWarning, {
 			name = "model_validation",
@@ -46,7 +46,7 @@ CoD.vhud_hellstorm_internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	end, false)
 	f1_local3 = vhudhellstormProximityWarning
 	vhudhellstormbuttonlayout = vhudhellstormProximityWarning.subscribeToModel
-	f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
 	vhudhellstormbuttonlayout(f1_local3, f1_local5["vehicle.collisionWarning"], function(f6_arg0)
 		f1_arg0:updateElementState(vhudhellstormProximityWarning, {
 			name = "model_validation",
@@ -74,7 +74,7 @@ CoD.vhud_hellstorm_internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	})
 	f1_local5 = self
 	f1_local3 = self.subscribeToModel
-	local f1_local6 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local6 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local3(f1_local5, f1_local6["factions.isCoDCaster"], function(f9_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

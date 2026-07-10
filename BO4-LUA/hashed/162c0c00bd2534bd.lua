@@ -8,7 +8,7 @@ CoD.SpawnRegionRadius.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	self.id = "SpawnRegionRadius"
 	self.soundSet = "default"
 	local SpawnArea = CoD.SpawnRegionRing.new(f1_arg0, f1_arg1, 0, 1, 0, 0, 0, 1, 0, 0)
-	SpawnArea:setRFTMaterial(LUI.UIImage.GetCachedMaterial(0x1DE43899593E67E))
+	SpawnArea:setRFTMaterial(LUI.UIImage.GetCachedMaterial(@"hash_51DE43899593E67E"))
 	SpawnArea:setShaderVector(0, 0, 1, 0, 0)
 	SpawnArea:setShaderVector(1, 0, 0, 0, 0)
 	SpawnArea:setShaderVector(2, 0, 1, 0, 0)

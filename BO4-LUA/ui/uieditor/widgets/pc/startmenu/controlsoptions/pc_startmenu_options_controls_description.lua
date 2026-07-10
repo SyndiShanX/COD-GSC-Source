@@ -13,11 +13,11 @@ CoD.PC_StartMenu_Options_Controls_Description.new = function(f1_arg0, f1_arg1, f
 	self.onlyChildrenFocusable = true
 	self.anyChildUsesUpdateState = true
 	local DescriptionTextBox = CoD.PC_StartMenu_Options_Controls_DescriptionText.new(f1_arg0, f1_arg1, 0, 0, 0, 673, 0, 0, 338, 540)
-	DescriptionTextBox.OptionName:setText(LocalizeToUpperString(0x93E719493E9E18F))
+	DescriptionTextBox.OptionName:setText(LocalizeToUpperString(@"menu/new"))
 	self:addElement(DescriptionTextBox)
 	self.DescriptionTextBox = DescriptionTextBox
 	local PlaceHolderImage = CoD.PC_StartMenu_Options_Controls_DescriptionImage.new(f1_arg0, f1_arg1, 0, 0, 0, 675, 0, 0, 4.5, 384.5)
-	PlaceHolderImage.PlaceHolderImage:setImage(RegisterImage(0xD94A99F28B028CF))
+	PlaceHolderImage.PlaceHolderImage:setImage(RegisterImage(@"img_t7_menu_mp_preview_biodome"))
 	self:addElement(PlaceHolderImage)
 	self.PlaceHolderImage = PlaceHolderImage
 	local Line = CoD.SeperationLine.new(f1_arg0, f1_arg1, 0, 0, 0, 673, 0, 0, 0, 1)
@@ -44,7 +44,7 @@ CoD.PC_StartMenu_Options_Controls_Description.new = function(f1_arg0, f1_arg1, f
 	self.DescriptionTextBox:linkToElementModel(self, "desc", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			DescriptionTextBox.detailedDescription:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			DescriptionTextBox.detailedDescription:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	testdescriptionpointer.id = "testdescriptionpointer"

@@ -8,13 +8,13 @@ CoD.VehicleGround_ModT4.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Image3 = LUI.UIImage.new(0, 0, 0, 216, 0, 0, 0, 54)
-	Image3:setImage(RegisterImage(0xE96BE34BB09996F))
-	Image3:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Image3:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_ground_modulest4"))
+	Image3:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Image3)
 	self.Image3 = Image3
 	local Image0 = LUI.UIImage.new(0, 0, 171, 183, 0, 0, 32, 44)
-	Image0:setImage(RegisterImage(0xB0113AB62B1A835))
-	Image0:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Image0:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_ground_modulespixel"))
+	Image0:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Image0)
 	self.Image0 = Image0
 	self:mergeStateConditions({
@@ -56,14 +56,14 @@ CoD.VehicleGround_ModT4.__clipsPerState = {
 				local f6_local0 = function(f7_arg0)
 					local f7_local0 = function(f8_arg0)
 						local f8_local0 = function(f9_arg0)
-							f9_arg0:beginAnimation(1990, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+							f9_arg0:beginAnimation(1990, Enum[@"luitween"][@"luitween_ease_both"])
 							f9_arg0:setLeftRight(0, 0, 196, 208)
 							f9_arg0:registerEventHandler("transition_complete_keyframe", f5_arg0.clipFinished)
 						end
 						f8_arg0:beginAnimation(1219)
 						f8_arg0:registerEventHandler("transition_complete_keyframe", f8_local0)
 					end
-					f7_arg0:beginAnimation(2490, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f7_arg0:beginAnimation(2490, Enum[@"luitween"][@"luitween_ease_both"])
 					f7_arg0:setLeftRight(0, 0, 45, 57)
 					f7_arg0:registerEventHandler("transition_complete_keyframe", f7_local0)
 				end

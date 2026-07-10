@@ -19,7 +19,7 @@ CoD.Expander.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5
 	ElementList:setWidgetType(CoD.PC_StartMenu_Options_Controls_KeyBinder)
 	ElementList:setVerticalCount(9)
 	ElementList:setSpacing(10)
-	ElementList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	ElementList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	ElementList:linkToElementModel(self, "optionsDatasource", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then

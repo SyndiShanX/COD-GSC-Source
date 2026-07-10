@@ -11,8 +11,8 @@ CoD.ShopItemTallDescContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	Name:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	Name:setTTF("ttmussels_demibold")
 	Name:setLetterSpacing(1.6)
-	Name:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	Name:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	Name:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	Name:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	Name:linkToElementModel(self, "name", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -24,12 +24,12 @@ CoD.ShopItemTallDescContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	local shopCategory = LUI.UIText.new(0.5, 0.5, -109, 109, 0, 0, 23, 37)
 	shopCategory:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	shopCategory:setTTF("dinnext_regular")
-	shopCategory:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	shopCategory:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	shopCategory:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	shopCategory:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	shopCategory:linkToElementModel(self, "shopCategory", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
-			shopCategory:setText(Engine[0xF9F1239CFD921FE](f3_local0))
+			shopCategory:setText(Engine[@"hash_4F9F1239CFD921FE"](f3_local0))
 		end
 	end)
 	self:addElement(shopCategory)

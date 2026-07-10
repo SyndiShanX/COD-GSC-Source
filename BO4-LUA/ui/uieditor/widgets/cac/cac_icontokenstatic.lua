@@ -9,8 +9,8 @@ CoD.cac_IconTokenStatic.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local imgTokenBox = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	imgTokenBox:setAlpha(0)
-	imgTokenBox:setImage(RegisterImage(0xACB6BFF8B3FFB88))
-	imgTokenBox:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	imgTokenBox:setImage(RegisterImage(@"uie_t7_menu_cac_icontokenbox"))
+	imgTokenBox:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(imgTokenBox)
 	self.imgTokenBox = imgTokenBox
 	local imgIconTokenMult = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
@@ -21,24 +21,24 @@ CoD.cac_IconTokenStatic.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	local imgIconTokenMultCP = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	imgIconTokenMultCP:setRGB(0, 0, 0)
 	imgIconTokenMultCP:setAlpha(0)
-	imgIconTokenMultCP:setImage(RegisterImage(0x53E30FEAEAC8F83))
+	imgIconTokenMultCP:setImage(RegisterImage(@"uie_t7_menu_cac_icontoken_cp"))
 	self:addElement(imgIconTokenMultCP)
 	self.imgIconTokenMultCP = imgIconTokenMultCP
 	local imgIconToken = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	imgIconToken:setAlpha(0.92)
-	imgIconToken:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	imgIconToken:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(imgIconToken)
 	self.imgIconToken = imgIconToken
 	local imgIconTokenCP = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	imgIconTokenCP:setAlpha(0)
-	imgIconTokenCP:setImage(RegisterImage(0x53E30FEAEAC8F83))
+	imgIconTokenCP:setImage(RegisterImage(@"uie_t7_menu_cac_icontoken_cp"))
 	self:addElement(imgIconTokenCP)
 	self.imgIconTokenCP = imgIconTokenCP
 	local glow = LUI.UIImage.new(0, 1, 0, 20, 0, 1, -3, 17)
 	glow:setRGB(1, 0.48, 0)
 	glow:setAlpha(RandomAddPercent(-15, 0.26))
-	glow:setImage(RegisterImage(0x1078C36A022A4FE))
-	glow:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	glow:setImage(RegisterImage(@"uie_t7_menu_cac_glow"))
+	glow:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(glow)
 	self.glow = glow
 	self:mergeStateConditions({
@@ -57,7 +57,7 @@ CoD.cac_IconTokenStatic.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	})
 	local f1_local7 = self
 	local f1_local8 = self.subscribeToModel
-	local f1_local9 = Engine[0x8DF2E5447F384B9]()
+	local f1_local9 = Engine[@"getglobalmodel"]()
 	f1_local8(f1_local7, f1_local9["lobbyRoot.lobbyNav"], function(f4_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

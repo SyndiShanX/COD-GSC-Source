@@ -10,24 +10,24 @@ CoD.BM_SmallContractProgress.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	local EmptyFill = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	EmptyFill:setRGB(0.45, 0.45, 0.45)
 	EmptyFill:setAlpha(0)
-	EmptyFill:setImage(RegisterImage(0x5EE487F3CC2F5EE))
+	EmptyFill:setImage(RegisterImage(@"hash_25EE487F3CC2F5EE"))
 	self:addElement(EmptyFill)
 	self.EmptyFill = EmptyFill
 	local EmptyRing = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	EmptyRing:setRGB(0.45, 0.45, 0.45)
 	EmptyRing:setAlpha(0)
-	EmptyRing:setImage(RegisterImage(0xA63A1E82AA367D2))
+	EmptyRing:setImage(RegisterImage(@"hash_5A63A1E82AA367D2"))
 	self:addElement(EmptyRing)
 	self.EmptyRing = EmptyRing
 	local ProgressBarBack = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	ProgressBarBack:setRGB(0.45, 0.45, 0.45)
-	ProgressBarBack:setImage(RegisterImage(0x9A7834DA6C08B1A))
+	ProgressBarBack:setImage(RegisterImage(@"hash_69A7834DA6C08B1A"))
 	self:addElement(ProgressBarBack)
 	self.ProgressBarBack = ProgressBarBack
 	local ProgressBarFront = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	ProgressBarFront:setRGB(ColorSet.PlayerYellow.r, ColorSet.PlayerYellow.g, ColorSet.PlayerYellow.b)
-	ProgressBarFront:setImage(RegisterImage(0xBAD1467C2B4564C))
-	ProgressBarFront:setMaterial(LUI.UIImage.GetCachedMaterial(0xD5CA1A25ED87F4F))
+	ProgressBarFront:setImage(RegisterImage(@"hash_1BAD1467C2B4564C"))
+	ProgressBarFront:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_clock_normal"))
 	ProgressBarFront:setShaderVector(1, 0.5, 0, 0, 0)
 	ProgressBarFront:setShaderVector(2, 0.5, 0, 0, 0)
 	ProgressBarFront:setShaderVector(3, 0, 0, 0, 0)
@@ -42,8 +42,8 @@ CoD.BM_SmallContractProgress.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	self.ProgressBarFront = ProgressBarFront
 	local ProgressBarComplete = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	ProgressBarComplete:setAlpha(0)
-	ProgressBarComplete:setImage(RegisterImage(0x200DFB498DD9B4E))
-	ProgressBarComplete:setMaterial(LUI.UIImage.GetCachedMaterial(0xD5CA1A25ED87F4F))
+	ProgressBarComplete:setImage(RegisterImage(@"hash_200DFB498DD9B4E"))
+	ProgressBarComplete:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_clock_normal"))
 	ProgressBarComplete:setShaderVector(1, 0.5, 0, 0, 0)
 	ProgressBarComplete:setShaderVector(2, 0.5, 0, 0, 0)
 	ProgressBarComplete:setShaderVector(3, 0, 0, 0, 0)
@@ -73,7 +73,7 @@ CoD.BM_SmallContractProgress.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	self.Plus = Plus
 	local Check = LUI.UIImage.new(0.5, 0.5, -32, 32, 0.5, 0.5, -32, 32)
 	Check:setAlpha(0)
-	Check:setImage(RegisterImage(0xD1E7BB277F7D37A))
+	Check:setImage(RegisterImage(@"uie_ui_menu_contracts_check"))
 	self:addElement(Check)
 	self.Check = Check
 	self:mergeStateConditions({

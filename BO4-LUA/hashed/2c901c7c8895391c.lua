@@ -14,8 +14,8 @@ CoD.MeritOverlayManualLayoutVerticalBG.new = function(f1_arg0, f1_arg1, f1_arg2,
 	self.IGRbg = IGRbg
 	local NextEchelon = LUI.UIText.new(0, 0, 460, 518, 0, 0, 571, 599)
 	NextEchelon:setTTF("ttmussels_regular")
-	NextEchelon:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	NextEchelon:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	NextEchelon:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	NextEchelon:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	NextEchelon:linkToElementModel(self, "nextRank", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -50,8 +50,8 @@ CoD.MeritOverlayManualLayoutVerticalBG.new = function(f1_arg0, f1_arg1, f1_arg2,
 	self.EchelonProgress = EchelonProgress
 	local CurrentEchelon = LUI.UIText.new(0, 0, 22, 80, 0, 0, 571, 599)
 	CurrentEchelon:setTTF("ttmussels_regular")
-	CurrentEchelon:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	CurrentEchelon:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	CurrentEchelon:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	CurrentEchelon:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	CurrentEchelon:linkToElementModel(self, "rank", true, function(model)
 		local f7_local0 = model:get()
 		if f7_local0 ~= nil then
@@ -71,33 +71,33 @@ CoD.MeritOverlayManualLayoutVerticalBG.new = function(f1_arg0, f1_arg1, f1_arg2,
 	self.EarnedEchelonIcon = EarnedEchelonIcon
 	local Box = LUI.UIImage.new(0.5, 0.5, -200, 200, 0.5, 0.5, -213, 99)
 	Box:setAlpha(0)
-	Box:setImage(RegisterImage(0x60863710610A64E))
+	Box:setImage(RegisterImage(@"uie_ui_hud_wz_endgame_merits_box"))
 	self:addElement(Box)
 	self.Box = Box
 	local ProgressTitle = LUI.UIText.new(0.5, 0.5, -100, 100, 0, 0, 455, 479)
 	ProgressTitle:setAlpha(0)
-	ProgressTitle:setText(Engine[0xF9F1239CFD921FE](0xDB9EE2A23526998))
+	ProgressTitle:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_5DB9EE2A23526998"))
 	ProgressTitle:setTTF("default")
-	ProgressTitle:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	ProgressTitle:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	ProgressTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	ProgressTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(ProgressTitle)
 	self.ProgressTitle = ProgressTitle
 	local MeritsHeader = LUI.UIText.new(0.5, 0.5, -256.5, 256.5, 0, 0, 76, 100)
 	MeritsHeader:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
-	MeritsHeader:setText(LocalizeToUpperString(0x2FD7986ED047F25))
+	MeritsHeader:setText(LocalizeToUpperString(@"hash_32FD7986ED047F25"))
 	MeritsHeader:setTTF("ttmussels_regular")
 	MeritsHeader:setLetterSpacing(2)
-	MeritsHeader:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	MeritsHeader:setAlignment(Enum[0x7A5123B654282D2][0x6ED4298C93DC5ED])
+	MeritsHeader:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	MeritsHeader:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
 	self:addElement(MeritsHeader)
 	self.MeritsHeader = MeritsHeader
 	local Title = LUI.UIText.new(0.5, 0.5, -248, 248, 0, 0, 19, 51)
 	Title:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
-	Title:setText(Engine[0xF9F1239CFD921FE](0x9C7C549DBCFDA00))
+	Title:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_29C7C549DBCFDA00"))
 	Title:setTTF("ttmussels_demibold")
 	Title:setLetterSpacing(4)
-	Title:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	Title:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	Title:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	Title:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	self:addElement(Title)
 	self.Title = Title
 	self:mergeStateConditions({

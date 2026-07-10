@@ -12,8 +12,8 @@ CoD.LobbyPlayerInspectionPlayerLevel.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	self.anyChildUsesUpdateState = true
 	local TiledBackingRank = LUI.UIImage.new(0, 0, 2, 350, 0, 0, 2, 160)
 	TiledBackingRank:setAlpha(0.5)
-	TiledBackingRank:setImage(RegisterImage(0x34839E8065B1E53))
-	TiledBackingRank:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	TiledBackingRank:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	TiledBackingRank:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	TiledBackingRank:setShaderVector(0, 0, 0, 0, 0)
 	TiledBackingRank:setupNineSliceShader(196, 88)
 	self:addElement(TiledBackingRank)
@@ -21,7 +21,7 @@ CoD.LobbyPlayerInspectionPlayerLevel.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	local RankIconBGTint = LUI.UIImage.new(0, 0, 2, 136, 0, 0, 14, 160)
 	RankIconBGTint:setRGB(0.39, 0.39, 0.39)
 	RankIconBGTint:setAlpha(0.02)
-	RankIconBGTint:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	RankIconBGTint:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(RankIconBGTint)
 	self.RankIconBGTint = RankIconBGTint
 	local RankAndLevel = CoD.CommonRankIconAndRankLarge.new(f1_arg0, f1_arg1, 0, 0, 2, 351, 0, 0, 19.5, 154.5)
@@ -41,8 +41,8 @@ CoD.LobbyPlayerInspectionPlayerLevel.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	self.CommonStripeBar = CommonStripeBar
 	local TopBracket = LUI.UIImage.new(0, 1, -2, 2, 1, 1, -26.5, 3.5)
 	TopBracket:setZRot(180)
-	TopBracket:setImage(RegisterImage(0x46CC392945F433B))
-	TopBracket:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	TopBracket:setImage(RegisterImage(@"uie_ui_menu_common_button_bracket"))
+	TopBracket:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	TopBracket:setShaderVector(0, 0, 0, 0, 0)
 	TopBracket:setupNineSliceShader(12, 12)
 	self:addElement(TopBracket)

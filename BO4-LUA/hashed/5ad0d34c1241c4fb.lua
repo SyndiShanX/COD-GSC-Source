@@ -19,8 +19,8 @@ CoD.Prestige_RewardWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	self.BgAdd = BgAdd
 	local focusInnerGlow = LUI.UIImage.new(0, 0, -9, 137, 0, 0, -9, 163)
 	focusInnerGlow:setAlpha(0)
-	focusInnerGlow:setImage(RegisterImage(0xCB07CCC28498CB2))
-	focusInnerGlow:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	focusInnerGlow:setImage(RegisterImage(@"uie_ui_menu_store_focus_frame"))
+	focusInnerGlow:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	focusInnerGlow:setShaderVector(0, 0, 0, 0, 0)
 	focusInnerGlow:setupNineSliceShader(28, 28)
 	self:addElement(focusInnerGlow)
@@ -43,8 +43,8 @@ CoD.Prestige_RewardWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	WideText2:setRGB(ColorSet.T8__SILVER.r, ColorSet.T8__SILVER.g, ColorSet.T8__SILVER.b)
 	WideText2:setAlpha(0)
 	WideText2:setTTF("ttmussels_regular")
-	WideText2:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	WideText2:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	WideText2:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	WideText2:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	WideText2:linkToElementModel(self, "itemGroupName", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -57,8 +57,8 @@ CoD.Prestige_RewardWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	WideText1:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
 	WideText1:setAlpha(0)
 	WideText1:setTTF("ttmussels_demibold")
-	WideText1:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	WideText1:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	WideText1:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	WideText1:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	WideText1:linkToElementModel(self, "displayName", true, function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
@@ -69,8 +69,8 @@ CoD.Prestige_RewardWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	self.WideText1 = WideText1
 	local FrontendFrameSelected = LUI.UIImage.new(0, 0, -1.5, 129.5, 0, 0, -1.5, 155.5)
 	FrontendFrameSelected:setAlpha(0)
-	FrontendFrameSelected:setImage(RegisterImage(0xCB07CCC28498CB2))
-	FrontendFrameSelected:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	FrontendFrameSelected:setImage(RegisterImage(@"uie_ui_menu_store_focus_frame"))
+	FrontendFrameSelected:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	FrontendFrameSelected:setShaderVector(0, 0, 0, 0, 0)
 	FrontendFrameSelected:setupNineSliceShader(4, 4)
 	self:addElement(FrontendFrameSelected)
@@ -163,15 +163,15 @@ CoD.Prestige_RewardWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 		})
 	end)
 	self:linkToElementModel(self, "itemIndex", true, function(model, f14_arg1)
-		CoD.Menu.UpdateButtonShownState(f14_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f14_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	self:linkToElementModel(self, "useWideLayout", true, function(model, f15_arg1)
-		CoD.Menu.UpdateButtonShownState(f15_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f15_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	self:linkToElementModel(self, "isPermanentlyUnlocked", true, function(model, f16_arg1)
-		CoD.Menu.UpdateButtonShownState(f16_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f16_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if IsUnlockTokenButtonAvailable(controller) and CoD.ModelUtility.IsSelfModelValueGreaterThanOrEqualTo(element, controller, "itemIndex", 0) and not CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "useWideLayout") and not CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "isPermanentlyUnlocked") then
 			CoD.PrestigeUtility.OpenPermanentUnlockClassItemDialog(menu, controller, element)
 			return true
@@ -179,7 +179,7 @@ CoD.Prestige_RewardWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 		end
 	end, function(element, menu, controller)
 		if IsUnlockTokenButtonAvailable(controller) and CoD.ModelUtility.IsSelfModelValueGreaterThanOrEqualTo(element, controller, "itemIndex", 0) and not CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "useWideLayout") and not CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "isPermanentlyUnlocked") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		else
 			return false

@@ -15,11 +15,11 @@ CoD.AmmoWidget_Prompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	local PromptText = LUI.UIText.new(0, 0, 0, 64, 0.22, 0.22, -2.5, 8.5)
 	PromptText:setRGB(1, 0, 0)
 	PromptText:setAlpha(0)
-	PromptText:setText(Engine[0xF9F1239CFD921FE](0x91D99ADC60420B1))
+	PromptText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_191D99ADC60420B1"))
 	PromptText:setTTF("0arame_mono_stencil")
 	PromptText:setLetterSpacing(3)
-	PromptText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	PromptText:setAlignment(Enum[0x7A5123B654282D2][0x6ED4298C93DC5ED])
+	PromptText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	PromptText:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
 	self:addElement(PromptText)
 	self.PromptText = PromptText
 	if PostLoadFunc then
@@ -35,7 +35,7 @@ CoD.AmmoWidget_Prompt.__resetProperties = function(f2_arg0)
 	f2_arg0.PromptText:setRGB(1, 0, 0)
 	f2_arg0.PromptText:setAlpha(0)
 	f2_arg0.PromptText:setLetterSpacing(3)
-	f2_arg0.PromptText:setAlignment(Enum[0x7A5123B654282D2][0x6ED4298C93DC5ED])
+	f2_arg0.PromptText:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
 	f2_arg0.red_box:setLeftRight(0, 0, 0, 64)
 	f2_arg0.red_box:setTopBottom(0, 0, -1, 10)
 	f2_arg0.red_box:setAlpha(0)
@@ -76,7 +76,7 @@ CoD.AmmoWidget_Prompt.__clipsPerState = {
 			f4_arg0.PromptText:setRGB(1, 0.49, 0.49)
 			f4_arg0.PromptText:setAlpha(1)
 			f4_arg0.PromptText:setLetterSpacing(3)
-			f4_arg0.PromptText:setAlignment(Enum[0x7A5123B654282D2][0x6ED4298C93DC5ED])
+			f4_arg0.PromptText:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
 			f4_arg0.clipFinished(f4_arg0.PromptText)
 			f4_arg0.nextClip = "DefaultClip"
 		end,

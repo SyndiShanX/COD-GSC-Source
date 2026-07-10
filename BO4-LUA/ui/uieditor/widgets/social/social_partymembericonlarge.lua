@@ -10,7 +10,7 @@ CoD.Social_PartyMemberIconLarge.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	local Icon = LUI.UIImage.new(0, 1, -3, 3, 0, 1, -3, 3)
 	Icon:setRGB(ColorSet.PartyOther.r, ColorSet.PartyOther.g, ColorSet.PartyOther.b)
 	Icon:setAlpha(0)
-	Icon:setImage(RegisterImage(0xF21DA17910EC77E))
+	Icon:setImage(RegisterImage(@"uie_t7_menu_frontend_iconpartymemberlarge"))
 	self:addElement(Icon)
 	self.Icon = Icon
 	if PostLoadFunc then

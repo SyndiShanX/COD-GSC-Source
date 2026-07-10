@@ -13,7 +13,7 @@ CoD.HUD_VehiclePrompt_Hold.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	label:setText(LocalizeToUpperString(0x0))
 	label:setTTF("ttmussels_demibold")
 	label:setLetterSpacing(2)
-	label:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	label:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	label:setBackingType(1)
 	label:setBackingWidget(CoD.TextBacking, f1_arg0, f1_arg1)
 	label:setBackingColor(0, 0, 0)
@@ -23,12 +23,12 @@ CoD.HUD_VehiclePrompt_Hold.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self.label = label
 	local HUDVehiclePromptContainer = nil
 	HUDVehiclePromptContainer = CoD.HUD_VehiclePrompt_Container.new(f1_arg0, f1_arg1, 0, 1, 0, 0, -0.11, 0.89, 7, -7)
-	HUDVehiclePromptContainer.KBMText:setText(Engine[0xF9F1239CFD921FE](0xF17B1BF58DB2590))
+	HUDVehiclePromptContainer.KBMText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_5F17B1BF58DB2590"))
 	self:addElement(HUDVehiclePromptContainer)
 	self.HUDVehiclePromptContainer = HUDVehiclePromptContainer
 	local HoldArrow = LUI.UIImage.new(0.5, 0.5, -10, 10, 0, 0, -7, 13)
 	HoldArrow:setAlpha(0)
-	HoldArrow:setImage(RegisterImage(0xCB30D895D0912D1))
+	HoldArrow:setImage(RegisterImage(@"uie_vehicleprompt_hold"))
 	self:addElement(HoldArrow)
 	self.HoldArrow = HoldArrow
 	self:mergeStateConditions({

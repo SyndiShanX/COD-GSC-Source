@@ -8,11 +8,11 @@ CoD.fe_LeftContainerMain.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	self.soundSet = "default"
 	local lblPressToPlay = LUI.UIText.new(0, 1, 0, 0, 1, 1, -27.5, 0.5)
 	lblPressToPlay:setRGB(ColorSet.T8__SLATE.r, ColorSet.T8__SLATE.g, ColorSet.T8__SLATE.b)
-	lblPressToPlay:setText(LocalizeToUpperString(0xF5814C348E0C9F1))
+	lblPressToPlay:setText(LocalizeToUpperString(@"platform/press_start"))
 	lblPressToPlay:setTTF("ttmussels_regular")
 	lblPressToPlay:setLetterSpacing(5)
-	lblPressToPlay:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	lblPressToPlay:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	lblPressToPlay:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	lblPressToPlay:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(lblPressToPlay)
 	self.lblPressToPlay = lblPressToPlay
 	if PostLoadFunc then

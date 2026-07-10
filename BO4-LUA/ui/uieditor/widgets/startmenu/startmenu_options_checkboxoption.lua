@@ -25,20 +25,20 @@ CoD.StartMenu_Options_CheckBoxOption.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	self.checkboxBacking = checkboxBacking
 	local CheckboxBkg = LUI.UIImage.new(0, 0, 22, 50, 0, 0, 13, 39)
 	CheckboxBkg:setAlpha(0)
-	CheckboxBkg:setImage(RegisterImage(0x8598719B0D5778E))
+	CheckboxBkg:setImage(RegisterImage(@"uie_t7_menu_cacselection_checkbox_empty"))
 	self:addElement(CheckboxBkg)
 	self.CheckboxBkg = CheckboxBkg
 	local checkboxCheck = LUI.UIImage.new(0, 0, 22, 50, 0, 0, 13, 39)
-	checkboxCheck:setImage(RegisterImage(0x7A44A1F2889C2B8))
+	checkboxCheck:setImage(RegisterImage(@"uie_t7_menu_cacselection_checkbox"))
 	self:addElement(checkboxCheck)
 	self.checkboxCheck = checkboxCheck
 	local labelText = LUI.UIText.new(0, 0, 70, 750, 0, 0, 7, 45)
 	labelText:setTTF("default")
-	labelText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	labelText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	labelText:linkToElementModel(self, "label", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			labelText:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			labelText:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	self:addElement(labelText)

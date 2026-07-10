@@ -45,8 +45,8 @@ CoD.InspectionWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	local CallingCardDescriptionText = LUI.UIText.new(0.5, 0.5, -825.5, -477.5, 0, 0, 915, 933)
 	CallingCardDescriptionText:setRGB(ColorSet.T8__OCHRE.r, ColorSet.T8__OCHRE.g, ColorSet.T8__OCHRE.b)
 	CallingCardDescriptionText:setTTF("ttmussels_regular")
-	CallingCardDescriptionText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	CallingCardDescriptionText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	CallingCardDescriptionText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	CallingCardDescriptionText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	CallingCardDescriptionText:subscribeToGlobalModel(f1_arg1, "InspectionUtilityInfo", "callingCardDescriptionText", function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -58,10 +58,10 @@ CoD.InspectionWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	local CallingCardTitleText = LUI.UIText.new(0.5, 0.5, -825.5, -477.5, 0, 0, 596, 617)
 	CallingCardTitleText:setRGB(0.92, 0.92, 0.92)
 	CallingCardTitleText:setAlpha(0.5)
-	CallingCardTitleText:setText(Engine[0xF9F1239CFD921FE](0xD993808FE84F8E0))
+	CallingCardTitleText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_2D993808FE84F8E0"))
 	CallingCardTitleText:setTTF("ttmussels_regular")
-	CallingCardTitleText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	CallingCardTitleText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	CallingCardTitleText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	CallingCardTitleText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(CallingCardTitleText)
 	self.CallingCardTitleText = CallingCardTitleText
 	local CallingCardShowcaseList = LUI.UIList.new(f1_arg0, f1_arg1, 10, 0, nil, false, false, false, false)
@@ -70,17 +70,17 @@ CoD.InspectionWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	CallingCardShowcaseList:setWidgetType(CoD.InspectCallingCardWidget)
 	CallingCardShowcaseList:setVerticalCount(3)
 	CallingCardShowcaseList:setSpacing(10)
-	CallingCardShowcaseList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	CallingCardShowcaseList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	CallingCardShowcaseList:setDataSource("InspectionUtilityCallingCardOptions")
 	CallingCardShowcaseList:appendEventHandler("input_source_changed", function(f4_arg0, f4_arg1)
 		f4_arg1.menu = f4_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f4_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
+		CoD.Menu.UpdateButtonShownState(f4_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"])
 	end)
 	local InspectionTrophyWidget = CallingCardShowcaseList
 	local TrophyTitleText = CallingCardShowcaseList.subscribeToModel
-	local f1_local12 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local12 = Engine[@"getmodelforcontroller"](f1_arg1)
 	TrophyTitleText(InspectionTrophyWidget, f1_local12.LastInput, function(f5_arg0, f5_arg1)
-		CoD.Menu.UpdateButtonShownState(f5_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
+		CoD.Menu.UpdateButtonShownState(f5_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"])
 	end, false)
 	CallingCardShowcaseList:registerEventHandler("list_item_gain_focus", function(element, event)
 		local f6_local0 = nil
@@ -94,20 +94,20 @@ CoD.InspectionWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 		elseif element.super.gainFocus then
 			f7_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"])
 		return f7_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(CallingCardShowcaseList, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(CallingCardShowcaseList, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		ProcessListAction(self, element, controller, menu)
 		PlaySoundAlias("uin_press_generic")
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 		return true
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(CallingCardShowcaseList, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(CallingCardShowcaseList, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], nil, function(element, menu, controller, model)
 		if not IsPC() then
 			CoD.InspectionUtility.ClearShowcaseCallingCard(menu, element, controller)
 			PlaySoundAlias("cac_equipment_remove")
@@ -116,13 +116,13 @@ CoD.InspectionWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 		end
 	end, function(element, menu, controller)
 		if not IsPC() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0xC9D32CFA07438E0, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"menu/clear", nil, nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(CallingCardShowcaseList, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB], "ui_remove", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(CallingCardShowcaseList, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"], "ui_remove", function(element, menu, controller, model)
 		if IsMouseOrKeyboard(controller) then
 			CoD.InspectionUtility.ClearShowcaseCallingCard(menu, element, controller)
 			return true
@@ -130,7 +130,7 @@ CoD.InspectionWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 		end
 	end, function(element, menu, controller)
 		if IsMouseOrKeyboard(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xA86619565BE54DB], 0xC9D32CFA07438E0, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "ui_remove")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_pckey_2"], @"menu/clear", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "ui_remove")
 			return true
 		else
 			return false
@@ -140,7 +140,7 @@ CoD.InspectionWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 		local f14_local0 = CallingCardShowcaseList
 		CoD.InspectionUtility.UpdateCallingCardShowcaseList(f1_arg0, self.CallingCardShowcaseList)
 	end)
-	CallingCardShowcaseList:AddContextualMenuAction(f1_arg0, f1_arg1, 0xC9D32CFA07438E0, function(f15_arg0, f15_arg1, f15_arg2, f15_arg3)
+	CallingCardShowcaseList:AddContextualMenuAction(f1_arg0, f1_arg1, @"menu/clear", function(f15_arg0, f15_arg1, f15_arg2, f15_arg3)
 		return function(f16_arg0, f16_arg1, f16_arg2, f16_arg3)
 			CoD.InspectionUtility.ClearShowcaseCallingCard(f16_arg1, f16_arg0, f16_arg2)
 		end
@@ -150,10 +150,10 @@ CoD.InspectionWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	TrophyTitleText = LUI.UIText.new(0.5, 0.5, -449.5, -199.5, 0, 0, 596, 617)
 	TrophyTitleText:setRGB(0.92, 0.92, 0.92)
 	TrophyTitleText:setAlpha(0)
-	TrophyTitleText:setText(Engine[0xF9F1239CFD921FE](0x483B43B98AC6E48))
+	TrophyTitleText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/career_best"))
 	TrophyTitleText:setTTF("ttmussels_regular")
-	TrophyTitleText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	TrophyTitleText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	TrophyTitleText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	TrophyTitleText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(TrophyTitleText)
 	self.TrophyTitleText = TrophyTitleText
 	InspectionTrophyWidget = CoD.InspectionTrophyWidget.new(f1_arg0, f1_arg1, 0.5, 0.5, -449.5, -199.5, 0, 0, 624, 906)
@@ -168,14 +168,14 @@ CoD.InspectionWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 		elseif element.super.gainFocus then
 			f18_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f18_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(InspectionTrophyWidget, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(InspectionTrophyWidget, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		CoD.InspectionUtility.OnTrophyShowcaseSelected(menu, controller, element)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 		return true
 	end, false)
 	self:addElement(InspectionTrophyWidget)

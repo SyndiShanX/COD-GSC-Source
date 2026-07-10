@@ -14,7 +14,7 @@ CoD.StartMenu_Identity_SubTitle.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	SubtitleText:setText("")
 	SubtitleText:setTTF("ttmussels_regular")
 	SubtitleText:setLetterSpacing(1.5)
-	SubtitleText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	SubtitleText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(SubtitleText)
 	self.SubtitleText = SubtitleText
 	local newIcon = CoD.NewBreadcrumb.new(f1_arg0, f1_arg1, 1, 1, -672, -654, 0.5, 0.5, -9, 9)

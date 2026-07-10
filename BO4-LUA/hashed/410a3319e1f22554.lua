@@ -8,7 +8,7 @@ CoD.PurchaseItemContentImage.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	self.soundSet = "default"
 	local ContractImage = LUI.UIImage.new(0, 0, 74, 906, 0, 0, 0, 376)
 	ContractImage:setScale(0.66, 0.66)
-	ContractImage:setMaterial(LUI.UIImage.GetCachedMaterial(0xE992BD5A540E2D))
+	ContractImage:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_delta_normal"))
 	ContractImage:setShaderVector(0, 0.36, 1, 0, 0)
 	ContractImage:setShaderVector(1, 0.43, 0.18, 0, 0)
 	ContractImage:setShaderVector(2, 0, 1, 0, 0)

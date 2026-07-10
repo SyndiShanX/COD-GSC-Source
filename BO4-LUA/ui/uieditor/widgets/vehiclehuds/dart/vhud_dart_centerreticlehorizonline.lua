@@ -7,8 +7,8 @@ CoD.vhud_dart_CenterReticleHorizonLine.new = function(f1_arg0, f1_arg1, f1_arg2,
 	self.id = "vhud_dart_CenterReticleHorizonLine"
 	self.soundSet = "default"
 	local CenterReticle = LUI.UIImage.new(0.5, 0.5, -334, 334, 0.5, 0.5, -4, 4)
-	CenterReticle:setImage(RegisterImage(0xBE82CCA3DBF33B4))
-	CenterReticle:setMaterial(LUI.UIImage.GetCachedMaterial(0x5956C6C1FD41D3C))
+	CenterReticle:setImage(RegisterImage(@"uie_ui_hud_vehicle_dart_horizontal_line"))
+	CenterReticle:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_aberration"))
 	CenterReticle:setShaderVector(0, 0.2, 1, 0, 0)
 	CenterReticle:setShaderVector(1, 0, 0, 0, 0)
 	CenterReticle:setShaderVector(2, 0, 0, 0, 0)
@@ -19,8 +19,8 @@ CoD.vhud_dart_CenterReticleHorizonLine.new = function(f1_arg0, f1_arg1, f1_arg2,
 	local CenterReticle0 = LUI.UIImage.new(0.5, 0.5, -334, 334, 0.5, 0.5, -4, 4)
 	CenterReticle0:setAlpha(0.08)
 	CenterReticle0:setZoom(-40)
-	CenterReticle0:setImage(RegisterImage(0xBE82CCA3DBF33B4))
-	CenterReticle0:setMaterial(LUI.UIImage.GetCachedMaterial(0x5956C6C1FD41D3C))
+	CenterReticle0:setImage(RegisterImage(@"uie_ui_hud_vehicle_dart_horizontal_line"))
+	CenterReticle0:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_aberration"))
 	CenterReticle0:setShaderVector(0, 0.2, 1, 0, 0)
 	CenterReticle0:setShaderVector(1, 0, 0, 0, 0)
 	CenterReticle0:setShaderVector(2, 0, 0, 0, 0)

@@ -9,14 +9,14 @@ CoD.vhud_agr_ReticleOutsideLine.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	local agrReticleOutsideLineUR0 = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	agrReticleOutsideLineUR0:setAlpha(0.15)
 	agrReticleOutsideLineUR0:setZoom(-50)
-	agrReticleOutsideLineUR0:setImage(RegisterImage(0x14E775656A19FFC))
-	agrReticleOutsideLineUR0:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	agrReticleOutsideLineUR0:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_agr_reticleoutsideline"))
+	agrReticleOutsideLineUR0:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(agrReticleOutsideLineUR0)
 	self.agrReticleOutsideLineUR0 = agrReticleOutsideLineUR0
 	local agrReticleOutsideLineUR = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	agrReticleOutsideLineUR:setAlpha(0.8)
-	agrReticleOutsideLineUR:setImage(RegisterImage(0x14E775656A19FFC))
-	agrReticleOutsideLineUR:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	agrReticleOutsideLineUR:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_agr_reticleoutsideline"))
+	agrReticleOutsideLineUR:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(agrReticleOutsideLineUR)
 	self.agrReticleOutsideLineUR = agrReticleOutsideLineUR
 	if PostLoadFunc then

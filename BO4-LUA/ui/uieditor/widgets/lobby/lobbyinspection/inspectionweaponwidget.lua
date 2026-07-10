@@ -19,18 +19,18 @@ CoD.InspectionWeaponWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	local GunRackTitleText = LUI.UIText.new(0, 0, 0, 250, 0, 0, -39, -18)
 	GunRackTitleText:setRGB(0.92, 0.92, 0.92)
 	GunRackTitleText:setAlpha(0.5)
-	GunRackTitleText:setText(Engine[0xF9F1239CFD921FE](0x2BA0F750E758177))
+	GunRackTitleText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/gun_rack"))
 	GunRackTitleText:setTTF("ttmussels_regular")
-	GunRackTitleText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	GunRackTitleText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	GunRackTitleText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	GunRackTitleText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(GunRackTitleText)
 	self.GunRackTitleText = GunRackTitleText
 	local WeaponName = LUI.UIText.new(0, 0, 1, 365, 0, 0, -12, 21)
 	WeaponName:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
 	WeaponName:setTTF("ttmussels_demibold")
 	WeaponName:setLetterSpacing(12)
-	WeaponName:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	WeaponName:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	WeaponName:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	WeaponName:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	WeaponName:subscribeToGlobalModel(f1_arg1, "InspectionWeapon", "weaponIndex", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -49,7 +49,7 @@ CoD.InspectionWeaponWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	})
 	local f1_local5 = self
 	local f1_local6 = self.subscribeToModel
-	local f1_local7 = Engine[0x8DF2E5447F384B9]()
+	local f1_local7 = Engine[@"getglobalmodel"]()
 	f1_local6(f1_local5, f1_local7["lobbyRoot.rankMode"], function(f4_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

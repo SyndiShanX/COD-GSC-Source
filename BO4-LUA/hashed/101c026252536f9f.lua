@@ -16,18 +16,18 @@ CoD.PositionDraft_EnemyStatus.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self.EnemiesReadyBackground = EnemiesReadyBackground
 	local EnemiesReady = LUI.UIText.new(0, 0.9, 0, 0, 0.52, 0.52, -8, 16)
 	EnemiesReady:setRGB(0.92, 0.92, 0.92)
-	EnemiesReady:setText(Engine[0xF9F1239CFD921FE](0x675EA06AE086251))
+	EnemiesReady:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_2675EA06AE086251"))
 	EnemiesReady:setTTF("ttmussels_regular")
 	EnemiesReady:setLetterSpacing(1)
-	EnemiesReady:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
-	EnemiesReady:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	EnemiesReady:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
+	EnemiesReady:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(EnemiesReady)
 	self.EnemiesReady = EnemiesReady
 	local WaitingForEnemyTeamBackground = LUI.UIImage.new(0, 1, 0, 0, 0, 0, 2, 43)
 	WaitingForEnemyTeamBackground:setRGB(0.72, 0.65, 0.5)
 	WaitingForEnemyTeamBackground:setAlpha(0)
 	WaitingForEnemyTeamBackground:setYRot(180)
-	WaitingForEnemyTeamBackground:setMaterial(LUI.UIImage.GetCachedMaterial(0x316E67E1DF2198E))
+	WaitingForEnemyTeamBackground:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_normal"))
 	WaitingForEnemyTeamBackground:setShaderVector(0, 1.1, 0, 0, 0)
 	WaitingForEnemyTeamBackground:setShaderVector(1, 0.71, 0, 0, 0)
 	WaitingForEnemyTeamBackground:setShaderVector(2, 1, 0, 0, 0)
@@ -37,11 +37,11 @@ CoD.PositionDraft_EnemyStatus.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self.WaitingForEnemyTeamBackground = WaitingForEnemyTeamBackground
 	local WaitingForEnemyTeam = LUI.UIText.new(0, 0.9, 0, 0, 0.52, 0.52, -36.5, -12.5)
 	WaitingForEnemyTeam:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
-	WaitingForEnemyTeam:setText(Engine[0xF9F1239CFD921FE](0xCB55EDAFFF81C41))
+	WaitingForEnemyTeam:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_4CB55EDAFFF81C41"))
 	WaitingForEnemyTeam:setTTF("ttmussels_demibold")
 	WaitingForEnemyTeam:setLetterSpacing(3)
-	WaitingForEnemyTeam:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
-	WaitingForEnemyTeam:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	WaitingForEnemyTeam:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
+	WaitingForEnemyTeam:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(WaitingForEnemyTeam)
 	self.WaitingForEnemyTeam = WaitingForEnemyTeam
 	local LineTop01 = LUI.UIImage.new(0, 1, 0, 0, 0, 0, 6, 7)
@@ -75,7 +75,7 @@ CoD.PositionDraft_EnemyStatus.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	})
 	local f1_local8 = self
 	local f1_local9 = self.subscribeToModel
-	local f1_local10 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local10 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local9(f1_local8, f1_local10["Clients.clientCount"], function(f4_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -87,7 +87,7 @@ CoD.PositionDraft_EnemyStatus.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	end, false)
 	f1_local8 = self
 	f1_local9 = self.subscribeToModel
-	f1_local10 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local10 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local9(f1_local8, f1_local10["Clients.clientReadyCount"], function(f5_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

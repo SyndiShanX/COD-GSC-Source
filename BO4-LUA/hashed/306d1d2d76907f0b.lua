@@ -42,19 +42,19 @@ CoD.HealthInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_ar
 	local GlowBlueOver = LUI.UIImage.new(0, 0, 86, 134, 0, 0, 14.5, 282.5)
 	GlowBlueOver:setAlpha(0)
 	GlowBlueOver:setZRot(90)
-	GlowBlueOver:setImage(RegisterImage(0x5BE416E17DAB33B))
-	GlowBlueOver:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	GlowBlueOver:setImage(RegisterImage(@"uie_t7_core_hud_mapwidget_panelglow"))
+	GlowBlueOver:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(GlowBlueOver)
 	self.GlowBlueOver = GlowBlueOver
 	local HealthValue = LUI.UIText.new(0, 0, 287, 351, 0, 0, 38, 64)
 	HealthValue:setTTF("0arame_mono_stencil")
-	HealthValue:setMaterial(LUI.UIImage.GetCachedMaterial(0x90D57B1E92D39D7))
+	HealthValue:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_90D57B1E92D39D7"))
 	HealthValue:setShaderVector(0, 0.8, 0, 0, 0)
 	HealthValue:setShaderVector(1, 0, 0, 0, 0)
 	HealthValue:setShaderVector(2, 1, 1, 1, 0.25)
 	HealthValue:setLetterSpacing(2)
-	HealthValue:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	HealthValue:setAlignment(Enum[0x7A5123B654282D2][0x6ED4298C93DC5ED])
+	HealthValue:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	HealthValue:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
 	HealthValue:linkToElementModel(self, "health.healthValue", true, function(model)
 		local f6_local0 = model:get()
 		if f6_local0 ~= nil then
@@ -74,8 +74,8 @@ CoD.HealthInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_ar
 	LED:setRGB(0, 0, 0)
 	LED:setAlpha(0.24)
 	LED:setScale(0.94, 0.94)
-	LED:setImage(RegisterImage(0x832BA507D0E7663))
-	LED:setMaterial(LUI.UIImage.GetCachedMaterial(0xE992BD5A540E2D))
+	LED:setImage(RegisterImage(@"uie_ui_hud_core_player_widget_led_status"))
+	LED:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_delta_normal"))
 	LED:setShaderVector(0, 0.03, 0.93, 0, 0)
 	LED:setShaderVector(1, 0, 0, 0, 0)
 	LED:setShaderVector(2, 0.37, 0.6, 0, 0)
@@ -87,34 +87,34 @@ CoD.HealthInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_ar
 		{
 			stateName = "Invisible",
 			condition = function(menu, element, event)
-				local f7_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xB8E9B69F4B87954])
+				local f7_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_demo_all_game_hud_hidden"])
 				if not f7_local0 then
-					f7_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xD3ABF9A2753CE40])
+					f7_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_demo_camera_mode_moviecam"])
 					if not f7_local0 then
-						f7_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x59333FC97F7870])
+						f7_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_emp_active"])
 						if not f7_local0 then
-							f7_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x69C28E2FCA82769])
+							f7_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_hud_hardcore"])
 							if not f7_local0 then
-								if Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xADC477DDE486DD7]) then
-									f7_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x23CD9BAB9B9F4C8])
+								if Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_hud_visible"]) then
+									f7_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_in_guided_missile"])
 									if not f7_local0 then
-										f7_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2])
+										f7_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_in_killcam"])
 										if not f7_local0 then
-											f7_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x7B52A87BC9AA4C7])
+											f7_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_in_remote_killstreak_static"])
 											if not f7_local0 then
-												f7_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x9BF57CE75A8755E])
+												f7_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"hash_29BF57CE75A8755E"])
 												if not f7_local0 then
-													f7_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x6668F0686232679])
+													f7_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_in_vehicle"])
 													if not f7_local0 then
-														f7_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x3AEEAA452536E6E])
+														f7_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_is_flash_banged"])
 														if not f7_local0 then
-															f7_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xD298E43D0B6FEF2])
+															f7_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_is_scoped"])
 															if not f7_local0 then
-																f7_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F])
+																f7_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_play_of_the_match"])
 																if not f7_local0 then
-																	f7_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04])
+																	f7_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_scoreboard_open"])
 																	if not f7_local0 then
-																		f7_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6])
+																		f7_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_ui_active"])
 																	end
 																end
 															end
@@ -143,182 +143,182 @@ CoD.HealthInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_ar
 	})
 	local f1_local10 = self
 	local f1_local11 = self.subscribeToModel
-	local f1_local12 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local11(f1_local10, f1_local12["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xB8E9B69F4B87954]], function(f9_arg0)
+	local f1_local12 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local11(f1_local10, f1_local12["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_demo_all_game_hud_hidden"]], function(f9_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f9_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xB8E9B69F4B87954],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_demo_all_game_hud_hidden"],
 		})
 	end, false)
 	f1_local10 = self
 	f1_local11 = self.subscribeToModel
-	f1_local12 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local11(f1_local10, f1_local12["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xD3ABF9A2753CE40]], function(f10_arg0)
+	f1_local12 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local11(f1_local10, f1_local12["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_demo_camera_mode_moviecam"]], function(f10_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f10_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xD3ABF9A2753CE40],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_demo_camera_mode_moviecam"],
 		})
 	end, false)
 	f1_local10 = self
 	f1_local11 = self.subscribeToModel
-	f1_local12 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local11(f1_local10, f1_local12["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x59333FC97F7870]], function(f11_arg0)
+	f1_local12 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local11(f1_local10, f1_local12["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_emp_active"]], function(f11_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f11_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x59333FC97F7870],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_emp_active"],
 		})
 	end, false)
 	f1_local10 = self
 	f1_local11 = self.subscribeToModel
-	f1_local12 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local11(f1_local10, f1_local12["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x69C28E2FCA82769]], function(f12_arg0)
+	f1_local12 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local11(f1_local10, f1_local12["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_hud_hardcore"]], function(f12_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f12_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x69C28E2FCA82769],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_hud_hardcore"],
 		})
 	end, false)
 	f1_local10 = self
 	f1_local11 = self.subscribeToModel
-	f1_local12 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local11(f1_local10, f1_local12["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xADC477DDE486DD7]], function(f13_arg0)
+	f1_local12 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local11(f1_local10, f1_local12["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_hud_visible"]], function(f13_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f13_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xADC477DDE486DD7],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_hud_visible"],
 		})
 	end, false)
 	f1_local10 = self
 	f1_local11 = self.subscribeToModel
-	f1_local12 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local11(f1_local10, f1_local12["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x23CD9BAB9B9F4C8]], function(f14_arg0)
+	f1_local12 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local11(f1_local10, f1_local12["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_guided_missile"]], function(f14_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f14_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x23CD9BAB9B9F4C8],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_guided_missile"],
 		})
 	end, false)
 	f1_local10 = self
 	f1_local11 = self.subscribeToModel
-	f1_local12 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local11(f1_local10, f1_local12["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2]], function(f15_arg0)
+	f1_local12 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local11(f1_local10, f1_local12["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"]], function(f15_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f15_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"],
 		})
 	end, false)
 	f1_local10 = self
 	f1_local11 = self.subscribeToModel
-	f1_local12 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local11(f1_local10, f1_local12["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x7B52A87BC9AA4C7]], function(f16_arg0)
+	f1_local12 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local11(f1_local10, f1_local12["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_remote_killstreak_static"]], function(f16_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f16_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x7B52A87BC9AA4C7],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_remote_killstreak_static"],
 		})
 	end, false)
 	f1_local10 = self
 	f1_local11 = self.subscribeToModel
-	f1_local12 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local11(f1_local10, f1_local12["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x9BF57CE75A8755E]], function(f17_arg0)
+	f1_local12 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local11(f1_local10, f1_local12["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"hash_29BF57CE75A8755E"]], function(f17_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f17_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x9BF57CE75A8755E],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"hash_29BF57CE75A8755E"],
 		})
 	end, false)
 	f1_local10 = self
 	f1_local11 = self.subscribeToModel
-	f1_local12 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local11(f1_local10, f1_local12["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x6668F0686232679]], function(f18_arg0)
+	f1_local12 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local11(f1_local10, f1_local12["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_vehicle"]], function(f18_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f18_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x6668F0686232679],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_vehicle"],
 		})
 	end, false)
 	f1_local10 = self
 	f1_local11 = self.subscribeToModel
-	f1_local12 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local11(f1_local10, f1_local12["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x3AEEAA452536E6E]], function(f19_arg0)
+	f1_local12 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local11(f1_local10, f1_local12["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_is_flash_banged"]], function(f19_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f19_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x3AEEAA452536E6E],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_is_flash_banged"],
 		})
 	end, false)
 	f1_local10 = self
 	f1_local11 = self.subscribeToModel
-	f1_local12 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local11(f1_local10, f1_local12["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xD298E43D0B6FEF2]], function(f20_arg0)
+	f1_local12 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local11(f1_local10, f1_local12["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_is_scoped"]], function(f20_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f20_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xD298E43D0B6FEF2],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_is_scoped"],
 		})
 	end, false)
 	f1_local10 = self
 	f1_local11 = self.subscribeToModel
-	f1_local12 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local11(f1_local10, f1_local12["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F]], function(f21_arg0)
+	f1_local12 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local11(f1_local10, f1_local12["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_play_of_the_match"]], function(f21_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f21_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_play_of_the_match"],
 		})
 	end, false)
 	f1_local10 = self
 	f1_local11 = self.subscribeToModel
-	f1_local12 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local11(f1_local10, f1_local12["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04]], function(f22_arg0)
+	f1_local12 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local11(f1_local10, f1_local12["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]], function(f22_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f22_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"],
 		})
 	end, false)
 	f1_local10 = self
 	f1_local11 = self.subscribeToModel
-	f1_local12 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local11(f1_local10, f1_local12["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]], function(f23_arg0)
+	f1_local12 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local11(f1_local10, f1_local12["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_ui_active"]], function(f23_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f23_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_ui_active"],
 		})
 	end, false)
 	self:linkToElementModel(self, "health.healthValue", true, function(model)

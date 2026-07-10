@@ -13,7 +13,7 @@ CoD.ScoreNotificationWaypoint.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local baseglow = LUI.UIImage.new(0.5, 0.5, -32, 32, 0.5, 0.5, -32, 32)
 	baseglow:setAlpha(0)
-	baseglow:setImage(RegisterImage(0x55D86A928138A5C))
+	baseglow:setImage(RegisterImage(@"uie_t7_hud_waypoints_baseglow"))
 	baseglow.__Color = function(f2_arg0)
 		local f2_local0 = f2_arg0:get()
 		if f2_local0 ~= nil then
@@ -46,7 +46,7 @@ CoD.ScoreNotificationWaypoint.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self.WaypointBacker = WaypointBacker
 	local WaypointPattern = LUI.UIImage.new(0.5, 0.5, -37, 39, 0.5, 0.5, -38.5, 37.5)
 	WaypointPattern:setAlpha(0.7)
-	WaypointPattern:setImage(RegisterImage(0xD35B12E94483619))
+	WaypointPattern:setImage(RegisterImage(@"uie_ui_hud_core_waypoint_led_small"))
 	WaypointPattern:linkToElementModel(self, "color", true, function(model)
 		local f5_local0 = model:get()
 		if f5_local0 ~= nil then
@@ -57,7 +57,7 @@ CoD.ScoreNotificationWaypoint.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self.WaypointPattern = WaypointPattern
 	local ProgressMeterBacking = LUI.UIImage.new(0.5, 0.5, -25, 27, 0.5, 0.5, -27, 25)
 	ProgressMeterBacking:setRGB(1, 0.98, 0.91)
-	ProgressMeterBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0xD5CA1A25ED87F4F))
+	ProgressMeterBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_clock_normal"))
 	ProgressMeterBacking:setShaderVector(0, 1.13, 0, 0, 0)
 	ProgressMeterBacking:setShaderVector(1, 0.5, 0, 0, 0)
 	ProgressMeterBacking:setShaderVector(2, 0.5, 0, 0, 0)
@@ -77,8 +77,8 @@ CoD.ScoreNotificationWaypoint.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self:addElement(ProgressMeterBacking)
 	self.ProgressMeterBacking = ProgressMeterBacking
 	local ProgressMeterBackingFill = LUI.UIImage.new(0.5, 0.5, -25, 27, 0.5, 0.5, -27, 25)
-	ProgressMeterBackingFill:setImage(RegisterImage(0x2E4DBA41E983343))
-	ProgressMeterBackingFill:setMaterial(LUI.UIImage.GetCachedMaterial(0xD5CA1A25ED87F4F))
+	ProgressMeterBackingFill:setImage(RegisterImage(@"uie_ui_hud_core_waypoint_domination_fill_02"))
+	ProgressMeterBackingFill:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_clock_normal"))
 	ProgressMeterBackingFill:setShaderVector(1, 0.5, 0, 0, 0)
 	ProgressMeterBackingFill:setShaderVector(2, 0.5, 0, 0, 0)
 	ProgressMeterBackingFill:setShaderVector(3, 0, 0, 0, 0)
@@ -131,7 +131,7 @@ CoD.ScoreNotificationWaypoint.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	})
 	local f1_local8 = CaptureIcon
 	local WaypointCenter = CaptureIcon.subscribeToModel
-	local f1_local10 = Engine[0x8DF2E5447F384B9]()
+	local f1_local10 = Engine[@"getglobalmodel"]()
 	WaypointCenter(f1_local8, f1_local10["hudItems.war.attackingTeam"], function(f15_arg0)
 		f1_arg0:updateElementState(CaptureIcon, {
 			name = "model_validation",
@@ -166,18 +166,18 @@ CoD.ScoreNotificationWaypoint.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self.WaypointCenter = WaypointCenter
 	f1_local10 = baseglow
 	f1_local8 = baseglow.subscribeToModel
-	local f1_local11 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local11 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local8(f1_local10, f1_local11["factions.playerFactionTeamEnum"], baseglow.__Color_FullPath)
 	baseglow:linkToElementModel(self, "clientUseMask", true, baseglow.__Color_FullPath)
 	f1_local10 = baseglow
 	f1_local8 = baseglow.subscribeToModel
-	f1_local11 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local11 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local8(f1_local10, f1_local11["profile.colorblindMode"], baseglow.__Color_FullPath)
 	self:mergeStateConditions({
 		{
 			stateName = "Captured",
 			condition = function(menu, element, event)
-				return CoD.HUDUtility.IsGameTypeEqualToString("control") and CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "state", Enum[0xA2C16942D15B316][0xDF225299252F5E])
+				return CoD.HUDUtility.IsGameTypeEqualToString("control") and CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "state", Enum[@"objectivestate_t"][@"objst_done"])
 			end,
 		},
 		{

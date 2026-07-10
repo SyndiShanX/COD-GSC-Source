@@ -9,7 +9,7 @@ CoD.EmpRebootIndicatorWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	self.soundSet = "HUD"
 	local ArmorFrame = LUI.UIImage.new(0.5, 0.5, -132, 130, 0.5, 0.5, -4, 29)
 	ArmorFrame:setAlpha(0.4)
-	ArmorFrame:setImage(RegisterImage(0xAADD20019A84C5F))
+	ArmorFrame:setImage(RegisterImage(@"uie_t7_hud_armorcontainer"))
 	self:addElement(ArmorFrame)
 	self.ArmorFrame = ArmorFrame
 	local BlackFrame = LUI.UIImage.new(0.5, 0.5, -150, 149, 0.5, 0.5, -29, -3)
@@ -22,7 +22,7 @@ CoD.EmpRebootIndicatorWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	self:addElement(armorBorder)
 	self.armorBorder = armorBorder
 	local ProgressBar = LUI.UIImage.new(0.5, 0.5, -136, 132, 0.5, 0.5, -16, -14)
-	ProgressBar:setMaterial(LUI.UIImage.GetCachedMaterial(0x910274CA3518744))
+	ProgressBar:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe"))
 	ProgressBar:setShaderVector(0, 1, 0, 0, 0)
 	ProgressBar:setShaderVector(1, 0, 0, 0, 0)
 	ProgressBar:setShaderVector(2, 1, 0, 0, 0)
@@ -31,10 +31,10 @@ CoD.EmpRebootIndicatorWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	self:addElement(ProgressBar)
 	self.ProgressBar = ProgressBar
 	local RebootText = LUI.UIText.new(0.5, 0.5, -117, 113, 0.5, 0.5, -4, 22)
-	RebootText:setText(Engine[0xF9F1239CFD921FE](0xBD2AB55ABF4ECF))
+	RebootText:setText(Engine[@"hash_4F9F1239CFD921FE"](0xBD2AB55ABF4ECF))
 	RebootText:setTTF("ttmussels_demibold")
-	RebootText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	RebootText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	RebootText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	RebootText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(RebootText)
 	self.RebootText = RebootText
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)

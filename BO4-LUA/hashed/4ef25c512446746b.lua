@@ -15,28 +15,28 @@ CoD.MasteryOptionsContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	MasteryGrid:setWidgetType(CoD.CamoSlotWide)
 	MasteryGrid:setVerticalCount(3)
 	MasteryGrid:setSpacing(10)
-	MasteryGrid:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	MasteryGrid:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	MasteryGrid:setDataSource("WeaponOptions")
 	MasteryGrid:linkToElementModel(MasteryGrid, "itemIndex", true, function(model, f2_arg1)
-		CoD.Menu.UpdateButtonShownState(f2_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(f2_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
-		CoD.Menu.UpdateButtonShownState(f2_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
+		CoD.Menu.UpdateButtonShownState(f2_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(f2_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+		CoD.Menu.UpdateButtonShownState(f2_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"])
 	end)
 	MasteryGrid:appendEventHandler("input_source_changed", function(f3_arg0, f3_arg1)
 		f3_arg1.menu = f3_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f3_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f3_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x4D2505E19049444])
-		CoD.Menu.UpdateButtonShownState(f3_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
-		CoD.Menu.UpdateButtonShownState(f3_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
+		CoD.Menu.UpdateButtonShownState(f3_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f3_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"hash_64D2505E19049444"])
+		CoD.Menu.UpdateButtonShownState(f3_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+		CoD.Menu.UpdateButtonShownState(f3_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"])
 	end)
 	local BottomBracket9Slice = MasteryGrid
 	local Label = MasteryGrid.subscribeToModel
-	local f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	Label(BottomBracket9Slice, f1_local4.LastInput, function(f4_arg0, f4_arg1)
-		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x4D2505E19049444])
-		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
-		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
+		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"hash_64D2505E19049444"])
+		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"])
 	end, false)
 	MasteryGrid:registerEventHandler("list_item_gain_focus", function(element, event)
 		local f5_local0 = nil
@@ -57,14 +57,14 @@ CoD.MasteryOptionsContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 		elseif element.super.gainFocus then
 			f7_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x4D2505E19049444])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"hash_64D2505E19049444"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"])
 		return f7_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(MasteryGrid, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(MasteryGrid, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if not CoD.WeaponOptionsUtility.IsItemWeaponOptionLocked(menu, element, controller) and not CoD.WeaponOptionsUtility.IsWeaponOptionEquipped(menu, element, controller, "camoIndex") then
 			PlaySoundAlias("uin_equipment_add")
 			CoD.WeaponOptionsUtility.SetWeaponOptionClassItemHelper(self, element, controller, menu)
@@ -81,16 +81,16 @@ CoD.MasteryOptionsContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 		end
 	end, function(element, menu, controller)
 		if not CoD.WeaponOptionsUtility.IsItemWeaponOptionLocked(menu, element, controller) and not CoD.WeaponOptionsUtility.IsWeaponOptionEquipped(menu, element, controller, "camoIndex") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		elseif CoD.WeaponOptionsUtility.IsWeaponOptionEquipped(menu, element, controller, "camoIndex") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(MasteryGrid, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(MasteryGrid, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], nil, function(element, menu, controller, model)
 		if CoD.WeaponOptionsUtility.IsWeaponOptionEquipped(menu, element, controller, "camoIndex") and IsGamepad(controller) then
 			PlaySoundAlias("uin_equipment_remove")
 			CoD.WeaponOptionsUtility.ClearWeaponOptionsHelper(self, element, menu, controller)
@@ -101,13 +101,13 @@ CoD.MasteryOptionsContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 		end
 	end, function(element, menu, controller)
 		if CoD.WeaponOptionsUtility.IsWeaponOptionEquipped(menu, element, controller, "camoIndex") and IsGamepad(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x679ACA6FFC6C8F3, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"menu/remove", nil, nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(MasteryGrid, f1_arg1, Enum[0x3DD78803F918E9D][0x4D2505E19049444], "ui_remove", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(MasteryGrid, f1_arg1, Enum[@"luibutton"][@"hash_64D2505E19049444"], "ui_remove", function(element, menu, controller, model)
 		if CoD.WeaponOptionsUtility.IsWeaponOptionEquipped(menu, element, controller, "camoIndex") and IsMouseOrKeyboard(controller) then
 			PlaySoundAlias("uin_equipment_remove")
 			CoD.WeaponOptionsUtility.ClearWeaponOptionsHelper(self, element, menu, controller)
@@ -118,13 +118,13 @@ CoD.MasteryOptionsContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 		end
 	end, function(element, menu, controller)
 		if CoD.WeaponOptionsUtility.IsWeaponOptionEquipped(menu, element, controller, "camoIndex") and IsMouseOrKeyboard(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x4D2505E19049444], 0x679ACA6FFC6C8F3, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "ui_remove")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"hash_64D2505E19049444"], @"menu/remove", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "ui_remove")
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(MasteryGrid, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(MasteryGrid, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], nil, function(element, menu, controller, model)
 		if not CoD.WeaponOptionsUtility.IsItemWeaponOptionLocked(menu, element, controller) and IsGamepad(controller) then
 			CoD.WeaponOptionsUtility.OpenActiveCamoStageDetailsOverlay(menu, controller, "CamoPersonalizationDetails", element, false)
 			return true
@@ -132,13 +132,13 @@ CoD.MasteryOptionsContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 		end
 	end, function(element, menu, controller)
 		if not CoD.WeaponOptionsUtility.IsItemWeaponOptionLocked(menu, element, controller) and IsGamepad(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], 0xB1A784560EDFEA7, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], @"menu/details", nil, nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(MasteryGrid, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB], "ui_contextual_1", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(MasteryGrid, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"], "ui_contextual_1", function(element, menu, controller, model)
 		if not CoD.WeaponOptionsUtility.IsItemWeaponOptionLocked(menu, element, controller) and IsMouseOrKeyboard(controller) then
 			CoD.WeaponOptionsUtility.OpenActiveCamoStageDetailsOverlay(menu, controller, "CamoPersonalizationDetails", element, false)
 			return true
@@ -146,7 +146,7 @@ CoD.MasteryOptionsContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 		end
 	end, function(element, menu, controller)
 		if not CoD.WeaponOptionsUtility.IsItemWeaponOptionLocked(menu, element, controller) and IsMouseOrKeyboard(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xA86619565BE54DB], 0xB1A784560EDFEA7, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "ui_contextual_1")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_pckey_2"], @"menu/details", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "ui_contextual_1")
 			return true
 		else
 			return false
@@ -162,7 +162,7 @@ CoD.MasteryOptionsContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 		CoD.GridAndListUtility.UpdateDataSource(MasteryGrid, true, false, true)
 		UpdateSelfState(self, f1_arg1)
 	end)
-	MasteryGrid:AddContextualMenuAction(f1_arg0, f1_arg1, 0x679ACA6FFC6C8F3, function(f20_arg0, f20_arg1, f20_arg2, f20_arg3)
+	MasteryGrid:AddContextualMenuAction(f1_arg0, f1_arg1, @"menu/remove", function(f20_arg0, f20_arg1, f20_arg2, f20_arg3)
 		if CoD.WeaponOptionsUtility.IsWeaponOptionEquipped(f20_arg1, f20_arg0, f20_arg2, "camoIndex") then
 			return function(f21_arg0, f21_arg1, f21_arg2, f21_arg3)
 				PlaySoundAlias("uin_equipment_remove")
@@ -173,7 +173,7 @@ CoD.MasteryOptionsContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 		else
 		end
 	end)
-	MasteryGrid:AddContextualMenuAction(f1_arg0, f1_arg1, 0xB1A784560EDFEA7, function(f22_arg0, f22_arg1, f22_arg2, f22_arg3)
+	MasteryGrid:AddContextualMenuAction(f1_arg0, f1_arg1, @"menu/details", function(f22_arg0, f22_arg1, f22_arg2, f22_arg3)
 		if not CoD.WeaponOptionsUtility.IsItemWeaponOptionLocked(f22_arg1, f22_arg0, f22_arg2) then
 			return function(f23_arg0, f23_arg1, f23_arg2, f23_arg3)
 				CoD.WeaponOptionsUtility.OpenActiveCamoStageDetailsOverlay(f23_arg1, f23_arg2, "CamoPersonalizationDetails", f23_arg0, false)
@@ -185,18 +185,18 @@ CoD.MasteryOptionsContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.MasteryGrid = MasteryGrid
 	Label = LUI.UIText.new(0, 0, 9, 171, 0, 0, 11, 27)
 	Label:setRGB(ColorSet.T8__OFF__GRAY.r, ColorSet.T8__OFF__GRAY.g, ColorSet.T8__OFF__GRAY.b)
-	Label:setText(LocalizeToUpperString(0x369B657962E04DA))
+	Label:setText(LocalizeToUpperString(@"hash_6369B657962E04DA"))
 	Label:setTTF("default")
 	Label:setLetterSpacing(4)
-	Label:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Label:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Label:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Label:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(Label)
 	self.Label = Label
 	BottomBracket9Slice = LUI.UIImage.new(0, 1, 9, -9, 0, 0, 28, 37)
 	BottomBracket9Slice:setAlpha(0.5)
 	BottomBracket9Slice:setZRot(180)
-	BottomBracket9Slice:setImage(RegisterImage(0xC325BED3F226657))
-	BottomBracket9Slice:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	BottomBracket9Slice:setImage(RegisterImage(@"hash_4C325BED3F226657"))
+	BottomBracket9Slice:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	BottomBracket9Slice:setShaderVector(0, 0, 0, 0, 0)
 	BottomBracket9Slice:setupNineSliceShader(16, 4)
 	self:addElement(BottomBracket9Slice)

@@ -14,12 +14,12 @@ CoD.AARWinLoseMessage.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	GametypeLabel:setAlpha(0.3)
 	GametypeLabel:setTTF("ttmussels_regular")
 	GametypeLabel:setLetterSpacing(4)
-	GametypeLabel:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	GametypeLabel:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	GametypeLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	GametypeLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	GametypeLabel:linkToElementModel(self, "gametype", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			GametypeLabel:setText(LocalizeStringWithParameter(0x95BAA5F888415EF, CoD.GameTypeUtility.GameTypeToLocalizeName(f2_local0)))
+			GametypeLabel:setText(LocalizeStringWithParameter(@"hash_695BAA5F888415EF", CoD.GameTypeUtility.GameTypeToLocalizeName(f2_local0)))
 		end
 	end)
 	self:addElement(GametypeLabel)
@@ -32,12 +32,12 @@ CoD.AARWinLoseMessage.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	Percentage:setAlpha(0.3)
 	Percentage:setTTF("ttmussels_regular")
 	Percentage:setLetterSpacing(4)
-	Percentage:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Percentage:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Percentage:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Percentage:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	Percentage:linkToElementModel(self, "winRatio", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
-			Percentage:setText(LocalizeStringWithParameter(0xE76EC7543C727E0, f3_local0))
+			Percentage:setText(LocalizeStringWithParameter(@"aar/percentage", f3_local0))
 		end
 	end)
 	self:addElement(Percentage)
@@ -50,12 +50,12 @@ CoD.AARWinLoseMessage.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	Wins:setAlpha(0.5)
 	Wins:setTTF("0arame_mono_stencil")
 	Wins:setLetterSpacing(1)
-	Wins:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Wins:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Wins:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Wins:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	Wins:linkToElementModel(self, "wins", true, function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
-			Wins:setText(LocalizeStringWithParameter(0xA18D24749F0ABA6, f4_local0))
+			Wins:setText(LocalizeStringWithParameter(@"hash_5A18D24749F0ABA6", f4_local0))
 		end
 	end)
 	self:addElement(Wins)
@@ -68,12 +68,12 @@ CoD.AARWinLoseMessage.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	Losses:setAlpha(0.5)
 	Losses:setTTF("0arame_mono_stencil")
 	Losses:setLetterSpacing(1)
-	Losses:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Losses:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Losses:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Losses:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	Losses:linkToElementModel(self, "losses", true, function(model)
 		local f5_local0 = model:get()
 		if f5_local0 ~= nil then
-			Losses:setText(LocalizeStringWithParameter(0x4E395ED8142BC76, f5_local0))
+			Losses:setText(LocalizeStringWithParameter(@"hash_24E395ED8142BC76", f5_local0))
 		end
 	end)
 	self:addElement(Losses)
@@ -88,7 +88,7 @@ CoD.AARWinLoseMessage.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	})
 	local f1_local8 = self
 	local f1_local9 = self.subscribeToModel
-	local f1_local10 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local10 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local9(f1_local8, f1_local10["AAR.activeStat"], function(f7_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

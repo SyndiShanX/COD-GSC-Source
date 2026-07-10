@@ -25,7 +25,7 @@ LUI.createMenu.CamoPersonalizationDetails = function(f1_arg0, f1_arg1)
 	ActiveCamoStagesList:setWidgetType(CoD.CommonListButtonLeft)
 	ActiveCamoStagesList:setVerticalCount(7)
 	ActiveCamoStagesList:setSpacing(8)
-	ActiveCamoStagesList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	ActiveCamoStagesList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	ActiveCamoStagesList:setDataSource("ActiveCamoStagesList")
 	ActiveCamoStagesList:registerEventHandler("list_item_gain_focus", function(element, event)
 		local f2_local0 = nil
@@ -41,11 +41,11 @@ LUI.createMenu.CamoPersonalizationDetails = function(f1_arg0, f1_arg1)
 	self:addElement(CamoDetailsSwatch)
 	self.CamoDetailsSwatch = CamoDetailsSwatch
 	local GenericMenuFrame = CoD.GenericMenuFrame.new(f1_local1, f1_arg0, 0, 1, 0, 0, 0, 1, 0, 0)
-	GenericMenuFrame.CommonHeader.subtitle.StageTitle:setText(Engine[0xF9F1239CFD921FE](CoD.WeaponOptionsUtility.GetCamoStageDetailsHeader(f1_local1, 0x2EEF729B41D6347)))
+	GenericMenuFrame.CommonHeader.subtitle.StageTitle:setText(Engine[@"hash_4F9F1239CFD921FE"](CoD.WeaponOptionsUtility.GetCamoStageDetailsHeader(f1_local1, @"hash_52EEF729B41D6347")))
 	GenericMenuFrame:subscribeToGlobalModel(f1_arg0, "LobbyRoot", "lobbyTitle", function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
-			GenericMenuFrame.CommonHeader.subtitle.subtitle:setText(Engine[0xF9F1239CFD921FE](f4_local0))
+			GenericMenuFrame.CommonHeader.subtitle.subtitle:setText(Engine[@"hash_4F9F1239CFD921FE"](f4_local0))
 		end
 	end)
 	self:addElement(GenericMenuFrame)
@@ -97,7 +97,7 @@ LUI.createMenu.CamoPersonalizationDetails = function(f1_arg0, f1_arg1)
 	end)
 	local f1_local7 = WeaponOptionInfoInternal
 	local VisualStagesHeader = WeaponOptionInfoInternal.subscribeToModel
-	local f1_local9 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	local f1_local9 = Engine[@"getmodelforcontroller"](f1_arg0)
 	VisualStagesHeader(f1_local7, f1_local9["WeaponPersonalization.listUpdate"], function(f10_arg0)
 		f1_local1:updateElementState(WeaponOptionInfoInternal, {
 			name = "model_validation",
@@ -118,7 +118,7 @@ LUI.createMenu.CamoPersonalizationDetails = function(f1_arg0, f1_arg1)
 	end)
 	f1_local7 = WeaponOptionInfoInternal
 	VisualStagesHeader = WeaponOptionInfoInternal.subscribeToModel
-	f1_local9 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	f1_local9 = Engine[@"getmodelforcontroller"](f1_arg0)
 	VisualStagesHeader(f1_local7, f1_local9.paintCanCount, function(f12_arg0)
 		f1_local1:updateElementState(WeaponOptionInfoInternal, {
 			name = "model_validation",
@@ -135,19 +135,19 @@ LUI.createMenu.CamoPersonalizationDetails = function(f1_arg0, f1_arg1)
 	self.WeaponOptionInfoInternal = WeaponOptionInfoInternal
 	VisualStagesHeader = LUI.UIText.new(0, 0, 824, 1324, 0, 0, 590, 616)
 	VisualStagesHeader:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
-	VisualStagesHeader:setText(LocalizeToUpperString(0xEFE5D00336839FB))
+	VisualStagesHeader:setText(LocalizeToUpperString(@"hash_1EFE5D00336839FB"))
 	VisualStagesHeader:setTTF("ttmussels_demibold")
 	VisualStagesHeader:setLetterSpacing(4)
-	VisualStagesHeader:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	VisualStagesHeader:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	VisualStagesHeader:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	VisualStagesHeader:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(VisualStagesHeader)
 	self.VisualStagesHeader = VisualStagesHeader
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		CoD.CACUtility.PlayChooseScreenOutro(menu, controller, "Close")
 		DelayGoBack(menu, controller, 200)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x78D439E1B360368, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"hash_778D439E1B360368", nil, nil)
 		return true
 	end, false)
 	LUI.OverrideFunction_CallOriginalFirst(self, "close", function(element)
@@ -208,7 +208,7 @@ CoD.CamoPersonalizationDetails.__clipsPerState = {
 			f19_arg0:setupElementClipCounter(3)
 			local f19_local0 = function(f20_arg0)
 				local f20_local0 = function(f21_arg0)
-					f21_arg0:beginAnimation(100, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f21_arg0:beginAnimation(100, Enum[@"luitween"][@"luitween_ease_both"])
 					f21_arg0:setTopBottom(0, 0, 538, 1160)
 					f21_arg0:setAlpha(1)
 					f21_arg0:registerEventHandler("transition_complete_keyframe", f19_arg0.clipFinished)
@@ -258,7 +258,7 @@ CoD.CamoPersonalizationDetails.__clipsPerState = {
 			f26_arg0:setupElementClipCounter(3)
 			local f26_local0 = function(f27_arg0)
 				local f27_local0 = function(f28_arg0)
-					f28_arg0:beginAnimation(100, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f28_arg0:beginAnimation(100, Enum[@"luitween"][@"luitween_ease_out"])
 					f28_arg0:setTopBottom(0, 0, 815, 1437)
 					f28_arg0:setAlpha(0)
 					f28_arg0:registerEventHandler("transition_complete_keyframe", f26_arg0.clipFinished)

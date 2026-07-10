@@ -12,17 +12,17 @@ CoD.GameEndScore_GameStatusPlayerLeft.new = function(f1_arg0, f1_arg1, f1_arg2, 
 	self:addElement(DotCorner9Slice)
 	self.DotCorner9Slice = DotCorner9Slice
 	local playersLeftIcon = LUI.UIImage.new(1, 1, -128, -80, 0, 0, 0, 50)
-	playersLeftIcon:setImage(RegisterImage(0x14B2E7558F68939))
+	playersLeftIcon:setImage(RegisterImage(@"uie_ui_hud_wz_hud_core_icon_lives"))
 	self:addElement(playersLeftIcon)
 	self.playersLeftIcon = playersLeftIcon
 	local PlayerCount = LUI.UIText.new(1, 1, -90, -10, 0, 0, 7.5, 42.5)
 	PlayerCount:setTTF("0arame_mono_stencil")
-	PlayerCount:setMaterial(LUI.UIImage.GetCachedMaterial(0x90D57B1E92D39D7))
+	PlayerCount:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_90D57B1E92D39D7"))
 	PlayerCount:setShaderVector(0, 0.8, 0, 0, 0)
 	PlayerCount:setShaderVector(1, 0, 0, 0, 0)
 	PlayerCount:setShaderVector(2, 1, 1, 1, 0.35)
-	PlayerCount:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	PlayerCount:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	PlayerCount:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	PlayerCount:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	PlayerCount:subscribeToGlobalModel(f1_arg1, "HUDItems", "alivePlayerCount", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then

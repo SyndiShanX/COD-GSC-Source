@@ -62,13 +62,13 @@ CoD.codcaster_player_portraittop_team2.new = function(f1_arg0, f1_arg1, f1_arg2,
 	self.ObjectiveStatus = ObjectiveStatus
 	local blur = LUI.UIImage.new(0, 0, 4.5, 127.5, 0, 0, 3.5, 55.5)
 	blur:setRGB(0, 0, 0)
-	blur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	blur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	blur:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(blur)
 	self.blur = blur
 	local teamcolorbg = LUI.UIImage.new(0.5, 0.5, -61, 61, 0, 0, 3, 61)
 	teamcolorbg:setAlpha(0.9)
-	teamcolorbg:setImage(RegisterImage(0x97941765AC1B3BE))
+	teamcolorbg:setImage(RegisterImage(@"uie_codcaster_teamcolloredbg_generic"))
 	teamcolorbg:subscribeToGlobalModel(f1_arg1, "FactionsGlobal", "axisFactionColor", function(model)
 		local f7_local0 = model:get()
 		if f7_local0 ~= nil then
@@ -141,12 +141,12 @@ CoD.codcaster_player_portraittop_team2.new = function(f1_arg0, f1_arg1, f1_arg2,
 	self.CodCasterPortraitPlayerListEntryExtra = CodCasterPortraitPlayerListEntryExtra
 	local BGTOP = LUI.UIImage.new(0, 0, -0.5, 131.5, 0, 0, 1, 93)
 	BGTOP:setYRot(180)
-	BGTOP:setImage(RegisterImage(0xF0066F1C01EE0A0))
+	BGTOP:setImage(RegisterImage(@"hash_7F0066F1C01EE0A0"))
 	self:addElement(BGTOP)
 	self.BGTOP = BGTOP
 	local ledplayer = LUI.UIImage.new(0, 0, 6, 66, 0, 0, 6, 54)
 	ledplayer:setAlpha(0)
-	ledplayer:setImage(RegisterImage(0x75B3EFBC7542A9D))
+	ledplayer:setImage(RegisterImage(@"hash_375B3EFBC7542A9D"))
 	ledplayer:subscribeToGlobalModel(f1_arg1, "FactionsGlobal", "axisFactionColor", function(model)
 		local f17_local0 = model:get()
 		if f17_local0 ~= nil then
@@ -162,7 +162,7 @@ CoD.codcaster_player_portraittop_team2.new = function(f1_arg0, f1_arg1, f1_arg2,
 	ScrStkButtons:setWidgetType(CoD.CodCasterSupportButton)
 	ScrStkButtons:setHorizontalCount(3)
 	ScrStkButtons:setSpacing(0)
-	ScrStkButtons:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	ScrStkButtons:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	ScrStkButtons:setDataSource("KillstreakList")
 	self:addElement(ScrStkButtons)
 	self.ScrStkButtons = ScrStkButtons
@@ -176,7 +176,7 @@ CoD.codcaster_player_portraittop_team2.new = function(f1_arg0, f1_arg1, f1_arg2,
 	local cornerImage = LUI.UIImage.new(0, 0, 7, 39, 0, 0, 7.5, 39.5)
 	cornerImage:setAlpha(0.5)
 	cornerImage:setYRot(180)
-	cornerImage:setImage(RegisterImage(0x2D507B944A58E16))
+	cornerImage:setImage(RegisterImage(@"hash_12D507B944A58E16"))
 	self:addElement(cornerImage)
 	self.cornerImage = cornerImage
 	local CodCasterPortraitPlayerListEntryEquipment = CoD.CodCasterPortraitPlayerListEntryEquipment.new(f1_arg0, f1_arg1, 0, 0, 9, 35, 0, 0, 28.5, 54.5)

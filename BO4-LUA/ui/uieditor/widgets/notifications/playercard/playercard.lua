@@ -38,14 +38,14 @@ CoD.PlayerCard.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_ar
 	end)
 	local HeroBacking = GamerTag
 	local ClanTag = GamerTag.subscribeToModel
-	local TeamColor = Engine[0x4DF5CFBC1771947](f1_arg1)
-	ClanTag(HeroBacking, TeamColor["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x198075B069840DC]], function(f5_arg0)
+	local TeamColor = Engine[@"getmodelforcontroller"](f1_arg1)
+	ClanTag(HeroBacking, TeamColor["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_game_ended"]], function(f5_arg0)
 		f1_arg0:updateElementState(GamerTag, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f5_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x198075B069840DC],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_game_ended"],
 		})
 	end, false)
 	GamerTag.Panel:setAlpha(0.6)
@@ -84,15 +84,15 @@ CoD.PlayerCard.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_ar
 	self.ClanTag = ClanTag
 	HeroBacking = LUI.UIImage.new(0, 0, -3, 93, 0, 0, -12, 96)
 	HeroBacking:setAlpha(0)
-	HeroBacking:setImage(RegisterImage(0x5FA309EA9D3CE14))
-	HeroBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0xE8F55203998700A))
+	HeroBacking:setImage(RegisterImage(@"uie_img_t7_hud_widget_playercard_playerbacking"))
+	HeroBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_feather_blend"))
 	self:addElement(HeroBacking)
 	self.HeroBacking = HeroBacking
 	TeamColor = LUI.UIImage.new(0, 0, 46, 142, 0, 0, 3, 73)
 	TeamColor:setRGB(ColorSet.FriendlyBlue.r, ColorSet.FriendlyBlue.g, ColorSet.FriendlyBlue.b)
 	TeamColor:setAlpha(0)
-	TeamColor:setImage(RegisterImage(0x2D2C20F3D0B1D5D))
-	TeamColor:setMaterial(LUI.UIImage.GetCachedMaterial(0xE8F55203998700A))
+	TeamColor:setImage(RegisterImage(@"uie_img_t7_hud_widget_playercard_playerbackingelements"))
+	TeamColor:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_feather_blend"))
 	self:addElement(TeamColor)
 	self.TeamColor = TeamColor
 	local RankIcon = LUI.UIImage.new(0, 0, 173, 197, 0, 0, 44, 68)
@@ -109,8 +109,8 @@ CoD.PlayerCard.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_ar
 	Rank:setAlpha(0)
 	Rank:setTTF("0arame_mono_stencil")
 	Rank:setLetterSpacing(0.5)
-	Rank:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	Rank:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Rank:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	Rank:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	Rank:linkToElementModel(self, "rank", true, function(model)
 		local f12_local0 = model:get()
 		if f12_local0 ~= nil then
@@ -135,7 +135,7 @@ CoD.PlayerCard.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_ar
 	})
 	local f1_local8 = self
 	local f1_local9 = self.subscribeToModel
-	local f1_local10 = Engine[0x8DF2E5447F384B9]()
+	local f1_local10 = Engine[@"getglobalmodel"]()
 	f1_local9(f1_local8, f1_local10["lobbyRoot.lobbyNav"], function(f15_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

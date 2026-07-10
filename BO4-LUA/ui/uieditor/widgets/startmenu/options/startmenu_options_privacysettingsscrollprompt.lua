@@ -13,8 +13,8 @@ CoD.StartMenu_Options_PrivacySettingsScrollPrompt.new = function(f1_arg0, f1_arg
 	local currentItem = LUI.UIText.new(0.5, 0.5, -57, -12, 0.5, 0.5, -9, 9)
 	currentItem:setAlpha(0.65)
 	currentItem:setTTF("ttmussels_regular")
-	currentItem:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
-	currentItem:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	currentItem:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
+	currentItem:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	currentItem:subscribeToGlobalModel(f1_arg1, "PrivacySettingManagementForm", "currentPage", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -25,16 +25,16 @@ CoD.StartMenu_Options_PrivacySettingsScrollPrompt.new = function(f1_arg0, f1_arg
 	self.currentItem = currentItem
 	local dividor = LUI.UIText.new(0.5, 0.5, -4.5, 4.5, 0.5, 0.5, -9, 9)
 	dividor:setAlpha(0.65)
-	dividor:setText(Engine[0xF9F1239CFD921FE](0x993C1A7DD3452BA))
+	dividor:setText(Engine[@"hash_4F9F1239CFD921FE"](@"mp/slash"))
 	dividor:setTTF("ttmussels_regular")
-	dividor:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	dividor:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	self:addElement(dividor)
 	self.dividor = dividor
 	local count = LUI.UIText.new(0.5, 0.5, 12, 57, 0.5, 0.5, -9, 9)
 	count:setAlpha(0.65)
 	count:setTTF("ttmussels_regular")
-	count:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	count:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	count:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	count:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	count:subscribeToGlobalModel(f1_arg1, "PrivacySettingManagementForm", "lastPage", function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -44,7 +44,7 @@ CoD.StartMenu_Options_PrivacySettingsScrollPrompt.new = function(f1_arg0, f1_arg
 	self:addElement(count)
 	self.count = count
 	local RightPageOver = CoD.BumperButtonWithKeyMouse.new(f1_arg0, f1_arg1, 0.5, 0.5, 34.5, 101.5, 0, 0, -4, 31)
-	RightPageOver.KeyMouseImage:setImage(RegisterImage(0x49AC5C845C7E582))
+	RightPageOver.KeyMouseImage:setImage(RegisterImage(@"uie_bumperright"))
 	RightPageOver:subscribeToGlobalModel(f1_arg1, "Controller", "right_shoulder_button_image", function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then

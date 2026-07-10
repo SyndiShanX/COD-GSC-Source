@@ -8,14 +8,14 @@ CoD.PlayOfTheMatchGamertagBacking.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	self.soundSet = "default"
 	local TextBackingBlur = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	TextBackingBlur:setRGB(0, 0, 0)
-	TextBackingBlur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	TextBackingBlur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	TextBackingBlur:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(TextBackingBlur)
 	self.TextBackingBlur = TextBackingBlur
 	local TextBacking = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	TextBacking:setRGB(0, 0, 0)
 	TextBacking:setAlpha(0.9)
-	TextBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0xE992BD5A540E2D))
+	TextBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_delta_normal"))
 	TextBacking:setShaderVector(0, 0, 1, 0, 0)
 	TextBacking:setShaderVector(1, 0, 0, 0, 0)
 	TextBacking:setShaderVector(2, 0, 1, 0, 0)
@@ -25,8 +25,8 @@ CoD.PlayOfTheMatchGamertagBacking.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	self.TextBacking = TextBacking
 	local DotPattern = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	DotPattern:setAlpha(0.15)
-	DotPattern:setImage(RegisterImage(0xD876FDDB0C64D93))
-	DotPattern:setMaterial(LUI.UIImage.GetCachedMaterial(0xE992BD5A540E2D))
+	DotPattern:setImage(RegisterImage(@"hash_2D876FDDB0C64D93"))
+	DotPattern:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_delta_normal"))
 	DotPattern:setShaderVector(0, 0, 1, 0, 0)
 	DotPattern:setShaderVector(1, 0, 0, 0, 0)
 	DotPattern:setShaderVector(2, 0, 1, 0, 0)

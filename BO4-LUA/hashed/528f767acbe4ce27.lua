@@ -9,14 +9,14 @@ CoD.ItemShopWeaponBribePreviewWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	self.soundSet = "none"
 	self.anyChildUsesUpdateState = true
 	local VideoPreview = LUI.UIImage.new(0, 0, 0, 450, 0, 0, 50, 500)
-	VideoPreview:setImage(RegisterImage(0x9FE3918D24562))
+	VideoPreview:setImage(RegisterImage(@"hash_9FE3918D24562"))
 	self:addElement(VideoPreview)
 	self.VideoPreview = VideoPreview
 	local WeaponBribePreviewPrompt = CoD.WeaponBribePreview.new(f1_arg0, f1_arg1, 0, 0, 19, 469, 0, 0, 461, 493)
-	WeaponBribePreviewPrompt.Title:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	WeaponBribePreviewPrompt.Title:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
-	WeaponBribePreviewPrompt.TitlePC:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	WeaponBribePreviewPrompt.TitlePC:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	WeaponBribePreviewPrompt.Title:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	WeaponBribePreviewPrompt.Title:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
+	WeaponBribePreviewPrompt.TitlePC:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	WeaponBribePreviewPrompt.TitlePC:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	self:addElement(WeaponBribePreviewPrompt)
 	self.WeaponBribePreviewPrompt = WeaponBribePreviewPrompt
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)

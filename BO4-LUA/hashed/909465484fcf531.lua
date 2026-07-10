@@ -11,13 +11,13 @@ CoD.EquippedBGBCount.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	Count:setRGB(0.58, 0.58, 0.58)
 	Count:setText(888)
 	Count:setTTF("skorzhen")
-	Count:setMaterial(LUI.UIImage.GetCachedMaterial(0x90D57B1E92D39D7))
+	Count:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_90D57B1E92D39D7"))
 	Count:setShaderVector(0, 1, 0, 0, 0)
 	Count:setShaderVector(1, 0, 0, 0, 0)
 	Count:setShaderVector(2, 0, 0, 0, 0.9)
 	Count:setLetterSpacing(2)
-	Count:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	Count:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Count:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	Count:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(Count)
 	self.Count = Count
 	if PostLoadFunc then

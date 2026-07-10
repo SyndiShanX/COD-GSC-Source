@@ -8,12 +8,12 @@ CoD.SprintMeterChevron.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Image0 = LUI.UIImage.new(0.5, 0.5, -8, 16, 1, 1, -18, 6)
-	Image0:setImage(RegisterImage(0xA90C77CD1BEA349))
+	Image0:setImage(RegisterImage(@"uie_hud_sprintmeter_line"))
 	self:addElement(Image0)
 	self.Image0 = Image0
 	local Image00 = LUI.UIImage.new(0.5, 0.5, 6, 18, 1, 1, -18, 6)
 	Image00:setScale(1.2, 1.2)
-	Image00:setImage(RegisterImage(0xAD5C67A48888A0C))
+	Image00:setImage(RegisterImage(@"uie_t7_hud_boost_arrow2"))
 	self:addElement(Image00)
 	self.Image00 = Image00
 	if PostLoadFunc then

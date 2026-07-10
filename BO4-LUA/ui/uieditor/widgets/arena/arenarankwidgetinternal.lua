@@ -7,7 +7,7 @@ CoD.ArenaRankWidgetInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.id = "ArenaRankWidgetInternal"
 	self.soundSet = "none"
 	local FireStreakIcon = LUI.UIImage.new(-0.5, 1.5, 0, 0, -0.5, 1.5, 0, 0)
-	FireStreakIcon:setMaterial(LUI.UIImage.GetCachedMaterial(0x9227A50BA2B8D21))
+	FireStreakIcon:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_flipbook_add"))
 	FireStreakIcon:setShaderVector(0, 4, 4, 0, 0)
 	FireStreakIcon:setShaderVector(1, 10, 0, 0, 0)
 	FireStreakIcon:linkToElementModel(self, "leaguePlayFirestreakIcon", true, function(model)

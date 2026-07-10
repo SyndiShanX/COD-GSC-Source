@@ -14,15 +14,15 @@ CoD.ZMLoadoutPreviewIndexItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self.Backing = Backing
 	local LinePattern = LUI.UIImage.new(0, 1, 1, -1, 0, 1, 1, -1)
 	LinePattern:setAlpha(0.7)
-	LinePattern:setImage(RegisterImage(0xB8CFFD5326CFE1B))
-	LinePattern:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	LinePattern:setImage(RegisterImage(@"uie_ui_menu_zombies_cac_grunge_pattern"))
+	LinePattern:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	LinePattern:setShaderVector(0, 0, 0, 0, 0)
 	LinePattern:setupNineSliceShader(256, 256)
 	self:addElement(LinePattern)
 	self.LinePattern = LinePattern
 	local LightFocus = LUI.UIImage.new(-0, 1, -2, 2, -0, 1, -3, 3)
 	LightFocus:setAlpha(0)
-	LightFocus:setImage(RegisterImage(0x25B3B76F422AA08))
+	LightFocus:setImage(RegisterImage(@"uie_ui_menu_zombies_cac_special_weapon_light_focus"))
 	self:addElement(LightFocus)
 	self.LightFocus = LightFocus
 	local Corner9Slice = CoD.Corner9Slice.new(f1_arg0, f1_arg1, 0, 1, 1, -1, 0, 1, 1, -1)
@@ -33,8 +33,8 @@ CoD.ZMLoadoutPreviewIndexItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	ModifierFrame:setRGB(0, 0.13, 0.89)
 	ModifierFrame:setAlpha(0)
 	ModifierFrame:setScale(1.35, 1.35)
-	ModifierFrame:setImage(RegisterImage(0xA9C0105E99D51D0))
-	ModifierFrame:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	ModifierFrame:setImage(RegisterImage(@"uie_ui_menu_zombies_cac_perk_glow"))
+	ModifierFrame:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(ModifierFrame)
 	self.ModifierFrame = ModifierFrame
 	local itemImage = LUI.UIFixedAspectRatioImage.new(0.5, 0.5, -24, 24, 0.5, 0.5, -24, 24)
@@ -43,11 +43,11 @@ CoD.ZMLoadoutPreviewIndexItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	local Name = LUI.UIText.new(0.5, 0.5, -130, 130, 1, 1, -22, -6)
 	Name:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	Name:setAlpha(0)
-	Name:setText(LocalizeToUpperString(0x93E719493E9E18F))
+	Name:setText(LocalizeToUpperString(@"menu/new"))
 	Name:setTTF("ttmussels_regular")
 	Name:setLetterSpacing(2)
-	Name:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	Name:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	Name:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	Name:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	self:addElement(Name)
 	self.Name = Name
 	self:mergeStateConditions({

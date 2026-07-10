@@ -14,7 +14,7 @@ local PostLoadFunc = function(self, controller, menu)
 		end)
 	end
 	if CoD.isDurango then
-		self.XboxGamerTag:setText(Engine[0xF9F1239CFD921FE](0x7C28F82C17DAE8, Engine[0x54689B3A7B3899E](0)))
+		self.XboxGamerTag:setText(Engine[@"hash_4F9F1239CFD921FE"](0x7C28F82C17DAE8, Engine[@"getgamertagforcontroller"](0)))
 	else
 		self.XboxGamerTag:setText("")
 	end
@@ -55,15 +55,15 @@ LUI.createMenu.FirstTimeBrightnessSetting = function(f3_arg0, f3_arg1)
 	local DescText = LUI.UIText.new(0.5, 0.5, -557, 557, 0, 0, 239.5, 260.5)
 	DescText:setRGB(0.6, 0.6, 0.6)
 	DescText:setZoom(40)
-	DescText:setText(Engine[0xF9F1239CFD921FE](0x39538A6EEE7239A))
+	DescText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_639538A6EEE7239A"))
 	DescText:setTTF("ttmussels_regular")
-	DescText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	DescText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	DescText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	DescText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(DescText)
 	self.DescText = DescText
 	local Logo = LUI.UIImage.new(0.5, 0.5, -210.5, 210.5, 0, 0, 324, 776)
 	Logo:setZoom(40)
-	Logo:setImage(RegisterImage(0xD50708E11EDBD06))
+	Logo:setImage(RegisterImage(@"uie_ui_icon_startmenu_option_brightnesslogo"))
 	Logo:setupUIStreamedImage(0)
 	Logo:subscribeToGlobalModel(f3_arg0, "PerController", "profile.brightnessPreviewColor", function(model)
 		local f4_local0 = model:get()
@@ -76,14 +76,14 @@ LUI.createMenu.FirstTimeBrightnessSetting = function(f3_arg0, f3_arg1)
 	local continueButton = CoD.GenericClickButton.new(f3_local1, f3_arg0, 0, 0, 938, 1141, 0, 0, 943, 1003)
 	continueButton:setAlpha(0)
 	continueButton:setZoom(50)
-	continueButton.label:setText(Engine[0xF9F1239CFD921FE](0x6393FF34EA56966))
+	continueButton.label:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/continue"))
 	self:addElement(continueButton)
 	self.continueButton = continueButton
 	local XboxGamerTag = LUI.UIText.new(0.5, 0.5, -400, 400, 0, 0, 943, 982)
 	XboxGamerTag:setZoom(50)
 	XboxGamerTag:setText("")
 	XboxGamerTag:setTTF("notosans_regular")
-	XboxGamerTag:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	XboxGamerTag:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	self:addElement(XboxGamerTag)
 	self.XboxGamerTag = XboxGamerTag
 	local Button = CoD.StartMenu_Options_SettingSlider.new(f3_local1, f3_arg0, 0.5, 0.5, -350, 350, 0, 0, 870, 916)
@@ -91,7 +91,7 @@ LUI.createMenu.FirstTimeBrightnessSetting = function(f3_arg0, f3_arg1)
 	self:addElement(Button)
 	self.Button = Button
 	local Header = CoD.StartMenuOptionsHeader.new(f3_local1, f3_arg0, 0, 1, 2, 2, 0, 0, 44, 124)
-	Header.HeaderText:setText(LocalizeToUpperString(0x4ADE150FFB574D4))
+	Header.HeaderText:setText(LocalizeToUpperString(@"menu/brightness"))
 	self:addElement(Header)
 	self.Header = Header
 	local BGFrame = CoD.StartMenuOptionsMainFrame.new(f3_local1, f3_arg0, 0.5, 0.5, -306, 306, 0.5, 0.5, -320, 320)
@@ -118,7 +118,7 @@ LUI.createMenu.FirstTimeBrightnessSetting = function(f3_arg0, f3_arg1)
 	end)
 	local f3_local14 = self
 	local f3_local15 = self.subscribeToModel
-	local f3_local16 = Engine[0x4DF5CFBC1771947](f3_arg0)
+	local f3_local16 = Engine[@"getmodelforcontroller"](f3_arg0)
 	f3_local15(f3_local14, f3_local16.LastInput, function(f7_arg0)
 		f3_local1:updateElementState(self, {
 			name = "model_validation",
@@ -128,27 +128,27 @@ LUI.createMenu.FirstTimeBrightnessSetting = function(f3_arg0, f3_arg1)
 			modelName = "LastInput",
 		})
 	end, false)
-	f3_local1:AddButtonCallbackFunction(self, f3_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f3_local1:AddButtonCallbackFunction(self, f3_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		GoBack(self, controller)
 		ClearMenuSavedState(menu)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x0, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"hash_0", nil, nil)
 		return false
 	end, false)
-	f3_local1:AddButtonCallbackFunction(self, f3_arg0, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], nil, function(element, menu, controller, model)
+	f3_local1:AddButtonCallbackFunction(self, f3_arg0, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], nil, function(element, menu, controller, model)
 		CoD.OptionsUtility.ResetPlayerSettingToDefault(self.Button, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x19D60864B204458, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"menu/default", nil, nil)
 		return true
 	end, false)
-	f3_local1:AddButtonCallbackFunction(self, f3_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f3_local1:AddButtonCallbackFunction(self, f3_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		ClearMenuSavedState(menu)
 		CoD.LobbyUtility.CompleteFirstTimeBrightness(menu, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD8FF5E03592FD99, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/confirm", nil, nil)
 		return true
 	end, false)
 	self:subscribeToGlobalModel(f3_arg0, "PerController", "PlayerSettingsUpdate", function(model)

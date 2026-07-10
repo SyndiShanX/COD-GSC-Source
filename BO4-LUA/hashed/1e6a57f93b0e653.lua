@@ -54,7 +54,7 @@ CoD.PositionDraft_FocusedCharacterInfo.new = function(f1_arg0, f1_arg1, f1_arg2,
 	})
 	local f1_local5 = RestrictedText
 	local f1_local6 = RestrictedText.subscribeToModel
-	local f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local6(f1_local5, f1_local7["PositionDraft.focusedCharacterIsRestricted"], function(f7_arg0)
 		f1_arg0:updateElementState(RestrictedText, {
 			name = "model_validation",
@@ -66,7 +66,7 @@ CoD.PositionDraft_FocusedCharacterInfo.new = function(f1_arg0, f1_arg1, f1_arg2,
 	end, false)
 	f1_local5 = RestrictedText
 	f1_local6 = RestrictedText.subscribeToModel
-	f1_local7 = Engine[0x8DF2E5447F384B9]()
+	f1_local7 = Engine[@"getglobalmodel"]()
 	f1_local6(f1_local5, f1_local7["lobbyRoot.lobbyNav"], function(f8_arg0)
 		f1_arg0:updateElementState(RestrictedText, {
 			name = "model_validation",
@@ -78,7 +78,7 @@ CoD.PositionDraft_FocusedCharacterInfo.new = function(f1_arg0, f1_arg1, f1_arg2,
 	end, false)
 	f1_local5 = RestrictedText
 	f1_local6 = RestrictedText.subscribeToModel
-	f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local6(f1_local5, f1_local7["PositionDraft.focusedCharacterHasRestriction"], function(f9_arg0)
 		f1_arg0:updateElementState(RestrictedText, {
 			name = "model_validation",
@@ -103,7 +103,7 @@ CoD.PositionDraft_FocusedCharacterInfo.new = function(f1_arg0, f1_arg1, f1_arg2,
 	})
 	f1_local5 = self
 	f1_local6 = self.subscribeToModel
-	f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local6(f1_local5, f1_local7["PositionDraft.focusedCharacterIndex"], function(f12_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

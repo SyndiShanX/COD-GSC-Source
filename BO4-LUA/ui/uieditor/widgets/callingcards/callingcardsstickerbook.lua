@@ -29,14 +29,14 @@ CoD.CallingCardsStickerbook.new = function(f3_arg0, f3_arg1, f3_arg2, f3_arg3, f
 	CardGrid:setHorizontalCount(3)
 	CardGrid:setVerticalCount(7)
 	CardGrid:setSpacing(20)
-	CardGrid:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	CardGrid:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	CardGrid:setVerticalCounter(CoD.verticalCounter)
 	CardGrid:setDataSource("CallingCardsSorted")
 	CardGrid:linkToElementModel(CardGrid, "isLocked", true, function(model, f4_arg1)
-		CoD.Menu.UpdateButtonShownState(f4_arg1, f3_arg0, f3_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f4_arg1, f3_arg0, f3_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	CardGrid:linkToElementModel(CardGrid, "trialLocked", true, function(model, f5_arg1)
-		CoD.Menu.UpdateButtonShownState(f5_arg1, f3_arg0, f3_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f5_arg1, f3_arg0, f3_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	CardGrid:registerEventHandler("list_item_gain_focus", function(element, event)
 		local f6_local0 = nil
@@ -55,10 +55,10 @@ CoD.CallingCardsStickerbook.new = function(f3_arg0, f3_arg1, f3_arg2, f3_arg3, f
 		elseif element.super.gainFocus then
 			f8_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f3_arg0, f3_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f3_arg0, f3_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f8_local0
 	end)
-	f3_arg0:AddButtonCallbackFunction(CardGrid, f3_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f3_arg0:AddButtonCallbackFunction(CardGrid, f3_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if not CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "isLocked") and not CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "trialLocked") then
 			CallingCards_SetPlayerBackground(menu, element, controller)
 			ForceNotifyModel(controller, "hudItems.evalEquippedCard")
@@ -67,7 +67,7 @@ CoD.CallingCardsStickerbook.new = function(f3_arg0, f3_arg1, f3_arg2, f3_arg3, f
 		end
 	end, function(element, menu, controller)
 		if not CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "isLocked") and not CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "trialLocked") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false
@@ -124,7 +124,7 @@ CoD.CallingCardsStickerbook.new = function(f3_arg0, f3_arg1, f3_arg2, f3_arg3, f
 	})
 	local f3_local6 = self
 	local f3_local7 = self.subscribeToModel
-	local f3_local8 = Engine[0x4DF5CFBC1771947](f3_arg1)
+	local f3_local8 = Engine[@"getmodelforcontroller"](f3_arg1)
 	f3_local7(f3_local6, f3_local8["hudItems.callingCardProfilingType"], function(f17_arg0)
 		f3_arg0:updateElementState(self, {
 			name = "model_validation",

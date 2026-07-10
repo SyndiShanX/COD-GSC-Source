@@ -7,7 +7,7 @@ CoD.OverheadName_WZ_PlayerNumber.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	self.id = "OverheadName_WZ_PlayerNumber"
 	self.soundSet = "default"
 	local Image = LUI.UIImage.new(0.43, 1.43, -11.5, -11.5, 0, 1, 0, 0)
-	Image:setImage(RegisterImage(0xB63170C49335443))
+	Image:setImage(RegisterImage(@"uie_ui_menu_cac_selection_circle"))
 	Image.__Color = function(f2_arg0)
 		local f2_local0 = f2_arg0:get()
 		if f2_local0 ~= nil then
@@ -29,9 +29,9 @@ CoD.OverheadName_WZ_PlayerNumber.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	self.Image = Image
 	local IDNumber2 = LUI.UIText.new(0.5, 0.5, -11, 12, 0, 0, 2.5, 25.5)
 	IDNumber2:setTTF("ttmussels_demibold")
-	IDNumber2:setMaterial(LUI.UIImage.GetCachedMaterial(0x336C1AE82B1520A))
-	IDNumber2:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	IDNumber2:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	IDNumber2:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_3336C1AE82B1520A"))
+	IDNumber2:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	IDNumber2:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	IDNumber2:linkToElementModel(self, "teammateIndex", true, function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
@@ -43,7 +43,7 @@ CoD.OverheadName_WZ_PlayerNumber.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	Image:linkToElementModel(self, "team", true, Image.__Color_FullPath)
 	local f1_local3 = Image
 	local f1_local4 = Image.subscribeToModel
-	local f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local4(f1_local3, f1_local5["profile.colorblindMode"], Image.__Color_FullPath)
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)
 	if PostLoadFunc then

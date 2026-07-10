@@ -20,7 +20,7 @@ CoD.MapVoteLabelLower.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	})
 	local f1_local2 = StartMenuIdentitySubtitleBG00
 	local SubTitle = StartMenuIdentitySubtitleBG00.subscribeToModel
-	local f1_local4 = Engine[0x8DF2E5447F384B9]()
+	local f1_local4 = Engine[@"getglobalmodel"]()
 	SubTitle(f1_local2, f1_local4["lobbyRoot.lobbyNav"], function(f3_arg0)
 		f1_arg0:updateElementState(StartMenuIdentitySubtitleBG00, {
 			name = "model_validation",
@@ -37,7 +37,7 @@ CoD.MapVoteLabelLower.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	SubTitle = LUI.UIText.new(0, 0, 9, 525, 0, 0, -1, 29)
 	SubTitle:setText("")
 	SubTitle:setTTF("dinnext_regular")
-	SubTitle:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	SubTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	LUI.OverrideFunction_CallOriginalFirst(SubTitle, "setText", function(element, controller)
 		ScaleWidgetToLabelLeftJustify(self, element, 2)
 	end)
@@ -53,7 +53,7 @@ CoD.MapVoteLabelLower.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	})
 	f1_local4 = self
 	f1_local2 = self.subscribeToModel
-	local f1_local5 = Engine[0x8DF2E5447F384B9]()
+	local f1_local5 = Engine[@"getglobalmodel"]()
 	f1_local2(f1_local4, f1_local5["lobbyRoot.lobbyNav"], function(f6_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

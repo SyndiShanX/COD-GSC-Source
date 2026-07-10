@@ -12,10 +12,10 @@ CoD.DirectorPlaylistHeaderB.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.Image = Image
 	local description4 = LUI.UIText.new(0, 0, 0, 500, 0, 0, 0, 24)
 	description4:setRGB(0.14, 0.14, 0.14)
-	description4:setText(Engine[0xF9F1239CFD921FE](0xFB6B6B58798A982))
+	description4:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_2FB6B6B58798A982"))
 	description4:setTTF("ttmussels_demibold")
-	description4:setAlignment(Engine[0x7F8853DC3581AA4](Enum[0x7A5123B654282D2][0x58C8A85F2048829]))
-	description4:setAlignment(Engine[0x7F8853DC3581AA4](Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3]))
+	description4:setAlignment(Engine[@"hash_67F8853DC3581AA4"](Enum[@"luialignment"][@"lui_alignment_left"]))
+	description4:setAlignment(Engine[@"hash_67F8853DC3581AA4"](Enum[@"luialignment"][@"lui_alignment_top"]))
 	self:addElement(description4)
 	self.description4 = description4
 	if PostLoadFunc then

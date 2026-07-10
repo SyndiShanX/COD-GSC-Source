@@ -27,7 +27,7 @@ CoD.CodCasterObjectiveStatus.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	})
 	local CodCasterObjectiveStatusHardpoint = CodCasterObjectiveStatusControl
 	local CodCasterObjectiveStatusLifeCount = CodCasterObjectiveStatusControl.subscribeToModel
-	local CodCasterObjectiveStatusSD = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local CodCasterObjectiveStatusSD = Engine[@"getmodelforcontroller"](f1_arg1)
 	CodCasterObjectiveStatusLifeCount(CodCasterObjectiveStatusHardpoint, CodCasterObjectiveStatusSD["hudItems.codcaster.ObjectiveB.progress"], function(f3_arg0)
 		f1_arg0:updateElementState(CodCasterObjectiveStatusControl, {
 			name = "model_validation",
@@ -39,7 +39,7 @@ CoD.CodCasterObjectiveStatus.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	end, false)
 	CodCasterObjectiveStatusHardpoint = CodCasterObjectiveStatusControl
 	CodCasterObjectiveStatusLifeCount = CodCasterObjectiveStatusControl.subscribeToModel
-	CodCasterObjectiveStatusSD = Engine[0x4DF5CFBC1771947](f1_arg1)
+	CodCasterObjectiveStatusSD = Engine[@"getmodelforcontroller"](f1_arg1)
 	CodCasterObjectiveStatusLifeCount(CodCasterObjectiveStatusHardpoint, CodCasterObjectiveStatusSD["hudItems.codcaster.ObjectiveA.progress"], function(f4_arg0)
 		f1_arg0:updateElementState(CodCasterObjectiveStatusControl, {
 			name = "model_validation",
@@ -76,7 +76,7 @@ CoD.CodCasterObjectiveStatus.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	})
 	local CodCasterObjectiveStatusCTF = CodCasterObjectiveStatusSD
 	local CodCasterObjectiveStatusDomination = CodCasterObjectiveStatusSD.subscribeToModel
-	local CodCasterObjectiveStatusSafeGuard = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local CodCasterObjectiveStatusSafeGuard = Engine[@"getmodelforcontroller"](f1_arg1)
 	CodCasterObjectiveStatusDomination(CodCasterObjectiveStatusCTF, CodCasterObjectiveStatusSafeGuard["HUDItems.codcaster.BombA"], function(f7_arg0)
 		f1_arg0:updateElementState(CodCasterObjectiveStatusSD, {
 			name = "model_validation",
@@ -88,7 +88,7 @@ CoD.CodCasterObjectiveStatus.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	end, false)
 	CodCasterObjectiveStatusCTF = CodCasterObjectiveStatusSD
 	CodCasterObjectiveStatusDomination = CodCasterObjectiveStatusSD.subscribeToModel
-	CodCasterObjectiveStatusSafeGuard = Engine[0x4DF5CFBC1771947](f1_arg1)
+	CodCasterObjectiveStatusSafeGuard = Engine[@"getmodelforcontroller"](f1_arg1)
 	CodCasterObjectiveStatusDomination(CodCasterObjectiveStatusCTF, CodCasterObjectiveStatusSafeGuard["HUDItems.codcaster.BombB"], function(f8_arg0)
 		f1_arg0:updateElementState(CodCasterObjectiveStatusSD, {
 			name = "model_validation",

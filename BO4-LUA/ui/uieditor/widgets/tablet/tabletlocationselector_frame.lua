@@ -12,80 +12,80 @@ CoD.TabletLocationSelector_Frame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	self.soundSet = "none"
 	local FrameCornerTL = LUI.UIImage.new(0, 0, 58, 98, 0, 0, 0, 40)
 	FrameCornerTL:setAlpha(0.2)
-	FrameCornerTL:setImage(RegisterImage(0x102824AD846AAD9))
+	FrameCornerTL:setImage(RegisterImage(@"hash_2102824AD846AAD9"))
 	self:addElement(FrameCornerTL)
 	self.FrameCornerTL = FrameCornerTL
 	local FrameCornerBR = LUI.UIImage.new(1, 1, -140, -100, 1, 1, -45, -5)
 	FrameCornerBR:setAlpha(0.2)
 	FrameCornerBR:setZRot(180)
-	FrameCornerBR:setImage(RegisterImage(0x102824AD846AAD9))
+	FrameCornerBR:setImage(RegisterImage(@"hash_2102824AD846AAD9"))
 	self:addElement(FrameCornerBR)
 	self.FrameCornerBR = FrameCornerBR
 	local FrameCornerTR = LUI.UIImage.new(1, 1, -140, -100, 0, 0, 0, 40)
 	FrameCornerTR:setAlpha(0.2)
 	FrameCornerTR:setYRot(180)
-	FrameCornerTR:setImage(RegisterImage(0x102824AD846AAD9))
+	FrameCornerTR:setImage(RegisterImage(@"hash_2102824AD846AAD9"))
 	self:addElement(FrameCornerTR)
 	self.FrameCornerTR = FrameCornerTR
 	local FrameCornerBL = LUI.UIImage.new(0, 0, 58, 98, 1, 1, -45, -5)
 	FrameCornerBL:setAlpha(0.2)
 	FrameCornerBL:setXRot(180)
-	FrameCornerBL:setImage(RegisterImage(0x102824AD846AAD9))
+	FrameCornerBL:setImage(RegisterImage(@"hash_2102824AD846AAD9"))
 	self:addElement(FrameCornerBL)
 	self.FrameCornerBL = FrameCornerBL
 	local FrameTopL = LUI.UIImage.new(0, 1, 98, -806, 0, 0, 0, 40)
 	FrameTopL:setAlpha(0.2)
-	FrameTopL:setImage(RegisterImage(0x201515318295B75))
+	FrameTopL:setImage(RegisterImage(@"hash_5201515318295B75"))
 	self:addElement(FrameTopL)
 	self.FrameTopL = FrameTopL
 	local FrameTopR = LUI.UIImage.new(0.82, 1, -140, -140, 0, 0, 0, 40)
 	FrameTopR:setAlpha(0.2)
-	FrameTopR:setImage(RegisterImage(0x201515318295B75))
+	FrameTopR:setImage(RegisterImage(@"hash_5201515318295B75"))
 	self:addElement(FrameTopR)
 	self.FrameTopR = FrameTopR
 	local FrameSideL = LUI.UIImage.new(0, 0, 58, 98, 0, 1, 42, -42)
 	FrameSideL:setAlpha(0.02)
-	FrameSideL:setImage(RegisterImage(0xFA302084C18FAA1))
+	FrameSideL:setImage(RegisterImage(@"hash_3FA302084C18FAA1"))
 	self:addElement(FrameSideL)
 	self.FrameSideL = FrameSideL
 	local FrameSideR = LUI.UIImage.new(1, 1, -140, -100, 0, 1, 42, -42)
 	FrameSideR:setAlpha(0.02)
 	FrameSideR:setYRot(180)
-	FrameSideR:setImage(RegisterImage(0xFA302084C18FAA1))
+	FrameSideR:setImage(RegisterImage(@"hash_3FA302084C18FAA1"))
 	self:addElement(FrameSideR)
 	self.FrameSideR = FrameSideR
 	local FrameBotL = LUI.UIImage.new(0, 0.31, 98, 98, 1, 1, -45, -5)
 	FrameBotL:setAlpha(0.2)
 	FrameBotL:setZRot(180)
-	FrameBotL:setImage(RegisterImage(0x201515318295B75))
+	FrameBotL:setImage(RegisterImage(@"hash_5201515318295B75"))
 	self:addElement(FrameBotL)
 	self.FrameBotL = FrameBotL
 	local FrameBotR = LUI.UIImage.new(0.73, 1, -140, -140, 1, 1, -45, -5)
 	FrameBotR:setAlpha(0.2)
 	FrameBotR:setZRot(180)
-	FrameBotR:setImage(RegisterImage(0x201515318295B75))
+	FrameBotR:setImage(RegisterImage(@"hash_5201515318295B75"))
 	self:addElement(FrameBotR)
 	self.FrameBotR = FrameBotR
 	local Meter = LUI.UIImage.new(0.5, 0.5, -73, 43, 0, 0, 20, 50)
 	Meter:setAlpha(0.05)
-	Meter:setImage(RegisterImage(0x3908E8325A56C68))
+	Meter:setImage(RegisterImage(@"hash_33908E8325A56C68"))
 	self:addElement(Meter)
 	self.Meter = Meter
 	local DiagonalFrameR = LUI.UIImage.new(1, 1, -314, -151, 1, 1, -189, -90)
 	DiagonalFrameR:setAlpha(0.05)
-	DiagonalFrameR:setImage(RegisterImage(0x78EC0C14D6CB24B))
+	DiagonalFrameR:setImage(RegisterImage(@"hash_778EC0C14D6CB24B"))
 	self:addElement(DiagonalFrameR)
 	self.DiagonalFrameR = DiagonalFrameR
 	local DiagonalFrameL = LUI.UIImage.new(0, 0, 111, 274, 1, 1, -189, -90)
 	DiagonalFrameL:setAlpha(0.05)
 	DiagonalFrameL:setYRot(180)
-	DiagonalFrameL:setImage(RegisterImage(0x78EC0C14D6CB24B))
+	DiagonalFrameL:setImage(RegisterImage(@"hash_778EC0C14D6CB24B"))
 	self:addElement(DiagonalFrameL)
 	self.DiagonalFrameL = DiagonalFrameL
 	local ButtonCase1 = LUI.UIImage.new(0.5, 0.5, -355, -157, 1, 1, -54, -6)
 	ButtonCase1:setAlpha(0.06)
 	ButtonCase1:setZRot(180)
-	ButtonCase1:setImage(RegisterImage(0x18D8A1BD8B8BC5E))
+	ButtonCase1:setImage(RegisterImage(@"uie_ui_hud_vehicle_ac130_ctrl_button_container"))
 	self:addElement(ButtonCase1)
 	self.ButtonCase1 = ButtonCase1
 	local f1_local15 = nil
@@ -95,7 +95,7 @@ CoD.TabletLocationSelector_Frame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	local ButtonCase3 = LUI.UIImage.new(0.5, 0.5, 157, 355, 1, 1, -54, -6)
 	ButtonCase3:setAlpha(0.06)
 	ButtonCase3:setZRot(180)
-	ButtonCase3:setImage(RegisterImage(0x18D8A1BD8B8BC5E))
+	ButtonCase3:setImage(RegisterImage(@"uie_ui_hud_vehicle_ac130_ctrl_button_container"))
 	self:addElement(ButtonCase3)
 	self.ButtonCase3 = ButtonCase3
 	local Grid = CoD.TabletLocationSelector_Grid.new(f1_arg0, f1_arg1, 0.5, 0.5, -449, 409, 0.5, 0.5, -284.5, 289.5)
@@ -120,7 +120,7 @@ CoD.TabletLocationSelector_Frame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	self.GadgetSquareL = GadgetSquareL
 	local AmbientGadgetL = LUI.UIImage.new(0, 0, -14, 67, 0, 0, 95, 228)
 	AmbientGadgetL:setAlpha(0.05)
-	AmbientGadgetL:setImage(RegisterImage(0xA6F04A05C52120B))
+	AmbientGadgetL:setImage(RegisterImage(@"hash_5A6F04A05C52120B"))
 	self:addElement(AmbientGadgetL)
 	self.AmbientGadgetL = AmbientGadgetL
 	local AmbientGadgetR = CoD.vhud_lightningstrike_ambientgadget.new(f1_arg0, f1_arg1, 1, 1, -100, 0, 0, 0, 130, 267)

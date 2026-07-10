@@ -8,7 +8,7 @@ CoD.prestigeRewardWidget_UI3D.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self.soundSet = "default"
 	local digit1 = LUI.UIText.new(0.5, 0.5, -94, -63, 0.5, 0.5, -19, 19)
 	digit1:setTTF("ttmussels_demibold")
-	digit1:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	digit1:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	digit1:subscribeToGlobalModel(f1_arg1, "CurrentWeapon", "weaponPrestigeUI3DText", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -19,7 +19,7 @@ CoD.prestigeRewardWidget_UI3D.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self.digit1 = digit1
 	local digit2 = LUI.UIText.new(0.5, 0.5, -62, -31, 0.5, 0.5, -19, 19)
 	digit2:setTTF("ttmussels_demibold")
-	digit2:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	digit2:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	digit2:subscribeToGlobalModel(f1_arg1, "CurrentWeapon", "weaponPrestigeUI3DText", function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -30,7 +30,7 @@ CoD.prestigeRewardWidget_UI3D.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self.digit2 = digit2
 	local digit3 = LUI.UIText.new(0.5, 0.5, -31, 0, 0.5, 0.5, -19, 19)
 	digit3:setTTF("ttmussels_demibold")
-	digit3:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	digit3:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	digit3:subscribeToGlobalModel(f1_arg1, "CurrentWeapon", "weaponPrestigeUI3DText", function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
@@ -41,7 +41,7 @@ CoD.prestigeRewardWidget_UI3D.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self.digit3 = digit3
 	local digit4 = LUI.UIText.new(0.5, 0.5, 0, 31, 0.5, 0.5, -19, 19)
 	digit4:setTTF("ttmussels_demibold")
-	digit4:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	digit4:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	digit4:subscribeToGlobalModel(f1_arg1, "CurrentWeapon", "weaponPrestigeUI3DText", function(model)
 		local f5_local0 = model:get()
 		if f5_local0 ~= nil then
@@ -52,7 +52,7 @@ CoD.prestigeRewardWidget_UI3D.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self.digit4 = digit4
 	local digit5 = LUI.UIText.new(0.5, 0.5, 31, 62, 0.5, 0.5, -19, 19)
 	digit5:setTTF("ttmussels_demibold")
-	digit5:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	digit5:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	digit5:subscribeToGlobalModel(f1_arg1, "CurrentWeapon", "weaponPrestigeUI3DText", function(model)
 		local f6_local0 = model:get()
 		if f6_local0 ~= nil then
@@ -63,7 +63,7 @@ CoD.prestigeRewardWidget_UI3D.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self.digit5 = digit5
 	local digit6 = LUI.UIText.new(0.5, 0.5, 62, 93, 0.5, 0.5, -19, 19)
 	digit6:setTTF("ttmussels_demibold")
-	digit6:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	digit6:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	digit6:subscribeToGlobalModel(f1_arg1, "CurrentWeapon", "weaponPrestigeUI3DText", function(model)
 		local f7_local0 = model:get()
 		if f7_local0 ~= nil then

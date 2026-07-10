@@ -63,7 +63,7 @@ CoD.AARMeritReportTab.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	})
 	local f1_local5 = self
 	local f1_local6 = self.subscribeToModel
-	local f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local6(f1_local5, f1_local7["AAR.activeTab"], function(f7_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -114,7 +114,7 @@ CoD.AARMeritReportTab.__clipsPerState = {
 			f11_arg0:__resetProperties()
 			f11_arg0:setupElementClipCounter(3)
 			local f11_local0 = function(f12_arg0)
-				f11_arg0.AarMpBacking:beginAnimation(150, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f11_arg0.AarMpBacking:beginAnimation(150, Enum[@"luitween"][@"luitween_ease_in"])
 				f11_arg0.AarMpBacking:registerEventHandler("interrupted_keyframe", f11_arg0.clipInterrupted)
 				f11_arg0.AarMpBacking:registerEventHandler("transition_complete_keyframe", f11_arg0.clipFinished)
 			end

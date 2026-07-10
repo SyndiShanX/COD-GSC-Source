@@ -8,7 +8,7 @@ CoD.InGamePlayerListRow.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	self.soundSet = "ChooseDecal"
 	local TeamColorBacking = LUI.UIImage.new(0, 1.01, -5, -5, 0, 1.19, -3, -3)
 	TeamColorBacking:setAlpha(0.8)
-	TeamColorBacking:setImage(RegisterImage(0x3AA5FC267DC2C8))
+	TeamColorBacking:setImage(RegisterImage(@"uie_ui_menu_cac_text_bg01"))
 	TeamColorBacking:linkToElementModel(self, "teamBGColor", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -25,8 +25,8 @@ CoD.InGamePlayerListRow.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	local rankText = LUI.UIText.new(0, 0, 7.5, 37.5, 0, 0, 0, 38)
 	rankText:setAlpha(0)
 	rankText:setTTF("ttmussels_regular")
-	rankText:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
-	rankText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	rankText:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
+	rankText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(rankText)
 	self.rankText = rankText
 	local rankImage = LUI.UIImage.new(0, 0, 41, 71, 0, 0, 4, 34)
@@ -35,7 +35,7 @@ CoD.InGamePlayerListRow.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	self.rankImage = rankImage
 	local playerName = LUI.UIText.new(0, 0, 7.5, 588.5, 0, 0, 4.5, 32.5)
 	playerName:setTTF("notosans_bold")
-	playerName:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	playerName:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(playerName)
 	self.playerName = playerName
 	self.rankText:linkToElementModel(self, "rankText", true, function(model)

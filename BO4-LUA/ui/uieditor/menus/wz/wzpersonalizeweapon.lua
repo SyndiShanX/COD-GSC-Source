@@ -34,12 +34,12 @@ LUI.createMenu.WZPersonalizeWeapon = function(f1_arg0, f1_arg1)
 	self:addElement(BackgroundSlidePanel)
 	self.BackgroundSlidePanel = BackgroundSlidePanel
 	local CACHeader = CoD.CommonHeader.new(f1_local1, f1_arg0, 0.5, 0.5, -960, 960, 0, 0, 0, 67)
-	CACHeader.subtitle.StageTitle:setText(LocalizeToUpperString(0x94122F68876E5D9))
+	CACHeader.subtitle.StageTitle:setText(LocalizeToUpperString(@"hash_194122F68876E5D9"))
 	CACHeader.subtitle.subtitle:setAlpha(0)
 	CACHeader:subscribeToGlobalModel(f1_arg0, "LobbyRoot", "lobbyTitle", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			CACHeader.subtitle.subtitle:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			CACHeader.subtitle.subtitle:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	CACHeader:linkToElementModel(self, nil, false, function(model)
@@ -140,7 +140,7 @@ LUI.createMenu.WZPersonalizeWeapon = function(f1_arg0, f1_arg1)
 	})
 	local f1_local10 = PaintCanCount
 	local f1_local11 = PaintCanCount.subscribeToModel
-	local f1_local12 = Engine[0x8DF2E5447F384B9]()
+	local f1_local12 = Engine[@"getglobalmodel"]()
 	f1_local11(f1_local10, f1_local12["lobbyRoot.lobbyNetworkMode"], function(f10_arg0)
 		f1_local1:updateElementState(PaintCanCount, {
 			name = "model_validation",
@@ -152,7 +152,7 @@ LUI.createMenu.WZPersonalizeWeapon = function(f1_arg0, f1_arg1)
 	end, false)
 	f1_local10 = PaintCanCount
 	f1_local11 = PaintCanCount.subscribeToModel
-	f1_local12 = Engine[0x8DF2E5447F384B9]()
+	f1_local12 = Engine[@"getglobalmodel"]()
 	f1_local11(f1_local10, f1_local12["lobbyRoot.lobbyNav"], function(f11_arg0)
 		f1_local1:updateElementState(PaintCanCount, {
 			name = "model_validation",
@@ -193,7 +193,7 @@ LUI.createMenu.WZPersonalizeWeapon = function(f1_arg0, f1_arg1)
 		end
 		return f13_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		if MenuPropertyIsTrue(menu, "_showWeaponVariantList") and IsPC() then
 			CoD.CACUtility.HideWeaponVariantList(menu, controller)
 			return true
@@ -206,13 +206,13 @@ LUI.createMenu.WZPersonalizeWeapon = function(f1_arg0, f1_arg1)
 			return true
 		end
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 		return true
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], nil, function(element, menu, controller, model)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], 0x0, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], @"hash_0", nil, nil)
 		return false
 	end, false)
 	LUI.OverrideFunction_CallOriginalFirst(self, "close", function(element)
@@ -271,7 +271,7 @@ CoD.WZPersonalizeWeapon.__clipsPerState = {
 			f21_arg0:setupElementClipCounter(2)
 			local f21_local0 = function(f22_arg0)
 				local f22_local0 = function(f23_arg0)
-					f23_arg0:beginAnimation(100, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f23_arg0:beginAnimation(100, Enum[@"luitween"][@"luitween_ease_both"])
 					f23_arg0:setTopBottom(0, 0, 672, 1294)
 					f23_arg0:setAlpha(1)
 					f23_arg0:registerEventHandler("transition_complete_keyframe", f21_arg0.clipFinished)
@@ -292,7 +292,7 @@ CoD.WZPersonalizeWeapon.__clipsPerState = {
 					f25_arg0:setAlpha(1)
 					f25_arg0:registerEventHandler("transition_complete_keyframe", f21_arg0.clipFinished)
 				end
-				f21_arg0.WeaponListWidget:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f21_arg0.WeaponListWidget:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f21_arg0.WeaponListWidget:setTopBottom(0, 0, 700, 1190)
 				f21_arg0.WeaponListWidget:registerEventHandler("interrupted_keyframe", f21_arg0.clipInterrupted)
 				f21_arg0.WeaponListWidget:registerEventHandler("transition_complete_keyframe", f24_local0)
@@ -306,7 +306,7 @@ CoD.WZPersonalizeWeapon.__clipsPerState = {
 			f26_arg0:__resetProperties()
 			f26_arg0:setupElementClipCounter(2)
 			local f26_local0 = function(f27_arg0)
-				f26_arg0.BackgroundSlidePanel:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f26_arg0.BackgroundSlidePanel:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f26_arg0.BackgroundSlidePanel:setTopBottom(0, 0, 1072, 1694)
 				f26_arg0.BackgroundSlidePanel:setAlpha(0)
 				f26_arg0.BackgroundSlidePanel:registerEventHandler("interrupted_keyframe", f26_arg0.clipInterrupted)
@@ -317,7 +317,7 @@ CoD.WZPersonalizeWeapon.__clipsPerState = {
 			f26_arg0.BackgroundSlidePanel:setAlpha(1)
 			f26_local0(f26_arg0.BackgroundSlidePanel)
 			local f26_local1 = function(f28_arg0)
-				f26_arg0.WeaponListWidget:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f26_arg0.WeaponListWidget:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f26_arg0.WeaponListWidget:setTopBottom(0, 0, 1080, 1570)
 				f26_arg0.WeaponListWidget:setAlpha(0)
 				f26_arg0.WeaponListWidget:registerEventHandler("interrupted_keyframe", f26_arg0.clipInterrupted)

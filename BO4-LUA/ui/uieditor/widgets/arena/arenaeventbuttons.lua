@@ -14,8 +14,8 @@ CoD.ArenaEventButtons.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local ArenaLeagueEventButton = CoD.ArenaEventButton.new(f1_arg0, f1_arg1, 0, 0, 0, 200, 0, 0, 0, 70)
 	ArenaLeagueEventButton:setAlpha(0)
-	ArenaLeagueEventButton.ArenaButtonInternal.MiddleTextFocus:setText(LocalizeToUpperString(0xA81622B007EDBAA))
-	ArenaLeagueEventButton.ArenaButtonInternal.MiddleText:setText(LocalizeToUpperString(0xA81622B007EDBAA))
+	ArenaLeagueEventButton.ArenaButtonInternal.MiddleTextFocus:setText(LocalizeToUpperString(@"hash_2A81622B007EDBAA"))
+	ArenaLeagueEventButton.ArenaButtonInternal.MiddleText:setText(LocalizeToUpperString(@"hash_2A81622B007EDBAA"))
 	ArenaLeagueEventButton:registerEventHandler("gain_focus", function(element, event)
 		local f2_local0 = nil
 		if element.gainFocus then
@@ -23,17 +23,17 @@ CoD.ArenaEventButtons.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 		elseif element.super.gainFocus then
 			f2_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f2_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(ArenaLeagueEventButton, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(ArenaLeagueEventButton, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		PlaySoundAlias("uin_press_generic")
 		SetLoseFocusToSelf(self, controller)
 		CoD.ArenaLeaguePlayUtility.ForceRefreshLadder(menu, controller)
 		OpenOverlay(self, "LeaguePlayLeaderboardMenu", controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 		return true
 	end, false)
 	self:addElement(ArenaLeagueEventButton)
@@ -42,13 +42,13 @@ CoD.ArenaEventButtons.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 		{
 			stateName = "LeaguePlay",
 			condition = function(menu, element, event)
-				return CoD.ArenaUtility.CurrentArenaEventTypeEquals(self, Enum[0xC0EA92D04BC003B][0xC32571741C5B730]) and CoD.ArenaLeaguePlayUtility.HasOneMatchPlayed(self, f1_arg1)
+				return CoD.ArenaUtility.CurrentArenaEventTypeEquals(self, Enum[@"hash_6C0EA92D04BC003B"][@"hash_5C32571741C5B730"]) and CoD.ArenaLeaguePlayUtility.HasOneMatchPlayed(self, f1_arg1)
 			end,
 		},
 	})
 	local f1_local2 = self
 	local f1_local3 = self.subscribeToModel
-	local f1_local4 = Engine[0x8DF2E5447F384B9]()
+	local f1_local4 = Engine[@"getglobalmodel"]()
 	f1_local3(f1_local2, f1_local4["lobbyPlaylist.name"], function(f6_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -60,7 +60,7 @@ CoD.ArenaEventButtons.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	end, false)
 	f1_local2 = self
 	f1_local3 = self.subscribeToModel
-	f1_local4 = Engine[0x8DF2E5447F384B9]()
+	f1_local4 = Engine[@"getglobalmodel"]()
 	f1_local3(f1_local2, f1_local4["lobbyRoot.lobbyNav"], function(f7_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -72,7 +72,7 @@ CoD.ArenaEventButtons.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	end, false)
 	f1_local2 = self
 	f1_local3 = self.subscribeToModel
-	f1_local4 = Engine[0x8DF2E5447F384B9]()
+	f1_local4 = Engine[@"getglobalmodel"]()
 	f1_local3(f1_local2, f1_local4["LeaguePlayLadder.entityLadderRank"], function(f8_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

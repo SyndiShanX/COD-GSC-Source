@@ -8,12 +8,12 @@ CoD.HubTagsSet_SetName.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	self.soundSet = "default"
 	local TextBox = LUI.UIText.new(0, 1, 0, 0, 0, 0, 45.5, 82.5)
 	TextBox:setTTF("ttmussels_demibold")
-	TextBox:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	TextBox:setAlignment(Enum[0x7A5123B654282D2][0x6ED4298C93DC5ED])
+	TextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	TextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
 	TextBox:linkToElementModel(self, "setName", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			TextBox:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			TextBox:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	self:addElement(TextBox)

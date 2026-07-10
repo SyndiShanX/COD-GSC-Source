@@ -15,28 +15,28 @@ CoD.CodCasterTeamIdentitysettingscontainer.new = function(f1_arg0, f1_arg1, f1_a
 	self.anyChildUsesUpdateState = true
 	local TeamLogoTitle = LUI.UIText.new(0, 0, 0, 300, 0, 0, 153.5, 174.5)
 	TeamLogoTitle:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
-	TeamLogoTitle:setText(LocalizeToUpperString(0xA3B7C749002927B))
+	TeamLogoTitle:setText(LocalizeToUpperString(@"hash_4A3B7C749002927B"))
 	TeamLogoTitle:setTTF("ttmussels_regular")
-	TeamLogoTitle:setMaterial(LUI.UIImage.GetCachedMaterial(0xAE166D9BA8C6907))
+	TeamLogoTitle:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_2AE166D9BA8C6907"))
 	TeamLogoTitle:setShaderVector(0, 0.08, 0, 0, 0)
 	TeamLogoTitle:setShaderVector(1, 0, 0, 0, 0)
 	TeamLogoTitle:setShaderVector(2, 1, 0, 0, 0)
 	TeamLogoTitle:setLetterSpacing(1)
-	TeamLogoTitle:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	TeamLogoTitle:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	TeamLogoTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	TeamLogoTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(TeamLogoTitle)
 	self.TeamLogoTitle = TeamLogoTitle
 	local TeamNameTitle = LUI.UIText.new(0, 0, 0, 300, 0, 0, 538, 555)
 	TeamNameTitle:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
-	TeamNameTitle:setText(LocalizeToUpperString(0x50940719C87AA8F))
+	TeamNameTitle:setText(LocalizeToUpperString(@"hash_450940719C87AA8F"))
 	TeamNameTitle:setTTF("ttmussels_regular")
-	TeamNameTitle:setMaterial(LUI.UIImage.GetCachedMaterial(0xAE166D9BA8C6907))
+	TeamNameTitle:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_2AE166D9BA8C6907"))
 	TeamNameTitle:setShaderVector(0, 0.08, 0, 0, 0)
 	TeamNameTitle:setShaderVector(1, 0, 0, 0, 0)
 	TeamNameTitle:setShaderVector(2, 1, 0, 0, 0)
 	TeamNameTitle:setLetterSpacing(1)
-	TeamNameTitle:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	TeamNameTitle:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	TeamNameTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	TeamNameTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(TeamNameTitle)
 	self.TeamNameTitle = TeamNameTitle
 	local TeamNameInputTextBox = nil
@@ -63,13 +63,13 @@ CoD.CodCasterTeamIdentitysettingscontainer.new = function(f1_arg0, f1_arg1, f1_a
 	TeamColorTitle:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	TeamColorTitle:setText(LocalizeToUpperString(0x89D11442E6707B))
 	TeamColorTitle:setTTF("ttmussels_regular")
-	TeamColorTitle:setMaterial(LUI.UIImage.GetCachedMaterial(0xAE166D9BA8C6907))
+	TeamColorTitle:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_2AE166D9BA8C6907"))
 	TeamColorTitle:setShaderVector(0, 0.08, 0, 0, 0)
 	TeamColorTitle:setShaderVector(1, 0, 0, 0, 0)
 	TeamColorTitle:setShaderVector(2, 1, 0, 0, 0)
 	TeamColorTitle:setLetterSpacing(0.08)
-	TeamColorTitle:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	TeamColorTitle:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	TeamColorTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	TeamColorTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(TeamColorTitle)
 	self.TeamColorTitle = TeamColorTitle
 	local TeamLogoImageButton = CoD.CodCasterTeamLogoButton.new(f1_arg0, f1_arg1, 0, 0, 1, 460, 0, 0, 190.5, 485.5)
@@ -82,7 +82,7 @@ CoD.CodCasterTeamIdentitysettingscontainer.new = function(f1_arg0, f1_arg1, f1_a
 	TeamLogoImageButton:subscribeToGlobalModel(f1_arg1, "TeamIdentityInformation", "teamLogoName", function(model)
 		local f5_local0 = model:get()
 		if f5_local0 ~= nil then
-			TeamLogoImageButton.LabelButton.itemName:setText(Engine[0xF9F1239CFD921FE](f5_local0))
+			TeamLogoImageButton.LabelButton.itemName:setText(Engine[@"hash_4F9F1239CFD921FE"](f5_local0))
 		end
 	end)
 	TeamLogoImageButton:registerEventHandler("gain_focus", function(element, event)
@@ -92,14 +92,14 @@ CoD.CodCasterTeamIdentitysettingscontainer.new = function(f1_arg0, f1_arg1, f1_a
 		elseif element.super.gainFocus then
 			f6_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f6_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(TeamLogoImageButton, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(TeamLogoImageButton, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		OpenOverlay(self, "EditTeamLogo", controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 		return true
 	end, false)
 	self:addElement(TeamLogoImageButton)
@@ -114,7 +114,7 @@ CoD.CodCasterTeamIdentitysettingscontainer.new = function(f1_arg0, f1_arg1, f1_a
 	TeamColorList:setHorizontalCount(7)
 	TeamColorList:setVerticalCount(2)
 	TeamColorList:setSpacing(12)
-	TeamColorList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	TeamColorList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	TeamColorList:setDataSource("TeamIdentityColorList")
 	TeamColorList:registerEventHandler("gain_focus", function(element, event)
 		local f9_local0 = nil
@@ -123,16 +123,16 @@ CoD.CodCasterTeamIdentitysettingscontainer.new = function(f1_arg0, f1_arg1, f1_a
 		elseif element.super.gainFocus then
 			f9_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f9_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(TeamColorList, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(TeamColorList, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		UpdateSelectedTeamIdentityColorElement(self, element, controller)
 		SetTeamIdentityTeamColor(self, element, controller)
 		SetTeamIdentityProfileValue(self, element, controller, "color")
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 		return false
 	end, false)
 	self:addElement(TeamColorList)

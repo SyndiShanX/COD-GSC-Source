@@ -17,7 +17,7 @@ CoD.ZMLoadoutPreview.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 			stateName = "PerkModifier",
 			condition = function(menu, element, event)
 				local f2_local0
-				if not CoD.ModelUtility.IsSelfModelValueEqualToEitherValue(element, f1_arg1, "image", 0x0, 0x7615068F50B3D66) then
+				if not CoD.ModelUtility.IsSelfModelValueEqualToEitherValue(element, f1_arg1, "image", @"hash_0", @"blacktransparent") then
 					f2_local0 = IsLastListElement(element)
 				else
 					f2_local0 = false
@@ -40,7 +40,7 @@ CoD.ZMLoadoutPreview.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	PerkList:setWidgetType(CoD.ZMLoadoutPreviewItem)
 	PerkList:setHorizontalCount(4)
 	PerkList:setSpacing(0)
-	PerkList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	PerkList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	PerkList:setDataSource("ZMEquippedPerks")
 	PerkList:registerEventHandler("list_item_gain_focus", function(element, event)
 		local f4_local0 = nil

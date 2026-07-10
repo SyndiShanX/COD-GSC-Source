@@ -26,14 +26,14 @@ CoD.VideoStreamingUtility.LiveEventUpdateCurrentFeed = function()
 	if not DataSources then
 		return
 	end
-	local f4_local0 = Dvar[0x14F55599DC04FE0]:get()
+	local f4_local0 = Dvar[@"hls_quality"]:get()
 	for f4_local6, f4_local7 in ipairs(CoD.VideoStreamingUtility.LiveEventQualities) do
 		if f4_local7.qualityId == f4_local0 then
 			local f4_local4 = DataSources.LiveEventViewer.getModel()
 			if f4_local4 then
-				local f4_local5 = Engine[0x40E824FE270E174](f4_local4, "currentQuality")
+				local f4_local5 = Engine[@"getmodel"](f4_local4, "currentQuality")
 				if f4_local5 then
-					Engine[0x83C9B5DE1D9371](f4_local5, f4_local7.display)
+					Engine[@"setmodelvalue"](f4_local5, f4_local7.display)
 				end
 			end
 		end
@@ -44,7 +44,7 @@ CoD.VideoStreamingUtility.StartLiveEventFromData = function(f5_arg0)
 end
 CoD.VideoStreamingUtility.LiveEventAutoDetectQuality = {
 	qualityId = "autodetect",
-	display = Engine[0xF9F1239CFD921FE](0x40AE254682D73CE),
+	display = Engine[@"hash_4F9F1239CFD921FE"](@"hash_140AE254682D73CE"),
 }
 CoD.VideoStreamingUtility.LiveEventNewQualities = function(f6_arg0)
 	CoD.VideoStreamingUtility.LiveEventQualities = {
@@ -56,7 +56,7 @@ CoD.VideoStreamingUtility.LiveEventNewQualities = function(f6_arg0)
 	if not f6_arg0.availableQualities or f6_arg0.availableQualities == "" then
 		CoD.VideoStreamingUtility.LiveEventUpdateCurrentFeed()
 		if CoD.isPC then
-			local f6_local1 = Engine[0xA798E4552F5E872](Engine[0x8DF2E5447F384B9](), "LiveEventViewer")
+			local f6_local1 = Engine[@"createmodel"](Engine[@"getglobalmodel"](), "LiveEventViewer")
 			local f6_local2 = f6_local1:create("stream")
 			f6_local2:set("")
 		end
@@ -79,9 +79,9 @@ CoD.VideoStreamingUtility.LiveEventNewQualities = function(f6_arg0)
 						if f6_local2 then
 							f6_local2 = false
 							f6_local3 = true
-							f6_local11 = Engine[0xF9F1239CFD921FE](0x56E3C9DF1FEE64)
+							f6_local11 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_56E3C9DF1FEE64")
 						else
-							f6_local11 = Engine[0xF9F1239CFD921FE](0xB961CE5CE287588, f6_local10)
+							f6_local11 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_2B961CE5CE287588", f6_local10)
 							if not f6_local3 and f6_local10 == f6_local1 then
 								f6_local2 = true
 							end
@@ -95,7 +95,7 @@ CoD.VideoStreamingUtility.LiveEventNewQualities = function(f6_arg0)
 			end
 		end
 	end
-	if not f6_local0[Dvar[0x14F55599DC04FE0]:get()] then
+	if not f6_local0[Dvar[@"hls_quality"]:get()] then
 		CoD.VideoStreamingUtility.SelectLiveEventQuality_Internal(CoD.VideoStreamingUtility.LiveEventAutoDetectQuality.qualityId)
 	end
 	CoD.VideoStreamingUtility.LiveEventUpdateCurrentFeed()
@@ -104,13 +104,13 @@ CoD.VideoStreamingUtility.LiveEventNewQualities = function(f6_arg0)
 	end
 end
 CoD.VideoStreamingUtility.LiveEventNewQualities({
-	availableQualities = Dvar[0x25DCCD772511DA0]:get(),
+	availableQualities = Dvar[@"hls_quality_available"]:get(),
 })
 DataSources.LiveEventViewerQualities = ListHelper_SetupDataSource(
 	"LiveEventViewerQualities",
 	function(f7_arg0)
 		local f7_local0 = {}
-		local f7_local1 = Dvar[0x14F55599DC04FE0]:get()
+		local f7_local1 = Dvar[@"hls_quality"]:get()
 		for f7_local5, f7_local6 in ipairs(CoD.VideoStreamingUtility.LiveEventQualities) do
 			table.insert(f7_local0, {
 				models = {
@@ -136,21 +136,21 @@ DataSources.LiveEventViewerQualities = ListHelper_SetupDataSource(
 	end
 )
 CoD.VideoStreamingUtility.SelectLiveEventQuality_Internal = function(f11_arg0)
-	if f11_arg0 and f11_arg0 ~= Dvar[0x14F55599DC04FE0]:get() then
-		Dvar[0x14F55599DC04FE0]:set(f11_arg0)
+	if f11_arg0 and f11_arg0 ~= Dvar[@"hls_quality"]:get() then
+		Dvar[@"hls_quality"]:set(f11_arg0)
 		CoD.VideoStreamingUtility.LiveEventUpdateCurrentFeed()
 		local f11_local0 = DataSources.LiveEventViewer.getModel()
 		if f11_local0 then
-			local f11_local1 = Engine[0x40E824FE270E174](f11_local0, "stream")
+			local f11_local1 = Engine[@"getmodel"](f11_local0, "stream")
 			if f11_local1 then
-				Engine[0x6A489878620F3BC](f11_local1)
+				Engine[@"forcenotifymodelsubscriptions"](f11_local1)
 			end
 		end
 	end
 end
 CoD.VideoStreamingUtility.IsLEVFeaturedCardEnabled = function()
-	if Dvar[0xC4CE265DD374630]:exists() then
-		return Dvar[0xC4CE265DD374630]:get()
+	if Dvar[@"featured_levenabled"]:exists() then
+		return Dvar[@"featured_levenabled"]:get()
 	else
 		return true
 	end
@@ -163,7 +163,7 @@ CoD.VideoStreamingUtility.CreateLEVFeaturedCard = function(f13_arg0, f13_arg1)
 				name = CoD.VideoStreamingUtility.GetLiveEventTitle(f13_arg1),
 				iconBackground = CoD.VideoStreamingUtility.GetLiveEventImage(f13_arg1),
 				iconBackgroundFocus = CoD.VideoStreamingUtility.GetLiveEventImage(f13_arg1),
-				descriptionText = 0x61AA1B2C5FE2E9F,
+				descriptionText = @"hash_461AA1B2C5FE2E9F",
 				action = CoD.MOTDUtility.FeatureCard_OpenLEVAction,
 				actionString = "liveevent",
 				param = CoD.VideoStreamingUtility.GetLiveEventName(f13_arg1),
@@ -191,7 +191,7 @@ CoD.VideoStreamingUtility.GetLiveEventTitle = function(f16_arg0)
 	if f16_local0 then
 		return f16_local0
 	else
-		return Engine[0xF9F1239CFD921FE](0x7DE2527076D9C58)
+		return Engine[@"hash_4F9F1239CFD921FE"](@"hash_77DE2527076D9C58")
 	end
 end
 CoD.VideoStreamingUtility.StreamerTableName = "gamedata/tables/common/live_event_streamers.csv"
@@ -204,11 +204,11 @@ CoD.VideoStreamingUtility.GetLiveEventImage = function(f17_arg0)
 	local f17_local0 = "gamedata/tables/common/live_event_streamers.csv"
 	local f17_local1 = CoD.VideoStreamingUtility.GetLiveEventName(f17_arg0)
 	if f17_local1 ~= "" then
-		local f17_local2 = Engine[0x910CBCCD3C164C9](CoD.VideoStreamingUtility.StreamerTableName, CoD.VideoStreamingUtility.StreamerNameCol, f17_local1)
+		local f17_local2 = Engine[@"tablefindrows"](CoD.VideoStreamingUtility.StreamerTableName, CoD.VideoStreamingUtility.StreamerNameCol, f17_local1)
 		if f17_local2 == nil then
 			return nil
 		elseif #f17_local2 > 0 then
-			return Engine[0xC6F8EC444864600](CoD.VideoStreamingUtility.StreamerTableName, f17_local2[1], CoD.VideoStreamingUtility.StreamImageCol)
+			return Engine[@"hash_4C6F8EC444864600"](CoD.VideoStreamingUtility.StreamerTableName, f17_local2[1], CoD.VideoStreamingUtility.StreamImageCol)
 		end
 	end
 	return 0x0
@@ -218,7 +218,7 @@ CoD.VideoStreamingUtility.IsMLGStream = function(f18_arg0)
 	return f18_local0 and LUI.startswith(f18_local0, "mlg/")
 end
 CoD.VideoStreamingUtility.GetMoviePlayerParams = function(f19_arg0, f19_arg1, f19_arg2, f19_arg3)
-	return "" .. (f19_arg0 or Enum[0xC47FC1BD2E5CCEE][0x90B07394D69C5F4]) .. "," .. (f19_arg1 or "") .. "," .. tostring(f19_arg2 or false) .. "," .. tostring(f19_arg3 or false)
+	return "" .. (f19_arg0 or Enum[@"hash_6C47FC1BD2E5CCEE"][@"hash_390B07394D69C5F4"]) .. "," .. (f19_arg1 or "") .. "," .. tostring(f19_arg2 or false) .. "," .. tostring(f19_arg3 or false)
 end
 CoD.VideoStreamingUtility.IsMoviePaused = function(f20_arg0)
 	return f20_arg0:isMoviePaused()
@@ -227,7 +227,7 @@ CoD.VideoStreamingUtility.ExpandMoviePlayerParams = function(f21_arg0)
 	local f21_local0 = CoDShared.splitString(f21_arg0, ",")
 	local f21_local1 = f21_local0[1]
 	if not f21_local1 then
-		f21_local1 = Enum[0xC47FC1BD2E5CCEE][0x90B07394D69C5F4]
+		f21_local1 = Enum[@"hash_6C47FC1BD2E5CCEE"][@"hash_390B07394D69C5F4"]
 	else
 		f21_local1 = tonumber(f21_local1)
 	end
@@ -251,11 +251,11 @@ CoD.VideoStreamingUtility.MLGUniqueIdToURL = function(f22_arg0, f22_arg1, f22_ar
 	if f22_arg3 ~= "" then
 		f22_local0 = LUI.getTableFromPath(f22_arg3, f22_local0)
 	end
-	local f22_local1 = Enum[0xC47FC1BD2E5CCEE][0x55550017F21A53C]
+	local f22_local1 = Enum[@"hash_6C47FC1BD2E5CCEE"][@"hash_655550017F21A53C"]
 	local f22_local2 = CoD.SafeGetModelValue(f22_local0, "videoID") or ""
-	local f22_local3 = Dvar[0xCF3B43F93B77DAB]:get()
+	local f22_local3 = Dvar[@"hash_CF3B43F93B77DAB"]:get()
 	if f22_local3 and f22_local3 ~= "" then
-		Engine[0x9EDE43760887B20]("https://core-api.majorleaguegaming.com/api/v1/organizations/" .. f22_local3 .. "/assemblers/extended-playback-videos/" .. f22_local2, "vodDownloadGroup", function(f23_arg0)
+		Engine[@"hash_69EDE43760887B20"]("https://core-api.majorleaguegaming.com/api/v1/organizations/" .. f22_local3 .. "/assemblers/extended-playback-videos/" .. f22_local2, "vodDownloadGroup", function(f23_arg0)
 			if f23_arg0 then
 				local f23_local0 = LUI.getTableFromPath("body.assets", f23_arg0)
 				if f23_local0 then
@@ -275,24 +275,24 @@ CoD.VideoStreamingUtility.MLGUniqueIdToURL = function(f22_arg0, f22_arg1, f22_ar
 					end
 				end
 			end
-			LuaUtils.UI_ShowErrorMessageDialog(f22_arg1, 0x2D63571522A693D, 0x127999393F1681)
+			LuaUtils.UI_ShowErrorMessageDialog(f22_arg1, @"hash_32D63571522A693D", @"hash_127999393F1681")
 		end)
 	else
-		Engine[0x458FE92FEB39D4E](Enum[0x7A63DCD561B0FA8][0x1725ABF82092BD8], "MLG Organization ID is invalid for current platform. No VoDs can be downloaded.\n")
-		LuaUtils.UI_ShowErrorMessageDialog(f22_arg1, 0x2D63571522A693D, 0x127999393F1681)
+		Engine[@"printerror"](Enum[@"consolelabel_e"][@"con_label_default"], "MLG Organization ID is invalid for current platform. No VoDs can be downloaded.\n")
+		LuaUtils.UI_ShowErrorMessageDialog(f22_arg1, @"hash_32D63571522A693D", @"hash_127999393F1681")
 	end
 end
 CoD.VideoStreamingUtility.CancelDownloadUrlGroup = function()
-	Engine[0xB285A069D4E40CB]("vodDownloadGroup")
+	Engine[@"hash_1B285A069D4E40CB"]("vodDownloadGroup")
 end
 CoD.VideoStreamingUtility.SetupVoDMovie = function(f25_arg0, f25_arg1, f25_arg2)
 	local f25_local0 = f25_arg1:getModel()
 	if f25_arg2 ~= "" then
 		f25_local0 = LUI.getTableFromPath(f25_arg2, f25_local0)
 	end
-	local f25_local1 = Enum[0xC47FC1BD2E5CCEE][0x90B07394D69C5F4]
+	local f25_local1 = Enum[@"hash_6C47FC1BD2E5CCEE"][@"hash_390B07394D69C5F4"]
 	if CoD.SafeGetModelValue(f25_local0, "isStreamed") then
-		f25_local1 = Enum[0xC47FC1BD2E5CCEE][0x55550017F21A53C]
+		f25_local1 = Enum[@"hash_6C47FC1BD2E5CCEE"][@"hash_655550017F21A53C"]
 	end
 	local f25_local2 = CoD.SafeGetModelValue(f25_local0, "movieName") or ""
 	local f25_local3 = CoD.SafeGetModelValue(f25_local0, "isAdditive") or false
@@ -302,9 +302,9 @@ CoD.VideoStreamingUtility.SetupVoDMovie = function(f25_arg0, f25_arg1, f25_arg2)
 end
 CoD.VideoStreamingUtility.SetupVoDPreviewWidget = function(f26_arg0, f26_arg1)
 	local f26_local0 = f26_arg0
-	local f26_local1 = Enum[0xC47FC1BD2E5CCEE][0x90B07394D69C5F4]
+	local f26_local1 = Enum[@"hash_6C47FC1BD2E5CCEE"][@"hash_390B07394D69C5F4"]
 	if CoD.SafeGetModelValue(f26_local0, "isStreamed") then
-		f26_local1 = Enum[0xC47FC1BD2E5CCEE][0x55550017F21A53C]
+		f26_local1 = Enum[@"hash_6C47FC1BD2E5CCEE"][@"hash_655550017F21A53C"]
 	end
 	return f26_local1, CoD.SafeGetModelValue(f26_local0, "movieName") or "", CoD.SafeGetModelValue(f26_local0, "isAdditive") or false, CoD.SafeGetModelValue(f26_local0, "isLooping") or false
 end
@@ -315,7 +315,7 @@ end
 CoD.VideoStreamingUtility.VoDViewerPreLoadFunc = function(f28_arg0, f28_arg1, f28_arg2)
 	f28_arg0.userData = f28_arg2
 	f28_arg0:setOwner(f28_arg1)
-	local f28_local0 = Engine[0x8DF2E5447F384B9]()
+	local f28_local0 = Engine[@"getglobalmodel"]()
 	local f28_local1 = f28_local0:create("VoDViewerFullscreen")
 	if f28_arg2 and f28_arg2.fullscreen then
 		f28_local1:set(true)
@@ -329,10 +329,10 @@ CoD.VideoStreamingUtility.VoDViewerPreLoadFunc = function(f28_arg0, f28_arg1, f2
 		CoD.VideoStreamingUtility.SkipVoDViewer(element, f28_arg1)
 	end)
 	if f28_arg0.userData and f28_arg0.userData.onlySkippable then
-		f28_arg0.buttonModel = Engine[0xA798E4552F5E872](Engine[0x4DF5CFBC1771947](f28_arg1), "SkippableVoDViewer.buttonPrompts")
+		f28_arg0.buttonModel = Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f28_arg1), "SkippableVoDViewer.buttonPrompts")
 		return
 	end
-	f28_arg0.buttonModel = Engine[0xA798E4552F5E872](Engine[0x4DF5CFBC1771947](f28_arg1), "VoDViewer.buttonPrompts")
+	f28_arg0.buttonModel = Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f28_arg1), "VoDViewer.buttonPrompts")
 	local f28_local2 = function()
 		return false
 	end
@@ -384,11 +384,11 @@ CoD.VideoStreamingUtility.VoDViewerPreLoadFunc = function(f28_arg0, f28_arg1, f2
 		if PropertyIsTrue(f28_arg0, "showPrompt") then
 			if IsChildElementInState(f38_arg1, "LiveEventViewerMovieAndBackground", "Windowed") then
 				SetElementStateByElementName(f38_arg1, "LiveEventViewerMovieAndBackground", f38_arg2, "DefaultState")
-				CoD.Menu.UpdateButtonShownState(f38_arg0, f38_arg1, f38_arg2, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
+				CoD.Menu.UpdateButtonShownState(f38_arg0, f38_arg1, f38_arg2, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
 				return true
 			else
 				SetElementStateByElementName(f38_arg1, "LiveEventViewerMovieAndBackground", f38_arg2, "Windowed")
-				CoD.Menu.UpdateButtonShownState(f38_arg0, f38_arg1, f38_arg2, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
+				CoD.Menu.UpdateButtonShownState(f38_arg0, f38_arg1, f38_arg2, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
 				return true
 			end
 		else
@@ -400,44 +400,44 @@ CoD.VideoStreamingUtility.VoDViewerPreLoadFunc = function(f28_arg0, f28_arg1, f2
 			f28_local7(f39_arg0, f39_arg1, f39_arg2, f39_arg3)
 		end
 	end
-	f28_arg0:AddButtonCallbackFunction(f28_arg0, f28_arg1, Enum[0x3DD78803F918E9D][0x57783F8DA4AAEF], nil, f28_local11, f28_local2, false)
-	f28_arg0:AddButtonCallbackFunction(f28_arg0, f28_arg1, Enum[0x3DD78803F918E9D][0x4B11D2B20C75A7F], nil, f28_local11, f28_local2, false)
-	f28_arg0:AddButtonCallbackFunction(f28_arg0, f28_arg1, Enum[0x3DD78803F918E9D][0x571F08AD84807E0], nil, f28_local11, f28_local2, false)
-	f28_arg0:AddButtonCallbackFunction(f28_arg0, f28_arg1, Enum[0x3DD78803F918E9D][0xD4C15FE32148D3A], nil, f28_local11, f28_local2, false)
-	f28_arg0:AddButtonCallbackFunction(f28_arg0, f28_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, f28_local7, f28_local2, false)
-	f28_arg0:AddButtonCallbackFunction(f28_arg0, f28_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], nil, f28_local7, f28_local2, false)
+	f28_arg0:AddButtonCallbackFunction(f28_arg0, f28_arg1, Enum[@"luibutton"][@"lui_key_left"], nil, f28_local11, f28_local2, false)
+	f28_arg0:AddButtonCallbackFunction(f28_arg0, f28_arg1, Enum[@"luibutton"][@"lui_key_up"], nil, f28_local11, f28_local2, false)
+	f28_arg0:AddButtonCallbackFunction(f28_arg0, f28_arg1, Enum[@"luibutton"][@"lui_key_right"], nil, f28_local11, f28_local2, false)
+	f28_arg0:AddButtonCallbackFunction(f28_arg0, f28_arg1, Enum[@"luibutton"][@"lui_key_down"], nil, f28_local11, f28_local2, false)
+	f28_arg0:AddButtonCallbackFunction(f28_arg0, f28_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, f28_local7, f28_local2, false)
+	f28_arg0:AddButtonCallbackFunction(f28_arg0, f28_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], nil, f28_local7, f28_local2, false)
 	if LUI.DEV == nil then
-		f28_arg0:AddButtonCallbackFunction(f28_arg0, f28_arg1, Enum[0x3DD78803F918E9D][0x93AB4C84F113EE1], nil, f28_local7, f28_local2, false)
+		f28_arg0:AddButtonCallbackFunction(f28_arg0, f28_arg1, Enum[@"luibutton"][@"lui_key_back"], nil, f28_local7, f28_local2, false)
 	end
-	f28_arg0:AddButtonCallbackFunction(f28_arg0, f28_arg1, Enum[0x3DD78803F918E9D][0x22361E23588705A], nil, f28_local7, f28_local2, false)
-	f28_arg0:AddButtonCallbackFunction(f28_arg0, f28_arg1, Enum[0x3DD78803F918E9D][0x493152B20AE4F58], nil, f28_local7, f28_local2, false)
-	f28_arg0:AddButtonCallbackFunction(f28_arg0, f28_arg1, Enum[0x3DD78803F918E9D][0x49A252B20B48936], nil, f28_local7, f28_local2, false)
-	f28_arg0:AddButtonCallbackFunction(f28_arg0, f28_arg1, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC], nil, f28_local7, f28_local2, false)
-	f28_arg0:AddButtonCallbackFunction(f28_arg0, f28_arg1, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA], nil, f28_local7, f28_local2, false)
-	f28_arg0:AddButtonCallbackFunction(f28_arg0, f28_arg1, Enum[0x3DD78803F918E9D][0x6CE8023188D673F], nil, f28_local7, f28_local2, false)
-	f28_arg0:AddButtonCallbackFunction(f28_arg0, f28_arg1, Enum[0x3DD78803F918E9D][0x29E5695FF1401AD], nil, f28_local7, f28_local2, false)
-	f28_arg0:AddButtonCallbackFunction(f28_arg0, f28_arg1, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, f28_local8, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x6C253CF816B40B5)
+	f28_arg0:AddButtonCallbackFunction(f28_arg0, f28_arg1, Enum[@"luibutton"][@"lui_key_start"], nil, f28_local7, f28_local2, false)
+	f28_arg0:AddButtonCallbackFunction(f28_arg0, f28_arg1, Enum[@"luibutton"][@"lui_key_lb"], nil, f28_local7, f28_local2, false)
+	f28_arg0:AddButtonCallbackFunction(f28_arg0, f28_arg1, Enum[@"luibutton"][@"lui_key_rb"], nil, f28_local7, f28_local2, false)
+	f28_arg0:AddButtonCallbackFunction(f28_arg0, f28_arg1, Enum[@"luibutton"][@"lui_key_ltrig"], nil, f28_local7, f28_local2, false)
+	f28_arg0:AddButtonCallbackFunction(f28_arg0, f28_arg1, Enum[@"luibutton"][@"lui_key_rtrig"], nil, f28_local7, f28_local2, false)
+	f28_arg0:AddButtonCallbackFunction(f28_arg0, f28_arg1, Enum[@"luibutton"][@"lui_key_lstick_pressed"], nil, f28_local7, f28_local2, false)
+	f28_arg0:AddButtonCallbackFunction(f28_arg0, f28_arg1, Enum[@"luibutton"][@"lui_key_rstick_pressed"], nil, f28_local7, f28_local2, false)
+	f28_arg0:AddButtonCallbackFunction(f28_arg0, f28_arg1, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, f28_local8, function(element, menu, controller)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/close")
 		return true
 	end, false)
 	if f28_arg0.userData and f28_arg0.userData.allowStreamQualityChange then
-		f28_arg0:AddButtonCallbackFunction(f28_arg0, f28_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], nil, f28_local9, function(element, menu, controller)
+		f28_arg0:AddButtonCallbackFunction(f28_arg0, f28_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], nil, f28_local9, function(element, menu, controller)
 			if CoD.VideoStreamingUtility.HasLiveEventStreamQualities(controller) then
-				CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x56FFD43E4B03BCF)
+				CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"hash_456FFD43E4B03BCF")
 				return true
 			else
-				CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x0)
+				CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], 0x0)
 				return false
 			end
 		end, false)
 	end
 	if f28_arg0.userData and f28_arg0.userData.allowToggleFullscreen then
-		f28_arg0:AddButtonCallbackFunction(f28_arg0, f28_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], nil, f28_local10, function(element, menu, controller)
+		f28_arg0:AddButtonCallbackFunction(f28_arg0, f28_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], nil, f28_local10, function(element, menu, controller)
 			if menu.LiveEventViewerMovieAndBackground and IsChildElementInState(menu, "LiveEventViewerMovieAndBackground", "Windowed") then
-				CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], 0x70675323ADAA7D6)
+				CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], @"menu/fullscreen")
 				return true
 			else
-				CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], 0xB7DCA76B1E2C72E)
+				CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], @"hash_4B7DCA76B1E2C72E")
 				return true
 			end
 		end, false)
@@ -445,10 +445,10 @@ CoD.VideoStreamingUtility.VoDViewerPreLoadFunc = function(f28_arg0, f28_arg1, f2
 end
 CoD.VideoStreamingUtility.VoDViewerPostLoadFunc = function(f43_arg0, f43_arg1, f43_arg2)
 	CoD.PlayFrontendMusic("")
-	Dvar[0x5CE320CFE22FBC0]:set(true)
+	Dvar[@"ui_liveeventvieweropen"]:set(true)
 	LUI.OverrideFunction_CallOriginalSecond(f43_arg0, "close", function(element)
-		Dvar[0x5CE320CFE22FBC0]:set(false)
-		local f44_local0 = CoD.SafeGetModelValue(Engine[0x8DF2E5447F384B9](), "lobbyRoot.lobbyNav")
+		Dvar[@"ui_liveeventvieweropen"]:set(false)
+		local f44_local0 = CoD.SafeGetModelValue(Engine[@"getglobalmodel"](), "lobbyRoot.lobbyNav")
 		if f44_local0 then
 			CoD.PlayFrontendMusicForLobby(f44_local0)
 		end
@@ -467,5 +467,5 @@ CoD.VideoStreamingUtility.SkipVoDViewer = function(f45_arg0, f45_arg1)
 	end
 end
 CoD.VideoStreamingUtility.SkipFullScreenMovie = function(f46_arg0, f46_arg1)
-	Engine[0x46C794158F47657](f46_arg1, Engine[0xC53F8D38DF9042B](f46_arg0.menuName), Engine[0xC53F8D38DF9042B]("finished_movie_playback"), 0)
+	Engine[@"hash_346C794158F47657"](f46_arg1, Engine[@"converttoxhash"](f46_arg0.menuName), Engine[@"converttoxhash"]("finished_movie_playback"), 0)
 end

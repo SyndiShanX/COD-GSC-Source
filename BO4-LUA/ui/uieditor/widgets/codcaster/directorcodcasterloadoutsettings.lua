@@ -20,7 +20,7 @@ CoD.DirectorCodCasterLoadoutSettings.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	ButtonListPC:setWidgetType(CoD.StartMenu_Options_SettingSlider)
 	ButtonListPC:setVerticalCount(13)
 	ButtonListPC:setSpacing(6)
-	ButtonListPC:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	ButtonListPC:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	ButtonListPC:setVerticalCounter(CoD.verticalCounter)
 	ButtonListPC:registerEventHandler("list_item_gain_focus", function(element, event)
 		local f2_local0 = nil
@@ -37,7 +37,7 @@ CoD.DirectorCodCasterLoadoutSettings.new = function(f1_arg0, f1_arg1, f1_arg2, f
 			f3_local0 = element.super:gainFocus(event)
 		end
 		SetElementCanBeNavigatedTo(self.OptionCategoryListPC, false)
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbb_pscircle"])
 		return f3_local0
 	end)
 	ButtonListPC:registerEventHandler("lose_focus", function(element, event)
@@ -50,13 +50,13 @@ CoD.DirectorCodCasterLoadoutSettings.new = function(f1_arg0, f1_arg1, f1_arg2, f
 		SetElementCanBeNavigatedTo(self.OptionCategoryListPC, true)
 		return f4_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(ButtonListPC, f1_arg1, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(ButtonListPC, f1_arg1, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		CoD.GridAndListUtility.SetFocusToFirstSelectableItem(self.ButtonListPC)
 		SetControllerModelValue(controller, "customGamesEdit", false)
 		SetFocusToElement(self, "OptionCategoryListPC", controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 		return true
 	end, false)
 	self:addElement(ButtonListPC)
@@ -68,7 +68,7 @@ CoD.DirectorCodCasterLoadoutSettings.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	OptionCategoryListPC:setWidgetType(CoD.CustomGames_OptionCategoryButton)
 	OptionCategoryListPC:setVerticalCount(5)
 	OptionCategoryListPC:setSpacing(8)
-	OptionCategoryListPC:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	OptionCategoryListPC:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	OptionCategoryListPC:setDataSource("CodCasterLoadoutSettingsCategories")
 	OptionCategoryListPC:registerEventHandler("gain_focus", function(element, event)
 		local f7_local0 = nil
@@ -77,16 +77,16 @@ CoD.DirectorCodCasterLoadoutSettings.new = function(f1_arg0, f1_arg1, f1_arg2, f
 		elseif element.super.gainFocus then
 			f7_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f7_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(OptionCategoryListPC, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(OptionCategoryListPC, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		ShowWidget(self.ButtonListPC)
 		SetCurrentElementAsActive(self, element, controller)
 		SetFocusToElement(self, "ButtonListPC", controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 		return true
 	end, false)
 	self:addElement(OptionCategoryListPC)
@@ -128,7 +128,7 @@ CoD.DirectorCodCasterLoadoutSettings.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	})
 	local f1_local8 = self
 	local f1_local9 = self.subscribeToModel
-	local f1_local10 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local10 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local9(f1_local8, f1_local10.customGamesEdit, function(f14_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

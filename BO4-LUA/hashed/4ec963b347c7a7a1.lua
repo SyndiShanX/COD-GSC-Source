@@ -16,22 +16,22 @@ CoD.PrestigeAttachmentGrid.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	PrestigeAttachmentList:setWidgetType(CoD.PrestigeAttachmentSlot)
 	PrestigeAttachmentList:setHorizontalCount(2)
 	PrestigeAttachmentList:setSpacing(6)
-	PrestigeAttachmentList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	PrestigeAttachmentList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	PrestigeAttachmentList:setDataSource("WeaponOptions")
 	PrestigeAttachmentList:linkToElementModel(PrestigeAttachmentList, "itemIndex", true, function(model, f2_arg1)
-		CoD.Menu.UpdateButtonShownState(f2_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f2_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	PrestigeAttachmentList:appendEventHandler("input_source_changed", function(f3_arg0, f3_arg1)
 		f3_arg1.menu = f3_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f3_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f3_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x4D2505E19049444])
+		CoD.Menu.UpdateButtonShownState(f3_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f3_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"hash_64D2505E19049444"])
 	end)
 	local f1_local2 = PrestigeAttachmentList
 	local f1_local3 = PrestigeAttachmentList.subscribeToModel
-	local f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local3(f1_local2, f1_local4.LastInput, function(f4_arg0, f4_arg1)
-		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x4D2505E19049444])
+		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"hash_64D2505E19049444"])
 	end, false)
 	PrestigeAttachmentList:registerEventHandler("list_item_gain_focus", function(element, event)
 		local f5_local0 = nil
@@ -46,12 +46,12 @@ CoD.PrestigeAttachmentGrid.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 		elseif element.super.gainFocus then
 			f6_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x4D2505E19049444])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"hash_64D2505E19049444"])
 		return f6_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(PrestigeAttachmentList, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(PrestigeAttachmentList, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if not CoD.WeaponOptionsUtility.IsItemWeaponOptionLocked(menu, element, controller) and not CoD.WeaponOptionsUtility.IsPrestigeAttachmentEquipped(menu, self, element, controller) then
 			PlaySoundAlias("uin_equipment_add")
 			CoD.WeaponOptionsUtility.SetWeaponPrestigeAttachmentItem(menu, self, element, controller, false)
@@ -68,16 +68,16 @@ CoD.PrestigeAttachmentGrid.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 		end
 	end, function(element, menu, controller)
 		if not CoD.WeaponOptionsUtility.IsItemWeaponOptionLocked(menu, element, controller) and not CoD.WeaponOptionsUtility.IsPrestigeAttachmentEquipped(menu, self, element, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		elseif CoD.WeaponOptionsUtility.IsPrestigeAttachmentEquipped(menu, self, element, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(PrestigeAttachmentList, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(PrestigeAttachmentList, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], nil, function(element, menu, controller, model)
 		if CoD.WeaponOptionsUtility.IsPrestigeAttachmentEquipped(menu, self, element, controller) and IsGamepad(controller) then
 			PlaySoundAlias("cac_equipment_remove")
 			CoD.WeaponOptionsUtility.ClearWeaponPrestigeAttachmentItem(menu, controller, false)
@@ -88,13 +88,13 @@ CoD.PrestigeAttachmentGrid.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 		end
 	end, function(element, menu, controller)
 		if CoD.WeaponOptionsUtility.IsPrestigeAttachmentEquipped(menu, self, element, controller) and IsGamepad(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x679ACA6FFC6C8F3, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"menu/remove", nil, nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(PrestigeAttachmentList, f1_arg1, Enum[0x3DD78803F918E9D][0x4D2505E19049444], "ui_remove", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(PrestigeAttachmentList, f1_arg1, Enum[@"luibutton"][@"hash_64D2505E19049444"], "ui_remove", function(element, menu, controller, model)
 		if CoD.WeaponOptionsUtility.IsPrestigeAttachmentEquipped(menu, self, element, controller) and IsMouseOrKeyboard(controller) then
 			PlaySoundAlias("cac_equipment_remove")
 			CoD.WeaponOptionsUtility.ClearWeaponPrestigeAttachmentItem(menu, controller, false)
@@ -105,7 +105,7 @@ CoD.PrestigeAttachmentGrid.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 		end
 	end, function(element, menu, controller)
 		if CoD.WeaponOptionsUtility.IsPrestigeAttachmentEquipped(menu, self, element, controller) and IsMouseOrKeyboard(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x4D2505E19049444], 0x679ACA6FFC6C8F3, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "ui_remove")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"hash_64D2505E19049444"], @"menu/remove", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "ui_remove")
 			return true
 		else
 			return false
@@ -115,7 +115,7 @@ CoD.PrestigeAttachmentGrid.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 		CoD.GridAndListUtility.UpdateDataSource(PrestigeAttachmentList, true, false, true)
 		UpdateSelfState(self, f1_arg1)
 	end)
-	PrestigeAttachmentList:AddContextualMenuAction(f1_arg0, f1_arg1, 0x679ACA6FFC6C8F3, function(f14_arg0, f14_arg1, f14_arg2, f14_arg3)
+	PrestigeAttachmentList:AddContextualMenuAction(f1_arg0, f1_arg1, @"menu/remove", function(f14_arg0, f14_arg1, f14_arg2, f14_arg3)
 		if CoD.WeaponOptionsUtility.IsPrestigeAttachmentEquipped(f14_arg1, self, f14_arg0, f14_arg2) then
 			return function(f15_arg0, f15_arg1, f15_arg2, f15_arg3)
 				PlaySoundAlias("cac_equipment_remove")

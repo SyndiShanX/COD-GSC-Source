@@ -12,15 +12,15 @@ CoD.Options_CategoryListSeparation.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	CategoryName:setAlpha(0.3)
 	CategoryName:setTTF("ttmussels_regular")
 	CategoryName:setLetterSpacing(5)
-	CategoryName:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	CategoryName:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(CategoryName)
 	self.CategoryName = CategoryName
 	local Number = LUI.UIText.new(0, 0, 34, 79, 1, 1, -25, 0)
 	Number:setRGB(0.47, 0.47, 0.47)
 	Number:setAlpha(0.3)
 	Number:setTTF("ttmussels_regular")
-	Number:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Number:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Number:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Number:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	Number:linkToElementModel(self, "categoryId", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -45,7 +45,7 @@ CoD.Options_CategoryListSeparation.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	})
 	local f1_local3 = self
 	local f1_local4 = self.subscribeToModel
-	local f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local4(f1_local3, f1_local5["PC.CurrentCategory"], function(f5_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

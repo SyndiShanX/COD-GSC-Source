@@ -14,7 +14,7 @@ CoD.ArenaKillcamVictimRank.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self.Backing = Backing
 	local Rank = LUI.UIText.new(0.5, 0.5, -61, 0, 0.5, 0.5, -17, 19)
 	Rank:setTTF("0arame_mono_stencil")
-	Rank:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
+	Rank:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
 	Rank.__String_Reference = function(f2_arg0)
 		local f2_local0 = f2_arg0:get()
 		if f2_local0 ~= nil then
@@ -62,7 +62,7 @@ CoD.ArenaKillcamVictimRank.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	f1_local5(f1_local4, f1_local6["gameClient.update"], Rank.__String_Reference_FullPath)
 	f1_local4 = Rank
 	f1_local5 = Rank.subscribeToModel
-	f1_local6 = Engine[0x8DF2E5447F384B9]()
+	f1_local6 = Engine[@"getglobalmodel"]()
 	f1_local5(f1_local4, f1_local6["PartyPrivacy.privacy"], Rank.__String_Reference_FullPath)
 	f1_local4 = RankIcon
 	f1_local5 = RankIcon.subscribeToModel
@@ -78,7 +78,7 @@ CoD.ArenaKillcamVictimRank.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	f1_local5(f1_local4, f1_local6["gameClient.update"], RankIcon.__Image_FullPath)
 	f1_local4 = RankIcon
 	f1_local5 = RankIcon.subscribeToModel
-	f1_local6 = Engine[0x8DF2E5447F384B9]()
+	f1_local6 = Engine[@"getglobalmodel"]()
 	f1_local5(f1_local4, f1_local6["PartyPrivacy.privacy"], RankIcon.__Image_FullPath)
 	self:mergeStateConditions({
 		{
@@ -90,7 +90,7 @@ CoD.ArenaKillcamVictimRank.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	})
 	f1_local4 = self
 	f1_local5 = self.subscribeToModel
-	f1_local6 = Engine[0x8DF2E5447F384B9]()
+	f1_local6 = Engine[@"getglobalmodel"]()
 	f1_local5(f1_local4, f1_local6["lobbyRoot.lobbyNetworkMode"], function(f7_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -102,7 +102,7 @@ CoD.ArenaKillcamVictimRank.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	end, false)
 	f1_local4 = self
 	f1_local5 = self.subscribeToModel
-	f1_local6 = Engine[0x8DF2E5447F384B9]()
+	f1_local6 = Engine[@"getglobalmodel"]()
 	f1_local5(f1_local4, f1_local6["lobbyRoot.lobbyNav"], function(f8_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

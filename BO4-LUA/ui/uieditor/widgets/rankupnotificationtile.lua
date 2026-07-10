@@ -17,8 +17,8 @@ CoD.RankUpNotificationTile.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self.CACvarientTitlePanel0 = CACvarientTitlePanel0
 	local Text = LUI.UIText.new(0, 1, 0, 0, 0, 0, 0, 45)
 	Text:setTTF("default")
-	Text:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	Text:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Text:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	Text:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(Text)
 	self.Text = Text
 	self.Text:linkToElementModel(self, "title", true, function(model)

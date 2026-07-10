@@ -8,7 +8,7 @@ LobbyMsgHost.HandleClientDisconnect = function(f1_arg0)
 	local f1_local5 = {}
 	LobbyMsg.PackageLobbyTypeAndXuid(f1_local3, f1_local4, f1_local5)
 	if f1_local4 then
-		Engine[0xD5BFDFD805494DF](f1_local5.lobbyType, f1_local5.xuid)
+		Engine[@"hash_5D5BFDFD805494DF"](f1_local5.lobbyType, f1_local5.xuid)
 	end
 end
 LobbyMsgHost.MsgHandlers[LobbyMsg.LuaMsgType.LUA_MESSAGE_TYPE_LOBBY_CLIENT_DISCONNECT] = LobbyMsgHost.HandleClientDisconnect

@@ -14,7 +14,7 @@ LUI.createMenu.CustomGames_BotSettingsPopup = function(f1_arg0, f1_arg1)
 	self.anyChildUsesUpdateState = true
 	f1_local1:addElementToPendingUpdateStateList(self)
 	local CommomCenteredPopup = CoD.CommonCenteredPopup.new(f1_local1, f1_arg0, 0, 1, 0, 0, 0, 1, 0, 0)
-	CommomCenteredPopup.TitleText:setText(LocalizeToUpperString(0x5025AFE42DB30DC))
+	CommomCenteredPopup.TitleText:setText(LocalizeToUpperString(@"menu/bot_settings"))
 	CommomCenteredPopup.HeaderBackground:setAlpha(0)
 	CommomCenteredPopup.HeaderTopBar:setAlpha(0)
 	CommomCenteredPopup.HeaderBottomBar:setAlpha(0)
@@ -25,15 +25,15 @@ LUI.createMenu.CustomGames_BotSettingsPopup = function(f1_arg0, f1_arg1)
 	BotSettingsList:setTopBottom(0.5, 0.5, -380, -320)
 	BotSettingsList:setAutoScaleContent(true)
 	BotSettingsList:setWidgetType(CoD.CustomGames_SettingSliderNoCustom)
-	BotSettingsList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	BotSettingsList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	BotSettingsList:setDataSource("BotSettings")
 	self:addElement(BotSettingsList)
 	self.BotSettingsList = BotSettingsList
 	local SettingDescription = LUI.UIText.new(0.5, 0.5, -250, 250, 0.5, 0.5, -284, -263)
 	SettingDescription:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	SettingDescription:setTTF("dinnext_regular")
-	SettingDescription:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	SettingDescription:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	SettingDescription:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	SettingDescription:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(SettingDescription)
 	self.SettingDescription = SettingDescription
 	local PCSmallCloseButton = nil
@@ -45,21 +45,21 @@ LUI.createMenu.CustomGames_BotSettingsPopup = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f2_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_none"])
 		return f2_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(PCSmallCloseButton, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "MOUSE1", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(PCSmallCloseButton, f1_arg0, Enum[@"luibutton"][@"lui_key_none"], "MOUSE1", function(element, menu, controller, model)
 		GoBack(self, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "MOUSE1")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "MOUSE1")
 		return false
 	end, false)
-	f1_local1:AddButtonCallbackFunction(PCSmallCloseButton, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "ui_confirm", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(PCSmallCloseButton, f1_arg0, Enum[@"luibutton"][@"lui_key_none"], "ui_confirm", function(element, menu, controller, model)
 		GoBack(self, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "ui_confirm")
 		return false
 	end, false)
 	self:addElement(PCSmallCloseButton)
@@ -67,7 +67,7 @@ LUI.createMenu.CustomGames_BotSettingsPopup = function(f1_arg0, f1_arg1)
 	SettingDescription:linkToElementModel(BotSettingsList, "desc", true, function(model)
 		local f7_local0 = model:get()
 		if f7_local0 ~= nil then
-			SettingDescription:setText(Engine[0xF9F1239CFD921FE](f7_local0))
+			SettingDescription:setText(Engine[@"hash_4F9F1239CFD921FE"](f7_local0))
 		end
 	end)
 	self:mergeStateConditions({
@@ -84,7 +84,7 @@ LUI.createMenu.CustomGames_BotSettingsPopup = function(f1_arg0, f1_arg1)
 	end)
 	local f1_local6 = self
 	local f1_local7 = self.subscribeToModel
-	local f1_local8 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	local f1_local8 = Engine[@"getmodelforcontroller"](f1_arg0)
 	f1_local7(f1_local6, f1_local8.LastInput, function(f10_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",
@@ -94,13 +94,13 @@ LUI.createMenu.CustomGames_BotSettingsPopup = function(f1_arg0, f1_arg1)
 			modelName = "LastInput",
 		})
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		GoBack(self, controller)
 		ClearMenuSavedState(menu)
 		ForceNotifyGlobalModel(controller, "GametypeSettings.Update")
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 		return true
 	end, false)
 	CommomCenteredPopup.buttons:setModel(self.buttonModel, f1_arg0)

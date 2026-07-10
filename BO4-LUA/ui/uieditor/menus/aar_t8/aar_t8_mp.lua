@@ -96,12 +96,12 @@ LUI.createMenu.AAR_T8_MP = function(f1_arg0, f1_arg1)
 	self:addElement(StageNotificationContainer)
 	self.StageNotificationContainer = StageNotificationContainer
 	local CommonHeader = CoD.CommonHeader.new(f1_local1, f1_arg0, 0, 0, 0, 1920, 0, 0, 0, 67)
-	CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(0xEEF90B1483C4C23))
+	CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(@"hash_5EEF90B1483C4C23"))
 	CommonHeader.subtitle.subtitle:setAlpha(0)
 	CommonHeader:subscribeToGlobalModel(f1_arg0, "LobbyRoot", "lobbyTitle", function(model)
 		local f8_local0 = model:get()
 		if f8_local0 ~= nil then
-			CommonHeader.subtitle.subtitle:setText(Engine[0xF9F1239CFD921FE](f8_local0))
+			CommonHeader.subtitle.subtitle:setText(Engine[@"hash_4F9F1239CFD921FE"](f8_local0))
 		end
 	end)
 	CommonHeader:registerEventHandler("menu_loaded", function(element, event)
@@ -164,7 +164,7 @@ LUI.createMenu.AAR_T8_MP = function(f1_arg0, f1_arg1)
 	})
 	local f1_local14 = DoubleXPNotification
 	local f1_local15 = DoubleXPNotification.subscribeToModel
-	local f1_local16 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	local f1_local16 = Engine[@"getmodelforcontroller"](f1_arg0)
 	f1_local15(f1_local14, f1_local16["AAR.activeTab"], function(f13_arg0)
 		f1_local1:updateElementState(DoubleXPNotification, {
 			name = "model_validation",
@@ -186,7 +186,7 @@ LUI.createMenu.AAR_T8_MP = function(f1_arg0, f1_arg1)
 	})
 	f1_local14 = self
 	f1_local15 = self.subscribeToModel
-	f1_local16 = Engine[0x8DF2E5447F384B9]()
+	f1_local16 = Engine[@"getglobalmodel"]()
 	f1_local15(f1_local14, f1_local16["lobbyRoot.lobbyNav"], function(f15_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",
@@ -198,11 +198,11 @@ LUI.createMenu.AAR_T8_MP = function(f1_arg0, f1_arg1)
 	end, false)
 	f1_local14 = self
 	f1_local15 = self.subscribeToModel
-	f1_local16 = Engine[0x8DF2E5447F384B9]()
+	f1_local16 = Engine[@"getglobalmodel"]()
 	f1_local15(f1_local14, f1_local16["lobbyRoot.lobbyNav"], function(f16_arg0, f16_arg1)
-		CoD.Menu.UpdateButtonShownState(f16_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+		CoD.Menu.UpdateButtonShownState(f16_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], "ui_confirm", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], "ui_confirm", function(element, menu, controller, model)
 		if not IsPC() then
 			CoD.AnalyticsUtility.GoBackAndShowMatchSurveyIfNecessary(menu, controller)
 			MenuUnhideFreeCursor(menu, controller)
@@ -215,32 +215,32 @@ LUI.createMenu.AAR_T8_MP = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if not IsPC() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0xE4E038F4690D38D, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"hash_4E4E038F4690D38D", nil, "ui_confirm")
 			return true
 		elseif IsPC() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, "ui_confirm")
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x93AB4C84F113EE1], "ESCAPE", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_back"], "ESCAPE", function(element, menu, controller, model)
 		CoD.AnalyticsUtility.GoBackAndShowMatchSurveyIfNecessary(menu, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x93AB4C84F113EE1], 0x0, nil, "ESCAPE")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_back"], @"hash_0", nil, "ESCAPE")
 		return false
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], "ui_contextual_1", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], "ui_contextual_1", function(element, menu, controller, model)
 		if IsLobbyNetworkModeLive() and not IsRecentGameBookmarked(controller) then
 			FileshareBookmarkRecentGame(controller)
-			UpdateButtonPromptState(menu, element, controller, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+			UpdateButtonPromptState(menu, element, controller, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 			return true
 		else
 		end
 	end, function(element, menu, controller)
 		if IsLobbyNetworkModeLive() and not IsRecentGameBookmarked(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x941662A2E0BF65E, nil, "ui_contextual_1")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"menu/bookmark_game", nil, "ui_contextual_1")
 			return true
 		else
 			return false

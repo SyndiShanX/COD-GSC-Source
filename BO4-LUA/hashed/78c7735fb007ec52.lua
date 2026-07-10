@@ -25,7 +25,7 @@ CoD.WZAAR_ChallengeContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	})
 	local f1_local3 = self
 	local f1_local4 = self.subscribeToModel
-	local f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local4(f1_local3, f1_local5["hudItems.warzone.wzAAR.challengeProgEarned"], function(f3_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -63,7 +63,7 @@ CoD.WZAAR_ChallengeContainer.__clipsPerState = {
 			f6_arg0:setupElementClipCounter(2)
 			local f6_local0 = function(f7_arg0)
 				local f7_local0 = function(f8_arg0)
-					f8_arg0:beginAnimation(400, Enum[0xF50FFF429AB1890][0xE99F3A6467FC0CA] | Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f8_arg0:beginAnimation(400, Enum[@"luitween"][@"luitween_back"] | Enum[@"luitween"][@"luitween_ease_both"])
 					f8_arg0:setAlpha(1)
 					f8_arg0:setScale(1, 1)
 					f8_arg0:registerEventHandler("transition_complete_keyframe", f6_arg0.clipFinished)

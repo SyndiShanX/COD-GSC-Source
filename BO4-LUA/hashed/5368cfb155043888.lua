@@ -22,7 +22,7 @@ CoD.ReservesSkipRevealPromptContainer.new = function(f1_arg0, f1_arg1, f1_arg2, 
 	})
 	local f1_local2 = self
 	local f1_local3 = self.subscribeToModel
-	local f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local3(f1_local2, f1_local4["LootRNGResult.ready"], function(f3_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -34,7 +34,7 @@ CoD.ReservesSkipRevealPromptContainer.new = function(f1_arg0, f1_arg1, f1_arg2, 
 	end, false)
 	f1_local2 = self
 	f1_local3 = self.subscribeToModel
-	f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local3(f1_local2, f1_local4["LootRNGResult.allBribeItemsOwned"], function(f4_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -46,7 +46,7 @@ CoD.ReservesSkipRevealPromptContainer.new = function(f1_arg0, f1_arg1, f1_arg2, 
 	end, false)
 	f1_local2 = self
 	f1_local3 = self.subscribeToModel
-	f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local3(f1_local2, f1_local4.reservesRevealSkipAvailable, function(f5_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -58,7 +58,7 @@ CoD.ReservesSkipRevealPromptContainer.new = function(f1_arg0, f1_arg1, f1_arg2, 
 	end, false)
 	f1_local2 = self
 	f1_local3 = self.subscribeToModel
-	f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local3(f1_local2, f1_local4.reservesRevealComplete, function(f6_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

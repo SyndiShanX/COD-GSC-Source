@@ -15,7 +15,7 @@ LUI.createMenu.Survey = function(f1_arg0, f1_arg1)
 	self.anyChildUsesUpdateState = true
 	f1_local1:addElementToPendingUpdateStateList(self)
 	local Blur = LUI.UIImage.new(0.03, 1.03, -64, -64, 0.06, 1.06, -64, -64)
-	Blur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	Blur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	Blur:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(Blur)
 	self.Blur = Blur
@@ -24,7 +24,7 @@ LUI.createMenu.Survey = function(f1_arg0, f1_arg1)
 	self.BackgroundImage = BackgroundImage
 	local BackingOverlay = LUI.UIImage.new(0, 0, 240, 1680, 0, 0, 135, 945)
 	BackingOverlay:setRGB(0, 0, 0)
-	BackingOverlay:setMaterial(LUI.UIImage.GetCachedMaterial(0xDE760AC0E801E57))
+	BackingOverlay:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_gradient_normal"))
 	BackingOverlay:setShaderVector(0, 0, 0, 0, 1)
 	BackingOverlay:setShaderVector(1, 1, 1, 1, 0.4)
 	BackingOverlay:setShaderVector(2, 0.65, 0, 0, 0)
@@ -99,23 +99,23 @@ LUI.createMenu.Survey = function(f1_arg0, f1_arg1)
 	f1_local10 = self.subscribeToModel
 	f1_local11 = DataSources.SurveyQuestion.getModel(f1_arg0)
 	f1_local10(f1_local9, f1_local11.answered, function(f9_arg0, f9_arg1)
-		CoD.Menu.UpdateButtonShownState(f9_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f9_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		CoD.SurveyUtility.CloseSurvey(self, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 		return true
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if not CoD.ModelUtility.IsGlobalDataSourceModelValueTrue(controller, "SurveyQuestion", "answered") then
 			return true
 		else
 		end
 	end, function(element, menu, controller)
 		if not CoD.ModelUtility.IsGlobalDataSourceModelValueTrue(controller, "SurveyQuestion", "answered") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		else
 			return false

@@ -9,7 +9,7 @@ CoD.EmblemEditorOptions = InheritFrom(CoD.Menu)
 LUI.createMenu.EmblemEditorOptions = function(f1_arg0, f1_arg1)
 	local self = CoD.Menu.NewForUIEditor("EmblemEditorOptions", f1_arg0)
 	local f1_local1 = self
-	CoD.CraftUtility.SetSlotCustomizationType(f1_arg0, Enum[0x63E5ADF9D95FC86][0x979B4C08E9D67B2])
+	CoD.CraftUtility.SetSlotCustomizationType(f1_arg0, Enum[@"customizationtype"][@"customization_type_emblem"])
 	self:setClass(CoD.EmblemEditorOptions)
 	self.soundSet = "default"
 	self:setOwner(f1_arg0)
@@ -30,8 +30,8 @@ LUI.createMenu.EmblemEditorOptions = function(f1_arg0, f1_arg1)
 	self.leftBackground = leftBackground
 	local NoiseTiledBacking = LUI.UIImage.new(0, 0, 1235, 1920, 0.09, 0.09, -92, 988)
 	NoiseTiledBacking:setAlpha(0.7)
-	NoiseTiledBacking:setImage(RegisterImage(0x34839E8065B1E53))
-	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	NoiseTiledBacking:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	NoiseTiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	NoiseTiledBacking:setupNineSliceShader(196, 88)
 	self:addElement(NoiseTiledBacking)
@@ -43,8 +43,8 @@ LUI.createMenu.EmblemEditorOptions = function(f1_arg0, f1_arg1)
 	self.BGOverlay = BGOverlay
 	local TiledPlusGrid = LUI.UIImage.new(0, 0, 1146, 1830, 0, 0, -103, 977)
 	TiledPlusGrid:setAlpha(0.1)
-	TiledPlusGrid:setImage(RegisterImage(0x6E37BAE22631294))
-	TiledPlusGrid:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	TiledPlusGrid:setImage(RegisterImage(@"uie_ui_hud_vehicle_hellstorm_repeat_plusgrid"))
+	TiledPlusGrid:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	TiledPlusGrid:setShaderVector(0, 0, 0, 0, 0)
 	TiledPlusGrid:setupNineSliceShader(220, 220)
 	self:addElement(TiledPlusGrid)
@@ -108,7 +108,7 @@ LUI.createMenu.EmblemEditorOptions = function(f1_arg0, f1_arg1)
 	OptionsList:setWidgetType(CoD.EmblemOptionsButtonSmall)
 	OptionsList:setVerticalCount(4)
 	OptionsList:setSpacing(18)
-	OptionsList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	OptionsList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	OptionsList:setDataSource("EmblemEditorOptionsList")
 	OptionsList:registerEventHandler("gain_focus", function(element, event)
 		local f9_local0 = nil
@@ -117,14 +117,14 @@ LUI.createMenu.EmblemEditorOptions = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f9_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f9_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(OptionsList, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(OptionsList, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		ProcessListAction(self, element, controller, menu)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 		return true
 	end, false)
 	self:addElement(OptionsList)
@@ -166,11 +166,11 @@ LUI.createMenu.EmblemEditorOptions = function(f1_arg0, f1_arg1)
 	self.CraftAuthorInfo = CraftAuthorInfo
 	local Title = LUI.UIText.new(0, 0, 1313.5, 1842.5, 0, 0, 32, 77)
 	Title:setRGB(ColorSet.T8__BEIGE__HEADER.r, ColorSet.T8__BEIGE__HEADER.g, ColorSet.T8__BEIGE__HEADER.b)
-	Title:setText(Engine[0xF9F1239CFD921FE](0x2FA47140D97F89D))
+	Title:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_2FA47140D97F89D"))
 	Title:setTTF("ttmussels_demibold")
 	Title:setLetterSpacing(4)
-	Title:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Title:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Title:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Title:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(Title)
 	self.Title = Title
 	local Border0 = LUI.UIImage.new(1, 1, -684, -682, 0, 0, 0, 1080)
@@ -195,16 +195,16 @@ LUI.createMenu.EmblemEditorOptions = function(f1_arg0, f1_arg1)
 	local HeaderStroke = LUI.UIImage.new(0, 0, 1312.5, 1842.5, 0, 0, 79, 86)
 	HeaderStroke:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	HeaderStroke:setZRot(180)
-	HeaderStroke:setImage(RegisterImage(0xC325BED3F226657))
-	HeaderStroke:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	HeaderStroke:setImage(RegisterImage(@"hash_4C325BED3F226657"))
+	HeaderStroke:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	HeaderStroke:setShaderVector(0, 0, 0, 0, 0)
 	HeaderStroke:setupNineSliceShader(16, 4)
 	self:addElement(HeaderStroke)
 	self.HeaderStroke = HeaderStroke
 	local dotline = LUI.UIImage.new(0, 0, 1316, 1838, 0, 0, 82.5, 86.5)
 	dotline:setAlpha(0.1)
-	dotline:setImage(RegisterImage(0xF9C7F41C631866E))
-	dotline:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	dotline:setImage(RegisterImage(@"uie_ui_menu_social_emblem_dotline"))
+	dotline:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	dotline:setShaderVector(0, 1.2, 0, 0, 0)
 	self:addElement(dotline)
 	self.dotline = dotline
@@ -215,7 +215,7 @@ LUI.createMenu.EmblemEditorOptions = function(f1_arg0, f1_arg1)
 	hintText:linkToElementModel(OptionsList, "description", true, function(model)
 		local f17_local0 = model:get()
 		if f17_local0 ~= nil then
-			hintText.ItemHintText:setText(Engine[0xF9F1239CFD921FE](f17_local0))
+			hintText.ItemHintText:setText(Engine[@"hash_4F9F1239CFD921FE"](f17_local0))
 		end
 	end)
 	self:mergeStateConditions({
@@ -234,11 +234,11 @@ LUI.createMenu.EmblemEditorOptions = function(f1_arg0, f1_arg1)
 		end
 		return f19_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		GoBack(self, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 		return true
 	end, false)
 	LUI.OverrideFunction_CallOriginalFirst(self, "close", function(element)
@@ -246,7 +246,7 @@ LUI.createMenu.EmblemEditorOptions = function(f1_arg0, f1_arg1)
 	end)
 	self:subscribeToGlobalModel(f1_arg0, "GlobalModel", "fileshareRoot.publishTask.state", function(model)
 		local f23_local0 = self
-		if CoD.ModelUtility.IsGlobalModelValueEqualToEnum("fileshareRoot.publishTask.state", Enum[0xE798E99E27D081E][0xFE5B3BE5B00EEEA]) and CoD.ModelUtility.IsGlobalModelValueTrue("fileshareRoot.publishTask.success") then
+		if CoD.ModelUtility.IsGlobalModelValueEqualToEnum("fileshareRoot.publishTask.state", Enum[@"filesharetaskuistate"][@"fileshare_task_ui_done"]) and CoD.ModelUtility.IsGlobalModelValueTrue("fileshareRoot.publishTask.success") then
 			GoBack(self, f1_arg0)
 		end
 	end)

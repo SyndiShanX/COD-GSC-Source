@@ -11,10 +11,10 @@ CoD.CategoryHeader.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	self.anyChildUsesUpdateState = true
 	local header = LUI.UIText.new(0, 0, 0, 75, 0.5, 0.5, -8, 8)
 	header:setRGB(ColorSet.T8__OFF__GRAY.r, ColorSet.T8__OFF__GRAY.g, ColorSet.T8__OFF__GRAY.b)
-	header:setText(Engine[0xF9F1239CFD921FE](0x63E51BFF17859F1))
+	header:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_463E51BFF17859F1"))
 	header:setTTF("ttmussels_regular")
 	header:setLetterSpacing(3.5)
-	header:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	header:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(header)
 	self.header = header
 	local newIcon = CoD.NewBreadcrumb.new(f1_arg0, f1_arg1, 0, 0, 81, 99, 0.5, 0.5, -9, 9)
@@ -36,7 +36,7 @@ CoD.CategoryHeader.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	})
 	local f1_local3 = newIcon
 	local f1_local4 = newIcon.subscribeToModel
-	local f1_local5 = Engine[0x8DF2E5447F384B9]()
+	local f1_local5 = Engine[@"getglobalmodel"]()
 	f1_local4(f1_local3, f1_local5["lobbyRoot.lobbyNetworkMode"], function(f3_arg0)
 		f1_arg0:updateElementState(newIcon, {
 			name = "model_validation",
@@ -48,7 +48,7 @@ CoD.CategoryHeader.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	end, false)
 	f1_local3 = newIcon
 	f1_local4 = newIcon.subscribeToModel
-	f1_local5 = Engine[0x8DF2E5447F384B9]()
+	f1_local5 = Engine[@"getglobalmodel"]()
 	f1_local4(f1_local3, f1_local5["lobbyRoot.lobbyNav"], function(f4_arg0)
 		f1_arg0:updateElementState(newIcon, {
 			name = "model_validation",

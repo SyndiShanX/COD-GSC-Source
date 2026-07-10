@@ -17,23 +17,23 @@ CoD.DirectorChooseGameTypeFrameWZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	GameTypeList:setWidgetType(CoD.CustomGames_MapModeSlider)
 	GameTypeList:setVerticalCount(14)
 	GameTypeList:setSpacing(8)
-	GameTypeList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	GameTypeList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	GameTypeList:setVerticalCounter(CoD.verticalCounter)
 	GameTypeList:setDataSource("GameTypeListWZ")
 	local f1_local2 = GameTypeList
 	local MapModeInfo = GameTypeList.subscribeToModel
 	local f1_local4 = DataSources.MapVote.getModel(f1_arg1)
 	MapModeInfo(f1_local2, f1_local4.mapVoteGameModeNext, function(f2_arg0, f2_arg1)
-		CoD.Menu.UpdateButtonShownState(f2_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f2_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	f1_local2 = GameTypeList
 	MapModeInfo = GameTypeList.subscribeToModel
 	f1_local4 = DataSources.MapVote.getModel(f1_arg1)
 	MapModeInfo(f1_local2, f1_local4.mapVoteMapNext, function(f3_arg0, f3_arg1)
-		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	GameTypeList:linkToElementModel(GameTypeList, "id", true, function(model, f4_arg1)
-		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	GameTypeList:registerEventHandler("list_item_gain_focus", function(element, event)
 		local f5_local0 = nil
@@ -47,10 +47,10 @@ CoD.DirectorChooseGameTypeFrameWZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 		elseif element.super.gainFocus then
 			f6_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f6_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(GameTypeList, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(GameTypeList, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if not CoD.DirectorUtility.IsElementMapOrGameTypeSelected(element, controller) then
 			GameModeSelected(element, controller)
 			PlaySoundAlias("uin_main_nav")
@@ -59,7 +59,7 @@ CoD.DirectorChooseGameTypeFrameWZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 		end
 	end, function(element, menu, controller)
 		if not CoD.DirectorUtility.IsElementMapOrGameTypeSelected(element, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		else
 			return false

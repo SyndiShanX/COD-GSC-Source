@@ -22,7 +22,7 @@ CoD.ZMAARGameInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 	GametypeAndMap:setAlpha(0.5)
 	GametypeAndMap:setTTF("skorzhen")
 	GametypeAndMap:setLetterSpacing(3)
-	GametypeAndMap:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	GametypeAndMap:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	GametypeAndMap:linkToElementModel(self, "gametypeAndMap", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -34,11 +34,11 @@ CoD.ZMAARGameInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 	local VictoryDefeat = LUI.UIText.new(0, 0, 125, 980, 0, 0, 33.5, 93.5)
 	VictoryDefeat:setRGB(0.58, 0.85, 1)
 	VictoryDefeat:setAlpha(0)
-	VictoryDefeat:setText(Engine[0xF9F1239CFD921FE](0xAB769C72F266516))
+	VictoryDefeat:setText(Engine[@"hash_4F9F1239CFD921FE"](@"aar/victory"))
 	VictoryDefeat:setTTF("skorzhen")
-	VictoryDefeat:setMaterial(LUI.UIImage.GetCachedMaterial(0x71E049B161CD00A))
+	VictoryDefeat:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_171E049B161CD00A"))
 	VictoryDefeat:setLetterSpacing(3)
-	VictoryDefeat:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	VictoryDefeat:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(VictoryDefeat)
 	self.VictoryDefeat = VictoryDefeat
 	self:mergeStateConditions({
@@ -63,7 +63,7 @@ CoD.ZMAARGameInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 	})
 	local f1_local4 = self
 	local f1_local5 = self.subscribeToModel
-	local f1_local6 = Engine[0x8DF2E5447F384B9]()
+	local f1_local6 = Engine[@"getglobalmodel"]()
 	f1_local5(f1_local4, f1_local6["lobbyRoot.lobbyNav"], function(f7_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -75,7 +75,7 @@ CoD.ZMAARGameInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 	end, false)
 	f1_local4 = self
 	f1_local5 = self.subscribeToModel
-	f1_local6 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local6 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local5(f1_local4, f1_local6["AAR.activeTab"], function(f8_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -96,7 +96,7 @@ CoD.ZMAARGameInfo.__resetProperties = function(f9_arg0)
 	f9_arg0.GametypeAndMap:completeAnimation()
 	f9_arg0.VictoryDefeat:setRGB(0.58, 0.85, 1)
 	f9_arg0.VictoryDefeat:setAlpha(0)
-	f9_arg0.VictoryDefeat:setText(Engine[0xF9F1239CFD921FE](0xAB769C72F266516))
+	f9_arg0.VictoryDefeat:setText(Engine[@"hash_4F9F1239CFD921FE"](@"aar/victory"))
 	f9_arg0.VictoryDefeat:setLetterSpacing(3)
 	f9_arg0.GametypeAndMap:setAlpha(0.5)
 end
@@ -117,7 +117,7 @@ CoD.ZMAARGameInfo.__clipsPerState = {
 			f11_arg0:setupElementClipCounter(1)
 			f11_arg0.VictoryDefeat:completeAnimation()
 			f11_arg0.VictoryDefeat:setAlpha(0)
-			f11_arg0.VictoryDefeat:setText(Engine[0xF9F1239CFD921FE](0x7BB5E9B11633E3))
+			f11_arg0.VictoryDefeat:setText(Engine[@"hash_4F9F1239CFD921FE"](@"aar/stats"))
 			f11_arg0.clipFinished(f11_arg0.VictoryDefeat)
 		end,
 	},
@@ -127,7 +127,7 @@ CoD.ZMAARGameInfo.__clipsPerState = {
 			f12_arg0:setupElementClipCounter(1)
 			f12_arg0.VictoryDefeat:completeAnimation()
 			f12_arg0.VictoryDefeat:setAlpha(0)
-			f12_arg0.VictoryDefeat:setText(Engine[0xF9F1239CFD921FE](0x5E9C86634E25EA8))
+			f12_arg0.VictoryDefeat:setText(Engine[@"hash_4F9F1239CFD921FE"](@"aar/summary"))
 			f12_arg0.clipFinished(f12_arg0.VictoryDefeat)
 		end,
 	},
@@ -140,7 +140,7 @@ CoD.ZMAARGameInfo.__clipsPerState = {
 			f13_arg0.clipFinished(f13_arg0.GametypeAndMap)
 			f13_arg0.VictoryDefeat:completeAnimation()
 			f13_arg0.VictoryDefeat:setAlpha(0.5)
-			f13_arg0.VictoryDefeat:setText(Engine[0xF9F1239CFD921FE](0x82F7D154900B7D8))
+			f13_arg0.VictoryDefeat:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_82F7D154900B7D8"))
 			f13_arg0.VictoryDefeat:setLetterSpacing(3)
 			f13_arg0.clipFinished(f13_arg0.VictoryDefeat)
 		end,

@@ -8,7 +8,7 @@ CoD.WeaponVariantPipInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Pip = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	Pip:setImage(RegisterImage(0xEEA1EF8036976B6))
+	Pip:setImage(RegisterImage(@"uie_ui_menu_pip01_fg"))
 	self:addElement(Pip)
 	self.Pip = Pip
 	self:mergeStateConditions({

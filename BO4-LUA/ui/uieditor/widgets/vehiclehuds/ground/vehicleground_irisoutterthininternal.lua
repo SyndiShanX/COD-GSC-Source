@@ -40,11 +40,11 @@ CoD.VehicleGround_IrisOutterThinInternal.__clipsPerState = {
 													local f13_local0 = function(f14_arg0)
 														local f14_local0 = function(f15_arg0)
 															local f15_local0 = function(f16_arg0)
-																f16_arg0:beginAnimation(1579, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+																f16_arg0:beginAnimation(1579, Enum[@"luitween"][@"luitween_ease_both"])
 																f16_arg0:setZRot(0)
 																f16_arg0:registerEventHandler("transition_complete_keyframe", f3_arg0.clipFinished)
 															end
-															f15_arg0:beginAnimation(1840, Enum[0xF50FFF429AB1890][0xE99F3A6467FC0CA] | Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+															f15_arg0:beginAnimation(1840, Enum[@"luitween"][@"luitween_back"] | Enum[@"luitween"][@"luitween_ease_out"])
 															f15_arg0:setZRot(-1)
 															f15_arg0:setZoom(0)
 															f15_arg0:registerEventHandler("transition_complete_keyframe", f15_local0)
@@ -53,35 +53,35 @@ CoD.VehicleGround_IrisOutterThinInternal.__clipsPerState = {
 														f14_arg0:setZRot(-2)
 														f14_arg0:registerEventHandler("transition_complete_keyframe", f14_local0)
 													end
-													f13_arg0:beginAnimation(3360, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+													f13_arg0:beginAnimation(3360, Enum[@"luitween"][@"luitween_ease_both"])
 													f13_arg0:setZRot(-2)
 													f13_arg0:registerEventHandler("transition_complete_keyframe", f13_local0)
 												end
 												f12_arg0:beginAnimation(520)
 												f12_arg0:registerEventHandler("transition_complete_keyframe", f12_local0)
 											end
-											f11_arg0:beginAnimation(879, Enum[0xF50FFF429AB1890][0xE99F3A6467FC0CA] | Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+											f11_arg0:beginAnimation(879, Enum[@"luitween"][@"luitween_back"] | Enum[@"luitween"][@"luitween_ease_out"])
 											f11_arg0:setZoom(-20)
 											f11_arg0:registerEventHandler("transition_complete_keyframe", f11_local0)
 										end
 										f10_arg0:beginAnimation(2740)
 										f10_arg0:registerEventHandler("transition_complete_keyframe", f10_local0)
 									end
-									f9_arg0:beginAnimation(3859, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+									f9_arg0:beginAnimation(3859, Enum[@"luitween"][@"luitween_ease_both"])
 									f9_arg0:setZRot(3)
 									f9_arg0:registerEventHandler("transition_complete_keyframe", f9_local0)
 								end
 								f8_arg0:beginAnimation(1500)
 								f8_arg0:registerEventHandler("transition_complete_keyframe", f8_local0)
 							end
-							f7_arg0:beginAnimation(1220, Enum[0xF50FFF429AB1890][0xE99F3A6467FC0CA] | Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+							f7_arg0:beginAnimation(1220, Enum[@"luitween"][@"luitween_back"] | Enum[@"luitween"][@"luitween_ease_out"])
 							f7_arg0:setZoom(-40)
 							f7_arg0:registerEventHandler("transition_complete_keyframe", f7_local0)
 						end
 						f6_arg0:beginAnimation(559)
 						f6_arg0:registerEventHandler("transition_complete_keyframe", f6_local0)
 					end
-					f5_arg0:beginAnimation(3020, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f5_arg0:beginAnimation(3020, Enum[@"luitween"][@"luitween_ease_both"])
 					f5_arg0:setZRot(-4)
 					f5_arg0:registerEventHandler("transition_complete_keyframe", f5_local0)
 				end

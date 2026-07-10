@@ -18,7 +18,7 @@ LUI.createMenu.ClassOptions = function(f1_arg0, f1_arg1)
 	self:addElement(BlackfadeBlur)
 	self.BlackfadeBlur = BlackfadeBlur
 	local ClassOptionsWidget = CoD.ClassOptionsWidget.new(f1_local1, f1_arg0, 0.5, 0.5, -960, 960, 0.5, 0.5, -540, 540)
-	ClassOptionsWidget.ClassNamelLabel:setText(LocalizeToUpperString(0xDD163B6B797AB91))
+	ClassOptionsWidget.ClassNamelLabel:setText(LocalizeToUpperString(@"menu/class_name"))
 	ClassOptionsWidget:registerEventHandler("menu_loaded", function(element, event)
 		local f2_local0 = nil
 		if element.menuLoaded then
@@ -44,12 +44,12 @@ LUI.createMenu.ClassOptions = function(f1_arg0, f1_arg1)
 		end
 		return f3_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], "ui_contextual_1", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], "ui_contextual_1", function(element, menu, controller, model)
 		GoBack(self, controller)
 		ClearMenuSavedState(menu)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, "ui_contextual_1")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, "ui_contextual_1")
 		return true
 	end, false)
 	LUI.OverrideFunction_CallOriginalFirst(self, "close", function(element)

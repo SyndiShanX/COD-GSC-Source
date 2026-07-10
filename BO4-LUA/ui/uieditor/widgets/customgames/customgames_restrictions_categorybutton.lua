@@ -15,8 +15,8 @@ CoD.CustomGames_Restrictions_CategoryButton.new = function(f1_arg0, f1_arg1, f1_
 	local FocusBorder = LUI.UIImage.new(0, 1, -4, 4, 0, 1, -4, 4)
 	FocusBorder:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
 	FocusBorder:setAlpha(0)
-	FocusBorder:setImage(RegisterImage(0xCB07CCC28498CB2))
-	FocusBorder:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	FocusBorder:setImage(RegisterImage(@"uie_ui_menu_store_focus_frame"))
+	FocusBorder:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	FocusBorder:setShaderVector(0, 0, 0, 0, 0)
 	FocusBorder:setupNineSliceShader(10, 10)
 	self:addElement(FocusBorder)
@@ -26,8 +26,8 @@ CoD.CustomGames_Restrictions_CategoryButton.new = function(f1_arg0, f1_arg1, f1_
 	self.emptyFocusable = emptyFocusable
 	local NoiseTiledBacking = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	NoiseTiledBacking:setAlpha(0.8)
-	NoiseTiledBacking:setImage(RegisterImage(0x34839E8065B1E53))
-	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	NoiseTiledBacking:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	NoiseTiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	NoiseTiledBacking:setupNineSliceShader(196, 88)
 	self:addElement(NoiseTiledBacking)
@@ -43,35 +43,35 @@ CoD.CustomGames_Restrictions_CategoryButton.new = function(f1_arg0, f1_arg1, f1_
 	local SettingLabel = LUI.UIText.new(0, 0, 15, 265, 0, 0, 12, 29)
 	SettingLabel:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
 	SettingLabel:setTTF("ttmussels_regular")
-	SettingLabel:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	SettingLabel:setAlignment(Enum[0x7A5123B654282D2][0x6ED4298C93DC5ED])
+	SettingLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	SettingLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
 	SettingLabel:linkToElementModel(self, "categoryName", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			SettingLabel:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			SettingLabel:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	self:addElement(SettingLabel)
 	self.SettingLabel = SettingLabel
 	local ItemFrameAdd = LUI.UIImage.new(0, 1, -3, 3, 0, 1, -2, 2)
-	ItemFrameAdd:setImage(RegisterImage(0xC2AE59F4FA74812))
-	ItemFrameAdd:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	ItemFrameAdd:setImage(RegisterImage(@"uie_ui_menu_store_element_frame"))
+	ItemFrameAdd:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	ItemFrameAdd:setShaderVector(0, 0, 0, 0, 0)
 	ItemFrameAdd:setupNineSliceShader(12, 164)
 	self:addElement(ItemFrameAdd)
 	self.ItemFrameAdd = ItemFrameAdd
 	local FrameSelected = LUI.UIImage.new(0, 1, -3, 3, 0, 1, -3, 3)
 	FrameSelected:setAlpha(0)
-	FrameSelected:setImage(RegisterImage(0xCB07CCC28498CB2))
-	FrameSelected:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	FrameSelected:setImage(RegisterImage(@"uie_ui_menu_store_focus_frame"))
+	FrameSelected:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	FrameSelected:setShaderVector(0, 0, 0, 0, 0)
 	FrameSelected:setupNineSliceShader(8, 8)
 	self:addElement(FrameSelected)
 	self.FrameSelected = FrameSelected
 	local FrameBorder = LUI.UIImage.new(0, 1, -1, 1, 0, 1, -1, 1)
 	FrameBorder:setAlpha(0.3)
-	FrameBorder:setImage(RegisterImage(0x185E11D74ECA3D7))
-	FrameBorder:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	FrameBorder:setImage(RegisterImage(@"uie_ui_menu_store_common_frame"))
+	FrameBorder:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	FrameBorder:setShaderVector(0, 0, 0, 0, 0)
 	FrameBorder:setupNineSliceShader(12, 12)
 	self:addElement(FrameBorder)
@@ -93,7 +93,7 @@ CoD.CustomGames_Restrictions_CategoryButton.new = function(f1_arg0, f1_arg1, f1_
 	})
 	local ItemImage = FlyoutIndicator
 	local TopBarFocus = FlyoutIndicator.subscribeToModel
-	local f1_local13 = Engine[0x8DF2E5447F384B9]()
+	local f1_local13 = Engine[@"getglobalmodel"]()
 	TopBarFocus(ItemImage, f1_local13["GametypeSettings.Update"], function(f5_arg0)
 		f1_arg0:updateElementState(FlyoutIndicator, {
 			name = "model_validation",
@@ -113,8 +113,8 @@ CoD.CustomGames_Restrictions_CategoryButton.new = function(f1_arg0, f1_arg1, f1_
 	self.FlyoutIndicator = FlyoutIndicator
 	TopBarFocus = LUI.UIImage.new(0, 1, -11, 11, 0, 0, -13, -6)
 	TopBarFocus:setAlpha(0)
-	TopBarFocus:setImage(RegisterImage(0x7E8B272A3927DAB))
-	TopBarFocus:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	TopBarFocus:setImage(RegisterImage(@"uie_ui_menu_cac_primary_button_top_bar_focused"))
+	TopBarFocus:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(TopBarFocus)
 	self.TopBarFocus = TopBarFocus
 	ItemImage = LUI.UIFixedAspectRatioImage.new(0.5, 0.5, -90, 90, 0.5, 0.5, -72, 98)

@@ -17,7 +17,7 @@ CoD.CodCasterLoadoutModulePerkWildcard.new = function(f1_arg0, f1_arg1, f1_arg2,
 	CodCasterLoadoutWildcardList:setTopBottom(0, 0, 5, 65)
 	CodCasterLoadoutWildcardList:setWidgetType(CoD.CodCasterLoadoutWildcard)
 	CodCasterLoadoutWildcardList:setSpacing(8)
-	CodCasterLoadoutWildcardList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	CodCasterLoadoutWildcardList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	CodCasterLoadoutWildcardList:setDataSource("WildcardPerksList")
 	CodCasterLoadoutWildcardList:subscribeToGlobalModel(f1_arg1, "PerController", "wildcards.customCount", function(model)
 		local f2_local0 = model:get()

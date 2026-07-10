@@ -20,10 +20,10 @@ CoD.VHUDHawkWeakSignal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	self.Black = Black
 	local WeakSignal = LUI.UIText.new(0.5, 0.5, -90, 90, 0, 0, 8, 53)
 	WeakSignal:setAlpha(0)
-	WeakSignal:setText(Engine[0xF9F1239CFD921FE](0x7536F24E4E34704))
+	WeakSignal:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_67536F24E4E34704"))
 	WeakSignal:setTTF("default")
-	WeakSignal:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	WeakSignal:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	WeakSignal:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	WeakSignal:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	self:addElement(WeakSignal)
 	self.WeakSignal = WeakSignal
 	local Gray = LUI.UIImage.new(0, 0, 4, 191, 0, 0, 61, 95)
@@ -33,10 +33,10 @@ CoD.VHUDHawkWeakSignal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	self.Gray = Gray
 	local TargetingOffline = LUI.UIText.new(0.5, 0.5, -93.5, 93.5, 0, 0, 67.5, 88.5)
 	TargetingOffline:setAlpha(0)
-	TargetingOffline:setText(Engine[0xF9F1239CFD921FE](0x47EC12E7417444E))
+	TargetingOffline:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_747EC12E7417444E"))
 	TargetingOffline:setTTF("default")
-	TargetingOffline:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	TargetingOffline:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	TargetingOffline:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	TargetingOffline:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	self:addElement(TargetingOffline)
 	self.TargetingOffline = TargetingOffline
 	local MessageBox = CoD.VHUDHawkWeakSignalBox.new(f1_arg0, f1_arg1, 0.5, 0.5, -251, 251, 1, 1, -103, 155)

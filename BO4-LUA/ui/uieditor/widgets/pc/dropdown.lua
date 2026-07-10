@@ -19,11 +19,11 @@ CoD.Dropdown.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5
 	self.Image = Image
 	local OptionName = LUI.UIText.new(0, 0, 10, 313, 0.5, 0.5, -10, 8)
 	OptionName:setRGB(ColorSet.T8__BUTTON_UNSELECTED_MAIN.r, ColorSet.T8__BUTTON_UNSELECTED_MAIN.g, ColorSet.T8__BUTTON_UNSELECTED_MAIN.b)
-	OptionName:setText(Engine[0xF9F1239CFD921FE](0xFB7B1C442A1FB03))
+	OptionName:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_1FB7B1C442A1FB03"))
 	OptionName:setTTF("ttmussels_regular")
 	OptionName:setLetterSpacing(2)
-	OptionName:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	OptionName:setAlignment(Enum[0x7A5123B654282D2][0x6ED4298C93DC5ED])
+	OptionName:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	OptionName:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
 	self:addElement(OptionName)
 	self.OptionName = OptionName
 	local emptyFocusable = CoD.emptyFocusable.new(f1_arg0, f1_arg1, 0, 1, 0, 0, 0, 1, 0, 0)
@@ -34,10 +34,10 @@ CoD.Dropdown.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5
 		elseif element.super.gainFocus then
 			f2_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f2_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(emptyFocusable, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(emptyFocusable, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if IsInDefaultState(element) then
 			SetState(self, "InUse", controller)
 			return true
@@ -45,7 +45,7 @@ CoD.Dropdown.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5
 		end
 	end, function(element, menu, controller)
 		if IsInDefaultState(element) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x179662091387B23, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_7179662091387B23", nil, nil)
 			return true
 		else
 			return false
@@ -62,10 +62,10 @@ CoD.Dropdown.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5
 		elseif element.super.gainFocus then
 			f5_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f5_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(CyclingListArrow, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(CyclingListArrow, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if IsInDefaultState(element) then
 			SetState(self, "DropSide", controller)
 			PlayClip(self, "Active", controller)
@@ -74,7 +74,7 @@ CoD.Dropdown.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5
 		end
 	end, function(element, menu, controller)
 		if IsInDefaultState(element) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x179662091387B23, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_7179662091387B23", nil, nil)
 			return true
 		else
 			return false
@@ -89,7 +89,7 @@ CoD.Dropdown.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5
 	DropDownList:setWidgetType(CoD.DropdownListItem)
 	DropDownList:setVerticalCount(4)
 	DropDownList:setFirstElementXOffset(1)
-	DropDownList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	DropDownList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	DropDownList:setDataSource("DropdownListTest")
 	self:addElement(DropDownList)
 	self.DropDownList = DropDownList

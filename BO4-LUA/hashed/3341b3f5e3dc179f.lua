@@ -8,20 +8,20 @@ CoD.CardGlowRectangleAnim.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local GlowRectangle01 = LUI.UIImage.new(0.5, 0.5, -174, 174, 0.5, 0.5, -338, 338)
-	GlowRectangle01:setImage(RegisterImage(0x65FB66FE8D39135))
-	GlowRectangle01:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	GlowRectangle01:setImage(RegisterImage(@"hash_65FB66FE8D39135"))
+	GlowRectangle01:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	GlowRectangle01:setShaderVector(0, 4, 0, 0, 0)
 	self:addElement(GlowRectangle01)
 	self.GlowRectangle01 = GlowRectangle01
 	local GlowRectangle02 = LUI.UIImage.new(0.5, 0.5, -174, 174, 0.5, 0.5, -338, 338)
-	GlowRectangle02:setImage(RegisterImage(0x65FB66FE8D39135))
-	GlowRectangle02:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	GlowRectangle02:setImage(RegisterImage(@"hash_65FB66FE8D39135"))
+	GlowRectangle02:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	GlowRectangle02:setShaderVector(0, 4, 0, 0, 0)
 	self:addElement(GlowRectangle02)
 	self.GlowRectangle02 = GlowRectangle02
 	local GlowRectangle03 = LUI.UIImage.new(0.5, 0.5, -174, 174, 0.5, 0.5, -338, 338)
-	GlowRectangle03:setImage(RegisterImage(0x65FB66FE8D39135))
-	GlowRectangle03:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	GlowRectangle03:setImage(RegisterImage(@"hash_65FB66FE8D39135"))
+	GlowRectangle03:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	GlowRectangle03:setShaderVector(0, 4, 0, 0, 0)
 	self:addElement(GlowRectangle03)
 	self.GlowRectangle03 = GlowRectangle03

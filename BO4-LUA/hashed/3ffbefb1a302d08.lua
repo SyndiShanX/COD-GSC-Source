@@ -16,7 +16,7 @@ CoD.Rush_Gameover.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Blur = LUI.UIImage.new(-0.5, 0.5, 960, 960, 0.5, 1.5, -540, -540)
 	Blur:setAlpha(0)
-	Blur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	Blur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	Blur:setShaderVector(0, 0, 0, 0, 0)
 	Blur:registerEventHandler("menu_loaded", function(element, event)
 		local f2_local0 = nil
@@ -64,8 +64,8 @@ CoD.Rush_Gameover.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 	self.BackgroundOverlay = BackgroundOverlay
 	local CroppedZmBacking2 = LUI.UIImage.new(0, 1, -8, 8, 0, 1, -18, 18)
 	CroppedZmBacking2:setAlpha(0.5)
-	CroppedZmBacking2:setImage(RegisterImage(0xA8FC401C1972BDE))
-	CroppedZmBacking2:setMaterial(LUI.UIImage.GetCachedMaterial(0xA02C44161370F6D))
+	CroppedZmBacking2:setImage(RegisterImage(@"uie_ui_hud_zm_aar_reward_bg"))
+	CroppedZmBacking2:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_1A02C44161370F6D"))
 	CroppedZmBacking2:setShaderVector(0, 0, 0, 0, 0)
 	CroppedZmBacking2:setShaderVector(1, 1, 1, 0, 0)
 	CroppedZmBacking2:setShaderVector(2, 0, 0, 0, 0)
@@ -86,8 +86,8 @@ CoD.Rush_Gameover.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 	self.CroppedZmBacking2 = CroppedZmBacking2
 	local NoiseTiledBacking = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	NoiseTiledBacking:setAlpha(0.4)
-	NoiseTiledBacking:setImage(RegisterImage(0x34839E8065B1E53))
-	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	NoiseTiledBacking:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	NoiseTiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	NoiseTiledBacking:setupNineSliceShader(196, 88)
 	NoiseTiledBacking:registerEventHandler("menu_loaded", function(element, event)
@@ -114,8 +114,8 @@ CoD.Rush_Gameover.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 	local TrialTimeText = LUI.UIText.new(0, 0, 0, 1920, 0, 0, 327, 354)
 	TrialTimeText:setTTF("skorzhen")
 	TrialTimeText:setLetterSpacing(4)
-	TrialTimeText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	TrialTimeText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	TrialTimeText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	TrialTimeText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	TrialTimeText:subscribeToGlobalModel(f1_arg1, "ZMHudGlobal", "trials.showScoreboard", function(model)
 		local f6_local0 = model:get()
 		if f6_local0 ~= nil then
@@ -152,13 +152,13 @@ CoD.Rush_Gameover.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 		{
 			stateName = "Show",
 			condition = function(menu, element, event)
-				return Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x198075B069840DC]) and CoD.HUDUtility.IsAnyGameType(f1_arg1, "zstandard")
+				return Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_game_ended"]) and CoD.HUDUtility.IsAnyGameType(f1_arg1, "zstandard")
 			end,
 		},
 		{
 			stateName = "TrialsPostGameShow",
 			condition = function(menu, element, event)
-				local f11_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x198075B069840DC])
+				local f11_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_game_ended"])
 				if f11_local0 then
 					f11_local0 = CoD.HUDUtility.IsAnyGameType(f1_arg1, "ztrials")
 					if f11_local0 then
@@ -171,19 +171,19 @@ CoD.Rush_Gameover.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 	})
 	local f1_local12 = self
 	local f1_local13 = self.subscribeToModel
-	local f1_local14 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local13(f1_local12, f1_local14["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x198075B069840DC]], function(f12_arg0)
+	local f1_local14 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local13(f1_local12, f1_local14["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_game_ended"]], function(f12_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f12_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x198075B069840DC],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_game_ended"],
 		})
 	end, false)
 	f1_local12 = self
 	f1_local13 = self.subscribeToModel
-	f1_local14 = Engine[0x8DF2E5447F384B9]()
+	f1_local14 = Engine[@"getglobalmodel"]()
 	f1_local13(f1_local12, f1_local14["ZMHudGlobal.trials.showScoreboard"], function(f13_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -274,7 +274,7 @@ CoD.Rush_Gameover.__clipsPerState = {
 			f17_arg0:__resetProperties()
 			f17_arg0:setupElementClipCounter(10)
 			local f17_local0 = function(f18_arg0)
-				f18_arg0:beginAnimation(300, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f18_arg0:beginAnimation(300, Enum[@"luitween"][@"luitween_ease_both"])
 				f18_arg0:setAlpha(0.05)
 				f18_arg0:registerEventHandler("transition_complete_keyframe", f17_arg0.clipFinished)
 			end
@@ -283,7 +283,7 @@ CoD.Rush_Gameover.__clipsPerState = {
 			f17_arg0.ZMSmokeBackgroundR:registerEventHandler("interrupted_keyframe", f17_arg0.clipInterrupted)
 			f17_arg0.ZMSmokeBackgroundR:registerEventHandler("transition_complete_keyframe", f17_local0)
 			local f17_local1 = function(f19_arg0)
-				f19_arg0:beginAnimation(300, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f19_arg0:beginAnimation(300, Enum[@"luitween"][@"luitween_ease_both"])
 				f19_arg0:setAlpha(0.05)
 				f19_arg0:registerEventHandler("transition_complete_keyframe", f17_arg0.clipFinished)
 			end
@@ -292,7 +292,7 @@ CoD.Rush_Gameover.__clipsPerState = {
 			f17_arg0.ZMSmokeBackgroundL:registerEventHandler("interrupted_keyframe", f17_arg0.clipInterrupted)
 			f17_arg0.ZMSmokeBackgroundL:registerEventHandler("transition_complete_keyframe", f17_local1)
 			local f17_local2 = function(f20_arg0)
-				f17_arg0.BackgroundOverlay:beginAnimation(200, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f17_arg0.BackgroundOverlay:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_in"])
 				f17_arg0.BackgroundOverlay:setAlpha(0.7)
 				f17_arg0.BackgroundOverlay:registerEventHandler("interrupted_keyframe", f17_arg0.clipInterrupted)
 				f17_arg0.BackgroundOverlay:registerEventHandler("transition_complete_keyframe", f17_arg0.clipFinished)
@@ -301,7 +301,7 @@ CoD.Rush_Gameover.__clipsPerState = {
 			f17_arg0.BackgroundOverlay:setAlpha(0)
 			f17_local2(f17_arg0.BackgroundOverlay)
 			local f17_local3 = function(f21_arg0)
-				f17_arg0.CroppedZmBacking2:beginAnimation(500, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f17_arg0.CroppedZmBacking2:beginAnimation(500, Enum[@"luitween"][@"luitween_ease_in"])
 				f17_arg0.CroppedZmBacking2:setAlpha(0.5)
 				f17_arg0.CroppedZmBacking2:registerEventHandler("interrupted_keyframe", f17_arg0.clipInterrupted)
 				f17_arg0.CroppedZmBacking2:registerEventHandler("transition_complete_keyframe", f17_arg0.clipFinished)
@@ -310,7 +310,7 @@ CoD.Rush_Gameover.__clipsPerState = {
 			f17_arg0.CroppedZmBacking2:setAlpha(0)
 			f17_local3(f17_arg0.CroppedZmBacking2)
 			local f17_local4 = function(f22_arg0)
-				f17_arg0.NoiseTiledBacking:beginAnimation(200, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f17_arg0.NoiseTiledBacking:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_in"])
 				f17_arg0.NoiseTiledBacking:setAlpha(0.4)
 				f17_arg0.NoiseTiledBacking:registerEventHandler("interrupted_keyframe", f17_arg0.clipInterrupted)
 				f17_arg0.NoiseTiledBacking:registerEventHandler("transition_complete_keyframe", f17_arg0.clipFinished)
@@ -371,7 +371,7 @@ CoD.Rush_Gameover.__clipsPerState = {
 			f29_arg0:setupElementClipCounter(10)
 			local f29_local0 = function(f30_arg0)
 				local f30_local0 = function(f31_arg0)
-					f31_arg0:beginAnimation(300, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f31_arg0:beginAnimation(300, Enum[@"luitween"][@"luitween_ease_both"])
 					f31_arg0:setAlpha(0.05)
 					f31_arg0:registerEventHandler("transition_complete_keyframe", f29_arg0.clipFinished)
 				end
@@ -384,7 +384,7 @@ CoD.Rush_Gameover.__clipsPerState = {
 			f29_local0(f29_arg0.ZMSmokeBackgroundR)
 			local f29_local1 = function(f32_arg0)
 				local f32_local0 = function(f33_arg0)
-					f33_arg0:beginAnimation(300, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f33_arg0:beginAnimation(300, Enum[@"luitween"][@"luitween_ease_both"])
 					f33_arg0:setAlpha(0.05)
 					f33_arg0:registerEventHandler("transition_complete_keyframe", f29_arg0.clipFinished)
 				end
@@ -396,7 +396,7 @@ CoD.Rush_Gameover.__clipsPerState = {
 			f29_arg0.ZMSmokeBackgroundL:setAlpha(0)
 			f29_local1(f29_arg0.ZMSmokeBackgroundL)
 			local f29_local2 = function(f34_arg0)
-				f29_arg0.BackgroundOverlay:beginAnimation(200, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f29_arg0.BackgroundOverlay:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_in"])
 				f29_arg0.BackgroundOverlay:setAlpha(0.7)
 				f29_arg0.BackgroundOverlay:registerEventHandler("interrupted_keyframe", f29_arg0.clipInterrupted)
 				f29_arg0.BackgroundOverlay:registerEventHandler("transition_complete_keyframe", f29_arg0.clipFinished)
@@ -405,7 +405,7 @@ CoD.Rush_Gameover.__clipsPerState = {
 			f29_arg0.BackgroundOverlay:setAlpha(0)
 			f29_local2(f29_arg0.BackgroundOverlay)
 			local f29_local3 = function(f35_arg0)
-				f29_arg0.CroppedZmBacking2:beginAnimation(500, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f29_arg0.CroppedZmBacking2:beginAnimation(500, Enum[@"luitween"][@"luitween_ease_in"])
 				f29_arg0.CroppedZmBacking2:setAlpha(0.5)
 				f29_arg0.CroppedZmBacking2:registerEventHandler("interrupted_keyframe", f29_arg0.clipInterrupted)
 				f29_arg0.CroppedZmBacking2:registerEventHandler("transition_complete_keyframe", f29_arg0.clipFinished)
@@ -414,7 +414,7 @@ CoD.Rush_Gameover.__clipsPerState = {
 			f29_arg0.CroppedZmBacking2:setAlpha(0)
 			f29_local3(f29_arg0.CroppedZmBacking2)
 			local f29_local4 = function(f36_arg0)
-				f29_arg0.NoiseTiledBacking:beginAnimation(200, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f29_arg0.NoiseTiledBacking:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_in"])
 				f29_arg0.NoiseTiledBacking:setAlpha(0.4)
 				f29_arg0.NoiseTiledBacking:registerEventHandler("interrupted_keyframe", f29_arg0.clipInterrupted)
 				f29_arg0.NoiseTiledBacking:registerEventHandler("transition_complete_keyframe", f29_arg0.clipFinished)
@@ -424,7 +424,7 @@ CoD.Rush_Gameover.__clipsPerState = {
 			f29_local4(f29_arg0.NoiseTiledBacking)
 			local f29_local5 = function(f37_arg0)
 				local f37_local0 = function(f38_arg0)
-					f38_arg0:beginAnimation(199, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f38_arg0:beginAnimation(199, Enum[@"luitween"][@"luitween_ease_out"])
 					f38_arg0:setAlpha(1)
 					f38_arg0:registerEventHandler("transition_complete_keyframe", f29_arg0.clipFinished)
 				end
@@ -453,7 +453,7 @@ CoD.Rush_Gameover.__clipsPerState = {
 			f29_local6(f29_arg0.TrialTimeText)
 			local f29_local7 = function(f41_arg0)
 				local f41_local0 = function(f42_arg0)
-					f42_arg0:beginAnimation(199, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f42_arg0:beginAnimation(199, Enum[@"luitween"][@"luitween_ease_out"])
 					f42_arg0:setAlpha(1)
 					f42_arg0:registerEventHandler("transition_complete_keyframe", f29_arg0.clipFinished)
 				end

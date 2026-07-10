@@ -12,7 +12,7 @@ CoD.MOTD_FeaturedButtonContainer_PC.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	self.anyChildUsesUpdateState = true
 	local continueButtonPC = nil
 	continueButtonPC = CoD.featureOverlay_Button_MouseOnly.new(f1_arg0, f1_arg1, 0.5, 0.5, 18.5, 178.5, 0.5, 0.5, -30, 30)
-	continueButtonPC.featureOverlayButtonContainer.Title:setText(LocalizeToUpperString(0x6393FF34EA56966))
+	continueButtonPC.featureOverlayButtonContainer.Title:setText(LocalizeToUpperString(@"menu/continue"))
 	continueButtonPC:registerEventHandler("menu_loaded", function(element, event)
 		local f2_local0 = nil
 		if element.menuLoaded then
@@ -35,21 +35,21 @@ CoD.MOTD_FeaturedButtonContainer_PC.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 		elseif element.super.gainFocus then
 			f3_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f3_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(continueButtonPC, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(continueButtonPC, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		CoD.MOTDUtility.FeatureCard_HandlePopupAction(self, controller, element, menu)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x6393FF34EA56966, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/continue", nil, "ui_confirm")
 		return true
 	end, false)
 	self:addElement(continueButtonPC)
 	self.continueButtonPC = continueButtonPC
 	local backButtonPC = nil
 	backButtonPC = CoD.featureOverlay_Button_MouseOnly.new(f1_arg0, f1_arg1, 0.5, 0.5, -177.5, -17.5, 0.5, 0.5, -30, 30)
-	backButtonPC.featureOverlayButtonContainer.Title:setText(LocalizeToUpperString(0x78D439E1B360368))
+	backButtonPC.featureOverlayButtonContainer.Title:setText(LocalizeToUpperString(@"hash_778D439E1B360368"))
 	backButtonPC:registerEventHandler("gain_focus", function(element, event)
 		local f6_local0 = nil
 		if element.gainFocus then
@@ -57,14 +57,14 @@ CoD.MOTD_FeaturedButtonContainer_PC.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 		elseif element.super.gainFocus then
 			f6_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f6_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(backButtonPC, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(backButtonPC, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		GoBack(self, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xA4032FB2AAB69F2, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"mp/back", nil, "ui_confirm")
 		return true
 	end, false)
 	self:addElement(backButtonPC)

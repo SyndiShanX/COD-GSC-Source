@@ -9,8 +9,8 @@ CoD.CalloutItemText.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Title = LUI.UIText.new(0.5, 0.5, -91, 91, 0, 0, 0, 26)
 	Title:setTTF("ttmussels_regular")
-	Title:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	Title:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Title:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	Title:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	Title:linkToElementModel(self, "text", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then

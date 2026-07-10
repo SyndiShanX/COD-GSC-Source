@@ -23,11 +23,11 @@ LUI.createMenu.Leaderboard_Main = function(f1_arg0, f1_arg1)
 	self:addElement(Background)
 	self.Background = Background
 	local GenericMenuFrame = CoD.GenericMenuFrame.new(f1_local1, f1_arg0, 0, 1, 0, 0, 0, 1, 0, 0)
-	GenericMenuFrame.CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(0xFE3665244ECF33B))
+	GenericMenuFrame.CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(@"menu/leaderboards"))
 	GenericMenuFrame:subscribeToGlobalModel(f1_arg0, "LobbyRoot", "lobbyTitle", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			GenericMenuFrame.CommonHeader.subtitle.subtitle:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			GenericMenuFrame.CommonHeader.subtitle.subtitle:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	self:addElement(GenericMenuFrame)
@@ -39,7 +39,7 @@ LUI.createMenu.Leaderboard_Main = function(f1_arg0, f1_arg1)
 	GameModeList:setHorizontalCount(4)
 	GameModeList:setVerticalCount(3)
 	GameModeList:setSpacing(18)
-	GameModeList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	GameModeList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	GameModeList:setDataSource("LeaderboardGameModeButton")
 	GameModeList:registerEventHandler("gain_focus", function(element, event)
 		local f3_local0 = nil
@@ -48,10 +48,10 @@ LUI.createMenu.Leaderboard_Main = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f3_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f3_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(GameModeList, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(GameModeList, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		CoD.LeaderboardUtility.AutoAddFriends(controller)
 		CoD.LeaderboardUtility.SetLeaderboardDef(self, element, controller)
 		CoD.LeaderboardUtility.LoadLeaderboard(self, controller)
@@ -59,14 +59,14 @@ LUI.createMenu.Leaderboard_Main = function(f1_arg0, f1_arg1)
 		PlaySoundAlias("uin_paint_decal_nav")
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 		return true
 	end, false)
 	self:addElement(GameModeList)
 	self.GameModeList = GameModeList
 	local PlaylistButton = CoD.LeaderboardListButton.new(f1_local1, f1_arg0, 0.5, 0.5, 539.5, 842.5, 0, 0, 224, 316)
 	PlaylistButton.CommonListButtonShortInternal.Title.__CommonListButtonShortInternal_Title_String_Reference = function()
-		PlaylistButton.CommonListButtonShortInternal.Title:setText(Engine[0xF9F1239CFD921FE](CoD.LeaderboardUtility.PlayerListCountAndMax(0x52A206848432462)))
+		PlaylistButton.CommonListButtonShortInternal.Title:setText(Engine[@"hash_4F9F1239CFD921FE"](CoD.LeaderboardUtility.PlayerListCountAndMax(@"hash_252A206848432462")))
 	end
 	PlaylistButton.CommonListButtonShortInternal.Title.__CommonListButtonShortInternal_Title_String_Reference()
 	PlaylistButton:registerEventHandler("gain_focus", function(element, event)
@@ -76,10 +76,10 @@ LUI.createMenu.Leaderboard_Main = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f7_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f7_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(PlaylistButton, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(PlaylistButton, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if not IsPC() then
 			CoD.LeaderboardUtility.AutoAddFriends(controller)
 			OpenPopup(self, "Leaderboards_PlayersList", controller)
@@ -92,10 +92,10 @@ LUI.createMenu.Leaderboard_Main = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if not IsPC() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xAC3B80C833B60E1, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_3AC3B80C833B60E1", nil, "ui_confirm")
 			return true
 		elseif IsPC() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xAC3B80C833B60E1, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_3AC3B80C833B60E1", nil, "ui_confirm")
 			return true
 		else
 			return false
@@ -130,13 +130,13 @@ LUI.createMenu.Leaderboard_Main = function(f1_arg0, f1_arg1)
 	self.TabBacking = TabBacking
 	local f1_local8 = PlaylistButton
 	local f1_local9 = PlaylistButton.subscribeToModel
-	local f1_local10 = Engine[0x8DF2E5447F384B9]()
+	local f1_local10 = Engine[@"getglobalmodel"]()
 	f1_local9(f1_local8, f1_local10["socialRoot.playersListCount"], PlaylistButton.CommonListButtonShortInternal.Title.__CommonListButtonShortInternal_Title_String_Reference)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], "ESCAPE", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], "ESCAPE", function(element, menu, controller, model)
 		GoBack(self, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, "ESCAPE")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, "ESCAPE")
 		return true
 	end, false)
 	GenericMenuFrame:setModel(self.buttonModel, f1_arg0)

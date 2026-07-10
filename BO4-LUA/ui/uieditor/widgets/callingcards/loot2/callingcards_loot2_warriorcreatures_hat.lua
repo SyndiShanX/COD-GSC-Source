@@ -7,7 +7,7 @@ CoD.callingcards_loot2_warriorcreatures_hat.new = function(f1_arg0, f1_arg1, f1_
 	self.id = "callingcards_loot2_warriorcreatures_hat"
 	self.soundSet = "default"
 	local hat = LUI.UIImage.new(0, 0, -7, 121, 0, 0, -2, 70)
-	hat:setImage(RegisterImage(0x184EAF66CA791F4))
+	hat:setImage(RegisterImage(@"uie_ui_menu_callingcards_warriorcreatures_hat"))
 	self:addElement(hat)
 	self.hat = hat
 	if PostLoadFunc then

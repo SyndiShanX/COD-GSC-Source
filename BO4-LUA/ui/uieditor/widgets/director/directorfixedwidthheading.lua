@@ -11,11 +11,11 @@ CoD.DirectorFixedWidthHeading.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self:addElement(Backing)
 	self.Backing = Backing
 	local Label = LUI.UIText.new(-0.01, 1.01, 5, -5, 0.5, 0.5, -15, 7)
-	Label:setText(Engine[0xF9F1239CFD921FE](0x700AE5902F5ECF7))
+	Label:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_7700AE5902F5ECF7"))
 	Label:setTTF("ttmussels_demibold")
 	Label:setLetterSpacing(0.1)
-	Label:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Label:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Label:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Label:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(Label)
 	self.Label = Label
 	if PostLoadFunc then

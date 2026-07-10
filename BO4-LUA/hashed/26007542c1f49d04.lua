@@ -9,7 +9,7 @@ CoD.towers_pap_head.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local danuComplete = LUI.UIImage.new(0, 0, 0, 128, 0, 0, 0, 128)
 	danuComplete:setAlpha(0.6)
-	danuComplete:setImage(RegisterImage(0xA92B3054BB11471))
+	danuComplete:setImage(RegisterImage(@"uie_t7_icon_redinsrally_zombie"))
 	self:addElement(danuComplete)
 	self.danuComplete = danuComplete
 	if PostLoadFunc then

@@ -33,12 +33,12 @@ LUI.createMenu.EquipmentSelect = function(f1_arg0, f1_arg1)
 	self:addElement(ItemInfo)
 	self.ItemInfo = ItemInfo
 	local CACHeader = CoD.CACHeader.new(f1_local1, f1_arg0, 0.5, 0.5, -960, 960, 0, 0, 0, 67)
-	CACHeader.subtitle.StageTitle:setText(LocalizeToUpperString(CoD.CACUtility.GetHeaderNameForLoadoutSlot(self, 0x305E03714EE77FC)))
+	CACHeader.subtitle.StageTitle:setText(LocalizeToUpperString(CoD.CACUtility.GetHeaderNameForLoadoutSlot(self, @"hash_305E03714EE77FC")))
 	CACHeader.subtitle.subtitle:setAlpha(0)
 	CACHeader:subscribeToGlobalModel(f1_arg0, "LobbyRoot", "lobbyTitle", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			CACHeader.subtitle.subtitle:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			CACHeader.subtitle.subtitle:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	CACHeader:linkToElementModel(self, nil, false, function(model)
@@ -106,7 +106,7 @@ LUI.createMenu.EquipmentSelect = function(f1_arg0, f1_arg1)
 	RestrictedText:linkToElementModel(EquipmentListWidget.itemList, nil, false, function(model)
 		RestrictedText:setModel(model, f1_arg0)
 	end)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		if not IsPC() then
 			PlaySoundAlias("uin_party_ease_slide_back")
 			CoD.CACUtility.PlayChooseScreenOutro(menu, controller, "Close")
@@ -121,10 +121,10 @@ LUI.createMenu.EquipmentSelect = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if not IsPC() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 			return true
 		elseif IsPC() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 			return true
 		else
 			return false
@@ -189,7 +189,7 @@ CoD.EquipmentSelect.__clipsPerState = {
 			f14_arg0:setupElementClipCounter(2)
 			local f14_local0 = function(f15_arg0)
 				local f15_local0 = function(f16_arg0)
-					f16_arg0:beginAnimation(100, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f16_arg0:beginAnimation(100, Enum[@"luitween"][@"luitween_ease_both"])
 					f16_arg0:setTopBottom(0, 0, 672, 1294)
 					f16_arg0:setAlpha(1)
 					f16_arg0:registerEventHandler("transition_complete_keyframe", f14_arg0.clipFinished)
@@ -222,7 +222,7 @@ CoD.EquipmentSelect.__clipsPerState = {
 			f19_arg0:__resetProperties()
 			f19_arg0:setupElementClipCounter(2)
 			local f19_local0 = function(f20_arg0)
-				f19_arg0.BackgroundSlidePanel:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f19_arg0.BackgroundSlidePanel:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f19_arg0.BackgroundSlidePanel:setTopBottom(0, 0, 1072, 1694)
 				f19_arg0.BackgroundSlidePanel:setAlpha(0)
 				f19_arg0.BackgroundSlidePanel:registerEventHandler("interrupted_keyframe", f19_arg0.clipInterrupted)
@@ -233,7 +233,7 @@ CoD.EquipmentSelect.__clipsPerState = {
 			f19_arg0.BackgroundSlidePanel:setAlpha(1)
 			f19_local0(f19_arg0.BackgroundSlidePanel)
 			local f19_local1 = function(f21_arg0)
-				f19_arg0.EquipmentListWidget:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f19_arg0.EquipmentListWidget:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f19_arg0.EquipmentListWidget:setTopBottom(0, 0, 980, 1480)
 				f19_arg0.EquipmentListWidget:setAlpha(0)
 				f19_arg0.EquipmentListWidget:registerEventHandler("interrupted_keyframe", f19_arg0.clipInterrupted)

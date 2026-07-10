@@ -6,15 +6,15 @@ local PostLoadFunc = function(self, controller, menu)
 		self:subscribeToModel(f1_local0.status, function(model)
 			local f2_local0 = CoD.perController[controller].leaderboardDurationFilter
 			if not f2_local0 then
-				f2_local0 = Enum[0x4AA9747C7FD29AA][0x55ACA16E2268D1A]
+				f2_local0 = Enum[@"lbtracktype"][@"lb_trk_alltime"]
 			end
 			local f2_local1 = LuaEnum.LB_MP_GAMES_NEEDED.WEEKLY
-			if f2_local0 == Enum[0x4AA9747C7FD29AA][0x55ACA16E2268D1A] then
+			if f2_local0 == Enum[@"lbtracktype"][@"lb_trk_alltime"] then
 				f2_local1 = LuaEnum.LB_MP_GAMES_NEEDED.ALLTIME
-			elseif f2_local0 == Enum[0x4AA9747C7FD29AA][0x4ADDC81D8048FD] then
+			elseif f2_local0 == Enum[@"lbtracktype"][@"lb_trk_monthly"] then
 				f2_local1 = LuaEnum.LB_MP_GAMES_NEEDED.MONTHLY
 			end
-			self.Text:setText(Engine[0xF9F1239CFD921FE](0x33467BF1A6467C2, f2_local1))
+			self.Text:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_433467BF1A6467C2", f2_local1))
 		end)
 	end
 end
@@ -31,8 +31,8 @@ CoD.Leaderboard_WarningText.new = function(f3_arg0, f3_arg1, f3_arg2, f3_arg3, f
 	Text:setRGB(1, 0.4, 0)
 	Text:setText("")
 	Text:setTTF("default")
-	Text:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
-	Text:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Text:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
+	Text:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(Text)
 	self.Text = Text
 	if PostLoadFunc then

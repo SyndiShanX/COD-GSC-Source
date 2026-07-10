@@ -8,13 +8,13 @@ CoD.vhud_sentinel_CenterReticle.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local CenterReticle = LUI.UIImage.new(0.5, 0.5, -30, 30, 0.5, 0.5, -18, 18)
-	CenterReticle:setImage(RegisterImage(0xC4D853A72F73535))
-	CenterReticle:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	CenterReticle:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_wasp_centerreticlecircle"))
+	CenterReticle:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(CenterReticle)
 	self.CenterReticle = CenterReticle
 	local CenterReticle0 = LUI.UIImage.new(0.5, 0.5, -30, 30, 0.5, 0.5, -18, 18)
-	CenterReticle0:setImage(RegisterImage(0xC4D853A72F73535))
-	CenterReticle0:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	CenterReticle0:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_wasp_centerreticlecircle"))
+	CenterReticle0:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(CenterReticle0)
 	self.CenterReticle0 = CenterReticle0
 	self:mergeStateConditions({
@@ -33,7 +33,7 @@ CoD.vhud_sentinel_CenterReticle.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	})
 	local f1_local3 = self
 	local f1_local4 = self.subscribeToModel
-	local f1_local5 = Engine[0x8DF2E5447F384B9]()
+	local f1_local5 = Engine[@"getglobalmodel"]()
 	f1_local4(f1_local3, f1_local5["lobbyRoot.lobbyNav"], function(f4_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

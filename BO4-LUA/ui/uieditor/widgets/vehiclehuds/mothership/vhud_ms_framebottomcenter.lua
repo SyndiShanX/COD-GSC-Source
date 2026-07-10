@@ -11,8 +11,8 @@ CoD.vhud_ms_FrameBottomCenter.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	msBottomFrameCenter:setRGB(0.74, 0.94, 0.99)
 	msBottomFrameCenter:setAlpha(0.6)
 	msBottomFrameCenter:setXRot(180)
-	msBottomFrameCenter:setImage(RegisterImage(0x27790B8D32A1115))
-	msBottomFrameCenter:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	msBottomFrameCenter:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_mothership_topframecenter"))
+	msBottomFrameCenter:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(msBottomFrameCenter)
 	self.msBottomFrameCenter = msBottomFrameCenter
 	local msBottomFrameCenterDepth = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
@@ -20,8 +20,8 @@ CoD.vhud_ms_FrameBottomCenter.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	msBottomFrameCenterDepth:setAlpha(0.1)
 	msBottomFrameCenterDepth:setXRot(180)
 	msBottomFrameCenterDepth:setZoom(-50)
-	msBottomFrameCenterDepth:setImage(RegisterImage(0x27790B8D32A1115))
-	msBottomFrameCenterDepth:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	msBottomFrameCenterDepth:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_mothership_topframecenter"))
+	msBottomFrameCenterDepth:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(msBottomFrameCenterDepth)
 	self.msBottomFrameCenterDepth = msBottomFrameCenterDepth
 	if PostLoadFunc then

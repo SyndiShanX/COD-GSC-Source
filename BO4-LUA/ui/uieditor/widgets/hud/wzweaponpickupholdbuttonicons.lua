@@ -14,10 +14,10 @@ CoD.WZWeaponPickupHoldButtonIcons.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	WeaponPickupWarzoneSquareActionPC = LUI.UIText.new(0, 0, 45, 122, 0.5, 0.5, 36, 56)
 	WeaponPickupWarzoneSquareActionPC:setRGB(0.79, 0.76, 0.58)
 	WeaponPickupWarzoneSquareActionPC:setAlpha(0)
-	WeaponPickupWarzoneSquareActionPC:setText(Engine[0xF9F1239CFD921FE](0x38B775D97E72F0C))
+	WeaponPickupWarzoneSquareActionPC:setText(Engine[@"hash_4F9F1239CFD921FE"](@"warzone/equip"))
 	WeaponPickupWarzoneSquareActionPC:setTTF("dinnext_regular")
 	WeaponPickupWarzoneSquareActionPC:setLetterSpacing(0.5)
-	WeaponPickupWarzoneSquareActionPC:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	WeaponPickupWarzoneSquareActionPC:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	WeaponPickupWarzoneSquareActionPC:setBackingType(1)
 	WeaponPickupWarzoneSquareActionPC:setBackingWidget(CoD.WeaponPickupPrompt_Backing, f1_arg0, f1_arg1)
 	WeaponPickupWarzoneSquareActionPC:setBackingXPadding(20)
@@ -28,12 +28,12 @@ CoD.WZWeaponPickupHoldButtonIcons.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	WeaponPickupWarzoneActionPC = LUI.UIText.new(0, 0, 45, 122, 0.5, 0.5, 36, 56)
 	WeaponPickupWarzoneActionPC:setRGB(0.79, 0.76, 0.58)
 	WeaponPickupWarzoneActionPC.__String_Reference = function()
-		WeaponPickupWarzoneActionPC:setText(Engine[0xF9F1239CFD921FE](CoD.HUDUtility.Get3DWeaponHintAlsoPickupHintTextWithPickUpOptions(f1_arg1)))
+		WeaponPickupWarzoneActionPC:setText(Engine[@"hash_4F9F1239CFD921FE"](CoD.HUDUtility.Get3DWeaponHintAlsoPickupHintTextWithPickUpOptions(f1_arg1)))
 	end
 	WeaponPickupWarzoneActionPC.__String_Reference()
 	WeaponPickupWarzoneActionPC:setTTF("dinnext_regular")
 	WeaponPickupWarzoneActionPC:setLetterSpacing(0.5)
-	WeaponPickupWarzoneActionPC:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	WeaponPickupWarzoneActionPC:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	WeaponPickupWarzoneActionPC:setBackingType(1)
 	WeaponPickupWarzoneActionPC:setBackingWidget(CoD.WeaponPickupPrompt_Backing, f1_arg0, f1_arg1)
 	WeaponPickupWarzoneActionPC:setBackingXPadding(20)
@@ -55,7 +55,7 @@ CoD.WZWeaponPickupHoldButtonIcons.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	end)
 	local f1_local4 = ButtonPrompt
 	local ButtonPromptTriangle = ButtonPrompt.subscribeToModel
-	local f1_local6 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local6 = Engine[@"getmodelforcontroller"](f1_arg1)
 	ButtonPromptTriangle(f1_local4, f1_local6.LastInput, function(f5_arg0)
 		f1_arg0:updateElementState(ButtonPrompt, {
 			name = "model_validation",
@@ -67,7 +67,7 @@ CoD.WZWeaponPickupHoldButtonIcons.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	end, false)
 	f1_local4 = ButtonPrompt
 	ButtonPromptTriangle = ButtonPrompt.subscribeToModel
-	f1_local6 = Engine[0x8DF2E5447F384B9]()
+	f1_local6 = Engine[@"getglobalmodel"]()
 	ButtonPromptTriangle(f1_local4, f1_local6["storageGlobalRoot.user_settings"], function(f6_arg0)
 		f1_arg0:updateElementState(ButtonPrompt, {
 			name = "model_validation",
@@ -102,7 +102,7 @@ CoD.WZWeaponPickupHoldButtonIcons.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	end)
 	f1_local6 = ButtonPromptTriangle
 	f1_local4 = ButtonPromptTriangle.subscribeToModel
-	local f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local4(f1_local6, f1_local7.LastInput, function(f10_arg0)
 		f1_arg0:updateElementState(ButtonPromptTriangle, {
 			name = "model_validation",
@@ -137,7 +137,7 @@ CoD.WZWeaponPickupHoldButtonIcons.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	f1_local7(f1_local8, f1_local9.heroHoldProgress, WeaponPickupWarzoneActionPC.__String_Reference)
 	f1_local8 = WeaponPickupWarzoneActionPC
 	f1_local7 = WeaponPickupWarzoneActionPC.subscribeToModel
-	f1_local9 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local9 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local7(f1_local8, f1_local9["hudItems.inventory.filledSlots"], WeaponPickupWarzoneActionPC.__String_Reference)
 	f1_local8 = f1_local6
 	f1_local7 = f1_local6.subscribeToModel
@@ -149,7 +149,7 @@ CoD.WZWeaponPickupHoldButtonIcons.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	f1_local7(f1_local8, f1_local9.heroHoldProgress, f1_local6.__String_Reference)
 	f1_local8 = f1_local6
 	f1_local7 = f1_local6.subscribeToModel
-	f1_local9 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local9 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local7(f1_local8, f1_local9["hudItems.inventory.filledSlots"], f1_local6.__String_Reference)
 	self:mergeStateConditions({
 		{
@@ -192,7 +192,7 @@ CoD.WZWeaponPickupHoldButtonIcons.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	end, false)
 	f1_local8 = self
 	f1_local7 = self.subscribeToModel
-	f1_local9 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local9 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local7(f1_local8, f1_local9["hudItems.inventory.filledSlots"], function(f16_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -204,7 +204,7 @@ CoD.WZWeaponPickupHoldButtonIcons.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	end, false)
 	f1_local8 = self
 	f1_local7 = self.subscribeToModel
-	f1_local9 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local9 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local7(f1_local8, f1_local9["hudItems.heroHoldProgress"], function(f17_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

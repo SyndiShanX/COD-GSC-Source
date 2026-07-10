@@ -10,41 +10,41 @@ CoD.KIllcamTeamPanelRight.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local BottomBackplateRight = LUI.UIImage.new(0, 0, 58, 444, 0, 0, 0, 68)
 	BottomBackplateRight:setAlpha(0)
-	BottomBackplateRight:setImage(RegisterImage(0xC87BEF5640733AB))
+	BottomBackplateRight:setImage(RegisterImage(@"hash_5C87BEF5640733AB"))
 	self:addElement(BottomBackplateRight)
 	self.BottomBackplateRight = BottomBackplateRight
 	local CallingCardHighlightRigh2 = LUI.UIImage.new(0, 0, 0, 386, 0, 0, 0, 68)
 	CallingCardHighlightRigh2:setRGB(ColorSet.Client_Self.r, ColorSet.Client_Self.g, ColorSet.Client_Self.b)
-	CallingCardHighlightRigh2:setImage(RegisterImage(0x84A15B7F82C942C))
+	CallingCardHighlightRigh2:setImage(RegisterImage(@"uie_ui_hud_highlight"))
 	self:addElement(CallingCardHighlightRigh2)
 	self.CallingCardHighlightRigh2 = CallingCardHighlightRigh2
 	local CallingCardGridPatternRight = LUI.UIImage.new(0, 0, 64, 450, 0, 0, 0, 68)
 	CallingCardGridPatternRight:setRGB(0.79, 0.61, 0.11)
-	CallingCardGridPatternRight:setImage(RegisterImage(0x684DCF03A2BF70F))
-	CallingCardGridPatternRight:setMaterial(LUI.UIImage.GetCachedMaterial(0xF755127C95CF5B6))
+	CallingCardGridPatternRight:setImage(RegisterImage(@"hash_1684DCF03A2BF70F"))
+	CallingCardGridPatternRight:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_F755127C95CF5B6"))
 	CallingCardGridPatternRight:setShaderVector(0, 3, 0, 0, 0)
 	self:addElement(CallingCardGridPatternRight)
 	self.CallingCardGridPatternRight = CallingCardGridPatternRight
 	local CallingcardHighlightRight1 = LUI.UIImage.new(0, 0, 8, 394, 0, 0, 0.5, 68.5)
 	CallingcardHighlightRight1:setRGB(ColorSet.Client_Self.r, ColorSet.Client_Self.g, ColorSet.Client_Self.b)
 	CallingcardHighlightRight1:setAlpha(0.35)
-	CallingcardHighlightRight1:setImage(RegisterImage(0x277059AB3BFAEFA))
-	CallingcardHighlightRight1:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	CallingcardHighlightRight1:setImage(RegisterImage(@"uie_ui_hud_highlight2"))
+	CallingcardHighlightRight1:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(CallingcardHighlightRight1)
 	self.CallingcardHighlightRight1 = CallingcardHighlightRight1
 	local CallingCardFlareRight = LUI.UIImage.new(0, 0, 61, 447, 0, 0, -0.5, 67.5)
 	CallingCardFlareRight:setRGB(ColorSet.EnemyOrange_Protanopia.r, ColorSet.EnemyOrange_Protanopia.g, ColorSet.EnemyOrange_Protanopia.b)
-	CallingCardFlareRight:setImage(RegisterImage(0x4C0D64C8709CA1C))
-	CallingCardFlareRight:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	CallingCardFlareRight:setImage(RegisterImage(@"hash_4C0D64C8709CA1C"))
+	CallingCardFlareRight:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(CallingCardFlareRight)
 	self.CallingCardFlareRight = CallingCardFlareRight
 	self:mergeStateConditions({
 		{
 			stateName = "Killcam",
 			condition = function(menu, element, event)
-				local f2_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2])
+				local f2_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_in_killcam"])
 				if not f2_local0 then
-					f2_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xA77EB9347BE4DFF])
+					f2_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_nemesis_killcam"])
 				end
 				return f2_local0
 			end,
@@ -52,26 +52,26 @@ CoD.KIllcamTeamPanelRight.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	})
 	local f1_local6 = self
 	local f1_local7 = self.subscribeToModel
-	local f1_local8 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local7(f1_local6, f1_local8["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2]], function(f3_arg0)
+	local f1_local8 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local7(f1_local6, f1_local8["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"]], function(f3_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f3_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"],
 		})
 	end, false)
 	f1_local6 = self
 	f1_local7 = self.subscribeToModel
-	f1_local8 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local7(f1_local6, f1_local8["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xA77EB9347BE4DFF]], function(f4_arg0)
+	f1_local8 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local7(f1_local6, f1_local8["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_nemesis_killcam"]], function(f4_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f4_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xA77EB9347BE4DFF],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_nemesis_killcam"],
 		})
 	end, false)
 	if PostLoadFunc then

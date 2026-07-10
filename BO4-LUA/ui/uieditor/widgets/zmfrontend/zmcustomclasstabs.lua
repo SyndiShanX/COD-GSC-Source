@@ -11,12 +11,12 @@ CoD.ZMCustomClassTabs.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	self.onlyChildrenFocusable = true
 	self.anyChildUsesUpdateState = true
 	local RB = CoD.BumperButtonWithKeyMouseText.new(f1_arg0, f1_arg1, 0.5, 0.5, 515, 715, 0, 0, 14, 48)
-	RB.GamepadPrompt:setText(Engine[0xF9F1239CFD921FE](0xBFED5292621DA9A))
+	RB.GamepadPrompt:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_5BFED5292621DA9A"))
 	self:addElement(RB)
 	self.RB = RB
 	local LB = CoD.BumperButtonWithKeyMouseText.new(f1_arg0, f1_arg1, 0.5, 0.5, -715, -515, 0, 0, 14, 48)
-	LB.GamepadPrompt:setText(Engine[0xF9F1239CFD921FE](0xBDCD5292604F434))
-	LB.GamepadPrompt:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
+	LB.GamepadPrompt:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_5BDCD5292604F434"))
+	LB.GamepadPrompt:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
 	self:addElement(LB)
 	self.LB = LB
 	local customClasssList = LUI.GridLayout.new(f1_arg0, f1_arg1, false, 0, 0, 0, 0, nil, nil, false, false, false, false)
@@ -25,7 +25,7 @@ CoD.ZMCustomClassTabs.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	customClasssList:setWidgetType(CoD.CustomClassListButton)
 	customClasssList:setHorizontalCount(6)
 	customClasssList:setSpacing(0)
-	customClasssList:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	customClasssList:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	customClasssList:setStaggeredIntroTime(50)
 	customClasssList:setDataSource("ChooseClassList")
 	customClasssList:registerEventHandler("list_active_changed", function(element, event)
@@ -33,7 +33,7 @@ CoD.ZMCustomClassTabs.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 		CoD.ZMLoadoutUtility.PreviewBubbleGumPack(element, f1_arg1, f1_arg0)
 		CoD.BaseUtility.SetMenuModelToElementModel(f1_arg0, element)
 		CoD.CACUtility.UpdateLockedStateForCustomClass(f1_arg0, f1_arg1)
-		UpdateButtonPromptState(f1_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x22361E23588705A])
+		UpdateButtonPromptState(f1_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_start"])
 		return f2_local0
 	end)
 	self.__on_menuOpened_customClasssList = function(f3_arg0, f3_arg1, f3_arg2, f3_arg3)

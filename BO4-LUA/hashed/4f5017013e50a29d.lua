@@ -10,7 +10,7 @@ CoD.WZAAR_MeritFlare.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	local flare = LUI.UIImage.new(0, 0, 0, 256, 0, 0, 0, 256)
 	flare:setRGB(1, 0.39, 0)
 	flare:setAlpha(0)
-	flare:setImage(RegisterImage(0xC4CCD81B90B0241))
+	flare:setImage(RegisterImage(@"uie_ui_menu_aar_levelup_flare"))
 	self:addElement(flare)
 	self.flare = flare
 	local flare2 = LUI.UIImage.new(0, 0, 0, 256, 0, 0, 0, 256)
@@ -18,8 +18,8 @@ CoD.WZAAR_MeritFlare.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	flare2:setAlpha(0)
 	flare2:setZRot(180)
 	flare2:setScale(0.5, 0.5)
-	flare2:setImage(RegisterImage(0xC4CCD81B90B0241))
-	flare2:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	flare2:setImage(RegisterImage(@"uie_ui_menu_aar_levelup_flare"))
+	flare2:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(flare2)
 	self.flare2 = flare2
 	if PostLoadFunc then

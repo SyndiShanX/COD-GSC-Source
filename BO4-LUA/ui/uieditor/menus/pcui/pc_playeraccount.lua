@@ -32,11 +32,11 @@ LUI.createMenu.PC_PlayerAccount = function(f1_arg0, f1_arg1)
 	self:addElement(PlayerAccountTabs)
 	self.PlayerAccountTabs = PlayerAccountTabs
 	local PlayerAccountFrame = CoD.GenericMenuFrame.new(f1_local1, f1_arg0, 0.5, 0.5, -960, 960, 0, 1, 0, 0)
-	PlayerAccountFrame.CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(0xB828992E638B17B))
+	PlayerAccountFrame.CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(@"hash_B828992E638B17B"))
 	PlayerAccountFrame:subscribeToGlobalModel(f1_arg0, "LobbyRoot", "lobbyTitle", function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
-			PlayerAccountFrame.CommonHeader.subtitle.subtitle:setText(Engine[0xF9F1239CFD921FE](f3_local0))
+			PlayerAccountFrame.CommonHeader.subtitle.subtitle:setText(Engine[@"hash_4F9F1239CFD921FE"](f3_local0))
 		end
 	end)
 	self:addElement(PlayerAccountFrame)
@@ -52,7 +52,7 @@ LUI.createMenu.PC_PlayerAccount = function(f1_arg0, f1_arg1)
 			TabFrame:changeFrameWidget(f4_local0)
 		end
 	end)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], "ui_contextual_1", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], "ui_contextual_1", function(element, menu, controller, model)
 		if CoD.StartMenuUtility.CanChangeWZStatsFilter(menu, self.TabFrame, controller) then
 			CoD.PlayerStatsUtility.UpdateWZStatsFilter(controller)
 			return true
@@ -60,17 +60,17 @@ LUI.createMenu.PC_PlayerAccount = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if CoD.StartMenuUtility.CanChangeWZStatsFilter(menu, self.TabFrame, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x0, nil, "ui_contextual_1")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"hash_0", nil, "ui_contextual_1")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		GoBack(self, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 		return true
 	end, false)
 	PlayerAccountTabs.id = "PlayerAccountTabs"

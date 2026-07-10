@@ -62,7 +62,7 @@ CoD.AttachmentUpgradeSlotContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	end)
 	local f1_local3 = AttachmentSlot
 	local MutuallyExclusiveIcon = AttachmentSlot.subscribeToModel
-	local f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
 	MutuallyExclusiveIcon(f1_local3, f1_local5["CustomClassList.equippedItemsChanged"], function(f8_arg0)
 		f1_arg0:updateElementState(AttachmentSlot, {
 			name = "model_validation",
@@ -84,7 +84,7 @@ CoD.AttachmentUpgradeSlotContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	AttachmentSlot:linkToElementModel(self, "displayNameShort", true, function(model)
 		local f11_local0 = model:get()
 		if f11_local0 ~= nil then
-			AttachmentSlot.AttachmentName.TextBox:setText(Engine[0xF9F1239CFD921FE](f11_local0))
+			AttachmentSlot.AttachmentName.TextBox:setText(Engine[@"hash_4F9F1239CFD921FE"](f11_local0))
 		end
 	end)
 	self:addElement(AttachmentSlot)
@@ -99,7 +99,7 @@ CoD.AttachmentUpgradeSlotContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 		},
 	})
 	MutuallyExclusiveIcon:setRGB(1, 0.41, 0)
-	MutuallyExclusiveIcon.image:setImage(RegisterImage(0x11D4E13C821CCE3))
+	MutuallyExclusiveIcon.image:setImage(RegisterImage(@"hash_111D4E13C821CCE3"))
 	MutuallyExclusiveIcon:linkToElementModel(self, nil, false, function(model)
 		MutuallyExclusiveIcon:setModel(model, f1_arg1)
 	end)
@@ -124,7 +124,7 @@ CoD.AttachmentUpgradeSlotContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	end)
 	f1_local5 = self
 	f1_local3 = self.subscribeToModel
-	local f1_local6 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local6 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local3(f1_local5, f1_local6["CustomClassList.equippedItemsChanged"], function(f16_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -183,7 +183,7 @@ CoD.AttachmentUpgradeSlotContainer.__clipsPerState = {
 			f22_arg0.UpgradeArrow:setZoom(0)
 			f22_arg0.clipFinished(f22_arg0.UpgradeArrow)
 			local f22_local0 = function(f23_arg0)
-				f22_arg0.AttachmentSlot:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f22_arg0.AttachmentSlot:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f22_arg0.AttachmentSlot:setZoom(20)
 				f22_arg0.AttachmentSlot:setScale(1.05, 1.05)
 				f22_arg0.AttachmentSlot:registerEventHandler("interrupted_keyframe", f22_arg0.clipInterrupted)
@@ -201,7 +201,7 @@ CoD.AttachmentUpgradeSlotContainer.__clipsPerState = {
 			f24_arg0.UpgradeArrow:setZoom(0)
 			f24_arg0.clipFinished(f24_arg0.UpgradeArrow)
 			local f24_local0 = function(f25_arg0)
-				f24_arg0.AttachmentSlot:beginAnimation(200, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f24_arg0.AttachmentSlot:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_out"])
 				f24_arg0.AttachmentSlot:setZoom(0)
 				f24_arg0.AttachmentSlot:setScale(1, 1)
 				f24_arg0.AttachmentSlot:registerEventHandler("interrupted_keyframe", f24_arg0.clipInterrupted)
@@ -230,7 +230,7 @@ CoD.AttachmentUpgradeSlotContainer.__clipsPerState = {
 			f28_arg0:__resetProperties()
 			f28_arg0:setupElementClipCounter(1)
 			local f28_local0 = function(f29_arg0)
-				f28_arg0.AttachmentSlot:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f28_arg0.AttachmentSlot:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f28_arg0.AttachmentSlot:setZoom(20)
 				f28_arg0.AttachmentSlot:setScale(1.05, 1.05)
 				f28_arg0.AttachmentSlot:registerEventHandler("interrupted_keyframe", f28_arg0.clipInterrupted)
@@ -245,7 +245,7 @@ CoD.AttachmentUpgradeSlotContainer.__clipsPerState = {
 			f30_arg0:__resetProperties()
 			f30_arg0:setupElementClipCounter(1)
 			local f30_local0 = function(f31_arg0)
-				f30_arg0.AttachmentSlot:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f30_arg0.AttachmentSlot:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f30_arg0.AttachmentSlot:setZoom(0)
 				f30_arg0.AttachmentSlot:setScale(1, 1)
 				f30_arg0.AttachmentSlot:registerEventHandler("interrupted_keyframe", f30_arg0.clipInterrupted)

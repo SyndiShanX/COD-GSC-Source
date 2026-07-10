@@ -35,22 +35,22 @@ CoD.ZMInvQuests.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_a
 	self:addElement(Quest4)
 	self.Quest4 = Quest4
 	local CornerTop = LUI.UIImage.new(1, 1, -41, 4, 0, 0, -4, 41)
-	CornerTop:setImage(RegisterImage(0x6D44FBC3D4EC400))
+	CornerTop:setImage(RegisterImage(@"uie_zm_hud_inventory_framecorner"))
 	self:addElement(CornerTop)
 	self.CornerTop = CornerTop
 	local CornerBot = LUI.UIImage.new(1, 1, -41, 4, 0, 0, 302, 347)
 	CornerBot:setXRot(180)
-	CornerBot:setImage(RegisterImage(0x6D44FBC3D4EC400))
+	CornerBot:setImage(RegisterImage(@"uie_zm_hud_inventory_framecorner"))
 	self:addElement(CornerBot)
 	self.CornerBot = CornerBot
 	local DividerTop = LUI.UIImage.new(1, 1, -35, 35, 0, 0, 121, 135)
 	DividerTop:setZRot(90)
-	DividerTop:setImage(RegisterImage(0xE7AE208C672D6E3))
+	DividerTop:setImage(RegisterImage(@"uie_zm_hud_inventory_framedivider_horizontal"))
 	self:addElement(DividerTop)
 	self.DividerTop = DividerTop
 	local DividerBot = LUI.UIImage.new(1, 1, -35, 35, 0, 0, 208, 222)
 	DividerBot:setZRot(90)
-	DividerBot:setImage(RegisterImage(0xE7AE208C672D6E3))
+	DividerBot:setImage(RegisterImage(@"uie_zm_hud_inventory_framedivider_horizontal"))
 	self:addElement(DividerBot)
 	self.DividerBot = DividerBot
 	self:mergeStateConditions({

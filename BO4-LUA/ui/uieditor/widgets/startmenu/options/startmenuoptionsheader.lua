@@ -16,7 +16,7 @@ CoD.StartMenuOptionsHeader.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	local Gradient = LUI.UIImage.new(0, 0, 0, 1930, 0, 0, 0, 80)
 	Gradient:setRGB(0.63, 0.57, 0.2)
 	Gradient:setAlpha(0)
-	Gradient:setImage(RegisterImage(0x61F4A521D2954B6))
+	Gradient:setImage(RegisterImage(@"hash_61F4A521D2954B6"))
 	self:addElement(Gradient)
 	self.Gradient = Gradient
 	local Underline = LUI.UIImage.new(0, 1, 0, 0, 1, 1, -4, 0)
@@ -25,8 +25,8 @@ CoD.StartMenuOptionsHeader.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self.Underline = Underline
 	local UnderlineTexture = LUI.UIImage.new(0, 1, 0, 0, 1, 1, -2, 0)
 	UnderlineTexture:setRGB(0.15, 0.15, 0.15)
-	UnderlineTexture:setImage(RegisterImage(0x1FC25912CF54567))
-	UnderlineTexture:setMaterial(LUI.UIImage.GetCachedMaterial(0x655565C7B387234))
+	UnderlineTexture:setImage(RegisterImage(@"uie_ui_menu_director_grain_bg01"))
+	UnderlineTexture:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_multiply"))
 	self:addElement(UnderlineTexture)
 	self.UnderlineTexture = UnderlineTexture
 	local Frame = CoD.StartMenuOptionsMainFrame.new(f1_arg0, f1_arg1, 0, 1, 0, 0, 0, 0, 0, 80)
@@ -51,16 +51,16 @@ CoD.StartMenuOptionsHeader.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self.Corner = Corner
 	local HeaderText = LUI.UIText.new(0.5, 0.5, -880, -380, 0, 0, 25, 75)
 	HeaderText:setRGB(0.63, 0.57, 0.2)
-	HeaderText:setText(Engine[0xF9F1239CFD921FE](0x93E719493E9E18F))
+	HeaderText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	HeaderText:setTTF("ttmussels_regular")
 	HeaderText:setLetterSpacing(10)
-	HeaderText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	HeaderText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(HeaderText)
 	self.HeaderText = HeaderText
 	local Image = LUI.UIImage.new(0.5, 0.5, -958, -890, 0, 0, 29, 71)
 	Image:setRGB(0.63, 0.57, 0.2)
 	Image:setAlpha(0.6)
-	Image:setImage(RegisterImage(0xC2359ED7F4961BF))
+	Image:setImage(RegisterImage(@"uie_ui_menu_director_top_left_dot_pattern"))
 	self:addElement(Image)
 	self.Image = Image
 	self:registerEventHandler("menu_loaded", function(self, event)
@@ -77,19 +77,19 @@ CoD.StartMenuOptionsHeader.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 		end
 		return f2_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		GoBack(self, controller)
 		UpdateGamerprofile(self, element, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 		return true
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], nil, function(element, menu, controller, model)
 		CoD.OptionsUtility.ResetPlayerSettingsGroupListToDefault(controller, self.OptionGroups)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x5D33EEAEB171341, Enum[0xBEBDBAEEB3ECCCA][0x2919C98A7A845F0] | 750 << Enum[0xBEBDBAEEB3ECCCA][0x76ADD225D738C93], nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"menu/all_defaults", Enum[@"luibuttonpromptflags"][@"hash_72919C98A7A845F0"] | 750 << Enum[@"luibuttonpromptflags"][@"hash_176ADD225D738C93"], nil)
 		return true
 	end, false)
 	self:subscribeToGlobalModel(f1_arg1, "PerController", "PlayerSettingsUpdate", function(model)

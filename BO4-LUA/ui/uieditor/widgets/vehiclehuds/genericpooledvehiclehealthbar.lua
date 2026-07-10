@@ -8,8 +8,8 @@ CoD.genericPooledVehicleHealthBar.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	self.soundSet = "default"
 	local fullBacking = LUI.UIImage.new(0, 0, 0, 54, 0, 0, 0, 174)
 	fullBacking:setRGB(0.15, 0.15, 0.15)
-	fullBacking:setImage(RegisterImage(0xC71371FF96104D6))
-	fullBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0xE992BD5A540E2D))
+	fullBacking:setImage(RegisterImage(@"uie_hud_minimap_health_meter_mg"))
+	fullBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_delta_normal"))
 	fullBacking:setShaderVector(0, 0, 1, 0, 0)
 	fullBacking:setShaderVector(1, 0, 0, 0, 0)
 	fullBacking:setShaderVector(2, 0, 1, 0, 0)
@@ -19,8 +19,8 @@ CoD.genericPooledVehicleHealthBar.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	self.fullBacking = fullBacking
 	local currentPool = LUI.UIImage.new(0, 0, 0, 54, 0, 0, 0, 174)
 	currentPool:setRGB(0.53, 0.53, 0.53)
-	currentPool:setImage(RegisterImage(0xC82371FF96F7809))
-	currentPool:setMaterial(LUI.UIImage.GetCachedMaterial(0xE992BD5A540E2D))
+	currentPool:setImage(RegisterImage(@"uie_hud_minimap_health_meter_fg"))
+	currentPool:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_delta_normal"))
 	currentPool:setShaderVector(0, 0, 1, 0, 0)
 	currentPool:setShaderVector(1, 0, 0, 0, 0)
 	currentPool:setShaderVector(2, 0, 1, 0, 0)
@@ -29,8 +29,8 @@ CoD.genericPooledVehicleHealthBar.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	self:addElement(currentPool)
 	self.currentPool = currentPool
 	local currentDamage = LUI.UIImage.new(0, 0, 0, 54, 0, 0, 0, 174)
-	currentDamage:setImage(RegisterImage(0xC82371FF96F7809))
-	currentDamage:setMaterial(LUI.UIImage.GetCachedMaterial(0xE992BD5A540E2D))
+	currentDamage:setImage(RegisterImage(@"uie_hud_minimap_health_meter_fg"))
+	currentDamage:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_delta_normal"))
 	currentDamage:setShaderVector(0, 0, 1, 0, 0)
 	currentDamage:setShaderVector(1, 0, 0, 0, 0)
 	currentDamage:setShaderVector(2, 0, 1, 0, 0)

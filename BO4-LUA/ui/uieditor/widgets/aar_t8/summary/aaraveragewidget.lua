@@ -14,8 +14,8 @@ CoD.AARAverageWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	GametypeLabel:setAlpha(0.3)
 	GametypeLabel:setTTF("ttmussels_regular")
 	GametypeLabel:setLetterSpacing(4)
-	GametypeLabel:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	GametypeLabel:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	GametypeLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	GametypeLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	GametypeLabel:linkToElementModel(self, "gametype", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -30,11 +30,11 @@ CoD.AARAverageWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	local DamageLabel = LUI.UIText.new(0, 0, 530, 1030, 0, 0, 9, 30)
 	DamageLabel:setRGB(ColorSet.PlayerYellow.r, ColorSet.PlayerYellow.g, ColorSet.PlayerYellow.b)
 	DamageLabel:setAlpha(0.3)
-	DamageLabel:setText(Engine[0xF9F1239CFD921FE](0x73D09C07F4B5680))
+	DamageLabel:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_573D09C07F4B5680"))
 	DamageLabel:setTTF("ttmussels_regular")
 	DamageLabel:setLetterSpacing(4)
-	DamageLabel:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	DamageLabel:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	DamageLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	DamageLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(DamageLabel)
 	self.DamageLabel = DamageLabel
 	local VerticalListSpacer = CoD.VerticalListSpacer.new(f1_arg0, f1_arg1, 0, 0, 1030, 1050, 0, 0, 0, 38)
@@ -45,8 +45,8 @@ CoD.AARAverageWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	Average:setAlpha(0.5)
 	Average:setTTF("0arame_mono_stencil")
 	Average:setLetterSpacing(1)
-	Average:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Average:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Average:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Average:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	Average:linkToElementModel(self, "averageStat", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -65,7 +65,7 @@ CoD.AARAverageWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	})
 	local f1_local6 = self
 	local f1_local7 = self.subscribeToModel
-	local f1_local8 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local8 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local7(f1_local6, f1_local8["AAR.activeStat"], function(f5_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

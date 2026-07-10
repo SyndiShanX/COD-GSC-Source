@@ -12,7 +12,7 @@ CoD.WZCollapseTimerInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local blur = LUI.UIImage.new(0, 0, -6, 145, 0, 0, 346.5, 384.5)
 	blur:setAlpha(0)
-	blur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	blur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	blur:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(blur)
 	self.blur = blur
@@ -23,8 +23,8 @@ CoD.WZCollapseTimerInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.bg = bg
 	local led = LUI.UIImage.new(0, 0, -9, 283, 0, 0, 344.5, 384.5)
 	led:setAlpha(0)
-	led:setImage(RegisterImage(0xC07F7432F86DA83))
-	led:setMaterial(LUI.UIImage.GetCachedMaterial(0xE992BD5A540E2D))
+	led:setImage(RegisterImage(@"uie_wz_hud_map_danger_led"))
+	led:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_delta_normal"))
 	led:setShaderVector(0, 0, 0.5, 0, 0)
 	led:setShaderVector(1, 0, 0, 0, 0)
 	led:setShaderVector(2, 0, 1, 0, 0)
@@ -35,8 +35,8 @@ CoD.WZCollapseTimerInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	local border = LUI.UIImage.new(0, 0, -12, 151, 0, 0, 342, 388)
 	border:setRGB(0.07, 0.07, 0.07)
 	border:setAlpha(0)
-	border:setImage(RegisterImage(0xA3C76B80B69874D))
-	border:setMaterial(LUI.UIImage.GetCachedMaterial(0x44484DDFAF5C093))
+	border:setImage(RegisterImage(@"uie_ui_hud_wz_hud_core_chamfer_border"))
+	border:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_normal"))
 	border:setShaderVector(0, 0, 0, 0, 0)
 	border:setupNineSliceShader(18, 24)
 	self:addElement(border)
@@ -44,8 +44,8 @@ CoD.WZCollapseTimerInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	local meterBacking = LUI.UIImage.new(0, 0, 4, 271, 0, 0, 357, 373)
 	meterBacking:setRGB(0, 0, 0)
 	meterBacking:setAlpha(0)
-	meterBacking:setImage(RegisterImage(0x3674F9B5EAEF4ED))
-	meterBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0xE125638BF94665F))
+	meterBacking:setImage(RegisterImage(@"uie_wz_hud_map_danger_bar_empty"))
+	meterBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_feather_edges"))
 	meterBacking:setShaderVector(0, 0.01, 0.02, 0.01, 0.02)
 	self:addElement(meterBacking)
 	self.meterBacking = meterBacking
@@ -53,8 +53,8 @@ CoD.WZCollapseTimerInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	SplashBig:setRGB(0, 0, 0)
 	SplashBig:setAlpha(0)
 	SplashBig:setScale(2, 1.2)
-	SplashBig:setImage(RegisterImage(0xEDC08FCAC068A90))
-	SplashBig:setMaterial(LUI.UIImage.GetCachedMaterial(0xE992BD5A540E2D))
+	SplashBig:setImage(RegisterImage(@"uie_ui_hud_wz_hud_core_timer_backer_splash"))
+	SplashBig:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_delta_normal"))
 	SplashBig:setShaderVector(0, 0, 1, 0, 0)
 	SplashBig:setShaderVector(1, 0.25, 0.25, 0, 0)
 	SplashBig:setShaderVector(2, 0, 1, 0, 0)
@@ -65,11 +65,11 @@ CoD.WZCollapseTimerInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	local Timer = LUI.UIText.new(0.5, 0.5, -35, 235, 0, 0, 313, 361)
 	Timer:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	Timer:setTTF("0arame_mono_stencil")
-	Timer:setMaterial(LUI.UIImage.GetCachedMaterial(0x90D57B1E92D39D7))
+	Timer:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_90D57B1E92D39D7"))
 	Timer:setShaderVector(0, 1, 0, 0, 0)
 	Timer:setShaderVector(1, 1, 0, 0, 0)
 	Timer:setShaderVector(2, 1, 1, 1, 0.2)
-	Timer:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	Timer:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	Timer:subscribeToGlobalModel(f1_arg1, "BombTimer", "bomb0.timeRemainingMilliSec", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -82,11 +82,11 @@ CoD.WZCollapseTimerInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	TimerDownButNotOut:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	TimerDownButNotOut:setAlpha(0)
 	TimerDownButNotOut:setTTF("0arame_mono_stencil")
-	TimerDownButNotOut:setMaterial(LUI.UIImage.GetCachedMaterial(0x90D57B1E92D39D7))
+	TimerDownButNotOut:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_90D57B1E92D39D7"))
 	TimerDownButNotOut:setShaderVector(0, 1, 0, 0, 0)
 	TimerDownButNotOut:setShaderVector(1, 1, 0, 0, 0)
 	TimerDownButNotOut:setShaderVector(2, 1, 1, 1, 0.2)
-	TimerDownButNotOut:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	TimerDownButNotOut:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	TimerDownButNotOut:setEndTimerUsePartialSeconds(false)
 	TimerDownButNotOut:subscribeToGlobalModel(f1_arg1, "WarzoneGlobal", "collapse", function(model)
 		local f3_local0 = model:get()
@@ -97,13 +97,13 @@ CoD.WZCollapseTimerInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self:addElement(TimerDownButNotOut)
 	self.TimerDownButNotOut = TimerDownButNotOut
 	local Icon = LUI.UIImage.new(0.5, 0.5, -83, -43, 0, 0, 317, 357)
-	Icon:setImage(RegisterImage(0x7CBAC810FA58FD7))
+	Icon:setImage(RegisterImage(@"uie_ui_hud_wz_hud_core_timer_icon"))
 	self:addElement(Icon)
 	self.Icon = Icon
 	local notch = LUI.UIImage.new(0, 0, 4, 12, 0, 0, 359, 371)
 	notch:setAlpha(0)
-	notch:setImage(RegisterImage(0xF28809D529EB156))
-	notch:setMaterial(LUI.UIImage.GetCachedMaterial(0xF755127C95CF5B6))
+	notch:setImage(RegisterImage(@"hash_3F28809D529EB156"))
+	notch:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_F755127C95CF5B6"))
 	notch:setShaderVector(0, 2, 0, 0, 0)
 	self:addElement(notch)
 	self.notch = notch
@@ -113,8 +113,8 @@ CoD.WZCollapseTimerInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	local highlight2 = LUI.UIImage.new(0.5, 0.5, -153, 153, 0, 0, 200.5, 485.5)
 	highlight2:setRGB(0, 0.1, 1)
 	highlight2:setScale(0, 0)
-	highlight2:setImage(RegisterImage(0x4A1176ABBF1AB4C))
-	highlight2:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	highlight2:setImage(RegisterImage(@"uie_ui_hud_notifications_glow"))
+	highlight2:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	highlight2:setShaderVector(0, 3, 0, 0, 0)
 	self:addElement(highlight2)
 	self.highlight2 = highlight2
@@ -123,23 +123,23 @@ CoD.WZCollapseTimerInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	highlight:setAlpha(0)
 	highlight:setZRot(360)
 	highlight:setScale(1.96, 0.4)
-	highlight:setImage(RegisterImage(0x4A1176ABBF1AB4C))
-	highlight:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	highlight:setImage(RegisterImage(@"uie_ui_hud_notifications_glow"))
+	highlight:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	highlight:setShaderVector(0, 3, 0, 0, 0)
 	self:addElement(highlight)
 	self.highlight = highlight
 	local Message = LUI.UIText.new(0, 0, -2, 206, 0, 0, 352, 379)
 	Message:setRGB(0, 0.56, 1)
 	Message:setAlpha(0)
-	Message:setText(Engine[0xF9F1239CFD921FE](0xD22DE36990C6974))
+	Message:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_5D22DE36990C6974"))
 	Message:setTTF("ttmussels_regular")
-	Message:setMaterial(LUI.UIImage.GetCachedMaterial(0x90D57B1E92D39D7))
+	Message:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_90D57B1E92D39D7"))
 	Message:setShaderVector(0, 1.02, 0, 0, 0)
 	Message:setShaderVector(1, -0.23, 0, 0, 0)
 	Message:setShaderVector(2, 0, 0, 1, 1)
 	Message:setLetterSpacing(2)
-	Message:setAlignment(Engine[0x7F8853DC3581AA4](Enum[0x7A5123B654282D2][0x58C8A85F2048829]))
-	Message:setAlignment(Engine[0x7F8853DC3581AA4](Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7]))
+	Message:setAlignment(Engine[@"hash_67F8853DC3581AA4"](Enum[@"luialignment"][@"lui_alignment_left"]))
+	Message:setAlignment(Engine[@"hash_67F8853DC3581AA4"](Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"]))
 	self:addElement(Message)
 	self.Message = Message
 	local EMP = CoD.Warzone_EMP_Status.new(f1_arg0, f1_arg1, 0, 0, -20, 296, 0, 0, 328.5, 416.5)
@@ -149,7 +149,7 @@ CoD.WZCollapseTimerInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 		{
 			stateName = "DownButNotOut",
 			condition = function(menu, element, event)
-				local f4_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x6FFF566DCC09BBD])
+				local f4_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_spectating_client"])
 				if f4_local0 then
 					f4_local0 = IsGametypeSettingsValue("deathCircleRespawn", 1)
 					if f4_local0 then
@@ -184,20 +184,20 @@ CoD.WZCollapseTimerInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 		{
 			stateName = "InfiltrationVehicle",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsModelValueEqualTo(f1_arg1, "hudItems.infiltrationVehicle", 1) and Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xADC477DDE486DD7])
+				return CoD.ModelUtility.IsModelValueEqualTo(f1_arg1, "hudItems.infiltrationVehicle", 1) and Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_hud_visible"])
 			end,
 		},
 	})
 	local f1_local16 = self
 	local f1_local17 = self.subscribeToModel
-	local f1_local18 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local17(f1_local16, f1_local18["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x6FFF566DCC09BBD]], function(f9_arg0)
+	local f1_local18 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local17(f1_local16, f1_local18["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_spectating_client"]], function(f9_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f9_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x6FFF566DCC09BBD],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_spectating_client"],
 		})
 	end, false)
 	self:appendEventHandler("deadSpectator.playerIndex", function(f10_arg0, f10_arg1)
@@ -206,7 +206,7 @@ CoD.WZCollapseTimerInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	end)
 	f1_local16 = self
 	f1_local17 = self.subscribeToModel
-	f1_local18 = Engine[0x8DF2E5447F384B9]()
+	f1_local18 = Engine[@"getglobalmodel"]()
 	f1_local17(f1_local16, f1_local18["hudItems.warzone.reinsertionPassengerCount"], function(f11_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -218,7 +218,7 @@ CoD.WZCollapseTimerInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	end, false)
 	f1_local16 = self
 	f1_local17 = self.subscribeToModel
-	f1_local18 = Engine[0x8DF2E5447F384B9]()
+	f1_local18 = Engine[@"getglobalmodel"]()
 	f1_local17(f1_local16, f1_local18["hudItems.warzone.collapseCount"], function(f12_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -230,7 +230,7 @@ CoD.WZCollapseTimerInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	end, false)
 	f1_local16 = self
 	f1_local17 = self.subscribeToModel
-	f1_local18 = Engine[0x8DF2E5447F384B9]()
+	f1_local18 = Engine[@"getglobalmodel"]()
 	f1_local17(f1_local16, f1_local18["hudItems.warzone.reinsertionIndex"], function(f13_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -242,7 +242,7 @@ CoD.WZCollapseTimerInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	end, false)
 	f1_local16 = self
 	f1_local17 = self.subscribeToModel
-	f1_local18 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local18 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local17(f1_local16, f1_local18["hudItems.playerCanRedeploy"], function(f14_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -254,7 +254,7 @@ CoD.WZCollapseTimerInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	end, false)
 	f1_local16 = self
 	f1_local17 = self.subscribeToModel
-	f1_local18 = Engine[0x8DF2E5447F384B9]()
+	f1_local18 = Engine[@"getglobalmodel"]()
 	f1_local17(f1_local16, f1_local18["bombTimer.bomb0.timeRemainingMilliSec"], function(f15_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -278,7 +278,7 @@ CoD.WZCollapseTimerInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	end, false)
 	f1_local16 = self
 	f1_local17 = self.subscribeToModel
-	f1_local18 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local18 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local17(f1_local16, f1_local18["hudItems.infiltrationVehicle"], function(f17_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -290,14 +290,14 @@ CoD.WZCollapseTimerInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	end, false)
 	f1_local16 = self
 	f1_local17 = self.subscribeToModel
-	f1_local18 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local17(f1_local16, f1_local18["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xADC477DDE486DD7]], function(f18_arg0)
+	f1_local18 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local17(f1_local16, f1_local18["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_hud_visible"]], function(f18_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f18_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xADC477DDE486DD7],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_hud_visible"],
 		})
 	end, false)
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)
@@ -343,7 +343,7 @@ CoD.WZCollapseTimerInternal.__resetProperties = function(f19_arg0)
 	f19_arg0.SplashBig:setLeftRight(0.5, 0.5, -82, 82)
 	f19_arg0.SplashBig:setAlpha(0)
 	f19_arg0.SplashBig:setScale(2, 1.2)
-	f19_arg0.SplashBig:setMaterial(LUI.UIImage.GetCachedMaterial(0xE992BD5A540E2D))
+	f19_arg0.SplashBig:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_delta_normal"))
 	f19_arg0.SplashBig:setShaderVector(0, 0, 1, 0, 0)
 	f19_arg0.SplashBig:setShaderVector(1, 0.25, 0.25, 0, 0)
 	f19_arg0.SplashBig:setShaderVector(2, 0, 1, 0, 0)
@@ -465,7 +465,7 @@ CoD.WZCollapseTimerInternal.__clipsPerState = {
 			f21_arg0.SplashBig:setLeftRight(0.5, 0.5, -82, 82)
 			f21_arg0.SplashBig:setAlpha(1)
 			f21_arg0.SplashBig:setScale(2, 1.2)
-			f21_arg0.SplashBig:setMaterial(LUI.UIImage.GetCachedMaterial(0xE992BD5A540E2D))
+			f21_arg0.SplashBig:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_delta_normal"))
 			f21_arg0.SplashBig:setShaderVector(0, 0.5, 0.5, 0, 0)
 			f21_arg0.SplashBig:setShaderVector(1, 0.5, 0.5, 0, 0)
 			f21_arg0.SplashBig:setShaderVector(2, 0, 1, 0, 0)

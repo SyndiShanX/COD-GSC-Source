@@ -24,7 +24,7 @@ CoD.DirectorSelectSafeAreaContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	})
 	local f1_local2 = CRMFeatureList
 	local PartyList = CRMFeatureList.subscribeToModel
-	local TrialPrompt = Engine[0x8DF2E5447F384B9]()
+	local TrialPrompt = Engine[@"getglobalmodel"]()
 	PartyList(f1_local2, TrialPrompt["lobbyRoot.lobbyNav"], function(f3_arg0)
 		f1_arg0:updateElementState(CRMFeatureList, {
 			name = "model_validation",
@@ -36,7 +36,7 @@ CoD.DirectorSelectSafeAreaContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	end, false)
 	f1_local2 = CRMFeatureList
 	PartyList = CRMFeatureList.subscribeToModel
-	TrialPrompt = Engine[0x8DF2E5447F384B9]()
+	TrialPrompt = Engine[@"getglobalmodel"]()
 	PartyList(f1_local2, TrialPrompt["liveEventViewer.stream"], function(f4_arg0)
 		f1_arg0:updateElementState(CRMFeatureList, {
 			name = "model_validation",
@@ -48,27 +48,27 @@ CoD.DirectorSelectSafeAreaContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	end, false)
 	f1_local2 = CRMFeatureList
 	PartyList = CRMFeatureList.subscribeToModel
-	TrialPrompt = Engine[0x8DF2E5447F384B9]()
+	TrialPrompt = Engine[@"getglobalmodel"]()
 	PartyList(f1_local2, TrialPrompt["lobbyRoot.lobbyNav"], function(f5_arg0, f5_arg1)
-		CoD.Menu.UpdateButtonShownState(f5_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f5_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	f1_local2 = CRMFeatureList
 	PartyList = CRMFeatureList.subscribeToModel
-	TrialPrompt = Engine[0x8DF2E5447F384B9]()
+	TrialPrompt = Engine[@"getglobalmodel"]()
 	PartyList(f1_local2, TrialPrompt["lobbyRoot.gameClient.update"], function(f6_arg0, f6_arg1)
-		CoD.Menu.UpdateButtonShownState(f6_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f6_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	f1_local2 = CRMFeatureList
 	PartyList = CRMFeatureList.subscribeToModel
-	TrialPrompt = Engine[0x8DF2E5447F384B9]()
+	TrialPrompt = Engine[@"getglobalmodel"]()
 	PartyList(f1_local2, TrialPrompt["lobbyRoot.privateClient.update"], function(f7_arg0, f7_arg1)
-		CoD.Menu.UpdateButtonShownState(f7_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f7_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	CRMFeatureList:linkToElementModel(CRMFeatureList, "showForAllClients", true, function(model, f8_arg1)
-		CoD.Menu.UpdateButtonShownState(f8_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f8_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	CRMFeatureList:linkToElementModel(CRMFeatureList, "actionString", true, function(model, f9_arg1)
-		CoD.Menu.UpdateButtonShownState(f9_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f9_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	CRMFeatureList:registerEventHandler("gain_focus", function(element, event)
 		local f10_local0 = nil
@@ -77,10 +77,10 @@ CoD.DirectorSelectSafeAreaContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 		elseif element.super.gainFocus then
 			f10_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f10_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(CRMFeatureList, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(CRMFeatureList, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if CoD.DirectorUtility.ShowForAllClients(element, controller) and IsPC() then
 			ProcessListAction(self, element, controller, menu)
 			return true
@@ -106,25 +106,25 @@ CoD.DirectorSelectSafeAreaContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 		end
 	end, function(element, menu, controller)
 		if CoD.DirectorUtility.ShowForAllClients(element, controller) and IsPC() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 			return false
 		elseif CoD.DirectorUtility.ShowForAllClients(element, controller) and CoD.ModelUtility.IsSelfModelPathValueEqualTo(element, controller, "actionString", "registration") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x977A022B8323362, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_2977A022B8323362", nil, "ui_confirm")
 			return true
 		elseif CoD.DirectorUtility.ShowForAllClients(element, controller) and CoD.ModelUtility.IsSelfModelPathValueEqualTo(element, controller, "actionString", "store") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x191CDDA584B4408, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_4191CDDA584B4408", nil, "ui_confirm")
 			return true
 		elseif CoD.DirectorUtility.ShowForAllClients(element, controller) and CoD.ModelUtility.IsSelfModelPathValueEqualTo(element, controller, "actionString", "motd") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x2DEBC821FE9A08B, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/motd", nil, "ui_confirm")
 			return true
 		elseif CoD.ModelUtility.IsSelfModelPathValueEqualTo(element, controller, "actionString", "vod") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		elseif CoD.DirectorUtility.ShowForAllClients(element, controller) and CoD.ModelUtility.IsSelfModelPathValueEqualTo(element, controller, "actionString", "liveevent") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x2A5ABE3F6C75E74, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_72A5ABE3F6C75E74", nil, "ui_confirm")
 			return true
 		elseif CoD.DirectorUtility.ShowForAllClients(element, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false
@@ -177,7 +177,7 @@ CoD.DirectorSelectSafeAreaContainer.__clipsPerState = {
 			f16_arg0:__resetProperties()
 			f16_arg0:setupElementClipCounter(1)
 			local f16_local0 = function(f17_arg0)
-				f16_arg0.TrialPrompt:beginAnimation(200, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f16_arg0.TrialPrompt:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_out"])
 				f16_arg0.TrialPrompt:setAlpha(1)
 				f16_arg0.TrialPrompt:registerEventHandler("interrupted_keyframe", f16_arg0.clipInterrupted)
 				f16_arg0.TrialPrompt:registerEventHandler("transition_complete_keyframe", f16_arg0.clipFinished)

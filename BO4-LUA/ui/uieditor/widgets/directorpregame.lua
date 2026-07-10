@@ -26,7 +26,7 @@ CoD.directorPregame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	local Header = CoD.DirectorScreenHeader.new(f1_arg0, f1_arg1, 0.5, 0.5, -870, -227, 0, 0, 301, 401)
 	Header:setAlpha(0)
 	Header:setZoom(75)
-	Header.Header:setText(LocalizeToUpperString(0x56CB4013028D74E))
+	Header.Header:setText(LocalizeToUpperString(@"menu/local"))
 	self:addElement(Header)
 	self.Header = Header
 	local pckeyboardNavigationRedirector2 = nil
@@ -56,7 +56,7 @@ CoD.directorPregame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	end)
 	local FindMatchMissingDLCErrorTriangle = ZMLobbyButtons
 	local FindMatchButton = ZMLobbyButtons.subscribeToModel
-	local CustomGamesButton = Engine[0x8DF2E5447F384B9]()
+	local CustomGamesButton = Engine[@"getglobalmodel"]()
 	FindMatchButton(FindMatchMissingDLCErrorTriangle, CustomGamesButton["lobbyRoot.lobbyNav"], function(f5_arg0)
 		f1_arg0:updateElementState(ZMLobbyButtons, {
 			name = "model_validation",
@@ -68,7 +68,7 @@ CoD.directorPregame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	end, false)
 	FindMatchMissingDLCErrorTriangle = ZMLobbyButtons
 	FindMatchButton = ZMLobbyButtons.subscribeToModel
-	CustomGamesButton = Engine[0x8DF2E5447F384B9]()
+	CustomGamesButton = Engine[@"getglobalmodel"]()
 	FindMatchButton(FindMatchMissingDLCErrorTriangle, CustomGamesButton["lobbyRoot.gameClient.update"], function(f6_arg0)
 		f1_arg0:updateElementState(ZMLobbyButtons, {
 			name = "model_validation",
@@ -80,7 +80,7 @@ CoD.directorPregame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	end, false)
 	FindMatchMissingDLCErrorTriangle = ZMLobbyButtons
 	FindMatchButton = ZMLobbyButtons.subscribeToModel
-	CustomGamesButton = Engine[0x8DF2E5447F384B9]()
+	CustomGamesButton = Engine[@"getglobalmodel"]()
 	FindMatchButton(FindMatchMissingDLCErrorTriangle, CustomGamesButton["lobbyRoot.privateClient.update"], function(f7_arg0)
 		f1_arg0:updateElementState(ZMLobbyButtons, {
 			name = "model_validation",
@@ -169,7 +169,7 @@ CoD.directorPregame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	end)
 	CustomGamesButton = FindMatchButton
 	FindMatchMissingDLCErrorTriangle = FindMatchButton.subscribeToModel
-	DirectorLobbyPoseMembers = Engine[0x8DF2E5447F384B9]()
+	DirectorLobbyPoseMembers = Engine[@"getglobalmodel"]()
 	FindMatchMissingDLCErrorTriangle(CustomGamesButton, DirectorLobbyPoseMembers["lobbyRoot.lobbyNav"], function(f17_arg0)
 		f1_arg0:updateElementState(FindMatchButton, {
 			name = "model_validation",
@@ -181,7 +181,7 @@ CoD.directorPregame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	end, false)
 	CustomGamesButton = FindMatchButton
 	FindMatchMissingDLCErrorTriangle = FindMatchButton.subscribeToModel
-	DirectorLobbyPoseMembers = Engine[0x8DF2E5447F384B9]()
+	DirectorLobbyPoseMembers = Engine[@"getglobalmodel"]()
 	FindMatchMissingDLCErrorTriangle(CustomGamesButton, DirectorLobbyPoseMembers["lobbyRoot.gameClient.update"], function(f18_arg0)
 		f1_arg0:updateElementState(FindMatchButton, {
 			name = "model_validation",
@@ -193,7 +193,7 @@ CoD.directorPregame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	end, false)
 	CustomGamesButton = FindMatchButton
 	FindMatchMissingDLCErrorTriangle = FindMatchButton.subscribeToModel
-	DirectorLobbyPoseMembers = Engine[0x8DF2E5447F384B9]()
+	DirectorLobbyPoseMembers = Engine[@"getglobalmodel"]()
 	FindMatchMissingDLCErrorTriangle(CustomGamesButton, DirectorLobbyPoseMembers["lobbyRoot.privateClient.update"], function(f19_arg0)
 		f1_arg0:updateElementState(FindMatchButton, {
 			name = "model_validation",
@@ -205,7 +205,7 @@ CoD.directorPregame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	end, false)
 	CustomGamesButton = FindMatchButton
 	FindMatchMissingDLCErrorTriangle = FindMatchButton.subscribeToModel
-	DirectorLobbyPoseMembers = Engine[0x8DF2E5447F384B9]()
+	DirectorLobbyPoseMembers = Engine[@"getglobalmodel"]()
 	FindMatchMissingDLCErrorTriangle(CustomGamesButton, DirectorLobbyPoseMembers.offlineScreenState, function(f20_arg0)
 		f1_arg0:updateElementState(FindMatchButton, {
 			name = "model_validation",
@@ -215,37 +215,37 @@ CoD.directorPregame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 			modelName = "offlineScreenState",
 		})
 	end, false)
-	FindMatchButton.DirectorSelectButtonMiniInternal.MiddleText:setText(LocalizeToUpperString(0xA14B986BB3C650A))
-	FindMatchButton.DirectorSelectButtonMiniInternal.MiddleTextFocus:setText(LocalizeToUpperString(0xA14B986BB3C650A))
+	FindMatchButton.DirectorSelectButtonMiniInternal.MiddleText:setText(LocalizeToUpperString(@"menu/find_match"))
+	FindMatchButton.DirectorSelectButtonMiniInternal.MiddleTextFocus:setText(LocalizeToUpperString(@"menu/find_match"))
 	CustomGamesButton = FindMatchButton
 	FindMatchMissingDLCErrorTriangle = FindMatchButton.subscribeToModel
-	DirectorLobbyPoseMembers = Engine[0x8DF2E5447F384B9]()
+	DirectorLobbyPoseMembers = Engine[@"getglobalmodel"]()
 	FindMatchMissingDLCErrorTriangle(CustomGamesButton, DirectorLobbyPoseMembers["lobbyRoot.lobbyNav"], function(f21_arg0, f21_arg1)
-		CoD.Menu.UpdateButtonShownState(f21_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f21_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	CustomGamesButton = FindMatchButton
 	FindMatchMissingDLCErrorTriangle = FindMatchButton.subscribeToModel
-	DirectorLobbyPoseMembers = Engine[0x8DF2E5447F384B9]()
+	DirectorLobbyPoseMembers = Engine[@"getglobalmodel"]()
 	FindMatchMissingDLCErrorTriangle(CustomGamesButton, DirectorLobbyPoseMembers["lobbyRoot.playlistId"], function(f22_arg0, f22_arg1)
-		CoD.Menu.UpdateButtonShownState(f22_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f22_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	CustomGamesButton = FindMatchButton
 	FindMatchMissingDLCErrorTriangle = FindMatchButton.subscribeToModel
-	DirectorLobbyPoseMembers = Engine[0x8DF2E5447F384B9]()
+	DirectorLobbyPoseMembers = Engine[@"getglobalmodel"]()
 	FindMatchMissingDLCErrorTriangle(CustomGamesButton, DirectorLobbyPoseMembers["lobbyRoot.lobbyList.playerCount"], function(f23_arg0, f23_arg1)
-		CoD.Menu.UpdateButtonShownState(f23_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f23_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	CustomGamesButton = FindMatchButton
 	FindMatchMissingDLCErrorTriangle = FindMatchButton.subscribeToModel
 	DirectorLobbyPoseMembers = DataSources.LobbyRoot.getModel(f1_arg1)
 	FindMatchMissingDLCErrorTriangle(CustomGamesButton, DirectorLobbyPoseMembers.playlistId, function(f24_arg0, f24_arg1)
-		CoD.Menu.UpdateButtonShownState(f24_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f24_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	CustomGamesButton = FindMatchButton
 	FindMatchMissingDLCErrorTriangle = FindMatchButton.subscribeToModel
 	DirectorLobbyPoseMembers = DataSources.LobbyRoot.getModel(f1_arg1)
 	FindMatchMissingDLCErrorTriangle(CustomGamesButton, DirectorLobbyPoseMembers["privateClient.count"], function(f25_arg0, f25_arg1)
-		CoD.Menu.UpdateButtonShownState(f25_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f25_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	FindMatchButton:registerEventHandler("gain_focus", function(element, event)
 		local f26_local0 = nil
@@ -254,10 +254,10 @@ CoD.directorPregame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 		elseif element.super.gainFocus then
 			f26_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f26_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(FindMatchButton, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(FindMatchButton, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if not IsZombies() and not CoD.DirectorUtility.IsNumClientsExceeded(controller) and not CoD.DirectorUtility.ShouldLockFindMatchButton(controller) then
 			CoD.DirectorUtility.NavigateToPublicLobbyForCurrentMenuMode(menu, controller)
 			PlaySoundAlias("uin_press_generic")
@@ -270,10 +270,10 @@ CoD.directorPregame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 		end
 	end, function(element, menu, controller)
 		if not IsZombies() and not CoD.DirectorUtility.IsNumClientsExceeded(controller) and not CoD.DirectorUtility.ShouldLockFindMatchButton(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		elseif not IsZombies() and CoD.DirectorUtility.IsNumClientsExceeded(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false
@@ -343,7 +343,7 @@ CoD.directorPregame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	end)
 	CommonHeader = CustomGamesButton
 	DirectorLobbyPoseMembers = CustomGamesButton.subscribeToModel
-	local DirectorLeaderActivitySelect = Engine[0x8DF2E5447F384B9]()
+	local DirectorLeaderActivitySelect = Engine[@"getglobalmodel"]()
 	DirectorLobbyPoseMembers(CommonHeader, DirectorLeaderActivitySelect["lobbyRoot.lobbyNav"], function(f35_arg0)
 		f1_arg0:updateElementState(CustomGamesButton, {
 			name = "model_validation",
@@ -355,7 +355,7 @@ CoD.directorPregame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	end, false)
 	CommonHeader = CustomGamesButton
 	DirectorLobbyPoseMembers = CustomGamesButton.subscribeToModel
-	DirectorLeaderActivitySelect = Engine[0x8DF2E5447F384B9]()
+	DirectorLeaderActivitySelect = Engine[@"getglobalmodel"]()
 	DirectorLobbyPoseMembers(CommonHeader, DirectorLeaderActivitySelect["lobbyRoot.gameClient.update"], function(f36_arg0)
 		f1_arg0:updateElementState(CustomGamesButton, {
 			name = "model_validation",
@@ -367,7 +367,7 @@ CoD.directorPregame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	end, false)
 	CommonHeader = CustomGamesButton
 	DirectorLobbyPoseMembers = CustomGamesButton.subscribeToModel
-	DirectorLeaderActivitySelect = Engine[0x8DF2E5447F384B9]()
+	DirectorLeaderActivitySelect = Engine[@"getglobalmodel"]()
 	DirectorLobbyPoseMembers(CommonHeader, DirectorLeaderActivitySelect["lobbyRoot.privateClient.update"], function(f37_arg0)
 		f1_arg0:updateElementState(CustomGamesButton, {
 			name = "model_validation",
@@ -379,7 +379,7 @@ CoD.directorPregame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	end, false)
 	CommonHeader = CustomGamesButton
 	DirectorLobbyPoseMembers = CustomGamesButton.subscribeToModel
-	DirectorLeaderActivitySelect = Engine[0x8DF2E5447F384B9]()
+	DirectorLeaderActivitySelect = Engine[@"getglobalmodel"]()
 	DirectorLobbyPoseMembers(CommonHeader, DirectorLeaderActivitySelect.offlineScreenState, function(f38_arg0)
 		f1_arg0:updateElementState(CustomGamesButton, {
 			name = "model_validation",
@@ -390,20 +390,20 @@ CoD.directorPregame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 		})
 	end, false)
 	CustomGamesButton.DirectorSelectButtonMiniInternal.MiddleText.__MiddleText_StringReference = function()
-		CustomGamesButton.DirectorSelectButtonMiniInternal.MiddleText:setText(LocalizeToUpperString(CoD.DirectorUtility.GetCustomGamesName(0x85D9C7D7DDC8EE0)))
+		CustomGamesButton.DirectorSelectButtonMiniInternal.MiddleText:setText(LocalizeToUpperString(CoD.DirectorUtility.GetCustomGamesName(@"menu/custom_games")))
 	end
 	CustomGamesButton.DirectorSelectButtonMiniInternal.MiddleText.__MiddleText_StringReference()
 	CustomGamesButton.DirectorSelectButtonMiniInternal.MiddleText:setTTF("ttmussels_regular")
 	CustomGamesButton.DirectorSelectButtonMiniInternal.MiddleTextFocus.__MiddleTextFocus_String = function()
-		CustomGamesButton.DirectorSelectButtonMiniInternal.MiddleTextFocus:setText(LocalizeToUpperString(CoD.DirectorUtility.GetCustomGamesName(0x85D9C7D7DDC8EE0)))
+		CustomGamesButton.DirectorSelectButtonMiniInternal.MiddleTextFocus:setText(LocalizeToUpperString(CoD.DirectorUtility.GetCustomGamesName(@"menu/custom_games")))
 	end
 	CustomGamesButton.DirectorSelectButtonMiniInternal.MiddleTextFocus.__MiddleTextFocus_String()
 	CustomGamesButton.DirectorSelectButtonMiniInternal.MiddleTextFocus:setTTF("ttmussels_regular")
 	CommonHeader = CustomGamesButton
 	DirectorLobbyPoseMembers = CustomGamesButton.subscribeToModel
-	DirectorLeaderActivitySelect = Engine[0x8DF2E5447F384B9]()
+	DirectorLeaderActivitySelect = Engine[@"getglobalmodel"]()
 	DirectorLobbyPoseMembers(CommonHeader, DirectorLeaderActivitySelect["lobbyRoot.lobbyNav"], function(f41_arg0, f41_arg1)
-		CoD.Menu.UpdateButtonShownState(f41_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f41_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	CustomGamesButton:registerEventHandler("gain_focus", function(element, event)
 		local f42_local0 = nil
@@ -412,10 +412,10 @@ CoD.directorPregame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 		elseif element.super.gainFocus then
 			f42_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f42_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(CustomGamesButton, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(CustomGamesButton, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if IsZombies() and IsPC() then
 			PlaySoundAlias("uin_press_generic")
 			CoD.DirectorUtility.NavigateToCustomLobbyForCurrentMode(menu, controller)
@@ -439,16 +439,16 @@ CoD.directorPregame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 		end
 	end, function(element, menu, controller)
 		if IsZombies() and IsPC() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		elseif IsZombies() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		elseif IsPC() and not IsZombies() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		elseif not IsZombies() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false
@@ -470,7 +470,7 @@ CoD.directorPregame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	CommonHeader:subscribeToGlobalModel(f1_arg1, "LobbyRoot", "lobbyTitle", function(model)
 		local f46_local0 = model:get()
 		if f46_local0 ~= nil then
-			CommonHeader.subtitle.subtitle:setText(Engine[0xF9F1239CFD921FE](f46_local0))
+			CommonHeader.subtitle.subtitle:setText(Engine[@"hash_4F9F1239CFD921FE"](f46_local0))
 		end
 	end)
 	self:addElement(CommonHeader)
@@ -494,7 +494,7 @@ CoD.directorPregame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	end)
 	local QuickPlay = DirectorLeaderActivitySelect
 	local DirectorMapGameTypeAndDifficulty = DirectorLeaderActivitySelect.subscribeToModel
-	local MapAndGameType = Engine[0x8DF2E5447F384B9]()
+	local MapAndGameType = Engine[@"getglobalmodel"]()
 	DirectorMapGameTypeAndDifficulty(QuickPlay, MapAndGameType["lobbyRoot.lobbyNav"], function(f50_arg0)
 		f1_arg0:updateElementState(DirectorLeaderActivitySelect, {
 			name = "model_validation",
@@ -506,7 +506,7 @@ CoD.directorPregame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	end, false)
 	QuickPlay = DirectorLeaderActivitySelect
 	DirectorMapGameTypeAndDifficulty = DirectorLeaderActivitySelect.subscribeToModel
-	MapAndGameType = Engine[0x8DF2E5447F384B9]()
+	MapAndGameType = Engine[@"getglobalmodel"]()
 	DirectorMapGameTypeAndDifficulty(QuickPlay, MapAndGameType["lobbyRoot.gameClient.update"], function(f51_arg0)
 		f1_arg0:updateElementState(DirectorLeaderActivitySelect, {
 			name = "model_validation",
@@ -518,7 +518,7 @@ CoD.directorPregame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	end, false)
 	QuickPlay = DirectorLeaderActivitySelect
 	DirectorMapGameTypeAndDifficulty = DirectorLeaderActivitySelect.subscribeToModel
-	MapAndGameType = Engine[0x8DF2E5447F384B9]()
+	MapAndGameType = Engine[@"getglobalmodel"]()
 	DirectorMapGameTypeAndDifficulty(QuickPlay, MapAndGameType["lobbyRoot.privateClient.update"], function(f52_arg0)
 		f1_arg0:updateElementState(DirectorLeaderActivitySelect, {
 			name = "model_validation",
@@ -533,9 +533,9 @@ CoD.directorPregame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	self.DirectorLeaderActivitySelect = DirectorLeaderActivitySelect
 	DirectorMapGameTypeAndDifficulty = CoD.DirectorMapGameTypeAndDifficulty.new(f1_arg0, f1_arg1, 0.5, 0.5, 514, 896, 1, 1, -368, -188)
 	DirectorMapGameTypeAndDifficulty:setAlpha(0)
-	DirectorMapGameTypeAndDifficulty.DirectorMapAndGameInternal.PlaylistHeader.GameModeText:setText(Engine[0xF9F1239CFD921FE](0xBC441E8EF98063C))
+	DirectorMapGameTypeAndDifficulty.DirectorMapAndGameInternal.PlaylistHeader.GameModeText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_2BC441E8EF98063C"))
 	DirectorMapGameTypeAndDifficulty.DirectorMapAndGameInternal.PlaylistHeader.GameModeText:setTTF("ttmussels_regular")
-	DirectorMapGameTypeAndDifficulty.DirectorMapAndGameInternal.PlaylistHeaderNonHost.GameModeText:setText(Engine[0xF9F1239CFD921FE](0xC95DCE378B96DFF))
+	DirectorMapGameTypeAndDifficulty.DirectorMapAndGameInternal.PlaylistHeaderNonHost.GameModeText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_1C95DCE378B96DFF"))
 	DirectorMapGameTypeAndDifficulty.DirectorMapAndGameInternal.PlaylistHeaderNonHost.GameModeText:setTTF("ttmussels_regular")
 	DirectorMapGameTypeAndDifficulty.DirectorMapAndGameInternal.MapImage.__DirectorMapAndGameInternal_MapImage_Image = function(f53_arg0)
 		local f53_local0 = f53_arg0:get()
@@ -568,7 +568,7 @@ CoD.directorPregame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	DirectorMapGameTypeAndDifficulty.DirectorMapAndGameInternal.DirectorMapAndGameTypeInternalTitles.Label.__Label_Desc = function(f57_arg0)
 		local f57_local0 = f57_arg0:get()
 		if f57_local0 ~= nil then
-			DirectorMapGameTypeAndDifficulty.DirectorMapAndGameInternal.DirectorMapAndGameTypeInternalTitles.Label:setText(Engine[0xF9F1239CFD921FE](CoD.DirectorUtility.PlaylistIDToZMPlaylistSubtitle(f57_local0)))
+			DirectorMapGameTypeAndDifficulty.DirectorMapAndGameInternal.DirectorMapAndGameTypeInternalTitles.Label:setText(Engine[@"hash_4F9F1239CFD921FE"](CoD.DirectorUtility.PlaylistIDToZMPlaylistSubtitle(f57_local0)))
 		end
 	end
 	DirectorMapGameTypeAndDifficulty:subscribeToGlobalModel(f1_arg1, "LobbyRoot", "playlistId", DirectorMapGameTypeAndDifficulty.DirectorMapAndGameInternal.DirectorMapAndGameTypeInternalTitles.Label.__Label_Desc)
@@ -582,7 +582,7 @@ CoD.directorPregame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	DirectorMapGameTypeAndDifficulty.DirectorMapAndGameInternal.DirectorMapAndGameTypeInternalTitles.SubTitle.__Label_Title = function(f59_arg0)
 		local f59_local0 = f59_arg0:get()
 		if f59_local0 ~= nil then
-			DirectorMapGameTypeAndDifficulty.DirectorMapAndGameInternal.DirectorMapAndGameTypeInternalTitles.SubTitle:setText(Engine[0xF9F1239CFD921FE](CoD.DirectorUtility.PlaylistIDToZMPlaylistName(f59_local0)))
+			DirectorMapGameTypeAndDifficulty.DirectorMapAndGameInternal.DirectorMapAndGameTypeInternalTitles.SubTitle:setText(Engine[@"hash_4F9F1239CFD921FE"](CoD.DirectorUtility.PlaylistIDToZMPlaylistName(f59_local0)))
 		end
 	end
 	DirectorMapGameTypeAndDifficulty:subscribeToGlobalModel(f1_arg1, "LobbyRoot", "playlistId", DirectorMapGameTypeAndDifficulty.DirectorMapAndGameInternal.DirectorMapAndGameTypeInternalTitles.SubTitle.__Label_Title)
@@ -595,29 +595,29 @@ CoD.directorPregame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	end
 	DirectorMapGameTypeAndDifficulty:appendEventHandler("on_session_start", function(f61_arg0, f61_arg1)
 		f61_arg1.menu = f61_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f61_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f61_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	DirectorMapGameTypeAndDifficulty:appendEventHandler("on_session_end", function(f62_arg0, f62_arg1)
 		f62_arg1.menu = f62_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f62_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f62_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	MapAndGameType = DirectorMapGameTypeAndDifficulty
 	QuickPlay = DirectorMapGameTypeAndDifficulty.subscribeToModel
-	local f1_local14 = Engine[0x8DF2E5447F384B9]()
+	local f1_local14 = Engine[@"getglobalmodel"]()
 	QuickPlay(MapAndGameType, f1_local14["lobbyRoot.lobbyNav"], function(f63_arg0, f63_arg1)
-		CoD.Menu.UpdateButtonShownState(f63_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f63_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	MapAndGameType = DirectorMapGameTypeAndDifficulty
 	QuickPlay = DirectorMapGameTypeAndDifficulty.subscribeToModel
-	f1_local14 = Engine[0x8DF2E5447F384B9]()
+	f1_local14 = Engine[@"getglobalmodel"]()
 	QuickPlay(MapAndGameType, f1_local14["lobbyRoot.gameClient.update"], function(f64_arg0, f64_arg1)
-		CoD.Menu.UpdateButtonShownState(f64_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f64_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	MapAndGameType = DirectorMapGameTypeAndDifficulty
 	QuickPlay = DirectorMapGameTypeAndDifficulty.subscribeToModel
-	f1_local14 = Engine[0x8DF2E5447F384B9]()
+	f1_local14 = Engine[@"getglobalmodel"]()
 	QuickPlay(MapAndGameType, f1_local14["lobbyRoot.privateClient.update"], function(f65_arg0, f65_arg1)
-		CoD.Menu.UpdateButtonShownState(f65_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f65_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	DirectorMapGameTypeAndDifficulty:registerEventHandler("gain_focus", function(element, event)
 		local f66_local0 = nil
@@ -626,10 +626,10 @@ CoD.directorPregame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 		elseif element.super.gainFocus then
 			f66_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f66_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(DirectorMapGameTypeAndDifficulty, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(DirectorMapGameTypeAndDifficulty, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if IsLobbyHostOfCurrentMenu() and IsZombies() then
 			CoD.LobbyUtility.SetLeaderActivityAndOpenOverlayNoDeps(self, controller, CoD.LobbyUtility.LeaderActivity.CHOOSING_MAP, "DirectorGamemodeSelectionZM")
 			PlaySoundAlias("uin_toggle_generic")
@@ -638,7 +638,7 @@ CoD.directorPregame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 		end
 	end, function(element, menu, controller)
 		if IsLobbyHostOfCurrentMenu() and IsZombies() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false
@@ -665,7 +665,7 @@ CoD.directorPregame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	end)
 	f1_local14 = QuickPlay
 	MapAndGameType = QuickPlay.subscribeToModel
-	local f1_local15 = Engine[0x8DF2E5447F384B9]()
+	local f1_local15 = Engine[@"getglobalmodel"]()
 	MapAndGameType(f1_local14, f1_local15["lobbyRoot.lobbyNav"], function(f72_arg0)
 		f1_arg0:updateElementState(QuickPlay, {
 			name = "model_validation",
@@ -677,7 +677,7 @@ CoD.directorPregame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	end, false)
 	f1_local14 = QuickPlay
 	MapAndGameType = QuickPlay.subscribeToModel
-	f1_local15 = Engine[0x8DF2E5447F384B9]()
+	f1_local15 = Engine[@"getglobalmodel"]()
 	MapAndGameType(f1_local14, f1_local15["lobbyRoot.gameClient.update"], function(f73_arg0)
 		f1_arg0:updateElementState(QuickPlay, {
 			name = "model_validation",
@@ -689,7 +689,7 @@ CoD.directorPregame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	end, false)
 	f1_local14 = QuickPlay
 	MapAndGameType = QuickPlay.subscribeToModel
-	f1_local15 = Engine[0x8DF2E5447F384B9]()
+	f1_local15 = Engine[@"getglobalmodel"]()
 	MapAndGameType(f1_local14, f1_local15["lobbyRoot.privateClient.update"], function(f74_arg0)
 		f1_arg0:updateElementState(QuickPlay, {
 			name = "model_validation",
@@ -701,7 +701,7 @@ CoD.directorPregame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	end, false)
 	f1_local14 = QuickPlay
 	MapAndGameType = QuickPlay.subscribeToModel
-	f1_local15 = Engine[0x8DF2E5447F384B9]()
+	f1_local15 = Engine[@"getglobalmodel"]()
 	MapAndGameType(f1_local14, f1_local15.offlineScreenState, function(f75_arg0)
 		f1_arg0:updateElementState(QuickPlay, {
 			name = "model_validation",
@@ -713,7 +713,7 @@ CoD.directorPregame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	end, false)
 	f1_local14 = QuickPlay
 	MapAndGameType = QuickPlay.subscribeToModel
-	f1_local15 = Engine[0x8DF2E5447F384B9]()
+	f1_local15 = Engine[@"getglobalmodel"]()
 	MapAndGameType(f1_local14, f1_local15["lobbyRoot.lobbyList.playerCount"], function(f76_arg0)
 		f1_arg0:updateElementState(QuickPlay, {
 			name = "model_validation",
@@ -725,7 +725,7 @@ CoD.directorPregame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	end, false)
 	f1_local14 = QuickPlay
 	MapAndGameType = QuickPlay.subscribeToModel
-	f1_local15 = Engine[0x8DF2E5447F384B9]()
+	f1_local15 = Engine[@"getglobalmodel"]()
 	MapAndGameType(f1_local14, f1_local15["ZMLobbyExclusions.ShowTutorialQuickPlay"], function(f77_arg0)
 		f1_arg0:updateElementState(QuickPlay, {
 			name = "model_validation",
@@ -736,21 +736,21 @@ CoD.directorPregame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 		})
 	end, false)
 	QuickPlay:setAlpha(0)
-	QuickPlay.DirectorSelectButtonMiniInternal.MiddleText:setText(LocalizeToUpperString(0x6A52F3FB63F2F76))
+	QuickPlay.DirectorSelectButtonMiniInternal.MiddleText:setText(LocalizeToUpperString(@"zmui/play_ztutorial"))
 	QuickPlay.DirectorSelectButtonMiniInternal.MiddleText:setTTF("ttmussels_regular")
-	QuickPlay.DirectorSelectButtonMiniInternal.MiddleTextFocus:setText(LocalizeToUpperString(0x6A52F3FB63F2F76))
+	QuickPlay.DirectorSelectButtonMiniInternal.MiddleTextFocus:setText(LocalizeToUpperString(@"zmui/play_ztutorial"))
 	QuickPlay.DirectorSelectButtonMiniInternal.MiddleTextFocus:setTTF("ttmussels_regular")
 	f1_local14 = QuickPlay
 	MapAndGameType = QuickPlay.subscribeToModel
-	f1_local15 = Engine[0x8DF2E5447F384B9]()
+	f1_local15 = Engine[@"getglobalmodel"]()
 	MapAndGameType(f1_local14, f1_local15["lobbyRoot.lobbyList.playerCount"], function(f78_arg0, f78_arg1)
-		CoD.Menu.UpdateButtonShownState(f78_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f78_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	f1_local14 = QuickPlay
 	MapAndGameType = QuickPlay.subscribeToModel
-	f1_local15 = Engine[0x8DF2E5447F384B9]()
+	f1_local15 = Engine[@"getglobalmodel"]()
 	MapAndGameType(f1_local14, f1_local15["ZMLobbyExclusions.ShowTutorialQuickPlay"], function(f79_arg0, f79_arg1)
-		CoD.Menu.UpdateButtonShownState(f79_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f79_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	QuickPlay:registerEventHandler("gain_focus", function(element, event)
 		local f80_local0 = nil
@@ -759,10 +759,10 @@ CoD.directorPregame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 		elseif element.super.gainFocus then
 			f80_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f80_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(QuickPlay, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(QuickPlay, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if CoD.ModelUtility.IsGlobalModelValueEqualTo("lobbyRoot.lobbyList.playerCount", 1) and CoD.ModelUtility.IsGlobalModelValueTrue("ZMLobbyExclusions.ShowTutorialQuickPlay") then
 			PlaySoundAlias("uin_toggle_generic")
 			CoD.ZombieUtility.QuickPlayPregame(menu, controller)
@@ -771,7 +771,7 @@ CoD.directorPregame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 		end
 	end, function(element, menu, controller)
 		if CoD.ModelUtility.IsGlobalModelValueEqualTo("lobbyRoot.lobbyList.playerCount", 1) and CoD.ModelUtility.IsGlobalModelValueTrue("ZMLobbyExclusions.ShowTutorialQuickPlay") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xAC3B80C833B60E1, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_3AC3B80C833B60E1", nil, "ui_confirm")
 			return true
 		else
 			return false
@@ -781,11 +781,11 @@ CoD.directorPregame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	self.QuickPlay = QuickPlay
 	MapAndGameType = CoD.DirectorMapAndGameTypeContainer.new(f1_arg0, f1_arg1, 0.5, 0.5, 514, 896, 1, 1, -368, -188)
 	MapAndGameType:setAlpha(0)
-	MapAndGameType.DirectorMapAndGameInternal.GamemodeIcon:setImage(RegisterImage(0x7615068F50B3D66))
-	MapAndGameType.DirectorMapAndGameInternal.DirectorMapAndGameTypeInternalTitles.Label:setText(Engine[0xF9F1239CFD921FE](0x2C79EA24AB1A2BA))
-	MapAndGameType.DirectorMapAndGameInternal.PlaylistHeader.GameModeText:setText(Engine[0xF9F1239CFD921FE](0x890976738B1D859))
+	MapAndGameType.DirectorMapAndGameInternal.GamemodeIcon:setImage(RegisterImage(@"blacktransparent"))
+	MapAndGameType.DirectorMapAndGameInternal.DirectorMapAndGameTypeInternalTitles.Label:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_2C79EA24AB1A2BA"))
+	MapAndGameType.DirectorMapAndGameInternal.PlaylistHeader.GameModeText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_5890976738B1D859"))
 	MapAndGameType.DirectorMapAndGameInternal.PlaylistHeader.GameModeText:setTTF("ttmussels_regular")
-	MapAndGameType.DirectorMapAndGameInternal.PlaylistHeaderNonHost.GameModeText:setText(Engine[0xF9F1239CFD921FE](0x890976738B1D859))
+	MapAndGameType.DirectorMapAndGameInternal.PlaylistHeaderNonHost.GameModeText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_5890976738B1D859"))
 	MapAndGameType.DirectorMapAndGameInternal.PlaylistHeaderNonHost.GameModeText:setTTF("ttmussels_regular")
 	MapAndGameType.DirectorMapAndGameInternal.MapImage.__DirectorMapAndGameInternal_MapImage_Image = function(f83_arg0)
 		local f83_local0 = f83_arg0:get()
@@ -817,21 +817,21 @@ CoD.directorPregame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	end
 	f1_local15 = MapAndGameType
 	f1_local14 = MapAndGameType.subscribeToModel
-	local f1_local16 = Engine[0x8DF2E5447F384B9]()
+	local f1_local16 = Engine[@"getglobalmodel"]()
 	f1_local14(f1_local15, f1_local16["lobbyRoot.lobbyNav"], function(f87_arg0, f87_arg1)
-		CoD.Menu.UpdateButtonShownState(f87_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f87_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	f1_local15 = MapAndGameType
 	f1_local14 = MapAndGameType.subscribeToModel
-	f1_local16 = Engine[0x8DF2E5447F384B9]()
+	f1_local16 = Engine[@"getglobalmodel"]()
 	f1_local14(f1_local15, f1_local16["lobbyRoot.privateClient.isHost"], function(f88_arg0, f88_arg1)
-		CoD.Menu.UpdateButtonShownState(f88_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f88_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	f1_local15 = MapAndGameType
 	f1_local14 = MapAndGameType.subscribeToModel
-	f1_local16 = Engine[0x8DF2E5447F384B9]()
+	f1_local16 = Engine[@"getglobalmodel"]()
 	f1_local14(f1_local15, f1_local16["lobbyRoot.gameClient.isHost"], function(f89_arg0, f89_arg1)
-		CoD.Menu.UpdateButtonShownState(f89_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f89_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	MapAndGameType:registerEventHandler("gain_focus", function(element, event)
 		local f90_local0 = nil
@@ -840,10 +840,10 @@ CoD.directorPregame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 		elseif element.super.gainFocus then
 			f90_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f90_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(MapAndGameType, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(MapAndGameType, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if not IsZombies() and IsPartyLeader(controller) then
 			CoD.DirectorUtility.DirectorOpenOverlayWithCurrentMenuMode(menu, controller, "DirectorFindGame")
 			PlaySoundAlias("uin_press_generic")
@@ -852,7 +852,7 @@ CoD.directorPregame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 		end
 	end, function(element, menu, controller)
 		if not IsZombies() and IsPartyLeader(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		else
 			return false
@@ -862,35 +862,35 @@ CoD.directorPregame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	self.MapAndGameType = MapAndGameType
 	f1_local15 = CustomGamesButton
 	f1_local14 = CustomGamesButton.subscribeToModel
-	f1_local16 = Engine[0x8DF2E5447F384B9]()
+	f1_local16 = Engine[@"getglobalmodel"]()
 	f1_local14(f1_local15, f1_local16["lobbyRoot.lobbyNav"], CustomGamesButton.DirectorSelectButtonMiniInternal.MiddleText.__MiddleText_StringReference)
 	f1_local15 = CustomGamesButton
 	f1_local14 = CustomGamesButton.subscribeToModel
-	f1_local16 = Engine[0x8DF2E5447F384B9]()
+	f1_local16 = Engine[@"getglobalmodel"]()
 	f1_local14(f1_local15, f1_local16["lobbyRoot.lobbyNav"], CustomGamesButton.DirectorSelectButtonMiniInternal.MiddleTextFocus.__MiddleTextFocus_String)
 	f1_local15 = DirectorMapGameTypeAndDifficulty
 	f1_local14 = DirectorMapGameTypeAndDifficulty.subscribeToModel
-	f1_local16 = Engine[0x8DF2E5447F384B9]()
+	f1_local16 = Engine[@"getglobalmodel"]()
 	f1_local14(f1_local15, f1_local16["lobbyRoot.lobbyNetworkMode"], DirectorMapGameTypeAndDifficulty.DirectorMapAndGameInternal.MapImage.__DirectorMapAndGameInternal_MapImage_Image_FullPath)
 	f1_local15 = DirectorMapGameTypeAndDifficulty
 	f1_local14 = DirectorMapGameTypeAndDifficulty.subscribeToModel
-	f1_local16 = Engine[0x8DF2E5447F384B9]()
+	f1_local16 = Engine[@"getglobalmodel"]()
 	f1_local14(f1_local15, f1_local16["lobbyRoot.lobbyNetworkMode"], DirectorMapGameTypeAndDifficulty.DirectorMapAndGameInternal.GamemodeIcon.__GamemodeIcon_Image_FullPath)
 	f1_local15 = DirectorMapGameTypeAndDifficulty
 	f1_local14 = DirectorMapGameTypeAndDifficulty.subscribeToModel
-	f1_local16 = Engine[0x8DF2E5447F384B9]()
+	f1_local16 = Engine[@"getglobalmodel"]()
 	f1_local14(f1_local15, f1_local16["lobbyRoot.lobbyNetworkMode"], DirectorMapGameTypeAndDifficulty.DirectorMapAndGameInternal.DirectorMapAndGameTypeInternalTitles.Label.__Label_Desc_FullPath)
 	f1_local15 = DirectorMapGameTypeAndDifficulty
 	f1_local14 = DirectorMapGameTypeAndDifficulty.subscribeToModel
-	f1_local16 = Engine[0x8DF2E5447F384B9]()
+	f1_local16 = Engine[@"getglobalmodel"]()
 	f1_local14(f1_local15, f1_local16["lobbyRoot.lobbyNetworkMode"], DirectorMapGameTypeAndDifficulty.DirectorMapAndGameInternal.DirectorMapAndGameTypeInternalTitles.SubTitle.__Label_Title_FullPath)
 	f1_local15 = MapAndGameType
 	f1_local14 = MapAndGameType.subscribeToModel
-	f1_local16 = Engine[0x8DF2E5447F384B9]()
+	f1_local16 = Engine[@"getglobalmodel"]()
 	f1_local14(f1_local15, f1_local16["lobbyRoot.lobbyNetworkMode"], MapAndGameType.DirectorMapAndGameInternal.MapImage.__DirectorMapAndGameInternal_MapImage_Image_FullPath)
 	f1_local15 = MapAndGameType
 	f1_local14 = MapAndGameType.subscribeToModel
-	f1_local16 = Engine[0x8DF2E5447F384B9]()
+	f1_local16 = Engine[@"getglobalmodel"]()
 	f1_local14(f1_local15, f1_local16["lobbyRoot.lobbyNetworkMode"], MapAndGameType.DirectorMapAndGameInternal.DirectorMapAndGameTypeInternalTitles.SubTitle.__Label_Title_FullPath)
 	self:mergeStateConditions({
 		{
@@ -914,7 +914,7 @@ CoD.directorPregame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	})
 	f1_local15 = self
 	f1_local14 = self.subscribeToModel
-	f1_local16 = Engine[0x8DF2E5447F384B9]()
+	f1_local16 = Engine[@"getglobalmodel"]()
 	f1_local14(f1_local15, f1_local16["lobbyRoot.lobbyNav"], function(f96_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

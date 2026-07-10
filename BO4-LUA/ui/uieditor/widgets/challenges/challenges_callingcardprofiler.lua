@@ -28,7 +28,7 @@ CoD.Challenges_CallingCardProfiler.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	local CTClassifiedOverlay = LUI.UIImage.new(0, 1, -1, 1, 0, 0, 0, 131)
 	CTClassifiedOverlay:setRGB(0, 0, 0)
 	CTClassifiedOverlay:setAlpha(0)
-	CTClassifiedOverlay:setImage(RegisterImage(0x2746D911ABDE62E))
+	CTClassifiedOverlay:setImage(RegisterImage(@"uie_t7_icons_challenges_classified_placeholder"))
 	self:addElement(CTClassifiedOverlay)
 	self.CTClassifiedOverlay = CTClassifiedOverlay
 	local TierStatus = CoD.StartMenu_Identity_SubTitle.new(f1_arg0, f1_arg1, 0.5, 0.5, -129, 129, 0, 0, 358, 388)
@@ -47,7 +47,7 @@ CoD.Challenges_CallingCardProfiler.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	self.BMGoldBarMed = BMGoldBarMed
 	local blackMarketBrandIcon = LUI.UIImage.new(0.5, 0.5, -54, 49, 0, 0, 18, 121)
 	blackMarketBrandIcon:setAlpha(0)
-	blackMarketBrandIcon:setImage(RegisterImage(0x67440195ABD2B8C))
+	blackMarketBrandIcon:setImage(RegisterImage(@"uie_t7_icon_blackmarket_encryptedicon_large"))
 	self:addElement(blackMarketBrandIcon)
 	self.blackMarketBrandIcon = blackMarketBrandIcon
 	local DotTiledBacking = CoD.StoreCommonTextBacking.new(f1_arg0, f1_arg1, 0.03, 0.97, 1, -1, 0, 0.03, 296, 294)
@@ -61,15 +61,15 @@ CoD.Challenges_CallingCardProfiler.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	self.ProgressBarBase = ProgressBarBase
 	local ProgressBarBoarder = LUI.UIImage.new(0.5, 0.5, -247.5, 247.5, 0, 0, 294, 317)
 	ProgressBarBoarder:setAlpha(0.1)
-	ProgressBarBoarder:setImage(RegisterImage(0x185E11D74ECA3D7))
-	ProgressBarBoarder:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	ProgressBarBoarder:setImage(RegisterImage(@"uie_ui_menu_store_common_frame"))
+	ProgressBarBoarder:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	ProgressBarBoarder:setShaderVector(0, 0, 0, 0, 0)
 	ProgressBarBoarder:setupNineSliceShader(12, 12)
 	self:addElement(ProgressBarBoarder)
 	self.ProgressBarBoarder = ProgressBarBoarder
 	local ProgressBar = LUI.UIImage.new(0.03, 0.97, 1, -1, 0, 0.03, 296, 294)
 	ProgressBar:setRGB(1, 0.36, 0)
-	ProgressBar:setMaterial(LUI.UIImage.GetCachedMaterial(0x910274CA3518744))
+	ProgressBar:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe"))
 	ProgressBar:setShaderVector(1, 0, 0, 0, 0)
 	ProgressBar:setShaderVector(2, 1, 0, 0, 0)
 	ProgressBar:setShaderVector(3, 0, 0, 0, 0)
@@ -85,7 +85,7 @@ CoD.Challenges_CallingCardProfiler.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	local ProgressFraction = LUI.UIText.new(1, 1, -58, -19, 0, 0, 298, 316)
 	ProgressFraction:setTTF("default")
 	ProgressFraction:setLetterSpacing(2)
-	ProgressFraction:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
+	ProgressFraction:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
 	ProgressFraction:linkToElementModel(self, "statFractionText", true, function(model)
 		local f5_local0 = model:get()
 		if f5_local0 ~= nil then
@@ -100,14 +100,14 @@ CoD.Challenges_CallingCardProfiler.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	TierList:setWidgetType(CoD.Challenges_TierIcon)
 	TierList:setHorizontalCount(5)
 	TierList:setSpacing(0)
-	TierList:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	TierList:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	TierList:setDataSource("TierIconList")
 	self:addElement(TierList)
 	self.TierList = TierList
 	local TierNumber = LUI.UIText.new(0.5, 0.5, -129, 129, 0, 0, 442, 466)
 	TierNumber:setRGB(ColorSet.T8__OFF__GRAY.r, ColorSet.T8__OFF__GRAY.g, ColorSet.T8__OFF__GRAY.b)
 	TierNumber:setTTF("ttmussels_regular")
-	TierNumber:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	TierNumber:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	TierNumber:linkToElementModel(self, "tierStatus", true, function(model)
 		local f6_local0 = model:get()
 		if f6_local0 ~= nil then
@@ -118,8 +118,8 @@ CoD.Challenges_CallingCardProfiler.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	self.TierNumber = TierNumber
 	local FrameBorder = LUI.UIImage.new(0.5, 0.5, -114.5, 115.5, 0, 0, 474, 528)
 	FrameBorder:setAlpha(0.15)
-	FrameBorder:setImage(RegisterImage(0x185E11D74ECA3D7))
-	FrameBorder:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	FrameBorder:setImage(RegisterImage(@"uie_ui_menu_store_common_frame"))
+	FrameBorder:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	FrameBorder:setShaderVector(0, 0, 0, 0, 0)
 	FrameBorder:setupNineSliceShader(12, 12)
 	self:addElement(FrameBorder)
@@ -128,8 +128,8 @@ CoD.Challenges_CallingCardProfiler.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	ChallengeName:setRGB(ColorSet.T8__OCHRE.r, ColorSet.T8__OCHRE.g, ColorSet.T8__OCHRE.b)
 	ChallengeName:setTTF("ttmussels_regular")
 	ChallengeName:setLetterSpacing(2)
-	ChallengeName:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	ChallengeName:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	ChallengeName:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	ChallengeName:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	ChallengeName:linkToElementModel(self, "title", true, function(model)
 		local f7_local0 = model:get()
 		if f7_local0 ~= nil then
@@ -142,8 +142,8 @@ CoD.Challenges_CallingCardProfiler.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	ChallengeDescription:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	ChallengeDescription:setTTF("dinnext_regular")
 	ChallengeDescription:setLetterSpacing(0.5)
-	ChallengeDescription:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	ChallengeDescription:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	ChallengeDescription:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	ChallengeDescription:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	ChallengeDescription:linkToElementModel(self, "description", true, function(model)
 		local f8_local0 = model:get()
 		if f8_local0 ~= nil then
@@ -229,7 +229,7 @@ CoD.Challenges_CallingCardProfiler.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	})
 	local f1_local19 = self
 	local f1_local20 = self.subscribeToModel
-	local f1_local21 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local21 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local20(f1_local19, f1_local21["hudItems.callingCardProfilingType"], function(f20_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -321,7 +321,7 @@ CoD.Challenges_CallingCardProfiler.__resetProperties = function(f27_arg0)
 	f27_arg0.DotTiledBacking:setAlpha(0.15)
 	f27_arg0.LockedIcon:setAlpha(1)
 	f27_arg0.TrialWidget:setAlpha(0)
-	f27_arg0.TrialWidget.InfoText:setText(Engine[0xF9F1239CFD921FE](0x62486486346EC3F))
+	f27_arg0.TrialWidget.InfoText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_262486486346EC3F"))
 	f27_arg0.CardIcon:setAlpha(1)
 	f27_arg0.CTClassifiedOverlay:setRGB(0, 0, 0)
 	f27_arg0.CTClassifiedOverlay:setAlpha(0)
@@ -404,7 +404,7 @@ CoD.Challenges_CallingCardProfiler.__clipsPerState = {
 			f29_arg0.TrialWidget:completeAnimation()
 			f29_arg0.TrialWidget.InfoText:completeAnimation()
 			f29_arg0.TrialWidget:setAlpha(1)
-			f29_arg0.TrialWidget.InfoText:setText(Engine[0xF9F1239CFD921FE](0xB98899150D5FB25))
+			f29_arg0.TrialWidget.InfoText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_3B98899150D5FB25"))
 			f29_arg0.clipFinished(f29_arg0.TrialWidget)
 		end,
 	},
@@ -449,7 +449,7 @@ CoD.Challenges_CallingCardProfiler.__clipsPerState = {
 			f30_arg0.TrialWidget:completeAnimation()
 			f30_arg0.TrialWidget.InfoText:completeAnimation()
 			f30_arg0.TrialWidget:setAlpha(1)
-			f30_arg0.TrialWidget.InfoText:setText(Engine[0xF9F1239CFD921FE](0xB98899150D5FB25))
+			f30_arg0.TrialWidget.InfoText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_3B98899150D5FB25"))
 			f30_arg0.clipFinished(f30_arg0.TrialWidget)
 		end,
 	},
@@ -489,7 +489,7 @@ CoD.Challenges_CallingCardProfiler.__clipsPerState = {
 			f31_arg0.TrialWidget:completeAnimation()
 			f31_arg0.TrialWidget.InfoText:completeAnimation()
 			f31_arg0.TrialWidget:setAlpha(1)
-			f31_arg0.TrialWidget.InfoText:setText(Engine[0xF9F1239CFD921FE](0xB98899150D5FB25))
+			f31_arg0.TrialWidget.InfoText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_3B98899150D5FB25"))
 			f31_arg0.clipFinished(f31_arg0.TrialWidget)
 		end,
 	},
@@ -503,7 +503,7 @@ CoD.Challenges_CallingCardProfiler.__clipsPerState = {
 			f32_arg0.TrialWidget:completeAnimation()
 			f32_arg0.TrialWidget.InfoText:completeAnimation()
 			f32_arg0.TrialWidget:setAlpha(1)
-			f32_arg0.TrialWidget.InfoText:setText(Engine[0xF9F1239CFD921FE](0xB98899150D5FB25))
+			f32_arg0.TrialWidget.InfoText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_3B98899150D5FB25"))
 			f32_arg0.clipFinished(f32_arg0.TrialWidget)
 		end,
 	},
@@ -525,7 +525,7 @@ CoD.Challenges_CallingCardProfiler.__clipsPerState = {
 			f33_arg0.TrialWidget:completeAnimation()
 			f33_arg0.TrialWidget.InfoText:completeAnimation()
 			f33_arg0.TrialWidget:setAlpha(1)
-			f33_arg0.TrialWidget.InfoText:setText(Engine[0xF9F1239CFD921FE](0xB98899150D5FB25))
+			f33_arg0.TrialWidget.InfoText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_3B98899150D5FB25"))
 			f33_arg0.clipFinished(f33_arg0.TrialWidget)
 			f33_arg0.XP:completeAnimation()
 			f33_arg0.XP:setAlpha(0)
@@ -547,7 +547,7 @@ CoD.Challenges_CallingCardProfiler.__clipsPerState = {
 			f34_arg0.TrialWidget:completeAnimation()
 			f34_arg0.TrialWidget.InfoText:completeAnimation()
 			f34_arg0.TrialWidget:setAlpha(1)
-			f34_arg0.TrialWidget.InfoText:setText(Engine[0xF9F1239CFD921FE](0xB98899150D5FB25))
+			f34_arg0.TrialWidget.InfoText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_3B98899150D5FB25"))
 			f34_arg0.clipFinished(f34_arg0.TrialWidget)
 			f34_arg0.XP:completeAnimation()
 			f34_arg0.XP:setAlpha(1)

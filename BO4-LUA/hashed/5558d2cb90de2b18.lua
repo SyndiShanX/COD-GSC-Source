@@ -8,7 +8,7 @@ CoD.WarzoneInventoryItemGrayBox.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self.soundSet = "none"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Image = LUI.UIImage.new(0.5, 0.5, -16, 16, 0.5, 0.5, -16, 16)
-	Image:setImage(RegisterImage(0xA6223620969586C))
+	Image:setImage(RegisterImage(@"uie_ui_hud_wz_hud_core_qe_pip"))
 	self:addElement(Image)
 	self.Image = Image
 	if PostLoadFunc then

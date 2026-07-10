@@ -16,24 +16,24 @@ CoD.RestrictedItemWarningText.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	local Warning = LUI.UIImage.new(0, 0, 0, 38, 0.5, 0.5, -15, 15)
 	Warning:setRGB(0.82, 0.08, 0.17)
 	Warning:setAlpha(0)
-	Warning:setImage(RegisterImage(0xDF501A88BB578F))
-	Warning:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Warning:setImage(RegisterImage(@"uie_t8_icon_restriction_warning"))
+	Warning:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Warning)
 	self.Warning = Warning
 	local Text = LUI.UIText.new(0.5, 0.5, -204, 247, 0.5, 0.5, -10, 10)
 	Text:setAlpha(0)
-	Text:setText(LocalizeToUpperString(0x3293C2F8FE5A04C))
+	Text:setText(LocalizeToUpperString(@"menu/restricted_item"))
 	Text:setTTF("ttmussels_regular")
 	Text:setLetterSpacing(2)
-	Text:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	Text:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(Text)
 	self.Text = Text
 	local CharacterText = LUI.UIText.new(0.5, 0.5, -204, 247, 0.5, 0.5, -10, 10)
 	CharacterText:setAlpha(0)
-	CharacterText:setText(Engine[0xF9F1239CFD921FE](AddLocalizeGameModeToString(0x3C8AC9335AFAA5E)))
+	CharacterText:setText(Engine[@"hash_4F9F1239CFD921FE"](AddLocalizeGameModeToString(@"hash_43C8AC9335AFAA5E")))
 	CharacterText:setTTF("ttmussels_regular")
 	CharacterText:setLetterSpacing(2)
-	CharacterText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	CharacterText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(CharacterText)
 	self.CharacterText = CharacterText
 	self:mergeStateConditions({
@@ -58,7 +58,7 @@ CoD.RestrictedItemWarningText.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	})
 	local f1_local5 = self
 	local f1_local6 = self.subscribeToModel
-	local f1_local7 = Engine[0x8DF2E5447F384B9]()
+	local f1_local7 = Engine[@"getglobalmodel"]()
 	f1_local6(f1_local5, f1_local7["lobbyRoot.lobbyNav"], function(f4_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -92,15 +92,15 @@ CoD.RestrictedItemWarningText.__resetProperties = function(f6_arg0)
 	f6_arg0.bg:completeAnimation()
 	f6_arg0.CharacterText:completeAnimation()
 	f6_arg0.Text:setAlpha(0)
-	f6_arg0.Text:setText(LocalizeToUpperString(0x3293C2F8FE5A04C))
+	f6_arg0.Text:setText(LocalizeToUpperString(@"menu/restricted_item"))
 	f6_arg0.Warning:setLeftRight(0, 0, 0, 38)
 	f6_arg0.Warning:setTopBottom(0.5, 0.5, -15, 15)
 	f6_arg0.Warning:setRGB(0.82, 0.08, 0.17)
 	f6_arg0.Warning:setAlpha(0)
-	f6_arg0.Warning:setImage(RegisterImage(0xDF501A88BB578F))
+	f6_arg0.Warning:setImage(RegisterImage(@"uie_t8_icon_restriction_warning"))
 	f6_arg0.bg:setAlpha(0)
 	f6_arg0.CharacterText:setAlpha(0)
-	f6_arg0.CharacterText:setText(Engine[0xF9F1239CFD921FE](AddLocalizeGameModeToString(0x3C8AC9335AFAA5E)))
+	f6_arg0.CharacterText:setText(Engine[@"hash_4F9F1239CFD921FE"](AddLocalizeGameModeToString(@"hash_43C8AC9335AFAA5E")))
 end
 CoD.RestrictedItemWarningText.__clipsPerState = {
 	DefaultState = {
@@ -118,15 +118,15 @@ CoD.RestrictedItemWarningText.__clipsPerState = {
 			f8_arg0.clipFinished(f8_arg0.bg)
 			f8_arg0.Warning:completeAnimation()
 			f8_arg0.Warning:setAlpha(1)
-			f8_arg0.Warning:setImage(RegisterImage(0xDF501A88BB578F))
+			f8_arg0.Warning:setImage(RegisterImage(@"uie_t8_icon_restriction_warning"))
 			f8_arg0.clipFinished(f8_arg0.Warning)
 			f8_arg0.Text:completeAnimation()
 			f8_arg0.Text:setAlpha(0)
-			f8_arg0.Text:setText(LocalizeToUpperString(0x3293C2F8FE5A04C))
+			f8_arg0.Text:setText(LocalizeToUpperString(@"menu/restricted_item"))
 			f8_arg0.clipFinished(f8_arg0.Text)
 			f8_arg0.CharacterText:completeAnimation()
 			f8_arg0.CharacterText:setAlpha(1)
-			f8_arg0.CharacterText:setText(Engine[0xF9F1239CFD921FE](AddLocalizeGameModeToString(0x3C8AC9335AFAA5E)))
+			f8_arg0.CharacterText:setText(Engine[@"hash_4F9F1239CFD921FE"](AddLocalizeGameModeToString(@"hash_43C8AC9335AFAA5E")))
 			f8_arg0.clipFinished(f8_arg0.CharacterText)
 		end,
 	},
@@ -142,7 +142,7 @@ CoD.RestrictedItemWarningText.__clipsPerState = {
 			f9_arg0.Warning:setTopBottom(0.5, 0.5, -18.5, 14.5)
 			f9_arg0.Warning:setRGB(0.82, 0.08, 0.17)
 			f9_arg0.Warning:setAlpha(1)
-			f9_arg0.Warning:setImage(RegisterImage(0xDF501A88BB578F))
+			f9_arg0.Warning:setImage(RegisterImage(@"uie_t8_icon_restriction_warning"))
 			f9_arg0.clipFinished(f9_arg0.Warning)
 			f9_arg0.Text:completeAnimation()
 			f9_arg0.Text:setAlpha(1)

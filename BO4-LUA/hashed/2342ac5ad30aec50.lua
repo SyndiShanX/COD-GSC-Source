@@ -9,7 +9,7 @@ CoD.NineBangReticle_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	self.soundSet = "none"
 	self.anyChildUsesUpdateState = true
 	local Backer = LUI.UIImage.new(0, 0, 26.5, 126.5, 0, 0, 113, 143)
-	Backer:setImage(RegisterImage(0xAD1CDB71E011B8))
+	Backer:setImage(RegisterImage(@"uie_ui_hud_flashbang_counter_backer"))
 	self:addElement(Backer)
 	self.Backer = Backer
 	local Pip9 = CoD.NineBangReticle_Pip.new(f1_arg0, f1_arg1, 0, 0, 91, 121, 0, 0, 122, 133)
@@ -88,7 +88,7 @@ CoD.NineBangReticle_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	self:addElement(Pip3)
 	self.Pip3 = Pip3
 	Reticle = LUI.UIImage.new(0, 0, 60.5, 92.5, 0, 0, 59, 91)
-	Reticle:setImage(RegisterImage(0xCE2DEFE7CFE38B3))
+	Reticle:setImage(RegisterImage(@"uie_ui_hud_reticle_flashbang"))
 	self:addElement(Reticle)
 	self.Reticle = Reticle
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)

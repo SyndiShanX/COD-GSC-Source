@@ -34,16 +34,16 @@ LUI.createMenu.PaintshopChooseIcon = function(f1_arg0, f1_arg1)
 	self.BGEnhancement = BGEnhancement
 	local NoiseTiledBacking = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	NoiseTiledBacking:setAlpha(0.05)
-	NoiseTiledBacking:setImage(RegisterImage(0x34839E8065B1E53))
-	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	NoiseTiledBacking:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	NoiseTiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	NoiseTiledBacking:setupNineSliceShader(196, 88)
 	self:addElement(NoiseTiledBacking)
 	self.NoiseTiledBacking = NoiseTiledBacking
 	local TiledPlusGrid = LUI.UIImage.new(0, 1.07, -135, -135, 0, 0, 0, 1080)
 	TiledPlusGrid:setAlpha(0.05)
-	TiledPlusGrid:setImage(RegisterImage(0x6E37BAE22631294))
-	TiledPlusGrid:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	TiledPlusGrid:setImage(RegisterImage(@"uie_ui_hud_vehicle_hellstorm_repeat_plusgrid"))
+	TiledPlusGrid:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	TiledPlusGrid:setShaderVector(0, 0, 0, 0, 0)
 	TiledPlusGrid:setupNineSliceShader(220, 220)
 	self:addElement(TiledPlusGrid)
@@ -55,18 +55,18 @@ LUI.createMenu.PaintshopChooseIcon = function(f1_arg0, f1_arg1)
 	self.editorBackground = editorBackground
 	local BgGrain = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	BgGrain:setAlpha(0.3)
-	BgGrain:setImage(RegisterImage(0x34839E8065B1E53))
-	BgGrain:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	BgGrain:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	BgGrain:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	BgGrain:setShaderVector(0, 0, 0, 0, 0)
 	BgGrain:setupNineSliceShader(196, 88)
 	self:addElement(BgGrain)
 	self.BgGrain = BgGrain
 	local MenuFrame = CoD.GenericMenuFrame.new(f1_local1, f1_arg0, 0, 1, 0, 0, 0, 1, 0, 0)
-	MenuFrame.CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(0xBC5A0D7A77F15BB))
+	MenuFrame.CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(@"hash_BC5A0D7A77F15BB"))
 	MenuFrame:subscribeToGlobalModel(f1_arg0, "LobbyRoot", "lobbyTitle", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			MenuFrame.CommonHeader.subtitle.subtitle:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			MenuFrame.CommonHeader.subtitle.subtitle:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	self:addElement(MenuFrame)
@@ -132,7 +132,7 @@ LUI.createMenu.PaintshopChooseIcon = function(f1_arg0, f1_arg1)
 		end
 		return f8_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		if IsEmblemEditor(controller) then
 			CoD.CraftUtility.EmblemChooseIcon_SelectionRejected(self, element, controller)
 			GoBack(self, controller)
@@ -148,19 +148,19 @@ LUI.createMenu.PaintshopChooseIcon = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if IsEmblemEditor(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 			return true
 		elseif IsPaintshop(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x22361E23588705A], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_start"], nil, function(element, menu, controller, model)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x22361E23588705A], 0x0, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_start"], @"hash_0", nil, nil)
 		return false
 	end, false)
 	LUI.OverrideFunction_CallOriginalFirst(self, "close", function(element)

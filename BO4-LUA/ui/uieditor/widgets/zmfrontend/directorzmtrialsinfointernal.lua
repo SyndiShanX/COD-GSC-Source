@@ -10,8 +10,8 @@ CoD.DirectorZMTrialsInfoInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	self.anyChildUsesUpdateState = true
 	local Trials = LUI.UIText.new(0.5, 0.5, -750, -144, 0.5, 0.5, -426, -354)
 	Trials:setTTF("ttmussels_demibold")
-	Trials:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Trials:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Trials:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Trials:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	Trials:subscribeToGlobalModel(f1_arg1, "ZMLobbyExclusions", "ZMPlaylistTab", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -32,8 +32,8 @@ CoD.DirectorZMTrialsInfoInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	self.TrialsIcon = TrialsIcon
 	local TrialsDesc = LUI.UIText.new(0.5, 0.5, -860, -360, 0.5, 0.5, -274, -244)
 	TrialsDesc:setTTF("ttmussels_regular")
-	TrialsDesc:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	TrialsDesc:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	TrialsDesc:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	TrialsDesc:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	TrialsDesc:subscribeToGlobalModel(f1_arg1, "ZMLobbyExclusions", "ZMPlaylistTab", function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
@@ -57,7 +57,7 @@ CoD.DirectorZMTrialsInfoInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	})
 	local f1_local6 = TrialsInfo
 	local f1_local7 = TrialsInfo.subscribeToModel
-	local f1_local8 = Engine[0x8DF2E5447F384B9]()
+	local f1_local8 = Engine[@"getglobalmodel"]()
 	f1_local7(f1_local6, f1_local8["ZMLobbyExclusions.focusedPlaylistID"], function(f6_arg0)
 		f1_arg0:updateElementState(TrialsInfo, {
 			name = "model_validation",

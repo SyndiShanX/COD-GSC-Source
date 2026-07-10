@@ -8,8 +8,8 @@ CoD.PC_Achievements_TotalPoints_CircularProgress.new = function(f1_arg0, f1_arg1
 	self.soundSet = "default"
 	local TotalProgressRing = LUI.UIImage.new(0.5, 0.5, -14, 14, 0.5, 0.5, -14, 14)
 	TotalProgressRing:setRGB(0.71, 0.68, 0.65)
-	TotalProgressRing:setImage(RegisterImage(0xC2785B5FC0B6F18))
-	TotalProgressRing:setMaterial(LUI.UIImage.GetCachedMaterial(0xD5CA1A25ED87F4F))
+	TotalProgressRing:setImage(RegisterImage(@"uie_ui_icon_controller_radial_fill_hud"))
+	TotalProgressRing:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_clock_normal"))
 	TotalProgressRing:setShaderVector(1, 0.5, 0, 0, 0)
 	TotalProgressRing:setShaderVector(2, 0.5, 0, 0, 0)
 	TotalProgressRing:setShaderVector(3, 0, 1, 0, 0)
@@ -24,7 +24,7 @@ CoD.PC_Achievements_TotalPoints_CircularProgress.new = function(f1_arg0, f1_arg1
 	self.TotalProgressRing = TotalProgressRing
 	local TotalProgressRingBG = LUI.UIImage.new(0.5, 0.5, -14, 14, 0.5, 0.5, -14, 14)
 	TotalProgressRingBG:setAlpha(0.03)
-	TotalProgressRingBG:setImage(RegisterImage(0xC2785B5FC0B6F18))
+	TotalProgressRingBG:setImage(RegisterImage(@"uie_ui_icon_controller_radial_fill_hud"))
 	self:addElement(TotalProgressRingBG)
 	self.TotalProgressRingBG = TotalProgressRingBG
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)

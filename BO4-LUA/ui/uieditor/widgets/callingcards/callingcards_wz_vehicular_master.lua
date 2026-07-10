@@ -1,19 +1,19 @@
 require("x64:d717612533034a4")
 require("x64:fca8b7caff8cb66")
 require("x64:f6ffffbea858c2c")
-CoD[0x9F34ECBDE25BB8F] = InheritFrom(LUI.UIElement)
-CoD[0x9F34ECBDE25BB8F].__defaultWidth = 960
-CoD[0x9F34ECBDE25BB8F].__defaultHeight = 240
-CoD[0x9F34ECBDE25BB8F].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+CoD[@"hash_29F34ECBDE25BB8F"] = InheritFrom(LUI.UIElement)
+CoD[@"hash_29F34ECBDE25BB8F"].__defaultWidth = 960
+CoD[@"hash_29F34ECBDE25BB8F"].__defaultHeight = 240
+CoD[@"hash_29F34ECBDE25BB8F"].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
 	local self = LUI.UIElement.new(f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
-	self:setClass(CoD[0x9F34ECBDE25BB8F])
+	self:setClass(CoD[@"hash_29F34ECBDE25BB8F"])
 	self.id = "CallingCards_wz_Vehicular_Master"
 	self.soundSet = "default"
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local bg = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	bg:setImage(RegisterImage(0x4BC201A0F872DE3))
-	bg:setMaterial(LUI.UIImage.GetCachedMaterial(0x73D72BCD14C2AAD))
+	bg:setImage(RegisterImage(@"uie_ui_icon_callingcards_wz_vehicular_master_background"))
+	bg:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_tile_scroll_normal"))
 	bg:setShaderVector(0, 1, 1, 0, 0)
 	bg:setShaderVector(1, -0.05, 0, 0, 0)
 	self:addElement(bg)
@@ -25,7 +25,7 @@ CoD[0x9F34ECBDE25BB8F].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	self:addElement(Fireball2)
 	self.Fireball2 = Fireball2
 	local grass = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	grass:setImage(RegisterImage(0xBA0743C2821890B))
+	grass:setImage(RegisterImage(@"uie_ui_icon_callingcards_wz_vehicular_master_grass"))
 	self:addElement(grass)
 	self.grass = grass
 	local glowyBits = CoD.CallingCards_Asset_robotdawg.new(f1_arg0, f1_arg1, 0, 0, 0, 960, 0, 0, 0, 240)
@@ -36,7 +36,7 @@ CoD[0x9F34ECBDE25BB8F].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	self.BreathSpot = BreathSpot
 	local head = LUI.UIImage.new(0, 0, 201.5, 465.5, 0, 0, 12, 172)
 	head:setScale(1.05, 1.05)
-	head:setImage(RegisterImage(0x800B5E112640B55))
+	head:setImage(RegisterImage(@"uie_ui_icon_callingcards_wz_vehicular_master_head"))
 	self:addElement(head)
 	self.head = head
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)
@@ -45,7 +45,7 @@ CoD[0x9F34ECBDE25BB8F].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	end
 	return self
 end
-CoD[0x9F34ECBDE25BB8F].__resetProperties = function(f2_arg0)
+CoD[@"hash_29F34ECBDE25BB8F"].__resetProperties = function(f2_arg0)
 	f2_arg0.Fireball:completeAnimation()
 	f2_arg0.glowyBits:completeAnimation()
 	f2_arg0.BreathSpot:completeAnimation()
@@ -58,7 +58,7 @@ CoD[0x9F34ECBDE25BB8F].__resetProperties = function(f2_arg0)
 	f2_arg0.head:setTopBottom(0, 0, 12, 172)
 	f2_arg0.head:setAlpha(1)
 end
-CoD[0x9F34ECBDE25BB8F].__clipsPerState = {
+CoD[@"hash_29F34ECBDE25BB8F"].__clipsPerState = {
 	DefaultState = {
 		DefaultClip = function(f3_arg0, f3_arg1)
 			f3_arg0:__resetProperties()
@@ -154,7 +154,7 @@ CoD[0x9F34ECBDE25BB8F].__clipsPerState = {
 		end,
 	},
 }
-CoD[0x9F34ECBDE25BB8F].__onClose = function(f16_arg0)
+CoD[@"hash_29F34ECBDE25BB8F"].__onClose = function(f16_arg0)
 	f16_arg0.Fireball:close()
 	f16_arg0.Fireball2:close()
 	f16_arg0.glowyBits:close()

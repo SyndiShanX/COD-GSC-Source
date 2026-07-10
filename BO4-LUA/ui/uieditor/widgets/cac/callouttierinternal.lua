@@ -14,27 +14,27 @@ CoD.CalloutTierInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	self.Tier2Available = Tier2Available
 	local Tier2Equipped = LUI.UIImage.new(0, 0, 0, 28, 0, 0, 0, 24)
 	Tier2Equipped:setAlpha(0)
-	Tier2Equipped:setImage(RegisterImage(0xF15F03862B81BBB))
+	Tier2Equipped:setImage(RegisterImage(@"hash_4F15F03862B81BBB"))
 	self:addElement(Tier2Equipped)
 	self.Tier2Equipped = Tier2Equipped
 	local Tier2Disabled = LUI.UIImage.new(0, 0, 0, 28, 0, 0, 0, 24)
 	Tier2Disabled:setAlpha(0)
-	Tier2Disabled:setImage(RegisterImage(0xBAE34FCD1DEBFBE))
+	Tier2Disabled:setImage(RegisterImage(@"hash_2BAE34FCD1DEBFBE"))
 	self:addElement(Tier2Disabled)
 	self.Tier2Disabled = Tier2Disabled
 	local Tier1Equipped = LUI.UIImage.new(0, 0, 0, 28, 0, 0, 0, 24)
 	Tier1Equipped:setAlpha(0)
-	Tier1Equipped:setImage(RegisterImage(0xC005ACBC777835C))
+	Tier1Equipped:setImage(RegisterImage(@"hash_C005ACBC777835C"))
 	self:addElement(Tier1Equipped)
 	self.Tier1Equipped = Tier1Equipped
 	local Tier1Available = LUI.UIImage.new(0, 0, 0, 28, 0, 0, 0, 24)
 	Tier1Available:setAlpha(0)
-	Tier1Available:setImage(RegisterImage(0x3F9E00D9473234C))
+	Tier1Available:setImage(RegisterImage(@"hash_13F9E00D9473234C"))
 	self:addElement(Tier1Available)
 	self.Tier1Available = Tier1Available
 	local Tier1Disabled = LUI.UIImage.new(0, 0, 0, 28, 0, 0, 0, 24)
 	Tier1Disabled:setAlpha(0)
-	Tier1Disabled:setImage(RegisterImage(0x25EE16A8A5B0FE1))
+	Tier1Disabled:setImage(RegisterImage(@"hash_425EE16A8A5B0FE1"))
 	self:addElement(Tier1Disabled)
 	self.Tier1Disabled = Tier1Disabled
 	if PostLoadFunc then

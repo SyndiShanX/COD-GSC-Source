@@ -21,8 +21,8 @@ CoD.CustomGames_SettingSliderNoCustom_Internal.new = function(f1_arg0, f1_arg1, 
 	self.focusCatcher = focusCatcher
 	local FocusGlow = LUI.UIImage.new(0, 1, -78, 78, 0, 1, -29, 29)
 	FocusGlow:setAlpha(0)
-	FocusGlow:setImage(RegisterImage(0xB8F10D49D85E9C4))
-	FocusGlow:setMaterial(LUI.UIImage.GetCachedMaterial(0xDAB59B2CAE01851))
+	FocusGlow:setImage(RegisterImage(@"uie_ui_menu_common_focus_glow_small"))
+	FocusGlow:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_6DAB59B2CAE01851"))
 	FocusGlow:setShaderVector(0, 0, 0, 0, 0)
 	FocusGlow:setShaderVector(1, 1.2, 0, 0, 0)
 	FocusGlow:setupNineSliceShader(160, 100)
@@ -30,8 +30,8 @@ CoD.CustomGames_SettingSliderNoCustom_Internal.new = function(f1_arg0, f1_arg1, 
 	self.FocusGlow = FocusGlow
 	local NoiseTiledBacking = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	NoiseTiledBacking:setAlpha(0.8)
-	NoiseTiledBacking:setImage(RegisterImage(0x34839E8065B1E53))
-	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	NoiseTiledBacking:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	NoiseTiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	NoiseTiledBacking:setupNineSliceShader(196, 88)
 	self:addElement(NoiseTiledBacking)
@@ -47,12 +47,12 @@ CoD.CustomGames_SettingSliderNoCustom_Internal.new = function(f1_arg0, f1_arg1, 
 	local SettingLabel = LUI.UIText.new(0, 1, 16, -234, 0.5, 0.5, -10.5, 10.5)
 	SettingLabel:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	SettingLabel:setTTF("ttmussels_regular")
-	SettingLabel:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	SettingLabel:setAlignment(Enum[0x7A5123B654282D2][0x6ED4298C93DC5ED])
+	SettingLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	SettingLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
 	SettingLabel:linkToElementModel(self, "name", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			SettingLabel:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			SettingLabel:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	self:addElement(SettingLabel)
@@ -60,8 +60,8 @@ CoD.CustomGames_SettingSliderNoCustom_Internal.new = function(f1_arg0, f1_arg1, 
 	local OptionCountBorder = LUI.UIImage.new(1, 1, -254, -4, 1, 1, -9, -5)
 	OptionCountBorder:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	OptionCountBorder:setAlpha(0)
-	OptionCountBorder:setImage(RegisterImage(0x1B69BB6285C5BBB))
-	OptionCountBorder:setMaterial(LUI.UIImage.GetCachedMaterial(0x31E7B3C72564429))
+	OptionCountBorder:setImage(RegisterImage(@"uie_hud_core_loadout_panel1"))
+	OptionCountBorder:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_631E7B3C72564429"))
 	OptionCountBorder:setShaderVector(0, 0, 0, 0.55, 0.13)
 	OptionCountBorder:setShaderVector(1, 10, 1, 0, 0)
 	OptionCountBorder:setShaderVector(2, 0, 1, 0, 1)
@@ -70,8 +70,8 @@ CoD.CustomGames_SettingSliderNoCustom_Internal.new = function(f1_arg0, f1_arg1, 
 	self.OptionCountBorder = OptionCountBorder
 	local CurrentOptionBorder = LUI.UIImage.new(1, 1, -254, -4, 1, 1, -9, -5)
 	CurrentOptionBorder:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
-	CurrentOptionBorder:setImage(RegisterImage(0x1B69BB6285C5BBB))
-	CurrentOptionBorder:setMaterial(LUI.UIImage.GetCachedMaterial(0x31E7B3C72564429))
+	CurrentOptionBorder:setImage(RegisterImage(@"uie_hud_core_loadout_panel1"))
+	CurrentOptionBorder:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_631E7B3C72564429"))
 	CurrentOptionBorder:setShaderVector(0, 0, 0, 0.55, 0.13)
 	CurrentOptionBorder:setShaderVector(1, 10, 1, 0, 0)
 	CurrentOptionBorder:setShaderVector(2, 0.3, 0.4, 0, 1)
@@ -99,7 +99,7 @@ CoD.CustomGames_SettingSliderNoCustom_Internal.new = function(f1_arg0, f1_arg1, 
 	end)
 	local TopBarFocus = SettingSliderList
 	local emptyFocusable = SettingSliderList.subscribeToModel
-	local ItemFrameAdd = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local ItemFrameAdd = Engine[@"getmodelforcontroller"](f1_arg1)
 	emptyFocusable(TopBarFocus, ItemFrameAdd.LastInput, function(f6_arg0)
 		f1_arg0:updateElementState(SettingSliderList, {
 			name = "model_validation",
@@ -112,7 +112,7 @@ CoD.CustomGames_SettingSliderNoCustom_Internal.new = function(f1_arg0, f1_arg1, 
 	SettingSliderList:setLeftRight(1, 1, -700, 0)
 	SettingSliderList:setTopBottom(0.5, 0.5, -20, 20)
 	SettingSliderList:setWidgetType(CoD.CustomGames_SettingSliderList)
-	SettingSliderList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	SettingSliderList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	SettingSliderList:linkToElementModel(self, "optionsDatasource", true, function(model)
 		local f7_local0 = model:get()
 		if f7_local0 ~= nil then
@@ -148,22 +148,22 @@ CoD.CustomGames_SettingSliderNoCustom_Internal.new = function(f1_arg0, f1_arg1, 
 	TopBarFocus = LUI.UIImage.new(0, 0, -33.5, 31.5, 0.5, 0.5, -3, 3)
 	TopBarFocus:setAlpha(0)
 	TopBarFocus:setZRot(-90)
-	TopBarFocus:setImage(RegisterImage(0x7E8B272A3927DAB))
-	TopBarFocus:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	TopBarFocus:setImage(RegisterImage(@"uie_ui_menu_cac_primary_button_top_bar_focused"))
+	TopBarFocus:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(TopBarFocus)
 	self.TopBarFocus = TopBarFocus
 	ItemFrameAdd = LUI.UIImage.new(0, 1, -3, 3, 0, 1, -1, 1)
 	ItemFrameAdd:setAlpha(0)
-	ItemFrameAdd:setImage(RegisterImage(0xC2AE59F4FA74812))
-	ItemFrameAdd:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	ItemFrameAdd:setImage(RegisterImage(@"uie_ui_menu_store_element_frame"))
+	ItemFrameAdd:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	ItemFrameAdd:setShaderVector(0, 0, 0, 0, 0)
 	ItemFrameAdd:setupNineSliceShader(12, 164)
 	self:addElement(ItemFrameAdd)
 	self.ItemFrameAdd = ItemFrameAdd
 	local FrameSelected = LUI.UIImage.new(0, 1, -3, 3, 0, 1, -3, 3)
 	FrameSelected:setAlpha(0)
-	FrameSelected:setImage(RegisterImage(0xCB07CCC28498CB2))
-	FrameSelected:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	FrameSelected:setImage(RegisterImage(@"uie_ui_menu_store_focus_frame"))
+	FrameSelected:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	FrameSelected:setShaderVector(0, 0, 0, 0, 0)
 	FrameSelected:setupNineSliceShader(8, 8)
 	self:addElement(FrameSelected)
@@ -175,16 +175,16 @@ CoD.CustomGames_SettingSliderNoCustom_Internal.new = function(f1_arg0, f1_arg1, 
 	local FocusBorder = LUI.UIImage.new(0, 1, -4, 4, 0, 1, -4, 4)
 	FocusBorder:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
 	FocusBorder:setAlpha(0)
-	FocusBorder:setImage(RegisterImage(0xCB07CCC28498CB2))
-	FocusBorder:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	FocusBorder:setImage(RegisterImage(@"uie_ui_menu_store_focus_frame"))
+	FocusBorder:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	FocusBorder:setShaderVector(0, 0, 0, 0, 0)
 	FocusBorder:setupNineSliceShader(10, 10)
 	self:addElement(FocusBorder)
 	self.FocusBorder = FocusBorder
 	local FrameBorder = LUI.UIImage.new(0, 1, -1, 1, 0, 1, -1, 1)
 	FrameBorder:setAlpha(0.3)
-	FrameBorder:setImage(RegisterImage(0x185E11D74ECA3D7))
-	FrameBorder:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	FrameBorder:setImage(RegisterImage(@"uie_ui_menu_store_common_frame"))
+	FrameBorder:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	FrameBorder:setShaderVector(0, 0, 0, 0, 0)
 	FrameBorder:setupNineSliceShader(12, 12)
 	self:addElement(FrameBorder)
@@ -199,14 +199,14 @@ CoD.CustomGames_SettingSliderNoCustom_Internal.new = function(f1_arg0, f1_arg1, 
 		elseif element.super.gainFocus then
 			f11_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f11_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(LeftArrow, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(LeftArrow, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		CoD.GridAndListUtility.NavigateGridItem(self.SettingSliderList, controller, false)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 		return true
 	end, false)
 	self:addElement(LeftArrow)
@@ -221,14 +221,14 @@ CoD.CustomGames_SettingSliderNoCustom_Internal.new = function(f1_arg0, f1_arg1, 
 		elseif element.super.gainFocus then
 			f14_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f14_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(RightArrow, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(RightArrow, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		CoD.GridAndListUtility.NavigateGridItem(self.SettingSliderList, controller, true)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 		return true
 	end, false)
 	self:addElement(RightArrow)
@@ -247,7 +247,7 @@ CoD.CustomGames_SettingSliderNoCustom_Internal.new = function(f1_arg0, f1_arg1, 
 	end)
 	local f1_local19 = self
 	local f1_local20 = self.subscribeToModel
-	local f1_local21 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local21 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local20(f1_local19, f1_local21.LastInput, function(f19_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

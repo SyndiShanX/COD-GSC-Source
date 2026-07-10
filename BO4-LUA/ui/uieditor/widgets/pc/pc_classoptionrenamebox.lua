@@ -19,8 +19,8 @@ CoD.PC_ClassOptionRenameBox.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	ClassNameText:setAlpha(0.4)
 	ClassNameText:setTTF("notosans_regular")
 	ClassNameText:setLetterSpacing(2)
-	ClassNameText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	ClassNameText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	ClassNameText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	ClassNameText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	ClassNameText:subscribeToGlobalModel(f1_arg1, "CACClassOptions", "customClassName", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -34,8 +34,8 @@ CoD.PC_ClassOptionRenameBox.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	TextBox:setText("")
 	TextBox:setTTF("notosans_regular")
 	TextBox:setLetterSpacing(2)
-	TextBox:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	TextBox:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	TextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	TextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(TextBox)
 	self.TextBox = TextBox
 	local PCHighlightBorder = CoD.PC_HighlightBorder.new(f1_arg0, f1_arg1, 0, 1, 0, 0, 0, 1, 0, 0)
@@ -51,7 +51,7 @@ CoD.PC_ClassOptionRenameBox.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	})
 	local f1_local5 = self
 	local f1_local6 = self.subscribeToModel
-	local f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local6(f1_local5, f1_local7.RenameClassText, function(f4_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

@@ -22,7 +22,7 @@ CoD.StartMenu_Options_PC_Graphics_Video.new = function(f2_arg0, f2_arg1, f2_arg2
 	graphicsList:setWidgetType(CoD.StartMenu_Options_Slider)
 	graphicsList:setVerticalCount(25)
 	graphicsList:setSpacing(0)
-	graphicsList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	graphicsList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	graphicsList:setDataSource("OptionGraphicsDevmenu")
 	self:addElement(graphicsList)
 	self.graphicsList = graphicsList

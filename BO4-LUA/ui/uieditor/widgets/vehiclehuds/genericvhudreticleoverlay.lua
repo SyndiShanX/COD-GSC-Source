@@ -134,13 +134,13 @@ CoD.genericVHUDReticleOverlay.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 		{
 			stateName = "Visible",
 			condition = function(menu, element, event)
-				return IsCampaign() and Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xADC477DDE486DD7])
+				return IsCampaign() and Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_hud_visible"])
 			end,
 		},
 	})
 	local f1_local8 = self
 	local f1_local9 = self.subscribeToModel
-	local f1_local10 = Engine[0x8DF2E5447F384B9]()
+	local f1_local10 = Engine[@"getglobalmodel"]()
 	f1_local9(f1_local8, f1_local10["lobbyRoot.lobbyNav"], function(f20_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -152,14 +152,14 @@ CoD.genericVHUDReticleOverlay.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	end, false)
 	f1_local8 = self
 	f1_local9 = self.subscribeToModel
-	f1_local10 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local9(f1_local8, f1_local10["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xADC477DDE486DD7]], function(f21_arg0)
+	f1_local10 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local9(f1_local8, f1_local10["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_hud_visible"]], function(f21_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f21_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xADC477DDE486DD7],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_hud_visible"],
 		})
 	end, false)
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)

@@ -18,7 +18,7 @@ CoD.Social_PlayersListButtonShared.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	self.EmptyBacking2 = EmptyBacking2
 	local TeamColorBacking = LUI.UIImage.new(0, 1.01, 14, 14, 0, 1.19, -4, -4)
 	TeamColorBacking:setAlpha(0.5)
-	TeamColorBacking:setImage(RegisterImage(0x3AA5FC267DC2C8))
+	TeamColorBacking:setImage(RegisterImage(@"uie_ui_menu_cac_text_bg01"))
 	TeamColorBacking.__Color = function(f2_arg0)
 		local f2_local0 = f2_arg0:get()
 		if f2_local0 ~= nil then
@@ -40,15 +40,15 @@ CoD.Social_PlayersListButtonShared.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	self.TeamColorBacking = TeamColorBacking
 	local OnOffBacking = LUI.UIImage.new(0, 1.01, 14, 14, 0, 1.19, -4, -4)
 	OnOffBacking:setAlpha(0)
-	OnOffBacking:setImage(RegisterImage(0x3AA5FC267DC2C8))
-	OnOffBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	OnOffBacking:setImage(RegisterImage(@"uie_ui_menu_cac_text_bg01"))
+	OnOffBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	OnOffBacking:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(OnOffBacking)
 	self.OnOffBacking = OnOffBacking
 	local Border = LUI.UIImage.new(0, 1, 14, 14, 0, 1, 0, 0)
 	Border:setRGB(0.47, 0.47, 0.47)
 	Border:setAlpha(0)
-	Border:setMaterial(LUI.UIImage.GetCachedMaterial(0x61FE85EDD9F1ED1))
+	Border:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_161FE85EDD9F1ED1"))
 	Border:setShaderVector(0, 0, 0, 0, 0)
 	Border:setShaderVector(1, 0, 0, 0, 0)
 	Border:setupNineSliceShader(1, 1)
@@ -147,7 +147,7 @@ CoD.Social_PlayersListButtonShared.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	local Plus = LUI.UIImage.new(0.5, 0.5, -12, 12, 0.5, 0.5, -12.5, 11.5)
 	Plus:setRGB(0.53, 0.53, 0.53)
 	Plus:setAlpha(0)
-	Plus:setImage(RegisterImage(0xEEAE023A842C318))
+	Plus:setImage(RegisterImage(@"uie_ui_menu_cac_plus"))
 	self:addElement(Plus)
 	self.Plus = Plus
 	local SocialPlayersListRankInfo = CoD.Social_PlayersListRankInfo.new(f1_arg0, f1_arg1, 1, 1, -79.5, -22.5, 0, 0, 1.5, 37.5)
@@ -168,13 +168,13 @@ CoD.Social_PlayersListButtonShared.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	self.membernamePC = membernamePC
 	local f1_local15 = TeamColorBacking
 	local f1_local16 = TeamColorBacking.subscribeToModel
-	local f1_local17 = Engine[0x8DF2E5447F384B9]()
+	local f1_local17 = Engine[@"getglobalmodel"]()
 	f1_local16(f1_local15, f1_local17["MapVote.mapVoteGameModeNext"], TeamColorBacking.__Color_FullPath)
 	self:mergeStateConditions({
 		{
 			stateName = "OfflinePC",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "primaryPresence", Enum[0x5904C991C9847C2][0xDB6E2B269A58541]) and IsPC()
+				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "primaryPresence", Enum[@"presenceprimary"][@"presence_primary_offline"]) and IsPC()
 			end,
 		},
 		{
@@ -218,19 +218,19 @@ CoD.Social_PlayersListButtonShared.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 		{
 			stateName = "Empty",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "xuid", Engine[0x9073FBE2D48C156]("0"))
+				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "xuid", Engine[@"stringtoxuiddecimal"]("0"))
 			end,
 		},
 		{
 			stateName = "Offline",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "primaryPresence", Enum[0x5904C991C9847C2][0xDB6E2B269A58541])
+				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "primaryPresence", Enum[@"presenceprimary"][@"presence_primary_offline"])
 			end,
 		},
 		{
 			stateName = "OnlineButNotOurGame",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "presence", Enum[0x4BBA402DE649132][0xA2184EBB293AF2D])
+				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "presence", Enum[@"presencetitle"][@"hash_7A2184EBB293AF2D"])
 			end,
 		},
 		{
@@ -251,7 +251,7 @@ CoD.Social_PlayersListButtonShared.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	end)
 	f1_local15 = self
 	f1_local16 = self.subscribeToModel
-	f1_local17 = Engine[0x8DF2E5447F384B9]()
+	f1_local17 = Engine[@"getglobalmodel"]()
 	f1_local16(f1_local15, f1_local17["socialRoot.leaderboardsPlayerListActive"], function(f27_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -272,7 +272,7 @@ CoD.Social_PlayersListButtonShared.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	end)
 	f1_local15 = self
 	f1_local16 = self.subscribeToModel
-	f1_local17 = Engine[0x8DF2E5447F384B9]()
+	f1_local17 = Engine[@"getglobalmodel"]()
 	f1_local16(f1_local15, f1_local17["lobbyRoot.lobbyNav"], function(f29_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -320,7 +320,7 @@ CoD.Social_PlayersListButtonShared.__resetProperties = function(f32_arg0)
 	f32_arg0.SocialPartyMemberIconLarge0:completeAnimation()
 	f32_arg0.OnOffBacking:setRGB(1, 1, 1)
 	f32_arg0.OnOffBacking:setAlpha(0)
-	f32_arg0.OnOffBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	f32_arg0.OnOffBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	f32_arg0.OnOffBacking:setShaderVector(0, 1, 0, 0, 0)
 	f32_arg0.TeamColorBacking:setAlpha(0.5)
 	f32_arg0.membername:setRGB(1, 1, 1)
@@ -689,7 +689,7 @@ CoD.Social_PlayersListButtonShared.__clipsPerState = {
 			f63_arg0.TeamColorBacking:setAlpha(0.5)
 			f63_arg0.clipFinished(f63_arg0.TeamColorBacking)
 			local f63_local0 = function(f64_arg0)
-				f63_arg0.OnOffBacking:beginAnimation(100, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f63_arg0.OnOffBacking:beginAnimation(100, Enum[@"luitween"][@"luitween_ease_both"])
 				f63_arg0.OnOffBacking:setAlpha(0.25)
 				f63_arg0.OnOffBacking:setShaderVector(0, 1, 0, 0, 0)
 				f63_arg0.OnOffBacking:registerEventHandler("interrupted_keyframe", f63_arg0.clipInterrupted)
@@ -697,7 +697,7 @@ CoD.Social_PlayersListButtonShared.__clipsPerState = {
 			end
 			f63_arg0.OnOffBacking:completeAnimation()
 			f63_arg0.OnOffBacking:setAlpha(0.5)
-			f63_arg0.OnOffBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+			f63_arg0.OnOffBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 			f63_arg0.OnOffBacking:setShaderVector(0, 2, 0, 0, 0)
 			f63_local0(f63_arg0.OnOffBacking)
 			f63_arg0.joinable:completeAnimation()
@@ -711,7 +711,7 @@ CoD.Social_PlayersListButtonShared.__clipsPerState = {
 			f65_arg0.TeamColorBacking:setAlpha(0.5)
 			f65_arg0.clipFinished(f65_arg0.TeamColorBacking)
 			local f65_local0 = function(f66_arg0)
-				f65_arg0.OnOffBacking:beginAnimation(100, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f65_arg0.OnOffBacking:beginAnimation(100, Enum[@"luitween"][@"luitween_ease_both"])
 				f65_arg0.OnOffBacking:setAlpha(0.5)
 				f65_arg0.OnOffBacking:setShaderVector(0, 2, 0, 0, 0)
 				f65_arg0.OnOffBacking:registerEventHandler("interrupted_keyframe", f65_arg0.clipInterrupted)
@@ -719,7 +719,7 @@ CoD.Social_PlayersListButtonShared.__clipsPerState = {
 			end
 			f65_arg0.OnOffBacking:completeAnimation()
 			f65_arg0.OnOffBacking:setAlpha(0.25)
-			f65_arg0.OnOffBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+			f65_arg0.OnOffBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 			f65_arg0.OnOffBacking:setShaderVector(0, 1, 0, 0, 0)
 			f65_local0(f65_arg0.OnOffBacking)
 		end,
@@ -741,7 +741,7 @@ CoD.Social_PlayersListButtonShared.__clipsPerState = {
 			f68_arg0.TeamColorBacking:setAlpha(0.5)
 			f68_arg0.clipFinished(f68_arg0.TeamColorBacking)
 			local f68_local0 = function(f69_arg0)
-				f68_arg0.OnOffBacking:beginAnimation(100, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f68_arg0.OnOffBacking:beginAnimation(100, Enum[@"luitween"][@"luitween_ease_both"])
 				f68_arg0.OnOffBacking:setAlpha(0.25)
 				f68_arg0.OnOffBacking:setShaderVector(0, 1, 0, 0, 0)
 				f68_arg0.OnOffBacking:registerEventHandler("interrupted_keyframe", f68_arg0.clipInterrupted)
@@ -749,7 +749,7 @@ CoD.Social_PlayersListButtonShared.__clipsPerState = {
 			end
 			f68_arg0.OnOffBacking:completeAnimation()
 			f68_arg0.OnOffBacking:setAlpha(0.5)
-			f68_arg0.OnOffBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+			f68_arg0.OnOffBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 			f68_arg0.OnOffBacking:setShaderVector(0, 2, 0, 0, 0)
 			f68_local0(f68_arg0.OnOffBacking)
 			f68_arg0.joinable:completeAnimation()
@@ -763,7 +763,7 @@ CoD.Social_PlayersListButtonShared.__clipsPerState = {
 			f70_arg0.TeamColorBacking:setAlpha(0.5)
 			f70_arg0.clipFinished(f70_arg0.TeamColorBacking)
 			local f70_local0 = function(f71_arg0)
-				f70_arg0.OnOffBacking:beginAnimation(100, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f70_arg0.OnOffBacking:beginAnimation(100, Enum[@"luitween"][@"luitween_ease_both"])
 				f70_arg0.OnOffBacking:setAlpha(0.5)
 				f70_arg0.OnOffBacking:setShaderVector(0, 2, 0, 0, 0)
 				f70_arg0.OnOffBacking:registerEventHandler("interrupted_keyframe", f70_arg0.clipInterrupted)
@@ -771,7 +771,7 @@ CoD.Social_PlayersListButtonShared.__clipsPerState = {
 			end
 			f70_arg0.OnOffBacking:completeAnimation()
 			f70_arg0.OnOffBacking:setAlpha(0.25)
-			f70_arg0.OnOffBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+			f70_arg0.OnOffBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 			f70_arg0.OnOffBacking:setShaderVector(0, 1, 0, 0, 0)
 			f70_local0(f70_arg0.OnOffBacking)
 		end,
@@ -785,7 +785,7 @@ CoD.Social_PlayersListButtonShared.__clipsPerState = {
 			f72_arg0.clipFinished(f72_arg0.TeamColorBacking)
 			f72_arg0.OnOffBacking:completeAnimation()
 			f72_arg0.OnOffBacking:setAlpha(0.25)
-			f72_arg0.OnOffBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+			f72_arg0.OnOffBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 			f72_arg0.OnOffBacking:setShaderVector(0, 1, 0, 0, 0)
 			f72_arg0.clipFinished(f72_arg0.OnOffBacking)
 		end,
@@ -797,7 +797,7 @@ CoD.Social_PlayersListButtonShared.__clipsPerState = {
 			f73_arg0.clipFinished(f73_arg0.TeamColorBacking)
 			f73_arg0.OnOffBacking:completeAnimation()
 			f73_arg0.OnOffBacking:setAlpha(0.5)
-			f73_arg0.OnOffBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+			f73_arg0.OnOffBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 			f73_arg0.OnOffBacking:setShaderVector(0, 2, 0, 0, 0)
 			f73_arg0.clipFinished(f73_arg0.OnOffBacking)
 		end,
@@ -808,7 +808,7 @@ CoD.Social_PlayersListButtonShared.__clipsPerState = {
 			f74_arg0.TeamColorBacking:setAlpha(0.5)
 			f74_arg0.clipFinished(f74_arg0.TeamColorBacking)
 			local f74_local0 = function(f75_arg0)
-				f74_arg0.OnOffBacking:beginAnimation(100, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f74_arg0.OnOffBacking:beginAnimation(100, Enum[@"luitween"][@"luitween_ease_both"])
 				f74_arg0.OnOffBacking:setAlpha(0.25)
 				f74_arg0.OnOffBacking:setShaderVector(0, 1, 0, 0, 0)
 				f74_arg0.OnOffBacking:registerEventHandler("interrupted_keyframe", f74_arg0.clipInterrupted)
@@ -816,7 +816,7 @@ CoD.Social_PlayersListButtonShared.__clipsPerState = {
 			end
 			f74_arg0.OnOffBacking:completeAnimation()
 			f74_arg0.OnOffBacking:setAlpha(0.5)
-			f74_arg0.OnOffBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+			f74_arg0.OnOffBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 			f74_arg0.OnOffBacking:setShaderVector(0, 2, 0, 0, 0)
 			f74_local0(f74_arg0.OnOffBacking)
 		end,
@@ -827,7 +827,7 @@ CoD.Social_PlayersListButtonShared.__clipsPerState = {
 			f76_arg0.TeamColorBacking:setAlpha(0.5)
 			f76_arg0.clipFinished(f76_arg0.TeamColorBacking)
 			local f76_local0 = function(f77_arg0)
-				f76_arg0.OnOffBacking:beginAnimation(100, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f76_arg0.OnOffBacking:beginAnimation(100, Enum[@"luitween"][@"luitween_ease_both"])
 				f76_arg0.OnOffBacking:setAlpha(0.5)
 				f76_arg0.OnOffBacking:setShaderVector(0, 2, 0, 0, 0)
 				f76_arg0.OnOffBacking:registerEventHandler("interrupted_keyframe", f76_arg0.clipInterrupted)
@@ -835,7 +835,7 @@ CoD.Social_PlayersListButtonShared.__clipsPerState = {
 			end
 			f76_arg0.OnOffBacking:completeAnimation()
 			f76_arg0.OnOffBacking:setAlpha(0.25)
-			f76_arg0.OnOffBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+			f76_arg0.OnOffBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 			f76_arg0.OnOffBacking:setShaderVector(0, 1, 0, 0, 0)
 			f76_local0(f76_arg0.OnOffBacking)
 		end,
@@ -847,7 +847,7 @@ CoD.Social_PlayersListButtonShared.__clipsPerState = {
 			f78_arg0.clipFinished(f78_arg0.TeamColorBacking)
 			f78_arg0.OnOffBacking:completeAnimation()
 			f78_arg0.OnOffBacking:setAlpha(0.7)
-			f78_arg0.OnOffBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+			f78_arg0.OnOffBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 			f78_arg0.OnOffBacking:setShaderVector(0, 2, 0, 0, 0)
 			f78_arg0.clipFinished(f78_arg0.OnOffBacking)
 		end,
@@ -865,7 +865,7 @@ CoD.Social_PlayersListButtonShared.__clipsPerState = {
 			end
 			f79_arg0.OnOffBacking:completeAnimation()
 			f79_arg0.OnOffBacking:setAlpha(0.5)
-			f79_arg0.OnOffBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+			f79_arg0.OnOffBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 			f79_arg0.OnOffBacking:setShaderVector(0, 2, 0, 0, 0)
 			f79_local0(f79_arg0.OnOffBacking)
 		end,
@@ -877,7 +877,7 @@ CoD.Social_PlayersListButtonShared.__clipsPerState = {
 			f81_arg0.clipFinished(f81_arg0.TeamColorBacking)
 			f81_arg0.OnOffBacking:completeAnimation()
 			f81_arg0.OnOffBacking:setAlpha(0.5)
-			f81_arg0.OnOffBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+			f81_arg0.OnOffBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 			f81_arg0.OnOffBacking:setShaderVector(0, 2, 0, 0, 0)
 			f81_arg0.clipFinished(f81_arg0.OnOffBacking)
 		end,
@@ -896,7 +896,7 @@ CoD.Social_PlayersListButtonShared.__clipsPerState = {
 			end
 			f82_arg0.OnOffBacking:completeAnimation()
 			f82_arg0.OnOffBacking:setAlpha(0.5)
-			f82_arg0.OnOffBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+			f82_arg0.OnOffBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 			f82_arg0.OnOffBacking:setShaderVector(0, 2, 0, 0, 0)
 			f82_local0(f82_arg0.OnOffBacking)
 		end,
@@ -919,7 +919,7 @@ CoD.Social_PlayersListButtonShared.__clipsPerState = {
 			end
 			f84_arg0.OnOffBacking:completeAnimation()
 			f84_arg0.OnOffBacking:setAlpha(0.7)
-			f84_arg0.OnOffBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+			f84_arg0.OnOffBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 			f84_arg0.OnOffBacking:setShaderVector(0, 2, 0, 0, 0)
 			f84_local1(f84_arg0.OnOffBacking)
 		end,
@@ -942,7 +942,7 @@ CoD.Social_PlayersListButtonShared.__clipsPerState = {
 			end
 			f87_arg0.OnOffBacking:completeAnimation()
 			f87_arg0.OnOffBacking:setAlpha(0.5)
-			f87_arg0.OnOffBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+			f87_arg0.OnOffBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 			f87_arg0.OnOffBacking:setShaderVector(0, 2, 0, 0, 0)
 			f87_local1(f87_arg0.OnOffBacking)
 		end,
@@ -958,14 +958,14 @@ CoD.Social_PlayersListButtonShared.__clipsPerState = {
 			f90_arg0.TeamColorBacking:setAlpha(0.5)
 			f90_local0(f90_arg0.TeamColorBacking)
 			local f90_local1 = function(f92_arg0)
-				f90_arg0.OnOffBacking:beginAnimation(100, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f90_arg0.OnOffBacking:beginAnimation(100, Enum[@"luitween"][@"luitween_ease_both"])
 				f90_arg0.OnOffBacking:setAlpha(0.5)
 				f90_arg0.OnOffBacking:registerEventHandler("interrupted_keyframe", f90_arg0.clipInterrupted)
 				f90_arg0.OnOffBacking:registerEventHandler("transition_complete_keyframe", f90_arg0.clipFinished)
 			end
 			f90_arg0.OnOffBacking:completeAnimation()
 			f90_arg0.OnOffBacking:setAlpha(0.7)
-			f90_arg0.OnOffBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+			f90_arg0.OnOffBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 			f90_arg0.OnOffBacking:setShaderVector(0, 2, 0, 0, 0)
 			f90_local1(f90_arg0.OnOffBacking)
 		end,
@@ -1151,7 +1151,7 @@ CoD.Social_PlayersListButtonShared.__clipsPerState = {
 			f100_arg0.TeamColorBacking:setAlpha(0.5)
 			f100_arg0.clipFinished(f100_arg0.TeamColorBacking)
 			local f100_local0 = function(f101_arg0)
-				f100_arg0.OnOffBacking:beginAnimation(100, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f100_arg0.OnOffBacking:beginAnimation(100, Enum[@"luitween"][@"luitween_ease_both"])
 				f100_arg0.OnOffBacking:setAlpha(0.25)
 				f100_arg0.OnOffBacking:setShaderVector(0, 1, 0, 0, 0)
 				f100_arg0.OnOffBacking:registerEventHandler("interrupted_keyframe", f100_arg0.clipInterrupted)
@@ -1159,7 +1159,7 @@ CoD.Social_PlayersListButtonShared.__clipsPerState = {
 			end
 			f100_arg0.OnOffBacking:completeAnimation()
 			f100_arg0.OnOffBacking:setAlpha(0.5)
-			f100_arg0.OnOffBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+			f100_arg0.OnOffBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 			f100_arg0.OnOffBacking:setShaderVector(0, 2, 0, 0, 0)
 			f100_local0(f100_arg0.OnOffBacking)
 		end,
@@ -1170,7 +1170,7 @@ CoD.Social_PlayersListButtonShared.__clipsPerState = {
 			f102_arg0.TeamColorBacking:setAlpha(0.5)
 			f102_arg0.clipFinished(f102_arg0.TeamColorBacking)
 			local f102_local0 = function(f103_arg0)
-				f102_arg0.OnOffBacking:beginAnimation(100, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f102_arg0.OnOffBacking:beginAnimation(100, Enum[@"luitween"][@"luitween_ease_both"])
 				f102_arg0.OnOffBacking:setAlpha(0.5)
 				f102_arg0.OnOffBacking:setShaderVector(0, 2, 0, 0, 0)
 				f102_arg0.OnOffBacking:registerEventHandler("interrupted_keyframe", f102_arg0.clipInterrupted)
@@ -1178,7 +1178,7 @@ CoD.Social_PlayersListButtonShared.__clipsPerState = {
 			end
 			f102_arg0.OnOffBacking:completeAnimation()
 			f102_arg0.OnOffBacking:setAlpha(0.25)
-			f102_arg0.OnOffBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+			f102_arg0.OnOffBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 			f102_arg0.OnOffBacking:setShaderVector(0, 1, 0, 0, 0)
 			f102_local0(f102_arg0.OnOffBacking)
 		end,

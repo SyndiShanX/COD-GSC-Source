@@ -14,7 +14,7 @@ CoD.WarWaypoint.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_a
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local ProgressMeterFrame = LUI.UIImage.new(0.5, 0.5, -52.5, 54.5, 0.5, 0.5, -51.5, 52.5)
-	ProgressMeterFrame:setImage(RegisterImage(0x7DBFC1DE549CC49))
+	ProgressMeterFrame:setImage(RegisterImage(@"uie_t7_hud_waypoints_new_framefill"))
 	self:addElement(ProgressMeterFrame)
 	self.ProgressMeterFrame = ProgressMeterFrame
 	local WaypointArrowDownNotClampedContainer = CoD.WaypointArrowContainer.new(f1_arg0, f1_arg1, 0.5, 0.5, -21, 21, 0.5, 0.5, -25, 21)
@@ -70,8 +70,8 @@ CoD.WarWaypoint.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_a
 	local progressMeterContested = LUI.UIImage.new(0.5, 0.5, -34, 36, 0.5, 0.5, -36, 34)
 	progressMeterContested:setRGB(1, 0.4, 0)
 	progressMeterContested:setAlpha(0)
-	progressMeterContested:setImage(RegisterImage(0xB1F550BBC41155E))
-	progressMeterContested:setMaterial(LUI.UIImage.GetCachedMaterial(0xD5CA1A25ED87F4F))
+	progressMeterContested:setImage(RegisterImage(@"uie_t7_hud_interact_meter_diamond"))
+	progressMeterContested:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_clock_normal"))
 	progressMeterContested:setShaderVector(1, 0.5, 0, 0, 0)
 	progressMeterContested:setShaderVector(2, 0.5, 0, 0, 0)
 	progressMeterContested:setShaderVector(3, 0, 0, 0, 0)
@@ -91,7 +91,7 @@ CoD.WarWaypoint.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_a
 	WaypointText:linkToElementModel(self, "text", true, function(model)
 		local f10_local0 = model:get()
 		if f10_local0 ~= nil then
-			WaypointText.WaypointTextWithBG.text:setText(Engine[0xF9F1239CFD921FE](f10_local0))
+			WaypointText.WaypointTextWithBG.text:setText(Engine[@"hash_4F9F1239CFD921FE"](f10_local0))
 		end
 	end)
 	WaypointText:linkToElementModel(self, "distanceText", true, function(model)
@@ -182,7 +182,7 @@ CoD.WarWaypoint.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_a
 	end)
 	local f1_local8 = self
 	local f1_local9 = self.subscribeToModel
-	local f1_local10 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local10 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local9(f1_local8, f1_local10["interactivePrompt.activeObjectiveID"], function(f22_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -194,7 +194,7 @@ CoD.WarWaypoint.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_a
 	end, false)
 	f1_local8 = self
 	f1_local9 = self.subscribeToModel
-	f1_local10 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local10 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local9(f1_local8, f1_local10["hudItems.hacked"], function(f23_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -266,50 +266,50 @@ CoD.WarWaypoint.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_a
 	end, false)
 	f1_local8 = self
 	f1_local9 = self.subscribeToModel
-	f1_local10 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local9(f1_local8, f1_local10["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x6FFF566DCC09BBD]], function(f29_arg0)
+	f1_local10 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local9(f1_local8, f1_local10["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_spectating_client"]], function(f29_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f29_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x6FFF566DCC09BBD],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_spectating_client"],
 		})
 	end, false)
 	f1_local8 = self
 	f1_local9 = self.subscribeToModel
-	f1_local10 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local9(f1_local8, f1_local10["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xADC477DDE486DD7]], function(f30_arg0)
+	f1_local10 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local9(f1_local8, f1_local10["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_hud_visible"]], function(f30_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f30_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xADC477DDE486DD7],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_hud_visible"],
 		})
 	end, false)
 	f1_local8 = self
 	f1_local9 = self.subscribeToModel
-	f1_local10 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local9(f1_local8, f1_local10["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x59333FC97F7870]], function(f31_arg0)
+	f1_local10 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local9(f1_local8, f1_local10["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_emp_active"]], function(f31_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f31_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x59333FC97F7870],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_emp_active"],
 		})
 	end, false)
 	f1_local8 = self
 	f1_local9 = self.subscribeToModel
-	f1_local10 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local9(f1_local8, f1_local10["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x1C630DB86D235A5]], function(f32_arg0)
+	f1_local10 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local9(f1_local8, f1_local10["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_selecting_locational_killstreak"]], function(f32_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f32_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x1C630DB86D235A5],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_selecting_locational_killstreak"],
 		})
 	end, false)
 	self:linkToElementModel(self, "icon", true, function(model)

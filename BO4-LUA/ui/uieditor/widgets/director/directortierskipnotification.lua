@@ -25,12 +25,12 @@ CoD.DirectorTierSkipNotification.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	self:addElement(TierSkipComplete)
 	self.TierSkipComplete = TierSkipComplete
 	local TierSkipIcon = LUI.UIImage.new(0, 0, 36, 136, 0.5, 0.5, -48, 52)
-	TierSkipIcon:setImage(RegisterImage(0x3162CFF8BC56A18))
+	TierSkipIcon:setImage(RegisterImage(@"ui_icon_blackmarket_tier_token"))
 	self:addElement(TierSkipIcon)
 	self.TierSkipIcon = TierSkipIcon
 	local TierSkipIconComplete = LUI.UIImage.new(0, 0, 146.5, 246.5, 0.5, 0.5, -48, 52)
 	TierSkipIconComplete:setAlpha(0)
-	TierSkipIconComplete:setImage(RegisterImage(0x3162CFF8BC56A18))
+	TierSkipIconComplete:setImage(RegisterImage(@"ui_icon_blackmarket_tier_token"))
 	self:addElement(TierSkipIconComplete)
 	self.TierSkipIconComplete = TierSkipIconComplete
 	local AmbientGlowAnim = CoD.TierBoostAmbientGlow.new(f1_arg0, f1_arg1, 0, 0, 50, 122, 0.5, 0.5, -34, 38)
@@ -64,7 +64,7 @@ CoD.DirectorTierSkipNotification.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	})
 	local f1_local7 = self
 	local f1_local8 = self.subscribeToModel
-	local f1_local9 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local9 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local8(f1_local7, f1_local9["TierSkip.notifyVisible"], function(f6_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

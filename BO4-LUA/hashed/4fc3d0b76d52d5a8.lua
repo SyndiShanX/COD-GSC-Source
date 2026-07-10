@@ -19,7 +19,7 @@ CoD.ZMInvObjectiveProgressItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	local Earned = LUI.UIImage.new(0.5, 0.5, -32, 32, 0, 0, 30, 94)
 	Earned:setRGB(1, 0.79, 0.32)
 	Earned:setAlpha(0)
-	Earned:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Earned:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	Earned:linkToElementModel(self, "progressItemFinishedImage", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then

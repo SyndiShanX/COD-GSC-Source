@@ -16,17 +16,17 @@ CoD.CamoFilterButtonList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	CamoFilterList:setWidgetType(CoD.CamoFilterButton)
 	CamoFilterList:setVerticalCount(3)
 	CamoFilterList:setSpacing(13)
-	CamoFilterList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	CamoFilterList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	CamoFilterList:setDataSource("WeaponOptionsCamoCategories")
 	CamoFilterList:appendEventHandler("input_source_changed", function(f2_arg0, f2_arg1)
 		f2_arg1.menu = f2_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f2_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f2_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	local f1_local2 = CamoFilterList
 	local f1_local3 = CamoFilterList.subscribeToModel
-	local f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local3(f1_local2, f1_local4.LastInput, function(f3_arg0, f3_arg1)
-		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	CamoFilterList:registerEventHandler("input_source_changed", function(element, event)
 		local f4_local0 = nil
@@ -43,10 +43,10 @@ CoD.CamoFilterButtonList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 		elseif element.super.gainFocus then
 			f5_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f5_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(CamoFilterList, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(CamoFilterList, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if IsMouseOrKeyboard(controller) then
 			SetCurrentElementAsActive(self, element, controller)
 			ProcessListAction(self, element, controller, menu)
@@ -56,7 +56,7 @@ CoD.CamoFilterButtonList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 			return true
 		end
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 		return true
 	end, false)
 	self:addElement(CamoFilterList)

@@ -8,7 +8,7 @@ CoD.SpectreLockLineWidgetNormal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self.soundSet = "default"
 	local Line = LUI.UIImage.new(0, 0, 0, 24, 0, 0, 0, 24)
 	Line:setRGB(1, 0.01, 0)
-	Line:setImage(RegisterImage(0xE2F6B35888DF713))
+	Line:setImage(RegisterImage(@"uie_spectre_blade_cornerline_notadd"))
 	self:addElement(Line)
 	self.Line = Line
 	if PostLoadFunc then

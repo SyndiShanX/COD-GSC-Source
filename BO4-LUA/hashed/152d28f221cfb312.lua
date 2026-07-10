@@ -11,7 +11,7 @@ CoD.ContextNotification_SpecialistWeaponHint.new = function(f1_arg0, f1_arg1, f1
 	local NotificationText = LUI.UIText.new(0, 0, 0, 300, 0, 0, 0, 30)
 	NotificationText:setTTF("ttmussels_regular")
 	NotificationText:setLetterSpacing(1)
-	NotificationText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	NotificationText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	NotificationText:setBackingType(1)
 	NotificationText:setBackingWidget(CoD.FE_ButtonPanel, f1_arg0, f1_arg1)
 	NotificationText:setBackingColor(0, 0, 0)

@@ -11,19 +11,19 @@ CoD.ArenaSkillDivision.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	self:addElement(SkillBadge)
 	self.SkillBadge = SkillBadge
 	local Title = LUI.UIText.new(0, 0, 103, 403, 0, 0, 20, 53)
-	Title:setText(LocalizeToUpperString(0x93E719493E9E18F))
+	Title:setText(LocalizeToUpperString(@"menu/new"))
 	Title:setTTF("ttmussels_demibold")
 	Title:setLetterSpacing(2)
-	Title:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Title:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	Title:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Title:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	self:addElement(Title)
 	self.Title = Title
 	local Description = LUI.UIText.new(0, 0, 103, 403, 0, 0, 53, 73)
 	Description:setRGB(ColorSet.T8__OCHRE.r, ColorSet.T8__OCHRE.g, ColorSet.T8__OCHRE.b)
-	Description:setText(Engine[0xF9F1239CFD921FE](0x93E719493E9E18F))
+	Description:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	Description:setTTF("ttmussels_regular")
-	Description:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Description:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Description:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Description:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(Description)
 	self.Description = Description
 	self:mergeStateConditions({

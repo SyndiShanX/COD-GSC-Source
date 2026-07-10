@@ -13,12 +13,12 @@ CoD.SupportSelectionDescription.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	SelectedDescription:setZoom(90)
 	SelectedDescription:setTTF("ttmussels_regular")
 	SelectedDescription:setLetterSpacing(2)
-	SelectedDescription:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	SelectedDescription:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	SelectedDescription:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	SelectedDescription:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	SelectedDescription:linkToElementModel(self, "desc", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			SelectedDescription:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			SelectedDescription:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	self:addElement(SelectedDescription)
@@ -28,8 +28,8 @@ CoD.SupportSelectionDescription.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	UnlockRequirements:setZoom(90)
 	UnlockRequirements:setTTF("dinnext_regular")
 	UnlockRequirements:setLetterSpacing(3)
-	UnlockRequirements:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	UnlockRequirements:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	UnlockRequirements:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	UnlockRequirements:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	UnlockRequirements:linkToElementModel(self, "itemIndex", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then

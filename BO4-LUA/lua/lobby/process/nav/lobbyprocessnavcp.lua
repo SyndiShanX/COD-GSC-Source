@@ -27,5 +27,5 @@ Lobby.Core.AddProcessForward(LuaEnum.UI.DIRECTOR_LAN_SELECT, LuaEnum.UI.DIRECTOR
 	return Lobby.ProcessNavigate.PrivateLobbyNavigate(f9_arg0, f9_arg1, f9_arg2)
 end)
 Lobby.Core.AddProcessBack(LuaEnum.UI.DIRECTOR_LAN_CP, LuaEnum.UI.DIRECTOR_LAN_SELECT, function(f10_arg0, f10_arg1, f10_arg2, f10_arg3)
-	return Lobby.Process.ReloadPrivateLobby(f10_arg0, Enum[0xC84D3E505F1444][0xBAA8EC6F3E77255], f10_arg2)
+	return Lobby.Process.ReloadPrivateLobby(f10_arg0, Enum[@"lobbynetworkmode"][@"lobby_networkmode_lan"], f10_arg2)
 end)

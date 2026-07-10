@@ -9,10 +9,10 @@ CoD.Hud_ZM_Trial_Completed.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local TrialCompletedText = LUI.UIText.new(0, 0, 0, 1920, 0, 0, 47, 137)
 	TrialCompletedText:setRGB(ColorSet.GroupName.r, ColorSet.GroupName.g, ColorSet.GroupName.b)
-	TrialCompletedText:setText(LocalizeToUpperString(0x400A284ADF5EAC0))
+	TrialCompletedText:setText(LocalizeToUpperString(@"hash_5400A284ADF5EAC0"))
 	TrialCompletedText:setTTF("skorzhen")
-	TrialCompletedText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	TrialCompletedText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	TrialCompletedText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	TrialCompletedText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(TrialCompletedText)
 	self.TrialCompletedText = TrialCompletedText
 	local DescriptionDivider = LUI.UIImage.new(0, 0, 672, 1248, 0, 0, 135, 137)
@@ -20,11 +20,11 @@ CoD.Hud_ZM_Trial_Completed.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self:addElement(DescriptionDivider)
 	self.DescriptionDivider = DescriptionDivider
 	local CornerL = LUI.UIImage.new(0, 0, 664.5, 679.5, 0, 0, 128.5, 143.5)
-	CornerL:setImage(RegisterImage(0x1EC82771A88A0E6))
+	CornerL:setImage(RegisterImage(@"hash_61EC82771A88A0E6"))
 	self:addElement(CornerL)
 	self.CornerL = CornerL
 	local CornerR = LUI.UIImage.new(0, 0, 1246, 1261, 0, 0, 128.5, 143.5)
-	CornerR:setImage(RegisterImage(0x1EC82771A88A0E6))
+	CornerR:setImage(RegisterImage(@"hash_61EC82771A88A0E6"))
 	self:addElement(CornerR)
 	self.CornerR = CornerR
 	self:mergeStateConditions({
@@ -37,7 +37,7 @@ CoD.Hud_ZM_Trial_Completed.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	})
 	local f1_local5 = self
 	local f1_local6 = self.subscribeToModel
-	local f1_local7 = Engine[0x8DF2E5447F384B9]()
+	local f1_local7 = Engine[@"getglobalmodel"]()
 	f1_local6(f1_local5, f1_local7["ZMHudGlobal.trials.gameState"], function(f3_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -49,7 +49,7 @@ CoD.Hud_ZM_Trial_Completed.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	end, false)
 	f1_local5 = self
 	f1_local6 = self.subscribeToModel
-	f1_local7 = Engine[0x8DF2E5447F384B9]()
+	f1_local7 = Engine[@"getglobalmodel"]()
 	f1_local6(f1_local5, f1_local7["ZMHudGlobal.trials.showScoreboard"], function(f4_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

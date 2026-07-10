@@ -10,7 +10,7 @@ CoD.CallingCards_Asset_cloud_zoom.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	local cloud1 = LUI.UIImage.new(0, 0, 0, 504, 0, 0, 0, 504)
 	cloud1:setAlpha(0.37)
 	cloud1:setScale(0.51, 0.51)
-	cloud1:setImage(RegisterImage(0xE1F4868CA403969))
+	cloud1:setImage(RegisterImage(@"uie_callingcards_survivalist_master_cloud1"))
 	self:addElement(cloud1)
 	self.cloud1 = cloud1
 	if PostLoadFunc then

@@ -9,26 +9,26 @@ CoD.TabbedScoreboardColHeaders.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local LeftCol = LUI.UIText.new(0, 0, -5, 87, 0.5, 0.5, -9, 6)
 	LeftCol:setRGB(0.7, 0.7, 0.7)
-	LeftCol:setText(Engine[0xF9F1239CFD921FE](0xA75180BC7FDA8F5))
+	LeftCol:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_6A75180BC7FDA8F5"))
 	LeftCol:setTTF("0arame_mono_stencil")
-	LeftCol:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	LeftCol:setAlignment(Enum[0x7A5123B654282D2][0x6ED4298C93DC5ED])
+	LeftCol:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	LeftCol:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
 	self:addElement(LeftCol)
 	self.LeftCol = LeftCol
 	local MidCol = LUI.UIText.new(0, 0, 77, 169, 0.5, 0.5, -9, 6)
 	MidCol:setRGB(0.7, 0.7, 0.7)
 	MidCol:setText("")
 	MidCol:setTTF("0arame_mono_stencil")
-	MidCol:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	MidCol:setAlignment(Enum[0x7A5123B654282D2][0x6ED4298C93DC5ED])
+	MidCol:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	MidCol:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
 	self:addElement(MidCol)
 	self.MidCol = MidCol
 	local RightCol = LUI.UIText.new(0, 0, 159, 251, 0.5, 0.5, -9, 6)
 	RightCol:setRGB(0.7, 0.7, 0.7)
 	RightCol:setText("")
 	RightCol:setTTF("0arame_mono_stencil")
-	RightCol:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	RightCol:setAlignment(Enum[0x7A5123B654282D2][0x6ED4298C93DC5ED])
+	RightCol:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	RightCol:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
 	self:addElement(RightCol)
 	self.RightCol = RightCol
 	local FFACol = LUI.UIText.new(0, 0, 241, 333, 0.5, 0.5, -9, 6)
@@ -36,8 +36,8 @@ CoD.TabbedScoreboardColHeaders.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	FFACol:setAlpha(0)
 	FFACol:setText("")
 	FFACol:setTTF("0arame_mono_stencil")
-	FFACol:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	FFACol:setAlignment(Enum[0x7A5123B654282D2][0x6ED4298C93DC5ED])
+	FFACol:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	FFACol:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
 	self:addElement(FFACol)
 	self.FFACol = FFACol
 	self:mergeStateConditions({
@@ -56,7 +56,7 @@ CoD.TabbedScoreboardColHeaders.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	})
 	local f1_local5 = self
 	local f1_local6 = self.subscribeToModel
-	local f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local6(f1_local5, f1_local7["scoreboardInfo.activeTab"], function(f4_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

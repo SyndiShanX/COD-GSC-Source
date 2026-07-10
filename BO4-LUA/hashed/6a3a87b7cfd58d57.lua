@@ -9,7 +9,7 @@ CoD.FactionInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_a
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local FactionIconFront = LUI.UIImage.new(0.5, 0.5, -96, 96, 0.5, 0.5, -138, 54)
-	FactionIconFront:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	FactionIconFront:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	FactionIconFront:subscribeToGlobalModel(f1_arg1, "Factions", "playerFactionIcon", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -35,8 +35,8 @@ CoD.FactionInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_a
 	self.NameBackground = NameBackground
 	local Name = LUI.UIText.new(0, 0, 0, 426, 0, 0, 229, 276)
 	Name:setTTF("ttmussels_demibold")
-	Name:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	Name:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Name:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	Name:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	Name:subscribeToGlobalModel(f1_arg1, "Factions", "playerFactionDisplayName", function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then

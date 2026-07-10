@@ -8,11 +8,11 @@ CoD.CallingCards_Asset_vilains_fire.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local flames = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 168)
-	flames:setImage(RegisterImage(0x1EE8A4C7B400DEF))
+	flames:setImage(RegisterImage(@"hash_71EE8A4C7B400DEF"))
 	self:addElement(flames)
 	self.flames = flames
 	local Image = LUI.UIImage.new(0, 0, 960, 1920, 0, 0, 0, 168)
-	Image:setImage(RegisterImage(0x1EE8A4C7B400DEF))
+	Image:setImage(RegisterImage(@"hash_71EE8A4C7B400DEF"))
 	self:addElement(Image)
 	self.Image = Image
 	if PostLoadFunc then

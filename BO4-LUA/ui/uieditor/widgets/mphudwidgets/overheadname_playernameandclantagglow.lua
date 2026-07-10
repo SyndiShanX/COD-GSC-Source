@@ -11,11 +11,11 @@ CoD.OverheadName_PlayerNameAndClanTagGlow.new = function(f1_arg0, f1_arg1, f1_ar
 	local ClanTag = LUI.UIText.new(0, 0, 0, 62, 0, 0, 0, 24)
 	ClanTag:setRGB(0.14, 0.14, 0.14)
 	ClanTag:setTTF("notosans_bold")
-	ClanTag:setMaterial(LUI.UIImage.GetCachedMaterial(0xAE166D9BA8C6907))
+	ClanTag:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_2AE166D9BA8C6907"))
 	ClanTag:setShaderVector(0, 0.3, 0, 0, 0)
 	ClanTag:setShaderVector(1, 0, 0, 0, 0)
 	ClanTag:setShaderVector(2, 1, 0, 0, 0)
-	ClanTag:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	ClanTag:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	ClanTag:linkToElementModel(self, "clanTag", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -27,11 +27,11 @@ CoD.OverheadName_PlayerNameAndClanTagGlow.new = function(f1_arg0, f1_arg1, f1_ar
 	local PlayerName = LUI.UIText.new(0, 0, 62, 262, 0, 0, 0, 24)
 	PlayerName:setRGB(0.14, 0.14, 0.14)
 	PlayerName:setTTF("notosans_bold")
-	PlayerName:setMaterial(LUI.UIImage.GetCachedMaterial(0xAE166D9BA8C6907))
+	PlayerName:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_2AE166D9BA8C6907"))
 	PlayerName:setShaderVector(0, 0.3, 0, 0, 0)
 	PlayerName:setShaderVector(1, 0, 0, 0, 0)
 	PlayerName:setShaderVector(2, 1, 0, 0, 0)
-	PlayerName:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	PlayerName:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	PlayerName:linkToElementModel(self, "playerName", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -44,19 +44,19 @@ CoD.OverheadName_PlayerNameAndClanTagGlow.new = function(f1_arg0, f1_arg1, f1_ar
 		{
 			stateName = "NameOnly",
 			condition = function(menu, element, event)
-				return CoD.OptionsUtility.IsProfileIntValue(f1_arg1, "team_indicator", Enum[0xDBB26718558B57][0x8C9403313F77863])
+				return CoD.OptionsUtility.IsProfileIntValue(f1_arg1, "team_indicator", Enum[@"settingteamindicator"][@"settingteamindicator_abbreviated"])
 			end,
 		},
 		{
 			stateName = "NameAndTag",
 			condition = function(menu, element, event)
-				return CoD.OptionsUtility.IsProfileIntValue(f1_arg1, "team_indicator", Enum[0xDBB26718558B57][0x88C22DE9F82059D])
+				return CoD.OptionsUtility.IsProfileIntValue(f1_arg1, "team_indicator", Enum[@"settingteamindicator"][@"settingteamindicator_full"])
 			end,
 		},
 	})
 	local f1_local3 = self
 	local f1_local4 = self.subscribeToModel
-	local f1_local5 = Engine[0x8DF2E5447F384B9]()
+	local f1_local5 = Engine[@"getglobalmodel"]()
 	f1_local4(f1_local3, f1_local5["storageGlobalRoot.user_settings"], function(f6_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -68,7 +68,7 @@ CoD.OverheadName_PlayerNameAndClanTagGlow.new = function(f1_arg0, f1_arg1, f1_ar
 	end, false)
 	self:subscribeToGlobalModel(f1_arg1, "PerController", "PlayerSettingsUpdate", function(model)
 		local f7_local0 = self
-		if CoD.ModelUtility.IsModelValueEqualToEitherValue(f1_arg1, "PlayerSettingsUpdate", "gamertag_indicator", 0xA88A13987A72D7A) then
+		if CoD.ModelUtility.IsModelValueEqualToEitherValue(f1_arg1, "PlayerSettingsUpdate", "gamertag_indicator", @"team_indicator") then
 			UpdateSelfState(self, f1_arg1)
 		end
 	end)

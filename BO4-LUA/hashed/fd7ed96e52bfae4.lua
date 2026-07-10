@@ -10,7 +10,7 @@ CoD.WZAARBlur.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local BlurWZAAR = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	BlurWZAAR:setAlpha(0)
-	BlurWZAAR:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	BlurWZAAR:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	BlurWZAAR:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(BlurWZAAR)
 	self.BlurWZAAR = BlurWZAAR
@@ -24,7 +24,7 @@ CoD.WZAARBlur.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 	})
 	local f1_local2 = self
 	local f1_local3 = self.subscribeToModel
-	local f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local3(f1_local2, f1_local4["hudItems.warzone.aarVisible"], function(f3_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

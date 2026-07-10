@@ -9,12 +9,12 @@ CoD.WarzoneKillsInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Blur = LUI.UIImage.new(0, 0, 6.5, 149.5, 0, 0, 5, 39)
-	Blur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	Blur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	Blur:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(Blur)
 	self.Blur = Blur
 	local Blur2 = LUI.UIImage.new(0, 0, 77.5, 149.5, 0, 0, 5, 39)
-	Blur2:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	Blur2:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	Blur2:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(Blur2)
 	self.Blur2 = Blur2
@@ -29,13 +29,13 @@ CoD.WarzoneKillsInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	self:addElement(PanelLight2)
 	self.PanelLight2 = PanelLight2
 	local Frame = LUI.UIImage.new(1, 1, -156, 0, 0, 0, 0, 44)
-	Frame:setImage(RegisterImage(0xCAC8D6877831B75))
-	Frame:setMaterial(LUI.UIImage.GetCachedMaterial(0xE8F55203998700A))
+	Frame:setImage(RegisterImage(@"uie_ui_hud_wz_hud_core_lives_counter_backer"))
+	Frame:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_feather_blend"))
 	self:addElement(Frame)
 	self.Frame = Frame
 	local Frame2 = LUI.UIImage.new(1, 1, -156, 0, 0, 0, 0, 44)
-	Frame2:setImage(RegisterImage(0xCAC8D6877831B75))
-	Frame2:setMaterial(LUI.UIImage.GetCachedMaterial(0xE8F55203998700A))
+	Frame2:setImage(RegisterImage(@"uie_ui_hud_wz_hud_core_lives_counter_backer"))
+	Frame2:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_feather_blend"))
 	self:addElement(Frame2)
 	self.Frame2 = Frame2
 	local playerKillsIcon = CoD.WarzoneKillsCount.new(f1_arg0, f1_arg1, 0, 0, 7.5, 76.5, 0, 0, 6, 38)
@@ -43,11 +43,11 @@ CoD.WarzoneKillsInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	self.playerKillsIcon = playerKillsIcon
 	local spectators = LUI.UIText.new(1, 1, -52, -10, 0, 0, 11, 33)
 	spectators:setTTF("0arame_mono_stencil")
-	spectators:setMaterial(LUI.UIImage.GetCachedMaterial(0x90D57B1E92D39D7))
+	spectators:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_90D57B1E92D39D7"))
 	spectators:setShaderVector(0, 0.8, 0, 0, 0)
 	spectators:setShaderVector(1, 0, 0, 0, 0)
 	spectators:setShaderVector(2, 1, 1, 1, 0.35)
-	spectators:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	spectators:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	spectators:linkToElementModel(self, "spectatorCount", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -57,21 +57,21 @@ CoD.WarzoneKillsInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	self:addElement(spectators)
 	self.spectators = spectators
 	local spectateIcon = LUI.UIImage.new(1, 1, -74.5, -46.5, 0, 0, 13.5, 32.5)
-	spectateIcon:setImage(RegisterImage(0x2AE79631E8041A4))
+	spectateIcon:setImage(RegisterImage(@"uie_ui_hud_wz_hud_core_spectate_eyeball"))
 	self:addElement(spectateIcon)
 	self.spectateIcon = spectateIcon
 	local playersLeftIcon = LUI.UIImage.new(1, 1, -151, -119, 0, 0, 6, 38)
-	playersLeftIcon:setImage(RegisterImage(0x14B2E7558F68939))
+	playersLeftIcon:setImage(RegisterImage(@"uie_ui_hud_wz_hud_core_icon_lives"))
 	self:addElement(playersLeftIcon)
 	self.playersLeftIcon = playersLeftIcon
 	local PlayerCount = LUI.UIText.new(1, 1, -126, -81, 0, 0, 11, 33)
 	PlayerCount:setTTF("0arame_mono_stencil")
-	PlayerCount:setMaterial(LUI.UIImage.GetCachedMaterial(0x90D57B1E92D39D7))
+	PlayerCount:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_90D57B1E92D39D7"))
 	PlayerCount:setShaderVector(0, 0.8, 0, 0, 0)
 	PlayerCount:setShaderVector(1, 0, 0, 0, 0)
 	PlayerCount:setShaderVector(2, 1, 1, 1, 0.35)
-	PlayerCount:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	PlayerCount:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	PlayerCount:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	PlayerCount:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	PlayerCount:subscribeToGlobalModel(f1_arg1, "HUDItems", "alivePlayerCount", function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -83,14 +83,14 @@ CoD.WarzoneKillsInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	local LED = LUI.UIImage.new(0, 0, 0, 156, 0, 0, 0, 44)
 	LED:setRGB(0, 0, 0)
 	LED:setAlpha(0.2)
-	LED:setImage(RegisterImage(0x51459DE6C7F148A))
+	LED:setImage(RegisterImage(@"uie_ui_hud_wz_hud_core_lives_counter_led"))
 	self:addElement(LED)
 	self.LED = LED
 	local LED2 = LUI.UIImage.new(0, 0, 72, 150, 0, 0, 0, 44)
 	LED2:setRGB(0, 0, 0)
 	LED2:setAlpha(0.2)
-	LED2:setImage(RegisterImage(0x51459DE6C7F148A))
-	LED2:setMaterial(LUI.UIImage.GetCachedMaterial(0xA02C44161370F6D))
+	LED2:setImage(RegisterImage(@"uie_ui_hud_wz_hud_core_lives_counter_led"))
+	LED2:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_1A02C44161370F6D"))
 	LED2:setShaderVector(0, 0, 0, 0, 0)
 	LED2:setShaderVector(1, 1, 1, 0, 0)
 	LED2:setShaderVector(2, 0, 0, 0, 0)

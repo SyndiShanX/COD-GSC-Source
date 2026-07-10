@@ -9,12 +9,12 @@ CoD.WarzoneInventoryLineArrow.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Pointer = LUI.UIImage.new(0, 0, 0, 44, 0, 0, 0, 28)
 	Pointer:setRGB(0, 0, 0)
-	Pointer:setImage(RegisterImage(0x9D1B20838FA39D4))
+	Pointer:setImage(RegisterImage(@"uie_ui_hud_wz_hud_core_qe_pointer"))
 	self:addElement(Pointer)
 	self.Pointer = Pointer
 	local Pointer2 = LUI.UIImage.new(0, 0, 0, 44, 0, 0, 0, 28)
-	Pointer2:setImage(RegisterImage(0x913CDFB7CCC557A))
-	Pointer2:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Pointer2:setImage(RegisterImage(@"uie_ui_hud_wz_hud_core_qe_pointer_lit"))
+	Pointer2:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Pointer2)
 	self.Pointer2 = Pointer2
 	if PostLoadFunc then

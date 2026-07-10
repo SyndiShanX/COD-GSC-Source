@@ -1,49 +1,49 @@
 require("x64:76e516a6ca47720")
-CoD[0x7ED38F84B5D585D] = InheritFrom(LUI.UIElement)
-CoD[0x7ED38F84B5D585D].__defaultWidth = 960
-CoD[0x7ED38F84B5D585D].__defaultHeight = 240
-CoD[0x7ED38F84B5D585D].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+CoD[@"hash_27ED38F84B5D585D"] = InheritFrom(LUI.UIElement)
+CoD[@"hash_27ED38F84B5D585D"].__defaultWidth = 960
+CoD[@"hash_27ED38F84B5D585D"].__defaultHeight = 240
+CoD[@"hash_27ED38F84B5D585D"].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
 	local self = LUI.UIElement.new(f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
-	self:setClass(CoD[0x7ED38F84B5D585D])
+	self:setClass(CoD[@"hash_27ED38F84B5D585D"])
 	self.id = "CallingCards_wz_insigniaechelons_master"
 	self.soundSet = "default"
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local clouds = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	clouds:setImage(RegisterImage(0xC2B9E2C1FAF4C7D))
-	clouds:setMaterial(LUI.UIImage.GetCachedMaterial(0x73D72BCD14C2AAD))
+	clouds:setImage(RegisterImage(@"uie_ui_icon_callingcards_wz_insigniaechelons_master_clouds"))
+	clouds:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_tile_scroll_normal"))
 	clouds:setShaderVector(0, 1, 1, 0, 0)
 	clouds:setShaderVector(1, 0.12, 0, 0, 0)
 	self:addElement(clouds)
 	self.clouds = clouds
 	local bg = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	bg:setImage(RegisterImage(0xB47378B4E75E793))
+	bg:setImage(RegisterImage(@"uie_ui_icon_callingcards_wz_insigniaechelons_master_background"))
 	self:addElement(bg)
 	self.bg = bg
 	local skulls = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	skulls:setImage(RegisterImage(0xC07D61DC25AF639))
+	skulls:setImage(RegisterImage(@"uie_ui_icon_callingcards_wz_insigniaechelons_master_skulls"))
 	self:addElement(skulls)
 	self.skulls = skulls
 	local SkullsClosed = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	SkullsClosed:setImage(RegisterImage(0x1286684211212BE))
+	SkullsClosed:setImage(RegisterImage(@"uie_ui_icon_callingcards_wz_insigniaechelons_master_skulls_closed"))
 	self:addElement(SkullsClosed)
 	self.SkullsClosed = SkullsClosed
 	local snakeTongue = LUI.UIImage.new(0, 0, 754, 818, 0, 0, 106.5, 146.5)
-	snakeTongue:setImage(RegisterImage(0xF5A1A277695270E))
-	snakeTongue:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD526D3FD71F281))
+	snakeTongue:setImage(RegisterImage(@"uie_ui_icon_callingcards_wz_insigniaechelons_master_snake_tongue"))
+	snakeTongue:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_flipbook"))
 	snakeTongue:setShaderVector(0, 0, 3, 0, 0)
 	snakeTongue:setShaderVector(1, 18, 0, 0, 0)
 	self:addElement(snakeTongue)
 	self.snakeTongue = snakeTongue
 	local debris = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	debris:setImage(RegisterImage(0x32DF09A33ABF8A0))
-	debris:setMaterial(LUI.UIImage.GetCachedMaterial(0x73D72BCD14C2AAD))
+	debris:setImage(RegisterImage(@"uie_ui_icon_callingcards_wz_insigniaechelons_master_debris"))
+	debris:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_tile_scroll_normal"))
 	debris:setShaderVector(0, 1, 1, 0, 0)
 	debris:setShaderVector(1, 0.15, 0, 0, 0)
 	self:addElement(debris)
 	self.debris = debris
 	local gemrocks = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	gemrocks:setImage(RegisterImage(0x3D0678153A7610C))
+	gemrocks:setImage(RegisterImage(@"uie_ui_icon_callingcards_wz_insigniaechelons_master_gemrocks"))
 	self:addElement(gemrocks)
 	self.gemrocks = gemrocks
 	local CallingCardsAssetsparklestar = CoD.CallingCards_Asset_sparkle_star.new(f1_arg0, f1_arg1, 0, 0, 199.5, 327.5, 0, 0, 94.5, 222.5)
@@ -60,50 +60,50 @@ CoD[0x7ED38F84B5D585D].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	self.CallingCardsAssetsparklestar4 = CallingCardsAssetsparklestar4
 	local gemShimmer = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
 	gemShimmer:setAlpha(0.3)
-	gemShimmer:setImage(RegisterImage(0xA6DA8DA926EEBA8))
-	gemShimmer:setMaterial(LUI.UIImage.GetCachedMaterial(0x9227A50BA2B8D21))
+	gemShimmer:setImage(RegisterImage(@"uie_ui_icon_callingcards_wz_insigniaechelons_master_gemrocks_shimmer"))
+	gemShimmer:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_flipbook_add"))
 	gemShimmer:setShaderVector(0, 0, 3, 0, 0)
 	gemShimmer:setShaderVector(1, 2, 0, 0, 0)
 	self:addElement(gemShimmer)
 	self.gemShimmer = gemShimmer
 	local snakeeyeglow = LUI.UIImage.new(0, 0, 711.5, 812.5, 0, 0, 54.5, 130.5)
 	snakeeyeglow:setZRot(-33)
-	snakeeyeglow:setImage(RegisterImage(0xCF0A8F3487C74C2))
-	snakeeyeglow:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	snakeeyeglow:setImage(RegisterImage(@"uie_ui_icon_callingcards_wz_insigniaechelons_master_snake_eyeglow"))
+	snakeeyeglow:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(snakeeyeglow)
 	self.snakeeyeglow = snakeeyeglow
 	local snakeeyeglow2 = LUI.UIImage.new(0, 0, 747.5, 848.5, 0, 0, 47.5, 123.5)
 	snakeeyeglow2:setZRot(77)
-	snakeeyeglow2:setImage(RegisterImage(0xCF0A8F3487C74C2))
-	snakeeyeglow2:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	snakeeyeglow2:setImage(RegisterImage(@"uie_ui_icon_callingcards_wz_insigniaechelons_master_snake_eyeglow"))
+	snakeeyeglow2:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(snakeeyeglow2)
 	self.snakeeyeglow2 = snakeeyeglow2
 	local snakeSheen = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
 	snakeSheen:setAlpha(0.25)
-	snakeSheen:setImage(RegisterImage(0x442C43303DD29AB))
-	snakeSheen:setMaterial(LUI.UIImage.GetCachedMaterial(0x9227A50BA2B8D21))
+	snakeSheen:setImage(RegisterImage(@"uie_ui_icon_callingcards_wz_insigniaechelons_master_snake_sheen"))
+	snakeSheen:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_flipbook_add"))
 	snakeSheen:setShaderVector(0, 0, 3, 0, 0)
 	snakeSheen:setShaderVector(1, 6, 0, 0, 0)
 	self:addElement(snakeSheen)
 	self.snakeSheen = snakeSheen
 	local rockglow1 = LUI.UIImage.new(0, 0, 0, 960, 0, 0, -1.5, 240.5)
-	rockglow1:setImage(RegisterImage(0x5F8C4C8DE8E1EE))
-	rockglow1:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	rockglow1:setImage(RegisterImage(@"uie_ui_icon_callingcards_wz_insigniaechelons_master_rockglow1"))
+	rockglow1:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(rockglow1)
 	self.rockglow1 = rockglow1
 	local rockglow2 = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	rockglow2:setImage(RegisterImage(0x5F8B4C8DE8E03B))
-	rockglow2:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	rockglow2:setImage(RegisterImage(@"uie_ui_icon_callingcards_wz_insigniaechelons_master_rockglow2"))
+	rockglow2:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(rockglow2)
 	self.rockglow2 = rockglow2
 	local rockglow3 = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	rockglow3:setImage(RegisterImage(0x5F8A4C8DE8DE88))
-	rockglow3:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	rockglow3:setImage(RegisterImage(@"uie_ui_icon_callingcards_wz_insigniaechelons_master_rockglow3"))
+	rockglow3:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(rockglow3)
 	self.rockglow3 = rockglow3
 	local cropper = LUI.UIImage.new(0, 0, -32, 992, 0, 0, -392, 632)
 	cropper:setAlpha(0)
-	cropper:setImage(RegisterImage(0x7EEE1693E39382A))
+	cropper:setImage(RegisterImage(@"uie_stage_crop_prop"))
 	self:addElement(cropper)
 	self.cropper = cropper
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)
@@ -112,7 +112,7 @@ CoD[0x7ED38F84B5D585D].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	end
 	return self
 end
-CoD[0x7ED38F84B5D585D].__resetProperties = function(f2_arg0)
+CoD[@"hash_27ED38F84B5D585D"].__resetProperties = function(f2_arg0)
 	f2_arg0.CallingCardsAssetsparklestar:completeAnimation()
 	f2_arg0.skulls:completeAnimation()
 	f2_arg0.SkullsClosed:completeAnimation()
@@ -140,7 +140,7 @@ CoD[0x7ED38F84B5D585D].__resetProperties = function(f2_arg0)
 	f2_arg0.CallingCardsAssetsparklestar4:setLeftRight(0, 0, -24.5, 103.5)
 	f2_arg0.CallingCardsAssetsparklestar4:setTopBottom(0, 0, -33.5, 94.5)
 end
-CoD[0x7ED38F84B5D585D].__clipsPerState = {
+CoD[@"hash_27ED38F84B5D585D"].__clipsPerState = {
 	DefaultState = {
 		DefaultClip = function(f3_arg0, f3_arg1)
 			f3_arg0:__resetProperties()
@@ -365,7 +365,7 @@ CoD[0x7ED38F84B5D585D].__clipsPerState = {
 		end,
 	},
 }
-CoD[0x7ED38F84B5D585D].__onClose = function(f42_arg0)
+CoD[@"hash_27ED38F84B5D585D"].__onClose = function(f42_arg0)
 	f42_arg0.CallingCardsAssetsparklestar:close()
 	f42_arg0.CallingCardsAssetsparklestar3:close()
 	f42_arg0.CallingCardsAssetsparklestar2:close()

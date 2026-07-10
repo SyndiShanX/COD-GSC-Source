@@ -7,12 +7,12 @@ CoD.PC_FlexibleVerticalTextBlock.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	self.id = "PC_FlexibleVerticalTextBlock"
 	self.soundSet = "default"
 	local Text = LUI.UIText.new(0.5, 0.5, -380, 380, 0.5, 0.5, -12.5, 12.5)
-	Text:setText(Engine[0xF9F1239CFD921FE](0x93E719493E9E18F))
+	Text:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	Text:setTTF("dinnext_regular")
 	Text:setLetterSpacing(1)
 	Text:setLineSpacing(4)
-	Text:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	Text:setAlignment(Enum[0x7A5123B654282D2][0x6ED4298C93DC5ED])
+	Text:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	Text:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
 	Text:setBackingType(2)
 	Text:setBackingAlpha(0)
 	LUI.OverrideFunction_CallOriginalFirst(Text, "setText", function(element, controller)

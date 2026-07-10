@@ -34,21 +34,21 @@ CoD.AARContractsTabInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.Contract2 = Contract2
 	local DailyContracts = LUI.UIText.new(0.5, 0.5, -740, -280, 0.5, 0.5, -361.5, -331.5)
 	DailyContracts:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
-	DailyContracts:setText(LocalizeToUpperString(0xB27DDDD116F4EFF))
+	DailyContracts:setText(LocalizeToUpperString(@"menu/daily_contract"))
 	DailyContracts:setTTF("ttmussels_demibold")
 	DailyContracts:setLetterSpacing(2)
-	DailyContracts:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	DailyContracts:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	self:addElement(DailyContracts)
 	self.DailyContracts = DailyContracts
 	local DailyContractTimer = LUI.UIText.new(0.5, 0.5, -740, -280, 0.5, 0.5, -325.5, -307.5)
 	DailyContractTimer:setRGB(ColorSet.StoreAvailabilityTimer.r, ColorSet.StoreAvailabilityTimer.g, ColorSet.StoreAvailabilityTimer.b)
 	DailyContractTimer:setTTF("ttmussels_regular")
 	DailyContractTimer:setLetterSpacing(2)
-	DailyContractTimer:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	DailyContractTimer:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	DailyContractTimer:subscribeToGlobalModel(f1_arg1, "Contracts", "dailyExpirationTime", function(model)
 		local f5_local0 = model:get()
 		if f5_local0 ~= nil then
-			DailyContractTimer:setText(LocalizeIntoStringIfNotEmpty(0x69797CFAD4CAB0C, f5_local0))
+			DailyContractTimer:setText(LocalizeIntoStringIfNotEmpty(@"hash_669797CFAD4CAB0C", f5_local0))
 		end
 	end)
 	self:addElement(DailyContractTimer)

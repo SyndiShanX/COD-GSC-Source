@@ -8,12 +8,12 @@ CoD.outofbounds_uparrow.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local UpArrowSmall = LUI.UIImage.new(0, 0, 0, 16, 0, 0, 0, 16)
-	UpArrowSmall:setImage(RegisterImage(0xDEAE7BFFAED8ACE))
+	UpArrowSmall:setImage(RegisterImage(@"hash_1DEAE7BFFAED8ACE"))
 	self:addElement(UpArrowSmall)
 	self.UpArrowSmall = UpArrowSmall
 	local UpArrowSmallAdd = LUI.UIImage.new(0, 0, 0, 16, 0, 0, 0, 16)
-	UpArrowSmallAdd:setImage(RegisterImage(0xDEAE7BFFAED8ACE))
-	UpArrowSmallAdd:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	UpArrowSmallAdd:setImage(RegisterImage(@"hash_1DEAE7BFFAED8ACE"))
+	UpArrowSmallAdd:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	UpArrowSmallAdd:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(UpArrowSmallAdd)
 	self.UpArrowSmallAdd = UpArrowSmallAdd

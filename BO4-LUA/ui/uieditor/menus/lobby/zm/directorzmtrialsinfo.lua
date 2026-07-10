@@ -15,7 +15,7 @@ LUI.createMenu.DirectorZMTrialsInfo = function(f1_arg0, f1_arg1)
 	self.anyChildUsesUpdateState = true
 	local TEMPBlackBGOverlay = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	TEMPBlackBGOverlay:setRGB(0, 0, 0)
-	TEMPBlackBGOverlay:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	TEMPBlackBGOverlay:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	TEMPBlackBGOverlay:setShaderVector(0, 0.01, 0.5, 0, 0)
 	self:addElement(TEMPBlackBGOverlay)
 	self.TEMPBlackBGOverlay = TEMPBlackBGOverlay
@@ -27,12 +27,12 @@ LUI.createMenu.DirectorZMTrialsInfo = function(f1_arg0, f1_arg1)
 	self:addElement(DirectorZMTrialsInfoInternal)
 	self.DirectorZMTrialsInfoInternal = DirectorZMTrialsInfoInternal
 	local CommonHeader = CoD.CommonHeader.new(f1_local1, f1_arg0, 0, 0, 0, 1920, 0, 0, 0, 67)
-	CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(0x4456C22914B29F9))
+	CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(@"menu/zombies_modes"))
 	CommonHeader.subtitle.subtitle:setAlpha(0)
 	CommonHeader:subscribeToGlobalModel(f1_arg0, "LobbyRoot", "lobbyTitle", function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
-			CommonHeader.subtitle.subtitle:setText(Engine[0xF9F1239CFD921FE](f3_local0))
+			CommonHeader.subtitle.subtitle:setText(Engine[@"hash_4F9F1239CFD921FE"](f3_local0))
 		end
 	end)
 	CommonHeader:registerEventHandler("menu_loaded", function(element, event)
@@ -82,11 +82,11 @@ LUI.createMenu.DirectorZMTrialsInfo = function(f1_arg0, f1_arg1)
 	end)
 	self:addElement(FooterContainerFrontendRight)
 	self.FooterContainerFrontendRight = FooterContainerFrontendRight
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], "ESCAPE", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], "ESCAPE", function(element, menu, controller, model)
 		GoBack(self, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x78D439E1B360368, nil, "ESCAPE")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"hash_778D439E1B360368", nil, "ESCAPE")
 		return true
 	end, false)
 	DirectorZMTrialsInfoInternal.id = "DirectorZMTrialsInfoInternal"

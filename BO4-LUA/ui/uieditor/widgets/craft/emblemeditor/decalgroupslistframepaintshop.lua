@@ -12,7 +12,7 @@ CoD.DecalGroupsListFramePaintshop.__defaultWidth = 1820
 CoD.DecalGroupsListFramePaintshop.__defaultHeight = 965
 CoD.DecalGroupsListFramePaintshop.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
 	local self = LUI.UIElement.new(f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
-	SetMenuProperty(f1_arg0, "_storageFileType", Enum[0xBBD4F9E70101BA8][0x5DB8C62CF926911])
+	SetMenuProperty(f1_arg0, "_storageFileType", Enum[@"storagefiletype"][@"hash_15DB8C62CF926911"])
 	self:setClass(CoD.DecalGroupsListFramePaintshop)
 	self.id = "DecalGroupsListFramePaintshop"
 	self.soundSet = "none"
@@ -24,7 +24,7 @@ CoD.DecalGroupsListFramePaintshop.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	GroupsButtonList:setWidgetType(CoD.DecalTypeButton)
 	GroupsButtonList:setVerticalCount(8)
 	GroupsButtonList:setSpacing(18)
-	GroupsButtonList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	GroupsButtonList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	GroupsButtonList:setDataSource("GroupDecalButtons")
 	GroupsButtonList:registerEventHandler("list_item_gain_focus", function(element, event)
 		local f2_local0 = nil
@@ -44,37 +44,37 @@ CoD.DecalGroupsListFramePaintshop.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	decalGroupList:setHorizontalCount(4)
 	decalGroupList:setVerticalCount(4)
 	decalGroupList:setSpacing(18)
-	decalGroupList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	decalGroupList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	decalGroupList:setVerticalCounter(CoD.verticalCounter)
 	decalGroupList:setDataSource("DecalGroupsList")
 	decalGroupList:linkToElementModel(decalGroupList, "isBMClassified", true, function(model, f3_arg1)
-		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	decalGroupList:appendEventHandler("record_curr_focused_elem_id", function(f4_arg0, f4_arg1)
 		f4_arg1.menu = f4_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f4_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f4_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	local CraftLayersAvailable = decalGroupList
 	local DecalGroupsAvailable = decalGroupList.subscribeToModel
-	local DecalPreview = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local DecalPreview = Engine[@"getmodelforcontroller"](f1_arg1)
 	DecalGroupsAvailable(CraftLayersAvailable, DecalPreview["Emblem.EmblemProperties.layersAvailable"], function(f5_arg0, f5_arg1)
-		CoD.Menu.UpdateButtonShownState(f5_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f5_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	CraftLayersAvailable = decalGroupList
 	DecalGroupsAvailable = decalGroupList.subscribeToModel
-	DecalPreview = Engine[0x4DF5CFBC1771947](f1_arg1)
+	DecalPreview = Engine[@"getmodelforcontroller"](f1_arg1)
 	DecalGroupsAvailable(CraftLayersAvailable, DecalPreview["Emblem.EmblemProperties.groupsUsed"], function(f6_arg0, f6_arg1)
-		CoD.Menu.UpdateButtonShownState(f6_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f6_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	decalGroupList:appendEventHandler("input_source_changed", function(f7_arg0, f7_arg1)
 		f7_arg1.menu = f7_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f7_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x22361E23588705A])
+		CoD.Menu.UpdateButtonShownState(f7_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_start"])
 	end)
 	CraftLayersAvailable = decalGroupList
 	DecalGroupsAvailable = decalGroupList.subscribeToModel
-	DecalPreview = Engine[0x4DF5CFBC1771947](f1_arg1)
+	DecalPreview = Engine[@"getmodelforcontroller"](f1_arg1)
 	DecalGroupsAvailable(CraftLayersAvailable, DecalPreview.LastInput, function(f8_arg0, f8_arg1)
-		CoD.Menu.UpdateButtonShownState(f8_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x22361E23588705A])
+		CoD.Menu.UpdateButtonShownState(f8_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_start"])
 	end, false)
 	decalGroupList:registerEventHandler("list_item_gain_focus", function(element, event)
 		local f9_local0 = nil
@@ -92,11 +92,11 @@ CoD.DecalGroupsListFramePaintshop.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 		elseif element.super.gainFocus then
 			f10_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x22361E23588705A])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_start"])
 		return f10_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(decalGroupList, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(decalGroupList, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if IsEmblemEditor(controller) and not CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "isBMClassified") and CoD.BaseUtility.DoesElementOrChildHaveFocus(self, "decalGroupList") and CoD.CraftUtility.EmblemChooseIcon_CanFitSelectedDecalGroup(self, controller) and CoD.CraftUtility.EmblemChooseIcon_IsGroupSlotAvailable(self, controller) then
 			CoD.CraftUtility.EmblemChooseIcon_SelectionAccepted(self, element, controller)
 			CoD.CraftUtility.EmblemEditor_SetEditMode(controller)
@@ -114,16 +114,16 @@ CoD.DecalGroupsListFramePaintshop.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 		end
 	end, function(element, menu, controller)
 		if IsEmblemEditor(controller) and not CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "isBMClassified") and CoD.BaseUtility.DoesElementOrChildHaveFocus(self, "decalGroupList") and CoD.CraftUtility.EmblemChooseIcon_CanFitSelectedDecalGroup(self, controller) and CoD.CraftUtility.EmblemChooseIcon_IsGroupSlotAvailable(self, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		elseif IsPaintshop(controller) and not CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "isBMClassified") and CoD.BaseUtility.DoesElementOrChildHaveFocus(self, "decalGroupList") and CoD.CraftUtility.EmblemChooseIcon_CanFitSelectedDecalGroup(self, controller) and CoD.CraftUtility.EmblemChooseIcon_IsGroupSlotAvailable(self, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(decalGroupList, f1_arg1, Enum[0x3DD78803F918E9D][0x22361E23588705A], "ui_contextual_1", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(decalGroupList, f1_arg1, Enum[@"luibutton"][@"lui_key_start"], "ui_contextual_1", function(element, menu, controller, model)
 		if CoD.CraftUtility.EmblemChooseIcon_IsCustomDecalCategorySelected(self, controller) and IsGamepad(controller) then
 			OpenPopup(self, "DecalGroupOptions", controller, nil)
 			return true
@@ -134,16 +134,16 @@ CoD.DecalGroupsListFramePaintshop.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 		end
 	end, function(element, menu, controller)
 		if CoD.CraftUtility.EmblemChooseIcon_IsCustomDecalCategorySelected(self, controller) and IsGamepad(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x22361E23588705A], 0x8E7772DFD9BBDEB, nil, "ui_contextual_1")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_start"], @"menu/options", nil, "ui_contextual_1")
 			return true
 		elseif CoD.CraftUtility.EmblemChooseIcon_IsCustomDecalCategorySelected(self, controller) and IsMouseOrKeyboard(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x22361E23588705A], 0x8E7772DFD9BBDEB, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "ui_contextual_1")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_start"], @"menu/options", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "ui_contextual_1")
 			return true
 		else
 			return false
 		end
 	end, false)
-	decalGroupList:AddContextualMenuAction(f1_arg0, f1_arg1, 0x8E7772DFD9BBDEB, function(f15_arg0, f15_arg1, f15_arg2, f15_arg3)
+	decalGroupList:AddContextualMenuAction(f1_arg0, f1_arg1, @"menu/options", function(f15_arg0, f15_arg1, f15_arg2, f15_arg3)
 		if CoD.CraftUtility.EmblemChooseIcon_IsCustomDecalCategorySelected(self, f15_arg2) then
 			return function(f16_arg0, f16_arg1, f16_arg2, f16_arg3)
 				OpenPopup(self, "DecalGroupOptions", f16_arg2, nil)
@@ -164,7 +164,7 @@ CoD.DecalGroupsListFramePaintshop.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	})
 	DecalPreview = DecalGroupsAvailable
 	CraftLayersAvailable = DecalGroupsAvailable.subscribeToModel
-	local SlotsUsedWidget = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local SlotsUsedWidget = Engine[@"getmodelforcontroller"](f1_arg1)
 	CraftLayersAvailable(DecalPreview, SlotsUsedWidget["Emblem.EmblemProperties.groupsUsed"], function(f18_arg0)
 		f1_arg0:updateElementState(DecalGroupsAvailable, {
 			name = "model_validation",

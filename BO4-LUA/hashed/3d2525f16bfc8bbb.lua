@@ -22,8 +22,8 @@ CoD.SpecialistHeadquarters.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	MainInfoText:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	MainInfoText:setTTF("ttmussels_regular")
 	MainInfoText:setLineSpacing(1)
-	MainInfoText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	MainInfoText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	MainInfoText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	MainInfoText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	MainInfoText:subscribeToGlobalModel(f1_arg1, "SpecialistHeadquarters", "MainInfoText", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -33,7 +33,7 @@ CoD.SpecialistHeadquarters.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self:addElement(MainInfoText)
 	self.MainInfoText = MainInfoText
 	local DossierButton = CoD.DirectorSelectButtonSpecialistHeadquarters.new(f1_arg0, f1_arg1, 0.5, 0.5, -860, -464, 0.5, 0.5, -289, -149)
-	DossierButton.Header:setText(LocalizeToUpperString(0xAD5EF55000B9F90))
+	DossierButton.Header:setText(LocalizeToUpperString(@"menu/dossier"))
 	DossierButton:subscribeToGlobalModel(f1_arg1, "SpecialistHeadquarters", "ChosenSpecialistID", function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -42,29 +42,29 @@ CoD.SpecialistHeadquarters.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	end)
 	DossierButton:appendEventHandler("on_session_start", function(f4_arg0, f4_arg1)
 		f4_arg1.menu = f4_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f4_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f4_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	DossierButton:appendEventHandler("on_session_end", function(f5_arg0, f5_arg1)
 		f5_arg1.menu = f5_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f5_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f5_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	local LowerSideInfoText = DossierButton
 	local ArchivesButton = DossierButton.subscribeToModel
-	local UpperSideInfoText = Engine[0x8DF2E5447F384B9]()
+	local UpperSideInfoText = Engine[@"getglobalmodel"]()
 	ArchivesButton(LowerSideInfoText, UpperSideInfoText["lobbyRoot.lobbyNav"], function(f6_arg0, f6_arg1)
-		CoD.Menu.UpdateButtonShownState(f6_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f6_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	LowerSideInfoText = DossierButton
 	ArchivesButton = DossierButton.subscribeToModel
-	UpperSideInfoText = Engine[0x8DF2E5447F384B9]()
+	UpperSideInfoText = Engine[@"getglobalmodel"]()
 	ArchivesButton(LowerSideInfoText, UpperSideInfoText["lobbyRoot.gameClient.update"], function(f7_arg0, f7_arg1)
-		CoD.Menu.UpdateButtonShownState(f7_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f7_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	LowerSideInfoText = DossierButton
 	ArchivesButton = DossierButton.subscribeToModel
-	UpperSideInfoText = Engine[0x8DF2E5447F384B9]()
+	UpperSideInfoText = Engine[@"getglobalmodel"]()
 	ArchivesButton(LowerSideInfoText, UpperSideInfoText["lobbyRoot.privateClient.update"], function(f8_arg0, f8_arg1)
-		CoD.Menu.UpdateButtonShownState(f8_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f8_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	DossierButton:registerEventHandler("gain_focus", function(element, event)
 		local f9_local0 = nil
@@ -73,10 +73,10 @@ CoD.SpecialistHeadquarters.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 		elseif element.super.gainFocus then
 			f9_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f9_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(DossierButton, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ENTER", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(DossierButton, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ENTER", function(element, menu, controller, model)
 		if IsLobbyHostOfCurrentMenu() then
 			CoD.CTUtility.UpdateSpecialistDossier(controller)
 			OpenOverlay(self, "SpecialistDossier", controller)
@@ -86,7 +86,7 @@ CoD.SpecialistHeadquarters.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 		end
 	end, function(element, menu, controller)
 		if IsLobbyHostOfCurrentMenu() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xAC3B80C833B60E1, nil, "ENTER")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_3AC3B80C833B60E1", nil, "ENTER")
 			return true
 		else
 			return false
@@ -99,33 +99,33 @@ CoD.SpecialistHeadquarters.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self:addElement(DossierButton)
 	self.DossierButton = DossierButton
 	ArchivesButton = CoD.DirectorSelectButtonSpecialistHeadquarters.new(f1_arg0, f1_arg1, 0.5, 0.5, -860, -464, 0.5, 0.5, -21, 184)
-	ArchivesButton.Image:setImage(RegisterImage(0xC77871E23260FE1))
-	ArchivesButton.Header:setText(LocalizeToUpperString(0xC94F6359C701D44))
+	ArchivesButton.Image:setImage(RegisterImage(@"ui_icon_specialist_story"))
+	ArchivesButton.Header:setText(LocalizeToUpperString(@"menu/archives"))
 	ArchivesButton:appendEventHandler("on_session_start", function(f13_arg0, f13_arg1)
 		f13_arg1.menu = f13_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f13_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f13_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	ArchivesButton:appendEventHandler("on_session_end", function(f14_arg0, f14_arg1)
 		f14_arg1.menu = f14_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f14_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f14_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	UpperSideInfoText = ArchivesButton
 	LowerSideInfoText = ArchivesButton.subscribeToModel
-	local SpecialistName = Engine[0x8DF2E5447F384B9]()
+	local SpecialistName = Engine[@"getglobalmodel"]()
 	LowerSideInfoText(UpperSideInfoText, SpecialistName["lobbyRoot.lobbyNav"], function(f15_arg0, f15_arg1)
-		CoD.Menu.UpdateButtonShownState(f15_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f15_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	UpperSideInfoText = ArchivesButton
 	LowerSideInfoText = ArchivesButton.subscribeToModel
-	SpecialistName = Engine[0x8DF2E5447F384B9]()
+	SpecialistName = Engine[@"getglobalmodel"]()
 	LowerSideInfoText(UpperSideInfoText, SpecialistName["lobbyRoot.gameClient.update"], function(f16_arg0, f16_arg1)
-		CoD.Menu.UpdateButtonShownState(f16_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f16_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	UpperSideInfoText = ArchivesButton
 	LowerSideInfoText = ArchivesButton.subscribeToModel
-	SpecialistName = Engine[0x8DF2E5447F384B9]()
+	SpecialistName = Engine[@"getglobalmodel"]()
 	LowerSideInfoText(UpperSideInfoText, SpecialistName["lobbyRoot.privateClient.update"], function(f17_arg0, f17_arg1)
-		CoD.Menu.UpdateButtonShownState(f17_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f17_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	ArchivesButton:registerEventHandler("gain_focus", function(element, event)
 		local f18_local0 = nil
@@ -134,10 +134,10 @@ CoD.SpecialistHeadquarters.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 		elseif element.super.gainFocus then
 			f18_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f18_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(ArchivesButton, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ENTER", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(ArchivesButton, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ENTER", function(element, menu, controller, model)
 		if IsLobbyHostOfCurrentMenu() then
 			OpenOverlay(self, "SpecialistHeadquartersArchives", controller)
 			PlaySoundAlias("uin_toggle_generic")
@@ -146,7 +146,7 @@ CoD.SpecialistHeadquarters.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 		end
 	end, function(element, menu, controller)
 		if IsLobbyHostOfCurrentMenu() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xAC3B80C833B60E1, nil, "ENTER")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_3AC3B80C833B60E1", nil, "ENTER")
 			return true
 		else
 			return false
@@ -163,8 +163,8 @@ CoD.SpecialistHeadquarters.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	LowerSideInfoText:setAlpha(0)
 	LowerSideInfoText:setTTF("ttmussels_regular")
 	LowerSideInfoText:setLineSpacing(1)
-	LowerSideInfoText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	LowerSideInfoText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	LowerSideInfoText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	LowerSideInfoText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	LowerSideInfoText:subscribeToGlobalModel(f1_arg1, "SpecialistHeadquarters", "SideInfoText", function(model)
 		local f22_local0 = model:get()
 		if f22_local0 ~= nil then
@@ -178,8 +178,8 @@ CoD.SpecialistHeadquarters.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	UpperSideInfoText:setAlpha(0)
 	UpperSideInfoText:setTTF("ttmussels_regular")
 	UpperSideInfoText:setLineSpacing(1)
-	UpperSideInfoText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	UpperSideInfoText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	UpperSideInfoText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	UpperSideInfoText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	UpperSideInfoText:subscribeToGlobalModel(f1_arg1, "SpecialistHeadquarters", "SideInfoText", function(model)
 		local f23_local0 = model:get()
 		if f23_local0 ~= nil then
@@ -194,7 +194,7 @@ CoD.SpecialistHeadquarters.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	SpecialistName:setZoom(3)
 	SpecialistName:setTTF("ttmussels_regular")
 	SpecialistName:setLetterSpacing(10)
-	SpecialistName:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	SpecialistName:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	SpecialistName:subscribeToGlobalModel(f1_arg1, "SpecialistHeadquarters", "ChosenSpecialistID", function(model)
 		local f24_local0 = model:get()
 		if f24_local0 ~= nil then
@@ -208,7 +208,7 @@ CoD.SpecialistHeadquarters.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	JobTitle:setZoom(3)
 	JobTitle:setTTF("ttmussels_regular")
 	JobTitle:setLetterSpacing(10)
-	JobTitle:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	JobTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	JobTitle:subscribeToGlobalModel(f1_arg1, "SpecialistHeadquarters", "ChosenSpecialistID", function(model)
 		local f25_local0 = model:get()
 		if f25_local0 ~= nil then
@@ -228,7 +228,7 @@ CoD.SpecialistHeadquarters.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	})
 	local RightProgress = PlayButton
 	local Specialists = PlayButton.subscribeToModel
-	local MiddleProgress = Engine[0x8DF2E5447F384B9]()
+	local MiddleProgress = Engine[@"getglobalmodel"]()
 	Specialists(RightProgress, MiddleProgress["lobbyRoot.lobbyTimeRemaining"], function(f27_arg0)
 		f1_arg0:updateElementState(PlayButton, {
 			name = "model_validation",
@@ -246,41 +246,41 @@ CoD.SpecialistHeadquarters.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	end)
 	PlayButton:appendEventHandler("on_session_start", function(f29_arg0, f29_arg1)
 		f29_arg1.menu = f29_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f29_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f29_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	PlayButton:appendEventHandler("on_session_end", function(f30_arg0, f30_arg1)
 		f30_arg1.menu = f30_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f30_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f30_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	RightProgress = PlayButton
 	Specialists = PlayButton.subscribeToModel
-	MiddleProgress = Engine[0x8DF2E5447F384B9]()
+	MiddleProgress = Engine[@"getglobalmodel"]()
 	Specialists(RightProgress, MiddleProgress["lobbyRoot.lobbyNav"], function(f31_arg0, f31_arg1)
-		CoD.Menu.UpdateButtonShownState(f31_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f31_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	RightProgress = PlayButton
 	Specialists = PlayButton.subscribeToModel
-	MiddleProgress = Engine[0x8DF2E5447F384B9]()
+	MiddleProgress = Engine[@"getglobalmodel"]()
 	Specialists(RightProgress, MiddleProgress["lobbyRoot.gameClient.update"], function(f32_arg0, f32_arg1)
-		CoD.Menu.UpdateButtonShownState(f32_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f32_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	RightProgress = PlayButton
 	Specialists = PlayButton.subscribeToModel
-	MiddleProgress = Engine[0x8DF2E5447F384B9]()
+	MiddleProgress = Engine[@"getglobalmodel"]()
 	Specialists(RightProgress, MiddleProgress["lobbyRoot.privateClient.update"], function(f33_arg0, f33_arg1)
-		CoD.Menu.UpdateButtonShownState(f33_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f33_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	RightProgress = PlayButton
 	Specialists = PlayButton.subscribeToModel
-	MiddleProgress = Engine[0x8DF2E5447F384B9]()
+	MiddleProgress = Engine[@"getglobalmodel"]()
 	Specialists(RightProgress, MiddleProgress["lobbyRoot.lobbyList.playerCount"], function(f34_arg0, f34_arg1)
-		CoD.Menu.UpdateButtonShownState(f34_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f34_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	RightProgress = PlayButton
 	Specialists = PlayButton.subscribeToModel
-	MiddleProgress = Engine[0x8DF2E5447F384B9]()
+	MiddleProgress = Engine[@"getglobalmodel"]()
 	Specialists(RightProgress, MiddleProgress["MapVote.timerActive"], function(f35_arg0, f35_arg1)
-		CoD.Menu.UpdateButtonShownState(f35_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f35_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	PlayButton:registerEventHandler("gain_focus", function(element, event)
 		local f36_local0 = nil
@@ -289,10 +289,10 @@ CoD.SpecialistHeadquarters.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 		elseif element.super.gainFocus then
 			f36_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f36_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(PlayButton, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(PlayButton, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if IsLobbyHostOfCurrentMenu() and CoD.ModelUtility.IsGlobalModelValueEqualTo("lobbyRoot.lobbyList.playerCount", 1) and not CoD.LobbyUtility.MapVoteTimerActive() then
 			CoD.CTUtility.RefreshChosenSpecialistParams(controller)
 			CoD.CTUtility.LaunchGame(menu, self, element, controller)
@@ -301,7 +301,7 @@ CoD.SpecialistHeadquarters.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 		end
 	end, function(element, menu, controller)
 		if IsLobbyHostOfCurrentMenu() and CoD.ModelUtility.IsGlobalModelValueEqualTo("lobbyRoot.lobbyList.playerCount", 1) and not CoD.LobbyUtility.MapVoteTimerActive() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 			return false
 		else
 			return false
@@ -313,38 +313,38 @@ CoD.SpecialistHeadquarters.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self:addElement(PlayButton)
 	self.PlayButton = PlayButton
 	Specialists = CoD.SpecialistHeadquartersButton.new(f1_arg0, f1_arg1, 0.5, 0.5, 448, 860, 0.5, 0.5, -126.5, -59.5)
-	Specialists.Header:setText(LocalizeToUpperString(0xFF94A9EB646C873))
+	Specialists.Header:setText(LocalizeToUpperString(@"hash_6FF94A9EB646C873"))
 	Specialists:appendEventHandler("on_session_start", function(f40_arg0, f40_arg1)
 		f40_arg1.menu = f40_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f40_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f40_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	Specialists:appendEventHandler("on_session_end", function(f41_arg0, f41_arg1)
 		f41_arg1.menu = f41_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f41_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f41_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	MiddleProgress = Specialists
 	RightProgress = Specialists.subscribeToModel
-	local LeftProgress = Engine[0x8DF2E5447F384B9]()
+	local LeftProgress = Engine[@"getglobalmodel"]()
 	RightProgress(MiddleProgress, LeftProgress["lobbyRoot.lobbyNav"], function(f42_arg0, f42_arg1)
-		CoD.Menu.UpdateButtonShownState(f42_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f42_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	MiddleProgress = Specialists
 	RightProgress = Specialists.subscribeToModel
-	LeftProgress = Engine[0x8DF2E5447F384B9]()
+	LeftProgress = Engine[@"getglobalmodel"]()
 	RightProgress(MiddleProgress, LeftProgress["lobbyRoot.gameClient.update"], function(f43_arg0, f43_arg1)
-		CoD.Menu.UpdateButtonShownState(f43_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f43_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	MiddleProgress = Specialists
 	RightProgress = Specialists.subscribeToModel
-	LeftProgress = Engine[0x8DF2E5447F384B9]()
+	LeftProgress = Engine[@"getglobalmodel"]()
 	RightProgress(MiddleProgress, LeftProgress["lobbyRoot.privateClient.update"], function(f44_arg0, f44_arg1)
-		CoD.Menu.UpdateButtonShownState(f44_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f44_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	MiddleProgress = Specialists
 	RightProgress = Specialists.subscribeToModel
-	LeftProgress = Engine[0x8DF2E5447F384B9]()
+	LeftProgress = Engine[@"getglobalmodel"]()
 	RightProgress(MiddleProgress, LeftProgress["MapVote.timerActive"], function(f45_arg0, f45_arg1)
-		CoD.Menu.UpdateButtonShownState(f45_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f45_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	Specialists:registerEventHandler("gain_focus", function(element, event)
 		local f46_local0 = nil
@@ -353,10 +353,10 @@ CoD.SpecialistHeadquarters.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 		elseif element.super.gainFocus then
 			f46_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f46_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(Specialists, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(Specialists, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if IsLobbyHostOfCurrentMenu() and not CoD.LobbyUtility.MapVoteTimerActive() then
 			SetControllerModelValue(controller, "SpecialistHeadquarters.ShowPlayButtonInSpecialistSelect", true)
 			OpenOverlay(self, "SpecialistHeadquartersSelectSpecialist", controller)
@@ -366,7 +366,7 @@ CoD.SpecialistHeadquarters.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 		end
 	end, function(element, menu, controller)
 		if IsLobbyHostOfCurrentMenu() and not CoD.LobbyUtility.MapVoteTimerActive() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xAC3B80C833B60E1, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_3AC3B80C833B60E1", nil, "ui_confirm")
 			return true
 		else
 			return false

@@ -7,16 +7,16 @@ CoD.CraftActionHeader.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	self.id = "CraftActionHeader"
 	self.soundSet = "SelectColor"
 	local Backing = LUI.UIImage.new(0, 1, 0, 0, 1, 1, -35, 0)
-	Backing:setImage(RegisterImage(0x34839E8065B1E53))
-	Backing:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	Backing:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	Backing:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	Backing:setShaderVector(0, 0, 0, 0, 0)
 	Backing:setupNineSliceShader(196, 88)
 	self:addElement(Backing)
 	self.Backing = Backing
 	local Frame = LUI.UIImage.new(0, 1, -1, 1, 1, 1, -36, 1)
 	Frame:setAlpha(0.2)
-	Frame:setImage(RegisterImage(0x185E11D74ECA3D7))
-	Frame:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	Frame:setImage(RegisterImage(@"uie_ui_menu_store_common_frame"))
+	Frame:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	Frame:setShaderVector(0, 0, 0, 0, 0)
 	Frame:setupNineSliceShader(16, 16)
 	self:addElement(Frame)
@@ -25,8 +25,8 @@ CoD.CraftActionHeader.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	text:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
 	text:setTTF("ttmussels_demibold")
 	text:setLetterSpacing(6)
-	text:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	text:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	text:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	text:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(text)
 	self.text = text
 	self.text:linkToElementModel(self, "actionName", true, function(model)

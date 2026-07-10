@@ -8,16 +8,16 @@ CoD.ZMConsumableItemCountInGame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local bg = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	bg:setImage(RegisterImage(0x6E5BECCF89F9216))
+	bg:setImage(RegisterImage(@"hash_46E5BECCF89F9216"))
 	self:addElement(bg)
 	self.bg = bg
 	local Count = LUI.UIText.new(0.1, 0.9, 0, 0, 0.25, 0.75, 0, 0)
 	Count:setText(888)
 	Count:setTTF("skorzhen")
-	Count:setMaterial(LUI.UIImage.GetCachedMaterial(0x71E049B161CD00A))
+	Count:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_171E049B161CD00A"))
 	Count:setLetterSpacing(1)
-	Count:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	Count:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Count:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	Count:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(Count)
 	self.Count = Count
 	if PostLoadFunc then

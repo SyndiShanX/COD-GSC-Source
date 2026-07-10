@@ -9,7 +9,7 @@ CoD.CallingCards_Asset_Pirates_Mast.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local mast = LUI.UIImage.new(0, 0, 0, 1000, 0, 0, 0, 280)
-	mast:setImage(RegisterImage(0x3D1A4E4E0179D0A))
+	mast:setImage(RegisterImage(@"uie_ui_icon_callingcards_pirates_mast"))
 	self:addElement(mast)
 	self.mast = mast
 	local flag = CoD.CallingCards_Asset_Pirates_Flag.new(f1_arg0, f1_arg1, 0, 0, 681.5, 691.5, 0, 0, 68, 78)
@@ -35,22 +35,22 @@ CoD.CallingCards_Asset_Pirates_Mast.__clipsPerState = {
 				local f4_local0 = function(f5_arg0)
 					local f5_local0 = function(f6_arg0)
 						local f6_local0 = function(f7_arg0)
-							f7_arg0:beginAnimation(480, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+							f7_arg0:beginAnimation(480, Enum[@"luitween"][@"luitween_ease_out"])
 							f7_arg0:setZRot(3)
 							f7_arg0:setScale(0.9, 1)
 							f7_arg0:registerEventHandler("transition_complete_keyframe", f3_arg0.clipFinished)
 						end
-						f6_arg0:beginAnimation(520, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+						f6_arg0:beginAnimation(520, Enum[@"luitween"][@"luitween_ease_out"])
 						f6_arg0:setZRot(-3)
 						f6_arg0:setScale(1, 1)
 						f6_arg0:registerEventHandler("transition_complete_keyframe", f6_local0)
 					end
-					f5_arg0:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f5_arg0:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_out"])
 					f5_arg0:setZRot(3)
 					f5_arg0:setScale(0.9, 1)
 					f5_arg0:registerEventHandler("transition_complete_keyframe", f5_local0)
 				end
-				f3_arg0.flag:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f3_arg0.flag:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_out"])
 				f3_arg0.flag:setZRot(-6)
 				f3_arg0.flag:setScale(1, 1)
 				f3_arg0.flag:registerEventHandler("interrupted_keyframe", f3_arg0.clipInterrupted)

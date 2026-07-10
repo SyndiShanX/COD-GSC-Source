@@ -42,19 +42,19 @@ CoD.PCSocialMenu_PendingRequests.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	self:addElement(PaginationLine1)
 	self.PaginationLine1 = PaginationLine1
 	local RequestReceived = LUI.UIText.new(0, 1, 0, 0, 0, 0, 5, 42)
-	RequestReceived:setText(Engine[0xF9F1239CFD921FE](0xF690C78D6DA9218))
+	RequestReceived:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_4F690C78D6DA9218"))
 	RequestReceived:setTTF("ttmussels_demibold")
 	RequestReceived:setLetterSpacing(3)
-	RequestReceived:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	RequestReceived:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	RequestReceived:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	RequestReceived:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(RequestReceived)
 	self.RequestReceived = RequestReceived
 	local RequestSent = LUI.UIText.new(0, 1, 0, 0, 0, 0, 323, 360)
-	RequestSent:setText(Engine[0xF9F1239CFD921FE](0x1AE94021C967D51))
+	RequestSent:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_21AE94021C967D51"))
 	RequestSent:setTTF("ttmussels_demibold")
 	RequestSent:setLetterSpacing(3)
-	RequestSent:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	RequestSent:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	RequestSent:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	RequestSent:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(RequestSent)
 	self.RequestSent = RequestSent
 	RequestSentList.id = "RequestSentList"

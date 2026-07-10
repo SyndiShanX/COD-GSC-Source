@@ -11,12 +11,12 @@ CoD.ItemDetailsCasePrice.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	CasePriceText:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	CasePriceText:setTTF("ttmussels_demibold")
 	CasePriceText:setLetterSpacing(2)
-	CasePriceText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	CasePriceText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	CasePriceText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	CasePriceText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	CasePriceText:linkToElementModel(self, "casePrice", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			CasePriceText:setText(LocalizeIntoString(0x9CBD79D3C8A2BED, f2_local0))
+			CasePriceText:setText(LocalizeIntoString(@"hash_79CBD79D3C8A2BED", f2_local0))
 		end
 	end)
 	self:addElement(CasePriceText)

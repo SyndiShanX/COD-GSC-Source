@@ -18,7 +18,7 @@ CoD.ReservesOffersCarousel.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	OffersCarousel:setTopBottom(0.5, 0.5, -231, 231)
 	OffersCarousel:setWidgetType(CoD.ReservesLootPurchaseBundleButtonContainer)
 	OffersCarousel:setSpacing(12)
-	OffersCarousel:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	OffersCarousel:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	OffersCarousel:setHorizontalCounter(CoD.horizontalCounterTriggerPrompts)
 	OffersCarousel:setDataSource("ReserveDealsList")
 	OffersCarousel:registerEventHandler("occlusion_change", function(element, event)
@@ -53,22 +53,22 @@ CoD.ReservesOffersCarousel.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 		elseif element.super.gainFocus then
 			f5_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_rtrig"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_ltrig"])
 		return f5_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(OffersCarousel, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(OffersCarousel, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		OpenOverlay(self, "ItemShopDetails", controller, {
 			_model = element:getModel(),
 		})
 		PlaySoundAlias("uin_toggle_generic")
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 		return true
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(OffersCarousel, f1_arg1, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA], "MWHEELDOWN", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(OffersCarousel, f1_arg1, Enum[@"luibutton"][@"lui_key_rtrig"], "MWHEELDOWN", function(element, menu, controller, model)
 		if not IsRepeatButtonPress(model) then
 			CoD.GridAndListUtility.NavigateGridItemOnParentGridOrList(element, controller, true)
 			return true
@@ -76,13 +76,13 @@ CoD.ReservesOffersCarousel.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 		end
 	end, function(element, menu, controller)
 		if not IsRepeatButtonPress(nil) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA], 0x0, nil, "MWHEELDOWN")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_rtrig"], @"hash_0", nil, "MWHEELDOWN")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(OffersCarousel, f1_arg1, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC], "MWHEELUP", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(OffersCarousel, f1_arg1, Enum[@"luibutton"][@"lui_key_ltrig"], "MWHEELUP", function(element, menu, controller, model)
 		if not IsRepeatButtonPress(model) then
 			CoD.GridAndListUtility.NavigateGridItemOnParentGridOrList(element, controller, false)
 			return true
@@ -90,7 +90,7 @@ CoD.ReservesOffersCarousel.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 		end
 	end, function(element, menu, controller)
 		if not IsRepeatButtonPress(nil) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC], 0x0, nil, "MWHEELUP")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_ltrig"], @"hash_0", nil, "MWHEELUP")
 			return false
 		else
 			return false
@@ -123,7 +123,7 @@ CoD.ReservesOffersCarousel.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	end)
 	local f1_local2 = self
 	local f1_local3 = self.subscribeToModel
-	local f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local3(f1_local2, f1_local4.LastInput, function(f16_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

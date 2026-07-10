@@ -36,7 +36,7 @@ CoD.ToggleButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 	ListItem:linkToElementModel(self, "name", true, function(model)
 		local f5_local0 = model:get()
 		if f5_local0 ~= nil then
-			ListItem.Title:setText(Engine[0xF9F1239CFD921FE](f5_local0))
+			ListItem.Title:setText(Engine[@"hash_4F9F1239CFD921FE"](f5_local0))
 		end
 	end)
 	self:addElement(ListItem)
@@ -84,7 +84,7 @@ CoD.ToggleButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 		})
 	end)
 	On.On.__On_String_Reference = function()
-		On.On:setText(LocalizeToUpperString(CoD.PCWidgetUtility.SetToggleString(self, "toggleOnString", 0x439156E8D96D245)))
+		On.On:setText(LocalizeToUpperString(CoD.PCWidgetUtility.SetToggleString(self, "toggleOnString", @"hash_439156E8D96D245")))
 	end
 	On.On.__On_String_Reference()
 	On:linkToElementModel(self, nil, false, function(model)
@@ -138,7 +138,7 @@ CoD.ToggleButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 		})
 	end)
 	Off.On.__On_String_Reference = function()
-		Off.On:setText(LocalizeToUpperString(CoD.PCWidgetUtility.SetToggleString(self, "toggleOffString", 0x3ECBDDA975E2AC1)))
+		Off.On:setText(LocalizeToUpperString(CoD.PCWidgetUtility.SetToggleString(self, "toggleOffString", @"hash_43ECBDDA975E2AC1")))
 	end
 	Off.On.__On_String_Reference()
 	Off:linkToElementModel(self, nil, false, function(model)

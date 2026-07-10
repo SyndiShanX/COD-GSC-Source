@@ -20,7 +20,7 @@ LUI.createMenu.DirectorCustomGameSetUp = function(f1_arg0, f1_arg1)
 	self.anyChildUsesUpdateState = true
 	f1_local1:addElementToPendingUpdateStateList(self)
 	local SceneBlur = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 6, -6)
-	SceneBlur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	SceneBlur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	SceneBlur:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(SceneBlur)
 	self.SceneBlur = SceneBlur
@@ -35,7 +35,7 @@ LUI.createMenu.DirectorCustomGameSetUp = function(f1_arg0, f1_arg1)
 	})
 	local HeaderGameRule = DirectorLobbySettingList
 	local DirectorGameSettingList = DirectorLobbySettingList.subscribeToModel
-	local HeaderGameMode = Engine[0x8DF2E5447F384B9]()
+	local HeaderGameMode = Engine[@"getglobalmodel"]()
 	DirectorGameSettingList(HeaderGameRule, HeaderGameMode["lobbyRoot.lobbyNav"], function(f3_arg0)
 		f1_local1:updateElementState(DirectorLobbySettingList, {
 			name = "model_validation",
@@ -52,20 +52,20 @@ LUI.createMenu.DirectorCustomGameSetUp = function(f1_arg0, f1_arg1)
 	self.DirectorGameSettingList = DirectorGameSettingList
 	HeaderGameRule = LUI.UIText.new(0.5, 0.5, 508, 968, 0, 0, 476, 496)
 	HeaderGameRule:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
-	HeaderGameRule:setText(Engine[0xF9F1239CFD921FE](0xBB7AA7A26F39DFA))
+	HeaderGameRule:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_BB7AA7A26F39DFA"))
 	HeaderGameRule:setTTF("default")
 	HeaderGameRule:setLetterSpacing(2)
-	HeaderGameRule:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	HeaderGameRule:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	HeaderGameRule:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	HeaderGameRule:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(HeaderGameRule)
 	self.HeaderGameRule = HeaderGameRule
 	HeaderGameMode = LUI.UIText.new(0.5, 0.5, 508, 968, 0, 0, 223, 243)
 	HeaderGameMode:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
-	HeaderGameMode:setText(LocalizeToUpperString(0x1496B17DC3093F9))
+	HeaderGameMode:setText(LocalizeToUpperString(@"hash_11496B17DC3093F9"))
 	HeaderGameMode:setTTF("default")
 	HeaderGameMode:setLetterSpacing(2)
-	HeaderGameMode:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	HeaderGameMode:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	HeaderGameMode:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	HeaderGameMode:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(HeaderGameMode)
 	self.HeaderGameMode = HeaderGameMode
 	local SelectionModeFocusBlocker = nil
@@ -91,10 +91,10 @@ LUI.createMenu.DirectorCustomGameSetUp = function(f1_arg0, f1_arg1)
 	FreeTeam:setHorizontalCount(2)
 	FreeTeam:setVerticalCount(6)
 	FreeTeam:setSpacing(18)
-	FreeTeam:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	FreeTeam:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	FreeTeam:setFilter(function(f4_arg0)
 		local f4_local0
-		if f4_arg0.team:get() == Enum[0x13A4717E5AC547][0xE4DDAC9C5C45556] or f4_arg0.team:get() == Enum[0x13A4717E5AC547][0xBD65CBD25CCBEDC] then
+		if f4_arg0.team:get() == Enum[@"team_t"][@"team_spectator"] or f4_arg0.team:get() == Enum[@"team_t"][@"team_neutral"] then
 			f4_local0 = false
 		else
 			f4_local0 = true
@@ -104,57 +104,57 @@ LUI.createMenu.DirectorCustomGameSetUp = function(f1_arg0, f1_arg1)
 	FreeTeam:setDataSource("DirectorPartyListCustom")
 	FreeTeam:appendEventHandler("on_session_start", function(f5_arg0, f5_arg1)
 		f5_arg1.menu = f5_arg1.menu or f1_local1
-		CoD.Menu.UpdateButtonShownState(f5_arg0, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f5_arg0, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	FreeTeam:appendEventHandler("on_session_end", function(f6_arg0, f6_arg1)
 		f6_arg1.menu = f6_arg1.menu or f1_local1
-		CoD.Menu.UpdateButtonShownState(f6_arg0, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f6_arg0, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	local BackingAxis = FreeTeam
 	local HeaderFreeTeam = FreeTeam.subscribeToModel
-	local AxisTeam = Engine[0x8DF2E5447F384B9]()
+	local AxisTeam = Engine[@"getglobalmodel"]()
 	HeaderFreeTeam(BackingAxis, AxisTeam["lobbyRoot.lobbyNav"], function(f7_arg0, f7_arg1)
-		CoD.Menu.UpdateButtonShownState(f7_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f7_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	BackingAxis = FreeTeam
 	HeaderFreeTeam = FreeTeam.subscribeToModel
-	AxisTeam = Engine[0x8DF2E5447F384B9]()
+	AxisTeam = Engine[@"getglobalmodel"]()
 	HeaderFreeTeam(BackingAxis, AxisTeam["lobbyRoot.gameClient.update"], function(f8_arg0, f8_arg1)
-		CoD.Menu.UpdateButtonShownState(f8_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f8_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	BackingAxis = FreeTeam
 	HeaderFreeTeam = FreeTeam.subscribeToModel
-	AxisTeam = Engine[0x8DF2E5447F384B9]()
+	AxisTeam = Engine[@"getglobalmodel"]()
 	HeaderFreeTeam(BackingAxis, AxisTeam["lobbyRoot.privateClient.update"], function(f9_arg0, f9_arg1)
-		CoD.Menu.UpdateButtonShownState(f9_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f9_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	FreeTeam:linkToElementModel(FreeTeam, "xuid", true, function(model, f10_arg1)
-		CoD.Menu.UpdateButtonShownState(f10_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f10_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	FreeTeam:linkToElementModel(FreeTeam, "team", true, function(model, f11_arg1)
-		CoD.Menu.UpdateButtonShownState(f11_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f11_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	BackingAxis = FreeTeam
 	HeaderFreeTeam = FreeTeam.subscribeToModel
 	AxisTeam = DataSources.LobbyRoot.getModel(f1_arg0)
 	HeaderFreeTeam(BackingAxis, AxisTeam.selectedXuid, function(f12_arg0, f12_arg1)
-		CoD.Menu.UpdateButtonShownState(f12_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f12_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	FreeTeam:appendEventHandler("input_source_changed", function(f13_arg0, f13_arg1)
 		f13_arg1.menu = f13_arg1.menu or f1_local1
-		CoD.Menu.UpdateButtonShownState(f13_arg0, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f13_arg0, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	BackingAxis = FreeTeam
 	HeaderFreeTeam = FreeTeam.subscribeToModel
-	AxisTeam = Engine[0x4DF5CFBC1771947](f1_arg0)
+	AxisTeam = Engine[@"getmodelforcontroller"](f1_arg0)
 	HeaderFreeTeam(BackingAxis, AxisTeam.LastInput, function(f14_arg0, f14_arg1)
-		CoD.Menu.UpdateButtonShownState(f14_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f14_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	BackingAxis = FreeTeam
 	HeaderFreeTeam = FreeTeam.subscribeToModel
 	AxisTeam = DataSources.LobbyRoot.getModel(f1_arg0)
 	HeaderFreeTeam(BackingAxis, AxisTeam.selectedXuidTeam, function(f15_arg0, f15_arg1)
-		CoD.Menu.UpdateButtonShownState(f15_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f15_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	FreeTeam:registerEventHandler("gain_focus", function(element, event)
 		local f16_local0 = nil
@@ -163,10 +163,10 @@ LUI.createMenu.DirectorCustomGameSetUp = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f16_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f16_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(FreeTeam, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(FreeTeam, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if IsLobbyHostOfCurrentMenu() and CoD.DirectorUtility.CanSelectClient(controller, element) and IsGamepad(controller) then
 			CoD.DirectorUtility.SelectClient(controller, element)
 			PlaySoundSetSound(self, "list_action")
@@ -195,22 +195,22 @@ LUI.createMenu.DirectorCustomGameSetUp = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if IsLobbyHostOfCurrentMenu() and CoD.DirectorUtility.CanSelectClient(controller, element) and IsGamepad(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x2D7AF821FE36BC6, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/move", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "ui_confirm")
 			return true
 		elseif IsLobbyHostOfCurrentMenu() and CoD.DirectorUtility.CanSwapWithSelectedClient(controller, element) and not CoD.DirectorUtility.IsClientEmpty(controller, element) and IsGamepad(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xB4A0F5945BB8108, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/swap", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "ui_confirm")
 			return true
 		elseif IsLobbyHostOfCurrentMenu() and CoD.DirectorUtility.CanSwapWithSelectedClient(controller, element) and IsGamepad(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x9038794D2FBCFAA, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/add", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "ui_confirm")
 			return true
 		elseif IsLobbyHostOfCurrentMenu() and CoD.DirectorUtility.CanSelectClient(controller, element) and IsMouseOrKeyboard(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 			return false
 		elseif IsLobbyHostOfCurrentMenu() and CoD.DirectorUtility.CanSwapWithSelectedClient(controller, element) and not CoD.DirectorUtility.IsClientEmpty(controller, element) and IsMouseOrKeyboard(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 			return false
 		elseif IsLobbyHostOfCurrentMenu() and CoD.DirectorUtility.CanSwapWithSelectedClient(controller, element) and IsMouseOrKeyboard(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 			return false
 		else
 			return false
@@ -224,7 +224,7 @@ LUI.createMenu.DirectorCustomGameSetUp = function(f1_arg0, f1_arg1)
 	HeaderFreeTeam = CoD.DirectorFixedWidthHeading.new(f1_local1, f1_arg0, 0.5, 0.5, -861, 0, 0, 0, 200, 230)
 	HeaderFreeTeam.Label:setRGB(ColorSet.CodCasterFactionAllies.r, ColorSet.CodCasterFactionAllies.g, ColorSet.CodCasterFactionAllies.b)
 	HeaderFreeTeam.Label:setAlpha(0)
-	HeaderFreeTeam.Label:setText(LocalizeToUpperString(0xC815AF97EE8C135))
+	HeaderFreeTeam.Label:setText(LocalizeToUpperString(@"mpui/allies"))
 	self:addElement(HeaderFreeTeam)
 	self.HeaderFreeTeam = HeaderFreeTeam
 	BackingAxis = LUI.UIImage.new(0.5, 0.5, -410, 32, 0, 0, 227, 872)
@@ -238,64 +238,64 @@ LUI.createMenu.DirectorCustomGameSetUp = function(f1_arg0, f1_arg1)
 	AxisTeam:setWidgetType(CoD.DirectorTeamMember)
 	AxisTeam:setVerticalCount(6)
 	AxisTeam:setSpacing(18)
-	AxisTeam:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	AxisTeam:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	AxisTeam:setFilter(function(f20_arg0)
-		return f20_arg0.team:get() == Enum[0x13A4717E5AC547][0x3F83D7CE4BD7B68]
+		return f20_arg0.team:get() == Enum[@"team_t"][@"team_axis"]
 	end)
 	AxisTeam:setDataSource("DirectorPartyListCustom")
 	AxisTeam:appendEventHandler("on_session_start", function(f21_arg0, f21_arg1)
 		f21_arg1.menu = f21_arg1.menu or f1_local1
-		CoD.Menu.UpdateButtonShownState(f21_arg0, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f21_arg0, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	AxisTeam:appendEventHandler("on_session_end", function(f22_arg0, f22_arg1)
 		f22_arg1.menu = f22_arg1.menu or f1_local1
-		CoD.Menu.UpdateButtonShownState(f22_arg0, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f22_arg0, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	local BackingAllies = AxisTeam
 	local HeaderAxisTeam = AxisTeam.subscribeToModel
-	local AlliesTeam = Engine[0x8DF2E5447F384B9]()
+	local AlliesTeam = Engine[@"getglobalmodel"]()
 	HeaderAxisTeam(BackingAllies, AlliesTeam["lobbyRoot.lobbyNav"], function(f23_arg0, f23_arg1)
-		CoD.Menu.UpdateButtonShownState(f23_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f23_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	BackingAllies = AxisTeam
 	HeaderAxisTeam = AxisTeam.subscribeToModel
-	AlliesTeam = Engine[0x8DF2E5447F384B9]()
+	AlliesTeam = Engine[@"getglobalmodel"]()
 	HeaderAxisTeam(BackingAllies, AlliesTeam["lobbyRoot.gameClient.update"], function(f24_arg0, f24_arg1)
-		CoD.Menu.UpdateButtonShownState(f24_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f24_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	BackingAllies = AxisTeam
 	HeaderAxisTeam = AxisTeam.subscribeToModel
-	AlliesTeam = Engine[0x8DF2E5447F384B9]()
+	AlliesTeam = Engine[@"getglobalmodel"]()
 	HeaderAxisTeam(BackingAllies, AlliesTeam["lobbyRoot.privateClient.update"], function(f25_arg0, f25_arg1)
-		CoD.Menu.UpdateButtonShownState(f25_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f25_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	AxisTeam:linkToElementModel(AxisTeam, "xuid", true, function(model, f26_arg1)
-		CoD.Menu.UpdateButtonShownState(f26_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f26_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	AxisTeam:linkToElementModel(AxisTeam, "team", true, function(model, f27_arg1)
-		CoD.Menu.UpdateButtonShownState(f27_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f27_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	BackingAllies = AxisTeam
 	HeaderAxisTeam = AxisTeam.subscribeToModel
 	AlliesTeam = DataSources.LobbyRoot.getModel(f1_arg0)
 	HeaderAxisTeam(BackingAllies, AlliesTeam.selectedXuid, function(f28_arg0, f28_arg1)
-		CoD.Menu.UpdateButtonShownState(f28_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f28_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	AxisTeam:appendEventHandler("input_source_changed", function(f29_arg0, f29_arg1)
 		f29_arg1.menu = f29_arg1.menu or f1_local1
-		CoD.Menu.UpdateButtonShownState(f29_arg0, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f29_arg0, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	BackingAllies = AxisTeam
 	HeaderAxisTeam = AxisTeam.subscribeToModel
-	AlliesTeam = Engine[0x4DF5CFBC1771947](f1_arg0)
+	AlliesTeam = Engine[@"getmodelforcontroller"](f1_arg0)
 	HeaderAxisTeam(BackingAllies, AlliesTeam.LastInput, function(f30_arg0, f30_arg1)
-		CoD.Menu.UpdateButtonShownState(f30_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f30_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	BackingAllies = AxisTeam
 	HeaderAxisTeam = AxisTeam.subscribeToModel
 	AlliesTeam = DataSources.LobbyRoot.getModel(f1_arg0)
 	HeaderAxisTeam(BackingAllies, AlliesTeam.selectedXuidTeam, function(f31_arg0, f31_arg1)
-		CoD.Menu.UpdateButtonShownState(f31_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f31_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	AxisTeam:registerEventHandler("gain_focus", function(element, event)
 		local f32_local0 = nil
@@ -304,10 +304,10 @@ LUI.createMenu.DirectorCustomGameSetUp = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f32_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f32_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(AxisTeam, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(AxisTeam, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if IsLobbyHostOfCurrentMenu() and CoD.DirectorUtility.CanSelectClient(controller, element) and IsGamepad(controller) then
 			CoD.DirectorUtility.SelectClient(controller, element)
 			PlaySoundSetSound(self, "list_action")
@@ -336,22 +336,22 @@ LUI.createMenu.DirectorCustomGameSetUp = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if IsLobbyHostOfCurrentMenu() and CoD.DirectorUtility.CanSelectClient(controller, element) and IsGamepad(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x2D7AF821FE36BC6, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/move", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "ui_confirm")
 			return true
 		elseif IsLobbyHostOfCurrentMenu() and CoD.DirectorUtility.CanSwapWithSelectedClient(controller, element) and not CoD.DirectorUtility.IsClientEmpty(controller, element) and IsGamepad(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xB4A0F5945BB8108, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/swap", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "ui_confirm")
 			return true
 		elseif IsLobbyHostOfCurrentMenu() and CoD.DirectorUtility.CanSwapWithSelectedClient(controller, element) and IsGamepad(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x9038794D2FBCFAA, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/add", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "ui_confirm")
 			return true
 		elseif IsLobbyHostOfCurrentMenu() and CoD.DirectorUtility.CanSelectClient(controller, element) and IsMouseOrKeyboard(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 			return false
 		elseif IsLobbyHostOfCurrentMenu() and CoD.DirectorUtility.CanSwapWithSelectedClient(controller, element) and not CoD.DirectorUtility.IsClientEmpty(controller, element) and IsMouseOrKeyboard(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 			return false
 		elseif IsLobbyHostOfCurrentMenu() and CoD.DirectorUtility.CanSwapWithSelectedClient(controller, element) and IsMouseOrKeyboard(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 			return false
 		else
 			return false
@@ -365,7 +365,7 @@ LUI.createMenu.DirectorCustomGameSetUp = function(f1_arg0, f1_arg1)
 	HeaderAxisTeam = CoD.DirectorFixedWidthHeading.new(f1_local1, f1_arg0, 0.5, 0.5, -409, 33, 0, 0, 200, 230)
 	HeaderAxisTeam.Backing:setRGB(ColorSet.CodCasterFactionAxis.r, ColorSet.CodCasterFactionAxis.g, ColorSet.CodCasterFactionAxis.b)
 	HeaderAxisTeam.Label:setRGB(ColorSet.CodCasterFactionAxis.r, ColorSet.CodCasterFactionAxis.g, ColorSet.CodCasterFactionAxis.b)
-	HeaderAxisTeam.Label:setText(LocalizeToUpperString(0x12BD5927860415A))
+	HeaderAxisTeam.Label:setText(LocalizeToUpperString(@"mpui/axis"))
 	self:addElement(HeaderAxisTeam)
 	self.HeaderAxisTeam = HeaderAxisTeam
 	BackingAllies = LUI.UIImage.new(0.5, 0.5, -861, -419, 0, 0, 227, 872)
@@ -379,64 +379,64 @@ LUI.createMenu.DirectorCustomGameSetUp = function(f1_arg0, f1_arg1)
 	AlliesTeam:setWidgetType(CoD.DirectorTeamMember)
 	AlliesTeam:setVerticalCount(6)
 	AlliesTeam:setSpacing(18)
-	AlliesTeam:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	AlliesTeam:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	AlliesTeam:setFilter(function(f36_arg0)
-		return f36_arg0.team:get() == Enum[0x13A4717E5AC547][0x2A34B055ADD98AB]
+		return f36_arg0.team:get() == Enum[@"team_t"][@"team_allies"]
 	end)
 	AlliesTeam:setDataSource("DirectorPartyListCustom")
 	AlliesTeam:appendEventHandler("on_session_start", function(f37_arg0, f37_arg1)
 		f37_arg1.menu = f37_arg1.menu or f1_local1
-		CoD.Menu.UpdateButtonShownState(f37_arg0, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f37_arg0, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	AlliesTeam:appendEventHandler("on_session_end", function(f38_arg0, f38_arg1)
 		f38_arg1.menu = f38_arg1.menu or f1_local1
-		CoD.Menu.UpdateButtonShownState(f38_arg0, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f38_arg0, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	local FooterContainerFrontendRight = AlliesTeam
 	local HeaderAlliesTeam = AlliesTeam.subscribeToModel
-	local CommonHeader = Engine[0x8DF2E5447F384B9]()
+	local CommonHeader = Engine[@"getglobalmodel"]()
 	HeaderAlliesTeam(FooterContainerFrontendRight, CommonHeader["lobbyRoot.lobbyNav"], function(f39_arg0, f39_arg1)
-		CoD.Menu.UpdateButtonShownState(f39_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f39_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	FooterContainerFrontendRight = AlliesTeam
 	HeaderAlliesTeam = AlliesTeam.subscribeToModel
-	CommonHeader = Engine[0x8DF2E5447F384B9]()
+	CommonHeader = Engine[@"getglobalmodel"]()
 	HeaderAlliesTeam(FooterContainerFrontendRight, CommonHeader["lobbyRoot.gameClient.update"], function(f40_arg0, f40_arg1)
-		CoD.Menu.UpdateButtonShownState(f40_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f40_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	FooterContainerFrontendRight = AlliesTeam
 	HeaderAlliesTeam = AlliesTeam.subscribeToModel
-	CommonHeader = Engine[0x8DF2E5447F384B9]()
+	CommonHeader = Engine[@"getglobalmodel"]()
 	HeaderAlliesTeam(FooterContainerFrontendRight, CommonHeader["lobbyRoot.privateClient.update"], function(f41_arg0, f41_arg1)
-		CoD.Menu.UpdateButtonShownState(f41_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f41_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	AlliesTeam:linkToElementModel(AlliesTeam, "xuid", true, function(model, f42_arg1)
-		CoD.Menu.UpdateButtonShownState(f42_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f42_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	AlliesTeam:linkToElementModel(AlliesTeam, "team", true, function(model, f43_arg1)
-		CoD.Menu.UpdateButtonShownState(f43_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f43_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	FooterContainerFrontendRight = AlliesTeam
 	HeaderAlliesTeam = AlliesTeam.subscribeToModel
 	CommonHeader = DataSources.LobbyRoot.getModel(f1_arg0)
 	HeaderAlliesTeam(FooterContainerFrontendRight, CommonHeader.selectedXuid, function(f44_arg0, f44_arg1)
-		CoD.Menu.UpdateButtonShownState(f44_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f44_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	AlliesTeam:appendEventHandler("input_source_changed", function(f45_arg0, f45_arg1)
 		f45_arg1.menu = f45_arg1.menu or f1_local1
-		CoD.Menu.UpdateButtonShownState(f45_arg0, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f45_arg0, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	FooterContainerFrontendRight = AlliesTeam
 	HeaderAlliesTeam = AlliesTeam.subscribeToModel
-	CommonHeader = Engine[0x4DF5CFBC1771947](f1_arg0)
+	CommonHeader = Engine[@"getmodelforcontroller"](f1_arg0)
 	HeaderAlliesTeam(FooterContainerFrontendRight, CommonHeader.LastInput, function(f46_arg0, f46_arg1)
-		CoD.Menu.UpdateButtonShownState(f46_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f46_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	FooterContainerFrontendRight = AlliesTeam
 	HeaderAlliesTeam = AlliesTeam.subscribeToModel
 	CommonHeader = DataSources.LobbyRoot.getModel(f1_arg0)
 	HeaderAlliesTeam(FooterContainerFrontendRight, CommonHeader.selectedXuidTeam, function(f47_arg0, f47_arg1)
-		CoD.Menu.UpdateButtonShownState(f47_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f47_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	AlliesTeam:registerEventHandler("gain_focus", function(element, event)
 		local f48_local0 = nil
@@ -445,10 +445,10 @@ LUI.createMenu.DirectorCustomGameSetUp = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f48_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f48_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(AlliesTeam, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(AlliesTeam, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if IsLobbyHostOfCurrentMenu() and CoD.DirectorUtility.CanSelectClient(controller, element) and IsGamepad(controller) then
 			CoD.DirectorUtility.SelectClient(controller, element)
 			PlaySoundSetSound(self, "list_action")
@@ -477,22 +477,22 @@ LUI.createMenu.DirectorCustomGameSetUp = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if IsLobbyHostOfCurrentMenu() and CoD.DirectorUtility.CanSelectClient(controller, element) and IsGamepad(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x2D7AF821FE36BC6, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/move", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "ui_confirm")
 			return true
 		elseif IsLobbyHostOfCurrentMenu() and CoD.DirectorUtility.CanSwapWithSelectedClient(controller, element) and not CoD.DirectorUtility.IsClientEmpty(controller, element) and IsGamepad(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xB4A0F5945BB8108, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/swap", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "ui_confirm")
 			return true
 		elseif IsLobbyHostOfCurrentMenu() and CoD.DirectorUtility.CanSwapWithSelectedClient(controller, element) and IsGamepad(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x9038794D2FBCFAA, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/add", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "ui_confirm")
 			return true
 		elseif IsLobbyHostOfCurrentMenu() and CoD.DirectorUtility.CanSelectClient(controller, element) and IsMouseOrKeyboard(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 			return false
 		elseif IsLobbyHostOfCurrentMenu() and CoD.DirectorUtility.CanSwapWithSelectedClient(controller, element) and not CoD.DirectorUtility.IsClientEmpty(controller, element) and IsMouseOrKeyboard(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 			return false
 		elseif IsLobbyHostOfCurrentMenu() and CoD.DirectorUtility.CanSwapWithSelectedClient(controller, element) and IsMouseOrKeyboard(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 			return false
 		else
 			return false
@@ -506,7 +506,7 @@ LUI.createMenu.DirectorCustomGameSetUp = function(f1_arg0, f1_arg1)
 	HeaderAlliesTeam = CoD.DirectorFixedWidthHeading.new(f1_local1, f1_arg0, 0.5, 0.5, -861, -419, 0, 0, 200, 230)
 	HeaderAlliesTeam.Backing:setRGB(ColorSet.CodCasterFactionAllies.r, ColorSet.CodCasterFactionAllies.g, ColorSet.CodCasterFactionAllies.b)
 	HeaderAlliesTeam.Label:setRGB(ColorSet.CodCasterFactionAllies.r, ColorSet.CodCasterFactionAllies.g, ColorSet.CodCasterFactionAllies.b)
-	HeaderAlliesTeam.Label:setText(LocalizeToUpperString(0xC815AF97EE8C135))
+	HeaderAlliesTeam.Label:setText(LocalizeToUpperString(@"mpui/allies"))
 	self:addElement(HeaderAlliesTeam)
 	self.HeaderAlliesTeam = HeaderAlliesTeam
 	FooterContainerFrontendRight = CoD.FooterContainer_Frontend_Right.new(f1_local1, f1_arg0, 0, 1, 0, 0, 1, 1, -48, 0)
@@ -593,7 +593,7 @@ LUI.createMenu.DirectorCustomGameSetUp = function(f1_arg0, f1_arg1)
 	})
 	local f1_local23 = DirectorCoDCasterList
 	local HeaderCODCaster = DirectorCoDCasterList.subscribeToModel
-	local f1_local25 = Engine[0x8DF2E5447F384B9]()
+	local f1_local25 = Engine[@"getglobalmodel"]()
 	HeaderCODCaster(f1_local23, f1_local25["lobbyRoot.lobbyNav"], function(f59_arg0)
 		f1_local1:updateElementState(DirectorCoDCasterList, {
 			name = "model_validation",
@@ -605,7 +605,7 @@ LUI.createMenu.DirectorCustomGameSetUp = function(f1_arg0, f1_arg1)
 	end, false)
 	f1_local23 = DirectorCoDCasterList
 	HeaderCODCaster = DirectorCoDCasterList.subscribeToModel
-	f1_local25 = Engine[0x8DF2E5447F384B9]()
+	f1_local25 = Engine[@"getglobalmodel"]()
 	HeaderCODCaster(f1_local23, f1_local25["lobbyRoot.gameClient.update"], function(f60_arg0)
 		f1_local1:updateElementState(DirectorCoDCasterList, {
 			name = "model_validation",
@@ -617,7 +617,7 @@ LUI.createMenu.DirectorCustomGameSetUp = function(f1_arg0, f1_arg1)
 	end, false)
 	f1_local23 = DirectorCoDCasterList
 	HeaderCODCaster = DirectorCoDCasterList.subscribeToModel
-	f1_local25 = Engine[0x8DF2E5447F384B9]()
+	f1_local25 = Engine[@"getglobalmodel"]()
 	HeaderCODCaster(f1_local23, f1_local25["lobbyRoot.privateClient.update"], function(f61_arg0)
 		f1_local1:updateElementState(DirectorCoDCasterList, {
 			name = "model_validation",
@@ -654,7 +654,7 @@ LUI.createMenu.DirectorCustomGameSetUp = function(f1_arg0, f1_arg1)
 	})
 	f1_local25 = self
 	f1_local23 = self.subscribeToModel
-	local f1_local26 = Engine[0x8DF2E5447F384B9]()
+	local f1_local26 = Engine[@"getglobalmodel"]()
 	f1_local23(f1_local25, f1_local26["lobbyRoot.lobbyNav"], function(f64_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",
@@ -666,7 +666,7 @@ LUI.createMenu.DirectorCustomGameSetUp = function(f1_arg0, f1_arg1)
 	end, false)
 	f1_local25 = self
 	f1_local23 = self.subscribeToModel
-	f1_local26 = Engine[0x8DF2E5447F384B9]()
+	f1_local26 = Engine[@"getglobalmodel"]()
 	f1_local23(f1_local25, f1_local26["MapVote.mapVoteGameModeNext"], function(f65_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",
@@ -677,9 +677,9 @@ LUI.createMenu.DirectorCustomGameSetUp = function(f1_arg0, f1_arg1)
 		})
 	end, false)
 	self:linkToElementModel(self, "xuid", true, function(model, f66_arg1)
-		CoD.Menu.UpdateButtonShownState(f66_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A])
+		CoD.Menu.UpdateButtonShownState(f66_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"])
 	end)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		if CoD.DirectorUtility.HasSelectedClient(controller) then
 			CoD.DirectorUtility.ClearSelectedClient(controller)
 			return true
@@ -688,7 +688,7 @@ LUI.createMenu.DirectorCustomGameSetUp = function(f1_arg0, f1_arg1)
 			return true
 		end
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 		return true
 	end, false)
 	LUI.OverrideFunction_CallOriginalFirst(self, "setState", function(element, controller, f69_arg2, f69_arg3, f69_arg4)
@@ -768,12 +768,12 @@ CoD.DirectorCustomGameSetUp.__resetProperties = function(f71_arg0)
 	f71_arg0.HeaderAlliesTeam.Backing:setAlpha(1)
 	f71_arg0.HeaderAlliesTeam.Label:setRGB(ColorSet.CodCasterFactionAllies.r, ColorSet.CodCasterFactionAllies.g, ColorSet.CodCasterFactionAllies.b)
 	f71_arg0.HeaderAlliesTeam.Label:setAlpha(1)
-	f71_arg0.HeaderAlliesTeam.Label:setText(LocalizeToUpperString(0xC815AF97EE8C135))
+	f71_arg0.HeaderAlliesTeam.Label:setText(LocalizeToUpperString(@"mpui/allies"))
 	f71_arg0.HeaderAxisTeam:setAlpha(1)
 	f71_arg0.HeaderAxisTeam.Backing:setRGB(ColorSet.CodCasterFactionAxis.r, ColorSet.CodCasterFactionAxis.g, ColorSet.CodCasterFactionAxis.b)
 	f71_arg0.HeaderAxisTeam.Backing:setAlpha(1)
 	f71_arg0.HeaderAxisTeam.Label:setRGB(ColorSet.CodCasterFactionAxis.r, ColorSet.CodCasterFactionAxis.g, ColorSet.CodCasterFactionAxis.b)
-	f71_arg0.HeaderAxisTeam.Label:setText(LocalizeToUpperString(0x12BD5927860415A))
+	f71_arg0.HeaderAxisTeam.Label:setText(LocalizeToUpperString(@"mpui/axis"))
 	f71_arg0.HeaderCODCaster:setAlpha(1)
 	f71_arg0.HeaderCODCaster.Backing:setRGB(0.29, 0.29, 0.29)
 	f71_arg0.DirectorCoDCasterList:setAlpha(1)
@@ -825,7 +825,7 @@ CoD.DirectorCustomGameSetUp.__clipsPerState = {
 			f73_arg0.HeaderAxisTeam.Backing:setRGB(0.29, 0.29, 0.29)
 			f73_arg0.HeaderAxisTeam.Backing:setAlpha(1)
 			f73_arg0.HeaderAxisTeam.Label:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
-			f73_arg0.HeaderAxisTeam.Label:setText(LocalizeToUpperString(0x39A9E427416E0C7))
+			f73_arg0.HeaderAxisTeam.Label:setText(LocalizeToUpperString(@"hash_139A9E427416E0C7"))
 			f73_arg0.clipFinished(f73_arg0.HeaderAxisTeam)
 			f73_arg0.BackingAllies:completeAnimation()
 			f73_arg0.BackingAllies:setAlpha(0)
@@ -841,7 +841,7 @@ CoD.DirectorCustomGameSetUp.__clipsPerState = {
 			f73_arg0.HeaderAlliesTeam.Backing:setAlpha(1)
 			f73_arg0.HeaderAlliesTeam.Label:setRGB(ColorSet.CodCasterFactionAllies.r, ColorSet.CodCasterFactionAllies.g, ColorSet.CodCasterFactionAllies.b)
 			f73_arg0.HeaderAlliesTeam.Label:setAlpha(0)
-			f73_arg0.HeaderAlliesTeam.Label:setText(LocalizeToUpperString(0xC815AF97EE8C135))
+			f73_arg0.HeaderAlliesTeam.Label:setText(LocalizeToUpperString(@"mpui/allies"))
 			f73_arg0.clipFinished(f73_arg0.HeaderAlliesTeam)
 			f73_arg0.BackingCODCaster:completeAnimation()
 			f73_arg0.BackingCODCaster:setAlpha(0)
@@ -882,7 +882,7 @@ CoD.DirectorCustomGameSetUp.__clipsPerState = {
 			f74_arg0.HeaderAxisTeam.Backing:setRGB(0.29, 0.29, 0.29)
 			f74_arg0.HeaderAxisTeam.Backing:setAlpha(1)
 			f74_arg0.HeaderAxisTeam.Label:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
-			f74_arg0.HeaderAxisTeam.Label:setText(LocalizeToUpperString(0x39A9E427416E0C7))
+			f74_arg0.HeaderAxisTeam.Label:setText(LocalizeToUpperString(@"hash_139A9E427416E0C7"))
 			f74_arg0.clipFinished(f74_arg0.HeaderAxisTeam)
 			f74_arg0.BackingAllies:completeAnimation()
 			f74_arg0.BackingAllies:setAlpha(0.15)
@@ -897,7 +897,7 @@ CoD.DirectorCustomGameSetUp.__clipsPerState = {
 			f74_arg0.HeaderAlliesTeam.Backing:setAlpha(1)
 			f74_arg0.HeaderAlliesTeam.Label:setRGB(1, 1, 1)
 			f74_arg0.HeaderAlliesTeam.Label:setAlpha(1)
-			f74_arg0.HeaderAlliesTeam.Label:setText(LocalizeToUpperString(0x39A9F427416E27A))
+			f74_arg0.HeaderAlliesTeam.Label:setText(LocalizeToUpperString(@"hash_139A9F427416E27A"))
 			f74_arg0.clipFinished(f74_arg0.HeaderAlliesTeam)
 			f74_arg0.BackingCODCaster:completeAnimation()
 			f74_arg0.BackingCODCaster:setAlpha(0)

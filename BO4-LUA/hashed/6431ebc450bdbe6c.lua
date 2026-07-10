@@ -13,7 +13,7 @@ CoD.WarzoneTeamListContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	TeamPlayerList:setTopBottom(1, 1, -258, 0)
 	TeamPlayerList:setWidgetType(CoD.WZTeamListItem)
 	TeamPlayerList:setVerticalCount(5)
-	TeamPlayerList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	TeamPlayerList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	TeamPlayerList:setDataSource("PlayerListWZ")
 	self:addElement(TeamPlayerList)
 	self.TeamPlayerList = TeamPlayerList

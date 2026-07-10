@@ -7,29 +7,29 @@ CoD.hud_speedometer_widget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self.id = "hud_speedometer_widget"
 	self.soundSet = "none"
 	local frameblur = LUI.UIImage.new(0, 0, 0, 252, 0, 0, 0, 132)
-	frameblur:setImage(RegisterImage(0x9D3ABB870D7F2CD))
-	frameblur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	frameblur:setImage(RegisterImage(@"hash_29D3ABB870D7F2CD"))
+	frameblur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	frameblur:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(frameblur)
 	self.frameblur = frameblur
 	local redzone = LUI.UIImage.new(0, 0, 198, 262, 0, 0, 38.5, 106.5)
 	redzone:setRGB(1, 0, 0)
-	redzone:setImage(RegisterImage(0x7D606C43E14EEDF))
+	redzone:setImage(RegisterImage(@"hash_67D606C43E14EEDF"))
 	self:addElement(redzone)
 	self.redzone = redzone
 	local redzone2 = LUI.UIImage.new(0, 0, 198, 262, 0, 0, 38.5, 106.5)
 	redzone2:setRGB(1, 0, 0)
-	redzone2:setImage(RegisterImage(0x7D606C43E14EEDF))
+	redzone2:setImage(RegisterImage(@"hash_67D606C43E14EEDF"))
 	self:addElement(redzone2)
 	self.redzone2 = redzone2
 	local frame = LUI.UIImage.new(0, 0, 0, 252, 0, 0, 0, 132)
-	frame:setImage(RegisterImage(0xFF7C4C17D5AB27E))
-	frame:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	frame:setImage(RegisterImage(@"hash_2FF7C4C17D5AB27E"))
+	frame:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(frame)
 	self.frame = frame
 	local fill = LUI.UIImage.new(0.5, 0.5, -126, 126, 0, 0, 4, 136)
-	fill:setImage(RegisterImage(0xC003D8EC72486C5))
-	fill:setMaterial(LUI.UIImage.GetCachedMaterial(0xD5CA1A25ED87F4F))
+	fill:setImage(RegisterImage(@"hash_4C003D8EC72486C5"))
+	fill:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_clock_normal"))
 	fill:setShaderVector(1, 0.5, 0, 0, 0)
 	fill:setShaderVector(2, 1, 0, 0, 0)
 	fill:setShaderVector(3, 0, 0, 0, 0)
@@ -43,8 +43,8 @@ CoD.hud_speedometer_widget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self:addElement(fill)
 	self.fill = fill
 	local arrow = LUI.UIImage.new(0.5, 0.5, -6, 6, 0, 0, 76, 197)
-	arrow:setImage(RegisterImage(0xBA297CB535037BE))
-	arrow:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	arrow:setImage(RegisterImage(@"hash_2BA297CB535037BE"))
+	arrow:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	arrow:subscribeToGlobalModel(f1_arg1, "PerController", "vehicle.speed", function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -54,8 +54,8 @@ CoD.hud_speedometer_widget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self:addElement(arrow)
 	self.arrow = arrow
 	local line = LUI.UIImage.new(0.5, 0.5, -6, 6, 0, 0, 32.5, 249.5)
-	line:setImage(RegisterImage(0x3847D97169AAAAF))
-	line:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	line:setImage(RegisterImage(@"hash_63847D97169AAAAF"))
+	line:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	line:subscribeToGlobalModel(f1_arg1, "PerController", "vehicle.speed", function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then

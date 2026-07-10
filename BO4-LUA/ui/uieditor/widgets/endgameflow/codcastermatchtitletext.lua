@@ -11,10 +11,10 @@ CoD.CODCasterMatchTitleText.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	local killcamTitleCODCaster = LUI.UIText.new(0, 0, 0, 856, 0, 0, 0, 64)
 	killcamTitleCODCaster:setAlpha(0)
 	killcamTitleCODCaster:setScale(1.02, 1.02)
-	killcamTitleCODCaster:setText(LocalizeToUpperString(0x4EFA5F5678040E7))
+	killcamTitleCODCaster:setText(LocalizeToUpperString(@"hash_44EFA5F5678040E7"))
 	killcamTitleCODCaster:setTTF("ttmussels_regular")
 	killcamTitleCODCaster:setLetterSpacing(14)
-	killcamTitleCODCaster:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	killcamTitleCODCaster:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	killcamTitleCODCaster:subscribeToGlobalModel(f1_arg1, "DeadSpectate", "playerIndex", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -27,10 +27,10 @@ CoD.CODCasterMatchTitleText.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	killcamTitle:setRGB(ColorSet.T8__GOLD.r, ColorSet.T8__GOLD.g, ColorSet.T8__GOLD.b)
 	killcamTitle:setAlpha(0)
 	killcamTitle:setScale(1.02, 1.02)
-	killcamTitle:setText(LocalizeToUpperString(0x4EFA5F5678040E7))
+	killcamTitle:setText(LocalizeToUpperString(@"hash_44EFA5F5678040E7"))
 	killcamTitle:setTTF("ttmussels_regular")
 	killcamTitle:setLetterSpacing(14)
-	killcamTitle:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	killcamTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(killcamTitle)
 	self.killcamTitle = killcamTitle
 	self:mergeStateConditions({
@@ -43,7 +43,7 @@ CoD.CODCasterMatchTitleText.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	})
 	local f1_local3 = self
 	local f1_local4 = self.subscribeToModel
-	local f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local4(f1_local3, f1_local5["factions.isCoDCaster"], function(f4_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

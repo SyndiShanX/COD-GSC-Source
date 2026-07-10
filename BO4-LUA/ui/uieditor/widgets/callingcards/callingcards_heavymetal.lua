@@ -1,42 +1,42 @@
 require("x64:1323f926c43b792")
-CoD[0x14ECFF745AEB685] = InheritFrom(LUI.UIElement)
-CoD[0x14ECFF745AEB685].__defaultWidth = 960
-CoD[0x14ECFF745AEB685].__defaultHeight = 240
-CoD[0x14ECFF745AEB685].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+CoD[@"hash_214ECFF745AEB685"] = InheritFrom(LUI.UIElement)
+CoD[@"hash_214ECFF745AEB685"].__defaultWidth = 960
+CoD[@"hash_214ECFF745AEB685"].__defaultHeight = 240
+CoD[@"hash_214ECFF745AEB685"].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
 	local self = LUI.UIElement.new(f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
-	self:setClass(CoD[0x14ECFF745AEB685])
+	self:setClass(CoD[@"hash_214ECFF745AEB685"])
 	self.id = "CallingCards_heavymetal"
 	self.soundSet = "none"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local background = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	background:setImage(RegisterImage(0x84D9B387573E236))
+	background:setImage(RegisterImage(@"uie_ui_menu_callingcards_heavymetal_bg"))
 	self:addElement(background)
 	self.background = background
 	local cop2 = CoD.ui_icon_callingcards_heavymetal_cop2.new(f1_arg0, f1_arg1, 0, 0, 498, 508, 0, 0, 0, 10)
 	self:addElement(cop2)
 	self.cop2 = cop2
 	local wall = LUI.UIImage.new(0, 0, -148, 444, 0, 0, -18, 278)
-	wall:setImage(RegisterImage(0x1061E65A7BFBF45))
+	wall:setImage(RegisterImage(@"uie_ui_menu_callingcards_heavymetal_wall"))
 	self:addElement(wall)
 	self.wall = wall
 	local cop1 = LUI.UIImage.new(0, 0, 514, 954, 0, 0, 0, 248)
-	cop1:setImage(RegisterImage(0x1D1244822BEB5ED))
+	cop1:setImage(RegisterImage(@"uie_ui_menu_callingcards_heavymetal_char2"))
 	self:addElement(cop1)
 	self.cop1 = cop1
 	local glass1 = LUI.UIImage.new(0, 0, 6, 342, 0, 0, 51, 299)
-	glass1:setImage(RegisterImage(0xA6E5A0F0AD19C7E))
+	glass1:setImage(RegisterImage(@"uie_ui_menu_callingcards_heavymetal_glass1"))
 	self:addElement(glass1)
 	self.glass1 = glass1
 	local glass2 = LUI.UIImage.new(0, 0, 349, 597, 0, 0, 120, 264)
-	glass2:setImage(RegisterImage(0xA6E590F0AD19ACB))
+	glass2:setImage(RegisterImage(@"uie_ui_menu_callingcards_heavymetal_glass2"))
 	self:addElement(glass2)
 	self.glass2 = glass2
 	local glass3 = LUI.UIImage.new(0, 0, 609.5, 825.5, 0, 0, 106, 306)
-	glass3:setImage(RegisterImage(0xA6E580F0AD19918))
+	glass3:setImage(RegisterImage(@"uie_ui_menu_callingcards_heavymetal_glass3"))
 	self:addElement(glass3)
 	self.glass3 = glass3
 	local glass4 = LUI.UIImage.new(0, 0, 670.5, 1006.5, 0, 0, -8, 240)
-	glass4:setImage(RegisterImage(0xA6E5F0F0AD1A4FD))
+	glass4:setImage(RegisterImage(@"uie_ui_menu_callingcards_heavymetal_glass4"))
 	self:addElement(glass4)
 	self.glass4 = glass4
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)
@@ -45,7 +45,7 @@ CoD[0x14ECFF745AEB685].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	end
 	return self
 end
-CoD[0x14ECFF745AEB685].__resetProperties = function(f2_arg0)
+CoD[@"hash_214ECFF745AEB685"].__resetProperties = function(f2_arg0)
 	f2_arg0.cop1:completeAnimation()
 	f2_arg0.cop2:completeAnimation()
 	f2_arg0.glass1:completeAnimation()
@@ -78,7 +78,7 @@ CoD[0x14ECFF745AEB685].__resetProperties = function(f2_arg0)
 	f2_arg0.glass4:setZRot(0)
 	f2_arg0.glass4:setScale(1, 1)
 end
-CoD[0x14ECFF745AEB685].__clipsPerState = {
+CoD[@"hash_214ECFF745AEB685"].__clipsPerState = {
 	DefaultState = {
 		DefaultClip = function(f3_arg0, f3_arg1)
 			f3_arg0:__resetProperties()
@@ -224,6 +224,6 @@ CoD[0x14ECFF745AEB685].__clipsPerState = {
 		end,
 	},
 }
-CoD[0x14ECFF745AEB685].__onClose = function(f16_arg0)
+CoD[@"hash_214ECFF745AEB685"].__onClose = function(f16_arg0)
 	f16_arg0.cop2:close()
 end

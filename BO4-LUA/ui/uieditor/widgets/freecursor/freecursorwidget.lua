@@ -45,7 +45,7 @@ CoD.freeCursorWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	end)
 	local f1_local4 = self
 	local f1_local5 = self.subscribeToModel
-	local f1_local6 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local6 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local5(f1_local4, f1_local6.LastInput, function(f7_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

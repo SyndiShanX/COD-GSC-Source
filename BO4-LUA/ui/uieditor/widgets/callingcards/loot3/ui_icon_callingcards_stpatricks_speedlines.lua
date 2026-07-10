@@ -8,11 +8,11 @@ CoD.ui_icon_callingcards_stpatricks_speedlines.new = function(f1_arg0, f1_arg1, 
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local speedlines = LUI.UIImage.new(0, 0, 0, 1230, 0, 0, 0, 728)
-	speedlines:setImage(RegisterImage(0xD8E8EB5C596F3A0))
+	speedlines:setImage(RegisterImage(@"uie_ui_menu_callingcards_stpatricks_f1_speedlines1"))
 	self:addElement(speedlines)
 	self.speedlines = speedlines
 	local speedlines2 = LUI.UIImage.new(0, 0, 0, 1230, 0, 0, 0, 728)
-	speedlines2:setImage(RegisterImage(0xD8E91B5C596F8B9))
+	speedlines2:setImage(RegisterImage(@"uie_ui_menu_callingcards_stpatricks_f1_speedlines2"))
 	self:addElement(speedlines2)
 	self.speedlines2 = speedlines2
 	if PostLoadFunc then
@@ -35,12 +35,12 @@ CoD.ui_icon_callingcards_stpatricks_speedlines.__clipsPerState = {
 			f3_arg0:setupElementClipCounter(2)
 			local f3_local0 = function(f4_arg0)
 				local f4_local0 = function(f5_arg0)
-					f5_arg0:beginAnimation(500, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f5_arg0:beginAnimation(500, Enum[@"luitween"][@"luitween_ease_both"])
 					f5_arg0:setAlpha(0)
 					f5_arg0:setScale(1, 1)
 					f5_arg0:registerEventHandler("transition_complete_keyframe", f3_arg0.clipFinished)
 				end
-				f3_arg0.speedlines:beginAnimation(500, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f3_arg0.speedlines:beginAnimation(500, Enum[@"luitween"][@"luitween_ease_both"])
 				f3_arg0.speedlines:setAlpha(1)
 				f3_arg0.speedlines:setScale(0.9, 0.9)
 				f3_arg0.speedlines:registerEventHandler("interrupted_keyframe", f3_arg0.clipInterrupted)
@@ -52,12 +52,12 @@ CoD.ui_icon_callingcards_stpatricks_speedlines.__clipsPerState = {
 			f3_local0(f3_arg0.speedlines)
 			local f3_local1 = function(f6_arg0)
 				local f6_local0 = function(f7_arg0)
-					f7_arg0:beginAnimation(500, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f7_arg0:beginAnimation(500, Enum[@"luitween"][@"luitween_ease_both"])
 					f7_arg0:setAlpha(1)
 					f7_arg0:setScale(0.9, 0.9)
 					f7_arg0:registerEventHandler("transition_complete_keyframe", f3_arg0.clipFinished)
 				end
-				f3_arg0.speedlines2:beginAnimation(500, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f3_arg0.speedlines2:beginAnimation(500, Enum[@"luitween"][@"luitween_ease_both"])
 				f3_arg0.speedlines2:setAlpha(0)
 				f3_arg0.speedlines2:setScale(1, 1)
 				f3_arg0.speedlines2:registerEventHandler("interrupted_keyframe", f3_arg0.clipInterrupted)

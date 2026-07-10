@@ -26,14 +26,14 @@ CoD.PlayerWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 	self:addElement(ArmorPortraitBG)
 	self.ArmorPortraitBG = ArmorPortraitBG
 	local Blur = LUI.UIImage.new(0, 0, 21, 334, 0, 0, 22, 88)
-	Blur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	Blur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	Blur:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(Blur)
 	self.Blur = Blur
 	local Backer = LUI.UIImage.new(0, 0, -32.5, 334.5, 0, 0, 8, 101)
 	Backer:setAlpha(0)
-	Backer:setImage(RegisterImage(0xA3887D32AFD1940))
-	Backer:setMaterial(LUI.UIImage.GetCachedMaterial(0xE125638BF94665F))
+	Backer:setImage(RegisterImage(@"uie_ui_hud_core_ammo_widget_backer"))
+	Backer:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_feather_edges"))
 	Backer:setShaderVector(0, 0.05, 0.2, 0.05, 0.2)
 	self:addElement(Backer)
 	self.Backer = Backer
@@ -51,7 +51,7 @@ CoD.PlayerWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 	self:addElement(headshotBarBacking)
 	self.headshotBarBacking = headshotBarBacking
 	local Frame = LUI.UIImage.new(0, 0, -6, 344, 0, 0, 7, 97)
-	Frame:setImage(RegisterImage(0xDABC2B0CF140508))
+	Frame:setImage(RegisterImage(@"hash_5DABC2B0CF140508"))
 	self:addElement(Frame)
 	self.Frame = Frame
 	local AmmoHeal_Prompt = CoD.AmmoWidget_Prompt.new(f1_arg0, f1_arg1, 0, 0, 94, 158, 0, 0, 93, 105)
@@ -65,7 +65,7 @@ CoD.PlayerWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 	})
 	local LEDgraph = AmmoHeal_Prompt
 	local BleedOutProgress = AmmoHeal_Prompt.subscribeToModel
-	local LEDscreen = Engine[0xE4D2F32833CFA6C](Engine[0x761955642304848](f1_arg1))
+	local LEDscreen = Engine[@"getmodelforclient"](Engine[@"getclientnum"](f1_arg1))
 	BleedOutProgress(LEDgraph, LEDscreen["health.healthValue"], function(f4_arg0)
 		f1_arg0:updateElementState(AmmoHeal_Prompt, {
 			name = "model_validation",
@@ -76,7 +76,7 @@ CoD.PlayerWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 		})
 	end, false)
 	AmmoHeal_Prompt:setAlpha(0)
-	AmmoHeal_Prompt.PromptText:setText(Engine[0xF9F1239CFD921FE](0x8CADD3D78C04519))
+	AmmoHeal_Prompt.PromptText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_38CADD3D78C04519"))
 	self:addElement(AmmoHeal_Prompt)
 	self.AmmoHeal_Prompt = AmmoHeal_Prompt
 	BleedOutProgress = CoD.progressBar.new(f1_arg0, f1_arg1, 0, 0, 157, 315, 0, 0, 51, 63)
@@ -92,13 +92,13 @@ CoD.PlayerWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 	LEDgraph = LUI.UIImage.new(0, 0, -6.5, 343.5, 0, 0, 7, 97)
 	LEDgraph:setRGB(0, 0, 0)
 	LEDgraph:setAlpha(0.75)
-	LEDgraph:setImage(RegisterImage(0xAB34D43D9ABFF83))
+	LEDgraph:setImage(RegisterImage(@"uie_ui_hud_core_player_widget_led_graph"))
 	self:addElement(LEDgraph)
 	self.LEDgraph = LEDgraph
 	LEDscreen = LUI.UIImage.new(0, 0, -5.5, 344.5, 0, 0, 7, 97)
 	LEDscreen:setRGB(0, 0, 0)
 	LEDscreen:setAlpha(0.2)
-	LEDscreen:setImage(RegisterImage(0x45B9712A20EE455))
+	LEDscreen:setImage(RegisterImage(@"uie_ui_hud_core_player_widget_led_screen"))
 	self:addElement(LEDscreen)
 	self.LEDscreen = LEDscreen
 	local HealthValue = CoD.HealthInfo.new(f1_arg0, f1_arg1, 0, 0, -17, 221, 0, 0, 1, 167)
@@ -112,7 +112,7 @@ CoD.PlayerWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 	self.HealthValue = HealthValue
 	local Sheen = LUI.UIImage.new(0, 0, -6, 344, 0, 0, 6, 96)
 	Sheen:setAlpha(0.01)
-	Sheen:setImage(RegisterImage(0xD4F65E240610DC8))
+	Sheen:setImage(RegisterImage(@"uie_ui_hud_core_player_widget_sheen"))
 	self:addElement(Sheen)
 	self.Sheen = Sheen
 	local DemoPip = CoD.DemoPip.new(f1_arg0, f1_arg1, 0, 0, 21, 26, 0, 0, 93, 98)
@@ -128,7 +128,7 @@ CoD.PlayerWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 	})
 	local f1_local15 = self
 	local f1_local16 = self.subscribeToModel
-	local f1_local17 = Engine[0x8DF2E5447F384B9]()
+	local f1_local17 = Engine[@"getglobalmodel"]()
 	f1_local16(f1_local15, f1_local17["lobbyRoot.lobbyNav"], function(f8_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -140,7 +140,7 @@ CoD.PlayerWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 	end, false)
 	f1_local15 = self
 	f1_local16 = self.subscribeToModel
-	f1_local17 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local17 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local16(f1_local15, f1_local17["hudItems.lastStand.progress"], function(f9_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -152,7 +152,7 @@ CoD.PlayerWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 	end, false)
 	f1_local15 = self
 	f1_local16 = self.subscribeToModel
-	f1_local17 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local17 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local16(f1_local15, f1_local17["hudItems.lastStand.beingRevived"], function(f10_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

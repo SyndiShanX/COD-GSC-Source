@@ -7,7 +7,7 @@ CoD.ChargeShot_CenterReticle.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	self.id = "ChargeShot_CenterReticle"
 	self.soundSet = "ChooseDecal"
 	local Center = LUI.UIImage.new(0.5, 0.5, -72, 72, 0.5, 0.5, -72, 72)
-	Center:setImage(RegisterImage(0xD506169DE82522A))
+	Center:setImage(RegisterImage(@"uie_t7_hud_chargeshot_reticle_center"))
 	self:addElement(Center)
 	self.Center = Center
 	if PostLoadFunc then

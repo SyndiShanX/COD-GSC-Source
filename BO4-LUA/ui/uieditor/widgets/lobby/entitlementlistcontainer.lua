@@ -16,7 +16,7 @@ CoD.EntitlementListContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	EntitlementItemList:setHorizontalCount(2)
 	EntitlementItemList:setVerticalCount(5)
 	EntitlementItemList:setSpacing(10)
-	EntitlementItemList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	EntitlementItemList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	EntitlementItemList:setDataSource("EntitlementItemList")
 	self:addElement(EntitlementItemList)
 	self.EntitlementItemList = EntitlementItemList
@@ -30,7 +30,7 @@ CoD.EntitlementListContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	})
 	local f1_local2 = self
 	local f1_local3 = self.subscribeToModel
-	local f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local3(f1_local2, f1_local4["EntitlementData.addsCODPoints"], function(f3_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

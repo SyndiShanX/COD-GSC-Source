@@ -21,7 +21,7 @@ CoD.freeCursorNoLabelButtonPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	self:addElement(progressRing)
 	self.progressRing = progressRing
 	local buttonPromptImage = LUI.UIImage.new(0, 1, 4, -4, 0, 1, 4, -4)
-	buttonPromptImage:setMaterial(LUI.UIImage.GetCachedMaterial(0x67D1E3A3D2D1BF))
+	buttonPromptImage:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_saturation_normal"))
 	buttonPromptImage:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(buttonPromptImage)
 	self.buttonPromptImage = buttonPromptImage
@@ -29,11 +29,11 @@ CoD.freeCursorNoLabelButtonPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 		{
 			stateName = "Enabled",
 			condition = function(menu, element, event)
-				local f3_local0 = CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "", Enum[0xF4865E3551C3835][0x901DFC093ED4187])
+				local f3_local0 = CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "", Enum[@"luibuttonpromptstates"][@"flag_enable_prompts"])
 				if f3_local0 then
 					f3_local0 = IsGamepad(f1_arg1)
 					if f3_local0 then
-						f3_local0 = CoD.ModelUtility.IsSelfModelValueEnumFlagSet(element, f1_arg1, "flags", Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3])
+						f3_local0 = CoD.ModelUtility.IsSelfModelValueEnumFlagSet(element, f1_arg1, "flags", Enum[@"luibuttonpromptflags"][@"bpf_contextual"])
 					end
 				end
 				return f3_local0
@@ -55,7 +55,7 @@ CoD.freeCursorNoLabelButtonPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	end)
 	local f1_local4 = self
 	local f1_local5 = self.subscribeToModel
-	local f1_local6 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local6 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local5(f1_local4, f1_local6.LastInput, function(f6_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

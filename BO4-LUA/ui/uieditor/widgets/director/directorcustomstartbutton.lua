@@ -47,7 +47,7 @@ CoD.DirectorCustomStartButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	end)
 	local PlayTextFocus = DirectorCustomStartButton
 	local PlayText = DirectorCustomStartButton.subscribeToModel
-	local CountdownText = Engine[0x8DF2E5447F384B9]()
+	local CountdownText = Engine[@"getglobalmodel"]()
 	PlayText(PlayTextFocus, CountdownText["lobbyRoot.lobbyNav"], function(f6_arg0)
 		f1_arg0:updateElementState(DirectorCustomStartButton, {
 			name = "model_validation",
@@ -69,25 +69,25 @@ CoD.DirectorCustomStartButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self.DirectorCustomStartButton = DirectorCustomStartButton
 	PlayText = LUI.UIText.new(0, 1, 0, 0, 0.5, 0.5, -12, 12)
 	PlayText:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
-	PlayText:setText(LocalizeToUpperString(0xDDDA371285672BD))
+	PlayText:setText(LocalizeToUpperString(@"menu/play"))
 	PlayText:setTTF("ttmussels_demibold")
 	PlayText:setLetterSpacing(3)
-	PlayText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	PlayText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	PlayText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	PlayText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(PlayText)
 	self.PlayText = PlayText
 	PlayTextFocus = LUI.UIText.new(0, 1, 0, 0, 0.5, 0.5, -12, 12)
 	PlayTextFocus:setRGB(0.28, 0.25, 0.24)
 	PlayTextFocus:setAlpha(0)
-	PlayTextFocus:setText(LocalizeToUpperString(0xDDDA371285672BD))
+	PlayTextFocus:setText(LocalizeToUpperString(@"menu/play"))
 	PlayTextFocus:setTTF("ttmussels_demibold")
-	PlayTextFocus:setMaterial(LUI.UIImage.GetCachedMaterial(0xAE166D9BA8C6907))
+	PlayTextFocus:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_2AE166D9BA8C6907"))
 	PlayTextFocus:setShaderVector(0, 0.14, 0, 0, 0)
 	PlayTextFocus:setShaderVector(1, 0.34, 0, 0, 0)
 	PlayTextFocus:setShaderVector(2, 1, 0, 0, 0)
 	PlayTextFocus:setLetterSpacing(3)
-	PlayTextFocus:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	PlayTextFocus:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	PlayTextFocus:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	PlayTextFocus:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(PlayTextFocus)
 	self.PlayTextFocus = PlayTextFocus
 	CountdownText = CoD.DirectorCustomGameButtonCountdown.new(f1_arg0, f1_arg1, 0.5, 0.5, -180, 180, 0.5, 0.5, -22.5, 22.5)
@@ -113,7 +113,7 @@ CoD.DirectorCustomStartButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	end)
 	local f1_local6 = DirectorPartyLeaderOnlyPrompt
 	local f1_local7 = DirectorPartyLeaderOnlyPrompt.subscribeToModel
-	local f1_local8 = Engine[0x8DF2E5447F384B9]()
+	local f1_local8 = Engine[@"getglobalmodel"]()
 	f1_local7(f1_local6, f1_local8["lobbyRoot.lobbyNav"], function(f11_arg0)
 		f1_arg0:updateElementState(DirectorPartyLeaderOnlyPrompt, {
 			name = "model_validation",
@@ -125,7 +125,7 @@ CoD.DirectorCustomStartButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	end, false)
 	f1_local6 = DirectorPartyLeaderOnlyPrompt
 	f1_local7 = DirectorPartyLeaderOnlyPrompt.subscribeToModel
-	f1_local8 = Engine[0x8DF2E5447F384B9]()
+	f1_local8 = Engine[@"getglobalmodel"]()
 	f1_local7(f1_local6, f1_local8["lobbyRoot.gameClient.update"], function(f12_arg0)
 		f1_arg0:updateElementState(DirectorPartyLeaderOnlyPrompt, {
 			name = "model_validation",
@@ -137,7 +137,7 @@ CoD.DirectorCustomStartButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	end, false)
 	f1_local6 = DirectorPartyLeaderOnlyPrompt
 	f1_local7 = DirectorPartyLeaderOnlyPrompt.subscribeToModel
-	f1_local8 = Engine[0x8DF2E5447F384B9]()
+	f1_local8 = Engine[@"getglobalmodel"]()
 	f1_local7(f1_local6, f1_local8["lobbyRoot.privateClient.update"], function(f13_arg0)
 		f1_arg0:updateElementState(DirectorPartyLeaderOnlyPrompt, {
 			name = "model_validation",
@@ -213,7 +213,7 @@ CoD.DirectorCustomStartButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	end, false)
 	f1_local6 = self
 	f1_local7 = self.subscribeToModel
-	f1_local8 = Engine[0x8DF2E5447F384B9]()
+	f1_local8 = Engine[@"getglobalmodel"]()
 	f1_local7(f1_local6, f1_local8["lobbyRoot.lobbyTimeRemaining"], function(f22_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -225,7 +225,7 @@ CoD.DirectorCustomStartButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	end, false)
 	f1_local6 = self
 	f1_local7 = self.subscribeToModel
-	f1_local8 = Engine[0x8DF2E5447F384B9]()
+	f1_local8 = Engine[@"getglobalmodel"]()
 	f1_local7(f1_local6, f1_local8["lobbyRoot.theaterDownloadPercent"], function(f23_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -237,7 +237,7 @@ CoD.DirectorCustomStartButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	end, false)
 	f1_local6 = self
 	f1_local7 = self.subscribeToModel
-	f1_local8 = Engine[0x8DF2E5447F384B9]()
+	f1_local8 = Engine[@"getglobalmodel"]()
 	f1_local7(f1_local6, f1_local8["lobbyRoot.theaterDataDownloaded"], function(f24_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -249,7 +249,7 @@ CoD.DirectorCustomStartButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	end, false)
 	f1_local6 = self
 	f1_local7 = self.subscribeToModel
-	f1_local8 = Engine[0x8DF2E5447F384B9]()
+	f1_local8 = Engine[@"getglobalmodel"]()
 	f1_local7(f1_local6, f1_local8["lobbyRoot.lobbyNav"], function(f25_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -261,7 +261,7 @@ CoD.DirectorCustomStartButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	end, false)
 	f1_local6 = self
 	f1_local7 = self.subscribeToModel
-	f1_local8 = Engine[0x8DF2E5447F384B9]()
+	f1_local8 = Engine[@"getglobalmodel"]()
 	f1_local7(f1_local6, f1_local8["lobbyRoot.privateClient.isHost"], function(f26_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -273,7 +273,7 @@ CoD.DirectorCustomStartButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	end, false)
 	f1_local6 = self
 	f1_local7 = self.subscribeToModel
-	f1_local8 = Engine[0x8DF2E5447F384B9]()
+	f1_local8 = Engine[@"getglobalmodel"]()
 	f1_local7(f1_local6, f1_local8["lobbyRoot.gameClient.isHost"], function(f27_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

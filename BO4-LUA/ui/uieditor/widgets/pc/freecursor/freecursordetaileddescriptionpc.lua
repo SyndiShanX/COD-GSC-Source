@@ -10,8 +10,8 @@ CoD.freeCursorDetailedDescriptionPC.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local BG = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	BG:setImage(RegisterImage(0x31AC999EEEB3C99))
-	BG:setMaterial(LUI.UIImage.GetCachedMaterial(0x44484DDFAF5C093))
+	BG:setImage(RegisterImage(@"hash_431AC999EEEB3C99"))
+	BG:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_normal"))
 	BG:setShaderVector(0, 0, 0, 0, 0)
 	BG:setupNineSliceShader(6, 6)
 	self:addElement(BG)
@@ -20,8 +20,8 @@ CoD.freeCursorDetailedDescriptionPC.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	detailedDescription2:setRGB(0.75, 0.74, 0.73)
 	detailedDescription2:setTTF("ttmussels_regular")
 	detailedDescription2:setLetterSpacing(2)
-	detailedDescription2:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	detailedDescription2:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	detailedDescription2:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	detailedDescription2:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	detailedDescription2:linkToElementModel(self, "detailedDescription", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -105,7 +105,7 @@ CoD.freeCursorDetailedDescriptionPC.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	end)
 	local f1_local4 = self
 	local f1_local5 = self.subscribeToModel
-	local f1_local6 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local6 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local5(f1_local4, f1_local6.LastInput, function(f11_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

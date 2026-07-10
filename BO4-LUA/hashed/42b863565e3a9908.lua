@@ -10,60 +10,60 @@ CoD.WZObituarySquadKilled.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local SquadEliminatedBlur = LUI.UIImage.new(0, 0, 0, 503, 0, 0, 0, 48)
 	SquadEliminatedBlur:setAlpha(0.5)
-	SquadEliminatedBlur:setImage(RegisterImage(0x6E3E83412B13039))
-	SquadEliminatedBlur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	SquadEliminatedBlur:setImage(RegisterImage(@"uie_ui_hud_wz_hud_squad_eliminated_backing"))
+	SquadEliminatedBlur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	SquadEliminatedBlur:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(SquadEliminatedBlur)
 	self.SquadEliminatedBlur = SquadEliminatedBlur
 	local SquadEliminatedBacking = LUI.UIImage.new(0, 0, 0, 503, 0, 0, 0, 48)
 	SquadEliminatedBacking:setRGB(0, 0, 0)
 	SquadEliminatedBacking:setAlpha(0.6)
-	SquadEliminatedBacking:setImage(RegisterImage(0x6E3E83412B13039))
+	SquadEliminatedBacking:setImage(RegisterImage(@"uie_ui_hud_wz_hud_squad_eliminated_backing"))
 	self:addElement(SquadEliminatedBacking)
 	self.SquadEliminatedBacking = SquadEliminatedBacking
 	local BGDotPatternLarge = LUI.UIImage.new(0, 0, 0, 503, 0, 0, 0.5, 48.5)
 	BGDotPatternLarge:setRGB(0, 0, 0)
 	BGDotPatternLarge:setAlpha(0.2)
-	BGDotPatternLarge:setImage(RegisterImage(0xFC21A8215EA012B))
-	BGDotPatternLarge:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	BGDotPatternLarge:setImage(RegisterImage(@"hash_7FC21A8215EA012B"))
+	BGDotPatternLarge:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	BGDotPatternLarge:setShaderVector(0, 0, 0, 0, 0)
 	BGDotPatternLarge:setupNineSliceShader(4, 4)
 	self:addElement(BGDotPatternLarge)
 	self.BGDotPatternLarge = BGDotPatternLarge
 	local Text = LUI.UIText.new(0.5, 0.5, -244, 242, 0.5, 0.5, -13, 21)
 	Text:setRGB(0.91, 0, 0)
-	Text:setText(Engine[0xF9F1239CFD921FE](0x3B9B19F4DBB3F9E))
+	Text:setText(Engine[@"hash_4F9F1239CFD921FE"](@"warzone/squad_killed"))
 	Text:setTTF("default")
-	Text:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	Text:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Text:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	Text:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(Text)
 	self.Text = Text
 	local GradientLine = LUI.UIImage.new(0, 0, -6.5, 510.5, 0, 0, 39, 55)
 	GradientLine:setRGB(0.91, 0, 0)
-	GradientLine:setImage(RegisterImage(0xED0B63C61449483))
+	GradientLine:setImage(RegisterImage(@"uie_ui_hud_wz_hud_squad_eliminated_gradient_line"))
 	self:addElement(GradientLine)
 	self.GradientLine = GradientLine
 	local BracketL = LUI.UIImage.new(0, 0, -5.5, 10.5, 0, 0, -6, 54)
 	BracketL:setRGB(0, 0, 0)
-	BracketL:setImage(RegisterImage(0xE1F751C91ABC7F8))
+	BracketL:setImage(RegisterImage(@"uie_ui_hud_wz_hud_squad_eliminated_bracket"))
 	self:addElement(BracketL)
 	self.BracketL = BracketL
 	local BracketR = LUI.UIImage.new(0, 0, 493, 509, 0, 0, -6, 54)
 	BracketR:setRGB(0, 0, 0)
 	BracketR:setZRot(180)
-	BracketR:setImage(RegisterImage(0xE1F751C91ABC7F8))
+	BracketR:setImage(RegisterImage(@"uie_ui_hud_wz_hud_squad_eliminated_bracket"))
 	self:addElement(BracketR)
 	self.BracketR = BracketR
 	local PipL = LUI.UIImage.new(0, 0, -6, 4, 0, 0, 20, 28)
 	PipL:setRGB(0.91, 0, 0)
 	PipL:setZRot(90)
-	PipL:setImage(RegisterImage(0x9D1B20838FA39D4))
+	PipL:setImage(RegisterImage(@"uie_ui_hud_wz_hud_core_qe_pointer"))
 	self:addElement(PipL)
 	self.PipL = PipL
 	local PipR = LUI.UIImage.new(0, 0, 499, 509, 0, 0, 20, 28)
 	PipR:setRGB(0.91, 0, 0)
 	PipR:setZRot(270)
-	PipR:setImage(RegisterImage(0x9D1B20838FA39D4))
+	PipR:setImage(RegisterImage(@"uie_ui_hud_wz_hud_core_qe_pointer"))
 	self:addElement(PipR)
 	self.PipR = PipR
 	self:mergeStateConditions({
@@ -120,7 +120,7 @@ CoD.WZObituarySquadKilled.__resetProperties = function(f5_arg0)
 	f5_arg0.BGDotPatternLarge:setAlpha(0.2)
 	f5_arg0.SquadEliminatedBacking:setLeftRight(0, 0, 0, 503)
 	f5_arg0.SquadEliminatedBacking:setAlpha(0.6)
-	f5_arg0.SquadEliminatedBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6B34AA3F39208EF))
+	f5_arg0.SquadEliminatedBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_normal"))
 	f5_arg0.SquadEliminatedBlur:setLeftRight(0, 0, 0, 503)
 	f5_arg0.SquadEliminatedBlur:setAlpha(0.5)
 end
@@ -181,7 +181,7 @@ CoD.WZObituarySquadKilled.__clipsPerState = {
 							f11_arg0:beginAnimation(1610)
 							f11_arg0:registerEventHandler("transition_complete_keyframe", f11_local0)
 						end
-						f10_arg0:beginAnimation(209, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+						f10_arg0:beginAnimation(209, Enum[@"luitween"][@"luitween_ease_in"])
 						f10_arg0:setLeftRight(0, 0, 0, 503)
 						f10_arg0:setAlpha(1)
 						f10_arg0:registerEventHandler("transition_complete_keyframe", f10_local0)
@@ -216,7 +216,7 @@ CoD.WZObituarySquadKilled.__clipsPerState = {
 							f17_arg0:beginAnimation(1610)
 							f17_arg0:registerEventHandler("transition_complete_keyframe", f17_local0)
 						end
-						f16_arg0:beginAnimation(209, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+						f16_arg0:beginAnimation(209, Enum[@"luitween"][@"luitween_ease_in"])
 						f16_arg0:setLeftRight(0, 0, 0, 503)
 						f16_arg0:setAlpha(0.6)
 						f16_arg0:registerEventHandler("transition_complete_keyframe", f16_local0)
@@ -231,7 +231,7 @@ CoD.WZObituarySquadKilled.__clipsPerState = {
 			f7_arg0.SquadEliminatedBacking:completeAnimation()
 			f7_arg0.SquadEliminatedBacking:setLeftRight(0, 0, 248, 255)
 			f7_arg0.SquadEliminatedBacking:setAlpha(0)
-			f7_arg0.SquadEliminatedBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6B34AA3F39208EF))
+			f7_arg0.SquadEliminatedBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_normal"))
 			f7_local1(f7_arg0.SquadEliminatedBacking)
 			local f7_local2 = function(f20_arg0)
 				local f20_local0 = function(f21_arg0)
@@ -249,7 +249,7 @@ CoD.WZObituarySquadKilled.__clipsPerState = {
 							f23_arg0:beginAnimation(1610)
 							f23_arg0:registerEventHandler("transition_complete_keyframe", f23_local0)
 						end
-						f22_arg0:beginAnimation(209, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+						f22_arg0:beginAnimation(209, Enum[@"luitween"][@"luitween_ease_in"])
 						f22_arg0:setLeftRight(0, 0, 0, 503)
 						f22_arg0:registerEventHandler("transition_complete_keyframe", f22_local0)
 					end
@@ -310,7 +310,7 @@ CoD.WZObituarySquadKilled.__clipsPerState = {
 							f35_arg0:beginAnimation(1610)
 							f35_arg0:registerEventHandler("transition_complete_keyframe", f35_local0)
 						end
-						f34_arg0:beginAnimation(209, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+						f34_arg0:beginAnimation(209, Enum[@"luitween"][@"luitween_ease_in"])
 						f34_arg0:setLeftRight(0, 0, -3.5, 507.5)
 						f34_arg0:registerEventHandler("transition_complete_keyframe", f34_local0)
 					end
@@ -343,7 +343,7 @@ CoD.WZObituarySquadKilled.__clipsPerState = {
 							f41_arg0:setTopBottom(0, 0, -3, 51)
 							f41_arg0:registerEventHandler("transition_complete_keyframe", f41_local0)
 						end
-						f40_arg0:beginAnimation(209, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+						f40_arg0:beginAnimation(209, Enum[@"luitween"][@"luitween_ease_in"])
 						f40_arg0:setLeftRight(0, 0, -5.5, 10.5)
 						f40_arg0:setTopBottom(0, 0, -5.65, 53.66)
 						f40_arg0:registerEventHandler("transition_complete_keyframe", f40_local0)
@@ -381,7 +381,7 @@ CoD.WZObituarySquadKilled.__clipsPerState = {
 							f47_arg0:setTopBottom(0, 0, -3.26, 51.25)
 							f47_arg0:registerEventHandler("transition_complete_keyframe", f47_local0)
 						end
-						f46_arg0:beginAnimation(209, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+						f46_arg0:beginAnimation(209, Enum[@"luitween"][@"luitween_ease_in"])
 						f46_arg0:setLeftRight(0, 0, 492.5, 508.5)
 						f46_arg0:setTopBottom(0, 0, -5.68, 53.69)
 						f46_arg0:registerEventHandler("transition_complete_keyframe", f46_local0)
@@ -417,7 +417,7 @@ CoD.WZObituarySquadKilled.__clipsPerState = {
 							f53_arg0:beginAnimation(1610)
 							f53_arg0:registerEventHandler("transition_complete_keyframe", f53_local0)
 						end
-						f52_arg0:beginAnimation(209, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+						f52_arg0:beginAnimation(209, Enum[@"luitween"][@"luitween_ease_in"])
 						f52_arg0:setLeftRight(0, 0, -6, 4)
 						f52_arg0:registerEventHandler("transition_complete_keyframe", f52_local0)
 					end
@@ -450,7 +450,7 @@ CoD.WZObituarySquadKilled.__clipsPerState = {
 							f59_arg0:beginAnimation(1610)
 							f59_arg0:registerEventHandler("transition_complete_keyframe", f59_local0)
 						end
-						f58_arg0:beginAnimation(209, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+						f58_arg0:beginAnimation(209, Enum[@"luitween"][@"luitween_ease_in"])
 						f58_arg0:setLeftRight(0, 0, 499, 509)
 						f58_arg0:registerEventHandler("transition_complete_keyframe", f58_local0)
 					end

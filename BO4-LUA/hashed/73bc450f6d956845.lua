@@ -3,7 +3,7 @@ require("x64:187db8450da061a")
 local PostLoadFunc = function(self, controller)
 	self.ProgressMarker:subscribeToGlobalModel(controller, "WarData", "currentZoneProgress", function(model)
 		local f2_local0, f2_local1, f2_local2, f2_local3 = self.ProgressMarker:getLocalRect()
-		local f2_local4 = Engine[0x614D394F6F9A18D](model)
+		local f2_local4 = Engine[@"getmodelvalue"](model)
 		if f2_local4 and f2_local0 and f2_local2 then
 			self.ProgressMarker:setLeftRight(f2_local4, f2_local4, f2_local0, f2_local2)
 		end
@@ -41,7 +41,7 @@ CoD.WarScoreInfo_Capture_ProgressBar.new = function(f3_arg0, f3_arg1, f3_arg2, f
 	})
 	local Segment2 = ProgressMarker
 	local Segment1 = ProgressMarker.subscribeToModel
-	local Segment3 = Engine[0x8DF2E5447F384B9]()
+	local Segment3 = Engine[@"getglobalmodel"]()
 	Segment1(Segment2, Segment3["hudItems.war.objectiveHeldByAttackingTeam"], function(f6_arg0)
 		f3_arg0:updateElementState(ProgressMarker, {
 			name = "model_validation",
@@ -53,7 +53,7 @@ CoD.WarScoreInfo_Capture_ProgressBar.new = function(f3_arg0, f3_arg1, f3_arg2, f
 	end, false)
 	Segment2 = ProgressMarker
 	Segment1 = ProgressMarker.subscribeToModel
-	Segment3 = Engine[0x8DF2E5447F384B9]()
+	Segment3 = Engine[@"getglobalmodel"]()
 	Segment1(Segment2, Segment3["hudItems.war.objectiveHeldByDefendingTeam"], function(f7_arg0)
 		f3_arg0:updateElementState(ProgressMarker, {
 			name = "model_validation",
@@ -83,7 +83,7 @@ CoD.WarScoreInfo_Capture_ProgressBar.new = function(f3_arg0, f3_arg1, f3_arg2, f
 	})
 	Segment3 = Segment1
 	Segment2 = Segment1.subscribeToModel
-	local f3_local5 = Engine[0x8DF2E5447F384B9]()
+	local f3_local5 = Engine[@"getglobalmodel"]()
 	Segment2(Segment3, f3_local5["hudItems.war.currentZoneProgress"], function(f10_arg0)
 		f3_arg0:updateElementState(Segment1, {
 			name = "model_validation",
@@ -95,7 +95,7 @@ CoD.WarScoreInfo_Capture_ProgressBar.new = function(f3_arg0, f3_arg1, f3_arg2, f
 	end, false)
 	Segment3 = Segment1
 	Segment2 = Segment1.subscribeToModel
-	f3_local5 = Engine[0x8DF2E5447F384B9]()
+	f3_local5 = Engine[@"getglobalmodel"]()
 	Segment2(Segment3, f3_local5["hudItems.war.objectiveHeldByAttackingTeam"], function(f11_arg0)
 		f3_arg0:updateElementState(Segment1, {
 			name = "model_validation",
@@ -107,7 +107,7 @@ CoD.WarScoreInfo_Capture_ProgressBar.new = function(f3_arg0, f3_arg1, f3_arg2, f
 	end, false)
 	Segment3 = Segment1
 	Segment2 = Segment1.subscribeToModel
-	f3_local5 = Engine[0x8DF2E5447F384B9]()
+	f3_local5 = Engine[@"getglobalmodel"]()
 	Segment2(Segment3, f3_local5["hudItems.war.objectiveHeldByDefendingTeam"], function(f12_arg0)
 		f3_arg0:updateElementState(Segment1, {
 			name = "model_validation",
@@ -142,7 +142,7 @@ CoD.WarScoreInfo_Capture_ProgressBar.new = function(f3_arg0, f3_arg1, f3_arg2, f
 	})
 	f3_local5 = Segment2
 	Segment3 = Segment2.subscribeToModel
-	local f3_local6 = Engine[0x8DF2E5447F384B9]()
+	local f3_local6 = Engine[@"getglobalmodel"]()
 	Segment3(f3_local5, f3_local6["hudItems.war.currentZoneProgress"], function(f16_arg0)
 		f3_arg0:updateElementState(Segment2, {
 			name = "model_validation",
@@ -154,7 +154,7 @@ CoD.WarScoreInfo_Capture_ProgressBar.new = function(f3_arg0, f3_arg1, f3_arg2, f
 	end, false)
 	f3_local5 = Segment2
 	Segment3 = Segment2.subscribeToModel
-	f3_local6 = Engine[0x8DF2E5447F384B9]()
+	f3_local6 = Engine[@"getglobalmodel"]()
 	Segment3(f3_local5, f3_local6["hudItems.war.objectiveHeldByAttackingTeam"], function(f17_arg0)
 		f3_arg0:updateElementState(Segment2, {
 			name = "model_validation",
@@ -166,7 +166,7 @@ CoD.WarScoreInfo_Capture_ProgressBar.new = function(f3_arg0, f3_arg1, f3_arg2, f
 	end, false)
 	f3_local5 = Segment2
 	Segment3 = Segment2.subscribeToModel
-	f3_local6 = Engine[0x8DF2E5447F384B9]()
+	f3_local6 = Engine[@"getglobalmodel"]()
 	Segment3(f3_local5, f3_local6["hudItems.war.objectiveHeldByDefendingTeam"], function(f18_arg0)
 		f3_arg0:updateElementState(Segment2, {
 			name = "model_validation",
@@ -201,7 +201,7 @@ CoD.WarScoreInfo_Capture_ProgressBar.new = function(f3_arg0, f3_arg1, f3_arg2, f
 	})
 	f3_local6 = Segment3
 	f3_local5 = Segment3.subscribeToModel
-	local f3_local7 = Engine[0x8DF2E5447F384B9]()
+	local f3_local7 = Engine[@"getglobalmodel"]()
 	f3_local5(f3_local6, f3_local7["hudItems.war.currentZoneProgress"], function(f22_arg0)
 		f3_arg0:updateElementState(Segment3, {
 			name = "model_validation",
@@ -213,7 +213,7 @@ CoD.WarScoreInfo_Capture_ProgressBar.new = function(f3_arg0, f3_arg1, f3_arg2, f
 	end, false)
 	f3_local6 = Segment3
 	f3_local5 = Segment3.subscribeToModel
-	f3_local7 = Engine[0x8DF2E5447F384B9]()
+	f3_local7 = Engine[@"getglobalmodel"]()
 	f3_local5(f3_local6, f3_local7["hudItems.war.objectiveHeldByAttackingTeam"], function(f23_arg0)
 		f3_arg0:updateElementState(Segment3, {
 			name = "model_validation",
@@ -225,7 +225,7 @@ CoD.WarScoreInfo_Capture_ProgressBar.new = function(f3_arg0, f3_arg1, f3_arg2, f
 	end, false)
 	f3_local6 = Segment3
 	f3_local5 = Segment3.subscribeToModel
-	f3_local7 = Engine[0x8DF2E5447F384B9]()
+	f3_local7 = Engine[@"getglobalmodel"]()
 	f3_local5(f3_local6, f3_local7["hudItems.war.objectiveHeldByDefendingTeam"], function(f24_arg0)
 		f3_arg0:updateElementState(Segment3, {
 			name = "model_validation",

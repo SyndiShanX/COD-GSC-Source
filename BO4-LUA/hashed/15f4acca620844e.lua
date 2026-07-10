@@ -8,7 +8,7 @@ CoD.WeaponPickupPrompt_BackingStash.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	self.soundSet = "default"
 	local Base = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	Base:setRGB(0.21, 0.21, 0.21)
-	Base:setMaterial(LUI.UIImage.GetCachedMaterial(0xE125638BF94665F))
+	Base:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_feather_edges"))
 	Base:setShaderVector(0, 0.01, 0.01, 0.01, 0.01)
 	self:addElement(Base)
 	self.Base = Base

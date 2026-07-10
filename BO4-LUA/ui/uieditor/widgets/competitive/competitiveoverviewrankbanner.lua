@@ -22,8 +22,8 @@ CoD.CompetitiveOverviewRankBanner.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	color:setAlpha(0)
 	color:setTTF("ttmussels_demibold")
 	color:setLetterSpacing(2)
-	color:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	color:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	color:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	color:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	color:subscribeToGlobalModel(f1_arg1, "LeaguePlay", "leaguePlayBannerName", function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -34,20 +34,20 @@ CoD.CompetitiveOverviewRankBanner.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	self.color = color
 	local rank = LUI.UIText.new(0.5, 0.5, -84, 84, 0, 0, 291, 316)
 	rank:setTTF("ttmussels_demibold")
-	rank:setMaterial(LUI.UIImage.GetCachedMaterial(0x71E049B161CD00A))
+	rank:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_171E049B161CD00A"))
 	rank:setLetterSpacing(2)
-	rank:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	rank:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	rank:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	rank:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	rank:subscribeToGlobalModel(f1_arg1, "LeaguePlay", "leaguePlayRank", function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
-			rank:setText(ToUpper(LocalizeStringWithParameter(0x47AC0462E4B2132, f4_local0)))
+			rank:setText(ToUpper(LocalizeStringWithParameter(@"hash_447AC0462E4B2132", f4_local0)))
 		end
 	end)
 	self:addElement(rank)
 	self.rank = rank
 	local firestreakflipbook = LUI.UIImage.new(0.5, 0.5, -170, 170, 0.5, 0.5, -274, 66)
-	firestreakflipbook:setMaterial(LUI.UIImage.GetCachedMaterial(0x9227A50BA2B8D21))
+	firestreakflipbook:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_flipbook_add"))
 	firestreakflipbook:setShaderVector(0, 4, 4, 0, 0)
 	firestreakflipbook:setShaderVector(1, 8, 0, 0, 0)
 	firestreakflipbook:subscribeToGlobalModel(f1_arg1, "LeaguePlay", "leaguePlayFirestreakIcon", function(model)

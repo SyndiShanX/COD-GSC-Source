@@ -8,8 +8,8 @@ CoD.StartMenu_Barracks_WZ_WinRecordWidget.new = function(f1_arg0, f1_arg1, f1_ar
 	self.soundSet = "none"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local BgGrid = LUI.UIImage.new(0, 0, 0, 457, 0, 1, 0, 0)
-	BgGrid:setImage(RegisterImage(0x7C4CA71FFE4CB25))
-	BgGrid:setMaterial(LUI.UIImage.GetCachedMaterial(0xA02C44161370F6D))
+	BgGrid:setImage(RegisterImage(@"uie_ui_menu_start_menu_small_grid"))
+	BgGrid:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_1A02C44161370F6D"))
 	BgGrid:setShaderVector(0, 0, 0, 0, 0)
 	BgGrid:setShaderVector(1, 1, 1, 0, 0)
 	BgGrid:setShaderVector(2, 0, 0, 0, 0)
@@ -22,19 +22,19 @@ CoD.StartMenu_Barracks_WZ_WinRecordWidget.new = function(f1_arg0, f1_arg1, f1_ar
 	self.bgAvgDamage = bgAvgDamage
 	local WinCount = LUI.UIText.new(0, 0, 261, 461, 0.5, 0.5, -7.5, 37.5)
 	WinCount:setRGB(0.69, 0.56, 0.04)
-	WinCount:setText(Engine[0xF9F1239CFD921FE](0x93E719493E9E18F))
+	WinCount:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	WinCount:setTTF("ttmussels_demibold")
 	WinCount:setLetterSpacing(3)
-	WinCount:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	WinCount:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	self:addElement(WinCount)
 	self.WinCount = WinCount
 	local GametypeTitle = LUI.UIText.new(0, 0, 261, 461, 0.5, 0.5, -35.5, -10.5)
 	GametypeTitle:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
-	GametypeTitle:setText(Engine[0xF9F1239CFD921FE](0x93E719493E9E18F))
+	GametypeTitle:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	GametypeTitle:setTTF("ttmussels_regular")
 	GametypeTitle:setLetterSpacing(2)
-	GametypeTitle:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	GametypeTitle:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	GametypeTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	GametypeTitle:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	self:addElement(GametypeTitle)
 	self.GametypeTitle = GametypeTitle
 	local ChallengeCoinIcon = LUI.UIImage.new(0, 0, 45.5, 215.5, 0.5, 0.5, -85, 85)
@@ -43,7 +43,7 @@ CoD.StartMenu_Barracks_WZ_WinRecordWidget.new = function(f1_arg0, f1_arg1, f1_ar
 	local IconEmpty = LUI.UIImage.new(0, 0, 45.5, 215.5, 0.5, 0.5, -85, 85)
 	IconEmpty:setRGB(ColorSet.T8__OFF__GRAY.r, ColorSet.T8__OFF__GRAY.g, ColorSet.T8__OFF__GRAY.b)
 	IconEmpty:setAlpha(0)
-	IconEmpty:setImage(RegisterImage(0x2D0580F3D157D69))
+	IconEmpty:setImage(RegisterImage(@"uie_ui_icon_wz_prestige_empty"))
 	self:addElement(IconEmpty)
 	self.IconEmpty = IconEmpty
 	if PostLoadFunc then

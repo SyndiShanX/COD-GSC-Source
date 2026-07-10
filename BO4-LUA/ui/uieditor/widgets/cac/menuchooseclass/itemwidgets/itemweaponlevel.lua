@@ -38,26 +38,26 @@ CoD.ItemWeaponLevel.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	levelLabel:setRGB(ColorSet.T8__OCHRE.r, ColorSet.T8__OCHRE.g, ColorSet.T8__OCHRE.b)
 	levelLabel:setTTF("0arame_mono_stencil")
 	levelLabel:setLetterSpacing(2)
-	levelLabel:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	levelLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	levelLabel:setBackingType(3)
 	levelLabel:setBackingColor(ColorSet.T8__OCHRE.r, ColorSet.T8__OCHRE.g, ColorSet.T8__OCHRE.b)
 	levelLabel:setBackingXPadding(13)
 	levelLabel:setBackingYPadding(6)
-	levelLabel:setBackingImage(RegisterImage(0x7D0A70047B9795C))
-	levelLabel:setBackingMaterial(LUI.UIImage.GetCachedMaterial(0x44484DDFAF5C093))
+	levelLabel:setBackingImage(RegisterImage(@"uie_ui_menu_cac_attachment_lvl_bg_colorless01"))
+	levelLabel:setBackingMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_normal"))
 	levelLabel:setBackingShaderVector(0, 0, 0, 0, 0)
 	levelLabel:setupBackingNineSliceShader(55, 16)
 	levelLabel:linkToElementModel(self, "itemIndex", true, function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
-			levelLabel:setText(CoD.CACUtility.LocalizeCurrentWeaponLevelIntoString(f1_arg0, 0xD8F445CA5BD1B0E, f1_arg1, f4_local0))
+			levelLabel:setText(CoD.CACUtility.LocalizeCurrentWeaponLevelIntoString(f1_arg0, @"hash_6D8F445CA5BD1B0E", f1_arg1, f4_local0))
 		end
 	end)
 	self:addElement(levelLabel)
 	self.levelLabel = levelLabel
 	local prestigeStar2 = CoD.onOffImage.new(f1_arg0, f1_arg1, 0, 0, -14, -3, 1, 1, -12, -1)
 	prestigeStar2:setRGB(0.97, 0.93, 0.07)
-	prestigeStar2.image:setImage(RegisterImage(0x1CEC5168AA639BA))
+	prestigeStar2.image:setImage(RegisterImage(@"uie_t7_arena_star_petit_white"))
 	prestigeStar2:linkToElementModel(self, nil, false, function(model)
 		prestigeStar2:setModel(model, f1_arg1)
 	end)
@@ -65,7 +65,7 @@ CoD.ItemWeaponLevel.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	self.prestigeStar2 = prestigeStar2
 	local prestigeStar1 = CoD.onOffImage.new(f1_arg0, f1_arg1, 0, 0, -14, -3, 1, 1, -31, -20)
 	prestigeStar1:setRGB(0.97, 0.93, 0.07)
-	prestigeStar1.image:setImage(RegisterImage(0x1CEC5168AA639BA))
+	prestigeStar1.image:setImage(RegisterImage(@"uie_t7_arena_star_petit_white"))
 	prestigeStar1:linkToElementModel(self, nil, false, function(model)
 		prestigeStar1:setModel(model, f1_arg1)
 	end)
@@ -73,8 +73,8 @@ CoD.ItemWeaponLevel.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	self.prestigeStar1 = prestigeStar1
 	local Glow = LUI.UIImage.new(0, 0, -3, 7, 0, 0, -36, 8)
 	Glow:setRGB(ColorSet.T8__OCHRE.r, ColorSet.T8__OCHRE.g, ColorSet.T8__OCHRE.b)
-	Glow:setImage(RegisterImage(0x3BF2E37984B1A8B))
-	Glow:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	Glow:setImage(RegisterImage(@"uie_ui_menu_cac_attachment_meter_tick_glow"))
+	Glow:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	Glow:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(Glow)
 	self.Glow = Glow
@@ -156,7 +156,7 @@ CoD.ItemWeaponLevel.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	end, false)
 	f1_local8 = self
 	f1_local9 = self.subscribeToModel
-	f1_local10 = Engine[0x8DF2E5447F384B9]()
+	f1_local10 = Engine[@"getglobalmodel"]()
 	f1_local9(f1_local8, f1_local10["lobbyRoot.lobbyNav"], function(f13_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

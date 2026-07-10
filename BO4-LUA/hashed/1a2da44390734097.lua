@@ -34,7 +34,7 @@ CoD.MultiItemPickupWaypointItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	end)
 	local f1_local3 = PCHighlightBorder
 	local f1_local4 = PCHighlightBorder.subscribeToModel
-	local f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local4(f1_local3, f1_local5.LastInput, function(f5_arg0)
 		f1_arg0:updateElementState(PCHighlightBorder, {
 			name = "model_validation",
@@ -78,7 +78,7 @@ CoD.MultiItemPickupWaypointItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	end)
 	f1_local3 = self
 	f1_local4 = self.subscribeToModel
-	f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local4(f1_local3, f1_local5.LastInput, function(f11_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

@@ -10,8 +10,8 @@ CoD.CommonButtonGeneric.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	self.onlyChildrenFocusable = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local ButtonGeneric = CoD.CommonButtonGenericInternal.new(f1_arg0, f1_arg1, 0, 1, 0, 0, 0, 1, 0, 0)
-	ButtonGeneric.MiddleText:setText(LocalizeToUpperString(0xA43B10D9DA121A))
-	ButtonGeneric.MiddleTextFocus:setText(LocalizeToUpperString(0xA43B10D9DA121A))
+	ButtonGeneric.MiddleText:setText(LocalizeToUpperString(@"hash_A43B10D9DA121A"))
+	ButtonGeneric.MiddleTextFocus:setText(LocalizeToUpperString(@"hash_A43B10D9DA121A"))
 	self:addElement(ButtonGeneric)
 	self.ButtonGeneric = ButtonGeneric
 	ButtonGeneric.id = "ButtonGeneric"

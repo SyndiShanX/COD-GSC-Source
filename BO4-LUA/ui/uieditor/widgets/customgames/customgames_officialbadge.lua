@@ -8,20 +8,20 @@ CoD.CustomGames_OfficialBadge.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self.soundSet = "none"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local OfficialIcon = LUI.UIImage.new(0, 0, 0, 30, 0, 0, 0, 30)
-	OfficialIcon:setImage(RegisterImage(0xA92DF43D53DFABF))
+	OfficialIcon:setImage(RegisterImage(@"uie_menu_mp_frontend_icon_medal"))
 	self:addElement(OfficialIcon)
 	self.OfficialIcon = OfficialIcon
 	local CustomIcon = LUI.UIImage.new(0, 0, 0, 30, 0, 0, 0, 30)
 	CustomIcon:setRGB(0.93, 0.45, 0.05)
 	CustomIcon:setAlpha(0)
-	CustomIcon:setImage(RegisterImage(0xAB5B2971F0A4BA4))
+	CustomIcon:setImage(RegisterImage(@"uie_t7_gamesettings_asteriskicon"))
 	self:addElement(CustomIcon)
 	self.CustomIcon = CustomIcon
 	local SettingLabel = LUI.UIText.new(0, 0, 32, 200, 0.5, 0.5, -10.5, 10.5)
 	SettingLabel:setRGB(0.78, 0.74, 0.67)
-	SettingLabel:setText(Engine[0xF9F1239CFD921FE](0x3428A4FD23FDA2A))
+	SettingLabel:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_63428A4FD23FDA2A"))
 	SettingLabel:setTTF("ttmussels_regular")
-	SettingLabel:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	SettingLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(SettingLabel)
 	self.SettingLabel = SettingLabel
 	self:mergeStateConditions({
@@ -51,7 +51,7 @@ CoD.CustomGames_OfficialBadge.__resetProperties = function(f4_arg0)
 	f4_arg0.CustomIcon:setAlpha(0)
 	f4_arg0.SettingLabel:setRGB(0.78, 0.74, 0.67)
 	f4_arg0.SettingLabel:setAlpha(1)
-	f4_arg0.SettingLabel:setText(Engine[0xF9F1239CFD921FE](0x3428A4FD23FDA2A))
+	f4_arg0.SettingLabel:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_63428A4FD23FDA2A"))
 end
 CoD.CustomGames_OfficialBadge.__clipsPerState = {
 	DefaultState = {
@@ -72,7 +72,7 @@ CoD.CustomGames_OfficialBadge.__clipsPerState = {
 			f6_arg0.clipFinished(f6_arg0.CustomIcon)
 			f6_arg0.SettingLabel:completeAnimation()
 			f6_arg0.SettingLabel:setRGB(0.93, 0.45, 0.05)
-			f6_arg0.SettingLabel:setText(Engine[0xF9F1239CFD921FE](0xDD2BE2574C9D2CC))
+			f6_arg0.SettingLabel:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_1DD2BE2574C9D2CC"))
 			f6_arg0.clipFinished(f6_arg0.SettingLabel)
 		end,
 	},

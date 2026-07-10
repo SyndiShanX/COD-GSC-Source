@@ -9,19 +9,19 @@ CoD.WarzoneAbilityItemCounter.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local CounterCorner = LUI.UIImage.new(0, 0, 0, 36, 0, 0, 0, 24)
 	CounterCorner:setRGB(0, 0, 0)
-	CounterCorner:setImage(RegisterImage(0x25AE8AF4C635914))
+	CounterCorner:setImage(RegisterImage(@"hash_525AE8AF4C635914"))
 	self:addElement(CounterCorner)
 	self.CounterCorner = CounterCorner
 	local Quantity = LUI.UIText.new(0, 0, 4, 32, 0, 0, 2.5, 22.5)
 	Quantity:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	Quantity:setTTF("0arame_mono_stencil")
-	Quantity:setMaterial(LUI.UIImage.GetCachedMaterial(0x90D57B1E92D39D7))
+	Quantity:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_90D57B1E92D39D7"))
 	Quantity:setShaderVector(0, 0.8, 0, 0, 0)
 	Quantity:setShaderVector(1, 0, 0, 0, 0)
 	Quantity:setShaderVector(2, 1, 1, 1, 0.5)
-	Quantity:setRFTMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
-	Quantity:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	Quantity:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	Quantity:setRFTMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
+	Quantity:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	Quantity:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	Quantity:linkToElementModel(self, "stackCount", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -40,7 +40,7 @@ CoD.WarzoneAbilityItemCounter.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 		{
 			stateName = "InvisibleHeavyMetalHeroes",
 			condition = function(menu, element, event)
-				return CoD.HUDUtility.IsGameTypeEqualToString("warzone_heavy_metal_heroes") and CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "id", 0xD794B7E34CF01C9)
+				return CoD.HUDUtility.IsGameTypeEqualToString("warzone_heavy_metal_heroes") and CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "id", @"eq_grapple_wz")
 			end,
 		},
 	})

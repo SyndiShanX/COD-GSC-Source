@@ -9,7 +9,7 @@ CoD.AARSquadStat.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local BarBot = LUI.UIImage.new(-0.03, 1.03, 2, 2, 0, 0, 54, 64)
-	BarBot:setImage(RegisterImage(0xC6873B923C6686C))
+	BarBot:setImage(RegisterImage(@"uie_ui_menu_mp_scoreboard_list_score_bot"))
 	self:addElement(BarBot)
 	self.BarBot = BarBot
 	local DotTiledBacking = CoD.StoreCommonTextBacking.new(f1_arg0, f1_arg1, 0, 1, 0, 0, 0, 0, 0, 56)
@@ -18,11 +18,11 @@ CoD.AARSquadStat.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 	self.DotTiledBacking = DotTiledBacking
 	local Value = LUI.UIText.new(0.5, 0.5, -42, 42, 0.5, 0.5, -13, 13)
 	Value:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
-	Value:setText(Engine[0xF9F1239CFD921FE](0x93E719493E9E18F))
+	Value:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	Value:setTTF("0arame_mono_stencil")
 	Value:setLetterSpacing(1)
-	Value:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	Value:setAlignment(Enum[0x7A5123B654282D2][0x6ED4298C93DC5ED])
+	Value:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	Value:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
 	self:addElement(Value)
 	self.Value = Value
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)

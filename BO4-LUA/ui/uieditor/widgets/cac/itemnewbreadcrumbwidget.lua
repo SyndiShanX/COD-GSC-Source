@@ -14,11 +14,11 @@ CoD.ItemNewBreadcrumbWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.BgIcon = BgIcon
 	local itemName = LUI.UIText.new(0.5, 0.5, -49, 49, 0.5, 0.5, -10, 11)
 	itemName:setRGB(0, 0, 0)
-	itemName:setText(LocalizeToUpperString(0x93E719493E9E18F))
+	itemName:setText(LocalizeToUpperString(@"menu/new"))
 	itemName:setTTF("ttmussels_demibold")
-	itemName:setMaterial(LUI.UIImage.GetCachedMaterial(0x71E049B161CD00A))
+	itemName:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_171E049B161CD00A"))
 	itemName:setLetterSpacing(1.5)
-	itemName:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	itemName:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	self:addElement(itemName)
 	self.itemName = itemName
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)
@@ -49,7 +49,7 @@ CoD.ItemNewBreadcrumbWidget.__clipsPerState = {
 			f3_local0(f3_arg0.BgIcon)
 			local f3_local1 = function(f5_arg0)
 				local f5_local0 = function(f6_arg0)
-					f6_arg0:beginAnimation(150, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f6_arg0:beginAnimation(150, Enum[@"luitween"][@"luitween_ease_out"])
 					f6_arg0:setAlpha(1)
 					f6_arg0:registerEventHandler("transition_complete_keyframe", f3_arg0.clipFinished)
 				end

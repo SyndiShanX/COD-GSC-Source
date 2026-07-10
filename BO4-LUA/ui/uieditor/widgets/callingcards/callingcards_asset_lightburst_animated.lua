@@ -8,8 +8,8 @@ CoD.CallingCards_Asset_lightburst_animated.new = function(f1_arg0, f1_arg1, f1_a
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local sunburst = LUI.UIImage.new(0, 0, 0, 608, 0, 0, 0, 608)
-	sunburst:setImage(RegisterImage(0xAF47B452F4E631B))
-	sunburst:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	sunburst:setImage(RegisterImage(@"uie_ui_icon_callingcards_zm_miscellaneous_01_lightburst"))
+	sunburst:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	sunburst:setShaderVector(0, 2.74, 0, 0, 0)
 	self:addElement(sunburst)
 	self.sunburst = sunburst

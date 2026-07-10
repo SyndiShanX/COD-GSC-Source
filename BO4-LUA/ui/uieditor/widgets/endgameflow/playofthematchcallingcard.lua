@@ -14,7 +14,7 @@ CoD.PlayOfTheMatchCallingCard.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local CallingCardPanelLeft = LUI.UIImage.new(0, 0, 0, 555, 0, 0, 0, 173)
-	CallingCardPanelLeft:setImage(RegisterImage(0x2504876AAAB7FA7))
+	CallingCardPanelLeft:setImage(RegisterImage(@"hash_2504876AAAB7FA7"))
 	self:addElement(CallingCardPanelLeft)
 	self.CallingCardPanelLeft = CallingCardPanelLeft
 	local AttackerPlayerCard = CoD.KillcamPlayerCard.new(f1_arg0, f1_arg1, 0, 0, 184, 531, 0, 0, 57, 145)
@@ -164,7 +164,7 @@ CoD.PlayOfTheMatchCallingCard.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	})
 	local f1_local7 = self
 	local f1_local8 = self.subscribeToModel
-	local f1_local9 = Engine[0x8DF2E5447F384B9]()
+	local f1_local9 = Engine[@"getglobalmodel"]()
 	f1_local8(f1_local7, f1_local9["lobbyRoot.lobbyNav"], function(f16_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

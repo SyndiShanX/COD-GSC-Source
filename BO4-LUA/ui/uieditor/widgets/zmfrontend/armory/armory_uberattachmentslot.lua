@@ -37,7 +37,7 @@ CoD.Armory_UberAttachmentSlot.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	end)
 	local f1_local2 = ZMItemSlotWide
 	local MutuallyExclusiveIcon = ZMItemSlotWide.subscribeToModel
-	local f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	MutuallyExclusiveIcon(f1_local2, f1_local4.armoryAttachmentUpdated, function(f5_arg0)
 		f1_arg0:updateElementState(ZMItemSlotWide, {
 			name = "model_validation",
@@ -59,7 +59,7 @@ CoD.Armory_UberAttachmentSlot.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	ZMItemSlotWide:linkToElementModel(self, "displayName", true, function(model)
 		local f8_local0 = model:get()
 		if f8_local0 ~= nil then
-			ZMItemSlotWide.AttachmentName:setText(Engine[0xF9F1239CFD921FE](f8_local0))
+			ZMItemSlotWide.AttachmentName:setText(Engine[@"hash_4F9F1239CFD921FE"](f8_local0))
 		end
 	end)
 	self:addElement(ZMItemSlotWide)
@@ -75,7 +75,7 @@ CoD.Armory_UberAttachmentSlot.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	})
 	f1_local4 = MutuallyExclusiveIcon
 	f1_local2 = MutuallyExclusiveIcon.subscribeToModel
-	local f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local2(f1_local4, f1_local5.armoryAttachmentUpdated, function(f10_arg0)
 		f1_arg0:updateElementState(MutuallyExclusiveIcon, {
 			name = "model_validation",
@@ -86,7 +86,7 @@ CoD.Armory_UberAttachmentSlot.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 		})
 	end, false)
 	MutuallyExclusiveIcon:setRGB(1, 0.41, 0)
-	MutuallyExclusiveIcon.image:setImage(RegisterImage(0x11D4E13C821CCE3))
+	MutuallyExclusiveIcon.image:setImage(RegisterImage(@"hash_111D4E13C821CCE3"))
 	MutuallyExclusiveIcon:linkToElementModel(self, nil, false, function(model)
 		MutuallyExclusiveIcon:setModel(model, f1_arg1)
 	end)
@@ -128,7 +128,7 @@ CoD.Armory_UberAttachmentSlot.__clipsPerState = {
 			f17_arg0:__resetProperties()
 			f17_arg0:setupElementClipCounter(1)
 			local f17_local0 = function(f18_arg0)
-				f17_arg0.ZMItemSlotWide:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f17_arg0.ZMItemSlotWide:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f17_arg0.ZMItemSlotWide:setScale(1.05, 1.05)
 				f17_arg0.ZMItemSlotWide:registerEventHandler("interrupted_keyframe", f17_arg0.clipInterrupted)
 				f17_arg0.ZMItemSlotWide:registerEventHandler("transition_complete_keyframe", f17_arg0.clipFinished)
@@ -141,7 +141,7 @@ CoD.Armory_UberAttachmentSlot.__clipsPerState = {
 			f19_arg0:__resetProperties()
 			f19_arg0:setupElementClipCounter(1)
 			local f19_local0 = function(f20_arg0)
-				f19_arg0.ZMItemSlotWide:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f19_arg0.ZMItemSlotWide:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f19_arg0.ZMItemSlotWide:setScale(1, 1)
 				f19_arg0.ZMItemSlotWide:registerEventHandler("interrupted_keyframe", f19_arg0.clipInterrupted)
 				f19_arg0.ZMItemSlotWide:registerEventHandler("transition_complete_keyframe", f19_arg0.clipFinished)

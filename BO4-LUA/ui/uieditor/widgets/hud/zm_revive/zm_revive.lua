@@ -14,7 +14,7 @@ CoD.ZM_Revive.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 	playerName:setRGB(1, 0.75, 0.44)
 	playerName:setTTF("notosans_regular")
 	playerName:setLetterSpacing(1)
-	playerName:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	playerName:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	playerName:linkToElementModel(self, "playerName", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -26,11 +26,11 @@ CoD.ZM_Revive.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 	local prompt = LUI.UIText.new(0, 0, 133, 267, 0, 0, 4, 64)
 	prompt:setTTF("dinnext_regular")
 	prompt:setLetterSpacing(1)
-	prompt:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	prompt:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	prompt:linkToElementModel(self, "prompt", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
-			prompt:setText(Engine[0xF9F1239CFD921FE](f3_local0))
+			prompt:setText(Engine[@"hash_4F9F1239CFD921FE"](f3_local0))
 		end
 	end)
 	self:addElement(prompt)
@@ -51,10 +51,10 @@ CoD.ZM_Revive.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 	self:addElement(ZMReviveClampedArrow)
 	self.ZMReviveClampedArrow = ZMReviveClampedArrow
 	local revivingText = LUI.UIText.new(0, 0, -300, 300, 0, 0, 180, 260)
-	revivingText:setText(Engine[0xF9F1239CFD921FE](0x605483F37772A32))
+	revivingText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"zombie/reviving"))
 	revivingText:setTTF("notosans_bold")
-	revivingText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	revivingText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	revivingText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	revivingText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(revivingText)
 	self.revivingText = revivingText
 	self:mergeStateConditions({
@@ -82,7 +82,7 @@ CoD.ZM_Revive.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 			condition = function(menu, element, event)
 				local f8_local0 = IsBleedOutVisible(element, f1_arg1)
 				if f8_local0 then
-					f8_local0 = CoD.ModelUtility.IsSelfModelValueEnumBitSet(element, f1_arg1, "stateFlags", Enum[0x3A1BF682942AEE9][0x87054111A5DB20B])
+					f8_local0 = CoD.ModelUtility.IsSelfModelValueEnumBitSet(element, f1_arg1, "stateFlags", Enum[@"bleedoutstateflags"][@"bleedout_state_flag_clamped"])
 					if f8_local0 then
 						f8_local0 = not CoD.HUDUtility.IsGameTypeEqualToString("zstandard")
 					end
@@ -95,7 +95,7 @@ CoD.ZM_Revive.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 			condition = function(menu, element, event)
 				local f9_local0 = IsBleedOutVisible(element, f1_arg1)
 				if f9_local0 then
-					f9_local0 = CoD.ModelUtility.IsSelfModelValueEnumBitSet(element, f1_arg1, "stateFlags", Enum[0x3A1BF682942AEE9][0x388AB9DB3B39402])
+					f9_local0 = CoD.ModelUtility.IsSelfModelValueEnumBitSet(element, f1_arg1, "stateFlags", Enum[@"bleedoutstateflags"][@"bleedout_state_flag_being_revived"])
 					if f9_local0 then
 						f9_local0 = not CoD.HUDUtility.IsGameTypeEqualToString("zstandard")
 					end
@@ -121,7 +121,7 @@ CoD.ZM_Revive.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 	end)
 	local f1_local6 = self
 	local f1_local7 = self.subscribeToModel
-	local f1_local8 = Engine[0x8DF2E5447F384B9]()
+	local f1_local8 = Engine[@"getglobalmodel"]()
 	f1_local7(f1_local6, f1_local8["ZMHudGlobal.trials.hudDeactivated"], function(f12_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -133,7 +133,7 @@ CoD.ZM_Revive.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 	end, false)
 	f1_local6 = self
 	f1_local7 = self.subscribeToModel
-	f1_local8 = Engine[0x8DF2E5447F384B9]()
+	f1_local8 = Engine[@"getglobalmodel"]()
 	f1_local7(f1_local6, f1_local8["ZMHudGlobal.trials.infoHidden"], function(f13_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -163,14 +163,14 @@ CoD.ZM_Revive.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 	end)
 	f1_local6 = self
 	f1_local7 = self.subscribeToModel
-	f1_local8 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local7(f1_local6, f1_local8["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x6FFF566DCC09BBD]], function(f16_arg0)
+	f1_local8 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local7(f1_local6, f1_local8["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_spectating_client"]], function(f16_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f16_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x6FFF566DCC09BBD],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_spectating_client"],
 		})
 	end, false)
 	self:linkToElementModel(self, "stateFlags", true, function(model)

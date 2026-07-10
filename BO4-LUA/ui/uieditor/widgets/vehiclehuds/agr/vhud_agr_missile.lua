@@ -9,16 +9,16 @@ CoD.vhud_agr_missile.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local agrIconMissileLine1 = LUI.UIImage.new(0.5, 0.5, -36, 36, 0.5, 0.5, -13.5, 13.5)
 	agrIconMissileLine1:setYRot(130)
-	agrIconMissileLine1:setImage(RegisterImage(0xDF4F8A44C810A29))
-	agrIconMissileLine1:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	agrIconMissileLine1:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_agr_notificationiconmissileoutline"))
+	agrIconMissileLine1:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(agrIconMissileLine1)
 	self.agrIconMissileLine1 = agrIconMissileLine1
 	local agrIconMissile1 = LUI.UIImage.new(0.5, 0.5, -36, 36, 0.5, 0.5, -13.5, 13.5)
 	agrIconMissile1:setAlpha(0)
 	agrIconMissile1:setYRot(130)
 	agrIconMissile1:setScale(1.2, 1.2)
-	agrIconMissile1:setImage(RegisterImage(0x411BC43EC9B5688))
-	agrIconMissile1:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	agrIconMissile1:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_agr_notificationiconmissile1"))
+	agrIconMissile1:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(agrIconMissile1)
 	self.agrIconMissile1 = agrIconMissile1
 	local GlowOrangeOver = LUI.UIImage.new(0.5, 0.5, -12.5, 12.5, 0.5, 0.5, -40, 44)
@@ -26,8 +26,8 @@ CoD.vhud_agr_missile.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	GlowOrangeOver:setAlpha(0)
 	GlowOrangeOver:setZRot(-90)
 	GlowOrangeOver:setScale(1.2, 1.2)
-	GlowOrangeOver:setImage(RegisterImage(0x5BE416E17DAB33B))
-	GlowOrangeOver:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	GlowOrangeOver:setImage(RegisterImage(@"uie_t7_core_hud_mapwidget_panelglow"))
+	GlowOrangeOver:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(GlowOrangeOver)
 	self.GlowOrangeOver = GlowOrangeOver
 	if PostLoadFunc then

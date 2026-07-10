@@ -17,10 +17,10 @@ CoD.SpecialistDossierInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	local JobTitle = LUI.UIText.new(0.5, 0.5, -860, -360, 0.5, 0.5, -390, -370)
 	JobTitle:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	JobTitle:setZoom(3)
-	JobTitle:setText(LocalizeToUpperString(0x1ADE64D69903E6E))
+	JobTitle:setText(LocalizeToUpperString(@"hash_41ADE64D69903E6E"))
 	JobTitle:setTTF("ttmussels_regular")
 	JobTitle:setLetterSpacing(10)
-	JobTitle:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	JobTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(JobTitle)
 	self.JobTitle = JobTitle
 	local SpecialistName = LUI.UIText.new(0.5, 0.5, -860, -360, 0.5, 0.5, -370, -280)
@@ -29,7 +29,7 @@ CoD.SpecialistDossierInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	SpecialistName:setZoom(3)
 	SpecialistName:setTTF("ttmussels_regular")
 	SpecialistName:setLetterSpacing(10)
-	SpecialistName:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	SpecialistName:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	SpecialistName:subscribeToGlobalModel(f1_arg1, "SpecialistDossier", "callsign", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -40,10 +40,10 @@ CoD.SpecialistDossierInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self.SpecialistName = SpecialistName
 	local FilesHeader = LUI.UIText.new(0.5, 0.5, -860, -360, 0.5, 0.5, -80, -56)
 	FilesHeader:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
-	FilesHeader:setText(LocalizeToUpperString(0xA497494F91D625A))
+	FilesHeader:setText(LocalizeToUpperString(@"hash_5A497494F91D625A"))
 	FilesHeader:setTTF("ttmussels_regular")
-	FilesHeader:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	FilesHeader:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	FilesHeader:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	FilesHeader:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(FilesHeader)
 	self.FilesHeader = FilesHeader
 	local BackstoryVideoButton = CoD.SpecialistDossierButton.new(f1_arg0, f1_arg1, 0.5, 0.5, -865, -355, 0.5, 0.5, -56, -7)
@@ -81,7 +81,7 @@ CoD.SpecialistDossierInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	end, false)
 	BioHeader = BackstoryVideoButton
 	IntroVideoButton = BackstoryVideoButton.subscribeToModel
-	BioButton = Engine[0x8DF2E5447F384B9]()
+	BioButton = Engine[@"getglobalmodel"]()
 	IntroVideoButton(BioHeader, BioButton["storageGlobalRoot.user_settings"], function(f7_arg0)
 		f1_arg0:updateElementState(BackstoryVideoButton, {
 			name = "model_validation",
@@ -115,7 +115,7 @@ CoD.SpecialistDossierInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	IntroVideoButton = BackstoryVideoButton.subscribeToModel
 	BioButton = DataSources.SpecialistDossier.getModel(f1_arg1)
 	IntroVideoButton(BioHeader, BioButton["backstoryVideo.hiResVideo.movieName"], function(f10_arg0, f10_arg1)
-		CoD.Menu.UpdateButtonShownState(f10_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f10_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	BackstoryVideoButton:registerEventHandler("gain_focus", function(element, event)
 		local f11_local0 = nil
@@ -124,10 +124,10 @@ CoD.SpecialistDossierInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 		elseif element.super.gainFocus then
 			f11_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f11_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(BackstoryVideoButton, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(BackstoryVideoButton, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if CoD.ModelUtility.IsGlobalDataSourceModelValueNonEmptyString(controller, "SpecialistDossier", "backstoryVideo.hiResVideo.movieName") and not IsElementInState(self.BackstoryVideoButton, "MatureContentFiltered") then
 			CoD.VideoStreamingUtility.SetupVoDMovie(controller, self.BackstoryPreview, "hiResVideo")
 			SetLoseFocusToElement(self, "BackstoryVideoButton", controller)
@@ -139,7 +139,7 @@ CoD.SpecialistDossierInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 		end
 	end, function(element, menu, controller)
 		if CoD.ModelUtility.IsGlobalDataSourceModelValueNonEmptyString(controller, "SpecialistDossier", "backstoryVideo.hiResVideo.movieName") and not IsElementInState(self.BackstoryVideoButton, "MatureContentFiltered") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD31D493AE40DA0F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_D31D493AE40DA0F", nil, nil)
 			return true
 		else
 			return false
@@ -179,7 +179,7 @@ CoD.SpecialistDossierInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	end, false)
 	BioButton = IntroVideoButton
 	BioHeader = IntroVideoButton.subscribeToModel
-	IntroPreview = Engine[0x8DF2E5447F384B9]()
+	IntroPreview = Engine[@"getglobalmodel"]()
 	BioHeader(BioButton, IntroPreview["storageGlobalRoot.user_settings"], function(f18_arg0)
 		f1_arg0:updateElementState(IntroVideoButton, {
 			name = "model_validation",
@@ -206,14 +206,14 @@ CoD.SpecialistDossierInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	IntroVideoButton:subscribeToGlobalModel(f1_arg1, "SpecialistDossier", "introVideoDesc", function(model)
 		local f20_local0 = model:get()
 		if f20_local0 ~= nil then
-			IntroVideoButton.ButtonText:setText(Engine[0xF9F1239CFD921FE](f20_local0))
+			IntroVideoButton.ButtonText:setText(Engine[@"hash_4F9F1239CFD921FE"](f20_local0))
 		end
 	end)
 	BioButton = IntroVideoButton
 	BioHeader = IntroVideoButton.subscribeToModel
 	IntroPreview = DataSources.SpecialistDossier.getModel(f1_arg1)
 	BioHeader(BioButton, IntroPreview["introVideo.hiResVideo.movieName"], function(f21_arg0, f21_arg1)
-		CoD.Menu.UpdateButtonShownState(f21_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f21_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	IntroVideoButton:registerEventHandler("gain_focus", function(element, event)
 		local f22_local0 = nil
@@ -222,10 +222,10 @@ CoD.SpecialistDossierInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 		elseif element.super.gainFocus then
 			f22_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f22_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(IntroVideoButton, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(IntroVideoButton, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if CoD.ModelUtility.IsGlobalDataSourceModelValueNonEmptyString(controller, "SpecialistDossier", "introVideo.hiResVideo.movieName") and not IsElementInState(self.IntroVideoButton, "MatureContentFiltered") then
 			CoD.VideoStreamingUtility.SetupVoDMovie(controller, self.IntroPreview, "hiResVideo")
 			SetLoseFocusToElement(self, "IntroVideoButton", controller)
@@ -237,7 +237,7 @@ CoD.SpecialistDossierInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 		end
 	end, function(element, menu, controller)
 		if CoD.ModelUtility.IsGlobalDataSourceModelValueNonEmptyString(controller, "SpecialistDossier", "introVideo.hiResVideo.movieName") and not IsElementInState(self.IntroVideoButton, "MatureContentFiltered") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD31D493AE40DA0F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_D31D493AE40DA0F", nil, nil)
 			return true
 		else
 			return false
@@ -254,10 +254,10 @@ CoD.SpecialistDossierInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self.IntroVideoButton = IntroVideoButton
 	BioHeader = LUI.UIText.new(0.5, 0.5, -860, -360, 0.5, 0.5, 110, 134)
 	BioHeader:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
-	BioHeader:setText(LocalizeToUpperString(0xBECB6115D1FE883))
+	BioHeader:setText(LocalizeToUpperString(@"hash_2BECB6115D1FE883"))
 	BioHeader:setTTF("ttmussels_regular")
-	BioHeader:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	BioHeader:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	BioHeader:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	BioHeader:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(BioHeader)
 	self.BioHeader = BioHeader
 	BioButton = CoD.SpecialistDossierButton.new(f1_arg0, f1_arg1, 0.5, 0.5, -865, -355, 0.5, 0.5, 144, 315)
@@ -265,7 +265,7 @@ CoD.SpecialistDossierInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	BioButton:subscribeToGlobalModel(f1_arg1, "SpecialistDossier", "bioPreview", function(model)
 		local f26_local0 = model:get()
 		if f26_local0 ~= nil then
-			BioButton.ButtonText:setText(Engine[0xF9F1239CFD921FE](f26_local0))
+			BioButton.ButtonText:setText(Engine[@"hash_4F9F1239CFD921FE"](f26_local0))
 		end
 	end)
 	BioButton:registerEventHandler("gain_focus", function(element, event)
@@ -275,14 +275,14 @@ CoD.SpecialistDossierInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 		elseif element.super.gainFocus then
 			f27_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f27_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(BioButton, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(BioButton, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		OpenOverlay(self, "SpecialistBio", controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xBECB6115D1FE883, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_2BECB6115D1FE883", nil, "ui_confirm")
 		return true
 	end, false)
 	LUI.OverrideFunction_CallOriginalFirst(BioButton, "childFocusGained", function(element)
@@ -323,7 +323,7 @@ CoD.SpecialistDossierInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	end, false)
 	Designation = IntroPreview
 	BackstoryPreview = IntroPreview.subscribeToModel
-	f1_local11 = Engine[0x8DF2E5447F384B9]()
+	f1_local11 = Engine[@"getglobalmodel"]()
 	BackstoryPreview(Designation, f1_local11["storageGlobalRoot.user_settings"], function(f34_arg0)
 		f1_arg0:updateElementState(IntroPreview, {
 			name = "model_validation",
@@ -352,13 +352,13 @@ CoD.SpecialistDossierInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	IntroPreview:subscribeToGlobalModel(f1_arg1, "SpecialistDossier", "introVideoTitle", function(model)
 		local f37_local0 = model:get()
 		if f37_local0 ~= nil then
-			IntroPreview.Title:setText(Engine[0xF9F1239CFD921FE](f37_local0))
+			IntroPreview.Title:setText(Engine[@"hash_4F9F1239CFD921FE"](f37_local0))
 		end
 	end)
 	IntroPreview:subscribeToGlobalModel(f1_arg1, "SpecialistDossier", "introVideoDesc", function(model)
 		local f38_local0 = model:get()
 		if f38_local0 ~= nil then
-			IntroPreview.Desc:setText(Engine[0xF9F1239CFD921FE](f38_local0))
+			IntroPreview.Desc:setText(Engine[@"hash_4F9F1239CFD921FE"](f38_local0))
 		end
 	end)
 	self:addElement(IntroPreview)
@@ -392,7 +392,7 @@ CoD.SpecialistDossierInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	end, false)
 	f1_local11 = BackstoryPreview
 	Designation = BackstoryPreview.subscribeToModel
-	f1_local12 = Engine[0x8DF2E5447F384B9]()
+	f1_local12 = Engine[@"getglobalmodel"]()
 	Designation(f1_local11, f1_local12["storageGlobalRoot.user_settings"], function(f42_arg0)
 		f1_arg0:updateElementState(BackstoryPreview, {
 			name = "model_validation",
@@ -421,13 +421,13 @@ CoD.SpecialistDossierInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	BackstoryPreview:subscribeToGlobalModel(f1_arg1, "SpecialistDossier", "backstoryVideoTitle", function(model)
 		local f45_local0 = model:get()
 		if f45_local0 ~= nil then
-			BackstoryPreview.Title:setText(Engine[0xF9F1239CFD921FE](f45_local0))
+			BackstoryPreview.Title:setText(Engine[@"hash_4F9F1239CFD921FE"](f45_local0))
 		end
 	end)
 	BackstoryPreview:subscribeToGlobalModel(f1_arg1, "SpecialistDossier", "backstoryVideoDesc", function(model)
 		local f46_local0 = model:get()
 		if f46_local0 ~= nil then
-			BackstoryPreview.Desc:setText(Engine[0xF9F1239CFD921FE](f46_local0))
+			BackstoryPreview.Desc:setText(Engine[@"hash_4F9F1239CFD921FE"](f46_local0))
 		end
 	end)
 	self:addElement(BackstoryPreview)

@@ -19,7 +19,7 @@ CoD.ContractRarityHeaderTile.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	local RarityLabel = LUI.UIText.new(0, 0, 0, 104, 0, 0, 0, 17)
 	RarityLabel:setTTF("ttmussels_demibold")
 	RarityLabel:setLetterSpacing(4)
-	RarityLabel:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	RarityLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	RarityLabel:setBackingType(1)
 	RarityLabel:setBackingWidget(CoD.ContractRarityBackground, f1_arg0, f1_arg1)
 	RarityLabel:setBackingXPadding(15)
@@ -46,7 +46,7 @@ CoD.ContractRarityHeaderTile.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	Contract:setText(LocalizeToUpperString(0x0))
 	Contract:setTTF("ttmussels_regular")
 	Contract:setLetterSpacing(4)
-	Contract:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	Contract:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(Contract)
 	self.Contract = Contract
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)

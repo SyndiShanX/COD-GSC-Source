@@ -26,7 +26,7 @@ CoD.SpecialistHeadquartersSpecialistInfo.new = function(f1_arg0, f1_arg1, f1_arg
 	SpecialistName:setZoom(3)
 	SpecialistName:setTTF("ttmussels_regular")
 	SpecialistName:setLetterSpacing(5)
-	SpecialistName:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	SpecialistName:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	SpecialistName:linkToElementModel(self, "name", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -40,7 +40,7 @@ CoD.SpecialistHeadquartersSpecialistInfo.new = function(f1_arg0, f1_arg1, f1_arg
 	JobTitle:setZoom(3)
 	JobTitle:setTTF("ttmussels_regular")
 	JobTitle:setLetterSpacing(5)
-	JobTitle:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	JobTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	JobTitle:linkToElementModel(self, "jobTitle", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -54,12 +54,12 @@ CoD.SpecialistHeadquartersSpecialistInfo.new = function(f1_arg0, f1_arg1, f1_arg
 	DetailedDesc:setAlpha(0.5)
 	DetailedDesc:setTTF("ttmussels_regular")
 	DetailedDesc:setLineSpacing(1)
-	DetailedDesc:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	DetailedDesc:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	DetailedDesc:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	DetailedDesc:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	DetailedDesc:linkToElementModel(self, "detailedDesc", true, function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
-			DetailedDesc:setText(Engine[0xF9F1239CFD921FE](f4_local0))
+			DetailedDesc:setText(Engine[@"hash_4F9F1239CFD921FE"](f4_local0))
 		end
 	end)
 	self:addElement(DetailedDesc)
@@ -67,10 +67,10 @@ CoD.SpecialistHeadquartersSpecialistInfo.new = function(f1_arg0, f1_arg1, f1_arg
 	local SpecialIssue = LUI.UIText.new(0, 0, 18, 468, 0, 0, 268, 292)
 	SpecialIssue:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	SpecialIssue:setAlpha(0.5)
-	SpecialIssue:setText(LocalizeToUpperString(0x29E45AE7FF6633E))
+	SpecialIssue:setText(LocalizeToUpperString(@"hash_729E45AE7FF6633E"))
 	SpecialIssue:setTTF("ttmussels_regular")
 	SpecialIssue:setLetterSpacing(6)
-	SpecialIssue:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	SpecialIssue:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	self:addElement(SpecialIssue)
 	self.SpecialIssue = SpecialIssue
 	local HubWeaponry = CoD.HubEquipmentItem.new(f1_arg0, f1_arg1, 0, 0, 12.5, 212.5, 0, 0, 280, 626)
@@ -82,7 +82,7 @@ CoD.SpecialistHeadquartersSpecialistInfo.new = function(f1_arg0, f1_arg1, f1_arg
 			end,
 		},
 	})
-	HubWeaponry.categoryHeader:setText(LocalizeToUpperString(0xA69F960F1CD39EE))
+	HubWeaponry.categoryHeader:setText(LocalizeToUpperString(@"hash_4A69F960F1CD39EE"))
 	HubWeaponry.categoryHeader:setLetterSpacing(6)
 	HubWeaponry.statHeader:setText("")
 	HubWeaponry.statValue:setText("")
@@ -95,7 +95,7 @@ CoD.SpecialistHeadquartersSpecialistInfo.new = function(f1_arg0, f1_arg1, f1_arg
 	HubWeaponry:linkToElementModel(self, "ability.displayName", true, function(model)
 		local f7_local0 = model:get()
 		if f7_local0 ~= nil then
-			HubWeaponry.name:setText(Engine[0xF9F1239CFD921FE](f7_local0))
+			HubWeaponry.name:setText(Engine[@"hash_4F9F1239CFD921FE"](f7_local0))
 		end
 	end)
 	self:addElement(HubWeaponry)
@@ -109,7 +109,7 @@ CoD.SpecialistHeadquartersSpecialistInfo.new = function(f1_arg0, f1_arg1, f1_arg
 			end,
 		},
 	})
-	HubEquipment.categoryHeader:setText(LocalizeToUpperString(0xF3F4754CD03FA1D))
+	HubEquipment.categoryHeader:setText(LocalizeToUpperString(@"hash_5F3F4754CD03FA1D"))
 	HubEquipment.categoryHeader:setLetterSpacing(6)
 	HubEquipment.statHeader:setText("")
 	HubEquipment.statValue:setText("")
@@ -122,7 +122,7 @@ CoD.SpecialistHeadquartersSpecialistInfo.new = function(f1_arg0, f1_arg1, f1_arg
 	HubEquipment:linkToElementModel(self, "equipment.displayName", true, function(model)
 		local f10_local0 = model:get()
 		if f10_local0 ~= nil then
-			HubEquipment.name:setText(Engine[0xF9F1239CFD921FE](f10_local0))
+			HubEquipment.name:setText(Engine[@"hash_4F9F1239CFD921FE"](f10_local0))
 		end
 	end)
 	self:addElement(HubEquipment)
@@ -135,15 +135,15 @@ CoD.SpecialistHeadquartersSpecialistInfo.new = function(f1_arg0, f1_arg1, f1_arg
 	self.CombatTrainingProgress = CombatTrainingProgress
 	local DividerSolidBot2 = LUI.UIImage.new(0, 0, 10, 478, 0, 0, 256.5, 264.5)
 	DividerSolidBot2:setAlpha(0.1)
-	DividerSolidBot2:setImage(RegisterImage(0x84B43D5B04D263A))
-	DividerSolidBot2:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	DividerSolidBot2:setImage(RegisterImage(@"hash_484B43D5B04D263A"))
+	DividerSolidBot2:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	DividerSolidBot2:setShaderVector(0, 0, 0, 0, 0)
 	DividerSolidBot2:setupNineSliceShader(16, 8)
 	self:addElement(DividerSolidBot2)
 	self.DividerSolidBot2 = DividerSolidBot2
 	local InfoDivider = LUI.UIImage.new(0, 0, 243.5, 247.5, 0, 0, 313.5, 434.5)
-	InfoDivider:setImage(RegisterImage(0x6DDA4086EA0EF02))
-	InfoDivider:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	InfoDivider:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_info_divider"))
+	InfoDivider:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(InfoDivider)
 	self.InfoDivider = InfoDivider
 	self:mergeStateConditions({

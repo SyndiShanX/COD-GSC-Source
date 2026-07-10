@@ -28,12 +28,12 @@ LUI.createMenu.PerkTalentSelect = function(f1_arg0, f1_arg1)
 	self:addElement(ItemInfo)
 	self.ItemInfo = ItemInfo
 	local CACHeader = CoD.CACHeader.new(f1_local1, f1_arg0, 0.5, 0.5, -960, 960, 0, 0, 0, 67)
-	CACHeader.subtitle.StageTitle:setText(LocalizeToUpperString(CoD.CACUtility.GetHeaderNameForLoadoutSlot(self, 0xE2669E63163D964)))
+	CACHeader.subtitle.StageTitle:setText(LocalizeToUpperString(CoD.CACUtility.GetHeaderNameForLoadoutSlot(self, @"hash_E2669E63163D964")))
 	CACHeader.subtitle.subtitle:setAlpha(0)
 	CACHeader:subscribeToGlobalModel(f1_arg0, "LobbyRoot", "lobbyTitle", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			CACHeader.subtitle.subtitle:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			CACHeader.subtitle.subtitle:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	CACHeader:linkToElementModel(self, nil, false, function(model)
@@ -115,12 +115,12 @@ LUI.createMenu.PerkTalentSelect = function(f1_arg0, f1_arg1)
 	end)
 	local f1_local10 = SelectedImage
 	local f1_local11 = SelectedImage.subscribeToModel
-	local f1_local12 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	local f1_local12 = Engine[@"getmodelforcontroller"](f1_arg0)
 	f1_local11(f1_local10, f1_local12.CACHasSelection, SelectedImage.__Alpha)
 	RestrictedText:linkToElementModel(PerkTalentListWidget.itemList, nil, false, function(model)
 		RestrictedText:setModel(model, f1_arg0)
 	end)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		if not IsPC() then
 			PlaySoundAlias("uin_party_ease_slide_back")
 			CoD.CACUtility.PlayChooseScreenOutro(menu, controller, "Close")
@@ -135,10 +135,10 @@ LUI.createMenu.PerkTalentSelect = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if not IsPC() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 			return true
 		elseif IsPC() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 			return true
 		else
 			return false
@@ -199,7 +199,7 @@ CoD.PerkTalentSelect.__clipsPerState = {
 			f16_arg0:setupElementClipCounter(2)
 			local f16_local0 = function(f17_arg0)
 				local f17_local0 = function(f18_arg0)
-					f18_arg0:beginAnimation(100, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f18_arg0:beginAnimation(100, Enum[@"luitween"][@"luitween_ease_both"])
 					f18_arg0:setTopBottom(0, 0, 672, 1294)
 					f18_arg0:setAlpha(1)
 					f18_arg0:registerEventHandler("transition_complete_keyframe", f16_arg0.clipFinished)
@@ -215,7 +215,7 @@ CoD.PerkTalentSelect.__clipsPerState = {
 			f16_local0(f16_arg0.BackgroundSlidePanel)
 			local f16_local1 = function(f19_arg0)
 				local f19_local0 = function(f20_arg0)
-					f20_arg0:beginAnimation(49, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f20_arg0:beginAnimation(49, Enum[@"luitween"][@"luitween_ease_both"])
 					f20_arg0:setTopBottom(0, 0, 515, 1015)
 					f20_arg0:setAlpha(1)
 					f20_arg0:registerEventHandler("transition_complete_keyframe", f16_arg0.clipFinished)
@@ -234,7 +234,7 @@ CoD.PerkTalentSelect.__clipsPerState = {
 			f21_arg0:__resetProperties(f21_arg1)
 			f21_arg0:setupElementClipCounter(3)
 			local f21_local0 = function(f22_arg0)
-				f21_arg0.BackgroundSlidePanel:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f21_arg0.BackgroundSlidePanel:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f21_arg0.BackgroundSlidePanel:setTopBottom(0, 0, 1072, 1694)
 				f21_arg0.BackgroundSlidePanel:setAlpha(0)
 				f21_arg0.BackgroundSlidePanel:registerEventHandler("interrupted_keyframe", f21_arg0.clipInterrupted)
@@ -245,7 +245,7 @@ CoD.PerkTalentSelect.__clipsPerState = {
 			f21_arg0.BackgroundSlidePanel:setAlpha(1)
 			f21_local0(f21_arg0.BackgroundSlidePanel)
 			local f21_local1 = function(f23_arg0)
-				f21_arg0.PerkTalentListWidget:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f21_arg0.PerkTalentListWidget:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f21_arg0.PerkTalentListWidget:setTopBottom(0, 0, 915, 1415)
 				f21_arg0.PerkTalentListWidget:registerEventHandler("interrupted_keyframe", f21_arg0.clipInterrupted)
 				f21_arg0.PerkTalentListWidget:registerEventHandler("transition_complete_keyframe", f21_arg0.clipFinished)

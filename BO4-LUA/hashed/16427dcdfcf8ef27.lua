@@ -16,20 +16,20 @@ CoD.PaintjobPersonalizationSlotInternal.new = function(f1_arg0, f1_arg1, f1_arg2
 	self.Backing = Backing
 	local DrawPaintjob = LUI.UIElement.new(0, 1, 0, 0, 0, 1, 0, 0)
 	DrawPaintjob:setAlpha(0)
-	DrawPaintjob:setupPaintjobCustomizationType(Enum[0x63E5ADF9D95FC86][0x4E4802F1ABF1844])
+	DrawPaintjob:setupPaintjobCustomizationType(Enum[@"customizationtype"][@"customization_type_paintshop_view_left"])
 	self:addElement(DrawPaintjob)
 	self.DrawPaintjob = DrawPaintjob
 	local PlusIcon = LUI.UIImage.new(0.5, 0.5, -12, 12, 0.5, 0.5, -12, 12)
 	PlusIcon:setAlpha(0)
-	PlusIcon:setImage(RegisterImage(0x1B97A54D41F4B80))
+	PlusIcon:setImage(RegisterImage(@"uie_ui_menu_common_add_plus"))
 	self:addElement(PlusIcon)
 	self.PlusIcon = PlusIcon
 	local NoneText = LUI.UIText.new(0, 0, 0, 112, 0, 0, 28, 52)
 	NoneText:setAlpha(0)
-	NoneText:setText(Engine[0xF9F1239CFD921FE](0x1EFDF7772FC1BF1))
+	NoneText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/none"))
 	NoneText:setTTF("default")
-	NoneText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	NoneText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	NoneText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	NoneText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(NoneText)
 	self.NoneText = NoneText
 	local CommonButtonOutline = CoD.CommonButtonOutline.new(f1_arg0, f1_arg1, 0, 1, -1, 1, 0, 1, 0, 0)
@@ -38,14 +38,14 @@ CoD.PaintjobPersonalizationSlotInternal.new = function(f1_arg0, f1_arg1, f1_arg2
 	local EquippedMarkerBG = LUI.UIImage.new(1, 1, -35, 9, 0, 0, -8, 36)
 	EquippedMarkerBG:setAlpha(0)
 	EquippedMarkerBG:setZoom(4)
-	EquippedMarkerBG:setImage(RegisterImage(0x7AF532D84DE505A))
-	EquippedMarkerBG:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	EquippedMarkerBG:setImage(RegisterImage(@"uie_ui_menu_cac_equipped_marker_bg"))
+	EquippedMarkerBG:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(EquippedMarkerBG)
 	self.EquippedMarkerBG = EquippedMarkerBG
 	local EquippedMarkerTick = LUI.UIImage.new(1, 1, -35, 9, 0, 0, -8, 36)
 	EquippedMarkerTick:setAlpha(0)
 	EquippedMarkerTick:setZoom(4)
-	EquippedMarkerTick:setImage(RegisterImage(0x9A8B26C9B001758))
+	EquippedMarkerTick:setImage(RegisterImage(@"uie_ui_menu_cac_equipped_marker_tick"))
 	self:addElement(EquippedMarkerTick)
 	self.EquippedMarkerTick = EquippedMarkerTick
 	self.DrawPaintjob:linkToElementModel(self, "paintjobSlot", true, function(model)
@@ -70,7 +70,7 @@ CoD.PaintjobPersonalizationSlotInternal.new = function(f1_arg0, f1_arg1, f1_arg2
 		{
 			stateName = "Paintjob",
 			condition = function(menu, element, event)
-				return not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "paintjobSlot", Enum[0xCA3F54D92F45B45][0x60CAA8D66ED63A5])
+				return not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "paintjobSlot", Enum[@"customizationpaintjobinvalidid"][@"customization_invalid_paintjob_slot"])
 			end,
 		},
 		{

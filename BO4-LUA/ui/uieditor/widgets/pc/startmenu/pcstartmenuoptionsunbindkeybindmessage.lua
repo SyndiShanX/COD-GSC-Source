@@ -10,9 +10,9 @@ CoD.PCStartMenuOptionsUnbindKeybindMessage.new = function(f1_arg0, f1_arg1, f1_a
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local TextBox = LUI.UIText.new(0, 0, 0, 126, 0, 1, 0, 0)
 	TextBox:setRGB(0.76, 0.76, 0.76)
-	TextBox:setText(Engine[0xF9F1239CFD921FE](0x37C0D99E99809ED))
+	TextBox:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_37C0D99E99809ED"))
 	TextBox:setTTF("ttmussels_regular")
-	TextBox:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	TextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(TextBox)
 	self.TextBox = TextBox
 	self:mergeStateConditions({
@@ -35,7 +35,7 @@ CoD.PCStartMenuOptionsUnbindKeybindMessage.new = function(f1_arg0, f1_arg1, f1_a
 	end)
 	local f1_local2 = self
 	local f1_local3 = self.subscribeToModel
-	local f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local3(f1_local2, f1_local4.LastInput, function(f5_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

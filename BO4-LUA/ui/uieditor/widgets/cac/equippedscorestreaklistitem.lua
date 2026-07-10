@@ -10,7 +10,7 @@ CoD.EquippedScorestreakListItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local ScorestreaksBG = LUI.UIImage.new(0, 0, -8, 108, 0, 0, -9, 159)
-	ScorestreaksBG:setImage(RegisterImage(0x62843B22FDD53AB))
+	ScorestreaksBG:setImage(RegisterImage(@"hash_262843B22FDD53AB"))
 	self:addElement(ScorestreaksBG)
 	self.ScorestreaksBG = ScorestreaksBG
 	local ScorestreakIcon = LUI.UIImage.new(0, 0, 3, 97, 0, 0, 10, 104)
@@ -26,7 +26,7 @@ CoD.EquippedScorestreakListItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	ScoreCost:setRGB(0.86, 0.74, 0.25)
 	ScoreCost:setTTF("ttmussels_regular")
 	ScoreCost:setLetterSpacing(5)
-	ScoreCost:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	ScoreCost:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	ScoreCost:linkToElementModel(self, "scoreToUnlock", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -37,8 +37,8 @@ CoD.EquippedScorestreakListItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self.ScoreCost = ScoreCost
 	local ScorestreaksBGAdd = LUI.UIImage.new(0, 0, -8, 108, 0, 0, -9, 159)
 	ScorestreaksBGAdd:setAlpha(0)
-	ScorestreaksBGAdd:setImage(RegisterImage(0x62843B22FDD53AB))
-	ScorestreaksBGAdd:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	ScorestreaksBGAdd:setImage(RegisterImage(@"hash_262843B22FDD53AB"))
+	ScorestreaksBGAdd:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	ScorestreaksBGAdd:setShaderVector(0, 1.5, 0, 0, 0)
 	self:addElement(ScorestreaksBGAdd)
 	self.ScorestreaksBGAdd = ScorestreaksBGAdd
@@ -120,7 +120,7 @@ CoD.EquippedScorestreakListItem.__clipsPerState = {
 			f13_arg0:__resetProperties()
 			f13_arg0:setupElementClipCounter(1)
 			local f13_local0 = function(f14_arg0)
-				f13_arg0.ScorestreaksBGAdd:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f13_arg0.ScorestreaksBGAdd:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f13_arg0.ScorestreaksBGAdd:setAlpha(1)
 				f13_arg0.ScorestreaksBGAdd:registerEventHandler("interrupted_keyframe", f13_arg0.clipInterrupted)
 				f13_arg0.ScorestreaksBGAdd:registerEventHandler("transition_complete_keyframe", f13_arg0.clipFinished)

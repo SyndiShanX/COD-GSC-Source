@@ -14,41 +14,41 @@ CoD.PC_SocialMenu_SortButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	self.SortButton = SortButton
 	local TextureButtonSort = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	TextureButtonSort:setAlpha(0.25)
-	TextureButtonSort:setImage(RegisterImage(0x34839E8065B1E53))
-	TextureButtonSort:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	TextureButtonSort:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	TextureButtonSort:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	TextureButtonSort:setShaderVector(0, 0, 0, 0, 0)
 	TextureButtonSort:setupNineSliceShader(100, 50)
 	self:addElement(TextureButtonSort)
 	self.TextureButtonSort = TextureButtonSort
 	local TextureButtonSortAdd = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	TextureButtonSortAdd:setAlpha(0)
-	TextureButtonSortAdd:setImage(RegisterImage(0x34839E8065B1E53))
-	TextureButtonSortAdd:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	TextureButtonSortAdd:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	TextureButtonSortAdd:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	TextureButtonSortAdd:setShaderVector(0, 0, 0, 0, 0)
 	TextureButtonSortAdd:setupNineSliceShader(100, 50)
 	self:addElement(TextureButtonSortAdd)
 	self.TextureButtonSortAdd = TextureButtonSortAdd
 	local Border = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	Border:setAlpha(0.7)
-	Border:setImage(RegisterImage(0x185E11D74ECA3D7))
-	Border:setMaterial(LUI.UIImage.GetCachedMaterial(0x44484DDFAF5C093))
+	Border:setImage(RegisterImage(@"uie_ui_menu_store_common_frame"))
+	Border:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_normal"))
 	Border:setShaderVector(0, 0, 0, 0, 0)
 	Border:setupNineSliceShader(5, 5)
 	self:addElement(Border)
 	self.Border = Border
 	local SortText = LUI.UIText.new(0, 0, 3, 211, 0.5, 0.5, -9, 9)
 	SortText:setRGB(0.76, 0.76, 0.76)
-	SortText:setText(Engine[0xF9F1239CFD921FE](0xBA47B26F6A681C4))
+	SortText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_2BA47B26F6A681C4"))
 	SortText:setTTF("ttmussels_regular")
-	SortText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	SortText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	SortText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	SortText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(SortText)
 	self.SortText = SortText
 	local Arrow = LUI.UIImage.new(0, 0, 190, 210, 0.5, 0.5, -10, 10)
-	Arrow:setImage(RegisterImage(0x5B12CB88F5E229D))
+	Arrow:setImage(RegisterImage(@"hash_35B12CB88F5E229D"))
 	self:addElement(Arrow)
 	self.Arrow = Arrow
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if IsInDefaultState(self) then
 			CoD.PCBattlenetUtility.SetSortFunction(controller, CoD.PCBattlenetUtility.SortEnum.ALPHABETICALLY_DESC)
 			SetState(self, "AlphabeticalReversed", controller)
@@ -69,16 +69,16 @@ CoD.PC_SocialMenu_SortButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 		end
 	end, function(element, menu, controller)
 		if IsInDefaultState(self) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 			return false
 		elseif IsSelfInState(self, "AlphabeticalReversed") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 			return false
 		elseif IsSelfInState(self, "Recent") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 			return false
 		elseif IsSelfInState(self, "RecentReversed") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 			return false
 		else
 			return false
@@ -97,7 +97,7 @@ CoD.PC_SocialMenu_SortButton.__resetProperties = function(f4_arg0)
 	f4_arg0.Arrow:completeAnimation()
 	f4_arg0.TextureButtonSortAdd:setAlpha(0)
 	f4_arg0.SortText:setRGB(0.76, 0.76, 0.76)
-	f4_arg0.SortText:setText(Engine[0xF9F1239CFD921FE](0xBA47B26F6A681C4))
+	f4_arg0.SortText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_2BA47B26F6A681C4"))
 	f4_arg0.Arrow:setTopBottom(0.5, 0.5, -10, 10)
 end
 CoD.PC_SocialMenu_SortButton.__clipsPerState = {
@@ -191,7 +191,7 @@ CoD.PC_SocialMenu_SortButton.__clipsPerState = {
 			f15_arg0:__resetProperties()
 			f15_arg0:setupElementClipCounter(1)
 			f15_arg0.SortText:completeAnimation()
-			f15_arg0.SortText:setText(Engine[0xF9F1239CFD921FE](0xC086671554562E1))
+			f15_arg0.SortText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_4C086671554562E1"))
 			f15_arg0.clipFinished(f15_arg0.SortText)
 		end,
 		Focus = function(f16_arg0, f16_arg1)
@@ -202,7 +202,7 @@ CoD.PC_SocialMenu_SortButton.__clipsPerState = {
 			f16_arg0.clipFinished(f16_arg0.TextureButtonSortAdd)
 			f16_arg0.SortText:completeAnimation()
 			f16_arg0.SortText:setRGB(1, 1, 1)
-			f16_arg0.SortText:setText(Engine[0xF9F1239CFD921FE](0xC086671554562E1))
+			f16_arg0.SortText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_4C086671554562E1"))
 			f16_arg0.clipFinished(f16_arg0.SortText)
 		end,
 		LoseFocus = function(f17_arg0, f17_arg1)
@@ -225,7 +225,7 @@ CoD.PC_SocialMenu_SortButton.__clipsPerState = {
 			end
 			f17_arg0.SortText:completeAnimation()
 			f17_arg0.SortText:setRGB(1, 1, 1)
-			f17_arg0.SortText:setText(Engine[0xF9F1239CFD921FE](0xC086671554562E1))
+			f17_arg0.SortText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_4C086671554562E1"))
 			f17_local1(f17_arg0.SortText)
 		end,
 	},
@@ -234,7 +234,7 @@ CoD.PC_SocialMenu_SortButton.__clipsPerState = {
 			f20_arg0:__resetProperties()
 			f20_arg0:setupElementClipCounter(2)
 			f20_arg0.SortText:completeAnimation()
-			f20_arg0.SortText:setText(Engine[0xF9F1239CFD921FE](0xC086671554562E1))
+			f20_arg0.SortText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_4C086671554562E1"))
 			f20_arg0.clipFinished(f20_arg0.SortText)
 			f20_arg0.Arrow:completeAnimation()
 			f20_arg0.Arrow:setTopBottom(0.5, 0.5, 10, -10)
@@ -248,7 +248,7 @@ CoD.PC_SocialMenu_SortButton.__clipsPerState = {
 			f21_arg0.clipFinished(f21_arg0.TextureButtonSortAdd)
 			f21_arg0.SortText:completeAnimation()
 			f21_arg0.SortText:setRGB(1, 1, 1)
-			f21_arg0.SortText:setText(Engine[0xF9F1239CFD921FE](0xC086671554562E1))
+			f21_arg0.SortText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_4C086671554562E1"))
 			f21_arg0.clipFinished(f21_arg0.SortText)
 			f21_arg0.Arrow:completeAnimation()
 			f21_arg0.Arrow:setTopBottom(0.5, 0.5, 10, -10)
@@ -274,7 +274,7 @@ CoD.PC_SocialMenu_SortButton.__clipsPerState = {
 			end
 			f22_arg0.SortText:completeAnimation()
 			f22_arg0.SortText:setRGB(1, 1, 1)
-			f22_arg0.SortText:setText(Engine[0xF9F1239CFD921FE](0xC086671554562E1))
+			f22_arg0.SortText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_4C086671554562E1"))
 			f22_local1(f22_arg0.SortText)
 			f22_arg0.Arrow:completeAnimation()
 			f22_arg0.Arrow:setTopBottom(0.5, 0.5, 10, -10)

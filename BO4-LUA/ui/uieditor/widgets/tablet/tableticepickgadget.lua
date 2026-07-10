@@ -10,7 +10,7 @@ CoD.TabletIcePickGadget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	self.soundSet = "default"
 	self.anyChildUsesUpdateState = true
 	local IcePickUI3D = CoD.TabletIcePickGadget_Internal.new(f1_arg0, f1_arg1, 0, 0, 0, 1336, 0, 0, 0, 740)
-	Engine[0xF0AF2C4A29D15D7](f1_arg1, 5, 1336, 740)
+	Engine[@"setupui3dwindow"](f1_arg1, 5, 1336, 740)
 	IcePickUI3D:setUI3DWindow(5)
 	IcePickUI3D:setScale(0.8, 0.8)
 	IcePickUI3D:subscribeToGlobalModel(f1_arg1, "IcePickInfo", nil, function(model)
@@ -19,7 +19,7 @@ CoD.TabletIcePickGadget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	self:addElement(IcePickUI3D)
 	self.IcePickUI3D = IcePickUI3D
 	local TabletIcePickSecondaryWindow = CoD.TabletIcePickSecondaryWindow.new(f1_arg0, f1_arg1, 0, 0, 1534, 1842, 0, 0, 78.5, 423.5)
-	Engine[0xF0AF2C4A29D15D7](f1_arg1, 2, 308, 345)
+	Engine[@"setupui3dwindow"](f1_arg1, 2, 308, 345)
 	TabletIcePickSecondaryWindow:setUI3DWindow(2)
 	TabletIcePickSecondaryWindow:setAlpha(0.3)
 	TabletIcePickSecondaryWindow:subscribeToGlobalModel(f1_arg1, "IcePickInfo", nil, function(model)

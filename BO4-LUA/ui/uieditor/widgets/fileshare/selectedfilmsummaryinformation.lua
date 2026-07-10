@@ -20,7 +20,7 @@ CoD.SelectedFilmSummaryInformation.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	ScoreColumn1:linkToElementModel(self, "column1Header", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
-			ScoreColumn1.HeaderText:setText(Engine[0xF9F1239CFD921FE](f3_local0))
+			ScoreColumn1.HeaderText:setText(Engine[@"hash_4F9F1239CFD921FE"](f3_local0))
 		end
 	end)
 	ScoreColumn1:linkToElementModel(self, "column1Value", true, function(model)
@@ -35,7 +35,7 @@ CoD.SelectedFilmSummaryInformation.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	ScoreColumn2:linkToElementModel(self, "column2Header", true, function(model)
 		local f5_local0 = model:get()
 		if f5_local0 ~= nil then
-			ScoreColumn2.HeaderText:setText(Engine[0xF9F1239CFD921FE](f5_local0))
+			ScoreColumn2.HeaderText:setText(Engine[@"hash_4F9F1239CFD921FE"](f5_local0))
 		end
 	end)
 	ScoreColumn2:linkToElementModel(self, "column2Value", true, function(model)
@@ -50,7 +50,7 @@ CoD.SelectedFilmSummaryInformation.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	ScoreColumn3:linkToElementModel(self, "column3Header", true, function(model)
 		local f7_local0 = model:get()
 		if f7_local0 ~= nil then
-			ScoreColumn3.HeaderText:setText(Engine[0xF9F1239CFD921FE](f7_local0))
+			ScoreColumn3.HeaderText:setText(Engine[@"hash_4F9F1239CFD921FE"](f7_local0))
 		end
 	end)
 	ScoreColumn3:linkToElementModel(self, "column3Value", true, function(model)
@@ -66,7 +66,7 @@ CoD.SelectedFilmSummaryInformation.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	ScoreColumn4:linkToElementModel(self, "column4Header", true, function(model)
 		local f9_local0 = model:get()
 		if f9_local0 ~= nil then
-			ScoreColumn4.HeaderText:setText(Engine[0xF9F1239CFD921FE](f9_local0))
+			ScoreColumn4.HeaderText:setText(Engine[@"hash_4F9F1239CFD921FE"](f9_local0))
 		end
 	end)
 	ScoreColumn4:linkToElementModel(self, "column4Value", true, function(model)

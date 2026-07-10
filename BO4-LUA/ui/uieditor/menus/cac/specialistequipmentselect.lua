@@ -31,12 +31,12 @@ LUI.createMenu.SpecialistEquipmentSelect = function(f1_arg0, f1_arg1)
 	self:addElement(EquipmentListWidget)
 	self.EquipmentListWidget = EquipmentListWidget
 	local CACHeader = CoD.CACHeader.new(f1_local1, f1_arg0, 0.5, 0.5, -960, 960, 0, 0, 0, 67)
-	CACHeader.subtitle.StageTitle:setText(LocalizeToUpperString(CoD.CACUtility.GetHeaderNameForLoadoutSlot(self, 0x5C60F77B9332E5B)))
+	CACHeader.subtitle.StageTitle:setText(LocalizeToUpperString(CoD.CACUtility.GetHeaderNameForLoadoutSlot(self, @"hash_15C60F77B9332E5B")))
 	CACHeader.subtitle.subtitle:setAlpha(0)
 	CACHeader:subscribeToGlobalModel(f1_arg0, "LobbyRoot", "lobbyTitle", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			CACHeader.subtitle.subtitle:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			CACHeader.subtitle.subtitle:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	CACHeader:linkToElementModel(self, nil, false, function(model)
@@ -162,7 +162,7 @@ LUI.createMenu.SpecialistEquipmentSelect = function(f1_arg0, f1_arg1)
 	RestrictedText:linkToElementModel(EquipmentListWidget.itemList, nil, false, function(model)
 		RestrictedText:setModel(model, f1_arg0)
 	end)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		if not IsPC() then
 			PlaySoundAlias("uin_party_ease_slide_back")
 			CoD.CACUtility.PlayChooseScreenOutro(menu, controller, "Close")
@@ -177,10 +177,10 @@ LUI.createMenu.SpecialistEquipmentSelect = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if not IsPC() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 			return true
 		elseif IsPC() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 			return true
 		else
 			return false
@@ -246,7 +246,7 @@ CoD.SpecialistEquipmentSelect.__clipsPerState = {
 			f20_arg0:setupElementClipCounter(2)
 			local f20_local0 = function(f21_arg0)
 				local f21_local0 = function(f22_arg0)
-					f22_arg0:beginAnimation(100, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f22_arg0:beginAnimation(100, Enum[@"luitween"][@"luitween_ease_both"])
 					f22_arg0:setTopBottom(0, 0, 639, 1261)
 					f22_arg0:setAlpha(1)
 					f22_arg0:registerEventHandler("transition_complete_keyframe", f20_arg0.clipFinished)
@@ -262,7 +262,7 @@ CoD.SpecialistEquipmentSelect.__clipsPerState = {
 			f20_local0(f20_arg0.BackgroundSlidePanel)
 			local f20_local1 = function(f23_arg0)
 				local f23_local0 = function(f24_arg0)
-					f24_arg0:beginAnimation(49, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f24_arg0:beginAnimation(49, Enum[@"luitween"][@"luitween_ease_both"])
 					f24_arg0:setTopBottom(0, 0, 547, 1047)
 					f24_arg0:setAlpha(1)
 					f24_arg0:registerEventHandler("transition_complete_keyframe", f20_arg0.clipFinished)
@@ -281,7 +281,7 @@ CoD.SpecialistEquipmentSelect.__clipsPerState = {
 			f25_arg0:__resetProperties()
 			f25_arg0:setupElementClipCounter(2)
 			local f25_local0 = function(f26_arg0)
-				f25_arg0.BackgroundSlidePanel:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f25_arg0.BackgroundSlidePanel:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f25_arg0.BackgroundSlidePanel:setTopBottom(0, 0, 1072, 1694)
 				f25_arg0.BackgroundSlidePanel:setAlpha(0)
 				f25_arg0.BackgroundSlidePanel:registerEventHandler("interrupted_keyframe", f25_arg0.clipInterrupted)
@@ -292,7 +292,7 @@ CoD.SpecialistEquipmentSelect.__clipsPerState = {
 			f25_arg0.BackgroundSlidePanel:setAlpha(1)
 			f25_local0(f25_arg0.BackgroundSlidePanel)
 			local f25_local1 = function(f27_arg0)
-				f25_arg0.EquipmentListWidget:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f25_arg0.EquipmentListWidget:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f25_arg0.EquipmentListWidget:setTopBottom(0, 0, 1080, 1580)
 				f25_arg0.EquipmentListWidget:setAlpha(0)
 				f25_arg0.EquipmentListWidget:registerEventHandler("interrupted_keyframe", f25_arg0.clipInterrupted)

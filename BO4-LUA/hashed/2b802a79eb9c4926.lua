@@ -11,8 +11,8 @@ CoD.IcePickHackFlavorTextItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	local HackText = LUI.UIText.new(0, 0, 4, 249, 0, 0, 3, 21)
 	HackText:setRGB(0.49, 0.85, 1)
 	HackText:setTTF("0arame_mono_stencil")
-	HackText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	HackText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	HackText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	HackText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	HackText:linkToElementModel(self, "hackingText", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then

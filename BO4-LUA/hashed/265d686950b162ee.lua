@@ -9,22 +9,22 @@ CoD.WarzoneDeathCamLabelButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local DeathCamLabel = LUI.UIText.new(0, 0, 0, 376, 0, 0, 10, 30)
 	DeathCamLabel:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
-	DeathCamLabel:setText(LocalizeToUpperString(0xA8BAC035CE51600))
+	DeathCamLabel:setText(LocalizeToUpperString(@"wz/deathcam"))
 	DeathCamLabel:setTTF("ttmussels_regular")
-	DeathCamLabel:setMaterial(LUI.UIImage.GetCachedMaterial(0x71E049B161CD00A))
+	DeathCamLabel:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_171E049B161CD00A"))
 	DeathCamLabel:setLetterSpacing(6)
-	DeathCamLabel:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	DeathCamLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(DeathCamLabel)
 	self.DeathCamLabel = DeathCamLabel
 	local DeathCamLabelPC = nil
 	DeathCamLabelPC = LUI.UIText.new(0.5, 2.64, 0, 0, 0.5, 0.5, -10, 10)
 	DeathCamLabelPC:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	DeathCamLabelPC:setAlpha(0)
-	DeathCamLabelPC:setText(LocalizeToUpperString(0x1DA457B0409FB2C))
+	DeathCamLabelPC:setText(LocalizeToUpperString(@"wz/deathcam_pc"))
 	DeathCamLabelPC:setTTF("ttmussels_regular")
-	DeathCamLabelPC:setMaterial(LUI.UIImage.GetCachedMaterial(0x71E049B161CD00A))
+	DeathCamLabelPC:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_171E049B161CD00A"))
 	DeathCamLabelPC:setLetterSpacing(6)
-	DeathCamLabelPC:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	DeathCamLabelPC:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(DeathCamLabelPC)
 	self.DeathCamLabelPC = DeathCamLabelPC
 	self:mergeStateConditions({
@@ -41,7 +41,7 @@ CoD.WarzoneDeathCamLabelButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	end)
 	local f1_local3 = self
 	local f1_local4 = self.subscribeToModel
-	local f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local4(f1_local3, f1_local5.LastInput, function(f4_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

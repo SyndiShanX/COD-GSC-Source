@@ -20,7 +20,7 @@ CoD.EmblemEditorColorMixerContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 		{
 			stateName = "Visible",
 			condition = function(menu, element, event)
-				return CoD.CraftUtility.IsEmblemEditorPropertyEqualToEnum(f1_arg1, "colorMode", Enum[0xC594B064FEDD0D6][0xC6A5FECEA7EADAA])
+				return CoD.CraftUtility.IsEmblemEditorPropertyEqualToEnum(f1_arg1, "colorMode", Enum[@"customizationcolormode"][@"customization_color_mode_mixer"])
 			end,
 		},
 	})

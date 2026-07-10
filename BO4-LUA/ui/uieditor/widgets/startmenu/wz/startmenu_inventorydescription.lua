@@ -73,8 +73,8 @@ CoD.StartMenu_InventoryDescription.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	title:setTTF("ttmussels_demibold")
 	title:setLetterSpacing(4)
 	title:setLineSpacing(-1)
-	title:setAlignment(Engine[0x7F8853DC3581AA4](Enum[0x7A5123B654282D2][0x58C8A85F2048829]))
-	title:setAlignment(Engine[0x7F8853DC3581AA4](Enum[0x7A5123B654282D2][0x70510683C22104B]))
+	title:setAlignment(Engine[@"hash_67F8853DC3581AA4"](Enum[@"luialignment"][@"lui_alignment_left"]))
+	title:setAlignment(Engine[@"hash_67F8853DC3581AA4"](Enum[@"luialignment"][@"lui_alignment_bottom"]))
 	title:linkToElementModel(self, "name", true, function(model)
 		local f7_local0 = model:get()
 		if f7_local0 ~= nil then
@@ -144,7 +144,7 @@ CoD.StartMenu_InventoryDescription.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	self.IconWeapon = IconWeapon
 	local ArmorIcon = LUI.UIImage.new(0.5, 0.5, -43, 57, 0, 0, -42.5, 57.5)
 	ArmorIcon:setAlpha(0)
-	ArmorIcon:setMaterial(LUI.UIImage.GetCachedMaterial(0x72987F9CD841ED7))
+	ArmorIcon:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_flipbook_animated"))
 	ArmorIcon:setShaderVector(0, 10, 1, 0, 0)
 	ArmorIcon.__Frame = function(f15_arg0)
 		local f15_local0 = f15_arg0:get()
@@ -192,7 +192,7 @@ CoD.StartMenu_InventoryDescription.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	WarzoneInventoryUnlockMissionObjective:linkToElementModel(self, "description", true, function(model)
 		local f19_local0 = model:get()
 		if f19_local0 ~= nil then
-			WarzoneInventoryUnlockMissionObjective.description:setText(Engine[0xF9F1239CFD921FE](f19_local0))
+			WarzoneInventoryUnlockMissionObjective.description:setText(Engine[@"hash_4F9F1239CFD921FE"](f19_local0))
 		end
 	end)
 	WarzoneInventoryUnlockMissionObjective:linkToElementModel(self, "unlockableItemRef", true, function(model)
@@ -204,29 +204,29 @@ CoD.StartMenu_InventoryDescription.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	WarzoneInventoryUnlockMissionObjective:linkToElementModel(self, "unlockableItemRef", true, function(model)
 		local f21_local0 = model:get()
 		if f21_local0 ~= nil then
-			WarzoneInventoryUnlockMissionObjective.WarzoneInventoryUnlockMissionReward.unlockableIcon:setImage(CoD.BaseUtility.AlreadyRegistered(CoD.WZUtility.GetPreviewImageLargeFromRef(Enum[0x9C0C2196D8313A0][0xBF1DCC8138A9D39], f21_local0)))
+			WarzoneInventoryUnlockMissionObjective.WarzoneInventoryUnlockMissionReward.unlockableIcon:setImage(CoD.BaseUtility.AlreadyRegistered(CoD.WZUtility.GetPreviewImageLargeFromRef(Enum[@"emodes"][@"mode_warzone"], f21_local0)))
 		end
 	end)
 	WarzoneInventoryUnlockMissionObjective:linkToElementModel(self, "quote", true, function(model)
 		local f22_local0 = model:get()
 		if f22_local0 ~= nil then
-			WarzoneInventoryUnlockMissionObjective.WarzoneInventoryUnlockMissionReward.quote:setText(Engine[0xF9F1239CFD921FE](f22_local0))
+			WarzoneInventoryUnlockMissionObjective.WarzoneInventoryUnlockMissionReward.quote:setText(Engine[@"hash_4F9F1239CFD921FE"](f22_local0))
 		end
 	end)
 	WarzoneInventoryUnlockMissionObjective:linkToElementModel(self, "rewardName", true, function(model)
 		local f23_local0 = model:get()
 		if f23_local0 ~= nil then
-			WarzoneInventoryUnlockMissionObjective.WarzoneInventoryUnlockMissionReward.rewardName:setText(Engine[0xF9F1239CFD921FE](f23_local0))
+			WarzoneInventoryUnlockMissionObjective.WarzoneInventoryUnlockMissionReward.rewardName:setText(Engine[@"hash_4F9F1239CFD921FE"](f23_local0))
 		end
 	end)
 	self:addElement(WarzoneInventoryUnlockMissionObjective)
 	self.WarzoneInventoryUnlockMissionObjective = WarzoneInventoryUnlockMissionObjective
 	local alreadyUnlockedLabel = LUI.UIText.new(0, 0, 286, 486, 0, 0, 135.5, 165.5)
 	alreadyUnlockedLabel:setAlpha(0)
-	alreadyUnlockedLabel:setText(Engine[0xF9F1239CFD921FE](0xBA819F632BB248A))
+	alreadyUnlockedLabel:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_1BA819F632BB248A"))
 	alreadyUnlockedLabel:setTTF("default")
-	alreadyUnlockedLabel:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	alreadyUnlockedLabel:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	alreadyUnlockedLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	alreadyUnlockedLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(alreadyUnlockedLabel)
 	self.alreadyUnlockedLabel = alreadyUnlockedLabel
 	ArmorIcon:linkToElementModel(self, "armorMax", true, ArmorIcon.__Frame_FullPath)

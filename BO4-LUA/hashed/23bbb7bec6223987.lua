@@ -86,13 +86,13 @@ CoD.ReservesRevealItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	self.ReserveLarge = ReserveLarge
 	local CardWrapper = LUI.UIImage.new(0.5, 0.5, -176, 176, 0.5, 0.5, -336, 336)
 	CardWrapper:setAlpha(0)
-	CardWrapper:setImage(RegisterImage(0xB2D673208AD3DFC))
+	CardWrapper:setImage(RegisterImage(@"hash_2B2D673208AD3DFC"))
 	self:addElement(CardWrapper)
 	self.CardWrapper = CardWrapper
 	local CardReflection01 = LUI.UIImage.new(0.5, 0.5, -176, 176, 0.5, 0.5, -336, 336)
 	CardReflection01:setAlpha(0)
-	CardReflection01:setImage(RegisterImage(0x921AFF0D06B9F40))
-	CardReflection01:setMaterial(LUI.UIImage.GetCachedMaterial(0x2EEB1ECF1F211F5))
+	CardReflection01:setImage(RegisterImage(@"hash_2921AFF0D06B9F40"))
+	CardReflection01:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_delta"))
 	CardReflection01:setShaderVector(0, 0, 1, 0, 0)
 	CardReflection01:setShaderVector(1, 0, 0, 0, 0)
 	CardReflection01:setShaderVector(2, -0.06, 1, 0, 0)
@@ -111,8 +111,8 @@ CoD.ReservesRevealItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	local FocusBorder = LUI.UIImage.new(0, 1, -3, 3, 0, 1, -4, 4)
 	FocusBorder:setRGB(0.96, 0.94, 0.78)
 	FocusBorder:setAlpha(0)
-	FocusBorder:setImage(RegisterImage(0xCB07CCC28498CB2))
-	FocusBorder:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	FocusBorder:setImage(RegisterImage(@"uie_ui_menu_store_focus_frame"))
+	FocusBorder:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	FocusBorder:setShaderVector(0, 0, 0, 0, 0)
 	FocusBorder:setupNineSliceShader(10, 10)
 	self:addElement(FocusBorder)
@@ -167,7 +167,7 @@ CoD.ReservesRevealItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	self.GlowRectangle = GlowRectangle
 	local RerollCardWrapper = LUI.UIImage.new(0.5, 0.5, -176, 176, 0.5, 0.5, -336, 336)
 	RerollCardWrapper:setAlpha(0)
-	RerollCardWrapper:setImage(RegisterImage(0xB2D673208AD3DFC))
+	RerollCardWrapper:setImage(RegisterImage(@"hash_2B2D673208AD3DFC"))
 	self:addElement(RerollCardWrapper)
 	self.RerollCardWrapper = RerollCardWrapper
 	local ReservesFoilFGLoopEffects = CoD.ReservesFoilFGLoopEffects.new(f1_arg0, f1_arg1, 0.5, 0.5, -155, 155, 0.5, 0.5, -316, 316)
@@ -178,31 +178,31 @@ CoD.ReservesRevealItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 		{
 			stateName = "RevealCommon",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "rarity", Enum[0x704F69F9B0BDCEC][0xFA11ABBEBCE1980]) and CoD.ModelUtility.IsSelfModelValueTrue(element, f1_arg1, "revealed")
+				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "rarity", Enum[@"lootraritytype"][@"loot_rarity_type_common"]) and CoD.ModelUtility.IsSelfModelValueTrue(element, f1_arg1, "revealed")
 			end,
 		},
 		{
 			stateName = "RevealRare",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "rarity", Enum[0x704F69F9B0BDCEC][0x895F040FAFBECB9]) and CoD.ModelUtility.IsSelfModelValueTrue(element, f1_arg1, "revealed")
+				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "rarity", Enum[@"lootraritytype"][@"loot_rarity_type_rare"]) and CoD.ModelUtility.IsSelfModelValueTrue(element, f1_arg1, "revealed")
 			end,
 		},
 		{
 			stateName = "RevealLegendary",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "rarity", Enum[0x704F69F9B0BDCEC][0x35E4133DEF6B806]) and CoD.ModelUtility.IsSelfModelValueTrue(element, f1_arg1, "revealed")
+				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "rarity", Enum[@"lootraritytype"][@"loot_rarity_type_legendary"]) and CoD.ModelUtility.IsSelfModelValueTrue(element, f1_arg1, "revealed")
 			end,
 		},
 		{
 			stateName = "RevealEpic",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "rarity", Enum[0x704F69F9B0BDCEC][0xC3B1CFA5096734]) and CoD.ModelUtility.IsSelfModelValueTrue(element, f1_arg1, "revealed")
+				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "rarity", Enum[@"lootraritytype"][@"loot_rarity_type_epic"]) and CoD.ModelUtility.IsSelfModelValueTrue(element, f1_arg1, "revealed")
 			end,
 		},
 		{
 			stateName = "RevealUltra",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "rarity", Enum[0x704F69F9B0BDCEC][0x3006FE890A202D9]) and CoD.ModelUtility.IsSelfModelValueTrue(element, f1_arg1, "revealed")
+				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "rarity", Enum[@"lootraritytype"][@"hash_63006FE890A202D9"]) and CoD.ModelUtility.IsSelfModelValueTrue(element, f1_arg1, "revealed")
 			end,
 		},
 		{
@@ -309,7 +309,7 @@ CoD.ReservesRevealItem.__clipsPerState = {
 				local f21_local0 = function(f22_arg0)
 					local f22_local0 = function(f23_arg0)
 						local f23_local0 = function(f24_arg0)
-							f24_arg0:beginAnimation(340, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+							f24_arg0:beginAnimation(340, Enum[@"luitween"][@"luitween_ease_out"])
 							f24_arg0:setAlpha(0.2)
 							f24_arg0:setScale(0.75, 0.75)
 							f24_arg0:registerEventHandler("transition_complete_keyframe", function(element, event)
@@ -317,13 +317,13 @@ CoD.ReservesRevealItem.__clipsPerState = {
 								f20_arg0.clipFinished(element, event)
 							end)
 						end
-						f23_arg0:beginAnimation(119, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+						f23_arg0:beginAnimation(119, Enum[@"luitween"][@"luitween_ease_out"])
 						f23_arg0:setAlpha(0.7)
 						f23_arg0:setScale(0.93, 0.93)
 						f23_arg0:registerEventHandler("transition_complete_keyframe", f23_local0)
 					end
 					f22_arg0:playClip("DefaultClip")
-					f22_arg0:beginAnimation(200, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f22_arg0:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_out"])
 					f22_arg0:setAlpha(0.48)
 					f22_arg0:setScale(1, 1)
 					f22_arg0:registerEventHandler("transition_complete_keyframe", f22_local0)
@@ -346,17 +346,17 @@ CoD.ReservesRevealItem.__clipsPerState = {
 			local f20_local1 = function(f26_arg0)
 				local f26_local0 = function(f27_arg0)
 					local f27_local0 = function(f28_arg0)
-						f28_arg0:beginAnimation(19, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+						f28_arg0:beginAnimation(19, Enum[@"luitween"][@"luitween_ease_out"])
 						f28_arg0:setAlpha(1)
 						f28_arg0:setScale(1, 1)
 						f28_arg0:registerEventHandler("transition_complete_keyframe", f20_arg0.clipFinished)
 					end
-					f27_arg0:beginAnimation(80, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f27_arg0:beginAnimation(80, Enum[@"luitween"][@"luitween_ease_out"])
 					f27_arg0:setAlpha(0.9)
 					f27_arg0:setScale(0.8, 0.8)
 					f27_arg0:registerEventHandler("transition_complete_keyframe", f27_local0)
 				end
-				f20_arg0.CardWrapper:beginAnimation(150, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f20_arg0.CardWrapper:beginAnimation(150, Enum[@"luitween"][@"luitween_ease_out"])
 				f20_arg0.CardWrapper:registerEventHandler("interrupted_keyframe", f20_arg0.clipInterrupted)
 				f20_arg0.CardWrapper:registerEventHandler("transition_complete_keyframe", f26_local0)
 			end

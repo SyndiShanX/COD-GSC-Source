@@ -12,8 +12,8 @@ CoD.zm_red_challenge_text.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	ChallengeText:setText("")
 	ChallengeText:setTTF("skorzhen")
 	ChallengeText:setLetterSpacing(1)
-	ChallengeText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	ChallengeText:setAlignment(Enum[0x7A5123B654282D2][0x6ED4298C93DC5ED])
+	ChallengeText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	ChallengeText:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
 	self:addElement(ChallengeText)
 	self.ChallengeText = ChallengeText
 	self:mergeStateConditions({
@@ -55,11 +55,11 @@ CoD.zm_red_challenge_text.__clipsPerState = {
 			f6_arg0:setupElementClipCounter(1)
 			local f6_local0 = function(f7_arg0)
 				local f7_local0 = function(f8_arg0)
-					f8_arg0:beginAnimation(500, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f8_arg0:beginAnimation(500, Enum[@"luitween"][@"luitween_ease_out"])
 					f8_arg0:setRGB(0.93, 0.17, 0.17)
 					f8_arg0:registerEventHandler("transition_complete_keyframe", f6_arg0.clipFinished)
 				end
-				f6_arg0.ChallengeText:beginAnimation(500, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f6_arg0.ChallengeText:beginAnimation(500, Enum[@"luitween"][@"luitween_ease_in"])
 				f6_arg0.ChallengeText:setRGB(0.91, 0.71, 0.71)
 				f6_arg0.ChallengeText:registerEventHandler("interrupted_keyframe", f6_arg0.clipInterrupted)
 				f6_arg0.ChallengeText:registerEventHandler("transition_complete_keyframe", f7_local0)

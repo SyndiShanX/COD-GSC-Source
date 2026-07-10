@@ -12,8 +12,8 @@ CoD.WZHorizontalCompass.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Backer = LUI.UIImage.new(0, 0, -76, 864, 0, 0, 27, 79)
-	Backer:setImage(RegisterImage(0xE37F9A2EBCB414D))
-	Backer:setMaterial(LUI.UIImage.GetCachedMaterial(0xE125638BF94665F))
+	Backer:setImage(RegisterImage(@"uie_ui_hud_wz_hud_core_compass_backer"))
+	Backer:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_feather_edges"))
 	Backer:setShaderVector(0, 0.45, 0.01, 0.45, 0.01)
 	self:addElement(Backer)
 	self.Backer = Backer
@@ -23,7 +23,7 @@ CoD.WZHorizontalCompass.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	HorizontalCompassDirections:setWidgetType(CoD.WZCompassMinor)
 	HorizontalCompassDirections:setHorizontalCount(50)
 	HorizontalCompassDirections:setSpacing(0)
-	HorizontalCompassDirections:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	HorizontalCompassDirections:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	HorizontalCompassDirections:setDataSource("HorizontalCompassPips")
 	self:addElement(HorizontalCompassDirections)
 	self.HorizontalCompassDirections = HorizontalCompassDirections
@@ -33,12 +33,12 @@ CoD.WZHorizontalCompass.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	self.Corner9Slice = Corner9Slice
 	local Text = LUI.UIText.new(0, 0, 254, 534, 0, 0, 1, 31)
 	Text:setTTF("0arame_mono_stencil")
-	Text:setMaterial(LUI.UIImage.GetCachedMaterial(0x90D57B1E92D39D7))
+	Text:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_90D57B1E92D39D7"))
 	Text:setShaderVector(0, 0.8, 0, 0, 0)
 	Text:setShaderVector(1, 0, 0, 0, 0)
 	Text:setShaderVector(2, 1, 1, 1, 0.35)
-	Text:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	Text:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Text:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	Text:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	Text:subscribeToGlobalModel(f1_arg1, "HUDItems", "yaw", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -54,7 +54,7 @@ CoD.WZHorizontalCompass.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	self:addElement(HorizontalCompassItems)
 	self.HorizontalCompassItems = HorizontalCompassItems
 	local HorizontalCompassItemsAdd = LUI.UIImage.new(0, 1, 22, -22, 0, 0, 62, 108)
-	HorizontalCompassItemsAdd:setMaterial(LUI.UIImage.GetCachedMaterial(0xF755127C95CF5B6))
+	HorizontalCompassItemsAdd:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_F755127C95CF5B6"))
 	HorizontalCompassItemsAdd:setShaderVector(0, 1, 0, 0, 0)
 	HorizontalCompassItemsAdd:setupHorizontalCompassItems(180)
 	self:addElement(HorizontalCompassItemsAdd)
@@ -64,14 +64,14 @@ CoD.WZHorizontalCompass.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 			stateName = "Hidden",
 			condition = function(menu, element, event)
 				local f3_local0
-				if not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xB8E9B69F4B87954]) and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xD3ABF9A2753CE40]) and Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xADC477DDE486DD7]) then
-					f3_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04])
+				if not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_demo_all_game_hud_hidden"]) and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_demo_camera_mode_moviecam"]) and Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_hud_visible"]) then
+					f3_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_scoreboard_open"])
 					if f3_local0 then
 					else
 						return f3_local0
 					end
 				end
-				f3_local0 = not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2])
+				f3_local0 = not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_in_killcam"])
 			end,
 		},
 		{
@@ -89,62 +89,62 @@ CoD.WZHorizontalCompass.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	})
 	local f1_local7 = self
 	local f1_local8 = self.subscribeToModel
-	local f1_local9 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local8(f1_local7, f1_local9["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xB8E9B69F4B87954]], function(f6_arg0)
+	local f1_local9 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local8(f1_local7, f1_local9["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_demo_all_game_hud_hidden"]], function(f6_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f6_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xB8E9B69F4B87954],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_demo_all_game_hud_hidden"],
 		})
 	end, false)
 	f1_local7 = self
 	f1_local8 = self.subscribeToModel
-	f1_local9 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local8(f1_local7, f1_local9["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xD3ABF9A2753CE40]], function(f7_arg0)
+	f1_local9 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local8(f1_local7, f1_local9["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_demo_camera_mode_moviecam"]], function(f7_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f7_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xD3ABF9A2753CE40],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_demo_camera_mode_moviecam"],
 		})
 	end, false)
 	f1_local7 = self
 	f1_local8 = self.subscribeToModel
-	f1_local9 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local8(f1_local7, f1_local9["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xADC477DDE486DD7]], function(f8_arg0)
+	f1_local9 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local8(f1_local7, f1_local9["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_hud_visible"]], function(f8_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f8_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xADC477DDE486DD7],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_hud_visible"],
 		})
 	end, false)
 	f1_local7 = self
 	f1_local8 = self.subscribeToModel
-	f1_local9 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local8(f1_local7, f1_local9["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04]], function(f9_arg0)
+	f1_local9 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local8(f1_local7, f1_local9["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]], function(f9_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f9_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"],
 		})
 	end, false)
 	f1_local7 = self
 	f1_local8 = self.subscribeToModel
-	f1_local9 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local8(f1_local7, f1_local9["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2]], function(f10_arg0)
+	f1_local9 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local8(f1_local7, f1_local9["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"]], function(f10_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f10_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"],
 		})
 	end, false)
 	self:appendEventHandler("input_source_changed", function(f11_arg0, f11_arg1)
@@ -153,7 +153,7 @@ CoD.WZHorizontalCompass.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	end)
 	f1_local7 = self
 	f1_local8 = self.subscribeToModel
-	f1_local9 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local9 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local8(f1_local7, f1_local9.LastInput, function(f12_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -177,7 +177,7 @@ CoD.WZHorizontalCompass.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	end, false)
 	f1_local7 = self
 	f1_local8 = self.subscribeToModel
-	f1_local9 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local9 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local8(f1_local7, f1_local9.PlayerSettingsUpdate, function(f14_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

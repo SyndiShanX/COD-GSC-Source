@@ -26,8 +26,8 @@ CoD.CodCasterSettingFooter.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self:addElement(BackingBlack)
 	self.BackingBlack = BackingBlack
 	local GrainBG01 = LUI.UIImage.new(-0.14, 1.16, 149, 149, 1, 1, -253, 0)
-	GrainBG01:setImage(RegisterImage(0x1FC25912CF54567))
-	GrainBG01:setMaterial(LUI.UIImage.GetCachedMaterial(0x3C40D6180864128))
+	GrainBG01:setImage(RegisterImage(@"uie_ui_menu_director_grain_bg01"))
+	GrainBG01:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_multiplyinverse"))
 	GrainBG01:registerEventHandler("menu_loaded", function(element, event)
 		local f3_local0 = nil
 		if element.menuLoaded then

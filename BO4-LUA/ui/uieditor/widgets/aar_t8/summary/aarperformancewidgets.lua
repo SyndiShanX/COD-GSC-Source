@@ -20,7 +20,7 @@ CoD.AARPerformanceWidgets.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	self:addElement(AARKillsWidget)
 	self.AARKillsWidget = AARKillsWidget
 	local DamageStat = CoD.AARSingleStat.new(f1_arg0, f1_arg1, 0.5, 0.5, -147, 78, 0.5, 0.5, -66, 66)
-	DamageStat.StatLabel:setText(Engine[0xF9F1239CFD921FE](0x61100A6B91B62C1))
+	DamageStat.StatLabel:setText(Engine[@"hash_4F9F1239CFD921FE"](@"aar/damage"))
 	DamageStat:subscribeToGlobalModel(f1_arg1, "AARSummaryStats", "damage", function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -60,7 +60,7 @@ CoD.AARPerformanceWidgets.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 		{
 			stateName = "VisibleSolo",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg1, "AAR.activeTab", CoD.AARUtility.AARTabs.AAR_SUMMARY) and CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "gametype", 0x5F8EE90CBFFA9E7)
+				return CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg1, "AAR.activeTab", CoD.AARUtility.AARTabs.AAR_SUMMARY) and CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "gametype", @"warzone_solo")
 			end,
 		},
 		{
@@ -72,7 +72,7 @@ CoD.AARPerformanceWidgets.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	})
 	local f1_local5 = self
 	local f1_local6 = self.subscribeToModel
-	local f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local6(f1_local5, f1_local7["AAR.activeTab"], function(f10_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

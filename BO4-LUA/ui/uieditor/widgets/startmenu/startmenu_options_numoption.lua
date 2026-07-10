@@ -29,12 +29,12 @@ CoD.StartMenu_Options_NumOption.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	local ActionText = LUI.UIText.new(0, 0, 12, 352, 0.5, 0.5, -10.5, 10.5)
 	ActionText:setRGB(0.78, 0.74, 0.67)
 	ActionText:setTTF("ttmussels_regular")
-	ActionText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	ActionText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	ActionText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	ActionText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	ActionText:linkToElementModel(self, "displayText", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			ActionText:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			ActionText:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	self:addElement(ActionText)
@@ -51,14 +51,14 @@ CoD.StartMenu_Options_NumOption.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 		elseif element.super.gainFocus then
 			f3_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f3_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(leftArrow, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "MOUSE1", function(element, menu, controller, model)
-		SendButtonPressToMenuEx(menu, controller, Enum[0x3DD78803F918E9D][0x57783F8DA4AAEF])
+	f1_arg0:AddButtonCallbackFunction(leftArrow, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "MOUSE1", function(element, menu, controller, model)
+		SendButtonPressToMenuEx(menu, controller, Enum[@"luibutton"][@"lui_key_left"])
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "MOUSE1")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "MOUSE1")
 		return false
 	end, false)
 	self:addElement(leftArrow)
@@ -72,14 +72,14 @@ CoD.StartMenu_Options_NumOption.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 		elseif element.super.gainFocus then
 			f6_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f6_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(rightArrow, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "MOUSE1", function(element, menu, controller, model)
-		SendButtonPressToMenuEx(menu, controller, Enum[0x3DD78803F918E9D][0x571F08AD84807E0])
+	f1_arg0:AddButtonCallbackFunction(rightArrow, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "MOUSE1", function(element, menu, controller, model)
+		SendButtonPressToMenuEx(menu, controller, Enum[@"luibutton"][@"lui_key_right"])
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "MOUSE1")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "MOUSE1")
 		return false
 	end, false)
 	self:addElement(rightArrow)
@@ -87,8 +87,8 @@ CoD.StartMenu_Options_NumOption.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	local currentText = LUI.UIText.new(0, 0, 370, 625, 0, 0, 19.5, 40.5)
 	currentText:setRGB(0.78, 0.74, 0.67)
 	currentText:setTTF("ttmussels_regular")
-	currentText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	currentText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	currentText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	currentText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	currentText:linkToElementModel(self, "currentNum", true, function(model)
 		local f9_local0 = model:get()
 		if f9_local0 ~= nil then

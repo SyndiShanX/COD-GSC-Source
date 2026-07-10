@@ -15,22 +15,22 @@ CoD.LaboratoryListItemInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local SceneBlur = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	SceneBlur:setRGB(0, 0, 0)
-	SceneBlur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	SceneBlur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	SceneBlur:setShaderVector(0, 0, 0.4, 0, 0)
 	self:addElement(SceneBlur)
 	self.SceneBlur = SceneBlur
 	local StoneTiledBacking = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	StoneTiledBacking:setAlpha(0.8)
-	StoneTiledBacking:setImage(RegisterImage(0x33757173B476ACD))
-	StoneTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	StoneTiledBacking:setImage(RegisterImage(@"uie_ui_zm_laboratory_buttonbgtile"))
+	StoneTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	StoneTiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	StoneTiledBacking:setupNineSliceShader(196, 88)
 	self:addElement(StoneTiledBacking)
 	self.StoneTiledBacking = StoneTiledBacking
 	local NoiseTiledBacking = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	NoiseTiledBacking:setAlpha(0.3)
-	NoiseTiledBacking:setImage(RegisterImage(0x34839E8065B1E53))
-	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	NoiseTiledBacking:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	NoiseTiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	NoiseTiledBacking:setupNineSliceShader(196, 88)
 	self:addElement(NoiseTiledBacking)
@@ -47,14 +47,14 @@ CoD.LaboratoryListItemInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	self.SelectorOverlayGray = SelectorOverlayGray
 	local LightFocus = LUI.UIImage.new(-0.05, 1.05, 0.5, 0.5, 0.5, 0.5, -74.5, 84.5)
 	LightFocus:setAlpha(0)
-	LightFocus:setImage(RegisterImage(0x25B3B76F422AA08))
+	LightFocus:setImage(RegisterImage(@"uie_ui_menu_zombies_cac_special_weapon_light_focus"))
 	self:addElement(LightFocus)
 	self.LightFocus = LightFocus
 	local FocusGlow = LUI.UIImage.new(0.2, 0.8, -100, 100, 0.2, 0.8, -74, 74)
 	FocusGlow:setRGB(0.89, 0.12, 0.12)
 	FocusGlow:setAlpha(0)
-	FocusGlow:setImage(RegisterImage(0x8E79E4E42B6714C))
-	FocusGlow:setMaterial(LUI.UIImage.GetCachedMaterial(0xDAB59B2CAE01851))
+	FocusGlow:setImage(RegisterImage(@"uie_ui_menu_common_focus_glow_large"))
+	FocusGlow:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_6DAB59B2CAE01851"))
 	FocusGlow:setShaderVector(0, 0, 0, 0.25, 0.25)
 	FocusGlow:setShaderVector(1, 1.2, 0, 0, 0)
 	FocusGlow:setupNineSliceShader(300, 300)
@@ -62,8 +62,8 @@ CoD.LaboratoryListItemInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	self.FocusGlow = FocusGlow
 	local FrameBorder = LUI.UIImage.new(0, 1, -1, 1, 0, 1, -1, 1)
 	FrameBorder:setAlpha(0.15)
-	FrameBorder:setImage(RegisterImage(0x185E11D74ECA3D7))
-	FrameBorder:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	FrameBorder:setImage(RegisterImage(@"uie_ui_menu_store_common_frame"))
+	FrameBorder:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	FrameBorder:setShaderVector(0, 0, 0, 0, 0)
 	FrameBorder:setupNineSliceShader(12, 12)
 	self:addElement(FrameBorder)
@@ -74,8 +74,8 @@ CoD.LaboratoryListItemInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	self:addElement(Lines)
 	self.Lines = Lines
 	local MetalFrame = LUI.UIImage.new(0, 1, -2, 2, 0, 1, -2, 2)
-	MetalFrame:setImage(RegisterImage(0xAED94B38E8B3347))
-	MetalFrame:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	MetalFrame:setImage(RegisterImage(@"uie_ui_zm_laboratory_buttonframe"))
+	MetalFrame:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	MetalFrame:setShaderVector(0, 0, 0, 0, 0)
 	MetalFrame:setupNineSliceShader(14, 14)
 	self:addElement(MetalFrame)
@@ -83,8 +83,8 @@ CoD.LaboratoryListItemInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	local MetalFrameAdditive = LUI.UIImage.new(0, 1, -2, 2, 0, 1, -2, 2)
 	MetalFrameAdditive:setRGB(1, 0, 0)
 	MetalFrameAdditive:setAlpha(0)
-	MetalFrameAdditive:setImage(RegisterImage(0xAED94B38E8B3347))
-	MetalFrameAdditive:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	MetalFrameAdditive:setImage(RegisterImage(@"uie_ui_zm_laboratory_buttonframe"))
+	MetalFrameAdditive:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	MetalFrameAdditive:setShaderVector(0, 0, 0, 0, 0)
 	MetalFrameAdditive:setupNineSliceShader(14, 14)
 	self:addElement(MetalFrameAdditive)
@@ -128,26 +128,26 @@ CoD.LaboratoryListItemInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	self:addElement(limit)
 	self.limit = limit
 	local npIcon = LUI.UIImage.new(0.5, 0.5, -32, -2, 1, 1, -37, -7)
-	npIcon:setImage(RegisterImage(0x6C8F8292AC0F89B))
+	npIcon:setImage(RegisterImage(@"uie_t7_hud_zm_vial_256"))
 	self:addElement(npIcon)
 	self.npIcon = npIcon
 	local codpointCost = LUI.UIText.new(-0, 1, 2, -2, 1, 1, -34, -4)
 	codpointCost:setAlpha(0)
 	codpointCost:setTTF("ttmussels_demibold")
-	codpointCost:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	codpointCost:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	codpointCost:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	codpointCost:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	codpointCost:linkToElementModel(self, "price", true, function(model)
 		local f6_local0 = model:get()
 		if f6_local0 ~= nil then
-			codpointCost:setText(LocalizeIntoString(0x6A3CC7BE3008989, f6_local0))
+			codpointCost:setText(LocalizeIntoString(@"hash_56A3CC7BE3008989", f6_local0))
 		end
 	end)
 	self:addElement(codpointCost)
 	self.codpointCost = codpointCost
 	local cost = LUI.UIText.new(0.5, 0.5, 0, 179, 1, 1, -32, -4)
 	cost:setTTF("skorzhen")
-	cost:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	cost:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	cost:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	cost:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	cost:linkToElementModel(self, "plasmaPrice", true, function(model)
 		local f7_local0 = model:get()
 		if f7_local0 ~= nil then
@@ -183,8 +183,8 @@ CoD.LaboratoryListItemInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	local FocusBorder = LUI.UIImage.new(0, 1, -2, 2, 0, 1, -2, 2)
 	FocusBorder:setRGB(0.89, 0.12, 0.12)
 	FocusBorder:setAlpha(0)
-	FocusBorder:setImage(RegisterImage(0xCB07CCC28498CB2))
-	FocusBorder:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	FocusBorder:setImage(RegisterImage(@"uie_ui_menu_store_focus_frame"))
+	FocusBorder:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	FocusBorder:setShaderVector(0, 0, 0, 0, 0)
 	FocusBorder:setupNineSliceShader(6, 6)
 	self:addElement(FocusBorder)
@@ -249,7 +249,7 @@ CoD.LaboratoryListItemInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	end)
 	local f1_local20 = self
 	local f1_local21 = self.subscribeToModel
-	local f1_local22 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local22 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local21(f1_local20, f1_local22["Laboratory.disableInput"], function(f16_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -261,7 +261,7 @@ CoD.LaboratoryListItemInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	end, false)
 	f1_local20 = self
 	f1_local21 = self.subscribeToModel
-	f1_local22 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local22 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local21(f1_local20, f1_local22["Laboratory.animState"], function(f17_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

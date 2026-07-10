@@ -18,7 +18,7 @@ CoD.DemoControlsButtonRecord.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	local Backing = LUI.UIImage.new(0.5, 0.5, -19, 19, 0.5, 0.5, -14.5, -1.5)
 	Backing:setRGB(0, 0, 0)
 	Backing:setAlpha(0.85)
-	Backing:setMaterial(LUI.UIImage.GetCachedMaterial(0xE125638BF94665F))
+	Backing:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_feather_edges"))
 	Backing:setShaderVector(0, 0.05, 0.05, 0.05, 0.05)
 	self:addElement(Backing)
 	self.Backing = Backing
@@ -28,11 +28,11 @@ CoD.DemoControlsButtonRecord.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	self.icon = icon
 	local mode = LUI.UIText.new(0.5, 0.5, -19, 19, 0.5, 0.5, -14.5, -0.5)
 	mode:setScale(0.9, 0.9)
-	mode:setText(Engine[0xF9F1239CFD921FE](0xA063CCCEF2CBA6B))
+	mode:setText(Engine[@"hash_4F9F1239CFD921FE"](@"demo/rec"))
 	mode:setTTF("default")
 	mode:setLetterSpacing(0.5)
-	mode:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	mode:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	mode:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	mode:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(mode)
 	self.mode = mode
 	local progressRing = CoD.ButtonProgressRingContainer.new(f1_arg0, f1_arg1, 0.5, 0.5, -21, 21, 0, 0, 36, 78)
@@ -45,7 +45,7 @@ CoD.DemoControlsButtonRecord.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	self.progressRing = progressRing
 	local buttonPromptImage = LUI.UIImage.new(0.5, 0.5, -16, 14, 0, 0, 42, 72)
 	buttonPromptImage:setScale(0.75, 0.75)
-	buttonPromptImage:setMaterial(LUI.UIImage.GetCachedMaterial(0x67D1E3A3D2D1BF))
+	buttonPromptImage:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_saturation_normal"))
 	buttonPromptImage:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(buttonPromptImage)
 	self.buttonPromptImage = buttonPromptImage
@@ -81,9 +81,9 @@ CoD.DemoControlsButtonRecord.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 		{
 			stateName = "RecordingKBM",
 			condition = function(menu, element, event)
-				local f7_local0 = CoD.ModelUtility.IsGlobalModelValueGreaterThanEnum(f1_arg1, "demo.clipState", Enum[0x49B95FEA9765BB5][0xED467E406770E0])
+				local f7_local0 = CoD.ModelUtility.IsGlobalModelValueGreaterThanEnum(f1_arg1, "demo.clipState", Enum[@"democlipstate"][@"demo_clip_idle"])
 				if f7_local0 then
-					f7_local0 = CoD.ModelUtility.IsGlobalModelValueLessThanOrEqualToEnum(f1_arg1, "demo.clipState", Enum[0x49B95FEA9765BB5][0x5C6D1A16F28A84F])
+					f7_local0 = CoD.ModelUtility.IsGlobalModelValueLessThanOrEqualToEnum(f1_arg1, "demo.clipState", Enum[@"democlipstate"][@"demo_clip_record_continuous"])
 					if f7_local0 then
 						f7_local0 = IsMouseOrKeyboard(f1_arg1)
 					end
@@ -94,7 +94,7 @@ CoD.DemoControlsButtonRecord.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 		{
 			stateName = "Recording",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsGlobalModelValueGreaterThanEnum(f1_arg1, "demo.clipState", Enum[0x49B95FEA9765BB5][0xED467E406770E0]) and CoD.ModelUtility.IsGlobalModelValueLessThanOrEqualToEnum(f1_arg1, "demo.clipState", Enum[0x49B95FEA9765BB5][0x5C6D1A16F28A84F])
+				return CoD.ModelUtility.IsGlobalModelValueGreaterThanEnum(f1_arg1, "demo.clipState", Enum[@"democlipstate"][@"demo_clip_idle"]) and CoD.ModelUtility.IsGlobalModelValueLessThanOrEqualToEnum(f1_arg1, "demo.clipState", Enum[@"democlipstate"][@"demo_clip_record_continuous"])
 			end,
 		},
 		{
@@ -119,7 +119,7 @@ CoD.DemoControlsButtonRecord.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	end)
 	local f1_local8 = self
 	local f1_local9 = self.subscribeToModel
-	local f1_local10 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local10 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local9(f1_local8, f1_local10.LastInput, function(f12_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -131,7 +131,7 @@ CoD.DemoControlsButtonRecord.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	end, false)
 	f1_local8 = self
 	f1_local9 = self.subscribeToModel
-	f1_local10 = Engine[0x8DF2E5447F384B9]()
+	f1_local10 = Engine[@"getglobalmodel"]()
 	f1_local9(f1_local8, f1_local10["demo.clipState"], function(f13_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

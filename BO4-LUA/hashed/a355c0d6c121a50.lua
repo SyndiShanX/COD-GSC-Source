@@ -11,10 +11,10 @@ CoD.BOPassRewardsandDisclaimers.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Description = LUI.UIText.new(0.5, 0.5, -300, 827, 0, 0, 0, 27)
 	Description:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
-	Description:setText(Engine[0xF9F1239CFD921FE](0x96A0418898A8E))
+	Description:setText(Engine[@"hash_4F9F1239CFD921FE"](0x96A0418898A8E))
 	Description:setTTF("ttmussels_regular")
-	Description:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Description:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Description:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Description:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(Description)
 	self.Description = Description
 	local VerticalListSpacer = CoD.VerticalListSpacer.new(f1_arg0, f1_arg1, 0, 0, -222.5, 527.5, 0, 0, 45, 55)
@@ -25,10 +25,10 @@ CoD.BOPassRewardsandDisclaimers.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	local PCDisclaimer = nil
 	PCDisclaimer = LUI.UIText.new(0.5, 0.5, -300, 855, 0, 0, 27, 45)
 	PCDisclaimer:setRGB(ColorSet.EnemyFlagBg.r, ColorSet.EnemyFlagBg.g, ColorSet.EnemyFlagBg.b)
-	PCDisclaimer:setText(LocalizeHash(0x26FCD76A799CA42))
+	PCDisclaimer:setText(LocalizeHash(@"hash_426FCD76A799CA42"))
 	PCDisclaimer:setTTF("dinnext_regular")
-	PCDisclaimer:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	PCDisclaimer:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	PCDisclaimer:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	PCDisclaimer:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(PCDisclaimer)
 	self.PCDisclaimer = PCDisclaimer
 	self:mergeStateConditions({

@@ -12,8 +12,8 @@ CoD.PlayerStatsGauntlet.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	StatValue:setText("")
 	StatValue:setTTF("default")
 	StatValue:setLetterSpacing(2)
-	StatValue:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	StatValue:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	StatValue:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	StatValue:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(StatValue)
 	self.StatValue = StatValue
 	local StatHeaderText = LUI.UIText.new(0, 0, 0, 200, 0, 0, 0, 22)
@@ -21,7 +21,7 @@ CoD.PlayerStatsGauntlet.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	StatHeaderText:setText("")
 	StatHeaderText:setTTF("ttmussels_regular")
 	StatHeaderText:setLetterSpacing(1)
-	StatHeaderText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	StatHeaderText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(StatHeaderText)
 	self.StatHeaderText = StatHeaderText
 	self:mergeStateConditions({

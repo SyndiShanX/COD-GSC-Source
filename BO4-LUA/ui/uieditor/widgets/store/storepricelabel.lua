@@ -15,7 +15,7 @@ CoD.StorePriceLabel.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	itemName:setText("")
 	itemName:setTTF("ttmussels_regular")
 	itemName:setLetterSpacing(1.5)
-	itemName:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
+	itemName:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
 	itemName:setBackingType(1)
 	itemName:setBackingXPadding(5)
 	itemName:setBackingYPadding(4)
@@ -26,8 +26,8 @@ CoD.StorePriceLabel.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	self.itemName = itemName
 	local Glow = LUI.UIImage.new(1, 2, -202, -110, 0.5, 2.34, -29.5, -29.5)
 	Glow:setAlpha(0)
-	Glow:setImage(RegisterImage(0x5BE416E17DAB33B))
-	Glow:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Glow:setImage(RegisterImage(@"uie_t7_core_hud_mapwidget_panelglow"))
+	Glow:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Glow)
 	self.Glow = Glow
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)

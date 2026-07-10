@@ -11,7 +11,7 @@ CoD.PlayOfTheMatchGamertag.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	Gamertag:setText("")
 	Gamertag:setTTF("notosans_regular")
 	Gamertag:setLetterSpacing(6)
-	Gamertag:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
+	Gamertag:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
 	Gamertag:setBackingType(1)
 	Gamertag:setBackingWidget(CoD.PlayOfTheMatchGamertagBacking, f1_arg0, f1_arg1)
 	Gamertag:setBackingXPadding(14)

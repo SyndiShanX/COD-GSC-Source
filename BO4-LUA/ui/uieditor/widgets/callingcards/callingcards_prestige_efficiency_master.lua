@@ -1,52 +1,52 @@
-CoD[0x3B42BAF0EE85869] = InheritFrom(LUI.UIElement)
-CoD[0x3B42BAF0EE85869].__defaultWidth = 960
-CoD[0x3B42BAF0EE85869].__defaultHeight = 240
-CoD[0x3B42BAF0EE85869].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+CoD[@"hash_23B42BAF0EE85869"] = InheritFrom(LUI.UIElement)
+CoD[@"hash_23B42BAF0EE85869"].__defaultWidth = 960
+CoD[@"hash_23B42BAF0EE85869"].__defaultHeight = 240
+CoD[@"hash_23B42BAF0EE85869"].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
 	local self = LUI.UIElement.new(f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
-	self:setClass(CoD[0x3B42BAF0EE85869])
+	self:setClass(CoD[@"hash_23B42BAF0EE85869"])
 	self.id = "CallingCards_Prestige_Efficiency_Master"
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local background = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	background:setImage(RegisterImage(0xDA6F0A5C34789BF))
+	background:setImage(RegisterImage(@"uie_e_background"))
 	self:addElement(background)
 	self.background = background
 	local cast = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	cast:setImage(RegisterImage(0xF9A26F3882CFBE0))
+	cast:setImage(RegisterImage(@"uie_cast"))
 	self:addElement(cast)
 	self.cast = cast
 	local eyes3 = LUI.UIImage.new(0, 0, 765.5, 803.5, 0, 0, 85, 123)
 	eyes3:setRGB(0.98, 0.94, 0.49)
 	eyes3:setAlpha(0.99)
 	eyes3:setZRot(3)
-	eyes3:setImage(RegisterImage(0x347512D7B004BFC))
-	eyes3:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	eyes3:setImage(RegisterImage(@"uie_eyes_02"))
+	eyes3:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(eyes3)
 	self.eyes3 = eyes3
 	local eyes2 = LUI.UIImage.new(0, 0, 542.5, 606.5, 0, 0, 55.5, 119.5)
 	eyes2:setRGB(0.98, 0.94, 0.49)
 	eyes2:setAlpha(0)
 	eyes2:setZRot(-38)
-	eyes2:setImage(RegisterImage(0x347512D7B004BFC))
-	eyes2:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	eyes2:setImage(RegisterImage(@"uie_eyes_02"))
+	eyes2:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(eyes2)
 	self.eyes2 = eyes2
 	local eyes = LUI.UIImage.new(0, 0, 272, 336, 0, 0, 10, 74)
 	eyes:setRGB(0.98, 0.94, 0.49)
 	eyes:setAlpha(0.01)
 	eyes:setZRot(-28)
-	eyes:setImage(RegisterImage(0x347542D7B005115))
-	eyes:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	eyes:setImage(RegisterImage(@"uie_eyes_01"))
+	eyes:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(eyes)
 	self.eyes = eyes
 	local greenmist = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	greenmist:setImage(RegisterImage(0x6ED5E18B228B826))
+	greenmist:setImage(RegisterImage(@"uie_green_mist"))
 	self:addElement(greenmist)
 	self.greenmist = greenmist
 	local fog = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 85, 325)
 	fog:setRGB(0.11, 0.51, 0.94)
-	fog:setImage(RegisterImage(0x1D93ACCB75F9541))
-	fog:setMaterial(LUI.UIImage.GetCachedMaterial(0x84B5D1E2B428AE3))
+	fog:setImage(RegisterImage(@"uie_fog"))
+	fog:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_tile_scroll_animated"))
 	fog:setShaderVector(0, 0.11, 0, 0, 0)
 	fog:setShaderVector(1, 1, 1, 0, 0)
 	fog:setShaderVector(2, 0, 0, 0, 0)
@@ -56,8 +56,8 @@ CoD[0x3B42BAF0EE85869].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	self.fog = fog
 	local fog2 = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 85, 325)
 	fog2:setRGB(0.11, 0.51, 0.94)
-	fog2:setImage(RegisterImage(0x1D93ACCB75F9541))
-	fog2:setMaterial(LUI.UIImage.GetCachedMaterial(0x84B5D1E2B428AE3))
+	fog2:setImage(RegisterImage(@"uie_fog"))
+	fog2:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_tile_scroll_animated"))
 	fog2:setShaderVector(0, -0.11, 0, 0, 0)
 	fog2:setShaderVector(1, 1, 1, 0, 0)
 	fog2:setShaderVector(2, 0, 0, 0, 0)
@@ -68,15 +68,15 @@ CoD[0x3B42BAF0EE85869].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	local flare = LUI.UIImage.new(0, 0, 422, 1198, 0, 0, -168, 224)
 	flare:setRGB(0.18, 0.5, 1)
 	flare:setScale(0.97, 0.97)
-	flare:setImage(RegisterImage(0x5B45F8600ABC506))
-	flare:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	flare:setImage(RegisterImage(@"uie_e_light_flare"))
+	flare:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(flare)
 	self.flare = flare
 	local lightAdjustments = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
 	lightAdjustments:setRGB(0.18, 0.5, 1)
 	lightAdjustments:setAlpha(0.9)
-	lightAdjustments:setImage(RegisterImage(0xADBC8D0663F6D6F))
-	lightAdjustments:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	lightAdjustments:setImage(RegisterImage(@"uie_light_pass_adjustment"))
+	lightAdjustments:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(lightAdjustments)
 	self.lightAdjustments = lightAdjustments
 	if PostLoadFunc then
@@ -84,7 +84,7 @@ CoD[0x3B42BAF0EE85869].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	end
 	return self
 end
-CoD[0x3B42BAF0EE85869].__resetProperties = function(f2_arg0)
+CoD[@"hash_23B42BAF0EE85869"].__resetProperties = function(f2_arg0)
 	f2_arg0.fog:completeAnimation()
 	f2_arg0.fog2:completeAnimation()
 	f2_arg0.flare:completeAnimation()
@@ -113,9 +113,9 @@ CoD[0x3B42BAF0EE85869].__resetProperties = function(f2_arg0)
 	f2_arg0.eyes:setAlpha(0.01)
 	f2_arg0.eyes3:setAlpha(0.99)
 	f2_arg0.eyes2:setAlpha(0)
-	f2_arg0.greenmist:setMaterial(LUI.UIImage.GetCachedMaterial(0x6B34AA3F39208EF))
+	f2_arg0.greenmist:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_normal"))
 end
-CoD[0x3B42BAF0EE85869].__clipsPerState = {
+CoD[@"hash_23B42BAF0EE85869"].__clipsPerState = {
 	DefaultState = {
 		DefaultClip = function(f3_arg0, f3_arg1)
 			f3_arg0:__resetProperties()
@@ -252,7 +252,7 @@ CoD[0x3B42BAF0EE85869].__clipsPerState = {
 				f28_arg0:registerEventHandler("transition_complete_keyframe", f3_arg0.clipFinished)
 			end
 			f3_arg0.greenmist:beginAnimation(1350)
-			f3_arg0.greenmist:setMaterial(LUI.UIImage.GetCachedMaterial(0x6B34AA3F39208EF))
+			f3_arg0.greenmist:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_normal"))
 			f3_arg0.greenmist:registerEventHandler("interrupted_keyframe", f3_arg0.clipInterrupted)
 			f3_arg0.greenmist:registerEventHandler("transition_complete_keyframe", f3_local3)
 			local f3_local4 = function(f29_arg0)

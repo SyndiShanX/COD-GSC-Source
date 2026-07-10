@@ -58,8 +58,8 @@ CoD.PrematchCountdown_Numbers.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	local Image0 = LUI.UIImage.new(0.5, 0.5, -94, 98, 0, 0, -40, 152)
 	Image0:setRGB(0.2, 0.23, 0.3)
 	Image0:setAlpha(0.68)
-	Image0:setImage(RegisterImage(0x5BE416E17DAB33B))
-	Image0:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Image0:setImage(RegisterImage(@"uie_t7_core_hud_mapwidget_panelglow"))
+	Image0:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Image0)
 	self.Image0 = Image0
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)
@@ -142,7 +142,7 @@ CoD.PrematchCountdown_Numbers.__clipsPerState = {
 						f8_arg0:setAlpha(0)
 						f8_arg0:registerEventHandler("transition_complete_keyframe", f8_local0)
 					end
-					f7_arg0:beginAnimation(250, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f7_arg0:beginAnimation(250, Enum[@"luitween"][@"luitween_ease_out"])
 					f7_arg0:setTopBottom(0.5, 0.5, 87, 91)
 					f7_arg0:setAlpha(0.76)
 					f7_arg0:registerEventHandler("transition_complete_keyframe", f7_local0)
@@ -160,7 +160,7 @@ CoD.PrematchCountdown_Numbers.__clipsPerState = {
 			f4_local1(f4_arg0.LineBottom)
 			local f4_local2 = function(f11_arg0)
 				local f11_local0 = function(f12_arg0)
-					f12_arg0:beginAnimation(110, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f12_arg0:beginAnimation(110, Enum[@"luitween"][@"luitween_ease_out"])
 					f12_arg0:setTopBottom(0.5, 0.5, -45, 53)
 					f12_arg0:registerEventHandler("transition_complete_keyframe", f4_arg0.clipFinished)
 				end
@@ -207,7 +207,7 @@ CoD.PrematchCountdown_Numbers.__clipsPerState = {
 						f15_arg0:setAlpha(0.5)
 						f15_arg0:registerEventHandler("transition_complete_keyframe", f15_local0)
 					end
-					f14_arg0:beginAnimation(89, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f14_arg0:beginAnimation(89, Enum[@"luitween"][@"luitween_ease_out"])
 					f14_arg0:setTopBottom(0.5, 0.5, -44.5, 60.5)
 					f14_arg0:setAlpha(1)
 					f14_arg0:registerEventHandler("transition_complete_keyframe", f14_local0)
@@ -292,7 +292,7 @@ CoD.PrematchCountdown_Numbers.__clipsPerState = {
 												f40_arg0:setAlpha(0)
 												f40_arg0:registerEventHandler("transition_complete_keyframe", f40_local0)
 											end
-											f39_arg0:beginAnimation(169, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+											f39_arg0:beginAnimation(169, Enum[@"luitween"][@"luitween_ease_both"])
 											f39_arg0:setLeftRight(0, 0, 858, 864)
 											f39_arg0:setTopBottom(0, 0, 119, 125)
 											f39_arg0:registerEventHandler("transition_complete_keyframe", f39_local0)
@@ -300,7 +300,7 @@ CoD.PrematchCountdown_Numbers.__clipsPerState = {
 										f38_arg0:beginAnimation(60)
 										f38_arg0:registerEventHandler("transition_complete_keyframe", f38_local0)
 									end
-									f37_arg0:beginAnimation(160, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+									f37_arg0:beginAnimation(160, Enum[@"luitween"][@"luitween_ease_both"])
 									f37_arg0:setLeftRight(0, 0, 864, 870)
 									f37_arg0:registerEventHandler("transition_complete_keyframe", f37_local0)
 								end
@@ -350,14 +350,14 @@ CoD.PrematchCountdown_Numbers.__clipsPerState = {
 												f51_arg0:setAlpha(0)
 												f51_arg0:registerEventHandler("transition_complete_keyframe", f51_local0)
 											end
-											f50_arg0:beginAnimation(169, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+											f50_arg0:beginAnimation(169, Enum[@"luitween"][@"luitween_ease_both"])
 											f50_arg0:setTopBottom(0, 0, 119, 125)
 											f50_arg0:registerEventHandler("transition_complete_keyframe", f50_local0)
 										end
 										f49_arg0:beginAnimation(60)
 										f49_arg0:registerEventHandler("transition_complete_keyframe", f49_local0)
 									end
-									f48_arg0:beginAnimation(160, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+									f48_arg0:beginAnimation(160, Enum[@"luitween"][@"luitween_ease_both"])
 									f48_arg0:setLeftRight(0, 0, 1057, 1063)
 									f48_arg0:registerEventHandler("transition_complete_keyframe", f48_local0)
 								end
@@ -407,14 +407,14 @@ CoD.PrematchCountdown_Numbers.__clipsPerState = {
 												f62_arg0:setAlpha(0)
 												f62_arg0:registerEventHandler("transition_complete_keyframe", f62_local0)
 											end
-											f61_arg0:beginAnimation(169, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+											f61_arg0:beginAnimation(169, Enum[@"luitween"][@"luitween_ease_both"])
 											f61_arg0:setLeftRight(0, 0, 858, 864)
 											f61_arg0:registerEventHandler("transition_complete_keyframe", f61_local0)
 										end
 										f60_arg0:beginAnimation(70)
 										f60_arg0:registerEventHandler("transition_complete_keyframe", f60_local0)
 									end
-									f59_arg0:beginAnimation(150, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+									f59_arg0:beginAnimation(150, Enum[@"luitween"][@"luitween_ease_both"])
 									f59_arg0:setLeftRight(0, 0, 864, 870)
 									f59_arg0:registerEventHandler("transition_complete_keyframe", f59_local0)
 								end
@@ -464,13 +464,13 @@ CoD.PrematchCountdown_Numbers.__clipsPerState = {
 												f73_arg0:setAlpha(0)
 												f73_arg0:registerEventHandler("transition_complete_keyframe", f73_local0)
 											end
-											f72_arg0:beginAnimation(169, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+											f72_arg0:beginAnimation(169, Enum[@"luitween"][@"luitween_ease_both"])
 											f72_arg0:registerEventHandler("transition_complete_keyframe", f72_local0)
 										end
 										f71_arg0:beginAnimation(60)
 										f71_arg0:registerEventHandler("transition_complete_keyframe", f71_local0)
 									end
-									f70_arg0:beginAnimation(160, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+									f70_arg0:beginAnimation(160, Enum[@"luitween"][@"luitween_ease_both"])
 									f70_arg0:setLeftRight(0, 0, 1057, 1063)
 									f70_arg0:registerEventHandler("transition_complete_keyframe", f70_local0)
 								end
@@ -582,7 +582,7 @@ CoD.PrematchCountdown_Numbers.__clipsPerState = {
 						f85_arg0:setAlpha(0)
 						f85_arg0:registerEventHandler("transition_complete_keyframe", f85_local0)
 					end
-					f84_arg0:beginAnimation(120, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f84_arg0:beginAnimation(120, Enum[@"luitween"][@"luitween_ease_both"])
 					f84_arg0:setTopBottom(0.5, 0.5, -30, -26)
 					f84_arg0:registerEventHandler("transition_complete_keyframe", f84_local0)
 				end
@@ -597,7 +597,7 @@ CoD.PrematchCountdown_Numbers.__clipsPerState = {
 			f81_local1(f81_arg0.LineBottom)
 			local f81_local2 = function(f93_arg0)
 				local f93_local0 = function(f94_arg0)
-					f94_arg0:beginAnimation(130, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f94_arg0:beginAnimation(130, Enum[@"luitween"][@"luitween_ease_in"])
 					f94_arg0:setTopBottom(0.5, 0.5, -45.5, -42.5)
 					f94_arg0:registerEventHandler("transition_complete_keyframe", f81_arg0.clipFinished)
 				end
@@ -741,14 +741,14 @@ CoD.PrematchCountdown_Numbers.__clipsPerState = {
 								f117_arg0:setAlpha(0)
 								f117_arg0:registerEventHandler("transition_complete_keyframe", f117_local0)
 							end
-							f116_arg0:beginAnimation(90, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+							f116_arg0:beginAnimation(90, Enum[@"luitween"][@"luitween_ease_both"])
 							f116_arg0:setLeftRight(0, 0, 960, 966)
 							f116_arg0:registerEventHandler("transition_complete_keyframe", f116_local0)
 						end
 						f115_arg0:beginAnimation(50)
 						f115_arg0:registerEventHandler("transition_complete_keyframe", f115_local0)
 					end
-					f114_arg0:beginAnimation(110, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f114_arg0:beginAnimation(110, Enum[@"luitween"][@"luitween_ease_both"])
 					f114_arg0:setLeftRight(0, 0, 864, 870)
 					f114_arg0:setTopBottom(0, 0, 24, 30)
 					f114_arg0:registerEventHandler("transition_complete_keyframe", f114_local0)
@@ -803,14 +803,14 @@ CoD.PrematchCountdown_Numbers.__clipsPerState = {
 								f129_arg0:setAlpha(0)
 								f129_arg0:registerEventHandler("transition_complete_keyframe", f129_local0)
 							end
-							f128_arg0:beginAnimation(90, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+							f128_arg0:beginAnimation(90, Enum[@"luitween"][@"luitween_ease_both"])
 							f128_arg0:setLeftRight(0, 0, 960, 966)
 							f128_arg0:registerEventHandler("transition_complete_keyframe", f128_local0)
 						end
 						f127_arg0:beginAnimation(50)
 						f127_arg0:registerEventHandler("transition_complete_keyframe", f127_local0)
 					end
-					f126_arg0:beginAnimation(110, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f126_arg0:beginAnimation(110, Enum[@"luitween"][@"luitween_ease_both"])
 					f126_arg0:setTopBottom(0, 0, 24, 30)
 					f126_arg0:registerEventHandler("transition_complete_keyframe", f126_local0)
 				end
@@ -864,14 +864,14 @@ CoD.PrematchCountdown_Numbers.__clipsPerState = {
 								f141_arg0:setAlpha(0)
 								f141_arg0:registerEventHandler("transition_complete_keyframe", f141_local0)
 							end
-							f140_arg0:beginAnimation(90, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+							f140_arg0:beginAnimation(90, Enum[@"luitween"][@"luitween_ease_both"])
 							f140_arg0:setLeftRight(0, 0, 959, 965)
 							f140_arg0:registerEventHandler("transition_complete_keyframe", f140_local0)
 						end
 						f139_arg0:beginAnimation(50)
 						f139_arg0:registerEventHandler("transition_complete_keyframe", f139_local0)
 					end
-					f138_arg0:beginAnimation(110, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f138_arg0:beginAnimation(110, Enum[@"luitween"][@"luitween_ease_both"])
 					f138_arg0:setLeftRight(0, 0, 864, 870)
 					f138_arg0:setTopBottom(0, 0, 24, 30)
 					f138_arg0:registerEventHandler("transition_complete_keyframe", f138_local0)
@@ -926,14 +926,14 @@ CoD.PrematchCountdown_Numbers.__clipsPerState = {
 								f153_arg0:setAlpha(0)
 								f153_arg0:registerEventHandler("transition_complete_keyframe", f153_local0)
 							end
-							f152_arg0:beginAnimation(90, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+							f152_arg0:beginAnimation(90, Enum[@"luitween"][@"luitween_ease_both"])
 							f152_arg0:setLeftRight(0, 0, 960, 966)
 							f152_arg0:registerEventHandler("transition_complete_keyframe", f152_local0)
 						end
 						f151_arg0:beginAnimation(50)
 						f151_arg0:registerEventHandler("transition_complete_keyframe", f151_local0)
 					end
-					f150_arg0:beginAnimation(110, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f150_arg0:beginAnimation(110, Enum[@"luitween"][@"luitween_ease_both"])
 					f150_arg0:setTopBottom(0, 0, 24, 30)
 					f150_arg0:registerEventHandler("transition_complete_keyframe", f150_local0)
 				end
@@ -985,7 +985,7 @@ CoD.PrematchCountdown_Numbers.__clipsPerState = {
 						f163_arg0:setAlpha(0)
 						f163_arg0:registerEventHandler("transition_complete_keyframe", f163_local0)
 					end
-					f162_arg0:beginAnimation(120, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f162_arg0:beginAnimation(120, Enum[@"luitween"][@"luitween_ease_both"])
 					f162_arg0:setTopBottom(0.5, 0.5, -27, -23)
 					f162_arg0:registerEventHandler("transition_complete_keyframe", f162_local0)
 				end

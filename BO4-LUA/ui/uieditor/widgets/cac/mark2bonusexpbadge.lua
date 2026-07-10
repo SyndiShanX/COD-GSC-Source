@@ -11,15 +11,15 @@ CoD.Mark2BonusExpBadge.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	Text:setRGB(0.22, 0.93, 1)
 	Text:setZoom(3)
 	Text:setScale(LanguageOverrideNumberForScale("korean", 0.9, LanguageOverrideNumberForScale("chinese", 0.9, 1, 1)))
-	Text:setText(LocalizeToUpperString(0xDF923C238938C67))
+	Text:setText(LocalizeToUpperString(@"hash_6DF923C238938C67"))
 	Text:setTTF("ttmussels_demibold")
 	Text:setLetterSpacing(2)
-	Text:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Text:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Text:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Text:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	Text:setBackingType(2)
 	Text:setBackingColor(0.13, 0.25, 0.6)
 	Text:setBackingXPadding(3)
-	Text:setBackingMaterial(LUI.UIImage.GetCachedMaterial(0xDE760AC0E801E57))
+	Text:setBackingMaterial(LUI.UIImage.GetCachedMaterial(@"uie_gradient_normal"))
 	Text:setBackingShaderVector(0, 1, 1, 1, 1)
 	Text:setBackingShaderVector(1, 0, 0, 0, 0)
 	Text:setBackingShaderVector(2, 0.5, 0, 0, 0)
@@ -126,7 +126,7 @@ CoD.Mark2BonusExpBadge.__resetProperties = function(f9_arg0)
 	f9_arg0.Text:setTopBottom(0, 0, 1, 16)
 	f9_arg0.Text:setRGB(0.22, 0.93, 1)
 	f9_arg0.Text:setAlpha(1)
-	f9_arg0.Text:setText(LocalizeToUpperString(0xDF923C238938C67))
+	f9_arg0.Text:setText(LocalizeToUpperString(@"hash_6DF923C238938C67"))
 end
 CoD.Mark2BonusExpBadge.__clipsPerState = {
 	DefaultState = {
@@ -145,7 +145,7 @@ CoD.Mark2BonusExpBadge.__clipsPerState = {
 			f11_arg0.Text:completeAnimation()
 			f11_arg0.Text:setTopBottom(0, 0, 3, 16)
 			f11_arg0.Text:setRGB(0.22, 0.94, 1)
-			f11_arg0.Text:setText(LocalizeToUpperString(0x8DC8ECEFEBF1515))
+			f11_arg0.Text:setText(LocalizeToUpperString(@"hash_18DC8ECEFEBF1515"))
 			f11_arg0.clipFinished(f11_arg0.Text)
 		end,
 	},
@@ -165,7 +165,7 @@ CoD.Mark2BonusExpBadge.__clipsPerState = {
 			f13_arg0:setupElementClipCounter(1)
 			f13_arg0.Text:completeAnimation()
 			f13_arg0.Text:setTopBottom(0, 0, -2, 16)
-			f13_arg0.Text:setText(LocalizeToUpperString(0x8DC8ECEFEBF1515))
+			f13_arg0.Text:setText(LocalizeToUpperString(@"hash_18DC8ECEFEBF1515"))
 			f13_arg0.clipFinished(f13_arg0.Text)
 		end,
 	},

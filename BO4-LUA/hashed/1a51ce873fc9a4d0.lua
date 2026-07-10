@@ -16,7 +16,7 @@ CoD.StartMenu_Inventory_WeaponsDisplayPC.new = function(f1_arg0, f1_arg1, f1_arg
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Blur = LUI.UIImage.new(1, 1, -449, 1, 0, 0, 0, 251)
-	Blur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	Blur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	Blur:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(Blur)
 	self.Blur = Blur
@@ -27,8 +27,8 @@ CoD.StartMenu_Inventory_WeaponsDisplayPC.new = function(f1_arg0, f1_arg1, f1_arg
 	self.Background = Background
 	local TiledBacking = LUI.UIImage.new(1, 1, -449, 1, 0, 0, 0, 433)
 	TiledBacking:setAlpha(0.5)
-	TiledBacking:setImage(RegisterImage(0x34839E8065B1E53))
-	TiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	TiledBacking:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	TiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	TiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	TiledBacking:setupNineSliceShader(196, 88)
 	self:addElement(TiledBacking)
@@ -36,8 +36,8 @@ CoD.StartMenu_Inventory_WeaponsDisplayPC.new = function(f1_arg0, f1_arg1, f1_arg
 	local GridTiled = LUI.UIImage.new(1, 1, -448.5, 0.5, 0, 0, 32, 443)
 	GridTiled:setAlpha(0.55)
 	GridTiled:setScale(1, 1)
-	GridTiled:setImage(RegisterImage(0xCA386792563DE8))
-	GridTiled:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	GridTiled:setImage(RegisterImage(@"uie_ui_menu_store_bg_grid"))
+	GridTiled:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	GridTiled:setShaderVector(0, 0, 0, 0, 0)
 	GridTiled:setupNineSliceShader(64, 64)
 	self:addElement(GridTiled)
@@ -75,21 +75,21 @@ CoD.StartMenu_Inventory_WeaponsDisplayPC.new = function(f1_arg0, f1_arg1, f1_arg
 		end
 		CoD.WZUtility.SetElementModelToElementWeaponModel(f1_arg1, element, self)
 		CoD.WZUtility.UpdateWZInventoryTooltipOnElementPC(f1_arg1, element)
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f5_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(WeaponVignette, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(WeaponVignette, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		CoD.WZUtility.SwitchToNextWeapon(controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 		return false
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(WeaponVignette, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "MOUSE1", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(WeaponVignette, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "MOUSE1", function(element, menu, controller, model)
 		CoD.WZUtility.SwitchToNextWeapon(controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "MOUSE1")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "MOUSE1")
 		return false
 	end, false)
 	self:addElement(WeaponVignette)
@@ -97,11 +97,11 @@ CoD.StartMenu_Inventory_WeaponsDisplayPC.new = function(f1_arg0, f1_arg1, f1_arg
 	local GamepadText = LUI.UIText.new(1, 1, -449, 1, 0, 0, 0, 21)
 	GamepadText:setRGB(0.55, 0.54, 0.49)
 	GamepadText:setAlpha(0)
-	GamepadText:setText(LocalizeToUpperString(0x23D1BB78E8AA44))
+	GamepadText:setText(LocalizeToUpperString(@"menu/switch_weapon"))
 	GamepadText:setTTF("ttmussels_regular")
 	GamepadText:setLetterSpacing(4)
-	GamepadText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	GamepadText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	GamepadText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	GamepadText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(GamepadText)
 	self.GamepadText = GamepadText
 	local SwitchWeaponImage = LUI.UIImage.new(1, 1, -72, -51, 0, 0, 0, 21)
@@ -135,7 +135,7 @@ CoD.StartMenu_Inventory_WeaponsDisplayPC.new = function(f1_arg0, f1_arg1, f1_arg
 	end)
 	local WeaponAttachmentsSmall = WeaponHeader
 	local WeaponAttachments = WeaponHeader.subscribeToModel
-	local DropAndDetachButtonPC = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local DropAndDetachButtonPC = Engine[@"getmodelforcontroller"](f1_arg1)
 	WeaponAttachments(WeaponAttachmentsSmall, DropAndDetachButtonPC.LastInput, function(f14_arg0)
 		f1_arg0:updateElementState(WeaponHeader, {
 			name = "model_validation",
@@ -158,7 +158,7 @@ CoD.StartMenu_Inventory_WeaponsDisplayPC.new = function(f1_arg0, f1_arg1, f1_arg
 		})
 	end, false)
 	WeaponHeader:linkToElementModel(WeaponHeader, "hasAttachments", true, function(model, f16_arg1)
-		CoD.Menu.UpdateButtonShownState(f16_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(f16_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_none"])
 	end)
 	WeaponHeader:registerEventHandler("gain_focus", function(element, event)
 		local f17_local0 = nil
@@ -167,18 +167,18 @@ CoD.StartMenu_Inventory_WeaponsDisplayPC.new = function(f1_arg0, f1_arg1, f1_arg
 		elseif element.super.gainFocus then
 			f17_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_none"])
 		return f17_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(WeaponHeader, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(WeaponHeader, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		CoD.WZUtility.SwitchToNextWeapon(controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 		return false
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(WeaponHeader, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "ui_remove", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(WeaponHeader, f1_arg1, Enum[@"luibutton"][@"lui_key_none"], "ui_remove", function(element, menu, controller, model)
 		if not CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) then
 			CoD.WZUtility.SendInventoryDropWeaponInSlotNotify(controller, self.weaponId)
 			return true
@@ -186,13 +186,13 @@ CoD.StartMenu_Inventory_WeaponsDisplayPC.new = function(f1_arg0, f1_arg1, f1_arg
 		end
 	end, function(element, menu, controller)
 		if not CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0xFFD03BF8361AC75, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "ui_remove")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"warzone/drop", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "ui_remove")
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(WeaponHeader, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "F", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(WeaponHeader, f1_arg1, Enum[@"luibutton"][@"lui_key_none"], "F", function(element, menu, controller, model)
 		if not CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and CoD.ModelUtility.IsSelfModelValueEqualTo(self, controller, "hasAttachments", 0) then
 			CoD.WZUtility.SendInventoryDropWeaponInSlotAndDetachNotify(controller, self.weaponId)
 			return true
@@ -200,7 +200,7 @@ CoD.StartMenu_Inventory_WeaponsDisplayPC.new = function(f1_arg0, f1_arg1, f1_arg
 		end
 	end, function(element, menu, controller)
 		if not CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and CoD.ModelUtility.IsSelfModelValueEqualTo(self, controller, "hasAttachments", 0) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x94D6AF2F50BEFEF, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "F")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_294D6AF2F50BEFEF", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "F")
 			return true
 		else
 			return false
@@ -210,7 +210,7 @@ CoD.StartMenu_Inventory_WeaponsDisplayPC.new = function(f1_arg0, f1_arg1, f1_arg
 		CoD.WZUtility.SetWeaponHeaderTexts(self, WeaponHeader)
 	end
 	f1_arg0:addMenuOpenedCallback(self.__on_menuOpened_WeaponHeader)
-	WeaponHeader:AddContextualMenuAction(f1_arg0, f1_arg1, 0xFFD03BF8361AC75, function(f25_arg0, f25_arg1, f25_arg2, f25_arg3)
+	WeaponHeader:AddContextualMenuAction(f1_arg0, f1_arg1, @"warzone/drop", function(f25_arg0, f25_arg1, f25_arg2, f25_arg3)
 		if not CoD.WZUtility.ScoreboardVisibilitySetAndPC(f25_arg2) then
 			return function(f26_arg0, f26_arg1, f26_arg2, f26_arg3)
 				CoD.WZUtility.SendInventoryDropWeaponInSlotNotify(f26_arg2, self.weaponId)
@@ -218,7 +218,7 @@ CoD.StartMenu_Inventory_WeaponsDisplayPC.new = function(f1_arg0, f1_arg1, f1_arg
 		else
 		end
 	end)
-	WeaponHeader:AddContextualMenuAction(f1_arg0, f1_arg1, 0x94D6AF2F50BEFEF, function(f27_arg0, f27_arg1, f27_arg2, f27_arg3)
+	WeaponHeader:AddContextualMenuAction(f1_arg0, f1_arg1, @"hash_294D6AF2F50BEFEF", function(f27_arg0, f27_arg1, f27_arg2, f27_arg3)
 		if not CoD.WZUtility.ScoreboardVisibilitySetAndPC(f27_arg2) and CoD.ModelUtility.IsSelfModelValueEqualTo(self, f27_arg2, "hasAttachments", 1) then
 			return function(f28_arg0, f28_arg1, f28_arg2, f28_arg3)
 				CoD.WZUtility.SendInventoryDropWeaponInSlotAndDetachNotify(f28_arg2, self.weaponId)
@@ -236,72 +236,72 @@ CoD.StartMenu_Inventory_WeaponsDisplayPC.new = function(f1_arg0, f1_arg1, f1_arg
 	WeaponAttachments:setHorizontalCount(3)
 	WeaponAttachments:setVerticalCount(2)
 	WeaponAttachments:setSpacing(40)
-	WeaponAttachments:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	WeaponAttachments:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	WeaponAttachments:appendEventHandler("input_source_changed", function(f29_arg0, f29_arg1)
 		f29_arg1.menu = f29_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f29_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f29_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x6CE8023188D673F])
-		CoD.Menu.UpdateButtonShownState(f29_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x22361E23588705A])
-		CoD.Menu.UpdateButtonShownState(f29_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(f29_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
-		CoD.Menu.UpdateButtonShownState(f29_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC])
-		CoD.Menu.UpdateButtonShownState(f29_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x4D2505E19049444])
-		CoD.Menu.UpdateButtonShownState(f29_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
+		CoD.Menu.UpdateButtonShownState(f29_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f29_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_lstick_pressed"])
+		CoD.Menu.UpdateButtonShownState(f29_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_start"])
+		CoD.Menu.UpdateButtonShownState(f29_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(f29_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+		CoD.Menu.UpdateButtonShownState(f29_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_ltrig"])
+		CoD.Menu.UpdateButtonShownState(f29_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"hash_64D2505E19049444"])
+		CoD.Menu.UpdateButtonShownState(f29_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"])
 	end)
 	DropAndDetachButtonPC = WeaponAttachments
 	WeaponAttachmentsSmall = WeaponAttachments.subscribeToModel
-	local DropButtonPC = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local DropButtonPC = Engine[@"getmodelforcontroller"](f1_arg1)
 	WeaponAttachmentsSmall(DropAndDetachButtonPC, DropButtonPC.LastInput, function(f30_arg0, f30_arg1)
-		CoD.Menu.UpdateButtonShownState(f30_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f30_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x6CE8023188D673F])
-		CoD.Menu.UpdateButtonShownState(f30_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x22361E23588705A])
-		CoD.Menu.UpdateButtonShownState(f30_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(f30_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
-		CoD.Menu.UpdateButtonShownState(f30_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC])
-		CoD.Menu.UpdateButtonShownState(f30_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x4D2505E19049444])
-		CoD.Menu.UpdateButtonShownState(f30_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
+		CoD.Menu.UpdateButtonShownState(f30_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f30_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_lstick_pressed"])
+		CoD.Menu.UpdateButtonShownState(f30_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_start"])
+		CoD.Menu.UpdateButtonShownState(f30_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(f30_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+		CoD.Menu.UpdateButtonShownState(f30_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_ltrig"])
+		CoD.Menu.UpdateButtonShownState(f30_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"hash_64D2505E19049444"])
+		CoD.Menu.UpdateButtonShownState(f30_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"])
 	end, false)
 	WeaponAttachments:linkToElementModel(WeaponAttachments, "id", true, function(model, f31_arg1)
-		CoD.Menu.UpdateButtonShownState(f31_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f31_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x6CE8023188D673F])
-		CoD.Menu.UpdateButtonShownState(f31_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x22361E23588705A])
-		CoD.Menu.UpdateButtonShownState(f31_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(f31_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
-		CoD.Menu.UpdateButtonShownState(f31_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC])
-		CoD.Menu.UpdateButtonShownState(f31_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
-		CoD.Menu.UpdateButtonShownState(f31_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x4D2505E19049444])
-		CoD.Menu.UpdateButtonShownState(f31_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
+		CoD.Menu.UpdateButtonShownState(f31_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f31_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_lstick_pressed"])
+		CoD.Menu.UpdateButtonShownState(f31_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_start"])
+		CoD.Menu.UpdateButtonShownState(f31_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(f31_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+		CoD.Menu.UpdateButtonShownState(f31_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_ltrig"])
+		CoD.Menu.UpdateButtonShownState(f31_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_none"])
+		CoD.Menu.UpdateButtonShownState(f31_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"hash_64D2505E19049444"])
+		CoD.Menu.UpdateButtonShownState(f31_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"])
 	end)
 	DropAndDetachButtonPC = WeaponAttachments
 	WeaponAttachmentsSmall = WeaponAttachments.subscribeToModel
-	DropButtonPC = Engine[0x4DF5CFBC1771947](f1_arg1)
+	DropButtonPC = Engine[@"getmodelforcontroller"](f1_arg1)
 	WeaponAttachmentsSmall(DropAndDetachButtonPC, DropButtonPC["hudItems.inventory.count"], function(f32_arg0, f32_arg1)
-		CoD.Menu.UpdateButtonShownState(f32_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f32_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x6CE8023188D673F])
-		CoD.Menu.UpdateButtonShownState(f32_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC])
-		CoD.Menu.UpdateButtonShownState(f32_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(f32_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f32_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_lstick_pressed"])
+		CoD.Menu.UpdateButtonShownState(f32_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_ltrig"])
+		CoD.Menu.UpdateButtonShownState(f32_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_none"])
 	end, false)
 	DropAndDetachButtonPC = WeaponAttachments
 	WeaponAttachmentsSmall = WeaponAttachments.subscribeToModel
-	DropButtonPC = Engine[0x4DF5CFBC1771947](f1_arg1)
+	DropButtonPC = Engine[@"getmodelforcontroller"](f1_arg1)
 	WeaponAttachmentsSmall(DropAndDetachButtonPC, DropButtonPC["hudItems.inventory.filledSlots"], function(f33_arg0, f33_arg1)
-		CoD.Menu.UpdateButtonShownState(f33_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f33_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x6CE8023188D673F])
-		CoD.Menu.UpdateButtonShownState(f33_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC])
-		CoD.Menu.UpdateButtonShownState(f33_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(f33_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f33_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_lstick_pressed"])
+		CoD.Menu.UpdateButtonShownState(f33_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_ltrig"])
+		CoD.Menu.UpdateButtonShownState(f33_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_none"])
 	end, false)
 	DropAndDetachButtonPC = WeaponAttachments
 	WeaponAttachmentsSmall = WeaponAttachments.subscribeToModel
-	DropButtonPC = Engine[0x4DF5CFBC1771947](f1_arg1)
+	DropButtonPC = Engine[@"getmodelforcontroller"](f1_arg1)
 	WeaponAttachmentsSmall(DropAndDetachButtonPC, DropButtonPC["hudItems.inventory.shard0.stackCount"], function(f34_arg0, f34_arg1)
-		CoD.Menu.UpdateButtonShownState(f34_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f34_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x6CE8023188D673F])
-		CoD.Menu.UpdateButtonShownState(f34_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC])
-		CoD.Menu.UpdateButtonShownState(f34_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(f34_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f34_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_lstick_pressed"])
+		CoD.Menu.UpdateButtonShownState(f34_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_ltrig"])
+		CoD.Menu.UpdateButtonShownState(f34_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_none"])
 	end, false)
 	WeaponAttachments:linkToElementModel(WeaponAttachments, "canTransferAttachment", true, function(model, f35_arg1)
-		CoD.Menu.UpdateButtonShownState(f35_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x22361E23588705A])
-		CoD.Menu.UpdateButtonShownState(f35_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
+		CoD.Menu.UpdateButtonShownState(f35_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_start"])
+		CoD.Menu.UpdateButtonShownState(f35_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"])
 	end)
 	WeaponAttachments:registerEventHandler("list_item_gain_focus", function(element, event)
 		local f36_local0 = nil
@@ -320,18 +320,18 @@ CoD.StartMenu_Inventory_WeaponsDisplayPC.new = function(f1_arg0, f1_arg1, f1_arg
 		elseif element.super.gainFocus then
 			f37_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x6CE8023188D673F])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x22361E23588705A])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x4D2505E19049444])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_lstick_pressed"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_start"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_ltrig"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_none"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"hash_64D2505E19049444"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"])
 		return f37_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(WeaponAttachments, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(WeaponAttachments, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], nil, function(element, menu, controller, model)
 		if IsGamepad(controller) and not CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and not CoD.WZUtility.InventoryFull(controller) then
 			CoD.WZUtility.SendInventoryDetachNotify(controller, element)
 			return true
@@ -339,13 +339,13 @@ CoD.StartMenu_Inventory_WeaponsDisplayPC.new = function(f1_arg0, f1_arg1, f1_arg
 		end
 	end, function(element, menu, controller)
 		if IsGamepad(controller) and not CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and not CoD.WZUtility.InventoryFull(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x6099347F51AF260, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3] | Enum[0xBEBDBAEEB3ECCCA][0x2919C98A7A845F0] | 400 << Enum[0xBEBDBAEEB3ECCCA][0x76ADD225D738C93], nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"menu/detach", Enum[@"luibuttonpromptflags"][@"bpf_contextual"] | Enum[@"luibuttonpromptflags"][@"hash_72919C98A7A845F0"] | 400 << Enum[@"luibuttonpromptflags"][@"hash_176ADD225D738C93"], nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(WeaponAttachments, f1_arg1, Enum[0x3DD78803F918E9D][0x6CE8023188D673F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(WeaponAttachments, f1_arg1, Enum[@"luibutton"][@"lui_key_lstick_pressed"], "ui_confirm", function(element, menu, controller, model)
 		if IsMouseOrKeyboard(controller) and not CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and not CoD.WZUtility.InventoryFull(controller) then
 			CoD.WZUtility.SendInventoryDetachNotify(controller, element)
 			return true
@@ -353,13 +353,13 @@ CoD.StartMenu_Inventory_WeaponsDisplayPC.new = function(f1_arg0, f1_arg1, f1_arg
 		end
 	end, function(element, menu, controller)
 		if IsMouseOrKeyboard(controller) and not CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and not CoD.WZUtility.InventoryFull(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x6CE8023188D673F], 0x6099347F51AF260, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_lstick_pressed"], @"menu/detach", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "ui_confirm")
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(WeaponAttachments, f1_arg1, Enum[0x3DD78803F918E9D][0x22361E23588705A], "ui_contextual_1", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(WeaponAttachments, f1_arg1, Enum[@"luibutton"][@"lui_key_start"], "ui_contextual_1", function(element, menu, controller, model)
 		if not CoD.WZUtility.IsDualWeaponMiddleClickAttachmentTransferDisabled() and not CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and IsMouseOrKeyboard(controller) and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "canTransferAttachment", CoD.WZUtility.ItemAvailableAction.ATTACH) then
 			CoD.WZUtility.SendInventoryEquipOnWeaponNotify(controller, element, menu, false, true)
 			return true
@@ -370,16 +370,16 @@ CoD.StartMenu_Inventory_WeaponsDisplayPC.new = function(f1_arg0, f1_arg1, f1_arg
 		end
 	end, function(element, menu, controller)
 		if not CoD.WZUtility.IsDualWeaponMiddleClickAttachmentTransferDisabled() and not CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and IsMouseOrKeyboard(controller) and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "canTransferAttachment", CoD.WZUtility.ItemAvailableAction.ATTACH) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x22361E23588705A], 0x234736A1C101BE7, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "ui_contextual_1")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_start"], @"wz/transfer_stowed", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "ui_contextual_1")
 			return true
 		elseif not CoD.WZUtility.IsDualWeaponMiddleClickAttachmentTransferDisabled() and not CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and IsMouseOrKeyboard(controller) and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "canTransferAttachment", CoD.WZUtility.ItemAvailableAction.SWAP) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x22361E23588705A], 0xD409BB4890E1387, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "ui_contextual_1")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_start"], @"wz/swap_stowed", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "ui_contextual_1")
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(WeaponAttachments, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(WeaponAttachments, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if IsGamepad(controller) and not CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) then
 			CoD.WZUtility.SendInventoryDropNotify(controller, element)
 			return true
@@ -387,13 +387,13 @@ CoD.StartMenu_Inventory_WeaponsDisplayPC.new = function(f1_arg0, f1_arg1, f1_arg
 		end
 	end, function(element, menu, controller)
 		if IsGamepad(controller) and not CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xFFD03BF8361AC75, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3] | Enum[0xBEBDBAEEB3ECCCA][0x2919C98A7A845F0] | 400 << Enum[0xBEBDBAEEB3ECCCA][0x76ADD225D738C93], nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"warzone/drop", Enum[@"luibuttonpromptflags"][@"bpf_contextual"] | Enum[@"luibuttonpromptflags"][@"hash_72919C98A7A845F0"] | 400 << Enum[@"luibuttonpromptflags"][@"hash_176ADD225D738C93"], nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(WeaponAttachments, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], "ui_remove", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(WeaponAttachments, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], "ui_remove", function(element, menu, controller, model)
 		if IsMouseOrKeyboard(controller) and not CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) then
 			CoD.WZUtility.SendInventoryDropNotify(controller, element)
 			return true
@@ -401,13 +401,13 @@ CoD.StartMenu_Inventory_WeaponsDisplayPC.new = function(f1_arg0, f1_arg1, f1_arg
 		end
 	end, function(element, menu, controller)
 		if IsMouseOrKeyboard(controller) and not CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], 0xFFD03BF8361AC75, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "ui_remove")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], @"warzone/drop", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "ui_remove")
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(WeaponAttachments, f1_arg1, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC], "MOUSE1", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(WeaponAttachments, f1_arg1, Enum[@"luibutton"][@"lui_key_ltrig"], "MOUSE1", function(element, menu, controller, model)
 		if IsMouseOrKeyboard(controller) and CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and not CoD.WZUtility.InventoryFull(controller) then
 			CoD.WZUtility.SendInventoryDetachNotify(controller, element)
 			return true
@@ -415,13 +415,13 @@ CoD.StartMenu_Inventory_WeaponsDisplayPC.new = function(f1_arg0, f1_arg1, f1_arg
 		end
 	end, function(element, menu, controller)
 		if IsMouseOrKeyboard(controller) and CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and not CoD.WZUtility.InventoryFull(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC], 0x6099347F51AF260, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "MOUSE1")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_ltrig"], @"menu/detach", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "MOUSE1")
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(WeaponAttachments, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "MOUSE1", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(WeaponAttachments, f1_arg1, Enum[@"luibutton"][@"lui_key_none"], "MOUSE1", function(element, menu, controller, model)
 		if not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and not CoD.WZUtility.InventoryFull(controller) then
 			CoD.WZUtility.SendInventoryDetachNotify(controller, element)
 			return true
@@ -429,13 +429,13 @@ CoD.StartMenu_Inventory_WeaponsDisplayPC.new = function(f1_arg0, f1_arg1, f1_arg
 		end
 	end, function(element, menu, controller)
 		if not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and not CoD.WZUtility.InventoryFull(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "MOUSE1")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "MOUSE1")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(WeaponAttachments, f1_arg1, Enum[0x3DD78803F918E9D][0x4D2505E19049444], "MOUSE2", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(WeaponAttachments, f1_arg1, Enum[@"luibutton"][@"hash_64D2505E19049444"], "MOUSE2", function(element, menu, controller, model)
 		if not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and IsMouseOrKeyboard(controller) then
 			CoD.WZUtility.SendInventoryDropNotify(controller, element)
 			return true
@@ -443,13 +443,13 @@ CoD.StartMenu_Inventory_WeaponsDisplayPC.new = function(f1_arg0, f1_arg1, f1_arg
 		end
 	end, function(element, menu, controller)
 		if not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and IsMouseOrKeyboard(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x4D2505E19049444], 0xFFD03BF8361AC75, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "MOUSE2")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"hash_64D2505E19049444"], @"warzone/drop", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "MOUSE2")
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(WeaponAttachments, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB], "MOUSE3", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(WeaponAttachments, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"], "MOUSE3", function(element, menu, controller, model)
 		if not CoD.WZUtility.IsDualWeaponMiddleClickAttachmentTransferDisabled() and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and IsMouseOrKeyboard(controller) and CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "canTransferAttachment", CoD.WZUtility.ItemAvailableAction.ATTACH) then
 			CoD.WZUtility.SendInventoryEquipOnWeaponNotify(controller, element, menu, false, true)
 			return true
@@ -460,16 +460,16 @@ CoD.StartMenu_Inventory_WeaponsDisplayPC.new = function(f1_arg0, f1_arg1, f1_arg
 		end
 	end, function(element, menu, controller)
 		if not CoD.WZUtility.IsDualWeaponMiddleClickAttachmentTransferDisabled() and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and IsMouseOrKeyboard(controller) and CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "canTransferAttachment", CoD.WZUtility.ItemAvailableAction.ATTACH) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xA86619565BE54DB], 0x234736A1C101BE7, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "MOUSE3")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_pckey_2"], @"wz/transfer_stowed", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "MOUSE3")
 			return true
 		elseif not CoD.WZUtility.IsDualWeaponMiddleClickAttachmentTransferDisabled() and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and IsMouseOrKeyboard(controller) and CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "canTransferAttachment", CoD.WZUtility.ItemAvailableAction.SWAP) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xA86619565BE54DB], 0xD409BB4890E1387, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "MOUSE3")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_pckey_2"], @"wz/swap_stowed", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "MOUSE3")
 			return true
 		else
 			return false
 		end
 	end, false)
-	WeaponAttachments:AddContextualMenuAction(f1_arg0, f1_arg1, 0x6099347F51AF260, function(f56_arg0, f56_arg1, f56_arg2, f56_arg3)
+	WeaponAttachments:AddContextualMenuAction(f1_arg0, f1_arg1, @"menu/detach", function(f56_arg0, f56_arg1, f56_arg2, f56_arg3)
 		if not CoD.WZUtility.ScoreboardVisibilitySetAndPC(f56_arg2) and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(f56_arg0, f56_arg2, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and not CoD.WZUtility.InventoryFull(f56_arg2) then
 			return function(f57_arg0, f57_arg1, f57_arg2, f57_arg3)
 				CoD.WZUtility.SendInventoryDetachNotify(f57_arg2, f57_arg0)
@@ -477,7 +477,7 @@ CoD.StartMenu_Inventory_WeaponsDisplayPC.new = function(f1_arg0, f1_arg1, f1_arg
 		else
 		end
 	end)
-	WeaponAttachments:AddContextualMenuAction(f1_arg0, f1_arg1, 0xFFD03BF8361AC75, function(f58_arg0, f58_arg1, f58_arg2, f58_arg3)
+	WeaponAttachments:AddContextualMenuAction(f1_arg0, f1_arg1, @"warzone/drop", function(f58_arg0, f58_arg1, f58_arg2, f58_arg3)
 		if not CoD.WZUtility.ScoreboardVisibilitySetAndPC(f58_arg2) and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(f58_arg0, f58_arg2, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) then
 			return function(f59_arg0, f59_arg1, f59_arg2, f59_arg3)
 				CoD.WZUtility.SendInventoryDropNotify(f59_arg2, f59_arg0)
@@ -485,7 +485,7 @@ CoD.StartMenu_Inventory_WeaponsDisplayPC.new = function(f1_arg0, f1_arg1, f1_arg
 		else
 		end
 	end)
-	WeaponAttachments:AddContextualMenuAction(f1_arg0, f1_arg1, 0x234736A1C101BE7, function(f60_arg0, f60_arg1, f60_arg2, f60_arg3)
+	WeaponAttachments:AddContextualMenuAction(f1_arg0, f1_arg1, @"wz/transfer_stowed", function(f60_arg0, f60_arg1, f60_arg2, f60_arg3)
 		if not CoD.WZUtility.IsDualWeaponMiddleClickAttachmentTransferDisabled() and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(f60_arg0, f60_arg2, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and not CoD.WZUtility.ScoreboardVisibilitySetAndPC(f60_arg2) and IsMouseOrKeyboard(f60_arg2) and CoD.ModelUtility.IsSelfModelValueEqualToEnum(f60_arg0, f60_arg2, "canTransferAttachment", CoD.WZUtility.ItemAvailableAction.ATTACH) then
 			return function(f61_arg0, f61_arg1, f61_arg2, f61_arg3)
 				CoD.WZUtility.SendInventoryEquipOnWeaponNotify(f61_arg2, f61_arg0, f61_arg1, false, false)
@@ -493,7 +493,7 @@ CoD.StartMenu_Inventory_WeaponsDisplayPC.new = function(f1_arg0, f1_arg1, f1_arg
 		else
 		end
 	end)
-	WeaponAttachments:AddContextualMenuAction(f1_arg0, f1_arg1, 0xD409BB4890E1387, function(f62_arg0, f62_arg1, f62_arg2, f62_arg3)
+	WeaponAttachments:AddContextualMenuAction(f1_arg0, f1_arg1, @"wz/swap_stowed", function(f62_arg0, f62_arg1, f62_arg2, f62_arg3)
 		if not CoD.WZUtility.IsDualWeaponMiddleClickAttachmentTransferDisabled() and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(f62_arg0, f62_arg2, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and not CoD.WZUtility.ScoreboardVisibilitySetAndPC(f62_arg2) and IsMouseOrKeyboard(f62_arg2) and CoD.ModelUtility.IsSelfModelValueEqualToEnum(f62_arg0, f62_arg2, "canTransferAttachment", CoD.WZUtility.ItemAvailableAction.SWAP) then
 			return function(f63_arg0, f63_arg1, f63_arg2, f63_arg3)
 				CoD.WZUtility.SendInventoryEquipOnWeaponNotify(f63_arg2, f63_arg0, f63_arg1, false, false)
@@ -509,72 +509,72 @@ CoD.StartMenu_Inventory_WeaponsDisplayPC.new = function(f1_arg0, f1_arg1, f1_arg
 	WeaponAttachmentsSmall:setWidgetType(CoD.WarzoneInventoryMenuItemAttachmentSmall)
 	WeaponAttachmentsSmall:setHorizontalCount(6)
 	WeaponAttachmentsSmall:setSpacing(12)
-	WeaponAttachmentsSmall:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	WeaponAttachmentsSmall:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	WeaponAttachmentsSmall:appendEventHandler("input_source_changed", function(f64_arg0, f64_arg1)
 		f64_arg1.menu = f64_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f64_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f64_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x6CE8023188D673F])
-		CoD.Menu.UpdateButtonShownState(f64_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(f64_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
-		CoD.Menu.UpdateButtonShownState(f64_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x22361E23588705A])
-		CoD.Menu.UpdateButtonShownState(f64_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC])
-		CoD.Menu.UpdateButtonShownState(f64_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x4D2505E19049444])
-		CoD.Menu.UpdateButtonShownState(f64_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
+		CoD.Menu.UpdateButtonShownState(f64_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f64_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_lstick_pressed"])
+		CoD.Menu.UpdateButtonShownState(f64_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(f64_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+		CoD.Menu.UpdateButtonShownState(f64_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_start"])
+		CoD.Menu.UpdateButtonShownState(f64_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_ltrig"])
+		CoD.Menu.UpdateButtonShownState(f64_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"hash_64D2505E19049444"])
+		CoD.Menu.UpdateButtonShownState(f64_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"])
 	end)
 	DropButtonPC = WeaponAttachmentsSmall
 	DropAndDetachButtonPC = WeaponAttachmentsSmall.subscribeToModel
-	local f1_local13 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local13 = Engine[@"getmodelforcontroller"](f1_arg1)
 	DropAndDetachButtonPC(DropButtonPC, f1_local13.LastInput, function(f65_arg0, f65_arg1)
-		CoD.Menu.UpdateButtonShownState(f65_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f65_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x6CE8023188D673F])
-		CoD.Menu.UpdateButtonShownState(f65_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(f65_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
-		CoD.Menu.UpdateButtonShownState(f65_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x22361E23588705A])
-		CoD.Menu.UpdateButtonShownState(f65_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC])
-		CoD.Menu.UpdateButtonShownState(f65_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x4D2505E19049444])
-		CoD.Menu.UpdateButtonShownState(f65_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
+		CoD.Menu.UpdateButtonShownState(f65_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f65_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_lstick_pressed"])
+		CoD.Menu.UpdateButtonShownState(f65_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(f65_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+		CoD.Menu.UpdateButtonShownState(f65_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_start"])
+		CoD.Menu.UpdateButtonShownState(f65_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_ltrig"])
+		CoD.Menu.UpdateButtonShownState(f65_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"hash_64D2505E19049444"])
+		CoD.Menu.UpdateButtonShownState(f65_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"])
 	end, false)
 	WeaponAttachmentsSmall:linkToElementModel(WeaponAttachmentsSmall, "id", true, function(model, f66_arg1)
-		CoD.Menu.UpdateButtonShownState(f66_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f66_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x6CE8023188D673F])
-		CoD.Menu.UpdateButtonShownState(f66_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(f66_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
-		CoD.Menu.UpdateButtonShownState(f66_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x22361E23588705A])
-		CoD.Menu.UpdateButtonShownState(f66_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC])
-		CoD.Menu.UpdateButtonShownState(f66_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
-		CoD.Menu.UpdateButtonShownState(f66_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x4D2505E19049444])
-		CoD.Menu.UpdateButtonShownState(f66_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
+		CoD.Menu.UpdateButtonShownState(f66_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f66_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_lstick_pressed"])
+		CoD.Menu.UpdateButtonShownState(f66_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(f66_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+		CoD.Menu.UpdateButtonShownState(f66_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_start"])
+		CoD.Menu.UpdateButtonShownState(f66_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_ltrig"])
+		CoD.Menu.UpdateButtonShownState(f66_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_none"])
+		CoD.Menu.UpdateButtonShownState(f66_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"hash_64D2505E19049444"])
+		CoD.Menu.UpdateButtonShownState(f66_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"])
 	end)
 	DropButtonPC = WeaponAttachmentsSmall
 	DropAndDetachButtonPC = WeaponAttachmentsSmall.subscribeToModel
-	f1_local13 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local13 = Engine[@"getmodelforcontroller"](f1_arg1)
 	DropAndDetachButtonPC(DropButtonPC, f1_local13["hudItems.inventory.count"], function(f67_arg0, f67_arg1)
-		CoD.Menu.UpdateButtonShownState(f67_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f67_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x6CE8023188D673F])
-		CoD.Menu.UpdateButtonShownState(f67_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC])
-		CoD.Menu.UpdateButtonShownState(f67_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(f67_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f67_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_lstick_pressed"])
+		CoD.Menu.UpdateButtonShownState(f67_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_ltrig"])
+		CoD.Menu.UpdateButtonShownState(f67_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_none"])
 	end, false)
 	DropButtonPC = WeaponAttachmentsSmall
 	DropAndDetachButtonPC = WeaponAttachmentsSmall.subscribeToModel
-	f1_local13 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local13 = Engine[@"getmodelforcontroller"](f1_arg1)
 	DropAndDetachButtonPC(DropButtonPC, f1_local13["hudItems.inventory.filledSlots"], function(f68_arg0, f68_arg1)
-		CoD.Menu.UpdateButtonShownState(f68_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f68_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x6CE8023188D673F])
-		CoD.Menu.UpdateButtonShownState(f68_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC])
-		CoD.Menu.UpdateButtonShownState(f68_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(f68_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f68_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_lstick_pressed"])
+		CoD.Menu.UpdateButtonShownState(f68_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_ltrig"])
+		CoD.Menu.UpdateButtonShownState(f68_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_none"])
 	end, false)
 	DropButtonPC = WeaponAttachmentsSmall
 	DropAndDetachButtonPC = WeaponAttachmentsSmall.subscribeToModel
-	f1_local13 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local13 = Engine[@"getmodelforcontroller"](f1_arg1)
 	DropAndDetachButtonPC(DropButtonPC, f1_local13["hudItems.inventory.shard0.stackCount"], function(f69_arg0, f69_arg1)
-		CoD.Menu.UpdateButtonShownState(f69_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f69_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x6CE8023188D673F])
-		CoD.Menu.UpdateButtonShownState(f69_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC])
-		CoD.Menu.UpdateButtonShownState(f69_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(f69_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f69_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_lstick_pressed"])
+		CoD.Menu.UpdateButtonShownState(f69_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_ltrig"])
+		CoD.Menu.UpdateButtonShownState(f69_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_none"])
 	end, false)
 	WeaponAttachmentsSmall:linkToElementModel(WeaponAttachmentsSmall, "canTransferAttachment", true, function(model, f70_arg1)
-		CoD.Menu.UpdateButtonShownState(f70_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x22361E23588705A])
-		CoD.Menu.UpdateButtonShownState(f70_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
+		CoD.Menu.UpdateButtonShownState(f70_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_start"])
+		CoD.Menu.UpdateButtonShownState(f70_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"])
 	end)
 	WeaponAttachmentsSmall:registerEventHandler("list_item_gain_focus", function(element, event)
 		local f71_local0 = nil
@@ -593,18 +593,18 @@ CoD.StartMenu_Inventory_WeaponsDisplayPC.new = function(f1_arg0, f1_arg1, f1_arg
 		elseif element.super.gainFocus then
 			f72_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x6CE8023188D673F])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x22361E23588705A])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x4D2505E19049444])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_lstick_pressed"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_start"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_ltrig"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_none"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"hash_64D2505E19049444"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"])
 		return f72_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(WeaponAttachmentsSmall, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(WeaponAttachmentsSmall, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], nil, function(element, menu, controller, model)
 		if IsGamepad(controller) and not CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and not CoD.WZUtility.InventoryFull(controller) then
 			CoD.WZUtility.SendInventoryDetachNotify(controller, element)
 			return true
@@ -612,13 +612,13 @@ CoD.StartMenu_Inventory_WeaponsDisplayPC.new = function(f1_arg0, f1_arg1, f1_arg
 		end
 	end, function(element, menu, controller)
 		if IsGamepad(controller) and not CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and not CoD.WZUtility.InventoryFull(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x6099347F51AF260, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3] | Enum[0xBEBDBAEEB3ECCCA][0x2919C98A7A845F0] | 400 << Enum[0xBEBDBAEEB3ECCCA][0x76ADD225D738C93], nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"menu/detach", Enum[@"luibuttonpromptflags"][@"bpf_contextual"] | Enum[@"luibuttonpromptflags"][@"hash_72919C98A7A845F0"] | 400 << Enum[@"luibuttonpromptflags"][@"hash_176ADD225D738C93"], nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(WeaponAttachmentsSmall, f1_arg1, Enum[0x3DD78803F918E9D][0x6CE8023188D673F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(WeaponAttachmentsSmall, f1_arg1, Enum[@"luibutton"][@"lui_key_lstick_pressed"], "ui_confirm", function(element, menu, controller, model)
 		if IsMouseOrKeyboard(controller) and not CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and not CoD.WZUtility.InventoryFull(controller) then
 			CoD.WZUtility.SendInventoryDetachNotify(controller, element)
 			return true
@@ -626,13 +626,13 @@ CoD.StartMenu_Inventory_WeaponsDisplayPC.new = function(f1_arg0, f1_arg1, f1_arg
 		end
 	end, function(element, menu, controller)
 		if IsMouseOrKeyboard(controller) and not CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and not CoD.WZUtility.InventoryFull(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x6CE8023188D673F], 0x6099347F51AF260, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_lstick_pressed"], @"menu/detach", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "ui_confirm")
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(WeaponAttachmentsSmall, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(WeaponAttachmentsSmall, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if IsGamepad(controller) and not CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) then
 			CoD.WZUtility.SendInventoryDropNotify(controller, element)
 			return true
@@ -640,13 +640,13 @@ CoD.StartMenu_Inventory_WeaponsDisplayPC.new = function(f1_arg0, f1_arg1, f1_arg
 		end
 	end, function(element, menu, controller)
 		if IsGamepad(controller) and not CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xFFD03BF8361AC75, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3] | Enum[0xBEBDBAEEB3ECCCA][0x2919C98A7A845F0] | 400 << Enum[0xBEBDBAEEB3ECCCA][0x76ADD225D738C93], nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"warzone/drop", Enum[@"luibuttonpromptflags"][@"bpf_contextual"] | Enum[@"luibuttonpromptflags"][@"hash_72919C98A7A845F0"] | 400 << Enum[@"luibuttonpromptflags"][@"hash_176ADD225D738C93"], nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(WeaponAttachmentsSmall, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], "ui_remove", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(WeaponAttachmentsSmall, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], "ui_remove", function(element, menu, controller, model)
 		if IsMouseOrKeyboard(controller) and not CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) then
 			CoD.WZUtility.SendInventoryDropNotify(controller, element)
 			return true
@@ -654,13 +654,13 @@ CoD.StartMenu_Inventory_WeaponsDisplayPC.new = function(f1_arg0, f1_arg1, f1_arg
 		end
 	end, function(element, menu, controller)
 		if IsMouseOrKeyboard(controller) and not CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], 0xFFD03BF8361AC75, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "ui_remove")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], @"warzone/drop", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "ui_remove")
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(WeaponAttachmentsSmall, f1_arg1, Enum[0x3DD78803F918E9D][0x22361E23588705A], "ui_contextual_1", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(WeaponAttachmentsSmall, f1_arg1, Enum[@"luibutton"][@"lui_key_start"], "ui_contextual_1", function(element, menu, controller, model)
 		if not CoD.WZUtility.IsDualWeaponMiddleClickAttachmentTransferDisabled() and not CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and IsMouseOrKeyboard(controller) and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "canTransferAttachment", CoD.WZUtility.ItemAvailableAction.ATTACH) then
 			CoD.WZUtility.SendInventoryEquipNotify(controller, element, menu, false)
 			return true
@@ -671,16 +671,16 @@ CoD.StartMenu_Inventory_WeaponsDisplayPC.new = function(f1_arg0, f1_arg1, f1_arg
 		end
 	end, function(element, menu, controller)
 		if not CoD.WZUtility.IsDualWeaponMiddleClickAttachmentTransferDisabled() and not CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and IsMouseOrKeyboard(controller) and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "canTransferAttachment", CoD.WZUtility.ItemAvailableAction.ATTACH) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x22361E23588705A], 0xDAF6A96C5DF8207, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "ui_contextual_1")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_start"], @"wz/transfer_primary", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "ui_contextual_1")
 			return true
 		elseif not CoD.WZUtility.IsDualWeaponMiddleClickAttachmentTransferDisabled() and not CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and IsMouseOrKeyboard(controller) and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "canTransferAttachment", CoD.WZUtility.ItemAvailableAction.SWAP) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x22361E23588705A], 0xD2838B2DBAF9E27, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "ui_contextual_1")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_start"], @"wz/swap_primary", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "ui_contextual_1")
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(WeaponAttachmentsSmall, f1_arg1, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC], "MOUSE1", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(WeaponAttachmentsSmall, f1_arg1, Enum[@"luibutton"][@"lui_key_ltrig"], "MOUSE1", function(element, menu, controller, model)
 		if IsMouseOrKeyboard(controller) and CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and not CoD.WZUtility.InventoryFull(controller) then
 			CoD.WZUtility.SendInventoryDetachNotify(controller, element)
 			return true
@@ -688,13 +688,13 @@ CoD.StartMenu_Inventory_WeaponsDisplayPC.new = function(f1_arg0, f1_arg1, f1_arg
 		end
 	end, function(element, menu, controller)
 		if IsMouseOrKeyboard(controller) and CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and not CoD.WZUtility.InventoryFull(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC], 0x6099347F51AF260, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "MOUSE1")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_ltrig"], @"menu/detach", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "MOUSE1")
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(WeaponAttachmentsSmall, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "MOUSE1", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(WeaponAttachmentsSmall, f1_arg1, Enum[@"luibutton"][@"lui_key_none"], "MOUSE1", function(element, menu, controller, model)
 		if not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and not CoD.WZUtility.InventoryFull(controller) then
 			CoD.WZUtility.SendInventoryDetachNotify(controller, element)
 			return true
@@ -702,13 +702,13 @@ CoD.StartMenu_Inventory_WeaponsDisplayPC.new = function(f1_arg0, f1_arg1, f1_arg
 		end
 	end, function(element, menu, controller)
 		if not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and not CoD.WZUtility.InventoryFull(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "MOUSE1")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "MOUSE1")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(WeaponAttachmentsSmall, f1_arg1, Enum[0x3DD78803F918E9D][0x4D2505E19049444], "MOUSE2", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(WeaponAttachmentsSmall, f1_arg1, Enum[@"luibutton"][@"hash_64D2505E19049444"], "MOUSE2", function(element, menu, controller, model)
 		if not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and IsMouseOrKeyboard(controller) then
 			CoD.WZUtility.SendInventoryDropNotify(controller, element)
 			return true
@@ -716,13 +716,13 @@ CoD.StartMenu_Inventory_WeaponsDisplayPC.new = function(f1_arg0, f1_arg1, f1_arg
 		end
 	end, function(element, menu, controller)
 		if not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and IsMouseOrKeyboard(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x4D2505E19049444], 0xFFD03BF8361AC75, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "MOUSE2")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"hash_64D2505E19049444"], @"warzone/drop", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "MOUSE2")
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(WeaponAttachmentsSmall, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB], "MOUSE3", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(WeaponAttachmentsSmall, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"], "MOUSE3", function(element, menu, controller, model)
 		if not CoD.WZUtility.IsDualWeaponMiddleClickAttachmentTransferDisabled() and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and IsMouseOrKeyboard(controller) and CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "canTransferAttachment", CoD.WZUtility.ItemAvailableAction.ATTACH) then
 			CoD.WZUtility.SendInventoryEquipNotify(controller, element, menu, false)
 			return true
@@ -733,16 +733,16 @@ CoD.StartMenu_Inventory_WeaponsDisplayPC.new = function(f1_arg0, f1_arg1, f1_arg
 		end
 	end, function(element, menu, controller)
 		if not CoD.WZUtility.IsDualWeaponMiddleClickAttachmentTransferDisabled() and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and IsMouseOrKeyboard(controller) and CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "canTransferAttachment", CoD.WZUtility.ItemAvailableAction.ATTACH) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xA86619565BE54DB], 0xDAF6A96C5DF8207, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "MOUSE3")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_pckey_2"], @"wz/transfer_primary", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "MOUSE3")
 			return true
 		elseif not CoD.WZUtility.IsDualWeaponMiddleClickAttachmentTransferDisabled() and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and IsMouseOrKeyboard(controller) and CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "canTransferAttachment", CoD.WZUtility.ItemAvailableAction.SWAP) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xA86619565BE54DB], 0xD2838B2DBAF9E27, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "MOUSE3")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_pckey_2"], @"wz/swap_primary", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "MOUSE3")
 			return true
 		else
 			return false
 		end
 	end, false)
-	WeaponAttachmentsSmall:AddContextualMenuAction(f1_arg0, f1_arg1, 0x6099347F51AF260, function(f91_arg0, f91_arg1, f91_arg2, f91_arg3)
+	WeaponAttachmentsSmall:AddContextualMenuAction(f1_arg0, f1_arg1, @"menu/detach", function(f91_arg0, f91_arg1, f91_arg2, f91_arg3)
 		if not CoD.WZUtility.ScoreboardVisibilitySetAndPC(f91_arg2) and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(f91_arg0, f91_arg2, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and not CoD.WZUtility.InventoryFull(f91_arg2) then
 			return function(f92_arg0, f92_arg1, f92_arg2, f92_arg3)
 				CoD.WZUtility.SendInventoryDetachNotify(f92_arg2, f92_arg0)
@@ -750,7 +750,7 @@ CoD.StartMenu_Inventory_WeaponsDisplayPC.new = function(f1_arg0, f1_arg1, f1_arg
 		else
 		end
 	end)
-	WeaponAttachmentsSmall:AddContextualMenuAction(f1_arg0, f1_arg1, 0xFFD03BF8361AC75, function(f93_arg0, f93_arg1, f93_arg2, f93_arg3)
+	WeaponAttachmentsSmall:AddContextualMenuAction(f1_arg0, f1_arg1, @"warzone/drop", function(f93_arg0, f93_arg1, f93_arg2, f93_arg3)
 		if not CoD.WZUtility.ScoreboardVisibilitySetAndPC(f93_arg2) and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(f93_arg0, f93_arg2, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) then
 			return function(f94_arg0, f94_arg1, f94_arg2, f94_arg3)
 				CoD.WZUtility.SendInventoryDropNotify(f94_arg2, f94_arg0)
@@ -758,7 +758,7 @@ CoD.StartMenu_Inventory_WeaponsDisplayPC.new = function(f1_arg0, f1_arg1, f1_arg
 		else
 		end
 	end)
-	WeaponAttachmentsSmall:AddContextualMenuAction(f1_arg0, f1_arg1, 0xDAF6A96C5DF8207, function(f95_arg0, f95_arg1, f95_arg2, f95_arg3)
+	WeaponAttachmentsSmall:AddContextualMenuAction(f1_arg0, f1_arg1, @"wz/transfer_primary", function(f95_arg0, f95_arg1, f95_arg2, f95_arg3)
 		if not CoD.WZUtility.IsDualWeaponMiddleClickAttachmentTransferDisabled() and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(f95_arg0, f95_arg2, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and not CoD.WZUtility.ScoreboardVisibilitySetAndPC(f95_arg2) and IsMouseOrKeyboard(f95_arg2) and CoD.ModelUtility.IsSelfModelValueEqualToEnum(f95_arg0, f95_arg2, "canTransferAttachment", CoD.WZUtility.ItemAvailableAction.ATTACH) then
 			return function(f96_arg0, f96_arg1, f96_arg2, f96_arg3)
 				CoD.WZUtility.SendInventoryEquipNotify(f96_arg2, f96_arg0, f96_arg1, false)
@@ -766,7 +766,7 @@ CoD.StartMenu_Inventory_WeaponsDisplayPC.new = function(f1_arg0, f1_arg1, f1_arg
 		else
 		end
 	end)
-	WeaponAttachmentsSmall:AddContextualMenuAction(f1_arg0, f1_arg1, 0xD2838B2DBAF9E27, function(f97_arg0, f97_arg1, f97_arg2, f97_arg3)
+	WeaponAttachmentsSmall:AddContextualMenuAction(f1_arg0, f1_arg1, @"wz/swap_primary", function(f97_arg0, f97_arg1, f97_arg2, f97_arg3)
 		if not CoD.WZUtility.IsDualWeaponMiddleClickAttachmentTransferDisabled() and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(f97_arg0, f97_arg2, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and not CoD.WZUtility.ScoreboardVisibilitySetAndPC(f97_arg2) and IsMouseOrKeyboard(f97_arg2) and CoD.ModelUtility.IsSelfModelValueEqualToEnum(f97_arg0, f97_arg2, "canTransferAttachment", CoD.WZUtility.ItemAvailableAction.SWAP) then
 			return function(f98_arg0, f98_arg1, f98_arg2, f98_arg3)
 				CoD.WZUtility.SendInventoryEquipNotify(f98_arg2, f98_arg0, f98_arg1, false)
@@ -810,32 +810,32 @@ CoD.StartMenu_Inventory_WeaponsDisplayPC.new = function(f1_arg0, f1_arg1, f1_arg
 			modelName = "weapon1.hasAttachments",
 		})
 	end, false)
-	DropAndDetachButtonPC.Image:setImage(RegisterImage(0x11FFBA26DA10CCC))
+	DropAndDetachButtonPC.Image:setImage(RegisterImage(@"uie_dropdetachicon"))
 	DropAndDetachButtonPC:appendEventHandler("input_source_changed", function(f102_arg0, f102_arg1)
 		f102_arg1.menu = f102_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f102_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x4D2505E19049444])
-		CoD.Menu.UpdateButtonShownState(f102_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f102_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"hash_64D2505E19049444"])
+		CoD.Menu.UpdateButtonShownState(f102_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	f1_local13 = DropAndDetachButtonPC
 	DropButtonPC = DropAndDetachButtonPC.subscribeToModel
-	f1_local14 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local14 = Engine[@"getmodelforcontroller"](f1_arg1)
 	DropButtonPC(f1_local13, f1_local14.LastInput, function(f103_arg0, f103_arg1)
-		CoD.Menu.UpdateButtonShownState(f103_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x4D2505E19049444])
-		CoD.Menu.UpdateButtonShownState(f103_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f103_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"hash_64D2505E19049444"])
+		CoD.Menu.UpdateButtonShownState(f103_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	f1_local13 = DropAndDetachButtonPC
 	DropButtonPC = DropAndDetachButtonPC.subscribeToModel
 	f1_local14 = DataSources.WarzoneInventory.getModel(f1_arg1)
 	DropButtonPC(f1_local13, f1_local14["weapon0.hasAttachments"], function(f104_arg0, f104_arg1)
-		CoD.Menu.UpdateButtonShownState(f104_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x4D2505E19049444])
-		CoD.Menu.UpdateButtonShownState(f104_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f104_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"hash_64D2505E19049444"])
+		CoD.Menu.UpdateButtonShownState(f104_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	f1_local13 = DropAndDetachButtonPC
 	DropButtonPC = DropAndDetachButtonPC.subscribeToModel
 	f1_local14 = DataSources.WarzoneInventory.getModel(f1_arg1)
 	DropButtonPC(f1_local13, f1_local14["weapon1.hasAttachments"], function(f105_arg0, f105_arg1)
-		CoD.Menu.UpdateButtonShownState(f105_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x4D2505E19049444])
-		CoD.Menu.UpdateButtonShownState(f105_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f105_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"hash_64D2505E19049444"])
+		CoD.Menu.UpdateButtonShownState(f105_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	DropAndDetachButtonPC:registerEventHandler("gain_focus", function(element, event)
 		local f106_local0 = nil
@@ -844,11 +844,11 @@ CoD.StartMenu_Inventory_WeaponsDisplayPC.new = function(f1_arg0, f1_arg1, f1_arg
 		elseif element.super.gainFocus then
 			f106_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x4D2505E19049444])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"hash_64D2505E19049444"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f106_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(DropAndDetachButtonPC, f1_arg1, Enum[0x3DD78803F918E9D][0x4D2505E19049444], "MOUSE2", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(DropAndDetachButtonPC, f1_arg1, Enum[@"luibutton"][@"hash_64D2505E19049444"], "MOUSE2", function(element, menu, controller, model)
 		if IsMouseOrKeyboard(controller) and CoD.WZUtility.HasAttachments(controller, self.weaponId) then
 			CoD.WZUtility.SendInventoryDropWeaponInSlotAndDetachNotify(controller, self.weaponId)
 			return true
@@ -856,13 +856,13 @@ CoD.StartMenu_Inventory_WeaponsDisplayPC.new = function(f1_arg0, f1_arg1, f1_arg
 		end
 	end, function(element, menu, controller)
 		if IsMouseOrKeyboard(controller) and CoD.WZUtility.HasAttachments(controller, self.weaponId) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x4D2505E19049444], 0x94D6AF2F50BEFEF, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "MOUSE2")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"hash_64D2505E19049444"], @"hash_294D6AF2F50BEFEF", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "MOUSE2")
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(DropAndDetachButtonPC, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(DropAndDetachButtonPC, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if IsGamepad(controller) and CoD.WZUtility.HasAttachments(controller, self.weaponId) then
 			CoD.WZUtility.SendInventoryDropWeaponInSlotAndDetachNotify(controller, self.weaponId)
 			return true
@@ -870,7 +870,7 @@ CoD.StartMenu_Inventory_WeaponsDisplayPC.new = function(f1_arg0, f1_arg1, f1_arg
 		end
 	end, function(element, menu, controller)
 		if IsGamepad(controller) and CoD.WZUtility.HasAttachments(controller, self.weaponId) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x94D6AF2F50BEFEF, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_294D6AF2F50BEFEF", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], nil)
 			return true
 		else
 			return false
@@ -881,20 +881,20 @@ CoD.StartMenu_Inventory_WeaponsDisplayPC.new = function(f1_arg0, f1_arg1, f1_arg
 	DropButtonPC = nil
 	DropButtonPC = CoD.StartMenu_Inventory_ActionIconPC.new(f1_arg0, f1_arg1, 1, 1, -444, -410, 0, 0, 68.5, 102.5)
 	DropButtonPC:linkToElementModel(DropButtonPC, "id", true, function(model, f111_arg1)
-		CoD.Menu.UpdateButtonShownState(f111_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x4D2505E19049444])
-		CoD.Menu.UpdateButtonShownState(f111_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f111_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"hash_64D2505E19049444"])
+		CoD.Menu.UpdateButtonShownState(f111_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	DropButtonPC:appendEventHandler("input_source_changed", function(f112_arg0, f112_arg1)
 		f112_arg1.menu = f112_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f112_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x4D2505E19049444])
-		CoD.Menu.UpdateButtonShownState(f112_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f112_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"hash_64D2505E19049444"])
+		CoD.Menu.UpdateButtonShownState(f112_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	f1_local14 = DropButtonPC
 	f1_local13 = DropButtonPC.subscribeToModel
-	local f1_local15 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local15 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local13(f1_local14, f1_local15.LastInput, function(f113_arg0, f113_arg1)
-		CoD.Menu.UpdateButtonShownState(f113_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x4D2505E19049444])
-		CoD.Menu.UpdateButtonShownState(f113_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f113_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"hash_64D2505E19049444"])
+		CoD.Menu.UpdateButtonShownState(f113_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	DropButtonPC:registerEventHandler("gain_focus", function(element, event)
 		local f114_local0 = nil
@@ -903,11 +903,11 @@ CoD.StartMenu_Inventory_WeaponsDisplayPC.new = function(f1_arg0, f1_arg1, f1_arg
 		elseif element.super.gainFocus then
 			f114_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x4D2505E19049444])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"hash_64D2505E19049444"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f114_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(DropButtonPC, f1_arg1, Enum[0x3DD78803F918E9D][0x4D2505E19049444], "MOUSE2", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(DropButtonPC, f1_arg1, Enum[@"luibutton"][@"hash_64D2505E19049444"], "MOUSE2", function(element, menu, controller, model)
 		if not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and IsMouseOrKeyboard(controller) then
 			CoD.WZUtility.SendInventoryDropWeaponInSlotNotify(controller, self.weaponId)
 			return true
@@ -915,13 +915,13 @@ CoD.StartMenu_Inventory_WeaponsDisplayPC.new = function(f1_arg0, f1_arg1, f1_arg
 		end
 	end, function(element, menu, controller)
 		if not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and IsMouseOrKeyboard(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x4D2505E19049444], 0xFFD03BF8361AC75, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "MOUSE2")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"hash_64D2505E19049444"], @"warzone/drop", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "MOUSE2")
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(DropButtonPC, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(DropButtonPC, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and IsGamepad(controller) then
 			CoD.WZUtility.SendInventoryDropWeaponInSlotNotify(controller, self.weaponId)
 			return true
@@ -929,7 +929,7 @@ CoD.StartMenu_Inventory_WeaponsDisplayPC.new = function(f1_arg0, f1_arg1, f1_arg
 		end
 	end, function(element, menu, controller)
 		if not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and IsGamepad(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xFFD03BF8361AC75, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"warzone/drop", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], nil)
 			return true
 		else
 			return false

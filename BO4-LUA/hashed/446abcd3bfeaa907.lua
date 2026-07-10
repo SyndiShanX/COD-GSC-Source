@@ -31,8 +31,8 @@ CoD.ZMInvObjectiveProgress.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self.SentinelStages = SentinelStages
 	local TextBacking = LUI.UIImage.new(0.5, 0.5, -192, 192, 0, 0, 3, 137)
 	TextBacking:setAlpha(0.9)
-	TextBacking:setImage(RegisterImage(0xF034C487614E57C))
-	TextBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	TextBacking:setImage(RegisterImage(@"uie_zm_hud_inventory_objectivesmoke"))
+	TextBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	TextBacking:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(TextBacking)
 	self.TextBacking = TextBacking
@@ -45,17 +45,17 @@ CoD.ZMInvObjectiveProgress.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	local Description = LUI.UIText.new(0.5, 0.5, -185, 185, 0, 0, 55, 76)
 	Description:setRGB(0, 0.75, 1)
 	Description:setTTF("skorzhen")
-	Description:setMaterial(LUI.UIImage.GetCachedMaterial(0x90D57B1E92D39D7))
+	Description:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_90D57B1E92D39D7"))
 	Description:setShaderVector(0, 0.7, 0, 0, 0)
 	Description:setShaderVector(1, 1, 0, 0, 0)
 	Description:setShaderVector(2, 0.05, 0, 0.2, 1)
 	Description:setLetterSpacing(1)
-	Description:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	Description:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Description:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	Description:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	Description:linkToElementModel(self, "description", true, function(model)
 		local f5_local0 = model:get()
 		if f5_local0 ~= nil then
-			Description:setText(Engine[0xF9F1239CFD921FE](f5_local0))
+			Description:setText(Engine[@"hash_4F9F1239CFD921FE"](f5_local0))
 		end
 	end)
 	self:addElement(Description)

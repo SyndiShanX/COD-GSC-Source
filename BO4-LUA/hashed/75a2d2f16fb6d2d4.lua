@@ -8,7 +8,7 @@ CoD.CurrentIndexQuickCycleArrow.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self.soundSet = "none"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local SelectedArrow = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	SelectedArrow:setImage(RegisterImage(0xCB30D895D0912D1))
+	SelectedArrow:setImage(RegisterImage(@"uie_vehicleprompt_hold"))
 	self:addElement(SelectedArrow)
 	self.SelectedArrow = SelectedArrow
 	if PostLoadFunc then

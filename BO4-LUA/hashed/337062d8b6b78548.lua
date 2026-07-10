@@ -11,7 +11,7 @@ CoD.vhud_attack_helicopter_health.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	self.BackImage = BackImage
 	local Overlay = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	Overlay:setRGB(0.98, 0.98, 0.98)
-	Overlay:setMaterial(LUI.UIImage.GetCachedMaterial(0x910274CA3518744))
+	Overlay:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe"))
 	Overlay:setShaderVector(1, 0, 0, 0, 0)
 	Overlay:setShaderVector(2, 1, 0, 0, 0)
 	Overlay:setShaderVector(3, 0, 0, 0, 0)

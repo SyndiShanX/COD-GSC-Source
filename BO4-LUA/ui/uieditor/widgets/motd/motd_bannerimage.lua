@@ -32,15 +32,15 @@ CoD.MOTD_BannerImage.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	})
 	self:appendEventHandler("input_source_changed", function(f5_arg0, f5_arg1)
 		f5_arg1.menu = f5_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f5_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f5_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	local f1_local2 = self
 	local f1_local3 = self.subscribeToModel
-	local f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local3(f1_local2, f1_local4.LastInput, function(f6_arg0, f6_arg1)
-		CoD.Menu.UpdateButtonShownState(f6_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f6_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if IsPC() and IsMouseOrKeyboard(controller) then
 			CoD.MOTDUtility.MOTD_SelectItemPC(menu, self, controller, "ButtonsList")
 			ClearMenuSavedState(menu)
@@ -49,7 +49,7 @@ CoD.MOTD_BannerImage.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 		end
 	end, function(element, menu, controller)
 		if IsPC() and IsMouseOrKeyboard(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 			return false
 		else
 			return false
@@ -87,7 +87,7 @@ CoD.MOTD_BannerImage.__clipsPerState = {
 			f12_arg0:__resetProperties()
 			f12_arg0:setupElementClipCounter(1)
 			local f12_local0 = function(f13_arg0)
-				f12_arg0.FrameSelectedCorner:beginAnimation(150, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f12_arg0.FrameSelectedCorner:beginAnimation(150, Enum[@"luitween"][@"luitween_ease_in"])
 				f12_arg0.FrameSelectedCorner:setScale(1.03, 1.03)
 				f12_arg0.FrameSelectedCorner:registerEventHandler("interrupted_keyframe", f12_arg0.clipInterrupted)
 				f12_arg0.FrameSelectedCorner:registerEventHandler("transition_complete_keyframe", f12_arg0.clipFinished)
@@ -100,7 +100,7 @@ CoD.MOTD_BannerImage.__clipsPerState = {
 			f14_arg0:__resetProperties()
 			f14_arg0:setupElementClipCounter(1)
 			local f14_local0 = function(f15_arg0)
-				f14_arg0.FrameSelectedCorner:beginAnimation(150, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f14_arg0.FrameSelectedCorner:beginAnimation(150, Enum[@"luitween"][@"luitween_ease_out"])
 				f14_arg0.FrameSelectedCorner:setScale(1, 1)
 				f14_arg0.FrameSelectedCorner:registerEventHandler("interrupted_keyframe", f14_arg0.clipInterrupted)
 				f14_arg0.FrameSelectedCorner:registerEventHandler("transition_complete_keyframe", f14_arg0.clipFinished)
@@ -129,7 +129,7 @@ CoD.MOTD_BannerImage.__clipsPerState = {
 			f18_arg0:__resetProperties()
 			f18_arg0:setupElementClipCounter(1)
 			local f18_local0 = function(f19_arg0)
-				f18_arg0.FrameSelectedCorner:beginAnimation(150, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f18_arg0.FrameSelectedCorner:beginAnimation(150, Enum[@"luitween"][@"luitween_ease_in"])
 				f18_arg0.FrameSelectedCorner:setScale(1.03, 1.03)
 				f18_arg0.FrameSelectedCorner:registerEventHandler("interrupted_keyframe", f18_arg0.clipInterrupted)
 				f18_arg0.FrameSelectedCorner:registerEventHandler("transition_complete_keyframe", f18_arg0.clipFinished)
@@ -142,7 +142,7 @@ CoD.MOTD_BannerImage.__clipsPerState = {
 			f20_arg0:__resetProperties()
 			f20_arg0:setupElementClipCounter(1)
 			local f20_local0 = function(f21_arg0)
-				f20_arg0.FrameSelectedCorner:beginAnimation(150, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f20_arg0.FrameSelectedCorner:beginAnimation(150, Enum[@"luitween"][@"luitween_ease_out"])
 				f20_arg0.FrameSelectedCorner:setScale(1, 1)
 				f20_arg0.FrameSelectedCorner:registerEventHandler("interrupted_keyframe", f20_arg0.clipInterrupted)
 				f20_arg0.FrameSelectedCorner:registerEventHandler("transition_complete_keyframe", f20_arg0.clipFinished)

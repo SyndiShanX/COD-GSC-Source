@@ -50,42 +50,42 @@ CoD.WeaponListWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	weaponList:setWidgetType(CoD.WeaponSelectGridItem)
 	weaponList:setHorizontalCount(5)
 	weaponList:setSpacing(10)
-	weaponList:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	weaponList:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	weaponList:setHorizontalScrollbar(CoD.PC_GridHorizontalScrollbar)
 	weaponList:setHorizontalCounter(CoD.horizontalCounterVerticalSpace)
 	weaponList:setDataSource("Unlockables")
 	weaponList:linkToElementModel(weaponList, "globalItemIndex", true, function(model, f4_arg1)
-		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
-		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
+		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"])
 	end)
 	weaponList:linkToElementModel(weaponList, "refHash", true, function(model, f5_arg1)
-		CoD.Menu.UpdateButtonShownState(f5_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(f5_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
-		CoD.Menu.UpdateButtonShownState(f5_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
+		CoD.Menu.UpdateButtonShownState(f5_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(f5_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+		CoD.Menu.UpdateButtonShownState(f5_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"])
 	end)
 	weaponList:linkToElementModel(weaponList, "itemIndex", true, function(model, f6_arg1)
-		CoD.Menu.UpdateButtonShownState(f6_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
-		CoD.Menu.UpdateButtonShownState(f6_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
+		CoD.Menu.UpdateButtonShownState(f6_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+		CoD.Menu.UpdateButtonShownState(f6_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"])
 	end)
 	weaponList:appendEventHandler("input_source_changed", function(f7_arg0, f7_arg1)
 		f7_arg1.menu = f7_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f7_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
-		CoD.Menu.UpdateButtonShownState(f7_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
+		CoD.Menu.UpdateButtonShownState(f7_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+		CoD.Menu.UpdateButtonShownState(f7_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"])
 	end)
 	local PCArrowR = weaponList
 	local PCArrowL = weaponList.subscribeToModel
-	local WeaponVariantListWidget = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local WeaponVariantListWidget = Engine[@"getmodelforcontroller"](f1_arg1)
 	PCArrowL(PCArrowR, WeaponVariantListWidget.LastInput, function(f8_arg0, f8_arg1)
-		CoD.Menu.UpdateButtonShownState(f8_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
-		CoD.Menu.UpdateButtonShownState(f8_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
+		CoD.Menu.UpdateButtonShownState(f8_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+		CoD.Menu.UpdateButtonShownState(f8_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"])
 	end, false)
 	PCArrowR = weaponList
 	PCArrowL = weaponList.subscribeToModel
-	WeaponVariantListWidget = Engine[0x8DF2E5447F384B9]()
+	WeaponVariantListWidget = Engine[@"getglobalmodel"]()
 	PCArrowL(PCArrowR, WeaponVariantListWidget["lobbyRoot.lobbyNav"], function(f9_arg0, f9_arg1)
-		CoD.Menu.UpdateButtonShownState(f9_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
-		CoD.Menu.UpdateButtonShownState(f9_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
+		CoD.Menu.UpdateButtonShownState(f9_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+		CoD.Menu.UpdateButtonShownState(f9_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"])
 	end, false)
 	weaponList:registerEventHandler("list_item_gain_focus", function(element, event)
 		local f10_local0 = nil
@@ -101,13 +101,13 @@ CoD.WeaponListWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 		elseif element.super.gainFocus then
 			f11_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_none"])
 		return f11_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(weaponList, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(weaponList, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if not CoD.CACUtility.IsCACItemLocked(menu, element, controller) and not CoD.CACUtility.IsCACBlackMarketItemLocked(menu, element, controller) and CoD.CACUtility.HasSignatureWeapons(menu, element, controller) then
 			CoD.CACUtility.ShowWeaponVariantList(menu, controller, self.WeaponVariantListWidget)
 			return true
@@ -119,16 +119,16 @@ CoD.WeaponListWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 		end
 	end, function(element, menu, controller)
 		if not CoD.CACUtility.IsCACItemLocked(menu, element, controller) and not CoD.CACUtility.IsCACBlackMarketItemLocked(menu, element, controller) and CoD.CACUtility.HasSignatureWeapons(menu, element, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		elseif not CoD.CACUtility.IsItemEquippedInCurrentLoadout(menu, element, controller) and not CoD.CACUtility.IsCACItemLocked(menu, element, controller) and not CoD.CACUtility.IsCACBlackMarketItemLocked(menu, element, controller) and not CoD.CACUtility.HasSignatureWeapons(menu, element, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(weaponList, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(weaponList, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], nil, function(element, menu, controller, model)
 		if not CoD.ModelUtility.IsSelfModelValueEqualTo(element, controller, "itemIndex", CoDShared.EmptyItemIndex) and CoD.CACUtility.IsCACGunLevelMax(menu, element, controller) and not CoD.CACUtility.IsCACGunPrestigeLevelMax(menu, element, controller) and IsGamepad(controller) and not CoD.CACUtility.IsCACItemLocked(menu, element, controller) and not CoD.CACUtility.IsCACBlackMarketItemLocked(menu, element, controller) and not IsCustomLobby() then
 			PrestigeWeapon(menu, element, controller)
 			PlaySoundAlias("uin_press_generic")
@@ -137,13 +137,13 @@ CoD.WeaponListWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 		end
 	end, function(element, menu, controller)
 		if not CoD.ModelUtility.IsSelfModelValueEqualTo(element, controller, "itemIndex", CoDShared.EmptyItemIndex) and CoD.CACUtility.IsCACGunLevelMax(menu, element, controller) and not CoD.CACUtility.IsCACGunPrestigeLevelMax(menu, element, controller) and IsGamepad(controller) and not CoD.CACUtility.IsCACItemLocked(menu, element, controller) and not CoD.CACUtility.IsCACBlackMarketItemLocked(menu, element, controller) and not IsCustomLobby() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], 0xF45564D1E059F32, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], @"challenge/prestige", nil, nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(weaponList, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB], "ui_contextual_1", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(weaponList, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"], "ui_contextual_1", function(element, menu, controller, model)
 		if not CoD.ModelUtility.IsSelfModelValueEqualTo(element, controller, "itemIndex", CoDShared.EmptyItemIndex) and CoD.CACUtility.IsCACGunLevelMax(menu, element, controller) and not CoD.CACUtility.IsCACGunPrestigeLevelMax(menu, element, controller) and IsMouseOrKeyboard(controller) and not CoD.CACUtility.IsCACItemLocked(menu, element, controller) and not CoD.CACUtility.IsCACBlackMarketItemLocked(menu, element, controller) and not IsCustomLobby() then
 			PrestigeWeapon(menu, element, controller)
 			return true
@@ -151,26 +151,26 @@ CoD.WeaponListWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 		end
 	end, function(element, menu, controller)
 		if not CoD.ModelUtility.IsSelfModelValueEqualTo(element, controller, "itemIndex", CoDShared.EmptyItemIndex) and CoD.CACUtility.IsCACGunLevelMax(menu, element, controller) and not CoD.CACUtility.IsCACGunPrestigeLevelMax(menu, element, controller) and IsMouseOrKeyboard(controller) and not CoD.CACUtility.IsCACItemLocked(menu, element, controller) and not CoD.CACUtility.IsCACBlackMarketItemLocked(menu, element, controller) and not IsCustomLobby() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xA86619565BE54DB], 0xDC436DD31790E72, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "ui_contextual_1")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_pckey_2"], @"hash_7DC436DD31790E72", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "ui_contextual_1")
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(weaponList, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "MWHEELUP", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(weaponList, f1_arg1, Enum[@"luibutton"][@"lui_key_none"], "MWHEELUP", function(element, menu, controller, model)
 		CoD.GridAndListUtility.ScrollLeft(self.weaponList)
 		CoD.GridAndListUtility.ValidateActiveItemVisibility(self.weaponList)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "MWHEELUP")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "MWHEELUP")
 		return false
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(weaponList, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "MWHEELDOWN", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(weaponList, f1_arg1, Enum[@"luibutton"][@"lui_key_none"], "MWHEELDOWN", function(element, menu, controller, model)
 		CoD.GridAndListUtility.ScrollRight(self.weaponList)
 		CoD.GridAndListUtility.ValidateActiveItemVisibility(self.weaponList)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "MWHEELDOWN")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "MWHEELDOWN")
 		return false
 	end, false)
 	self.__on_menuOpened_weaponList = function(f22_arg0, f22_arg1, f22_arg2, f22_arg3)
@@ -187,7 +187,7 @@ CoD.WeaponListWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 		CoD.GridAndListUtility.UpdateDataSource(weaponList, true, false, true)
 		UpdateSelfState(self, f1_arg1)
 	end)
-	weaponList:AddContextualMenuAction(f1_arg0, f1_arg1, 0xDC436DD31790E72, function(f26_arg0, f26_arg1, f26_arg2, f26_arg3)
+	weaponList:AddContextualMenuAction(f1_arg0, f1_arg1, @"hash_7DC436DD31790E72", function(f26_arg0, f26_arg1, f26_arg2, f26_arg3)
 		if not CoD.ModelUtility.IsSelfModelValueEqualTo(f26_arg0, f26_arg2, "itemIndex", CoDShared.EmptyItemIndex) and CoD.CACUtility.IsCACGunLevelMax(f26_arg1, f26_arg0, f26_arg2) and not CoD.CACUtility.IsCACGunPrestigeLevelMax(f26_arg1, f26_arg0, f26_arg2) and not CoD.CACUtility.IsCACItemLocked(f26_arg1, f26_arg0, f26_arg2) and not CoD.CACUtility.IsCACBlackMarketItemLocked(f26_arg1, f26_arg0, f26_arg2) and not IsCustomLobby() then
 			return function(f27_arg0, f27_arg1, f27_arg2, f27_arg3)
 				PrestigeWeapon(f27_arg1, f27_arg0, f27_arg2)
@@ -208,17 +208,17 @@ CoD.WeaponListWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 		},
 	})
 	PCArrowL:setZRot(90)
-	PCArrowL.Arrow:setImage(RegisterImage(0x5E74D00B45D12B6))
-	PCArrowL.Arrow2:setImage(RegisterImage(0x5E74D00B45D12B6))
+	PCArrowL.Arrow:setImage(RegisterImage(@"uie_optionswidgets_arrow"))
+	PCArrowL.Arrow2:setImage(RegisterImage(@"uie_optionswidgets_arrow"))
 	PCArrowL:appendEventHandler("input_source_changed", function(f29_arg0, f29_arg1)
 		f29_arg1.menu = f29_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f29_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f29_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	WeaponVariantListWidget = PCArrowL
 	PCArrowR = PCArrowL.subscribeToModel
-	local f1_local6 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local6 = Engine[@"getmodelforcontroller"](f1_arg1)
 	PCArrowR(WeaponVariantListWidget, f1_local6.LastInput, function(f30_arg0, f30_arg1)
-		CoD.Menu.UpdateButtonShownState(f30_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f30_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	PCArrowL:registerEventHandler("gain_focus", function(element, event)
 		local f31_local0 = nil
@@ -227,10 +227,10 @@ CoD.WeaponListWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 		elseif element.super.gainFocus then
 			f31_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f31_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(PCArrowL, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(PCArrowL, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if IsMouseOrKeyboard(controller) then
 			CoD.GridAndListUtility.ScrollLeft(self.weaponList)
 			CoD.GridAndListUtility.ValidateActiveItemVisibility(self.weaponList)
@@ -239,7 +239,7 @@ CoD.WeaponListWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 		end
 	end, function(element, menu, controller)
 		if IsMouseOrKeyboard(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, nil)
 			return false
 		else
 			return false
@@ -258,17 +258,17 @@ CoD.WeaponListWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 		},
 	})
 	PCArrowR:setZRot(270)
-	PCArrowR.Arrow:setImage(RegisterImage(0x5E74D00B45D12B6))
-	PCArrowR.Arrow2:setImage(RegisterImage(0x5E74D00B45D12B6))
+	PCArrowR.Arrow:setImage(RegisterImage(@"uie_optionswidgets_arrow"))
+	PCArrowR.Arrow2:setImage(RegisterImage(@"uie_optionswidgets_arrow"))
 	PCArrowR:appendEventHandler("input_source_changed", function(f35_arg0, f35_arg1)
 		f35_arg1.menu = f35_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f35_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f35_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	f1_local6 = PCArrowR
 	WeaponVariantListWidget = PCArrowR.subscribeToModel
-	local f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
 	WeaponVariantListWidget(f1_local6, f1_local7.LastInput, function(f36_arg0, f36_arg1)
-		CoD.Menu.UpdateButtonShownState(f36_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f36_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	PCArrowR:registerEventHandler("gain_focus", function(element, event)
 		local f37_local0 = nil
@@ -277,10 +277,10 @@ CoD.WeaponListWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 		elseif element.super.gainFocus then
 			f37_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f37_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(PCArrowR, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(PCArrowR, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if IsMouseOrKeyboard(controller) then
 			CoD.GridAndListUtility.ScrollRight(self.weaponList)
 			CoD.GridAndListUtility.ValidateActiveItemVisibility(self.weaponList)
@@ -289,7 +289,7 @@ CoD.WeaponListWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 		end
 	end, function(element, menu, controller)
 		if IsMouseOrKeyboard(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, nil)
 			return false
 		else
 			return false
@@ -306,14 +306,14 @@ CoD.WeaponListWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 		elseif element.super.gainFocus then
 			f40_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbb_pscircle"])
 		return f40_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(WeaponVariantListWidget, f1_arg1, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(WeaponVariantListWidget, f1_arg1, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		CoD.CACUtility.HideWeaponVariantList(menu, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 		return true
 	end, false)
 	self:addElement(WeaponVariantListWidget)

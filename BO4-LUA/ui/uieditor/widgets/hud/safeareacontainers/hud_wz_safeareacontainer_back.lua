@@ -66,7 +66,7 @@ CoD.Hud_WZ_SafeAreaContainer_Back.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	})
 	local GameUpdateNotification = DeployableNotifications
 	local WaypointCloseMessage = DeployableNotifications.subscribeToModel
-	local ObituaryCallout = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local ObituaryCallout = Engine[@"getmodelforcontroller"](f1_arg1)
 	WaypointCloseMessage(GameUpdateNotification, ObituaryCallout["hudItems.showSpawnSelect"], function(f3_arg0)
 		f1_arg0:updateElementState(DeployableNotifications, {
 			name = "model_validation",
@@ -79,7 +79,7 @@ CoD.Hud_WZ_SafeAreaContainer_Back.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	self:addElement(DeployableNotifications)
 	self.DeployableNotifications = DeployableNotifications
 	WaypointCloseMessage = CoD.WaypointCloseMessage.new(f1_arg0, f1_arg1, 0.5, 0.5, -192, 192, 0.5, 0.5, -292.5, -271.5)
-	WaypointCloseMessage.text:setText(Engine[0xF9F1239CFD921FE](0x93E719493E9E18F))
+	WaypointCloseMessage.text:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	self:addElement(WaypointCloseMessage)
 	self.WaypointCloseMessage = WaypointCloseMessage
 	GameUpdateNotification = CoD.WZGameUpdateNotification.new(f1_arg0, f1_arg1, 0.5, 0.5, -250, 250, 0.5, 0.5, -354.5, -306.5)
@@ -92,7 +92,7 @@ CoD.Hud_WZ_SafeAreaContainer_Back.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	self:addElement(ObituaryCallout)
 	self.ObituaryCallout = ObituaryCallout
 	local KillcamCompass = CoD.WZKillcamCompass.new(f1_arg0, f1_arg1, 0, 0, -31, 319, 0, 0, 0, 350)
-	KillcamCompass:setRFTMaterial(LUI.UIImage.GetCachedMaterial(0xC212964B40FA826))
+	KillcamCompass:setRFTMaterial(LUI.UIImage.GetCachedMaterial(@"hash_5C212964B40FA826"))
 	self:addElement(KillcamCompass)
 	self.KillcamCompass = KillcamCompass
 	local DeathCamContainer = CoD.DeathCamContainer.new(f1_arg0, f1_arg1, 0.5, 0.5, -300, 300, 0.85, 0.85, -187.5, 112.5)
@@ -100,7 +100,7 @@ CoD.Hud_WZ_SafeAreaContainer_Back.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 		{
 			stateName = "Visible",
 			condition = function(menu, element, event)
-				local f5_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x534C7B2375D2D47])
+				local f5_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_player_dead"])
 				if f5_local0 then
 					if not CoD.ModelUtility.IsModelValueGreaterThan(f1_arg1, "hudItems.hacked", 0) then
 						f5_local0 = not CoD.SpawnSelectionUtility.IsSpawnSelectActive(f1_arg1)
@@ -114,19 +114,19 @@ CoD.Hud_WZ_SafeAreaContainer_Back.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	})
 	local WZCollapseTimer = DeathCamContainer
 	local Console = DeathCamContainer.subscribeToModel
-	local WarzoneWingsuitOverlay = Engine[0x4DF5CFBC1771947](f1_arg1)
-	Console(WZCollapseTimer, WarzoneWingsuitOverlay["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x534C7B2375D2D47]], function(f6_arg0)
+	local WarzoneWingsuitOverlay = Engine[@"getmodelforcontroller"](f1_arg1)
+	Console(WZCollapseTimer, WarzoneWingsuitOverlay["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_player_dead"]], function(f6_arg0)
 		f1_arg0:updateElementState(DeathCamContainer, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f6_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x534C7B2375D2D47],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_player_dead"],
 		})
 	end, false)
 	WZCollapseTimer = DeathCamContainer
 	Console = DeathCamContainer.subscribeToModel
-	WarzoneWingsuitOverlay = Engine[0x4DF5CFBC1771947](f1_arg1)
+	WarzoneWingsuitOverlay = Engine[@"getmodelforcontroller"](f1_arg1)
 	Console(WZCollapseTimer, WarzoneWingsuitOverlay["hudItems.hacked"], function(f7_arg0)
 		f1_arg0:updateElementState(DeathCamContainer, {
 			name = "model_validation",
@@ -138,7 +138,7 @@ CoD.Hud_WZ_SafeAreaContainer_Back.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	end, false)
 	WZCollapseTimer = DeathCamContainer
 	Console = DeathCamContainer.subscribeToModel
-	WarzoneWingsuitOverlay = Engine[0x4DF5CFBC1771947](f1_arg1)
+	WarzoneWingsuitOverlay = Engine[@"getmodelforcontroller"](f1_arg1)
 	Console(WZCollapseTimer, WarzoneWingsuitOverlay["hudItems.showSpawnSelect"], function(f8_arg0)
 		f1_arg0:updateElementState(DeathCamContainer, {
 			name = "model_validation",
@@ -185,23 +185,23 @@ CoD.Hud_WZ_SafeAreaContainer_Back.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 		{
 			stateName = "Hidden",
 			condition = function(menu, element, event)
-				return not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2])
+				return not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_in_killcam"])
 			end,
 		},
 	})
 	local EMPcompass = WarzoneKillerIdentity
 	local WZReinsertionPassengerCount = WarzoneKillerIdentity.subscribeToModel
-	local EMPplayer = Engine[0x4DF5CFBC1771947](f1_arg1)
-	WZReinsertionPassengerCount(EMPcompass, EMPplayer["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2]], function(f11_arg0)
+	local EMPplayer = Engine[@"getmodelforcontroller"](f1_arg1)
+	WZReinsertionPassengerCount(EMPcompass, EMPplayer["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"]], function(f11_arg0)
 		f1_arg0:updateElementState(WarzoneKillerIdentity, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f11_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"],
 		})
 	end, false)
-	WarzoneKillerIdentity.KillerLabel:setText(LocalizeToUpperString(0x98E1E885ED068B4))
+	WarzoneKillerIdentity.KillerLabel:setText(LocalizeToUpperString(@"hash_698E1E885ED068B4"))
 	WarzoneKillerIdentity:subscribeToGlobalModel(f1_arg1, "Attacker", nil, function(model)
 		WarzoneKillerIdentity:setModel(model, f1_arg1)
 	end)
@@ -265,7 +265,7 @@ CoD.Hud_WZ_SafeAreaContainer_Back.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	})
 	local f1_local25 = self
 	local f1_local26 = self.subscribeToModel
-	local f1_local27 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local27 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local26(f1_local25, f1_local27["factions.isCoDCaster"], function(f21_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -289,7 +289,7 @@ CoD.Hud_WZ_SafeAreaContainer_Back.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	end, false)
 	f1_local25 = self
 	f1_local26 = self.subscribeToModel
-	f1_local27 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local27 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local26(f1_local25, f1_local27["hudItems.showSpawnSelect"], function(f23_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

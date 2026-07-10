@@ -12,7 +12,7 @@ CoD.TabbedScoreboardMapInfoboxRight.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local InfoRIghtBG = LUI.UIImage.new(0, 0, 0, 188, 0, 0, 75, 75)
-	InfoRIghtBG:setImage(RegisterImage(0x179F8C7A3100CD7))
+	InfoRIghtBG:setImage(RegisterImage(@"hash_2179F8C7A3100CD7"))
 	self:addElement(InfoRIghtBG)
 	self.InfoRIghtBG = InfoRIghtBG
 	local TerrainAdd = CoD.TabbedScoreboardInfoTerrain.new(f1_arg0, f1_arg1, 0, 0, -1, 189, 0, 0, 7, 77)
@@ -20,23 +20,23 @@ CoD.TabbedScoreboardMapInfoboxRight.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	self.TerrainAdd = TerrainAdd
 	local InfoRightBotBar = LUI.UIImage.new(0, 0, 0, 188, 0, 0, 89, 97)
 	InfoRightBotBar:setRGB(0.95, 0.95, 0.95)
-	InfoRightBotBar:setImage(RegisterImage(0xFCFDB982EBF8906))
+	InfoRightBotBar:setImage(RegisterImage(@"hash_1FCFDB982EBF8906"))
 	self:addElement(InfoRightBotBar)
 	self.InfoRightBotBar = InfoRightBotBar
 	local InfoStripe = CoD.TabbedScoreboardInfoStripe.new(f1_arg0, f1_arg1, 0, 0, -4, 184, 0, 0, 71, 95)
 	self:addElement(InfoStripe)
 	self.InfoStripe = InfoStripe
 	local InfoRightRedBar = LUI.UIImage.new(0, 0, 0, 188, 0, 0, 75, 91)
-	InfoRightRedBar:setImage(RegisterImage(0x78CAD9EF906ADDA))
+	InfoRightRedBar:setImage(RegisterImage(@"hash_678CAD9EF906ADDA"))
 	self:addElement(InfoRightRedBar)
 	self.InfoRightRedBar = InfoRightRedBar
 	local InfoRightTopBar = LUI.UIImage.new(0, 0, 0, 188, 0, 0, 69, 77)
 	InfoRightTopBar:setRGB(0.95, 0.95, 0.95)
-	InfoRightTopBar:setImage(RegisterImage(0xFCFDB982EBF8906))
+	InfoRightTopBar:setImage(RegisterImage(@"hash_1FCFDB982EBF8906"))
 	self:addElement(InfoRightTopBar)
 	self.InfoRightTopBar = InfoRightTopBar
 	local Fui = LUI.UIImage.new(0, 0, 2, 188, 0, 0, -3, 71)
-	Fui:setImage(RegisterImage(0x2BFA29122B19C83))
+	Fui:setImage(RegisterImage(@"hash_2BFA29122B19C83"))
 	self:addElement(Fui)
 	self.Fui = Fui
 	local CursorFocus = CoD.TabbedScoreboardInfoCursor.new(f1_arg0, f1_arg1, 0, 0, 51.5, 81.5, 0, 0, 23, 53)
@@ -73,7 +73,7 @@ CoD.TabbedScoreboardMapInfoboxRight.__clipsPerState = {
 			f3_arg0:setupElementClipCounter(7)
 			local f3_local0 = function(f4_arg0)
 				local f4_local0 = function(f5_arg0)
-					f5_arg0:beginAnimation(500, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f5_arg0:beginAnimation(500, Enum[@"luitween"][@"luitween_ease_out"])
 					f5_arg0:setTopBottom(0, 0, 7, 75)
 					f5_arg0:registerEventHandler("transition_complete_keyframe", f3_arg0.clipFinished)
 				end
@@ -88,7 +88,7 @@ CoD.TabbedScoreboardMapInfoboxRight.__clipsPerState = {
 			f3_arg0.InfoRIghtBG:registerEventHandler("interrupted_keyframe", f3_arg0.clipInterrupted)
 			f3_arg0.InfoRIghtBG:registerEventHandler("transition_complete_keyframe", f3_local0)
 			local f3_local1 = function(f6_arg0)
-				f6_arg0:beginAnimation(300, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f6_arg0:beginAnimation(300, Enum[@"luitween"][@"luitween_ease_both"])
 				f6_arg0:setAlpha(1)
 				f6_arg0:registerEventHandler("transition_complete_keyframe", f3_arg0.clipFinished)
 			end
@@ -127,7 +127,7 @@ CoD.TabbedScoreboardMapInfoboxRight.__clipsPerState = {
 			f3_arg0.InfoRightRedBar:registerEventHandler("interrupted_keyframe", f3_arg0.clipInterrupted)
 			f3_arg0.InfoRightRedBar:registerEventHandler("transition_complete_keyframe", f3_local3)
 			local f3_local4 = function(f12_arg0)
-				f12_arg0:beginAnimation(699, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f12_arg0:beginAnimation(699, Enum[@"luitween"][@"luitween_ease_out"])
 				f12_arg0:setTopBottom(0, 0, 0, 8)
 				f12_arg0:registerEventHandler("transition_complete_keyframe", f3_arg0.clipFinished)
 			end
@@ -137,7 +137,7 @@ CoD.TabbedScoreboardMapInfoboxRight.__clipsPerState = {
 			f3_arg0.InfoRightTopBar:registerEventHandler("interrupted_keyframe", f3_arg0.clipInterrupted)
 			f3_arg0.InfoRightTopBar:registerEventHandler("transition_complete_keyframe", f3_local4)
 			local f3_local5 = function(f13_arg0)
-				f13_arg0:beginAnimation(300, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f13_arg0:beginAnimation(300, Enum[@"luitween"][@"luitween_ease_in"])
 				f13_arg0:setAlpha(1)
 				f13_arg0:registerEventHandler("transition_complete_keyframe", f3_arg0.clipFinished)
 			end

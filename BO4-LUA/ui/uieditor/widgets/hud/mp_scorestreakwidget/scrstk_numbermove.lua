@@ -18,8 +18,8 @@ CoD.ScrStk_NumberMove.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	self.PanelAmmo = PanelAmmo
 	local NumberFrame = LUI.UIImage.new(0, 0, 10, 82, 0, 0, 4, 28)
 	NumberFrame:setAlpha(0)
-	NumberFrame:setImage(RegisterImage(0xF7A0F9D9466CFD2))
-	NumberFrame:setMaterial(LUI.UIImage.GetCachedMaterial(0xFAEF6B981087FCE))
+	NumberFrame:setImage(RegisterImage(@"uie_t7_mp_hud_scorestreak_nmbrbox"))
+	NumberFrame:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_aberration_no_blur"))
 	NumberFrame:setShaderVector(0, 0.1, 1, 0, 0)
 	NumberFrame:setShaderVector(1, 0, 0, 0, 0)
 	NumberFrame:setShaderVector(2, 0, 0, 0, 0)
@@ -58,7 +58,7 @@ CoD.ScrStk_NumberMove.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	end, false)
 	self:subscribeToGlobalModel(f1_arg1, "PerController", "scriptNotify", function(model)
 		local f5_local0 = self
-		if CoD.ModelUtility.IsParamModelEqualToHashString(model, 0x1E30E91084F7E66) then
+		if CoD.ModelUtility.IsParamModelEqualToHashString(model, @"hash_21E30E91084F7E66") then
 			UpdateSelfState(self, f1_arg1)
 		end
 	end)

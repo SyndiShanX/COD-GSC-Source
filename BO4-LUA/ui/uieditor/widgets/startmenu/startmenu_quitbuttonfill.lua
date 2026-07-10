@@ -8,8 +8,8 @@ CoD.StartMenu_QuitButtonFill.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local HoldButtonFill = LUI.UIImage.new(0, 1, 0, 0, 0, 1, -16, 16)
-	HoldButtonFill:setImage(RegisterImage(0x746B4D04E0617E5))
-	HoldButtonFill:setMaterial(LUI.UIImage.GetCachedMaterial(0x910274CA3518744))
+	HoldButtonFill:setImage(RegisterImage(@"uie_ui_menu_common_quit_glow"))
+	HoldButtonFill:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe"))
 	HoldButtonFill:setShaderVector(1, 0, 0, 0, 0)
 	HoldButtonFill:setShaderVector(2, 1, 0, 0, 0)
 	HoldButtonFill:setShaderVector(3, 0, 0, 0, 0)

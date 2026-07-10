@@ -23,7 +23,7 @@ CoD.ArenaDailyBonus.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 		{
 			stateName = "Event",
 			condition = function(menu, element, event)
-				local f2_local0 = CoD.ArenaUtility.CurrentArenaEventTypeEquals(self, Enum[0xC0EA92D04BC003B][0xC32571741C5B730])
+				local f2_local0 = CoD.ArenaUtility.CurrentArenaEventTypeEquals(self, Enum[@"hash_6C0EA92D04BC003B"][@"hash_5C32571741C5B730"])
 				if f2_local0 then
 					f2_local0 = CoD.ArenaLeaguePlayUtility.HasOneMatchPlayed(self, f1_arg1)
 					if f2_local0 then
@@ -36,7 +36,7 @@ CoD.ArenaDailyBonus.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	})
 	local bonusnumber = RemainingTime
 	local bonustext = RemainingTime.subscribeToModel
-	local f1_local6 = Engine[0x8DF2E5447F384B9]()
+	local f1_local6 = Engine[@"getglobalmodel"]()
 	bonustext(bonusnumber, f1_local6["lobbyPlaylist.name"], function(f3_arg0)
 		f1_arg0:updateElementState(RemainingTime, {
 			name = "model_validation",
@@ -48,7 +48,7 @@ CoD.ArenaDailyBonus.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	end, false)
 	bonusnumber = RemainingTime
 	bonustext = RemainingTime.subscribeToModel
-	f1_local6 = Engine[0x8DF2E5447F384B9]()
+	f1_local6 = Engine[@"getglobalmodel"]()
 	bonustext(bonusnumber, f1_local6["lobbyRoot.lobbyNav"], function(f4_arg0)
 		f1_arg0:updateElementState(RemainingTime, {
 			name = "model_validation",
@@ -60,7 +60,7 @@ CoD.ArenaDailyBonus.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	end, false)
 	bonusnumber = RemainingTime
 	bonustext = RemainingTime.subscribeToModel
-	f1_local6 = Engine[0x8DF2E5447F384B9]()
+	f1_local6 = Engine[@"getglobalmodel"]()
 	bonustext(bonusnumber, f1_local6["LeaguePlayLadder.entityLadderRank"], function(f5_arg0)
 		f1_arg0:updateElementState(RemainingTime, {
 			name = "model_validation",
@@ -70,7 +70,7 @@ CoD.ArenaDailyBonus.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 			modelName = "LeaguePlayLadder.entityLadderRank",
 		})
 	end, false)
-	RemainingTime.EventEndsIn:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	RemainingTime.EventEndsIn:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	RemainingTime:subscribeToGlobalModel(f1_arg1, "Arena", "arenaLeaguePlayDailyPoolTimer", function(model)
 		local f6_local0 = model:get()
 		if f6_local0 ~= nil then
@@ -81,19 +81,19 @@ CoD.ArenaDailyBonus.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	self.RemainingTime = RemainingTime
 	bonustext = LUI.UIText.new(0.5, 0.5, -100, 100, 0, 0, 43, 67)
 	bonustext:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
-	bonustext:setText(LocalizeToUpperString(0xF15E6BF954D13D8))
+	bonustext:setText(LocalizeToUpperString(@"hash_4F15E6BF954D13D8"))
 	bonustext:setTTF("ttmussels_regular")
 	bonustext:setLetterSpacing(3)
-	bonustext:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	bonustext:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	bonustext:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	bonustext:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	self:addElement(bonustext)
 	self.bonustext = bonustext
 	bonusnumber = LUI.UIText.new(0.5, 0.5, -100, 100, 0, 0, 2, 51)
 	bonusnumber:setRGB(ColorSet.WarzoneTeammate3.r, ColorSet.WarzoneTeammate3.g, ColorSet.WarzoneTeammate3.b)
 	bonusnumber:setTTF("0arame_mono_stencil")
 	bonusnumber:setLetterSpacing(2)
-	bonusnumber:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	bonusnumber:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	bonusnumber:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	bonusnumber:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	bonusnumber:subscribeToGlobalModel(f1_arg1, "LeaguePlay", "dailyBonusPool", function(model)
 		local f7_local0 = model:get()
 		if f7_local0 ~= nil then
@@ -106,13 +106,13 @@ CoD.ArenaDailyBonus.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 		{
 			stateName = "LeaguePlay",
 			condition = function(menu, element, event)
-				return CoD.ArenaUtility.CurrentArenaEventTypeEquals(self, Enum[0xC0EA92D04BC003B][0xC32571741C5B730]) and CoD.ArenaLeaguePlayUtility.HasOneMatchPlayed(self, f1_arg1)
+				return CoD.ArenaUtility.CurrentArenaEventTypeEquals(self, Enum[@"hash_6C0EA92D04BC003B"][@"hash_5C32571741C5B730"]) and CoD.ArenaLeaguePlayUtility.HasOneMatchPlayed(self, f1_arg1)
 			end,
 		},
 	})
 	local f1_local7 = self
 	f1_local6 = self.subscribeToModel
-	local f1_local8 = Engine[0x8DF2E5447F384B9]()
+	local f1_local8 = Engine[@"getglobalmodel"]()
 	f1_local6(f1_local7, f1_local8["lobbyPlaylist.name"], function(f9_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -124,7 +124,7 @@ CoD.ArenaDailyBonus.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	end, false)
 	f1_local7 = self
 	f1_local6 = self.subscribeToModel
-	f1_local8 = Engine[0x8DF2E5447F384B9]()
+	f1_local8 = Engine[@"getglobalmodel"]()
 	f1_local6(f1_local7, f1_local8["lobbyRoot.lobbyNav"], function(f10_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -136,7 +136,7 @@ CoD.ArenaDailyBonus.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	end, false)
 	f1_local7 = self
 	f1_local6 = self.subscribeToModel
-	f1_local8 = Engine[0x8DF2E5447F384B9]()
+	f1_local8 = Engine[@"getglobalmodel"]()
 	f1_local6(f1_local7, f1_local8["LeaguePlayLadder.entityLadderRank"], function(f11_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

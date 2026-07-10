@@ -109,23 +109,23 @@ CoD.BowLauncherReticle_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self:addElement(BowLauncherReticleDot)
 	self.BowLauncherReticleDot = BowLauncherReticleDot
 	WingL = LUI.UIImage.new(-1.31, -1.2, 220, 220, 0.27, 0.5, 34.5, 34.5)
-	WingL:setImage(RegisterImage(0x3CE9CF4F5C3D42F))
+	WingL:setImage(RegisterImage(@"uie_ui_hud_reticles_bowlauncher_wing_l"))
 	self:addElement(WingL)
 	self.WingL = WingL
 	WingR = LUI.UIImage.new(-1.08, -0.96, 304, 304, 0.4, 0.63, 12.5, 12.5)
-	WingR:setImage(RegisterImage(0x3CE92F4F5C3C331))
+	WingR:setImage(RegisterImage(@"uie_ui_hud_reticles_bowlauncher_wing_r"))
 	self:addElement(WingR)
 	self.WingR = WingR
 	local DrawLine = LUI.UIImage.new(-1, -0.93, 235, 235, -0.02, 0.13, 12, 12)
-	DrawLine:setImage(RegisterImage(0x862D295DBF13568))
+	DrawLine:setImage(RegisterImage(@"uie_ui_hud_reticles_bowlauncher_draw_line"))
 	self:addElement(DrawLine)
 	self.DrawLine = DrawLine
 	local DrawLine2 = LUI.UIImage.new(-1.02, -0.95, 237, 237, 0.73, 0.88, 12, 12)
-	DrawLine2:setImage(RegisterImage(0x862D295DBF13568))
+	DrawLine2:setImage(RegisterImage(@"uie_ui_hud_reticles_bowlauncher_draw_line"))
 	self:addElement(DrawLine2)
 	self.DrawLine2 = DrawLine2
 	local ADSCurve = LUI.UIImage.new(-0.47, -0.12, 127, 127, -0.01, 0.14, 9, 9)
-	ADSCurve:setImage(RegisterImage(0x8A25F3AC063C84B))
+	ADSCurve:setImage(RegisterImage(@"uie_ui_hud_reticles_bowlauncher_ads_curve"))
 	self:addElement(ADSCurve)
 	self.ADSCurve = ADSCurve
 	self:mergeStateConditions({
@@ -265,7 +265,7 @@ CoD.BowLauncherReticle_Internal.__clipsPerState = {
 			local f20_local2 = function(f23_arg0)
 				local f23_local0 = function(f24_arg0)
 					local f24_local0 = function(f25_arg0)
-						f25_arg0:beginAnimation(69, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+						f25_arg0:beginAnimation(69, Enum[@"luitween"][@"luitween_ease_out"])
 						f25_arg0:setLeftRight(-1.31, -1.2, 264, 264)
 						f25_arg0:registerEventHandler("transition_complete_keyframe", f20_arg0.clipFinished)
 					end
@@ -284,7 +284,7 @@ CoD.BowLauncherReticle_Internal.__clipsPerState = {
 			f20_local2(f20_arg0.WingL)
 			local f20_local3 = function(f26_arg0)
 				local f26_local0 = function(f27_arg0)
-					f27_arg0:beginAnimation(69, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f27_arg0:beginAnimation(69, Enum[@"luitween"][@"luitween_ease_out"])
 					f27_arg0:setLeftRight(-1.08, -0.96, 260, 260)
 					f27_arg0:registerEventHandler("transition_complete_keyframe", f20_arg0.clipFinished)
 				end
@@ -300,7 +300,7 @@ CoD.BowLauncherReticle_Internal.__clipsPerState = {
 			local f20_local4 = function(f28_arg0)
 				local f28_local0 = function(f29_arg0)
 					local f29_local0 = function(f30_arg0)
-						f30_arg0:beginAnimation(69, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+						f30_arg0:beginAnimation(69, Enum[@"luitween"][@"luitween_ease_out"])
 						f30_arg0:setTopBottom(0.17, 0.32, 21, 21)
 						f30_arg0:registerEventHandler("transition_complete_keyframe", f20_arg0.clipFinished)
 					end
@@ -321,7 +321,7 @@ CoD.BowLauncherReticle_Internal.__clipsPerState = {
 			local f20_local5 = function(f31_arg0)
 				local f31_local0 = function(f32_arg0)
 					local f32_local0 = function(f33_arg0)
-						f33_arg0:beginAnimation(69, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+						f33_arg0:beginAnimation(69, Enum[@"luitween"][@"luitween_ease_out"])
 						f33_arg0:setTopBottom(0.48, 0.63, 12, 12)
 						f33_arg0:registerEventHandler("transition_complete_keyframe", f20_arg0.clipFinished)
 					end
@@ -667,7 +667,7 @@ CoD.BowLauncherReticle_Internal.__clipsPerState = {
 			local f56_local2 = function(f59_arg0)
 				local f59_local0 = function(f60_arg0)
 					local f60_local0 = function(f61_arg0)
-						f61_arg0:beginAnimation(69, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+						f61_arg0:beginAnimation(69, Enum[@"luitween"][@"luitween_ease_out"])
 						f61_arg0:setLeftRight(-1.31, -1.2, 264, 264)
 						f61_arg0:setAlpha(0.15)
 						f61_arg0:registerEventHandler("transition_complete_keyframe", f56_arg0.clipFinished)
@@ -687,7 +687,7 @@ CoD.BowLauncherReticle_Internal.__clipsPerState = {
 			f56_local2(f56_arg0.WingL)
 			local f56_local3 = function(f62_arg0)
 				local f62_local0 = function(f63_arg0)
-					f63_arg0:beginAnimation(69, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f63_arg0:beginAnimation(69, Enum[@"luitween"][@"luitween_ease_out"])
 					f63_arg0:setLeftRight(-1.08, -0.96, 260, 260)
 					f63_arg0:setAlpha(0.15)
 					f63_arg0:registerEventHandler("transition_complete_keyframe", f56_arg0.clipFinished)
@@ -704,7 +704,7 @@ CoD.BowLauncherReticle_Internal.__clipsPerState = {
 			local f56_local4 = function(f64_arg0)
 				local f64_local0 = function(f65_arg0)
 					local f65_local0 = function(f66_arg0)
-						f66_arg0:beginAnimation(69, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+						f66_arg0:beginAnimation(69, Enum[@"luitween"][@"luitween_ease_out"])
 						f66_arg0:setTopBottom(0.17, 0.32, 21, 21)
 						f66_arg0:registerEventHandler("transition_complete_keyframe", f56_arg0.clipFinished)
 					end
@@ -725,7 +725,7 @@ CoD.BowLauncherReticle_Internal.__clipsPerState = {
 			local f56_local5 = function(f67_arg0)
 				local f67_local0 = function(f68_arg0)
 					local f68_local0 = function(f69_arg0)
-						f69_arg0:beginAnimation(69, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+						f69_arg0:beginAnimation(69, Enum[@"luitween"][@"luitween_ease_out"])
 						f69_arg0:setTopBottom(0.48, 0.63, 12, 12)
 						f69_arg0:registerEventHandler("transition_complete_keyframe", f56_arg0.clipFinished)
 					end
@@ -838,7 +838,7 @@ CoD.BowLauncherReticle_Internal.__clipsPerState = {
 			local f77_local2 = function(f80_arg0)
 				local f80_local0 = function(f81_arg0)
 					local f81_local0 = function(f82_arg0)
-						f82_arg0:beginAnimation(69, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+						f82_arg0:beginAnimation(69, Enum[@"luitween"][@"luitween_ease_out"])
 						f82_arg0:setLeftRight(-1.31, -1.2, 264, 264)
 						f82_arg0:setAlpha(0.15)
 						f82_arg0:registerEventHandler("transition_complete_keyframe", f77_arg0.clipFinished)
@@ -858,7 +858,7 @@ CoD.BowLauncherReticle_Internal.__clipsPerState = {
 			f77_local2(f77_arg0.WingL)
 			local f77_local3 = function(f83_arg0)
 				local f83_local0 = function(f84_arg0)
-					f84_arg0:beginAnimation(69, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f84_arg0:beginAnimation(69, Enum[@"luitween"][@"luitween_ease_out"])
 					f84_arg0:setLeftRight(-1.08, -0.96, 260, 260)
 					f84_arg0:setAlpha(0.15)
 					f84_arg0:registerEventHandler("transition_complete_keyframe", f77_arg0.clipFinished)
@@ -875,7 +875,7 @@ CoD.BowLauncherReticle_Internal.__clipsPerState = {
 			local f77_local4 = function(f85_arg0)
 				local f85_local0 = function(f86_arg0)
 					local f86_local0 = function(f87_arg0)
-						f87_arg0:beginAnimation(69, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+						f87_arg0:beginAnimation(69, Enum[@"luitween"][@"luitween_ease_out"])
 						f87_arg0:setTopBottom(0.17, 0.32, 21, 21)
 						f87_arg0:registerEventHandler("transition_complete_keyframe", f77_arg0.clipFinished)
 					end
@@ -896,7 +896,7 @@ CoD.BowLauncherReticle_Internal.__clipsPerState = {
 			local f77_local5 = function(f88_arg0)
 				local f88_local0 = function(f89_arg0)
 					local f89_local0 = function(f90_arg0)
-						f90_arg0:beginAnimation(69, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+						f90_arg0:beginAnimation(69, Enum[@"luitween"][@"luitween_ease_out"])
 						f90_arg0:setTopBottom(0.48, 0.63, 12, 12)
 						f90_arg0:registerEventHandler("transition_complete_keyframe", f77_arg0.clipFinished)
 					end

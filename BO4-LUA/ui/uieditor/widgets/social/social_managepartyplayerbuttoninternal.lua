@@ -24,8 +24,8 @@ CoD.Social_ManagePartyPlayerButtonInternal.new = function(f1_arg0, f1_arg1, f1_a
 	self.Backing = Backing
 	local NoiseTiledBacking = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	NoiseTiledBacking:setAlpha(0.8)
-	NoiseTiledBacking:setImage(RegisterImage(0x34839E8065B1E53))
-	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	NoiseTiledBacking:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	NoiseTiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	NoiseTiledBacking:setupNineSliceShader(196, 88)
 	self:addElement(NoiseTiledBacking)
@@ -125,8 +125,8 @@ CoD.Social_ManagePartyPlayerButtonInternal.new = function(f1_arg0, f1_arg1, f1_a
 	end
 	playerName.__Color()
 	playerName:setTTF("notosans_bold")
-	playerName:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	playerName:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	playerName:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	playerName:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	playerName:setBackingType(2)
 	playerName:setBackingColor(0, 0, 0)
 	playerName:setBackingAlpha(0.6)
@@ -214,8 +214,8 @@ CoD.Social_ManagePartyPlayerButtonInternal.new = function(f1_arg0, f1_arg1, f1_a
 	self.PartyBar = PartyBar
 	local FocusGlow = LUI.UIImage.new(-0.1, 1.09, -100, 100, 0.5, 0.5, -61, 61)
 	FocusGlow:setAlpha(0)
-	FocusGlow:setImage(RegisterImage(0x8E79E4E42B6714C))
-	FocusGlow:setMaterial(LUI.UIImage.GetCachedMaterial(0xDAB59B2CAE01851))
+	FocusGlow:setImage(RegisterImage(@"uie_ui_menu_common_focus_glow_large"))
+	FocusGlow:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_6DAB59B2CAE01851"))
 	FocusGlow:setShaderVector(0, 0, 0, 0.25, 0.25)
 	FocusGlow:setShaderVector(1, 1.2, 0, 0, 0)
 	FocusGlow:setupNineSliceShader(300, 300)

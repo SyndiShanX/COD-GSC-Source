@@ -16,29 +16,29 @@ LUI.createMenu.LaboratoryPlasmaConfirmation = function(f1_arg0, f1_arg1)
 	self.anyChildUsesUpdateState = true
 	local FullscreenPopupTemplate = CoD.FullscreenPopupTemplate.new(f1_local1, f1_arg0, 0, 1, 0, 0, 0, 1, 0, 0)
 	FullscreenPopupTemplate.ButtonList:setDataSource("PlasmaConfirmationButtonList")
-	FullscreenPopupTemplate.ErrorSubtitle:setText(Engine[0xF9F1239CFD921FE](0x306208DB7BBE129))
-	FullscreenPopupTemplate.WorkingTitle:setText(Engine[0xF9F1239CFD921FE](0x9D00A7D3D969F6E))
-	FullscreenPopupTemplate.DoneTitle:setText(Engine[0xF9F1239CFD921FE](0x83048BBBD98FC6A))
+	FullscreenPopupTemplate.ErrorSubtitle:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/purchase_error"))
+	FullscreenPopupTemplate.WorkingTitle:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/purchase_processing"))
+	FullscreenPopupTemplate.DoneTitle:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/purchase_complete"))
 	FullscreenPopupTemplate:linkToElementModel(self, nil, false, function(model)
 		FullscreenPopupTemplate:setModel(model, f1_arg0)
 	end)
 	FullscreenPopupTemplate:linkToElementModel(self, "price", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
-			FullscreenPopupTemplate.Subtitle:setText(LocalizeIntoString(0x4FD368063324203, f3_local0))
+			FullscreenPopupTemplate.Subtitle:setText(LocalizeIntoString(@"hash_44FD368063324203", f3_local0))
 		end
 	end)
 	FullscreenPopupTemplate:linkToElementModel(self, "name", true, function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
-			FullscreenPopupTemplate.Title:setText(LocalizeIntoString(0x63FCD1B0849669E, f4_local0))
+			FullscreenPopupTemplate.Title:setText(LocalizeIntoString(@"hash_663FCD1B0849669E", f4_local0))
 		end
 	end)
 	LUI.OverrideFunction_CallOriginalFirst(FullscreenPopupTemplate, "setState", function(element, controller, f5_arg2, f5_arg3, f5_arg4)
 		if IsPC() and IsElementInState(element, "FinishedState") then
-			CoD.PCUtility.LinkPCSmallCloseButtonToInput(f1_local1, controller, element, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+			CoD.PCUtility.LinkPCSmallCloseButtonToInput(f1_local1, controller, element, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		elseif IsPC() then
-			CoD.PCUtility.LinkPCSmallCloseButtonToInput(f1_local1, controller, element, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A])
+			CoD.PCUtility.LinkPCSmallCloseButtonToInput(f1_local1, controller, element, Enum[@"luibutton"][@"lui_key_xbb_pscircle"])
 		end
 	end)
 	self:addElement(FullscreenPopupTemplate)
@@ -53,10 +53,10 @@ LUI.createMenu.LaboratoryPlasmaConfirmation = function(f1_arg0, f1_arg1)
 	self:addElement(Image)
 	self.Image = Image
 	local CostText = LUI.UIText.new(0.5, 0.5, -679.5, -446.5, 0.5, 0.5, 142.5, 191.5)
-	CostText:setText(Engine[0xF9F1239CFD921FE](0x93F12745A24670F))
+	CostText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_393F12745A24670F"))
 	CostText:setTTF("default")
-	CostText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	CostText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	CostText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	CostText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(CostText)
 	self.CostText = CostText
 	local FooterContainerFrontendRight = CoD.FooterContainer_Frontend_Right.new(f1_local1, f1_arg0, 0, 1, 0, 0, 1, 1, -48, 0)
@@ -77,15 +77,15 @@ LUI.createMenu.LaboratoryPlasmaConfirmation = function(f1_arg0, f1_arg1)
 	self.FooterContainerFrontendRight = FooterContainerFrontendRight
 	self:appendEventHandler("input_source_changed", function(f8_arg0, f8_arg1)
 		f8_arg1.menu = f8_arg1.menu or f1_local1
-		CoD.Menu.UpdateButtonShownState(f8_arg0, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f8_arg0, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	local f1_local6 = self
 	local f1_local7 = self.subscribeToModel
-	local f1_local8 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	local f1_local8 = Engine[@"getmodelforcontroller"](f1_arg0)
 	f1_local7(f1_local6, f1_local8.LastInput, function(f9_arg0, f9_arg1)
-		CoD.Menu.UpdateButtonShownState(f9_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f9_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		if not IsElementInState(self.FullscreenPopupTemplate, "WorkingState") and not IsElementInState(self.FullscreenPopupTemplate, "FinishedState") then
 			GoBack(self, controller)
 			return true
@@ -93,13 +93,13 @@ LUI.createMenu.LaboratoryPlasmaConfirmation = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if not IsElementInState(self.FullscreenPopupTemplate, "WorkingState") and not IsElementInState(self.FullscreenPopupTemplate, "FinishedState") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if IsElementInState(self.FullscreenPopupTemplate, "FinishedState") then
 			GoBack(self, controller)
 			return true
@@ -114,13 +114,13 @@ LUI.createMenu.LaboratoryPlasmaConfirmation = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if IsElementInState(self.FullscreenPopupTemplate, "FinishedState") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x6393FF34EA56966, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/continue", nil, nil)
 			return true
 		elseif IsElementInState(self.FullscreenPopupTemplate, "ErrorState") and IsGamepad(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x70A9FDC87CD3D48, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/back", nil, nil)
 			return true
 		elseif IsPC() and IsElementInState(self.FullscreenPopupTemplate, "DefaultState") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x85952ACC6D0C1B0, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/purchase", nil, nil)
 			return true
 		else
 			return false

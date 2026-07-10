@@ -48,7 +48,7 @@ CoD.DirectorCustomGameCodCaster.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 		{
 			stateName = "Empty",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "xuid", Engine[0x9073FBE2D48C156]("0"))
+				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "xuid", Engine[@"stringtoxuiddecimal"]("0"))
 			end,
 		},
 		{
@@ -69,7 +69,7 @@ CoD.DirectorCustomGameCodCaster.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	end)
 	local f1_local3 = self
 	local f1_local4 = self.subscribeToModel
-	local f1_local5 = Engine[0x8DF2E5447F384B9]()
+	local f1_local5 = Engine[@"getglobalmodel"]()
 	f1_local4(f1_local3, f1_local5["lobbyRoot.selectedXuid"], function(f9_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -81,7 +81,7 @@ CoD.DirectorCustomGameCodCaster.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	end, false)
 	f1_local3 = self
 	f1_local4 = self.subscribeToModel
-	f1_local5 = Engine[0x8DF2E5447F384B9]()
+	f1_local5 = Engine[@"getglobalmodel"]()
 	f1_local4(f1_local3, f1_local5["lobbyRoot.selectedXuidTeam"], function(f10_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -106,7 +106,7 @@ CoD.DirectorCustomGameCodCaster.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	end)
 	f1_local3 = self
 	f1_local4 = self.subscribeToModel
-	f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local4(f1_local3, f1_local5.LastInput, function(f13_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

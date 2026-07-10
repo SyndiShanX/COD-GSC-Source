@@ -10,7 +10,7 @@ LUI.createMenu.WildcardSelect = function(f1_arg0, f1_arg1)
 	CoD.BaseUtility.SetPropertiesFromUserData(self, f1_arg1)
 	SetProperty(self, "_showItemNameOnButtonHold", true)
 	SetProperty(self, "preserveLuiButton", {
-		[Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC]] = true,
+		[Enum[@"luibutton"][@"lui_key_ltrig"]] = true,
 	})
 	SetControllerModelValue(f1_arg0, "WildcardMenuOpen", true)
 	self:setClass(CoD.WildcardSelect)
@@ -30,10 +30,10 @@ LUI.createMenu.WildcardSelect = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f2_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_none"])
 		return f2_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(CloseOnClickOutside, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "MOUSE1", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(CloseOnClickOutside, f1_arg0, Enum[@"luibutton"][@"lui_key_none"], "MOUSE1", function(element, menu, controller, model)
 		if not IsRepeatButtonPress(model) then
 			CoD.CACUtility.AnimatedMenuClose(menu, controller, "Close", 200, "cac_loadout_edit_select_primary")
 			return true
@@ -41,7 +41,7 @@ LUI.createMenu.WildcardSelect = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if not IsRepeatButtonPress(nil) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "MOUSE1")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "MOUSE1")
 			return false
 		else
 			return false
@@ -72,12 +72,12 @@ LUI.createMenu.WildcardSelect = function(f1_arg0, f1_arg1)
 	self.FooterContainerFrontendRight = FooterContainerFrontendRight
 	local CACHeader = CoD.CACHeader.new(f1_local1, f1_arg0, 0.5, 0.5, -960, 960, 0, 0, 0, 67)
 	CACHeader.BGSceneBlur:setAlpha(0)
-	CACHeader.subtitle.StageTitle:setText(LocalizeToUpperString(0x8DEB3201AB34D8E))
+	CACHeader.subtitle.StageTitle:setText(LocalizeToUpperString(@"hash_38DEB3201AB34D8E"))
 	CACHeader.subtitle.subtitle:setAlpha(0)
 	CACHeader:subscribeToGlobalModel(f1_arg0, "LobbyRoot", "lobbyTitle", function(model)
 		local f6_local0 = model:get()
 		if f6_local0 ~= nil then
-			CACHeader.subtitle.subtitle:setText(Engine[0xF9F1239CFD921FE](f6_local0))
+			CACHeader.subtitle.subtitle:setText(Engine[@"hash_4F9F1239CFD921FE"](f6_local0))
 		end
 	end)
 	CACHeader:linkToElementModel(self, nil, false, function(model)
@@ -118,24 +118,24 @@ LUI.createMenu.WildcardSelect = function(f1_arg0, f1_arg1)
 	end)
 	self:addElement(TopBar)
 	self.TopBar = TopBar
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], "ESCAPE", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], "ESCAPE", function(element, menu, controller, model)
 		PlaySoundAlias("uin_party_ease_slide_back")
 		SetControllerModelValue(controller, "WildcardMenuOpen", false)
 		CoD.CACUtility.PlayChooseScreenOutro(menu, controller, "Close")
 		DelayUnhideFreecursorGoBack(menu, controller, 200)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, "ESCAPE")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, "ESCAPE")
 		return true
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_ltrig"], nil, function(element, menu, controller, model)
 		if not IsPC() then
 			return true
 		else
 		end
 	end, function(element, menu, controller)
 		if not IsPC() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC], 0x37FD8BAF8499F87, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_ltrig"], @"hash_237FD8BAF8499F87", nil, nil)
 			return true
 		else
 			return false
@@ -198,7 +198,7 @@ CoD.WildcardSelect.__clipsPerState = {
 			f17_arg0:setupElementClipCounter(3)
 			local f17_local0 = function(f18_arg0)
 				local f18_local0 = function(f19_arg0)
-					f19_arg0:beginAnimation(100, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f19_arg0:beginAnimation(100, Enum[@"luitween"][@"luitween_ease_both"])
 					f19_arg0:setTopBottom(0, 0, -30, 570)
 					f19_arg0:setAlpha(1)
 					f19_arg0:registerEventHandler("transition_complete_keyframe", f17_arg0.clipFinished)
@@ -237,7 +237,7 @@ CoD.WildcardSelect.__clipsPerState = {
 			f22_arg0:setupElementClipCounter(3)
 			local f22_local0 = function(f23_arg0)
 				local f23_local0 = function(f24_arg0)
-					f24_arg0:beginAnimation(100, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f24_arg0:beginAnimation(100, Enum[@"luitween"][@"luitween_ease_both"])
 					f24_arg0:setTopBottom(0, 0, -50, 550)
 					f24_arg0:setAlpha(0)
 					f24_arg0:registerEventHandler("transition_complete_keyframe", f22_arg0.clipFinished)

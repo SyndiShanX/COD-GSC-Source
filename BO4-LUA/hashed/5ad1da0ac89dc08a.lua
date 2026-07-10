@@ -11,52 +11,52 @@ CoD.SpawnSelectLocationMarker.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local SpawnIconBg = LUI.UIImage.new(0, 0, 74.5, 122.5, 0, 0, 40.5, 88.5)
-	SpawnIconBg:setImage(RegisterImage(0x6BAB388F74F4130))
+	SpawnIconBg:setImage(RegisterImage(@"uie_ui_hud_selectspawn_point_bg"))
 	self:addElement(SpawnIconBg)
 	self.SpawnIconBg = SpawnIconBg
 	local SpawnIconBgAdd = LUI.UIImage.new(0, 0, 74.5, 122.5, 0, 0, 40.5, 88.5)
-	SpawnIconBgAdd:setImage(RegisterImage(0x6BAB388F74F4130))
-	SpawnIconBgAdd:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	SpawnIconBgAdd:setImage(RegisterImage(@"uie_ui_hud_selectspawn_point_bg"))
+	SpawnIconBgAdd:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(SpawnIconBgAdd)
 	self.SpawnIconBgAdd = SpawnIconBgAdd
 	local SpawnIconSelect = LUI.UIImage.new(0, 0, 74.5, 122.5, 0, 0, 40.5, 88.5)
-	SpawnIconSelect:setImage(RegisterImage(0xBDB803803D3EBB8))
+	SpawnIconSelect:setImage(RegisterImage(@"uie_ui_hud_selectspawn_point_pulse"))
 	self:addElement(SpawnIconSelect)
 	self.SpawnIconSelect = SpawnIconSelect
 	local SpawnIconOutline = LUI.UIImage.new(0, 0, 74.5, 122.5, 0, 0, 40.5, 88.5)
-	SpawnIconOutline:setImage(RegisterImage(0xC8EC26A4504B31))
-	SpawnIconOutline:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	SpawnIconOutline:setImage(RegisterImage(@"uie_ui_hud_selectspawn_point_boundary"))
+	SpawnIconOutline:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(SpawnIconOutline)
 	self.SpawnIconOutline = SpawnIconOutline
 	local SpawnSelectLock = LUI.UIImage.new(0, 0, 74.5, 122.5, 0, 0, 40.5, 88.5)
-	SpawnSelectLock:setImage(RegisterImage(0xB40AE443453183B))
-	SpawnSelectLock:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	SpawnSelectLock:setImage(RegisterImage(@"uie_ui_hud_selectspawn_lock"))
+	SpawnSelectLock:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(SpawnSelectLock)
 	self.SpawnSelectLock = SpawnSelectLock
 	local SpawnSelectLockAdd = LUI.UIImage.new(0, 0, 74.5, 122.5, 0, 0, 40.5, 88.5)
 	SpawnSelectLockAdd:setAlpha(0)
 	SpawnSelectLockAdd:setScale(1.1, 1.1)
-	SpawnSelectLockAdd:setImage(RegisterImage(0xB40AE443453183B))
-	SpawnSelectLockAdd:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	SpawnSelectLockAdd:setImage(RegisterImage(@"uie_ui_hud_selectspawn_lock"))
+	SpawnSelectLockAdd:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(SpawnSelectLockAdd)
 	self.SpawnSelectLockAdd = SpawnSelectLockAdd
 	local iconSelectedLineRight = CoD.SpawnSelectIconLine.new(f1_arg0, f1_arg1, 0, 0, 121, 197, 0, 0, 61, 67)
-	iconSelectedLineRight:setRFTMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	iconSelectedLineRight:setRFTMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(iconSelectedLineRight)
 	self.iconSelectedLineRight = iconSelectedLineRight
 	local iconSelectedLineLeft = CoD.SpawnSelectIconLine.new(f1_arg0, f1_arg1, 0, 0, 0, 76, 0, 0, 61, 67)
 	iconSelectedLineLeft:setZRot(180)
-	iconSelectedLineLeft:setRFTMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	iconSelectedLineLeft:setRFTMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(iconSelectedLineLeft)
 	self.iconSelectedLineLeft = iconSelectedLineLeft
 	local iconSelectedLineBot = CoD.SpawnSelectIconLine.new(f1_arg0, f1_arg1, 0, 0, 60.5, 136.5, 0, 0, 121.5, 127.5)
 	iconSelectedLineBot:setZRot(270)
-	iconSelectedLineBot:setRFTMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	iconSelectedLineBot:setRFTMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(iconSelectedLineBot)
 	self.iconSelectedLineBot = iconSelectedLineBot
 	local iconSelectedLineTop = CoD.SpawnSelectIconLine.new(f1_arg0, f1_arg1, 0, 0, 60.5, 136.5, 0, 0, 0, 6)
 	iconSelectedLineTop:setZRot(90)
-	iconSelectedLineTop:setRFTMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	iconSelectedLineTop:setRFTMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(iconSelectedLineTop)
 	self.iconSelectedLineTop = iconSelectedLineTop
 	iconSelectedLineRight.id = "iconSelectedLineRight"

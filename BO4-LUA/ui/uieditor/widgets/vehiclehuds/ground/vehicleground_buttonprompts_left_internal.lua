@@ -84,7 +84,7 @@ CoD.VehicleGround_ButtonPrompts_Left_Internal.new = function(f1_arg0, f1_arg1, f
 	ExitVehicleBtn:linkToElementModel(self, "vehicleExitPromptRef", true, function(model)
 		local f17_local0 = model:get()
 		if f17_local0 ~= nil then
-			ExitVehicleBtn.label:setText(Engine[0xF9F1239CFD921FE](f17_local0))
+			ExitVehicleBtn.label:setText(Engine[@"hash_4F9F1239CFD921FE"](f17_local0))
 		end
 	end)
 	LUI.OverrideFunction_CallOriginalFirst(ExitVehicleBtn, "setState", function(element, controller, f18_arg2, f18_arg3, f18_arg4)

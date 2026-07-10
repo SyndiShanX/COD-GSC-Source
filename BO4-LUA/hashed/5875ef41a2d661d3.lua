@@ -18,8 +18,8 @@ CoD.CharacterSelection_PrestigeInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	self.PrestigeIcon = PrestigeIcon
 	local PrestigeText = LUI.UIText.new(0, 0, 74, 536, 0, 0, 18.5, 55.5)
 	PrestigeText:setTTF("ttmussels_regular")
-	PrestigeText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	PrestigeText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	PrestigeText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	PrestigeText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	PrestigeText:subscribeToGlobalModel(f1_arg1, "PrestigeStats", "plevel", function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then

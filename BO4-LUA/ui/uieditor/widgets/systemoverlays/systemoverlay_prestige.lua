@@ -26,8 +26,8 @@ CoD.systemOverlay_Prestige.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	local MainText = LUI.UIText.new(0.5, 0.5, -919.5, -489.5, 0, 0, 422, 459)
 	MainText:setTTF("ttmussels_demibold")
 	MainText:setLetterSpacing(4)
-	MainText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	MainText:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	MainText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	MainText:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	MainText:linkToElementModel(self, "prestigeItemName", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -40,7 +40,7 @@ CoD.systemOverlay_Prestige.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	Title:setRGB(ColorSet.T8__BEIGE__HEADER.r, ColorSet.T8__BEIGE__HEADER.g, ColorSet.T8__BEIGE__HEADER.b)
 	Title:setTTF("ttmussels_demibold")
 	Title:setLetterSpacing(6)
-	Title:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	Title:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	Title:linkToElementModel(self, "title", true, function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
@@ -53,7 +53,7 @@ CoD.systemOverlay_Prestige.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	Subtitle:setRGB(ColorSet.T8__BEIGE__HEADER.r, ColorSet.T8__BEIGE__HEADER.g, ColorSet.T8__BEIGE__HEADER.b)
 	Subtitle:setTTF("ttmussels_demibold")
 	Subtitle:setLetterSpacing(6)
-	Subtitle:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	Subtitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	Subtitle:linkToElementModel(self, "subtitle", true, function(model)
 		local f5_local0 = model:get()
 		if f5_local0 ~= nil then
@@ -66,8 +66,8 @@ CoD.systemOverlay_Prestige.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	text:setRGB(0.92, 0.92, 0.92)
 	text:setTTF("notosans_regular")
 	text:setLetterSpacing(1)
-	text:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	text:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	text:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	text:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	text:linkToElementModel(self, "description", true, function(model)
 		local f6_local0 = model:get()
 		if f6_local0 ~= nil then
@@ -86,7 +86,7 @@ CoD.systemOverlay_Prestige.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	options:setWidgetType(CoD.featureOverlay_Button)
 	options:setVerticalCount(2)
 	options:setSpacing(4)
-	options:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	options:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	options:linkToElementModel(self, "listDatasource", true, function(model)
 		local f8_local0 = model:get()
 		if f8_local0 ~= nil then
@@ -94,7 +94,7 @@ CoD.systemOverlay_Prestige.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 		end
 	end)
 	options:linkToElementModel(options, "disabled", true, function(model, f9_arg1)
-		CoD.Menu.UpdateButtonShownState(f9_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f9_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	options:registerEventHandler("gain_focus", function(element, event)
 		local f10_local0 = nil
@@ -103,10 +103,10 @@ CoD.systemOverlay_Prestige.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 		elseif element.super.gainFocus then
 			f10_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f10_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(options, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(options, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if not IsDisabled(element, controller) then
 			ProcessListAction(self, element, controller, menu)
 			return true
@@ -114,7 +114,7 @@ CoD.systemOverlay_Prestige.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 		end
 	end, function(element, menu, controller)
 		if not IsDisabled(element, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false
@@ -129,12 +129,12 @@ CoD.systemOverlay_Prestige.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	WarningText:setRGB(ColorSet.Orange.r, ColorSet.Orange.g, ColorSet.Orange.b)
 	WarningText:setTTF("dinnext_regular")
 	WarningText:setLetterSpacing(1)
-	WarningText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	WarningText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	WarningText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	WarningText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	WarningText:linkToElementModel(self, "supportText", true, function(model)
 		local f13_local0 = model:get()
 		if f13_local0 ~= nil then
-			WarningText:setText(Engine[0xF9F1239CFD921FE](f13_local0))
+			WarningText:setText(Engine[@"hash_4F9F1239CFD921FE"](f13_local0))
 		end
 	end)
 	self:addElement(WarningText)
@@ -149,7 +149,7 @@ CoD.systemOverlay_Prestige.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 		},
 	})
 	PermanentUnlockTokenButton:setAlpha(0)
-	PermanentUnlockTokenButton.CommonButtonOutlineThin.ButtonIcon:setImage(RegisterImage(0x5DB5170C4871157))
+	PermanentUnlockTokenButton.CommonButtonOutlineThin.ButtonIcon:setImage(RegisterImage(@"prestige_icon_awards"))
 	PermanentUnlockTokenButton:subscribeToGlobalModel(f1_arg1, "PerController", "permanentUnlockTokensCount", function(model)
 		local f15_local0 = model:get()
 		if f15_local0 ~= nil then

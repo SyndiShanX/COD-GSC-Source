@@ -13,7 +13,7 @@ CoD.CompassAwarenessRingSegment.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 		{
 			stateName = "Detect_CUAV",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueBitSet(element, f1_arg1, "segmentValue", CoD.HUDUtility.AwarenessLevels.AWARENESS_LEVEL_INNER_BIT) and IsVisibilityBitSet(f1_arg1, Enum[0x7F032C2EF103A1A][0xF0EF20BB6FB88F])
+				return CoD.ModelUtility.IsSelfModelValueBitSet(element, f1_arg1, "segmentValue", CoD.HUDUtility.AwarenessLevels.AWARENESS_LEVEL_INNER_BIT) and IsVisibilityBitSet(f1_arg1, Enum[@"uivisibilitybit"][@"bit_counter_uav_active"])
 			end,
 		},
 		{
@@ -40,14 +40,14 @@ CoD.CompassAwarenessRingSegment.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	end)
 	local f1_local2 = Inner
 	local Outer = Inner.subscribeToModel
-	local f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	Outer(f1_local2, f1_local4["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF0EF20BB6FB88F]], function(f6_arg0)
+	local f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
+	Outer(f1_local2, f1_local4["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_counter_uav_active"]], function(f6_arg0)
 		f1_arg0:updateElementState(Inner, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f6_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF0EF20BB6FB88F],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_counter_uav_active"],
 		})
 	end, false)
 	f1_local2 = Inner
@@ -73,7 +73,7 @@ CoD.CompassAwarenessRingSegment.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 		{
 			stateName = "Detect_CUAV",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueBitSet(element, f1_arg1, "segmentValue", CoD.HUDUtility.AwarenessLevels.AWARENESS_LEVEL_OUTER_BIT) and IsVisibilityBitSet(f1_arg1, Enum[0x7F032C2EF103A1A][0xF0EF20BB6FB88F])
+				return CoD.ModelUtility.IsSelfModelValueBitSet(element, f1_arg1, "segmentValue", CoD.HUDUtility.AwarenessLevels.AWARENESS_LEVEL_OUTER_BIT) and IsVisibilityBitSet(f1_arg1, Enum[@"uivisibilitybit"][@"bit_counter_uav_active"])
 			end,
 		},
 		{
@@ -100,14 +100,14 @@ CoD.CompassAwarenessRingSegment.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	end)
 	f1_local4 = Outer
 	f1_local2 = Outer.subscribeToModel
-	local f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local2(f1_local4, f1_local5["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF0EF20BB6FB88F]], function(f13_arg0)
+	local f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local2(f1_local4, f1_local5["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_counter_uav_active"]], function(f13_arg0)
 		f1_arg0:updateElementState(Outer, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f13_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF0EF20BB6FB88F],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_counter_uav_active"],
 		})
 	end, false)
 	f1_local4 = Outer

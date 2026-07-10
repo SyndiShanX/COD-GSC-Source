@@ -16,8 +16,8 @@ CoD.WeaponAccessoriesSelectInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local CharmListBg = LUI.UIImage.new(0, 0, 73, 921, 0, 0, 81, 926)
 	CharmListBg:setScale(0.77, 0.77)
-	CharmListBg:setImage(RegisterImage(0xCE384B31419E220))
-	CharmListBg:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	CharmListBg:setImage(RegisterImage(@"uie_ui_menu_emblem_empty_bg"))
+	CharmListBg:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	CharmListBg:setShaderVector(0, 0, 0, 0, 0)
 	CharmListBg:setupNineSliceShader(212, 212)
 	self:addElement(CharmListBg)
@@ -29,26 +29,26 @@ CoD.WeaponAccessoriesSelectInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	CharmList:setHorizontalCount(4)
 	CharmList:setVerticalCount(4)
 	CharmList:setSpacing(11)
-	CharmList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	CharmList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	CharmList:setVerticalCounter(CoD.verticalCounter)
 	CharmList:setDataSource("WeaponCharmList")
 	CharmList:linkToElementModel(CharmList, "isLocked", true, function(model, f2_arg1)
-		CoD.Menu.UpdateButtonShownState(f2_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f2_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	CharmList:linkToElementModel(CharmList, "available", true, function(model, f3_arg1)
-		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	CharmList:appendEventHandler("input_source_changed", function(f4_arg0, f4_arg1)
 		f4_arg1.menu = f4_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f4_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f4_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x4D2505E19049444])
+		CoD.Menu.UpdateButtonShownState(f4_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f4_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"hash_64D2505E19049444"])
 	end)
 	local CharmsMessage = CharmList
 	local ItemInfoPanel = CharmList.subscribeToModel
-	local XCamMouseControl = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local XCamMouseControl = Engine[@"getmodelforcontroller"](f1_arg1)
 	ItemInfoPanel(CharmsMessage, XCamMouseControl.LastInput, function(f5_arg0, f5_arg1)
-		CoD.Menu.UpdateButtonShownState(f5_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f5_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x4D2505E19049444])
+		CoD.Menu.UpdateButtonShownState(f5_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f5_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"hash_64D2505E19049444"])
 	end, false)
 	CharmList:registerEventHandler("list_item_gain_focus", function(element, event)
 		local f6_local0 = nil
@@ -69,12 +69,12 @@ CoD.WeaponAccessoriesSelectInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 		elseif element.super.gainFocus then
 			f8_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x4D2505E19049444])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"hash_64D2505E19049444"])
 		return f8_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(CharmList, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(CharmList, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if not CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "isLocked") and CoD.ModelUtility.IsSelfModelValueNilOrTrue(element, controller, "available") and not IsElementModelConditionFn(menu, self, element, controller, "isEquippedFn") then
 			CoD.WeaponOptionsUtility.EquipWeaponAccessory(menu, element, controller, false)
 			SaveLoadout(self, controller)
@@ -83,13 +83,13 @@ CoD.WeaponAccessoriesSelectInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 		end
 	end, function(element, menu, controller)
 		if not CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "isLocked") and CoD.ModelUtility.IsSelfModelValueNilOrTrue(element, controller, "available") and not IsElementModelConditionFn(menu, self, element, controller, "isEquippedFn") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(CharmList, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(CharmList, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], nil, function(element, menu, controller, model)
 		if IsElementModelConditionFn(menu, self, element, controller, "isEquippedFn") and IsGamepad(controller) then
 			CoD.WeaponOptionsUtility.ClearWeaponAccessory(menu, controller)
 			return true
@@ -97,13 +97,13 @@ CoD.WeaponAccessoriesSelectInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 		end
 	end, function(element, menu, controller)
 		if IsElementModelConditionFn(menu, self, element, controller, "isEquippedFn") and IsGamepad(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x679ACA6FFC6C8F3, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"menu/remove", nil, nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(CharmList, f1_arg1, Enum[0x3DD78803F918E9D][0x4D2505E19049444], "ui_remove", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(CharmList, f1_arg1, Enum[@"luibutton"][@"hash_64D2505E19049444"], "ui_remove", function(element, menu, controller, model)
 		if IsElementModelConditionFn(menu, self, element, controller, "isEquippedFn") and IsMouseOrKeyboard(controller) then
 			CoD.WeaponOptionsUtility.ClearWeaponAccessory(menu, controller)
 			return true
@@ -111,7 +111,7 @@ CoD.WeaponAccessoriesSelectInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 		end
 	end, function(element, menu, controller)
 		if IsElementModelConditionFn(menu, self, element, controller, "isEquippedFn") and IsMouseOrKeyboard(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x4D2505E19049444], 0x679ACA6FFC6C8F3, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "ui_remove")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"hash_64D2505E19049444"], @"menu/remove", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "ui_remove")
 			return true
 		else
 			return false
@@ -121,7 +121,7 @@ CoD.WeaponAccessoriesSelectInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 		local f15_local0 = CharmList
 		UpdateAllMenuButtonPrompts(f1_arg0, f1_arg1)
 	end)
-	CharmList:AddContextualMenuAction(f1_arg0, f1_arg1, 0x679ACA6FFC6C8F3, function(f16_arg0, f16_arg1, f16_arg2, f16_arg3)
+	CharmList:AddContextualMenuAction(f1_arg0, f1_arg1, @"menu/remove", function(f16_arg0, f16_arg1, f16_arg2, f16_arg3)
 		if IsElementModelConditionFn(f16_arg1, self, f16_arg0, f16_arg2, "isEquippedFn") then
 			return function(f17_arg0, f17_arg1, f17_arg2, f17_arg3)
 				CoD.WeaponOptionsUtility.ClearWeaponAccessory(f17_arg1, f17_arg2)
@@ -137,10 +137,10 @@ CoD.WeaponAccessoriesSelectInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	CharmsMessage = LUI.UIText.new(0, 0, 167, 817, 0.5, 0.5, -53.5, -23.5)
 	CharmsMessage:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	CharmsMessage:setAlpha(0)
-	CharmsMessage:setText(Engine[0xF9F1239CFD921FE](0xF11EFCA50B790EB))
+	CharmsMessage:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_6F11EFCA50B790EB"))
 	CharmsMessage:setTTF("dinnext_regular")
-	CharmsMessage:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	CharmsMessage:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	CharmsMessage:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	CharmsMessage:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(CharmsMessage)
 	self.CharmsMessage = CharmsMessage
 	XCamMouseControl = nil

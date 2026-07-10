@@ -9,7 +9,7 @@ CoD.ItemShopPreviewButtonContentImage.new = function(f1_arg0, f1_arg1, f1_arg2, 
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Default = LUI.UIImage.new(0, 0, 0, 224, 0, 0, 0, 307)
 	Default:setAlpha(0)
-	Default:setMaterial(LUI.UIImage.GetCachedMaterial(0xA02C44161370F6D))
+	Default:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_1A02C44161370F6D"))
 	Default:setShaderVector(0, 0.5, 0, 0, 0)
 	Default:setShaderVector(1, 1, 1, 0, 0)
 	Default:setShaderVector(2, 0, 0, 0, 0)
@@ -23,7 +23,7 @@ CoD.ItemShopPreviewButtonContentImage.new = function(f1_arg0, f1_arg1, f1_arg2, 
 	self.Default = Default
 	local OutfitBundle = LUI.UIImage.new(0, 0, 0, 224, 0, 0, 0, 307)
 	OutfitBundle:setAlpha(0)
-	OutfitBundle:setMaterial(LUI.UIImage.GetCachedMaterial(0xA02C44161370F6D))
+	OutfitBundle:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_1A02C44161370F6D"))
 	OutfitBundle:setShaderVector(0, 0.5, 0.3, 0, 0)
 	OutfitBundle:setShaderVector(1, 1, 1, 0, 0)
 	OutfitBundle:setShaderVector(2, 0, 0, 0, 0)
@@ -37,7 +37,7 @@ CoD.ItemShopPreviewButtonContentImage.new = function(f1_arg0, f1_arg1, f1_arg2, 
 	self.OutfitBundle = OutfitBundle
 	local OutfitPalette = LUI.UIImage.new(0, 0, 0, 224, 0, 0, 0, 307)
 	OutfitPalette:setAlpha(0)
-	OutfitPalette:setMaterial(LUI.UIImage.GetCachedMaterial(0xA02C44161370F6D))
+	OutfitPalette:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_1A02C44161370F6D"))
 	OutfitPalette:setShaderVector(0, 0.5, 0, 0, 0)
 	OutfitPalette:setShaderVector(1, 1, 1, 0, 0)
 	OutfitPalette:setShaderVector(2, 0.05, 0, 0, 0)
@@ -53,13 +53,13 @@ CoD.ItemShopPreviewButtonContentImage.new = function(f1_arg0, f1_arg1, f1_arg2, 
 		{
 			stateName = "OutfitBundle",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", 0xC398D8E22A2269B)
+				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", @"outfit_bundle")
 			end,
 		},
 		{
 			stateName = "OutfitPalette",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", 0xDD691088352B680)
+				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", @"palette")
 			end,
 		},
 	})

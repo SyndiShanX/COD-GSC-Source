@@ -12,14 +12,14 @@ CoD.TabbedScoreboardHeaderTitle.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	GameType:setText(ToUpper(LocalizeString(GetGameMode())))
 	GameType:setTTF("ttmussels_demibold")
 	GameType:setLetterSpacing(2)
-	GameType:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	GameType:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(GameType)
 	self.GameType = GameType
 	local MapText = LUI.UIText.new(0.5, 0.5, -135, 321, 0, 0, 0, 25)
 	MapText:setRGB(ColorSet.T8__OCHRE.r, ColorSet.T8__OCHRE.g, ColorSet.T8__OCHRE.b)
 	MapText:setText(ToUpper(GetMapName()))
 	MapText:setTTF("ttmussels_regular")
-	MapText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	MapText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(MapText)
 	self.MapText = MapText
 	if PostLoadFunc then

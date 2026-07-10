@@ -18,14 +18,14 @@ CoD.DirectorZMMapSelectItemInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	self.BGGray = BGGray
 	local NoiseTiledBacking = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	NoiseTiledBacking:setAlpha(0.5)
-	NoiseTiledBacking:setImage(RegisterImage(0x34839E8065B1E53))
-	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	NoiseTiledBacking:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	NoiseTiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	NoiseTiledBacking:setupNineSliceShader(196, 88)
 	self:addElement(NoiseTiledBacking)
 	self.NoiseTiledBacking = NoiseTiledBacking
 	local MapImage = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	MapImage:setMaterial(LUI.UIImage.GetCachedMaterial(0xA02C44161370F6D))
+	MapImage:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_1A02C44161370F6D"))
 	MapImage:setShaderVector(0, 0, 0, 0, 0)
 	MapImage:setShaderVector(1, 1, 1, 0, 0)
 	MapImage:setShaderVector(2, 0, 0, 0, 0)
@@ -40,13 +40,13 @@ CoD.DirectorZMMapSelectItemInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	local equippedIcon = LUI.UIImage.new(0.5, 0.5, 108.5, 125.5, 0.5, 0.5, -69, -53)
 	equippedIcon:setRGB(0.56, 0.68, 0.27)
 	equippedIcon:setAlpha(0)
-	equippedIcon:setImage(RegisterImage(0xB0337CBFC61A7A2))
+	equippedIcon:setImage(RegisterImage(@"hash_1B0337CBFC61A7A2"))
 	self:addElement(equippedIcon)
 	self.equippedIcon = equippedIcon
 	local FrameBorder = LUI.UIImage.new(0, 1, -1, 1, 0, 1, -1, 1)
 	FrameBorder:setAlpha(0.15)
-	FrameBorder:setImage(RegisterImage(0x185E11D74ECA3D7))
-	FrameBorder:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	FrameBorder:setImage(RegisterImage(@"uie_ui_menu_store_common_frame"))
+	FrameBorder:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	FrameBorder:setShaderVector(0, 0, 0, 0, 0)
 	FrameBorder:setupNineSliceShader(12, 12)
 	self:addElement(FrameBorder)
@@ -58,13 +58,13 @@ CoD.DirectorZMMapSelectItemInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	local MapName = LUI.UIText.new(0, 0, 9, 245, 1, 1, -23, -5)
 	MapName:setRGB(0.58, 0.58, 0.58)
 	MapName:setTTF("skorzhen")
-	MapName:setMaterial(LUI.UIImage.GetCachedMaterial(0x90D57B1E92D39D7))
+	MapName:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_90D57B1E92D39D7"))
 	MapName:setShaderVector(0, 1, 0, 0, 0)
 	MapName:setShaderVector(1, 0, 0, 0, 0)
 	MapName:setShaderVector(2, 0, 0, 0, 0.9)
 	MapName:setLetterSpacing(2)
-	MapName:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	MapName:setAlignment(Enum[0x7A5123B654282D2][0x70510683C22104B])
+	MapName:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	MapName:setAlignment(Enum[@"luialignment"][@"lui_alignment_bottom"])
 	MapName.__String_Reference = function(f3_arg0)
 		local f3_local0 = f3_arg0:get()
 		if f3_local0 ~= nil then
@@ -88,17 +88,17 @@ CoD.DirectorZMMapSelectItemInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	TrialsMapName:setRGB(0.58, 0.58, 0.58)
 	TrialsMapName:setAlpha(0)
 	TrialsMapName:setTTF("skorzhen")
-	TrialsMapName:setMaterial(LUI.UIImage.GetCachedMaterial(0x90D57B1E92D39D7))
+	TrialsMapName:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_90D57B1E92D39D7"))
 	TrialsMapName:setShaderVector(0, 1, 0, 0, 0)
 	TrialsMapName:setShaderVector(1, 0, 0, 0, 0)
 	TrialsMapName:setShaderVector(2, 0, 0, 0, 0.9)
 	TrialsMapName:setLetterSpacing(2)
-	TrialsMapName:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	TrialsMapName:setAlignment(Enum[0x7A5123B654282D2][0x70510683C22104B])
+	TrialsMapName:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	TrialsMapName:setAlignment(Enum[@"luialignment"][@"lui_alignment_bottom"])
 	TrialsMapName.__String_Reference = function(f5_arg0)
 		local f5_local0 = f5_arg0:get()
 		if f5_local0 ~= nil then
-			TrialsMapName:setText(Engine[0xF9F1239CFD921FE](CoD.ZombieUtility.GauntletMapNameToLocalizedMapDetailedNameIfPurchasable(f1_arg1, self:getModel(), f5_local0)))
+			TrialsMapName:setText(Engine[@"hash_4F9F1239CFD921FE"](CoD.ZombieUtility.GauntletMapNameToLocalizedMapDetailedNameIfPurchasable(f1_arg1, self:getModel(), f5_local0)))
 		end
 	end
 	TrialsMapName:linkToElementModel(self, "id", true, TrialsMapName.__String_Reference)
@@ -116,26 +116,26 @@ CoD.DirectorZMMapSelectItemInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	self.TrialsMapName = TrialsMapName
 	local EquippedMarkerTick2 = LUI.UIImage.new(1, 1, -150, 10, 0, 0, -17, 143)
 	EquippedMarkerTick2:setAlpha(0)
-	EquippedMarkerTick2:setImage(RegisterImage(0x65F14AD6E4F3F8F))
+	EquippedMarkerTick2:setImage(RegisterImage(@"uie_ui_menu_zombies_cac_elixir_slot_check"))
 	self:addElement(EquippedMarkerTick2)
 	self.EquippedMarkerTick2 = EquippedMarkerTick2
 	local FeaturedBannerBG = LUI.UIImage.new(0, 0, -2, 102, 0, 0, -1, 23)
 	FeaturedBannerBG:setAlpha(0)
-	FeaturedBannerBG:setImage(RegisterImage(0x6E1F7864C578F30))
+	FeaturedBannerBG:setImage(RegisterImage(@"uie_ui_menu_zm_common_featured_bannerbg"))
 	self:addElement(FeaturedBannerBG)
 	self.FeaturedBannerBG = FeaturedBannerBG
 	local FeaturedTag = LUI.UIText.new(0, 0, 3, 83, 0, 0, 3, 19)
 	FeaturedTag:setRGB(0.92, 0.92, 0.92)
 	FeaturedTag:setAlpha(0)
-	FeaturedTag:setText(LocalizeToUpperString(0x7E251454EDF7A26))
+	FeaturedTag:setText(LocalizeToUpperString(@"menu/public_tab"))
 	FeaturedTag:setTTF("ttmussels_regular")
-	FeaturedTag:setMaterial(LUI.UIImage.GetCachedMaterial(0x90D57B1E92D39D7))
+	FeaturedTag:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_90D57B1E92D39D7"))
 	FeaturedTag:setShaderVector(0, 1, 0, 0, 0)
 	FeaturedTag:setShaderVector(1, 0, 0, 0, 0)
 	FeaturedTag:setShaderVector(2, 0, 0, 0, 0.9)
 	FeaturedTag:setLetterSpacing(1)
-	FeaturedTag:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	FeaturedTag:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	FeaturedTag:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	FeaturedTag:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	self:addElement(FeaturedTag)
 	self.FeaturedTag = FeaturedTag
 	local DoubleXPCardIconsLeftAligned = CoD.DoubleXPCardIconsLeftAligned.new(f1_arg0, f1_arg1, 0, 0, 0, 129, 0, 0, 8, 51)
@@ -147,8 +147,8 @@ CoD.DirectorZMMapSelectItemInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	local FocusGlow = LUI.UIImage.new(0, 1, -49, 49, 0, 1, -49, 49)
 	FocusGlow:setRGB(0.89, 0.12, 0.12)
 	FocusGlow:setAlpha(0)
-	FocusGlow:setImage(RegisterImage(0xB8F10D49D85E9C4))
-	FocusGlow:setMaterial(LUI.UIImage.GetCachedMaterial(0xDAB59B2CAE01851))
+	FocusGlow:setImage(RegisterImage(@"uie_ui_menu_common_focus_glow_small"))
+	FocusGlow:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_6DAB59B2CAE01851"))
 	FocusGlow:setShaderVector(0, 0, 0, 0.25, 0.25)
 	FocusGlow:setShaderVector(1, 1.2, 0, 0, 0)
 	FocusGlow:setupNineSliceShader(100, 100)
@@ -157,8 +157,8 @@ CoD.DirectorZMMapSelectItemInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	local FocusBorder = LUI.UIImage.new(0, 1, -4, 4, 0, 1, -3, 3)
 	FocusBorder:setRGB(1, 0.7, 0.7)
 	FocusBorder:setAlpha(0)
-	FocusBorder:setImage(RegisterImage(0xCB07CCC28498CB2))
-	FocusBorder:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	FocusBorder:setImage(RegisterImage(@"uie_ui_menu_store_focus_frame"))
+	FocusBorder:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	FocusBorder:setShaderVector(0, 0, 0, 0, 0)
 	FocusBorder:setupNineSliceShader(10, 10)
 	self:addElement(FocusBorder)
@@ -170,19 +170,19 @@ CoD.DirectorZMMapSelectItemInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	self.FocusBrackets = FocusBrackets
 	local downloadIcon = LUI.UIImage.new(1, 1, -60, -10, 0, 0, 10, 60)
 	downloadIcon:setAlpha(0)
-	downloadIcon:setImage(RegisterImage(0x9D993738EE5B550))
+	downloadIcon:setImage(RegisterImage(@"t7_icon_menu_options_download"))
 	self:addElement(downloadIcon)
 	self.downloadIcon = downloadIcon
 	local upsellIcon = LUI.UIText.new(1, 1, -210, -10, 0, 0, 10, 50)
 	upsellIcon:setAlpha(0)
-	upsellIcon:setText(Engine[0xF9F1239CFD921FE](0xCFD524E10472BF8))
+	upsellIcon:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/purchase_icon"))
 	upsellIcon:setTTF("default")
-	upsellIcon:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
+	upsellIcon:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
 	self:addElement(upsellIcon)
 	self.upsellIcon = upsellIcon
 	local lockImage = LUI.UIImage.new(1, 1, -60, -10, 0, 0, 10, 60)
 	lockImage:setAlpha(0)
-	lockImage:setImage(RegisterImage(0xE1E7C490B2BA4FB))
+	lockImage:setImage(RegisterImage(@"uie_ui_icon_global_lock"))
 	self:addElement(lockImage)
 	self.lockImage = lockImage
 	MapName:linkToElementModel(self, "lockState", true, MapName.__String_Reference_FullPath)
@@ -193,8 +193,8 @@ CoD.DirectorZMMapSelectItemInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 			condition = function(menu, element, event)
 				local f8_local0 = CoD.ModelUtility.IsSelfModelValueTrue(element, f1_arg1, "locked")
 				if f8_local0 then
-					if not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "lockState", Enum[0xDACBB5C5F26BCD9][0x9B632F6362EA1BE]) then
-						f8_local0 = not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "lockState", Enum[0xDACBB5C5F26BCD9][0x4BDEB566326AC98])
+					if not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "lockState", Enum[@"playlistlockstate"][@"pls_required_dlc_not_available"]) then
+						f8_local0 = not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "lockState", Enum[@"playlistlockstate"][@"hash_4BDEB566326AC98"])
 					else
 						f8_local0 = false
 					end
@@ -205,19 +205,19 @@ CoD.DirectorZMMapSelectItemInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 		{
 			stateName = "Purchasable",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "lockState", Enum[0xDACBB5C5F26BCD9][0x4BDEB566326AC98])
+				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "lockState", Enum[@"playlistlockstate"][@"hash_4BDEB566326AC98"])
 			end,
 		},
 		{
 			stateName = "PurchasablePc",
 			condition = function(menu, element, event)
-				return IsPC() and CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "lockState", Enum[0xDACBB5C5F26BCD9][0x9B632F6362EA1BE])
+				return IsPC() and CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "lockState", Enum[@"playlistlockstate"][@"pls_required_dlc_not_available"])
 			end,
 		},
 		{
 			stateName = "Download",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "lockState", Enum[0xDACBB5C5F26BCD9][0x9B632F6362EA1BE]) and not IsPC()
+				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "lockState", Enum[@"playlistlockstate"][@"pls_required_dlc_not_available"]) and not IsPC()
 			end,
 		},
 		{
@@ -247,7 +247,7 @@ CoD.DirectorZMMapSelectItemInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	end)
 	local f1_local19 = self
 	local f1_local20 = self.subscribeToModel
-	local f1_local21 = Engine[0x8DF2E5447F384B9]()
+	local f1_local21 = Engine[@"getglobalmodel"]()
 	f1_local20(f1_local19, f1_local21["lobbyRoot.playlistID"], function(f15_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -367,7 +367,7 @@ CoD.DirectorZMMapSelectItemInternal.__clipsPerState = {
 			f20_local3(f20_arg0.FocusBorder)
 			local f20_local4 = function(f25_arg0)
 				local f25_local0 = function(f26_arg0)
-					f26_arg0:beginAnimation(50, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f26_arg0:beginAnimation(50, Enum[@"luitween"][@"luitween_ease_out"])
 					f26_arg0:setLeftRight(0, 1, -10, 10)
 					f26_arg0:setTopBottom(0, 1, -10, 10)
 					f26_arg0:setAlpha(1)
@@ -514,7 +514,7 @@ CoD.DirectorZMMapSelectItemInternal.__clipsPerState = {
 			f35_local1(f35_arg0.FocusBorder)
 			local f35_local2 = function(f38_arg0)
 				local f38_local0 = function(f39_arg0)
-					f39_arg0:beginAnimation(50, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f39_arg0:beginAnimation(50, Enum[@"luitween"][@"luitween_ease_out"])
 					f39_arg0:setLeftRight(0, 1, -10, 10)
 					f39_arg0:setTopBottom(0, 1, -10, 10)
 					f39_arg0:setAlpha(1)
@@ -670,7 +670,7 @@ CoD.DirectorZMMapSelectItemInternal.__clipsPerState = {
 			f48_local1(f48_arg0.FocusBorder)
 			local f48_local2 = function(f51_arg0)
 				local f51_local0 = function(f52_arg0)
-					f52_arg0:beginAnimation(50, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f52_arg0:beginAnimation(50, Enum[@"luitween"][@"luitween_ease_out"])
 					f52_arg0:setLeftRight(0, 1, -10, 10)
 					f52_arg0:setTopBottom(0, 1, -10, 10)
 					f52_arg0:setAlpha(1)
@@ -814,7 +814,7 @@ CoD.DirectorZMMapSelectItemInternal.__clipsPerState = {
 			f59_local1(f59_arg0.FocusBorder)
 			local f59_local2 = function(f62_arg0)
 				local f62_local0 = function(f63_arg0)
-					f63_arg0:beginAnimation(50, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f63_arg0:beginAnimation(50, Enum[@"luitween"][@"luitween_ease_out"])
 					f63_arg0:setLeftRight(0, 1, -10, 10)
 					f63_arg0:setTopBottom(0, 1, -10, 10)
 					f63_arg0:setAlpha(1)
@@ -958,7 +958,7 @@ CoD.DirectorZMMapSelectItemInternal.__clipsPerState = {
 			f70_local1(f70_arg0.FocusBorder)
 			local f70_local2 = function(f73_arg0)
 				local f73_local0 = function(f74_arg0)
-					f74_arg0:beginAnimation(50, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f74_arg0:beginAnimation(50, Enum[@"luitween"][@"luitween_ease_out"])
 					f74_arg0:setLeftRight(0, 1, -10, 10)
 					f74_arg0:setTopBottom(0, 1, -10, 10)
 					f74_arg0:setAlpha(1)
@@ -1102,7 +1102,7 @@ CoD.DirectorZMMapSelectItemInternal.__clipsPerState = {
 			f81_local3(f81_arg0.FocusBorder)
 			local f81_local4 = function(f86_arg0)
 				local f86_local0 = function(f87_arg0)
-					f87_arg0:beginAnimation(50, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f87_arg0:beginAnimation(50, Enum[@"luitween"][@"luitween_ease_out"])
 					f87_arg0:setLeftRight(0, 1, -10, 10)
 					f87_arg0:setTopBottom(0, 1, -10, 10)
 					f87_arg0:setAlpha(1)

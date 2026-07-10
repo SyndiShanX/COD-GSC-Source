@@ -19,7 +19,7 @@ CoD.systemOverlay_DemoCustomizeHighlightReel_Layout.new = function(f1_arg0, f1_a
 	self.darkbg = darkbg
 	local blur = LUI.UIImage.new(0, 0, 0, 1920, 0, 0, 240, 840)
 	blur:setAlpha(0)
-	blur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	blur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	blur:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(blur)
 	self.blur = blur
@@ -30,8 +30,8 @@ CoD.systemOverlay_DemoCustomizeHighlightReel_Layout.new = function(f1_arg0, f1_a
 	self.backing = backing
 	local NoiseTiledBacking = LUI.UIImage.new(0, 0, 0, 1920, 0.09, 0.09, 148, 748)
 	NoiseTiledBacking:setAlpha(0.65)
-	NoiseTiledBacking:setImage(RegisterImage(0x34839E8065B1E53))
-	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	NoiseTiledBacking:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	NoiseTiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	NoiseTiledBacking:setupNineSliceShader(196, 88)
 	self:addElement(NoiseTiledBacking)
@@ -119,15 +119,15 @@ CoD.systemOverlay_DemoCustomizeHighlightReel_Layout.__clipsPerState = {
 					local f11_local0 = function(f12_arg0)
 						local f12_local0 = function(f13_arg0)
 							local f13_local0 = function(f14_arg0)
-								f14_arg0:beginAnimation(9, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+								f14_arg0:beginAnimation(9, Enum[@"luitween"][@"luitween_ease_both"])
 								f14_arg0:setAlpha(1)
 								f14_arg0:registerEventHandler("transition_complete_keyframe", f7_arg0.clipFinished)
 							end
-							f13_arg0:beginAnimation(10, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+							f13_arg0:beginAnimation(10, Enum[@"luitween"][@"luitween_ease_out"])
 							f13_arg0:setAlpha(0)
 							f13_arg0:registerEventHandler("transition_complete_keyframe", f13_local0)
 						end
-						f12_arg0:beginAnimation(9, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+						f12_arg0:beginAnimation(9, Enum[@"luitween"][@"luitween_ease_out"])
 						f12_arg0:setAlpha(1)
 						f12_arg0:registerEventHandler("transition_complete_keyframe", f12_local0)
 					end
@@ -158,7 +158,7 @@ CoD.systemOverlay_DemoCustomizeHighlightReel_Layout.__clipsPerState = {
 					f18_arg0:beginAnimation(30)
 					f18_arg0:registerEventHandler("transition_complete_keyframe", f7_arg0.clipFinished)
 				end
-				f7_arg0.alertStatusBar:beginAnimation(70, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f7_arg0.alertStatusBar:beginAnimation(70, Enum[@"luitween"][@"luitween_ease_in"])
 				f7_arg0.alertStatusBar:setAlpha(1)
 				f7_arg0.alertStatusBar:registerEventHandler("interrupted_keyframe", f7_arg0.clipInterrupted)
 				f7_arg0.alertStatusBar:registerEventHandler("transition_complete_keyframe", f17_local0)

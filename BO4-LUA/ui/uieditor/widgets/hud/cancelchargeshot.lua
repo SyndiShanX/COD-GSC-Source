@@ -9,10 +9,10 @@ CoD.CancelChargeShot.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local NotificationText = LUI.UIText.new(0, 0, 0, 300, 0, 0, 0, 30)
-	NotificationText:setText(Engine[0xF9F1239CFD921FE](0x3D8A0C512FDAAE))
+	NotificationText:setText(Engine[@"hash_4F9F1239CFD921FE"](0x3D8A0C512FDAAE))
 	NotificationText:setTTF("ttmussels_regular")
 	NotificationText:setLetterSpacing(1)
-	NotificationText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	NotificationText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	NotificationText:setBackingType(1)
 	NotificationText:setBackingWidget(CoD.FE_ButtonPanel, f1_arg0, f1_arg1)
 	NotificationText:setBackingColor(0, 0, 0)

@@ -17,16 +17,16 @@ CoD.ItemHistoryFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	self.anyChildUsesUpdateState = true
 	local NoiseBackingLeft = LUI.UIImage.new(0.5, 0.5, -856, -492, 0.5, 0.5, -355, 405)
 	NoiseBackingLeft:setAlpha(0.4)
-	NoiseBackingLeft:setImage(RegisterImage(0x34839E8065B1E53))
-	NoiseBackingLeft:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	NoiseBackingLeft:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	NoiseBackingLeft:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	NoiseBackingLeft:setShaderVector(0, 0, 0, 0, 0)
 	NoiseBackingLeft:setupNineSliceShader(196, 88)
 	self:addElement(NoiseBackingLeft)
 	self.NoiseBackingLeft = NoiseBackingLeft
 	local NoiseBackingRight = LUI.UIImage.new(0.5, 0.5, -470, 854, 0.5, 0.5, -356, 404)
 	NoiseBackingRight:setAlpha(0.4)
-	NoiseBackingRight:setImage(RegisterImage(0x34839E8065B1E53))
-	NoiseBackingRight:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	NoiseBackingRight:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	NoiseBackingRight:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	NoiseBackingRight:setShaderVector(0, 0, 0, 0, 0)
 	NoiseBackingRight:setupNineSliceShader(196, 88)
 	self:addElement(NoiseBackingRight)
@@ -37,12 +37,12 @@ CoD.ItemHistoryFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	HistoryList:setWidgetType(CoD.BMTallItemContainer)
 	HistoryList:setHorizontalCount(5)
 	HistoryList:setSpacing(20)
-	HistoryList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	HistoryList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	HistoryList:setHorizontalScrollbar(CoD.PC_GridHorizontalScrollbar)
 	HistoryList:setHorizontalCounter(CoD.horizontalCounter)
 	HistoryList:setDataSource("ItemHistoryList")
 	HistoryList:linkToElementModel(HistoryList, "lootType", true, function(model, f2_arg1)
-		CoD.Menu.UpdateButtonShownState(f2_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f2_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	HistoryList:registerEventHandler("gain_list_focus", function(element, event)
 		local f3_local0 = nil
@@ -56,12 +56,12 @@ CoD.ItemHistoryFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 		elseif element.super.gainFocus then
 			f4_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x4B11D2B20C75A7F])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_up"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_none"])
 		return f4_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(HistoryList, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(HistoryList, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "lootType", LuaEnum.LOOT_TYPE.CONTRACT) then
 			CoD.BlackMarketUtility.PlayItemShopSelectSound(element, controller)
 			CoD.ContractUtility.OpenContractDetails(self, element, controller)
@@ -76,35 +76,35 @@ CoD.ItemHistoryFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 		end
 	end, function(element, menu, controller)
 		if CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "lootType", LuaEnum.LOOT_TYPE.CONTRACT) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x9C695BAD15F589A, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_9C695BAD15F589A", nil, nil)
 			return true
 		elseif CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "lootType", LuaEnum.LOOT_TYPE.ITEMSHOP) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x9C695BAD15F589A, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_9C695BAD15F589A", nil, nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(HistoryList, f1_arg1, Enum[0x3DD78803F918E9D][0x4B11D2B20C75A7F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(HistoryList, f1_arg1, Enum[@"luibutton"][@"lui_key_up"], nil, function(element, menu, controller, model)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x4B11D2B20C75A7F], 0x0, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_up"], @"hash_0", nil, nil)
 		return false
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(HistoryList, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "MWHEELUP", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(HistoryList, f1_arg1, Enum[@"luibutton"][@"lui_key_none"], "MWHEELUP", function(element, menu, controller, model)
 		CoD.GridAndListUtility.ScrollLeft(self.HistoryList)
 		CoD.GridAndListUtility.ValidateActiveItemVisibility(self.HistoryList)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "MWHEELUP")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "MWHEELUP")
 		return false
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(HistoryList, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "MWHEELDOWN", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(HistoryList, f1_arg1, Enum[@"luibutton"][@"lui_key_none"], "MWHEELDOWN", function(element, menu, controller, model)
 		CoD.GridAndListUtility.ScrollRight(self.HistoryList)
 		CoD.GridAndListUtility.ValidateActiveItemVisibility(self.HistoryList)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "MWHEELDOWN")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "MWHEELDOWN")
 		return false
 	end, false)
 	self:addElement(HistoryList)
@@ -115,7 +115,7 @@ CoD.ItemHistoryFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	CategoryList:setWidgetType(CoD.StoreCategoryButton)
 	CategoryList:setVerticalCount(3)
 	CategoryList:setSpacing(20)
-	CategoryList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	CategoryList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	CategoryList:setDataSource("ItemHistoryCategoryList")
 	CategoryList:registerEventHandler("list_item_gain_focus", function(element, event)
 		local f13_local0 = nil
@@ -139,16 +139,16 @@ CoD.ItemHistoryFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	self.FramingCornerBrackets = FramingCornerBrackets
 	local DottedLineTop = LUI.UIImage.new(0.5, 0.5, -856, 854, 0.5, 0.5, -364, -360)
 	DottedLineTop:setAlpha(0.35)
-	DottedLineTop:setImage(RegisterImage(0xB20AD7A31239369))
-	DottedLineTop:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	DottedLineTop:setImage(RegisterImage(@"uie_ui_menu_social_emblem_dotline_tiled"))
+	DottedLineTop:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	DottedLineTop:setShaderVector(0, 0, 0, 0, 0)
 	DottedLineTop:setupNineSliceShader(16, 4)
 	self:addElement(DottedLineTop)
 	self.DottedLineTop = DottedLineTop
 	local DottedLineBot = LUI.UIImage.new(0.5, 0.5, -856, 854, 0.5, 0.5, 408, 412)
 	DottedLineBot:setAlpha(0.35)
-	DottedLineBot:setImage(RegisterImage(0xB20AD7A31239369))
-	DottedLineBot:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	DottedLineBot:setImage(RegisterImage(@"uie_ui_menu_social_emblem_dotline_tiled"))
+	DottedLineBot:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	DottedLineBot:setShaderVector(0, 0, 0, 0, 0)
 	DottedLineBot:setupNineSliceShader(16, 4)
 	self:addElement(DottedLineBot)

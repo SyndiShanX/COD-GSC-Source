@@ -42,7 +42,7 @@ CoD.ReticleGroupContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	end)
 	local ReticlesList = CycleColorPrompt
 	local Label = CycleColorPrompt.subscribeToModel
-	local ReticleColors = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local ReticleColors = Engine[@"getmodelforcontroller"](f1_arg1)
 	Label(ReticlesList, ReticleColors.LastInput, function(f6_arg0)
 		f1_arg0:updateElementState(CycleColorPrompt, {
 			name = "model_validation",
@@ -56,11 +56,11 @@ CoD.ReticleGroupContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	self.CycleColorPrompt = CycleColorPrompt
 	Label = LUI.UIText.new(0, 1, 0, 0, 0, 0, 104, 122)
 	Label:setRGB(0.39, 0.39, 0.39)
-	Label:setText(LocalizeToUpperString(0xE44ADD3E8DA4E08))
+	Label:setText(LocalizeToUpperString(@"hash_6E44ADD3E8DA4E08"))
 	Label:setTTF("default")
 	Label:setLetterSpacing(4)
-	Label:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	Label:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Label:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	Label:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(Label)
 	self.Label = Label
 	ReticlesList = LUI.UIList.new(f1_arg0, f1_arg1, 10, 0, nil, false, false, false, false)
@@ -108,7 +108,7 @@ CoD.ReticleGroupContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	end)
 	local ReticlesWillAppearHereText = ReticlesList
 	ReticleColors = ReticlesList.subscribeToModel
-	local f1_local6 = Engine[0x8DF2E5447F384B9]()
+	local f1_local6 = Engine[@"getglobalmodel"]()
 	ReticleColors(ReticlesWillAppearHereText, f1_local6["lobbyRoot.lobbyNav"], function(f12_arg0)
 		f1_arg0:updateElementState(ReticlesList, {
 			name = "model_validation",
@@ -124,10 +124,10 @@ CoD.ReticleGroupContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	ReticlesList:setHorizontalCount(8)
 	ReticlesList:setVerticalCount(2)
 	ReticlesList:setSpacing(10)
-	ReticlesList:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	ReticlesList:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	ReticlesList:setDataSource("WeaponReticles")
 	ReticlesList:linkToElementModel(ReticlesList, "itemIndex", true, function(model, f13_arg1)
-		CoD.Menu.UpdateButtonShownState(f13_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f13_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	ReticlesList:registerEventHandler("list_item_gain_focus", function(element, event)
 		local f14_local0 = nil
@@ -150,10 +150,10 @@ CoD.ReticleGroupContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 		elseif element.super.gainFocus then
 			f16_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f16_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(ReticlesList, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(ReticlesList, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if CoD.WeaponOptionsUtility.CanEquipWeaponOption(menu, element, controller) and CoD.WeaponOptionsUtility.IsReticlePreviewing(controller, element, menu) and not IsElementPropertyValue(element, "isLootLocked", true) then
 			SetCurrentElementAsActive(self, element, controller)
 			CoD.WeaponOptionsUtility.SetWeaponOptionClassItemHelper(self, element, controller, menu)
@@ -168,7 +168,7 @@ CoD.ReticleGroupContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 		end
 	end, function(element, menu, controller)
 		if CoD.WeaponOptionsUtility.CanEquipWeaponOption(menu, element, controller) and CoD.WeaponOptionsUtility.IsReticlePreviewing(controller, element, menu) and not IsElementPropertyValue(element, "isLootLocked", true) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		else
 			return false
@@ -204,7 +204,7 @@ CoD.ReticleGroupContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	end)
 	f1_local6 = ReticleColors
 	ReticlesWillAppearHereText = ReticleColors.subscribeToModel
-	local f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
 	ReticlesWillAppearHereText(f1_local6, f1_local7.LastInput, function(f23_arg0)
 		f1_arg0:updateElementState(ReticleColors, {
 			name = "model_validation",
@@ -220,7 +220,7 @@ CoD.ReticleGroupContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	ReticleColors:setWidgetType(CoD.ReticleColorSlot)
 	ReticleColors:setHorizontalCount(5)
 	ReticleColors:setSpacing(10)
-	ReticleColors:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	ReticleColors:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	ReticleColors:setDataSource("WeaponReticleColor")
 	ReticleColors:registerEventHandler("list_active_changed", function(element, event)
 		local f24_local0 = nil
@@ -236,14 +236,14 @@ CoD.ReticleGroupContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 		elseif element.super.gainFocus then
 			f25_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_none"])
 		return f25_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(ReticleColors, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "MOUSE1", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(ReticleColors, f1_arg1, Enum[@"luibutton"][@"lui_key_none"], "MOUSE1", function(element, menu, controller, model)
 		SetCurrentElementAsActive(self, element, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "MOUSE1")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "MOUSE1")
 		return false
 	end, false)
 	self.__on_menuOpened_ReticleColors = function(f28_arg0, f28_arg1, f28_arg2, f28_arg3)
@@ -260,10 +260,10 @@ CoD.ReticleGroupContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	self.ReticleColors = ReticleColors
 	ReticlesWillAppearHereText = LUI.UIText.new(0.5, 0.5, -615, 615, 0, 0, 150, 180)
 	ReticlesWillAppearHereText:setAlpha(0)
-	ReticlesWillAppearHereText:setText(Engine[0xF9F1239CFD921FE](0x13D359FE54DC768))
+	ReticlesWillAppearHereText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_213D359FE54DC768"))
 	ReticlesWillAppearHereText:setTTF("dinnext_regular")
-	ReticlesWillAppearHereText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	ReticlesWillAppearHereText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	ReticlesWillAppearHereText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	ReticlesWillAppearHereText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(ReticlesWillAppearHereText)
 	self.ReticlesWillAppearHereText = ReticlesWillAppearHereText
 	CycleColorPrompt:linkToElementModel(ReticlesList, nil, false, function(model)
@@ -289,7 +289,7 @@ CoD.ReticleGroupContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	end)
 	f1_local7 = self
 	f1_local6 = self.subscribeToModel
-	local f1_local8 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local8 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local6(f1_local7, f1_local8.LastInput, function(f34_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -305,15 +305,15 @@ CoD.ReticleGroupContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	end)
 	self:appendEventHandler("input_source_changed", function(f36_arg0, f36_arg1)
 		f36_arg1.menu = f36_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f36_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
+		CoD.Menu.UpdateButtonShownState(f36_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
 	end)
 	f1_local7 = self
 	f1_local6 = self.subscribeToModel
-	f1_local8 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local8 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local6(f1_local7, f1_local8.LastInput, function(f37_arg0, f37_arg1)
-		CoD.Menu.UpdateButtonShownState(f37_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
+		CoD.Menu.UpdateButtonShownState(f37_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], nil, function(element, menu, controller, model)
 		if not IsMouseOrKeyboard(controller) then
 			CoD.GridAndListUtility.NavigateGridItemInChild(self, controller, "ReticleColors", true)
 			return true
@@ -321,7 +321,7 @@ CoD.ReticleGroupContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 		end
 	end, function(element, menu, controller)
 		if not IsMouseOrKeyboard(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], 0x0, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], @"hash_0", nil, nil)
 			return false
 		else
 			return false

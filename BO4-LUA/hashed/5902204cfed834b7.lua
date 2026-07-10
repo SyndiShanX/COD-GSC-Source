@@ -8,19 +8,19 @@ CoD.FTUEDescriptionWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	self.soundSet = "default"
 	local InventoryTitleLabel = LUI.UIText.new(0, 1, 0, 0, 0, 0, 0, 23)
 	InventoryTitleLabel:setRGB(ColorSet.GroupName.r, ColorSet.GroupName.g, ColorSet.GroupName.b)
-	InventoryTitleLabel:setText(LocalizeToUpperString(0xF5027E25ECEDB35))
+	InventoryTitleLabel:setText(LocalizeToUpperString(@"menu/ammo"))
 	InventoryTitleLabel:setTTF("ttmussels_demibold")
-	InventoryTitleLabel:setAlignment(Engine[0x7F8853DC3581AA4](Enum[0x7A5123B654282D2][0x58C8A85F2048829]))
-	InventoryTitleLabel:setAlignment(Engine[0x7F8853DC3581AA4](Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7]))
+	InventoryTitleLabel:setAlignment(Engine[@"hash_67F8853DC3581AA4"](Enum[@"luialignment"][@"lui_alignment_left"]))
+	InventoryTitleLabel:setAlignment(Engine[@"hash_67F8853DC3581AA4"](Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"]))
 	self:addElement(InventoryTitleLabel)
 	self.InventoryTitleLabel = InventoryTitleLabel
 	local AmmoTextBox = LUI.UIText.new(0, 1, 0, 0, 0, 0, 37, 55)
 	AmmoTextBox:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
-	AmmoTextBox:setText(Engine[0xF9F1239CFD921FE](0x4B0EEFF4D432726))
+	AmmoTextBox:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_44B0EEFF4D432726"))
 	AmmoTextBox:setTTF("dinnext_regular")
 	AmmoTextBox:setLineSpacing(5)
-	AmmoTextBox:setAlignment(Engine[0x7F8853DC3581AA4](Enum[0x7A5123B654282D2][0x58C8A85F2048829]))
-	AmmoTextBox:setAlignment(Engine[0x7F8853DC3581AA4](Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3]))
+	AmmoTextBox:setAlignment(Engine[@"hash_67F8853DC3581AA4"](Enum[@"luialignment"][@"lui_alignment_left"]))
+	AmmoTextBox:setAlignment(Engine[@"hash_67F8853DC3581AA4"](Enum[@"luialignment"][@"lui_alignment_top"]))
 	self:addElement(AmmoTextBox)
 	self.AmmoTextBox = AmmoTextBox
 	if PostLoadFunc then

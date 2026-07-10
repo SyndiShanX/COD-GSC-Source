@@ -15,10 +15,10 @@ CoD.WarzoneSplitInventory_PC_TextButton.new = function(f1_arg0, f1_arg1, f1_arg2
 	local Label = LUI.UIText.new(0.05, 0.95, 0, 0, 0.5, 0.5, -10, 10)
 	Label:setRGB(0.55, 0.54, 0.49)
 	Label:setAlpha(0.9)
-	Label:setText(LocalizeToUpperString(0x7D14DF1D6CBE990))
+	Label:setText(LocalizeToUpperString(@"hash_67D14DF1D6CBE990"))
 	Label:setTTF("ttmussels_regular")
-	Label:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	Label:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	Label:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	Label:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	self:addElement(Label)
 	self.Label = Label
 	Container.id = "Container"

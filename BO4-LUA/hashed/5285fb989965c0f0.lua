@@ -43,23 +43,23 @@ CoD.Hud_ZM_Factory_SafeAreaContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	ZmNotifBGBContainerFactory:setScale(0.75, 0.75)
 	ZmNotifBGBContainerFactory:subscribeToGlobalModel(f1_arg1, "PerController", "scriptNotify", function(model)
 		local f2_local0 = ZmNotifBGBContainerFactory
-		if CoD.ModelUtility.IsParamModelEqualToHashString(model, 0x39DD32AD1CB76B9) and not CoD.ModelUtility.IsGlobalModelValueEqualTo("ZMHudGlobal.trials.hudDeactivated", 1) then
+		if CoD.ModelUtility.IsParamModelEqualToHashString(model, @"zombie_bgb_token_notification") and not CoD.ModelUtility.IsGlobalModelValueEqualTo("ZMHudGlobal.trials.hudDeactivated", 1) then
 			AddZombieBGBTokenNotification(self, f2_local0, f1_arg1, model)
-		elseif CoD.ModelUtility.IsParamModelEqualToHashString(model, 0xB985C26468953AB) and not CoD.ModelUtility.IsGlobalModelValueEqualTo("ZMHudGlobal.trials.hudDeactivated", 1) then
+		elseif CoD.ModelUtility.IsParamModelEqualToHashString(model, @"zombie_bgb_notification") and not CoD.ModelUtility.IsGlobalModelValueEqualTo("ZMHudGlobal.trials.hudDeactivated", 1) then
 			AddZombieBGBNotification(self, f2_local0, f1_arg1, model)
-		elseif CoD.ModelUtility.IsParamModelEqualToHashString(model, 0xFE668F4EBC2E3F) and not CoD.ModelUtility.IsGlobalModelValueEqualTo("ZMHudGlobal.trials.hudDeactivated", 1) then
+		elseif CoD.ModelUtility.IsParamModelEqualToHashString(model, @"zombie_notification") and not CoD.ModelUtility.IsGlobalModelValueEqualTo("ZMHudGlobal.trials.hudDeactivated", 1) then
 			AddZombieNotification(self, f2_local0, f1_arg1, model)
-		elseif CoD.ModelUtility.IsParamModelEqualToHashString(model, 0x675B38B81564449) and not CoD.ModelUtility.IsGlobalModelValueEqualTo("ZMHudGlobal.trials.hudDeactivated", 1) then
+		elseif CoD.ModelUtility.IsParamModelEqualToHashString(model, @"zombie_callings_notification") and not CoD.ModelUtility.IsGlobalModelValueEqualTo("ZMHudGlobal.trials.hudDeactivated", 1) then
 			CoD.ZombiesCallingsUtility.AddZombieCallingsNotification(self, f2_local0, model)
-		elseif CoD.ModelUtility.IsParamModelEqualToHashString(model, 0x58CF088766F3AFF) and not CoD.ModelUtility.IsGlobalModelValueEqualTo("ZMHudGlobal.trials.hudDeactivated", 1) then
+		elseif CoD.ModelUtility.IsParamModelEqualToHashString(model, @"hash_658CF088766F3AFF") and not CoD.ModelUtility.IsGlobalModelValueEqualTo("ZMHudGlobal.trials.hudDeactivated", 1) then
 			AddZombieRushNotification(self, f2_local0, model, "Key")
-		elseif CoD.ModelUtility.IsParamModelEqualToHashString(model, 0xAC2171741B33FC9) and not CoD.ModelUtility.IsGlobalModelValueEqualTo("ZMHudGlobal.trials.hudDeactivated", 1) then
+		elseif CoD.ModelUtility.IsParamModelEqualToHashString(model, @"hash_3AC2171741B33FC9") and not CoD.ModelUtility.IsGlobalModelValueEqualTo("ZMHudGlobal.trials.hudDeactivated", 1) then
 			AddZombieRushNotification(self, f2_local0, model, "ExtraLife")
-		elseif CoD.ModelUtility.IsParamModelEqualToHashString(model, 0xB83E3ECA730E165) then
+		elseif CoD.ModelUtility.IsParamModelEqualToHashString(model, @"hash_6B83E3ECA730E165") then
 			CoD.ZombieUtility.AddTrialsRoundSplashNotification(self, f2_local0, model)
-		elseif CoD.ModelUtility.IsParamModelEqualToHashString(model, 0xE47C74793854333) and not CoD.ModelUtility.IsGlobalModelValueEqualTo("ZMHudGlobal.trials.hudDeactivated", 1) then
+		elseif CoD.ModelUtility.IsParamModelEqualToHashString(model, @"zombie_special_notification") and not CoD.ModelUtility.IsGlobalModelValueEqualTo("ZMHudGlobal.trials.hudDeactivated", 1) then
 			CoD.ZombieUtility.SpecialZombieNotification(self, f2_local0, model)
-		elseif CoD.ModelUtility.IsParamModelEqualToHashString(model, 0x2F5757AD20BC3AE) then
+		elseif CoD.ModelUtility.IsParamModelEqualToHashString(model, @"hash_2F5757AD20BC3AE") then
 			CoD.ZombieUtility.AddTcmSplashNotification(self, f2_local0, model)
 		end
 	end)
@@ -91,23 +91,23 @@ CoD.Hud_ZM_Factory_SafeAreaContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f
 				local f5_local0 = CoD.ModelUtility.IsModelValueTrue(f1_arg1, "hudItems.playerSpawned")
 				if f5_local0 then
 					if
-						not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xB8E9B69F4B87954])
-						and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xD3ABF9A2753CE40])
-						and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x59333FC97F7870])
-						and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x69C28E2FCA82769])
-						and Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xADC477DDE486DD7])
-						and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x23CD9BAB9B9F4C8])
-						and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2])
-						and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x7B52A87BC9AA4C7])
-						and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x9BF57CE75A8755E])
-						and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x6668F0686232679])
-						and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x3AEEAA452536E6E])
-						and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xD298E43D0B6FEF2])
-						and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F])
-						and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04])
-						and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6])
+						not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_demo_all_game_hud_hidden"])
+						and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_demo_camera_mode_moviecam"])
+						and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_emp_active"])
+						and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_hud_hardcore"])
+						and Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_hud_visible"])
+						and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_in_guided_missile"])
+						and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_in_killcam"])
+						and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_in_remote_killstreak_static"])
+						and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"hash_29BF57CE75A8755E"])
+						and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_in_vehicle"])
+						and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_is_flash_banged"])
+						and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_is_scoped"])
+						and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_play_of_the_match"])
+						and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_scoreboard_open"])
+						and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_ui_active"])
 					then
-						f5_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xBB045E46E88E762])
+						f5_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_weapon_hud_visible"])
 					else
 						f5_local0 = false
 					end
@@ -118,7 +118,7 @@ CoD.Hud_ZM_Factory_SafeAreaContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	})
 	local f1_local7 = ScorePC
 	local ZMScrArcade = ScorePC.subscribeToModel
-	local AmmoPC = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local AmmoPC = Engine[@"getmodelforcontroller"](f1_arg1)
 	ZMScrArcade(f1_local7, AmmoPC["hudItems.playerSpawned"], function(f6_arg0)
 		f1_arg0:updateElementState(ScorePC, {
 			name = "model_validation",
@@ -130,194 +130,194 @@ CoD.Hud_ZM_Factory_SafeAreaContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	end, false)
 	f1_local7 = ScorePC
 	ZMScrArcade = ScorePC.subscribeToModel
-	AmmoPC = Engine[0x4DF5CFBC1771947](f1_arg1)
-	ZMScrArcade(f1_local7, AmmoPC["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xB8E9B69F4B87954]], function(f7_arg0)
+	AmmoPC = Engine[@"getmodelforcontroller"](f1_arg1)
+	ZMScrArcade(f1_local7, AmmoPC["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_demo_all_game_hud_hidden"]], function(f7_arg0)
 		f1_arg0:updateElementState(ScorePC, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f7_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xB8E9B69F4B87954],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_demo_all_game_hud_hidden"],
 		})
 	end, false)
 	f1_local7 = ScorePC
 	ZMScrArcade = ScorePC.subscribeToModel
-	AmmoPC = Engine[0x4DF5CFBC1771947](f1_arg1)
-	ZMScrArcade(f1_local7, AmmoPC["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xD3ABF9A2753CE40]], function(f8_arg0)
+	AmmoPC = Engine[@"getmodelforcontroller"](f1_arg1)
+	ZMScrArcade(f1_local7, AmmoPC["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_demo_camera_mode_moviecam"]], function(f8_arg0)
 		f1_arg0:updateElementState(ScorePC, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f8_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xD3ABF9A2753CE40],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_demo_camera_mode_moviecam"],
 		})
 	end, false)
 	f1_local7 = ScorePC
 	ZMScrArcade = ScorePC.subscribeToModel
-	AmmoPC = Engine[0x4DF5CFBC1771947](f1_arg1)
-	ZMScrArcade(f1_local7, AmmoPC["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x59333FC97F7870]], function(f9_arg0)
+	AmmoPC = Engine[@"getmodelforcontroller"](f1_arg1)
+	ZMScrArcade(f1_local7, AmmoPC["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_emp_active"]], function(f9_arg0)
 		f1_arg0:updateElementState(ScorePC, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f9_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x59333FC97F7870],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_emp_active"],
 		})
 	end, false)
 	f1_local7 = ScorePC
 	ZMScrArcade = ScorePC.subscribeToModel
-	AmmoPC = Engine[0x4DF5CFBC1771947](f1_arg1)
-	ZMScrArcade(f1_local7, AmmoPC["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x69C28E2FCA82769]], function(f10_arg0)
+	AmmoPC = Engine[@"getmodelforcontroller"](f1_arg1)
+	ZMScrArcade(f1_local7, AmmoPC["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_hud_hardcore"]], function(f10_arg0)
 		f1_arg0:updateElementState(ScorePC, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f10_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x69C28E2FCA82769],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_hud_hardcore"],
 		})
 	end, false)
 	f1_local7 = ScorePC
 	ZMScrArcade = ScorePC.subscribeToModel
-	AmmoPC = Engine[0x4DF5CFBC1771947](f1_arg1)
-	ZMScrArcade(f1_local7, AmmoPC["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xADC477DDE486DD7]], function(f11_arg0)
+	AmmoPC = Engine[@"getmodelforcontroller"](f1_arg1)
+	ZMScrArcade(f1_local7, AmmoPC["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_hud_visible"]], function(f11_arg0)
 		f1_arg0:updateElementState(ScorePC, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f11_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xADC477DDE486DD7],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_hud_visible"],
 		})
 	end, false)
 	f1_local7 = ScorePC
 	ZMScrArcade = ScorePC.subscribeToModel
-	AmmoPC = Engine[0x4DF5CFBC1771947](f1_arg1)
-	ZMScrArcade(f1_local7, AmmoPC["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x23CD9BAB9B9F4C8]], function(f12_arg0)
+	AmmoPC = Engine[@"getmodelforcontroller"](f1_arg1)
+	ZMScrArcade(f1_local7, AmmoPC["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_guided_missile"]], function(f12_arg0)
 		f1_arg0:updateElementState(ScorePC, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f12_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x23CD9BAB9B9F4C8],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_guided_missile"],
 		})
 	end, false)
 	f1_local7 = ScorePC
 	ZMScrArcade = ScorePC.subscribeToModel
-	AmmoPC = Engine[0x4DF5CFBC1771947](f1_arg1)
-	ZMScrArcade(f1_local7, AmmoPC["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2]], function(f13_arg0)
+	AmmoPC = Engine[@"getmodelforcontroller"](f1_arg1)
+	ZMScrArcade(f1_local7, AmmoPC["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"]], function(f13_arg0)
 		f1_arg0:updateElementState(ScorePC, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f13_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"],
 		})
 	end, false)
 	f1_local7 = ScorePC
 	ZMScrArcade = ScorePC.subscribeToModel
-	AmmoPC = Engine[0x4DF5CFBC1771947](f1_arg1)
-	ZMScrArcade(f1_local7, AmmoPC["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x7B52A87BC9AA4C7]], function(f14_arg0)
+	AmmoPC = Engine[@"getmodelforcontroller"](f1_arg1)
+	ZMScrArcade(f1_local7, AmmoPC["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_remote_killstreak_static"]], function(f14_arg0)
 		f1_arg0:updateElementState(ScorePC, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f14_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x7B52A87BC9AA4C7],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_remote_killstreak_static"],
 		})
 	end, false)
 	f1_local7 = ScorePC
 	ZMScrArcade = ScorePC.subscribeToModel
-	AmmoPC = Engine[0x4DF5CFBC1771947](f1_arg1)
-	ZMScrArcade(f1_local7, AmmoPC["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x9BF57CE75A8755E]], function(f15_arg0)
+	AmmoPC = Engine[@"getmodelforcontroller"](f1_arg1)
+	ZMScrArcade(f1_local7, AmmoPC["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"hash_29BF57CE75A8755E"]], function(f15_arg0)
 		f1_arg0:updateElementState(ScorePC, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f15_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x9BF57CE75A8755E],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"hash_29BF57CE75A8755E"],
 		})
 	end, false)
 	f1_local7 = ScorePC
 	ZMScrArcade = ScorePC.subscribeToModel
-	AmmoPC = Engine[0x4DF5CFBC1771947](f1_arg1)
-	ZMScrArcade(f1_local7, AmmoPC["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x6668F0686232679]], function(f16_arg0)
+	AmmoPC = Engine[@"getmodelforcontroller"](f1_arg1)
+	ZMScrArcade(f1_local7, AmmoPC["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_vehicle"]], function(f16_arg0)
 		f1_arg0:updateElementState(ScorePC, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f16_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x6668F0686232679],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_vehicle"],
 		})
 	end, false)
 	f1_local7 = ScorePC
 	ZMScrArcade = ScorePC.subscribeToModel
-	AmmoPC = Engine[0x4DF5CFBC1771947](f1_arg1)
-	ZMScrArcade(f1_local7, AmmoPC["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x3AEEAA452536E6E]], function(f17_arg0)
+	AmmoPC = Engine[@"getmodelforcontroller"](f1_arg1)
+	ZMScrArcade(f1_local7, AmmoPC["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_is_flash_banged"]], function(f17_arg0)
 		f1_arg0:updateElementState(ScorePC, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f17_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x3AEEAA452536E6E],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_is_flash_banged"],
 		})
 	end, false)
 	f1_local7 = ScorePC
 	ZMScrArcade = ScorePC.subscribeToModel
-	AmmoPC = Engine[0x4DF5CFBC1771947](f1_arg1)
-	ZMScrArcade(f1_local7, AmmoPC["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xD298E43D0B6FEF2]], function(f18_arg0)
+	AmmoPC = Engine[@"getmodelforcontroller"](f1_arg1)
+	ZMScrArcade(f1_local7, AmmoPC["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_is_scoped"]], function(f18_arg0)
 		f1_arg0:updateElementState(ScorePC, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f18_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xD298E43D0B6FEF2],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_is_scoped"],
 		})
 	end, false)
 	f1_local7 = ScorePC
 	ZMScrArcade = ScorePC.subscribeToModel
-	AmmoPC = Engine[0x4DF5CFBC1771947](f1_arg1)
-	ZMScrArcade(f1_local7, AmmoPC["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F]], function(f19_arg0)
+	AmmoPC = Engine[@"getmodelforcontroller"](f1_arg1)
+	ZMScrArcade(f1_local7, AmmoPC["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_play_of_the_match"]], function(f19_arg0)
 		f1_arg0:updateElementState(ScorePC, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f19_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_play_of_the_match"],
 		})
 	end, false)
 	f1_local7 = ScorePC
 	ZMScrArcade = ScorePC.subscribeToModel
-	AmmoPC = Engine[0x4DF5CFBC1771947](f1_arg1)
-	ZMScrArcade(f1_local7, AmmoPC["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04]], function(f20_arg0)
+	AmmoPC = Engine[@"getmodelforcontroller"](f1_arg1)
+	ZMScrArcade(f1_local7, AmmoPC["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]], function(f20_arg0)
 		f1_arg0:updateElementState(ScorePC, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f20_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"],
 		})
 	end, false)
 	f1_local7 = ScorePC
 	ZMScrArcade = ScorePC.subscribeToModel
-	AmmoPC = Engine[0x4DF5CFBC1771947](f1_arg1)
-	ZMScrArcade(f1_local7, AmmoPC["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]], function(f21_arg0)
+	AmmoPC = Engine[@"getmodelforcontroller"](f1_arg1)
+	ZMScrArcade(f1_local7, AmmoPC["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_ui_active"]], function(f21_arg0)
 		f1_arg0:updateElementState(ScorePC, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f21_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_ui_active"],
 		})
 	end, false)
 	f1_local7 = ScorePC
 	ZMScrArcade = ScorePC.subscribeToModel
-	AmmoPC = Engine[0x4DF5CFBC1771947](f1_arg1)
-	ZMScrArcade(f1_local7, AmmoPC["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xBB045E46E88E762]], function(f22_arg0)
+	AmmoPC = Engine[@"getmodelforcontroller"](f1_arg1)
+	ZMScrArcade(f1_local7, AmmoPC["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_weapon_hud_visible"]], function(f22_arg0)
 		f1_arg0:updateElementState(ScorePC, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f22_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xBB045E46E88E762],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_weapon_hud_visible"],
 		})
 	end, false)
 	self:addElement(ScorePC)
@@ -336,23 +336,23 @@ CoD.Hud_ZM_Factory_SafeAreaContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f
 				local f24_local0 = CoD.ModelUtility.IsModelValueTrue(f1_arg1, "hudItems.playerSpawned")
 				if f24_local0 then
 					if
-						not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xB8E9B69F4B87954])
-						and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xD3ABF9A2753CE40])
-						and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x59333FC97F7870])
-						and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x198075B069840DC])
-						and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x69C28E2FCA82769])
-						and Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xADC477DDE486DD7])
-						and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x23CD9BAB9B9F4C8])
-						and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2])
-						and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x7B52A87BC9AA4C7])
-						and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x9BF57CE75A8755E])
-						and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x6668F0686232679])
-						and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x3AEEAA452536E6E])
-						and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xD298E43D0B6FEF2])
-						and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F])
-						and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6])
+						not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_demo_all_game_hud_hidden"])
+						and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_demo_camera_mode_moviecam"])
+						and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_emp_active"])
+						and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_game_ended"])
+						and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_hud_hardcore"])
+						and Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_hud_visible"])
+						and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_in_guided_missile"])
+						and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_in_killcam"])
+						and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_in_remote_killstreak_static"])
+						and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"hash_29BF57CE75A8755E"])
+						and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_in_vehicle"])
+						and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_is_flash_banged"])
+						and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_is_scoped"])
+						and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_play_of_the_match"])
+						and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_ui_active"])
 					then
-						f24_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xBB045E46E88E762])
+						f24_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_weapon_hud_visible"])
 					else
 						f24_local0 = false
 					end
@@ -363,7 +363,7 @@ CoD.Hud_ZM_Factory_SafeAreaContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	})
 	AmmoPC = ZMScrArcade
 	f1_local7 = ZMScrArcade.subscribeToModel
-	local Rounds = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local Rounds = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local7(AmmoPC, Rounds["hudItems.playerSpawned"], function(f25_arg0)
 		f1_arg0:updateElementState(ZMScrArcade, {
 			name = "model_validation",
@@ -375,194 +375,194 @@ CoD.Hud_ZM_Factory_SafeAreaContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	end, false)
 	AmmoPC = ZMScrArcade
 	f1_local7 = ZMScrArcade.subscribeToModel
-	Rounds = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local7(AmmoPC, Rounds["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xB8E9B69F4B87954]], function(f26_arg0)
+	Rounds = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local7(AmmoPC, Rounds["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_demo_all_game_hud_hidden"]], function(f26_arg0)
 		f1_arg0:updateElementState(ZMScrArcade, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f26_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xB8E9B69F4B87954],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_demo_all_game_hud_hidden"],
 		})
 	end, false)
 	AmmoPC = ZMScrArcade
 	f1_local7 = ZMScrArcade.subscribeToModel
-	Rounds = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local7(AmmoPC, Rounds["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xD3ABF9A2753CE40]], function(f27_arg0)
+	Rounds = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local7(AmmoPC, Rounds["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_demo_camera_mode_moviecam"]], function(f27_arg0)
 		f1_arg0:updateElementState(ZMScrArcade, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f27_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xD3ABF9A2753CE40],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_demo_camera_mode_moviecam"],
 		})
 	end, false)
 	AmmoPC = ZMScrArcade
 	f1_local7 = ZMScrArcade.subscribeToModel
-	Rounds = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local7(AmmoPC, Rounds["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x59333FC97F7870]], function(f28_arg0)
+	Rounds = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local7(AmmoPC, Rounds["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_emp_active"]], function(f28_arg0)
 		f1_arg0:updateElementState(ZMScrArcade, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f28_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x59333FC97F7870],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_emp_active"],
 		})
 	end, false)
 	AmmoPC = ZMScrArcade
 	f1_local7 = ZMScrArcade.subscribeToModel
-	Rounds = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local7(AmmoPC, Rounds["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x198075B069840DC]], function(f29_arg0)
+	Rounds = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local7(AmmoPC, Rounds["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_game_ended"]], function(f29_arg0)
 		f1_arg0:updateElementState(ZMScrArcade, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f29_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x198075B069840DC],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_game_ended"],
 		})
 	end, false)
 	AmmoPC = ZMScrArcade
 	f1_local7 = ZMScrArcade.subscribeToModel
-	Rounds = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local7(AmmoPC, Rounds["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x69C28E2FCA82769]], function(f30_arg0)
+	Rounds = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local7(AmmoPC, Rounds["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_hud_hardcore"]], function(f30_arg0)
 		f1_arg0:updateElementState(ZMScrArcade, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f30_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x69C28E2FCA82769],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_hud_hardcore"],
 		})
 	end, false)
 	AmmoPC = ZMScrArcade
 	f1_local7 = ZMScrArcade.subscribeToModel
-	Rounds = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local7(AmmoPC, Rounds["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xADC477DDE486DD7]], function(f31_arg0)
+	Rounds = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local7(AmmoPC, Rounds["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_hud_visible"]], function(f31_arg0)
 		f1_arg0:updateElementState(ZMScrArcade, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f31_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xADC477DDE486DD7],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_hud_visible"],
 		})
 	end, false)
 	AmmoPC = ZMScrArcade
 	f1_local7 = ZMScrArcade.subscribeToModel
-	Rounds = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local7(AmmoPC, Rounds["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x23CD9BAB9B9F4C8]], function(f32_arg0)
+	Rounds = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local7(AmmoPC, Rounds["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_guided_missile"]], function(f32_arg0)
 		f1_arg0:updateElementState(ZMScrArcade, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f32_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x23CD9BAB9B9F4C8],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_guided_missile"],
 		})
 	end, false)
 	AmmoPC = ZMScrArcade
 	f1_local7 = ZMScrArcade.subscribeToModel
-	Rounds = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local7(AmmoPC, Rounds["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2]], function(f33_arg0)
+	Rounds = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local7(AmmoPC, Rounds["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"]], function(f33_arg0)
 		f1_arg0:updateElementState(ZMScrArcade, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f33_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"],
 		})
 	end, false)
 	AmmoPC = ZMScrArcade
 	f1_local7 = ZMScrArcade.subscribeToModel
-	Rounds = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local7(AmmoPC, Rounds["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x7B52A87BC9AA4C7]], function(f34_arg0)
+	Rounds = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local7(AmmoPC, Rounds["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_remote_killstreak_static"]], function(f34_arg0)
 		f1_arg0:updateElementState(ZMScrArcade, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f34_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x7B52A87BC9AA4C7],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_remote_killstreak_static"],
 		})
 	end, false)
 	AmmoPC = ZMScrArcade
 	f1_local7 = ZMScrArcade.subscribeToModel
-	Rounds = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local7(AmmoPC, Rounds["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x9BF57CE75A8755E]], function(f35_arg0)
+	Rounds = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local7(AmmoPC, Rounds["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"hash_29BF57CE75A8755E"]], function(f35_arg0)
 		f1_arg0:updateElementState(ZMScrArcade, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f35_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x9BF57CE75A8755E],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"hash_29BF57CE75A8755E"],
 		})
 	end, false)
 	AmmoPC = ZMScrArcade
 	f1_local7 = ZMScrArcade.subscribeToModel
-	Rounds = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local7(AmmoPC, Rounds["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x6668F0686232679]], function(f36_arg0)
+	Rounds = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local7(AmmoPC, Rounds["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_vehicle"]], function(f36_arg0)
 		f1_arg0:updateElementState(ZMScrArcade, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f36_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x6668F0686232679],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_vehicle"],
 		})
 	end, false)
 	AmmoPC = ZMScrArcade
 	f1_local7 = ZMScrArcade.subscribeToModel
-	Rounds = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local7(AmmoPC, Rounds["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x3AEEAA452536E6E]], function(f37_arg0)
+	Rounds = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local7(AmmoPC, Rounds["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_is_flash_banged"]], function(f37_arg0)
 		f1_arg0:updateElementState(ZMScrArcade, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f37_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x3AEEAA452536E6E],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_is_flash_banged"],
 		})
 	end, false)
 	AmmoPC = ZMScrArcade
 	f1_local7 = ZMScrArcade.subscribeToModel
-	Rounds = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local7(AmmoPC, Rounds["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xD298E43D0B6FEF2]], function(f38_arg0)
+	Rounds = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local7(AmmoPC, Rounds["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_is_scoped"]], function(f38_arg0)
 		f1_arg0:updateElementState(ZMScrArcade, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f38_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xD298E43D0B6FEF2],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_is_scoped"],
 		})
 	end, false)
 	AmmoPC = ZMScrArcade
 	f1_local7 = ZMScrArcade.subscribeToModel
-	Rounds = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local7(AmmoPC, Rounds["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F]], function(f39_arg0)
+	Rounds = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local7(AmmoPC, Rounds["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_play_of_the_match"]], function(f39_arg0)
 		f1_arg0:updateElementState(ZMScrArcade, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f39_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_play_of_the_match"],
 		})
 	end, false)
 	AmmoPC = ZMScrArcade
 	f1_local7 = ZMScrArcade.subscribeToModel
-	Rounds = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local7(AmmoPC, Rounds["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]], function(f40_arg0)
+	Rounds = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local7(AmmoPC, Rounds["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_ui_active"]], function(f40_arg0)
 		f1_arg0:updateElementState(ZMScrArcade, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f40_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_ui_active"],
 		})
 	end, false)
 	AmmoPC = ZMScrArcade
 	f1_local7 = ZMScrArcade.subscribeToModel
-	Rounds = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local7(AmmoPC, Rounds["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xBB045E46E88E762]], function(f41_arg0)
+	Rounds = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local7(AmmoPC, Rounds["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_weapon_hud_visible"]], function(f41_arg0)
 		f1_arg0:updateElementState(ZMScrArcade, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f41_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xBB045E46E88E762],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_weapon_hud_visible"],
 		})
 	end, false)
 	ZMScrArcade:setScale(1.15, 1.15)
@@ -587,7 +587,7 @@ CoD.Hud_ZM_Factory_SafeAreaContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	})
 	local ZMPerkVaporsContainer = Rounds
 	local AmmoWidgetZMContainer = Rounds.subscribeToModel
-	local Console = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local Console = Engine[@"getmodelforcontroller"](f1_arg1)
 	AmmoWidgetZMContainer(ZMPerkVaporsContainer, Console["hudItems.playerSpawned"], function(f43_arg0)
 		f1_arg0:updateElementState(Rounds, {
 			name = "model_validation",
@@ -599,206 +599,206 @@ CoD.Hud_ZM_Factory_SafeAreaContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	end, false)
 	ZMPerkVaporsContainer = Rounds
 	AmmoWidgetZMContainer = Rounds.subscribeToModel
-	Console = Engine[0x4DF5CFBC1771947](f1_arg1)
-	AmmoWidgetZMContainer(ZMPerkVaporsContainer, Console["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xB8E9B69F4B87954]], function(f44_arg0)
+	Console = Engine[@"getmodelforcontroller"](f1_arg1)
+	AmmoWidgetZMContainer(ZMPerkVaporsContainer, Console["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_demo_all_game_hud_hidden"]], function(f44_arg0)
 		f1_arg0:updateElementState(Rounds, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f44_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xB8E9B69F4B87954],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_demo_all_game_hud_hidden"],
 		})
 	end, false)
 	ZMPerkVaporsContainer = Rounds
 	AmmoWidgetZMContainer = Rounds.subscribeToModel
-	Console = Engine[0x4DF5CFBC1771947](f1_arg1)
-	AmmoWidgetZMContainer(ZMPerkVaporsContainer, Console["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xD3ABF9A2753CE40]], function(f45_arg0)
+	Console = Engine[@"getmodelforcontroller"](f1_arg1)
+	AmmoWidgetZMContainer(ZMPerkVaporsContainer, Console["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_demo_camera_mode_moviecam"]], function(f45_arg0)
 		f1_arg0:updateElementState(Rounds, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f45_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xD3ABF9A2753CE40],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_demo_camera_mode_moviecam"],
 		})
 	end, false)
 	ZMPerkVaporsContainer = Rounds
 	AmmoWidgetZMContainer = Rounds.subscribeToModel
-	Console = Engine[0x4DF5CFBC1771947](f1_arg1)
-	AmmoWidgetZMContainer(ZMPerkVaporsContainer, Console["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x59333FC97F7870]], function(f46_arg0)
+	Console = Engine[@"getmodelforcontroller"](f1_arg1)
+	AmmoWidgetZMContainer(ZMPerkVaporsContainer, Console["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_emp_active"]], function(f46_arg0)
 		f1_arg0:updateElementState(Rounds, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f46_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x59333FC97F7870],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_emp_active"],
 		})
 	end, false)
 	ZMPerkVaporsContainer = Rounds
 	AmmoWidgetZMContainer = Rounds.subscribeToModel
-	Console = Engine[0x4DF5CFBC1771947](f1_arg1)
-	AmmoWidgetZMContainer(ZMPerkVaporsContainer, Console["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x69C28E2FCA82769]], function(f47_arg0)
+	Console = Engine[@"getmodelforcontroller"](f1_arg1)
+	AmmoWidgetZMContainer(ZMPerkVaporsContainer, Console["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_hud_hardcore"]], function(f47_arg0)
 		f1_arg0:updateElementState(Rounds, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f47_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x69C28E2FCA82769],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_hud_hardcore"],
 		})
 	end, false)
 	ZMPerkVaporsContainer = Rounds
 	AmmoWidgetZMContainer = Rounds.subscribeToModel
-	Console = Engine[0x4DF5CFBC1771947](f1_arg1)
-	AmmoWidgetZMContainer(ZMPerkVaporsContainer, Console["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xADC477DDE486DD7]], function(f48_arg0)
+	Console = Engine[@"getmodelforcontroller"](f1_arg1)
+	AmmoWidgetZMContainer(ZMPerkVaporsContainer, Console["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_hud_visible"]], function(f48_arg0)
 		f1_arg0:updateElementState(Rounds, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f48_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xADC477DDE486DD7],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_hud_visible"],
 		})
 	end, false)
 	ZMPerkVaporsContainer = Rounds
 	AmmoWidgetZMContainer = Rounds.subscribeToModel
-	Console = Engine[0x4DF5CFBC1771947](f1_arg1)
-	AmmoWidgetZMContainer(ZMPerkVaporsContainer, Console["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x23CD9BAB9B9F4C8]], function(f49_arg0)
+	Console = Engine[@"getmodelforcontroller"](f1_arg1)
+	AmmoWidgetZMContainer(ZMPerkVaporsContainer, Console["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_guided_missile"]], function(f49_arg0)
 		f1_arg0:updateElementState(Rounds, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f49_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x23CD9BAB9B9F4C8],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_guided_missile"],
 		})
 	end, false)
 	ZMPerkVaporsContainer = Rounds
 	AmmoWidgetZMContainer = Rounds.subscribeToModel
-	Console = Engine[0x4DF5CFBC1771947](f1_arg1)
-	AmmoWidgetZMContainer(ZMPerkVaporsContainer, Console["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2]], function(f50_arg0)
+	Console = Engine[@"getmodelforcontroller"](f1_arg1)
+	AmmoWidgetZMContainer(ZMPerkVaporsContainer, Console["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"]], function(f50_arg0)
 		f1_arg0:updateElementState(Rounds, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f50_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"],
 		})
 	end, false)
 	ZMPerkVaporsContainer = Rounds
 	AmmoWidgetZMContainer = Rounds.subscribeToModel
-	Console = Engine[0x4DF5CFBC1771947](f1_arg1)
-	AmmoWidgetZMContainer(ZMPerkVaporsContainer, Console["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x7B52A87BC9AA4C7]], function(f51_arg0)
+	Console = Engine[@"getmodelforcontroller"](f1_arg1)
+	AmmoWidgetZMContainer(ZMPerkVaporsContainer, Console["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_remote_killstreak_static"]], function(f51_arg0)
 		f1_arg0:updateElementState(Rounds, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f51_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x7B52A87BC9AA4C7],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_remote_killstreak_static"],
 		})
 	end, false)
 	ZMPerkVaporsContainer = Rounds
 	AmmoWidgetZMContainer = Rounds.subscribeToModel
-	Console = Engine[0x4DF5CFBC1771947](f1_arg1)
-	AmmoWidgetZMContainer(ZMPerkVaporsContainer, Console["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x9BF57CE75A8755E]], function(f52_arg0)
+	Console = Engine[@"getmodelforcontroller"](f1_arg1)
+	AmmoWidgetZMContainer(ZMPerkVaporsContainer, Console["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"hash_29BF57CE75A8755E"]], function(f52_arg0)
 		f1_arg0:updateElementState(Rounds, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f52_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x9BF57CE75A8755E],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"hash_29BF57CE75A8755E"],
 		})
 	end, false)
 	ZMPerkVaporsContainer = Rounds
 	AmmoWidgetZMContainer = Rounds.subscribeToModel
-	Console = Engine[0x4DF5CFBC1771947](f1_arg1)
-	AmmoWidgetZMContainer(ZMPerkVaporsContainer, Console["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x6668F0686232679]], function(f53_arg0)
+	Console = Engine[@"getmodelforcontroller"](f1_arg1)
+	AmmoWidgetZMContainer(ZMPerkVaporsContainer, Console["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_vehicle"]], function(f53_arg0)
 		f1_arg0:updateElementState(Rounds, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f53_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x6668F0686232679],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_vehicle"],
 		})
 	end, false)
 	ZMPerkVaporsContainer = Rounds
 	AmmoWidgetZMContainer = Rounds.subscribeToModel
-	Console = Engine[0x4DF5CFBC1771947](f1_arg1)
-	AmmoWidgetZMContainer(ZMPerkVaporsContainer, Console["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x3AEEAA452536E6E]], function(f54_arg0)
+	Console = Engine[@"getmodelforcontroller"](f1_arg1)
+	AmmoWidgetZMContainer(ZMPerkVaporsContainer, Console["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_is_flash_banged"]], function(f54_arg0)
 		f1_arg0:updateElementState(Rounds, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f54_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x3AEEAA452536E6E],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_is_flash_banged"],
 		})
 	end, false)
 	ZMPerkVaporsContainer = Rounds
 	AmmoWidgetZMContainer = Rounds.subscribeToModel
-	Console = Engine[0x4DF5CFBC1771947](f1_arg1)
-	AmmoWidgetZMContainer(ZMPerkVaporsContainer, Console["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xD298E43D0B6FEF2]], function(f55_arg0)
+	Console = Engine[@"getmodelforcontroller"](f1_arg1)
+	AmmoWidgetZMContainer(ZMPerkVaporsContainer, Console["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_is_scoped"]], function(f55_arg0)
 		f1_arg0:updateElementState(Rounds, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f55_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xD298E43D0B6FEF2],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_is_scoped"],
 		})
 	end, false)
 	ZMPerkVaporsContainer = Rounds
 	AmmoWidgetZMContainer = Rounds.subscribeToModel
-	Console = Engine[0x4DF5CFBC1771947](f1_arg1)
-	AmmoWidgetZMContainer(ZMPerkVaporsContainer, Console["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F]], function(f56_arg0)
+	Console = Engine[@"getmodelforcontroller"](f1_arg1)
+	AmmoWidgetZMContainer(ZMPerkVaporsContainer, Console["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_play_of_the_match"]], function(f56_arg0)
 		f1_arg0:updateElementState(Rounds, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f56_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_play_of_the_match"],
 		})
 	end, false)
 	ZMPerkVaporsContainer = Rounds
 	AmmoWidgetZMContainer = Rounds.subscribeToModel
-	Console = Engine[0x4DF5CFBC1771947](f1_arg1)
-	AmmoWidgetZMContainer(ZMPerkVaporsContainer, Console["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04]], function(f57_arg0)
+	Console = Engine[@"getmodelforcontroller"](f1_arg1)
+	AmmoWidgetZMContainer(ZMPerkVaporsContainer, Console["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]], function(f57_arg0)
 		f1_arg0:updateElementState(Rounds, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f57_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"],
 		})
 	end, false)
 	ZMPerkVaporsContainer = Rounds
 	AmmoWidgetZMContainer = Rounds.subscribeToModel
-	Console = Engine[0x4DF5CFBC1771947](f1_arg1)
-	AmmoWidgetZMContainer(ZMPerkVaporsContainer, Console["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]], function(f58_arg0)
+	Console = Engine[@"getmodelforcontroller"](f1_arg1)
+	AmmoWidgetZMContainer(ZMPerkVaporsContainer, Console["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_ui_active"]], function(f58_arg0)
 		f1_arg0:updateElementState(Rounds, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f58_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_ui_active"],
 		})
 	end, false)
 	ZMPerkVaporsContainer = Rounds
 	AmmoWidgetZMContainer = Rounds.subscribeToModel
-	Console = Engine[0x4DF5CFBC1771947](f1_arg1)
-	AmmoWidgetZMContainer(ZMPerkVaporsContainer, Console["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xBB045E46E88E762]], function(f59_arg0)
+	Console = Engine[@"getmodelforcontroller"](f1_arg1)
+	AmmoWidgetZMContainer(ZMPerkVaporsContainer, Console["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_weapon_hud_visible"]], function(f59_arg0)
 		f1_arg0:updateElementState(Rounds, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f59_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xBB045E46E88E762],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_weapon_hud_visible"],
 		})
 	end, false)
 	ZMPerkVaporsContainer = Rounds
 	AmmoWidgetZMContainer = Rounds.subscribeToModel
-	Console = Engine[0x4DF5CFBC1771947](f1_arg1)
-	AmmoWidgetZMContainer(ZMPerkVaporsContainer, Console["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x198075B069840DC]], function(f60_arg0)
+	Console = Engine[@"getmodelforcontroller"](f1_arg1)
+	AmmoWidgetZMContainer(ZMPerkVaporsContainer, Console["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_game_ended"]], function(f60_arg0)
 		f1_arg0:updateElementState(Rounds, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f60_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x198075B069840DC],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_game_ended"],
 		})
 	end, false)
 	Rounds:setScale(0.8, 0.8)
@@ -854,23 +854,23 @@ CoD.Hud_ZM_Factory_SafeAreaContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f
 				local f62_local0 = CoD.ModelUtility.IsModelValueTrue(f1_arg1, "hudItems.playerSpawned")
 				if f62_local0 then
 					if
-						not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xB8E9B69F4B87954])
-						and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xD3ABF9A2753CE40])
-						and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x59333FC97F7870])
-						and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x69C28E2FCA82769])
-						and Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xADC477DDE486DD7])
-						and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x23CD9BAB9B9F4C8])
-						and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2])
-						and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x7B52A87BC9AA4C7])
-						and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x9BF57CE75A8755E])
-						and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x6668F0686232679])
-						and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x3AEEAA452536E6E])
-						and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xD298E43D0B6FEF2])
-						and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F])
-						and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04])
-						and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6])
+						not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_demo_all_game_hud_hidden"])
+						and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_demo_camera_mode_moviecam"])
+						and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_emp_active"])
+						and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_hud_hardcore"])
+						and Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_hud_visible"])
+						and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_in_guided_missile"])
+						and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_in_killcam"])
+						and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_in_remote_killstreak_static"])
+						and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"hash_29BF57CE75A8755E"])
+						and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_in_vehicle"])
+						and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_is_flash_banged"])
+						and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_is_scoped"])
+						and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_play_of_the_match"])
+						and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_scoreboard_open"])
+						and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_ui_active"])
 					then
-						f62_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xBB045E46E88E762])
+						f62_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_weapon_hud_visible"])
 					else
 						f62_local0 = false
 					end
@@ -885,7 +885,7 @@ CoD.Hud_ZM_Factory_SafeAreaContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f
 				if f63_local0 then
 					f63_local0 = IsCodCasterProfileValueEqualTo(f1_arg1, "shoutcaster_ds_voip_dock", 1)
 					if f63_local0 then
-						f63_local0 = not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04])
+						f63_local0 = not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_scoreboard_open"])
 					end
 				end
 				return f63_local0
@@ -894,7 +894,7 @@ CoD.Hud_ZM_Factory_SafeAreaContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	})
 	local f1_local23 = VoipContainer0
 	local ZMOrangeHeatPack = VoipContainer0.subscribeToModel
-	local f1_local25 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local25 = Engine[@"getmodelforcontroller"](f1_arg1)
 	ZMOrangeHeatPack(f1_local23, f1_local25["hudItems.playerSpawned"], function(f64_arg0)
 		f1_arg0:updateElementState(VoipContainer0, {
 			name = "model_validation",
@@ -906,199 +906,199 @@ CoD.Hud_ZM_Factory_SafeAreaContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	end, false)
 	f1_local23 = VoipContainer0
 	ZMOrangeHeatPack = VoipContainer0.subscribeToModel
-	f1_local25 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	ZMOrangeHeatPack(f1_local23, f1_local25["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xB8E9B69F4B87954]], function(f65_arg0)
+	f1_local25 = Engine[@"getmodelforcontroller"](f1_arg1)
+	ZMOrangeHeatPack(f1_local23, f1_local25["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_demo_all_game_hud_hidden"]], function(f65_arg0)
 		f1_arg0:updateElementState(VoipContainer0, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f65_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xB8E9B69F4B87954],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_demo_all_game_hud_hidden"],
 		})
 	end, false)
 	f1_local23 = VoipContainer0
 	ZMOrangeHeatPack = VoipContainer0.subscribeToModel
-	f1_local25 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	ZMOrangeHeatPack(f1_local23, f1_local25["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xD3ABF9A2753CE40]], function(f66_arg0)
+	f1_local25 = Engine[@"getmodelforcontroller"](f1_arg1)
+	ZMOrangeHeatPack(f1_local23, f1_local25["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_demo_camera_mode_moviecam"]], function(f66_arg0)
 		f1_arg0:updateElementState(VoipContainer0, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f66_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xD3ABF9A2753CE40],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_demo_camera_mode_moviecam"],
 		})
 	end, false)
 	f1_local23 = VoipContainer0
 	ZMOrangeHeatPack = VoipContainer0.subscribeToModel
-	f1_local25 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	ZMOrangeHeatPack(f1_local23, f1_local25["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x59333FC97F7870]], function(f67_arg0)
+	f1_local25 = Engine[@"getmodelforcontroller"](f1_arg1)
+	ZMOrangeHeatPack(f1_local23, f1_local25["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_emp_active"]], function(f67_arg0)
 		f1_arg0:updateElementState(VoipContainer0, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f67_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x59333FC97F7870],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_emp_active"],
 		})
 	end, false)
 	f1_local23 = VoipContainer0
 	ZMOrangeHeatPack = VoipContainer0.subscribeToModel
-	f1_local25 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	ZMOrangeHeatPack(f1_local23, f1_local25["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x69C28E2FCA82769]], function(f68_arg0)
+	f1_local25 = Engine[@"getmodelforcontroller"](f1_arg1)
+	ZMOrangeHeatPack(f1_local23, f1_local25["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_hud_hardcore"]], function(f68_arg0)
 		f1_arg0:updateElementState(VoipContainer0, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f68_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x69C28E2FCA82769],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_hud_hardcore"],
 		})
 	end, false)
 	f1_local23 = VoipContainer0
 	ZMOrangeHeatPack = VoipContainer0.subscribeToModel
-	f1_local25 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	ZMOrangeHeatPack(f1_local23, f1_local25["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xADC477DDE486DD7]], function(f69_arg0)
+	f1_local25 = Engine[@"getmodelforcontroller"](f1_arg1)
+	ZMOrangeHeatPack(f1_local23, f1_local25["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_hud_visible"]], function(f69_arg0)
 		f1_arg0:updateElementState(VoipContainer0, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f69_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xADC477DDE486DD7],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_hud_visible"],
 		})
 	end, false)
 	f1_local23 = VoipContainer0
 	ZMOrangeHeatPack = VoipContainer0.subscribeToModel
-	f1_local25 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	ZMOrangeHeatPack(f1_local23, f1_local25["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x23CD9BAB9B9F4C8]], function(f70_arg0)
+	f1_local25 = Engine[@"getmodelforcontroller"](f1_arg1)
+	ZMOrangeHeatPack(f1_local23, f1_local25["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_guided_missile"]], function(f70_arg0)
 		f1_arg0:updateElementState(VoipContainer0, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f70_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x23CD9BAB9B9F4C8],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_guided_missile"],
 		})
 	end, false)
 	f1_local23 = VoipContainer0
 	ZMOrangeHeatPack = VoipContainer0.subscribeToModel
-	f1_local25 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	ZMOrangeHeatPack(f1_local23, f1_local25["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2]], function(f71_arg0)
+	f1_local25 = Engine[@"getmodelforcontroller"](f1_arg1)
+	ZMOrangeHeatPack(f1_local23, f1_local25["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"]], function(f71_arg0)
 		f1_arg0:updateElementState(VoipContainer0, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f71_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"],
 		})
 	end, false)
 	f1_local23 = VoipContainer0
 	ZMOrangeHeatPack = VoipContainer0.subscribeToModel
-	f1_local25 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	ZMOrangeHeatPack(f1_local23, f1_local25["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x7B52A87BC9AA4C7]], function(f72_arg0)
+	f1_local25 = Engine[@"getmodelforcontroller"](f1_arg1)
+	ZMOrangeHeatPack(f1_local23, f1_local25["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_remote_killstreak_static"]], function(f72_arg0)
 		f1_arg0:updateElementState(VoipContainer0, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f72_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x7B52A87BC9AA4C7],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_remote_killstreak_static"],
 		})
 	end, false)
 	f1_local23 = VoipContainer0
 	ZMOrangeHeatPack = VoipContainer0.subscribeToModel
-	f1_local25 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	ZMOrangeHeatPack(f1_local23, f1_local25["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x9BF57CE75A8755E]], function(f73_arg0)
+	f1_local25 = Engine[@"getmodelforcontroller"](f1_arg1)
+	ZMOrangeHeatPack(f1_local23, f1_local25["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"hash_29BF57CE75A8755E"]], function(f73_arg0)
 		f1_arg0:updateElementState(VoipContainer0, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f73_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x9BF57CE75A8755E],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"hash_29BF57CE75A8755E"],
 		})
 	end, false)
 	f1_local23 = VoipContainer0
 	ZMOrangeHeatPack = VoipContainer0.subscribeToModel
-	f1_local25 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	ZMOrangeHeatPack(f1_local23, f1_local25["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x6668F0686232679]], function(f74_arg0)
+	f1_local25 = Engine[@"getmodelforcontroller"](f1_arg1)
+	ZMOrangeHeatPack(f1_local23, f1_local25["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_vehicle"]], function(f74_arg0)
 		f1_arg0:updateElementState(VoipContainer0, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f74_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x6668F0686232679],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_vehicle"],
 		})
 	end, false)
 	f1_local23 = VoipContainer0
 	ZMOrangeHeatPack = VoipContainer0.subscribeToModel
-	f1_local25 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	ZMOrangeHeatPack(f1_local23, f1_local25["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x3AEEAA452536E6E]], function(f75_arg0)
+	f1_local25 = Engine[@"getmodelforcontroller"](f1_arg1)
+	ZMOrangeHeatPack(f1_local23, f1_local25["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_is_flash_banged"]], function(f75_arg0)
 		f1_arg0:updateElementState(VoipContainer0, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f75_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x3AEEAA452536E6E],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_is_flash_banged"],
 		})
 	end, false)
 	f1_local23 = VoipContainer0
 	ZMOrangeHeatPack = VoipContainer0.subscribeToModel
-	f1_local25 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	ZMOrangeHeatPack(f1_local23, f1_local25["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xD298E43D0B6FEF2]], function(f76_arg0)
+	f1_local25 = Engine[@"getmodelforcontroller"](f1_arg1)
+	ZMOrangeHeatPack(f1_local23, f1_local25["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_is_scoped"]], function(f76_arg0)
 		f1_arg0:updateElementState(VoipContainer0, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f76_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xD298E43D0B6FEF2],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_is_scoped"],
 		})
 	end, false)
 	f1_local23 = VoipContainer0
 	ZMOrangeHeatPack = VoipContainer0.subscribeToModel
-	f1_local25 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	ZMOrangeHeatPack(f1_local23, f1_local25["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F]], function(f77_arg0)
+	f1_local25 = Engine[@"getmodelforcontroller"](f1_arg1)
+	ZMOrangeHeatPack(f1_local23, f1_local25["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_play_of_the_match"]], function(f77_arg0)
 		f1_arg0:updateElementState(VoipContainer0, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f77_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_play_of_the_match"],
 		})
 	end, false)
 	f1_local23 = VoipContainer0
 	ZMOrangeHeatPack = VoipContainer0.subscribeToModel
-	f1_local25 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	ZMOrangeHeatPack(f1_local23, f1_local25["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04]], function(f78_arg0)
+	f1_local25 = Engine[@"getmodelforcontroller"](f1_arg1)
+	ZMOrangeHeatPack(f1_local23, f1_local25["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]], function(f78_arg0)
 		f1_arg0:updateElementState(VoipContainer0, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f78_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"],
 		})
 	end, false)
 	f1_local23 = VoipContainer0
 	ZMOrangeHeatPack = VoipContainer0.subscribeToModel
-	f1_local25 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	ZMOrangeHeatPack(f1_local23, f1_local25["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]], function(f79_arg0)
+	f1_local25 = Engine[@"getmodelforcontroller"](f1_arg1)
+	ZMOrangeHeatPack(f1_local23, f1_local25["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_ui_active"]], function(f79_arg0)
 		f1_arg0:updateElementState(VoipContainer0, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f79_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_ui_active"],
 		})
 	end, false)
 	f1_local23 = VoipContainer0
 	ZMOrangeHeatPack = VoipContainer0.subscribeToModel
-	f1_local25 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	ZMOrangeHeatPack(f1_local23, f1_local25["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xBB045E46E88E762]], function(f80_arg0)
+	f1_local25 = Engine[@"getmodelforcontroller"](f1_arg1)
+	ZMOrangeHeatPack(f1_local23, f1_local25["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_weapon_hud_visible"]], function(f80_arg0)
 		f1_arg0:updateElementState(VoipContainer0, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f80_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xBB045E46E88E762],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_weapon_hud_visible"],
 		})
 	end, false)
 	f1_local23 = VoipContainer0
 	ZMOrangeHeatPack = VoipContainer0.subscribeToModel
-	f1_local25 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local25 = Engine[@"getmodelforcontroller"](f1_arg1)
 	ZMOrangeHeatPack(f1_local23, f1_local25["factions.isCoDCaster"], function(f81_arg0)
 		f1_arg0:updateElementState(VoipContainer0, {
 			name = "model_validation",
@@ -1142,7 +1142,7 @@ CoD.Hud_ZM_Factory_SafeAreaContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	})
 	f1_local25 = self
 	f1_local23 = self.subscribeToModel
-	local f1_local26 = Engine[0x8DF2E5447F384B9]()
+	local f1_local26 = Engine[@"getglobalmodel"]()
 	f1_local23(f1_local25, f1_local26["ZMHudGlobal.trials.hudDeactivated"], function(f84_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -1154,7 +1154,7 @@ CoD.Hud_ZM_Factory_SafeAreaContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	end, false)
 	f1_local25 = self
 	f1_local23 = self.subscribeToModel
-	f1_local26 = Engine[0x8DF2E5447F384B9]()
+	f1_local26 = Engine[@"getglobalmodel"]()
 	f1_local23(f1_local25, f1_local26["ZMHudGlobal.trials.infoHidden"], function(f85_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -1166,7 +1166,7 @@ CoD.Hud_ZM_Factory_SafeAreaContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	end, false)
 	self:subscribeToGlobalModel(f1_arg1, "PerController", "scriptNotify", function(model)
 		local f86_local0 = self
-		if CoD.ModelUtility.IsParamModelEqualToHashString(model, 0xAEF0DA8363893B6) and not CoD.ModelUtility.IsGlobalModelValueEqualTo("ZMHudGlobal.trials.hudDeactivated", 1) then
+		if CoD.ModelUtility.IsParamModelEqualToHashString(model, @"hash_3AEF0DA8363893B6") and not CoD.ModelUtility.IsGlobalModelValueEqualTo("ZMHudGlobal.trials.hudDeactivated", 1) then
 			CoD.ZombieUtility.CreateZMDoubleNotification(f1_arg0, self, f1_arg1)
 		end
 	end)

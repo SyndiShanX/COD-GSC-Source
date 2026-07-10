@@ -10,7 +10,7 @@ CoD.CommonRightSlideInPopup.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.anyChildUsesUpdateState = true
 	local BlackfadeBlurB = LUI.UIImage.new(1, 1, -550, 249, 0, 1, -5, 5)
 	BlackfadeBlurB:setRGB(0, 0, 0)
-	BlackfadeBlurB:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	BlackfadeBlurB:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	BlackfadeBlurB:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(BlackfadeBlurB)
 	self.BlackfadeBlurB = BlackfadeBlurB
@@ -21,8 +21,8 @@ CoD.CommonRightSlideInPopup.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.RightBackground = RightBackground
 	local RightTiledBacking = LUI.UIImage.new(1, 1, -550, 248, 0, 1, 0, 0)
 	RightTiledBacking:setAlpha(0.25)
-	RightTiledBacking:setImage(RegisterImage(0x34839E8065B1E53))
-	RightTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	RightTiledBacking:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	RightTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	RightTiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	RightTiledBacking:setupNineSliceShader(196, 88)
 	self:addElement(RightTiledBacking)

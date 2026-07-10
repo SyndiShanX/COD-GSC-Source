@@ -84,7 +84,7 @@ CoD.Social_MissingDLCNotification_Internal.new = function(f1_arg0, f1_arg1, f1_a
 	})
 	local f1_local2 = self
 	local f1_local3 = self.subscribeToModel
-	local f1_local4 = Engine[0x8DF2E5447F384B9]()
+	local f1_local4 = Engine[@"getglobalmodel"]()
 	f1_local3(f1_local2, f1_local4["lobbyRoot.privateClient.update"], function(f6_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -96,7 +96,7 @@ CoD.Social_MissingDLCNotification_Internal.new = function(f1_arg0, f1_arg1, f1_a
 	end, false)
 	f1_local2 = self
 	f1_local3 = self.subscribeToModel
-	f1_local4 = Engine[0x8DF2E5447F384B9]()
+	f1_local4 = Engine[@"getglobalmodel"]()
 	f1_local3(f1_local2, f1_local4["lobbyRoot.lobbyNav"], function(f7_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -172,7 +172,7 @@ CoD.Social_MissingDLCNotification_Internal.__clipsPerState = {
 			f14_arg0.notificationIcon:completeAnimation()
 			f14_arg0.notificationIcon:setRGB(1, 0.92, 0)
 			f14_arg0.notificationIcon:setAlpha(1)
-			f14_arg0.notificationIcon:setImage(RegisterImage(0x6115AC21B22303A))
+			f14_arg0.notificationIcon:setImage(RegisterImage(@"uie_warning_triangle"))
 			f14_arg0.clipFinished(f14_arg0.notificationIcon)
 		end,
 	},
@@ -183,7 +183,7 @@ CoD.Social_MissingDLCNotification_Internal.__clipsPerState = {
 			f15_arg0.notificationIcon:completeAnimation()
 			f15_arg0.notificationIcon:setRGB(1, 0, 0)
 			f15_arg0.notificationIcon:setAlpha(1)
-			f15_arg0.notificationIcon:setImage(RegisterImage(0x1F10DEAAEFC50A4))
+			f15_arg0.notificationIcon:setImage(RegisterImage(@"warning_triangle"))
 			f15_arg0.clipFinished(f15_arg0.notificationIcon)
 		end,
 	},
@@ -194,7 +194,7 @@ CoD.Social_MissingDLCNotification_Internal.__clipsPerState = {
 			f16_arg0.notificationIcon:completeAnimation()
 			f16_arg0.notificationIcon:setRGB(1, 0.92, 0)
 			f16_arg0.notificationIcon:setAlpha(1)
-			f16_arg0.notificationIcon:setImage(RegisterImage(0x6115AC21B22303A))
+			f16_arg0.notificationIcon:setImage(RegisterImage(@"uie_warning_triangle"))
 			f16_arg0.clipFinished(f16_arg0.notificationIcon)
 		end,
 	},
@@ -205,7 +205,7 @@ CoD.Social_MissingDLCNotification_Internal.__clipsPerState = {
 			f17_arg0.notificationIcon:completeAnimation()
 			f17_arg0.notificationIcon:setRGB(1, 0, 0)
 			f17_arg0.notificationIcon:setAlpha(1)
-			f17_arg0.notificationIcon:setImage(RegisterImage(0x1F10DEAAEFC50A4))
+			f17_arg0.notificationIcon:setImage(RegisterImage(@"warning_triangle"))
 			f17_arg0.clipFinished(f17_arg0.notificationIcon)
 		end,
 	},

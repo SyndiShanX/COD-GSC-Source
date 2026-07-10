@@ -9,18 +9,18 @@ CoD.SelectedFilmSummaryScoreColumn.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local HeaderText = LUI.UIText.new(0, 1, 0, 0, 0, 0, 0, 26)
 	HeaderText:setRGB(ColorSet.T8__OFF__GRAY.r, ColorSet.T8__OFF__GRAY.g, ColorSet.T8__OFF__GRAY.b)
-	HeaderText:setText(Engine[0xF9F1239CFD921FE](0x93E719493E9E18F))
+	HeaderText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	HeaderText:setTTF("ttmussels_regular")
 	HeaderText:setLetterSpacing(1)
-	HeaderText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	HeaderText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	HeaderText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	HeaderText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(HeaderText)
 	self.HeaderText = HeaderText
 	local ValueText = LUI.UIText.new(0.5, 0.5, -99.5, 99.5, 1, 1, -34, -1)
-	ValueText:setText(Engine[0xF9F1239CFD921FE](0x93E719493E9E18F))
+	ValueText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	ValueText:setTTF("dinnext_regular")
 	ValueText:setLetterSpacing(1)
-	ValueText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	ValueText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	self:addElement(ValueText)
 	self.ValueText = ValueText
 	self:mergeStateConditions({

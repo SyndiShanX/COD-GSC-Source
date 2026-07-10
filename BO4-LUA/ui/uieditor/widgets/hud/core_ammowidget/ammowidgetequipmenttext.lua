@@ -15,11 +15,11 @@ CoD.AmmoWidgetEquipmentText.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 		{
 			stateName = "Hidden",
 			condition = function(menu, element, event)
-				local f2_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2])
+				local f2_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_in_killcam"])
 				if not f2_local0 then
-					f2_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F])
+					f2_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_play_of_the_match"])
 					if not f2_local0 then
-						f2_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xC57360571B0917E])
+						f2_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_team_spectator"])
 					end
 				end
 				return f2_local0
@@ -52,38 +52,38 @@ CoD.AmmoWidgetEquipmentText.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	})
 	local ExtraTextPC = HeroAbilityUseString
 	local f1_local3 = HeroAbilityUseString.subscribeToModel
-	local f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local3(ExtraTextPC, f1_local4["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2]], function(f7_arg0)
+	local f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local3(ExtraTextPC, f1_local4["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"]], function(f7_arg0)
 		f1_arg0:updateElementState(HeroAbilityUseString, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f7_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"],
 		})
 	end, false)
 	ExtraTextPC = HeroAbilityUseString
 	f1_local3 = HeroAbilityUseString.subscribeToModel
-	f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local3(ExtraTextPC, f1_local4["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F]], function(f8_arg0)
+	f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local3(ExtraTextPC, f1_local4["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_play_of_the_match"]], function(f8_arg0)
 		f1_arg0:updateElementState(HeroAbilityUseString, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f8_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_play_of_the_match"],
 		})
 	end, false)
 	ExtraTextPC = HeroAbilityUseString
 	f1_local3 = HeroAbilityUseString.subscribeToModel
-	f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local3(ExtraTextPC, f1_local4["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xC57360571B0917E]], function(f9_arg0)
+	f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local3(ExtraTextPC, f1_local4["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_team_spectator"]], function(f9_arg0)
 		f1_arg0:updateElementState(HeroAbilityUseString, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f9_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xC57360571B0917E],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_team_spectator"],
 		})
 	end, false)
 	HeroAbilityUseString:appendEventHandler("input_source_changed", function(f10_arg0, f10_arg1)
@@ -92,7 +92,7 @@ CoD.AmmoWidgetEquipmentText.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	end)
 	ExtraTextPC = HeroAbilityUseString
 	f1_local3 = HeroAbilityUseString.subscribeToModel
-	f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local3(ExtraTextPC, f1_local4.LastInput, function(f11_arg0)
 		f1_arg0:updateElementState(HeroAbilityUseString, {
 			name = "model_validation",
@@ -102,9 +102,9 @@ CoD.AmmoWidgetEquipmentText.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 			modelName = "LastInput",
 		})
 	end, false)
-	HeroAbilityUseString.KBMText:setText(Engine[0xF9F1239CFD921FE](0xEC61C43D90FCF56))
-	HeroAbilityUseString.GamepadText:setText(Engine[0xF9F1239CFD921FE](0x9E6A8D0F83F4FC6))
-	HeroAbilityUseString.GamepadText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	HeroAbilityUseString.KBMText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_2EC61C43D90FCF56"))
+	HeroAbilityUseString.GamepadText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_29E6A8D0F83F4FC6"))
+	HeroAbilityUseString.GamepadText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	self:addElement(HeroAbilityUseString)
 	self.HeroAbilityUseString = HeroAbilityUseString
 	f1_local3 = nil
@@ -112,10 +112,10 @@ CoD.AmmoWidgetEquipmentText.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	ExtraTextPC = nil
 	ExtraTextPC = LUI.UIText.new(0, 1, 0, 0, 0.5, 0.5, -59, -41)
 	ExtraTextPC:setAlpha(0)
-	ExtraTextPC:setText(Engine[0xF9F1239CFD921FE](0xE5D33208E8D6267))
+	ExtraTextPC:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_2E5D33208E8D6267"))
 	ExtraTextPC:setTTF("ttmussels_regular")
-	ExtraTextPC:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	ExtraTextPC:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	ExtraTextPC:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	ExtraTextPC:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	self:addElement(ExtraTextPC)
 	self.ExtraTextPC = ExtraTextPC
 	self:mergeStateConditions({
@@ -140,7 +140,7 @@ CoD.AmmoWidgetEquipmentText.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 		{
 			stateName = "InUse",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "state", Enum[0xF0447219F15F7F3][0x1873A43E9D1620E])
+				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "state", Enum[@"weapongadgetstates"][@"player_ability_state_inuse"])
 			end,
 		},
 		{
@@ -152,25 +152,25 @@ CoD.AmmoWidgetEquipmentText.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 		{
 			stateName = "PowerBasedEmptyCharging",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "state", Enum[0xF0447219F15F7F3][0x958A6962CA8F9B7]) and CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "powerRatio", 0)
+				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "state", Enum[@"weapongadgetstates"][@"player_ability_state_charging"]) and CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "powerRatio", 0)
 			end,
 		},
 		{
 			stateName = "PowerBasedChargingAndReady",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "state", Enum[0xF0447219F15F7F3][0x1CF78BFE5F942F1]) and not IsWarzone()
+				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "state", Enum[@"weapongadgetstates"][@"hash_61CF78BFE5F942F1"]) and not IsWarzone()
 			end,
 		},
 		{
 			stateName = "PowerBasedCharging",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "state", Enum[0xF0447219F15F7F3][0x958A6962CA8F9B7]) and not IsWarzone()
+				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "state", Enum[@"weapongadgetstates"][@"player_ability_state_charging"]) and not IsWarzone()
 			end,
 		},
 		{
 			stateName = "PowerBased",
 			condition = function(menu, element, event)
-				return not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "state", Enum[0xF0447219F15F7F3][0x29529861EAA8D1C])
+				return not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "state", Enum[@"weapongadgetstates"][@"player_ability_state_hidden"])
 			end,
 		},
 		{
@@ -182,7 +182,7 @@ CoD.AmmoWidgetEquipmentText.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	})
 	local f1_local5 = self
 	f1_local4 = self.subscribeToModel
-	local f1_local6 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local6 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local4(f1_local5, f1_local6["hudItems.hawkActive"], function(f22_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -221,7 +221,7 @@ CoD.AmmoWidgetEquipmentText.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	end)
 	f1_local5 = self
 	f1_local4 = self.subscribeToModel
-	f1_local6 = Engine[0x8DF2E5447F384B9]()
+	f1_local6 = Engine[@"getglobalmodel"]()
 	f1_local4(f1_local5, f1_local6["lobbyRoot.lobbyNav"], function(f26_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

@@ -21,12 +21,12 @@ CoD.systemOverlay_FreeCursor_GenericForeground.new = function(f1_arg0, f1_arg1, 
 	title:setRGB(ColorSet.T8__BEIGE__HEADER.r, ColorSet.T8__BEIGE__HEADER.g, ColorSet.T8__BEIGE__HEADER.b)
 	title:setTTF("ttmussels_demibold")
 	title:setLetterSpacing(6)
-	title:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	title:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	title:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	title:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	title:linkToElementModel(self, "title", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
-			title:setText(Engine[0xF9F1239CFD921FE](f3_local0))
+			title:setText(Engine[@"hash_4F9F1239CFD921FE"](f3_local0))
 		end
 	end)
 	self:addElement(title)

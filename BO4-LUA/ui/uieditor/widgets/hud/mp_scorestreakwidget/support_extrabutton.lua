@@ -14,30 +14,30 @@ CoD.Support_ExtraButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local BGTopBlur = LUI.UIImage.new(0, 0, -12, 60, 0, 0, 5, 69)
-	BGTopBlur:setImage(RegisterImage(0x8109EAF75437C9B))
-	BGTopBlur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	BGTopBlur:setImage(RegisterImage(@"uie_ui_hud_core_frame_streaks_widget_top_mask"))
+	BGTopBlur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	BGTopBlur:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(BGTopBlur)
 	self.BGTopBlur = BGTopBlur
 	local BGTop = LUI.UIImage.new(0, 0, -12, 60, 0, 0, 5, 69)
-	BGTop:setImage(RegisterImage(0x79F067B6F93C63A))
+	BGTop:setImage(RegisterImage(@"uie_ui_hud_core_frame_streaks_widget_top"))
 	self:addElement(BGTop)
 	self.BGTop = BGTop
 	local PanelDark = LUI.UIImage.new(0, 0, -22, 60, 0, 0, -3.5, 79.5)
 	PanelDark:setAlpha(0.97)
-	PanelDark:setImage(RegisterImage(0xE0682AD1DCF1678))
+	PanelDark:setImage(RegisterImage(@"uie_streak_flare_bg"))
 	self:addElement(PanelDark)
 	self.PanelDark = PanelDark
 	local Background = LUI.UIImage.new(0, 0, -22, 60, 0, 0, -3.5, 79.5)
 	Background:setAlpha(0.2)
-	Background:setImage(RegisterImage(0x75825763EF40352))
-	Background:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Background:setImage(RegisterImage(@"uie_streak_flare"))
+	Background:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Background)
 	self.Background = Background
 	local LED = LUI.UIImage.new(0, 0, -11.5, 52.5, 0, 0, 3, 67)
 	LED:setRGB(0.79, 0.45, 0.05)
 	LED:setAlpha(0)
-	LED:setImage(RegisterImage(0xBA589418FAFF06D))
+	LED:setImage(RegisterImage(@"uie_ui_hud_core_streak_led_button"))
 	self:addElement(LED)
 	self.LED = LED
 	local buttonInternal = CoD.Support_ButtonInternal.new(f1_arg0, f1_arg1, 0, 0, 0, 40, 0, 0, 18, 59)
@@ -102,26 +102,26 @@ CoD.Support_ExtraButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	})
 	local ArrowDown = ControllerDependentTextBox
 	local ArrowUp = ControllerDependentTextBox.subscribeToModel
-	local FUItop2 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	ArrowUp(ArrowDown, FUItop2["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2]], function(f10_arg0)
+	local FUItop2 = Engine[@"getmodelforcontroller"](f1_arg1)
+	ArrowUp(ArrowDown, FUItop2["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"]], function(f10_arg0)
 		f1_arg0:updateElementState(ControllerDependentTextBox, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f10_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"],
 		})
 	end, false)
 	ArrowDown = ControllerDependentTextBox
 	ArrowUp = ControllerDependentTextBox.subscribeToModel
-	FUItop2 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	ArrowUp(ArrowDown, FUItop2["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F]], function(f11_arg0)
+	FUItop2 = Engine[@"getmodelforcontroller"](f1_arg1)
+	ArrowUp(ArrowDown, FUItop2["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_play_of_the_match"]], function(f11_arg0)
 		f1_arg0:updateElementState(ControllerDependentTextBox, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f11_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_play_of_the_match"],
 		})
 	end, false)
 	ControllerDependentTextBox:appendEventHandler("input_source_changed", function(f12_arg0, f12_arg1)
@@ -130,7 +130,7 @@ CoD.Support_ExtraButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	end)
 	ArrowDown = ControllerDependentTextBox
 	ArrowUp = ControllerDependentTextBox.subscribeToModel
-	FUItop2 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	FUItop2 = Engine[@"getmodelforcontroller"](f1_arg1)
 	ArrowUp(ArrowDown, FUItop2.LastInput, function(f13_arg0)
 		f1_arg0:updateElementState(ControllerDependentTextBox, {
 			name = "model_validation",
@@ -144,7 +144,7 @@ CoD.Support_ExtraButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	ControllerDependentTextBox.KBMText:setLetterSpacing(0)
 	ControllerDependentTextBox.GamepadText:setText(CoD.BaseUtility.AlreadyLocalized("[{+weapnext_inventory}]"))
 	ControllerDependentTextBox.GamepadText:setLetterSpacing(0)
-	ControllerDependentTextBox.GamepadText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	ControllerDependentTextBox.GamepadText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	ControllerDependentTextBox:linkToElementModel(self, nil, false, function(model)
 		ControllerDependentTextBox:setModel(model, f1_arg1)
 	end)
@@ -209,8 +209,8 @@ CoD.Support_ExtraButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	FUItop2 = LUI.UIImage.new(0, 0, 0.5, 40.5, 0, 0, 52, 60)
 	FUItop2:setRGB(ColorSet.T8__OCHRE.r, ColorSet.T8__OCHRE.g, ColorSet.T8__OCHRE.b)
 	FUItop2:setAlpha(0)
-	FUItop2:setImage(RegisterImage(0xD21881AE56187FC))
-	FUItop2:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	FUItop2:setImage(RegisterImage(@"uie_ui_hud_core_streak_widget_fui_selector"))
+	FUItop2:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(FUItop2)
 	self.FUItop2 = FUItop2
 	self:mergeStateConditions({
@@ -265,7 +265,7 @@ CoD.Support_ExtraButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	end)
 	local f1_local13 = self
 	local f1_local14 = self.subscribeToModel
-	local f1_local15 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local15 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local14(f1_local13, f1_local15.LastInput, function(f27_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -379,7 +379,7 @@ CoD.Support_ExtraButton.__clipsPerState = {
 			f31_arg0:__resetProperties()
 			f31_arg0:setupElementClipCounter(12)
 			local f31_local0 = function(f32_arg0)
-				f31_arg0.BGTopBlur:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f31_arg0.BGTopBlur:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f31_arg0.BGTopBlur:setTopBottom(0, 0, 5, 69)
 				f31_arg0.BGTopBlur:setAlpha(1)
 				f31_arg0.BGTopBlur:registerEventHandler("interrupted_keyframe", f31_arg0.clipInterrupted)
@@ -390,7 +390,7 @@ CoD.Support_ExtraButton.__clipsPerState = {
 			f31_arg0.BGTopBlur:setAlpha(0)
 			f31_local0(f31_arg0.BGTopBlur)
 			local f31_local1 = function(f33_arg0)
-				f31_arg0.BGTop:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f31_arg0.BGTop:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f31_arg0.BGTop:setTopBottom(0, 0, 5, 69)
 				f31_arg0.BGTop:setAlpha(1)
 				f31_arg0.BGTop:registerEventHandler("interrupted_keyframe", f31_arg0.clipInterrupted)
@@ -401,7 +401,7 @@ CoD.Support_ExtraButton.__clipsPerState = {
 			f31_arg0.BGTop:setAlpha(0)
 			f31_local1(f31_arg0.BGTop)
 			local f31_local2 = function(f34_arg0)
-				f31_arg0.PanelDark:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f31_arg0.PanelDark:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f31_arg0.PanelDark:setTopBottom(0, 0, -3.5, 79.5)
 				f31_arg0.PanelDark:setAlpha(0.97)
 				f31_arg0.PanelDark:registerEventHandler("interrupted_keyframe", f31_arg0.clipInterrupted)
@@ -413,7 +413,7 @@ CoD.Support_ExtraButton.__clipsPerState = {
 			f31_arg0.PanelDark:setScale(1, 0.8)
 			f31_local2(f31_arg0.PanelDark)
 			local f31_local3 = function(f35_arg0)
-				f31_arg0.Background:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f31_arg0.Background:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f31_arg0.Background:setTopBottom(0, 0, -3.5, 79.5)
 				f31_arg0.Background:setAlpha(0.05)
 				f31_arg0.Background:registerEventHandler("interrupted_keyframe", f31_arg0.clipInterrupted)
@@ -425,7 +425,7 @@ CoD.Support_ExtraButton.__clipsPerState = {
 			f31_arg0.Background:setScale(1, 0.8)
 			f31_local3(f31_arg0.Background)
 			local f31_local4 = function(f36_arg0)
-				f31_arg0.LED:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f31_arg0.LED:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f31_arg0.LED:setTopBottom(0, 0, 3, 67)
 				f31_arg0.LED:setAlpha(0.08)
 				f31_arg0.LED:registerEventHandler("interrupted_keyframe", f31_arg0.clipInterrupted)
@@ -436,7 +436,7 @@ CoD.Support_ExtraButton.__clipsPerState = {
 			f31_arg0.LED:setAlpha(0)
 			f31_local4(f31_arg0.LED)
 			local f31_local5 = function(f37_arg0)
-				f31_arg0.buttonInternal:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735])
+				f31_arg0.buttonInternal:beginAnimation(200, Enum[@"luitween"][@"luitween_bounce"])
 				f31_arg0.buttonInternal:setAlpha(1)
 				f31_arg0.buttonInternal:registerEventHandler("interrupted_keyframe", f31_arg0.clipInterrupted)
 				f31_arg0.buttonInternal:registerEventHandler("transition_complete_keyframe", f31_arg0.clipFinished)
@@ -490,7 +490,7 @@ CoD.Support_ExtraButton.__clipsPerState = {
 			f39_arg0:__resetProperties()
 			f39_arg0:setupElementClipCounter(10)
 			local f39_local0 = function(f40_arg0)
-				f39_arg0.PanelDark:beginAnimation(230, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f39_arg0.PanelDark:beginAnimation(230, Enum[@"luitween"][@"luitween_ease_both"])
 				f39_arg0.PanelDark:setScale(1, 1)
 				f39_arg0.PanelDark:registerEventHandler("interrupted_keyframe", f39_arg0.clipInterrupted)
 				f39_arg0.PanelDark:registerEventHandler("transition_complete_keyframe", f39_arg0.clipFinished)
@@ -499,7 +499,7 @@ CoD.Support_ExtraButton.__clipsPerState = {
 			f39_arg0.PanelDark:setScale(1, 0.8)
 			f39_local0(f39_arg0.PanelDark)
 			local f39_local1 = function(f41_arg0)
-				f39_arg0.Background:beginAnimation(230, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f39_arg0.Background:beginAnimation(230, Enum[@"luitween"][@"luitween_ease_both"])
 				f39_arg0.Background:setScale(1, 1)
 				f39_arg0.Background:registerEventHandler("interrupted_keyframe", f39_arg0.clipInterrupted)
 				f39_arg0.Background:registerEventHandler("transition_complete_keyframe", f39_arg0.clipFinished)
@@ -513,7 +513,7 @@ CoD.Support_ExtraButton.__clipsPerState = {
 			f39_arg0.LED:setAlpha(0.34)
 			f39_arg0.clipFinished(f39_arg0.LED)
 			local f39_local2 = function(f42_arg0)
-				f39_arg0.buttonInternal:beginAnimation(230, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f39_arg0.buttonInternal:beginAnimation(230, Enum[@"luitween"][@"luitween_ease_both"])
 				f39_arg0.buttonInternal:setScale(1.1, 1.1)
 				f39_arg0.buttonInternal:registerEventHandler("interrupted_keyframe", f39_arg0.clipInterrupted)
 				f39_arg0.buttonInternal:registerEventHandler("transition_complete_keyframe", f39_arg0.clipFinished)
@@ -549,7 +549,7 @@ CoD.Support_ExtraButton.__clipsPerState = {
 			f43_arg0:__resetProperties()
 			f43_arg0:setupElementClipCounter(12)
 			local f43_local0 = function(f44_arg0)
-				f43_arg0.BGTopBlur:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f43_arg0.BGTopBlur:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f43_arg0.BGTopBlur:setTopBottom(0, 0, 15, 79)
 				f43_arg0.BGTopBlur:setAlpha(0)
 				f43_arg0.BGTopBlur:registerEventHandler("interrupted_keyframe", f43_arg0.clipInterrupted)
@@ -560,7 +560,7 @@ CoD.Support_ExtraButton.__clipsPerState = {
 			f43_arg0.BGTopBlur:setAlpha(1)
 			f43_local0(f43_arg0.BGTopBlur)
 			local f43_local1 = function(f45_arg0)
-				f43_arg0.BGTop:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f43_arg0.BGTop:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f43_arg0.BGTop:setTopBottom(0, 0, 15, 79)
 				f43_arg0.BGTop:setAlpha(0)
 				f43_arg0.BGTop:registerEventHandler("interrupted_keyframe", f43_arg0.clipInterrupted)
@@ -571,7 +571,7 @@ CoD.Support_ExtraButton.__clipsPerState = {
 			f43_arg0.BGTop:setAlpha(1)
 			f43_local1(f43_arg0.BGTop)
 			local f43_local2 = function(f46_arg0)
-				f43_arg0.PanelDark:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f43_arg0.PanelDark:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f43_arg0.PanelDark:setTopBottom(0, 0, 6.5, 89.5)
 				f43_arg0.PanelDark:setAlpha(0)
 				f43_arg0.PanelDark:registerEventHandler("interrupted_keyframe", f43_arg0.clipInterrupted)
@@ -583,7 +583,7 @@ CoD.Support_ExtraButton.__clipsPerState = {
 			f43_arg0.PanelDark:setScale(1, 0.8)
 			f43_local2(f43_arg0.PanelDark)
 			local f43_local3 = function(f47_arg0)
-				f43_arg0.Background:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f43_arg0.Background:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f43_arg0.Background:setTopBottom(0, 0, 6.5, 89.5)
 				f43_arg0.Background:setAlpha(0)
 				f43_arg0.Background:registerEventHandler("interrupted_keyframe", f43_arg0.clipInterrupted)
@@ -595,7 +595,7 @@ CoD.Support_ExtraButton.__clipsPerState = {
 			f43_arg0.Background:setScale(1, 0.8)
 			f43_local3(f43_arg0.Background)
 			local f43_local4 = function(f48_arg0)
-				f43_arg0.LED:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f43_arg0.LED:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f43_arg0.LED:setTopBottom(0, 0, 13, 77)
 				f43_arg0.LED:setAlpha(0)
 				f43_arg0.LED:registerEventHandler("interrupted_keyframe", f43_arg0.clipInterrupted)
@@ -606,7 +606,7 @@ CoD.Support_ExtraButton.__clipsPerState = {
 			f43_arg0.LED:setAlpha(0.08)
 			f43_local4(f43_arg0.LED)
 			local f43_local5 = function(f49_arg0)
-				f43_arg0.buttonInternal:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735])
+				f43_arg0.buttonInternal:beginAnimation(200, Enum[@"luitween"][@"luitween_bounce"])
 				f43_arg0.buttonInternal:setAlpha(0)
 				f43_arg0.buttonInternal:registerEventHandler("interrupted_keyframe", f43_arg0.clipInterrupted)
 				f43_arg0.buttonInternal:registerEventHandler("transition_complete_keyframe", f43_arg0.clipFinished)

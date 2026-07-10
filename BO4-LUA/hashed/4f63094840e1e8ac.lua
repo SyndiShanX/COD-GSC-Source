@@ -14,19 +14,19 @@ CoD.ButtonFrame_XPMeterInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self:addElement(LevelMeterBgTint)
 	self.LevelMeterBgTint = LevelMeterBgTint
 	local LevelMeterBg = LUI.UIImage.new(0, 1, -2, -54, 0.5, 0.5, -12.5, 5.5)
-	LevelMeterBg:setImage(RegisterImage(0x61E8EB53DFEF82B))
-	LevelMeterBg:setMaterial(LUI.UIImage.GetCachedMaterial(0xF755127C95CF5B6))
+	LevelMeterBg:setImage(RegisterImage(@"uie_ui_menu_inspection_level_meter_bg"))
+	LevelMeterBg:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_F755127C95CF5B6"))
 	LevelMeterBg:setShaderVector(0, 2, 0, 0, 0)
 	self:addElement(LevelMeterBg)
 	self.LevelMeterBg = LevelMeterBg
 	local CurrentXPMeter = CoD.CommonWipeMeterWithGlow.new(f1_arg0, f1_arg1, 0, 1, 0, -56, 0, 0, 16, 28)
 	CurrentXPMeter.Meter:setRGB(1, 0.73, 0)
-	CurrentXPMeter.Meter:setImage(RegisterImage(0x6D2FBF31F53910C))
+	CurrentXPMeter.Meter:setImage(RegisterImage(@"uie_ui_menu_aar_levelup_bar"))
 	CurrentXPMeter.Meter:setShaderVector(0, 0.25, 0, 0, 0)
 	CurrentXPMeter.MeterAdd:setAlpha(0.3)
-	CurrentXPMeter.MeterAdd:setImage(RegisterImage(0x6D2FBF31F53910C))
+	CurrentXPMeter.MeterAdd:setImage(RegisterImage(@"uie_ui_menu_aar_levelup_bar"))
 	CurrentXPMeter.MeterGlow:setRGB(0.39, 0.18, 0)
-	CurrentXPMeter.MeterGlow:setImage(RegisterImage(0xA7D61A3302B55D0))
+	CurrentXPMeter.MeterGlow:setImage(RegisterImage(@"uie_ui_menu_aar_levelup_bar_glow"))
 	CurrentXPMeter.MeterGlow:setShaderVector(0, 0.25, 0, 0, 0)
 	self:addElement(CurrentXPMeter)
 	self.CurrentXPMeter = CurrentXPMeter
@@ -34,7 +34,7 @@ CoD.ButtonFrame_XPMeterInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	CurrentXPText:setText("")
 	CurrentXPText:setTTF("ttmussels_demibold")
 	CurrentXPText:setLetterSpacing(1)
-	CurrentXPText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	CurrentXPText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(CurrentXPText)
 	self.CurrentXPText = CurrentXPText
 	local NeededXPText = LUI.UIText.new(1, 1, -167, -57, 0, 0, 29.5, 50.5)
@@ -42,7 +42,7 @@ CoD.ButtonFrame_XPMeterInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	NeededXPText:setText("")
 	NeededXPText:setTTF("ttmussels_demibold")
 	NeededXPText:setLetterSpacing(1)
-	NeededXPText:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
+	NeededXPText:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
 	self:addElement(NeededXPText)
 	self.NeededXPText = NeededXPText
 	local RankIcon = LUI.UIImage.new(1, 1, -48, 0, 0, 0, -2, 46)

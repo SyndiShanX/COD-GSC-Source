@@ -21,10 +21,10 @@ CoD.EmblemEditorPCLegend.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 		elseif element.super.gainFocus then
 			f2_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f2_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(emptyFocusable, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "MOUSE1", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(emptyFocusable, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "MOUSE1", function(element, menu, controller, model)
 		if IsSelfInState(self, "Open") then
 			SetState(self, "Close", controller)
 			return true
@@ -32,7 +32,7 @@ CoD.EmblemEditorPCLegend.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 		end
 	end, function(element, menu, controller)
 		if IsSelfInState(self, "Open") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "MOUSE1")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "MOUSE1")
 			return false
 		else
 			return false
@@ -43,56 +43,56 @@ CoD.EmblemEditorPCLegend.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	local dropshadow = LUI.UIImage.new(0, 1, -50, 50, 1, 1, -429.5, -180.5)
 	dropshadow:setRGB(0, 0, 0)
 	dropshadow:setAlpha(0.8)
-	dropshadow:setImage(RegisterImage(0xF8AD9AE7EF787EF))
-	dropshadow:setMaterial(LUI.UIImage.GetCachedMaterial(0x44484DDFAF5C093))
+	dropshadow:setImage(RegisterImage(@"uie_dropshadow_9s"))
+	dropshadow:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_normal"))
 	dropshadow:setShaderVector(0, 0, 0, 0, 0)
 	dropshadow:setupNineSliceShader(120, 120)
 	self:addElement(dropshadow)
 	self.dropshadow = dropshadow
 	local Backing = LUI.UIImage.new(0, 1, 0, 0, 1, 1, -380.5, -53.5)
 	Backing:setRGB(0, 0, 0)
-	Backing:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	Backing:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	Backing:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(Backing)
 	self.Backing = Backing
 	local NoiseTiledBacking2 = LUI.UIImage.new(0, 1, 0, 0, 1, 1, -380.5, -53.5)
-	NoiseTiledBacking2:setImage(RegisterImage(0x34839E8065B1E53))
-	NoiseTiledBacking2:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	NoiseTiledBacking2:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	NoiseTiledBacking2:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	NoiseTiledBacking2:setShaderVector(0, 0, 0, 0, 0)
 	NoiseTiledBacking2:setupNineSliceShader(196, 88)
 	self:addElement(NoiseTiledBacking2)
 	self.NoiseTiledBacking2 = NoiseTiledBacking2
 	local NoiseTiledBackingAdd = LUI.UIImage.new(0, 1, 0, 0, 1, 1, -380.5, -53.5)
 	NoiseTiledBackingAdd:setAlpha(0.2)
-	NoiseTiledBackingAdd:setImage(RegisterImage(0x34839E8065B1E53))
-	NoiseTiledBackingAdd:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	NoiseTiledBackingAdd:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	NoiseTiledBackingAdd:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	NoiseTiledBackingAdd:setShaderVector(0, 0, 0, 0, 0)
 	NoiseTiledBackingAdd:setupNineSliceShader(196, 88)
 	self:addElement(NoiseTiledBackingAdd)
 	self.NoiseTiledBackingAdd = NoiseTiledBackingAdd
 	local FooterStripe1 = LUI.UIImage.new(0, 1, 0, 0, 1, 1, -90.5, -54.5)
 	FooterStripe1:setAlpha(0.1)
-	FooterStripe1:setImage(RegisterImage(0xC7A051F5EFC70E5))
-	FooterStripe1:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	FooterStripe1:setImage(RegisterImage(@"hash_2C7A051F5EFC70E5"))
+	FooterStripe1:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	FooterStripe1:setShaderVector(0, 0, 0, 0, 0)
 	FooterStripe1:setupNineSliceShader(245, 40)
 	self:addElement(FooterStripe1)
 	self.FooterStripe1 = FooterStripe1
 	local dividerH02 = LUI.UIImage.new(0, 1, 0, 0, 1, 1, -91.5, -87.5)
 	dividerH02:setAlpha(0.2)
-	dividerH02:setImage(RegisterImage(0x84B43D5B04D263A))
-	dividerH02:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	dividerH02:setImage(RegisterImage(@"hash_484B43D5B04D263A"))
+	dividerH02:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	dividerH02:setShaderVector(0, 0, 0, 0, 0)
 	dividerH02:setupNineSliceShader(8, 4)
 	self:addElement(dividerH02)
 	self.dividerH02 = dividerH02
 	local text = LUI.UIText.new(0.5, 0.5, -160, 160, 1, 1, -365.5, -350.5)
 	text:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
-	text:setText(Engine[0xF9F1239CFD921FE](0x90E9019810E01CA))
+	text:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_490E9019810E01CA"))
 	text:setTTF("ttmussels_demibold")
 	text:setLetterSpacing(6)
-	text:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	text:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	text:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	text:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(text)
 	self.text = text
 	local PCTheaterKeyboardShortcut18 = CoD.EmblemEditorPCLegend_Shortcuts.new(f1_arg0, f1_arg1, 0.5, 0.5, -840, 840, 1, 1, -321.5, -61.5)
@@ -101,16 +101,16 @@ CoD.EmblemEditorPCLegend.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	self.PCTheaterKeyboardShortcut18 = PCTheaterKeyboardShortcut18
 	local Frame03 = LUI.UIImage.new(0, 1, 0, 0, 1, 1, -380.5, -341.5)
 	Frame03:setAlpha(0.2)
-	Frame03:setImage(RegisterImage(0x185E11D74ECA3D7))
-	Frame03:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	Frame03:setImage(RegisterImage(@"uie_ui_menu_store_common_frame"))
+	Frame03:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	Frame03:setShaderVector(0, 0, 0, 0, 0)
 	Frame03:setupNineSliceShader(16, 16)
 	self:addElement(Frame03)
 	self.Frame03 = Frame03
 	local Frame = LUI.UIImage.new(0, 1, 0, 0, 1, 1, -382.5, -52.5)
 	Frame:setAlpha(0.1)
-	Frame:setImage(RegisterImage(0x185E11D74ECA3D7))
-	Frame:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	Frame:setImage(RegisterImage(@"uie_ui_menu_store_common_frame"))
+	Frame:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	Frame:setShaderVector(0, 0, 0, 0, 0)
 	Frame:setupNineSliceShader(16, 16)
 	self:addElement(Frame)

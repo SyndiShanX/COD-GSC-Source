@@ -70,7 +70,7 @@ CoD.DirectorTheaterStartButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	end, false)
 	f1_local2 = ButtonContainer
 	f1_local3 = ButtonContainer.subscribeToModel
-	f1_local4 = Engine[0x8DF2E5447F384B9]()
+	f1_local4 = Engine[@"getglobalmodel"]()
 	f1_local3(f1_local2, f1_local4["lobbyRoot.lobbyTimeRemaining"], function(f8_arg0)
 		f1_arg0:updateElementState(ButtonContainer, {
 			name = "model_validation",
@@ -94,7 +94,7 @@ CoD.DirectorTheaterStartButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	end, false)
 	f1_local2 = ButtonContainer
 	f1_local3 = ButtonContainer.subscribeToModel
-	f1_local4 = Engine[0x8DF2E5447F384B9]()
+	f1_local4 = Engine[@"getglobalmodel"]()
 	f1_local3(f1_local2, f1_local4["lobbyRoot.theaterDownloadPercent"], function(f10_arg0)
 		f1_arg0:updateElementState(ButtonContainer, {
 			name = "model_validation",
@@ -106,7 +106,7 @@ CoD.DirectorTheaterStartButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	end, false)
 	f1_local2 = ButtonContainer
 	f1_local3 = ButtonContainer.subscribeToModel
-	f1_local4 = Engine[0x8DF2E5447F384B9]()
+	f1_local4 = Engine[@"getglobalmodel"]()
 	f1_local3(f1_local2, f1_local4["lobbyRoot.theaterDataDownloaded"], function(f11_arg0)
 		f1_arg0:updateElementState(ButtonContainer, {
 			name = "model_validation",
@@ -118,7 +118,7 @@ CoD.DirectorTheaterStartButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	end, false)
 	f1_local2 = ButtonContainer
 	f1_local3 = ButtonContainer.subscribeToModel
-	f1_local4 = Engine[0x8DF2E5447F384B9]()
+	f1_local4 = Engine[@"getglobalmodel"]()
 	f1_local3(f1_local2, f1_local4["lobbyRoot.lobbyNav"], function(f12_arg0)
 		f1_arg0:updateElementState(ButtonContainer, {
 			name = "model_validation",
@@ -130,7 +130,7 @@ CoD.DirectorTheaterStartButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	end, false)
 	f1_local2 = ButtonContainer
 	f1_local3 = ButtonContainer.subscribeToModel
-	f1_local4 = Engine[0x8DF2E5447F384B9]()
+	f1_local4 = Engine[@"getglobalmodel"]()
 	f1_local3(f1_local2, f1_local4["lobbyRoot.privateClient.isHost"], function(f13_arg0)
 		f1_arg0:updateElementState(ButtonContainer, {
 			name = "model_validation",
@@ -142,7 +142,7 @@ CoD.DirectorTheaterStartButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	end, false)
 	f1_local2 = ButtonContainer
 	f1_local3 = ButtonContainer.subscribeToModel
-	f1_local4 = Engine[0x8DF2E5447F384B9]()
+	f1_local4 = Engine[@"getglobalmodel"]()
 	f1_local3(f1_local2, f1_local4["lobbyRoot.gameClient.isHost"], function(f14_arg0)
 		f1_arg0:updateElementState(ButtonContainer, {
 			name = "model_validation",

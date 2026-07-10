@@ -10,7 +10,7 @@ CoD.ClassMiniPreviewTalentItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	local noslotIcon = LUI.UIImage.new(0.5, 0.5, -25, 25, 0.5, 0.5, -25, 25)
 	noslotIcon:setAlpha(0.01)
 	noslotIcon:setScale(0.4, 0.4)
-	noslotIcon:setImage(RegisterImage(0x35CB0919FD78E83))
+	noslotIcon:setImage(RegisterImage(@"uie_ui_menu_draft_attachment_noslot"))
 	self:addElement(noslotIcon)
 	self.noslotIcon = noslotIcon
 	local TalenImage = LUI.UIFixedAspectRatioImage.new(0.5, 0.5, -35, 35, 0.5, 0.5, -35, 35)

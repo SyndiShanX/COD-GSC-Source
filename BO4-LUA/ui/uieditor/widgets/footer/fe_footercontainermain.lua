@@ -21,7 +21,7 @@ CoD.fe_FooterContainerMain.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self:addElement(PressStartText)
 	self.PressStartText = PressStartText
 	local Logo = LUI.UIImage.new(0, 0, 45, 109, 1, 1, -66, -2)
-	Logo:setImage(RegisterImage(0xAD5B9D46C446ED8))
+	Logo:setImage(RegisterImage(@"hash_4AD5B9D46C446ED8"))
 	self:addElement(Logo)
 	self.Logo = Logo
 	self:mergeStateConditions({

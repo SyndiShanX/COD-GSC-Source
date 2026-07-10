@@ -61,7 +61,7 @@ CoD.DirectorSelectButtonGameType.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	end)
 	local f1_local2 = DirectorCustomStartButton
 	local DirectorPartyLeaderOnlyPrompt = DirectorCustomStartButton.subscribeToModel
-	local f1_local4 = Engine[0x8DF2E5447F384B9]()
+	local f1_local4 = Engine[@"getglobalmodel"]()
 	DirectorPartyLeaderOnlyPrompt(f1_local2, f1_local4["lobbyRoot.lobbyNav"], function(f8_arg0)
 		f1_arg0:updateElementState(DirectorCustomStartButton, {
 			name = "model_validation",
@@ -110,7 +110,7 @@ CoD.DirectorSelectButtonGameType.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	end)
 	f1_local4 = DirectorPartyLeaderOnlyPrompt
 	f1_local2 = DirectorPartyLeaderOnlyPrompt.subscribeToModel
-	local f1_local5 = Engine[0x8DF2E5447F384B9]()
+	local f1_local5 = Engine[@"getglobalmodel"]()
 	f1_local2(f1_local4, f1_local5["lobbyRoot.lobbyNav"], function(f15_arg0)
 		f1_arg0:updateElementState(DirectorPartyLeaderOnlyPrompt, {
 			name = "model_validation",
@@ -122,7 +122,7 @@ CoD.DirectorSelectButtonGameType.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	end, false)
 	f1_local4 = DirectorPartyLeaderOnlyPrompt
 	f1_local2 = DirectorPartyLeaderOnlyPrompt.subscribeToModel
-	f1_local5 = Engine[0x8DF2E5447F384B9]()
+	f1_local5 = Engine[@"getglobalmodel"]()
 	f1_local2(f1_local4, f1_local5["lobbyRoot.gameClient.update"], function(f16_arg0)
 		f1_arg0:updateElementState(DirectorPartyLeaderOnlyPrompt, {
 			name = "model_validation",
@@ -134,7 +134,7 @@ CoD.DirectorSelectButtonGameType.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	end, false)
 	f1_local4 = DirectorPartyLeaderOnlyPrompt
 	f1_local2 = DirectorPartyLeaderOnlyPrompt.subscribeToModel
-	f1_local5 = Engine[0x8DF2E5447F384B9]()
+	f1_local5 = Engine[@"getglobalmodel"]()
 	f1_local2(f1_local4, f1_local5["lobbyRoot.privateClient.update"], function(f17_arg0)
 		f1_arg0:updateElementState(DirectorPartyLeaderOnlyPrompt, {
 			name = "model_validation",
@@ -180,7 +180,7 @@ CoD.DirectorSelectButtonGameType.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	end)
 	f1_local4 = self
 	f1_local2 = self.subscribeToModel
-	f1_local5 = Engine[0x8DF2E5447F384B9]()
+	f1_local5 = Engine[@"getglobalmodel"]()
 	f1_local2(f1_local4, f1_local5["lobbyRoot.lobbyNav"], function(f22_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -230,7 +230,7 @@ CoD.DirectorSelectButtonGameType.__clipsPerState = {
 			f26_arg0:__resetProperties()
 			f26_arg0:setupElementClipCounter(2)
 			local f26_local0 = function(f27_arg0)
-				f26_arg0.DirectorCustomStartButton:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f26_arg0.DirectorCustomStartButton:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f26_arg0.DirectorCustomStartButton:setZoom(5)
 				f26_arg0.DirectorCustomStartButton:setScale(1.05, 1.05)
 				f26_arg0.DirectorCustomStartButton:registerEventHandler("interrupted_keyframe", f26_arg0.clipInterrupted)
@@ -256,7 +256,7 @@ CoD.DirectorSelectButtonGameType.__clipsPerState = {
 			f29_arg0:__resetProperties()
 			f29_arg0:setupElementClipCounter(2)
 			local f29_local0 = function(f30_arg0)
-				f29_arg0.DirectorCustomStartButton:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f29_arg0.DirectorCustomStartButton:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f29_arg0.DirectorCustomStartButton:setZoom(0)
 				f29_arg0.DirectorCustomStartButton:setScale(1, 1)
 				f29_arg0.DirectorCustomStartButton:registerEventHandler("interrupted_keyframe", f29_arg0.clipInterrupted)

@@ -17,7 +17,7 @@ CoD.WarzoneQuickConsumeSlotPC.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	InventoryEquipmentSmall:setTopBottom(0, 0, 92, 108)
 	InventoryEquipmentSmall:setWidgetType(CoD.WarzoneInventoryItemGrayBox)
 	InventoryEquipmentSmall:setHorizontalCount(3)
-	InventoryEquipmentSmall:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	InventoryEquipmentSmall:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	self:addElement(InventoryEquipmentSmall)
 	self.InventoryEquipmentSmall = InventoryEquipmentSmall
 	local ControllerDependentTextBox = CoD.ControllerDependent_TextBox.new(f1_arg0, f1_arg1, 0.5, 0.5, -43, 46, 0, 0, 93, 115)
@@ -61,26 +61,26 @@ CoD.WarzoneQuickConsumeSlotPC.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	})
 	local EmptyPanel = ControllerDependentTextBox
 	local EmptyBlur = ControllerDependentTextBox.subscribeToModel
-	local FullConsumed = Engine[0x4DF5CFBC1771947](f1_arg1)
-	EmptyBlur(EmptyPanel, FullConsumed["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2]], function(f8_arg0)
+	local FullConsumed = Engine[@"getmodelforcontroller"](f1_arg1)
+	EmptyBlur(EmptyPanel, FullConsumed["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"]], function(f8_arg0)
 		f1_arg0:updateElementState(ControllerDependentTextBox, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f8_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"],
 		})
 	end, false)
 	EmptyPanel = ControllerDependentTextBox
 	EmptyBlur = ControllerDependentTextBox.subscribeToModel
-	FullConsumed = Engine[0x4DF5CFBC1771947](f1_arg1)
-	EmptyBlur(EmptyPanel, FullConsumed["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F]], function(f9_arg0)
+	FullConsumed = Engine[@"getmodelforcontroller"](f1_arg1)
+	EmptyBlur(EmptyPanel, FullConsumed["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_play_of_the_match"]], function(f9_arg0)
 		f1_arg0:updateElementState(ControllerDependentTextBox, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f9_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_play_of_the_match"],
 		})
 	end, false)
 	ControllerDependentTextBox:appendEventHandler("input_source_changed", function(f10_arg0, f10_arg1)
@@ -89,7 +89,7 @@ CoD.WarzoneQuickConsumeSlotPC.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	end)
 	EmptyPanel = ControllerDependentTextBox
 	EmptyBlur = ControllerDependentTextBox.subscribeToModel
-	FullConsumed = Engine[0x4DF5CFBC1771947](f1_arg1)
+	FullConsumed = Engine[@"getmodelforcontroller"](f1_arg1)
 	EmptyBlur(EmptyPanel, FullConsumed.LastInput, function(f11_arg0)
 		f1_arg0:updateElementState(ControllerDependentTextBox, {
 			name = "model_validation",
@@ -101,7 +101,7 @@ CoD.WarzoneQuickConsumeSlotPC.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	end, false)
 	EmptyPanel = ControllerDependentTextBox
 	EmptyBlur = ControllerDependentTextBox.subscribeToModel
-	FullConsumed = Engine[0x4DF5CFBC1771947](f1_arg1)
+	FullConsumed = Engine[@"getmodelforcontroller"](f1_arg1)
 	EmptyBlur(EmptyPanel, FullConsumed["hudItems.inventory.quickConsumeNetworkId"], function(f12_arg0)
 		f1_arg0:updateElementState(ControllerDependentTextBox, {
 			name = "model_validation",
@@ -116,7 +116,7 @@ CoD.WarzoneQuickConsumeSlotPC.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self.ControllerDependentTextBox = ControllerDependentTextBox
 	EmptyBlur = LUI.UIImage.new(0.5, 0.5, -33.5, 33.5, 0, 0, 21.5, 88.5)
 	EmptyBlur:setScale(0.96, 0.96)
-	EmptyBlur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	EmptyBlur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	EmptyBlur:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(EmptyBlur)
 	self.EmptyBlur = EmptyBlur
@@ -154,7 +154,7 @@ CoD.WarzoneQuickConsumeSlotPC.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	FullConsumed:setTopBottom(0, 0, 19.5, 89.5)
 	FullConsumed:setWidgetType(CoD.WarzoneQuickInventoryMenuItemSmall)
 	FullConsumed:setSpacing(3)
-	FullConsumed:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
+	FullConsumed:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
 	FullConsumed:setFilter(function(f16_arg0)
 		return f16_arg0.type:get() ~= "ammo"
 	end)
@@ -164,11 +164,11 @@ CoD.WarzoneQuickConsumeSlotPC.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	local LED = LUI.UIImage.new(0, 0, 31, 99, 0, 0, 19.5, 87.5)
 	LED:setRGB(0, 0, 0)
 	LED:setAlpha(0.2)
-	LED:setImage(RegisterImage(0xD6566449C808FFB))
+	LED:setImage(RegisterImage(@"uie_ui_hud_wz_hud_core_player_widget_led_heal"))
 	self:addElement(LED)
 	self.LED = LED
 	local EmptyFrame = LUI.UIImage.new(0.5, 0.5, -42.5, 41.5, 0, 0, 12, 96)
-	EmptyFrame:setImage(RegisterImage(0x70548EF9EFFFB38))
+	EmptyFrame:setImage(RegisterImage(@"uie_ui_pc_quickconsume_slot"))
 	self:addElement(EmptyFrame)
 	self.EmptyFrame = EmptyFrame
 	self:mergeStateConditions({
@@ -181,7 +181,7 @@ CoD.WarzoneQuickConsumeSlotPC.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	})
 	local f1_local8 = self
 	local f1_local9 = self.subscribeToModel
-	local f1_local10 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local10 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local9(f1_local8, f1_local10["hudItems.inventory.quickConsumeNetworkId"], function(f18_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

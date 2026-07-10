@@ -15,7 +15,7 @@ CoD.CodCasterMiniMapPosition.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 			stateName = "VisibleFull",
 			condition = function(menu, element, event)
 				local f2_local0
-				if not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x198075B069840DC]) and not ScoreboardVisible(f1_arg1) and not CoD.ModelUtility.IsModelValueTrue(f1_arg1, "CodCaster.showFullScreenMap") and not CoD.CodCasterUtility.CodCasterIsInAerialCam(f1_arg1) then
+				if not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_game_ended"]) and not ScoreboardVisible(f1_arg1) and not CoD.ModelUtility.IsModelValueTrue(f1_arg1, "CodCaster.showFullScreenMap") and not CoD.CodCasterUtility.CodCasterIsInAerialCam(f1_arg1) then
 					f2_local0 = CoD.CodCasterUtility.IsCodCasterWithProfileValueEqualTo(f1_arg1, "shoutcaster_ds_minimap", 2)
 					if f2_local0 then
 						f2_local0 = not CoD.ModelUtility.IsModelValueTrue(f1_arg1, "CodCaster.showKeyboard")
@@ -30,7 +30,7 @@ CoD.CodCasterMiniMapPosition.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 			stateName = "VisibleStandard",
 			condition = function(menu, element, event)
 				local f3_local0
-				if not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x198075B069840DC]) and not ScoreboardVisible(f1_arg1) and not CoD.ModelUtility.IsModelValueTrue(f1_arg1, "CodCaster.showFullScreenMap") and not CoD.CodCasterUtility.CodCasterIsInAerialCam(f1_arg1) then
+				if not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_game_ended"]) and not ScoreboardVisible(f1_arg1) and not CoD.ModelUtility.IsModelValueTrue(f1_arg1, "CodCaster.showFullScreenMap") and not CoD.CodCasterUtility.CodCasterIsInAerialCam(f1_arg1) then
 					f3_local0 = CoD.CodCasterUtility.IsCodCasterWithProfileValueEqualTo(f1_arg1, "shoutcaster_ds_minimap", 1)
 					if f3_local0 then
 						f3_local0 = not CoD.ModelUtility.IsModelValueTrue(f1_arg1, "CodCaster.showKeyboard")
@@ -44,19 +44,19 @@ CoD.CodCasterMiniMapPosition.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	})
 	local f1_local2 = CodCasterMiniMap
 	local f1_local3 = CodCasterMiniMap.subscribeToModel
-	local f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local3(f1_local2, f1_local4["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x198075B069840DC]], function(f4_arg0)
+	local f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local3(f1_local2, f1_local4["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_game_ended"]], function(f4_arg0)
 		f1_arg0:updateElementState(CodCasterMiniMap, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f4_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x198075B069840DC],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_game_ended"],
 		})
 	end, false)
 	f1_local2 = CodCasterMiniMap
 	f1_local3 = CodCasterMiniMap.subscribeToModel
-	f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local3(f1_local2, f1_local4.forceScoreboard, function(f5_arg0)
 		f1_arg0:updateElementState(CodCasterMiniMap, {
 			name = "model_validation",
@@ -68,19 +68,19 @@ CoD.CodCasterMiniMapPosition.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	end, false)
 	f1_local2 = CodCasterMiniMap
 	f1_local3 = CodCasterMiniMap.subscribeToModel
-	f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local3(f1_local2, f1_local4["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04]], function(f6_arg0)
+	f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local3(f1_local2, f1_local4["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]], function(f6_arg0)
 		f1_arg0:updateElementState(CodCasterMiniMap, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f6_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"],
 		})
 	end, false)
 	f1_local2 = CodCasterMiniMap
 	f1_local3 = CodCasterMiniMap.subscribeToModel
-	f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local3(f1_local2, f1_local4["CodCaster.showFullScreenMap"], function(f7_arg0)
 		f1_arg0:updateElementState(CodCasterMiniMap, {
 			name = "model_validation",
@@ -92,14 +92,14 @@ CoD.CodCasterMiniMapPosition.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	end, false)
 	f1_local2 = CodCasterMiniMap
 	f1_local3 = CodCasterMiniMap.subscribeToModel
-	f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local3(f1_local2, f1_local4["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x7EAF988DDEB83EA]], function(f8_arg0)
+	f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local3(f1_local2, f1_local4["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"hash_57EAF988DDEB83EA"]], function(f8_arg0)
 		f1_arg0:updateElementState(CodCasterMiniMap, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f8_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x7EAF988DDEB83EA],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"hash_57EAF988DDEB83EA"],
 		})
 	end, false)
 	f1_local2 = CodCasterMiniMap
@@ -116,7 +116,7 @@ CoD.CodCasterMiniMapPosition.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	end, false)
 	f1_local2 = CodCasterMiniMap
 	f1_local3 = CodCasterMiniMap.subscribeToModel
-	f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local3(f1_local2, f1_local4["CodCaster.showKeyboard"], function(f10_arg0)
 		f1_arg0:updateElementState(CodCasterMiniMap, {
 			name = "model_validation",

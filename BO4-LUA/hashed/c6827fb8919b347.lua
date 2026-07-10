@@ -72,16 +72,16 @@ CoD.BountyHunterPackageSingleTier.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	local NoiseTiledBacking = LUI.UIImage.new(0, 0, 12, 82, 0, 0, 15, 33)
 	NoiseTiledBacking:setRGB(0.48, 0.59, 0.41)
 	NoiseTiledBacking:setAlpha(0.75)
-	NoiseTiledBacking:setImage(RegisterImage(0x519D21799A7D188))
-	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	NoiseTiledBacking:setImage(RegisterImage(@"hash_1519D21799A7D188"))
+	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	NoiseTiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	NoiseTiledBacking:setupNineSliceShader(16, 16)
 	self:addElement(NoiseTiledBacking)
 	self.NoiseTiledBacking = NoiseTiledBacking
 	local NoiseTiledBacking2 = LUI.UIImage.new(0, 0, 12, 14, 0, 0, 15, 33)
 	NoiseTiledBacking2:setRGB(0.75, 0.92, 0.59)
-	NoiseTiledBacking2:setImage(RegisterImage(0x519D21799A7D188))
-	NoiseTiledBacking2:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	NoiseTiledBacking2:setImage(RegisterImage(@"hash_1519D21799A7D188"))
+	NoiseTiledBacking2:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	NoiseTiledBacking2:setShaderVector(0, 0, 0, 0, 0)
 	NoiseTiledBacking2:setupNineSliceShader(16, 16)
 	self:addElement(NoiseTiledBacking2)
@@ -90,7 +90,7 @@ CoD.BountyHunterPackageSingleTier.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	Cost2:setRGB(0.76, 0.92, 0.59)
 	Cost2:setTTF("ttmussels_regular")
 	Cost2:setLetterSpacing(2)
-	Cost2:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	Cost2:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	Cost2:linkToElementModel(self, "buyCost", true, function(model)
 		local f10_local0 = model:get()
 		if f10_local0 ~= nil then
@@ -104,8 +104,8 @@ CoD.BountyHunterPackageSingleTier.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	DollarSign2:setText(CoD.BaseUtility.AlreadyLocalized("$"))
 	DollarSign2:setTTF("ttmussels_regular")
 	DollarSign2:setLetterSpacing(4)
-	DollarSign2:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	DollarSign2:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	DollarSign2:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	DollarSign2:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(DollarSign2)
 	self.DollarSign2 = DollarSign2
 	self:mergeStateConditions({
@@ -127,7 +127,7 @@ CoD.BountyHunterPackageSingleTier.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	end)
 	local f1_local6 = self
 	local f1_local7 = self.subscribeToModel
-	local f1_local8 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local8 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local7(f1_local6, f1_local8["luielement.BountyHunterLoadout.money"], function(f13_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

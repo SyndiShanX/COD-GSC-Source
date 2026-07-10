@@ -11,8 +11,8 @@ CoD.DirectorLobbyClanAndMemberName.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	local ClanTag = LUI.UIText.new(0, 0, 0, 99, 0.5, 0.5, -10.5, 10.5)
 	ClanTag:setTTF("notosans_regular")
 	ClanTag:setLetterSpacing(2)
-	ClanTag:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	ClanTag:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	ClanTag:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	ClanTag:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	ClanTag:linkToElementModel(self, "clantag", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -28,8 +28,8 @@ CoD.DirectorLobbyClanAndMemberName.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	gamertag.__Color()
 	gamertag:setTTF("notosans_bold")
 	gamertag:setLetterSpacing(2)
-	gamertag:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	gamertag:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	gamertag:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	gamertag:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	gamertag:linkToElementModel(self, "gamertag", true, function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
@@ -43,8 +43,8 @@ CoD.DirectorLobbyClanAndMemberName.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	realId:setRGB(0.56, 0.56, 0.56)
 	realId:setTTF("notosans_bold")
 	realId:setLetterSpacing(2)
-	realId:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	realId:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	realId:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	realId:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	realId:linkToElementModel(self, "realName", true, function(model)
 		local f5_local0 = model:get()
 		if f5_local0 ~= nil then

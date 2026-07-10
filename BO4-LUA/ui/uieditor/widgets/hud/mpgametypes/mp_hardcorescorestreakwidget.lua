@@ -15,7 +15,7 @@ CoD.MP_HardcoreScorestreakWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	self.Panel = Panel
 	local text = LUI.UIText.new(0, 0, 15, 289, 0, 0, 0, 38)
 	text:setTTF("default")
-	text:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	text:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	text:subscribeToGlobalModel(f1_arg1, "HUDItems", "currentHCStreakName", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -63,7 +63,7 @@ CoD.MP_HardcoreScorestreakWidget.__clipsPerState = {
 			local f7_local0 = function(f8_arg0)
 				local f8_local0 = function(f9_arg0)
 					local f9_local0 = function(f10_arg0)
-						f10_arg0:beginAnimation(290, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735])
+						f10_arg0:beginAnimation(290, Enum[@"luitween"][@"luitween_bounce"])
 						f10_arg0:setAlpha(0)
 						f10_arg0:registerEventHandler("transition_complete_keyframe", f7_arg0.clipFinished)
 					end
@@ -81,7 +81,7 @@ CoD.MP_HardcoreScorestreakWidget.__clipsPerState = {
 			local f7_local1 = function(f11_arg0)
 				local f11_local0 = function(f12_arg0)
 					local f12_local0 = function(f13_arg0)
-						f13_arg0:beginAnimation(290, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735])
+						f13_arg0:beginAnimation(290, Enum[@"luitween"][@"luitween_bounce"])
 						f13_arg0:setAlpha(0)
 						f13_arg0:registerEventHandler("transition_complete_keyframe", f7_arg0.clipFinished)
 					end

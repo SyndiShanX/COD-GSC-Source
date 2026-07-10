@@ -11,9 +11,9 @@ CoD.AARStatLine.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_a
 	local RatioLabel = LUI.UIText.new(0, 0, 0, 240, 0, 0, 0, 21)
 	RatioLabel:setRGB(0.9, 0.89, 0.78)
 	RatioLabel:setAlpha(0.25)
-	RatioLabel:setText(Engine[0xF9F1239CFD921FE](0xC6FCD3D2BEA972))
+	RatioLabel:setText(Engine[@"hash_4F9F1239CFD921FE"](0xC6FCD3D2BEA972))
 	RatioLabel:setTTF("dinnext_regular")
-	RatioLabel:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	RatioLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(RatioLabel)
 	self.RatioLabel = RatioLabel
 	local VerticalListSpacer = CoD.VerticalListSpacer.new(f1_arg0, f1_arg1, 0, 0, 240, 248, 0, 0, -15, 36)
@@ -23,8 +23,8 @@ CoD.AARStatLine.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_a
 	KDRatio:setRGB(0.9, 0.89, 0.78)
 	KDRatio:setAlpha(0.25)
 	KDRatio:setTTF("dinnext_regular")
-	KDRatio:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	KDRatio:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	KDRatio:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	KDRatio:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	KDRatio:linkToElementModel(self, "kdRatio", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then

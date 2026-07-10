@@ -46,7 +46,7 @@ CoD.ArenaEventButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	end)
 	local f1_local2 = ArenaButtonInternal
 	local newIcon = ArenaButtonInternal.subscribeToModel
-	local f1_local4 = Engine[0x8DF2E5447F384B9]()
+	local f1_local4 = Engine[@"getglobalmodel"]()
 	newIcon(f1_local2, f1_local4["lobbyRoot.lobbyNav"], function(f6_arg0)
 		f1_arg0:updateElementState(ArenaButtonInternal, {
 			name = "model_validation",
@@ -89,7 +89,7 @@ CoD.ArenaEventButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	})
 	f1_local4 = newIcon
 	f1_local2 = newIcon.subscribeToModel
-	local f1_local5 = Engine[0x8DF2E5447F384B9]()
+	local f1_local5 = Engine[@"getglobalmodel"]()
 	f1_local2(f1_local4, f1_local5["lobbyRoot.lobbyNetworkMode"], function(f11_arg0)
 		f1_arg0:updateElementState(newIcon, {
 			name = "model_validation",
@@ -101,7 +101,7 @@ CoD.ArenaEventButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	end, false)
 	f1_local4 = newIcon
 	f1_local2 = newIcon.subscribeToModel
-	f1_local5 = Engine[0x8DF2E5447F384B9]()
+	f1_local5 = Engine[@"getglobalmodel"]()
 	f1_local2(f1_local4, f1_local5["lobbyRoot.lobbyNav"], function(f12_arg0)
 		f1_arg0:updateElementState(newIcon, {
 			name = "model_validation",
@@ -184,7 +184,7 @@ CoD.ArenaEventButton.__clipsPerState = {
 			f22_arg0:__resetProperties()
 			f22_arg0:setupElementClipCounter(1)
 			local f22_local0 = function(f23_arg0)
-				f22_arg0.ArenaButtonInternal:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f22_arg0.ArenaButtonInternal:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f22_arg0.ArenaButtonInternal:setZoom(5)
 				f22_arg0.ArenaButtonInternal:setScale(1.05, 1.05)
 				f22_arg0.ArenaButtonInternal:registerEventHandler("interrupted_keyframe", f22_arg0.clipInterrupted)
@@ -199,7 +199,7 @@ CoD.ArenaEventButton.__clipsPerState = {
 			f24_arg0:__resetProperties()
 			f24_arg0:setupElementClipCounter(1)
 			local f24_local0 = function(f25_arg0)
-				f24_arg0.ArenaButtonInternal:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f24_arg0.ArenaButtonInternal:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f24_arg0.ArenaButtonInternal:setZoom(0)
 				f24_arg0.ArenaButtonInternal:setScale(1, 1)
 				f24_arg0.ArenaButtonInternal:registerEventHandler("interrupted_keyframe", f24_arg0.clipInterrupted)
@@ -284,7 +284,7 @@ CoD.ArenaEventButton.__clipsPerState = {
 			f36_arg0:__resetProperties()
 			f36_arg0:setupElementClipCounter(1)
 			local f36_local0 = function(f37_arg0)
-				f36_arg0.ArenaButtonInternal:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f36_arg0.ArenaButtonInternal:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f36_arg0.ArenaButtonInternal:setScale(1.05, 1.05)
 				f36_arg0.ArenaButtonInternal:registerEventHandler("interrupted_keyframe", f36_arg0.clipInterrupted)
 				f36_arg0.ArenaButtonInternal:registerEventHandler("transition_complete_keyframe", f36_arg0.clipFinished)
@@ -297,7 +297,7 @@ CoD.ArenaEventButton.__clipsPerState = {
 			f38_arg0:__resetProperties()
 			f38_arg0:setupElementClipCounter(1)
 			local f38_local0 = function(f39_arg0)
-				f38_arg0.ArenaButtonInternal:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f38_arg0.ArenaButtonInternal:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f38_arg0.ArenaButtonInternal:setScale(1, 1)
 				f38_arg0.ArenaButtonInternal:registerEventHandler("interrupted_keyframe", f38_arg0.clipInterrupted)
 				f38_arg0.ArenaButtonInternal:registerEventHandler("transition_complete_keyframe", f38_arg0.clipFinished)

@@ -15,7 +15,7 @@ LUI.createMenu.AARRewardOverlay = function(f1_arg0, f1_arg1)
 	f1_local1:addElementToPendingUpdateStateList(self)
 	local SceneBlur = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	SceneBlur:setAlpha(0)
-	SceneBlur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	SceneBlur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	SceneBlur:setShaderVector(0, 0, 0.85, 0, 0)
 	self:addElement(SceneBlur)
 	self.SceneBlur = SceneBlur
@@ -51,7 +51,7 @@ LUI.createMenu.AARRewardOverlay = function(f1_arg0, f1_arg1)
 	})
 	local ZMRewardsTitle = RewardsTab
 	local RewardsTitle = RewardsTab.subscribeToModel
-	local f1_local8 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	local f1_local8 = Engine[@"getmodelforcontroller"](f1_arg0)
 	RewardsTitle(ZMRewardsTitle, f1_local8["AAR.activeTab"], function(f4_arg0)
 		f1_local1:updateElementState(RewardsTab, {
 			name = "model_validation",
@@ -63,7 +63,7 @@ LUI.createMenu.AARRewardOverlay = function(f1_arg0, f1_arg1)
 	end, false)
 	ZMRewardsTitle = RewardsTab
 	RewardsTitle = RewardsTab.subscribeToModel
-	f1_local8 = Engine[0x8DF2E5447F384B9]()
+	f1_local8 = Engine[@"getglobalmodel"]()
 	RewardsTitle(ZMRewardsTitle, f1_local8["lobbyRoot.lobbyNav"], function(f5_arg0)
 		f1_local1:updateElementState(RewardsTab, {
 			name = "model_validation",
@@ -77,21 +77,21 @@ LUI.createMenu.AARRewardOverlay = function(f1_arg0, f1_arg1)
 	self.RewardsTab = RewardsTab
 	RewardsTitle = LUI.UIText.new(0.5, 0.5, -960, 960, 0, 0, 26, 77)
 	RewardsTitle:setRGB(ColorSet.T8_FactionTier_InProgress.r, ColorSet.T8_FactionTier_InProgress.g, ColorSet.T8_FactionTier_InProgress.b)
-	RewardsTitle:setText(Engine[0xF9F1239CFD921FE](0x897061E92EE5BFC))
+	RewardsTitle:setText(Engine[@"hash_4F9F1239CFD921FE"](@"aar/rewards"))
 	RewardsTitle:setTTF("ttmussels_regular")
 	RewardsTitle:setLetterSpacing(14)
-	RewardsTitle:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	RewardsTitle:setAlignment(Enum[0x7A5123B654282D2][0x70510683C22104B])
+	RewardsTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	RewardsTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_bottom"])
 	self:addElement(RewardsTitle)
 	self.RewardsTitle = RewardsTitle
 	ZMRewardsTitle = LUI.UIText.new(0.5, 0.5, -960, 960, 0, 0, 26, 77)
 	ZMRewardsTitle:setRGB(ColorSet.T8_FactionTier_InProgress.r, ColorSet.T8_FactionTier_InProgress.g, ColorSet.T8_FactionTier_InProgress.b)
 	ZMRewardsTitle:setAlpha(0)
-	ZMRewardsTitle:setText(Engine[0xF9F1239CFD921FE](0x897061E92EE5BFC))
+	ZMRewardsTitle:setText(Engine[@"hash_4F9F1239CFD921FE"](@"aar/rewards"))
 	ZMRewardsTitle:setTTF("skorzhen")
 	ZMRewardsTitle:setLetterSpacing(14)
-	ZMRewardsTitle:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	ZMRewardsTitle:setAlignment(Enum[0x7A5123B654282D2][0x70510683C22104B])
+	ZMRewardsTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	ZMRewardsTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_bottom"])
 	self:addElement(ZMRewardsTitle)
 	self.ZMRewardsTitle = ZMRewardsTitle
 	self:mergeStateConditions({
@@ -104,7 +104,7 @@ LUI.createMenu.AARRewardOverlay = function(f1_arg0, f1_arg1)
 	})
 	local f1_local9 = self
 	f1_local8 = self.subscribeToModel
-	local f1_local10 = Engine[0x8DF2E5447F384B9]()
+	local f1_local10 = Engine[@"getglobalmodel"]()
 	f1_local8(f1_local9, f1_local10["lobbyRoot.lobbyNav"], function(f7_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",
@@ -116,15 +116,15 @@ LUI.createMenu.AARRewardOverlay = function(f1_arg0, f1_arg1)
 	end, false)
 	self:appendEventHandler("input_source_changed", function(f8_arg0, f8_arg1)
 		f8_arg1.menu = f8_arg1.menu or f1_local1
-		CoD.Menu.UpdateButtonShownState(f8_arg0, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f8_arg0, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	f1_local9 = self
 	f1_local8 = self.subscribeToModel
-	f1_local10 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	f1_local10 = Engine[@"getmodelforcontroller"](f1_arg0)
 	f1_local8(f1_local9, f1_local10.LastInput, function(f9_arg0, f9_arg1)
-		CoD.Menu.UpdateButtonShownState(f9_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f9_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if not IsPC() then
 			CoD.AARUtility.InitRewardsPaging(controller)
 			GoBack(self, controller)
@@ -137,16 +137,16 @@ LUI.createMenu.AARRewardOverlay = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if not IsPC() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x6393FF34EA56966, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/continue", nil, nil)
 			return true
 		elseif IsPC() and IsGamepad(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, nil)
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		if IsPC() then
 			CoD.AARUtility.InitRewardsPaging(controller)
 			GoBack(self, controller)
@@ -155,26 +155,26 @@ LUI.createMenu.AARRewardOverlay = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if IsPC() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "MOUSE1", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_none"], "MOUSE1", function(element, menu, controller, model)
 		CoD.AARUtility.InitRewardsPaging(controller)
 		GoBack(self, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "MOUSE1")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "MOUSE1")
 		return false
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "ui_confirm", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_none"], "ui_confirm", function(element, menu, controller, model)
 		CoD.AARUtility.InitRewardsPaging(controller)
 		GoBack(self, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "ui_confirm")
 		return false
 	end, false)
 	self.__on_menuOpened_self = function(f18_arg0, f18_arg1, f18_arg2, f18_arg3)
@@ -224,7 +224,7 @@ CoD.AARRewardOverlay.__clipsPerState = {
 			f22_arg0:setupElementClipCounter(3)
 			local f22_local0 = function(f23_arg0)
 				local f23_local0 = function(f24_arg0)
-					f24_arg0:beginAnimation(149, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f24_arg0:beginAnimation(149, Enum[@"luitween"][@"luitween_ease_out"])
 					f24_arg0:setAlpha(1)
 					f24_arg0:registerEventHandler("transition_complete_keyframe", f22_arg0.clipFinished)
 				end
@@ -236,7 +236,7 @@ CoD.AARRewardOverlay.__clipsPerState = {
 			f22_arg0.RewardsTab:setAlpha(0)
 			f22_local0(f22_arg0.RewardsTab)
 			local f22_local1 = function(f25_arg0)
-				f22_arg0.RewardsTitle:beginAnimation(150, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f22_arg0.RewardsTitle:beginAnimation(150, Enum[@"luitween"][@"luitween_ease_in"])
 				f22_arg0.RewardsTitle:setAlpha(1)
 				f22_arg0.RewardsTitle:registerEventHandler("interrupted_keyframe", f22_arg0.clipInterrupted)
 				f22_arg0.RewardsTitle:registerEventHandler("transition_complete_keyframe", f22_arg0.clipFinished)
@@ -255,7 +255,7 @@ CoD.AARRewardOverlay.__clipsPerState = {
 			f26_arg0:setupElementClipCounter(3)
 			local f26_local0 = function(f27_arg0)
 				local f27_local0 = function(f28_arg0)
-					f28_arg0:beginAnimation(149, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f28_arg0:beginAnimation(149, Enum[@"luitween"][@"luitween_ease_out"])
 					f28_arg0:setAlpha(1)
 					f28_arg0:registerEventHandler("transition_complete_keyframe", f26_arg0.clipFinished)
 				end

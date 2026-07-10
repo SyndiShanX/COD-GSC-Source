@@ -29,7 +29,7 @@ CoD.DirectorConfigButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	end)
 	local f1_local2 = ConfigInternal
 	local ButtonName = ConfigInternal.subscribeToModel
-	local f1_local4 = Engine[0x8DF2E5447F384B9]()
+	local f1_local4 = Engine[@"getglobalmodel"]()
 	ButtonName(f1_local2, f1_local4["lobbyRoot.lobbyNav"], function(f5_arg0)
 		f1_arg0:updateElementState(ConfigInternal, {
 			name = "model_validation",
@@ -41,7 +41,7 @@ CoD.DirectorConfigButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	end, false)
 	f1_local2 = ConfigInternal
 	ButtonName = ConfigInternal.subscribeToModel
-	f1_local4 = Engine[0x8DF2E5447F384B9]()
+	f1_local4 = Engine[@"getglobalmodel"]()
 	ButtonName(f1_local2, f1_local4["lobbyRoot.gameClient.update"], function(f6_arg0)
 		f1_arg0:updateElementState(ConfigInternal, {
 			name = "model_validation",
@@ -53,7 +53,7 @@ CoD.DirectorConfigButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	end, false)
 	f1_local2 = ConfigInternal
 	ButtonName = ConfigInternal.subscribeToModel
-	f1_local4 = Engine[0x8DF2E5447F384B9]()
+	f1_local4 = Engine[@"getglobalmodel"]()
 	ButtonName(f1_local2, f1_local4["lobbyRoot.privateClient.update"], function(f7_arg0)
 		f1_arg0:updateElementState(ConfigInternal, {
 			name = "model_validation",
@@ -77,11 +77,11 @@ CoD.DirectorConfigButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	self:addElement(ConfigInternal)
 	self.ConfigInternal = ConfigInternal
 	ButtonName = LUI.UIText.new(0, 1, 0, 0, 0.5, 0.5, -9, 9)
-	ButtonName:setText(LocalizeToUpperString(0x97EE1DC92936225))
+	ButtonName:setText(LocalizeToUpperString(@"menu/bots"))
 	ButtonName:setTTF("ttmussels_regular")
 	ButtonName:setLetterSpacing(2)
-	ButtonName:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	ButtonName:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	ButtonName:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	ButtonName:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(ButtonName)
 	self.ButtonName = ButtonName
 	ConfigInternal.id = "ConfigInternal"

@@ -19,9 +19,9 @@ CoD.DirectorSelectButtonSpecialistHeadquarters.new = function(f1_arg0, f1_arg1, 
 	self.Image = Image
 	local Header = LUI.UIText.new(0, 1, 0, 0, 0, 0, -33, -6)
 	Header:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
-	Header:setText(Engine[0xF9F1239CFD921FE](0x93E719493E9E18F))
+	Header:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	Header:setTTF("ttmussels_regular")
-	Header:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	Header:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(Header)
 	self.Header = Header
 	SpecialistPersonalizationButtonOptionInternal.id = "SpecialistPersonalizationButtonOptionInternal"

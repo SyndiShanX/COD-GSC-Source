@@ -9,7 +9,7 @@ CoD.PlayerListRowKillandDeathValue.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Score01 = LUI.UIText.new(0, 0, 0, 95, 0.5, 0.5, -7.5, 7.5)
 	Score01:setTTF("0arame_mono_stencil")
-	Score01:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	Score01:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	Score01:linkToElementModel(self, "clientNumScoreInfoUpdated", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then

@@ -8,7 +8,7 @@ CoD.DeathMarker.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_a
 	self.soundSet = "ChooseDecal"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local DeathIcon = LUI.UIImage.new(0, 0, 0, 40, 0, 0, 0, 40)
-	DeathIcon:setImage(RegisterImage(0xEEF27DB975D1457))
+	DeathIcon:setImage(RegisterImage(@"uie_t7_headicon_dead"))
 	self:addElement(DeathIcon)
 	self.DeathIcon = DeathIcon
 	if PostLoadFunc then

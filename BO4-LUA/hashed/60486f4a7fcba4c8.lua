@@ -9,10 +9,10 @@ CoD.ShowPlayButtonHintText.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local ShowPlayButtonHint = LUI.UIText.new(0, 0, 0, 800, 0, 0, 0, 24)
 	ShowPlayButtonHint:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
-	ShowPlayButtonHint:setText(Engine[0xF9F1239CFD921FE](0xDB05264D4789AD1))
+	ShowPlayButtonHint:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_DB05264D4789AD1"))
 	ShowPlayButtonHint:setTTF("ttmussels_regular")
-	ShowPlayButtonHint:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	ShowPlayButtonHint:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	ShowPlayButtonHint:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	ShowPlayButtonHint:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(ShowPlayButtonHint)
 	self.ShowPlayButtonHint = ShowPlayButtonHint
 	self:mergeStateConditions({
@@ -42,7 +42,7 @@ CoD.ShowPlayButtonHintText.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 end
 CoD.ShowPlayButtonHintText.__resetProperties = function(f4_arg0)
 	f4_arg0.ShowPlayButtonHint:completeAnimation()
-	f4_arg0.ShowPlayButtonHint:setText(Engine[0xF9F1239CFD921FE](0xDB05264D4789AD1))
+	f4_arg0.ShowPlayButtonHint:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_DB05264D4789AD1"))
 end
 CoD.ShowPlayButtonHintText.__clipsPerState = {
 	DefaultState = {
@@ -56,7 +56,7 @@ CoD.ShowPlayButtonHintText.__clipsPerState = {
 			f6_arg0:__resetProperties()
 			f6_arg0:setupElementClipCounter(1)
 			f6_arg0.ShowPlayButtonHint:completeAnimation()
-			f6_arg0.ShowPlayButtonHint:setText(Engine[0xF9F1239CFD921FE](0xD0C408E05261DE3))
+			f6_arg0.ShowPlayButtonHint:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_5D0C408E05261DE3"))
 			f6_arg0.clipFinished(f6_arg0.ShowPlayButtonHint)
 		end,
 	},

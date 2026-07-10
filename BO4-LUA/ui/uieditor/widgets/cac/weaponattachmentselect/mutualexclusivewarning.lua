@@ -10,18 +10,18 @@ CoD.MutualExclusiveWarning.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Icon = LUI.UIImage.new(0, 0, 0, 18, 0.5, 0.5, -9, 9)
 	Icon:setRGB(1, 0.41, 0)
-	Icon:setImage(RegisterImage(0x11D4E13C821CCE3))
+	Icon:setImage(RegisterImage(@"hash_111D4E13C821CCE3"))
 	self:addElement(Icon)
 	self.Icon = Icon
 	local WarningText = LUI.UIText.new(0, 0, 29, 229, 0.5, 0.5, -10.5, 10.5)
 	WarningText:setRGB(1, 0.41, 0)
 	WarningText:setTTF("ttmussels_demibold")
 	WarningText:setLetterSpacing(3)
-	WarningText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	WarningText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	WarningText:linkToElementModel(self, "cautionText", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			WarningText:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			WarningText:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	self:addElement(WarningText)

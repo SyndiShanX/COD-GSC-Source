@@ -21,15 +21,15 @@ LUI = {
 		false,
 	},
 }
-if Enum[0x7A5123B654282D2] then
+if Enum[@"luialignment"] then
 	LUI.Alignment = {
-		None = Enum[0x7A5123B654282D2][0x1539396E54B179A],
-		Left = Enum[0x7A5123B654282D2][0x58C8A85F2048829],
-		Center = Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041],
-		Right = Enum[0x7A5123B654282D2][0x830CFD395E6AA0A],
-		Top = Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3],
-		Middle = Enum[0x7A5123B654282D2][0x6ED4298C93DC5ED],
-		Bottom = Enum[0x7A5123B654282D2][0x70510683C22104B],
+		None = Enum[@"luialignment"][@"lui_alignment_none"],
+		Left = Enum[@"luialignment"][@"lui_alignment_left"],
+		Center = Enum[@"luialignment"][@"lui_alignment_center"],
+		Right = Enum[@"luialignment"][@"lui_alignment_right"],
+		Top = Enum[@"luialignment"][@"lui_alignment_top"],
+		Middle = Enum[@"luialignment"][@"lui_alignment_middle"],
+		Bottom = Enum[@"luialignment"][@"lui_alignment_bottom"],
 	}
 end
 if hpairs ~= nil then
@@ -160,9 +160,9 @@ LUI.CreateModelsAndInitialize = function(f16_arg0, f16_arg1)
 	end
 end
 LUI.CreateModelAndInitialize = function(f17_arg0, f17_arg1, f17_arg2)
-	local f17_local0 = Engine[0xA798E4552F5E872](f17_arg0, f17_arg1)
+	local f17_local0 = Engine[@"createmodel"](f17_arg0, f17_arg1)
 	if f17_local0 and f17_arg2 ~= nil then
-		Engine[0x83C9B5DE1D9371](f17_local0, f17_arg2)
+		Engine[@"setmodelvalue"](f17_local0, f17_arg2)
 	end
 	return f17_local0
 end
@@ -297,7 +297,7 @@ function DisableGlobals()
 	f28_local0.__newindex = function(f29_arg0, f29_arg1, f29_arg2)
 		error("LUI Error: Tried to create global variable " .. f29_arg1, 2)
 	end
-	if Engine[0x2DA54CF5D6B7F02]() then
+	if Engine[@"isdevelopmentbuild"]() then
 		f28_local0.__index = function(f30_arg0, f30_arg1)
 			if f30_arg1 == "PreLoadFunc" or f30_arg1 == "PostLoadFunc" or f30_arg1 == "LobbyVM" then
 				return nil
@@ -307,7 +307,7 @@ function DisableGlobals()
 				f30_local0 = debug.traceback()
 			end
 			if string.find(f30_local0, "debuggerIndexMeta") == nil then
-				if nil ~= Dvar[0x96B7991ACA20308] and Dvar[0x96B7991ACA20308]:get() then
+				if nil ~= Dvar[@"ui_errorundeflocals"] and Dvar[@"ui_errorundeflocals"]:get() then
 					error("LUI Error: Tried to use undefined variable " .. f30_arg1, 2)
 				else
 					DebugPrint("WARNING: Tried to use undefined variable " .. f30_arg1 .. "\n" .. f30_local0)
@@ -323,7 +323,7 @@ function EnableGlobals()
 		setmetatable(_G, f31_local0)
 	end
 	f31_local0.__newindex = nil
-	if Engine[0x2DA54CF5D6B7F02]() then
+	if Engine[@"isdevelopmentbuild"]() then
 		f31_local0.__index = nil
 	end
 end

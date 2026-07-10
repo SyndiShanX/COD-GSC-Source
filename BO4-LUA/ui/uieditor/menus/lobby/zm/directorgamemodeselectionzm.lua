@@ -17,13 +17,13 @@ LUI.createMenu.DirectorGamemodeSelectionZM = function(f1_arg0, f1_arg1)
 	f1_local1:addElementToPendingUpdateStateList(self)
 	local SceneBlur = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	SceneBlur:setRGB(0, 0, 0)
-	SceneBlur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	SceneBlur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	SceneBlur:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(SceneBlur)
 	self.SceneBlur = SceneBlur
 	local BackgroundImage = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	BackgroundImage:setAlpha(0.85)
-	BackgroundImage:setImage(RegisterImage(0x4BF88A437F4C579))
+	BackgroundImage:setImage(RegisterImage(@"uie_fe_cp_background"))
 	self:addElement(BackgroundImage)
 	self.BackgroundImage = BackgroundImage
 	local BGEnhancement = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
@@ -33,16 +33,16 @@ LUI.createMenu.DirectorGamemodeSelectionZM = function(f1_arg0, f1_arg1)
 	self.BGEnhancement = BGEnhancement
 	local NoiseTiledBacking = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	NoiseTiledBacking:setAlpha(0)
-	NoiseTiledBacking:setImage(RegisterImage(0x34839E8065B1E53))
-	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	NoiseTiledBacking:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	NoiseTiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	NoiseTiledBacking:setupNineSliceShader(196, 88)
 	self:addElement(NoiseTiledBacking)
 	self.NoiseTiledBacking = NoiseTiledBacking
 	local TiledPlusGrid = LUI.UIImage.new(0.5, 0.5, -1095, 960, 0, 0, 0, 1080)
 	TiledPlusGrid:setAlpha(0.05)
-	TiledPlusGrid:setImage(RegisterImage(0x6E37BAE22631294))
-	TiledPlusGrid:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	TiledPlusGrid:setImage(RegisterImage(@"uie_ui_hud_vehicle_hellstorm_repeat_plusgrid"))
+	TiledPlusGrid:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	TiledPlusGrid:setShaderVector(0, 0, 0, 0, 0)
 	TiledPlusGrid:setupNineSliceShader(220, 220)
 	self:addElement(TiledPlusGrid)
@@ -69,12 +69,12 @@ LUI.createMenu.DirectorGamemodeSelectionZM = function(f1_arg0, f1_arg1)
 	self:addElement(FooterContainerFrontendRight)
 	self.FooterContainerFrontendRight = FooterContainerFrontendRight
 	local DirectorHeaderTabSafeArea = CoD.DirectorHeaderTabSafeArea.new(f1_local1, f1_arg0, 0, 1, 0, 0, 0, 0, 0, 1080)
-	DirectorHeaderTabSafeArea.CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(0x4456C22914B29F9))
+	DirectorHeaderTabSafeArea.CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(@"menu/zombies_modes"))
 	DirectorHeaderTabSafeArea.Tabs.customClasssList:setDataSource("DirectorPlaylistGameTypeList")
 	DirectorHeaderTabSafeArea:subscribeToGlobalModel(f1_arg0, "LobbyRoot", "lobbyTitle", function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
-			DirectorHeaderTabSafeArea.CommonHeader.subtitle.subtitle:setText(Engine[0xF9F1239CFD921FE](f3_local0))
+			DirectorHeaderTabSafeArea.CommonHeader.subtitle.subtitle:setText(Engine[@"hash_4F9F1239CFD921FE"](f3_local0))
 		end
 	end)
 	DirectorHeaderTabSafeArea:registerEventHandler("menu_loaded", function(element, event)
@@ -132,7 +132,7 @@ LUI.createMenu.DirectorGamemodeSelectionZM = function(f1_arg0, f1_arg1)
 	})
 	local f1_local10 = self
 	local f1_local11 = self.subscribeToModel
-	local f1_local12 = Engine[0x8DF2E5447F384B9]()
+	local f1_local12 = Engine[@"getglobalmodel"]()
 	f1_local11(f1_local10, f1_local12["ZMLobbyExclusions.ZMPlaylistTab"], function(f11_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",
@@ -144,28 +144,28 @@ LUI.createMenu.DirectorGamemodeSelectionZM = function(f1_arg0, f1_arg1)
 	end, false)
 	f1_local10 = self
 	f1_local11 = self.subscribeToModel
-	f1_local12 = Engine[0x8DF2E5447F384B9]()
+	f1_local12 = Engine[@"getglobalmodel"]()
 	f1_local11(f1_local10, f1_local12["ZMLobbyExclusions.ZMPlaylistTab"], function(f12_arg0, f12_arg1)
-		CoD.Menu.UpdateButtonShownState(f12_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x22361E23588705A])
+		CoD.Menu.UpdateButtonShownState(f12_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_start"])
 	end, false)
 	self:appendEventHandler("input_source_changed", function(f13_arg0, f13_arg1)
 		f13_arg1.menu = f13_arg1.menu or f1_local1
-		CoD.Menu.UpdateButtonShownState(f13_arg0, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x22361E23588705A])
+		CoD.Menu.UpdateButtonShownState(f13_arg0, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_start"])
 	end)
 	f1_local10 = self
 	f1_local11 = self.subscribeToModel
-	f1_local12 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	f1_local12 = Engine[@"getmodelforcontroller"](f1_arg0)
 	f1_local11(f1_local10, f1_local12.LastInput, function(f14_arg0, f14_arg1)
-		CoD.Menu.UpdateButtonShownState(f14_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x22361E23588705A])
+		CoD.Menu.UpdateButtonShownState(f14_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_start"])
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		GoBack(self, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 		return true
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x22361E23588705A], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_start"], nil, function(element, menu, controller, model)
 		if CoD.ZombieUtility.TrialsInfo() and IsGamepad(controller) then
 			OpenOverlay(self, "DirectorZMTrialsInfo", controller)
 			return true
@@ -173,7 +173,7 @@ LUI.createMenu.DirectorGamemodeSelectionZM = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if CoD.ZombieUtility.TrialsInfo() and IsGamepad(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x22361E23588705A], 0xAB419DD8BD872BA, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_start"], @"hash_4AB419DD8BD872BA", nil, nil)
 			return true
 		else
 			return false

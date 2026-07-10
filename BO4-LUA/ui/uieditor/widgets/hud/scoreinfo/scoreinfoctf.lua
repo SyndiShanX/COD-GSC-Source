@@ -11,7 +11,7 @@ CoD.ScoreInfoCTF.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Blur = LUI.UIImage.new(0.5, 0.5, -101.5, 101.5, 0.5, 0.5, -27, 27)
-	Blur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	Blur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	Blur:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(Blur)
 	self.Blur = Blur
@@ -23,21 +23,21 @@ CoD.ScoreInfoCTF.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 	local LEDFull = LUI.UIImage.new(0.5, 0.5, -110.5, 111.5, 0.5, 0.5, -79, 43)
 	LEDFull:setRGB(0, 0, 0)
 	LEDFull:setAlpha(0.2)
-	LEDFull:setImage(RegisterImage(0x322B09BC49B50F1))
+	LEDFull:setImage(RegisterImage(@"uie_ui_hud_core_objective_widget_led_screen_03"))
 	self:addElement(LEDFull)
 	self.LEDFull = LEDFull
 	local frame = LUI.UIImage.new(0.5, 0.5, -104.5, 104.5, 0.5, 0.5, -30, 30)
 	frame:setYRot(180)
-	frame:setImage(RegisterImage(0x52BE0503BCF6523))
-	frame:setMaterial(LUI.UIImage.GetCachedMaterial(0x44484DDFAF5C093))
+	frame:setImage(RegisterImage(@"uie_ui_hud_core_frame_stretchable"))
+	frame:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_normal"))
 	frame:setShaderVector(0, 0, 0, 0, 0)
 	frame:setupNineSliceShader(16, 16)
 	self:addElement(frame)
 	self.frame = frame
 	local Divider = LUI.UIImage.new(0.5, 0.5, -100, 100, 0.5, 0.5, -2.5, 2.5)
 	Divider:setRGB(0, 0, 0)
-	Divider:setImage(RegisterImage(0xD16B33E79A589C5))
-	Divider:setMaterial(LUI.UIImage.GetCachedMaterial(0xE8F55203998700A))
+	Divider:setImage(RegisterImage(@"hash_5D16B33E79A589C5"))
+	Divider:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_feather_blend"))
 	self:addElement(Divider)
 	self.Divider = Divider
 	local flagStateEnemy = CoD.ScoreInfoCTF_FlagState.new(f1_arg0, f1_arg1, 0, 0, 37, 207, 0.5, 0.5, 2, 24)
@@ -57,7 +57,7 @@ CoD.ScoreInfoCTF.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 	})
 	local friendlyflag = flagStateEnemy
 	local flagStateFriendly = flagStateEnemy.subscribeToModel
-	local enemyflag = Engine[0x8DF2E5447F384B9]()
+	local enemyflag = Engine[@"getglobalmodel"]()
 	flagStateFriendly(friendlyflag, enemyflag["CTFLevelInfo.flagStateAxis"], function(f4_arg0)
 		f1_arg0:updateElementState(flagStateEnemy, {
 			name = "model_validation",
@@ -92,7 +92,7 @@ CoD.ScoreInfoCTF.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 	})
 	enemyflag = flagStateFriendly
 	friendlyflag = flagStateFriendly.subscribeToModel
-	local f1_local10 = Engine[0x8DF2E5447F384B9]()
+	local f1_local10 = Engine[@"getglobalmodel"]()
 	friendlyflag(enemyflag, f1_local10["CTFLevelInfo.flagStateAllies"], function(f8_arg0)
 		f1_arg0:updateElementState(flagStateFriendly, {
 			name = "model_validation",
@@ -115,7 +115,7 @@ CoD.ScoreInfoCTF.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 		friendlyflag:setRGB(GetColorBlindSafeColorFromBase("FriendlyBlue", f1_arg1, ColorSet.FriendlyBlue.r, ColorSet.FriendlyBlue.g, ColorSet.FriendlyBlue.b))
 	end
 	friendlyflag.__Color()
-	friendlyflag:setImage(RegisterImage(0xC54C476FF3DDA9B))
+	friendlyflag:setImage(RegisterImage(@"uie_ui_icon_waypoints_ctf_flag"))
 	self:addElement(friendlyflag)
 	self.friendlyflag = friendlyflag
 	enemyflag = LUI.UIImage.new(0.5, 0.5, -97, -77, 0.5, 0.5, 2.5, 22.5)
@@ -123,16 +123,16 @@ CoD.ScoreInfoCTF.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 		enemyflag:setRGB(GetColorBlindSafeColorFromBase("EnemyOrange_Base", f1_arg1, ColorSet.EnemyOrange_Base.r, ColorSet.EnemyOrange_Base.g, ColorSet.EnemyOrange_Base.b))
 	end
 	enemyflag.__Color()
-	enemyflag:setImage(RegisterImage(0xC54C476FF3DDA9B))
+	enemyflag:setImage(RegisterImage(@"uie_ui_icon_waypoints_ctf_flag"))
 	self:addElement(enemyflag)
 	self.enemyflag = enemyflag
 	local f1_local11 = friendlyflag
 	f1_local10 = friendlyflag.subscribeToModel
-	local f1_local12 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local12 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local10(f1_local11, f1_local12["profile.colorblindMode"], friendlyflag.__Color)
 	f1_local11 = enemyflag
 	f1_local10 = enemyflag.subscribeToModel
-	f1_local12 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local12 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local10(f1_local11, f1_local12["profile.colorblindMode"], enemyflag.__Color)
 	self:mergeStateConditions({
 		{
@@ -144,13 +144,13 @@ CoD.ScoreInfoCTF.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 		{
 			stateName = "Axis",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsModelValueEqualTo(f1_arg1, "factions.actualTeam", Enum[0x13A4717E5AC547][0x3F83D7CE4BD7B68])
+				return CoD.ModelUtility.IsModelValueEqualTo(f1_arg1, "factions.actualTeam", Enum[@"team_t"][@"team_axis"])
 			end,
 		},
 	})
 	f1_local11 = self
 	f1_local10 = self.subscribeToModel
-	f1_local12 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local12 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local10(f1_local11, f1_local12["factions.isCoDCaster"], function(f14_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -162,7 +162,7 @@ CoD.ScoreInfoCTF.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 	end, false)
 	f1_local11 = self
 	f1_local10 = self.subscribeToModel
-	f1_local12 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local12 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local10(f1_local11, f1_local12["factions.actualTeam"], function(f15_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

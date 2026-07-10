@@ -9,8 +9,8 @@ CoD.WaveformBlackHat.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local ShaderImage = LUI.UIImage.new(0, 0, 0, 309, 0, 0, 0, 260)
 	ShaderImage:setRGB(0, 0.93, 1)
-	ShaderImage:setImage(RegisterImage(0x5496F87A4850486))
-	ShaderImage:setMaterial(LUI.UIImage.GetCachedMaterial(0x7B9E9B0200DE32B))
+	ShaderImage:setImage(RegisterImage(@"uie_gradient_noise"))
+	ShaderImage:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_blackhat_waveform"))
 	ShaderImage:subscribeToGlobalModel(f1_arg1, "Blackhat", "offsetShaderValue", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -35,7 +35,7 @@ CoD.WaveformBlackHat.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	})
 	local f1_local2 = self
 	local f1_local3 = self.subscribeToModel
-	local f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local3(f1_local2, f1_local4["hudItems.blackhat.status"], function(f5_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

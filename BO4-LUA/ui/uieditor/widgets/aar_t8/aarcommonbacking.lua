@@ -9,7 +9,7 @@ CoD.AARCommonBacking.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	self.soundSet = "default"
 	self.anyChildUsesUpdateState = true
 	local Blur = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	Blur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	Blur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	Blur:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(Blur)
 	self.Blur = Blur
@@ -20,8 +20,8 @@ CoD.AARCommonBacking.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	self.Backer = Backer
 	local TiledBacking = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	TiledBacking:setAlpha(0.12)
-	TiledBacking:setImage(RegisterImage(0x34839E8065B1E53))
-	TiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	TiledBacking:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	TiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	TiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	TiledBacking:setupNineSliceShader(196, 88)
 	self:addElement(TiledBacking)
@@ -33,8 +33,8 @@ CoD.AARCommonBacking.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	local FuiBox02Right = LUI.UIImage.new(1, 1, -84, -50, 1, 1, -10, -44)
 	FuiBox02Right:setAlpha(0.05)
 	FuiBox02Right:setZRot(-90)
-	FuiBox02Right:setImage(RegisterImage(0x811A80C0AADA825))
-	FuiBox02Right:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	FuiBox02Right:setImage(RegisterImage(@"uie_ui_hud_vehicle_ac130_fui_box01"))
+	FuiBox02Right:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	FuiBox02Right:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(FuiBox02Right)
 	self.FuiBox02Right = FuiBox02Right

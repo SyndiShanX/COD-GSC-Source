@@ -70,13 +70,13 @@ CoD.ChallengesUtility.ChallengeCategoryTable = {
 	},
 }
 CoD.ChallengesUtility.ChallengeCategoryDisplayName = {
-	operations = 0xCE9A53873255D09,
-	career = 0x70C18F2AE62C195,
-	scorestreaks = 0xCD2E0542DA537BE,
-	prestige = 0xF45564D1E059F32,
+	operations = @"challenge/operations",
+	career = @"challenge/career",
+	scorestreaks = @"challenge/scorestreaks",
+	prestige = @"challenge/prestige",
 }
 CoD.ChallengesUtility.ChallengeCategorySortOrder = {
-	[Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5]] = {
+	[Enum[@"emodes"][@"mode_multiplayer"]] = {
 		mp = 0,
 		bootcamp = 1,
 		killer = 2,
@@ -100,7 +100,7 @@ CoD.ChallengesUtility.ChallengeCategorySortOrder = {
 		equipment = 20,
 		wildcards = 21,
 	},
-	[Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A]] = {
+	[Enum[@"emodes"][@"mode_zombies"]] = {
 		zm = 0,
 		hunter = 1,
 		survivalist = 2,
@@ -109,7 +109,7 @@ CoD.ChallengesUtility.ChallengeCategorySortOrder = {
 		weapons_and_equipment = 5,
 		prestigious = 6,
 	},
-	[Enum[0x9C0C2196D8313A0][0xBF1DCC8138A9D39]] = {
+	[Enum[@"emodes"][@"mode_warzone"]] = {
 		wz = 0,
 		professional = 1,
 		survivalist = 2,
@@ -118,15 +118,15 @@ CoD.ChallengesUtility.ChallengeCategorySortOrder = {
 	},
 }
 CoD.ChallengesUtility.ChallengeTypeHashToEnum = {
-	[0xFB43557B54149CE] = Enum[0x30E44A363F3414C][0x5CB1517DC5C10C1],
-	[0x6D03B583228161E] = Enum[0x30E44A363F3414C][0x398A3DF84F4A233],
-	[0xC57E42946F6E08C] = Enum[0x30E44A363F3414C][0x4D0D341C55C3159],
-	[0x73F89AC8D3F248] = Enum[0x30E44A363F3414C][0x86B082C51FC2370],
-	[0x14447AC692A7D40] = Enum[0x30E44A363F3414C][0xA3311F9A3A184EF],
-	[0x4F35AE761BD424] = Enum[0x30E44A363F3414C][0x28E0B9B3994DEC3],
+	[@"global"] = Enum[@"statsmilestonetypes_t"][@"milestone_global"],
+	[@"daily"] = Enum[@"statsmilestonetypes_t"][@"milestone_daily"],
+	[@"group"] = Enum[@"statsmilestonetypes_t"][@"milestone_group"],
+	[@"attachment"] = Enum[@"statsmilestonetypes_t"][@"milestone_attachments"],
+	[@"gamemode"] = Enum[@"statsmilestonetypes_t"][@"milestone_gamemode"],
+	[@"specialist"] = Enum[@"statsmilestonetypes_t"][@"milestone_specialist"],
 }
 CoD.ChallengesUtility.SetupCategoryStatsDatasource = function(f1_arg0, f1_arg1, f1_arg2)
-	local f1_local0 = Engine[0x5539283B329E2A9](f1_arg0, nil, f1_arg1)
+	local f1_local0 = Engine[@"getchallengeinfoforimages"](f1_arg0, nil, f1_arg1)
 	local f1_local1 = {
 		[f1_arg2] = {},
 	}
@@ -143,10 +143,10 @@ CoD.ChallengesUtility.SetupCategoryStatsDatasource = function(f1_arg0, f1_arg1, 
 		f1_local1[f1_local8].numTotal = 0
 	end
 	f1_local2 = nil
-	f1_local3 = Engine[0x4DF5CFBC1771947](f1_arg0)
-	if f1_arg1 == Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5] then
+	f1_local3 = Engine[@"getmodelforcontroller"](f1_arg0)
+	if f1_arg1 == Enum[@"emodes"][@"mode_multiplayer"] then
 		f1_local2 = f1_local3:create("ChallengesMPCategoryStats")
-	elseif f1_arg1 == Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A] then
+	elseif f1_arg1 == Enum[@"emodes"][@"mode_zombies"] then
 		f1_local2 = f1_local3:create("ChallengesZMCategoryStats")
 	else
 		f1_local2 = f1_local3:create("ChallengesWZCategoryStats")
@@ -157,8 +157,8 @@ CoD.ChallengesUtility.SetupCategoryStatsDatasource = function(f1_arg0, f1_arg1, 
 			assert(f1_local1[f1_local7])
 			f1_local1[f1_local7].numTotal = f1_local1[f1_local7].numTotal + 1
 			local f1_local12
-			if f1_local11.currChallengeStatValue < Engine[0xC6F8EC444864600]("gamedata/stats/" .. f1_arg2 .. "/statsmilestones" .. f1_local11.tableNum + 1 .. ".csv", f1_local11.currentChallengeRow or f1_local11.challengeRow, CoD.ChallengesUtility.TargetValCol) then
-				f1_local12 = not Dvar[0x818EB2F0EDA28E5]:get()
+			if f1_local11.currChallengeStatValue < Engine[@"hash_4C6F8EC444864600"]("gamedata/stats/" .. f1_arg2 .. "/statsmilestones" .. f1_local11.tableNum + 1 .. ".csv", f1_local11.currentChallengeRow or f1_local11.challengeRow, CoD.ChallengesUtility.TargetValCol) then
+				f1_local12 = not Dvar[@"allitemsunlocked"]:get()
 			else
 				f1_local12 = false
 			end
@@ -194,10 +194,10 @@ CoD.ChallengesUtility.SetupCategoryStatsDatasource = function(f1_arg0, f1_arg1, 
 		if not f1_local7 then
 			if f1_local6 then
 				f1_local1[f1_local10].categoryLocked = true
-				f1_local1[f1_local10].categoryLockedText = Engine[0xF9F1239CFD921FE](0x7FFD6D29AEB436E, f1_local6)
+				f1_local1[f1_local10].categoryLockedText = Engine[@"hash_4F9F1239CFD921FE"](@"hash_57FFD6D29AEB436E", f1_local6)
 			elseif f1_local5 then
 				f1_local1[f1_local10].categoryLocked = true
-				f1_local1[f1_local10].categoryLockedText = Engine[0xF9F1239CFD921FE](0x81C07BC4A11544D, f1_local5)
+				f1_local1[f1_local10].categoryLockedText = Engine[@"hash_4F9F1239CFD921FE"](@"hash_381C07BC4A11544D", f1_local5)
 			end
 		else
 			f1_local1[f1_local10].categoryLocked = false
@@ -230,21 +230,21 @@ CoD.ChallengesUtility.RefreshCategoryStats = function(f2_arg0, f2_arg1)
 		local f2_local0 = CoD.StartMenuUtility.GetSessionModeFromLobby()
 		if not f2_local0 then
 			return
-		elseif f2_local0 == Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5] then
+		elseif f2_local0 == Enum[@"emodes"][@"mode_multiplayer"] then
 			DataSources.ChallengesMPCategoryStats.init(f2_arg0)
-		elseif f2_local0 == Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A] then
+		elseif f2_local0 == Enum[@"emodes"][@"mode_zombies"] then
 			DataSources.ChallengesZMCategoryStats.init(f2_arg0)
-		elseif f2_local0 == Enum[0x9C0C2196D8313A0][0xBF1DCC8138A9D39] then
+		elseif f2_local0 == Enum[@"emodes"][@"mode_warzone"] then
 			DataSources.ChallengesWZCategoryStats.init(f2_arg0)
 		end
 	end
 end
 DataSources.ChallengesMPCategoryStats = {
 	init = function(f3_arg0)
-		return CoD.ChallengesUtility.SetupCategoryStatsDatasource(f3_arg0, Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5], "mp")
+		return CoD.ChallengesUtility.SetupCategoryStatsDatasource(f3_arg0, Enum[@"emodes"][@"mode_multiplayer"], "mp")
 	end,
 	getModel = function(f4_arg0)
-		local f4_local0 = Engine[0x40E824FE270E174](Engine[0x4DF5CFBC1771947](f4_arg0), "ChallengesMPCategoryStats")
+		local f4_local0 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f4_arg0), "ChallengesMPCategoryStats")
 		if f4_local0 == nil then
 			f4_local0 = DataSources.ChallengesMPCategoryStats.init(f4_arg0)
 		end
@@ -253,10 +253,10 @@ DataSources.ChallengesMPCategoryStats = {
 }
 DataSources.ChallengesZMCategoryStats = {
 	init = function(f5_arg0)
-		return CoD.ChallengesUtility.SetupCategoryStatsDatasource(f5_arg0, Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A], "zm")
+		return CoD.ChallengesUtility.SetupCategoryStatsDatasource(f5_arg0, Enum[@"emodes"][@"mode_zombies"], "zm")
 	end,
 	getModel = function(f6_arg0)
-		local f6_local0 = Engine[0x40E824FE270E174](Engine[0x4DF5CFBC1771947](f6_arg0), "ChallengesZMCategoryStats")
+		local f6_local0 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f6_arg0), "ChallengesZMCategoryStats")
 		if f6_local0 == nil then
 			f6_local0 = DataSources.ChallengesZMCategoryStats.init(f6_arg0)
 		end
@@ -265,10 +265,10 @@ DataSources.ChallengesZMCategoryStats = {
 }
 DataSources.ChallengesWZCategoryStats = {
 	init = function(f7_arg0)
-		return CoD.ChallengesUtility.SetupCategoryStatsDatasource(f7_arg0, Enum[0x9C0C2196D8313A0][0xBF1DCC8138A9D39], "wz")
+		return CoD.ChallengesUtility.SetupCategoryStatsDatasource(f7_arg0, Enum[@"emodes"][@"mode_warzone"], "wz")
 	end,
 	getModel = function(f8_arg0)
-		local f8_local0 = Engine[0x40E824FE270E174](Engine[0x4DF5CFBC1771947](f8_arg0), "ChallengesWZCategoryStats")
+		local f8_local0 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f8_arg0), "ChallengesWZCategoryStats")
 		if f8_local0 == nil then
 			f8_local0 = DataSources.ChallengesWZCategoryStats.init(f8_arg0)
 		end
@@ -294,9 +294,9 @@ CoD.ChallengesUtility.CreateChallengeTab = function(f9_arg0, f9_arg1, f9_arg2, f
 end
 DataSources.MasterCallingCard = {
 	getModel = function(f10_arg0)
-		local f10_local0 = Engine[0x40E824FE270E174](Engine[0x4DF5CFBC1771947](f10_arg0), "MasterCallingCard")
+		local f10_local0 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f10_arg0), "MasterCallingCard")
 		if f10_local0 == nil then
-			f10_local0 = Engine[0xA798E4552F5E872](Engine[0x4DF5CFBC1771947](f10_arg0), "MasterCallingCard")
+			f10_local0 = Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f10_arg0), "MasterCallingCard")
 			f10_local0:create("title")
 			f10_local0:create("description")
 			f10_local0:create("icon")
@@ -314,7 +314,7 @@ DataSources.MasterCallingCard = {
 		return f10_local0
 	end,
 	setModelValues = function(f11_arg0, f11_arg1, f11_arg2, f11_arg3, f11_arg4, f11_arg5, f11_arg6)
-		local f11_local0 = Engine[0x40E824FE270E174](Engine[0x4DF5CFBC1771947](f11_arg0), "MasterCallingCard")
+		local f11_local0 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f11_arg0), "MasterCallingCard")
 		if f11_local0 == nil then
 			f11_local0 = DataSources.MasterCallingCard.getModel(f11_arg0)
 		end
@@ -327,7 +327,7 @@ DataSources.MasterCallingCard = {
 		f11_local1 = f11_local1.set
 		local f11_local3
 		if f11_arg4 < 1 then
-			f11_local3 = not Dvar[0x818EB2F0EDA28E5]:get()
+			f11_local3 = not Dvar[@"allitemsunlocked"]:get()
 		else
 			f11_local3 = false
 		end
@@ -344,9 +344,9 @@ DataSources.MasterCallingCard = {
 }
 DataSources.MasterCTCallingCard = {
 	getModel = function(f12_arg0)
-		local f12_local0 = Engine[0x40E824FE270E174](Engine[0x4DF5CFBC1771947](f12_arg0), "MasterCTCallingCard")
+		local f12_local0 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f12_arg0), "MasterCTCallingCard")
 		if f12_local0 == nil then
-			f12_local0 = Engine[0xA798E4552F5E872](Engine[0x4DF5CFBC1771947](f12_arg0), "MasterCTCallingCard")
+			f12_local0 = Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f12_arg0), "MasterCTCallingCard")
 			f12_local0:create("title")
 			f12_local0:create("description")
 			f12_local0:create("iconId")
@@ -359,7 +359,7 @@ DataSources.MasterCTCallingCard = {
 		return f12_local0
 	end,
 	setModelValues = function(f13_arg0, f13_arg1, f13_arg2, f13_arg3, f13_arg4, f13_arg5)
-		local f13_local0 = Engine[0x40E824FE270E174](Engine[0x4DF5CFBC1771947](f13_arg0), "MasterCTCallingCard")
+		local f13_local0 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f13_arg0), "MasterCTCallingCard")
 		if f13_local0 == nil then
 			f13_local0 = DataSources.MasterCTCallingCard.getModel(f13_arg0)
 		end
@@ -367,15 +367,15 @@ DataSources.MasterCTCallingCard = {
 		f13_local0.description:set(f13_arg2)
 		f13_local0.iconId:set(f13_arg3)
 		f13_local0.icon:set(CoD.ChallengesUtility.GetBackgroundByID(f13_arg3))
-		f13_local0.statPercent:set(Dvar[0x818EB2F0EDA28E5]:get() and 1 or f13_arg4 / f13_arg5)
-		f13_local0.percentComplete:set(Dvar[0x818EB2F0EDA28E5]:get() and 1 or f13_arg4 / f13_arg5)
-		f13_local0.statFractionText:set(Engine[0xF9F1239CFD921FE](0x31CF0F51CCA3A27, f13_arg4, f13_arg5))
+		f13_local0.statPercent:set(Dvar[@"allitemsunlocked"]:get() and 1 or f13_arg4 / f13_arg5)
+		f13_local0.percentComplete:set(Dvar[@"allitemsunlocked"]:get() and 1 or f13_arg4 / f13_arg5)
+		f13_local0.statFractionText:set(Engine[@"hash_4F9F1239CFD921FE"](@"hash_631CF0F51CCA3A27", f13_arg4, f13_arg5))
 		local f13_local1 = f13_local0.isLocked
 		local f13_local2 = f13_local1
 		f13_local1 = f13_local1.set
 		local f13_local3
 		if f13_arg4 < f13_arg5 then
-			f13_local3 = not Dvar[0x818EB2F0EDA28E5]:get()
+			f13_local3 = not Dvar[@"allitemsunlocked"]:get()
 		else
 			f13_local3 = false
 		end
@@ -384,100 +384,100 @@ DataSources.MasterCTCallingCard = {
 }
 DataSources.ChallengesTabs = ListHelper_SetupDataSource("ChallengesTabs", function(f14_arg0)
 	local f14_local0 = {}
-	local f14_local1 = Engine[0x8DF2E5447F384B9]()
+	local f14_local1 = Engine[@"getglobalmodel"]()
 	f14_local1 = f14_local1.defaultChallengeTab:get()
 	local f14_local2 = CoD.StartMenuUtility.GetSessionModeFromLobby()
-	if f14_local2 == Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5] then
-		CoD.ChallengesUtility.CreateChallengeTab(f14_arg0, f14_local0, 0xCE9A53873255D09, "CoD.Challenges_FrameWidget_Operations", "operations", f14_local1)
-		CoD.ChallengesUtility.CreateChallengeTab(f14_arg0, f14_local0, 0x70C18F2AE62C195, "CoD.Challenges_FrameWidget_Career", "career", f14_local1)
-		CoD.ChallengesUtility.CreateChallengeTab(f14_arg0, f14_local0, 0xCD2E0542DA537BE, "CoD.Challenges_FrameWidget_Scorestreaks", "scorestreaks", f14_local1)
-		CoD.ChallengesUtility.CreateChallengeTab(f14_arg0, f14_local0, 0xF45564D1E059F32, "CoD.Challenges_FrameWidget_Prestige", "prestige", f14_local1)
-	elseif f14_local2 == Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A] then
-		CoD.ChallengesUtility.CreateChallengeTab(f14_arg0, f14_local0, 0x892ED10E8BF4877, "CoD.Challenges_FrameWidget_Expert", "expert", f14_local1)
-		CoD.ChallengesUtility.CreateChallengeTab(f14_arg0, f14_local0, 0x677D363E896D453, "CoD.Challenges_FrameWidget_Toolkit", "toolkit", f14_local1)
+	if f14_local2 == Enum[@"emodes"][@"mode_multiplayer"] then
+		CoD.ChallengesUtility.CreateChallengeTab(f14_arg0, f14_local0, @"challenge/operations", "CoD.Challenges_FrameWidget_Operations", "operations", f14_local1)
+		CoD.ChallengesUtility.CreateChallengeTab(f14_arg0, f14_local0, @"challenge/career", "CoD.Challenges_FrameWidget_Career", "career", f14_local1)
+		CoD.ChallengesUtility.CreateChallengeTab(f14_arg0, f14_local0, @"challenge/scorestreaks", "CoD.Challenges_FrameWidget_Scorestreaks", "scorestreaks", f14_local1)
+		CoD.ChallengesUtility.CreateChallengeTab(f14_arg0, f14_local0, @"challenge/prestige", "CoD.Challenges_FrameWidget_Prestige", "prestige", f14_local1)
+	elseif f14_local2 == Enum[@"emodes"][@"mode_zombies"] then
+		CoD.ChallengesUtility.CreateChallengeTab(f14_arg0, f14_local0, @"hash_6892ED10E8BF4877", "CoD.Challenges_FrameWidget_Expert", "expert", f14_local1)
+		CoD.ChallengesUtility.CreateChallengeTab(f14_arg0, f14_local0, @"hash_1677D363E896D453", "CoD.Challenges_FrameWidget_Toolkit", "toolkit", f14_local1)
 	else
-		CoD.ChallengesUtility.CreateChallengeTab(f14_arg0, f14_local0, 0x70C18F2AE62C195, "CoD.ChallengesFramewidgetCareerWZ", "career", f14_local1)
-		CoD.ChallengesUtility.CreateChallengeTab(f14_arg0, f14_local0, 0xCE9A53873255D09, "CoD.ChallengesFramewidgetOperationsWZ", "operations", f14_local1)
+		CoD.ChallengesUtility.CreateChallengeTab(f14_arg0, f14_local0, @"challenge/career", "CoD.ChallengesFramewidgetCareerWZ", "career", f14_local1)
+		CoD.ChallengesUtility.CreateChallengeTab(f14_arg0, f14_local0, @"challenge/operations", "CoD.ChallengesFramewidgetOperationsWZ", "operations", f14_local1)
 	end
 	return f14_local0
 end)
 DataSources.OperationsTabs = ListHelper_SetupDataSource("OperationsTabs", function(f15_arg0)
 	local f15_local0 = {}
-	local f15_local1 = Engine[0x8DF2E5447F384B9]()
+	local f15_local1 = Engine[@"getglobalmodel"]()
 	f15_local1 = f15_local1.challengeCategory:get()
-	CoD.ChallengesUtility.CreateChallengeTab(f15_arg0, f15_local0, 0x77600252B55C452, "CoD.ChallengesStickerbook", "bootcamp", f15_local1)
-	CoD.ChallengesUtility.CreateChallengeTab(f15_arg0, f15_local0, 0x65DA104E9465AC0, "CoD.ChallengesStickerbook", "killer", f15_local1)
-	CoD.ChallengesUtility.CreateChallengeTab(f15_arg0, f15_local0, 0xAB782700D73E766, "CoD.ChallengesStickerbook", "humiliation", f15_local1)
-	CoD.ChallengesUtility.CreateChallengeTab(f15_arg0, f15_local0, 0x86884AAE31003E5, "CoD.ChallengesStickerbook", "precision", f15_local1)
-	CoD.ChallengesUtility.CreateChallengeTab(f15_arg0, f15_local0, 0xA9D0747734C1994, "CoD.ChallengesStickerbook", "killjoys", f15_local1)
+	CoD.ChallengesUtility.CreateChallengeTab(f15_arg0, f15_local0, @"hash_177600252B55C452", "CoD.ChallengesStickerbook", "bootcamp", f15_local1)
+	CoD.ChallengesUtility.CreateChallengeTab(f15_arg0, f15_local0, @"challenge/killer", "CoD.ChallengesStickerbook", "killer", f15_local1)
+	CoD.ChallengesUtility.CreateChallengeTab(f15_arg0, f15_local0, @"hash_6AB782700D73E766", "CoD.ChallengesStickerbook", "humiliation", f15_local1)
+	CoD.ChallengesUtility.CreateChallengeTab(f15_arg0, f15_local0, @"hash_686884AAE31003E5", "CoD.ChallengesStickerbook", "precision", f15_local1)
+	CoD.ChallengesUtility.CreateChallengeTab(f15_arg0, f15_local0, @"hash_3A9D0747734C1994", "CoD.ChallengesStickerbook", "killjoys", f15_local1)
 	return f15_local0
 end)
 DataSources.CareerTabs = ListHelper_SetupDataSource("CareerTabs", function(f16_arg0)
 	local f16_local0 = {}
-	local f16_local1 = Engine[0x8DF2E5447F384B9]()
+	local f16_local1 = Engine[@"getglobalmodel"]()
 	f16_local1 = f16_local1.challengeCategory:get()
-	CoD.ChallengesUtility.CreateChallengeTab(f16_arg0, f16_local0, 0x832B872C3810A1D, "CoD.ChallengesStickerbook", "gamevictories", f16_local1)
-	CoD.ChallengesUtility.CreateChallengeTab(f16_arg0, f16_local0, 0xCBFC431FF389F30, "CoD.ChallengesStickerbook", "tourofduty", f16_local1)
-	CoD.ChallengesUtility.CreateChallengeTab(f16_arg0, f16_local0, 0x1DE917BC6765D92, "CoD.ChallengesStickerbook", "gameheroics", f16_local1)
-	CoD.ChallengesUtility.CreateChallengeTab(f16_arg0, f16_local0, 0x8AD60D04B9DC260, "CoD.ChallengesStickerbook", "weaponproficiency", f16_local1)
-	CoD.ChallengesUtility.CreateChallengeTab(f16_arg0, f16_local0, 0x6DFABEBE8C8B1E1, "CoD.ChallengesStickerbook", "marksman", f16_local1)
-	CoD.ChallengesUtility.CreateChallengeTab(f16_arg0, f16_local0, 0x24F78410BB18BC0, "CoD.ChallengesStickerbook", "specialized", f16_local1)
+	CoD.ChallengesUtility.CreateChallengeTab(f16_arg0, f16_local0, @"hash_6832B872C3810A1D", "CoD.ChallengesStickerbook", "gamevictories", f16_local1)
+	CoD.ChallengesUtility.CreateChallengeTab(f16_arg0, f16_local0, @"hash_2CBFC431FF389F30", "CoD.ChallengesStickerbook", "tourofduty", f16_local1)
+	CoD.ChallengesUtility.CreateChallengeTab(f16_arg0, f16_local0, @"hash_41DE917BC6765D92", "CoD.ChallengesStickerbook", "gameheroics", f16_local1)
+	CoD.ChallengesUtility.CreateChallengeTab(f16_arg0, f16_local0, @"hash_38AD60D04B9DC260", "CoD.ChallengesStickerbook", "weaponproficiency", f16_local1)
+	CoD.ChallengesUtility.CreateChallengeTab(f16_arg0, f16_local0, @"hash_36DFABEBE8C8B1E1", "CoD.ChallengesStickerbook", "marksman", f16_local1)
+	CoD.ChallengesUtility.CreateChallengeTab(f16_arg0, f16_local0, @"challenge/specialized", "CoD.ChallengesStickerbook", "specialized", f16_local1)
 	return f16_local0
 end)
 DataSources.ScorestreaksTabs = ListHelper_SetupDataSource("ScorestreaksTabs", function(f17_arg0)
 	local f17_local0 = {}
-	local f17_local1 = Engine[0x8DF2E5447F384B9]()
+	local f17_local1 = Engine[@"getglobalmodel"]()
 	f17_local1 = f17_local1.challengeCategory:get()
-	CoD.ChallengesUtility.CreateChallengeTab(f17_arg0, f17_local0, 0xB6763773FCFB224, "CoD.ChallengesStickerbook", "airassault", f17_local1)
-	CoD.ChallengesUtility.CreateChallengeTab(f17_arg0, f17_local0, 0xD4AC4AA905A80CB, "CoD.ChallengesStickerbook", "groundassault", f17_local1)
-	CoD.ChallengesUtility.CreateChallengeTab(f17_arg0, f17_local0, 0x156F86BB05EF10E, "CoD.ChallengesStickerbook", "support", f17_local1)
+	CoD.ChallengesUtility.CreateChallengeTab(f17_arg0, f17_local0, @"hash_7B6763773FCFB224", "CoD.ChallengesStickerbook", "airassault", f17_local1)
+	CoD.ChallengesUtility.CreateChallengeTab(f17_arg0, f17_local0, @"hash_3D4AC4AA905A80CB", "CoD.ChallengesStickerbook", "groundassault", f17_local1)
+	CoD.ChallengesUtility.CreateChallengeTab(f17_arg0, f17_local0, @"challenge/support", "CoD.ChallengesStickerbook", "support", f17_local1)
 	return f17_local0
 end)
 DataSources.PrestigeTabs = ListHelper_SetupDataSource("PrestigeTabs", function(f18_arg0)
 	local f18_local0 = {}
-	local f18_local1 = Engine[0x8DF2E5447F384B9]()
+	local f18_local1 = Engine[@"getglobalmodel"]()
 	f18_local1 = f18_local1.challengeCategory:get()
-	CoD.ChallengesUtility.CreateChallengeTab(f18_arg0, f18_local0, 0x5286388DDB2A3DE, "CoD.ChallengesStickerbook", "handling", f18_local1)
-	CoD.ChallengesUtility.CreateChallengeTab(f18_arg0, f18_local0, 0x43286D0DE2B2332, "CoD.ChallengesStickerbook", "efficiency", f18_local1)
-	CoD.ChallengesUtility.CreateChallengeTab(f18_arg0, f18_local0, 0x80013311B8CB58F, "CoD.ChallengesStickerbook", "tacticalkits", f18_local1)
-	CoD.ChallengesUtility.CreateChallengeTab(f18_arg0, f18_local0, 0x4AEF303ED69E004, "CoD.ChallengesStickerbook", "gear", f18_local1)
-	CoD.ChallengesUtility.CreateChallengeTab(f18_arg0, f18_local0, 0x6F78F5AEA99A7E8, "CoD.ChallengesStickerbook", "perks", f18_local1)
-	CoD.ChallengesUtility.CreateChallengeTab(f18_arg0, f18_local0, 0x7DC3FC26D23E8ED, "CoD.ChallengesStickerbook", "equipment", f18_local1)
-	CoD.ChallengesUtility.CreateChallengeTab(f18_arg0, f18_local0, 0x454D80797ED0C36, "CoD.ChallengesStickerbook", "wildcards", f18_local1)
+	CoD.ChallengesUtility.CreateChallengeTab(f18_arg0, f18_local0, @"challenge/handling", "CoD.ChallengesStickerbook", "handling", f18_local1)
+	CoD.ChallengesUtility.CreateChallengeTab(f18_arg0, f18_local0, @"challenge/efficiency", "CoD.ChallengesStickerbook", "efficiency", f18_local1)
+	CoD.ChallengesUtility.CreateChallengeTab(f18_arg0, f18_local0, @"hash_780013311B8CB58F", "CoD.ChallengesStickerbook", "tacticalkits", f18_local1)
+	CoD.ChallengesUtility.CreateChallengeTab(f18_arg0, f18_local0, @"challenge/gear", "CoD.ChallengesStickerbook", "gear", f18_local1)
+	CoD.ChallengesUtility.CreateChallengeTab(f18_arg0, f18_local0, @"challenge/perks", "CoD.ChallengesStickerbook", "perks", f18_local1)
+	CoD.ChallengesUtility.CreateChallengeTab(f18_arg0, f18_local0, @"challenge/equipment", "CoD.ChallengesStickerbook", "equipment", f18_local1)
+	CoD.ChallengesUtility.CreateChallengeTab(f18_arg0, f18_local0, @"challenge/wildcards", "CoD.ChallengesStickerbook", "wildcards", f18_local1)
 	return f18_local0
 end)
 DataSources.ToolkitTabs = ListHelper_SetupDataSource("ToolkitTabs", function(f19_arg0)
 	local f19_local0 = {}
-	local f19_local1 = Engine[0x8DF2E5447F384B9]()
+	local f19_local1 = Engine[@"getglobalmodel"]()
 	f19_local1 = f19_local1.challengeCategory:get()
-	CoD.ChallengesUtility.CreateChallengeTab(f19_arg0, f19_local0, 0x21B7E9D719708D1, "CoD.ChallengesStickerbook", "elixirs_and_talismans", f19_local1)
-	CoD.ChallengesUtility.CreateChallengeTab(f19_arg0, f19_local0, 0x26CD93E46733780, "CoD.ChallengesStickerbook", "weapons_and_equipment", f19_local1)
-	CoD.ChallengesUtility.CreateChallengeTab(f19_arg0, f19_local0, 0x6A1754117AB845E, "CoD.ChallengesStickerbook", "prestigious", f19_local1)
+	CoD.ChallengesUtility.CreateChallengeTab(f19_arg0, f19_local0, @"hash_221B7E9D719708D1", "CoD.ChallengesStickerbook", "elixirs_and_talismans", f19_local1)
+	CoD.ChallengesUtility.CreateChallengeTab(f19_arg0, f19_local0, @"hash_126CD93E46733780", "CoD.ChallengesStickerbook", "weapons_and_equipment", f19_local1)
+	CoD.ChallengesUtility.CreateChallengeTab(f19_arg0, f19_local0, @"hash_16A1754117AB845E", "CoD.ChallengesStickerbook", "prestigious", f19_local1)
 	return f19_local0
 end)
 DataSources.ExpertTabs = ListHelper_SetupDataSource("ExpertTabs", function(f20_arg0)
 	local f20_local0 = {}
-	local f20_local1 = Engine[0x8DF2E5447F384B9]()
+	local f20_local1 = Engine[@"getglobalmodel"]()
 	f20_local1 = f20_local1.challengeCategory:get()
-	CoD.ChallengesUtility.CreateChallengeTab(f20_arg0, f20_local0, 0xB31D6069443FEFE, "CoD.ChallengesStickerbook", "hunter", f20_local1)
-	CoD.ChallengesUtility.CreateChallengeTab(f20_arg0, f20_local0, 0xD818E0F459A2CFA, "CoD.ChallengesStickerbook", "survivalist", f20_local1)
-	CoD.ChallengesUtility.CreateChallengeTab(f20_arg0, f20_local0, 0x9ADE67A378FCCC2, "CoD.ChallengesStickerbook", "strategist", f20_local1)
+	CoD.ChallengesUtility.CreateChallengeTab(f20_arg0, f20_local0, @"hash_6B31D6069443FEFE", "CoD.ChallengesStickerbook", "hunter", f20_local1)
+	CoD.ChallengesUtility.CreateChallengeTab(f20_arg0, f20_local0, @"hash_6D818E0F459A2CFA", "CoD.ChallengesStickerbook", "survivalist", f20_local1)
+	CoD.ChallengesUtility.CreateChallengeTab(f20_arg0, f20_local0, @"hash_9ADE67A378FCCC2", "CoD.ChallengesStickerbook", "strategist", f20_local1)
 	return f20_local0
 end)
 DataSources.CareerWZTabs = ListHelper_SetupDataSource("CareerWZTabs", function(f21_arg0)
 	local f21_local0 = {}
-	local f21_local1 = Engine[0x8DF2E5447F384B9]()
+	local f21_local1 = Engine[@"getglobalmodel"]()
 	f21_local1 = f21_local1.challengeCategory:get()
-	CoD.ChallengesUtility.CreateChallengeTab(f21_arg0, f21_local0, 0xA9AFC6579AE78B3, "CoD.ChallengesStickerbook", "professional", f21_local1)
-	CoD.ChallengesUtility.CreateChallengeTab(f21_arg0, f21_local0, 0x62FE35AC4EC80DE, "CoD.ChallengesStickerbook", "survivalist", f21_local1)
+	CoD.ChallengesUtility.CreateChallengeTab(f21_arg0, f21_local0, @"hash_5A9AFC6579AE78B3", "CoD.ChallengesStickerbook", "professional", f21_local1)
+	CoD.ChallengesUtility.CreateChallengeTab(f21_arg0, f21_local0, @"hash_562FE35AC4EC80DE", "CoD.ChallengesStickerbook", "survivalist", f21_local1)
 	return f21_local0
 end)
 DataSources.OperationsWZTabs = ListHelper_SetupDataSource("OperationsWZTabs", function(f22_arg0)
 	local f22_local0 = {}
-	local f22_local1 = Engine[0x8DF2E5447F384B9]()
+	local f22_local1 = Engine[@"getglobalmodel"]()
 	f22_local1 = f22_local1.challengeCategory:get()
-	CoD.ChallengesUtility.CreateChallengeTab(f22_arg0, f22_local0, 0x6074D9A1B1A097D, "CoD.ChallengesStickerbook", "heroics", f22_local1)
-	CoD.ChallengesUtility.CreateChallengeTab(f22_arg0, f22_local0, 0xD30385BBBC1DD9D, "CoD.ChallengesStickerbook", "vehicular", f22_local1)
+	CoD.ChallengesUtility.CreateChallengeTab(f22_arg0, f22_local0, @"hash_56074D9A1B1A097D", "CoD.ChallengesStickerbook", "heroics", f22_local1)
+	CoD.ChallengesUtility.CreateChallengeTab(f22_arg0, f22_local0, @"hash_6D30385BBBC1DD9D", "CoD.ChallengesStickerbook", "vehicular", f22_local1)
 	return f22_local0
 end)
 CoD.ChallengesUtility.SetupTierListDatasource = function(f23_arg0)
@@ -510,7 +510,7 @@ CoD.ChallengesUtility.SetupTierListDatasource = function(f23_arg0)
 		for f24_local7 = 0, f24_local2, 1 do
 			table.insert(f24_local0, {
 				models = {
-					tierText = Engine[0xF9F1239CFD921FE](CoD.ChallengesUtility.GetChallengeTierNumeral(f24_local7)),
+					tierText = Engine[@"hash_4F9F1239CFD921FE"](CoD.ChallengesUtility.GetChallengeTierNumeral(f24_local7)),
 					isReached = f24_local6,
 					isCurrentTier = f24_local7 == f24_local3,
 					xp = f24_local4,
@@ -552,7 +552,7 @@ CoD.ChallengesUtility.SetCallingCardForWidget = function(f28_arg0, f28_arg1, f28
 	local f28_local1 = false
 	if CoD.isPC and CoD.PCKoreaUtility.ShowKorea15Plus() then
 		local f28_local2 = 19
-		local f28_local3 = Engine[0x2DCF0973239E909](CoD.backgroundsTable, f28_local2, f28_local2, f28_arg1)
+		local f28_local3 = Engine[@"tablelookup"](CoD.backgroundsTable, f28_local2, f28_local2, f28_arg1)
 		if f28_local3 and f28_local3 ~= 0x0 then
 			f28_arg0.__backgroundImage = f28_arg1
 			f28_arg0.isWidgetBasedCallingCard = nil
@@ -566,9 +566,9 @@ CoD.ChallengesUtility.SetCallingCardForWidget = function(f28_arg0, f28_arg1, f28
 			f28_arg0.isWidgetBasedCallingCard = true
 			f28_arg0:changeFrameWidget(CoD[f28_arg1])
 		else
-			if Engine[0x7B48C1ABFF0F764]() and (CoD.isCampaign or CoD.isZombie) then
-				local f28_local4 = Engine[0x2DCF0973239E909](CoD.backgroundsTable, 11, 3, f28_arg1)
-				if f28_local4 ~= nil and Engine[0x238317564B9D47B](f28_local4) then
+			if Engine[@"isingame"]() and (CoD.isCampaign or CoD.isZombie) then
+				local f28_local4 = Engine[@"tablelookup"](CoD.backgroundsTable, 11, 3, f28_arg1)
+				if f28_local4 ~= nil and Engine[@"hash_4238317564B9D47B"](f28_local4) then
 					f28_arg1 = f28_local4
 				end
 			end
@@ -598,25 +598,25 @@ CoD.ChallengesUtility.GetGameModeInfo = function()
 		return nil
 	end
 	local f32_local1 = {}
-	if f32_local0 == Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5] then
+	if f32_local0 == Enum[@"emodes"][@"mode_multiplayer"] then
 		f32_local1.name = "mp"
-	elseif f32_local0 == Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A] then
+	elseif f32_local0 == Enum[@"emodes"][@"mode_zombies"] then
 		f32_local1.name = "zm"
-	elseif f32_local0 == Enum[0x9C0C2196D8313A0][0xBF1DCC8138A9D39] then
+	elseif f32_local0 == Enum[@"emodes"][@"mode_warzone"] then
 		f32_local1.name = "wz"
 	end
 	f32_local1.index = f32_local0
 	return f32_local1
 end
 CoD.ChallengesUtility.GetChallengeTypeString = function(f33_arg0)
-	return 0x7ACFF58FDD459C3 .. "TYPE_" .. f33_arg0
+	return @"challenge/" .. "TYPE_" .. f33_arg0
 end
 CoD.ChallengesUtility.TierString = {
-	[0] = 0x3CC221B7F8C89EC,
-	[1] = 0x3CC231B7F8C8B9F,
-	[2] = 0x3CC241B7F8C8D52,
-	[3] = 0x3CC251B7F8C8F05,
-	[4] = 0x3CC1E1B7F8C8320,
+	[0] = @"hash_63CC221B7F8C89EC",
+	[1] = @"hash_63CC231B7F8C8B9F",
+	[2] = @"hash_63CC241B7F8C8D52",
+	[3] = @"hash_63CC251B7F8C8F05",
+	[4] = @"hash_63CC1E1B7F8C8320",
 }
 CoD.ChallengesUtility.GetChallengeTierNumeral = function(f34_arg0)
 	local f34_local0
@@ -631,27 +631,27 @@ CoD.ChallengesUtility.GetChallengeTierNumeral = function(f34_arg0)
 end
 CoD.ChallengesUtility.GetLocalizedNameAndDescriptionForChallengeInfo = function(f35_arg0)
 	local f35_local0 = "mp"
-	if f35_arg0.mode == Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A] then
+	if f35_arg0.mode == Enum[@"emodes"][@"mode_zombies"] then
 		f35_local0 = "zm"
-	elseif f35_arg0.mode == Enum[0x9C0C2196D8313A0][0xBF1DCC8138A9D39] then
+	elseif f35_arg0.mode == Enum[@"emodes"][@"mode_warzone"] then
 		f35_local0 = "wz"
 	end
 	local f35_local1 = "gamedata/stats/" .. f35_local0 .. "/statsmilestones" .. f35_arg0.tableNum + 1 .. ".csv"
-	local f35_local2 = Engine[0xC6F8EC444864600](f35_local1, f35_arg0.challengeRow, CoD.ChallengesUtility.NameStringCol)
+	local f35_local2 = Engine[@"hash_4C6F8EC444864600"](f35_local1, f35_arg0.challengeRow, CoD.ChallengesUtility.NameStringCol)
 	local f35_local3 = f35_local2 .. "_DESC"
 	local f35_local4 = ""
-	if f35_arg0.challengeType == Enum[0x30E44A363F3414C][0x26D4317EE22AF96] then
-		f35_local4 = Engine[0xF9F1239CFD921FE](Engine[0x6B7AC889104DED3](f35_arg0.itemIndex, Enum[0x6EB546760F890D2][0x569E84652131CD7], f35_arg0.mode))
-	elseif f35_arg0.challengeType == Enum[0x30E44A363F3414C][0x4D0D341C55C3159] then
-		f35_local4 = Engine[0xF9F1239CFD921FE](CoD.ChallengesUtility.GetChallengeTypeString(Engine[0xCF93F3431B9ACB2](f35_arg0.itemIndex)))
-	elseif f35_arg0.challengeType == Enum[0x30E44A363F3414C][0x86B082C51FC2370] then
-		f35_local4 = Engine[0xED84C33EC5F01EA](Engine[0x31B335F9A01DF74](f35_arg0.itemIndex))
-	elseif f35_arg0.challengeType == Enum[0x30E44A363F3414C][0xA3311F9A3A184EF] then
-		local f35_local5 = Engine[0xEA74FA7EE46E195](Engine[0x4E2149BC9637156](f35_arg0.itemIndex))
-		local f35_local6 = Engine[0xF9F1239CFD921FE]
+	if f35_arg0.challengeType == Enum[@"statsmilestonetypes_t"][@"milestone_weapon"] then
+		f35_local4 = Engine[@"hash_4F9F1239CFD921FE"](Engine[@"getitemname"](f35_arg0.itemIndex, Enum[@"statindexoffset"][@"hash_6569E84652131CD7"], f35_arg0.mode))
+	elseif f35_arg0.challengeType == Enum[@"statsmilestonetypes_t"][@"milestone_group"] then
+		f35_local4 = Engine[@"hash_4F9F1239CFD921FE"](CoD.ChallengesUtility.GetChallengeTypeString(Engine[@"getitemgroupbyindex"](f35_arg0.itemIndex)))
+	elseif f35_arg0.challengeType == Enum[@"statsmilestonetypes_t"][@"milestone_attachments"] then
+		f35_local4 = Engine[@"localize"](Engine[@"getattachmentnamebyindex"](f35_arg0.itemIndex))
+	elseif f35_arg0.challengeType == Enum[@"statsmilestonetypes_t"][@"milestone_gamemode"] then
+		local f35_local5 = Engine[@"getgametypeinfo"](Engine[@"getgametypename"](f35_arg0.itemIndex))
+		local f35_local6 = Engine[@"hash_4F9F1239CFD921FE"]
 		local f35_local7
 		if f35_local5 then
-			f35_local7 = f35_local5[0x62BC418020E30AF]
+			f35_local7 = f35_local5[@"challengetypestring"]
 			if not f35_local7 then
 			else
 				f35_local4 = f35_local6(f35_local7)
@@ -659,19 +659,19 @@ CoD.ChallengesUtility.GetLocalizedNameAndDescriptionForChallengeInfo = function(
 		end
 		f35_local7 = 0x0
 	end
-	return Engine[0xED84C33EC5F01EA](f35_local2, "", f35_local4, CoD.ChallengesUtility.GetLocalizedTierText(f35_local1, f35_arg0.challengeRow)), Engine[0xED84C33EC5F01EA](f35_local3, Engine[0xC6F8EC444864600](f35_local1, f35_arg0.challengeRow, CoD.ChallengesUtility.TargetValCol), f35_local4)
+	return Engine[@"localize"](f35_local2, "", f35_local4, CoD.ChallengesUtility.GetLocalizedTierText(f35_local1, f35_arg0.challengeRow)), Engine[@"localize"](f35_local3, Engine[@"hash_4C6F8EC444864600"](f35_local1, f35_arg0.challengeRow, CoD.ChallengesUtility.TargetValCol), f35_local4)
 end
 CoD.ChallengesUtility.GetLocalizedTierText = function(f36_arg0, f36_arg1)
 	local f36_local0 = ""
 	if f36_arg0 ~= nil and f36_arg1 ~= nil then
 		local f36_local1 = false
 		local f36_local2 = nil
-		local f36_local3 = tonumber(Engine[0xC6F8EC444864600](f36_arg0, f36_arg1, 1))
-		if f36_local3 > 0 or tonumber(Engine[0xC6F8EC444864600](f36_arg0, f36_arg1 + 1, 1)) == 1 then
+		local f36_local3 = tonumber(Engine[@"hash_4C6F8EC444864600"](f36_arg0, f36_arg1, 1))
+		if f36_local3 > 0 or tonumber(Engine[@"hash_4C6F8EC444864600"](f36_arg0, f36_arg1 + 1, 1)) == 1 then
 			f36_local1 = true
 		end
 		if f36_local1 == true then
-			f36_local0 = Engine[0xF9F1239CFD921FE](CoD.ChallengesUtility.GetChallengeTierNumeral(f36_local3))
+			f36_local0 = Engine[@"hash_4F9F1239CFD921FE"](CoD.ChallengesUtility.GetChallengeTierNumeral(f36_local3))
 		end
 	end
 	return f36_local0
@@ -685,20 +685,20 @@ CoD.ChallengesUtility.GetBackgroundByID = function(f37_arg0)
 		f37_local3 = 0
 	end
 	if CoD.isPC and CoD.PCKoreaUtility.ShowKorea15Plus() then
-		local f37_local4 = Engine[0x2DCF0973239E909](CoD.backgroundsTable, f37_local1, f37_local2, f37_local3)
+		local f37_local4 = Engine[@"tablelookup"](CoD.backgroundsTable, f37_local1, f37_local2, f37_local3)
 		if f37_local4 and f37_local4 ~= 0x0 then
 			return f37_local4
 		end
 	end
-	return Engine[0x2DCF0973239E909](CoD.backgroundsTable, f37_local0, f37_local2, f37_local3)
+	return Engine[@"tablelookup"](CoD.backgroundsTable, f37_local0, f37_local2, f37_local3)
 end
 CoD.ChallengesUtility.GetChallengeTable = function(f38_arg0, f38_arg1, f38_arg2, f38_arg3, f38_arg4)
 	local f38_local0 = {}
-	local f38_local1 = Engine[0x5539283B329E2A9](f38_arg0, f38_arg3, f38_arg1)
+	local f38_local1 = Engine[@"getchallengeinfoforimages"](f38_arg0, f38_arg3, f38_arg1)
 	if not f38_local1 then
 		return f38_local0
 	end
-	local f38_local2 = Engine[0xA6C26EBACD7322D](f38_arg0, CoD.STATS_LOCATION_NORMAL, f38_arg1)
+	local f38_local2 = Engine[@"getplayerstats"](f38_arg0, CoD.STATS_LOCATION_NORMAL, f38_arg1)
 	local f38_local3 = 0
 	local f38_local4 = 0
 	if f38_local2 and f38_local2.PlayerStatsList then
@@ -725,13 +725,13 @@ CoD.ChallengesUtility.GetChallengeTable = function(f38_arg0, f38_arg1, f38_arg2,
 		local f38_local40, f38_local23, f38_local24, f38_local27, f38_local25 = nil
 		if f38_local33 ~= nil then
 			local f38_local8 = "gamedata/stats/" .. f38_arg2 .. "/statsmilestones" .. f38_local36 + 1 .. ".csv"
-			local f38_local9 = tonumber(Engine[0xC6F8EC444864600](f38_local8, f38_local33, CoD.ChallengesUtility.TierIdCol))
-			local f38_local10 = Engine[0xC6F8EC444864600](f38_local8, f38_local33, CoD.ChallengesUtility.TargetValCol)
-			local f38_local11 = Engine[0xC6F8EC444864600](f38_local8, f38_local33, CoD.ChallengesUtility.NameStringCol)
-			local f38_local12 = Engine[0xC6F8EC444864600](f38_local8, f38_local33, CoD.ChallengesUtility.NameStringCol) .. "_DESC"
-			local f38_local13 = tonumber(Engine[0xC6F8EC444864600](f38_local8, f38_local33, CoD.ChallengesUtility.XpEarnedCol))
-			local f38_local14 = Engine[0xC6F8EC444864600](f38_local8, f38_local33, CoD.ChallengesUtility.UnlockRankCol)
-			local f38_local15 = Engine[0xC6F8EC444864600](f38_local8, f38_local33, CoD.ChallengesUtility.UnlockPLevelCol)
+			local f38_local9 = tonumber(Engine[@"hash_4C6F8EC444864600"](f38_local8, f38_local33, CoD.ChallengesUtility.TierIdCol))
+			local f38_local10 = Engine[@"hash_4C6F8EC444864600"](f38_local8, f38_local33, CoD.ChallengesUtility.TargetValCol)
+			local f38_local11 = Engine[@"hash_4C6F8EC444864600"](f38_local8, f38_local33, CoD.ChallengesUtility.NameStringCol)
+			local f38_local12 = Engine[@"hash_4C6F8EC444864600"](f38_local8, f38_local33, CoD.ChallengesUtility.NameStringCol) .. "_DESC"
+			local f38_local13 = tonumber(Engine[@"hash_4C6F8EC444864600"](f38_local8, f38_local33, CoD.ChallengesUtility.XpEarnedCol))
+			local f38_local14 = Engine[@"hash_4C6F8EC444864600"](f38_local8, f38_local33, CoD.ChallengesUtility.UnlockRankCol)
+			local f38_local15 = Engine[@"hash_4C6F8EC444864600"](f38_local8, f38_local33, CoD.ChallengesUtility.UnlockPLevelCol)
 			local f38_local16 = CoD.ChallengesUtility.GetLocalizedTierText(f38_local8, f38_local33)
 			if f38_local14 ~= "" then
 				f38_local17 = tonumber(f38_local14)
@@ -739,18 +739,18 @@ CoD.ChallengesUtility.GetChallengeTable = function(f38_arg0, f38_arg1, f38_arg2,
 			if f38_local15 ~= "" then
 				f38_local18 = tonumber(f38_local15)
 			end
-			if f38_local38 == Enum[0x30E44A363F3414C][0x26D4317EE22AF96] then
-				f38_local19 = Engine[0xF9F1239CFD921FE](Engine[0x6B7AC889104DED3](f38_local32.itemIndex, Enum[0x6EB546760F890D2][0x569E84652131CD7], f38_arg1))
-			elseif f38_local38 == Enum[0x30E44A363F3414C][0x4D0D341C55C3159] then
-				f38_local19 = Engine[0xF9F1239CFD921FE](CoD.ChallengesUtility.GetChallengeTypeString(Engine[0xCF93F3431B9ACB2](f38_local32.itemIndex)))
-			elseif f38_local38 == Enum[0x30E44A363F3414C][0x86B082C51FC2370] then
-				f38_local19 = Engine[0xED84C33EC5F01EA](Engine[0x31B335F9A01DF74](f38_local32.itemIndex))
-			elseif f38_local38 == Enum[0x30E44A363F3414C][0xA3311F9A3A184EF] then
-				local f38_local20 = Engine[0xEA74FA7EE46E195](Engine[0x4E2149BC9637156](f38_local32.itemIndex))
-				local f38_local21 = Engine[0xF9F1239CFD921FE]
+			if f38_local38 == Enum[@"statsmilestonetypes_t"][@"milestone_weapon"] then
+				f38_local19 = Engine[@"hash_4F9F1239CFD921FE"](Engine[@"getitemname"](f38_local32.itemIndex, Enum[@"statindexoffset"][@"hash_6569E84652131CD7"], f38_arg1))
+			elseif f38_local38 == Enum[@"statsmilestonetypes_t"][@"milestone_group"] then
+				f38_local19 = Engine[@"hash_4F9F1239CFD921FE"](CoD.ChallengesUtility.GetChallengeTypeString(Engine[@"getitemgroupbyindex"](f38_local32.itemIndex)))
+			elseif f38_local38 == Enum[@"statsmilestonetypes_t"][@"milestone_attachments"] then
+				f38_local19 = Engine[@"localize"](Engine[@"getattachmentnamebyindex"](f38_local32.itemIndex))
+			elseif f38_local38 == Enum[@"statsmilestonetypes_t"][@"milestone_gamemode"] then
+				local f38_local20 = Engine[@"getgametypeinfo"](Engine[@"getgametypename"](f38_local32.itemIndex))
+				local f38_local21 = Engine[@"hash_4F9F1239CFD921FE"]
 				local f38_local22
 				if f38_local20 then
-					f38_local22 = f38_local20[0x62BC418020E30AF]
+					f38_local22 = f38_local20[@"challengetypestring"]
 					if not f38_local22 then
 					else
 						f38_local19 = f38_local21(f38_local22)
@@ -764,30 +764,30 @@ CoD.ChallengesUtility.GetChallengeTable = function(f38_arg0, f38_arg1, f38_arg2,
 			if not f38_local37 then
 				if f38_local4 < f38_local18 then
 					f38_local24 = true
-					f38_local25 = Engine[0xF9F1239CFD921FE](0xE2EF437F27777CE, f38_local18)
+					f38_local25 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_4E2EF437F27777CE", f38_local18)
 				elseif f38_local4 == 0 and f38_local3 < f38_local17 then
 					f38_local24 = true
-					f38_local25 = Engine[0xF9F1239CFD921FE](0x10EFA40E4B9F78E, CoD.GetRankName(f38_local17, 0, f38_arg1), f38_local17 + 1)
+					f38_local25 = Engine[@"hash_4F9F1239CFD921FE"](@"menu/unlocked_at", CoD.GetRankName(f38_local17, 0, f38_arg1), f38_local17 + 1)
 				end
 			end
 			if f38_local23 and f38_local24 then
-				f38_local16 = Engine[0xED84C33EC5F01EA](CoD.ChallengesUtility.TierString[0])
+				f38_local16 = Engine[@"localize"](CoD.ChallengesUtility.TierString[0])
 			end
 			local f38_local20 = f38_local32.currentChallengeRow
 			if f38_local20 then
-				f38_local12 = Engine[0xC6F8EC444864600](f38_local8, f38_local20, CoD.ChallengesUtility.NameStringCol) .. "_DESC"
+				f38_local12 = Engine[@"hash_4C6F8EC444864600"](f38_local8, f38_local20, CoD.ChallengesUtility.NameStringCol) .. "_DESC"
 				if f38_local23 then
-					f38_local26 = tonumber(Engine[0xC6F8EC444864600](f38_local8, f38_local20, CoD.ChallengesUtility.TierIdCol))
-					f38_local10 = Engine[0xC6F8EC444864600](f38_local8, f38_local20, CoD.ChallengesUtility.TargetValCol)
-					f38_local13 = tonumber(Engine[0xC6F8EC444864600](f38_local8, f38_local20, CoD.ChallengesUtility.XpEarnedCol))
+					f38_local26 = tonumber(Engine[@"hash_4C6F8EC444864600"](f38_local8, f38_local20, CoD.ChallengesUtility.TierIdCol))
+					f38_local10 = Engine[@"hash_4C6F8EC444864600"](f38_local8, f38_local20, CoD.ChallengesUtility.TargetValCol)
+					f38_local13 = tonumber(Engine[@"hash_4C6F8EC444864600"](f38_local8, f38_local20, CoD.ChallengesUtility.XpEarnedCol))
 					f38_local16 = CoD.ChallengesUtility.GetLocalizedTierText(f38_local8, f38_local20)
 				end
 			end
-			f38_local27 = Engine[0xED84C33EC5F01EA](f38_local11, "", f38_local19, f38_local16)
+			f38_local27 = Engine[@"localize"](f38_local11, "", f38_local19, f38_local16)
 			if not f38_local25 then
-				f38_local25 = Engine[0xED84C33EC5F01EA](f38_local12, f38_local10, f38_local19)
+				f38_local25 = Engine[@"localize"](f38_local12, f38_local10, f38_local19)
 			end
-			if Dvar[0x818EB2F0EDA28E5]:get() then
+			if Dvar[@"allitemsunlocked"]:get() then
 				f38_local28 = f38_local10
 				f38_local29 = f38_local10
 			end
@@ -795,8 +795,8 @@ CoD.ChallengesUtility.GetChallengeTable = function(f38_arg0, f38_arg1, f38_arg2,
 			local f38_local22 = f38_local29 / f38_local10
 			local f38_local30 = f38_local22 < 1
 			if f38_local35 == "darkops" and not f38_local37 and f38_local30 then
-				f38_local27 = Engine[0xF9F1239CFD921FE](0x597B1BD675E38D4)
-				f38_local25 = Engine[0xF9F1239CFD921FE](0xD39450F492BCD23)
+				f38_local27 = Engine[@"hash_4F9F1239CFD921FE"](@"challenge/classified")
+				f38_local25 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_5D39450F492BCD23")
 			end
 			table.insert(f38_local0, {
 				models = {
@@ -809,13 +809,13 @@ CoD.ChallengesUtility.GetChallengeTable = function(f38_arg0, f38_arg1, f38_arg2,
 					previousVal = f38_local28,
 					currentVal = f38_local29,
 					prevStatPercent = f38_local21,
-					statPercent = Dvar[0x818EB2F0EDA28E5]:get() and 1 or f38_local22,
-					statFractionText = Engine[0xF9F1239CFD921FE](0x31CF0F51CCA3A27, f38_local29, f38_local10),
-					tierStatus = Engine[0xF9F1239CFD921FE](0x38A59531FCD1E, f38_local26 + 1, f38_local9 + 1),
+					statPercent = Dvar[@"allitemsunlocked"]:get() and 1 or f38_local22,
+					statFractionText = Engine[@"hash_4F9F1239CFD921FE"](@"hash_631CF0F51CCA3A27", f38_local29, f38_local10),
+					tierStatus = Engine[@"hash_4F9F1239CFD921FE"](0x38A59531FCD1E, f38_local26 + 1, f38_local9 + 1),
 					xp = f38_local13,
 					percentComplete = f38_local22,
-					isLocked = f38_local30 and not Dvar[0x818EB2F0EDA28E5]:get(),
-					isWZ = f38_arg1 == Enum[0x9C0C2196D8313A0][0xBF1DCC8138A9D39],
+					isLocked = f38_local30 and not Dvar[@"allitemsunlocked"]:get(),
+					isWZ = f38_arg1 == Enum[@"emodes"][@"mode_warzone"],
 				},
 				properties = {
 					isMastery = f38_local37,
@@ -834,20 +834,20 @@ end
 CoD.ChallengesUtility.UpdateDailyChallengeModel = function(f40_arg0, f40_arg1, f40_arg2, f40_arg3)
 	local f40_local0 = CoD.ChallengesUtility.GetDailyChallenge(f40_arg0, f40_arg2, f40_arg3)
 	if not f40_local0 then
-		Engine[0x83C9B5DE1D9371](Engine[0xA798E4552F5E872](f40_arg1, "description"), "")
-		Engine[0x83C9B5DE1D9371](Engine[0xA798E4552F5E872](f40_arg1, "fractionText"), "0/1")
-		Engine[0x83C9B5DE1D9371](Engine[0xA798E4552F5E872](f40_arg1, "image"), "")
-		Engine[0x83C9B5DE1D9371](Engine[0xA798E4552F5E872](f40_arg1, "progressPercentage"), 0)
-		Engine[0x83C9B5DE1D9371](Engine[0xA798E4552F5E872](f40_arg1, "rewardText"), "")
-		Engine[0x83C9B5DE1D9371](Engine[0xA798E4552F5E872](f40_arg1, "title"), "")
+		Engine[@"setmodelvalue"](Engine[@"createmodel"](f40_arg1, "description"), "")
+		Engine[@"setmodelvalue"](Engine[@"createmodel"](f40_arg1, "fractionText"), "0/1")
+		Engine[@"setmodelvalue"](Engine[@"createmodel"](f40_arg1, "image"), "")
+		Engine[@"setmodelvalue"](Engine[@"createmodel"](f40_arg1, "progressPercentage"), 0)
+		Engine[@"setmodelvalue"](Engine[@"createmodel"](f40_arg1, "rewardText"), "")
+		Engine[@"setmodelvalue"](Engine[@"createmodel"](f40_arg1, "title"), "")
 		return
 	else
-		Engine[0x83C9B5DE1D9371](Engine[0xA798E4552F5E872](f40_arg1, "description"), f40_local0.challengeDescription)
-		Engine[0x83C9B5DE1D9371](Engine[0xA798E4552F5E872](f40_arg1, "fractionText"), Engine[0xF9F1239CFD921FE](0x31CF0F51CCA3A27, f40_local0.currChallengeStatValue, f40_local0.targetVal))
-		Engine[0x83C9B5DE1D9371](Engine[0xA798E4552F5E872](f40_arg1, "image"), f40_local0.image)
-		Engine[0x83C9B5DE1D9371](Engine[0xA798E4552F5E872](f40_arg1, "progressPercentage"), f40_local0.percentComplete)
-		Engine[0x83C9B5DE1D9371](Engine[0xA798E4552F5E872](f40_arg1, "rewardText"), f40_local0.rewardText)
-		Engine[0x83C9B5DE1D9371](Engine[0xA798E4552F5E872](f40_arg1, "title"), f40_local0.challengeName)
+		Engine[@"setmodelvalue"](Engine[@"createmodel"](f40_arg1, "description"), f40_local0.challengeDescription)
+		Engine[@"setmodelvalue"](Engine[@"createmodel"](f40_arg1, "fractionText"), Engine[@"hash_4F9F1239CFD921FE"](@"hash_631CF0F51CCA3A27", f40_local0.currChallengeStatValue, f40_local0.targetVal))
+		Engine[@"setmodelvalue"](Engine[@"createmodel"](f40_arg1, "image"), f40_local0.image)
+		Engine[@"setmodelvalue"](Engine[@"createmodel"](f40_arg1, "progressPercentage"), f40_local0.percentComplete)
+		Engine[@"setmodelvalue"](Engine[@"createmodel"](f40_arg1, "rewardText"), f40_local0.rewardText)
+		Engine[@"setmodelvalue"](Engine[@"createmodel"](f40_arg1, "title"), f40_local0.challengeName)
 	end
 end
 CoD.ChallengesUtility.MakeChallengeTierString = function(f41_arg0)
@@ -855,7 +855,7 @@ CoD.ChallengesUtility.MakeChallengeTierString = function(f41_arg0)
 	if f41_arg0 == 0x0 or f41_arg0 == "" then
 		return ""
 	else
-		return Engine[0xED84C33EC5F01EA](0xE743A7E5D0C37CD, LocalizeString(PrependString(0x7ACFF58FDD459C3 .. "TIER_", f41_local0)))
+		return Engine[@"localize"](@"hash_1E743A7E5D0C37CD", LocalizeString(PrependString(@"challenge/" .. "TIER_", f41_local0)))
 	end
 end
 CoD.ChallengesUtility.SetTotalMasterInfo = function(f42_arg0)
@@ -880,14 +880,14 @@ CoD.ChallengesUtility.SetTotalMasterInfo = function(f42_arg0)
 	if f42_local4 then
 		f42_local5 = f42_local4.models
 		f42_local6 = nil
-		if f42_local0.index == Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5] then
-			f42_local7 = Engine[0xA798E4552F5E872](Engine[0x4DF5CFBC1771947](f42_arg0), "ChallengesMPCategoryStats")
+		if f42_local0.index == Enum[@"emodes"][@"mode_multiplayer"] then
+			f42_local7 = Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f42_arg0), "ChallengesMPCategoryStats")
 			f42_local6 = f42_local7.mp.percentComplete:get()
-		elseif f42_local0.index == Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A] then
-			f42_local7 = Engine[0xA798E4552F5E872](Engine[0x4DF5CFBC1771947](f42_arg0), "ChallengesZMCategoryStats")
+		elseif f42_local0.index == Enum[@"emodes"][@"mode_zombies"] then
+			f42_local7 = Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f42_arg0), "ChallengesZMCategoryStats")
 			f42_local6 = f42_local7.zm.percentComplete:get()
 		else
-			f42_local7 = Engine[0xA798E4552F5E872](Engine[0x4DF5CFBC1771947](f42_arg0), "ChallengesWZCategoryStats")
+			f42_local7 = Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f42_arg0), "ChallengesWZCategoryStats")
 			f42_local6 = f42_local7.wz.percentComplete:get()
 		end
 		DataSources.MasterCallingCard.setModelValues(f42_arg0, f42_local5.title, f42_local5.description, f42_local5.icon, f42_local6)
@@ -899,10 +899,10 @@ CoD.ChallengesUtility.SetTotalMasterCTInfo = function(f43_arg0)
 end
 DataSources.ChallengeCards = DataSourceHelpers.ListSetup("ChallengeCards", function(f44_arg0)
 	local f44_local0 = {}
-	local f44_local1 = Engine[0x8DF2E5447F384B9]()
+	local f44_local1 = Engine[@"getglobalmodel"]()
 	f44_local1 = f44_local1.challengeCategory
 	if f44_local1 then
-		f44_local1 = Engine[0x8DF2E5447F384B9]()
+		f44_local1 = Engine[@"getglobalmodel"]()
 		f44_local1 = f44_local1.challengeCategory:get()
 	end
 	if not f44_local1 then
@@ -931,7 +931,7 @@ DataSources.ChallengeCards = DataSourceHelpers.ListSetup("ChallengeCards", funct
 	end
 	if f44_local6 then
 		f44_local7 = f44_local6.models
-		DataSources.MasterCallingCard.setModelValues(f44_arg0, f44_local7.title, f44_local7.description, f44_local7.icon, f44_local4 / f44_local5, Engine[0xF9F1239CFD921FE](0x31CF0F51CCA3A27, f44_local4, f44_local5), f44_local7.xp)
+		DataSources.MasterCallingCard.setModelValues(f44_arg0, f44_local7.title, f44_local7.description, f44_local7.icon, f44_local4 / f44_local5, Engine[@"hash_4F9F1239CFD921FE"](@"hash_631CF0F51CCA3A27", f44_local4, f44_local5), f44_local7.xp)
 	end
 	if #f44_local0 > 0 then
 		f44_local0[1].properties.selectIndex = true
@@ -947,7 +947,7 @@ CoD.ChallengesUtility.GetChallengeCardsForSessionMode = function(f46_arg0, f46_a
 	local f46_local2 = true
 	local f46_local3 = false
 	local f46_local4
-	if f46_arg1 ~= Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5] and f46_arg1 ~= Enum[0x9C0C2196D8313A0][0xBF1DCC8138A9D39] then
+	if f46_arg1 ~= Enum[@"emodes"][@"mode_multiplayer"] and f46_arg1 ~= Enum[@"emodes"][@"mode_warzone"] then
 		f46_local4 = false
 	else
 		f46_local4 = true
@@ -1040,15 +1040,15 @@ CoD.ChallengesUtility.AddMasteryChallengeCardsToList = function(f48_arg0, f48_ar
 			if not f48_local0[f48_local8].models.isLocked then
 				f48_local4 = f48_local4 + 1
 			end
-			f48_local0[f48_local8].models.statFractionText = Engine[0xF9F1239CFD921FE](0x31CF0F51CCA3A27, f48_local9, f48_local0[f48_local8].properties.targetVal)
+			f48_local0[f48_local8].models.statFractionText = Engine[@"hash_4F9F1239CFD921FE"](@"hash_631CF0F51CCA3A27", f48_local9, f48_local0[f48_local8].properties.targetVal)
 			table.insert(f48_arg3, f48_local0[f48_local8])
 		end
 	end
 	f48_local0.onehundredpercent.models.percentComplete = f48_local4 / f48_local3
 	f48_local0.onehundredpercent.models.isLocked = f48_local0.onehundredpercent.models.percentComplete < 1
-	f48_local0.onehundredpercent.models.statFractionText = Engine[0xF9F1239CFD921FE](0x31CF0F51CCA3A27, f48_local4, f48_local3)
+	f48_local0.onehundredpercent.models.statFractionText = Engine[@"hash_4F9F1239CFD921FE"](@"hash_631CF0F51CCA3A27", f48_local4, f48_local3)
 	table.insert(f48_arg3, f48_local0.onehundredpercent)
-	if f48_arg1 == Enum[0x9C0C2196D8313A0][0xBF1DCC8138A9D39] then
+	if f48_arg1 == Enum[@"emodes"][@"mode_warzone"] then
 		f48_local5 = CoD.RankUtility.GetRankMasterCard(f48_arg0, f48_arg1)
 		if f48_local5 then
 			table.insert(f48_arg3, f48_local5)
@@ -1061,11 +1061,11 @@ CoD.ChallengesUtility.AddMasteryChallengeCardsToList = function(f48_arg0, f48_ar
 end
 CoD.ChallengesUtility.GetMasteryChallengeCards = function(f50_arg0, f50_arg1)
 	local f50_local0 = {}
-	CoD.ChallengesUtility.AddMasteryChallengeCardsToList(f50_arg0, Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5], "mp", f50_local0)
+	CoD.ChallengesUtility.AddMasteryChallengeCardsToList(f50_arg0, Enum[@"emodes"][@"mode_multiplayer"], "mp", f50_local0)
 	if not CoD.isPC or not CoD.PCKoreaUtility.ShowKorea15Plus() then
-		CoD.ChallengesUtility.AddMasteryChallengeCardsToList(f50_arg0, Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A], "zm", f50_local0)
+		CoD.ChallengesUtility.AddMasteryChallengeCardsToList(f50_arg0, Enum[@"emodes"][@"mode_zombies"], "zm", f50_local0)
 	end
-	CoD.ChallengesUtility.AddMasteryChallengeCardsToList(f50_arg0, Enum[0x9C0C2196D8313A0][0xBF1DCC8138A9D39], "wz", f50_local0)
+	CoD.ChallengesUtility.AddMasteryChallengeCardsToList(f50_arg0, Enum[@"emodes"][@"mode_warzone"], "wz", f50_local0)
 	local f50_local1 = CoD.ChallengesUtility.AddGlobalChallengesToList(f50_arg0, {})
 	if not CoD.isPC or not CoD.PCKoreaUtility.ShowKorea15Plus() then
 		table.insert(f50_local0, f50_local1)
@@ -1075,16 +1075,16 @@ CoD.ChallengesUtility.GetMasteryChallengeCards = function(f50_arg0, f50_arg1)
 	local f50_local8 = f50_local0
 	local f50_local9 = {}
 	local f50_local10 = {
-		title = Engine[0xF9F1239CFD921FE](f50_local4),
-		description = Engine[0xF9F1239CFD921FE](f50_local5),
+		title = Engine[@"hash_4F9F1239CFD921FE"](f50_local4),
+		description = Engine[@"hash_4F9F1239CFD921FE"](f50_local5),
 		iconId = f50_local6,
 		icon = CoD.ChallengesUtility.GetBackgroundByID(f50_local6),
 		percentComplete = f50_local2 / f50_local3,
-		statFractionText = Engine[0xF9F1239CFD921FE](0x31CF0F51CCA3A27, f50_local2, f50_local3),
+		statFractionText = Engine[@"hash_4F9F1239CFD921FE"](@"hash_631CF0F51CCA3A27", f50_local2, f50_local3),
 	}
 	local f50_local11
 	if f50_local2 ~= f50_local3 then
-		f50_local11 = not Dvar[0x818EB2F0EDA28E5]:get()
+		f50_local11 = not Dvar[@"allitemsunlocked"]:get()
 	else
 		f50_local11 = false
 	end
@@ -1096,7 +1096,7 @@ CoD.ChallengesUtility.GetMasteryChallengeCards = function(f50_arg0, f50_arg1)
 	f50_local7(f50_local8, f50_local9)
 	f50_local7 = {}
 	if not CoD.isPC or not CoD.PCKoreaUtility.ShowKorea15Plus() then
-		f50_local8 = CoD.ChallengesUtility.AddDarkOpsChallengeCardsToList(f50_arg0, Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A], "zm", f50_local7)
+		f50_local8 = CoD.ChallengesUtility.AddDarkOpsChallengeCardsToList(f50_arg0, Enum[@"emodes"][@"mode_zombies"], "zm", f50_local7)
 		if f50_local8 and not f50_local8.models.isLocked then
 			table.insert(f50_local0, f50_local8)
 		end
@@ -1115,20 +1115,20 @@ CoD.ChallengesUtility.GetMasteryChallengeCards = function(f50_arg0, f50_arg1)
 	return f50_local0
 end
 CoD.ChallengesUtility.AddDefaultCallingCardsToList = function(f52_arg0, f52_arg1)
-	for f52_local8, f52_local9 in ipairs(Engine[0x1002B9F161700E0](f52_arg0, "default")) do
+	for f52_local8, f52_local9 in ipairs(Engine[@"getbackgroundsforcategoryname"](f52_arg0, "default")) do
 		if not f52_local9.isBGLocked then
 			local f52_local3 = table.insert
 			local f52_local4 = f52_arg1
 			local f52_local5 = {}
 			local f52_local6 = {
-				title = Engine[0xED84C33EC5F01EA](f52_local9.description),
+				title = Engine[@"localize"](f52_local9.description),
 				description = "",
 				iconId = f52_local9.id,
 				icon = CoD.ChallengesUtility.GetBackgroundByID(f52_local9.id),
 			}
 			local f52_local7 = f52_local9.isBGLocked
 			if f52_local7 then
-				f52_local7 = not Dvar[0x818EB2F0EDA28E5]:get()
+				f52_local7 = not Dvar[@"allitemsunlocked"]:get()
 			end
 			f52_local6.isLocked = f52_local7
 			f52_local5.models = f52_local6
@@ -1149,16 +1149,16 @@ CoD.ChallengesUtility.AddCombatTrainingChallengesToList = function(f53_arg0, f53
 		local f53_local10 = f53_arg1
 		local f53_local11 = {}
 		local f53_local12 = {
-			title = Engine[0xF9F1239CFD921FE](f53_local6),
-			description = Engine[0xF9F1239CFD921FE](f53_local7),
+			title = Engine[@"hash_4F9F1239CFD921FE"](f53_local6),
+			description = Engine[@"hash_4F9F1239CFD921FE"](f53_local7),
 			iconId = f53_local8,
 			icon = CoD.ChallengesUtility.GetBackgroundByID(f53_local8),
 			percentComplete = f53_local3 / f53_local4,
-			statFractionText = Engine[0xF9F1239CFD921FE](0x31CF0F51CCA3A27, f53_local3, f53_local4),
+			statFractionText = Engine[@"hash_4F9F1239CFD921FE"](@"hash_631CF0F51CCA3A27", f53_local3, f53_local4),
 		}
 		local f53_local13
 		if not f53_local5 then
-			f53_local13 = not Dvar[0x818EB2F0EDA28E5]:get()
+			f53_local13 = not Dvar[@"allitemsunlocked"]:get()
 		else
 			f53_local13 = false
 		end
@@ -1196,15 +1196,15 @@ CoD.ChallengesUtility.GetGeneralCallingCards = function(f54_arg0, f54_arg1)
 	return f54_local0
 end
 DataSources.CallingCardsSorted = DataSourceHelpers.ListSetup("CallingCardsSorted", function(f56_arg0)
-	local f56_local0 = Engine[0x8DF2E5447F384B9]()
+	local f56_local0 = Engine[@"getglobalmodel"]()
 	f56_local0 = f56_local0.callingCardCategory:get()
 	local f56_local1 = {}
 	if f56_local0 == "mp" then
-		f56_local1 = CoD.ChallengesUtility.GetChallengeCardsForSessionMode(f56_arg0, Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5], f56_local0, true)
+		f56_local1 = CoD.ChallengesUtility.GetChallengeCardsForSessionMode(f56_arg0, Enum[@"emodes"][@"mode_multiplayer"], f56_local0, true)
 	elseif f56_local0 == "zm" then
-		f56_local1 = CoD.ChallengesUtility.GetChallengeCardsForSessionMode(f56_arg0, Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A], f56_local0, true)
+		f56_local1 = CoD.ChallengesUtility.GetChallengeCardsForSessionMode(f56_arg0, Enum[@"emodes"][@"mode_zombies"], f56_local0, true)
 	elseif f56_local0 == "wz" then
-		f56_local1 = CoD.ChallengesUtility.GetChallengeCardsForSessionMode(f56_arg0, Enum[0x9C0C2196D8313A0][0xBF1DCC8138A9D39], f56_local0, true)
+		f56_local1 = CoD.ChallengesUtility.GetChallengeCardsForSessionMode(f56_arg0, Enum[@"emodes"][@"mode_warzone"], f56_local0, true)
 	elseif f56_local0 == "general" then
 		f56_local1 = CoD.ChallengesUtility.GetGeneralCallingCards(f56_arg0, true)
 	elseif f56_local0 == "masters" then
@@ -1230,7 +1230,7 @@ DataSources.CallingCardsSorted = DataSourceHelpers.ListSetup("CallingCardsSorted
 		if f56_local6.properties.trialUnlocked then
 			f56_local6.models.trialLocked = false
 		else
-			f56_local6.models.trialLocked = Engine[0xCB675CA7856DA25]()
+			f56_local6.models.trialLocked = Engine[@"hash_5CB675CA7856DA25"]()
 		end
 	end
 	if #f56_local1 > 0 then
@@ -1258,43 +1258,43 @@ CoD.ChallengesUtility.AddGlobalChallengesToList = function(f57_arg0, f57_arg1)
 	local f57_local13 = 7
 	local f57_local14 = 8
 	local f57_local15 = 9
-	local f57_local16 = Engine[0x8BF970606552F4C](f57_arg0, Enum[0xBBD4F9E70101BA8][0xD5A7695E03A7A90])
-	local f57_local17 = Engine[0x8BF970606552F4C](f57_arg0, Enum[0xBBD4F9E70101BA8][0xA57D6164B91A8FC])
-	local f57_local18 = Engine[0x8BF970606552F4C](f57_arg0, Enum[0xBBD4F9E70101BA8][0xAB0E693244221BC])
+	local f57_local16 = Engine[@"storagegetbuffer"](f57_arg0, Enum[@"storagefiletype"][@"hash_5D5A7695E03A7A90"])
+	local f57_local17 = Engine[@"storagegetbuffer"](f57_arg0, Enum[@"storagefiletype"][@"hash_A57D6164B91A8FC"])
+	local f57_local18 = Engine[@"storagegetbuffer"](f57_arg0, Enum[@"storagefiletype"][@"hash_1AB0E693244221BC"])
 	local f57_local19 = 0
 	local f57_local20 = 0
 	while true do
-		local f57_local21 = tonumber(Engine[0xC6F8EC444864600](f57_local0, f57_local20, f57_local7))
-		local f57_local22 = tonumber(Engine[0xC6F8EC444864600](f57_local0, f57_local20, f57_local8))
-		local f57_local23 = tonumber(Engine[0xC6F8EC444864600](f57_local0, f57_local20, f57_local9))
-		local f57_local24 = Engine[0xC6F8EC444864600](f57_local0, f57_local20, f57_local10)
-		local f57_local25 = Engine[0xC6F8EC444864600](f57_local0, f57_local20, f57_local11)
-		local f57_local26 = Engine[0xC6F8EC444864600](f57_local0, f57_local20, f57_local12)
-		local f57_local27 = Engine[0xC6F8EC444864600](f57_local0, f57_local20, f57_local13)
-		local f57_local28 = Engine[0xC6F8EC444864600](f57_local0, f57_local20, f57_local14)
+		local f57_local21 = tonumber(Engine[@"hash_4C6F8EC444864600"](f57_local0, f57_local20, f57_local7))
+		local f57_local22 = tonumber(Engine[@"hash_4C6F8EC444864600"](f57_local0, f57_local20, f57_local8))
+		local f57_local23 = tonumber(Engine[@"hash_4C6F8EC444864600"](f57_local0, f57_local20, f57_local9))
+		local f57_local24 = Engine[@"hash_4C6F8EC444864600"](f57_local0, f57_local20, f57_local10)
+		local f57_local25 = Engine[@"hash_4C6F8EC444864600"](f57_local0, f57_local20, f57_local11)
+		local f57_local26 = Engine[@"hash_4C6F8EC444864600"](f57_local0, f57_local20, f57_local12)
+		local f57_local27 = Engine[@"hash_4C6F8EC444864600"](f57_local0, f57_local20, f57_local13)
+		local f57_local28 = Engine[@"hash_4C6F8EC444864600"](f57_local0, f57_local20, f57_local14)
 		local f57_local29 = nil
 		if f57_local5 then
-			f57_local29 = Engine[0x2DCF0973239E909](f57_local1, f57_local6, f57_local4, f57_local28)
+			f57_local29 = Engine[@"tablelookup"](f57_local1, f57_local6, f57_local4, f57_local28)
 		end
 		if not f57_local29 or f57_local29 == 0x0 then
-			f57_local29 = Engine[0x2DCF0973239E909](f57_local1, f57_local3, f57_local4, f57_local28)
+			f57_local29 = Engine[@"tablelookup"](f57_local1, f57_local3, f57_local4, f57_local28)
 		end
-		local f57_local30 = Engine[0x2DCF0973239E909](f57_local1, f57_local2, f57_local4, f57_local28)
+		local f57_local30 = Engine[@"tablelookup"](f57_local1, f57_local2, f57_local4, f57_local28)
 		if f57_local21 == 0 then
 			local f57_local31 = f57_local19 / f57_local20
-			local f57_local32 = Engine[0xF9F1239CFD921FE](0x31CF0F51CCA3A27, f57_local19, f57_local20)
-			DataSources.MasterCallingCard.setModelValues(f57_arg0, Engine[0xF9F1239CFD921FE](f57_local27), Engine[0xF9F1239CFD921FE](f57_local28), f57_local29, f57_local31, f57_local32)
+			local f57_local32 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_631CF0F51CCA3A27", f57_local19, f57_local20)
+			DataSources.MasterCallingCard.setModelValues(f57_arg0, Engine[@"hash_4F9F1239CFD921FE"](f57_local27), Engine[@"hash_4F9F1239CFD921FE"](f57_local28), f57_local29, f57_local31, f57_local32)
 			local f57_local33 = {}
 			local f57_local34 = {
-				title = Engine[0xF9F1239CFD921FE](f57_local27),
-				description = Engine[0xF9F1239CFD921FE](f57_local28),
+				title = Engine[@"hash_4F9F1239CFD921FE"](f57_local27),
+				description = Engine[@"hash_4F9F1239CFD921FE"](f57_local28),
 				icon = f57_local29,
 				iconId = f57_local30,
-				statPercent = Dvar[0x818EB2F0EDA28E5]:get() and 1 or f57_local31,
+				statPercent = Dvar[@"allitemsunlocked"]:get() and 1 or f57_local31,
 			}
 			local f57_local35
 			if f57_local31 < 1 then
-				f57_local35 = not Dvar[0x818EB2F0EDA28E5]:get()
+				f57_local35 = not Dvar[@"allitemsunlocked"]:get()
 			else
 				f57_local35 = false
 			end
@@ -1320,13 +1320,13 @@ CoD.ChallengesUtility.AddGlobalChallengesToList = function(f57_arg0, f57_arg1)
 						f57_local32 = CoD.PlayerStatsUtility.HashStorageLookup(f57_local16, f57_local31)
 						f57_local33 = CoD.PlayerStatsUtility.HashStorageLookup(f57_local17, f57_local31)
 						f57_local34 = CoD.PlayerStatsUtility.HashStorageLookup(f57_local18, f57_local31)
-						if f57_local25 == 0xDB3201FD1EB3847 then
+						if f57_local25 == @"rank" then
 							f57_local35 = true
 							f57_local21 = f57_local21 - 1
 							f57_local22 = f57_local22 - 1
 							f57_local23 = f57_local23 - 1
-							if f57_local24 == 0xD59E8BFAC78A33B then
-								local f57_local36 = 0x1E79BD3853D120F
+							if f57_local24 == @"playerstatslist" then
+								local f57_local36 = @"plevel"
 								local f57_local37
 								if f57_local26 ~= 0x0 then
 									f57_local37 = {
@@ -1351,10 +1351,10 @@ CoD.ChallengesUtility.AddGlobalChallengesToList = function(f57_arg0, f57_arg1)
 									f57_local36,
 								}
 							end
-						elseif f57_local25 == 0xA9ACE0557715BCE then
+						elseif f57_local25 == @"weapon_launcher" then
 							f57_local32 = CoD.PlayerStatsUtility.HashStorageLookup(f57_local16, {
-								0xD59E8BFAC78A33B,
-								0xBE93D1227E6DB1,
+								@"playerstatslist",
+								@"hash_BE93D1227E6DB1",
 							})
 						end
 					else
@@ -1418,17 +1418,17 @@ CoD.ChallengesUtility.AddGlobalChallengesToList = function(f57_arg0, f57_arg1)
 											local f57_local47, f57_local48, f57_local49 = nil
 											if not f57_local35 then
 												if f57_local37 < 1 then
-													local f57_local50 = Engine[0xF9F1239CFD921FE](0x31CF0F51CCA3A27, f57_local32, f57_local21)
+													local f57_local50 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_631CF0F51CCA3A27", f57_local32, f57_local21)
 												end
-												f57_local47 = f57_local50 or Engine[0xF9F1239CFD921FE](0x459775A6A6CBBF4)
+												f57_local47 = f57_local50 or Engine[@"hash_4F9F1239CFD921FE"](@"hash_2459775A6A6CBBF4")
 												if f57_local38 < 1 then
-													local f57_local51 = Engine[0xF9F1239CFD921FE](0x31CF0F51CCA3A27, f57_local33, f57_local22)
+													local f57_local51 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_631CF0F51CCA3A27", f57_local33, f57_local22)
 												end
-												f57_local48 = f57_local51 or Engine[0xF9F1239CFD921FE](0x459775A6A6CBBF4)
+												f57_local48 = f57_local51 or Engine[@"hash_4F9F1239CFD921FE"](@"hash_2459775A6A6CBBF4")
 												if f57_local39 < 1 then
-													local f57_local52 = Engine[0xF9F1239CFD921FE](0x31CF0F51CCA3A27, f57_local34, f57_local23)
+													local f57_local52 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_631CF0F51CCA3A27", f57_local34, f57_local23)
 												end
-												f57_local49 = f57_local52 or Engine[0xF9F1239CFD921FE](0x459775A6A6CBBF4)
+												f57_local49 = f57_local52 or Engine[@"hash_4F9F1239CFD921FE"](@"hash_2459775A6A6CBBF4")
 											else
 												f57_local47 = f57_local32 + 1
 												f57_local48 = f57_local33 + 1
@@ -1456,20 +1456,20 @@ CoD.ChallengesUtility.AddGlobalChallengesToList = function(f57_arg0, f57_arg1)
 													percent = f57_local39,
 													statFractionText = f57_local49,
 												},
-												title = Engine[0xF9F1239CFD921FE](f57_local27),
-												description = Engine[0xF9F1239CFD921FE](f57_local28),
+												title = Engine[@"hash_4F9F1239CFD921FE"](f57_local27),
+												description = Engine[@"hash_4F9F1239CFD921FE"](f57_local28),
 												icon = f57_local29,
 												iconId = f57_local30,
-												statPercent = Dvar[0x818EB2F0EDA28E5]:get() and 1 or f57_local36,
+												statPercent = Dvar[@"allitemsunlocked"]:get() and 1 or f57_local36,
 											}
 											local f57_local57
 											if f57_local36 < 1 then
-												f57_local57 = not Dvar[0x818EB2F0EDA28E5]:get()
+												f57_local57 = not Dvar[@"allitemsunlocked"]:get()
 											else
 												f57_local57 = false
 											end
 											f57_local56.isLocked = f57_local57
-											f57_local56.statFractionText = Engine[0xF9F1239CFD921FE](0x31CF0F51CCA3A27, f57_local46, 3)
+											f57_local56.statFractionText = Engine[@"hash_4F9F1239CFD921FE"](@"hash_631CF0F51CCA3A27", f57_local46, 3)
 											f57_local55.models = f57_local56
 											f57_local55.properties = {
 												globalChallenge = true,
@@ -1495,7 +1495,7 @@ CoD.ChallengesUtility.AddGlobalChallengesToList = function(f57_arg0, f57_arg1)
 	end
 end
 CoD.ChallengesUtility.UpdateCallingCardProfilerType = function(f58_arg0, f58_arg1)
-	local f58_local0 = Engine[0x4DF5CFBC1771947](f58_arg0)
+	local f58_local0 = Engine[@"getmodelforcontroller"](f58_arg0)
 	if f58_arg1.globalChallenge then
 		f58_local0.hudItems.callingCardProfilingType:set("global")
 	elseif f58_arg1.ctChallenge then
@@ -1609,7 +1609,7 @@ DataSources.WZAARChallengeContainerList = DataSourceHelpers.ListSetup("WZAARChal
 			if f63_local7.properties.isDarkOps then
 				if f63_local7.models.statPercent >= 1 then
 					f63_local7.models.isContract = false
-					f63_local7.models.title = Engine[0xF9F1239CFD921FE](f63_local7.models.title)
+					f63_local7.models.title = Engine[@"hash_4F9F1239CFD921FE"](f63_local7.models.title)
 					table.insert(f63_local0, f63_local7)
 					if #f63_local0 >= 3 then
 						break
@@ -1617,7 +1617,7 @@ DataSources.WZAARChallengeContainerList = DataSourceHelpers.ListSetup("WZAARChal
 				end
 			end
 			f63_local7.models.isContract = false
-			f63_local7.models.title = Engine[0xF9F1239CFD921FE](f63_local7.models.title)
+			f63_local7.models.title = Engine[@"hash_4F9F1239CFD921FE"](f63_local7.models.title)
 			table.insert(f63_local0, f63_local7)
 			if #f63_local0 >= 3 then
 				break
@@ -1652,7 +1652,7 @@ DataSources.WZAARChallengeContainerList = DataSourceHelpers.ListSetup("WZAARChal
 						f63_local0[f66_local4].models = f63_local0[f66_local4 - 1].models
 					end
 					f63_local0[f66_local7].models = {
-						title = Engine[0xF9F1239CFD921FE](f66_arg0.displayName:get()),
+						title = Engine[@"hash_4F9F1239CFD921FE"](f66_arg0.displayName:get()),
 						description = f66_arg0.description:get(),
 						xp = f66_arg0.xpReward:get(),
 						statPercent = f66_arg0.progressRatioIngame:get(),
@@ -1661,7 +1661,7 @@ DataSources.WZAARChallengeContainerList = DataSourceHelpers.ListSetup("WZAARChal
 						rewardIcon = f66_arg0.rewardIcon:get(),
 						cases = f66_arg0.rewardAmount:get(),
 						isContract = true,
-						maxTier = 0x0,
+						maxTier = @"hash_0",
 					}
 					return
 				end
@@ -1672,7 +1672,7 @@ DataSources.WZAARChallengeContainerList = DataSourceHelpers.ListSetup("WZAARChal
 	f63_local6(f63_local4)
 	f63_local6(f63_local5)
 	if #f63_local0 > 0 then
-		f63_local7 = Engine[0x4DF5CFBC1771947](f63_arg0)
+		f63_local7 = Engine[@"getmodelforcontroller"](f63_arg0)
 		local f63_local8 = f63_local7.hudItems.warzone:create("wzAAR.challengeProgEarned")
 		f63_local8:set(true)
 	end
@@ -1715,10 +1715,10 @@ CoD.ChallengesUtility.AddDarkOpsChallengeCardsToList = function(f68_arg0, f68_ar
 			iconId = f68_local4.iconId,
 			icon = f68_local4.icon,
 			percentComplete = f68_local1 / f68_local2,
-			statFractionText = Engine[0xF9F1239CFD921FE](0x31CF0F51CCA3A27, f68_local1, f68_local2),
+			statFractionText = Engine[@"hash_4F9F1239CFD921FE"](@"hash_631CF0F51CCA3A27", f68_local1, f68_local2),
 		}
 		if f68_local1 < f68_local2 then
-			f68_local7 = not Dvar[0x818EB2F0EDA28E5]:get()
+			f68_local7 = not Dvar[@"allitemsunlocked"]:get()
 		else
 			f68_local7 = false
 		end
@@ -1743,12 +1743,12 @@ CoD.ChallengesUtility.GetCTChallengeTable = function(f70_arg0)
 			description = f70_local8,
 			iconId = f70_local9,
 			icon = CoD.ChallengesUtility.GetBackgroundByID(f70_local9),
-			statPercent = Dvar[0x818EB2F0EDA28E5]:get() and 1 or f70_local4 / f70_local5,
-			statFractionText = Engine[0xF9F1239CFD921FE](0x31CF0F51CCA3A27, f70_local4, f70_local5),
+			statPercent = Dvar[@"allitemsunlocked"]:get() and 1 or f70_local4 / f70_local5,
+			statFractionText = Engine[@"hash_4F9F1239CFD921FE"](@"hash_631CF0F51CCA3A27", f70_local4, f70_local5),
 		}
 		local f70_local14
 		if not f70_local6 then
-			f70_local14 = not Dvar[0x818EB2F0EDA28E5]:get()
+			f70_local14 = not Dvar[@"allitemsunlocked"]:get()
 		else
 			f70_local14 = false
 		end
@@ -1772,7 +1772,7 @@ DataSources.CallingCardsBlackMarket = DataSourceHelpers.ListSetup("CallingCardsB
 			displayName = f72_local6.displayName,
 			rarity = f72_local6.rarity,
 			iconId = f72_local6.iconId,
-			category = 0x5D0D4D46178F2C8,
+			category = @"menu/calling_card",
 			setInfo = "",
 			unlockInfo = f72_local6.lootInfo.unlockInfo or "",
 		}
@@ -1809,7 +1809,7 @@ DataSources.CallingCardSetBlackMarket = DataSourceHelpers.ListSetup("CallingCard
 		CoD.perController[f75_arg2].callingCardSetRef = f75_arg3.setRef
 		CoD.perController[f75_arg2].isBlackMarketCallingCardNonSet = f75_arg3.nonSet == true
 		local f75_local0 = OpenOverlay(f75_arg4, "CallingCards_BlackMarket", f75_arg2, {
-			_storageClientBuffer = CoD.BreadcrumbUtility.GetStorageClientBufferForPlayer(f75_arg2, Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5]),
+			_storageClientBuffer = CoD.BreadcrumbUtility.GetStorageClientBufferForPlayer(f75_arg2, Enum[@"emodes"][@"mode_multiplayer"]),
 		})
 		f75_local0.callingCardShowcaseSlot = f75_arg4.callingCardShowcaseSlot
 		f75_local0.callingCardShowcaseIsBM = true
@@ -1819,9 +1819,9 @@ DataSources.CallingCardSetBlackMarket = DataSourceHelpers.ListSetup("CallingCard
 		table.insert(f74_local0, {
 			models = {
 				setInfo = "",
-				rarity = Enum[0x704F69F9B0BDCEC][0x8556B83CAD0D180],
+				rarity = Enum[@"lootraritytype"][@"loot_rarity_type_count"],
 				iconId = 0,
-				category = 0x0,
+				category = @"hash_0",
 				numOwned = 0,
 				nonSet = true,
 				skipDefaultTitle = true,
@@ -1847,7 +1847,7 @@ DataSources.CallingCardSetBlackMarket = DataSourceHelpers.ListSetup("CallingCard
 				setInfo = f74_local9.setInfoString,
 				rarity = f74_local9.rarity,
 				iconId = f74_local9.iconId,
-				category = 0x0,
+				category = @"hash_0",
 				numOwned = f74_local9.numOwned,
 				breadcrumb = f74_local6,
 			},
@@ -1878,7 +1878,7 @@ DataSourceHelpers.PerControllerDataSourceSetup(
 	true,
 	{
 		setModelValues = function(f77_arg0, f77_arg1)
-			local f77_local0 = Engine[0x4DF5CFBC1771947](f77_arg0)
+			local f77_local0 = Engine[@"getmodelforcontroller"](f77_arg0)
 			f77_local0 = f77_local0.CallingCardsBlackMarketMasterCard
 			if f77_local0 == nil then
 				f77_local0 = DataSources.CallingCardsBlackMarketMasterCard.getModel(f77_arg0)
@@ -1890,7 +1890,7 @@ DataSourceHelpers.PerControllerDataSourceSetup(
 				f77_local0.unlockInfo:set(f77_local1.lootInfo.unlockInfo)
 				f77_local0.rarity:set(f77_local1.rarity)
 				f77_local0.iconId:set(f77_local1.iconId)
-				f77_local0.category:set(0x5D0D4D46178F2C8)
+				f77_local0.category:set(@"menu/calling_card")
 				f77_local0.owned:set(f77_local1.lootInfo.owned)
 				f77_local0.available:set(f77_local1.lootInfo.available)
 				f77_local0.categoryTab:set("loot")
@@ -1915,7 +1915,7 @@ DataSources.CallingCardsBlackMarketCardSet = DataSourceHelpers.ListSetup("Callin
 					displayName = f78_local12.displayName,
 					rarity = f78_local12.rarity,
 					iconId = f78_local12.iconId,
-					category = 0x5D0D4D46178F2C8,
+					category = @"menu/calling_card",
 					setInfo = f78_local1.setInfoString,
 					unlockInfo = f78_local12.lootInfo.unlockInfo or "",
 				}
@@ -1961,26 +1961,26 @@ DataSources.CallingCardsTabs = ListHelper_SetupDataSource("CallingCardsTabs", fu
 			},
 		})
 	end
-	f79_local2(0x90CD5BF86D24185, "CoD.CallingCardsStickerbook", "general", true)
+	f79_local2(@"menu/general", "CoD.CallingCardsStickerbook", "general", true)
 	if IsOnlineGame() then
-		f79_local2(0x55D96CC762EABDD, "CoD.CallingCardsStickerbook", "mp", true)
+		f79_local2(@"menu/multiplayer", "CoD.CallingCardsStickerbook", "mp", true)
 		if not CoD.isPC or not CoD.PCKoreaUtility.ShowKorea15Plus() then
-			f79_local2(0xB06081B8B4567F2, "CoD.CallingCardsStickerbook", "zm", true)
+			f79_local2(@"menu/zombies", "CoD.CallingCardsStickerbook", "zm", true)
 		end
-		f79_local2(0xA2DD20750465431, "CoD.CallingCardsStickerbook", "wz", true)
-		f79_local2(0xE1E56BF62CCB5F2, "CoD.CallingCardsStickerbook", "masters", true)
+		f79_local2(@"menu/warzone", "CoD.CallingCardsStickerbook", "wz", true)
+		f79_local2(@"menu/masters", "CoD.CallingCardsStickerbook", "masters", true)
 		if CoD.BlackMarketUtility.BuildCallingCardSets(f79_arg0, f79_arg1.menu) then
-			f79_local2(0x29C903C6DF90D6F, "CoD.CallingCards_Set_BlackMarket", "loot", true)
+			f79_local2(@"menu/black_market", "CoD.CallingCards_Set_BlackMarket", "loot", true)
 		end
 	end
 	return f79_local0
 end, true)
 CoD.ChallengesUtility.GetEmblemBackgroundImageText = function(f81_arg0, f81_arg1)
-	local f81_local0, f81_local1 = Engine[0x9AE8FCCC10C32FA](f81_arg0, f81_arg1)
+	local f81_local0, f81_local1 = Engine[@"getchallengeunlockembleminfo"](f81_arg0, f81_arg1)
 	if f81_local0 < 0 then
 		return f81_local1
 	end
-	local f81_local2 = 0x5D0D4D46178F2C8
+	local f81_local2 = @"menu/calling_card"
 	local f81_local3 = CoD.backgroundsTable
 	local f81_local4 = {
 		15,
@@ -1989,7 +1989,7 @@ CoD.ChallengesUtility.GetEmblemBackgroundImageText = function(f81_arg0, f81_arg1
 	}
 	if f81_local1 then
 		f81_local3 = CoD.emblemIconsTable
-		f81_local2 = 0x6C028A55BD26B51
+		f81_local2 = @"menu/emblem"
 		f81_local4 = {
 			3,
 		}
@@ -2001,7 +2001,7 @@ CoD.ChallengesUtility.GetEmblemBackgroundImageText = function(f81_arg0, f81_arg1
 	end
 	local f81_local5 = 0x0
 	for f81_local9, f81_local10 in ipairs(f81_local4) do
-		f81_local5 = Engine[0xC6F8EC444864600](f81_local3, f81_local0, f81_local10)
+		f81_local5 = Engine[@"hash_4C6F8EC444864600"](f81_local3, f81_local0, f81_local10)
 		if f81_local5 ~= 0x0 then
 			break
 		end
@@ -2009,12 +2009,12 @@ CoD.ChallengesUtility.GetEmblemBackgroundImageText = function(f81_arg0, f81_arg1
 	return f81_local1, f81_local5, f81_local2
 end
 CoD.ChallengesUtility.IsSpecialistTransmissionChallenge = function(f82_arg0, f82_arg1, f82_arg2)
-	if f82_arg0 == Enum[0x30E44A363F3414C][0x28E0B9B3994DEC3] then
-		if LUI.startswith(Engine[0xC6F8EC444864600](CoD.getStatsMilestoneTable(f82_arg1 + 1), f82_arg2, Enum[0x5D8958B21A067C9][0x464E0DE2EEE17E0]), "transmission") then
+	if f82_arg0 == Enum[@"statsmilestonetypes_t"][@"milestone_specialist"] then
+		if LUI.startswith(Engine[@"hash_4C6F8EC444864600"](CoD.getStatsMilestoneTable(f82_arg1 + 1), f82_arg2, Enum[@"milestonetablecolumns_t"][@"milestone_column_statname"]), "transmission") then
 			return true
 		end
-	elseif f82_arg0 == Enum[0x30E44A363F3414C][0x5CB1517DC5C10C1] then
-		local f82_local0 = Engine[0xC6F8EC444864600](CoD.getStatsMilestoneTable(f82_arg1 + 1), f82_arg2, Enum[0x5D8958B21A067C9][0x464E0DE2EEE17E0])
+	elseif f82_arg0 == Enum[@"statsmilestonetypes_t"][@"milestone_global"] then
+		local f82_local0 = Engine[@"hash_4C6F8EC444864600"](CoD.getStatsMilestoneTable(f82_arg1 + 1), f82_arg2, Enum[@"milestonetablecolumns_t"][@"milestone_column_statname"])
 		if f82_local0 == "specialist_transmissions" or f82_local0 == "hero_transmissions" then
 			return true
 		end
@@ -2022,7 +2022,7 @@ CoD.ChallengesUtility.IsSpecialistTransmissionChallenge = function(f82_arg0, f82
 	return false
 end
 CoD.ChallengesUtility.IsTerribleKnifeChallenge = function(f83_arg0, f83_arg1, f83_arg2)
-	if f83_arg0 == Enum[0x30E44A363F3414C][0x4D0D341C55C3159] and Engine[0xC6F8EC444864600](CoD.getStatsMilestoneTable(f83_arg1 + 1), f83_arg2, Enum[0x5D8958B21A067C9][0xBD6B92975B2A6AB]) == "weapon_knife" then
+	if f83_arg0 == Enum[@"statsmilestonetypes_t"][@"milestone_group"] and Engine[@"hash_4C6F8EC444864600"](CoD.getStatsMilestoneTable(f83_arg1 + 1), f83_arg2, Enum[@"milestonetablecolumns_t"][@"milestone_column_include"]) == "weapon_knife" then
 		return true
 	else
 		return false
@@ -2043,7 +2043,7 @@ CoD.ChallengesUtility.IsHiddenPostShipChallenge = function(f84_arg0, f84_arg1, f
 		"_gold",
 		"_for_diamond",
 	}
-	local f84_local2 = Engine[0xC6F8EC444864600](CoD.getStatsMilestoneTable(f84_arg1 + 1), f84_arg2, Enum[0x5D8958B21A067C9][0xB5684905B6499D3])
+	local f84_local2 = Engine[@"hash_4C6F8EC444864600"](CoD.getStatsMilestoneTable(f84_arg1 + 1), f84_arg2, Enum[@"milestonetablecolumns_t"][@"milestone_column_challengestatname"])
 	for f84_local9, f84_local10 in ipairs(f84_local0) do
 		for f84_local6, f84_local7 in ipairs(f84_local1) do
 			if f84_local2 == f84_local10 .. f84_local7 then
@@ -2051,7 +2051,7 @@ CoD.ChallengesUtility.IsHiddenPostShipChallenge = function(f84_arg0, f84_arg1, f
 			end
 		end
 	end
-	f84_local3 = Engine[0xC6F8EC444864600](CoD.getStatsMilestoneTable(f84_arg1 + 1), f84_arg2, Enum[0x5D8958B21A067C9][0xBD6B92975B2A6AB])
+	f84_local3 = Engine[@"hash_4C6F8EC444864600"](CoD.getStatsMilestoneTable(f84_arg1 + 1), f84_arg2, Enum[@"milestonetablecolumns_t"][@"milestone_column_include"])
 	if f84_local2 == "weapons_mastery" and f84_local3 ~= "knife_loadout" then
 		return true
 	elseif f84_local2 == "secondary_mastery" and f84_local3 ~= "weapon_knife" then
@@ -2093,22 +2093,22 @@ CoD.ChallengesUtility.GetChallengeRewardDisplayTier = function(f85_arg0)
 	return f85_local0, f85_local1
 end
 CoD.ChallengesUtility.GetChallengeRewardIconAndCategoryName = function(f86_arg0)
-	local f86_local0 = Engine[0x3EAC408F958FF05]()
+	local f86_local0 = Engine[@"currentsessionmode"]()
 	if f86_arg0 == "darkops" then
 		local f86_local1 = nil
-		if f86_local0 == Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5] then
-			f86_local1 = 0x341BABF8FBCA1B8
-		elseif f86_local0 == Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A] then
-			f86_local1 = 0x52348B12CA70050
+		if f86_local0 == Enum[@"emodes"][@"mode_multiplayer"] then
+			f86_local1 = @"ui_icon_challenges_mpdarkops_large"
+		elseif f86_local0 == Enum[@"emodes"][@"mode_zombies"] then
+			f86_local1 = @"ui_icon_challenges_zmdarkops_large"
 		else
-			f86_local1 = 0xE50181493FE38FC
+			f86_local1 = @"ui_icon_challenges_wzdarkops_large"
 		end
-		return f86_local1, 0xD3B373F67B75C3D
+		return f86_local1, @"challenge/darkops"
 	end
 	local f86_local1 = nil
-	if f86_local0 == Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5] then
+	if f86_local0 == Enum[@"emodes"][@"mode_multiplayer"] then
 		f86_local1 = "mp"
-	elseif f86_local0 == Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A] then
+	elseif f86_local0 == Enum[@"emodes"][@"mode_zombies"] then
 		f86_local1 = "zm"
 	else
 		f86_local1 = "wz"
@@ -2116,74 +2116,74 @@ CoD.ChallengesUtility.GetChallengeRewardIconAndCategoryName = function(f86_arg0)
 	for f86_local8, f86_local9 in pairs(CoD.ChallengesUtility.ChallengeCategoryTable[f86_local1]) do
 		for f86_local5, f86_local6 in pairs(f86_local9) do
 			if f86_local6 == f86_arg0 then
-				return 0xCBC192FB58C7151 .. f86_local1 .. f86_local8 .. "_large", CoD.ChallengesUtility.ChallengeCategoryDisplayName[f86_local8]
+				return @"hash_1CBC192FB58C7151" .. f86_local1 .. f86_local8 .. "_large", CoD.ChallengesUtility.ChallengeCategoryDisplayName[f86_local8]
 			end
 		end
 	end
-	return 0x7615068F50B3D66, 0x2C79EA24AB1A2BA
+	return @"blacktransparent", @"hash_2C79EA24AB1A2BA"
 end
 CoD.ChallengesUtility.DiamondCamoImages = {
-	[0xECD2F25FD60F375] = 0x4E63DF28241BC3C,
-	[0x21D7E71414C058F] = 0xC85AC1398EE0D60,
-	[0x21CA371808F856E] = 0x536A313952C3C15,
-	[0xFE185BE04328801] = 0x505F93D1D6A8731,
-	[0xBB321718EF0E454] = 0xADC6BCF531C9714,
-	[0x418D65A32A8D17] = 0x4E04CA80A585E12,
-	[0x3A681C976E8D9F1] = 0x8EC8B55BAC8B49D,
-	[0x83455A968205009] = 0x80FA4DF9430A3F0,
-	[0x81D603CAEFE4CDB] = 0x80FA4DF9430A3F0,
-	[0xB0E53F588197120] = 0x660446A3E45D538,
-	[0xF8F3D92031F6F7] = 0x4E63DF28241BC3C,
-	[0x2032B32D0D142BE] = 0xC85AC1398EE0D60,
-	[0xF48082B20588E4E] = 0x8EC8B55BAC8B49D,
-	[0xB66427785660BAE] = 0x80FA4DF9430A3F0,
-	[0x40DF302FEF996C9] = 0x80FA4DF9430A3F0,
-	[0x768B46BA75651CE] = 0x80FA4DF9430A3F0,
-	[0x8228A2C81E439CA] = 0x80FA4DF9430A3F0,
-	[0xD7835133AA2DAA1] = 0xC85AC1398EE0D60,
-	[0xD24CEBED0A8EC7B] = 0xADC6BCF531C9714,
-	[0x9618269D014E1FE] = 0x505F93D1D6A8731,
-	[0xA44144DDCDC7A06] = 0x80FA4DF9430A3F0,
-	[0x82D4D1D3EC87299] = 0x80FA4DF9430A3F0,
-	[0xCB6925EBE3BC0D6] = 0x4E63DF28241BC3C,
-	[0xAB1184700CE0AA6] = 0x80FA4DF9430A3F0,
-	[0x7F46C2CAF1DE7FC] = 0x536A313952C3C15,
-	[0x7B5B30F9AA8786C] = 0x505F93D1D6A8731,
-	[0xB2CB0CDA291AE11] = 0x4E04CA80A585E12,
-	[0xC2D17D2F2C857E1] = 0x4E63DF28241BC3C,
-	[0xFFCEC935D4BCD61] = 0x80FA4DF9430A3F0,
-	[0x8A2B56939A972EE] = 0x80FA4DF9430A3F0,
-	[0xF9EB7548CC02363] = 0xADC6BCF531C9714,
-	[0x3D6E545E88450C5] = 0x505F93D1D6A8731,
-	[0xDD5E58C9EB28AF6] = 0x4E04CA80A585E12,
+	[@"weapon_assault"] = @"ui_icon_camonotification_diamond_ar",
+	[@"weapon_smg"] = @"ui_icon_camonotification_diamond_smg",
+	[@"weapon_lmg"] = @"ui_icon_camonotification_diamond_lmg",
+	[@"weapon_sniper"] = @"ui_icon_camonotification_diamond_snipers",
+	[@"weapon_cqb"] = @"ui_icon_camonotification_diamond_shotguns",
+	[@"weapon_tactical"] = @"ui_icon_camonotification_diamond_tactical",
+	[@"weapon_pistol"] = @"ui_icon_camonotification_diamond_pistols",
+	[@"knife_loadout"] = @"ui_icon_camonotification_diamond_knife",
+	[@"bowie_knife"] = @"ui_icon_camonotification_diamond_knife",
+	[@"launcher_standard_t8"] = @"ui_icon_camonotification_diamond_launchers",
+	[@"ar_standard_t8"] = @"ui_icon_camonotification_diamond_ar",
+	[@"smg_fastburst_t8"] = @"ui_icon_camonotification_diamond_smg",
+	[@"pistol_fullauto_t8"] = @"ui_icon_camonotification_diamond_pistols",
+	[@"melee_secretsanta_t8"] = @"ui_icon_camonotification_diamond_knife",
+	[@"melee_slaybell_t8"] = @"ui_icon_camonotification_diamond_knife",
+	[@"melee_demohammer_t8"] = @"ui_icon_camonotification_diamond_knife",
+	[@"melee_coinbag_t8_mp"] = @"ui_icon_camonotification_diamond_knife",
+	[@"smg_folding_t8"] = @"ui_icon_camonotification_diamond_smg",
+	[@"shotgun_fullauto_t8_mp"] = @"ui_icon_camonotification_diamond_shotguns",
+	[@"sniper_mini14_t8"] = @"ui_icon_camonotification_diamond_snipers",
+	[@"melee_cutlass_t8"] = @"ui_icon_camonotification_diamond_knife",
+	[@"melee_club_t8"] = @"ui_icon_camonotification_diamond_knife",
+	[@"ar_peacekeeper_t8"] = @"ui_icon_camonotification_diamond_ar",
+	[@"special_ballisticknife_t8_dw"] = @"ui_icon_camonotification_diamond_knife",
+	[@"lmg_stealth_t8"] = @"ui_icon_camonotification_diamond_lmg",
+	[@"sniper_locus_t8"] = @"ui_icon_camonotification_diamond_snipers",
+	[@"tr_flechette_t8"] = @"ui_icon_camonotification_diamond_tactical",
+	[@"ar_galil_t8"] = @"ui_icon_camonotification_diamond_ar",
+	[@"melee_zombiearm_t8"] = @"ui_icon_camonotification_diamond_knife",
+	[@"special_crossbow_t8"] = @"ui_icon_camonotification_diamond_knife",
+	[@"shotgun_precision_t8"] = @"ui_icon_camonotification_diamond_shotguns",
+	[@"sniper_damagesemi_t8"] = @"ui_icon_camonotification_diamond_snipers",
+	[@"tr_damageburst_t8"] = @"ui_icon_camonotification_diamond_tactical",
 }
 CoD.ChallengesUtility.ZombiesTrialsExpToMedalImages = {
 	[0] = {
-		[1000] = 0x2638A7737E9BD02,
-		[2000] = 0xD56A5FDBB9721FB,
-		[3000] = 0x7775EF99258EEEC,
+		[1000] = @"uie_trial_medal_bronze",
+		[2000] = @"uie_trial_medal_silver",
+		[3000] = @"uie_trial_medal_gold",
 	},
 	[1] = {
 		[1000] = 0x772C55AAA62BD0,
-		[2000] = 0xFD6B3DF8A0BA964,
-		[3000] = 0x8F9261A2CAA7739,
+		[2000] = @"hash_FD6B3DF8A0BA964",
+		[3000] = @"hash_18F9261A2CAA7739",
 	},
 }
 CoD.ChallengesUtility.GetChallengeRewardInfo = function(f87_arg0, f87_arg1, f87_arg2, f87_arg3, f87_arg4, f87_arg5)
 	local f87_local0 = CoD.getStatsMilestoneTable(f87_arg1 + 1)
-	local f87_local1 = Engine[0xC6F8EC444864600](f87_local0, f87_arg2, Enum[0x5D8958B21A067C9][0x3EC8154AE4BACB4])
-	local f87_local2 = tonumber(Engine[0xC6F8EC444864600](f87_local0, f87_arg2, Enum[0x5D8958B21A067C9][0x7006A487838ED18]))
-	local f87_local3 = tonumber(Engine[0xC6F8EC444864600](f87_local0, f87_arg2 + 1, Enum[0x5D8958B21A067C9][0x7006A487838ED18]))
-	local f87_local4 = tonumber(Engine[0xC6F8EC444864600](f87_local0, f87_arg2, Enum[0x5D8958B21A067C9][0x35632689A9F7BC5])) or 0
-	local f87_local5 = Engine[0xC6F8EC444864600](f87_local0, f87_arg2, Enum[0x5D8958B21A067C9][0x457367C3C67B2D2])
-	local f87_local6 = Engine[0xC6F8EC444864600](f87_local0, f87_arg2, Enum[0x5D8958B21A067C9][0x640F4EB17312ABE])
-	local f87_local7 = Engine[0xC6F8EC444864600](f87_local0, f87_arg2, Enum[0x5D8958B21A067C9][0xAC1F1707CCC317E])
-	local f87_local8 = Engine[0xC6F8EC444864600](f87_local0, f87_arg2, Enum[0x5D8958B21A067C9][0xB5684905B6499D3])
+	local f87_local1 = Engine[@"hash_4C6F8EC444864600"](f87_local0, f87_arg2, Enum[@"milestonetablecolumns_t"][@"milestone_column_string"])
+	local f87_local2 = tonumber(Engine[@"hash_4C6F8EC444864600"](f87_local0, f87_arg2, Enum[@"milestonetablecolumns_t"][@"milestone_column_tierid"]))
+	local f87_local3 = tonumber(Engine[@"hash_4C6F8EC444864600"](f87_local0, f87_arg2 + 1, Enum[@"milestonetablecolumns_t"][@"milestone_column_tierid"]))
+	local f87_local4 = tonumber(Engine[@"hash_4C6F8EC444864600"](f87_local0, f87_arg2, Enum[@"milestonetablecolumns_t"][@"milestone_column_targetvalue"])) or 0
+	local f87_local5 = Engine[@"hash_4C6F8EC444864600"](f87_local0, f87_arg2, Enum[@"milestonetablecolumns_t"][@"milestone_column_unlockitem"])
+	local f87_local6 = Engine[@"hash_4C6F8EC444864600"](f87_local0, f87_arg2, Enum[@"milestonetablecolumns_t"][@"milestone_column_unlockimage"])
+	local f87_local7 = Engine[@"hash_4C6F8EC444864600"](f87_local0, f87_arg2, Enum[@"milestonetablecolumns_t"][@"milestone_column_unlockheroitem"])
+	local f87_local8 = Engine[@"hash_4C6F8EC444864600"](f87_local0, f87_arg2, Enum[@"milestonetablecolumns_t"][@"milestone_column_challengestatname"])
 	local f87_local9 = false
-	local f87_local10 = Engine[0xC6F8EC444864600](f87_local0, f87_arg2, Enum[0x5D8958B21A067C9][0xBD9527E82A2DB55])
-	local f87_local11 = tonumber(Engine[0xC6F8EC444864600](f87_local0, f87_arg2, Enum[0x5D8958B21A067C9][0xFD52098C435DC2A]))
-	local f87_local12 = tonumber(Engine[0xC6F8EC444864600](f87_local0, f87_arg2, Enum[0x5D8958B21A067C9][0xADDE5074A3A02E1]))
-	local f87_local13 = Engine[0x3EAC408F958FF05]()
+	local f87_local10 = Engine[@"hash_4C6F8EC444864600"](f87_local0, f87_arg2, Enum[@"milestonetablecolumns_t"][@"milestone_column_category"])
+	local f87_local11 = tonumber(Engine[@"hash_4C6F8EC444864600"](f87_local0, f87_arg2, Enum[@"milestonetablecolumns_t"][@"milestone_column_xpearned"]))
+	local f87_local12 = tonumber(Engine[@"hash_4C6F8EC444864600"](f87_local0, f87_arg2, Enum[@"milestonetablecolumns_t"][@"milestone_column_vialsearned"]))
+	local f87_local13 = Engine[@"currentsessionmode"]()
 	if f87_local2 and f87_local2 > 0 then
 		f87_local9 = true
 	elseif f87_local3 and f87_local3 == 1 then
@@ -2203,158 +2203,158 @@ CoD.ChallengesUtility.GetChallengeRewardInfo = function(f87_arg0, f87_arg1, f87_
 	if f87_local9 == true then
 		f87_local16 = CoD.ChallengesUtility.TierString[f87_local2]
 		if f87_local16 then
-			f87_local17 = Engine[0xED84C33EC5F01EA](f87_local16)
+			f87_local17 = Engine[@"localize"](f87_local16)
 		end
 		local f87_local18 = f87_arg2 + 1
 		local f87_local19 = f87_local2
-		local f87_local20 = tonumber(Engine[0xC6F8EC444864600](f87_local0, f87_local18, Enum[0x5D8958B21A067C9][0x7006A487838ED18])) or -1
+		local f87_local20 = tonumber(Engine[@"hash_4C6F8EC444864600"](f87_local0, f87_local18, Enum[@"milestonetablecolumns_t"][@"milestone_column_tierid"])) or -1
 		while f87_local19 < f87_local20 do
 			f87_local19 = f87_local20
 			f87_local18 = f87_local18 + 1
-			f87_local20 = tonumber(Engine[0xC6F8EC444864600](f87_local0, f87_local18, Enum[0x5D8958B21A067C9][0x7006A487838ED18])) or -1
+			f87_local20 = tonumber(Engine[@"hash_4C6F8EC444864600"](f87_local0, f87_local18, Enum[@"milestonetablecolumns_t"][@"milestone_column_tierid"])) or -1
 		end
 		f87_local15 = f87_local19
 	end
 	local f87_local18 = nil
 	local f87_local19 = "MENU/NEW"
-	local f87_local20 = 0x7615068F50B3D66
-	local f87_local21 = 0x2C79EA24AB1A2BA
+	local f87_local20 = @"blacktransparent"
+	local f87_local21 = @"hash_2C79EA24AB1A2BA"
 	local f87_local22 = ""
 	local f87_local23 = ""
 	f87_local20, f87_local21 = CoD.ChallengesUtility.GetChallengeRewardIconAndCategoryName(f87_local10)
 	local f87_local24 = 0x0
 	local f87_local25 = nil
-	if f87_arg3 == Enum[0x30E44A363F3414C][0x5CB1517DC5C10C1] then
-		f87_local18 = Engine[0xED84C33EC5F01EA](f87_local14, f87_local4, "", f87_local17)
-		f87_local19 = Engine[0xED84C33EC5F01EA](f87_local1 .. "_DESC", f87_local4, "", f87_local17)
-	elseif f87_arg3 == Enum[0x30E44A363F3414C][0x398A3DF84F4A233] then
-		f87_local18 = Engine[0xED84C33EC5F01EA](f87_local1)
+	if f87_arg3 == Enum[@"statsmilestonetypes_t"][@"milestone_global"] then
+		f87_local18 = Engine[@"localize"](f87_local14, f87_local4, "", f87_local17)
+		f87_local19 = Engine[@"localize"](f87_local1 .. "_DESC", f87_local4, "", f87_local17)
+	elseif f87_arg3 == Enum[@"statsmilestonetypes_t"][@"milestone_daily"] then
+		f87_local18 = Engine[@"localize"](f87_local1)
 		f87_local19 = "MENU/DAILY_CHALLENGE_COMPLETED"
-	elseif f87_arg3 == Enum[0x30E44A363F3414C][0x4D0D341C55C3159] then
-		local f87_local26 = Engine[0xF9F1239CFD921FE](CoD.ChallengesUtility.GetChallengeTypeString(Engine[0xCF93F3431B9ACB2](f87_arg4)))
-		f87_local18 = Engine[0xED84C33EC5F01EA](f87_local1, f87_local4, f87_local26, f87_local17)
-		f87_local19 = Engine[0xED84C33EC5F01EA](f87_local1 .. "_DESC", f87_local4, f87_local26, f87_local17)
-	elseif f87_arg3 == Enum[0x30E44A363F3414C][0xA3311F9A3A184EF] then
-		local f87_local26 = Engine[0x6F8027A8BC75673]()
+	elseif f87_arg3 == Enum[@"statsmilestonetypes_t"][@"milestone_group"] then
+		local f87_local26 = Engine[@"hash_4F9F1239CFD921FE"](CoD.ChallengesUtility.GetChallengeTypeString(Engine[@"getitemgroupbyindex"](f87_arg4)))
+		f87_local18 = Engine[@"localize"](f87_local1, f87_local4, f87_local26, f87_local17)
+		f87_local19 = Engine[@"localize"](f87_local1 .. "_DESC", f87_local4, f87_local26, f87_local17)
+	elseif f87_arg3 == Enum[@"statsmilestonetypes_t"][@"milestone_gamemode"] then
+		local f87_local26 = Engine[@"hash_36F8027A8BC75673"]()
 		if (not f87_local26 or f87_local26 == "") and CoD.isFrontend then
 			f87_local26 = CoD.AARUtility.GetCurrentGametype(f87_arg0)
 		end
 		if f87_local26 then
-			local f87_local27 = Engine[0xEA74FA7EE46E195](f87_local26)
-			local f87_local28 = Engine[0xF9F1239CFD921FE]
+			local f87_local27 = Engine[@"getgametypeinfo"](f87_local26)
+			local f87_local28 = Engine[@"hash_4F9F1239CFD921FE"]
 			local f87_local29
 			if f87_local27 then
-				f87_local29 = f87_local27[0x62BC418020E30AF]
+				f87_local29 = f87_local27[@"challengetypestring"]
 				if not f87_local29 then
 				else
 					f87_local28 = f87_local28(f87_local29)
-					f87_local18 = Engine[0xED84C33EC5F01EA](f87_local14, f87_local4, f87_local28, f87_local17)
-					f87_local19 = Engine[0xED84C33EC5F01EA](f87_local1 .. "_DESC", f87_local4, f87_local28, f87_local17)
+					f87_local18 = Engine[@"localize"](f87_local14, f87_local4, f87_local28, f87_local17)
+					f87_local19 = Engine[@"localize"](f87_local1 .. "_DESC", f87_local4, f87_local28, f87_local17)
 				end
 			end
 			f87_local29 = 0x0
 		end
-	elseif f87_arg3 == Enum[0x30E44A363F3414C][0x26D4317EE22AF96] then
-		f87_local24 = Engine[0x6B7AC889104DED3](f87_arg4)
-		f87_local18 = Engine[0xED84C33EC5F01EA](f87_local14, f87_local4, f87_local24, f87_local17)
-		f87_local23 = Engine[0xED84C33EC5F01EA](f87_local1 .. "_DESC", f87_local4, f87_local24)
+	elseif f87_arg3 == Enum[@"statsmilestonetypes_t"][@"milestone_weapon"] then
+		f87_local24 = Engine[@"getitemname"](f87_arg4)
+		f87_local18 = Engine[@"localize"](f87_local14, f87_local4, f87_local24, f87_local17)
+		f87_local23 = Engine[@"localize"](f87_local1 .. "_DESC", f87_local4, f87_local24)
 		if LUI.startswith(f87_local10, "camo") then
-			f87_local19 = Engine[0xF9F1239CFD921FE](f87_local24)
+			f87_local19 = Engine[@"hash_4F9F1239CFD921FE"](f87_local24)
 		else
 			f87_local19 = f87_local23
 		end
-	elseif f87_arg3 == Enum[0x30E44A363F3414C][0x86B082C51FC2370] then
-		local f87_local26 = Engine[0x31B335F9A01DF74](f87_arg4)
-		f87_local18 = Engine[0xED84C33EC5F01EA](f87_local14, f87_local4, f87_local26, f87_local17)
-		f87_local19 = Engine[0xED84C33EC5F01EA](f87_local1 .. "_DESC", f87_local4, f87_local26, f87_local17)
+	elseif f87_arg3 == Enum[@"statsmilestonetypes_t"][@"milestone_attachments"] then
+		local f87_local26 = Engine[@"getattachmentnamebyindex"](f87_arg4)
+		f87_local18 = Engine[@"localize"](f87_local14, f87_local4, f87_local26, f87_local17)
+		f87_local19 = Engine[@"localize"](f87_local1 .. "_DESC", f87_local4, f87_local26, f87_local17)
 		if f87_local5 and f87_local5 ~= 0x0 then
-			local f87_local27 = Engine[0xF04360CE55D41A](f87_arg4)
-			f87_local20 = 0x56868FEED8DA814 .. f87_local27
+			local f87_local27 = Engine[@"getattachmentrefbyindex"](f87_arg4)
+			f87_local20 = @"hash_256868FEED8DA814" .. f87_local27
 			local f87_local28 = string.sub(f87_local10, string.len("reticle_") + 1)
 			local f87_local29 = f87_local28 / CoD.WeaponOptionsUtility.maxReticles
 			if f87_local27 then
 				f87_local25 = {
-					displayString = Engine[0xF9F1239CFD921FE](CoD.BaseUtility.GetLocStringListEntry(0xCDB9A1280306634 .. f87_local27, f87_local29 + 1)),
-					image = Engine[0xC53F8D38DF9042B](f87_local27 .. "_" .. f87_local28),
+					displayString = Engine[@"hash_4F9F1239CFD921FE"](CoD.BaseUtility.GetLocStringListEntry(@"hash_2CDB9A1280306634" .. f87_local27, f87_local29 + 1)),
+					image = Engine[@"converttoxhash"](f87_local27 .. "_" .. f87_local28),
 					attachmentName = f87_local26,
 				}
 			end
 		end
-	elseif f87_arg3 == Enum[0x30E44A363F3414C][0x28E0B9B3994DEC3] then
+	elseif f87_arg3 == Enum[@"statsmilestonetypes_t"][@"milestone_specialist"] then
 		local f87_local26 = CoD.PlayerRoleUtility.GetCachedHeroInfo(f87_local13, f87_arg5)
-		f87_local18 = Engine[0xED84C33EC5F01EA](f87_local14, "", f87_local26.displayName)
+		f87_local18 = Engine[@"localize"](f87_local14, "", f87_local26.displayName)
 	end
 	local f87_local26 = nil
 	if LUI.startswith(f87_local10, "camo") then
-		local f87_local27 = Engine[0x2DCF0973239E909](CoD.attachmentTable, Enum[0xAAB93F26A00CE2][0xF65E25C47700E9F], Enum[0xAAB93F26A00CE2][0x5AE79C9066CF279], f87_local10)
-		f87_local18 = Engine[0xED84C33EC5F01EA](f87_local14, f87_local27)
-		if f87_arg3 == Enum[0x30E44A363F3414C][0x5CB1517DC5C10C1] then
-			if f87_local5 == 0x229B17B6185BE37 then
-				f87_local20 = 0x9583723AEC6E7BB
+		local f87_local27 = Engine[@"tablelookup"](CoD.attachmentTable, Enum[@"attachmenttablecolumn_e"][@"attachmenttable_column_name"], Enum[@"attachmenttablecolumn_e"][@"attachmenttable_column_reference"], f87_local10)
+		f87_local18 = Engine[@"localize"](f87_local14, f87_local27)
+		if f87_arg3 == Enum[@"statsmilestonetypes_t"][@"milestone_global"] then
+			if f87_local5 == @"camo_darkmatter" then
+				f87_local20 = @"ui_icon_camonotification_darkmatter"
 			else
-				local f87_local28 = Engine[0xC6F8EC444864600](f87_local0, f87_arg2, Enum[0x5D8958B21A067C9][0xBD6B92975B2A6AB])
+				local f87_local28 = Engine[@"hash_4C6F8EC444864600"](f87_local0, f87_arg2, Enum[@"milestonetablecolumns_t"][@"milestone_column_include"])
 				if not f87_local28 then
-					f87_local20 = 0x7615068F50B3D66
+					f87_local20 = @"blacktransparent"
 				else
-					f87_local20 = CoD.ChallengesUtility.DiamondCamoImages[f87_local28[1]] or 0x7615068F50B3D66
+					f87_local20 = CoD.ChallengesUtility.DiamondCamoImages[f87_local28[1]] or @"blacktransparent"
 				end
 			end
-		elseif f87_arg3 == Enum[0x30E44A363F3414C][0x4D0D341C55C3159] then
-			if f87_local5 == 0xDCAF4647CD4E672 then
-				local f87_local28 = Engine[0xC6F8EC444864600](f87_local0, f87_arg2, Enum[0x5D8958B21A067C9][0xBD6B92975B2A6AB])
+		elseif f87_arg3 == Enum[@"statsmilestonetypes_t"][@"milestone_group"] then
+			if f87_local5 == @"camo_diamond" then
+				local f87_local28 = Engine[@"hash_4C6F8EC444864600"](f87_local0, f87_arg2, Enum[@"milestonetablecolumns_t"][@"milestone_column_include"])
 				if not f87_local28 then
-					f87_local20 = 0x7615068F50B3D66
+					f87_local20 = @"blacktransparent"
 				else
-					f87_local20 = CoD.ChallengesUtility.DiamondCamoImages[f87_local28[1]] or 0x7615068F50B3D66
+					f87_local20 = CoD.ChallengesUtility.DiamondCamoImages[f87_local28[1]] or @"blacktransparent"
 				end
 			end
 		else
 			local f87_local28 = CoD.CACUtility.GetUnlockableItemInfo(f87_arg4, f87_local13)
 			if f87_local28 then
-				if f87_local13 ~= Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A] then
+				if f87_local13 ~= Enum[@"emodes"][@"mode_zombies"] then
 					f87_local20 = f87_local28.nameHash .. "_" .. f87_local10 .. "_icon"
 				else
-					f87_local20 = Engine[0x8518E07C1C5BC6D](f87_arg4)
+					f87_local20 = Engine[@"getitemimage"](f87_arg4)
 				end
 			else
-				f87_local20 = 0x7615068F50B3D66
+				f87_local20 = @"blacktransparent"
 			end
 		end
-		if f87_local13 == Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A] and not IsBooleanDvarSet(0x30FAB929626F598) and (LUI.startswith(f87_local10, "camo_darkmatter") or f87_local10 == "camo_diamond" or f87_local10 == "camo_gold") then
+		if f87_local13 == Enum[@"emodes"][@"mode_zombies"] and not IsBooleanDvarSet(@"hash_730FAB929626F598") and (LUI.startswith(f87_local10, "camo_darkmatter") or f87_local10 == "camo_diamond" or f87_local10 == "camo_gold") then
 			return nil
 		end
 		f87_local26 = {
 			displayString = f87_local18,
 			weaponName = f87_local24,
-			image = Engine[0x2DCF0973239E909](CoD.attachmentTable, Enum[0xAAB93F26A00CE2][0x9CAE84BECEB0511], Enum[0xAAB93F26A00CE2][0x5AE79C9066CF279], f87_local10),
+			image = Engine[@"tablelookup"](CoD.attachmentTable, Enum[@"attachmenttablecolumn_e"][@"attachmenttable_column_image"], Enum[@"attachmenttablecolumn_e"][@"attachmenttable_column_reference"], f87_local10),
 			camoRef = f87_local10,
-			aarDisplayString = Engine[0xED84C33EC5F01EA](f87_local27),
+			aarDisplayString = Engine[@"localize"](f87_local27),
 			aarDescription = f87_local23,
 		}
 	elseif f87_local10 == "activecamounveil" then
-		if Engine[0x2DCF0973239E909](CoD.attachmentTable, Enum[0xAAB93F26A00CE2][0x9A2FFE632B9ED93], Enum[0xAAB93F26A00CE2][0x419575E672F6FA2], f87_local5) then
-			local f87_local28 = Engine[0x2DCF0973239E909](CoD.attachmentTable, Enum[0xAAB93F26A00CE2][0xF65E25C47700E9F], Enum[0xAAB93F26A00CE2][0x419575E672F6FA2], f87_local5)
-			f87_local20 = 0x18CDADFEDA5A37F .. Engine[0x2DCF0973239E909](CoD.attachmentTable, Enum[0xAAB93F26A00CE2][0x5AE79C9066CF279], Enum[0xAAB93F26A00CE2][0x419575E672F6FA2], f87_local5) .. "_icon"
+		if Engine[@"tablelookup"](CoD.attachmentTable, Enum[@"attachmenttablecolumn_e"][@"hash_9A2FFE632B9ED93"], Enum[@"attachmenttablecolumn_e"][@"hash_2419575E672F6FA2"], f87_local5) then
+			local f87_local28 = Engine[@"tablelookup"](CoD.attachmentTable, Enum[@"attachmenttablecolumn_e"][@"attachmenttable_column_name"], Enum[@"attachmenttablecolumn_e"][@"hash_2419575E672F6FA2"], f87_local5)
+			f87_local20 = @"hash_18CDADFEDA5A37F" .. Engine[@"tablelookup"](CoD.attachmentTable, Enum[@"attachmenttablecolumn_e"][@"attachmenttable_column_reference"], Enum[@"attachmenttablecolumn_e"][@"hash_2419575E672F6FA2"], f87_local5) .. "_icon"
 			f87_local26 = {
 				displayString = f87_local28,
-				weaponName = Engine[0x6B7AC889104DED3](f87_arg4, Enum[0x6EB546760F890D2][0x569E84652131CD7]),
-				image = Engine[0x2DCF0973239E909](CoD.attachmentTable, Enum[0xAAB93F26A00CE2][0x9CAE84BECEB0511], Enum[0xAAB93F26A00CE2][0x419575E672F6FA2], f87_local5),
+				weaponName = Engine[@"getitemname"](f87_arg4, Enum[@"statindexoffset"][@"hash_6569E84652131CD7"]),
+				image = Engine[@"tablelookup"](CoD.attachmentTable, Enum[@"attachmenttablecolumn_e"][@"attachmenttable_column_image"], Enum[@"attachmenttablecolumn_e"][@"hash_2419575E672F6FA2"], f87_local5),
 				camoRef = nil,
 				useRotatedIcon = true,
 				category = f87_local10,
-				aarDisplayString = Engine[0xED84C33EC5F01EA](f87_local28),
+				aarDisplayString = Engine[@"localize"](f87_local28),
 			}
 		end
 	elseif f87_local10 == "zm" then
-		local f87_local27 = Engine[0xDBC2AD5002B261B](0x2D73FC2D365631E)
+		local f87_local27 = Engine[@"getgametypesetting"](@"zmtrialsvariant")
 		if CoD.ChallengesUtility.ZombiesTrialsExpToMedalImages[f87_local27] then
 			local f87_local30 = CoD.ChallengesUtility.ZombiesTrialsExpToMedalImages[f87_local27][f87_local11]
 		end
-		f87_local20 = f87_local30 or 0x7615068F50B3D66
+		f87_local20 = f87_local30 or @"blacktransparent"
 	end
 	local f87_local27 = function(f88_arg0, f88_arg1)
 		local f88_local0
-		if Engine[0xC6F8EC444864600](f88_arg0, f88_arg1, Enum[0x5D8958B21A067C9][0x9FB3E9EFC8253E2]) ~= "1" and Engine[0xC6F8EC444864600](f88_arg0, f88_arg1, Enum[0x5D8958B21A067C9][0x6449F22C0B59F0D]) ~= "1" then
+		if Engine[@"hash_4C6F8EC444864600"](f88_arg0, f88_arg1, Enum[@"milestonetablecolumns_t"][@"milestone_column_ismastery"]) ~= "1" and Engine[@"hash_4C6F8EC444864600"](f88_arg0, f88_arg1, Enum[@"milestonetablecolumns_t"][@"milestone_column_isexpert"]) ~= "1" then
 			f88_local0 = false
 		else
 			f88_local0 = true
@@ -2363,7 +2363,7 @@ CoD.ChallengesUtility.GetChallengeRewardInfo = function(f87_arg0, f87_arg1, f87_
 	end
 	local f87_local28 = nil
 	if f87_arg4 then
-		local f87_local29, f87_local31, f87_local32 = CoD.ChallengesUtility.GetEmblemBackgroundImageText(tonumber(Engine[0xC6F8EC444864600](f87_local0, f87_arg2, Enum[0x5D8958B21A067C9][0xD42865D2A0A942F])), f87_arg4)
+		local f87_local29, f87_local31, f87_local32 = CoD.ChallengesUtility.GetEmblemBackgroundImageText(tonumber(Engine[@"hash_4C6F8EC444864600"](f87_local0, f87_arg2, Enum[@"milestonetablecolumns_t"][@"milestone_column_index"])), f87_arg4)
 		local f87_local33
 		if f87_local29 then
 			f87_local33 = 0x0
@@ -2371,7 +2371,7 @@ CoD.ChallengesUtility.GetChallengeRewardInfo = function(f87_arg0, f87_arg1, f87_
 			else
 				local f87_local34, f87_local35, f87_local36 = nil
 				if f87_local9 and f87_local2 < f87_local15 then
-					f87_local34, f87_local35, f87_local36 = CoD.ChallengesUtility.GetEmblemBackgroundImageText(tonumber(Engine[0xC6F8EC444864600](f87_local0, f87_arg2 + f87_local15 - f87_local2, Enum[0x5D8958B21A067C9][0xD42865D2A0A942F])), f87_arg4)
+					f87_local34, f87_local35, f87_local36 = CoD.ChallengesUtility.GetEmblemBackgroundImageText(tonumber(Engine[@"hash_4C6F8EC444864600"](f87_local0, f87_arg2 + f87_local15 - f87_local2, Enum[@"milestonetablecolumns_t"][@"milestone_column_index"])), f87_arg4)
 				end
 				if not f87_local31 then
 					f87_local31 = f87_local35
@@ -2381,7 +2381,7 @@ CoD.ChallengesUtility.GetChallengeRewardInfo = function(f87_arg0, f87_arg1, f87_
 				end
 				if f87_local31 or f87_local35 then
 					f87_local28 = {
-						displayString = f87_local32 and Engine[0xED84C33EC5F01EA](f87_local32),
+						displayString = f87_local32 and Engine[@"localize"](f87_local32),
 						image = f87_local31,
 						maxTierImage = f87_local35,
 						rewardSize = f87_local33,
@@ -2390,26 +2390,26 @@ CoD.ChallengesUtility.GetChallengeRewardInfo = function(f87_arg0, f87_arg1, f87_
 				end
 			end
 		end
-		f87_local33 = 0x5A59957285A94B1
+		f87_local33 = @"callingcard"
 	end
 	local f87_local29 = nil
 	if f87_local11 and f87_local11 > 0 then
 		local f87_local31 = nil
 		if CoD.isWarzone then
-			f87_local31 = Engine[0xF9F1239CFD921FE](0xBCE3D9B07DE63B7, f87_local11)
+			f87_local31 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_1BCE3D9B07DE63B7", f87_local11)
 		else
-			f87_local31 = Engine[0xF9F1239CFD921FE](0xD6137AA2004DB90, f87_local11)
+			f87_local31 = Engine[@"hash_4F9F1239CFD921FE"](@"rank/xp", f87_local11)
 		end
 		f87_local29 = {
 			displayString = f87_local31,
-			image = 0x620E589747ADBAB,
+			image = @"t7_hud_mp_notifications_xp_blue",
 		}
 	end
 	local f87_local31 = nil
 	if f87_local12 and f87_local12 > 0 then
 		f87_local31 = {
-			displayString = Engine[0xF9F1239CFD921FE](0x93971DCC7C92F86, f87_local12),
-			image = 0x84B4BDBA28C85D,
+			displayString = Engine[@"hash_4F9F1239CFD921FE"](@"hash_693971DCC7C92F86", f87_local12),
+			image = @"t7_hud_zm_vial_256",
 		}
 	end
 	return {
@@ -2439,7 +2439,7 @@ CoD.ChallengesUtility.IsCallingCardEquipped = function(f89_arg0)
 			f89_local0 = f89_local0.iconID:get()
 		end
 	end
-	local f89_local1 = Engine[0x6007CA97055D6DC]()
+	local f89_local1 = Engine[@"getemblembackgroundid"]()
 	return f89_local1 and f89_local0 and f89_local0 == f89_local1
 end
 CoD.ChallengesUtility.UpdateCallingCard = function(f90_arg0, f90_arg1, f90_arg2, f90_arg3, f90_arg4)
@@ -2458,14 +2458,14 @@ CoD.ChallengesUtility.UpdateCallingCard = function(f90_arg0, f90_arg1, f90_arg2,
 	end
 	for f90_local1 = 1, #f90_local0, 1 do
 		local f90_local4 = f90_local0[f90_local1]
-		local f90_local5 = Engine[0x40E824FE270E174](f90_arg4, f90_local4)
+		local f90_local5 = Engine[@"getmodel"](f90_arg4, f90_local4)
 		if f90_local5 then
 			f90_arg2._backingSubscription = f90_arg2:subscribeToModel(f90_local5, function(model)
-				local f91_local0 = Engine[0x614D394F6F9A18D](model)
+				local f91_local0 = Engine[@"getmodelvalue"](model)
 				if f90_local4 == "identityBadge.xuid" then
 					local f91_local1 = f91_local0
 					f91_local0 = CoD.FreeCursorUtility.XUIDToEmblemBackgroundId(f91_local0)
-					if Engine[0x41DC2CF4139D7](f91_local1) then
+					if Engine[@"islocalclient"](f91_local1) then
 						f91_local0 = ValidateEmblemBackground(f90_arg1, f91_local0)
 					end
 				elseif f90_local4 == "xuid" then
@@ -2487,7 +2487,7 @@ end
 CoD.ChallengesUtility.SetupIsCategoryLocked = function(f92_arg0, f92_arg1, f92_arg2, f92_arg3)
 	local f92_local0 = f92_arg3.challengeRow
 	if f92_local0 ~= nil then
-		local f92_local1 = Engine[0xA6C26EBACD7322D](f92_arg0, CoD.STATS_LOCATION_NORMAL, f92_arg1)
+		local f92_local1 = Engine[@"getplayerstats"](f92_arg0, CoD.STATS_LOCATION_NORMAL, f92_arg1)
 		local f92_local2 = 0
 		local f92_local3 = 0
 		if f92_local1 then
@@ -2495,14 +2495,14 @@ CoD.ChallengesUtility.SetupIsCategoryLocked = function(f92_arg0, f92_arg1, f92_a
 			f92_local3 = f92_local1.PlayerStatsList.PLEVEL.StatValue:get()
 		end
 		local f92_local4 = "gamedata/stats/" .. string.upper(f92_arg2) .. "/statsmilestones" .. f92_arg3.tableNum + 1 .. ".csv"
-		local f92_local5 = tonumber(Engine[0xC6F8EC444864600](f92_local4, f92_local0, CoD.ChallengesUtility.UnlockRankCol))
-		local f92_local6 = tonumber(Engine[0xC6F8EC444864600](f92_local4, f92_local0, CoD.ChallengesUtility.UnlockPLevelCol))
+		local f92_local5 = tonumber(Engine[@"hash_4C6F8EC444864600"](f92_local4, f92_local0, CoD.ChallengesUtility.UnlockRankCol))
+		local f92_local6 = tonumber(Engine[@"hash_4C6F8EC444864600"](f92_local4, f92_local0, CoD.ChallengesUtility.UnlockPLevelCol))
 		if f92_local3 < f92_local6 then
-			return true, Engine[0xF9F1239CFD921FE](0x7FFD6D29AEB436E, f92_local6), nil, f92_local6
+			return true, Engine[@"hash_4F9F1239CFD921FE"](@"hash_57FFD6D29AEB436E", f92_local6), nil, f92_local6
 		elseif f92_local3 > 0 then
 			return false
 		elseif f92_local2 < f92_local5 then
-			return true, Engine[0xF9F1239CFD921FE](0x81C07BC4A11544D, f92_local5 + 1), f92_local5 + 1, nil
+			return true, Engine[@"hash_4F9F1239CFD921FE"](@"hash_381C07BC4A11544D", f92_local5 + 1), f92_local5 + 1, nil
 		end
 	end
 	return false
@@ -2510,9 +2510,9 @@ end
 CoD.ChallengesUtility.IsCategoryLocked = function(f93_arg0, f93_arg1)
 	local f93_local0 = CoD.StartMenuUtility.GetSessionModeFromLobby()
 	local f93_local1 = nil
-	if f93_local0 == Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5] then
+	if f93_local0 == Enum[@"emodes"][@"mode_multiplayer"] then
 		f93_local1 = DataSources.ChallengesMPCategoryStats.getModel(f93_arg0)
-	elseif f93_local0 == Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A] then
+	elseif f93_local0 == Enum[@"emodes"][@"mode_zombies"] then
 		f93_local1 = DataSources.ChallengesZMCategoryStats.getModel(f93_arg0)
 	else
 		f93_local1 = DataSources.ChallengesWZCategoryStats.getModel(f93_arg0)
@@ -2521,19 +2521,19 @@ CoD.ChallengesUtility.IsCategoryLocked = function(f93_arg0, f93_arg1)
 end
 CoD.ChallengesUtility.SetDarkOpsModeIcon = function(f94_arg0)
 	local f94_local0 = CoD.StartMenuUtility.GetSessionModeFromLobby()
-	local f94_local1 = Engine[0x4DF5CFBC1771947](f94_arg0)
-	if f94_local0 == Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5] then
-		f94_local1.hudItems.darkOpsModeIcon:set(0x341BABF8FBCA1B8)
-	elseif f94_local0 == Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A] then
-		f94_local1.hudItems.darkOpsModeIcon:set(0x52348B12CA70050)
-	elseif f94_local0 == Enum[0x9C0C2196D8313A0][0xBF1DCC8138A9D39] then
-		f94_local1.hudItems.darkOpsModeIcon:set(0xE50181493FE38FC)
+	local f94_local1 = Engine[@"getmodelforcontroller"](f94_arg0)
+	if f94_local0 == Enum[@"emodes"][@"mode_multiplayer"] then
+		f94_local1.hudItems.darkOpsModeIcon:set(@"ui_icon_challenges_mpdarkops_large")
+	elseif f94_local0 == Enum[@"emodes"][@"mode_zombies"] then
+		f94_local1.hudItems.darkOpsModeIcon:set(@"ui_icon_challenges_zmdarkops_large")
+	elseif f94_local0 == Enum[@"emodes"][@"mode_warzone"] then
+		f94_local1.hudItems.darkOpsModeIcon:set(@"ui_icon_challenges_wzdarkops_large")
 	end
 end
 CoD.ChallengesUtility.UpdateCardListFromTabChanged = function(f95_arg0, f95_arg1, f95_arg2)
 	local f95_local0 = f95_arg1:getModel(f95_arg2, "tabCategory")
 	if f95_local0 then
-		local f95_local1 = Engine[0x614D394F6F9A18D](f95_local0)
+		local f95_local1 = Engine[@"getmodelvalue"](f95_local0)
 		SetGlobalModelValue("challengeCategory", f95_local1)
 		SetGlobalModelValue("callingCardCategory", f95_local1)
 		local f95_local2 = f95_arg0.TabFrame.framedWidget

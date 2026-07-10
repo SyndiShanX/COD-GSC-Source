@@ -26,7 +26,7 @@ CoD.freeCursorButtonPromptContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 			Xbtn.button.buttonPromptImage:setImage(RegisterImage(f2_local0))
 		end
 	end)
-	Xbtn:linkToElementModel(self, "" .. Enum[0x3DD78803F918E9D][0xC083113BC81F23F], false, function(model)
+	Xbtn:linkToElementModel(self, "" .. Enum[@"luibutton"][@"lui_key_xbx_pssquare"], false, function(model)
 		Xbtn:setModel(model, f1_arg1)
 	end)
 	self:addElement(Xbtn)
@@ -38,7 +38,7 @@ CoD.freeCursorButtonPromptContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 			Abtn.button.buttonPromptImage:setImage(RegisterImage(f4_local0))
 		end
 	end)
-	Abtn:linkToElementModel(self, "" .. Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], false, function(model)
+	Abtn:linkToElementModel(self, "" .. Enum[@"luibutton"][@"lui_key_xba_pscross"], false, function(model)
 		Abtn:setModel(model, f1_arg1)
 	end)
 	self:addElement(Abtn)
@@ -50,7 +50,7 @@ CoD.freeCursorButtonPromptContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 			Bbtn.button.buttonPromptImage:setImage(RegisterImage(f6_local0))
 		end
 	end)
-	Bbtn:linkToElementModel(self, "" .. Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], false, function(model)
+	Bbtn:linkToElementModel(self, "" .. Enum[@"luibutton"][@"lui_key_xbb_pscircle"], false, function(model)
 		Bbtn:setModel(model, f1_arg1)
 	end)
 	self:addElement(Bbtn)
@@ -62,7 +62,7 @@ CoD.freeCursorButtonPromptContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 			OptionsBtn.button.buttonPromptImage:setImage(RegisterImage(f8_local0))
 		end
 	end)
-	OptionsBtn:linkToElementModel(self, "" .. Enum[0x3DD78803F918E9D][0x22361E23588705A], false, function(model)
+	OptionsBtn:linkToElementModel(self, "" .. Enum[@"luibutton"][@"lui_key_start"], false, function(model)
 		OptionsBtn:setModel(model, f1_arg1)
 	end)
 	self:addElement(OptionsBtn)
@@ -74,7 +74,7 @@ CoD.freeCursorButtonPromptContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 			Ybtn.button.buttonPromptImage:setImage(RegisterImage(f10_local0))
 		end
 	end)
-	Ybtn:linkToElementModel(self, "" .. Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], false, function(model)
+	Ybtn:linkToElementModel(self, "" .. Enum[@"luibutton"][@"lui_key_xby_pstriangle"], false, function(model)
 		Ybtn:setModel(model, f1_arg1)
 	end)
 	self:addElement(Ybtn)
@@ -86,7 +86,7 @@ CoD.freeCursorButtonPromptContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 			LTbtn.button.buttonPromptImage:setImage(RegisterImage(f12_local0))
 		end
 	end)
-	LTbtn:linkToElementModel(self, "" .. Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC], false, function(model)
+	LTbtn:linkToElementModel(self, "" .. Enum[@"luibutton"][@"lui_key_ltrig"], false, function(model)
 		LTbtn:setModel(model, f1_arg1)
 	end)
 	self:addElement(LTbtn)
@@ -98,7 +98,7 @@ CoD.freeCursorButtonPromptContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 			RTbtn.button.buttonPromptImage:setImage(RegisterImage(f14_local0))
 		end
 	end)
-	RTbtn:linkToElementModel(self, "" .. Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA], false, function(model)
+	RTbtn:linkToElementModel(self, "" .. Enum[@"luibutton"][@"lui_key_rtrig"], false, function(model)
 		RTbtn:setModel(model, f1_arg1)
 	end)
 	self:addElement(RTbtn)
@@ -110,21 +110,21 @@ CoD.freeCursorButtonPromptContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 			LeftStick.button.buttonPromptImage:setImage(RegisterImage(f16_local0))
 		end
 	end)
-	LeftStick:linkToElementModel(self, "" .. Enum[0x3DD78803F918E9D][0x6CE8023188D673F], false, function(model)
+	LeftStick:linkToElementModel(self, "" .. Enum[@"luibutton"][@"lui_key_lstick_pressed"], false, function(model)
 		LeftStick:setModel(model, f1_arg1)
 	end)
 	self:addElement(LeftStick)
 	self.LeftStick = LeftStick
 	local PCKey2 = nil
 	PCKey2 = CoD.freeCursorButtonPrompt.new(f1_arg0, f1_arg1, 0, 0, 1044, 1176, 0.5, 0.5, -18, 18)
-	PCKey2:linkToElementModel(self, "" .. Enum[0x3DD78803F918E9D][0xA86619565BE54DB], false, function(model)
+	PCKey2:linkToElementModel(self, "" .. Enum[@"luibutton"][@"lui_key_pckey_2"], false, function(model)
 		PCKey2:setModel(model, f1_arg1)
 	end)
 	self:addElement(PCKey2)
 	self.PCKey2 = PCKey2
 	local PCKeyBack = nil
 	PCKeyBack = CoD.freeCursorButtonPrompt.new(f1_arg0, f1_arg1, 0, 0, 1176, 1308, 0.5, 0.5, -18, 18)
-	PCKeyBack:linkToElementModel(self, "" .. Enum[0x3DD78803F918E9D][0x4D2505E19049444], false, function(model)
+	PCKeyBack:linkToElementModel(self, "" .. Enum[@"luibutton"][@"hash_64D2505E19049444"], false, function(model)
 		PCKeyBack:setModel(model, f1_arg1)
 	end)
 	self:addElement(PCKeyBack)
@@ -155,7 +155,7 @@ CoD.freeCursorButtonPromptContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	})
 	local f1_local12 = self
 	local f1_local13 = self.subscribeToModel
-	local f1_local14 = Engine[0x8DF2E5447F384B9]()
+	local f1_local14 = Engine[@"getglobalmodel"]()
 	f1_local13(f1_local12, f1_local14["lobbyRoot.lobbyNav"], function(f22_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -167,7 +167,7 @@ CoD.freeCursorButtonPromptContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	end, false)
 	f1_local12 = self
 	f1_local13 = self.subscribeToModel
-	f1_local14 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local14 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local13(f1_local12, f1_local14["FreeCursor.contextualInfo.detailedDescription"], function(f23_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -183,7 +183,7 @@ CoD.freeCursorButtonPromptContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	end)
 	f1_local12 = self
 	f1_local13 = self.subscribeToModel
-	f1_local14 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local14 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local13(f1_local12, f1_local14.LastInput, function(f25_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

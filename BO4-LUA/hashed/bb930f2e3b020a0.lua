@@ -14,7 +14,7 @@ CoD.ClassMiniPreviewWeaponItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	local noslotIcon = LUI.UIImage.new(0.5, 0.5, -25, 25, 0.5, 0.5, -25, 25)
 	noslotIcon:setAlpha(0.02)
 	noslotIcon:setScale(0.4, 0.4)
-	noslotIcon:setImage(RegisterImage(0x35CB0919FD78E83))
+	noslotIcon:setImage(RegisterImage(@"uie_ui_menu_draft_attachment_noslot"))
 	self:addElement(noslotIcon)
 	self.noslotIcon = noslotIcon
 	local WeaponImage = LUI.UIFixedAspectRatioImage.new(0.5, 0.5, -135, 135, 0.5, 0.5, -19, 19)
@@ -34,7 +34,7 @@ CoD.ClassMiniPreviewWeaponItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	PrimaryAttachments:setScale(0.7, 0.7)
 	PrimaryAttachments:setWidgetType(CoD.ClassMiniPreviewAttachmentPip)
 	PrimaryAttachments:setHorizontalCount(6)
-	PrimaryAttachments:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	PrimaryAttachments:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	self:addElement(PrimaryAttachments)
 	self.PrimaryAttachments = PrimaryAttachments
 	local RestrictedIcon = CoD.RestrictedItemWarning.new(f1_arg0, f1_arg1, 0.5, 0.5, -30, 30, 0.5, 0.5, -29, 21)

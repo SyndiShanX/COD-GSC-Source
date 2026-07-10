@@ -10,8 +10,8 @@ CoD.ReservesFoilFGLoopEffects.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	local CardReflection01 = LUI.UIImage.new(0.5, 0.5, -176, 176, 0.5, 0.5, -336, 336)
 	CardReflection01:setRGB(0.63, 0.61, 0.49)
 	CardReflection01:setAlpha(0)
-	CardReflection01:setImage(RegisterImage(0x921AFF0D06B9F40))
-	CardReflection01:setMaterial(LUI.UIImage.GetCachedMaterial(0x2EEB1ECF1F211F5))
+	CardReflection01:setImage(RegisterImage(@"hash_2921AFF0D06B9F40"))
+	CardReflection01:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_delta"))
 	CardReflection01:setShaderVector(0, 0, 1, 0, 0)
 	CardReflection01:setShaderVector(1, 0, 0, 0, 0)
 	CardReflection01:setShaderVector(2, -0.06, 1, 0, 0)
@@ -22,8 +22,8 @@ CoD.ReservesFoilFGLoopEffects.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	local CardReflection02 = LUI.UIImage.new(0.5, 0.5, -176, 176, 0.5, 0.5, -336, 336)
 	CardReflection02:setRGB(0.63, 0.61, 0.49)
 	CardReflection02:setAlpha(0)
-	CardReflection02:setImage(RegisterImage(0x52009380E7CF786))
-	CardReflection02:setMaterial(LUI.UIImage.GetCachedMaterial(0x2EEB1ECF1F211F5))
+	CardReflection02:setImage(RegisterImage(@"hash_152009380E7CF786"))
+	CardReflection02:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_delta"))
 	CardReflection02:setShaderVector(0, 0, 1, 0, 0)
 	CardReflection02:setShaderVector(1, 0, 0, 0, 0)
 	CardReflection02:setShaderVector(2, -0.06, 1, 0, 0)
@@ -34,8 +34,8 @@ CoD.ReservesFoilFGLoopEffects.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	local CardReflectionBorder = LUI.UIImage.new(0.5, 0.5, -176, 176, 0.5, 0.5, -336, 336)
 	CardReflectionBorder:setRGB(0.8, 0.77, 0.62)
 	CardReflectionBorder:setAlpha(0)
-	CardReflectionBorder:setImage(RegisterImage(0x5F36F45613F891A))
-	CardReflectionBorder:setMaterial(LUI.UIImage.GetCachedMaterial(0x2EEB1ECF1F211F5))
+	CardReflectionBorder:setImage(RegisterImage(@"hash_75F36F45613F891A"))
+	CardReflectionBorder:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_delta"))
 	CardReflectionBorder:setShaderVector(0, 0, 1, 0, 0)
 	CardReflectionBorder:setShaderVector(1, 0, 0, 0, 0)
 	CardReflectionBorder:setShaderVector(2, -0.06, 1, 0, 0)
@@ -47,31 +47,31 @@ CoD.ReservesFoilFGLoopEffects.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 		{
 			stateName = "RevealCommon",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "rarity", Enum[0x704F69F9B0BDCEC][0xFA11ABBEBCE1980]) and CoD.ModelUtility.IsSelfModelValueTrue(element, f1_arg1, "revealed")
+				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "rarity", Enum[@"lootraritytype"][@"loot_rarity_type_common"]) and CoD.ModelUtility.IsSelfModelValueTrue(element, f1_arg1, "revealed")
 			end,
 		},
 		{
 			stateName = "RevealRare",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "rarity", Enum[0x704F69F9B0BDCEC][0x895F040FAFBECB9]) and CoD.ModelUtility.IsSelfModelValueTrue(element, f1_arg1, "revealed")
+				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "rarity", Enum[@"lootraritytype"][@"loot_rarity_type_rare"]) and CoD.ModelUtility.IsSelfModelValueTrue(element, f1_arg1, "revealed")
 			end,
 		},
 		{
 			stateName = "RevealLegendary",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "rarity", Enum[0x704F69F9B0BDCEC][0x35E4133DEF6B806]) and CoD.ModelUtility.IsSelfModelValueTrue(element, f1_arg1, "revealed")
+				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "rarity", Enum[@"lootraritytype"][@"loot_rarity_type_legendary"]) and CoD.ModelUtility.IsSelfModelValueTrue(element, f1_arg1, "revealed")
 			end,
 		},
 		{
 			stateName = "RevealEpic",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "rarity", Enum[0x704F69F9B0BDCEC][0xC3B1CFA5096734]) and CoD.ModelUtility.IsSelfModelValueTrue(element, f1_arg1, "revealed")
+				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "rarity", Enum[@"lootraritytype"][@"loot_rarity_type_epic"]) and CoD.ModelUtility.IsSelfModelValueTrue(element, f1_arg1, "revealed")
 			end,
 		},
 		{
 			stateName = "RevealUltra",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "rarity", Enum[0x704F69F9B0BDCEC][0x3006FE890A202D9]) and CoD.ModelUtility.IsSelfModelValueTrue(element, f1_arg1, "revealed")
+				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "rarity", Enum[@"lootraritytype"][@"hash_63006FE890A202D9"]) and CoD.ModelUtility.IsSelfModelValueTrue(element, f1_arg1, "revealed")
 			end,
 		},
 		{

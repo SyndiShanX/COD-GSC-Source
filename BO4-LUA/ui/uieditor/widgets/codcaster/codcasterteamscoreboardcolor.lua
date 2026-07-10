@@ -8,7 +8,7 @@ CoD.codcasterTeamscoreboardColor.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	self.soundSet = "default"
 	local DarkBase = LUI.UIImage.new(0, 0, 0, 180, 0, 0, 0, 104)
 	DarkBase:setAlpha(0.9)
-	DarkBase:setImage(RegisterImage(0xE346B5B8A0516D3))
+	DarkBase:setImage(RegisterImage(@"hash_4E346B5B8A0516D3"))
 	self:addElement(DarkBase)
 	self.DarkBase = DarkBase
 	local teamlogo = LUI.UIImage.new(0, 0, -4.5, 73.5, 0, 0, 24.5, 102.5)
@@ -19,22 +19,22 @@ CoD.codcasterTeamscoreboardColor.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	score:setAlpha(0.75)
 	score:setText(999)
 	score:setTTF("0arame_mono_stencil")
-	score:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	score:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	score:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	score:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(score)
 	self.score = score
 	local score2 = LUI.UIText.new(0, 0, 68, 174, 0, 0, 39.5, 93.5)
 	score2:setText(999)
 	score2:setTTF("0arame_mono_stencil")
-	score2:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	score2:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	score2:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	score2:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	self:addElement(score2)
 	self.score2 = score2
 	local TeamnameShadow = LUI.UIText.new(0, 0, 10, 120, 0, 0, 8, 26)
 	TeamnameShadow:setRGB(0, 0, 0)
 	TeamnameShadow:setTTF("notosans_bold")
-	TeamnameShadow:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	TeamnameShadow:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	TeamnameShadow:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	TeamnameShadow:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	TeamnameShadow:subscribeToGlobalModel(f1_arg1, "Factions", "alliesFactionDisplayName", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -45,8 +45,8 @@ CoD.codcasterTeamscoreboardColor.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	self.TeamnameShadow = TeamnameShadow
 	local Teamname = LUI.UIText.new(0, 0, 10, 120, 0, 0, 7, 25)
 	Teamname:setTTF("notosans_bold")
-	Teamname:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Teamname:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	Teamname:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Teamname:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	Teamname:subscribeToGlobalModel(f1_arg1, "Factions", "alliesFactionDisplayName", function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then

@@ -8,15 +8,15 @@ CoD.InGameTrialsRulesColumnTall.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local BackgroundTall = LUI.UIImage.new(0, 0, 0, 388, 0.5, 0.5, -402.5, 402.5)
-	BackgroundTall:setImage(RegisterImage(0xA703FE14F98C63C))
-	BackgroundTall:setMaterial(LUI.UIImage.GetCachedMaterial(0x44484DDFAF5C093))
+	BackgroundTall:setImage(RegisterImage(@"uie_trial_rules_bronze_normal"))
+	BackgroundTall:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_normal"))
 	BackgroundTall:setShaderVector(0, 0, 0, 0, 0.36)
 	BackgroundTall:setupNineSliceShader(310, 350)
 	self:addElement(BackgroundTall)
 	self.BackgroundTall = BackgroundTall
 	local Medal = LUI.UIImage.new(0, 0, 148, 240, 0, 0, 0, 92)
 	Medal:setAlpha(0.5)
-	Medal:setImage(RegisterImage(0x2638A7737E9BD02))
+	Medal:setImage(RegisterImage(@"uie_trial_medal_bronze"))
 	self:addElement(Medal)
 	self.Medal = Medal
 	if PostLoadFunc then

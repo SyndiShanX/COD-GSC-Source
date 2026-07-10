@@ -25,7 +25,7 @@ LUI.createMenu.Credit_Fullscreen = function(f1_arg0, f1_arg1)
 	self:addElement(skipPrompt)
 	self.skipPrompt = skipPrompt
 	local speedUpPrompt = CoD.FadingSkipPrompt.new(f1_local1, f1_arg0, 1, 1, -1824, -96, 1, 1, -126, -88)
-	speedUpPrompt.pressXtext:setText(Engine[0xF9F1239CFD921FE](0xE839A39F74BC0A2))
+	speedUpPrompt.pressXtext:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_7E839A39F74BC0A2"))
 	self:addElement(speedUpPrompt)
 	self.speedUpPrompt = speedUpPrompt
 	self:mergeStateConditions({
@@ -48,7 +48,7 @@ LUI.createMenu.Credit_Fullscreen = function(f1_arg0, f1_arg1)
 	end)
 	local f1_local6 = self
 	local f1_local7 = self.subscribeToModel
-	local f1_local8 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	local f1_local8 = Engine[@"getmodelforcontroller"](f1_arg0)
 	f1_local7(f1_local6, f1_local8.LastInput, function(f4_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",
@@ -91,8 +91,8 @@ CoD.Credit_Fullscreen.__resetProperties = function(f9_arg0)
 	f9_arg0.speedUpPrompt:completeAnimation()
 	f9_arg0.skipPrompt:completeAnimation()
 	f9_arg0.speedUpPrompt:setAlpha(1)
-	f9_arg0.speedUpPrompt.pressXtext:setText(Engine[0xF9F1239CFD921FE](0xE839A39F74BC0A2))
-	f9_arg0.skipPrompt.pressXtext:setText(Engine[0xF9F1239CFD921FE](0x8F7A20360760C))
+	f9_arg0.speedUpPrompt.pressXtext:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_7E839A39F74BC0A2"))
+	f9_arg0.skipPrompt.pressXtext:setText(Engine[@"hash_4F9F1239CFD921FE"](@"platform/skip"))
 end
 CoD.Credit_Fullscreen.__clipsPerState = {
 	DefaultState = {
@@ -107,12 +107,12 @@ CoD.Credit_Fullscreen.__clipsPerState = {
 			f11_arg0:setupElementClipCounter(2)
 			f11_arg0.skipPrompt:completeAnimation()
 			f11_arg0.skipPrompt.pressXtext:completeAnimation()
-			f11_arg0.skipPrompt.pressXtext:setText(Engine[0xF9F1239CFD921FE](0xCA29A669EA5CBCE))
+			f11_arg0.skipPrompt.pressXtext:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_CA29A669EA5CBCE"))
 			f11_arg0.clipFinished(f11_arg0.skipPrompt)
 			f11_arg0.speedUpPrompt:completeAnimation()
 			f11_arg0.speedUpPrompt.pressXtext:completeAnimation()
 			f11_arg0.speedUpPrompt:setAlpha(1)
-			f11_arg0.speedUpPrompt.pressXtext:setText(Engine[0xF9F1239CFD921FE](0xA926B4D0908C555))
+			f11_arg0.speedUpPrompt.pressXtext:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_6A926B4D0908C555"))
 			f11_arg0.clipFinished(f11_arg0.speedUpPrompt)
 		end,
 	},

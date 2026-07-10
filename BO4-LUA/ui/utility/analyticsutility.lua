@@ -8,13 +8,13 @@ CoD.AnalyticsUtility.RecordPostMatchSurveyResult = function(f1_arg0, f1_arg1)
 		surveyId = 1,
 	}
 	local f1_local1 = CoD.AnalyticsUtility.Surveys[f1_local0.surveyId]
-	Engine[0xDE279ECDDDD966](f1_arg0, 0x70A892033B9AD63, {
-		[0xB62C62C9808EA37] = f1_local1.version,
-		[0x96C713F4CEEAE75] = Engine[0xF9F1239CFD921FE](f1_local1.surveyID),
-		[0xE528455BF88DC80] = f1_local1.order[1] .. f1_local1.order[2] .. f1_local1.order[3],
-		[0x63556805EE914FD] = f1_arg1,
-		[0x336E379BA146826] = Engine[0xD52E2360F482280](),
-		[0xAD6CA05018E4411] = CoD.AnalyticsUtility.IsQuitter(f1_arg0),
+	Engine[0xDE279ECDDDD966](f1_arg0, @"hash_70A892033B9AD63", {
+		[@"version"] = f1_local1.version,
+		[@"survey_id"] = Engine[@"hash_4F9F1239CFD921FE"](f1_local1.surveyID),
+		[@"survey_order"] = f1_local1.order[1] .. f1_local1.order[2] .. f1_local1.order[3],
+		[@"answer_id"] = f1_arg1,
+		[@"match_id"] = Engine[@"hash_6D52E2360F482280"](),
+		[@"quitter"] = CoD.AnalyticsUtility.IsQuitter(f1_arg0),
 	})
 end
 CoD.AnalyticsUtility.PostMatchSurveyButtonAction = function(f2_arg0, f2_arg1, f2_arg2, f2_arg3)
@@ -36,7 +36,7 @@ CoD.AnalyticsUtility.Surveys = {}
 CoD.AnalyticsUtility.Surveys[1] = {
 	buttons = {
 		{
-			displayText = 0x663FC1AF7C5AECF,
+			displayText = @"hash_3663FC1AF7C5AECF",
 			actionGamepad = function(f4_arg0, f4_arg1)
 				CoD.AnalyticsUtility.PostMatchSurveyButtonAction(f4_arg0, nil, f4_arg1, CoD.AnalyticsUtility.SurveyResult.SkipRead)
 			end,
@@ -45,7 +45,7 @@ CoD.AnalyticsUtility.Surveys[1] = {
 			end,
 		},
 		{
-			displayText = 0xCB464A614BAB582,
+			displayText = @"hash_7CB464A614BAB582",
 			actionGamepad = function(f6_arg0, f6_arg1)
 				CoD.AnalyticsUtility.PostMatchSurveyButtonAction(f6_arg0, nil, f6_arg1, CoD.AnalyticsUtility.SurveyResult.Yes)
 			end,
@@ -54,7 +54,7 @@ CoD.AnalyticsUtility.Surveys[1] = {
 			end,
 		},
 		{
-			displayText = 0xC7595D6C67FD4C4,
+			displayText = @"menu/no_caps",
 			actionGamepad = function(f8_arg0, f8_arg1)
 				CoD.AnalyticsUtility.PostMatchSurveyButtonAction(f8_arg0, nil, f8_arg1, CoD.AnalyticsUtility.SurveyResult.No)
 			end,
@@ -68,7 +68,7 @@ CoD.AnalyticsUtility.Surveys[1] = {
 		2,
 		3,
 	}),
-	surveyID = 0x606FA6854614C23,
+	surveyID = @"hash_7606FA6854614C23",
 	version = 1,
 }
 CoD.AnalyticsUtility.GoBack = function()
@@ -79,8 +79,8 @@ CoD.AnalyticsUtility.GoBack = function()
 end
 CoD.OverlayUtility.AddSystemOverlay("PostMatchSurveyPC", {
 	menuName = "SystemOverlay_Compact",
-	title = 0x15012E369942EFD,
-	description = Engine[0xF9F1239CFD921FE](0x849E7D09B0F3898),
+	title = @"menu/survey_1",
+	description = Engine[@"hash_4F9F1239CFD921FE"](@"menu/survey_intro"),
 	categoryType = CoD.OverlayUtility.OverlayTypes.Connection,
 	[CoD.OverlayUtility.GoBackPropertyName] = CoD.AnalyticsUtility.GoBack,
 	listDatasource = function(f12_arg0)
@@ -127,9 +127,9 @@ CoD.OverlayUtility.AddSystemOverlay("PostMatchSurveyPC", {
 })
 CoD.OverlayUtility.AddAutoDetectOverlay("PostMatchSurvey", {
 	menuName = "SystemOverlay_Full",
-	title = 0x15012E369942EFD,
+	title = @"menu/survey_1",
 	frameWidget = "CoD.systemOverlay_Compact_BasicFrame",
-	description = Engine[0xF9F1239CFD921FE](0x849E7D09B0F3898),
+	description = Engine[@"hash_4F9F1239CFD921FE"](@"menu/survey_intro"),
 	categoryType = CoD.OverlayUtility.OverlayTypes.Connection,
 	[CoD.OverlayUtility.GoBackPropertyName] = CoD.AnalyticsUtility.GoBack,
 	options = function()
@@ -150,18 +150,18 @@ CoD.AnalyticsUtility.SurveyShouldShow = function(f22_arg0, f22_arg1)
 	local f22_local0 = CoD.GetCurrentPlayerStats(f22_arg1)
 	if f22_local0 and f22_local0.AfterActionReportStats and f22_local0.AfterActionReportStats.surveyId then
 		local f22_local1 = tonumber(f22_local0.AfterActionReportStats.surveyId:get())
-		local f22_local2 = Engine[0xD52E2360F482280]()
-		if f22_local2 == Engine[0x8506F73B393062F](0) then
+		local f22_local2 = Engine[@"hash_6D52E2360F482280"]()
+		if f22_local2 == Engine[@"numbertouint64"](0) then
 			return false, false
 		else
-			local f22_local3 = Engine[0xA798E4552F5E872](Engine[0x4DF5CFBC1771947](f22_arg1), "lobbyRoot.lastMatchID")
-			local f22_local4 = Engine[0x614D394F6F9A18D](f22_local3)
-			Engine[0x83C9B5DE1D9371](f22_local3, f22_local2)
+			local f22_local3 = Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f22_arg1), "lobbyRoot.lastMatchID")
+			local f22_local4 = Engine[@"getmodelvalue"](f22_local3)
+			Engine[@"setmodelvalue"](f22_local3, f22_local2)
 			if f22_local4 ~= nil and f22_local2 == f22_local4 then
 				return false, false
 			elseif f22_local1 == 0 then
 				if CoD.AnalyticsUtility.IsQuitter(f22_arg1) then
-					return (Dvar[0x583519CFDFE4574]:get() or 0) >= math.random(), false
+					return (Dvar[@"survey_chance"]:get() or 0) >= math.random(), false
 				else
 					return false, true
 				end
@@ -174,8 +174,8 @@ CoD.AnalyticsUtility.SurveyShouldShow = function(f22_arg0, f22_arg1)
 	end
 end
 CoD.AnalyticsUtility.IsQuitter = function(f23_arg0)
-	if Engine[0x3EAC408F958FF05]() == Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5] then
-		local f23_local0 = Engine[0x40E824FE270E174](Engine[0x8DF2E5447F384B9](), "lobbyRoot.quitGameFlag")
+	if Engine[@"currentsessionmode"]() == Enum[@"emodes"][@"mode_multiplayer"] then
+		local f23_local0 = Engine[@"getmodel"](Engine[@"getglobalmodel"](), "lobbyRoot.quitGameFlag")
 		return f23_local0 and f23_local0:get() ~= LuaEnum.QUIT_FLAG.HAS_NOT_QUIT
 	else
 		return false

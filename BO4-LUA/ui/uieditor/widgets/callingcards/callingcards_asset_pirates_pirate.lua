@@ -19,7 +19,7 @@ CoD.CallingCards_Asset_Pirates_Pirate.new = function(f1_arg0, f1_arg1, f1_arg2, 
 	self:addElement(armwithgun)
 	self.armwithgun = armwithgun
 	local piratebody = LUI.UIImage.new(0, 0, 517.5, 750.5, 0, 0, 0, 280)
-	piratebody:setImage(RegisterImage(0x9285FBAE26567BF))
+	piratebody:setImage(RegisterImage(@"uie_ui_icon_callingcards_pirates_body"))
 	self:addElement(piratebody)
 	self.piratebody = piratebody
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)
@@ -41,7 +41,7 @@ CoD.CallingCards_Asset_Pirates_Pirate.__clipsPerState = {
 			f3_arg0:setupElementClipCounter(2)
 			local f3_local0 = function(f4_arg0)
 				local f4_local0 = function(f5_arg0)
-					f5_arg0:beginAnimation(2000, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f5_arg0:beginAnimation(2000, Enum[@"luitween"][@"luitween_ease_out"])
 					f5_arg0:setZRot(-15)
 					f5_arg0:registerEventHandler("transition_complete_keyframe", function(element, event)
 						element:playClip("DefaultClip")
@@ -49,7 +49,7 @@ CoD.CallingCards_Asset_Pirates_Pirate.__clipsPerState = {
 					end)
 				end
 				f3_arg0.armwithsword:playClip("DefaultClip")
-				f3_arg0.armwithsword:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f3_arg0.armwithsword:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_out"])
 				f3_arg0.armwithsword:setZRot(8)
 				f3_arg0.armwithsword:registerEventHandler("interrupted_keyframe", f3_arg0.clipInterrupted)
 				f3_arg0.armwithsword:registerEventHandler("transition_complete_keyframe", f4_local0)
@@ -59,11 +59,11 @@ CoD.CallingCards_Asset_Pirates_Pirate.__clipsPerState = {
 			f3_local0(f3_arg0.armwithsword)
 			local f3_local1 = function(f7_arg0)
 				local f7_local0 = function(f8_arg0)
-					f8_arg0:beginAnimation(2000, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f8_arg0:beginAnimation(2000, Enum[@"luitween"][@"luitween_ease_out"])
 					f8_arg0:setZRot(-15)
 					f8_arg0:registerEventHandler("transition_complete_keyframe", f3_arg0.clipFinished)
 				end
-				f3_arg0.armwithgun:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f3_arg0.armwithgun:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_out"])
 				f3_arg0.armwithgun:setZRot(6)
 				f3_arg0.armwithgun:registerEventHandler("interrupted_keyframe", f3_arg0.clipInterrupted)
 				f3_arg0.armwithgun:registerEventHandler("transition_complete_keyframe", f7_local0)

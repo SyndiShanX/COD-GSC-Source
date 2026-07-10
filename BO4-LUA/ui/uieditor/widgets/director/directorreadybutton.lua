@@ -16,7 +16,7 @@ CoD.DirectorReadyButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	local Backing = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	Backing:setRGB(0, 0, 0)
 	Backing:setAlpha(0)
-	Backing:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	Backing:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	Backing:setShaderVector(0, 0, 0.5, 0, 0)
 	self:addElement(Backing)
 	self.Backing = Backing
@@ -36,8 +36,8 @@ CoD.DirectorReadyButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 		},
 	})
 	DirectorSelectButtonMiniInternal:setAlpha(0)
-	DirectorSelectButtonMiniInternal.MiddleText:setText(LocalizeToUpperString(0x7A9F166E7248D86))
-	DirectorSelectButtonMiniInternal.MiddleTextFocus:setText(LocalizeToUpperString(0x7A9F166E7248D86))
+	DirectorSelectButtonMiniInternal.MiddleText:setText(LocalizeToUpperString(@"menu/ready_up"))
+	DirectorSelectButtonMiniInternal.MiddleTextFocus:setText(LocalizeToUpperString(@"menu/ready_up"))
 	self:addElement(DirectorSelectButtonMiniInternal)
 	self.DirectorSelectButtonMiniInternal = DirectorSelectButtonMiniInternal
 	local DirectorCustomStartButton = CoD.DirectorSelectButtonInternal.new(f1_arg0, f1_arg1, 0, 1, 0, 0, -0.16, 1, 0, 0)
@@ -69,8 +69,8 @@ CoD.DirectorReadyButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	self.Border01 = Border01
 	local FrontendFrame = LUI.UIImage.new(0, 1, -1, 1, 0, 1, -1, 1)
 	FrontendFrame:setAlpha(0)
-	FrontendFrame:setImage(RegisterImage(0x185E11D74ECA3D7))
-	FrontendFrame:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	FrontendFrame:setImage(RegisterImage(@"uie_ui_menu_store_common_frame"))
+	FrontendFrame:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	FrontendFrame:setShaderVector(0, 0, 0, 0, 0)
 	FrontendFrame:setupNineSliceShader(12, 12)
 	self:addElement(FrontendFrame)
@@ -84,7 +84,7 @@ CoD.DirectorReadyButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	circle:setAlpha(0)
 	circle:setZRot(180)
 	circle:setScale(1.05, 1.05)
-	circle:setMaterial(LUI.UIImage.GetCachedMaterial(0x15B163CA03FCE8B))
+	circle:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_elliptical_ring_normal"))
 	circle:setShaderVector(0, 4.66, 0, 0, 0)
 	circle:setShaderVector(1, 80, 80, 0, 0)
 	circle:setShaderVector(2, 0, 0, 0, 0)
@@ -93,7 +93,7 @@ CoD.DirectorReadyButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	local CountdownText = LUI.UIText.new(0, 0, 129.5, 184.5, 0.5, 0.5, -12, 12)
 	CountdownText:setAlpha(0)
 	CountdownText:setTTF("ttmussels_regular")
-	CountdownText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	CountdownText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	CountdownText:subscribeToGlobalModel(f1_arg1, "LobbyRoot", "lobbyStatus", function(model)
 		local f6_local0 = model:get()
 		if f6_local0 ~= nil then
@@ -105,8 +105,8 @@ CoD.DirectorReadyButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	local timer = LUI.UIText.new(0, 0, 50, 130, 0.5, 0.5, -22.5, 22.5)
 	timer:setAlpha(0)
 	timer:setTTF("ttmussels_demibold")
-	timer:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	timer:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	timer:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	timer:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	timer:subscribeToGlobalModel(f1_arg1, "LobbyRoot", "lobbyTimeRemaining", function(model)
 		local f7_local0 = model:get()
 		if f7_local0 ~= nil then
@@ -117,8 +117,8 @@ CoD.DirectorReadyButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	self.timer = timer
 	local Fill = LUI.UIImage.new(0, 1, -105, 105, 0, 1, -65, 65)
 	Fill:setAlpha(0)
-	Fill:setImage(RegisterImage(0x3F09D20CA138B49))
-	Fill:setMaterial(LUI.UIImage.GetCachedMaterial(0x910274CA3518744))
+	Fill:setImage(RegisterImage(@"uie_ui_menu_common_tab_backing"))
+	Fill:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe"))
 	Fill:setShaderVector(1, 0, 0, 0, 0)
 	Fill:setShaderVector(2, 1, 0, 0, 0)
 	Fill:setShaderVector(3, 0, 0, 0, 0)
@@ -133,8 +133,8 @@ CoD.DirectorReadyButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	self.Fill = Fill
 	local Fill2 = LUI.UIImage.new(0, 1, -105, 105, 0, 1, -65, 65)
 	Fill2:setAlpha(0)
-	Fill2:setImage(RegisterImage(0x3F09D20CA138B49))
-	Fill2:setMaterial(LUI.UIImage.GetCachedMaterial(0x910274CA3518744))
+	Fill2:setImage(RegisterImage(@"uie_ui_menu_common_tab_backing"))
+	Fill2:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe"))
 	Fill2:setShaderVector(1, 0, 0, 0, 0)
 	Fill2:setShaderVector(2, 1, 0, 0, 0)
 	Fill2:setShaderVector(3, 0, 0, 0, 0)
@@ -148,21 +148,21 @@ CoD.DirectorReadyButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	self:addElement(Fill2)
 	self.Fill2 = Fill2
 	local PlayText = LUI.UIText.new(0, 1, 0, 0, 0.5, 0.5, -12, 12)
-	PlayText:setText(LocalizeToUpperString(0x7A9F166E7248D86))
+	PlayText:setText(LocalizeToUpperString(@"menu/ready_up"))
 	PlayText:setTTF("ttmussels_demibold")
 	PlayText:setLetterSpacing(6)
-	PlayText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	PlayText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	PlayText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	PlayText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(PlayText)
 	self.PlayText = PlayText
 	local WaitingText = LUI.UIText.new(0, 1, 0, 0, 0.5, 0.5, -12, 12)
 	WaitingText:setRGB(ColorSet.T8__OCHRE.r, ColorSet.T8__OCHRE.g, ColorSet.T8__OCHRE.b)
 	WaitingText:setAlpha(0)
-	WaitingText:setText(LocalizeToUpperString(0xEAC4945DCDC2806))
+	WaitingText:setText(LocalizeToUpperString(@"hash_4EAC4945DCDC2806"))
 	WaitingText:setTTF("default")
 	WaitingText:setLetterSpacing(3)
-	WaitingText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	WaitingText:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	WaitingText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	WaitingText:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	self:addElement(WaitingText)
 	self.WaitingText = WaitingText
 	self:mergeStateConditions({
@@ -223,7 +223,7 @@ CoD.DirectorReadyButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	end, false)
 	f1_local14 = self
 	f1_local15 = self.subscribeToModel
-	f1_local16 = Engine[0x8DF2E5447F384B9]()
+	f1_local16 = Engine[@"getglobalmodel"]()
 	f1_local15(f1_local14, f1_local16["lobbyRoot.lobbyTimeRemaining"], function(f17_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -235,7 +235,7 @@ CoD.DirectorReadyButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	end, false)
 	f1_local14 = self
 	f1_local15 = self.subscribeToModel
-	f1_local16 = Engine[0x8DF2E5447F384B9]()
+	f1_local16 = Engine[@"getglobalmodel"]()
 	f1_local15(f1_local14, f1_local16["lobbyRoot.lobbyList.playerCount"], function(f18_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -247,7 +247,7 @@ CoD.DirectorReadyButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	end, false)
 	f1_local14 = self
 	f1_local15 = self.subscribeToModel
-	f1_local16 = Engine[0x8DF2E5447F384B9]()
+	f1_local16 = Engine[@"getglobalmodel"]()
 	f1_local15(f1_local14, f1_local16["lobbyRoot.lobbyNav"], function(f19_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -259,7 +259,7 @@ CoD.DirectorReadyButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	end, false)
 	f1_local14 = self
 	f1_local15 = self.subscribeToModel
-	f1_local16 = Engine[0x8DF2E5447F384B9]()
+	f1_local16 = Engine[@"getglobalmodel"]()
 	f1_local15(f1_local14, f1_local16["lobbyRoot.publicLobby.stage"], function(f20_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -271,45 +271,45 @@ CoD.DirectorReadyButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	end, false)
 	self:appendEventHandler("input_source_changed", function(f21_arg0, f21_arg1)
 		f21_arg1.menu = f21_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f21_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A])
-		CoD.Menu.UpdateButtonShownState(f21_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(f21_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbb_pscircle"])
+		CoD.Menu.UpdateButtonShownState(f21_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_none"])
 	end)
 	f1_local14 = self
 	f1_local15 = self.subscribeToModel
-	f1_local16 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local16 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local15(f1_local14, f1_local16.LastInput, function(f22_arg0, f22_arg1)
-		CoD.Menu.UpdateButtonShownState(f22_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A])
-		CoD.Menu.UpdateButtonShownState(f22_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(f22_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbb_pscircle"])
+		CoD.Menu.UpdateButtonShownState(f22_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_none"])
 	end, false)
 	f1_local14 = self
 	f1_local15 = self.subscribeToModel
-	f1_local16 = Engine[0x8DF2E5447F384B9]()
+	f1_local16 = Engine[@"getglobalmodel"]()
 	f1_local15(f1_local14, f1_local16["lobbyRoot.lobbyNav"], function(f23_arg0, f23_arg1)
-		CoD.Menu.UpdateButtonShownState(f23_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A])
-		CoD.Menu.UpdateButtonShownState(f23_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(f23_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbb_pscircle"])
+		CoD.Menu.UpdateButtonShownState(f23_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_none"])
 	end, false)
 	f1_local14 = self
 	f1_local15 = self.subscribeToModel
-	f1_local16 = Engine[0x8DF2E5447F384B9]()
+	f1_local16 = Engine[@"getglobalmodel"]()
 	f1_local15(f1_local14, f1_local16["lobbyRoot.publicLobby.stage"], function(f24_arg0, f24_arg1)
-		CoD.Menu.UpdateButtonShownState(f24_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A])
-		CoD.Menu.UpdateButtonShownState(f24_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(f24_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbb_pscircle"])
+		CoD.Menu.UpdateButtonShownState(f24_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_none"])
 	end, false)
 	f1_local14 = self
 	f1_local15 = self.subscribeToModel
-	f1_local16 = Engine[0x8DF2E5447F384B9]()
+	f1_local16 = Engine[@"getglobalmodel"]()
 	f1_local15(f1_local14, f1_local16["lobbyRoot.playlistId"], function(f25_arg0, f25_arg1)
-		CoD.Menu.UpdateButtonShownState(f25_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A])
-		CoD.Menu.UpdateButtonShownState(f25_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(f25_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbb_pscircle"])
+		CoD.Menu.UpdateButtonShownState(f25_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_none"])
 	end, false)
 	f1_local14 = self
 	f1_local15 = self.subscribeToModel
-	f1_local16 = Engine[0x8DF2E5447F384B9]()
+	f1_local16 = Engine[@"getglobalmodel"]()
 	f1_local15(f1_local14, f1_local16["lobbyRoot.lobbyList.playerCount"], function(f26_arg0, f26_arg1)
-		CoD.Menu.UpdateButtonShownState(f26_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A])
-		CoD.Menu.UpdateButtonShownState(f26_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(f26_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbb_pscircle"])
+		CoD.Menu.UpdateButtonShownState(f26_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_none"])
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], "ESCAPE", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], "ESCAPE", function(element, menu, controller, model)
 		if IsGamepad(controller) and CoD.DirectorUtility.CanReadyDown(controller) and not CoD.DirectorUtility.IsNumClientsExceeded(controller) and CoD.DirectorUtility.AllClientsOwnDLCForPlaylist(controller) then
 			SetState(self, "DefaultState", controller)
 			CoD.DirectorUtility.SetLocalClientsReady()
@@ -324,19 +324,19 @@ CoD.DirectorReadyButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 		end
 	end, function(element, menu, controller)
 		if IsGamepad(controller) and CoD.DirectorUtility.CanReadyDown(controller) and not CoD.DirectorUtility.IsNumClientsExceeded(controller) and CoD.DirectorUtility.AllClientsOwnDLCForPlaylist(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x6DA4540B4705513, nil, "ESCAPE")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"hash_26DA4540B4705513", nil, "ESCAPE")
 			return true
 		elseif IsGamepad(controller) and CoD.DirectorUtility.CanReadyDown(controller) and CoD.DirectorUtility.IsNumClientsExceeded(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x6DA4540B4705513, nil, "ESCAPE")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"hash_26DA4540B4705513", nil, "ESCAPE")
 			return true
 		elseif IsGamepad(controller) and CoD.DirectorUtility.CanReadyDown(controller) and not CoD.DirectorUtility.AllClientsOwnDLCForPlaylist(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x6DA4540B4705513, nil, "ESCAPE")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"hash_26DA4540B4705513", nil, "ESCAPE")
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "MOUSE1", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_none"], "MOUSE1", function(element, menu, controller, model)
 		if IsMouseOrKeyboard(controller) and CoD.DirectorUtility.CanReadyUp(controller) and not CoD.DirectorUtility.IsNumClientsExceeded(controller) and CoD.DirectorUtility.AllClientsOwnDLCForPlaylist(controller) then
 			CoD.BaseUtility.StopPlayOnceSound(element, "uin_ready_bar_fill_1shot")
 			PlaySoundAlias("uin_ready_bar_done")
@@ -367,28 +367,28 @@ CoD.DirectorReadyButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 		end
 	end, function(element, menu, controller)
 		if IsMouseOrKeyboard(controller) and CoD.DirectorUtility.CanReadyUp(controller) and not CoD.DirectorUtility.IsNumClientsExceeded(controller) and CoD.DirectorUtility.AllClientsOwnDLCForPlaylist(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "MOUSE1")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "MOUSE1")
 			return false
 		elseif IsMouseOrKeyboard(controller) and CoD.DirectorUtility.CanReadyDown(controller) and not CoD.DirectorUtility.IsNumClientsExceeded(controller) and CoD.DirectorUtility.AllClientsOwnDLCForPlaylist(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "MOUSE1")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "MOUSE1")
 			return false
 		elseif IsMouseOrKeyboard(controller) and CoD.DirectorUtility.CanReadyUp(controller) and CoD.DirectorUtility.IsNumClientsExceeded(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "MOUSE1")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "MOUSE1")
 			return false
 		elseif IsMouseOrKeyboard(controller) and CoD.DirectorUtility.CanReadyDown(controller) and CoD.DirectorUtility.IsNumClientsExceeded(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "MOUSE1")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "MOUSE1")
 			return false
 		elseif IsMouseOrKeyboard(controller) and CoD.DirectorUtility.CanReadyUp(controller) and not CoD.DirectorUtility.AllClientsOwnDLCForPlaylist(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "MOUSE1")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "MOUSE1")
 			return false
 		elseif IsMouseOrKeyboard(controller) and CoD.DirectorUtility.CanReadyDown(controller) and not CoD.DirectorUtility.AllClientsOwnDLCForPlaylist(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "MOUSE1")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "MOUSE1")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_none"], "ui_confirm", function(element, menu, controller, model)
 		if IsMouseOrKeyboard(controller) and CoD.DirectorUtility.CanReadyUp(controller) and not CoD.DirectorUtility.IsNumClientsExceeded(controller) and CoD.DirectorUtility.AllClientsOwnDLCForPlaylist(controller) then
 			CoD.BaseUtility.StopPlayOnceSound(element, "uin_ready_bar_fill_1shot")
 			PlaySoundAlias("uin_ready_bar_done")
@@ -409,13 +409,13 @@ CoD.DirectorReadyButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 		end
 	end, function(element, menu, controller)
 		if IsMouseOrKeyboard(controller) and CoD.DirectorUtility.CanReadyUp(controller) and not CoD.DirectorUtility.IsNumClientsExceeded(controller) and CoD.DirectorUtility.AllClientsOwnDLCForPlaylist(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "ui_confirm")
 			return false
 		elseif IsMouseOrKeyboard(controller) and CoD.DirectorUtility.CanReadyUp(controller) and CoD.DirectorUtility.IsNumClientsExceeded(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "ui_confirm")
 			return false
 		elseif IsMouseOrKeyboard(controller) and CoD.DirectorUtility.CanReadyUp(controller) and not CoD.DirectorUtility.AllClientsOwnDLCForPlaylist(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "ui_confirm")
 			return false
 		else
 			return false
@@ -434,16 +434,16 @@ CoD.DirectorReadyButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	end)
 	self:linkToElementModel(self, nil, true, function(model)
 		local f35_local0 = self
-		if CoD.ModelUtility.IsParamModelEqualTo(model, Enum[0xE29E259801BC1A4][0x715085B24AAB606] | Enum[0xE29E259801BC1A4][0x253A6F6CAAAE464]) and IsElementInFocus(self.DirectorCustomStartButton) and CoD.DirectorUtility.CanReadyUp(f1_arg1) and not CoD.DirectorUtility.IsNumClientsExceeded(f1_arg1) and CoD.DirectorUtility.AllClientsOwnDLCForPlaylist(f1_arg1) then
+		if CoD.ModelUtility.IsParamModelEqualTo(model, Enum[@"luibuttonflags"][@"hash_4715085B24AAB606"] | Enum[@"luibuttonflags"][@"flag_down"]) and IsElementInFocus(self.DirectorCustomStartButton) and CoD.DirectorUtility.CanReadyUp(f1_arg1) and not CoD.DirectorUtility.IsNumClientsExceeded(f1_arg1) and CoD.DirectorUtility.AllClientsOwnDLCForPlaylist(f1_arg1) then
 			CoD.BaseUtility.StopPlayOnceSound(f35_local0, "uin_ready_bar_fill_1shot")
 			PlaySoundAlias("uin_ready_bar_done")
 			SetState(self, "Ready", f1_arg1)
 			CoD.DirectorUtility.SetLocalClientsReady()
-		elseif CoD.ModelUtility.IsParamModelEqualTo(model, Enum[0xE29E259801BC1A4][0x715085B24AAB606] | Enum[0xE29E259801BC1A4][0x253A6F6CAAAE464]) and IsElementInFocus(self.DirectorCustomStartButton) and CoD.DirectorUtility.CanReadyUp(f1_arg1) and CoD.DirectorUtility.IsNumClientsExceeded(f1_arg1) then
+		elseif CoD.ModelUtility.IsParamModelEqualTo(model, Enum[@"luibuttonflags"][@"hash_4715085B24AAB606"] | Enum[@"luibuttonflags"][@"flag_down"]) and IsElementInFocus(self.DirectorCustomStartButton) and CoD.DirectorUtility.CanReadyUp(f1_arg1) and CoD.DirectorUtility.IsNumClientsExceeded(f1_arg1) then
 			CoD.BaseUtility.StopPlayOnceSound(f35_local0, "uin_ready_bar_fill_1shot")
 			PlaySoundAlias("uin_ready_bar_done")
 			CoD.DirectorUtility.OpenTooManyClientsPopup(self, f1_arg1)
-		elseif CoD.ModelUtility.IsParamModelEqualTo(model, Enum[0xE29E259801BC1A4][0x715085B24AAB606] | Enum[0xE29E259801BC1A4][0x253A6F6CAAAE464]) and IsElementInFocus(self.DirectorCustomStartButton) and CoD.DirectorUtility.CanReadyUp(f1_arg1) and not CoD.DirectorUtility.AllClientsOwnDLCForPlaylist(f1_arg1) then
+		elseif CoD.ModelUtility.IsParamModelEqualTo(model, Enum[@"luibuttonflags"][@"hash_4715085B24AAB606"] | Enum[@"luibuttonflags"][@"flag_down"]) and IsElementInFocus(self.DirectorCustomStartButton) and CoD.DirectorUtility.CanReadyUp(f1_arg1) and not CoD.DirectorUtility.AllClientsOwnDLCForPlaylist(f1_arg1) then
 			CoD.BaseUtility.StopPlayOnceSound(f35_local0, "uin_ready_bar_fill_1shot")
 			PlaySoundAlias("uin_ready_bar_done")
 			CoD.DirectorUtility.OpenMapsNotEnabledPopup(self, f1_arg1)
@@ -474,14 +474,14 @@ CoD.DirectorReadyButton.__resetProperties = function(f36_arg0)
 	f36_arg0.DirectorSelectButtonMiniInternal:completeAnimation()
 	f36_arg0.Fill:setAlpha(0)
 	f36_arg0.Fill:setScale(1, 1)
-	f36_arg0.Fill:setImage(RegisterImage(0x3F09D20CA138B49))
+	f36_arg0.Fill:setImage(RegisterImage(@"uie_ui_menu_common_tab_backing"))
 	f36_arg0.DirectorCustomStartButton:setRGB(1, 1, 1)
 	f36_arg0.DirectorCustomStartButton:setAlpha(1)
 	f36_arg0.DirectorCustomStartButton:setScale(1, 1)
 	f36_arg0.PlayText:setRGB(1, 1, 1)
 	f36_arg0.PlayText:setAlpha(1)
 	f36_arg0.PlayText:setScale(1, 1)
-	f36_arg0.PlayText:setText(LocalizeToUpperString(0x7A9F166E7248D86))
+	f36_arg0.PlayText:setText(LocalizeToUpperString(@"menu/ready_up"))
 	f36_arg0.Fill2:setAlpha(0)
 	f36_arg0.Fill2:setScale(1, 1)
 	f36_arg0.timer:setLeftRight(0, 0, 50, 130)
@@ -499,8 +499,8 @@ CoD.DirectorReadyButton.__resetProperties = function(f36_arg0)
 	f36_arg0.Border01:setAlpha(0)
 	f36_arg0.FrontendFrame:setAlpha(0)
 	f36_arg0.DirectorSelectButtonMiniInternal:setAlpha(0)
-	f36_arg0.DirectorSelectButtonMiniInternal.MiddleText:setText(LocalizeToUpperString(0x7A9F166E7248D86))
-	f36_arg0.DirectorSelectButtonMiniInternal.MiddleTextFocus:setText(LocalizeToUpperString(0x7A9F166E7248D86))
+	f36_arg0.DirectorSelectButtonMiniInternal.MiddleText:setText(LocalizeToUpperString(@"menu/ready_up"))
+	f36_arg0.DirectorSelectButtonMiniInternal.MiddleTextFocus:setText(LocalizeToUpperString(@"menu/ready_up"))
 end
 CoD.DirectorReadyButton.__clipsPerState = {
 	DefaultState = {
@@ -520,7 +520,7 @@ CoD.DirectorReadyButton.__clipsPerState = {
 			f38_arg0.Fill:completeAnimation()
 			f38_arg0.Fill:setAlpha(0.35)
 			f38_arg0.Fill:setScale(1.05, 1.05)
-			f38_arg0.Fill:setImage(RegisterImage(0x3F09D20CA138B49))
+			f38_arg0.Fill:setImage(RegisterImage(@"uie_ui_menu_common_tab_backing"))
 			f38_arg0.clipFinished(f38_arg0.Fill)
 			f38_arg0.Fill2:completeAnimation()
 			f38_arg0.Fill2:setAlpha(0.35)
@@ -974,11 +974,11 @@ CoD.DirectorReadyButton.__clipsPerState = {
 			f76_arg0.DirectorSelectButtonMiniInternal:completeAnimation()
 			f76_arg0.DirectorSelectButtonMiniInternal.MiddleText:completeAnimation()
 			f76_arg0.DirectorSelectButtonMiniInternal.MiddleTextFocus:completeAnimation()
-			f76_arg0.DirectorSelectButtonMiniInternal.MiddleText:setText(LocalizeToUpperString(0xE6F6113B8B75F3E))
-			f76_arg0.DirectorSelectButtonMiniInternal.MiddleTextFocus:setText(LocalizeToUpperString(0xE6F6113B8B75F3E))
+			f76_arg0.DirectorSelectButtonMiniInternal.MiddleText:setText(LocalizeToUpperString(@"menu/ready"))
+			f76_arg0.DirectorSelectButtonMiniInternal.MiddleTextFocus:setText(LocalizeToUpperString(@"menu/ready"))
 			f76_arg0.clipFinished(f76_arg0.DirectorSelectButtonMiniInternal)
 			f76_arg0.PlayText:completeAnimation()
-			f76_arg0.PlayText:setText(LocalizeToUpperString(0xE6F6113B8B75F3E))
+			f76_arg0.PlayText:setText(LocalizeToUpperString(@"menu/ready"))
 			f76_arg0.clipFinished(f76_arg0.PlayText)
 		end,
 		ChildFocus = function(f77_arg0, f77_arg1)
@@ -989,7 +989,7 @@ CoD.DirectorReadyButton.__clipsPerState = {
 			f77_arg0.clipFinished(f77_arg0.DirectorCustomStartButton)
 			f77_arg0.PlayText:completeAnimation()
 			f77_arg0.PlayText:setScale(1.05, 1.05)
-			f77_arg0.PlayText:setText(LocalizeToUpperString(0xE6F6113B8B75F3E))
+			f77_arg0.PlayText:setText(LocalizeToUpperString(@"menu/ready"))
 			f77_arg0.clipFinished(f77_arg0.PlayText)
 		end,
 		GainChildFocus = function(f78_arg0, f78_arg1)
@@ -1012,7 +1012,7 @@ CoD.DirectorReadyButton.__clipsPerState = {
 			end
 			f78_arg0.PlayText:completeAnimation()
 			f78_arg0.PlayText:setScale(1, 1)
-			f78_arg0.PlayText:setText(LocalizeToUpperString(0xE6F6113B8B75F3E))
+			f78_arg0.PlayText:setText(LocalizeToUpperString(@"menu/ready"))
 			f78_local1(f78_arg0.PlayText)
 		end,
 		LoseChildFocus = function(f81_arg0, f81_arg1)
@@ -1035,7 +1035,7 @@ CoD.DirectorReadyButton.__clipsPerState = {
 			end
 			f81_arg0.PlayText:completeAnimation()
 			f81_arg0.PlayText:setScale(1.05, 1.05)
-			f81_arg0.PlayText:setText(LocalizeToUpperString(0xE6F6113B8B75F3E))
+			f81_arg0.PlayText:setText(LocalizeToUpperString(@"menu/ready"))
 			f81_local1(f81_arg0.PlayText)
 		end,
 	},

@@ -16,7 +16,7 @@ LUI.createMenu.ZMPersonalizeCharacterMain = function(f1_arg0, f1_arg1)
 	local Blur = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	Blur:setRGB(0.08, 0.08, 0.08)
 	Blur:setAlpha(0)
-	Blur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	Blur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	Blur:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(Blur)
 	self.Blur = Blur
@@ -28,11 +28,11 @@ LUI.createMenu.ZMPersonalizeCharacterMain = function(f1_arg0, f1_arg1)
 	self.StartMenuPersonalizationZM = StartMenuPersonalizationZM
 	local SocialFrame = CoD.GenericMenuFrame.new(f1_local1, f1_arg0, 0, 1, 0, 0, 0, 1, 0, 0)
 	SocialFrame.CommonHeader.BGSceneBlur:setAlpha(1)
-	SocialFrame.CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(0x350A8FDD8E022EC))
+	SocialFrame.CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(@"hash_2350A8FDD8E022EC"))
 	SocialFrame:subscribeToGlobalModel(f1_arg0, "LobbyRoot", "lobbyTitle", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			SocialFrame.CommonHeader.subtitle.subtitle:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			SocialFrame.CommonHeader.subtitle.subtitle:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	self:addElement(SocialFrame)
@@ -41,16 +41,16 @@ LUI.createMenu.ZMPersonalizeCharacterMain = function(f1_arg0, f1_arg1)
 	local f1_local7 = self.subscribeToModel
 	local f1_local8 = DataSources.CharacterBreadcrumbs.getModel(f1_arg0)
 	f1_local7(f1_local6, f1_local8.breadcrumbCount, function(f3_arg0, f3_arg1)
-		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x29E5695FF1401AD])
+		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_rstick_pressed"])
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], "ESCAPE", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], "ESCAPE", function(element, menu, controller, model)
 		GoBack(self, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, "ESCAPE")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, "ESCAPE")
 		return true
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x29E5695FF1401AD], "ui_contextual_2", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_rstick_pressed"], "ui_contextual_2", function(element, menu, controller, model)
 		if CoD.ModelUtility.IsGlobalDataSourceModelValueGreaterThan(controller, "CharacterBreadcrumbs", "breadcrumbCount", 0) and IsPC() then
 			CoD.BreadcrumbUtility.ClearAllPersonalizationBreadcrumbs(menu, controller)
 			return true
@@ -58,7 +58,7 @@ LUI.createMenu.ZMPersonalizeCharacterMain = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if CoD.ModelUtility.IsGlobalDataSourceModelValueGreaterThan(controller, "CharacterBreadcrumbs", "breadcrumbCount", 0) and IsPC() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x29E5695FF1401AD], 0x5619D8212EDA599, nil, "ui_contextual_2")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_rstick_pressed"], @"hash_65619D8212EDA599", nil, "ui_contextual_2")
 			return true
 		else
 			return false

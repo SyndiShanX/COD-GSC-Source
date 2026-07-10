@@ -29,7 +29,7 @@ CoD.ClassOptionsWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	self.buttons = buttons
 	local featureOverlayButtonMouseOnly = nil
 	featureOverlayButtonMouseOnly = CoD.featureOverlay_Button_MouseOnly.new(f1_arg0, f1_arg1, 1, 1, -525, -365, 1, 1, -60, 0)
-	featureOverlayButtonMouseOnly.featureOverlayButtonContainer.Title:setText(Engine[0xF9F1239CFD921FE](0x78D439E1B360368))
+	featureOverlayButtonMouseOnly.featureOverlayButtonContainer.Title:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_778D439E1B360368"))
 	featureOverlayButtonMouseOnly:registerEventHandler("gain_focus", function(element, event)
 		local f2_local0 = nil
 		if element.gainFocus then
@@ -37,14 +37,14 @@ CoD.ClassOptionsWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 		elseif element.super.gainFocus then
 			f2_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f2_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(featureOverlayButtonMouseOnly, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(featureOverlayButtonMouseOnly, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		GoBack(self, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 		return false
 	end, false)
 	self:addElement(featureOverlayButtonMouseOnly)
@@ -55,7 +55,7 @@ CoD.ClassOptionsWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	ClassSetOptionsList:setWidgetType(CoD.CommonListButtonGeneric)
 	ClassSetOptionsList:setVerticalCount(2)
 	ClassSetOptionsList:setSpacing(20)
-	ClassSetOptionsList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	ClassSetOptionsList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	ClassSetOptionsList:setDataSource("CACClassOptions")
 	ClassSetOptionsList:registerEventHandler("list_item_gain_focus", function(element, event)
 		local f5_local0 = nil
@@ -86,15 +86,15 @@ CoD.ClassOptionsWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 		elseif element.super.gainFocus then
 			f7_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f7_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(ClassSetOptionsList, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(ClassSetOptionsList, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		ProcessListAction(self, element, controller, menu)
 		PlaySoundAlias("uin_toggle_generic")
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 		return true
 	end, false)
 	self:addElement(ClassSetOptionsList)
@@ -116,8 +116,8 @@ CoD.ClassOptionsWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	local ClassNameLabelBacking = nil
 	ClassNameLabelBacking = LUI.UIImage.new(0.5, 0.5, -192.5, 192.5, 0, 0, 139, 182)
 	ClassNameLabelBacking:setAlpha(0.5)
-	ClassNameLabelBacking:setImage(RegisterImage(0x34839E8065B1E53))
-	ClassNameLabelBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	ClassNameLabelBacking:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	ClassNameLabelBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	ClassNameLabelBacking:setShaderVector(0, 0, 0, 0, 0)
 	ClassNameLabelBacking:setupNineSliceShader(196, 88)
 	self:addElement(ClassNameLabelBacking)
@@ -126,10 +126,10 @@ CoD.ClassOptionsWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	ClassNamelLabel = LUI.UIText.new(0.5, 0.5, -192.5, 192.5, 0, 0, 146, 175)
 	ClassNamelLabel:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	ClassNamelLabel:setAlpha(0.2)
-	ClassNamelLabel:setText(LocalizeToUpperString(0xDD163B6B797AB91))
+	ClassNamelLabel:setText(LocalizeToUpperString(@"menu/class_name"))
 	ClassNamelLabel:setTTF("ttmussels_regular")
 	ClassNamelLabel:setLetterSpacing(4)
-	ClassNamelLabel:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	ClassNamelLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	self:addElement(ClassNamelLabel)
 	self.ClassNamelLabel = ClassNamelLabel
 	local PCClassOptionRenameBox = nil
@@ -139,16 +139,16 @@ CoD.ClassOptionsWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	local ClassOptionsTitle = nil
 	ClassOptionsTitle = LUI.UIText.new(0.5, 0.5, -192.5, 192.5, 0, 0, 40, 79)
 	ClassOptionsTitle:setRGB(ColorSet.T8__BEIGE__HEADER.r, ColorSet.T8__BEIGE__HEADER.g, ColorSet.T8__BEIGE__HEADER.b)
-	ClassOptionsTitle:setText(LocalizeToUpperString(0x27F19FF8EF11A44))
+	ClassOptionsTitle:setText(LocalizeToUpperString(@"menu/class_options"))
 	ClassOptionsTitle:setTTF("ttmussels_demibold")
 	ClassOptionsTitle:setLetterSpacing(2)
-	ClassOptionsTitle:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	ClassOptionsTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	self:addElement(ClassOptionsTitle)
 	self.ClassOptionsTitle = ClassOptionsTitle
 	local CurrentClassName = LUI.UIText.new(1, 1, -460.5, -82.5, 0, 0, 128, 167)
 	CurrentClassName:setRGB(ColorSet.T8__BEIGE__HEADER.r, ColorSet.T8__BEIGE__HEADER.g, ColorSet.T8__BEIGE__HEADER.b)
 	CurrentClassName:setTTF("notosans_bold")
-	CurrentClassName:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	CurrentClassName:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	CurrentClassName:subscribeToGlobalModel(f1_arg1, "CACClassOptions", "customClassName", function(model)
 		local f10_local0 = model:get()
 		if f10_local0 ~= nil then
@@ -160,7 +160,7 @@ CoD.ClassOptionsWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	local ClassSetTitle = LUI.UIText.new(1, 1, -460.5, -82.5, 0, 0, 551.5, 590.5)
 	ClassSetTitle:setRGB(ColorSet.T8__BEIGE__HEADER.r, ColorSet.T8__BEIGE__HEADER.g, ColorSet.T8__BEIGE__HEADER.b)
 	ClassSetTitle:setTTF("notosans_bold")
-	ClassSetTitle:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	ClassSetTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	ClassSetTitle:subscribeToGlobalModel(f1_arg1, "CustomClassMenu", "customClassSetName", function(model)
 		local f11_local0 = model:get()
 		if f11_local0 ~= nil then
@@ -179,7 +179,7 @@ CoD.ClassOptionsWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	ClassOptionsList:setWidgetType(CoD.CommonListButtonGeneric)
 	ClassOptionsList:setVerticalCount(4)
 	ClassOptionsList:setSpacing(20)
-	ClassOptionsList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	ClassOptionsList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	ClassOptionsList:setDataSource("CACClassOptions")
 	ClassOptionsList:registerEventHandler("list_item_gain_focus", function(element, event)
 		local f12_local0 = nil
@@ -193,27 +193,27 @@ CoD.ClassOptionsWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 		elseif element.super.gainFocus then
 			f13_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f13_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(ClassOptionsList, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(ClassOptionsList, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		ProcessListAction(self, element, controller, menu)
 		PlaySoundAlias("uin_toggle_generic")
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 		return true
 	end, false)
 	self:addElement(ClassOptionsList)
 	self.ClassOptionsList = ClassOptionsList
 	local ClassOptionDesc = LUI.UIText.new(1, 1, -459.5, -49.5, 0, 0, 200.5, 219.5)
 	ClassOptionDesc:setTTF("dinnext_regular")
-	ClassOptionDesc:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	ClassOptionDesc:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	ClassOptionDesc:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	ClassOptionDesc:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	ClassOptionDesc:subscribeToGlobalModel(f1_arg1, "CACClassOptions", "customClassOptionsHintText", function(model)
 		local f16_local0 = model:get()
 		if f16_local0 ~= nil then
-			ClassOptionDesc:setText(Engine[0xF9F1239CFD921FE](f16_local0))
+			ClassOptionDesc:setText(Engine[@"hash_4F9F1239CFD921FE"](f16_local0))
 		end
 	end)
 	self:addElement(ClassOptionDesc)
@@ -227,21 +227,21 @@ CoD.ClassOptionsWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 		elseif element.super.gainFocus then
 			f17_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_none"])
 		return f17_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(PCSmallCloseButton, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "MOUSE1", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(PCSmallCloseButton, f1_arg1, Enum[@"luibutton"][@"lui_key_none"], "MOUSE1", function(element, menu, controller, model)
 		GoBack(self, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "MOUSE1")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "MOUSE1")
 		return false
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(PCSmallCloseButton, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(PCSmallCloseButton, f1_arg1, Enum[@"luibutton"][@"lui_key_none"], "ui_confirm", function(element, menu, controller, model)
 		GoBack(self, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "ui_confirm")
 		return false
 	end, false)
 	self:addElement(PCSmallCloseButton)

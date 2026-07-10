@@ -12,10 +12,10 @@ CoD.BM_BountyRequirementContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	self:addElement(Backing)
 	self.Backing = Backing
 	local BountyRequirement = LUI.UIText.new(0, 0, 120, 689, 0, 0, 23.5, 62.5)
-	BountyRequirement:setText(Engine[0xF9F1239CFD921FE](0xB778C58492E1282))
+	BountyRequirement:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_1B778C58492E1282"))
 	BountyRequirement:setTTF("ttmussels_demibold")
-	BountyRequirement:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	BountyRequirement:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	BountyRequirement:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	BountyRequirement:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(BountyRequirement)
 	self.BountyRequirement = BountyRequirement
 	if PostLoadFunc then

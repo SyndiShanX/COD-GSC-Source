@@ -34,7 +34,7 @@ CoD.StartMenu_Options_PC_Sound_Sound.new = function(f3_arg0, f3_arg1, f3_arg2, f
 	graphicsList:setWidgetType(CoD.OptionDropdown)
 	graphicsList:setVerticalCount(14)
 	graphicsList:setSpacing(0)
-	graphicsList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	graphicsList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	graphicsList:setDataSource("OptionSoundSound")
 	self:addElement(graphicsList)
 	self.graphicsList = graphicsList
@@ -44,13 +44,13 @@ CoD.StartMenu_Options_PC_Sound_Sound.new = function(f3_arg0, f3_arg1, f3_arg2, f
 	optionInfo:linkToElementModel(graphicsList, "description", true, function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
-			optionInfo.description:setText(Engine[0xF9F1239CFD921FE](f4_local0))
+			optionInfo.description:setText(Engine[@"hash_4F9F1239CFD921FE"](f4_local0))
 		end
 	end)
 	optionInfo:linkToElementModel(graphicsList, "label", true, function(model)
 		local f5_local0 = model:get()
 		if f5_local0 ~= nil then
-			optionInfo.title.itemName:setText(Engine[0xF9F1239CFD921FE](f5_local0))
+			optionInfo.title.itemName:setText(Engine[@"hash_4F9F1239CFD921FE"](f5_local0))
 		end
 	end)
 	graphicsList.id = "graphicsList"

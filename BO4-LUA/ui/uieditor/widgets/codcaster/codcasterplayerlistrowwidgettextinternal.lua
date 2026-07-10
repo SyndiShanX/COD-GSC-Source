@@ -8,9 +8,9 @@ CoD.CodCasterPlayerListRowWidgetTextInternal.new = function(f1_arg0, f1_arg1, f1
 	self.soundSet = "none"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Gamertag = LUI.UIText.new(0, 0, 0, 165, 0.5, 0.5, -7.5, 7.5)
-	Gamertag:setText(Engine[0xF9F1239CFD921FE](0xA67CAA5982ED86C))
+	Gamertag:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_4A67CAA5982ED86C"))
 	Gamertag:setTTF("notosans_regular")
-	Gamertag:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	Gamertag:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(Gamertag)
 	self.Gamertag = Gamertag
 	self:mergeStateConditions({

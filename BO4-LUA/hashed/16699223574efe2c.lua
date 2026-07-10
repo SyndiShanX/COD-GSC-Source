@@ -19,34 +19,34 @@ CoD.StartMenu_Options_PC_Voice_Text.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	textOptionsList:setWidgetType(CoD.OptionDropdown)
 	textOptionsList:setVerticalCount(10)
 	textOptionsList:setSpacing(0)
-	textOptionsList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	textOptionsList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	textOptionsList:setDataSource("OptionVoiceText")
 	self:addElement(textOptionsList)
 	self.textOptionsList = textOptionsList
 	local ChannelText = LUI.UIText.new(0, 0, 0, 750, 0, 0, 99, 144)
-	ChannelText:setText(Engine[0xF9F1239CFD921FE](0x11E89D549AAECEF))
+	ChannelText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_211E89D549AAECEF"))
 	ChannelText:setTTF("default")
-	ChannelText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	ChannelText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	ChannelText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	ChannelText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(ChannelText)
 	self.ChannelText = ChannelText
 	local PrefixText = LUI.UIText.new(0, 0, 0, 750, 0, 0, 301, 346)
-	PrefixText:setText(Engine[0xF9F1239CFD921FE](0x1D7E52384712586))
+	PrefixText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_71D7E52384712586"))
 	PrefixText:setTTF("default")
-	PrefixText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	PrefixText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	PrefixText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	PrefixText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(PrefixText)
 	self.PrefixText = PrefixText
 	optionInfo:linkToElementModel(textOptionsList, "description", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			optionInfo.description:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			optionInfo.description:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	optionInfo:linkToElementModel(textOptionsList, "label", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
-			optionInfo.title.itemName:setText(Engine[0xF9F1239CFD921FE](f3_local0))
+			optionInfo.title.itemName:setText(Engine[@"hash_4F9F1239CFD921FE"](f3_local0))
 		end
 	end)
 	textOptionsList.id = "textOptionsList"

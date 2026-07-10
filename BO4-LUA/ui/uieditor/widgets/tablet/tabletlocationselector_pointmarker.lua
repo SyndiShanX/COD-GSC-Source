@@ -9,11 +9,11 @@ CoD.TabletLocationSelector_PointMarker.new = function(f1_arg0, f1_arg1, f1_arg2,
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local IconFrame = LUI.UIImage.new(0.74, 0.74, -44, 20, 0.76, 0.76, -44, 20)
 	IconFrame:setAlpha(0)
-	IconFrame:setImage(RegisterImage(0x87A7AC36F9F587F))
+	IconFrame:setImage(RegisterImage(@"uie_ui_hud_cp_hud_tacmode_echo"))
 	self:addElement(IconFrame)
 	self.IconFrame = IconFrame
 	local Icon = LUI.UIImage.new(0, 0, -7, 57, -0.04, -0.04, -4, 60)
-	Icon:setImage(RegisterImage(0x1DD23044C39232D))
+	Icon:setImage(RegisterImage(@"t7_cp_hud_tacmode_type_quadtank"))
 	self:addElement(Icon)
 	self.Icon = Icon
 	if PostLoadFunc then

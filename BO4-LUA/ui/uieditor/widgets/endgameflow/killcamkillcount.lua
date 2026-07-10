@@ -12,10 +12,10 @@ CoD.KillcamKillCount.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	self.KillCountBacking = KillCountBacking
 	local Numbers = LUI.UIText.new(0, 1, 0, 0, 0, 1, 0, 0)
 	Numbers:setRGB(0.06, 0.06, 0.06)
-	Numbers:setText(Engine[0xF9F1239CFD921FE](0x4323579690CF719))
+	Numbers:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_4323579690CF719"))
 	Numbers:setTTF("ttmussels_demibold")
-	Numbers:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	Numbers:setAlignment(Enum[0x7A5123B654282D2][0x6ED4298C93DC5ED])
+	Numbers:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	Numbers:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
 	self:addElement(Numbers)
 	self.Numbers = Numbers
 	local KillCountBit = LUI.UIImage.new(0, 0, 2, 4, 0, 0, 2, 4)

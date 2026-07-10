@@ -7,36 +7,36 @@ CoD.vhud_HellstormReticleFocus.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	self.id = "vhud_HellstormReticleFocus"
 	self.soundSet = "default"
 	local L = LUI.UIImage.new(0, 0, 0, 110, 0, 0, 0, 110)
-	L:setImage(RegisterImage(0xC49ECB87DAA4E82))
+	L:setImage(RegisterImage(@"uie_ui_hud_vehicle_hellstorm_ringreticle"))
 	self:addElement(L)
 	self.L = L
 	local LAdd = LUI.UIImage.new(0, 0, 0, 110, 0, 0, 0, 110)
 	LAdd:setAlpha(0.2)
-	LAdd:setImage(RegisterImage(0xC49ECB87DAA4E82))
-	LAdd:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	LAdd:setImage(RegisterImage(@"uie_ui_hud_vehicle_hellstorm_ringreticle"))
+	LAdd:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(LAdd)
 	self.LAdd = LAdd
 	local R = LUI.UIImage.new(0.5, 0.5, 110, 0, 0, 0, 0, 110)
-	R:setImage(RegisterImage(0xC49ECB87DAA4E82))
+	R:setImage(RegisterImage(@"uie_ui_hud_vehicle_hellstorm_ringreticle"))
 	self:addElement(R)
 	self.R = R
 	local RAdd = LUI.UIImage.new(0.5, 0.5, 110, 0, 0, 0, 0, 110)
 	RAdd:setAlpha(0.2)
-	RAdd:setImage(RegisterImage(0xC49ECB87DAA4E82))
-	RAdd:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	RAdd:setImage(RegisterImage(@"uie_ui_hud_vehicle_hellstorm_ringreticle"))
+	RAdd:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(RAdd)
 	self.RAdd = RAdd
 	local Glow = LUI.UIImage.new(0, 0, 0, 220, 0, 0, 0, 110)
 	Glow:setRGB(ColorSet.EnemyOrange_Bright.r, ColorSet.EnemyOrange_Bright.g, ColorSet.EnemyOrange_Bright.b)
-	Glow:setImage(RegisterImage(0x2C5D89A2DB53AB2))
-	Glow:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	Glow:setImage(RegisterImage(@"uie_ui_hud_vehicle_hellstorm_ringreticle_glow"))
+	Glow:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	Glow:setShaderVector(0, 1.5, 0, 0, 0)
 	self:addElement(Glow)
 	self.Glow = Glow
 	local PinBot = LUI.UIImage.new(0, 0, 98.5, 122.5, 0, 0, 200, 220)
 	PinBot:setZRot(90)
-	PinBot:setImage(RegisterImage(0x99A8C3E368A2195))
-	PinBot:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	PinBot:setImage(RegisterImage(@"uie_ui_hud_vehicle_hellstorm_indicator"))
+	PinBot:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(PinBot)
 	self.PinBot = PinBot
 	if PostLoadFunc then

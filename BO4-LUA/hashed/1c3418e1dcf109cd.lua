@@ -54,7 +54,7 @@ CoD.BlackMarketTrialInfoBannerWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f
 end
 CoD.BlackMarketTrialInfoBannerWidget.__resetProperties = function(f7_arg0)
 	f7_arg0.TrialWidget:completeAnimation()
-	f7_arg0.TrialWidget.InfoText:setText(Engine[0xF9F1239CFD921FE](0x62486486346EC3F))
+	f7_arg0.TrialWidget.InfoText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_262486486346EC3F"))
 end
 CoD.BlackMarketTrialInfoBannerWidget.__clipsPerState = {
 	DefaultState = {
@@ -63,7 +63,7 @@ CoD.BlackMarketTrialInfoBannerWidget.__clipsPerState = {
 			f8_arg0:setupElementClipCounter(1)
 			f8_arg0.TrialWidget:completeAnimation()
 			f8_arg0.TrialWidget.InfoText:completeAnimation()
-			f8_arg0.TrialWidget.InfoText:setText(Engine[0xF9F1239CFD921FE](0x8C8E3A75045BE50))
+			f8_arg0.TrialWidget.InfoText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_48C8E3A75045BE50"))
 			f8_arg0.clipFinished(f8_arg0.TrialWidget)
 		end,
 	},

@@ -10,7 +10,7 @@ CoD.AARTierRewardTypeImageContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Image = LUI.UIFixedAspectRatioImage.new(0.5, 0.5, -146, 146, 0, 0, 28, 404)
-	Image:setMaterial(LUI.UIImage.GetCachedMaterial(0xA02C44161370F6D))
+	Image:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_1A02C44161370F6D"))
 	Image:setShaderVector(0, 0.5, 0.5, 0, 0)
 	Image:setShaderVector(1, 1, 1, 0, 0)
 	Image:setShaderVector(2, 0, 0, 0, 0)
@@ -25,7 +25,7 @@ CoD.AARTierRewardTypeImageContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	self.Image = Image
 	local ContrabandImage = LUI.UIFixedAspectRatioImage.new(0.5, 0.5, -146, 146, 0, 0, 49.5, 382.5)
 	ContrabandImage:setAlpha(0)
-	ContrabandImage:setMaterial(LUI.UIImage.GetCachedMaterial(0xA02C44161370F6D))
+	ContrabandImage:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_1A02C44161370F6D"))
 	ContrabandImage:setShaderVector(0, 0.5, 0.5, 0, 0)
 	ContrabandImage:setShaderVector(1, 1, 1, 0, 0)
 	ContrabandImage:setShaderVector(2, 0, 0, 0, 0)
@@ -52,7 +52,7 @@ CoD.AARTierRewardTypeImageContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	self:addElement(CallingCardImage)
 	self.CallingCardImage = CallingCardImage
 	local CharacterImage = LUI.UIImage.new(0.5, 0.5, -146, 146, 0, 0, 28, 406)
-	CharacterImage:setMaterial(LUI.UIImage.GetCachedMaterial(0xA02C44161370F6D))
+	CharacterImage:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_1A02C44161370F6D"))
 	CharacterImage:setShaderVector(0, 0, 0, 0, 0)
 	CharacterImage:setShaderVector(1, 1, 1, 0, 0)
 	CharacterImage:setShaderVector(2, 0, 0, 0, 0)
@@ -66,7 +66,7 @@ CoD.AARTierRewardTypeImageContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	self.CharacterImage = CharacterImage
 	local WarPaint = LUI.UIImage.new(0.5, 0.5, -110, 110, 0, 0, 106, 326)
 	WarPaint:setAlpha(0)
-	WarPaint:setMaterial(LUI.UIImage.GetCachedMaterial(0xA02C44161370F6D))
+	WarPaint:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_1A02C44161370F6D"))
 	WarPaint:setShaderVector(0, 0.5, 0.5, 0, 0)
 	WarPaint:setShaderVector(1, 1.1, 1.1, 0, 0)
 	WarPaint:setShaderVector(2, 0, 0, 0, 0)
@@ -92,13 +92,13 @@ CoD.AARTierRewardTypeImageContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 		{
 			stateName = "Contraband",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", 0x37934F15B706913)
+				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", @"contraband")
 			end,
 		},
 		{
 			stateName = "CallingCard",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", 0xCA2BC08C1A6BCF6)
+				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", @"calling_card")
 			end,
 		},
 		{
@@ -110,19 +110,19 @@ CoD.AARTierRewardTypeImageContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 		{
 			stateName = "WarPaint",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", 0xFB8B65946FBF7A2)
+				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", @"war_paint")
 			end,
 		},
 		{
 			stateName = "WarPaintBundle",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", 0x48B82A2276A1CAF)
+				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", @"hash_248B82A2276A1CAF")
 			end,
 		},
 		{
 			stateName = "Decal",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", 0x1FE4C75ACC7DF0E)
+				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", @"decal")
 			end,
 		},
 	})

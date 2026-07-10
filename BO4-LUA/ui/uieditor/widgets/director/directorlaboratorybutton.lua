@@ -21,10 +21,10 @@ CoD.DirectorLaboratoryButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 		elseif element.super.gainFocus then
 			f2_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f2_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(DirectorLaboratoryButtonInternal, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(DirectorLaboratoryButtonInternal, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if not IsPlayerAGuest(controller) then
 			PlaySoundAlias("uin_toggle_generic")
 			OpenOverlay(self, "Laboratory", controller)
@@ -33,7 +33,7 @@ CoD.DirectorLaboratoryButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 		end
 	end, function(element, menu, controller)
 		if not IsPlayerAGuest(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x96D9A8F7540D6B6, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_96D9A8F7540D6B6", nil, nil)
 			return true
 		else
 			return false
@@ -76,7 +76,7 @@ CoD.DirectorLaboratoryButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	end, false)
 	f1_local4 = self
 	f1_local5 = self.subscribeToModel
-	f1_local6 = Engine[0x8DF2E5447F384B9]()
+	f1_local6 = Engine[@"getglobalmodel"]()
 	f1_local5(f1_local4, f1_local6["lobbyRoot.lobbyNav"], function(f8_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

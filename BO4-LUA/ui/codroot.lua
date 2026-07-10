@@ -35,17 +35,17 @@ LUI.CoDRoot.ProcessEvents = function(f2_arg0, f2_arg1)
 end
 LUI.CoDRoot.ProcessEventNow = function(f3_arg0, f3_arg1)
 	if f3_arg1.name ~= "process_events" then
-		Engine[0x6E447857BE70BC1](f3_arg1.name)
-		Engine[0xDE5D6CFE3B945DD]()
+		Engine[@"beginpixevent"](f3_arg1.name)
+		Engine[@"eventprocessed"]()
 	end
 	local f3_local0 = f3_arg0:propagateEvent(f3_arg1)
 	if f3_local0 then
-		Engine[0x66E2713AD003565]()
+		Engine[@"endpixevent"]()
 		return f3_local0
 	end
 	local f3_local1 = LUI.UIElement.processEvent(f3_arg0, f3_arg1)
 	if f3_arg1.name ~= "process_events" then
-		Engine[0x66E2713AD003565]()
+		Engine[@"endpixevent"]()
 	end
 	return f3_local1
 end

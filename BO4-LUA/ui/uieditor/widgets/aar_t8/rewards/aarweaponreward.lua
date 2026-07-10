@@ -99,7 +99,7 @@ CoD.AARWeaponReward.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	self:addElement(VerticalListSpacer4)
 	self.VerticalListSpacer4 = VerticalListSpacer4
 	local InfoDotline2 = LUI.UIImage.new(0.5, 0.5, -196, 184, 0, 0, 641, 645)
-	InfoDotline2:setImage(RegisterImage(0x805FC715189E506))
+	InfoDotline2:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_info_dotline"))
 	self:addElement(InfoDotline2)
 	self.InfoDotline2 = InfoDotline2
 	local VerticalListSpacer6 = CoD.VerticalListSpacer.new(f1_arg0, f1_arg1, 0, 0, 0.5, 412.5, 0, 0, 645, 661)
@@ -160,7 +160,7 @@ CoD.AARWeaponReward.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	end)
 	local f1_local13 = self
 	local f1_local14 = self.subscribeToModel
-	local f1_local15 = Engine[0x8DF2E5447F384B9]()
+	local f1_local15 = Engine[@"getglobalmodel"]()
 	f1_local14(f1_local13, f1_local15["lobbyRoot.lobbyNav"], function(f17_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

@@ -41,16 +41,16 @@ CoD.directorPrivate.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	CommonHeader:subscribeToGlobalModel(f1_arg1, "LobbyRoot", "lobbyTitle", function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
-			CommonHeader.subtitle.subtitle:setText(Engine[0xF9F1239CFD921FE](f4_local0))
+			CommonHeader.subtitle.subtitle:setText(Engine[@"hash_4F9F1239CFD921FE"](f4_local0))
 		end
 	end)
 	self:addElement(CommonHeader)
 	self.CommonHeader = CommonHeader
 	local DirectorReadyButton = CoD.DirectorReadyButton.new(f1_arg0, f1_arg1, 0.5, 0.5, 514, 896, 1, 1, -178, -108)
-	DirectorReadyButton.DirectorSelectButtonMiniInternal.MiddleText:setText(LocalizeToUpperString(0x7A9F166E7248D86))
-	DirectorReadyButton.DirectorSelectButtonMiniInternal.MiddleTextFocus:setText(LocalizeToUpperString(0x7A9F166E7248D86))
-	DirectorReadyButton.PlayText:setText(LocalizeToUpperString(0xE6F6113B8B75F3E))
-	DirectorReadyButton:subscribeToGlobalModel(f1_arg1, "PerController", "ButtonBits." .. Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], function(model)
+	DirectorReadyButton.DirectorSelectButtonMiniInternal.MiddleText:setText(LocalizeToUpperString(@"menu/ready_up"))
+	DirectorReadyButton.DirectorSelectButtonMiniInternal.MiddleTextFocus:setText(LocalizeToUpperString(@"menu/ready_up"))
+	DirectorReadyButton.PlayText:setText(LocalizeToUpperString(@"menu/ready"))
+	DirectorReadyButton:subscribeToGlobalModel(f1_arg1, "PerController", "ButtonBits." .. Enum[@"luibutton"][@"lui_key_xba_pscross"], function(model)
 		DirectorReadyButton:setModel(model, f1_arg1)
 	end)
 	self:addElement(DirectorReadyButton)
@@ -64,9 +64,9 @@ CoD.directorPrivate.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 			end,
 		},
 	})
-	DirectorMapGameTypeAndDifficulty.DirectorMapAndGameInternal.PlaylistHeader.GameModeText:setText(Engine[0xF9F1239CFD921FE](0xC95DCE378B96DFF))
+	DirectorMapGameTypeAndDifficulty.DirectorMapAndGameInternal.PlaylistHeader.GameModeText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_1C95DCE378B96DFF"))
 	DirectorMapGameTypeAndDifficulty.DirectorMapAndGameInternal.PlaylistHeader.GameModeText:setTTF("ttmussels_regular")
-	DirectorMapGameTypeAndDifficulty.DirectorMapAndGameInternal.PlaylistHeaderNonHost.GameModeText:setText(Engine[0xF9F1239CFD921FE](0xC95DCE378B96DFF))
+	DirectorMapGameTypeAndDifficulty.DirectorMapAndGameInternal.PlaylistHeaderNonHost.GameModeText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_1C95DCE378B96DFF"))
 	DirectorMapGameTypeAndDifficulty.DirectorMapAndGameInternal.PlaylistHeaderNonHost.GameModeText:setTTF("ttmussels_regular")
 	DirectorMapGameTypeAndDifficulty.DirectorMapAndGameInternal.MapImage.__DirectorMapAndGameInternal_MapImage_Image = function(f7_arg0)
 		local f7_local0 = f7_arg0:get()
@@ -99,7 +99,7 @@ CoD.directorPrivate.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	DirectorMapGameTypeAndDifficulty.DirectorMapAndGameInternal.DirectorMapAndGameTypeInternalTitles.Label.__Label_Desc = function(f11_arg0)
 		local f11_local0 = f11_arg0:get()
 		if f11_local0 ~= nil then
-			DirectorMapGameTypeAndDifficulty.DirectorMapAndGameInternal.DirectorMapAndGameTypeInternalTitles.Label:setText(Engine[0xF9F1239CFD921FE](CoD.DirectorUtility.PlaylistIDToZMPlaylistSubtitle(f11_local0)))
+			DirectorMapGameTypeAndDifficulty.DirectorMapAndGameInternal.DirectorMapAndGameTypeInternalTitles.Label:setText(Engine[@"hash_4F9F1239CFD921FE"](CoD.DirectorUtility.PlaylistIDToZMPlaylistSubtitle(f11_local0)))
 		end
 	end
 	DirectorMapGameTypeAndDifficulty:subscribeToGlobalModel(f1_arg1, "LobbyRoot", "playlistId", DirectorMapGameTypeAndDifficulty.DirectorMapAndGameInternal.DirectorMapAndGameTypeInternalTitles.Label.__Label_Desc)
@@ -113,7 +113,7 @@ CoD.directorPrivate.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	DirectorMapGameTypeAndDifficulty.DirectorMapAndGameInternal.DirectorMapAndGameTypeInternalTitles.SubTitle.__Label_Title = function(f13_arg0)
 		local f13_local0 = f13_arg0:get()
 		if f13_local0 ~= nil then
-			DirectorMapGameTypeAndDifficulty.DirectorMapAndGameInternal.DirectorMapAndGameTypeInternalTitles.SubTitle:setText(Engine[0xF9F1239CFD921FE](CoD.DirectorUtility.PlaylistIDToZMPlaylistName(f13_local0)))
+			DirectorMapGameTypeAndDifficulty.DirectorMapAndGameInternal.DirectorMapAndGameTypeInternalTitles.SubTitle:setText(Engine[@"hash_4F9F1239CFD921FE"](CoD.DirectorUtility.PlaylistIDToZMPlaylistName(f13_local0)))
 		end
 	end
 	DirectorMapGameTypeAndDifficulty:subscribeToGlobalModel(f1_arg1, "LobbyRoot", "playlistId", DirectorMapGameTypeAndDifficulty.DirectorMapAndGameInternal.DirectorMapAndGameTypeInternalTitles.SubTitle.__Label_Title)
@@ -165,7 +165,7 @@ CoD.directorPrivate.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	})
 	local f1_local8 = DirectorZMLobbySettingList
 	local f1_local9 = DirectorZMLobbySettingList.subscribeToModel
-	local f1_local10 = Engine[0x8DF2E5447F384B9]()
+	local f1_local10 = Engine[@"getglobalmodel"]()
 	f1_local9(f1_local8, f1_local10["MapVote.mapVoteGameModeNext"], function(f19_arg0)
 		f1_arg0:updateElementState(DirectorZMLobbySettingList, {
 			name = "model_validation",
@@ -179,19 +179,19 @@ CoD.directorPrivate.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	self.DirectorZMLobbySettingList = DirectorZMLobbySettingList
 	f1_local8 = DirectorMapGameTypeAndDifficulty
 	f1_local9 = DirectorMapGameTypeAndDifficulty.subscribeToModel
-	f1_local10 = Engine[0x8DF2E5447F384B9]()
+	f1_local10 = Engine[@"getglobalmodel"]()
 	f1_local9(f1_local8, f1_local10["lobbyRoot.lobbyNetworkMode"], DirectorMapGameTypeAndDifficulty.DirectorMapAndGameInternal.MapImage.__DirectorMapAndGameInternal_MapImage_Image_FullPath)
 	f1_local8 = DirectorMapGameTypeAndDifficulty
 	f1_local9 = DirectorMapGameTypeAndDifficulty.subscribeToModel
-	f1_local10 = Engine[0x8DF2E5447F384B9]()
+	f1_local10 = Engine[@"getglobalmodel"]()
 	f1_local9(f1_local8, f1_local10["lobbyRoot.lobbyNetworkMode"], DirectorMapGameTypeAndDifficulty.DirectorMapAndGameInternal.GamemodeIcon.__GamemodeIcon_Image_FullPath)
 	f1_local8 = DirectorMapGameTypeAndDifficulty
 	f1_local9 = DirectorMapGameTypeAndDifficulty.subscribeToModel
-	f1_local10 = Engine[0x8DF2E5447F384B9]()
+	f1_local10 = Engine[@"getglobalmodel"]()
 	f1_local9(f1_local8, f1_local10["lobbyRoot.lobbyNetworkMode"], DirectorMapGameTypeAndDifficulty.DirectorMapAndGameInternal.DirectorMapAndGameTypeInternalTitles.Label.__Label_Desc_FullPath)
 	f1_local8 = DirectorMapGameTypeAndDifficulty
 	f1_local9 = DirectorMapGameTypeAndDifficulty.subscribeToModel
-	f1_local10 = Engine[0x8DF2E5447F384B9]()
+	f1_local10 = Engine[@"getglobalmodel"]()
 	f1_local9(f1_local8, f1_local10["lobbyRoot.lobbyNetworkMode"], DirectorMapGameTypeAndDifficulty.DirectorMapAndGameInternal.DirectorMapAndGameTypeInternalTitles.SubTitle.__Label_Title_FullPath)
 	self:mergeStateConditions({
 		{
@@ -215,7 +215,7 @@ CoD.directorPrivate.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	})
 	f1_local8 = self
 	f1_local9 = self.subscribeToModel
-	f1_local10 = Engine[0x8DF2E5447F384B9]()
+	f1_local10 = Engine[@"getglobalmodel"]()
 	f1_local9(f1_local8, f1_local10["lobbyRoot.lobbyNav"], function(f23_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

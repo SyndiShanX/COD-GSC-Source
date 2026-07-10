@@ -9,8 +9,8 @@ CoD.PlayerListRowHealthValue.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local HealthValue = LUI.UIText.new(0, 0, 0, 47, 0.5, 0.5, -7.5, 7.5)
 	HealthValue:setTTF("0arame_mono_stencil")
-	HealthValue:setMaterial(LUI.UIImage.GetCachedMaterial(0x71E049B161CD00A))
-	HealthValue:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	HealthValue:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_171E049B161CD00A"))
+	HealthValue:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	HealthValue:linkToElementModel(self, "health.healthValue", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then

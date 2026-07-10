@@ -10,11 +10,11 @@ CoD.WeaponVariantPipFocus.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local PipBack = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	PipBack:setImage(RegisterImage(0x920F8D99D7E96C9))
+	PipBack:setImage(RegisterImage(@"hash_4920F8D99D7E96C9"))
 	self:addElement(PipBack)
 	self.PipBack = PipBack
 	local PipFront = CoD.WeaponVariantPipInternal.new(f1_arg0, f1_arg1, 0, 1, 0, 0, 0, 1, 0, 0)
-	PipFront.Pip:setImage(RegisterImage(0x913E8D99D73F13D))
+	PipFront.Pip:setImage(RegisterImage(@"hash_4913E8D99D73F13D"))
 	PipFront:linkToElementModel(self, nil, false, function(model)
 		PipFront:setModel(model, f1_arg1)
 	end)

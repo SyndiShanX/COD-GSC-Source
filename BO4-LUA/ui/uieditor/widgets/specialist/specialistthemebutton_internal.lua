@@ -16,7 +16,7 @@ CoD.SpecialistThemeButton_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local SceneBlur = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	SceneBlur:setAlpha(0)
-	SceneBlur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	SceneBlur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	SceneBlur:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(SceneBlur)
 	self.SceneBlur = SceneBlur
@@ -27,16 +27,16 @@ CoD.SpecialistThemeButton_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	self.BlackBacking = BlackBacking
 	local TiledBacking = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	TiledBacking:setAlpha(0.5)
-	TiledBacking:setImage(RegisterImage(0x34839E8065B1E53))
-	TiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	TiledBacking:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	TiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	TiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	TiledBacking:setupNineSliceShader(196, 88)
 	self:addElement(TiledBacking)
 	self.TiledBacking = TiledBacking
 	local TiledBackingAdd = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	TiledBackingAdd:setAlpha(0)
-	TiledBackingAdd:setImage(RegisterImage(0x34839E8065B1E53))
-	TiledBackingAdd:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	TiledBackingAdd:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	TiledBackingAdd:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	TiledBackingAdd:setShaderVector(0, 0, 0, 0, 0)
 	TiledBackingAdd:setupNineSliceShader(196, 88)
 	self:addElement(TiledBackingAdd)
@@ -61,8 +61,8 @@ CoD.SpecialistThemeButton_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	Header:setAlpha(0.75)
 	Header:setTTF("ttmussels_demibold")
 	Header:setLetterSpacing(6)
-	Header:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Header:setAlignment(Enum[0x7A5123B654282D2][0x6ED4298C93DC5ED])
+	Header:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Header:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
 	Header:linkToElementModel(self, "displayName", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -73,15 +73,15 @@ CoD.SpecialistThemeButton_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	self.Header = Header
 	local BracketL = LUI.UIImage.new(1, 1, -82, -74, 0, 0, 23, 47)
 	BracketL:setAlpha(0)
-	BracketL:setImage(RegisterImage(0x6AA0A70F33D3978))
-	BracketL:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	BracketL:setImage(RegisterImage(@"hash_6AA0A70F33D3978"))
+	BracketL:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(BracketL)
 	self.BracketL = BracketL
 	local BracketR = LUI.UIImage.new(1, 1, -24, -16, 0, 0, 22.5, 46.5)
 	BracketR:setAlpha(0)
 	BracketR:setZRot(180)
-	BracketR:setImage(RegisterImage(0x6AA0A70F33D3978))
-	BracketR:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	BracketR:setImage(RegisterImage(@"hash_6AA0A70F33D3978"))
+	BracketR:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(BracketR)
 	self.BracketR = BracketR
 	local caclock = CoD.cac_lock.new(f1_arg0, f1_arg1, 1, 1, -55, -25, 0.5, 0.5, -15, 15)
@@ -131,7 +131,7 @@ CoD.SpecialistThemeButton_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 		})
 	end, false)
 	EquippedMarkerTick:setZoom(4)
-	EquippedMarkerTick.image:setImage(RegisterImage(0x9A8B26C9B001758))
+	EquippedMarkerTick.image:setImage(RegisterImage(@"uie_ui_menu_cac_equipped_marker_tick"))
 	EquippedMarkerTick:linkToElementModel(self, nil, false, function(model)
 		EquippedMarkerTick:setModel(model, f1_arg1)
 	end)
@@ -192,7 +192,7 @@ CoD.SpecialistThemeButton_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	end)
 	local f1_local16 = CommonButtonOutline
 	local f1_local17 = CommonButtonOutline.subscribeToModel
-	local f1_local18 = Engine[0x8DF2E5447F384B9]()
+	local f1_local18 = Engine[@"getglobalmodel"]()
 	f1_local17(f1_local16, f1_local18["lobbyRoot.lobbyNav"], function(f14_arg0)
 		f1_arg0:updateElementState(CommonButtonOutline, {
 			name = "model_validation",

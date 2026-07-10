@@ -13,12 +13,12 @@ CoD.PC_StartMenu_OptionsTabs_Background.new = function(f1_arg0, f1_arg1, f1_arg2
 	self.TabBackingTint = TabBackingTint
 	local TabBottomLine = LUI.UIImage.new(0, 1, 0, 0, 0, 0, 34, 38)
 	TabBottomLine:setAlpha(0.08)
-	TabBottomLine:setImage(RegisterImage(0x5526CF3733E24C4))
+	TabBottomLine:setImage(RegisterImage(@"uie_ui_menu_common_tab_line_bottom"))
 	self:addElement(TabBottomLine)
 	self.TabBottomLine = TabBottomLine
 	local TabBackingBlur = LUI.UIImage.new(0, 1, 0, 0, 0, 0, 0, 37)
 	TabBackingBlur:setAlpha(0)
-	TabBackingBlur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	TabBackingBlur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	TabBackingBlur:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(TabBackingBlur)
 	self.TabBackingBlur = TabBackingBlur

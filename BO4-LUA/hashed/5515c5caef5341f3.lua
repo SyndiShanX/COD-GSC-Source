@@ -15,7 +15,7 @@ CoD.ZMInvPhasedItemsContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	ItemsPhase0:setTopBottom(0, 0, 0, 80)
 	ItemsPhase0:setWidgetType(CoD.ZMInvWonderWeaponComponent)
 	ItemsPhase0:setHorizontalCount(4)
-	ItemsPhase0:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	ItemsPhase0:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	ItemsPhase0:setFilter(function(f2_arg0)
 		return f2_arg0.displayedInPhase:get() == 0
 	end)
@@ -28,7 +28,7 @@ CoD.ZMInvPhasedItemsContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	ItemsPhase1:setAlpha(0)
 	ItemsPhase1:setWidgetType(CoD.ZMInvWonderWeaponComponent)
 	ItemsPhase1:setHorizontalCount(4)
-	ItemsPhase1:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	ItemsPhase1:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	ItemsPhase1:setFilter(function(f3_arg0)
 		return f3_arg0.displayedInPhase:get() == 1
 	end)
@@ -41,7 +41,7 @@ CoD.ZMInvPhasedItemsContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	ItemsPhase2:setAlpha(0)
 	ItemsPhase2:setWidgetType(CoD.ZMInvWonderWeaponComponent)
 	ItemsPhase2:setHorizontalCount(4)
-	ItemsPhase2:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	ItemsPhase2:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	ItemsPhase2:setFilter(function(f4_arg0)
 		return f4_arg0.displayedInPhase:get() == 2
 	end)
@@ -54,7 +54,7 @@ CoD.ZMInvPhasedItemsContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	ItemsPhase3:setAlpha(0)
 	ItemsPhase3:setWidgetType(CoD.ZMInvWonderWeaponComponent)
 	ItemsPhase3:setHorizontalCount(4)
-	ItemsPhase3:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	ItemsPhase3:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	ItemsPhase3:setFilter(function(f5_arg0)
 		return f5_arg0.displayedInPhase:get() == 3
 	end)

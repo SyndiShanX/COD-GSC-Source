@@ -21,7 +21,7 @@ CoD.AARTierRewardColumn.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	})
 	local f1_local2 = Header
 	local TierRewardGrid = Header.subscribeToModel
-	local f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	TierRewardGrid(f1_local2, f1_local4["AAR.tierReward.highlightedTier"], function(f3_arg0)
 		f1_arg0:updateElementState(Header, {
 			name = "model_validation",
@@ -63,7 +63,7 @@ CoD.AARTierRewardColumn.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	TierRewardGrid:setWidgetType(CoD.AARTierRewardItem)
 	TierRewardGrid:setVerticalCount(4)
 	TierRewardGrid:setSpacing(11)
-	TierRewardGrid:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	TierRewardGrid:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	TierRewardGrid:linkToElementModel(self, "tierRewardDatasource", true, function(model)
 		local f8_local0 = model:get()
 		if f8_local0 ~= nil then

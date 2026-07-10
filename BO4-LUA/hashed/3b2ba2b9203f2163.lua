@@ -13,7 +13,7 @@ CoD.ContractSupplyChainDetails_InfoPanel.new = function(f1_arg0, f1_arg1, f1_arg
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local SceneBlur = LUI.UIImage.new(0, 0, 6, 552, 0, 0, 6.5, 231.5)
-	SceneBlur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	SceneBlur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	SceneBlur:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(SceneBlur)
 	self.SceneBlur = SceneBlur
@@ -28,8 +28,8 @@ CoD.ContractSupplyChainDetails_InfoPanel.new = function(f1_arg0, f1_arg1, f1_arg
 	local Desc = LUI.UIText.new(0, 0, 27, 527, 0, 0, 90, 108)
 	Desc:setTTF("dinnext_regular")
 	Desc:setLetterSpacing(1)
-	Desc:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Desc:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Desc:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Desc:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	Desc:linkToElementModel(self, "contentsDesc", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -41,12 +41,12 @@ CoD.ContractSupplyChainDetails_InfoPanel.new = function(f1_arg0, f1_arg1, f1_arg
 	local SubExtraText = LUI.UIText.new(0, 0, 27, 527, 0, 0, 198.5, 216.5)
 	SubExtraText:setTTF("dinnext_regular")
 	SubExtraText:setLetterSpacing(1)
-	SubExtraText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	SubExtraText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	SubExtraText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	SubExtraText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	SubExtraText:linkToElementModel(self, "subExtraText", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
-			SubExtraText:setText(Engine[0xF9F1239CFD921FE](f3_local0))
+			SubExtraText:setText(Engine[@"hash_4F9F1239CFD921FE"](f3_local0))
 		end
 	end)
 	self:addElement(SubExtraText)
@@ -55,8 +55,8 @@ CoD.ContractSupplyChainDetails_InfoPanel.new = function(f1_arg0, f1_arg1, f1_arg
 	MainExtraText:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	MainExtraText:setTTF("ttmussels_regular")
 	MainExtraText:setLetterSpacing(2)
-	MainExtraText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	MainExtraText:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	MainExtraText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	MainExtraText:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	MainExtraText:linkToElementModel(self, "mainExtraText", true, function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
@@ -69,8 +69,8 @@ CoD.ContractSupplyChainDetails_InfoPanel.new = function(f1_arg0, f1_arg1, f1_arg
 	Name:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
 	Name:setTTF("ttmussels_demibold")
 	Name:setLetterSpacing(4)
-	Name:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Name:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	Name:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Name:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	Name:linkToElementModel(self, "name", true, function(model)
 		local f5_local0 = model:get()
 		if f5_local0 ~= nil then
@@ -81,24 +81,24 @@ CoD.ContractSupplyChainDetails_InfoPanel.new = function(f1_arg0, f1_arg1, f1_arg
 	self.Name = Name
 	local ButtonTopLine9Slice = LUI.UIImage.new(0, 0, 0, 558, 0, 0, 0, 20)
 	ButtonTopLine9Slice:setAlpha(0.25)
-	ButtonTopLine9Slice:setImage(RegisterImage(0xC752149A1FA1AAE))
-	ButtonTopLine9Slice:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	ButtonTopLine9Slice:setImage(RegisterImage(@"uie_ui_menu_cac_secondary_button_top_line"))
+	ButtonTopLine9Slice:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	ButtonTopLine9Slice:setShaderVector(0, 0, 0, 0, 0)
 	ButtonTopLine9Slice:setupNineSliceShader(120, 10)
 	self:addElement(ButtonTopLine9Slice)
 	self.ButtonTopLine9Slice = ButtonTopLine9Slice
 	local ButtonBottomLine9Slice = LUI.UIImage.new(0, 0, 0, 558, 0, 0, 223, 243)
 	ButtonBottomLine9Slice:setAlpha(0.25)
-	ButtonBottomLine9Slice:setImage(RegisterImage(0xC752149A1FA1AAE))
-	ButtonBottomLine9Slice:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	ButtonBottomLine9Slice:setImage(RegisterImage(@"uie_ui_menu_cac_secondary_button_top_line"))
+	ButtonBottomLine9Slice:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	ButtonBottomLine9Slice:setShaderVector(0, 0, 0, 0, 0)
 	ButtonBottomLine9Slice:setupNineSliceShader(120, 10)
 	self:addElement(ButtonBottomLine9Slice)
 	self.ButtonBottomLine9Slice = ButtonBottomLine9Slice
 	local HeaderGlow = LUI.UIImage.new(0, 0, 2, 556, 0, 0, 12, 44)
 	HeaderGlow:setAlpha(0.1)
-	HeaderGlow:setImage(RegisterImage(0xFAA6C81834660D3))
-	HeaderGlow:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	HeaderGlow:setImage(RegisterImage(@"uie_ui_menu_common_box_glow"))
+	HeaderGlow:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	HeaderGlow:setShaderVector(0, 0, 0, 0, 0)
 	HeaderGlow:setupNineSliceShader(12, 12)
 	HeaderGlow:linkToElementModel(self, "rarity", true, function(model)
@@ -120,8 +120,8 @@ CoD.ContractSupplyChainDetails_InfoPanel.new = function(f1_arg0, f1_arg1, f1_arg
 	self.ContractRarityHeaderBackground = ContractRarityHeaderBackground
 	local PixelGridTiledBacking = LUI.UIImage.new(0, 0, 5.5, 551.5, 0, 0, 16, 40)
 	PixelGridTiledBacking:setAlpha(0.05)
-	PixelGridTiledBacking:setImage(RegisterImage(0x311E811A3183347))
-	PixelGridTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	PixelGridTiledBacking:setImage(RegisterImage(@"uie_ui_hud_notifications_pixelpattern"))
+	PixelGridTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	PixelGridTiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	PixelGridTiledBacking:setupNineSliceShader(128, 128)
 	self:addElement(PixelGridTiledBacking)
@@ -143,10 +143,10 @@ CoD.ContractSupplyChainDetails_InfoPanel.new = function(f1_arg0, f1_arg1, f1_arg
 	local togglePreviewLabel = LUI.UIText.new(0, 0, 69, 117, 0.5, 0.5, -149.5, -131.5)
 	togglePreviewLabel:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	togglePreviewLabel:setAlpha(0)
-	togglePreviewLabel:setText(Engine[0xF9F1239CFD921FE](0x32E3CA70AD7D0D0))
+	togglePreviewLabel:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/toggle_preview"))
 	togglePreviewLabel:setTTF("dinnext_regular")
 	togglePreviewLabel:setLetterSpacing(2)
-	togglePreviewLabel:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	togglePreviewLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(togglePreviewLabel)
 	self.togglePreviewLabel = togglePreviewLabel
 	local Seasonal = CoD.ContractSeasonalOverlay_MetadataPanel.new(f1_arg0, f1_arg1, 0, 0, 6, 552, 0, 0, 16, 41)
@@ -182,13 +182,13 @@ CoD.ContractSupplyChainDetails_InfoPanel.new = function(f1_arg0, f1_arg1, f1_arg
 		{
 			stateName = "Weapon",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", 0xCC13B0F8EEFF726) and not IsMouseOrKeyboard(f1_arg1)
+				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", @"signature_weapon") and not IsMouseOrKeyboard(f1_arg1)
 			end,
 		},
 		{
 			stateName = "WeaponKBM",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", 0xCC13B0F8EEFF726) and IsMouseOrKeyboard(f1_arg1)
+				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", @"signature_weapon") and IsMouseOrKeyboard(f1_arg1)
 			end,
 		},
 	})
@@ -207,7 +207,7 @@ CoD.ContractSupplyChainDetails_InfoPanel.new = function(f1_arg0, f1_arg1, f1_arg
 	end)
 	local f1_local18 = self
 	local f1_local19 = self.subscribeToModel
-	local f1_local20 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local20 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local19(f1_local18, f1_local20.LastInput, function(f17_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

@@ -11,8 +11,8 @@ CoD.SelfIdentityBadgePreview.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local BackingBorder = LUI.UIImage.new(0.5, 0.5, -219, 219, 0.5, 0.5, -45, 45)
-	BackingBorder:setImage(RegisterImage(0x34839E8065B1E53))
-	BackingBorder:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	BackingBorder:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	BackingBorder:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	BackingBorder:setShaderVector(0, 0, 0, 0, 0)
 	BackingBorder:setupNineSliceShader(196, 88)
 	self:addElement(BackingBorder)
@@ -26,15 +26,15 @@ CoD.SelfIdentityBadgePreview.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	self.SelfIdentityBadge = SelfIdentityBadge
 	local DotLineTop = LUI.UIImage.new(0, 1, 0, 0, 0, 0, -6, -2)
 	DotLineTop:setAlpha(0.4)
-	DotLineTop:setImage(RegisterImage(0xF9C7F41C631866E))
-	DotLineTop:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	DotLineTop:setImage(RegisterImage(@"uie_ui_menu_social_emblem_dotline"))
+	DotLineTop:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	DotLineTop:setShaderVector(0, 1.2, 0, 0, 0)
 	self:addElement(DotLineTop)
 	self.DotLineTop = DotLineTop
 	local DotLineBottom = LUI.UIImage.new(0, 1, 0, 0, 0, 0, 93, 97)
 	DotLineBottom:setAlpha(0.4)
-	DotLineBottom:setImage(RegisterImage(0xF9C7F41C631866E))
-	DotLineBottom:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	DotLineBottom:setImage(RegisterImage(@"uie_ui_menu_social_emblem_dotline"))
+	DotLineBottom:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	DotLineBottom:setShaderVector(0, 1.2, 0, 0, 0)
 	self:addElement(DotLineBottom)
 	self.DotLineBottom = DotLineBottom

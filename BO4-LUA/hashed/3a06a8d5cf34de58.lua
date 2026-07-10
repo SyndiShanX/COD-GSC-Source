@@ -11,7 +11,7 @@ CoD.ItemShopDiscountBanner.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	local Corner = LUI.UIImage.new(0, 0, 195, 211, 0, 0, 0, 16)
 	Corner:setRGB(0.45, 0.41, 0.07)
 	Corner:setAlpha(0)
-	Corner:setImage(RegisterImage(0xB998225BD626F68))
+	Corner:setImage(RegisterImage(@"hash_5B998225BD626F68"))
 	self:addElement(Corner)
 	self.Corner = Corner
 	local Promo = LUI.UIText.new(0, 0, 0, 200, 0, 0, 9, 28)
@@ -19,7 +19,7 @@ CoD.ItemShopDiscountBanner.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	Promo:setAlpha(0)
 	Promo:setTTF("ttmussels_demibold")
 	Promo:setLetterSpacing(2)
-	Promo:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
+	Promo:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
 	Promo:setBackingType(1)
 	Promo:setBackingWidget(CoD.ContractSeasonalPromoBacker, f1_arg0, f1_arg1)
 	Promo:setBackingXPadding(7)
@@ -27,7 +27,7 @@ CoD.ItemShopDiscountBanner.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	Promo:linkToElementModel(self, "percentOff", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			Promo:setText(ToUpper(LocalizeIntoString(0x4211D07B481977D, f2_local0)))
+			Promo:setText(ToUpper(LocalizeIntoString(@"hash_44211D07B481977D", f2_local0)))
 		end
 	end)
 	self:addElement(Promo)

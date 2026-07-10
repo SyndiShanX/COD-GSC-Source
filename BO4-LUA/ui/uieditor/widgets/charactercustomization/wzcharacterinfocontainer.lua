@@ -184,7 +184,7 @@ CoD.WZCharacterInfoContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 end
 CoD.WZCharacterInfoContainer.__resetProperties = function(f22_arg0)
 	f22_arg0.TrialWidget:completeAnimation()
-	f22_arg0.TrialWidget.InfoText:setText(Engine[0xF9F1239CFD921FE](0x62486486346EC3F))
+	f22_arg0.TrialWidget.InfoText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_262486486346EC3F"))
 end
 CoD.WZCharacterInfoContainer.__clipsPerState = {
 	DefaultState = {
@@ -199,7 +199,7 @@ CoD.WZCharacterInfoContainer.__clipsPerState = {
 			f24_arg0:setupElementClipCounter(1)
 			f24_arg0.TrialWidget:completeAnimation()
 			f24_arg0.TrialWidget.InfoText:completeAnimation()
-			f24_arg0.TrialWidget.InfoText:setText(Engine[0xF9F1239CFD921FE](0x7C9D41D120A6AD1))
+			f24_arg0.TrialWidget.InfoText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_17C9D41D120A6AD1"))
 			f24_arg0.clipFinished(f24_arg0.TrialWidget)
 		end,
 	},
@@ -209,7 +209,7 @@ CoD.WZCharacterInfoContainer.__clipsPerState = {
 			f25_arg0:setupElementClipCounter(1)
 			f25_arg0.TrialWidget:completeAnimation()
 			f25_arg0.TrialWidget.InfoText:completeAnimation()
-			f25_arg0.TrialWidget.InfoText:setText(Engine[0xF9F1239CFD921FE](0x8C8E3A75045BE50))
+			f25_arg0.TrialWidget.InfoText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_48C8E3A75045BE50"))
 			f25_arg0.clipFinished(f25_arg0.TrialWidget)
 		end,
 	},
@@ -219,7 +219,7 @@ CoD.WZCharacterInfoContainer.__clipsPerState = {
 			f26_arg0:setupElementClipCounter(1)
 			f26_arg0.TrialWidget:completeAnimation()
 			f26_arg0.TrialWidget.InfoText:completeAnimation()
-			f26_arg0.TrialWidget.InfoText:setText(Engine[0xF9F1239CFD921FE](0xE88946FB6CDD737))
+			f26_arg0.TrialWidget.InfoText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_2E88946FB6CDD737"))
 			f26_arg0.clipFinished(f26_arg0.TrialWidget)
 		end,
 	},

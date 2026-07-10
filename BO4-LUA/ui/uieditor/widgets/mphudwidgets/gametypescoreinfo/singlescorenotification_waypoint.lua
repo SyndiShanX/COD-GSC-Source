@@ -14,7 +14,7 @@ CoD.SingleScoreNotification_Waypoint.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	WaypointList:setWidgetType(CoD.ScoreNotificationWaypoint)
 	WaypointList:setHorizontalCount(5)
 	WaypointList:setSpacing(-18)
-	WaypointList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	WaypointList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	WaypointList:setDataSource("WaypointObjectiveList")
 	LUI.OverrideFunction_CallOriginalFirst(WaypointList, "setWidth", function(element, controller)
 		ScaleToElementWidth(self, element, 0)

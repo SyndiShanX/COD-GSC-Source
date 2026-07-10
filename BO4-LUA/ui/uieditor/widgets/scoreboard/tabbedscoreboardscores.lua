@@ -17,7 +17,7 @@ CoD.TabbedScoreboardScores.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Blur = LUI.UIImage.new(0, 0, 235, 1685, 0, 0, 177, 676)
-	Blur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	Blur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	Blur:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(Blur)
 	self.Blur = Blur
@@ -29,7 +29,7 @@ CoD.TabbedScoreboardScores.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	local TintBody02 = LUI.UIImage.new(0, 0, 233, 1687, 0, 0, 174.5, 678.5)
 	TintBody02:setRGB(0.87, 0.87, 0.87)
 	TintBody02:setAlpha(0.9)
-	TintBody02:setImage(RegisterImage(0xDEEBB22EE3BB003))
+	TintBody02:setImage(RegisterImage(@"uie_ui_menu_mp_scoreboard_list_bg"))
 	self:addElement(TintBody02)
 	self.TintBody02 = TintBody02
 	local TintBody01 = LUI.UIImage.new(0, 0, 235, 1685, 0, 0, 177, 185)
@@ -43,27 +43,27 @@ CoD.TabbedScoreboardScores.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	YourTeamScores:setWidgetType(CoD.TabbedScoreboardRowLeft)
 	YourTeamScores:setVerticalCount(6)
 	YourTeamScores:setSpacing(6)
-	YourTeamScores:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	YourTeamScores:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	YourTeamScores:setDataSource("Clients")
 	local TopBarLeft01 = YourTeamScores
 	local EnemyTeamScores = YourTeamScores.subscribeToModel
-	local TopBarRight01 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local TopBarRight01 = Engine[@"getmodelforcontroller"](f1_arg1)
 	EnemyTeamScores(TopBarLeft01, TopBarRight01.forceScoreboard, function(f2_arg0, f2_arg1)
-		CoD.Menu.UpdateButtonShownState(f2_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(f2_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+		CoD.Menu.UpdateButtonShownState(f2_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(f2_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 	end, false)
 	TopBarLeft01 = YourTeamScores
 	EnemyTeamScores = YourTeamScores.subscribeToModel
-	TopBarRight01 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	EnemyTeamScores(TopBarLeft01, TopBarRight01["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04]], function(f3_arg0, f3_arg1)
-		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+	TopBarRight01 = Engine[@"getmodelforcontroller"](f1_arg1)
+	EnemyTeamScores(TopBarLeft01, TopBarRight01["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]], function(f3_arg0, f3_arg1)
+		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 	end, false)
 	TopBarLeft01 = YourTeamScores
 	EnemyTeamScores = YourTeamScores.subscribeToModel
-	TopBarRight01 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	EnemyTeamScores(TopBarLeft01, TopBarRight01["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2]], function(f4_arg0, f4_arg1)
-		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+	TopBarRight01 = Engine[@"getmodelforcontroller"](f1_arg1)
+	EnemyTeamScores(TopBarLeft01, TopBarRight01["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"]], function(f4_arg0, f4_arg1)
+		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 	end, false)
 	YourTeamScores:registerEventHandler("list_item_gain_focus", function(element, event)
 		local f5_local0 = nil
@@ -79,11 +79,11 @@ CoD.TabbedScoreboardScores.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 		end
 		CoD.ScoreboardUtility.SetSavedActiveItemToLocalPlayer(element, f1_arg1)
 		CoD.CodCasterUtility.ScoreboardSetFocus(self, f1_arg1)
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 		return f6_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(YourTeamScores, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(YourTeamScores, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if ScoreboardVisible(controller) then
 			CoD.ScoreboardUtility.ToggleClientMute(element, controller)
 			return true
@@ -91,21 +91,21 @@ CoD.TabbedScoreboardScores.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 		end
 	end, function(element, menu, controller)
 		if ScoreboardVisible(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, nil)
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(YourTeamScores, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], nil, function(element, menu, controller, model)
-		if ScoreboardVisible(controller) and IsVisibilityBitSet(controller, Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2]) then
+	f1_arg0:AddButtonCallbackFunction(YourTeamScores, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], nil, function(element, menu, controller, model)
+		if ScoreboardVisible(controller) and IsVisibilityBitSet(controller, Enum[@"uivisibilitybit"][@"bit_in_killcam"]) then
 			BlockGameFromKeyEvent(controller)
 			return true
 		else
 		end
 	end, function(element, menu, controller)
-		if ScoreboardVisible(controller) and IsVisibilityBitSet(controller, Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2]) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x0, nil, nil)
+		if ScoreboardVisible(controller) and IsVisibilityBitSet(controller, Enum[@"uivisibilitybit"][@"bit_in_killcam"]) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"hash_0", nil, nil)
 			return false
 		else
 			return false
@@ -119,27 +119,27 @@ CoD.TabbedScoreboardScores.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	EnemyTeamScores:setWidgetType(CoD.TabbedScoreboardRowRight)
 	EnemyTeamScores:setVerticalCount(6)
 	EnemyTeamScores:setSpacing(6)
-	EnemyTeamScores:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	EnemyTeamScores:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	EnemyTeamScores:setDataSource("Clients")
 	TopBarRight01 = EnemyTeamScores
 	TopBarLeft01 = EnemyTeamScores.subscribeToModel
-	local RankHashtagLeft = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local RankHashtagLeft = Engine[@"getmodelforcontroller"](f1_arg1)
 	TopBarLeft01(TopBarRight01, RankHashtagLeft.forceScoreboard, function(f11_arg0, f11_arg1)
-		CoD.Menu.UpdateButtonShownState(f11_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(f11_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+		CoD.Menu.UpdateButtonShownState(f11_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(f11_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 	end, false)
 	TopBarRight01 = EnemyTeamScores
 	TopBarLeft01 = EnemyTeamScores.subscribeToModel
-	RankHashtagLeft = Engine[0x4DF5CFBC1771947](f1_arg1)
-	TopBarLeft01(TopBarRight01, RankHashtagLeft["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04]], function(f12_arg0, f12_arg1)
-		CoD.Menu.UpdateButtonShownState(f12_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(f12_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+	RankHashtagLeft = Engine[@"getmodelforcontroller"](f1_arg1)
+	TopBarLeft01(TopBarRight01, RankHashtagLeft["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]], function(f12_arg0, f12_arg1)
+		CoD.Menu.UpdateButtonShownState(f12_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(f12_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 	end, false)
 	TopBarRight01 = EnemyTeamScores
 	TopBarLeft01 = EnemyTeamScores.subscribeToModel
-	RankHashtagLeft = Engine[0x4DF5CFBC1771947](f1_arg1)
-	TopBarLeft01(TopBarRight01, RankHashtagLeft["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2]], function(f13_arg0, f13_arg1)
-		CoD.Menu.UpdateButtonShownState(f13_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+	RankHashtagLeft = Engine[@"getmodelforcontroller"](f1_arg1)
+	TopBarLeft01(TopBarRight01, RankHashtagLeft["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"]], function(f13_arg0, f13_arg1)
+		CoD.Menu.UpdateButtonShownState(f13_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 	end, false)
 	EnemyTeamScores:registerEventHandler("list_item_gain_focus", function(element, event)
 		local f14_local0 = nil
@@ -153,11 +153,11 @@ CoD.TabbedScoreboardScores.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 		elseif element.super.gainFocus then
 			f15_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 		return f15_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(EnemyTeamScores, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(EnemyTeamScores, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if ScoreboardVisible(controller) then
 			CoD.ScoreboardUtility.ToggleClientMute(element, controller)
 			return true
@@ -165,21 +165,21 @@ CoD.TabbedScoreboardScores.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 		end
 	end, function(element, menu, controller)
 		if ScoreboardVisible(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, nil)
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(EnemyTeamScores, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], nil, function(element, menu, controller, model)
-		if ScoreboardVisible(controller) and IsVisibilityBitSet(controller, Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2]) then
+	f1_arg0:AddButtonCallbackFunction(EnemyTeamScores, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], nil, function(element, menu, controller, model)
+		if ScoreboardVisible(controller) and IsVisibilityBitSet(controller, Enum[@"uivisibilitybit"][@"bit_in_killcam"]) then
 			BlockGameFromKeyEvent(controller)
 			return true
 		else
 		end
 	end, function(element, menu, controller)
-		if ScoreboardVisible(controller) and IsVisibilityBitSet(controller, Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2]) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x0, nil, nil)
+		if ScoreboardVisible(controller) and IsVisibilityBitSet(controller, Enum[@"uivisibilitybit"][@"bit_in_killcam"]) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"hash_0", nil, nil)
 			return false
 		else
 			return false
@@ -188,7 +188,7 @@ CoD.TabbedScoreboardScores.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self:addElement(EnemyTeamScores)
 	self.EnemyTeamScores = EnemyTeamScores
 	TopBarLeft01 = LUI.UIImage.new(0, 0, 251, 943, 0, 0, 220, 232)
-	TopBarLeft01:setImage(RegisterImage(0xD8E206A00473587))
+	TopBarLeft01:setImage(RegisterImage(@"hash_6D8E206A00473587"))
 	TopBarLeft01:subscribeToGlobalModel(f1_arg1, "Factions", "alliesFactionColor", function(model)
 		local f20_local0 = model:get()
 		if f20_local0 ~= nil then
@@ -198,7 +198,7 @@ CoD.TabbedScoreboardScores.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self:addElement(TopBarLeft01)
 	self.TopBarLeft01 = TopBarLeft01
 	TopBarRight01 = LUI.UIImage.new(0, 0, 981, 1673, 0, 0, 220, 232)
-	TopBarRight01:setImage(RegisterImage(0xD8E206A00473587))
+	TopBarRight01:setImage(RegisterImage(@"hash_6D8E206A00473587"))
 	TopBarRight01:subscribeToGlobalModel(f1_arg1, "Factions", "axisFactionColor", function(model)
 		local f21_local0 = model:get()
 		if f21_local0 ~= nil then
@@ -209,34 +209,34 @@ CoD.TabbedScoreboardScores.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self.TopBarRight01 = TopBarRight01
 	RankHashtagLeft = LUI.UIText.new(0, 0, 253, 295, 0, 0, 197.5, 212.5)
 	RankHashtagLeft:setRGB(0.7, 0.7, 0.7)
-	RankHashtagLeft:setText(Engine[0xF9F1239CFD921FE](0x1F2CC836CC2EF55))
+	RankHashtagLeft:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/hashtag"))
 	RankHashtagLeft:setTTF("0arame_mono_stencil")
-	RankHashtagLeft:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	RankHashtagLeft:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	RankHashtagLeft:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	RankHashtagLeft:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(RankHashtagLeft)
 	self.RankHashtagLeft = RankHashtagLeft
 	local SpecialistLeft = LUI.UIText.new(0, 0, 295.5, 684.5, 0, 0, 197.5, 212.5)
 	SpecialistLeft:setRGB(0.7, 0.7, 0.7)
-	SpecialistLeft:setText(Engine[0xF9F1239CFD921FE](0xE5960B3E0AF9188))
+	SpecialistLeft:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_E5960B3E0AF9188"))
 	SpecialistLeft:setTTF("0arame_mono_stencil")
-	SpecialistLeft:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	SpecialistLeft:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	SpecialistLeft:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	SpecialistLeft:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(SpecialistLeft)
 	self.SpecialistLeft = SpecialistLeft
 	local SpecialistRight = LUI.UIText.new(0, 0, 1026, 1414, 0, 0, 197.5, 212.5)
 	SpecialistRight:setRGB(0.7, 0.7, 0.7)
-	SpecialistRight:setText(Engine[0xF9F1239CFD921FE](0xE5960B3E0AF9188))
+	SpecialistRight:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_E5960B3E0AF9188"))
 	SpecialistRight:setTTF("0arame_mono_stencil")
-	SpecialistRight:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	SpecialistRight:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	SpecialistRight:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	SpecialistRight:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(SpecialistRight)
 	self.SpecialistRight = SpecialistRight
 	local RankHashtagRight = LUI.UIText.new(0, 0, 986, 1028, 0, 0, 197.5, 212.5)
 	RankHashtagRight:setRGB(0.7, 0.7, 0.7)
-	RankHashtagRight:setText(Engine[0xF9F1239CFD921FE](0x1F2CC836CC2EF55))
+	RankHashtagRight:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/hashtag"))
 	RankHashtagRight:setTTF("0arame_mono_stencil")
-	RankHashtagRight:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	RankHashtagRight:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	RankHashtagRight:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	RankHashtagRight:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(RankHashtagRight)
 	self.RankHashtagRight = RankHashtagRight
 	local FriendlyHeaders = CoD.TabbedScoreboardColHeaders.new(f1_arg0, f1_arg1, 0, 0, 691, 937, 0, 0, 185, 225)
@@ -265,7 +265,7 @@ CoD.TabbedScoreboardScores.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	})
 	local f1_local16 = self
 	local f1_local17 = self.subscribeToModel
-	local f1_local18 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local18 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local17(f1_local16, f1_local18["scoreboardInfo.activeTab"], function(f24_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

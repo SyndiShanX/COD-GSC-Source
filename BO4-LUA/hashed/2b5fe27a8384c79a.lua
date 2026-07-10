@@ -35,27 +35,27 @@ CoD.NameAndXPBonus.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 		})
 	end)
 	MastercraftName:setRGB(0.39, 0.39, 0.39)
-	MastercraftName.TextBox:setAlignment(Enum[0x7A5123B654282D2][0x70510683C22104B])
+	MastercraftName.TextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_bottom"])
 	MastercraftName:linkToElementModel(self, nil, false, function(model)
 		MastercraftName:setModel(model, f1_arg1)
 	end)
 	MastercraftName:linkToElementModel(self, "signatureVariantName", true, function(model)
 		local f6_local0 = model:get()
 		if f6_local0 ~= nil then
-			MastercraftName.TextBox:setText(Engine[0xF9F1239CFD921FE](f6_local0))
+			MastercraftName.TextBox:setText(Engine[@"hash_4F9F1239CFD921FE"](f6_local0))
 		end
 	end)
 	self:addElement(MastercraftName)
 	self.MastercraftName = MastercraftName
 	local Spacer = LUI.UIImage.new(0, 0, 0, 500, 0, 0, 7, 17)
-	Spacer:setImage(RegisterImage(0x7615068F50B3D66))
+	Spacer:setImage(RegisterImage(@"blacktransparent"))
 	self:addElement(Spacer)
 	self.Spacer = Spacer
 	local Name = LUI.UIText.new(0, 0, 0, 500, 0, 0, -25, 7)
 	Name:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
 	Name:setTTF("ttmussels_demibold")
 	Name:setLetterSpacing(14)
-	Name:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	Name:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	Name:linkToElementModel(self, "name", true, function(model)
 		local f7_local0 = model:get()
 		if f7_local0 ~= nil then

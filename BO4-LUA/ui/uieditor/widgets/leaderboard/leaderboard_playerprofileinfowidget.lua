@@ -20,8 +20,8 @@ CoD.Leaderboard_PlayerProfileInfoWidget.new = function(f1_arg0, f1_arg1, f1_arg2
 	Title:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	Title:setTTF("notosans_regular")
 	Title:setLetterSpacing(2)
-	Title:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Title:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Title:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Title:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	Title:linkToElementModel(self, "name", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -65,8 +65,8 @@ CoD.Leaderboard_PlayerProfileInfoWidget.new = function(f1_arg0, f1_arg1, f1_arg2
 	self.GamerCard = GamerCard
 	local PixelGridTiledBacking = LUI.UIImage.new(0, 0, 0, 360, 0, 0, 0, 37)
 	PixelGridTiledBacking:setAlpha(0.15)
-	PixelGridTiledBacking:setImage(RegisterImage(0x311E811A3183347))
-	PixelGridTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	PixelGridTiledBacking:setImage(RegisterImage(@"uie_ui_hud_notifications_pixelpattern"))
+	PixelGridTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	PixelGridTiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	PixelGridTiledBacking:setupNineSliceShader(128, 128)
 	self:addElement(PixelGridTiledBacking)

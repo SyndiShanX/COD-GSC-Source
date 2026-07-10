@@ -15,12 +15,12 @@ CoD.MultiItemPickupWaypoint_HeaderInfo.new = function(f1_arg0, f1_arg1, f1_arg2,
 	end
 	text.__Alpha()
 	text.__String_Reference = function()
-		text:setText(Engine[0xF9F1239CFD921FE](CoD.HUDUtility.Get3DWeaponHintPickupHintTextWithPickUpOptions(f1_arg1)))
+		text:setText(Engine[@"hash_4F9F1239CFD921FE"](CoD.HUDUtility.Get3DWeaponHintPickupHintTextWithPickUpOptions(f1_arg1)))
 	end
 	text.__String_Reference()
 	text:setTTF("dinnext_regular")
 	text:setLetterSpacing(0.5)
-	text:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	text:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(text)
 	self.text = text
 	local Line = LUI.UIImage.new(0, 0, 178, 179, 0, 0, -5, 25)
@@ -31,11 +31,11 @@ CoD.MultiItemPickupWaypoint_HeaderInfo.new = function(f1_arg0, f1_arg1, f1_arg2,
 	CursorHintText:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	CursorHintText:setTTF("ttmussels_demibold")
 	CursorHintText:setLetterSpacing(0.5)
-	CursorHintText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	CursorHintText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	CursorHintText:linkToElementModel(self, "name", true, function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
-			CursorHintText:setText(Engine[0xF9F1239CFD921FE](f4_local0))
+			CursorHintText:setText(Engine[@"hash_4F9F1239CFD921FE"](f4_local0))
 		end
 	end)
 	self:addElement(CursorHintText)
@@ -50,7 +50,7 @@ CoD.MultiItemPickupWaypoint_HeaderInfo.new = function(f1_arg0, f1_arg1, f1_arg2,
 	f1_local5(f1_local4, f1_local6.heroHoldProgress, text.__Alpha)
 	f1_local4 = text
 	f1_local5 = text.subscribeToModel
-	f1_local6 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local6 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local5(f1_local4, f1_local6["hudItems.inventory.filledSlots"], text.__Alpha)
 	f1_local4 = text
 	f1_local5 = text.subscribeToModel
@@ -62,7 +62,7 @@ CoD.MultiItemPickupWaypoint_HeaderInfo.new = function(f1_arg0, f1_arg1, f1_arg2,
 	f1_local5(f1_local4, f1_local6.heroHoldProgress, text.__String_Reference)
 	f1_local4 = text
 	f1_local5 = text.subscribeToModel
-	f1_local6 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local6 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local5(f1_local4, f1_local6["hudItems.inventory.filledSlots"], text.__String_Reference)
 	self:mergeStateConditions({
 		{

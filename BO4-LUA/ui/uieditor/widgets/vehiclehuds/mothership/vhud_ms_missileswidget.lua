@@ -107,14 +107,14 @@ CoD.vhud_ms_missilesWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self.vhudmsmissile2 = vhudmsmissile2
 	local Bar = LUI.UIImage.new(0.5, 0.5, -25, 25, 0.5, 0.5, 61, 68)
 	Bar:setRGB(0.74, 0.94, 0.99)
-	Bar:setImage(RegisterImage(0x5534C48D872A06A))
-	Bar:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Bar:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_mothership_timebar"))
+	Bar:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Bar)
 	self.Bar = Bar
 	local solidbar = LUI.UIImage.new(0.5, 0.5, -25, 25, 0.5, 0.5, 61, 68)
 	solidbar:setRGB(0.74, 0.94, 0.99)
-	solidbar:setImage(RegisterImage(0x7EA3B14064D93ED))
-	solidbar:setMaterial(LUI.UIImage.GetCachedMaterial(0x910274CA3518744))
+	solidbar:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_mothership_timebarsolid"))
+	solidbar:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe"))
 	solidbar:setShaderVector(1, 0, 0, 0, 0)
 	solidbar:setShaderVector(2, 1, 0, 0, 0)
 	solidbar:setShaderVector(3, 0, 0, 0, 0)

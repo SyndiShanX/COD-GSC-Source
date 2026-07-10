@@ -7,7 +7,7 @@ CoD.CommonHeaderBG.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	self.id = "CommonHeaderBG"
 	self.soundSet = "default"
 	local BGSceneBlur = LUI.UIImage.new(-0.1, 1.1, 230.5, 230.5, 0, 0, 0, 73)
-	BGSceneBlur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	BGSceneBlur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	BGSceneBlur:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(BGSceneBlur)
 	self.BGSceneBlur = BGSceneBlur
@@ -23,22 +23,22 @@ CoD.CommonHeaderBG.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	self.background1 = background1
 	local PixelGrid = LUI.UIImage.new(0, 0, 0, 2304, 0, 0, 25, 67)
 	PixelGrid:setAlpha(0.5)
-	PixelGrid:setImage(RegisterImage(0x34839E8065B1E53))
-	PixelGrid:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	PixelGrid:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	PixelGrid:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	PixelGrid:setShaderVector(0, 0, 0, 0, 0)
 	PixelGrid:setupNineSliceShader(64, 64)
 	self:addElement(PixelGrid)
 	self.PixelGrid = PixelGrid
 	local TopBar = LUI.UIImage.new(0.5, 0.5, -1152, 1152, 0, 0, 24.5, 27.5)
 	TopBar:setAlpha(0.2)
-	TopBar:setImage(RegisterImage(0x42BCCF45B82FBED))
-	TopBar:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	TopBar:setImage(RegisterImage(@"uie_ui_menu_cac_primary_button_top_bar"))
+	TopBar:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(TopBar)
 	self.TopBar = TopBar
 	local TopBar2 = LUI.UIImage.new(0.5, 0.5, -1152, 1152, 0, 0, 65, 68)
 	TopBar2:setRGB(0.27, 0.27, 0.3)
-	TopBar2:setImage(RegisterImage(0x42BCCF45B82FBED))
-	TopBar2:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	TopBar2:setImage(RegisterImage(@"uie_ui_menu_cac_primary_button_top_bar"))
+	TopBar2:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	TopBar2:setShaderVector(0, 2, 0, 0, 0)
 	self:addElement(TopBar2)
 	self.TopBar2 = TopBar2

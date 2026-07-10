@@ -17,7 +17,7 @@ CoD.CodcasterNonTeamBasedPlayerListInternal.new = function(f1_arg0, f1_arg1, f1_
 	FreeTeam:setWidgetType(CoD.CodCasterPlayerListRowWidget)
 	FreeTeam:setVerticalCount(18)
 	FreeTeam:setSpacing(0)
-	FreeTeam:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	FreeTeam:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	FreeTeam:setDataSource("Clients")
 	self:addElement(FreeTeam)
 	self.FreeTeam = FreeTeam

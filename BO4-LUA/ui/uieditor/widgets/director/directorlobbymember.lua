@@ -68,7 +68,7 @@ CoD.DirectorLobbyMember.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 		{
 			stateName = "Empty",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "xuid", Engine[0x9073FBE2D48C156]("0"))
+				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "xuid", Engine[@"stringtoxuiddecimal"]("0"))
 			end,
 		},
 	})
@@ -83,7 +83,7 @@ CoD.DirectorLobbyMember.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	end)
 	local f1_local7 = self
 	local f1_local8 = self.subscribeToModel
-	local f1_local9 = Engine[0x8DF2E5447F384B9]()
+	local f1_local9 = Engine[@"getglobalmodel"]()
 	f1_local8(f1_local7, f1_local9["lobbyRoot.lobbyNetworkMode"], function(f9_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -95,7 +95,7 @@ CoD.DirectorLobbyMember.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	end, false)
 	f1_local7 = self
 	f1_local8 = self.subscribeToModel
-	f1_local9 = Engine[0x8DF2E5447F384B9]()
+	f1_local9 = Engine[@"getglobalmodel"]()
 	f1_local8(f1_local7, f1_local9["lobbyRoot.lobbyNav"], function(f10_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -116,30 +116,30 @@ CoD.DirectorLobbyMember.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	end)
 	self:appendEventHandler("input_source_changed", function(f12_arg0, f12_arg1)
 		f12_arg1.menu = f12_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f12_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+		CoD.Menu.UpdateButtonShownState(f12_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 	end)
 	f1_local7 = self
 	f1_local8 = self.subscribeToModel
-	f1_local9 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local9 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local8(f1_local7, f1_local9.LastInput, function(f13_arg0, f13_arg1)
-		CoD.Menu.UpdateButtonShownState(f13_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+		CoD.Menu.UpdateButtonShownState(f13_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 	end, false)
 	self:linkToElementModel(self, "xuid", true, function(model, f14_arg1)
-		CoD.Menu.UpdateButtonShownState(f14_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+		CoD.Menu.UpdateButtonShownState(f14_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 	end)
 	self:linkToElementModel(self, "clientListFlags", true, function(model, f15_arg1)
-		CoD.Menu.UpdateButtonShownState(f15_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+		CoD.Menu.UpdateButtonShownState(f15_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 	end)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], nil, function(element, menu, controller, model)
-		if IsPC() and IsGamepad(controller) and not CoD.ModelUtility.IsSelfModelValueEqualTo(self, controller, "xuid", Engine[0x9073FBE2D48C156]("0")) and not CoD.ModelUtility.IsSelfModelValueEnumFlagSet(element, controller, "clientListFlags", CoD.DirectorUtility.ClientListFlags.FIRST_EMPTY) then
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], nil, function(element, menu, controller, model)
+		if IsPC() and IsGamepad(controller) and not CoD.ModelUtility.IsSelfModelValueEqualTo(self, controller, "xuid", Engine[@"stringtoxuiddecimal"]("0")) and not CoD.ModelUtility.IsSelfModelValueEnumFlagSet(element, controller, "clientListFlags", CoD.DirectorUtility.ClientListFlags.FIRST_EMPTY) then
 			SetSelectedFriendXUID(self, element, controller)
 			OpenOverlay(self, "Social_PlayerDetailsPopup", controller, nil)
 			return true
 		else
 		end
 	end, function(element, menu, controller)
-		if IsPC() and IsGamepad(controller) and not CoD.ModelUtility.IsSelfModelValueEqualTo(self, controller, "xuid", Engine[0x9073FBE2D48C156]("0")) and not CoD.ModelUtility.IsSelfModelValueEnumFlagSet(element, controller, "clientListFlags", CoD.DirectorUtility.ClientListFlags.FIRST_EMPTY) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0xE0254269ED8FFD3, nil, nil)
+		if IsPC() and IsGamepad(controller) and not CoD.ModelUtility.IsSelfModelValueEqualTo(self, controller, "xuid", Engine[@"stringtoxuiddecimal"]("0")) and not CoD.ModelUtility.IsSelfModelValueEnumFlagSet(element, controller, "clientListFlags", CoD.DirectorUtility.ClientListFlags.FIRST_EMPTY) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"hash_1E0254269ED8FFD3", nil, nil)
 			return true
 		else
 			return false
@@ -220,7 +220,7 @@ CoD.DirectorLobbyMember.__clipsPerState = {
 			f23_arg0:__resetProperties()
 			f23_arg0:setupElementClipCounter(2)
 			local f23_local0 = function(f24_arg0)
-				f23_arg0.DirectorCustomStartButton:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f23_arg0.DirectorCustomStartButton:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f23_arg0.DirectorCustomStartButton:setScale(1.05, 1.05)
 				f23_arg0.DirectorCustomStartButton:registerEventHandler("interrupted_keyframe", f23_arg0.clipInterrupted)
 				f23_arg0.DirectorCustomStartButton:registerEventHandler("transition_complete_keyframe", f23_arg0.clipFinished)
@@ -237,7 +237,7 @@ CoD.DirectorLobbyMember.__clipsPerState = {
 			f25_arg0:__resetProperties()
 			f25_arg0:setupElementClipCounter(2)
 			local f25_local0 = function(f26_arg0)
-				f25_arg0.DirectorCustomStartButton:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f25_arg0.DirectorCustomStartButton:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f25_arg0.DirectorCustomStartButton:setScale(1, 1)
 				f25_arg0.DirectorCustomStartButton:registerEventHandler("interrupted_keyframe", f25_arg0.clipInterrupted)
 				f25_arg0.DirectorCustomStartButton:registerEventHandler("transition_complete_keyframe", f25_arg0.clipFinished)

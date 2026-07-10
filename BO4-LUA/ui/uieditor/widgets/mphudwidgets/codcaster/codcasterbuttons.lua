@@ -17,8 +17,8 @@ CoD.CodCasterButtons.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	self:addElement(CodCasterButtonsBG)
 	self.CodCasterButtonsBG = CodCasterButtonsBG
 	local ToggleList1 = CoD.CodCasterButtonPromptContainer.new(f1_arg0, f1_arg1, 0, 0, 856, 1120, 0, 0, 45, 83)
-	ToggleList1.Prompt.KeyPrompt.keybind:setText(Engine[0xF9F1239CFD921FE](0xB5C6FCB5ACEAB52))
-	ToggleList1.Text:setText(Engine[0xF9F1239CFD921FE](0x1C66D706E4682A))
+	ToggleList1.Prompt.KeyPrompt.keybind:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_B5C6FCB5ACEAB52"))
+	ToggleList1.Text:setText(Engine[@"hash_4F9F1239CFD921FE"](0x1C66D706E4682A))
 	ToggleList1:subscribeToGlobalModel(f1_arg1, "Controller", "dpad_down_button_image", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -28,8 +28,8 @@ CoD.CodCasterButtons.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	self:addElement(ToggleList1)
 	self.ToggleList1 = ToggleList1
 	local SelectPlayer1 = CoD.CodCasterButtonPromptContainer.new(f1_arg0, f1_arg1, 0, 0, 35, 299, 0, 0, -5, 33)
-	SelectPlayer1.Prompt.KeyPrompt.keybind:setText(Engine[0xF9F1239CFD921FE](0xEA7793F2DAF4059))
-	SelectPlayer1.Text:setText(Engine[0xF9F1239CFD921FE](0xE528282EC1246D5))
+	SelectPlayer1.Prompt.KeyPrompt.keybind:setText(Engine[@"hash_4F9F1239CFD921FE"](@"key/enter"))
+	SelectPlayer1.Text:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_E528282EC1246D5"))
 	SelectPlayer1:subscribeToGlobalModel(f1_arg1, "Controller", "primary_button_image", function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -40,7 +40,7 @@ CoD.CodCasterButtons.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	self.SelectPlayer1 = SelectPlayer1
 	local FullsreenMap = CoD.CodCasterButtonPromptContainer.new(f1_arg0, f1_arg1, 0, 0, 35, 299, 0, 0, 45, 83)
 	FullsreenMap.Prompt.KeyPrompt.keybind:setText(CoD.BaseUtility.AlreadyLocalized("M"))
-	FullsreenMap.Text:setText(Engine[0xF9F1239CFD921FE](0xD9622B4FC02DFBA))
+	FullsreenMap.Text:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_6D9622B4FC02DFBA"))
 	FullsreenMap:subscribeToGlobalModel(f1_arg1, "Controller", "alt2_button_image", function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
@@ -52,7 +52,7 @@ CoD.CodCasterButtons.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	local SelectCentralPlayer = CoD.CodCasterButtonPromptContainer.new(f1_arg0, f1_arg1, 0, 0, 35, 299, 0, 0, 45, 83)
 	SelectCentralPlayer:setAlpha(0)
 	SelectCentralPlayer.Prompt.KeyPrompt.keybind:setText(CoD.BaseUtility.AlreadyLocalized("`"))
-	SelectCentralPlayer.Text:setText(Engine[0xF9F1239CFD921FE](0x2EB128302A523CF))
+	SelectCentralPlayer.Text:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_72EB128302A523CF"))
 	SelectCentralPlayer:subscribeToGlobalModel(f1_arg1, "Controller", "alt2_button_image", function(model)
 		local f5_local0 = model:get()
 		if f5_local0 ~= nil then
@@ -63,7 +63,7 @@ CoD.CodCasterButtons.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	self.SelectCentralPlayer = SelectCentralPlayer
 	local ChangeCamera = CoD.CodCasterButtonPromptContainer.new(f1_arg0, f1_arg1, 0, 0, 308, 572, 0, 0, -5, 33)
 	ChangeCamera.Prompt.KeyPrompt.keybind:setText(CoD.BaseUtility.AlreadyLocalized("C"))
-	ChangeCamera.Text:setText(Engine[0xF9F1239CFD921FE](0xF4695A8C0A844EF))
+	ChangeCamera.Text:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_4F4695A8C0A844EF"))
 	ChangeCamera:subscribeToGlobalModel(f1_arg1, "Controller", "alt1_button_image", function(model)
 		local f6_local0 = model:get()
 		if f6_local0 ~= nil then
@@ -74,7 +74,7 @@ CoD.CodCasterButtons.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	self.ChangeCamera = ChangeCamera
 	local Toolbar1 = CoD.CodCasterButtonPromptContainer.new(f1_arg0, f1_arg1, 0, 0, 308, 572, 0, 0, 45, 83)
 	Toolbar1.Prompt.KeyPrompt.keybind:setText(CoD.BaseUtility.AlreadyLocalized("T"))
-	Toolbar1.Text:setText(Engine[0xF9F1239CFD921FE](0xEF1D244CD091910))
+	Toolbar1.Text:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_1EF1D244CD091910"))
 	Toolbar1:subscribeToGlobalModel(f1_arg1, "Controller", "secondary_button_image", function(model)
 		local f7_local0 = model:get()
 		if f7_local0 ~= nil then
@@ -84,8 +84,8 @@ CoD.CodCasterButtons.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	self:addElement(Toolbar1)
 	self.Toolbar1 = Toolbar1
 	local NavigatePortrait1 = CoD.CodCasterButtonPromptContainer.new(f1_arg0, f1_arg1, 0, 0, 581, 845, 0, 0, -5, 33)
-	NavigatePortrait1.Prompt.KeyPrompt.keybind:setText(Engine[0xF9F1239CFD921FE](0x9F8D4988D934149))
-	NavigatePortrait1.Text:setText(Engine[0xF9F1239CFD921FE](0x11D93615BDAC5C3))
+	NavigatePortrait1.Prompt.KeyPrompt.keybind:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_79F8D4988D934149"))
+	NavigatePortrait1.Text:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_311D93615BDAC5C3"))
 	NavigatePortrait1:subscribeToGlobalModel(f1_arg1, "Controller", "dpad_lr_button_image", function(model)
 		local f8_local0 = model:get()
 		if f8_local0 ~= nil then
@@ -96,11 +96,11 @@ CoD.CodCasterButtons.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	self.NavigatePortrait1 = NavigatePortrait1
 	local KeyboardShortcuts1 = CoD.CodCasterButtonPromptContainer_OnlyKeyboardKey.new(f1_arg0, f1_arg1, 0, 0, 581, 845, 0, 0, 45, 83)
 	KeyboardShortcuts1.KeyPrompt.keybind:setText(CoD.BaseUtility.AlreadyLocalized("V"))
-	KeyboardShortcuts1.Text:setText(Engine[0xF9F1239CFD921FE](0x93AC596F9C2A96C))
+	KeyboardShortcuts1.Text:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_693AC596F9C2A96C"))
 	self:addElement(KeyboardShortcuts1)
 	self.KeyboardShortcuts1 = KeyboardShortcuts1
 	local TogglePortraits = CoD.CodCasterButtonPromptContainer.new(f1_arg0, f1_arg1, 0, 0, 856, 1120, 0, 0, -5, 33)
-	TogglePortraits.Prompt.KeyPrompt.keybind:setText(Engine[0xF9F1239CFD921FE](0x1F4945715AA4BFD))
+	TogglePortraits.Prompt.KeyPrompt.keybind:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_31F4945715AA4BFD"))
 	TogglePortraits:subscribeToGlobalModel(f1_arg1, "Controller", "dpad_up_button_image", function(model)
 		local f9_local0 = model:get()
 		if f9_local0 ~= nil then
@@ -112,7 +112,7 @@ CoD.CodCasterButtons.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	local CyclePlayers = CoD.CodCasterButtonDoublePromptContainer.new(f1_arg0, f1_arg1, 0, 0, 1131, 1395, 0, 0, -5, 33)
 	CyclePlayers.Prompt.KeyPrompt.keybind:setText(CoD.BaseUtility.AlreadyLocalized(","))
 	CyclePlayers.Prompt2.KeyPrompt.keybind:setText(CoD.BaseUtility.AlreadyLocalized("."))
-	CyclePlayers.Text:setText(Engine[0xF9F1239CFD921FE](0xCCA4488F17F1D0B))
+	CyclePlayers.Text:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_1CCA4488F17F1D0B"))
 	CyclePlayers:subscribeToGlobalModel(f1_arg1, "Controller", "left_shoulder_button_image", function(model)
 		local f10_local0 = model:get()
 		if f10_local0 ~= nil then
@@ -130,7 +130,7 @@ CoD.CodCasterButtons.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	local SettingPanelsNEW = CoD.CodCasterButtonDoublePromptContainer.new(f1_arg0, f1_arg1, 0, 0, 1131, 1395, 0, 0, 45, 83)
 	SettingPanelsNEW.Prompt.KeyPrompt.keybind:setText(CoD.BaseUtility.AlreadyLocalized("R"))
 	SettingPanelsNEW.Prompt2.KeyPrompt.keybind:setText(CoD.BaseUtility.AlreadyLocalized("Y"))
-	SettingPanelsNEW.Text:setText(Engine[0xF9F1239CFD921FE](0x2A1BD37927EB1CA))
+	SettingPanelsNEW.Text:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_2A1BD37927EB1CA"))
 	SettingPanelsNEW:subscribeToGlobalModel(f1_arg1, "Controller", "left_trigger_button_image", function(model)
 		local f12_local0 = model:get()
 		if f12_local0 ~= nil then
@@ -148,7 +148,7 @@ CoD.CodCasterButtons.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	local AerialCameraZoom = CoD.CodCasterButtonPromptContainer.new(f1_arg0, f1_arg1, 0, 0, 1406, 1670, 0, 0, -5, 33)
 	AerialCameraZoom:setAlpha(0)
 	AerialCameraZoom.Prompt.KeyPrompt.keybind:setText(CoD.BaseUtility.AlreadyLocalized("[ ]"))
-	AerialCameraZoom.Text:setText(Engine[0xF9F1239CFD921FE](0x82758552FB3DD94))
+	AerialCameraZoom.Text:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_582758552FB3DD94"))
 	AerialCameraZoom:subscribeToGlobalModel(f1_arg1, "Controller", "left_stick_move_image", function(model)
 		local f14_local0 = model:get()
 		if f14_local0 ~= nil then
@@ -159,7 +159,7 @@ CoD.CodCasterButtons.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	self.AerialCameraZoom = AerialCameraZoom
 	local NavigateLoadout = CoD.CodCasterButtonPromptContainer.new(f1_arg0, f1_arg1, 0, 0, 1406, 1670, 0, 0, -5, 33)
 	NavigateLoadout.Prompt.KeyPrompt.keybind:setText(CoD.BaseUtility.AlreadyLocalized("[ ]"))
-	NavigateLoadout.Text:setText(Engine[0xF9F1239CFD921FE](0xCC03F6E4651CC85))
+	NavigateLoadout.Text:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_6CC03F6E4651CC85"))
 	NavigateLoadout:subscribeToGlobalModel(f1_arg1, "Controller", "left_stick_move_image", function(model)
 		local f15_local0 = model:get()
 		if f15_local0 ~= nil then
@@ -171,7 +171,7 @@ CoD.CodCasterButtons.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	local AerialCameraControl = CoD.CodCasterButtonPromptContainer.new(f1_arg0, f1_arg1, 0, 0, 1406, 1670, 0, 0, 45, 83)
 	AerialCameraControl:setAlpha(0)
 	AerialCameraControl.Prompt.KeyPrompt.keybind:setText(CoD.BaseUtility.AlreadyLocalized("W A S D"))
-	AerialCameraControl.Text:setText(Engine[0xF9F1239CFD921FE](0xFC19E4BB0DB2DBC))
+	AerialCameraControl.Text:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_5FC19E4BB0DB2DBC"))
 	AerialCameraControl:subscribeToGlobalModel(f1_arg1, "Controller", "right_stick_move_image", function(model)
 		local f16_local0 = model:get()
 		if f16_local0 ~= nil then
@@ -182,7 +182,7 @@ CoD.CodCasterButtons.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	self.AerialCameraControl = AerialCameraControl
 	local ThirdPersonCam = CoD.CodCasterButtonPromptContainer.new(f1_arg0, f1_arg1, 0, 0, 1406, 1670, 0, 0, 45, 83)
 	ThirdPersonCam.Prompt.KeyPrompt.keybind:setText(CoD.BaseUtility.AlreadyLocalized("W A S D"))
-	ThirdPersonCam.Text:setText(Engine[0xF9F1239CFD921FE](0xEB3AD01F256685B))
+	ThirdPersonCam.Text:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_1EB3AD01F256685B"))
 	ThirdPersonCam:subscribeToGlobalModel(f1_arg1, "Controller", "right_stick_move_image", function(model)
 		local f17_local0 = model:get()
 		if f17_local0 ~= nil then
@@ -193,7 +193,7 @@ CoD.CodCasterButtons.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	self.ThirdPersonCam = ThirdPersonCam
 	local LoadoutToggle = CoD.CodCasterButtonPromptContainer.new(f1_arg0, f1_arg1, 0, 0, 1678.5, 1942.5, 0, 0, 45, 83)
 	LoadoutToggle.Prompt.KeyPrompt.keybind:setText(CoD.BaseUtility.AlreadyLocalized("H"))
-	LoadoutToggle.Text:setText(Engine[0xF9F1239CFD921FE](0xD51F53F712CEE78))
+	LoadoutToggle.Text:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_4D51F53F712CEE78"))
 	LoadoutToggle:subscribeToGlobalModel(f1_arg1, "Controller", "right_stick_button_image", function(model)
 		local f18_local0 = model:get()
 		if f18_local0 ~= nil then
@@ -205,7 +205,7 @@ CoD.CodCasterButtons.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	local LockUnlockStickCamera = CoD.CodCasterButtonPromptContainer.new(f1_arg0, f1_arg1, 0, 0, 1678.5, 1942.5, 0, 0, 45, 83)
 	LockUnlockStickCamera:setAlpha(0)
 	LockUnlockStickCamera.Prompt.KeyPrompt.keybind:setText(CoD.BaseUtility.AlreadyLocalized("L"))
-	LockUnlockStickCamera.Text:setText(Engine[0xF9F1239CFD921FE](0xDBD347CE6E79536))
+	LockUnlockStickCamera.Text:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_6DBD347CE6E79536"))
 	LockUnlockStickCamera:subscribeToGlobalModel(f1_arg1, "Controller", "right_stick_button_image", function(model)
 		local f19_local0 = model:get()
 		if f19_local0 ~= nil then
@@ -217,7 +217,7 @@ CoD.CodCasterButtons.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	local FocusSpectatedPlayer = CoD.CodCasterButtonPromptContainer.new(f1_arg0, f1_arg1, 0, 0, 1678.5, 1942.5, 0, 0, -5, 33)
 	FocusSpectatedPlayer:setAlpha(0)
 	FocusSpectatedPlayer.Prompt.KeyPrompt.keybind:setText(CoD.BaseUtility.AlreadyLocalized(";"))
-	FocusSpectatedPlayer.Text:setText(Engine[0xF9F1239CFD921FE](0x24B92E40440B5ED))
+	FocusSpectatedPlayer.Text:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_524B92E40440B5ED"))
 	FocusSpectatedPlayer:subscribeToGlobalModel(f1_arg1, "Controller", "left_stick_button_image", function(model)
 		local f20_local0 = model:get()
 		if f20_local0 ~= nil then
@@ -263,19 +263,19 @@ CoD.CodCasterButtons.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	})
 	local f1_local20 = self
 	local f1_local21 = self.subscribeToModel
-	local f1_local22 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local21(f1_local20, f1_local22["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x7EAF988DDEB83EA]], function(f24_arg0)
+	local f1_local22 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local21(f1_local20, f1_local22["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"hash_57EAF988DDEB83EA"]], function(f24_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f24_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x7EAF988DDEB83EA],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"hash_57EAF988DDEB83EA"],
 		})
 	end, false)
 	f1_local20 = self
 	f1_local21 = self.subscribeToModel
-	f1_local22 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local22 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local21(f1_local20, f1_local22["factions.isCoDCaster"], function(f25_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

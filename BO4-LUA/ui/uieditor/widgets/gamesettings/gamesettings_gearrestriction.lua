@@ -20,7 +20,7 @@ CoD.GameSettings_GearRestriction.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	OptionCategoryGrid:setWidgetType(CoD.CustomGames_OptionCategoryButton)
 	OptionCategoryGrid:setVerticalCount(6)
 	OptionCategoryGrid:setSpacing(8)
-	OptionCategoryGrid:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	OptionCategoryGrid:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	OptionCategoryGrid:setDataSource("GearRestrictionOptionCategories")
 	self:addElement(OptionCategoryGrid)
 	self.OptionCategoryGrid = OptionCategoryGrid
@@ -31,7 +31,7 @@ CoD.GameSettings_GearRestriction.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	SlidersPC:setWidgetType(CoD.CustomGames_SettingSlider)
 	SlidersPC:setVerticalCount(12)
 	SlidersPC:setSpacing(8)
-	SlidersPC:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	SlidersPC:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	SlidersPC:setVerticalCounter(CoD.verticalCounter)
 	SlidersPC:registerEventHandler("list_item_gain_focus", function(element, event)
 		local f2_local0 = nil

@@ -10,16 +10,16 @@ CoD.AmmoWidget_AmmoCaliber.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	local ammoType = LUI.UIText.new(0, 0, 0, 164, 0, 0, 0, 14)
 	ammoType:setRGB(0.73, 0.71, 0.64)
 	ammoType:setTTF("ttmussels_regular")
-	ammoType:setMaterial(LUI.UIImage.GetCachedMaterial(0x90D57B1E92D39D7))
+	ammoType:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_90D57B1E92D39D7"))
 	ammoType:setShaderVector(0, 1, 0, 0, 0)
 	ammoType:setShaderVector(1, 0, 0, 0, 0)
 	ammoType:setShaderVector(2, 0.8, 0.8, 0.8, 0.3)
 	ammoType:setLetterSpacing(1)
-	ammoType:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	ammoType:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	ammoType:linkToElementModel(self, "ammoCaliberName", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			ammoType:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			ammoType:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	self:addElement(ammoType)
@@ -34,7 +34,7 @@ CoD.AmmoWidget_AmmoCaliber.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	})
 	local f1_local2 = self
 	local f1_local3 = self.subscribeToModel
-	local f1_local4 = Engine[0x8DF2E5447F384B9]()
+	local f1_local4 = Engine[@"getglobalmodel"]()
 	f1_local3(f1_local2, f1_local4["lobbyRoot.lobbyNav"], function(f4_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

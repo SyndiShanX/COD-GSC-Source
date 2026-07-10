@@ -16,11 +16,11 @@ CoD.OverheadName_WZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 		{
 			stateName = "HideNumber",
 			condition = function(menu, element, event)
-				local f2_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x1CDCB451655ABCF])
+				local f2_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_final_killcam"])
 				if not f2_local0 then
-					f2_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2])
+					f2_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_in_killcam"])
 					if not f2_local0 then
-						f2_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F])
+						f2_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_play_of_the_match"])
 					end
 				end
 				return f2_local0
@@ -29,38 +29,38 @@ CoD.OverheadName_WZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	})
 	local WaypointBacker = NameAndNumber
 	local HealthBar = NameAndNumber.subscribeToModel
-	local WaypointPattern = Engine[0x4DF5CFBC1771947](f1_arg1)
-	HealthBar(WaypointBacker, WaypointPattern["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x1CDCB451655ABCF]], function(f3_arg0)
+	local WaypointPattern = Engine[@"getmodelforcontroller"](f1_arg1)
+	HealthBar(WaypointBacker, WaypointPattern["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_final_killcam"]], function(f3_arg0)
 		f1_arg0:updateElementState(NameAndNumber, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f3_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x1CDCB451655ABCF],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_final_killcam"],
 		})
 	end, false)
 	WaypointBacker = NameAndNumber
 	HealthBar = NameAndNumber.subscribeToModel
-	WaypointPattern = Engine[0x4DF5CFBC1771947](f1_arg1)
-	HealthBar(WaypointBacker, WaypointPattern["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2]], function(f4_arg0)
+	WaypointPattern = Engine[@"getmodelforcontroller"](f1_arg1)
+	HealthBar(WaypointBacker, WaypointPattern["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"]], function(f4_arg0)
 		f1_arg0:updateElementState(NameAndNumber, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f4_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"],
 		})
 	end, false)
 	WaypointBacker = NameAndNumber
 	HealthBar = NameAndNumber.subscribeToModel
-	WaypointPattern = Engine[0x4DF5CFBC1771947](f1_arg1)
-	HealthBar(WaypointBacker, WaypointPattern["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F]], function(f5_arg0)
+	WaypointPattern = Engine[@"getmodelforcontroller"](f1_arg1)
+	HealthBar(WaypointBacker, WaypointPattern["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_play_of_the_match"]], function(f5_arg0)
 		f1_arg0:updateElementState(NameAndNumber, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f5_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_play_of_the_match"],
 		})
 	end, false)
 	NameAndNumber:linkToElementModel(self, nil, false, function(model)
@@ -75,36 +75,36 @@ CoD.OverheadName_WZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	self:addElement(HealthBar)
 	self.HealthBar = HealthBar
 	WaypointBacker = LUI.UIImage.new(0.5, 0.5, -38, 38, 0.5, 0.5, -111, -35)
-	WaypointBacker:setImage(RegisterImage(0x8DDD1FDE43242E1))
+	WaypointBacker:setImage(RegisterImage(@"uie_ui_hud_core_waypoint_domination_backer"))
 	self:addElement(WaypointBacker)
 	self.WaypointBacker = WaypointBacker
 	WaypointPattern = LUI.UIImage.new(0.5, 0.5, -38, 38, 0.5, 0.5, -111, -35)
 	WaypointPattern:setRGB(0.13, 0.87, 0.94)
 	WaypointPattern:setAlpha(0.75)
-	WaypointPattern:setImage(RegisterImage(0x159D9B7B7294C91))
-	WaypointPattern:setMaterial(LUI.UIImage.GetCachedMaterial(0xF755127C95CF5B6))
+	WaypointPattern:setImage(RegisterImage(@"uie_ui_hud_core_waypoint_led"))
+	WaypointPattern:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_F755127C95CF5B6"))
 	WaypointPattern:setShaderVector(0, 2, 0, 0, 0)
 	self:addElement(WaypointPattern)
 	self.WaypointPattern = WaypointPattern
 	local YouText2 = LUI.UIText.new(0.5, 0.5, -29, 29, 0, 0, -68.5, -47.5)
-	YouText2:setText(LocalizeToUpperString(0x4657C39C60632A0))
+	YouText2:setText(LocalizeToUpperString(@"wz/you"))
 	YouText2:setTTF("ttmussels_demibold")
-	YouText2:setMaterial(LUI.UIImage.GetCachedMaterial(0x90D57B1E92D39D7))
+	YouText2:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_90D57B1E92D39D7"))
 	YouText2:setShaderVector(0, 0.5, 0, 0, 0)
 	YouText2:setShaderVector(1, 0, 0, 0, 0)
 	YouText2:setShaderVector(2, 0, 0, 0, 0.5)
 	YouText2:setLetterSpacing(2)
-	YouText2:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	YouText2:setAlignment(Enum[0x7A5123B654282D2][0x6ED4298C93DC5ED])
+	YouText2:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	YouText2:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
 	self:addElement(YouText2)
 	self.YouText2 = YouText2
 	local Arrows = LUI.UIImage.new(0.5, 0.5, -16, 16, 0, 0, -28.5, 3.5)
-	Arrows:setImage(RegisterImage(0xAB17136E34541E3))
+	Arrows:setImage(RegisterImage(@"uie_ui_hud_revive_arrow"))
 	self:addElement(Arrows)
 	self.Arrows = Arrows
 	local PlatoonChevron = LUI.UIImage.new(0, 0, 81, 119, 0, 0, -8, 30)
 	PlatoonChevron:setAlpha(0)
-	PlatoonChevron:setImage(RegisterImage(0x9D0929E1A7AFA3F))
+	PlatoonChevron:setImage(RegisterImage(@"uie_ui_hud_wz_hud_platoon_chevron"))
 	PlatoonChevron:linkToElementModel(self, "platoonIndicatorScale", true, function(model)
 		local f8_local0 = model:get()
 		if f8_local0 ~= nil then
@@ -125,7 +125,7 @@ CoD.OverheadName_WZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	self.PlatoonRevive = PlatoonRevive
 	local PandemicPlatoonChevron = LUI.UIImage.new(0, 0, 81, 119, 0, 0, -8, 30)
 	PandemicPlatoonChevron:setAlpha(0)
-	PandemicPlatoonChevron:setImage(RegisterImage(0x860B7285A075F9F))
+	PandemicPlatoonChevron:setImage(RegisterImage(@"hash_4860B7285A075F9F"))
 	PandemicPlatoonChevron:linkToElementModel(self, "platoonIndicatorScale", true, function(model)
 		local f10_local0 = model:get()
 		if f10_local0 ~= nil then
@@ -140,11 +140,11 @@ CoD.OverheadName_WZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 			condition = function(menu, element, event)
 				local f11_local0 = CoD.ModelUtility.IsSelfModelValueEqualToClientModelValue(f1_arg1, element, "clientNum", "clientNum")
 				if f11_local0 then
-					f11_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x1CDCB451655ABCF])
+					f11_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_final_killcam"])
 					if not f11_local0 then
-						f11_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2])
+						f11_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_in_killcam"])
 						if not f11_local0 then
-							f11_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F])
+							f11_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_play_of_the_match"])
 						end
 					end
 				end
@@ -154,11 +154,11 @@ CoD.OverheadName_WZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 		{
 			stateName = "Killcam",
 			condition = function(menu, element, event)
-				local f12_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x1CDCB451655ABCF])
+				local f12_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_final_killcam"])
 				if not f12_local0 then
-					f12_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2])
+					f12_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_in_killcam"])
 					if not f12_local0 then
-						f12_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F])
+						f12_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_play_of_the_match"])
 					end
 				end
 				return f12_local0
@@ -214,7 +214,7 @@ CoD.OverheadName_WZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	end)
 	local f1_local10 = self
 	local f1_local11 = self.subscribeToModel
-	local f1_local12 = Engine[0xE4D2F32833CFA6C](Engine[0x761955642304848](f1_arg1))
+	local f1_local12 = Engine[@"getmodelforclient"](Engine[@"getclientnum"](f1_arg1))
 	f1_local11(f1_local10, f1_local12.clientNum, function(f18_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -226,38 +226,38 @@ CoD.OverheadName_WZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	end, false)
 	f1_local10 = self
 	f1_local11 = self.subscribeToModel
-	f1_local12 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local11(f1_local10, f1_local12["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x1CDCB451655ABCF]], function(f19_arg0)
+	f1_local12 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local11(f1_local10, f1_local12["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_final_killcam"]], function(f19_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f19_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x1CDCB451655ABCF],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_final_killcam"],
 		})
 	end, false)
 	f1_local10 = self
 	f1_local11 = self.subscribeToModel
-	f1_local12 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local11(f1_local10, f1_local12["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2]], function(f20_arg0)
+	f1_local12 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local11(f1_local10, f1_local12["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"]], function(f20_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f20_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"],
 		})
 	end, false)
 	f1_local10 = self
 	f1_local11 = self.subscribeToModel
-	f1_local12 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local11(f1_local10, f1_local12["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F]], function(f21_arg0)
+	f1_local12 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local11(f1_local10, f1_local12["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_play_of_the_match"]], function(f21_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f21_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_play_of_the_match"],
 		})
 	end, false)
 	self:linkToElementModel(self, "isInLastStand", true, function(model)
@@ -289,7 +289,7 @@ CoD.OverheadName_WZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	end)
 	f1_local10 = self
 	f1_local11 = self.subscribeToModel
-	f1_local12 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local12 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local11(f1_local10, f1_local12["factions.actualTeam"], function(f25_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -301,7 +301,7 @@ CoD.OverheadName_WZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	end, false)
 	f1_local10 = self
 	f1_local11 = self.subscribeToModel
-	f1_local12 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local12 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local11(f1_local10, f1_local12["hudItems.playerOnInfectedPlatoon"], function(f26_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

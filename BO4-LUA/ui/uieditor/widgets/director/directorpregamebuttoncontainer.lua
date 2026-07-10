@@ -38,7 +38,7 @@ CoD.DirectorPreGameButtonContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	end)
 	local f1_local2 = LobbyButtons
 	local f1_local3 = LobbyButtons.subscribeToModel
-	local f1_local4 = Engine[0x8DF2E5447F384B9]()
+	local f1_local4 = Engine[@"getglobalmodel"]()
 	f1_local3(f1_local2, f1_local4["lobbyRoot.lobbyNav"], function(f5_arg0)
 		f1_arg0:updateElementState(LobbyButtons, {
 			name = "model_validation",
@@ -53,22 +53,22 @@ CoD.DirectorPreGameButtonContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	LobbyButtons:setWidgetType(CoD.DirectorPreGameButton)
 	LobbyButtons:setHorizontalCount(4)
 	LobbyButtons:setSpacing(21)
-	LobbyButtons:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	LobbyButtons:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	LobbyButtons:setDataSource("DirectorPregameButtons")
 	LobbyButtons:linkToElementModel(LobbyButtons, "locked", true, function(model, f6_arg1)
-		CoD.Menu.UpdateButtonShownState(f6_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f6_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	LobbyButtons:linkToElementModel(LobbyButtons, "featureItemIndex", true, function(model, f7_arg1)
-		CoD.Menu.UpdateButtonShownState(f7_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f7_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	f1_local2 = LobbyButtons
 	f1_local3 = LobbyButtons.subscribeToModel
-	f1_local4 = Engine[0x8DF2E5447F384B9]()
+	f1_local4 = Engine[@"getglobalmodel"]()
 	f1_local3(f1_local2, f1_local4["lobbyRoot.lobbyNav"], function(f8_arg0, f8_arg1)
-		CoD.Menu.UpdateButtonShownState(f8_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f8_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	LobbyButtons:linkToElementModel(LobbyButtons, "trialLocked", true, function(model, f9_arg1)
-		CoD.Menu.UpdateButtonShownState(f9_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f9_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	LobbyButtons:registerEventHandler("gain_list_focus", function(element, event)
 		local f10_local0 = nil
@@ -87,10 +87,10 @@ CoD.DirectorPreGameButtonContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 		elseif element.super.gainFocus then
 			f12_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f12_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(LobbyButtons, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(LobbyButtons, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if not CoD.DirectorUtility.IsDirectorButtonOptionLocked(menu, element, controller) and not CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "trialLocked") then
 			PlaySoundAlias("uin_press_generic")
 			ProcessListAction(self, element, controller, menu)
@@ -99,7 +99,7 @@ CoD.DirectorPreGameButtonContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 		end
 	end, function(element, menu, controller)
 		if not CoD.DirectorUtility.IsDirectorButtonOptionLocked(menu, element, controller) and not CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "trialLocked") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false

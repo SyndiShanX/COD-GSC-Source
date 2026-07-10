@@ -31,9 +31,9 @@ CoD.SupplyChainDetails.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 				if not MenuPropertyIsTrue(menu, "__hideSupplyChainDetailsButtons") then
 					f3_local0 = CoD.BlackMarketUtility.ShowSupplyChainDetailsButtonPrompts(element, f1_arg1)
 					if f3_local0 then
-						f3_local0 = CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "rarity", Enum[0x704F69F9B0BDCEC][0x8556B83CAD0D180])
+						f3_local0 = CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "rarity", Enum[@"lootraritytype"][@"loot_rarity_type_count"])
 						if f3_local0 then
-							if not CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", 0x4F35AE761BD424) then
+							if not CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", @"specialist") then
 								f3_local0 = not IsElementPropertyValue(self, "__selfHideSupplyChainDetailsButtons", true)
 							else
 								f3_local0 = false
@@ -162,7 +162,7 @@ CoD.SupplyChainDetails.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	end)
 	local f1_local4 = self
 	local f1_local5 = self.subscribeToModel
-	local f1_local6 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local6 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local5(f1_local4, f1_local6.LastInput, function(f18_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

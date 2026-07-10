@@ -13,18 +13,18 @@ CoD.PC_Korea_Event_TierProgress.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local TierTitle = LUI.UIText.new(0.5, 0.5, -378, 378, 0.5, 0.5, -130, -105)
 	TierTitle:setRGB(ColorSet.T8__OCHRE.r, ColorSet.T8__OCHRE.g, ColorSet.T8__OCHRE.b)
-	TierTitle:setText(Engine[0xF9F1239CFD921FE](0xD6B512C1C4B5EC5))
+	TierTitle:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_5D6B512C1C4B5EC5"))
 	TierTitle:setTTF("ttmussels_demibold")
 	TierTitle:setLetterSpacing(5)
-	TierTitle:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	TierTitle:setAlignment(Enum[0x7A5123B654282D2][0x70510683C22104B])
+	TierTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	TierTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_bottom"])
 	self:addElement(TierTitle)
 	self.TierTitle = TierTitle
 	local TierTimeRemaining = LUI.UIText.new(0.5, 0.5, -317.5, 317.5, 0.5, 0.5, -98, -83)
 	TierTimeRemaining:setTTF("dinnext_regular")
 	TierTimeRemaining:setLetterSpacing(5)
-	TierTimeRemaining:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	TierTimeRemaining:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	TierTimeRemaining:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	TierTimeRemaining:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	TierTimeRemaining:subscribeToGlobalModel(f1_arg1, "PCKoreaEventCurrentDayProgression", "timeRemaining", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -34,8 +34,8 @@ CoD.PC_Korea_Event_TierProgress.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self:addElement(TierTimeRemaining)
 	self.TierTimeRemaining = TierTimeRemaining
 	local ProgressFill = LUI.UIImage.new(0.5, 0.5, -317.5, 317.5, 0.5, 0.5, -28, 0)
-	ProgressFill:setImage(RegisterImage(0x2DB280070E6C877))
-	ProgressFill:setMaterial(LUI.UIImage.GetCachedMaterial(0x316E67E1DF2198E))
+	ProgressFill:setImage(RegisterImage(@"uie_pc_igrevent_progress_fill"))
+	ProgressFill:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_normal"))
 	ProgressFill:setShaderVector(1, 0, 0, 0, 0)
 	ProgressFill:setShaderVector(2, 1, 0, 0, 0)
 	ProgressFill:setShaderVector(3, 0, 0, 0, 0)
@@ -50,26 +50,26 @@ CoD.PC_Korea_Event_TierProgress.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self.ProgressFill = ProgressFill
 	local Border = LUI.UIImage.new(0.5, 0.5, -317.5, 317.5, 0.5, 0.5, -28, 0)
 	Border:setRGB(0.45, 0.45, 0.45)
-	Border:setImage(RegisterImage(0x15BB65132BCEED9))
-	Border:setMaterial(LUI.UIImage.GetCachedMaterial(0x44484DDFAF5C093))
+	Border:setImage(RegisterImage(@"hash_415BB65132BCEED9"))
+	Border:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_normal"))
 	Border:setShaderVector(0, 0, 0, 0.02, 0)
 	Border:setupNineSliceShader(25, 25)
 	self:addElement(Border)
 	self.Border = Border
 	local CornerPips = LUI.UIImage.new(0.5, 0.5, 314.5, 319.5, 0.5, 0.5, -30.5, -25.5)
-	CornerPips:setImage(RegisterImage(0xCD2D51C614BCB51))
+	CornerPips:setImage(RegisterImage(@"hash_6CD2D51C614BCB51"))
 	self:addElement(CornerPips)
 	self.CornerPips = CornerPips
 	local CornerPips2 = LUI.UIImage.new(0.5, 0.5, 314.5, 319.5, 0.5, 0.5, -2.5, 2.5)
-	CornerPips2:setImage(RegisterImage(0xCD2D51C614BCB51))
+	CornerPips2:setImage(RegisterImage(@"hash_6CD2D51C614BCB51"))
 	self:addElement(CornerPips2)
 	self.CornerPips2 = CornerPips2
 	local CornerPips3 = LUI.UIImage.new(0.5, 0.5, -319.5, -314.5, 0.5, 0.5, -2.5, 2.5)
-	CornerPips3:setImage(RegisterImage(0xCD2D51C614BCB51))
+	CornerPips3:setImage(RegisterImage(@"hash_6CD2D51C614BCB51"))
 	self:addElement(CornerPips3)
 	self.CornerPips3 = CornerPips3
 	local CornerPips4 = LUI.UIImage.new(0.5, 0.5, -319.5, -314.5, 0.5, 0.5, -30.5, -25.5)
-	CornerPips4:setImage(RegisterImage(0xCD2D51C614BCB51))
+	CornerPips4:setImage(RegisterImage(@"hash_6CD2D51C614BCB51"))
 	self:addElement(CornerPips4)
 	self.CornerPips4 = CornerPips4
 	local TextNumber = CoD.PC_Korea_Event_Day_Progression_Numbers.new(f1_arg0, f1_arg1, 0.5, 0.5, -348, -288, 0.5, 0.5, 6, 38)
@@ -94,7 +94,7 @@ CoD.PC_Korea_Event_TierProgress.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	})
 	local TextNumber4 = TextNumber2
 	local TextNumber3 = TextNumber2.subscribeToModel
-	local TextNumber5 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local TextNumber5 = Engine[@"getmodelforcontroller"](f1_arg1)
 	TextNumber3(TextNumber4, TextNumber5["PCKoreaEventCurrentDayProgression.progression"], function(f6_arg0)
 		f1_arg0:updateElementState(TextNumber2, {
 			name = "model_validation",
@@ -118,7 +118,7 @@ CoD.PC_Korea_Event_TierProgress.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	})
 	TextNumber5 = TextNumber3
 	TextNumber4 = TextNumber3.subscribeToModel
-	local Star = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local Star = Engine[@"getmodelforcontroller"](f1_arg1)
 	TextNumber4(TextNumber5, Star["PCKoreaEventCurrentDayProgression.progression"], function(f8_arg0)
 		f1_arg0:updateElementState(TextNumber3, {
 			name = "model_validation",
@@ -142,7 +142,7 @@ CoD.PC_Korea_Event_TierProgress.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	})
 	Star = TextNumber4
 	TextNumber5 = TextNumber4.subscribeToModel
-	local StarFull = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local StarFull = Engine[@"getmodelforcontroller"](f1_arg1)
 	TextNumber5(Star, StarFull["PCKoreaEventCurrentDayProgression.progression"], function(f10_arg0)
 		f1_arg0:updateElementState(TextNumber4, {
 			name = "model_validation",
@@ -166,7 +166,7 @@ CoD.PC_Korea_Event_TierProgress.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	})
 	StarFull = TextNumber5
 	Star = TextNumber5.subscribeToModel
-	local TierAcquiredGlow = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local TierAcquiredGlow = Engine[@"getmodelforcontroller"](f1_arg1)
 	Star(StarFull, TierAcquiredGlow["PCKoreaEventCurrentDayProgression.progression"], function(f12_arg0)
 		f1_arg0:updateElementState(TextNumber5, {
 			name = "model_validation",
@@ -181,8 +181,8 @@ CoD.PC_Korea_Event_TierProgress.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self.TextNumber5 = TextNumber5
 	Star = LUI.UIImage.new(0.5, 0.5, 160, 200, 0.5, 0.5, 38, 74)
 	Star:setAlpha(0.7)
-	Star:setImage(RegisterImage(0xA90716DCE74FFF2))
-	Star:setMaterial(LUI.UIImage.GetCachedMaterial(0x98A2728B4675FB5))
+	Star:setImage(RegisterImage(@"uie_pc_igrevent_progression_star"))
+	Star:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_glint"))
 	Star:setShaderVector(0, 0, 0, 0, 0)
 	Star:setShaderVector(1, -46.8, 0, 0, 0)
 	self:addElement(Star)
@@ -190,30 +190,30 @@ CoD.PC_Korea_Event_TierProgress.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	StarFull = LUI.UIImage.new(0.5, 0.5, 160, 200, 0.5, 0.5, 38, 74)
 	StarFull:setAlpha(0)
 	StarFull:setScale(1.1, 1.1)
-	StarFull:setImage(RegisterImage(0x78D95A993908FDE))
-	StarFull:setMaterial(LUI.UIImage.GetCachedMaterial(0x98A2728B4675FB5))
+	StarFull:setImage(RegisterImage(@"uie_pc_igrevent_weekprogression_star"))
+	StarFull:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_glint"))
 	StarFull:setShaderVector(0, 0.95, 0, 0, 0)
 	StarFull:setShaderVector(1, -46.8, 0, 0, 0)
 	self:addElement(StarFull)
 	self.StarFull = StarFull
 	TierAcquiredGlow = LUI.UIImage.new(0.5, 0.5, -80, 80, 0.5, 0.5, 46, 206)
 	TierAcquiredGlow:setAlpha(0)
-	TierAcquiredGlow:setImage(RegisterImage(0x6752D35CBDA5874))
+	TierAcquiredGlow:setImage(RegisterImage(@"uie_pc_igrevent_tieracquired_token_glow"))
 	self:addElement(TierAcquiredGlow)
 	self.TierAcquiredGlow = TierAcquiredGlow
 	local TierToken = LUI.UIImage.new(0.5, 0.5, -40, 40, 0.5, 0.5, 86, 166)
 	TierToken:setAlpha(0)
 	TierToken:setScale(2, 2)
-	TierToken:setImage(RegisterImage(0x3162CFF8BC56A18))
+	TierToken:setImage(RegisterImage(@"ui_icon_blackmarket_tier_token"))
 	self:addElement(TierToken)
 	self.TierToken = TierToken
 	local TierAcquiredText = LUI.UIText.new(0.5, 0.5, -350, 350, 0.5, 0.5, 166, 187)
 	TierAcquiredText:setRGB(ColorSet.T8__OCHRE.r, ColorSet.T8__OCHRE.g, ColorSet.T8__OCHRE.b)
 	TierAcquiredText:setAlpha(0)
-	TierAcquiredText:setText(Engine[0xF9F1239CFD921FE](0xE483DAF970FDA40))
+	TierAcquiredText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_6E483DAF970FDA40"))
 	TierAcquiredText:setTTF("ttmussels_demibold")
-	TierAcquiredText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	TierAcquiredText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	TierAcquiredText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	TierAcquiredText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(TierAcquiredText)
 	self.TierAcquiredText = TierAcquiredText
 	local TokenEmpty = CoD.PC_Korea_Event_Daily_Tier.new(f1_arg0, f1_arg1, 0.5, 0.5, 119, 159, 0.5, 0.5, 37, 77)
@@ -240,7 +240,7 @@ CoD.PC_Korea_Event_TierProgress.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	})
 	local TokenEmpty3 = TokenEmpty
 	local TokenEmpty2 = TokenEmpty.subscribeToModel
-	local TokenEmpty4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local TokenEmpty4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	TokenEmpty2(TokenEmpty3, TokenEmpty4["PCKoreaEventCurrentDayProgression.progression"], function(f15_arg0)
 		f1_arg0:updateElementState(TokenEmpty, {
 			name = "model_validation",
@@ -252,7 +252,7 @@ CoD.PC_Korea_Event_TierProgress.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	end, false)
 	TokenEmpty3 = TokenEmpty
 	TokenEmpty2 = TokenEmpty.subscribeToModel
-	TokenEmpty4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	TokenEmpty4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	TokenEmpty2(TokenEmpty3, TokenEmpty4["PCKoreaEventCurrentDayProgression.showCompletedAnimation"], function(f16_arg0)
 		f1_arg0:updateElementState(TokenEmpty, {
 			name = "model_validation",
@@ -288,7 +288,7 @@ CoD.PC_Korea_Event_TierProgress.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	})
 	TokenEmpty4 = TokenEmpty2
 	TokenEmpty3 = TokenEmpty2.subscribeToModel
-	local SeparatorsList = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local SeparatorsList = Engine[@"getmodelforcontroller"](f1_arg1)
 	TokenEmpty3(TokenEmpty4, SeparatorsList["PCKoreaEventCurrentDayProgression.progression"], function(f19_arg0)
 		f1_arg0:updateElementState(TokenEmpty2, {
 			name = "model_validation",
@@ -300,7 +300,7 @@ CoD.PC_Korea_Event_TierProgress.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	end, false)
 	TokenEmpty4 = TokenEmpty2
 	TokenEmpty3 = TokenEmpty2.subscribeToModel
-	SeparatorsList = Engine[0x4DF5CFBC1771947](f1_arg1)
+	SeparatorsList = Engine[@"getmodelforcontroller"](f1_arg1)
 	TokenEmpty3(TokenEmpty4, SeparatorsList["PCKoreaEventCurrentDayProgression.showCompletedAnimation"], function(f20_arg0)
 		f1_arg0:updateElementState(TokenEmpty2, {
 			name = "model_validation",
@@ -336,7 +336,7 @@ CoD.PC_Korea_Event_TierProgress.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	})
 	SeparatorsList = TokenEmpty3
 	TokenEmpty4 = TokenEmpty3.subscribeToModel
-	local PCKoreaEventDayProgressionSeparators2 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local PCKoreaEventDayProgressionSeparators2 = Engine[@"getmodelforcontroller"](f1_arg1)
 	TokenEmpty4(SeparatorsList, PCKoreaEventDayProgressionSeparators2["PCKoreaEventCurrentDayProgression.progression"], function(f23_arg0)
 		f1_arg0:updateElementState(TokenEmpty3, {
 			name = "model_validation",
@@ -348,7 +348,7 @@ CoD.PC_Korea_Event_TierProgress.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	end, false)
 	SeparatorsList = TokenEmpty3
 	TokenEmpty4 = TokenEmpty3.subscribeToModel
-	PCKoreaEventDayProgressionSeparators2 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	PCKoreaEventDayProgressionSeparators2 = Engine[@"getmodelforcontroller"](f1_arg1)
 	TokenEmpty4(SeparatorsList, PCKoreaEventDayProgressionSeparators2["PCKoreaEventCurrentDayProgression.showCompletedAnimation"], function(f24_arg0)
 		f1_arg0:updateElementState(TokenEmpty3, {
 			name = "model_validation",
@@ -384,7 +384,7 @@ CoD.PC_Korea_Event_TierProgress.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	})
 	PCKoreaEventDayProgressionSeparators2 = TokenEmpty4
 	SeparatorsList = TokenEmpty4.subscribeToModel
-	local PCKoreaEventDayProgressionSeparators = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local PCKoreaEventDayProgressionSeparators = Engine[@"getmodelforcontroller"](f1_arg1)
 	SeparatorsList(PCKoreaEventDayProgressionSeparators2, PCKoreaEventDayProgressionSeparators["PCKoreaEventCurrentDayProgression.progression"], function(f27_arg0)
 		f1_arg0:updateElementState(TokenEmpty4, {
 			name = "model_validation",
@@ -396,7 +396,7 @@ CoD.PC_Korea_Event_TierProgress.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	end, false)
 	PCKoreaEventDayProgressionSeparators2 = TokenEmpty4
 	SeparatorsList = TokenEmpty4.subscribeToModel
-	PCKoreaEventDayProgressionSeparators = Engine[0x4DF5CFBC1771947](f1_arg1)
+	PCKoreaEventDayProgressionSeparators = Engine[@"getmodelforcontroller"](f1_arg1)
 	SeparatorsList(PCKoreaEventDayProgressionSeparators2, PCKoreaEventDayProgressionSeparators["PCKoreaEventCurrentDayProgression.showCompletedAnimation"], function(f28_arg0)
 		f1_arg0:updateElementState(TokenEmpty4, {
 			name = "model_validation",
@@ -416,7 +416,7 @@ CoD.PC_Korea_Event_TierProgress.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	SeparatorsList:setHorizontalCount(3)
 	SeparatorsList:setSpacing(150)
 	SeparatorsList:setFirstElementXOffset(152)
-	SeparatorsList:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	SeparatorsList:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	self:addElement(SeparatorsList)
 	self.SeparatorsList = SeparatorsList
 	PCKoreaEventDayProgressionSeparators2 = CoD.PC_Korea_Event_Day_Progression_Separators.new(f1_arg0, f1_arg1, 0.5, 0.5, -6, 4, 0.5, 0.5, -28, 0)
@@ -474,7 +474,7 @@ CoD.PC_Korea_Event_TierProgress.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	})
 	local f1_local28 = self
 	local f1_local29 = self.subscribeToModel
-	local f1_local30 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local30 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local29(f1_local28, f1_local30["PCKoreaEventCurrentDayProgression.progression"], function(f33_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -486,7 +486,7 @@ CoD.PC_Korea_Event_TierProgress.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	end, false)
 	f1_local28 = self
 	f1_local29 = self.subscribeToModel
-	f1_local30 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local30 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local29(f1_local28, f1_local30["PCKoreaEventCurrentDayProgression.showStarCompletedAnimation"], function(f34_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -498,7 +498,7 @@ CoD.PC_Korea_Event_TierProgress.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	end, false)
 	f1_local28 = self
 	f1_local29 = self.subscribeToModel
-	f1_local30 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local30 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local29(f1_local28, f1_local30["PCKoreaEventCurrentDayProgression.showCompletedAnimation"], function(f35_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

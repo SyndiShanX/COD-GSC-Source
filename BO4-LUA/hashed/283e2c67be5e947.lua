@@ -12,11 +12,11 @@ CoD.StartMenu_Inventory_CurrentWeaponPC_Vignette.new = function(f1_arg0, f1_arg1
 	self.CurrentWeaponImage = CurrentWeaponImage
 	local CurrentWeaponName = LUI.UIText.new(0.5, 0.5, -200, 200, 0, 0, 0, 24)
 	CurrentWeaponName:setRGB(ColorSet.T8__BEIGE__HEADER.r, ColorSet.T8__BEIGE__HEADER.g, ColorSet.T8__BEIGE__HEADER.b)
-	CurrentWeaponName:setText(Engine[0xF9F1239CFD921FE](0x93E719493E9E18F))
+	CurrentWeaponName:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	CurrentWeaponName:setTTF("ttmussels_demibold")
 	CurrentWeaponName:setLetterSpacing(4)
-	CurrentWeaponName:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	CurrentWeaponName:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	CurrentWeaponName:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	CurrentWeaponName:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	self:addElement(CurrentWeaponName)
 	self.CurrentWeaponName = CurrentWeaponName
 	if PostLoadFunc then

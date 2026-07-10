@@ -20,7 +20,7 @@ CoD.ChallengesGlobalStickerbook.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	CallingCardGrid:setHorizontalCount(3)
 	CallingCardGrid:setVerticalCount(4)
 	CallingCardGrid:setSpacing(20)
-	CallingCardGrid:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	CallingCardGrid:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	CallingCardGrid:setDataSource("CallingCardsGlobalChallenges")
 	CallingCardGrid:registerEventHandler("list_item_gain_focus", function(element, event)
 		local f2_local0 = nil

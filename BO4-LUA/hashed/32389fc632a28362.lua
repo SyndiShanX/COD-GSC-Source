@@ -21,13 +21,13 @@ CoD.PlayerWidgetWZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Blur = LUI.UIImage.new(0, 0, 15, 315, 0, 0, 26.5, 92.5)
-	Blur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	Blur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	Blur:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(Blur)
 	self.Blur = Blur
 	local GlowSpecialist = LUI.UIImage.new(0, 0, 19, 107, 0, 0, -4, 112)
 	GlowSpecialist:setAlpha(0.12)
-	GlowSpecialist:setImage(RegisterImage(0xD1DEF58D810CED5))
+	GlowSpecialist:setImage(RegisterImage(@"hash_2D1DEF58D810CED5"))
 	self:addElement(GlowSpecialist)
 	self.GlowSpecialist = GlowSpecialist
 	local PanelDark = LUI.UIImage.new(0, 0, 17, 178, 0, 0, 26, 90)
@@ -51,7 +51,7 @@ CoD.PlayerWidgetWZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	})
 	local Armor = AmmoHeal_Prompt
 	local HealthValue = AmmoHeal_Prompt.subscribeToModel
-	local CharacterPortrait2 = Engine[0xE4D2F32833CFA6C](Engine[0x761955642304848](f1_arg1))
+	local CharacterPortrait2 = Engine[@"getmodelforclient"](Engine[@"getclientnum"](f1_arg1))
 	HealthValue(Armor, CharacterPortrait2["health.healthValue"], function(f3_arg0)
 		f1_arg0:updateElementState(AmmoHeal_Prompt, {
 			name = "model_validation",
@@ -62,7 +62,7 @@ CoD.PlayerWidgetWZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 		})
 	end, false)
 	AmmoHeal_Prompt:setAlpha(0)
-	AmmoHeal_Prompt.PromptText:setText(Engine[0xF9F1239CFD921FE](0x8CADD3D78C04519))
+	AmmoHeal_Prompt.PromptText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_38CADD3D78C04519"))
 	self:addElement(AmmoHeal_Prompt)
 	self.AmmoHeal_Prompt = AmmoHeal_Prompt
 	HealthValue = CoD.PlayerWidgetWZHealth.new(f1_arg0, f1_arg1, 0, 0, 86.5, 174.5, 0, 0, 24, 96)
@@ -96,22 +96,22 @@ CoD.PlayerWidgetWZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	local LEDarmor = LUI.UIImage.new(0, 0, 246, 314, 0, 0, 23, 91)
 	LEDarmor:setRGB(0, 0, 0)
 	LEDarmor:setAlpha(0.2)
-	LEDarmor:setImage(RegisterImage(0x9715DAADF2D1074))
+	LEDarmor:setImage(RegisterImage(@"hash_59715DAADF2D1074"))
 	self:addElement(LEDarmor)
 	self.LEDarmor = LEDarmor
 	local LEDplayer = LUI.UIImage.new(0, 0, 3.5, 183.5, 0, 0, 8, 108)
 	LEDplayer:setRGB(0, 0, 0)
 	LEDplayer:setAlpha(0.2)
-	LEDplayer:setImage(RegisterImage(0xBA2206DF71A2020))
+	LEDplayer:setImage(RegisterImage(@"hash_BA2206DF71A2020"))
 	self:addElement(LEDplayer)
 	self.LEDplayer = LEDplayer
 	local Frame = LUI.UIImage.new(0, 0, 1.5, 329.5, 0, 0, 8, 108)
-	Frame:setImage(RegisterImage(0xBA5A94668BDF7FD))
+	Frame:setImage(RegisterImage(@"hash_3BA5A94668BDF7FD"))
 	self:addElement(Frame)
 	self.Frame = Frame
 	local AmmoWidgetMPAbilityItem = CoD.AmmoWidgetWZ_AbilityItem_Heal.new(f1_arg0, f1_arg1, 0, 0, 178, 250, 0, 0, 27.5, 86.5)
-	AmmoWidgetMPAbilityItem.HeroAbilityUseString.KBMText:setText(Engine[0xF9F1239CFD921FE](0x34175BD548C4C21))
-	AmmoWidgetMPAbilityItem.HeroAbilityUseString.GamepadText:setText(Engine[0xF9F1239CFD921FE](0x34175BD548C4C21))
+	AmmoWidgetMPAbilityItem.HeroAbilityUseString.KBMText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_234175BD548C4C21"))
+	AmmoWidgetMPAbilityItem.HeroAbilityUseString.GamepadText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_234175BD548C4C21"))
 	AmmoWidgetMPAbilityItem:subscribeToGlobalModel(f1_arg1, "PlayerAbilities", "playerGadget1", function(model)
 		AmmoWidgetMPAbilityItem:setModel(model, f1_arg1)
 	end)
@@ -189,7 +189,7 @@ CoD.PlayerWidgetWZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	})
 	local f1_local17 = self
 	local f1_local18 = self.subscribeToModel
-	local f1_local19 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local19 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local18(f1_local17, f1_local19.PlayerSettingsUpdate, function(f16_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

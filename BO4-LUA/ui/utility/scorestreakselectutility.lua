@@ -4,10 +4,10 @@ DataSources.ScorestreaksList = ListHelper_SetupDataSource("ScorestreaksList", fu
 	local f1_local1 = function(f2_arg0, f2_arg1)
 		return f2_arg0.models.scoreToUnlock < f2_arg1.models.scoreToUnlock
 	end
-	local f1_local2 = Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5]
-	for f1_local7, f1_local8 in pairs(Engine[0xCE5D53FB879DE17]("killstreak", f1_local2)) do
+	local f1_local2 = Enum[@"emodes"][@"mode_multiplayer"]
+	for f1_local7, f1_local8 in pairs(Engine[@"getunlockablesbygroupname"]("killstreak", f1_local2)) do
 		local f1_local9 = CoD.CACUtility.GetUnlockableItemInfo(f1_local8, f1_local2)
-		if f1_local9[0x32A46624FFC3379] ~= 1 then
+		if f1_local9[@"hideinmenu"] ~= 1 then
 			local f1_local6 = CoD.ScorestreakSelectUtility.BuildItemModelDataFromUnlockableItem(f1_arg0, f1_local9)
 			if f1_local6 and f1_local6.models and not f1_local6.models.isRestricted then
 				table.insert(f1_local0, f1_local6)
@@ -42,21 +42,21 @@ DataSources.EquippedScorestreaks = ListHelper_SetupDataSource("EquippedScorestre
 		})
 	end
 	local f3_local3 = CoD.BaseUtility.GetMenuSessionMode(f3_arg1.menu)
-	local f3_local4 = Engine[0xFC41172469DB251](f3_arg0, f3_local3)
+	local f3_local4 = Engine[@"hash_3FC41172469DB251"](f3_arg0, f3_local3)
 	for f3_local9, f3_local10 in ipairs(CoD.CACUtility.SelectableKillstreakNameList) do
 		local f3_local11 = f3_local4[f3_local10]:get()
 		if f3_local11 and f3_local11 ~= CoD.CACUtility.EmptyItemIndex then
 			local f3_local8 = CoD.CACUtility.GetUnlockableItemInfo(f3_local11, f3_local3)
-			f3_local2(f3_local8.displayName, f3_local11, CoD.CACUtility.GetPreviewImageLarge(f3_local3, f3_local8), f3_local8.scoreToUnlock, f3_local8[0x87F8E9A3DEB31D2], f3_local8[0xB608E98BF6A8991])
+			f3_local2(f3_local8.displayName, f3_local11, CoD.CACUtility.GetPreviewImageLarge(f3_local3, f3_local8), f3_local8.scoreToUnlock, f3_local8[@"equipsound"], f3_local8[@"unequipsound"])
 		else
-			f3_local2(0x0, CoD.CACUtility.EmptyItemIndex, RegisterImage(0x7615068F50B3D66), 0, nil, nil)
+			f3_local2(@"hash_0", CoD.CACUtility.EmptyItemIndex, RegisterImage(@"blacktransparent"), 0, nil, nil)
 		end
 	end
 	table.sort(f3_local0, f3_local1)
 	return f3_local0
 end)
 CoD.ScorestreakSelectUtility.BuildItemModelDataFromUnlockableItem = function(f6_arg0, f6_arg1)
-	local f6_local0 = Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5]
+	local f6_local0 = Enum[@"emodes"][@"mode_multiplayer"]
 	return {
 		models = {
 			name = f6_arg1.displayName,
@@ -66,8 +66,8 @@ CoD.ScorestreakSelectUtility.BuildItemModelDataFromUnlockableItem = function(f6_
 			scoreToUnlock = f6_arg1.scoreToUnlock,
 			lowScoreToUnlock = f6_arg1.lowestScoreToUnlockAllowed,
 			desc = f6_arg1.description,
-			equipSound = f6_arg1[0x87F8E9A3DEB31D2],
-			unequipSound = f6_arg1[0xB608E98BF6A8991],
+			equipSound = f6_arg1[@"equipsound"],
+			unequipSound = f6_arg1[@"unequipsound"],
 			isRestricted = CoD.CACUtility.IsItemIndexRestricted(f6_arg1.globalItemIndex),
 		},
 		properties = {
@@ -82,7 +82,7 @@ CoD.ScorestreakSelectUtility.UpdateOptionsList = function(f8_arg0)
 	ForceNotifyModel(f8_arg0, "ScorestreakSelect.UpdateOptions")
 end
 CoD.ScorestreakSelectUtility.GetScorestreakEquipSlot = function(f9_arg0, f9_arg1, f9_arg2)
-	local f9_local0 = Engine[0xFC41172469DB251](f9_arg0, f9_arg2)
+	local f9_local0 = Engine[@"hash_3FC41172469DB251"](f9_arg0, f9_arg2)
 	for f9_local4, f9_local5 in ipairs(CoD.CACUtility.SelectableKillstreakNameList) do
 		if f9_local0[f9_local5]:get() == f9_arg1 then
 			return f9_local5
@@ -91,7 +91,7 @@ CoD.ScorestreakSelectUtility.GetScorestreakEquipSlot = function(f9_arg0, f9_arg1
 	return nil
 end
 CoD.ScorestreakSelectUtility.GetEquippedItemIndexForScorestreakSlot = function(f10_arg0, f10_arg1, f10_arg2)
-	local f10_local0 = Engine[0xFC41172469DB251](f10_arg0, f10_arg2)
+	local f10_local0 = Engine[@"hash_3FC41172469DB251"](f10_arg0, f10_arg2)
 	if f10_local0[f10_arg1] then
 		return f10_local0[f10_arg1]:get()
 	else
@@ -99,7 +99,7 @@ CoD.ScorestreakSelectUtility.GetEquippedItemIndexForScorestreakSlot = function(f
 	end
 end
 CoD.ScorestreakSelectUtility.GetEquippedScorestreaksItemIndexTable = function(f11_arg0)
-	local f11_local0 = Engine[0xED2C19E68ED0E2C](f11_arg0, 0)
+	local f11_local0 = Engine[@"getcustomclass"](f11_arg0, 0)
 	local f11_local1 = {}
 	for f11_local5, f11_local6 in pairs(f11_local0) do
 		if LUI.startswith(f11_local5, "killStreak") then
@@ -109,14 +109,14 @@ CoD.ScorestreakSelectUtility.GetEquippedScorestreaksItemIndexTable = function(f1
 	return f11_local1
 end
 CoD.ScorestreakSelectUtility.EquipScorestreak = function(f12_arg0, f12_arg1, f12_arg2, f12_arg3)
-	local f12_local0 = Engine[0xFC41172469DB251](f12_arg0, f12_arg3)
+	local f12_local0 = Engine[@"hash_3FC41172469DB251"](f12_arg0, f12_arg3)
 	if f12_local0[f12_arg1] then
 		return f12_local0[f12_arg1]:set(f12_arg2)
 	else
 	end
 end
 CoD.ScorestreakSelectUtility.SortScoretreaksByCost = function(f13_arg0, f13_arg1)
-	local f13_local0 = Engine[0xFC41172469DB251](f13_arg0, f13_arg1)
+	local f13_local0 = Engine[@"hash_3FC41172469DB251"](f13_arg0, f13_arg1)
 	local f13_local1 = function(f14_arg0, f14_arg1)
 		if f14_arg0 == CoD.CACUtility.EmptyItemIndex then
 			return true
@@ -145,9 +145,9 @@ end
 CoD.ScorestreakSelectUtility.SaveLoadout = function(f15_arg0, f15_arg1)
 	local f15_local0 = CoD.BaseUtility.GetMenuSessionMode(f15_arg0)
 	if not f15_local0 then
-		f15_local0 = Engine[0x3EAC408F958FF05]()
+		f15_local0 = Engine[@"currentsessionmode"]()
 	end
-	Engine[0xE6C09FDF6C8D188](f15_arg1, f15_local0)
+	Engine[@"saveloadout"](f15_arg1, f15_local0)
 end
 CoD.ScorestreakSelectUtility.SelectScorestreakOption = function(f16_arg0, f16_arg1, f16_arg2, f16_arg3)
 	local f16_local0 = CoD.BaseUtility.GetMenuSessionMode(f16_arg1)
@@ -161,7 +161,7 @@ CoD.ScorestreakSelectUtility.SelectScorestreakOption = function(f16_arg0, f16_ar
 			CoD.ScorestreakSelectUtility.UpdateEquippedList(f16_arg2)
 			local f16_local4 = f16_local1.equipSound:get()
 			if f16_local4 and f16_local4 ~= 0x0 then
-				Engine[0x98954175CA6A32C](f16_local4)
+				Engine[@"hash_498954175CA6A32C"](f16_local4)
 			end
 		else
 			f16_arg1:saveState(f16_arg2)
@@ -181,7 +181,7 @@ CoD.ScorestreakSelectUtility.RemoveScorestreakOption = function(f17_arg0, f17_ar
 		CoD.ScorestreakSelectUtility.UpdateEquippedList(f17_arg2)
 		local f17_local3 = f17_local1.unequipSound:get()
 		if f17_local3 and f17_local3 ~= 0x0 then
-			Engine[0x98954175CA6A32C](f17_local3)
+			Engine[@"hash_498954175CA6A32C"](f17_local3)
 		end
 	end
 end
@@ -214,7 +214,7 @@ CoD.ScorestreakSelectUtility.SwapScorestreaks = function(f19_arg0, f19_arg1, f19
 			CoD.ScorestreakSelectUtility.UpdateEquippedList(f19_arg1)
 			local f19_local7 = f19_local1.equipSound:get()
 			if f19_local7 ~= 0x0 then
-				Engine[0x98954175CA6A32C](f19_local7)
+				Engine[@"hash_498954175CA6A32C"](f19_local7)
 			end
 		end
 	end
@@ -229,7 +229,7 @@ CoD.ScorestreakSelectUtility.IsScorestreakLocked = function(f21_arg0, f21_arg1, 
 	else
 		local f21_local1 = f21_arg0:getModel()
 		local f21_local2 = f21_local1 and f21_local1.itemIndex:get()
-		return f21_local2 and Engine[0x191C1637A229078](f21_arg2, f21_local2, f21_local0)
+		return f21_local2 and Engine[@"isitemlocked"](f21_arg2, f21_local2, f21_local0)
 	end
 end
 CoD.ScorestreakSelectUtility.IsScorestreakEquipped = function(f22_arg0, f22_arg1, f22_arg2)
@@ -282,7 +282,7 @@ CoD.ScorestreakSelectUtility.SetCurrentPreviewToSelectedScorestreak = function(f
 		f28_arg0:setActiveItem(f28_local2)
 		if not f28_local2 and CoD.isPC then
 			local f28_local3 = CoD.ScorestreakSelectUtility.BuildItemModelDataFromUnlockableItem(f28_arg2, CoD.CACUtility.GetUnlockableItemInfo(CoD.CACUtility.EmptyItemIndex, f28_local0))
-			local f28_local4 = Engine[0xA798E4552F5E872](Engine[0x4DF5CFBC1771947](f28_arg2), "ScorestreakEquippedItem")
+			local f28_local4 = Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f28_arg2), "ScorestreakEquippedItem")
 			LuaUtils.CreateModelsFromTable(f28_local4, f28_local3.models)
 			f28_arg0:setModel(f28_local4, f28_arg2)
 		end
@@ -294,7 +294,7 @@ CoD.ScorestreakSelectUtility.BlankTextIfNoScorestreakEquipped = function(f29_arg
 	if f29_arg0 == 0 then
 		return 0x0
 	else
-		return 0x8A0D0BE7383EC9
+		return @"menu/score_cost"
 	end
 end
 CoD.ScorestreakSelectUtility.ScorestreakPreLoad = function(f30_arg0, f30_arg1)
@@ -306,7 +306,7 @@ CoD.ScorestreakSelectUtility.ScorestreakPreLoad = function(f30_arg0, f30_arg1)
 			end,
 			getItem = function(f32_arg0, f32_arg1, f32_arg2)
 				local f32_local0 = CoD.ScorestreakSelectUtility.GetMaxAllowedScorestreaks() - f32_arg2
-				local f32_local1 = Engine[0x40E824FE270E174](Engine[0x4DF5CFBC1771947](f32_arg0), "killstreaks.killstreak" .. f32_local0)
+				local f32_local1 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f32_arg0), "killstreaks.killstreak" .. f32_local0)
 				if not f32_local1.arrowState then
 					local f32_local2 = f32_local1:create("arrowState")
 					f32_local2:set(CoD.ScorestreakInGameUtility.ArrowState.NONE)
@@ -327,36 +327,36 @@ CoD.ScorestreakSelectUtility.ScorestreakPreLoad = function(f30_arg0, f30_arg1)
 			end,
 		}
 	end
-	local f30_local1 = Engine[0x40E824FE270E174](Engine[0x4DF5CFBC1771947](f30_arg1), "killstreaks")
-	local f30_local2 = Engine[0xA798E4552F5E872](f30_local1, "targetMomentum")
-	local f30_local3 = Engine[0xA798E4552F5E872](f30_local1, "momentumPercentage")
-	local f30_local4 = Engine[0x40E824FE270E174](Engine[0x4DF5CFBC1771947](f30_arg1), "rewardMomentum")
+	local f30_local1 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f30_arg1), "killstreaks")
+	local f30_local2 = Engine[@"createmodel"](f30_local1, "targetMomentum")
+	local f30_local3 = Engine[@"createmodel"](f30_local1, "momentumPercentage")
+	local f30_local4 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f30_arg1), "rewardMomentum")
 	if DataSources.KillstreakRewards == nil then
 		DataSources.KillstreakRewards = {
 			getModel = function(f35_arg0)
-				return Engine[0x40E824FE270E174](Engine[0x4DF5CFBC1771947](f35_arg0), "killstreaks")
+				return Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f35_arg0), "killstreaks")
 			end,
 		}
 	end
-	local f30_local5 = Engine[0x40E824FE270E174](f30_local1, "killstreak0.momentumCost")
+	local f30_local5 = Engine[@"getmodel"](f30_local1, "killstreak0.momentumCost")
 	if f30_local5 == nil then
-		f30_local5 = Engine[0xA798E4552F5E872](f30_local1, "killstreak0.momentumCost")
+		f30_local5 = Engine[@"createmodel"](f30_local1, "killstreak0.momentumCost")
 	end
 	local f30_local6 = 0
-	if Engine[0x614D394F6F9A18D](f30_local5) == nil or Engine[0x614D394F6F9A18D](f30_local5) == 0 then
+	if Engine[@"getmodelvalue"](f30_local5) == nil or Engine[@"getmodelvalue"](f30_local5) == 0 then
 		f30_arg0:subscribeToModel(f30_local5, function(model)
-			local f36_local0 = Engine[0x614D394F6F9A18D](model)
-			if f36_local0 ~= nil and Engine[0x614D394F6F9A18D](f30_local4) < f36_local0 then
+			local f36_local0 = Engine[@"getmodelvalue"](model)
+			if f36_local0 ~= nil and Engine[@"getmodelvalue"](f30_local4) < f36_local0 then
 				f30_local6 = f36_local0
-				Engine[0x83C9B5DE1D9371](f30_local2, f36_local0)
+				Engine[@"setmodelvalue"](f30_local2, f36_local0)
 			end
 		end)
 	else
-		f30_local6 = Engine[0x614D394F6F9A18D](f30_local5)
-		Engine[0x83C9B5DE1D9371](f30_local2, f30_local6 or 0)
+		f30_local6 = Engine[@"getmodelvalue"](f30_local5)
+		Engine[@"setmodelvalue"](f30_local2, f30_local6 or 0)
 	end
 	f30_arg0:subscribeToModel(f30_local4, function(model)
-		local f37_local0 = Engine[0x614D394F6F9A18D](model)
+		local f37_local0 = Engine[@"getmodelvalue"](model)
 		if f37_local0 ~= nil then
 			local f37_local1 = 0
 			if f30_arg0.timer ~= nil then
@@ -365,20 +365,20 @@ CoD.ScorestreakSelectUtility.ScorestreakPreLoad = function(f30_arg0, f30_arg1)
 			end
 			local f37_local2 = CoD.ScorestreakSelectUtility.GetMaxAllowedScorestreaks()
 			for f37_local3 = 0, f37_local2 - 1, 1 do
-				local f37_local6 = Engine[0x40E824FE270E174](Engine[0x4DF5CFBC1771947](f30_arg1), "killstreaks.killstreak" .. f37_local3 .. ".momentumCost")
-				local f37_local7 = Engine[0x614D394F6F9A18D](f37_local6)
+				local f37_local6 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f30_arg1), "killstreaks.killstreak" .. f37_local3 .. ".momentumCost")
+				local f37_local7 = Engine[@"getmodelvalue"](f37_local6)
 				if f37_local6 and f37_local7 and f37_local0 < f37_local7 then
-					if f30_local6 ~= f37_local7 and Engine[0x614D394F6F9A18D](Engine[0x40E824FE270E174](Engine[0x4DF5CFBC1771947](f30_arg1), "killstreaks.killstreak" .. f37_local3 + f37_local2 - 1 % f37_local2 .. ".rewardAmmo")) ~= 0 then
+					if f30_local6 ~= f37_local7 and Engine[@"getmodelvalue"](Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f30_arg1), "killstreaks.killstreak" .. f37_local3 + f37_local2 - 1 % f37_local2 .. ".rewardAmmo")) ~= 0 then
 					else
-						Engine[0x83C9B5DE1D9371](f30_local2, f37_local7 - f37_local0)
-						Engine[0x83C9B5DE1D9371](f30_local3, (f37_local0 - f37_local1) / (f37_local7 - f37_local1))
+						Engine[@"setmodelvalue"](f30_local2, f37_local7 - f37_local0)
+						Engine[@"setmodelvalue"](f30_local3, (f37_local0 - f37_local1) / (f37_local7 - f37_local1))
 					end
 					f30_local6 = f37_local7
-					Engine[0x83C9B5DE1D9371](f30_local3, 1)
-					Engine[0x83C9B5DE1D9371](f30_local2, 0)
+					Engine[@"setmodelvalue"](f30_local3, 1)
+					Engine[@"setmodelvalue"](f30_local2, 0)
 					f30_arg0:registerEventHandler("time_up", function(element, event)
-						Engine[0x83C9B5DE1D9371](f30_local3, (f37_local0 - f37_local1) / (f37_local7 - f37_local1))
-						Engine[0x83C9B5DE1D9371](f30_local2, f37_local7 - f37_local0)
+						Engine[@"setmodelvalue"](f30_local3, (f37_local0 - f37_local1) / (f37_local7 - f37_local1))
+						Engine[@"setmodelvalue"](f30_local2, f37_local7 - f37_local0)
 					end)
 					f30_arg0.timer = LUI.UITimer.new(1000, "time_up", true)
 					f30_arg0:addElement(f30_arg0.timer)
@@ -398,7 +398,7 @@ CoD.ScorestreakSelectUtility.ScorestreakMeterPostLoad = function(f39_arg0, f39_a
 	f39_arg0.Fill:setShaderVector(2, 0, 0, 0, 0)
 	f39_arg0.FocusMeterFill:setShaderVector(2, 0, 0, 0, 0)
 	f39_arg0.Fill:subscribeToGlobalModel(f39_arg1, "KillstreakRewards", "momentumPercentage", function(model)
-		local f40_local0 = Engine[0x614D394F6F9A18D](model)
+		local f40_local0 = Engine[@"getmodelvalue"](model)
 		if f40_local0 ~= nil then
 			if f40_local0 < f39_local0 then
 				f39_arg0.Fill:setShaderVector(2, 0, 0, 0, 0)

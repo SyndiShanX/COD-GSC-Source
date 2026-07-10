@@ -8,21 +8,21 @@ CoD.IdentityLootCaseCount.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local CaseIcon = LUI.UIImage.new(0, 0, 0, 52, 0.5, 0.5, -21, 31)
-	CaseIcon:setImage(RegisterImage(0xD0C0C9F62783A5C))
+	CaseIcon:setImage(RegisterImage(@"ui_icon_blackmarket_reserves_case_small"))
 	self:addElement(CaseIcon)
 	self.CaseIcon = CaseIcon
 	local CaseCount = LUI.UIText.new(0, 0, 52, 104, 0.5, 0.5, -11, 11)
 	CaseCount:setText(SetValueIfNumberEqualTo(-1, "-", 0))
 	CaseCount:setTTF("ttmussels_demibold")
-	CaseCount:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	CaseCount:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	CaseCount:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	CaseCount:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	self:addElement(CaseCount)
 	self.CaseCount = CaseCount
 	local Flash = LUI.UIImage.new(0.5, 0.5, -75, 75, 0.5, 0.5, -75, 75)
 	Flash:setRGB(1, 0.98, 0.71)
 	Flash:setAlpha(0)
-	Flash:setImage(RegisterImage(0x4A1176ABBF1AB4C))
-	Flash:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Flash:setImage(RegisterImage(@"uie_ui_hud_notifications_glow"))
+	Flash:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Flash)
 	self.Flash = Flash
 	self:mergeStateConditions({

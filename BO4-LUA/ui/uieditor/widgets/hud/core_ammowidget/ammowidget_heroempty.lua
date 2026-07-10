@@ -10,7 +10,7 @@ CoD.AmmoWidget_HeroEmpty.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	local ImgIcon = LUI.UIImage.new(0.5, 0.5, -54.5, 50.5, 0.5, 0.5, -59.5, 57.5)
 	ImgIcon:setRGB(1, 0, 0)
 	ImgIcon:setAlpha(0.3)
-	ImgIcon:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	ImgIcon:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	ImgIcon:linkToElementModel(self, "image", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -22,7 +22,7 @@ CoD.AmmoWidget_HeroEmpty.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	local ImgIconGrow = LUI.UIImage.new(0.5, 0.5, -54.5, 50.5, 0.5, 0.5, -59.5, 57.5)
 	ImgIconGrow:setRGB(1, 0, 0)
 	ImgIconGrow:setAlpha(0.31)
-	ImgIconGrow:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	ImgIconGrow:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	ImgIconGrow:linkToElementModel(self, "image", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -35,8 +35,8 @@ CoD.AmmoWidget_HeroEmpty.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	Inactive:setRGB(0.88, 0.07, 0.07)
 	Inactive:setAlpha(0.25)
 	Inactive:setScale(1.6, 1.6)
-	Inactive:setImage(RegisterImage(0xCFDBE48B7A82C2C))
-	Inactive:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Inactive:setImage(RegisterImage(@"uie_ui_hud_core_hero_widget_unavailable"))
+	Inactive:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Inactive)
 	self.Inactive = Inactive
 	self:linkToElementModel(self, "pulseEmpty", true, function(model)

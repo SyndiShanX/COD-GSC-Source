@@ -8,11 +8,11 @@ CoD.VoDViewerSkipPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	self.soundSet = "HUD"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local label = LUI.UIText.new(1, 1, -841, -60, 1, 1, -87, -50)
-	label:setText(Engine[0xF9F1239CFD921FE](0x8F7A20360760C))
+	label:setText(Engine[@"hash_4F9F1239CFD921FE"](@"platform/skip"))
 	label:setTTF("ttmussels_regular")
 	label:setLetterSpacing(4)
-	label:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
-	label:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	label:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
+	label:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(label)
 	self.label = label
 	self:mergeStateConditions({
@@ -35,7 +35,7 @@ CoD.VoDViewerSkipPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	end)
 	local f1_local2 = self
 	local f1_local3 = self.subscribeToModel
-	local f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local3(f1_local2, f1_local4.LastInput, function(f5_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -47,7 +47,7 @@ CoD.VoDViewerSkipPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	end, false)
 	f1_local2 = self
 	f1_local3 = self.subscribeToModel
-	f1_local4 = Engine[0x8DF2E5447F384B9]()
+	f1_local4 = Engine[@"getglobalmodel"]()
 	f1_local3(f1_local2, f1_local4.cutsceneSkippable, function(f6_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -67,7 +67,7 @@ CoD.VoDViewerSkipPrompt.__resetProperties = function(f7_arg0)
 	f7_arg0.label:setLeftRight(1, 1, -841, -60)
 	f7_arg0.label:setTopBottom(1, 1, -87, -50)
 	f7_arg0.label:setAlpha(1)
-	f7_arg0.label:setText(Engine[0xF9F1239CFD921FE](0x8F7A20360760C))
+	f7_arg0.label:setText(Engine[@"hash_4F9F1239CFD921FE"](@"platform/skip"))
 end
 CoD.VoDViewerSkipPrompt.__clipsPerState = {
 	DefaultState = {
@@ -126,7 +126,7 @@ CoD.VoDViewerSkipPrompt.__clipsPerState = {
 			f13_arg0.label:setLeftRight(1, 1, -826, -45)
 			f13_arg0.label:setTopBottom(1, 1, -65, -28)
 			f13_arg0.label:setAlpha(0)
-			f13_arg0.label:setText(Engine[0xF9F1239CFD921FE](0x3135E00B961022B))
+			f13_arg0.label:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_63135E00B961022B"))
 			f13_local0(f13_arg0.label)
 		end,
 	},

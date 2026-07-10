@@ -10,11 +10,11 @@ CoD.LeaguePlayEventEndDelayLobbyMessage.new = function(f1_arg0, f1_arg1, f1_arg2
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Description = LUI.UIText.new(0, 0, 6, 507, 0, 0, 34, 55)
 	Description:setRGB(0.92, 0.92, 0.92)
-	Description:setText(Engine[0xF9F1239CFD921FE](0xFD414AFDE92218B))
+	Description:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_FD414AFDE92218B"))
 	Description:setTTF("ttmussels_regular")
 	Description:setLetterSpacing(2)
-	Description:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Description:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Description:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Description:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	Description:setBackingType(1)
 	Description:setBackingWidget(CoD.CommonPixelBackingWithTopPadding, f1_arg0, f1_arg1)
 	Description:setBackingColor(0, 0, 0)
@@ -24,10 +24,10 @@ CoD.LeaguePlayEventEndDelayLobbyMessage.new = function(f1_arg0, f1_arg1, f1_arg2
 	self.Description = Description
 	local Title = LUI.UIText.new(0, 0, 6, 294, 0, 0, 5, 29)
 	Title:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
-	Title:setText(Engine[0xF9F1239CFD921FE](0xA7353E18F1D3EA2))
+	Title:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_A7353E18F1D3EA2"))
 	Title:setTTF("ttmussels_demibold")
 	Title:setLetterSpacing(2)
-	Title:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	Title:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(Title)
 	self.Title = Title
 	self:mergeStateConditions({

@@ -10,7 +10,7 @@ CoD.WarzoneDBNORedeploying.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local MatchText = CoD.PrematchCountdown_BeginsIn.new(f1_arg0, f1_arg1, 0.5, 0.5, -959.5, 959.5, 0.5, 0.5, -24, 24)
 	MatchText.MatchText:setAlpha(1)
-	MatchText.MatchText:setText(Engine[0xF9F1239CFD921FE](0x968D3B043BAE7EA))
+	MatchText.MatchText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_2968D3B043BAE7EA"))
 	MatchText.MatchText:setLetterSpacing(1.7)
 	MatchText.MatchText:setBackingColor(1, 0.16, 0.16)
 	MatchText.MatchText:setBackingAlpha(0.9)
@@ -32,7 +32,7 @@ CoD.WarzoneDBNORedeploying.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 end
 CoD.WarzoneDBNORedeploying.__resetProperties = function(f3_arg0)
 	f3_arg0.MatchText:completeAnimation()
-	f3_arg0.MatchText.MatchText:setText(Engine[0xF9F1239CFD921FE](0x968D3B043BAE7EA))
+	f3_arg0.MatchText.MatchText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_2968D3B043BAE7EA"))
 end
 CoD.WarzoneDBNORedeploying.__clipsPerState = {
 	DefaultState = {
@@ -47,7 +47,7 @@ CoD.WarzoneDBNORedeploying.__clipsPerState = {
 			f5_arg0:setupElementClipCounter(1)
 			f5_arg0.MatchText:beginAnimation(80)
 			f5_arg0.MatchText.MatchText:beginAnimation(80)
-			f5_arg0.MatchText.MatchText:setText(Engine[0xF9F1239CFD921FE](0x8B6A7A86C45442F))
+			f5_arg0.MatchText.MatchText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_68B6A7A86C45442F"))
 			f5_arg0.MatchText:registerEventHandler("interrupted_keyframe", f5_arg0.clipInterrupted)
 			f5_arg0.MatchText:registerEventHandler("transition_complete_keyframe", f5_arg0.clipFinished)
 		end,

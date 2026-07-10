@@ -26,8 +26,8 @@ LUI.createMenu.ReservesPromoImagePopup = function(f1_arg0, f1_arg1)
 	self.LiveEventViewerFooterContainer0 = LiveEventViewerFooterContainer0
 	local PromoTitle = LUI.UIText.new(0.5, 0.5, -815.5, 815.5, 0, 0, 86.5, 158.5)
 	PromoTitle:setTTF("ttmussels_demibold")
-	PromoTitle:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	PromoTitle:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	PromoTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	PromoTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	PromoTitle:subscribeToGlobalModel(f1_arg0, "ReservesPromoPopup", "title", function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -38,21 +38,21 @@ LUI.createMenu.ReservesPromoImagePopup = function(f1_arg0, f1_arg1)
 	self.PromoTitle = PromoTitle
 	local PromoDesc = LUI.UIText.new(0.5, 0.5, -815.5, 815.5, 0, 0, 158.5, 188.5)
 	PromoDesc:setTTF("ttmussels_regular")
-	PromoDesc:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	PromoDesc:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	PromoDesc:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	PromoDesc:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	PromoDesc:subscribeToGlobalModel(f1_arg0, "ReservesPromoPopup", "desc", function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
-			PromoDesc:setText(Engine[0xF9F1239CFD921FE](f4_local0))
+			PromoDesc:setText(Engine[@"hash_4F9F1239CFD921FE"](f4_local0))
 		end
 	end)
 	self:addElement(PromoDesc)
 	self.PromoDesc = PromoDesc
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		GoBack(self, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x6C253CF816B40B5, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/close", nil, nil)
 		return true
 	end, false)
 	LiveEventViewerFooterContainer0:setModel(self.buttonModel, f1_arg0)

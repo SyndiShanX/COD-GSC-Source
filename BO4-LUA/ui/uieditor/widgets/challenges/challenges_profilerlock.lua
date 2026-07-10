@@ -27,7 +27,7 @@ CoD.Challenges_ProfilerLock.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	local TierText = LUI.UIText.new(0, 0, 45, 221, 0, 0, 9, 36)
 	TierText:setTTF("ttmussels_regular")
 	TierText:setLetterSpacing(1)
-	TierText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	TierText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	TierText:linkToElementModel(self, "maxTier", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then

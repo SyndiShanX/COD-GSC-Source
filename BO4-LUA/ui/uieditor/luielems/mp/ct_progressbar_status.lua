@@ -26,11 +26,11 @@ LUI.createMenu.ct_progressbar_status = function(f1_arg0, f1_arg1)
 	local backing = LUI.UIText.new(0.5, 0.5, -1593, 327, 0.5, 0.5, -35, 0)
 	backing:setRGB(ColorSet.Title.r, ColorSet.Title.g, ColorSet.Title.b)
 	backing:setScale(1.5, 1.2)
-	backing:setText(Engine[0xF9F1239CFD921FE](0xB99FB9E6E5A4D96))
+	backing:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_6B99FB9E6E5A4D96"))
 	backing:setTTF("ttmussels_regular")
-	backing:setMaterial(LUI.UIImage.GetCachedMaterial(0x71E049B161CD00A))
-	backing:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	backing:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	backing:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_171E049B161CD00A"))
+	backing:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	backing:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	backing:setBackingType(2)
 	backing:setBackingColor(0, 0, 0)
 	self:addElement(backing)
@@ -38,11 +38,11 @@ LUI.createMenu.ct_progressbar_status = function(f1_arg0, f1_arg1)
 	local InGameHint = LUI.UIText.new(0.5, 0.5, -1593, 327, 0.5, 0.5, -35, 0)
 	InGameHint:setRGB(ColorSet.Title.r, ColorSet.Title.g, ColorSet.Title.b)
 	InGameHint:setScale(1.04, 1.04)
-	InGameHint:setText(Engine[0xF9F1239CFD921FE](0xEA9D05FBEB780CF))
+	InGameHint:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_6EA9D05FBEB780CF"))
 	InGameHint:setTTF("ttmussels_regular")
-	InGameHint:setMaterial(LUI.UIImage.GetCachedMaterial(0x71E049B161CD00A))
-	InGameHint:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	InGameHint:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	InGameHint:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_171E049B161CD00A"))
+	InGameHint:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	InGameHint:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	InGameHint:setBackingType(2)
 	InGameHint:setBackingColor(0, 0, 0)
 	self:addElement(InGameHint)
@@ -62,7 +62,7 @@ CoD.ct_progressbar_status.__resetProperties = function(f2_arg0)
 	f2_arg0.InGameHint:setRGB(ColorSet.Title.r, ColorSet.Title.g, ColorSet.Title.b)
 	f2_arg0.InGameHint:setAlpha(1)
 	f2_arg0.InGameHint:setScale(1.04, 1.04)
-	f2_arg0.InGameHint:setText(Engine[0xF9F1239CFD921FE](0xEA9D05FBEB780CF))
+	f2_arg0.InGameHint:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_6EA9D05FBEB780CF"))
 end
 CoD.ct_progressbar_status.__clipsPerState = {
 	DefaultState = {
@@ -70,7 +70,7 @@ CoD.ct_progressbar_status.__clipsPerState = {
 			f3_arg0:__resetProperties()
 			f3_arg0:setupElementClipCounter(1)
 			local f3_local0 = function(f4_arg0)
-				f3_arg0.InGameHint:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f3_arg0.InGameHint:beginAnimation(1000, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_out"])
 				f3_arg0.InGameHint:setAlpha(1)
 				f3_arg0.InGameHint:setScale(0.9, 0.9)
 				f3_arg0.InGameHint:registerEventHandler("interrupted_keyframe", f3_arg0.clipInterrupted)
@@ -90,7 +90,7 @@ CoD.ct_progressbar_status.__clipsPerState = {
 			f5_arg0.InGameHint:setRGB(ColorSet.FriendlyBlue.r, ColorSet.FriendlyBlue.g, ColorSet.FriendlyBlue.b)
 			f5_arg0.InGameHint:setAlpha(1)
 			f5_arg0.InGameHint:setScale(1, 1)
-			f5_arg0.InGameHint:setText(Engine[0xF9F1239CFD921FE](0x846B38B79C0E04A))
+			f5_arg0.InGameHint:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_2846B38B79C0E04A"))
 			f5_arg0.clipFinished(f5_arg0.InGameHint)
 		end,
 	},
@@ -113,7 +113,7 @@ CoD.ct_progressbar_status.__clipsPerState = {
 			f6_arg0.InGameHint:setRGB(ColorSet.Title.r, ColorSet.Title.g, ColorSet.Title.b)
 			f6_arg0.InGameHint:setAlpha(1)
 			f6_arg0.InGameHint:setScale(1, 1)
-			f6_arg0.InGameHint:setText(Engine[0xF9F1239CFD921FE](0xEA9D05FBEB780CF))
+			f6_arg0.InGameHint:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_6EA9D05FBEB780CF"))
 			f6_local0(f6_arg0.InGameHint)
 		end,
 	},
@@ -132,7 +132,7 @@ CoD.ct_progressbar_status.__clipsPerState = {
 			f9_arg0.InGameHint:setRGB(ColorSet.EnemyOrange_Bright.r, ColorSet.EnemyOrange_Bright.g, ColorSet.EnemyOrange_Bright.b)
 			f9_arg0.InGameHint:setAlpha(1)
 			f9_arg0.InGameHint:setScale(1, 1)
-			f9_arg0.InGameHint:setText(Engine[0xF9F1239CFD921FE](0x4A870996652669F))
+			f9_arg0.InGameHint:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_24A870996652669F"))
 			f9_local0(f9_arg0.InGameHint)
 		end,
 	},
@@ -155,7 +155,7 @@ CoD.ct_progressbar_status.__clipsPerState = {
 			f11_arg0.InGameHint:setRGB(ColorSet.Title.r, ColorSet.Title.g, ColorSet.Title.b)
 			f11_arg0.InGameHint:setAlpha(1)
 			f11_arg0.InGameHint:setScale(1, 1)
-			f11_arg0.InGameHint:setText(Engine[0xF9F1239CFD921FE](0xEA9D05FBEB780CF))
+			f11_arg0.InGameHint:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_6EA9D05FBEB780CF"))
 			f11_local0(f11_arg0.InGameHint)
 		end,
 	},
@@ -174,7 +174,7 @@ CoD.ct_progressbar_status.__clipsPerState = {
 			f14_arg0.InGameHint:setRGB(ColorSet.EnemyOrange_Bright.r, ColorSet.EnemyOrange_Bright.g, ColorSet.EnemyOrange_Bright.b)
 			f14_arg0.InGameHint:setAlpha(1)
 			f14_arg0.InGameHint:setScale(1, 1)
-			f14_arg0.InGameHint:setText(Engine[0xF9F1239CFD921FE](0x4A870996652669F))
+			f14_arg0.InGameHint:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_24A870996652669F"))
 			f14_local0(f14_arg0.InGameHint)
 		end,
 	},
@@ -197,7 +197,7 @@ CoD.ct_progressbar_status.__clipsPerState = {
 			f16_arg0.InGameHint:setRGB(ColorSet.Title.r, ColorSet.Title.g, ColorSet.Title.b)
 			f16_arg0.InGameHint:setAlpha(1)
 			f16_arg0.InGameHint:setScale(1, 1)
-			f16_arg0.InGameHint:setText(Engine[0xF9F1239CFD921FE](0x704E4AF4B420D7A))
+			f16_arg0.InGameHint:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_1704E4AF4B420D7A"))
 			f16_local0(f16_arg0.InGameHint)
 		end,
 	},
@@ -220,7 +220,7 @@ CoD.ct_progressbar_status.__clipsPerState = {
 			f19_arg0.InGameHint:setRGB(ColorSet.Title.r, ColorSet.Title.g, ColorSet.Title.b)
 			f19_arg0.InGameHint:setAlpha(1)
 			f19_arg0.InGameHint:setScale(1, 1)
-			f19_arg0.InGameHint:setText(Engine[0xF9F1239CFD921FE](0x704E4AF4B420D7A))
+			f19_arg0.InGameHint:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_1704E4AF4B420D7A"))
 			f19_local0(f19_arg0.InGameHint)
 		end,
 	},
@@ -243,7 +243,7 @@ CoD.ct_progressbar_status.__clipsPerState = {
 			f22_arg0.InGameHint:setRGB(ColorSet.Title.r, ColorSet.Title.g, ColorSet.Title.b)
 			f22_arg0.InGameHint:setAlpha(1)
 			f22_arg0.InGameHint:setScale(1, 1)
-			f22_arg0.InGameHint:setText(Engine[0xF9F1239CFD921FE](0x7A31535DCB25D50))
+			f22_arg0.InGameHint:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_37A31535DCB25D50"))
 			f22_local0(f22_arg0.InGameHint)
 		end,
 	},
@@ -266,7 +266,7 @@ CoD.ct_progressbar_status.__clipsPerState = {
 			f25_arg0.InGameHint:setRGB(ColorSet.Title.r, ColorSet.Title.g, ColorSet.Title.b)
 			f25_arg0.InGameHint:setAlpha(1)
 			f25_arg0.InGameHint:setScale(1, 1)
-			f25_arg0.InGameHint:setText(Engine[0xF9F1239CFD921FE](0x7A31535DCB25D50))
+			f25_arg0.InGameHint:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_37A31535DCB25D50"))
 			f25_local0(f25_arg0.InGameHint)
 		end,
 	},
@@ -278,7 +278,7 @@ CoD.ct_progressbar_status.__clipsPerState = {
 			f28_arg0.InGameHint:setRGB(ColorSet.FriendlyBlue.r, ColorSet.FriendlyBlue.g, ColorSet.FriendlyBlue.b)
 			f28_arg0.InGameHint:setAlpha(1)
 			f28_arg0.InGameHint:setScale(1, 1)
-			f28_arg0.InGameHint:setText(Engine[0xF9F1239CFD921FE](0x9B80CA7DBB3A50E))
+			f28_arg0.InGameHint:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_49B80CA7DBB3A50E"))
 			f28_arg0.clipFinished(f28_arg0.InGameHint)
 		end,
 	},

@@ -11,12 +11,12 @@ CoD.WarzoneDeathCamLabelLarge.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self:addElement(Background)
 	self.Background = Background
 	local DeathCamLabel = LUI.UIText.new(0.5, 0.5, -450, 450, 0, 0, 0, 200)
-	DeathCamLabel:setText(LocalizeToUpperString(0xA8BAC035CE51600))
+	DeathCamLabel:setText(LocalizeToUpperString(@"wz/deathcam"))
 	DeathCamLabel:setTTF("ttmussels_demibold")
-	DeathCamLabel:setMaterial(LUI.UIImage.GetCachedMaterial(0x71E049B161CD00A))
+	DeathCamLabel:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_171E049B161CD00A"))
 	DeathCamLabel:setLetterSpacing(20)
-	DeathCamLabel:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	DeathCamLabel:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	DeathCamLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	DeathCamLabel:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	self:addElement(DeathCamLabel)
 	self.DeathCamLabel = DeathCamLabel
 	if PostLoadFunc then

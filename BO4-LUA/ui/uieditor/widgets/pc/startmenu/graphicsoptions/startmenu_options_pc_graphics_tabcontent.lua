@@ -41,7 +41,7 @@ CoD.StartMenu_Options_PC_Graphics_TabContent.new = function(f1_arg0, f1_arg1, f1
 	})
 	local f1_local5 = List
 	local SeparationLineVertical = List.subscribeToModel
-	local f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
 	SeparationLineVertical(f1_local5, f1_local7["PC.CurrentCategory"], function(f4_arg0)
 		f1_arg0:updateElementState(List, {
 			name = "model_validation",
@@ -66,7 +66,7 @@ CoD.StartMenu_Options_PC_Graphics_TabContent.new = function(f1_arg0, f1_arg1, f1
 	List:setWidgetType(CoD.CategoryExpendableButton)
 	List:setVerticalCount(4)
 	List:setSpacing(10)
-	List:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	List:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	List:setDataSource("OptionGraphicsCategories")
 	self:addElement(List)
 	self.List = List
@@ -133,7 +133,7 @@ CoD.StartMenu_Options_PC_Graphics_TabContent.__clipsPerState = {
 			f12_arg0:__resetProperties()
 			f12_arg0:setupElementClipCounter(4)
 			local f12_local0 = function(f13_arg0)
-				f12_arg0.SubOptionsNavigation:beginAnimation(350, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f12_arg0.SubOptionsNavigation:beginAnimation(350, Enum[@"luitween"][@"luitween_ease_out"])
 				f12_arg0.SubOptionsNavigation:setLeftRight(0.5, 0.5, -688, 712)
 				f12_arg0.SubOptionsNavigation:registerEventHandler("interrupted_keyframe", f12_arg0.clipInterrupted)
 				f12_arg0.SubOptionsNavigation:registerEventHandler("transition_complete_keyframe", f12_arg0.clipFinished)
@@ -142,7 +142,7 @@ CoD.StartMenu_Options_PC_Graphics_TabContent.__clipsPerState = {
 			f12_arg0.SubOptionsNavigation:setLeftRight(0.5, 0.5, -488, 912)
 			f12_local0(f12_arg0.SubOptionsNavigation)
 			local f12_local1 = function(f14_arg0)
-				f12_arg0.VRAM:beginAnimation(350, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f12_arg0.VRAM:beginAnimation(350, Enum[@"luitween"][@"luitween_ease_out"])
 				f12_arg0.VRAM:setLeftRight(0.5, 0.5, 42, 712)
 				f12_arg0.VRAM:registerEventHandler("interrupted_keyframe", f12_arg0.clipInterrupted)
 				f12_arg0.VRAM:registerEventHandler("transition_complete_keyframe", f12_arg0.clipFinished)
@@ -152,7 +152,7 @@ CoD.StartMenu_Options_PC_Graphics_TabContent.__clipsPerState = {
 			f12_arg0.VRAM:setTopBottom(0, 0, 0, 45)
 			f12_local1(f12_arg0.VRAM)
 			local f12_local2 = function(f15_arg0)
-				f12_arg0.Global:beginAnimation(350, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f12_arg0.Global:beginAnimation(350, Enum[@"luitween"][@"luitween_ease_out"])
 				f12_arg0.Global:setLeftRight(0.5, 0.5, -424, 0)
 				f12_arg0.Global:registerEventHandler("interrupted_keyframe", f12_arg0.clipInterrupted)
 				f12_arg0.Global:registerEventHandler("transition_complete_keyframe", f12_arg0.clipFinished)
@@ -162,7 +162,7 @@ CoD.StartMenu_Options_PC_Graphics_TabContent.__clipsPerState = {
 			f12_arg0.Global:setTopBottom(0, 0, 0, 45)
 			f12_local2(f12_arg0.Global)
 			local f12_local3 = function(f16_arg0)
-				f12_arg0.List:beginAnimation(350, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f12_arg0.List:beginAnimation(350, Enum[@"luitween"][@"luitween_ease_out"])
 				f12_arg0.List:setLeftRight(0, 0, 81, 471)
 				f12_arg0.List:registerEventHandler("interrupted_keyframe", f12_arg0.clipInterrupted)
 				f12_arg0.List:registerEventHandler("transition_complete_keyframe", f12_arg0.clipFinished)

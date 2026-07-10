@@ -14,7 +14,7 @@ CoD.CustomClassTabs.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local TabBackingBlur = LUI.UIImage.new(0, 1, 0, 0, 0, 0, 52, 89)
-	TabBackingBlur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	TabBackingBlur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	TabBackingBlur:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(TabBackingBlur)
 	self.TabBackingBlur = TabBackingBlur
@@ -26,17 +26,17 @@ CoD.CustomClassTabs.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	local f1_local3 = nil
 	self.NoiseTiledBacking = LUI.UIElement.createFake()
 	local RB = CoD.BumperButtonWithKeyMouseText.new(f1_arg0, f1_arg1, 0.5, 0.5, 695, 895, 0, 0, 53, 87)
-	RB.GamepadPrompt:setText(Engine[0xF9F1239CFD921FE](0xBFED5292621DA9A))
+	RB.GamepadPrompt:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_5BFED5292621DA9A"))
 	self:addElement(RB)
 	self.RB = RB
 	local LB = CoD.BumperButtonWithKeyMouseText.new(f1_arg0, f1_arg1, 0.5, 0.5, -895, -695, 0, 0, 53, 87)
-	LB.GamepadPrompt:setText(Engine[0xF9F1239CFD921FE](0xBDCD5292604F434))
-	LB.GamepadPrompt:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
+	LB.GamepadPrompt:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_5BDCD5292604F434"))
+	LB.GamepadPrompt:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
 	self:addElement(LB)
 	self.LB = LB
 	local TabBottomLine = LUI.UIImage.new(0.5, 0.5, -960, 960, 0, 0, 86, 90)
 	TabBottomLine:setAlpha(0.08)
-	TabBottomLine:setImage(RegisterImage(0x5526CF3733E24C4))
+	TabBottomLine:setImage(RegisterImage(@"uie_ui_menu_common_tab_line_bottom"))
 	self:addElement(TabBottomLine)
 	self.TabBottomLine = TabBottomLine
 	local right = nil
@@ -51,7 +51,7 @@ CoD.CustomClassTabs.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	})
 	local grid = right
 	local left = right.subscribeToModel
-	local f1_local10 = Engine[0x8DF2E5447F384B9]()
+	local f1_local10 = Engine[@"getglobalmodel"]()
 	left(grid, f1_local10.CACCurrentActiveTabIndex, function(f3_arg0)
 		f1_arg0:updateElementState(right, {
 			name = "model_validation",
@@ -70,14 +70,14 @@ CoD.CustomClassTabs.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 		elseif element.super.gainFocus then
 			f4_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f4_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(right, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(right, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		CoD.GridAndListUtility.DoBumperGridButton(menu, controller, false)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 		return true
 	end, false)
 	self:addElement(right)
@@ -94,7 +94,7 @@ CoD.CustomClassTabs.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	})
 	f1_local10 = left
 	grid = left.subscribeToModel
-	local f1_local11 = Engine[0x8DF2E5447F384B9]()
+	local f1_local11 = Engine[@"getglobalmodel"]()
 	grid(f1_local10, f1_local11.CACCurrentActiveTabIndex, function(f8_arg0)
 		f1_arg0:updateElementState(left, {
 			name = "model_validation",
@@ -112,14 +112,14 @@ CoD.CustomClassTabs.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 		elseif element.super.gainFocus then
 			f9_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f9_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(left, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(left, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		CoD.GridAndListUtility.DoBumperGridButton(menu, controller, true)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 		return true
 	end, false)
 	self:addElement(left)
@@ -130,15 +130,15 @@ CoD.CustomClassTabs.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	grid:setWidgetType(CoD.CACCustomClassListButton)
 	grid:setHorizontalCount(6)
 	grid:setSpacing(0)
-	grid:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	grid:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	grid:setStaggeredIntroTime(50)
 	grid:setDataSource("ChooseClassList")
 	grid:registerEventHandler("list_active_changed", function(element, event)
 		local f12_local0 = nil
 		CoD.CACUtility.UpdateSelectedCustomClass(f1_arg0, f1_arg1, element)
 		CoD.BaseUtility.SetMenuModelToElementModel(f1_arg0, element)
-		UpdateButtonPromptState(f1_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x22361E23588705A])
-		UpdateButtonPromptState(f1_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC])
+		UpdateButtonPromptState(f1_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_start"])
+		UpdateButtonPromptState(f1_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_ltrig"])
 		CoD.CACUtility.UpdateLockedStateForCustomClass(f1_arg0, f1_arg1)
 		CoD.CACUtility.DelayedUpdateClassWeaponModel(f1_arg0, element, f1_arg1, 10)
 		CoD.CACUtility.UpdateCACCurrentActiveTabIndexValue(f1_arg1, self.grid)
@@ -165,7 +165,7 @@ CoD.CustomClassTabs.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	end)
 	f1_local11 = self
 	f1_local10 = self.subscribeToModel
-	local f1_local12 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local12 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local10(f1_local11, f1_local12.LastInput, function(f16_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

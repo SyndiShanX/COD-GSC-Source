@@ -60,7 +60,7 @@ CoD.TabletLocationSelector_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	end)
 	local f1_local10 = buttonprompt
 	local MessagePromptPlaneMortar = buttonprompt.subscribeToModel
-	local f1_local12 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local12 = Engine[@"getmodelforcontroller"](f1_arg1)
 	MessagePromptPlaneMortar(f1_local10, f1_local12.LastInput, function(f4_arg0)
 		f1_arg0:updateElementState(buttonprompt, {
 			name = "model_validation",
@@ -71,7 +71,7 @@ CoD.TabletLocationSelector_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 		})
 	end, false)
 	buttonprompt:setAlpha(0)
-	buttonprompt.label:setText(Engine[0xF9F1239CFD921FE](0x7905825FED0EBD8))
+	buttonprompt.label:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/waypoint_target"))
 	buttonprompt:subscribeToGlobalModel(f1_arg1, "Controller", "primary_button_image", function(model)
 		local f5_local0 = model:get()
 		if f5_local0 ~= nil then
@@ -88,37 +88,37 @@ CoD.TabletLocationSelector_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 		{
 			stateName = "Mortar",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg1, "hudItems.tabletLocationSelectorType", Enum[0xE2C7BBF6E260E20][0x904CE4D0F802D96])
+				return CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg1, "hudItems.tabletLocationSelectorType", Enum[@"locsel_t"][@"loc_sel_mortar"])
 			end,
 		},
 		{
 			stateName = "Comlink",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg1, "hudItems.tabletLocationSelectorType", Enum[0xE2C7BBF6E260E20][0x4336D8FF9031118])
+				return CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg1, "hudItems.tabletLocationSelectorType", Enum[@"locsel_t"][@"loc_sel_comlink"])
 			end,
 		},
 		{
 			stateName = "Napalm",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg1, "hudItems.tabletLocationSelectorType", Enum[0xE2C7BBF6E260E20][0x8760DA1682812FA])
+				return CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg1, "hudItems.tabletLocationSelectorType", Enum[@"locsel_t"][@"loc_sel_napalm"])
 			end,
 		},
 		{
 			stateName = "Artillery",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg1, "hudItems.tabletLocationSelectorType", Enum[0xE2C7BBF6E260E20][0x290413573874733])
+				return CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg1, "hudItems.tabletLocationSelectorType", Enum[@"locsel_t"][@"loc_sel_artillery"])
 			end,
 		},
 		{
 			stateName = "Fixed",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg1, "hudItems.tabletLocationSelectorType", Enum[0xE2C7BBF6E260E20][0x99A6C784DDD3D07])
+				return CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg1, "hudItems.tabletLocationSelectorType", Enum[@"locsel_t"][@"hash_199A6C784DDD3D07"])
 			end,
 		},
 	})
 	f1_local12 = self
 	f1_local10 = self.subscribeToModel
-	local f1_local13 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local13 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local10(f1_local12, f1_local13["hudItems.tabletLocationSelectorType"], function(f11_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -168,7 +168,7 @@ CoD.TabletLocationSelector_Internal.__clipsPerState = {
 			f14_arg0.MessagePromptStandard:completeAnimation()
 			f14_arg0.MessagePromptStandard.CursorHintText:completeAnimation()
 			f14_arg0.MessagePromptStandard:setAlpha(0)
-			f14_arg0.MessagePromptStandard.CursorHintText:setText(Engine[0xF9F1239CFD921FE](0x397C7860EF08AA3))
+			f14_arg0.MessagePromptStandard.CursorHintText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/remaining_target"))
 			f14_arg0.clipFinished(f14_arg0.MessagePromptStandard)
 			f14_arg0.buttonprompt:completeAnimation()
 			f14_arg0.buttonprompt:setTopBottom(0, 0, 682, 727)
@@ -187,7 +187,7 @@ CoD.TabletLocationSelector_Internal.__clipsPerState = {
 			f15_arg0.MessagePromptStandard:completeAnimation()
 			f15_arg0.MessagePromptStandard.CursorHintText:completeAnimation()
 			f15_arg0.MessagePromptStandard:setAlpha(1)
-			f15_arg0.MessagePromptStandard.CursorHintText:setText(Engine[0xF9F1239CFD921FE](0x5E69975EAC86CC7))
+			f15_arg0.MessagePromptStandard.CursorHintText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_55E69975EAC86CC7"))
 			f15_arg0.clipFinished(f15_arg0.MessagePromptStandard)
 		end,
 	},
@@ -198,7 +198,7 @@ CoD.TabletLocationSelector_Internal.__clipsPerState = {
 			f16_arg0.MessagePromptStandard:completeAnimation()
 			f16_arg0.MessagePromptStandard.CursorHintText:completeAnimation()
 			f16_arg0.MessagePromptStandard:setAlpha(1)
-			f16_arg0.MessagePromptStandard.CursorHintText:setText(Engine[0xF9F1239CFD921FE](0xC1D1D888C9B0714))
+			f16_arg0.MessagePromptStandard.CursorHintText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_6C1D1D888C9B0714"))
 			f16_arg0.clipFinished(f16_arg0.MessagePromptStandard)
 		end,
 	},
@@ -209,7 +209,7 @@ CoD.TabletLocationSelector_Internal.__clipsPerState = {
 			f17_arg0.MessagePromptStandard:completeAnimation()
 			f17_arg0.MessagePromptStandard.CursorHintText:completeAnimation()
 			f17_arg0.MessagePromptStandard:setAlpha(1)
-			f17_arg0.MessagePromptStandard.CursorHintText:setText(Engine[0xF9F1239CFD921FE](0x81367119583BEBC))
+			f17_arg0.MessagePromptStandard.CursorHintText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_81367119583BEBC"))
 			f17_arg0.clipFinished(f17_arg0.MessagePromptStandard)
 		end,
 	},
@@ -220,7 +220,7 @@ CoD.TabletLocationSelector_Internal.__clipsPerState = {
 			f18_arg0.MessagePromptStandard:completeAnimation()
 			f18_arg0.MessagePromptStandard.CursorHintText:completeAnimation()
 			f18_arg0.MessagePromptStandard:setAlpha(1)
-			f18_arg0.MessagePromptStandard.CursorHintText:setText(Engine[0xF9F1239CFD921FE](0x50D1022CB609A5D))
+			f18_arg0.MessagePromptStandard.CursorHintText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_650D1022CB609A5D"))
 			f18_arg0.clipFinished(f18_arg0.MessagePromptStandard)
 		end,
 	},

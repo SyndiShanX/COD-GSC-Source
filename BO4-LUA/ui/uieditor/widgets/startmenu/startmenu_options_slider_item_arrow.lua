@@ -18,8 +18,8 @@ CoD.StartMenu_Options_Slider_Item_Arrow.new = function(f2_arg0, f2_arg1, f2_arg2
 	self:addElement(Image)
 	self.Image = Image
 	local arrow = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	arrow:setImage(RegisterImage(0x53866FDE741ED56))
-	arrow:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	arrow:setImage(RegisterImage(@"uie_img_t7_menu_startmenu_option_arrow"))
+	arrow:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(arrow)
 	self.arrow = arrow
 	if PostLoadFunc then

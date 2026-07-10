@@ -40,8 +40,8 @@ CoD.freeCursorIdentityPanel.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.sizeElement = sizeElement
 	local gamertag = LUI.UIText.new(0, 0, 118.5, 367.5, 0, 0, 6.5, 32.5)
 	gamertag:setTTF("notosans_regular")
-	gamertag:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	gamertag:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	gamertag:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	gamertag:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	gamertag:linkToElementModel(self, "xuid", true, function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
@@ -52,8 +52,8 @@ CoD.freeCursorIdentityPanel.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.gamertag = gamertag
 	local clantag = LUI.UIText.new(0, 0, 118.5, 367.5, 0, 0, 31, 52)
 	clantag:setTTF("notosans_regular")
-	clantag:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	clantag:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	clantag:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	clantag:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	clantag:linkToElementModel(self, "xuid", true, function(model)
 		local f5_local0 = model:get()
 		if f5_local0 ~= nil then

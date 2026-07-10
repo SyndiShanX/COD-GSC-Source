@@ -9,7 +9,7 @@ CoD.QuarterMasterTab_CaseBreadcrumb.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	self.soundSet = "none"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Image = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	Image:setImage(RegisterImage(0xF47F2A53FD6CD6E))
+	Image:setImage(RegisterImage(@"hash_4F47F2A53FD6CD6E"))
 	self:addElement(Image)
 	self.Image = Image
 	if PostLoadFunc then

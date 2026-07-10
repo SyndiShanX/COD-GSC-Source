@@ -13,10 +13,10 @@ CoD.PC_BnetStore_LegalButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	self.BG = BG
 	local LegalButtonTitle = LUI.UIText.new(0, 1, 25, -25, 0.5, 0.5, -9, 9)
 	LegalButtonTitle:setRGB(0.47, 0.47, 0.47)
-	LegalButtonTitle:setText(LocalizeToUpperString(0x93E719493E9E18F))
+	LegalButtonTitle:setText(LocalizeToUpperString(@"menu/new"))
 	LegalButtonTitle:setTTF("dinnext_regular")
-	LegalButtonTitle:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	LegalButtonTitle:setAlignment(Enum[0x7A5123B654282D2][0x6ED4298C93DC5ED])
+	LegalButtonTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	LegalButtonTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
 	self:addElement(LegalButtonTitle)
 	self.LegalButtonTitle = LegalButtonTitle
 	local DotTL = LUI.UIImage.new(0, 0, 0, 1, 0, 0, 15, 16)

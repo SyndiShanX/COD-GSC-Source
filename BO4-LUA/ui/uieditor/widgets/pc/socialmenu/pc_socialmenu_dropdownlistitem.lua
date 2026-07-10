@@ -21,8 +21,8 @@ CoD.PC_SocialMenu_DropDownListItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	TextBox:setRGB(0.76, 0.76, 0.76)
 	TextBox:setTTF("ttmussels_regular")
 	TextBox:setLetterSpacing(1)
-	TextBox:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	TextBox:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	TextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	TextBox:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	TextBox:linkToElementModel(self, "name", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -51,8 +51,8 @@ CoD.PC_SocialMenu_DropDownListItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	GlowAdd:setAlpha(0)
 	GlowAdd:setZRot(-90)
 	GlowAdd:setScale(0.34, 0.48)
-	GlowAdd:setImage(RegisterImage(0xAD405802E3EEE94))
-	GlowAdd:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	GlowAdd:setImage(RegisterImage(@"uie_icon_frontend_navigation_glowmed"))
+	GlowAdd:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(GlowAdd)
 	self.GlowAdd = GlowAdd
 	self:mergeStateConditions({

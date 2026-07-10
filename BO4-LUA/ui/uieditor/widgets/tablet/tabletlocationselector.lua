@@ -10,7 +10,7 @@ CoD.TabletLocationSelector.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self.onlyChildrenFocusable = true
 	self.anyChildUsesUpdateState = true
 	local internal = CoD.TabletLocationSelector_Internal.new(f1_arg0, f1_arg1, 0, 1, 0, 0, -0.07, 0.93, 55, 55)
-	Engine[0xF0AF2C4A29D15D7](f1_arg1, 1, 1140, 740)
+	Engine[@"setupui3dwindow"](f1_arg1, 1, 1140, 740)
 	internal:setUI3DWindow(1)
 	self:addElement(internal)
 	self.internal = internal

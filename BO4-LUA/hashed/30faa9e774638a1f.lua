@@ -18,15 +18,15 @@ CoD.ReservesLootButtonsGroup.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	end)
 	local LootCaseButton = ReservesLootBribeButton
 	local LootBundleCrateButton = ReservesLootBribeButton.subscribeToModel
-	local f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	LootBundleCrateButton(LootCaseButton, f1_local4["LootStreamProgress.allRngUnlocked"], function(f3_arg0, f3_arg1)
-		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	LootCaseButton = ReservesLootBribeButton
 	LootBundleCrateButton = ReservesLootBribeButton.subscribeToModel
 	f1_local4 = DataSources.ReservesItemCounts.getModel(f1_arg1)
 	LootBundleCrateButton(LootCaseButton, f1_local4.lootBribeCount, function(f4_arg0, f4_arg1)
-		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	ReservesLootBribeButton:registerEventHandler("gain_focus", function(element, event)
 		local f5_local0 = nil
@@ -35,10 +35,10 @@ CoD.ReservesLootButtonsGroup.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 		elseif element.super.gainFocus then
 			f5_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f5_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(ReservesLootBribeButton, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(ReservesLootBribeButton, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if CoD.ModelUtility.IsControllerModelValueTrue(controller, "LootStreamProgress.allRngUnlocked") then
 			CoD.BlackMarketUtility.OpenAllReservesOwnedDialog(menu, controller)
 			return true
@@ -54,10 +54,10 @@ CoD.ReservesLootButtonsGroup.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 		end
 	end, function(element, menu, controller)
 		if CoD.ModelUtility.IsControllerModelValueTrue(controller, "LootStreamProgress.allRngUnlocked") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x867BE59364DD53B, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/redeem", nil, nil)
 			return true
 		elseif CoD.ModelUtility.IsGlobalDataSourceModelValueGreaterThan(controller, "ReservesItemCounts", "lootBribeCount", 0) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x867BE59364DD53B, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/redeem", nil, nil)
 			return true
 		else
 			return false
@@ -71,15 +71,15 @@ CoD.ReservesLootButtonsGroup.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	end)
 	f1_local4 = LootBundleCrateButton
 	LootCaseButton = LootBundleCrateButton.subscribeToModel
-	local f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
 	LootCaseButton(f1_local4, f1_local5["LootStreamProgress.allRngUnlocked"], function(f9_arg0, f9_arg1)
-		CoD.Menu.UpdateButtonShownState(f9_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f9_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	f1_local4 = LootBundleCrateButton
 	LootCaseButton = LootBundleCrateButton.subscribeToModel
 	f1_local5 = DataSources.ReservesItemCounts.getModel(f1_arg1)
 	LootCaseButton(f1_local4, f1_local5.lootBundleCrateCount, function(f10_arg0, f10_arg1)
-		CoD.Menu.UpdateButtonShownState(f10_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f10_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	LootBundleCrateButton:registerEventHandler("gain_focus", function(element, event)
 		local f11_local0 = nil
@@ -88,10 +88,10 @@ CoD.ReservesLootButtonsGroup.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 		elseif element.super.gainFocus then
 			f11_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f11_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(LootBundleCrateButton, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(LootBundleCrateButton, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if CoD.ModelUtility.IsControllerModelValueTrue(controller, "LootStreamProgress.allRngUnlocked") then
 			CoD.BlackMarketUtility.OpenAllReservesOwnedDialog(menu, controller)
 			return true
@@ -107,10 +107,10 @@ CoD.ReservesLootButtonsGroup.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 		end
 	end, function(element, menu, controller)
 		if CoD.ModelUtility.IsControllerModelValueTrue(controller, "LootStreamProgress.allRngUnlocked") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x867BE59364DD53B, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/redeem", nil, nil)
 			return true
 		elseif CoD.ModelUtility.IsGlobalDataSourceModelValueGreaterThan(controller, "ReservesItemCounts", "lootBundleCrateCount", 0) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x867BE59364DD53B, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/redeem", nil, nil)
 			return true
 		else
 			return false
@@ -124,15 +124,15 @@ CoD.ReservesLootButtonsGroup.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	end)
 	f1_local5 = LootCaseButton
 	f1_local4 = LootCaseButton.subscribeToModel
-	local f1_local6 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local6 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local4(f1_local5, f1_local6["LootStreamProgress.allRngUnlocked"], function(f15_arg0, f15_arg1)
-		CoD.Menu.UpdateButtonShownState(f15_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f15_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	f1_local5 = LootCaseButton
 	f1_local4 = LootCaseButton.subscribeToModel
 	f1_local6 = DataSources.ReservesItemCounts.getModel(f1_arg1)
 	f1_local4(f1_local5, f1_local6.lootCaseCount, function(f16_arg0, f16_arg1)
-		CoD.Menu.UpdateButtonShownState(f16_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f16_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	LootCaseButton:registerEventHandler("gain_focus", function(element, event)
 		local f17_local0 = nil
@@ -141,10 +141,10 @@ CoD.ReservesLootButtonsGroup.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 		elseif element.super.gainFocus then
 			f17_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f17_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(LootCaseButton, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(LootCaseButton, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if CoD.ModelUtility.IsControllerModelValueTrue(controller, "LootStreamProgress.allRngUnlocked") then
 			CoD.BlackMarketUtility.OpenAllReservesOwnedDialog(menu, controller)
 			return true
@@ -160,10 +160,10 @@ CoD.ReservesLootButtonsGroup.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 		end
 	end, function(element, menu, controller)
 		if CoD.ModelUtility.IsControllerModelValueTrue(controller, "LootStreamProgress.allRngUnlocked") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x867BE59364DD53B, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/redeem", nil, nil)
 			return true
 		elseif CoD.ModelUtility.IsGlobalDataSourceModelValueGreaterThan(controller, "ReservesItemCounts", "lootCaseCount", 0) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x867BE59364DD53B, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/redeem", nil, nil)
 			return true
 		else
 			return false

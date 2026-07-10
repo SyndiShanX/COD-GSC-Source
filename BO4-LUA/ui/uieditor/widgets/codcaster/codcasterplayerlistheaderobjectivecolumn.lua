@@ -9,31 +9,31 @@ CoD.CodCasterPlayerListHeaderObjectiveColumn.new = function(f1_arg0, f1_arg1, f1
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local FlagCTF = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	FlagCTF:setAlpha(0)
-	FlagCTF:setImage(RegisterImage(0xDA4F726904CBAA9))
+	FlagCTF:setImage(RegisterImage(@"uie_t7_codcaster_gamemode_ctf"))
 	self:addElement(FlagCTF)
 	self.FlagCTF = FlagCTF
 	local Bomb = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	Bomb:setAlpha(0)
-	Bomb:setImage(RegisterImage(0x1384926403E5879))
+	Bomb:setImage(RegisterImage(@"uie_t7_codcaster_gamemode_snd"))
 	self:addElement(Bomb)
 	self.Bomb = Bomb
 	local Hardpoint = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	Hardpoint:setAlpha(0)
-	Hardpoint:setImage(RegisterImage(0x48ED8422CAFED83))
+	Hardpoint:setImage(RegisterImage(@"uie_t7_codcaster_gamemode_hardpoint"))
 	self:addElement(Hardpoint)
 	self.Hardpoint = Hardpoint
 	local Ball = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	Ball:setAlpha(0)
-	Ball:setImage(RegisterImage(0xA013C07155EC0C3))
+	Ball:setImage(RegisterImage(@"uie_t7_codcaster_gamemode_uplink"))
 	self:addElement(Ball)
 	self.Ball = Ball
 	local FlagDom = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	FlagDom:setAlpha(0)
-	FlagDom:setImage(RegisterImage(0x8832159AB9E923A))
+	FlagDom:setImage(RegisterImage(@"uie_t7_codcaster_gamemode_domination"))
 	self:addElement(FlagDom)
 	self.FlagDom = FlagDom
 	local Default = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	Default:setImage(RegisterImage(0xC731D2658B4AEFD))
+	Default:setImage(RegisterImage(@"uie_t7_codcaster_gamemode_tdm"))
 	self:addElement(Default)
 	self.Default = Default
 	self:mergeStateConditions({

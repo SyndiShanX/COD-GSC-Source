@@ -21,10 +21,10 @@ CoD.PerkTalentListWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	itemList:setWidgetType(CoD.TalentSlotContainer)
 	itemList:setHorizontalCount(5)
 	itemList:setSpacing(10)
-	itemList:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	itemList:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	itemList:setDataSource("Unlockables")
 	itemList:linkToElementModel(itemList, "globalItemIndex", true, function(model, f2_arg1)
-		CoD.Menu.UpdateButtonShownState(f2_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f2_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	itemList:registerEventHandler("list_item_gain_focus", function(element, event)
 		local f3_local0 = nil
@@ -39,10 +39,10 @@ CoD.PerkTalentListWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 		elseif element.super.gainFocus then
 			f4_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f4_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(itemList, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(itemList, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if IsPC() and not CoD.CACUtility.IsItemEquippedInCurrentLoadout(menu, element, controller) and not CoD.CACUtility.IsCACItemLocked(menu, element, controller) then
 			CoD.CACUtility.EquipWeapon(self, element, menu, controller, true)
 			CoD.CACUtility.UpdateWeaponModel(menu, element, controller)
@@ -59,10 +59,10 @@ CoD.PerkTalentListWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 		end
 	end, function(element, menu, controller)
 		if IsPC() and not CoD.CACUtility.IsItemEquippedInCurrentLoadout(menu, element, controller) and not CoD.CACUtility.IsCACItemLocked(menu, element, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		elseif not CoD.CACUtility.IsItemEquippedInCurrentLoadout(menu, element, controller) and not CoD.CACUtility.IsCACItemLocked(menu, element, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false

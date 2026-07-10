@@ -16,7 +16,7 @@ CoD.OverCapacityItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	self.sizeElement = sizeElement
 	local NoiseBacking = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	NoiseBacking:setAlpha(0.5)
-	NoiseBacking:setImage(RegisterImage(0x34839E8065B1E53))
+	NoiseBacking:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
 	NoiseBacking:setupNineSliceShader(196, 88)
 	self:addElement(NoiseBacking)
 	self.NoiseBacking = NoiseBacking
@@ -36,12 +36,12 @@ CoD.OverCapacityItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	local name = LUI.UIText.new(0, 0, 0, 200, 0, 0, 110, 127)
 	name:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	name:setTTF("ttmussels_regular")
-	name:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	name:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	name:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	name:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	name:linkToElementModel(self, "name", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
-			name:setText(Engine[0xF9F1239CFD921FE](f3_local0))
+			name:setText(Engine[@"hash_4F9F1239CFD921FE"](f3_local0))
 		end
 	end)
 	self:addElement(name)
@@ -50,8 +50,8 @@ CoD.OverCapacityItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	header:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	header:setTTF("ttmussels_demibold")
 	header:setLetterSpacing(2)
-	header:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	header:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	header:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	header:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	header:linkToElementModel(self, "headerName", true, function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then

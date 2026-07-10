@@ -7,8 +7,8 @@ CoD.FE_ButtonPanelShader.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	self.id = "FE_ButtonPanelShader"
 	self.soundSet = "default"
 	local Full = LUI.UIImage.new(0, 1, -2, 2, 0, 1, -3, 3)
-	Full:setImage(RegisterImage(0xA03CE50BF6A7EC9))
-	Full:setMaterial(LUI.UIImage.GetCachedMaterial(0x2B96FF998623B68))
+	Full:setImage(RegisterImage(@"uie_t7_menu_frontend_buttonpanelfull"))
+	Full:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_scene_blur_pass_1_nineslice"))
 	Full:setShaderVector(0, 0, 0, 0, 0)
 	Full:setShaderVector(1, 3, 3, 0, 0)
 	Full:setupNineSliceShader(12, 12)

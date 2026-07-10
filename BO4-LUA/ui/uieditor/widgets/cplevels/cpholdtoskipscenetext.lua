@@ -10,18 +10,18 @@ CoD.CPHoldToSkipSceneText.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	self.soundSet = "default"
 	self.anyChildUsesUpdateState = true
 	local Hold = LUI.UIText.new(0, 1, 121, -115, 0, 1, 0.5, 0.5)
-	Hold:setText(Engine[0xF9F1239CFD921FE](0xC08CC61C226C4F5))
+	Hold:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_7C08CC61C226C4F5"))
 	Hold:setTTF("default")
-	Hold:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	Hold:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(Hold)
 	self.Hold = Hold
 	local CPHoldToSkipSceneButton = CoD.CPHoldToSkipSceneButton.new(f1_arg0, f1_arg1, 0, 0, 165, 210, 0, 0, 5, 35)
 	self:addElement(CPHoldToSkipSceneButton)
 	self.CPHoldToSkipSceneButton = CPHoldToSkipSceneButton
 	local ToSkip = LUI.UIText.new(0, 1, 210, 0, 0, 1, 0.5, 0.5)
-	ToSkip:setText(Engine[0xF9F1239CFD921FE](0xECE1C7E3530500E))
+	ToSkip:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_5ECE1C7E3530500E"))
 	ToSkip:setTTF("default")
-	ToSkip:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	ToSkip:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(ToSkip)
 	self.ToSkip = ToSkip
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)

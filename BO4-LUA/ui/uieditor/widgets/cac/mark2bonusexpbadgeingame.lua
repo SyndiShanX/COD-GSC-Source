@@ -10,18 +10,18 @@ CoD.Mark2BonusExpBadgeInGame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	local Background = LUI.UIImage.new(0, 0, 0, 195, 0, 0, 0, 18)
 	Background:setRGB(0.13, 0.69, 0.74)
 	Background:setAlpha(0.6)
-	Background:setMaterial(LUI.UIImage.GetCachedMaterial(0xE125638BF94665F))
+	Background:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_feather_edges"))
 	Background:setShaderVector(0, 0.21, 0.05, 0.21, 0.05)
 	self:addElement(Background)
 	self.Background = Background
 	local Text = LUI.UIText.new(0, 0, 0, 195, 0, 0, 0, 18)
 	Text:setZoom(3)
 	Text:setScale(LanguageOverrideNumberForScale("korean", 0.9, LanguageOverrideNumberForScale("chinese", 0.9, 1, 1)))
-	Text:setText(LocalizeToUpperString(0xDF923C238938C67))
+	Text:setText(LocalizeToUpperString(@"hash_6DF923C238938C67"))
 	Text:setTTF("ttmussels_demibold")
 	Text:setLetterSpacing(2)
-	Text:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	Text:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	Text:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	Text:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	self:addElement(Text)
 	self.Text = Text
 	self:mergeStateConditions({
@@ -75,7 +75,7 @@ CoD.Mark2BonusExpBadgeInGame.__resetProperties = function(f7_arg0)
 	f7_arg0.Text:completeAnimation()
 	f7_arg0.Background:completeAnimation()
 	f7_arg0.Text:setAlpha(1)
-	f7_arg0.Text:setText(LocalizeToUpperString(0xDF923C238938C67))
+	f7_arg0.Text:setText(LocalizeToUpperString(@"hash_6DF923C238938C67"))
 	f7_arg0.Background:setAlpha(0.6)
 end
 CoD.Mark2BonusExpBadgeInGame.__clipsPerState = {
@@ -102,7 +102,7 @@ CoD.Mark2BonusExpBadgeInGame.__clipsPerState = {
 			f10_arg0:__resetProperties()
 			f10_arg0:setupElementClipCounter(1)
 			f10_arg0.Text:completeAnimation()
-			f10_arg0.Text:setText(LocalizeToUpperString(0x8DC8ECEFEBF1515))
+			f10_arg0.Text:setText(LocalizeToUpperString(@"hash_18DC8ECEFEBF1515"))
 			f10_arg0.clipFinished(f10_arg0.Text)
 		end,
 	},

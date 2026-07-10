@@ -8,18 +8,18 @@ CoD.ArenaGauntletWinCounter.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.soundSet = "none"
 	local WinsLabel = LUI.UIText.new(-0.75, 1.75, 0, 0, 0, 0, 0, 24)
 	WinsLabel:setRGB(ColorSet.PlayerGreen.r, ColorSet.PlayerGreen.g, ColorSet.PlayerGreen.b)
-	WinsLabel:setText(Engine[0xF9F1239CFD921FE](0x585891326C1258C))
+	WinsLabel:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_4585891326C1258C"))
 	WinsLabel:setTTF("ttmussels_demibold")
-	WinsLabel:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	WinsLabel:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	WinsLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	WinsLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(WinsLabel)
 	self.WinsLabel = WinsLabel
 	local WinCount = LUI.UIText.new(0.01, 0.99, 0, 0, 0, 0, 39, 79)
 	WinCount:setRGB(ColorSet.PlayerGreen.r, ColorSet.PlayerGreen.g, ColorSet.PlayerGreen.b)
 	WinCount:setText("")
 	WinCount:setTTF("ttmussels_demibold")
-	WinCount:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	WinCount:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	WinCount:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	WinCount:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(WinCount)
 	self.WinCount = WinCount
 	if PostLoadFunc then

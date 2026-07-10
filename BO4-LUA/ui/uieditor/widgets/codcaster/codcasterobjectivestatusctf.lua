@@ -31,8 +31,8 @@ CoD.CodCasterObjectiveStatusCTF.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	local flagStatusA = LUI.UIText.new(0.08, 0.08, 0, 200, 0.87, 0.87, -7.5, 7.5)
 	flagStatusA:setTTF("ttmussels_demibold")
 	flagStatusA:setLetterSpacing(2)
-	flagStatusA:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	flagStatusA:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	flagStatusA:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	flagStatusA:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	flagStatusA:subscribeToGlobalModel(f1_arg1, "HUDItems", "codcaster.ObjectiveA.text", function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
@@ -44,8 +44,8 @@ CoD.CodCasterObjectiveStatusCTF.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	local flagStatusB = LUI.UIText.new(0.92, 0.92, -200, 0, 0.87, 0.87, -7.5, 7.5)
 	flagStatusB:setTTF("ttmussels_demibold")
 	flagStatusB:setLetterSpacing(2)
-	flagStatusB:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
-	flagStatusB:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	flagStatusB:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
+	flagStatusB:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	flagStatusB:subscribeToGlobalModel(f1_arg1, "HUDItems", "codcaster.ObjectiveB.text", function(model)
 		local f5_local0 = model:get()
 		if f5_local0 ~= nil then

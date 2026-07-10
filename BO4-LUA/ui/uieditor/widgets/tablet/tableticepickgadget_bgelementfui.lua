@@ -16,8 +16,8 @@ CoD.TabletIcePickGadget_BgElementFui.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	self.SquareOthers = SquareOthers
 	local FuiR01 = LUI.UIImage.new(0, 0, 0, 120, 0, 0, 0, 72)
 	FuiR01:setAlpha(0.5)
-	FuiR01:setImage(RegisterImage(0xED037F889559729))
-	FuiR01:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	FuiR01:setImage(RegisterImage(@"hash_7ED037F889559729"))
+	FuiR01:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	FuiR01:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(FuiR01)
 	self.FuiR01 = FuiR01

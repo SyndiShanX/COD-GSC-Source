@@ -9,8 +9,8 @@ CoD.ReticleEnemyIndicatorInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Triangle = LUI.UIImage.new(0.5, 0.5, -34, 34, 0, 0, 115, 159)
 	Triangle:setAlpha(0.8)
-	Triangle:setImage(RegisterImage(0x108B57FEAA671EF))
-	Triangle:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	Triangle:setImage(RegisterImage(@"uie_ui_hud_reticle_scanner_arrow"))
+	Triangle:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	Triangle:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(Triangle)
 	self.Triangle = Triangle
@@ -78,7 +78,7 @@ CoD.ReticleEnemyIndicatorInternal.__clipsPerState = {
 					f11_arg0:setShaderVector(0, 1, 0, 0, 0)
 					f11_arg0:registerEventHandler("transition_complete_keyframe", f9_arg0.clipFinished)
 				end
-				f9_arg0.Triangle:beginAnimation(100, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f9_arg0.Triangle:beginAnimation(100, Enum[@"luitween"][@"luitween_ease_out"])
 				f9_arg0.Triangle:setTopBottom(0.05, 0.05, 0, 44)
 				f9_arg0.Triangle:setShaderVector(0, 1.5, 0, 0, 0)
 				f9_arg0.Triangle:registerEventHandler("interrupted_keyframe", f9_arg0.clipInterrupted)
@@ -98,7 +98,7 @@ CoD.ReticleEnemyIndicatorInternal.__clipsPerState = {
 					f14_arg0:setShaderVector(0, 1, 0, 0, 0)
 					f14_arg0:registerEventHandler("transition_complete_keyframe", f12_arg0.clipFinished)
 				end
-				f12_arg0.Triangle:beginAnimation(100, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f12_arg0.Triangle:beginAnimation(100, Enum[@"luitween"][@"luitween_ease_out"])
 				f12_arg0.Triangle:setTopBottom(0.05, 0.05, 0, 44)
 				f12_arg0.Triangle:setShaderVector(0, 1.5, 0, 0, 0)
 				f12_arg0.Triangle:registerEventHandler("interrupted_keyframe", f12_arg0.clipInterrupted)
@@ -140,7 +140,7 @@ CoD.ReticleEnemyIndicatorInternal.__clipsPerState = {
 					f20_arg0:setShaderVector(0, 1, 0, 0, 0)
 					f20_arg0:registerEventHandler("transition_complete_keyframe", f18_arg0.clipFinished)
 				end
-				f18_arg0.Triangle:beginAnimation(100, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f18_arg0.Triangle:beginAnimation(100, Enum[@"luitween"][@"luitween_ease_out"])
 				f18_arg0.Triangle:setTopBottom(0, 0, 115, 159)
 				f18_arg0.Triangle:setShaderVector(0, 1.5, 0, 0, 0)
 				f18_arg0.Triangle:registerEventHandler("interrupted_keyframe", f18_arg0.clipInterrupted)
@@ -182,7 +182,7 @@ CoD.ReticleEnemyIndicatorInternal.__clipsPerState = {
 					f26_arg0:setShaderVector(0, 1, 0, 0, 0)
 					f26_arg0:registerEventHandler("transition_complete_keyframe", f24_arg0.clipFinished)
 				end
-				f24_arg0.Triangle:beginAnimation(100, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f24_arg0.Triangle:beginAnimation(100, Enum[@"luitween"][@"luitween_ease_out"])
 				f24_arg0.Triangle:setTopBottom(0, 0, 115, 159)
 				f24_arg0.Triangle:setShaderVector(0, 1.5, 0, 0, 0)
 				f24_arg0.Triangle:registerEventHandler("interrupted_keyframe", f24_arg0.clipInterrupted)

@@ -20,14 +20,14 @@ CoD.ScrStk_CombatEfficiencyPulse.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	local Image0 = LUI.UIImage.new(0.5, 0.5, -53, 55, 0, 1, 0, 0)
 	Image0:setRGB(0, 0.79, 1)
 	Image0:setAlpha(0)
-	Image0:setImage(RegisterImage(0xBA6A87EDF89D3EB))
+	Image0:setImage(RegisterImage(@"uie_t7_mp_hud_scorestreak_fillglowvert"))
 	self:addElement(Image0)
 	self.Image0 = Image0
 	local Glow = LUI.UIImage.new(0.5, 0.5, -84, 86, 0.5, 0.5, -88, 88)
 	Glow:setRGB(0, 0.6, 1)
 	Glow:setAlpha(0)
-	Glow:setImage(RegisterImage(0x1BB2C084812E7B6))
-	Glow:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Glow:setImage(RegisterImage(@"uie_t7_cp_hud_tacmode_glow"))
+	Glow:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Glow)
 	self.Glow = Glow
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)

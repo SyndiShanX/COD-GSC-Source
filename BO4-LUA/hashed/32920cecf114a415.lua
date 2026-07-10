@@ -16,25 +16,25 @@ CoD.SpecialistDossierButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.SpecialistPersonalizationButtonOptionInternal = SpecialistPersonalizationButtonOptionInternal
 	local ButtonText = LUI.UIText.new(0.03, 1, 5, -5, 0, 0, 9.5, 33.5)
 	ButtonText:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
-	ButtonText:setText(Engine[0xF9F1239CFD921FE](0x93E719493E9E18F))
+	ButtonText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	ButtonText:setTTF("ttmussels_demibold")
-	ButtonText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	ButtonText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	ButtonText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	ButtonText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(ButtonText)
 	self.ButtonText = ButtonText
 	local MatureContentText = LUI.UIText.new(0, 1, 5, -5, 0, 0, 5, 38)
 	MatureContentText:setRGB(0.5, 0.5, 0.5)
 	MatureContentText:setAlpha(0)
-	MatureContentText:setText(LocalizeToUpperString(0xC52F8F8D0D51561))
+	MatureContentText:setText(LocalizeToUpperString(@"hash_C52F8F8D0D51561"))
 	MatureContentText:setTTF("ttmussels_demibold")
-	MatureContentText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	MatureContentText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	MatureContentText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	MatureContentText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(MatureContentText)
 	self.MatureContentText = MatureContentText
 	local lockImage = LUI.UIImage.new(1, 1, -55, -5, 0.5, 0.5, -25, 25)
 	lockImage:setAlpha(0)
 	lockImage:setScale(0.6, 0.6)
-	lockImage:setImage(RegisterImage(0xE1E7C490B2BA4FB))
+	lockImage:setImage(RegisterImage(@"uie_ui_icon_global_lock"))
 	self:addElement(lockImage)
 	self.lockImage = lockImage
 	self:mergeStateConditions({

@@ -16,22 +16,22 @@ CoD.WZTeamScoreboard.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	WZTeamScoreboard:setWidgetType(CoD.WZTeamScoreboard_Row)
 	WZTeamScoreboard:setVerticalCount(5)
 	WZTeamScoreboard:setSpacing(10)
-	WZTeamScoreboard:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	WZTeamScoreboard:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	WZTeamScoreboard:setDataSource("WZTeamScoreboard")
 	WZTeamScoreboard:linkToElementModel(WZTeamScoreboard, "clientNum", true, function(model, f2_arg1)
-		CoD.Menu.UpdateButtonShownState(f2_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f2_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	local Column1Header = WZTeamScoreboard
 	local PlayerColumnHeader = WZTeamScoreboard.subscribeToModel
-	local Column2Header = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local Column2Header = Engine[@"getmodelforcontroller"](f1_arg1)
 	PlayerColumnHeader(Column1Header, Column2Header["deadSpectator.playerIndex"], function(f3_arg0, f3_arg1)
-		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	Column1Header = WZTeamScoreboard
 	PlayerColumnHeader = WZTeamScoreboard.subscribeToModel
-	Column2Header = Engine[0x4DF5CFBC1771947](f1_arg1)
-	PlayerColumnHeader(Column1Header, Column2Header["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x198075B069840DC]], function(f4_arg0, f4_arg1)
-		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+	Column2Header = Engine[@"getmodelforcontroller"](f1_arg1)
+	PlayerColumnHeader(Column1Header, Column2Header["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_game_ended"]], function(f4_arg0, f4_arg1)
+		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	WZTeamScoreboard:registerEventHandler("gain_focus", function(element, event)
 		local f5_local0 = nil
@@ -40,26 +40,26 @@ CoD.WZTeamScoreboard.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 		elseif element.super.gainFocus then
 			f5_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f5_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(WZTeamScoreboard, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(WZTeamScoreboard, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if not IsScoreboardPlayerSelf(element, controller) and IsScoreboardPlayerMuted(controller, element) then
 			CoD.ScoreboardUtility.ToggleClientMute(element, controller)
-			UpdateButtonPromptState(menu, element, controller, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+			UpdateButtonPromptState(menu, element, controller, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 			return true
 		elseif not IsScoreboardPlayerSelf(element, controller) then
 			CoD.ScoreboardUtility.ToggleClientMute(element, controller)
-			UpdateButtonPromptState(menu, element, controller, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+			UpdateButtonPromptState(menu, element, controller, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 			return true
 		else
 		end
 	end, function(element, menu, controller)
 		if not IsScoreboardPlayerSelf(element, controller) and IsScoreboardPlayerMuted(controller, element) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x39685D9366015DB, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_39685D9366015DB", nil, nil)
 			return true
 		elseif not IsScoreboardPlayerSelf(element, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x12FAB6BE7D9F2EA, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/mute_player", nil, nil)
 			return true
 		else
 			return false
@@ -69,34 +69,34 @@ CoD.WZTeamScoreboard.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	self.WZTeamScoreboard = WZTeamScoreboard
 	PlayerColumnHeader = LUI.UIText.new(0, 0, 547, 987, 0, 0, 30, 48)
 	PlayerColumnHeader:setRGB(0.92, 0.92, 0.92)
-	PlayerColumnHeader:setText(Engine[0xF9F1239CFD921FE](0x1995691035EAE4E))
+	PlayerColumnHeader:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/player"))
 	PlayerColumnHeader:setTTF("0arame_mono_stencil")
-	PlayerColumnHeader:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	PlayerColumnHeader:setAlignment(Enum[0x7A5123B654282D2][0x70510683C22104B])
+	PlayerColumnHeader:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	PlayerColumnHeader:setAlignment(Enum[@"luialignment"][@"lui_alignment_bottom"])
 	self:addElement(PlayerColumnHeader)
 	self.PlayerColumnHeader = PlayerColumnHeader
 	Column1Header = LUI.UIText.new(0, 0, 1012.5, 1152.5, 0, 0, 30, 48)
 	Column1Header:setRGB(0.92, 0.92, 0.92)
 	Column1Header:setText(GetScoreboardColumnHeader(f1_arg1, 0, 0x0))
 	Column1Header:setTTF("0arame_mono_stencil")
-	Column1Header:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	Column1Header:setAlignment(Enum[0x7A5123B654282D2][0x70510683C22104B])
+	Column1Header:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	Column1Header:setAlignment(Enum[@"luialignment"][@"lui_alignment_bottom"])
 	self:addElement(Column1Header)
 	self.Column1Header = Column1Header
 	Column2Header = LUI.UIText.new(0, 0, 1155, 1295, 0, 0, 30, 48)
 	Column2Header:setRGB(0.92, 0.92, 0.92)
 	Column2Header:setText(GetScoreboardColumnHeader(f1_arg1, 1, 0x0))
 	Column2Header:setTTF("0arame_mono_stencil")
-	Column2Header:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	Column2Header:setAlignment(Enum[0x7A5123B654282D2][0x70510683C22104B])
+	Column2Header:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	Column2Header:setAlignment(Enum[@"luialignment"][@"lui_alignment_bottom"])
 	self:addElement(Column2Header)
 	self.Column2Header = Column2Header
 	local Column3Header = LUI.UIText.new(0, 0, 1298, 1438, 0, 0, 30, 48)
 	Column3Header:setRGB(0.92, 0.92, 0.92)
 	Column3Header:setText(GetScoreboardColumnHeader(f1_arg1, 2, 0x0))
 	Column3Header:setTTF("0arame_mono_stencil")
-	Column3Header:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	Column3Header:setAlignment(Enum[0x7A5123B654282D2][0x70510683C22104B])
+	Column3Header:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	Column3Header:setAlignment(Enum[@"luialignment"][@"lui_alignment_bottom"])
 	self:addElement(Column3Header)
 	self.Column3Header = Column3Header
 	local ColumnExtraHeader = LUI.UIText.new(0, 0, 1441, 1581, 0, 0, 30, 48)
@@ -104,8 +104,8 @@ CoD.WZTeamScoreboard.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	ColumnExtraHeader:setAlpha(0)
 	ColumnExtraHeader:setText(GetScoreboardColumnHeader(f1_arg1, 9, 0x0))
 	ColumnExtraHeader:setTTF("0arame_mono_stencil")
-	ColumnExtraHeader:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	ColumnExtraHeader:setAlignment(Enum[0x7A5123B654282D2][0x70510683C22104B])
+	ColumnExtraHeader:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	ColumnExtraHeader:setAlignment(Enum[@"luialignment"][@"lui_alignment_bottom"])
 	self:addElement(ColumnExtraHeader)
 	self.ColumnExtraHeader = ColumnExtraHeader
 	self:mergeStateConditions({

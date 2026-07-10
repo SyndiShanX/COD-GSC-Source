@@ -12,11 +12,11 @@ CoD.PCSocialMenu_GenericButton_Container.new = function(f1_arg0, f1_arg1, f1_arg
 	self:addElement(Background)
 	self.Background = Background
 	local Title = LUI.UIText.new(0.05, 0.95, 0, 0, 0.5, 0.5, -8, 16)
-	Title:setText(Engine[0xF9F1239CFD921FE](0x93E719493E9E18F))
+	Title:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	Title:setTTF("ttmussels_demibold")
 	Title:setLetterSpacing(3)
-	Title:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	Title:setAlignment(Enum[0x7A5123B654282D2][0x6ED4298C93DC5ED])
+	Title:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	Title:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
 	self:addElement(Title)
 	self.Title = Title
 	local CornerDotBLAnim = LUI.UIImage.new(0, 0, 1, 2, 1, 1, -2, -1)
@@ -33,7 +33,7 @@ CoD.PCSocialMenu_GenericButton_Container.new = function(f1_arg0, f1_arg1, f1_arg
 	self.CornerDotBL = CornerDotBL
 	local Glow = LUI.UIImage.new(0, 1, 0, 0, 0, 0, -55, 7)
 	Glow:setAlpha(0)
-	Glow:setImage(RegisterImage(0xC3B2316BAE91099))
+	Glow:setImage(RegisterImage(@"hash_6C3B2316BAE91099"))
 	self:addElement(Glow)
 	self.Glow = Glow
 	local TopBorder = LUI.UIImage.new(0, 1, 0, 0, 0, 0, 0, 6)

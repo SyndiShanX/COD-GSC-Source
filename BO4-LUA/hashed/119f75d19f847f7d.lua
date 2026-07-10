@@ -20,14 +20,14 @@ CoD.BM_ContractDetailsInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	self:addElement(BottomDarkening)
 	self.BottomDarkening = BottomDarkening
 	local Art = LUI.UIImage.new(0, 0, 3, 459, 0, 0, 4, 500)
-	Art:setImage(RegisterImage(0xA806569052CB2E3))
-	Art:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Art:setImage(RegisterImage(@"uie_ui_menu_contracts_bg_art"))
+	Art:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Art)
 	self.Art = Art
 	local Backer = LUI.UIImage.new(0.5, 0.5, -58.5, 59.5, 0, 0, 95, 213)
 	Backer:setRGB(0.09, 0.09, 0.09)
 	Backer:setScale(2.5, 2.5)
-	Backer:setMaterial(LUI.UIImage.GetCachedMaterial(0x15B163CA03FCE8B))
+	Backer:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_elliptical_ring_normal"))
 	Backer:setShaderVector(0, 40, 10, 0, 0)
 	Backer:setShaderVector(1, 100, 100, 0, 0)
 	Backer:setShaderVector(2, 0.1, 0.05, 0, 0)
@@ -36,7 +36,7 @@ CoD.BM_ContractDetailsInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	local dashedRing = LUI.UIImage.new(0, 0, 102.5, 358.5, 0, 0, 26.5, 282.5)
 	dashedRing:setAlpha(0)
 	dashedRing:setScale(1.02, 1.04)
-	dashedRing:setImage(RegisterImage(0x9CB47A4FF976C1C))
+	dashedRing:setImage(RegisterImage(@"hash_39CB47A4FF976C1C"))
 	self:addElement(dashedRing)
 	self.dashedRing = dashedRing
 	local CompletedBox = LUI.UIImage.new(0, 0, 15, 447, 0, 0, 13.5, 483.5)
@@ -46,16 +46,16 @@ CoD.BM_ContractDetailsInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	self.CompletedBox = CompletedBox
 	local PixelGridTiledBacking = LUI.UIImage.new(0, 1, 0, 0, 0, 0, 0, 637)
 	PixelGridTiledBacking:setAlpha(0.04)
-	PixelGridTiledBacking:setImage(RegisterImage(0x311E811A3183347))
-	PixelGridTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	PixelGridTiledBacking:setImage(RegisterImage(@"uie_ui_hud_notifications_pixelpattern"))
+	PixelGridTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	PixelGridTiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	PixelGridTiledBacking:setupNineSliceShader(128, 128)
 	self:addElement(PixelGridTiledBacking)
 	self.PixelGridTiledBacking = PixelGridTiledBacking
 	local ButtonTopLine9Slice = LUI.UIImage.new(0, 0, -6, 466, 0, 0, 489, 509)
 	ButtonTopLine9Slice:setAlpha(0.11)
-	ButtonTopLine9Slice:setImage(RegisterImage(0xC752149A1FA1AAE))
-	ButtonTopLine9Slice:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	ButtonTopLine9Slice:setImage(RegisterImage(@"uie_ui_menu_cac_secondary_button_top_line"))
+	ButtonTopLine9Slice:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	ButtonTopLine9Slice:setShaderVector(0, 0, 0, 0, 0)
 	ButtonTopLine9Slice:setupNineSliceShader(120, 10)
 	self:addElement(ButtonTopLine9Slice)
@@ -93,8 +93,8 @@ CoD.BM_ContractDetailsInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	Name:setRGB(ColorSet.T8__OCHRE.r, ColorSet.T8__OCHRE.g, ColorSet.T8__OCHRE.b)
 	Name:setTTF("ttmussels_demibold")
 	Name:setLetterSpacing(2)
-	Name:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	Name:setAlignment(Enum[0x7A5123B654282D2][0x70510683C22104B])
+	Name:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	Name:setAlignment(Enum[@"luialignment"][@"lui_alignment_bottom"])
 	Name:linkToElementModel(self, "displayName", true, function(model)
 		local f6_local0 = model:get()
 		if f6_local0 ~= nil then
@@ -105,8 +105,8 @@ CoD.BM_ContractDetailsInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	self.Name = Name
 	local Description = LUI.UIText.new(0.05, 0.05, 2, 414, 0, 0, 414, 430)
 	Description:setTTF("dinnext_regular")
-	Description:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	Description:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Description:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	Description:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	Description:linkToElementModel(self, "description", true, function(model)
 		local f7_local0 = model:get()
 		if f7_local0 ~= nil then
@@ -127,10 +127,10 @@ CoD.BM_ContractDetailsInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	local SelectNewContract = LUI.UIText.new(0.5, 0.5, -215, 215, 0, 0, 294.5, 316.5)
 	SelectNewContract:setRGB(0.58, 0.58, 0.58)
 	SelectNewContract:setAlpha(0)
-	SelectNewContract:setText(LocalizeToUpperString(0xB87969FDAE93020))
+	SelectNewContract:setText(LocalizeToUpperString(@"hash_4B87969FDAE93020"))
 	SelectNewContract:setTTF("dinnext_regular")
-	SelectNewContract:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	SelectNewContract:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	SelectNewContract:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	SelectNewContract:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	SelectNewContract:setBackingType(1)
 	SelectNewContract:setBackingWidget(CoD.CommonCornerPips02, f1_arg0, f1_arg1)
 	SelectNewContract:setBackingColor(0.8, 0.8, 0.8)
@@ -290,11 +290,11 @@ CoD.BM_ContractDetailsInternal.__clipsPerState = {
 							f23_arg0:beginAnimation(1930)
 							f23_arg0:registerEventHandler("transition_complete_keyframe", f23_local0)
 						end
-						f22_arg0:beginAnimation(190, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735])
+						f22_arg0:beginAnimation(190, Enum[@"luitween"][@"luitween_bounce"])
 						f22_arg0:setAlpha(0.02)
 						f22_arg0:registerEventHandler("transition_complete_keyframe", f22_local0)
 					end
-					f21_arg0:beginAnimation(179, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735])
+					f21_arg0:beginAnimation(179, Enum[@"luitween"][@"luitween_bounce"])
 					f21_arg0:setAlpha(0.1)
 					f21_arg0:registerEventHandler("transition_complete_keyframe", f21_local0)
 				end
@@ -322,8 +322,8 @@ CoD.BM_ContractDetailsInternal.__clipsPerState = {
 								f29_arg0:beginAnimation(1770)
 								f29_arg0:registerEventHandler("transition_complete_keyframe", f29_local0)
 							end
-							f28_arg0:beginAnimation(79, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735])
-							f28_arg0.Completed:beginAnimation(79, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735])
+							f28_arg0:beginAnimation(79, Enum[@"luitween"][@"luitween_bounce"])
+							f28_arg0.Completed:beginAnimation(79, Enum[@"luitween"][@"luitween_bounce"])
 							f28_arg0.Completed:setScale(1, 1)
 							f28_arg0:registerEventHandler("transition_complete_keyframe", f28_local0)
 						end
@@ -339,7 +339,7 @@ CoD.BM_ContractDetailsInternal.__clipsPerState = {
 					f26_arg0.Completed:setScale(0.33, 0.33)
 					f26_arg0:registerEventHandler("transition_complete_keyframe", f26_local0)
 				end
-				f17_arg0.BMContractProgress:beginAnimation(640, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735])
+				f17_arg0.BMContractProgress:beginAnimation(640, Enum[@"luitween"][@"luitween_bounce"])
 				f17_arg0.BMContractProgress:setAlpha(1)
 				f17_arg0.BMContractProgress:setScale(1, 1)
 				f17_arg0.BMContractProgress:registerEventHandler("interrupted_keyframe", f17_arg0.clipInterrupted)

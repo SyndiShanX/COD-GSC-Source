@@ -21,7 +21,7 @@ LUI.createMenu.WeaponBribeSelection = function(f1_arg0, f1_arg1)
 	GenericMenuFrameIdentity:subscribeToGlobalModel(f1_arg0, "LobbyRoot", "lobbyTitle", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			GenericMenuFrameIdentity.CommonHeader.subtitle.subtitle:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			GenericMenuFrameIdentity.CommonHeader.subtitle.subtitle:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	self:addElement(GenericMenuFrameIdentity)
@@ -33,17 +33,17 @@ LUI.createMenu.WeaponBribeSelection = function(f1_arg0, f1_arg1)
 	WeaponBribes:setHorizontalCount(4)
 	WeaponBribes:setVerticalCount(5)
 	WeaponBribes:setSpacing(5)
-	WeaponBribes:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	WeaponBribes:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	WeaponBribes:setVerticalCounter(CoD.verticalCounter)
 	WeaponBribes:setDataSource("WeaponBribeList")
 	WeaponBribes:linkToElementModel(WeaponBribes, "purchased", true, function(model, f3_arg1)
-		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	local WeaponBribeSelectionTimer = WeaponBribes
 	local SupplyChainDetails = WeaponBribes.subscribeToModel
 	local f1_local6 = DataSources.BribeMenuTimer.getModel(f1_arg0)
 	SupplyChainDetails(WeaponBribeSelectionTimer, f1_local6.cycled, function(f4_arg0, f4_arg1)
-		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	WeaponBribes:registerEventHandler("list_item_gain_focus", function(element, event)
 		local f5_local0 = nil
@@ -58,10 +58,10 @@ LUI.createMenu.WeaponBribeSelection = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f6_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f6_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(WeaponBribes, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(WeaponBribes, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if not CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "purchased") and CoD.BlackMarketUtility.WeaponBribeSelectionAvailable(controller) then
 			OpenOverlay(self, "PurchaseBribeStack", controller, {
 				_model = element:getModel(),
@@ -75,7 +75,7 @@ LUI.createMenu.WeaponBribeSelection = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if not CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "purchased") and CoD.BlackMarketUtility.WeaponBribeSelectionAvailable(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		else
 			return false
@@ -107,7 +107,7 @@ LUI.createMenu.WeaponBribeSelection = function(f1_arg0, f1_arg1)
 	end)
 	f1_local6 = SupplyChainDetails
 	WeaponBribeSelectionTimer = SupplyChainDetails.subscribeToModel
-	local f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	local f1_local7 = Engine[@"getmodelforcontroller"](f1_arg0)
 	WeaponBribeSelectionTimer(f1_local6, f1_local7.LastInput, function(f12_arg0)
 		f1_local1:updateElementState(SupplyChainDetails, {
 			name = "model_validation",
@@ -140,11 +140,11 @@ LUI.createMenu.WeaponBribeSelection = function(f1_arg0, f1_arg1)
 	WeaponBribeSelectionTimer = CoD.WeaponBribeSelectionTimer.new(f1_local1, f1_arg0, 0, 0, 96, 1207, 0, 0, 171, 204)
 	self:addElement(WeaponBribeSelectionTimer)
 	self.WeaponBribeSelectionTimer = WeaponBribeSelectionTimer
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		GoBack(self, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 		return true
 	end, false)
 	LUI.OverrideFunction_CallOriginalFirst(self, "close", function(element)

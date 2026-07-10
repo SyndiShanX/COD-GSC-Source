@@ -23,12 +23,12 @@ CoD.BountyHunterPreviewItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	ItemName:setRGB(0.78, 0.78, 0.78)
 	ItemName:setTTF("ttmussels_regular")
 	ItemName:setLetterSpacing(4)
-	ItemName:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	ItemName:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	ItemName:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	ItemName:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	ItemName:linkToElementModel(self, "displayName", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
-			ItemName:setText(Engine[0xF9F1239CFD921FE](f3_local0))
+			ItemName:setText(Engine[@"hash_4F9F1239CFD921FE"](f3_local0))
 		end
 	end)
 	self:addElement(ItemName)
@@ -40,12 +40,12 @@ CoD.BountyHunterPreviewItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	local ItemDescription = LUI.UIText.new(0, 0, 100, 330, 0, 0, 39, 59)
 	ItemDescription:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	ItemDescription:setTTF("dinnext_regular")
-	ItemDescription:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	ItemDescription:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	ItemDescription:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	ItemDescription:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	ItemDescription:linkToElementModel(self, "description", true, function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
-			ItemDescription:setText(Engine[0xF9F1239CFD921FE](f4_local0))
+			ItemDescription:setText(Engine[@"hash_4F9F1239CFD921FE"](f4_local0))
 		end
 	end)
 	self:addElement(ItemDescription)

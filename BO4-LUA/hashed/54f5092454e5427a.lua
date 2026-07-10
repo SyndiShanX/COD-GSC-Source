@@ -14,18 +14,18 @@ CoD.HealCooldown.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local HealButtonTextImageReplacement = CoD.ControllerDependent_TextBox.new(f1_arg0, f1_arg1, 0, 0, -8.5, 80.5, 0, 0, 53.5, 75.5)
-	HealButtonTextImageReplacement.KBMText:setText(Engine[0xF9F1239CFD921FE](0x34175BD548C4C21))
-	HealButtonTextImageReplacement.GamepadText:setText(Engine[0xF9F1239CFD921FE](0x34175BD548C4C21))
+	HealButtonTextImageReplacement.KBMText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_234175BD548C4C21"))
+	HealButtonTextImageReplacement.GamepadText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_234175BD548C4C21"))
 	HealButtonTextImageReplacement.GamepadText:setLetterSpacing(-2)
-	HealButtonTextImageReplacement.GamepadText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	HealButtonTextImageReplacement.GamepadText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	self:addElement(HealButtonTextImageReplacement)
 	self.HealButtonTextImageReplacement = HealButtonTextImageReplacement
 	local BackingFill = LUI.UIImage.new(0, 0, -5, 67, 0, 0, -15, 45)
 	BackingFill:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
 	BackingFill:setAlpha(0)
 	BackingFill:setZRot(180)
-	BackingFill:setImage(RegisterImage(0x16FB6BFD381E066))
-	BackingFill:setMaterial(LUI.UIImage.GetCachedMaterial(0x316E67E1DF2198E))
+	BackingFill:setImage(RegisterImage(@"hash_216FB6BFD381E066"))
+	BackingFill:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_normal"))
 	BackingFill:setShaderVector(0, 1, 0, 0, 0)
 	BackingFill:setShaderVector(1, 0, 0, 0, 0)
 	BackingFill:setShaderVector(3, 0.05, 0, 0, 0)
@@ -40,30 +40,30 @@ CoD.HealCooldown.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 	self.BackingFill = BackingFill
 	local ReadyBox = LUI.UIImage.new(0, 0, 0, 72, 0, 0, -27.5, 62.5)
 	ReadyBox:setRGB(1, 0.68, 0)
-	ReadyBox:setImage(RegisterImage(0x28081B8F637C9BD))
-	ReadyBox:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	ReadyBox:setImage(RegisterImage(@"hash_628081B8F637C9BD"))
+	ReadyBox:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(ReadyBox)
 	self.ReadyBox = ReadyBox
 	local ReadyGlow = LUI.UIImage.new(0, 0, 10, 62, 0, 0, -19.5, 62.5)
-	ReadyGlow:setImage(RegisterImage(0x560FE2D650E06A5))
-	ReadyGlow:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	ReadyGlow:setImage(RegisterImage(@"hash_3560FE2D650E06A5"))
+	ReadyGlow:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(ReadyGlow)
 	self.ReadyGlow = ReadyGlow
 	local ReadyGlow2 = LUI.UIImage.new(0, 0, 10, 62, 0, 0, -19.5, 62.5)
-	ReadyGlow2:setImage(RegisterImage(0x560FE2D650E06A5))
-	ReadyGlow2:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	ReadyGlow2:setImage(RegisterImage(@"hash_3560FE2D650E06A5"))
+	ReadyGlow2:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(ReadyGlow2)
 	self.ReadyGlow2 = ReadyGlow2
 	local ReadyPulse = LUI.UIImage.new(0, 0, 9, 61, 0, 0, -18.5, 63.5)
 	ReadyPulse:setRGB(ColorSet.T8__OCHRE.r, ColorSet.T8__OCHRE.g, ColorSet.T8__OCHRE.b)
-	ReadyPulse:setImage(RegisterImage(0x349F3334F5ECEF5))
-	ReadyPulse:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	ReadyPulse:setImage(RegisterImage(@"hash_349F3334F5ECEF5"))
+	ReadyPulse:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	ReadyPulse:setShaderVector(0, 2, 0, 0, 0)
 	self:addElement(ReadyPulse)
 	self.ReadyPulse = ReadyPulse
 	local HealEmpty = CoD.AmmoWidget_EquipmentEmpty.new(f1_arg0, f1_arg1, 0, 0, 3.5, 65.5, 0, 0, -5, 35)
-	HealEmpty.ImgIcon:setImage(RegisterImage(0x7615068F50B3D66))
-	HealEmpty.ImgIconGrow:setImage(RegisterImage(0x7615068F50B3D66))
+	HealEmpty.ImgIcon:setImage(RegisterImage(@"blacktransparent"))
+	HealEmpty.ImgIconGrow:setImage(RegisterImage(@"blacktransparent"))
 	HealEmpty:linkToElementModel(self, nil, false, function(model)
 		HealEmpty:setModel(model, f1_arg1)
 	end)
@@ -71,7 +71,7 @@ CoD.HealCooldown.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 	self.HealEmpty = HealEmpty
 	local BackingPulse = CoD.AmmoWidgetMP_EquipmentLethal_Flash.new(f1_arg0, f1_arg1, 0, 0, 16.5, 55.5, 0, 0, 0.5, 39.5)
 	BackingPulse:setYRot(180)
-	BackingPulse:setRFTMaterial(LUI.UIImage.GetCachedMaterial(0x1DE43899593E67E))
+	BackingPulse:setRFTMaterial(LUI.UIImage.GetCachedMaterial(@"hash_51DE43899593E67E"))
 	BackingPulse:setShaderVector(0, 0, 1, 0, 0)
 	BackingPulse:setShaderVector(1, 0, 0, 0, 0)
 	BackingPulse:setShaderVector(3, 0, 0, 0, 0)
@@ -105,7 +105,7 @@ CoD.HealCooldown.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 	LocalHealIcon:setRGB(0, 0, 0)
 	LocalHealIcon:setAlpha(0)
 	LocalHealIcon:setScale(0.7, 0.7)
-	LocalHealIcon:setImage(RegisterImage(0x40A4F8228AC959))
+	LocalHealIcon:setImage(RegisterImage(@"hash_40A4F8228AC959"))
 	self:addElement(LocalHealIcon)
 	self.LocalHealIcon = LocalHealIcon
 	local AmmoWidgetMPAbilityFlare = CoD.AmmoWidgetMP_Ability_Flare.new(f1_arg0, f1_arg1, 0, 0, -275, 1463, 0, 0, -986.5, 87.5)
@@ -128,8 +128,8 @@ CoD.HealCooldown.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 	self.Line = Line
 	local Box = LUI.UIImage.new(0, 0, 11, 61, 0, 0, -5.5, 44.5)
 	Box:setAlpha(0.5)
-	Box:setImage(RegisterImage(0x1361B633E108517))
-	Box:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Box:setImage(RegisterImage(@"hash_61361B633E108517"))
+	Box:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Box)
 	self.Box = Box
 	local WZAmmoNumber = CoD.onOffText.new(f1_arg0, f1_arg1, 0, 0, 45.5, 65.5, 0, 0, 13, 50)
@@ -143,7 +143,7 @@ CoD.HealCooldown.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 	})
 	local f1_local15 = WZAmmoNumber
 	local f1_local16 = WZAmmoNumber.subscribeToModel
-	local f1_local17 = Engine[0x8DF2E5447F384B9]()
+	local f1_local17 = Engine[@"getglobalmodel"]()
 	f1_local16(f1_local15, f1_local17["lobbyRoot.lobbyNav"], function(f10_arg0)
 		f1_arg0:updateElementState(WZAmmoNumber, {
 			name = "model_validation",
@@ -177,7 +177,7 @@ CoD.HealCooldown.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 		{
 			stateName = "InUse",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(self, f1_arg1, "state", Enum[0xF0447219F15F7F3][0x1873A43E9D1620E])
+				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(self, f1_arg1, "state", Enum[@"weapongadgetstates"][@"player_ability_state_inuse"])
 			end,
 		},
 		{
@@ -195,7 +195,7 @@ CoD.HealCooldown.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 	})
 	f1_local15 = self
 	f1_local16 = self.subscribeToModel
-	f1_local17 = Engine[0x8DF2E5447F384B9]()
+	f1_local17 = Engine[@"getglobalmodel"]()
 	f1_local16(f1_local15, f1_local17["lobbyRoot.lobbyNav"], function(f17_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

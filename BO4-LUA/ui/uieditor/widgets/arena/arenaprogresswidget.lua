@@ -18,8 +18,8 @@ CoD.ArenaProgressWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	self.BodyBacker = BodyBacker
 	local NoiseTiledBacking = LUI.UIImage.new(0, 0, 75, 1109, 0, 0, 2, 122)
 	NoiseTiledBacking:setAlpha(0.5)
-	NoiseTiledBacking:setImage(RegisterImage(0x34839E8065B1E53))
-	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	NoiseTiledBacking:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	NoiseTiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	NoiseTiledBacking:setupNineSliceShader(196, 88)
 	self:addElement(NoiseTiledBacking)
@@ -30,16 +30,16 @@ CoD.ArenaProgressWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	self.SquareOthers = SquareOthers
 	local CornerBottomRight = LUI.UIImage.new(1, 1, -3, 1, 1, 1, -78, -74)
 	CornerBottomRight:setAlpha(0.2)
-	CornerBottomRight:setImage(RegisterImage(0xCD2D51C614BCB51))
+	CornerBottomRight:setImage(RegisterImage(@"hash_6CD2D51C614BCB51"))
 	self:addElement(CornerBottomRight)
 	self.CornerBottomRight = CornerBottomRight
 	local CornerTopRight = LUI.UIImage.new(1, 1, -3, 1, 0, 0, -2, 2)
 	CornerTopRight:setAlpha(0.2)
-	CornerTopRight:setImage(RegisterImage(0xCD2D51C614BCB51))
+	CornerTopRight:setImage(RegisterImage(@"hash_6CD2D51C614BCB51"))
 	self:addElement(CornerTopRight)
 	self.CornerTopRight = CornerTopRight
 	local firestreakflipbook = LUI.UIImage.new(0.5, 0.5, -665, -295, 0.5, 0.5, -223, 147)
-	firestreakflipbook:setMaterial(LUI.UIImage.GetCachedMaterial(0x9227A50BA2B8D21))
+	firestreakflipbook:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_flipbook_add"))
 	firestreakflipbook:setShaderVector(0, 4, 4, 0, 0)
 	firestreakflipbook:setShaderVector(1, 8, 0, 0, 0)
 	firestreakflipbook:subscribeToGlobalModel(f1_arg1, "LeaguePlay", "leaguePlayFirestreakIcon", function(model)
@@ -61,8 +61,8 @@ CoD.ArenaProgressWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	self.RankIcon = RankIcon
 	local NextRank = LUI.UIText.new(0, 0, 901, 1101, 0, 0, 93.5, 111.5)
 	NextRank:setTTF("ttmussels_regular")
-	NextRank:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
-	NextRank:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	NextRank:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
+	NextRank:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	NextRank:subscribeToGlobalModel(f1_arg1, "LeaguePlay", "leaguePlayRank", function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then

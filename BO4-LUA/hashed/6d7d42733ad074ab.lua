@@ -27,7 +27,7 @@ CoD.CharacterSelection_FeaturedGamesList.new = function(f1_arg0, f1_arg1, f1_arg
 			modelName = "characterInT4",
 		})
 	end)
-	WaW.GameIcon:setImage(RegisterImage(0x3965E33060D4686))
+	WaW.GameIcon:setImage(RegisterImage(@"hash_3965E33060D4686"))
 	WaW:linkToElementModel(self, nil, false, function(model)
 		WaW:setModel(model, f1_arg1)
 	end)
@@ -58,7 +58,7 @@ CoD.CharacterSelection_FeaturedGamesList.new = function(f1_arg0, f1_arg1, f1_arg
 			modelName = "characterInT5",
 		})
 	end)
-	BO1.GameIcon:setImage(RegisterImage(0x534F132D0D9461D))
+	BO1.GameIcon:setImage(RegisterImage(@"hash_2534F132D0D9461D"))
 	BO1:linkToElementModel(self, nil, false, function(model)
 		BO1:setModel(model, f1_arg1)
 	end)
@@ -89,7 +89,7 @@ CoD.CharacterSelection_FeaturedGamesList.new = function(f1_arg0, f1_arg1, f1_arg
 			modelName = "characterInT6",
 		})
 	end)
-	BO2.GameIcon:setImage(RegisterImage(0x534EE32D0D94104))
+	BO2.GameIcon:setImage(RegisterImage(@"hash_2534EE32D0D94104"))
 	BO2:linkToElementModel(self, nil, false, function(model)
 		BO2:setModel(model, f1_arg1)
 	end)
@@ -120,7 +120,7 @@ CoD.CharacterSelection_FeaturedGamesList.new = function(f1_arg0, f1_arg1, f1_arg
 			modelName = "characterInT7",
 		})
 	end)
-	BO3.GameIcon:setImage(RegisterImage(0x534EF32D0D942B7))
+	BO3.GameIcon:setImage(RegisterImage(@"hash_2534EF32D0D942B7"))
 	BO3:linkToElementModel(self, nil, false, function(model)
 		BO3:setModel(model, f1_arg1)
 	end)
@@ -151,7 +151,7 @@ CoD.CharacterSelection_FeaturedGamesList.new = function(f1_arg0, f1_arg1, f1_arg
 			modelName = "characterInT8",
 		})
 	end)
-	BO4.GameIcon:setImage(RegisterImage(0x534EC32D0D93D9E))
+	BO4.GameIcon:setImage(RegisterImage(@"hash_2534EC32D0D93D9E"))
 	BO4:linkToElementModel(self, nil, false, function(model)
 		BO4:setModel(model, f1_arg1)
 	end)

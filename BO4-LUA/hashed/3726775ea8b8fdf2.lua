@@ -8,12 +8,12 @@ CoD.NineBangReticle_Pip.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	self.soundSet = "none"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local piphighlight = LUI.UIImage.new(0, 0, -3, 33, 0, 0, -1, 11)
-	piphighlight:setImage(RegisterImage(0x897BEC966B785BD))
-	piphighlight:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	piphighlight:setImage(RegisterImage(@"uie_ui_hud_firebang_counter_piphighlight"))
+	piphighlight:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(piphighlight)
 	self.piphighlight = piphighlight
 	local pipfill = LUI.UIImage.new(0, 0, -3, 33, 0, 0, -1, 11)
-	pipfill:setImage(RegisterImage(0x9A69CDFF60EEDC6))
+	pipfill:setImage(RegisterImage(@"uie_ui_hud_firebang_counter_pipfill"))
 	self:addElement(pipfill)
 	self.pipfill = pipfill
 	if PostLoadFunc then

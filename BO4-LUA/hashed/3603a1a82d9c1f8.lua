@@ -13,8 +13,8 @@ CoD.Prestige_LevelProgress_Rank.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	RankName:setAlpha(0.5)
 	RankName:setTTF("ttmussels_demibold")
 	RankName:setLetterSpacing(2)
-	RankName:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	RankName:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	RankName:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	RankName:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	RankName:subscribeToGlobalModel(f1_arg1, "PrestigeMenuInfo", "hasPrestiged", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -31,8 +31,8 @@ CoD.Prestige_LevelProgress_Rank.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	RankTitle:setAlpha(0.5)
 	RankTitle:setTTF("ttmussels_demibold")
 	RankTitle:setLetterSpacing(2)
-	RankTitle:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	RankTitle:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	RankTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	RankTitle:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	RankTitle:subscribeToGlobalModel(f1_arg1, "PrestigeMenuInfo", "hasPrestiged", function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then

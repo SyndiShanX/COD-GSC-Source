@@ -31,10 +31,10 @@ LUI.createMenu.ZMEquipmentSelect = function(f1_arg0, f1_arg1)
 	itemList:setWidgetType(CoD.ZMItemGridButtonSmall)
 	itemList:setHorizontalCount(6)
 	itemList:setSpacing(10)
-	itemList:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	itemList:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	itemList:setDataSource("Unlockables")
 	itemList:linkToElementModel(itemList, "globalItemIndex", true, function(model, f2_arg1)
-		CoD.Menu.UpdateButtonShownState(f2_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f2_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	itemList:registerEventHandler("list_item_gain_focus", function(element, event)
 		local f3_local0 = nil
@@ -54,10 +54,10 @@ LUI.createMenu.ZMEquipmentSelect = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f5_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f5_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(itemList, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(itemList, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if IsPC() and CoD.CACUtility.IsItemEquippedInCurrentLoadout(menu, element, controller) and not CoD.CACUtility.IsCACItemLocked(menu, element, controller) then
 			GoBack(self, controller)
 			return true
@@ -69,10 +69,10 @@ LUI.createMenu.ZMEquipmentSelect = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if IsPC() and CoD.CACUtility.IsItemEquippedInCurrentLoadout(menu, element, controller) and not CoD.CACUtility.IsCACItemLocked(menu, element, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "ui_confirm")
 			return false
 		elseif not CoD.CACUtility.IsItemEquippedInCurrentLoadout(menu, element, controller) and not CoD.CACUtility.IsCACItemLocked(menu, element, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false
@@ -98,12 +98,12 @@ LUI.createMenu.ZMEquipmentSelect = function(f1_arg0, f1_arg1)
 	self:addElement(ItemInfo)
 	self.ItemInfo = ItemInfo
 	local CACHeader = CoD.CommonHeader.new(f1_local1, f1_arg0, 0.5, 0.5, -960, 960, 0, 0, 0, 67)
-	CACHeader.subtitle.StageTitle:setText(LocalizeToUpperString(CoD.CACUtility.GetHeaderNameForLoadoutSlot(self, 0x5C60F77B9332E5B)))
+	CACHeader.subtitle.StageTitle:setText(LocalizeToUpperString(CoD.CACUtility.GetHeaderNameForLoadoutSlot(self, @"hash_15C60F77B9332E5B")))
 	CACHeader.subtitle.subtitle:setAlpha(0)
 	CACHeader:subscribeToGlobalModel(f1_arg0, "LobbyRoot", "lobbyTitle", function(model)
 		local f10_local0 = model:get()
 		if f10_local0 ~= nil then
-			CACHeader.subtitle.subtitle:setText(Engine[0xF9F1239CFD921FE](f10_local0))
+			CACHeader.subtitle.subtitle:setText(Engine[@"hash_4F9F1239CFD921FE"](f10_local0))
 		end
 	end)
 	CACHeader:linkToElementModel(self, nil, false, function(model)
@@ -168,11 +168,11 @@ LUI.createMenu.ZMEquipmentSelect = function(f1_arg0, f1_arg1)
 	ItemInfo:linkToElementModel(itemList, nil, false, function(model)
 		ItemInfo:setModel(model, f1_arg0)
 	end)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		GoBack(self, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 		return true
 	end, false)
 	LUI.OverrideFunction_CallOriginalFirst(self, "close", function(element)
@@ -202,7 +202,7 @@ LUI.createMenu.ZMEquipmentSelect = function(f1_arg0, f1_arg1)
 		PostLoadFunc(self, f1_arg0)
 	end
 	local f1_local10 = self
-	if not CoD.BaseUtility.IsMenuSessionModeEqualTo(f1_local1, Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A]) then
+	if not CoD.BaseUtility.IsMenuSessionModeEqualTo(f1_local1, Enum[@"emodes"][@"mode_zombies"]) then
 		CoD.CACUtility.UpdateWeaponModel(f1_local1, self, f1_arg0)
 		CoD.BaseUtility.SetModelFromPropertyModel(f1_arg0, self, self)
 	end

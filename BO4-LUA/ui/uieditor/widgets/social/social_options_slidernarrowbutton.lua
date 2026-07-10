@@ -15,12 +15,12 @@ CoD.Social_Options_SliderNarrowButton.new = function(f1_arg0, f1_arg1, f1_arg2, 
 	local ButtonLabel = LUI.UIText.new(0, 0, 6.5, 197.5, 0, 0, 11.5, 32.5)
 	ButtonLabel:setRGB(0.78, 0.74, 0.67)
 	ButtonLabel:setTTF("ttmussels_regular")
-	ButtonLabel:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	ButtonLabel:setAlignment(Enum[0x7A5123B654282D2][0x6ED4298C93DC5ED])
+	ButtonLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	ButtonLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
 	ButtonLabel:linkToElementModel(self, "altText", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			ButtonLabel:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			ButtonLabel:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	self:addElement(ButtonLabel)

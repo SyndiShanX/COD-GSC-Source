@@ -13,10 +13,10 @@ CoD.PositionDraft_ViewTeams_Prompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	local viewTeams = LUI.UIText.new(0, 0, 0, 600, 0, 0, 240, 277)
 	viewTeams:setRGB(0.66, 0.66, 0.66)
 	viewTeams:setAlpha(0)
-	viewTeams:setText(Engine[0xF9F1239CFD921FE](0x7B9BD9B1628B977))
+	viewTeams:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/view_teams"))
 	viewTeams:setTTF("default")
-	viewTeams:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	viewTeams:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	viewTeams:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	viewTeams:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(viewTeams)
 	self.viewTeams = viewTeams
 	local FriendlyStatus = CoD.PositionDraft_FriendlyTeamStatusBar.new(f1_arg0, f1_arg1, 0, 0, 89.5, 239.5, 0, 0, 199.5, 219.5)

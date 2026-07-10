@@ -9,8 +9,8 @@ CoD.EmblemLayerPositionWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local TopBottomText = LUI.UIText.new(0, 0, 0, 173, 0, 0, -2, 22)
 	TopBottomText:setTTF("dinnext_regular")
-	TopBottomText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	TopBottomText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	TopBottomText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	TopBottomText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(TopBottomText)
 	self.TopBottomText = TopBottomText
 	self.TopBottomText:linkToElementModel(self, "topBottomText", true, function(model)
@@ -39,7 +39,7 @@ CoD.EmblemLayerPositionWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	end)
 	local f1_local2 = self
 	local f1_local3 = self.subscribeToModel
-	local f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local3(f1_local2, f1_local4.LastInput, function(f6_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -61,7 +61,7 @@ CoD.EmblemLayerPositionWidget.__resetProperties = function(f7_arg0)
 	f7_arg0.TopBottomText:setRGB(1, 1, 1)
 	f7_arg0.TopBottomText:setAlpha(1)
 	f7_arg0.TopBottomText:setLetterSpacing(0)
-	f7_arg0.TopBottomText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	f7_arg0.TopBottomText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 end
 CoD.EmblemLayerPositionWidget.__clipsPerState = {
 	DefaultState = {
@@ -88,7 +88,7 @@ CoD.EmblemLayerPositionWidget.__clipsPerState = {
 			f10_arg0.TopBottomText:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
 			f10_arg0.TopBottomText:setAlpha(1)
 			f10_arg0.TopBottomText:setLetterSpacing(2)
-			f10_arg0.TopBottomText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+			f10_arg0.TopBottomText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 			f10_arg0.clipFinished(f10_arg0.TopBottomText)
 		end,
 	},

@@ -10,20 +10,20 @@ CoD.FooterButton_PartyCount.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Label = LUI.UIText.new(0, 0, 0, 52, 0, 0, 9, 29)
 	Label:setRGB(0.49, 0.49, 0.49)
-	Label:setText(LocalizeToUpperString(0x56004A0B4E33CD8))
+	Label:setText(LocalizeToUpperString(@"hash_756004A0B4E33CD8"))
 	Label:setTTF("ttmussels_regular")
 	Label:setLetterSpacing(6)
-	Label:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	Label:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(Label)
 	self.Label = Label
 	local Spacer2 = LUI.UIImage.new(0, 0, 58, 64, 0, 0, -4, 44)
 	Spacer2:setRGB(0, 0, 0)
-	Spacer2:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Spacer2:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Spacer2)
 	self.Spacer2 = Spacer2
 	local Spacer = LUI.UIImage.new(0, 0, 52, 58, 0, 0, 1, 49)
 	Spacer:setRGB(0, 0, 0)
-	Spacer:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Spacer:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Spacer)
 	self.Spacer = Spacer
 	local PartyCount = LUI.UIText.new(0, 0, 64, 153, 0, 0, 9, 29)
@@ -33,7 +33,7 @@ CoD.FooterButton_PartyCount.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	PartyCount.__String_Reference()
 	PartyCount:setTTF("ttmussels_regular")
 	PartyCount:setLetterSpacing(6)
-	PartyCount:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	PartyCount:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(PartyCount)
 	self.PartyCount = PartyCount
 	local MatchmakingCount = LUI.UIText.new(0, 0, 64, 153, 0, 0, 9, 29)
@@ -44,24 +44,24 @@ CoD.FooterButton_PartyCount.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	MatchmakingCount.__String_Reference()
 	MatchmakingCount:setTTF("ttmussels_regular")
 	MatchmakingCount:setLetterSpacing(6)
-	MatchmakingCount:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	MatchmakingCount:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(MatchmakingCount)
 	self.MatchmakingCount = MatchmakingCount
 	local f1_local6 = PartyCount
 	local f1_local7 = PartyCount.subscribeToModel
-	local f1_local8 = Engine[0x8DF2E5447F384B9]()
+	local f1_local8 = Engine[@"getglobalmodel"]()
 	f1_local7(f1_local6, f1_local8["lobbyRoot.privateClient.update"], PartyCount.__String_Reference)
 	f1_local6 = PartyCount
 	f1_local7 = PartyCount.subscribeToModel
-	f1_local8 = Engine[0x8DF2E5447F384B9]()
+	f1_local8 = Engine[@"getglobalmodel"]()
 	f1_local7(f1_local6, f1_local8["lobbyRoot.gameClient.update"], PartyCount.__String_Reference)
 	f1_local6 = MatchmakingCount
 	f1_local7 = MatchmakingCount.subscribeToModel
-	f1_local8 = Engine[0x8DF2E5447F384B9]()
+	f1_local8 = Engine[@"getglobalmodel"]()
 	f1_local7(f1_local6, f1_local8["lobbyRoot.privateClient.update"], MatchmakingCount.__String_Reference)
 	f1_local6 = MatchmakingCount
 	f1_local7 = MatchmakingCount.subscribeToModel
-	f1_local8 = Engine[0x8DF2E5447F384B9]()
+	f1_local8 = Engine[@"getglobalmodel"]()
 	f1_local7(f1_local6, f1_local8["lobbyRoot.gameClient.update"], MatchmakingCount.__String_Reference)
 	self:mergeStateConditions({
 		{
@@ -73,7 +73,7 @@ CoD.FooterButton_PartyCount.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	})
 	f1_local6 = self
 	f1_local7 = self.subscribeToModel
-	f1_local8 = Engine[0x8DF2E5447F384B9]()
+	f1_local8 = Engine[@"getglobalmodel"]()
 	f1_local7(f1_local6, f1_local8["lobbyRoot.publicLobby.stage"], function(f5_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -93,7 +93,7 @@ CoD.FooterButton_PartyCount.__resetProperties = function(f6_arg0)
 	f6_arg0.Label:completeAnimation()
 	f6_arg0.MatchmakingCount:completeAnimation()
 	f6_arg0.PartyCount:completeAnimation()
-	f6_arg0.Label:setText(LocalizeToUpperString(0x56004A0B4E33CD8))
+	f6_arg0.Label:setText(LocalizeToUpperString(@"hash_756004A0B4E33CD8"))
 	f6_arg0.MatchmakingCount:setAlpha(0)
 	f6_arg0.PartyCount:setAlpha(1)
 end
@@ -109,7 +109,7 @@ CoD.FooterButton_PartyCount.__clipsPerState = {
 			f8_arg0:__resetProperties()
 			f8_arg0:setupElementClipCounter(3)
 			f8_arg0.Label:completeAnimation()
-			f8_arg0.Label:setText(LocalizeToUpperString(0xE20D5225108123D))
+			f8_arg0.Label:setText(LocalizeToUpperString(@"hash_5E20D5225108123D"))
 			f8_arg0.clipFinished(f8_arg0.Label)
 			f8_arg0.PartyCount:completeAnimation()
 			f8_arg0.PartyCount:setAlpha(0)

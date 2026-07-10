@@ -8,7 +8,7 @@ CoD.WeaponLevelUpHeaderStripe.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self.soundSet = "default"
 	local HeaderBacking = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	HeaderBacking:setRGB(0.87, 0.87, 0.87)
-	HeaderBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	HeaderBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	HeaderBacking:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(HeaderBacking)
 	self.HeaderBacking = HeaderBacking
@@ -18,8 +18,8 @@ CoD.WeaponLevelUpHeaderStripe.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self.HeaderBacking2 = HeaderBacking2
 	local HeaderStripe = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	HeaderStripe:setRGB(0, 0, 0)
-	HeaderStripe:setImage(RegisterImage(0xC7A051F5EFC70E5))
-	HeaderStripe:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	HeaderStripe:setImage(RegisterImage(@"hash_2C7A051F5EFC70E5"))
+	HeaderStripe:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	HeaderStripe:setShaderVector(0, 0, 0, 0, 0)
 	HeaderStripe:setupNineSliceShader(50, 8)
 	self:addElement(HeaderStripe)

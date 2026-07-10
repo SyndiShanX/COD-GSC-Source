@@ -8,10 +8,10 @@ CoD.TrialUpsellMessage.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	self.id = "TrialUpsellMessage"
 	self.soundSet = "none"
 	local Message = LUI.UIText.new(0, 0, 50, 799, 0.5, 0.5, -10, 10)
-	Message:setText(Engine[0xF9F1239CFD921FE](0x62486486346EC3F))
+	Message:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_262486486346EC3F"))
 	Message:setTTF("dinnext_regular")
-	Message:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Message:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	Message:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Message:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	self:addElement(Message)
 	self.Message = Message
 	local UpsellWidget = CoD.UpsellWidget.new(f1_arg0, f1_arg1, 0, 0, 0, 40, 0.5, 0.5, -20, 20)

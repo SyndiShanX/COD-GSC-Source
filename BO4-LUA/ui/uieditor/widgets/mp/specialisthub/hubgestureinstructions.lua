@@ -9,11 +9,11 @@ CoD.HubGestureInstructions.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local LobbyGestureInstruct = LUI.UIText.new(0.5, 0.5, -205, 205, 0.5, 0.5, -9, 9)
 	LobbyGestureInstruct:setRGB(ColorSet.T8__OFF__GRAY.r, ColorSet.T8__OFF__GRAY.g, ColorSet.T8__OFF__GRAY.b)
-	LobbyGestureInstruct:setText(Engine[0xF9F1239CFD921FE](0x81261AF40E18937))
+	LobbyGestureInstruct:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_381261AF40E18937"))
 	LobbyGestureInstruct:setTTF("dinnext_regular")
 	LobbyGestureInstruct:setLetterSpacing(2)
-	LobbyGestureInstruct:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	LobbyGestureInstruct:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	LobbyGestureInstruct:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	LobbyGestureInstruct:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(LobbyGestureInstruct)
 	self.LobbyGestureInstruct = LobbyGestureInstruct
 	self:mergeStateConditions({

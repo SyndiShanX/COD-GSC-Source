@@ -32,7 +32,7 @@ CoD.AmmoWidgetWZ_WeaponImage.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	self:addElement(PowerWeaponDrainGadget2)
 	self.PowerWeaponDrainGadget2 = PowerWeaponDrainGadget2
 	local WeaponImage = LUI.UIFixedAspectRatioImage.new(0, 0, -164, 0, 0, 0, -44, 6)
-	WeaponImage:setMaterial(LUI.UIImage.GetCachedMaterial(0xF755127C95CF5B6))
+	WeaponImage:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_F755127C95CF5B6"))
 	WeaponImage:setShaderVector(0, 1, 0, 0, 0)
 	WeaponImage:linkToElementModel(self, "weapon", true, function(model)
 		local f4_local0 = model:get()

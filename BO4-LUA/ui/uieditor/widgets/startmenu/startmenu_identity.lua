@@ -51,20 +51,20 @@ CoD.StartMenu_Identity.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 			end,
 		},
 	})
-	EmblemEditor.ButtonInternal.imageContainer.ImageContainer:setImage(RegisterImage(0x50C9EBA50F5E0B))
+	EmblemEditor.ButtonInternal.imageContainer.ImageContainer:setImage(RegisterImage(@"uie_ui_menu_start_menu_emblem"))
 	EmblemEditor.ButtonInternal.Title:setText("")
-	EmblemEditor.ButtonInternal.Subtitle.SubtitleText:setText(LocalizeHash(0x5E93B286AFFF18D))
+	EmblemEditor.ButtonInternal.Subtitle.SubtitleText:setText(LocalizeHash(@"hash_5E93B286AFFF18D"))
 	local Emblems = EmblemEditor
 	local Paintshop = EmblemEditor.subscribeToModel
-	local CallingCards = Engine[0x8DF2E5447F384B9]()
+	local CallingCards = Engine[@"getglobalmodel"]()
 	Paintshop(Emblems, CallingCards["lobbyRoot.lobbyNetworkMode"], function(f7_arg0, f7_arg1)
-		CoD.Menu.UpdateButtonShownState(f7_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f7_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	Emblems = EmblemEditor
 	Paintshop = EmblemEditor.subscribeToModel
-	CallingCards = Engine[0x8DF2E5447F384B9]()
+	CallingCards = Engine[@"getglobalmodel"]()
 	Paintshop(Emblems, CallingCards["lobbyRoot.lobbyNav"], function(f8_arg0, f8_arg1)
-		CoD.Menu.UpdateButtonShownState(f8_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f8_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	EmblemEditor:registerEventHandler("gain_focus", function(element, event)
 		local f9_local0 = nil
@@ -73,25 +73,25 @@ CoD.StartMenu_Identity.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 		elseif element.super.gainFocus then
 			f9_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f9_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(EmblemEditor, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(EmblemEditor, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if IsGameTrial() then
 			OpenPopup(self, "WZTrialUpsellPopup", controller, nil)
 			return true
 		elseif IsLive() and not IsUserContentRestricted(controller) then
-			OpenEmblemSelect(self, element, controller, Enum[0xBBD4F9E70101BA8][0x791C91FD2327632], menu, "true")
+			OpenEmblemSelect(self, element, controller, Enum[@"storagefiletype"][@"storage_emblems"], menu, "true")
 			PlaySoundAlias("uin_toggle_generic")
 			return true
 		else
 		end
 	end, function(element, menu, controller)
 		if IsGameTrial() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		elseif IsLive() and not IsUserContentRestricted(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false
@@ -132,20 +132,20 @@ CoD.StartMenu_Identity.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 			end,
 		},
 	})
-	Paintshop.ButtonInternal.imageContainer.ImageContainer:setImage(RegisterImage(0x60BC44EA9E8F0EF))
+	Paintshop.ButtonInternal.imageContainer.ImageContainer:setImage(RegisterImage(@"uie_ui_menu_start_menu_paintshop"))
 	Paintshop.ButtonInternal.Title:setText("")
-	Paintshop.ButtonInternal.Subtitle.SubtitleText:setText(LocalizeHash(0xEBF0E83B479C6AB))
+	Paintshop.ButtonInternal.Subtitle.SubtitleText:setText(LocalizeHash(@"hash_EBF0E83B479C6AB"))
 	CallingCards = Paintshop
 	Emblems = Paintshop.subscribeToModel
-	local f1_local5 = Engine[0x8DF2E5447F384B9]()
+	local f1_local5 = Engine[@"getglobalmodel"]()
 	Emblems(CallingCards, f1_local5["lobbyRoot.lobbyNetworkMode"], function(f17_arg0, f17_arg1)
-		CoD.Menu.UpdateButtonShownState(f17_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f17_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	CallingCards = Paintshop
 	Emblems = Paintshop.subscribeToModel
-	f1_local5 = Engine[0x8DF2E5447F384B9]()
+	f1_local5 = Engine[@"getglobalmodel"]()
 	Emblems(CallingCards, f1_local5["lobbyRoot.lobbyNav"], function(f18_arg0, f18_arg1)
-		CoD.Menu.UpdateButtonShownState(f18_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f18_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	Paintshop:registerEventHandler("gain_focus", function(element, event)
 		local f19_local0 = nil
@@ -154,10 +154,10 @@ CoD.StartMenu_Identity.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 		elseif element.super.gainFocus then
 			f19_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f19_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(Paintshop, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(Paintshop, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if IsGameTrial() then
 			OpenPopup(self, "WZTrialUpsellPopup", controller, nil)
 			return true
@@ -169,10 +169,10 @@ CoD.StartMenu_Identity.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 		end
 	end, function(element, menu, controller)
 		if IsGameTrial() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		elseif IsLive() and not IsUserContentRestricted(controller) and IsInDefaultState(element) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false
@@ -190,7 +190,7 @@ CoD.StartMenu_Identity.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 		},
 	})
 	Emblems.ButtonInternal.Title:setText("")
-	Emblems.ButtonInternal.Subtitle.SubtitleText:setText(LocalizeHash(0x4335B0D906D9B56))
+	Emblems.ButtonInternal.Subtitle.SubtitleText:setText(LocalizeHash(@"hash_74335B0D906D9B56"))
 	Emblems:subscribeToGlobalModel(f1_arg1, "PerController", "identityBadge.xuid", function(model)
 		local f23_local0 = model:get()
 		if f23_local0 ~= nil then
@@ -199,15 +199,15 @@ CoD.StartMenu_Identity.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	end)
 	f1_local5 = Emblems
 	CallingCards = Emblems.subscribeToModel
-	local ClanTagPC = Engine[0x8DF2E5447F384B9]()
+	local ClanTagPC = Engine[@"getglobalmodel"]()
 	CallingCards(f1_local5, ClanTagPC["lobbyRoot.lobbyNetworkMode"], function(f24_arg0, f24_arg1)
-		CoD.Menu.UpdateButtonShownState(f24_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f24_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	f1_local5 = Emblems
 	CallingCards = Emblems.subscribeToModel
-	ClanTagPC = Engine[0x8DF2E5447F384B9]()
+	ClanTagPC = Engine[@"getglobalmodel"]()
 	CallingCards(f1_local5, ClanTagPC["lobbyRoot.lobbyNav"], function(f25_arg0, f25_arg1)
-		CoD.Menu.UpdateButtonShownState(f25_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f25_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	Emblems:registerEventHandler("gain_focus", function(element, event)
 		local f26_local0 = nil
@@ -216,21 +216,21 @@ CoD.StartMenu_Identity.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 		elseif element.super.gainFocus then
 			f26_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f26_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(Emblems, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(Emblems, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if IsLive() and not IsUserContentRestricted(controller) then
-			OpenEmblemSelect(self, element, controller, Enum[0xBBD4F9E70101BA8][0x791C91FD2327632], menu, "false")
+			OpenEmblemSelect(self, element, controller, Enum[@"storagefiletype"][@"storage_emblems"], menu, "false")
 			PlaySoundAlias("uin_toggle_generic")
 			return true
 		else
-			OpenEmblemSelect(self, element, controller, Enum[0xBBD4F9E70101BA8][0xB909AC87BFB6D6C], menu, "false")
+			OpenEmblemSelect(self, element, controller, Enum[@"storagefiletype"][@"storage_default_emblems"], menu, "false")
 			PlaySoundAlias("uin_toggle_generic")
 			return true
 		end
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 		return true
 	end, false)
 	self:addElement(Emblems)
@@ -252,7 +252,7 @@ CoD.StartMenu_Identity.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	})
 	ClanTagPC = CallingCards
 	f1_local5 = CallingCards.subscribeToModel
-	local CornerPipTR = Engine[0x8DF2E5447F384B9]()
+	local CornerPipTR = Engine[@"getglobalmodel"]()
 	f1_local5(ClanTagPC, CornerPipTR["lobbyRoot.lobbyNetworkMode"], function(f31_arg0)
 		f1_arg0:updateElementState(CallingCards, {
 			name = "model_validation",
@@ -264,7 +264,7 @@ CoD.StartMenu_Identity.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	end, false)
 	ClanTagPC = CallingCards
 	f1_local5 = CallingCards.subscribeToModel
-	CornerPipTR = Engine[0x8DF2E5447F384B9]()
+	CornerPipTR = Engine[@"getglobalmodel"]()
 	f1_local5(ClanTagPC, CornerPipTR["lobbyRoot.lobbyNav"], function(f32_arg0)
 		f1_arg0:updateElementState(CallingCards, {
 			name = "model_validation",
@@ -276,7 +276,7 @@ CoD.StartMenu_Identity.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	end, false)
 	ClanTagPC = CallingCards
 	f1_local5 = CallingCards.subscribeToModel
-	CornerPipTR = Engine[0x4DF5CFBC1771947](f1_arg1)
+	CornerPipTR = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local5(ClanTagPC, CornerPipTR["CallingCardsIdentity.GetPublicProfileComplete"], function(f33_arg0)
 		f1_arg0:updateElementState(CallingCards, {
 			name = "model_validation",
@@ -287,7 +287,7 @@ CoD.StartMenu_Identity.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 		})
 	end, false)
 	CallingCards.Backing.Title:setText("")
-	CallingCards.Backing.Subtitle.SubtitleText:setText(LocalizeHash(0xED22CCD3920E18B))
+	CallingCards.Backing.Subtitle.SubtitleText:setText(LocalizeHash(@"hash_3ED22CCD3920E18B"))
 	CallingCards:registerEventHandler("gain_focus", function(element, event)
 		local f34_local0 = nil
 		if element.gainFocus then
@@ -295,10 +295,10 @@ CoD.StartMenu_Identity.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 		elseif element.super.gainFocus then
 			f34_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f34_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(CallingCards, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(CallingCards, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if IsInDefaultState(element) then
 			OpenCallingCards(self, element, controller, "", menu)
 			PlaySoundAlias("uin_toggle_generic")
@@ -307,7 +307,7 @@ CoD.StartMenu_Identity.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 		end
 	end, function(element, menu, controller)
 		if IsInDefaultState(element) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false
@@ -331,24 +331,24 @@ CoD.StartMenu_Identity.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	CornerPipTR = LUI.UIImage.new(0.5, 0.5, 578, 602, 0.5, 0.5, -384, -360)
 	CornerPipTR:setAlpha(0.05)
 	CornerPipTR:setZRot(-90)
-	CornerPipTR:setImage(RegisterImage(0x8DC834094E7A02C))
+	CornerPipTR:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_window_corner"))
 	self:addElement(CornerPipTR)
 	self.CornerPipTR = CornerPipTR
 	local CornerPipTL = LUI.UIImage.new(0.5, 0.5, -602, -578, 0.5, 0.5, -384, -360)
 	CornerPipTL:setAlpha(0.05)
-	CornerPipTL:setImage(RegisterImage(0x8DC834094E7A02C))
+	CornerPipTL:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_window_corner"))
 	self:addElement(CornerPipTL)
 	self.CornerPipTL = CornerPipTL
 	local CornerPipBR = LUI.UIImage.new(0.5, 0.5, 580, 604, 0.5, 0.5, 365.5, 389.5)
 	CornerPipBR:setAlpha(0.05)
 	CornerPipBR:setZRot(180)
-	CornerPipBR:setImage(RegisterImage(0x8DC834094E7A02C))
+	CornerPipBR:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_window_corner"))
 	self:addElement(CornerPipBR)
 	self.CornerPipBR = CornerPipBR
 	local CornerPipBL = LUI.UIImage.new(0.5, 0.5, -602, -578, 0.5, 0.5, 365.5, 389.5)
 	CornerPipBL:setAlpha(0.05)
 	CornerPipBL:setZRot(90)
-	CornerPipBL:setImage(RegisterImage(0x8DC834094E7A02C))
+	CornerPipBL:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_window_corner"))
 	self:addElement(CornerPipBL)
 	self.CornerPipBL = CornerPipBL
 	local TabbedScoreboardFuiBox = CoD.TabbedScoreboardFuiBox.new(f1_arg0, f1_arg1, 0.5, 0.5, 454, 566, 0.5, 0.5, -361.5, -345.5)

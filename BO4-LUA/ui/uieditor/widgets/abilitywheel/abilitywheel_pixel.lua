@@ -7,14 +7,14 @@ CoD.AbilityWheel_Pixel.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	self.id = "AbilityWheel_Pixel"
 	self.soundSet = "default"
 	local Image19 = LUI.UIImage.new(0, 0, 0, 12, 0, 0, 0, 12)
-	Image19:setImage(RegisterImage(0xA4E3A816ADAA8CD))
-	Image19:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Image19:setImage(RegisterImage(@"uie_t7_cp_hud_abilitywheel_pixel"))
+	Image19:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Image19)
 	self.Image19 = Image19
 	local Image20 = LUI.UIImage.new(0, 0, 0, 12, 0, 0, 0, 12)
 	Image20:setZoom(20)
-	Image20:setImage(RegisterImage(0xEBA372CF7EFA210))
-	Image20:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Image20:setImage(RegisterImage(@"uie_t7_cp_hud_abilitywheel_pixelblur"))
+	Image20:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Image20)
 	self.Image20 = Image20
 	if PostLoadFunc then

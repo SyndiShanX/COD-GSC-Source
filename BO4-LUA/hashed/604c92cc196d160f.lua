@@ -25,15 +25,15 @@ CoD.ReservesBribeStack.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	local FocusGlowPC = nil
 	FocusGlowPC = LUI.UIImage.new(0.5, 0.5, -240.5, 240.5, 0.5, 0.5, -362.5, 362.5)
 	FocusGlowPC:setAlpha(0)
-	FocusGlowPC:setImage(RegisterImage(0x8E79E4E42B6714C))
-	FocusGlowPC:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	FocusGlowPC:setImage(RegisterImage(@"uie_ui_menu_common_focus_glow_large"))
+	FocusGlowPC:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(FocusGlowPC)
 	self.FocusGlowPC = FocusGlowPC
 	local f1_local3 = nil
 	self.FocusGlow2 = LUI.UIElement.createFake()
 	local NineSliceBMFrame = LUI.UIImage.new(0, 1, -2, 2, 0, 1, -2, 2)
-	NineSliceBMFrame:setImage(RegisterImage(0x1AC151A09D526DC))
-	NineSliceBMFrame:setMaterial(LUI.UIImage.GetCachedMaterial(0x44484DDFAF5C093))
+	NineSliceBMFrame:setImage(RegisterImage(@"hash_71AC151A09D526DC"))
+	NineSliceBMFrame:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_normal"))
 	NineSliceBMFrame:setShaderVector(0, 0, 0, 0, 0)
 	NineSliceBMFrame:setupNineSliceShader(162, 52)
 	self:addElement(NineSliceBMFrame)
@@ -46,8 +46,8 @@ CoD.ReservesBribeStack.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	Title:setRGB(0.11, 0.11, 0.11)
 	Title:setTTF("ttmussels_demibold")
 	Title:setLetterSpacing(2)
-	Title:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Title:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	Title:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Title:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	Title:linkToElementModel(self, "name", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -59,8 +59,8 @@ CoD.ReservesBribeStack.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	local FocusBorder = LUI.UIImage.new(0, 1, -6, 6, 0, 1, -6, 6)
 	FocusBorder:setRGB(1, 0.75, 0.47)
 	FocusBorder:setAlpha(0)
-	FocusBorder:setImage(RegisterImage(0xCB07CCC28498CB2))
-	FocusBorder:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	FocusBorder:setImage(RegisterImage(@"uie_ui_menu_store_focus_frame"))
+	FocusBorder:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	FocusBorder:setShaderVector(0, 0, 0, 0, 0)
 	FocusBorder:setupNineSliceShader(18, 18)
 	self:addElement(FocusBorder)
@@ -96,7 +96,7 @@ CoD.ReservesBribeStack.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	ItemHintText:linkToElementModel(self, "desc", true, function(model)
 		local f8_local0 = model:get()
 		if f8_local0 ~= nil then
-			ItemHintText.textCenterAlign:setText(Engine[0xF9F1239CFD921FE](f8_local0))
+			ItemHintText.textCenterAlign:setText(Engine[@"hash_4F9F1239CFD921FE"](f8_local0))
 		end
 	end)
 	self:addElement(ItemHintText)
@@ -125,7 +125,7 @@ CoD.ReservesBribeStack.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	self.TimerRight = TimerRight
 	local PurchasedBanner = CoD.ContractPurchasedBanner.new(f1_arg0, f1_arg1, 0.5, 0.5, -75, 75, 1, 1, -46, -21)
 	PurchasedBanner:setAlpha(0)
-	PurchasedBanner.PurchasedTitle:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	PurchasedBanner.PurchasedTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	self:addElement(PurchasedBanner)
 	self.PurchasedBanner = PurchasedBanner
 	local ItemShopDiscountBanner = CoD.ItemShopDiscountBanner.new(f1_arg0, f1_arg1, 0, 0, 26, 237, 0, 0, 370.5, 396.5)
@@ -135,7 +135,7 @@ CoD.ReservesBribeStack.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	ItemShopDiscountBanner:linkToElementModel(self, "percentOff", true, function(model)
 		local f12_local0 = model:get()
 		if f12_local0 ~= nil then
-			ItemShopDiscountBanner.Promo:setText(ToUpper(LocalizeIntoString(0x650F08A0DD215DD, f12_local0)))
+			ItemShopDiscountBanner.Promo:setText(ToUpper(LocalizeIntoString(@"hash_4650F08A0DD215DD", f12_local0)))
 		end
 	end)
 	self:addElement(ItemShopDiscountBanner)

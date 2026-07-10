@@ -21,11 +21,11 @@ CoD.CallingCards_Stickerbook_BlackMarket.new = function(f1_arg0, f1_arg1, f1_arg
 	CallingCardGrid:setHorizontalCount(3)
 	CallingCardGrid:setVerticalCount(7)
 	CallingCardGrid:setSpacing(15)
-	CallingCardGrid:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	CallingCardGrid:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	CallingCardGrid:setVerticalCounter(CoD.verticalCounter)
 	CallingCardGrid:setDataSource("CallingCardsBlackMarket")
 	CallingCardGrid:linkToElementModel(CallingCardGrid, "owned", true, function(model, f2_arg1)
-		CoD.Menu.UpdateButtonShownState(f2_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f2_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	CallingCardGrid:registerEventHandler("list_item_lose_focus", function(element, event)
 		local f3_local0 = nil
@@ -39,10 +39,10 @@ CoD.CallingCards_Stickerbook_BlackMarket.new = function(f1_arg0, f1_arg1, f1_arg
 		elseif element.super.gainFocus then
 			f4_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f4_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(CallingCardGrid, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(CallingCardGrid, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "owned") then
 			CallingCards_SetPlayerBackground(menu, element, controller)
 			PlaySoundSetSound(self, "action")
@@ -52,7 +52,7 @@ CoD.CallingCards_Stickerbook_BlackMarket.new = function(f1_arg0, f1_arg1, f1_arg
 		end
 	end, function(element, menu, controller)
 		if CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "owned") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false

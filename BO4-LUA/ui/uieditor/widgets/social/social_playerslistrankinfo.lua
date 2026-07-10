@@ -10,7 +10,7 @@ CoD.Social_PlayersListRankInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	local rankText = LUI.UIText.new(0, 0, -41, 16, 0, 0, 8, 29)
 	rankText:setAlpha(0)
 	rankText:setTTF("0arame_mono_stencil")
-	rankText:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
+	rankText:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
 	rankText:linkToElementModel(self, "isParagon", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -61,7 +61,7 @@ CoD.Social_PlayersListRankInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	})
 	local f1_local4 = self
 	local f1_local5 = self.subscribeToModel
-	local f1_local6 = Engine[0x8DF2E5447F384B9]()
+	local f1_local6 = Engine[@"getglobalmodel"]()
 	f1_local5(f1_local4, f1_local6["lobbyRoot.rankMode"], function(f8_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

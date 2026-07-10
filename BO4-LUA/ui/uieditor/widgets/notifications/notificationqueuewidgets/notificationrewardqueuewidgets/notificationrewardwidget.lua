@@ -12,14 +12,14 @@ CoD.NotificationRewardWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local PixelBacking = LUI.UIImage.new(0, 0, 312, 384, 0, 0, 12, 84)
 	PixelBacking:setRGB(0.12, 0.12, 0.12)
-	PixelBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	PixelBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	PixelBacking:setShaderVector(0, 0, 0.5, 0, 0)
 	self:addElement(PixelBacking)
 	self.PixelBacking = PixelBacking
 	local PixelGrid = LUI.UIImage.new(0, 0, 312, 384, 0, 0, 12, 84)
 	PixelGrid:setAlpha(0.5)
-	PixelGrid:setImage(RegisterImage(0x311E811A3183347))
-	PixelGrid:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	PixelGrid:setImage(RegisterImage(@"uie_ui_hud_notifications_pixelpattern"))
+	PixelGrid:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	PixelGrid:setShaderVector(0, 0, 0, 0, 0)
 	PixelGrid:setupNineSliceShader(64, 64)
 	self:addElement(PixelGrid)
@@ -32,12 +32,12 @@ CoD.NotificationRewardWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	self.ImageScanline = ImageScanline
 	local Text = LUI.UIText.new(1, 1, -384, -82, 0.5, 0.5, -15, 15)
 	Text:setTTF("ttmussels_regular")
-	Text:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
+	Text:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
 	self:addElement(Text)
 	self.Text = Text
 	local highlight = LUI.UIImage.new(0, 0, 252, 444, 0, 0, -48, 144)
-	highlight:setImage(RegisterImage(0x5924CD83FB419A7))
-	highlight:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	highlight:setImage(RegisterImage(@"uie_t7_hud_notficationhighlight"))
+	highlight:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(highlight)
 	self.highlight = highlight
 	local Header = CoD.WeaponLevelUpHeaderStripe.new(f1_arg0, f1_arg1, 0, 0, 312, 384, 0, 0, 4, 12)
@@ -75,7 +75,7 @@ CoD.NotificationRewardWidget.__resetProperties = function(f6_arg0)
 	f6_arg0.highlight:setAlpha(1)
 	f6_arg0.highlight:setZRot(0)
 	f6_arg0.highlight:setScale(1, 1)
-	f6_arg0.highlight:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	f6_arg0.highlight:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	f6_arg0.Text:setAlpha(1)
 end
 CoD.NotificationRewardWidget.__clipsPerState = {
@@ -149,7 +149,7 @@ CoD.NotificationRewardWidget.__clipsPerState = {
 			f7_arg0.highlight:setAlpha(0)
 			f7_arg0.highlight:setZRot(0)
 			f7_arg0.highlight:setScale(0, 0)
-			f7_arg0.highlight:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+			f7_arg0.highlight:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 			f7_local1(f7_arg0.highlight)
 		end,
 		TimeUp = function(f18_arg0, f18_arg1)
@@ -160,15 +160,15 @@ CoD.NotificationRewardWidget.__clipsPerState = {
 					local f20_local0 = function(f21_arg0)
 						local f21_local0 = function(f22_arg0)
 							local f22_local0 = function(f23_arg0)
-								f23_arg0:beginAnimation(39, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+								f23_arg0:beginAnimation(39, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_out"])
 								f23_arg0:setAlpha(0)
 								f23_arg0:registerEventHandler("transition_complete_keyframe", f18_arg0.clipFinished)
 							end
-							f22_arg0:beginAnimation(40, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+							f22_arg0:beginAnimation(40, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_out"])
 							f22_arg0:setAlpha(0.6)
 							f22_arg0:registerEventHandler("transition_complete_keyframe", f22_local0)
 						end
-						f21_arg0:beginAnimation(59, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+						f21_arg0:beginAnimation(59, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_out"])
 						f21_arg0:setAlpha(0)
 						f21_arg0:registerEventHandler("transition_complete_keyframe", f21_local0)
 					end
@@ -186,15 +186,15 @@ CoD.NotificationRewardWidget.__clipsPerState = {
 				local f24_local0 = function(f25_arg0)
 					local f25_local0 = function(f26_arg0)
 						local f26_local0 = function(f27_arg0)
-							f27_arg0:beginAnimation(39, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+							f27_arg0:beginAnimation(39, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_out"])
 							f27_arg0:setAlpha(0)
 							f27_arg0:registerEventHandler("transition_complete_keyframe", f18_arg0.clipFinished)
 						end
-						f26_arg0:beginAnimation(40, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+						f26_arg0:beginAnimation(40, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_out"])
 						f26_arg0:setAlpha(0.6)
 						f26_arg0:registerEventHandler("transition_complete_keyframe", f26_local0)
 					end
-					f25_arg0:beginAnimation(59, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f25_arg0:beginAnimation(59, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_out"])
 					f25_arg0:setAlpha(0)
 					f25_arg0:registerEventHandler("transition_complete_keyframe", f25_local0)
 				end

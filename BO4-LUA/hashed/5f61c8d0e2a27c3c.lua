@@ -11,8 +11,8 @@ CoD.ZMSpecialWeapon_StageDescriptionInternal.new = function(f1_arg0, f1_arg1, f1
 	Name:setRGB(0.92, 0.89, 0.72)
 	Name:setTTF("ttmussels_demibold")
 	Name:setLetterSpacing(14)
-	Name:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
-	Name:setAlignment(Enum[0x7A5123B654282D2][0x70510683C22104B])
+	Name:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
+	Name:setAlignment(Enum[@"luialignment"][@"lui_alignment_bottom"])
 	Name:linkToElementModel(self, "itemName", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -24,8 +24,8 @@ CoD.ZMSpecialWeapon_StageDescriptionInternal.new = function(f1_arg0, f1_arg1, f1
 	local Description = LUI.UIText.new(0, 0, -108, 600, 0, 0, 45, 63)
 	Description:setRGB(0.8, 0.79, 0.78)
 	Description:setTTF("dinnext_regular")
-	Description:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
-	Description:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Description:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
+	Description:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	Description:linkToElementModel(self, "description", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then

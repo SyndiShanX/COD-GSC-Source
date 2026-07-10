@@ -16,10 +16,10 @@ CoD.Archives_Audio.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	AudioList:setWidgetType(CoD.ArchivesVideoButton)
 	AudioList:setVerticalCount(13)
 	AudioList:setSpacing(10)
-	AudioList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	AudioList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	AudioList:setDataSource("ArchivesAudioList")
 	AudioList:linkToElementModel(AudioList, "alias", true, function(model, f2_arg1)
-		CoD.Menu.UpdateButtonShownState(f2_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f2_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	AudioList:registerEventHandler("gain_focus", function(element, event)
 		local f3_local0 = nil
@@ -28,10 +28,10 @@ CoD.Archives_Audio.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 		elseif element.super.gainFocus then
 			f3_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f3_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(AudioList, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(AudioList, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if CoD.ModelUtility.IsSelfModelValueNonEmptyString(element, controller, "alias") and not IsElementInState(element, "MatureContentFiltered") then
 			CoD.CTUtility.PlayArchivesAudio(menu, controller, element)
 			return true
@@ -39,7 +39,7 @@ CoD.Archives_Audio.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 		end
 	end, function(element, menu, controller)
 		if CoD.ModelUtility.IsSelfModelValueNonEmptyString(element, controller, "alias") and not IsElementInState(element, "MatureContentFiltered") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xDDDA371285672BD, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/play", nil, nil)
 			return true
 		else
 			return false

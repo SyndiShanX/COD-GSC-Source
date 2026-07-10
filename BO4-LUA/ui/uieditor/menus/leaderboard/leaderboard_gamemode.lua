@@ -4,8 +4,8 @@ require("x64:81a24c5340caa1e")
 require("x64:26953ab49613c9")
 require("x64:7889ce1e3e2e8a")
 local PostLoadFunc = function(f1_arg0, f1_arg1)
-	f1_arg0:subscribeToModel(Engine[0xA798E4552F5E872](Engine[0x8DF2E5447F384B9](), "FilterInfo"), function(model)
-		f1_arg0.CurrentFilterInfo:setText(Engine[0x614D394F6F9A18D](model) or "")
+	f1_arg0:subscribeToModel(Engine[@"createmodel"](Engine[@"getglobalmodel"](), "FilterInfo"), function(model)
+		f1_arg0.CurrentFilterInfo:setText(Engine[@"getmodelvalue"](model) or "")
 	end)
 end
 CoD.Leaderboard_GameMode = InheritFrom(CoD.Menu)
@@ -28,11 +28,11 @@ LUI.createMenu.Leaderboard_GameMode = function(f3_arg0, f3_arg1)
 	self:addElement(TabFrame)
 	self.TabFrame = TabFrame
 	local MenuFrame = CoD.GenericMenuFrameIdentity.new(f3_local1, f3_arg0, 0, 1, 0, 0, 0, 1, 0, 0)
-	MenuFrame.CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(0xFE3665244ECF33B))
+	MenuFrame.CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(@"menu/leaderboards"))
 	MenuFrame:subscribeToGlobalModel(f3_arg0, "LobbyRoot", "lobbyTitle", function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
-			MenuFrame.CommonHeader.subtitle.subtitle:setText(Engine[0xF9F1239CFD921FE](f4_local0))
+			MenuFrame.CommonHeader.subtitle.subtitle:setText(Engine[@"hash_4F9F1239CFD921FE"](f4_local0))
 		end
 	end)
 	self.__on_menuOpened_MenuFrame = function(f5_arg0, f5_arg1, f5_arg2, f5_arg3)
@@ -61,7 +61,7 @@ LUI.createMenu.Leaderboard_GameMode = function(f3_arg0, f3_arg1)
 	end)
 	local TabBacking = GameModeTabs
 	local CurrentFilterInfo = GameModeTabs.subscribeToModel
-	local LeaderboardWarningText = Engine[0x4DF5CFBC1771947](f3_arg0)
+	local LeaderboardWarningText = Engine[@"getmodelforcontroller"](f3_arg0)
 	CurrentFilterInfo(TabBacking, LeaderboardWarningText.LastInput, function(f9_arg0)
 		f3_local1:updateElementState(GameModeTabs, {
 			name = "model_validation",
@@ -81,11 +81,11 @@ LUI.createMenu.Leaderboard_GameMode = function(f3_arg0, f3_arg1)
 	self.GameModeTabs = GameModeTabs
 	CurrentFilterInfo = LUI.UIText.new(0, 0, 1050, 1350, 0, 0, 172, 193)
 	CurrentFilterInfo:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
-	CurrentFilterInfo:setText(Engine[0xF9F1239CFD921FE](0x31CF0F51CCA3A27))
+	CurrentFilterInfo:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_631CF0F51CCA3A27"))
 	CurrentFilterInfo:setTTF("ttmussels_regular")
 	CurrentFilterInfo:setLetterSpacing(0.5)
-	CurrentFilterInfo:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
-	CurrentFilterInfo:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	CurrentFilterInfo:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
+	CurrentFilterInfo:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(CurrentFilterInfo)
 	self.CurrentFilterInfo = CurrentFilterInfo
 	TabBacking = CoD.CommonTabBarBacking.new(f3_local1, f3_arg0, 0, 1, 0, 0, 0, 0, 52, 89)
@@ -131,7 +131,7 @@ LUI.createMenu.Leaderboard_GameMode = function(f3_arg0, f3_arg1)
 		end
 		if CoD.LeaderboardUtility.IsLobbyLeaderboard(f3_arg0) then
 			ShowHeaderKickerAndIcon(f3_local1)
-			SetHeadingKickerText(0xDE4B1936ABC08E4)
+			SetHeadingKickerText(@"hash_5DE4B1936ABC08E4")
 			MenuHidesFreeCursor(f3_local1, f3_arg0)
 			PlaySoundAlias("uin_paint_decal_nav")
 		else
@@ -145,13 +145,13 @@ LUI.createMenu.Leaderboard_GameMode = function(f3_arg0, f3_arg1)
 		end
 		return f14_local0
 	end)
-	f3_local1:AddButtonCallbackFunction(self, f3_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], "ESCAPE", function(element, menu, controller, model)
+	f3_local1:AddButtonCallbackFunction(self, f3_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], "ESCAPE", function(element, menu, controller, model)
 		GoBack(self, controller)
 		ClearMenuSavedState(menu)
 		PlaySoundAlias("uin_paint_decal_nav")
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, "ESCAPE")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, "ESCAPE")
 		return true
 	end, false)
 	TabFrame.id = "TabFrame"

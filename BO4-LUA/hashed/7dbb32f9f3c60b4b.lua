@@ -29,21 +29,21 @@ CoD.SpecialistInfoCTOverallProgress.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	self.LeftProgress = LeftProgress
 	local Header = LUI.UIText.new(0, 1, 0, 0, 0, 0, 0, 24)
 	Header:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
-	Header:setText(LocalizeToUpperString(0x1F548D4609D9566))
+	Header:setText(LocalizeToUpperString(@"hash_51F548D4609D9566"))
 	Header:setTTF("ttmussels_regular")
 	Header:setLetterSpacing(5)
-	Header:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	Header:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	self:addElement(Header)
 	self.Header = Header
 	local DiffDesc = LUI.UIText.new(0, 1, 0, 0, 0, 0, 31, 49)
 	DiffDesc:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	DiffDesc:setAlpha(0.5)
 	DiffDesc:setTTF("ttmussels_regular")
-	DiffDesc:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	DiffDesc:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	DiffDesc:linkToElementModel(self, "difficulty", true, function(model)
 		local f5_local0 = model:get()
 		if f5_local0 ~= nil then
-			DiffDesc:setText(Engine[0xF9F1239CFD921FE](CoD.CTUtility.CTDifficultyToDesc(f5_local0)))
+			DiffDesc:setText(Engine[@"hash_4F9F1239CFD921FE"](CoD.CTUtility.CTDifficultyToDesc(f5_local0)))
 		end
 	end)
 	self:addElement(DiffDesc)

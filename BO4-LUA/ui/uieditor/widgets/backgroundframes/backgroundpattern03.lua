@@ -8,8 +8,8 @@ CoD.BackgroundPattern03.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Pattern = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	Pattern:setImage(RegisterImage(0xD53B84EF8D4D8B5))
-	Pattern:setMaterial(LUI.UIImage.GetCachedMaterial(0x73D72BCD14C2AAD))
+	Pattern:setImage(RegisterImage(@"uie_t7_menu_pattern_01"))
+	Pattern:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_tile_scroll_normal"))
 	Pattern:setShaderVector(0, 2.5, 1, 0, 0)
 	Pattern:setShaderVector(1, 0, 0, 0, 0)
 	self:addElement(Pattern)

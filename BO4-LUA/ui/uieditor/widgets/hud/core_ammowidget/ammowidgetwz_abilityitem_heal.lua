@@ -15,19 +15,19 @@ CoD.AmmoWidgetWZ_AbilityItem_Heal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	local Backing = LUI.UIImage.new(0.5, 0.5, -36, 32, 0.5, 0.5, -30, 30)
 	Backing:setRGB(0.34, 0.32, 0.2)
 	Backing:setAlpha(0)
-	Backing:setImage(RegisterImage(0xF3974F8EE78598C))
+	Backing:setImage(RegisterImage(@"uie_ui_hud_wz_hud_core_player_widget_ability_backer"))
 	self:addElement(Backing)
 	self.Backing = Backing
 	local Glow = LUI.UIImage.new(0, 0, 9, 61, 0, 0, 7, 59)
 	Glow:setAlpha(0)
-	Glow:setImage(RegisterImage(0x613317835FD35EB))
-	Glow:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Glow:setImage(RegisterImage(@"hash_3613317835FD35EB"))
+	Glow:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Glow)
 	self.Glow = Glow
 	local ClockMeterAdd = LUI.UIImage.new(0.5, 0.5, -35, 31, 0.5, 0.5, -29, 29)
 	ClockMeterAdd:setRGB(0, 0, 0)
 	ClockMeterAdd:setAlpha(0)
-	ClockMeterAdd:setMaterial(LUI.UIImage.GetCachedMaterial(0xD5CA1A25ED87F4F))
+	ClockMeterAdd:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_clock_normal"))
 	ClockMeterAdd:setShaderVector(1, 0.5, 0, 0, 0)
 	ClockMeterAdd:setShaderVector(2, 0.5, 0, 0, 0)
 	ClockMeterAdd:setShaderVector(3, 0, 0, 0, 0)
@@ -41,8 +41,8 @@ CoD.AmmoWidgetWZ_AbilityItem_Heal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	self:addElement(ClockMeterAdd)
 	self.ClockMeterAdd = ClockMeterAdd
 	local Box = LUI.UIImage.new(0, 0, -1, 69, 0, 0, -5, 65)
-	Box:setImage(RegisterImage(0x2A20E3F9478C322))
-	Box:setMaterial(LUI.UIImage.GetCachedMaterial(0xF755127C95CF5B6))
+	Box:setImage(RegisterImage(@"uie_ui_hud_core_abeg_widget_box"))
+	Box:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_F755127C95CF5B6"))
 	Box:setShaderVector(0, 2, 0, 0, 0)
 	self:addElement(Box)
 	self.Box = Box
@@ -96,11 +96,11 @@ CoD.AmmoWidgetWZ_AbilityItem_Heal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 		{
 			stateName = "Hidden",
 			condition = function(menu, element, event)
-				local f9_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2])
+				local f9_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_in_killcam"])
 				if not f9_local0 then
-					f9_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F])
+					f9_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_play_of_the_match"])
 					if not f9_local0 then
-						f9_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xC57360571B0917E])
+						f9_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_team_spectator"])
 					end
 				end
 				return f9_local0
@@ -139,7 +139,7 @@ CoD.AmmoWidgetWZ_AbilityItem_Heal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	})
 	local QuickEquipCycleString = HeroAbilityUseString
 	local HeroAbilityHoldString = HeroAbilityUseString.subscribeToModel
-	local HeroAbilityHoldStringPC = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local HeroAbilityHoldStringPC = Engine[@"getmodelforcontroller"](f1_arg1)
 	HeroAbilityHoldString(QuickEquipCycleString, HeroAbilityHoldStringPC.PlayerSettingsUpdate, function(f15_arg0)
 		f1_arg0:updateElementState(HeroAbilityUseString, {
 			name = "model_validation",
@@ -151,38 +151,38 @@ CoD.AmmoWidgetWZ_AbilityItem_Heal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	end, false)
 	QuickEquipCycleString = HeroAbilityUseString
 	HeroAbilityHoldString = HeroAbilityUseString.subscribeToModel
-	HeroAbilityHoldStringPC = Engine[0x4DF5CFBC1771947](f1_arg1)
-	HeroAbilityHoldString(QuickEquipCycleString, HeroAbilityHoldStringPC["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2]], function(f16_arg0)
+	HeroAbilityHoldStringPC = Engine[@"getmodelforcontroller"](f1_arg1)
+	HeroAbilityHoldString(QuickEquipCycleString, HeroAbilityHoldStringPC["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"]], function(f16_arg0)
 		f1_arg0:updateElementState(HeroAbilityUseString, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f16_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"],
 		})
 	end, false)
 	QuickEquipCycleString = HeroAbilityUseString
 	HeroAbilityHoldString = HeroAbilityUseString.subscribeToModel
-	HeroAbilityHoldStringPC = Engine[0x4DF5CFBC1771947](f1_arg1)
-	HeroAbilityHoldString(QuickEquipCycleString, HeroAbilityHoldStringPC["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F]], function(f17_arg0)
+	HeroAbilityHoldStringPC = Engine[@"getmodelforcontroller"](f1_arg1)
+	HeroAbilityHoldString(QuickEquipCycleString, HeroAbilityHoldStringPC["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_play_of_the_match"]], function(f17_arg0)
 		f1_arg0:updateElementState(HeroAbilityUseString, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f17_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_play_of_the_match"],
 		})
 	end, false)
 	QuickEquipCycleString = HeroAbilityUseString
 	HeroAbilityHoldString = HeroAbilityUseString.subscribeToModel
-	HeroAbilityHoldStringPC = Engine[0x4DF5CFBC1771947](f1_arg1)
-	HeroAbilityHoldString(QuickEquipCycleString, HeroAbilityHoldStringPC["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xC57360571B0917E]], function(f18_arg0)
+	HeroAbilityHoldStringPC = Engine[@"getmodelforcontroller"](f1_arg1)
+	HeroAbilityHoldString(QuickEquipCycleString, HeroAbilityHoldStringPC["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_team_spectator"]], function(f18_arg0)
 		f1_arg0:updateElementState(HeroAbilityUseString, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f18_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xC57360571B0917E],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_team_spectator"],
 		})
 	end, false)
 	HeroAbilityUseString:appendEventHandler("input_source_changed", function(f19_arg0, f19_arg1)
@@ -191,7 +191,7 @@ CoD.AmmoWidgetWZ_AbilityItem_Heal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	end)
 	QuickEquipCycleString = HeroAbilityUseString
 	HeroAbilityHoldString = HeroAbilityUseString.subscribeToModel
-	HeroAbilityHoldStringPC = Engine[0x4DF5CFBC1771947](f1_arg1)
+	HeroAbilityHoldStringPC = Engine[@"getmodelforcontroller"](f1_arg1)
 	HeroAbilityHoldString(QuickEquipCycleString, HeroAbilityHoldStringPC.LastInput, function(f20_arg0)
 		f1_arg0:updateElementState(HeroAbilityUseString, {
 			name = "model_validation",
@@ -201,9 +201,9 @@ CoD.AmmoWidgetWZ_AbilityItem_Heal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 			modelName = "LastInput",
 		})
 	end, false)
-	HeroAbilityUseString.KBMText:setText(Engine[0xF9F1239CFD921FE](0xEC61C43D90FCF56))
-	HeroAbilityUseString.GamepadText:setText(Engine[0xF9F1239CFD921FE](0x9E6A8D0F83F4FC6))
-	HeroAbilityUseString.GamepadText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	HeroAbilityUseString.KBMText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_2EC61C43D90FCF56"))
+	HeroAbilityUseString.GamepadText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_29E6A8D0F83F4FC6"))
+	HeroAbilityUseString.GamepadText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	self:addElement(HeroAbilityUseString)
 	self.HeroAbilityUseString = HeroAbilityUseString
 	HeroAbilityHoldString = CoD.AbilityHoldToActivate.new(f1_arg0, f1_arg1, 0.5, 0.5, -100, 100, 0, 0, -50, -1)
@@ -272,7 +272,7 @@ CoD.AmmoWidgetWZ_AbilityItem_Heal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	})
 	local LED = QuickEquipCycleString
 	HeroAbilityHoldStringPC = QuickEquipCycleString.subscribeToModel
-	local stackCount = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local stackCount = Engine[@"getmodelforcontroller"](f1_arg1)
 	HeroAbilityHoldStringPC(LED, stackCount.PlayerSettingsUpdate, function(f30_arg0)
 		f1_arg0:updateElementState(QuickEquipCycleString, {
 			name = "model_validation",
@@ -284,7 +284,7 @@ CoD.AmmoWidgetWZ_AbilityItem_Heal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	end, false)
 	LED = QuickEquipCycleString
 	HeroAbilityHoldStringPC = QuickEquipCycleString.subscribeToModel
-	stackCount = Engine[0x8DF2E5447F384B9]()
+	stackCount = Engine[@"getglobalmodel"]()
 	HeroAbilityHoldStringPC(LED, stackCount["storageGlobalRoot.user_settings"], function(f31_arg0)
 		f1_arg0:updateElementState(QuickEquipCycleString, {
 			name = "model_validation",
@@ -296,7 +296,7 @@ CoD.AmmoWidgetWZ_AbilityItem_Heal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	end, false)
 	LED = QuickEquipCycleString
 	HeroAbilityHoldStringPC = QuickEquipCycleString.subscribeToModel
-	stackCount = Engine[0x4DF5CFBC1771947](f1_arg1)
+	stackCount = Engine[@"getmodelforcontroller"](f1_arg1)
 	HeroAbilityHoldStringPC(LED, stackCount["hudItems.inventory.open"], function(f32_arg0)
 		f1_arg0:updateElementState(QuickEquipCycleString, {
 			name = "model_validation",
@@ -312,7 +312,7 @@ CoD.AmmoWidgetWZ_AbilityItem_Heal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	end)
 	LED = QuickEquipCycleString
 	HeroAbilityHoldStringPC = QuickEquipCycleString.subscribeToModel
-	stackCount = Engine[0x4DF5CFBC1771947](f1_arg1)
+	stackCount = Engine[@"getmodelforcontroller"](f1_arg1)
 	HeroAbilityHoldStringPC(LED, stackCount.LastInput, function(f34_arg0)
 		f1_arg0:updateElementState(QuickEquipCycleString, {
 			name = "model_validation",
@@ -324,7 +324,7 @@ CoD.AmmoWidgetWZ_AbilityItem_Heal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	end, false)
 	QuickEquipCycleString.KBMText:setText("")
 	QuickEquipCycleString.KBMText:setLetterSpacing(2)
-	QuickEquipCycleString.GamepadText:setText(Engine[0xF9F1239CFD921FE](0xFB00D233B6DAFE4))
+	QuickEquipCycleString.GamepadText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_4FB00D233B6DAFE4"))
 	QuickEquipCycleString.GamepadText:setTTF("ttmussels_regular")
 	QuickEquipCycleString.GamepadText:setLetterSpacing(2)
 	self:addElement(QuickEquipCycleString)
@@ -343,7 +343,7 @@ CoD.AmmoWidgetWZ_AbilityItem_Heal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	LED = LUI.UIImage.new(0, 0, 0.5, 68.5, 0, 0, -4.5, 63.5)
 	LED:setRGB(0, 0, 0)
 	LED:setAlpha(0.2)
-	LED:setImage(RegisterImage(0xD6566449C808FFB))
+	LED:setImage(RegisterImage(@"uie_ui_hud_wz_hud_core_player_widget_led_heal"))
 	self:addElement(LED)
 	self.LED = LED
 	stackCount = CoD.WarzoneAbilityItemCounter.new(f1_arg0, f1_arg1, 0, 0, 38.5, 74.5, 0, 0, 41, 65)
@@ -387,7 +387,7 @@ CoD.AmmoWidgetWZ_AbilityItem_Heal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	HeroAbilityHoldStringPC:linkToElementModel(self, "powerRatio", true, HeroAbilityHoldStringPC.__Alpha)
 	f1_local14 = HeroAbilityHoldStringPC
 	f1_local15 = HeroAbilityHoldStringPC.subscribeToModel
-	f1_local16 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local16 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local15(f1_local14, f1_local16["GameplayFeedbackSettings.hideRadiationHold"], HeroAbilityHoldStringPC.__Alpha)
 	self:mergeStateConditions({
 		{
@@ -399,7 +399,7 @@ CoD.AmmoWidgetWZ_AbilityItem_Heal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 		{
 			stateName = "InUse",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "state", Enum[0xF0447219F15F7F3][0x1873A43E9D1620E])
+				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "state", Enum[@"weapongadgetstates"][@"player_ability_state_inuse"])
 			end,
 		},
 		{
@@ -411,19 +411,19 @@ CoD.AmmoWidgetWZ_AbilityItem_Heal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 		{
 			stateName = "PowerBasedEmptyCharging",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "state", Enum[0xF0447219F15F7F3][0x958A6962CA8F9B7]) and CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "powerRatio", 0)
+				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "state", Enum[@"weapongadgetstates"][@"player_ability_state_charging"]) and CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "powerRatio", 0)
 			end,
 		},
 		{
 			stateName = "PowerBasedCharging",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "state", Enum[0xF0447219F15F7F3][0x958A6962CA8F9B7])
+				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "state", Enum[@"weapongadgetstates"][@"player_ability_state_charging"])
 			end,
 		},
 		{
 			stateName = "PowerBased",
 			condition = function(menu, element, event)
-				return not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "state", Enum[0xF0447219F15F7F3][0x29529861EAA8D1C])
+				return not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "state", Enum[@"weapongadgetstates"][@"player_ability_state_hidden"])
 			end,
 		},
 	})
@@ -503,7 +503,7 @@ CoD.AmmoWidgetWZ_AbilityItem_Heal.__resetProperties = function(f53_arg0)
 	f53_arg0.PowerBasedImageUnavailable:setAlpha(0)
 	f53_arg0.PowerBasedImageAvailable:setAlpha(1)
 	f53_arg0.Glow:setAlpha(0)
-	f53_arg0.Glow:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	f53_arg0.Glow:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	f53_arg0.Box:setRGB(1, 1, 1)
 	f53_arg0.Box:setAlpha(1)
 	f53_arg0.LED:setRGB(0, 0, 0)
@@ -657,7 +657,7 @@ CoD.AmmoWidgetWZ_AbilityItem_Heal.__clipsPerState = {
 			f60_arg0:setupElementClipCounter(6)
 			f60_arg0.Glow:completeAnimation()
 			f60_arg0.Glow:setAlpha(0.1)
-			f60_arg0.Glow:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+			f60_arg0.Glow:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 			f60_arg0.clipFinished(f60_arg0.Glow)
 			f60_arg0.Box:completeAnimation()
 			f60_arg0.Box:setRGB(0, 0, 0)
@@ -700,7 +700,7 @@ CoD.AmmoWidgetWZ_AbilityItem_Heal.__clipsPerState = {
 			f62_arg0:setupElementClipCounter(8)
 			f62_arg0.Glow:completeAnimation()
 			f62_arg0.Glow:setAlpha(0.1)
-			f62_arg0.Glow:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+			f62_arg0.Glow:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 			f62_arg0.clipFinished(f62_arg0.Glow)
 			f62_arg0.Box:completeAnimation()
 			f62_arg0.Box:setRGB(0, 0, 0)

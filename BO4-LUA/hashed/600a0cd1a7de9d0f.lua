@@ -6,7 +6,7 @@ function TestModifyFunction(f1_arg0)
 end
 function FractionToPercentageRounded(f2_arg0)
 	if f2_arg0 and f2_arg0 ~= 0x0 and f2_arg0 ~= "" then
-		return Engine[0xF9F1239CFD921FE](0x16A7A1F8ECC8C64, math.floor(f2_arg0 * 100 + 0.5))
+		return Engine[@"hash_4F9F1239CFD921FE"](@"mpui/percent", math.floor(f2_arg0 * 100 + 0.5))
 	else
 		return 0x0
 	end
@@ -64,27 +64,27 @@ function SecondsAsTimePlayedString(f9_arg0)
 		local f9_local1 = math.floor(f9_arg0 / 3600)
 		f9_arg0 = f9_arg0 - f9_local1 * 3600
 		local f9_local2 = math.floor(f9_arg0 / 60)
-		return Engine[0xF9F1239CFD921FE](0xFEBB5BF51FE663, f9_local0, f9_local1, f9_local2, f9_arg0 - f9_local2 * 60)
+		return Engine[@"hash_4F9F1239CFD921FE"](0xFEBB5BF51FE663, f9_local0, f9_local1, f9_local2, f9_arg0 - f9_local2 * 60)
 	else
-		return Engine[0xF9F1239CFD921FE](0xFEBB5BF51FE663, 0, 0, 0, 0)
+		return Engine[@"hash_4F9F1239CFD921FE"](0xFEBB5BF51FE663, 0, 0, 0, 0)
 	end
 end
 function UTCAsDate(f10_arg0)
 	if tonumber(f10_arg0) > 0 then
-		return Engine[0x952C108C4897E9A](f10_arg0)
+		return Engine[@"hash_5952C108C4897E9A"](f10_arg0)
 	else
 		return ""
 	end
 end
 function UTCStringAsDate(f11_arg0)
-	return Engine[0x72B3321101CFE15](f11_arg0, false, false)
+	return Engine[@"hash_672B3321101CFE15"](f11_arg0, false, false)
 end
 function UTCStringAsShortDate(f12_arg0)
-	return Engine[0x72B3321101CFE15](f12_arg0, false, true)
+	return Engine[@"hash_672B3321101CFE15"](f12_arg0, false, true)
 end
 function DistanceInMetricString(f13_arg0)
 	local f13_local0 = math.floor(f13_arg0 / 1000)
-	return Engine[0xF9F1239CFD921FE](0x7453D11DFE4B5A9, f13_local0, f13_arg0 - f13_local0 * 1000)
+	return Engine[@"hash_4F9F1239CFD921FE"](@"hash_17453D11DFE4B5A9", f13_local0, f13_arg0 - f13_local0 * 1000)
 end
 function GetRightAlignedCharacter(f14_arg0, f14_arg1, f14_arg2)
 	local f14_local0 = f14_arg2:len() - f14_arg1 - f14_arg0
@@ -124,13 +124,13 @@ function ImageIsOnlyOnDurangoOrPc(f19_arg0)
 	return f19_local0 or "$white"
 end
 function AppendCurrentSessionMode(f20_arg0)
-	return f20_arg0 .. "_" .. string.lower(Engine[0x5AA137994DA7513]())
+	return f20_arg0 .. "_" .. string.lower(Engine[@"getmodename"]())
 end
 function AppendCurrentSessionModeOrTheater(f21_arg0)
-	if Engine[0xA55C3ACD0D2BCF0]() then
+	if Engine[@"isdemoplaying"]() then
 		return f21_arg0 .. "_theater"
 	else
-		return f21_arg0 .. "_" .. string.lower(Engine[0x5AA137994DA7513]())
+		return f21_arg0 .. "_" .. string.lower(Engine[@"getmodename"]())
 	end
 end
 function NumberAsPercentRounded(f22_arg0)
@@ -140,19 +140,19 @@ function NumberAsPercentRounded(f22_arg0)
 	elseif f22_arg0 > 0 and f22_local0 == 0 then
 		f22_local0 = 1
 	end
-	return Engine[0xF9F1239CFD921FE](0x16A7A1F8ECC8C64, tostring(f22_local0))
+	return Engine[@"hash_4F9F1239CFD921FE"](@"mpui/percent", tostring(f22_local0))
 end
 function NumberAsPercent(f23_arg0)
-	return Engine[0xF9F1239CFD921FE](0x16A7A1F8ECC8C64, tostring(f23_arg0))
+	return Engine[@"hash_4F9F1239CFD921FE"](@"mpui/percent", tostring(f23_arg0))
 end
 function LocalizeString(f24_arg0)
-	return Engine[0xED84C33EC5F01EA](f24_arg0)
+	return Engine[@"localize"](f24_arg0)
 end
 function LocalizeHash(f25_arg0)
-	return Engine[0xF9F1239CFD921FE](f25_arg0)
+	return Engine[@"hash_4F9F1239CFD921FE"](f25_arg0)
 end
 function LocalizeIntoString(f26_arg0, f26_arg1)
-	return Engine[0xF9F1239CFD921FE](f26_arg0, f26_arg1)
+	return Engine[@"hash_4F9F1239CFD921FE"](f26_arg0, f26_arg1)
 end
 function LocalizeIntoStringIfNotEmpty(f27_arg0, f27_arg1)
 	local f27_local0
@@ -163,16 +163,16 @@ function LocalizeIntoStringIfNotEmpty(f27_arg0, f27_arg1)
 			return f27_local0
 		end
 	end
-	f27_local0 = Engine[0xF9F1239CFD921FE](f27_arg0, f27_arg1)
+	f27_local0 = Engine[@"hash_4F9F1239CFD921FE"](f27_arg0, f27_arg1)
 end
 function LocalizeToUpperString(f28_arg0)
-	return Engine[0xB03220D3A4F3E38](Engine[0xF9F1239CFD921FE](f28_arg0))
+	return Engine[@"toupper"](Engine[@"hash_4F9F1239CFD921FE"](f28_arg0))
 end
 function ConvertToUpperString(f29_arg0)
-	return Engine[0xB03220D3A4F3E38](f29_arg0)
+	return Engine[@"toupper"](f29_arg0)
 end
 function ToUpper(f30_arg0)
-	return Engine[0xB03220D3A4F3E38](f30_arg0)
+	return Engine[@"toupper"](f30_arg0)
 end
 function AppendString(f31_arg0, f31_arg1)
 	return f31_arg1 .. f31_arg0
@@ -198,24 +198,24 @@ function LanguageOverrideNumberForScale(f34_arg0, f34_arg1, f34_arg2, f34_arg3)
 	end
 end
 function SessionModeOverrideNumber(f35_arg0, f35_arg1, f35_arg2)
-	if Engine[0x3EAC408F958FF05]() == f35_arg0 then
+	if Engine[@"currentsessionmode"]() == f35_arg0 then
 		local f35_local0 = f35_arg1
 	end
 	return f35_local0 or f35_arg2
 end
 function AppendLocalizeString(f36_arg0, f36_arg1)
-	return f36_arg1 .. Engine[0xED84C33EC5F01EA](f36_arg0)
+	return f36_arg1 .. Engine[@"localize"](f36_arg0)
 end
 function PrependString(f37_arg0, f37_arg1)
 	return f37_arg0 .. f37_arg1
 end
 function PrependLocalizeString(f38_arg0, f38_arg1)
-	return Engine[0xF9F1239CFD921FE](f38_arg0) .. f38_arg1
+	return Engine[@"hash_4F9F1239CFD921FE"](f38_arg0) .. f38_arg1
 end
 function PrependToLocalizeStringIfNotEmpty(f39_arg0, f39_arg1)
 	local f39_local0
 	if f39_arg1 ~= "" and f39_arg1 ~= 0x0 then
-		f39_local0 = f39_arg0 .. Engine[0xF9F1239CFD921FE](f39_arg1)
+		f39_local0 = f39_arg0 .. Engine[@"hash_4F9F1239CFD921FE"](f39_arg1)
 		if not f39_local0 then
 		else
 			return f39_local0
@@ -224,16 +224,16 @@ function PrependToLocalizeStringIfNotEmpty(f39_arg0, f39_arg1)
 	f39_local0 = ""
 end
 function PrependLocalizedStringWithSeparator(f40_arg0, f40_arg1, f40_arg2)
-	return Engine[0xF9F1239CFD921FE](f40_arg0) .. f40_arg1 .. f40_arg2
+	return Engine[@"hash_4F9F1239CFD921FE"](f40_arg0) .. f40_arg1 .. f40_arg2
 end
 function PrependLevelTypeStringWithSeparator(f41_arg0, f41_arg1)
-	local f41_local0 = 0x99A97D1A6F94031
-	if Engine[0x3EAC408F958FF05]() == Enum[0x9C0C2196D8313A0][0xBF1DCC8138A9D39] then
-		f41_local0 = 0xE15E03CF165A930
+	local f41_local0 = @"hash_499A97D1A6F94031"
+	if Engine[@"currentsessionmode"]() == Enum[@"emodes"][@"mode_warzone"] then
+		f41_local0 = @"hash_3E15E03CF165A930"
 	elseif LuaUtils.IsArenaMode() then
-		f41_local0 = 0x3370355189B42A7
+		f41_local0 = @"arena/rank"
 	end
-	return Engine[0xF9F1239CFD921FE](f41_local0) .. f41_arg0 .. f41_arg1
+	return Engine[@"hash_4F9F1239CFD921FE"](f41_local0) .. f41_arg0 .. f41_arg1
 end
 function SplitString(f42_arg0, f42_arg1)
 	return unpack(LUI.splitString(f42_arg1, f42_arg0))
@@ -246,17 +246,17 @@ function StringAsClanTag(f43_arg0)
 	end
 end
 function PrependClanTagToHostname(f44_arg0, f44_arg1)
-	return StringAsClanTag(Engine[0x614D394F6F9A18D](Engine[0x40E824FE270E174](f44_arg0, "clantag"))) .. f44_arg1
+	return StringAsClanTag(Engine[@"getmodelvalue"](Engine[@"getmodel"](f44_arg0, "clantag"))) .. f44_arg1
 end
 function InlineStringAsClanTag(f45_arg0)
 	if not f45_arg0 or f45_arg0 == "" then
 		return ""
 	else
-		return Engine[0xF9F1239CFD921FE](0x7A487C443E58143, f45_arg0)
+		return Engine[@"hash_4F9F1239CFD921FE"](@"hash_47A487C443E58143", f45_arg0)
 	end
 end
 function GetFirstSignedInController(f46_arg0)
-	return Engine[0xF9F1239CFD921FE](0xFAACA5179AA8A57, Engine[0x54689B3A7B3899E](0))
+	return Engine[@"hash_4F9F1239CFD921FE"](@"hash_1FAACA5179AA8A57", Engine[@"getgamertagforcontroller"](0))
 end
 function Negate(f47_arg0)
 	return 1 - f47_arg0
@@ -352,12 +352,12 @@ function ConsoleColorFromIndex(f63_arg0, f63_arg1)
 		g = 1,
 		b = 1,
 	}
-	if f63_arg1 == Enum[0x97A8DF5F2FA8BD5][0xF51088437AB5AF5] then
+	if f63_arg1 == Enum[@"cacheduicolors"][@"cached_ui_color_enemy"] then
 		f63_local0 = CoD.TeamUtility.GetColorSetEnemyOrShoutCasterColor(f63_arg0)
-	elseif f63_arg1 == Enum[0x97A8DF5F2FA8BD5][0x4D3BDE8AD3D7704] then
+	elseif f63_arg1 == Enum[@"cacheduicolors"][@"cached_ui_color_friendly"] then
 		f63_local0 = CoD.TeamUtility.GetColorSetFriendlyOrShoutCasterColor(f63_arg0)
-	elseif f63_arg1 ~= Enum[0x97A8DF5F2FA8BD5][0x4A8B270BE295E3E] then
-		local f63_local1, f63_local2, f63_local3 = Engine[0xF8C039759157EA2](f63_arg0, f63_arg1)
+	elseif f63_arg1 ~= Enum[@"cacheduicolors"][@"cached_ui_color_invalid"] then
+		local f63_local1, f63_local2, f63_local3 = Engine[@"hash_1F8C039759157EA2"](f63_arg0, f63_arg1)
 		f63_local0 = {
 			r = f63_local1,
 			g = f63_local2,
@@ -367,9 +367,9 @@ function ConsoleColorFromIndex(f63_arg0, f63_arg1)
 	return f63_local0.r, f63_local0.g, f63_local0.b
 end
 function RedForHighGPUTemperature(f64_arg0, f64_arg1, f64_arg2, f64_arg3, f64_arg4)
-	local f64_local0 = Engine[0xA798E4552F5E872](Engine[0x8DF2E5447F384B9](), "PCTelemetry.GPUTemperature")
+	local f64_local0 = Engine[@"createmodel"](Engine[@"getglobalmodel"](), "PCTelemetry.GPUTemperature")
 	f64_local0 = f64_local0:get()
-	local f64_local1 = Engine[0xA798E4552F5E872](Engine[0x8DF2E5447F384B9](), "PCTelemetry.showGPUTemp")
+	local f64_local1 = Engine[@"createmodel"](Engine[@"getglobalmodel"](), "PCTelemetry.showGPUTemp")
 	if f64_local0 >= 85 then
 		f64_local1:set(1)
 		f64_arg2 = 1
@@ -377,13 +377,13 @@ function RedForHighGPUTemperature(f64_arg0, f64_arg1, f64_arg2, f64_arg3, f64_ar
 		f64_arg4 = 0
 		f64_arg0.LabelIsRed = true
 	elseif f64_arg0.LabelIsRed then
-		Engine[0x83C9B5DE1D9371](f64_local1, Engine[0xD4D7317F380395F](f64_arg1, 0x866C1C9ACD412B6) or 0)
+		Engine[@"setmodelvalue"](f64_local1, Engine[@"profileint"](f64_arg1, @"com_show_gpu_temperature") or 0)
 		f64_arg0.LabelIsRed = nil
 	end
 	return f64_arg2, f64_arg3, f64_arg4
 end
 function CodPointsColor(f65_arg0, f65_arg1, f65_arg2, f65_arg3, f65_arg4)
-	local f65_local0 = CoD.SafeGetModelValue(Engine[0x4DF5CFBC1771947](f65_arg1), f65_arg0)
+	local f65_local0 = CoD.SafeGetModelValue(Engine[@"getmodelforcontroller"](f65_arg1), f65_arg0)
 	if f65_local0 and f65_local0 < 0 then
 		return 1, 0, 0
 	else
@@ -484,42 +484,42 @@ function UnitsToMeters(f78_arg0)
 	end
 end
 function LocalizeStringWithDatasource(f79_arg0, f79_arg1, f79_arg2)
-	return Engine[0xF9F1239CFD921FE](f79_arg2, CoD.SafeGetModelValue(Engine[0x4DF5CFBC1771947](f79_arg1), f79_arg0))
+	return Engine[@"hash_4F9F1239CFD921FE"](f79_arg2, CoD.SafeGetModelValue(Engine[@"getmodelforcontroller"](f79_arg1), f79_arg0))
 end
 function LocalizeStringWithParameter(f80_arg0, f80_arg1)
-	return Engine[0xF9F1239CFD921FE](f80_arg0, f80_arg1)
+	return Engine[@"hash_4F9F1239CFD921FE"](f80_arg0, f80_arg1)
 end
 function LocalizeStringWithParameterAndStripBattletag(f81_arg0, f81_arg1)
-	return Engine[0xF9F1239CFD921FE](f81_arg0, CoD.SocialUtility.CleanGamerTag(f81_arg1))
+	return Engine[@"hash_4F9F1239CFD921FE"](f81_arg0, CoD.SocialUtility.CleanGamerTag(f81_arg1))
 end
 function NumAbs(f82_arg0)
 	return tostring(math.abs(tonumber(f82_arg0)))
 end
 function GetBubbleGumPackNameFromPackIndex(f83_arg0, f83_arg1)
-	return Engine[0x8E3CB087BD6EF56](f83_arg0, f83_arg1)
+	return Engine[@"getbubblegumpackname"](f83_arg0, f83_arg1)
 end
 function GetClientName(f84_arg0, f84_arg1)
 	if type(f84_arg1) ~= "number" then
 		return ""
 	else
-		return CoD.SocialUtility.CleanGamerTag(Engine[0x7DC6B423FDDBCAD](f84_arg0, f84_arg1))
+		return CoD.SocialUtility.CleanGamerTag(Engine[@"getplayernameforclientnum"](f84_arg0, f84_arg1))
 	end
 end
 function GetClientClantag(f85_arg0, f85_arg1)
 	if type(f85_arg1) ~= "number" then
 		return ""
 	else
-		return Engine[0xF152471A3D15A55](f85_arg0, f85_arg1)
+		return Engine[@"getclantagforclientnum"](f85_arg0, f85_arg1)
 	end
 end
 function GetClientNameAndClanTag(f86_arg0, f86_arg1)
 	return GetClientClantag(f86_arg0, f86_arg1) .. GetClientName(f86_arg0, f86_arg1)
 end
 function GetLocalClientXuid(f87_arg0, f87_arg1)
-	return Engine[0x93B19E01B1FD1C7](f87_arg0)
+	return Engine[@"getxuid64"](f87_arg0)
 end
 function StorageLookup(f88_arg0, f88_arg1, f88_arg2)
-	local f88_local0 = Engine[0x8BF970606552F4C](f88_arg0, f88_arg2)
+	local f88_local0 = Engine[@"storagegetbuffer"](f88_arg0, f88_arg2)
 	if f88_local0 == nil then
 		return
 	end
@@ -569,7 +569,7 @@ function CombatRecordGetComparisonTwoStatRatioForItemIndex(f94_arg0, f94_arg1, f
 end
 function CombatRecordGetItemKillsOrAssistsForItemIndex(f95_arg0, f95_arg1)
 	local f95_local0 = "kills"
-	if Engine[0x3D0E017B2C4C7E3](f95_arg1, CoD.GetCombatRecordMode()) then
+	if Engine[@"isitempassive"](f95_arg1, CoD.GetCombatRecordMode()) then
 		f95_local0 = "assists"
 	end
 	local f95_local1 = CoD.GetCombatRecordStatForPath(CoD.GetCombatRecordStats(f95_arg0), "ItemStats." .. f95_arg1 .. ".stats." .. f95_local0)
@@ -581,7 +581,7 @@ function CombatRecordGetItemKillsOrAssistsForItemIndex(f95_arg0, f95_arg1)
 end
 function CombatRecordGetComparisonItemKillsOrAssistsForItemIndex(f96_arg0, f96_arg1)
 	local f96_local0 = "kills"
-	if Engine[0x3D0E017B2C4C7E3](f96_arg1, CoD.GetCombatRecordMode()) then
+	if Engine[@"isitempassive"](f96_arg1, CoD.GetCombatRecordMode()) then
 		f96_local0 = "assists"
 	end
 	local f96_local1 = nil
@@ -597,7 +597,7 @@ function CombatRecordGetComparisonItemKillsOrAssistsForItemIndex(f96_arg0, f96_a
 end
 function CombatRecordGetKillsOrAssistsRatioForItemIndex(f97_arg0, f97_arg1, f97_arg2)
 	local f97_local0 = "kills"
-	if Engine[0x3D0E017B2C4C7E3](f97_arg2, CoD.GetCombatRecordMode()) then
+	if Engine[@"isitempassive"](f97_arg2, CoD.GetCombatRecordMode()) then
 		f97_local0 = "assists"
 	end
 	local f97_local1 = CoD.GetCombatRecordStats(f97_arg0)
@@ -605,7 +605,7 @@ function CombatRecordGetKillsOrAssistsRatioForItemIndex(f97_arg0, f97_arg1, f97_
 end
 function CombatRecordGetComparisonKillsOrAssistsRatioForItemIndex(f98_arg0, f98_arg1, f98_arg2)
 	local f98_local0 = "kills"
-	if Engine[0x3D0E017B2C4C7E3](f98_arg2, CoD.GetCombatRecordMode()) then
+	if Engine[@"isitempassive"](f98_arg2, CoD.GetCombatRecordMode()) then
 		f98_local0 = "assists"
 	end
 	local f98_local1, f98_local2 = nil
@@ -617,18 +617,18 @@ function CombatRecordGetComparisonKillsOrAssistsRatioForItemIndex(f98_arg0, f98_
 	return CoD.GetDisplayRatioFromTwoStats(f98_local1, f98_local2)
 end
 function RankToLevelNumber(f99_arg0, f99_arg1)
-	return Engine[0xE1DE4A6CE92B4FD](f99_arg1, CoD.ModeStringToMode(f99_arg0))
+	return Engine[@"getrankdisplaylevel"](f99_arg1, CoD.ModeStringToMode(f99_arg0))
 end
 function LevelStringFromStorage(f100_arg0, f100_arg1, f100_arg2)
 	local f100_local0 = CoD.ModeStringToMode(f100_arg1)
 	if LuaUtils.GameModeAvailable(f100_local0) then
 		if IsGameModeParagonCapable(f100_local0) and CoD.PrestigeUtility.GetPrestigeCap(f100_local0) <= StorageLookup(f100_arg0, "playerstatslist.plevel.statvalue", f100_arg2) then
-			return Engine[0xB03220D3A4F3E38](Engine[0xF9F1239CFD921FE](0x21235EA457AB637, Engine[0x801A572E417CC01](StorageLookup(f100_arg0, "playerstatslist.paragon_rank.statvalue", f100_arg2), f100_local0)))
+			return Engine[@"toupper"](Engine[@"hash_4F9F1239CFD921FE"](@"hash_621235EA457AB637", Engine[@"getparagonrankdisplaylevel"](StorageLookup(f100_arg0, "playerstatslist.paragon_rank.statvalue", f100_arg2), f100_local0)))
 		else
-			return Engine[0xB03220D3A4F3E38](Engine[0xF9F1239CFD921FE](0x21235EA457AB637, Engine[0xE1DE4A6CE92B4FD](StorageLookup(f100_arg0, "playerstatslist.rank.statvalue", f100_arg2), f100_local0)))
+			return Engine[@"toupper"](Engine[@"hash_4F9F1239CFD921FE"](@"hash_621235EA457AB637", Engine[@"getrankdisplaylevel"](StorageLookup(f100_arg0, "playerstatslist.rank.statvalue", f100_arg2), f100_local0)))
 		end
 	else
-		return Engine[0xB03220D3A4F3E38](Engine[0xF9F1239CFD921FE](0x21235EA457AB637, 0))
+		return Engine[@"toupper"](Engine[@"hash_4F9F1239CFD921FE"](@"hash_621235EA457AB637", 0))
 	end
 end
 function RankTitleFromStorage(f101_arg0, f101_arg1, f101_arg2)
@@ -641,13 +641,13 @@ function GetRankOrParagonIcon(f102_arg0, f102_arg1, f102_arg2, f102_arg3, f102_a
 	if IsGameModeParagonCapable(f102_local0) and f102_local2 == CoD.PrestigeUtility.GetPrestigeCap(f102_local0) then
 		local f102_local3 = StorageLookup(f102_arg0, f102_arg3, f102_arg5)
 		if f102_local3 ~= CoD.PrestigeUtility.INVALID_PARAGON_ICON_ID then
-			return Engine[0x142BF2BEA87722E](f102_local3, f102_local0)
+			return Engine[@"getparagoniconbyid"](f102_local3, f102_local0)
 		end
 	end
-	return Engine[0x9C6922557618920](f102_local1, f102_local2, f102_local0)
+	return Engine[@"getrankicon"](f102_local1, f102_local2, f102_local0)
 end
 function GetRankIconLarge(f103_arg0)
-	if not f103_arg0 or f103_arg0 == "" or f103_arg0 == 0x0 or f103_arg0 == 0x7615068F50B3D66 or f103_arg0 == 0x214ECBA8C04D44C then
+	if not f103_arg0 or f103_arg0 == "" or f103_arg0 == 0x0 or f103_arg0 == @"blacktransparent" or f103_arg0 == 0x214ECBA8C04D44C then
 		return 0x214ECBA8C04D44C
 	else
 		return f103_arg0 .. "_large"
@@ -655,31 +655,31 @@ function GetRankIconLarge(f103_arg0)
 end
 function LocalServerStatusToString(f104_arg0)
 	if f104_arg0 == 0 then
-		return 0xDA680012C01968D
+		return @"menu/lobby"
 	else
-		return 0xEF105DFE1446B3B
+		return @"menu/in_game"
 	end
 end
 function PresenceToModeString(f105_arg0)
 	local f105_local0 = tonumber(f105_arg0)
-	if f105_local0 == Enum[0x4BBA402DE649132][0x1CF21FD793411B9] then
-		return 0x72BB745FED1CD7E
-	elseif f105_local0 == Enum[0x4BBA402DE649132][0xA2184EBB293AF2D] or f105_local0 == Enum[0x4BBA402DE649132][0xC14960E60DA36B7] then
-		return 0x8E783C525F2FA8
-	elseif f105_local0 >= Enum[0x4BBA402DE649132][0x69F9F19327AE3B3] and f105_local0 <= Enum[0x4BBA402DE649132][0x59DAD56E9325476] then
-		return 0xC00E43A2AA46CC4
-	elseif f105_local0 >= Enum[0x4BBA402DE649132][0x1DB40BC5D7A26F2] and f105_local0 <= Enum[0x4BBA402DE649132][0xDD9D1D4A601036C] then
-		return LuaUtils.GetDisplayNameForEMode(Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A])
-	elseif f105_local0 >= Enum[0x4BBA402DE649132][0x1632587246C118A] and f105_local0 <= Enum[0x4BBA402DE649132][0xEDDB0D016B3F54] then
-		return LuaUtils.GetDisplayNameForEMode(Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5])
-	elseif f105_local0 >= Enum[0x4BBA402DE649132][0x61619C03C7E6934] and f105_local0 <= Enum[0x4BBA402DE649132][0x886E7F57ED1ED3A] then
-		return 0x62CDF997F090DB1
-	elseif f105_local0 >= Enum[0x4BBA402DE649132][0x79F90DEF3681532] and f105_local0 <= Enum[0x4BBA402DE649132][0x35923F6DC7C09AC] then
-		return LuaUtils.GetDisplayNameForEMode(Enum[0x9C0C2196D8313A0][0xBF1DCC8138A9D39])
-	elseif f105_local0 >= Enum[0x4BBA402DE649132][0x5EEADE3AFEF0F50] and f105_local0 <= Enum[0x4BBA402DE649132][0xAE1F1FC5A87498E] then
+	if f105_local0 == Enum[@"presencetitle"][@"hash_51CF21FD793411B9"] then
+		return @"menu/offline"
+	elseif f105_local0 == Enum[@"presencetitle"][@"hash_7A2184EBB293AF2D"] or f105_local0 == Enum[@"presencetitle"][@"hash_6C14960E60DA36B7"] then
+		return @"menu/online"
+	elseif f105_local0 >= Enum[@"presencetitle"][@"hash_669F9F19327AE3B3"] and f105_local0 <= Enum[@"presencetitle"][@"hash_659DAD56E9325476"] then
+		return @"menu/main_menu"
+	elseif f105_local0 >= Enum[@"presencetitle"][@"hash_21DB40BC5D7A26F2"] and f105_local0 <= Enum[@"presencetitle"][@"hash_5DD9D1D4A601036C"] then
+		return LuaUtils.GetDisplayNameForEMode(Enum[@"emodes"][@"mode_zombies"])
+	elseif f105_local0 >= Enum[@"presencetitle"][@"hash_41632587246C118A"] and f105_local0 <= Enum[@"presencetitle"][0xEDDB0D016B3F54] then
+		return LuaUtils.GetDisplayNameForEMode(Enum[@"emodes"][@"mode_multiplayer"])
+	elseif f105_local0 >= Enum[@"presencetitle"][@"hash_361619C03C7E6934"] and f105_local0 <= Enum[@"presencetitle"][@"hash_886E7F57ED1ED3A"] then
+		return @"menu/campaign"
+	elseif f105_local0 >= Enum[@"presencetitle"][@"hash_179F90DEF3681532"] and f105_local0 <= Enum[@"presencetitle"][@"hash_435923F6DC7C09AC"] then
+		return LuaUtils.GetDisplayNameForEMode(Enum[@"emodes"][@"mode_warzone"])
+	elseif f105_local0 >= Enum[@"presencetitle"][@"hash_65EEADE3AFEF0F50"] and f105_local0 <= Enum[@"presencetitle"][@"hash_4AE1F1FC5A87498E"] then
 		return 0x7D527CD96A3419
 	else
-		return 0x2C79EA24AB1A2BA
+		return @"hash_2C79EA24AB1A2BA"
 	end
 end
 function StickyPartyStatusToString(f106_arg0)
@@ -687,7 +687,7 @@ function StickyPartyStatusToString(f106_arg0)
 	if f106_local0 ~= nil then
 		return f106_local0
 	else
-		return 0x2C79EA24AB1A2BA
+		return @"hash_2C79EA24AB1A2BA"
 	end
 end
 function LobbyJoinableToString(f107_arg0)
@@ -695,7 +695,7 @@ function LobbyJoinableToString(f107_arg0)
 	if f107_local0 ~= nil then
 		return f107_local0
 	else
-		return 0x34F5097A432DED7
+		return @"hash_634F5097A432DED7"
 	end
 end
 function PlatformPresenceToLocalizedString(f108_arg0)
@@ -724,13 +724,13 @@ end
 function LocalizeWithNatType(f111_arg0)
 	local f111_local0 = tonumber(f111_arg0)
 	if f111_local0 == 1 then
-		return Engine[0xF9F1239CFD921FE](0xBE02352B7C7ADA9, Engine[0xF9F1239CFD921FE](0x6ED205D2902BCCD))
+		return Engine[@"hash_4F9F1239CFD921FE"](@"hash_1BE02352B7C7ADA9", Engine[@"hash_4F9F1239CFD921FE"](@"hash_26ED205D2902BCCD"))
 	elseif f111_local0 == 2 then
-		return Engine[0xF9F1239CFD921FE](0xBE02352B7C7ADA9, Engine[0xF9F1239CFD921FE](0x6382C5E67F9468C))
+		return Engine[@"hash_4F9F1239CFD921FE"](@"hash_1BE02352B7C7ADA9", Engine[@"hash_4F9F1239CFD921FE"](@"hash_6382C5E67F9468C"))
 	elseif f111_local0 == 3 then
-		return Engine[0xF9F1239CFD921FE](0xBE02352B7C7ADA9, Engine[0xF9F1239CFD921FE](0x9AA44209F0D1934))
+		return Engine[@"hash_4F9F1239CFD921FE"](@"hash_1BE02352B7C7ADA9", Engine[@"hash_4F9F1239CFD921FE"](@"hash_59AA44209F0D1934"))
 	else
-		return Engine[0xF9F1239CFD921FE](0xBE02352B7C7ADA9, Engine[0xF9F1239CFD921FE](0xBB00DBB82414EFB))
+		return Engine[@"hash_4F9F1239CFD921FE"](@"hash_1BE02352B7C7ADA9", Engine[@"hash_4F9F1239CFD921FE"](@"hash_2BB00DBB82414EFB"))
 	end
 end
 function PartyPrivacy(f112_arg0)
@@ -738,16 +738,16 @@ function PartyPrivacy(f112_arg0)
 end
 function DivideByScoreLimit(f113_arg0, f113_arg1, f113_arg2, f113_arg3, f113_arg4)
 	local f113_local0 = nil
-	if Dvar[0xFF54369D6573B91]:get() == "dom" or Dvar[0xFF54369D6573B91]:get() == "ball" or Dvar[0xFF54369D6573B91]:get() == "dom_dm" then
-		local f113_local1 = Engine[0xDBC2AD5002B261B](0x1BE65BD13DB0766) or 0
-		local f113_local2 = Engine[0xDBC2AD5002B261B](0x521DCAB34B80E72) or 0
+	if Dvar[@"g_gametype"]:get() == "dom" or Dvar[@"g_gametype"]:get() == "ball" or Dvar[@"g_gametype"]:get() == "dom_dm" then
+		local f113_local1 = Engine[@"getgametypesetting"](@"roundlimit") or 0
+		local f113_local2 = Engine[@"getgametypesetting"](@"roundscorelimit") or 0
 		if f113_local1 > 2 then
-			f113_local0 = (Engine[0x9672E391E0BF3DD](f113_arg0) + 1) * f113_local2
+			f113_local0 = (Engine[@"getroundsplayed"](f113_arg0) + 1) * f113_local2
 		else
 			f113_local0 = f113_local1 * f113_local2
 		end
 	else
-		f113_local0 = CoD.SafeGetModelValue(Engine[0x4DF5CFBC1771947](f113_arg0), "gameScore.scoreLimit")
+		f113_local0 = CoD.SafeGetModelValue(Engine[@"getmodelforcontroller"](f113_arg0), "gameScore.scoreLimit")
 	end
 	if f113_local0 then
 		return f113_arg1 / f113_local0, f113_arg2 / f113_local0, f113_arg3 / f113_local0, f113_arg4 / f113_local0
@@ -756,28 +756,28 @@ function DivideByScoreLimit(f113_arg0, f113_arg1, f113_arg2, f113_arg3, f113_arg
 	end
 end
 function SessionModeToLocalizedSessionMode(f114_arg0)
-	local f114_local0 = 0x55D96CC762EABDD
-	if f114_arg0 == Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A] then
-		f114_local0 = 0xB06081B8B4567F2
-	elseif f114_arg0 == Enum[0x9C0C2196D8313A0][0x60063C67132EB69] then
-		f114_local0 = 0x62CDF997F090DB1
+	local f114_local0 = @"menu/multiplayer"
+	if f114_arg0 == Enum[@"emodes"][@"mode_zombies"] then
+		f114_local0 = @"menu/zombies"
+	elseif f114_arg0 == Enum[@"emodes"][@"mode_campaign"] then
+		f114_local0 = @"menu/campaign"
 	end
-	return Engine[0xF9F1239CFD921FE](f114_local0)
+	return Engine[@"hash_4F9F1239CFD921FE"](f114_local0)
 end
 function SessionModeToUnlocalizedSessionModeCaps(f115_arg0)
-	local f115_local0 = 0x55D96CC762EABDD
-	if f115_arg0 == Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A] then
-		f115_local0 = 0xB06081B8B4567F2
-	elseif f115_arg0 == Enum[0x9C0C2196D8313A0][0x60063C67132EB69] then
-		f115_local0 = 0x62CDF997F090DB1
+	local f115_local0 = @"menu/multiplayer"
+	if f115_arg0 == Enum[@"emodes"][@"mode_zombies"] then
+		f115_local0 = @"menu/zombies"
+	elseif f115_arg0 == Enum[@"emodes"][@"mode_campaign"] then
+		f115_local0 = @"menu/campaign"
 	end
 	return f115_local0
 end
 function MapNameToLocalizedMapName(f116_arg0)
-	return Engine[0xB03220D3A4F3E38](CoD.MapUtility.GetLocalizedMapValue(f116_arg0, "mapName", ""))
+	return Engine[@"toupper"](CoD.MapUtility.GetLocalizedMapValue(f116_arg0, "mapName", ""))
 end
 function MapNameToLocalizedMapDetailedName(f117_arg0, f117_arg1, f117_arg2)
-	local f117_local0 = Engine[0xB03220D3A4F3E38](CoD.MapUtility.GetLocalizedMapValue(f117_arg2, f117_arg1, ""))
+	local f117_local0 = Engine[@"toupper"](CoD.MapUtility.GetLocalizedMapValue(f117_arg2, f117_arg1, ""))
 	if f117_local0 and f117_local0 ~= 0x0 then
 		return CoD.StoreUtility.PrependPurchaseIconIfNeeded(f117_arg0, f117_arg2, f117_local0)
 	else
@@ -785,7 +785,7 @@ function MapNameToLocalizedMapDetailedName(f117_arg0, f117_arg1, f117_arg2)
 	end
 end
 function MapNameToLocalizedMapDetailedNameIfPurchasable(f118_arg0, f118_arg1, f118_arg2, f118_arg3)
-	local f118_local0 = Engine[0xB03220D3A4F3E38](CoD.MapUtility.GetLocalizedMapValue(f118_arg3, f118_arg2, ""))
+	local f118_local0 = Engine[@"toupper"](CoD.MapUtility.GetLocalizedMapValue(f118_arg3, f118_arg2, ""))
 	if f118_local0 and f118_local0 ~= 0x0 then
 		return f118_local0
 	else
@@ -798,7 +798,7 @@ end
 function MapNameToLocalizedMapDetailedDescription(f120_arg0, f120_arg1)
 	local f120_local0 = CoD.MapUtility.GetLocalizedMapValue(f120_arg1, "mapDescription", "")
 	if f120_local0 and f120_local0 ~= "" then
-		return CoD.StoreUtility.AddUpsellToDescriptionIfNeeded(f120_arg0, f120_arg1, Engine[0xF9F1239CFD921FE](f120_local0))
+		return CoD.StoreUtility.AddUpsellToDescriptionIfNeeded(f120_arg0, f120_arg1, Engine[@"hash_4F9F1239CFD921FE"](f120_local0))
 	else
 		return ""
 	end
@@ -813,11 +813,11 @@ function GameTypeToLocalizedGameType(f123_arg0)
 	if f123_arg0 == nil or f123_arg0 == "" or f123_arg0 == 0x0 then
 		return ""
 	else
-		local f123_local0 = Engine[0xEA74FA7EE46E195](f123_arg0)
+		local f123_local0 = Engine[@"getgametypeinfo"](f123_arg0)
 		if f123_local0.nameRefCaps == nil then
 			return ""
 		else
-			return Engine[0xF9F1239CFD921FE](f123_local0.nameRefCaps)
+			return Engine[@"hash_4F9F1239CFD921FE"](f123_local0.nameRefCaps)
 		end
 	end
 end
@@ -825,11 +825,11 @@ function GameTypeToLocalizedGameTypeDescription(f124_arg0)
 	if f124_arg0 == nil or f124_arg0 == "" or f124_arg0 == 0x0 then
 		return ""
 	else
-		local f124_local0 = Engine[0xEA74FA7EE46E195](f124_arg0)
+		local f124_local0 = Engine[@"getgametypeinfo"](f124_arg0)
 		if f124_local0.descriptionRef == nil then
 			return ""
 		else
-			return Engine[0xF9F1239CFD921FE](f124_local0.descriptionRef)
+			return Engine[@"hash_4F9F1239CFD921FE"](f124_local0.descriptionRef)
 		end
 	end
 end
@@ -837,25 +837,25 @@ function GameTypeToImage(f125_arg0)
 	if f125_arg0 == nil or f125_arg0 == "" then
 		return ""
 	else
-		local f125_local0 = Engine[0xEA74FA7EE46E195](f125_arg0)
+		local f125_local0 = Engine[@"getgametypeinfo"](f125_arg0)
 		return f125_local0.image
 	end
 end
 function GetGametypeImage(f126_arg0)
-	return GameTypeToImage(Engine[0x69811927938FCD7]())
+	return GameTypeToImage(Engine[@"lobbygetgametype"]())
 end
 function LocalizedGameType(f127_arg0)
-	local f127_local0 = Engine[0xEA74FA7EE46E195](Engine[0x69811927938FCD7]())
-	return f127_local0.nameRefCaps and Engine[0xF9F1239CFD921FE](f127_local0.nameRefCaps) or ""
+	local f127_local0 = Engine[@"getgametypeinfo"](Engine[@"lobbygetgametype"]())
+	return f127_local0.nameRefCaps and Engine[@"hash_4F9F1239CFD921FE"](f127_local0.nameRefCaps) or ""
 end
 function GetGameModeOnMapName(f128_arg0)
-	return CoD.BaseUtility.GetGameModeOnMapNameString(Engine[0x69811927938FCD7](), Engine[0xE67E7253CC272C9]())
+	return CoD.BaseUtility.GetGameModeOnMapNameString(Engine[@"lobbygetgametype"](), Engine[@"lobbygetmap"]())
 end
 function GetGameMode(f129_arg0)
-	local f129_local0 = Engine[0xEA74FA7EE46E195](Engine[0x69811927938FCD7]())
+	local f129_local0 = Engine[@"getgametypeinfo"](Engine[@"lobbygetgametype"]())
 	local f129_local1
 	if f129_local0 then
-		f129_local1 = Engine[0xF9F1239CFD921FE](f129_local0.nameRef)
+		f129_local1 = Engine[@"hash_4F9F1239CFD921FE"](f129_local0.nameRef)
 		if not f129_local1 then
 		else
 			return f129_local1
@@ -864,7 +864,7 @@ function GetGameMode(f129_arg0)
 	f129_local1 = ""
 end
 function GetMapName(f130_arg0)
-	local f130_local0 = Engine[0xE67E7253CC272C9]()
+	local f130_local0 = Engine[@"lobbygetmap"]()
 	return CoD.MapUtility.GetLocalizedMapValue(f130_local0, "mapName", f130_local0)
 end
 function GetHeroIndexForClientNum(f131_arg0, f131_arg1)
@@ -872,7 +872,7 @@ function GetHeroIndexForClientNum(f131_arg0, f131_arg1)
 	if f131_local0 == -1 then
 		return 0
 	else
-		local f131_local1 = Engine[0xEE799A4C64E4559](f131_arg0, f131_local0)
+		local f131_local1 = Engine[@"getheroindexforclientnum"](f131_arg0, f131_local0)
 		if f131_local1 ~= nil then
 			return f131_local1
 		else
@@ -881,12 +881,12 @@ function GetHeroIndexForClientNum(f131_arg0, f131_arg1)
 	end
 end
 function GetCharacterDisplayNameByIndex(f132_arg0)
-	return CoD.PlayerRoleUtility.GetCharacterDisplayNameByIndex(f132_arg0, Engine[0x3EAC408F958FF05]())
+	return CoD.PlayerRoleUtility.GetCharacterDisplayNameByIndex(f132_arg0, Engine[@"currentsessionmode"]())
 end
 function GetPositionDraftStatePortraitByIndex(f133_arg0, f133_arg1)
 	local f133_local0 = f133_arg1
 	local f133_local1 = f133_arg0
-	local f133_local2 = CoD.PlayerRoleUtility.GetCachedHeroInfo(Engine[0x3EAC408F958FF05](), f133_local0)
+	local f133_local2 = CoD.PlayerRoleUtility.GetCachedHeroInfo(Engine[@"currentsessionmode"](), f133_local0)
 	local f133_local3 = nil
 	if f133_local2 and f133_local2.positionDraftPortrait then
 		f133_local3 = f133_local2.positionDraftPortrait
@@ -903,7 +903,7 @@ function GetPositionDraftStatePortraitByIndex(f133_arg0, f133_arg1)
 	return f133_local3 or "$blacktransparent"
 end
 function GetPositionDraftIconByIndex(f134_arg0)
-	local f134_local0 = CoD.PlayerRoleUtility.GetCachedHeroInfo(Engine[0x3EAC408F958FF05](), f134_arg0)
+	local f134_local0 = CoD.PlayerRoleUtility.GetCachedHeroInfo(Engine[@"currentsessionmode"](), f134_arg0)
 	if f134_local0 == nil or f134_local0.positionDraftIcon == nil then
 		return "$blacktransparent"
 	else
@@ -911,39 +911,39 @@ function GetPositionDraftIconByIndex(f134_arg0)
 	end
 end
 function GetStoryMomentHintForFocusedCharacter(f135_arg0, f135_arg1)
-	local f135_local0 = Engine[0x4DF5CFBC1771947](f135_arg0)
+	local f135_local0 = Engine[@"getmodelforcontroller"](f135_arg0)
 	f135_local0 = f135_local0:create("PositionDraft.focusedCharacterIndex")
 	f135_local0 = f135_local0:get()
 	if f135_local0 == nil or f135_local0 <= 0 then
 		return ""
 	end
-	for f135_local4, f135_local5 in ipairs(CoD.PlayerRoleUtility.GetHeroList(Engine[0x3EAC408F958FF05]())) do
+	for f135_local4, f135_local5 in ipairs(CoD.PlayerRoleUtility.GetHeroList(Engine[@"currentsessionmode"]())) do
 		if f135_local5.bodyIndex == f135_local0 then
-			return Engine[0xF9F1239CFD921FE](0x2B2F5CD924F5F0D, Engine[0xF9F1239CFD921FE](f135_local5.displayName))
+			return Engine[@"hash_4F9F1239CFD921FE"](@"hash_32B2F5CD924F5F0D", Engine[@"hash_4F9F1239CFD921FE"](f135_local5.displayName))
 		end
 	end
 	return ""
 end
 function GetPrestigeTitleForPLevelAndMode(f136_arg0, f136_arg1)
 	if f136_arg1 == CoD.PrestigeUtility.GetPrestigeCap(CoD.ModeStringToMode(f136_arg0)) then
-		return Engine[0xF9F1239CFD921FE](0xD87A39C0FE06CA1)
+		return Engine[@"hash_4F9F1239CFD921FE"](@"menu/prestige_master")
 	elseif f136_arg1 > 0 then
-		return Engine[0xF9F1239CFD921FE](0x910399F02006FB7, f136_arg1)
+		return Engine[@"hash_4F9F1239CFD921FE"](@"hash_4910399F02006FB7", f136_arg1)
 	else
 		return ""
 	end
 end
 function GetPrestigeTitleText(f137_arg0, f137_arg1)
 	if IsMaxPrestigeLevel(f137_arg0) then
-		return Engine[0xF9F1239CFD921FE](0x754A8D073F00C06)
+		return Engine[@"hash_4F9F1239CFD921FE"](@"hash_7754A8D073F00C06")
 	else
 		local f137_local0 = CoD.PrestigeUtility.GetCurrentPLevel(f137_arg0) + 1
 		if IsAtXPCap(f137_arg0) and f137_local0 ~= CoD.PrestigeUtility.GetPrestigeCap(CoD.PrestigeUtility.GetPrestigeGameMode()) then
-			return Engine[0xF9F1239CFD921FE](0xE574BBAD7F9CEAE, f137_local0)
+			return Engine[@"hash_4F9F1239CFD921FE"](@"hash_5E574BBAD7F9CEAE", f137_local0)
 		elseif f137_local0 == CoD.PrestigeUtility.GetPrestigeCap(CoD.PrestigeUtility.GetPrestigeGameMode()) then
-			return Engine[0xF9F1239CFD921FE](0xD87A39C0FE06CA1)
+			return Engine[@"hash_4F9F1239CFD921FE"](@"menu/prestige_master")
 		else
-			return Engine[0xF9F1239CFD921FE](0x910399F02006FB7, f137_local0)
+			return Engine[@"hash_4F9F1239CFD921FE"](@"hash_4910399F02006FB7", f137_local0)
 		end
 	end
 end
@@ -961,11 +961,11 @@ function SetToDisabledIfNotAtXPCap(f139_arg0, f139_arg1)
 	return f139_arg1
 end
 function GetPermanentUnlockTokenText(f140_arg0, f140_arg1)
-	local f140_local0 = 0xF57ABF99A89DCDD
+	local f140_local0 = @"hash_7F57ABF99A89DCDD"
 	if f140_arg1 == 1 then
-		f140_local0 = 0x2DCDC8722C33D24
+		f140_local0 = @"hash_42DCDC8722C33D24"
 	end
-	return Engine[0xF9F1239CFD921FE](f140_local0, f140_arg1)
+	return Engine[@"hash_4F9F1239CFD921FE"](f140_local0, f140_arg1)
 end
 function SetToParagonColorIfPrestigeMasterByRank(f141_arg0, f141_arg1, f141_arg2, f141_arg3)
 	if IsInParagonCapableGameMode() then
@@ -1022,23 +1022,23 @@ function FileshareGetDownloadProgress(f147_arg0)
 	if not IsInTheaterMode() then
 		return ""
 	end
-	local f147_local0 = Engine[0xA798E4552F5E872](Engine[0x8DF2E5447F384B9](), "lobbyRoot.theaterDownloadPercent")
+	local f147_local0 = Engine[@"createmodel"](Engine[@"getglobalmodel"](), "lobbyRoot.theaterDownloadPercent")
 	if f147_local0 then
-		local f147_local1 = Engine[0x614D394F6F9A18D](f147_local0)
+		local f147_local1 = Engine[@"getmodelvalue"](f147_local0)
 		if f147_local1 ~= nil then
-			return Engine[0xF9F1239CFD921FE](0x658F66BBA1E1ADF, f147_local1)
+			return Engine[@"hash_4F9F1239CFD921FE"](@"hash_4658F66BBA1E1ADF", f147_local1)
 		end
 	end
 	return ""
 end
 function GetImageViewerParams(f148_arg0, f148_arg1)
-	return Enum[0xBC604DA292437E4][Engine[0xC53F8D38DF9042B](f148_arg0)], f148_arg1
+	return Enum[@"screenshotviewtype"][Engine[@"converttoxhash"](f148_arg0)], f148_arg1
 end
 function GetObjectiveProperty(f149_arg0, f149_arg1)
 	local f149_local0 = f149_arg1 and CoD.HUDUtility.GetCachedObjective(f149_arg1)
 	local f149_local1
 	if f149_local0 then
-		f149_local1 = f149_local0[Engine[0xC53F8D38DF9042B](f149_arg0)]
+		f149_local1 = f149_local0[Engine[@"converttoxhash"](f149_arg0)]
 		if not f149_local1 then
 		else
 			return f149_local1
@@ -1059,11 +1059,11 @@ function GetObjectiveXHashProperty(f150_arg0, f150_arg1)
 	f150_local1 = 0x0
 end
 function LocalizeWithKeyBinding(f151_arg0, f151_arg1, f151_arg2)
-	local f151_local0 = Engine[0xDFD7EFA83DD8C75](f151_arg0, f151_arg1)
+	local f151_local0 = Engine[@"keybinding"](f151_arg0, f151_arg1)
 	if f151_local0 then
-		return Engine[0xF9F1239CFD921FE](f151_arg2, f151_local0)
+		return Engine[@"hash_4F9F1239CFD921FE"](f151_arg2, f151_local0)
 	else
-		return Engine[0xF9F1239CFD921FE](f151_arg2)
+		return Engine[@"hash_4F9F1239CFD921FE"](f151_arg2)
 	end
 end
 function GetCurrentCPObjectiveText(f152_arg0, f152_arg1)
@@ -1080,8 +1080,8 @@ function GetCurrentCPObjectiveText(f152_arg0, f152_arg1)
 	end
 end
 function GetCPInstructionText(f153_arg0, f153_arg1)
-	local f153_local0 = Engine[0x4DF5CFBC1771947](f153_arg0)
-	return Engine[0xEFE2F6436680CF3](f153_local0.hudItems.cpInstructionText:get(), "CS_LOCALIZED_STRINGS")
+	local f153_local0 = Engine[@"getmodelforcontroller"](f153_arg0)
+	return Engine[@"getistring"](f153_local0.hudItems.cpInstructionText:get(), "CS_LOCALIZED_STRINGS")
 end
 function ZombieClientScoreboardColor(f154_arg0)
 	local f154_local0, f154_local1, f154_local2, f154_local3 = Dvar["cg_ScoresColor_Gamertag_" .. f154_arg0].get(f154_local0["cg_ScoresColor_Gamertag_" .. f154_arg0])
@@ -1109,7 +1109,7 @@ function GetEmblemLayerAndGroupIndex(f159_arg0, f159_arg1)
 	return f159_local0[1], f159_local0[2], CoD.GetCustomization(f159_arg0, "type")
 end
 function GetEmblemDecalDesc(f160_arg0)
-	local f160_local0 = Engine[0xEE3271E477915B1](f160_arg0)
+	local f160_local0 = Engine[@"getdecaldesc"](f160_arg0)
 	if f160_local0 ~= nil then
 		return f160_local0
 	else
@@ -1118,13 +1118,13 @@ function GetEmblemDecalDesc(f160_arg0)
 end
 function GetPaintjobName(f161_arg0)
 	if f161_arg0 == "" then
-		return Engine[0xF9F1239CFD921FE](0xDFFD9B8A1D5E6D4)
+		return Engine[@"hash_4F9F1239CFD921FE"](@"hash_4DFFD9B8A1D5E6D4")
 	else
 		return f161_arg0
 	end
 end
 function GetPaintjobIndexParams(f162_arg0, f162_arg1)
-	return f162_arg0, f162_arg1, Enum[0xBBD4F9E70101BA8][0x743B8404C246F61]
+	return f162_arg0, f162_arg1, Enum[@"storagefiletype"][@"storage_paintjobs"]
 end
 function GetPaintshopExtraCamParameters(f163_arg0, f163_arg1)
 	local f163_local0 = f163_arg1
@@ -1132,29 +1132,29 @@ function GetPaintshopExtraCamParameters(f163_arg0, f163_arg1)
 	if f163_local1 == 0 then
 		f163_local1 = CoD.GetCustomization(f163_arg0, "weapon_index") or 0
 	end
-	local f163_local2 = Engine[0xB98952F69D937F9](f163_local1, Enum[0x6EB546760F890D2][0x569E84652131CD7], Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5])
+	local f163_local2 = Engine[@"hash_7B98952F69D937F9"](f163_local1, Enum[@"statindexoffset"][@"hash_6569E84652131CD7"], Enum[@"emodes"][@"mode_multiplayer"])
 	local f163_local3 = CoD.CraftUtility.GetLoadoutSlot(f163_arg0)
 	local f163_local4 = "left"
 	return f163_local3, f163_local2, CoD.WeaponOptionsUtility.GetWeaponOptionsString(0, 0, 1), f163_local1, f163_local0, f163_arg0
 end
 function LocalizeLayerMOfN(f164_arg0, f164_arg1, f164_arg2)
-	return Engine[0xF9F1239CFD921FE](f164_arg0, f164_arg2, Engine[0xB3DF0B6F944FF42](f164_arg1, CoD.GetCustomization(f164_arg1, "type"), CoD.perController[f164_arg1].totalLayers))
+	return Engine[@"hash_4F9F1239CFD921FE"](f164_arg0, f164_arg2, Engine[@"getusedlayercount"](f164_arg1, CoD.GetCustomization(f164_arg1, "type"), CoD.perController[f164_arg1].totalLayers))
 end
 function GunsmithAccuracyPercentage(f165_arg0)
 	return string.format("%2.2f", f165_arg0 * 100) .. "%"
 end
 function GetLocalizedWeaponName(f166_arg0)
-	local f166_local0 = Engine[0x6B7AC889104DED3](tonumber(f166_arg0))
+	local f166_local0 = Engine[@"getitemname"](tonumber(f166_arg0))
 	if f166_local0 then
-		return Engine[0xF9F1239CFD921FE](f166_local0)
+		return Engine[@"hash_4F9F1239CFD921FE"](f166_local0)
 	else
 		return ""
 	end
 end
 function LocalizeWeaponNameIntoString(f167_arg0, f167_arg1, f167_arg2)
-	local f167_local0 = Engine[0x6B7AC889104DED3](tonumber(f167_arg2))
+	local f167_local0 = Engine[@"getitemname"](tonumber(f167_arg2))
 	if f167_local0 then
-		return LocalizeIntoString(f167_arg0, Engine[0xB03220D3A4F3E38](Engine[0xF9F1239CFD921FE](f167_local0)))
+		return LocalizeIntoString(f167_arg0, Engine[@"toupper"](Engine[@"hash_4F9F1239CFD921FE"](f167_local0)))
 	else
 		return ""
 	end
@@ -1167,40 +1167,40 @@ function GetItemDescFromIndex(f169_arg0, f169_arg1)
 end
 function GetItemNameFromRef(f170_arg0, f170_arg1)
 	if not f170_arg0 then
-		f170_arg0 = Engine[0x3EAC408F958FF05]()
+		f170_arg0 = Engine[@"currentsessionmode"]()
 	end
 	if not f170_arg1 or f170_arg1 == "" then
 		return 0x0
 	end
 	local f170_local0 = f170_arg1
 	if type(f170_local0) ~= "xhash" then
-		f170_local0 = Engine[0xC53F8D38DF9042B](f170_local0)
+		f170_local0 = Engine[@"converttoxhash"](f170_local0)
 	end
-	local f170_local1 = Engine[0xCA0179D394E63CE](Engine[0x8FF94BB44442412](f170_local0, f170_arg0), f170_arg0)
+	local f170_local1 = Engine[@"getunlockableinfobyindex"](Engine[@"hash_68FF94BB44442412"](f170_local0, f170_arg0), f170_arg0)
 	return f170_local1.name
 end
 function GetItemImageFromIndex(f171_arg0, f171_arg1)
 	return GetItemImageForIndex(f171_arg1, f171_arg0)
 end
 function GetHudImageFromItemIndex(f172_arg0)
-	return Engine[0xD97858119DEE164](Engine[0xB98952F69D937F9](f172_arg0) .. "_" .. string.lower(CoD.gameMode), Engine[0x3EAC408F958FF05]()) or "blacktransparent"
+	return Engine[@"gethudiconforweapon"](Engine[@"hash_7B98952F69D937F9"](f172_arg0) .. "_" .. string.lower(CoD.gameMode), Engine[@"currentsessionmode"]()) or "blacktransparent"
 end
 function GetHudImageFromItemRefHash(f173_arg0, f173_arg1)
 	local f173_local0 = CoD.SafeGetModelValue(f173_arg0, "weapon")
 	if f173_local0 and f173_local0 > 0 then
 		return GetHudImageFromItemIndex(f173_local0)
 	else
-		return Engine[0xD97858119DEE164](f173_arg1, Engine[0x3EAC408F958FF05]()) or "blacktransparent"
+		return Engine[@"gethudiconforweapon"](f173_arg1, Engine[@"currentsessionmode"]()) or "blacktransparent"
 	end
 end
 function GetHudDisplayNameFromItemIndex(f174_arg0)
-	return Engine[0xB680D2B7BFC8098](Engine[0xB98952F69D937F9](f174_arg0) .. "_" .. string.lower(CoD.gameMode), Engine[0x3EAC408F958FF05]()) or 0x2C79EA24AB1A2BA
+	return Engine[@"hash_B680D2B7BFC8098"](Engine[@"hash_7B98952F69D937F9"](f174_arg0) .. "_" .. string.lower(CoD.gameMode), Engine[@"currentsessionmode"]()) or @"hash_2C79EA24AB1A2BA"
 end
 function GetItemImageByIndexAndMode(f175_arg0, f175_arg1)
 	return GetItemNameForIndex(f175_arg1, nil, CoD.ModeStringToMode(f175_arg0))
 end
 function GetWeaponGadgetIconAvailable(f176_arg0)
-	local f176_local0 = BlackTransparentIfNilOrEmpty(Engine[0xCAC5353CDB6246D](f176_arg0))
+	local f176_local0 = BlackTransparentIfNilOrEmpty(Engine[@"getweapongadgeticonavailable"](f176_arg0))
 	if type(f176_local0) == "userdata" then
 		return f176_local0
 	else
@@ -1208,12 +1208,12 @@ function GetWeaponGadgetIconAvailable(f176_arg0)
 	end
 end
 function GetWeaponGadgetIconUnavailable(f177_arg0)
-	return Engine[0xA9DABDB8742AE8](f177_arg0)
+	return Engine[@"getweapongadgeticonunavailable"](f177_arg0)
 end
 function GetConsumableCountFromIndex(f178_arg0, f178_arg1)
 	local f178_local0 = f178_arg0
-	if Engine[0x8EF5BEFA0AE50FE]() and not IsLobbyNetworkModeLAN() then
-		local f178_local1 = Engine[0x475AAFCBC9AF822](f178_local0, Engine[0xC53F8D38DF9042B](Engine[0xD5D69BA555E016D](f178_arg1)))
+	if Engine[@"iszombiesgame"]() and not IsLobbyNetworkModeLAN() then
+		local f178_local1 = Engine[@"hash_3475AAFCBC9AF822"](f178_local0, Engine[@"converttoxhash"](Engine[@"getitemref"](f178_arg1)))
 		if not f178_local1 then
 			return 0
 		else
@@ -1224,7 +1224,7 @@ function GetConsumableCountFromIndex(f178_arg0, f178_arg1)
 	end
 end
 function GetWeaponItemImageFromIndex(f179_arg0)
-	return Engine[0x8518E07C1C5BC6D](f179_arg0)
+	return Engine[@"getitemimage"](f179_arg0)
 end
 function GetMaxAllocationAmount(f180_arg0, f180_arg1)
 	return CoD.CACUtility.GetMaxAllocation(f180_arg0)
@@ -1257,7 +1257,7 @@ function GetWeaponAttributesForAttachment(f183_arg0, f183_arg1, f183_arg2, f183_
 		f183_local0 = CoD.BaseUtility.GetMenuLoadoutSlot(f183_arg0)
 		f183_local1 = CoD.BaseUtility.GetMenuAttachmentFilter(f183_arg0)
 	end
-	if not (f183_local1 ~= nil or Engine[0x3EAC408F958FF05]() ~= Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5] or f183_local0 ~= "primary" and f183_local0 ~= "secondary") or not (Engine[0x3EAC408F958FF05]() ~= Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A] or f183_local0 ~= "zmStartWeapon" and f183_local0 ~= "armory") or IsInGame() and CoD.BountyHunterUtility.GameTypeIsBounty(nil) then
+	if not (f183_local1 ~= nil or Engine[@"currentsessionmode"]() ~= Enum[@"emodes"][@"mode_multiplayer"] or f183_local0 ~= "primary" and f183_local0 ~= "secondary") or not (Engine[@"currentsessionmode"]() ~= Enum[@"emodes"][@"mode_zombies"] or f183_local0 ~= "zmStartWeapon" and f183_local0 ~= "armory") or IsInGame() and CoD.BountyHunterUtility.GameTypeIsBounty(nil) then
 		return 0, 0, 0, 0
 	else
 		return f183_arg1 / 100, f183_arg2 / 100, f183_arg3, f183_arg4
@@ -1269,7 +1269,7 @@ function GetWeaponAttributeBaseValueForAttachment(f184_arg0, f184_arg1)
 		f184_local0 = CoD.BaseUtility.GetMenuLoadoutSlot(f184_arg0)
 		f184_local1 = CoD.BaseUtility.GetMenuAttachmentFilter(f184_arg0)
 	end
-	if not (f184_local1 ~= nil or Engine[0x3EAC408F958FF05]() ~= Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5] or f184_local0 ~= "primary" and f184_local0 ~= "secondary") or Engine[0x3EAC408F958FF05]() == Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A] and f184_local0 == "zmStartWeapon" then
+	if not (f184_local1 ~= nil or Engine[@"currentsessionmode"]() ~= Enum[@"emodes"][@"mode_multiplayer"] or f184_local0 ~= "primary" and f184_local0 ~= "secondary") or Engine[@"currentsessionmode"]() == Enum[@"emodes"][@"mode_zombies"] and f184_local0 == "zmStartWeapon" then
 		return ""
 	else
 		local f184_local2 = LUI.splitString(f184_arg1, ",")
@@ -1286,7 +1286,7 @@ function GetWeaponAttributeAddedValueForAttachment(f185_arg0, f185_arg1)
 		f185_local0 = CoD.BaseUtility.GetMenuLoadoutSlot(f185_arg0)
 		f185_local1 = CoD.BaseUtility.GetMenuAttachmentFilter(f185_arg0)
 	end
-	if not (f185_local1 ~= nil or Engine[0x3EAC408F958FF05]() ~= Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5] or f185_local0 ~= "primary" and f185_local0 ~= "secondary") or Engine[0x3EAC408F958FF05]() == Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A] and f185_local0 == "zmStartWeapon" then
+	if not (f185_local1 ~= nil or Engine[@"currentsessionmode"]() ~= Enum[@"emodes"][@"mode_multiplayer"] or f185_local0 ~= "primary" and f185_local0 ~= "secondary") or Engine[@"currentsessionmode"]() == Enum[@"emodes"][@"mode_zombies"] and f185_local0 == "zmStartWeapon" then
 		return ""
 	end
 	local f185_local2 = LUI.splitString(f185_arg1, ",")
@@ -1302,9 +1302,9 @@ end
 function GetClientGameLobbyXUIDForClientNum(f186_arg0)
 	local f186_local0 = f186_arg0
 	if f186_local0 == LuaDefine.INVALID_CLIENT_INDEX or LuaDefine.MAX_CLIENTS <= f186_local0 then
-		return Engine[0x8506F73B393062F](LuaDefine.INVALID_XUID)
+		return Engine[@"numbertouint64"](LuaDefine.INVALID_XUID)
 	else
-		return Engine[0xDB23F7EB606D71B](Enum[0x7CA2DE5266A94BF][0xC46B73E8E18BA2], Engine[0xC3DF042E7492B66](Enum[0x7CA2DE5266A94BF][0xC46B73E8E18BA2]), f186_arg0)
+		return Engine[@"getlobbyxuidforclientnum"](Enum[@"lobbymodule"][@"lobby_module_client"], Engine[@"lobbygetcontrollinglobbysession"](Enum[@"lobbymodule"][@"lobby_module_client"]), f186_arg0)
 	end
 end
 function GetClientGameLobbyXUIDForClientNumString(f187_arg0)
@@ -1312,27 +1312,27 @@ function GetClientGameLobbyXUIDForClientNumString(f187_arg0)
 end
 function GetScoreboardPlayerName(f188_arg0, f188_arg1)
 	if f188_arg1 and f188_arg1 ~= "" then
-		return Engine[0xA457DFCEF7A7C9D](f188_arg0, f188_arg1) or ""
+		return Engine[@"getgamertagforclient"](f188_arg0, f188_arg1) or ""
 	else
 		return ""
 	end
 end
 function GetScoreboardPlayerRank(f189_arg0, f189_arg1)
 	if f189_arg1 and f189_arg1 ~= "" then
-		return Engine[0x331433774E33ED8](f189_arg0, f189_arg1) or ""
+		return Engine[@"getrankstringforclient"](f189_arg0, f189_arg1) or ""
 	else
 		return ""
 	end
 end
 function GetScoreboardPlayerRankIcon(f190_arg0, f190_arg1)
 	if f190_arg1 and f190_arg1 ~= "" then
-		return Engine[0x8BCE6459C40220](f190_arg0, f190_arg1) or "blacktransparent"
+		return Engine[@"getrankiconforclient"](f190_arg0, f190_arg1) or "blacktransparent"
 	else
 		return ""
 	end
 end
 function GetScoreboardPlayerScoreColumn(f191_arg0, f191_arg1, f191_arg2)
-	return Engine[0x4115AA5FA07976D](f191_arg2, f191_arg1)
+	return Engine[@"getscoreboardcolumnforclient"](f191_arg2, f191_arg1)
 end
 function GetScoreboardCurrentStreak(f192_arg0, f192_arg1)
 	local f192_local0 = tonumber(f192_arg1)
@@ -1344,9 +1344,9 @@ function GetScoreboardCurrentStreak(f192_arg0, f192_arg1)
 end
 function GetCodcasterPlayerListKD(f193_arg0, f193_arg1)
 	local f193_local0 = f193_arg1
-	local f193_local1 = Engine[0xE4D2F32833CFA6C](f193_local0)
+	local f193_local1 = Engine[@"getmodelforclient"](f193_local0)
 	f193_local1 = f193_local1:create("kills")
-	local f193_local2 = Engine[0xE4D2F32833CFA6C](f193_local0)
+	local f193_local2 = Engine[@"getmodelforclient"](f193_local0)
 	f193_local2 = f193_local2:create("deaths")
 	local f193_local3 = f193_local1:get()
 	local f193_local4 = f193_local2:get()
@@ -1361,57 +1361,57 @@ function GetCodcasterPlayerListKD(f193_arg0, f193_arg1)
 	return f193_local3 .. " / " .. f193_local4
 end
 function GetScoreboardColumnHeader(f194_arg0, f194_arg1, f194_arg2)
-	local f194_local0 = Engine[0x4E9119DFEF0C60A](f194_arg0, f194_arg1) or ""
+	local f194_local0 = Engine[@"getscoreboardcolumnheader"](f194_arg0, f194_arg1) or ""
 	if CoD.BountyHunterUtility.GameTypeIsBounty(f194_arg0) and string.lower(f194_local0) == "objective score" then
-		f194_local0 = Engine[0xF9F1239CFD921FE](0xF637558C9E3D6CD)
+		f194_local0 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_1F637558C9E3D6CD")
 	end
 	if CoD.HUDUtility.IsGameTypeEqualToString("warzone_deposit") and string.lower(f194_local0) == "score" then
-		f194_local0 = Engine[0xF9F1239CFD921FE](0x899455D1DF9CE06)
+		f194_local0 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_3899455D1DF9CE06")
 	end
 	return f194_local0
 end
 function GetScoreboardPlayerPingBarImage(f195_arg0)
-	local f195_local0 = Engine[0x5F8EA8E2974BDCF]()
-	if Dvar[0xDDC61194A7E2C0C]:get() == false then
-		if Dvar[0x3F506D23F310141]:get() > 1 and f195_arg0 > 0 then
+	local f195_local0 = Engine[@"getpingimagecount"]()
+	if Dvar[@"hash_7DDC61194A7E2C0C"]:get() == false then
+		if Dvar[@"cg_scoresping_interval"]:get() > 1 and f195_arg0 > 0 then
 			return "ping_bar_0" .. f195_arg0
 		end
-	elseif Dvar[0xDDC61194A7E2C0C]:get() > 1 and f195_arg0 > 0 then
+	elseif Dvar[@"hash_7DDC61194A7E2C0C"]:get() > 1 and f195_arg0 > 0 then
 		return "ping_bar_0" .. f195_arg0
 	end
 	return "blacktransparent"
 end
 function GetScoreboardPlayerPingRange(f196_arg0)
-	local f196_local0 = Engine[0x5F8EA8E2974BDCF] and Engine[0x5F8EA8E2974BDCF]() or 4
-	local f196_local1 = Engine[0xC90DF4302B30DFD] and Engine[0xC90DF4302B30DFD]() or 100
+	local f196_local0 = Engine[@"getpingimagecount"] and Engine[@"getpingimagecount"]() or 4
+	local f196_local1 = Engine[@"getpingstepms"] and Engine[@"getpingstepms"]() or 100
 	local f196_local2 = f196_local0 + 1 - f196_arg0
 	if f196_local2 == f196_local0 then
-		return Engine[0xF9F1239CFD921FE](0xA5DFC2E3D7DF772, f196_local1 * (f196_local2 - 1))
+		return Engine[@"hash_4F9F1239CFD921FE"](@"menu/ping_max", f196_local1 * (f196_local2 - 1))
 	elseif f196_local2 < f196_local0 then
-		return Engine[0xF9F1239CFD921FE](0x2F670BEF7CB789, f196_local1 * (f196_local2 - 1), f196_local1 * f196_local2 - 1)
+		return Engine[@"hash_4F9F1239CFD921FE"](@"menu/ping_range", f196_local1 * (f196_local2 - 1), f196_local1 * f196_local2 - 1)
 	else
 		return ""
 	end
 end
 function GetScoreboardTeamBackgroundColor(f197_arg0, f197_arg1)
 	if CoD.IsShoutcaster(f197_arg0) and CoD.ShoutcasterProfileVarBool(f197_arg0, "shoutcaster_ds_flip_scorepanel") then
-		if f197_arg1 == Enum[0x13A4717E5AC547][0x2A34B055ADD98AB] then
-			f197_arg1 = Enum[0x13A4717E5AC547][0x3F83D7CE4BD7B68]
-		elseif f197_arg1 == Enum[0x13A4717E5AC547][0x3F83D7CE4BD7B68] then
-			f197_arg1 = Enum[0x13A4717E5AC547][0x2A34B055ADD98AB]
+		if f197_arg1 == Enum[@"team_t"][@"team_allies"] then
+			f197_arg1 = Enum[@"team_t"][@"team_axis"]
+		elseif f197_arg1 == Enum[@"team_t"][@"team_axis"] then
+			f197_arg1 = Enum[@"team_t"][@"team_allies"]
 		end
 	end
 	return CoD.TeamUtility.GetTeamFactionColor(f197_arg1)
 end
 function GetScoreboardPingBarAlpha(f198_arg0)
-	if Engine[0x7B48C1ABFF0F764]() and IsScoreboardPingAsBars() and IsLive() then
+	if Engine[@"isingame"]() and IsScoreboardPingAsBars() and IsLive() then
 		return 1
 	else
 		return 0
 	end
 end
 function GetScoreboardPingValueAlpha(f199_arg0)
-	if Engine[0x7B48C1ABFF0F764]() and not IsScoreboardPingAsBars() and IsLive() then
+	if Engine[@"isingame"]() and not IsScoreboardPingAsBars() and IsLive() then
 		return f199_arg0
 	else
 		return 0
@@ -1422,23 +1422,23 @@ function KillCamAllowRespawnToString(f200_arg0, f200_arg1)
 		if IsGamepad(f200_arg0) then
 			local f200_local0
 			if f200_arg1 == 1 then
-				f200_local0 = 0x210A2FFB2104D9F
+				f200_local0 = @"hash_3210A2FFB2104D9F"
 				if not f200_local0 then
 				else
 					return f200_local0
 				end
 			end
-			f200_local0 = 0x847731E84CD3C18
+			f200_local0 = @"hash_2847731E84CD3C18"
 		else
 			local f200_local0
 			if f200_arg1 == 1 then
-				f200_local0 = 0x81D69DF6BE38220
+				f200_local0 = @"hash_81D69DF6BE38220"
 				if not f200_local0 then
 				else
 					return f200_local0
 				end
 			end
-			f200_local0 = 0x669667599F67B3F
+			f200_local0 = @"hash_669667599F67B3F"
 		end
 	else
 		local f200_local0
@@ -1449,7 +1449,7 @@ function KillCamAllowRespawnToString(f200_arg0, f200_arg1)
 				return f200_local0
 			end
 		end
-		f200_local0 = 0x34A052BB0658AF8
+		f200_local0 = @"hash_234A052BB0658AF8"
 	end
 end
 function TeamStringFromPlayerIndex(f201_arg0, f201_arg1)
@@ -1457,15 +1457,15 @@ function TeamStringFromPlayerIndex(f201_arg0, f201_arg1)
 	if f201_local0 == -1 then
 		return ""
 	else
-		local f201_local1 = Engine[0x2C6B07FD023877B](f201_arg0, f201_local0)
-		if CoD.IsShoutcaster(f201_arg0) and not CoDShared.IsGametypeTeamBased() and f201_local1 ~= Enum[0x13A4717E5AC547][0xE4DDAC9C5C45556] then
+		local f201_local1 = Engine[@"getteamid"](f201_arg0, f201_local0)
+		if CoD.IsShoutcaster(f201_arg0) and not CoDShared.IsGametypeTeamBased() and f201_local1 ~= Enum[@"team_t"][@"team_spectator"] then
 			return ""
 		else
 			local f201_local2 = CoD.TeamUtility.GetTeamNameCaps(f201_local1)
 			if CoD.IsShoutcaster(f201_arg0) and CoD.TeamUtility.ShouldUseCustomTeamIdentity(f201_arg0) then
 				return f201_local2
 			else
-				return Engine[0xED84C33EC5F01EA](f201_local2)
+				return Engine[@"localize"](f201_local2)
 			end
 		end
 	end
@@ -1473,16 +1473,16 @@ end
 function TeamColorFromPlayerIndex(f202_arg0, f202_arg1)
 	local f202_local0 = f202_arg1
 	if f202_local0 == -1 then
-		return CoD.TeamUtility.GetTeamFactionColor(Enum[0x13A4717E5AC547][0x97263B3C1ABADF7])
+		return CoD.TeamUtility.GetTeamFactionColor(Enum[@"team_t"][@"team_free"])
 	end
-	local f202_local1 = Engine[0x2C6B07FD023877B](f202_arg0, f202_local0)
-	if CoD.IsShoutcaster(f202_arg0) and not CoDShared.IsGametypeTeamBased() and f202_local1 ~= Enum[0x13A4717E5AC547][0xE4DDAC9C5C45556] then
-		return CoD.TeamUtility.GetTeamFactionColor(Enum[0x13A4717E5AC547][0x97263B3C1ABADF7])
+	local f202_local1 = Engine[@"getteamid"](f202_arg0, f202_local0)
+	if CoD.IsShoutcaster(f202_arg0) and not CoDShared.IsGametypeTeamBased() and f202_local1 ~= Enum[@"team_t"][@"team_spectator"] then
+		return CoD.TeamUtility.GetTeamFactionColor(Enum[@"team_t"][@"team_free"])
 	elseif CoD.IsShoutcaster(f202_arg0) and CoD.ShoutcasterProfileVarBool(f202_arg0, "shoutcaster_ds_flip_scorepanel") then
-		if f202_arg1 == Enum[0x13A4717E5AC547][0x2A34B055ADD98AB] then
-			f202_arg1 = Enum[0x13A4717E5AC547][0x3F83D7CE4BD7B68]
-		elseif f202_arg1 == Enum[0x13A4717E5AC547][0x3F83D7CE4BD7B68] then
-			f202_arg1 = Enum[0x13A4717E5AC547][0x2A34B055ADD98AB]
+		if f202_arg1 == Enum[@"team_t"][@"team_allies"] then
+			f202_arg1 = Enum[@"team_t"][@"team_axis"]
+		elseif f202_arg1 == Enum[@"team_t"][@"team_axis"] then
+			f202_arg1 = Enum[@"team_t"][@"team_allies"]
 		end
 	end
 	return CoD.TeamUtility.GetTeamFactionColor(f202_local1)
@@ -1491,7 +1491,7 @@ function ClientGamertagColor(f203_arg0, f203_arg1)
 	local f203_local0 = f203_arg1
 	if f203_local0 < 0 then
 		return ColorSet.White.r, ColorSet.White.g, ColorSet.White.b
-	elseif Engine[0x761955642304848](f203_arg0) == f203_local0 then
+	elseif Engine[@"getclientnum"](f203_arg0) == f203_local0 then
 		return ColorSet.Client_Self.r, ColorSet.Client_Self.g, ColorSet.Client_Self.b
 	else
 		local f203_local1 = CoD.LobbyUtility.GetClient(f203_local0)
@@ -1515,7 +1515,7 @@ function ClientBackgroundColor(f204_arg0, f204_arg1)
 	if f204_local0 ~= nil and f204_local0.isMember == 1 then
 		return ColorSet.Client_PartyMember.r, ColorSet.Client_PartyMember.g, ColorSet.Client_PartyMember.b
 	else
-		return CoD.TeamUtility.GetTeamFactionColor(Enum[0x13A4717E5AC547][0x2A34B055ADD98AB])
+		return CoD.TeamUtility.GetTeamFactionColor(Enum[@"team_t"][@"team_allies"])
 	end
 end
 function BlackhatHackingPercentage(f205_arg0)
@@ -1546,10 +1546,10 @@ function GetCategoryIconForOverlayType(f207_arg0)
 	end
 end
 function GetAARMedalName(f208_arg0)
-	return Engine[0xED84C33EC5F01EA](Engine[0xC6F8EC444864600](CoD.scoreInfoTable, f208_arg0, CoD.AARUtility.medalStringCol))
+	return Engine[@"localize"](Engine[@"hash_4C6F8EC444864600"](CoD.scoreInfoTable, f208_arg0, CoD.AARUtility.medalStringCol))
 end
 function GetAARMedalDesc(f209_arg0)
-	return Engine[0xED84C33EC5F01EA](Engine[0xC6F8EC444864600](CoD.scoreInfoTable, f209_arg0, CoD.AARUtility.medalStringCol) .. "_DESC")
+	return Engine[@"localize"](Engine[@"hash_4C6F8EC444864600"](CoD.scoreInfoTable, f209_arg0, CoD.AARUtility.medalStringCol) .. "_DESC")
 end
 function GetAARMedalHitCount(f210_arg0)
 	if f210_arg0 and tonumber(f210_arg0) > 1 then
@@ -1603,9 +1603,9 @@ function DifficultyIconFromNumber(f215_arg0)
 end
 function PrependArenaToPlaylist(f216_arg0)
 	if IsArenaMode() then
-		return Engine[0xF9F1239CFD921FE](0x4B08B09636ECD9E) .. " " .. Engine[0xF9F1239CFD921FE](f216_arg0)
+		return Engine[@"hash_4F9F1239CFD921FE"](@"hash_44B08B09636ECD9E") .. " " .. Engine[@"hash_4F9F1239CFD921FE"](f216_arg0)
 	else
-		return Engine[0xF9F1239CFD921FE](f216_arg0)
+		return Engine[@"hash_4F9F1239CFD921FE"](f216_arg0)
 	end
 end
 function GetArenaRank(f217_arg0)
@@ -1615,7 +1615,7 @@ function GetArenaRankIconLG(f218_arg0)
 	return CoD.ArenaRankedPlayUtility.GetArenaRankIconLarge(f218_arg0)
 end
 function GetCurrentMinimapImageName(f219_arg0)
-	local f219_local0, f219_local1, f219_local2 = Engine[0x5EA79AB5A744D06]()
+	local f219_local0, f219_local1, f219_local2 = Engine[@"hash_35EA79AB5A744D06"]()
 	return f219_local1
 end
 function GetQuestItemHolderImageFromEnum(f220_arg0)
@@ -1635,7 +1635,7 @@ end
 function GetPlayerListObjective(f221_arg0, f221_arg1)
 	local f221_local0 = tonumber(f221_arg1)
 	if f221_local0 >= 0 and f221_local0 < LuaDefine.MAX_CLIENTS then
-		local f221_local1 = Engine[0xC11C46262D07E5E](f221_arg0, f221_local0)
+		local f221_local1 = Engine[@"objectivesgetplayerusing"](f221_arg0, f221_local0)
 		if f221_local1 then
 			for f221_local5, f221_local6 in pairs(f221_local1) do
 				if ShouldShowObjectiveForPlayer(f221_arg0, f221_local0, f221_local6) then
@@ -1662,7 +1662,7 @@ function GetPlayerListObjectiveMinimapImage(f223_arg0, f223_arg1)
 	local f223_local0 = GetPlayerListObjective(f223_arg0, f223_arg1)
 	if f223_local0 and f223_local0.name then
 		local f223_local1 = CoD.HUDUtility.GetCachedObjective(f223_local0.name)
-		return f223_local1[0xAA8267261655DF1] or 0x214ECBA8C04D44C
+		return f223_local1[@"minimapimage"] or 0x214ECBA8C04D44C
 	else
 		return 0x214ECBA8C04D44C
 	end
@@ -1671,12 +1671,12 @@ function GetPlayerListObjectiveColor(f224_arg0, f224_arg1)
 	local f224_local0 = f224_arg1
 	local f224_local1 = GetPlayerListObjective(f224_arg0, f224_local0)
 	if f224_local1 and f224_local1.id and ShouldShowColorForObjective(f224_arg0, f224_local0, f224_local1) then
-		local f224_local2 = Engine[0x7A01BC612811EFE](f224_arg0, f224_local1.id)
-		local f224_local3 = Engine[0x4C77EAF5F088DC3](f224_arg0, f224_local1.id)
-		if f224_local3 == Enum[0x13A4717E5AC547][0x97263B3C1ABADF7] or f224_local3 == Enum[0x13A4717E5AC547][0xE4DDAC9C5C45556] or f224_local3 == Enum[0x13A4717E5AC547][0xBD65CBD25CCBEDC] or f224_local2 ~= 1 then
+		local f224_local2 = Engine[@"objectivegetteamusingcount"](f224_arg0, f224_local1.id)
+		local f224_local3 = Engine[@"getobjectiveteam"](f224_arg0, f224_local1.id)
+		if f224_local3 == Enum[@"team_t"][@"team_free"] or f224_local3 == Enum[@"team_t"][@"team_spectator"] or f224_local3 == Enum[@"team_t"][@"team_neutral"] or f224_local2 ~= 1 then
 			return ColorSet.White.r, ColorSet.White.g, ColorSet.White.b
 		else
-			return CoD.TeamUtility.GetTeamFactionColor(Engine[0x4C77EAF5F088DC3](f224_arg0, f224_local1.id))
+			return CoD.TeamUtility.GetTeamFactionColor(Engine[@"getobjectiveteam"](f224_arg0, f224_local1.id))
 		end
 	else
 		return ColorSet.White.r, ColorSet.White.g, ColorSet.White.b
@@ -1696,19 +1696,19 @@ function GetRandomStringCharacter(f227_arg0)
 	return string.char(math.random(33, 126))
 end
 function FormatAutoReviveCountdown(f228_arg0)
-	return Engine[0xF9F1239CFD921FE](0x391AB6BB6AB12D, f228_arg0)
+	return Engine[@"hash_4F9F1239CFD921FE"](0x391AB6BB6AB12D, f228_arg0)
 end
 function UpdateCoDPointPurchaseDesc(f229_arg0, f229_arg1, f229_arg2, f229_arg3)
 	local f229_local0 = CoD.SafeGetModelValue(f229_arg1, "price")
 	if f229_local0 then
-		local f229_local1 = f229_local0 - Engine[0xF40679B550DCCA2](f229_arg2, CoD.Currencies.COD_POINTS)
+		local f229_local1 = f229_local0 - Engine[@"hash_2F40679B550DCCA2"](f229_arg2, CoD.Currencies.COD_POINTS)
 		if f229_local1 < 0 then
 			f229_local1 = 0
 			GoBack(f229_arg0, f229_arg2)
 		end
-		return Engine[0xF9F1239CFD921FE](0xC9037730DD8568, f229_local1)
+		return Engine[@"hash_4F9F1239CFD921FE"](0xC9037730DD8568, f229_local1)
 	else
-		return Engine[0xF9F1239CFD921FE](f229_arg3)
+		return Engine[@"hash_4F9F1239CFD921FE"](f229_arg3)
 	end
 end
 function CheckForKeyboardMouseDescriptionInList(f230_arg0, f230_arg1, f230_arg2)
@@ -1736,24 +1736,24 @@ function UpdateKeyShortcutsButtonPrompts(f233_arg0, f233_arg1, f233_arg2)
 		return f233_arg2
 	end
 	local f233_local0 = f233_arg0:getModel()
-	local f233_local1 = Engine[0xF9F1239CFD921FE](0x0)
+	local f233_local1 = Engine[@"hash_4F9F1239CFD921FE"](0x0)
 	if f233_local0 and f233_local0.KeyShortcut then
-		f233_local1 = Engine[0x614D394F6F9A18D](f233_local0.KeyShortcut)
+		f233_local1 = Engine[@"getmodelvalue"](f233_local0.KeyShortcut)
 		if f233_local1 then
-			if not Engine[0x40E824FE270E174](Engine[0x4DF5CFBC1771947](f233_arg1), "KeyPressBits." .. f233_local1) then
+			if not Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f233_arg1), "KeyPressBits." .. f233_local1) then
 				local f233_local2 = nil
-				f233_local1, f233_local2 = Engine[0x7C4C4DBF61B869E](f233_arg1, f233_local1, 0)
+				f233_local1, f233_local2 = Engine[@"hash_27C4C4DBF61B869E"](f233_arg1, f233_local1, 0)
 			elseif #f233_local1 > 1 then
-				f233_local1 = Engine[0xF9F1239CFD921FE](0x819ABD75CBD7B59 .. f233_local1)
+				f233_local1 = Engine[@"hash_4F9F1239CFD921FE"](@"key/" .. f233_local1)
 			end
 		end
 	end
 	return f233_local1
 end
 function AddLocalizeGameModeToString(f234_arg0)
-	local f234_local0 = Engine[0xEA74FA7EE46E195](Dvar[0xFF54369D6573B91]:get())
-	return Engine[0xB03220D3A4F3E38](Engine[0xF9F1239CFD921FE](f234_arg0, f234_local0.nameRef))
+	local f234_local0 = Engine[@"getgametypeinfo"](Dvar[@"g_gametype"]:get())
+	return Engine[@"toupper"](Engine[@"hash_4F9F1239CFD921FE"](f234_arg0, f234_local0.nameRef))
 end
 function SetProgressTarget(f235_arg0)
-	return Engine[0xF9F1239CFD921FE](0xB5E5844327FB1A0, f235_arg0)
+	return Engine[@"hash_4F9F1239CFD921FE"](@"menu/progress_target", f235_arg0)
 end

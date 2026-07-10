@@ -19,14 +19,14 @@ CoD.LaboratoryListItemNebuliumPlasmaDiscount.new = function(f1_arg0, f1_arg1, f1
 	Description:linkToElementModel(self, "labelName", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
-			Description.name:setText(Engine[0xF9F1239CFD921FE](f3_local0))
+			Description.name:setText(Engine[@"hash_4F9F1239CFD921FE"](f3_local0))
 		end
 	end)
 	self:addElement(Description)
 	self.Description = Description
 	local Corner = LUI.UIImage.new(0.5, 0.5, -10.5, 10.5, 0, 0, 154, 171)
 	Corner:setAlpha(0)
-	Corner:setImage(RegisterImage(0xEBE9EBCE2C3F60E))
+	Corner:setImage(RegisterImage(@"uie_zm_hud_cornerdecoration_half"))
 	self:addElement(Corner)
 	self.Corner = Corner
 	local Button = CoD.LaboratoryListItemNebuliumPlasmaDiscount_Internal.new(f1_arg0, f1_arg1, 0.5, 0.5, -241, 241, 0.5, 0.5, -75, 75)
@@ -62,7 +62,7 @@ CoD.LaboratoryListItemNebuliumPlasmaDiscount.new = function(f1_arg0, f1_arg1, f1
 	end)
 	local f1_local4 = self
 	local f1_local5 = self.subscribeToModel
-	local f1_local6 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local6 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local5(f1_local4, f1_local6["Laboratory.disableInput"], function(f7_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -74,7 +74,7 @@ CoD.LaboratoryListItemNebuliumPlasmaDiscount.new = function(f1_arg0, f1_arg1, f1
 	end, false)
 	f1_local4 = self
 	f1_local5 = self.subscribeToModel
-	f1_local6 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local6 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local5(f1_local4, f1_local6["Laboratory.animState"], function(f8_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

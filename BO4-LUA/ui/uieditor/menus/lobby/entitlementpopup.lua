@@ -24,13 +24,13 @@ LUI.createMenu.EntitlementPopup = function(f1_arg0, f1_arg1)
 	f1_local1:addElementToPendingUpdateStateList(self)
 	local backing = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	backing:setRGB(0, 0, 0)
-	backing:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	backing:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	backing:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(backing)
 	self.backing = backing
 	local BackgroundImage = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	BackgroundImage:setAlpha(0.85)
-	BackgroundImage:setImage(RegisterImage(0x4BF88A437F4C579))
+	BackgroundImage:setImage(RegisterImage(@"uie_fe_cp_background"))
 	self:addElement(BackgroundImage)
 	self.BackgroundImage = BackgroundImage
 	local f1_local4 = nil
@@ -48,7 +48,7 @@ LUI.createMenu.EntitlementPopup = function(f1_arg0, f1_arg1)
 	})
 	local OptionDesc = CommonCheckbox
 	local featureOverlayButtonMouseOnly = CommonCheckbox.subscribeToModel
-	local PCDisclaimer = Engine[0x8DF2E5447F384B9]()
+	local PCDisclaimer = Engine[@"getglobalmodel"]()
 	featureOverlayButtonMouseOnly(OptionDesc, PCDisclaimer.EntitlementAcknowledged, function(f3_arg0)
 		f1_local1:updateElementState(CommonCheckbox, {
 			name = "model_validation",
@@ -65,14 +65,14 @@ LUI.createMenu.EntitlementPopup = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f4_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f4_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(CommonCheckbox, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "MOUSE1", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(CommonCheckbox, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "MOUSE1", function(element, menu, controller, model)
 		ToggleGlobalModelValueBoolean("EntitlementAcknowledged")
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "MOUSE1")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "MOUSE1")
 		return false
 	end, false)
 	self:addElement(CommonCheckbox)
@@ -89,7 +89,7 @@ LUI.createMenu.EntitlementPopup = function(f1_arg0, f1_arg1)
 	})
 	PCDisclaimer = featureOverlayButtonMouseOnly
 	OptionDesc = featureOverlayButtonMouseOnly.subscribeToModel
-	local CheckboxConfirm = Engine[0x8DF2E5447F384B9]()
+	local CheckboxConfirm = Engine[@"getglobalmodel"]()
 	OptionDesc(PCDisclaimer, CheckboxConfirm.EntitlementAcknowledged, function(f8_arg0)
 		f1_local1:updateElementState(featureOverlayButtonMouseOnly, {
 			name = "model_validation",
@@ -99,12 +99,12 @@ LUI.createMenu.EntitlementPopup = function(f1_arg0, f1_arg1)
 			modelName = "EntitlementAcknowledged",
 		})
 	end, false)
-	featureOverlayButtonMouseOnly.featureOverlayButtonContainer.Title:setText(Engine[0xF9F1239CFD921FE](0x6393FF34EA56966))
+	featureOverlayButtonMouseOnly.featureOverlayButtonContainer.Title:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/continue"))
 	PCDisclaimer = featureOverlayButtonMouseOnly
 	OptionDesc = featureOverlayButtonMouseOnly.subscribeToModel
-	CheckboxConfirm = Engine[0x8DF2E5447F384B9]()
+	CheckboxConfirm = Engine[@"getglobalmodel"]()
 	OptionDesc(PCDisclaimer, CheckboxConfirm.EntitlementAcknowledged, function(f9_arg0, f9_arg1)
-		CoD.Menu.UpdateButtonShownState(f9_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f9_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	featureOverlayButtonMouseOnly:registerEventHandler("gain_focus", function(element, event)
 		local f10_local0 = nil
@@ -113,10 +113,10 @@ LUI.createMenu.EntitlementPopup = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f10_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f10_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(featureOverlayButtonMouseOnly, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(featureOverlayButtonMouseOnly, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if CoD.ModelUtility.IsGlobalModelValueTrue("EntitlementAcknowledged") then
 			SetGlobalModelValueFalse("EntitlementAcknowledged")
 			CoD.EntitlementUtility.SetCurrentEntitlementViewed(controller)
@@ -126,7 +126,7 @@ LUI.createMenu.EntitlementPopup = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if CoD.ModelUtility.IsGlobalModelValueTrue("EntitlementAcknowledged") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 			return false
 		else
 			return false
@@ -136,28 +136,28 @@ LUI.createMenu.EntitlementPopup = function(f1_arg0, f1_arg1)
 	self.featureOverlayButtonMouseOnly = featureOverlayButtonMouseOnly
 	OptionDesc = LUI.UIText.new(0.5, 0.5, -577.5, 577.5, 0.5, 0.5, -209, -184)
 	OptionDesc:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
-	OptionDesc:setText(LocalizeHash(0x9CE5409F9792E88))
+	OptionDesc:setText(LocalizeHash(@"hash_29CE5409F9792E88"))
 	OptionDesc:setTTF("dinnext_regular")
-	OptionDesc:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	OptionDesc:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	OptionDesc:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	OptionDesc:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(OptionDesc)
 	self.OptionDesc = OptionDesc
 	PCDisclaimer = nil
 	PCDisclaimer = LUI.UIText.new(0.5, 0.5, -490.5, 664.5, 0.5, 0.5, 126, 144)
 	PCDisclaimer:setRGB(ColorSet.EnemyFlagBg.r, ColorSet.EnemyFlagBg.g, ColorSet.EnemyFlagBg.b)
-	PCDisclaimer:setText(LocalizeHash(0x26FCD76A799CA42))
+	PCDisclaimer:setText(LocalizeHash(@"hash_426FCD76A799CA42"))
 	PCDisclaimer:setTTF("dinnext_regular")
-	PCDisclaimer:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	PCDisclaimer:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	PCDisclaimer:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	PCDisclaimer:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(PCDisclaimer)
 	self.PCDisclaimer = PCDisclaimer
 	CheckboxConfirm = nil
 	CheckboxConfirm = LUI.UIText.new(0.5, 0.5, -460, 451, 0.5, 0.5, 284, 306)
 	CheckboxConfirm:setRGB(ColorSet.EnemyFlagBg.r, ColorSet.EnemyFlagBg.g, ColorSet.EnemyFlagBg.b)
-	CheckboxConfirm:setText(LocalizeHash(0xAF78441D1A89BF8))
+	CheckboxConfirm:setText(LocalizeHash(@"hash_1AF78441D1A89BF8"))
 	CheckboxConfirm:setTTF("dinnext_regular")
-	CheckboxConfirm:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	CheckboxConfirm:setAlignment(Enum[0x7A5123B654282D2][0x6ED4298C93DC5ED])
+	CheckboxConfirm:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	CheckboxConfirm:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
 	self:addElement(CheckboxConfirm)
 	self.CheckboxConfirm = CheckboxConfirm
 	local f1_local10 = nil
@@ -173,17 +173,17 @@ LUI.createMenu.EntitlementPopup = function(f1_arg0, f1_arg1)
 	self.Codpoints = Codpoints
 	local Title = LUI.UIText.new(0.5, 0.5, -577.5, 391.5, 0.5, 0.5, -315, -240)
 	Title:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
-	Title:setText(LocalizeToUpperString(0x1FACEF786749CBA))
+	Title:setText(LocalizeToUpperString(@"hash_11FACEF786749CBA"))
 	Title:setTTF("ttmussels_regular")
-	Title:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Title:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	Title:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Title:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	self:addElement(Title)
 	self.Title = Title
 	local BoundaryBot2 = LUI.UIImage.new(0.5, 0.5, -880.5, -319.5, 0.5, 0.5, -61, -45)
 	BoundaryBot2:setAlpha(0.15)
 	BoundaryBot2:setZRot(-90)
-	BoundaryBot2:setImage(RegisterImage(0x614FFDE5DDC2DFB))
-	BoundaryBot2:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	BoundaryBot2:setImage(RegisterImage(@"uie_ui_hud_tak5_player_layout_bracket"))
+	BoundaryBot2:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	BoundaryBot2:setShaderVector(0, 0, 0, 0, 0)
 	BoundaryBot2:setupNineSliceShader(66, 8)
 	self:addElement(BoundaryBot2)
@@ -191,8 +191,8 @@ LUI.createMenu.EntitlementPopup = function(f1_arg0, f1_arg1)
 	local BoundaryBot = LUI.UIImage.new(0.5, 0.5, 319.5, 880.5, 0.5, 0.5, -61, -45)
 	BoundaryBot:setAlpha(0.15)
 	BoundaryBot:setZRot(90)
-	BoundaryBot:setImage(RegisterImage(0x614FFDE5DDC2DFB))
-	BoundaryBot:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	BoundaryBot:setImage(RegisterImage(@"uie_ui_hud_tak5_player_layout_bracket"))
+	BoundaryBot:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	BoundaryBot:setShaderVector(0, 0, 0, 0, 0)
 	BoundaryBot:setupNineSliceShader(66, 8)
 	self:addElement(BoundaryBot)
@@ -201,7 +201,7 @@ LUI.createMenu.EntitlementPopup = function(f1_arg0, f1_arg1)
 	self:addElement(EntitlementItemList)
 	self.EntitlementItemList = EntitlementItemList
 	local Banner = LUI.UIImage.new(0.5, 0.5, -600, 600, 0.5, 0.5, -464.5, -344.5)
-	Banner:setImage(RegisterImage(CoD.EntitlementUtility.GetBannerImage(f1_arg0, 0x7615068F50B3D66)))
+	Banner:setImage(RegisterImage(CoD.EntitlementUtility.GetBannerImage(f1_arg0, @"blacktransparent")))
 	self:addElement(Banner)
 	self.Banner = Banner
 	self:mergeStateConditions({
@@ -214,7 +214,7 @@ LUI.createMenu.EntitlementPopup = function(f1_arg0, f1_arg1)
 	})
 	local f1_local17 = self
 	local f1_local18 = self.subscribeToModel
-	local f1_local19 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	local f1_local19 = Engine[@"getmodelforcontroller"](f1_arg0)
 	f1_local18(f1_local17, f1_local19["EntitlementData.addsCODPoints"], function(f15_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",
@@ -226,11 +226,11 @@ LUI.createMenu.EntitlementPopup = function(f1_arg0, f1_arg1)
 	end, false)
 	f1_local17 = self
 	f1_local18 = self.subscribeToModel
-	f1_local19 = Engine[0x8DF2E5447F384B9]()
+	f1_local19 = Engine[@"getglobalmodel"]()
 	f1_local18(f1_local17, f1_local19.EntitlementAcknowledged, function(f16_arg0, f16_arg1)
-		CoD.Menu.UpdateButtonShownState(f16_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f16_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if not IsPC() and CoD.BaseUtility.IsButtonHoldFinished(model) then
 			CoD.EntitlementUtility.SetCurrentEntitlementViewed(controller)
 			CoD.EntitlementUtility.GoBackAndOpenEntitlementPopups(self, controller)
@@ -243,10 +243,10 @@ LUI.createMenu.EntitlementPopup = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if not IsPC() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x5BE4A02B20F31F1, Enum[0xBEBDBAEEB3ECCCA][0x71B04FAC5BE0E35] | 750 << Enum[0xBEBDBAEEB3ECCCA][0x76ADD225D738C93], nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/ok", Enum[@"luibuttonpromptflags"][@"hash_771B04FAC5BE0E35"] | 750 << Enum[@"luibuttonpromptflags"][@"hash_176ADD225D738C93"], nil)
 			return true
 		elseif IsPC() and CoD.ModelUtility.IsGlobalModelValueTrue("EntitlementAcknowledged") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x5BE4A02B20F31F1, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/ok", nil, nil)
 			return true
 		else
 			return false

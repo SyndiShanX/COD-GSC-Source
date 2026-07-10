@@ -13,8 +13,8 @@ CoD.ContractProgressBar.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	self.Box = Box
 	local ProgressBarBacking = LUI.UIImage.new(0, 0.78, 61, 61, 0, 0.33, 5, 5)
 	ProgressBarBacking:setRGB(0.28, 0.28, 0.28)
-	ProgressBarBacking:setImage(RegisterImage(0x1B69BB6285C5BBB))
-	ProgressBarBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x31E7B3C72564429))
+	ProgressBarBacking:setImage(RegisterImage(@"uie_hud_core_loadout_panel1"))
+	ProgressBarBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_631E7B3C72564429"))
 	ProgressBarBacking:setShaderVector(0, 0, 0, 0.55, 0.13)
 	ProgressBarBacking:setShaderVector(2, 0, 1, 0, 1)
 	ProgressBarBacking:setupNineSliceShader(25, 4)
@@ -28,8 +28,8 @@ CoD.ContractProgressBar.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	self.ProgressBarBacking = ProgressBarBacking
 	local ProgressBar = LUI.UIImage.new(0, 0.78, 61, 61, 0, 0.33, 5, 5)
 	ProgressBar:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
-	ProgressBar:setImage(RegisterImage(0x1B69BB6285C5BBB))
-	ProgressBar:setMaterial(LUI.UIImage.GetCachedMaterial(0x31E7B3C72564429))
+	ProgressBar:setImage(RegisterImage(@"uie_hud_core_loadout_panel1"))
+	ProgressBar:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_631E7B3C72564429"))
 	ProgressBar:setShaderVector(0, 0, 0, 0.55, 0.13)
 	ProgressBar:setupNineSliceShader(25, 4)
 	ProgressBar:linkToElementModel(self, "totalRewardCount", true, function(model)
@@ -59,8 +59,8 @@ CoD.ContractProgressBar.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	self.ProgressBar = ProgressBar
 	local TiledShaderImage = LUI.UIImage.new(0.18, 0.97, -3, -3, 0.28, 0.61, 1, 1)
 	TiledShaderImage:setRGB(0, 0, 0)
-	TiledShaderImage:setImage(RegisterImage(0x4B6FFA90272070E))
-	TiledShaderImage:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	TiledShaderImage:setImage(RegisterImage(@"uie_ui_menu_store_repeat_dot_pattern"))
+	TiledShaderImage:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	TiledShaderImage:setShaderVector(0, 0, 0, 0, 0)
 	TiledShaderImage:setupNineSliceShader(24, 24)
 	self:addElement(TiledShaderImage)
@@ -68,8 +68,8 @@ CoD.ContractProgressBar.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	local ProgressFraction = LUI.UIText.new(0, 0, 0, 58, 0, 0, 0, 18)
 	ProgressFraction:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	ProgressFraction:setTTF("ttmussels_regular")
-	ProgressFraction:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	ProgressFraction:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	ProgressFraction:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	ProgressFraction:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	ProgressFraction:linkToElementModel(self, "rewardFractionString", true, function(model)
 		local f6_local0 = model:get()
 		if f6_local0 ~= nil then

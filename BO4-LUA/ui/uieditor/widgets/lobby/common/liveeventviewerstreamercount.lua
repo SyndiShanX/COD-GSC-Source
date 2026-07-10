@@ -9,11 +9,11 @@ CoD.LiveEventViewerStreamerCount.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local streamerCountIcon = LUI.UIImage.new(1, 1, -236, -198, 1, 1, -38, 0)
-	streamerCountIcon:setImage(RegisterImage(0xBFAC9B8CEAA96D1))
+	streamerCountIcon:setImage(RegisterImage(@"uie_twitch_streamers_white"))
 	self:addElement(streamerCountIcon)
 	self.streamerCountIcon = streamerCountIcon
 	local streamerCount = CoD.ArabicAlignTextBox.new(f1_arg0, f1_arg1, 1, 1, -198, 0, 1, 1, -35.5, -2.5)
-	streamerCount.textBox:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	streamerCount.textBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	streamerCount:subscribeToGlobalModel(f1_arg1, "LiveEventViewer", "viewers", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -32,7 +32,7 @@ CoD.LiveEventViewerStreamerCount.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	})
 	local f1_local3 = self
 	local f1_local4 = self.subscribeToModel
-	local f1_local5 = Engine[0x8DF2E5447F384B9]()
+	local f1_local5 = Engine[@"getglobalmodel"]()
 	f1_local4(f1_local3, f1_local5["liveEventViewer.viewers"], function(f4_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

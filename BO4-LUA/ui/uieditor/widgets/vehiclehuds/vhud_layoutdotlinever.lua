@@ -8,8 +8,8 @@ CoD.vhud_layoutDotLineVer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	self.soundSet = "default"
 	local layoutDotlineV01 = LUI.UIImage.new(0, 0, 0, 2, 0, 0, 0, 1170)
 	layoutDotlineV01:setAlpha(0.5)
-	layoutDotlineV01:setImage(RegisterImage(0xA40C7054B1DE8B))
-	layoutDotlineV01:setMaterial(LUI.UIImage.GetCachedMaterial(0x7EA4827662D4CD4))
+	layoutDotlineV01:setImage(RegisterImage(@"uie_ui_hud_vehicle_ac130_layout_grid_dotline_ver"))
+	layoutDotlineV01:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_17EA4827662D4CD4"))
 	layoutDotlineV01:setShaderVector(0, 1, 5, 0, 0)
 	layoutDotlineV01:setShaderVector(1, 0, 1, 0, 1)
 	self:addElement(layoutDotlineV01)

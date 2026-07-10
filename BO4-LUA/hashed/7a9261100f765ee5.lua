@@ -26,7 +26,7 @@ LUI.createMenu.VehicleHUD_GroundVehicle = function(f1_arg0, f1_arg1)
 	self:addElement(AbilitiesAndAmmo)
 	self.AbilitiesAndAmmo = AbilitiesAndAmmo
 	local CompassGroupVehicleGPS = CoD.CompassGroupVehicleGPS.new(f1_local1, f1_arg0, 0, 0, 659, 929, 0, 0, -493, -223)
-	Engine[0xF0AF2C4A29D15D7](f1_arg0, 4, 270, 270)
+	Engine[@"setupui3dwindow"](f1_arg0, 4, 270, 270)
 	CompassGroupVehicleGPS:setUI3DWindow(4)
 	self:addElement(CompassGroupVehicleGPS)
 	self.CompassGroupVehicleGPS = CompassGroupVehicleGPS

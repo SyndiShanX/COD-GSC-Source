@@ -13,18 +13,18 @@ Lobby.MatchmakingPriority.mpPublicGame = {}
 Lobby.MatchmakingPriority.doaPublicGame = {}
 Lobby.MatchmakingPriority.OnMatchmakingPriorityQuit = function(f1_arg0)
 	local f1_local0 = LobbyData.GetLobbyMenuByID(LobbyData.GetLobbyNav())
-	if f1_local0[0x8B72E07B55C3AC0] == LobbyData.GetLobbyMenuIDByName(LuaEnum.UI.DIRECTOR_ONLINE_MP_PUBLIC) then
-		Lobby.MatchmakingPriority.AddHost(f1_arg0.hostSecId, Enum[0xC018C5F55467EB1][0x1375971BA46DA71])
+	if f1_local0[@"id"] == LobbyData.GetLobbyMenuIDByName(LuaEnum.UI.DIRECTOR_ONLINE_MP_PUBLIC) then
+		Lobby.MatchmakingPriority.AddHost(f1_arg0.hostSecId, Enum[@"jointype"][@"join_type_playlist"])
 	end
 end
 Lobby.MatchmakingPriority.GetSettings = function()
 	local f2_local0 = Lobby.MatchmakingPriority.SETTING.DISABLED
 	local f2_local1 = nil
 	local f2_local2 = 0
-	if Engine[0x9882F293C327557]() == LobbyData.GetLobbyMenuIDByName(LuaEnum.UI.DIRECTOR_ONLINE_MP_PUBLIC) and Dvar[0xB7E7D205283F9AA]:exists() then
-		f2_local0 = Dvar[0xB7E7D205283F9AA]:get()
+	if Engine[@"getlobbyuiscreen"]() == LobbyData.GetLobbyMenuIDByName(LuaEnum.UI.DIRECTOR_ONLINE_MP_PUBLIC) and Dvar[@"tu11_matchmakingprioritymp"]:exists() then
+		f2_local0 = Dvar[@"tu11_matchmakingprioritymp"]:get()
 		f2_local1 = Lobby.MatchmakingPriority.mpPublicGame
-		f2_local2 = Dvar[0x93504697ED9246D]:get()
+		f2_local2 = Dvar[@"tu11_matchmakingprioritympignoretime"]:get()
 	end
 	return f2_local0, f2_local1, f2_local2
 end
@@ -32,7 +32,7 @@ Lobby.MatchmakingPriority.AddHost = function(f3_arg0, f3_arg1)
 	local f3_local0, f3_local1, f3_local2 = Lobby.MatchmakingPriority.GetSettings()
 	if f3_local0 == Lobby.MatchmakingPriority.SETTING.DISABLED then
 		return
-	elseif f3_arg1 ~= Enum[0xC018C5F55467EB1][0x1375971BA46DA71] then
+	elseif f3_arg1 ~= Enum[@"jointype"][@"join_type_playlist"] then
 		return
 	end
 	local f3_local3 = nil
@@ -46,19 +46,19 @@ Lobby.MatchmakingPriority.AddHost = function(f3_arg0, f3_arg1)
 		LuaUtils.TableClear(f3_local1)
 		table.insert(f3_local1, {
 			secId = f3_arg0,
-			joinTime = Engine[0xEFF639FB8A1BE0A](),
-			ignoreUntilTime = Engine[0xEFF639FB8A1BE0A]() + f3_local2,
+			joinTime = Engine[@"seconds"](),
+			ignoreUntilTime = Engine[@"seconds"]() + f3_local2,
 		})
 	elseif f3_local0 == Lobby.MatchmakingPriority.SETTING.MULTI_PRIORITY_LOW or f3_local0 == Lobby.MatchmakingPriority.SETTING.MULTI_IGNORE then
 		if f3_local3 == nil then
 			table.insert(f3_local1, {
 				secId = f3_arg0,
-				joinTime = Engine[0xEFF639FB8A1BE0A](),
-				ignoreUntilTime = Engine[0xEFF639FB8A1BE0A]() + f3_local2,
+				joinTime = Engine[@"seconds"](),
+				ignoreUntilTime = Engine[@"seconds"]() + f3_local2,
 			})
 		else
-			f3_local3.joinTime = Engine[0xEFF639FB8A1BE0A]()
-			f3_local3.ignoreUntilTime = Engine[0xEFF639FB8A1BE0A]() + f3_local2
+			f3_local3.joinTime = Engine[@"seconds"]()
+			f3_local3.ignoreUntilTime = Engine[@"seconds"]() + f3_local2
 		end
 	end
 end
@@ -79,7 +79,7 @@ Lobby.MatchmakingPriority.IgnoreSearchResult = function(f5_arg0)
 	end
 	for f5_local6, f5_local7 in pairs(f5_local1) do
 		if f5_local7.secId == f5_arg0 then
-			if f5_local7.ignoreUntilTime > Engine[0xEFF639FB8A1BE0A]() then
+			if f5_local7.ignoreUntilTime > Engine[@"seconds"]() then
 			else
 				table.remove(f5_local1, f5_local6)
 				break

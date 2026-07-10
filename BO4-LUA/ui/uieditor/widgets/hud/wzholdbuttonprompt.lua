@@ -28,7 +28,7 @@ CoD.WZHoldButtonPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	ControllerDependentTextBox.KBMText:setLetterSpacing(0)
 	ControllerDependentTextBox.GamepadText:setText(CoD.BaseUtility.AlreadyLocalized("[{+usereload}]"))
 	ControllerDependentTextBox.GamepadText:setLetterSpacing(0)
-	ControllerDependentTextBox.GamepadText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	ControllerDependentTextBox.GamepadText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	self:addElement(ControllerDependentTextBox)
 	self.ControllerDependentTextBox = ControllerDependentTextBox
 	self:mergeStateConditions({
@@ -51,7 +51,7 @@ CoD.WZHoldButtonPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	end)
 	local f1_local3 = self
 	local f1_local4 = self.subscribeToModel
-	local f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local4(f1_local3, f1_local5.LastInput, function(f6_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

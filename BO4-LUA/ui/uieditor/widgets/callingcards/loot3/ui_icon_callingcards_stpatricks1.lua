@@ -10,11 +10,11 @@ CoD.ui_icon_callingcards_stpatricks1.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local bg = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	bg:setImage(RegisterImage(0x4BD4CD811A5D5E0))
+	bg:setImage(RegisterImage(@"uie_ui_menu_callingcards_stpatricks_f1_bg"))
 	self:addElement(bg)
 	self.bg = bg
 	local clouds = LUI.UIImage.new(0, 0, -168.5, 1061.5, 0, 0, -148, 364)
-	clouds:setImage(RegisterImage(0x8A183B208FB1BD))
+	clouds:setImage(RegisterImage(@"uie_ui_menu_callingcards_stpatricks_f1_clouds"))
 	self:addElement(clouds)
 	self.clouds = clouds
 	local speedlines = CoD.ui_icon_callingcards_stpatricks_speedlines.new(f1_arg0, f1_arg1, 0, 0, -135, 1095, 0, 0, -265.5, 462.5)
@@ -22,7 +22,7 @@ CoD.ui_icon_callingcards_stpatricks1.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	self.speedlines = speedlines
 	local ruin = LUI.UIImage.new(0, 0, 358, 566, 0, 0, 8, 232)
 	ruin:setScale(0.5, 0.5)
-	ruin:setImage(RegisterImage(0x92F7B0959183DE9))
+	ruin:setImage(RegisterImage(@"uie_ui_menu_callingcards_stpatricks_f1_ruin"))
 	self:addElement(ruin)
 	self.ruin = ruin
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)
@@ -48,7 +48,7 @@ CoD.ui_icon_callingcards_stpatricks1.__clipsPerState = {
 			f3_arg0:__resetProperties()
 			f3_arg0:setupElementClipCounter(3)
 			local f3_local0 = function(f4_arg0)
-				f3_arg0.clouds:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f3_arg0.clouds:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_in"])
 				f3_arg0.clouds:setLeftRight(0, 0, -158.5, 1071.5)
 				f3_arg0.clouds:setScale(0.9, 0.9)
 				f3_arg0.clouds:registerEventHandler("interrupted_keyframe", f3_arg0.clipInterrupted)
@@ -60,7 +60,7 @@ CoD.ui_icon_callingcards_stpatricks1.__clipsPerState = {
 			f3_local0(f3_arg0.clouds)
 			local f3_local1 = function(f5_arg0)
 				f3_arg0.speedlines:playClip("DefaultClip")
-				f3_arg0.speedlines:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f3_arg0.speedlines:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_in"])
 				f3_arg0.speedlines:setAlpha(0.6)
 				f3_arg0.speedlines:setScale(1, 1)
 				f3_arg0.speedlines:registerEventHandler("interrupted_keyframe", f3_arg0.clipInterrupted)
@@ -75,7 +75,7 @@ CoD.ui_icon_callingcards_stpatricks1.__clipsPerState = {
 			f3_arg0.speedlines:setScale(0.7, 0.7)
 			f3_local1(f3_arg0.speedlines)
 			local f3_local2 = function(f7_arg0)
-				f3_arg0.ruin:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f3_arg0.ruin:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_in"])
 				f3_arg0.ruin:setScale(2, 2)
 				f3_arg0.ruin:registerEventHandler("interrupted_keyframe", f3_arg0.clipInterrupted)
 				f3_arg0.ruin:registerEventHandler("transition_complete_keyframe", f3_arg0.clipFinished)

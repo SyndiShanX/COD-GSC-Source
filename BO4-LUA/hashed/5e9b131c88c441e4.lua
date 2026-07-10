@@ -8,7 +8,7 @@ CoD.WZTeamPlayerIsTarget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	self.soundSet = "none"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local BountyIndicator = LUI.UIImage.new(0.5, 0.5, -15, 15, 0.5, 0.5, -15, 15)
-	BountyIndicator:setImage(RegisterImage(0x651B795DA754E93))
+	BountyIndicator:setImage(RegisterImage(@"uie_ui_hud_wz_hud_bounty"))
 	self:addElement(BountyIndicator)
 	self.BountyIndicator = BountyIndicator
 	self:mergeStateConditions({

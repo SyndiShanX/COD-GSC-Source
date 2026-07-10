@@ -24,14 +24,14 @@ LUI.createMenu.Prestige_CustomizeIcon = function(f1_arg0, f1_arg1)
 	self.BlackBacking = BlackBacking
 	local TiledPlusGrid = LUI.UIImage.new(0.5, 0.5, -1095, 960, 0.5, 0.5, -540, 540)
 	TiledPlusGrid:setAlpha(0.05)
-	TiledPlusGrid:setImage(RegisterImage(0x6E37BAE22631294))
-	TiledPlusGrid:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	TiledPlusGrid:setImage(RegisterImage(@"uie_ui_hud_vehicle_hellstorm_repeat_plusgrid"))
+	TiledPlusGrid:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	TiledPlusGrid:setShaderVector(0, 0, 0, 0, 0)
 	TiledPlusGrid:setupNineSliceShader(220, 220)
 	self:addElement(TiledPlusGrid)
 	self.TiledPlusGrid = TiledPlusGrid
 	local GenericMenuFrame = CoD.GenericMenuFrame.new(f1_local1, f1_arg0, 0, 1, 0, 0, 0, 1, 0, 0)
-	GenericMenuFrame.CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(CoD.CustomizePrestigeIconUtility.GetCustomizePrestigeIconMenuTitleString(0x754A8D073F00C06)))
+	GenericMenuFrame.CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(CoD.CustomizePrestigeIconUtility.GetCustomizePrestigeIconMenuTitleString(@"hash_7754A8D073F00C06")))
 	GenericMenuFrame.CommonHeader.subtitle.subtitle:setText("")
 	self:addElement(GenericMenuFrame)
 	self.GenericMenuFrame = GenericMenuFrame
@@ -77,7 +77,7 @@ LUI.createMenu.Prestige_CustomizeIcon = function(f1_arg0, f1_arg1)
 	IconList:setHorizontalCount(4)
 	IconList:setVerticalCount(4)
 	IconList:setSpacing(20)
-	IconList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	IconList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	IconList:setVerticalCounter(CoD.verticalCounter)
 	IconList:setDataSource("PrestigeIcon")
 	IconList:registerEventHandler("gain_focus", function(element, event)
@@ -87,16 +87,16 @@ LUI.createMenu.Prestige_CustomizeIcon = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f6_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f6_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(IconList, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(IconList, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		CoD.CustomizePrestigeIconUtility.PrestigeIconSelected(menu, element, controller)
 		UpdateElementDataSource(self, "IconList")
 		CoD.PrestigeUtility.ClearHasPrestigedStatus(self, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 		return true
 	end, false)
 	self:addElement(IconList)
@@ -109,11 +109,11 @@ LUI.createMenu.Prestige_CustomizeIcon = function(f1_arg0, f1_arg1)
 		UpdateElementState(self, "Details", f1_arg0)
 		return f10_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		GoBack(self, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 		return true
 	end, false)
 	if CoD.isPC then

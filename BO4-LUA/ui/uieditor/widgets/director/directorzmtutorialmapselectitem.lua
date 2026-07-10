@@ -23,7 +23,7 @@ CoD.DirectorZMTutorialMapSelectItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	Botton:linkToElementModel(self, "name", true, function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
-			Botton.MapName:setText(Engine[0xF9F1239CFD921FE](f4_local0))
+			Botton.MapName:setText(Engine[@"hash_4F9F1239CFD921FE"](f4_local0))
 		end
 	end)
 	Botton:linkToElementModel(self, "icon", true, function(model)
@@ -44,7 +44,7 @@ CoD.DirectorZMTutorialMapSelectItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	})
 	local f1_local2 = self
 	local f1_local3 = self.subscribeToModel
-	local f1_local4 = Engine[0x8DF2E5447F384B9]()
+	local f1_local4 = Engine[@"getglobalmodel"]()
 	f1_local3(f1_local2, f1_local4["MapVote.mapVoteMapNext"], function(f7_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -65,7 +65,7 @@ CoD.DirectorZMTutorialMapSelectItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	end)
 	f1_local2 = self
 	f1_local3 = self.subscribeToModel
-	f1_local4 = Engine[0x8DF2E5447F384B9]()
+	f1_local4 = Engine[@"getglobalmodel"]()
 	f1_local3(f1_local2, f1_local4.localZMDifficulty, function(f9_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

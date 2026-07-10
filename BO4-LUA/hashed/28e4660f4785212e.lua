@@ -25,13 +25,13 @@ LUI.createMenu.FTUEInfoScreen = function(f1_arg0, f1_arg1)
 	self.StartMenuBackground = StartMenuBackground
 	local backing = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	backing:setRGB(0, 0, 0)
-	backing:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	backing:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	backing:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(backing)
 	self.backing = backing
 	local BackgroundImage = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	BackgroundImage:setAlpha(0.85)
-	BackgroundImage:setImage(RegisterImage(0x4BF88A437F4C579))
+	BackgroundImage:setImage(RegisterImage(@"uie_fe_cp_background"))
 	self:addElement(BackgroundImage)
 	self.BackgroundImage = BackgroundImage
 	local FooterContainerFrontendRight = CoD.FooterContainer_Frontend_Right.new(f1_local1, f1_arg0, 0, 1, 0, 0, 1, 1, -48, 0)
@@ -54,8 +54,8 @@ LUI.createMenu.FTUEInfoScreen = function(f1_arg0, f1_arg1)
 	self.FooterContainerFrontendRight = FooterContainerFrontendRight
 	local NoiseTiledBacking = LUI.UIImage.new(0.5, 0.5, -631, 648, 0.5, 0.5, 87.5, 336.5)
 	NoiseTiledBacking:setAlpha(0)
-	NoiseTiledBacking:setImage(RegisterImage(0x34839E8065B1E53))
-	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	NoiseTiledBacking:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	NoiseTiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	NoiseTiledBacking:setupNineSliceShader(196, 88)
 	self:addElement(NoiseTiledBacking)
@@ -63,8 +63,8 @@ LUI.createMenu.FTUEInfoScreen = function(f1_arg0, f1_arg1)
 	local Title = LUI.UIText.new(0.5, 0.5, -632, 649, 0.5, 0.5, -438, -373)
 	Title:setRGB(ColorSet.GroupName.r, ColorSet.GroupName.g, ColorSet.GroupName.b)
 	Title:setTTF("ttmussels_regular")
-	Title:setAlignment(Engine[0x7F8853DC3581AA4](Enum[0x7A5123B654282D2][0x58C8A85F2048829]))
-	Title:setAlignment(Engine[0x7F8853DC3581AA4](Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3]))
+	Title:setAlignment(Engine[@"hash_67F8853DC3581AA4"](Enum[@"luialignment"][@"lui_alignment_left"]))
+	Title:setAlignment(Engine[@"hash_67F8853DC3581AA4"](Enum[@"luialignment"][@"lui_alignment_top"]))
 	Title:subscribeToGlobalModel(f1_arg0, "FTUEInfo", "mainTitle", function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -80,14 +80,14 @@ LUI.createMenu.FTUEInfoScreen = function(f1_arg0, f1_arg1)
 	List:setHorizontalCount(4)
 	List:setSpacing(90)
 	List:setBalanceGridRows(true)
-	List:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	List:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	List:setDataSource("FTUEEntries")
 	self:addElement(List)
 	self.List = List
 	local infoBracketBot = LUI.UIImage.new(0.5, 0.5, -632, 649, 0.5, 0.5, 327, 335)
 	infoBracketBot:setAlpha(0)
-	infoBracketBot:setImage(RegisterImage(0xC325BED3F226657))
-	infoBracketBot:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	infoBracketBot:setImage(RegisterImage(@"hash_4C325BED3F226657"))
+	infoBracketBot:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	infoBracketBot:setShaderVector(0, 0, 0, 0, 0)
 	infoBracketBot:setupNineSliceShader(16, 4)
 	self:addElement(infoBracketBot)
@@ -107,12 +107,12 @@ LUI.createMenu.FTUEInfoScreen = function(f1_arg0, f1_arg1)
 	SingleEntryText:setAlpha(0)
 	SingleEntryText:setTTF("dinnext_regular")
 	SingleEntryText:setLineSpacing(1)
-	SingleEntryText:setAlignment(Engine[0x7F8853DC3581AA4](Enum[0x7A5123B654282D2][0x58C8A85F2048829]))
-	SingleEntryText:setAlignment(Engine[0x7F8853DC3581AA4](Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3]))
+	SingleEntryText:setAlignment(Engine[@"hash_67F8853DC3581AA4"](Enum[@"luialignment"][@"lui_alignment_left"]))
+	SingleEntryText:setAlignment(Engine[@"hash_67F8853DC3581AA4"](Enum[@"luialignment"][@"lui_alignment_top"]))
 	SingleEntryText:subscribeToGlobalModel(f1_arg0, "FTUEInfo", "mainText", function(model)
 		local f5_local0 = model:get()
 		if f5_local0 ~= nil then
-			SingleEntryText:setText(Engine[0xF9F1239CFD921FE](f5_local0))
+			SingleEntryText:setText(Engine[@"hash_4F9F1239CFD921FE"](f5_local0))
 		end
 	end)
 	self:addElement(SingleEntryText)
@@ -128,7 +128,7 @@ LUI.createMenu.FTUEInfoScreen = function(f1_arg0, f1_arg1)
 	})
 	local PCButton2 = ContentWarningText
 	local PCButton = ContentWarningText.subscribeToModel
-	local Lines = Engine[0x8DF2E5447F384B9]()
+	local Lines = Engine[@"getglobalmodel"]()
 	PCButton(PCButton2, Lines["storageGlobalRoot.user_settings"], function(f7_arg0)
 		f1_local1:updateElementState(ContentWarningText, {
 			name = "model_validation",
@@ -140,13 +140,13 @@ LUI.createMenu.FTUEInfoScreen = function(f1_arg0, f1_arg1)
 	end, false)
 	ContentWarningText:setAlpha(0)
 	ContentWarningText.TextBox:setRGB(0.76, 0.28, 0.28)
-	ContentWarningText.TextBox:setText(Engine[0xF9F1239CFD921FE](SetStringRefPlatformDependant(0x65916AB4A7E637A, 0xED2BAA9C2D148DA)))
+	ContentWarningText.TextBox:setText(Engine[@"hash_4F9F1239CFD921FE"](SetStringRefPlatformDependant(@"hash_465916AB4A7E637A", @"hash_6ED2BAA9C2D148DA")))
 	ContentWarningText.TextBox:setLetterSpacing(0)
 	self:addElement(ContentWarningText)
 	self.ContentWarningText = ContentWarningText
 	PCButton = nil
 	PCButton = CoD.PC_MOTD_Buttons.new(f1_local1, f1_arg0, 0.5, 0.5, -632.5, -392.5, 0.5, 0.5, 372.5, 452.5)
-	PCButton.OptionText:setText(LocalizeToUpperString(0x6393FF34EA56966))
+	PCButton.OptionText:setText(LocalizeToUpperString(@"menu/continue"))
 	PCButton:linkToElementModel(self, "image", true, function(model)
 		local f8_local0 = model:get()
 		if f8_local0 ~= nil then
@@ -160,14 +160,14 @@ LUI.createMenu.FTUEInfoScreen = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f9_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f9_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(PCButton, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(PCButton, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		CoD.FTUEUtility.AdvanceCurrentSequence(self, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 		return false
 	end, false)
 	self:addElement(PCButton)
@@ -175,7 +175,7 @@ LUI.createMenu.FTUEInfoScreen = function(f1_arg0, f1_arg1)
 	PCButton2 = nil
 	PCButton2 = CoD.PC_MOTD_Buttons.new(f1_local1, f1_arg0, 0.5, 0.5, -380, -140, 0.5, 0.5, 372.5, 452.5)
 	PCButton2:setAlpha(0)
-	PCButton2.OptionText:setText(LocalizeToUpperString(0x6393FF34EA56966))
+	PCButton2.OptionText:setText(LocalizeToUpperString(@"menu/continue"))
 	PCButton2:linkToElementModel(self, "image", true, function(model)
 		local f12_local0 = model:get()
 		if f12_local0 ~= nil then
@@ -189,15 +189,15 @@ LUI.createMenu.FTUEInfoScreen = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f13_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f13_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(PCButton2, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(PCButton2, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		CoD.FTUEUtility.WriteMPStats(controller)
 		CoD.FTUEUtility.DismissPromoEventPC(menu, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 		return false
 	end, false)
 	self:addElement(PCButton2)
@@ -209,39 +209,39 @@ LUI.createMenu.FTUEInfoScreen = function(f1_arg0, f1_arg1)
 	self.Lines = Lines
 	local dotline = LUI.UIImage.new(0.5, 0.5, -632.5, 649.5, 0.5, 0.5, 355.5, 359.5)
 	dotline:setAlpha(0.25)
-	dotline:setImage(RegisterImage(0xF9C7F41C631866E))
-	dotline:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	dotline:setImage(RegisterImage(@"uie_ui_menu_social_emblem_dotline"))
+	dotline:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	dotline:setShaderVector(0, 1.2, 0, 0, 0)
 	self:addElement(dotline)
 	self.dotline = dotline
 	local dotline2 = LUI.UIImage.new(0.5, 0.5, -631.5, 649.5, 0.5, 0.5, -348, -344)
 	dotline2:setAlpha(0.25)
-	dotline2:setImage(RegisterImage(0xF9C7F41C631866E))
-	dotline2:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	dotline2:setImage(RegisterImage(@"uie_ui_menu_social_emblem_dotline"))
+	dotline2:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	dotline2:setShaderVector(0, 1.2, 0, 0, 0)
 	self:addElement(dotline2)
 	self.dotline2 = dotline2
 	local CornerPip = LUI.UIImage.new(0.5, 0.5, -674, -651, 0.5, 0.5, -367, -344)
 	CornerPip:setAlpha(0.25)
-	CornerPip:setImage(RegisterImage(0x8DC834094E7A02C))
+	CornerPip:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_window_corner"))
 	self:addElement(CornerPip)
 	self.CornerPip = CornerPip
 	local CornerPip3 = LUI.UIImage.new(0.5, 0.5, 670, 693, 0.5, 0.5, 353.5, 376.5)
 	CornerPip3:setAlpha(0.25)
 	CornerPip3:setZRot(180)
-	CornerPip3:setImage(RegisterImage(0x8DC834094E7A02C))
+	CornerPip3:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_window_corner"))
 	self:addElement(CornerPip3)
 	self.CornerPip3 = CornerPip3
 	local CornerPip4 = LUI.UIImage.new(0.5, 0.5, 670, 693, 0.5, 0.5, -367, -344)
 	CornerPip4:setAlpha(0.25)
 	CornerPip4:setZRot(270)
-	CornerPip4:setImage(RegisterImage(0x8DC834094E7A02C))
+	CornerPip4:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_window_corner"))
 	self:addElement(CornerPip4)
 	self.CornerPip4 = CornerPip4
 	local CornerPip2 = LUI.UIImage.new(0, 0, 297.5, 320.5, 0.5, 0.5, 353.5, 376.5)
 	CornerPip2:setAlpha(0.25)
 	CornerPip2:setZRot(90)
-	CornerPip2:setImage(RegisterImage(0x8DC834094E7A02C))
+	CornerPip2:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_window_corner"))
 	self:addElement(CornerPip2)
 	self.CornerPip2 = CornerPip2
 	local BoxHighlighted = CoD.CommonBgLayoutElement03.new(f1_local1, f1_arg0, 0, 0, 253.5, 329.5, 0.5, 0.5, -455.5, -75.5)
@@ -289,7 +289,7 @@ LUI.createMenu.FTUEInfoScreen = function(f1_arg0, f1_arg1)
 	})
 	local f1_local25 = self
 	local f1_local26 = self.subscribeToModel
-	local f1_local27 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	local f1_local27 = Engine[@"getmodelforcontroller"](f1_arg0)
 	f1_local26(f1_local25, f1_local27["FTUEInfo.layout"], function(f21_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",
@@ -301,12 +301,12 @@ LUI.createMenu.FTUEInfoScreen = function(f1_arg0, f1_arg1)
 	end, false)
 	f1_local25 = self
 	f1_local26 = self.subscribeToModel
-	f1_local27 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	f1_local27 = Engine[@"getmodelforcontroller"](f1_arg0)
 	f1_local26(f1_local25, f1_local27["FTUEInfo.layout"], function(f22_arg0, f22_arg1)
-		CoD.Menu.UpdateButtonShownState(f22_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(f22_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A])
+		CoD.Menu.UpdateButtonShownState(f22_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(f22_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"])
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "MOUSE1", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "MOUSE1", function(element, menu, controller, model)
 		if not IsPC() and not IsRepeatButtonPress(model) and CoD.ModelUtility.IsModelValueEqualToEnum(controller, "FTUEInfo.layout", CoD.FTUEUtility.FTUELayouts.StoreUpsell) and not CoD.BaseUtility.IsButtonHoldFinished(model) then
 			CoD.FTUEUtility.AdvanceCurrentSequence(self, controller)
 			PlaySoundAlias("uin_toggle_generic")
@@ -336,28 +336,28 @@ LUI.createMenu.FTUEInfoScreen = function(f1_arg0, f1_arg1)
 	end, function(element, menu, controller)
 		local f24_local0 = nil
 		if not IsPC() and not IsRepeatButtonPress(f24_local0) and CoD.ModelUtility.IsModelValueEqualToEnum(controller, "FTUEInfo.layout", CoD.FTUEUtility.FTUELayouts.StoreUpsell) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x85952ACC6D0C1B0, Enum[0xBEBDBAEEB3ECCCA][0x71B04FAC5BE0E35] | 750 << Enum[0xBEBDBAEEB3ECCCA][0x76ADD225D738C93], "MOUSE1")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/purchase", Enum[@"luibuttonpromptflags"][@"hash_771B04FAC5BE0E35"] | 750 << Enum[@"luibuttonpromptflags"][@"hash_176ADD225D738C93"], "MOUSE1")
 			return true
 		elseif not IsPC() and not IsRepeatButtonPress(f24_local0) and CoD.ModelUtility.IsModelValueEqualToEnum(controller, "FTUEInfo.layout", CoD.FTUEUtility.FTUELayouts.PromoEvent) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x29C903C6DF90D6F, Enum[0xBEBDBAEEB3ECCCA][0x71B04FAC5BE0E35] | 750 << Enum[0xBEBDBAEEB3ECCCA][0x76ADD225D738C93], "MOUSE1")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/black_market", Enum[@"luibuttonpromptflags"][@"hash_771B04FAC5BE0E35"] | 750 << Enum[@"luibuttonpromptflags"][@"hash_176ADD225D738C93"], "MOUSE1")
 			return true
 		elseif not IsPC() and not IsRepeatButtonPress(f24_local0) and CoD.ModelUtility.IsModelValueEqualToEnum(controller, "FTUEInfo.layout", CoD.FTUEUtility.FTUELayouts.HoldButtonEntries1) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x6393FF34EA56966, Enum[0xBEBDBAEEB3ECCCA][0x71B04FAC5BE0E35] | 750 << Enum[0xBEBDBAEEB3ECCCA][0x76ADD225D738C93], "MOUSE1")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/continue", Enum[@"luibuttonpromptflags"][@"hash_771B04FAC5BE0E35"] | 750 << Enum[@"luibuttonpromptflags"][@"hash_176ADD225D738C93"], "MOUSE1")
 			return true
 		elseif IsPC() and not IsRepeatButtonPress(f24_local0) and CoD.ModelUtility.IsModelValueEqualToEnum(controller, "FTUEInfo.layout", CoD.FTUEUtility.FTUELayouts.HoldButtonEntries1) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x6393FF34EA56966, Enum[0xBEBDBAEEB3ECCCA][0x71B04FAC5BE0E35] | 750 << Enum[0xBEBDBAEEB3ECCCA][0x76ADD225D738C93], "MOUSE1")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/continue", Enum[@"luibuttonpromptflags"][@"hash_771B04FAC5BE0E35"] | 750 << Enum[@"luibuttonpromptflags"][@"hash_176ADD225D738C93"], "MOUSE1")
 			return true
 		elseif not IsPC() and not IsRepeatButtonPress(f24_local0) and not CoD.ModelUtility.IsModelValueEqualToEnum(controller, "FTUEInfo.layout", CoD.FTUEUtility.FTUELayouts.HoldButtonEntries1) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x6393FF34EA56966, nil, "MOUSE1")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/continue", nil, "MOUSE1")
 			return true
 		elseif IsPC() and not IsRepeatButtonPress(f24_local0) and not CoD.ModelUtility.IsModelValueEqualToEnum(controller, "FTUEInfo.layout", CoD.FTUEUtility.FTUELayouts.HoldButtonEntries1) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x6393FF34EA56966, nil, "MOUSE1")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/continue", nil, "MOUSE1")
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		if CoD.ModelUtility.IsModelValueEqualToEnum(controller, "FTUEInfo.layout", CoD.FTUEUtility.FTUELayouts.WarningEntry) then
 			CoD.FTUEUtility.BackOutCurrentSequence(self, controller)
 			return true
@@ -376,16 +376,16 @@ LUI.createMenu.FTUEInfoScreen = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if CoD.ModelUtility.IsModelValueEqualToEnum(controller, "FTUEInfo.layout", CoD.FTUEUtility.FTUELayouts.WarningEntry) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 			return true
 		elseif CoD.ModelUtility.IsModelValueEqualToEnum(controller, "FTUEInfo.layout", CoD.FTUEUtility.FTUELayouts.StoreUpsell) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x3996BAAC73C3F6D, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/dismiss", nil, nil)
 			return true
 		elseif CoD.ModelUtility.IsModelValueEqualToEnum(controller, "FTUEInfo.layout", CoD.FTUEUtility.FTUELayouts.PromoEvent) and not IsPC() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x3996BAAC73C3F6D, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/dismiss", nil, nil)
 			return true
 		elseif CoD.ModelUtility.IsModelValueEqualToEnum(controller, "FTUEInfo.layout", CoD.FTUEUtility.FTUELayouts.PromoEvent) and IsPC() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x3996BAAC73C3F6D, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/dismiss", nil, nil)
 			return true
 		else
 			return false
@@ -425,7 +425,7 @@ LUI.createMenu.FTUEInfoScreen = function(f1_arg0, f1_arg1)
 	end
 	f1_local26 = self
 	if IsPC() then
-		UpdateButtonPromptState(f1_local1, f1_local26, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A])
+		UpdateButtonPromptState(f1_local1, f1_local26, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"])
 		ChangeDefaultFocus(self, self.PCButton)
 	else
 		MenuHidesFreeCursor(f1_local1, f1_arg0)
@@ -450,10 +450,10 @@ CoD.FTUEInfoScreen.__resetProperties = function(f29_arg0)
 	f29_arg0.infoBracketBot:setAlpha(0)
 	f29_arg0.NoiseTiledBacking:setAlpha(0)
 	f29_arg0.PCButton2:setAlpha(0)
-	f29_arg0.PCButton2.OptionText:setText(LocalizeToUpperString(0x6393FF34EA56966))
+	f29_arg0.PCButton2.OptionText:setText(LocalizeToUpperString(@"menu/continue"))
 	f29_arg0.ContentWarningText:setAlpha(0)
 	f29_arg0.FixedAspectRatioImage:setAlpha(0)
-	f29_arg0.PCButton.OptionText:setText(LocalizeToUpperString(0x6393FF34EA56966))
+	f29_arg0.PCButton.OptionText:setText(LocalizeToUpperString(@"menu/continue"))
 end
 CoD.FTUEInfoScreen.__clipsPerState = {
 	DefaultState = {
@@ -561,12 +561,12 @@ CoD.FTUEInfoScreen.__clipsPerState = {
 			f34_arg0.clipFinished(f34_arg0.SingleEntryText)
 			f34_arg0.PCButton:completeAnimation()
 			f34_arg0.PCButton.OptionText:completeAnimation()
-			f34_arg0.PCButton.OptionText:setText(LocalizeToUpperString(0x29C903C6DF90D6F))
+			f34_arg0.PCButton.OptionText:setText(LocalizeToUpperString(@"menu/black_market"))
 			f34_arg0.clipFinished(f34_arg0.PCButton)
 			f34_arg0.PCButton2:completeAnimation()
 			f34_arg0.PCButton2.OptionText:completeAnimation()
 			f34_arg0.PCButton2:setAlpha(1)
-			f34_arg0.PCButton2.OptionText:setText(LocalizeToUpperString(0x3996BAAC73C3F6D))
+			f34_arg0.PCButton2.OptionText:setText(LocalizeToUpperString(@"menu/dismiss"))
 			f34_arg0.clipFinished(f34_arg0.PCButton2)
 			f34_arg0.Lines:completeAnimation()
 			f34_arg0.Lines:setAlpha(1)

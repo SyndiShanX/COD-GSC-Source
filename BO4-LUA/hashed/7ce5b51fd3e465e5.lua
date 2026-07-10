@@ -7,8 +7,8 @@ CoD.ui_icon_callingcards_fairytales_flame3.new = function(f1_arg0, f1_arg1, f1_a
 	self.id = "ui_icon_callingcards_fairytales_flame3"
 	self.soundSet = "default"
 	local fire3 = LUI.UIImage.new(0, 0, -220, 20, 0, 0, -120, 56)
-	fire3:setImage(RegisterImage(0x45BC54F122A1AD3))
-	fire3:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	fire3:setImage(RegisterImage(@"uie_ui_icon_callingcards_fairytale_fire3"))
+	fire3:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(fire3)
 	self.fire3 = fire3
 	if PostLoadFunc then

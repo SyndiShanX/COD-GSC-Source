@@ -11,7 +11,7 @@ CoD.ZMLoadoutPreviewActiveClass.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	ActiveClassTab:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
 	ActiveClassTab:setTTF("ttmussels_demibold")
 	ActiveClassTab:setLetterSpacing(2)
-	ActiveClassTab:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	ActiveClassTab:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	ActiveClassTab:linkToElementModel(self, "customClassName", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -30,7 +30,7 @@ CoD.ZMLoadoutPreviewActiveClass.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	})
 	local f1_local2 = self
 	local f1_local3 = self.subscribeToModel
-	local f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local3(f1_local2, f1_local4.selectedCustomClass, function(f4_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

@@ -18,22 +18,22 @@ CoD.LaboratorySpecialOffers.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	SpecialOffers:setWidgetType(CoD.LaboratoryListItem)
 	SpecialOffers:setHorizontalCount(3)
 	SpecialOffers:setSpacing(16)
-	SpecialOffers:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	SpecialOffers:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	SpecialOffers:setFilter(function(f2_arg0)
 		return f2_arg0.specialOffer:get() == true
 	end)
 	SpecialOffers:setDataSource("ZMLaboratoryNPItemList")
 	local LaboratoryOffersHeader = SpecialOffers
 	local StoneTiledBacking = SpecialOffers.subscribeToModel
-	local TextBox = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local TextBox = Engine[@"getmodelforcontroller"](f1_arg1)
 	StoneTiledBacking(LaboratoryOffersHeader, TextBox["Laboratory.animState"], function(f3_arg0, f3_arg1)
-		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	LaboratoryOffersHeader = SpecialOffers
 	StoneTiledBacking = SpecialOffers.subscribeToModel
-	TextBox = Engine[0x4DF5CFBC1771947](f1_arg1)
+	TextBox = Engine[@"getmodelforcontroller"](f1_arg1)
 	StoneTiledBacking(LaboratoryOffersHeader, TextBox["Laboratory.disableInput"], function(f4_arg0, f4_arg1)
-		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	SpecialOffers:registerEventHandler("list_item_gain_focus", function(element, event)
 		local f5_local0 = nil
@@ -47,10 +47,10 @@ CoD.LaboratorySpecialOffers.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 		elseif element.super.gainFocus then
 			f6_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f6_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(SpecialOffers, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(SpecialOffers, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if CoD.ModelUtility.IsModelValueEqualToEnum(controller, "Laboratory.animState", CoD.ZMLaboratoryUtility.LabAnimState.NOT_PLAYING) and CoD.ZMLaboratoryUtility.CanPurchase(controller, element) and CoD.ModelUtility.IsModelValueEqualTo(controller, "Laboratory.disableInput", 0) then
 			CoD.ZMLaboratoryUtility.CacheOfferButtonModel(controller, element, menu)
 			ProcessListAction(self, element, controller, menu)
@@ -63,10 +63,10 @@ CoD.LaboratorySpecialOffers.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 		end
 	end, function(element, menu, controller)
 		if CoD.ModelUtility.IsModelValueEqualToEnum(controller, "Laboratory.animState", CoD.ZMLaboratoryUtility.LabAnimState.NOT_PLAYING) and CoD.ZMLaboratoryUtility.CanPurchase(controller, element) and CoD.ModelUtility.IsModelValueEqualTo(controller, "Laboratory.disableInput", 0) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		elseif CoD.ModelUtility.IsModelValueEqualToEnum(controller, "Laboratory.animState", CoD.ZMLaboratoryUtility.LabAnimState.NOT_PLAYING) and not CoD.ZMLaboratoryUtility.CanPurchase(controller, element) and CoD.ModelUtility.IsModelValueEqualTo(controller, "Laboratory.disableInput", 0) and IsBooleanDvarSet("laboratory_codpoints_enabled") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		else
 			return false
@@ -77,8 +77,8 @@ CoD.LaboratorySpecialOffers.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	StoneTiledBacking = LUI.UIImage.new(0, 0, 0, 480, 0.09, 0.09, -30, 6)
 	StoneTiledBacking:setRGB(0.83, 0.11, 0.01)
 	StoneTiledBacking:setAlpha(0)
-	StoneTiledBacking:setImage(RegisterImage(0x33757173B476ACD))
-	StoneTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	StoneTiledBacking:setImage(RegisterImage(@"uie_ui_zm_laboratory_buttonbgtile"))
+	StoneTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	StoneTiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	StoneTiledBacking:setupNineSliceShader(196, 88)
 	self:addElement(StoneTiledBacking)
@@ -90,11 +90,11 @@ CoD.LaboratorySpecialOffers.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.LaboratoryOffersHeader = LaboratoryOffersHeader
 	TextBox = LUI.UIText.new(0, 0, -30, 506, 0, 0, -14, 23)
 	TextBox:setRGB(0.58, 0.85, 1)
-	TextBox:setText(Engine[0xF9F1239CFD921FE](0x715BBA8DDB1B644))
+	TextBox:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_7715BBA8DDB1B644"))
 	TextBox:setTTF("skorzhen")
 	TextBox:setLetterSpacing(3)
-	TextBox:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	TextBox:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	TextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	TextBox:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	self:addElement(TextBox)
 	self.TextBox = TextBox
 	self:mergeStateConditions({

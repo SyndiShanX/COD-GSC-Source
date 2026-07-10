@@ -12,7 +12,7 @@ CoD.ChatClientPassiveEntryDisplay.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local ChatBackground = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	ChatBackground:setAlpha(0)
-	ChatBackground:setImage(RegisterImage(0xFECB0E0003975BA))
+	ChatBackground:setImage(RegisterImage(@"hash_6FECB0E0003975BA"))
 	self:addElement(ChatBackground)
 	self.ChatBackground = ChatBackground
 	local ChatClientChatEntryStaticView = CoD.ChatClientChatEntryStaticView.new(f1_arg0, f1_arg1, 0.03, 0.03, -2, 516, 0.07, 0.07, 2.5, 213.5)
@@ -35,7 +35,7 @@ CoD.ChatClientPassiveEntryDisplay.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	})
 	local f1_local3 = self
 	local f1_local4 = self.subscribeToModel
-	local f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local4(f1_local3, f1_local5["ChatGlobal.ChatAvailableInMenuEvent"], function(f3_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -47,7 +47,7 @@ CoD.ChatClientPassiveEntryDisplay.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	end, false)
 	f1_local3 = self
 	f1_local4 = self.subscribeToModel
-	f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local4(f1_local3, f1_local5["ChatGlobal.MenuChatInActiveMode"], function(f4_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

@@ -47,7 +47,7 @@ CoD.Armory_AttachmentUpgradeSlotContainer.new = function(f1_arg0, f1_arg1, f1_ar
 	end)
 	local f1_local3 = AttachmentSlot
 	local f1_local4 = AttachmentSlot.subscribeToModel
-	local f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local4(f1_local3, f1_local5.armoryAttachmentUpdated, function(f6_arg0)
 		f1_arg0:updateElementState(AttachmentSlot, {
 			name = "model_validation",
@@ -69,7 +69,7 @@ CoD.Armory_AttachmentUpgradeSlotContainer.new = function(f1_arg0, f1_arg1, f1_ar
 	AttachmentSlot:linkToElementModel(self, "displayName", true, function(model)
 		local f9_local0 = model:get()
 		if f9_local0 ~= nil then
-			AttachmentSlot.AttachmentName:setText(Engine[0xF9F1239CFD921FE](f9_local0))
+			AttachmentSlot.AttachmentName:setText(Engine[@"hash_4F9F1239CFD921FE"](f9_local0))
 		end
 	end)
 	self:addElement(AttachmentSlot)
@@ -93,7 +93,7 @@ CoD.Armory_AttachmentUpgradeSlotContainer.new = function(f1_arg0, f1_arg1, f1_ar
 	end)
 	f1_local3 = self
 	f1_local4 = self.subscribeToModel
-	f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local4(f1_local3, f1_local5.armoryAttachmentUpdated, function(f12_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -149,7 +149,7 @@ CoD.Armory_AttachmentUpgradeSlotContainer.__clipsPerState = {
 			f18_arg0.UpgradeArrow:setZoom(0)
 			f18_arg0.clipFinished(f18_arg0.UpgradeArrow)
 			local f18_local0 = function(f19_arg0)
-				f18_arg0.AttachmentSlot:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f18_arg0.AttachmentSlot:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f18_arg0.AttachmentSlot:setZoom(20)
 				f18_arg0.AttachmentSlot:setScale(1.05, 1.05)
 				f18_arg0.AttachmentSlot:registerEventHandler("interrupted_keyframe", f18_arg0.clipInterrupted)
@@ -167,7 +167,7 @@ CoD.Armory_AttachmentUpgradeSlotContainer.__clipsPerState = {
 			f20_arg0.UpgradeArrow:setZoom(0)
 			f20_arg0.clipFinished(f20_arg0.UpgradeArrow)
 			local f20_local0 = function(f21_arg0)
-				f20_arg0.AttachmentSlot:beginAnimation(200, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f20_arg0.AttachmentSlot:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_out"])
 				f20_arg0.AttachmentSlot:setZoom(0)
 				f20_arg0.AttachmentSlot:setScale(1, 1)
 				f20_arg0.AttachmentSlot:registerEventHandler("interrupted_keyframe", f20_arg0.clipInterrupted)
@@ -196,7 +196,7 @@ CoD.Armory_AttachmentUpgradeSlotContainer.__clipsPerState = {
 			f24_arg0:__resetProperties()
 			f24_arg0:setupElementClipCounter(1)
 			local f24_local0 = function(f25_arg0)
-				f24_arg0.AttachmentSlot:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f24_arg0.AttachmentSlot:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f24_arg0.AttachmentSlot:setZoom(20)
 				f24_arg0.AttachmentSlot:setScale(1.05, 1.05)
 				f24_arg0.AttachmentSlot:registerEventHandler("interrupted_keyframe", f24_arg0.clipInterrupted)
@@ -211,7 +211,7 @@ CoD.Armory_AttachmentUpgradeSlotContainer.__clipsPerState = {
 			f26_arg0:__resetProperties()
 			f26_arg0:setupElementClipCounter(1)
 			local f26_local0 = function(f27_arg0)
-				f26_arg0.AttachmentSlot:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f26_arg0.AttachmentSlot:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f26_arg0.AttachmentSlot:setZoom(0)
 				f26_arg0.AttachmentSlot:setScale(1, 1)
 				f26_arg0.AttachmentSlot:registerEventHandler("interrupted_keyframe", f26_arg0.clipInterrupted)

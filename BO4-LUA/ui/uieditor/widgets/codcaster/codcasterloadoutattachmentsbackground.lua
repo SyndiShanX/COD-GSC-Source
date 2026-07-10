@@ -8,13 +8,13 @@ CoD.CodCasterLoadoutAttachmentsBackground.new = function(f1_arg0, f1_arg1, f1_ar
 	self.soundSet = "default"
 	local BG = LUI.UIImage.new(0, 1, 0, 0, 0, 0, 4, 67)
 	BG:setRGB(0, 0, 0)
-	BG:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	BG:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	BG:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(BG)
 	self.BG = BG
 	local CodCasterLoadoutAttachmentsBackground = LUI.UIImage.new(0, 1, 0, 0, 0, 0, 0, 76)
-	CodCasterLoadoutAttachmentsBackground:setImage(RegisterImage(0x6237BCC6F1A8D53))
-	CodCasterLoadoutAttachmentsBackground:setMaterial(LUI.UIImage.GetCachedMaterial(0x44484DDFAF5C093))
+	CodCasterLoadoutAttachmentsBackground:setImage(RegisterImage(@"hash_36237BCC6F1A8D53"))
+	CodCasterLoadoutAttachmentsBackground:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_normal"))
 	CodCasterLoadoutAttachmentsBackground:setShaderVector(0, 0, 0, 0, 0)
 	CodCasterLoadoutAttachmentsBackground:setupNineSliceShader(55, 38)
 	self:addElement(CodCasterLoadoutAttachmentsBackground)

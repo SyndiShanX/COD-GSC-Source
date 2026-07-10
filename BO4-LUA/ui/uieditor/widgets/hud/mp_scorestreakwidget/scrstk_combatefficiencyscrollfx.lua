@@ -7,14 +7,14 @@ CoD.ScrStk_CombatEfficiencyScrollFX.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	self.id = "ScrStk_CombatEfficiencyScrollFX"
 	self.soundSet = "HUD"
 	local Image1 = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	Image1:setImage(RegisterImage(0xAF40AF7C36D2FD))
-	Image1:setMaterial(LUI.UIImage.GetCachedMaterial(0xD8EA9FE9B0BCF75))
+	Image1:setImage(RegisterImage(@"uie_t7_mp_hud_scorestreak_focusmeterpixelfade"))
+	Image1:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_tile_scroll"))
 	Image1:setShaderVector(0, 1, 1, 0, 0)
 	Image1:setShaderVector(1, 2.4, 0, 0, 0)
 	self:addElement(Image1)
 	self.Image1 = Image1
 	local Image0 = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	Image0:setImage(RegisterImage(0x478CD87D4EF3E51))
+	Image0:setImage(RegisterImage(@"uie_t7_mp_hud_scorestreak_focusmeterpixelfadegrad"))
 	self:addElement(Image0)
 	self.Image0 = Image0
 	if PostLoadFunc then

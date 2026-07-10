@@ -14,8 +14,8 @@ CoD.CommonTabBar.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local LB = CoD.BumperButtonWithKeyMouseText.new(f1_arg0, f1_arg1, 0, 0, 582, 782, 0, 0, 16.5, 50.5)
-	LB.GamepadPrompt:setText(Engine[0xF9F1239CFD921FE](0xF0418298D80E185))
-	LB.GamepadPrompt:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
+	LB.GamepadPrompt:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_F0418298D80E185"))
+	LB.GamepadPrompt:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
 	self:addElement(LB)
 	self.LB = LB
 	local Tabs = CoD.basicTabList.new(f1_arg0, f1_arg1, 0, 0, 786, 2514, 0, 0, 16.5, 76.5)
@@ -23,7 +23,7 @@ CoD.CommonTabBar.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 	self:addElement(Tabs)
 	self.Tabs = Tabs
 	local RB = CoD.BumperButtonWithKeyMouseText.new(f1_arg0, f1_arg1, 0, 0, 2518, 2718, 0, 0, 16.5, 50.5)
-	RB.GamepadPrompt:setText(Engine[0xF9F1239CFD921FE](0xF5CE97BDE3585DB))
+	RB.GamepadPrompt:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_7F5CE97BDE3585DB"))
 	self:addElement(RB)
 	self.RB = RB
 	Tabs.id = "Tabs"

@@ -8,12 +8,12 @@ CoD.callingcards_loot2_surrealistlandscapes_ball.new = function(f1_arg0, f1_arg1
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local ball = LUI.UIImage.new(0, 0, 0, 48, 0, 0, 0, 48)
-	ball:setImage(RegisterImage(0x677E544F069DB17))
+	ball:setImage(RegisterImage(@"uie_ui_menu_callingcards_surrealistlandscape_ball"))
 	self:addElement(ball)
 	self.ball = ball
 	local ball2 = LUI.UIImage.new(0, 0, -28, 76, 0, 0, -28, 76)
-	ball2:setImage(RegisterImage(0xFFBEF2D5D94F063))
-	ball2:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	ball2:setImage(RegisterImage(@"uie_ui_menu_callingcards_surrealistlandscape_glow"))
+	ball2:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(ball2)
 	self.ball2 = ball2
 	if PostLoadFunc then

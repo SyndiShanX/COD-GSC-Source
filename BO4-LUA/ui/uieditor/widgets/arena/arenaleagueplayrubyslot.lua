@@ -7,7 +7,7 @@ CoD.arenaLeaguePlayRubySlot.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.id = "arenaLeaguePlayRubySlot"
 	self.soundSet = "none"
 	local RubySlot = LUI.UIImage.new(0.5, 0.5, -20, 20, 0.5, 0.5, -20, 20)
-	RubySlot:setImage(RegisterImage(0x81EAB9F8F5950E7))
+	RubySlot:setImage(RegisterImage(@"uie_ui_menu_arena_rubyframe"))
 	self:addElement(RubySlot)
 	self.RubySlot = RubySlot
 	if PostLoadFunc then

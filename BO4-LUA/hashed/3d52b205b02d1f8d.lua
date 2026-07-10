@@ -31,32 +31,32 @@ CoD.GameEndScore_DeathCamPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self:addElement(ButtonIcon)
 	self.ButtonIcon = ButtonIcon
 	local WaypointBacker = LUI.UIImage.new(0.5, 0.5, -53, 23, 0.5, 0.5, -73, 3)
-	WaypointBacker:setImage(RegisterImage(0x8DDD1FDE43242E1))
+	WaypointBacker:setImage(RegisterImage(@"uie_ui_hud_core_waypoint_domination_backer"))
 	self:addElement(WaypointBacker)
 	self.WaypointBacker = WaypointBacker
 	local WaypointPattern = LUI.UIImage.new(0.5, 0.5, -53, 23, 0.5, 0.5, -73, 3)
 	WaypointPattern:setRGB(0.13, 0.87, 0.94)
 	WaypointPattern:setAlpha(0.75)
-	WaypointPattern:setImage(RegisterImage(0x159D9B7B7294C91))
-	WaypointPattern:setMaterial(LUI.UIImage.GetCachedMaterial(0xF755127C95CF5B6))
+	WaypointPattern:setImage(RegisterImage(@"uie_ui_hud_core_waypoint_led"))
+	WaypointPattern:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_F755127C95CF5B6"))
 	WaypointPattern:setShaderVector(0, 2, 0, 0, 0)
 	self:addElement(WaypointPattern)
 	self.WaypointPattern = WaypointPattern
 	local YouText = LUI.UIText.new(0.5, 0.5, -44, 14, 0, 0, 16.5, 37.5)
-	YouText:setText(LocalizeToUpperString(0x4657C39C60632A0))
+	YouText:setText(LocalizeToUpperString(@"wz/you"))
 	YouText:setTTF("ttmussels_demibold")
-	YouText:setMaterial(LUI.UIImage.GetCachedMaterial(0x90D57B1E92D39D7))
+	YouText:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_90D57B1E92D39D7"))
 	YouText:setShaderVector(0, 0.5, 0, 0, 0)
 	YouText:setShaderVector(1, 0, 0, 0, 0)
 	YouText:setShaderVector(2, 0, 0, 0, 0.5)
 	YouText:setLetterSpacing(2)
-	YouText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	YouText:setAlignment(Enum[0x7A5123B654282D2][0x6ED4298C93DC5ED])
+	YouText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	YouText:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
 	self:addElement(YouText)
 	self.YouText = YouText
 	local Arrows = LUI.UIImage.new(0.5, 0.5, -31, 1, 0, 0, 54.5, 86.5)
-	Arrows:setImage(RegisterImage(0xAB17136E34541E3))
-	Arrows:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	Arrows:setImage(RegisterImage(@"uie_ui_hud_revive_arrow"))
+	Arrows:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	Arrows:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(Arrows)
 	self.Arrows = Arrows
@@ -94,7 +94,7 @@ CoD.GameEndScore_DeathCamPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	end, false)
 	f1_local7 = self
 	f1_local8 = self.subscribeToModel
-	f1_local9 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local9 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local8(f1_local7, f1_local9["gameScore.hasPlayedDeathCam"], function(f8_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -106,7 +106,7 @@ CoD.GameEndScore_DeathCamPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	end, false)
 	f1_local7 = self
 	f1_local8 = self.subscribeToModel
-	f1_local9 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local9 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local8(f1_local7, f1_local9["gameScore.currentState"], function(f9_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -118,38 +118,38 @@ CoD.GameEndScore_DeathCamPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	end, false)
 	f1_local7 = self
 	f1_local8 = self.subscribeToModel
-	f1_local9 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local8(f1_local7, f1_local9["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x534C7B2375D2D47]], function(f10_arg0)
+	f1_local9 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local8(f1_local7, f1_local9["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_player_dead"]], function(f10_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f10_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x534C7B2375D2D47],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_player_dead"],
 		})
 	end, false)
 	f1_local7 = self
 	f1_local8 = self.subscribeToModel
-	f1_local9 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local8(f1_local7, f1_local9["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x6FFF566DCC09BBD]], function(f11_arg0)
+	f1_local9 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local8(f1_local7, f1_local9["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_spectating_client"]], function(f11_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f11_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x6FFF566DCC09BBD],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_spectating_client"],
 		})
 	end, false)
 	f1_local7 = self
 	f1_local8 = self.subscribeToModel
-	f1_local9 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local8(f1_local7, f1_local9["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x198075B069840DC]], function(f12_arg0)
+	f1_local9 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local8(f1_local7, f1_local9["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_game_ended"]], function(f12_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f12_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x198075B069840DC],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_game_ended"],
 		})
 	end, false)
 	self:appendEventHandler("input_source_changed", function(f13_arg0, f13_arg1)
@@ -158,7 +158,7 @@ CoD.GameEndScore_DeathCamPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	end)
 	f1_local7 = self
 	f1_local8 = self.subscribeToModel
-	f1_local9 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local9 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local8(f1_local7, f1_local9.LastInput, function(f14_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

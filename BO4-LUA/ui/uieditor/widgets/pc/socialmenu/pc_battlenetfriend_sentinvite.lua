@@ -13,13 +13,13 @@ CoD.PC_BattlenetFriend_SentInvite.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	local IMG_Background = LUI.UIImage.new(0.02, 1, 0, 0, 0, 1, 0, 0)
 	IMG_Background:setRGB(0.07, 0.07, 0.07)
 	IMG_Background:setAlpha(0)
-	IMG_Background:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	IMG_Background:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(IMG_Background)
 	self.IMG_Background = IMG_Background
 	local TXTPlayerTag = LUI.UIText.new(0.23, 0.23, 0, 268, 0, 0, 7, 28)
 	TXTPlayerTag:setRGB(ColorSet.EnemyOrange_Protanopia.r, ColorSet.EnemyOrange_Protanopia.g, ColorSet.EnemyOrange_Protanopia.b)
 	TXTPlayerTag:setTTF("notosans_light")
-	TXTPlayerTag:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	TXTPlayerTag:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	TXTPlayerTag:linkToElementModel(self, "identityBadge.gamertag", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -42,27 +42,27 @@ CoD.PC_BattlenetFriend_SentInvite.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 		elseif element.super.gainFocus then
 			f4_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f4_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(BTN_Remove, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(BTN_Remove, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		CoD.PCUtility.RevokeSentFriendRequest(self, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 		return false
 	end, false)
 	self:addElement(BTN_Remove)
 	self.BTN_Remove = BTN_Remove
 	local TXTPending = LUI.UIText.new(0.23, 0.23, 0, 270, 0.49, 0.49, 0, 15)
-	TXTPending:setText(Engine[0xF9F1239CFD921FE](0x3DD0EE1DB9F6A1C))
+	TXTPending:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_33DD0EE1DB9F6A1C"))
 	TXTPending:setTTF("notosans_regular")
-	TXTPending:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	TXTPending:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	TXTPending:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	TXTPending:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(TXTPending)
 	self.TXTPending = TXTPending
 	local ProgramImage = LUI.UIImage.new(0.11, 0.11, 0, 40, 0.5, 0.5, -22, 18)
-	ProgramImage:setImage(RegisterImage(0x6EB79ABD22C8593))
+	ProgramImage:setImage(RegisterImage(@"uie_social_friendlist_offline_icon"))
 	self:addElement(ProgramImage)
 	self.ProgramImage = ProgramImage
 	self:mergeStateConditions({

@@ -11,7 +11,7 @@ CoD.CoDPointPrice.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 	AmountText:setRGB(ColorSet.CodPointsNumber.r, ColorSet.CodPointsNumber.g, ColorSet.CodPointsNumber.b)
 	AmountText:setTTF("ttmussels_demibold")
 	AmountText:setLetterSpacing(1)
-	AmountText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	AmountText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	AmountText:linkToElementModel(self, "name", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -22,10 +22,10 @@ CoD.CoDPointPrice.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 	self.AmountText = AmountText
 	local CoDPointsText = LUI.UIText.new(0, 0, 113, 313, 0, 0, 5, 27)
 	CoDPointsText:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
-	CoDPointsText:setText(Engine[0xF9F1239CFD921FE](0x93582834683FCC5))
+	CoDPointsText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_293582834683FCC5"))
 	CoDPointsText:setTTF("ttmussels_demibold")
 	CoDPointsText:setLetterSpacing(2)
-	CoDPointsText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	CoDPointsText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(CoDPointsText)
 	self.CoDPointsText = CoDPointsText
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)

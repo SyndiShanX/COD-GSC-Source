@@ -22,7 +22,7 @@ CoD.PC_StartMenu_Options_RegistrationForm.new = function(f1_arg0, f1_arg1, f1_ar
 	registrationFormDob:setWidgetType(CoD.StartMenu_Options_NumOption)
 	registrationFormDob:setVerticalCount(3)
 	registrationFormDob:setSpacing(12)
-	registrationFormDob:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	registrationFormDob:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	registrationFormDob:setDataSource("CODAccountRegisterInfoDob")
 	self:addElement(registrationFormDob)
 	self.registrationFormDob = registrationFormDob
@@ -30,7 +30,7 @@ CoD.PC_StartMenu_Options_RegistrationForm.new = function(f1_arg0, f1_arg1, f1_ar
 	registrationFormRegion:setLeftRight(0.5, 0.5, -375, 375)
 	registrationFormRegion:setTopBottom(0, 0, 127.5, 187.5)
 	registrationFormRegion:setWidgetType(CoD.StartMenu_Options_NumOption)
-	registrationFormRegion:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	registrationFormRegion:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	registrationFormRegion:setDataSource("CODAccountRegisterInfoRegion")
 	self:addElement(registrationFormRegion)
 	self.registrationFormRegion = registrationFormRegion
@@ -40,7 +40,7 @@ CoD.PC_StartMenu_Options_RegistrationForm.new = function(f1_arg0, f1_arg1, f1_ar
 	registrationFormOptions:setWidgetType(CoD.StartMenu_Options_SimpleCheckOption)
 	registrationFormOptions:setVerticalCount(2)
 	registrationFormOptions:setSpacing(12)
-	registrationFormOptions:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	registrationFormOptions:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	registrationFormOptions:setDataSource("CODAccountRegisterInfoOptions")
 	registrationFormOptions:registerEventHandler("gain_focus", function(element, event)
 		local f2_local0 = nil
@@ -49,14 +49,14 @@ CoD.PC_StartMenu_Options_RegistrationForm.new = function(f1_arg0, f1_arg1, f1_ar
 		elseif element.super.gainFocus then
 			f2_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f2_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(registrationFormOptions, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "MOUSE1", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(registrationFormOptions, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "MOUSE1", function(element, menu, controller, model)
 		ProcessListAction(self, element, controller, menu)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "MOUSE1")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "MOUSE1")
 		return false
 	end, false)
 	self:addElement(registrationFormOptions)
@@ -66,7 +66,7 @@ CoD.PC_StartMenu_Options_RegistrationForm.new = function(f1_arg0, f1_arg1, f1_ar
 	registerButton:setTopBottom(0.87, 0.87, -61, -1)
 	registerButton:setWidgetType(CoD.StartMenu_Options_ButtonAction)
 	registerButton:setSpacing(12)
-	registerButton:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	registerButton:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	registerButton:setDataSource("CODAccountRegisterConfirmation")
 	registerButton:registerEventHandler("gain_focus", function(element, event)
 		local f5_local0 = nil
@@ -75,24 +75,24 @@ CoD.PC_StartMenu_Options_RegistrationForm.new = function(f1_arg0, f1_arg1, f1_ar
 		elseif element.super.gainFocus then
 			f5_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f5_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(registerButton, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "MOUSE1", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(registerButton, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "MOUSE1", function(element, menu, controller, model)
 		ProcessListAction(self, element, controller, menu)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "MOUSE1")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "MOUSE1")
 		return false
 	end, false)
 	self:addElement(registerButton)
 	self.registerButton = registerButton
 	local DateOfBirthHeader = LUI.UIText.new(0.5, 0.5, -375, 375, 0.4, 0.4, 0, 25)
 	DateOfBirthHeader:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
-	DateOfBirthHeader:setText(Engine[0xF9F1239CFD921FE](0x3BA3C3532BBA47A))
+	DateOfBirthHeader:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_43BA3C3532BBA47A"))
 	DateOfBirthHeader:setTTF("ttmussels_regular")
-	DateOfBirthHeader:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	DateOfBirthHeader:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	DateOfBirthHeader:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	DateOfBirthHeader:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(DateOfBirthHeader)
 	self.DateOfBirthHeader = DateOfBirthHeader
 	local GUIDE = LUI.UIImage.new(0, 0, 1104, 1164, 0, 0, 89.5, 149.5)
@@ -123,8 +123,8 @@ CoD.PC_StartMenu_Options_RegistrationForm.new = function(f1_arg0, f1_arg1, f1_ar
 	InfoText:setRGB(0.96, 0.93, 0.84)
 	InfoText:setAlpha(0.3)
 	InfoText:setTTF("ttmussels_regular")
-	InfoText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	InfoText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	InfoText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	InfoText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	InfoText:linkToElementModel(self, "hintText", true, function(model)
 		local f8_local0 = model:get()
 		if f8_local0 ~= nil then
@@ -134,7 +134,7 @@ CoD.PC_StartMenu_Options_RegistrationForm.new = function(f1_arg0, f1_arg1, f1_ar
 	self:addElement(InfoText)
 	self.InfoText = InfoText
 	local PCRegistrationEmail = CoD.PC_CoDAccount_EditableOption.new(f1_arg0, f1_arg1, 0.5, 0.5, -375, 375, 0.19, 0.19, 0, 60)
-	PCRegistrationEmail.ActionText:setText(LocalizeString(0x1770F1CA89E2DE5))
+	PCRegistrationEmail.ActionText:setText(LocalizeString(@"hash_61770F1CA89E2DE5"))
 	PCRegistrationEmail:linkToElementModel(self, "currentText", true, function(model)
 		local f9_local0 = model:get()
 		if f9_local0 ~= nil then
@@ -147,7 +147,7 @@ CoD.PC_StartMenu_Options_RegistrationForm.new = function(f1_arg0, f1_arg1, f1_ar
 	self:addElement(PCRegistrationEmail)
 	self.PCRegistrationEmail = PCRegistrationEmail
 	local PCRegistrationPassword = CoD.PC_CoDAccount_EditableOption.new(f1_arg0, f1_arg1, 0.5, 0.5, -375, 375, 0.26, 0.26, 0, 60)
-	PCRegistrationPassword.ActionText:setText(LocalizeString(0xA50C91C923FBBF6))
+	PCRegistrationPassword.ActionText:setText(LocalizeString(@"hash_4A50C91C923FBBF6"))
 	PCRegistrationPassword:linkToElementModel(self, "currentText", true, function(model)
 		local f11_local0 = model:get()
 		if f11_local0 ~= nil then
@@ -160,7 +160,7 @@ CoD.PC_StartMenu_Options_RegistrationForm.new = function(f1_arg0, f1_arg1, f1_ar
 	self:addElement(PCRegistrationPassword)
 	self.PCRegistrationPassword = PCRegistrationPassword
 	local PCRegistrationConfirmationPassword = CoD.PC_CoDAccount_EditableOption.new(f1_arg0, f1_arg1, 0.5, 0.5, -375, 375, 0.33, 0.33, 2, 62)
-	PCRegistrationConfirmationPassword.ActionText:setText(LocalizeString(0xC77EF01F8EFB323))
+	PCRegistrationConfirmationPassword.ActionText:setText(LocalizeString(@"hash_7C77EF01F8EFB323"))
 	PCRegistrationConfirmationPassword:linkToElementModel(self, "currentText", true, function(model)
 		local f13_local0 = model:get()
 		if f13_local0 ~= nil then

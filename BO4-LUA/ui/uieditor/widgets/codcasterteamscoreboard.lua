@@ -11,12 +11,12 @@ CoD.CodCasterTeamScoreboard.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local BlurBot = LUI.UIImage.new(0.5, 0.5, -233, 233, 0.62, 0.62, -37.5, 37.5)
-	BlurBot:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	BlurBot:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	BlurBot:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(BlurBot)
 	self.BlurBot = BlurBot
 	local BlurTop = LUI.UIImage.new(0.5, 0.5, -235, 235, 0.18, 0.18, -12.5, 12.5)
-	BlurTop:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	BlurTop:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	BlurTop:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(BlurTop)
 	self.BlurTop = BlurTop
@@ -88,7 +88,7 @@ CoD.CodCasterTeamScoreboard.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	local SelectArrowRight = LUI.UIImage.new(0, 0, 317, 333, 0, 0, 37, 105)
 	SelectArrowRight:setAlpha(0)
 	SelectArrowRight:setYRot(180)
-	SelectArrowRight:setImage(RegisterImage(0xCDDB5BA2ABCA6CF))
+	SelectArrowRight:setImage(RegisterImage(@"hash_3CDDB5BA2ABCA6CF"))
 	SelectArrowRight:subscribeToGlobalModel(f1_arg1, "FactionsGlobal", "axisFactionColor", function(model)
 		local f8_local0 = model:get()
 		if f8_local0 ~= nil then
@@ -99,7 +99,7 @@ CoD.CodCasterTeamScoreboard.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.SelectArrowRight = SelectArrowRight
 	local SelectArrowLeft = LUI.UIImage.new(0, 0, 189, 205, 0, 0, 37, 105)
 	SelectArrowLeft:setAlpha(0)
-	SelectArrowLeft:setImage(RegisterImage(0xCDDB5BA2ABCA6CF))
+	SelectArrowLeft:setImage(RegisterImage(@"hash_3CDDB5BA2ABCA6CF"))
 	SelectArrowLeft:subscribeToGlobalModel(f1_arg1, "FactionsGlobal", "alliesFactionColor", function(model)
 		local f9_local0 = model:get()
 		if f9_local0 ~= nil then
@@ -109,7 +109,7 @@ CoD.CodCasterTeamScoreboard.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self:addElement(SelectArrowLeft)
 	self.SelectArrowLeft = SelectArrowLeft
 	local frame = LUI.UIImage.new(0.5, 0.5, -260, 260, 0, 0, 0, 116)
-	frame:setImage(RegisterImage(0x61C3519381A43C7))
+	frame:setImage(RegisterImage(@"hash_761C3519381A43C7"))
 	self:addElement(frame)
 	self.frame = frame
 	local GameTimer = CoD.Codcaster_timer_nl.new(f1_arg0, f1_arg1, 0.5, 0.5, -50, 50, 0, 0, 44.5, 71.5)
@@ -117,9 +117,9 @@ CoD.CodCasterTeamScoreboard.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.GameTimer = GameTimer
 	local gamemode = LUI.UIText.new(0.5, 0.5, -100, 100, 0, 0, 10, 30)
 	gamemode:setTTF("ttmussels_demibold")
-	gamemode:setMaterial(LUI.UIImage.GetCachedMaterial(0x71E049B161CD00A))
-	gamemode:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	gamemode:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	gamemode:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_171E049B161CD00A"))
+	gamemode:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	gamemode:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	gamemode:subscribeToGlobalModel(f1_arg1, "Scoreboard", "gameType", function(model)
 		local f10_local0 = model:get()
 		if f10_local0 ~= nil then
@@ -130,7 +130,7 @@ CoD.CodCasterTeamScoreboard.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.gamemode = gamemode
 	local TeamIndicatorLeft = LUI.UIImage.new(0, 0, 3, 43, 0, 0, 31, 111)
 	TeamIndicatorLeft:setAlpha(0)
-	TeamIndicatorLeft:setImage(RegisterImage(0xC5A305502986CC7))
+	TeamIndicatorLeft:setImage(RegisterImage(@"hash_7C5A305502986CC7"))
 	TeamIndicatorLeft:subscribeToGlobalModel(f1_arg1, "FactionsGlobal", "alliesFactionColor", function(model)
 		local f11_local0 = model:get()
 		if f11_local0 ~= nil then
@@ -142,7 +142,7 @@ CoD.CodCasterTeamScoreboard.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	local TeamIndicatorRight = LUI.UIImage.new(0, 0, 479, 519, 0, 0, 31, 111)
 	TeamIndicatorRight:setAlpha(0)
 	TeamIndicatorRight:setYRot(180)
-	TeamIndicatorRight:setImage(RegisterImage(0xC5A305502986CC7))
+	TeamIndicatorRight:setImage(RegisterImage(@"hash_7C5A305502986CC7"))
 	TeamIndicatorRight:subscribeToGlobalModel(f1_arg1, "FactionsGlobal", "axisFactionColor", function(model)
 		local f12_local0 = model:get()
 		if f12_local0 ~= nil then
@@ -155,8 +155,8 @@ CoD.CodCasterTeamScoreboard.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	teamname4:setRGB(0, 0, 0)
 	teamname4:setAlpha(0.75)
 	teamname4:setTTF("notosans_bold")
-	teamname4:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
-	teamname4:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	teamname4:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
+	teamname4:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	teamname4:subscribeToGlobalModel(f1_arg1, "Factions", "axisFactionDisplayName", function(model)
 		local f13_local0 = model:get()
 		if f13_local0 ~= nil then
@@ -167,8 +167,8 @@ CoD.CodCasterTeamScoreboard.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.teamname4 = teamname4
 	local teamname3 = LUI.UIText.new(-0.5, -0.5, 632, 742, 0, 0, 13, 31)
 	teamname3:setTTF("notosans_bold")
-	teamname3:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
-	teamname3:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	teamname3:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
+	teamname3:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	teamname3:subscribeToGlobalModel(f1_arg1, "Factions", "axisFactionDisplayName", function(model)
 		local f14_local0 = model:get()
 		if f14_local0 ~= nil then
@@ -193,7 +193,7 @@ CoD.CodCasterTeamScoreboard.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	})
 	local f1_local18 = self
 	local f1_local19 = self.subscribeToModel
-	local f1_local20 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local20 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local19(f1_local18, f1_local20["deadSpectator.playerTeam"], function(f17_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

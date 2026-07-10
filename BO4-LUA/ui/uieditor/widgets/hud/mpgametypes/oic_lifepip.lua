@@ -8,7 +8,7 @@ CoD.OIC_LifePip.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_a
 	self.soundSet = "none"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Image = LUI.UIImage.new(0.5, 0.5, -18.5, 18.5, 0.5, 0.5, -18.5, 18.5)
-	Image:setImage(RegisterImage(0x14B2E7558F68939))
+	Image:setImage(RegisterImage(@"uie_ui_hud_wz_hud_core_icon_lives"))
 	self:addElement(Image)
 	self.Image = Image
 	self:mergeStateConditions({

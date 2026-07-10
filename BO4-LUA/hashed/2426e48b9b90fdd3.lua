@@ -20,8 +20,8 @@ CoD.ButtonFrame_MedalWZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	FeaturedMedalName:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	FeaturedMedalName:setAlpha(0.5)
 	FeaturedMedalName:setTTF("ttmussels_regular")
-	FeaturedMedalName:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	FeaturedMedalName:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	FeaturedMedalName:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	FeaturedMedalName:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	FeaturedMedalName:subscribeToGlobalModel(f1_arg1, "FeaturedMedals", "FeaturedMedal.name", function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -34,7 +34,7 @@ CoD.ButtonFrame_MedalWZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	FeaturedMedalTimesEarned:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
 	FeaturedMedalTimesEarned:setTTF("ttmussels_demibold")
 	FeaturedMedalTimesEarned:setLetterSpacing(3)
-	FeaturedMedalTimesEarned:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	FeaturedMedalTimesEarned:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	FeaturedMedalTimesEarned:subscribeToGlobalModel(f1_arg1, "FeaturedMedals", "FeaturedMedal.timesEarned", function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
@@ -57,8 +57,8 @@ CoD.ButtonFrame_MedalWZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	MultiKillMedalName:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	MultiKillMedalName:setAlpha(0.5)
 	MultiKillMedalName:setTTF("ttmussels_regular")
-	MultiKillMedalName:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	MultiKillMedalName:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	MultiKillMedalName:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	MultiKillMedalName:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	MultiKillMedalName:subscribeToGlobalModel(f1_arg1, "FeaturedMedals", "MultiKillMedal.name", function(model)
 		local f6_local0 = model:get()
 		if f6_local0 ~= nil then
@@ -71,7 +71,7 @@ CoD.ButtonFrame_MedalWZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	MultiKillMedalTimesEarned:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
 	MultiKillMedalTimesEarned:setTTF("ttmussels_demibold")
 	MultiKillMedalTimesEarned:setLetterSpacing(3)
-	MultiKillMedalTimesEarned:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	MultiKillMedalTimesEarned:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	MultiKillMedalTimesEarned:subscribeToGlobalModel(f1_arg1, "FeaturedMedals", "MultiKillMedal.timesEarned", function(model)
 		local f7_local0 = model:get()
 		if f7_local0 ~= nil then
@@ -94,8 +94,8 @@ CoD.ButtonFrame_MedalWZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	KillStreakMedalName:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	KillStreakMedalName:setAlpha(0.5)
 	KillStreakMedalName:setTTF("ttmussels_regular")
-	KillStreakMedalName:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	KillStreakMedalName:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	KillStreakMedalName:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	KillStreakMedalName:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	KillStreakMedalName:subscribeToGlobalModel(f1_arg1, "FeaturedMedals", "KillStreakMedal.name", function(model)
 		local f9_local0 = model:get()
 		if f9_local0 ~= nil then
@@ -108,7 +108,7 @@ CoD.ButtonFrame_MedalWZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	KillStreakMedalTimesEarned:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
 	KillStreakMedalTimesEarned:setTTF("ttmussels_demibold")
 	KillStreakMedalTimesEarned:setLetterSpacing(3)
-	KillStreakMedalTimesEarned:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	KillStreakMedalTimesEarned:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	KillStreakMedalTimesEarned:subscribeToGlobalModel(f1_arg1, "FeaturedMedals", "KillStreakMedal.timesEarned", function(model)
 		local f10_local0 = model:get()
 		if f10_local0 ~= nil then

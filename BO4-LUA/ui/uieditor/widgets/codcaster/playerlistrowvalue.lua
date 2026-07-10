@@ -10,7 +10,7 @@ CoD.PlayerListRowValue.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	local Score0100 = LUI.UIText.new(0, 0, 0, 47, 0.5, 0.5, -7.5, 7.5)
 	Score0100:setText(0)
 	Score0100:setTTF("0arame_mono_stencil")
-	Score0100:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	Score0100:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	self:addElement(Score0100)
 	self.Score0100 = Score0100
 	self:mergeStateConditions({

@@ -20,14 +20,14 @@ CoD.vhud_layoutPlusGridLarge.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	self:addElement(gridPlus04)
 	self.gridPlus04 = gridPlus04
 	local gridPlus05 = LUI.UIImage.new(0, 0, 433, 451, 0, 0, 648.5, 666.5)
-	gridPlus05:setImage(RegisterImage(0xFC173FF2534BB4C))
-	gridPlus05:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	gridPlus05:setImage(RegisterImage(@"uie_ui_hud_vehicle_ac130_layout_grid_plus"))
+	gridPlus05:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	gridPlus05:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(gridPlus05)
 	self.gridPlus05 = gridPlus05
 	local gridPlus06 = LUI.UIImage.new(0, 0, 433, 451, 0, 0, 0, 18)
-	gridPlus06:setImage(RegisterImage(0xFC173FF2534BB4C))
-	gridPlus06:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	gridPlus06:setImage(RegisterImage(@"uie_ui_hud_vehicle_ac130_layout_grid_plus"))
+	gridPlus06:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	gridPlus06:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(gridPlus06)
 	self.gridPlus06 = gridPlus06

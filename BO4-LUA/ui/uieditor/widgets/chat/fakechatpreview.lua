@@ -10,13 +10,13 @@ CoD.FakeChatPreview.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	local Collapsed = nil
 	Collapsed = LUI.UIImage.new(0, 0, -1, 329, 0, 0, 202, 369)
 	Collapsed:setAlpha(0)
-	Collapsed:setImage(RegisterImage(0xF12DFEB7A0E9911))
+	Collapsed:setImage(RegisterImage(@"hash_4F12DFEB7A0E9911"))
 	self:addElement(Collapsed)
 	self.Collapsed = Collapsed
 	local Expanded = nil
 	Expanded = LUI.UIImage.new(0, 0, 0, 540, 0, 0, 67, 370)
 	Expanded:setAlpha(0)
-	Expanded:setImage(RegisterImage(0x4ECAE69096D20D1))
+	Expanded:setImage(RegisterImage(@"hash_54ECAE69096D20D1"))
 	self:addElement(Expanded)
 	self.Expanded = Expanded
 	if PreLoadFunc then

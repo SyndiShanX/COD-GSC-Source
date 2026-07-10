@@ -81,14 +81,14 @@ CoD.TooltipActionPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	end)
 	local f1_local5 = self
 	local f1_local6 = self.subscribeToModel
-	local f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local6(f1_local5, f1_local7["ButtonBits." .. Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA]], function(f11_arg0)
+	local f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local6(f1_local5, f1_local7["ButtonBits." .. Enum[@"luibutton"][@"lui_key_rtrig"]], function(f11_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f11_arg0:get(),
-			modelName = "ButtonBits." .. Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA],
+			modelName = "ButtonBits." .. Enum[@"luibutton"][@"lui_key_rtrig"],
 		})
 	end, false)
 	self:linkToElementModel(self, "detailedViewPC", true, function(model)
@@ -106,7 +106,7 @@ CoD.TooltipActionPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	end)
 	f1_local5 = self
 	f1_local6 = self.subscribeToModel
-	f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local6(f1_local5, f1_local7.LastInput, function(f14_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

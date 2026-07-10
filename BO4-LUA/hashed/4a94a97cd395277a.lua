@@ -7,8 +7,8 @@ CoD.ZombiesPortrait.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	self.id = "ZombiesPortrait"
 	self.soundSet = "default"
 	local Portrait = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	Portrait:setImage(RegisterImage(0x9FC2657D07FF186))
-	Portrait:setMaterial(LUI.UIImage.GetCachedMaterial(0xA02C44161370F6D))
+	Portrait:setImage(RegisterImage(@"ui_icon_hero_portrait_draft_stanton"))
+	Portrait:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_1A02C44161370F6D"))
 	Portrait:setShaderVector(0, 0, 0, 0, 0)
 	Portrait:setShaderVector(1, 1, 1, 0, 0)
 	Portrait:setShaderVector(2, 0.2, 0, 0, 0)

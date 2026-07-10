@@ -11,8 +11,8 @@ CoD.genericVHUDHealthAndRadar.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local BlurMask = LUI.UIImage.new(1, 1, -366, -86, 1, 1, -308, -28)
-	BlurMask:setImage(RegisterImage(0x99AE5E7738A5587))
-	BlurMask:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	BlurMask:setImage(RegisterImage(@"uie_hud_minimap_outer_ring"))
+	BlurMask:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	BlurMask:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(BlurMask)
 	self.BlurMask = BlurMask

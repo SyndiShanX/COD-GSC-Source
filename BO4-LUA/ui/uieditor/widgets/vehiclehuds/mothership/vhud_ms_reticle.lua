@@ -34,7 +34,7 @@ CoD.vhud_ms_Reticle.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local TextureOverlayGrid = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	TextureOverlayGrid:setAlpha(0.55)
-	TextureOverlayGrid:setImage(RegisterImage(0xE0FC77400EBFC1))
+	TextureOverlayGrid:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_mothership_textureoverlaygrid"))
 	self:addElement(TextureOverlayGrid)
 	self.TextureOverlayGrid = TextureOverlayGrid
 	local RingElement0 = CoD.VehicleGround_CenterInnerRingElement.new(f1_arg0, f1_arg1, 0.5, 0.5, -402, -316, 0.5, 0.5, -281, -177)
@@ -49,37 +49,37 @@ CoD.vhud_ms_Reticle.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	local msBoldLightRight = LUI.UIImage.new(0.5, 0.5, 158, 514, 0.5, 0.5, -385, 398)
 	msBoldLightRight:setAlpha(0.3)
 	msBoldLightRight:setZoom(50)
-	msBoldLightRight:setImage(RegisterImage(0xAB4DC9D11F92483))
-	msBoldLightRight:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	msBoldLightRight:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_mothership_rightboldlight"))
+	msBoldLightRight:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(msBoldLightRight)
 	self.msBoldLightRight = msBoldLightRight
 	local msBoldLightLeft = LUI.UIImage.new(0.5, 0.5, -511, -155, 0.5, 0.5, -385, 398)
 	msBoldLightLeft:setAlpha(0.3)
 	msBoldLightLeft:setZRot(-177)
 	msBoldLightLeft:setZoom(50)
-	msBoldLightLeft:setImage(RegisterImage(0xAB4DC9D11F92483))
-	msBoldLightLeft:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	msBoldLightLeft:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_mothership_rightboldlight"))
+	msBoldLightLeft:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(msBoldLightLeft)
 	self.msBoldLightLeft = msBoldLightLeft
 	local msDoubleArrowsLower = LUI.UIImage.new(0.5, 0.5, -12, 21, 0.5, 0.5, 264, 323)
 	msDoubleArrowsLower:setRGB(0.74, 0.94, 0.99)
 	msDoubleArrowsLower:setAlpha(0.3)
 	msDoubleArrowsLower:setZRot(180)
-	msDoubleArrowsLower:setImage(RegisterImage(0x21CD7B1CED9CB58))
-	msDoubleArrowsLower:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	msDoubleArrowsLower:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_mothership_arrowdouble"))
+	msDoubleArrowsLower:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(msDoubleArrowsLower)
 	self.msDoubleArrowsLower = msDoubleArrowsLower
 	local msDoubleArrowsUpper = LUI.UIImage.new(0.5, 0.5, -15, 22, 0.5, 0.5, -337, -300)
 	msDoubleArrowsUpper:setRGB(0.74, 0.94, 0.99)
 	msDoubleArrowsUpper:setAlpha(0.3)
-	msDoubleArrowsUpper:setImage(RegisterImage(0x6D4131DB15D8159))
-	msDoubleArrowsUpper:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	msDoubleArrowsUpper:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_mothership_arrowsingle"))
+	msDoubleArrowsUpper:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(msDoubleArrowsUpper)
 	self.msDoubleArrowsUpper = msDoubleArrowsUpper
 	local msCenterInnerRing = LUI.UIImage.new(0.5, 0.5, -317, 326, 0.5, 0.5, -326, 317)
 	msCenterInnerRing:setAlpha(0.2)
-	msCenterInnerRing:setImage(RegisterImage(0xB7BAE0BCEE02601))
-	msCenterInnerRing:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	msCenterInnerRing:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_mothership_centerinnerring"))
+	msCenterInnerRing:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(msCenterInnerRing)
 	self.msCenterInnerRing = msCenterInnerRing
 	local msCenterPoint = CoD.duplicateStateImage.new(f1_arg0, f1_arg1, 0.5, 0.5, -8, 12, 0.5, 0.5, -11, 9)
@@ -100,7 +100,7 @@ CoD.vhud_ms_Reticle.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	})
 	local msMidDotsL = msCenterPoint
 	local msMidDotsR = msCenterPoint.subscribeToModel
-	local msOutsideArrowBlurR = Engine[0x8DF2E5447F384B9]()
+	local msOutsideArrowBlurR = Engine[@"getglobalmodel"]()
 	msMidDotsR(msMidDotsL, msOutsideArrowBlurR["lobbyRoot.lobbyNav"], function(f3_arg0)
 		f1_arg0:updateElementState(msCenterPoint, {
 			name = "model_validation",
@@ -135,52 +135,52 @@ CoD.vhud_ms_Reticle.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 		})
 	end, false)
 	msCenterPoint:setYRot(180)
-	msCenterPoint.state1Image:setImage(RegisterImage(0xACCB39F8082B9C9))
-	msCenterPoint.state1Image:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	msCenterPoint.state1Image:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_mothership_centerpoint"))
+	msCenterPoint.state1Image:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	msCenterPoint.state2Image:setRGB(ColorSet.EnemyOrange.r, ColorSet.EnemyOrange.g, ColorSet.EnemyOrange.b)
 	self:addElement(msCenterPoint)
 	self.msCenterPoint = msCenterPoint
 	msMidDotsR = LUI.UIImage.new(0.5, 0.5, -960, -960, 0.5, 0.5, -540, -540)
 	msMidDotsR:setRGB(0.74, 0.94, 0.99)
 	msMidDotsR:setAlpha(0)
-	msMidDotsR:setImage(RegisterImage(0x252ACD29099C690))
-	msMidDotsR:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	msMidDotsR:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_mothership_rightmiddots"))
+	msMidDotsR:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(msMidDotsR)
 	self.msMidDotsR = msMidDotsR
 	msMidDotsL = LUI.UIImage.new(0.5, 0.5, -960, -960, 0.5, 0.5, -540, -540)
 	msMidDotsL:setRGB(0.74, 0.94, 0.99)
 	msMidDotsL:setAlpha(0)
 	msMidDotsL:setZRot(180)
-	msMidDotsL:setImage(RegisterImage(0x252ACD29099C690))
-	msMidDotsL:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	msMidDotsL:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_mothership_rightmiddots"))
+	msMidDotsL:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(msMidDotsL)
 	self.msMidDotsL = msMidDotsL
 	msOutsideArrowBlurR = LUI.UIImage.new(0.5, 0.5, 477, 593, 0.5, 0.5, -59, 57)
 	msOutsideArrowBlurR:setAlpha(0.2)
-	msOutsideArrowBlurR:setImage(RegisterImage(0x585DEA94E059B5))
-	msOutsideArrowBlurR:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	msOutsideArrowBlurR:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_mothership_outerarrowblur"))
+	msOutsideArrowBlurR:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(msOutsideArrowBlurR)
 	self.msOutsideArrowBlurR = msOutsideArrowBlurR
 	local msOutsideArrowBlurL = LUI.UIImage.new(0.5, 0.5, -593, -477, 0.5, 0.5, -59, 57)
 	msOutsideArrowBlurL:setAlpha(0.2)
 	msOutsideArrowBlurL:setYRot(180)
-	msOutsideArrowBlurL:setImage(RegisterImage(0x585DEA94E059B5))
-	msOutsideArrowBlurL:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	msOutsideArrowBlurL:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_mothership_outerarrowblur"))
+	msOutsideArrowBlurL:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(msOutsideArrowBlurL)
 	self.msOutsideArrowBlurL = msOutsideArrowBlurL
 	local msOutsideArrowR = LUI.UIImage.new(0.5, 0.5, 525, 575, 0.5, 0.5, -39, 36)
 	msOutsideArrowR:setRGB(0.74, 0.94, 0.99)
 	msOutsideArrowR:setAlpha(0.2)
-	msOutsideArrowR:setImage(RegisterImage(0xC98E0005AC2B3EC))
-	msOutsideArrowR:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	msOutsideArrowR:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_mothership_outerarrow"))
+	msOutsideArrowR:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(msOutsideArrowR)
 	self.msOutsideArrowR = msOutsideArrowR
 	local msOutsideArrowL = LUI.UIImage.new(0.5, 0.5, -579, -529, 0.5, 0.5, -44, 31)
 	msOutsideArrowL:setRGB(0.74, 0.94, 0.99)
 	msOutsideArrowL:setAlpha(0.2)
 	msOutsideArrowL:setZRot(180)
-	msOutsideArrowL:setImage(RegisterImage(0xC98E0005AC2B3EC))
-	msOutsideArrowL:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	msOutsideArrowL:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_mothership_outerarrow"))
+	msOutsideArrowL:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(msOutsideArrowL)
 	self.msOutsideArrowL = msOutsideArrowL
 	local vhudmsFrameBottomRight = CoD.vhud_ms_FrameBottomRight.new(f1_arg0, f1_arg1, 1, 1, -641, 80, 1, 1, -211, 7)
@@ -245,7 +245,7 @@ CoD.vhud_ms_Reticle.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	})
 	local msCenterDiamondSideL = msCenterDiamondT
 	local msCenterDiamondB = msCenterDiamondT.subscribeToModel
-	local msCenterDiamondSideR = Engine[0x8DF2E5447F384B9]()
+	local msCenterDiamondSideR = Engine[@"getglobalmodel"]()
 	msCenterDiamondB(msCenterDiamondSideL, msCenterDiamondSideR["lobbyRoot.lobbyNav"], function(f8_arg0)
 		f1_arg0:updateElementState(msCenterDiamondT, {
 			name = "model_validation",
@@ -279,8 +279,8 @@ CoD.vhud_ms_Reticle.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 			modelName = "vehicleType",
 		})
 	end, false)
-	msCenterDiamondT.state1Image:setImage(RegisterImage(0x3C917B68C1D560E))
-	msCenterDiamondT.state1Image:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	msCenterDiamondT.state1Image:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_mothership_centerdiamondtop"))
+	msCenterDiamondT.state1Image:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	msCenterDiamondT.state2Image:setRGB(ColorSet.EnemyOrange.r, ColorSet.EnemyOrange.g, ColorSet.EnemyOrange.b)
 	self:addElement(msCenterDiamondT)
 	self.msCenterDiamondT = msCenterDiamondT
@@ -302,7 +302,7 @@ CoD.vhud_ms_Reticle.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	})
 	msCenterDiamondSideR = msCenterDiamondB
 	msCenterDiamondSideL = msCenterDiamondB.subscribeToModel
-	local vhudmsReticleLineHostLL = Engine[0x8DF2E5447F384B9]()
+	local vhudmsReticleLineHostLL = Engine[@"getglobalmodel"]()
 	msCenterDiamondSideL(msCenterDiamondSideR, vhudmsReticleLineHostLL["lobbyRoot.lobbyNav"], function(f12_arg0)
 		f1_arg0:updateElementState(msCenterDiamondB, {
 			name = "model_validation",
@@ -337,8 +337,8 @@ CoD.vhud_ms_Reticle.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 		})
 	end, false)
 	msCenterDiamondB:setZRot(180)
-	msCenterDiamondB.state1Image:setImage(RegisterImage(0x3C917B68C1D560E))
-	msCenterDiamondB.state1Image:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	msCenterDiamondB.state1Image:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_mothership_centerdiamondtop"))
+	msCenterDiamondB.state1Image:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	msCenterDiamondB.state2Image:setRGB(ColorSet.EnemyOrange.r, ColorSet.EnemyOrange.g, ColorSet.EnemyOrange.b)
 	self:addElement(msCenterDiamondB)
 	self.msCenterDiamondB = msCenterDiamondB
@@ -360,7 +360,7 @@ CoD.vhud_ms_Reticle.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	})
 	vhudmsReticleLineHostLL = msCenterDiamondSideL
 	msCenterDiamondSideR = msCenterDiamondSideL.subscribeToModel
-	local vhudmsReticleLineHostLR = Engine[0x8DF2E5447F384B9]()
+	local vhudmsReticleLineHostLR = Engine[@"getglobalmodel"]()
 	msCenterDiamondSideR(vhudmsReticleLineHostLL, vhudmsReticleLineHostLR["lobbyRoot.lobbyNav"], function(f16_arg0)
 		f1_arg0:updateElementState(msCenterDiamondSideL, {
 			name = "model_validation",
@@ -394,8 +394,8 @@ CoD.vhud_ms_Reticle.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 			modelName = "vehicleType",
 		})
 	end, false)
-	msCenterDiamondSideL.state1Image:setImage(RegisterImage(0x75D443C057C1AB4))
-	msCenterDiamondSideL.state1Image:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	msCenterDiamondSideL.state1Image:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_mothership_centerdiamondside"))
+	msCenterDiamondSideL.state1Image:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	msCenterDiamondSideL.state2Image:setRGB(ColorSet.EnemyOrange.r, ColorSet.EnemyOrange.g, ColorSet.EnemyOrange.b)
 	self:addElement(msCenterDiamondSideL)
 	self.msCenterDiamondSideL = msCenterDiamondSideL
@@ -417,7 +417,7 @@ CoD.vhud_ms_Reticle.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	})
 	vhudmsReticleLineHostLR = msCenterDiamondSideR
 	vhudmsReticleLineHostLL = msCenterDiamondSideR.subscribeToModel
-	local vhudmsReticleLineHostUL = Engine[0x8DF2E5447F384B9]()
+	local vhudmsReticleLineHostUL = Engine[@"getglobalmodel"]()
 	vhudmsReticleLineHostLL(vhudmsReticleLineHostLR, vhudmsReticleLineHostUL["lobbyRoot.lobbyNav"], function(f20_arg0)
 		f1_arg0:updateElementState(msCenterDiamondSideR, {
 			name = "model_validation",
@@ -452,8 +452,8 @@ CoD.vhud_ms_Reticle.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 		})
 	end, false)
 	msCenterDiamondSideR:setZRot(180)
-	msCenterDiamondSideR.state1Image:setImage(RegisterImage(0x75D443C057C1AB4))
-	msCenterDiamondSideR.state1Image:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	msCenterDiamondSideR.state1Image:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_mothership_centerdiamondside"))
+	msCenterDiamondSideR.state1Image:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	msCenterDiamondSideR.state2Image:setRGB(ColorSet.EnemyOrange.r, ColorSet.EnemyOrange.g, ColorSet.EnemyOrange.b)
 	self:addElement(msCenterDiamondSideR)
 	self.msCenterDiamondSideR = msCenterDiamondSideR
@@ -740,7 +740,7 @@ CoD.vhud_ms_Reticle.__clipsPerState = {
 						f33_arg0:setAlpha(0)
 						f33_arg0:registerEventHandler("transition_complete_keyframe", f33_local0)
 					end
-					f32_arg0:beginAnimation(580, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f32_arg0:beginAnimation(580, Enum[@"luitween"][@"luitween_ease_out"])
 					f32_arg0:setLeftRight(0.5, 0.5, -402, -316)
 					f32_arg0:setTopBottom(0.5, 0.5, -281, -177)
 					f32_arg0:setAlpha(1)
@@ -783,7 +783,7 @@ CoD.vhud_ms_Reticle.__clipsPerState = {
 						f40_arg0:setAlpha(0)
 						f40_arg0:registerEventHandler("transition_complete_keyframe", f40_local0)
 					end
-					f39_arg0:beginAnimation(580, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f39_arg0:beginAnimation(580, Enum[@"luitween"][@"luitween_ease_out"])
 					f39_arg0:setLeftRight(0.5, 0.5, 316, 402)
 					f39_arg0:setTopBottom(0.5, 0.5, -281, -177)
 					f39_arg0:setAlpha(1)
@@ -816,7 +816,7 @@ CoD.vhud_ms_Reticle.__clipsPerState = {
 										f51_arg0:setAlpha(0)
 										f51_arg0:registerEventHandler("transition_complete_keyframe", f51_local0)
 									end
-									f50_arg0:beginAnimation(439, Enum[0xF50FFF429AB1890][0xE99F3A6467FC0CA] | Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+									f50_arg0:beginAnimation(439, Enum[@"luitween"][@"luitween_back"] | Enum[@"luitween"][@"luitween_ease_in"])
 									f50_arg0:setLeftRight(0.5, 0.5, 158, 514)
 									f50_arg0:setAlpha(0.3)
 									f50_arg0:registerEventHandler("transition_complete_keyframe", f50_local0)
@@ -865,7 +865,7 @@ CoD.vhud_ms_Reticle.__clipsPerState = {
 										f59_arg0:setAlpha(0)
 										f59_arg0:registerEventHandler("transition_complete_keyframe", f59_local0)
 									end
-									f58_arg0:beginAnimation(439, Enum[0xF50FFF429AB1890][0xE99F3A6467FC0CA] | Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+									f58_arg0:beginAnimation(439, Enum[@"luitween"][@"luitween_back"] | Enum[@"luitween"][@"luitween_ease_in"])
 									f58_arg0:setLeftRight(0.5, 0.5, -511, -155)
 									f58_arg0:setAlpha(0.3)
 									f58_arg0:registerEventHandler("transition_complete_keyframe", f58_local0)
@@ -1195,7 +1195,7 @@ CoD.vhud_ms_Reticle.__clipsPerState = {
 								f108_arg0:beginAnimation(120)
 								f108_arg0:registerEventHandler("transition_complete_keyframe", f108_local0)
 							end
-							f107_arg0:beginAnimation(640, Enum[0xF50FFF429AB1890][0xE99F3A6467FC0CA] | Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+							f107_arg0:beginAnimation(640, Enum[@"luitween"][@"luitween_back"] | Enum[@"luitween"][@"luitween_ease_in"])
 							f107_arg0:setLeftRight(1, 1, -641.5, 80.5)
 							f107_arg0:setTopBottom(1, 1, -211, 7)
 							f107_arg0:registerEventHandler("transition_complete_keyframe", f107_local0)
@@ -1237,7 +1237,7 @@ CoD.vhud_ms_Reticle.__clipsPerState = {
 								f115_arg0:beginAnimation(80)
 								f115_arg0:registerEventHandler("transition_complete_keyframe", f115_local0)
 							end
-							f114_arg0:beginAnimation(640, Enum[0xF50FFF429AB1890][0xE99F3A6467FC0CA] | Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+							f114_arg0:beginAnimation(640, Enum[@"luitween"][@"luitween_back"] | Enum[@"luitween"][@"luitween_ease_in"])
 							f114_arg0:setLeftRight(0, 0, -63, 659)
 							f114_arg0:setTopBottom(1, 1, -211, 7)
 							f114_arg0:registerEventHandler("transition_complete_keyframe", f114_local0)
@@ -1264,7 +1264,7 @@ CoD.vhud_ms_Reticle.__clipsPerState = {
 			local f30_local16 = function(f118_arg0)
 				local f118_local0 = function(f119_arg0)
 					local f119_local0 = function(f120_arg0)
-						f120_arg0:beginAnimation(640, Enum[0xF50FFF429AB1890][0xE99F3A6467FC0CA] | Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+						f120_arg0:beginAnimation(640, Enum[@"luitween"][@"luitween_back"] | Enum[@"luitween"][@"luitween_ease_in"])
 						f120_arg0:setTopBottom(0, 0, 114, 210)
 						f120_arg0:setAlpha(1)
 						f120_arg0:registerEventHandler("transition_complete_keyframe", f30_arg0.clipFinished)
@@ -1285,7 +1285,7 @@ CoD.vhud_ms_Reticle.__clipsPerState = {
 			local f30_local17 = function(f121_arg0)
 				local f121_local0 = function(f122_arg0)
 					local f122_local0 = function(f123_arg0)
-						f123_arg0:beginAnimation(640, Enum[0xF50FFF429AB1890][0xE99F3A6467FC0CA] | Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+						f123_arg0:beginAnimation(640, Enum[@"luitween"][@"luitween_back"] | Enum[@"luitween"][@"luitween_ease_in"])
 						f123_arg0:setTopBottom(1, 1, -200, -104)
 						f123_arg0:setAlpha(1)
 						f123_arg0:registerEventHandler("transition_complete_keyframe", f30_arg0.clipFinished)
@@ -1307,7 +1307,7 @@ CoD.vhud_ms_Reticle.__clipsPerState = {
 				local f124_local0 = function(f125_arg0)
 					local f125_local0 = function(f126_arg0)
 						local f126_local0 = function(f127_arg0)
-							f127_arg0:beginAnimation(640, Enum[0xF50FFF429AB1890][0xE99F3A6467FC0CA] | Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+							f127_arg0:beginAnimation(640, Enum[@"luitween"][@"luitween_back"] | Enum[@"luitween"][@"luitween_ease_in"])
 							f127_arg0:setLeftRight(0, 0, -64, 657)
 							f127_arg0:setTopBottom(0, 0, -3, 215)
 							f127_arg0:registerEventHandler("transition_complete_keyframe", f30_arg0.clipFinished)
@@ -1352,7 +1352,7 @@ CoD.vhud_ms_Reticle.__clipsPerState = {
 								f132_arg0:setAlpha(0)
 								f132_arg0:registerEventHandler("transition_complete_keyframe", f132_local0)
 							end
-							f131_arg0:beginAnimation(640, Enum[0xF50FFF429AB1890][0xE99F3A6467FC0CA] | Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+							f131_arg0:beginAnimation(640, Enum[@"luitween"][@"luitween_back"] | Enum[@"luitween"][@"luitween_ease_in"])
 							f131_arg0:setLeftRight(1, 1, -640, 81)
 							f131_arg0:setTopBottom(0, 0, -3, 215)
 							f131_arg0:registerEventHandler("transition_complete_keyframe", f131_local0)
@@ -1690,7 +1690,7 @@ CoD.vhud_ms_Reticle.__clipsPerState = {
 						f183_arg0:setAlpha(0)
 						f183_arg0:registerEventHandler("transition_complete_keyframe", f183_local0)
 					end
-					f182_arg0:beginAnimation(80, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f182_arg0:beginAnimation(80, Enum[@"luitween"][@"luitween_ease_in"])
 					f182_arg0:setLeftRight(0.5, 0.5, 42, 116)
 					f182_arg0:setAlpha(0.7)
 					f182_arg0:registerEventHandler("transition_complete_keyframe", f182_local0)
@@ -1710,7 +1710,7 @@ CoD.vhud_ms_Reticle.__clipsPerState = {
 						f189_arg0:beginAnimation(349)
 						f189_arg0:registerEventHandler("transition_complete_keyframe", f30_arg0.clipFinished)
 					end
-					f188_arg0:beginAnimation(480, Enum[0xF50FFF429AB1890][0xE99F3A6467FC0CA] | Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f188_arg0:beginAnimation(480, Enum[@"luitween"][@"luitween_back"] | Enum[@"luitween"][@"luitween_ease_in"])
 					f188_arg0:setLeftRight(0.5, 0.5, -511, -278)
 					f188_arg0:setTopBottom(0.5, 0.5, 168, 254)
 					f188_arg0:setAlpha(1)
@@ -1731,7 +1731,7 @@ CoD.vhud_ms_Reticle.__clipsPerState = {
 						f192_arg0:beginAnimation(349)
 						f192_arg0:registerEventHandler("transition_complete_keyframe", f30_arg0.clipFinished)
 					end
-					f191_arg0:beginAnimation(480, Enum[0xF50FFF429AB1890][0xE99F3A6467FC0CA] | Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f191_arg0:beginAnimation(480, Enum[@"luitween"][@"luitween_back"] | Enum[@"luitween"][@"luitween_ease_in"])
 					f191_arg0:setLeftRight(0.5, 0.5, 265, 498)
 					f191_arg0:setTopBottom(0.5, 0.5, 168, 254)
 					f191_arg0:setAlpha(1)
@@ -1752,7 +1752,7 @@ CoD.vhud_ms_Reticle.__clipsPerState = {
 						f195_arg0:beginAnimation(349)
 						f195_arg0:registerEventHandler("transition_complete_keyframe", f30_arg0.clipFinished)
 					end
-					f194_arg0:beginAnimation(480, Enum[0xF50FFF429AB1890][0xE99F3A6467FC0CA] | Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f194_arg0:beginAnimation(480, Enum[@"luitween"][@"luitween_back"] | Enum[@"luitween"][@"luitween_ease_in"])
 					f194_arg0:setLeftRight(0.5, 0.5, -504, -271)
 					f194_arg0:setTopBottom(0.5, 0.5, -259, -173)
 					f194_arg0:setAlpha(1)
@@ -1773,7 +1773,7 @@ CoD.vhud_ms_Reticle.__clipsPerState = {
 						f198_arg0:beginAnimation(349)
 						f198_arg0:registerEventHandler("transition_complete_keyframe", f30_arg0.clipFinished)
 					end
-					f197_arg0:beginAnimation(480, Enum[0xF50FFF429AB1890][0xE99F3A6467FC0CA] | Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f197_arg0:beginAnimation(480, Enum[@"luitween"][@"luitween_back"] | Enum[@"luitween"][@"luitween_ease_in"])
 					f197_arg0:setLeftRight(0.5, 0.5, 265, 498)
 					f197_arg0:setTopBottom(0.5, 0.5, -263, -177)
 					f197_arg0:setAlpha(1)
@@ -1928,7 +1928,7 @@ CoD.vhud_ms_Reticle.__clipsPerState = {
 			f216_arg0.RingElement1:setTopBottom(0.5, 0.5, -281, -177)
 			f216_local1(f216_arg0.RingElement1)
 			local f216_local2 = function(f219_arg0)
-				f216_arg0.msBoldLightRight:beginAnimation(300, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f216_arg0.msBoldLightRight:beginAnimation(300, Enum[@"luitween"][@"luitween_ease_in"])
 				f216_arg0.msBoldLightRight:setZoom(-190)
 				f216_arg0.msBoldLightRight:registerEventHandler("interrupted_keyframe", f216_arg0.clipInterrupted)
 				f216_arg0.msBoldLightRight:registerEventHandler("transition_complete_keyframe", f216_arg0.clipFinished)
@@ -1937,7 +1937,7 @@ CoD.vhud_ms_Reticle.__clipsPerState = {
 			f216_arg0.msBoldLightRight:setZoom(50)
 			f216_local2(f216_arg0.msBoldLightRight)
 			local f216_local3 = function(f220_arg0)
-				f216_arg0.msBoldLightLeft:beginAnimation(300, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f216_arg0.msBoldLightLeft:beginAnimation(300, Enum[@"luitween"][@"luitween_ease_in"])
 				f216_arg0.msBoldLightLeft:setZoom(-190)
 				f216_arg0.msBoldLightLeft:registerEventHandler("interrupted_keyframe", f216_arg0.clipInterrupted)
 				f216_arg0.msBoldLightLeft:registerEventHandler("transition_complete_keyframe", f216_arg0.clipFinished)

@@ -7,8 +7,8 @@ CoD.ContractSeasonalBacker.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self.id = "ContractSeasonalBacker"
 	self.soundSet = "none"
 	local NineSliceShaderImage = LUI.UIImage.new(0, 1, 0, 0, 0, 0, -7, 24)
-	NineSliceShaderImage:setImage(RegisterImage(0x32F868891484B77))
-	NineSliceShaderImage:setMaterial(LUI.UIImage.GetCachedMaterial(0x44484DDFAF5C093))
+	NineSliceShaderImage:setImage(RegisterImage(@"hash_32F868891484B77"))
+	NineSliceShaderImage:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_normal"))
 	NineSliceShaderImage:setShaderVector(0, 0, 0, 0, 0)
 	NineSliceShaderImage:setupNineSliceShader(26, 26)
 	self:addElement(NineSliceShaderImage)

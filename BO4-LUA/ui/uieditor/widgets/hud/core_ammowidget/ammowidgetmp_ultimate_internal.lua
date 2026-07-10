@@ -16,18 +16,18 @@ CoD.AmmoWidgetMP_Ultimate_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Blur = LUI.UIImage.new(0, 0, 79.5, 183.5, 0, 0, 10.5, 120.5)
-	Blur:setImage(RegisterImage(0x7C42B938F911DF9))
-	Blur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	Blur:setImage(RegisterImage(@"uie_ui_hud_core_player_widget_panel_hex"))
+	Blur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	Blur:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(Blur)
 	self.Blur = Blur
 	local BlurRight = LUI.UIImage.new(0, 0, 181.5, 248.5, 0, 0, 31.5, 98.5)
-	BlurRight:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	BlurRight:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	BlurRight:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(BlurRight)
 	self.BlurRight = BlurRight
 	local BlurLeft = LUI.UIImage.new(0, 0, 16.5, 85.5, 0, 0, 32, 96)
-	BlurLeft:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	BlurLeft:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	BlurLeft:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(BlurLeft)
 	self.BlurLeft = BlurLeft
@@ -44,7 +44,7 @@ CoD.AmmoWidgetMP_Ultimate_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	local Panel = LUI.UIImage.new(0, 0, 79.5, 183.5, 0, 0, 10.5, 120.5)
 	Panel:setRGB(0.18, 0.17, 0.16)
 	Panel:setAlpha(0.94)
-	Panel:setImage(RegisterImage(0x7C42B938F911DF9))
+	Panel:setImage(RegisterImage(@"uie_ui_hud_core_player_widget_panel_hex"))
 	self:addElement(Panel)
 	self.Panel = Panel
 	local ControllerDependentTextBox = CoD.ControllerDependent_TextBox.new(f1_arg0, f1_arg1, 0.5, 0.5, -65, 65, 0, 0, -19, 5)
@@ -52,11 +52,11 @@ CoD.AmmoWidgetMP_Ultimate_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 		{
 			stateName = "Hidden",
 			condition = function(menu, element, event)
-				local f2_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2])
+				local f2_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_in_killcam"])
 				if not f2_local0 then
-					f2_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F])
+					f2_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_play_of_the_match"])
 					if not f2_local0 then
-						f2_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xC57360571B0917E])
+						f2_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_team_spectator"])
 					end
 				end
 				return f2_local0
@@ -89,38 +89,38 @@ CoD.AmmoWidgetMP_Ultimate_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	})
 	local Frame = ControllerDependentTextBox
 	local TankUseString = ControllerDependentTextBox.subscribeToModel
-	local GlowHero = Engine[0x4DF5CFBC1771947](f1_arg1)
-	TankUseString(Frame, GlowHero["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2]], function(f7_arg0)
+	local GlowHero = Engine[@"getmodelforcontroller"](f1_arg1)
+	TankUseString(Frame, GlowHero["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"]], function(f7_arg0)
 		f1_arg0:updateElementState(ControllerDependentTextBox, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f7_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"],
 		})
 	end, false)
 	Frame = ControllerDependentTextBox
 	TankUseString = ControllerDependentTextBox.subscribeToModel
-	GlowHero = Engine[0x4DF5CFBC1771947](f1_arg1)
-	TankUseString(Frame, GlowHero["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F]], function(f8_arg0)
+	GlowHero = Engine[@"getmodelforcontroller"](f1_arg1)
+	TankUseString(Frame, GlowHero["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_play_of_the_match"]], function(f8_arg0)
 		f1_arg0:updateElementState(ControllerDependentTextBox, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f8_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_play_of_the_match"],
 		})
 	end, false)
 	Frame = ControllerDependentTextBox
 	TankUseString = ControllerDependentTextBox.subscribeToModel
-	GlowHero = Engine[0x4DF5CFBC1771947](f1_arg1)
-	TankUseString(Frame, GlowHero["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xC57360571B0917E]], function(f9_arg0)
+	GlowHero = Engine[@"getmodelforcontroller"](f1_arg1)
+	TankUseString(Frame, GlowHero["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_team_spectator"]], function(f9_arg0)
 		f1_arg0:updateElementState(ControllerDependentTextBox, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f9_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xC57360571B0917E],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_team_spectator"],
 		})
 	end, false)
 	ControllerDependentTextBox:appendEventHandler("input_source_changed", function(f10_arg0, f10_arg1)
@@ -129,7 +129,7 @@ CoD.AmmoWidgetMP_Ultimate_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	end)
 	Frame = ControllerDependentTextBox
 	TankUseString = ControllerDependentTextBox.subscribeToModel
-	GlowHero = Engine[0x4DF5CFBC1771947](f1_arg1)
+	GlowHero = Engine[@"getmodelforcontroller"](f1_arg1)
 	TankUseString(Frame, GlowHero.LastInput, function(f11_arg0)
 		f1_arg0:updateElementState(ControllerDependentTextBox, {
 			name = "model_validation",
@@ -141,11 +141,11 @@ CoD.AmmoWidgetMP_Ultimate_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	end, false)
 	ControllerDependentTextBox:setAlpha(0)
 	ControllerDependentTextBox:setScale(SetCustomScaleDependingOnPlatform(f1_arg1, 1, 1, 0.9, 0.9))
-	ControllerDependentTextBox.KBMText:setText(Engine[0xF9F1239CFD921FE](0xEC61C43D90FCF56))
+	ControllerDependentTextBox.KBMText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_2EC61C43D90FCF56"))
 	ControllerDependentTextBox.KBMText:setLetterSpacing(0)
-	ControllerDependentTextBox.GamepadText:setText(Engine[0xF9F1239CFD921FE](0x9E6A8D0F83F4FC6))
+	ControllerDependentTextBox.GamepadText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_29E6A8D0F83F4FC6"))
 	ControllerDependentTextBox.GamepadText:setLetterSpacing(-0.2)
-	ControllerDependentTextBox.GamepadText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	ControllerDependentTextBox.GamepadText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	self:addElement(ControllerDependentTextBox)
 	self.ControllerDependentTextBox = ControllerDependentTextBox
 	TankUseString = CoD.AmmoWidget_AbilityText.new(f1_arg0, f1_arg1, 0.5, 0.5, -58, 58, 0, 0, -42.5, -17.5)
@@ -171,7 +171,7 @@ CoD.AmmoWidgetMP_Ultimate_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	})
 	GlowHero = TankUseString
 	Frame = TankUseString.subscribeToModel
-	local LED = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local LED = Engine[@"getmodelforcontroller"](f1_arg1)
 	Frame(GlowHero, LED["hudItems.smartCoverState"], function(f15_arg0)
 		f1_arg0:updateElementState(TankUseString, {
 			name = "model_validation",
@@ -183,7 +183,7 @@ CoD.AmmoWidgetMP_Ultimate_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	end, false)
 	GlowHero = TankUseString
 	Frame = TankUseString.subscribeToModel
-	LED = Engine[0x4DF5CFBC1771947](f1_arg1)
+	LED = Engine[@"getmodelforcontroller"](f1_arg1)
 	Frame(GlowHero, LED["hudItems.dogState"], function(f16_arg0)
 		f1_arg0:updateElementState(TankUseString, {
 			name = "model_validation",
@@ -199,7 +199,7 @@ CoD.AmmoWidgetMP_Ultimate_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	end)
 	GlowHero = TankUseString
 	Frame = TankUseString.subscribeToModel
-	LED = Engine[0x4DF5CFBC1771947](f1_arg1)
+	LED = Engine[@"getmodelforcontroller"](f1_arg1)
 	Frame(GlowHero, LED.LastInput, function(f18_arg0)
 		f1_arg0:updateElementState(TankUseString, {
 			name = "model_validation",
@@ -212,20 +212,20 @@ CoD.AmmoWidgetMP_Ultimate_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	self:addElement(TankUseString)
 	self.TankUseString = TankUseString
 	Frame = LUI.UIImage.new(0, 0, 0, 268, 0, 0, -10, 140)
-	Frame:setImage(RegisterImage(0xF56F1460BB4F637))
+	Frame:setImage(RegisterImage(@"uie_ui_hud_core_frame_hero_widget"))
 	self:addElement(Frame)
 	self.Frame = Frame
 	GlowHero = LUI.UIImage.new(0, 0, 78.5, 188.5, 0, 0, 13, 125)
 	GlowHero:setAlpha(0)
-	GlowHero:setImage(RegisterImage(0xD4F7AA0A4512AE0))
-	GlowHero:setMaterial(LUI.UIImage.GetCachedMaterial(0xF755127C95CF5B6))
+	GlowHero:setImage(RegisterImage(@"uie_ui_hud_core_hero_widget_glow_hero"))
+	GlowHero:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_F755127C95CF5B6"))
 	GlowHero:setShaderVector(0, 4, 0, 0, 0)
 	self:addElement(GlowHero)
 	self.GlowHero = GlowHero
 	LED = LUI.UIImage.new(0, 0, 79, 183, 0, 0, 11.5, 121.5)
 	LED:setRGB(0, 0, 0)
 	LED:setAlpha(0.3)
-	LED:setImage(RegisterImage(0x6A97BE1E61599B6))
+	LED:setImage(RegisterImage(@"uie_ui_hud_core_player_widget_led_hex"))
 	self:addElement(LED)
 	self.LED = LED
 	local FullBackingDeployed = LUI.UIImage.new(0, 0, 100, 164, 0, 0, 35, 95)
@@ -233,13 +233,13 @@ CoD.AmmoWidgetMP_Ultimate_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	FullBackingDeployed:setAlpha(0)
 	FullBackingDeployed:setZRot(180)
 	FullBackingDeployed:setScale(1.5, 1.5)
-	FullBackingDeployed:setImage(RegisterImage(0x482C522ED478AB1))
+	FullBackingDeployed:setImage(RegisterImage(@"uie_hud_common_core_ammo_panelcenter2"))
 	self:addElement(FullBackingDeployed)
 	self.FullBackingDeployed = FullBackingDeployed
 	local AbilityPulse = CoD.AmmoWidgetMP_Ability_Flash.new(f1_arg0, f1_arg1, 0, 0, 99, 164, 0, 0, 35.5, 94.5)
 	AbilityPulse:setAlpha(0)
 	AbilityPulse:setScale(1.5, 1.5)
-	AbilityPulse:setRFTMaterial(LUI.UIImage.GetCachedMaterial(0x1DE43899593E67E))
+	AbilityPulse:setRFTMaterial(LUI.UIImage.GetCachedMaterial(@"hash_51DE43899593E67E"))
 	AbilityPulse:setShaderVector(0, 0, 1, 0, 0)
 	AbilityPulse:setShaderVector(1, 0, 0, 0, 0)
 	AbilityPulse:setShaderVector(3, 0, 0, 0, 0)
@@ -262,8 +262,8 @@ CoD.AmmoWidgetMP_Ultimate_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	local UltimateRadialMeterpath2 = LUI.UIImage.new(0, 0, 80, 188, 0, 0, 11.5, 121.5)
 	UltimateRadialMeterpath2:setRGB(0.57, 0.57, 0.57)
 	UltimateRadialMeterpath2:setAlpha(0.06)
-	UltimateRadialMeterpath2:setImage(RegisterImage(0xDC66F93B7868335))
-	UltimateRadialMeterpath2:setMaterial(LUI.UIImage.GetCachedMaterial(0xF755127C95CF5B6))
+	UltimateRadialMeterpath2:setImage(RegisterImage(@"uie_ui_hud_core_hero_widget_meter_empty"))
+	UltimateRadialMeterpath2:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_F755127C95CF5B6"))
 	UltimateRadialMeterpath2:setShaderVector(0, 6, 0, 0, 0)
 	self:addElement(UltimateRadialMeterpath2)
 	self.UltimateRadialMeterpath2 = UltimateRadialMeterpath2
@@ -291,7 +291,7 @@ CoD.AmmoWidgetMP_Ultimate_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	self.PowerBasedImageUnavailable = PowerBasedImageUnavailable
 	local combatEfficiencyActive = LUI.UIImage.new(0, 0, 48, 80, 0, 0, -16, 16)
 	combatEfficiencyActive:setAlpha(0)
-	combatEfficiencyActive:setImage(RegisterImage(0xC43A727D93CE8E8))
+	combatEfficiencyActive:setImage(RegisterImage(@"t7_hud_mp_ability_hero_combatefficiency_available"))
 	self:addElement(combatEfficiencyActive)
 	self.combatEfficiencyActive = combatEfficiencyActive
 	local UltimateRadialMeterWipes = CoD.AmmoWidgetMP_Ultimate_Progress_Fill.new(f1_arg0, f1_arg1, 0.5, 0.5, -56, 56, 0, 0, 11, 123)
@@ -315,16 +315,16 @@ CoD.AmmoWidgetMP_Ultimate_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	self.HeroAbilityHoldStringPC = HeroAbilityHoldStringPC
 	local GlowRing = LUI.UIImage.new(0, 0, 71.5, 195.5, 0, 0, -4, 134)
 	GlowRing:setAlpha(0)
-	GlowRing:setImage(RegisterImage(0xCDD8E4DEC7EA034))
-	GlowRing:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	GlowRing:setImage(RegisterImage(@"uie_abeq_flare_ring"))
+	GlowRing:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	GlowRing:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(GlowRing)
 	self.GlowRing = GlowRing
 	local FlareBack = LUI.UIImage.new(0, 0, 32, 232, 0, 0, -10, 138)
 	FlareBack:setAlpha(0)
 	FlareBack:setScale(1, 0.8)
-	FlareBack:setImage(RegisterImage(0x650DB36D4791063))
-	FlareBack:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	FlareBack:setImage(RegisterImage(@"uie_hex_flare_back"))
+	FlareBack:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(FlareBack)
 	self.FlareBack = FlareBack
 	local NotAvailable = CoD.AmmoWidget_HeroEmpty.new(f1_arg0, f1_arg1, 0, 0, 85.5, 185.5, 0, 0, 11, 123)
@@ -362,7 +362,7 @@ CoD.AmmoWidgetMP_Ultimate_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 		{
 			stateName = "InUse",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "state", Enum[0xF0447219F15F7F3][0x1873A43E9D1620E])
+				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "state", Enum[@"weapongadgetstates"][@"player_ability_state_inuse"])
 			end,
 		},
 		{
@@ -374,7 +374,7 @@ CoD.AmmoWidgetMP_Ultimate_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 		{
 			stateName = "PowerBasedEmptyCharging_CombatEfficiency",
 			condition = function(menu, element, event)
-				local f33_local0 = CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "state", Enum[0xF0447219F15F7F3][0x958A6962CA8F9B7])
+				local f33_local0 = CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "state", Enum[@"weapongadgetstates"][@"player_ability_state_charging"])
 				if f33_local0 then
 					f33_local0 = CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "powerRatio", 0)
 					if f33_local0 then
@@ -387,25 +387,25 @@ CoD.AmmoWidgetMP_Ultimate_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 		{
 			stateName = "PowerBasedEmptyCharging",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "state", Enum[0xF0447219F15F7F3][0x958A6962CA8F9B7]) and CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "powerRatio", 0)
+				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "state", Enum[@"weapongadgetstates"][@"player_ability_state_charging"]) and CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "powerRatio", 0)
 			end,
 		},
 		{
 			stateName = "PowerBasedCharging_CombatEfficiency",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "state", Enum[0xF0447219F15F7F3][0x958A6962CA8F9B7]) and CoD.ModelUtility.IsGlobalDataSourceModelValueEqualTo(f1_arg1, "HUDItems", "combatEfficiencyActive", 1)
+				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "state", Enum[@"weapongadgetstates"][@"player_ability_state_charging"]) and CoD.ModelUtility.IsGlobalDataSourceModelValueEqualTo(f1_arg1, "HUDItems", "combatEfficiencyActive", 1)
 			end,
 		},
 		{
 			stateName = "PowerBasedCharging",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "state", Enum[0xF0447219F15F7F3][0x958A6962CA8F9B7])
+				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "state", Enum[@"weapongadgetstates"][@"player_ability_state_charging"])
 			end,
 		},
 		{
 			stateName = "PowerBased",
 			condition = function(menu, element, event)
-				return not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "state", Enum[0xF0447219F15F7F3][0x29529861EAA8D1C])
+				return not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "state", Enum[@"weapongadgetstates"][@"player_ability_state_hidden"])
 			end,
 		},
 	})
@@ -479,7 +479,7 @@ CoD.AmmoWidgetMP_Ultimate_Internal.__resetProperties = function(f42_arg0)
 	f42_arg0.NotAvailable:setAlpha(1)
 	f42_arg0.AbilityPulse:setRGB(1, 1, 1)
 	f42_arg0.AbilityPulse:setAlpha(0)
-	f42_arg0.AbilityPulse:setRFTMaterial(LUI.UIImage.GetCachedMaterial(0x1DE43899593E67E))
+	f42_arg0.AbilityPulse:setRFTMaterial(LUI.UIImage.GetCachedMaterial(@"hash_51DE43899593E67E"))
 	f42_arg0.AbilityPulse:setShaderVector(0, 0, 1, 0, 0)
 	f42_arg0.AbilityPulse:setShaderVector(1, 0, 0, 0, 0)
 	f42_arg0.AbilityPulse:setShaderVector(3, 0, 0, 0, 0)
@@ -646,7 +646,7 @@ CoD.AmmoWidgetMP_Ultimate_Internal.__clipsPerState = {
 			f52_arg0.clipFinished(f52_arg0.FullBackingDeployed)
 			f52_arg0.AbilityPulse:completeAnimation()
 			f52_arg0.AbilityPulse:setAlpha(0)
-			f52_arg0.AbilityPulse:setRFTMaterial(LUI.UIImage.GetCachedMaterial(0x1DE43899593E67E))
+			f52_arg0.AbilityPulse:setRFTMaterial(LUI.UIImage.GetCachedMaterial(@"hash_51DE43899593E67E"))
 			f52_arg0.AbilityPulse:setShaderVector(0, 0, 1, 0, 0)
 			f52_arg0.AbilityPulse:setShaderVector(1, 0, 0, 0, 0)
 			f52_arg0.AbilityPulse:setShaderVector(3, 0, 0, 0, 0)
@@ -677,7 +677,7 @@ CoD.AmmoWidgetMP_Ultimate_Internal.__clipsPerState = {
 			f53_local0(f53_arg0.FullBackingDeployed)
 			f53_arg0.AbilityPulse:completeAnimation()
 			f53_arg0.AbilityPulse:setAlpha(0)
-			f53_arg0.AbilityPulse:setRFTMaterial(LUI.UIImage.GetCachedMaterial(0x1DE43899593E67E))
+			f53_arg0.AbilityPulse:setRFTMaterial(LUI.UIImage.GetCachedMaterial(@"hash_51DE43899593E67E"))
 			f53_arg0.AbilityPulse:setShaderVector(0, 0, 1, 0, 0)
 			f53_arg0.AbilityPulse:setShaderVector(1, 0, 0, 0, 0)
 			f53_arg0.AbilityPulse:setShaderVector(3, 0, 0, 0, 0)
@@ -726,7 +726,7 @@ CoD.AmmoWidgetMP_Ultimate_Internal.__clipsPerState = {
 			end
 			f57_arg0.AbilityPulse:completeAnimation()
 			f57_arg0.AbilityPulse:setAlpha(0)
-			f57_arg0.AbilityPulse:setRFTMaterial(LUI.UIImage.GetCachedMaterial(0x1DE43899593E67E))
+			f57_arg0.AbilityPulse:setRFTMaterial(LUI.UIImage.GetCachedMaterial(@"hash_51DE43899593E67E"))
 			f57_arg0.AbilityPulse:setShaderVector(0, 0, 1, 0, 0)
 			f57_arg0.AbilityPulse:setShaderVector(1, 0, 0, 0, 0)
 			f57_arg0.AbilityPulse:setShaderVector(3, 0, 0, 0, 0)
@@ -760,7 +760,7 @@ CoD.AmmoWidgetMP_Ultimate_Internal.__clipsPerState = {
 			f61_arg0.clipFinished(f61_arg0.FullBackingDeployed)
 			f61_arg0.AbilityPulse:completeAnimation()
 			f61_arg0.AbilityPulse:setAlpha(0)
-			f61_arg0.AbilityPulse:setRFTMaterial(LUI.UIImage.GetCachedMaterial(0x1DE43899593E67E))
+			f61_arg0.AbilityPulse:setRFTMaterial(LUI.UIImage.GetCachedMaterial(@"hash_51DE43899593E67E"))
 			f61_arg0.AbilityPulse:setShaderVector(0, 0, 1, 0, 0)
 			f61_arg0.AbilityPulse:setShaderVector(1, 0, 0, 0, 0)
 			f61_arg0.AbilityPulse:setShaderVector(3, 0, 0, 0, 0)
@@ -788,7 +788,7 @@ CoD.AmmoWidgetMP_Ultimate_Internal.__clipsPerState = {
 			f62_local0(f62_arg0.FullBackingDeployed)
 			f62_arg0.AbilityPulse:completeAnimation()
 			f62_arg0.AbilityPulse:setAlpha(0)
-			f62_arg0.AbilityPulse:setRFTMaterial(LUI.UIImage.GetCachedMaterial(0x1DE43899593E67E))
+			f62_arg0.AbilityPulse:setRFTMaterial(LUI.UIImage.GetCachedMaterial(@"hash_51DE43899593E67E"))
 			f62_arg0.AbilityPulse:setShaderVector(0, 0, 1, 0, 0)
 			f62_arg0.AbilityPulse:setShaderVector(1, 0, 0, 0, 0)
 			f62_arg0.AbilityPulse:setShaderVector(3, 0, 0, 0, 0)
@@ -843,7 +843,7 @@ CoD.AmmoWidgetMP_Ultimate_Internal.__clipsPerState = {
 			end
 			f66_arg0.AbilityPulse:completeAnimation()
 			f66_arg0.AbilityPulse:setAlpha(0)
-			f66_arg0.AbilityPulse:setRFTMaterial(LUI.UIImage.GetCachedMaterial(0x1DE43899593E67E))
+			f66_arg0.AbilityPulse:setRFTMaterial(LUI.UIImage.GetCachedMaterial(@"hash_51DE43899593E67E"))
 			f66_arg0.AbilityPulse:setShaderVector(0, 0, 1, 0, 0)
 			f66_arg0.AbilityPulse:setShaderVector(1, 0, 0, 0, 0)
 			f66_arg0.AbilityPulse:setShaderVector(3, 0, 0, 0, 0)
@@ -874,7 +874,7 @@ CoD.AmmoWidgetMP_Ultimate_Internal.__clipsPerState = {
 			f71_arg0.clipFinished(f71_arg0.FullBackingDeployed)
 			f71_arg0.AbilityPulse:completeAnimation()
 			f71_arg0.AbilityPulse:setAlpha(0)
-			f71_arg0.AbilityPulse:setRFTMaterial(LUI.UIImage.GetCachedMaterial(0x1DE43899593E67E))
+			f71_arg0.AbilityPulse:setRFTMaterial(LUI.UIImage.GetCachedMaterial(@"hash_51DE43899593E67E"))
 			f71_arg0.AbilityPulse:setShaderVector(0, 0, 1, 0, 0)
 			f71_arg0.AbilityPulse:setShaderVector(1, 0, 0, 0, 0)
 			f71_arg0.AbilityPulse:setShaderVector(3, 0, 0, 0, 0)
@@ -906,7 +906,7 @@ CoD.AmmoWidgetMP_Ultimate_Internal.__clipsPerState = {
 			end
 			f72_arg0.AbilityPulse:completeAnimation()
 			f72_arg0.AbilityPulse:setAlpha(1)
-			f72_arg0.AbilityPulse:setRFTMaterial(LUI.UIImage.GetCachedMaterial(0x1DE43899593E67E))
+			f72_arg0.AbilityPulse:setRFTMaterial(LUI.UIImage.GetCachedMaterial(@"hash_51DE43899593E67E"))
 			f72_arg0.AbilityPulse:setShaderVector(0, 0, 1, 0, 0)
 			f72_arg0.AbilityPulse:setShaderVector(1, 0, 0, 0, 0)
 			f72_arg0.AbilityPulse:setShaderVector(3, 0, 0, 0, 0)
@@ -946,7 +946,7 @@ CoD.AmmoWidgetMP_Ultimate_Internal.__clipsPerState = {
 			f76_arg0.clipFinished(f76_arg0.FullBackingDeployed)
 			f76_arg0.AbilityPulse:completeAnimation()
 			f76_arg0.AbilityPulse:setAlpha(0)
-			f76_arg0.AbilityPulse:setRFTMaterial(LUI.UIImage.GetCachedMaterial(0x1DE43899593E67E))
+			f76_arg0.AbilityPulse:setRFTMaterial(LUI.UIImage.GetCachedMaterial(@"hash_51DE43899593E67E"))
 			f76_arg0.AbilityPulse:setShaderVector(0, 0, 1, 0, 0)
 			f76_arg0.AbilityPulse:setShaderVector(1, 0, 0, 0, 0)
 			f76_arg0.AbilityPulse:setShaderVector(3, 0, 0, 0, 0)
@@ -978,7 +978,7 @@ CoD.AmmoWidgetMP_Ultimate_Internal.__clipsPerState = {
 			end
 			f77_arg0.AbilityPulse:completeAnimation()
 			f77_arg0.AbilityPulse:setAlpha(1)
-			f77_arg0.AbilityPulse:setRFTMaterial(LUI.UIImage.GetCachedMaterial(0x1DE43899593E67E))
+			f77_arg0.AbilityPulse:setRFTMaterial(LUI.UIImage.GetCachedMaterial(@"hash_51DE43899593E67E"))
 			f77_arg0.AbilityPulse:setShaderVector(0, 0, 1, 0, 0)
 			f77_arg0.AbilityPulse:setShaderVector(1, 0, 0, 0, 0)
 			f77_arg0.AbilityPulse:setShaderVector(3, 0, 0, 0, 0)
@@ -1020,7 +1020,7 @@ CoD.AmmoWidgetMP_Ultimate_Internal.__clipsPerState = {
 			f81_arg0.AbilityPulse:completeAnimation()
 			f81_arg0.AbilityPulse:setRGB(1, 1, 1)
 			f81_arg0.AbilityPulse:setAlpha(0)
-			f81_arg0.AbilityPulse:setRFTMaterial(LUI.UIImage.GetCachedMaterial(0x1DE43899593E67E))
+			f81_arg0.AbilityPulse:setRFTMaterial(LUI.UIImage.GetCachedMaterial(@"hash_51DE43899593E67E"))
 			f81_arg0.AbilityPulse:setShaderVector(0, 0, 1, 0, 0)
 			f81_arg0.AbilityPulse:setShaderVector(1, 0, 0, 0, 0)
 			f81_arg0.AbilityPulse:setShaderVector(3, 0, 0, 0, 0)
@@ -1042,7 +1042,7 @@ CoD.AmmoWidgetMP_Ultimate_Internal.__clipsPerState = {
 					f83_arg0:setAlpha(0.1)
 					f83_arg0:registerEventHandler("transition_complete_keyframe", f81_arg0.clipFinished)
 				end
-				f81_arg0.FlareBack:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f81_arg0.FlareBack:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_out"])
 				f81_arg0.FlareBack:setAlpha(0.2)
 				f81_arg0.FlareBack:registerEventHandler("interrupted_keyframe", f81_arg0.clipInterrupted)
 				f81_arg0.FlareBack:registerEventHandler("transition_complete_keyframe", f82_local0)
@@ -1067,7 +1067,7 @@ CoD.AmmoWidgetMP_Ultimate_Internal.__clipsPerState = {
 			f85_arg0:setupElementClipCounter(4)
 			f85_arg0.AbilityPulse:completeAnimation()
 			f85_arg0.AbilityPulse:setAlpha(0)
-			f85_arg0.AbilityPulse:setRFTMaterial(LUI.UIImage.GetCachedMaterial(0x1DE43899593E67E))
+			f85_arg0.AbilityPulse:setRFTMaterial(LUI.UIImage.GetCachedMaterial(@"hash_51DE43899593E67E"))
 			f85_arg0.AbilityPulse:setShaderVector(0, 0, 1, 0, 0)
 			f85_arg0.AbilityPulse:setShaderVector(1, 0, 0, 0, 0)
 			f85_arg0.AbilityPulse:setShaderVector(3, 0, 0, 0, 0)
@@ -1107,7 +1107,7 @@ CoD.AmmoWidgetMP_Ultimate_Internal.__clipsPerState = {
 			f86_arg0.AbilityPulse:completeAnimation()
 			f86_arg0.AbilityPulse:setRGB(1, 1, 1)
 			f86_arg0.AbilityPulse:setAlpha(0)
-			f86_arg0.AbilityPulse:setRFTMaterial(LUI.UIImage.GetCachedMaterial(0x1DE43899593E67E))
+			f86_arg0.AbilityPulse:setRFTMaterial(LUI.UIImage.GetCachedMaterial(@"hash_51DE43899593E67E"))
 			f86_arg0.AbilityPulse:setShaderVector(0, 0, 1, 0, 0)
 			f86_arg0.AbilityPulse:setShaderVector(1, 0, 0, 0, 0)
 			f86_arg0.AbilityPulse:setShaderVector(3, 0, 0, 0, 0)
@@ -1125,11 +1125,11 @@ CoD.AmmoWidgetMP_Ultimate_Internal.__clipsPerState = {
 				local f90_local0 = function(f91_arg0)
 					local f91_local0 = function(f92_arg0)
 						local f92_local0 = function(f93_arg0)
-							f93_arg0:beginAnimation(59, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+							f93_arg0:beginAnimation(59, Enum[@"luitween"][@"luitween_ease_out"])
 							f93_arg0:setScale(0.94, 0.92)
 							f93_arg0:registerEventHandler("transition_complete_keyframe", f86_arg0.clipFinished)
 						end
-						f92_arg0:beginAnimation(20, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+						f92_arg0:beginAnimation(20, Enum[@"luitween"][@"luitween_ease_out"])
 						f92_arg0:setAlpha(1)
 						f92_arg0:setScale(0.83, 0.83)
 						f92_arg0:registerEventHandler("transition_complete_keyframe", f92_local0)

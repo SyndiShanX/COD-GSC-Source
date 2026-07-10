@@ -38,7 +38,7 @@ CoD.ChooseClassSlideOutInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	ClassList:setTopBottom(0, 0, 0, 35)
 	ClassList:setWidgetType(CoD.SelectClassListButton)
 	ClassList:setSpacing(0)
-	ClassList:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	ClassList:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	ClassList:setHorizontalPips(CoD.CommonScalingListHorizontalPips)
 	ClassList:setDataSource("ChooseClass_InGame")
 	ClassList:registerEventHandler("list_active_changed", function(element, event)
@@ -66,28 +66,28 @@ CoD.ChooseClassSlideOutInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self:addElement(focusBlocker)
 	self.focusBlocker = focusBlocker
 	local LB = CoD.BumperButtonWithKeyMouseText.new(f1_arg0, f1_arg1, 0.5, 0.5, -300, -100, 0, 0, 1, 35)
-	LB.GamepadPrompt:setText(Engine[0xF9F1239CFD921FE](0xBDCD5292604F434))
-	LB.GamepadPrompt:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
+	LB.GamepadPrompt:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_5BDCD5292604F434"))
+	LB.GamepadPrompt:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
 	self:addElement(LB)
 	self.LB = LB
 	local RB = CoD.BumperButtonWithKeyMouseText.new(f1_arg0, f1_arg1, 0.5, 0.5, 100, 300, 0, 0, 1, 35)
-	RB.GamepadPrompt:setText(Engine[0xF9F1239CFD921FE](0xBFED5292621DA9A))
+	RB.GamepadPrompt:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_5BFED5292621DA9A"))
 	self:addElement(RB)
 	self.RB = RB
 	local PreviewMWheelFocusable = nil
 	PreviewMWheelFocusable = CoD.emptyFocusable.new(f1_arg0, f1_arg1, 0, 0, 0, 1920, 0, 0, 0, 600)
 	PreviewMWheelFocusable:appendEventHandler("input_source_changed", function(f6_arg0, f6_arg1)
 		f6_arg1.menu = f6_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f6_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(f6_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_none"])
 	end)
 	local f1_local8 = PreviewMWheelFocusable
 	local ClassName = PreviewMWheelFocusable.subscribeToModel
-	local ClassPClist = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local ClassPClist = Engine[@"getmodelforcontroller"](f1_arg1)
 	ClassName(f1_local8, ClassPClist.LastInput, function(f7_arg0, f7_arg1)
-		CoD.Menu.UpdateButtonShownState(f7_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(f7_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_none"])
 	end, false)
 	PreviewMWheelFocusable:linkToElementModel(PreviewMWheelFocusable, nil, true, function(model, f8_arg1)
-		CoD.Menu.UpdateButtonShownState(f8_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(f8_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_none"])
 	end)
 	PreviewMWheelFocusable:registerEventHandler("gain_focus", function(element, event)
 		local f9_local0 = nil
@@ -96,7 +96,7 @@ CoD.ChooseClassSlideOutInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 		elseif element.super.gainFocus then
 			f9_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_none"])
 		return f9_local0
 	end)
 	PreviewMWheelFocusable:registerEventHandler("lose_focus", function(element, event)
@@ -108,21 +108,21 @@ CoD.ChooseClassSlideOutInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 		end
 		return f10_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(PreviewMWheelFocusable, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "MWHEELUP", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(PreviewMWheelFocusable, f1_arg1, Enum[@"luibutton"][@"lui_key_none"], "MWHEELUP", function(element, menu, controller, model)
 		CoD.GridAndListUtility.NavigateGridItem(self.ClassPClist, controller, true)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "MWHEELUP")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "MWHEELUP")
 		return false
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(PreviewMWheelFocusable, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "MWHEELDOWN", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(PreviewMWheelFocusable, f1_arg1, Enum[@"luibutton"][@"lui_key_none"], "MWHEELDOWN", function(element, menu, controller, model)
 		CoD.GridAndListUtility.NavigateGridItem(self.ClassPClist, controller, false)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "MWHEELDOWN")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "MWHEELDOWN")
 		return false
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(PreviewMWheelFocusable, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "MOUSE1", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(PreviewMWheelFocusable, f1_arg1, Enum[@"luibutton"][@"lui_key_none"], "MOUSE1", function(element, menu, controller, model)
 		if IsMouseOrKeyboard(controller) and not CoD.CACUtility.IsCurrentClassLocked(menu, controller) then
 			CoD.PCUtility.ConfirmChangeClass(menu, controller)
 			return true
@@ -130,7 +130,7 @@ CoD.ChooseClassSlideOutInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 		end
 	end, function(element, menu, controller)
 		if IsMouseOrKeyboard(controller) and not CoD.CACUtility.IsCurrentClassLocked(menu, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "MOUSE1")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "MOUSE1")
 			return false
 		else
 			return false
@@ -144,8 +144,8 @@ CoD.ChooseClassSlideOutInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	ClassName:setAlpha(0)
 	ClassName:setTTF("notosans_regular")
 	ClassName:setLetterSpacing(2)
-	ClassName:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	ClassName:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	ClassName:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	ClassName:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	self:addElement(ClassName)
 	self.ClassName = ClassName
 	f1_local8 = nil
@@ -156,10 +156,10 @@ CoD.ChooseClassSlideOutInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	ClassPClist:setWidgetType(CoD.PC_ChooseClassTabs)
 	ClassPClist:setHorizontalCount(18)
 	ClassPClist:setSpacing(-1)
-	ClassPClist:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	ClassPClist:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	ClassPClist:setDataSource("ChooseClass_InGame")
 	ClassPClist:linkToElementModel(ClassPClist, nil, true, function(model, f17_arg1)
-		CoD.Menu.UpdateButtonShownState(f17_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f17_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	ClassPClist:registerEventHandler("list_active_changed", function(element, event)
 		local f18_local0 = nil
@@ -186,10 +186,10 @@ CoD.ChooseClassSlideOutInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 		elseif element.super.gainFocus then
 			f21_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f21_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(ClassPClist, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(ClassPClist, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if not CoD.CACUtility.IsCurrentClassLocked(menu, controller) then
 			CoD.PCUtility.ConfirmChangeClass(menu, controller)
 			return true
@@ -197,7 +197,7 @@ CoD.ChooseClassSlideOutInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 		end
 	end, function(element, menu, controller)
 		if not CoD.CACUtility.IsCurrentClassLocked(menu, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 			return false
 		else
 			return false
@@ -236,7 +236,7 @@ CoD.ChooseClassSlideOutInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	end)
 	local f1_local11 = self
 	local f1_local12 = self.subscribeToModel
-	local f1_local13 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local13 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local12(f1_local11, f1_local13.LastInput, function(f30_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

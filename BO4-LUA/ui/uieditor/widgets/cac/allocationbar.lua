@@ -8,22 +8,22 @@ CoD.AllocationBar.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local dashBacking = LUI.UIImage.new(0, 0, -8, 24, 0, 0, -8, 24)
-	dashBacking:setImage(RegisterImage(0x4BB3E0B0E9A1D7E))
+	dashBacking:setImage(RegisterImage(@"uie_ui_menu_cac_allocation_pip_empty"))
 	self:addElement(dashBacking)
 	self.dashBacking = dashBacking
 	local dash = LUI.UIImage.new(0, 0, -8, 24, 0, 0, -8, 24)
-	dash:setImage(RegisterImage(0xEEB4FB140EAEAC))
+	dash:setImage(RegisterImage(@"uie_ui_menu_cac_allocation_pip_full"))
 	self:addElement(dash)
 	self.dash = dash
 	local Glow = LUI.UIImage.new(0, 0, -12.5, 29.5, 0, 0, -28, 45)
 	Glow:setRGB(0.88, 0.8, 0.45)
 	Glow:setAlpha(0)
-	Glow:setImage(RegisterImage(0x1078C36A022A4FE))
-	Glow:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Glow:setImage(RegisterImage(@"uie_t7_menu_cac_glow"))
+	Glow:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Glow)
 	self.Glow = Glow
 	local CornerDots = LUI.UIImage.new(0, 0, -8, 24, 0, 0, -8, 24)
-	CornerDots:setImage(RegisterImage(0x1735E8FCAB0ED9))
+	CornerDots:setImage(RegisterImage(@"uie_ui_menu_cac_allocation_pip_dots"))
 	self:addElement(CornerDots)
 	self.CornerDots = CornerDots
 	if PostLoadFunc then

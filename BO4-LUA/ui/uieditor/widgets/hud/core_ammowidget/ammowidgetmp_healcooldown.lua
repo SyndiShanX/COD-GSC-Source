@@ -18,7 +18,7 @@ CoD.AmmowidgetMP_HealCooldown.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	local LED = LUI.UIImage.new(0, 0, 1, 71, 0, 0, -3.5, 66.5)
 	LED:setRGB(0, 0, 0)
 	LED:setAlpha(0.3)
-	LED:setImage(RegisterImage(0xB7A2AC51B160918))
+	LED:setImage(RegisterImage(@"uie_ui_hud_core_player_widget_led_outer"))
 	self:addElement(LED)
 	self.LED = LED
 	local AmmoWidgetAbilityContainer = CoD.AmmoWidget_AbilityContainer.new(f1_arg0, f1_arg1, 0, 0, -23, 69, 0, 0, -9, 35)
@@ -54,7 +54,7 @@ CoD.AmmowidgetMP_HealCooldown.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	BackingFillAnim:setRGB(0.13, 0.13, 0.13)
 	BackingFillAnim:setAlpha(0)
 	BackingFillAnim:setZRot(180)
-	BackingFillAnim:setMaterial(LUI.UIImage.GetCachedMaterial(0x316E67E1DF2198E))
+	BackingFillAnim:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_normal"))
 	BackingFillAnim:setShaderVector(0, 1, 0, 0, 0)
 	BackingFillAnim:setShaderVector(1, 0, 0, 0, 0)
 	BackingFillAnim:setShaderVector(3, 0.05, 0, 0, 0)
@@ -71,7 +71,7 @@ CoD.AmmowidgetMP_HealCooldown.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	FullBackingDeployed:setRGB(0.79, 0.55, 0)
 	FullBackingDeployed:setAlpha(0)
 	FullBackingDeployed:setZRot(180)
-	FullBackingDeployed:setImage(RegisterImage(0x482C522ED478AB1))
+	FullBackingDeployed:setImage(RegisterImage(@"uie_hud_common_core_ammo_panelcenter2"))
 	self:addElement(FullBackingDeployed)
 	self.FullBackingDeployed = FullBackingDeployed
 	local AbilityPulse = CoD.AmmoWidgetMP_Ability_Flash.new(f1_arg0, f1_arg1, 0, 0, 4, 70, 0, 0, 2.5, 58.5)
@@ -102,7 +102,7 @@ CoD.AmmowidgetMP_HealCooldown.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 		})
 	end)
 	AbilityPulse:setAlpha(0.5)
-	AbilityPulse:setRFTMaterial(LUI.UIImage.GetCachedMaterial(0x1DE43899593E67E))
+	AbilityPulse:setRFTMaterial(LUI.UIImage.GetCachedMaterial(@"hash_51DE43899593E67E"))
 	AbilityPulse:setShaderVector(0, 0, 1, 0, 0)
 	AbilityPulse:setShaderVector(1, 0, 0, 0, 0)
 	AbilityPulse:setShaderVector(3, 0, 0, 0, 0)
@@ -118,25 +118,25 @@ CoD.AmmowidgetMP_HealCooldown.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self:addElement(AbilityPulse)
 	self.AbilityPulse = AbilityPulse
 	local Box = LUI.UIImage.new(0, 0, 2, 72, 0, 0, -3.5, 66.5)
-	Box:setImage(RegisterImage(0x2A20E3F9478C322))
-	Box:setMaterial(LUI.UIImage.GetCachedMaterial(0xF755127C95CF5B6))
+	Box:setImage(RegisterImage(@"uie_ui_hud_core_abeg_widget_box"))
+	Box:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_F755127C95CF5B6"))
 	Box:setShaderVector(0, 2, 0, 0, 0)
 	self:addElement(Box)
 	self.Box = Box
 	local PowerBasedImageAvailable = LUI.UIImage.new(0, 0, -3.5, 76.5, 0, 0, -8.5, 71.5)
-	PowerBasedImageAvailable:setImage(RegisterImage(0x2F98C87888D2E0D))
+	PowerBasedImageAvailable:setImage(RegisterImage(@"uie_hud_common_core_icon_heal"))
 	self:addElement(PowerBasedImageAvailable)
 	self.PowerBasedImageAvailable = PowerBasedImageAvailable
 	local PowerBasedImageUnavailable = LUI.UIImage.new(0, 0, -5, 75, 0, 0, -10, 70)
 	PowerBasedImageUnavailable:setRGB(0.65, 0.65, 0.65)
 	PowerBasedImageUnavailable:setAlpha(0)
-	PowerBasedImageUnavailable:setImage(RegisterImage(0xDCA29A818A78E8C))
+	PowerBasedImageUnavailable:setImage(RegisterImage(@"uie_ui_icon_equipment_heal_dark"))
 	self:addElement(PowerBasedImageUnavailable)
 	self.PowerBasedImageUnavailable = PowerBasedImageUnavailable
 	local NotAvailable = CoD.AmmoWidget_EquipmentEmpty.new(f1_arg0, f1_arg1, 0.5, 0.5, -27, 27, 0.5, 0.5, -10.5, 16.5)
 	NotAvailable:setScale(0.9, 0.9)
-	NotAvailable.ImgIcon:setImage(RegisterImage(0x2F98C87888D2E0D))
-	NotAvailable.ImgIconGrow:setImage(RegisterImage(0x2F98C87888D2E0D))
+	NotAvailable.ImgIcon:setImage(RegisterImage(@"uie_hud_common_core_icon_heal"))
+	NotAvailable.ImgIconGrow:setImage(RegisterImage(@"uie_hud_common_core_icon_heal"))
 	NotAvailable:linkToElementModel(self, nil, false, function(model)
 		NotAvailable:setModel(model, f1_arg1)
 	end)
@@ -145,7 +145,7 @@ CoD.AmmowidgetMP_HealCooldown.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	local Line = LUI.UIImage.new(0, 0, 4, 70, 0.35, 0.35, -2, 3)
 	Line:setRGB(0.89, 0.89, 0.89)
 	Line:setAlpha(0)
-	Line:setMaterial(LUI.UIImage.GetCachedMaterial(0xE125638BF94665F))
+	Line:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_feather_edges"))
 	Line:setShaderVector(0, 0.01, 0.41, 0.01, 0.41)
 	Line:linkToElementModel(self, "powerRatio", true, function(model)
 		local f12_local0 = model:get()
@@ -160,11 +160,11 @@ CoD.AmmowidgetMP_HealCooldown.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 		{
 			stateName = "Hidden",
 			condition = function(menu, element, event)
-				local f13_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2])
+				local f13_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_in_killcam"])
 				if not f13_local0 then
-					f13_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F])
+					f13_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_play_of_the_match"])
 					if not f13_local0 then
-						f13_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xC57360571B0917E])
+						f13_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_team_spectator"])
 					end
 				end
 				return f13_local0
@@ -197,38 +197,38 @@ CoD.AmmowidgetMP_HealCooldown.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	})
 	local FlareBack = HeroAbilityUseString
 	local GlowRing = HeroAbilityUseString.subscribeToModel
-	local BountyHealthCount = Engine[0x4DF5CFBC1771947](f1_arg1)
-	GlowRing(FlareBack, BountyHealthCount["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2]], function(f18_arg0)
+	local BountyHealthCount = Engine[@"getmodelforcontroller"](f1_arg1)
+	GlowRing(FlareBack, BountyHealthCount["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"]], function(f18_arg0)
 		f1_arg0:updateElementState(HeroAbilityUseString, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f18_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"],
 		})
 	end, false)
 	FlareBack = HeroAbilityUseString
 	GlowRing = HeroAbilityUseString.subscribeToModel
-	BountyHealthCount = Engine[0x4DF5CFBC1771947](f1_arg1)
-	GlowRing(FlareBack, BountyHealthCount["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F]], function(f19_arg0)
+	BountyHealthCount = Engine[@"getmodelforcontroller"](f1_arg1)
+	GlowRing(FlareBack, BountyHealthCount["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_play_of_the_match"]], function(f19_arg0)
 		f1_arg0:updateElementState(HeroAbilityUseString, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f19_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_play_of_the_match"],
 		})
 	end, false)
 	FlareBack = HeroAbilityUseString
 	GlowRing = HeroAbilityUseString.subscribeToModel
-	BountyHealthCount = Engine[0x4DF5CFBC1771947](f1_arg1)
-	GlowRing(FlareBack, BountyHealthCount["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xC57360571B0917E]], function(f20_arg0)
+	BountyHealthCount = Engine[@"getmodelforcontroller"](f1_arg1)
+	GlowRing(FlareBack, BountyHealthCount["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_team_spectator"]], function(f20_arg0)
 		f1_arg0:updateElementState(HeroAbilityUseString, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f20_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xC57360571B0917E],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_team_spectator"],
 		})
 	end, false)
 	HeroAbilityUseString:appendEventHandler("input_source_changed", function(f21_arg0, f21_arg1)
@@ -237,7 +237,7 @@ CoD.AmmowidgetMP_HealCooldown.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	end)
 	FlareBack = HeroAbilityUseString
 	GlowRing = HeroAbilityUseString.subscribeToModel
-	BountyHealthCount = Engine[0x4DF5CFBC1771947](f1_arg1)
+	BountyHealthCount = Engine[@"getmodelforcontroller"](f1_arg1)
 	GlowRing(FlareBack, BountyHealthCount.LastInput, function(f22_arg0)
 		f1_arg0:updateElementState(HeroAbilityUseString, {
 			name = "model_validation",
@@ -248,24 +248,24 @@ CoD.AmmowidgetMP_HealCooldown.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 		})
 	end, false)
 	HeroAbilityUseString:setAlpha(0)
-	HeroAbilityUseString.KBMText:setText(Engine[0xF9F1239CFD921FE](0x34175BD548C4C21))
-	HeroAbilityUseString.GamepadText:setText(Engine[0xF9F1239CFD921FE](0x34175BD548C4C21))
-	HeroAbilityUseString.GamepadText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	HeroAbilityUseString.KBMText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_234175BD548C4C21"))
+	HeroAbilityUseString.GamepadText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_234175BD548C4C21"))
+	HeroAbilityUseString.GamepadText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	self:addElement(HeroAbilityUseString)
 	self.HeroAbilityUseString = HeroAbilityUseString
 	GlowRing = LUI.UIImage.new(0, 0, -3.5, 76.5, 0, 0, -8.5, 71.5)
 	GlowRing:setRGB(1, 0.44, 0)
 	GlowRing:setAlpha(0)
-	GlowRing:setImage(RegisterImage(0x7028EB3BEA46612))
-	GlowRing:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	GlowRing:setImage(RegisterImage(@"uie_hex_flare_ring"))
+	GlowRing:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	GlowRing:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(GlowRing)
 	self.GlowRing = GlowRing
 	FlareBack = LUI.UIImage.new(0, 0, -45.5, 114.5, 0, 0, -40, 100)
 	FlareBack:setAlpha(0)
 	FlareBack:setScale(1.16, 1.16)
-	FlareBack:setImage(RegisterImage(0x49442D6D518A75D))
-	FlareBack:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	FlareBack:setImage(RegisterImage(@"uie_abeq_flare_back"))
+	FlareBack:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(FlareBack)
 	self.FlareBack = FlareBack
 	BountyHealthCount = CoD.BountyHunterHealthCount.new(f1_arg0, f1_arg1, 0, 0, 44.5, 71.5, 0, 0, 39, 63)
@@ -285,7 +285,7 @@ CoD.AmmowidgetMP_HealCooldown.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 		{
 			stateName = "InUse",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "state", Enum[0xF0447219F15F7F3][0x1873A43E9D1620E])
+				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "state", Enum[@"weapongadgetstates"][@"player_ability_state_inuse"])
 			end,
 		},
 		{
@@ -303,19 +303,19 @@ CoD.AmmowidgetMP_HealCooldown.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 		{
 			stateName = "PowerBasedEmptyCharging",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "state", Enum[0xF0447219F15F7F3][0x958A6962CA8F9B7]) and CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "powerRatio", 0)
+				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "state", Enum[@"weapongadgetstates"][@"player_ability_state_charging"]) and CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "powerRatio", 0)
 			end,
 		},
 		{
 			stateName = "PowerBasedCharging",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "state", Enum[0xF0447219F15F7F3][0x958A6962CA8F9B7]) and CoD.ModelUtility.IsSelfModelValueLessThan(self, f1_arg1, "powerRatio", 1)
+				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "state", Enum[@"weapongadgetstates"][@"player_ability_state_charging"]) and CoD.ModelUtility.IsSelfModelValueLessThan(self, f1_arg1, "powerRatio", 1)
 			end,
 		},
 		{
 			stateName = "PowerBased",
 			condition = function(menu, element, event)
-				return not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "state", Enum[0xF0447219F15F7F3][0x29529861EAA8D1C])
+				return not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "state", Enum[@"weapongadgetstates"][@"player_ability_state_hidden"])
 			end,
 		},
 	})
@@ -382,7 +382,7 @@ CoD.AmmowidgetMP_HealCooldown.__resetProperties = function(f35_arg0)
 	f35_arg0.AbilityPulse:setLeftRight(0, 0, 4, 70)
 	f35_arg0.AbilityPulse:setTopBottom(0, 0, 2.5, 58.5)
 	f35_arg0.AbilityPulse:setAlpha(0.5)
-	f35_arg0.AbilityPulse:setRFTMaterial(LUI.UIImage.GetCachedMaterial(0x1DE43899593E67E))
+	f35_arg0.AbilityPulse:setRFTMaterial(LUI.UIImage.GetCachedMaterial(@"hash_51DE43899593E67E"))
 	f35_arg0.AbilityPulse:setShaderVector(0, 0, 1, 0, 0)
 	f35_arg0.AbilityPulse:setShaderVector(1, 0, 0, 0, 0)
 	f35_arg0.AbilityPulse:setShaderVector(3, 0, 0, 0, 0)
@@ -392,7 +392,7 @@ CoD.AmmowidgetMP_HealCooldown.__resetProperties = function(f35_arg0)
 	f35_arg0.AmmoWidgetMPAbilityFlare:setAlpha(0)
 	f35_arg0.PowerBasedImageUnavailable:setRGB(0.65, 0.65, 0.65)
 	f35_arg0.PowerBasedImageUnavailable:setAlpha(0)
-	f35_arg0.PowerBasedImageUnavailable:setImage(RegisterImage(0xDCA29A818A78E8C))
+	f35_arg0.PowerBasedImageUnavailable:setImage(RegisterImage(@"uie_ui_icon_equipment_heal_dark"))
 	f35_arg0.PowerBasedImageAvailable:setRGB(1, 1, 1)
 	f35_arg0.PowerBasedImageAvailable:setAlpha(1)
 	f35_arg0.FullBackingDeployed:setAlpha(0)
@@ -523,7 +523,7 @@ CoD.AmmowidgetMP_HealCooldown.__clipsPerState = {
 			f40_arg0:setupElementClipCounter(4)
 			f40_arg0.AbilityPulse:completeAnimation()
 			f40_arg0.AbilityPulse:setAlpha(0)
-			f40_arg0.AbilityPulse:setRFTMaterial(LUI.UIImage.GetCachedMaterial(0x1DE43899593E67E))
+			f40_arg0.AbilityPulse:setRFTMaterial(LUI.UIImage.GetCachedMaterial(@"hash_51DE43899593E67E"))
 			f40_arg0.AbilityPulse:setShaderVector(0, 0, 1, 0, 0)
 			f40_arg0.AbilityPulse:setShaderVector(1, 0, 0, 0, 0)
 			f40_arg0.AbilityPulse:setShaderVector(3, 0, 0, 0, 0)
@@ -533,7 +533,7 @@ CoD.AmmowidgetMP_HealCooldown.__clipsPerState = {
 			f40_arg0.clipFinished(f40_arg0.PowerBasedImageAvailable)
 			f40_arg0.PowerBasedImageUnavailable:completeAnimation()
 			f40_arg0.PowerBasedImageUnavailable:setAlpha(0.4)
-			f40_arg0.PowerBasedImageUnavailable:setImage(RegisterImage(0xDCA29A818A78E8C))
+			f40_arg0.PowerBasedImageUnavailable:setImage(RegisterImage(@"uie_ui_icon_equipment_heal_dark"))
 			f40_arg0.clipFinished(f40_arg0.PowerBasedImageUnavailable)
 			f40_arg0.NotAvailable:completeAnimation()
 			f40_arg0.NotAvailable:setAlpha(0)
@@ -552,7 +552,7 @@ CoD.AmmowidgetMP_HealCooldown.__clipsPerState = {
 			f41_arg0.clipFinished(f41_arg0.FullBackingDeployed)
 			f41_arg0.AbilityPulse:completeAnimation()
 			f41_arg0.AbilityPulse:setAlpha(0.5)
-			f41_arg0.AbilityPulse:setRFTMaterial(LUI.UIImage.GetCachedMaterial(0x1DE43899593E67E))
+			f41_arg0.AbilityPulse:setRFTMaterial(LUI.UIImage.GetCachedMaterial(@"hash_51DE43899593E67E"))
 			f41_arg0.AbilityPulse:setShaderVector(0, 0, 1, 0, 0)
 			f41_arg0.AbilityPulse:setShaderVector(1, 0, 0, 0, 0)
 			f41_arg0.AbilityPulse:setShaderVector(3, 0, 0, 0, 0)
@@ -562,7 +562,7 @@ CoD.AmmowidgetMP_HealCooldown.__clipsPerState = {
 			f41_arg0.clipFinished(f41_arg0.PowerBasedImageAvailable)
 			f41_arg0.PowerBasedImageUnavailable:completeAnimation()
 			f41_arg0.PowerBasedImageUnavailable:setAlpha(0.4)
-			f41_arg0.PowerBasedImageUnavailable:setImage(RegisterImage(0xDCA29A818A78E8C))
+			f41_arg0.PowerBasedImageUnavailable:setImage(RegisterImage(@"uie_ui_icon_equipment_heal_dark"))
 			f41_arg0.clipFinished(f41_arg0.PowerBasedImageUnavailable)
 			f41_arg0.NotAvailable:completeAnimation()
 			f41_arg0.NotAvailable:setAlpha(1)
@@ -588,7 +588,7 @@ CoD.AmmowidgetMP_HealCooldown.__clipsPerState = {
 			f42_arg0.clipFinished(f42_arg0.FullBackingDeployed)
 			f42_arg0.AbilityPulse:completeAnimation()
 			f42_arg0.AbilityPulse:setAlpha(0.5)
-			f42_arg0.AbilityPulse:setRFTMaterial(LUI.UIImage.GetCachedMaterial(0x1DE43899593E67E))
+			f42_arg0.AbilityPulse:setRFTMaterial(LUI.UIImage.GetCachedMaterial(@"hash_51DE43899593E67E"))
 			f42_arg0.AbilityPulse:setShaderVector(0, 0, 1, 0, 0)
 			f42_arg0.AbilityPulse:setShaderVector(1, 0, 0, 0, 0)
 			f42_arg0.AbilityPulse:setShaderVector(3, 0, 0, 0, 0)
@@ -598,7 +598,7 @@ CoD.AmmowidgetMP_HealCooldown.__clipsPerState = {
 			f42_arg0.clipFinished(f42_arg0.PowerBasedImageAvailable)
 			f42_arg0.PowerBasedImageUnavailable:completeAnimation()
 			f42_arg0.PowerBasedImageUnavailable:setAlpha(0.4)
-			f42_arg0.PowerBasedImageUnavailable:setImage(RegisterImage(0xDCA29A818A78E8C))
+			f42_arg0.PowerBasedImageUnavailable:setImage(RegisterImage(@"uie_ui_icon_equipment_heal_dark"))
 			f42_arg0.clipFinished(f42_arg0.PowerBasedImageUnavailable)
 			f42_arg0.NotAvailable:completeAnimation()
 			f42_arg0.NotAvailable:setAlpha(1)
@@ -624,7 +624,7 @@ CoD.AmmowidgetMP_HealCooldown.__clipsPerState = {
 			f43_arg0.clipFinished(f43_arg0.AmmoWidgetMPAbilityFlare)
 			f43_arg0.AbilityPulse:completeAnimation()
 			f43_arg0.AbilityPulse:setAlpha(0)
-			f43_arg0.AbilityPulse:setRFTMaterial(LUI.UIImage.GetCachedMaterial(0x1DE43899593E67E))
+			f43_arg0.AbilityPulse:setRFTMaterial(LUI.UIImage.GetCachedMaterial(@"hash_51DE43899593E67E"))
 			f43_arg0.AbilityPulse:setShaderVector(0, 0, 1, 0, 0)
 			f43_arg0.AbilityPulse:setShaderVector(1, 0, 0, 0, 0)
 			f43_arg0.AbilityPulse:setShaderVector(3, 0, 0, 0, 0)
@@ -679,7 +679,7 @@ CoD.AmmowidgetMP_HealCooldown.__clipsPerState = {
 			f46_arg0.AbilityPulse:setLeftRight(0, 0, 3, 68)
 			f46_arg0.AbilityPulse:setTopBottom(0, 0, 0, 59)
 			f46_arg0.AbilityPulse:setAlpha(0)
-			f46_arg0.AbilityPulse:setRFTMaterial(LUI.UIImage.GetCachedMaterial(0x1DE43899593E67E))
+			f46_arg0.AbilityPulse:setRFTMaterial(LUI.UIImage.GetCachedMaterial(@"hash_51DE43899593E67E"))
 			f46_arg0.AbilityPulse:setShaderVector(0, 0, 1, 0, 0)
 			f46_arg0.AbilityPulse:setShaderVector(1, 0, 0, 0, 0)
 			f46_arg0.AbilityPulse:setShaderVector(3, 0, 0, 0, 0)

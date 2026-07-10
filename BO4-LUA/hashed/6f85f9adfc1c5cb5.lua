@@ -26,7 +26,7 @@ CoD.CamoSlot.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5
 				if not IsCustomLobby() then
 					f3_local0 = CoD.WeaponOptionsUtility.IsItemWeaponOptionLocked(menu, element, f1_arg1)
 					if f3_local0 then
-						f3_local0 = CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "unlockSessionMode", Enum[0x9C0C2196D8313A0][0xBF1DCC8138A9D39])
+						f3_local0 = CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "unlockSessionMode", Enum[@"emodes"][@"mode_warzone"])
 						if f3_local0 then
 							if not CoD.WeaponOptionsUtility.ShouldHideWeaponOptionProgress(menu, element, f1_arg1) then
 								f3_local0 = not IsLocal()
@@ -50,7 +50,7 @@ CoD.CamoSlot.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5
 	})
 	local f1_local2 = CamoSlotInternal
 	local NewBreadcrumb = CamoSlotInternal.subscribeToModel
-	local f1_local4 = Engine[0x8DF2E5447F384B9]()
+	local f1_local4 = Engine[@"getglobalmodel"]()
 	NewBreadcrumb(f1_local2, f1_local4["lobbyRoot.lobbyNav"], function(f5_arg0)
 		f1_arg0:updateElementState(CamoSlotInternal, {
 			name = "model_validation",
@@ -80,7 +80,7 @@ CoD.CamoSlot.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5
 	end)
 	f1_local2 = CamoSlotInternal
 	NewBreadcrumb = CamoSlotInternal.subscribeToModel
-	f1_local4 = Engine[0x8DF2E5447F384B9]()
+	f1_local4 = Engine[@"getglobalmodel"]()
 	NewBreadcrumb(f1_local2, f1_local4["lobbyRoot.lobbyNetworkMode"], function(f8_arg0)
 		f1_arg0:updateElementState(CamoSlotInternal, {
 			name = "model_validation",
@@ -133,7 +133,7 @@ CoD.CamoSlot.__clipsPerState = {
 			f13_arg0:__resetProperties()
 			f13_arg0:setupElementClipCounter(1)
 			local f13_local0 = function(f14_arg0)
-				f13_arg0.CamoSlotInternal:beginAnimation(200, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f13_arg0.CamoSlotInternal:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_in"])
 				f13_arg0.CamoSlotInternal:setScale(1.05, 1.05)
 				f13_arg0.CamoSlotInternal:registerEventHandler("interrupted_keyframe", f13_arg0.clipInterrupted)
 				f13_arg0.CamoSlotInternal:registerEventHandler("transition_complete_keyframe", f13_arg0.clipFinished)
@@ -146,7 +146,7 @@ CoD.CamoSlot.__clipsPerState = {
 			f15_arg0:__resetProperties()
 			f15_arg0:setupElementClipCounter(1)
 			local f15_local0 = function(f16_arg0)
-				f15_arg0.CamoSlotInternal:beginAnimation(200, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f15_arg0.CamoSlotInternal:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_out"])
 				f15_arg0.CamoSlotInternal:setScale(1, 1)
 				f15_arg0.CamoSlotInternal:registerEventHandler("interrupted_keyframe", f15_arg0.clipInterrupted)
 				f15_arg0.CamoSlotInternal:registerEventHandler("transition_complete_keyframe", f15_arg0.clipFinished)
@@ -182,7 +182,7 @@ CoD.CamoSlot.__clipsPerState = {
 			f19_arg0:__resetProperties()
 			f19_arg0:setupElementClipCounter(1)
 			local f19_local0 = function(f20_arg0)
-				f19_arg0.CamoSlotInternal:beginAnimation(200, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f19_arg0.CamoSlotInternal:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_in"])
 				f19_arg0.CamoSlotInternal:setScale(1.05, 1.05)
 				f19_arg0.CamoSlotInternal:registerEventHandler("interrupted_keyframe", f19_arg0.clipInterrupted)
 				f19_arg0.CamoSlotInternal:registerEventHandler("transition_complete_keyframe", f19_arg0.clipFinished)
@@ -199,7 +199,7 @@ CoD.CamoSlot.__clipsPerState = {
 			f21_arg0:__resetProperties()
 			f21_arg0:setupElementClipCounter(1)
 			local f21_local0 = function(f22_arg0)
-				f21_arg0.CamoSlotInternal:beginAnimation(200, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f21_arg0.CamoSlotInternal:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_out"])
 				f21_arg0.CamoSlotInternal:setScale(1, 1)
 				f21_arg0.CamoSlotInternal:registerEventHandler("interrupted_keyframe", f21_arg0.clipInterrupted)
 				f21_arg0.CamoSlotInternal:registerEventHandler("transition_complete_keyframe", f21_arg0.clipFinished)
@@ -245,7 +245,7 @@ CoD.CamoSlot.__clipsPerState = {
 			f27_arg0:__resetProperties()
 			f27_arg0:setupElementClipCounter(2)
 			local f27_local0 = function(f28_arg0)
-				f27_arg0.CamoSlotInternal:beginAnimation(200, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f27_arg0.CamoSlotInternal:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_in"])
 				f27_arg0.CamoSlotInternal:setScale(1.05, 1.05)
 				f27_arg0.CamoSlotInternal:registerEventHandler("interrupted_keyframe", f27_arg0.clipInterrupted)
 				f27_arg0.CamoSlotInternal:registerEventHandler("transition_complete_keyframe", f27_arg0.clipFinished)
@@ -262,7 +262,7 @@ CoD.CamoSlot.__clipsPerState = {
 			f29_arg0:__resetProperties()
 			f29_arg0:setupElementClipCounter(1)
 			local f29_local0 = function(f30_arg0)
-				f29_arg0.CamoSlotInternal:beginAnimation(200, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f29_arg0.CamoSlotInternal:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_out"])
 				f29_arg0.CamoSlotInternal:setScale(1, 1)
 				f29_arg0.CamoSlotInternal:registerEventHandler("interrupted_keyframe", f29_arg0.clipInterrupted)
 				f29_arg0.CamoSlotInternal:registerEventHandler("transition_complete_keyframe", f29_arg0.clipFinished)

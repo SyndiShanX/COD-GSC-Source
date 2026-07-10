@@ -8,11 +8,11 @@ CoD.PC_Theater_Keyboard_Shortcut_Text.new = function(f1_arg0, f1_arg1, f1_arg2, 
 	self.soundSet = "default"
 	local Text = LUI.UIText.new(0, 1, 12, 0, 0.5, 0.5, -7.5, 7.5)
 	Text:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
-	Text:setText(LocalizeToUpperString(0xA61241CD7E3DE2B))
+	Text:setText(LocalizeToUpperString(@"hash_5A61241CD7E3DE2B"))
 	Text:setTTF("dinnext_regular")
 	Text:setLineSpacing(2)
-	Text:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Text:setAlignment(Enum[0x7A5123B654282D2][0x6ED4298C93DC5ED])
+	Text:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Text:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
 	self:addElement(Text)
 	self.Text = Text
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)

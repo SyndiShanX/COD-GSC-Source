@@ -8,12 +8,12 @@ CoD.Social_NoFriends.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	self.soundSet = "ChooseDecal"
 	local noFriends = LUI.UIText.new(0, 0, 210, 1710, 0, 0, 526, 554)
 	noFriends:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
-	noFriends:setText(Engine[0xF9F1239CFD921FE](0xBAA9A79FE50F45E))
+	noFriends:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_BAA9A79FE50F45E"))
 	noFriends:setTTF("dinnext_regular")
 	noFriends:setLetterSpacing(3)
 	noFriends:setLineSpacing(8)
-	noFriends:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	noFriends:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	noFriends:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	noFriends:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(noFriends)
 	self.noFriends = noFriends
 	if PostLoadFunc then

@@ -8,46 +8,46 @@ CoD.TabletConnectionArrow.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local RightArrow03 = LUI.UIImage.new(1, 1, -65, -41, 0, 0, 0.5, 30.5)
-	RightArrow03:setImage(RegisterImage(0xB74F856BFDB37C1))
+	RightArrow03:setImage(RegisterImage(@"uie_ui_hud_tak5_data_arrow01"))
 	self:addElement(RightArrow03)
 	self.RightArrow03 = RightArrow03
 	local RightArrow02 = LUI.UIImage.new(1, 1, -52, -28, 0, 0, 0.5, 30.5)
-	RightArrow02:setImage(RegisterImage(0xB74F856BFDB37C1))
+	RightArrow02:setImage(RegisterImage(@"uie_ui_hud_tak5_data_arrow01"))
 	self:addElement(RightArrow02)
 	self.RightArrow02 = RightArrow02
 	local RightArrow01 = LUI.UIImage.new(1, 1, -39, -15, 0, 0, 0.5, 30.5)
-	RightArrow01:setImage(RegisterImage(0xB74F856BFDB37C1))
+	RightArrow01:setImage(RegisterImage(@"uie_ui_hud_tak5_data_arrow01"))
 	self:addElement(RightArrow01)
 	self.RightArrow01 = RightArrow01
 	local RightArrow00 = LUI.UIImage.new(0, 0, 38.5, 64.5, 0, 0, 0, 30)
-	RightArrow00:setImage(RegisterImage(0xB74F556BFDB32A8))
+	RightArrow00:setImage(RegisterImage(@"uie_ui_hud_tak5_data_arrow02"))
 	self:addElement(RightArrow00)
 	self.RightArrow00 = RightArrow00
 	local RightArrowAdd03 = LUI.UIImage.new(1, 1, -65, -41, 0, 0, 0.5, 30.5)
 	RightArrowAdd03:setAlpha(0)
-	RightArrowAdd03:setImage(RegisterImage(0xB74F856BFDB37C1))
-	RightArrowAdd03:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	RightArrowAdd03:setImage(RegisterImage(@"uie_ui_hud_tak5_data_arrow01"))
+	RightArrowAdd03:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	RightArrowAdd03:setShaderVector(0, 2, 0, 0, 0)
 	self:addElement(RightArrowAdd03)
 	self.RightArrowAdd03 = RightArrowAdd03
 	local RightArrowAdd02 = LUI.UIImage.new(1, 1, -52, -28, 0, 0, 0.5, 30.5)
 	RightArrowAdd02:setAlpha(0)
-	RightArrowAdd02:setImage(RegisterImage(0xB74F856BFDB37C1))
-	RightArrowAdd02:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	RightArrowAdd02:setImage(RegisterImage(@"uie_ui_hud_tak5_data_arrow01"))
+	RightArrowAdd02:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	RightArrowAdd02:setShaderVector(0, 2, 0, 0, 0)
 	self:addElement(RightArrowAdd02)
 	self.RightArrowAdd02 = RightArrowAdd02
 	local RightArrowAdd01 = LUI.UIImage.new(1, 1, -39, -15, 0, 0, 0.5, 30.5)
 	RightArrowAdd01:setAlpha(0)
-	RightArrowAdd01:setImage(RegisterImage(0xB74F856BFDB37C1))
-	RightArrowAdd01:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	RightArrowAdd01:setImage(RegisterImage(@"uie_ui_hud_tak5_data_arrow01"))
+	RightArrowAdd01:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	RightArrowAdd01:setShaderVector(0, 2, 0, 0, 0)
 	self:addElement(RightArrowAdd01)
 	self.RightArrowAdd01 = RightArrowAdd01
 	local RightArrowAdd00 = LUI.UIImage.new(0, 0, 38.5, 64.5, 0, 0, 0, 30)
 	RightArrowAdd00:setAlpha(0)
-	RightArrowAdd00:setImage(RegisterImage(0xB74F556BFDB32A8))
-	RightArrowAdd00:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	RightArrowAdd00:setImage(RegisterImage(@"uie_ui_hud_tak5_data_arrow02"))
+	RightArrowAdd00:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	RightArrowAdd00:setShaderVector(0, 2, 0, 0, 0)
 	self:addElement(RightArrowAdd00)
 	self.RightArrowAdd00 = RightArrowAdd00
@@ -211,7 +211,7 @@ CoD.TabletConnectionArrow.__clipsPerState = {
 			f25_arg0:setupElementClipCounter(4)
 			local f25_local0 = function(f26_arg0)
 				local f26_local0 = function(f27_arg0)
-					f27_arg0:beginAnimation(250, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f27_arg0:beginAnimation(250, Enum[@"luitween"][@"luitween_ease_both"])
 					f27_arg0:setAlpha(1)
 					f27_arg0:registerEventHandler("transition_complete_keyframe", f25_arg0.clipFinished)
 				end
@@ -228,7 +228,7 @@ CoD.TabletConnectionArrow.__clipsPerState = {
 						f30_arg0:beginAnimation(250)
 						f30_arg0:registerEventHandler("transition_complete_keyframe", f25_arg0.clipFinished)
 					end
-					f29_arg0:beginAnimation(250, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f29_arg0:beginAnimation(250, Enum[@"luitween"][@"luitween_ease_both"])
 					f29_arg0:setAlpha(1)
 					f29_arg0:registerEventHandler("transition_complete_keyframe", f29_local0)
 				end
@@ -245,7 +245,7 @@ CoD.TabletConnectionArrow.__clipsPerState = {
 						f33_arg0:beginAnimation(500)
 						f33_arg0:registerEventHandler("transition_complete_keyframe", f25_arg0.clipFinished)
 					end
-					f32_arg0:beginAnimation(250, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f32_arg0:beginAnimation(250, Enum[@"luitween"][@"luitween_ease_both"])
 					f32_arg0:setAlpha(1)
 					f32_arg0:registerEventHandler("transition_complete_keyframe", f32_local0)
 				end
@@ -261,7 +261,7 @@ CoD.TabletConnectionArrow.__clipsPerState = {
 					f35_arg0:beginAnimation(750)
 					f35_arg0:registerEventHandler("transition_complete_keyframe", f25_arg0.clipFinished)
 				end
-				f25_arg0.RightArrowAdd00:beginAnimation(250, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f25_arg0.RightArrowAdd00:beginAnimation(250, Enum[@"luitween"][@"luitween_ease_both"])
 				f25_arg0.RightArrowAdd00:setAlpha(1)
 				f25_arg0.RightArrowAdd00:registerEventHandler("interrupted_keyframe", f25_arg0.clipInterrupted)
 				f25_arg0.RightArrowAdd00:registerEventHandler("transition_complete_keyframe", f34_local0)

@@ -31,7 +31,7 @@ CoD.SDDemObjectiveNotification_BombPlanted.new = function(f1_arg0, f1_arg1, f1_a
 	self:addElement(ArrowLeft)
 	self.ArrowLeft = ArrowLeft
 	local EnemyBombA = LUI.UIImage.new(0.5, 0.5, -24, 24, 0, 0, 6, 54)
-	EnemyBombA:setImage(RegisterImage(0xBA08AEAD2336626))
+	EnemyBombA:setImage(RegisterImage(@"ui_icon_waypoint_bomb"))
 	EnemyBombA:subscribeToGlobalModel(f1_arg1, "HUDItems", "colorBlindSensitiveEnemyColor", function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
@@ -41,7 +41,7 @@ CoD.SDDemObjectiveNotification_BombPlanted.new = function(f1_arg0, f1_arg1, f1_a
 	self:addElement(EnemyBombA)
 	self.EnemyBombA = EnemyBombA
 	local EnemyBombB = LUI.UIImage.new(0.5, 0.5, -24, 24, 0, 0, 6, 54)
-	EnemyBombB:setImage(RegisterImage(0xBA08AEAD2336626))
+	EnemyBombB:setImage(RegisterImage(@"ui_icon_waypoint_bomb"))
 	EnemyBombB:subscribeToGlobalModel(f1_arg1, "HUDItems", "colorBlindSensitiveEnemyColor", function(model)
 		local f5_local0 = model:get()
 		if f5_local0 ~= nil then
@@ -52,7 +52,7 @@ CoD.SDDemObjectiveNotification_BombPlanted.new = function(f1_arg0, f1_arg1, f1_a
 	self.EnemyBombB = EnemyBombB
 	local FriendlyBombA = LUI.UIImage.new(0, 0, 15, 63, 0, 0, 6, 54)
 	FriendlyBombA:setAlpha(0)
-	FriendlyBombA:setImage(RegisterImage(0xBA08AEAD2336626))
+	FriendlyBombA:setImage(RegisterImage(@"ui_icon_waypoint_bomb"))
 	FriendlyBombA:subscribeToGlobalModel(f1_arg1, "HUDItems", "colorBlindSensitiveFriendlyColor", function(model)
 		local f6_local0 = model:get()
 		if f6_local0 ~= nil then
@@ -63,7 +63,7 @@ CoD.SDDemObjectiveNotification_BombPlanted.new = function(f1_arg0, f1_arg1, f1_a
 	self.FriendlyBombA = FriendlyBombA
 	local FriendlyBombB = LUI.UIImage.new(1, 1, -63, -15, 0, 0, 6, 54)
 	FriendlyBombB:setAlpha(0)
-	FriendlyBombB:setImage(RegisterImage(0xBA08AEAD2336626))
+	FriendlyBombB:setImage(RegisterImage(@"ui_icon_waypoint_bomb"))
 	FriendlyBombB:subscribeToGlobalModel(f1_arg1, "HUDItems", "colorBlindSensitiveFriendlyColor", function(model)
 		local f7_local0 = model:get()
 		if f7_local0 ~= nil then
@@ -75,11 +75,11 @@ CoD.SDDemObjectiveNotification_BombPlanted.new = function(f1_arg0, f1_arg1, f1_a
 	local BombLabel = LUI.UIText.new(0, 0, 55.5, 86.5, 0, 0, 12.5, 45.5)
 	BombLabel:setText(CoD.BaseUtility.AlreadyLocalized("A"))
 	BombLabel:setTTF("ttmussels_demibold")
-	BombLabel:setMaterial(LUI.UIImage.GetCachedMaterial(0x6250C6FCAC36BD4))
+	BombLabel:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_56250C6FCAC36BD4"))
 	BombLabel:setShaderVector(0, 0.25, 0, 0, 0)
 	BombLabel:setShaderVector(1, 0, 0, 0, 1)
-	BombLabel:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	BombLabel:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	BombLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	BombLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(BombLabel)
 	self.BombLabel = BombLabel
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)

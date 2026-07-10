@@ -32,11 +32,11 @@ LUI.createMenu.Social_Main = function(f1_arg0, f1_arg1)
 	self:addElement(TabFrame)
 	self.TabFrame = TabFrame
 	local GenericMenuFrameIdentity = CoD.GenericMenuFrameIdentity.new(f1_local1, f1_arg0, 0, 1, 0, 0, 0, 1, 0, 0)
-	GenericMenuFrameIdentity.CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(0xC4B68D4F7C51908))
+	GenericMenuFrameIdentity.CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(@"hash_5C4B68D4F7C51908"))
 	GenericMenuFrameIdentity:subscribeToGlobalModel(f1_arg0, "LobbyRoot", "lobbyTitle", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			GenericMenuFrameIdentity.CommonHeader.subtitle.subtitle:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			GenericMenuFrameIdentity.CommonHeader.subtitle.subtitle:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	self:addElement(GenericMenuFrameIdentity)
@@ -73,31 +73,31 @@ LUI.createMenu.Social_Main = function(f1_arg0, f1_arg1)
 	})
 	local f1_local7 = self
 	local f1_local8 = self.subscribeToModel
-	local f1_local9 = Engine[0x8DF2E5447F384B9]()
+	local f1_local9 = Engine[@"getglobalmodel"]()
 	f1_local8(f1_local7, f1_local9["socialRoot.tab"], function(f6_arg0, f6_arg1)
-		CoD.Menu.UpdateButtonShownState(f6_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x93AB4C84F113EE1])
+		CoD.Menu.UpdateButtonShownState(f6_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_back"])
 	end, false)
 	f1_local7 = self
 	f1_local8 = self.subscribeToModel
-	f1_local9 = Engine[0x8DF2E5447F384B9]()
+	f1_local9 = Engine[@"getglobalmodel"]()
 	f1_local8(f1_local7, f1_local9["socialRoot.sort"], function(f7_arg0, f7_arg1)
-		CoD.Menu.UpdateButtonShownState(f7_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x93AB4C84F113EE1])
+		CoD.Menu.UpdateButtonShownState(f7_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_back"])
 	end, false)
 	f1_local7 = self
 	f1_local8 = self.subscribeToModel
 	f1_local9 = DataSources.SocialRoot.getModel(f1_arg0)
 	f1_local8(f1_local7, f1_local9.tab, function(f8_arg0, f8_arg1)
-		CoD.Menu.UpdateButtonShownState(f8_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x22361E23588705A])
+		CoD.Menu.UpdateButtonShownState(f8_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_start"])
 	end, false)
 	self:appendEventHandler("<datasourceChange>ClanInfo", function(f9_arg0, f9_arg1)
 		f9_arg1.menu = f9_arg1.menu or f1_local1
-		CoD.Menu.UpdateButtonShownState(f9_arg0, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x22361E23588705A])
+		CoD.Menu.UpdateButtonShownState(f9_arg0, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_start"])
 	end)
 	f1_local7 = self
 	f1_local8 = self.subscribeToModel
-	f1_local9 = Engine[0x8DF2E5447F384B9]()
+	f1_local9 = Engine[@"getglobalmodel"]()
 	f1_local8(f1_local7, f1_local9["lobbyRoot.rankMode"], function(f10_arg0, f10_arg1)
-		CoD.Menu.UpdateButtonShownState(f10_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC])
+		CoD.Menu.UpdateButtonShownState(f10_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_ltrig"])
 	end, false)
 	self:registerEventHandler("close_all_ingame_menus", function(self, event)
 		local f11_local0 = nil
@@ -109,56 +109,56 @@ LUI.createMenu.Social_Main = function(f1_arg0, f1_arg1)
 		end
 		return f11_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], nil, function(element, menu, controller, model)
 		GoBack(self, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], 0x0, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], @"hash_0", nil, nil)
 		return false
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x93AB4C84F113EE1], nil, function(element, menu, controller, model)
-		if not IsPC() and CoD.ModelUtility.IsGlobalModelValueEqualTo("socialRoot.tab", "friends") and CoD.ModelUtility.IsGlobalModelValueEqualTo("socialRoot.sort", Enum[0x3908242653FAC08][0x378D2974EF235BB]) then
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_back"], nil, function(element, menu, controller, model)
+		if not IsPC() and CoD.ModelUtility.IsGlobalModelValueEqualTo("socialRoot.tab", "friends") and CoD.ModelUtility.IsGlobalModelValueEqualTo("socialRoot.sort", Enum[@"presencesorting"][@"presence_sorting_online_most_recent"]) then
 			SocialToggleSorting(self, element, controller)
-			UpdateButtonPromptState(menu, element, controller, Enum[0x3DD78803F918E9D][0x93AB4C84F113EE1])
+			UpdateButtonPromptState(menu, element, controller, Enum[@"luibutton"][@"lui_key_back"])
 			return true
-		elseif not IsPC() and CoD.ModelUtility.IsGlobalModelValueEqualTo("socialRoot.tab", "friends") and CoD.ModelUtility.IsGlobalModelValueEqualTo("socialRoot.sort", Enum[0x3908242653FAC08][0x874C3506F8D93CE]) then
+		elseif not IsPC() and CoD.ModelUtility.IsGlobalModelValueEqualTo("socialRoot.tab", "friends") and CoD.ModelUtility.IsGlobalModelValueEqualTo("socialRoot.sort", Enum[@"presencesorting"][@"presence_sorting_alphabetical"]) then
 			SocialToggleSorting(self, element, controller)
-			UpdateButtonPromptState(menu, element, controller, Enum[0x3DD78803F918E9D][0x93AB4C84F113EE1])
+			UpdateButtonPromptState(menu, element, controller, Enum[@"luibutton"][@"lui_key_back"])
 			return true
 		else
 		end
 	end, function(element, menu, controller)
-		if not IsPC() and CoD.ModelUtility.IsGlobalModelValueEqualTo("socialRoot.tab", "friends") and CoD.ModelUtility.IsGlobalModelValueEqualTo("socialRoot.sort", Enum[0x3908242653FAC08][0x378D2974EF235BB]) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x93AB4C84F113EE1], 0xCA85F8B6A3ED016, nil, nil)
+		if not IsPC() and CoD.ModelUtility.IsGlobalModelValueEqualTo("socialRoot.tab", "friends") and CoD.ModelUtility.IsGlobalModelValueEqualTo("socialRoot.sort", Enum[@"presencesorting"][@"presence_sorting_online_most_recent"]) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_back"], @"hash_5CA85F8B6A3ED016", nil, nil)
 			return true
-		elseif not IsPC() and CoD.ModelUtility.IsGlobalModelValueEqualTo("socialRoot.tab", "friends") and CoD.ModelUtility.IsGlobalModelValueEqualTo("socialRoot.sort", Enum[0x3908242653FAC08][0x874C3506F8D93CE]) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x93AB4C84F113EE1], 0xD80133548748A69, nil, nil)
+		elseif not IsPC() and CoD.ModelUtility.IsGlobalModelValueEqualTo("socialRoot.tab", "friends") and CoD.ModelUtility.IsGlobalModelValueEqualTo("socialRoot.sort", Enum[@"presencesorting"][@"presence_sorting_alphabetical"]) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_back"], @"hash_4D80133548748A69", nil, nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		GoBack(self, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 		return true
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], nil, function(element, menu, controller, model)
 		if AlwaysFalse() then
 			return true
 		else
 		end
 	end, function(element, menu, controller)
 		if AlwaysFalse() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x0, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"hash_0", nil, nil)
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x22361E23588705A], "ui_contextual_1", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_start"], "ui_contextual_1", function(element, menu, controller, model)
 		if CoD.ClanUtility.ShowClanOptionPrompt(controller) then
 			OpenPopup(self, "ClanOptions", controller)
 			return true
@@ -166,13 +166,13 @@ LUI.createMenu.Social_Main = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if CoD.ClanUtility.ShowClanOptionPrompt(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x22361E23588705A], 0x2FA47140D97F89D, nil, "ui_contextual_1")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_start"], @"hash_2FA47140D97F89D", nil, "ui_contextual_1")
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_ltrig"], nil, function(element, menu, controller, model)
 		if not IsPC() and not IsRepeatButtonPress(model) and CoD.RankUtility.IsCurrentRankModeEqualTo(CoD.RankUtility.RankMode.Multiplayer) then
 			CoD.RankUtility.ToggleRankMode()
 			return true
@@ -190,16 +190,16 @@ LUI.createMenu.Social_Main = function(f1_arg0, f1_arg1)
 	end, function(element, menu, controller)
 		local f23_local0 = nil
 		if not IsPC() and not IsRepeatButtonPress(f23_local0) and CoD.RankUtility.IsCurrentRankModeEqualTo(CoD.RankUtility.RankMode.Multiplayer) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC], 0x502E6E565E8BFDE, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_ltrig"], @"hash_1502E6E565E8BFDE", nil, nil)
 			return true
 		elseif not IsPC() and not IsRepeatButtonPress(f23_local0) and CoD.RankUtility.IsCurrentRankModeEqualTo(CoD.RankUtility.RankMode.Arena) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC], 0xE4653C70EC64D31, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_ltrig"], @"menu/rank_arena", nil, nil)
 			return true
 		elseif not IsPC() and not IsRepeatButtonPress(f23_local0) and CoD.RankUtility.IsCurrentRankModeEqualTo(CoD.RankUtility.RankMode.Warzone) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC], 0xF9B486622459EBA, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_ltrig"], @"menu/rank_warzone", nil, nil)
 			return true
 		elseif not IsPC() and not IsRepeatButtonPress(f23_local0) and CoD.RankUtility.IsCurrentRankModeEqualTo(CoD.RankUtility.RankMode.Zombies) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC], 0x34DE38E1E88127D, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_ltrig"], @"menu/rank_zombies", nil, nil)
 			return true
 		else
 			return false

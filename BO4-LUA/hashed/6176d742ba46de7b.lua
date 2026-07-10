@@ -11,11 +11,11 @@ CoD.WeaponBribeSelectionTimer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	TimerText:setRGB(ColorSet.StoreAvailabilityTimer.r, ColorSet.StoreAvailabilityTimer.g, ColorSet.StoreAvailabilityTimer.b)
 	TimerText:setTTF("ttmussels_regular")
 	TimerText:setLetterSpacing(2)
-	TimerText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	TimerText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	TimerText:subscribeToGlobalModel(f1_arg1, "BribeMenuTimer", "bribe_menu_timer", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			TimerText:setText(ToUpper(LocalizeIntoString(0xAC0D5F97E5CC643, f2_local0)))
+			TimerText:setText(ToUpper(LocalizeIntoString(@"hash_5AC0D5F97E5CC643", f2_local0)))
 		end
 	end)
 	self:addElement(TimerText)

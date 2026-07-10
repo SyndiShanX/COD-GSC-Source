@@ -19,18 +19,18 @@ LUI.createMenu.PC_Korea_Bootsequence_Rating = function(f1_arg0, f1_arg1)
 	self.BackBGScreen = BackBGScreen
 	local KoreaAdditionnalText18 = nil
 	KoreaAdditionnalText18 = LUI.UIText.new(0.5, 0.5, -654.5, 654.5, 0.5, 0.5, -151, -22)
-	KoreaAdditionnalText18:setText(Engine[0xF9F1239CFD921FE](0x40029439C03BA7C))
+	KoreaAdditionnalText18:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_40029439C03BA7C"))
 	KoreaAdditionnalText18:setTTF("notosans_regular")
-	KoreaAdditionnalText18:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	KoreaAdditionnalText18:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	KoreaAdditionnalText18:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	KoreaAdditionnalText18:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(KoreaAdditionnalText18)
 	self.KoreaAdditionnalText18 = KoreaAdditionnalText18
 	local KoreaAdditionnalText15 = nil
 	KoreaAdditionnalText15 = LUI.UIText.new(0.5, 0.5, -783, 783, 0.5, 0.5, -177, -87)
-	KoreaAdditionnalText15:setText(Engine[0xF9F1239CFD921FE](0x4002E439C03C2FB))
+	KoreaAdditionnalText15:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_4002E439C03C2FB"))
 	KoreaAdditionnalText15:setTTF("notosans_regular")
-	KoreaAdditionnalText15:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	KoreaAdditionnalText15:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	KoreaAdditionnalText15:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	KoreaAdditionnalText15:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(KoreaAdditionnalText15)
 	self.KoreaAdditionnalText15 = KoreaAdditionnalText15
 	local PCKoreaBoot15ContentDescriptorsIcons = nil

@@ -10,14 +10,14 @@ CoD.DirectorTeamMemberEmpty.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local SearchingBacking = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	SearchingBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	SearchingBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	SearchingBacking:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(SearchingBacking)
 	self.SearchingBacking = SearchingBacking
 	local NoiseTiledBacking = LUI.UIImage.new(0, 0, 0, 400, 0.09, 0.09, -7, 78)
 	NoiseTiledBacking:setAlpha(0.7)
-	NoiseTiledBacking:setImage(RegisterImage(0x34839E8065B1E53))
-	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	NoiseTiledBacking:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	NoiseTiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	NoiseTiledBacking:setupNineSliceShader(196, 88)
 	self:addElement(NoiseTiledBacking)
@@ -40,24 +40,24 @@ CoD.DirectorTeamMemberEmpty.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	local EmptyText = LUI.UIText.new(0.03, 0.97, 0, 0, 0.37, 0.63, 0, 0)
 	EmptyText:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	EmptyText:setAlpha(0.9)
-	EmptyText:setText(Engine[0xF9F1239CFD921FE](0x6ADB318F8178FC))
+	EmptyText:setText(Engine[@"hash_4F9F1239CFD921FE"](0x6ADB318F8178FC))
 	EmptyText:setTTF("ttmussels_regular")
 	EmptyText:setLetterSpacing(10)
-	EmptyText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	EmptyText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	EmptyText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	EmptyText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(EmptyText)
 	self.EmptyText = EmptyText
 	local ButtonAddPlus = nil
 	ButtonAddPlus = LUI.UIImage.new(1, 1, -64, -20, 0.5, 0.5, -22, 22)
 	ButtonAddPlus:setAlpha(0)
-	ButtonAddPlus:setImage(RegisterImage(0x5C627FDA784DE0D))
+	ButtonAddPlus:setImage(RegisterImage(@"uie_ui_menu_cac_button_add_plus"))
 	self:addElement(ButtonAddPlus)
 	self.ButtonAddPlus = ButtonAddPlus
 	local ButtonAddPlusHighlighted = nil
 	ButtonAddPlusHighlighted = LUI.UIImage.new(1, 1, -64, -20, 0.5, 0.5, -22, 22)
 	ButtonAddPlusHighlighted:setAlpha(0)
-	ButtonAddPlusHighlighted:setImage(RegisterImage(0x63E82F3B2442EBB))
-	ButtonAddPlusHighlighted:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	ButtonAddPlusHighlighted:setImage(RegisterImage(@"uie_ui_menu_cac_button_add_plus_highlighted"))
+	ButtonAddPlusHighlighted:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(ButtonAddPlusHighlighted)
 	self.ButtonAddPlusHighlighted = ButtonAddPlusHighlighted
 	local SelectionOverlay = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
@@ -105,7 +105,7 @@ CoD.DirectorTeamMemberEmpty.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	end)
 	local f1_local10 = self
 	local f1_local11 = self.subscribeToModel
-	local f1_local12 = Engine[0x8DF2E5447F384B9]()
+	local f1_local12 = Engine[@"getglobalmodel"]()
 	f1_local11(f1_local10, f1_local12["lobbyRoot.selectedXuid"], function(f5_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -117,7 +117,7 @@ CoD.DirectorTeamMemberEmpty.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	end, false)
 	f1_local10 = self
 	f1_local11 = self.subscribeToModel
-	f1_local12 = Engine[0x8DF2E5447F384B9]()
+	f1_local12 = Engine[@"getglobalmodel"]()
 	f1_local11(f1_local10, f1_local12["lobbyRoot.selectedXuidTeam"], function(f6_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

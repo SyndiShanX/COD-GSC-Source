@@ -59,7 +59,7 @@ CoD.WarzoneInventory.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	RightConsumed:setWidgetType(CoD.WarzoneQuickInventoryMenuItemSmall)
 	RightConsumed:setHorizontalCount(5)
 	RightConsumed:setSpacing(3)
-	RightConsumed:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	RightConsumed:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	RightConsumed:setDataSource("WarzoneConsumed")
 	self:addElement(RightConsumed)
 	self.RightConsumed = RightConsumed
@@ -105,7 +105,7 @@ CoD.WarzoneInventory.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	RightConsumedHidden:setWidgetType(CoD.WarzoneQuickInventoryMenuItemSmall)
 	RightConsumedHidden:setHorizontalCount(5)
 	RightConsumedHidden:setSpacing(3)
-	RightConsumedHidden:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	RightConsumedHidden:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	RightConsumedHidden:setDataSource("WarzoneConsumed")
 	self:addElement(RightConsumedHidden)
 	self.RightConsumedHidden = RightConsumedHidden
@@ -150,7 +150,7 @@ CoD.WarzoneInventory.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	LeftConsumed:setWidgetType(CoD.WarzoneQuickInventoryMenuItemSmall)
 	LeftConsumed:setHorizontalCount(5)
 	LeftConsumed:setSpacing(3)
-	LeftConsumed:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
+	LeftConsumed:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
 	LeftConsumed:setDataSource("WarzoneConsumed")
 	self:addElement(LeftConsumed)
 	self.LeftConsumed = LeftConsumed
@@ -196,7 +196,7 @@ CoD.WarzoneInventory.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	LeftConsumedHidden:setWidgetType(CoD.WarzoneQuickInventoryMenuItemSmall)
 	LeftConsumedHidden:setHorizontalCount(5)
 	LeftConsumedHidden:setSpacing(3)
-	LeftConsumedHidden:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
+	LeftConsumedHidden:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
 	LeftConsumedHidden:setDataSource("WarzoneConsumed")
 	self:addElement(LeftConsumedHidden)
 	self.LeftConsumedHidden = LeftConsumedHidden
@@ -226,15 +226,15 @@ CoD.WarzoneInventory.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	self:addElement(InventoryEquipmentSmall)
 	self.InventoryEquipmentSmall = InventoryEquipmentSmall
 	local QuickLabel = LUI.UIText.new(0, 0, 319, 519, 0, 0, -22, -4)
-	QuickLabel:setText(LocalizeToUpperString(0xAC24C20650F01A4))
+	QuickLabel:setText(LocalizeToUpperString(@"warzone/quick_equip"))
 	QuickLabel:setTTF("ttmussels_regular")
-	QuickLabel:setMaterial(LUI.UIImage.GetCachedMaterial(0x90D57B1E92D39D7))
+	QuickLabel:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_90D57B1E92D39D7"))
 	QuickLabel:setShaderVector(0, 0.6, 0, 0, 0)
 	QuickLabel:setShaderVector(1, 0.3, 0, 0, 0)
 	QuickLabel:setShaderVector(2, 0, 0, 0, 1)
 	QuickLabel:setLetterSpacing(2)
-	QuickLabel:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	QuickLabel:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	QuickLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	QuickLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(QuickLabel)
 	self.QuickLabel = QuickLabel
 	local InventoryPromptImazge = CoD.WarzoneInventoryNag.new(f1_arg0, f1_arg1, 0.5, 0.5, -102.5, 134.5, 0, 0, 58, 95)
@@ -254,7 +254,7 @@ CoD.WarzoneInventory.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 			condition = function(menu, element, event)
 				local f20_local0 = IsMouseOrKeyboard(f1_arg1)
 				if f20_local0 then
-					if not CoD.WZUtility.IsInLastStand(f1_arg1, "hudItems.lastStand") and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xD567EDB5609CCEC]) and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x534C7B2375D2D47]) and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04]) and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x6FFF566DCC09BBD]) and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) and Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xBB045E46E88E762]) and not CoD.ModelUtility.IsModelValueTrue(f1_arg1, "vehicle.hidePlayerInfo") and not CoD.ModelUtility.IsModelValueEqualTo(f1_arg1, "hudItems.infiltrationVehicle", 1) then
+					if not CoD.WZUtility.IsInLastStand(f1_arg1, "hudItems.lastStand") and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_is_demo_playing"]) and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_player_dead"]) and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]) and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_spectating_client"]) and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_ui_active"]) and Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_weapon_hud_visible"]) and not CoD.ModelUtility.IsModelValueTrue(f1_arg1, "vehicle.hidePlayerInfo") and not CoD.ModelUtility.IsModelValueEqualTo(f1_arg1, "hudItems.infiltrationVehicle", 1) then
 						f20_local0 = not CoD.WZUtility.IsWarzoneUIHidden(f1_arg1, "wzHideActivePerksUI", "warzoneHideActivePerks")
 					else
 						f20_local0 = false
@@ -273,7 +273,7 @@ CoD.WarzoneInventory.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 			stateName = "InventoryOpenHiddenAllPreference",
 			condition = function(menu, element, event)
 				local f22_local0
-				if not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xD567EDB5609CCEC]) and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x534C7B2375D2D47]) and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04]) and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x6FFF566DCC09BBD]) and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) and Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xBB045E46E88E762]) and not CoD.WZUtility.IsInLastStand(f1_arg1, "hudItems.lastStand") then
+				if not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_is_demo_playing"]) and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_player_dead"]) and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]) and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_spectating_client"]) and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_ui_active"]) and Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_weapon_hud_visible"]) and not CoD.WZUtility.IsInLastStand(f1_arg1, "hudItems.lastStand") then
 					f22_local0 = CoD.ModelUtility.IsModelValueEqualTo(f1_arg1, "hudItems.inventory.open", true)
 					if f22_local0 then
 						if not CoD.ModelUtility.IsModelValueTrue(f1_arg1, "vehicle.hidePlayerInfo") and not CoD.ModelUtility.IsModelValueEqualTo(f1_arg1, "hudItems.infiltrationVehicle", 1) then
@@ -295,7 +295,7 @@ CoD.WarzoneInventory.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 			stateName = "InventoryOpenHiddenButtonsPreference",
 			condition = function(menu, element, event)
 				local f23_local0
-				if not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xD567EDB5609CCEC]) and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x534C7B2375D2D47]) and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04]) and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x6FFF566DCC09BBD]) and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) and Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xBB045E46E88E762]) and not CoD.WZUtility.IsInLastStand(f1_arg1, "hudItems.lastStand") then
+				if not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_is_demo_playing"]) and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_player_dead"]) and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]) and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_spectating_client"]) and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_ui_active"]) and Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_weapon_hud_visible"]) and not CoD.WZUtility.IsInLastStand(f1_arg1, "hudItems.lastStand") then
 					f23_local0 = CoD.ModelUtility.IsModelValueEqualTo(f1_arg1, "hudItems.inventory.open", true)
 					if f23_local0 then
 						if not CoD.ModelUtility.IsModelValueTrue(f1_arg1, "vehicle.hidePlayerInfo") and not CoD.ModelUtility.IsModelValueEqualTo(f1_arg1, "hudItems.infiltrationVehicle", 1) then
@@ -314,7 +314,7 @@ CoD.WarzoneInventory.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 			stateName = "InventoryOpenHiddenPerksPreference",
 			condition = function(menu, element, event)
 				local f24_local0
-				if not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xD567EDB5609CCEC]) and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x534C7B2375D2D47]) and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04]) and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x6FFF566DCC09BBD]) and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) and Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xBB045E46E88E762]) and not CoD.WZUtility.IsInLastStand(f1_arg1, "hudItems.lastStand") then
+				if not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_is_demo_playing"]) and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_player_dead"]) and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]) and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_spectating_client"]) and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_ui_active"]) and Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_weapon_hud_visible"]) and not CoD.WZUtility.IsInLastStand(f1_arg1, "hudItems.lastStand") then
 					f24_local0 = CoD.ModelUtility.IsModelValueEqualTo(f1_arg1, "hudItems.inventory.open", true)
 					if f24_local0 then
 						if not CoD.ModelUtility.IsModelValueTrue(f1_arg1, "vehicle.hidePlayerInfo") and not CoD.ModelUtility.IsModelValueEqualTo(f1_arg1, "hudItems.infiltrationVehicle", 1) then
@@ -333,7 +333,7 @@ CoD.WarzoneInventory.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 			stateName = "InventoryOpen",
 			condition = function(menu, element, event)
 				local f25_local0
-				if not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xD567EDB5609CCEC]) and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x534C7B2375D2D47]) and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04]) and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x6FFF566DCC09BBD]) and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) and Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xBB045E46E88E762]) and not CoD.WZUtility.IsInLastStand(f1_arg1, "hudItems.lastStand") then
+				if not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_is_demo_playing"]) and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_player_dead"]) and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]) and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_spectating_client"]) and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_ui_active"]) and Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_weapon_hud_visible"]) and not CoD.WZUtility.IsInLastStand(f1_arg1, "hudItems.lastStand") then
 					f25_local0 = CoD.ModelUtility.IsModelValueEqualTo(f1_arg1, "hudItems.inventory.open", true)
 					if f25_local0 then
 						if not CoD.ModelUtility.IsModelValueTrue(f1_arg1, "vehicle.hidePlayerInfo") then
@@ -352,7 +352,7 @@ CoD.WarzoneInventory.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 			stateName = "InventoryVisibleHiddenAllPreference",
 			condition = function(menu, element, event)
 				local f26_local0
-				if not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xD567EDB5609CCEC]) and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x534C7B2375D2D47]) and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04]) and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x6FFF566DCC09BBD]) and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) and Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xBB045E46E88E762]) and not CoD.WZUtility.IsInLastStand(f1_arg1, "hudItems.lastStand") then
+				if not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_is_demo_playing"]) and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_player_dead"]) and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]) and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_spectating_client"]) and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_ui_active"]) and Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_weapon_hud_visible"]) and not CoD.WZUtility.IsInLastStand(f1_arg1, "hudItems.lastStand") then
 					f26_local0 = CoD.ModelUtility.IsModelValueEqualTo(f1_arg1, "hudItems.inventory.canUseQuickInventory", true)
 					if f26_local0 then
 						if not CoD.ModelUtility.IsModelValueTrue(f1_arg1, "vehicle.hidePlayerInfo") and not CoD.ModelUtility.IsModelValueEqualTo(f1_arg1, "hudItems.infiltrationVehicle", 1) then
@@ -374,7 +374,7 @@ CoD.WarzoneInventory.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 			stateName = "InventoryVisibleHiddenButtonsPreference",
 			condition = function(menu, element, event)
 				local f27_local0
-				if not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xD567EDB5609CCEC]) and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x534C7B2375D2D47]) and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04]) and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x6FFF566DCC09BBD]) and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) and Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xBB045E46E88E762]) and not CoD.WZUtility.IsInLastStand(f1_arg1, "hudItems.lastStand") then
+				if not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_is_demo_playing"]) and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_player_dead"]) and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]) and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_spectating_client"]) and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_ui_active"]) and Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_weapon_hud_visible"]) and not CoD.WZUtility.IsInLastStand(f1_arg1, "hudItems.lastStand") then
 					f27_local0 = CoD.ModelUtility.IsModelValueEqualTo(f1_arg1, "hudItems.inventory.canUseQuickInventory", true)
 					if f27_local0 then
 						if not CoD.ModelUtility.IsModelValueTrue(f1_arg1, "vehicle.hidePlayerInfo") and not CoD.ModelUtility.IsModelValueEqualTo(f1_arg1, "hudItems.infiltrationVehicle", 1) then
@@ -393,7 +393,7 @@ CoD.WarzoneInventory.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 			stateName = "InventoryVisibleHiddenPerksPreference",
 			condition = function(menu, element, event)
 				local f28_local0
-				if not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xD567EDB5609CCEC]) and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x534C7B2375D2D47]) and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04]) and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x6FFF566DCC09BBD]) and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) and Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xBB045E46E88E762]) and not CoD.WZUtility.IsInLastStand(f1_arg1, "hudItems.lastStand") then
+				if not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_is_demo_playing"]) and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_player_dead"]) and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]) and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_spectating_client"]) and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_ui_active"]) and Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_weapon_hud_visible"]) and not CoD.WZUtility.IsInLastStand(f1_arg1, "hudItems.lastStand") then
 					f28_local0 = CoD.ModelUtility.IsModelValueEqualTo(f1_arg1, "hudItems.inventory.canUseQuickInventory", true)
 					if f28_local0 then
 						if not CoD.ModelUtility.IsModelValueTrue(f1_arg1, "vehicle.hidePlayerInfo") and not CoD.ModelUtility.IsModelValueEqualTo(f1_arg1, "hudItems.infiltrationVehicle", 1) then
@@ -412,7 +412,7 @@ CoD.WarzoneInventory.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 			stateName = "InventoryVisible",
 			condition = function(menu, element, event)
 				local f29_local0
-				if not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xD567EDB5609CCEC]) and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x534C7B2375D2D47]) and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04]) and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x6FFF566DCC09BBD]) and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) and Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xBB045E46E88E762]) and not CoD.WZUtility.IsInLastStand(f1_arg1, "hudItems.lastStand") then
+				if not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_is_demo_playing"]) and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_player_dead"]) and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]) and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_spectating_client"]) and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_ui_active"]) and Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_weapon_hud_visible"]) and not CoD.WZUtility.IsInLastStand(f1_arg1, "hudItems.lastStand") then
 					f29_local0 = CoD.ModelUtility.IsModelValueEqualTo(f1_arg1, "hudItems.inventory.canUseQuickInventory", true)
 					if f29_local0 then
 						if not CoD.ModelUtility.IsModelValueTrue(f1_arg1, "vehicle.hidePlayerInfo") and not CoD.ModelUtility.IsModelValueEqualTo(f1_arg1, "hudItems.infiltrationVehicle", 1) then
@@ -431,7 +431,7 @@ CoD.WarzoneInventory.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 			stateName = "QuickInventoryEmptyHiddenAllPreference",
 			condition = function(menu, element, event)
 				local f30_local0
-				if not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xD567EDB5609CCEC]) and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x534C7B2375D2D47]) and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04]) and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x6FFF566DCC09BBD]) and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) and Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xBB045E46E88E762]) and not CoD.WZUtility.IsInLastStand(f1_arg1, "hudItems.lastStand") and not CoD.ModelUtility.IsModelValueEqualTo(f1_arg1, "hudItems.infiltrationVehicle", 1) then
+				if not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_is_demo_playing"]) and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_player_dead"]) and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]) and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_spectating_client"]) and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_ui_active"]) and Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_weapon_hud_visible"]) and not CoD.WZUtility.IsInLastStand(f1_arg1, "hudItems.lastStand") and not CoD.ModelUtility.IsModelValueEqualTo(f1_arg1, "hudItems.infiltrationVehicle", 1) then
 					f30_local0 = CoD.WZUtility.IsWarzoneUIHidden(f1_arg1, "wzHideOnScreenButtonsUI", "warzoneHideOnScreenButtons")
 					if f30_local0 then
 						f30_local0 = CoD.WZUtility.IsWarzoneUIHidden(f1_arg1, "wzHideActivePerksUI", "warzoneHideActivePerks")
@@ -446,7 +446,7 @@ CoD.WarzoneInventory.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 			stateName = "QuickInventoryEmptyHiddenButtonsPreference",
 			condition = function(menu, element, event)
 				local f31_local0
-				if not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xD567EDB5609CCEC]) and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x534C7B2375D2D47]) and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04]) and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x6FFF566DCC09BBD]) and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) and Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xBB045E46E88E762]) and not CoD.WZUtility.IsInLastStand(f1_arg1, "hudItems.lastStand") and not CoD.ModelUtility.IsModelValueEqualTo(f1_arg1, "hudItems.infiltrationVehicle", 1) then
+				if not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_is_demo_playing"]) and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_player_dead"]) and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]) and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_spectating_client"]) and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_ui_active"]) and Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_weapon_hud_visible"]) and not CoD.WZUtility.IsInLastStand(f1_arg1, "hudItems.lastStand") and not CoD.ModelUtility.IsModelValueEqualTo(f1_arg1, "hudItems.infiltrationVehicle", 1) then
 					f31_local0 = CoD.WZUtility.IsWarzoneUIHidden(f1_arg1, "wzHideOnScreenButtonsUI", "warzoneHideOnScreenButtons")
 				else
 					f31_local0 = false
@@ -458,7 +458,7 @@ CoD.WarzoneInventory.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 			stateName = "QuickInventoryEmptyHiddenPerksPreference",
 			condition = function(menu, element, event)
 				local f32_local0
-				if not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xD567EDB5609CCEC]) and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x534C7B2375D2D47]) and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04]) and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x6FFF566DCC09BBD]) and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) and Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xBB045E46E88E762]) and not CoD.WZUtility.IsInLastStand(f1_arg1, "hudItems.lastStand") and not CoD.ModelUtility.IsModelValueEqualTo(f1_arg1, "hudItems.infiltrationVehicle", 1) then
+				if not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_is_demo_playing"]) and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_player_dead"]) and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]) and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_spectating_client"]) and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_ui_active"]) and Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_weapon_hud_visible"]) and not CoD.WZUtility.IsInLastStand(f1_arg1, "hudItems.lastStand") and not CoD.ModelUtility.IsModelValueEqualTo(f1_arg1, "hudItems.infiltrationVehicle", 1) then
 					f32_local0 = CoD.WZUtility.IsWarzoneUIHidden(f1_arg1, "wzHideActivePerksUI", "warzoneHideActivePerks")
 				else
 					f32_local0 = false
@@ -470,7 +470,7 @@ CoD.WarzoneInventory.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 			stateName = "QuickInventoryEmpty",
 			condition = function(menu, element, event)
 				local f33_local0
-				if not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xD567EDB5609CCEC]) and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x534C7B2375D2D47]) and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04]) and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x6FFF566DCC09BBD]) and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) and Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xBB045E46E88E762]) and not CoD.WZUtility.IsInLastStand(f1_arg1, "hudItems.lastStand") and not CoD.ModelUtility.IsModelValueEqualTo(f1_arg1, "hudItems.infiltrationVehicle", 1) then
+				if not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_is_demo_playing"]) and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_player_dead"]) and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]) and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_spectating_client"]) and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_ui_active"]) and Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_weapon_hud_visible"]) and not CoD.WZUtility.IsInLastStand(f1_arg1, "hudItems.lastStand") and not CoD.ModelUtility.IsModelValueEqualTo(f1_arg1, "hudItems.infiltrationVehicle", 1) then
 					f33_local0 = CoD.ModelUtility.IsModelValueEqualTo(f1_arg1, "hudItems.playerOnInfectedPlatoon", 0)
 				else
 					f33_local0 = false
@@ -485,7 +485,7 @@ CoD.WarzoneInventory.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	end)
 	local f1_local11 = self
 	local f1_local12 = self.subscribeToModel
-	local f1_local13 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local13 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local12(f1_local11, f1_local13.LastInput, function(f35_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -497,7 +497,7 @@ CoD.WarzoneInventory.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	end, false)
 	f1_local11 = self
 	f1_local12 = self.subscribeToModel
-	f1_local13 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local13 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local12(f1_local11, f1_local13["hudItems.lastStand.progress"], function(f36_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -509,7 +509,7 @@ CoD.WarzoneInventory.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	end, false)
 	f1_local11 = self
 	f1_local12 = self.subscribeToModel
-	f1_local13 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local13 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local12(f1_local11, f1_local13["hudItems.lastStand.beingRevived"], function(f37_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -521,79 +521,79 @@ CoD.WarzoneInventory.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	end, false)
 	f1_local11 = self
 	f1_local12 = self.subscribeToModel
-	f1_local13 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local12(f1_local11, f1_local13["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xD567EDB5609CCEC]], function(f38_arg0)
+	f1_local13 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local12(f1_local11, f1_local13["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_is_demo_playing"]], function(f38_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f38_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xD567EDB5609CCEC],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_is_demo_playing"],
 		})
 	end, false)
 	f1_local11 = self
 	f1_local12 = self.subscribeToModel
-	f1_local13 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local12(f1_local11, f1_local13["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x534C7B2375D2D47]], function(f39_arg0)
+	f1_local13 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local12(f1_local11, f1_local13["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_player_dead"]], function(f39_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f39_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x534C7B2375D2D47],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_player_dead"],
 		})
 	end, false)
 	f1_local11 = self
 	f1_local12 = self.subscribeToModel
-	f1_local13 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local12(f1_local11, f1_local13["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04]], function(f40_arg0)
+	f1_local13 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local12(f1_local11, f1_local13["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]], function(f40_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f40_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"],
 		})
 	end, false)
 	f1_local11 = self
 	f1_local12 = self.subscribeToModel
-	f1_local13 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local12(f1_local11, f1_local13["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x6FFF566DCC09BBD]], function(f41_arg0)
+	f1_local13 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local12(f1_local11, f1_local13["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_spectating_client"]], function(f41_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f41_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x6FFF566DCC09BBD],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_spectating_client"],
 		})
 	end, false)
 	f1_local11 = self
 	f1_local12 = self.subscribeToModel
-	f1_local13 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local12(f1_local11, f1_local13["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]], function(f42_arg0)
+	f1_local13 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local12(f1_local11, f1_local13["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_ui_active"]], function(f42_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f42_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_ui_active"],
 		})
 	end, false)
 	f1_local11 = self
 	f1_local12 = self.subscribeToModel
-	f1_local13 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local12(f1_local11, f1_local13["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xBB045E46E88E762]], function(f43_arg0)
+	f1_local13 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local12(f1_local11, f1_local13["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_weapon_hud_visible"]], function(f43_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f43_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xBB045E46E88E762],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_weapon_hud_visible"],
 		})
 	end, false)
 	f1_local11 = self
 	f1_local12 = self.subscribeToModel
-	f1_local13 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local13 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local12(f1_local11, f1_local13["vehicle.hidePlayerInfo"], function(f44_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -605,7 +605,7 @@ CoD.WarzoneInventory.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	end, false)
 	f1_local11 = self
 	f1_local12 = self.subscribeToModel
-	f1_local13 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local13 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local12(f1_local11, f1_local13["hudItems.infiltrationVehicle"], function(f45_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -617,7 +617,7 @@ CoD.WarzoneInventory.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	end, false)
 	f1_local11 = self
 	f1_local12 = self.subscribeToModel
-	f1_local13 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local13 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local12(f1_local11, f1_local13.PlayerSettingsUpdate, function(f46_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -629,7 +629,7 @@ CoD.WarzoneInventory.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	end, false)
 	f1_local11 = self
 	f1_local12 = self.subscribeToModel
-	f1_local13 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local13 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local12(f1_local11, f1_local13["hudItems.inventory.open"], function(f47_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -641,7 +641,7 @@ CoD.WarzoneInventory.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	end, false)
 	f1_local11 = self
 	f1_local12 = self.subscribeToModel
-	f1_local13 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local13 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local12(f1_local11, f1_local13["hudItems.inventory.canUseQuickInventory"], function(f48_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -653,7 +653,7 @@ CoD.WarzoneInventory.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	end, false)
 	f1_local11 = self
 	f1_local12 = self.subscribeToModel
-	f1_local13 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local13 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local12(f1_local11, f1_local13["hudItems.playerOnInfectedPlatoon"], function(f49_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

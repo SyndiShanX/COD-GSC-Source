@@ -8,11 +8,11 @@ CoD.ArenaSlottedRuby.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	self.soundSet = "none"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local RubySlot = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	RubySlot:setImage(RegisterImage(0x81EAB9F8F5950E7))
+	RubySlot:setImage(RegisterImage(@"uie_ui_menu_arena_rubyframe"))
 	self:addElement(RubySlot)
 	self.RubySlot = RubySlot
 	local Ruby = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	Ruby:setImage(RegisterImage(0x17ED8E3A9A3FC36))
+	Ruby:setImage(RegisterImage(@"uie_ui_menu_arena_ruby"))
 	self:addElement(Ruby)
 	self.Ruby = Ruby
 	if PostLoadFunc then

@@ -50,26 +50,26 @@ CoD.TabbedMultiItemPickup.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	ItemPickupGrid:setHorizontalCount(5)
 	ItemPickupGrid:setVerticalCount(3)
 	ItemPickupGrid:setSpacing(4)
-	ItemPickupGrid:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	ItemPickupGrid:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	ItemPickupGrid:setBackingWidget(CoD.WeaponPickupPrompt_Backing)
 	ItemPickupGrid:setBackingWidgetXPadding(5)
 	ItemPickupGrid:setBackingWidgetYPadding(6)
 	ItemPickupGrid:setDataSource("MultiItemPickup")
 	ItemPickupGrid:appendEventHandler("input_source_changed", function(f6_arg0, f6_arg1)
 		f6_arg1.menu = f6_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f6_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+		CoD.Menu.UpdateButtonShownState(f6_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 	end)
 	local ItemHeader = ItemPickupGrid
 	local MultiItemPickupTabBar = ItemPickupGrid.subscribeToModel
-	local f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
 	MultiItemPickupTabBar(ItemHeader, f1_local5.LastInput, function(f7_arg0, f7_arg1)
-		CoD.Menu.UpdateButtonShownState(f7_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+		CoD.Menu.UpdateButtonShownState(f7_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 	end, false)
 	ItemHeader = ItemPickupGrid
 	MultiItemPickupTabBar = ItemPickupGrid.subscribeToModel
 	f1_local5 = DataSources.MultiItemPickup.getModel(f1_arg1)
 	MultiItemPickupTabBar(ItemHeader, f1_local5.status, function(f8_arg0, f8_arg1)
-		CoD.Menu.UpdateButtonShownState(f8_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+		CoD.Menu.UpdateButtonShownState(f8_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 	end, false)
 	ItemPickupGrid:registerEventHandler("list_active_changed", function(element, event)
 		local f9_local0 = nil
@@ -87,19 +87,19 @@ CoD.TabbedMultiItemPickup.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 		elseif element.super.gainFocus then
 			f10_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 		return f10_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(ItemPickupGrid, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], nil, function(element, menu, controller, model)
-		if IsGamepad(controller) and IsIntDvarNonZero("tabbedMultiItemPickup") and CoD.ModelUtility.IsGlobalDataSourceModelValueEqualToEnum(controller, "MultiItemPickup", "status", Enum[0x163CDAE6010C493][0xC9FADA56582F80F]) then
+	f1_arg0:AddButtonCallbackFunction(ItemPickupGrid, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], nil, function(element, menu, controller, model)
+		if IsGamepad(controller) and IsIntDvarNonZero("tabbedMultiItemPickup") and CoD.ModelUtility.IsGlobalDataSourceModelValueEqualToEnum(controller, "MultiItemPickup", "status", Enum[@"hash_163CDAE6010C493"][@"hash_5C9FADA56582F80F"]) then
 			CoD.WZUtility.SendInventoryPickUpNotify(controller, element)
 			BlockGameFromKeyEvent(controller)
 			return true
 		else
 		end
 	end, function(element, menu, controller)
-		if IsGamepad(controller) and IsIntDvarNonZero("tabbedMultiItemPickup") and CoD.ModelUtility.IsGlobalDataSourceModelValueEqualToEnum(controller, "MultiItemPickup", "status", Enum[0x163CDAE6010C493][0xC9FADA56582F80F]) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x0, nil, nil)
+		if IsGamepad(controller) and IsIntDvarNonZero("tabbedMultiItemPickup") and CoD.ModelUtility.IsGlobalDataSourceModelValueEqualToEnum(controller, "MultiItemPickup", "status", Enum[@"hash_163CDAE6010C493"][@"hash_5C9FADA56582F80F"]) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"hash_0", nil, nil)
 			return false
 		else
 			return false
@@ -107,7 +107,7 @@ CoD.TabbedMultiItemPickup.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	end, false)
 	ItemPickupGrid:subscribeToGlobalModel(f1_arg1, "MultiItemPickup", "status", function(model)
 		local f13_local0 = ItemPickupGrid
-		if CoD.ModelUtility.IsGlobalDataSourceModelValueEqualToEnum(f1_arg1, "MultiItemPickup", "status", Enum[0x163CDAE6010C493][0xC9FADA56582F80F]) and IsGamepad(f1_arg1) then
+		if CoD.ModelUtility.IsGlobalDataSourceModelValueEqualToEnum(f1_arg1, "MultiItemPickup", "status", Enum[@"hash_163CDAE6010C493"][@"hash_5C9FADA56582F80F"]) and IsGamepad(f1_arg1) then
 			CoD.BaseUtility.EnableNavigation(f13_local0)
 		elseif IsGamepad(f1_arg1) then
 			CoD.GridAndListUtility.SetFocusToFirstSelectableItem(f13_local0)
@@ -132,11 +132,11 @@ CoD.TabbedMultiItemPickup.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 		{
 			stateName = "Active",
 			condition = function(menu, element, event)
-				local f16_local0 = CoD.ModelUtility.IsGlobalDataSourceModelValueEqualToEnum(f1_arg1, "MultiItemPickup", "status", Enum[0x163CDAE6010C493][0xC9FADA56582F80F])
+				local f16_local0 = CoD.ModelUtility.IsGlobalDataSourceModelValueEqualToEnum(f1_arg1, "MultiItemPickup", "status", Enum[@"hash_163CDAE6010C493"][@"hash_5C9FADA56582F80F"])
 				if f16_local0 then
 					f16_local0 = IsIntDvarNonZero("tabbedMultiItemPickup")
 					if f16_local0 then
-						if not IsVisibilityBitSet(f1_arg1, Enum[0x7F032C2EF103A1A][0x6FFF566DCC09BBD]) then
+						if not IsVisibilityBitSet(f1_arg1, Enum[@"uivisibilitybit"][@"bit_spectating_client"]) then
 							f16_local0 = not IsMouseOrKeyboard(f1_arg1)
 						else
 							f16_local0 = false
@@ -161,14 +161,14 @@ CoD.TabbedMultiItemPickup.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	end, false)
 	f1_local6 = self
 	f1_local5 = self.subscribeToModel
-	f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local5(f1_local6, f1_local7["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x6FFF566DCC09BBD]], function(f18_arg0)
+	f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local5(f1_local6, f1_local7["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_spectating_client"]], function(f18_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f18_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x6FFF566DCC09BBD],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_spectating_client"],
 		})
 	end, false)
 	self:appendEventHandler("input_source_changed", function(f19_arg0, f19_arg1)
@@ -177,7 +177,7 @@ CoD.TabbedMultiItemPickup.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	end)
 	f1_local6 = self
 	f1_local5 = self.subscribeToModel
-	f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local5(f1_local6, f1_local7.LastInput, function(f20_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

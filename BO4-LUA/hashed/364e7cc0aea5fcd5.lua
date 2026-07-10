@@ -28,13 +28,13 @@ CoD.CharacterSelection_CustomCharacterFrameWidget.new = function(f1_arg0, f1_arg
 	end)
 	CustomCharacter:appendEventHandler("input_source_changed", function(f4_arg0, f4_arg1)
 		f4_arg1.menu = f4_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f4_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
+		CoD.Menu.UpdateButtonShownState(f4_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
 	end)
 	local IconsLine = CustomCharacter
 	local Characters = CustomCharacter.subscribeToModel
-	local IconsText = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local IconsText = Engine[@"getmodelforcontroller"](f1_arg1)
 	Characters(IconsLine, IconsText.LastInput, function(f5_arg0, f5_arg1)
-		CoD.Menu.UpdateButtonShownState(f5_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
+		CoD.Menu.UpdateButtonShownState(f5_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
 	end, false)
 	CustomCharacter:registerEventHandler("gain_focus", function(element, event)
 		local f6_local0 = nil
@@ -43,11 +43,11 @@ CoD.CharacterSelection_CustomCharacterFrameWidget.new = function(f1_arg0, f1_arg
 		elseif element.super.gainFocus then
 			f6_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
 		return f6_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(CustomCharacter, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(CustomCharacter, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if IsElementInState(element, "DefaultState") then
 			PositionDraftSelectCharacterFrontend(self, element, controller)
 			GoBack(self, controller)
@@ -57,13 +57,13 @@ CoD.CharacterSelection_CustomCharacterFrameWidget.new = function(f1_arg0, f1_arg
 		end
 	end, function(element, menu, controller)
 		if IsElementInState(element, "DefaultState") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(CustomCharacter, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], "ui_contextual_2", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(CustomCharacter, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], "ui_contextual_2", function(element, menu, controller, model)
 		if IsGamepad(controller) then
 			PlaySoundAlias("uin_toggle_generic")
 			OpenOverlay(self, "PersonalizeDefaultWZCharacter", controller, nil)
@@ -76,10 +76,10 @@ CoD.CharacterSelection_CustomCharacterFrameWidget.new = function(f1_arg0, f1_arg
 		end
 	end, function(element, menu, controller)
 		if IsGamepad(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], 0x2AA2EA68ACC2317, nil, "ui_contextual_2")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], @"hash_72AA2EA68ACC2317", nil, "ui_contextual_2")
 			return true
 		elseif not IsGamepad(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], 0x2AA2EA68ACC2317, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "ui_contextual_2")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], @"hash_72AA2EA68ACC2317", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "ui_contextual_2")
 			return true
 		else
 			return false
@@ -96,7 +96,7 @@ CoD.CharacterSelection_CustomCharacterFrameWidget.new = function(f1_arg0, f1_arg
 			CoD.ModelUtility.SetControllerModelValueToEnum(f1_arg1, "WZCharacterInfo.showInfoState", CoD.WZUtility.CharacterInfoShowState.HIDE)
 		end
 	end)
-	CustomCharacter:AddContextualMenuAction(f1_arg0, f1_arg1, 0x2AA2EA68ACC2317, function(f13_arg0, f13_arg1, f13_arg2, f13_arg3)
+	CustomCharacter:AddContextualMenuAction(f1_arg0, f1_arg1, @"hash_72AA2EA68ACC2317", function(f13_arg0, f13_arg1, f13_arg2, f13_arg3)
 		return function(f14_arg0, f14_arg1, f14_arg2, f14_arg3)
 			PlaySoundAlias("uin_toggle_generic")
 			OpenOverlay(self, "PersonalizeDefaultWZCharacter", f14_arg2, nil)
@@ -111,7 +111,7 @@ CoD.CharacterSelection_CustomCharacterFrameWidget.new = function(f1_arg0, f1_arg
 	Characters:setHorizontalCount(3)
 	Characters:setVerticalCount(4)
 	Characters:setSpacing(0)
-	Characters:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	Characters:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	Characters:setVerticalCounter(CoD.verticalCounter)
 	Characters:linkToElementModel(self, "characterDatasource", true, function(model)
 		local f15_local0 = model:get()
@@ -120,24 +120,24 @@ CoD.CharacterSelection_CustomCharacterFrameWidget.new = function(f1_arg0, f1_arg
 		end
 	end)
 	Characters:linkToElementModel(Characters, "purchasable", true, function(model, f16_arg1)
-		CoD.Menu.UpdateButtonShownState(f16_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f16_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	Characters:linkToElementModel(Characters, "disabled", true, function(model, f17_arg1)
-		CoD.Menu.UpdateButtonShownState(f17_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(f17_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
+		CoD.Menu.UpdateButtonShownState(f17_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(f17_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
 	end)
 	Characters:appendEventHandler("input_source_changed", function(f18_arg0, f18_arg1)
 		f18_arg1.menu = f18_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f18_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
+		CoD.Menu.UpdateButtonShownState(f18_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
 	end)
 	IconsText = Characters
 	IconsLine = Characters.subscribeToModel
-	local DefaultLine = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local DefaultLine = Engine[@"getmodelforcontroller"](f1_arg1)
 	IconsLine(IconsText, DefaultLine.LastInput, function(f19_arg0, f19_arg1)
-		CoD.Menu.UpdateButtonShownState(f19_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
+		CoD.Menu.UpdateButtonShownState(f19_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
 	end, false)
 	Characters:linkToElementModel(Characters, "hasCustomization", true, function(model, f20_arg1)
-		CoD.Menu.UpdateButtonShownState(f20_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
+		CoD.Menu.UpdateButtonShownState(f20_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
 	end)
 	Characters:registerEventHandler("list_item_gain_focus", function(element, event)
 		local f21_local0 = nil
@@ -161,11 +161,11 @@ CoD.CharacterSelection_CustomCharacterFrameWidget.new = function(f1_arg0, f1_arg
 		elseif element.super.gainFocus then
 			f23_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
 		return f23_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(Characters, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(Characters, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if not CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "purchasable") and not CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "disabled") and not IsGameTrial() then
 			PositionDraftSelectCharacterFrontend(self, element, controller)
 			GoBack(self, controller)
@@ -180,16 +180,16 @@ CoD.CharacterSelection_CustomCharacterFrameWidget.new = function(f1_arg0, f1_arg
 		end
 	end, function(element, menu, controller)
 		if not CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "purchasable") and not CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "disabled") and not IsGameTrial() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		elseif IsPC() and IsElementInState(element, "Selected") and not IsGameTrial() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(Characters, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], "ui_contextual_2", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(Characters, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], "ui_contextual_2", function(element, menu, controller, model)
 		if IsGamepad(controller) and not CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "disabled") and not IsGameTrial() and CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "hasCustomization") then
 			PlaySoundAlias("uin_toggle_generic")
 			OpenOverlay(self, "PersonalizeCharacter", controller, {
@@ -214,16 +214,16 @@ CoD.CharacterSelection_CustomCharacterFrameWidget.new = function(f1_arg0, f1_arg
 		end
 	end, function(element, menu, controller)
 		if IsGamepad(controller) and not CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "disabled") and not IsGameTrial() and CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "hasCustomization") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], 0x2AA2EA68ACC2317, nil, "ui_contextual_2")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], @"hash_72AA2EA68ACC2317", nil, "ui_contextual_2")
 			return true
 		elseif not IsGamepad(controller) and not CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "disabled") and not IsGameTrial() and CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "hasCustomization") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], 0x2AA2EA68ACC2317, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "ui_contextual_2")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], @"hash_72AA2EA68ACC2317", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "ui_contextual_2")
 			return true
 		else
 			return false
 		end
 	end, false)
-	Characters:AddContextualMenuAction(f1_arg0, f1_arg1, 0x2AA2EA68ACC2317, function(f28_arg0, f28_arg1, f28_arg2, f28_arg3)
+	Characters:AddContextualMenuAction(f1_arg0, f1_arg1, @"hash_72AA2EA68ACC2317", function(f28_arg0, f28_arg1, f28_arg2, f28_arg3)
 		if not CoD.ModelUtility.IsSelfModelValueTrue(f28_arg0, f28_arg2, "disabled") and not IsGameTrial() and CoD.ModelUtility.IsSelfModelValueTrue(f28_arg0, f28_arg2, "hasCustomization") then
 			return function(f29_arg0, f29_arg1, f29_arg2, f29_arg3)
 				PlaySoundAlias("uin_toggle_generic")
@@ -247,11 +247,11 @@ CoD.CharacterSelection_CustomCharacterFrameWidget.new = function(f1_arg0, f1_arg
 	self.IconsLine = IconsLine
 	IconsText = LUI.UIText.new(0.5, 0.5, 389, 859, 0, 0, 143, 164)
 	IconsText:setRGB(0.38, 0.38, 0.4)
-	IconsText:setText(LocalizeToUpperString(0xCA7BC570F2FBA16))
+	IconsText:setText(LocalizeToUpperString(@"hash_7CA7BC570F2FBA16"))
 	IconsText:setTTF("default")
 	IconsText:setLetterSpacing(3)
-	IconsText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	IconsText:setAlignment(Enum[0x7A5123B654282D2][0x70510683C22104B])
+	IconsText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	IconsText:setAlignment(Enum[@"luialignment"][@"lui_alignment_bottom"])
 	self:addElement(IconsText)
 	self.IconsText = IconsText
 	DefaultLine = LUI.UIImage.new(0.5, 0.5, 78, 379, 0, 0, 164, 165)
@@ -261,11 +261,11 @@ CoD.CharacterSelection_CustomCharacterFrameWidget.new = function(f1_arg0, f1_arg
 	self.DefaultLine = DefaultLine
 	local DefaultText = LUI.UIText.new(0.5, 0.5, 78, 379, 0, 0, 143, 164)
 	DefaultText:setRGB(0.38, 0.38, 0.4)
-	DefaultText:setText(LocalizeToUpperString(0x19D60864B204458))
+	DefaultText:setText(LocalizeToUpperString(@"menu/default"))
 	DefaultText:setTTF("default")
 	DefaultText:setLetterSpacing(3)
-	DefaultText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	DefaultText:setAlignment(Enum[0x7A5123B654282D2][0x70510683C22104B])
+	DefaultText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	DefaultText:setAlignment(Enum[@"luialignment"][@"lui_alignment_bottom"])
 	self:addElement(DefaultText)
 	self.DefaultText = DefaultText
 	local TabbedScoreboardFuiBox2 = CoD.TabbedScoreboardFuiBox.new(f1_arg0, f1_arg1, 0.5, 0.5, 765, 877, 0, 0, 150.5, 166.5)
@@ -276,29 +276,29 @@ CoD.CharacterSelection_CustomCharacterFrameWidget.new = function(f1_arg0, f1_arg
 	local DotPipR01 = LUI.UIImage.new(0.5, 0.5, 387, 391, 0, 0, 162.5, 166.5)
 	DotPipR01:setRGB(0.38, 0.38, 0.4)
 	DotPipR01:setAlpha(0.2)
-	DotPipR01:setImage(RegisterImage(0x3854665C02218EF))
-	DotPipR01:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	DotPipR01:setImage(RegisterImage(@"hash_73854665C02218EF"))
+	DotPipR01:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(DotPipR01)
 	self.DotPipR01 = DotPipR01
 	local DotPipR02 = LUI.UIImage.new(0.5, 0.5, 851, 855, 0, 0, 162.5, 166.5)
 	DotPipR02:setRGB(0.38, 0.38, 0.4)
 	DotPipR02:setAlpha(0.2)
-	DotPipR02:setImage(RegisterImage(0x3854665C02218EF))
-	DotPipR02:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	DotPipR02:setImage(RegisterImage(@"hash_73854665C02218EF"))
+	DotPipR02:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(DotPipR02)
 	self.DotPipR02 = DotPipR02
 	local DotPipL02 = LUI.UIImage.new(0.5, 0.5, 377, 381, 0, 0, 162.5, 166.5)
 	DotPipL02:setRGB(0.38, 0.38, 0.4)
 	DotPipL02:setAlpha(0.2)
-	DotPipL02:setImage(RegisterImage(0x3854665C02218EF))
-	DotPipL02:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	DotPipL02:setImage(RegisterImage(@"hash_73854665C02218EF"))
+	DotPipL02:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(DotPipL02)
 	self.DotPipL02 = DotPipL02
 	local DotPipL01 = LUI.UIImage.new(0.5, 0.5, 76, 80, 0, 0, 162.5, 166.5)
 	DotPipL01:setRGB(0.38, 0.38, 0.4)
 	DotPipL01:setAlpha(0.2)
-	DotPipL01:setImage(RegisterImage(0x3854665C02218EF))
-	DotPipL01:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	DotPipL01:setImage(RegisterImage(@"hash_73854665C02218EF"))
+	DotPipL01:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(DotPipL01)
 	self.DotPipL01 = DotPipL01
 	self:linkToElementModel(self, "characterDatasource", true, function(model)

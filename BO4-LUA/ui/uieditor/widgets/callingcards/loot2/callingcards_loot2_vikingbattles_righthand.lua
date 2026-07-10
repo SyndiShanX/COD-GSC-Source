@@ -8,7 +8,7 @@ CoD.callingcards_loot2_vikingbattles_righthand.new = function(f1_arg0, f1_arg1, 
 	self.soundSet = "default"
 	local character02righthand = LUI.UIImage.new(0, 0, -35, 245, 0, 0, -81, 39)
 	character02righthand:setZRot(25)
-	character02righthand:setImage(RegisterImage(0x975B68E32089D71))
+	character02righthand:setImage(RegisterImage(@"uie_ui_menu_callingcards_vikingbattles_char2righthand"))
 	self:addElement(character02righthand)
 	self.character02righthand = character02righthand
 	if PostLoadFunc then

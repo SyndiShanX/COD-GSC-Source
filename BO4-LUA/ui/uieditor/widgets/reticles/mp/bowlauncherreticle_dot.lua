@@ -9,11 +9,11 @@ CoD.BowLauncherReticle_Dot.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local CenterDot = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	CenterDot:setAlpha(0)
-	CenterDot:setImage(RegisterImage(0x649FF0EF9A0B22F))
+	CenterDot:setImage(RegisterImage(@"uie_bowlauncher_center_dot"))
 	self:addElement(CenterDot)
 	self.CenterDot = CenterDot
 	local dot = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	dot:setImage(RegisterImage(0x62EAE1CA751BEA4))
+	dot:setImage(RegisterImage(@"uie_ui_hud_reticles_bowlauncher_hipfire_dot"))
 	self:addElement(dot)
 	self.dot = dot
 	self:mergeStateConditions({

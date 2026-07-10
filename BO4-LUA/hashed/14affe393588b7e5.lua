@@ -30,12 +30,12 @@ CoD.GameEndScore_EliminatorContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	WeaponName:setRGB(0.92, 0.92, 0.92)
 	WeaponName:setTTF("ttmussels_demibold")
 	WeaponName:setLetterSpacing(4)
-	WeaponName:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	WeaponName:setAlignment(Enum[0x7A5123B654282D2][0x6ED4298C93DC5ED])
+	WeaponName:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	WeaponName:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
 	WeaponName:linkToElementModel(self, "weaponName", true, function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
-			WeaponName:setText(Engine[0xF9F1239CFD921FE](f4_local0))
+			WeaponName:setText(Engine[@"hash_4F9F1239CFD921FE"](f4_local0))
 		end
 	end)
 	self:addElement(WeaponName)
@@ -53,11 +53,11 @@ CoD.GameEndScore_EliminatorContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	MeansOfDeathLabel:setAlpha(0)
 	MeansOfDeathLabel:setTTF("ttmussels_regular")
 	MeansOfDeathLabel:setLetterSpacing(6)
-	MeansOfDeathLabel:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	MeansOfDeathLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	MeansOfDeathLabel:linkToElementModel(self, "meansOfDeathLabel", true, function(model)
 		local f6_local0 = model:get()
 		if f6_local0 ~= nil then
-			MeansOfDeathLabel:setText(Engine[0xF9F1239CFD921FE](f6_local0))
+			MeansOfDeathLabel:setText(Engine[@"hash_4F9F1239CFD921FE"](f6_local0))
 		end
 	end)
 	self:addElement(MeansOfDeathLabel)
@@ -94,7 +94,7 @@ CoD.GameEndScore_EliminatorContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f
 		PostLoadFunc(self, f1_arg1, f1_arg0)
 	end
 	local f1_local6 = self
-	CallCustomElementFunction_Element(PlayerIndentity, "setAlignment", Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
+	CallCustomElementFunction_Element(PlayerIndentity, "setAlignment", Enum[@"luialignment"][@"lui_alignment_right"])
 	return self
 end
 CoD.GameEndScore_EliminatorContainer.__resetProperties = function(f10_arg0)

@@ -11,7 +11,7 @@ LUI.createMenu.zm_trial_weapon_locked = function(f1_arg0, f1_arg1)
 	self.ignoreCursor = true
 	f1_local1:addElementToPendingUpdateStateList(self)
 	local WeaponLockedIcon = LUI.UIImage.new(0.5, 0.5, -43, 43, 0.5, 0.5, -43, 43)
-	WeaponLockedIcon:setImage(RegisterImage(0x8BF44F9388C3E5A))
+	WeaponLockedIcon:setImage(RegisterImage(@"uie_weapon_locked_zm"))
 	self:addElement(WeaponLockedIcon)
 	self.WeaponLockedIcon = WeaponLockedIcon
 	self:linkToElementModel(self, "show_icon", true, function(model)

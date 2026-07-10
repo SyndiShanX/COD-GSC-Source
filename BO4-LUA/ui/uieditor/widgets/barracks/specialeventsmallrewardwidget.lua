@@ -14,15 +14,15 @@ CoD.SpecialEventSmallRewardWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	self:addElement(Frame)
 	self.Frame = Frame
 	local FixedAspectRatioImage = LUI.UIFixedAspectRatioImage.new(0.5, 0.5, -44, 44, 0.5, 0.5, -44, 44)
-	FixedAspectRatioImage:setImage(RegisterImage(0x3754381ECA16647))
-	FixedAspectRatioImage:setMaterial(LUI.UIImage.GetCachedMaterial(0xA02C44161370F6D))
+	FixedAspectRatioImage:setImage(RegisterImage(@"hash_33754381ECA16647"))
+	FixedAspectRatioImage:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_1A02C44161370F6D"))
 	FixedAspectRatioImage:setShaderVector(0, 0, 0, 0, 0)
 	FixedAspectRatioImage:setShaderVector(1, 1, 1, 0, 0)
 	FixedAspectRatioImage:setShaderVector(2, 0, 0, 0, 0)
 	self:addElement(FixedAspectRatioImage)
 	self.FixedAspectRatioImage = FixedAspectRatioImage
 	local MainRewardLockedIcon = LUI.UIImage.new(0.5, 0.5, -46, -18, 0.5, 0.5, 14, 42)
-	MainRewardLockedIcon:setImage(RegisterImage(0x8E860AEBE108BAD))
+	MainRewardLockedIcon:setImage(RegisterImage(@"uie_t7_menu_cac_iconlock"))
 	self:addElement(MainRewardLockedIcon)
 	self.MainRewardLockedIcon = MainRewardLockedIcon
 	self:mergeStateConditions({

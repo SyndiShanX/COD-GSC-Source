@@ -16,7 +16,7 @@ CoD.StartMenu_Options_PC_Voice_VoiceBar_RecordButton.new = function(f1_arg0, f1_
 	self.Background = Background
 	local RecordImage = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	RecordImage:setRGB(0.68, 0.14, 0.1)
-	RecordImage:setImage(RegisterImage(0x9B492EAA2070F06))
+	RecordImage:setImage(RegisterImage(@"uie_sliderbar_handle_alt"))
 	self:addElement(RecordImage)
 	self.RecordImage = RecordImage
 	local PCHighlightBorder = CoD.PC_HighlightBorder.new(f1_arg0, f1_arg1, 0, 1, 0, 0, 0, 1, 0, 0)
@@ -32,7 +32,7 @@ CoD.StartMenu_Options_PC_Voice_VoiceBar_RecordButton.new = function(f1_arg0, f1_
 	})
 	local f1_local4 = self
 	local f1_local5 = self.subscribeToModel
-	local f1_local6 = Engine[0x8DF2E5447F384B9]()
+	local f1_local6 = Engine[@"getglobalmodel"]()
 	f1_local5(f1_local4, f1_local6["SpeakingEnergy.isRecording"], function(f3_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -55,7 +55,7 @@ CoD.StartMenu_Options_PC_Voice_VoiceBar_RecordButton.__resetProperties = functio
 	f4_arg0.Background:setRGB(0.09, 0.09, 0.09)
 	f4_arg0.PCHighlightBorder:setAlpha(1)
 	f4_arg0.RecordImage:setRGB(0.68, 0.14, 0.1)
-	f4_arg0.RecordImage:setImage(RegisterImage(0x9B492EAA2070F06))
+	f4_arg0.RecordImage:setImage(RegisterImage(@"uie_sliderbar_handle_alt"))
 end
 CoD.StartMenu_Options_PC_Voice_VoiceBar_RecordButton.__clipsPerState = {
 	DefaultState = {
@@ -126,13 +126,13 @@ CoD.StartMenu_Options_PC_Voice_VoiceBar_RecordButton.__clipsPerState = {
 			local f11_local1 = function(f13_arg0)
 				f11_arg0.RecordImage:beginAnimation(200)
 				f11_arg0.RecordImage:setRGB(1, 0.22, 0.16)
-				f11_arg0.RecordImage:setImage(RegisterImage(0x3BB127E81D2363C))
+				f11_arg0.RecordImage:setImage(RegisterImage(@"uie_voice_stop"))
 				f11_arg0.RecordImage:registerEventHandler("interrupted_keyframe", f11_arg0.clipInterrupted)
 				f11_arg0.RecordImage:registerEventHandler("transition_complete_keyframe", f11_arg0.clipFinished)
 			end
 			f11_arg0.RecordImage:completeAnimation()
 			f11_arg0.RecordImage:setRGB(0.68, 0.14, 0.1)
-			f11_arg0.RecordImage:setImage(RegisterImage(0x9B492EAA2070F06))
+			f11_arg0.RecordImage:setImage(RegisterImage(@"uie_sliderbar_handle_alt"))
 			f11_local1(f11_arg0.RecordImage)
 			local f11_local2 = function(f14_arg0)
 				f11_arg0.PCHighlightBorder:playClip("DefaultClip")
@@ -158,7 +158,7 @@ CoD.StartMenu_Options_PC_Voice_VoiceBar_RecordButton.__clipsPerState = {
 			f16_arg0.clipFinished(f16_arg0.Background)
 			f16_arg0.RecordImage:completeAnimation()
 			f16_arg0.RecordImage:setRGB(1, 0.22, 0.16)
-			f16_arg0.RecordImage:setImage(RegisterImage(0x3BB127E81D2363C))
+			f16_arg0.RecordImage:setImage(RegisterImage(@"uie_voice_stop"))
 			f16_arg0.clipFinished(f16_arg0.RecordImage)
 			f16_arg0.PCHighlightBorder:completeAnimation()
 			f16_arg0.PCHighlightBorder:setAlpha(1)
@@ -173,7 +173,7 @@ CoD.StartMenu_Options_PC_Voice_VoiceBar_RecordButton.__clipsPerState = {
 			f17_arg0.clipFinished(f17_arg0.Background)
 			f17_arg0.RecordImage:completeAnimation()
 			f17_arg0.RecordImage:setRGB(1, 0.22, 0.16)
-			f17_arg0.RecordImage:setImage(RegisterImage(0x3BB127E81D2363C))
+			f17_arg0.RecordImage:setImage(RegisterImage(@"uie_voice_stop"))
 			f17_arg0.clipFinished(f17_arg0.RecordImage)
 			f17_arg0.PCHighlightBorder:completeAnimation()
 			f17_arg0.PCHighlightBorder:setAlpha(1)
@@ -199,7 +199,7 @@ CoD.StartMenu_Options_PC_Voice_VoiceBar_RecordButton.__clipsPerState = {
 			end
 			f18_arg0.RecordImage:completeAnimation()
 			f18_arg0.RecordImage:setRGB(1, 0.22, 0.16)
-			f18_arg0.RecordImage:setImage(RegisterImage(0x3BB127E81D2363C))
+			f18_arg0.RecordImage:setImage(RegisterImage(@"uie_voice_stop"))
 			f18_local1(f18_arg0.RecordImage)
 			f18_arg0.PCHighlightBorder:completeAnimation()
 			f18_arg0.PCHighlightBorder:setAlpha(1)
@@ -225,7 +225,7 @@ CoD.StartMenu_Options_PC_Voice_VoiceBar_RecordButton.__clipsPerState = {
 			end
 			f21_arg0.RecordImage:completeAnimation()
 			f21_arg0.RecordImage:setRGB(1, 0.22, 0.16)
-			f21_arg0.RecordImage:setImage(RegisterImage(0x3BB127E81D2363C))
+			f21_arg0.RecordImage:setImage(RegisterImage(@"uie_voice_stop"))
 			f21_local1(f21_arg0.RecordImage)
 			f21_arg0.PCHighlightBorder:completeAnimation()
 			f21_arg0.PCHighlightBorder:setAlpha(1)
@@ -247,13 +247,13 @@ CoD.StartMenu_Options_PC_Voice_VoiceBar_RecordButton.__clipsPerState = {
 			local f24_local1 = function(f26_arg0)
 				f24_arg0.RecordImage:beginAnimation(200)
 				f24_arg0.RecordImage:setRGB(0.68, 0.14, 0.1)
-				f24_arg0.RecordImage:setImage(RegisterImage(0x9B492EAA2070F06))
+				f24_arg0.RecordImage:setImage(RegisterImage(@"uie_sliderbar_handle_alt"))
 				f24_arg0.RecordImage:registerEventHandler("interrupted_keyframe", f24_arg0.clipInterrupted)
 				f24_arg0.RecordImage:registerEventHandler("transition_complete_keyframe", f24_arg0.clipFinished)
 			end
 			f24_arg0.RecordImage:completeAnimation()
 			f24_arg0.RecordImage:setRGB(1, 0.22, 0.16)
-			f24_arg0.RecordImage:setImage(RegisterImage(0x3BB127E81D2363C))
+			f24_arg0.RecordImage:setImage(RegisterImage(@"uie_voice_stop"))
 			f24_local1(f24_arg0.RecordImage)
 			local f24_local2 = function(f27_arg0)
 				f24_arg0.PCHighlightBorder:playClip("DefaultClip")

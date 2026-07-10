@@ -9,8 +9,8 @@ CoD.BowLauncherReticle_L4.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Line4 = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	Line4:setAlpha(0)
-	Line4:setImage(RegisterImage(0x43FE59993DEC23C))
-	Line4:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Line4:setImage(RegisterImage(@"uie_bowlauncher_line4"))
+	Line4:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Line4)
 	self.Line4 = Line4
 	if PostLoadFunc then

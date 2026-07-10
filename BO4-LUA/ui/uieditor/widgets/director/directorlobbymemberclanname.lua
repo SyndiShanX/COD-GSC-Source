@@ -13,8 +13,8 @@ CoD.DirectorLobbyMemberClanName.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	end
 	clantag.__Color()
 	clantag:setTTF("default")
-	clantag:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	clantag:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	clantag:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	clantag:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	clantag:setBackingType(2)
 	clantag:setBackingColor(0, 0, 0)
 	clantag:setBackingAlpha(0.9)

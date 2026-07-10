@@ -19,11 +19,11 @@ CoD.WeaponPersonalizeSlot.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	self.WeaponPersonalizationItem = WeaponPersonalizationItem
 	local ButtonName = LUI.UIText.new(0, 1, 0, 0, 0, 0, -21, -5)
 	ButtonName:setRGB(0.63, 0.62, 0.61)
-	ButtonName:setText(Engine[0xF9F1239CFD921FE](0xFA6E6FE616EF67))
+	ButtonName:setText(Engine[@"hash_4F9F1239CFD921FE"](0xFA6E6FE616EF67))
 	ButtonName:setTTF("ttmussels_regular")
-	ButtonName:setMaterial(LUI.UIImage.GetCachedMaterial(0x71E049B161CD00A))
+	ButtonName:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_171E049B161CD00A"))
 	ButtonName:setLetterSpacing(3)
-	ButtonName:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	ButtonName:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	self:addElement(ButtonName)
 	self.ButtonName = ButtonName
 	local newIcon = CoD.NewBreadcrumb.new(f1_arg0, f1_arg1, 1, 1, 5, 23, 0, 0, -1, 17)
@@ -37,7 +37,7 @@ CoD.WeaponPersonalizeSlot.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	})
 	local f1_local4 = newIcon
 	local f1_local5 = newIcon.subscribeToModel
-	local f1_local6 = Engine[0x8DF2E5447F384B9]()
+	local f1_local6 = Engine[@"getglobalmodel"]()
 	f1_local5(f1_local4, f1_local6["lobbyRoot.lobbyNetworkMode"], function(f4_arg0)
 		f1_arg0:updateElementState(newIcon, {
 			name = "model_validation",
@@ -49,7 +49,7 @@ CoD.WeaponPersonalizeSlot.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	end, false)
 	f1_local4 = newIcon
 	f1_local5 = newIcon.subscribeToModel
-	f1_local6 = Engine[0x8DF2E5447F384B9]()
+	f1_local6 = Engine[@"getglobalmodel"]()
 	f1_local5(f1_local4, f1_local6["lobbyRoot.lobbyNav"], function(f5_arg0)
 		f1_arg0:updateElementState(newIcon, {
 			name = "model_validation",

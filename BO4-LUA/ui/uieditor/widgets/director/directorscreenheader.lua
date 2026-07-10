@@ -10,11 +10,11 @@ CoD.DirectorScreenHeader.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	self.anyChildUsesUpdateState = true
 	local Header = LUI.UIText.new(0, 0, 103, 643, 0, 0, 35, 65)
 	Header:setRGB(0.86, 0.74, 0.25)
-	Header:setText(LocalizeToUpperString(0xDDDA371285672BD))
+	Header:setText(LocalizeToUpperString(@"menu/play"))
 	Header:setTTF("ttmussels_regular")
 	Header:setLetterSpacing(14)
-	Header:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Header:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Header:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Header:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(Header)
 	self.Header = Header
 	local DirectorLeaderActivityMain = CoD.DirectorLeaderActivityMain.new(f1_arg0, f1_arg1, 0, 0, 0, 888, 0, 0, 50, 102)
@@ -36,7 +36,7 @@ CoD.DirectorScreenHeader.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	end)
 	local f1_local3 = DirectorLeaderActivityMain
 	local f1_local4 = DirectorLeaderActivityMain.subscribeToModel
-	local f1_local5 = Engine[0x8DF2E5447F384B9]()
+	local f1_local5 = Engine[@"getglobalmodel"]()
 	f1_local4(f1_local3, f1_local5["lobbyRoot.lobbyNav"], function(f5_arg0)
 		f1_arg0:updateElementState(DirectorLeaderActivityMain, {
 			name = "model_validation",
@@ -48,7 +48,7 @@ CoD.DirectorScreenHeader.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	end, false)
 	f1_local3 = DirectorLeaderActivityMain
 	f1_local4 = DirectorLeaderActivityMain.subscribeToModel
-	f1_local5 = Engine[0x8DF2E5447F384B9]()
+	f1_local5 = Engine[@"getglobalmodel"]()
 	f1_local4(f1_local3, f1_local5["lobbyRoot.gameClient.update"], function(f6_arg0)
 		f1_arg0:updateElementState(DirectorLeaderActivityMain, {
 			name = "model_validation",
@@ -60,7 +60,7 @@ CoD.DirectorScreenHeader.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	end, false)
 	f1_local3 = DirectorLeaderActivityMain
 	f1_local4 = DirectorLeaderActivityMain.subscribeToModel
-	f1_local5 = Engine[0x8DF2E5447F384B9]()
+	f1_local5 = Engine[@"getglobalmodel"]()
 	f1_local4(f1_local3, f1_local5["lobbyRoot.privateClient.update"], function(f7_arg0)
 		f1_arg0:updateElementState(DirectorLeaderActivityMain, {
 			name = "model_validation",

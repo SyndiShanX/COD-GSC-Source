@@ -8,8 +8,8 @@ CoD.ui_icon_callingcards_robber_laser.new = function(f1_arg0, f1_arg1, f1_arg2, 
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local lasers = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	lasers:setImage(RegisterImage(0x5145C4730C5C89A))
-	lasers:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	lasers:setImage(RegisterImage(@"uie_ui_menu_callingcards_robbery_lasers"))
+	lasers:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(lasers)
 	self.lasers = lasers
 	if PostLoadFunc then
@@ -55,7 +55,7 @@ CoD.ui_icon_callingcards_robber_laser.__clipsPerState = {
 																				f20_arg0:setZRot(0)
 																				f20_arg0:registerEventHandler("transition_complete_keyframe", f20_local0)
 																			end
-																			f19_arg0:beginAnimation(359, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+																			f19_arg0:beginAnimation(359, Enum[@"luitween"][@"luitween_ease_out"])
 																			f19_arg0:setAlpha(0.3)
 																			f19_arg0:setZRot(-1)
 																			f19_arg0:registerEventHandler("transition_complete_keyframe", f19_local0)
@@ -120,7 +120,7 @@ CoD.ui_icon_callingcards_robber_laser.__clipsPerState = {
 							f7_arg0:setZRot(-4)
 							f7_arg0:registerEventHandler("transition_complete_keyframe", f7_local0)
 						end
-						f6_arg0:beginAnimation(360, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+						f6_arg0:beginAnimation(360, Enum[@"luitween"][@"luitween_ease_in"])
 						f6_arg0:setAlpha(0.3)
 						f6_arg0:setZRot(-5)
 						f6_arg0:registerEventHandler("transition_complete_keyframe", f6_local0)

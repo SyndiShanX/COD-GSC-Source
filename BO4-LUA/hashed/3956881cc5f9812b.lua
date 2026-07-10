@@ -8,29 +8,29 @@ CoD.PC_Korea_Menus_15ContentDescriptors_Icons.new = function(f1_arg0, f1_arg1, f
 	self.soundSet = "default"
 	local KoreaDrugReferenceIcon = LUI.UIImage.new(0, 0, 5, 90, 0, 0, 230, 331)
 	KoreaDrugReferenceIcon:setAlpha(0)
-	KoreaDrugReferenceIcon:setImage(RegisterImage(0xA8745DC00C3C045))
+	KoreaDrugReferenceIcon:setImage(RegisterImage(@"uie_korea_drugreference_icon"))
 	self:addElement(KoreaDrugReferenceIcon)
 	self.KoreaDrugReferenceIcon = KoreaDrugReferenceIcon
 	local KoreaCurrencyIcon = LUI.UIImage.new(0, 0, 98, 183, 0, 0, 230, 331)
 	KoreaCurrencyIcon:setAlpha(0)
-	KoreaCurrencyIcon:setImage(RegisterImage(0x5BF4DE9B5B86775))
+	KoreaCurrencyIcon:setImage(RegisterImage(@"uie_korea_currency_icon"))
 	self:addElement(KoreaCurrencyIcon)
 	self.KoreaCurrencyIcon = KoreaCurrencyIcon
 	local KoreaViolenceIcon = LUI.UIImage.new(0, 0, 5, 90, 0, 0, 120, 221)
-	KoreaViolenceIcon:setImage(RegisterImage(0x6FA664A00191357))
+	KoreaViolenceIcon:setImage(RegisterImage(@"uie_korea_violence_icon"))
 	self:addElement(KoreaViolenceIcon)
 	self.KoreaViolenceIcon = KoreaViolenceIcon
 	local KoreaRating15Logo = LUI.UIImage.new(0, 0, 5, 90, 0, 0, 10, 111)
-	KoreaRating15Logo:setImage(RegisterImage(0x259D9D3DF9159B5))
+	KoreaRating15Logo:setImage(RegisterImage(@"uie_korea_ratinglogo_15"))
 	self:addElement(KoreaRating15Logo)
 	self.KoreaRating15Logo = KoreaRating15Logo
 	local KoreaRating18Logo = LUI.UIImage.new(0, 0, 98, 183, 0, 0, 10, 111)
-	KoreaRating18Logo:setImage(RegisterImage(0x259DCD3DF915ECE))
+	KoreaRating18Logo:setImage(RegisterImage(@"uie_korea_ratinglogo_18"))
 	self:addElement(KoreaRating18Logo)
 	self.KoreaRating18Logo = KoreaRating18Logo
 	local KoreaStrongLanguageIcon = LUI.UIImage.new(0, 0, 98, 183, 0, 0, 120, 221)
 	KoreaStrongLanguageIcon:setAlpha(0)
-	KoreaStrongLanguageIcon:setImage(RegisterImage(0xD7C7CE2EFBBB1B1))
+	KoreaStrongLanguageIcon:setImage(RegisterImage(@"uie_korea_stronglanguage"))
 	self:addElement(KoreaStrongLanguageIcon)
 	self.KoreaStrongLanguageIcon = KoreaStrongLanguageIcon
 	if PostLoadFunc then

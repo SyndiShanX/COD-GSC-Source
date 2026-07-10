@@ -67,8 +67,8 @@ CoD.DirectorZMTrialsInfoDescription.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 		})
 	end, false)
 	Silver:setScale(0.95, 0.95)
-	Silver.Background:setImage(RegisterImage(0xD2773BA8C6EFDB))
-	Silver.Medal:setImage(RegisterImage(0xD56A5FDBB9721FB))
+	Silver.Background:setImage(RegisterImage(@"uie_trial_rules_silver_normal"))
+	Silver.Medal:setImage(RegisterImage(@"uie_trial_medal_silver"))
 	self:addElement(Silver)
 	self.Silver = Silver
 	Gold = CoD.InGameTrialsRulesColumn.new(f1_arg0, f1_arg1, 0.5, 0.5, 173, 561, 0.5, 0.5, -348, 348)
@@ -99,8 +99,8 @@ CoD.DirectorZMTrialsInfoDescription.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 		})
 	end, false)
 	Gold:setScale(0.95, 0.95)
-	Gold.Background:setImage(RegisterImage(0xDCF1B07E0539E4A))
-	Gold.Medal:setImage(RegisterImage(0x7775EF99258EEEC))
+	Gold.Background:setImage(RegisterImage(@"uie_trial_rules_gold_normal"))
+	Gold.Medal:setImage(RegisterImage(@"uie_trial_medal_gold"))
 	self:addElement(Gold)
 	self.Gold = Gold
 	RoundDescriptionGrid = LUI.GridLayout.new(f1_arg0, f1_arg1, false, 0, 0, 6, 0, nil, nil, false, false, false, false)
@@ -146,7 +146,7 @@ CoD.DirectorZMTrialsInfoDescription.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	RoundDescriptionGrid:setHorizontalCount(3)
 	RoundDescriptionGrid:setVerticalCount(10)
 	RoundDescriptionGrid:setSpacing(6)
-	RoundDescriptionGrid:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	RoundDescriptionGrid:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	RoundDescriptionGrid:setDataSource("ZMTrialInfoRoundStat")
 	self:addElement(RoundDescriptionGrid)
 	self.RoundDescriptionGrid = RoundDescriptionGrid

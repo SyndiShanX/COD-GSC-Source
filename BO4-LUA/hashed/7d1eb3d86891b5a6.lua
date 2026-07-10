@@ -9,12 +9,12 @@ CoD.vhud_attack_helicopter_rocket.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local rocketOutline = LUI.UIImage.new(0.5, 0.5, -50, 50, 0.5, 0.5, -10, 10)
 	rocketOutline:setZRot(270)
-	rocketOutline:setImage(RegisterImage(0xCCCC7CAE966F3F8))
+	rocketOutline:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_dart_notificationboxammoline"))
 	self:addElement(rocketOutline)
 	self.rocketOutline = rocketOutline
 	local rocket = LUI.UIImage.new(0.5, 0.5, -50, 50, 0.5, 0.5, -10, 10)
 	rocket:setZRot(270)
-	rocket:setImage(RegisterImage(0xEDB8AB65691925A))
+	rocket:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_dart_notificationboxammo"))
 	self:addElement(rocket)
 	self.rocket = rocket
 	if PostLoadFunc then

@@ -31,7 +31,7 @@ CoD.fe_RightContainerWithHeroesHead.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 			FooterButtonDoublePrompts.buttonPromptImage1:setImage(RegisterImage(f3_local0))
 		end
 	end)
-	FooterButtonDoublePrompts:linkToElementModel(self, "" .. Enum[0x3DD78803F918E9D][0x493152B20AE4F58], false, function(model)
+	FooterButtonDoublePrompts:linkToElementModel(self, "" .. Enum[@"luibutton"][@"lui_key_lb"], false, function(model)
 		FooterButtonDoublePrompts:setModel(model, f1_arg1)
 	end)
 	self:addElement(FooterButtonDoublePrompts)
@@ -43,7 +43,7 @@ CoD.fe_RightContainerWithHeroesHead.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 			Padbtn.buttonPromptImage:setImage(RegisterImage(f5_local0))
 		end
 	end)
-	Padbtn:linkToElementModel(self, "" .. Enum[0x3DD78803F918E9D][0x93AB4C84F113EE1], false, function(model)
+	Padbtn:linkToElementModel(self, "" .. Enum[@"luibutton"][@"lui_key_back"], false, function(model)
 		Padbtn:setModel(model, f1_arg1)
 	end)
 	self:addElement(Padbtn)
@@ -55,7 +55,7 @@ CoD.fe_RightContainerWithHeroesHead.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 			RJoystickbtn.buttonPromptImage:setImage(RegisterImage(f7_local0))
 		end
 	end)
-	RJoystickbtn:linkToElementModel(self, "" .. Enum[0x3DD78803F918E9D][0x29E5695FF1401AD], false, function(model)
+	RJoystickbtn:linkToElementModel(self, "" .. Enum[@"luibutton"][@"lui_key_rstick_pressed"], false, function(model)
 		RJoystickbtn:setModel(model, f1_arg1)
 	end)
 	self:addElement(RJoystickbtn)

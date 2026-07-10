@@ -16,7 +16,7 @@ CoD.StartMenu_Options_PC_GraphicsOptions_VRAMBar.new = function(f1_arg0, f1_arg1
 	Maximum:setText(LocalizeToUpperString(0x4EF66575DDB929))
 	Maximum:setTTF("dinnext_regular")
 	Maximum:setLetterSpacing(1)
-	Maximum:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
+	Maximum:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
 	self:addElement(Maximum)
 	self.Maximum = Maximum
 	local FilledBarBackground = LUI.UIImage.new(0, 1, 0, 0, 0.5, 0.5, -3, 5)
@@ -42,7 +42,7 @@ CoD.StartMenu_Options_PC_GraphicsOptions_VRAMBar.new = function(f1_arg0, f1_arg1
 	local OverflowIndicator4 = LUI.UIImage.new(1, 1, -4, 26, 0.5, 0.5, -32, -2)
 	OverflowIndicator4:setRGB(0.76, 0.76, 0.76)
 	OverflowIndicator4:setAlpha(0.44)
-	OverflowIndicator4:setImage(RegisterImage(0x7F2DD388A81D61))
+	OverflowIndicator4:setImage(RegisterImage(@"uie_warning_small"))
 	self:addElement(OverflowIndicator4)
 	self.OverflowIndicator4 = OverflowIndicator4
 	local Corners = CoD.StartMenuOptionsMainCorners.new(f1_arg0, f1_arg1, 0, 1, 0, 0, 0.5, 0.5, -3, 5)
@@ -52,20 +52,20 @@ CoD.StartMenu_Options_PC_GraphicsOptions_VRAMBar.new = function(f1_arg0, f1_arg1
 	local TextBox = LUI.UIText.new(0, 1, 0, -180, 0.5, 0.5, -24.5, -7.5)
 	TextBox:setRGB(0.76, 0.76, 0.76)
 	TextBox:setAlpha(0.6)
-	TextBox:setText(LocalizeToUpperString(0xCCC02F6B5D8DCE1))
+	TextBox:setText(LocalizeToUpperString(@"hash_5CCC02F6B5D8DCE1"))
 	TextBox:setTTF("dinnext_regular")
 	TextBox:setLetterSpacing(1)
-	TextBox:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	TextBox:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	TextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	TextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(TextBox)
 	self.TextBox = TextBox
 	local MbUsage = LUI.UIText.new(1, 1, -125, 0, 0.5, 0.5, -24.5, -7.5)
 	MbUsage:setRGB(0.76, 0.76, 0.76)
 	MbUsage:setAlpha(0.44)
-	MbUsage:setText(LocalizeToUpperString(0xBF86D864C077F3E))
+	MbUsage:setText(LocalizeToUpperString(@"hash_5BF86D864C077F3E"))
 	MbUsage:setTTF("dinnext_regular")
 	MbUsage:setLetterSpacing(1)
-	MbUsage:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
+	MbUsage:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
 	self:addElement(MbUsage)
 	self.MbUsage = MbUsage
 	local RecommendedLimit = LUI.UIImage.new(0, 0, 284, 285, 0.5, 0.5, -3, 5)
@@ -94,7 +94,7 @@ CoD.StartMenu_Options_PC_GraphicsOptions_VRAMBar.new = function(f1_arg0, f1_arg1
 	end
 	local f1_local13 = self
 	f1_local13 = TooltipFocus
-	CoD.PCWidgetUtility.SetupEmptyFocusableTooltip(f1_local13, f1_arg1, 0xCCC02F6B5D8DCE1, 0xA669610927190D)
+	CoD.PCWidgetUtility.SetupEmptyFocusableTooltip(f1_local13, f1_arg1, @"hash_5CCC02F6B5D8DCE1", 0xA669610927190D)
 	DisableKeyboardNavigationByElement(f1_local13)
 	return self
 end

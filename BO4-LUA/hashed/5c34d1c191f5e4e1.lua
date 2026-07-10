@@ -12,7 +12,7 @@ CoD.WZAAR_IGR_background.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	self:addElement(Black)
 	self.Black = Black
 	local BackgroundInGameReport = LUI.UIImage.new(0.5, 0.5, -270, 270, 0.5, 0.5, -314, 314)
-	BackgroundInGameReport:setImage(RegisterImage(0x1437C61CDF07849))
+	BackgroundInGameReport:setImage(RegisterImage(@"uie_ui_hud_wz_hud_aar_panel"))
 	self:addElement(BackgroundInGameReport)
 	self.BackgroundInGameReport = BackgroundInGameReport
 	if PostLoadFunc then

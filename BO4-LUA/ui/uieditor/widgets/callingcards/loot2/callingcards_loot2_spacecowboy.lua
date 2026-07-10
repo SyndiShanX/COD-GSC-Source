@@ -1,37 +1,37 @@
-CoD[0x8CBCB769802AC5B] = InheritFrom(LUI.UIElement)
-CoD[0x8CBCB769802AC5B].__defaultWidth = 960
-CoD[0x8CBCB769802AC5B].__defaultHeight = 240
-CoD[0x8CBCB769802AC5B].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+CoD[@"hash_38CBCB769802AC5B"] = InheritFrom(LUI.UIElement)
+CoD[@"hash_38CBCB769802AC5B"].__defaultWidth = 960
+CoD[@"hash_38CBCB769802AC5B"].__defaultHeight = 240
+CoD[@"hash_38CBCB769802AC5B"].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
 	local self = LUI.UIElement.new(f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
-	self:setClass(CoD[0x8CBCB769802AC5B])
+	self:setClass(CoD[@"hash_38CBCB769802AC5B"])
 	self.id = "callingcards_loot2_spacecowboy"
 	self.soundSet = "none"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local background = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	background:setImage(RegisterImage(0x372D976B89D0E83))
+	background:setImage(RegisterImage(@"uie_ui_menu_callingcards_spacecowboy_bg"))
 	self:addElement(background)
 	self.background = background
 	local wrangleranimation = LUI.UIImage.new(0, 0, 274, 650, 0, 0, -9, 231)
-	wrangleranimation:setImage(RegisterImage(0x26D57066DCCBCA7))
-	wrangleranimation:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD526D3FD71F281))
+	wrangleranimation:setImage(RegisterImage(@"uie_ui_menu_callingcards_spacecowboy_wranglers"))
+	wrangleranimation:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_flipbook"))
 	wrangleranimation:setShaderVector(0, 4, 0, 0, 0)
 	wrangleranimation:setShaderVector(1, 20, 0, 0, 0)
 	self:addElement(wrangleranimation)
 	self.wrangleranimation = wrangleranimation
 	local smoke = LUI.UIImage.new(0, 0, -20, 524, 0, 0, -16, 240)
-	smoke:setImage(RegisterImage(0xB3CDBE67C7CBE36))
-	smoke:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	smoke:setImage(RegisterImage(@"uie_ui_menu_callingcards_spacecowboy_clouds"))
+	smoke:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(smoke)
 	self.smoke = smoke
 	local smoke2 = LUI.UIImage.new(0, 0, -150, 394, 0, 0, -28, 228)
 	smoke2:setAlpha(0)
 	smoke2:setScale(1.5, 1.5)
-	smoke2:setImage(RegisterImage(0xB3CDBE67C7CBE36))
-	smoke2:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	smoke2:setImage(RegisterImage(@"uie_ui_menu_callingcards_spacecowboy_clouds"))
+	smoke2:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(smoke2)
 	self.smoke2 = smoke2
 	local foregrounddude = LUI.UIImage.new(0, 0, -90, 1038, 0, 0, -9, 311)
-	foregrounddude:setImage(RegisterImage(0x207D6B4C9921491))
+	foregrounddude:setImage(RegisterImage(@"uie_ui_menu_callingcards_spacecowboy_foregrounddude"))
 	self:addElement(foregrounddude)
 	self.foregrounddude = foregrounddude
 	if PostLoadFunc then
@@ -39,7 +39,7 @@ CoD[0x8CBCB769802AC5B].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	end
 	return self
 end
-CoD[0x8CBCB769802AC5B].__resetProperties = function(f2_arg0)
+CoD[@"hash_38CBCB769802AC5B"].__resetProperties = function(f2_arg0)
 	f2_arg0.wrangleranimation:completeAnimation()
 	f2_arg0.foregrounddude:completeAnimation()
 	f2_arg0.smoke:completeAnimation()
@@ -57,7 +57,7 @@ CoD[0x8CBCB769802AC5B].__resetProperties = function(f2_arg0)
 	f2_arg0.smoke2:setAlpha(0)
 	f2_arg0.smoke2:setScale(1.5, 1.5)
 end
-CoD[0x8CBCB769802AC5B].__clipsPerState = {
+CoD[@"hash_38CBCB769802AC5B"].__clipsPerState = {
 	DefaultState = {
 		DefaultClip = function(f3_arg0, f3_arg1)
 			f3_arg0:__resetProperties()

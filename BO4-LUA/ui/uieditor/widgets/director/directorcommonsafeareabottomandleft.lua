@@ -105,7 +105,7 @@ CoD.DirectorCommonSafeAreaBottomAndLeft.new = function(f1_arg0, f1_arg1, f1_arg2
 	})
 	local f1_local7 = DirectorAppLoadoutNotification
 	local f1_local8 = DirectorAppLoadoutNotification.subscribeToModel
-	local f1_local9 = Engine[0x8DF2E5447F384B9]()
+	local f1_local9 = Engine[@"getglobalmodel"]()
 	f1_local8(f1_local7, f1_local9["lobbyRoot.lobbyNav"], function(f12_arg0)
 		f1_arg0:updateElementState(DirectorAppLoadoutNotification, {
 			name = "model_validation",
@@ -117,7 +117,7 @@ CoD.DirectorCommonSafeAreaBottomAndLeft.new = function(f1_arg0, f1_arg1, f1_arg2
 	end, false)
 	f1_local7 = DirectorAppLoadoutNotification
 	f1_local8 = DirectorAppLoadoutNotification.subscribeToModel
-	f1_local9 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local9 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local8(f1_local7, f1_local9.extLoadoutReady, function(f13_arg0)
 		f1_arg0:updateElementState(DirectorAppLoadoutNotification, {
 			name = "model_validation",
@@ -139,13 +139,13 @@ CoD.DirectorCommonSafeAreaBottomAndLeft.new = function(f1_arg0, f1_arg1, f1_arg2
 		{
 			stateName = "ContractsZombies",
 			condition = function(menu, element, event)
-				return CoD.DirectorUtility.IsMainMode(f1_arg1, Enum[0x89C1455C5032969][0x79D01499920B292]) and CoD.LootContractsUtility.IsUIEnabled(f1_arg1)
+				return CoD.DirectorUtility.IsMainMode(f1_arg1, Enum[@"lobbymainmode"][@"lobby_mainmode_zm"]) and CoD.LootContractsUtility.IsUIEnabled(f1_arg1)
 			end,
 		},
 		{
 			stateName = "Zombies",
 			condition = function(menu, element, event)
-				return CoD.DirectorUtility.IsMainMode(f1_arg1, Enum[0x89C1455C5032969][0x79D01499920B292])
+				return CoD.DirectorUtility.IsMainMode(f1_arg1, Enum[@"lobbymainmode"][@"lobby_mainmode_zm"])
 			end,
 		},
 		{
@@ -157,7 +157,7 @@ CoD.DirectorCommonSafeAreaBottomAndLeft.new = function(f1_arg0, f1_arg1, f1_arg2
 	})
 	f1_local7 = self
 	f1_local8 = self.subscribeToModel
-	f1_local9 = Engine[0x8DF2E5447F384B9]()
+	f1_local9 = Engine[@"getglobalmodel"]()
 	f1_local8(f1_local7, f1_local9["lobbyRoot.lobbyMainMode"], function(f18_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -169,7 +169,7 @@ CoD.DirectorCommonSafeAreaBottomAndLeft.new = function(f1_arg0, f1_arg1, f1_arg2
 	end, false)
 	f1_local7 = self
 	f1_local8 = self.subscribeToModel
-	f1_local9 = Engine[0x8DF2E5447F384B9]()
+	f1_local9 = Engine[@"getglobalmodel"]()
 	f1_local8(f1_local7, f1_local9["lobbyRoot.lobbyNav"], function(f19_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

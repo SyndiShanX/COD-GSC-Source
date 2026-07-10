@@ -16,7 +16,7 @@ CoD.CodCasterButtonDoublePromptContainer.new = function(f1_arg0, f1_arg1, f1_arg
 		{
 			stateName = "Enabled",
 			condition = function(menu, element, event)
-				local f2_local0 = CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "", Enum[0xF4865E3551C3835][0x901DFC093ED4187])
+				local f2_local0 = CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "", Enum[@"luibuttonpromptstates"][@"flag_enable_prompts"])
 				if f2_local0 then
 					if not CoD.FreeCursorUtility.ShowingContextualPromptForFlags(element, f1_arg1) then
 						f2_local0 = IsMouseOrKeyboard(f1_arg1)
@@ -69,7 +69,7 @@ CoD.CodCasterButtonDoublePromptContainer.new = function(f1_arg0, f1_arg1, f1_arg
 	end, false)
 	Text = Prompt
 	Prompt2 = Prompt.subscribeToModel
-	f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	Prompt2(Text, f1_local4.activeKeys, function(f7_arg0)
 		f1_arg0:updateElementState(Prompt, {
 			name = "model_validation",
@@ -94,7 +94,7 @@ CoD.CodCasterButtonDoublePromptContainer.new = function(f1_arg0, f1_arg1, f1_arg
 	end)
 	Text = Prompt
 	Prompt2 = Prompt.subscribeToModel
-	f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	Prompt2(Text, f1_local4.LastInput, function(f10_arg0)
 		f1_arg0:updateElementState(Prompt, {
 			name = "model_validation",
@@ -150,7 +150,7 @@ CoD.CodCasterButtonDoublePromptContainer.new = function(f1_arg0, f1_arg1, f1_arg
 	end, false)
 	f1_local4 = Prompt2
 	Text = Prompt2.subscribeToModel
-	f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
 	Text(f1_local4, f1_local5.activeKeys, function(f15_arg0)
 		f1_arg0:updateElementState(Prompt2, {
 			name = "model_validation",
@@ -175,7 +175,7 @@ CoD.CodCasterButtonDoublePromptContainer.new = function(f1_arg0, f1_arg1, f1_arg
 	end)
 	f1_local4 = Prompt2
 	Text = Prompt2.subscribeToModel
-	f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
 	Text(f1_local4, f1_local5.LastInput, function(f18_arg0)
 		f1_arg0:updateElementState(Prompt2, {
 			name = "model_validation",
@@ -188,11 +188,11 @@ CoD.CodCasterButtonDoublePromptContainer.new = function(f1_arg0, f1_arg1, f1_arg
 	self:addElement(Prompt2)
 	self.Prompt2 = Prompt2
 	Text = LUI.UIText.new(0, 0, 320, 486, 0.5, 0.5, -8, 8)
-	Text:setText(Engine[0xF9F1239CFD921FE](0xA61241CD7E3DE2B))
+	Text:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_5A61241CD7E3DE2B"))
 	Text:setTTF("default")
 	Text:setLineSpacing(2)
-	Text:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Text:setAlignment(Enum[0x7A5123B654282D2][0x6ED4298C93DC5ED])
+	Text:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Text:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
 	self:addElement(Text)
 	self.Text = Text
 	self:mergeStateConditions({

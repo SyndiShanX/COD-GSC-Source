@@ -4,44 +4,44 @@ CoD.WeaponAttachmentsUtility.ContainerPadding = 25
 CoD.WeaponAttachmentsUtility.UberAttachmentPadding = 20
 CoD.WeaponAttachmentsUtility.WeaponAttachmentListTable = {
 	primary = {
-		weaponRefHash = 0x0,
+		weaponRefHash = @"hash_0",
 		attachmentList = {},
 		isArenaMode = false,
 	},
 	secondary = {
-		weaponRefHash = 0x0,
+		weaponRefHash = @"hash_0",
 		attachmentList = {},
 		isArenaMode = false,
 	},
 }
 CoD.WeaponAttachmentsUtility.WeaponAttachmentGroupNames = {
 	{
-		attachmentGroup = Enum[0x7420BCDBDE17A84][0x6AC43DB9B6634DA],
-		name = 0x13BE4995FD8DBF8,
+		attachmentGroup = Enum[@"eattachmentgroup"][@"attachment_group_optic"],
+		name = @"hash_313BE4995FD8DBF8",
 	},
 	{
-		attachmentGroup = Enum[0x7420BCDBDE17A84][0x2FDACB5DC7958DD],
-		name = 0x49BD5D27E45D8A4,
+		attachmentGroup = Enum[@"eattachmentgroup"][@"attachment_group_rig"],
+		name = @"hash_649BD5D27E45D8A4",
 	},
 	{
-		attachmentGroup = Enum[0x7420BCDBDE17A84][0x2701CB609E58337],
-		name = 0x7DBA1D8EA36A999,
+		attachmentGroup = Enum[@"eattachmentgroup"][@"attachment_group_mod"],
+		name = @"hash_7DBA1D8EA36A999",
 	},
 	{
-		attachmentGroup = Enum[0x7420BCDBDE17A84][0x6EE211053211305],
-		name = 0xCD6625B5DAFD45F,
+		attachmentGroup = Enum[@"eattachmentgroup"][@"hash_26EE211053211305"],
+		name = @"hash_4CD6625B5DAFD45F",
 	},
 	{
-		attachmentGroup = Enum[0x7420BCDBDE17A84][0x4877F405CA40935],
-		name = 0x49BD5D27E45D8A4,
+		attachmentGroup = Enum[@"eattachmentgroup"][@"attachment_group_weaponoptions"],
+		name = @"hash_649BD5D27E45D8A4",
 	},
 }
 CoD.WeaponAttachmentsUtility.AttachmentTierType = LuaEnum.createEnum("NONE", "BASE", "UPGRADE")
 CoD.WeaponAttachmentsUtility.GetBaseAttachmentRef = function(f1_arg0, f1_arg1)
 	if f1_arg1 and f1_arg0.attachmentUpgrades then
 		for f1_local3, f1_local4 in ipairs(f1_arg0.attachmentUpgrades) do
-			if f1_local4[0xBF43C7495E3788C] == f1_arg1 then
-				return f1_local4[0x7EB5A64A49DE165]
+			if f1_local4[@"hash_1BF43C7495E3788C"] == f1_arg1 then
+				return f1_local4[@"baseattachment"]
 			end
 		end
 	end
@@ -49,8 +49,8 @@ end
 CoD.WeaponAttachmentsUtility.GetUpgradedAttachmentRef = function(f2_arg0, f2_arg1)
 	if f2_arg1 and f2_arg0.attachmentUpgrades then
 		for f2_local3, f2_local4 in ipairs(f2_arg0.attachmentUpgrades) do
-			if f2_local4[0x7EB5A64A49DE165] == f2_arg1 then
-				return f2_local4[0xBF43C7495E3788C]
+			if f2_local4[@"baseattachment"] == f2_arg1 then
+				return f2_local4[@"hash_1BF43C7495E3788C"]
 			end
 		end
 	end
@@ -62,10 +62,10 @@ CoD.WeaponAttachmentsUtility.DoesAttachmentHaveUpgrade = function(f4_arg0, f4_ar
 	return CoD.WeaponAttachmentsUtility.GetUpgradedAttachmentRef(f4_arg0, f4_arg1) ~= nil
 end
 CoD.WeaponAttachmentsUtility.GetBaseAttachmentIndex = function(f5_arg0, f5_arg1, f5_arg2)
-	return Engine[0xB99CB645DEAEB92](f5_arg0, Engine[0x58B87258E0EBAD0](f5_arg1), f5_arg2)
+	return Engine[@"getattachmentindexbyattachmenttableindex"](f5_arg0, Engine[@"getattachmentindexbyref"](f5_arg1), f5_arg2)
 end
 CoD.WeaponAttachmentsUtility.GetAttachmentIndexForWeaponAttachmentRef = function(f6_arg0, f6_arg1, f6_arg2)
-	return Engine[0xB99CB645DEAEB92](f6_arg0, Engine[0x58B87258E0EBAD0](f6_arg1), f6_arg2)
+	return Engine[@"getattachmentindexbyattachmenttableindex"](f6_arg0, Engine[@"getattachmentindexbyref"](f6_arg1), f6_arg2)
 end
 CoD.WeaponAttachmentsUtility.GetDisplayNameForAttachmentGroup = function(f7_arg0)
 	for f7_local3, f7_local4 in ipairs(CoD.WeaponAttachmentsUtility.WeaponAttachmentGroupNames) do
@@ -73,7 +73,7 @@ CoD.WeaponAttachmentsUtility.GetDisplayNameForAttachmentGroup = function(f7_arg0
 			return f7_local4.name
 		end
 	end
-	return 0x49BD5D27E45D8A4
+	return @"hash_649BD5D27E45D8A4"
 end
 CoD.WeaponAttachmentsUtility.GetAttachmentTierType = function(f8_arg0, f8_arg1)
 	local f8_local0 = CoD.WeaponAttachmentsUtility.AttachmentTierType.NONE
@@ -89,12 +89,12 @@ CoD.WeaponAttachmentsUtility.GetAttachmentCautionText = function(f9_arg0, f9_arg
 	local f9_local1 = 0x0
 	local f9_local2 = CoD.CACUtility.GetMutuallyExclusiveAttachments(f9_arg0, f9_local0, f9_arg2, f9_arg4, f9_arg5)
 	if #f9_local2 > 0 then
-		local f9_local3 = Engine[0x174D9B6F1E719ED](f9_arg3, f9_local2[1].attachmentIndex, f9_arg5)
-		if not Engine[0x689E378B0101DCE](f9_arg3, f9_arg4) or not Engine[0x689E378B0101DCE](f9_arg3, f9_local2[1].attachmentIndex) then
-			if Engine[0x37522AE910C327](f9_local3, f9_arg5) == Enum[0x7420BCDBDE17A84][0x6EE211053211305] then
-				f9_local1 = 0x91F59C33FE184A9
+		local f9_local3 = Engine[@"getitemattachment"](f9_arg3, f9_local2[1].attachmentIndex, f9_arg5)
+		if not Engine[@"isoptic"](f9_arg3, f9_arg4) or not Engine[@"isoptic"](f9_arg3, f9_local2[1].attachmentIndex) then
+			if Engine[0x37522AE910C327](f9_local3, f9_arg5) == Enum[@"eattachmentgroup"][@"hash_26EE211053211305"] then
+				f9_local1 = @"menu/removes_uber"
 			else
-				f9_local1 = 0x73A7619DEA60089
+				f9_local1 = @"menu/removes_attachments"
 			end
 		end
 	end
@@ -120,7 +120,7 @@ CoD.WeaponAttachmentsUtility.UpdateHorizontalCount = function(f11_arg0, f11_arg1
 		else
 			f11_local4 = false
 		end
-		if CoD.CACUtility.EmptyItemIndex < Engine[0xEF453A0A31D191A](f11_local3, f11_local1) then
+		if CoD.CACUtility.EmptyItemIndex < Engine[@"hash_3EF453A0A31D191A"](f11_local3, f11_local1) then
 			local f11_local6 = 1
 		end
 		f11_local5 = f11_local6 or 0
@@ -130,9 +130,9 @@ CoD.WeaponAttachmentsUtility.UpdateHorizontalCount = function(f11_arg0, f11_arg1
 		f11_local3 = f11_local7[f11_local9].itemIndex:get()
 	end
 	if f11_local1 and CoD.CACUtility.EmptyItemIndex < f11_local3 then
-		local f11_local7 = Engine[0x2964239F2151F6F](f11_local3, f11_local1)
+		local f11_local7 = Engine[@"getunlockableitemkvpinfo"](f11_local3, f11_local1)
 		if f11_local4 == "optic" then
-			f11_arg1:setHorizontalCount(f11_local7[0xA9C48738BFE4409] or 0)
+			f11_arg1:setHorizontalCount(f11_local7[@"hash_1A9C48738BFE4409"] or 0)
 		else
 			f11_arg1:setHorizontalCount(f11_local7[0x6E3B76844E6637] + f11_local5 or 0)
 		end
@@ -146,20 +146,20 @@ CoD.WeaponAttachmentsUtility.GetClipCountAndSizeForWeapon = function(f12_arg0, f
 				f12_local0 = LUI.appendStringWithDelimiter(f12_local0, f12_local5, "+")
 			end
 		end
-		return Engine[0x9268F8D899F10DF](f12_arg0, f12_local0)
+		return Engine[@"hash_29268F8D899F10DF"](f12_arg0, f12_local0)
 	else
 		return 0, 0
 	end
 end
 CoD.WeaponAttachmentsUtility.UpdateEquippedWeaponAttachmentAttributes = function(f13_arg0, f13_arg1, f13_arg2, f13_arg3)
-	local f13_local0 = Enum[0x4894073C9168D02][0x5B7E5FC5552F23A]
-	local f13_local1 = Enum[0x4894073C9168D02][0x115E22D013F28C1]
-	local f13_local2 = Enum[0x4894073C9168D02][0x51BABA455D2DC80]
-	local f13_local3 = Enum[0x4894073C9168D02][0x1A6E182D6FE3472]
-	local f13_local4 = Enum[0x4894073C9168D02][0x5083C82F930E500]
-	local f13_local5 = Enum[0x4894073C9168D02][0x295ABB48F2C6284]
+	local f13_local0 = Enum[@"weaponattributescolumn"][@"weaponattributes_reference"]
+	local f13_local1 = Enum[@"weaponattributescolumn"][@"weaponattributes_weapon_name"]
+	local f13_local2 = Enum[@"weaponattributescolumn"][@"weaponattributes_damage"]
+	local f13_local3 = Enum[@"weaponattributescolumn"][@"weaponattributes_range"]
+	local f13_local4 = Enum[@"weaponattributescolumn"][@"weaponattributes_fire_rate"]
+	local f13_local5 = Enum[@"weaponattributescolumn"][@"weaponattributes_accuracy"]
 	local f13_local6 = f13_arg0[f13_arg1 .. ".itemIndex"]:get()
-	local f13_local7 = Engine[0xB98952F69D937F9](f13_local6, Enum[0x6EB546760F890D2][0x569E84652131CD7], f13_arg3)
+	local f13_local7 = Engine[@"hash_7B98952F69D937F9"](f13_local6, Enum[@"statindexoffset"][@"hash_6569E84652131CD7"], f13_arg3)
 	local f13_local8 = {
 		damage = 0,
 		range = 0,
@@ -173,12 +173,12 @@ CoD.WeaponAttachmentsUtility.UpdateEquippedWeaponAttachmentAttributes = function
 	for f13_local21, f13_local22 in ipairs(f13_local9) do
 		local f13_local23 = f13_arg0[f13_local22].itemIndex:get()
 		if f13_local22 ~= f13_arg2 and f13_local23 > CoD.CACUtility.EmptyItemIndex then
-			local f13_local14 = Engine[0x2E29FB421AD554B](f13_local6, f13_local23, f13_arg3)
+			local f13_local14 = Engine[@"getattachmentref"](f13_local6, f13_local23, f13_arg3)
 			table.insert(f13_local10, f13_local14)
-			local f13_local15 = Engine[0x2DCF0973239E909](CoD.weaponAttributes, f13_local2, f13_local0, f13_local14, f13_local1, f13_local7)
-			local f13_local16 = Engine[0x2DCF0973239E909](CoD.weaponAttributes, f13_local3, f13_local0, f13_local14, f13_local1, f13_local7)
-			local f13_local17 = Engine[0x2DCF0973239E909](CoD.weaponAttributes, f13_local4, f13_local0, f13_local14, f13_local1, f13_local7)
-			local f13_local18 = Engine[0x2DCF0973239E909](CoD.weaponAttributes, f13_local5, f13_local0, f13_local14, f13_local1, f13_local7)
+			local f13_local15 = Engine[@"tablelookup"](CoD.weaponAttributes, f13_local2, f13_local0, f13_local14, f13_local1, f13_local7)
+			local f13_local16 = Engine[@"tablelookup"](CoD.weaponAttributes, f13_local3, f13_local0, f13_local14, f13_local1, f13_local7)
+			local f13_local17 = Engine[@"tablelookup"](CoD.weaponAttributes, f13_local4, f13_local0, f13_local14, f13_local1, f13_local7)
+			local f13_local18 = Engine[@"tablelookup"](CoD.weaponAttributes, f13_local5, f13_local0, f13_local14, f13_local1, f13_local7)
 			local f13_local19 = f13_local8.damage
 			local f13_local20
 			if not f13_local15 then
@@ -222,17 +222,17 @@ CoD.WeaponAttachmentsUtility.UpdateEquippedWeaponAttachmentAttributes = function
 	return f13_local10, f13_local8
 end
 CoD.WeaponAttachmentsUtility.GetWeaponAttachmentAttributes = function(f14_arg0, f14_arg1, f14_arg2, f14_arg3, f14_arg4)
-	local f14_local0 = Enum[0x4894073C9168D02][0x5B7E5FC5552F23A]
-	local f14_local1 = Enum[0x4894073C9168D02][0x115E22D013F28C1]
-	local f14_local2 = Engine[0xB98952F69D937F9](f14_arg0, Enum[0x6EB546760F890D2][0x569E84652131CD7], f14_arg2)
+	local f14_local0 = Enum[@"weaponattributescolumn"][@"weaponattributes_reference"]
+	local f14_local1 = Enum[@"weaponattributescolumn"][@"weaponattributes_weapon_name"]
+	local f14_local2 = Engine[@"hash_7B98952F69D937F9"](f14_arg0, Enum[@"statindexoffset"][@"hash_6569E84652131CD7"], f14_arg2)
 	local f14_local3 = CoD.CACUtility.GetUnlockableItemInfo(f14_arg0, f14_arg2)
 	local f14_local4 = f14_local3.attributesTable
-	if f14_local3.attributesTableZM and f14_arg2 == Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A] then
+	if f14_local3.attributesTableZM and f14_arg2 == Enum[@"emodes"][@"mode_zombies"] then
 		f14_local4 = f14_local3.attributesTableZM
 	end
 	local f14_local5 = function(f15_arg0, f15_arg1)
 		local f15_local0 = f14_local4 and f14_local4[f15_arg0] or 0
-		local f15_local1 = Engine[0x2DCF0973239E909](CoD.weaponAttributes, f15_arg1, f14_local0, f14_arg1, f14_local1, f14_local2) or 0
+		local f15_local1 = Engine[@"tablelookup"](CoD.weaponAttributes, f15_arg1, f14_local0, f14_arg1, f14_local1, f14_local2) or 0
 		local f15_local2 = false
 		for f15_local6, f15_local7 in ipairs(f14_arg3) do
 			if f15_local7 == f14_arg1 then
@@ -247,14 +247,14 @@ CoD.WeaponAttachmentsUtility.GetWeaponAttachmentAttributes = function(f14_arg0, 
 		return f15_local0 .. "," .. f15_local3
 	end
 	local f14_local6 = {
-		damage = f14_local5("damage", Enum[0x4894073C9168D02][0x51BABA455D2DC80]),
-		range = f14_local5("range", Enum[0x4894073C9168D02][0x1A6E182D6FE3472]),
-		fireRate = f14_local5("fireRate", Enum[0x4894073C9168D02][0x5083C82F930E500]),
-		accuracy = f14_local5("accuracy", Enum[0x4894073C9168D02][0x295ABB48F2C6284]),
+		damage = f14_local5("damage", Enum[@"weaponattributescolumn"][@"weaponattributes_damage"]),
+		range = f14_local5("range", Enum[@"weaponattributescolumn"][@"weaponattributes_range"]),
+		fireRate = f14_local5("fireRate", Enum[@"weaponattributescolumn"][@"weaponattributes_fire_rate"]),
+		accuracy = f14_local5("accuracy", Enum[@"weaponattributescolumn"][@"weaponattributes_accuracy"]),
 		magCount = 0,
 		magSize = 0,
-		uberName = 0x0,
-		uberImage = 0x0,
+		uberName = @"hash_0",
+		uberImage = @"hash_0",
 	}
 	local f14_local7 = LUI.ShallowCopy(f14_arg3)
 	for f14_local11, f14_local12 in ipairs(f14_arg3) do
@@ -263,7 +263,7 @@ CoD.WeaponAttachmentsUtility.GetWeaponAttachmentAttributes = function(f14_arg0, 
 			break
 		end
 	end
-	if f14_arg2 == Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A] then
+	if f14_arg2 == Enum[@"emodes"][@"mode_zombies"] then
 		if #f14_local7 < CoD.ZMLoadoutUtility.MaxArmoryAttachments then
 			table.insert(f14_local7, f14_arg1)
 		end
@@ -349,19 +349,19 @@ CoD.WeaponAttachmentsUtility.GetWeaponAttachmentList = function(f18_arg0, f18_ar
 	local f18_local1, f18_local2, f18_local3 = CoD.BaseUtility.GetMenuModelModeLoadoutSlot(f18_arg1.menu)
 	local f18_local4 = CoD.BaseUtility.GetMenuLoadoutListItemSlot(f18_arg1.menu)
 	local f18_local5 = f18_local1[f18_local3].itemIndex:get()
-	local f18_local6 = Engine[0x2964239F2151F6F](f18_local5, f18_local2)
-	local f18_local7 = Engine[0xF8ECCDE64F061E1](f18_local5, f18_local2)
+	local f18_local6 = Engine[@"getunlockableitemkvpinfo"](f18_local5, f18_local2)
+	local f18_local7 = Engine[@"getnumattachments"](f18_local5, f18_local2)
 	local f18_local8 = f18_local1[f18_local3].numGunfightersEquipped:get()
 	local f18_local9, f18_local10 = CoD.WeaponAttachmentsUtility.UpdateEquippedWeaponAttachmentAttributes(f18_local1, f18_local3, f18_local4, f18_local2)
 	for f18_local11 = 1, f18_local7 - 1, 1 do
-		local f18_local14 = Engine[0x174D9B6F1E719ED](f18_local5, f18_local11, f18_local2)
+		local f18_local14 = Engine[@"getitemattachment"](f18_local5, f18_local11, f18_local2)
 		if CoD.CACUtility.EmptyItemIndex < f18_local14 then
-			local f18_local15 = Engine[0x2E29FB421AD554B](f18_local5, f18_local11, f18_local2)
-			local f18_local16 = Engine[0xD0520F158FE13E9](f18_local5, f18_local11, f18_local2)
-			local f18_local17 = Engine[0xA48813350B43601](f18_local5, f18_local11, f18_local2)
-			local f18_local18 = Engine[0x8FD38AB8CA1FA21](f18_local5, f18_local11, f18_local2)
-			local f18_local19 = Engine[0x55B3AC1DC0E0003](f18_local5, f18_local11, f18_local2)
-			local f18_local20 = Engine[0x1F444BD03EB910E](f18_local5, f18_local14, f18_local2)
+			local f18_local15 = Engine[@"getattachmentref"](f18_local5, f18_local11, f18_local2)
+			local f18_local16 = Engine[@"getattachmentname"](f18_local5, f18_local11, f18_local2)
+			local f18_local17 = Engine[@"getattachmentnameshort"](f18_local5, f18_local11, f18_local2)
+			local f18_local18 = Engine[@"getattachmentuniqueimagebyindex"](f18_local5, f18_local11, f18_local2)
+			local f18_local19 = Engine[@"getattachmentdesc"](f18_local5, f18_local11, f18_local2)
+			local f18_local20 = Engine[@"hash_61F444BD03EB910E"](f18_local5, f18_local14, f18_local2)
 			local f18_local21 = Engine[0x37522AE910C327](f18_local14, f18_local2)
 			local f18_local22 = CoD.WeaponAttachmentsUtility.GetWeaponAttachmentAttributes(f18_local5, f18_local15, f18_local2, f18_local9, f18_local10)
 			local f18_local23 = CoD.CACUtility.EmptyItemIndex
@@ -375,15 +375,15 @@ CoD.WeaponAttachmentsUtility.GetWeaponAttachmentList = function(f18_arg0, f18_ar
 				f18_local25 = CoD.WeaponAttachmentsUtility.GetAttachmentIndexForWeaponAttachmentRef(f18_local5, f18_local26, f18_local2)
 			end
 			local f18_local27 = CoD.WeaponAttachmentsUtility.IsAttachmentUpgrade(f18_local6, f18_local15)
-			local f18_local28 = f18_local21 == Enum[0x7420BCDBDE17A84][0x6EE211053211305]
-			local f18_local29 = Engine[0x93ABA160B5D7323](f18_local5, Engine[0x58B87258E0EBAD0](f18_local15), false)
+			local f18_local28 = f18_local21 == Enum[@"eattachmentgroup"][@"hash_26EE211053211305"]
+			local f18_local29 = Engine[@"hash_793ABA160B5D7323"](f18_local5, Engine[@"getattachmentindexbyref"](f18_local15), false)
 			local f18_local30 = nil
 			if f18_local29 then
 				f18_local30 = CoD.FillerWidget140_90
 			elseif f18_local27 then
 				f18_local30 = CoD.AttachmentUpgradeSlotContainer
 			elseif f18_local28 then
-				if f18_local2 == Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5] then
+				if f18_local2 == Enum[@"emodes"][@"mode_multiplayer"] then
 					f18_local30 = CoD.WeaponAttachmentsUtility.GetUberAttachmentWidget
 				else
 					f18_local30 = CoD.UberAttachmentSlot
@@ -406,7 +406,7 @@ CoD.WeaponAttachmentsUtility.GetWeaponAttachmentList = function(f18_arg0, f18_ar
 					isUberAttachment = f18_local28,
 					upgradedAttachmentIndex = f18_local25,
 					weaponAttributes = f18_local22,
-					description = Engine[0xF9F1239CFD921FE](f18_local19),
+					description = Engine[@"hash_4F9F1239CFD921FE"](f18_local19),
 					cautionText = CoD.WeaponAttachmentsUtility.GetAttachmentCautionText(f18_arg0, f18_local1, f18_local4, f18_local5, f18_local11, f18_local2),
 					stateLeft = true,
 					attachmentInFocus = false,
@@ -466,7 +466,7 @@ DataSources.WeaponAttachments = ListHelper_SetupDataSource(
 				local f19_local14 = f19_local19.models.weaponIndex
 				local f19_local15 = f19_local19.models.itemIndex
 				local f19_local16 = f19_local19.models.attachmentRef
-				local f19_local17 = Engine[0x93ABA160B5D7323](f19_local14, Engine[0x58B87258E0EBAD0](f19_local16), false)
+				local f19_local17 = Engine[@"hash_793ABA160B5D7323"](f19_local14, Engine[@"getattachmentindexbyref"](f19_local16), false)
 				f19_local19.models.weaponAttributes = CoD.WeaponAttachmentsUtility.GetWeaponAttachmentAttributes(f19_local14, f19_local16, f19_local1, f19_local9, f19_local10)
 				f19_local19.models.cautionText = CoD.WeaponAttachmentsUtility.GetAttachmentCautionText(f19_arg0, f19_local0, f19_local3, f19_local14, f19_local15, f19_local1)
 				f19_local19.models.isRestricted = f19_local17
@@ -477,7 +477,7 @@ DataSources.WeaponAttachments = ListHelper_SetupDataSource(
 	false,
 	{
 		getModelForAttachmentIndex = function(f21_arg0, f21_arg1)
-			local f21_local0 = Engine[0x4DF5CFBC1771947](f21_arg0)
+			local f21_local0 = Engine[@"getmodelforcontroller"](f21_arg0)
 			f21_local0 = f21_local0.WeaponAttachments
 			if f21_local0 and f21_local0[f21_arg1] then
 				return f21_local0[f21_arg1]
@@ -490,12 +490,12 @@ CoD.WeaponAttachmentsUtility.UpdateAttachmentFilter = function(f22_arg0, f22_arg
 	local f22_local0 = CoD.BaseUtility.GetMenuAttachmentFilter(f22_arg0)
 	local f22_local1 = function(f23_arg0)
 		if f22_local0 == "optic" then
-			return f23_arg0 == Enum[0x7420BCDBDE17A84][0x6AC43DB9B6634DA]
+			return f23_arg0 == Enum[@"eattachmentgroup"][@"attachment_group_optic"]
 		elseif f22_local0 == "uber" then
-			return f23_arg0 == Enum[0x7420BCDBDE17A84][0x6EE211053211305]
+			return f23_arg0 == Enum[@"eattachmentgroup"][@"hash_26EE211053211305"]
 		else
 			local f23_local0
-			if f23_arg0 == Enum[0x7420BCDBDE17A84][0x6AC43DB9B6634DA] or f23_arg0 == Enum[0x7420BCDBDE17A84][0x6EE211053211305] then
+			if f23_arg0 == Enum[@"eattachmentgroup"][@"attachment_group_optic"] or f23_arg0 == Enum[@"eattachmentgroup"][@"hash_26EE211053211305"] then
 				f23_local0 = false
 			else
 				f23_local0 = true
@@ -644,7 +644,7 @@ CoD.WeaponAttachmentsUtility.CenterAttachmentLayout = function(f28_arg0, f28_arg
 	f28_arg3:setLeftRight(0.5, 0.5, -f28_local4, f28_local4)
 end
 CoD.WeaponAttachmentsUtility.GetAttachmentSlotForItemIndex = function(f29_arg0, f29_arg1, f29_arg2, f29_arg3, f29_arg4)
-	local f29_local0 = Engine[0xED9C4D9D6233895](f29_arg0, f29_arg2, f29_arg4)
+	local f29_local0 = Engine[@"getcustomclasscacroot"](f29_arg0, f29_arg2, f29_arg4)
 	if f29_local0 then
 		for f29_local4, f29_local5 in ipairs(f29_arg3) do
 			local f29_local6 = LUI.getTableFromPath(CoD.CACUtility.GetDDLPathForModelPath(f29_local0, f29_local5), f29_local0)
@@ -660,7 +660,7 @@ CoD.WeaponAttachmentsUtility.ValidateUpgradeAttachmentLoadoutHelper = function(f
 	if f30_local0 <= CoD.CACUtility.EmptyItemIndex then
 		return
 	end
-	local f30_local1 = Engine[0x2964239F2151F6F](f30_local0, f30_arg3)
+	local f30_local1 = Engine[@"getunlockableitemkvpinfo"](f30_local0, f30_arg3)
 	local f30_local2 = CoD.CACUtility.GetAttachmentListForSlot(f30_arg2)
 	local f30_local3 = f30_arg1.classNum:get()
 	for f30_local8, f30_local9 in ipairs(f30_local2) do
@@ -699,7 +699,7 @@ CoD.WeaponAttachmentsUtility.SetupAttachmentDescriptionFlyouts = function(f32_ar
 			f32_local0 = f32_local2[f32_local4].itemIndex:get()
 			f32_local1 = "WeaponAttachments"
 		end
-		local f32_local2 = Engine[0x4DF5CFBC1771947](f32_arg2)
+		local f32_local2 = Engine[@"getmodelforcontroller"](f32_arg2)
 		f32_local2 = f32_local2[f32_local1]
 		local f32_local3 = 1
 		local f32_local4 = f32_local2[f32_local3]
@@ -713,7 +713,7 @@ CoD.WeaponAttachmentsUtility.SetupAttachmentDescriptionFlyouts = function(f32_ar
 				UpdateState(f32_local5, {
 					controller = f32_arg2,
 				})
-				local f32_local6 = Engine[0x4DF5CFBC1771947](f32_arg2)
+				local f32_local6 = Engine[@"getmodelforcontroller"](f32_arg2)
 				local f32_local7 = f32_local6:create("WeaponAttachmentFlyout.entNum")
 				local f32_local8 = function(f33_arg0, f33_arg1)
 					local f33_local0 = f33_arg1:get()
@@ -756,14 +756,14 @@ CoD.WeaponAttachmentsUtility.SetupUberHintText = function(f37_arg0, f37_arg1, f3
 		local f37_local5 = CoD.BonuscardUtility.IsOperatorModBonuscardEquipped(f37_local0, f37_local2, f37_local1)
 		local f37_local6 = 0x0
 		if not f37_local5 then
-			f37_local6 = 0x7A1F89C3CFA8A86
+			f37_local6 = @"hash_17A1F89C3CFA8A86"
 			if f37_local2 == "secondary" then
 				f37_local6 = 0x15D4FED971424A
 			end
 		elseif not f37_local4 then
-			f37_local6 = 0xB6269F85047C8B4
+			f37_local6 = @"hash_2B6269F85047C8B4"
 		end
-		f37_arg1:setText(Engine[0xF9F1239CFD921FE](f37_local6))
+		f37_arg1:setText(Engine[@"hash_4F9F1239CFD921FE"](f37_local6))
 	end
 end
 CoD.WeaponAttachmentsUtility.CanEquipUberAttachmentInSlot = function(f38_arg0)
@@ -791,7 +791,7 @@ CoD.WeaponAttachmentsUtility.IsAttachmentOptic = function(f39_arg0, f39_arg1)
 		if f39_local1 == nil or f39_local2 == nil then
 			return false
 		else
-			return Engine[0x689E378B0101DCE](f39_local2, f39_local1)
+			return Engine[@"isoptic"](f39_local2, f39_local1)
 		end
 	end
 end
@@ -843,7 +843,7 @@ end
 CoD.WeaponAttachmentsUtility.DoesWeaponHaveUberAttachment = function(f43_arg0, f43_arg1)
 	local f43_local0, f43_local1, f43_local2 = CoD.BaseUtility.GetMenuModelModeLoadoutSlot(f43_arg0)
 	if f43_local0 and f43_local0[f43_local2] then
-		return CoD.CACUtility.EmptyItemIndex < Engine[0xEF453A0A31D191A](f43_local0[f43_local2].itemIndex:get(), f43_local1)
+		return CoD.CACUtility.EmptyItemIndex < Engine[@"hash_3EF453A0A31D191A"](f43_local0[f43_local2].itemIndex:get(), f43_local1)
 	else
 		return false
 	end
@@ -854,9 +854,9 @@ end
 CoD.WeaponAttachmentsUtility.UpdateAttachmentHeader = function(f45_arg0, f45_arg1)
 	local f45_local0 = CoD.BaseUtility.GetMenuAttachmentFilter(f45_arg0)
 	if f45_local0 == "optic" then
-		f45_arg1 = 0xBB87386985BA15F
+		f45_arg1 = @"hash_2BB87386985BA15F"
 	elseif f45_local0 == "uber" then
-		f45_arg1 = 0x912DE50663D611C
+		f45_arg1 = @"hash_6912DE50663D611C"
 	end
 	return f45_arg1
 end

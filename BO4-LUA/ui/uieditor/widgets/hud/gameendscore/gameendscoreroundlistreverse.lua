@@ -36,7 +36,7 @@ CoD.GameEndScoreRoundListReverse.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	end)
 	local f1_local2 = RoundPipList
 	local Score = RoundPipList.subscribeToModel
-	local f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	Score(f1_local2, f1_local4["gameScore.currentState"], function(f4_arg0)
 		f1_arg0:updateElementState(RoundPipList, {
 			name = "model_validation",
@@ -72,7 +72,7 @@ CoD.GameEndScoreRoundListReverse.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	RoundPipList:setYRot(180)
 	RoundPipList:setWidgetType(CoD.GameEndScoreRoundPip)
 	RoundPipList:setSpacing(47)
-	RoundPipList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	RoundPipList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	RoundPipList:subscribeToGlobalModel(f1_arg1, "GameScore", "roundWinLimit", function(model)
 		local f7_local0 = model:get()
 		if f7_local0 ~= nil then
@@ -85,9 +85,9 @@ CoD.GameEndScoreRoundListReverse.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	Score:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	Score:setText(4)
 	Score:setTTF("0arame_mono_stencil")
-	Score:setMaterial(LUI.UIImage.GetCachedMaterial(0x71E049B161CD00A))
-	Score:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	Score:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Score:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_171E049B161CD00A"))
+	Score:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	Score:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(Score)
 	self.Score = Score
 	self:mergeStateConditions({
@@ -100,7 +100,7 @@ CoD.GameEndScoreRoundListReverse.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	})
 	f1_local4 = self
 	f1_local2 = self.subscribeToModel
-	local f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local2(f1_local4, f1_local5["gameScore.roundWinLimit"], function(f9_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -112,7 +112,7 @@ CoD.GameEndScoreRoundListReverse.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	end, false)
 	f1_local4 = self
 	f1_local2 = self.subscribeToModel
-	f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local2(f1_local4, f1_local5.forceScoreboard, function(f10_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -124,7 +124,7 @@ CoD.GameEndScoreRoundListReverse.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	end, false)
 	f1_local4 = self
 	f1_local2 = self.subscribeToModel
-	f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local2(f1_local4, f1_local5["gameScore.currentState"], function(f11_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -136,50 +136,50 @@ CoD.GameEndScoreRoundListReverse.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	end, false)
 	f1_local4 = self
 	f1_local2 = self.subscribeToModel
-	f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local2(f1_local4, f1_local5["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2]], function(f12_arg0)
+	f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local2(f1_local4, f1_local5["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"]], function(f12_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f12_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"],
 		})
 	end, false)
 	f1_local4 = self
 	f1_local2 = self.subscribeToModel
-	f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local2(f1_local4, f1_local5["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x1CDCB451655ABCF]], function(f13_arg0)
+	f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local2(f1_local4, f1_local5["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_final_killcam"]], function(f13_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f13_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x1CDCB451655ABCF],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_final_killcam"],
 		})
 	end, false)
 	f1_local4 = self
 	f1_local2 = self.subscribeToModel
-	f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local2(f1_local4, f1_local5["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F]], function(f14_arg0)
+	f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local2(f1_local4, f1_local5["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_play_of_the_match"]], function(f14_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f14_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_play_of_the_match"],
 		})
 	end, false)
 	f1_local4 = self
 	f1_local2 = self.subscribeToModel
-	f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local2(f1_local4, f1_local5["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04]], function(f15_arg0)
+	f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local2(f1_local4, f1_local5["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]], function(f15_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f15_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"],
 		})
 	end, false)
 	RoundPipList.id = "RoundPipList"
@@ -216,7 +216,7 @@ CoD.GameEndScoreRoundListReverse.__clipsPerState = {
 			f18_arg0.RoundPipList:setAlpha(0)
 			f18_arg0.clipFinished(f18_arg0.RoundPipList)
 			local f18_local0 = function(f19_arg0)
-				f18_arg0.Score:beginAnimation(450, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f18_arg0.Score:beginAnimation(450, Enum[@"luitween"][@"luitween_ease_in"])
 				f18_arg0.Score:setAlpha(1)
 				f18_arg0.Score:registerEventHandler("interrupted_keyframe", f18_arg0.clipInterrupted)
 				f18_arg0.Score:registerEventHandler("transition_complete_keyframe", f18_arg0.clipFinished)

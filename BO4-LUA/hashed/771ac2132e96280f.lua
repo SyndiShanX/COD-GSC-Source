@@ -26,8 +26,8 @@ CoD.ItemHistoryReservesHeader.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	Category:setAlpha(0)
 	Category:setTTF("ttmussels_regular")
 	Category:setLetterSpacing(2)
-	Category:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	Category:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	Category:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	Category:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	Category:linkToElementModel(self, "rarity", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then

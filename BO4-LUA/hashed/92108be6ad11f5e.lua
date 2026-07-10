@@ -14,7 +14,7 @@ CoD.ItemShopPreviewButtonInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Strip = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	Strip:setAlpha(0.8)
-	Strip:setMaterial(LUI.UIImage.GetCachedMaterial(0x67D1E3A3D2D1BF))
+	Strip:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_saturation_normal"))
 	Strip:setShaderVector(0, 0.7, 0, 0, 0)
 	Strip:linkToElementModel(self, "rarity", true, function(model)
 		local f2_local0 = model:get()
@@ -31,22 +31,22 @@ CoD.ItemShopPreviewButtonInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	self.StripDarken = StripDarken
 	local LED = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	LED:setRGB(0, 0, 0)
-	LED:setImage(RegisterImage(0x4B6FFA90272070E))
-	LED:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	LED:setImage(RegisterImage(@"uie_ui_menu_store_repeat_dot_pattern"))
+	LED:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	LED:setShaderVector(0, 0, 0, 0, 0)
 	LED:setupNineSliceShader(24, 24)
 	self:addElement(LED)
 	self.LED = LED
 	local LED2 = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	LED2:setRGB(0, 0, 0)
-	LED2:setImage(RegisterImage(0x4B6FFA90272070E))
-	LED2:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	LED2:setImage(RegisterImage(@"uie_ui_menu_store_repeat_dot_pattern"))
+	LED2:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	LED2:setShaderVector(0, 0, 0, 0, 0)
 	LED2:setupNineSliceShader(24, 24)
 	self:addElement(LED2)
 	self.LED2 = LED2
 	local Border = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	Border:setMaterial(LUI.UIImage.GetCachedMaterial(0xE7BDCB879A5176D))
+	Border:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_3E7BDCB879A5176D"))
 	Border:setShaderVector(0, 0, 0, 0, 0)
 	Border:setShaderVector(1, 0, 0, 0, 0)
 	Border:setupNineSliceShader(1, 1)
@@ -79,16 +79,16 @@ CoD.ItemShopPreviewButtonInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	self.Image = Image
 	local Text = LUI.UIText.new(0, 0, 9, 217, 0, 0, 282.5, 300.5)
 	Text:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
-	Text:setText(LocalizeToUpperString(0xDE6A90417A1818A))
+	Text:setText(LocalizeToUpperString(@"hash_3DE6A90417A1818A"))
 	Text:setTTF("ttmussels_regular")
 	Text:setLetterSpacing(1)
-	Text:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	Text:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	Text:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	Text:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	self:addElement(Text)
 	self.Text = Text
 	local VideoPlayIcon = LUI.UIImage.new(0.5, 0.5, -32, 32, 0.5, 0.5, -42, 22)
 	VideoPlayIcon:setAlpha(0.58)
-	VideoPlayIcon:setImage(RegisterImage(0x28C77CAF49CB973))
+	VideoPlayIcon:setImage(RegisterImage(@"hash_528C77CAF49CB973"))
 	self:addElement(VideoPlayIcon)
 	self.VideoPlayIcon = VideoPlayIcon
 	local CommonButtonOutline = CoD.CommonButtonOutline.new(f1_arg0, f1_arg1, 0, 0, 0, 225, 0, 0, 0, 308)
@@ -108,7 +108,7 @@ CoD.ItemShopPreviewButtonInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 				local f7_local0 = IsPC()
 				if f7_local0 then
 					if not CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "allowFrozenMoment", true) and not CoD.ModelUtility.IsSelfModelValueNonEmptyString(element, f1_arg1, "movieName") then
-						f7_local0 = CoD.ModelUtility.IsSelfModelValueEqualToEitherValue(self, f1_arg1, "itemCategory", 0x73452998C43A16, 0xAD68520D53FDBFB)
+						f7_local0 = CoD.ModelUtility.IsSelfModelValueEqualToEitherValue(self, f1_arg1, "itemCategory", @"single_weapon_charm", @"hash_1AD68520D53FDBFB")
 					else
 						f7_local0 = false
 					end
@@ -119,7 +119,7 @@ CoD.ItemShopPreviewButtonInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 		{
 			stateName = "CamoOrDeathFXPreview",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualToEitherValue(self, f1_arg1, "itemCategory", 0x73452998C43A16, 0xAD68520D53FDBFB)
+				return CoD.ModelUtility.IsSelfModelValueEqualToEitherValue(self, f1_arg1, "itemCategory", @"single_weapon_charm", @"hash_1AD68520D53FDBFB")
 			end,
 		},
 		{

@@ -16,7 +16,7 @@ CoD.WaypointHardpoint.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local ProgressBarBGBlur = LUI.UIImage.new(0.5, 0.5, -179, 179, 0.5, 0.5, 61, 79)
-	ProgressBarBGBlur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	ProgressBarBGBlur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	ProgressBarBGBlur:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(ProgressBarBGBlur)
 	self.ProgressBarBGBlur = ProgressBarBGBlur
@@ -167,13 +167,13 @@ CoD.WaypointHardpoint.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	WaypointText:linkToElementModel(self, "text", true, function(model)
 		local f20_local0 = model:get()
 		if f20_local0 ~= nil then
-			WaypointText.WaypointTextWithBG.text:setText(Engine[0xF9F1239CFD921FE](f20_local0))
+			WaypointText.WaypointTextWithBG.text:setText(Engine[@"hash_4F9F1239CFD921FE"](f20_local0))
 		end
 	end)
 	WaypointText:linkToElementModel(self, "distanceText", true, function(model)
 		local f21_local0 = model:get()
 		if f21_local0 ~= nil then
-			WaypointText.DistanceTextWithBG.text:setText(LocalizeIntoStringIfNotEmpty(0x7235825812D46C6, f21_local0))
+			WaypointText.DistanceTextWithBG.text:setText(LocalizeIntoStringIfNotEmpty(@"hash_37235825812D46C6", f21_local0))
 		end
 	end)
 	self:addElement(WaypointText)
@@ -214,8 +214,8 @@ CoD.WaypointHardpoint.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	local WaypointPatternClock = LUI.UIImage.new(0.5, 0.5, -37, 39, 0.5, 0.5, -38, 38)
 	WaypointPatternClock:setRGB(0.25, 0.25, 0.25)
 	WaypointPatternClock:setAlpha(0.92)
-	WaypointPatternClock:setImage(RegisterImage(0x159D9B7B7294C91))
-	WaypointPatternClock:setMaterial(LUI.UIImage.GetCachedMaterial(0xD5CA1A25ED87F4F))
+	WaypointPatternClock:setImage(RegisterImage(@"uie_ui_hud_core_waypoint_led"))
+	WaypointPatternClock:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_clock_normal"))
 	WaypointPatternClock:setShaderVector(1, 0.5, 0, 0, 0)
 	WaypointPatternClock:setShaderVector(2, 0.5, 0, 0, 0)
 	WaypointPatternClock:setShaderVector(3, 0, 0, 0, 0)
@@ -358,7 +358,7 @@ CoD.WaypointHardpoint.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	end)
 	local f1_local14 = self
 	local f1_local15 = self.subscribeToModel
-	local f1_local16 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local16 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local15(f1_local14, f1_local16["interactivePrompt.activeObjectiveID"], function(f44_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -370,7 +370,7 @@ CoD.WaypointHardpoint.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	end, false)
 	f1_local14 = self
 	f1_local15 = self.subscribeToModel
-	f1_local16 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local16 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local15(f1_local14, f1_local16["hudItems.hacked"], function(f45_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -442,50 +442,50 @@ CoD.WaypointHardpoint.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	end, false)
 	f1_local14 = self
 	f1_local15 = self.subscribeToModel
-	f1_local16 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local15(f1_local14, f1_local16["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x6FFF566DCC09BBD]], function(f51_arg0)
+	f1_local16 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local15(f1_local14, f1_local16["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_spectating_client"]], function(f51_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f51_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x6FFF566DCC09BBD],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_spectating_client"],
 		})
 	end, false)
 	f1_local14 = self
 	f1_local15 = self.subscribeToModel
-	f1_local16 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local15(f1_local14, f1_local16["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xADC477DDE486DD7]], function(f52_arg0)
+	f1_local16 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local15(f1_local14, f1_local16["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_hud_visible"]], function(f52_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f52_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xADC477DDE486DD7],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_hud_visible"],
 		})
 	end, false)
 	f1_local14 = self
 	f1_local15 = self.subscribeToModel
-	f1_local16 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local15(f1_local14, f1_local16["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x59333FC97F7870]], function(f53_arg0)
+	f1_local16 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local15(f1_local14, f1_local16["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_emp_active"]], function(f53_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f53_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x59333FC97F7870],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_emp_active"],
 		})
 	end, false)
 	f1_local14 = self
 	f1_local15 = self.subscribeToModel
-	f1_local16 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local15(f1_local14, f1_local16["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x1C630DB86D235A5]], function(f54_arg0)
+	f1_local16 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local15(f1_local14, f1_local16["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_selecting_locational_killstreak"]], function(f54_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f54_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x1C630DB86D235A5],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_selecting_locational_killstreak"],
 		})
 	end, false)
 	self:linkToElementModel(self, "icon", true, function(model)

@@ -10,23 +10,23 @@ CoD.ZMAARStampWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	local StampName = LUI.UIText.new(0, 0, -33, 291, 0, 0, 26.5, 51.5)
 	StampName:setText(CoD.AARUtility.GetAARStamp(f1_arg1, "RED GREEN BLUE PURPLE"))
 	StampName:setTTF("skorzhen")
-	StampName:setMaterial(LUI.UIImage.GetCachedMaterial(0x71E049B161CD00A))
+	StampName:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_171E049B161CD00A"))
 	StampName:setLetterSpacing(2)
-	StampName:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
+	StampName:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
 	StampName:setBackingType(2)
 	StampName:setBackingXPadding(24)
 	StampName:setBackingYPadding(8)
-	StampName:setBackingImage(RegisterImage(0xDE5A7BE7FE903F2))
+	StampName:setBackingImage(RegisterImage(@"uie_ui_hud_zm_aar_obj_bg"))
 	self:addElement(StampName)
 	self.StampName = StampName
 	local Stamp = LUI.UIImage.new(0, 0, 290, 340, 0, 0, 15, 65)
-	Stamp:setImage(RegisterImage(0x51A5D15E57F49CE))
+	Stamp:setImage(RegisterImage(@"hash_151A5D15E57F49CE"))
 	self:addElement(Stamp)
 	self.Stamp = Stamp
 	local URL = LUI.UIText.new(0, 0, 98, 298, 0, 0, 49, 65)
-	URL:setText(Engine[0xF9F1239CFD921FE](0xD8599B289858EC4))
+	URL:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_4D8599B289858EC4"))
 	URL:setTTF("dinnext_regular")
-	URL:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
+	URL:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
 	self:addElement(URL)
 	self.URL = URL
 	self:mergeStateConditions({
@@ -76,7 +76,7 @@ CoD.ZMAARStampWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	})
 	local f1_local4 = self
 	local f1_local5 = self.subscribeToModel
-	local f1_local6 = Engine[0x8DF2E5447F384B9]()
+	local f1_local6 = Engine[@"getglobalmodel"]()
 	f1_local5(f1_local4, f1_local6["lobbyRoot.lobbyNav"], function(f4_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -88,7 +88,7 @@ CoD.ZMAARStampWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	end, false)
 	f1_local4 = self
 	f1_local5 = self.subscribeToModel
-	f1_local6 = Engine[0x8DF2E5447F384B9]()
+	f1_local6 = Engine[@"getglobalmodel"]()
 	f1_local5(f1_local4, f1_local6["lobbyRoot.lobbyNetworkMode"], function(f5_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -100,7 +100,7 @@ CoD.ZMAARStampWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	end, false)
 	f1_local4 = self
 	f1_local5 = self.subscribeToModel
-	f1_local6 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local6 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local5(f1_local4, f1_local6["AAR.activeTab"], function(f6_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -154,11 +154,11 @@ CoD.ZMAARStampWidget.__clipsPerState = {
 						f12_arg0:beginAnimation(500)
 						f12_arg0:registerEventHandler("transition_complete_keyframe", f9_arg0.clipFinished)
 					end
-					f11_arg0:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f11_arg0:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 					f11_arg0:setAlpha(1)
 					f11_arg0:registerEventHandler("transition_complete_keyframe", f11_local0)
 				end
-				f9_arg0.Stamp:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f9_arg0.Stamp:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 				f9_arg0.Stamp:setAlpha(0.5)
 				f9_arg0.Stamp:registerEventHandler("interrupted_keyframe", f9_arg0.clipInterrupted)
 				f9_arg0.Stamp:registerEventHandler("transition_complete_keyframe", f10_local0)
@@ -182,11 +182,11 @@ CoD.ZMAARStampWidget.__clipsPerState = {
 						f16_arg0:beginAnimation(500)
 						f16_arg0:registerEventHandler("transition_complete_keyframe", f13_arg0.clipFinished)
 					end
-					f15_arg0:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f15_arg0:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 					f15_arg0:setAlpha(1)
 					f15_arg0:registerEventHandler("transition_complete_keyframe", f15_local0)
 				end
-				f13_arg0.Stamp:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f13_arg0.Stamp:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 				f13_arg0.Stamp:setAlpha(0.5)
 				f13_arg0.Stamp:registerEventHandler("interrupted_keyframe", f13_arg0.clipInterrupted)
 				f13_arg0.Stamp:registerEventHandler("transition_complete_keyframe", f14_local0)

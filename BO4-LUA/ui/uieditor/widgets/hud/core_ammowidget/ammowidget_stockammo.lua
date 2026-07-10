@@ -32,7 +32,7 @@ CoD.AmmoWidget_StockAmmo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	clipGrid:setWidgetType(CoD.AmmoWidget_StockAmmoPip)
 	clipGrid:setHorizontalCount(5)
 	clipGrid:setSpacing(-3)
-	clipGrid:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	clipGrid:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	clipGrid:setDataSource("CurrentWeaponStockAmmo")
 	clipGrid:subscribeToGlobalModel(f1_arg1, "CurrentWeapon", "ammoStock", function(model)
 		local f3_local0 = clipGrid
@@ -56,7 +56,7 @@ CoD.AmmoWidget_StockAmmo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	singleShotGrid:setHorizontalCount(6)
 	singleShotGrid:setVerticalCount(3)
 	singleShotGrid:setSpacing(1)
-	singleShotGrid:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	singleShotGrid:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	singleShotGrid:setDataSource("CurrentWeaponSingleShotAmmo")
 	singleShotGrid:subscribeToGlobalModel(f1_arg1, "CurrentWeapon", "ammoStock", function(model)
 		local f5_local0 = singleShotGrid
@@ -112,7 +112,7 @@ CoD.AmmoWidget_StockAmmo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 		{
 			stateName = "TankGunWZ",
 			condition = function(menu, element, event)
-				return IsWarzone() and CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "equippedWeaponReference", 0x8A462F65A5A2A09)
+				return IsWarzone() and CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "equippedWeaponReference", @"hash_78A462F65A5A2A09")
 			end,
 		},
 	})
@@ -175,7 +175,7 @@ CoD.AmmoWidget_StockAmmo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	end, false)
 	f1_local8 = self
 	f1_local9 = self.subscribeToModel
-	f1_local10 = Engine[0x8DF2E5447F384B9]()
+	f1_local10 = Engine[@"getglobalmodel"]()
 	f1_local9(f1_local8, f1_local10["lobbyRoot.lobbyNav"], function(f18_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

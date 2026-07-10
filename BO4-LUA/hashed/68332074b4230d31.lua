@@ -16,7 +16,7 @@ CoD.CharacterSelection_CharacterInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	CharacterFullName:setText("")
 	CharacterFullName:setTTF("notosans_regular")
 	CharacterFullName:setLetterSpacing(10)
-	CharacterFullName:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	CharacterFullName:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(CharacterFullName)
 	self.CharacterFullName = CharacterFullName
 	local CommonSocialArrow = CoD.CharacterSelection_CharacterInfoSeparator.new(f1_arg0, f1_arg1, 0, 0, -27, 400, 0, 0, 40, 52)
@@ -26,8 +26,8 @@ CoD.CharacterSelection_CharacterInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	availabilityText:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	availabilityText:setText("")
 	availabilityText:setTTF("ttmussels_regular")
-	availabilityText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	availabilityText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	availabilityText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	availabilityText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(availabilityText)
 	self.availabilityText = availabilityText
 	local FeaturedGamesList = CoD.CharacterSelection_FeaturedGamesList.new(f1_arg0, f1_arg1, 0, 0, 0, 320, 0, 0, 80, 144)
@@ -123,7 +123,7 @@ CoD.CharacterSelection_CharacterInfo.__clipsPerState = {
 			f8_local1(f8_arg0.availabilityText)
 			local f8_local2 = function(f13_arg0)
 				local f13_local0 = function(f14_arg0)
-					f14_arg0:beginAnimation(199, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f14_arg0:beginAnimation(199, Enum[@"luitween"][@"luitween_ease_in"])
 					f14_arg0:setAlpha(1)
 					f14_arg0:registerEventHandler("transition_complete_keyframe", f8_arg0.clipFinished)
 				end

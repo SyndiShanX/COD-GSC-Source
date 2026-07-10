@@ -33,8 +33,8 @@ CoD.LayerIcon.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 	self.layerIcon = layerIcon
 	local emptyLayerIcon = LUI.UIImage.new(0.5, 0.5, -24, 24, 0.5, 0.5, -24, 24)
 	emptyLayerIcon:setAlpha(0)
-	emptyLayerIcon:setImage(RegisterImage(0x1B97A54D41F4B80))
-	emptyLayerIcon:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	emptyLayerIcon:setImage(RegisterImage(@"uie_ui_menu_common_add_plus"))
+	emptyLayerIcon:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	emptyLayerIcon:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(emptyLayerIcon)
 	self.emptyLayerIcon = emptyLayerIcon

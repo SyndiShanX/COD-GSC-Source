@@ -17,16 +17,16 @@ CoD.HUD_ZM_Arcade_Multiplier.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	self.ZmFxSpark2Ext = ZmFxSpark2Ext
 	local Multiplier = LUI.UIText.new(0, 0, 0, 218, 0.01, 0.01, 0, 39)
 	Multiplier:setTTF("skorzhen")
-	Multiplier:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Multiplier:setAlignment(Enum[0x7A5123B654282D2][0x6ED4298C93DC5ED])
+	Multiplier:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Multiplier:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
 	Multiplier:setBackingType(2)
 	Multiplier:setBackingXPadding(5)
 	Multiplier:setBackingYPadding(3)
-	Multiplier:setBackingImage(RegisterImage(0x75D661B612187DF))
+	Multiplier:setBackingImage(RegisterImage(@"hash_675D661B612187DF"))
 	Multiplier:linkToElementModel(self, "multiplier_count", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			Multiplier:setText(LocalizeIntoString(0x674D175D3480E09, f2_local0))
+			Multiplier:setText(LocalizeIntoString(@"mp/multiplier_x", f2_local0))
 		end
 	end)
 	self:addElement(Multiplier)
@@ -35,8 +35,8 @@ CoD.HUD_ZM_Arcade_Multiplier.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	Image:setRGB(1, 0.84, 0)
 	Image:setAlpha(0)
 	Image:setZRot(90)
-	Image:setImage(RegisterImage(0x5BE416E17DAB33B))
-	Image:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Image:setImage(RegisterImage(@"uie_t7_core_hud_mapwidget_panelglow"))
+	Image:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Image)
 	self.Image = Image
 	local flare12 = CoD.Hud_ZM_Flare_Multiplier.new(f1_arg0, f1_arg1, 0, 0, -728, 184, 0, 0, -509.5, 51.5)

@@ -9,17 +9,17 @@ CoD.AARSubStat.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_ar
 	self.soundSet = "none"
 	local ScoreLabel = LUI.UIText.new(0, 0, 0, 231, 0, 0, 0, 21)
 	ScoreLabel:setRGB(0.9, 0.89, 0.78)
-	ScoreLabel:setText(Engine[0xF9F1239CFD921FE](0x2E07839FFD3A082))
+	ScoreLabel:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_72E07839FFD3A082"))
 	ScoreLabel:setTTF("dinnext_regular")
-	ScoreLabel:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	ScoreLabel:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	ScoreLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	ScoreLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(ScoreLabel)
 	self.ScoreLabel = ScoreLabel
 	local Score = LUI.UIText.new(0, 0, 241, 419, 0, 0, 0, 21)
 	Score:setRGB(0.9, 0.89, 0.78)
 	Score:setTTF("dinnext_regular")
-	Score:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Score:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	Score:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Score:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	Score:linkToElementModel(self, "objectiveScore", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then

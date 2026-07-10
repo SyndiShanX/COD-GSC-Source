@@ -26,8 +26,8 @@ CoD.BM_ContractsFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	self.TrayLeft = LUI.UIElement.createFake()
 	local NoiseBackingRight = LUI.UIImage.new(0, 1, 0, 0, -0, 1, -30, -30)
 	NoiseBackingRight:setAlpha(0.1)
-	NoiseBackingRight:setImage(RegisterImage(0x34839E8065B1E53))
-	NoiseBackingRight:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	NoiseBackingRight:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	NoiseBackingRight:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	NoiseBackingRight:setShaderVector(0, 0, 0, 0, 0)
 	NoiseBackingRight:setupNineSliceShader(196, 88)
 	self:addElement(NoiseBackingRight)
@@ -51,10 +51,10 @@ CoD.BM_ContractsFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 		elseif element.super.gainFocus then
 			f4_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f4_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(Contract2, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(Contract2, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if IsElementInState(self.Contract2, "ContractSlot") then
 			OpenOverlay(self, "BlackMarketContractSelect", controller, {
 				_contractSlot = 2,
@@ -66,7 +66,7 @@ CoD.BM_ContractsFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 		end
 	end, function(element, menu, controller)
 		if IsElementInState(self.Contract2, "ContractSlot") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		else
 			return false
@@ -93,10 +93,10 @@ CoD.BM_ContractsFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 		elseif element.super.gainFocus then
 			f9_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f9_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(Contract1, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(Contract1, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if IsElementInState(self.Contract1, "ContractSlot") then
 			OpenOverlay(self, "BlackMarketContractSelect", controller, {
 				_contractSlot = 1,
@@ -108,7 +108,7 @@ CoD.BM_ContractsFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 		end
 	end, function(element, menu, controller)
 		if IsElementInState(self.Contract1, "ContractSlot") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		else
 			return false
@@ -150,21 +150,21 @@ CoD.BM_ContractsFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	self.DailyContract = DailyContract
 	local DailyContracts = LUI.UIText.new(0.5, 0.5, -874.5, -331.5, 0.5, 0.5, -413.5, -383.5)
 	DailyContracts:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
-	DailyContracts:setText(LocalizeToUpperString(0xB27DDDD116F4EFF))
+	DailyContracts:setText(LocalizeToUpperString(@"menu/daily_contract"))
 	DailyContracts:setTTF("ttmussels_demibold")
 	DailyContracts:setLetterSpacing(2)
-	DailyContracts:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	DailyContracts:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(DailyContracts)
 	self.DailyContracts = DailyContracts
 	local DailyContractTimer = LUI.UIText.new(0.5, 0.5, -873.5, -330.5, 0.5, 0.5, -383.5, -365.5)
 	DailyContractTimer:setRGB(ColorSet.StoreAvailabilityTimer.r, ColorSet.StoreAvailabilityTimer.g, ColorSet.StoreAvailabilityTimer.b)
 	DailyContractTimer:setTTF("ttmussels_regular")
 	DailyContractTimer:setLetterSpacing(2)
-	DailyContractTimer:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	DailyContractTimer:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	DailyContractTimer:subscribeToGlobalModel(f1_arg1, "Contracts", "dailyExpirationTime", function(model)
 		local f16_local0 = model:get()
 		if f16_local0 ~= nil then
-			DailyContractTimer:setText(LocalizeIntoStringIfNotEmpty(0x69797CFAD4CAB0C, f16_local0))
+			DailyContractTimer:setText(LocalizeIntoStringIfNotEmpty(@"hash_669797CFAD4CAB0C", f16_local0))
 		end
 	end)
 	self:addElement(DailyContractTimer)
@@ -176,11 +176,11 @@ CoD.BM_ContractsFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	NewContractsTimer:setRGB(ColorSet.StoreAvailabilityTimer.r, ColorSet.StoreAvailabilityTimer.g, ColorSet.StoreAvailabilityTimer.b)
 	NewContractsTimer:setTTF("ttmussels_regular")
 	NewContractsTimer:setLetterSpacing(2)
-	NewContractsTimer:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	NewContractsTimer:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	NewContractsTimer:subscribeToGlobalModel(f1_arg1, "Contracts", "availableExpirationTime", function(model)
 		local f17_local0 = model:get()
 		if f17_local0 ~= nil then
-			NewContractsTimer:setText(LocalizeIntoStringIfNotEmpty(0xDFF0B6C9E6A2356, f17_local0))
+			NewContractsTimer:setText(LocalizeIntoStringIfNotEmpty(@"hash_3DFF0B6C9E6A2356", f17_local0))
 		end
 	end)
 	self:addElement(NewContractsTimer)
@@ -188,8 +188,8 @@ CoD.BM_ContractsFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	local Bracket = LUI.UIImage.new(0.5, 0.5, -124, 824, 0.5, 0.5, -394.5, -385.5)
 	Bracket:setAlpha(0.5)
 	Bracket:setZRot(180)
-	Bracket:setImage(RegisterImage(0xC325BED3F226657))
-	Bracket:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	Bracket:setImage(RegisterImage(@"hash_4C325BED3F226657"))
+	Bracket:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	Bracket:setShaderVector(0, 0, 0, 0, 0)
 	Bracket:setupNineSliceShader(16, 4)
 	self:addElement(Bracket)
@@ -242,7 +242,7 @@ CoD.BM_ContractsFrame.__clipsPerState = {
 			f24_arg0:setupElementClipCounter(5)
 			local f24_local0 = function(f25_arg0)
 				local f25_local0 = function(f26_arg0)
-					f26_arg0:beginAnimation(320, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f26_arg0:beginAnimation(320, Enum[@"luitween"][@"luitween_ease_out"])
 					f26_arg0:setAlpha(1)
 					f26_arg0:registerEventHandler("transition_complete_keyframe", f24_arg0.clipFinished)
 				end
@@ -255,7 +255,7 @@ CoD.BM_ContractsFrame.__clipsPerState = {
 			f24_local0(f24_arg0.Contract2)
 			local f24_local1 = function(f27_arg0)
 				local f27_local0 = function(f28_arg0)
-					f28_arg0:beginAnimation(320, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f28_arg0:beginAnimation(320, Enum[@"luitween"][@"luitween_ease_out"])
 					f28_arg0:setAlpha(1)
 					f28_arg0:registerEventHandler("transition_complete_keyframe", f24_arg0.clipFinished)
 				end
@@ -268,7 +268,7 @@ CoD.BM_ContractsFrame.__clipsPerState = {
 			f24_local1(f24_arg0.Contract1)
 			local f24_local2 = function(f29_arg0)
 				local f29_local0 = function(f30_arg0)
-					f30_arg0:beginAnimation(280, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f30_arg0:beginAnimation(280, Enum[@"luitween"][@"luitween_ease_out"])
 					f30_arg0:setAlpha(1)
 					f30_arg0:registerEventHandler("transition_complete_keyframe", f24_arg0.clipFinished)
 				end
@@ -281,7 +281,7 @@ CoD.BM_ContractsFrame.__clipsPerState = {
 			f24_local2(f24_arg0.DailyContract)
 			local f24_local3 = function(f31_arg0)
 				local f31_local0 = function(f32_arg0)
-					f32_arg0:beginAnimation(280, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f32_arg0:beginAnimation(280, Enum[@"luitween"][@"luitween_ease_out"])
 					f32_arg0:setAlpha(1)
 					f32_arg0:registerEventHandler("transition_complete_keyframe", f24_arg0.clipFinished)
 				end
@@ -294,7 +294,7 @@ CoD.BM_ContractsFrame.__clipsPerState = {
 			f24_local3(f24_arg0.DailyContracts)
 			local f24_local4 = function(f33_arg0)
 				local f33_local0 = function(f34_arg0)
-					f34_arg0:beginAnimation(310, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f34_arg0:beginAnimation(310, Enum[@"luitween"][@"luitween_ease_out"])
 					f34_arg0:setAlpha(1)
 					f34_arg0:registerEventHandler("transition_complete_keyframe", f24_arg0.clipFinished)
 				end

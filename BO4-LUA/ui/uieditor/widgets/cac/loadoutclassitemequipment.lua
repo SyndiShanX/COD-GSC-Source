@@ -23,7 +23,7 @@ CoD.LoadoutClassItemEquipment.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	EquipmentSlot:linkToElementModel(self, "name", true, function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
-			EquipmentSlot.ItemName.TextBox:setText(Engine[0xF9F1239CFD921FE](f4_local0))
+			EquipmentSlot.ItemName.TextBox:setText(Engine[@"hash_4F9F1239CFD921FE"](f4_local0))
 		end
 	end)
 	self:addElement(EquipmentSlot)
@@ -59,7 +59,7 @@ CoD.LoadoutClassItemEquipment.__clipsPerState = {
 			f9_arg0:__resetProperties()
 			f9_arg0:setupElementClipCounter(1)
 			local f9_local0 = function(f10_arg0)
-				f9_arg0.EquipmentSlot:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f9_arg0.EquipmentSlot:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f9_arg0.EquipmentSlot:setScale(1.05, 1.05)
 				f9_arg0.EquipmentSlot:registerEventHandler("interrupted_keyframe", f9_arg0.clipInterrupted)
 				f9_arg0.EquipmentSlot:registerEventHandler("transition_complete_keyframe", f9_arg0.clipFinished)
@@ -72,7 +72,7 @@ CoD.LoadoutClassItemEquipment.__clipsPerState = {
 			f11_arg0:__resetProperties()
 			f11_arg0:setupElementClipCounter(1)
 			local f11_local0 = function(f12_arg0)
-				f11_arg0.EquipmentSlot:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f11_arg0.EquipmentSlot:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f11_arg0.EquipmentSlot:setScale(1, 1)
 				f11_arg0.EquipmentSlot:registerEventHandler("interrupted_keyframe", f11_arg0.clipInterrupted)
 				f11_arg0.EquipmentSlot:registerEventHandler("transition_complete_keyframe", f11_arg0.clipFinished)

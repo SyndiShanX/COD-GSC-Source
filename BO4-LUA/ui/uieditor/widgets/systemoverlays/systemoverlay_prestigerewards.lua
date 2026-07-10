@@ -13,10 +13,10 @@ CoD.systemOverlay_PrestigeRewards.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local RewardsTitle = LUI.UIText.new(0, 0, 2, 515, 0, 0, 0, 24)
 	RewardsTitle:setRGB(ColorSet.T8__BEIGE__HEADER.r, ColorSet.T8__BEIGE__HEADER.g, ColorSet.T8__BEIGE__HEADER.b)
-	RewardsTitle:setText(LocalizeToUpperString(0x2ACBA21D0C15241))
+	RewardsTitle:setText(LocalizeToUpperString(@"menu/rewards"))
 	RewardsTitle:setTTF("ttmussels_demibold")
 	RewardsTitle:setLetterSpacing(6)
-	RewardsTitle:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	RewardsTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(RewardsTitle)
 	self.RewardsTitle = RewardsTitle
 	local CallingCardsFrameWidget = CoD.CallingCards_FrameWidget.new(f1_arg0, f1_arg1, 0, 0, 2, 217, 0, 0, 233, 287)
@@ -26,10 +26,10 @@ CoD.systemOverlay_PrestigeRewards.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	self:addElement(CallingCardsFrameWidget)
 	self.CallingCardsFrameWidget = CallingCardsFrameWidget
 	local CallingCardLabel = LUI.UIText.new(0, 0, 5, 275, 0, 0, 291, 309)
-	CallingCardLabel:setText(LocalizeToUpperString(0x5D0D4D46178F2C8))
+	CallingCardLabel:setText(LocalizeToUpperString(@"menu/calling_card"))
 	CallingCardLabel:setTTF("ttmussels_regular")
-	CallingCardLabel:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	CallingCardLabel:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	CallingCardLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	CallingCardLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(CallingCardLabel)
 	self.CallingCardLabel = CallingCardLabel
 	local RewardList = LUI.UIList.new(f1_arg0, f1_arg1, 5, 0, nil, false, false, false, false)
@@ -38,7 +38,7 @@ CoD.systemOverlay_PrestigeRewards.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	RewardList:setWidgetType(CoD.systemOverlay_PrestigeRewardItem)
 	RewardList:setHorizontalCount(3)
 	RewardList:setSpacing(5)
-	RewardList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	RewardList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	RewardList:setDataSource("PrestigeRewards")
 	self:addElement(RewardList)
 	self.RewardList = RewardList

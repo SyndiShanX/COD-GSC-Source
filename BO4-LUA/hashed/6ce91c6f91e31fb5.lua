@@ -13,15 +13,15 @@ CoD.ReservesPromoInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	local FocusGlow = LUI.UIImage.new(0.01, 0.99, -78, 78, -0.12, 1.12, -37, 37)
 	FocusGlow:setAlpha(0)
 	FocusGlow:setScale(1.01, 1)
-	FocusGlow:setImage(RegisterImage(0xB8F10D49D85E9C4))
-	FocusGlow:setMaterial(LUI.UIImage.GetCachedMaterial(0xDAB59B2CAE01851))
+	FocusGlow:setImage(RegisterImage(@"uie_ui_menu_common_focus_glow_small"))
+	FocusGlow:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_6DAB59B2CAE01851"))
 	FocusGlow:setShaderVector(0, 0, 0, 0.24, 0.24)
 	FocusGlow:setShaderVector(1, 1.2, 0, 0, 0)
 	FocusGlow:setupNineSliceShader(160, 160)
 	self:addElement(FocusGlow)
 	self.FocusGlow = FocusGlow
 	local PreviewButton = LUI.UIImage.new(0, 0, 0, 556, 0, 0, 1, 133)
-	PreviewButton:setImage(RegisterImage(0x9B5AB12D437292D))
+	PreviewButton:setImage(RegisterImage(@"hash_9B5AB12D437292D"))
 	self:addElement(PreviewButton)
 	self.PreviewButton = PreviewButton
 	local PreviewScene = LUI.UIImage.new(0, 0, -0.5, 555.5, 0, 0, 1, 133)
@@ -36,8 +36,8 @@ CoD.ReservesPromoInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	local Title = LUI.UIText.new(0, 0, 23, 458, 0, 0, 18.5, 42.5)
 	Title:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	Title:setTTF("ttmussels_demibold")
-	Title:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Title:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Title:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Title:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	Title:linkToElementModel(self, "name", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -48,10 +48,10 @@ CoD.ReservesPromoInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	self.Title = Title
 	local Price = LUI.UIText.new(0, 0, 23, 123, 1, 1, -36.5, -18.5)
 	Price:setRGB(0.95, 0.82, 0.26)
-	Price:setText(Engine[0xF9F1239CFD921FE](0x93F12745A24670F))
+	Price:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_393F12745A24670F"))
 	Price:setTTF("ttmussels_demibold")
-	Price:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Price:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Price:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Price:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(Price)
 	self.Price = Price
 	local ShopTimer = CoD.DiscountTimer.new(f1_arg0, f1_arg1, 1, 1, -59, -23, 1, 1, -29.5, -14.5)

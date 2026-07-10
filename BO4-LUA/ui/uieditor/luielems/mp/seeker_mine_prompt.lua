@@ -16,8 +16,8 @@ LUI.createMenu.seeker_mine_prompt = function(f1_arg0, f1_arg1)
 	local progressRing = LUI.UIImage.new(0.5, 0.5, -57, 57, 0, 0, 765.5, 879.5)
 	progressRing:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	progressRing:setScale(0.9, 0.9)
-	progressRing:setImage(RegisterImage(0x10852B139855D04))
-	progressRing:setMaterial(LUI.UIImage.GetCachedMaterial(0xD5CA1A25ED87F4F))
+	progressRing:setImage(RegisterImage(@"uie_ui_icon_controller_radial_fill_hud_lg"))
+	progressRing:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_clock_normal"))
 	progressRing:setShaderVector(1, 0.5, 0, 0, 0)
 	progressRing:setShaderVector(2, 0.5, 0, 0, 0)
 	progressRing:setShaderVector(3, 0, 1, 0, 0)
@@ -33,7 +33,7 @@ LUI.createMenu.seeker_mine_prompt = function(f1_arg0, f1_arg1)
 	local pulse = LUI.UIImage.new(0.5, 0.5, -45, 45, 0, 0, 777.5, 867.5)
 	pulse:setAlpha(0.4)
 	pulse:setScale(0.9, 0.9)
-	pulse:setMaterial(LUI.UIImage.GetCachedMaterial(0x15B163CA03FCE8B))
+	pulse:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_elliptical_ring_normal"))
 	pulse:setShaderVector(0, 10, 0, 0, 0)
 	pulse:setShaderVector(1, 128, 128, 0, 0)
 	pulse:setShaderVector(2, 0.24, 0.22, 0, 0)
@@ -57,8 +57,8 @@ LUI.createMenu.seeker_mine_prompt = function(f1_arg0, f1_arg1)
 	local ThumbsUp = LUI.UIImage.new(0.5, 0.5, -39.5, 40.5, 0, 0, 782.5, 862.5)
 	ThumbsUp:setRGB(ColorSet.T8__GREEN.r, ColorSet.T8__GREEN.g, ColorSet.T8__GREEN.b)
 	ThumbsUp:setAlpha(0)
-	ThumbsUp:setImage(RegisterImage(0x73260470E1F86D2))
-	ThumbsUp:setMaterial(LUI.UIImage.GetCachedMaterial(0xF755127C95CF5B6))
+	ThumbsUp:setImage(RegisterImage(@"uie_ui_hud_icon_seekermine_success"))
+	ThumbsUp:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_F755127C95CF5B6"))
 	ThumbsUp:setShaderVector(0, 2, 0, 0, 0)
 	self:addElement(ThumbsUp)
 	self.ThumbsUp = ThumbsUp
@@ -70,19 +70,19 @@ LUI.createMenu.seeker_mine_prompt = function(f1_arg0, f1_arg1)
 		{
 			stateName = "Fail",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelPathValueEqualTo(element, f1_arg0, "promptState", 3) and not Engine[0xDD333420C49E6D0](f1_arg0, Enum[0x7F032C2EF103A1A][0x6FFF566DCC09BBD])
+				return CoD.ModelUtility.IsSelfModelPathValueEqualTo(element, f1_arg0, "promptState", 3) and not Engine[@"isvisibilitybitset"](f1_arg0, Enum[@"uivisibilitybit"][@"bit_spectating_client"])
 			end,
 		},
 		{
 			stateName = "Success",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelPathValueEqualTo(element, f1_arg0, "promptState", 1) and not Engine[0xDD333420C49E6D0](f1_arg0, Enum[0x7F032C2EF103A1A][0x6FFF566DCC09BBD])
+				return CoD.ModelUtility.IsSelfModelPathValueEqualTo(element, f1_arg0, "promptState", 1) and not Engine[@"isvisibilitybitset"](f1_arg0, Enum[@"uivisibilitybit"][@"bit_spectating_client"])
 			end,
 		},
 		{
 			stateName = "Started",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelPathValueEqualTo(element, f1_arg0, "promptState", 0) and not Engine[0xDD333420C49E6D0](f1_arg0, Enum[0x7F032C2EF103A1A][0x6FFF566DCC09BBD])
+				return CoD.ModelUtility.IsSelfModelPathValueEqualTo(element, f1_arg0, "promptState", 0) and not Engine[@"isvisibilitybitset"](f1_arg0, Enum[@"uivisibilitybit"][@"bit_spectating_client"])
 			end,
 		},
 	})
@@ -97,14 +97,14 @@ LUI.createMenu.seeker_mine_prompt = function(f1_arg0, f1_arg1)
 	end)
 	local f1_local8 = self
 	local f1_local9 = self.subscribeToModel
-	local f1_local10 = Engine[0x4DF5CFBC1771947](f1_arg0)
-	f1_local9(f1_local8, f1_local10["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x6FFF566DCC09BBD]], function(f8_arg0)
+	local f1_local10 = Engine[@"getmodelforcontroller"](f1_arg0)
+	f1_local9(f1_local8, f1_local10["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_spectating_client"]], function(f8_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_local1,
 			controller = f1_arg0,
 			modelValue = f8_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x6FFF566DCC09BBD],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_spectating_client"],
 		})
 	end, false)
 	self:processEvent({
@@ -246,7 +246,7 @@ CoD.seeker_mine_prompt.__clipsPerState = {
 					f19_arg0:setScale(1.1, 1.1)
 					f19_arg0:registerEventHandler("transition_complete_keyframe", f14_arg0.clipFinished)
 				end
-				f14_arg0.ThumbsUp:beginAnimation(120, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f14_arg0.ThumbsUp:beginAnimation(120, Enum[@"luitween"][@"luitween_ease_in"])
 				f14_arg0.ThumbsUp:setAlpha(1)
 				f14_arg0.ThumbsUp:setScale(0.9, 0.9)
 				f14_arg0.ThumbsUp:registerEventHandler("interrupted_keyframe", f14_arg0.clipInterrupted)

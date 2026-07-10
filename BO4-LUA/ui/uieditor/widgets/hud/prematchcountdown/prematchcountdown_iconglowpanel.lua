@@ -9,7 +9,7 @@ CoD.PrematchCountdown_IconGlowPanel.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	local IconGlowPanel = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	IconGlowPanel:setRGB(0, 0, 0)
 	IconGlowPanel:setAlpha(0.4)
-	IconGlowPanel:setImage(RegisterImage(0x5BE416E17DAB33B))
+	IconGlowPanel:setImage(RegisterImage(@"uie_t7_core_hud_mapwidget_panelglow"))
 	self:addElement(IconGlowPanel)
 	self.IconGlowPanel = IconGlowPanel
 	if PostLoadFunc then

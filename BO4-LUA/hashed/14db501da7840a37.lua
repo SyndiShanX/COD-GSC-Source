@@ -27,7 +27,7 @@ CoD.PC_HUD_FastLoadoutContainer_TinyLoadoutList.new = function(f1_arg0, f1_arg1,
 	})
 	local f1_local2 = customClasssList
 	local TextBox = customClasssList.subscribeToModel
-	local f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	TextBox(f1_local2, f1_local4.selectedCustomClass, function(f4_arg0)
 		f1_arg0:updateElementState(customClasssList, {
 			name = "model_validation",
@@ -45,17 +45,17 @@ CoD.PC_HUD_FastLoadoutContainer_TinyLoadoutList.new = function(f1_arg0, f1_arg1,
 	customClasssList:setHorizontalCount(6)
 	customClasssList:setVerticalCount(2)
 	customClasssList:setSpacing(-4)
-	customClasssList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	customClasssList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	customClasssList:setDataSource("ChooseClass_TinyLoadout")
 	self:addElement(customClasssList)
 	self.customClasssList = customClasssList
 	TextBox = LUI.UIText.new(0, 0, -184, 179, 0.5, 0.5, -10.5, 10.5)
 	TextBox:setAlpha(0)
 	TextBox:setTTF("ttmussels_regular")
-	TextBox:setMaterial(LUI.UIImage.GetCachedMaterial(0x71E049B161CD00A))
+	TextBox:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_171E049B161CD00A"))
 	TextBox:setLetterSpacing(2)
-	TextBox:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
-	TextBox:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	TextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
+	TextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(TextBox)
 	self.TextBox = TextBox
 	TextBox:linkToElementModel(customClasssList, "customClassName", true, function(model)

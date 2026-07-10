@@ -22,7 +22,7 @@ CoD.freeCursorButtonPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	local keyPrompt = nil
 	keyPrompt = CoD.KeyPrompt.new(f1_arg0, f1_arg1, 0.03, 0.03, 2.5, 28.5, 0.5, 0.5, -13.5, 13.5)
 	keyPrompt:setAlpha(0)
-	keyPrompt.Border.FETitleNumBrdr00.Image:setMaterial(LUI.UIImage.GetCachedMaterial(0x44484DDFAF5C093))
+	keyPrompt.Border.FETitleNumBrdr00.Image:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_normal"))
 	keyPrompt.keybind.__KeyBind = function(f2_arg0)
 		local f2_local0 = f2_arg0:get()
 		if f2_local0 ~= nil then
@@ -55,9 +55,9 @@ CoD.freeCursorButtonPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	local label = LUI.UIText.new(0, 0, 82, 151, 0, 0, 8, 26)
 	label:setRGB(0.92, 0.92, 0.92)
 	label:setTTF("ttmussels_demibold")
-	label:setMaterial(LUI.UIImage.GetCachedMaterial(0x71E049B161CD00A))
+	label:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_171E049B161CD00A"))
 	label:setLetterSpacing(4)
-	label:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	label:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	label:linkToElementModel(self, "Label", true, function(model)
 		local f5_local0 = model:get()
 		if f5_local0 ~= nil then
@@ -72,17 +72,17 @@ CoD.freeCursorButtonPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	keyPrompt:appendEventHandler("input_source_changed", keyPrompt.keybind.__KeyBind_FullPath)
 	local f1_local8 = keyPrompt
 	local f1_local9 = keyPrompt.subscribeToModel
-	local f1_local10 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local10 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local9(f1_local8, f1_local10.LastInput, keyPrompt.keybind.__KeyBind_FullPath)
 	self:mergeStateConditions({
 		{
 			stateName = "Disabled",
 			condition = function(menu, element, event)
-				local f6_local0 = CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "", Enum[0xF4865E3551C3835][0x42F62C12777D074])
+				local f6_local0 = CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "", Enum[@"luibuttonpromptstates"][@"flag_disable_prompts"])
 				if f6_local0 then
 					f6_local0 = IsGamepad(f1_arg1)
 					if f6_local0 then
-						f6_local0 = CoD.ModelUtility.IsSelfModelValueEnumFlagSet(element, f1_arg1, "flags", Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3])
+						f6_local0 = CoD.ModelUtility.IsSelfModelValueEnumFlagSet(element, f1_arg1, "flags", Enum[@"luibuttonpromptflags"][@"bpf_contextual"])
 					end
 				end
 				return f6_local0
@@ -91,11 +91,11 @@ CoD.freeCursorButtonPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 		{
 			stateName = "Enabled",
 			condition = function(menu, element, event)
-				local f7_local0 = CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "", Enum[0xF4865E3551C3835][0x901DFC093ED4187])
+				local f7_local0 = CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "", Enum[@"luibuttonpromptstates"][@"flag_enable_prompts"])
 				if f7_local0 then
 					f7_local0 = IsGamepad(f1_arg1)
 					if f7_local0 then
-						f7_local0 = CoD.ModelUtility.IsSelfModelValueEnumFlagSet(element, f1_arg1, "flags", Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3])
+						f7_local0 = CoD.ModelUtility.IsSelfModelValueEnumFlagSet(element, f1_arg1, "flags", Enum[@"luibuttonpromptflags"][@"bpf_contextual"])
 					end
 				end
 				return f7_local0
@@ -104,10 +104,10 @@ CoD.freeCursorButtonPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 		{
 			stateName = "DisabledPC",
 			condition = function(menu, element, event)
-				local f8_local0 = CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "", Enum[0xF4865E3551C3835][0x42F62C12777D074])
+				local f8_local0 = CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "", Enum[@"luibuttonpromptstates"][@"flag_disable_prompts"])
 				if f8_local0 then
 					if not IsGamepad(f1_arg1) and not ShouldHideButtonPromptForPC(element, f1_arg1) then
-						f8_local0 = CoD.ModelUtility.IsSelfModelValueEnumFlagSet(element, f1_arg1, "flags", Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3])
+						f8_local0 = CoD.ModelUtility.IsSelfModelValueEnumFlagSet(element, f1_arg1, "flags", Enum[@"luibuttonpromptflags"][@"bpf_contextual"])
 						if f8_local0 then
 							f8_local0 = IsPC()
 						end
@@ -121,10 +121,10 @@ CoD.freeCursorButtonPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 		{
 			stateName = "EnabledPC",
 			condition = function(menu, element, event)
-				local f9_local0 = CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "", Enum[0xF4865E3551C3835][0x901DFC093ED4187])
+				local f9_local0 = CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "", Enum[@"luibuttonpromptstates"][@"flag_enable_prompts"])
 				if f9_local0 then
 					if not IsGamepad(f1_arg1) and not ShouldHideButtonPromptForPC(element, f1_arg1) then
-						f9_local0 = CoD.ModelUtility.IsSelfModelValueEnumFlagSet(element, f1_arg1, "flags", Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3])
+						f9_local0 = CoD.ModelUtility.IsSelfModelValueEnumFlagSet(element, f1_arg1, "flags", Enum[@"luibuttonpromptflags"][@"bpf_contextual"])
 						if f9_local0 then
 							f9_local0 = IsPC()
 						end
@@ -151,7 +151,7 @@ CoD.freeCursorButtonPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	end)
 	f1_local8 = self
 	f1_local9 = self.subscribeToModel
-	f1_local10 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local10 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local9(f1_local8, f1_local10.LastInput, function(f12_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

@@ -8,27 +8,27 @@ CoD.MinimapHelperItems.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local items = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	items:setupCompassItems(Enum[0x398581F68B3E097][0x72D54007C707EBC])
+	items:setupCompassItems(Enum[@"compasstype"][@"compass_type_full"])
 	self:addElement(items)
 	self.items = items
 	self:mergeStateConditions({
 		{
 			stateName = "CounterUAV",
 			condition = function(menu, element, event)
-				return Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xF0EF20BB6FB88F])
+				return Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_counter_uav_active"])
 			end,
 		},
 	})
 	local f1_local2 = self
 	local f1_local3 = self.subscribeToModel
-	local f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local3(f1_local2, f1_local4["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF0EF20BB6FB88F]], function(f3_arg0)
+	local f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local3(f1_local2, f1_local4["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_counter_uav_active"]], function(f3_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f3_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF0EF20BB6FB88F],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_counter_uav_active"],
 		})
 	end, false)
 	if PostLoadFunc then

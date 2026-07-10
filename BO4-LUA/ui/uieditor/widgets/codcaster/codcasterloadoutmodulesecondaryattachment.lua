@@ -17,7 +17,7 @@ CoD.CodCasterLoadoutModuleSecondaryAttachment.new = function(f1_arg0, f1_arg1, f
 	CodCasterLoadoutAttachments:setTopBottom(0, 0, 6, 66)
 	CodCasterLoadoutAttachments:setWidgetType(CoD.CodCasterLoadoutSecondaryAttachment)
 	CodCasterLoadoutAttachments:setSpacing(0)
-	CodCasterLoadoutAttachments:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	CodCasterLoadoutAttachments:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	CodCasterLoadoutAttachments:setDataSource("SecondaryWeaponAttachmentImageList")
 	CodCasterLoadoutAttachments:subscribeToGlobalModel(f1_arg1, "PerController", "secondaryWeapon.attachmentCount", function(model)
 		local f2_local0 = model:get()

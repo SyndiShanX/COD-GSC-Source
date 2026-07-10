@@ -10,19 +10,19 @@ CoD.TabletIcePickGadget_BgElementFui2.new = function(f1_arg0, f1_arg1, f1_arg2, 
 	local ConnectedText = LUI.UIImage.new(0, 0, 11.5, 111.5, 0, 0, 6, 38)
 	ConnectedText:setRGB(0.22, 0.77, 1)
 	ConnectedText:setAlpha(0.5)
-	ConnectedText:setImage(RegisterImage(0x67F8C000069CCEE))
-	ConnectedText:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	ConnectedText:setImage(RegisterImage(@"uie_ui_menu_inspection_connected_text"))
+	ConnectedText:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	ConnectedText:setShaderVector(0, 1.62, 0, 0, 0)
 	self:addElement(ConnectedText)
 	self.ConnectedText = ConnectedText
 	local AnalysingBacking = LUI.UIImage.new(0, 0, 0, 248, 0, 0, 0, 28)
 	AnalysingBacking:setRGB(0.02, 0.82, 0.99)
-	AnalysingBacking:setImage(RegisterImage(0xB018641EB968C33))
+	AnalysingBacking:setImage(RegisterImage(@"uie_ui_menu_inspection_analysing_stripe"))
 	self:addElement(AnalysingBacking)
 	self.AnalysingBacking = AnalysingBacking
 	local AnalysingBackingAdd = LUI.UIImage.new(0, 0, 0, 248, 0, 0, 0, 28)
 	AnalysingBackingAdd:setRGB(0.02, 0.59, 0.99)
-	AnalysingBackingAdd:setImage(RegisterImage(0xB018641EB968C33))
+	AnalysingBackingAdd:setImage(RegisterImage(@"uie_ui_menu_inspection_analysing_stripe"))
 	self:addElement(AnalysingBackingAdd)
 	self.AnalysingBackingAdd = AnalysingBackingAdd
 	if PostLoadFunc then
@@ -190,7 +190,7 @@ CoD.TabletIcePickGadget_BgElementFui2.__clipsPerState = {
 						f31_arg0:setAlpha(1)
 						f31_arg0:registerEventHandler("transition_complete_keyframe", f31_local0)
 					end
-					f30_arg0:beginAnimation(300, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f30_arg0:beginAnimation(300, Enum[@"luitween"][@"luitween_ease_out"])
 					f30_arg0:setLeftRight(0, 0, 11.5, 111.5)
 					f30_arg0:setAlpha(0.77)
 					f30_arg0:registerEventHandler("transition_complete_keyframe", f30_local0)

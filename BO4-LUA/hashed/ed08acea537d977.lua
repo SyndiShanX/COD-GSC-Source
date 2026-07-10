@@ -8,7 +8,7 @@ CoD.WarzoneRedeployment.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	self.soundSet = "none"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local blur = LUI.UIImage.new(0.5, 0.5, -145.5, 145.5, 0.5, 0.5, -19, 19)
-	blur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	blur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	blur:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(blur)
 	self.blur = blur
@@ -19,28 +19,28 @@ CoD.WarzoneRedeployment.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	self.bg = bg
 	local led = LUI.UIImage.new(0.5, 0.5, -146, 146, 0.5, 0.5, -20, 20)
 	led:setAlpha(0.02)
-	led:setImage(RegisterImage(0xC07F7432F86DA83))
+	led:setImage(RegisterImage(@"uie_wz_hud_map_danger_led"))
 	self:addElement(led)
 	self.led = led
 	local border = LUI.UIImage.new(0.5, 0.5, -151.5, 151.5, 0.5, 0.5, -23, 23)
 	border:setRGB(0.07, 0.07, 0.07)
-	border:setImage(RegisterImage(0xA3C76B80B69874D))
-	border:setMaterial(LUI.UIImage.GetCachedMaterial(0x44484DDFAF5C093))
+	border:setImage(RegisterImage(@"uie_ui_hud_wz_hud_core_chamfer_border"))
+	border:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_normal"))
 	border:setShaderVector(0, 0, 0, 0, 0)
 	border:setupNineSliceShader(18, 24)
 	self:addElement(border)
 	self.border = border
 	local Message = LUI.UIText.new(0, 0, 47, 314, 0, 0, 31, 51)
 	Message:setRGB(1, 0, 0)
-	Message:setText(LocalizeToUpperString(0x441DCDDB6D233EF))
+	Message:setText(LocalizeToUpperString(@"hash_1441DCDDB6D233EF"))
 	Message:setTTF("ttmussels_regular")
-	Message:setMaterial(LUI.UIImage.GetCachedMaterial(0x90D57B1E92D39D7))
+	Message:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_90D57B1E92D39D7"))
 	Message:setShaderVector(0, 1.02, 0, 0, 0)
 	Message:setShaderVector(1, -0.23, 0, 0, 0)
 	Message:setShaderVector(2, 1, 0, 0, 0.6)
 	Message:setLetterSpacing(2)
-	Message:setAlignment(Engine[0x7F8853DC3581AA4](Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041]))
-	Message:setAlignment(Engine[0x7F8853DC3581AA4](Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7]))
+	Message:setAlignment(Engine[@"hash_67F8853DC3581AA4"](Enum[@"luialignment"][@"lui_alignment_center"]))
+	Message:setAlignment(Engine[@"hash_67F8853DC3581AA4"](Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"]))
 	self:addElement(Message)
 	self.Message = Message
 	if PostLoadFunc then

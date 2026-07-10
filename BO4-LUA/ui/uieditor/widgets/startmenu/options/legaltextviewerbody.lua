@@ -9,12 +9,12 @@ CoD.LegalTextViewerBody.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	self.soundSet = "default"
 	local textEntry = LUI.UIText.new(0, 1, 0, 0, 0, 0, 15, 45)
 	textEntry:setTTF("dinnext_regular")
-	textEntry:setAlignment(Engine[0x7F8853DC3581AA4](Enum[0x7A5123B654282D2][0x58C8A85F2048829]))
-	textEntry:setAlignment(Engine[0x7F8853DC3581AA4](Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3]))
+	textEntry:setAlignment(Engine[@"hash_67F8853DC3581AA4"](Enum[@"luialignment"][@"lui_alignment_left"]))
+	textEntry:setAlignment(Engine[@"hash_67F8853DC3581AA4"](Enum[@"luialignment"][@"lui_alignment_top"]))
 	textEntry:subscribeToGlobalModel(f1_arg1, "CODAccountLegalInfo", "currentLegalInfoText", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			textEntry:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			textEntry:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	self:addElement(textEntry)

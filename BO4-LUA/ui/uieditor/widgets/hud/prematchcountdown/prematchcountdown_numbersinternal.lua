@@ -10,11 +10,11 @@ CoD.PrematchCountdown_NumbersInternal.new = function(f1_arg0, f1_arg1, f1_arg2, 
 	local Numbers = LUI.UIText.new(0.5, 0.5, -120, 120, 0, 0, -6, 123)
 	Numbers:setText("")
 	Numbers:setTTF("ttmussels_demibold")
-	Numbers:setMaterial(LUI.UIImage.GetCachedMaterial(0x6250C6FCAC36BD4))
+	Numbers:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_56250C6FCAC36BD4"))
 	Numbers:setShaderVector(0, 0.14, 0, 0, 0)
 	Numbers:setShaderVector(1, 0, 0, 0, 0.3)
-	Numbers:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	Numbers:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Numbers:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	Numbers:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(Numbers)
 	self.Numbers = Numbers
 	if PostLoadFunc then

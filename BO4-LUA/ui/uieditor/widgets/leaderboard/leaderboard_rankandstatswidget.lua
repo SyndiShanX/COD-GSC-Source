@@ -17,7 +17,7 @@ CoD.Leaderboard_RankAndStatsWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	self:addElement(rankIcon)
 	self.rankIcon = rankIcon
 	local rankText = CoD.FE_SlideSubHeader.new(f1_arg0, f1_arg1, 0, 0, 141.5, 359.5, 0, 0, 47, 89)
-	rankText.FELabelSubHeadingD0.Label0:setText(Engine[0xF9F1239CFD921FE](PrependLocalizedStringWithSeparator(0x99A97D1A6F94031, " ", "LEVEL 53")))
+	rankText.FELabelSubHeadingD0.Label0:setText(Engine[@"hash_4F9F1239CFD921FE"](PrependLocalizedStringWithSeparator(@"hash_499A97D1A6F94031", " ", "LEVEL 53")))
 	self:addElement(rankText)
 	self.rankText = rankText
 	local ListHeader0 = CoD.FE_ListHeader.new(f1_arg0, f1_arg1, 0, 0, 141, 360, 0, 0, 5, 47)

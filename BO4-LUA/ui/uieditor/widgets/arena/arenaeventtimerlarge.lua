@@ -11,35 +11,35 @@ CoD.ArenaEventTimerLarge.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	local EventEndsIn = LUI.UIText.new(0, 0, 0, 260, 0, 0, 4, 25)
 	EventEndsIn:setRGB(ColorSet.T8__OCHRE.r, ColorSet.T8__OCHRE.g, ColorSet.T8__OCHRE.b)
 	EventEndsIn:setAlpha(0)
-	EventEndsIn:setText(Engine[0xF9F1239CFD921FE](0x93E719493E9E18F))
+	EventEndsIn:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	EventEndsIn:setTTF("dinnext_regular")
 	EventEndsIn:setLetterSpacing(1)
-	EventEndsIn:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	EventEndsIn:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	EventEndsIn:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	EventEndsIn:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	self:addElement(EventEndsIn)
 	self.EventEndsIn = EventEndsIn
 	local EventStartsIn = LUI.UIText.new(0, 0, 0, 260, 0, 0, 4, 25)
 	EventStartsIn:setRGB(ColorSet.T8__OCHRE.r, ColorSet.T8__OCHRE.g, ColorSet.T8__OCHRE.b)
 	EventStartsIn:setAlpha(0)
-	EventStartsIn:setText(Engine[0xF9F1239CFD921FE](0x93E719493E9E18F))
+	EventStartsIn:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	EventStartsIn:setTTF("dinnext_regular")
 	EventStartsIn:setLetterSpacing(1)
-	EventStartsIn:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	EventStartsIn:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	EventStartsIn:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	EventStartsIn:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	self:addElement(EventStartsIn)
 	self.EventStartsIn = EventStartsIn
 	self:mergeStateConditions({
 		{
 			stateName = "Event",
 			condition = function(menu, element, event)
-				return CoD.ArenaUtility.CurrentArenaEventTypeEquals(self, Enum[0xC0EA92D04BC003B][0xC32571741C5B730]) and CoD.ArenaUtility.IsEventCompleteTimer(self, f1_arg1, element)
+				return CoD.ArenaUtility.CurrentArenaEventTypeEquals(self, Enum[@"hash_6C0EA92D04BC003B"][@"hash_5C32571741C5B730"]) and CoD.ArenaUtility.IsEventCompleteTimer(self, f1_arg1, element)
 			end,
 		},
 		{
 			stateName = "NextEvent",
 			condition = function(menu, element, event)
 				local f3_local0
-				if not CoD.ArenaUtility.CurrentArenaEventTypeEquals(self, Enum[0xC0EA92D04BC003B][0xC32571741C5B730]) then
+				if not CoD.ArenaUtility.CurrentArenaEventTypeEquals(self, Enum[@"hash_6C0EA92D04BC003B"][@"hash_5C32571741C5B730"]) then
 					f3_local0 = CoD.ArenaUtility.IsNextEventCompleteTimer(self, f1_arg1, element)
 				else
 					f3_local0 = false
@@ -50,7 +50,7 @@ CoD.ArenaEventTimerLarge.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	})
 	local f1_local3 = self
 	local f1_local4 = self.subscribeToModel
-	local f1_local5 = Engine[0x8DF2E5447F384B9]()
+	local f1_local5 = Engine[@"getglobalmodel"]()
 	f1_local4(f1_local3, f1_local5["lobbyPlaylist.name"], function(f4_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -62,7 +62,7 @@ CoD.ArenaEventTimerLarge.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	end, false)
 	f1_local3 = self
 	f1_local4 = self.subscribeToModel
-	f1_local5 = Engine[0x8DF2E5447F384B9]()
+	f1_local5 = Engine[@"getglobalmodel"]()
 	f1_local4(f1_local3, f1_local5["lobbyRoot.lobbyNav"], function(f5_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -95,7 +95,7 @@ CoD.ArenaEventTimerLarge.__clipsPerState = {
 			f8_arg0:__resetProperties()
 			f8_arg0:setupElementClipCounter(1)
 			local f8_local0 = function(f9_arg0)
-				f8_arg0.EventEndsIn:beginAnimation(300, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f8_arg0.EventEndsIn:beginAnimation(300, Enum[@"luitween"][@"luitween_ease_out"])
 				f8_arg0.EventEndsIn:setAlpha(1)
 				f8_arg0.EventEndsIn:registerEventHandler("interrupted_keyframe", f8_arg0.clipInterrupted)
 				f8_arg0.EventEndsIn:registerEventHandler("transition_complete_keyframe", f8_arg0.clipFinished)
@@ -110,7 +110,7 @@ CoD.ArenaEventTimerLarge.__clipsPerState = {
 			f10_arg0:__resetProperties()
 			f10_arg0:setupElementClipCounter(1)
 			local f10_local0 = function(f11_arg0)
-				f10_arg0.EventStartsIn:beginAnimation(300, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f10_arg0.EventStartsIn:beginAnimation(300, Enum[@"luitween"][@"luitween_ease_out"])
 				f10_arg0.EventStartsIn:setAlpha(1)
 				f10_arg0.EventStartsIn:registerEventHandler("interrupted_keyframe", f10_arg0.clipInterrupted)
 				f10_arg0.EventStartsIn:registerEventHandler("transition_complete_keyframe", f10_arg0.clipFinished)

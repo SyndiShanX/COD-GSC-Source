@@ -11,7 +11,7 @@ CoD.ProximityAlarm.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local blur = LUI.UIImage.new(0, 1, 0, 0, 0.5, 0.5, -29, 29)
-	blur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	blur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	blur:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(blur)
 	self.blur = blur
@@ -22,7 +22,7 @@ CoD.ProximityAlarm.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	self.Image = Image
 	local ProximityAlarm = CoD.ProximityAlarm_Internal.new(f1_arg0, f1_arg1, 0.5, 0.5, -161, 161, 0.5, 0.5, -38, 38)
 	ProximityAlarm:setAlpha(0.93)
-	ProximityAlarm.text:setText(Engine[0xF9F1239CFD921FE](0x8B965A8BB3FC505))
+	ProximityAlarm.text:setText(Engine[@"hash_4F9F1239CFD921FE"](@"weapon/alarm_alarm"))
 	self:addElement(ProximityAlarm)
 	self.ProximityAlarm = ProximityAlarm
 	self:mergeStateConditions({
@@ -53,7 +53,7 @@ CoD.ProximityAlarm.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	})
 	local f1_local4 = self
 	local f1_local5 = self.subscribeToModel
-	local f1_local6 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local6 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local5(f1_local4, f1_local6["hudItems.proximityAlarm"], function(f6_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -65,7 +65,7 @@ CoD.ProximityAlarm.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	end, false)
 	f1_local4 = self
 	f1_local5 = self.subscribeToModel
-	f1_local6 = Engine[0x8DF2E5447F384B9]()
+	f1_local6 = Engine[@"getglobalmodel"]()
 	f1_local5(f1_local4, f1_local6["lobbyRoot.lobbyNav"], function(f7_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -86,7 +86,7 @@ CoD.ProximityAlarm.__resetProperties = function(f8_arg0)
 	f8_arg0.blur:completeAnimation()
 	f8_arg0.Image:completeAnimation()
 	f8_arg0.ProximityAlarm:setAlpha(0.93)
-	f8_arg0.ProximityAlarm.text:setText(Engine[0xF9F1239CFD921FE](0x8B965A8BB3FC505))
+	f8_arg0.ProximityAlarm.text:setText(Engine[@"hash_4F9F1239CFD921FE"](@"weapon/alarm_alarm"))
 	f8_arg0.blur:setAlpha(1)
 	f8_arg0.Image:setAlpha(0.3)
 end
@@ -119,7 +119,7 @@ CoD.ProximityAlarm.__clipsPerState = {
 			f10_arg0.ProximityAlarm:completeAnimation()
 			f10_arg0.ProximityAlarm.text:completeAnimation()
 			f10_arg0.ProximityAlarm:setAlpha(0)
-			f10_arg0.ProximityAlarm.text:setText(Engine[0xF9F1239CFD921FE](0x6D07C2DB72A2619))
+			f10_arg0.ProximityAlarm.text:setText(Engine[@"hash_4F9F1239CFD921FE"](@"weapon/c4_armed"))
 			f10_arg0.clipFinished(f10_arg0.ProximityAlarm)
 		end,
 		DefaultState = function(f11_arg0, f11_arg1)
@@ -168,7 +168,7 @@ CoD.ProximityAlarm.__clipsPerState = {
 			f14_arg0.ProximityAlarm:completeAnimation()
 			f14_arg0.ProximityAlarm.text:completeAnimation()
 			f14_arg0.ProximityAlarm:setAlpha(1)
-			f14_arg0.ProximityAlarm.text:setText(Engine[0xF9F1239CFD921FE](0x31007C3B2B31BDB))
+			f14_arg0.ProximityAlarm.text:setText(Engine[@"hash_4F9F1239CFD921FE"](@"weapon/c4_alarm"))
 			f14_local0(f14_arg0.ProximityAlarm)
 			f14_arg0.nextClip = "DefaultClip"
 		end,
@@ -186,7 +186,7 @@ CoD.ProximityAlarm.__clipsPerState = {
 			f18_arg0.ProximityAlarm:completeAnimation()
 			f18_arg0.ProximityAlarm.text:completeAnimation()
 			f18_arg0.ProximityAlarm:setAlpha(0)
-			f18_arg0.ProximityAlarm.text:setText(Engine[0xF9F1239CFD921FE](0xFCEDC5C8AC323F8))
+			f18_arg0.ProximityAlarm.text:setText(Engine[@"hash_4F9F1239CFD921FE"](@"weapon/alarm_set"))
 			f18_arg0.clipFinished(f18_arg0.ProximityAlarm)
 		end,
 		DefaultState = function(f19_arg0, f19_arg1)
@@ -235,7 +235,7 @@ CoD.ProximityAlarm.__clipsPerState = {
 			f22_arg0.ProximityAlarm:completeAnimation()
 			f22_arg0.ProximityAlarm.text:completeAnimation()
 			f22_arg0.ProximityAlarm:setAlpha(1)
-			f22_arg0.ProximityAlarm.text:setText(Engine[0xF9F1239CFD921FE](0x8B965A8BB3FC505))
+			f22_arg0.ProximityAlarm.text:setText(Engine[@"hash_4F9F1239CFD921FE"](@"weapon/alarm_alarm"))
 			f22_local0(f22_arg0.ProximityAlarm)
 			f22_arg0.nextClip = "DefaultClip"
 		end,

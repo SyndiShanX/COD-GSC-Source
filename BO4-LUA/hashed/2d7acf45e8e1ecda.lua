@@ -15,7 +15,7 @@ CoD.PositionDraft_SearchingForPlayers.new = function(f1_arg0, f1_arg1, f1_arg2, 
 	local BackgroundAdd = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	BackgroundAdd:setRGB(ColorSet.T8__OFF__GRAY.r, ColorSet.T8__OFF__GRAY.g, ColorSet.T8__OFF__GRAY.b)
 	BackgroundAdd:setAlpha(0.1)
-	BackgroundAdd:setMaterial(LUI.UIImage.GetCachedMaterial(0x92F09074FB20E6D))
+	BackgroundAdd:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_scanlines"))
 	BackgroundAdd:setShaderVector(0, 0.31, 0, 0, 0)
 	BackgroundAdd:setShaderVector(1, 0.84, 0, 0, 0)
 	BackgroundAdd:setShaderVector(2, 0.05, 0, 0, 0)
@@ -23,10 +23,10 @@ CoD.PositionDraft_SearchingForPlayers.new = function(f1_arg0, f1_arg1, f1_arg2, 
 	self.BackgroundAdd = BackgroundAdd
 	local PositionDraftSearchingForPlayers = LUI.UIText.new(0.02, 0.97, 0, 0, 0.16, 0.86, 0, 0)
 	PositionDraftSearchingForPlayers:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
-	PositionDraftSearchingForPlayers:setText(Engine[0xF9F1239CFD921FE](0xB0DCC02393CEC4E))
+	PositionDraftSearchingForPlayers:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_1B0DCC02393CEC4E"))
 	PositionDraftSearchingForPlayers:setTTF("ttmussels_regular")
 	PositionDraftSearchingForPlayers:setLetterSpacing(4)
-	PositionDraftSearchingForPlayers:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	PositionDraftSearchingForPlayers:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(PositionDraftSearchingForPlayers)
 	self.PositionDraftSearchingForPlayers = PositionDraftSearchingForPlayers
 	local barTop = LUI.UIImage.new(0, 1, 24, 0, 0, 0, -7, 0)
@@ -64,7 +64,7 @@ CoD.PositionDraft_SearchingForPlayers.new = function(f1_arg0, f1_arg1, f1_arg2, 
 	self.Corner3 = Corner3
 	local arrow = LUI.UIImage.new(0, 0, 9.5, 14.5, 0, 0, -6, -1)
 	arrow:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
-	arrow:setImage(RegisterImage(0x19A57A2805CEECA))
+	arrow:setImage(RegisterImage(@"uie_ui_hud_common_line_arrow"))
 	self:addElement(arrow)
 	self.arrow = arrow
 	self:mergeStateConditions({
@@ -77,7 +77,7 @@ CoD.PositionDraft_SearchingForPlayers.new = function(f1_arg0, f1_arg1, f1_arg2, 
 	})
 	local f1_local12 = self
 	local f1_local13 = self.subscribeToModel
-	local f1_local14 = Engine[0x8DF2E5447F384B9]()
+	local f1_local14 = Engine[@"getglobalmodel"]()
 	f1_local13(f1_local12, f1_local14["PositionDraft.waitingForPlayers"], function(f3_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

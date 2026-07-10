@@ -1,36 +1,36 @@
-CoD[0xFE0FBDC105843CB] = InheritFrom(LUI.UIElement)
-CoD[0xFE0FBDC105843CB].__defaultWidth = 960
-CoD[0xFE0FBDC105843CB].__defaultHeight = 240
-CoD[0xFE0FBDC105843CB].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+CoD[@"hash_FE0FBDC105843CB"] = InheritFrom(LUI.UIElement)
+CoD[@"hash_FE0FBDC105843CB"].__defaultWidth = 960
+CoD[@"hash_FE0FBDC105843CB"].__defaultHeight = 240
+CoD[@"hash_FE0FBDC105843CB"].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
 	local self = LUI.UIElement.new(f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
-	self:setClass(CoD[0xFE0FBDC105843CB])
+	self:setClass(CoD[@"hash_FE0FBDC105843CB"])
 	self.id = "CallingCards_Tour_Of_Duty_Master"
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local CardIcon = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	CardIcon:setImage(RegisterImage(0x434A15996B65B48))
-	CardIcon:setMaterial(LUI.UIImage.GetCachedMaterial(0xE8F55203998700A))
+	CardIcon:setImage(RegisterImage(@"uie_t7_icon_callingcard_temp2_lrg"))
+	CardIcon:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_feather_blend"))
 	self:addElement(CardIcon)
 	self.CardIcon = CardIcon
 	local sandyBg = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	sandyBg:setImage(RegisterImage(0x38246771362DCCA))
+	sandyBg:setImage(RegisterImage(@"uie_sandy_bg"))
 	self:addElement(sandyBg)
 	self.sandyBg = sandyBg
 	local warrior = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	warrior:setImage(RegisterImage(0x63BC237CF22EC4B))
+	warrior:setImage(RegisterImage(@"uie_warrior"))
 	self:addElement(warrior)
 	self.warrior = warrior
 	local dust = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	dust:setImage(RegisterImage(0xEA71666B3E5511F))
-	dust:setMaterial(LUI.UIImage.GetCachedMaterial(0xD8EA9FE9B0BCF75))
+	dust:setImage(RegisterImage(@"uie_dust_bloom"))
+	dust:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_tile_scroll"))
 	dust:setShaderVector(0, 1, 1, 0, 0)
 	dust:setShaderVector(1, 0.75, 0, 0, 0)
 	self:addElement(dust)
 	self.dust = dust
 	local dust2 = LUI.UIImage.new(0, 0, -966, 742, 0, 0, -287, 140)
 	dust2:setScale(1.5, 1.5)
-	dust2:setImage(RegisterImage(0xEA71666B3E5511F))
-	dust2:setMaterial(LUI.UIImage.GetCachedMaterial(0xD8EA9FE9B0BCF75))
+	dust2:setImage(RegisterImage(@"uie_dust_bloom"))
+	dust2:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_tile_scroll"))
 	dust2:setShaderVector(0, 1, 1, 0, 0)
 	dust2:setShaderVector(1, 0.75, 0, 0, 0)
 	self:addElement(dust2)
@@ -38,25 +38,25 @@ CoD[0xFE0FBDC105843CB].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	local bloodSpray2 = LUI.UIImage.new(0, 0, 188.5, 700.5, 0, 0, 70, 268)
 	bloodSpray2:setRGB(0.62, 0.02, 0.02)
 	bloodSpray2:setAlpha(0.98)
-	bloodSpray2:setImage(RegisterImage(0x88E1B9DC08A1EA3))
-	bloodSpray2:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD526D3FD71F281))
+	bloodSpray2:setImage(RegisterImage(@"uie_blood_spray2"))
+	bloodSpray2:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_flipbook"))
 	bloodSpray2:setShaderVector(0, 0, 5, 0, 0)
 	bloodSpray2:setShaderVector(1, 10, 0, 0, 0)
 	self:addElement(bloodSpray2)
 	self.bloodSpray2 = bloodSpray2
 	local torso = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	torso:setImage(RegisterImage(0x2D9E2A367B077FA))
+	torso:setImage(RegisterImage(@"uie_torso"))
 	self:addElement(torso)
 	self.torso = torso
 	local cropper = LUI.UIImage.new(0, 0, -32, 992, 0, 0, -392, 632)
 	cropper:setAlpha(0)
-	cropper:setImage(RegisterImage(0x7EEE1693E39382A))
+	cropper:setImage(RegisterImage(@"uie_stage_crop_prop"))
 	self:addElement(cropper)
 	self.cropper = cropper
 	local Image = LUI.UIImage.new(0, 0, 770, 850, 0, 0, -2, 94)
 	Image:setAlpha(0.6)
-	Image:setImage(RegisterImage(0xE605E868641E69A))
-	Image:setMaterial(LUI.UIImage.GetCachedMaterial(0xE992BD5A540E2D))
+	Image:setImage(RegisterImage(@"uie_sword_sheen"))
+	Image:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_delta_normal"))
 	Image:setShaderVector(0, 0.94, 1.07, 0, 0)
 	Image:setShaderVector(1, 0.04, 0.04, 0, 0)
 	Image:setShaderVector(2, 0, 1, 0, 0)
@@ -69,7 +69,7 @@ CoD[0xFE0FBDC105843CB].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	end
 	return self
 end
-CoD[0xFE0FBDC105843CB].__resetProperties = function(f2_arg0)
+CoD[@"hash_FE0FBDC105843CB"].__resetProperties = function(f2_arg0)
 	f2_arg0.warrior:completeAnimation()
 	f2_arg0.Image:completeAnimation()
 	f2_arg0.dust2:completeAnimation()
@@ -89,7 +89,7 @@ CoD[0xFE0FBDC105843CB].__resetProperties = function(f2_arg0)
 	f2_arg0.dust2:setScale(1.5, 1.5)
 	f2_arg0.bloodSpray2:setAlpha(0.98)
 end
-CoD[0xFE0FBDC105843CB].__clipsPerState = {
+CoD[@"hash_FE0FBDC105843CB"].__clipsPerState = {
 	DefaultState = {
 		DefaultClip = function(f3_arg0, f3_arg1)
 			f3_arg0:__resetProperties()

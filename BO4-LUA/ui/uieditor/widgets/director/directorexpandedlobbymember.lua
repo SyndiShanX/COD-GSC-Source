@@ -38,14 +38,14 @@ CoD.DirectorExpandedLobbyMember.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self.DirectorCustomStartButton = DirectorCustomStartButton
 	local SearchingBacking = LUI.UIImage.new(0, 0, 2, 427, 0, 0, 0, 69)
 	SearchingBacking:setAlpha(0)
-	SearchingBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	SearchingBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	SearchingBacking:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(SearchingBacking)
 	self.SearchingBacking = SearchingBacking
 	local NoiseTiledBacking = LUI.UIImage.new(0, 0, 2, 427, 0.09, 0.09, -6, 63)
 	NoiseTiledBacking:setAlpha(0)
-	NoiseTiledBacking:setImage(RegisterImage(0x34839E8065B1E53))
-	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	NoiseTiledBacking:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	NoiseTiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	NoiseTiledBacking:setupNineSliceShader(196, 88)
 	self:addElement(NoiseTiledBacking)
@@ -57,50 +57,50 @@ CoD.DirectorExpandedLobbyMember.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	local SearchingLeft = LUI.UIText.new(0, 0, 2.5, 182.5, 0.5, 0.5, -10, 10)
 	SearchingLeft:setRGB(ColorSet.T8__OFF__GRAY.r, ColorSet.T8__OFF__GRAY.g, ColorSet.T8__OFF__GRAY.b)
 	SearchingLeft:setAlpha(0)
-	SearchingLeft:setText(LocalizeToUpperString(0xE91C8C702197ED8))
+	SearchingLeft:setText(LocalizeToUpperString(@"hash_7E91C8C702197ED8"))
 	SearchingLeft:setTTF("ttmussels_regular")
-	SearchingLeft:setMaterial(LUI.UIImage.GetCachedMaterial(0x90D57B1E92D39D7))
+	SearchingLeft:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_90D57B1E92D39D7"))
 	SearchingLeft:setShaderVector(0, 0.2, 0, 0, 0)
 	SearchingLeft:setShaderVector(1, 0, 0, 0, 0)
 	SearchingLeft:setShaderVector(2, 0, 0, 0, 1)
 	SearchingLeft:setLetterSpacing(2)
-	SearchingLeft:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
-	SearchingLeft:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	SearchingLeft:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
+	SearchingLeft:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(SearchingLeft)
 	self.SearchingLeft = SearchingLeft
 	local SearchingRight = LUI.UIText.new(0, 0, 243.5, 425.5, 0.5, 0.5, -10, 10)
 	SearchingRight:setRGB(ColorSet.T8__OFF__GRAY.r, ColorSet.T8__OFF__GRAY.g, ColorSet.T8__OFF__GRAY.b)
 	SearchingRight:setAlpha(0)
-	SearchingRight:setText(LocalizeToUpperString(0x20B566D0856BB8D))
+	SearchingRight:setText(LocalizeToUpperString(@"hash_220B566D0856BB8D"))
 	SearchingRight:setTTF("ttmussels_regular")
-	SearchingRight:setMaterial(LUI.UIImage.GetCachedMaterial(0x90D57B1E92D39D7))
+	SearchingRight:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_90D57B1E92D39D7"))
 	SearchingRight:setShaderVector(0, 0.2, 0, 0, 0)
 	SearchingRight:setShaderVector(1, 0, 0, 0, 0)
 	SearchingRight:setShaderVector(2, 0, 0, 0, 1)
 	SearchingRight:setLetterSpacing(2)
-	SearchingRight:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	SearchingRight:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	SearchingRight:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	SearchingRight:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(SearchingRight)
 	self.SearchingRight = SearchingRight
 	local Spinner = LUI.UIImage.new(0, 0, 195.5, 229.5, 0, 0, 18, 52)
 	Spinner:setAlpha(0)
-	Spinner:setImage(RegisterImage(0xC96F6285B1D996C))
-	Spinner:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	Spinner:setImage(RegisterImage(@"hash_7C96F6285B1D996C"))
+	Spinner:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	Spinner:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(Spinner)
 	self.Spinner = Spinner
 	local PlayerFound = LUI.UIText.new(0.5, 0.5, -90, 90, 0.5, 0.5, -10, 10)
 	PlayerFound:setRGB(ColorSet.T8__OFF__GRAY.r, ColorSet.T8__OFF__GRAY.g, ColorSet.T8__OFF__GRAY.b)
 	PlayerFound:setAlpha(0)
-	PlayerFound:setText(LocalizeToUpperString(0xEB699BFD0440905))
+	PlayerFound:setText(LocalizeToUpperString(@"hash_2EB699BFD0440905"))
 	PlayerFound:setTTF("ttmussels_regular")
-	PlayerFound:setMaterial(LUI.UIImage.GetCachedMaterial(0x90D57B1E92D39D7))
+	PlayerFound:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_90D57B1E92D39D7"))
 	PlayerFound:setShaderVector(0, 0.2, 0, 0, 0)
 	PlayerFound:setShaderVector(1, 0, 0, 0, 0)
 	PlayerFound:setShaderVector(2, 0, 0, 0, 1)
 	PlayerFound:setLetterSpacing(2)
-	PlayerFound:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	PlayerFound:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	PlayerFound:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	PlayerFound:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(PlayerFound)
 	self.PlayerFound = PlayerFound
 	self:mergeStateConditions({
@@ -113,13 +113,13 @@ CoD.DirectorExpandedLobbyMember.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 		{
 			stateName = "EmptySearching",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelPathValueEqualTo(element, f1_arg1, "info->xuid", Engine[0x9073FBE2D48C156]("0"))
+				return CoD.ModelUtility.IsSelfModelPathValueEqualTo(element, f1_arg1, "info->xuid", Engine[@"stringtoxuiddecimal"]("0"))
 			end,
 		},
 		{
 			stateName = "Empty",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelPathValueEqualTo(element, f1_arg1, "info->xuid", Engine[0x9073FBE2D48C156]("0"))
+				return CoD.ModelUtility.IsSelfModelPathValueEqualTo(element, f1_arg1, "info->xuid", Engine[@"stringtoxuiddecimal"]("0"))
 			end,
 		},
 		{
@@ -190,7 +190,7 @@ CoD.DirectorExpandedLobbyMember.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	end)
 	local f1_local11 = self
 	local f1_local12 = self.subscribeToModel
-	local f1_local13 = Engine[0x8DF2E5447F384B9]()
+	local f1_local13 = Engine[@"getglobalmodel"]()
 	f1_local12(f1_local11, f1_local13["lobbyRoot.publicLobby.stage"], function(f13_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -202,7 +202,7 @@ CoD.DirectorExpandedLobbyMember.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	end, false)
 	f1_local11 = self
 	f1_local12 = self.subscribeToModel
-	f1_local13 = Engine[0x8DF2E5447F384B9]()
+	f1_local13 = Engine[@"getglobalmodel"]()
 	f1_local12(f1_local11, f1_local13["lobbyRoot.lobbyNav"], function(f14_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -214,13 +214,13 @@ CoD.DirectorExpandedLobbyMember.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	end, false)
 	self:appendEventHandler("input_source_changed", function(f15_arg0, f15_arg1)
 		f15_arg1.menu = f15_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f15_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+		CoD.Menu.UpdateButtonShownState(f15_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 	end)
 	f1_local11 = self
 	f1_local12 = self.subscribeToModel
-	f1_local13 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local13 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local12(f1_local11, f1_local13.LastInput, function(f16_arg0, f16_arg1)
-		CoD.Menu.UpdateButtonShownState(f16_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+		CoD.Menu.UpdateButtonShownState(f16_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 	end, false)
 	self:linkToElementModel(self, "info", true, function(model, f17_arg1)
 		if self["__buttonPrompt_info->xuid"] then
@@ -234,20 +234,20 @@ CoD.DirectorExpandedLobbyMember.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 		end
 		if model then
 			self["__buttonPrompt_info->xuid"] = self:subscribeToModel(model, function(model)
-				CoD.Menu.UpdateButtonShownState(f17_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+				CoD.Menu.UpdateButtonShownState(f17_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 			end)
 		end
 	end)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], nil, function(element, menu, controller, model)
-		if IsPC() and IsGamepad(controller) and not CoD.ModelUtility.IsSelfModelPathValueEqualTo(self, controller, "info->xuid", Engine[0x9073FBE2D48C156]("0")) then
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], nil, function(element, menu, controller, model)
+		if IsPC() and IsGamepad(controller) and not CoD.ModelUtility.IsSelfModelPathValueEqualTo(self, controller, "info->xuid", Engine[@"stringtoxuiddecimal"]("0")) then
 			SetSelectedFriendXUID(self, element, controller)
 			OpenOverlay(self, "Social_PlayerDetailsPopup", controller, nil)
 			return true
 		else
 		end
 	end, function(element, menu, controller)
-		if IsPC() and IsGamepad(controller) and not CoD.ModelUtility.IsSelfModelPathValueEqualTo(self, controller, "info->xuid", Engine[0x9073FBE2D48C156]("0")) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0xE0254269ED8FFD3, nil, nil)
+		if IsPC() and IsGamepad(controller) and not CoD.ModelUtility.IsSelfModelPathValueEqualTo(self, controller, "info->xuid", Engine[@"stringtoxuiddecimal"]("0")) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"hash_1E0254269ED8FFD3", nil, nil)
 			return true
 		else
 			return false
@@ -289,7 +289,7 @@ CoD.DirectorExpandedLobbyMember.__resetProperties = function(f21_arg0)
 	f21_arg0.SearchingRight:setAlpha(0)
 	f21_arg0.Spinner:setAlpha(0)
 	f21_arg0.Spinner:setZRot(0)
-	f21_arg0.Spinner:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	f21_arg0.Spinner:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	f21_arg0.Spinner:setShaderVector(0, 1, 0, 0, 0)
 	f21_arg0.NoiseTiledBacking:setAlpha(0)
 	f21_arg0.CommonCornerPips:setAlpha(0)
@@ -319,7 +319,7 @@ CoD.DirectorExpandedLobbyMember.__clipsPerState = {
 			f24_arg0:__resetProperties()
 			f24_arg0:setupElementClipCounter(1)
 			local f24_local0 = function(f25_arg0)
-				f24_arg0.DirectorExpandedLobbyMemberInternal:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f24_arg0.DirectorExpandedLobbyMemberInternal:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f24_arg0.DirectorExpandedLobbyMemberInternal:setScale(1.05, 1.05)
 				f24_arg0.DirectorExpandedLobbyMemberInternal:registerEventHandler("interrupted_keyframe", f24_arg0.clipInterrupted)
 				f24_arg0.DirectorExpandedLobbyMemberInternal:registerEventHandler("transition_complete_keyframe", f24_arg0.clipFinished)
@@ -332,7 +332,7 @@ CoD.DirectorExpandedLobbyMember.__clipsPerState = {
 			f26_arg0:__resetProperties()
 			f26_arg0:setupElementClipCounter(1)
 			local f26_local0 = function(f27_arg0)
-				f26_arg0.DirectorExpandedLobbyMemberInternal:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f26_arg0.DirectorExpandedLobbyMemberInternal:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f26_arg0.DirectorExpandedLobbyMemberInternal:setScale(1, 1)
 				f26_arg0.DirectorExpandedLobbyMemberInternal:registerEventHandler("interrupted_keyframe", f26_arg0.clipInterrupted)
 				f26_arg0.DirectorExpandedLobbyMemberInternal:registerEventHandler("transition_complete_keyframe", f26_arg0.clipFinished)
@@ -371,7 +371,7 @@ CoD.DirectorExpandedLobbyMember.__clipsPerState = {
 			f30_arg0.DirectorExpandedLobbyMemberInternal:setAlpha(0)
 			f30_arg0.clipFinished(f30_arg0.DirectorExpandedLobbyMemberInternal)
 			local f30_local0 = function(f31_arg0)
-				f30_arg0.DirectorCustomStartButton:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f30_arg0.DirectorCustomStartButton:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f30_arg0.DirectorCustomStartButton:setScale(1.05, 1.05)
 				f30_arg0.DirectorCustomStartButton:registerEventHandler("interrupted_keyframe", f30_arg0.clipInterrupted)
 				f30_arg0.DirectorCustomStartButton:registerEventHandler("transition_complete_keyframe", f30_arg0.clipFinished)
@@ -388,7 +388,7 @@ CoD.DirectorExpandedLobbyMember.__clipsPerState = {
 			f32_arg0.DirectorExpandedLobbyMemberInternal:setAlpha(0)
 			f32_arg0.clipFinished(f32_arg0.DirectorExpandedLobbyMemberInternal)
 			local f32_local0 = function(f33_arg0)
-				f32_arg0.DirectorCustomStartButton:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f32_arg0.DirectorCustomStartButton:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f32_arg0.DirectorCustomStartButton:setScale(1, 1)
 				f32_arg0.DirectorCustomStartButton:registerEventHandler("interrupted_keyframe", f32_arg0.clipInterrupted)
 				f32_arg0.DirectorCustomStartButton:registerEventHandler("transition_complete_keyframe", f32_arg0.clipFinished)
@@ -432,7 +432,7 @@ CoD.DirectorExpandedLobbyMember.__clipsPerState = {
 			f34_arg0.Spinner:completeAnimation()
 			f34_arg0.Spinner:setAlpha(0.02)
 			f34_arg0.Spinner:setZRot(0)
-			f34_arg0.Spinner:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+			f34_arg0.Spinner:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 			f34_arg0.Spinner:setShaderVector(0, 2, 0, 0, 0)
 			f34_local0(f34_arg0.Spinner)
 			f34_arg0.nextClip = "DefaultClip"
@@ -472,7 +472,7 @@ CoD.DirectorExpandedLobbyMember.__clipsPerState = {
 					f39_arg0:setAlpha(0.8)
 					f39_arg0:registerEventHandler("transition_complete_keyframe", f37_arg0.clipFinished)
 				end
-				f37_arg0.PlayerFound:beginAnimation(200, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f37_arg0.PlayerFound:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_out"])
 				f37_arg0.PlayerFound:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
 				f37_arg0.PlayerFound:setAlpha(1)
 				f37_arg0.PlayerFound:registerEventHandler("interrupted_keyframe", f37_arg0.clipInterrupted)

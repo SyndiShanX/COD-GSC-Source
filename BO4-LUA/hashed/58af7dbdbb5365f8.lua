@@ -7,8 +7,8 @@ CoD.WZBox9Slice.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_a
 	self.id = "WZBox9Slice"
 	self.soundSet = "default"
 	local Box9Slice = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	Box9Slice:setImage(RegisterImage(0x7A4A75DE434AB62))
-	Box9Slice:setMaterial(LUI.UIImage.GetCachedMaterial(0x44484DDFAF5C093))
+	Box9Slice:setImage(RegisterImage(@"uie_wz_hud_header_box"))
+	Box9Slice:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_normal"))
 	Box9Slice:setShaderVector(0, 0, 0, 0, 0)
 	Box9Slice:setupNineSliceShader(6, 6)
 	self:addElement(Box9Slice)

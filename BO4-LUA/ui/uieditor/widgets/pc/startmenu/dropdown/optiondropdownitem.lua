@@ -1,6 +1,6 @@
 require("x64:3625a0d08a5c80d")
 local f0_local0 = function(f1_arg0, f1_arg1, f1_arg2)
-	CoD.Menu.AddButtonCallbackFunction(f1_arg2, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, f2_arg3)
+	CoD.Menu.AddButtonCallbackFunction(f1_arg2, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, f2_arg3)
 		f1_arg0:processEvent({
 			name = "lose_focus",
 			controller = controller,
@@ -10,7 +10,7 @@ local f0_local0 = function(f1_arg0, f1_arg1, f1_arg2)
 			element = f1_arg0,
 		})
 	end)
-	CoD.Menu.AddButtonCallbackFunction(f1_arg2, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, f3_arg3)
+	CoD.Menu.AddButtonCallbackFunction(f1_arg2, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, f3_arg3)
 		if not menu.m_disableNavigation and menu:AcceptGamePadButtonInputFromModelCallback(controller) then
 			f1_arg0:processEvent({
 				name = "lose_focus",
@@ -45,12 +45,12 @@ CoD.OptionDropdownItem.new = function(f5_arg0, f5_arg1, f5_arg2, f5_arg3, f5_arg
 	self.fullbacking = fullbacking
 	local labelText = LUI.UIText.new(0, 0, 9, 364, 0, 0, 0, 36)
 	labelText:setTTF("default")
-	labelText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	labelText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	labelText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	labelText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	labelText:linkToElementModel(self, "valueDisplay", true, function(model)
 		local f6_local0 = model:get()
 		if f6_local0 ~= nil then
-			labelText:setText(Engine[0xF9F1239CFD921FE](f6_local0))
+			labelText:setText(Engine[@"hash_4F9F1239CFD921FE"](f6_local0))
 		end
 	end)
 	self:addElement(labelText)

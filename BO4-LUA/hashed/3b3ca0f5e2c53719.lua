@@ -41,8 +41,8 @@ LUI.createMenu.PurchaseCodPoints = function(f1_arg0, f1_arg1)
 	local TiledwhiteNoiseBacking = nil
 	TiledwhiteNoiseBacking = LUI.UIImage.new(0.5, 0.5, 103, 325, 0, 0, 85, 127)
 	TiledwhiteNoiseBacking:setAlpha(0.02)
-	TiledwhiteNoiseBacking:setImage(RegisterImage(0x7167D8C33A06020))
-	TiledwhiteNoiseBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	TiledwhiteNoiseBacking:setImage(RegisterImage(@"uie_ui_menu_aar_repeat_white_bg"))
+	TiledwhiteNoiseBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	TiledwhiteNoiseBacking:setShaderVector(0, 0, 0, 0, 0)
 	TiledwhiteNoiseBacking:setupNineSliceShader(64, 64)
 	self:addElement(TiledwhiteNoiseBacking)
@@ -60,27 +60,27 @@ LUI.createMenu.PurchaseCodPoints = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f3_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_none"])
 		return f3_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(PCSmallCloseButton, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "MOUSE1", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(PCSmallCloseButton, f1_arg0, Enum[@"luibutton"][@"lui_key_none"], "MOUSE1", function(element, menu, controller, model)
 		HidePsStoreIcon(controller)
 		PlayClip(self, "Close", controller)
 		DelayGoBack(menu, controller, 300)
 		PlaySoundAlias("uin_party_ease_slide_back")
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "MOUSE1")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "MOUSE1")
 		return false
 	end, false)
-	f1_local1:AddButtonCallbackFunction(PCSmallCloseButton, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "ui_confirm", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(PCSmallCloseButton, f1_arg0, Enum[@"luibutton"][@"lui_key_none"], "ui_confirm", function(element, menu, controller, model)
 		HidePsStoreIcon(controller)
 		PlayClip(self, "Close", controller)
 		DelayGoBack(menu, controller, 300)
 		PlaySoundAlias("uin_party_ease_slide_back")
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "ui_confirm")
 		return false
 	end, false)
 	self:addElement(PCSmallCloseButton)
@@ -107,7 +107,7 @@ LUI.createMenu.PurchaseCodPoints = function(f1_arg0, f1_arg1)
 	})
 	local f1_local8 = self
 	local f1_local9 = self.subscribeToModel
-	local f1_local10 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	local f1_local10 = Engine[@"getmodelforcontroller"](f1_arg0)
 	f1_local9(f1_local8, f1_local10["StoreRoot.ready"], function(f11_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",
@@ -117,14 +117,14 @@ LUI.createMenu.PurchaseCodPoints = function(f1_arg0, f1_arg1)
 			modelName = "StoreRoot.ready",
 		})
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		HidePsStoreIcon(controller)
 		PlayClip(self, "Close", controller)
 		DelayGoBack(menu, controller, 300)
 		PlaySoundAlias("uin_party_ease_slide_back")
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 		return true
 	end, false)
 	LUI.OverrideFunction_CallOriginalFirst(self, "close", function(element)
@@ -133,7 +133,7 @@ LUI.createMenu.PurchaseCodPoints = function(f1_arg0, f1_arg1)
 	end)
 	self.__on_menuOpened_self = function(f15_arg0, f15_arg1, f15_arg2, f15_arg3)
 		local f15_local0 = self
-		ShowPsStoreIcon(f15_arg1, Enum[0x784DC8CE13E1E13][0x6AAAA535714D805])
+		ShowPsStoreIcon(f15_arg1, Enum[@"hash_6784DC8CE13E1E13"][@"right"])
 		PlaySoundAlias("uin_party_ease_slide")
 		MenuHidesFreeCursor(f15_arg2, f15_arg1)
 	end
@@ -332,7 +332,7 @@ CoD.PurchaseCodPoints.__clipsPerState = {
 			f33_arg0:__resetProperties()
 			f33_arg0:setupElementClipCounter(2)
 			local f33_local0 = function(f34_arg0)
-				f34_arg0:beginAnimation(239, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f34_arg0:beginAnimation(239, Enum[@"luitween"][@"luitween_ease_both"])
 				f34_arg0:setAlpha(1)
 				f34_arg0:registerEventHandler("transition_complete_keyframe", f33_arg0.clipFinished)
 			end
@@ -344,7 +344,7 @@ CoD.PurchaseCodPoints.__clipsPerState = {
 			f33_arg0.CoDPointsContainer:registerEventHandler("transition_complete_keyframe", f33_local0)
 			local f33_local1 = function(f35_arg0)
 				local f35_local0 = function(f36_arg0)
-					f36_arg0:beginAnimation(239, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f36_arg0:beginAnimation(239, Enum[@"luitween"][@"luitween_ease_both"])
 					f36_arg0:setAlpha(1)
 					f36_arg0:registerEventHandler("transition_complete_keyframe", f33_arg0.clipFinished)
 				end
@@ -388,7 +388,7 @@ CoD.PurchaseCodPoints.__clipsPerState = {
 			f38_arg0.Blackfade:setAlpha(0)
 			f38_local0(f38_arg0.Blackfade)
 			local f38_local1 = function(f40_arg0)
-				f38_arg0.CoDPointsContainer:beginAnimation(300, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f38_arg0.CoDPointsContainer:beginAnimation(300, Enum[@"luitween"][@"luitween_ease_both"])
 				f38_arg0.CoDPointsContainer:setAlpha(1)
 				f38_arg0.CoDPointsContainer:registerEventHandler("interrupted_keyframe", f38_arg0.clipInterrupted)
 				f38_arg0.CoDPointsContainer:registerEventHandler("transition_complete_keyframe", f38_arg0.clipFinished)
@@ -398,7 +398,7 @@ CoD.PurchaseCodPoints.__clipsPerState = {
 			f38_arg0.CoDPointsContainer:setAlpha(0)
 			f38_local1(f38_arg0.CoDPointsContainer)
 			local f38_local2 = function(f41_arg0)
-				f38_arg0.fefooterRighSlideIn:beginAnimation(300, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f38_arg0.fefooterRighSlideIn:beginAnimation(300, Enum[@"luitween"][@"luitween_ease_both"])
 				f38_arg0.fefooterRighSlideIn:setAlpha(1)
 				f38_arg0.fefooterRighSlideIn:registerEventHandler("interrupted_keyframe", f38_arg0.clipInterrupted)
 				f38_arg0.fefooterRighSlideIn:registerEventHandler("transition_complete_keyframe", f38_arg0.clipFinished)

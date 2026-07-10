@@ -30,7 +30,7 @@ CoD.directorPublic.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local HeaderWZ = CoD.StageNotificationContainer.new(f1_arg0, f1_arg1, 0, 1, 0, 0, 0, 0, 0, 120)
 	HeaderWZ:setAlpha(0)
-	HeaderWZ.CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(0xA2DD20750465431))
+	HeaderWZ.CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(@"menu/warzone"))
 	HeaderWZ.CommonHeader.subtitle.subtitle:setAlpha(0)
 	HeaderWZ:subscribeToGlobalModel(f1_arg1, "LobbyRoot", "publicLobby.stageDetails", function(model)
 		local f2_local0 = model:get()
@@ -86,7 +86,7 @@ CoD.directorPublic.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 			condition = function(menu, element, event)
 				local f8_local0 = CoD.ModelUtility.IsGlobalModelValueEqualToEnum("lobbyRoot.publicLobby.stage", LuaEnum.PUBLIC_LOBBY.INVALID)
 				if f8_local0 then
-					f8_local0 = CoD.BaseUtility.IsCurrentSessionModeEqualTo(Enum[0x9C0C2196D8313A0][0xBF1DCC8138A9D39])
+					f8_local0 = CoD.BaseUtility.IsCurrentSessionModeEqualTo(Enum[@"emodes"][@"mode_warzone"])
 					if f8_local0 then
 						f8_local0 = IsLobbyPrivateHost()
 						if f8_local0 then
@@ -94,7 +94,7 @@ CoD.directorPublic.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 							if f8_local0 then
 								f8_local0 = CoD.DirectorUtility.ShowDirectorPublic(f1_arg1)
 								if f8_local0 then
-									f8_local0 = CoD.DirectorUtility.IsMainMode(f1_arg1, Enum[0x89C1455C5032969][0x78C124999125C42])
+									f8_local0 = CoD.DirectorUtility.IsMainMode(f1_arg1, Enum[@"lobbymainmode"][@"lobby_mainmode_wz"])
 									if f8_local0 then
 										f8_local0 = CoD.LobbyUtility.AllMembersInFrontend()
 									end
@@ -109,7 +109,7 @@ CoD.directorPublic.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	})
 	local DirectorTogglePartyFill = WarzoneHostPlayButton
 	local WarzoneClientPlayButton = WarzoneHostPlayButton.subscribeToModel
-	local CustomGamesButton = Engine[0x8DF2E5447F384B9]()
+	local CustomGamesButton = Engine[@"getglobalmodel"]()
 	WarzoneClientPlayButton(DirectorTogglePartyFill, CustomGamesButton["lobbyRoot.publicLobby.stage"], function(f9_arg0)
 		f1_arg0:updateElementState(WarzoneHostPlayButton, {
 			name = "model_validation",
@@ -121,7 +121,7 @@ CoD.directorPublic.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	end, false)
 	DirectorTogglePartyFill = WarzoneHostPlayButton
 	WarzoneClientPlayButton = WarzoneHostPlayButton.subscribeToModel
-	CustomGamesButton = Engine[0x8DF2E5447F384B9]()
+	CustomGamesButton = Engine[@"getglobalmodel"]()
 	WarzoneClientPlayButton(DirectorTogglePartyFill, CustomGamesButton["lobbyRoot.privateClient.update"], function(f10_arg0)
 		f1_arg0:updateElementState(WarzoneHostPlayButton, {
 			name = "model_validation",
@@ -133,7 +133,7 @@ CoD.directorPublic.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	end, false)
 	DirectorTogglePartyFill = WarzoneHostPlayButton
 	WarzoneClientPlayButton = WarzoneHostPlayButton.subscribeToModel
-	CustomGamesButton = Engine[0x8DF2E5447F384B9]()
+	CustomGamesButton = Engine[@"getglobalmodel"]()
 	WarzoneClientPlayButton(DirectorTogglePartyFill, CustomGamesButton["lobbyRoot.lobbyNav"], function(f11_arg0)
 		f1_arg0:updateElementState(WarzoneHostPlayButton, {
 			name = "model_validation",
@@ -145,7 +145,7 @@ CoD.directorPublic.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	end, false)
 	DirectorTogglePartyFill = WarzoneHostPlayButton
 	WarzoneClientPlayButton = WarzoneHostPlayButton.subscribeToModel
-	CustomGamesButton = Engine[0x8DF2E5447F384B9]()
+	CustomGamesButton = Engine[@"getglobalmodel"]()
 	WarzoneClientPlayButton(DirectorTogglePartyFill, CustomGamesButton["lobbyRoot.lobbyMainMode"], function(f12_arg0)
 		f1_arg0:updateElementState(WarzoneHostPlayButton, {
 			name = "model_validation",
@@ -155,8 +155,8 @@ CoD.directorPublic.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 			modelName = "lobbyRoot.lobbyMainMode",
 		})
 	end, false)
-	WarzoneHostPlayButton.DirectorSelectButtonMiniInternal.MiddleText:setText(LocalizeToUpperString(0xA56BF6A96B02984))
-	WarzoneHostPlayButton.DirectorSelectButtonMiniInternal.MiddleTextFocus:setText(LocalizeToUpperString(0xA56BF6A96B02984))
+	WarzoneHostPlayButton.DirectorSelectButtonMiniInternal.MiddleText:setText(LocalizeToUpperString(@"menu/deploy"))
+	WarzoneHostPlayButton.DirectorSelectButtonMiniInternal.MiddleTextFocus:setText(LocalizeToUpperString(@"menu/deploy"))
 	WarzoneHostPlayButton:registerEventHandler("gain_focus", function(element, event)
 		local f13_local0 = nil
 		if element.gainFocus then
@@ -164,15 +164,15 @@ CoD.directorPublic.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 		elseif element.super.gainFocus then
 			f13_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f13_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(WarzoneHostPlayButton, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(WarzoneHostPlayButton, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		LobbyOnlineStartMatchMaking(menu, self, element, controller)
 		PlaySoundAlias("uin_wz_deploy")
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 		return true
 	end, false)
 	self:addElement(WarzoneHostPlayButton)
@@ -184,14 +184,14 @@ CoD.directorPublic.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 			condition = function(menu, element, event)
 				local f16_local0 = CoD.ModelUtility.IsGlobalModelValueEqualToEnum("lobbyRoot.publicLobby.stage", LuaEnum.PUBLIC_LOBBY.INVALID)
 				if f16_local0 then
-					f16_local0 = CoD.BaseUtility.IsCurrentSessionModeEqualTo(Enum[0x9C0C2196D8313A0][0xBF1DCC8138A9D39])
+					f16_local0 = CoD.BaseUtility.IsCurrentSessionModeEqualTo(Enum[@"emodes"][@"mode_warzone"])
 					if f16_local0 then
 						if not IsLobbyPrivateHost() then
 							f16_local0 = IsWarzone()
 							if f16_local0 then
 								f16_local0 = CoD.DirectorUtility.ShowDirectorPublic(f1_arg1)
 								if f16_local0 then
-									f16_local0 = CoD.DirectorUtility.IsMainMode(f1_arg1, Enum[0x89C1455C5032969][0x78C124999125C42])
+									f16_local0 = CoD.DirectorUtility.IsMainMode(f1_arg1, Enum[@"lobbymainmode"][@"lobby_mainmode_wz"])
 									if f16_local0 then
 										f16_local0 = CoD.LobbyUtility.AllMembersInFrontend()
 									end
@@ -208,7 +208,7 @@ CoD.directorPublic.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	})
 	CustomGamesButton = WarzoneClientPlayButton
 	DirectorTogglePartyFill = WarzoneClientPlayButton.subscribeToModel
-	local DirectorWarningMessage = Engine[0x8DF2E5447F384B9]()
+	local DirectorWarningMessage = Engine[@"getglobalmodel"]()
 	DirectorTogglePartyFill(CustomGamesButton, DirectorWarningMessage["lobbyRoot.publicLobby.stage"], function(f17_arg0)
 		f1_arg0:updateElementState(WarzoneClientPlayButton, {
 			name = "model_validation",
@@ -220,7 +220,7 @@ CoD.directorPublic.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	end, false)
 	CustomGamesButton = WarzoneClientPlayButton
 	DirectorTogglePartyFill = WarzoneClientPlayButton.subscribeToModel
-	DirectorWarningMessage = Engine[0x8DF2E5447F384B9]()
+	DirectorWarningMessage = Engine[@"getglobalmodel"]()
 	DirectorTogglePartyFill(CustomGamesButton, DirectorWarningMessage["lobbyRoot.privateClient.update"], function(f18_arg0)
 		f1_arg0:updateElementState(WarzoneClientPlayButton, {
 			name = "model_validation",
@@ -232,7 +232,7 @@ CoD.directorPublic.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	end, false)
 	CustomGamesButton = WarzoneClientPlayButton
 	DirectorTogglePartyFill = WarzoneClientPlayButton.subscribeToModel
-	DirectorWarningMessage = Engine[0x8DF2E5447F384B9]()
+	DirectorWarningMessage = Engine[@"getglobalmodel"]()
 	DirectorTogglePartyFill(CustomGamesButton, DirectorWarningMessage["lobbyRoot.lobbyNav"], function(f19_arg0)
 		f1_arg0:updateElementState(WarzoneClientPlayButton, {
 			name = "model_validation",
@@ -244,7 +244,7 @@ CoD.directorPublic.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	end, false)
 	CustomGamesButton = WarzoneClientPlayButton
 	DirectorTogglePartyFill = WarzoneClientPlayButton.subscribeToModel
-	DirectorWarningMessage = Engine[0x8DF2E5447F384B9]()
+	DirectorWarningMessage = Engine[@"getglobalmodel"]()
 	DirectorTogglePartyFill(CustomGamesButton, DirectorWarningMessage["lobbyRoot.lobbyMainMode"], function(f20_arg0)
 		f1_arg0:updateElementState(WarzoneClientPlayButton, {
 			name = "model_validation",
@@ -305,20 +305,20 @@ CoD.directorPublic.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	})
 	CustomGamesButton:setAlpha(0)
 	CustomGamesButton.DirectorSelectButtonMiniInternal.MiddleText.__MiddleText_StringReference = function()
-		CustomGamesButton.DirectorSelectButtonMiniInternal.MiddleText:setText(LocalizeToUpperString(CoD.DirectorUtility.GetCustomGamesName(0x85D9C7D7DDC8EE0)))
+		CustomGamesButton.DirectorSelectButtonMiniInternal.MiddleText:setText(LocalizeToUpperString(CoD.DirectorUtility.GetCustomGamesName(@"menu/custom_games")))
 	end
 	CustomGamesButton.DirectorSelectButtonMiniInternal.MiddleText.__MiddleText_StringReference()
 	CustomGamesButton.DirectorSelectButtonMiniInternal.MiddleText:setTTF("ttmussels_regular")
 	CustomGamesButton.DirectorSelectButtonMiniInternal.MiddleTextFocus.__MiddleTextFocus_String = function()
-		CustomGamesButton.DirectorSelectButtonMiniInternal.MiddleTextFocus:setText(LocalizeToUpperString(CoD.DirectorUtility.GetCustomGamesName(0x85D9C7D7DDC8EE0)))
+		CustomGamesButton.DirectorSelectButtonMiniInternal.MiddleTextFocus:setText(LocalizeToUpperString(CoD.DirectorUtility.GetCustomGamesName(@"menu/custom_games")))
 	end
 	CustomGamesButton.DirectorSelectButtonMiniInternal.MiddleTextFocus.__MiddleTextFocus_String()
 	CustomGamesButton.DirectorSelectButtonMiniInternal.MiddleTextFocus:setTTF("ttmussels_regular")
 	local TopBar = CustomGamesButton
 	DirectorWarningMessage = CustomGamesButton.subscribeToModel
-	local f1_local10 = Engine[0x8DF2E5447F384B9]()
+	local f1_local10 = Engine[@"getglobalmodel"]()
 	DirectorWarningMessage(TopBar, f1_local10["lobbyRoot.lobbyNav"], function(f29_arg0, f29_arg1)
-		CoD.Menu.UpdateButtonShownState(f29_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f29_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	CustomGamesButton:registerEventHandler("gain_focus", function(element, event)
 		local f30_local0 = nil
@@ -327,10 +327,10 @@ CoD.directorPublic.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 		elseif element.super.gainFocus then
 			f30_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f30_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(CustomGamesButton, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(CustomGamesButton, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if CoD.WZUtility.AllowWZOffline() and not IsGameTrial() and IsWarzone() and not IsPC() then
 			PlaySoundAlias("uin_press_generic")
 			OpenSystemOverlay(self, menu, controller, "CustomGamesNotification")
@@ -345,10 +345,10 @@ CoD.directorPublic.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 		end
 	end, function(element, menu, controller)
 		if CoD.WZUtility.AllowWZOffline() and not IsGameTrial() and IsWarzone() and not IsPC() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		elseif CoD.WZUtility.AllowWZOffline() and not IsGameTrial() and IsWarzone() and IsPC() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false
@@ -373,11 +373,11 @@ CoD.directorPublic.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	self:addElement(MapVoteZM)
 	self.MapVoteZM = MapVoteZM
 	local MapAndGameType = CoD.DirectorMapAndGameTypeContainer.new(f1_arg0, f1_arg1, 0.5, 0.5, 514, 896, 1, 1, -368, -188)
-	MapAndGameType.DirectorMapAndGameInternal.GamemodeIcon:setImage(RegisterImage(0x7615068F50B3D66))
+	MapAndGameType.DirectorMapAndGameInternal.GamemodeIcon:setImage(RegisterImage(@"blacktransparent"))
 	MapAndGameType.DirectorMapAndGameInternal.DirectorMapAndGameTypeInternalTitles.Label:setText("")
-	MapAndGameType.DirectorMapAndGameInternal.PlaylistHeader.GameModeText:setText(Engine[0xF9F1239CFD921FE](0x890976738B1D859))
+	MapAndGameType.DirectorMapAndGameInternal.PlaylistHeader.GameModeText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_5890976738B1D859"))
 	MapAndGameType.DirectorMapAndGameInternal.PlaylistHeader.GameModeText:setTTF("ttmussels_regular")
-	MapAndGameType.DirectorMapAndGameInternal.PlaylistHeaderNonHost.GameModeText:setText(Engine[0xF9F1239CFD921FE](0x890976738B1D859))
+	MapAndGameType.DirectorMapAndGameInternal.PlaylistHeaderNonHost.GameModeText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_5890976738B1D859"))
 	MapAndGameType.DirectorMapAndGameInternal.PlaylistHeaderNonHost.GameModeText:setTTF("ttmussels_regular")
 	MapAndGameType.DirectorMapAndGameInternal.MapImage.__DirectorMapAndGameInternal_MapImage_Image = function(f33_arg0)
 		local f33_local0 = f33_arg0:get()
@@ -409,21 +409,21 @@ CoD.directorPublic.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	end
 	local DirectorLobbyPoseMembers = MapAndGameType
 	local DirectorReadyButton = MapAndGameType.subscribeToModel
-	local DirectorLobbyPoseMembersZM = Engine[0x8DF2E5447F384B9]()
+	local DirectorLobbyPoseMembersZM = Engine[@"getglobalmodel"]()
 	DirectorReadyButton(DirectorLobbyPoseMembers, DirectorLobbyPoseMembersZM["lobbyRoot.lobbyNav"], function(f37_arg0, f37_arg1)
-		CoD.Menu.UpdateButtonShownState(f37_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f37_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	DirectorLobbyPoseMembers = MapAndGameType
 	DirectorReadyButton = MapAndGameType.subscribeToModel
-	DirectorLobbyPoseMembersZM = Engine[0x8DF2E5447F384B9]()
+	DirectorLobbyPoseMembersZM = Engine[@"getglobalmodel"]()
 	DirectorReadyButton(DirectorLobbyPoseMembers, DirectorLobbyPoseMembersZM["lobbyRoot.privateClient.isHost"], function(f38_arg0, f38_arg1)
-		CoD.Menu.UpdateButtonShownState(f38_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f38_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	DirectorLobbyPoseMembers = MapAndGameType
 	DirectorReadyButton = MapAndGameType.subscribeToModel
-	DirectorLobbyPoseMembersZM = Engine[0x8DF2E5447F384B9]()
+	DirectorLobbyPoseMembersZM = Engine[@"getglobalmodel"]()
 	DirectorReadyButton(DirectorLobbyPoseMembers, DirectorLobbyPoseMembersZM["lobbyRoot.gameClient.isHost"], function(f39_arg0, f39_arg1)
-		CoD.Menu.UpdateButtonShownState(f39_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f39_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	MapAndGameType:registerEventHandler("gain_focus", function(element, event)
 		local f40_local0 = nil
@@ -432,10 +432,10 @@ CoD.directorPublic.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 		elseif element.super.gainFocus then
 			f40_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f40_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(MapAndGameType, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(MapAndGameType, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if not IsZombies() and IsPartyLeader(controller) then
 			CoD.DirectorUtility.DirectorOpenOverlayWithCurrentMenuMode(menu, controller, "DirectorFindGameWZ")
 			PlaySoundAlias("uin_press_generic")
@@ -444,7 +444,7 @@ CoD.directorPublic.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 		end
 	end, function(element, menu, controller)
 		if not IsZombies() and IsPartyLeader(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		else
 			return false
@@ -454,10 +454,10 @@ CoD.directorPublic.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	self.MapAndGameType = MapAndGameType
 	DirectorReadyButton = CoD.DirectorReadyButton.new(f1_arg0, f1_arg1, 0.5, 0.5, 514, 896, 1, 1, -178, -108)
 	DirectorReadyButton:setAlpha(0)
-	DirectorReadyButton.DirectorSelectButtonMiniInternal.MiddleText:setText(LocalizeToUpperString(0x7A9F166E7248D86))
-	DirectorReadyButton.DirectorSelectButtonMiniInternal.MiddleTextFocus:setText(LocalizeToUpperString(0x7A9F166E7248D86))
-	DirectorReadyButton.PlayText:setText(LocalizeToUpperString(0xE6F6113B8B75F3E))
-	DirectorReadyButton:subscribeToGlobalModel(f1_arg1, "PerController", "ButtonBits." .. Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], function(model)
+	DirectorReadyButton.DirectorSelectButtonMiniInternal.MiddleText:setText(LocalizeToUpperString(@"menu/ready_up"))
+	DirectorReadyButton.DirectorSelectButtonMiniInternal.MiddleTextFocus:setText(LocalizeToUpperString(@"menu/ready_up"))
+	DirectorReadyButton.PlayText:setText(LocalizeToUpperString(@"menu/ready"))
+	DirectorReadyButton:subscribeToGlobalModel(f1_arg1, "PerController", "ButtonBits." .. Enum[@"luibutton"][@"lui_key_xba_pscross"], function(model)
 		DirectorReadyButton:setModel(model, f1_arg1)
 	end)
 	self:addElement(DirectorReadyButton)
@@ -486,23 +486,23 @@ CoD.directorPublic.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	self.TrialCountdown = TrialCountdown
 	local f1_local20 = HeaderWZDeploying
 	local f1_local21 = HeaderWZDeploying.subscribeToModel
-	local f1_local22 = Engine[0x8DF2E5447F384B9]()
+	local f1_local22 = Engine[@"getglobalmodel"]()
 	f1_local21(f1_local20, f1_local22["lobbyRoot.lobbyNetworkMode"], HeaderWZDeploying.CommonHeader.subtitle.StageTitle.__CommonHeader_subtitle_ScreenTitle_FullPath)
 	f1_local20 = CustomGamesButton
 	f1_local21 = CustomGamesButton.subscribeToModel
-	f1_local22 = Engine[0x8DF2E5447F384B9]()
+	f1_local22 = Engine[@"getglobalmodel"]()
 	f1_local21(f1_local20, f1_local22["lobbyRoot.lobbyNav"], CustomGamesButton.DirectorSelectButtonMiniInternal.MiddleText.__MiddleText_StringReference)
 	f1_local20 = CustomGamesButton
 	f1_local21 = CustomGamesButton.subscribeToModel
-	f1_local22 = Engine[0x8DF2E5447F384B9]()
+	f1_local22 = Engine[@"getglobalmodel"]()
 	f1_local21(f1_local20, f1_local22["lobbyRoot.lobbyNav"], CustomGamesButton.DirectorSelectButtonMiniInternal.MiddleTextFocus.__MiddleTextFocus_String)
 	f1_local20 = MapAndGameType
 	f1_local21 = MapAndGameType.subscribeToModel
-	f1_local22 = Engine[0x8DF2E5447F384B9]()
+	f1_local22 = Engine[@"getglobalmodel"]()
 	f1_local21(f1_local20, f1_local22["lobbyRoot.lobbyNetworkMode"], MapAndGameType.DirectorMapAndGameInternal.MapImage.__DirectorMapAndGameInternal_MapImage_Image_FullPath)
 	f1_local20 = MapAndGameType
 	f1_local21 = MapAndGameType.subscribeToModel
-	f1_local22 = Engine[0x8DF2E5447F384B9]()
+	f1_local22 = Engine[@"getglobalmodel"]()
 	f1_local21(f1_local20, f1_local22["lobbyRoot.lobbyNetworkMode"], MapAndGameType.DirectorMapAndGameInternal.DirectorMapAndGameTypeInternalTitles.SubTitle.__Label_Title_FullPath)
 	self:mergeStateConditions({
 		{
@@ -510,7 +510,7 @@ CoD.directorPublic.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 			condition = function(menu, element, event)
 				local f45_local0 = IsPC()
 				if f45_local0 then
-					f45_local0 = CoD.DirectorUtility.IsMainMode(f1_arg1, Enum[0x89C1455C5032969][0x78C124999125C42])
+					f45_local0 = CoD.DirectorUtility.IsMainMode(f1_arg1, Enum[@"lobbymainmode"][@"lobby_mainmode_wz"])
 					if f45_local0 then
 						f45_local0 = CoD.ModelUtility.IsGlobalModelValueEqualToEnum("lobbyRoot.publicLobby.stage", LuaEnum.PUBLIC_LOBBY.INVALID)
 					end
@@ -521,19 +521,19 @@ CoD.directorPublic.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 		{
 			stateName = "WarzoneNotDeployed",
 			condition = function(menu, element, event)
-				return CoD.DirectorUtility.IsMainMode(f1_arg1, Enum[0x89C1455C5032969][0x78C124999125C42]) and CoD.ModelUtility.IsGlobalModelValueEqualToEnum("lobbyRoot.publicLobby.stage", LuaEnum.PUBLIC_LOBBY.INVALID)
+				return CoD.DirectorUtility.IsMainMode(f1_arg1, Enum[@"lobbymainmode"][@"lobby_mainmode_wz"]) and CoD.ModelUtility.IsGlobalModelValueEqualToEnum("lobbyRoot.publicLobby.stage", LuaEnum.PUBLIC_LOBBY.INVALID)
 			end,
 		},
 		{
 			stateName = "WarzoneDeploying_isPC",
 			condition = function(menu, element, event)
-				return CoD.DirectorUtility.IsMainMode(f1_arg1, Enum[0x89C1455C5032969][0x78C124999125C42]) and IsPC()
+				return CoD.DirectorUtility.IsMainMode(f1_arg1, Enum[@"lobbymainmode"][@"lobby_mainmode_wz"]) and IsPC()
 			end,
 		},
 		{
 			stateName = "WarzoneDeploying",
 			condition = function(menu, element, event)
-				return CoD.DirectorUtility.IsMainMode(f1_arg1, Enum[0x89C1455C5032969][0x78C124999125C42])
+				return CoD.DirectorUtility.IsMainMode(f1_arg1, Enum[@"lobbymainmode"][@"lobby_mainmode_wz"])
 			end,
 		},
 		{
@@ -563,7 +563,7 @@ CoD.directorPublic.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	})
 	f1_local20 = self
 	f1_local21 = self.subscribeToModel
-	f1_local22 = Engine[0x8DF2E5447F384B9]()
+	f1_local22 = Engine[@"getglobalmodel"]()
 	f1_local21(f1_local20, f1_local22["lobbyRoot.lobbyMainMode"], function(f53_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -575,7 +575,7 @@ CoD.directorPublic.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	end, false)
 	f1_local20 = self
 	f1_local21 = self.subscribeToModel
-	f1_local22 = Engine[0x8DF2E5447F384B9]()
+	f1_local22 = Engine[@"getglobalmodel"]()
 	f1_local21(f1_local20, f1_local22["lobbyRoot.lobbyNav"], function(f54_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -587,7 +587,7 @@ CoD.directorPublic.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	end, false)
 	f1_local20 = self
 	f1_local21 = self.subscribeToModel
-	f1_local22 = Engine[0x8DF2E5447F384B9]()
+	f1_local22 = Engine[@"getglobalmodel"]()
 	f1_local21(f1_local20, f1_local22["lobbyRoot.publicLobby.stage"], function(f55_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

@@ -31,18 +31,18 @@ CoD.DirectorSelectButtonMode.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	self.GamemodeIcon = GamemodeIcon
 	local GameModeText = LUI.UIText.new(0, 1, 8, -8, 0.5, 0.5, -12, 12)
 	GameModeText:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
-	GameModeText:setText(ToUpper(CoD.BaseUtility.LocalizeIfXHash(0xA43B10D9DA121A)))
+	GameModeText:setText(ToUpper(CoD.BaseUtility.LocalizeIfXHash(@"hash_A43B10D9DA121A")))
 	GameModeText:setTTF("ttmussels_demibold")
-	GameModeText:setMaterial(LUI.UIImage.GetCachedMaterial(0x71E049B161CD00A))
+	GameModeText:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_171E049B161CD00A"))
 	GameModeText:setLetterSpacing(3)
-	GameModeText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	GameModeText:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	GameModeText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	GameModeText:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	self:addElement(GameModeText)
 	self.GameModeText = GameModeText
 	local TabBottomLine = LUI.UIImage.new(0, 1, 0, 0, 0, 0, -2, 2)
 	TabBottomLine:setAlpha(0.09)
-	TabBottomLine:setImage(RegisterImage(0x5526CF3733E24C4))
-	TabBottomLine:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	TabBottomLine:setImage(RegisterImage(@"uie_ui_menu_common_tab_line_bottom"))
+	TabBottomLine:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(TabBottomLine)
 	self.TabBottomLine = TabBottomLine
 	self:mergeStateConditions({

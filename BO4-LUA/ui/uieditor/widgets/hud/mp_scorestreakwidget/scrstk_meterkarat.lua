@@ -9,21 +9,21 @@ CoD.ScrStk_MeterKarat.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	self.soundSet = "HUD"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local FocusMeterFillWhite0 = LUI.UIImage.new(0.5, 0.5, -6, 6, 0.5, 0.5, -3, 3)
-	FocusMeterFillWhite0:setImage(RegisterImage(0xF20585D14FA19A4))
+	FocusMeterFillWhite0:setImage(RegisterImage(@"uie_t7_mp_hud_scorestreak_focusmeterbit"))
 	self:addElement(FocusMeterFillWhite0)
 	self.FocusMeterFillWhite0 = FocusMeterFillWhite0
 	local ScrStkMeterKaratInner0 = CoD.ScrStk_MeterKaratInner.new(f1_arg0, f1_arg1, 0.5, 0.5, -8, 10, 0.5, 0.5, -19, 21)
-	ScrStkMeterKaratInner0:setRFTMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	ScrStkMeterKaratInner0:setRFTMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(ScrStkMeterKaratInner0)
 	self.ScrStkMeterKaratInner0 = ScrStkMeterKaratInner0
 	local ScrStkMeterKaratInner00 = CoD.ScrStk_MeterKaratInner.new(f1_arg0, f1_arg1, 0.5, 0.5, -8, 10, 0.5, 0.5, -20, 20)
-	ScrStkMeterKaratInner00:setRFTMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	ScrStkMeterKaratInner00:setRFTMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(ScrStkMeterKaratInner00)
 	self.ScrStkMeterKaratInner00 = ScrStkMeterKaratInner00
 	local Image0 = LUI.UIImage.new(0.5, 0.5, -17, 19, 0.5, 0.5, -3, 3)
 	Image0:setAlpha(0)
-	Image0:setImage(RegisterImage(0x5BE416E17DAB33B))
-	Image0:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Image0:setImage(RegisterImage(@"uie_t7_core_hud_mapwidget_panelglow"))
+	Image0:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Image0)
 	self.Image0 = Image0
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)
@@ -51,7 +51,7 @@ CoD.ScrStk_MeterKarat.__clipsPerState = {
 				local f5_local0 = function(f6_arg0)
 					local f6_local0 = function(f7_arg0)
 						local f7_local0 = function(f8_arg0)
-							f8_arg0:beginAnimation(410, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735])
+							f8_arg0:beginAnimation(410, Enum[@"luitween"][@"luitween_bounce"])
 							f8_arg0:setLeftRight(0.5, 0.5, -95, 103)
 							f8_arg0:setTopBottom(0.5, 0.5, -3, 3)
 							f8_arg0:setAlpha(0)

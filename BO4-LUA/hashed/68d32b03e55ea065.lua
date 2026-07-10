@@ -22,7 +22,7 @@ CoD.StartMenu_Options_Frame_Network.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	OptionGroups:setWidgetType(CoD.StartMenu_Options_SettingSlider_Wrapper)
 	OptionGroups:setVerticalCount(18)
 	OptionGroups:setSpacing(10)
-	OptionGroups:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	OptionGroups:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	OptionGroups:setDataSource("PlayerSettingsNetworkList")
 	OptionGroups:registerEventHandler("list_item_gain_focus", function(element, event)
 		local f2_local0 = nil
@@ -40,26 +40,26 @@ CoD.StartMenu_Options_Frame_Network.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 		elseif element.super.gainFocus then
 			f3_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 		return f3_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(OptionGroups, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(OptionGroups, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], nil, function(element, menu, controller, model)
 		if HasListAction(element, controller) and IsElementPropertyValue(element, "isHidden", true) then
 			ProcessListAction(self, element, controller, menu)
-			UpdateButtonPromptState(menu, element, controller, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+			UpdateButtonPromptState(menu, element, controller, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 			return true
 		elseif HasListAction(element, controller) then
 			ProcessListAction(self, element, controller, menu)
-			UpdateButtonPromptState(menu, element, controller, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+			UpdateButtonPromptState(menu, element, controller, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 			return true
 		else
 		end
 	end, function(element, menu, controller)
 		if HasListAction(element, controller) and IsElementPropertyValue(element, "isHidden", true) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x3F20759C07A14C2, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"menu/show", nil, nil)
 			return true
 		elseif HasListAction(element, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x7A4FDABE47B6C3F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"menu/hide", nil, nil)
 			return true
 		else
 			return false

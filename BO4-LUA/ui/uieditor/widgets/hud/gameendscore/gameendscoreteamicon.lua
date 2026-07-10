@@ -7,7 +7,7 @@ CoD.GameEndScoreTeamIcon.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	self.id = "GameEndScoreTeamIcon"
 	self.soundSet = "default"
 	local StandardIcon = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	StandardIcon:setImage(RegisterImage(0xEB54B7AC43CFC03))
+	StandardIcon:setImage(RegisterImage(@"hash_3EB54B7AC43CFC03"))
 	self:addElement(StandardIcon)
 	self.StandardIcon = StandardIcon
 	if PostLoadFunc then

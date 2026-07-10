@@ -14,7 +14,7 @@ CoD.ScoreboardGameStatus.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local BlurBG = LUI.UIImage.new(0, 0, 235, 1685, 0, 0, 177, 761)
-	BlurBG:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	BlurBG:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	BlurBG:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(BlurBG)
 	self.BlurBG = BlurBG
@@ -26,7 +26,7 @@ CoD.ScoreboardGameStatus.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	local TintBody01 = LUI.UIImage.new(0, 0, 233, 1687, 0, 0, 185, 755)
 	TintBody01:setRGB(0.87, 0.87, 0.87)
 	TintBody01:setAlpha(0.9)
-	TintBody01:setImage(RegisterImage(0x1CF2000F10E265B))
+	TintBody01:setImage(RegisterImage(@"uie_ui_menu_mp_scoreboard_map_bg"))
 	self:addElement(TintBody01)
 	self.TintBody01 = TintBody01
 	local TintTop01 = LUI.UIImage.new(0, 0, 235, 1685, 0, 0, 177, 185)
@@ -39,8 +39,8 @@ CoD.ScoreboardGameStatus.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	self.ScoreboardGameStatusMap = ScoreboardGameStatusMap
 	local MapGrid02 = LUI.UIImage.new(0, 0, 224, 1682, 0, 0, 218, 706)
 	MapGrid02:setAlpha(0)
-	MapGrid02:setImage(RegisterImage(0xCABC1612E8ACC9B))
-	MapGrid02:setMaterial(LUI.UIImage.GetCachedMaterial(0x7EA4827662D4CD4))
+	MapGrid02:setImage(RegisterImage(@"uie_ui_menu_mp_scoreboard_map_grid01"))
+	MapGrid02:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_17EA4827662D4CD4"))
 	MapGrid02:setShaderVector(0, 9, 4, 0, 0)
 	MapGrid02:setShaderVector(1, 0, 1, 0, 1)
 	self:addElement(MapGrid02)
@@ -49,12 +49,12 @@ CoD.ScoreboardGameStatus.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	self:addElement(Corner)
 	self.Corner = Corner
 	local CornerAdd = CoD.TabbedScoreboardLayoutCorner.new(f1_arg0, f1_arg1, 0, 0, 466, 1451, 0, 0, 239.5, 711.5)
-	CornerAdd:setRFTMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	CornerAdd:setRFTMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(CornerAdd)
 	self.CornerAdd = CornerAdd
 	local MapGrid01 = LUI.UIImage.new(0, 0, 475, 1441, 0, 0, 248, 748)
-	MapGrid01:setImage(RegisterImage(0xCABC4612E8AD1B4))
-	MapGrid01:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	MapGrid01:setImage(RegisterImage(@"uie_ui_menu_mp_scoreboard_map_grid04"))
+	MapGrid01:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	MapGrid01:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(MapGrid01)
 	self.MapGrid01 = MapGrid01
@@ -68,12 +68,12 @@ CoD.ScoreboardGameStatus.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	self:addElement(infoboxLeft)
 	self.infoboxLeft = infoboxLeft
 	local MapLayoutSideBoxR = LUI.UIImage.new(0, 0, 1672, 1688, 0, 0, 465, 489)
-	MapLayoutSideBoxR:setImage(RegisterImage(0x2ED71ABEC279140))
+	MapLayoutSideBoxR:setImage(RegisterImage(@"hash_12ED71ABEC279140"))
 	self:addElement(MapLayoutSideBoxR)
 	self.MapLayoutSideBoxR = MapLayoutSideBoxR
 	local MapLayoutSideBoxL = LUI.UIImage.new(0, 0, 231.5, 247.5, 0, 0, 465, 489)
 	MapLayoutSideBoxL:setZRot(180)
-	MapLayoutSideBoxL:setImage(RegisterImage(0x2ED71ABEC279140))
+	MapLayoutSideBoxL:setImage(RegisterImage(@"hash_12ED71ABEC279140"))
 	self:addElement(MapLayoutSideBoxL)
 	self.MapLayoutSideBoxL = MapLayoutSideBoxL
 	self:mergeStateConditions({
@@ -86,7 +86,7 @@ CoD.ScoreboardGameStatus.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	})
 	local f1_local15 = self
 	local f1_local16 = self.subscribeToModel
-	local f1_local17 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local17 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local16(f1_local15, f1_local17["scoreboardInfo.activeTab"], function(f3_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -126,7 +126,7 @@ CoD.ScoreboardGameStatus.__resetProperties = function(f4_arg0)
 	f4_arg0.InfoboxRIght:setAlpha(1)
 	f4_arg0.CornerAdd:setAlpha(1)
 	f4_arg0.MapGrid01:setAlpha(1)
-	f4_arg0.MapGrid01:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	f4_arg0.MapGrid01:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	f4_arg0.MapGrid01:setShaderVector(0, 1, 0, 0, 0)
 	f4_arg0.Corner:setAlpha(1)
 	f4_arg0.MapLayoutSideBoxR:setAlpha(1)
@@ -233,7 +233,7 @@ CoD.ScoreboardGameStatus.__clipsPerState = {
 			end
 			f6_arg0.MapGrid01:completeAnimation()
 			f6_arg0.MapGrid01:setAlpha(0)
-			f6_arg0.MapGrid01:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+			f6_arg0.MapGrid01:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 			f6_arg0.MapGrid01:setShaderVector(0, 1, 0, 0, 0)
 			f6_local3(f6_arg0.MapGrid01)
 			local f6_local4 = function(f15_arg0)
@@ -246,7 +246,7 @@ CoD.ScoreboardGameStatus.__clipsPerState = {
 			f6_arg0.infoGraphic:registerEventHandler("interrupted_keyframe", f6_arg0.clipInterrupted)
 			f6_arg0.infoGraphic:registerEventHandler("transition_complete_keyframe", f6_local4)
 			local f6_local5 = function(f16_arg0)
-				f6_arg0.InfoboxRIght:beginAnimation(500, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f6_arg0.InfoboxRIght:beginAnimation(500, Enum[@"luitween"][@"luitween_ease_in"])
 				f6_arg0.InfoboxRIght:setAlpha(1)
 				f6_arg0.InfoboxRIght:registerEventHandler("interrupted_keyframe", f6_arg0.clipInterrupted)
 				f6_arg0.InfoboxRIght:registerEventHandler("transition_complete_keyframe", f6_arg0.clipFinished)
@@ -255,7 +255,7 @@ CoD.ScoreboardGameStatus.__clipsPerState = {
 			f6_arg0.InfoboxRIght:setAlpha(0)
 			f6_local5(f6_arg0.InfoboxRIght)
 			local f6_local6 = function(f17_arg0)
-				f6_arg0.infoboxLeft:beginAnimation(500, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f6_arg0.infoboxLeft:beginAnimation(500, Enum[@"luitween"][@"luitween_ease_in"])
 				f6_arg0.infoboxLeft:setAlpha(1)
 				f6_arg0.infoboxLeft:registerEventHandler("interrupted_keyframe", f6_arg0.clipInterrupted)
 				f6_arg0.infoboxLeft:registerEventHandler("transition_complete_keyframe", f6_arg0.clipFinished)

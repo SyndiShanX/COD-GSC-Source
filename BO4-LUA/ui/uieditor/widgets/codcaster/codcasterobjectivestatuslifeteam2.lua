@@ -22,7 +22,7 @@ CoD.CodCasterObjectiveStatusLifeTeam2.new = function(f1_arg0, f1_arg1, f1_arg2, 
 	self.LifeList = LifeList
 	local LifeIcon = LUI.UIImage.new(0.71, 0.71, -74.5, 53.5, -0.3, -0.3, -48, 80)
 	LifeIcon:setScale(0.25, 0.25)
-	LifeIcon:setImage(RegisterImage(0xEE751109854B314))
+	LifeIcon:setImage(RegisterImage(@"hash_6EE751109854B314"))
 	LifeIcon:subscribeToGlobalModel(f1_arg1, "Scoreboard", "team2FactionColor", function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then

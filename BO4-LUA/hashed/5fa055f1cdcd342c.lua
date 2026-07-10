@@ -10,13 +10,13 @@ CoD.PC_MultiItemPickup_Scrollbar.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	local topArrow = LUI.UIImage.new(0, 0, 0, 15, 0, 0, 0, 15)
 	topArrow:setRGB(0.55, 0.54, 0.49)
 	topArrow:setAlpha(0)
-	topArrow:setImage(RegisterImage(0x50F3B2B4549D1B9))
+	topArrow:setImage(RegisterImage(@"uie_ui_arrow_up"))
 	self:addElement(topArrow)
 	self.topArrow = topArrow
 	local bottomArrow = LUI.UIImage.new(0, 0, 0, 15, 1, 1, -15, 0)
 	bottomArrow:setRGB(0.55, 0.54, 0.49)
 	bottomArrow:setAlpha(0)
-	bottomArrow:setImage(RegisterImage(0x1EED26FD6433420))
+	bottomArrow:setImage(RegisterImage(@"uie_ui_arrow_down"))
 	self:addElement(bottomArrow)
 	self.bottomArrow = bottomArrow
 	local sliderBorder = LUI.UIImage.new(0, 0, 0, 15, 0, 1, 6, -6)

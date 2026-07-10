@@ -9,10 +9,10 @@ CoD.WeaponBribeOwned.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	self.soundSet = "none"
 	local PurchasedTitle = LUI.UIText.new(0.5, 0.5, -73, 73, 0.5, 0.5, -9, 9)
 	PurchasedTitle:setRGB(ColorSet.CodPointsNumber.r, ColorSet.CodPointsNumber.g, ColorSet.CodPointsNumber.b)
-	PurchasedTitle:setText(LocalizeToUpperString(0x4BF458160EDDE21))
+	PurchasedTitle:setText(LocalizeToUpperString(@"menu/weapon_owned"))
 	PurchasedTitle:setTTF("ttmussels_demibold")
 	PurchasedTitle:setLetterSpacing(4)
-	PurchasedTitle:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
+	PurchasedTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
 	PurchasedTitle:setBackingType(1)
 	PurchasedTitle:setBackingWidget(CoD.ContractActiveBannerBacker, f1_arg0, f1_arg1)
 	PurchasedTitle:setBackingXPadding(8)

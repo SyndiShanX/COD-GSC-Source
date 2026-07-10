@@ -13,7 +13,7 @@ CoD.VehicleGround_HashText.new = function ( f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	local Arrow = LUI.UIImage.new( 0.5, 0.5, -30, -6, 0.5, 0.5, -11, 5 )
 	Arrow:setRGB( 0.8, 0.82, 0.87 )
 	Arrow:setZRot( -90 )
-	Arrow:setImage( RegisterImage( 0x37605B8A38BAC3B ) )
+	Arrow:setImage( RegisterImage( @"uie_t7_cp_hud_woundedsoldier_arrowt" ) )
 	self:addElement( Arrow )
 	self.Arrow = Arrow
 	
@@ -26,20 +26,20 @@ CoD.VehicleGround_HashText.new = function ( f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	TextStrike:setText( CoD.BaseUtility.AlreadyLocalized( "STRIKE" ) )
 	TextStrike:setTTF( "ttmussels_demibold" )
 	TextStrike:setLetterSpacing( 1.5 )
-	TextStrike:setAlignment( Enum[0x7A5123B654282D2][0x58C8A85F2048829] )
-	TextStrike:setAlignment( Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3] )
+	TextStrike:setAlignment( Enum[@"luialignment"][@"lui_alignment_left"] )
+	TextStrike:setAlignment( Enum[@"luialignment"][@"lui_alignment_top"] )
 	self:addElement( TextStrike )
 	self.TextStrike = TextStrike
 	
 	local Image0 = LUI.UIImage.new( 0.5, 0.5, -55, -40, 0.5, 0.5, -18, 44 )
 	Image0:setZRot( 90 )
-	Image0:setImage( RegisterImage( 0x720D5B4FA8ACB23 ) )
+	Image0:setImage( RegisterImage( @"uie_t7_cp_hud_woundedsoldier_sidemask" ) )
 	self:addElement( Image0 )
 	self.Image0 = Image0
 	
 	local Image1 = LUI.UIImage.new( 0.5, 0.5, -55, -46, 0.5, 0.5, -49, 13 )
 	Image1:setZRot( -90 )
-	Image1:setImage( RegisterImage( 0x720D5B4FA8ACB23 ) )
+	Image1:setImage( RegisterImage( @"uie_t7_cp_hud_woundedsoldier_sidemask" ) )
 	self:addElement( Image1 )
 	self.Image1 = Image1
 	
@@ -106,7 +106,7 @@ CoD.VehicleGround_HashText.__clipsPerState = {
 																																							local f39_local0 = function ( f40_arg0 )
 																																								local f40_local0 = function ( f41_arg0 )
 																																									local f41_local0 = function ( f42_arg0 )
-																																										f42_arg0:beginAnimation( 290, Enum[0xF50FFF429AB1890][0x5193EA7825DC097] )
+																																										f42_arg0:beginAnimation( 290, Enum[@"luitween"][@"luitween_ease_both"] )
 																																										f42_arg0:setLeftRight( 0.5, 0.5, -30, -6 )
 																																										f42_arg0:setAlpha( 1 )
 																																										f42_arg0:registerEventHandler( "transition_complete_keyframe", f3_arg0.clipFinished )
@@ -118,7 +118,7 @@ CoD.VehicleGround_HashText.__clipsPerState = {
 																																									f41_arg0:registerEventHandler( "transition_complete_keyframe", f41_local0 )
 																																								end
 																																								
-																																								f40_arg0:beginAnimation( 260, Enum[0xF50FFF429AB1890][0x5193EA7825DC097] )
+																																								f40_arg0:beginAnimation( 260, Enum[@"luitween"][@"luitween_ease_both"] )
 																																								f40_arg0:setLeftRight( 0.5, 0.5, -40, -16 )
 																																								f40_arg0:setAlpha( 0.28 )
 																																								f40_arg0:registerEventHandler( "transition_complete_keyframe", f40_local0 )
@@ -138,7 +138,7 @@ CoD.VehicleGround_HashText.__clipsPerState = {
 																																					f37_arg0:registerEventHandler( "transition_complete_keyframe", f37_local0 )
 																																				end
 																																				
-																																				f36_arg0:beginAnimation( 340, Enum[0xF50FFF429AB1890][0x5193EA7825DC097] )
+																																				f36_arg0:beginAnimation( 340, Enum[@"luitween"][@"luitween_ease_both"] )
 																																				f36_arg0:setLeftRight( 0.5, 0.5, -30, -6 )
 																																				f36_arg0:setAlpha( 0.97 )
 																																				f36_arg0:registerEventHandler( "transition_complete_keyframe", f36_local0 )
@@ -154,7 +154,7 @@ CoD.VehicleGround_HashText.__clipsPerState = {
 																																		f34_arg0:registerEventHandler( "transition_complete_keyframe", f34_local0 )
 																																	end
 																																	
-																																	f33_arg0:beginAnimation( 310, Enum[0xF50FFF429AB1890][0x5193EA7825DC097] )
+																																	f33_arg0:beginAnimation( 310, Enum[@"luitween"][@"luitween_ease_both"] )
 																																	f33_arg0:setLeftRight( 0.5, 0.5, -40, -16 )
 																																	f33_arg0:setAlpha( 0.61 )
 																																	f33_arg0:registerEventHandler( "transition_complete_keyframe", f33_local0 )
@@ -169,7 +169,7 @@ CoD.VehicleGround_HashText.__clipsPerState = {
 																															f31_arg0:registerEventHandler( "transition_complete_keyframe", f31_local0 )
 																														end
 																														
-																														f30_arg0:beginAnimation( 500, Enum[0xF50FFF429AB1890][0x5193EA7825DC097] )
+																														f30_arg0:beginAnimation( 500, Enum[@"luitween"][@"luitween_ease_both"] )
 																														f30_arg0:setLeftRight( 0.5, 0.5, -30, -6 )
 																														f30_arg0:setAlpha( 1 )
 																														f30_arg0:registerEventHandler( "transition_complete_keyframe", f30_local0 )
@@ -189,7 +189,7 @@ CoD.VehicleGround_HashText.__clipsPerState = {
 																											f27_arg0:registerEventHandler( "transition_complete_keyframe", f27_local0 )
 																										end
 																										
-																										f26_arg0:beginAnimation( 809, Enum[0xF50FFF429AB1890][0x5193EA7825DC097] )
+																										f26_arg0:beginAnimation( 809, Enum[@"luitween"][@"luitween_ease_both"] )
 																										f26_arg0:setLeftRight( 0.5, 0.5, -40, -16 )
 																										f26_arg0:setAlpha( 0.44 )
 																										f26_arg0:registerEventHandler( "transition_complete_keyframe", f26_local0 )
@@ -209,7 +209,7 @@ CoD.VehicleGround_HashText.__clipsPerState = {
 																							f23_arg0:registerEventHandler( "transition_complete_keyframe", f23_local0 )
 																						end
 																						
-																						f22_arg0:beginAnimation( 989, Enum[0xF50FFF429AB1890][0x5193EA7825DC097] )
+																						f22_arg0:beginAnimation( 989, Enum[@"luitween"][@"luitween_ease_both"] )
 																						f22_arg0:setLeftRight( 0.5, 0.5, -30, -6 )
 																						f22_arg0:setAlpha( 0.99 )
 																						f22_arg0:registerEventHandler( "transition_complete_keyframe", f22_local0 )
@@ -225,7 +225,7 @@ CoD.VehicleGround_HashText.__clipsPerState = {
 																				f20_arg0:registerEventHandler( "transition_complete_keyframe", f20_local0 )
 																			end
 																			
-																			f19_arg0:beginAnimation( 689, Enum[0xF50FFF429AB1890][0x5193EA7825DC097] )
+																			f19_arg0:beginAnimation( 689, Enum[@"luitween"][@"luitween_ease_both"] )
 																			f19_arg0:setLeftRight( 0.5, 0.5, -40, -16 )
 																			f19_arg0:setAlpha( 0.45 )
 																			f19_arg0:registerEventHandler( "transition_complete_keyframe", f19_local0 )
@@ -240,7 +240,7 @@ CoD.VehicleGround_HashText.__clipsPerState = {
 																	f17_arg0:registerEventHandler( "transition_complete_keyframe", f17_local0 )
 																end
 																
-																f16_arg0:beginAnimation( 250, Enum[0xF50FFF429AB1890][0x5193EA7825DC097] )
+																f16_arg0:beginAnimation( 250, Enum[@"luitween"][@"luitween_ease_both"] )
 																f16_arg0:setLeftRight( 0.5, 0.5, -30, -6 )
 																f16_arg0:setAlpha( 0.89 )
 																f16_arg0:registerEventHandler( "transition_complete_keyframe", f16_local0 )
@@ -256,13 +256,13 @@ CoD.VehicleGround_HashText.__clipsPerState = {
 														f14_arg0:registerEventHandler( "transition_complete_keyframe", f14_local0 )
 													end
 													
-													f13_arg0:beginAnimation( 240, Enum[0xF50FFF429AB1890][0x5193EA7825DC097] )
+													f13_arg0:beginAnimation( 240, Enum[@"luitween"][@"luitween_ease_both"] )
 													f13_arg0:setLeftRight( 0.5, 0.5, -40, -16 )
 													f13_arg0:setAlpha( 0.35 )
 													f13_arg0:registerEventHandler( "transition_complete_keyframe", f13_local0 )
 												end
 												
-												f12_arg0:beginAnimation( 9, Enum[0xF50FFF429AB1890][0x5193EA7825DC097] )
+												f12_arg0:beginAnimation( 9, Enum[@"luitween"][@"luitween_ease_both"] )
 												f12_arg0:setAlpha( 0.97 )
 												f12_arg0:registerEventHandler( "transition_complete_keyframe", f12_local0 )
 											end
@@ -271,7 +271,7 @@ CoD.VehicleGround_HashText.__clipsPerState = {
 											f11_arg0:registerEventHandler( "transition_complete_keyframe", f11_local0 )
 										end
 										
-										f10_arg0:beginAnimation( 940, Enum[0xF50FFF429AB1890][0x5193EA7825DC097] )
+										f10_arg0:beginAnimation( 940, Enum[@"luitween"][@"luitween_ease_both"] )
 										f10_arg0:registerEventHandler( "transition_complete_keyframe", f10_local0 )
 									end
 									
@@ -279,7 +279,7 @@ CoD.VehicleGround_HashText.__clipsPerState = {
 									f9_arg0:registerEventHandler( "transition_complete_keyframe", f9_local0 )
 								end
 								
-								f8_arg0:beginAnimation( 179, Enum[0xF50FFF429AB1890][0x5193EA7825DC097] )
+								f8_arg0:beginAnimation( 179, Enum[@"luitween"][@"luitween_ease_both"] )
 								f8_arg0:setLeftRight( 0.5, 0.5, -30, -6 )
 								f8_arg0:setAlpha( 1 )
 								f8_arg0:registerEventHandler( "transition_complete_keyframe", f8_local0 )
@@ -295,7 +295,7 @@ CoD.VehicleGround_HashText.__clipsPerState = {
 						f6_arg0:registerEventHandler( "transition_complete_keyframe", f6_local0 )
 					end
 					
-					f5_arg0:beginAnimation( 200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097] )
+					f5_arg0:beginAnimation( 200, Enum[@"luitween"][@"luitween_ease_both"] )
 					f5_arg0:setLeftRight( 0.5, 0.5, -40, -16 )
 					f5_arg0:setAlpha( 0.47 )
 					f5_arg0:registerEventHandler( "transition_complete_keyframe", f5_local0 )
@@ -327,7 +327,7 @@ CoD.VehicleGround_HashText.__clipsPerState = {
 																local f55_local0 = function ( f56_arg0 )
 																	local f56_local0 = function ( f57_arg0 )
 																		local f57_local0 = function ( f58_arg0 )
-																			f58_arg0:beginAnimation( 500, Enum[0xF50FFF429AB1890][0x5193EA7825DC097] )
+																			f58_arg0:beginAnimation( 500, Enum[@"luitween"][@"luitween_ease_both"] )
 																			f58_arg0:setTopBottom( 0.5, 0.5, -240, 234 )
 																			f58_arg0:registerEventHandler( "transition_complete_keyframe", f3_arg0.clipFinished )
 																		end
@@ -336,7 +336,7 @@ CoD.VehicleGround_HashText.__clipsPerState = {
 																		f57_arg0:registerEventHandler( "transition_complete_keyframe", f57_local0 )
 																	end
 																	
-																	f56_arg0:beginAnimation( 1500, Enum[0xF50FFF429AB1890][0x5193EA7825DC097] )
+																	f56_arg0:beginAnimation( 1500, Enum[@"luitween"][@"luitween_ease_both"] )
 																	f56_arg0:setTopBottom( 0.5, 0.5, -277, 197 )
 																	f56_arg0:registerEventHandler( "transition_complete_keyframe", f56_local0 )
 																end
@@ -345,17 +345,17 @@ CoD.VehicleGround_HashText.__clipsPerState = {
 																f55_arg0:registerEventHandler( "transition_complete_keyframe", f55_local0 )
 															end
 															
-															f54_arg0:beginAnimation( 500, Enum[0xF50FFF429AB1890][0x5193EA7825DC097] )
+															f54_arg0:beginAnimation( 500, Enum[@"luitween"][@"luitween_ease_both"] )
 															f54_arg0:setTopBottom( 0.5, 0.5, -353, 121 )
 															f54_arg0:registerEventHandler( "transition_complete_keyframe", f54_local0 )
 														end
 														
-														f53_arg0:beginAnimation( 1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097] )
+														f53_arg0:beginAnimation( 1000, Enum[@"luitween"][@"luitween_ease_both"] )
 														f53_arg0:setTopBottom( 0.5, 0.5, -277, 197 )
 														f53_arg0:registerEventHandler( "transition_complete_keyframe", f53_local0 )
 													end
 													
-													f52_arg0:beginAnimation( 2000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097] )
+													f52_arg0:beginAnimation( 2000, Enum[@"luitween"][@"luitween_ease_both"] )
 													f52_arg0:setTopBottom( 0.5, 0.5, -390, 84 )
 													f52_arg0:registerEventHandler( "transition_complete_keyframe", f52_local0 )
 												end
@@ -364,7 +364,7 @@ CoD.VehicleGround_HashText.__clipsPerState = {
 												f51_arg0:registerEventHandler( "transition_complete_keyframe", f51_local0 )
 											end
 											
-											f50_arg0:beginAnimation( 2000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097] )
+											f50_arg0:beginAnimation( 2000, Enum[@"luitween"][@"luitween_ease_both"] )
 											f50_arg0:setTopBottom( 0.5, 0.5, -315, 159 )
 											f50_arg0:registerEventHandler( "transition_complete_keyframe", f50_local0 )
 										end
@@ -373,7 +373,7 @@ CoD.VehicleGround_HashText.__clipsPerState = {
 										f49_arg0:registerEventHandler( "transition_complete_keyframe", f49_local0 )
 									end
 									
-									f48_arg0:beginAnimation( 500, Enum[0xF50FFF429AB1890][0x5193EA7825DC097] )
+									f48_arg0:beginAnimation( 500, Enum[@"luitween"][@"luitween_ease_both"] )
 									f48_arg0:setTopBottom( 0.5, 0.5, -427, 47 )
 									f48_arg0:registerEventHandler( "transition_complete_keyframe", f48_local0 )
 								end
@@ -382,7 +382,7 @@ CoD.VehicleGround_HashText.__clipsPerState = {
 								f47_arg0:registerEventHandler( "transition_complete_keyframe", f47_local0 )
 							end
 							
-							f46_arg0:beginAnimation( 1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097] )
+							f46_arg0:beginAnimation( 1000, Enum[@"luitween"][@"luitween_ease_both"] )
 							f46_arg0:setTopBottom( 0.5, 0.5, -127, 347 )
 							f46_arg0:registerEventHandler( "transition_complete_keyframe", f46_local0 )
 						end
@@ -391,7 +391,7 @@ CoD.VehicleGround_HashText.__clipsPerState = {
 						f45_arg0:registerEventHandler( "transition_complete_keyframe", f45_local0 )
 					end
 					
-					f44_arg0:beginAnimation( 500, Enum[0xF50FFF429AB1890][0x5193EA7825DC097] )
+					f44_arg0:beginAnimation( 500, Enum[@"luitween"][@"luitween_ease_both"] )
 					f44_arg0:setTopBottom( 0.5, 0.5, -53, 421 )
 					f44_arg0:registerEventHandler( "transition_complete_keyframe", f44_local0 )
 				end

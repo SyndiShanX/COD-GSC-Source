@@ -5,12 +5,12 @@ require("x64:cf05df8e6110793")
 require("x64:1e6a720fa965a6a")
 require("x64:d73fbe78518a345")
 local PostLoadFunc = function(self, controller)
-	self:subscribeToModel(Engine[0xA798E4552F5E872](Engine[0x8DF2E5447F384B9](), "objectivesUpdated"), function(model)
+	self:subscribeToModel(Engine[@"createmodel"](Engine[@"getglobalmodel"](), "objectivesUpdated"), function(model)
 		local f2_local0 = self:getModel()
 		if f2_local0 then
-			local f2_local1 = Engine[0x40E824FE270E174](f2_local0, "clientNum")
+			local f2_local1 = Engine[@"getmodel"](f2_local0, "clientNum")
 			if f2_local1 then
-				local f2_local2 = Engine[0x614D394F6F9A18D](f2_local1)
+				local f2_local2 = Engine[@"getmodelvalue"](f2_local1)
 				self.ObjectiveStatus:setImage(RegisterImage(GetPlayerListObjectiveImage(controller, f2_local2)))
 				self.ObjectiveStatus:setRGB(GetPlayerListObjectiveColor(controller, f2_local2))
 			end
@@ -33,7 +33,7 @@ CoD.CodCasterPlayerListRowWidget.new = function(f3_arg0, f3_arg1, f3_arg2, f3_ar
 	self.statsbg = statsbg
 	local BlackBar = LUI.UIImage.new(0, 1, 0, 0, 0, 0, 0, 16)
 	BlackBar:setAlpha(0.8)
-	BlackBar:setImage(RegisterImage(0x97941765AC1B3BE))
+	BlackBar:setImage(RegisterImage(@"uie_codcaster_teamcolloredbg_generic"))
 	BlackBar:linkToElementModel(self, "clientNum", true, function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
@@ -50,12 +50,12 @@ CoD.CodCasterPlayerListRowWidget.new = function(f3_arg0, f3_arg1, f3_arg2, f3_ar
 	self.highlight = highlight
 	local freebg = LUI.UIImage.new(0.5, 0.5, -202, 202, 0, 0, 0, 16)
 	freebg:setAlpha(0)
-	freebg:setImage(RegisterImage(0xBD8D43404DC456))
+	freebg:setImage(RegisterImage(@"hash_BD8D43404DC456"))
 	self:addElement(freebg)
 	self.freebg = freebg
 	local focus = LUI.UIImage.new(0, 0, -2, 502, 0, 0, -6, 34)
 	focus:setAlpha(0)
-	focus:setImage(RegisterImage(0x9C9B7154A05B453))
+	focus:setImage(RegisterImage(@"uie_t7_codcaster_focusback"))
 	self:addElement(focus)
 	self.focus = focus
 	local ScoreboardRowDeathIcon = LUI.UIImage.new(0, 0, 13, 41, 0.5, 0.5, -16, 12)
@@ -80,7 +80,7 @@ CoD.CodCasterPlayerListRowWidget.new = function(f3_arg0, f3_arg1, f3_arg2, f3_ar
 	self.Score01 = Score01
 	local DeadIcon = LUI.UIImage.new(0, 0, 17, 37, 0.5, 0.5, -11, 9)
 	DeadIcon:setScale(0.85, 0.75)
-	DeadIcon:setImage(RegisterImage(0x9E55E6818C34348))
+	DeadIcon:setImage(RegisterImage(@"hash_39E55E6818C34348"))
 	self:addElement(DeadIcon)
 	self.DeadIcon = DeadIcon
 	local ObjectiveStatus = CoD.CodCasterPortraitObjectiveStatus.new(f3_arg0, f3_arg1, 0, 0, -5, 59, 0.5, 0.5, -33, 31)
@@ -160,7 +160,7 @@ CoD.CodCasterPlayerListRowWidget.new = function(f3_arg0, f3_arg1, f3_arg2, f3_ar
 	})
 	local f3_local14 = self
 	local f3_local15 = self.subscribeToModel
-	local f3_local16 = Engine[0x4DF5CFBC1771947](f3_arg1)
+	local f3_local16 = Engine[@"getmodelforcontroller"](f3_arg1)
 	f3_local15(f3_local14, f3_local16["hudItems.codcaster.nextClient"], function(f18_arg0)
 		f3_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -190,7 +190,7 @@ CoD.CodCasterPlayerListRowWidget.new = function(f3_arg0, f3_arg1, f3_arg2, f3_ar
 	end)
 	f3_local14 = self
 	f3_local15 = self.subscribeToModel
-	f3_local16 = Engine[0x4DF5CFBC1771947](f3_arg1)
+	f3_local16 = Engine[@"getmodelforcontroller"](f3_arg1)
 	f3_local15(f3_local14, f3_local16["deadSpectator.playerIndex"], function(f21_arg0)
 		f3_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -202,14 +202,14 @@ CoD.CodCasterPlayerListRowWidget.new = function(f3_arg0, f3_arg1, f3_arg2, f3_ar
 	end, false)
 	f3_local14 = self
 	f3_local15 = self.subscribeToModel
-	f3_local16 = Engine[0x4DF5CFBC1771947](f3_arg1)
-	f3_local15(f3_local14, f3_local16["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x198075B069840DC]], function(f22_arg0)
+	f3_local16 = Engine[@"getmodelforcontroller"](f3_arg1)
+	f3_local15(f3_local14, f3_local16["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_game_ended"]], function(f22_arg0)
 		f3_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f3_arg0,
 			controller = f3_arg1,
 			modelValue = f22_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x198075B069840DC],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_game_ended"],
 		})
 	end, false)
 	self.__on_menuOpened_self = function(f23_arg0, f23_arg1, f23_arg2, f23_arg3)

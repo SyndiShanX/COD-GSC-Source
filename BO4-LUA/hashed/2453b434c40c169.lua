@@ -43,7 +43,7 @@ CoD.ArchivesVoDPreview.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	self.VoDPreview = VoDPreview
 	local Play = CoD.VodButtonPrompt.new(f1_arg0, f1_arg1, 0, 0, 0, 200, 1, 1, -33, 0)
 	Play:setAlpha(0)
-	Play.Play:setText(LocalizeToUpperString(0xD31D493AE40DA0F))
+	Play.Play:setText(LocalizeToUpperString(@"hash_D31D493AE40DA0F"))
 	Play:subscribeToGlobalModel(f1_arg1, "Controller", "primary_button_image", function(model)
 		local f6_local0 = model:get()
 		if f6_local0 ~= nil then
@@ -54,7 +54,7 @@ CoD.ArchivesVoDPreview.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	self.Play = Play
 	local Fullscreen = CoD.VodButtonPrompt.new(f1_arg0, f1_arg1, 1, 1, -200, 0, 1, 1, -33, 0)
 	Fullscreen:setAlpha(0)
-	Fullscreen.Play:setText(LocalizeToUpperString(0x23594B6BDE14144))
+	Fullscreen.Play:setText(LocalizeToUpperString(@"hash_323594B6BDE14144"))
 	Fullscreen:subscribeToGlobalModel(f1_arg1, "Controller", "alt2_button_image", function(model)
 		local f7_local0 = model:get()
 		if f7_local0 ~= nil then
@@ -67,13 +67,13 @@ CoD.ArchivesVoDPreview.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	ArchivesVoDDescription:linkToElementModel(self, "title", true, function(model)
 		local f8_local0 = model:get()
 		if f8_local0 ~= nil then
-			ArchivesVoDDescription.Title:setText(Engine[0xF9F1239CFD921FE](f8_local0))
+			ArchivesVoDDescription.Title:setText(Engine[@"hash_4F9F1239CFD921FE"](f8_local0))
 		end
 	end)
 	ArchivesVoDDescription:linkToElementModel(self, "desc", true, function(model)
 		local f9_local0 = model:get()
 		if f9_local0 ~= nil then
-			ArchivesVoDDescription.Desc:setText(Engine[0xF9F1239CFD921FE](f9_local0))
+			ArchivesVoDDescription.Desc:setText(Engine[@"hash_4F9F1239CFD921FE"](f9_local0))
 		end
 	end)
 	self:addElement(ArchivesVoDDescription)
@@ -109,7 +109,7 @@ CoD.ArchivesVoDPreview.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	end)
 	local f1_local5 = self
 	local f1_local6 = self.subscribeToModel
-	local f1_local7 = Engine[0x8DF2E5447F384B9]()
+	local f1_local7 = Engine[@"getglobalmodel"]()
 	f1_local6(f1_local5, f1_local7["storageGlobalRoot.user_settings"], function(f14_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -134,7 +134,7 @@ CoD.ArchivesVoDPreview.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	end)
 	f1_local5 = self
 	f1_local6 = self.subscribeToModel
-	f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local6(f1_local5, f1_local7.LastInput, function(f17_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

@@ -60,7 +60,7 @@ CoD.SurveyButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 	end)
 	local f1_local2 = DirectorCustomStartButton
 	local f1_local3 = DirectorCustomStartButton.subscribeToModel
-	local f1_local4 = Engine[0x8DF2E5447F384B9]()
+	local f1_local4 = Engine[@"getglobalmodel"]()
 	f1_local3(f1_local2, f1_local4["lobbyRoot.lobbyNav"], function(f8_arg0)
 		f1_arg0:updateElementState(DirectorCustomStartButton, {
 			name = "model_validation",
@@ -122,9 +122,9 @@ CoD.SurveyButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 	f1_local3 = self.subscribeToModel
 	f1_local4 = DataSources.SurveyQuestion.getModel(f1_arg1)
 	f1_local3(f1_local2, f1_local4.answered, function(f16_arg0, f16_arg1)
-		CoD.Menu.UpdateButtonShownState(f16_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f16_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if not CoD.ModelUtility.IsGlobalDataSourceModelValueTrue(controller, "SurveyQuestion", "answered") then
 			CoD.SurveyUtility.SendSurveyDlogResponse(self, controller)
 			return true
@@ -132,7 +132,7 @@ CoD.SurveyButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 		end
 	end, function(element, menu, controller)
 		if not CoD.ModelUtility.IsGlobalDataSourceModelValueTrue(controller, "SurveyQuestion", "answered") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		else
 			return false
@@ -170,7 +170,7 @@ CoD.SurveyButton.__clipsPerState = {
 			f22_arg0:__resetProperties()
 			f22_arg0:setupElementClipCounter(1)
 			local f22_local0 = function(f23_arg0)
-				f22_arg0.DirectorCustomStartButton:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f22_arg0.DirectorCustomStartButton:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f22_arg0.DirectorCustomStartButton:setZoom(5)
 				f22_arg0.DirectorCustomStartButton:setScale(1.05, 1.05)
 				f22_arg0.DirectorCustomStartButton:registerEventHandler("interrupted_keyframe", f22_arg0.clipInterrupted)
@@ -185,7 +185,7 @@ CoD.SurveyButton.__clipsPerState = {
 			f24_arg0:__resetProperties()
 			f24_arg0:setupElementClipCounter(1)
 			local f24_local0 = function(f25_arg0)
-				f24_arg0.DirectorCustomStartButton:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f24_arg0.DirectorCustomStartButton:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f24_arg0.DirectorCustomStartButton:setZoom(0)
 				f24_arg0.DirectorCustomStartButton:setScale(1, 1)
 				f24_arg0.DirectorCustomStartButton:registerEventHandler("interrupted_keyframe", f24_arg0.clipInterrupted)
@@ -267,7 +267,7 @@ CoD.SurveyButton.__clipsPerState = {
 			f36_arg0:__resetProperties()
 			f36_arg0:setupElementClipCounter(1)
 			local f36_local0 = function(f37_arg0)
-				f36_arg0.DirectorCustomStartButton:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f36_arg0.DirectorCustomStartButton:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f36_arg0.DirectorCustomStartButton:setScale(1.05, 1.05)
 				f36_arg0.DirectorCustomStartButton:registerEventHandler("interrupted_keyframe", f36_arg0.clipInterrupted)
 				f36_arg0.DirectorCustomStartButton:registerEventHandler("transition_complete_keyframe", f36_arg0.clipFinished)
@@ -280,7 +280,7 @@ CoD.SurveyButton.__clipsPerState = {
 			f38_arg0:__resetProperties()
 			f38_arg0:setupElementClipCounter(1)
 			local f38_local0 = function(f39_arg0)
-				f38_arg0.DirectorCustomStartButton:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f38_arg0.DirectorCustomStartButton:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f38_arg0.DirectorCustomStartButton:setScale(1, 1)
 				f38_arg0.DirectorCustomStartButton:registerEventHandler("interrupted_keyframe", f38_arg0.clipInterrupted)
 				f38_arg0.DirectorCustomStartButton:registerEventHandler("transition_complete_keyframe", f38_arg0.clipFinished)

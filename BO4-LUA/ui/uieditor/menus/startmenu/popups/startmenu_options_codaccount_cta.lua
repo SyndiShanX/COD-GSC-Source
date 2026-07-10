@@ -31,7 +31,7 @@ LUI.createMenu.StartMenu_Options_CoDAccount_CTA = function(f1_arg0, f1_arg1)
 	accountOptionsList:setWidgetType(CoD.GameSettings_OptionsButton)
 	accountOptionsList:setVerticalCount(3)
 	accountOptionsList:setSpacing(12)
-	accountOptionsList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	accountOptionsList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	accountOptionsList:setDataSource("CODAccountRegisterOptions")
 	accountOptionsList:registerEventHandler("gain_focus", function(element, event)
 		local f2_local0 = nil
@@ -40,14 +40,14 @@ LUI.createMenu.StartMenu_Options_CoDAccount_CTA = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f2_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f2_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(accountOptionsList, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "MOUSE1", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(accountOptionsList, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "MOUSE1", function(element, menu, controller, model)
 		ProcessListAction(self, element, controller, menu)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "MOUSE1")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "MOUSE1")
 		return true
 	end, false)
 	self:addElement(accountOptionsList)
@@ -55,28 +55,28 @@ LUI.createMenu.StartMenu_Options_CoDAccount_CTA = function(f1_arg0, f1_arg1)
 	local Desc = LUI.UIText.new(0.5, 0.5, -380, 380, 0.5, 0.5, -132, -111)
 	Desc:setRGB(0.96, 0.93, 0.84)
 	Desc:setAlpha(0.3)
-	Desc:setText(Engine[0xF9F1239CFD921FE](0xFFAD8F01669B007))
+	Desc:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_6FFAD8F01669B007"))
 	Desc:setTTF("ttmussels_regular")
-	Desc:setAlignment(Engine[0x7F8853DC3581AA4](Enum[0x7A5123B654282D2][0x58C8A85F2048829]))
-	Desc:setAlignment(Engine[0x7F8853DC3581AA4](Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3]))
+	Desc:setAlignment(Engine[@"hash_67F8853DC3581AA4"](Enum[@"luialignment"][@"lui_alignment_left"]))
+	Desc:setAlignment(Engine[@"hash_67F8853DC3581AA4"](Enum[@"luialignment"][@"lui_alignment_top"]))
 	self:addElement(Desc)
 	self.Desc = Desc
 	local Title = LUI.UIText.new(0.5, 0.5, -380, 380, 0.5, 0.5, -178, -133)
 	Title:setRGB(ColorSet.T8__BEIGE__HEADER.r, ColorSet.T8__BEIGE__HEADER.g, ColorSet.T8__BEIGE__HEADER.b)
-	Title:setText(Engine[0xF9F1239CFD921FE](0x2141D0923911BB7))
+	Title:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_62141D0923911BB7"))
 	Title:setTTF("ttmussels_regular")
 	Title:setLetterSpacing(6)
-	Title:setAlignment(Engine[0x7F8853DC3581AA4](Enum[0x7A5123B654282D2][0x58C8A85F2048829]))
+	Title:setAlignment(Engine[@"hash_67F8853DC3581AA4"](Enum[@"luialignment"][@"lui_alignment_left"]))
 	self:addElement(Title)
 	self.Title = Title
 	local Header = CoD.CommonHeader.new(f1_local1, f1_arg0, 0.5, 0.5, -960, 960, 0, 0, 0, 67)
 	Header.BGSceneBlur:setAlpha(0)
-	Header.subtitle.StageTitle:setText(LocalizeToUpperString(0x30BC41F2404F851))
+	Header.subtitle.StageTitle:setText(LocalizeToUpperString(@"hash_630BC41F2404F851"))
 	Header.subtitle.subtitle:setAlpha(0)
 	Header:subscribeToGlobalModel(f1_arg0, "LobbyRoot", "lobbyTitle", function(model)
 		local f5_local0 = model:get()
 		if f5_local0 ~= nil then
-			Header.subtitle.subtitle:setText(Engine[0xF9F1239CFD921FE](f5_local0))
+			Header.subtitle.subtitle:setText(Engine[@"hash_4F9F1239CFD921FE"](f5_local0))
 		end
 	end)
 	Header:registerEventHandler("menu_loaded", function(element, event)
@@ -101,7 +101,7 @@ LUI.createMenu.StartMenu_Options_CoDAccount_CTA = function(f1_arg0, f1_arg1)
 	self.BackingGrayMediumLeft = BackingGrayMediumLeft
 	local SkipButton = nil
 	SkipButton = CoD.GameSettings_OptionsButton.new(f1_local1, f1_arg0, 0, 0, 1220, 1360, 0, 0, 851, 911)
-	SkipButton.OptionText:setText(LocalizeToUpperString(0x663FC1AF7C5AECF))
+	SkipButton.OptionText:setText(LocalizeToUpperString(@"hash_3663FC1AF7C5AECF"))
 	SkipButton:linkToElementModel(self, "image", true, function(model)
 		local f7_local0 = model:get()
 		if f7_local0 ~= nil then
@@ -115,15 +115,15 @@ LUI.createMenu.StartMenu_Options_CoDAccount_CTA = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f8_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f8_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(SkipButton, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(SkipButton, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		GoBack(self, controller)
 		CoD.LobbyUtility.OpenFTUEGameIntroductionOverlay(controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 		return false
 	end, false)
 	self:addElement(SkipButton)
@@ -149,7 +149,7 @@ LUI.createMenu.StartMenu_Options_CoDAccount_CTA = function(f1_arg0, f1_arg1)
 		end
 		return f12_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		if not IsSelfInState(self, "SignInRequired") then
 			GoBack(self, controller)
 			return true
@@ -157,7 +157,7 @@ LUI.createMenu.StartMenu_Options_CoDAccount_CTA = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if not IsSelfInState(self, "SignInRequired") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 			return true
 		else
 			return false

@@ -7,9 +7,9 @@ CoD.CPHostSkippingScene.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	self.id = "CPHostSkippingScene"
 	self.soundSet = "default"
 	local Label0 = LUI.UIText.new(0, 1, 21, -21, 0, 1, 0.5, 0.5)
-	Label0:setText(Engine[0xF9F1239CFD921FE](0x346F494EC53C4D6))
+	Label0:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_2346F494EC53C4D6"))
 	Label0:setTTF("default")
-	Label0:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	Label0:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(Label0)
 	self.Label0 = Label0
 	if PostLoadFunc then

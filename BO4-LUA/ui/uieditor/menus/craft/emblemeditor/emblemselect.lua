@@ -18,21 +18,21 @@ LUI.createMenu.EmblemSelect = function(f1_arg0, f1_arg1)
 	f1_local1:addElementToPendingUpdateStateList(self)
 	local backing = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	backing:setRGB(0, 0, 0)
-	backing:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	backing:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	backing:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(backing)
 	self.backing = backing
 	local BackgroundImage = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	BackgroundImage:setAlpha(0.85)
-	BackgroundImage:setImage(RegisterImage(0x4BF88A437F4C579))
+	BackgroundImage:setImage(RegisterImage(@"uie_fe_cp_background"))
 	self:addElement(BackgroundImage)
 	self.BackgroundImage = BackgroundImage
 	local MenuFrame = CoD.GenericMenuFrame.new(f1_local1, f1_arg0, 0, 1, 0, 0, 0, 1, 0, 0)
-	MenuFrame.CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(0x4335B0D906D9B56))
+	MenuFrame.CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(@"hash_74335B0D906D9B56"))
 	MenuFrame:subscribeToGlobalModel(f1_arg0, "LobbyRoot", "lobbyTitle", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			MenuFrame.CommonHeader.subtitle.subtitle:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			MenuFrame.CommonHeader.subtitle.subtitle:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	self:addElement(MenuFrame)
@@ -88,13 +88,13 @@ LUI.createMenu.EmblemSelect = function(f1_arg0, f1_arg1)
 		elseif self.super.OcclusionChange then
 			f7_local0 = self.super:OcclusionChange(event)
 		end
-		CoD.CraftUtility.SetSlotCustomizationType(f1_arg0, Enum[0x63E5ADF9D95FC86][0x979B4C08E9D67B2])
+		CoD.CraftUtility.SetSlotCustomizationType(f1_arg0, Enum[@"customizationtype"][@"customization_type_emblem"])
 		if not f7_local0 then
 			f7_local0 = self:dispatchEventToChildren(event)
 		end
 		return f7_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		if MenuPropertyIsTrue(menu, "_selectGroupEmblem") then
 			CoD.CraftUtility.ClearEmblem()
 			GoBack(self, controller)
@@ -106,13 +106,13 @@ LUI.createMenu.EmblemSelect = function(f1_arg0, f1_arg1)
 			return true
 		end
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 		return true
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x22361E23588705A], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_start"], nil, function(element, menu, controller, model)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x22361E23588705A], 0x0, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_start"], @"hash_0", nil, nil)
 		return false
 	end, false)
 	LUI.OverrideFunction_CallOriginalFirst(self, "close", function(element)

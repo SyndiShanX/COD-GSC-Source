@@ -13,12 +13,12 @@ CoD.ui_icon_callingcards_crimewave_criminalcar.new = function ( f1_arg0, f1_arg1
 	f1_arg0:addElementToPendingUpdateStateList( self )
 	
 	local criminalcar = LUI.UIImage.new( 0, 0, 0, 648, 0, 0, 0, 240 )
-	criminalcar:setImage( RegisterImage( 0x899CB3AF3E3207E ) )
+	criminalcar:setImage( RegisterImage( @"uie_ui_menu_callingcards_crimewave_criminals2" ) )
 	self:addElement( criminalcar )
 	self.criminalcar = criminalcar
 	
 	local criminalcar2 = LUI.UIImage.new( 0, 0, 0, 648, 0, 0, 0, 240 )
-	criminalcar2:setImage( RegisterImage( 0x899CA3AF3E31ECB ) )
+	criminalcar2:setImage( RegisterImage( @"uie_ui_menu_callingcards_crimewave_criminals1" ) )
 	self:addElement( criminalcar2 )
 	self.criminalcar2 = criminalcar2
 	

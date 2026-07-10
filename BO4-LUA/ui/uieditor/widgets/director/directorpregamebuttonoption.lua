@@ -39,21 +39,21 @@ CoD.DirectorPreGameButtonOption.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 			end,
 		},
 	})
-	DirectorSelectButtonMiniInternal.MiddleText:setText(LocalizeToUpperString(0xA43B10D9DA121A))
-	DirectorSelectButtonMiniInternal.MiddleTextFocus:setText(LocalizeToUpperString(0xA43B10D9DA121A))
+	DirectorSelectButtonMiniInternal.MiddleText:setText(LocalizeToUpperString(@"hash_A43B10D9DA121A"))
+	DirectorSelectButtonMiniInternal.MiddleTextFocus:setText(LocalizeToUpperString(@"hash_A43B10D9DA121A"))
 	self:addElement(DirectorSelectButtonMiniInternal)
 	self.DirectorSelectButtonMiniInternal = DirectorSelectButtonMiniInternal
 	local SceneBlur = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	SceneBlur:setRGB(0, 0, 0)
 	SceneBlur:setAlpha(0)
-	SceneBlur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	SceneBlur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	SceneBlur:setShaderVector(0, 0, 0.4, 0, 0)
 	self:addElement(SceneBlur)
 	self.SceneBlur = SceneBlur
 	local NoiseTiledBacking = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	NoiseTiledBacking:setAlpha(0)
-	NoiseTiledBacking:setImage(RegisterImage(0x34839E8065B1E53))
-	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	NoiseTiledBacking:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	NoiseTiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	NoiseTiledBacking:setupNineSliceShader(196, 88)
 	self:addElement(NoiseTiledBacking)
@@ -65,7 +65,7 @@ CoD.DirectorPreGameButtonOption.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self.Tint = Tint
 	local DotTiledBacking = CoD.CommonPixelBacking.new(f1_arg0, f1_arg1, 0, 1, 4, -4, 0, 1, 4, -4)
 	DotTiledBacking:setAlpha(0)
-	DotTiledBacking:setRFTMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	DotTiledBacking:setRFTMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	DotTiledBacking.NoiseBacking:setAlpha(1)
 	DotTiledBacking.TiledShaderImage:setRGB(0.22, 0.22, 0.22)
 	DotTiledBacking.TiledShaderImage:setAlpha(0.15)
@@ -74,8 +74,8 @@ CoD.DirectorPreGameButtonOption.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self.DotTiledBacking = DotTiledBacking
 	local FrameBorder = LUI.UIImage.new(0, 1, -1, 1, 0, 1, -1, 1)
 	FrameBorder:setAlpha(0)
-	FrameBorder:setImage(RegisterImage(0x185E11D74ECA3D7))
-	FrameBorder:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	FrameBorder:setImage(RegisterImage(@"uie_ui_menu_store_common_frame"))
+	FrameBorder:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	FrameBorder:setShaderVector(0, 0, 0, 0, 0)
 	FrameBorder:setupNineSliceShader(12, 12)
 	self:addElement(FrameBorder)
@@ -88,11 +88,11 @@ CoD.DirectorPreGameButtonOption.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	local SuspendedTxt = LUI.UIText.new(0, 1, 24, -24, 0.5, 0.5, -12, 12)
 	SuspendedTxt:setRGB(0.92, 0.92, 0.92)
 	SuspendedTxt:setAlpha(0)
-	SuspendedTxt:setText(Engine[0xF9F1239CFD921FE](0xB58CF470802AA10))
+	SuspendedTxt:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_3B58CF470802AA10"))
 	SuspendedTxt:setTTF("ttmussels_regular")
 	SuspendedTxt:setLetterSpacing(3)
-	SuspendedTxt:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	SuspendedTxt:setAlignment(Enum[0x7A5123B654282D2][0x6ED4298C93DC5ED])
+	SuspendedTxt:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	SuspendedTxt:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
 	self:addElement(SuspendedTxt)
 	self.SuspendedTxt = SuspendedTxt
 	local Timer = LUI.UIText.new(0.5, 0.5, -130, 130, 0.5, 0.5, 15, 29)
@@ -100,8 +100,8 @@ CoD.DirectorPreGameButtonOption.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	Timer:setAlpha(0)
 	Timer:setTTF("dinnext_regular")
 	Timer:setLetterSpacing(1)
-	Timer:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	Timer:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Timer:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	Timer:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	Timer:subscribeToGlobalModel(f1_arg1, "Arena", "lockoutTimeRemaining", function(model)
 		local f6_local0 = model:get()
 		if f6_local0 ~= nil then
@@ -169,7 +169,7 @@ CoD.DirectorPreGameButtonOption.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	end)
 	local f1_local10 = self
 	local f1_local11 = self.subscribeToModel
-	local f1_local12 = Engine[0x8DF2E5447F384B9]()
+	local f1_local12 = Engine[@"getglobalmodel"]()
 	f1_local11(f1_local10, f1_local12["lobbyRoot.lobbyNav"], function(f14_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -181,7 +181,7 @@ CoD.DirectorPreGameButtonOption.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	end, false)
 	f1_local10 = self
 	f1_local11 = self.subscribeToModel
-	f1_local12 = Engine[0x8DF2E5447F384B9]()
+	f1_local12 = Engine[@"getglobalmodel"]()
 	f1_local11(f1_local10, f1_local12["lobbyRoot.gameClient.update"], function(f15_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -193,7 +193,7 @@ CoD.DirectorPreGameButtonOption.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	end, false)
 	f1_local10 = self
 	f1_local11 = self.subscribeToModel
-	f1_local12 = Engine[0x8DF2E5447F384B9]()
+	f1_local12 = Engine[@"getglobalmodel"]()
 	f1_local11(f1_local10, f1_local12["lobbyRoot.privateClient.update"], function(f16_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -205,7 +205,7 @@ CoD.DirectorPreGameButtonOption.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	end, false)
 	f1_local10 = self
 	f1_local11 = self.subscribeToModel
-	f1_local12 = Engine[0x8DF2E5447F384B9]()
+	f1_local12 = Engine[@"getglobalmodel"]()
 	f1_local11(f1_local10, f1_local12.offlineScreenState, function(f17_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

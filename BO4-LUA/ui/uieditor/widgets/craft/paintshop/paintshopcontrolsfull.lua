@@ -13,22 +13,22 @@ CoD.PaintshopControlsFull.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local BackingBot = LUI.UIImage.new(0, 0, 1, 421, 0, 0, 412, 525)
-	BackingBot:setImage(RegisterImage(0x34839E8065B1E53))
-	BackingBot:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	BackingBot:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	BackingBot:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	BackingBot:setShaderVector(0, 0, 0, 0, 0)
 	BackingBot:setupNineSliceShader(196, 88)
 	self:addElement(BackingBot)
 	self.BackingBot = BackingBot
 	local BackingMid = LUI.UIImage.new(0, 0, 0, 420, 0, 0, 230, 377)
-	BackingMid:setImage(RegisterImage(0x34839E8065B1E53))
-	BackingMid:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	BackingMid:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	BackingMid:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	BackingMid:setShaderVector(0, 0, 0, 0, 0)
 	BackingMid:setupNineSliceShader(196, 88)
 	self:addElement(BackingMid)
 	self.BackingMid = BackingMid
 	local BackingTop = LUI.UIImage.new(0, 0, 0, 420, 0, 0, 0, 190)
-	BackingTop:setImage(RegisterImage(0x34839E8065B1E53))
-	BackingTop:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	BackingTop:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	BackingTop:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	BackingTop:setShaderVector(0, 0, 0, 0, 0)
 	BackingTop:setupNineSliceShader(196, 88)
 	self:addElement(BackingTop)
@@ -48,7 +48,7 @@ CoD.PaintshopControlsFull.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	end)
 	local PaintshopChooseSide0 = ColorPicker
 	local materialPicker = ColorPicker.subscribeToModel
-	local rsOpacity = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local rsOpacity = Engine[@"getmodelforcontroller"](f1_arg1)
 	materialPicker(PaintshopChooseSide0, rsOpacity.LastInput, function(f4_arg0)
 		f1_arg0:updateElementState(ColorPicker, {
 			name = "model_validation",
@@ -67,7 +67,7 @@ CoD.PaintshopControlsFull.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 			modelName = "isGrouped",
 		})
 	end)
-	ColorPicker.label:setText(Engine[0xF9F1239CFD921FE](0x3F334E151B36E5C))
+	ColorPicker.label:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_43F334E151B36E5C"))
 	ColorPicker:subscribeToGlobalModel(f1_arg1, "Controller", "alt2_button_image", function(model)
 		local f6_local0 = model:get()
 		if f6_local0 ~= nil then
@@ -97,7 +97,7 @@ CoD.PaintshopControlsFull.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	end)
 	rsOpacity = materialPicker
 	PaintshopChooseSide0 = materialPicker.subscribeToModel
-	local lsOpacity = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local lsOpacity = Engine[@"getmodelforcontroller"](f1_arg1)
 	PaintshopChooseSide0(rsOpacity, lsOpacity.LastInput, function(f10_arg0)
 		f1_arg0:updateElementState(materialPicker, {
 			name = "model_validation",
@@ -116,7 +116,7 @@ CoD.PaintshopControlsFull.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 			modelName = "isGrouped",
 		})
 	end)
-	materialPicker.label:setText(Engine[0xF9F1239CFD921FE](0xE5BDA73054BDF29))
+	materialPicker.label:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/material_picker"))
 	materialPicker:subscribeToGlobalModel(f1_arg1, "Controller", "dpad_up_button_image", function(model)
 		local f12_local0 = model:get()
 		if f12_local0 ~= nil then
@@ -127,7 +127,7 @@ CoD.PaintshopControlsFull.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	self.materialPicker = materialPicker
 	PaintshopChooseSide0 = CoD.PaintshopChooseSide.new(f1_arg0, f1_arg1, 0, 0, 6, 326, 0, 0, 415, 447)
 	PaintshopChooseSide0:setScale(LanguageOverrideNumberForScale("korean", 0.8, LanguageOverrideNumberForScale("japanese", 0.8, LanguageOverrideNumberForScale("chinese", 0.8, 1, 1))))
-	PaintshopChooseSide0.text:setText(LocalizeToUpperString(0xD9555D6F5A195F2))
+	PaintshopChooseSide0.text:setText(LocalizeToUpperString(@"hash_5D9555D6F5A195F2"))
 	self:addElement(PaintshopChooseSide0)
 	self.PaintshopChooseSide0 = PaintshopChooseSide0
 	rsOpacity = CoD.EmblemEditorButtonPrompt.new(f1_arg0, f1_arg1, 0, 0, 39, 75, 0, 0, 256, 292)
@@ -151,10 +151,10 @@ CoD.PaintshopControlsFull.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	self:addElement(lsOpacity)
 	self.lsOpacity = lsOpacity
 	local opacity = LUI.UIText.new(0, 0, 82, 370, 0, 0, 260, 285)
-	opacity:setText(Engine[0xF9F1239CFD921FE](0x611006D6269F87D))
+	opacity:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_6611006D6269F87D"))
 	opacity:setTTF("ttmussels_regular")
-	opacity:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	opacity:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	opacity:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	opacity:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(opacity)
 	self.opacity = opacity
 	local ToggleOutline = CoD.PaintshopButtonPrompt.new(f1_arg0, f1_arg1, 0, 0, 20, 420, 0, 0, 292, 332)
@@ -172,7 +172,7 @@ CoD.PaintshopControlsFull.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	end)
 	local overrides = ToggleOutline
 	local Clip = ToggleOutline.subscribeToModel
-	local rightTriggerButton = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local rightTriggerButton = Engine[@"getmodelforcontroller"](f1_arg1)
 	Clip(overrides, rightTriggerButton.LastInput, function(f17_arg0)
 		f1_arg0:updateElementState(ToggleOutline, {
 			name = "model_validation",
@@ -200,7 +200,7 @@ CoD.PaintshopControlsFull.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 			modelName = "isGrouped",
 		})
 	end)
-	ToggleOutline.label:setText(Engine[0xF9F1239CFD921FE](0xB01D7611E815CFB))
+	ToggleOutline.label:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_1B01D7611E815CFB"))
 	ToggleOutline:subscribeToGlobalModel(f1_arg1, "Controller", "alt1_button_image", function(model)
 		local f20_local0 = model:get()
 		if f20_local0 ~= nil then
@@ -230,7 +230,7 @@ CoD.PaintshopControlsFull.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	end)
 	rightTriggerButton = Clip
 	overrides = Clip.subscribeToModel
-	local leftTriggerButton = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local leftTriggerButton = Engine[@"getmodelforcontroller"](f1_arg1)
 	overrides(rightTriggerButton, leftTriggerButton.LastInput, function(f24_arg0)
 		f1_arg0:updateElementState(Clip, {
 			name = "model_validation",
@@ -258,7 +258,7 @@ CoD.PaintshopControlsFull.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 			modelName = "isGrouped",
 		})
 	end)
-	Clip.label:setText(Engine[0xF9F1239CFD921FE](0xAB63F65EEE8AB3C))
+	Clip.label:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/emblem_clip"))
 	Clip:subscribeToGlobalModel(f1_arg1, "Controller", "dpad_down_button_image", function(model)
 		local f27_local0 = model:get()
 		if f27_local0 ~= nil then
@@ -269,7 +269,7 @@ CoD.PaintshopControlsFull.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	self.Clip = Clip
 	overrides = CoD.EmblemEditorHeaderRight.new(f1_arg0, f1_arg1, 0, 0, 5, 325, 0, 0, 232, 269)
 	overrides:setScale(LanguageOverrideNumberForScale("korean", 0.8, LanguageOverrideNumberForScale("japanese", 0.8, LanguageOverrideNumberForScale("chinese", 0.8, 1, 1))))
-	overrides.text:setText(Engine[0xF9F1239CFD921FE](0x1EE153317E38FB5))
+	overrides.text:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_21EE153317E38FB5"))
 	self:addElement(overrides)
 	self.overrides = overrides
 	rightTriggerButton = CoD.EmblemEditorButtonPrompt.new(f1_arg0, f1_arg1, 0, 0, 39, 73, 0, 0, 109, 155)
@@ -293,15 +293,15 @@ CoD.PaintshopControlsFull.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	self:addElement(leftTriggerButton)
 	self.leftTriggerButton = leftTriggerButton
 	local rotateText = LUI.UIText.new(0, 0, 82, 370, 0, 0, 117, 142)
-	rotateText:setText(Engine[0xF9F1239CFD921FE](0x2FFF1300E166617))
+	rotateText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_12FFF1300E166617"))
 	rotateText:setTTF("ttmussels_regular")
 	rotateText:setLetterSpacing(2)
-	rotateText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	rotateText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	rotateText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	rotateText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(rotateText)
 	self.rotateText = rotateText
 	local Flip = CoD.PaintshopButtonPrompt.new(f1_arg0, f1_arg1, 0, 0, 20, 371, 0, 0, 148, 194)
-	Flip.label:setText(Engine[0xF9F1239CFD921FE](0x80DD0DAE2D212DC))
+	Flip.label:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_480DD0DAE2D212DC"))
 	Flip:subscribeToGlobalModel(f1_arg1, "Controller", "back_button_image", function(model)
 		local f30_local0 = model:get()
 		if f30_local0 ~= nil then
@@ -311,7 +311,7 @@ CoD.PaintshopControlsFull.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	self:addElement(Flip)
 	self.Flip = Flip
 	local FixedScale = CoD.PaintshopButtonPrompt.new(f1_arg0, f1_arg1, 0, 0, 20, 420, 0, 0, 71, 117)
-	FixedScale.label:setText(Engine[0xF9F1239CFD921FE](0xAD2AED6D89BCC15))
+	FixedScale.label:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_6AD2AED6D89BCC15"))
 	FixedScale:subscribeToGlobalModel(f1_arg1, "Controller", "move_right_stick_button_image", function(model)
 		local f31_local0 = model:get()
 		if f31_local0 ~= nil then
@@ -321,7 +321,7 @@ CoD.PaintshopControlsFull.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	self:addElement(FixedScale)
 	self.FixedScale = FixedScale
 	local FreeScale = CoD.PaintshopButtonPrompt.new(f1_arg0, f1_arg1, 0, 0, 20, 420, 0, 0, 71, 117)
-	FreeScale.label:setText(Engine[0xF9F1239CFD921FE](0xDD45E7A84A50DF9))
+	FreeScale.label:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_7DD45E7A84A50DF9"))
 	FreeScale:subscribeToGlobalModel(f1_arg1, "Controller", "move_right_stick_button_image", function(model)
 		local f32_local0 = model:get()
 		if f32_local0 ~= nil then
@@ -331,7 +331,7 @@ CoD.PaintshopControlsFull.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	self:addElement(FreeScale)
 	self.FreeScale = FreeScale
 	local Move = CoD.PaintshopButtonPrompt.new(f1_arg0, f1_arg1, 0, 0, 20, 420, 0, 0, 33, 79)
-	Move.label:setText(Engine[0xF9F1239CFD921FE](0x507A3A71D9218BE))
+	Move.label:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_507A3A71D9218BE"))
 	Move:subscribeToGlobalModel(f1_arg1, "Controller", "move_left_stick_button_image", function(model)
 		local f33_local0 = model:get()
 		if f33_local0 ~= nil then
@@ -342,53 +342,53 @@ CoD.PaintshopControlsFull.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	self.Move = Move
 	local PaintshopChooseSide = CoD.PaintshopChooseSide.new(f1_arg0, f1_arg1, 0, 0, 5, 325, 0, 0, 4, 36)
 	PaintshopChooseSide:setScale(LanguageOverrideNumberForScale("korean", 0.8, LanguageOverrideNumberForScale("japanese", 0.8, LanguageOverrideNumberForScale("chinese", 0.8, 1, 1))))
-	PaintshopChooseSide.text:setText(LocalizeToUpperString(0xF5CA503839CA925))
+	PaintshopChooseSide.text:setText(LocalizeToUpperString(@"hash_5F5CA503839CA925"))
 	self:addElement(PaintshopChooseSide)
 	self.PaintshopChooseSide = PaintshopChooseSide
 	local dividerH01 = LUI.UIImage.new(0, 0, 0, 420, 0, 0, 22, 26)
 	dividerH01:setAlpha(0.2)
-	dividerH01:setImage(RegisterImage(0x84B43D5B04D263A))
-	dividerH01:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	dividerH01:setImage(RegisterImage(@"hash_484B43D5B04D263A"))
+	dividerH01:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	dividerH01:setShaderVector(0, 0, 0, 0, 0)
 	dividerH01:setupNineSliceShader(8, 4)
 	self:addElement(dividerH01)
 	self.dividerH01 = dividerH01
 	local dividerH02 = LUI.UIImage.new(0, 0, 1, 420, 0, 0, 253, 257)
 	dividerH02:setAlpha(0.2)
-	dividerH02:setImage(RegisterImage(0x84B43D5B04D263A))
-	dividerH02:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	dividerH02:setImage(RegisterImage(@"hash_484B43D5B04D263A"))
+	dividerH02:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	dividerH02:setShaderVector(0, 0, 0, 0, 0)
 	dividerH02:setupNineSliceShader(8, 4)
 	self:addElement(dividerH02)
 	self.dividerH02 = dividerH02
 	local dividerH03 = LUI.UIImage.new(0, 0, 1, 421, 0, 0, 433, 437)
 	dividerH03:setAlpha(0.2)
-	dividerH03:setImage(RegisterImage(0x84B43D5B04D263A))
-	dividerH03:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	dividerH03:setImage(RegisterImage(@"hash_484B43D5B04D263A"))
+	dividerH03:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	dividerH03:setShaderVector(0, 0, 0, 0, 0)
 	dividerH03:setupNineSliceShader(8, 4)
 	self:addElement(dividerH03)
 	self.dividerH03 = dividerH03
 	local Frame01 = LUI.UIImage.new(0, 1, -1, 1, 0, 0, 0, 190)
 	Frame01:setAlpha(0.2)
-	Frame01:setImage(RegisterImage(0x185E11D74ECA3D7))
-	Frame01:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	Frame01:setImage(RegisterImage(@"uie_ui_menu_store_common_frame"))
+	Frame01:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	Frame01:setShaderVector(0, 0, 0, 0, 0)
 	Frame01:setupNineSliceShader(16, 16)
 	self:addElement(Frame01)
 	self.Frame01 = Frame01
 	local Frame02 = LUI.UIImage.new(0, 1, -1, 1, 0, 0, 230, 377)
 	Frame02:setAlpha(0.2)
-	Frame02:setImage(RegisterImage(0x185E11D74ECA3D7))
-	Frame02:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	Frame02:setImage(RegisterImage(@"uie_ui_menu_store_common_frame"))
+	Frame02:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	Frame02:setShaderVector(0, 0, 0, 0, 0)
 	Frame02:setupNineSliceShader(16, 16)
 	self:addElement(Frame02)
 	self.Frame02 = Frame02
 	local Frame03 = LUI.UIImage.new(0, 1, -1, 1, 0, 0, 412, 525)
 	Frame03:setAlpha(0.2)
-	Frame03:setImage(RegisterImage(0x185E11D74ECA3D7))
-	Frame03:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	Frame03:setImage(RegisterImage(@"uie_ui_menu_store_common_frame"))
+	Frame03:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	Frame03:setShaderVector(0, 0, 0, 0, 0)
 	Frame03:setupNineSliceShader(16, 16)
 	self:addElement(Frame03)
@@ -447,7 +447,7 @@ CoD.PaintshopControlsFull.__resetProperties = function(f34_arg0)
 	f34_arg0.BackingMid:setAlpha(1)
 	f34_arg0.BackingBot:setAlpha(1)
 	f34_arg0.FixedScale:setAlpha(1)
-	f34_arg0.FixedScale.label:setText(Engine[0xF9F1239CFD921FE](0xAD2AED6D89BCC15))
+	f34_arg0.FixedScale.label:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_6AD2AED6D89BCC15"))
 	f34_arg0.Frame03:setAlpha(0.2)
 	f34_arg0.Frame02:setAlpha(0.2)
 	f34_arg0.Frame01:setAlpha(0.2)
@@ -653,7 +653,7 @@ CoD.PaintshopControlsFull.__clipsPerState = {
 			f41_arg0.FixedScale:completeAnimation()
 			f41_arg0.FixedScale.label:completeAnimation()
 			f41_arg0.FixedScale:setAlpha(1)
-			f41_arg0.FixedScale.label:setText(Engine[0xF9F1239CFD921FE](0x4FA615DA76883A8))
+			f41_arg0.FixedScale.label:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_34FA615DA76883A8"))
 			f41_arg0.clipFinished(f41_arg0.FixedScale)
 			f41_arg0.FreeScale:completeAnimation()
 			f41_arg0.FreeScale:setAlpha(0)

@@ -14,7 +14,7 @@ CoD.ClassMiniPreview.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	self.anyChildUsesUpdateState = true
 	local inventoryline4 = LUI.UIImage.new(0.5, 0.5, -542, -538, 1, 1, -64, -16)
 	inventoryline4:setAlpha(0.1)
-	inventoryline4:setImage(RegisterImage(0x40E8461C131060A))
+	inventoryline4:setImage(RegisterImage(@"hash_40E8461C131060A"))
 	self:addElement(inventoryline4)
 	self.inventoryline4 = inventoryline4
 	local Primary = CoD.ClassMiniPreviewWeaponItem.new(f1_arg0, f1_arg1, 0, 0, 162, 402, 0.5, 0.5, -35, 35)
@@ -48,7 +48,7 @@ CoD.ClassMiniPreview.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	self.Primary = Primary
 	local inventoryline6 = LUI.UIImage.new(0.5, 0.5, -298, -294, 1, 1, -64, -16)
 	inventoryline6:setAlpha(0.1)
-	inventoryline6:setImage(RegisterImage(0x40E8461C131060A))
+	inventoryline6:setImage(RegisterImage(@"hash_40E8461C131060A"))
 	self:addElement(inventoryline6)
 	self.inventoryline6 = inventoryline6
 	local Secondary = CoD.ClassMiniPreviewWeaponItem.new(f1_arg0, f1_arg1, 0, 0, 406, 646, 0.5, 0.5, -35, 35)
@@ -82,7 +82,7 @@ CoD.ClassMiniPreview.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	self.Secondary = Secondary
 	local inventoryline7 = LUI.UIImage.new(0.5, 0.5, -54, -50, 1, 1, -64, -16)
 	inventoryline7:setAlpha(0.1)
-	inventoryline7:setImage(RegisterImage(0x40E8461C131060A))
+	inventoryline7:setImage(RegisterImage(@"hash_40E8461C131060A"))
 	self:addElement(inventoryline7)
 	self.inventoryline7 = inventoryline7
 	local Gear = CoD.ClassMiniPreviewGearItem.new(f1_arg0, f1_arg1, 0, 0, 650, 730, 0.5, 0.5, -35, 35)
@@ -110,7 +110,7 @@ CoD.ClassMiniPreview.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	self.Gear = Gear
 	local inventoryline5 = LUI.UIImage.new(0.5, 0.5, 30, 34, 1, 1, -64, -16)
 	inventoryline5:setAlpha(0.1)
-	inventoryline5:setImage(RegisterImage(0x40E8461C131060A))
+	inventoryline5:setImage(RegisterImage(@"hash_40E8461C131060A"))
 	self:addElement(inventoryline5)
 	self.inventoryline5 = inventoryline5
 	local Equipment = CoD.ClassMiniPreviewEquipmentItem.new(f1_arg0, f1_arg1, 0, 0, 734, 814, 0, 0, 5, 75)
@@ -159,7 +159,7 @@ CoD.ClassMiniPreview.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	self.Equipment = Equipment
 	local inventoryline2 = LUI.UIImage.new(0.5, 0.5, 114, 118, 1, 1, -64, -16)
 	inventoryline2:setAlpha(0.1)
-	inventoryline2:setImage(RegisterImage(0x40E8461C131060A))
+	inventoryline2:setImage(RegisterImage(@"hash_40E8461C131060A"))
 	self:addElement(inventoryline2)
 	self.inventoryline2 = inventoryline2
 	local Talents = LUI.GridLayout.new(f1_arg0, f1_arg1, false, 0, 0, 0, 0, nil, nil, false, false, false, false)
@@ -168,7 +168,7 @@ CoD.ClassMiniPreview.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	Talents:setWidgetType(CoD.ClassMiniPreviewTalentItem)
 	Talents:setHorizontalCount(6)
 	Talents:setSpacing(0)
-	Talents:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	Talents:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	Talents:linkToElementModel(self, "talentsMiniPreview", true, function(model)
 		local f19_local0 = model:get()
 		if f19_local0 ~= nil then
@@ -179,7 +179,7 @@ CoD.ClassMiniPreview.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	self.Talents = Talents
 	local inventoryline3 = LUI.UIImage.new(0.5, 0.5, 538, 542, 1, 1, -64, -16)
 	inventoryline3:setAlpha(0.1)
-	inventoryline3:setImage(RegisterImage(0x40E8461C131060A))
+	inventoryline3:setImage(RegisterImage(@"hash_40E8461C131060A"))
 	self:addElement(inventoryline3)
 	self.inventoryline3 = inventoryline3
 	Primary.id = "Primary"

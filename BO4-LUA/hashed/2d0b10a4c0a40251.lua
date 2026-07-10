@@ -17,7 +17,7 @@ CoD.WarzoneContextualExtraItems_LeftAlign.new = function(f1_arg0, f1_arg1, f1_ar
 	InventoryEquipmentSmall:setTopBottom(1, 1, -24, -8)
 	InventoryEquipmentSmall:setWidgetType(CoD.WarzoneInventoryItemGrayBox)
 	InventoryEquipmentSmall:setHorizontalCount(3)
-	InventoryEquipmentSmall:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	InventoryEquipmentSmall:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	self:addElement(InventoryEquipmentSmall)
 	self.InventoryEquipmentSmall = InventoryEquipmentSmall
 	local InventoryEquipmentLarge = LUI.UIList.new(f1_arg0, f1_arg1, 2, 0, nil, false, false, false, false)
@@ -25,7 +25,7 @@ CoD.WarzoneContextualExtraItems_LeftAlign.new = function(f1_arg0, f1_arg1, f1_ar
 	InventoryEquipmentLarge:setTopBottom(1, 1, -75, -5)
 	InventoryEquipmentLarge:setWidgetType(CoD.WarzoneQuickInventoryItem)
 	InventoryEquipmentLarge:setHorizontalCount(3)
-	InventoryEquipmentLarge:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
+	InventoryEquipmentLarge:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
 	InventoryEquipmentLarge:registerEventHandler("list_active_changed", function(element, event)
 		local f2_local0 = nil
 		UpdateSelfElementState(f1_arg0, self.ArrowL, f1_arg1)
@@ -234,7 +234,7 @@ CoD.WarzoneContextualExtraItems_LeftAlign.new = function(f1_arg0, f1_arg1, f1_ar
 	})
 	local f1_local8 = self
 	local f1_local9 = self.subscribeToModel
-	local f1_local10 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local10 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local9(f1_local8, f1_local10["hudItems.inventory.open"], function(f25_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -246,7 +246,7 @@ CoD.WarzoneContextualExtraItems_LeftAlign.new = function(f1_arg0, f1_arg1, f1_ar
 	end, false)
 	f1_local8 = self
 	f1_local9 = self.subscribeToModel
-	f1_local10 = Engine[0x8DF2E5447F384B9]()
+	f1_local10 = Engine[@"getglobalmodel"]()
 	f1_local9(f1_local8, f1_local10["storageGlobalRoot.user_settings"], function(f26_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -306,7 +306,7 @@ CoD.WarzoneContextualExtraItems_LeftAlign.new = function(f1_arg0, f1_arg1, f1_ar
 	end, false)
 	f1_local8 = self
 	f1_local9 = self.subscribeToModel
-	f1_local10 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local10 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local9(f1_local8, f1_local10.PlayerSettingsUpdate, function(f31_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -322,7 +322,7 @@ CoD.WarzoneContextualExtraItems_LeftAlign.new = function(f1_arg0, f1_arg1, f1_ar
 	end)
 	f1_local8 = self
 	f1_local9 = self.subscribeToModel
-	f1_local10 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local10 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local9(f1_local8, f1_local10.LastInput, function(f33_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -462,12 +462,12 @@ CoD.WarzoneContextualExtraItems_LeftAlign.__clipsPerState = {
 					f40_arg0.Button.Icon:setScale(0.9, 0.9)
 					f40_arg0:registerEventHandler("transition_complete_keyframe", f40_local0)
 				end
-				f38_arg0.QuickInventoryItemCurrent:beginAnimation(180, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
-				f38_arg0.QuickInventoryItemCurrent.Button.Blur:beginAnimation(180, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
-				f38_arg0.QuickInventoryItemCurrent.Button.Backing:beginAnimation(180, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
-				f38_arg0.QuickInventoryItemCurrent.Button.LED:beginAnimation(180, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
-				f38_arg0.QuickInventoryItemCurrent.Button.Border:beginAnimation(180, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
-				f38_arg0.QuickInventoryItemCurrent.Button.StackCount:beginAnimation(180, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f38_arg0.QuickInventoryItemCurrent:beginAnimation(180, Enum[@"luitween"][@"luitween_ease_out"])
+				f38_arg0.QuickInventoryItemCurrent.Button.Blur:beginAnimation(180, Enum[@"luitween"][@"luitween_ease_out"])
+				f38_arg0.QuickInventoryItemCurrent.Button.Backing:beginAnimation(180, Enum[@"luitween"][@"luitween_ease_out"])
+				f38_arg0.QuickInventoryItemCurrent.Button.LED:beginAnimation(180, Enum[@"luitween"][@"luitween_ease_out"])
+				f38_arg0.QuickInventoryItemCurrent.Button.Border:beginAnimation(180, Enum[@"luitween"][@"luitween_ease_out"])
+				f38_arg0.QuickInventoryItemCurrent.Button.StackCount:beginAnimation(180, Enum[@"luitween"][@"luitween_ease_out"])
 				f38_arg0.QuickInventoryItemCurrent:setTopBottom(1, 1, 9, 79)
 				f38_arg0.QuickInventoryItemCurrent.Button.Blur:setAlpha(0)
 				f38_arg0.QuickInventoryItemCurrent.Button.Backing:setAlpha(0)

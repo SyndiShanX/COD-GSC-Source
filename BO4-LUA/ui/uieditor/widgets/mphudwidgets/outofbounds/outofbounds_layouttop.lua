@@ -10,12 +10,12 @@ CoD.outofbounds_layoutTop.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	local LayoutElementTop2 = LUI.UIImage.new(0, 0, 0, 700, 0, 0, 2, 18)
 	LayoutElementTop2:setAlpha(0.15)
 	LayoutElementTop2:setZoom(-10)
-	LayoutElementTop2:setImage(RegisterImage(0x9C016F17656D4BC))
+	LayoutElementTop2:setImage(RegisterImage(@"hash_59C016F17656D4BC"))
 	self:addElement(LayoutElementTop2)
 	self.LayoutElementTop2 = LayoutElementTop2
 	local LayoutElementTop = LUI.UIImage.new(0, 0, 0, 700, 0, 0, 0, 16)
 	LayoutElementTop:setAlpha(0.3)
-	LayoutElementTop:setImage(RegisterImage(0x9C016F17656D4BC))
+	LayoutElementTop:setImage(RegisterImage(@"hash_59C016F17656D4BC"))
 	self:addElement(LayoutElementTop)
 	self.LayoutElementTop = LayoutElementTop
 	if PostLoadFunc then
@@ -26,7 +26,7 @@ end
 CoD.outofbounds_layoutTop.__resetProperties = function(f2_arg0)
 	f2_arg0.LayoutElementTop2:completeAnimation()
 	f2_arg0.LayoutElementTop2:setZoom(-10)
-	f2_arg0.LayoutElementTop2:setImage(RegisterImage(0x9C016F17656D4BC))
+	f2_arg0.LayoutElementTop2:setImage(RegisterImage(@"hash_59C016F17656D4BC"))
 end
 CoD.outofbounds_layoutTop.__clipsPerState = {
 	DefaultState = {
@@ -39,14 +39,14 @@ CoD.outofbounds_layoutTop.__clipsPerState = {
 					f5_arg0:setZoom(-10)
 					f5_arg0:registerEventHandler("transition_complete_keyframe", f3_arg0.clipFinished)
 				end
-				f3_arg0.LayoutElementTop2:beginAnimation(700, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f3_arg0.LayoutElementTop2:beginAnimation(700, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_both"])
 				f3_arg0.LayoutElementTop2:setZoom(30)
 				f3_arg0.LayoutElementTop2:registerEventHandler("interrupted_keyframe", f3_arg0.clipInterrupted)
 				f3_arg0.LayoutElementTop2:registerEventHandler("transition_complete_keyframe", f4_local0)
 			end
 			f3_arg0.LayoutElementTop2:completeAnimation()
 			f3_arg0.LayoutElementTop2:setZoom(-10)
-			f3_arg0.LayoutElementTop2:setImage(RegisterImage(0x9C016F17656D4BC))
+			f3_arg0.LayoutElementTop2:setImage(RegisterImage(@"hash_59C016F17656D4BC"))
 			f3_local0(f3_arg0.LayoutElementTop2)
 			f3_arg0.nextClip = "DefaultClip"
 		end,

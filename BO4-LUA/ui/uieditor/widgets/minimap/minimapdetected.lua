@@ -9,7 +9,7 @@ CoD.MinimapDetected.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	self.soundSet = "none"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local IconDetected = LUI.UIImage.new(0.5, 0.5, -28, 28, 0.5, 0.5, -28, 28)
-	IconDetected:setImage(RegisterImage(0x621725BBEBDF7F9))
+	IconDetected:setImage(RegisterImage(@"uie_icon_minimap_detected"))
 	self:addElement(IconDetected)
 	self.IconDetected = IconDetected
 	self:mergeStateConditions({
@@ -22,7 +22,7 @@ CoD.MinimapDetected.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	})
 	local f1_local2 = self
 	local f1_local3 = self.subscribeToModel
-	local f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local3(f1_local2, f1_local4["huditems.isExposedOnMinimap"], function(f3_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

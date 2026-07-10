@@ -31,8 +31,8 @@ CoD.SpawnSelectKillcam.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	self:addElement(AVIBContainer)
 	self.AVIBContainer = AVIBContainer
 	local SpawnSelectionMap = CoD.SpawnSelectionMap.new(f1_arg0, f1_arg1, 0.5, 0.5, -960, 960, 0.5, 0.5, -540, 540)
-	SpawnSelectionMap.MinimapFogOfWar.MinimapFogOfWar:setupCompassFog(Enum[0x398581F68B3E097][0xCB482ABCCF21CD8])
-	SpawnSelectionMap.MinimapFogOfWar.CompassMinimapMap:setupCompassMap(Enum[0x398581F68B3E097][0xCB482ABCCF21CD8])
+	SpawnSelectionMap.MinimapFogOfWar.MinimapFogOfWar:setupCompassFog(Enum[@"compasstype"][@"compass_type_spawn"])
+	SpawnSelectionMap.MinimapFogOfWar.CompassMinimapMap:setupCompassMap(Enum[@"compasstype"][@"compass_type_spawn"])
 	self.__on_menuOpened_SpawnSelectionMap = function(f2_arg0, f2_arg1, f2_arg2, f2_arg3)
 		local f2_local0 = SpawnSelectionMap
 		if not IsElementPropertyValue(f2_local0, "_receivedMenuOpen", true) then
@@ -51,7 +51,7 @@ CoD.SpawnSelectKillcam.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	local selectspawnWipe = LUI.UIImage.new(0, 0, 98, 1822, 0, 0, 161, 965)
 	selectspawnWipe:setRGB(0.02, 0.07, 0.09)
 	selectspawnWipe:setAlpha(0.17)
-	selectspawnWipe:setMaterial(LUI.UIImage.GetCachedMaterial(0x2EEB1ECF1F211F5))
+	selectspawnWipe:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_delta"))
 	selectspawnWipe:setShaderVector(0, 0.83, 1, 0, 0)
 	selectspawnWipe:setShaderVector(1, 0.5, 0, 0, 0)
 	selectspawnWipe:setShaderVector(2, 0, 1, 0, 0)
@@ -68,40 +68,40 @@ CoD.SpawnSelectKillcam.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	self.mapGrid01 = mapGrid01
 	local mapGrid01Add = CoD.SpawnSelectLayoutGrid.new(f1_arg0, f1_arg1, 0, 0, 175, 1747, 0, 0, 277, 915)
 	mapGrid01Add:setAlpha(0.33)
-	mapGrid01Add:setRFTMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	mapGrid01Add:setRFTMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(mapGrid01Add)
 	self.mapGrid01Add = mapGrid01Add
 	local selectspawnFractalMultiply = LUI.UIImage.new(0, 0, 97, 1819, 0, 0, 158, 930)
 	selectspawnFractalMultiply:setAlpha(0)
-	selectspawnFractalMultiply:setImage(RegisterImage(0xA7D9246BC3FCD6))
-	selectspawnFractalMultiply:setMaterial(LUI.UIImage.GetCachedMaterial(0x655565C7B387234))
+	selectspawnFractalMultiply:setImage(RegisterImage(@"uie_ui_hud_selectspawn_grid_fractal"))
+	selectspawnFractalMultiply:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_multiply"))
 	self:addElement(selectspawnFractalMultiply)
 	self.selectspawnFractalMultiply = selectspawnFractalMultiply
 	local selectspawnFractalAdd = LUI.UIImage.new(0, 0, 102, 1814, 0, 0, 169, 919)
 	selectspawnFractalAdd:setAlpha(0.04)
-	selectspawnFractalAdd:setImage(RegisterImage(0xA7D9246BC3FCD6))
-	selectspawnFractalAdd:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	selectspawnFractalAdd:setImage(RegisterImage(@"uie_ui_hud_selectspawn_grid_fractal"))
+	selectspawnFractalAdd:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(selectspawnFractalAdd)
 	self.selectspawnFractalAdd = selectspawnFractalAdd
 	local selectspawnMissionArea = LUI.UIImage.new(0, 0, 1331, 1501, 0, 0, 818, 882)
 	selectspawnMissionArea:setAlpha(0.35)
-	selectspawnMissionArea:setImage(RegisterImage(0x859A589EE03AACA))
+	selectspawnMissionArea:setImage(RegisterImage(@"uie_ui_hud_selectspawn_mission_area"))
 	self:addElement(selectspawnMissionArea)
 	self.selectspawnMissionArea = selectspawnMissionArea
 	local offshoreMapNameGlow = LUI.UIImage.new(0, 0, 81, 417, 0, 0, 804, 1004)
 	offshoreMapNameGlow:setAlpha(0.14)
-	offshoreMapNameGlow:setImage(RegisterImage(0xC307C69A98DE8D7))
-	offshoreMapNameGlow:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	offshoreMapNameGlow:setImage(RegisterImage(@"uie_ui_hud_selectspawn_mapname_glow"))
+	offshoreMapNameGlow:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(offshoreMapNameGlow)
 	self.offshoreMapNameGlow = offshoreMapNameGlow
 	local selectSpawnTxt = LUI.UIText.new(0, 0, 176, 596, 0, 0, 88.5, 125.5)
 	selectSpawnTxt:setRGB(0.92, 0.92, 0.92)
 	selectSpawnTxt:setAlpha(0.07)
-	selectSpawnTxt:setText(Engine[0xF9F1239CFD921FE](0xAFFDA3E711D7D6F))
+	selectSpawnTxt:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_3AFFDA3E711D7D6F"))
 	selectSpawnTxt:setTTF("0arame_mono_stencil")
 	selectSpawnTxt:setLetterSpacing(12)
-	selectSpawnTxt:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	selectSpawnTxt:setAlignment(Enum[0x7A5123B654282D2][0x6ED4298C93DC5ED])
+	selectSpawnTxt:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	selectSpawnTxt:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
 	self:addElement(selectSpawnTxt)
 	self.selectSpawnTxt = selectSpawnTxt
 	local selectSpawnTopline02 = LUI.UIImage.new(0, 0, 596, 597, 0, 0, 61, 69)
@@ -143,12 +143,12 @@ CoD.SpawnSelectKillcam.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	self.Leftpip = Leftpip
 	local PCKillCamHint01 = nil
 	PCKillCamHint01 = CoD.PC_KillCamHint.new(f1_arg0, f1_arg1, 0, 0, 1099, 1814, 0, 0, 972, 995)
-	PCKillCamHint01.PcHint:setText(Engine[0xF9F1239CFD921FE](0x88CA6B883CEEDBB))
+	PCKillCamHint01.PcHint:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_688CA6B883CEEDBB"))
 	self:addElement(PCKillCamHint01)
 	self.PCKillCamHint01 = PCKillCamHint01
 	local PCKillCamHint02 = nil
 	PCKillCamHint02 = CoD.PC_KillCamHint.new(f1_arg0, f1_arg1, 0, 0, 105, 819, 0, 0, 972, 995)
-	PCKillCamHint02.PcHint:setText(Engine[0xF9F1239CFD921FE](0x88EEE5B13D09FB5))
+	PCKillCamHint02.PcHint:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_88EEE5B13D09FB5"))
 	self:addElement(PCKillCamHint02)
 	self.PCKillCamHint02 = PCKillCamHint02
 	self:mergeStateConditions({
@@ -161,7 +161,7 @@ CoD.SpawnSelectKillcam.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	})
 	local f1_local25 = self
 	local f1_local26 = self.subscribeToModel
-	local f1_local27 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local27 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local26(f1_local25, f1_local27["hudItems.showSpawnSelect"], function(f4_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -194,7 +194,7 @@ CoD.SpawnSelectKillcam.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	end)
 	self:subscribeToGlobalModel(f1_arg1, "PerController", "scriptNotify", function(model)
 		local f6_local0 = self
-		if CoD.ModelUtility.IsParamModelEqualToHashString(model, 0x3C88BB4F5B7A901) then
+		if CoD.ModelUtility.IsParamModelEqualToHashString(model, @"force_spawn_selection") then
 			CoD.SpawnSelectionUtility.SendMenuResponseForRecommendedRegion(self, f1_arg1, f1_arg0, self.SpawnSelectionMap)
 		end
 	end)
@@ -267,7 +267,7 @@ CoD.SpawnSelectKillcam.__resetProperties = function(f8_arg0)
 	f8_arg0.PCKillCamHint01:setAlpha(1)
 	f8_arg0.selectspawnWipe:setRGB(0.02, 0.07, 0.09)
 	f8_arg0.selectspawnWipe:setAlpha(0.17)
-	f8_arg0.selectspawnWipe:setMaterial(LUI.UIImage.GetCachedMaterial(0x2EEB1ECF1F211F5))
+	f8_arg0.selectspawnWipe:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_delta"))
 	f8_arg0.selectspawnWipe:setShaderVector(0, 0.83, 1, 0, 0)
 	f8_arg0.selectspawnWipe:setShaderVector(1, 0.5, 0, 0, 0)
 	f8_arg0.selectspawnWipe:setShaderVector(2, 0, 1, 0, 0)
@@ -320,7 +320,7 @@ CoD.SpawnSelectKillcam.__clipsPerState = {
 			local f9_local2 = function(f14_arg0)
 				local f14_local0 = function(f15_arg0)
 					local f15_local0 = function(f16_arg0)
-						f16_arg0:beginAnimation(69, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+						f16_arg0:beginAnimation(69, Enum[@"luitween"][@"luitween_ease_out"])
 						f16_arg0:setAlpha(0)
 						f16_arg0:setShaderVector(0, 1, 1, 0, 0)
 						f16_arg0:registerEventHandler("transition_complete_keyframe", f9_arg0.clipFinished)
@@ -329,7 +329,7 @@ CoD.SpawnSelectKillcam.__clipsPerState = {
 					f15_arg0:setShaderVector(0, 0, 1, 0, 0)
 					f15_arg0:registerEventHandler("transition_complete_keyframe", f15_local0)
 				end
-				f14_arg0:beginAnimation(90, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f14_arg0:beginAnimation(90, Enum[@"luitween"][@"luitween_ease_in"])
 				f14_arg0:setAlpha(1)
 				f14_arg0:setShaderVector(0, 0, 0.5, 0, 0)
 				f14_arg0:registerEventHandler("transition_complete_keyframe", f14_local0)
@@ -337,7 +337,7 @@ CoD.SpawnSelectKillcam.__clipsPerState = {
 			f9_arg0.selectspawnWipe:beginAnimation(10)
 			f9_arg0.selectspawnWipe:setRGB(0.02, 0.07, 0.09)
 			f9_arg0.selectspawnWipe:setAlpha(0)
-			f9_arg0.selectspawnWipe:setMaterial(LUI.UIImage.GetCachedMaterial(0x2EEB1ECF1F211F5))
+			f9_arg0.selectspawnWipe:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_delta"))
 			f9_arg0.selectspawnWipe:setShaderVector(0, 0, 0, 0, 0)
 			f9_arg0.selectspawnWipe:setShaderVector(1, 0.5, 0, 0, 0)
 			f9_arg0.selectspawnWipe:setShaderVector(2, 0, 1, 0, 0)
@@ -354,7 +354,7 @@ CoD.SpawnSelectKillcam.__clipsPerState = {
 							f9_arg0.clipFinished(element, event)
 						end)
 					end
-					f18_arg0:beginAnimation(200, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f18_arg0:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_in"])
 					f18_arg0:setAlpha(1)
 					f18_arg0:registerEventHandler("transition_complete_keyframe", f18_local0)
 				end
@@ -369,11 +369,11 @@ CoD.SpawnSelectKillcam.__clipsPerState = {
 			local f9_local4 = function(f21_arg0)
 				local f21_local0 = function(f22_arg0)
 					local f22_local0 = function(f23_arg0)
-						f23_arg0:beginAnimation(69, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+						f23_arg0:beginAnimation(69, Enum[@"luitween"][@"luitween_ease_both"])
 						f23_arg0:setAlpha(0.2)
 						f23_arg0:registerEventHandler("transition_complete_keyframe", f9_arg0.clipFinished)
 					end
-					f22_arg0:beginAnimation(290, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f22_arg0:beginAnimation(290, Enum[@"luitween"][@"luitween_ease_both"])
 					f22_arg0:setAlpha(0.5)
 					f22_arg0:registerEventHandler("transition_complete_keyframe", f22_local0)
 				end
@@ -387,11 +387,11 @@ CoD.SpawnSelectKillcam.__clipsPerState = {
 			local f9_local5 = function(f24_arg0)
 				local f24_local0 = function(f25_arg0)
 					local f25_local0 = function(f26_arg0)
-						f26_arg0:beginAnimation(69, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+						f26_arg0:beginAnimation(69, Enum[@"luitween"][@"luitween_ease_both"])
 						f26_arg0:setAlpha(0.2)
 						f26_arg0:registerEventHandler("transition_complete_keyframe", f9_arg0.clipFinished)
 					end
-					f25_arg0:beginAnimation(290, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f25_arg0:beginAnimation(290, Enum[@"luitween"][@"luitween_ease_both"])
 					f25_arg0:setAlpha(1)
 					f25_arg0:registerEventHandler("transition_complete_keyframe", f25_local0)
 				end
@@ -406,11 +406,11 @@ CoD.SpawnSelectKillcam.__clipsPerState = {
 				local f27_local0 = function(f28_arg0)
 					local f28_local0 = function(f29_arg0)
 						local f29_local0 = function(f30_arg0)
-							f30_arg0:beginAnimation(69, Enum[0xF50FFF429AB1890][0xE99F3A6467FC0CA] | Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+							f30_arg0:beginAnimation(69, Enum[@"luitween"][@"luitween_back"] | Enum[@"luitween"][@"luitween_ease_out"])
 							f30_arg0:setAlpha(0.15)
 							f30_arg0:registerEventHandler("transition_complete_keyframe", f9_arg0.clipFinished)
 						end
-						f29_arg0:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+						f29_arg0:beginAnimation(200, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_in"])
 						f29_arg0:setAlpha(0.5)
 						f29_arg0:registerEventHandler("transition_complete_keyframe", f29_local0)
 					end
@@ -428,7 +428,7 @@ CoD.SpawnSelectKillcam.__clipsPerState = {
 			f9_local6(f9_arg0.selectspawnFractalMultiply)
 			local f9_local7 = function(f31_arg0)
 				local f31_local0 = function(f32_arg0)
-					f32_arg0:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f32_arg0:beginAnimation(200, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_in"])
 					f32_arg0:setAlpha(0.15)
 					f32_arg0:registerEventHandler("transition_complete_keyframe", f9_arg0.clipFinished)
 				end
@@ -459,7 +459,7 @@ CoD.SpawnSelectKillcam.__clipsPerState = {
 					f36_arg0:setAlpha(0.05)
 					f36_arg0:registerEventHandler("transition_complete_keyframe", f9_arg0.clipFinished)
 				end
-				f35_arg0:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f35_arg0:beginAnimation(200, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_both"])
 				f35_arg0:setAlpha(0.2)
 				f35_arg0:registerEventHandler("transition_complete_keyframe", f35_local0)
 			end

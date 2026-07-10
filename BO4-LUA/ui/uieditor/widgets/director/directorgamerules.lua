@@ -17,7 +17,7 @@ CoD.DirectorGameRules.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	local PCTooltipExceptionWidget = nil
 	PCTooltipExceptionWidget = CoD.PC_TooltipExceptionWidget.new(f1_arg0, f1_arg1, 0.5, 0.5, -178, 178, 1, 1, -28, 0)
 	PCTooltipExceptionWidget:setAlpha(0)
-	PCTooltipExceptionWidget.Tip:setText(LocalizeToUpperString(0xBB7AA7A26F39DFA))
+	PCTooltipExceptionWidget.Tip:setText(LocalizeToUpperString(@"hash_BB7AA7A26F39DFA"))
 	self:addElement(PCTooltipExceptionWidget)
 	self.PCTooltipExceptionWidget = PCTooltipExceptionWidget
 	GameRules.id = "GameRules"

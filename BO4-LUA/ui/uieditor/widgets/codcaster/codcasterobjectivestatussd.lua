@@ -23,7 +23,7 @@ CoD.CodCasterObjectiveStatusSD.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	self.BombB2 = BombB2
 	local glow = LUI.UIImage.new(0.5, 0.5, -16, 16, 0.5, 0.5, -16, 16)
 	glow:setAlpha(0)
-	glow:setImage(RegisterImage(0xD9007F963116063))
+	glow:setImage(RegisterImage(@"uie_codcaster_objectifstatusglow"))
 	self:addElement(glow)
 	self.glow = glow
 	self:mergeStateConditions({
@@ -48,7 +48,7 @@ CoD.CodCasterObjectiveStatusSD.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	})
 	local f1_local6 = self
 	local f1_local7 = self.subscribeToModel
-	local f1_local8 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local8 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local7(f1_local6, f1_local8["HUDItems.codcaster.BombA"], function(f5_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -60,7 +60,7 @@ CoD.CodCasterObjectiveStatusSD.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	end, false)
 	f1_local6 = self
 	f1_local7 = self.subscribeToModel
-	f1_local8 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local8 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local7(f1_local6, f1_local8["HUDItems.codcaster.BombB"], function(f6_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -141,13 +141,13 @@ CoD.CodCasterObjectiveStatusSD.__clipsPerState = {
 			f12_arg0:setupElementClipCounter(5)
 			local f12_local0 = function(f13_arg0)
 				local f13_local0 = function(f14_arg0)
-					f14_arg0:beginAnimation(210, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f14_arg0:beginAnimation(210, Enum[@"luitween"][@"luitween_ease_both"])
 					f14_arg0:setLeftRight(0, 0, 176, 236)
 					f14_arg0:setAlpha(0)
 					f14_arg0:setScale(1, 1)
 					f14_arg0:registerEventHandler("transition_complete_keyframe", f12_arg0.clipFinished)
 				end
-				f12_arg0.BombB:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f12_arg0.BombB:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f12_arg0.BombB:setLeftRight(0, 0, 186.64, 246.64)
 				f12_arg0.BombB:setAlpha(0.52)
 				f12_arg0.BombB:setScale(0.8, 0.8)
@@ -161,12 +161,12 @@ CoD.CodCasterObjectiveStatusSD.__clipsPerState = {
 			f12_local0(f12_arg0.BombB)
 			local f12_local1 = function(f15_arg0)
 				local f15_local0 = function(f16_arg0)
-					f16_arg0:beginAnimation(210, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f16_arg0:beginAnimation(210, Enum[@"luitween"][@"luitween_ease_both"])
 					f16_arg0:setLeftRight(0, 0, 176, 236)
 					f16_arg0:setScale(1, 1)
 					f16_arg0:registerEventHandler("transition_complete_keyframe", f12_arg0.clipFinished)
 				end
-				f12_arg0.BombA:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f12_arg0.BombA:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f12_arg0.BombA:setLeftRight(0, 0, 165.1, 225.1)
 				f12_arg0.BombA:setScale(1.2, 1.2)
 				f12_arg0.BombA:registerEventHandler("interrupted_keyframe", f12_arg0.clipInterrupted)
@@ -185,12 +185,12 @@ CoD.CodCasterObjectiveStatusSD.__clipsPerState = {
 			f12_arg0.clipFinished(f12_arg0.BombB2)
 			local f12_local2 = function(f17_arg0)
 				local f17_local0 = function(f18_arg0)
-					f18_arg0:beginAnimation(100, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f18_arg0:beginAnimation(100, Enum[@"luitween"][@"luitween_ease_out"])
 					f18_arg0:setAlpha(0)
 					f18_arg0:setScale(1.25, 1.25)
 					f18_arg0:registerEventHandler("transition_complete_keyframe", f12_arg0.clipFinished)
 				end
-				f17_arg0:beginAnimation(90, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f17_arg0:beginAnimation(90, Enum[@"luitween"][@"luitween_ease_both"])
 				f17_arg0:setAlpha(1)
 				f17_arg0:registerEventHandler("transition_complete_keyframe", f17_local0)
 			end
@@ -218,13 +218,13 @@ CoD.CodCasterObjectiveStatusSD.__clipsPerState = {
 			f20_arg0.clipFinished(f20_arg0.BombA)
 			local f20_local0 = function(f21_arg0)
 				local f21_local0 = function(f22_arg0)
-					f22_arg0:beginAnimation(210, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f22_arg0:beginAnimation(210, Enum[@"luitween"][@"luitween_ease_both"])
 					f22_arg0:setLeftRight(0, 0, 176, 236)
 					f22_arg0:setAlpha(0)
 					f22_arg0:setScale(1, 1)
 					f22_arg0:registerEventHandler("transition_complete_keyframe", f20_arg0.clipFinished)
 				end
-				f20_arg0.BombA2:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f20_arg0.BombA2:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f20_arg0.BombA2:setLeftRight(0, 0, 165.36, 225.36)
 				f20_arg0.BombA2:setAlpha(0.52)
 				f20_arg0.BombA2:setScale(0.8, 0.8)
@@ -238,12 +238,12 @@ CoD.CodCasterObjectiveStatusSD.__clipsPerState = {
 			f20_local0(f20_arg0.BombA2)
 			local f20_local1 = function(f23_arg0)
 				local f23_local0 = function(f24_arg0)
-					f24_arg0:beginAnimation(210, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f24_arg0:beginAnimation(210, Enum[@"luitween"][@"luitween_ease_both"])
 					f24_arg0:setLeftRight(0, 0, 176, 236)
 					f24_arg0:setScale(1, 1)
 					f24_arg0:registerEventHandler("transition_complete_keyframe", f20_arg0.clipFinished)
 				end
-				f20_arg0.BombB2:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f20_arg0.BombB2:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f20_arg0.BombB2:setLeftRight(0, 0, 186.64, 246.64)
 				f20_arg0.BombB2:setScale(1.2, 1.2)
 				f20_arg0.BombB2:registerEventHandler("interrupted_keyframe", f20_arg0.clipInterrupted)
@@ -256,12 +256,12 @@ CoD.CodCasterObjectiveStatusSD.__clipsPerState = {
 			local f20_local2 = function(f25_arg0)
 				local f25_local0 = function(f26_arg0)
 					local f26_local0 = function(f27_arg0)
-						f27_arg0:beginAnimation(100, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+						f27_arg0:beginAnimation(100, Enum[@"luitween"][@"luitween_ease_both"])
 						f27_arg0:setAlpha(0)
 						f27_arg0:setScale(1.25, 1.25)
 						f27_arg0:registerEventHandler("transition_complete_keyframe", f20_arg0.clipFinished)
 					end
-					f26_arg0:beginAnimation(90, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f26_arg0:beginAnimation(90, Enum[@"luitween"][@"luitween_ease_both"])
 					f26_arg0:setAlpha(1)
 					f26_arg0:registerEventHandler("transition_complete_keyframe", f26_local0)
 				end

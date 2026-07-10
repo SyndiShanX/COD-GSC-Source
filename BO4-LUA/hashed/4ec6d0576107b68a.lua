@@ -8,7 +8,7 @@ CoD.TrialWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_a
 	self.soundSet = "none"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local WZTrialImage = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	WZTrialImage:setImage(RegisterImage(0x7497F9C6C6FF53))
+	WZTrialImage:setImage(RegisterImage(@"uie_ui_icon_wz_frontend_gameicon_trial"))
 	self:addElement(WZTrialImage)
 	self.WZTrialImage = WZTrialImage
 	self:mergeStateConditions({

@@ -19,7 +19,7 @@ CoD.StartMenuButtonSmContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	self.Backing = Backing
 	local NoiseTiledBacking = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	NoiseTiledBacking:setAlpha(0.5)
-	NoiseTiledBacking:setImage(RegisterImage(0x34839E8065B1E53))
+	NoiseTiledBacking:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
 	NoiseTiledBacking:setupNineSliceShader(196, 88)
 	self:addElement(NoiseTiledBacking)
 	self.NoiseTiledBacking = NoiseTiledBacking
@@ -37,11 +37,11 @@ CoD.StartMenuButtonSmContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	self.ImageContainer = ImageContainer
 	local ButtonText = LUI.UIText.new(0, 0, 7, 493, 0.08, 0.08, -7.5, 17.5)
 	ButtonText:setRGB(0.78, 0.74, 0.67)
-	ButtonText:setText(Engine[0xF9F1239CFD921FE](0x93E719493E9E18F))
+	ButtonText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	ButtonText:setTTF("ttmussels_regular")
 	ButtonText:setLetterSpacing(1)
-	ButtonText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	ButtonText:setAlignment(Enum[0x7A5123B654282D2][0x6ED4298C93DC5ED])
+	ButtonText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	ButtonText:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
 	self:addElement(ButtonText)
 	self.ButtonText = ButtonText
 	local ButtonOutline = CoD.CommonButtonOutline.new(f1_arg0, f1_arg1, 0, 1, 0, 0, 0, 1, 0, 0)

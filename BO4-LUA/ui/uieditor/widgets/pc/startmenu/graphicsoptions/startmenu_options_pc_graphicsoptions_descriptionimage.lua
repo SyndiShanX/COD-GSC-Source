@@ -7,7 +7,7 @@ CoD.StartMenu_Options_PC_GraphicsOptions_DescriptionImage.new = function(f1_arg0
 	self.id = "StartMenu_Options_PC_GraphicsOptions_DescriptionImage"
 	self.soundSet = "default"
 	local PlaceHolderImage = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	PlaceHolderImage:setImage(RegisterImage(0xD94A99F28B028CF))
+	PlaceHolderImage:setImage(RegisterImage(@"img_t7_menu_mp_preview_biodome"))
 	self:addElement(PlaceHolderImage)
 	self.PlaceHolderImage = PlaceHolderImage
 	local TopBorderLine = LUI.UIImage.new(0, 1, 0, 0, 0, 0, 0, 1)

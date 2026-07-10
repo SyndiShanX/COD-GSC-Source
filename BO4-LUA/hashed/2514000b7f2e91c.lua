@@ -8,13 +8,13 @@ CoD.DeployableNotifications_SensorDartIcon.new = function(f1_arg0, f1_arg1, f1_a
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local DartIcon = LUI.UIImage.new(0, 0, -35, 93, 0, 0, -26, 102)
-	DartIcon:setImage(RegisterImage(0xD67C4B118BE8D31))
+	DartIcon:setImage(RegisterImage(@"hash_7D67C4B118BE8D31"))
 	self:addElement(DartIcon)
 	self.DartIcon = DartIcon
 	local DartEcho = LUI.UIImage.new(0, 0, 12, 48, 0, 0, 12, 48)
 	DartEcho:setRGB(0, 0.76, 1)
 	DartEcho:setAlpha(0)
-	DartEcho:setImage(RegisterImage(0xB5CF7AB5AD5141B))
+	DartEcho:setImage(RegisterImage(@"hash_5B5CF7AB5AD5141B"))
 	self:addElement(DartEcho)
 	self.DartEcho = DartEcho
 	self:mergeStateConditions({

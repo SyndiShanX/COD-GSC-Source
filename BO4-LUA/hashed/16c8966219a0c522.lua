@@ -14,7 +14,7 @@ CoD.WarzoneInventoryMenuItemSmall.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	local ActiveBG = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	ActiveBG:setRGB(ColorSet.Orange.r, ColorSet.Orange.g, ColorSet.Orange.b)
 	ActiveBG:setAlpha(0)
-	ActiveBG:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	ActiveBG:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(ActiveBG)
 	self.ActiveBG = ActiveBG
 	local internal = CoD.WarzoneInventoryMenuItemSmall_Internal.new(f1_arg0, f1_arg1, 0.5, 0.5, -46, 46, 0, 0, 0, 90)
@@ -26,7 +26,7 @@ CoD.WarzoneInventoryMenuItemSmall.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	local ConsumedProgress = LUI.UIImage.new(0, 0, 3, 93, 0, 0, 1, 89)
 	ConsumedProgress:setRGB(0, 0, 0)
 	ConsumedProgress:setAlpha(0.8)
-	ConsumedProgress:setMaterial(LUI.UIImage.GetCachedMaterial(0xD5CA1A25ED87F4F))
+	ConsumedProgress:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_clock_normal"))
 	ConsumedProgress:setShaderVector(1, 0.5, 0, 0, 0)
 	ConsumedProgress:setShaderVector(2, 0.5, 0, 0, 0)
 	ConsumedProgress:setShaderVector(3, 0, 0, 0, 0)
@@ -42,8 +42,8 @@ CoD.WarzoneInventoryMenuItemSmall.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	local castTimer = nil
 	castTimer = LUI.UIImage.new(0.5, 0.5, -22, 22, 0.5, 0.5, -22, 22)
 	castTimer:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
-	castTimer:setImage(RegisterImage(0xC2785B5FC0B6F18))
-	castTimer:setMaterial(LUI.UIImage.GetCachedMaterial(0xD5CA1A25ED87F4F))
+	castTimer:setImage(RegisterImage(@"uie_ui_icon_controller_radial_fill_hud"))
+	castTimer:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_clock_normal"))
 	castTimer:setShaderVector(1, 0.5, 0, 0, 0)
 	castTimer:setShaderVector(2, 0.5, 0, 0, 0)
 	castTimer:setShaderVector(3, 0, 0, 0, 0)
@@ -58,8 +58,8 @@ CoD.WarzoneInventoryMenuItemSmall.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	self.castTimer = castTimer
 	local NotAvailable = LUI.UIImage.new(0, 0, 2, 90, 0, 0, 1, 89)
 	NotAvailable:setAlpha(0)
-	NotAvailable:setImage(RegisterImage(0xB1FCC7EA3552F5A))
-	NotAvailable:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	NotAvailable:setImage(RegisterImage(@"uie_ui_hud_wz_hud_core_drop_x"))
+	NotAvailable:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(NotAvailable)
 	self.NotAvailable = NotAvailable
 	local PickupPulse = CoD.WarzoneInventoryPickupPulse.new(f1_arg0, f1_arg1, 0.5, 0.5, -50, 50, 0.5, 0.5, -50, 50)
@@ -159,39 +159,39 @@ CoD.WarzoneInventoryMenuItemSmall.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	end)
 	self:appendEventHandler("input_source_changed", function(f17_arg0, f17_arg1)
 		f17_arg1.menu = f17_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f17_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+		CoD.Menu.UpdateButtonShownState(f17_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 	end)
 	local f1_local7 = self
 	local f1_local8 = self.subscribeToModel
-	local f1_local9 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local9 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local8(f1_local7, f1_local9.LastInput, function(f18_arg0, f18_arg1)
-		CoD.Menu.UpdateButtonShownState(f18_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+		CoD.Menu.UpdateButtonShownState(f18_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 	end, false)
 	self:linkToElementModel(self, "id", true, function(model, f19_arg1)
-		CoD.Menu.UpdateButtonShownState(f19_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+		CoD.Menu.UpdateButtonShownState(f19_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 	end)
 	self:linkToElementModel(self, "availableAction", true, function(model, f20_arg1)
-		CoD.Menu.UpdateButtonShownState(f20_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+		CoD.Menu.UpdateButtonShownState(f20_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 	end)
 	f1_local7 = self
 	f1_local8 = self.subscribeToModel
 	f1_local9 = DataSources.HUDItems.getModel(f1_arg1)
 	f1_local8(f1_local7, f1_local9.armorType, function(f21_arg0, f21_arg1)
-		CoD.Menu.UpdateButtonShownState(f21_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+		CoD.Menu.UpdateButtonShownState(f21_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 	end, false)
 	f1_local7 = self
 	f1_local8 = self.subscribeToModel
-	f1_local9 = Engine[0xE4D2F32833CFA6C](Engine[0x761955642304848](f1_arg1))
+	f1_local9 = Engine[@"getmodelforclient"](Engine[@"getclientnum"](f1_arg1))
 	f1_local8(f1_local7, f1_local9.armor, function(f22_arg0, f22_arg1)
-		CoD.Menu.UpdateButtonShownState(f22_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+		CoD.Menu.UpdateButtonShownState(f22_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 	end, false)
 	f1_local7 = self
 	f1_local8 = self.subscribeToModel
-	f1_local9 = Engine[0xE4D2F32833CFA6C](Engine[0x761955642304848](f1_arg1))
+	f1_local9 = Engine[@"getmodelforclient"](Engine[@"getclientnum"](f1_arg1))
 	f1_local8(f1_local7, f1_local9.armorMax, function(f23_arg0, f23_arg1)
-		CoD.Menu.UpdateButtonShownState(f23_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+		CoD.Menu.UpdateButtonShownState(f23_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], "ui_confirm", function(element, menu, controller, model)
 		if IsMouseOrKeyboard(controller) and not CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "availableAction", CoD.WZUtility.ItemAvailableAction.CONSUME) then
 			CoD.WZUtility.SendInventoryConsumeNotify(controller, element)
 			return true
@@ -202,10 +202,10 @@ CoD.WarzoneInventoryMenuItemSmall.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 		end
 	end, function(element, menu, controller)
 		if IsMouseOrKeyboard(controller) and not CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "availableAction", CoD.WZUtility.ItemAvailableAction.CONSUME) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x1F464950EB4AA26, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"menu/use", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "ui_confirm")
 			return true
 		elseif IsMouseOrKeyboard(controller) and not CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "availableAction", CoD.WZUtility.ItemAvailableAction.REPAIR) and not CoD.ModelUtility.IsGlobalDataSourceModelValueEqualTo(controller, "HUDItems", "armorType", 0) and not CoD.HUDUtility.IsArmorAtFullHealth(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x2C27E2320C64A74, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"wz/repair_armor", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "ui_confirm")
 			return true
 		else
 			return false
@@ -381,7 +381,7 @@ CoD.WarzoneInventoryMenuItemSmall.__clipsPerState = {
 			f44_arg0:__resetProperties()
 			f44_arg0:setupElementClipCounter(2)
 			local f44_local0 = function(f45_arg0)
-				f44_arg0.internal:beginAnimation(200, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f44_arg0.internal:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_in"])
 				f44_arg0.internal:setScale(1.14, 1.14)
 				f44_arg0.internal:registerEventHandler("interrupted_keyframe", f44_arg0.clipInterrupted)
 				f44_arg0.internal:registerEventHandler("transition_complete_keyframe", f44_arg0.clipFinished)
@@ -397,7 +397,7 @@ CoD.WarzoneInventoryMenuItemSmall.__clipsPerState = {
 			f46_arg0:__resetProperties()
 			f46_arg0:setupElementClipCounter(2)
 			local f46_local0 = function(f47_arg0)
-				f46_arg0.internal:beginAnimation(200, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f46_arg0.internal:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_in"])
 				f46_arg0.internal:setScale(1, 1)
 				f46_arg0.internal:registerEventHandler("interrupted_keyframe", f46_arg0.clipInterrupted)
 				f46_arg0.internal:registerEventHandler("transition_complete_keyframe", f46_arg0.clipFinished)

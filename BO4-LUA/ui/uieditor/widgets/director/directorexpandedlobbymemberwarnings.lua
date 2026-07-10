@@ -30,7 +30,7 @@ CoD.DirectorExpandedLobbyMemberWarnings.new = function(f1_arg0, f1_arg1, f1_arg2
 	end)
 	local f1_local2 = self
 	local f1_local3 = self.subscribeToModel
-	local f1_local4 = Engine[0x8DF2E5447F384B9]()
+	local f1_local4 = Engine[@"getglobalmodel"]()
 	f1_local3(f1_local2, f1_local4["lobbyRoot.playlistId"], function(f4_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -64,7 +64,7 @@ CoD.DirectorExpandedLobbyMemberWarnings.__clipsPerState = {
 			f7_arg0.notificationIcon:completeAnimation()
 			f7_arg0.notificationIcon:setRGB(ColorSet.EnemyScorestreakTarget.r, ColorSet.EnemyScorestreakTarget.g, ColorSet.EnemyScorestreakTarget.b)
 			f7_arg0.notificationIcon:setAlpha(1)
-			f7_arg0.notificationIcon:setImage(RegisterImage(0x1F10DEAAEFC50A4))
+			f7_arg0.notificationIcon:setImage(RegisterImage(@"warning_triangle"))
 			f7_arg0.clipFinished(f7_arg0.notificationIcon)
 		end,
 	},

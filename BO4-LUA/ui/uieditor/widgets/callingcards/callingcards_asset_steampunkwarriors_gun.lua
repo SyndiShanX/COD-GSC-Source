@@ -10,7 +10,7 @@ CoD.CallingCards_Asset_steampunkwarriors_gun.new = function(f1_arg0, f1_arg1, f1
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local gun = LUI.UIImage.new(0, 0, -176.5, 23.5, 0, 0, -141, 27)
-	gun:setImage(RegisterImage(0x9D40B121013CB22))
+	gun:setImage(RegisterImage(@"hash_59D40B121013CB22"))
 	self:addElement(gun)
 	self.gun = gun
 	local gunsmoke = CoD.CallingCards_Asset_steampunkwarriors_gunsmoke.new(f1_arg0, f1_arg1, 0, 0, -159.5, -149.5, 0, 0, -106, -96)

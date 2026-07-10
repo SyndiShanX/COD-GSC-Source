@@ -44,7 +44,7 @@ CoD.Challenges_MP_Stickerbook_CombatTraining.new = function(f1_arg0, f1_arg1, f1
 	CallingCardGrid:setHorizontalCount(3)
 	CallingCardGrid:setVerticalCount(4)
 	CallingCardGrid:setSpacing(20)
-	CallingCardGrid:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	CallingCardGrid:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	CallingCardGrid:setDataSource("CombatTrainingCallingCards")
 	CallingCardGrid:registerEventHandler("list_item_gain_focus", function(element, event)
 		local f5_local0 = nil
@@ -114,7 +114,7 @@ CoD.Challenges_MP_Stickerbook_CombatTraining.new = function(f1_arg0, f1_arg1, f1
 	})
 	local f1_local5 = self
 	local f1_local6 = self.subscribeToModel
-	local f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local6(f1_local5, f1_local7["hudItems.profilingMasterCallingCard"], function(f14_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

@@ -8,7 +8,7 @@ CoD.DoubleLoot.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_ar
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local cryptokeyBack = LUI.UIImage.new(0.5, 0.5, -58, 62, 0, 0, 3, 123)
-	cryptokeyBack:setImage(RegisterImage(0x2F4FC7FBD0C778C))
+	cryptokeyBack:setImage(RegisterImage(@"uie_t7_icon_blackmarket_doubleloot"))
 	self:addElement(cryptokeyBack)
 	self.cryptokeyBack = cryptokeyBack
 	self:mergeStateConditions({

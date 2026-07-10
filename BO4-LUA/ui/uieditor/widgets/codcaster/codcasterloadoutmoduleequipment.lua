@@ -17,7 +17,7 @@ CoD.CodCasterLoadoutModuleEquipment.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	CodCasterLoadoutEquipmentList:setTopBottom(0, 0, 5, 65)
 	CodCasterLoadoutEquipmentList:setWidgetType(CoD.CodCasterLoadoutPerks)
 	CodCasterLoadoutEquipmentList:setSpacing(1)
-	CodCasterLoadoutEquipmentList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	CodCasterLoadoutEquipmentList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	CodCasterLoadoutEquipmentList:setBackingWidgetXPadding(1)
 	CodCasterLoadoutEquipmentList:setDataSource("EquipmentList")
 	CodCasterLoadoutEquipmentList:subscribeToGlobalModel(f1_arg1, "PerController", "talents.talentEquipmentCount", function(model)

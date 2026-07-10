@@ -27,7 +27,7 @@ CoD.ContractFrameInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	})
 	local Blur4 = PurchasedContractsButton
 	local TransactionDeepLinkButton = PurchasedContractsButton.subscribeToModel
-	local Blur3 = Engine[0x8DF2E5447F384B9]()
+	local Blur3 = Engine[@"getglobalmodel"]()
 	TransactionDeepLinkButton(Blur4, Blur3.ContractsForceUpdate, function(f3_arg0)
 		f1_arg0:updateElementState(PurchasedContractsButton, {
 			name = "model_validation",
@@ -37,8 +37,8 @@ CoD.ContractFrameInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 			modelName = "ContractsForceUpdate",
 		})
 	end, false)
-	PurchasedContractsButton.DirectorSelectButtonMiniInternal.MiddleText:setText(LocalizeToUpperString(0xB501D2CF5C8B98A))
-	PurchasedContractsButton.DirectorSelectButtonMiniInternal.MiddleTextFocus:setText(LocalizeToUpperString(0xB501D2CF5C8B98A))
+	PurchasedContractsButton.DirectorSelectButtonMiniInternal.MiddleText:setText(LocalizeToUpperString(@"menu/view_all"))
+	PurchasedContractsButton.DirectorSelectButtonMiniInternal.MiddleTextFocus:setText(LocalizeToUpperString(@"menu/view_all"))
 	PurchasedContractsButton:registerEventHandler("gain_focus", function(element, event)
 		local f4_local0 = nil
 		if element.gainFocus then
@@ -46,23 +46,23 @@ CoD.ContractFrameInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 		elseif element.super.gainFocus then
 			f4_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f4_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(PurchasedContractsButton, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(PurchasedContractsButton, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		OpenOverlay(self, "PurchasedContractsMenu", controller)
 		PlaySoundAlias("uin_press_generic")
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 		return true
 	end, false)
 	self:addElement(PurchasedContractsButton)
 	self.PurchasedContractsButton = PurchasedContractsButton
 	TransactionDeepLinkButton = nil
 	TransactionDeepLinkButton = CoD.DirectorPreGameButton.new(f1_arg0, f1_arg1, 0.88, 0.88, -936.5, -706.5, 0, 0, 781, 851)
-	TransactionDeepLinkButton.DirectorCustomStartButton.MiddleText:setText(LocalizeToUpperString(0x4031C820A02E7BA))
-	TransactionDeepLinkButton.DirectorCustomStartButton.MiddleTextFocus:setText(LocalizeToUpperString(0x4031C820A02E7BA))
+	TransactionDeepLinkButton.DirectorCustomStartButton.MiddleText:setText(LocalizeToUpperString(@"hash_44031C820A02E7BA"))
+	TransactionDeepLinkButton.DirectorCustomStartButton.MiddleTextFocus:setText(LocalizeToUpperString(@"hash_44031C820A02E7BA"))
 	TransactionDeepLinkButton:registerEventHandler("gain_focus", function(element, event)
 		local f7_local0 = nil
 		if element.gainFocus then
@@ -70,10 +70,10 @@ CoD.ContractFrameInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 		elseif element.super.gainFocus then
 			f7_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_none"])
 		return f7_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(TransactionDeepLinkButton, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(TransactionDeepLinkButton, f1_arg1, Enum[@"luibutton"][@"lui_key_none"], "ui_confirm", function(element, menu, controller, model)
 		if IsPC() and CoD.PCKoreaUtility.IsInKorea() then
 			CoD.PCKoreaUtility.OpenTransactionsDeepLinkBlackmarket(controller)
 			return true
@@ -81,13 +81,13 @@ CoD.ContractFrameInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 		end
 	end, function(element, menu, controller)
 		if IsPC() and CoD.PCKoreaUtility.IsInKorea() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "ui_confirm")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(TransactionDeepLinkButton, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "MOUSE1", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(TransactionDeepLinkButton, f1_arg1, Enum[@"luibutton"][@"lui_key_none"], "MOUSE1", function(element, menu, controller, model)
 		if IsPC() and CoD.PCKoreaUtility.IsInKorea() then
 			CoD.PCKoreaUtility.OpenTransactionsDeepLinkBlackmarket(controller)
 			return true
@@ -95,7 +95,7 @@ CoD.ContractFrameInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 		end
 	end, function(element, menu, controller)
 		if IsPC() and CoD.PCKoreaUtility.IsInKorea() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "MOUSE1")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "MOUSE1")
 			return false
 		else
 			return false
@@ -104,22 +104,22 @@ CoD.ContractFrameInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	self:addElement(TransactionDeepLinkButton)
 	self.TransactionDeepLinkButton = TransactionDeepLinkButton
 	Blur4 = LUI.UIImage.new(0, 0, 480, 898, 0, 0, 377, 565)
-	Blur4:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	Blur4:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	Blur4:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(Blur4)
 	self.Blur4 = Blur4
 	Blur3 = LUI.UIImage.new(0, 0, 5, 423, 0, 0, 377, 565)
-	Blur3:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	Blur3:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	Blur3:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(Blur3)
 	self.Blur3 = Blur3
 	local Blur2 = LUI.UIImage.new(0, 0, 480, 898, 0, 0, 81, 269)
-	Blur2:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	Blur2:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	Blur2:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(Blur2)
 	self.Blur2 = Blur2
 	local Blur1 = LUI.UIImage.new(0, 0, 5, 423, 0, 0, 81, 269)
-	Blur1:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	Blur1:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	Blur1:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(Blur1)
 	self.Blur1 = Blur1
@@ -143,8 +143,8 @@ CoD.ContractFrameInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	infoBracketBot:setRGB(0.98, 1, 0.89)
 	infoBracketBot:setAlpha(0.35)
 	infoBracketBot:setZRot(180)
-	infoBracketBot:setImage(RegisterImage(0xC325BED3F226657))
-	infoBracketBot:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	infoBracketBot:setImage(RegisterImage(@"hash_4C325BED3F226657"))
+	infoBracketBot:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	infoBracketBot:setShaderVector(0, 0, 0, 0, 0)
 	infoBracketBot:setupNineSliceShader(16, 4)
 	self:addElement(infoBracketBot)
@@ -153,8 +153,8 @@ CoD.ContractFrameInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	infoBracketBot2:setRGB(0.98, 1, 0.89)
 	infoBracketBot2:setAlpha(0.35)
 	infoBracketBot2:setZRot(180)
-	infoBracketBot2:setImage(RegisterImage(0xC325BED3F226657))
-	infoBracketBot2:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	infoBracketBot2:setImage(RegisterImage(@"hash_4C325BED3F226657"))
+	infoBracketBot2:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	infoBracketBot2:setShaderVector(0, 0, 0, 0, 0)
 	infoBracketBot2:setupNineSliceShader(16, 4)
 	self:addElement(infoBracketBot2)
@@ -173,7 +173,7 @@ CoD.ContractFrameInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	PurchasedContractList:setWidgetType(CoD.ContractItem)
 	PurchasedContractList:setHorizontalCount(2)
 	PurchasedContractList:setSpacing(57)
-	PurchasedContractList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	PurchasedContractList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	PurchasedContractList:setDataSource("PurchasedContracts")
 	PurchasedContractList:registerEventHandler("list_item_gain_focus", function(element, event)
 		local f12_local0 = nil
@@ -190,15 +190,15 @@ CoD.ContractFrameInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 		elseif element.super.gainFocus then
 			f13_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f13_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(PurchasedContractList, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(PurchasedContractList, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		PlaySoundAlias("uin_toggle_generic")
 		CoD.ContractUtility.OpenContractDetails(self, element, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 		return true
 	end, false)
 	self:addElement(PurchasedContractList)
@@ -209,10 +209,10 @@ CoD.ContractFrameInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	PurchasableContractList:setWidgetType(CoD.ContractItem)
 	PurchasableContractList:setHorizontalCount(2)
 	PurchasableContractList:setSpacing(57)
-	PurchasableContractList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	PurchasableContractList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	PurchasableContractList:setDataSource("PurchasableContracts")
 	PurchasableContractList:linkToElementModel(PurchasableContractList, "purchased", true, function(model, f16_arg1)
-		CoD.Menu.UpdateButtonShownState(f16_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f16_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	PurchasableContractList:registerEventHandler("list_item_gain_focus", function(element, event)
 		local f17_local0 = nil
@@ -229,10 +229,10 @@ CoD.ContractFrameInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 		elseif element.super.gainFocus then
 			f18_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f18_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(PurchasableContractList, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(PurchasableContractList, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if not CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "purchased") then
 			PlaySoundAlias("uin_toggle_generic")
 			CoD.ContractUtility.OpenContractDetails(self, element, controller)
@@ -241,7 +241,7 @@ CoD.ContractFrameInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 		end
 	end, function(element, menu, controller)
 		if not CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "purchased") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		else
 			return false
@@ -253,12 +253,12 @@ CoD.ContractFrameInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	ContractTimer1:setRGB(ColorSet.StoreAvailabilityTimer.r, ColorSet.StoreAvailabilityTimer.g, ColorSet.StoreAvailabilityTimer.b)
 	ContractTimer1:setTTF("ttmussels_regular")
 	ContractTimer1:setLetterSpacing(2)
-	ContractTimer1:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	ContractTimer1:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	ContractTimer1:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	ContractTimer1:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	ContractTimer1:subscribeToGlobalModel(f1_arg1, "AutoEvents", "autoevent_contract1_timer", function(model)
 		local f21_local0 = model:get()
 		if f21_local0 ~= nil then
-			ContractTimer1:setText(LocalizeIntoStringIfNotEmpty(0xAAA70C5480C51D2, f21_local0))
+			ContractTimer1:setText(LocalizeIntoStringIfNotEmpty(@"hash_5AAA70C5480C51D2", f21_local0))
 		end
 	end)
 	self:addElement(ContractTimer1)
@@ -267,12 +267,12 @@ CoD.ContractFrameInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	ContractTimer2:setRGB(ColorSet.StoreAvailabilityTimer.r, ColorSet.StoreAvailabilityTimer.g, ColorSet.StoreAvailabilityTimer.b)
 	ContractTimer2:setTTF("ttmussels_regular")
 	ContractTimer2:setLetterSpacing(2)
-	ContractTimer2:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	ContractTimer2:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	ContractTimer2:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	ContractTimer2:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	ContractTimer2:subscribeToGlobalModel(f1_arg1, "AutoEvents", "autoevent_contract2_timer", function(model)
 		local f22_local0 = model:get()
 		if f22_local0 ~= nil then
-			ContractTimer2:setText(LocalizeIntoStringIfNotEmpty(0xAAA70C5480C51D2, f22_local0))
+			ContractTimer2:setText(LocalizeIntoStringIfNotEmpty(@"hash_5AAA70C5480C51D2", f22_local0))
 		end
 	end)
 	self:addElement(ContractTimer2)
@@ -301,7 +301,7 @@ CoD.ContractFrameInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	end)
 	local f1_local20 = SupplyChainDetails
 	local ContractInfoPanel = SupplyChainDetails.subscribeToModel
-	local f1_local22 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local22 = Engine[@"getmodelforcontroller"](f1_arg1)
 	ContractInfoPanel(f1_local20, f1_local22.LastInput, function(f26_arg0)
 		f1_arg0:updateElementState(SupplyChainDetails, {
 			name = "model_validation",
@@ -364,7 +364,7 @@ CoD.ContractFrameInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	end)
 	f1_local22 = ContractInfoPanel
 	f1_local20 = ContractInfoPanel.subscribeToModel
-	local f1_local23 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local23 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local20(f1_local22, f1_local23.LastInput, function(f33_arg0)
 		f1_arg0:updateElementState(ContractInfoPanel, {
 			name = "model_validation",

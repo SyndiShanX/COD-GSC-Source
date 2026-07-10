@@ -16,7 +16,7 @@ LUI.createMenu.initial_black = function(f1_arg0, f1_arg1)
 	self.anyChildUsesUpdateState = true
 	f1_local1:addElementToPendingUpdateStateList(self)
 	local Fullscreen = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	Fullscreen:setImage(RegisterImage(0xD210F4BC59B4E93))
+	Fullscreen:setImage(RegisterImage(@"uie_default_black_0"))
 	self:addElement(Fullscreen)
 	self.Fullscreen = Fullscreen
 	local AnimationLoading20 = CoD.AnimationLoading2.new(f1_local1, f1_arg0, 1, 1, -288, -96, 1, 1, -246, -54)
@@ -29,7 +29,7 @@ LUI.createMenu.initial_black = function(f1_arg0, f1_arg1)
 	Team1PlayerList:setWidgetType(CoD.LoadingScreenTalkerWidgetCPZM)
 	Team1PlayerList:setVerticalCount(4)
 	Team1PlayerList:setSpacing(8)
-	Team1PlayerList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	Team1PlayerList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	Team1PlayerList:setDataSource("LoadingScreenPlayerListTeam1")
 	self:addElement(Team1PlayerList)
 	self.Team1PlayerList = Team1PlayerList

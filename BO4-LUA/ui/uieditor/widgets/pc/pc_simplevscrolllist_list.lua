@@ -15,7 +15,7 @@ CoD.PC_SimpleVScrollList_List.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	View:setAutoScaleContent(true)
 	View:setWidgetType(CoD.StartMenu_Options_Slider)
 	View:setVerticalCount(10)
-	View:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	View:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	LUI.OverrideFunction_CallOriginalFirst(View, "setDataSource", function(element, controller)
 		CoD.PCWidgetUtility.ScrollVerticalTo(self, 0)
 	end)

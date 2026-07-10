@@ -19,7 +19,7 @@ LUI.createMenu.LeaguePlayEndRankUp = function(f1_arg0, f1_arg1)
 	self.anyChildUsesUpdateState = true
 	f1_local1:addElementToPendingUpdateStateList(self)
 	local BlurBg = LUI.UIImage.new(-0.5, 1.5, 0, 0, 0.5, 1.5, -540, -540)
-	BlurBg:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	BlurBg:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	BlurBg:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(BlurBg)
 	self.BlurBg = BlurBg
@@ -100,15 +100,15 @@ LUI.createMenu.LeaguePlayEndRankUp = function(f1_arg0, f1_arg1)
 	local EventEnd = LUI.UIText.new(0.5, 0.5, -150, 150, 1, 1, -224, -203)
 	EventEnd:setRGB(ColorSet.T8__OCHRE.r, ColorSet.T8__OCHRE.g, ColorSet.T8__OCHRE.b)
 	EventEnd:setAlpha(0)
-	EventEnd:setText(Engine[0xF9F1239CFD921FE](0x461D2627AF5B94))
+	EventEnd:setText(Engine[@"hash_4F9F1239CFD921FE"](0x461D2627AF5B94))
 	EventEnd:setTTF("ttmussels_regular")
-	EventEnd:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	EventEnd:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	EventEnd:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	EventEnd:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(EventEnd)
 	self.EventEnd = EventEnd
 	local PCButton = nil
 	PCButton = CoD.PC_MOTD_Buttons.new(f1_local1, f1_arg0, 0.5, 0.5, 650, 890, 0.8, 0.8, 27, 107)
-	PCButton.OptionText:setText(LocalizeToUpperString(0x6393FF34EA56966))
+	PCButton.OptionText:setText(LocalizeToUpperString(@"menu/continue"))
 	PCButton:linkToElementModel(self, "image", true, function(model)
 		local f6_local0 = model:get()
 		if f6_local0 ~= nil then
@@ -122,26 +122,26 @@ LUI.createMenu.LeaguePlayEndRankUp = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f7_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f7_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(PCButton, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(PCButton, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		CoD.ArenaLeaguePlayUtility.DisplayRankUpIfPossible(menu, self, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 		return false
 	end, false)
 	self:addElement(PCButton)
 	self.PCButton = PCButton
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		CoD.ArenaLeaguePlayUtility.DisplayRankUpIfPossible(menu, self, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x6393FF34EA56966, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/continue", nil, "ui_confirm")
 		return true
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], "ESCAPE", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], "ESCAPE", function(element, menu, controller, model)
 		if IsPC() then
 			CoD.ArenaLeaguePlayUtility.DisplayRankUpIfPossible(menu, self, controller)
 			return true
@@ -149,7 +149,7 @@ LUI.createMenu.LeaguePlayEndRankUp = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if IsPC() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, "ESCAPE")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, "ESCAPE")
 			return true
 		else
 			return false
@@ -190,7 +190,7 @@ CoD.LeaguePlayEndRankUp.__clipsPerState = {
 			f15_arg0:__resetProperties()
 			f15_arg0:setupElementClipCounter(3)
 			local f15_local0 = function(f16_arg0)
-				f15_arg0.arenaLeaguePlayBg:beginAnimation(200, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f15_arg0.arenaLeaguePlayBg:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_out"])
 				f15_arg0.arenaLeaguePlayBg:registerEventHandler("interrupted_keyframe", f15_arg0.clipInterrupted)
 				f15_arg0.arenaLeaguePlayBg:registerEventHandler("transition_complete_keyframe", f15_arg0.clipFinished)
 			end
@@ -199,7 +199,7 @@ CoD.LeaguePlayEndRankUp.__clipsPerState = {
 			f15_local0(f15_arg0.arenaLeaguePlayBg)
 			local f15_local1 = function(f17_arg0)
 				local f17_local0 = function(f18_arg0)
-					f18_arg0:beginAnimation(200, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f18_arg0:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_out"])
 					f18_arg0:setAlpha(1)
 					f18_arg0:registerEventHandler("transition_complete_keyframe", f15_arg0.clipFinished)
 				end
@@ -212,7 +212,7 @@ CoD.LeaguePlayEndRankUp.__clipsPerState = {
 			f15_local1(f15_arg0.LeaguePlayEndrankupplacement)
 			local f15_local2 = function(f19_arg0)
 				local f19_local0 = function(f20_arg0)
-					f20_arg0:beginAnimation(200, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f20_arg0:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_out"])
 					f20_arg0:setAlpha(1)
 					f20_arg0:registerEventHandler("transition_complete_keyframe", f15_arg0.clipFinished)
 				end

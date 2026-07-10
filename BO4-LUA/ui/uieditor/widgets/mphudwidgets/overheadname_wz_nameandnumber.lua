@@ -25,10 +25,10 @@ CoD.OverheadName_WZ_NameAndNumber.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	self:addElement(Image)
 	self.Image = Image
 	local PlayerNameAndClanTag = CoD.OverheadName_PlayerNameAndClanTag.new(f1_arg0, f1_arg1, 0, 0, 49, 184, 0, 0, 3, 33)
-	PlayerNameAndClanTag.ClanTag:setMaterial(LUI.UIImage.GetCachedMaterial(0x6250C6FCAC36BD4))
+	PlayerNameAndClanTag.ClanTag:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_56250C6FCAC36BD4"))
 	PlayerNameAndClanTag.ClanTag:setShaderVector(0, 0.2, 0, 0, 0)
 	PlayerNameAndClanTag.ClanTag:setShaderVector(1, 0, 0, 0, 1)
-	PlayerNameAndClanTag.PlayerName:setMaterial(LUI.UIImage.GetCachedMaterial(0x6250C6FCAC36BD4))
+	PlayerNameAndClanTag.PlayerName:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_56250C6FCAC36BD4"))
 	PlayerNameAndClanTag.PlayerName:setShaderVector(0, 0.2, 0, 0, 0)
 	PlayerNameAndClanTag.PlayerName:setShaderVector(1, 0, 0, 0, 1)
 	PlayerNameAndClanTag:linkToElementModel(self, nil, false, function(model)

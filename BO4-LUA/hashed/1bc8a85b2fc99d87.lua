@@ -21,12 +21,12 @@ CoD.ZMInventoryListInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	PackAPunchItems:setWidgetType(CoD.ZMInvPaPItem)
 	PackAPunchItems:setHorizontalCount(4)
 	PackAPunchItems:setSpacing(-12)
-	PackAPunchItems:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	PackAPunchItems:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	PackAPunchItems:setDataSource("ZMInventoryPaPItems")
 	self:addElement(PackAPunchItems)
 	self.PackAPunchItems = PackAPunchItems
 	local Divider = LUI.UIImage.new(0, 0, 706, 716, 0, 0, 0, 80)
-	Divider:setImage(RegisterImage(0xDA3E86054B0E24D))
+	Divider:setImage(RegisterImage(@"uie_zm_hud_inventory_framedivider_vertical"))
 	self:addElement(Divider)
 	self.Divider = Divider
 	local WonderWeaponItems = CoD.ZMInvPhasedItemsContainer.new(f1_arg0, f1_arg1, 0, 0, 458, 706, 0, 0, 0, 80)
@@ -37,7 +37,7 @@ CoD.ZMInventoryListInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self:addElement(WonderWeaponItems)
 	self.WonderWeaponItems = WonderWeaponItems
 	local Divider2 = LUI.UIImage.new(0, 0, 448, 458, 0, 0, 0, 80)
-	Divider2:setImage(RegisterImage(0xDA3E86054B0E24D))
+	Divider2:setImage(RegisterImage(@"uie_zm_hud_inventory_framedivider_vertical"))
 	self:addElement(Divider2)
 	self.Divider2 = Divider2
 	local ShieldComponents = LUI.GridLayout.new(f1_arg0, f1_arg1, false, 0, 0, 0, 0, nil, nil, false, false, false, false)
@@ -46,7 +46,7 @@ CoD.ZMInventoryListInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	ShieldComponents:setWidgetType(CoD.ZMInvShieldItem)
 	ShieldComponents:setHorizontalCount(3)
 	ShieldComponents:setSpacing(0)
-	ShieldComponents:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	ShieldComponents:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	ShieldComponents:setDataSource("ZMInventoryShieldPieces")
 	self:addElement(ShieldComponents)
 	self.ShieldComponents = ShieldComponents

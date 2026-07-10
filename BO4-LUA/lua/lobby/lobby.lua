@@ -43,25 +43,25 @@ LobbyVM = {
 	playSoundHistory = {},
 }
 LobbyVM.DevGui.LaunchGame = function(f1_arg0, f1_arg1)
-	local f1_local0 = Engine[0xC3DF042E7492B66](Enum[0x7CA2DE5266A94BF][0x98EA1BB7164D103])
+	local f1_local0 = Engine[@"lobbygetcontrollinglobbysession"](Enum[@"lobbymodule"][@"lobby_module_host"])
 	if f1_arg0 ~= nil then
-		Engine[0x9DB4788AE93C72D](f1_local0, f1_arg0)
+		Engine[@"lobbysetmap"](f1_local0, f1_arg0)
 	end
 	if f1_arg1 ~= nil then
-		Engine[0x1673E80DCB5CEA3](f1_local0, f1_arg1)
+		Engine[@"lobbysetgametype"](f1_local0, f1_arg1)
 	end
-	if not Engine[0x3E68E350BEFE50D](Enum[0x7CA2DE5266A94BF][0xC46B73E8E18BA2], f1_local0) then
+	if not Engine[@"islobbyactive"](Enum[@"lobbymodule"][@"lobby_module_client"], f1_local0) then
 		return
-	elseif not Engine[0xEA2BE00F49480D](f1_local0) then
+	elseif not Engine[@"islobbyhost"](f1_local0) then
 		return
 	else
 		Lobby.Timer.Clear(true)
-		LobbyVM.LaunchGameExec(Engine[0xA5B9C0111291A8B](), f1_local0)
+		LobbyVM.LaunchGameExec(Engine[@"getprimarycontroller"](), f1_local0)
 	end
 end
 LobbyVM.DevGui.LobbyReset = function()
 	LobbyVM.OnErrorShutdown({
-		controller = Engine[0xA5B9C0111291A8B](),
+		controller = Engine[@"getprimarycontroller"](),
 		signoutUsers = false,
 	})
 end
@@ -69,65 +69,65 @@ LobbyVM.PlaySound = function(f3_arg0, f3_arg1)
 	local f3_local0 = false
 	if LobbyVM.playSoundHistory[f3_arg0] == nil then
 		f3_local0 = true
-	elseif LobbyVM.playSoundHistory[f3_arg0] < Engine[0x9D33D652B9B0F3B]() then
+	elseif LobbyVM.playSoundHistory[f3_arg0] < Engine[@"milliseconds"]() then
 		f3_local0 = true
 	end
 	if f3_local0 == true then
-		Engine[0xC4146BA76D0F982](f3_arg0)
-		LobbyVM.playSoundHistory[f3_arg0] = Engine[0x9D33D652B9B0F3B]() + f3_arg1
+		Engine[@"playsound"](f3_arg0)
+		LobbyVM.playSoundHistory[f3_arg0] = Engine[@"milliseconds"]() + f3_arg1
 	end
 end
 LobbyVM.ExecuteLobbyVMRequest = function(f4_arg0)
-	local f4_local0 = Engine[0x8DF2E5447F384B9]()
+	local f4_local0 = Engine[@"getglobalmodel"]()
 	f4_local0 = f4_local0:create("lobbyRoot.lobbyVMRequest")
 	if not f4_local0:set(f4_arg0) then
 		f4_local0:forceNotifySubscriptions()
 	end
 end
 LobbyVM.ExecuteLobbyVMCreateOverlay = function(f5_arg0, f5_arg1)
-	local f5_local0 = Engine[0x8DF2E5447F384B9]()
+	local f5_local0 = Engine[@"getglobalmodel"]()
 	f5_local0 = f5_local0:create("lobbyRoot.lobbyVMCreateOverlayController")
 	f5_local0:set(f5_arg0)
-	f5_local0 = Engine[0x8DF2E5447F384B9]()
+	f5_local0 = Engine[@"getglobalmodel"]()
 	f5_local0 = f5_local0:create("lobbyRoot.lobbyVMCreateOverlay")
 	if not f5_local0:set(f5_arg1) then
 		f5_local0:forceNotifySubscriptions()
 	end
 end
 LobbyVM.ExecuteLobbyVMOpenSurvey = function(f6_arg0)
-	local f6_local0 = Engine[0x8DF2E5447F384B9]()
+	local f6_local0 = Engine[@"getglobalmodel"]()
 	f6_local0 = f6_local0:create("lobbyRoot.lobbyVMOpenIntroSurvey")
 	if not f6_local0:set(f6_arg0) then
 		f6_local0:forceNotifySubscriptions()
 	end
 end
 LobbyVM.OnErrorShutdown = function(f7_arg0)
-	Engine[0x8C5711DAACC99F4](Enum[0x7A63DCD561B0FA8][0xC1DE3DC19B3B20D], "Performing emergency shutdown.\n")
-	Engine[0x8C5711DAACC99F4](Enum[0x7A63DCD561B0FA8][0xC1DE3DC19B3B20D], "Close all popups in the lobby.\n")
-	Engine[0x6A489878620F3BC](Engine[0xA798E4552F5E872](Engine[0x8DF2E5447F384B9](), "lobbyRoot.closePopups"))
-	Engine[0x8C5711DAACC99F4](Enum[0x7A63DCD561B0FA8][0xC1DE3DC19B3B20D], "Shutting down joins.\n")
-	Engine[0xA6B364A77D75A61]()
-	if Engine[0xFBA11FA8773D18B] then
-		Engine[0xFBA11FA8773D18B]()
+	Engine[@"printinfo"](Enum[@"consolelabel_e"][@"con_label_lobby"], "Performing emergency shutdown.\n")
+	Engine[@"printinfo"](Enum[@"consolelabel_e"][@"con_label_lobby"], "Close all popups in the lobby.\n")
+	Engine[@"forcenotifymodelsubscriptions"](Engine[@"createmodel"](Engine[@"getglobalmodel"](), "lobbyRoot.closePopups"))
+	Engine[@"printinfo"](Enum[@"consolelabel_e"][@"con_label_lobby"], "Shutting down joins.\n")
+	Engine[@"lobbyjoinerrorshutdown"]()
+	if Engine[@"lobbyclienttaskerrorshutdown"] then
+		Engine[@"lobbyclienttaskerrorshutdown"]()
 	end
-	if Engine[0x14185945116E1D4] then
-		Engine[0x14185945116E1D4]()
+	if Engine[@"lobbyhosttaskerrorshutdown"] then
+		Engine[@"lobbyhosttaskerrorshutdown"]()
 	end
-	if Engine[0xA63E42B2FB6EC02]() == Enum[0xC84D3E505F1444][0xE99F41098B71960] then
-		Engine[0x8C5711DAACC99F4](Enum[0x7A63DCD561B0FA8][0xC1DE3DC19B3B20D], "Shutting down qos probes.\n")
-		Engine[0x3E0045B2BFBC092](Enum[0xBF54BE1BB3D618B][0x92676CF5B6FCD43])
-		Engine[0x8C5711DAACC99F4](Enum[0x7A63DCD561B0FA8][0xC1DE3DC19B3B20D], "Shutting down advertisement.\n")
-		Engine[0x3D86AB10C408002](Enum[0xBF54BE1BB3D618B][0x92676CF5B6FCD43])
-		Engine[0x8C5711DAACC99F4](Enum[0x7A63DCD561B0FA8][0xC1DE3DC19B3B20D], "Shutting down search.\n")
-		Engine[0xFEFD627D17150A9]()
+	if Engine[@"getlobbynetworkmode"]() == Enum[@"lobbynetworkmode"][@"lobby_networkmode_live"] then
+		Engine[@"printinfo"](Enum[@"consolelabel_e"][@"con_label_lobby"], "Shutting down qos probes.\n")
+		Engine[@"qoserrorshutdown"](Enum[@"lobbytype"][@"lobby_type_game"])
+		Engine[@"printinfo"](Enum[@"consolelabel_e"][@"con_label_lobby"], "Shutting down advertisement.\n")
+		Engine[@"advertiseerrorshutdown"](Enum[@"lobbytype"][@"lobby_type_game"])
+		Engine[@"printinfo"](Enum[@"consolelabel_e"][@"con_label_lobby"], "Shutting down search.\n")
+		Engine[@"lobbysearcherrorshutdown"]()
 	end
-	Engine[0x8C5711DAACC99F4](Enum[0x7A63DCD561B0FA8][0xC1DE3DC19B3B20D], "Shutting down private lobby.\n")
-	Engine[0x7F81D0ECC617424](Enum[0xBF54BE1BB3D618B][0x92676CF5B6FCD43])
-	Engine[0x438E23E9BD0A11F](Enum[0xBF54BE1BB3D618B][0x92676CF5B6FCD43])
-	Engine[0x8C5711DAACC99F4](Enum[0x7A63DCD561B0FA8][0xC1DE3DC19B3B20D], "Shutting down game lobby.\n")
-	Engine[0x7F81D0ECC617424](Enum[0xBF54BE1BB3D618B][0xA1647599284110])
-	Engine[0x438E23E9BD0A11F](Enum[0xBF54BE1BB3D618B][0xA1647599284110])
-	Engine[0x8C5711DAACC99F4](Enum[0x7A63DCD561B0FA8][0xC1DE3DC19B3B20D], "Clearing process queue.\n")
+	Engine[@"printinfo"](Enum[@"consolelabel_e"][@"con_label_lobby"], "Shutting down private lobby.\n")
+	Engine[@"lobbyclienterrorshutdown"](Enum[@"lobbytype"][@"lobby_type_game"])
+	Engine[@"lobbyhosterrorshutdown"](Enum[@"lobbytype"][@"lobby_type_game"])
+	Engine[@"printinfo"](Enum[@"consolelabel_e"][@"con_label_lobby"], "Shutting down game lobby.\n")
+	Engine[@"lobbyclienterrorshutdown"](Enum[@"lobbytype"][@"lobby_type_private"])
+	Engine[@"lobbyhosterrorshutdown"](Enum[@"lobbytype"][@"lobby_type_private"])
+	Engine[@"printinfo"](Enum[@"consolelabel_e"][@"con_label_lobby"], "Clearing process queue.\n")
 	Lobby.ProcessQueue.ErrorShutdown()
 	if f7_arg0.signoutUsers ~= nil and f7_arg0.signoutUsers == true then
 		for f7_local0 = 0, LuaDefine.MAX_CONTROLLER_COUNT - 1, 1 do
@@ -135,12 +135,12 @@ LobbyVM.OnErrorShutdown = function(f7_arg0)
 				controller = f7_local0,
 			})
 		end
-		Engine[0xBCE638C29483CC1]()
+		Engine[@"signoutallusers"]()
 	end
-	Engine[0x8C5711DAACC99F4](Enum[0x7A63DCD561B0FA8][0xC1DE3DC19B3B20D], "Forcing UI screen.\n")
-	Engine[0xBFFECE7B49BC12](LobbyData.GetLobbyMenuIDByName(LuaEnum.UI.MAIN))
-	Engine[0xE1789115A2356E7]("open_main", {})
-	Engine[0x8C5711DAACC99F4](Enum[0x7A63DCD561B0FA8][0xC1DE3DC19B3B20D], "Lobby emergency shutdown complete.\n")
+	Engine[@"printinfo"](Enum[@"consolelabel_e"][@"con_label_lobby"], "Forcing UI screen.\n")
+	Engine[@"forcelobbyuiscreen"](LobbyData.GetLobbyMenuIDByName(LuaEnum.UI.MAIN))
+	Engine[@"luivm_event"]("open_main", {})
+	Engine[@"printinfo"](Enum[@"consolelabel_e"][@"con_label_lobby"], "Lobby emergency shutdown complete.\n")
 end
 LobbyVM.ErrorShutdownMessage = function(f8_arg0, f8_arg1)
 	LobbyVM.OnErrorShutdown({
@@ -151,24 +151,24 @@ LobbyVM.ErrorShutdownMessage = function(f8_arg0, f8_arg1)
 end
 LobbyVM.LogGlobalData = function()
 	local f9_local0 = Engine[0xDE279ECDDDD966]
-	local f9_local1 = Engine[0xA5B9C0111291A8B]()
-	local f9_local2 = 0x9E4136B4110C280
+	local f9_local1 = Engine[@"getprimarycontroller"]()
+	local f9_local2 = @"hash_59E4136B4110C280"
 	local f9_local3 = {
-		[0xB001CCB4B4A6BD0] = Engine[0xB15BEE2BE53060A](),
-		[0x514AE50C5450622] = Engine[0xBDC89A97B6CE16D](),
-		ffotd_version = Engine[0xBB208CB2EB85904](),
+		[@"playlist_version"] = Engine[@"getplaylistversionnumber"](),
+		[@"hash_1514AE50C5450622"] = Engine[@"getprotocolversion"](),
+		ffotd_version = Engine[@"getffotdversion"](),
 	}
-	local f9_local4 = Engine[0xB51E213813BA60B]
-	local f9_local5 = Engine[0x41979A67CD7F2C2](Enum[0xBBD4F9E70101BA8][0xFDE358A242AFA2C])
-	f9_local3[0xA5F320A7654324C] = f9_local4(f9_local5.ddlPath)
-	f9_local4 = Engine[0xB51E213813BA60B]
-	f9_local5 = Engine[0x41979A67CD7F2C2](Enum[0xBBD4F9E70101BA8][0x6C886CEB6BF4BCA])
-	f9_local3[0x445FA044E754C98] = f9_local4(f9_local5.ddlPath)
-	f9_local3[0x7B625C48C3B5FCC] = Engine[0x4FFC2D5916B1682](Enum[0x612EBB6BD74ACF0][0xBABF31AFD223EE0])
-	f9_local3[0x3C8D0C915904179] = Engine[0x5C1CAE2FFBA193C](Enum[0xB5C29E1F576CCA2][0xDD83FC85A90B9DE])
-	f9_local3[0x503BF40BEE579B5] = Engine[0x5C1CAE2FFBA193C](Enum[0xB5C29E1F576CCA2][0xF4435CE5FA728B4])
-	f9_local3[0xE9C4B410C8C673C] = Engine[0x5C1CAE2FFBA193C](Enum[0xB5C29E1F576CCA2][0x64E89CE128A661D])
-	f9_local3[0xFE0F01D08734D0F] = Engine[0x5C1CAE2FFBA193C](Enum[0xB5C29E1F576CCA2][0x78E1EA4884C34D6])
+	local f9_local4 = Engine[@"getddlversion"]
+	local f9_local5 = Engine[@"getstoragefileinfo"](Enum[@"storagefiletype"][@"storage_mp_stats_online"])
+	f9_local3[@"hash_5A5F320A7654324C"] = f9_local4(f9_local5.ddlPath)
+	f9_local4 = Engine[@"getddlversion"]
+	f9_local5 = Engine[@"getstoragefileinfo"](Enum[@"storagefiletype"][@"storage_mp_loadouts"])
+	f9_local3[@"hash_4445FA044E754C98"] = f9_local4(f9_local5.ddlPath)
+	f9_local3[@"hash_47B625C48C3B5FCC"] = Engine[@"getbuildintfield"](Enum[@"buildintfield"][@"build_intfield_changelist"])
+	f9_local3[@"build_machine"] = Engine[@"getbuildstringfield"](Enum[@"buildstringfield"][@"build_stringfield_build_machine"])
+	f9_local3[@"build_time"] = Engine[@"getbuildstringfield"](Enum[@"buildstringfield"][@"build_stringfield_build_time"])
+	f9_local3[@"build_type"] = Engine[@"getbuildstringfield"](Enum[@"buildstringfield"][@"build_stringfield_build_type"])
+	f9_local3[@"build_name"] = Engine[@"getbuildstringfield"](Enum[@"buildstringfield"][@"build_stringfield_build_name"])
 	f9_local0(f9_local1, f9_local2, f9_local3)
 end
 LobbyVM.OnClientAdded = function(f10_arg0)
@@ -176,8 +176,8 @@ LobbyVM.OnClientAdded = function(f10_arg0)
 	local f10_local1 = f10_arg0.lobbyType
 	local f10_local2 = f10_arg0.lobbyMode
 	local f10_local3 = f10_arg0.xuid
-	if f10_local0 == Enum[0x7CA2DE5266A94BF][0x98EA1BB7164D103] then
-		local f10_local4 = Engine[0x614D394F6F9A18D](Engine[0xA798E4552F5E872](Engine[0x8DF2E5447F384B9](), "lobbyRoot.gameClient.isHost"))
+	if f10_local0 == Enum[@"lobbymodule"][@"lobby_module_host"] then
+		local f10_local4 = Engine[@"getmodelvalue"](Engine[@"createmodel"](Engine[@"getglobalmodel"](), "lobbyRoot.gameClient.isHost"))
 		if f10_local4 and f10_local4 ~= 0 then
 			LuaUtils.ForceLobbyButtonUpdate()
 		end
@@ -187,17 +187,17 @@ LobbyVM.OnClientAdded = function(f10_arg0)
 	Lobby.Pregame.OnClientAdded(f10_arg0)
 	Lobby.Leaderboard.OnClientAdded(f10_arg0)
 	Lobby.RecentPlayers.OnClientAdded(f10_arg0)
-	Engine[0x5FF8107C3C62E89](f10_local1)
-	if f10_local0 == Enum[0x7CA2DE5266A94BF][0xC46B73E8E18BA2] and not Engine[0x41DC2CF4139D7](f10_local3) and not Engine[0x7B48C1ABFF0F764]() then
+	Engine[@"qosprobelistenerupdate"](f10_local1)
+	if f10_local0 == Enum[@"lobbymodule"][@"lobby_module_client"] and not Engine[@"islocalclient"](f10_local3) and not Engine[@"isingame"]() then
 		LobbyVM.PlaySound(LobbyData.Sounds.ClientsAddedToLobby, 500)
 	end
-	if LuaDefine.isPS4 == true and Enum[0xC84D3E505F1444][0xE99F41098B71960] == Engine[0xA63E42B2FB6EC02]() and f10_local0 == Enum[0x7CA2DE5266A94BF][0xC46B73E8E18BA2] and f10_local1 == Enum[0xBF54BE1BB3D618B][0xA1647599284110] and Engine[0x41DC2CF4139D7](f10_local3) and not Engine[0x7B48C1ABFF0F764]() then
-		local f10_local4 = Engine[0x852F787399D3F90](f10_local3)
-		if Engine[0x33A0182C8E1848A] ~= nil then
-			Engine[0x33A0182C8E1848A](f10_local4)
+	if LuaDefine.isPS4 == true and Enum[@"lobbynetworkmode"][@"lobby_networkmode_live"] == Engine[@"getlobbynetworkmode"]() and f10_local0 == Enum[@"lobbymodule"][@"lobby_module_client"] and f10_local1 == Enum[@"lobbytype"][@"lobby_type_private"] and Engine[@"islocalclient"](f10_local3) and not Engine[@"isingame"]() then
+		local f10_local4 = Engine[@"getcontrollerforxuid"](f10_local3)
+		if Engine[@"notifypsplusasyncmultiplay"] ~= nil then
+			Engine[@"notifypsplusasyncmultiplay"](f10_local4)
 		end
 	end
-	local f10_local4 = Engine[0x5065E759595C457](f10_local3)
+	local f10_local4 = Engine[@"xuidtostring"](f10_local3)
 	if LobbyVM.ClientsToRemove[f10_local4] then
 		LobbyVM.ClientsToRemove[f10_local4] = nil
 	end
@@ -205,12 +205,12 @@ LobbyVM.OnClientAdded = function(f10_arg0)
 		LobbyVM.ClientsInModule[f10_local0] = {}
 	end
 	LobbyVM.ClientsInModule[f10_local0][f10_local4] = true
-	f10_arg0.lobbyID = Engine[0x8CB6D1C656D57EE](f10_local0, f10_local1)
-	Engine[0xDE279ECDDDD966](Engine[0xA5B9C0111291A8B](), 0x84AA3CF21433C2, {
-		[0xA988C5BE2B9606C] = f10_arg0.lobbyModule,
-		[0x193F66F4B46350C] = f10_arg0.lobbyType,
-		[0x63C8C33B4DB02C7] = f10_arg0.lobbyMode,
-		[0xB5C735486FC7CCB] = f10_arg0.xuid,
+	f10_arg0.lobbyID = Engine[@"getlobbylobbyid"](f10_local0, f10_local1)
+	Engine[0xDE279ECDDDD966](Engine[@"getprimarycontroller"](), 0x84AA3CF21433C2, {
+		[@"lobby_module"] = f10_arg0.lobbyModule,
+		[@"lobby_type"] = f10_arg0.lobbyType,
+		[@"lobby_mode"] = f10_arg0.lobbyMode,
+		[@"xuid"] = f10_arg0.xuid,
 	})
 end
 LobbyVM.OnClientRemoved = function(f11_arg0)
@@ -218,18 +218,18 @@ LobbyVM.OnClientRemoved = function(f11_arg0)
 	local f11_local1 = f11_arg0.lobbyType
 	local f11_local2 = f11_arg0.lobbyMode
 	local f11_local3 = f11_arg0.xuid
-	if f11_local0 == Enum[0x7CA2DE5266A94BF][0x98EA1BB7164D103] then
+	if f11_local0 == Enum[@"lobbymodule"][@"lobby_module_host"] then
 		LuaUtils.ForceLobbyButtonUpdate()
 	end
 	Lobby.Timer.OnClientRemoved(f11_arg0)
 	Lobby.Pregame.OnClientRemoved(f11_arg0)
 	Lobby.Matchmaking.OnClientRemoved(f11_arg0)
-	Engine[0x5FF8107C3C62E89](f11_local1)
-	if f11_local0 == Enum[0x7CA2DE5266A94BF][0xC46B73E8E18BA2] and not Engine[0x41DC2CF4139D7](f11_local3) and not Engine[0x7B48C1ABFF0F764]() then
+	Engine[@"qosprobelistenerupdate"](f11_local1)
+	if f11_local0 == Enum[@"lobbymodule"][@"lobby_module_client"] and not Engine[@"islocalclient"](f11_local3) and not Engine[@"isingame"]() then
 		LobbyVM.PlaySound(LobbyData.Sounds.ClientsRemovedFromLobby, 500)
 	end
-	f11_arg0.lobbyID = Engine[0x8CB6D1C656D57EE](f11_local0, f11_local1)
-	local f11_local4 = Engine[0x5065E759595C457](f11_local3)
+	f11_arg0.lobbyID = Engine[@"getlobbylobbyid"](f11_local0, f11_local1)
+	local f11_local4 = Engine[@"xuidtostring"](f11_local3)
 	if LobbyVM.ClientsInModule[f11_local0] and LobbyVM.ClientsInModule[f11_local0][f11_local4] then
 		LobbyVM.ClientsInModule[f11_local0][f11_local4] = nil
 	end
@@ -243,19 +243,19 @@ LobbyVM.OnClientRemoved = function(f11_arg0)
 	if not f11_local5 then
 		LobbyVM.ClientsToRemove[f11_local4] = true
 	end
-	Engine[0xDE279ECDDDD966](Engine[0xA5B9C0111291A8B](), 0x5D76FEC9A7AF604, {
-		[0xA988C5BE2B9606C] = f11_arg0.lobbyModule,
-		[0x193F66F4B46350C] = f11_arg0.lobbyType,
-		[0x63C8C33B4DB02C7] = f11_arg0.lobbyMode,
-		[0xB5C735486FC7CCB] = f11_arg0.xuid,
+	Engine[0xDE279ECDDDD966](Engine[@"getprimarycontroller"](), @"hash_25D76FEC9A7AF604", {
+		[@"lobby_module"] = f11_arg0.lobbyModule,
+		[@"lobby_type"] = f11_arg0.lobbyType,
+		[@"lobby_mode"] = f11_arg0.lobbyMode,
+		[@"xuid"] = f11_arg0.xuid,
 	})
 end
 LobbyVM.OnUILevelRunningChanged = function(f12_arg0)
 	local f12_local0 = f12_arg0.running
 	for f12_local1 = 0, LuaDefine.MAX_CONTROLLER_COUNT - 1, 1 do
-		Engine[0x9005641B3423AB0](f12_local1, Engine[0xC3DF042E7492B66](Enum[0x7CA2DE5266A94BF][0xC46B73E8E18BA2]))
+		Engine[@"sendclientheartbeat"](f12_local1, Engine[@"lobbygetcontrollinglobbysession"](Enum[@"lobbymodule"][@"lobby_module_client"]))
 	end
-	if Engine[0xE39F1F30B306065]() and f12_local0 == true and (not Dvar[0xB852BA138B9853A]:exists() or not Dvar[0xB852BA138B9853A]:get()) then
+	if Engine[@"isdedicatedserver"]() and f12_local0 == true and (not Dvar[@"hash_2B852BA138B9853A"]:exists() or not Dvar[@"hash_2B852BA138B9853A"]:get()) then
 		Lobby.Timer.SetDedicatedDelayedCMD(Lobby.Timer.LOBBY_DEDICATED_CMD.REMOVE_ALL_CLIENTS)
 	end
 end
@@ -266,15 +266,15 @@ LobbyVM.OnMatchChangeMap = function(f13_arg0)
 	Lobby.Stats.OnMatchChangeMap(f13_arg0)
 	Lobby.Matchmaking.OnMatchChangeMap(f13_arg0)
 	Lobby.CharacterSelection.OnChangeMap(f13_arg0)
-	local f13_local3 = Engine[0x8DF2E5447F384B9]()
+	local f13_local3 = Engine[@"getglobalmodel"]()
 	f13_local3 = f13_local3:create("lobbyRoot.selectedMapId")
-	f13_local3:set(Engine[0xC53F8D38DF9042B](f13_arg0.nextMap))
-	Engine[0xDE279ECDDDD966](Engine[0xA5B9C0111291A8B](), 0x393C9A4BAA822A3, {
-		[0xA988C5BE2B9606C] = f13_arg0.lobbyModule,
-		[0x193F66F4B46350C] = f13_arg0.lobbyType,
-		[0x63C8C33B4DB02C7] = f13_arg0.lobbyMode,
-		[0xF3076BC189A19FF] = f13_arg0.currentMap,
-		[0xDB228AC0186F361] = f13_arg0.nextMap,
+	f13_local3:set(Engine[@"converttoxhash"](f13_arg0.nextMap))
+	Engine[0xDE279ECDDDD966](Engine[@"getprimarycontroller"](), @"hash_393C9A4BAA822A3", {
+		[@"lobby_module"] = f13_arg0.lobbyModule,
+		[@"lobby_type"] = f13_arg0.lobbyType,
+		[@"lobby_mode"] = f13_arg0.lobbyMode,
+		[@"current_map"] = f13_arg0.currentMap,
+		[@"next_map"] = f13_arg0.nextMap,
 	})
 end
 LobbyVM.OnChangePlaylist = function(f14_arg0) end
@@ -300,7 +300,7 @@ LobbyVM.OnMatchEnd = function(f15_arg0)
 	LuaUtils.UploadAllLocalStatsBuffers()
 end
 LobbyVM.ShouldShowContentChangedMessage = function(f16_arg0, f16_arg1)
-	if LobbyVM.CheckDLCBit(Engine[0xFD1E02C14853724](), Engine[0x943893A16399DCF](Engine[0xE67E7253CC272C9]())) then
+	if LobbyVM.CheckDLCBit(Engine[@"getdlcbits"](), Engine[@"getdlcbitformapname"](Engine[@"lobbygetmap"]())) then
 		return true
 	else
 		return false
@@ -312,62 +312,62 @@ LobbyVM.OnDisconnect = function(f17_arg0)
 	local f17_local2 = f17_arg0.lobbyMode
 	local f17_local3 = f17_arg0.disconnectClientXuid
 	local f17_local4 = f17_arg0.disconnectClient
-	local f17_local5 = Engine[0xA5B9C0111291A8B]()
+	local f17_local5 = Engine[@"getprimarycontroller"]()
 	local f17_local6 = true
 	local f17_local7 = nil
-	local f17_local8 = Engine[0xF9F1239CFD921FE](0xB6154C132FDA6EE)
+	local f17_local8 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_B6154C132FDA6EE")
 	local f17_local9 = Lobby.Process.Recover(f17_local5)
-	if f17_local4 == Enum[0x3EB01916743DF12][0xF1FF91F0B0EF524] then
-	elseif f17_local4 == Enum[0x3EB01916743DF12][0x8313735094E5B68] then
-	elseif f17_local4 == Enum[0x3EB01916743DF12][0x6EF5F11FAA609FC] then
+	if f17_local4 == Enum[@"lobbydisconnectclient"][@"lobby_disconnect_client_invalid"] then
+	elseif f17_local4 == Enum[@"lobbydisconnectclient"][@"lobby_disconnect_client_drop"] then
+	elseif f17_local4 == Enum[@"lobbydisconnectclient"][@"lobby_disconnect_client_nopartychat"] then
 		f17_local6 = false
-		f17_local7 = Engine[0xF9F1239CFD921FE](0xA009F37E1567367)
-		f17_local8 = Engine[0xF9F1239CFD921FE](0x22BE13738744598)
-		Dvar[0xE21BBE3614F731D]:set(false)
-	elseif f17_local4 == Enum[0x3EB01916743DF12][0x75E935EEE527F8B] then
+		f17_local7 = Engine[@"hash_4F9F1239CFD921FE"](@"menu/notice")
+		f17_local8 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_422BE13738744598")
+		Dvar[@"partychatdisallowed"]:set(false)
+	elseif f17_local4 == Enum[@"lobbydisconnectclient"][@"lobby_disconnect_client_kick"] then
 		f17_local6 = false
-		f17_local7 = Engine[0xF9F1239CFD921FE](0x8F4D42673CB46CD)
-		f17_local8 = Engine[0xF9F1239CFD921FE](0x8188B874FA9DFE4)
-		if f17_local1 == Enum[0xBF54BE1BB3D618B][0xA1647599284110] and Engine[0x7B48C1ABFF0F764]() == true then
-			f17_local9 = Lobby.Process.HostLeftNoMigrationCreatePrivateLobby(f17_local5, f17_local2, Engine[0x29B25E8DA873863](Enum[0x7CA2DE5266A94BF][0xC46B73E8E18BA2], f17_local1))
+		f17_local7 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_18F4D42673CB46CD")
+		f17_local8 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_38188B874FA9DFE4")
+		if f17_local1 == Enum[@"lobbytype"][@"lobby_type_private"] and Engine[@"isingame"]() == true then
+			f17_local9 = Lobby.Process.HostLeftNoMigrationCreatePrivateLobby(f17_local5, f17_local2, Engine[@"getlobbymaxclients"](Enum[@"lobbymodule"][@"lobby_module_client"], f17_local1))
 		end
-	elseif f17_local4 == Enum[0x3EB01916743DF12][0x18DF95700618225] then
+	elseif f17_local4 == Enum[@"lobbydisconnectclient"][@"lobby_disconnect_client_baddlc"] then
 		if LobbyVM.ShouldShowContentChangedMessage(f17_local5, f17_local1) then
-			Engine[0xBC42C678E40DBE8](Enum[0xE4C65AA61FAEC38][0x100911D2B38A4EF], Engine[0xF9F1239CFD921FE](0xDDDB3A5B7CE38F1))
+			Engine[@"comerror"](Enum[@"errorcode"][@"error_drop"], Engine[@"hash_4F9F1239CFD921FE"](@"hash_DDDB3A5B7CE38F1"))
 		else
-			Engine[0xBC42C678E40DBE8](Enum[0xE4C65AA61FAEC38][0x100911D2B38A4EF], Engine[0xF9F1239CFD921FE](0x609344F0F879051))
+			Engine[@"comerror"](Enum[@"errorcode"][@"error_drop"], Engine[@"hash_4F9F1239CFD921FE"](@"platform/missingmap"))
 		end
-	elseif f17_local4 == Enum[0x3EB01916743DF12][0xCC945BAA59091A2] then
-		if Engine[0xEA2BE00F49480D](Enum[0xBF54BE1BB3D618B][0xA1647599284110]) and not Engine[0xEA2BE00F49480D](Enum[0xBF54BE1BB3D618B][0x92676CF5B6FCD43]) then
-			Lobby.ProcessQueue.AddToQueue("ReloadGameLobby", Lobby.ProcessNavigate.ReloadGameLobby(f17_local5, math.random(Engine[0x22EAAB59AA27E9B]("arena_lobbyReloadSearchDelayMin"), Engine[0x22EAAB59AA27E9B]("arena_lobbyReloadSearchDelayMax"))))
+	elseif f17_local4 == Enum[@"lobbydisconnectclient"][@"lobby_disconnect_client_hostreload"] then
+		if Engine[@"islobbyhost"](Enum[@"lobbytype"][@"lobby_type_private"]) and not Engine[@"islobbyhost"](Enum[@"lobbytype"][@"lobby_type_game"]) then
+			Lobby.ProcessQueue.AddToQueue("ReloadGameLobby", Lobby.ProcessNavigate.ReloadGameLobby(f17_local5, math.random(Engine[@"getdvarint"]("arena_lobbyReloadSearchDelayMin"), Engine[@"getdvarint"]("arena_lobbyReloadSearchDelayMax"))))
 		end
 		return
-	elseif f17_local4 == Enum[0x3EB01916743DF12][0x49C6D6AA15230A8] then
-		if Engine[0xEA2BE00F49480D](Enum[0xBF54BE1BB3D618B][0xA1647599284110]) and not Engine[0xEA2BE00F49480D](Enum[0xBF54BE1BB3D618B][0x92676CF5B6FCD43]) then
+	elseif f17_local4 == Enum[@"lobbydisconnectclient"][@"hash_449C6D6AA15230A8"] then
+		if Engine[@"islobbyhost"](Enum[@"lobbytype"][@"lobby_type_private"]) and not Engine[@"islobbyhost"](Enum[@"lobbytype"][@"lobby_type_game"]) then
 			local f17_local10 = LobbyData.GetCurrentMenuTarget()
 			Lobby.ProcessQueue.AddToQueue("LeaveDedicatedGameLobby", Lobby.ProcessNavigate.LeaveGameLobbyAsyncMatchmaking(f17_local5, f17_local10, f17_local10, LuaEnum.LEAVE_WITH_PARTY.WITH))
 		end
 		return
-	elseif f17_local4 == Enum[0x3EB01916743DF12][0xDF49978C783A5BB] then
+	elseif f17_local4 == Enum[@"lobbydisconnectclient"][@"hash_1DF49978C783A5BB"] then
 		f17_local6 = false
-		f17_local7 = Engine[0xF9F1239CFD921FE](0x77FA7015AB6DB6F)
-		f17_local8 = Engine[0xF9F1239CFD921FE](0xAE260610DD3C172)
-		if f17_local1 == Enum[0xBF54BE1BB3D618B][0xA1647599284110] and Engine[0x7B48C1ABFF0F764]() == true then
-			f17_local9 = Lobby.Process.HostLeftNoMigrationCreatePrivateLobby(f17_local5, f17_local2, Engine[0x29B25E8DA873863](Enum[0x7CA2DE5266A94BF][0xC46B73E8E18BA2], f17_local1))
+		f17_local7 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_377FA7015AB6DB6F")
+		f17_local8 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_7AE260610DD3C172")
+		if f17_local1 == Enum[@"lobbytype"][@"lobby_type_private"] and Engine[@"isingame"]() == true then
+			f17_local9 = Lobby.Process.HostLeftNoMigrationCreatePrivateLobby(f17_local5, f17_local2, Engine[@"getlobbymaxclients"](Enum[@"lobbymodule"][@"lobby_module_client"], f17_local1))
 		end
-	elseif f17_local4 == Enum[0x3EB01916743DF12][0xB901B6DF0CD7657] then
+	elseif f17_local4 == Enum[@"lobbydisconnectclient"][@"hash_3B901B6DF0CD7657"] then
 		f17_local6 = false
-		f17_local7 = Engine[0xF9F1239CFD921FE](0x8F4D42673CB46CD)
-		f17_local8 = Engine[0xF9F1239CFD921FE](0xB582AE90C06D4FF)
-		if f17_local1 == Enum[0xBF54BE1BB3D618B][0xA1647599284110] and Engine[0x7B48C1ABFF0F764]() == true then
-			f17_local9 = Lobby.Process.HostLeftNoMigrationCreatePrivateLobby(f17_local5, f17_local2, Engine[0x29B25E8DA873863](Enum[0x7CA2DE5266A94BF][0xC46B73E8E18BA2], f17_local1))
+		f17_local7 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_18F4D42673CB46CD")
+		f17_local8 = Engine[@"hash_4F9F1239CFD921FE"](@"menu/korea_15plus_blocked_gamemode")
+		if f17_local1 == Enum[@"lobbytype"][@"lobby_type_private"] and Engine[@"isingame"]() == true then
+			f17_local9 = Lobby.Process.HostLeftNoMigrationCreatePrivateLobby(f17_local5, f17_local2, Engine[@"getlobbymaxclients"](Enum[@"lobbymodule"][@"lobby_module_client"], f17_local1))
 		end
-	elseif f17_local4 == Enum[0x3EB01916743DF12][0xA1580BBC7A114CC] then
+	elseif f17_local4 == Enum[@"lobbydisconnectclient"][@"hash_4A1580BBC7A114CC"] then
 		f17_local6 = false
-		f17_local7 = Engine[0xF9F1239CFD921FE](0x8F4D42673CB46CD)
-		f17_local8 = Engine[0xF9F1239CFD921FE](0xAE260610DD3C172)
-		if f17_local1 == Enum[0xBF54BE1BB3D618B][0xA1647599284110] and Engine[0x7B48C1ABFF0F764]() == true then
-			f17_local9 = Lobby.Process.HostLeftNoMigrationCreatePrivateLobby(f17_local5, f17_local2, Engine[0x29B25E8DA873863](Enum[0x7CA2DE5266A94BF][0xC46B73E8E18BA2], f17_local1))
+		f17_local7 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_18F4D42673CB46CD")
+		f17_local8 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_7AE260610DD3C172")
+		if f17_local1 == Enum[@"lobbytype"][@"lobby_type_private"] and Engine[@"isingame"]() == true then
+			f17_local9 = Lobby.Process.HostLeftNoMigrationCreatePrivateLobby(f17_local5, f17_local2, Engine[@"getlobbymaxclients"](Enum[@"lobbymodule"][@"lobby_module_client"], f17_local1))
 		end
 	end
 	if f17_local6 == true then
@@ -378,33 +378,33 @@ LobbyVM.OnDisconnect = function(f17_arg0)
 	Lobby.ProcessQueue.AddToQueue("DisconnectFromHost", f17_local9)
 end
 LobbyVM.ComErrorCodeToString = function(f18_arg0)
-	if f18_arg0 == Enum[0xE4C65AA61FAEC38][0x84590C95AD33750] then
+	if f18_arg0 == Enum[@"errorcode"][@"error_none"] then
 		return "ERR_NONE"
-	elseif f18_arg0 == Enum[0xE4C65AA61FAEC38][0xB4C43B6B70ED514] then
+	elseif f18_arg0 == Enum[@"errorcode"][@"error_fatal"] then
 		return "ERR_FATAL"
-	elseif f18_arg0 == Enum[0xE4C65AA61FAEC38][0x100911D2B38A4EF] then
+	elseif f18_arg0 == Enum[@"errorcode"][@"error_drop"] then
 		return "ERR_DROP"
-	elseif f18_arg0 == Enum[0xE4C65AA61FAEC38][0xBA57228C2051AF4] then
+	elseif f18_arg0 == Enum[@"errorcode"][@"error_from_startup"] then
 		return "ERR_FROM_STARTUP"
-	elseif f18_arg0 == Enum[0xE4C65AA61FAEC38][0x5C4F621E03F9383] then
+	elseif f18_arg0 == Enum[@"errorcode"][@"error_serverdisconnect"] then
 		return "ERR_SERVERDISCONNECT"
-	elseif f18_arg0 == Enum[0xE4C65AA61FAEC38][0xD4ADF57B8A14BCC] then
+	elseif f18_arg0 == Enum[@"errorcode"][@"error_disconnect"] then
 		return "ERR_DISCONNECT"
-	elseif f18_arg0 == Enum[0xE4C65AA61FAEC38][0x9341AB8A66C1641] then
+	elseif f18_arg0 == Enum[@"errorcode"][@"error_script"] then
 		return "ERR_SCRIPT"
-	elseif f18_arg0 == Enum[0xE4C65AA61FAEC38][0x7E578636CAA34BF] then
+	elseif f18_arg0 == Enum[@"errorcode"][@"error_script_drop"] then
 		return "ERR_SCRIPT_DROP"
-	elseif f18_arg0 == Enum[0xE4C65AA61FAEC38][0xAEB84C253C0C157] then
+	elseif f18_arg0 == Enum[@"errorcode"][@"error_localization"] then
 		return "ERR_LOCALIZATION"
-	elseif f18_arg0 == Enum[0xE4C65AA61FAEC38][0x16ACC85EDB7768C] then
+	elseif f18_arg0 == Enum[@"errorcode"][@"error_ui"] then
 		return "ERR_UI"
-	elseif f18_arg0 == Enum[0xE4C65AA61FAEC38][0x75C63927410FF8C] then
+	elseif f18_arg0 == Enum[@"errorcode"][@"error_lua"] then
 		return "ERR_LUA"
-	elseif f18_arg0 == Enum[0xE4C65AA61FAEC38][0x2FD312C2C06EC11] then
+	elseif f18_arg0 == Enum[@"errorcode"][@"error_softrestart"] then
 		return "ERR_SOFTRESTART"
-	elseif f18_arg0 == Enum[0xE4C65AA61FAEC38][0x7039D0A1017FE92] then
+	elseif f18_arg0 == Enum[@"errorcode"][@"error_softrestart_keepdw"] then
 		return "ERR_SOFTRESTART_KEEPDW"
-	elseif f18_arg0 == Enum[0xE4C65AA61FAEC38][0x37CE91CC63B87FB] then
+	elseif f18_arg0 == Enum[@"errorcode"][@"error_softrestart_silent"] then
 		return "ERR_SOFTRESTART_SILENT"
 	else
 		return tostring(f18_arg0)
@@ -414,40 +414,40 @@ LobbyVM.ClientsToRemove = {}
 LobbyVM.ClientsInModule = {}
 LobbyVM.OnUILoad = function(f19_arg0)
 	local f19_local0 = f19_arg0.frontend
-	local f19_local1 = Enum[0xC0AB9543C5C440B][0x755065F5A0B7FB0]
+	local f19_local1 = Enum[@"hash_C0AB9543C5C440B"][@"hash_6755065F5A0B7FB0"]
 	if f19_local0 == false then
-		f19_local1 = Enum[0xC0AB9543C5C440B][0xFA6FA0C00230DEE]
-	elseif false == Engine[0xE39F1F30B306065]() then
+		f19_local1 = Enum[@"hash_C0AB9543C5C440B"][@"hash_6FA6FA0C00230DEE"]
+	elseif false == Engine[@"isdedicatedserver"]() then
 		local f19_local2 = LobbyData.GetCurrentMenuTarget()
 		local f19_local3 = LobbyData.GetLobbyMenuByName(LuaEnum.UI.DIRECTOR_ONLINE_WZ_PUBLIC)
-		if f19_local2[0x8B72E07B55C3AC0] == f19_local3[0x8B72E07B55C3AC0] then
-			Engine[0x41D81D6B58AAF3F](Enum[0xBF54BE1BB3D618B][0xA1647599284110], f19_local3[0xEE71E4EE12BC453])
-			Engine[0x7C75E608EA39B5C](Engine[0xA5B9C0111291A8B](), "pubSemaphoreFetch 0")
+		if f19_local2[@"id"] == f19_local3[@"id"] then
+			Engine[@"setlobbymaxclients"](Enum[@"lobbytype"][@"lobby_type_private"], f19_local3[@"maxclients"])
+			Engine[@"exec"](Engine[@"getprimarycontroller"](), "pubSemaphoreFetch 0")
 		end
 		local f19_local4 = 1200000
-		if Dvar[0x2A58B3AE6DE7CC7]:exists() then
-			f19_local4 = Dvar[0x2A58B3AE6DE7CC7]:get() * 60000
+		if Dvar[@"hash_2A58B3AE6DE7CC7"]:exists() then
+			f19_local4 = Dvar[@"hash_2A58B3AE6DE7CC7"]:get() * 60000
 		end
-		local f19_local5 = Lobby.MatchmakingAsync.GetLocalUserInfo(Engine[0xA5B9C0111291A8B]())
-		if f19_local5 and f19_local5.xuid ~= LuaDefine.INVALID_XUID_X64 and f19_local4 <= Engine[0x9D33D652B9B0F3B]() - f19_local5.lastDCQoSSuccess then
+		local f19_local5 = Lobby.MatchmakingAsync.GetLocalUserInfo(Engine[@"getprimarycontroller"]())
+		if f19_local5 and f19_local5.xuid ~= LuaDefine.INVALID_XUID_X64 and f19_local4 <= Engine[@"milliseconds"]() - f19_local5.lastDCQoSSuccess then
 			f19_local5.completedDCQoS = false
 			f19_local5.hasInitiateDCQoS = false
 		end
 	end
 	local f19_local2 = 0
-	local f19_local3 = Engine[0x370E918BE7B2017]() - 1
+	local f19_local3 = Engine[@"getmaxlocalcontrollers"]() - 1
 	for f19_local4 = f19_local2, f19_local3, 1 do
-		if Engine[0xF285055A1A895A1](f19_local4) then
-			Engine[0x1D2E041DAB54785](f19_local4, Enum[0xBF54BE1BB3D618B][0xA1647599284110], f19_local1)
+		if Engine[@"iscontrollerbeingused"](f19_local4) then
+			Engine[@"hash_61D2E041DAB54785"](f19_local4, Enum[@"lobbytype"][@"lobby_type_private"], f19_local1)
 		end
 	end
 	for f19_local7, f19_local8 in pairs(LobbyVM.ClientsToRemove) do
-		Engine[0x8C7A8C4C5FD9892](Engine[0x40E824FE270E174](Engine[0x8DF2E5447F384B9](), "LobbyClients." .. f19_local7))
+		Engine[@"unsubscribeandfreemodel"](Engine[@"getmodel"](Engine[@"getglobalmodel"](), "LobbyClients." .. f19_local7))
 	end
 	LobbyVM.ClientsToRemove = {}
 end
 LobbyVM.TestChangeWhereIAm = function(f20_arg0)
-	Engine[0x1D2E041DAB54785](0, Enum[0xBF54BE1BB3D618B][0xA1647599284110], f20_arg0.testNumber)
+	Engine[@"hash_61D2E041DAB54785"](0, Enum[@"lobbytype"][@"lobby_type_private"], f20_arg0.testNumber)
 end
 LobbyVM.OnComError = function(f21_arg0)
 	Lobby.Platform.OnComError(f21_arg0)
@@ -460,19 +460,19 @@ LobbyVM.OnComError = function(f21_arg0)
 	local f21_local2 = f21_arg0.errorMsg
 	local f21_local3 = f21_arg0.signoutUsers
 	local f21_local4 = f21_arg0.comErrorInProgress
-	Engine[0x458FE92FEB39D4E](Enum[0x7A63DCD561B0FA8][0x1725ABF82092BD8], "COM ERROR - errorCode: " .. LobbyVM.ComErrorCodeToString(f21_local1) .. ", errorMsg: " .. f21_local2 .. ".\n")
-	Engine[0x83C9B5DE1D9371](Engine[0xA798E4552F5E872](Engine[0x8DF2E5447F384B9](), "lobbyRoot.hideMenusForGameStart"), 0)
-	if f21_local1 == Enum[0xE4C65AA61FAEC38][0x2FD312C2C06EC11] or f21_local1 == Enum[0xE4C65AA61FAEC38][0x7039D0A1017FE92] or f21_local1 == Enum[0xE4C65AA61FAEC38][0x37CE91CC63B87FB] then
+	Engine[@"printerror"](Enum[@"consolelabel_e"][@"con_label_default"], "COM ERROR - errorCode: " .. LobbyVM.ComErrorCodeToString(f21_local1) .. ", errorMsg: " .. f21_local2 .. ".\n")
+	Engine[@"setmodelvalue"](Engine[@"createmodel"](Engine[@"getglobalmodel"](), "lobbyRoot.hideMenusForGameStart"), 0)
+	if f21_local1 == Enum[@"errorcode"][@"error_softrestart"] or f21_local1 == Enum[@"errorcode"][@"error_softrestart_keepdw"] or f21_local1 == Enum[@"errorcode"][@"error_softrestart_silent"] then
 		return
-	elseif Engine[0xA63E42B2FB6EC02]() == Enum[0xC84D3E505F1444][0xE99F41098B71960] and not Engine[0xD7913D0F914DE47](f21_local0) then
+	elseif Engine[@"getlobbynetworkmode"]() == Enum[@"lobbynetworkmode"][@"lobby_networkmode_live"] and not Engine[@"issignedintodemonware"](f21_local0) then
 		LobbyVM.OnErrorShutdown(f21_arg0)
 	end
-	if f21_local1 == Enum[0xE4C65AA61FAEC38][0x16ACC85EDB7768C] or f21_local1 == Enum[0xE4C65AA61FAEC38][0xD4ADF57B8A14BCC] or f21_local1 == Enum[0xE4C65AA61FAEC38][0xB4C43B6B70ED514] or f21_local1 == Enum[0xE4C65AA61FAEC38][0x100911D2B38A4EF] or f21_local1 == Enum[0xE4C65AA61FAEC38][0x7039D0A1017FE92] or f21_local1 == Enum[0xE4C65AA61FAEC38][0x37CE91CC63B87FB] then
+	if f21_local1 == Enum[@"errorcode"][@"error_ui"] or f21_local1 == Enum[@"errorcode"][@"error_disconnect"] or f21_local1 == Enum[@"errorcode"][@"error_fatal"] or f21_local1 == Enum[@"errorcode"][@"error_drop"] or f21_local1 == Enum[@"errorcode"][@"error_softrestart_keepdw"] or f21_local1 == Enum[@"errorcode"][@"error_softrestart_silent"] then
 		return
-	elseif f21_local1 == Enum[0xE4C65AA61FAEC38][0x84590C95AD33750] or f21_local1 == Enum[0xE4C65AA61FAEC38][0x75C63927410FF8C] or f21_local1 == Enum[0xE4C65AA61FAEC38][0xBA57228C2051AF4] or f21_local1 == Enum[0xE4C65AA61FAEC38][0xAEB84C253C0C157] or f21_local1 == Enum[0xE4C65AA61FAEC38][0x5C4F621E03F9383] then
+	elseif f21_local1 == Enum[@"errorcode"][@"error_none"] or f21_local1 == Enum[@"errorcode"][@"error_lua"] or f21_local1 == Enum[@"errorcode"][@"error_from_startup"] or f21_local1 == Enum[@"errorcode"][@"error_localization"] or f21_local1 == Enum[@"errorcode"][@"error_serverdisconnect"] then
 		LuaUtils.UI_ShowErrorMessageDialog(f21_local0, f21_local2)
 		return
-	elseif f21_local1 == Enum[0xE4C65AA61FAEC38][0x9341AB8A66C1641] or f21_local1 == Enum[0xE4C65AA61FAEC38][0x7E578636CAA34BF] then
+	elseif f21_local1 == Enum[@"errorcode"][@"error_script"] or f21_local1 == Enum[@"errorcode"][@"error_script_drop"] then
 		LuaUtils.UI_ShowErrorMessageDialog(f21_local0, f21_local2)
 		Lobby.ProcessQueue.AddToQueue("ErrorNonFatal", Lobby.Process.NonFatalError(f21_local2))
 		return
@@ -492,18 +492,18 @@ LobbyVM.OnComErrorCleanup = function(f26_arg0)
 	local f26_local1 = f26_arg0.errorCode
 	local f26_local2 = f26_arg0.errorMsg
 	local f26_local3 = f26_arg0.errorShutdown
-	Engine[0xB972AE22481F1]()
+	Engine[@"lobbylaunchclear"]()
 	if f26_local3 ~= nil and f26_local3 == true then
 		LobbyVM.OnErrorShutdown(f26_arg0)
 		LobbyVM.ShutdownCleanup(f26_arg0)
 	end
-	if f26_local1 == Enum[0xE4C65AA61FAEC38][0xB4C43B6B70ED514] then
+	if f26_local1 == Enum[@"errorcode"][@"error_fatal"] then
 		LuaUtils.UI_ShowErrorMessageDialog(f26_local0, f26_local2)
 		local f26_local4 = Lobby.Process.Recover(f26_local0)
 		if f26_local4 ~= nil then
 			Lobby.ProcessQueue.AddToQueue("ErrorFatal", f26_local4)
 		end
-	elseif f26_local1 == Enum[0xE4C65AA61FAEC38][0x100911D2B38A4EF] then
+	elseif f26_local1 == Enum[@"errorcode"][@"error_drop"] then
 		local f26_local4 = Lobby.Process.Recover(f26_local0)
 		if f26_local4 then
 			local f26_local5 = Lobby.Actions.ErrorPopupMsg(f26_local2)
@@ -526,19 +526,19 @@ end
 LobbyVM.OnPreExecFFOTD = function()
 	Lobby.Platform.OnPreExecFFOTD()
 	local f27_local0 = {
-		controller = Engine[0xA5B9C0111291A8B](),
+		controller = Engine[@"getprimarycontroller"](),
 		signoutUsers = false,
 	}
-	local f27_local1 = Engine[0xA798E4552F5E872](Engine[0x8DF2E5447F384B9](), "lobbyRoot.FFOTDShutdown")
-	Engine[0x83C9B5DE1D9371](f27_local1, true)
+	local f27_local1 = Engine[@"createmodel"](Engine[@"getglobalmodel"](), "lobbyRoot.FFOTDShutdown")
+	Engine[@"setmodelvalue"](f27_local1, true)
 	LobbyVM.OnErrorShutdown(f27_local0)
-	Engine[0x83C9B5DE1D9371](f27_local1, false)
+	Engine[@"setmodelvalue"](f27_local1, false)
 end
 LobbyVM.OnDWDisconnect = function(f28_arg0)
 	local f28_local0 = f28_arg0.controller
-	if not Engine[0xE39F1F30B306065]() then
-		if f28_local0 == Engine[0xA5B9C0111291A8B]() then
-			Engine[0xAD8E547671F2E86](true)
+	if not Engine[@"isdedicatedserver"]() then
+		if f28_local0 == Engine[@"getprimarycontroller"]() then
+			Engine[@"lobbyonlinecancel"](true)
 		end
 		Lobby.MatchmakingAsync.LogOutLocalUserInfo(f28_local0)
 	end
@@ -576,12 +576,12 @@ LobbyVM.OnLobbyHostLeftNoMigration = function(f30_arg0)
 	local f30_local6 = f30_arg0.isPrivateHost
 	if not LobbyVM.CanClientLaunch(false) then
 		return
-	elseif Engine[0x8FCA273DF0BEF97](f30_local1) then
+	elseif Engine[@"islobbyinrecovery"](f30_local1) then
 		return
-	elseif f30_local5 == true and f30_local1 == Enum[0xBF54BE1BB3D618B][0x92676CF5B6FCD43] then
+	elseif f30_local5 == true and f30_local1 == Enum[@"lobbytype"][@"lobby_type_game"] then
 		if Lobby.ProcessQueue.GetCurrentRunningProcessName() ~= "HostLeftNoMigrationGame" then
 			local f30_local7 = Lobby.Process.Recover(f30_local0)
-			if Engine[0x9882F293C327557]() == LobbyData.GetLobbyMenuIDByName(LuaEnum.UI.DIRECTOR_ONLINE_WZ_PUBLIC) then
+			if Engine[@"getlobbyuiscreen"]() == LobbyData.GetLobbyMenuIDByName(LuaEnum.UI.DIRECTOR_ONLINE_WZ_PUBLIC) then
 				local f30_local8 = LobbyData.GetLobbyMenuByName(LuaEnum.UI.DIRECTOR_ONLINE_WZ_PUBLIC)
 				f30_local7 = Lobby.ProcessNavigate.LeaveGameLobbyAsyncMatchmaking(f30_local0, f30_local8, f30_local8, LuaEnum.LEAVE_WITH_PARTY.WITH, true)
 			end
@@ -589,7 +589,7 @@ LobbyVM.OnLobbyHostLeftNoMigration = function(f30_arg0)
 		end
 	else
 		local f30_local7 = LobbyData.GetLobbyNav()
-		if f30_local1 == Enum[0xBF54BE1BB3D618B][0xA1647599284110] and f30_local5 == false and (f30_local7 == LobbyData.GetLobbyMenuIDByName(LuaEnum.UI.DIRECTOR_ONLINE_MP_PUBLIC) or f30_local7 == LobbyData.GetLobbyMenuIDByName(LuaEnum.UI.DIRECTOR_ONLINE_ZM_PUBLIC)) then
+		if f30_local1 == Enum[@"lobbytype"][@"lobby_type_private"] and f30_local5 == false and (f30_local7 == LobbyData.GetLobbyMenuIDByName(LuaEnum.UI.DIRECTOR_ONLINE_MP_PUBLIC) or f30_local7 == LobbyData.GetLobbyMenuIDByName(LuaEnum.UI.DIRECTOR_ONLINE_ZM_PUBLIC)) then
 			if Lobby.ProcessQueue.GetCurrentRunningProcessName() ~= "HostLeftNoMigrationSearch" then
 				Lobby.ProcessQueue.AddToQueue("HostLeftNoMigrationSearch", Lobby.Process.Recover(f30_local0))
 			end
@@ -597,15 +597,15 @@ LobbyVM.OnLobbyHostLeftNoMigration = function(f30_arg0)
 			Lobby.ProcessQueue.AddToQueue("HostLeftNoMigration", Lobby.Process.HostLeftNoMigrationCreatePrivateLobby(f30_local0, f30_local2, f30_local4))
 		end
 	end
-	Engine[0xC4146BA76D0F982](LobbyData.Sounds.LobbyClosed)
-	Engine[0xDE279ECDDDD966](f30_local0, 0x7ED422C1906DDFB, {
-		[0x8B8DE5B56F6D021] = f30_arg0.controller,
-		[0xA988C5BE2B9606C] = f30_arg0.lobbyModule,
-		[0xA553941A735DE81] = f30_arg0.lobbyMainMode,
-		[0x862D3F1B0F11978] = f30_arg0.lobbyNetworkMode,
-		[0xD2D053EF8A44776] = f30_arg0.maxClients,
-		[0x6B8AE8B89BF06C2] = f30_arg0.isGameLobbyActive,
-		[0xB3088C31338F710] = f30_arg0.isPrivateHost,
+	Engine[@"playsound"](LobbyData.Sounds.LobbyClosed)
+	Engine[0xDE279ECDDDD966](f30_local0, @"hash_37ED422C1906DDFB", {
+		[@"controller"] = f30_arg0.controller,
+		[@"lobby_module"] = f30_arg0.lobbyModule,
+		[@"hash_1A553941A735DE81"] = f30_arg0.lobbyMainMode,
+		[@"hash_5862D3F1B0F11978"] = f30_arg0.lobbyNetworkMode,
+		[@"max_clients"] = f30_arg0.maxClients,
+		[@"hash_46B8AE8B89BF06C2"] = f30_arg0.isGameLobbyActive,
+		[@"hash_4B3088C31338F710"] = f30_arg0.isPrivateHost,
 	})
 end
 LobbyVM.OnLobbyHostLeftInGameMigrateFinished = function(f31_arg0)
@@ -633,26 +633,26 @@ LobbyVM.OnLobbyHostLeftInGameMigrateFinished = function(f31_arg0)
 		Lobby.Join.autoJoin.data = nil
 	end
 	Lobby.ProcessQueue.AddToQueue("LobbyHostLeft_InGameMigrateFinished", f31_local1)
-	Engine[0xC4146BA76D0F982](LobbyData.Sounds.LobbyClosed)
-	Engine[0xDE279ECDDDD966](f31_local0, 0xE50E3FBE0A7A1C6, {
-		[0x8B8DE5B56F6D021] = f31_arg0.controller,
+	Engine[@"playsound"](LobbyData.Sounds.LobbyClosed)
+	Engine[0xDE279ECDDDD966](f31_local0, @"hash_2E50E3FBE0A7A1C6", {
+		[@"controller"] = f31_arg0.controller,
 	})
 end
 LobbyVM.OnLobbyHostLeftMigrateFinished = function(f32_arg0)
 	local f32_local0 = f32_arg0.controller
 	local f32_local1 = f32_arg0.lobbyType
-	local f32_local2 = Engine[0x3E68E350BEFE50D](Enum[0x7CA2DE5266A94BF][0xC46B73E8E18BA2], Enum[0xBF54BE1BB3D618B][0x92676CF5B6FCD43])
+	local f32_local2 = Engine[@"islobbyactive"](Enum[@"lobbymodule"][@"lobby_module_client"], Enum[@"lobbytype"][@"lobby_type_game"])
 	local f32_local3 = false
 	local f32_local4 = LobbyData.GetCurrentMenuTarget()
-	if f32_local1 == Enum[0xBF54BE1BB3D618B][0xA1647599284110] and f32_local2 == false and (f32_local4[0x8B72E07B55C3AC0] == LobbyData.GetLobbyMenuIDByName(LuaEnum.UI.DIRECTOR_ONLINE_MP_PUBLIC) or f32_local4[0x8B72E07B55C3AC0] == LobbyData.GetLobbyMenuIDByName(LuaEnum.UI.DIRECTOR_ONLINE_ZM_PUBLIC) or f32_local4[0x8B72E07B55C3AC0] == LobbyData.GetLobbyMenuIDByName(LuaEnum.UI.DIRECTOR_ONLINE_MP_ARENA_MATCHMAKING)) then
+	if f32_local1 == Enum[@"lobbytype"][@"lobby_type_private"] and f32_local2 == false and (f32_local4[@"id"] == LobbyData.GetLobbyMenuIDByName(LuaEnum.UI.DIRECTOR_ONLINE_MP_PUBLIC) or f32_local4[@"id"] == LobbyData.GetLobbyMenuIDByName(LuaEnum.UI.DIRECTOR_ONLINE_ZM_PUBLIC) or f32_local4[@"id"] == LobbyData.GetLobbyMenuIDByName(LuaEnum.UI.DIRECTOR_ONLINE_MP_ARENA_MATCHMAKING)) then
 		f32_local3 = true
 	end
 	if f32_local3 == true then
 		local f32_local5, f32_local6 = Lobby.Process.GetBackFunc(f32_local4)
 		Lobby.ProcessQueue.AddToQueue("LobbyMigrationFinished", f32_local6(f32_local0, f32_local4, f32_local5, LuaEnum.LEAVE_WITH_PARTY.WITH))
 	end
-	if f32_local1 == Enum[0xBF54BE1BB3D618B][0xA1647599284110] then
-		Engine[0xE1789115A2356E7]("open_toaster_popup", {
+	if f32_local1 == Enum[@"lobbytype"][@"lobby_type_private"] then
+		Engine[@"luivm_event"]("open_toaster_popup", {
 			toastType = "new_host",
 		})
 	end
@@ -663,7 +663,7 @@ LobbyVM.OnLobbyClientLeftEvent = function(f33_arg0)
 		local f33_local1 = LuaEnum.LEAVE_WITH_PARTY.WITHOUT
 	end
 	local f33_local2 = {}
-	if LobbyData.GetLobbyMenuIDByName(LuaEnum.UI.DIRECTOR_ONLINE_WZ_PUBLIC) == Engine[0x9882F293C327557]() then
+	if LobbyData.GetLobbyMenuIDByName(LuaEnum.UI.DIRECTOR_ONLINE_WZ_PUBLIC) == Engine[@"getlobbyuiscreen"]() then
 		local f33_local3 = LobbyData.GetLobbyMenuByName(LuaEnum.UI.DIRECTOR_ONLINE_WZ_PUBLIC)
 		f33_local2 = Lobby.ProcessNavigate.LeaveGameLobbyAsyncMatchmaking(f33_local0, f33_local3, f33_local3, LuaEnum.LEAVE_WITH_PARTY.WITH, true)
 	else
@@ -710,7 +710,7 @@ LobbyVM.OnGoForward = function(f37_arg0)
 	local f37_local4 = LobbyData.GetLobbyMenuByID(LobbyData.GetLobbyNav())
 	local f37_local5 = LobbyData.GetLobbyMenuByName(f37_local1)
 	if f37_local0 == nil then
-		f37_local0 = Engine[0xA5B9C0111291A8B]()
+		f37_local0 = Engine[@"getprimarycontroller"]()
 	end
 	if f37_local4 == nil then
 		error("LobbyVM: No menu called '" .. currentMenu .. "' found.")
@@ -720,28 +720,28 @@ LobbyVM.OnGoForward = function(f37_arg0)
 	end
 	local f37_local6 = Lobby.Process.GetForwardFunc(f37_local4, f37_local5)
 	if f37_local6 == nil then
-		error("LobbyVM: No forward process function found to move from '" .. f37_local4[0x4BCADBA8E631B86] .. "' to '" .. f37_local1 .. "'.")
+		error("LobbyVM: No forward process function found to move from '" .. f37_local4[@"name"] .. "' to '" .. f37_local1 .. "'.")
 	end
 	local f37_local7 = f37_local6(f37_local0, f37_local4, f37_local5, f37_arg0)
 	if f37_local7 ~= nil and f37_local3 == true then
-		if Engine[0xEA2BE00F49480D](Enum[0xBF54BE1BB3D618B][0xA1647599284110]) == true then
+		if Engine[@"islobbyhost"](Enum[@"lobbytype"][@"lobby_type_private"]) == true then
 			local f37_local8 = Lobby.Process.ManagePartyLeave(f37_local0)
 			Lobby.Process.AppendProcess(f37_local8, f37_local7)
-			Lobby.ProcessQueue.AddToQueue("GoForward from '" .. f37_local4[0x4BCADBA8E631B86] .. "' menu to '" .. f37_local5[0x4BCADBA8E631B86] .. "' menu AND ManagePartyLeave", f37_local8)
+			Lobby.ProcessQueue.AddToQueue("GoForward from '" .. f37_local4[@"name"] .. "' menu to '" .. f37_local5[@"name"] .. "' menu AND ManagePartyLeave", f37_local8)
 		else
-			local f37_local8 = Lobby.Process.ReloadPrivateLobby(f37_local0, Engine[0xA63E42B2FB6EC02]())
+			local f37_local8 = Lobby.Process.ReloadPrivateLobby(f37_local0, Engine[@"getlobbynetworkmode"]())
 			Lobby.Process.AppendProcess(f37_local8, f37_local7)
-			Lobby.ProcessQueue.AddToQueue("GoForward from '" .. f37_local4[0x4BCADBA8E631B86] .. "' menu to '" .. f37_local5[0x4BCADBA8E631B86] .. "' menu AND PartyMemberLeave", f37_local8)
+			Lobby.ProcessQueue.AddToQueue("GoForward from '" .. f37_local4[@"name"] .. "' menu to '" .. f37_local5[@"name"] .. "' menu AND PartyMemberLeave", f37_local8)
 		end
 		return
 	end
-	Lobby.ProcessQueue.AddToQueue("GoForward from '" .. f37_local4[0x4BCADBA8E631B86] .. "' menu to '" .. f37_local5[0x4BCADBA8E631B86] .. "' menu.", f37_local7)
+	Lobby.ProcessQueue.AddToQueue("GoForward from '" .. f37_local4[@"name"] .. "' menu to '" .. f37_local5[@"name"] .. "' menu.", f37_local7)
 end
 LobbyVM.OnGoBack = function(f38_arg0)
 	if Lobby.Launch.IsHostLaunching() then
 		return
 	end
-	local f38_local0 = Engine[0xA5B9C0111291A8B]()
+	local f38_local0 = Engine[@"getprimarycontroller"]()
 	local f38_local1 = f38_arg0.withParty
 	local f38_local2 = LobbyData.GetLobbyMenuByID(LobbyData.GetLobbyNav())
 	if f38_local2 == nil then
@@ -751,28 +751,28 @@ LobbyVM.OnGoBack = function(f38_arg0)
 	if f38_local3 == nil or f38_local4 == nil then
 		error("LobbyVM: No back process function found for '" .. currentMenu("'."))
 	end
-	Lobby.ProcessQueue.AddToQueue("GoBackFrom" .. f38_local2[0x4BCADBA8E631B86], f38_local4(f38_local0, f38_local2, f38_local3, f38_local1))
+	Lobby.ProcessQueue.AddToQueue("GoBackFrom" .. f38_local2[@"name"], f38_local4(f38_local0, f38_local2, f38_local3, f38_local1))
 end
 LobbyVM.OnManagePartyLeave = function(f39_arg0)
 	if Lobby.Launch.IsHostLaunching() then
 		return
 	end
 	local f39_local0 = f39_arg0.controller
-	if Engine[0xEA2BE00F49480D](Enum[0xBF54BE1BB3D618B][0xA1647599284110]) == true then
+	if Engine[@"islobbyhost"](Enum[@"lobbytype"][@"lobby_type_private"]) == true then
 		Lobby.ProcessQueue.AddToQueue("ManagePartyLeave", Lobby.Process.ManagePartyLeave(f39_local0))
 	else
-		Lobby.ProcessQueue.AddToQueue("PartyMemberLeave", Lobby.Process.ReloadPrivateLobby(f39_local0, Engine[0xA63E42B2FB6EC02]()))
+		Lobby.ProcessQueue.AddToQueue("PartyMemberLeave", Lobby.Process.ReloadPrivateLobby(f39_local0, Engine[@"getlobbynetworkmode"]()))
 	end
 end
 LobbyVM.OnCreateDedicatedLANLobby = function()
 	local f40_local0 = LuaEnum.UI.DIRECTOR_LAN_MP
-	if Dvar[0xA56A9C383009025]:exists() and Dvar[0xA56A9C383009025]:get() == "wz" then
+	if Dvar[@"hash_6A56A9C383009025"]:exists() and Dvar[@"hash_6A56A9C383009025"]:get() == "wz" then
 		f40_local0 = LuaEnum.UI.DIRECTOR_LAN_WZ
 	end
 	Lobby.ProcessQueue.AddToQueue("CreateDedicatedLANLobby", Lobby.Process.CreateDedicatedLANLobby(0, LobbyData.GetLobbyMenuByName(f40_local0)))
 end
 LobbyVM.OnCreateDedicatedLobby = function(f41_arg0)
-	if Dvar[0x4BADE8473F0165F]:get() == true then
+	if Dvar[@"hash_44BADE8473F0165F"]:get() == true then
 		return
 	else
 		Lobby.ProcessQueue.AddToQueue("CreateDedicatedLobby", Lobby.Process.CreateDedicatedLobby(0, LobbyData.GetLobbyMenuByName(LuaEnum.UI.DIRECTOR_ONLINE_MP_PUBLIC)))
@@ -795,32 +795,32 @@ end
 LobbyVM.OnCanLobbyCanMigrate = function(f45_arg0)
 	local f45_local0 = f45_arg0.lobbyModule
 	if f45_local0 == nil then
-		f45_local0 = Enum[0x7CA2DE5266A94BF][0x98EA1BB7164D103]
+		f45_local0 = Enum[@"lobbymodule"][@"lobby_module_host"]
 	end
 	local f45_local1 = f45_arg0.lobbyType
 	local f45_local2 = f45_arg0.lobbyMode
-	if Engine[0x9E5BE3B4BBA4E0E]("lobbyMigrate_Enabled") == false or Engine[0x9E5BE3B4BBA4E0E]("lobbyMigrate_dedicatedOnly") == true or Engine[0x9E5BE3B4BBA4E0E]("lobbyMigrate_EnabledLAN") == false and Enum[0xC84D3E505F1444][0xBAA8EC6F3E77255] == Engine[0xA63E42B2FB6EC02]() then
-		Engine[0x5DF86CF48135674](Enum[0x7A63DCD561B0FA8][0x422418A32076161], "Cannot become host, failed lobby migrateable check\n")
+	if Engine[@"getdvarbool"]("lobbyMigrate_Enabled") == false or Engine[@"getdvarbool"]("lobbyMigrate_dedicatedOnly") == true or Engine[@"getdvarbool"]("lobbyMigrate_EnabledLAN") == false and Enum[@"lobbynetworkmode"][@"lobby_networkmode_lan"] == Engine[@"getlobbynetworkmode"]() then
+		Engine[@"printwarning"](Enum[@"consolelabel_e"][@"con_label_migration"], "Cannot become host, failed lobby migrateable check\n")
 		return false
-	elseif f45_local1 == Enum[0xBF54BE1BB3D618B][0xBC48855DCB4BE0E] then
-		Engine[0x5DF86CF48135674](Enum[0x7A63DCD561B0FA8][0x422418A32076161], "Cannot become host, lobby type is LOBBY_TYPE_TRANSITION\n")
+	elseif f45_local1 == Enum[@"lobbytype"][@"lobby_type_transition"] then
+		Engine[@"printwarning"](Enum[@"consolelabel_e"][@"con_label_migration"], "Cannot become host, lobby type is LOBBY_TYPE_TRANSITION\n")
 		return false
-	elseif Engine[0x3E68E350BEFE50D](f45_local0, f45_local1) == false then
-		Engine[0x5DF86CF48135674](Enum[0x7A63DCD561B0FA8][0x422418A32076161], "Cannot become host, requested lobby is not active\n")
+	elseif Engine[@"islobbyactive"](f45_local0, f45_local1) == false then
+		Engine[@"printwarning"](Enum[@"consolelabel_e"][@"con_label_migration"], "Cannot become host, requested lobby is not active\n")
 		return false
 	else
 		local f45_local3 = LobbyData.GetCurrentMenuTarget()
-		if f45_local3[0x439FA113121ADC5] ~= 1 then
-			Engine[0x5DF86CF48135674](Enum[0x7A63DCD561B0FA8][0x422418A32076161], "Cannot become host, lobby menu does not allow migration\n")
+		if f45_local3[@"hasmigration"] ~= 1 then
+			Engine[@"printwarning"](Enum[@"consolelabel_e"][@"con_label_migration"], "Cannot become host, lobby menu does not allow migration\n")
 			return false
-		elseif Engine[0x8FCA273DF0BEF97](f45_local1) then
-			Engine[0x5DF86CF48135674](Enum[0x7A63DCD561B0FA8][0x422418A32076161], "Cannot become host, lobby is in recovery\n")
+		elseif Engine[@"islobbyinrecovery"](f45_local1) then
+			Engine[@"printwarning"](Enum[@"consolelabel_e"][@"con_label_migration"], "Cannot become host, lobby is in recovery\n")
 			return false
 		elseif true == LuaUtils.IsArenaMode() then
-			Engine[0x5DF86CF48135674](Enum[0x7A63DCD561B0FA8][0x422418A32076161], "Cannot become host, migration is not allowed in arena\n")
+			Engine[@"printwarning"](Enum[@"consolelabel_e"][@"con_label_migration"], "Cannot become host, migration is not allowed in arena\n")
 			return false
 		elseif false == Lobby.ProcessQueue.IsQueueEmpty() then
-			Engine[0x5DF86CF48135674](Enum[0x7A63DCD561B0FA8][0x422418A32076161], "Cannot become host, process queue is not empty\n")
+			Engine[@"printwarning"](Enum[@"consolelabel_e"][@"con_label_migration"], "Cannot become host, process queue is not empty\n")
 			return false
 		else
 			return true
@@ -841,7 +841,7 @@ LobbyVM.OnLobbyLocalClientLeave = function(f46_arg0)
 	end
 end
 LobbyVM.SetMaxLocalPlayers = function(f47_arg0)
-	Dvar[0x6BAC8B42067D2C5]:set(math.min(f47_arg0[0x6D8502BDC7A4868], Engine[0x370E918BE7B2017]()))
+	Dvar[@"lobby_maxlocalplayers"]:set(math.min(f47_arg0[@"maxlocalclients"], Engine[@"getmaxlocalcontrollers"]()))
 end
 LobbyVM.OnLobbySettings = function(f48_arg0)
 	local f48_local0 = f48_arg0.controller
@@ -852,46 +852,46 @@ LobbyVM.OnLobbySettings = function(f48_arg0)
 		f48_local1 = LobbyData.GetLobbyMenuByID(f48_local1)
 	end
 	if f48_local1 == nil then
-		Engine[0x8C5711DAACC99F4](Enum[0x7A63DCD561B0FA8][0x59962D5EF982597], "Tried to apply settings for an invalid target.@\n")
+		Engine[@"printinfo"](Enum[@"consolelabel_e"][@"con_label_lobbyhost"], "Tried to apply settings for an invalid target.@\n")
 		return
 	end
-	Engine[0x8C5711DAACC99F4](Enum[0x7A63DCD561B0FA8][0x59962D5EF982597], "Applying settings for menu: " .. f48_local1[0x4BCADBA8E631B86] .. ".\n")
-	if not Engine[0xC3441D67206942](f48_local0) and Engine[0xCB675CA7856DA25]() and f48_local1[0xEB7DDC7F079D51B] ~= Enum[0x89C1455C5032969][0xD5FBB8D74AC6D62] and f48_local1[0xEB7DDC7F079D51B] ~= Enum[0x89C1455C5032969][0x78C124999125C42] then
-		LuaUtils.SafeComError(Enum[0xE4C65AA61FAEC38][0x7039D0A1017FE92], 0x89F50A5AB4EE929)
+	Engine[@"printinfo"](Enum[@"consolelabel_e"][@"con_label_lobbyhost"], "Applying settings for menu: " .. f48_local1[@"name"] .. ".\n")
+	if not Engine[@"isinventorybusy"](f48_local0) and Engine[@"hash_5CB675CA7856DA25"]() and f48_local1[@"mainmode"] ~= Enum[@"lobbymainmode"][@"lobby_mainmode_invalid"] and f48_local1[@"mainmode"] ~= Enum[@"lobbymainmode"][@"lobby_mainmode_wz"] then
+		LuaUtils.SafeComError(Enum[@"errorcode"][@"error_softrestart_keepdw"], @"menu/join_result_full_version_required_title")
 	end
-	if not Engine[0xC3441D67206942](f48_local0) and f48_local1[0xEB7DDC7F079D51B] == Enum[0x89C1455C5032969][0x79D01499920B292] then
-		if Engine[0xA8FBC7AC4C3F3A6]() then
-			LuaUtils.SafeComError(Enum[0xE4C65AA61FAEC38][0x7039D0A1017FE92], 0xB582AE90C06D4FF)
-		elseif Engine[0x5405A6484A88367]() then
-			LuaUtils.SafeComError(Enum[0xE4C65AA61FAEC38][0x7039D0A1017FE92], 0x89F50A5AB4EE929)
+	if not Engine[@"isinventorybusy"](f48_local0) and f48_local1[@"mainmode"] == Enum[@"lobbymainmode"][@"lobby_mainmode_zm"] then
+		if Engine[@"hash_3A8FBC7AC4C3F3A6"]() then
+			LuaUtils.SafeComError(Enum[@"errorcode"][@"error_softrestart_keepdw"], @"menu/korea_15plus_blocked_gamemode")
+		elseif Engine[@"hash_45405A6484A88367"]() then
+			LuaUtils.SafeComError(Enum[@"errorcode"][@"error_softrestart_keepdw"], @"menu/join_result_full_version_required_title")
 		end
 	end
 	if not f48_local2 then
-		local f48_local4 = Engine[0x80964E6C43E0C4B]()
-		local f48_local5 = f48_local1[0xEB7DDC7F079D51B]
-		if Engine[0x60CA86E76BBABC0] then
-			Engine[0x60CA86E76BBABC0](Enum[0x4317C8C4998D8DC][0xBC3515387CDAB7])
+		local f48_local4 = Engine[@"getlobbymainmode"]()
+		local f48_local5 = f48_local1[@"mainmode"]
+		if Engine[@"switchcampaignmode"] then
+			Engine[@"switchcampaignmode"](Enum[@"campaignmode"][0xBC3515387CDAB7])
 		end
 		if f48_local4 ~= f48_local5 then
-			Engine[0xA47E6B48AB89F8E](f48_local0, Lobby.Core.GetMainModeStr(f48_local5))
+			Engine[@"switchmode"](f48_local0, Lobby.Core.GetMainModeStr(f48_local5))
 		end
 	end
-	if f48_local3 ~= true and f48_local1[0xF7AE5746E79F2CE] == Enum[0xF7AE5746E79F2CE][0xC8A8AE094E793A5] then
-		Engine[0xB418B3A08848737]()
+	if f48_local3 ~= true and f48_local1[@"egamemodes"] == Enum[@"egamemodes"][@"mode_game_invalid"] then
+		Engine[@"resetgametypesettings"]()
 	end
 	LobbyVM.SetMaxLocalPlayers(f48_local1)
-	Engine[0xA69E412987A9A16](f48_local1[0xBF54BE1BB3D618B], f48_local1[0x8409AA0F01B5DBC])
-	Engine[0xA52D2CF79103AE1](f48_local1[0xF7AE5746E79F2CE])
-	Engine[0x41D81D6B58AAF3F](f48_local1[0xBF54BE1BB3D618B], f48_local1[0xEE71E4EE12BC453])
+	Engine[@"setlobbymode"](f48_local1[@"lobbytype"], f48_local1[@"lobbymode"])
+	Engine[@"tempgamemodesetmode"](f48_local1[@"egamemodes"])
+	Engine[@"setlobbymaxclients"](f48_local1[@"lobbytype"], f48_local1[@"maxclients"])
 end
 LobbyVM.OnSessionModeChange = function(f49_arg0)
 	Lobby.CharacterSelection.OnSetGametype()
-	if f49_arg0.toMode == Enum[0x9C0C2196D8313A0][0xBF1DCC8138A9D39] then
-		for f49_local0 = 0, Engine[0xB686A0A723E6442]() - 1, 1 do
+	if f49_arg0.toMode == Enum[@"emodes"][@"mode_warzone"] then
+		for f49_local0 = 0, Engine[@"getmaxcontrollercount"]() - 1, 1 do
 			Lobby.Stats.ValidateWZCharacterSelection(f49_local0)
 		end
-	elseif f49_arg0.toMode == Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A] then
-		for f49_local0 = 0, Engine[0xB686A0A723E6442]() - 1, 1 do
+	elseif f49_arg0.toMode == Enum[@"emodes"][@"mode_zombies"] then
+		for f49_local0 = 0, Engine[@"getmaxcontrollercount"]() - 1, 1 do
 			Lobby.Stats.ValidateZMWeaponArmory(f49_local0)
 		end
 	end
@@ -911,21 +911,21 @@ LobbyVM.OnUpdateUI = function(f50_arg0)
 			return f51_arg0
 		end
 	end
-	local f50_local4 = Engine[0x8CB6D1C656D57EE](Enum[0x7CA2DE5266A94BF][0xC46B73E8E18BA2], Enum[0xBF54BE1BB3D618B][0xA1647599284110])
+	local f50_local4 = Engine[@"getlobbylobbyid"](Enum[@"lobbymodule"][@"lobby_module_client"], Enum[@"lobbytype"][@"lobby_type_private"])
 	if f50_local4 ~= LobbyVM.lobbyID then
-		Engine[0x83C9B5DE1D9371](Engine[0xA798E4552F5E872](Engine[0x8DF2E5447F384B9](), "lobbyRoot.showSelect"), true)
+		Engine[@"setmodelvalue"](Engine[@"createmodel"](Engine[@"getglobalmodel"](), "lobbyRoot.showSelect"), true)
 		LobbyVM.lobbyID = f50_local4
 	end
-	Engine[0x58F4769A24A7C7B](f50_local0[0x8B72E07B55C3AC0])
+	Engine[@"setlobbyuiscreen"](f50_local0[@"id"])
 	LobbyData.SetLobbyNav(f50_local0)
-	Engine[0x83C9B5DE1D9371](Engine[0xA798E4552F5E872](Engine[0x8DF2E5447F384B9](), "lobbyRoot.lobbyMode", true), f50_local0[0x8409AA0F01B5DBC])
-	Engine[0x83C9B5DE1D9371](Engine[0xA798E4552F5E872](Engine[0x8DF2E5447F384B9](), "lobbyRoot.lobbyMainMode", true), f50_local0[0xEB7DDC7F079D51B])
-	Engine[0x83C9B5DE1D9371](Engine[0xA798E4552F5E872](Engine[0x8DF2E5447F384B9](), "lobbyRoot.lobbyGameMode", true), f50_local0[0xF7AE5746E79F2CE])
-	Engine[0x83C9B5DE1D9371](Engine[0xA798E4552F5E872](Engine[0x8DF2E5447F384B9](), "lobbyRoot.room", true), f50_local3(f50_local0[0x355141FF0C48EDA]))
-	CoDShared[0x562F4B21BD0FAB0](f50_local1, f50_local0[0xEB7DDC7F079D51B])
+	Engine[@"setmodelvalue"](Engine[@"createmodel"](Engine[@"getglobalmodel"](), "lobbyRoot.lobbyMode", true), f50_local0[@"lobbymode"])
+	Engine[@"setmodelvalue"](Engine[@"createmodel"](Engine[@"getglobalmodel"](), "lobbyRoot.lobbyMainMode", true), f50_local0[@"mainmode"])
+	Engine[@"setmodelvalue"](Engine[@"createmodel"](Engine[@"getglobalmodel"](), "lobbyRoot.lobbyGameMode", true), f50_local0[@"egamemodes"])
+	Engine[@"setmodelvalue"](Engine[@"createmodel"](Engine[@"getglobalmodel"](), "lobbyRoot.room", true), f50_local3(f50_local0[@"room"]))
+	CoDShared[@"hash_3562F4B21BD0FAB0"](f50_local1, f50_local0[@"mainmode"])
 	if f50_local2 then
 		local f50_local5 = LobbyData.GetLobbyMenuByName(LuaEnum.UI.DIRECTOR_ONLINE_MP_ARENA_PREGAME)
-		if f50_local5 ~= nil and f50_local0[0x8B72E07B55C3AC0] == f50_local5[0x8B72E07B55C3AC0] then
+		if f50_local5 ~= nil and f50_local0[@"id"] == f50_local5[@"id"] then
 			Lobby.Events.EventDispatcher("OnClanUIEvent", {
 				controller = f50_local1,
 				event = LuaEnum.CLAN_UI_EVENT.INIT_MODELS,
@@ -938,9 +938,9 @@ LobbyVM.OnUpdateUI = function(f50_arg0)
 	end
 end
 LobbyVM.ResetClientLoadouts = function()
-	local f52_local0 = Engine[0x3797858022DCB59](Enum[0xBF54BE1BB3D618B][0xA1647599284110])
-	local f52_local1 = Engine[0xE42CF04B7DDD5DE](LobbyMsg.EncodeToLobbyMsgType(LobbyMsg.LuaMsgType.LUA_MESSAGE_TYPE_LOBBY_CLIENT_RESET_LOADOUTS), Enum[0x7CA2DE5266A94BF][0x98EA1BB7164D103], Enum[0xBF54BE1BB3D618B][0xA1647599284110])
-	f52_local1:sendTo(f52_local0, Enum[0x7CA2DE5266A94BF][0xDAA8D01F295C885], Enum[0xBF5D4C4954EF3E5][0x41640605E759E71])
+	local f52_local0 = Engine[@"getlobbyhostcontrollerindex"](Enum[@"lobbytype"][@"lobby_type_private"])
+	local f52_local1 = Engine[@"hash_1E42CF04B7DDD5DE"](LobbyMsg.EncodeToLobbyMsgType(LobbyMsg.LuaMsgType.LUA_MESSAGE_TYPE_LOBBY_CLIENT_RESET_LOADOUTS), Enum[@"lobbymodule"][@"lobby_module_host"], Enum[@"lobbytype"][@"lobby_type_private"])
+	f52_local1:sendTo(f52_local0, Enum[@"lobbymodule"][@"hash_2DAA8D01F295C885"], Enum[@"netchanmsgtype_e"][@"netchan_lobbyprivate_reliable"])
 	f52_local1:free()
 end
 LobbyVM.Leaderboard_PopulateCustomList = function(f53_arg0)
@@ -950,62 +950,62 @@ LobbyVM.CheckDLCBit = function(f54_arg0, f54_arg1)
 	return f54_arg0 & f54_arg1 == f54_arg1
 end
 LobbyVM.LaunchGameExec = function(f55_arg0, f55_arg1)
-	if f55_arg1 ~= Engine[0xC3DF042E7492B66](Enum[0x7CA2DE5266A94BF][0x98EA1BB7164D103]) then
-		Engine[0x458FE92FEB39D4E](Enum[0x7A63DCD561B0FA8][0x59962D5EF982597], "Launch game not supported for this lobby type(" .. f55_arg1 .. ")\n")
+	if f55_arg1 ~= Engine[@"lobbygetcontrollinglobbysession"](Enum[@"lobbymodule"][@"lobby_module_host"]) then
+		Engine[@"printerror"](Enum[@"consolelabel_e"][@"con_label_lobbyhost"], "Launch game not supported for this lobby type(" .. f55_arg1 .. ")\n")
 		return false
 	elseif Lobby.ProcessQueue.IsQueueEmpty() then
-		Engine[0x8C5711DAACC99F4](Enum[0x7A63DCD561B0FA8][0x59962D5EF982597], "** Launching game... **\n")
-		Engine[0x7C75E608EA39B5C](f55_arg0, "lobbyLaunchGame")
+		Engine[@"printinfo"](Enum[@"consolelabel_e"][@"con_label_lobbyhost"], "** Launching game... **\n")
+		Engine[@"exec"](f55_arg0, "lobbyLaunchGame")
 		return true
 	else
 		local f55_local0 = Lobby.ProcessQueue.GetQueueHead()
-		Engine[0x458FE92FEB39D4E](Enum[0x7A63DCD561B0FA8][0x59962D5EF982597], "Warning: Could not launch game. Lobby process '" .. f55_local0.name .. "' in progress.\n")
+		Engine[@"printerror"](Enum[@"consolelabel_e"][@"con_label_lobbyhost"], "Warning: Could not launch game. Lobby process '" .. f55_local0.name .. "' in progress.\n")
 		return false
 	end
 end
 LobbyVM.LaunchDemoExec = function(f56_arg0, f56_arg1)
-	if f56_arg1 ~= Enum[0xBF54BE1BB3D618B][0xA1647599284110] then
-		Engine[0x458FE92FEB39D4E](Enum[0x7A63DCD561B0FA8][0x59962D5EF982597], "Launch demo not supported for this lobby type(" .. f56_arg1 .. ")\n")
+	if f56_arg1 ~= Enum[@"lobbytype"][@"lobby_type_private"] then
+		Engine[@"printerror"](Enum[@"consolelabel_e"][@"con_label_lobbyhost"], "Launch demo not supported for this lobby type(" .. f56_arg1 .. ")\n")
 		return
 	elseif Lobby.ProcessQueue.IsQueueEmpty() then
-		Engine[0x8C5711DAACC99F4](Enum[0x7A63DCD561B0FA8][0x59962D5EF982597], "** Launching demo... **\n")
-		Engine[0x7C75E608EA39B5C](f56_arg0, "lobbyLaunchDemo")
+		Engine[@"printinfo"](Enum[@"consolelabel_e"][@"con_label_lobbyhost"], "** Launching demo... **\n")
+		Engine[@"exec"](f56_arg0, "lobbyLaunchDemo")
 		LuaUtils.UI_ClearErrorMessageDialog()
 	else
 		local f56_local0 = Lobby.ProcessQueue.GetQueueHead()
-		Engine[0x458FE92FEB39D4E](Enum[0x7A63DCD561B0FA8][0x59962D5EF982597], "Warning: Could not launch damo. Lobby process '" .. f56_local0.name .. "' in progress.\n")
+		Engine[@"printerror"](Enum[@"consolelabel_e"][@"con_label_lobbyhost"], "Warning: Could not launch damo. Lobby process '" .. f56_local0.name .. "' in progress.\n")
 	end
 end
 LobbyVM.GetBitsForLockedInMap = function()
-	local f57_local0 = Engine[0xE67E7253CC272C9]()
+	local f57_local0 = Engine[@"lobbygetmap"]()
 	if f57_local0 == nil or f57_local0 == "" then
-		f57_local0 = Engine[0xB87231BF773995E]()
+		f57_local0 = Engine[@"getcurrentmap"]()
 	end
-	return Engine[0x943893A16399DCF](f57_local0)
+	return Engine[@"getdlcbitformapname"](f57_local0)
 end
 LobbyVM.GetNeededDLCBits = function()
-	local f58_local0 = Engine[0x9882F293C327557]()
+	local f58_local0 = Engine[@"getlobbyuiscreen"]()
 	if f58_local0 == LobbyData.GetLobbyMenuIDByName(LuaEnum.UI.DIRECTOR_ONLINE_ZM_PUBLIC) or f58_local0 == LobbyData.GetLobbyMenuIDByName(LuaEnum.UI.DIRECTOR_ONLINE_MP_PUBLIC) then
-		return Lobby.Matchmaking.GetMapPackBits(CoDShared.GetLobbyDLCBits(Engine[0x80964E6C43E0C4B](), Enum[0x7CA2DE5266A94BF][0x98EA1BB7164D103], Enum[0xBF54BE1BB3D618B][0x92676CF5B6FCD43]), Engine[0x7B3B2B73B53EB34]())
+		return Lobby.Matchmaking.GetMapPackBits(CoDShared.GetLobbyDLCBits(Engine[@"getlobbymainmode"](), Enum[@"lobbymodule"][@"lobby_module_host"], Enum[@"lobbytype"][@"lobby_type_game"]), Engine[@"getplaylistid"]())
 	elseif f58_local0 == LobbyData.GetLobbyMenuIDByName(LuaEnum.UI.DIRECTOR_ONLINE_ZM_PREGAME) or f58_local0 == LobbyData.GetLobbyMenuIDByName(LuaEnum.UI.DIRECTOR_ONLINE_MP_PREGAME) then
 		return 0
 	elseif f58_local0 == LobbyData.GetLobbyMenuIDByName(LuaEnum.UI.DIRECTOR_ONLINE) then
 		return 0
 	end
-	local f58_local1 = Engine[0xE67E7253CC272C9]()
+	local f58_local1 = Engine[@"lobbygetmap"]()
 	if f58_local1 == nil or f58_local1 == "" then
-		f58_local1 = Engine[0xB87231BF773995E]()
+		f58_local1 = Engine[@"getcurrentmap"]()
 	end
-	return Engine[0x943893A16399DCF](f58_local1)
+	return Engine[@"getdlcbitformapname"](f58_local1)
 end
 LobbyVM.TriggerQuitMissingMapProcess = function(f59_arg0, f59_arg1)
-	Engine[0x5DF86CF48135674](Enum[0x7A63DCD561B0FA8][0xD48A9770CD84BB6], "Leaving game because map '" .. Engine[0xE67E7253CC272C9]() .. "' is in contentpack '" .. f59_arg1 .. "' but our dlcbits is '" .. f59_arg0 .. "'.\n")
-	local f59_local0 = Lobby.Process.Recover(Engine[0xA5B9C0111291A8B]())
-	Lobby.Process.ForceAction(f59_local0.tail, Lobby.Actions.ErrorPopupMsg(0x609344F0F879051))
+	Engine[@"printwarning"](Enum[@"consolelabel_e"][@"con_label_lobbyclient"], "Leaving game because map '" .. Engine[@"lobbygetmap"]() .. "' is in contentpack '" .. f59_arg1 .. "' but our dlcbits is '" .. f59_arg0 .. "'.\n")
+	local f59_local0 = Lobby.Process.Recover(Engine[@"getprimarycontroller"]())
+	Lobby.Process.ForceAction(f59_local0.tail, Lobby.Actions.ErrorPopupMsg(@"platform/missingmap"))
 	Lobby.ProcessQueue.AddToQueue("MissingMap", f59_local0)
 end
 LobbyVM.DLCMapCheck = function()
-	local f60_local0 = CoDShared.GetLobbyDLCBits(Engine[0x80964E6C43E0C4B](), Enum[0x7CA2DE5266A94BF][0x98EA1BB7164D103], Engine[0xC3DF042E7492B66](Enum[0x7CA2DE5266A94BF][0xC46B73E8E18BA2]))
+	local f60_local0 = CoDShared.GetLobbyDLCBits(Engine[@"getlobbymainmode"](), Enum[@"lobbymodule"][@"lobby_module_host"], Engine[@"lobbygetcontrollinglobbysession"](Enum[@"lobbymodule"][@"lobby_module_client"]))
 	local f60_local1 = LobbyVM.GetNeededDLCBits()
 	if not LobbyVM.CheckDLCBit(f60_local0, f60_local1) then
 		LobbyVM.TriggerQuitMissingMapProcess(f60_local0, f60_local1)
@@ -1015,7 +1015,7 @@ LobbyVM.DLCMapCheck = function()
 	end
 end
 LobbyVM.CanLoadMap = function()
-	local f61_local0 = CoDShared.GetLobbyDLCBits(Engine[0x80964E6C43E0C4B](), Enum[0x7CA2DE5266A94BF][0xC46B73E8E18BA2], Engine[0xC3DF042E7492B66](Enum[0x7CA2DE5266A94BF][0xC46B73E8E18BA2]))
+	local f61_local0 = CoDShared.GetLobbyDLCBits(Engine[@"getlobbymainmode"](), Enum[@"lobbymodule"][@"lobby_module_client"], Engine[@"lobbygetcontrollinglobbysession"](Enum[@"lobbymodule"][@"lobby_module_client"]))
 	local f61_local1 = LobbyVM.GetBitsForLockedInMap()
 	if not LobbyVM.CheckDLCBit(f61_local0, f61_local1) then
 		LobbyVM.TriggerQuitMissingMapProcess(f61_local0, f61_local1)
@@ -1025,10 +1025,10 @@ LobbyVM.CanLoadMap = function()
 	end
 end
 LobbyVM.CanClientLaunch = function(f62_arg0)
-	if CoDShared.IsMapFree(Engine[0xC53F8D38DF9042B](Engine[0xE67E7253CC272C9]()), Engine[0x9882F293C327557](), Engine[0x7B3B2B73B53EB34]()) then
+	if CoDShared.IsMapFree(Engine[@"converttoxhash"](Engine[@"lobbygetmap"]()), Engine[@"getlobbyuiscreen"](), Engine[@"getplaylistid"]()) then
 		return true
 	elseif LobbyVM.CanLoadMap() == false then
-		Engine[0xB972AE22481F1]()
+		Engine[@"lobbylaunchclear"]()
 		return false
 	else
 		return true
@@ -1041,7 +1041,7 @@ LobbyVM.OnCanBroadcastHostInfo = function(f64_arg0)
 	return true
 end
 LobbyVM.OnUpdateAdvertising = function(f65_arg0)
-	if f65_arg0.lobbyType == Enum[0xBF54BE1BB3D618B][0x92676CF5B6FCD43] then
+	if f65_arg0.lobbyType == Enum[@"lobbytype"][@"lobby_type_game"] then
 		Lobby.Matchmaking.UpdateAdvertising("force update from code")
 	end
 end
@@ -1050,12 +1050,12 @@ LobbyVM.UGCOffensiveEmblemAdd = function(f66_arg0)
 end
 LobbyVM.OnChangeSigninState = function(f67_arg0)
 	local f67_local0 = nil
-	if f67_arg0.onlineState == Enum[0x1F6577DCFF6E881][0xFE806F50201F7E3] then
+	if f67_arg0.onlineState == Enum[@"liveuserstate"][@"live_user_signed_out"] then
 		Lobby.Anticheat.OnControllerSignedOut(f67_arg0.controller)
 		if f67_arg0.isPrimary then
 			f67_local0 = Lobby.Process.PrimaryControllerSignedOut(f67_arg0.controller)
 		end
-	elseif f67_arg0.onlineState == Enum[0x1F6577DCFF6E881][0x1675B607D4A7DAA] then
+	elseif f67_arg0.onlineState == Enum[@"liveuserstate"][@"live_user_signed_in"] then
 		if f67_arg0.isPrimary then
 			f67_local0 = Lobby.Process.PrimaryControllerSignedIn(f67_arg0.controller)
 		end
@@ -1069,11 +1069,11 @@ end
 LobbyVM.ClearLobbyStatus = function()
 	if LobbyVM.lobbyStatus.cleared == true then
 		return
-	elseif LobbyVM.lobbyStatus.clearedTime > Engine[0x9D33D652B9B0F3B]() then
+	elseif LobbyVM.lobbyStatus.clearedTime > Engine[@"milliseconds"]() then
 		return
 	else
 		LobbyVM.lobbyStatus.cleared = true
-		local f68_local0 = Engine[0x8DF2E5447F384B9]()
+		local f68_local0 = Engine[@"getglobalmodel"]()
 		f68_local0 = f68_local0.lobbyRoot
 		local f68_local1 = f68_local0:create("lobbyStatusString1")
 		f68_local1:set("")
@@ -1084,32 +1084,32 @@ LobbyVM.ClearLobbyStatus = function()
 	end
 end
 LobbyVM.LobbyStatusUpdate = function(f69_arg0)
-	if not Engine[0x3E5B188BDE5B13B]() then
+	if not Engine[@"ismainthreadorproxy"]() then
 		return
 	end
-	local f69_local0 = Engine[0x8DF2E5447F384B9]()
+	local f69_local0 = Engine[@"getglobalmodel"]()
 	f69_local0 = f69_local0.lobbyRoot
 	local f69_local1 = f69_local0:create("lobbyStatusString1")
 	local f69_local2 = f69_local0:create("lobbyStatusString2")
 	local f69_local3 = f69_local0:create("lobbyStatusString3")
 	LobbyVM.lobbyStatus.cleared = false
-	LobbyVM.lobbyStatus.clearedTime = Engine[0x9D33D652B9B0F3B]() + 10000
+	LobbyVM.lobbyStatus.clearedTime = Engine[@"milliseconds"]() + 10000
 	local f69_local4 = f69_arg0.searchStage
 	local f69_local5 = ""
 	if f69_local4 == 1 then
 		local f69_local6 = f69_arg0.numResults
 		if f69_local6 == 1 then
-			f69_local5 = Engine[0xF9F1239CFD921FE](0xE4043BEC55997D7)
+			f69_local5 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_2E4043BEC55997D7")
 		else
-			f69_local5 = Engine[0xF9F1239CFD921FE](0xF5C23E745BBA03A, f69_local6)
+			f69_local5 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_5F5C23E745BBA03A", f69_local6)
 		end
 		f69_local1:set(f69_local5)
 		f69_local2:set("")
 		f69_local3:set("")
 	elseif f69_local4 == 2 then
-		f69_local2:set(Engine[0xF9F1239CFD921FE](0x14406E6B65BB0D6, f69_arg0.contactedResults, f69_arg0.numResults))
+		f69_local2:set(Engine[@"hash_4F9F1239CFD921FE"](@"hash_614406E6B65BB0D6", f69_arg0.contactedResults, f69_arg0.numResults))
 	elseif f69_local4 == 3 then
-		f69_local3:set(Engine[0xF9F1239CFD921FE](0x5AE8C0E42569E25, f69_arg0.joiningCurHost, f69_arg0.joiningNumHosts))
+		f69_local3:set(Engine[@"hash_4F9F1239CFD921FE"](@"hash_75AE8C0E42569E25", f69_arg0.joiningCurHost, f69_arg0.joiningNumHosts))
 	end
 end
 LobbyVM.ProcessCompleteSuccess = function(f70_arg0)
@@ -1126,31 +1126,31 @@ LobbyVM.ProcessUpdate = function(f73_arg0)
 end
 LobbyVM.OnGameLobbyGameServerDataUpdate = function(f74_arg0)
 	local f74_local0 = LobbyData.GetCurrentMenuTarget()
-	if f74_local0[0x8409AA0F01B5DBC] == Enum[0x8409AA0F01B5DBC][0xBB5FD8AEFC4D4B9] or f74_local0[0x8409AA0F01B5DBC] == Enum[0x8409AA0F01B5DBC][0xD42D003CEEA3F87] then
-		local f74_local1 = Engine[0x3ACB99DBAD24D55](Engine[0x7B3B2B73B53EB34]())
+	if f74_local0[@"lobbymode"] == Enum[@"lobbymode"][@"lobby_mode_public"] or f74_local0[@"lobbymode"] == Enum[@"lobbymode"][@"lobby_mode_arena"] then
+		local f74_local1 = Engine[@"getplaylistinfobyid"](Engine[@"getplaylistid"]())
 		if f74_local1 then
 			local f74_local2 = f74_local1.name
-			local f74_local3 = Engine[0xA798E4552F5E872](Engine[0x8DF2E5447F384B9](), "lobbyPlaylist")
-			Engine[0x83C9B5DE1D9371](Engine[0xA798E4552F5E872](f74_local3, "name"), Engine[0xB03220D3A4F3E38](Engine[0xF9F1239CFD921FE](f74_local2)))
-			Engine[0x83C9B5DE1D9371](Engine[0xA798E4552F5E872](f74_local3, "kickerText"), 0x0)
+			local f74_local3 = Engine[@"createmodel"](Engine[@"getglobalmodel"](), "lobbyPlaylist")
+			Engine[@"setmodelvalue"](Engine[@"createmodel"](f74_local3, "name"), Engine[@"toupper"](Engine[@"hash_4F9F1239CFD921FE"](f74_local2)))
+			Engine[@"setmodelvalue"](Engine[@"createmodel"](f74_local3, "kickerText"), 0x0)
 		end
 	end
 	Lobby.MapVote.GameLobbyGameServerDataUpdate(f74_arg0)
 end
 LobbyVM.OnPrivateLobbyServerDataUpdate = function(f75_arg0)
 	local f75_local0 = LobbyData.GetCurrentMenuTarget()
-	if Engine[0x3EAC408F958FF05]() == Enum[0x9C0C2196D8313A0][0xBF1DCC8138A9D39] then
-		local f75_local1 = Engine[0x8DF2E5447F384B9]()
+	if Engine[@"currentsessionmode"]() == Enum[@"emodes"][@"mode_warzone"] then
+		local f75_local1 = Engine[@"getglobalmodel"]()
 		f75_local1 = f75_local1:create("lobbyRoot.fillParty")
 		f75_local1:set(f75_arg0.fillParty)
 	end
-	if f75_local0[0x8409AA0F01B5DBC] == Enum[0x8409AA0F01B5DBC][0xBB5FD8AEFC4D4B9] or f75_local0[0x8409AA0F01B5DBC] == Enum[0x8409AA0F01B5DBC][0xD42D003CEEA3F87] then
-		local f75_local2 = Engine[0x3ACB99DBAD24D55](Engine[0x7B3B2B73B53EB34]())
+	if f75_local0[@"lobbymode"] == Enum[@"lobbymode"][@"lobby_mode_public"] or f75_local0[@"lobbymode"] == Enum[@"lobbymode"][@"lobby_mode_arena"] then
+		local f75_local2 = Engine[@"getplaylistinfobyid"](Engine[@"getplaylistid"]())
 		if f75_local2 then
 			local f75_local3 = f75_local2.name
-			local f75_local4 = Engine[0xA798E4552F5E872](Engine[0x8DF2E5447F384B9](), "lobbyPlaylist")
-			Engine[0x83C9B5DE1D9371](Engine[0xA798E4552F5E872](f75_local4, "name"), Engine[0xB03220D3A4F3E38](Engine[0xF9F1239CFD921FE](f75_local3)))
-			Engine[0x83C9B5DE1D9371](Engine[0xA798E4552F5E872](f75_local4, "kickerText"), 0x0)
+			local f75_local4 = Engine[@"createmodel"](Engine[@"getglobalmodel"](), "lobbyPlaylist")
+			Engine[@"setmodelvalue"](Engine[@"createmodel"](f75_local4, "name"), Engine[@"toupper"](Engine[@"hash_4F9F1239CFD921FE"](f75_local3)))
+			Engine[@"setmodelvalue"](Engine[@"createmodel"](f75_local4, "kickerText"), 0x0)
 		end
 	end
 end
@@ -1159,18 +1159,18 @@ LobbyVM.OnGameLobbyClientDataUpdate = function(f76_arg0)
 	Lobby.TeamSelection.GameLobbyClientDataUpdate(f76_arg0)
 	Lobby.Pregame.GameLobbyClientDataUpdate(f76_arg0)
 	LuaUtils.ForceLobbyButtonUpdate()
-	Engine[0x6A489878620F3BC](Engine[0xA798E4552F5E872](Engine[0x8DF2E5447F384B9](), "lobbyRoot.gameClientDataUpdate"))
+	Engine[@"forcenotifymodelsubscriptions"](Engine[@"createmodel"](Engine[@"getglobalmodel"](), "lobbyRoot.gameClientDataUpdate"))
 end
 LobbyVM.OnDediQosReady = function()
-	local f77_local0 = Engine[0x29A1F6E8893B96F](Lobby.Matchmaking.DatacenterType.ANY)
+	local f77_local0 = Engine[@"getdediqosresultsbytype"](Lobby.Matchmaking.DatacenterType.ANY)
 	if f77_local0.numResults == 0 then
-		Engine[0x5DF86CF48135674](Enum[0x7A63DCD561B0FA8][0xC1DE3DC19B3B20D], "Engine told us results were ready, but no results available\n")
+		Engine[@"printwarning"](Enum[@"consolelabel_e"][@"con_label_lobby"], "Engine told us results were ready, but no results available\n")
 	else
 		servers = f77_local0.pingResults
 		for f77_local4, f77_local5 in ipairs(servers) do
-			Engine[0xDE279ECDDDD966](Engine[0xA5B9C0111291A8B](), 0x744BF3845B0D442, {
-				[0xF90406E9A94ABE6] = f77_local5.location,
-				[0xF30E00DC53307A9] = f77_local5.ping,
+			Engine[0xDE279ECDDDD966](Engine[@"getprimarycontroller"](), @"hash_6744BF3845B0D442", {
+				[@"location"] = f77_local5.location,
+				[@"ping"] = f77_local5.ping,
 			})
 		end
 	end
@@ -1213,7 +1213,7 @@ LobbyVM.OnPump = function(f80_arg0)
 	if Lobby.Join.autoJoin.leaveServerImmediately == true then
 		Lobby.Join.autoJoin.leaveServerImmediately = false
 		if not CoDShared.IsInTheaterLobby() then
-			Engine[0x81B232D8CD69A4B]()
+			Engine[@"leaveserverimmediately"]()
 		end
 	end
 end
@@ -1228,11 +1228,11 @@ LobbyVM.GetLootItemCategory = function(f83_arg0)
 	local f83_local0 = "gamedata/loot/mplootitems.csv"
 	local f83_local1 = 1
 	local f83_local2 = 2
-	local f83_local3 = Engine[0x910CBCCD3C164C9](f83_local0, f83_local1, f83_arg0)
+	local f83_local3 = Engine[@"tablefindrows"](f83_local0, f83_local1, f83_arg0)
 	if f83_local3 == nil or #f83_local3 == 0 then
 		return -1
 	else
-		local f83_local4 = Engine[0x5A4D00DABC5F44B](f83_local0, f83_local3[1], f83_local2)
+		local f83_local4 = Engine[@"tablelookupgetcolumnvalueforrow"](f83_local0, f83_local3[1], f83_local2)
 		if f83_local4 == nil then
 			return -1
 		else
@@ -1241,14 +1241,14 @@ LobbyVM.GetLootItemCategory = function(f83_arg0)
 	end
 end
 LobbyVM.GetRecentItemTags = function(f84_arg0, f84_arg1)
-	local f84_local0 = Engine[0xF9DEF4016ECF1FB](f84_arg0, Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5], 0, Engine[0xE3E5F674ECC4A61](f84_arg0, Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5]))
+	local f84_local0 = Engine[@"getlootitems"](f84_arg0, Enum[@"emodes"][@"mode_multiplayer"], 0, Engine[@"getlootitemcount"](f84_arg0, Enum[@"emodes"][@"mode_multiplayer"]))
 	local f84_local1 = LuaUtils.GetCurrentLootVersion()
 	local f84_local2 = "gamedata/loot/mplootitems.csv"
-	local f84_local3 = Engine[0x910CBCCD3C164C9](f84_local2, 2, f84_arg1)
+	local f84_local3 = Engine[@"tablefindrows"](f84_local2, 2, f84_arg1)
 	local f84_local4 = 6
 	local f84_local5 = 0
 	for f84_local10, f84_local11 in ipairs(f84_local3) do
-		local f84_local9 = Engine[0x5A4D00DABC5F44B](f84_local2, f84_local11, f84_local4)
+		local f84_local9 = Engine[@"tablelookupgetcolumnvalueforrow"](f84_local2, f84_local11, f84_local4)
 		if f84_local9 == nil or f84_local9 == "" then
 			f84_local9 = -1
 		else
@@ -1287,7 +1287,7 @@ LobbyVM.OnBuyCrate = function(f85_arg0)
 	local f85_local1 = ' "PurchaseWith": "' .. f85_arg0.currency .. '", '
 	local f85_local2 = ' "Rank": [], '
 	local f85_local3 = ' "ExcludeTag": [], '
-	local f85_local4 = ' "InventoryVersion": [ ' .. Dvar[0x7EC5101FF8361D3]:get() .. " ] "
+	local f85_local4 = ' "InventoryVersion": [ ' .. Dvar[@"loot_mpitemversions"]:get() .. " ] "
 	local f85_local5 = false
 	local f85_local6 = ""
 	if f85_arg0.crateDWID == 32 then
@@ -1304,38 +1304,38 @@ LobbyVM.OnBuyCrate = function(f85_arg0)
 			f85_local3 = f85_local3 .. f85_local7
 		end
 		f85_local3 = f85_local3 .. " ], "
-		Engine[0x8C5711DAACC99F4](Enum[0x7A63DCD561B0FA8][0x1725ABF82092BD8], "Excluding: " .. f85_local3 .. ".\n")
+		Engine[@"printinfo"](Enum[@"consolelabel_e"][@"con_label_default"], "Excluding: " .. f85_local3 .. ".\n")
 	end
 	return f85_local0 .. f85_local1 .. f85_local2 .. f85_local3 .. f85_local4
 end
 LobbyVM.DLCInfo = {
 	{
-		dlcIndex = Enum[0x15A59C8C59697E5][0xAE7A7ACDC9568EC],
+		dlcIndex = Enum[@"dlcindex_t"][@"content_dlc1_index"],
 		dlcPackName = "dlc1",
 		inventoryVersion = 101,
 	},
 	{
-		dlcIndex = Enum[0x15A59C8C59697E5][0x186BB7D796153ED],
+		dlcIndex = Enum[@"dlcindex_t"][@"content_dlc2_index"],
 		dlcPackName = "dlc2",
 		inventoryVersion = 102,
 	},
 	{
-		dlcIndex = Enum[0x15A59C8C59697E5][0xA15323F2E0DB8C2],
+		dlcIndex = Enum[@"dlcindex_t"][@"content_dlc3_index"],
 		dlcPackName = "dlc3",
 		inventoryVersion = 103,
 	},
 	{
-		dlcIndex = Enum[0x15A59C8C59697E5][0x3AC6F0A427CC963],
+		dlcIndex = Enum[@"dlcindex_t"][@"content_dlc4_index"],
 		dlcPackName = "dlc4",
 		inventoryVersion = 104,
 	},
 }
 LobbyVM.OnSpendVials = function(f86_arg0)
 	local f86_local0 = ' "NumVials": ' .. f86_arg0.vialCount .. ", "
-	local f86_local1 = ' "InventoryVersion": [' .. Dvar[0x1FE5ADAF8E375DF]:get() .. " "
-	local f86_local2 = Engine[0x22EAAB59AA27E9B]("tu9_highestAvailableDLC")
+	local f86_local1 = ' "InventoryVersion": [' .. Dvar[@"loot_zmitemversions"]:get() .. " "
+	local f86_local2 = Engine[@"getdvarint"]("tu9_highestAvailableDLC")
 	for f86_local6, f86_local7 in ipairs(LobbyVM.DLCInfo) do
-		if f86_local7.dlcIndex <= f86_local2 and Engine[0xB521CB398C92692](f86_arg0.controller, Engine[0xC53F8D38DF9042B](f86_local7.dlcPackName)) then
+		if f86_local7.dlcIndex <= f86_local2 and Engine[@"hasentitlement"](f86_arg0.controller, Engine[@"converttoxhash"](f86_local7.dlcPackName)) then
 			f86_local1 = f86_local1 .. ", " .. f86_local7.inventoryVersion .. " "
 		end
 	end
@@ -1354,44 +1354,44 @@ LobbyVM.OnInventoryFetched = function(f87_arg0)
 	local f87_local3 = 2
 	local f87_local4 = false
 	for f87_local8, f87_local9 in ipairs(f87_local0) do
-		if Engine[0xDCACE8F075B721B](f87_arg0.controller, tonumber(Engine[0x2DCF0973239E909](nil, f87_local1, f87_local2, f87_local9, f87_local3))) > 0 then
-			Engine[0x280E4C1191CC53D](f87_arg0.controller, f87_local9, "1")
+		if Engine[@"getinventoryitemquantity"](f87_arg0.controller, tonumber(Engine[@"tablelookup"](nil, f87_local1, f87_local2, f87_local9, f87_local3))) > 0 then
+			Engine[@"setprofilevar"](f87_arg0.controller, f87_local9, "1")
 			f87_local4 = true
 		end
 	end
 	if f87_local4 then
-		Engine[0x16C9486C6451EEE](f87_arg0.controller)
+		Engine[@"commitprofilechanges"](f87_arg0.controller)
 	end
 end
 LobbyVM.CheckSpecialPlaylistRules = function(f88_arg0)
-	if Dvar[0xE21BBE3614F731D]:get() == true then
-		if Engine[0x4160EF6B98737EF]() and not Engine[0x1B09567078C4A6F]() then
-			Dvar[0xE21BBE3614F731D]:set(false)
-			Engine[0xBC42C678E40DBE8](Enum[0xE4C65AA61FAEC38][0x100911D2B38A4EF], Engine[0xF9F1239CFD921FE](0x22BE13738744598))
+	if Dvar[@"partychatdisallowed"]:get() == true then
+		if Engine[@"islocalclientinplatformpartychat"]() and not Engine[@"isincomerror"]() then
+			Dvar[@"partychatdisallowed"]:set(false)
+			Engine[@"comerror"](Enum[@"errorcode"][@"error_drop"], Engine[@"hash_4F9F1239CFD921FE"](@"hash_422BE13738744598"))
 		end
-		local f88_local0 = Engine[0x755D55B3813D249](Enum[0x7CA2DE5266A94BF][0x98EA1BB7164D103], Enum[0xBF54BE1BB3D618B][0x92676CF5B6FCD43])
+		local f88_local0 = Engine[@"lobbygetsessionclients"](Enum[@"lobbymodule"][@"lobby_module_host"], Enum[@"lobbytype"][@"lobby_type_game"])
 		for f88_local4, f88_local5 in ipairs(f88_local0.sessionClients) do
 			if f88_local5.isInPlatformPartyChat == true then
-				Engine[0x3C379E096BB7570](f88_arg0, Enum[0xBF54BE1BB3D618B][0x92676CF5B6FCD43], f88_local5.xuid, Enum[0x3EB01916743DF12][0x6EF5F11FAA609FC], 0x22BE13738744598)
+				Engine[@"kickclient"](f88_arg0, Enum[@"lobbytype"][@"lobby_type_game"], f88_local5.xuid, Enum[@"lobbydisconnectclient"][@"lobby_disconnect_client_nopartychat"], @"hash_422BE13738744598")
 			end
 		end
 	end
 end
 LobbyVM.IngameMonitor = function()
-	if not Engine[0x7B48C1ABFF0F764]() then
+	if not Engine[@"isingame"]() then
 		return
-	elseif (Engine[0xE39F1F30B306065]() or CoDShared.IsLobbyMode(Enum[0x8409AA0F01B5DBC][0xBB5FD8AEFC4D4B9])) and Dvar[0xE21BBE3614F731D]:get() and Engine[0x3E68E350BEFE50D](Enum[0x7CA2DE5266A94BF][0x98EA1BB7164D103], Enum[0xBF54BE1BB3D618B][0x92676CF5B6FCD43]) then
-		local f89_local0 = Engine[0x755D55B3813D249](Enum[0x7CA2DE5266A94BF][0x98EA1BB7164D103], Enum[0xBF54BE1BB3D618B][0x92676CF5B6FCD43])
-		local f89_local1 = Engine[0x3797858022DCB59](Enum[0xBF54BE1BB3D618B][0x92676CF5B6FCD43])
+	elseif (Engine[@"isdedicatedserver"]() or CoDShared.IsLobbyMode(Enum[@"lobbymode"][@"lobby_mode_public"])) and Dvar[@"partychatdisallowed"]:get() and Engine[@"islobbyactive"](Enum[@"lobbymodule"][@"lobby_module_host"], Enum[@"lobbytype"][@"lobby_type_game"]) then
+		local f89_local0 = Engine[@"lobbygetsessionclients"](Enum[@"lobbymodule"][@"lobby_module_host"], Enum[@"lobbytype"][@"lobby_type_game"])
+		local f89_local1 = Engine[@"getlobbyhostcontrollerindex"](Enum[@"lobbytype"][@"lobby_type_game"])
 		for f89_local5, f89_local6 in ipairs(f89_local0.sessionClients) do
 			if f89_local6.isInPlatformPartyChat == true then
-				Engine[0x3C379E096BB7570](f89_local1, Enum[0xBF54BE1BB3D618B][0x92676CF5B6FCD43], f89_local6.xuid, Enum[0x3EB01916743DF12][0x6EF5F11FAA609FC], 0x22BE13738744598)
+				Engine[@"kickclient"](f89_local1, Enum[@"lobbytype"][@"lobby_type_game"], f89_local6.xuid, Enum[@"lobbydisconnectclient"][@"lobby_disconnect_client_nopartychat"], @"hash_422BE13738744598")
 			end
 		end
 	end
 end
 LobbyVM.OnMessageReceived = function(f90_arg0)
-	if f90_arg0.msgType == Enum[0x3901A96E6973A52][0x2DF0374DB931C86] then
+	if f90_arg0.msgType == Enum[@"msgtype"][@"message_type_lobby_host_lobby_move"] then
 		LobbyVM.ProcesMoveLobby(f90_arg0)
 	end
 end
@@ -1400,13 +1400,13 @@ LobbyVM.ProcesMoveLobby = function(f91_arg0)
 	local f91_local1 = f91_arg0.lobbyType
 	local f91_local2 = f91_arg0.lobbyTypeMoveFrom
 	local f91_local3 = f91_local1
-	Engine[0xC31C302EB4FEC60](Enum[0x7CA2DE5266A94BF][0xC46B73E8E18BA2], f91_local2, f91_local3)
-	Engine[0xBB840C7E3D32BD6](Enum[0x7CA2DE5266A94BF][0x98EA1BB7164D103], f91_local3)
-	Engine[0xBB840C7E3D32BD6](Enum[0x7CA2DE5266A94BF][0x98EA1BB7164D103], f91_local2)
-	Engine[0xBB840C7E3D32BD6](Enum[0x7CA2DE5266A94BF][0xC46B73E8E18BA2], f91_local2)
-	local f91_local4 = Engine[0x755D55B3813D249](Enum[0x7CA2DE5266A94BF][0xC46B73E8E18BA2], f91_local3)
+	Engine[@"copylobbysession"](Enum[@"lobbymodule"][@"lobby_module_client"], f91_local2, f91_local3)
+	Engine[@"clearlobbysession"](Enum[@"lobbymodule"][@"lobby_module_host"], f91_local3)
+	Engine[@"clearlobbysession"](Enum[@"lobbymodule"][@"lobby_module_host"], f91_local2)
+	Engine[@"clearlobbysession"](Enum[@"lobbymodule"][@"lobby_module_client"], f91_local2)
+	local f91_local4 = Engine[@"lobbygetsessionclients"](Enum[@"lobbymodule"][@"lobby_module_client"], f91_local3)
 	for f91_local8, f91_local9 in ipairs(f91_local4.sessionClients) do
-		Engine[0x5D28F97B2C14CD7](f91_local0, f91_local3, f91_local9.xuid)
+		Engine[@"hash_35D28F97B2C14CD7"](f91_local0, f91_local3, f91_local9.xuid)
 	end
 end
 LobbyVM.OnPublisherVarScript = function(f92_arg0)
@@ -1431,7 +1431,7 @@ LobbyVM.OnPublisherVarScript = function(f92_arg0)
 					f92_local4 = false
 				end
 			else
-				Engine[0x8C5711DAACC99F4](Enum[0x7A63DCD561B0FA8][0xD48A9770CD84BB6], "Unknown publisher variable type [" .. f92_local3 .. "] \n")
+				Engine[@"printinfo"](Enum[@"consolelabel_e"][@"con_label_lobbyclient"], "Unknown publisher variable type [" .. f92_local3 .. "] \n")
 			end
 			f92_local0[f92_local2] = f92_local4
 		end
@@ -1443,7 +1443,7 @@ LobbyVM.OnPublisherVarScript = function(f92_arg0)
 	if LobbyVM ~= nil then
 		Lobby.Events.EventDispatcher(f92_arg0.name, f92_local0)
 	else
-		Engine[0x87AE7E64BA5AD61](f92_arg0.name, f92_local0)
+		Engine[@"lobbyevent"](f92_arg0.name, f92_local0)
 	end
 end
 LobbyVM.OnGetMapName = function(f93_arg0)
@@ -1454,31 +1454,31 @@ LobbyVM.OnCanFitPlayers = function(f94_arg0)
 	local f94_local1 = f94_arg0.reservationCount
 	local f94_local2 = f94_arg0.clientCount
 	local f94_local3 = f94_arg0.memberCount
-	local f94_local4 = Engine[0xA63E42B2FB6EC02]()
+	local f94_local4 = Engine[@"getlobbynetworkmode"]()
 	local f94_local5
-	if f94_local4 ~= Enum[0xC84D3E505F1444][0xDB898B3478D2D71] and f94_local4 ~= Enum[0xC84D3E505F1444][0xBAA8EC6F3E77255] then
+	if f94_local4 ~= Enum[@"lobbynetworkmode"][@"lobby_networkmode_invalid"] and f94_local4 ~= Enum[@"lobbynetworkmode"][@"lobby_networkmode_lan"] then
 		f94_local5 = false
 	else
 		f94_local5 = true
 	end
-	if f94_local5 == false and f94_local0 == Enum[0xBF54BE1BB3D618B][0xA1647599284110] and f94_local1 + f94_local2 + f94_local3 > Dvar[0x4FF45B41C6046F8]:get() then
+	if f94_local5 == false and f94_local0 == Enum[@"lobbytype"][@"lobby_type_private"] and f94_local1 + f94_local2 + f94_local3 > Dvar[@"hash_4FF45B41C6046F8"]:get() then
 		return false
 	else
 		return true
 	end
 end
 LobbyVM.OnLobbyAsyncMatchmakerStart = function(f95_arg0)
-	if Lobby.ProcessQueue.GetCurrentRunningProcessName() ~= "FindWarZoneServer" and Engine[0x3EAC408F958FF05]() == Enum[0x9C0C2196D8313A0][0xBF1DCC8138A9D39] then
+	if Lobby.ProcessQueue.GetCurrentRunningProcessName() ~= "FindWarZoneServer" and Engine[@"currentsessionmode"]() == Enum[@"emodes"][@"mode_warzone"] then
 		Lobby.ProcessQueue.AddToQueue("FindWarZoneServer", Lobby.Process.AsyncMatchmakingStartAsyncMatchmaker(f95_arg0.controller))
 	end
 end
 LobbyVM.OnLobbyAsyncMatchmakerRedeploy = function(f96_arg0)
-	if Lobby.ProcessQueue.GetCurrentRunningProcessName() ~= "Redeploy" and Engine[0x3EAC408F958FF05]() == Enum[0x9C0C2196D8313A0][0xBF1DCC8138A9D39] then
+	if Lobby.ProcessQueue.GetCurrentRunningProcessName() ~= "Redeploy" and Engine[@"currentsessionmode"]() == Enum[@"emodes"][@"mode_warzone"] then
 		Lobby.ProcessQueue.AddToQueue("Redeploy", Lobby.Process.AsyncMatchmakingStartAsyncMatchmaker(f96_arg0.controller))
 	end
 end
 LobbyVM.TestFFOTDFnOverride = function()
-	Engine[0x458FE92FEB39D4E](Enum[0x7A63DCD561B0FA8][0xA9AE284CC7DE955], "Failed to override Lobby VM funtion from FFOTD.\n")
+	Engine[@"printerror"](Enum[@"consolelabel_e"][@"con_label_live"], "Failed to override Lobby VM funtion from FFOTD.\n")
 	error("Failed to override Lobby VM funtion from FFOTD.")
 end
 require("x64:eef8dcfe7b2aafc")

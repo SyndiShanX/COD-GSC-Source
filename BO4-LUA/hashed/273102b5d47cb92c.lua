@@ -19,8 +19,8 @@ CoD.AttackerVictimInfoBar_Container.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 			stateName = "Visible",
 			condition = function(menu, element, event)
 				local f2_local0
-				if not CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg1, "hudItems.killedByMOD", Enum[0x52177B239BFECC1][0x2C99EB591CE8EB6]) and not CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg1, "hudItems.killedByMOD", Enum[0x52177B239BFECC1][0xEBD7B5999BC11B0]) then
-					f2_local0 = not CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg1, "hudItems.killedByMOD", Enum[0x52177B239BFECC1][0x6EF8543A25EF511])
+				if not CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg1, "hudItems.killedByMOD", Enum[@"meansofdeath_t"][@"mod_unknown"]) and not CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg1, "hudItems.killedByMOD", Enum[@"meansofdeath_t"][@"mod_suicide"]) then
+					f2_local0 = not CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg1, "hudItems.killedByMOD", Enum[@"meansofdeath_t"][@"mod_meta"])
 				else
 					f2_local0 = false
 				end
@@ -30,7 +30,7 @@ CoD.AttackerVictimInfoBar_Container.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	})
 	local f1_local2 = self
 	local f1_local3 = self.subscribeToModel
-	local f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local3(f1_local2, f1_local4["hudItems.killedByMOD"], function(f3_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

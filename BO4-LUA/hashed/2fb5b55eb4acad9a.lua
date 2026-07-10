@@ -14,7 +14,7 @@ CoD.LaboratoryPlasma_PopoutContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local SceneBlur = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	SceneBlur:setRGB(0, 0, 0)
-	SceneBlur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	SceneBlur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	SceneBlur:setShaderVector(0, 0, 0.4, 0, 0)
 	self:addElement(SceneBlur)
 	self.SceneBlur = SceneBlur
@@ -25,8 +25,8 @@ CoD.LaboratoryPlasma_PopoutContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	self.leftBackground = leftBackground
 	local NoiseTiledBacking = LUI.UIImage.new(0, 0, 0.5, 798.5, 0, 1, 0, 0)
 	NoiseTiledBacking:setAlpha(0.6)
-	NoiseTiledBacking:setImage(RegisterImage(0x34839E8065B1E53))
-	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	NoiseTiledBacking:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	NoiseTiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	NoiseTiledBacking:setupNineSliceShader(196, 88)
 	self:addElement(NoiseTiledBacking)
@@ -34,8 +34,8 @@ CoD.LaboratoryPlasma_PopoutContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	local StoneTiledBacking = LUI.UIImage.new(0, 0, 0, 799, 0, 0, 1, 207)
 	StoneTiledBacking:setRGB(0.83, 0.11, 0.01)
 	StoneTiledBacking:setAlpha(0.8)
-	StoneTiledBacking:setImage(RegisterImage(0x33757173B476ACD))
-	StoneTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	StoneTiledBacking:setImage(RegisterImage(@"uie_ui_zm_laboratory_buttonbgtile"))
+	StoneTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	StoneTiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	StoneTiledBacking:setupNineSliceShader(196, 88)
 	self:addElement(StoneTiledBacking)
@@ -52,8 +52,8 @@ CoD.LaboratoryPlasma_PopoutContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	self.Divider = Divider
 	local tileTexture = LUI.UIImage.new(0.5, 0.5, -400, 400, 0, 1, 0, 0)
 	tileTexture:setAlpha(0.5)
-	tileTexture:setImage(RegisterImage(0xA38BB233841162F))
-	tileTexture:setMaterial(LUI.UIImage.GetCachedMaterial(0xD8EA9FE9B0BCF75))
+	tileTexture:setImage(RegisterImage(@"uie_t7_tile_texture"))
+	tileTexture:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_tile_scroll"))
 	tileTexture:setShaderVector(0, 30, 55, 0, 0)
 	tileTexture:setShaderVector(1, 0, 0, 0, 0)
 	self:addElement(tileTexture)
@@ -64,13 +64,13 @@ CoD.LaboratoryPlasma_PopoutContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	List:setWidgetType(CoD.LaboratoryPlasma_ListButton)
 	List:setVerticalCount(3)
 	List:setSpacing(19)
-	List:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	List:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	List:setFilter(function(f2_arg0)
 		return f2_arg0.isFeatured:get() ~= true
 	end)
 	List:setDataSource("ZMLaboratoryPlasmaItemList")
 	List:linkToElementModel(List, "disabled", true, function(model, f3_arg1)
-		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	List:registerEventHandler("gain_focus", function(element, event)
 		local f4_local0 = nil
@@ -79,10 +79,10 @@ CoD.LaboratoryPlasma_PopoutContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f
 		elseif element.super.gainFocus then
 			f4_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f4_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(List, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(List, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if not IsDisabled(element, controller) then
 			ProcessListAction(self, element, controller, menu)
 			return true
@@ -90,7 +90,7 @@ CoD.LaboratoryPlasma_PopoutContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f
 		end
 	end, function(element, menu, controller)
 		if not IsDisabled(element, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		else
 			return false
@@ -100,27 +100,27 @@ CoD.LaboratoryPlasma_PopoutContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	self.List = List
 	local titlePurchasePlasma = LUI.UIText.new(0.5, 0.5, -325.5, 326.5, 0, 0, 175.5, 205.5)
 	titlePurchasePlasma:setRGB(0.58, 0.85, 1)
-	titlePurchasePlasma:setText(LocalizeToUpperString(0x29616DF01C4B70B))
+	titlePurchasePlasma:setText(LocalizeToUpperString(@"hash_29616DF01C4B70B"))
 	titlePurchasePlasma:setTTF("skorzhen")
 	titlePurchasePlasma:setLetterSpacing(5)
-	titlePurchasePlasma:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	titlePurchasePlasma:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	titlePurchasePlasma:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	titlePurchasePlasma:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(titlePurchasePlasma)
 	self.titlePurchasePlasma = titlePurchasePlasma
 	local titleNotEnoughPlasma = LUI.UIText.new(0.5, 0.5, -325.5, 326.5, 0, 0, 175.5, 205.5)
 	titleNotEnoughPlasma:setRGB(0.58, 0.85, 1)
-	titleNotEnoughPlasma:setText(LocalizeToUpperString(0xDFE20BB2A710F9C))
+	titleNotEnoughPlasma:setText(LocalizeToUpperString(@"hash_1DFE20BB2A710F9C"))
 	titleNotEnoughPlasma:setTTF("skorzhen")
 	titleNotEnoughPlasma:setLetterSpacing(5)
-	titleNotEnoughPlasma:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	titleNotEnoughPlasma:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	titleNotEnoughPlasma:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	titleNotEnoughPlasma:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(titleNotEnoughPlasma)
 	self.titleNotEnoughPlasma = titleNotEnoughPlasma
 	local reason = LUI.UIText.new(0.5, 0.5, -324.5, 325.5, 0, 0, 231.5, 251.5)
 	reason:setRGB(ColorSet.T8__OFF__GRAY.r, ColorSet.T8__OFF__GRAY.g, ColorSet.T8__OFF__GRAY.b)
 	reason:setTTF("dinnext_regular")
-	reason:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	reason:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	reason:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	reason:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	reason:linkToElementModel(self, "plasmaPrice", true, function(model)
 		local f7_local0 = model:get()
 		if f7_local0 ~= nil then
@@ -133,13 +133,13 @@ CoD.LaboratoryPlasma_PopoutContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	Featured:setLeftRight(0, 0, 76, 726)
 	Featured:setTopBottom(0, 0, 355, 445)
 	Featured:setWidgetType(CoD.LaboratoryPlasma_ListButton)
-	Featured:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	Featured:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	Featured:setFilter(function(f8_arg0)
 		return f8_arg0.isFeatured:get() == true
 	end)
 	Featured:setDataSource("ZMLaboratoryPlasmaItemList")
 	Featured:linkToElementModel(Featured, "disabled", true, function(model, f9_arg1)
-		CoD.Menu.UpdateButtonShownState(f9_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f9_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	Featured:registerEventHandler("gain_focus", function(element, event)
 		local f10_local0 = nil
@@ -148,10 +148,10 @@ CoD.LaboratoryPlasma_PopoutContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f
 		elseif element.super.gainFocus then
 			f10_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f10_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(Featured, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(Featured, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if not IsDisabled(element, controller) then
 			ProcessListAction(self, element, controller, menu)
 			return true
@@ -159,7 +159,7 @@ CoD.LaboratoryPlasma_PopoutContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f
 		end
 	end, function(element, menu, controller)
 		if not IsDisabled(element, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		else
 			return false
@@ -170,13 +170,13 @@ CoD.LaboratoryPlasma_PopoutContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	local BgZmStar = LUI.UIImage.new(0.5, 0.5, -100, 100, 0, 0, 107, 307)
 	BgZmStar:setRGB(ColorSet.T8__OFF__GRAY.r, ColorSet.T8__OFF__GRAY.g, ColorSet.T8__OFF__GRAY.b)
 	BgZmStar:setAlpha(0.4)
-	BgZmStar:setImage(RegisterImage(0x37B9CCC18877DAA))
-	BgZmStar:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	BgZmStar:setImage(RegisterImage(@"uie_ui_hud_zm_arr_reward_star"))
+	BgZmStar:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	BgZmStar:setShaderVector(0, 4, 0, 0, 0)
 	self:addElement(BgZmStar)
 	self.BgZmStar = BgZmStar
 	local DividerCenter = LUI.UIImage.new(0.5, 0.5, -7.5, 7.5, 0.5, 0.5, -1.5, 13.5)
-	DividerCenter:setImage(RegisterImage(0x1EC82771A88A0E6))
+	DividerCenter:setImage(RegisterImage(@"hash_61EC82771A88A0E6"))
 	self:addElement(DividerCenter)
 	self.DividerCenter = DividerCenter
 	local HeaderUnderline = CoD.zm_LaboratoryDescriptionDivider.new(f1_arg0, f1_arg1, 0.5, 0.5, -324.5, 324.5, 0, 0, 191, 223)
@@ -184,14 +184,14 @@ CoD.LaboratoryPlasma_PopoutContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	self.HeaderUnderline = HeaderUnderline
 	local SideBar = LUI.UIImage.new(0, 0, -2, 3, 0, 1, 0, 0)
 	SideBar:setAlpha(0.25)
-	SideBar:setImage(RegisterImage(0x38DA8EF7E70CB06))
+	SideBar:setImage(RegisterImage(@"hash_638DA8EF7E70CB06"))
 	self:addElement(SideBar)
 	self.SideBar = SideBar
 	local SideBar2 = nil
 	SideBar2 = LUI.UIImage.new(0, 0, 796, 801, 0, 1, 0, 0)
 	SideBar2:setAlpha(0.25)
 	SideBar2:setYRot(180)
-	SideBar2:setImage(RegisterImage(0x38DA8EF7E70CB06))
+	SideBar2:setImage(RegisterImage(@"hash_638DA8EF7E70CB06"))
 	self:addElement(SideBar2)
 	self.SideBar2 = SideBar2
 	local CommonIdentityWidgetStreamlined = CoD.CommonIdentityWidgetStreamlined.new(f1_arg0, f1_arg1, 1, 1, -603.5, -73.5, 0, 0, 87, 127)

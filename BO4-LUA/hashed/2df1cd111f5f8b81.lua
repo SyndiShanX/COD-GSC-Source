@@ -9,13 +9,13 @@ CoD.PC_Korea_Event_Day_Progression.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local EmptyStarImage = LUI.UIImage.new(0.5, 0.5, -48, 48, 0.5, 0.5, -53, 43)
 	EmptyStarImage:setRGB(0.8, 0.8, 0.8)
-	EmptyStarImage:setImage(RegisterImage(0x348714DC6D56380))
+	EmptyStarImage:setImage(RegisterImage(@"uie_pc_igrevent_weekprogression_star_empty"))
 	self:addElement(EmptyStarImage)
 	self.EmptyStarImage = EmptyStarImage
 	local StarImage = LUI.UIImage.new(0.5, 0.5, -48, 48, 0.5, 0.5, -53, 43)
 	StarImage:setAlpha(0)
-	StarImage:setImage(RegisterImage(0x78D95A993908FDE))
-	StarImage:setMaterial(LUI.UIImage.GetCachedMaterial(0x98A2728B4675FB5))
+	StarImage:setImage(RegisterImage(@"uie_pc_igrevent_weekprogression_star"))
+	StarImage:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_glint"))
 	StarImage:setShaderVector(0, 0, 0, 0, 0)
 	StarImage:setShaderVector(1, -46.8, 0, 0, 0)
 	self:addElement(StarImage)
@@ -70,7 +70,7 @@ CoD.PC_Korea_Event_Day_Progression.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	end)
 	local f1_local4 = self
 	local f1_local5 = self.subscribeToModel
-	local f1_local6 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local6 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local5(f1_local4, f1_local6["PCKoreaEventCurrentDayProgression.showStarCompletedAnimation"], function(f7_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

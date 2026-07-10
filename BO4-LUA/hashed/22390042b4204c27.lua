@@ -14,13 +14,13 @@ LUI.createMenu.Theater_SelectFilm = function(f1_arg0, f1_arg1)
 	self.anyChildUsesUpdateState = true
 	local BGBlur = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	BGBlur:setRGB(0.08, 0.08, 0.08)
-	BGBlur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	BGBlur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	BGBlur:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(BGBlur)
 	self.BGBlur = BGBlur
 	local BGBlack = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	BGBlack:setAlpha(0.9)
-	BGBlack:setImage(RegisterImage(0x4BF88A437F4C579))
+	BGBlack:setImage(RegisterImage(@"uie_fe_cp_background"))
 	self:addElement(BGBlack)
 	self.BGBlack = BGBlack
 	local Background = CoD.StartMenuOptionsBackground.new(f1_local1, f1_arg0, 0, 1, 0, 0, 0, 1, 0, 0)
@@ -52,11 +52,11 @@ LUI.createMenu.Theater_SelectFilm = function(f1_arg0, f1_arg1)
 	self:addElement(DirectorTheaterSelectFile)
 	self.DirectorTheaterSelectFile = DirectorTheaterSelectFile
 	local GenericMenuFrameIdentity = CoD.GenericMenuFrameIdentity.new(f1_local1, f1_arg0, 0.5, 0.5, -960, 960, 0, 1, 0, 0)
-	GenericMenuFrameIdentity.CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(0x60E17AB37AB4874))
+	GenericMenuFrameIdentity.CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(@"menu/theater"))
 	GenericMenuFrameIdentity:subscribeToGlobalModel(f1_arg0, "LobbyRoot", "lobbyTitle", function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
-			GenericMenuFrameIdentity.CommonHeader.subtitle.subtitle:setText(Engine[0xF9F1239CFD921FE](f3_local0))
+			GenericMenuFrameIdentity.CommonHeader.subtitle.subtitle:setText(Engine[@"hash_4F9F1239CFD921FE"](f3_local0))
 		end
 	end)
 	self:addElement(GenericMenuFrameIdentity)
@@ -74,7 +74,7 @@ LUI.createMenu.Theater_SelectFilm = function(f1_arg0, f1_arg1)
 		end
 		return f4_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		CoD.FileshareUtility.ClearCurrentFilter()
 		CoD.FileshareUtility.SetupFileshareForTheater(controller)
 		GoBack(self, controller)
@@ -82,7 +82,7 @@ LUI.createMenu.Theater_SelectFilm = function(f1_arg0, f1_arg1)
 		ResetThumbnailViewer(controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 		return true
 	end, false)
 	DirectorTheaterSelectFile.id = "DirectorTheaterSelectFile"

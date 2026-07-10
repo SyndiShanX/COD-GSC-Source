@@ -23,7 +23,7 @@ CoD.StartMenu_Personalization_WZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	self:addElement(FrameWidget)
 	self.FrameWidget = FrameWidget
 	local WZCharacterInfoContainer = CoD.WZCharacterInfoContainer.new(f1_arg0, f1_arg1, 0.5, 0.5, -683, -290, 0.5, 0.5, 71, 231)
-	WZCharacterInfoContainer.CharacterSelectionCharacterInfo.CharacterFullName:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	WZCharacterInfoContainer.CharacterSelectionCharacterInfo.CharacterFullName:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	WZCharacterInfoContainer:subscribeToGlobalModel(f1_arg1, "WZCharacterInfo", "infoModel", function(model)
 		CoD.WZUtility.SetElementModelToControllerModelValue(WZCharacterInfoContainer, f1_arg1, "WZCharacterInfo.infoModel")
 	end)
@@ -35,17 +35,17 @@ CoD.StartMenu_Personalization_WZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	options:setWidgetType(CoD.SpecialistPersonalizationButtonOption)
 	options:setVerticalCount(3)
 	options:setSpacing(13)
-	options:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	options:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	options:setDataSource("WZCharacterCategories")
 	options:appendEventHandler("input_source_changed", function(f5_arg0, f5_arg1)
 		f5_arg1.menu = f5_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f5_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f5_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	local f1_local4 = options
 	local f1_local5 = options.subscribeToModel
-	local f1_local6 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local6 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local5(f1_local4, f1_local6.LastInput, function(f6_arg0, f6_arg1)
-		CoD.Menu.UpdateButtonShownState(f6_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f6_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	options:registerEventHandler("input_source_changed", function(element, event)
 		local f7_local0 = nil
@@ -62,10 +62,10 @@ CoD.StartMenu_Personalization_WZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 		elseif element.super.gainFocus then
 			f8_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f8_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(options, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(options, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if IsMouseOrKeyboard(controller) then
 			SetCurrentElementAsActive(self, element, controller)
 			ProcessListAction(self, element, controller, menu)
@@ -75,7 +75,7 @@ CoD.StartMenu_Personalization_WZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 			return true
 		end
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 		return true
 	end, false)
 	self:addElement(options)
@@ -93,9 +93,9 @@ CoD.StartMenu_Personalization_WZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	f1_local5 = self.subscribeToModel
 	f1_local6 = DataSources.StartMenuBreadcrumbs.getModel(f1_arg1)
 	f1_local5(f1_local4, f1_local6["personalization.breadcrumbCount"], function(f13_arg0, f13_arg1)
-		CoD.Menu.UpdateButtonShownState(f13_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
+		CoD.Menu.UpdateButtonShownState(f13_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], nil, function(element, menu, controller, model)
 		if CoD.ModelUtility.IsGlobalDataSourceModelValueGreaterThan(controller, "StartMenuBreadcrumbs", "personalization.breadcrumbCount", 0) and not IsPC() then
 			CoD.BreadcrumbUtility.ClearAllPersonalizationBreadcrumbs(menu, controller)
 			UpdateElementState(self, "specialists", controller)
@@ -104,7 +104,7 @@ CoD.StartMenu_Personalization_WZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 		end
 	end, function(element, menu, controller)
 		if CoD.ModelUtility.IsGlobalDataSourceModelValueGreaterThan(controller, "StartMenuBreadcrumbs", "personalization.breadcrumbCount", 0) and not IsPC() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], 0x5619D8212EDA599, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], @"hash_65619D8212EDA599", nil, nil)
 			return true
 		else
 			return false

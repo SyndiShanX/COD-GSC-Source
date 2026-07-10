@@ -8,17 +8,17 @@ CoD.Codcaster_annoncement_bg.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local blur = LUI.UIImage.new(0.5, 0.5, -217, 217, 1.1, 1.1, -29, -9)
-	blur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	blur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	blur:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(blur)
 	self.blur = blur
 	local colorbg = LUI.UIImage.new(0.5, 0.5, -217, 217, 0, 0, 7, 27)
 	colorbg:setAlpha(0.9)
-	colorbg:setImage(RegisterImage(0x97941765AC1B3BE))
+	colorbg:setImage(RegisterImage(@"uie_codcaster_teamcolloredbg_generic"))
 	self:addElement(colorbg)
 	self.colorbg = colorbg
 	local AnnouncementImageBackground = LUI.UIImage.new(0.5, 0.5, -230, 230, 0, 0, 0, 32)
-	AnnouncementImageBackground:setImage(RegisterImage(0x5875249235577C3))
+	AnnouncementImageBackground:setImage(RegisterImage(@"uie_codcaster_announcement_bg"))
 	self:addElement(AnnouncementImageBackground)
 	self.AnnouncementImageBackground = AnnouncementImageBackground
 	if PostLoadFunc then

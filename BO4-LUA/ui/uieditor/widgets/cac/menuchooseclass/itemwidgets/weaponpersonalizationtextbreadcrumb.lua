@@ -13,8 +13,8 @@ CoD.WeaponPersonalizationTextBreadcrumb.new = function(f1_arg0, f1_arg1, f1_arg2
 	textCenterAlign:setRGB(0.8, 0.79, 0.78)
 	textCenterAlign:setText("")
 	textCenterAlign:setTTF("dinnext_regular")
-	textCenterAlign:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	textCenterAlign:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	textCenterAlign:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	textCenterAlign:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	textCenterAlign:setBackingType(1)
 	textCenterAlign:setBackingXPadding(15)
 	textCenterAlign:setBackingYPadding(7)
@@ -39,7 +39,7 @@ CoD.WeaponPersonalizationTextBreadcrumb.new = function(f1_arg0, f1_arg1, f1_arg2
 	})
 	local f1_local3 = Breadcrumb
 	local f1_local4 = Breadcrumb.subscribeToModel
-	local f1_local5 = Engine[0x8DF2E5447F384B9]()
+	local f1_local5 = Engine[@"getglobalmodel"]()
 	f1_local4(f1_local3, f1_local5["lobbyRoot.lobbyNetworkMode"], function(f3_arg0)
 		f1_arg0:updateElementState(Breadcrumb, {
 			name = "model_validation",
@@ -51,7 +51,7 @@ CoD.WeaponPersonalizationTextBreadcrumb.new = function(f1_arg0, f1_arg1, f1_arg2
 	end, false)
 	f1_local3 = Breadcrumb
 	f1_local4 = Breadcrumb.subscribeToModel
-	f1_local5 = Engine[0x8DF2E5447F384B9]()
+	f1_local5 = Engine[@"getglobalmodel"]()
 	f1_local4(f1_local3, f1_local5["lobbyRoot.lobbyNav"], function(f4_arg0)
 		f1_arg0:updateElementState(Breadcrumb, {
 			name = "model_validation",

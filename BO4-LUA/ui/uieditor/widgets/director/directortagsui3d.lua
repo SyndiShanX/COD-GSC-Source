@@ -7,7 +7,7 @@ CoD.DirectorTagsUI3D.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	self:setClass(CoD.DirectorTagsUI3D)
 	self.id = "DirectorTagsUI3D"
 	self.soundSet = "none"
-	Engine[0xF0AF2C4A29D15D7](f1_arg1, 1, 500, 500)
+	Engine[@"setupui3dwindow"](f1_arg1, 1, 500, 500)
 	self:setUI3DWindow(1)
 	self.anyChildUsesUpdateState = true
 	local DirectorTagsUI3DPlayer1 = CoD.DirectorTagsUI3DPlayer.new(f1_arg0, f1_arg1, 0, 0.25, 0, 0, 0, 0.25, 0, 0)

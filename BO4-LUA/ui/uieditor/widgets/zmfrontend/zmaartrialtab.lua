@@ -31,7 +31,7 @@ CoD.ZMAARTrialTab.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 	})
 	local f1_local3 = self
 	local f1_local4 = self.subscribeToModel
-	local f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local4(f1_local3, f1_local5["AAR.activeTab"], function(f4_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -72,7 +72,7 @@ CoD.ZMAARTrialTab.__clipsPerState = {
 			f7_arg0:__resetProperties()
 			f7_arg0:setupElementClipCounter(2)
 			local f7_local0 = function(f8_arg0)
-				f7_arg0.AarMpBacking:beginAnimation(150, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f7_arg0.AarMpBacking:beginAnimation(150, Enum[@"luitween"][@"luitween_ease_in"])
 				f7_arg0.AarMpBacking:setAlpha(1)
 				f7_arg0.AarMpBacking:registerEventHandler("interrupted_keyframe", f7_arg0.clipInterrupted)
 				f7_arg0.AarMpBacking:registerEventHandler("transition_complete_keyframe", f7_arg0.clipFinished)

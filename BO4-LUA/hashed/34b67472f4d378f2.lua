@@ -21,13 +21,13 @@ CoD.ZMTalismanListItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 		{
 			stateName = "NoConsumablesRemaining",
 			condition = function(menu, element, event)
-				return not CoD.CACUtility.DoesCACItemHaveConsumablesRemaining(menu, element, f1_arg1, Enum[0x6EB546760F890D2][0x5544C104CD15F10])
+				return not CoD.CACUtility.DoesCACItemHaveConsumablesRemaining(menu, element, f1_arg1, Enum[@"statindexoffset"][@"hash_15544C104CD15F10"])
 			end,
 		},
 	})
 	local f1_local2 = Talisman
 	local f1_local3 = Talisman.subscribeToModel
-	local f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local3(f1_local2, f1_local4["TalismanSelect.Update"], function(f4_arg0)
 		f1_arg0:updateElementState(Talisman, {
 			name = "model_validation",
@@ -64,7 +64,7 @@ CoD.ZMTalismanListItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	Talisman:linkToElementModel(self, "displayName", true, function(model)
 		local f10_local0 = model:get()
 		if f10_local0 ~= nil then
-			Talisman.itemName:setText(Engine[0xF9F1239CFD921FE](f10_local0))
+			Talisman.itemName:setText(Engine[@"hash_4F9F1239CFD921FE"](f10_local0))
 		end
 	end)
 	self:addElement(Talisman)

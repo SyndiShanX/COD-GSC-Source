@@ -23,7 +23,7 @@ CoD.ItemHintTextBreadcrumb.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	local textCenterAlign = LUI.UIText.new(0, 0, 11.5, 307.5, 0.5, 0.5, -10, 10)
 	textCenterAlign:setText("")
 	textCenterAlign:setTTF("dinnext_regular")
-	textCenterAlign:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	textCenterAlign:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	textCenterAlign:setBackingType(1)
 	textCenterAlign:setBackingXPadding(15)
 	textCenterAlign:setBackingYPadding(7)
@@ -51,7 +51,7 @@ CoD.ItemHintTextBreadcrumb.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	})
 	local f1_local6 = Breadcrumb
 	local Spacer2 = Breadcrumb.subscribeToModel
-	local f1_local8 = Engine[0x8DF2E5447F384B9]()
+	local f1_local8 = Engine[@"getglobalmodel"]()
 	Spacer2(f1_local6, f1_local8["lobbyRoot.lobbyNetworkMode"], function(f3_arg0)
 		f1_arg0:updateElementState(Breadcrumb, {
 			name = "model_validation",
@@ -63,7 +63,7 @@ CoD.ItemHintTextBreadcrumb.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	end, false)
 	f1_local6 = Breadcrumb
 	Spacer2 = Breadcrumb.subscribeToModel
-	f1_local8 = Engine[0x8DF2E5447F384B9]()
+	f1_local8 = Engine[@"getglobalmodel"]()
 	Spacer2(f1_local6, f1_local8["lobbyRoot.lobbyNav"], function(f4_arg0)
 		f1_arg0:updateElementState(Breadcrumb, {
 			name = "model_validation",
@@ -113,7 +113,7 @@ CoD.ItemHintTextBreadcrumb.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	end)
 	f1_local8 = self
 	f1_local6 = self.subscribeToModel
-	local f1_local9 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local9 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local6(f1_local8, f1_local9.LastInput, function(f10_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

@@ -14,7 +14,7 @@ LUI.createMenu.Store_DLC = function(f1_arg0, f1_arg1)
 	self:playSound("menu_open", f1_arg0)
 	self.anyChildUsesUpdateState = true
 	local Background = LUI.UIImage.new(0.5, 0.5, -957, 963, 0.5, 0.5, -540, 540)
-	Background:setImage(RegisterImage(0xEF427A6CB5D6885))
+	Background:setImage(RegisterImage(@"uie_t7_mp_menu_cac_version6_backdrop720p"))
 	self:addElement(Background)
 	self.Background = Background
 	local editorBackground = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
@@ -23,11 +23,11 @@ LUI.createMenu.Store_DLC = function(f1_arg0, f1_arg1)
 	self:addElement(editorBackground)
 	self.editorBackground = editorBackground
 	local frame = CoD.GenericMenuFrameIdentity.new(f1_local1, f1_arg0, 0, 1, 0, 0, 0, 1, 0, 0)
-	frame.CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(0xBB7AA7A26F39DFA))
+	frame.CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(@"hash_BB7AA7A26F39DFA"))
 	frame:subscribeToGlobalModel(f1_arg0, "LobbyRoot", "lobbyTitle", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			frame.CommonHeader.subtitle.subtitle:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			frame.CommonHeader.subtitle.subtitle:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	self:addElement(frame)
@@ -46,21 +46,21 @@ LUI.createMenu.Store_DLC = function(f1_arg0, f1_arg1)
 		elseif self.super.menuLoaded then
 			f3_local0 = self.super:menuLoaded(event)
 		end
-		ShowPsStoreIcon(f1_arg0, Enum[0x784DC8CE13E1E13][0xF4B7EC4DCAA8AC4])
+		ShowPsStoreIcon(f1_arg0, Enum[@"hash_6784DC8CE13E1E13"][@"center"])
 		if not f3_local0 then
 			f3_local0 = self:dispatchEventToChildren(event)
 		end
 		return f3_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		GoBack(self, controller)
 		ClearMenuSavedState(menu)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0xA4032FB2AAB69F2, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"mp/back", nil, nil)
 		return true
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], nil, function(element, menu, controller, model)
 		if not IsPC() then
 			RedeemCode(self, element, controller)
 			return true
@@ -68,7 +68,7 @@ LUI.createMenu.Store_DLC = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if not IsPC() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0xAC7CDF7FDA3D9D3, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"hash_2AC7CDF7FDA3D9D3", nil, nil)
 			return true
 		else
 			return false

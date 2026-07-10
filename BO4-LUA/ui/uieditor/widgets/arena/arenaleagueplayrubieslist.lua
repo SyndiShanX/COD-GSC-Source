@@ -15,7 +15,7 @@ CoD.arenaLeaguePlayRubiesList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	rubiesListSlot:setWidgetType(CoD.arenaLeaguePlayRubySlot)
 	rubiesListSlot:setHorizontalCount(3)
 	rubiesListSlot:setSpacing(5)
-	rubiesListSlot:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	rubiesListSlot:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(rubiesListSlot)
 	self.rubiesListSlot = rubiesListSlot
 	local rubiesList = LUI.UIList.new(f1_arg0, f1_arg1, 5, 0, nil, false, false, false, false)
@@ -24,7 +24,7 @@ CoD.arenaLeaguePlayRubiesList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	rubiesList:setWidgetType(CoD.arenaLeaguePlayRuby)
 	rubiesList:setHorizontalCount(3)
 	rubiesList:setSpacing(5)
-	rubiesList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	rubiesList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(rubiesList)
 	self.rubiesList = rubiesList
 	rubiesListSlot.id = "rubiesListSlot"

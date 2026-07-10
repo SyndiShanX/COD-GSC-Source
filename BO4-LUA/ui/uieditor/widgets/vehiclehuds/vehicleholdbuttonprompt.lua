@@ -10,7 +10,7 @@ CoD.VehicleHoldButtonPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local buttonPromptImage = LUI.UIImage.new(0, 0, 6, 36, 0, 0, 9, 39)
-	buttonPromptImage:setMaterial(LUI.UIImage.GetCachedMaterial(0x67D1E3A3D2D1BF))
+	buttonPromptImage:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_saturation_normal"))
 	buttonPromptImage:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(buttonPromptImage)
 	self.buttonPromptImage = buttonPromptImage
@@ -18,7 +18,7 @@ CoD.VehicleHoldButtonPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	label:setText(LocalizeToUpperString(0x0))
 	label:setTTF("ttmussels_regular")
 	label:setLetterSpacing(2)
-	label:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	label:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	LUI.OverrideFunction_CallOriginalFirst(label, "setText", function(element, controller)
 		ScaleWidgetToLabel(self, element, -35)
 	end)
@@ -57,10 +57,10 @@ CoD.VehicleHoldButtonPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	KeyboardAction = LUI.UIText.new(0, 0, 4.5, 37.5, 0, 0, 5, 43)
 	KeyboardAction:setRGB(1, 1, 0.5)
 	KeyboardAction:setAlpha(0)
-	KeyboardAction:setText(Engine[0xF9F1239CFD921FE](0xF17B1BF58DB2590))
+	KeyboardAction:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_5F17B1BF58DB2590"))
 	KeyboardAction:setTTF("default")
-	KeyboardAction:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	KeyboardAction:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	KeyboardAction:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	KeyboardAction:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(KeyboardAction)
 	self.KeyboardAction = KeyboardAction
 	self:mergeStateConditions({
@@ -92,7 +92,7 @@ CoD.VehicleHoldButtonPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	end)
 	local f1_local5 = self
 	local f1_local6 = self.subscribeToModel
-	local f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local6(f1_local5, f1_local7.LastInput, function(f11_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -132,7 +132,7 @@ CoD.VehicleHoldButtonPrompt.__resetProperties = function(f13_arg0)
 	f13_arg0.KeyboardAction:setLeftRight(0, 0, 4.5, 37.5)
 	f13_arg0.KeyboardAction:setTopBottom(0, 0, 5, 43)
 	f13_arg0.KeyboardAction:setAlpha(0)
-	f13_arg0.KeyboardAction:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	f13_arg0.KeyboardAction:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 end
 CoD.VehicleHoldButtonPrompt.__clipsPerState = {
 	DefaultState = {
@@ -170,7 +170,7 @@ CoD.VehicleHoldButtonPrompt.__clipsPerState = {
 			f15_arg0.KeyboardAction:setLeftRight(0, 0, -66, 10)
 			f15_arg0.KeyboardAction:setTopBottom(0.5, 0.5, -22.5, 4.5)
 			f15_arg0.KeyboardAction:setAlpha(1)
-			f15_arg0.KeyboardAction:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
+			f15_arg0.KeyboardAction:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
 			f15_arg0.clipFinished(f15_arg0.KeyboardAction)
 		end,
 	},

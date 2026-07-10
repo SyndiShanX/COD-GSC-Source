@@ -1,25 +1,25 @@
 require("x64:aa4a875e6d01dd8")
 require("x64:4461ca91e78a5d5")
-CoD[0x6DF244A87F06B10] = InheritFrom(LUI.UIElement)
-CoD[0x6DF244A87F06B10].__defaultWidth = 960
-CoD[0x6DF244A87F06B10].__defaultHeight = 240
-CoD[0x6DF244A87F06B10].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+CoD[@"hash_26DF244A87F06B10"] = InheritFrom(LUI.UIElement)
+CoD[@"hash_26DF244A87F06B10"].__defaultWidth = 960
+CoD[@"hash_26DF244A87F06B10"].__defaultHeight = 240
+CoD[@"hash_26DF244A87F06B10"].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
 	local self = LUI.UIElement.new(f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
-	self:setClass(CoD[0x6DF244A87F06B10])
+	self:setClass(CoD[@"hash_26DF244A87F06B10"])
 	self.id = "ui_icon_callingcards_fairytales"
 	self.soundSet = "none"
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local background = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	background:setImage(RegisterImage(0x8F5098864EC8D99))
+	background:setImage(RegisterImage(@"uie_ui_icon_callingcards_fairytale_bg"))
 	self:addElement(background)
 	self.background = background
 	local gret = LUI.UIImage.new(0, 0, 260, 372, 0, 0, 120, 256)
-	gret:setImage(RegisterImage(0xEF36F178745B32A))
+	gret:setImage(RegisterImage(@"uie_ui_icon_callingcards_fairytale_gret"))
 	self:addElement(gret)
 	self.gret = gret
 	local hans = LUI.UIImage.new(0, 0, 112, 240, 0, 0, 91, 251)
-	hans:setImage(RegisterImage(0xA698AFF80406902))
+	hans:setImage(RegisterImage(@"uie_ui_icon_callingcards_fairytale_hans"))
 	self:addElement(hans)
 	self.hans = hans
 	local arm = CoD.ui_icon_callingcards_fairytales_armgroup.new(f1_arg0, f1_arg1, 0, 0, 792, 802, 0, 0, 96, 106)
@@ -29,14 +29,14 @@ CoD[0x6DF244A87F06B10].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	self:addElement(smoke)
 	self.smoke = smoke
 	local largesmoke = LUI.UIImage.new(0, 0, -211.5, 548.5, 0, 0, -86, 298)
-	largesmoke:setImage(RegisterImage(0x657CCC3058DCB02))
-	largesmoke:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	largesmoke:setImage(RegisterImage(@"uie_ui_icon_callingcards_fairytale_smokelarge"))
+	largesmoke:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(largesmoke)
 	self.largesmoke = largesmoke
 	local largesmoke2 = LUI.UIImage.new(0, 0, 580, 1340, 0, 0, -86, 298)
 	largesmoke2:setAlpha(0)
-	largesmoke2:setImage(RegisterImage(0x657CCC3058DCB02))
-	largesmoke2:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	largesmoke2:setImage(RegisterImage(@"uie_ui_icon_callingcards_fairytale_smokelarge"))
+	largesmoke2:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(largesmoke2)
 	self.largesmoke2 = largesmoke2
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)
@@ -45,7 +45,7 @@ CoD[0x6DF244A87F06B10].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	end
 	return self
 end
-CoD[0x6DF244A87F06B10].__resetProperties = function(f2_arg0)
+CoD[@"hash_26DF244A87F06B10"].__resetProperties = function(f2_arg0)
 	f2_arg0.arm:completeAnimation()
 	f2_arg0.gret:completeAnimation()
 	f2_arg0.hans:completeAnimation()
@@ -64,19 +64,19 @@ CoD[0x6DF244A87F06B10].__resetProperties = function(f2_arg0)
 	f2_arg0.largesmoke2:setLeftRight(0, 0, 580, 1340)
 	f2_arg0.largesmoke2:setAlpha(0)
 end
-CoD[0x6DF244A87F06B10].__clipsPerState = {
+CoD[@"hash_26DF244A87F06B10"].__clipsPerState = {
 	DefaultState = {
 		DefaultClip = function(f3_arg0, f3_arg1)
 			f3_arg0:__resetProperties()
 			f3_arg0:setupElementClipCounter(6)
 			local f3_local0 = function(f4_arg0)
 				local f4_local0 = function(f5_arg0)
-					f5_arg0:beginAnimation(2010, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f5_arg0:beginAnimation(2010, Enum[@"luitween"][@"luitween_ease_out"])
 					f5_arg0:setLeftRight(0, 0, 245, 357)
 					f5_arg0:setZRot(19)
 					f5_arg0:registerEventHandler("transition_complete_keyframe", f3_arg0.clipFinished)
 				end
-				f3_arg0.gret:beginAnimation(990, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f3_arg0.gret:beginAnimation(990, Enum[@"luitween"][@"luitween_ease_out"])
 				f3_arg0.gret:setLeftRight(0, 0, 196, 308)
 				f3_arg0.gret:setZRot(-11)
 				f3_arg0.gret:registerEventHandler("interrupted_keyframe", f3_arg0.clipInterrupted)
@@ -89,13 +89,13 @@ CoD[0x6DF244A87F06B10].__clipsPerState = {
 			f3_local0(f3_arg0.gret)
 			local f3_local1 = function(f6_arg0)
 				local f6_local0 = function(f7_arg0)
-					f7_arg0:beginAnimation(2300, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f7_arg0:beginAnimation(2300, Enum[@"luitween"][@"luitween_ease_out"])
 					f7_arg0:setLeftRight(0, 0, 150, 278)
 					f7_arg0:setTopBottom(0, 0, 96, 256)
 					f7_arg0:setZRot(11)
 					f7_arg0:registerEventHandler("transition_complete_keyframe", f3_arg0.clipFinished)
 				end
-				f3_arg0.hans:beginAnimation(700, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f3_arg0.hans:beginAnimation(700, Enum[@"luitween"][@"luitween_ease_out"])
 				f3_arg0.hans:setLeftRight(0, 0, 76, 204)
 				f3_arg0.hans:setTopBottom(0, 0, 106, 266)
 				f3_arg0.hans:setZRot(-10)
@@ -109,7 +109,7 @@ CoD[0x6DF244A87F06B10].__clipsPerState = {
 			f3_local1(f3_arg0.hans)
 			local f3_local2 = function(f8_arg0)
 				local f8_local0 = function(f9_arg0)
-					f9_arg0:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f9_arg0:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_out"])
 					f9_arg0:setZRot(-8)
 					f9_arg0:registerEventHandler("transition_complete_keyframe", function(element, event)
 						element:playClip("DefaultClip")
@@ -117,7 +117,7 @@ CoD[0x6DF244A87F06B10].__clipsPerState = {
 					end)
 				end
 				f3_arg0.arm:playClip("DefaultClip")
-				f3_arg0.arm:beginAnimation(2000, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f3_arg0.arm:beginAnimation(2000, Enum[@"luitween"][@"luitween_ease_out"])
 				f3_arg0.arm:setZRot(2)
 				f3_arg0.arm:registerEventHandler("interrupted_keyframe", f3_arg0.clipInterrupted)
 				f3_arg0.arm:registerEventHandler("transition_complete_keyframe", f8_local0)
@@ -166,7 +166,7 @@ CoD[0x6DF244A87F06B10].__clipsPerState = {
 		end,
 	},
 }
-CoD[0x6DF244A87F06B10].__onClose = function(f15_arg0)
+CoD[@"hash_26DF244A87F06B10"].__onClose = function(f15_arg0)
 	f15_arg0.arm:close()
 	f15_arg0.smoke:close()
 end

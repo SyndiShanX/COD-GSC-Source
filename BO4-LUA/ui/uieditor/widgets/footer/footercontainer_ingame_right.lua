@@ -35,7 +35,7 @@ CoD.FooterContainer_Ingame_Right.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	self.RightContainer = LUI.UIElement.createFake()
 	local BackHold = CoD.FooterButton_BackHold.new(f1_arg0, f1_arg1, 0.5, 0.5, -120, 120, 1, 1, -48, 0)
 	BackHold:setAlpha(0)
-	BackHold:linkToElementModel(self, "" .. Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], false, function(model)
+	BackHold:linkToElementModel(self, "" .. Enum[@"luibutton"][@"lui_key_xbb_pscircle"], false, function(model)
 		BackHold:setModel(model, f1_arg1)
 	end)
 	self:addElement(BackHold)

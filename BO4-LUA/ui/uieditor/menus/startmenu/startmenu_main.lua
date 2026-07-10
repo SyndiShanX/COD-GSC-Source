@@ -20,7 +20,7 @@ LUI.createMenu.StartMenu_Main = function(f1_arg0, f1_arg1)
 	f1_local1:addElementToPendingUpdateStateList(self)
 	local SceneBlur = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	SceneBlur:setRGB(0, 0, 0)
-	SceneBlur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	SceneBlur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	SceneBlur:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(SceneBlur)
 	self.SceneBlur = SceneBlur
@@ -40,8 +40,8 @@ LUI.createMenu.StartMenu_Main = function(f1_arg0, f1_arg1)
 	self.TopBacking = TopBacking
 	local NoiseTiledBacking = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	NoiseTiledBacking:setAlpha(0)
-	NoiseTiledBacking:setImage(RegisterImage(0x34839E8065B1E53))
-	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	NoiseTiledBacking:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	NoiseTiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	NoiseTiledBacking:setupNineSliceShader(196, 88)
 	self:addElement(NoiseTiledBacking)
@@ -56,8 +56,8 @@ LUI.createMenu.StartMenu_Main = function(f1_arg0, f1_arg1)
 	self.MenuFrameIngame = MenuFrameIngame
 	local TiledPlusGrid = LUI.UIImage.new(0, 0, -135, 1920, 0, 0, 0, 1080)
 	TiledPlusGrid:setAlpha(0.05)
-	TiledPlusGrid:setImage(RegisterImage(0x6E37BAE22631294))
-	TiledPlusGrid:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	TiledPlusGrid:setImage(RegisterImage(@"uie_ui_hud_vehicle_hellstorm_repeat_plusgrid"))
+	TiledPlusGrid:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	TiledPlusGrid:setShaderVector(0, 0, 0, 0, 0)
 	TiledPlusGrid:setupNineSliceShader(220, 220)
 	self:addElement(TiledPlusGrid)
@@ -70,14 +70,14 @@ LUI.createMenu.StartMenu_Main = function(f1_arg0, f1_arg1)
 	local DividerSolidBot = LUI.UIImage.new(0, 1.01, -11, -11, 0, 0, 41, 45)
 	DividerSolidBot:setRGB(ColorSet.T8__BEIGE__HEADER.r, ColorSet.T8__BEIGE__HEADER.g, ColorSet.T8__BEIGE__HEADER.b)
 	DividerSolidBot:setAlpha(0)
-	DividerSolidBot:setImage(RegisterImage(0x84B43D5B04D263A))
-	DividerSolidBot:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	DividerSolidBot:setImage(RegisterImage(@"hash_484B43D5B04D263A"))
+	DividerSolidBot:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	DividerSolidBot:setShaderVector(0, 0, 0, 0, 0)
 	DividerSolidBot:setupNineSliceShader(8, 4)
 	self:addElement(DividerSolidBot)
 	self.DividerSolidBot = DividerSolidBot
 	local SafeAreaContainer = CoD.StartMenu_SafeAreaContainer.new(f1_local1, f1_arg0, 0, 1, 0, 0, 0, 1, 0, 0)
-	SafeAreaContainer.CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(0x4DC58203AB2DE0))
+	SafeAreaContainer.CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(@"menu/menu"))
 	self:addElement(SafeAreaContainer)
 	self.SafeAreaContainer = SafeAreaContainer
 	local DirectorQuitButtonContainer = nil
@@ -90,10 +90,10 @@ LUI.createMenu.StartMenu_Main = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f2_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f2_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(DirectorQuitButtonContainer, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "MOUSE1", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(DirectorQuitButtonContainer, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "MOUSE1", function(element, menu, controller, model)
 		if IsPC() then
 			OpenPCQuit(self, menu, self, controller)
 			return true
@@ -101,7 +101,7 @@ LUI.createMenu.StartMenu_Main = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if IsPC() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "MOUSE1")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "MOUSE1")
 			return false
 		else
 			return false
@@ -184,7 +184,7 @@ LUI.createMenu.StartMenu_Main = function(f1_arg0, f1_arg1)
 	})
 	local f1_local15 = self
 	local f1_local16 = self.subscribeToModel
-	local f1_local17 = Engine[0x8DF2E5447F384B9]()
+	local f1_local17 = Engine[@"getglobalmodel"]()
 	f1_local16(f1_local15, f1_local17["lobbyRoot.lobbyNav"], function(f13_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",
@@ -196,47 +196,47 @@ LUI.createMenu.StartMenu_Main = function(f1_arg0, f1_arg1)
 	end, false)
 	f1_local15 = self
 	f1_local16 = self.subscribeToModel
-	f1_local17 = Engine[0x8DF2E5447F384B9]()
+	f1_local17 = Engine[@"getglobalmodel"]()
 	f1_local16(f1_local15, f1_local17["lobbyRoot.lobbyNav"], function(f14_arg0, f14_arg1)
-		CoD.Menu.UpdateButtonShownState(f14_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
-		CoD.Menu.UpdateButtonShownState(f14_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
-		CoD.Menu.UpdateButtonShownState(f14_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC])
+		CoD.Menu.UpdateButtonShownState(f14_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+		CoD.Menu.UpdateButtonShownState(f14_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_none"])
+		CoD.Menu.UpdateButtonShownState(f14_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_ltrig"])
 	end, false)
 	f1_local15 = self
 	f1_local16 = self.subscribeToModel
-	f1_local17 = Engine[0x8DF2E5447F384B9]()
+	f1_local17 = Engine[@"getglobalmodel"]()
 	f1_local16(f1_local15, f1_local17["lobbyRoot.lobbyMainMode"], function(f15_arg0, f15_arg1)
-		CoD.Menu.UpdateButtonShownState(f15_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC])
+		CoD.Menu.UpdateButtonShownState(f15_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_ltrig"])
 	end, false)
 	self:appendEventHandler("input_source_changed", function(f16_arg0, f16_arg1)
 		f16_arg1.menu = f16_arg1.menu or f1_local1
-		CoD.Menu.UpdateButtonShownState(f16_arg0, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x22361E23588705A])
+		CoD.Menu.UpdateButtonShownState(f16_arg0, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_start"])
 	end)
 	f1_local15 = self
 	f1_local16 = self.subscribeToModel
-	f1_local17 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	f1_local17 = Engine[@"getmodelforcontroller"](f1_arg0)
 	f1_local16(f1_local15, f1_local17.LastInput, function(f17_arg0, f17_arg1)
-		CoD.Menu.UpdateButtonShownState(f17_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x22361E23588705A])
+		CoD.Menu.UpdateButtonShownState(f17_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_start"])
 	end, false)
 	f1_local15 = self
 	f1_local16 = self.subscribeToModel
-	f1_local17 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	f1_local17 = Engine[@"getmodelforcontroller"](f1_arg0)
 	f1_local16(f1_local15, f1_local17["PositionDraft.stage"], function(f18_arg0, f18_arg1)
-		CoD.Menu.UpdateButtonShownState(f18_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(f18_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_none"])
 	end, false)
 	self:appendEventHandler("on_session_start", function(f19_arg0, f19_arg1)
 		f19_arg1.menu = f19_arg1.menu or f1_local1
-		CoD.Menu.UpdateButtonShownState(f19_arg0, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(f19_arg0, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_none"])
 	end)
 	self:appendEventHandler("on_session_end", function(f20_arg0, f20_arg1)
 		f20_arg1.menu = f20_arg1.menu or f1_local1
-		CoD.Menu.UpdateButtonShownState(f20_arg0, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(f20_arg0, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_none"])
 	end)
 	f1_local15 = self
 	f1_local16 = self.subscribeToModel
-	f1_local17 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	f1_local17 = Engine[@"getmodelforcontroller"](f1_arg0)
 	f1_local16(f1_local15, f1_local17["hudItems.hasStartedWZMatch"], function(f21_arg0, f21_arg1)
-		CoD.Menu.UpdateButtonShownState(f21_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(f21_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_none"])
 	end, false)
 	self:registerEventHandler("menu_loaded", function(self, event)
 		local f22_local0 = nil
@@ -284,7 +284,7 @@ LUI.createMenu.StartMenu_Main = function(f1_arg0, f1_arg1)
 		end
 		return f25_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		if InFrontend() then
 			CoD.BaseUtility.SwitchModeOnMenu(controller)
 			RefreshLobbyRoom(menu, controller)
@@ -315,25 +315,25 @@ LUI.createMenu.StartMenu_Main = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if InFrontend() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 			return true
 		elseif not IsPC() and not IsDemoPlaying() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x3996BAAC73C3F6D, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/dismiss", nil, nil)
 			return true
 		elseif IsPC() and not IsDemoPlaying() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 			return true
 		elseif IsPC() and IsDemoPlaying() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 			return true
 		elseif IsDemoPlaying() and not IsPC() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], nil, function(element, menu, controller, model)
 		if IsWarzone() and IsInGame() and not IsDemoPlaying() then
 			CoD.WZUtility.NextWeapon(controller)
 			return true
@@ -344,16 +344,16 @@ LUI.createMenu.StartMenu_Main = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if IsWarzone() and IsInGame() and not IsDemoPlaying() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], 0x0, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], @"hash_0", nil, nil)
 			return false
 		elseif IsInGame() and not IsLobbyNetworkModeLAN() and not IsDemoPlaying() and not IsPC() and not IsGameTypeCombatTraining() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], 0x478E0BA47CFB4A8, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], @"menu/social", nil, nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "weapnext", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_none"], "weapnext", function(element, menu, controller, model)
 		if IsWarzone() and IsInGame() and not IsDemoPlaying() then
 			CoD.WZUtility.NextWeapon(controller)
 			return true
@@ -361,13 +361,13 @@ LUI.createMenu.StartMenu_Main = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if IsWarzone() and IsInGame() and not IsDemoPlaying() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "weapnext")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "weapnext")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "weapprev", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_none"], "weapprev", function(element, menu, controller, model)
 		if IsWarzone() and IsInGame() and not IsDemoPlaying() then
 			CoD.WZUtility.PrevWeapon(controller)
 			return true
@@ -375,13 +375,13 @@ LUI.createMenu.StartMenu_Main = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if IsWarzone() and IsInGame() and not IsDemoPlaying() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "weapprev")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "weapprev")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "weapswitchprimary", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_none"], "weapswitchprimary", function(element, menu, controller, model)
 		if IsPC() and IsWarzone() and IsInGame() and not IsDemoPlaying() then
 			CoD.WZUtility.SwitchToWeaponInSlot(controller, 0)
 			return true
@@ -389,13 +389,13 @@ LUI.createMenu.StartMenu_Main = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if IsPC() and IsWarzone() and IsInGame() and not IsDemoPlaying() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "weapswitchprimary")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "weapswitchprimary")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "weapswitchsecondary", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_none"], "weapswitchsecondary", function(element, menu, controller, model)
 		if IsPC() and IsWarzone() and IsInGame() and not IsDemoPlaying() then
 			CoD.WZUtility.SwitchToWeaponInSlot(controller, 1)
 			return true
@@ -403,27 +403,27 @@ LUI.createMenu.StartMenu_Main = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if IsPC() and IsWarzone() and IsInGame() and not IsDemoPlaying() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "weapswitchsecondary")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "weapswitchsecondary")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC], "F1", function(element, menu, controller, model)
-		if not IsRepeatButtonPress(model) and CoD.DirectorUtility.IsMainMode(controller, Enum[0x89C1455C5032969][0x7E41449995CD57E]) and not InFrontend() and AlwaysFalse() then
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_ltrig"], "F1", function(element, menu, controller, model)
+		if not IsRepeatButtonPress(model) and CoD.DirectorUtility.IsMainMode(controller, Enum[@"lobbymainmode"][@"lobby_mainmode_mp"]) and not InFrontend() and AlwaysFalse() then
 			CoD.StartMenuUtility.ShowClassSelectSlideout(menu, controller)
 			return true
 		else
 		end
 	end, function(element, menu, controller)
-		if not IsRepeatButtonPress(nil) and CoD.DirectorUtility.IsMainMode(controller, Enum[0x89C1455C5032969][0x7E41449995CD57E]) and not InFrontend() and AlwaysFalse() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC], 0x0, nil, "F1")
+		if not IsRepeatButtonPress(nil) and CoD.DirectorUtility.IsMainMode(controller, Enum[@"lobbymainmode"][@"lobby_mainmode_mp"]) and not InFrontend() and AlwaysFalse() then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_ltrig"], @"hash_0", nil, "F1")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x22361E23588705A], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_start"], nil, function(element, menu, controller, model)
 		if IsPC() and IsGamepad(controller) then
 			RefreshLobbyRoom(menu, controller)
 			StartMenuGoBack(menu, controller)
@@ -434,10 +434,10 @@ LUI.createMenu.StartMenu_Main = function(f1_arg0, f1_arg1)
 			return true
 		end
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x22361E23588705A], 0x0, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_start"], @"hash_0", nil, nil)
 		return false
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], nil, function(element, menu, controller, model)
 		if CoD.StartMenuUtility.CanChangeWZStatsFilter(menu, self.TabFrame, controller) then
 			CoD.PlayerStatsUtility.UpdateWZStatsFilter(controller)
 			PlaySoundAlias("uin_stats_switch")
@@ -446,13 +446,13 @@ LUI.createMenu.StartMenu_Main = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if CoD.StartMenuUtility.CanChangeWZStatsFilter(menu, self.TabFrame, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x0, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"hash_0", nil, nil)
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "ui_contextual_2", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_none"], "ui_contextual_2", function(element, menu, controller, model)
 		if IsPC() and CoD.PCUtility.CanShowLeaveGameButton(menu, controller) then
 			QuitPCGame_MP(self, controller, false)
 			return true
@@ -460,13 +460,13 @@ LUI.createMenu.StartMenu_Main = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if IsPC() and CoD.PCUtility.CanShowLeaveGameButton(menu, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "ui_contextual_2")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "ui_contextual_2")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "ui_contextual_1", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_none"], "ui_contextual_1", function(element, menu, controller, model)
 		if IsPC() and CoD.PCUtility.CanShowStartWarzoneButton(menu, controller) then
 			CoD.WZUtility.StartWarzone(controller)
 			SetControllerModelValue(controller, "hudItems.hasStartedWZMatch", true)
@@ -475,7 +475,7 @@ LUI.createMenu.StartMenu_Main = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if IsPC() and CoD.PCUtility.CanShowStartWarzoneButton(menu, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "ui_contextual_1")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "ui_contextual_1")
 			return false
 		else
 			return false

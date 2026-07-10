@@ -58,27 +58,27 @@ local f0_local8 = function(f1_arg0, f1_arg1, f1_arg2)
 	return f1_arg0[f1_arg1].fetchStatus == f1_arg2
 end
 Lobby.Clans.InitClanDataForController = function(f2_arg0)
-	local f2_local0 = Engine[0x93B19E01B1FD1C7](f2_arg0)
-	local f2_local1 = Engine[0x5065E759595C457](f2_local0)
+	local f2_local0 = Engine[@"getxuid64"](f2_arg0)
+	local f2_local1 = Engine[@"xuidtostring"](f2_local0)
 	local f2_local2 = {
 		controller = f2_arg0,
 		xuid = f2_local0,
 		xuidStr = f2_local1,
-		liveBackoff = Engine[0xBDF857C8ED1376B](10, 3, 2, true),
+		liveBackoff = Engine[@"hash_7BDF857C8ED1376B"](10, 3, 2, true),
 	}
 	local f2_local3 = function(f3_arg0)
 		return {
 			fetchInit = false,
 			fetchStatus = f3_arg0,
 			fetchedTime = 0,
-			liveBackoff = Engine[0xBDF857C8ED1376B](10, 3, 2, true),
+			liveBackoff = Engine[@"hash_7BDF857C8ED1376B"](10, 3, 2, true),
 			data = {},
 		}
 	end
 	local f2_local4 = function()
 		return {
 			process = false,
-			liveBackoff = Engine[0xBDF857C8ED1376B](10, 3, 2, true),
+			liveBackoff = Engine[@"hash_7BDF857C8ED1376B"](10, 3, 2, true),
 			data = {},
 		}
 	end
@@ -97,33 +97,33 @@ Lobby.Clans.InitFetchGroups = function(f5_arg0)
 	f5_arg0[f0_local5].groupTableIndex = 1
 end
 Lobby.Clans.Pump = function(f6_arg0)
-	if not Dvar[0xCA8E9EDE02C25E6]:get() then
+	if not Dvar[@"hash_3CA8E9EDE02C25E6"]:get() then
 		return
-	elseif Engine[0x7B48C1ABFF0F764]() or Engine[0xE39F1F30B306065]() or Engine[0xA63E42B2FB6EC02]() ~= Enum[0xC84D3E505F1444][0xE99F41098B71960] or not Engine[0xFD9E0D91D366130]() then
+	elseif Engine[@"isingame"]() or Engine[@"isdedicatedserver"]() or Engine[@"getlobbynetworkmode"]() ~= Enum[@"lobbynetworkmode"][@"lobby_networkmode_live"] or not Engine[@"hash_7FD9E0D91D366130"]() then
 		return
 	end
 	for f6_local14, f6_local15 in pairs(Lobby.Clans.data) do
 		local f6_local16 = f6_local15.controller
-		if Engine[0xD7913D0F914DE47](f6_local16) then
+		if Engine[@"issignedintodemonware"](f6_local16) then
 			Lobby.Clans.CheckForDataRefetch(f6_local15)
-			if f6_local15[f0_local1].fetchStatus == Lobby.Clans.DATA_STATUS.NOT_FETCHED and not Engine[0xCE326D48856DEBC](Enum[0x273AD594AA15D05][0x27F86ABF82F5269], f6_local16) then
+			if f6_local15[f0_local1].fetchStatus == Lobby.Clans.DATA_STATUS.NOT_FETCHED and not Engine[@"hash_CE326D48856DEBC"](Enum[@"hash_5273AD594AA15D05"][@"hash_327F86ABF82F5269"], f6_local16) then
 				Lobby.Clans.GetMembershipsByUsers(f6_local15)
 			end
-			if f6_local15[f0_local2].fetchStatus == Lobby.Clans.DATA_STATUS.NOT_FETCHED and not Engine[0xCE326D48856DEBC](Enum[0x273AD594AA15D05][0x27F86ABF82F5269], f6_local16) then
+			if f6_local15[f0_local2].fetchStatus == Lobby.Clans.DATA_STATUS.NOT_FETCHED and not Engine[@"hash_CE326D48856DEBC"](Enum[@"hash_5273AD594AA15D05"][@"hash_327F86ABF82F5269"], f6_local16) then
 				Lobby.Clans.GetMembershipsForFriends(f6_local15)
 			end
-			if f6_local15[f0_local3].fetchStatus == Lobby.Clans.DATA_STATUS.NOT_FETCHED and not Engine[0xCE326D48856DEBC](Enum[0x273AD594AA15D05][0xF24C4FC86613A77], f6_local16) then
+			if f6_local15[f0_local3].fetchStatus == Lobby.Clans.DATA_STATUS.NOT_FETCHED and not Engine[@"hash_CE326D48856DEBC"](Enum[@"hash_5273AD594AA15D05"][@"hash_7F24C4FC86613A77"], f6_local16) then
 				Lobby.Clans.GetMembershipProposalsByUser(f6_local15)
 			end
 			if f6_local15[f0_local1].fetchStatus == Lobby.Clans.DATA_STATUS.FETCHED then
-				if f6_local15[f0_local4].fetchStatus == Lobby.Clans.DATA_STATUS.NOT_FETCHED and not Engine[0xCE326D48856DEBC](Enum[0x273AD594AA15D05][0x83A96343789C2C7], f6_local16) then
+				if f6_local15[f0_local4].fetchStatus == Lobby.Clans.DATA_STATUS.NOT_FETCHED and not Engine[@"hash_CE326D48856DEBC"](Enum[@"hash_5273AD594AA15D05"][@"hash_383A96343789C2C7"], f6_local16) then
 					Lobby.Clans.GetMembershipProposalsByGroup(f6_local15)
 				end
-				if f6_local15[f0_local6].fetchStatus == Lobby.Clans.DATA_STATUS.NOT_FETCHED and not Engine[0xCE326D48856DEBC](Enum[0x273AD594AA15D05][0x77347ADE8055E9C], f6_local16) then
+				if f6_local15[f0_local6].fetchStatus == Lobby.Clans.DATA_STATUS.NOT_FETCHED and not Engine[@"hash_CE326D48856DEBC"](Enum[@"hash_5273AD594AA15D05"][@"hash_477347ADE8055E9C"], f6_local16) then
 					Lobby.Clans.GetGroupMembers(f6_local15)
 				end
 			end
-			if f6_local15[f0_local5].fetchStatus == Lobby.Clans.DATA_STATUS.NOT_FETCHED and not Engine[0xCE326D48856DEBC](Enum[0x273AD594AA15D05][0x8E32D633D0D4DE6], f6_local16) and f6_local15[f0_local1].fetchStatus == Lobby.Clans.DATA_STATUS.FETCHED and f6_local15[f0_local3].fetchStatus == Lobby.Clans.DATA_STATUS.FETCHED and f6_local15[f0_local6].fetchStatus == Lobby.Clans.DATA_STATUS.FETCHED and f6_local15[f0_local2].fetchStatus == Lobby.Clans.DATA_STATUS.FETCHED then
+			if f6_local15[f0_local5].fetchStatus == Lobby.Clans.DATA_STATUS.NOT_FETCHED and not Engine[@"hash_CE326D48856DEBC"](Enum[@"hash_5273AD594AA15D05"][@"hash_48E32D633D0D4DE6"], f6_local16) and f6_local15[f0_local1].fetchStatus == Lobby.Clans.DATA_STATUS.FETCHED and f6_local15[f0_local3].fetchStatus == Lobby.Clans.DATA_STATUS.FETCHED and f6_local15[f0_local6].fetchStatus == Lobby.Clans.DATA_STATUS.FETCHED and f6_local15[f0_local2].fetchStatus == Lobby.Clans.DATA_STATUS.FETCHED then
 				if not f6_local15[f0_local5].groupTablesCreated then
 					local f6_local3 = {}
 					for f6_local7, f6_local8 in ipairs(f6_local15[f0_local1].data) do
@@ -174,31 +174,31 @@ Lobby.Clans.Pump = function(f6_arg0)
 				Lobby.Clans.GetGroupInfos(f6_local15)
 			end
 			if f6_local15[f0_local7].process then
-				if f6_local15[f0_local7].action == Lobby.Clans.GROUP_ACTION.CREATE and not Engine[0xCE326D48856DEBC](Enum[0x273AD594AA15D05][0x4B70AB52219B5AC], f6_local16) then
+				if f6_local15[f0_local7].action == Lobby.Clans.GROUP_ACTION.CREATE and not Engine[@"hash_CE326D48856DEBC"](Enum[@"hash_5273AD594AA15D05"][@"hash_54B70AB52219B5AC"], f6_local16) then
 					Lobby.Clans.CreateGroup(f6_local15)
 				end
-				if f6_local15[f0_local7].action == Lobby.Clans.GROUP_ACTION.UPDATE and not Engine[0xCE326D48856DEBC](Enum[0x273AD594AA15D05][0x2F172D800D65249], f6_local16) then
+				if f6_local15[f0_local7].action == Lobby.Clans.GROUP_ACTION.UPDATE and not Engine[@"hash_CE326D48856DEBC"](Enum[@"hash_5273AD594AA15D05"][@"hash_22F172D800D65249"], f6_local16) then
 					Lobby.Clans.UpdateGroup(f6_local15)
 				end
-				if f6_local15[f0_local7].action == Lobby.Clans.GROUP_ACTION.REMOVE and not Engine[0xCE326D48856DEBC](Enum[0x273AD594AA15D05][0xCD28C4E40235DFB], f6_local16) then
+				if f6_local15[f0_local7].action == Lobby.Clans.GROUP_ACTION.REMOVE and not Engine[@"hash_CE326D48856DEBC"](Enum[@"hash_5273AD594AA15D05"][@"hash_1CD28C4E40235DFB"], f6_local16) then
 					Lobby.Clans.RemoveGroupMember(f6_local15)
 				end
-				if f6_local15[f0_local7].action == Lobby.Clans.GROUP_ACTION.JOIN and not Engine[0xCE326D48856DEBC](Enum[0x273AD594AA15D05][0x7365C66071C2B5E], f6_local16) then
+				if f6_local15[f0_local7].action == Lobby.Clans.GROUP_ACTION.JOIN and not Engine[@"hash_CE326D48856DEBC"](Enum[@"hash_5273AD594AA15D05"][@"hash_47365C66071C2B5E"], f6_local16) then
 					Lobby.Clans.AddOrUpdateGroupMember(f6_local15)
 				end
-				if f6_local15[f0_local7].action == Lobby.Clans.GROUP_ACTION.ADD_OR_UPDATE and not Engine[0xCE326D48856DEBC](Enum[0x273AD594AA15D05][0x7365C66071C2B5E], f6_local16) then
+				if f6_local15[f0_local7].action == Lobby.Clans.GROUP_ACTION.ADD_OR_UPDATE and not Engine[@"hash_CE326D48856DEBC"](Enum[@"hash_5273AD594AA15D05"][@"hash_47365C66071C2B5E"], f6_local16) then
 					Lobby.Clans.AddOrUpdateGroupMember(f6_local15)
 				end
-				if f6_local15[f0_local7].action == Lobby.Clans.GROUP_ACTION.ACCEPT_REQUEST and not Engine[0xCE326D48856DEBC](Enum[0x273AD594AA15D05][0x3E0CD00FDD11C0], f6_local16) then
+				if f6_local15[f0_local7].action == Lobby.Clans.GROUP_ACTION.ACCEPT_REQUEST and not Engine[@"hash_CE326D48856DEBC"](Enum[@"hash_5273AD594AA15D05"][0x3E0CD00FDD11C0], f6_local16) then
 					Lobby.Clans.AddOrUpdateGroupMember(f6_local15)
 				end
-				if f6_local15[f0_local7].action == Lobby.Clans.GROUP_ACTION.INVITE and not Engine[0xCE326D48856DEBC](Enum[0x273AD594AA15D05][0x3E0CD00FDD11C0], f6_local16) then
+				if f6_local15[f0_local7].action == Lobby.Clans.GROUP_ACTION.INVITE and not Engine[@"hash_CE326D48856DEBC"](Enum[@"hash_5273AD594AA15D05"][0x3E0CD00FDD11C0], f6_local16) then
 					Lobby.Clans.ProposeMemberships(f6_local15)
 				end
-				if f6_local15[f0_local7].action == Lobby.Clans.GROUP_ACTION.REJECT_REQUEST and not Engine[0xCE326D48856DEBC](Enum[0x273AD594AA15D05][0x9178AFAC78EB448], f6_local16) then
+				if f6_local15[f0_local7].action == Lobby.Clans.GROUP_ACTION.REJECT_REQUEST and not Engine[@"hash_CE326D48856DEBC"](Enum[@"hash_5273AD594AA15D05"][@"hash_9178AFAC78EB448"], f6_local16) then
 					Lobby.Clans.RemoveProposals(f6_local15)
 				end
-				if f6_local15[f0_local7].action == Lobby.Clans.GROUP_ACTION.FIND_GROUPS and not Engine[0xCE326D48856DEBC](Enum[0x273AD594AA15D05][0x9F9E42CFF7FF10], f6_local16) then
+				if f6_local15[f0_local7].action == Lobby.Clans.GROUP_ACTION.FIND_GROUPS and not Engine[@"hash_CE326D48856DEBC"](Enum[@"hash_5273AD594AA15D05"][0x9F9E42CFF7FF10], f6_local16) then
 					Lobby.Clans.FindGroups(f6_local15)
 				end
 			end
@@ -206,19 +206,19 @@ Lobby.Clans.Pump = function(f6_arg0)
 	end
 end
 Lobby.Clans.OnInit = function(f7_arg0)
-	if not Dvar[0xCA8E9EDE02C25E6]:get() then
+	if not Dvar[@"hash_3CA8E9EDE02C25E6"]:get() then
 		return false
 	end
 	for f7_local0 = 0, LuaDefine.MAX_CONTROLLER_COUNT - 1, 1 do
-		if Engine[0xC3AA9424B651A7E](f7_local0) then
+		if Engine[@"issignedin"](f7_local0) then
 			Lobby.Clans.InitClanDataForController(f7_local0)
 		end
 	end
 end
 Lobby.Clans.OnChangeSigninState = function(f8_arg0)
-	if not Dvar[0xCA8E9EDE02C25E6]:get() then
+	if not Dvar[@"hash_3CA8E9EDE02C25E6"]:get() then
 		return false
-	elseif Lobby.Clans.data[localClientXuidStr] ~= nil and f8_arg0.onlineState ~= Enum[0x1F6577DCFF6E881][0x1675B607D4A7DAA] then
+	elseif Lobby.Clans.data[localClientXuidStr] ~= nil and f8_arg0.onlineState ~= Enum[@"liveuserstate"][@"live_user_signed_in"] then
 		table.remove(Lobby.Clans.data[CoDShared.GetXUID64StringForController(f8_arg0.controller)])
 	else
 		Lobby.Clans.InitClanDataForController(f8_arg0.controller)
@@ -241,16 +241,16 @@ Lobby.Clans.PrintError = function(f10_arg0, f10_arg1)
 		f10_arg1 = ""
 	end
 	if f10_arg0 == nil then
-		Engine[0x458FE92FEB39D4E](Enum[0x7A63DCD561B0FA8][0xA1C4971DA015C84], "Clan task failed. " .. f10_arg1 .. "\n")
+		Engine[@"printerror"](Enum[@"consolelabel_e"][@"con_label_lobbyvm"], "Clan task failed. " .. f10_arg1 .. "\n")
 	else
-		Engine[0x458FE92FEB39D4E](Enum[0x7A63DCD561B0FA8][0xA1C4971DA015C84], "Clan task failed: ErrorCode: " .. tostring(f10_arg0) .. ". " .. (LuaEnum.ClanErrorCodeDescriptions[f10_arg0] or "Not a Clan error, some other DW system error") .. ". " .. f10_arg1 .. "\n")
+		Engine[@"printerror"](Enum[@"consolelabel_e"][@"con_label_lobbyvm"], "Clan task failed: ErrorCode: " .. tostring(f10_arg0) .. ". " .. (LuaEnum.ClanErrorCodeDescriptions[f10_arg0] or "Not a Clan error, some other DW system error") .. ". " .. f10_arg1 .. "\n")
 	end
 	Lobby.Clans.PrintCallstack()
 end
 Lobby.Clans.PrintErrorToClientAndClearTaskIfNeeded = function(f11_arg0, f11_arg1, f11_arg2)
 	if LuaEnum.ClanErrorCodeDescriptions[f11_arg1] then
 		Lobby.Clans.ClearTask(f11_arg2)
-		Engine[0xE1789115A2356E7]("open_toaster_popup", {
+		Engine[@"luivm_event"]("open_toaster_popup", {
 			toastType = "error",
 			message = LuaEnum.ClanErrorCodeDescriptions[f11_arg1],
 			isError = true,
@@ -271,12 +271,12 @@ Lobby.Clans.SetClanDataForController = function(f13_arg0, f13_arg1)
 end
 Lobby.Clans.SetFetchedData = function(f14_arg0, f14_arg1, f14_arg2)
 	f14_arg0[f14_arg1].fetchStatus = Lobby.Clans.DATA_STATUS.FETCHED
-	f14_arg0[f14_arg1].fetchedTime = Engine[0x316595FEDC72451]()
+	f14_arg0[f14_arg1].fetchedTime = Engine[@"hash_6316595FEDC72451"]()
 	f14_arg0[f14_arg1].data = f14_arg2
 end
 Lobby.Clans.CheckForDataRefetch = function(f15_arg0)
-	local f15_local0 = Engine[0x316595FEDC72451]()
-	local f15_local1 = Dvar[0x504E380F2438452]:get()
+	local f15_local0 = Engine[@"hash_6316595FEDC72451"]()
+	local f15_local1 = Dvar[@"hash_4504E380F2438452"]:get()
 	for f15_local8, f15_local9 in pairs(Lobby.Clans.REFETCHABLE_TASKS) do
 		if f15_arg0[f15_local8].fetchStatus == Lobby.Clans.DATA_STATUS.FETCHED and f15_arg0[f15_local8].fetchedTime + f15_local1 < f15_local0 then
 			local f15_local5 = f15_arg0[f15_local8]
@@ -298,7 +298,7 @@ Lobby.Clans.GetClanInfoForUser = function(f16_arg0)
 	return nil, nil
 end
 Lobby.Clans.GetControllerClanModel = function(f17_arg0)
-	local f17_local0 = Engine[0x8DF2E5447F384B9]()
+	local f17_local0 = Engine[@"getglobalmodel"]()
 	local f17_local1 = f17_local0.LobbyClients:create(f17_arg0, true)
 	return f17_local1:create("clan")
 end
@@ -307,13 +307,13 @@ Lobby.Clans.ClearTask = function(f18_arg0)
 	f18_arg0.action = nil
 end
 Lobby.Clans.GetMembershipsByUsers = function(f19_arg0)
-	if not Engine[0x88C82D2C4BED05](f19_arg0[f0_local1].liveBackoff, Engine[0x316595FEDC72451]()) then
+	if not Engine[0x88C82D2C4BED05](f19_arg0[f0_local1].liveBackoff, Engine[@"hash_6316595FEDC72451"]()) then
 		return
 	end
 	local f19_local0 = Lobby.ProcessQueue.RegisterEventHandler(Lobby.Clans.GetMembershipsByUsersComplete, {
 		user = f19_arg0,
 	})
-	if not Engine[0xA0F0BC61EE66B5E](f19_local0, f19_arg0.controller, LuaDefine.TASKMANAGER2_DEFAULT_TIMEOUT, {
+	if not Engine[@"hash_6A0F0BC61EE66B5E"](f19_local0, f19_arg0.controller, LuaDefine.TASKMANAGER2_DEFAULT_TIMEOUT, {
 		f19_arg0.xuid,
 	}, {}) then
 		Lobby.Clans.PrintError(nil, "Task failed to start")
@@ -331,12 +331,12 @@ Lobby.Clans.GetMembershipsByUsersComplete = function(f20_arg0, f20_arg1, f20_arg
 	if f20_arg0 == Lobby.ProcessQueue.ACTIONSTATE.RUNNING then
 		return false
 	elseif f20_arg0 == Lobby.ProcessQueue.ACTIONSTATE.SUCCESS then
-		Engine[0x299C3DC3A21873E](f20_local1.liveBackoff)
+		Engine[@"hash_6299C3DC3A21873E"](f20_local1.liveBackoff)
 		Lobby.Clans.SetFetchedData(f20_local0, f0_local1, f20_arg2.clansGroupMemberInfo[1].clansGroupMembershipInfo)
 		Lobby.Clans.FormatMembershipInfo(f20_local0)
 		Lobby.Clans.ReadGroupMembershipFiles(f20_local0)
 	elseif f20_arg0 == Lobby.ProcessQueue.ACTIONSTATE.FAILURE or f20_arg0 == Lobby.ProcessQueue.ACTIONSTATE.ERROR then
-		Engine[0xF910D4EFAE3B0F3](f20_local1.liveBackoff, Engine[0x316595FEDC72451]())
+		Engine[@"hash_6F910D4EFAE3B0F3"](f20_local1.liveBackoff, Engine[@"hash_6316595FEDC72451"]())
 		Lobby.Clans.PrintError(f20_arg2.errorCode)
 	end
 	return true
@@ -344,11 +344,11 @@ end
 Lobby.Clans.GetMembershipsForFriends = function(f21_arg0)
 	local f21_local0 = f21_arg0[f0_local2]
 	local f21_local1 = f21_arg0.controller
-	if not Engine[0x88C82D2C4BED05](f21_local0.liveBackoff, Engine[0x316595FEDC72451]()) then
+	if not Engine[0x88C82D2C4BED05](f21_local0.liveBackoff, Engine[@"hash_6316595FEDC72451"]()) then
 		return
 	elseif not f21_local0.fetchInit then
 		local f21_local2 = 0
-		f21_local2 = Engine[0xE1E8FED08B06DF7](f21_local1)
+		f21_local2 = Engine[@"getfriendscount"](f21_local1)
 		if f21_local2 == 0 then
 			Lobby.Clans.SetFetchedData(f21_arg0, f0_local2, {})
 			return
@@ -360,7 +360,7 @@ Lobby.Clans.GetMembershipsForFriends = function(f21_arg0)
 	local f21_local2 = {}
 	if f21_local0.fetchOffSet < f21_local0.fetchCount then
 		local f21_local3 = {}
-		f21_local3 = Engine[0x5BC6F44500DD93D](f21_local1, f21_local0.fetchOffSet, f0_local0, Enum[0xEA28383B5DEC206][0x708B5057D80F5FF])
+		f21_local3 = Engine[@"getonlinefriendslist"](f21_local1, f21_local0.fetchOffSet, f0_local0, Enum[@"presencefilter"][@"presence_filter_all"])
 		f21_local0.fetchOffSet = f21_local0.fetchOffSet + f0_local0
 		for f21_local7, f21_local8 in ipairs(f21_local3) do
 			f21_local2[f21_local7] = f21_local8.xuid
@@ -369,7 +369,7 @@ Lobby.Clans.GetMembershipsForFriends = function(f21_arg0)
 	local f21_local3 = Lobby.ProcessQueue.RegisterEventHandler(Lobby.Clans.GetMembershipsForFriendsComplete, {
 		user = f21_arg0,
 	})
-	if not Engine[0xA0F0BC61EE66B5E](f21_local3, f21_local1, LuaDefine.TASKMANAGER2_DEFAULT_TIMEOUT, f21_local2, {
+	if not Engine[@"hash_6A0F0BC61EE66B5E"](f21_local3, f21_local1, LuaDefine.TASKMANAGER2_DEFAULT_TIMEOUT, f21_local2, {
 		LuaEnum.CLAN_KINDS.CLAN,
 	}) then
 		Lobby.Clans.PrintError(nil, "Task failed to start")
@@ -387,14 +387,14 @@ Lobby.Clans.GetMembershipsForFriendsComplete = function(f22_arg0, f22_arg1, f22_
 	if f22_arg0 == Lobby.ProcessQueue.ACTIONSTATE.RUNNING then
 		return false
 	elseif f22_arg0 == Lobby.ProcessQueue.ACTIONSTATE.SUCCESS then
-		Engine[0x299C3DC3A21873E](f22_local1.liveBackoff)
+		Engine[@"hash_6299C3DC3A21873E"](f22_local1.liveBackoff)
 		if #f22_arg2.clansGroupMemberInfo > 0 then
 			for f22_local5, f22_local6 in ipairs(f22_arg2.clansGroupMemberInfo) do
 				if #f22_local6.clansGroupMembershipInfo > 0 then
 					f22_local1.data[f22_local6.clansGroupMembershipInfo[1].clansGroupIdentifier.IDstr] = f22_local6.clansGroupMembershipInfo[1].clansGroupIdentifier
 					f22_local1.list[#f22_local1.list + 1] = {
 						xuid = f22_local6.userID,
-						xuidStr = Engine[0x5065E759595C457](f22_local6.userID),
+						xuidStr = Engine[@"xuidtostring"](f22_local6.userID),
 						IDstr = f22_local6.clansGroupMembershipInfo[1].clansGroupIdentifier.IDstr,
 					}
 				end
@@ -406,14 +406,14 @@ Lobby.Clans.GetMembershipsForFriendsComplete = function(f22_arg0, f22_arg1, f22_
 			Lobby.Clans.PopulateUIFriendClanModels(f22_local0)
 		end
 	elseif f22_arg0 == Lobby.ProcessQueue.ACTIONSTATE.FAILURE or f22_arg0 == Lobby.ProcessQueue.ACTIONSTATE.ERROR then
-		Engine[0xF910D4EFAE3B0F3](f22_local1.liveBackoff, Engine[0x316595FEDC72451]())
+		Engine[@"hash_6F910D4EFAE3B0F3"](f22_local1.liveBackoff, Engine[@"hash_6316595FEDC72451"]())
 		Lobby.Clans.PrintError(f22_arg2.errorCode)
 	end
 	return true
 end
 Lobby.Clans.GetGroupInfos = function(f23_arg0, f23_arg1)
 	local f23_local0 = f23_arg0[f0_local5]
-	if not Engine[0x88C82D2C4BED05](f23_local0.liveBackoff, Engine[0x316595FEDC72451]()) then
+	if not Engine[0x88C82D2C4BED05](f23_local0.liveBackoff, Engine[@"hash_6316595FEDC72451"]()) then
 		return
 	elseif f23_local0.groupTables[f23_local0.groupTableIndex] == nil or #f23_local0.groupTables[f23_local0.groupTableIndex].kinds == 0 then
 		Lobby.Clans.SetFetchedData(f23_arg0, f0_local5, {})
@@ -427,7 +427,7 @@ Lobby.Clans.GetGroupInfos = function(f23_arg0, f23_arg1)
 	local f23_local3 = Lobby.ProcessQueue.RegisterEventHandler(Lobby.Clans.GetGroupInfosComplete, {
 		user = f23_arg0,
 	})
-	if not Engine[0xD36C267A07DB296](f23_local3, f23_local2, LuaDefine.TASKMANAGER2_DEFAULT_TIMEOUT, f23_local1.kinds, f23_local1.IDs, f23_local1.rootKinds, f23_local1.rootIDs) then
+	if not Engine[@"hash_3D36C267A07DB296"](f23_local3, f23_local2, LuaDefine.TASKMANAGER2_DEFAULT_TIMEOUT, f23_local1.kinds, f23_local1.IDs, f23_local1.rootKinds, f23_local1.rootIDs) then
 		Lobby.Clans.PrintError(nil, "Task failed to start")
 		LobbyVM.ProcessCompleteFailure({
 			actionId = f23_local3,
@@ -443,7 +443,7 @@ Lobby.Clans.GetGroupInfosComplete = function(f24_arg0, f24_arg1, f24_arg2)
 	if f24_arg0 == Lobby.ProcessQueue.ACTIONSTATE.RUNNING then
 		return false
 	elseif f24_arg0 == Lobby.ProcessQueue.ACTIONSTATE.SUCCESS then
-		Engine[0x299C3DC3A21873E](f24_local1.liveBackoff)
+		Engine[@"hash_6299C3DC3A21873E"](f24_local1.liveBackoff)
 		for f24_local5, f24_local6 in ipairs(f24_arg2.clansGroupInfos) do
 			f24_local1.data[f24_local6.clansGroupIdentifier.IDstr] = f24_local6
 		end
@@ -457,13 +457,13 @@ Lobby.Clans.GetGroupInfosComplete = function(f24_arg0, f24_arg1, f24_arg2)
 			Lobby.Clans.PopulateUIClanInfoModels(f24_local0)
 		end
 	elseif f24_arg0 == Lobby.ProcessQueue.ACTIONSTATE.FAILURE or f24_arg0 == Lobby.ProcessQueue.ACTIONSTATE.ERROR then
-		Engine[0xF910D4EFAE3B0F3](f24_local1.liveBackoff, Engine[0x316595FEDC72451]())
+		Engine[@"hash_6F910D4EFAE3B0F3"](f24_local1.liveBackoff, Engine[@"hash_6316595FEDC72451"]())
 		Lobby.Clans.PrintError(f24_arg2.errorCode)
 	end
 	return true
 end
 Lobby.Clans.GetGroupMembers = function(f25_arg0)
-	if not Engine[0x88C82D2C4BED05](f25_arg0[f0_local6].liveBackoff, Engine[0x316595FEDC72451]()) then
+	if not Engine[0x88C82D2C4BED05](f25_arg0[f0_local6].liveBackoff, Engine[@"hash_6316595FEDC72451"]()) then
 		return
 	end
 	local f25_local0, f25_local1 = Lobby.Clans.GetClanInfoForUser(f25_arg0)
@@ -475,7 +475,7 @@ Lobby.Clans.GetGroupMembers = function(f25_arg0)
 	local f25_local3 = Lobby.ProcessQueue.RegisterEventHandler(Lobby.Clans.GetGroupMembersComplete, {
 		user = f25_arg0,
 	})
-	if not Engine[0x7899906EABDA3E1](f25_local3, f25_local2, LuaDefine.TASKMANAGER2_DEFAULT_TIMEOUT, f25_local0, f25_local1, LuaEnum.CLAN_OPTIONAL_PARAMETERS.ROOT_KIND, LuaEnum.CLAN_OPTIONAL_PARAMETERS.ROOT_ID, LuaEnum.CLAN_OPTIONAL_PARAMETERS.XUIDS, LuaEnum.CLAN_OPTIONAL_PARAMETERS.ROLES) then
+	if not Engine[@"hash_47899906EABDA3E1"](f25_local3, f25_local2, LuaDefine.TASKMANAGER2_DEFAULT_TIMEOUT, f25_local0, f25_local1, LuaEnum.CLAN_OPTIONAL_PARAMETERS.ROOT_KIND, LuaEnum.CLAN_OPTIONAL_PARAMETERS.ROOT_ID, LuaEnum.CLAN_OPTIONAL_PARAMETERS.XUIDS, LuaEnum.CLAN_OPTIONAL_PARAMETERS.ROLES) then
 		Lobby.Clans.PrintError(nil, "Task failed to start")
 		LobbyVM.ProcessCompleteFailure({
 			actionId = f25_local3,
@@ -491,24 +491,24 @@ Lobby.Clans.GetGroupMembersComplete = function(f26_arg0, f26_arg1, f26_arg2)
 	if f26_arg0 == Lobby.ProcessQueue.ACTIONSTATE.RUNNING then
 		return false
 	elseif f26_arg0 == Lobby.ProcessQueue.ACTIONSTATE.SUCCESS then
-		Engine[0x299C3DC3A21873E](f26_local1.liveBackoff)
+		Engine[@"hash_6299C3DC3A21873E"](f26_local1.liveBackoff)
 		Lobby.Clans.SetFetchedData(f26_local0, f0_local6, f26_arg2.clansGroupMemberInfo)
 		Lobby.Clans.PopulateUIClanMemberModels(f26_local0)
 	elseif f26_arg0 == Lobby.ProcessQueue.ACTIONSTATE.FAILURE or f26_arg0 == Lobby.ProcessQueue.ACTIONSTATE.ERROR then
-		Engine[0xF910D4EFAE3B0F3](f26_local1.liveBackoff, Engine[0x316595FEDC72451]())
+		Engine[@"hash_6F910D4EFAE3B0F3"](f26_local1.liveBackoff, Engine[@"hash_6316595FEDC72451"]())
 		Lobby.Clans.PrintError(f26_arg2.errorCode)
 	end
 	return true
 end
 Lobby.Clans.GetMembershipProposalsByUser = function(f27_arg0)
-	if not Engine[0x88C82D2C4BED05](f27_arg0[f0_local3].liveBackoff, Engine[0x316595FEDC72451]()) then
+	if not Engine[0x88C82D2C4BED05](f27_arg0[f0_local3].liveBackoff, Engine[@"hash_6316595FEDC72451"]()) then
 		return
 	end
 	local f27_local0 = f27_arg0.controller
 	local f27_local1 = Lobby.ProcessQueue.RegisterEventHandler(Lobby.Clans.GetMembershipProposalsByUserComplete, {
 		user = f27_arg0,
 	})
-	if not Engine[0x1BBB39F76C1A04B](f27_local1, f27_local0, LuaDefine.TASKMANAGER2_DEFAULT_TIMEOUT, f27_arg0.xuid, f27_arg0.xuid) then
+	if not Engine[@"hash_61BBB39F76C1A04B"](f27_local1, f27_local0, LuaDefine.TASKMANAGER2_DEFAULT_TIMEOUT, f27_arg0.xuid, f27_arg0.xuid) then
 		Lobby.Clans.PrintError(nil, "Task failed to start")
 		LobbyVM.ProcessCompleteFailure({
 			actionId = f27_local1,
@@ -524,17 +524,17 @@ Lobby.Clans.GetMembershipProposalsByUserComplete = function(f28_arg0, f28_arg1, 
 	if f28_arg0 == Lobby.ProcessQueue.ACTIONSTATE.RUNNING then
 		return false
 	elseif f28_arg0 == Lobby.ProcessQueue.ACTIONSTATE.SUCCESS then
-		Engine[0x299C3DC3A21873E](f28_local1.liveBackoff)
+		Engine[@"hash_6299C3DC3A21873E"](f28_local1.liveBackoff)
 		Lobby.Clans.SetFetchedData(f28_local0, f0_local3, f28_arg2.clansGroupMembershipProposals)
 	elseif f28_arg0 == Lobby.ProcessQueue.ACTIONSTATE.FAILURE or f28_arg0 == Lobby.ProcessQueue.ACTIONSTATE.ERROR then
-		Engine[0xF910D4EFAE3B0F3](f28_local1.liveBackoff, Engine[0x316595FEDC72451]())
+		Engine[@"hash_6F910D4EFAE3B0F3"](f28_local1.liveBackoff, Engine[@"hash_6316595FEDC72451"]())
 		Lobby.Clans.PrintError(f28_arg2.errorCode)
 	end
 	return true
 end
 Lobby.Clans.GetMembershipProposalsByGroup = function(f29_arg0)
 	local f29_local0 = f29_arg0[f0_local4]
-	if not Engine[0x88C82D2C4BED05](f29_local0.liveBackoff, Engine[0x316595FEDC72451]()) then
+	if not Engine[0x88C82D2C4BED05](f29_local0.liveBackoff, Engine[@"hash_6316595FEDC72451"]()) then
 		return
 	elseif #f29_arg0[f0_local1].data == 0 then
 		Lobby.Clans.SetFetchedData(f29_arg0, f0_local4, {})
@@ -543,7 +543,7 @@ Lobby.Clans.GetMembershipProposalsByGroup = function(f29_arg0)
 		f29_local0.fetchCount = 0
 		f29_local0.fetchList = {}
 		for f29_local4, f29_local5 in ipairs(f29_arg0[f0_local1].data) do
-			if f29_local5.role > Enum[0x10C0A769A29C38F][0xB17C2FE5CC7F0BC] then
+			if f29_local5.role > Enum[@"hash_610C0A769A29C38F"][@"hash_4B17C2FE5CC7F0BC"] then
 				f29_local0.fetchList[f29_local0.fetchCount] = {
 					kind = f29_local5.clansGroupIdentifier.kind,
 					ID = f29_local5.clansGroupIdentifier.ID,
@@ -565,7 +565,7 @@ Lobby.Clans.GetMembershipProposalsByGroup = function(f29_arg0)
 		user = f29_arg0,
 	})
 	local f29_local3 = f29_local0.fetchList[f29_local0.fetchOffSet]
-	if not Engine[0xA12CA07097B822B](f29_local2, f29_local1, LuaDefine.TASKMANAGER2_DEFAULT_TIMEOUT, f29_local3.kind, f29_local3.ID, f29_local3.rootKind, f29_local3.rootID) then
+	if not Engine[@"hash_7A12CA07097B822B"](f29_local2, f29_local1, LuaDefine.TASKMANAGER2_DEFAULT_TIMEOUT, f29_local3.kind, f29_local3.ID, f29_local3.rootKind, f29_local3.rootID) then
 		Lobby.Clans.PrintError(nil, "Task failed to start")
 		LobbyVM.ProcessCompleteFailure({
 			actionId = f29_local2,
@@ -581,7 +581,7 @@ Lobby.Clans.GetMembershipProposalsByGroupComplete = function(f30_arg0, f30_arg1,
 	if f30_arg0 == Lobby.ProcessQueue.ACTIONSTATE.RUNNING then
 		return false
 	elseif f30_arg0 == Lobby.ProcessQueue.ACTIONSTATE.SUCCESS then
-		Engine[0x299C3DC3A21873E](f30_local1.liveBackoff)
+		Engine[@"hash_6299C3DC3A21873E"](f30_local1.liveBackoff)
 		f30_local1.fetchOffSet = f30_local1.fetchOffSet + 1
 		if #f30_arg2.clansGroupMembershipProposals > 0 then
 			for f30_local5, f30_local6 in ipairs(f30_arg2.clansGroupMembershipProposals) do
@@ -593,14 +593,14 @@ Lobby.Clans.GetMembershipProposalsByGroupComplete = function(f30_arg0, f30_arg1,
 			Lobby.Clans.SetFetchedData(f30_local0, f0_local4, f30_local1.data)
 		end
 	elseif f30_arg0 == Lobby.ProcessQueue.ACTIONSTATE.FAILURE or f30_arg0 == Lobby.ProcessQueue.ACTIONSTATE.ERROR then
-		Engine[0xF910D4EFAE3B0F3](f30_local1.liveBackoff, Engine[0x316595FEDC72451]())
+		Engine[@"hash_6F910D4EFAE3B0F3"](f30_local1.liveBackoff, Engine[@"hash_6316595FEDC72451"]())
 		Lobby.Clans.PrintError(f30_arg2.errorCode)
 	end
 	return true
 end
 Lobby.Clans.RemoveGroupMember = function(f31_arg0)
 	local f31_local0 = f31_arg0[f0_local7]
-	if not Engine[0x88C82D2C4BED05](f31_local0.liveBackoff, Engine[0x316595FEDC72451]()) then
+	if not Engine[0x88C82D2C4BED05](f31_local0.liveBackoff, Engine[@"hash_6316595FEDC72451"]()) then
 		return
 	end
 	local f31_local1 = f31_local0.data
@@ -614,9 +614,9 @@ Lobby.Clans.RemoveGroupMember = function(f31_arg0)
 		f31_local4 = f31_local1.replacesGroupID
 		f31_local5 = f31_local1.replacesRootID
 	end
-	local f31_local6 = Engine[0x8DF2E5447F384B9]()
+	local f31_local6 = Engine[@"getglobalmodel"]()
 	f31_local6.socialRoot.clans.loaded:set(LuaEnum.CLAN_INFO_MODELS.DELETING_CLAN)
-	if not Engine[0x5BBAEBE20B6669F](f31_local3, f31_local2, LuaDefine.TASKMANAGER2_DEFAULT_TIMEOUT, f31_local1.kind, f31_local4, f31_local1.rootKind, f31_local5, f31_local1.user or 0, f31_local1.newOwner or 0) then
+	if not Engine[@"hash_65BBAEBE20B6669F"](f31_local3, f31_local2, LuaDefine.TASKMANAGER2_DEFAULT_TIMEOUT, f31_local1.kind, f31_local4, f31_local1.rootKind, f31_local5, f31_local1.user or 0, f31_local1.newOwner or 0) then
 		Lobby.Clans.PrintError(nil, "Task failed to start")
 		LobbyVM.ProcessCompleteFailure({
 			actionId = f31_local3,
@@ -632,29 +632,29 @@ Lobby.Clans.RemoveGroupMemberComplete = function(f32_arg0, f32_arg1, f32_arg2)
 	if f32_arg0 == Lobby.ProcessQueue.ACTIONSTATE.RUNNING then
 		return false
 	elseif f32_arg0 == Lobby.ProcessQueue.ACTIONSTATE.SUCCESS then
-		Engine[0x299C3DC3A21873E](f32_local1.liveBackoff)
+		Engine[@"hash_6299C3DC3A21873E"](f32_local1.liveBackoff)
 		Lobby.Clans.ClearTask(f32_local1)
 		local f32_local2 = f32_local1.data
 		if not f32_local2.user then
-			Engine[0xE1789115A2356E7]("open_toaster_popup", {
+			Engine[@"luivm_event"]("open_toaster_popup", {
 				toastType = "remove_user",
-				message = Engine[0xF9F1239CFD921FE](0x8069015F62912FE),
+				message = Engine[@"hash_4F9F1239CFD921FE"](@"hash_38069015F62912FE"),
 				isError = false,
 				controller = controller,
 				immediate = true,
 			})
-		elseif f32_local2.user == Engine[0x93B19E01B1FD1C7](f32_local0.controller) and f32_local2.newOwner == 0 then
-			Engine[0xE1789115A2356E7]("open_toaster_popup", {
+		elseif f32_local2.user == Engine[@"getxuid64"](f32_local0.controller) and f32_local2.newOwner == 0 then
+			Engine[@"luivm_event"]("open_toaster_popup", {
 				toastType = "remove_user",
-				message = Engine[0xF9F1239CFD921FE](0xC147AE3BDB2BEC6),
+				message = Engine[@"hash_4F9F1239CFD921FE"](@"hash_6C147AE3BDB2BEC6"),
 				isError = false,
 				controller = controller,
 				immediate = true,
 			})
 		else
-			Engine[0xE1789115A2356E7]("open_toaster_popup", {
+			Engine[@"luivm_event"]("open_toaster_popup", {
 				toastType = "remove_user",
-				message = Engine[0xF9F1239CFD921FE](0x7B285A6F0614EC4),
+				message = Engine[@"hash_4F9F1239CFD921FE"](@"hash_37B285A6F0614EC4"),
 				gamertag = f32_local2.user,
 				isError = false,
 				controller = controller,
@@ -667,7 +667,7 @@ Lobby.Clans.RemoveGroupMemberComplete = function(f32_arg0, f32_arg1, f32_arg2)
 			f32_local1.action = Lobby.Clans.GROUP_ACTION.ACCEPT_REQUEST
 		end
 	elseif f32_arg0 == Lobby.ProcessQueue.ACTIONSTATE.FAILURE or f32_arg0 == Lobby.ProcessQueue.ACTIONSTATE.ERROR then
-		Engine[0xF910D4EFAE3B0F3](f32_local1.liveBackoff, Engine[0x316595FEDC72451]())
+		Engine[@"hash_6F910D4EFAE3B0F3"](f32_local1.liveBackoff, Engine[@"hash_6316595FEDC72451"]())
 		Lobby.Clans.PrintError(f32_arg2.errorCode)
 		Lobby.Clans.PrintErrorToClientAndClearTaskIfNeeded(f32_local0.controller, f32_arg2.errorCode, f32_local1)
 	end
@@ -679,7 +679,7 @@ Lobby.Clans.RemoveGroupMemberComplete = function(f32_arg0, f32_arg1, f32_arg2)
 end
 Lobby.Clans.ProposeMemberships = function(f33_arg0)
 	local f33_local0 = f33_arg0[f0_local7]
-	if not Engine[0x88C82D2C4BED05](f33_local0.liveBackoff, Engine[0x316595FEDC72451]()) then
+	if not Engine[0x88C82D2C4BED05](f33_local0.liveBackoff, Engine[@"hash_6316595FEDC72451"]()) then
 		return
 	end
 	local f33_local1 = f33_local0.data
@@ -687,7 +687,7 @@ Lobby.Clans.ProposeMemberships = function(f33_arg0)
 	local f33_local3 = Lobby.ProcessQueue.RegisterEventHandler(Lobby.Clans.ProposeMembershipsComplete, {
 		user = f33_arg0,
 	})
-	if not Engine[0xA31A6CCD8DCD181](f33_local3, f33_local2, LuaDefine.TASKMANAGER2_DEFAULT_TIMEOUT, f33_local1.kind, f33_local1.ID, f33_local1.rootKind, f33_local1.rootID, f33_local1.xuids, f33_local1.roles) then
+	if not Engine[@"hash_5A31A6CCD8DCD181"](f33_local3, f33_local2, LuaDefine.TASKMANAGER2_DEFAULT_TIMEOUT, f33_local1.kind, f33_local1.ID, f33_local1.rootKind, f33_local1.rootID, f33_local1.xuids, f33_local1.roles) then
 		Lobby.Clans.PrintError(nil, "Task failed to start")
 		LobbyVM.ProcessCompleteFailure({
 			actionId = f33_local3,
@@ -703,10 +703,10 @@ Lobby.Clans.ProposeMembershipsComplete = function(f34_arg0, f34_arg1, f34_arg2)
 	if f34_arg0 == Lobby.ProcessQueue.ACTIONSTATE.RUNNING then
 		return false
 	elseif f34_arg0 == Lobby.ProcessQueue.ACTIONSTATE.SUCCESS then
-		Engine[0x299C3DC3A21873E](f34_local1.liveBackoff)
+		Engine[@"hash_6299C3DC3A21873E"](f34_local1.liveBackoff)
 		Lobby.Clans.ClearTask(f34_local1)
 	elseif f34_arg0 == Lobby.ProcessQueue.ACTIONSTATE.FAILURE or f34_arg0 == Lobby.ProcessQueue.ACTIONSTATE.ERROR then
-		Engine[0xF910D4EFAE3B0F3](f34_local1.liveBackoff, Engine[0x316595FEDC72451]())
+		Engine[@"hash_6F910D4EFAE3B0F3"](f34_local1.liveBackoff, Engine[@"hash_6316595FEDC72451"]())
 		Lobby.Clans.PrintError(f34_arg2.errorCode)
 		Lobby.Clans.PrintErrorToClientAndClearTaskIfNeeded(f34_local0.controller, f34_arg2.errorCode, f34_local1)
 	end
@@ -714,7 +714,7 @@ Lobby.Clans.ProposeMembershipsComplete = function(f34_arg0, f34_arg1, f34_arg2)
 end
 Lobby.Clans.CreateGroup = function(f35_arg0)
 	local f35_local0 = f35_arg0[f0_local7]
-	if not Engine[0x88C82D2C4BED05](f35_local0.liveBackoff, Engine[0x316595FEDC72451]()) then
+	if not Engine[0x88C82D2C4BED05](f35_local0.liveBackoff, Engine[@"hash_6316595FEDC72451"]()) then
 		return
 	end
 	local f35_local1 = f35_arg0.controller
@@ -736,7 +736,7 @@ Lobby.Clans.CreateGroup = function(f35_arg0)
 		end
 	end
 	local f35_local3 = f35_local0.data
-	local f35_local4 = Engine[0x42C33FC244F1071]
+	local f35_local4 = Engine[@"hash_642C33FC244F1071"]
 	local f35_local5 = f35_local2
 	local f35_local6 = f35_local1
 	local f35_local7 = LuaDefine.TASKMANAGER2_DEFAULT_TIMEOUT
@@ -771,14 +771,14 @@ Lobby.Clans.CreateGroupComplete = function(f36_arg0, f36_arg1, f36_arg2)
 		return false
 	elseif f36_arg0 == Lobby.ProcessQueue.ACTIONSTATE.SUCCESS then
 		Lobby.Clans.CreateGroupDataFile(f36_local0, f36_arg2, f36_local1.data)
-		Engine[0x299C3DC3A21873E](f36_local1.liveBackoff)
+		Engine[@"hash_6299C3DC3A21873E"](f36_local1.liveBackoff)
 		Lobby.Clans.ClearTask(f36_local1)
 		Lobby.Events.EventDispatcher("OnClanUIEvent", {
 			controller = f36_local0.controller,
 			event = LuaEnum.CLAN_UI_EVENT.REFETCH_ALL,
 		})
 	elseif f36_arg0 == Lobby.ProcessQueue.ACTIONSTATE.FAILURE or f36_arg0 == Lobby.ProcessQueue.ACTIONSTATE.ERROR then
-		Engine[0xF910D4EFAE3B0F3](f36_local1.liveBackoff, Engine[0x316595FEDC72451]())
+		Engine[@"hash_6F910D4EFAE3B0F3"](f36_local1.liveBackoff, Engine[@"hash_6316595FEDC72451"]())
 		Lobby.Clans.PrintError(f36_arg2.errorCode)
 		Lobby.Clans.ClearTask(f36_local1)
 	end
@@ -786,7 +786,7 @@ Lobby.Clans.CreateGroupComplete = function(f36_arg0, f36_arg1, f36_arg2)
 end
 Lobby.Clans.UpdateGroup = function(f37_arg0)
 	local f37_local0 = f37_arg0[f0_local7]
-	if not Engine[0x88C82D2C4BED05](f37_local0.liveBackoff, Engine[0x316595FEDC72451]()) then
+	if not Engine[0x88C82D2C4BED05](f37_local0.liveBackoff, Engine[@"hash_6316595FEDC72451"]()) then
 		return
 	end
 	local f37_local1 = f37_arg0.controller
@@ -794,7 +794,7 @@ Lobby.Clans.UpdateGroup = function(f37_arg0)
 		user = f37_arg0,
 	})
 	local f37_local3 = f37_local0.data
-	if not Engine[0x881698562E943FA](f37_local2, f37_local1, LuaDefine.TASKMANAGER2_DEFAULT_TIMEOUT, f37_local3.kind, f37_local3.ID, LuaEnum.CLAN_OPTIONAL_PARAMETERS.ROOT_KIND, LuaEnum.CLAN_OPTIONAL_PARAMETERS.ROOT_ID, "Jeff is a Spud", LuaEnum.CLAN_OPTIONAL_PARAMETERS.OWNER, LuaEnum.CLAN_OPTIONAL_PARAMETERS.PRIVACY_LEVEL) then
+	if not Engine[@"hash_6881698562E943FA"](f37_local2, f37_local1, LuaDefine.TASKMANAGER2_DEFAULT_TIMEOUT, f37_local3.kind, f37_local3.ID, LuaEnum.CLAN_OPTIONAL_PARAMETERS.ROOT_KIND, LuaEnum.CLAN_OPTIONAL_PARAMETERS.ROOT_ID, "Jeff is a Spud", LuaEnum.CLAN_OPTIONAL_PARAMETERS.OWNER, LuaEnum.CLAN_OPTIONAL_PARAMETERS.PRIVACY_LEVEL) then
 		Lobby.Clans.PrintError(nil, "Task failed to start")
 		LobbyVM.ProcessCompleteFailure({
 			actionId = f37_local2,
@@ -810,15 +810,15 @@ Lobby.Clans.UpdateGroupComplete = function(f38_arg0, f38_arg1, f38_arg2)
 	if f38_arg0 == Lobby.ProcessQueue.ACTIONSTATE.RUNNING then
 		return false
 	elseif f38_arg0 == Lobby.ProcessQueue.ACTIONSTATE.SUCCESS then
-		Engine[0x299C3DC3A21873E](f38_local0.liveBackoff)
+		Engine[@"hash_6299C3DC3A21873E"](f38_local0.liveBackoff)
 	elseif f38_arg0 == Lobby.ProcessQueue.ACTIONSTATE.FAILURE or f38_arg0 == Lobby.ProcessQueue.ACTIONSTATE.ERROR then
-		Engine[0xF910D4EFAE3B0F3](f38_local0.liveBackoff, Engine[0x316595FEDC72451]())
+		Engine[@"hash_6F910D4EFAE3B0F3"](f38_local0.liveBackoff, Engine[@"hash_6316595FEDC72451"]())
 		Lobby.Clans.PrintError(f38_arg2.errorCode)
 	end
 end
 Lobby.Clans.AddOrUpdateGroupMember = function(f39_arg0)
 	local f39_local0 = f39_arg0[f0_local7]
-	if not Engine[0x88C82D2C4BED05](f39_local0.liveBackoff, Engine[0x316595FEDC72451]()) then
+	if not Engine[0x88C82D2C4BED05](f39_local0.liveBackoff, Engine[@"hash_6316595FEDC72451"]()) then
 		return
 	end
 	local f39_local1 = f39_local0.data
@@ -826,9 +826,9 @@ Lobby.Clans.AddOrUpdateGroupMember = function(f39_arg0)
 	local f39_local3 = Lobby.ProcessQueue.RegisterEventHandler(Lobby.Clans.AddOrUpdateGroupMemberComplete, {
 		user = f39_arg0,
 	})
-	local f39_local4 = Engine[0x8DF2E5447F384B9]()
+	local f39_local4 = Engine[@"getglobalmodel"]()
 	f39_local4.socialRoot.clans.loaded:set(LuaEnum.CLAN_INFO_MODELS.JOINING_CLAN)
-	f39_local4 = Engine[0x6F76A7726BAA362]
+	f39_local4 = Engine[@"hash_66F76A7726BAA362"]
 	local f39_local5 = f39_local3
 	local f39_local6 = f39_local2
 	local f39_local7 = LuaDefine.TASKMANAGER2_DEFAULT_TIMEOUT
@@ -838,7 +838,7 @@ Lobby.Clans.AddOrUpdateGroupMember = function(f39_arg0)
 	local f39_local11 = f39_local1.rootID
 	local f39_local12 = f39_local1.role
 	if not f39_local12 then
-		f39_local12 = Enum[0x10C0A769A29C38F][0xB17C2FE5CC7F0BC]
+		f39_local12 = Enum[@"hash_610C0A769A29C38F"][@"hash_4B17C2FE5CC7F0BC"]
 	end
 	if not f39_local4(f39_local5, f39_local6, f39_local7, f39_local8, f39_local9, f39_local10, f39_local11, f39_local12, f39_local1.xuid, f39_local1.replacesGroupID or 0) then
 		Lobby.Clans.PrintError(nil, "Task failed to start")
@@ -857,7 +857,7 @@ Lobby.Clans.AddOrUpdateGroupMemberComplete = function(f40_arg0, f40_arg1, f40_ar
 	if f40_arg0 == Lobby.ProcessQueue.ACTIONSTATE.RUNNING then
 		return false
 	elseif f40_arg0 == Lobby.ProcessQueue.ACTIONSTATE.SUCCESS then
-		Engine[0x299C3DC3A21873E](f40_local2.liveBackoff)
+		Engine[@"hash_6299C3DC3A21873E"](f40_local2.liveBackoff)
 		Lobby.Clans.ClearTask(f40_local2)
 		f40_local0[f0_local1].fetchStatus = Lobby.Clans.DATA_STATUS.NOT_FETCHED
 		f40_local0[f0_local5].fetchStatus = Lobby.Clans.DATA_STATUS.NOT_FETCHED
@@ -865,21 +865,21 @@ Lobby.Clans.AddOrUpdateGroupMemberComplete = function(f40_arg0, f40_arg1, f40_ar
 		f40_local0[f0_local3].fetchStatus = Lobby.Clans.DATA_STATUS.NOT_FETCHED
 		f40_local0[f0_local4].fetchStatus = Lobby.Clans.DATA_STATUS.NOT_FETCHED
 		if f40_local2.action == Lobby.Clans.GROUP_ACTION.ACCEPT_REQUEST then
-			Engine[0xE1789115A2356E7]("open_toaster_popup", {
+			Engine[@"luivm_event"]("open_toaster_popup", {
 				toastType = "clan_join",
-				message = 0x985BB17C727067D,
+				message = @"hash_1985BB17C727067D",
 				isError = false,
 				controller = f40_local1,
 				immediate = true,
 			})
 		end
 	elseif f40_arg0 == Lobby.ProcessQueue.ACTIONSTATE.FAILURE or f40_arg0 == Lobby.ProcessQueue.ACTIONSTATE.ERROR then
-		Engine[0xF910D4EFAE3B0F3](f40_local2.liveBackoff, Engine[0x316595FEDC72451]())
+		Engine[@"hash_6F910D4EFAE3B0F3"](f40_local2.liveBackoff, Engine[@"hash_6316595FEDC72451"]())
 		Lobby.Clans.PrintError(f40_arg2.errorCode)
 		if f40_local2.action == Lobby.Clans.GROUP_ACTION.ACCEPT_REQUEST then
-			Engine[0xE1789115A2356E7]("open_toaster_popup", {
+			Engine[@"luivm_event"]("open_toaster_popup", {
 				toastType = "clan_join",
-				message = 0x26374B4FCED05C9,
+				message = @"hash_726374B4FCED05C9",
 				isError = true,
 				controller = f40_local1,
 				immediate = true,
@@ -890,7 +890,7 @@ Lobby.Clans.AddOrUpdateGroupMemberComplete = function(f40_arg0, f40_arg1, f40_ar
 end
 Lobby.Clans.RemoveProposals = function(f41_arg0)
 	local f41_local0 = f41_arg0[f0_local7]
-	if not Engine[0x88C82D2C4BED05](f41_local0.liveBackoff, Engine[0x316595FEDC72451]()) then
+	if not Engine[0x88C82D2C4BED05](f41_local0.liveBackoff, Engine[@"hash_6316595FEDC72451"]()) then
 		return
 	end
 	local f41_local1 = f41_arg0.controller
@@ -898,7 +898,7 @@ Lobby.Clans.RemoveProposals = function(f41_arg0)
 		user = f41_arg0,
 	})
 	f41_local0.data.cooldown = 0
-	if not Engine[0x889A6176CDF642D](f41_local2, f41_local1, LuaDefine.TASKMANAGER2_DEFAULT_TIMEOUT, {
+	if not Engine[@"hash_889A6176CDF642D"](f41_local2, f41_local1, LuaDefine.TASKMANAGER2_DEFAULT_TIMEOUT, {
 		f41_local0.data.targetUserID,
 	}, {
 		f41_local0.data.kind,
@@ -925,10 +925,10 @@ Lobby.Clans.RemoveProposalsComplete = function(f42_arg0, f42_arg1, f42_arg2)
 	if f42_arg0 == Lobby.ProcessQueue.ACTIONSTATE.RUNNING then
 		return false
 	elseif f42_arg0 == Lobby.ProcessQueue.ACTIONSTATE.SUCCESS then
-		Engine[0x299C3DC3A21873E](f42_local0.liveBackoff)
+		Engine[@"hash_6299C3DC3A21873E"](f42_local0.liveBackoff)
 		Lobby.Clans.ClearTask(f42_local0)
 	elseif f42_arg0 == Lobby.ProcessQueue.ACTIONSTATE.FAILURE or f42_arg0 == Lobby.ProcessQueue.ACTIONSTATE.ERROR then
-		Engine[0xF910D4EFAE3B0F3](f42_local0.liveBackoff, Engine[0x316595FEDC72451]())
+		Engine[@"hash_6F910D4EFAE3B0F3"](f42_local0.liveBackoff, Engine[@"hash_6316595FEDC72451"]())
 		Lobby.Clans.PrintError(f42_arg2.errorCode)
 	end
 	return true
@@ -950,7 +950,7 @@ Lobby.Clans.FormatMembershipInfo = function(f43_arg0)
 			rootKind = f43_local7.clansGroupIdentifier.rootKind,
 			rootID = f43_local7.clansGroupIdentifier.rootID,
 			rootIDstr = f43_local7.clansGroupIdentifier.rootIDstr,
-			owner = f43_local7.role == Enum[0x10C0A769A29C38F][0xE94BCDEEB8AE946],
+			owner = f43_local7.role == Enum[@"hash_610C0A769A29C38F"][@"hash_4E94BCDEEB8AE946"],
 		}
 		if f43_local8 == LuaEnum.CLAN_KINDS.CLAN then
 			f43_local2.dataFormatted.clan = f43_local9
@@ -965,21 +965,21 @@ Lobby.Clans.FormatMembershipInfo = function(f43_arg0)
 end
 Lobby.Clans.FindGroups = function(f44_arg0)
 	local f44_local0 = f44_arg0[f0_local7]
-	if not Engine[0x88C82D2C4BED05](f44_local0.liveBackoff, Engine[0x316595FEDC72451]()) then
+	if not Engine[0x88C82D2C4BED05](f44_local0.liveBackoff, Engine[@"hash_6316595FEDC72451"]()) then
 		return
 	end
 	local f44_local1 = f44_arg0.controller
 	local f44_local2 = Lobby.ProcessQueue.RegisterEventHandler(Lobby.Clans.FindGroupsComplete, {
 		user = f44_arg0,
 	})
-	local f44_local3 = Engine[0x4DF5CFBC1771947](f44_local1)
+	local f44_local3 = Engine[@"getmodelforcontroller"](f44_local1)
 	local f44_local4 = f44_local0.data.search
 	local f44_local5 = f44_local0.data.kind
-	local f44_local6 = Engine[0x40E824FE270E174](f44_local3, "ClanSearchFields.publicOnly")
+	local f44_local6 = Engine[@"getmodel"](f44_local3, "ClanSearchFields.publicOnly")
 	local f44_local7
 	if f44_local6:get() then
 		f44_local7 = {
-			Enum[0xC491AC72605E0C3][0xB91F60B176A25F1],
+			Enum[@"hash_6C491AC72605E0C3"][@"hash_4B91F60B176A25F1"],
 		}
 		if not f44_local7 then
 		else
@@ -987,7 +987,7 @@ Lobby.Clans.FindGroups = function(f44_arg0)
 				f44_local5,
 			}
 			local f44_local9 = f44_local0.data
-			if not Engine[0xB356BB0AF6EE665](f44_local2, f44_local1, LuaDefine.TASKMANAGER2_DEFAULT_TIMEOUT, f44_local8, f44_local4, f44_local7) then
+			if not Engine[@"hash_6B356BB0AF6EE665"](f44_local2, f44_local1, LuaDefine.TASKMANAGER2_DEFAULT_TIMEOUT, f44_local8, f44_local4, f44_local7) then
 				Lobby.Clans.PrintError(nil, "Task failed to start")
 				LobbyVM.ProcessCompleteFailure({
 					actionId = f44_local2,
@@ -1006,11 +1006,11 @@ Lobby.Clans.FindGroupsComplete = function(f45_arg0, f45_arg1, f45_arg2)
 	if f45_arg0 == Lobby.ProcessQueue.ACTIONSTATE.RUNNING then
 		return false
 	elseif f45_arg0 == Lobby.ProcessQueue.ACTIONSTATE.SUCCESS then
-		Engine[0x299C3DC3A21873E](f45_local1.liveBackoff)
+		Engine[@"hash_6299C3DC3A21873E"](f45_local1.liveBackoff)
 		Lobby.Clans.PopulateUIClansSearchResults(f45_local0, f45_arg2)
 		Lobby.Clans.ClearTask(f45_local1)
 	elseif f45_arg0 == Lobby.ProcessQueue.ACTIONSTATE.FAILURE or f45_arg0 == Lobby.ProcessQueue.ACTIONSTATE.ERROR then
-		Engine[0xF910D4EFAE3B0F3](f45_local1.liveBackoff, Engine[0x316595FEDC72451]())
+		Engine[@"hash_6F910D4EFAE3B0F3"](f45_local1.liveBackoff, Engine[@"hash_6316595FEDC72451"]())
 		Lobby.Clans.ClearTask(f45_local1)
 		Lobby.Clans.PrintError(f45_arg2.errorCode)
 	end
@@ -1127,9 +1127,9 @@ Lobby.Clans.getTableFromPath = function(f47_arg0, f47_arg1)
 end
 Lobby.Clans.GetRootModelForRequest = function(f48_arg0, f48_arg1)
 	if f48_arg0.rootModel == LuaEnum.CLAN_ROOT_MODEL.GLOBAL then
-		return Engine[0x8DF2E5447F384B9]()
+		return Engine[@"getglobalmodel"]()
 	else
-		return Engine[0x4DF5CFBC1771947](f48_arg1)
+		return Engine[@"getmodelforcontroller"](f48_arg1)
 	end
 end
 Lobby.Clans.CreateInboxModel = function(f49_arg0, f49_arg1, f49_arg2)
@@ -1189,7 +1189,7 @@ Lobby.Clans.HandleUIClanInboxModels = function(f50_arg0, f50_arg1)
 	end
 	local f50_local4 = f50_local0:create("modelCount")
 	f50_local4:set(f50_local3)
-	Engine[0x6A489878620F3BC](f50_local4)
+	Engine[@"forcenotifymodelsubscriptions"](f50_local4)
 end
 Lobby.Clans.GetEmblemRenderInfo = function(f51_arg0, f51_arg1)
 	local f51_local0 = Lobby.Clans.getTableFromPath(f51_arg1.path, Lobby.Clans.GetRootModelForRequest(f51_arg1, f51_arg1.controller))
@@ -1234,13 +1234,13 @@ Lobby.Clans.ReadGroupMembershipFiles = function(f53_arg0)
 		f53_local2 = f53_local2 + 1
 	end
 	local f53_local11 = function(f55_arg0, f55_arg1)
-		return f53_local10(Enum[0xBBD4F9E70101BA8][0x6CA620BD75C97F4], f55_arg0, f55_arg1.kind, f55_arg1.ID, f55_arg1.rootKind, f55_arg1.rootID, LuaEnum.CLAN_STORAGE.DATA)
+		return f53_local10(Enum[@"storagefiletype"][@"hash_56CA620BD75C97F4"], f55_arg0, f55_arg1.kind, f55_arg1.ID, f55_arg1.rootKind, f55_arg1.rootID, LuaEnum.CLAN_STORAGE.DATA)
 	end
 	local f53_local12 = function(f56_arg0, f56_arg1)
-		return f53_local10(Enum[0xBBD4F9E70101BA8][0x94DF15E8078D20A], f56_arg0, f56_arg1.kind, f56_arg1.ID, f56_arg1.rootKind, f56_arg1.rootID, LuaEnum.CLAN_STORAGE.EMBLEM)
+		return f53_local10(Enum[@"storagefiletype"][@"hash_394DF15E8078D20A"], f56_arg0, f56_arg1.kind, f56_arg1.ID, f56_arg1.rootKind, f56_arg1.rootID, LuaEnum.CLAN_STORAGE.EMBLEM)
 	end
 	local f53_local13 = function(f57_arg0, f57_arg1)
-		return f53_local10(Enum[0xBBD4F9E70101BA8][0x423A66A665DE4DF], f57_arg0, f57_arg1.kind, f57_arg1.ID, f57_arg1.rootKind, f57_arg1.rootID, LuaEnum.CLAN_STORAGE.TEAM_DATA)
+		return f53_local10(Enum[@"storagefiletype"][@"hash_6423A66A665DE4DF"], f57_arg0, f57_arg1.kind, f57_arg1.ID, f57_arg1.rootKind, f57_arg1.rootID, LuaEnum.CLAN_STORAGE.TEAM_DATA)
 	end
 	if f53_local1.dataFormatted.clan ~= nil then
 		f53_local11(LuaEnum.CLAN_STORAGE_SLOT.CLAN_DATA, f53_local1.dataFormatted.clan)
@@ -1258,9 +1258,9 @@ Lobby.Clans.ReadGroupMembershipFiles = function(f53_arg0)
 		f53_local12(LuaEnum.CLAN_STORAGE_SLOT.TEAM_1_EMBLEM - 1 + f53_local17, f53_local18)
 	end
 	if #f53_local3 > 0 then
-		Engine[0x7079182F35F6DF8](f53_local0, f53_local3, f53_local4, f53_local5, f53_local6, f53_local7, f53_local8, f53_local9)
+		Engine[@"hash_37079182F35F6DF8"](f53_local0, f53_local3, f53_local4, f53_local5, f53_local6, f53_local7, f53_local8, f53_local9)
 		for f53_local14 = 1, #f53_local3 or 0, 1 do
-			Engine[0x9C5F27295601778](f53_local0, f53_local3[f53_local14], f53_local4[f53_local14])
+			Engine[@"hash_49C5F27295601778"](f53_local0, f53_local3[f53_local14], f53_local4[f53_local14])
 		end
 	end
 end
@@ -1268,9 +1268,9 @@ Lobby.Clans.CreateGroupDataFile = function(f58_arg0, f58_arg1, f58_arg2)
 	local f58_local0 = f58_arg0.controller
 	local f58_local1 = f58_arg0[f0_local7].data
 	if f58_local1.kind == LuaEnum.CLAN_KINDS.CLAN then
-		Engine[0x7079182F35F6DF8](f58_local0, {
-			Enum[0xBBD4F9E70101BA8][0x6CA620BD75C97F4],
-			Enum[0xBBD4F9E70101BA8][0x94DF15E8078D20A],
+		Engine[@"hash_37079182F35F6DF8"](f58_local0, {
+			Enum[@"storagefiletype"][@"hash_56CA620BD75C97F4"],
+			Enum[@"storagefiletype"][@"hash_394DF15E8078D20A"],
 		}, {
 			LuaEnum.CLAN_STORAGE_SLOT.CLAN_DATA,
 			LuaEnum.CLAN_STORAGE_SLOT.CLAN_EMBLEM,
@@ -1290,20 +1290,20 @@ Lobby.Clans.CreateGroupDataFile = function(f58_arg0, f58_arg1, f58_arg2)
 			LuaEnum.CLAN_STORAGE.DATA,
 			LuaEnum.CLAN_STORAGE.EMBLEM,
 		})
-		Engine[0x7368A6035CE9089](f58_local0, Enum[0xBBD4F9E70101BA8][0x6CA620BD75C97F4], LuaEnum.CLAN_STORAGE_SLOT.CLAN_DATA)
-		local f58_local2 = Engine[0x8BF970606552F4C](f58_local0, Enum[0xBBD4F9E70101BA8][0x6CA620BD75C97F4], LuaEnum.CLAN_STORAGE_SLOT.CLAN_DATA)
+		Engine[@"storagereset"](f58_local0, Enum[@"storagefiletype"][@"hash_56CA620BD75C97F4"], LuaEnum.CLAN_STORAGE_SLOT.CLAN_DATA)
+		local f58_local2 = Engine[@"storagegetbuffer"](f58_local0, Enum[@"storagefiletype"][@"hash_56CA620BD75C97F4"], LuaEnum.CLAN_STORAGE_SLOT.CLAN_DATA)
 		if f58_local2 ~= nil then
 			f58_local2.description:set(f58_local1.description)
 			f58_local2.messageXuid:set(f58_arg0.xuid)
-			f58_local2.message:set(Engine[0xF9F1239CFD921FE](0x48254D9AC546E95))
-			Engine[0xFD581BCE55651E3](f58_local0, Enum[0xBBD4F9E70101BA8][0x6CA620BD75C97F4], LuaEnum.CLAN_STORAGE_SLOT.CLAN_DATA)
+			f58_local2.message:set(Engine[@"hash_4F9F1239CFD921FE"](@"hash_648254D9AC546E95"))
+			Engine[@"hash_7FD581BCE55651E3"](f58_local0, Enum[@"storagefiletype"][@"hash_56CA620BD75C97F4"], LuaEnum.CLAN_STORAGE_SLOT.CLAN_DATA)
 		end
-		Engine[0x8A10CA2A2270D41](f58_local0, LuaEnum.CLAN_STORAGE_SLOT.CLAN_EMBLEM, Enum[0xBBD4F9E70101BA8][0x94DF15E8078D20A])
+		Engine[@"hash_48A10CA2A2270D41"](f58_local0, LuaEnum.CLAN_STORAGE_SLOT.CLAN_EMBLEM, Enum[@"storagefiletype"][@"hash_394DF15E8078D20A"])
 	elseif f58_local1.kind == LuaEnum.CLAN_KINDS.TEAM then
 		local f58_local2 = -1
 		local f58_local3 = nil
 		for f58_local4 = LuaEnum.TEAM_STORAGE_SLOT.TEAM_1_DATA, LuaEnum.TEAM_STORAGE_SLOT.TEAM_3_DATA, 1 do
-			f58_local3 = Engine[0x8BF970606552F4C](f58_local0, Enum[0xBBD4F9E70101BA8][0x423A66A665DE4DF], f58_local4)
+			f58_local3 = Engine[@"storagegetbuffer"](f58_local0, Enum[@"storagefiletype"][@"hash_6423A66A665DE4DF"], f58_local4)
 			if f58_local3 == nil then
 				f58_local2 = f58_local4
 				break
@@ -1311,9 +1311,9 @@ Lobby.Clans.CreateGroupDataFile = function(f58_arg0, f58_arg1, f58_arg2)
 		end
 		local f58_local4 = LuaEnum.CLAN_STORAGE_SLOT.TEAM_1_EMBLEM + f58_local2
 		assert(f58_local3 == nil)
-		Engine[0x7079182F35F6DF8](f58_local0, {
-			Enum[0xBBD4F9E70101BA8][0x423A66A665DE4DF],
-			Enum[0xBBD4F9E70101BA8][0x94DF15E8078D20A],
+		Engine[@"hash_37079182F35F6DF8"](f58_local0, {
+			Enum[@"storagefiletype"][@"hash_6423A66A665DE4DF"],
+			Enum[@"storagefiletype"][@"hash_394DF15E8078D20A"],
 		}, {
 			f58_local2,
 			f58_local4,
@@ -1333,15 +1333,15 @@ Lobby.Clans.CreateGroupDataFile = function(f58_arg0, f58_arg1, f58_arg2)
 			LuaEnum.CLAN_STORAGE.TEAM_DATA,
 			LuaEnum.CLAN_STORAGE.EMBLEM,
 		})
-		Engine[0x7368A6035CE9089](f58_local0, Enum[0xBBD4F9E70101BA8][0x423A66A665DE4DF], f58_local2)
-		if Engine[0x8BF970606552F4C](f58_local0, Enum[0xBBD4F9E70101BA8][0x423A66A665DE4DF], index) ~= nil then
-			Engine[0xFD581BCE55651E3](f58_local0, Enum[0xBBD4F9E70101BA8][0x423A66A665DE4DF], f58_local2)
+		Engine[@"storagereset"](f58_local0, Enum[@"storagefiletype"][@"hash_6423A66A665DE4DF"], f58_local2)
+		if Engine[@"storagegetbuffer"](f58_local0, Enum[@"storagefiletype"][@"hash_6423A66A665DE4DF"], index) ~= nil then
+			Engine[@"hash_7FD581BCE55651E3"](f58_local0, Enum[@"storagefiletype"][@"hash_6423A66A665DE4DF"], f58_local2)
 		end
-		Engine[0x8A10CA2A2270D41](f58_local0, f58_local4, Enum[0xBBD4F9E70101BA8][0x94DF15E8078D20A])
+		Engine[@"hash_48A10CA2A2270D41"](f58_local0, f58_local4, Enum[@"storagefiletype"][@"hash_394DF15E8078D20A"])
 	end
 end
 Lobby.Clans.InitClanUIModelsForController = function(f59_arg0)
-	if not Dvar[0xCA8E9EDE02C25E6]:get() then
+	if not Dvar[@"hash_3CA8E9EDE02C25E6"]:get() then
 		return
 	else
 		local f59_local0 = Lobby.Clans.GetClanUserDataForController(f59_arg0)
@@ -1356,12 +1356,12 @@ Lobby.Clans.PopulateUIMembershipModels = function(f60_arg0)
 	local f60_local1 = f60_local0:create("clans")
 	local f60_local2 = f60_local0:create("squads")
 	local f60_local3 = f60_local0:create("teams")
-	local f60_local4 = Engine[0x8DF2E5447F384B9]()
+	local f60_local4 = Engine[@"getglobalmodel"]()
 	f60_local4 = f60_local4:create("socialRoot")
 	local f60_local5 = f60_local4:create("clans")
 	if #f60_arg0[f0_local1].data == 0 then
 		if f60_local1.clan1 then
-			Engine[0x8C7A8C4C5FD9892](f60_local1.clan1)
+			Engine[@"unsubscribeandfreemodel"](f60_local1.clan1)
 		end
 		local f60_local6 = f60_local1:create("count")
 		f60_local6:set(0)
@@ -1392,7 +1392,7 @@ Lobby.Clans.PopulateUIMembershipModels = function(f60_arg0)
 	for f60_local17, f60_local18 in ipairs(f60_arg0[f0_local1].data) do
 		local f60_local15 = f60_local1
 		local f60_local19 = f60_local18.clansGroupIdentifier.kind
-		local f60_local20 = f60_local18.role == Enum[0x10C0A769A29C38F][0xE94BCDEEB8AE946]
+		local f60_local20 = f60_local18.role == Enum[@"hash_610C0A769A29C38F"][@"hash_4E94BCDEEB8AE946"]
 		if f60_local19 == LuaEnum.CLAN_KINDS.CLAN then
 			f60_local6 = f60_local6 + 1
 			f60_local15 = f60_local1:create("clan" .. f60_local6)
@@ -1449,7 +1449,7 @@ end
 Lobby.Clans.PopulateUIClanUserInboxModels = function(f61_arg0)
 	local f61_local0 = Lobby.Clans.GetControllerClanModel(f61_arg0.xuidStr)
 	local f61_local1 = f61_local0:create("inbox")
-	local f61_local2 = Engine[0x8DF2E5447F384B9]()
+	local f61_local2 = Engine[@"getglobalmodel"]()
 	f61_local2 = f61_local2:create("socialRoot")
 	local f61_local3 = f61_local2:create("clans")
 	local f61_local4 = f61_local3:create("countInbox")
@@ -1457,7 +1457,7 @@ Lobby.Clans.PopulateUIClanUserInboxModels = function(f61_arg0)
 		local f61_local5 = f61_local1:create("count")
 		f61_local5:set(0)
 		f61_local4:set(0)
-		Engine[0x6A489878620F3BC](f61_local4)
+		Engine[@"forcenotifymodelsubscriptions"](f61_local4)
 		return
 	end
 	local f61_local5 = 0
@@ -1504,7 +1504,7 @@ Lobby.Clans.PopulateUIClanUserInboxModels = function(f61_arg0)
 	f61_local6 = f61_local1:create("count")
 	f61_local6:set(f61_local5)
 	f61_local4:set(f61_local5)
-	Engine[0x6A489878620F3BC](f61_local4)
+	Engine[@"forcenotifymodelsubscriptions"](f61_local4)
 end
 Lobby.Clans.PopulateUIClanGroupInboxModels = function(f62_arg0)
 	local f62_local0 = Lobby.Clans.GetControllerClanModel(f62_arg0.xuidStr)
@@ -1512,13 +1512,13 @@ Lobby.Clans.PopulateUIClanGroupInboxModels = function(f62_arg0)
 	local f62_local2 = 0
 	local f62_local3 = f62_local1:create("count")
 	f62_local3:set(f62_local2)
-	f62_local3 = Engine[0x8DF2E5447F384B9]()
+	f62_local3 = Engine[@"getglobalmodel"]()
 	f62_local3 = f62_local3:create("socialRoot")
 	local f62_local4 = f62_local3:create("clans")
 	local f62_local5 = f62_local4:create("countInboxGroup")
 	f62_local5:set(f62_local2)
 	if #f62_arg0[f0_local4].data == 0 then
-		Engine[0x6A489878620F3BC](f62_local5)
+		Engine[@"forcenotifymodelsubscriptions"](f62_local5)
 		return
 	end
 	for f62_local10, f62_local11 in ipairs(f62_arg0[f0_local4].data) do
@@ -1566,10 +1566,10 @@ Lobby.Clans.PopulateUIClanGroupInboxModels = function(f62_arg0)
 	f62_local6 = f62_local1:create("count")
 	f62_local6:set(f62_local2)
 	f62_local5:set(f62_local2)
-	Engine[0x6A489878620F3BC](f62_local5)
+	Engine[@"forcenotifymodelsubscriptions"](f62_local5)
 end
 Lobby.Clans.InitUIClanInfoModels = function()
-	local f63_local0 = Engine[0x8DF2E5447F384B9]()
+	local f63_local0 = Engine[@"getglobalmodel"]()
 	f63_local0 = f63_local0:create("socialRoot")
 	local f63_local1 = f63_local0:create("clans")
 	if f63_local1.loaded == nil then
@@ -1584,13 +1584,13 @@ Lobby.Clans.InitUIClanInfoModels = function()
 	end
 	local f63_local2 = f63_local1:create("listClans")
 	if f63_local2.count == nil then
-		local f63_local3 = Engine[0x8DF2E5447F384B9]()
+		local f63_local3 = Engine[@"getglobalmodel"]()
 		f63_local3 = f63_local3.socialRoot.clans:create("ownerClan")
 		f63_local3:set(false)
-		f63_local3 = Engine[0x8DF2E5447F384B9]()
+		f63_local3 = Engine[@"getglobalmodel"]()
 		f63_local3 = f63_local3.socialRoot.clans:create("ownerSquad")
 		f63_local3:set(false)
-		f63_local3 = Engine[0x8DF2E5447F384B9]()
+		f63_local3 = Engine[@"getglobalmodel"]()
 		f63_local3 = f63_local3.socialRoot.clans:create("ownerTeam")
 		f63_local3:set(false)
 	end
@@ -1602,7 +1602,7 @@ Lobby.Clans.PopulateUIClanInfoModels = function(f64_arg0)
 		Lobby.Clans.InitUIClanInfoModels()
 		return
 	end
-	local f64_local0 = Engine[0x8DF2E5447F384B9]()
+	local f64_local0 = Engine[@"getglobalmodel"]()
 	f64_local0 = f64_local0.socialRoot
 	local f64_local1 = f64_local0:create("clans")
 	local f64_local2 = f64_local1:create("loaded")
@@ -1659,7 +1659,7 @@ Lobby.Clans.PopulateUIClanInfoModels = function(f64_arg0)
 		f64_local15 = f64_local14:create("rootIDstr")
 		f64_local15:set(f64_local17.clansGroupIdentifier.rootIDstr)
 		if f64_local18 == LuaEnum.CLAN_KINDS.TEAM then
-			Engine[0x6A489878620F3BC](f64_local7)
+			Engine[@"forcenotifymodelsubscriptions"](f64_local7)
 		end
 	end
 	f64_local12 = f64_local2
@@ -1716,13 +1716,13 @@ Lobby.Clans.PopulateUIClansSearchResults = function(f65_arg0, f65_arg1)
 		end
 	end
 	f65_local3:set(f65_local4)
-	Engine[0x6A489878620F3BC](f65_local3)
+	Engine[@"forcenotifymodelsubscriptions"](f65_local3)
 end
 Lobby.Clans.PopulateUIClanMemberModels = function(f66_arg0)
 	local f66_local0 = Lobby.Clans.GetControllerClanModel(f66_arg0.xuidStr)
 	local f66_local1 = f66_local0:create("members")
 	local f66_local2 = f66_local1:create("list")
-	local f66_local3 = Engine[0x8DF2E5447F384B9]()
+	local f66_local3 = Engine[@"getglobalmodel"]()
 	f66_local3 = f66_local3:create("socialRoot")
 	local f66_local4 = f66_local3:create("clans")
 	if #f66_arg0[f0_local6].data == 0 then
@@ -1743,7 +1743,7 @@ Lobby.Clans.PopulateUIClanMemberModels = function(f66_arg0)
 	end
 	local f66_local5 = 0
 	for f66_local10, f66_local8 in ipairs(f66_arg0[f0_local6].data) do
-		local f66_local17 = Engine[0x5065E759595C457](f66_local8.userID)
+		local f66_local17 = Engine[@"xuidtostring"](f66_local8.userID)
 		f66_local5 = f66_local5 + 1
 		local f66_local18 = f66_local2:create("member" .. f66_local5)
 		local f66_local19 = f66_local18:create("xuidStr")
@@ -1784,7 +1784,7 @@ Lobby.Clans.PopulateUIClanMemberModels = function(f66_arg0)
 	f66_local6:set(f66_local5)
 end
 Lobby.Clans.PopulateUIFriendClanModels = function(f67_arg0)
-	local f67_local0 = Engine[0x8DF2E5447F384B9]()
+	local f67_local0 = Engine[@"getglobalmodel"]()
 	local f67_local1 = f67_local0.socialRoot:create("clans")
 	local f67_local2 = f67_local1:create("friendsClans")
 	local f67_local3 = f67_local2:create("list")
@@ -1811,7 +1811,7 @@ Lobby.Clans.PopulateUIFriendClanModels = function(f67_arg0)
 	f67_local5:set(f67_local4)
 end
 Lobby.Clans.DoClanAction = function(f68_arg0, f68_arg1)
-	Engine[0xE1789115A2356E7]("clan_action", {
+	Engine[@"luivm_event"]("clan_action", {
 		controller = f68_arg0,
 		actionType = f68_arg1,
 		immediate = true,

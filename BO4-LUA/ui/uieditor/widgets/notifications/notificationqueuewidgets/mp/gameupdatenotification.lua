@@ -15,7 +15,7 @@ CoD.GameUpdateNotification.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	local NotificationText = LUI.UIText.new(0.5, 0.5, -230, 230, 0, 0, 4.5, 43.5)
 	NotificationText:setTTF("ttmussels_regular")
 	NotificationText:setLetterSpacing(4)
-	NotificationText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	NotificationText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	NotificationText:setBackingType(2)
 	NotificationText:setBackingColor(0, 0, 0)
 	NotificationText:setBackingAlpha(0.8)

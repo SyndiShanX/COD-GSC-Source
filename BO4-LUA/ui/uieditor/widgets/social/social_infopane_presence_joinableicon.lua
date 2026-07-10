@@ -9,29 +9,29 @@ CoD.Social_InfoPane_Presence_JoinableIcon.new = function(f1_arg0, f1_arg1, f1_ar
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local joinableIcon = LUI.UIImage.new(0, 0, 0, 32, 0.5, 0.5, -16, 16)
 	joinableIcon:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
-	joinableIcon:setImage(RegisterImage(0xD3145ED87B4F77F))
-	joinableIcon:setMaterial(LUI.UIImage.GetCachedMaterial(0xE8F55203998700A))
+	joinableIcon:setImage(RegisterImage(@"uie_t7_menu_frontend_iconjoinable"))
+	joinableIcon:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_feather_blend"))
 	self:addElement(joinableIcon)
 	self.joinableIcon = joinableIcon
 	local notjoinableText = LUI.UIText.new(0, 1, 6, -6, 0.5, 0.5, -8, 10)
 	notjoinableText:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	notjoinableText:setAlpha(0)
 	notjoinableText:setScale(LanguageOverrideNumber("japanese", 0.9, 1, 1))
-	notjoinableText:setText(LocalizeToUpperString(0x34F5097A432DED7))
+	notjoinableText:setText(LocalizeToUpperString(@"hash_634F5097A432DED7"))
 	notjoinableText:setTTF("dinnext_regular")
 	notjoinableText:setLetterSpacing(2)
-	notjoinableText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	notjoinableText:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	notjoinableText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	notjoinableText:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	self:addElement(notjoinableText)
 	self.notjoinableText = notjoinableText
 	local joinableText = LUI.UIText.new(0, 0, 36, 236, 0.5, 0.5, -7, 11)
 	joinableText:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	joinableText:setScale(LanguageOverrideNumber("japanese", 0.9, 1, 1))
-	joinableText:setText(LocalizeToUpperString(0x6AA4BA2A90A62C5))
+	joinableText:setText(LocalizeToUpperString(@"hash_46AA4BA2A90A62C5"))
 	joinableText:setTTF("dinnext_regular")
 	joinableText:setLetterSpacing(2)
-	joinableText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	joinableText:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	joinableText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	joinableText:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	self:addElement(joinableText)
 	self.joinableText = joinableText
 	self:mergeStateConditions({
@@ -69,7 +69,7 @@ CoD.Social_InfoPane_Presence_JoinableIcon.new = function(f1_arg0, f1_arg1, f1_ar
 	})
 	local f1_local4 = self
 	local f1_local5 = self.subscribeToModel
-	local f1_local6 = Engine[0x8DF2E5447F384B9]()
+	local f1_local6 = Engine[@"getglobalmodel"]()
 	f1_local5(f1_local4, f1_local6["lobbyRoot.lobbyLockedIn"], function(f6_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

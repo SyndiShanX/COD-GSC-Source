@@ -8,17 +8,17 @@ CoD.LeaguePlayEndRankUpRuby.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.soundSet = "none"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local RubySlot = LUI.UIImage.new(0.5, 0.5, -20, 20, 0.5, 0.5, -20, 20)
-	RubySlot:setImage(RegisterImage(0x81EAB9F8F5950E7))
+	RubySlot:setImage(RegisterImage(@"uie_ui_menu_arena_rubyframe"))
 	self:addElement(RubySlot)
 	self.RubySlot = RubySlot
 	local Ruby = LUI.UIImage.new(0.5, 0.5, -20, 20, 0.5, 0.5, -20, 20)
 	Ruby:setAlpha(0.2)
-	Ruby:setImage(RegisterImage(0x17ED8E3A9A3FC36))
+	Ruby:setImage(RegisterImage(@"uie_ui_menu_arena_ruby"))
 	self:addElement(Ruby)
 	self.Ruby = Ruby
 	local RubyAnim = LUI.UIImage.new(0.5, 0.5, -26.5, 26.5, 0.5, 0.5, -28, 25)
-	RubyAnim:setImage(RegisterImage(0x88F3083B7A9ADAD))
-	RubyAnim:setMaterial(LUI.UIImage.GetCachedMaterial(0x9227A50BA2B8D21))
+	RubyAnim:setImage(RegisterImage(@"uie_ui_menu_arena_ruby_flipbook"))
+	RubyAnim:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_flipbook_add"))
 	RubyAnim:setShaderVector(0, 4, 4, 0, 0)
 	RubyAnim:setShaderVector(1, 5, 0, 0, 0)
 	self:addElement(RubyAnim)

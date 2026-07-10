@@ -8,21 +8,21 @@ CoD.SpawnSelectLayoutGrid.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	self.soundSet = "default"
 	local mapGridRT = LUI.UIImage.new(0, 0, 786, 1572, 0, 0, 0, 324)
 	mapGridRT:setYRot(180)
-	mapGridRT:setImage(RegisterImage(0xF4B18E563E6CBCB))
+	mapGridRT:setImage(RegisterImage(@"uie_ui_hud_selectspawn_grid_line"))
 	self:addElement(mapGridRT)
 	self.mapGridRT = mapGridRT
 	local mapGridLB = LUI.UIImage.new(0, 0, 0, 786, 0, 0, 324, 648)
 	mapGridLB:setXRot(180)
-	mapGridLB:setImage(RegisterImage(0xF4B18E563E6CBCB))
+	mapGridLB:setImage(RegisterImage(@"uie_ui_hud_selectspawn_grid_line"))
 	self:addElement(mapGridLB)
 	self.mapGridLB = mapGridLB
 	local mapGridRB = LUI.UIImage.new(0, 0, 786, 1572, 0, 0, 324, 648)
 	mapGridRB:setZRot(180)
-	mapGridRB:setImage(RegisterImage(0xF4B18E563E6CBCB))
+	mapGridRB:setImage(RegisterImage(@"uie_ui_hud_selectspawn_grid_line"))
 	self:addElement(mapGridRB)
 	self.mapGridRB = mapGridRB
 	local mapGridLT = LUI.UIImage.new(0, 0, 0, 786, 0, 0, 0, 324)
-	mapGridLT:setImage(RegisterImage(0xF4B18E563E6CBCB))
+	mapGridLT:setImage(RegisterImage(@"uie_ui_hud_selectspawn_grid_line"))
 	self:addElement(mapGridLT)
 	self.mapGridLT = mapGridLT
 	if PostLoadFunc then

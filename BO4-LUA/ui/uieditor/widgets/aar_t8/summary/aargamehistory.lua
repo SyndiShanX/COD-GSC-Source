@@ -16,49 +16,49 @@ CoD.AARGameHistory.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	self.onlyChildrenFocusable = CoD.isPC
 	self.anyChildUsesUpdateState = true
 	local GameHistoryBG = LUI.UIImage.new(0, 0, 0, 1160, 0, 0, 42, 276)
-	GameHistoryBG:setImage(RegisterImage(0x2149632FF11659E))
-	GameHistoryBG:setMaterial(LUI.UIImage.GetCachedMaterial(0x6E9593DF28749F2))
+	GameHistoryBG:setImage(RegisterImage(@"uie_ui_menu_aar_info_grid_bg"))
+	GameHistoryBG:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_6E9593DF28749F2"))
 	GameHistoryBG:setShaderVector(0, 4, 1, 0, 0)
 	GameHistoryBG:setShaderVector(1, 0, 1, 0, 1)
 	self:addElement(GameHistoryBG)
 	self.GameHistoryBG = GameHistoryBG
 	local GameHistoryGridVline = LUI.UIImage.new(0, 0, 0, 1160, 0, 0, 45, 272)
 	GameHistoryGridVline:setAlpha(0.2)
-	GameHistoryGridVline:setImage(RegisterImage(0x481D0965AE0510B))
-	GameHistoryGridVline:setMaterial(LUI.UIImage.GetCachedMaterial(0x7EA4827662D4CD4))
+	GameHistoryGridVline:setImage(RegisterImage(@"uie_ui_menu_aar_info_grid_vline"))
+	GameHistoryGridVline:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_17EA4827662D4CD4"))
 	GameHistoryGridVline:setShaderVector(0, 20, 1, 0, 0)
 	GameHistoryGridVline:setShaderVector(1, 0, 1, 0, 1)
 	self:addElement(GameHistoryGridVline)
 	self.GameHistoryGridVline = GameHistoryGridVline
 	local GameHistoryGridHline2 = LUI.UIImage.new(0, 0, -1.5, 1162.5, 0, 0, 98, 102)
 	GameHistoryGridHline2:setAlpha(0.2)
-	GameHistoryGridHline2:setImage(RegisterImage(0xD665F794FF05F2D))
-	GameHistoryGridHline2:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	GameHistoryGridHline2:setImage(RegisterImage(@"uie_ui_menu_aar_info_grid_hline"))
+	GameHistoryGridHline2:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(GameHistoryGridHline2)
 	self.GameHistoryGridHline2 = GameHistoryGridHline2
 	local GameHistoryGridHline1 = LUI.UIImage.new(0, 0, -1.5, 1162.5, 0, 0, 214.5, 218.5)
 	GameHistoryGridHline1:setAlpha(0.2)
-	GameHistoryGridHline1:setImage(RegisterImage(0xD665F794FF05F2D))
-	GameHistoryGridHline1:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	GameHistoryGridHline1:setImage(RegisterImage(@"uie_ui_menu_aar_info_grid_hline"))
+	GameHistoryGridHline1:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(GameHistoryGridHline1)
 	self.GameHistoryGridHline1 = GameHistoryGridHline1
 	local GameHistoryGridSub = LUI.UIImage.new(0, 0, 0, 1160, 0, 0, 43, 277)
 	GameHistoryGridSub:setAlpha(0.03)
-	GameHistoryGridSub:setImage(RegisterImage(0x6975DA716B3A3FD))
-	GameHistoryGridSub:setMaterial(LUI.UIImage.GetCachedMaterial(0x7EA4827662D4CD4))
+	GameHistoryGridSub:setImage(RegisterImage(@"uie_ui_menu_aar_info_grid_sub"))
+	GameHistoryGridSub:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_17EA4827662D4CD4"))
 	GameHistoryGridSub:setShaderVector(0, 4, 1, 0, 0)
 	GameHistoryGridSub:setShaderVector(1, 0, 1, 0, 1)
 	self:addElement(GameHistoryGridSub)
 	self.GameHistoryGridSub = GameHistoryGridSub
 	local GameHistoryGridBracket2 = LUI.UIImage.new(0, 0, -2, 1162, 0, 0, 266, 278)
 	GameHistoryGridBracket2:setZRot(180)
-	GameHistoryGridBracket2:setImage(RegisterImage(0x3725DFF82A4EF8B))
-	GameHistoryGridBracket2:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	GameHistoryGridBracket2:setImage(RegisterImage(@"uie_ui_menu_aar_info_grid_bracket"))
+	GameHistoryGridBracket2:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(GameHistoryGridBracket2)
 	self.GameHistoryGridBracket2 = GameHistoryGridBracket2
 	local GameHistoryGridBracket1 = LUI.UIImage.new(0, 0, -2, 1162, 0, 0, 40, 52)
-	GameHistoryGridBracket1:setImage(RegisterImage(0x3725DFF82A4EF8B))
-	GameHistoryGridBracket1:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	GameHistoryGridBracket1:setImage(RegisterImage(@"uie_ui_menu_aar_info_grid_bracket"))
+	GameHistoryGridBracket1:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(GameHistoryGridBracket1)
 	self.GameHistoryGridBracket1 = GameHistoryGridBracket1
 	local AverageMessage = CoD.AARAverageWidget.new(f1_arg0, f1_arg1, 0, 0, 0, 1500, 0, 0, 275, 313)
@@ -77,8 +77,8 @@ CoD.AARGameHistory.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	self.WinLoseMessage = WinLoseMessage
 	local StatTypeBar = LUI.UIImage.new(0, 0, -2.5, 1161.5, 0, 0, -3, 1)
 	StatTypeBar:setAlpha(0.4)
-	StatTypeBar:setImage(RegisterImage(0xB07AA95C48BD14F))
-	StatTypeBar:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	StatTypeBar:setImage(RegisterImage(@"uie_ui_menu_aar_stat_rt_navbar"))
+	StatTypeBar:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(StatTypeBar)
 	self.StatTypeBar = StatTypeBar
 	local CommonSecondaryTabBar = CoD.CommonSecondaryTabBar.new(f1_arg0, f1_arg1, 0, 0, 63, 1148, 0, 0, -13, 48)
@@ -101,7 +101,7 @@ CoD.AARGameHistory.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	GameHistoryGrid:setWidgetType(CoD.AARNumericalStatHistory)
 	GameHistoryGrid:setHorizontalCount(10)
 	GameHistoryGrid:setSpacing(-8)
-	GameHistoryGrid:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	GameHistoryGrid:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	GameHistoryGrid:setDataSource("AARGameHistory")
 	GameHistoryGrid:subscribeToGlobalModel(f1_arg1, "PerController", "AAR.activeStat", function(model)
 		CoD.GridAndListUtility.UpdateDataSource(GameHistoryGrid, true, true, true)
@@ -110,11 +110,11 @@ CoD.AARGameHistory.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	self.GameHistoryGrid = GameHistoryGrid
 	local Last10Games = LUI.UIText.new(0, 0, 0, 855, 0, 0, -38, 0)
 	Last10Games:setRGB(0.9, 0.89, 0.78)
-	Last10Games:setText(Engine[0xF9F1239CFD921FE](0x134099EC43595F0))
+	Last10Games:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_134099EC43595F0"))
 	Last10Games:setTTF("dinnext_regular")
 	Last10Games:setLetterSpacing(10)
-	Last10Games:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Last10Games:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Last10Games:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Last10Games:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(Last10Games)
 	self.Last10Games = Last10Games
 	local AARCompactHistoryMessage = CoD.AARCompactHistoryMessage.new(f1_arg0, f1_arg1, 0, 0, 756, 1336, 0, 0, -39, -1)
@@ -128,7 +128,7 @@ CoD.AARGameHistory.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	})
 	local f1_local16 = AARCompactHistoryMessage
 	local f1_local17 = AARCompactHistoryMessage.subscribeToModel
-	local f1_local18 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local18 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local17(f1_local16, f1_local18["AAR.activeStat"], function(f7_arg0)
 		f1_arg0:updateElementState(AARCompactHistoryMessage, {
 			name = "model_validation",

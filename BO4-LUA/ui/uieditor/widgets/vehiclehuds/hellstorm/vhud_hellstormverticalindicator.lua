@@ -7,8 +7,8 @@ CoD.vhud_HellstormVerticalIndicator.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	self.id = "vhud_HellstormVerticalIndicator"
 	self.soundSet = "default"
 	local LayoutBar = LUI.UIImage.new(0, 0, 8, 72, 0, 0, 88, 0)
-	LayoutBar:setImage(RegisterImage(0x328F3B7DAD2C9EA))
-	LayoutBar:setMaterial(LUI.UIImage.GetCachedMaterial(0x2EEB1ECF1F211F5))
+	LayoutBar:setImage(RegisterImage(@"hash_6328F3B7DAD2C9EA"))
+	LayoutBar:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_delta"))
 	LayoutBar:setShaderVector(0, 0, 1, 0, 0)
 	LayoutBar:setShaderVector(1, 0, 0, 0, 0)
 	LayoutBar:setShaderVector(2, 0, 1, 0, 0)
@@ -18,8 +18,8 @@ CoD.vhud_HellstormVerticalIndicator.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	self.LayoutBar = LayoutBar
 	local LayoutBarAdd = LUI.UIImage.new(0, 0, 8, 72, 0, 0, 88, 0)
 	LayoutBarAdd:setAlpha(0.5)
-	LayoutBarAdd:setImage(RegisterImage(0x328F3B7DAD2C9EA))
-	LayoutBarAdd:setMaterial(LUI.UIImage.GetCachedMaterial(0x5956C6C1FD41D3C))
+	LayoutBarAdd:setImage(RegisterImage(@"hash_6328F3B7DAD2C9EA"))
+	LayoutBarAdd:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_aberration"))
 	LayoutBarAdd:setShaderVector(0, 0.2, 1, 0, 0)
 	LayoutBarAdd:setShaderVector(1, 0, 0, 0, 0)
 	LayoutBarAdd:setShaderVector(2, 0, 0, 0, 0)

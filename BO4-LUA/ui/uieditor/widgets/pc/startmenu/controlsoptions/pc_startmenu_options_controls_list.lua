@@ -16,7 +16,7 @@ CoD.PC_StartMenu_Options_Controls_List.new = function(f1_arg0, f1_arg1, f1_arg2,
 	List:setWidgetType(CoD.CyclingList)
 	List:setVerticalCount(13)
 	List:setSpacing(4)
-	List:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	List:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	List:setVerticalScrollbar(CoD.PC_VScrollbar)
 	List:registerEventHandler("gain_list_focus", function(element, event)
 		local f2_local0 = nil

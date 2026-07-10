@@ -10,27 +10,27 @@ CoD.ArmorOverheadName.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local armor = LUI.UIImage.new(0, 0, 0, 30, 0, 0, 0, 30)
 	armor:setAlpha(0)
-	armor:setImage(RegisterImage(0xB5BC23908F1D357))
+	armor:setImage(RegisterImage(@"hash_4B5BC23908F1D357"))
 	self:addElement(armor)
 	self.armor = armor
 	local armordamage1 = LUI.UIImage.new(0, 0, 0, 30, 0, 0, 0, 30)
 	armordamage1:setAlpha(0)
-	armordamage1:setImage(RegisterImage(0xF27C140343E5BBF))
+	armordamage1:setImage(RegisterImage(@"hash_7F27C140343E5BBF"))
 	self:addElement(armordamage1)
 	self.armordamage1 = armordamage1
 	local armordamage2 = LUI.UIImage.new(0, 0, 0, 30, 0, 0, 0, 30)
 	armordamage2:setAlpha(0)
-	armordamage2:setImage(RegisterImage(0xF27C240343E5D72))
+	armordamage2:setImage(RegisterImage(@"hash_7F27C240343E5D72"))
 	self:addElement(armordamage2)
 	self.armordamage2 = armordamage2
 	local armordamage3 = LUI.UIImage.new(0, 0, 0, 30, 0, 0, 0, 30)
 	armordamage3:setAlpha(0)
-	armordamage3:setImage(RegisterImage(0xF27C340343E5F25))
+	armordamage3:setImage(RegisterImage(@"hash_7F27C340343E5F25"))
 	self:addElement(armordamage3)
 	self.armordamage3 = armordamage3
 	local armordamage4 = LUI.UIImage.new(0, 0, 0, 30, 0, 0, 0, 30)
 	armordamage4:setAlpha(0)
-	armordamage4:setImage(RegisterImage(0xF27BC40343E5340))
+	armordamage4:setImage(RegisterImage(@"hash_7F27BC40343E5340"))
 	self:addElement(armordamage4)
 	self.armordamage4 = armordamage4
 	self:mergeStateConditions({

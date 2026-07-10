@@ -9,20 +9,20 @@ CoD.FE_Menu_LeftGraphics.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Pixel200 = LUI.UIImage.new(0, 0, 13, 67, 0, 0, 847, 853)
 	Pixel200:setYRot(-180)
-	Pixel200:setImage(RegisterImage(0xFAFDD3A12CFCCB6))
-	Pixel200:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Pixel200:setImage(RegisterImage(@"uie_t7_menu_frontend_pixelist"))
+	Pixel200:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Pixel200)
 	self.Pixel200 = Pixel200
 	local Pixel2001 = LUI.UIImage.new(0, 0, 13, 67, 0, 0, 66, 72)
 	Pixel2001:setYRot(-180)
-	Pixel2001:setImage(RegisterImage(0xFAFDD3A12CFCCB6))
-	Pixel2001:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Pixel2001:setImage(RegisterImage(@"uie_t7_menu_frontend_pixelist"))
+	Pixel2001:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Pixel2001)
 	self.Pixel2001 = Pixel2001
 	local LineSide = LUI.UIImage.new(0, 0, 50, 53, 0, 0, 48, 874)
 	LineSide:setZRot(180)
-	LineSide:setImage(RegisterImage(0x17BA7D5EBC23097))
-	LineSide:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	LineSide:setImage(RegisterImage(@"uie_t7_menu_frontend_lineside"))
+	LineSide:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(LineSide)
 	self.LineSide = LineSide
 	if PostLoadFunc then

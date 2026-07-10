@@ -18,17 +18,17 @@ CoD.vhud_tank_robot_target_status.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	self:addElement(TargetIdentifiedBacking)
 	self.TargetIdentifiedBacking = TargetIdentifiedBacking
 	local TargetIdentified = LUI.UIText.new(0, 0, 0.5, 300.5, 0, 0, 13, 45)
-	TargetIdentified:setText(Engine[0xF9F1239CFD921FE](0x2721ED0264B5F06))
+	TargetIdentified:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_12721ED0264B5F06"))
 	TargetIdentified:setTTF("ttmussels_regular")
-	TargetIdentified:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	TargetIdentified:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	TargetIdentified:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	TargetIdentified:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(TargetIdentified)
 	self.TargetIdentified = TargetIdentified
 	local TargetLocked = LUI.UIText.new(0, 0, 0.5, 300.5, 0, 0, 57, 89)
-	TargetLocked:setText(Engine[0xF9F1239CFD921FE](0xD2DCC0FA9B3BC61))
+	TargetLocked:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_5D2DCC0FA9B3BC61"))
 	TargetLocked:setTTF("ttmussels_regular")
-	TargetLocked:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	TargetLocked:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	TargetLocked:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	TargetLocked:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(TargetLocked)
 	self.TargetLocked = TargetLocked
 	if PostLoadFunc then

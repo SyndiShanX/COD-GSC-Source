@@ -13,8 +13,8 @@ CoD.PC_ConnectionQueuingOverlay.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local NoiseTiledBacking = LUI.UIImage.new(0, 1, 0, 0, 0.1, 0.9, 0, 0)
 	NoiseTiledBacking:setAlpha(0.65)
-	NoiseTiledBacking:setImage(RegisterImage(0x34839E8065B1E53))
-	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	NoiseTiledBacking:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	NoiseTiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	NoiseTiledBacking:setupNineSliceShader(196, 88)
 	self:addElement(NoiseTiledBacking)
@@ -40,24 +40,24 @@ CoD.PC_ConnectionQueuingOverlay.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self.TopBar = TopBar
 	local BottomBar = LUI.UIImage.new(0, 1, 0, 0, 0.95, 0.95, -8, 0)
 	BottomBar:setRGB(ColorSet.T8__BEIGE__HEADER.r, ColorSet.T8__BEIGE__HEADER.g, ColorSet.T8__BEIGE__HEADER.b)
-	BottomBar:setMaterial(LUI.UIImage.GetCachedMaterial(0x73D72BCD14C2AAD))
+	BottomBar:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_tile_scroll_normal"))
 	BottomBar:setShaderVector(0, 2, 1, 0, 0)
 	BottomBar:setShaderVector(1, 0, 0, 0, 0)
 	self:addElement(BottomBar)
 	self.BottomBar = BottomBar
 	local Header = LUI.UIText.new(0.5, 0.5, -324.5, 324.5, 0.2, 0.2, 0, 30)
-	Header:setText(Engine[0xF9F1239CFD921FE](0xC51866DCC22F69A))
+	Header:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_7C51866DCC22F69A"))
 	Header:setTTF("ttmussels_demibold")
-	Header:setMaterial(LUI.UIImage.GetCachedMaterial(0x71E049B161CD00A))
-	Header:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	Header:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Header:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_171E049B161CD00A"))
+	Header:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	Header:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(Header)
 	self.Header = Header
 	local QueuingText = LUI.UIText.new(0.5, 0.5, -325, 325, 0.38, 0.38, 0, 18)
 	QueuingText:setTTF("ttmussels_regular")
 	QueuingText:setLetterSpacing(1)
-	QueuingText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	QueuingText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	QueuingText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	QueuingText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	QueuingText.__String_Reference = function(f2_arg0)
 		local f2_local0 = f2_arg0:get()
 		if f2_local0 ~= nil then
@@ -79,11 +79,11 @@ CoD.PC_ConnectionQueuingOverlay.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self.QueuingText = QueuingText
 	local f1_local9 = QueuingText
 	local f1_local10 = QueuingText.subscribeToModel
-	local f1_local11 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local11 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local10(f1_local9, f1_local11["PCConnectionQueue.ConnectionQueueRemainingtime"], QueuingText.__String_Reference_FullPath)
 	f1_local9 = QueuingText
 	f1_local10 = QueuingText.subscribeToModel
-	f1_local11 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local11 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local10(f1_local9, f1_local11["PCConnectionQueue.ConnectionQueuePosition"], QueuingText.__String_Reference_FullPath)
 	self:mergeStateConditions({
 		{

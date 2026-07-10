@@ -16,29 +16,29 @@ CoD.PCWidgetUtility.PartyInviteStatus = {
 CoD.PCWidgetUtility.CurrentChatInputWidget = {}
 CoD.PCWidgetUtility.VoiceChatChannelsOptions = {
 	{
-		name = Engine[0xF9F1239CFD921FE](0xDC308EED3C91279),
+		name = Engine[@"hash_4F9F1239CFD921FE"](@"hash_DC308EED3C91279"),
 		value = 0,
 	},
 	{
-		name = Engine[0xF9F1239CFD921FE](0x28E2EDC7107C3D6),
+		name = Engine[@"hash_4F9F1239CFD921FE"](@"hash_728E2EDC7107C3D6"),
 		value = 2,
 	},
 }
 DataSources.VoiceChatChannelsSelectionOptions = DataSourceHelpers.DropdownListSetup("PC.VoiceChatChannelsSelectionOptions", CoD.PCWidgetUtility.VoiceChatChannelsOptions)
 DataSources.VoiceChatChannelsSelection = {
 	getModel = function(f1_arg0)
-		local f1_local0 = Engine[0x4DF5CFBC1771947](f1_arg0)
+		local f1_local0 = Engine[@"getmodelforcontroller"](f1_arg0)
 		local f1_local1 = f1_local0.VoiceChatChannelsSelection
 		if not f1_local1 then
 			f1_local1 = f1_local0:create("VoiceChatChannelsSelection")
 			local f1_local2 = f1_local1:create("name")
-			f1_local2:set(Engine[0xF9F1239CFD921FE](0x28E2EDC7107C3D6))
+			f1_local2:set(Engine[@"hash_4F9F1239CFD921FE"](@"hash_728E2EDC7107C3D6"))
 			f1_local2 = f1_local1:create("optionsDataSource")
 			f1_local2:set("VoiceChatChannelsSelectionOptions")
 			f1_local2 = f1_local1:create("isOpen")
 			f1_local2:set(false)
 			f1_local2 = f1_local1:create("currentValue")
-			f1_local2:set(Engine[0xD4D7317F380395F](f1_arg0, "voice_favored_channel"))
+			f1_local2:set(Engine[@"profileint"](f1_arg0, "voice_favored_channel"))
 		end
 		return f1_local1
 	end,
@@ -47,7 +47,7 @@ CoD.PCWidgetUtility.PrepareVoiceChatDropdownProperties = function(f2_arg0, f2_ar
 	f2_arg0._optionProperties = {}
 	f2_arg0._optionProperties._options = CoD.PCWidgetUtility.VoiceChatChannelsOptions
 	f2_arg0._optionProperties._setCurrentValue = function(f3_arg0, f3_arg1, f3_arg2)
-		Engine[0x280E4C1191CC53D](f3_arg1, "voice_favored_channel", f3_arg2)
+		Engine[@"setprofilevar"](f3_arg1, "voice_favored_channel", f3_arg2)
 		f2_arg0.immediateUpdateValue = f3_arg2
 		local f3_local0 = f2_arg0:getModel()
 		f3_local0.currentValue:set(f2_arg0._optionProperties._getCurrentValue())
@@ -58,7 +58,7 @@ CoD.PCWidgetUtility.PrepareVoiceChatDropdownProperties = function(f2_arg0, f2_ar
 			f2_arg0.immediateUpdateValue = nil
 			return f4_local0
 		else
-			return Engine[0xD4D7317F380395F](f2_arg1, "voice_favored_channel")
+			return Engine[@"profileint"](f2_arg1, "voice_favored_channel")
 		end
 	end
 end
@@ -422,7 +422,7 @@ CoD.PCWidgetUtility.PrepareSliderBar = function(f16_arg0, f16_arg1, f16_arg2, f1
 	f16_arg4:registerEventHandler("leftmousedown", function(element, event)
 		f16_arg2:CaptureMouseAndLockFocus(event.controller, element)
 		SetProperty(f16_arg2, "preserveLuiButton", {
-			[Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F]] = true,
+			[Enum[@"luibutton"][@"lui_key_xba_pscross"]] = true,
 		})
 		element.__lockedFocus = true
 		f16_arg0:playSound("gain_focus", f16_arg1)
@@ -431,7 +431,7 @@ CoD.PCWidgetUtility.PrepareSliderBar = function(f16_arg0, f16_arg1, f16_arg2, f1
 	f16_arg4:registerEventHandler("leftmouseup", function(element, event)
 		f16_arg2:CaptureMouseAndLockFocus(event.controller, nil)
 		SetProperty(f16_arg2, "preserveLuiButton", {
-			[Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F]] = nil,
+			[Enum[@"luibutton"][@"lui_key_xba_pscross"]] = nil,
 		})
 		element.__lockedFocus = false
 		f16_arg0:playSound("value_changed", f16_arg1)
@@ -444,7 +444,7 @@ CoD.PCWidgetUtility.PrepareSliderBar = function(f16_arg0, f16_arg1, f16_arg2, f1
 			assert(f22_arg1.controller ~= nil)
 			f16_arg2:CaptureMouseAndLockFocus(f22_arg1.controller, nil)
 			SetProperty(f16_arg2, "preserveLuiButton", {
-				[Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F]] = nil,
+				[Enum[@"luibutton"][@"lui_key_xba_pscross"]] = nil,
 			})
 			f22_arg0.__lockedFocus = false
 		end
@@ -452,7 +452,7 @@ CoD.PCWidgetUtility.PrepareSliderBar = function(f16_arg0, f16_arg1, f16_arg2, f1
 	f16_arg4:registerEventHandler("mouse_capture_lost", function(element, event)
 		if element.__lockedFocus then
 			SetProperty(f16_arg2, "preserveLuiButton", {
-				[Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F]] = nil,
+				[Enum[@"luibutton"][@"lui_key_xba_pscross"]] = nil,
 			})
 			element.__lockedFocus = false
 		end
@@ -461,7 +461,7 @@ CoD.PCWidgetUtility.PrepareSliderBar = function(f16_arg0, f16_arg1, f16_arg2, f1
 		if f24_arg0.__lockedFocus then
 			f16_arg2:CaptureMouseAndLockFocus(f16_arg1, nil)
 			SetProperty(f16_arg2, "preserveLuiButton", {
-				[Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F]] = nil,
+				[Enum[@"luibutton"][@"lui_key_xba_pscross"]] = nil,
 			})
 			f24_arg0.__lockedFocus = false
 		end
@@ -484,7 +484,7 @@ CoD.PCWidgetUtility.PrepareSliderBar = function(f16_arg0, f16_arg1, f16_arg2, f1
 	if f16_arg0.EditBox ~= nil then
 		local f16_local4 = 7
 		DisableKeyboardNavigationByElement(f16_arg0.EditBox)
-		CoD.Menu.AddButtonCallbackFunction(f16_arg2, f16_arg0, f16_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "ui_confirm", function(element, menu, controller, f26_arg3)
+		CoD.Menu.AddButtonCallbackFunction(f16_arg2, f16_arg0, f16_arg1, Enum[@"luibutton"][@"lui_key_none"], "ui_confirm", function(element, menu, controller, f26_arg3)
 			CoD.PCWidgetUtility.BringIntoView(f16_arg0, controller)
 			menu:ChangeInputFocus(controller, f16_arg0.EditBox)
 			return true
@@ -570,18 +570,18 @@ CoD.PCWidgetUtility.PrepareYesNoToggleButton = function(f30_arg0, f30_arg1, f30_
 			end
 			f31_local0 = f30_arg5.minValue:get()
 		end
-		f30_arg4:AddButtonCallbackFunction(f30_arg1, f30_arg3, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "MOUSE1", function(element, menu, controller, model)
+		f30_arg4:AddButtonCallbackFunction(f30_arg1, f30_arg3, Enum[@"luibutton"][@"lui_key_xba_pscross"], "MOUSE1", function(element, menu, controller, model)
 			f30_local0(true)
 			return true
 		end, false)
-		f30_arg4:AddButtonCallbackFunction(f30_arg2, f30_arg3, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "MOUSE1", function(element, menu, controller, model)
+		f30_arg4:AddButtonCallbackFunction(f30_arg2, f30_arg3, Enum[@"luibutton"][@"lui_key_xba_pscross"], "MOUSE1", function(element, menu, controller, model)
 			f30_local0(false)
 			return true
 		end, false)
-		f30_arg4:AddButtonCallbackFunction(f30_arg0, f30_arg3, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "MOUSE1", function(element, menu, controller, model)
+		f30_arg4:AddButtonCallbackFunction(f30_arg0, f30_arg3, Enum[@"luibutton"][@"lui_key_none"], "MOUSE1", function(element, menu, controller, model)
 			return false
 		end, false)
-		f30_arg4:AddButtonCallbackFunction(f30_arg0, f30_arg3, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "ui_confirm", function(element, menu, controller, model)
+		f30_arg4:AddButtonCallbackFunction(f30_arg0, f30_arg3, Enum[@"luibutton"][@"lui_key_none"], "ui_confirm", function(element, menu, controller, model)
 			f30_local0(not CoD.PCWidgetUtility.IsToggled(f30_arg0, nil))
 			return true
 		end, false)
@@ -598,7 +598,7 @@ CoD.PCWidgetUtility.KeyBoundHandler = function(f37_arg0, f37_arg1)
 		local f37_local2 = f37_local0.bindIndex:get()
 		if f37_local1 and f37_local2 then
 			f37_local0.binding:set(false)
-			f37_local0.keybind:set(Engine[0x794B3C1FFCB4111](f37_arg1.controller, f37_local1, f37_local2, false, false))
+			f37_local0.keybind:set(Engine[@"getkeybindinglocalizedstring"](f37_arg1.controller, f37_local1, f37_local2, false, false))
 		end
 	end
 	return true
@@ -607,7 +607,7 @@ CoD.PCWidgetUtility.PrepareMainAltKeyBinder = function(f38_arg0, f38_arg1, f38_a
 	f38_arg0._bindKey = function(f39_arg0)
 		if not f38_arg2.m_disableNavigation and f38_arg2:AcceptGamePadButtonInputFromModelCallback(f38_arg1) then
 			CoD.PCWidgetUtility.BringIntoView(f38_arg0, f38_arg1)
-			if not Engine[0xBFCB46AE6026E3]() then
+			if not Engine[@"lastinput_gamepad"]() then
 				local f39_local0 = f38_arg0:getModel()
 				if f39_local0 then
 					local f39_local1 = f39_local0.command:get()
@@ -622,21 +622,21 @@ CoD.PCWidgetUtility.PrepareMainAltKeyBinder = function(f38_arg0, f38_arg1, f38_a
 						f39_local3 = DataSources.KeybindMessages.getModel(f38_arg1)
 						f39_local3.isBindingKey:set(true)
 						f39_local3 = DataSources.KeybindMessages.getModel(f38_arg1)
-						f39_local3.keybindMessage:set(Engine[0xF9F1239CFD921FE](0x1EEC966B7C77D17))
-						Engine[0xB81A5136C5503E4](f38_arg1, "clearKeyStates")
+						f39_local3.keybindMessage:set(Engine[@"hash_4F9F1239CFD921FE"](@"hash_1EEC966B7C77D17"))
+						Engine[@"execnow"](f38_arg1, "clearKeyStates")
 						PlaySoundSetSound(f38_arg0, "gain_focus")
 						if f39_arg0 then
 							f39_local3 = f38_arg3.bind_alt:get()
 							local f39_local4 = DataSources.KeybindMessages.getModel(f38_arg1)
-							f39_local4.currentKeybind:set(Engine[0xB03220D3A4F3E38](f39_local3))
+							f39_local4.currentKeybind:set(Engine[@"toupper"](f39_local3))
 							f39_local0.binding_alt:set(true)
-							Engine[0x9EB5B4A37440B79](f38_arg1, f39_local1, f39_local2)
+							Engine[@"hash_59EB5B4A37440B79"](f38_arg1, f39_local1, f39_local2)
 						else
 							f39_local3 = f38_arg3.bind_main:get()
 							local f39_local4 = DataSources.KeybindMessages.getModel(f38_arg1)
-							f39_local4.currentKeybind:set(Engine[0xB03220D3A4F3E38](f39_local3))
+							f39_local4.currentKeybind:set(Engine[@"toupper"](f39_local3))
 							f39_local0.binding_main:set(true)
-							Engine[0xB9A3A2486AEEA3F](f38_arg1, f39_local1, f39_local2)
+							Engine[@"bindcommand"](f38_arg1, f39_local1, f39_local2)
 						end
 					end
 				end
@@ -645,16 +645,16 @@ CoD.PCWidgetUtility.PrepareMainAltKeyBinder = function(f38_arg0, f38_arg1, f38_a
 		else
 		end
 	end
-	f38_arg2:AddButtonCallbackFunction(f38_arg4, f38_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f38_arg2:AddButtonCallbackFunction(f38_arg4, f38_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		f38_arg0._bindKey(false)
 		return true
 	end, false)
-	f38_arg2:AddButtonCallbackFunction(f38_arg5, f38_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f38_arg2:AddButtonCallbackFunction(f38_arg5, f38_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		f38_arg0._bindKey(true)
 		return true
 	end, false)
 	local f38_local0 = function(f42_arg0, f42_arg1, f42_arg2, f42_arg3)
-		if not Engine[0xBFCB46AE6026E3]() then
+		if not Engine[@"lastinput_gamepad"]() then
 			CoD.PCWidgetUtility.BringIntoView(f38_arg0, f42_arg2)
 			CoD.PCWidgetUtility.DeleteKeybind(f42_arg0, f42_arg1, f42_arg2, f42_arg3, f42_arg0 == f38_arg4)
 		end
@@ -663,11 +663,11 @@ CoD.PCWidgetUtility.PrepareMainAltKeyBinder = function(f38_arg0, f38_arg1, f38_a
 		"ui_remove",
 		"BACKSPACE",
 	}) do
-		f38_arg2:AddButtonCallbackFunction(f38_arg4, f38_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], f38_local5, f38_local0)
-		f38_arg2:AddButtonCallbackFunction(f38_arg5, f38_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], f38_local5, f38_local0)
+		f38_arg2:AddButtonCallbackFunction(f38_arg4, f38_arg1, Enum[@"luibutton"][@"lui_key_none"], f38_local5, f38_local0)
+		f38_arg2:AddButtonCallbackFunction(f38_arg5, f38_arg1, Enum[@"luibutton"][@"lui_key_none"], f38_local5, f38_local0)
 	end
 	if not f38_arg0.__contextualPrepared then
-		f38_arg4:AddContextualMenuAction(f38_arg2, f38_arg1, 0x58B9A5DAE6B2AD6, function(f43_arg0, f43_arg1, f43_arg2, f43_arg3)
+		f38_arg4:AddContextualMenuAction(f38_arg2, f38_arg1, @"hash_358B9A5DAE6B2AD6", function(f43_arg0, f43_arg1, f43_arg2, f43_arg3)
 			local f43_local0 = f43_arg0:getModel()
 			f43_local0 = f43_local0.bind_main:get()
 			if f43_local0 and f43_local0 ~= "" then
@@ -678,7 +678,7 @@ CoD.PCWidgetUtility.PrepareMainAltKeyBinder = function(f38_arg0, f38_arg1, f38_a
 			else
 			end
 		end)
-		f38_arg5:AddContextualMenuAction(f38_arg2, f38_arg1, 0x58B9A5DAE6B2AD6, function(f45_arg0, f45_arg1, f45_arg2, f45_arg3)
+		f38_arg5:AddContextualMenuAction(f38_arg2, f38_arg1, @"hash_358B9A5DAE6B2AD6", function(f45_arg0, f45_arg1, f45_arg2, f45_arg3)
 			local f45_local0 = f45_arg0:getModel()
 			f45_local0 = f45_local0.bind_alt:get()
 			if f45_local0 and f45_local0 ~= "" then
@@ -697,15 +697,15 @@ CoD.PCWidgetUtility.PrepareMainAltKeyBinder = function(f38_arg0, f38_arg1, f38_a
 			local f47_local1 = f47_local0.command:get()
 			local f47_local2 = f47_local0.bindIndex:get()
 			if f47_local1 and f47_local2 then
-				local f47_local3, f47_local4 = Engine[0x7C4C4DBF61B869E](f47_arg1.controller, f47_local1, f47_local2, true)
+				local f47_local3, f47_local4 = Engine[@"hash_27C4C4DBF61B869E"](f47_arg1.controller, f47_local1, f47_local2, true)
 				if not f47_local3 then
 					f47_local3 = ""
 				end
 				if not f47_local4 then
 					f47_local4 = ""
 				end
-				f47_local0.bind_main:set(Engine[0xB03220D3A4F3E38](f47_local3))
-				f47_local0.bind_alt:set(Engine[0xB03220D3A4F3E38](f47_local4))
+				f47_local0.bind_main:set(Engine[@"toupper"](f47_local3))
+				f47_local0.bind_alt:set(Engine[@"toupper"](f47_local4))
 				if f47_local0.binding_main:get() or f47_local0.binding_alt:get() then
 					local f47_local5 = DataSources.KeybindMessages.getModel(f38_arg1)
 					f47_local5.showErrorMessage:set(false)
@@ -714,7 +714,7 @@ CoD.PCWidgetUtility.PrepareMainAltKeyBinder = function(f38_arg0, f38_arg1, f38_a
 							f47_local5 = DataSources.KeybindMessages.getModel(f38_arg1)
 							f47_local5.showErrorMessage:set(true)
 							f47_local5 = DataSources.KeybindMessages.getModel(f38_arg1)
-							f47_local5.keybindMessage:set(Engine[0xF9F1239CFD921FE](0x7C79F5CDEA78F15, Engine[0xB03220D3A4F3E38](f47_arg1.invalidKey)))
+							f47_local5.keybindMessage:set(Engine[@"hash_4F9F1239CFD921FE"](@"hash_57C79F5CDEA78F15", Engine[@"toupper"](f47_arg1.invalidKey)))
 						end
 						return
 					end
@@ -722,13 +722,13 @@ CoD.PCWidgetUtility.PrepareMainAltKeyBinder = function(f38_arg0, f38_arg1, f38_a
 					f47_local5 = f47_local5.currentKeybind:get()
 					local f47_local6 = ""
 					local f47_local7 = DataSources.KeybindMessages.getModel(f38_arg1)
-					f47_local7.pastKeybind:set(Engine[0xF9F1239CFD921FE](0x2EC45BE9E9BD199, f47_local5))
+					f47_local7.pastKeybind:set(Engine[@"hash_4F9F1239CFD921FE"](@"hash_42EC45BE9E9BD199", f47_local5))
 					if f47_local0.binding_main:get() then
 						f47_local6 = f47_local3
 					else
 						f47_local6 = f47_local4
 					end
-					if f47_local5 ~= Engine[0xB03220D3A4F3E38](f47_local6) then
+					if f47_local5 ~= Engine[@"toupper"](f47_local6) then
 						PlaySoundSetSound(f47_arg0, "toggle")
 						f47_local7 = 6
 						local f47_local8 = {}
@@ -740,29 +740,29 @@ CoD.PCWidgetUtility.PrepareMainAltKeyBinder = function(f38_arg0, f38_arg1, f38_a
 						if #f47_local8 > 0 then
 							f47_local9 = DataSources.KeybindMessages.getModel(f38_arg1)
 							f47_local9.showWarningMessage:set(true)
-							f47_local9 = Engine[0xF9F1239CFD921FE](f47_local0.name:get())
+							f47_local9 = Engine[@"hash_4F9F1239CFD921FE"](f47_local0.name:get())
 							if #f47_local8 > 1 then
 								f47_local10 = DataSources.KeybindMessages.getModel(f38_arg1)
-								f47_local10.keybindMessage:set(Engine[0xF9F1239CFD921FE](0x92F53A3665DC3A5, Engine[0xB03220D3A4F3E38](f47_local6), f47_local9))
+								f47_local10.keybindMessage:set(Engine[@"hash_4F9F1239CFD921FE"](@"hash_592F53A3665DC3A5", Engine[@"toupper"](f47_local6), f47_local9))
 							else
-								local f47_local10 = Engine[0xF9F1239CFD921FE](CoD.PCOptionsUtility.CommandToXHash(f38_arg1, f47_local8[1]) or 0x0)
+								local f47_local10 = Engine[@"hash_4F9F1239CFD921FE"](CoD.PCOptionsUtility.CommandToXHash(f38_arg1, f47_local8[1]) or 0x0)
 								local f47_local11 = DataSources.KeybindMessages.getModel(f38_arg1)
-								f47_local11.keybindMessage:set(Engine[0xF9F1239CFD921FE](0xEB1FF40050E3938, Engine[0xB03220D3A4F3E38](f47_local6), f47_local10, f47_local9))
+								f47_local11.keybindMessage:set(Engine[@"hash_4F9F1239CFD921FE"](@"hash_4EB1FF40050E3938", Engine[@"toupper"](f47_local6), f47_local10, f47_local9))
 							end
 						else
 							local f47_local9 = DataSources.KeybindMessages.getModel(f38_arg1)
 							f47_local9.showPastKeybind:set(true)
 							if f47_local5 == "" then
 								f47_local9 = DataSources.KeybindMessages.getModel(f38_arg1)
-								f47_local9.keybindMessage:set(Engine[0xF9F1239CFD921FE](0x3D1E55048CE3726, Engine[0xB03220D3A4F3E38](f47_local6)))
+								f47_local9.keybindMessage:set(Engine[@"hash_4F9F1239CFD921FE"](@"hash_63D1E55048CE3726", Engine[@"toupper"](f47_local6)))
 							else
 								f47_local9 = DataSources.KeybindMessages.getModel(f38_arg1)
-								f47_local9.currentKeybind:set(Engine[0xF9F1239CFD921FE](0x4A7CDEC944CCCAF, Engine[0xB03220D3A4F3E38](f47_local6)))
+								f47_local9.currentKeybind:set(Engine[@"hash_4F9F1239CFD921FE"](@"hash_34A7CDEC944CCCAF", Engine[@"toupper"](f47_local6)))
 								f47_local9 = DataSources.KeybindMessages.getModel(f38_arg1)
-								f47_local9.keybindMessage:set(Engine[0xF9F1239CFD921FE](0xB729DA024CB9455, Engine[0xB03220D3A4F3E38](f47_local6), f47_local5))
+								f47_local9.keybindMessage:set(Engine[@"hash_4F9F1239CFD921FE"](@"hash_2B729DA024CB9455", Engine[@"toupper"](f47_local6), f47_local5))
 							end
 						end
-						Dvar[0x2B49C5C32022076]:set(true)
+						Dvar[@"hash_72B49C5C32022076"]:set(true)
 						f47_local9 = DataSources.OptionControlKeyBindingsDropDown.getModel(f38_arg1)
 						f47_local9.presetIsModified:set(true)
 						f47_local9 = f47_arg0:getMenu()
@@ -803,7 +803,7 @@ CoD.PCWidgetUtility.DeleteKeybind = function(f49_arg0, f49_arg1, f49_arg2, f49_a
 		local f49_local2 = f49_local0.bindIndex:get()
 		if f49_local1 and f49_local2 then
 			PlaySoundSetSound(f49_arg0, "toggle")
-			Engine[0x83D5ABE29C88EF6](f49_arg2, f49_local1, f49_local2, f49_arg4)
+			Engine[@"hash_183D5ABE29C88EF6"](f49_arg2, f49_local1, f49_local2, f49_arg4)
 		end
 	end
 	return true
@@ -1015,18 +1015,18 @@ CoD.PCWidgetUtility.ScrollToActiveElement = function(f71_arg0, f71_arg1)
 	CoD.PCWidgetUtility.ScrollToElement(f71_arg0, f71_arg0.View.activeWidget, f71_arg1)
 end
 CoD.PCWidgetUtility.AddScrollWheels = function(f72_arg0, f72_arg1, f72_arg2)
-	f72_arg0:AddButtonCallbackFunction(f72_arg2, f72_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "MWHEELUP", function(element, menu, controller, model)
+	f72_arg0:AddButtonCallbackFunction(f72_arg2, f72_arg1, Enum[@"luibutton"][@"lui_key_none"], "MWHEELUP", function(element, menu, controller, model)
 		f72_arg2.ScrollView.View:navigateItemUp()
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "MWHEELUP")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "MWHEELUP")
 		return false
 	end, false)
-	f72_arg0:AddButtonCallbackFunction(f72_arg2, f72_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "MWHEELDOWN", function(element, menu, controller, model, f75_arg4)
+	f72_arg0:AddButtonCallbackFunction(f72_arg2, f72_arg1, Enum[@"luibutton"][@"lui_key_none"], "MWHEELDOWN", function(element, menu, controller, model, f75_arg4)
 		f72_arg2.ScrollView.View:navigateItemDown()
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "MWHEELDOWN")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "MWHEELDOWN")
 		return false
 	end, false)
 end
@@ -1153,13 +1153,13 @@ CoD.PCWidgetUtility.PrepareVScrollWidgetNavigation = function(f80_arg0, f80_arg1
 		end
 		return true
 	end
-	CoD.Menu.AddButtonCallbackFunction(f80_arg2, f80_arg0, f80_arg1, Enum[0x3DD78803F918E9D][0x4B11D2B20C75A7F], "ui_navup", function(element, menu, controller, f84_arg3)
+	CoD.Menu.AddButtonCallbackFunction(f80_arg2, f80_arg0, f80_arg1, Enum[@"luibutton"][@"lui_key_up"], "ui_navup", function(element, menu, controller, f84_arg3)
 		if not f80_arg0.m_disableNavigation and (not (not f80_arg0.dpadDisabled or not IsDpadButton(f84_arg3)) or f80_local4(f80_local0)) then
 			return true
 		else
 		end
 	end)
-	CoD.Menu.AddButtonCallbackFunction(f80_arg2, f80_arg0, f80_arg1, Enum[0x3DD78803F918E9D][0xD4C15FE32148D3A], "ui_navdown", function(element, menu, controller, f85_arg3)
+	CoD.Menu.AddButtonCallbackFunction(f80_arg2, f80_arg0, f80_arg1, Enum[@"luibutton"][@"lui_key_down"], "ui_navdown", function(element, menu, controller, f85_arg3)
 		if not f80_arg0.m_disableNavigation and (not (not f80_arg0.dpadDisabled or not IsDpadButton(f85_arg3)) or f80_local4(f80_local1)) then
 			return true
 		else
@@ -1177,7 +1177,7 @@ CoD.PCWidgetUtility.PrepareVScrollWidgetNavigation = function(f80_arg0, f80_arg1
 			return false
 		end
 	end
-	CoD.Menu.AddButtonCallbackFunction(f80_arg2, f80_arg0, f80_arg1, Enum[0x3DD78803F918E9D][0x57783F8DA4AAEF], "ui_navleft", function(element, menu, controller, f87_arg3)
+	CoD.Menu.AddButtonCallbackFunction(f80_arg2, f80_arg0, f80_arg1, Enum[@"luibutton"][@"lui_key_left"], "ui_navleft", function(element, menu, controller, f87_arg3)
 		if f80_arg0.m_disableNavigation then
 			return false
 		elseif CoD.PCOptionsUtility.OptionListFocusModelBehavior then
@@ -1193,7 +1193,7 @@ CoD.PCWidgetUtility.PrepareVScrollWidgetNavigation = function(f80_arg0, f80_arg1
 		end
 		return false
 	end)
-	CoD.Menu.AddButtonCallbackFunction(f80_arg2, f80_arg0, f80_arg1, Enum[0x3DD78803F918E9D][0x571F08AD84807E0], "ui_navright", function(element, menu, controller, f88_arg3)
+	CoD.Menu.AddButtonCallbackFunction(f80_arg2, f80_arg0, f80_arg1, Enum[@"luibutton"][@"lui_key_right"], "ui_navright", function(element, menu, controller, f88_arg3)
 		if f80_arg0.m_disableNavigation then
 			return false
 		elseif CoD.PCOptionsUtility.OptionListFocusModelBehavior then
@@ -1335,13 +1335,13 @@ CoD.PCWidgetUtility.SetupScrollbar = function(f94_arg0, f94_arg1, f94_arg2, f94_
 			element.m_focusable = false
 		end)
 	end
-	f94_arg2:AddButtonCallbackFunction(f94_arg5, f94_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "MWHEELDOWN", function(element, menu, controller, model)
+	f94_arg2:AddButtonCallbackFunction(f94_arg5, f94_arg1, Enum[@"luibutton"][@"lui_key_none"], "MWHEELDOWN", function(element, menu, controller, model)
 		CoD.PCWidgetUtility.ScrollVerticalByAmount(f94_local4, f94_arg0.wheelScrollUnit)
 		return true
 	end, function(element, menu, controller)
 		return false
 	end, false)
-	f94_arg2:AddButtonCallbackFunction(f94_arg5, f94_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "MWHEELUP", function(element, menu, controller, model)
+	f94_arg2:AddButtonCallbackFunction(f94_arg5, f94_arg1, Enum[@"luibutton"][@"lui_key_none"], "MWHEELUP", function(element, menu, controller, model)
 		CoD.PCWidgetUtility.ScrollVerticalByAmount(f94_local4, -f94_arg0.wheelScrollUnit)
 		return true
 	end, function(element, menu, controller)
@@ -1384,7 +1384,7 @@ CoD.PCWidgetUtility.SetupSettingsMenuCache = function(f110_arg0, f110_arg1)
 		f110_arg1.close = function(f112_arg0)
 			local f112_local0 = f112_arg0:getOwner()
 			if not f112_local0 then
-				f112_local0 = Engine[0xA5B9C0111291A8B]()
+				f112_local0 = Engine[@"getprimarycontroller"]()
 			end
 			CoD.Menu.RemoveFromCurrMenuNameList(f112_arg0.menuName)
 			if f112_arg0.occludedBy ~= nil and f112_arg0.occludedBy.occludedMenu == f112_arg0 then
@@ -1394,7 +1394,7 @@ CoD.PCWidgetUtility.SetupSettingsMenuCache = function(f110_arg0, f110_arg1)
 				if f112_arg0.occludedBy ~= nil then
 					f112_arg0.occludedMenu.occludedBy = f112_arg0.occludedBy
 				else
-					if IsGameTypeDOA() and Engine[0xBC62B0E988DCCAF]() then
+					if IsGameTypeDOA() and Engine[@"issplitscreen"]() then
 						f112_arg0.occludedMenu:setOwner(f112_arg0:getOwner())
 					end
 					f112_arg0.occludedMenu:processEvent({
@@ -1462,7 +1462,7 @@ CoD.PCWidgetUtility.PrepareOptionScreenListCache = function(f113_arg0, f113_arg1
 					end
 					local f115_local1 = Engine[0x4B06D9D6B673AA](f113_arg1)
 					if f115_local1 and f115_arg0:isParentOf(f115_local1) then
-						Engine[0x18F7786899BA625](f113_arg1)
+						Engine[@"hash_718F7786899BA625"](f113_arg1)
 					end
 					f115_arg0:removeDataSourceLink(true)
 					f115_arg0:removeElement(f115_arg0.itemStencil)
@@ -1502,7 +1502,7 @@ CoD.PCWidgetUtility.PrepareOptionScreenListCache = function(f113_arg0, f113_arg1
 						end
 						local f115_local1 = Engine[0x4B06D9D6B673AA](f113_arg1)
 						if f115_local1 and f115_arg0:isParentOf(f115_local1) then
-							Engine[0x18F7786899BA625](f113_arg1)
+							Engine[@"hash_718F7786899BA625"](f113_arg1)
 						end
 						f115_arg0:removeDataSourceLink(true)
 						f115_arg0:removeElement(f115_arg0.itemStencil)
@@ -1675,7 +1675,7 @@ CoD.PCWidgetUtility.PrepareVScrollWidget = function(f117_arg0, f117_arg1, f117_a
 		return true
 	end)
 	CoD.PCWidgetUtility.SetupScrollbar(f117_arg0, f117_arg1, f117_arg2, false, false)
-	f117_arg2:AddButtonCallbackFunction(f117_arg0.ScrollView, f117_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "MOUSE1", function(element, menu, controller, model)
+	f117_arg2:AddButtonCallbackFunction(f117_arg0.ScrollView, f117_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "MOUSE1", function(element, menu, controller, model)
 		if CoD.GetMouseFocus(controller) then
 			local f128_local0 = CoD.GetMouseFocus(controller)
 			while f128_local0 and not f128_local0.gridInfoTable do
@@ -1716,7 +1716,7 @@ CoD.PCWidgetUtility.PrepareVScrollWidget = function(f117_arg0, f117_arg1, f117_a
 end
 CoD.PCWidgetUtility.ScrollUpDown = function(f130_arg0, f130_arg1, f130_arg2, f130_arg3)
 	if CoD.GetMouseFocus(f130_arg1) and f130_arg0:isParentOf(CoD.GetMouseFocus(f130_arg1)) then
-		local f130_local0 = Engine[0x614D394F6F9A18D](f130_arg3)
+		local f130_local0 = Engine[@"getmodelvalue"](f130_arg3)
 		local f130_local1 = CoD.GetScriptNotifyData(f130_arg3)
 		f130_local1 = f130_local1[1]
 		local f130_local2 = CoD.GetScriptNotifyData(f130_arg3)
@@ -1785,7 +1785,7 @@ CoD.PCWidgetUtility.PrepareCategoryButton = function(f137_arg0, f137_arg1, f137_
 	end
 	assert(f137_arg3.categoryId)
 	local f137_local0 = f137_arg3.categoryId:get()
-	f137_arg2:AddButtonCallbackFunction(f137_arg0, f137_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "MOUSE1", function(element, menu, controller, model)
+	f137_arg2:AddButtonCallbackFunction(f137_arg0, f137_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "MOUSE1", function(element, menu, controller, model)
 		CoD.PCOptionsUtility.SetCurrentCategoryModel(controller, f137_local0)
 		f137_arg0:playSound("list_right", controller)
 		return true
@@ -1796,7 +1796,7 @@ CoD.PCWidgetUtility.PrepareCategoryButton = function(f137_arg0, f137_arg1, f137_
 		DisableKeyboardNavigationByElement(f137_arg0)
 	end
 	if f137_local0 >= 0 and f137_local0 <= 9 then
-		f137_arg2:AddButtonCallbackFunction(f137_arg2, f137_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], tostring(f137_local0), function(element, menu, controller, model)
+		f137_arg2:AddButtonCallbackFunction(f137_arg2, f137_arg1, Enum[@"luibutton"][@"lui_key_none"], tostring(f137_local0), function(element, menu, controller, model)
 			PlaySoundSetSound(f137_arg0, "list_right")
 			CoD.PCOptionsUtility.SetCurrentCategoryModel(controller, f137_local0)
 			return true
@@ -1820,7 +1820,7 @@ CoD.PCWidgetUtility.UpdateOptionList = function(f142_arg0, f142_arg1, f142_arg2)
 			if f142_local0.profileVar and f142_arg0._optionProperties and f142_arg0._optionProperties._options and #f142_arg0._optionProperties._options > 0 and CoD.PCWidgetUtility.OptionValueToOptionIndex(f142_arg0, f142_local0.currentValue:get()) == -1 then
 				f142_arg0._optionProperties._setCurrentValue(f142_local0.profileVar:get(), f142_arg1, f142_arg0._optionProperties._options[1].value)
 			end
-			Engine[0x6A489878620F3BC](f142_local0.currentValue)
+			Engine[@"forcenotifymodelsubscriptions"](f142_local0.currentValue)
 		end
 	end
 end
@@ -1928,21 +1928,21 @@ CoD.PCWidgetUtility.PrepareCyclingList = function(f151_arg0, f151_arg1, f151_arg
 			end
 		end
 		CoD.PCWidgetUtility.UpdateOptionList(f151_arg0, f151_arg1, true)
-		f151_arg2:AddButtonCallbackFunction(f151_arg4.center, f151_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "MOUSE1", function(element, menu, controller)
+		f151_arg2:AddButtonCallbackFunction(f151_arg4.center, f151_arg1, Enum[@"luibutton"][@"lui_key_none"], "MOUSE1", function(element, menu, controller)
 			return false
 		end, false)
-		f151_arg2:AddButtonCallbackFunction(f151_arg4.center, f151_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "ui_confirm", function(element, menu, controller)
+		f151_arg2:AddButtonCallbackFunction(f151_arg4.center, f151_arg1, Enum[@"luibutton"][@"lui_key_none"], "ui_confirm", function(element, menu, controller)
 			f151_local0(f151_arg0._getCurrentSelection() + 1)
 			return true
 		end, false)
-		f151_arg2:AddButtonCallbackFunction(f151_arg4.left, f151_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller)
+		f151_arg2:AddButtonCallbackFunction(f151_arg4.left, f151_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller)
 			local f156_local0 = f151_arg0._getCurrentSelection()
 			if f156_local0 > 1 then
 				f151_local0(f156_local0 - 1)
 			end
 			return true
 		end, false)
-		f151_arg2:AddButtonCallbackFunction(f151_arg4.right, f151_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller)
+		f151_arg2:AddButtonCallbackFunction(f151_arg4.right, f151_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller)
 			local f157_local0 = f151_arg0._getCurrentSelection()
 			if f157_local0 < #f151_arg0._optionProperties._options then
 				f151_local0(f157_local0 + 1)
@@ -1962,17 +1962,17 @@ CoD.PCWidgetUtility.PrepareCyclingList = function(f151_arg0, f151_arg1, f151_arg
 			end
 			f158_local1 = 1
 		end
-		f151_arg2:AddButtonCallbackFunction(f151_arg0, f151_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "MOUSE1", function(element, menu, controller)
+		f151_arg2:AddButtonCallbackFunction(f151_arg0, f151_arg1, Enum[@"luibutton"][@"lui_key_none"], "MOUSE1", function(element, menu, controller)
 			return false
 		end, false)
-		f151_arg2:AddButtonCallbackFunction(f151_arg0, f151_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "ui_confirm", function(element, menu, controller)
+		f151_arg2:AddButtonCallbackFunction(f151_arg0, f151_arg1, Enum[@"luibutton"][@"lui_key_none"], "ui_confirm", function(element, menu, controller)
 			f151_local0(f151_arg0._getCurrentSelection() + 1)
 			return true
 		end, false)
 	end
 end
 CoD.PCWidgetUtility.PrepareDropdownItem = function(f161_arg0, f161_arg1, f161_arg2, f161_arg3)
-	f161_arg2:AddButtonCallbackFunction(f161_arg0, f161_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller)
+	f161_arg2:AddButtonCallbackFunction(f161_arg0, f161_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller)
 		local f162_local0 = f161_arg0
 		local f162_local1 = f162_local0
 		f162_local0 = f162_local0.dispatchEventToParent
@@ -1988,15 +1988,15 @@ CoD.PCWidgetUtility.PrepareDropdownItem = function(f161_arg0, f161_arg1, f161_ar
 end
 CoD.PCWidgetUtility.PrepareHeistBuyMenuButtons = function(f163_arg0, f163_arg1, f163_arg2)
 	assert(f163_arg0.BountyHunterBuyInternal and f163_arg0.BountyHunterOpenPrompt)
-	f163_arg2:AddButtonCallbackFunction(f163_arg0, f163_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "+activate", function(element, menu, controller)
-		if not IsVisibilityBitSet(controller, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) and IsMouseOrKeyboard(controller) and not IsDemoPlaying() then
+	f163_arg2:AddButtonCallbackFunction(f163_arg0, f163_arg1, Enum[@"luibutton"][@"lui_key_none"], "+activate", function(element, menu, controller)
+		if not IsVisibilityBitSet(controller, Enum[@"uivisibilitybit"][@"bit_ui_active"]) and IsMouseOrKeyboard(controller) and not IsDemoPlaying() then
 			CoD.BountyHunterUtility.ToggleBuyMenuVisible(f163_arg0, controller, f163_arg0.BountyHunterBuyInternal, f163_arg0.BountyHunterOpenPrompt, f163_arg0.PCBackButton)
 			return true
 		else
 		end
 	end)
-	f163_arg2:AddButtonCallbackFunction(f163_arg0, f163_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "ESCAPE", function(element, menu, controller)
-		if not IsVisibilityBitSet(controller, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) and CoD.BountyHunterUtility.IsBuyMenuVisible(f163_arg0.BountyHunterBuyInternal) and IsMouseOrKeyboard(controller) and not IsDemoPlaying() then
+	f163_arg2:AddButtonCallbackFunction(f163_arg0, f163_arg1, Enum[@"luibutton"][@"lui_key_none"], "ESCAPE", function(element, menu, controller)
+		if not IsVisibilityBitSet(controller, Enum[@"uivisibilitybit"][@"bit_ui_active"]) and CoD.BountyHunterUtility.IsBuyMenuVisible(f163_arg0.BountyHunterBuyInternal) and IsMouseOrKeyboard(controller) and not IsDemoPlaying() then
 			CoD.BountyHunterUtility.ToggleBuyMenuVisible(f163_arg0, controller, f163_arg0.BountyHunterBuyInternal, f163_arg0.BountyHunterOpenPrompt, f163_arg0.PCBackButton)
 			return true
 		else
@@ -2081,9 +2081,9 @@ CoD.PCWidgetUtility.CreateDropdown = function(f170_arg0, f170_arg1, f170_arg2, f
 		local f173_local1 = 0
 		local f173_local2 = 1
 		local f173_local3 = f173_local0
-		if f173_arg3 == "W" or f173_arg3 == "UPARROW" or f173_arg3 == "ui_navup" or f173_arg4 == Enum[0x3DD78803F918E9D][0x4B11D2B20C75A7F] then
+		if f173_arg3 == "W" or f173_arg3 == "UPARROW" or f173_arg3 == "ui_navup" or f173_arg4 == Enum[@"luibutton"][@"lui_key_up"] then
 			f173_local3 = f173_local1
-		elseif f173_arg3 == "S" or f173_arg3 == "DOWNARROW" or f173_arg3 == "ui_navdown" or f173_arg4 == Enum[0x3DD78803F918E9D][0xD4C15FE32148D3A] then
+		elseif f173_arg3 == "S" or f173_arg3 == "DOWNARROW" or f173_arg3 == "ui_navdown" or f173_arg4 == Enum[@"luibutton"][@"lui_key_down"] then
 			f173_local3 = f173_local2
 		elseif f173_arg3 == "ui_confirm" then
 			local f173_local4 = f170_local0.ScrollView.View.activeWidget
@@ -2097,7 +2097,7 @@ CoD.PCWidgetUtility.CreateDropdown = function(f170_arg0, f170_arg1, f170_arg2, f
 			f173_local7.value = f173_local8.value:get()
 			f173_local6(f173_local5, f173_local7)
 			return true
-		elseif f173_arg3 == "ESCAPE" or f173_arg4 == Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A] then
+		elseif f173_arg3 == "ESCAPE" or f173_arg4 == Enum[@"luibutton"][@"lui_key_xbb_pscircle"] then
 			local f173_local4 = f170_local0:getModel()
 			f173_local4.isOpen:set(false)
 			return true
@@ -2225,7 +2225,7 @@ CoD.PCWidgetUtility.PrepareDropdownList = function(f180_arg0, f180_arg1, f180_ar
 	f180_arg0:registerEventHandler("onDropdownItemChanged", function(element, event)
 		if not f180_arg4._checkListOptionsOutdated or not f180_arg4._checkListOptionsOutdated(f180_arg1) then
 			if f180_arg3.refreshWidget then
-				Engine[0x6A489878620F3BC](f180_arg3.refreshWidget)
+				Engine[@"forcenotifymodelsubscriptions"](f180_arg3.refreshWidget)
 			end
 			local f183_local0 = f180_arg3.profileVar
 			if f183_local0 then
@@ -2234,14 +2234,14 @@ CoD.PCWidgetUtility.PrepareDropdownList = function(f180_arg0, f180_arg1, f180_ar
 			CoD.PCWidgetUtility.ChangeWidgetValue(element, f183_local0, event.controller, f180_arg3, event.value, true)
 		end
 		f180_arg3.isOpen:set(false)
-		if Engine[0x267ACA658A43FBD](f180_arg1) then
+		if Engine[@"hash_267ACA658A43FBD"](f180_arg1) then
 			f180_arg2:ChangeFocusedElement(f180_arg1, element, true)
 		end
 	end)
 	if not f180_arg0.__subscribedToSettingsMenuOpen then
 		f180_arg0:subscribeToGlobalModel(f180_arg1, "PerController", "SettingsMenuOpen", function(model)
 			if model:get() and f180_arg4._checkListOptionsOutdated and f180_arg4._checkListOptionsOutdated(f180_arg1) and f180_arg3.refreshWidget then
-				Engine[0x6A489878620F3BC](f180_arg3.refreshWidget)
+				Engine[@"forcenotifymodelsubscriptions"](f180_arg3.refreshWidget)
 			end
 		end)
 		f180_arg0.__subscribedToSettingsMenuOpen = true
@@ -2249,7 +2249,7 @@ CoD.PCWidgetUtility.PrepareDropdownList = function(f180_arg0, f180_arg1, f180_ar
 end
 CoD.PCWidgetUtility.PrepareDirectorQuitButton = function(f185_arg0, f185_arg1)
 	local f185_local0 = function(f186_arg0, f186_arg1)
-		if Dvar[0x7119D0EEFF392AB]:get() == 0 then
+		if Dvar[@"r_fullscreen"]:get() == 0 then
 			f186_arg0:hide()
 		else
 			f186_arg0:show()
@@ -2433,13 +2433,13 @@ CoD.PCWidgetUtility.PrepareExpander = function(f194_arg0, f194_arg1, f194_arg2, 
 			f201_local0 = f201_local1
 		end
 	end)
-	f194_arg2:AddButtonCallbackFunction(f194_arg5, f194_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f194_arg2:AddButtonCallbackFunction(f194_arg5, f194_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		f194_arg3.isOpen:set(not f194_arg3.isOpen:get())
 		f194_arg4.updateSize()
 		f194_arg0:playSound("toggle", controller)
 		if f194_arg3.isOpen:get() then
 			local f202_local0 = f194_arg4:getFirstSelectableItem(true)
-			if Engine[0x267ACA658A43FBD]() then
+			if Engine[@"hash_267ACA658A43FBD"]() then
 				local f202_local1 = f202_local0
 				if not f202_local1:isFocusable() then
 					f202_local1 = CoD.BaseUtility.FindSingleFocusableDescendant(f202_local1, true)
@@ -2448,7 +2448,7 @@ CoD.PCWidgetUtility.PrepareExpander = function(f194_arg0, f194_arg1, f194_arg2, 
 			end
 		else
 			f194_arg0.gridInfoTable.parentGrid:setActiveItem(f194_arg0)
-			if Engine[0x267ACA658A43FBD]() then
+			if Engine[@"hash_267ACA658A43FBD"]() then
 				local f202_local0 = f194_arg5
 				if not f202_local0:isFocusable() then
 					f202_local0 = CoD.BaseUtility.FindSingleFocusableDescendant(f202_local0, true)
@@ -2485,23 +2485,23 @@ CoD.PCWidgetUtility.PrepareUpdateExpanderDependingOnChildListCount = function(f2
 	f205_arg0:registerEventHandler("grid_updated", function(element, event)
 		if event.grid == element.ElementList then
 			local f206_local0 = event.grid:getDataSource()
-			Engine[0x83C9B5DE1D9371](f205_local0.listCount, f206_local0.getCount(event.grid))
+			Engine[@"setmodelvalue"](f205_local0.listCount, f206_local0.getCount(event.grid))
 			element.ElementList.updateSizeWithTimer()
 		end
 	end)
 end
 CoD.PCWidgetUtility.IsBattlenetFriendsCategoryEmpty = function(f207_arg0)
 	local f207_local0 = f207_arg0:getModel()
-	return Engine[0x614D394F6F9A18D](f207_local0.listCount) == 0
+	return Engine[@"getmodelvalue"](f207_local0.listCount) == 0
 end
 CoD.PCWidgetUtility.CanHideBattlenetFriendsCategory = function(f208_arg0)
 	local f208_local0 = f208_arg0:getModel()
-	return Engine[0x614D394F6F9A18D](f208_local0.hideIfEmpty)
+	return Engine[@"getmodelvalue"](f208_local0.hideIfEmpty)
 end
 CoD.PCWidgetUtility.UpdateNameOnListCount = function(f209_arg0, f209_arg1)
 	assert(f209_arg0 ~= nil)
 	local f209_local0 = f209_arg0:getModel()
-	return Engine[0xF9F1239CFD921FE](f209_local0.name:get(), f209_arg1)
+	return Engine[@"hash_4F9F1239CFD921FE"](f209_local0.name:get(), f209_arg1)
 end
 CoD.PCWidgetUtility.IsJoinableInScrollView = function(f210_arg0, f210_arg1)
 	return IsJoinable(f210_arg0.ScrollView.View, f210_arg1)
@@ -2510,8 +2510,8 @@ CoD.PCWidgetUtility.LobbyQuickJoinInScrollView = function(f211_arg0, f211_arg1, 
 	LobbyQuickJoin(f211_arg0, f211_arg1.ScrollView.View, f211_arg2, f211_arg3, f211_arg4)
 end
 CoD.PCWidgetUtility.SetupFakeChatPreview = function(f212_arg0, f212_arg1, f212_arg2)
-	f212_arg0:subscribeToModel(Engine[0x40E824FE270E174](Engine[0x4DF5CFBC1771947](f212_arg1), f212_arg2), function(model, f213_arg1)
-		if CoD.BitUtility.IsBitwiseAndNonZero(model:get(), Enum[0xE29E259801BC1A4][0x3DC8FC0E6AB543F] | Enum[0xE29E259801BC1A4][0x253A6F6CAAAE464]) then
+	f212_arg0:subscribeToModel(Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f212_arg1), f212_arg2), function(model, f213_arg1)
+		if CoD.BitUtility.IsBitwiseAndNonZero(model:get(), Enum[@"luibuttonflags"][@"flag_isrepeat"] | Enum[@"luibuttonflags"][@"flag_down"]) then
 			if f213_arg1.currentState == "Inactive" or f213_arg1.currentState == nil then
 				SetElementState(f213_arg1, f213_arg1, f212_arg1, "Collapsed")
 			elseif f213_arg1.currentState == "Collapsed" then
@@ -2530,7 +2530,7 @@ CoD.PCWidgetUtility.CanShowMenuStyleChat = function(f214_arg0)
 	end
 	local f214_local1 = false
 	if CoD.isWarzone then
-		local f214_local2 = Engine[0x4DF5CFBC1771947](f214_arg0)
+		local f214_local2 = Engine[@"getmodelforcontroller"](f214_arg0)
 		f214_local2 = f214_local2.gameScore
 		f214_local2 = f214_local2 and f214_local2.currentState
 		if f214_local2 then
@@ -2538,7 +2538,7 @@ CoD.PCWidgetUtility.CanShowMenuStyleChat = function(f214_arg0)
 		end
 		f214_local1 = f214_local2 and f214_local2 ~= ""
 	end
-	local f214_local2 = IsVisibilityBitSet(f214_arg0, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6])
+	local f214_local2 = IsVisibilityBitSet(f214_arg0, Enum[@"uivisibilitybit"][@"bit_ui_active"])
 	if not f214_local2 then
 		f214_local2 = f214_local0 or f214_local1
 	end
@@ -2548,19 +2548,19 @@ CoD.PCWidgetUtility.RegisterInGameChatEventActivated = function(f215_arg0, f215_
 	f215_arg2.__inGameChattingModelSubscription = f215_arg2:subscribeToModel(CoD.ChatClientUtility.GetInGameChattingModel(f215_arg0), function(model)
 		if not CoD.PCWidgetUtility.CanShowMenuStyleChat(f215_arg0) then
 			if model:get() then
-				Engine[0x7FFD5B70FD46B06](f215_arg0, "MOUSE1")
+				Engine[@"hash_37FFD5B70FD46B06"](f215_arg0, "MOUSE1")
 				CoD.FreeCursorUtility.RetriggerCursorPosition(f215_arg2, f215_arg0)
 				if f215_arg1 and f215_arg1.occludedBy == nil and f215_arg1.currentInputFocus ~= f215_arg2.InputText then
 					f215_arg1:ChangeInputFocus(f215_arg0, f215_arg2.InputText)
 				end
 			else
-				Engine[0x10BF7D7C03EECE6](f215_arg0, false, Enum[0x9061B48916076D5][0x2334BDF2E4222EA])
+				Engine[@"lockinput"](f215_arg0, false, Enum[@"hash_39061B48916076D5"][@"hash_52334BDF2E4222EA"])
 			end
 		else
-			Engine[0x10BF7D7C03EECE6](f215_arg0, false, Enum[0x9061B48916076D5][0x2334BDF2E4222EA])
+			Engine[@"lockinput"](f215_arg0, false, Enum[@"hash_39061B48916076D5"][@"hash_52334BDF2E4222EA"])
 		end
 	end)
-	CoD.Menu.AddButtonCallbackFunction(f215_arg1, f215_arg1, f215_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "MOUSE1", function(element, menu, controller, f217_arg3)
+	CoD.Menu.AddButtonCallbackFunction(f215_arg1, f215_arg1, f215_arg0, Enum[@"luibutton"][@"lui_key_none"], "MOUSE1", function(element, menu, controller, f217_arg3)
 		if not CoD.PCWidgetUtility.CanShowMenuStyleChat(controller) then
 			local f217_local0 = CoD.ChatClientUtility.GetInGameChattingModel(controller)
 			if f217_local0:get() and not f215_arg2:IsMouseInsideElement(controller) then
@@ -2575,7 +2575,7 @@ CoD.PCWidgetUtility.RegisterInGameChatEventActivated = function(f215_arg0, f215_
 	end)
 end
 CoD.PCWidgetUtility.GetChatChannelColor = function(f218_arg0)
-	return CoD.ChatClientUtility.ColorToString(CoD.ChatClientUtility.GetColorForChannelType(Engine[0x5884871F4FF3ACA](f218_arg0)))
+	return CoD.ChatClientUtility.ColorToString(CoD.ChatClientUtility.GetColorForChannelType(Engine[@"hash_5884871F4FF3ACA"](f218_arg0)))
 end
 CoD.PCWidgetUtility.SetupChatEntriesView = function(f219_arg0, f219_arg1, f219_arg2, f219_arg3)
 	local f219_local0 = f219_arg3
@@ -2674,7 +2674,7 @@ CoD.PCWidgetUtility.UpdateChatEntryPositions = function(f224_arg0, f224_arg1)
 end
 CoD.PCWidgetUtility.UpdateChatEntryState = function(f225_arg0, f225_arg1, f225_arg2)
 	local f225_local0 = f225_arg0:getModel()
-	if f225_local0 and Engine[0x9D33D652B9B0F3B]() - f225_local0.timeMs:get() < 5000 then
+	if f225_local0 and Engine[@"milliseconds"]() - f225_local0.timeMs:get() < 5000 then
 		local f225_local1 = f225_arg0:getParent()
 		f225_local1:setState(f225_arg1, f225_local1.currentState, true, true)
 	end
@@ -2719,20 +2719,20 @@ CoD.PCWidgetUtility.SetupClickableChatChannel = function(f233_arg0, f233_arg1)
 	f233_arg0:appendEventHandler("leftmousedown", function(f234_arg0, f234_arg1)
 		local f234_local0 = CoD.SafeGetModelValue(f234_arg0:getModel(), "chId")
 		if f234_local0 then
-			Engine[0x6A489878620F3BC](CoD.ChatClientUtility.GetCurrentChattingModel(f234_arg1.controller))
+			Engine[@"forcenotifymodelsubscriptions"](CoD.ChatClientUtility.GetCurrentChattingModel(f234_arg1.controller))
 			CoD.ChatClientUtility.SetChannelTo(f234_arg1.controller, f234_local0)
 		end
 	end)
 end
 CoD.PCWidgetUtility.SetupLeftClickableChatPlayerName = function(f235_arg0, f235_arg1, f235_arg2)
 	f235_arg0.handleMouseButton = true
-	CoD.Menu.AddButtonCallbackFunction(f235_arg2, f235_arg0, f235_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "MOUSE1", function(element, menu, controller, f236_arg3)
+	CoD.Menu.AddButtonCallbackFunction(f235_arg2, f235_arg0, f235_arg1, Enum[@"luibutton"][@"lui_key_none"], "MOUSE1", function(element, menu, controller, f236_arg3)
 		local f236_local0 = element:getModel()
 		local f236_local1 = f236_local0.xuid:get()
 		local f236_local2 = nil
-		if Engine[0x93B19E01B1FD1C7](controller) == f236_local1 then
+		if Engine[@"getxuid64"](controller) == f236_local1 then
 			f236_local2 = f236_local0.chId:get()
-			if Engine[0x5884871F4FF3ACA](f236_local2) ~= Enum[0xF6296F5D7A38AD2][0x5E57997D82BCBD1] then
+			if Engine[@"hash_5884871F4FF3ACA"](f236_local2) ~= Enum[@"hash_7F6296F5D7A38AD2"][@"hash_75E57997D82BCBD1"] then
 				f236_local2 = nil
 			end
 		else
@@ -2752,10 +2752,10 @@ CoD.PCWidgetUtility.SetupRightClickableChatPlayerNameParent = function(f237_arg0
 	end)
 end
 CoD.PCWidgetUtility.GetSelectedFriendXUID = function(f239_arg0)
-	return Engine[0x614D394F6F9A18D](Engine[0xA798E4552F5E872](Engine[0x4DF5CFBC1771947](f239_arg0), "Social.selectedFriendXUID"))
+	return Engine[@"getmodelvalue"](Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f239_arg0), "Social.selectedFriendXUID"))
 end
 CoD.PCWidgetUtility.GetSelectedFriendGamertag = function(f240_arg0)
-	return Engine[0x614D394F6F9A18D](Engine[0xA798E4552F5E872](Engine[0x4DF5CFBC1771947](f240_arg0), "Social.selectedFriendGamertag"))
+	return Engine[@"getmodelvalue"](Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f240_arg0), "Social.selectedFriendGamertag"))
 end
 CoD.PCWidgetUtility.RemoveFriend = function(f241_arg0, f241_arg1, f241_arg2, f241_arg3, f241_arg4)
 	local f241_local0 = {
@@ -2822,7 +2822,7 @@ CoD.PCWidgetUtility.BlockPlayer = function(f244_arg0, f244_arg1, f244_arg2, f244
 		f244_local0 = f244_arg3.xuid
 		if not f244_local0 then
 		else
-			return Engine[0xBA84F92B6D4F69B](f244_local0)
+			return Engine[@"blockplayer"](f244_local0)
 		end
 	end
 	f244_local0 = CoD.PCWidgetUtility.GetSelectedFriendXUID(f244_arg2)
@@ -2836,7 +2836,7 @@ CoD.PCWidgetUtility.UnblockPlayer = function(f245_arg0, f245_arg1, f245_arg2, f2
 		f245_local0 = f245_arg3.xuid
 		if not f245_local0 then
 		else
-			return Engine[0x78C309997EF4FFE](f245_local0)
+			return Engine[@"unblockplayer"](f245_local0)
 		end
 	end
 	f245_local0 = CoD.PCWidgetUtility.GetSelectedFriendXUID(f245_arg2)
@@ -2857,7 +2857,7 @@ CoD.PCWidgetUtility.ReportPlayer = function(f248_arg0, f248_arg1, f248_arg2, f24
 		f248_local0 = f248_arg3.xuid
 		if not f248_local0 then
 		else
-			local f248_local1 = Engine[0xDC3B811A6](f248_arg2, f248_local0)
+			local f248_local1 = Engine[@"getplayerinfo"](f248_arg2, f248_local0)
 			local f248_local2 = {
 				controller = f248_arg2,
 				xuid = f248_local0,
@@ -2885,7 +2885,7 @@ CoD.PCWidgetUtility.CancelPartyInvite = function(f249_arg0, f249_arg1, f249_arg2
 		f249_local0 = f249_arg3.xuid
 		if not f249_local0 then
 		else
-			Engine[0x406FC054276FCE6](f249_arg2, f249_local0)
+			Engine[@"hash_2406FC054276FCE6"](f249_arg2, f249_local0)
 		end
 	end
 	f249_local0 = CoD.PCWidgetUtility.GetSelectedFriendXUID(f249_arg2)
@@ -2894,7 +2894,7 @@ CoD.PCWidgetUtility.OpenPlayerAccount = function(f250_arg0, f250_arg1, f250_arg2
 	CoD.PCUtility.ToggleShortcutMenu(f250_arg4, f250_arg2, "ui_openPlayerAccount")
 end
 CoD.PCWidgetUtility.ShowRemoveFriend = function(f251_arg0, f251_arg1, f251_arg2)
-	return Engine[0x3176B986956D1B3](f251_arg0, f251_arg2)
+	return Engine[@"isfriendfromxuid"](f251_arg0, f251_arg2)
 end
 CoD.PCWidgetUtility.ShowInspectPlayer = function(f252_arg0, f252_arg1, f252_arg2)
 	local f252_local0 = f252_arg1
@@ -2907,9 +2907,9 @@ CoD.PCWidgetUtility.ShowInspectPlayer = function(f252_arg0, f252_arg1, f252_arg2
 	return f252_local1
 end
 CoD.PCWidgetUtility.ShowWhisperPlayer = function(f253_arg0, f253_arg1, f253_arg2)
-	local f253_local0 = Engine[0x93B19E01B1FD1C7](f253_arg0) == f253_arg2
-	local f253_local1 = Engine[0x3176B986956D1B3](f253_arg0, f253_arg2)
-	local f253_local2 = Engine[0xC79AA7AECB2E438](f253_arg2)
+	local f253_local0 = Engine[@"getxuid64"](f253_arg0) == f253_arg2
+	local f253_local1 = Engine[@"isfriendfromxuid"](f253_arg0, f253_arg2)
+	local f253_local2 = Engine[@"isplayerblocked"](f253_arg2)
 	local f253_local3
 	if not f253_local0 then
 		local f253_local4 = f253_local1
@@ -2921,8 +2921,8 @@ CoD.PCWidgetUtility.ShowWhisperPlayer = function(f253_arg0, f253_arg1, f253_arg2
 end
 CoD.PCWidgetUtility.ShowBlockPlayer = function(f254_arg0, f254_arg1, f254_arg2)
 	local f254_local0
-	if not (Engine[0x93B19E01B1FD1C7](f254_arg0) == f254_arg2) and not Engine[0x3176B986956D1B3](f254_arg0, f254_arg2) then
-		f254_local0 = not Engine[0xC79AA7AECB2E438](f254_arg2)
+	if not (Engine[@"getxuid64"](f254_arg0) == f254_arg2) and not Engine[@"isfriendfromxuid"](f254_arg0, f254_arg2) then
+		f254_local0 = not Engine[@"isplayerblocked"](f254_arg2)
 	else
 		f254_local0 = false
 	end
@@ -2930,25 +2930,25 @@ CoD.PCWidgetUtility.ShowBlockPlayer = function(f254_arg0, f254_arg1, f254_arg2)
 end
 CoD.PCWidgetUtility.ShowUnblockPlayer = function(f255_arg0, f255_arg1, f255_arg2)
 	local f255_local0
-	if not (Engine[0x93B19E01B1FD1C7](f255_arg0) == f255_arg2) then
-		f255_local0 = Engine[0xC79AA7AECB2E438](f255_arg2)
+	if not (Engine[@"getxuid64"](f255_arg0) == f255_arg2) then
+		f255_local0 = Engine[@"isplayerblocked"](f255_arg2)
 	else
 		f255_local0 = false
 	end
 	return f255_local0
 end
 CoD.PCWidgetUtility.ShowInvitePlayersToParty = function(f256_arg0, f256_arg1, f256_arg2)
-	return Engine[0x93B19E01B1FD1C7](f256_arg0) == f256_arg2
+	return Engine[@"getxuid64"](f256_arg0) == f256_arg2
 end
 CoD.PCWidgetUtility.ShowLeaveParty = function(f257_arg0, f257_arg1, f257_arg2)
-	return Engine[0x93B19E01B1FD1C7](f257_arg0) == f257_arg2 and ShouldShowLeaveParty(f257_arg0)
+	return Engine[@"getxuid64"](f257_arg0) == f257_arg2 and ShouldShowLeaveParty(f257_arg0)
 end
 CoD.PCWidgetUtility.ShowReportPlayer = function(f258_arg0, f258_arg1, f258_arg2)
-	return not (Engine[0x93B19E01B1FD1C7](f258_arg0) == f258_arg2)
+	return not (Engine[@"getxuid64"](f258_arg0) == f258_arg2)
 end
 CoD.PCWidgetUtility.ShowCancelPartyInvite = function(f259_arg0, f259_arg1, f259_arg2)
 	local f259_local0
-	if (Engine[0x93B19E01B1FD1C7](f259_arg0) == f259_arg2) or CoD.PCBattlenetUtility.GetPartyInviteStatus(f259_arg0, f259_arg2) ~= CoD.PCWidgetUtility.PartyInviteStatus.PENDING then
+	if (Engine[@"getxuid64"](f259_arg0) == f259_arg2) or CoD.PCBattlenetUtility.GetPartyInviteStatus(f259_arg0, f259_arg2) ~= CoD.PCWidgetUtility.PartyInviteStatus.PENDING then
 		f259_local0 = false
 	else
 		f259_local0 = true
@@ -2956,7 +2956,7 @@ CoD.PCWidgetUtility.ShowCancelPartyInvite = function(f259_arg0, f259_arg1, f259_
 	return f259_local0
 end
 CoD.PCWidgetUtility.ShowOpenPlayerAccount = function(f260_arg0, f260_arg1, f260_arg2)
-	local f260_local0 = Engine[0x93B19E01B1FD1C7](f260_arg0) == f260_arg2
+	local f260_local0 = Engine[@"getxuid64"](f260_arg0) == f260_arg2
 	local f260_local1
 	if not IsInGame() then
 		f260_local1 = not IsMainModeInvalid()
@@ -2966,10 +2966,10 @@ CoD.PCWidgetUtility.ShowOpenPlayerAccount = function(f260_arg0, f260_arg1, f260_
 	return f260_local1
 end
 CoD.PCWidgetUtility.CanFriendRequest = function(f261_arg0, f261_arg1)
-	return not Engine[0x3176B986956D1B3](f261_arg0, f261_arg1)
+	return not Engine[@"isfriendfromxuid"](f261_arg0, f261_arg1)
 end
 CoD.PCWidgetUtility.CanRemoveFriend = function(f262_arg0, f262_arg1)
-	return Engine[0x3176B986956D1B3](f262_arg0, f262_arg1)
+	return Engine[@"isfriendfromxuid"](f262_arg0, f262_arg1)
 end
 CoD.PCWidgetUtility.CanBlockPlayer = function(f263_arg0, f263_arg1)
 	return false
@@ -3015,63 +3015,63 @@ CoD.PCWidgetUtility.CloseContextualMenu = function(f266_arg0, f266_arg1)
 end
 CoD.PCWidgetUtility.PlayerContextualMenuExtraOptionsData = {
 	{
-		name = 0x2ABB014B7887052,
+		name = @"hash_62ABB014B7887052",
 		id = "removeFriend",
 		clickFct = CoD.PCWidgetUtility.RemoveFriend,
 		visibilityFct = CoD.PCWidgetUtility.ShowRemoveFriend,
 		enableFct = CoD.PCWidgetUtility.CanRemoveFriend,
 	},
 	{
-		name = 0x6FA0A657B8DE886,
+		name = @"hash_76FA0A657B8DE886",
 		id = "blockPlayer",
 		clickFct = CoD.PCWidgetUtility.BlockPlayer,
 		visibilityFct = CoD.PCWidgetUtility.ShowBlockPlayer,
 		enableFct = CoD.PCWidgetUtility.CanBlockPlayer,
 	},
 	{
-		name = 0x4D831F3E49D4035,
+		name = @"hash_64D831F3E49D4035",
 		id = "unblockPlayer",
 		clickFct = CoD.PCWidgetUtility.UnblockPlayer,
 		visibilityFct = CoD.PCWidgetUtility.ShowUnblockPlayer,
 		enableFct = CoD.PCWidgetUtility.CanUnblockPlayer,
 	},
 	{
-		name = 0x891CBAB469619DF,
+		name = @"hash_6891CBAB469619DF",
 		id = "whisperPlayer",
 		clickFct = CoD.PCWidgetUtility.WhisperPlayer,
 		visibilityFct = CoD.PCWidgetUtility.ShowWhisperPlayer,
 		enableFct = nil,
 	},
 	{
-		name = 0xC4EB9FE5F09A2E7,
+		name = @"hash_C4EB9FE5F09A2E7",
 		id = "invitePlayersToParty",
 		clickFct = CoD.PCWidgetUtility.OpenInvitePlayerPopup,
 		visibilityFct = CoD.PCWidgetUtility.ShowInvitePlayersToParty,
 		enableFct = nil,
 	},
 	{
-		name = 0xBC2011402700EA4,
+		name = @"hash_BC2011402700EA4",
 		id = "leaveParty",
 		clickFct = CoD.PCWidgetUtility.LeaveParty,
 		visibilityFct = CoD.PCWidgetUtility.ShowLeaveParty,
 		enableFct = nil,
 	},
 	{
-		name = 0x74834ABE9827A3,
+		name = @"menu/report_player",
 		id = "reportPlayerPc",
 		clickFct = CoD.PCWidgetUtility.ReportPlayer,
 		visibilityFct = CoD.PCWidgetUtility.ShowReportPlayer,
 		enableFct = nil,
 	},
 	{
-		name = 0x9477D8B17843EA2,
+		name = @"hash_79477D8B17843EA2",
 		id = "cancelPartyInvite",
 		clickFct = CoD.PCWidgetUtility.CancelPartyInvite,
 		visibilityFct = CoD.PCWidgetUtility.ShowCancelPartyInvite,
 		enableFct = nil,
 	},
 	{
-		name = 0x6328062E8FE88F1,
+		name = @"hash_46328062E8FE88F1",
 		id = "playerAccount",
 		clickFct = CoD.PCWidgetUtility.OpenPlayerAccount,
 		visibilityFct = CoD.PCWidgetUtility.ShowOpenPlayerAccount,
@@ -3164,17 +3164,17 @@ CoD.PCWidgetUtility.UpdatePlayerContextualMenuOptions = function(f276_arg0, f276
 	if not f276_local1 and f276_local0.clientNum then
 		f276_local1 = GetClientGameLobbyXUIDForClientNum(f276_local0.clientNum:get())
 	end
-	if f276_local1 == nil or not Engine[0xF7F835CF63F45B](f276_local1) or Engine[0x5CB8E6B7FBBFFD5](f276_local1) then
+	if f276_local1 == nil or not Engine[@"xuidisvalid"](f276_local1) or Engine[@"hash_65CB8E6B7FBBFFD5"](f276_local1) then
 		return
 	end
-	Engine[0x83C9B5DE1D9371](Engine[0xA798E4552F5E872](Engine[0x4DF5CFBC1771947](f276_arg2), "Social.selectedFriendXUID"), f276_local1)
+	Engine[@"setmodelvalue"](Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f276_arg2), "Social.selectedFriendXUID"), f276_local1)
 	if not f276_local0.gamertag or not f276_local0.gamertag:get() then
 		local f276_local2 = f276_local0.fullname
 		local f276_local3 = f276_local0.fullname:get()
 		local f276_local4 = ""
 	end
 	local f276_local5 = f276_local2 and f276_local3 or f276_local4
-	local f276_local6 = CoD.SocialUtility.GetFriendsButtonOptions(f276_arg2, nil, f276_local1, f276_local5, (f276_local0.battlenetPresence and f276_local0.battlenetPresence:get() or Engine[0x227214D8BB51A25](f276_local1)) ~= Enum[0x8811A60F2FF3ADA][0xD7B6D45F00CF380], true, f276_arg1.menuName)
+	local f276_local6 = CoD.SocialUtility.GetFriendsButtonOptions(f276_arg2, nil, f276_local1, f276_local5, (f276_local0.battlenetPresence and f276_local0.battlenetPresence:get() or Engine[@"getbattlenetpresence"](f276_local1)) ~= Enum[@"hash_28811A60F2FF3ADA"][@"hash_5D7B6D45F00CF380"], true, f276_arg1.menuName)
 	f276_arg0.__contextualMenuActions = {}
 	local f276_local7 = CoD.PCWidgetUtility.PlayerContextualMenuOptionsIDOrder
 	if not InFrontend() then
@@ -3232,8 +3232,8 @@ CoD.PCWidgetUtility.SetupClickableFilter = function(f283_arg0, f283_arg1)
 		local f284_local0 = f284_arg0:getModel()
 		local f284_local1 = CoD.SafeGetModelValue(f284_local0, "channelId")
 		local f284_local2 = f284_local0.active
-		Engine[0xD1DD5DBCA5778EA](f284_local1)
-		local f284_local3 = Engine[0xCA0ADE9B4DA235D](f284_local1)
+		Engine[@"hash_6D1DD5DBCA5778EA"](f284_local1)
+		local f284_local3 = Engine[@"hash_3CA0ADE9B4DA235D"](f284_local1)
 		local f284_local4 = f284_local2
 		local f284_local5 = f284_local2.set
 		local f284_local6
@@ -3246,10 +3246,10 @@ CoD.PCWidgetUtility.SetupClickableFilter = function(f283_arg0, f283_arg1)
 				f284_local5 = f284_local5:get()
 				if f284_local3 then
 					if f284_local5 == f284_local1 then
-						Engine[0x8D53AF0ABECF512]()
+						Engine[@"hash_38D53AF0ABECF512"]()
 					end
-				elseif Engine[0x5884871F4FF3ACA](f284_local5) == Enum[0xF6296F5D7A38AD2][0x59073B959F68608] then
-					Engine[0x8D53AF0ABECF512]()
+				elseif Engine[@"hash_5884871F4FF3ACA"](f284_local5) == Enum[@"hash_7F6296F5D7A38AD2"][@"hash_659073B959F68608"] then
+					Engine[@"hash_38D53AF0ABECF512"]()
 				end
 			end
 		end
@@ -3273,10 +3273,10 @@ CoD.PCWidgetUtility.SetupChatFiltersButton = function(f285_arg0, f285_arg1)
 		assert(f286_local0.ChatClientFilterList)
 		f286_local0:addElement(f286_local0.ChatClientFilterList)
 		f286_local0:sendInitializationEvents(f286_arg1.controller, f286_local0.ChatClientFilterList)
-		local f286_local1, f286_local2, f286_local3, f286_local4 = Engine[0x695399A0E06EC35](f286_arg1.controller, f286_arg0)
+		local f286_local1, f286_local2, f286_local3, f286_local4 = Engine[@"hash_3695399A0E06EC35"](f286_arg1.controller, f286_arg0)
 		local f286_local5, f286_local6, f286_local7, f286_local8 = f286_local0:getRect()
 		if f286_local5 ~= nil then
-			local f286_local9, f286_local10 = Engine[0x1A28BE9919661FA](f286_arg1.controller)
+			local f286_local9, f286_local10 = Engine[@"getscreensize"](f286_arg1.controller)
 			f286_local1 = f286_local1 * f286_local9 / (f286_local7 - f286_local5)
 			f286_local3 = f286_local3 * f286_local9 / (f286_local7 - f286_local5)
 			f286_local2 = f286_local2 * f286_local10 / (f286_local8 - f286_local6)
@@ -3303,92 +3303,92 @@ CoD.PCWidgetUtility.SetupChatFiltersButton = function(f285_arg0, f285_arg1)
 end
 CoD.PCWidgetUtility.ReportDropdownOptions = {
 	{
-		name = Engine[0xF9F1239CFD921FE](0x86F94CB724F2FB4),
+		name = Engine[@"hash_4F9F1239CFD921FE"](@"hash_186F94CB724F2FB4"),
 		value = 1,
-		description = Engine[0xF9F1239CFD921FE](0xC71757DD87707BC),
-		confirmation = Engine[0xF9F1239CFD921FE](0x988B900B0DF0B83),
-		chatConfirmation = Engine[0xF9F1239CFD921FE](0xA93EF7EF4B1AC05),
-		reason = Enum[0x3636486ECC29E13][0x2FCEB963D858F6A],
-		source = Enum[0xE4996868826FAEE][0x22CC5A4603BB6D6],
+		description = Engine[@"hash_4F9F1239CFD921FE"](@"hash_C71757DD87707BC"),
+		confirmation = Engine[@"hash_4F9F1239CFD921FE"](@"hash_4988B900B0DF0B83"),
+		chatConfirmation = Engine[@"hash_4F9F1239CFD921FE"](@"hash_7A93EF7EF4B1AC05"),
+		reason = Enum[@"reporttype"][@"hash_52FCEB963D858F6A"],
+		source = Enum[@"reportsource"][@"hash_22CC5A4603BB6D6"],
 		action = function(f289_arg0, f289_arg1) end,
 	},
 	{
-		name = Engine[0xF9F1239CFD921FE](0x6BD8567C603F5A3),
+		name = Engine[@"hash_4F9F1239CFD921FE"](@"hash_36BD8567C603F5A3"),
 		value = 2,
-		description = Engine[0xF9F1239CFD921FE](0xB804A7D12B045B3),
-		confirmation = Engine[0xF9F1239CFD921FE](0xBF3C356602228DA),
-		chatConfirmation = Engine[0xF9F1239CFD921FE](0xE64954DBD80A7CF),
-		reason = Enum[0x3636486ECC29E13][0xDAF54FBD07FE70D],
-		source = Enum[0xE4996868826FAEE][0xDF74048DC41F55A],
+		description = Engine[@"hash_4F9F1239CFD921FE"](@"hash_2B804A7D12B045B3"),
+		confirmation = Engine[@"hash_4F9F1239CFD921FE"](@"hash_6BF3C356602228DA"),
+		chatConfirmation = Engine[@"hash_4F9F1239CFD921FE"](@"hash_E64954DBD80A7CF"),
+		reason = Enum[@"reporttype"][@"hash_DAF54FBD07FE70D"],
+		source = Enum[@"reportsource"][@"hash_3DF74048DC41F55A"],
 		action = function(f290_arg0, f290_arg1)
-			local f290_local0 = Engine[0x4DF5CFBC1771947](f290_arg0)
+			local f290_local0 = Engine[@"getmodelforcontroller"](f290_arg0)
 			CoD.MetricsUtility.ReportUser(f290_arg0, f290_arg1, "offensive", 1, true, f290_local0.ReportPlayerText:get())
 		end,
 	},
 	{
-		name = Engine[0xF9F1239CFD921FE](0x8D520440159326),
+		name = Engine[@"hash_4F9F1239CFD921FE"](0x8D520440159326),
 		value = 3,
-		description = Engine[0xF9F1239CFD921FE](0x8BD0AD1B03A5766),
-		confirmation = Engine[0xF9F1239CFD921FE](0xF774FEAC5C1F55D),
-		chatConfirmation = Engine[0xF9F1239CFD921FE](0x3E766BC24D20E27),
+		description = Engine[@"hash_4F9F1239CFD921FE"](@"hash_18BD0AD1B03A5766"),
+		confirmation = Engine[@"hash_4F9F1239CFD921FE"](@"hash_3F774FEAC5C1F55D"),
+		chatConfirmation = Engine[@"hash_4F9F1239CFD921FE"](@"hash_53E766BC24D20E27"),
 		reason = -1,
-		source = Enum[0xE4996868826FAEE][0xDF74048DC41F55A],
+		source = Enum[@"reportsource"][@"hash_3DF74048DC41F55A"],
 		action = function(f291_arg0, f291_arg1)
-			local f291_local0 = Engine[0x4DF5CFBC1771947](f291_arg0)
+			local f291_local0 = Engine[@"getmodelforcontroller"](f291_arg0)
 			f291_local0 = f291_local0.ReportPlayerText:get()
 			CoD.MetricsUtility.ReportUser(f291_arg0, f291_arg1, "greifer", 1, true)
 		end,
 	},
 	{
-		name = Engine[0xF9F1239CFD921FE](0x5919C649561B63C),
+		name = Engine[@"hash_4F9F1239CFD921FE"](@"hash_15919C649561B63C"),
 		value = 4,
-		description = Engine[0xF9F1239CFD921FE](0x4D8434BEFFB6730),
-		confirmation = Engine[0xF9F1239CFD921FE](0x68497C5E58F25BF),
-		chatConfirmation = Engine[0xF9F1239CFD921FE](0x47FE6FBD71AF9CF),
+		description = Engine[@"hash_4F9F1239CFD921FE"](@"hash_24D8434BEFFB6730"),
+		confirmation = Engine[@"hash_4F9F1239CFD921FE"](@"hash_768497C5E58F25BF"),
+		chatConfirmation = Engine[@"hash_4F9F1239CFD921FE"](@"hash_447FE6FBD71AF9CF"),
 		reason = -1,
-		source = Enum[0xE4996868826FAEE][0xDF74048DC41F55A],
+		source = Enum[@"reportsource"][@"hash_3DF74048DC41F55A"],
 		action = function(f292_arg0, f292_arg1)
-			local f292_local0 = Engine[0x4DF5CFBC1771947](f292_arg0)
+			local f292_local0 = Engine[@"getmodelforcontroller"](f292_arg0)
 			CoD.MetricsUtility.ReportUser(f292_arg0, f292_arg1, "offensive_emblem", 1, true, f292_local0.ReportPlayerText:get())
 		end,
 	},
 	{
-		name = Engine[0xF9F1239CFD921FE](0xCE324B8FB722A9B),
+		name = Engine[@"hash_4F9F1239CFD921FE"](@"hash_3CE324B8FB722A9B"),
 		value = 5,
-		description = Engine[0xF9F1239CFD921FE](0xD69EE51ABD16407),
-		confirmation = Engine[0xF9F1239CFD921FE](0xAB7F2F75ADF7E86),
-		chatConfirmation = Engine[0xF9F1239CFD921FE](0x2FDE62E23ABC28),
+		description = Engine[@"hash_4F9F1239CFD921FE"](@"hash_5D69EE51ABD16407"),
+		confirmation = Engine[@"hash_4F9F1239CFD921FE"](@"hash_5AB7F2F75ADF7E86"),
+		chatConfirmation = Engine[@"hash_4F9F1239CFD921FE"](0x2FDE62E23ABC28),
 		reason = -1,
-		source = Enum[0xE4996868826FAEE][0xDF74048DC41F55A],
+		source = Enum[@"reportsource"][@"hash_3DF74048DC41F55A"],
 		action = function(f293_arg0, f293_arg1)
-			local f293_local0 = Engine[0x4DF5CFBC1771947](f293_arg0)
+			local f293_local0 = Engine[@"getmodelforcontroller"](f293_arg0)
 			CoD.MetricsUtility.ReportUser(f293_arg0, f293_arg1, "offensive_paintjob", 1, true, f293_local0.ReportPlayerText:get())
 		end,
 	},
 	{
-		name = Engine[0xF9F1239CFD921FE](0x2519B57188045C6),
+		name = Engine[@"hash_4F9F1239CFD921FE"](@"hash_72519B57188045C6"),
 		value = 6,
-		description = Engine[0xF9F1239CFD921FE](0xE3C15A99F65706),
-		confirmation = Engine[0xF9F1239CFD921FE](0x34B1B14D7769F7D),
-		chatConfirmation = Engine[0xF9F1239CFD921FE](0x33A182AC50FF0D2),
+		description = Engine[@"hash_4F9F1239CFD921FE"](0xE3C15A99F65706),
+		confirmation = Engine[@"hash_4F9F1239CFD921FE"](@"hash_734B1B14D7769F7D"),
+		chatConfirmation = Engine[@"hash_4F9F1239CFD921FE"](@"hash_533A182AC50FF0D2"),
 		reason = -1,
-		source = Enum[0xE4996868826FAEE][0xDF74048DC41F55A],
+		source = Enum[@"reportsource"][@"hash_3DF74048DC41F55A"],
 		action = function(f294_arg0, f294_arg1)
-			Engine[0x752216AD625784A](f294_arg0, f294_arg1)
-			local f294_local0 = Engine[0x4DF5CFBC1771947](f294_arg0)
+			Engine[@"hash_4752216AD625784A"](f294_arg0, f294_arg1)
+			local f294_local0 = Engine[@"getmodelforcontroller"](f294_arg0)
 			CoD.MetricsUtility.ReportUser(f294_arg0, f294_arg1, "cheater", 1, true, f294_local0.ReportPlayerText:get())
 		end,
 	},
 	{
-		name = Engine[0xF9F1239CFD921FE](0xFE4AA96E0028906),
+		name = Engine[@"hash_4F9F1239CFD921FE"](@"hash_FE4AA96E0028906"),
 		value = 7,
-		description = Engine[0xF9F1239CFD921FE](0xF85E8086F061446),
-		confirmation = Engine[0xF9F1239CFD921FE](0xFBD108477DE79BD),
-		chatConfirmation = Engine[0xF9F1239CFD921FE](0x1E6CE0A4E16A923),
+		description = Engine[@"hash_4F9F1239CFD921FE"](@"hash_1F85E8086F061446"),
+		confirmation = Engine[@"hash_4F9F1239CFD921FE"](@"hash_5FBD108477DE79BD"),
+		chatConfirmation = Engine[@"hash_4F9F1239CFD921FE"](@"hash_31E6CE0A4E16A923"),
 		reason = -1,
-		source = Enum[0xE4996868826FAEE][0xDF74048DC41F55A],
+		source = Enum[@"reportsource"][@"hash_3DF74048DC41F55A"],
 		action = function(f295_arg0, f295_arg1)
-			local f295_local0 = Engine[0x4DF5CFBC1771947](f295_arg0)
+			local f295_local0 = Engine[@"getmodelforcontroller"](f295_arg0)
 			CoD.MetricsUtility.ReportUser(f295_arg0, f295_arg1, "booster", 1, true, f295_local0.ReportPlayerText:get())
 		end,
 	},
@@ -3396,12 +3396,12 @@ CoD.PCWidgetUtility.ReportDropdownOptions = {
 DataSources.ReportPlayerDropDownList = DataSourceHelpers.DropdownListSetup("PC.ReportPlayerDropDownList", CoD.PCWidgetUtility.ReportDropdownOptions)
 DataSources.ReportPlayerDropDown = {
 	getModel = function(f296_arg0)
-		local f296_local0 = Engine[0x4DF5CFBC1771947](f296_arg0)
+		local f296_local0 = Engine[@"getmodelforcontroller"](f296_arg0)
 		local f296_local1 = f296_local0.ReportPlayerDropDownList
 		if not f296_local1 then
 			f296_local1 = f296_local0:create("ReportPlayerDropDownList")
 			local f296_local2 = f296_local1:create("name")
-			f296_local2:set(Engine[0xF9F1239CFD921FE](0x625E26A2459D33B))
+			f296_local2:set(Engine[@"hash_4F9F1239CFD921FE"](@"hash_1625E26A2459D33B"))
 			f296_local2 = f296_local1:create("optionsDataSource")
 			f296_local2:set("ReportPlayerDropDownList")
 			f296_local2 = f296_local1:create("isOpen")
@@ -3421,7 +3421,7 @@ DataSources.ReportPlayerDropDown = {
 	end,
 	resetModel = function(f299_arg0)
 		local f299_local0 = DataSources.ReportPlayerDropDown.getModel(f299_arg0)
-		f299_local0.name:set(Engine[0xF9F1239CFD921FE](0x625E26A2459D33B))
+		f299_local0.name:set(Engine[@"hash_4F9F1239CFD921FE"](@"hash_1625E26A2459D33B"))
 		f299_local0.currentValue:set(0)
 	end,
 }
@@ -3432,7 +3432,7 @@ CoD.PCWidgetUtility.ReportReasonToText = function(f300_arg0, f300_arg1)
 		local f300_local2 = f300_local0.currentValue
 		return f300_local1[REG4:get()].name
 	else
-		return Engine[0xF9F1239CFD921FE](0x625E26A2459D33B)
+		return Engine[@"hash_4F9F1239CFD921FE"](@"hash_1625E26A2459D33B")
 	end
 end
 CoD.PCWidgetUtility.ReportReasonToDescription = function(f301_arg0, f301_arg1)
@@ -3442,7 +3442,7 @@ CoD.PCWidgetUtility.ReportReasonToDescription = function(f301_arg0, f301_arg1)
 		local f301_local2 = f301_local0.currentValue
 		return f301_local1[REG4:get()].description
 	else
-		return Engine[0xF9F1239CFD921FE](0x804C18CC814A475)
+		return Engine[@"hash_4F9F1239CFD921FE"](@"hash_6804C18CC814A475")
 	end
 end
 CoD.PCWidgetUtility.ReportReasonToConfirmation = function(f302_arg0, f302_arg1)
@@ -3478,10 +3478,10 @@ CoD.PCWidgetUtility.SendReportPlayer = function(f306_arg0, f306_arg1)
 	local f306_local4 = CoD.PCWidgetUtility.ReportDropdownOptions
 	local f306_local5 = f306_local1.currentValue
 	f306_local4 = f306_local4[f306_local3:get()].source
-	f306_local3 = Engine[0x4DF5CFBC1771947](f306_arg1)
+	f306_local3 = Engine[@"getmodelforcontroller"](f306_arg1)
 	f306_local3 = f306_local3.ReportPlayerText:get()
-	if CoD.MetricsUtility.NextReportTime <= Engine[0x9D33D652B9B0F3B]() and f306_local2 ~= -1 then
-		Engine[0x310BF60E8E4712E](f306_local0, f306_local2, f306_local4, f306_local3)
+	if CoD.MetricsUtility.NextReportTime <= Engine[@"milliseconds"]() and f306_local2 ~= -1 then
+		Engine[@"hash_5310BF60E8E4712E"](f306_local0, f306_local2, f306_local4, f306_local3)
 	end
 	f306_local5 = CoD.PCWidgetUtility.ReportDropdownOptions
 	local f306_local6 = f306_local1.currentValue
@@ -3501,9 +3501,9 @@ CoD.PCWidgetUtility.SendReportPlayer = function(f306_arg0, f306_arg1)
 	end
 end
 CoD.PCWidgetUtility.ResetReportPlayerText = function(f307_arg0)
-	local f307_local0 = Engine[0x4DF5CFBC1771947](f307_arg0)
+	local f307_local0 = Engine[@"getmodelforcontroller"](f307_arg0)
 	if f307_local0.ReportPlayerText:get() then
-		local f307_local1 = Engine[0x4DF5CFBC1771947](f307_arg0)
+		local f307_local1 = Engine[@"getmodelforcontroller"](f307_arg0)
 		f307_local1.ReportPlayerText:set("")
 	end
 end
@@ -3518,7 +3518,7 @@ CoD.PCWidgetUtility.PrepareOpenButton = function(f310_arg0, f310_arg1, f310_arg2
 		return
 	else
 		local f310_local0 = f310_arg4.openMenuName:get()
-		f310_arg3:AddButtonCallbackFunction(f310_arg1, f310_arg2, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+		f310_arg3:AddButtonCallbackFunction(f310_arg1, f310_arg2, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 			if not f310_arg0._unavailable then
 				PlaySoundSetSound(f310_arg0, "gain_focus")
 				OpenOverlay(menu, f310_local0, controller)
@@ -3527,7 +3527,7 @@ CoD.PCWidgetUtility.PrepareOpenButton = function(f310_arg0, f310_arg1, f310_arg2
 		end, function(element, menu, controller)
 			return false
 		end, false)
-		f310_arg3:AddButtonCallbackFunction(f310_arg0, f310_arg2, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "ui_confirm", function(element, menu, controller, model)
+		f310_arg3:AddButtonCallbackFunction(f310_arg0, f310_arg2, Enum[@"luibutton"][@"lui_key_none"], "ui_confirm", function(element, menu, controller, model)
 			if not f310_arg0._unavailable then
 				PlaySoundSetSound(f310_arg0, "gain_focus")
 				OpenOverlay(menu, f310_local0, controller)
@@ -3540,27 +3540,27 @@ CoD.PCWidgetUtility.PrepareOpenButton = function(f310_arg0, f310_arg1, f310_arg2
 end
 CoD.PCWidgetUtility.KeybindingsLayoutDropdownOptions = {
 	{
-		name = Engine[0xF9F1239CFD921FE](0x28175489C8141B6),
+		name = Engine[@"hash_4F9F1239CFD921FE"](@"hash_228175489C8141B6"),
 		value = "default",
 		image = "i_mtl_keypreset_default",
 	},
 	{
-		name = Engine[0xF9F1239CFD921FE](0xF19766D304A31AF),
+		name = Engine[@"hash_4F9F1239CFD921FE"](@"hash_6F19766D304A31AF"),
 		value = "bo3",
 		image = "i_mtl_keypreset_bo3",
 	},
 	{
-		name = Engine[0xF9F1239CFD921FE](0xB84EDDAA5625C93),
+		name = Engine[@"hash_4F9F1239CFD921FE"](@"hash_3B84EDDAA5625C93"),
 		value = "lefty",
 		image = "i_mtl_keypreset_lefty",
 	},
 	{
-		name = Engine[0xF9F1239CFD921FE](0xB9797AB1FCB7D7),
+		name = Engine[@"hash_4F9F1239CFD921FE"](0xB9797AB1FCB7D7),
 		value = "watcher",
 		image = "i_mtl_keypreset_overwatch",
 	},
 	{
-		name = Engine[0xF9F1239CFD921FE](0xCBC02A14B23EC17),
+		name = Engine[@"hash_4F9F1239CFD921FE"](@"hash_1CBC02A14B23EC17"),
 		value = "defuser",
 		image = "i_mtl_keypreset_lefty",
 	},
@@ -3568,12 +3568,12 @@ CoD.PCWidgetUtility.KeybindingsLayoutDropdownOptions = {
 DataSources.OptionControlKeyBindingsDropDownList = DataSourceHelpers.DropdownListSetup("PC.OptionControlKeyBindingsDropDownList", CoD.PCWidgetUtility.KeybindingsLayoutDropdownOptions)
 DataSources.OptionControlKeyBindingsDropDown = {
 	getModel = function(f315_arg0)
-		local f315_local0 = Engine[0x4DF5CFBC1771947](f315_arg0)
+		local f315_local0 = Engine[@"getmodelforcontroller"](f315_arg0)
 		local f315_local1 = f315_local0.OptionControlKeyBindingsDropDown
 		if not f315_local1 then
 			f315_local1 = f315_local0:create("OptionControlKeyBindingsDropDown")
 			local f315_local2 = f315_local1:create("name")
-			f315_local2:set(Engine[0xF9F1239CFD921FE](0xFD7B83733B5E4F1))
+			f315_local2:set(Engine[@"hash_4F9F1239CFD921FE"](@"hash_7FD7B83733B5E4F1"))
 			f315_local2 = f315_local1:create("optionsDataSource")
 			f315_local2:set("OptionControlKeyBindingsDropDownList")
 			f315_local2 = f315_local1:create("isOpen")
@@ -3620,8 +3620,8 @@ CoD.PCWidgetUtility.KeybindPresetToText = function(f318_arg0, f318_arg1)
 	local f318_local0 = f318_arg0
 	local f318_local1 = f318_local0:getModel()
 	if f318_local1.presetIsModified:get() then
-		local f318_local2 = Engine[0xF9F1239CFD921FE]
-		local f318_local3 = 0x31F53D4B78955D1
+		local f318_local2 = Engine[@"hash_4F9F1239CFD921FE"]
+		local f318_local3 = @"hash_31F53D4B78955D1"
 		local f318_local4 = f318_local0._optionProperties._options
 		local f318_local5 = f318_local1.presetId
 		return f318_local2(f318_local3, f318_local4[REG7:get()].name)
@@ -3649,7 +3649,7 @@ CoD.PCWidgetUtility.PrepareOptionsKeysetBindingsDropdownProperties = function(f3
 	f319_arg0._setModelToCurrentDvars = function(f321_arg0, f321_arg1, f321_arg2)
 		local f321_local0 = f321_arg0:getModel()
 		if f321_local0 then
-			local f321_local1 = Dvar[0x4EF8884606BD64C]:get()
+			local f321_local1 = Dvar[@"hash_14EF8884606BD64C"]:get()
 			if f321_local1 == 0 then
 				f321_local1 = 1 or f321_local1
 			end
@@ -3657,7 +3657,7 @@ CoD.PCWidgetUtility.PrepareOptionsKeysetBindingsDropdownProperties = function(f3
 			if f321_arg2 then
 				f321_local0.presetIsModified:set(false)
 			else
-				f321_local0.presetIsModified:set(Dvar[0x2B49C5C32022076]:get())
+				f321_local0.presetIsModified:set(Dvar[@"hash_72B49C5C32022076"]:get())
 			end
 			f321_local0.dropdownUpdated:set(false)
 			CoD.PCWidgetUtility.UpdateKeyboardPresetColor(f321_local1)
@@ -3675,8 +3675,8 @@ CoD.PCWidgetUtility.PrepareOptionsKeysetBindingsDropdownProperties = function(f3
 		else
 			LoadPCBindings(f322_arg0, f322_arg1, f322_arg0._optionProperties._options[f322_local1].value)
 		end
-		Dvar[0x4EF8884606BD64C]:set(f322_local1)
-		Dvar[0x2B49C5C32022076]:set(f322_local0.presetIsModified:get())
+		Dvar[@"hash_14EF8884606BD64C"]:set(f322_local1)
+		Dvar[@"hash_72B49C5C32022076"]:set(f322_local0.presetIsModified:get())
 		f322_local0.dropdownUpdated:set(false)
 	end
 	f319_arg0._optionProperties._getCurrentValue = DataSources.OptionControlKeyBindingsDropDown.getCurrentValue
@@ -3688,7 +3688,7 @@ CoD.PCWidgetUtility.ApplyOptionsKeysetBindingsDropdownProperties = function(f323
 end
 CoD.PCWidgetUtility.DisplayApplyPresetConfirmationPopupAndGoToSettings = function(f324_arg0, f324_arg1, f324_arg2)
 	assert(f324_arg2)
-	if Dvar[0x2B49C5C32022076]:get() then
+	if Dvar[@"hash_72B49C5C32022076"]:get() then
 		local f324_local0 = f324_arg2:getModel()
 		if not f324_local0.dropdownUpdated:get() then
 			CoD.PCWidgetUtility.GoBackAndOpenSettingsMenuOnTabId(f324_arg0, f324_arg1, 1, CoD.PCWidgetUtility.PCKeybindingsTabId)
@@ -3707,7 +3707,7 @@ CoD.PCWidgetUtility.DisplayApplyPresetConfirmationPopupAndGoToSettings = functio
 end
 CoD.PCWidgetUtility.DisplayApplyPresetConfirmationPopup = function(f325_arg0, f325_arg1, f325_arg2, f325_arg3, f325_arg4)
 	assert(f325_arg2)
-	if Dvar[0x2B49C5C32022076]:get() then
+	if Dvar[@"hash_72B49C5C32022076"]:get() then
 		local f325_local0 = f325_arg2:getModel()
 		if not f325_local0.dropdownUpdated:get() then
 			GoBack(f325_arg0, f325_arg1)
@@ -3783,10 +3783,10 @@ CoD.PCWidgetUtility.PrepareFastLoadoutContainer = function(f331_arg0, f331_arg1,
 	end
 	local f331_local1 = f331_arg0
 	local f331_local2 = f331_arg0.subscribeToModel
-	local f331_local3 = Engine[0x4DF5CFBC1771947](f331_arg1)
+	local f331_local3 = Engine[@"getmodelforcontroller"](f331_arg1)
 	f331_local2(f331_local1, f331_local3.engineLoadoutSelect, function(f333_arg0)
-		local f333_local0 = Engine[0x614D394F6F9A18D](f333_arg0)
-		local f333_local1 = Engine[0x40E824FE270E174](Engine[0x4DF5CFBC1771947](f331_arg1), "PositionDraft.stage")
+		local f333_local0 = Engine[@"getmodelvalue"](f333_arg0)
+		local f333_local1 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f331_arg1), "PositionDraft.stage")
 		if not f333_local1:get() ~= CoD.PlayerRoleUtility.DraftStage.DRAFT_STAGE_NONE and not CoD.BountyHunterUtility.GameTypeIsBounty(f331_arg1) then
 			f331_local0(f331_arg1, f333_local0)
 		end
@@ -3836,40 +3836,40 @@ CoD.PCWidgetUtility.SetDvarBool = function(f341_arg0, f341_arg1, f341_arg2, f341
 	Dvar[f341_arg2]:set(f341_arg3)
 end
 CoD.PCWidgetUtility.KeyboardColor = function(f342_arg0, f342_arg1)
-	Engine[0x7CDF15507B69734](f342_arg0, f342_arg1)
+	Engine[@"hash_67CDF15507B69734"](f342_arg0, f342_arg1)
 end
 CoD.PCWidgetUtility.KeyboardFadeColor = function(f343_arg0, f343_arg1, f343_arg2, f343_arg3)
-	Engine[0xAAB4482CC62F5C6](f343_arg0, f343_arg1, f343_arg2, f343_arg3)
+	Engine[@"hash_1AAB4482CC62F5C6"](f343_arg0, f343_arg1, f343_arg2, f343_arg3)
 end
 CoD.PCWidgetUtility.KeyboardBlinkColor = function(f344_arg0, f344_arg1, f344_arg2, f344_arg3, f344_arg4)
-	Engine[0x675F017817C9C7D](f344_arg0, f344_arg1, f344_arg2, f344_arg3, f344_arg4)
+	Engine[@"hash_1675F017817C9C7D"](f344_arg0, f344_arg1, f344_arg2, f344_arg3, f344_arg4)
 end
 CoD.PCWidgetUtility.KeyboardPulseColor = function(f345_arg0, f345_arg1, f345_arg2, f345_arg3, f345_arg4, f345_arg5)
-	Engine[0x838F9E94E55E4CA](f345_arg0, f345_arg1, f345_arg2, f345_arg3, f345_arg4, f345_arg5)
+	Engine[@"hash_4838F9E94E55E4CA"](f345_arg0, f345_arg1, f345_arg2, f345_arg3, f345_arg4, f345_arg5)
 end
 CoD.PCWidgetUtility.KeyboardColorReset = function(f346_arg0)
-	Engine[0x117D8D649C9A0FC](f346_arg0)
+	Engine[@"hash_3117D8D649C9A0FC"](f346_arg0)
 end
 CoD.PCWidgetUtility.SetKeyColor = function(f347_arg0, f347_arg1)
-	Engine[0x98D45A2A00D1381](f347_arg0, f347_arg1)
+	Engine[@"hash_598D45A2A00D1381"](f347_arg0, f347_arg1)
 end
 CoD.PCWidgetUtility.SetKeyFadeColor = function(f348_arg0, f348_arg1, f348_arg2, f348_arg3)
-	Engine[0x6DCD06D981B8B3F](f348_arg0, f348_arg1, f348_arg2, f348_arg3)
+	Engine[@"hash_66DCD06D981B8B3F"](f348_arg0, f348_arg1, f348_arg2, f348_arg3)
 end
 CoD.PCWidgetUtility.SetKeyBlinkColor = function(f349_arg0, f349_arg1, f349_arg2, f349_arg3, f349_arg4)
-	Engine[0x408F665FA8CF244](f349_arg0, f349_arg1, f349_arg2, f349_arg3, f349_arg4)
+	Engine[@"hash_1408F665FA8CF244"](f349_arg0, f349_arg1, f349_arg2, f349_arg3, f349_arg4)
 end
 CoD.PCWidgetUtility.SetKeyPulseColor = function(f350_arg0, f350_arg1, f350_arg2, f350_arg3, f350_arg4, f350_arg5)
-	Engine[0xBF005CAA3F45ABF](f350_arg0, f350_arg1, f350_arg2, f350_arg3, f350_arg4, f350_arg5)
+	Engine[@"hash_2BF005CAA3F45ABF"](f350_arg0, f350_arg1, f350_arg2, f350_arg3, f350_arg4, f350_arg5)
 end
 CoD.PCWidgetUtility.ResetKeyColor = function(f351_arg0)
-	Engine[0x617BD4E27764ADB](f351_arg0)
+	Engine[@"hash_6617BD4E27764ADB"](f351_arg0)
 end
 CoD.PCWidgetUtility.ResetAllKeysColor = function()
-	Engine[0x955A84E44475EF7]()
+	Engine[@"hash_1955A84E44475EF7"]()
 end
 CoD.PCWidgetUtility.DefaultKeyboardPulseColor = function()
-	Engine[0x838F9E94E55E4CA](0, "0x0021fa", "2500", "750", "750", "0")
+	Engine[@"hash_4838F9E94E55E4CA"](0, "0x0021fa", "2500", "750", "750", "0")
 end
 CoD.PCWidgetUtility.OpenPreviewKeybindsPopup = function(f354_arg0, f354_arg1, f354_arg2)
 	OpenOverlay(f354_arg0, "StartMenu_Options_Controls_PreviewKeybindings", f354_arg1, {
@@ -3883,10 +3883,10 @@ CoD.PCWidgetUtility.GoBackAndOpenSettingsMenuOnTabId = function(f355_arg0, f355_
 	})
 end
 CoD.PCWidgetUtility.SetupEmptyFocusableTooltip = function(f356_arg0, f356_arg1, f356_arg2, f356_arg3)
-	local f356_local0 = Engine[0xA798E4552F5E872](Engine[0x4DF5CFBC1771947](f356_arg1), "EmptyFocusableTooltip")
-	Engine[0x83C9B5DE1D9371](Engine[0xA798E4552F5E872](f356_local0, "name"), 0x0)
-	Engine[0x83C9B5DE1D9371](Engine[0xA798E4552F5E872](f356_local0, "detailedDescription"), Engine[0xED84C33EC5F01EA](0x0))
-	Engine[0x83C9B5DE1D9371](Engine[0xA798E4552F5E872](f356_local0, "tooltipArchetype"), CoD.FreeCursorUtility.TooltipArchetypes.FEATURE_TITLE)
+	local f356_local0 = Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f356_arg1), "EmptyFocusableTooltip")
+	Engine[@"setmodelvalue"](Engine[@"createmodel"](f356_local0, "name"), 0x0)
+	Engine[@"setmodelvalue"](Engine[@"createmodel"](f356_local0, "detailedDescription"), Engine[@"localize"](0x0))
+	Engine[@"setmodelvalue"](Engine[@"createmodel"](f356_local0, "tooltipArchetype"), CoD.FreeCursorUtility.TooltipArchetypes.FEATURE_TITLE)
 	f356_arg0:setModel(f356_local0, f356_arg1)
 	f356_arg0:registerEventHandler("gain_focus", function(element, event)
 		local f357_local0 = nil
@@ -3895,8 +3895,8 @@ CoD.PCWidgetUtility.SetupEmptyFocusableTooltip = function(f356_arg0, f356_arg1, 
 		elseif element.super.gainFocus then
 			f357_local0 = element.super:gainFocus(event)
 		end
-		Engine[0x83C9B5DE1D9371](Engine[0xA798E4552F5E872](f356_local0, "name"), f356_arg2)
-		Engine[0x83C9B5DE1D9371](Engine[0xA798E4552F5E872](f356_local0, "detailedDescription"), Engine[0xED84C33EC5F01EA](f356_arg3))
+		Engine[@"setmodelvalue"](Engine[@"createmodel"](f356_local0, "name"), f356_arg2)
+		Engine[@"setmodelvalue"](Engine[@"createmodel"](f356_local0, "detailedDescription"), Engine[@"localize"](f356_arg3))
 		return f357_local0
 	end)
 	f356_arg0:registerEventHandler("lose_focus", function(element, event)
@@ -3906,8 +3906,8 @@ CoD.PCWidgetUtility.SetupEmptyFocusableTooltip = function(f356_arg0, f356_arg1, 
 		elseif element.super.loseFocus then
 			f358_local0 = element.super:loseFocus(event)
 		end
-		Engine[0x83C9B5DE1D9371](Engine[0xA798E4552F5E872](f356_local0, "name"), 0x0)
-		Engine[0x83C9B5DE1D9371](Engine[0xA798E4552F5E872](f356_local0, "detailedDescription"), Engine[0xED84C33EC5F01EA](0x0))
+		Engine[@"setmodelvalue"](Engine[@"createmodel"](f356_local0, "name"), 0x0)
+		Engine[@"setmodelvalue"](Engine[@"createmodel"](f356_local0, "detailedDescription"), Engine[@"localize"](0x0))
 		return f358_local0
 	end)
 end
@@ -3923,5 +3923,5 @@ CoD.PCWidgetUtility.SetupDefaultFocusDirectorPublicIfBountyMode = function(f360_
 	f360_arg0.__defaultFocus = f360_arg0.HomeOrPlayListPC
 end
 CoD.PCWidgetUtility.EnableShrinkToFit = function(f361_arg0)
-	f361_arg0:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	f361_arg0:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 end

@@ -9,7 +9,7 @@ CoD.AmmoWidget_PowerBasedCountPip.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Image = LUI.UIImage.new(0, 0, -15, 61, 0, 0, -4.5, 11.5)
 	Image:setAlpha(0)
-	Image:setImage(RegisterImage(0x2612AFD97ACC29C))
+	Image:setImage(RegisterImage(@"uie_ui_hud_core_abeg_widget_reserves_full"))
 	self:addElement(Image)
 	self.Image = Image
 	if PostLoadFunc then

@@ -13,7 +13,7 @@ LUI.createMenu.Social_PartySettings = function(f1_arg0, f1_arg1)
 	self:playSound("menu_open", f1_arg0)
 	self.anyChildUsesUpdateState = true
 	local CommomCenteredPopup = CoD.CommonCenteredPopup.new(f1_local1, f1_arg0, 0, 1, 0, 0, 0, 1, 0, 0)
-	CommomCenteredPopup.TitleText:setText(LocalizeToUpperString(0x20661B30B65C27F))
+	CommomCenteredPopup.TitleText:setText(LocalizeToUpperString(@"menu/party_settings"))
 	CommomCenteredPopup.HeaderBackground:setAlpha(0)
 	CommomCenteredPopup.HeaderTopBar:setAlpha(0)
 	CommomCenteredPopup.HeaderBottomBar:setAlpha(0)
@@ -25,7 +25,7 @@ LUI.createMenu.Social_PartySettings = function(f1_arg0, f1_arg1)
 	PartySettingsList:setWidgetType(CoD.CustomGames_SettingSliderNoCustom)
 	PartySettingsList:setVerticalCount(4)
 	PartySettingsList:setSpacing(8)
-	PartySettingsList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	PartySettingsList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	PartySettingsList:setDataSource("PartyControlsList")
 	PartySettingsList:registerEventHandler("gain_focus", function(element, event)
 		local f2_local0 = nil
@@ -34,10 +34,10 @@ LUI.createMenu.Social_PartySettings = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f2_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f2_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(PartySettingsList, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(PartySettingsList, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if HasListAction(element, controller) then
 			ProcessListAction(self, element, controller, menu)
 			return true
@@ -45,7 +45,7 @@ LUI.createMenu.Social_PartySettings = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if HasListAction(element, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		else
 			return false
@@ -62,8 +62,8 @@ LUI.createMenu.Social_PartySettings = function(f1_arg0, f1_arg1)
 	local SettingDescription = LUI.UIText.new(0.5, 0.5, -250, 250, 0, 0, 460, 481)
 	SettingDescription:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	SettingDescription:setTTF("dinnext_regular")
-	SettingDescription:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	SettingDescription:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	SettingDescription:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	SettingDescription:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(SettingDescription)
 	self.SettingDescription = SettingDescription
 	local BTNQuit = nil
@@ -76,14 +76,14 @@ LUI.createMenu.Social_PartySettings = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f7_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f7_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(BTNQuit, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(BTNQuit, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		GoBack(self, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 		return false
 	end, false)
 	self:addElement(BTNQuit)
@@ -91,14 +91,14 @@ LUI.createMenu.Social_PartySettings = function(f1_arg0, f1_arg1)
 	SettingDescription:linkToElementModel(PartySettingsList, "desc", true, function(model)
 		local f10_local0 = model:get()
 		if f10_local0 ~= nil then
-			SettingDescription:setText(Engine[0xF9F1239CFD921FE](f10_local0))
+			SettingDescription:setText(Engine[@"hash_4F9F1239CFD921FE"](f10_local0))
 		end
 	end)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		GoBack(self, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0xA4032FB2AAB69F2, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"mp/back", nil, nil)
 		return true
 	end, false)
 	LUI.OverrideFunction_CallOriginalFirst(self, "goBack", function(element, controller)

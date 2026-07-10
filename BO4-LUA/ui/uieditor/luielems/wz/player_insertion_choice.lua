@@ -17,13 +17,13 @@ LUI.createMenu.player_insertion_choice = function(f1_arg0, f1_arg1)
 	self.ignoreCursor = true
 	f1_local1:addElementToPendingUpdateStateList(self)
 	local InsertionChoice = LUI.UIText.new(0, 0, 43, 444, 0, 0, 545, 582)
-	InsertionChoice:setText(Engine[0xF9F1239CFD921FE](0xA2EEE6D4BBFD6FD))
+	InsertionChoice:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_1A2EEE6D4BBFD6FD"))
 	InsertionChoice:setTTF("default")
-	InsertionChoice:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	InsertionChoice:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	InsertionChoice:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	InsertionChoice:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	InsertionChoice:setBackingType(2)
 	InsertionChoice:setBackingXPadding(3)
-	InsertionChoice:setBackingMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	InsertionChoice:setBackingMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	InsertionChoice:setBackingShaderVector(0, 0, 0, 0, 0)
 	self:addElement(InsertionChoice)
 	self.InsertionChoice = InsertionChoice
@@ -39,7 +39,7 @@ LUI.createMenu.player_insertion_choice = function(f1_arg0, f1_arg1)
 end
 CoD.player_insertion_choice.__resetProperties = function(f2_arg0)
 	f2_arg0.InsertionChoice:completeAnimation()
-	f2_arg0.InsertionChoice:setText(Engine[0xF9F1239CFD921FE](0xA2EEE6D4BBFD6FD))
+	f2_arg0.InsertionChoice:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_1A2EEE6D4BBFD6FD"))
 end
 CoD.player_insertion_choice.__clipsPerState = {
 	DefaultState = {
@@ -47,7 +47,7 @@ CoD.player_insertion_choice.__clipsPerState = {
 			f3_arg0:__resetProperties()
 			f3_arg0:setupElementClipCounter(1)
 			f3_arg0.InsertionChoice:completeAnimation()
-			f3_arg0.InsertionChoice:setText(Engine[0xF9F1239CFD921FE](0xA2EEE6D4BBFD6FD))
+			f3_arg0.InsertionChoice:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_1A2EEE6D4BBFD6FD"))
 			f3_arg0.clipFinished(f3_arg0.InsertionChoice)
 		end,
 	},
@@ -56,7 +56,7 @@ CoD.player_insertion_choice.__clipsPerState = {
 			f4_arg0:__resetProperties()
 			f4_arg0:setupElementClipCounter(1)
 			f4_arg0.InsertionChoice:completeAnimation()
-			f4_arg0.InsertionChoice:setText(Engine[0xF9F1239CFD921FE](0x39502279B642251))
+			f4_arg0.InsertionChoice:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_539502279B642251"))
 			f4_arg0.clipFinished(f4_arg0.InsertionChoice)
 		end,
 	},
@@ -65,7 +65,7 @@ CoD.player_insertion_choice.__clipsPerState = {
 			f5_arg0:__resetProperties()
 			f5_arg0:setupElementClipCounter(1)
 			f5_arg0.InsertionChoice:completeAnimation()
-			f5_arg0.InsertionChoice:setText(Engine[0xF9F1239CFD921FE](0x17AB36B067E50BC))
+			f5_arg0.InsertionChoice:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_117AB36B067E50BC"))
 			f5_arg0.clipFinished(f5_arg0.InsertionChoice)
 		end,
 	},
@@ -74,7 +74,7 @@ CoD.player_insertion_choice.__clipsPerState = {
 			f6_arg0:__resetProperties()
 			f6_arg0:setupElementClipCounter(1)
 			f6_arg0.InsertionChoice:completeAnimation()
-			f6_arg0.InsertionChoice:setText(Engine[0xF9F1239CFD921FE](0x34AD229607585B5))
+			f6_arg0.InsertionChoice:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_534AD229607585B5"))
 			f6_arg0.clipFinished(f6_arg0.InsertionChoice)
 		end,
 	},

@@ -8,10 +8,10 @@ CoD.FadingSkipPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	self.soundSet = "Omnipedia"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local pressXtext = LUI.UIText.new(1, 1, -1350, -4, 0, 0, 3, 33)
-	pressXtext:setText(Engine[0xF9F1239CFD921FE](0x8F7A20360760C))
+	pressXtext:setText(Engine[@"hash_4F9F1239CFD921FE"](@"platform/skip"))
 	pressXtext:setTTF("default")
-	pressXtext:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
-	pressXtext:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	pressXtext:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
+	pressXtext:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(pressXtext)
 	self.pressXtext = pressXtext
 	if PostLoadFunc then

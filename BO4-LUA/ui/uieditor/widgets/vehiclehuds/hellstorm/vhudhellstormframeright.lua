@@ -11,31 +11,31 @@ CoD.vhudHellstormFrameRight.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local DotR = LUI.UIImage.new(0.5, 0.5, 53.5, 37.5, 0.5, 0.5, -6, 6)
-	DotR:setImage(RegisterImage(0x99A8C3E368A2195))
-	DotR:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	DotR:setImage(RegisterImage(@"uie_ui_hud_vehicle_hellstorm_indicator"))
+	DotR:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(DotR)
 	self.DotR = DotR
 	local FrameBoxesLeft = LUI.UIImage.new(0, 0, 390.5, 316.5, 0, 0, 224, 260)
 	FrameBoxesLeft:setAlpha(0.7)
-	FrameBoxesLeft:setImage(RegisterImage(0xC6FA7184B0307E7))
+	FrameBoxesLeft:setImage(RegisterImage(@"uie_ui_hud_vehicle_ac130_frame_boxes"))
 	self:addElement(FrameBoxesLeft)
 	self.FrameBoxesLeft = FrameBoxesLeft
 	local FrameBoxesLeftAdd = LUI.UIImage.new(0, 0, 390.5, 316.5, 0, 0, 224, 260)
 	FrameBoxesLeftAdd:setAlpha(0.7)
-	FrameBoxesLeftAdd:setImage(RegisterImage(0xC6FA7184B0307E7))
-	FrameBoxesLeftAdd:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	FrameBoxesLeftAdd:setImage(RegisterImage(@"uie_ui_hud_vehicle_ac130_frame_boxes"))
+	FrameBoxesLeftAdd:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	FrameBoxesLeftAdd:setShaderVector(0, 1.5, 0, 0, 0)
 	self:addElement(FrameBoxesLeftAdd)
 	self.FrameBoxesLeftAdd = FrameBoxesLeftAdd
 	local FrameEngineLeft = LUI.UIImage.new(0, 0, 229, 189, 0, 0, 236, 282)
-	FrameEngineLeft:setImage(RegisterImage(0x5338AA8246DD618))
-	FrameEngineLeft:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	FrameEngineLeft:setImage(RegisterImage(@"uie_ui_hud_vehicle_ac130_frame_engine"))
+	FrameEngineLeft:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	FrameEngineLeft:setShaderVector(0, 2, 0, 0, 0)
 	self:addElement(FrameEngineLeft)
 	self.FrameEngineLeft = FrameEngineLeft
 	local FrameHlineLeft = LUI.UIImage.new(0, 0, 182, 0, 0, 0, 238, 246)
-	FrameHlineLeft:setImage(RegisterImage(0x9F9F4F6492BE854))
-	FrameHlineLeft:setMaterial(LUI.UIImage.GetCachedMaterial(0x2EEB1ECF1F211F5))
+	FrameHlineLeft:setImage(RegisterImage(@"uie_ui_hud_vehicle_ac130_frame_hline"))
+	FrameHlineLeft:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_delta"))
 	FrameHlineLeft:setShaderVector(0, 0, 1, 0, 0)
 	FrameHlineLeft:setShaderVector(1, 0, 0, 0, 0)
 	FrameHlineLeft:setShaderVector(2, 0, 1, 0, 0)
@@ -44,8 +44,8 @@ CoD.vhudHellstormFrameRight.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self:addElement(FrameHlineLeft)
 	self.FrameHlineLeft = FrameHlineLeft
 	local FrameHlineLeft2 = LUI.UIImage.new(0, 0, 182, 0, 0, 0, 238, 246)
-	FrameHlineLeft2:setImage(RegisterImage(0x9F9F4F6492BE854))
-	FrameHlineLeft2:setMaterial(LUI.UIImage.GetCachedMaterial(0x2EEB1ECF1F211F5))
+	FrameHlineLeft2:setImage(RegisterImage(@"uie_ui_hud_vehicle_ac130_frame_hline"))
+	FrameHlineLeft2:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_delta"))
 	FrameHlineLeft2:setShaderVector(0, 0, 1, 0, 0)
 	FrameHlineLeft2:setShaderVector(1, 0, 0, 0, 0)
 	FrameHlineLeft2:setShaderVector(2, 0, 1, 0, 0)
@@ -55,8 +55,8 @@ CoD.vhudHellstormFrameRight.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.FrameHlineLeft2 = FrameHlineLeft2
 	local FrameGraphicLeft = LUI.UIImage.new(0, 0, 316.5, 280.5, 0, 0, 0, 484)
 	FrameGraphicLeft:setAlpha(0.8)
-	FrameGraphicLeft:setImage(RegisterImage(0xCCB3C262A05836A))
-	FrameGraphicLeft:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	FrameGraphicLeft:setImage(RegisterImage(@"uie_ui_hud_vehicle_ac130_frame_graphic_left"))
+	FrameGraphicLeft:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	FrameGraphicLeft:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(FrameGraphicLeft)
 	self.FrameGraphicLeft = FrameGraphicLeft
@@ -75,7 +75,7 @@ CoD.vhudHellstormFrameRight.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	})
 	local f1_local10 = RMeter
 	local StrokeR = RMeter.subscribeToModel
-	local f1_local12 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local12 = Engine[@"getmodelforcontroller"](f1_arg1)
 	StrokeR(f1_local10, f1_local12["hudItems.remoteMissilePhase2"], function(f3_arg0)
 		f1_arg0:updateElementState(RMeter, {
 			name = "model_validation",
@@ -90,8 +90,8 @@ CoD.vhudHellstormFrameRight.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self:addElement(RMeter)
 	self.RMeter = RMeter
 	StrokeR = LUI.UIImage.new(0.5, 0.5, -194.5, -14.5, 0.5, 0.5, -5, 23)
-	StrokeR:setImage(RegisterImage(0xEFA29833AEF0480))
-	StrokeR:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	StrokeR:setImage(RegisterImage(@"hash_7EFA29833AEF0480"))
+	StrokeR:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	StrokeR:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(StrokeR)
 	self.StrokeR = StrokeR
@@ -123,7 +123,7 @@ CoD.vhudHellstormFrameRight.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	})
 	f1_local12 = self
 	f1_local10 = self.subscribeToModel
-	local f1_local13 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local13 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local10(f1_local12, f1_local13["hudItems.remoteMissilePhase2"], function(f8_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

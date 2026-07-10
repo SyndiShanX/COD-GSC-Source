@@ -9,13 +9,13 @@ CoD.SpawnSelectInfoLine.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local SpawnInfoLine = LUI.UIImage.new(0, 0, 0, 100, 0, 0, 0, 4)
 	SpawnInfoLine:setRGB(0.92, 0.92, 0.92)
-	SpawnInfoLine:setImage(RegisterImage(0xAB806B88B73F037))
+	SpawnInfoLine:setImage(RegisterImage(@"uie_ui_hud_selectspawn_info_line"))
 	self:addElement(SpawnInfoLine)
 	self.SpawnInfoLine = SpawnInfoLine
 	local SpawnInfoLineAdd = LUI.UIImage.new(0, 0, 0, 100, 0, 0, 0, 4)
 	SpawnInfoLineAdd:setRGB(0.92, 0.92, 0.92)
-	SpawnInfoLineAdd:setImage(RegisterImage(0xAB806B88B73F037))
-	SpawnInfoLineAdd:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	SpawnInfoLineAdd:setImage(RegisterImage(@"uie_ui_hud_selectspawn_info_line"))
+	SpawnInfoLineAdd:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(SpawnInfoLineAdd)
 	self.SpawnInfoLineAdd = SpawnInfoLineAdd
 	if PostLoadFunc then

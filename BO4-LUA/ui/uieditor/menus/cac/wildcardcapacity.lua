@@ -21,19 +21,19 @@ LUI.createMenu.WildcardCapacity = function(f1_arg0, f1_arg1)
 	self.background = background
 	local Title = LUI.UIText.new(0, 0, 154, 1173, 0, 0, 186, 245)
 	Title:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
-	Title:setText(LocalizeToUpperString(0xE2C3AE1D6F2A2A3))
+	Title:setText(LocalizeToUpperString(@"hash_E2C3AE1D6F2A2A3"))
 	Title:setTTF("ttmussels_demibold")
 	Title:setLetterSpacing(6)
-	Title:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Title:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Title:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Title:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(Title)
 	self.Title = Title
 	local Description = LUI.UIText.new(0, 0, 705, 1724, 0, 0, 365, 387)
 	Description:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
-	Description:setText(Engine[0xF9F1239CFD921FE](0xA83310B9F003575))
+	Description:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_2A83310B9F003575"))
 	Description:setTTF("dinnext_regular")
-	Description:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Description:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Description:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Description:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(Description)
 	self.Description = Description
 	local SelectedImage = LUI.UIFixedAspectRatioImage.new(0, 0, 147, 594, 0, 0, 325.5, 772.5)
@@ -46,7 +46,7 @@ LUI.createMenu.WildcardCapacity = function(f1_arg0, f1_arg1)
 	selectionList:setWidgetType(CoD.OverCapacityItem)
 	selectionList:setHorizontalCount(3)
 	selectionList:setSpacing(15)
-	selectionList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	selectionList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	selectionList:setDataSource("WildcardOvercapacityList")
 	selectionList:registerEventHandler("gain_focus", function(element, event)
 		local f3_local0 = nil
@@ -55,23 +55,23 @@ LUI.createMenu.WildcardCapacity = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f3_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f3_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(selectionList, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(selectionList, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		RemoveOverflowWildcardFromClass(self, element, menu, controller, "WildcardSelect")
 		CoD.CACUtility.EquippedItemsChanged(menu, controller)
 		PlaySoundAlias("cac_overload_select")
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x679ACA6FFC6C8F3, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/remove", nil, "ui_confirm")
 		return true
 	end, false)
 	self:addElement(selectionList)
 	self.selectionList = selectionList
 	local featureOverlayButtonMouseOnly = nil
 	featureOverlayButtonMouseOnly = CoD.featureOverlay_Button_MouseOnly.new(f1_local1, f1_arg0, 0.5, 0.5, -255, -129, 0, 0, 675, 732)
-	featureOverlayButtonMouseOnly.featureOverlayButtonContainer.Title:setText(Engine[0xF9F1239CFD921FE](0x78D439E1B360368))
+	featureOverlayButtonMouseOnly.featureOverlayButtonContainer.Title:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_778D439E1B360368"))
 	featureOverlayButtonMouseOnly:registerEventHandler("gain_focus", function(element, event)
 		local f6_local0 = nil
 		if element.gainFocus then
@@ -79,15 +79,15 @@ LUI.createMenu.WildcardCapacity = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f6_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f6_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(featureOverlayButtonMouseOnly, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(featureOverlayButtonMouseOnly, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		PlaySoundSetSound(self, "menu_no_selection")
 		GoBack(self, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 		return false
 	end, false)
 	self:addElement(featureOverlayButtonMouseOnly)
@@ -98,12 +98,12 @@ LUI.createMenu.WildcardCapacity = function(f1_arg0, f1_arg1)
 			SelectedImage:setImage(RegisterImage(f9_local0))
 		end
 	end)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		GoBack(self, controller)
 		PlaySoundSetSound(self, "menu_no_selection")
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 		return true
 	end, false)
 	LUI.OverrideFunction_CallOriginalFirst(self, "close", function(element)

@@ -17,10 +17,10 @@ CoD.StartMenu_ChangeSpecialist_CT.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	local specialistRespawnDesc = LUI.UIText.new(0.5, 0.5, -281.5, 281.5, 0.5, 0.5, -246, -213)
 	specialistRespawnDesc:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
 	specialistRespawnDesc:setZoom(10)
-	specialistRespawnDesc:setText(LocalizeToUpperString(0x666D479022F3E32))
+	specialistRespawnDesc:setText(LocalizeToUpperString(@"menu/specialist"))
 	specialistRespawnDesc:setTTF("ttmussels_demibold")
-	specialistRespawnDesc:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	specialistRespawnDesc:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	specialistRespawnDesc:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	specialistRespawnDesc:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(specialistRespawnDesc)
 	self.specialistRespawnDesc = specialistRespawnDesc
 	local Characters = LUI.UIList.new(f1_arg0, f1_arg1, 2, 0, nil, false, false, false, false)
@@ -34,7 +34,7 @@ CoD.StartMenu_ChangeSpecialist_CT.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	})
 	local f1_local3 = Characters
 	local DraftCooldown = Characters.subscribeToModel
-	local SignatureAbility = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local SignatureAbility = Engine[@"getmodelforcontroller"](f1_arg1)
 	DraftCooldown(f1_local3, SignatureAbility["PositionEditLoadout.SelectedCharacterIndex"], function(f3_arg0)
 		f1_arg0:updateElementState(Characters, {
 			name = "model_validation",
@@ -82,7 +82,7 @@ CoD.StartMenu_ChangeSpecialist_CT.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	end)
 	f1_local3 = Characters
 	DraftCooldown = Characters.subscribeToModel
-	SignatureAbility = Engine[0x8DF2E5447F384B9]()
+	SignatureAbility = Engine[@"getglobalmodel"]()
 	DraftCooldown(f1_local3, SignatureAbility["hudItems.specialistSwitchIsLethal"], function(f8_arg0)
 		f1_arg0:updateElementState(Characters, {
 			name = "model_validation",
@@ -94,14 +94,14 @@ CoD.StartMenu_ChangeSpecialist_CT.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	end, false)
 	f1_local3 = Characters
 	DraftCooldown = Characters.subscribeToModel
-	SignatureAbility = Engine[0x4DF5CFBC1771947](f1_arg1)
-	DraftCooldown(f1_local3, SignatureAbility["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x534C7B2375D2D47]], function(f9_arg0)
+	SignatureAbility = Engine[@"getmodelforcontroller"](f1_arg1)
+	DraftCooldown(f1_local3, SignatureAbility["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_player_dead"]], function(f9_arg0)
 		f1_arg0:updateElementState(Characters, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f9_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x534C7B2375D2D47],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_player_dead"],
 		})
 	end, false)
 	Characters:setLeftRight(0.5, 0.5, -268, -100)
@@ -109,7 +109,7 @@ CoD.StartMenu_ChangeSpecialist_CT.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	Characters:setScale(2, 2)
 	Characters:setWidgetType(CoD.PositionDraft_Character)
 	Characters:setBalanceGridRows(true)
-	Characters:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	Characters:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	Characters:setDataSource("PositionDraftCharacters")
 	Characters:registerEventHandler("lose_list_focus", function(element, event)
 		local f10_local0 = nil
@@ -141,7 +141,7 @@ CoD.StartMenu_ChangeSpecialist_CT.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	end)
 	self:subscribeToGlobalModel(f1_arg1, "PerController", "scriptNotify", function(model)
 		local f13_local0 = self
-		if CoD.ModelUtility.IsParamModelEqualToHashString(model, 0xDDDF8559F5B304D) and CoD.ModelUtility.IsScriptNotifyDataArgEqualTo(model, 1, 1) then
+		if CoD.ModelUtility.IsParamModelEqualToHashString(model, @"hash_2DDDF8559F5B304D") and CoD.ModelUtility.IsScriptNotifyDataArgEqualTo(model, 1, 1) then
 			CoD.ModelUtility.SetScriptNotifyDataArg(model, 1, 0)
 			StartMenuGoBack(f1_arg0, f1_arg1)
 		end

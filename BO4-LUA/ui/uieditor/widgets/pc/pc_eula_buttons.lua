@@ -37,8 +37,8 @@ CoD.PC_EULA_Buttons.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	OptionText:setRGB(0.78, 0.74, 0.67)
 	OptionText:setAlpha(0.9)
 	OptionText:setTTF("ttmussels_regular")
-	OptionText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	OptionText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	OptionText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	OptionText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	OptionText:linkToElementModel(self, "displayText", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then

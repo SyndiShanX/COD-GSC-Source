@@ -41,8 +41,8 @@ CoD.DirectorFeaturedCarousel.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	self.Box = Box
 	local TiledBacking = LUI.UIImage.new(0, 1, 0, 0, 1, 1, -31, 0)
 	TiledBacking:setRGB(0.67, 0.67, 0.67)
-	TiledBacking:setImage(RegisterImage(0x34839E8065B1E53))
-	TiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	TiledBacking:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	TiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	TiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	TiledBacking:setupNineSliceShader(196, 88)
 	self:addElement(TiledBacking)
@@ -52,16 +52,16 @@ CoD.DirectorFeaturedCarousel.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	self.RotatingGraphicPips = RotatingGraphicPips
 	local IdentityBracketBot = LUI.UIImage.new(0, 1.01, -3, -3, 0, 0, -2, 10)
 	IdentityBracketBot:setAlpha(0.15)
-	IdentityBracketBot:setImage(RegisterImage(0x5D6BC90D2477559))
-	IdentityBracketBot:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	IdentityBracketBot:setImage(RegisterImage(@"hash_65D6BC90D2477559"))
+	IdentityBracketBot:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	IdentityBracketBot:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(IdentityBracketBot)
 	self.IdentityBracketBot = IdentityBracketBot
 	local IdentityBracketBot2 = LUI.UIImage.new(-0.01, 1.01, 0, 0, 1, 1, -10, 2)
 	IdentityBracketBot2:setAlpha(0.15)
 	IdentityBracketBot2:setZRot(180)
-	IdentityBracketBot2:setImage(RegisterImage(0x5D6BC90D2477559))
-	IdentityBracketBot2:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	IdentityBracketBot2:setImage(RegisterImage(@"hash_65D6BC90D2477559"))
+	IdentityBracketBot2:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	IdentityBracketBot2:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(IdentityBracketBot2)
 	self.IdentityBracketBot2 = IdentityBracketBot2

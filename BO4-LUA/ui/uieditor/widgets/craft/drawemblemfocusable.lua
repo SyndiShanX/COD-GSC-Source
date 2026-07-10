@@ -10,7 +10,7 @@ CoD.DrawEmblemFocusable.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	local DrawEmblem = nil
 	DrawEmblem = LUI.UIElement.new(0, 1, 0, 0, 0, 1, 0, 0)
 	DrawEmblem:setAlpha(0)
-	DrawEmblem:setupEmblem(Enum[0x63E5ADF9D95FC86][0x4E4802F1ABF1844])
+	DrawEmblem:setupEmblem(Enum[@"customizationtype"][@"customization_type_paintshop_view_left"])
 	self:addElement(DrawEmblem)
 	self.DrawEmblem = DrawEmblem
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)

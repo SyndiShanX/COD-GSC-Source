@@ -8,10 +8,10 @@ CoD.GroupFractionLabel.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local groupsUsedValue = LUI.UIText.new(0, 0, 0, 180, 0, 0, 7.5, 32.5)
-	groupsUsedValue:setText(Engine[0xF9F1239CFD921FE](0x93E719493E9E18F))
+	groupsUsedValue:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	groupsUsedValue:setTTF("dinnext_regular")
-	groupsUsedValue:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	groupsUsedValue:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	groupsUsedValue:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	groupsUsedValue:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(groupsUsedValue)
 	self.groupsUsedValue = groupsUsedValue
 	if PostLoadFunc then

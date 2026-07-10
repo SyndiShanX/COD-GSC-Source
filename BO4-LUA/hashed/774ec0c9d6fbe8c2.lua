@@ -16,24 +16,24 @@ CoD.PC_Theater_Keyboard_Shortcut_Legend.new = function(f1_arg0, f1_arg1, f1_arg2
 	KeyboardShortcutsList:setHorizontalCount(3)
 	KeyboardShortcutsList:setVerticalCount(7)
 	KeyboardShortcutsList:setSpacing(0)
-	KeyboardShortcutsList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	KeyboardShortcutsList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	KeyboardShortcutsList:setDataSource("BasicDemoShortcutsKBM")
 	self:addElement(KeyboardShortcutsList)
 	self.KeyboardShortcutsList = KeyboardShortcutsList
 	local ModeTittle = LUI.UIText.new(0, 0, 0, 950, 0, 0, -25, 0)
 	ModeTittle:setRGB(ColorSet.T8__BUTTON__UNSELECTED__HEADER.r, ColorSet.T8__BUTTON__UNSELECTED__HEADER.g, ColorSet.T8__BUTTON__UNSELECTED__HEADER.b)
-	ModeTittle:setText(LocalizeToUpperString(0xFC244F0B9CC213B))
+	ModeTittle:setText(LocalizeToUpperString(@"hash_FC244F0B9CC213B"))
 	ModeTittle:setTTF("dinnext_regular")
-	ModeTittle:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	ModeTittle:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	ModeTittle:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	ModeTittle:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	self:addElement(ModeTittle)
 	self.ModeTittle = ModeTittle
 	local Title = LUI.UIText.new(0, 0, 0, 950, 0, 0, -60, -25)
 	Title:setRGB(ColorSet.T8__OCHRE.r, ColorSet.T8__OCHRE.g, ColorSet.T8__OCHRE.b)
-	Title:setText(Engine[0xF9F1239CFD921FE](0x93AC596F9C2A96C))
+	Title:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_693AC596F9C2A96C"))
 	Title:setTTF("ttmussels_regular")
-	Title:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Title:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	Title:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Title:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	self:addElement(Title)
 	self.Title = Title
 	self:mergeStateConditions({
@@ -64,7 +64,7 @@ CoD.PC_Theater_Keyboard_Shortcut_Legend.new = function(f1_arg0, f1_arg1, f1_arg2
 	})
 	local f1_local4 = self
 	local f1_local5 = self.subscribeToModel
-	local f1_local6 = Engine[0x8DF2E5447F384B9]()
+	local f1_local6 = Engine[@"getglobalmodel"]()
 	f1_local5(f1_local4, f1_local6["demo.contextMode"], function(f6_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -88,7 +88,7 @@ CoD.PC_Theater_Keyboard_Shortcut_Legend.__resetProperties = function(f8_arg0)
 	f8_arg0.KeyboardShortcutsList:completeAnimation()
 	f8_arg0.ModeTittle:completeAnimation()
 	f8_arg0.KeyboardShortcutsList:setAlpha(1)
-	f8_arg0.ModeTittle:setText(LocalizeToUpperString(0xFC244F0B9CC213B))
+	f8_arg0.ModeTittle:setText(LocalizeToUpperString(@"hash_FC244F0B9CC213B"))
 end
 CoD.PC_Theater_Keyboard_Shortcut_Legend.__clipsPerState = {
 	DefaultState = {
@@ -108,7 +108,7 @@ CoD.PC_Theater_Keyboard_Shortcut_Legend.__clipsPerState = {
 			f10_arg0.KeyboardShortcutsList:setAlpha(1)
 			f10_arg0.clipFinished(f10_arg0.KeyboardShortcutsList)
 			f10_arg0.ModeTittle:completeAnimation()
-			f10_arg0.ModeTittle:setText(LocalizeToUpperString(0x2466B35790D15BF))
+			f10_arg0.ModeTittle:setText(LocalizeToUpperString(@"hash_42466B35790D15BF"))
 			f10_arg0.clipFinished(f10_arg0.ModeTittle)
 		end,
 	},
@@ -129,7 +129,7 @@ CoD.PC_Theater_Keyboard_Shortcut_Legend.__clipsPerState = {
 			f12_arg0.KeyboardShortcutsList:setAlpha(1)
 			f12_arg0.clipFinished(f12_arg0.KeyboardShortcutsList)
 			f12_arg0.ModeTittle:completeAnimation()
-			f12_arg0.ModeTittle:setText(LocalizeToUpperString(0x2961AAF61FB5B21))
+			f12_arg0.ModeTittle:setText(LocalizeToUpperString(@"hash_72961AAF61FB5B21"))
 			f12_arg0.clipFinished(f12_arg0.ModeTittle)
 		end,
 	},
@@ -141,7 +141,7 @@ CoD.PC_Theater_Keyboard_Shortcut_Legend.__clipsPerState = {
 			f13_arg0.KeyboardShortcutsList:setAlpha(1)
 			f13_arg0.clipFinished(f13_arg0.KeyboardShortcutsList)
 			f13_arg0.ModeTittle:completeAnimation()
-			f13_arg0.ModeTittle:setText(LocalizeToUpperString(0xEBDDCC281D5C214))
+			f13_arg0.ModeTittle:setText(LocalizeToUpperString(@"hash_7EBDDCC281D5C214"))
 			f13_arg0.clipFinished(f13_arg0.ModeTittle)
 		end,
 	},

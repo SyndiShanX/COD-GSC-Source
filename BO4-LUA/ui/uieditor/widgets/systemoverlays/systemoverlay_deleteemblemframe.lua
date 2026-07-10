@@ -36,8 +36,8 @@ CoD.systemOverlay_DeleteEmblemFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	title:setRGB(ColorSet.T8__BEIGE__HEADER.r, ColorSet.T8__BEIGE__HEADER.g, ColorSet.T8__BEIGE__HEADER.b)
 	title:setTTF("ttmussels_demibold")
 	title:setLetterSpacing(6)
-	title:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	title:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	title:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	title:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	title:linkToElementModel(self, "title", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -64,7 +64,7 @@ CoD.systemOverlay_DeleteEmblemFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	options:setWidgetType(CoD.featureOverlay_Button)
 	options:setHorizontalCount(2)
 	options:setSpacing(15)
-	options:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	options:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	options:linkToElementModel(self, "listDatasource", true, function(model)
 		local f5_local0 = model:get()
 		if f5_local0 ~= nil then
@@ -72,17 +72,17 @@ CoD.systemOverlay_DeleteEmblemFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 		end
 	end)
 	options:linkToElementModel(options, "disabled", true, function(model, f6_arg1)
-		CoD.Menu.UpdateButtonShownState(f6_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f6_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	options:appendEventHandler("input_source_changed", function(f7_arg0, f7_arg1)
 		f7_arg1.menu = f7_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f7_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f7_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	local f1_local8 = options
 	local f1_local9 = options.subscribeToModel
-	local f1_local10 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local10 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local9(f1_local8, f1_local10.LastInput, function(f8_arg0, f8_arg1)
-		CoD.Menu.UpdateButtonShownState(f8_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f8_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	options:registerEventHandler("gain_focus", function(element, event)
 		local f9_local0 = nil
@@ -91,10 +91,10 @@ CoD.systemOverlay_DeleteEmblemFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 		elseif element.super.gainFocus then
 			f9_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f9_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(options, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(options, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if not IsDisabled(element, controller) and IsMouseOrKeyboard(controller) then
 			ProcessListAction(self, element, controller, menu)
 			return true
@@ -102,7 +102,7 @@ CoD.systemOverlay_DeleteEmblemFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 		end
 	end, function(element, menu, controller)
 		if not IsDisabled(element, controller) and IsMouseOrKeyboard(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false
@@ -124,7 +124,7 @@ CoD.systemOverlay_DeleteEmblemFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	end)
 	f1_local8 = self
 	f1_local9 = self.subscribeToModel
-	f1_local10 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local10 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local9(f1_local8, f1_local10.LastInput, function(f14_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

@@ -12,11 +12,11 @@ CoD.CallingCards_Asset_superheroes_speed_hero.new = function(f1_arg0, f1_arg1, f
 	self:addElement(rightarm)
 	self.rightarm = rightarm
 	local hero = LUI.UIImage.new(0, 0, 0, 384, 0, 0, 0, 240)
-	hero:setImage(RegisterImage(0x15FA951A24AE220))
+	hero:setImage(RegisterImage(@"hash_515FA951A24AE220"))
 	self:addElement(hero)
 	self.hero = hero
 	local leftarm = LUI.UIImage.new(0, 0, 200, 384, 0, 0, 16.5, 96.5)
-	leftarm:setImage(RegisterImage(0xE8474EBB573E401))
+	leftarm:setImage(RegisterImage(@"hash_6E8474EBB573E401"))
 	self:addElement(leftarm)
 	self.leftarm = leftarm
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)
@@ -40,19 +40,19 @@ CoD.CallingCards_Asset_superheroes_speed_hero.__clipsPerState = {
 				local f4_local0 = function(f5_arg0)
 					local f5_local0 = function(f6_arg0)
 						local f6_local0 = function(f7_arg0)
-							f7_arg0:beginAnimation(750, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+							f7_arg0:beginAnimation(750, Enum[@"luitween"][@"luitween_ease_out"])
 							f7_arg0:setZRot(10)
 							f7_arg0:registerEventHandler("transition_complete_keyframe", f3_arg0.clipFinished)
 						end
-						f6_arg0:beginAnimation(750, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+						f6_arg0:beginAnimation(750, Enum[@"luitween"][@"luitween_ease_out"])
 						f6_arg0:setZRot(-28)
 						f6_arg0:registerEventHandler("transition_complete_keyframe", f6_local0)
 					end
-					f5_arg0:beginAnimation(800, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f5_arg0:beginAnimation(800, Enum[@"luitween"][@"luitween_ease_out"])
 					f5_arg0:setZRot(10)
 					f5_arg0:registerEventHandler("transition_complete_keyframe", f5_local0)
 				end
-				f3_arg0.rightarm:beginAnimation(700, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f3_arg0.rightarm:beginAnimation(700, Enum[@"luitween"][@"luitween_ease_out"])
 				f3_arg0.rightarm:setZRot(-28)
 				f3_arg0.rightarm:registerEventHandler("interrupted_keyframe", f3_arg0.clipInterrupted)
 				f3_arg0.rightarm:registerEventHandler("transition_complete_keyframe", f4_local0)
@@ -64,19 +64,19 @@ CoD.CallingCards_Asset_superheroes_speed_hero.__clipsPerState = {
 				local f8_local0 = function(f9_arg0)
 					local f9_local0 = function(f10_arg0)
 						local f10_local0 = function(f11_arg0)
-							f11_arg0:beginAnimation(750, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+							f11_arg0:beginAnimation(750, Enum[@"luitween"][@"luitween_ease_out"])
 							f11_arg0:setTopBottom(0, 0, 12.5, 92.5)
 							f11_arg0:registerEventHandler("transition_complete_keyframe", f3_arg0.clipFinished)
 						end
-						f10_arg0:beginAnimation(750, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+						f10_arg0:beginAnimation(750, Enum[@"luitween"][@"luitween_ease_out"])
 						f10_arg0:setTopBottom(0, 0, 57.5, 137.5)
 						f10_arg0:registerEventHandler("transition_complete_keyframe", f10_local0)
 					end
-					f9_arg0:beginAnimation(800, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f9_arg0:beginAnimation(800, Enum[@"luitween"][@"luitween_ease_out"])
 					f9_arg0:setTopBottom(0, 0, 12.5, 92.5)
 					f9_arg0:registerEventHandler("transition_complete_keyframe", f9_local0)
 				end
-				f3_arg0.leftarm:beginAnimation(700, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f3_arg0.leftarm:beginAnimation(700, Enum[@"luitween"][@"luitween_ease_out"])
 				f3_arg0.leftarm:setTopBottom(0, 0, 57.5, 137.5)
 				f3_arg0.leftarm:registerEventHandler("interrupted_keyframe", f3_arg0.clipInterrupted)
 				f3_arg0.leftarm:registerEventHandler("transition_complete_keyframe", f8_local0)

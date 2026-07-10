@@ -44,11 +44,11 @@ CoD.PC_TooltipExceptionWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self:addElement(DotTopRight1)
 	self.DotTopRight1 = DotTopRight1
 	local Tip = LUI.UIText.new(0, 1, 0, 0, 0.5, 0.5, -9, 9)
-	Tip:setText(LocalizeToUpperString(0x1496B17DC3093F9))
+	Tip:setText(LocalizeToUpperString(@"hash_11496B17DC3093F9"))
 	Tip:setTTF("ttmussels_regular")
 	Tip:setLetterSpacing(6)
-	Tip:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	Tip:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Tip:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	Tip:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(Tip)
 	self.Tip = Tip
 	if PostLoadFunc then

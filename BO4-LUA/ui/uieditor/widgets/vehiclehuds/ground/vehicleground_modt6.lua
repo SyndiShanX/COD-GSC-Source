@@ -8,8 +8,8 @@ CoD.VehicleGround_ModT6.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Image6 = LUI.UIImage.new(0, 0, 0, 156, 0, 0, 0, 54)
-	Image6:setImage(RegisterImage(0xE96C034BB099CD5))
-	Image6:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Image6:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_ground_modulest6"))
+	Image6:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Image6)
 	self.Image6 = Image6
 	self:mergeStateConditions({

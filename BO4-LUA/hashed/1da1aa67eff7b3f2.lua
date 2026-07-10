@@ -49,7 +49,7 @@ CoD.WarScoreInfo_Deliver_ProgressBar.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	})
 	local f1_local2 = FlagStateWidget1
 	local FlagStateWidget2 = FlagStateWidget1.subscribeToModel
-	local f1_local4 = Engine[0x8DF2E5447F384B9]()
+	local f1_local4 = Engine[@"getglobalmodel"]()
 	FlagStateWidget2(f1_local2, f1_local4["hudItems.war.batteryState1"], function(f8_arg0)
 		f1_arg0:updateElementState(FlagStateWidget1, {
 			name = "model_validation",
@@ -61,7 +61,7 @@ CoD.WarScoreInfo_Deliver_ProgressBar.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	end, false)
 	f1_local2 = FlagStateWidget1
 	FlagStateWidget2 = FlagStateWidget1.subscribeToModel
-	f1_local4 = Engine[0x8DF2E5447F384B9]()
+	f1_local4 = Engine[@"getglobalmodel"]()
 	FlagStateWidget2(f1_local2, f1_local4["hudItems.war.attackingTeam"], function(f9_arg0)
 		f1_arg0:updateElementState(FlagStateWidget1, {
 			name = "model_validation",
@@ -73,7 +73,7 @@ CoD.WarScoreInfo_Deliver_ProgressBar.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	end, false)
 	f1_local2 = FlagStateWidget1
 	FlagStateWidget2 = FlagStateWidget1.subscribeToModel
-	f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	FlagStateWidget2(f1_local2, f1_local4["factions.playerFactionTeamEnum"], function(f10_arg0)
 		f1_arg0:updateElementState(FlagStateWidget1, {
 			name = "model_validation",
@@ -126,7 +126,7 @@ CoD.WarScoreInfo_Deliver_ProgressBar.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	})
 	f1_local4 = FlagStateWidget2
 	f1_local2 = FlagStateWidget2.subscribeToModel
-	local f1_local5 = Engine[0x8DF2E5447F384B9]()
+	local f1_local5 = Engine[@"getglobalmodel"]()
 	f1_local2(f1_local4, f1_local5["hudItems.war.batteryState2"], function(f17_arg0)
 		f1_arg0:updateElementState(FlagStateWidget2, {
 			name = "model_validation",
@@ -138,7 +138,7 @@ CoD.WarScoreInfo_Deliver_ProgressBar.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	end, false)
 	f1_local4 = FlagStateWidget2
 	f1_local2 = FlagStateWidget2.subscribeToModel
-	f1_local5 = Engine[0x8DF2E5447F384B9]()
+	f1_local5 = Engine[@"getglobalmodel"]()
 	f1_local2(f1_local4, f1_local5["hudItems.war.attackingTeam"], function(f18_arg0)
 		f1_arg0:updateElementState(FlagStateWidget2, {
 			name = "model_validation",
@@ -150,7 +150,7 @@ CoD.WarScoreInfo_Deliver_ProgressBar.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	end, false)
 	f1_local4 = FlagStateWidget2
 	f1_local2 = FlagStateWidget2.subscribeToModel
-	f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local2(f1_local4, f1_local5["factions.playerFactionTeamEnum"], function(f19_arg0)
 		f1_arg0:updateElementState(FlagStateWidget2, {
 			name = "model_validation",

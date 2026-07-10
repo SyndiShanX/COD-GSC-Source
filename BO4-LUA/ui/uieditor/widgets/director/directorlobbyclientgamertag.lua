@@ -12,7 +12,7 @@ CoD.DirectorLobbyClientGamertag.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local MaskBacking = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	MaskBacking:setRGB(0.11, 0.11, 0.11)
-	MaskBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x81EEB1F96D4BE0A))
+	MaskBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_381EEB1F96D4BE0A"))
 	MaskBacking:setShaderVector(0, 0, 0.6, 0, 0)
 	self:addElement(MaskBacking)
 	self.MaskBacking = MaskBacking
@@ -22,8 +22,8 @@ CoD.DirectorLobbyClientGamertag.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	local LeagueRankNumber = LUI.UIText.new(0, 0, -52.5, 46.5, 0, 0, 3.5, 29.5)
 	LeagueRankNumber:setAlpha(0)
 	LeagueRankNumber:setTTF("default")
-	LeagueRankNumber:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	LeagueRankNumber:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	LeagueRankNumber:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	LeagueRankNumber:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	LeagueRankNumber.__String_Reference = function(f2_arg0)
 		local f2_local0 = f2_arg0:get()
 		if f2_local0 ~= nil then
@@ -52,7 +52,7 @@ CoD.DirectorLobbyClientGamertag.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self.ArenaRankIcon = ArenaRankIcon
 	local RankNumber = LUI.UIText.new(0.5, 0.5, -49.5, 49.5, 0, 0, 5, 31)
 	RankNumber:setTTF("0arame_mono_stencil")
-	RankNumber:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	RankNumber:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	RankNumber.__Color = function(f5_arg0)
 		local f5_local0 = f5_arg0:get()
 		if f5_local0 ~= nil then
@@ -118,7 +118,7 @@ CoD.DirectorLobbyClientGamertag.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	local Gamertag = LUI.UIText.new(0.5, 0.5, 101.5, 200.5, 0, 0, 4, 30)
 	Gamertag:setTTF("notosans_regular")
 	Gamertag:setLetterSpacing(1)
-	Gamertag:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	Gamertag:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	Gamertag:linkToElementModel(self, "xuid", true, function(model)
 		local f11_local0 = model:get()
 		if f11_local0 ~= nil then
@@ -161,7 +161,7 @@ CoD.DirectorLobbyClientGamertag.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	f1_local10(f1_local9, f1_local11["gameClient.update"], LeagueRankNumber.__String_Reference_FullPath)
 	f1_local9 = LeagueRankNumber
 	f1_local10 = LeagueRankNumber.subscribeToModel
-	f1_local11 = Engine[0x8DF2E5447F384B9]()
+	f1_local11 = Engine[@"getglobalmodel"]()
 	f1_local10(f1_local9, f1_local11["PartyPrivacy.privacy"], LeagueRankNumber.__String_Reference_FullPath)
 	f1_local9 = RankIcon
 	f1_local10 = RankIcon.subscribeToModel
@@ -177,7 +177,7 @@ CoD.DirectorLobbyClientGamertag.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	f1_local10(f1_local9, f1_local11["gameClient.update"], RankIcon.__Image_FullPath)
 	f1_local9 = RankIcon
 	f1_local10 = RankIcon.subscribeToModel
-	f1_local11 = Engine[0x8DF2E5447F384B9]()
+	f1_local11 = Engine[@"getglobalmodel"]()
 	f1_local10(f1_local9, f1_local11["PartyPrivacy.privacy"], RankIcon.__Image_FullPath)
 	Gamertag:linkToElementModel(self, "clantag", true, Gamertag.__String_Reference_FullPath)
 	self:mergeStateConditions({
@@ -217,7 +217,7 @@ CoD.DirectorLobbyClientGamertag.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	end)
 	f1_local9 = self
 	f1_local10 = self.subscribeToModel
-	f1_local11 = Engine[0x8DF2E5447F384B9]()
+	f1_local11 = Engine[@"getglobalmodel"]()
 	f1_local10(f1_local9, f1_local11["lobbyRoot.lobbyNav"], function(f19_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

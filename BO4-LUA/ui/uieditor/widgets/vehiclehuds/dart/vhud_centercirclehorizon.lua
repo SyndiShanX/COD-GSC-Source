@@ -9,8 +9,8 @@ CoD.vhud_CenterCircleHorizon.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	local CenterCircleHorizon = LUI.UIImage.new(0.5, 0.5, -58, 58, 0.5, 0.5, -40, 40)
 	CenterCircleHorizon:setAlpha(0.1)
 	CenterCircleHorizon:setZoom(7)
-	CenterCircleHorizon:setImage(RegisterImage(0x999492673C51C27))
-	CenterCircleHorizon:setMaterial(LUI.UIImage.GetCachedMaterial(0x5956C6C1FD41D3C))
+	CenterCircleHorizon:setImage(RegisterImage(@"uie_ui_hud_vehicle_dart_center_reticle_large"))
+	CenterCircleHorizon:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_aberration"))
 	CenterCircleHorizon:setShaderVector(0, 0.2, 1, 0, 0)
 	CenterCircleHorizon:setShaderVector(1, 0, 0, 0, 0)
 	CenterCircleHorizon:setShaderVector(2, 0, 0, 0, 0)
@@ -19,8 +19,8 @@ CoD.vhud_CenterCircleHorizon.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	self:addElement(CenterCircleHorizon)
 	self.CenterCircleHorizon = CenterCircleHorizon
 	local CenterCircleHorizon0 = LUI.UIImage.new(0.5, 0.5, -58, 58, 0.5, 0.5, -40, 40)
-	CenterCircleHorizon0:setImage(RegisterImage(0x999492673C51C27))
-	CenterCircleHorizon0:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	CenterCircleHorizon0:setImage(RegisterImage(@"uie_ui_hud_vehicle_dart_center_reticle_large"))
+	CenterCircleHorizon0:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(CenterCircleHorizon0)
 	self.CenterCircleHorizon0 = CenterCircleHorizon0
 	if PostLoadFunc then

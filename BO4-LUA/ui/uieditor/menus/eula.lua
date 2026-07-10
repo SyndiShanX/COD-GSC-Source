@@ -17,14 +17,14 @@ LUI.createMenu.EULA = function(f1_arg0, f1_arg1)
 	f1_local1:addElementToPendingUpdateStateList(self)
 	local BlackBG = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	BlackBG:setRGB(0, 0, 0)
-	BlackBG:setMaterial(LUI.UIImage.GetCachedMaterial(0x655565C7B387234))
+	BlackBG:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_multiply"))
 	self:addElement(BlackBG)
 	self.BlackBG = BlackBG
 	local Header = LUI.UIText.new(0.5, 0.5, -864, 864, 0, 0, 166, 211)
-	Header:setText(Engine[0xF9F1239CFD921FE](0x31BE80D5236D780))
+	Header:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_431BE80D5236D780"))
 	Header:setTTF("ttmussels_demibold")
-	Header:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	Header:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Header:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	Header:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(Header)
 	self.Header = Header
 	local eulaBody = CoD.eulaBody.new(f1_local1, f1_arg0, 0.5, 0.5, -864, 864, 0, 0, 251, 951)
@@ -50,7 +50,7 @@ LUI.createMenu.EULA = function(f1_arg0, f1_arg1)
 	PCEULAButtons:setWidgetType(CoD.PC_EULA_Buttons)
 	PCEULAButtons:setHorizontalCount(2)
 	PCEULAButtons:setSpacing(20)
-	PCEULAButtons:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	PCEULAButtons:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	PCEULAButtons:setDataSource("PCEULAOptions")
 	PCEULAButtons:registerEventHandler("gain_focus", function(element, event)
 		local f3_local0 = nil
@@ -59,14 +59,14 @@ LUI.createMenu.EULA = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f3_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f3_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(PCEULAButtons, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(PCEULAButtons, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		ProcessListAction(self, element, controller, menu)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 		return false
 	end, false)
 	self:addElement(PCEULAButtons)
@@ -105,14 +105,14 @@ LUI.createMenu.EULA = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f8_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f8_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(SliderArrowLeft, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(SliderArrowLeft, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		CoD.LobbyUtility.PreviousEULAPage(self, element, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 		return false
 	end, false)
 	self:addElement(SliderArrowLeft)
@@ -159,14 +159,14 @@ LUI.createMenu.EULA = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f14_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f14_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(SliderArrowRight, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(SliderArrowRight, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		CoD.LobbyUtility.NextEULAPage(self, element, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 		return false
 	end, false)
 	self:addElement(SliderArrowRight)
@@ -186,16 +186,16 @@ LUI.createMenu.EULA = function(f1_arg0, f1_arg1)
 	f1_local11 = self.subscribeToModel
 	local f1_local13 = DataSources.EULA.getModel(f1_arg0)
 	f1_local11(f1_local12, f1_local13.CurrentEULAPage, function(f18_arg0, f18_arg1)
-		CoD.Menu.UpdateButtonShownState(f18_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x493152B20AE4F58])
-		CoD.Menu.UpdateButtonShownState(f18_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x49A252B20B48936])
+		CoD.Menu.UpdateButtonShownState(f18_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_lb"])
+		CoD.Menu.UpdateButtonShownState(f18_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_rb"])
 	end, false)
 	f1_local12 = self
 	f1_local11 = self.subscribeToModel
 	f1_local13 = DataSources.EULA.getModel(f1_arg0)
 	f1_local11(f1_local12, f1_local13.MaxEULAPage, function(f19_arg0, f19_arg1)
-		CoD.Menu.UpdateButtonShownState(f19_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x49A252B20B48936])
+		CoD.Menu.UpdateButtonShownState(f19_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_rb"])
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if not IsPC() then
 			CoD.LobbyUtility.AcceptEULA(menu, controller)
 			return true
@@ -203,13 +203,13 @@ LUI.createMenu.EULA = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if not IsPC() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xBD872543F8A833, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/accept", nil, "ui_confirm")
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], "ESCAPE", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], "ESCAPE", function(element, menu, controller, model)
 		if not IsPC() then
 			CoD.LobbyUtility.DeclineEULA(self, menu, controller)
 			return true
@@ -217,34 +217,34 @@ LUI.createMenu.EULA = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if not IsPC() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0xFD0A4EC72EF5F3F, nil, "ESCAPE")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/decline", nil, "ESCAPE")
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x493152B20AE4F58], "ui_navleft", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_lb"], "ui_navleft", function(element, menu, controller, model)
 		if not CoD.LobbyUtility.IsFirstEULAPage(controller) then
 			CoD.LobbyUtility.PreviousEULAPage(self, self.eulaBody, controller)
 			return true
 		else
 		end
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x493152B20AE4F58], 0x272B11A2E0CC67C, nil, "ui_navleft")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_lb"], @"menu/previous_page", nil, "ui_navleft")
 		if not CoD.LobbyUtility.IsFirstEULAPage(controller) then
 			return true
 		else
 			return false
 		end
 	end, true)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x49A252B20B48936], "ui_navright", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_rb"], "ui_navright", function(element, menu, controller, model)
 		if not CoD.LobbyUtility.IsLastEULAPage(controller) then
 			CoD.LobbyUtility.NextEULAPage(self, self.eulaBody, controller)
 			return true
 		else
 		end
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x49A252B20B48936], 0x92878DD19A9AAD8, nil, "ui_navright")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_rb"], @"menu/next_page", nil, "ui_navright")
 		if not CoD.LobbyUtility.IsLastEULAPage(controller) then
 			return true
 		else

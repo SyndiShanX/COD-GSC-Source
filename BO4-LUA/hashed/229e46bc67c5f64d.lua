@@ -10,7 +10,7 @@ CoD.WeaponVariantPip.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local PipBack = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	PipBack:setImage(RegisterImage(0xEDC0EF8035D1E2A))
+	PipBack:setImage(RegisterImage(@"uie_ui_menu_pip01_bg"))
 	self:addElement(PipBack)
 	self.PipBack = PipBack
 	local PipFront = CoD.WeaponVariantPipInternal.new(f1_arg0, f1_arg1, 0, 1, 0, 0, 0, 1, 0, 0)

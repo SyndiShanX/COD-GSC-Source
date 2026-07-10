@@ -101,7 +101,7 @@ Lobby.Test.tests.mp_public = {
 }
 Lobby.Test.PreTargetSettings = function(f1_arg0)
 	if f1_arg0.playlistID ~= nil then
-		Engine[0xCE25A90DC553200](f1_arg0.playlistID)
+		Engine[@"setplaylistid"](f1_arg0.playlistID)
 	end
 end
 Lobby.Test.ProcessFunction = function()
@@ -109,13 +109,13 @@ Lobby.Test.ProcessFunction = function()
 		return
 	end
 	local f2_local0 = LobbyData.GetCurrentMenuTarget()
-	local f2_local1 = f2_local0[0x4BCADBA8E631B86]
-	local f2_local2 = Engine[0x9882F293C327557]()
+	local f2_local1 = f2_local0[@"name"]
+	local f2_local2 = Engine[@"getlobbyuiscreen"]()
 	if Lobby.Test.currentTest.state == Lobby.Test.STATE.NOT_STARTED then
-		local f2_local3 = Lobby.Test.tests[Dvar[0x8C6C20B615F01FD]:get()]
+		local f2_local3 = Lobby.Test.tests[Dvar[@"hash_68C6C20B615F01FD"]:get()]
 		if f2_local3 == nil then
 			assert(false)
-			Dvar[0x8C6C20B615F01FD]:set("")
+			Dvar[@"hash_68C6C20B615F01FD"]:set("")
 			Lobby.Test.currentTest.state = Lobby.Test.STATE.ERROR
 			return
 		end
@@ -147,7 +147,7 @@ Lobby.Test.ProcessFunction = function()
 			Lobby.Test.gameTimeoutDeadline = -1
 		else
 			Lobby.Test.gameTimeout = f2_local3.gameTimeout
-			Lobby.Test.gameTimeoutDeadline = Engine[0x9D33D652B9B0F3B]() + f2_local3.gameTimeout * 1000
+			Lobby.Test.gameTimeoutDeadline = Engine[@"milliseconds"]() + f2_local3.gameTimeout * 1000
 		end
 		Lobby.Test.currentTest.name = f2_local3.name
 		Lobby.Test.currentTest.startTarget = f2_local3.startTarget
@@ -160,13 +160,13 @@ Lobby.Test.ProcessFunction = function()
 			},
 		}
 		Lobby.Test.currentTest.state = Lobby.Test.STATE.INITIALIZED
-		Engine[0x8C5711DAACC99F4](Enum[0x7A63DCD561B0FA8][0xC1DE3DC19B3B20D], "LobbyTest '" .. Lobby.Test.currentTest.name .. "' INITIALIZED, start target is '" .. Lobby.Test.currentTest.startTarget .. "', stop target is '" .. f2_local5 .. "' \n")
+		Engine[@"printinfo"](Enum[@"consolelabel_e"][@"con_label_lobby"], "LobbyTest '" .. Lobby.Test.currentTest.name .. "' INITIALIZED, start target is '" .. Lobby.Test.currentTest.startTarget .. "', stop target is '" .. f2_local5 .. "' \n")
 	end
 	if Lobby.Test.currentTest.state == Lobby.Test.STATE.INITIALIZED then
 		local f2_local11 = Lobby.Test.tests[Lobby.Test.currentTest.name]
-		if f2_local0[0x4BCADBA8E631B86] == Lobby.Test.currentTest.startTarget then
+		if f2_local0[@"name"] == Lobby.Test.currentTest.startTarget then
 			Lobby.Test.currentTest.state = Lobby.Test.STATE.IN_PROGRESS
-			Engine[0x8C5711DAACC99F4](Enum[0x7A63DCD561B0FA8][0xC1DE3DC19B3B20D], "LobbyTest '" .. Lobby.Test.currentTest.name .. "' IN_PROGRESS\n")
+			Engine[@"printinfo"](Enum[@"consolelabel_e"][@"con_label_lobby"], "LobbyTest '" .. Lobby.Test.currentTest.name .. "' IN_PROGRESS\n")
 		end
 	end
 	if Lobby.Test.currentTest.state == Lobby.Test.STATE.IN_PROGRESS then
@@ -188,7 +188,7 @@ Lobby.Test.ProcessFunction = function()
 								LobbyVM.OnLobbyAsyncMatchmakerStart({
 									controller = 0,
 								})
-								Engine[0x8C5711DAACC99F4](Enum[0x7A63DCD561B0FA8][0xC1DE3DC19B3B20D], "LobbyTest '" .. Lobby.Test.currentTest.name .. "' IN_PROGRESS, starting async mathcmaking from target '" .. f2_local7.data.from .. "' on playlis id '" .. Engine[0x7B3B2B73B53EB34]() .. "'\n")
+								Engine[@"printinfo"](Enum[@"consolelabel_e"][@"con_label_lobby"], "LobbyTest '" .. Lobby.Test.currentTest.name .. "' IN_PROGRESS, starting async mathcmaking from target '" .. f2_local7.data.from .. "' on playlis id '" .. Engine[@"getplaylistid"]() .. "'\n")
 							end
 							Lobby.Test.currentTest.state = Lobby.Test.STATE.IN_PROGRESS
 						end
@@ -203,36 +203,36 @@ Lobby.Test.ProcessFunction = function()
 							controller = 0,
 							navToMenu = f2_local8,
 						})
-						Engine[0x8C5711DAACC99F4](Enum[0x7A63DCD561B0FA8][0xC1DE3DC19B3B20D], "LobbyTest '" .. Lobby.Test.currentTest.name .. "' IN_PROGRESS, going from target '" .. f2_local7.data.from .. " to target '" .. f2_local7.data.to .. "'\n")
+						Engine[@"printinfo"](Enum[@"consolelabel_e"][@"con_label_lobby"], "LobbyTest '" .. Lobby.Test.currentTest.name .. "' IN_PROGRESS, going from target '" .. f2_local7.data.from .. " to target '" .. f2_local7.data.to .. "'\n")
 					end
 				end
 			end
 		end
 	end
 	if Lobby.Test.currentTest.state == Lobby.Test.STATE.FINISHED then
-		Engine[0x8C5711DAACC99F4](Enum[0x7A63DCD561B0FA8][0xC1DE3DC19B3B20D], "LobbyTest '" .. Lobby.Test.currentTest.name .. "' FINISHED at target '" .. Lobby.Test.currentTest.stopTarget .. "'\n")
+		Engine[@"printinfo"](Enum[@"consolelabel_e"][@"con_label_lobby"], "LobbyTest '" .. Lobby.Test.currentTest.name .. "' FINISHED at target '" .. Lobby.Test.currentTest.stopTarget .. "'\n")
 		Lobby.Test.currentTest.state = Lobby.Test.STATE.NOT_STARTED
 	end
 	if Lobby.Test.currentTest.state == Lobby.Test.STATE.ERROR then
-		Dvar[0x8C6C20B615F01FD]:set("")
+		Dvar[@"hash_68C6C20B615F01FD"]:set("")
 	end
 end
 Lobby.Test.Pump = function()
-	if Engine[0xE39F1F30B306065]() then
+	if Engine[@"isdedicatedserver"]() then
 		return
-	elseif not Engine[0x3CD0351DA0D371](0) then
+	elseif not Engine[@"isdemonwarefetchingdone"](0) then
 		return
-	elseif not Dvar[0x8C6C20B615F01FD]:exists() or Dvar[0x8C6C20B615F01FD]:get() == "" then
+	elseif not Dvar[@"hash_68C6C20B615F01FD"]:exists() or Dvar[@"hash_68C6C20B615F01FD"]:get() == "" then
 		return
 	end
 	Lobby.Test.ProcessFunction()
 	if Lobby.Test.gameTimeout ~= -1 then
-		if Engine[0x7B48C1ABFF0F764]() then
-			Lobby.Test.gameTimeoutDeadline = Engine[0x9D33D652B9B0F3B]() + Lobby.Test.gameTimeout * 1000
-		elseif Engine[0x9D33D652B9B0F3B]() > Lobby.Test.gameTimeoutDeadline then
+		if Engine[@"isingame"]() then
+			Lobby.Test.gameTimeoutDeadline = Engine[@"milliseconds"]() + Lobby.Test.gameTimeout * 1000
+		elseif Engine[@"milliseconds"]() > Lobby.Test.gameTimeoutDeadline then
 			Lobby.Test.currentTest.state = Lobby.Test.STATE.NOT_STARTED
 			Lobby.Test.gameTimeout = -1
-			Engine[0xBC42C678E40DBE8](Enum[0xE4C65AA61FAEC38][0x2FD312C2C06EC11], "Not in a game for longer than timeout.")
+			Engine[@"comerror"](Enum[@"errorcode"][@"error_softrestart"], "Not in a game for longer than timeout.")
 		end
 	end
 end

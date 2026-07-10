@@ -27,7 +27,7 @@ CoD.ProximityAlarm_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	})
 	local f1_local2 = icon
 	local text = icon.subscribeToModel
-	local f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	text(f1_local2, f1_local4["hudItems.proximityAlarm"], function(f4_arg0)
 		f1_arg0:updateElementState(icon, {
 			name = "model_validation",
@@ -43,9 +43,9 @@ CoD.ProximityAlarm_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self:addElement(icon)
 	self.icon = icon
 	text = LUI.UIText.new(0.27, 0.27, 0, 216, 0.3, 0.3, 0, 30)
-	text:setText(Engine[0xF9F1239CFD921FE](0xFCEDC5C8AC323F8))
+	text:setText(Engine[@"hash_4F9F1239CFD921FE"](@"weapon/alarm_set"))
 	text:setTTF("ttmussels_demibold")
-	text:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	text:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(text)
 	self.text = text
 	self:mergeStateConditions({

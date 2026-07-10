@@ -35,7 +35,7 @@ CoD.CodCaster.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 			condition = function(menu, element, event)
 				local f2_local0 = CoD.ModelUtility.IsModelValueTrue(f1_arg1, "CodCaster.showFullScreenMap")
 				if f2_local0 then
-					if not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04]) then
+					if not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]) then
 						f2_local0 = not CoD.CodCasterUtility.CodCasterIsInAerialCam(f1_arg1)
 					else
 						f2_local0 = false
@@ -47,7 +47,7 @@ CoD.CodCaster.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 	})
 	local CodCasterHeaderNonTeamBased = OverheadMap
 	local waitingForPlayers = OverheadMap.subscribeToModel
-	local CodCasterPortraitPlayerCard = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local CodCasterPortraitPlayerCard = Engine[@"getmodelforcontroller"](f1_arg1)
 	waitingForPlayers(CodCasterHeaderNonTeamBased, CodCasterPortraitPlayerCard["CodCaster.showFullScreenMap"], function(f3_arg0)
 		f1_arg0:updateElementState(OverheadMap, {
 			name = "model_validation",
@@ -59,26 +59,26 @@ CoD.CodCaster.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 	end, false)
 	CodCasterHeaderNonTeamBased = OverheadMap
 	waitingForPlayers = OverheadMap.subscribeToModel
-	CodCasterPortraitPlayerCard = Engine[0x4DF5CFBC1771947](f1_arg1)
-	waitingForPlayers(CodCasterHeaderNonTeamBased, CodCasterPortraitPlayerCard["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04]], function(f4_arg0)
+	CodCasterPortraitPlayerCard = Engine[@"getmodelforcontroller"](f1_arg1)
+	waitingForPlayers(CodCasterHeaderNonTeamBased, CodCasterPortraitPlayerCard["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]], function(f4_arg0)
 		f1_arg0:updateElementState(OverheadMap, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f4_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"],
 		})
 	end, false)
 	CodCasterHeaderNonTeamBased = OverheadMap
 	waitingForPlayers = OverheadMap.subscribeToModel
-	CodCasterPortraitPlayerCard = Engine[0x4DF5CFBC1771947](f1_arg1)
-	waitingForPlayers(CodCasterHeaderNonTeamBased, CodCasterPortraitPlayerCard["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x7EAF988DDEB83EA]], function(f5_arg0)
+	CodCasterPortraitPlayerCard = Engine[@"getmodelforcontroller"](f1_arg1)
+	waitingForPlayers(CodCasterHeaderNonTeamBased, CodCasterPortraitPlayerCard["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"hash_57EAF988DDEB83EA"]], function(f5_arg0)
 		f1_arg0:updateElementState(OverheadMap, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f5_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x7EAF988DDEB83EA],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"hash_57EAF988DDEB83EA"],
 		})
 	end, false)
 	self:addElement(OverheadMap)
@@ -88,7 +88,7 @@ CoD.CodCaster.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 		{
 			stateName = "Invisible",
 			condition = function(menu, element, event)
-				return not CoD.ModelUtility.IsGlobalDataSourceModelValueEqualToEnum(f1_arg1, "DeadSpectate", "playerTeam", Enum[0x13A4717E5AC547][0xE4DDAC9C5C45556])
+				return not CoD.ModelUtility.IsGlobalDataSourceModelValueEqualToEnum(f1_arg1, "DeadSpectate", "playerTeam", Enum[@"team_t"][@"team_spectator"])
 			end,
 		},
 	})
@@ -104,8 +104,8 @@ CoD.CodCaster.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 			modelName = "playerTeam",
 		})
 	end, false)
-	waitingForPlayers.TextBox:setText(Engine[0xF9F1239CFD921FE](0xE26CA69C50088EB))
-	waitingForPlayers.TextBox:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	waitingForPlayers.TextBox:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_E26CA69C50088EB"))
+	waitingForPlayers.TextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	self:addElement(waitingForPlayers)
 	self.waitingForPlayers = waitingForPlayers
 	CodCasterHeaderNonTeamBased = CoD.CodCasterHeaderNonTeamBased.new(f1_arg0, f1_arg1, 0.5, 0.5, -262, 262, 0, 0, 16, 164)
@@ -114,7 +114,7 @@ CoD.CodCaster.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 			stateName = "Visible",
 			condition = function(menu, element, event)
 				local f8_local0
-				if not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x198075B069840DC]) and not ScoreboardVisible(f1_arg1) then
+				if not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_game_ended"]) and not ScoreboardVisible(f1_arg1) then
 					f8_local0 = IsCodCasterProfileValueEqualTo(f1_arg1, "shoutcaster_qs_playerlist", 1)
 					if f8_local0 then
 						f8_local0 = IsCodCasterProfileValueEqualTo(f1_arg1, "shoutcaster_ds_teamscore", 1)
@@ -128,19 +128,19 @@ CoD.CodCaster.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 	})
 	CodCasterPortraitPlayerList = CodCasterHeaderNonTeamBased
 	CodCasterPortraitPlayerCard = CodCasterHeaderNonTeamBased.subscribeToModel
-	local CodCasterAnnouncementFeed = Engine[0x4DF5CFBC1771947](f1_arg1)
-	CodCasterPortraitPlayerCard(CodCasterPortraitPlayerList, CodCasterAnnouncementFeed["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x198075B069840DC]], function(f9_arg0)
+	local CodCasterAnnouncementFeed = Engine[@"getmodelforcontroller"](f1_arg1)
+	CodCasterPortraitPlayerCard(CodCasterPortraitPlayerList, CodCasterAnnouncementFeed["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_game_ended"]], function(f9_arg0)
 		f1_arg0:updateElementState(CodCasterHeaderNonTeamBased, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f9_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x198075B069840DC],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_game_ended"],
 		})
 	end, false)
 	CodCasterPortraitPlayerList = CodCasterHeaderNonTeamBased
 	CodCasterPortraitPlayerCard = CodCasterHeaderNonTeamBased.subscribeToModel
-	CodCasterAnnouncementFeed = Engine[0x4DF5CFBC1771947](f1_arg1)
+	CodCasterAnnouncementFeed = Engine[@"getmodelforcontroller"](f1_arg1)
 	CodCasterPortraitPlayerCard(CodCasterPortraitPlayerList, CodCasterAnnouncementFeed.forceScoreboard, function(f10_arg0)
 		f1_arg0:updateElementState(CodCasterHeaderNonTeamBased, {
 			name = "model_validation",
@@ -152,14 +152,14 @@ CoD.CodCaster.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 	end, false)
 	CodCasterPortraitPlayerList = CodCasterHeaderNonTeamBased
 	CodCasterPortraitPlayerCard = CodCasterHeaderNonTeamBased.subscribeToModel
-	CodCasterAnnouncementFeed = Engine[0x4DF5CFBC1771947](f1_arg1)
-	CodCasterPortraitPlayerCard(CodCasterPortraitPlayerList, CodCasterAnnouncementFeed["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04]], function(f11_arg0)
+	CodCasterAnnouncementFeed = Engine[@"getmodelforcontroller"](f1_arg1)
+	CodCasterPortraitPlayerCard(CodCasterPortraitPlayerList, CodCasterAnnouncementFeed["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]], function(f11_arg0)
 		f1_arg0:updateElementState(CodCasterHeaderNonTeamBased, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f11_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"],
 		})
 	end, false)
 	CodCasterPortraitPlayerList = CodCasterHeaderNonTeamBased
@@ -183,7 +183,7 @@ CoD.CodCaster.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 			stateName = "Visible",
 			condition = function(menu, element, event)
 				local f13_local0
-				if not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x198075B069840DC]) then
+				if not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_game_ended"]) then
 					f13_local0 = IsCodCasterProfileValueEqualTo(f1_arg1, "shoutcaster_qs_playercard", 1)
 					if f13_local0 then
 						if not ScoreboardVisible(f1_arg1) then
@@ -201,14 +201,14 @@ CoD.CodCaster.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 	})
 	CodCasterAnnouncementFeed = CodCasterPortraitPlayerCard
 	CodCasterPortraitPlayerList = CodCasterPortraitPlayerCard.subscribeToModel
-	local CodCasterPortraitTeamScoreBoard = Engine[0x4DF5CFBC1771947](f1_arg1)
-	CodCasterPortraitPlayerList(CodCasterAnnouncementFeed, CodCasterPortraitTeamScoreBoard["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x198075B069840DC]], function(f14_arg0)
+	local CodCasterPortraitTeamScoreBoard = Engine[@"getmodelforcontroller"](f1_arg1)
+	CodCasterPortraitPlayerList(CodCasterAnnouncementFeed, CodCasterPortraitTeamScoreBoard["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_game_ended"]], function(f14_arg0)
 		f1_arg0:updateElementState(CodCasterPortraitPlayerCard, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f14_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x198075B069840DC],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_game_ended"],
 		})
 	end, false)
 	CodCasterAnnouncementFeed = CodCasterPortraitPlayerCard
@@ -225,7 +225,7 @@ CoD.CodCaster.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 	end, false)
 	CodCasterAnnouncementFeed = CodCasterPortraitPlayerCard
 	CodCasterPortraitPlayerList = CodCasterPortraitPlayerCard.subscribeToModel
-	CodCasterPortraitTeamScoreBoard = Engine[0x4DF5CFBC1771947](f1_arg1)
+	CodCasterPortraitTeamScoreBoard = Engine[@"getmodelforcontroller"](f1_arg1)
 	CodCasterPortraitPlayerList(CodCasterAnnouncementFeed, CodCasterPortraitTeamScoreBoard.forceScoreboard, function(f16_arg0)
 		f1_arg0:updateElementState(CodCasterPortraitPlayerCard, {
 			name = "model_validation",
@@ -237,26 +237,26 @@ CoD.CodCaster.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 	end, false)
 	CodCasterAnnouncementFeed = CodCasterPortraitPlayerCard
 	CodCasterPortraitPlayerList = CodCasterPortraitPlayerCard.subscribeToModel
-	CodCasterPortraitTeamScoreBoard = Engine[0x4DF5CFBC1771947](f1_arg1)
-	CodCasterPortraitPlayerList(CodCasterAnnouncementFeed, CodCasterPortraitTeamScoreBoard["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04]], function(f17_arg0)
+	CodCasterPortraitTeamScoreBoard = Engine[@"getmodelforcontroller"](f1_arg1)
+	CodCasterPortraitPlayerList(CodCasterAnnouncementFeed, CodCasterPortraitTeamScoreBoard["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]], function(f17_arg0)
 		f1_arg0:updateElementState(CodCasterPortraitPlayerCard, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f17_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"],
 		})
 	end, false)
 	CodCasterAnnouncementFeed = CodCasterPortraitPlayerCard
 	CodCasterPortraitPlayerList = CodCasterPortraitPlayerCard.subscribeToModel
-	CodCasterPortraitTeamScoreBoard = Engine[0x4DF5CFBC1771947](f1_arg1)
-	CodCasterPortraitPlayerList(CodCasterAnnouncementFeed, CodCasterPortraitTeamScoreBoard["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x7EAF988DDEB83EA]], function(f18_arg0)
+	CodCasterPortraitTeamScoreBoard = Engine[@"getmodelforcontroller"](f1_arg1)
+	CodCasterPortraitPlayerList(CodCasterAnnouncementFeed, CodCasterPortraitTeamScoreBoard["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"hash_57EAF988DDEB83EA"]], function(f18_arg0)
 		f1_arg0:updateElementState(CodCasterPortraitPlayerCard, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f18_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x7EAF988DDEB83EA],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"hash_57EAF988DDEB83EA"],
 		})
 	end, false)
 	CodCasterPortraitPlayerCard:subscribeToGlobalModel(f1_arg1, "DeadSpectate", "playerIndex", function(model)
@@ -281,7 +281,7 @@ CoD.CodCaster.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 			condition = function(menu, element, event)
 				local f21_local0 = IsCodCasterProfileValueEqualTo(f1_arg1, "shoutcaster_qs_playerlist", 1)
 				if f21_local0 then
-					if not ScoreboardVisible(f1_arg1) and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x198075B069840DC]) then
+					if not ScoreboardVisible(f1_arg1) and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_game_ended"]) then
 						f21_local0 = CoD.CodCasterUtility.CodCasterShowPortraitList(f1_arg1)
 					else
 						f21_local0 = false
@@ -305,7 +305,7 @@ CoD.CodCaster.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 	end, false)
 	CodCasterPortraitTeamScoreBoard = CodCasterPortraitPlayerList
 	CodCasterAnnouncementFeed = CodCasterPortraitPlayerList.subscribeToModel
-	CodCasterObjectiveStatus = Engine[0x4DF5CFBC1771947](f1_arg1)
+	CodCasterObjectiveStatus = Engine[@"getmodelforcontroller"](f1_arg1)
 	CodCasterAnnouncementFeed(CodCasterPortraitTeamScoreBoard, CodCasterObjectiveStatus.forceScoreboard, function(f23_arg0)
 		f1_arg0:updateElementState(CodCasterPortraitPlayerList, {
 			name = "model_validation",
@@ -317,38 +317,38 @@ CoD.CodCaster.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 	end, false)
 	CodCasterPortraitTeamScoreBoard = CodCasterPortraitPlayerList
 	CodCasterAnnouncementFeed = CodCasterPortraitPlayerList.subscribeToModel
-	CodCasterObjectiveStatus = Engine[0x4DF5CFBC1771947](f1_arg1)
-	CodCasterAnnouncementFeed(CodCasterPortraitTeamScoreBoard, CodCasterObjectiveStatus["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04]], function(f24_arg0)
+	CodCasterObjectiveStatus = Engine[@"getmodelforcontroller"](f1_arg1)
+	CodCasterAnnouncementFeed(CodCasterPortraitTeamScoreBoard, CodCasterObjectiveStatus["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]], function(f24_arg0)
 		f1_arg0:updateElementState(CodCasterPortraitPlayerList, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f24_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"],
 		})
 	end, false)
 	CodCasterPortraitTeamScoreBoard = CodCasterPortraitPlayerList
 	CodCasterAnnouncementFeed = CodCasterPortraitPlayerList.subscribeToModel
-	CodCasterObjectiveStatus = Engine[0x4DF5CFBC1771947](f1_arg1)
-	CodCasterAnnouncementFeed(CodCasterPortraitTeamScoreBoard, CodCasterObjectiveStatus["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x198075B069840DC]], function(f25_arg0)
+	CodCasterObjectiveStatus = Engine[@"getmodelforcontroller"](f1_arg1)
+	CodCasterAnnouncementFeed(CodCasterPortraitTeamScoreBoard, CodCasterObjectiveStatus["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_game_ended"]], function(f25_arg0)
 		f1_arg0:updateElementState(CodCasterPortraitPlayerList, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f25_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x198075B069840DC],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_game_ended"],
 		})
 	end, false)
 	CodCasterPortraitTeamScoreBoard = CodCasterPortraitPlayerList
 	CodCasterAnnouncementFeed = CodCasterPortraitPlayerList.subscribeToModel
-	CodCasterObjectiveStatus = Engine[0x4DF5CFBC1771947](f1_arg1)
-	CodCasterAnnouncementFeed(CodCasterPortraitTeamScoreBoard, CodCasterObjectiveStatus["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x3DA38CAFF843C18]], function(f26_arg0)
+	CodCasterObjectiveStatus = Engine[@"getmodelforcontroller"](f1_arg1)
+	CodCasterAnnouncementFeed(CodCasterPortraitTeamScoreBoard, CodCasterObjectiveStatus["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"hash_23DA38CAFF843C18"]], function(f26_arg0)
 		f1_arg0:updateElementState(CodCasterPortraitPlayerList, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f26_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x3DA38CAFF843C18],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"hash_23DA38CAFF843C18"],
 		})
 	end, false)
 	self:addElement(CodCasterPortraitPlayerList)
@@ -364,7 +364,7 @@ CoD.CodCaster.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 		{
 			stateName = "Hidden",
 			condition = function(menu, element, event)
-				return Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x198075B069840DC])
+				return Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_game_ended"])
 			end,
 		},
 	})
@@ -382,7 +382,7 @@ CoD.CodCaster.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 	end, false)
 	CodCasterObjectiveStatus = CodCasterAnnouncementFeed
 	CodCasterPortraitTeamScoreBoard = CodCasterAnnouncementFeed.subscribeToModel
-	CodCasterPlayerList = Engine[0x4DF5CFBC1771947](f1_arg1)
+	CodCasterPlayerList = Engine[@"getmodelforcontroller"](f1_arg1)
 	CodCasterPortraitTeamScoreBoard(CodCasterObjectiveStatus, CodCasterPlayerList.forceScoreboard, function(f30_arg0)
 		f1_arg0:updateElementState(CodCasterAnnouncementFeed, {
 			name = "model_validation",
@@ -394,26 +394,26 @@ CoD.CodCaster.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 	end, false)
 	CodCasterObjectiveStatus = CodCasterAnnouncementFeed
 	CodCasterPortraitTeamScoreBoard = CodCasterAnnouncementFeed.subscribeToModel
-	CodCasterPlayerList = Engine[0x4DF5CFBC1771947](f1_arg1)
-	CodCasterPortraitTeamScoreBoard(CodCasterObjectiveStatus, CodCasterPlayerList["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04]], function(f31_arg0)
+	CodCasterPlayerList = Engine[@"getmodelforcontroller"](f1_arg1)
+	CodCasterPortraitTeamScoreBoard(CodCasterObjectiveStatus, CodCasterPlayerList["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]], function(f31_arg0)
 		f1_arg0:updateElementState(CodCasterAnnouncementFeed, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f31_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"],
 		})
 	end, false)
 	CodCasterObjectiveStatus = CodCasterAnnouncementFeed
 	CodCasterPortraitTeamScoreBoard = CodCasterAnnouncementFeed.subscribeToModel
-	CodCasterPlayerList = Engine[0x4DF5CFBC1771947](f1_arg1)
-	CodCasterPortraitTeamScoreBoard(CodCasterObjectiveStatus, CodCasterPlayerList["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x198075B069840DC]], function(f32_arg0)
+	CodCasterPlayerList = Engine[@"getmodelforcontroller"](f1_arg1)
+	CodCasterPortraitTeamScoreBoard(CodCasterObjectiveStatus, CodCasterPlayerList["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_game_ended"]], function(f32_arg0)
 		f1_arg0:updateElementState(CodCasterAnnouncementFeed, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f32_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x198075B069840DC],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_game_ended"],
 		})
 	end, false)
 	self:addElement(CodCasterAnnouncementFeed)
@@ -425,7 +425,7 @@ CoD.CodCaster.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 			condition = function(menu, element, event)
 				local f33_local0 = CoD.CodCasterUtility.CurrentSpectatedTeamEqualTo(f1_arg1, 1)
 				if f33_local0 then
-					if not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x198075B069840DC]) and not ScoreboardVisible(f1_arg1) then
+					if not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_game_ended"]) and not ScoreboardVisible(f1_arg1) then
 						f33_local0 = IsCodCasterProfileValueEqualTo(f1_arg1, "shoutcaster_qs_playerlist", 1)
 						if f33_local0 then
 							f33_local0 = IsCodCasterProfileValueEqualTo(f1_arg1, "shoutcaster_ds_teamscore", 1)
@@ -442,7 +442,7 @@ CoD.CodCaster.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 			condition = function(menu, element, event)
 				local f34_local0 = CoD.CodCasterUtility.CurrentSpectatedTeamEqualTo(f1_arg1, 2)
 				if f34_local0 then
-					if not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x198075B069840DC]) and not ScoreboardVisible(f1_arg1) then
+					if not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_game_ended"]) and not ScoreboardVisible(f1_arg1) then
 						f34_local0 = IsCodCasterProfileValueEqualTo(f1_arg1, "shoutcaster_qs_playerlist", 1)
 						if f34_local0 then
 							f34_local0 = IsCodCasterProfileValueEqualTo(f1_arg1, "shoutcaster_ds_teamscore", 1)
@@ -457,7 +457,7 @@ CoD.CodCaster.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 	})
 	CodCasterPlayerList = CodCasterPortraitTeamScoreBoard
 	CodCasterObjectiveStatus = CodCasterPortraitTeamScoreBoard.subscribeToModel
-	local CodCasterLoadoutTalents = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local CodCasterLoadoutTalents = Engine[@"getmodelforcontroller"](f1_arg1)
 	CodCasterObjectiveStatus(CodCasterPlayerList, CodCasterLoadoutTalents["deadSpectator.playerTeam"], function(f35_arg0)
 		f1_arg0:updateElementState(CodCasterPortraitTeamScoreBoard, {
 			name = "model_validation",
@@ -469,19 +469,19 @@ CoD.CodCaster.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 	end, false)
 	CodCasterPlayerList = CodCasterPortraitTeamScoreBoard
 	CodCasterObjectiveStatus = CodCasterPortraitTeamScoreBoard.subscribeToModel
-	CodCasterLoadoutTalents = Engine[0x4DF5CFBC1771947](f1_arg1)
-	CodCasterObjectiveStatus(CodCasterPlayerList, CodCasterLoadoutTalents["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x198075B069840DC]], function(f36_arg0)
+	CodCasterLoadoutTalents = Engine[@"getmodelforcontroller"](f1_arg1)
+	CodCasterObjectiveStatus(CodCasterPlayerList, CodCasterLoadoutTalents["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_game_ended"]], function(f36_arg0)
 		f1_arg0:updateElementState(CodCasterPortraitTeamScoreBoard, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f36_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x198075B069840DC],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_game_ended"],
 		})
 	end, false)
 	CodCasterPlayerList = CodCasterPortraitTeamScoreBoard
 	CodCasterObjectiveStatus = CodCasterPortraitTeamScoreBoard.subscribeToModel
-	CodCasterLoadoutTalents = Engine[0x4DF5CFBC1771947](f1_arg1)
+	CodCasterLoadoutTalents = Engine[@"getmodelforcontroller"](f1_arg1)
 	CodCasterObjectiveStatus(CodCasterPlayerList, CodCasterLoadoutTalents.forceScoreboard, function(f37_arg0)
 		f1_arg0:updateElementState(CodCasterPortraitTeamScoreBoard, {
 			name = "model_validation",
@@ -493,14 +493,14 @@ CoD.CodCaster.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 	end, false)
 	CodCasterPlayerList = CodCasterPortraitTeamScoreBoard
 	CodCasterObjectiveStatus = CodCasterPortraitTeamScoreBoard.subscribeToModel
-	CodCasterLoadoutTalents = Engine[0x4DF5CFBC1771947](f1_arg1)
-	CodCasterObjectiveStatus(CodCasterPlayerList, CodCasterLoadoutTalents["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04]], function(f38_arg0)
+	CodCasterLoadoutTalents = Engine[@"getmodelforcontroller"](f1_arg1)
+	CodCasterObjectiveStatus(CodCasterPlayerList, CodCasterLoadoutTalents["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]], function(f38_arg0)
 		f1_arg0:updateElementState(CodCasterPortraitTeamScoreBoard, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f38_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"],
 		})
 	end, false)
 	CodCasterPlayerList = CodCasterPortraitTeamScoreBoard
@@ -523,7 +523,7 @@ CoD.CodCaster.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 			stateName = "Visible",
 			condition = function(menu, element, event)
 				local f40_local0
-				if not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x198075B069840DC]) and not ScoreboardVisible(f1_arg1) then
+				if not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_game_ended"]) and not ScoreboardVisible(f1_arg1) then
 					f40_local0 = IsCodCasterProfileValueEqualTo(f1_arg1, "shoutcaster_qs_playerlist", 1)
 					if f40_local0 then
 						f40_local0 = IsCodCasterProfileValueEqualTo(f1_arg1, "shoutcaster_ds_teamscore", 1)
@@ -540,19 +540,19 @@ CoD.CodCaster.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 	})
 	CodCasterLoadoutTalents = CodCasterObjectiveStatus
 	CodCasterPlayerList = CodCasterObjectiveStatus.subscribeToModel
-	local CodCasterLoadoutPrimary = Engine[0x4DF5CFBC1771947](f1_arg1)
-	CodCasterPlayerList(CodCasterLoadoutTalents, CodCasterLoadoutPrimary["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x198075B069840DC]], function(f41_arg0)
+	local CodCasterLoadoutPrimary = Engine[@"getmodelforcontroller"](f1_arg1)
+	CodCasterPlayerList(CodCasterLoadoutTalents, CodCasterLoadoutPrimary["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_game_ended"]], function(f41_arg0)
 		f1_arg0:updateElementState(CodCasterObjectiveStatus, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f41_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x198075B069840DC],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_game_ended"],
 		})
 	end, false)
 	CodCasterLoadoutTalents = CodCasterObjectiveStatus
 	CodCasterPlayerList = CodCasterObjectiveStatus.subscribeToModel
-	CodCasterLoadoutPrimary = Engine[0x4DF5CFBC1771947](f1_arg1)
+	CodCasterLoadoutPrimary = Engine[@"getmodelforcontroller"](f1_arg1)
 	CodCasterPlayerList(CodCasterLoadoutTalents, CodCasterLoadoutPrimary.forceScoreboard, function(f42_arg0)
 		f1_arg0:updateElementState(CodCasterObjectiveStatus, {
 			name = "model_validation",
@@ -564,14 +564,14 @@ CoD.CodCaster.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 	end, false)
 	CodCasterLoadoutTalents = CodCasterObjectiveStatus
 	CodCasterPlayerList = CodCasterObjectiveStatus.subscribeToModel
-	CodCasterLoadoutPrimary = Engine[0x4DF5CFBC1771947](f1_arg1)
-	CodCasterPlayerList(CodCasterLoadoutTalents, CodCasterLoadoutPrimary["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04]], function(f43_arg0)
+	CodCasterLoadoutPrimary = Engine[@"getmodelforcontroller"](f1_arg1)
+	CodCasterPlayerList(CodCasterLoadoutTalents, CodCasterLoadoutPrimary["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]], function(f43_arg0)
 		f1_arg0:updateElementState(CodCasterObjectiveStatus, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f43_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"],
 		})
 	end, false)
 	CodCasterLoadoutTalents = CodCasterObjectiveStatus
@@ -594,7 +594,7 @@ CoD.CodCaster.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 			stateName = "Visible",
 			condition = function(menu, element, event)
 				local f45_local0
-				if not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x198075B069840DC]) and not ScoreboardVisible(f1_arg1) then
+				if not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_game_ended"]) and not ScoreboardVisible(f1_arg1) then
 					f45_local0 = IsCodCasterProfileValueEqualTo(f1_arg1, "shoutcaster_qs_playerlist", 1)
 					if f45_local0 then
 						f45_local0 = CoD.CodCasterUtility.CodCasterShowPlayerList(self, f1_arg1)
@@ -615,7 +615,7 @@ CoD.CodCaster.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 			stateName = "NonTeamBased",
 			condition = function(menu, element, event)
 				local f46_local0
-				if not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x198075B069840DC]) and not ScoreboardVisible(f1_arg1) then
+				if not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_game_ended"]) and not ScoreboardVisible(f1_arg1) then
 					f46_local0 = IsCodCasterProfileValueEqualTo(f1_arg1, "shoutcaster_qs_playerlist", 1)
 					if f46_local0 then
 						f46_local0 = CoD.CodCasterUtility.CodCasterShowPlayerList(self, f1_arg1)
@@ -636,19 +636,19 @@ CoD.CodCaster.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 	})
 	CodCasterLoadoutPrimary = CodCasterPlayerList
 	CodCasterLoadoutTalents = CodCasterPlayerList.subscribeToModel
-	local CodCasterLoadoutSecondary = Engine[0x4DF5CFBC1771947](f1_arg1)
-	CodCasterLoadoutTalents(CodCasterLoadoutPrimary, CodCasterLoadoutSecondary["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x198075B069840DC]], function(f47_arg0)
+	local CodCasterLoadoutSecondary = Engine[@"getmodelforcontroller"](f1_arg1)
+	CodCasterLoadoutTalents(CodCasterLoadoutPrimary, CodCasterLoadoutSecondary["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_game_ended"]], function(f47_arg0)
 		f1_arg0:updateElementState(CodCasterPlayerList, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f47_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x198075B069840DC],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_game_ended"],
 		})
 	end, false)
 	CodCasterLoadoutPrimary = CodCasterPlayerList
 	CodCasterLoadoutTalents = CodCasterPlayerList.subscribeToModel
-	CodCasterLoadoutSecondary = Engine[0x4DF5CFBC1771947](f1_arg1)
+	CodCasterLoadoutSecondary = Engine[@"getmodelforcontroller"](f1_arg1)
 	CodCasterLoadoutTalents(CodCasterLoadoutPrimary, CodCasterLoadoutSecondary.forceScoreboard, function(f48_arg0)
 		f1_arg0:updateElementState(CodCasterPlayerList, {
 			name = "model_validation",
@@ -660,14 +660,14 @@ CoD.CodCaster.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 	end, false)
 	CodCasterLoadoutPrimary = CodCasterPlayerList
 	CodCasterLoadoutTalents = CodCasterPlayerList.subscribeToModel
-	CodCasterLoadoutSecondary = Engine[0x4DF5CFBC1771947](f1_arg1)
-	CodCasterLoadoutTalents(CodCasterLoadoutPrimary, CodCasterLoadoutSecondary["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04]], function(f49_arg0)
+	CodCasterLoadoutSecondary = Engine[@"getmodelforcontroller"](f1_arg1)
+	CodCasterLoadoutTalents(CodCasterLoadoutPrimary, CodCasterLoadoutSecondary["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]], function(f49_arg0)
 		f1_arg0:updateElementState(CodCasterPlayerList, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f49_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"],
 		})
 	end, false)
 	CodCasterLoadoutPrimary = CodCasterPlayerList
@@ -684,19 +684,19 @@ CoD.CodCaster.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 	end, false)
 	CodCasterLoadoutPrimary = CodCasterPlayerList
 	CodCasterLoadoutTalents = CodCasterPlayerList.subscribeToModel
-	CodCasterLoadoutSecondary = Engine[0x4DF5CFBC1771947](f1_arg1)
-	CodCasterLoadoutTalents(CodCasterLoadoutPrimary, CodCasterLoadoutSecondary["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x3DA38CAFF843C18]], function(f51_arg0)
+	CodCasterLoadoutSecondary = Engine[@"getmodelforcontroller"](f1_arg1)
+	CodCasterLoadoutTalents(CodCasterLoadoutPrimary, CodCasterLoadoutSecondary["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"hash_23DA38CAFF843C18"]], function(f51_arg0)
 		f1_arg0:updateElementState(CodCasterPlayerList, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f51_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x3DA38CAFF843C18],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"hash_23DA38CAFF843C18"],
 		})
 	end, false)
 	CodCasterLoadoutPrimary = CodCasterPlayerList
 	CodCasterLoadoutTalents = CodCasterPlayerList.subscribeToModel
-	CodCasterLoadoutSecondary = Engine[0x8DF2E5447F384B9]()
+	CodCasterLoadoutSecondary = Engine[@"getglobalmodel"]()
 	CodCasterLoadoutTalents(CodCasterLoadoutPrimary, CodCasterLoadoutSecondary["MapVote.mapVoteMapPreviousGametype"], function(f52_arg0)
 		f1_arg0:updateElementState(CodCasterPlayerList, {
 			name = "model_validation",
@@ -708,7 +708,7 @@ CoD.CodCaster.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 	end, false)
 	CodCasterLoadoutPrimary = CodCasterPlayerList
 	CodCasterLoadoutTalents = CodCasterPlayerList.subscribeToModel
-	CodCasterLoadoutSecondary = Engine[0x4DF5CFBC1771947](f1_arg1)
+	CodCasterLoadoutSecondary = Engine[@"getmodelforcontroller"](f1_arg1)
 	CodCasterLoadoutTalents(CodCasterLoadoutPrimary, CodCasterLoadoutSecondary["CodCaster.showKeyboard"], function(f53_arg0)
 		f1_arg0:updateElementState(CodCasterPlayerList, {
 			name = "model_validation",
@@ -740,13 +740,13 @@ CoD.CodCaster.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 		{
 			stateName = "Visible",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsModelValueTrue(f1_arg1, "CodCaster.showKeyboard") and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04])
+				return CoD.ModelUtility.IsModelValueTrue(f1_arg1, "CodCaster.showKeyboard") and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_scoreboard_open"])
 			end,
 		},
 	})
 	local f1_local15 = CodCasterKeyboard
 	local CodCasterMiniMapPosition = CodCasterKeyboard.subscribeToModel
-	local f1_local17 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local17 = Engine[@"getmodelforcontroller"](f1_arg1)
 	CodCasterMiniMapPosition(f1_local15, f1_local17["CodCaster.showKeyboard"], function(f55_arg0)
 		f1_arg0:updateElementState(CodCasterKeyboard, {
 			name = "model_validation",
@@ -758,14 +758,14 @@ CoD.CodCaster.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 	end, false)
 	f1_local15 = CodCasterKeyboard
 	CodCasterMiniMapPosition = CodCasterKeyboard.subscribeToModel
-	f1_local17 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	CodCasterMiniMapPosition(f1_local15, f1_local17["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04]], function(f56_arg0)
+	f1_local17 = Engine[@"getmodelforcontroller"](f1_arg1)
+	CodCasterMiniMapPosition(f1_local15, f1_local17["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]], function(f56_arg0)
 		f1_arg0:updateElementState(CodCasterKeyboard, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f56_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"],
 		})
 	end, false)
 	self:addElement(CodCasterKeyboard)
@@ -777,13 +777,13 @@ CoD.CodCaster.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 		{
 			stateName = "Hidden",
 			condition = function(menu, element, event)
-				local f57_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x1CDCB451655ABCF])
+				local f57_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_final_killcam"])
 				if not f57_local0 then
-					f57_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x198075B069840DC])
+					f57_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_game_ended"])
 					if not f57_local0 then
-						f57_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F])
+						f57_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_play_of_the_match"])
 						if not f57_local0 then
-							f57_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x4828BED794DA0A5])
+							f57_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_round_end_killcam"])
 						end
 					end
 				end
@@ -800,7 +800,7 @@ CoD.CodCaster.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 			stateName = "VisibleLoadoutAndNotTeamBased",
 			condition = function(menu, element, event)
 				local f59_local0
-				if not IsGametypeTeambased() and not CoD.CodCasterUtility.CodCasterIsInAerialCam(f1_arg1) and not ScoreboardVisible(f1_arg1) and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x1CDCB451655ABCF]) and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x198075B069840DC]) and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F]) and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x4828BED794DA0A5]) and not CoD.HUDUtility.IsGameTypeEqualToString("gun") then
+				if not IsGametypeTeambased() and not CoD.CodCasterUtility.CodCasterIsInAerialCam(f1_arg1) and not ScoreboardVisible(f1_arg1) and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_final_killcam"]) and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_game_ended"]) and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_play_of_the_match"]) and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_round_end_killcam"]) and not CoD.HUDUtility.IsGameTypeEqualToString("gun") then
 					f59_local0 = IsCodCasterProfileValueEqualTo(f1_arg1, "shoutcaster_qs_loadout", 1)
 					if f59_local0 then
 						f59_local0 = not CoD.HUDUtility.IsGameTypeEqualToString("oic")
@@ -815,7 +815,7 @@ CoD.CodCaster.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 			stateName = "VisibleLoadout",
 			condition = function(menu, element, event)
 				local f60_local0
-				if not CoD.CodCasterUtility.CodCasterIsInAerialCam(f1_arg1) and not ScoreboardVisible(f1_arg1) and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x1CDCB451655ABCF]) and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x198075B069840DC]) and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x6668F0686232679]) and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F]) and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x4828BED794DA0A5]) then
+				if not CoD.CodCasterUtility.CodCasterIsInAerialCam(f1_arg1) and not ScoreboardVisible(f1_arg1) and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_final_killcam"]) and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_game_ended"]) and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_in_vehicle"]) and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_play_of_the_match"]) and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_round_end_killcam"]) then
 					f60_local0 = IsCodCasterProfileValueEqualTo(f1_arg1, "shoutcaster_qs_loadout", 1)
 					if f60_local0 then
 						if not CoD.HUDUtility.IsGameTypeEqualToString("gun") then
@@ -839,55 +839,55 @@ CoD.CodCaster.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 	})
 	f1_local17 = self
 	f1_local15 = self.subscribeToModel
-	local f1_local18 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local15(f1_local17, f1_local18["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x1CDCB451655ABCF]], function(f62_arg0)
+	local f1_local18 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local15(f1_local17, f1_local18["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_final_killcam"]], function(f62_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f62_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x1CDCB451655ABCF],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_final_killcam"],
 		})
 	end, false)
 	f1_local17 = self
 	f1_local15 = self.subscribeToModel
-	f1_local18 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local15(f1_local17, f1_local18["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x198075B069840DC]], function(f63_arg0)
+	f1_local18 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local15(f1_local17, f1_local18["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_game_ended"]], function(f63_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f63_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x198075B069840DC],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_game_ended"],
 		})
 	end, false)
 	f1_local17 = self
 	f1_local15 = self.subscribeToModel
-	f1_local18 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local15(f1_local17, f1_local18["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F]], function(f64_arg0)
+	f1_local18 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local15(f1_local17, f1_local18["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_play_of_the_match"]], function(f64_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f64_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_play_of_the_match"],
 		})
 	end, false)
 	f1_local17 = self
 	f1_local15 = self.subscribeToModel
-	f1_local18 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local15(f1_local17, f1_local18["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x4828BED794DA0A5]], function(f65_arg0)
+	f1_local18 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local15(f1_local17, f1_local18["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_round_end_killcam"]], function(f65_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f65_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x4828BED794DA0A5],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_round_end_killcam"],
 		})
 	end, false)
 	f1_local17 = self
 	f1_local15 = self.subscribeToModel
-	f1_local18 = Engine[0x8DF2E5447F384B9]()
+	f1_local18 = Engine[@"getglobalmodel"]()
 	f1_local15(f1_local17, f1_local18["scoreboard.team1.count"], function(f66_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -899,7 +899,7 @@ CoD.CodCaster.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 	end, false)
 	f1_local17 = self
 	f1_local15 = self.subscribeToModel
-	f1_local18 = Engine[0x8DF2E5447F384B9]()
+	f1_local18 = Engine[@"getglobalmodel"]()
 	f1_local15(f1_local17, f1_local18["scoreboard.team2.count"], function(f67_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -911,19 +911,19 @@ CoD.CodCaster.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 	end, false)
 	f1_local17 = self
 	f1_local15 = self.subscribeToModel
-	f1_local18 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local15(f1_local17, f1_local18["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x7EAF988DDEB83EA]], function(f68_arg0)
+	f1_local18 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local15(f1_local17, f1_local18["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"hash_57EAF988DDEB83EA"]], function(f68_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f68_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x7EAF988DDEB83EA],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"hash_57EAF988DDEB83EA"],
 		})
 	end, false)
 	f1_local17 = self
 	f1_local15 = self.subscribeToModel
-	f1_local18 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local18 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local15(f1_local17, f1_local18.forceScoreboard, function(f69_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -935,14 +935,14 @@ CoD.CodCaster.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 	end, false)
 	f1_local17 = self
 	f1_local15 = self.subscribeToModel
-	f1_local18 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local15(f1_local17, f1_local18["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04]], function(f70_arg0)
+	f1_local18 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local15(f1_local17, f1_local18["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]], function(f70_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f70_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"],
 		})
 	end, false)
 	f1_local17 = self
@@ -959,162 +959,162 @@ CoD.CodCaster.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 	end, false)
 	f1_local17 = self
 	f1_local15 = self.subscribeToModel
-	f1_local18 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local15(f1_local17, f1_local18["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x6668F0686232679]], function(f72_arg0)
+	f1_local18 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local15(f1_local17, f1_local18["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_vehicle"]], function(f72_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f72_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x6668F0686232679],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_vehicle"],
 		})
 	end, false)
 	f1_local17 = self
 	f1_local15 = self.subscribeToModel
-	f1_local18 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local18 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local15(f1_local17, f1_local18["CodCaster.showFullScreenMap"], function(f73_arg0, f73_arg1)
-		CoD.Menu.UpdateButtonShownState(f73_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x93AB4C84F113EE1])
-		CoD.Menu.UpdateButtonShownState(f73_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
+		CoD.Menu.UpdateButtonShownState(f73_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_back"])
+		CoD.Menu.UpdateButtonShownState(f73_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
 	end, false)
 	f1_local17 = self
 	f1_local15 = self.subscribeToModel
-	f1_local18 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local18 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local15(f1_local17, f1_local18["CodCaster.showSettingsSideBar"], function(f74_arg0, f74_arg1)
-		CoD.Menu.UpdateButtonShownState(f74_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x93AB4C84F113EE1])
+		CoD.Menu.UpdateButtonShownState(f74_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_back"])
 	end, false)
 	f1_local17 = self
 	f1_local15 = self.subscribeToModel
-	f1_local18 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local15(f1_local17, f1_local18["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]], function(f75_arg0, f75_arg1)
-		CoD.Menu.UpdateButtonShownState(f75_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x93AB4C84F113EE1])
-		CoD.Menu.UpdateButtonShownState(f75_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
-		CoD.Menu.UpdateButtonShownState(f75_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(f75_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC])
-		CoD.Menu.UpdateButtonShownState(f75_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA])
-		CoD.Menu.UpdateButtonShownState(f75_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x57783F8DA4AAEF])
-		CoD.Menu.UpdateButtonShownState(f75_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
-		CoD.Menu.UpdateButtonShownState(f75_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x571F08AD84807E0])
-		CoD.Menu.UpdateButtonShownState(f75_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x4B11D2B20C75A7F])
-		CoD.Menu.UpdateButtonShownState(f75_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xD4C15FE32148D3A])
+	f1_local18 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local15(f1_local17, f1_local18["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_ui_active"]], function(f75_arg0, f75_arg1)
+		CoD.Menu.UpdateButtonShownState(f75_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_back"])
+		CoD.Menu.UpdateButtonShownState(f75_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+		CoD.Menu.UpdateButtonShownState(f75_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(f75_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_ltrig"])
+		CoD.Menu.UpdateButtonShownState(f75_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_rtrig"])
+		CoD.Menu.UpdateButtonShownState(f75_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_left"])
+		CoD.Menu.UpdateButtonShownState(f75_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_none"])
+		CoD.Menu.UpdateButtonShownState(f75_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_right"])
+		CoD.Menu.UpdateButtonShownState(f75_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_up"])
+		CoD.Menu.UpdateButtonShownState(f75_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_down"])
 	end, false)
 	f1_local17 = self
 	f1_local15 = self.subscribeToModel
-	f1_local18 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local15(f1_local17, f1_local18["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x7EAF988DDEB83EA]], function(f76_arg0, f76_arg1)
-		CoD.Menu.UpdateButtonShownState(f76_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
-		CoD.Menu.UpdateButtonShownState(f76_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x57783F8DA4AAEF])
-		CoD.Menu.UpdateButtonShownState(f76_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
-		CoD.Menu.UpdateButtonShownState(f76_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x571F08AD84807E0])
-		CoD.Menu.UpdateButtonShownState(f76_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x4B11D2B20C75A7F])
-		CoD.Menu.UpdateButtonShownState(f76_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xD4C15FE32148D3A])
+	f1_local18 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local15(f1_local17, f1_local18["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"hash_57EAF988DDEB83EA"]], function(f76_arg0, f76_arg1)
+		CoD.Menu.UpdateButtonShownState(f76_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+		CoD.Menu.UpdateButtonShownState(f76_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_left"])
+		CoD.Menu.UpdateButtonShownState(f76_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_none"])
+		CoD.Menu.UpdateButtonShownState(f76_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_right"])
+		CoD.Menu.UpdateButtonShownState(f76_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_up"])
+		CoD.Menu.UpdateButtonShownState(f76_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_down"])
 	end, false)
 	f1_local17 = self
 	f1_local15 = self.subscribeToModel
 	f1_local18 = DataSources.CodCaster.getModel(f1_arg1)
 	f1_local15(f1_local17, f1_local18.profileSettingsUpdated, function(f77_arg0, f77_arg1)
-		CoD.Menu.UpdateButtonShownState(f77_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A])
-		CoD.Menu.UpdateButtonShownState(f77_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(f77_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbb_pscircle"])
+		CoD.Menu.UpdateButtonShownState(f77_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_none"])
 	end, false)
 	self:appendEventHandler("input_source_changed", function(f78_arg0, f78_arg1)
 		f78_arg1.menu = f78_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f78_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A])
-		CoD.Menu.UpdateButtonShownState(f78_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f78_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbb_pscircle"])
+		CoD.Menu.UpdateButtonShownState(f78_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	f1_local17 = self
 	f1_local15 = self.subscribeToModel
-	f1_local18 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local18 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local15(f1_local17, f1_local18.LastInput, function(f79_arg0, f79_arg1)
-		CoD.Menu.UpdateButtonShownState(f79_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A])
-		CoD.Menu.UpdateButtonShownState(f79_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f79_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbb_pscircle"])
+		CoD.Menu.UpdateButtonShownState(f79_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	f1_local17 = self
 	f1_local15 = self.subscribeToModel
-	f1_local18 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local18 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local15(f1_local17, f1_local18.forceScoreboard, function(f80_arg0, f80_arg1)
-		CoD.Menu.UpdateButtonShownState(f80_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(f80_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC])
-		CoD.Menu.UpdateButtonShownState(f80_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA])
-		CoD.Menu.UpdateButtonShownState(f80_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x57783F8DA4AAEF])
-		CoD.Menu.UpdateButtonShownState(f80_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
-		CoD.Menu.UpdateButtonShownState(f80_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x571F08AD84807E0])
-		CoD.Menu.UpdateButtonShownState(f80_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x4B11D2B20C75A7F])
-		CoD.Menu.UpdateButtonShownState(f80_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xD4C15FE32148D3A])
+		CoD.Menu.UpdateButtonShownState(f80_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(f80_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_ltrig"])
+		CoD.Menu.UpdateButtonShownState(f80_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_rtrig"])
+		CoD.Menu.UpdateButtonShownState(f80_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_left"])
+		CoD.Menu.UpdateButtonShownState(f80_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_none"])
+		CoD.Menu.UpdateButtonShownState(f80_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_right"])
+		CoD.Menu.UpdateButtonShownState(f80_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_up"])
+		CoD.Menu.UpdateButtonShownState(f80_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_down"])
 	end, false)
 	f1_local17 = self
 	f1_local15 = self.subscribeToModel
-	f1_local18 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local15(f1_local17, f1_local18["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04]], function(f81_arg0, f81_arg1)
-		CoD.Menu.UpdateButtonShownState(f81_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(f81_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC])
-		CoD.Menu.UpdateButtonShownState(f81_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA])
-		CoD.Menu.UpdateButtonShownState(f81_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x57783F8DA4AAEF])
-		CoD.Menu.UpdateButtonShownState(f81_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
-		CoD.Menu.UpdateButtonShownState(f81_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x571F08AD84807E0])
-		CoD.Menu.UpdateButtonShownState(f81_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x4B11D2B20C75A7F])
-		CoD.Menu.UpdateButtonShownState(f81_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xD4C15FE32148D3A])
+	f1_local18 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local15(f1_local17, f1_local18["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]], function(f81_arg0, f81_arg1)
+		CoD.Menu.UpdateButtonShownState(f81_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(f81_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_ltrig"])
+		CoD.Menu.UpdateButtonShownState(f81_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_rtrig"])
+		CoD.Menu.UpdateButtonShownState(f81_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_left"])
+		CoD.Menu.UpdateButtonShownState(f81_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_none"])
+		CoD.Menu.UpdateButtonShownState(f81_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_right"])
+		CoD.Menu.UpdateButtonShownState(f81_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_up"])
+		CoD.Menu.UpdateButtonShownState(f81_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_down"])
 	end, false)
 	f1_local17 = self
 	f1_local15 = self.subscribeToModel
-	f1_local18 = Engine[0x8DF2E5447F384B9]()
+	f1_local18 = Engine[@"getglobalmodel"]()
 	f1_local15(f1_local17, f1_local18["scoreboard.team1.count"], function(f82_arg0, f82_arg1)
-		CoD.Menu.UpdateButtonShownState(f82_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x4B11D2B20C75A7F])
-		CoD.Menu.UpdateButtonShownState(f82_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xD4C15FE32148D3A])
+		CoD.Menu.UpdateButtonShownState(f82_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_up"])
+		CoD.Menu.UpdateButtonShownState(f82_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_down"])
 	end, false)
 	f1_local17 = self
 	f1_local15 = self.subscribeToModel
-	f1_local18 = Engine[0x8DF2E5447F384B9]()
+	f1_local18 = Engine[@"getglobalmodel"]()
 	f1_local15(f1_local17, f1_local18["scoreboard.team2.count"], function(f83_arg0, f83_arg1)
-		CoD.Menu.UpdateButtonShownState(f83_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x4B11D2B20C75A7F])
-		CoD.Menu.UpdateButtonShownState(f83_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xD4C15FE32148D3A])
+		CoD.Menu.UpdateButtonShownState(f83_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_up"])
+		CoD.Menu.UpdateButtonShownState(f83_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_down"])
 	end, false)
 	f1_local17 = self
 	f1_local15 = self.subscribeToModel
-	f1_local18 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local18 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local15(f1_local17, f1_local18["CodCaster.showKeyboard"], function(f84_arg0, f84_arg1)
-		CoD.Menu.UpdateButtonShownState(f84_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(f84_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_none"])
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0x93AB4C84F113EE1], nil, function(element, menu, controller, model)
-		if CoD.ScoreboardUtility.CanShowScoreboard(controller) and not CoD.ModelUtility.IsModelValueTrue(controller, "CodCaster.showFullScreenMap") and not CoD.ModelUtility.IsModelValueEqualTo(controller, "CodCaster.showSettingsSideBar", 1) and not IsVisibilityBitSet(controller, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) then
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_back"], nil, function(element, menu, controller, model)
+		if CoD.ScoreboardUtility.CanShowScoreboard(controller) and not CoD.ModelUtility.IsModelValueTrue(controller, "CodCaster.showFullScreenMap") and not CoD.ModelUtility.IsModelValueEqualTo(controller, "CodCaster.showSettingsSideBar", 1) and not IsVisibilityBitSet(controller, Enum[@"uivisibilitybit"][@"bit_ui_active"]) then
 			CoD.ScoreboardUtility.ShowScoreboard(controller)
 			return true
-		elseif CoD.ScoreboardUtility.CanHideScoreboard(controller) and not CoD.ModelUtility.IsModelValueTrue(controller, "CodCaster.showFullScreenMap") and not CoD.ModelUtility.IsModelValueEqualTo(controller, "CodCaster.showSettingsSideBar", 1) and not IsVisibilityBitSet(controller, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) then
+		elseif CoD.ScoreboardUtility.CanHideScoreboard(controller) and not CoD.ModelUtility.IsModelValueTrue(controller, "CodCaster.showFullScreenMap") and not CoD.ModelUtility.IsModelValueEqualTo(controller, "CodCaster.showSettingsSideBar", 1) and not IsVisibilityBitSet(controller, Enum[@"uivisibilitybit"][@"bit_ui_active"]) then
 			CoD.ScoreboardUtility.HideScoreboard(menu, controller)
 			return true
 		else
 		end
 	end, function(element, menu, controller)
-		if CoD.ScoreboardUtility.CanShowScoreboard(controller) and not CoD.ModelUtility.IsModelValueTrue(controller, "CodCaster.showFullScreenMap") and not CoD.ModelUtility.IsModelValueEqualTo(controller, "CodCaster.showSettingsSideBar", 1) and not IsVisibilityBitSet(controller, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x93AB4C84F113EE1], 0x0, nil, nil)
+		if CoD.ScoreboardUtility.CanShowScoreboard(controller) and not CoD.ModelUtility.IsModelValueTrue(controller, "CodCaster.showFullScreenMap") and not CoD.ModelUtility.IsModelValueEqualTo(controller, "CodCaster.showSettingsSideBar", 1) and not IsVisibilityBitSet(controller, Enum[@"uivisibilitybit"][@"bit_ui_active"]) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_back"], @"hash_0", nil, nil)
 			return false
-		elseif CoD.ScoreboardUtility.CanHideScoreboard(controller) and not CoD.ModelUtility.IsModelValueTrue(controller, "CodCaster.showFullScreenMap") and not CoD.ModelUtility.IsModelValueEqualTo(controller, "CodCaster.showSettingsSideBar", 1) and not IsVisibilityBitSet(controller, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x93AB4C84F113EE1], 0x0, nil, nil)
+		elseif CoD.ScoreboardUtility.CanHideScoreboard(controller) and not CoD.ModelUtility.IsModelValueTrue(controller, "CodCaster.showFullScreenMap") and not CoD.ModelUtility.IsModelValueEqualTo(controller, "CodCaster.showSettingsSideBar", 1) and not IsVisibilityBitSet(controller, Enum[@"uivisibilitybit"][@"bit_ui_active"]) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_back"], @"hash_0", nil, nil)
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], "M", function(element, menu, controller, model)
-		if not CoD.ModelUtility.IsModelValueTrue(controller, "CodCaster.showFullScreenMap") and not CoD.CodCasterUtility.CodCasterIsInAerialCam(controller) and not IsVisibilityBitSet(controller, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) then
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], "M", function(element, menu, controller, model)
+		if not CoD.ModelUtility.IsModelValueTrue(controller, "CodCaster.showFullScreenMap") and not CoD.CodCasterUtility.CodCasterIsInAerialCam(controller) and not IsVisibilityBitSet(controller, Enum[@"uivisibilitybit"][@"bit_ui_active"]) then
 			ToggleControllerModelValueBoolean(controller, "CodCaster.showFullScreenMap")
 			CoD.ScoreboardUtility.HideScoreboard(menu, controller)
 			return true
-		elseif not CoD.CodCasterUtility.CodCasterIsInAerialCam(controller) and not IsVisibilityBitSet(controller, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) then
+		elseif not CoD.CodCasterUtility.CodCasterIsInAerialCam(controller) and not IsVisibilityBitSet(controller, Enum[@"uivisibilitybit"][@"bit_ui_active"]) then
 			ToggleControllerModelValueBoolean(controller, "CodCaster.showFullScreenMap")
 			return true
 		else
 		end
 	end, function(element, menu, controller)
-		if not CoD.ModelUtility.IsModelValueTrue(controller, "CodCaster.showFullScreenMap") and not CoD.CodCasterUtility.CodCasterIsInAerialCam(controller) and not IsVisibilityBitSet(controller, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], 0x0, nil, "M")
+		if not CoD.ModelUtility.IsModelValueTrue(controller, "CodCaster.showFullScreenMap") and not CoD.CodCasterUtility.CodCasterIsInAerialCam(controller) and not IsVisibilityBitSet(controller, Enum[@"uivisibilitybit"][@"bit_ui_active"]) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], @"hash_0", nil, "M")
 			return false
-		elseif not CoD.CodCasterUtility.CodCasterIsInAerialCam(controller) and not IsVisibilityBitSet(controller, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], 0x0, nil, "M")
+		elseif not CoD.CodCasterUtility.CodCasterIsInAerialCam(controller) and not IsVisibilityBitSet(controller, Enum[@"uivisibilitybit"][@"bit_ui_active"]) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], @"hash_0", nil, "M")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], "T", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], "T", function(element, menu, controller, model)
 		if IsCodCasterProfileValueEqualTo(controller, "shoutcaster_ds_toolbar", 1) and IsGamepad(controller) then
 			SetCodCasterProfileValue(self, element, controller, "shoutcaster_ds_toolbar", "0")
 			return true
@@ -1125,30 +1125,30 @@ CoD.CodCaster.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 		end
 	end, function(element, menu, controller)
 		if IsCodCasterProfileValueEqualTo(controller, "shoutcaster_ds_toolbar", 1) and IsGamepad(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x0, nil, "T")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"hash_0", nil, "T")
 			return false
 		elseif IsCodCasterProfileValueEqualTo(controller, "shoutcaster_ds_toolbar", 0) and CoD.CodCasterUtility.HasButtonFocus(self) and IsGamepad(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x0, nil, "T")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"hash_0", nil, "T")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ENTER", function(element, menu, controller, model)
-		if CoD.CodCasterUtility.HasButtonFocus(self) and not IsVisibilityBitSet(controller, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) and not ScoreboardVisible(controller) and not GameEnded(controller) and not IsMouse(controller) then
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ENTER", function(element, menu, controller, model)
+		if CoD.CodCasterUtility.HasButtonFocus(self) and not IsVisibilityBitSet(controller, Enum[@"uivisibilitybit"][@"bit_ui_active"]) and not ScoreboardVisible(controller) and not GameEnded(controller) and not IsMouse(controller) then
 			CoD.CodCasterUtility.SpectatePlayer(self, controller)
 			return true
 		else
 		end
 	end, function(element, menu, controller)
-		if CoD.CodCasterUtility.HasButtonFocus(self) and not IsVisibilityBitSet(controller, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) and not ScoreboardVisible(controller) and not GameEnded(controller) and not IsMouse(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ENTER")
+		if CoD.CodCasterUtility.HasButtonFocus(self) and not IsVisibilityBitSet(controller, Enum[@"uivisibilitybit"][@"bit_ui_active"]) and not ScoreboardVisible(controller) and not GameEnded(controller) and not IsMouse(controller) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ENTER")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "T", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_none"], "T", function(element, menu, controller, model)
 		if IsCodCasterProfileValueEqualTo(controller, "shoutcaster_ds_toolbar", 1) then
 			SetCodCasterProfileValue(self, element, controller, "shoutcaster_ds_toolbar", "0")
 			return true
@@ -1159,17 +1159,17 @@ CoD.CodCaster.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 		end
 	end, function(element, menu, controller)
 		if IsCodCasterProfileValueEqualTo(controller, "shoutcaster_ds_toolbar", 1) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "T")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "T")
 			return false
 		elseif IsCodCasterProfileValueEqualTo(controller, "shoutcaster_ds_toolbar", 0) and CoD.CodCasterUtility.HasButtonFocus(self) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "T")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "T")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC], "R", function(element, menu, controller, model)
-		if not IsRepeatButtonPress(model) and not IsVisibilityBitSet(controller, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) and not ScoreboardVisible(controller) and not GameEnded(controller) then
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_ltrig"], "R", function(element, menu, controller, model)
+		if not IsRepeatButtonPress(model) and not IsVisibilityBitSet(controller, Enum[@"uivisibilitybit"][@"bit_ui_active"]) and not ScoreboardVisible(controller) and not GameEnded(controller) then
 			ToggleControllerModelValueNumber(controller, "CodCaster.showQuickSettingsSideBar")
 			OpenPopupWithPriority(self, "CodCasterQuickSettingsSideBar", controller, 300)
 			SetLuiKeyCatcher(true)
@@ -1177,15 +1177,15 @@ CoD.CodCaster.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 		else
 		end
 	end, function(element, menu, controller)
-		if not IsRepeatButtonPress(nil) and not IsVisibilityBitSet(controller, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) and not ScoreboardVisible(controller) and not GameEnded(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC], 0x0, nil, "R")
+		if not IsRepeatButtonPress(nil) and not IsVisibilityBitSet(controller, Enum[@"uivisibilitybit"][@"bit_ui_active"]) and not ScoreboardVisible(controller) and not GameEnded(controller) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_ltrig"], @"hash_0", nil, "R")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA], "Y", function(element, menu, controller, model)
-		if not IsRepeatButtonPress(model) and not IsVisibilityBitSet(controller, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) and not ScoreboardVisible(controller) and not GameEnded(controller) then
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_rtrig"], "Y", function(element, menu, controller, model)
+		if not IsRepeatButtonPress(model) and not IsVisibilityBitSet(controller, Enum[@"uivisibilitybit"][@"bit_ui_active"]) and not ScoreboardVisible(controller) and not GameEnded(controller) then
 			ToggleControllerModelValueNumber(controller, "CodCaster.showSettingsSideBar")
 			OpenPopupWithPriority(self, "CodCasterSettingsSideBar", controller, 300)
 			SetLuiKeyCatcher(true)
@@ -1193,348 +1193,348 @@ CoD.CodCaster.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 		else
 		end
 	end, function(element, menu, controller)
-		if not IsRepeatButtonPress(nil) and not IsVisibilityBitSet(controller, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) and not ScoreboardVisible(controller) and not GameEnded(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA], 0x0, nil, "Y")
+		if not IsRepeatButtonPress(nil) and not IsVisibilityBitSet(controller, Enum[@"uivisibilitybit"][@"bit_ui_active"]) and not ScoreboardVisible(controller) and not GameEnded(controller) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_rtrig"], @"hash_0", nil, "Y")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "F", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_none"], "F", function(element, menu, controller, model)
 		CoD.CodCasterUtility.ToggleCodCasterProfileValue(controller, "shoutcaster_qs_xray")
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "F")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "F")
 		return false
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "G", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_none"], "G", function(element, menu, controller, model)
 		CoD.CodCasterUtility.ToggleCodCasterProfileValue(controller, "shoutcaster_qs_listen_in")
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "G")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "G")
 		return false
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "H", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_none"], "H", function(element, menu, controller, model)
 		CoD.CodCasterUtility.ToggleCodCasterProfileValue(controller, "shoutcaster_qs_loadout")
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "H")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "H")
 		return false
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "J", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_none"], "J", function(element, menu, controller, model)
 		CoD.CodCasterUtility.ToggleCodCasterProfileValue(controller, "shoutcaster_qs_playercard")
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "J")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "J")
 		return false
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "K", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_none"], "K", function(element, menu, controller, model)
 		CoD.CodCasterUtility.ToggleCodCasterProfileValue(controller, "shoutcaster_qs_playerhud")
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "K")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "K")
 		return false
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "1", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_none"], "1", function(element, menu, controller, model)
 		CoD.CodCasterUtility.SpectatePlayerNumber(self, controller, "1")
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "1")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "1")
 		return false
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "2", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_none"], "2", function(element, menu, controller, model)
 		CoD.CodCasterUtility.SpectatePlayerNumber(self, controller, "2")
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "2")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "2")
 		return false
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "3", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_none"], "3", function(element, menu, controller, model)
 		CoD.CodCasterUtility.SpectatePlayerNumber(self, controller, "3")
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "3")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "3")
 		return false
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "4", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_none"], "4", function(element, menu, controller, model)
 		CoD.CodCasterUtility.SpectatePlayerNumber(self, controller, "4")
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "4")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "4")
 		return false
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "5", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_none"], "5", function(element, menu, controller, model)
 		CoD.CodCasterUtility.SpectatePlayerNumber(self, controller, "5")
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "5")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "5")
 		return false
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "6", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_none"], "6", function(element, menu, controller, model)
 		CoD.CodCasterUtility.SpectatePlayerNumber(self, controller, "6")
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "6")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "6")
 		return false
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "7", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_none"], "7", function(element, menu, controller, model)
 		CoD.CodCasterUtility.SpectatePlayerNumber(self, controller, "7")
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "7")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "7")
 		return false
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "8", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_none"], "8", function(element, menu, controller, model)
 		CoD.CodCasterUtility.SpectatePlayerNumber(self, controller, "8")
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "8")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "8")
 		return false
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "9", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_none"], "9", function(element, menu, controller, model)
 		CoD.CodCasterUtility.SpectatePlayerNumber(self, controller, "9")
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "9")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "9")
 		return false
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "0", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_none"], "0", function(element, menu, controller, model)
 		CoD.CodCasterUtility.SpectatePlayerNumber(self, controller, "10")
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "0")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "0")
 		return false
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0x6CE8023188D673F], "LSHIFT", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_lstick_pressed"], "LSHIFT", function(element, menu, controller, model)
 		CoD.CodCasterUtility.ClearSelectedLoadoutElement(self, menu, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x6CE8023188D673F], 0x0, nil, "LSHIFT")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_lstick_pressed"], @"hash_0", nil, "LSHIFT")
 		return false
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0x29E5695FF1401AD], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_rstick_pressed"], nil, function(element, menu, controller, model)
 		CoD.CodCasterUtility.ToggleCodCasterProfileValue(controller, "shoutcaster_qs_loadout")
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x29E5695FF1401AD], 0x0, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_rstick_pressed"], @"hash_0", nil, nil)
 		return false
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0x57783F8DA4AAEF], nil, function(element, menu, controller, model)
-		if not IsRepeatButtonPress(model) and not IsVisibilityBitSet(controller, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) and not ScoreboardVisible(controller) and not GameEnded(controller) and IsDpadButton(model) then
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_left"], nil, function(element, menu, controller, model)
+		if not IsRepeatButtonPress(model) and not IsVisibilityBitSet(controller, Enum[@"uivisibilitybit"][@"bit_ui_active"]) and not ScoreboardVisible(controller) and not GameEnded(controller) and IsDpadButton(model) then
 			CoD.CodCasterUtility.OnDpadLeft(self, controller)
 			return true
-		elseif not IsRepeatButtonPress(model) and not IsVisibilityBitSet(controller, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) and not ScoreboardVisible(controller) and not GameEnded(controller) and not IsDpadButton(model) and not CoD.CodCasterUtility.CodCasterIsInAerialCam(controller) then
+		elseif not IsRepeatButtonPress(model) and not IsVisibilityBitSet(controller, Enum[@"uivisibilitybit"][@"bit_ui_active"]) and not ScoreboardVisible(controller) and not GameEnded(controller) and not IsDpadButton(model) and not CoD.CodCasterUtility.CodCasterIsInAerialCam(controller) then
 			CoD.CodCasterUtility.NavigateLoadoutLeft(self, menu, controller)
 			return true
 		else
 		end
 	end, function(element, menu, controller)
 		local f134_local0 = nil
-		if not IsRepeatButtonPress(f134_local0) and not IsVisibilityBitSet(controller, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) and not ScoreboardVisible(controller) and not GameEnded(controller) and IsDpadButton(f134_local0) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x57783F8DA4AAEF], 0x0, nil, nil)
+		if not IsRepeatButtonPress(f134_local0) and not IsVisibilityBitSet(controller, Enum[@"uivisibilitybit"][@"bit_ui_active"]) and not ScoreboardVisible(controller) and not GameEnded(controller) and IsDpadButton(f134_local0) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_left"], @"hash_0", nil, nil)
 			return false
-		elseif not IsRepeatButtonPress(f134_local0) and not IsVisibilityBitSet(controller, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) and not ScoreboardVisible(controller) and not GameEnded(controller) and not IsDpadButton(f134_local0) and not CoD.CodCasterUtility.CodCasterIsInAerialCam(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x57783F8DA4AAEF], 0x0, nil, nil)
+		elseif not IsRepeatButtonPress(f134_local0) and not IsVisibilityBitSet(controller, Enum[@"uivisibilitybit"][@"bit_ui_active"]) and not ScoreboardVisible(controller) and not GameEnded(controller) and not IsDpadButton(f134_local0) and not CoD.CodCasterUtility.CodCasterIsInAerialCam(controller) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_left"], @"hash_0", nil, nil)
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "LEFTARROW", function(element, menu, controller, model)
-		if not IsRepeatButtonPress(model) and not IsVisibilityBitSet(controller, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) and not ScoreboardVisible(controller) and not GameEnded(controller) then
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_none"], "LEFTARROW", function(element, menu, controller, model)
+		if not IsRepeatButtonPress(model) and not IsVisibilityBitSet(controller, Enum[@"uivisibilitybit"][@"bit_ui_active"]) and not ScoreboardVisible(controller) and not GameEnded(controller) then
 			CoD.CodCasterUtility.OnDpadLeft(self, controller)
 			return true
 		else
 		end
 	end, function(element, menu, controller)
-		if not IsRepeatButtonPress(nil) and not IsVisibilityBitSet(controller, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) and not ScoreboardVisible(controller) and not GameEnded(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "LEFTARROW")
+		if not IsRepeatButtonPress(nil) and not IsVisibilityBitSet(controller, Enum[@"uivisibilitybit"][@"bit_ui_active"]) and not ScoreboardVisible(controller) and not GameEnded(controller) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "LEFTARROW")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0x571F08AD84807E0], nil, function(element, menu, controller, model)
-		if not IsRepeatButtonPress(model) and not IsVisibilityBitSet(controller, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) and not ScoreboardVisible(controller) and not GameEnded(controller) and IsDpadButton(model) then
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_right"], nil, function(element, menu, controller, model)
+		if not IsRepeatButtonPress(model) and not IsVisibilityBitSet(controller, Enum[@"uivisibilitybit"][@"bit_ui_active"]) and not ScoreboardVisible(controller) and not GameEnded(controller) and IsDpadButton(model) then
 			CoD.CodCasterUtility.OnDpadRight(self, controller)
 			return true
-		elseif not IsRepeatButtonPress(model) and not IsVisibilityBitSet(controller, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) and not ScoreboardVisible(controller) and not GameEnded(controller) and not IsDpadButton(model) and not CoD.CodCasterUtility.CodCasterIsInAerialCam(controller) then
+		elseif not IsRepeatButtonPress(model) and not IsVisibilityBitSet(controller, Enum[@"uivisibilitybit"][@"bit_ui_active"]) and not ScoreboardVisible(controller) and not GameEnded(controller) and not IsDpadButton(model) and not CoD.CodCasterUtility.CodCasterIsInAerialCam(controller) then
 			CoD.CodCasterUtility.NavigateLoadoutRight(self, menu, controller)
 			return true
 		else
 		end
 	end, function(element, menu, controller)
 		local f138_local0 = nil
-		if not IsRepeatButtonPress(f138_local0) and not IsVisibilityBitSet(controller, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) and not ScoreboardVisible(controller) and not GameEnded(controller) and IsDpadButton(f138_local0) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x571F08AD84807E0], 0x0, nil, nil)
+		if not IsRepeatButtonPress(f138_local0) and not IsVisibilityBitSet(controller, Enum[@"uivisibilitybit"][@"bit_ui_active"]) and not ScoreboardVisible(controller) and not GameEnded(controller) and IsDpadButton(f138_local0) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_right"], @"hash_0", nil, nil)
 			return false
-		elseif not IsRepeatButtonPress(f138_local0) and not IsVisibilityBitSet(controller, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) and not ScoreboardVisible(controller) and not GameEnded(controller) and not IsDpadButton(f138_local0) and not CoD.CodCasterUtility.CodCasterIsInAerialCam(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x571F08AD84807E0], 0x0, nil, nil)
+		elseif not IsRepeatButtonPress(f138_local0) and not IsVisibilityBitSet(controller, Enum[@"uivisibilitybit"][@"bit_ui_active"]) and not ScoreboardVisible(controller) and not GameEnded(controller) and not IsDpadButton(f138_local0) and not CoD.CodCasterUtility.CodCasterIsInAerialCam(controller) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_right"], @"hash_0", nil, nil)
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "RIGHTARROW", function(element, menu, controller, model)
-		if not IsRepeatButtonPress(model) and not IsVisibilityBitSet(controller, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) and not ScoreboardVisible(controller) and not GameEnded(controller) then
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_none"], "RIGHTARROW", function(element, menu, controller, model)
+		if not IsRepeatButtonPress(model) and not IsVisibilityBitSet(controller, Enum[@"uivisibilitybit"][@"bit_ui_active"]) and not ScoreboardVisible(controller) and not GameEnded(controller) then
 			CoD.CodCasterUtility.OnDpadRight(self, controller)
 			return true
 		else
 		end
 	end, function(element, menu, controller)
-		if not IsRepeatButtonPress(nil) and not IsVisibilityBitSet(controller, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) and not ScoreboardVisible(controller) and not GameEnded(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "RIGHTARROW")
+		if not IsRepeatButtonPress(nil) and not IsVisibilityBitSet(controller, Enum[@"uivisibilitybit"][@"bit_ui_active"]) and not ScoreboardVisible(controller) and not GameEnded(controller) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "RIGHTARROW")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0x4B11D2B20C75A7F], nil, function(element, menu, controller, model)
-		if not IsRepeatButtonPress(model) and not IsVisibilityBitSet(controller, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) and not ScoreboardVisible(controller) and not GameEnded(controller) and IsDpadButton(model) and not ShouldHideCodCasterHud(controller) then
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_up"], nil, function(element, menu, controller, model)
+		if not IsRepeatButtonPress(model) and not IsVisibilityBitSet(controller, Enum[@"uivisibilitybit"][@"bit_ui_active"]) and not ScoreboardVisible(controller) and not GameEnded(controller) and IsDpadButton(model) and not ShouldHideCodCasterHud(controller) then
 			ToggleControllerModelValueBoolean(controller, "codcaster.showPortraitList")
 			UpdateSelfElementState(menu, self.CodCasterPortraitPlayerList, controller)
 			return true
-		elseif not IsRepeatButtonPress(model) and not IsVisibilityBitSet(controller, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) and not ScoreboardVisible(controller) and not GameEnded(controller) and not IsDpadButton(model) and not CoD.CodCasterUtility.CodCasterIsInAerialCam(controller) then
+		elseif not IsRepeatButtonPress(model) and not IsVisibilityBitSet(controller, Enum[@"uivisibilitybit"][@"bit_ui_active"]) and not ScoreboardVisible(controller) and not GameEnded(controller) and not IsDpadButton(model) and not CoD.CodCasterUtility.CodCasterIsInAerialCam(controller) then
 			CoD.CodCasterUtility.NavigateLoadoutUp(self, menu, controller)
 			return true
 		else
 		end
 	end, function(element, menu, controller)
 		local f142_local0 = nil
-		if not IsRepeatButtonPress(f142_local0) and not IsVisibilityBitSet(controller, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) and not ScoreboardVisible(controller) and not GameEnded(controller) and IsDpadButton(f142_local0) and not ShouldHideCodCasterHud(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x4B11D2B20C75A7F], 0x0, nil, nil)
+		if not IsRepeatButtonPress(f142_local0) and not IsVisibilityBitSet(controller, Enum[@"uivisibilitybit"][@"bit_ui_active"]) and not ScoreboardVisible(controller) and not GameEnded(controller) and IsDpadButton(f142_local0) and not ShouldHideCodCasterHud(controller) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_up"], @"hash_0", nil, nil)
 			return false
-		elseif not IsRepeatButtonPress(f142_local0) and not IsVisibilityBitSet(controller, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) and not ScoreboardVisible(controller) and not GameEnded(controller) and not IsDpadButton(f142_local0) and not CoD.CodCasterUtility.CodCasterIsInAerialCam(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x4B11D2B20C75A7F], 0x0, nil, nil)
+		elseif not IsRepeatButtonPress(f142_local0) and not IsVisibilityBitSet(controller, Enum[@"uivisibilitybit"][@"bit_ui_active"]) and not ScoreboardVisible(controller) and not GameEnded(controller) and not IsDpadButton(f142_local0) and not CoD.CodCasterUtility.CodCasterIsInAerialCam(controller) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_up"], @"hash_0", nil, nil)
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "UPARROW", function(element, menu, controller, model)
-		if not IsRepeatButtonPress(model) and not IsVisibilityBitSet(controller, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) and not ScoreboardVisible(controller) and not GameEnded(controller) then
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_none"], "UPARROW", function(element, menu, controller, model)
+		if not IsRepeatButtonPress(model) and not IsVisibilityBitSet(controller, Enum[@"uivisibilitybit"][@"bit_ui_active"]) and not ScoreboardVisible(controller) and not GameEnded(controller) then
 			ToggleControllerModelValueBoolean(controller, "codcaster.showPortraitList")
 			UpdateSelfElementState(menu, self.CodCasterPortraitPlayerList, controller)
 			return true
 		else
 		end
 	end, function(element, menu, controller)
-		if not IsRepeatButtonPress(nil) and not IsVisibilityBitSet(controller, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) and not ScoreboardVisible(controller) and not GameEnded(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "UPARROW")
+		if not IsRepeatButtonPress(nil) and not IsVisibilityBitSet(controller, Enum[@"uivisibilitybit"][@"bit_ui_active"]) and not ScoreboardVisible(controller) and not GameEnded(controller) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "UPARROW")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0xD4C15FE32148D3A], nil, function(element, menu, controller, model)
-		if not IsRepeatButtonPress(model) and not IsVisibilityBitSet(controller, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) and not ScoreboardVisible(controller) and not GameEnded(controller) and IsDpadButton(model) and not ShouldHideCodCasterHud(controller) then
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_down"], nil, function(element, menu, controller, model)
+		if not IsRepeatButtonPress(model) and not IsVisibilityBitSet(controller, Enum[@"uivisibilitybit"][@"bit_ui_active"]) and not ScoreboardVisible(controller) and not GameEnded(controller) and IsDpadButton(model) and not ShouldHideCodCasterHud(controller) then
 			ToggleControllerModelValueBoolean(controller, "codcaster.showPlayerList")
 			UpdateSelfElementState(menu, self.CodCasterPlayerList, controller)
 			return true
-		elseif not IsRepeatButtonPress(model) and not IsVisibilityBitSet(controller, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) and not ScoreboardVisible(controller) and not GameEnded(controller) and not IsDpadButton(model) and not CoD.CodCasterUtility.CodCasterIsInAerialCam(controller) then
+		elseif not IsRepeatButtonPress(model) and not IsVisibilityBitSet(controller, Enum[@"uivisibilitybit"][@"bit_ui_active"]) and not ScoreboardVisible(controller) and not GameEnded(controller) and not IsDpadButton(model) and not CoD.CodCasterUtility.CodCasterIsInAerialCam(controller) then
 			CoD.CodCasterUtility.NavigateLoadoutDown(self, menu, controller)
 			return true
 		else
 		end
 	end, function(element, menu, controller)
 		local f146_local0 = nil
-		if not IsRepeatButtonPress(f146_local0) and not IsVisibilityBitSet(controller, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) and not ScoreboardVisible(controller) and not GameEnded(controller) and IsDpadButton(f146_local0) and not ShouldHideCodCasterHud(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xD4C15FE32148D3A], 0x0, nil, nil)
+		if not IsRepeatButtonPress(f146_local0) and not IsVisibilityBitSet(controller, Enum[@"uivisibilitybit"][@"bit_ui_active"]) and not ScoreboardVisible(controller) and not GameEnded(controller) and IsDpadButton(f146_local0) and not ShouldHideCodCasterHud(controller) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_down"], @"hash_0", nil, nil)
 			return false
-		elseif not IsRepeatButtonPress(f146_local0) and not IsVisibilityBitSet(controller, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) and not ScoreboardVisible(controller) and not GameEnded(controller) and not IsDpadButton(f146_local0) and not CoD.CodCasterUtility.CodCasterIsInAerialCam(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xD4C15FE32148D3A], 0x0, nil, nil)
+		elseif not IsRepeatButtonPress(f146_local0) and not IsVisibilityBitSet(controller, Enum[@"uivisibilitybit"][@"bit_ui_active"]) and not ScoreboardVisible(controller) and not GameEnded(controller) and not IsDpadButton(f146_local0) and not CoD.CodCasterUtility.CodCasterIsInAerialCam(controller) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_down"], @"hash_0", nil, nil)
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "DOWNARROW", function(element, menu, controller, model)
-		if not IsRepeatButtonPress(model) and not IsVisibilityBitSet(controller, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) and not ScoreboardVisible(controller) and not GameEnded(controller) then
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_none"], "DOWNARROW", function(element, menu, controller, model)
+		if not IsRepeatButtonPress(model) and not IsVisibilityBitSet(controller, Enum[@"uivisibilitybit"][@"bit_ui_active"]) and not ScoreboardVisible(controller) and not GameEnded(controller) then
 			ToggleControllerModelValueBoolean(controller, "codcaster.showPlayerList")
 			UpdateSelfElementState(menu, self.CodCasterPlayerList, controller)
 			return true
 		else
 		end
 	end, function(element, menu, controller)
-		if not IsRepeatButtonPress(nil) and not IsVisibilityBitSet(controller, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) and not ScoreboardVisible(controller) and not GameEnded(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "DOWNARROW")
+		if not IsRepeatButtonPress(nil) and not IsVisibilityBitSet(controller, Enum[@"uivisibilitybit"][@"bit_ui_active"]) and not ScoreboardVisible(controller) and not GameEnded(controller) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "DOWNARROW")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "A", function(element, menu, controller, model)
-		if not IsRepeatButtonPress(model) and not IsVisibilityBitSet(controller, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) and not ScoreboardVisible(controller) and not GameEnded(controller) and not CoD.CodCasterUtility.CodCasterIsInAerialCam(controller) then
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_none"], "A", function(element, menu, controller, model)
+		if not IsRepeatButtonPress(model) and not IsVisibilityBitSet(controller, Enum[@"uivisibilitybit"][@"bit_ui_active"]) and not ScoreboardVisible(controller) and not GameEnded(controller) and not CoD.CodCasterUtility.CodCasterIsInAerialCam(controller) then
 			CoD.CodCasterUtility.NavigateLoadoutLeft(self, menu, controller)
 			return true
 		else
 		end
 	end, function(element, menu, controller)
-		if not IsRepeatButtonPress(nil) and not IsVisibilityBitSet(controller, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) and not ScoreboardVisible(controller) and not GameEnded(controller) and not CoD.CodCasterUtility.CodCasterIsInAerialCam(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "A")
+		if not IsRepeatButtonPress(nil) and not IsVisibilityBitSet(controller, Enum[@"uivisibilitybit"][@"bit_ui_active"]) and not ScoreboardVisible(controller) and not GameEnded(controller) and not CoD.CodCasterUtility.CodCasterIsInAerialCam(controller) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "A")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "D", function(element, menu, controller, model)
-		if not IsRepeatButtonPress(model) and not IsVisibilityBitSet(controller, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) and not ScoreboardVisible(controller) and not GameEnded(controller) and not CoD.CodCasterUtility.CodCasterIsInAerialCam(controller) then
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_none"], "D", function(element, menu, controller, model)
+		if not IsRepeatButtonPress(model) and not IsVisibilityBitSet(controller, Enum[@"uivisibilitybit"][@"bit_ui_active"]) and not ScoreboardVisible(controller) and not GameEnded(controller) and not CoD.CodCasterUtility.CodCasterIsInAerialCam(controller) then
 			CoD.CodCasterUtility.NavigateLoadoutRight(self, menu, controller)
 			return true
 		else
 		end
 	end, function(element, menu, controller)
-		if not IsRepeatButtonPress(nil) and not IsVisibilityBitSet(controller, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) and not ScoreboardVisible(controller) and not GameEnded(controller) and not CoD.CodCasterUtility.CodCasterIsInAerialCam(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "D")
+		if not IsRepeatButtonPress(nil) and not IsVisibilityBitSet(controller, Enum[@"uivisibilitybit"][@"bit_ui_active"]) and not ScoreboardVisible(controller) and not GameEnded(controller) and not CoD.CodCasterUtility.CodCasterIsInAerialCam(controller) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "D")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "W", function(element, menu, controller, model)
-		if not IsRepeatButtonPress(model) and not IsVisibilityBitSet(controller, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) and not ScoreboardVisible(controller) and not GameEnded(controller) and not CoD.CodCasterUtility.CodCasterIsInAerialCam(controller) then
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_none"], "W", function(element, menu, controller, model)
+		if not IsRepeatButtonPress(model) and not IsVisibilityBitSet(controller, Enum[@"uivisibilitybit"][@"bit_ui_active"]) and not ScoreboardVisible(controller) and not GameEnded(controller) and not CoD.CodCasterUtility.CodCasterIsInAerialCam(controller) then
 			CoD.CodCasterUtility.NavigateLoadoutUp(self, menu, controller)
 			return true
 		else
 		end
 	end, function(element, menu, controller)
-		if not IsRepeatButtonPress(nil) and not IsVisibilityBitSet(controller, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) and not ScoreboardVisible(controller) and not GameEnded(controller) and not CoD.CodCasterUtility.CodCasterIsInAerialCam(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "W")
+		if not IsRepeatButtonPress(nil) and not IsVisibilityBitSet(controller, Enum[@"uivisibilitybit"][@"bit_ui_active"]) and not ScoreboardVisible(controller) and not GameEnded(controller) and not CoD.CodCasterUtility.CodCasterIsInAerialCam(controller) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "W")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "S", function(element, menu, controller, model)
-		if not IsRepeatButtonPress(model) and not IsVisibilityBitSet(controller, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) and not ScoreboardVisible(controller) and not GameEnded(controller) and not CoD.CodCasterUtility.CodCasterIsInAerialCam(controller) then
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_none"], "S", function(element, menu, controller, model)
+		if not IsRepeatButtonPress(model) and not IsVisibilityBitSet(controller, Enum[@"uivisibilitybit"][@"bit_ui_active"]) and not ScoreboardVisible(controller) and not GameEnded(controller) and not CoD.CodCasterUtility.CodCasterIsInAerialCam(controller) then
 			CoD.CodCasterUtility.NavigateLoadoutDown(self, menu, controller)
 			return true
 		else
 		end
 	end, function(element, menu, controller)
-		if not IsRepeatButtonPress(nil) and not IsVisibilityBitSet(controller, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) and not ScoreboardVisible(controller) and not GameEnded(controller) and not CoD.CodCasterUtility.CodCasterIsInAerialCam(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "S")
+		if not IsRepeatButtonPress(nil) and not IsVisibilityBitSet(controller, Enum[@"uivisibilitybit"][@"bit_ui_active"]) and not ScoreboardVisible(controller) and not GameEnded(controller) and not CoD.CodCasterUtility.CodCasterIsInAerialCam(controller) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "S")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "V", function(element, menu, controller, model)
-		if not CoD.ModelUtility.IsModelValueTrue(controller, "CodCaster.showKeyboard") and not IsVisibilityBitSet(controller, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) then
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_none"], "V", function(element, menu, controller, model)
+		if not CoD.ModelUtility.IsModelValueTrue(controller, "CodCaster.showKeyboard") and not IsVisibilityBitSet(controller, Enum[@"uivisibilitybit"][@"bit_ui_active"]) then
 			ToggleControllerModelValueBoolean(controller, "CodCaster.showKeyboard")
 			CoD.ScoreboardUtility.HideScoreboard(menu, controller)
 			return true
-		elseif not IsVisibilityBitSet(controller, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) then
+		elseif not IsVisibilityBitSet(controller, Enum[@"uivisibilitybit"][@"bit_ui_active"]) then
 			ToggleControllerModelValueBoolean(controller, "CodCaster.showKeyboard")
 			return true
 		else
 		end
 	end, function(element, menu, controller)
-		if not CoD.ModelUtility.IsModelValueTrue(controller, "CodCaster.showKeyboard") and not IsVisibilityBitSet(controller, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "V")
+		if not CoD.ModelUtility.IsModelValueTrue(controller, "CodCaster.showKeyboard") and not IsVisibilityBitSet(controller, Enum[@"uivisibilitybit"][@"bit_ui_active"]) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "V")
 			return false
-		elseif not IsVisibilityBitSet(controller, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "V")
+		elseif not IsVisibilityBitSet(controller, Enum[@"uivisibilitybit"][@"bit_ui_active"]) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "V")
 			return false
 		else
 			return false

@@ -113,8 +113,8 @@ CoD.ArenaGauntletTierProgress.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self.ArenaSlottedRuby = ArenaSlottedRuby
 	local TierTitle = LUI.UIText.new(0.5, 0.5, -100, 100, 0, 0, -12, 12)
 	TierTitle:setTTF("ttmussels_demibold")
-	TierTitle:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	TierTitle:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	TierTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	TierTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	TierTitle:linkToElementModel(self, "title", true, function(model)
 		local f14_local0 = model:get()
 		if f14_local0 ~= nil then

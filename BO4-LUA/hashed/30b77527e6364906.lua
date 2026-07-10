@@ -50,21 +50,21 @@ LUI.createMenu.PurchaseReservesItem = function(f1_arg0, f1_arg1)
 	FullscreenPopupTemplate.ButtonList:setWidgetType(CoD.PurchaseReservesItemButton)
 	FullscreenPopupTemplate.ButtonList:setDataSource("PurchaseReservesItemButtons")
 	FullscreenPopupTemplate.ErrorSubtitle:setText("")
-	FullscreenPopupTemplate.WorkingTitle:setText(LocalizeToUpperString(0x9D00A7D3D969F6E))
-	FullscreenPopupTemplate.DoneTitle:setText(LocalizeToUpperString(0x83048BBBD98FC6A))
+	FullscreenPopupTemplate.WorkingTitle:setText(LocalizeToUpperString(@"menu/purchase_processing"))
+	FullscreenPopupTemplate.DoneTitle:setText(LocalizeToUpperString(@"menu/purchase_complete"))
 	FullscreenPopupTemplate:linkToElementModel(self, nil, false, function(model)
 		FullscreenPopupTemplate:setModel(model, f1_arg0)
 	end)
 	FullscreenPopupTemplate:linkToElementModel(self, "name", true, function(model)
 		local f7_local0 = model:get()
 		if f7_local0 ~= nil then
-			FullscreenPopupTemplate.Subtitle:setText(LocalizeIntoString(0xAF16248246D3D96, f7_local0))
+			FullscreenPopupTemplate.Subtitle:setText(LocalizeIntoString(@"hash_1AF16248246D3D96", f7_local0))
 		end
 	end)
 	FullscreenPopupTemplate:linkToElementModel(self, "name", true, function(model)
 		local f8_local0 = model:get()
 		if f8_local0 ~= nil then
-			FullscreenPopupTemplate.Title:setText(ToUpper(LocalizeIntoString(0x63FCD1B0849669E, f8_local0)))
+			FullscreenPopupTemplate.Title:setText(ToUpper(LocalizeIntoString(@"hash_663FCD1B0849669E", f8_local0)))
 		end
 	end)
 	self:addElement(FullscreenPopupTemplate)
@@ -88,8 +88,8 @@ LUI.createMenu.PurchaseReservesItem = function(f1_arg0, f1_arg1)
 	local Linker = LUI.UIImage.new(0.5, 0.5, -330, -326, 0.5, 0.5, -192, 205)
 	Linker:setRGB(ColorSet.T8__BEIGE__HEADER.r, ColorSet.T8__BEIGE__HEADER.g, ColorSet.T8__BEIGE__HEADER.b)
 	Linker:setAlpha(0.35)
-	Linker:setImage(RegisterImage(0xC49B0C8991A541F))
-	Linker:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	Linker:setImage(RegisterImage(@"hash_C49B0C8991A541F"))
+	Linker:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	Linker:setShaderVector(0, 0, 0, 0, 0)
 	Linker:setupNineSliceShader(4, 8)
 	self:addElement(Linker)
@@ -98,12 +98,12 @@ LUI.createMenu.PurchaseReservesItem = function(f1_arg0, f1_arg1)
 	Price:setRGB(ColorSet.CodPointsNumber.r, ColorSet.CodPointsNumber.g, ColorSet.CodPointsNumber.b)
 	Price:setTTF("ttmussels_demibold")
 	Price:setLetterSpacing(4)
-	Price:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	Price:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Price:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	Price:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	Price:linkToElementModel(self, "price", true, function(model)
 		local f11_local0 = model:get()
 		if f11_local0 ~= nil then
-			Price:setText(LocalizeIntoString(0x7AD54B6F8C27799, f11_local0))
+			Price:setText(LocalizeIntoString(@"hash_27AD54B6F8C27799", f11_local0))
 		end
 	end)
 	self:addElement(Price)
@@ -129,23 +129,23 @@ LUI.createMenu.PurchaseReservesItem = function(f1_arg0, f1_arg1)
 	self.CommonIdentityWidgetStreamlinedC = LUI.UIElement.createFake()
 	local Purchase = LUI.UIText.new(0.5, 0.5, -960, -330, 0.5, 0.5, 104, 124)
 	Purchase:setRGB(0.82, 0.95, 1)
-	Purchase:setText(LocalizeToUpperString(0x85952ACC6D0C1B0))
+	Purchase:setText(LocalizeToUpperString(@"menu/purchase"))
 	Purchase:setTTF("ttmussels_regular")
 	Purchase:setLetterSpacing(3)
-	Purchase:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	Purchase:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Purchase:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	Purchase:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(Purchase)
 	self.Purchase = Purchase
 	local ItemName = LUI.UIText.new(0.5, 0.5, -914.5, -370.5, 0.5, 0.5, 138, 178)
 	ItemName:setRGB(0.5, 0.85, 1)
 	ItemName:setTTF("ttmussels_demibold")
-	ItemName:setMaterial(LUI.UIImage.GetCachedMaterial(0x93F361CC41C94AF))
+	ItemName:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_593F361CC41C94AF"))
 	ItemName:setShaderVector(0, 0.8, 0, 0, 0)
 	ItemName:setShaderVector(1, 0, 0, 0, 0)
 	ItemName:setShaderVector(2, 0, 0.7, 1, 0.2)
 	ItemName:setLetterSpacing(6)
-	ItemName:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	ItemName:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	ItemName:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	ItemName:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	ItemName:linkToElementModel(self, "name", true, function(model)
 		local f14_local0 = model:get()
 		if f14_local0 ~= nil then
@@ -157,15 +157,15 @@ LUI.createMenu.PurchaseReservesItem = function(f1_arg0, f1_arg1)
 	local BracketLeft = LUI.UIImage.new(0.5, 0.5, -926, -902, 0.5, 0.5, 121, 193)
 	BracketLeft:setRGB(0.79, 0.94, 1)
 	BracketLeft:setYRot(180)
-	BracketLeft:setImage(RegisterImage(0xE1C1C55D18A0A1B))
+	BracketLeft:setImage(RegisterImage(@"uie_ui_menu_common_bracket01"))
 	self:addElement(BracketLeft)
 	self.BracketLeft = BracketLeft
 	local BracketRight = LUI.UIImage.new(0.5, 0.5, -383, -359, 0.5, 0.5, 121, 193)
 	BracketRight:setRGB(0.79, 0.94, 1)
-	BracketRight:setImage(RegisterImage(0xE1C1C55D18A0A1B))
+	BracketRight:setImage(RegisterImage(@"uie_ui_menu_common_bracket01"))
 	self:addElement(BracketRight)
 	self.BracketRight = BracketRight
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		if not IsElementInState(self.FullscreenPopupTemplate, "WorkingState") and not IsElementInState(self.FullscreenPopupTemplate, "ErrorState") then
 			GoBack(self, controller)
 			CoD.BlackMarketUtility.SendPurchaseReservesEvent(controller, menu)
@@ -174,13 +174,13 @@ LUI.createMenu.PurchaseReservesItem = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if not IsElementInState(self.FullscreenPopupTemplate, "WorkingState") and not IsElementInState(self.FullscreenPopupTemplate, "ErrorState") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if IsElementInState(self.FullscreenPopupTemplate, "ErrorState") then
 			GoBack(self, controller)
 			return true
@@ -188,7 +188,7 @@ LUI.createMenu.PurchaseReservesItem = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if IsElementInState(self.FullscreenPopupTemplate, "ErrorState") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x70A9FDC87CD3D48, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/back", nil, nil)
 			return true
 		else
 			return false
@@ -226,9 +226,9 @@ LUI.createMenu.PurchaseReservesItem = function(f1_arg0, f1_arg1)
 	local f1_local14 = self
 	f1_local14 = FullscreenPopupTemplate
 	if IsPC() and IsElementInState(self.FullscreenPopupTemplate, "ErrorState") then
-		CoD.PCUtility.LinkPCSmallCloseButtonToInput(f1_local1, f1_arg0, f1_local14, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.PCUtility.LinkPCSmallCloseButtonToInput(f1_local1, f1_arg0, f1_local14, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	elseif IsPC() then
-		CoD.PCUtility.LinkPCSmallCloseButtonToInput(f1_local1, f1_arg0, f1_local14, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A])
+		CoD.PCUtility.LinkPCSmallCloseButtonToInput(f1_local1, f1_arg0, f1_local14, Enum[@"luibutton"][@"lui_key_xbb_pscircle"])
 	end
 	return self
 end

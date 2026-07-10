@@ -92,7 +92,7 @@ CoD.vhud_ms_ModRight.__clipsPerState = {
 																											f29_arg0:registerEventHandler( "transition_complete_keyframe", f5_arg0.clipFinished )
 																										end
 																										
-																										f28_arg0:beginAnimation( 199, Enum[0xF50FFF429AB1890][0x6F6186B702830BC] )
+																										f28_arg0:beginAnimation( 199, Enum[@"luitween"][@"luitween_ease_out"] )
 																										f28_arg0:setLeftRight( 0, 0, 286, 454 )
 																										f28_arg0:setAlpha( 0 )
 																										f28_arg0:registerEventHandler( "transition_complete_keyframe", f28_local0 )
@@ -102,7 +102,7 @@ CoD.vhud_ms_ModRight.__clipsPerState = {
 																									f27_arg0:registerEventHandler( "transition_complete_keyframe", f27_local0 )
 																								end
 																								
-																								f26_arg0:beginAnimation( 300, Enum[0xF50FFF429AB1890][0x6F6186B702830BC] )
+																								f26_arg0:beginAnimation( 300, Enum[@"luitween"][@"luitween_ease_out"] )
 																								f26_arg0:setLeftRight( 0, 0, 414, 582 )
 																								f26_arg0:registerEventHandler( "transition_complete_keyframe", f26_local0 )
 																							end
@@ -111,7 +111,7 @@ CoD.vhud_ms_ModRight.__clipsPerState = {
 																							f25_arg0:registerEventHandler( "transition_complete_keyframe", f25_local0 )
 																						end
 																						
-																						f24_arg0:beginAnimation( 300, Enum[0xF50FFF429AB1890][0x6F6186B702830BC] )
+																						f24_arg0:beginAnimation( 300, Enum[@"luitween"][@"luitween_ease_out"] )
 																						f24_arg0:setLeftRight( 0, 0, 582, 750 )
 																						f24_arg0:registerEventHandler( "transition_complete_keyframe", f24_local0 )
 																					end
@@ -168,7 +168,7 @@ CoD.vhud_ms_ModRight.__clipsPerState = {
 											f13_arg0:registerEventHandler( "transition_complete_keyframe", f13_local0 )
 										end
 										
-										f12_arg0:beginAnimation( 140, Enum[0xF50FFF429AB1890][0x6F6186B702830BC] )
+										f12_arg0:beginAnimation( 140, Enum[@"luitween"][@"luitween_ease_out"] )
 										f12_arg0:setLeftRight( 0, 0, 516, 684 )
 										f12_arg0:setAlpha( 0 )
 										f12_arg0:registerEventHandler( "transition_complete_keyframe", f12_local0 )
@@ -183,7 +183,7 @@ CoD.vhud_ms_ModRight.__clipsPerState = {
 								f10_arg0:registerEventHandler( "transition_complete_keyframe", f10_local0 )
 							end
 							
-							f9_arg0:beginAnimation( 299, Enum[0xF50FFF429AB1890][0x6F6186B702830BC] )
+							f9_arg0:beginAnimation( 299, Enum[@"luitween"][@"luitween_ease_out"] )
 							f9_arg0:setLeftRight( 0, 0, 586, 754 )
 							f9_arg0:registerEventHandler( "transition_complete_keyframe", f9_local0 )
 						end
@@ -192,7 +192,7 @@ CoD.vhud_ms_ModRight.__clipsPerState = {
 						f8_arg0:registerEventHandler( "transition_complete_keyframe", f8_local0 )
 					end
 					
-					f7_arg0:beginAnimation( 299, Enum[0xF50FFF429AB1890][0x6F6186B702830BC] )
+					f7_arg0:beginAnimation( 299, Enum[@"luitween"][@"luitween_ease_out"] )
 					f7_arg0:setLeftRight( 0, 0, 744, 912 )
 					f7_arg0:registerEventHandler( "transition_complete_keyframe", f7_local0 )
 				end
@@ -223,7 +223,7 @@ CoD.vhud_ms_ModRight.__clipsPerState = {
 																local f42_local0 = function ( f43_arg0 )
 																	local f43_local0 = function ( f44_arg0 )
 																		local f44_local0 = function ( f45_arg0 )
-																			f45_arg0:beginAnimation( 300, Enum[0xF50FFF429AB1890][0x6F6186B702830BC] )
+																			f45_arg0:beginAnimation( 300, Enum[@"luitween"][@"luitween_ease_out"] )
 																			f45_arg0:setLeftRight( 0, 0, 582, 798 )
 																			f45_arg0:registerEventHandler( "transition_complete_keyframe", f5_arg0.clipFinished )
 																		end
@@ -280,7 +280,7 @@ CoD.vhud_ms_ModRight.__clipsPerState = {
 								f34_arg0:registerEventHandler( "transition_complete_keyframe", f34_local0 )
 							end
 							
-							f33_arg0:beginAnimation( 150, Enum[0xF50FFF429AB1890][0x6F6186B702830BC] )
+							f33_arg0:beginAnimation( 150, Enum[@"luitween"][@"luitween_ease_out"] )
 							f33_arg0:setLeftRight( 0, 0, 370, 586 )
 							f33_arg0:setAlpha( 0 )
 							f33_arg0:registerEventHandler( "transition_complete_keyframe", f33_local0 )
@@ -295,7 +295,7 @@ CoD.vhud_ms_ModRight.__clipsPerState = {
 					f31_arg0:registerEventHandler( "transition_complete_keyframe", f31_local0 )
 				end
 				
-				f30_arg0:beginAnimation( 299, Enum[0xF50FFF429AB1890][0x6F6186B702830BC] )
+				f30_arg0:beginAnimation( 299, Enum[@"luitween"][@"luitween_ease_out"] )
 				f30_arg0:setLeftRight( 0, 0, 528, 744 )
 				f30_arg0:registerEventHandler( "transition_complete_keyframe", f30_local0 )
 			end

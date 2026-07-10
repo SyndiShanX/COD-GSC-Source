@@ -44,29 +44,29 @@ LUI.createMenu.DiaDeLosMuertosRedemptionPopup = function(f1_arg0, f1_arg1)
 		},
 	})
 	FullscreenPopupTemplate.ButtonList:setWidgetType(CoD.ItemShopButton)
-	FullscreenPopupTemplate.ErrorSubtitle:setText(Engine[0xF9F1239CFD921FE](0x9768A66571AA0BA))
-	FullscreenPopupTemplate.WorkingTitle:setText(LocalizeToUpperString(0x67B9487B8B4E09C))
-	FullscreenPopupTemplate.DoneTitle:setText(Engine[0xF9F1239CFD921FE](0xEF90EDFB180B9A2))
+	FullscreenPopupTemplate.ErrorSubtitle:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_79768A66571AA0BA"))
+	FullscreenPopupTemplate.WorkingTitle:setText(LocalizeToUpperString(@"hash_667B9487B8B4E09C"))
+	FullscreenPopupTemplate.DoneTitle:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_5EF90EDFB180B9A2"))
 	FullscreenPopupTemplate:linkToElementModel(self, nil, false, function(model)
 		FullscreenPopupTemplate:setModel(model, f1_arg0)
 	end)
 	FullscreenPopupTemplate:linkToElementModel(self, "name", true, function(model)
 		local f7_local0 = model:get()
 		if f7_local0 ~= nil then
-			FullscreenPopupTemplate.Subtitle:setText(LocalizeIntoString(0x7A8CE209945317C, f7_local0))
+			FullscreenPopupTemplate.Subtitle:setText(LocalizeIntoString(@"hash_27A8CE209945317C", f7_local0))
 		end
 	end)
 	FullscreenPopupTemplate:linkToElementModel(self, "name", true, function(model)
 		local f8_local0 = model:get()
 		if f8_local0 ~= nil then
-			FullscreenPopupTemplate.Title:setText(LocalizeToUpperString(LocalizeIntoString(0x38044C9897FFD7D, f8_local0)))
+			FullscreenPopupTemplate.Title:setText(LocalizeToUpperString(LocalizeIntoString(@"hash_738044C9897FFD7D", f8_local0)))
 		end
 	end)
 	LUI.OverrideFunction_CallOriginalFirst(FullscreenPopupTemplate, "setState", function(element, controller, f9_arg2, f9_arg3, f9_arg4)
 		if IsPC() and IsElementInState(element, "FinishedState") then
-			CoD.PCUtility.LinkPCSmallCloseButtonToInput(f1_local1, controller, element, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+			CoD.PCUtility.LinkPCSmallCloseButtonToInput(f1_local1, controller, element, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		elseif IsPC() then
-			CoD.PCUtility.LinkPCSmallCloseButtonToInput(f1_local1, controller, element, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A])
+			CoD.PCUtility.LinkPCSmallCloseButtonToInput(f1_local1, controller, element, Enum[@"luibutton"][@"lui_key_xbb_pscircle"])
 		end
 	end)
 	self:addElement(FullscreenPopupTemplate)
@@ -83,12 +83,12 @@ LUI.createMenu.DiaDeLosMuertosRedemptionPopup = function(f1_arg0, f1_arg1)
 	local CostText = LUI.UIText.new(0.5, 0.5, -959.5, -329.5, 0.5, 0.5, 166, 196)
 	CostText:setRGB(ColorSet.CodPointsNumber.r, ColorSet.CodPointsNumber.g, ColorSet.CodPointsNumber.b)
 	CostText:setTTF("ttmussels_demibold")
-	CostText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	CostText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	CostText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	CostText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	CostText:linkToElementModel(self, "price", true, function(model)
 		local f10_local0 = model:get()
 		if f10_local0 ~= nil then
-			CostText:setText(LocalizeIntoString(0x6A3CC7BE3008989, f10_local0))
+			CostText:setText(LocalizeIntoString(@"hash_56A3CC7BE3008989", f10_local0))
 		end
 	end)
 	self:addElement(CostText)
@@ -111,38 +111,38 @@ LUI.createMenu.DiaDeLosMuertosRedemptionPopup = function(f1_arg0, f1_arg1)
 	local Linker = LUI.UIImage.new(0.5, 0.5, -330, -326, 0.5, 0.5, -192, 205)
 	Linker:setRGB(ColorSet.T8__BEIGE__HEADER.r, ColorSet.T8__BEIGE__HEADER.g, ColorSet.T8__BEIGE__HEADER.b)
 	Linker:setAlpha(0.35)
-	Linker:setImage(RegisterImage(0xC49B0C8991A541F))
-	Linker:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	Linker:setImage(RegisterImage(@"hash_C49B0C8991A541F"))
+	Linker:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	Linker:setShaderVector(0, 0, 0, 0, 0)
 	Linker:setupNineSliceShader(4, 8)
 	self:addElement(Linker)
 	self.Linker = Linker
 	local CornerPip = LUI.UIImage.new(0.5, 0.5, -802.5, -786.5, 0.5, 0.5, -187, -171)
 	CornerPip:setAlpha(0.4)
-	CornerPip:setImage(RegisterImage(0x8DC834094E7A02C))
+	CornerPip:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_window_corner"))
 	self:addElement(CornerPip)
 	self.CornerPip = CornerPip
 	local CornerPip2 = LUI.UIImage.new(0.5, 0.5, -494.5, -478.5, 0.5, 0.5, -187, -171)
 	CornerPip2:setAlpha(0.4)
 	CornerPip2:setZRot(270)
-	CornerPip2:setImage(RegisterImage(0x8DC834094E7A02C))
+	CornerPip2:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_window_corner"))
 	self:addElement(CornerPip2)
 	self.CornerPip2 = CornerPip2
 	local CornerPip3 = LUI.UIImage.new(0.5, 0.5, -803.5, -787.5, 0.5, 0.5, 122, 138)
 	CornerPip3:setAlpha(0.4)
 	CornerPip3:setZRot(90)
-	CornerPip3:setImage(RegisterImage(0x8DC834094E7A02C))
+	CornerPip3:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_window_corner"))
 	self:addElement(CornerPip3)
 	self.CornerPip3 = CornerPip3
 	local CornerPip4 = LUI.UIImage.new(0.5, 0.5, -494.5, -478.5, 0.5, 0.5, 121, 137)
 	CornerPip4:setAlpha(0.4)
 	CornerPip4:setZRot(180)
-	CornerPip4:setImage(RegisterImage(0x8DC834094E7A02C))
+	CornerPip4:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_window_corner"))
 	self:addElement(CornerPip4)
 	self.CornerPip4 = CornerPip4
 	local Image = LUI.UIImage.new(0.5, 0.5, -898, -385, 0.5, 0.5, -189, 139)
-	Image:setImage(RegisterImage(CoD.EntitlementUtility.GetDOTDImageRedemption(0xC441A414036272D)))
-	Image:setMaterial(LUI.UIImage.GetCachedMaterial(0xA02C44161370F6D))
+	Image:setImage(RegisterImage(CoD.EntitlementUtility.GetDOTDImageRedemption(@"loot_ui_icon_outfit_dotd_base_pal_exo2_battery")))
+	Image:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_1A02C44161370F6D"))
 	Image:setShaderVector(0, 0, 0, 0, 0)
 	Image:setShaderVector(1, 1, 1, 0, 0)
 	Image:setShaderVector(2, 0, 0, 0, 0)
@@ -157,15 +157,15 @@ LUI.createMenu.DiaDeLosMuertosRedemptionPopup = function(f1_arg0, f1_arg1)
 	self.TabbedScoreboardFuiBox = TabbedScoreboardFuiBox
 	self:appendEventHandler("input_source_changed", function(f13_arg0, f13_arg1)
 		f13_arg1.menu = f13_arg1.menu or f1_local1
-		CoD.Menu.UpdateButtonShownState(f13_arg0, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f13_arg0, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	local f1_local16 = self
 	local f1_local17 = self.subscribeToModel
-	local f1_local18 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	local f1_local18 = Engine[@"getmodelforcontroller"](f1_arg0)
 	f1_local17(f1_local16, f1_local18.LastInput, function(f14_arg0, f14_arg1)
-		CoD.Menu.UpdateButtonShownState(f14_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f14_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		if not IsElementInState(self.FullscreenPopupTemplate, "WorkingState") and not IsElementInState(self.FullscreenPopupTemplate, "FinishedState") then
 			CoD.EntitlementUtility.GoBackAndOpenEntitlementPopups(self, controller)
 			return true
@@ -173,13 +173,13 @@ LUI.createMenu.DiaDeLosMuertosRedemptionPopup = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if not IsElementInState(self.FullscreenPopupTemplate, "WorkingState") and not IsElementInState(self.FullscreenPopupTemplate, "FinishedState") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if IsElementInState(self.FullscreenPopupTemplate, "FinishedState") then
 			CoD.EntitlementUtility.GoBackAndOpenEntitlementPopups(self, controller)
 			return true
@@ -193,13 +193,13 @@ LUI.createMenu.DiaDeLosMuertosRedemptionPopup = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if IsElementInState(self.FullscreenPopupTemplate, "FinishedState") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x6393FF34EA56966, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/continue", nil, nil)
 			return true
 		elseif IsElementInState(self.FullscreenPopupTemplate, "ErrorState") and not IsMouseOrKeyboard(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x70A9FDC87CD3D48, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/back", nil, nil)
 			return true
 		elseif not IsElementInState(self.FullscreenPopupTemplate, "WorkingState") and not IsElementInState(self.FullscreenPopupTemplate, "ErrorState") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x867BE59364DD53B, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/redeem", nil, nil)
 			return true
 		else
 			return false

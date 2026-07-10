@@ -20,7 +20,7 @@ CoD.PositionDraft_CharacterList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	})
 	local f1_local2 = Characters
 	local f1_local3 = Characters.subscribeToModel
-	local f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local3(f1_local2, f1_local4["PositionEditLoadout.SelectedCharacterIndex"], function(f3_arg0)
 		f1_arg0:updateElementState(Characters, {
 			name = "model_validation",
@@ -68,7 +68,7 @@ CoD.PositionDraft_CharacterList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	end)
 	f1_local2 = Characters
 	f1_local3 = Characters.subscribeToModel
-	f1_local4 = Engine[0x8DF2E5447F384B9]()
+	f1_local4 = Engine[@"getglobalmodel"]()
 	f1_local3(f1_local2, f1_local4["hudItems.specialistSwitchIsLethal"], function(f8_arg0)
 		f1_arg0:updateElementState(Characters, {
 			name = "model_validation",
@@ -80,14 +80,14 @@ CoD.PositionDraft_CharacterList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	end, false)
 	f1_local2 = Characters
 	f1_local3 = Characters.subscribeToModel
-	f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local3(f1_local2, f1_local4["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x534C7B2375D2D47]], function(f9_arg0)
+	f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local3(f1_local2, f1_local4["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_player_dead"]], function(f9_arg0)
 		f1_arg0:updateElementState(Characters, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f9_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x534C7B2375D2D47],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_player_dead"],
 		})
 	end, false)
 	Characters:setLeftRight(0.5, 0.5, -245, 249)
@@ -97,13 +97,13 @@ CoD.PositionDraft_CharacterList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	Characters:setHorizontalCount(3)
 	Characters:setVerticalCount(5)
 	Characters:setSpacing(-5)
-	Characters:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	Characters:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	Characters:setDataSource("PositionDraftCharacters")
 	f1_local2 = Characters
 	f1_local3 = Characters.subscribeToModel
-	f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local3(f1_local2, f1_local4["factions.isCoDCaster"], function(f10_arg0, f10_arg1)
-		CoD.Menu.UpdateButtonShownState(f10_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f10_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	Characters:registerEventHandler("list_item_gain_focus", function(element, event)
 		local f11_local0 = nil
@@ -126,10 +126,10 @@ CoD.PositionDraft_CharacterList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 		elseif element.super.gainFocus then
 			f13_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f13_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(Characters, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(Characters, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if not IsCodCaster(controller) and IsElementInState(element, "DefaultState") then
 			PositionDraftSelectCharacter(self, element, controller)
 			SetLoseFocusToElement(self, "Characters", controller)
@@ -140,7 +140,7 @@ CoD.PositionDraft_CharacterList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 		end
 	end, function(element, menu, controller)
 		if not IsCodCaster(controller) and IsElementInState(element, "DefaultState") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false

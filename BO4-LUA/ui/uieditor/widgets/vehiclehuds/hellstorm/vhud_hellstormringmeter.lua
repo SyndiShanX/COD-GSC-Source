@@ -7,11 +7,11 @@ CoD.vhud_HellstormRingMeter.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.id = "vhud_HellstormRingMeter"
 	self.soundSet = "default"
 	local L1 = LUI.UIImage.new(0, 0, 0, 416, 0, 0, 0, 832)
-	L1:setImage(RegisterImage(0xBF72B2CA288F8F))
+	L1:setImage(RegisterImage(@"uie_ui_hud_vehicle_hellstorm_ringmeter"))
 	self:addElement(L1)
 	self.L1 = L1
 	local L2 = LUI.UIImage.new(0, 0, 832, 416, 0, 0, 0, 832)
-	L2:setImage(RegisterImage(0xBF72B2CA288F8F))
+	L2:setImage(RegisterImage(@"uie_ui_hud_vehicle_hellstorm_ringmeter"))
 	self:addElement(L2)
 	self.L2 = L2
 	if PostLoadFunc then

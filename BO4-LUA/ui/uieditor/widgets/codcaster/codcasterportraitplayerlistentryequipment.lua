@@ -9,12 +9,12 @@ CoD.CodCasterPortraitPlayerListEntryEquipment.new = function(f1_arg0, f1_arg1, f
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local equipmentInactive = LUI.UIImage.new(0, 0, 0, 26, 0, 0, 0, 26)
 	equipmentInactive:setAlpha(0.4)
-	equipmentInactive:setImage(RegisterImage(0xA06A85AEEF6215F))
+	equipmentInactive:setImage(RegisterImage(@"hash_4A06A85AEEF6215F"))
 	self:addElement(equipmentInactive)
 	self.equipmentInactive = equipmentInactive
 	local EquipmentActive = LUI.UIImage.new(0, 0, 0, 26, 0, 0, 0, 26)
 	EquipmentActive:setAlpha(0)
-	EquipmentActive:setImage(RegisterImage(0xD4CD91D5CB3A9BC))
+	EquipmentActive:setImage(RegisterImage(@"hash_5D4CD91D5CB3A9BC"))
 	self:addElement(EquipmentActive)
 	self.EquipmentActive = EquipmentActive
 	self:mergeStateConditions({

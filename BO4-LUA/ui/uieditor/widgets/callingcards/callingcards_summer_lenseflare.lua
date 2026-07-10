@@ -7,8 +7,8 @@ CoD.CallingCards_Summer_lenseflare.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	self.id = "CallingCards_Summer_lenseflare"
 	self.soundSet = "default"
 	local lenseflare = LUI.UIImage.new(0, 0, -135, 505, 0, 0, -153, 183)
-	lenseflare:setImage(RegisterImage(0xD0E6290A54EC443))
-	lenseflare:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	lenseflare:setImage(RegisterImage(@"uie_ui_icon_callingcards_summer_lenseflare"))
+	lenseflare:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(lenseflare)
 	self.lenseflare = lenseflare
 	if PostLoadFunc then

@@ -17,8 +17,8 @@ CoD.AARClassRewardCACPreview_ZM.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	rewardDesc:setAlpha(0)
 	rewardDesc:setTTF("ttmussels_regular")
 	rewardDesc:setLetterSpacing(1)
-	rewardDesc:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	rewardDesc:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	rewardDesc:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	rewardDesc:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	rewardDesc:linkToElementModel(self, "reward1Desc", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -40,8 +40,8 @@ CoD.AARClassRewardCACPreview_ZM.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	rewardTitle:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	rewardTitle:setTTF("ttmussels_demibold")
 	rewardTitle:setLetterSpacing(6)
-	rewardTitle:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	rewardTitle:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	rewardTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	rewardTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	rewardTitle:linkToElementModel(self, "reward1Title", true, function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then

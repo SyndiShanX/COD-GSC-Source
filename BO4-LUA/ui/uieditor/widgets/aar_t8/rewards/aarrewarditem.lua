@@ -25,8 +25,8 @@ CoD.AARRewardItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 	Description:setText("")
 	Description:setTTF("ttmussels_regular")
 	Description:setLetterSpacing(1)
-	Description:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Description:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Description:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Description:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(Description)
 	self.Description = Description
 	local Title = LUI.UIText.new(0.5, 0.5, -171, 89, 0, 0, 124.5, 145.5)
@@ -34,8 +34,8 @@ CoD.AARRewardItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 	Title:setText("")
 	Title:setTTF("ttmussels_demibold")
 	Title:setLetterSpacing(4)
-	Title:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Title:setAlignment(Enum[0x7A5123B654282D2][0x70510683C22104B])
+	Title:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Title:setAlignment(Enum[@"luialignment"][@"lui_alignment_bottom"])
 	self:addElement(Title)
 	self.Title = Title
 	local Corner = CoD.AARRewardBrackets.new(f1_arg0, f1_arg1, 0, 0, -1, 381, 0, 0, -1, 183)

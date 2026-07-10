@@ -68,7 +68,7 @@ CoD.AARSummaryTab_WZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 			modelName = "xpNeededToLevelUp",
 		})
 	end)
-	XPMeter.maxRankText:setText(Engine[0xF9F1239CFD921FE](0xF80010008304EC0))
+	XPMeter.maxRankText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_4F80010008304EC0"))
 	XPMeter:linkToElementModel(self, nil, false, function(model)
 		XPMeter:setModel(model, f1_arg1)
 	end)
@@ -111,13 +111,13 @@ CoD.AARSummaryTab_WZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	XPMeter:linkToElementModel(self, "xpEarnedDuringMatch", true, function(model)
 		local f14_local0 = model:get()
 		if f14_local0 ~= nil then
-			XPMeter.xpEarnedText:setText(LocalizeIntoString(0x9EDF95589F9CAF1, f14_local0))
+			XPMeter.xpEarnedText:setText(LocalizeIntoString(@"hash_29EDF95589F9CAF1", f14_local0))
 		end
 	end)
 	XPMeter:linkToElementModel(self, "xpNeededToLevelUp", true, function(model)
 		local f15_local0 = model:get()
 		if f15_local0 ~= nil then
-			XPMeter.xpNeededText:setText(LocalizeIntoString(0xC1881B67805BFCA, f15_local0))
+			XPMeter.xpNeededText:setText(LocalizeIntoString(@"hash_2C1881B67805BFCA", f15_local0))
 		end
 	end)
 	self:addElement(XPMeter)
@@ -130,11 +130,11 @@ CoD.AARSummaryTab_WZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	self.AARGameHistory = AARGameHistory
 	local PerformanceLabel = LUI.UIText.new(0.5, 0.5, -321.5, 533.5, 0.5, 0.5, -255, -217)
 	PerformanceLabel:setRGB(0.9, 0.89, 0.78)
-	PerformanceLabel:setText(Engine[0xF9F1239CFD921FE](0x4B072C59118316))
+	PerformanceLabel:setText(Engine[@"hash_4F9F1239CFD921FE"](0x4B072C59118316))
 	PerformanceLabel:setTTF("dinnext_regular")
 	PerformanceLabel:setLetterSpacing(10)
-	PerformanceLabel:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	PerformanceLabel:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	PerformanceLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	PerformanceLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(PerformanceLabel)
 	self.PerformanceLabel = PerformanceLabel
 	local AARGametypeHeader = CoD.AARGametypeHeader.new(f1_arg0, f1_arg1, 0.5, 0.5, -351.5, 648.5, 0.5, 0.5, -400, -250)
@@ -206,13 +206,13 @@ CoD.AARSummaryTab_WZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	AARTierBar:linkToElementModel(self, "barCurrentTier", true, function(model)
 		local f27_local0 = model:get()
 		if f27_local0 ~= nil then
-			AARTierBar.CurrentTier:setText(LocalizeStringWithParameter(0xE743A7E5D0C37CD, f27_local0))
+			AARTierBar.CurrentTier:setText(LocalizeStringWithParameter(@"hash_1E743A7E5D0C37CD", f27_local0))
 		end
 	end)
 	AARTierBar:linkToElementModel(self, "barNextTier", true, function(model)
 		local f28_local0 = model:get()
 		if f28_local0 ~= nil then
-			AARTierBar.NextTier:setText(LocalizeStringWithParameter(0xE743A7E5D0C37CD, f28_local0))
+			AARTierBar.NextTier:setText(LocalizeStringWithParameter(@"hash_1E743A7E5D0C37CD", f28_local0))
 		end
 	end)
 	self:addElement(AARTierBar)
@@ -235,7 +235,7 @@ CoD.AARSummaryTab_WZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 			end,
 		},
 	})
-	TrialInfoBannerWidgetPC.InfoText:setText(Engine[0xF9F1239CFD921FE](0x38324BF4626CE42))
+	TrialInfoBannerWidgetPC.InfoText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_138324BF4626CE42"))
 	self:addElement(TrialInfoBannerWidgetPC)
 	self.TrialInfoBannerWidgetPC = TrialInfoBannerWidgetPC
 	local DamageStat = CoD.AARPerformanceWidgets.new(f1_arg0, f1_arg1, 0.5, 0.5, -321.5, 862.5, 0.5, 0.5, -203.5, -71.5)
@@ -275,7 +275,7 @@ CoD.AARSummaryTab_WZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	})
 	local f1_local12 = self
 	local f1_local13 = self.subscribeToModel
-	local f1_local14 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local14 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local13(f1_local12, f1_local14["AAR.activeTab"], function(f36_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -362,7 +362,7 @@ CoD.AARSummaryTab_WZ.__clipsPerState = {
 			local f39_local1 = function(f41_arg0)
 				local f41_local0 = function(f42_arg0)
 					local f42_local0 = function(f43_arg0)
-						f43_arg0:beginAnimation(100, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+						f43_arg0:beginAnimation(100, Enum[@"luitween"][@"luitween_ease_out"])
 						f43_arg0:setAlpha(1)
 						f43_arg0:registerEventHandler("transition_complete_keyframe", f39_arg0.clipFinished)
 					end
@@ -379,7 +379,7 @@ CoD.AARSummaryTab_WZ.__clipsPerState = {
 			local f39_local2 = function(f44_arg0)
 				local f44_local0 = function(f45_arg0)
 					local f45_local0 = function(f46_arg0)
-						f46_arg0:beginAnimation(99, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+						f46_arg0:beginAnimation(99, Enum[@"luitween"][@"luitween_ease_out"])
 						f46_arg0:setAlpha(1)
 						f46_arg0:registerEventHandler("transition_complete_keyframe", f39_arg0.clipFinished)
 					end

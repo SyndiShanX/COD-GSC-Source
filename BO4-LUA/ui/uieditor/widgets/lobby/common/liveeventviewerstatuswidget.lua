@@ -9,14 +9,14 @@ CoD.LiveEventViewerStatusWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local liveLabel = LUI.UIText.new(0, 0, 38, 77, 0.5, 0.5, -19, 19)
-	liveLabel:setText(Engine[0xF9F1239CFD921FE](0x4AD4D7A985521CF))
+	liveLabel:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_4AD4D7A985521CF"))
 	liveLabel:setTTF("default")
-	liveLabel:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	liveLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(liveLabel)
 	self.liveLabel = liveLabel
 	local liveCircle = LUI.UIImage.new(0, 0, 0, 30, 0.5, 0.5, -15, 15)
 	liveCircle:setRGB(1, 0, 0)
-	liveCircle:setMaterial(LUI.UIImage.GetCachedMaterial(0x50BD503A1EC49C7))
+	liveCircle:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_elliptical_ring"))
 	liveCircle:setShaderVector(0, 8, 2, 0, 0)
 	liveCircle:setShaderVector(1, 20, 20, 0, 0)
 	liveCircle:setShaderVector(2, 0.2, 0.2, 0, 0)
@@ -26,19 +26,19 @@ CoD.LiveEventViewerStatusWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 		{
 			stateName = "Live",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsGlobalModelValueEqualToEnum("liveEventViewer.liveState", Enum[0x2F0D281157F67C6][0xE232211FE48ADBF])
+				return CoD.ModelUtility.IsGlobalModelValueEqualToEnum("liveEventViewer.liveState", Enum[@"hlschannelstate_e"][@"hls_channel_state_live"])
 			end,
 		},
 		{
 			stateName = "Replay",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsGlobalModelValueEqualToEnum("liveEventViewer.liveState", Enum[0x2F0D281157F67C6][0xDD0743E74B029A2])
+				return CoD.ModelUtility.IsGlobalModelValueEqualToEnum("liveEventViewer.liveState", Enum[@"hlschannelstate_e"][@"hls_channel_state_replay"])
 			end,
 		},
 	})
 	local f1_local3 = self
 	local f1_local4 = self.subscribeToModel
-	local f1_local5 = Engine[0x8DF2E5447F384B9]()
+	local f1_local5 = Engine[@"getglobalmodel"]()
 	f1_local4(f1_local3, f1_local5["liveEventViewer.liveState"], function(f4_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -59,7 +59,7 @@ CoD.LiveEventViewerStatusWidget.__resetProperties = function(f5_arg0)
 	f5_arg0.liveCircle:setRGB(1, 0, 0)
 	f5_arg0.liveCircle:setAlpha(1)
 	f5_arg0.liveLabel:setAlpha(1)
-	f5_arg0.liveLabel:setText(Engine[0xF9F1239CFD921FE](0x4AD4D7A985521CF))
+	f5_arg0.liveLabel:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_4AD4D7A985521CF"))
 end
 CoD.LiveEventViewerStatusWidget.__clipsPerState = {
 	DefaultState = {
@@ -89,7 +89,7 @@ CoD.LiveEventViewerStatusWidget.__clipsPerState = {
 			f9_arg0:__resetProperties()
 			f9_arg0:setupElementClipCounter(2)
 			f9_arg0.liveLabel:completeAnimation()
-			f9_arg0.liveLabel:setText(Engine[0xF9F1239CFD921FE](0xD9EF34E16C4EB58))
+			f9_arg0.liveLabel:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_6D9EF34E16C4EB58"))
 			f9_arg0.clipFinished(f9_arg0.liveLabel)
 			f9_arg0.liveCircle:completeAnimation()
 			f9_arg0.liveCircle:setRGB(0.02, 1, 0)

@@ -8,7 +8,7 @@ CoD.PC_VodViewerQuitButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self.soundSet = "none"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local BTNQuit = LUI.UIImage.new(0.98, 0.98, -49, 1, 0.02, 0.02, -1, 49)
-	BTNQuit:setImage(RegisterImage(0x9ECB977BE93F2AB))
+	BTNQuit:setImage(RegisterImage(@"uie_close_icon"))
 	self:addElement(BTNQuit)
 	self.BTNQuit = BTNQuit
 	self:mergeStateConditions({
@@ -31,7 +31,7 @@ CoD.PC_VodViewerQuitButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	end)
 	local f1_local2 = self
 	local f1_local3 = self.subscribeToModel
-	local f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local3(f1_local2, f1_local4.LastInput, function(f5_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -43,7 +43,7 @@ CoD.PC_VodViewerQuitButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	end, false)
 	f1_local2 = self
 	f1_local3 = self.subscribeToModel
-	f1_local4 = Engine[0x8DF2E5447F384B9]()
+	f1_local4 = Engine[@"getglobalmodel"]()
 	f1_local3(f1_local2, f1_local4.cutsceneSkippable, function(f6_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

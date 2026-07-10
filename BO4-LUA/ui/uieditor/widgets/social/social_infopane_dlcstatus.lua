@@ -8,10 +8,10 @@ CoD.Social_InfoPane_DLCStatus.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self.soundSet = "none"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local DLCText = LUI.UIText.new(0, 0, 0, 200, 0, 0, 0.5, 16.5)
-	DLCText:setText(Engine[0xF9F1239CFD921FE](0xB9675B360750903))
+	DLCText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_6B9675B360750903"))
 	DLCText:setTTF("dinnext_regular")
-	DLCText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	DLCText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	DLCText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	DLCText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(DLCText)
 	self.DLCText = DLCText
 	self:mergeStateConditions({
@@ -67,7 +67,7 @@ end
 CoD.Social_InfoPane_DLCStatus.__resetProperties = function(f8_arg0)
 	f8_arg0.DLCText:completeAnimation()
 	f8_arg0.DLCText:setAlpha(1)
-	f8_arg0.DLCText:setText(Engine[0xF9F1239CFD921FE](0xB9675B360750903))
+	f8_arg0.DLCText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_6B9675B360750903"))
 end
 CoD.Social_InfoPane_DLCStatus.__clipsPerState = {
 	DefaultState = {
@@ -85,7 +85,7 @@ CoD.Social_InfoPane_DLCStatus.__clipsPerState = {
 			f10_arg0:setupElementClipCounter(1)
 			f10_arg0.DLCText:completeAnimation()
 			f10_arg0.DLCText:setAlpha(1)
-			f10_arg0.DLCText:setText(Engine[0xF9F1239CFD921FE](0xB9675B360750903))
+			f10_arg0.DLCText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_6B9675B360750903"))
 			f10_arg0.clipFinished(f10_arg0.DLCText)
 		end,
 	},
@@ -95,7 +95,7 @@ CoD.Social_InfoPane_DLCStatus.__clipsPerState = {
 			f11_arg0:setupElementClipCounter(1)
 			f11_arg0.DLCText:completeAnimation()
 			f11_arg0.DLCText:setAlpha(1)
-			f11_arg0.DLCText:setText(Engine[0xF9F1239CFD921FE](0xB2A7066FD394420))
+			f11_arg0.DLCText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_7B2A7066FD394420"))
 			f11_arg0.clipFinished(f11_arg0.DLCText)
 		end,
 	},

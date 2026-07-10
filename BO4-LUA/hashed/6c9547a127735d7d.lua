@@ -10,7 +10,7 @@ CoD.KilledByHeader.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	local TextBackground = LUI.UIImage.new(0, 1, 0, 0, 0.5, 0.5, -16, 16)
 	TextBackground:setRGB(0, 0, 0)
 	TextBackground:setAlpha(0.8)
-	TextBackground:setMaterial(LUI.UIImage.GetCachedMaterial(0xE992BD5A540E2D))
+	TextBackground:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_delta_normal"))
 	TextBackground:setShaderVector(0, 0, 1, 0, 0)
 	TextBackground:setShaderVector(1, 0.15, 0.15, 0, 0)
 	TextBackground:setShaderVector(2, 0, 1, 0, 0)
@@ -19,10 +19,10 @@ CoD.KilledByHeader.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	self:addElement(TextBackground)
 	self.TextBackground = TextBackground
 	local MistakesText = LUI.UIText.new(0.5, 0.5, -206.5, 206.5, 0.5, 0.5, -18.5, 18.5)
-	MistakesText:setText(LocalizeToUpperString(0x1838FDD5EA1D43A))
+	MistakesText:setText(LocalizeToUpperString(@"hash_51838FDD5EA1D43A"))
 	MistakesText:setTTF("notosans_regular")
-	MistakesText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	MistakesText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	MistakesText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	MistakesText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	MistakesText:subscribeToGlobalModel(f1_arg1, "HUDItems", "killedByMOD", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -49,8 +49,8 @@ CoD.KilledByHeader.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	self.WeaponImage = WeaponImage
 	local DeathTypeText = LUI.UIText.new(0.5, 0.5, -276.5, -76.5, 0.5, 0.5, -18.5, 18.5)
 	DeathTypeText:setTTF("notosans_regular")
-	DeathTypeText:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
-	DeathTypeText:setAlignment(Enum[0x7A5123B654282D2][0x6ED4298C93DC5ED])
+	DeathTypeText:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
+	DeathTypeText:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
 	DeathTypeText:subscribeToGlobalModel(f1_arg1, "HUDItems", "killedByMOD", function(model)
 		local f5_local0 = model:get()
 		if f5_local0 ~= nil then
@@ -67,8 +67,8 @@ CoD.KilledByHeader.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	self.DeathTypeText = DeathTypeText
 	local DeathWeaponName = LUI.UIText.new(0.5, 0.5, 77, 277, 0.5, 0.5, -18.5, 18.5)
 	DeathWeaponName:setTTF("notosans_regular")
-	DeathWeaponName:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	DeathWeaponName:setAlignment(Enum[0x7A5123B654282D2][0x6ED4298C93DC5ED])
+	DeathWeaponName:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	DeathWeaponName:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
 	DeathWeaponName:subscribeToGlobalModel(f1_arg1, "HUDItems", "killedByMOD", function(model)
 		local f7_local0 = model:get()
 		if f7_local0 ~= nil then
@@ -78,7 +78,7 @@ CoD.KilledByHeader.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	DeathWeaponName:subscribeToGlobalModel(f1_arg1, "HUDItems", "killedByItemIndex", function(model)
 		local f8_local0 = model:get()
 		if f8_local0 ~= nil then
-			DeathWeaponName:setText(LocalizeToUpperString(GetItemNameFromIndex(Enum[0x6EB546760F890D2][0x3057ABF96AF8289], f8_local0)))
+			DeathWeaponName:setText(LocalizeToUpperString(GetItemNameFromIndex(Enum[@"statindexoffset"][@"hash_13057ABF96AF8289"], f8_local0)))
 		end
 	end)
 	self:addElement(DeathWeaponName)
@@ -93,7 +93,7 @@ CoD.KilledByHeader.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	})
 	local f1_local6 = self
 	local f1_local7 = self.subscribeToModel
-	local f1_local8 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local8 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local7(f1_local6, f1_local8["hudItems.showSpawnSelect"], function(f10_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

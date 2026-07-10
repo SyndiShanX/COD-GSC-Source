@@ -10,7 +10,7 @@ CoD.WarzoneQuickInventoryMenuItemSmall_Internal.new = function(f1_arg0, f1_arg1,
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Blur = LUI.UIImage.new(0, 0, 11, 78, 0, 0, 13, 75)
-	Blur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	Blur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	Blur:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(Blur)
 	self.Blur = Blur
@@ -21,7 +21,7 @@ CoD.WarzoneQuickInventoryMenuItemSmall_Internal.new = function(f1_arg0, f1_arg1,
 	self.Backing = Backing
 	local Icon = LUI.UIImage.new(0.5, 0.5, -38, 38, 0.5, 0.5, -42, 34)
 	Icon:setScale(0.72, 0.72)
-	Icon:setMaterial(LUI.UIImage.GetCachedMaterial(0x67D1E3A3D2D1BF))
+	Icon:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_saturation_normal"))
 	Icon:setShaderVector(0, 1, 0, 0, 0)
 	Icon:linkToElementModel(self, "icon", true, function(model)
 		local f2_local0 = model:get()
@@ -46,20 +46,20 @@ CoD.WarzoneQuickInventoryMenuItemSmall_Internal.new = function(f1_arg0, f1_arg1,
 	self.StackCount = StackCount
 	local Border = LUI.UIImage.new(0, 0, 0, 88, 0, 0, 0.5, 88.5)
 	Border:setRGB(0, 0, 0)
-	Border:setImage(RegisterImage(0x144D4B98D6C5F71))
-	Border:setMaterial(LUI.UIImage.GetCachedMaterial(0xE125638BF94665F))
+	Border:setImage(RegisterImage(@"uie_ui_hud_wz_hud_core_qe_border"))
+	Border:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_feather_edges"))
 	Border:setShaderVector(0, 0.01, 0.1, 0.01, 0.1)
 	self:addElement(Border)
 	self.Border = Border
 	local triangles = LUI.UIImage.new(0, 0, 0.5, 88.5, 0, 0, 0.5, 88.5)
 	triangles:setRGB(0, 0, 0)
-	triangles:setImage(RegisterImage(0x8CF82F4676A49D8))
+	triangles:setImage(RegisterImage(@"uie_ui_hud_wz_hud_core_qe_triangles"))
 	self:addElement(triangles)
 	self.triangles = triangles
 	local LED = LUI.UIImage.new(0, 0, 0, 88, 0, 0, 0.5, 88.5)
 	LED:setRGB(0.29, 0.28, 0.22)
 	LED:setAlpha(0.08)
-	LED:setImage(RegisterImage(0x4EF5361D0A84EE8))
+	LED:setImage(RegisterImage(@"uie_ui_hud_wz_hud_core_qe_led"))
 	self:addElement(LED)
 	self.LED = LED
 	self:mergeStateConditions({

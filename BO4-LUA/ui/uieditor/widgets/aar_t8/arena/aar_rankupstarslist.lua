@@ -14,7 +14,7 @@ CoD.AAR_RankUpStarsList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	AARRankedStarsList:setWidgetType(CoD.AAR_RankUpStar)
 	AARRankedStarsList:setHorizontalCount(9)
 	AARRankedStarsList:setVerticalCount(5)
-	AARRankedStarsList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	AARRankedStarsList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	AARRankedStarsList:setDataSource("RankedPlayStar")
 	self:addElement(AARRankedStarsList)
 	self.AARRankedStarsList = AARRankedStarsList

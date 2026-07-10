@@ -18,7 +18,7 @@ CoD.IconRewardWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 				if f2_local0 then
 					f2_local0 = IsWarzone()
 					if f2_local0 then
-						f2_local0 = CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "icon", 0x620E589747ADBAB)
+						f2_local0 = CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "icon", @"t7_hud_mp_notifications_xp_blue")
 					end
 				end
 				return f2_local0
@@ -27,13 +27,13 @@ CoD.IconRewardWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 		{
 			stateName = "Visible",
 			condition = function(menu, element, event)
-				return IsDoubleXP(f1_arg1) and CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "icon", 0x620E589747ADBAB)
+				return IsDoubleXP(f1_arg1) and CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "icon", @"t7_hud_mp_notifications_xp_blue")
 			end,
 		},
 	})
 	local CallingCardReward = Notification2xpReward
 	local RewardImage = Notification2xpReward.subscribeToModel
-	local f1_local4 = Engine[0x8DF2E5447F384B9]()
+	local f1_local4 = Engine[@"getglobalmodel"]()
 	RewardImage(CallingCardReward, f1_local4["lobbyRoot.lobbyNav"], function(f4_arg0)
 		f1_arg0:updateElementState(Notification2xpReward, {
 			name = "model_validation",
@@ -63,7 +63,7 @@ CoD.IconRewardWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	self.RewardImage = RewardImage
 	CallingCardReward = LUI.UIImage.new(0, 0, 0, 72, 0, 0, 0, 72)
 	CallingCardReward:setAlpha(0)
-	CallingCardReward:setMaterial(LUI.UIImage.GetCachedMaterial(0xA02C44161370F6D))
+	CallingCardReward:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_1A02C44161370F6D"))
 	CallingCardReward:setShaderVector(0, 0.5, 0, 0, 0)
 	CallingCardReward:setShaderVector(1, 1, 1, 0, 0)
 	CallingCardReward:setShaderVector(2, 0, 0, 0, 0)
@@ -91,7 +91,7 @@ CoD.IconRewardWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 		{
 			stateName = "DoubleXP",
 			condition = function(menu, element, event)
-				return IsDoubleXP(f1_arg1) and CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "icon", 0x620E589747ADBAB)
+				return IsDoubleXP(f1_arg1) and CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "icon", @"t7_hud_mp_notifications_xp_blue")
 			end,
 		},
 	})

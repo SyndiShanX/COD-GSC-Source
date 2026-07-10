@@ -39,7 +39,7 @@ CoD.StartMenu_Barracks_WZ_WinRecordContainer.new = function(f1_arg0, f1_arg1, f1
 			modelName = "quadWins",
 		})
 	end, false)
-	QuadWins.GametypeTitle:setText(LocalizeToUpperString(0x5BE69820FD79596))
+	QuadWins.GametypeTitle:setText(LocalizeToUpperString(@"menu/quad_wins"))
 	QuadWins:subscribeToGlobalModel(f1_arg1, "BarrackWinsWZ", "quadWins", function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
@@ -75,7 +75,7 @@ CoD.StartMenu_Barracks_WZ_WinRecordContainer.new = function(f1_arg0, f1_arg1, f1
 			modelName = "duoWins",
 		})
 	end, false)
-	DuoWins.GametypeTitle:setText(LocalizeToUpperString(0x24D573075A30555))
+	DuoWins.GametypeTitle:setText(LocalizeToUpperString(@"menu/duo_wins"))
 	DuoWins:subscribeToGlobalModel(f1_arg1, "BarrackWinsWZ", "duoWins", function(model)
 		local f8_local0 = model:get()
 		if f8_local0 ~= nil then
@@ -111,7 +111,7 @@ CoD.StartMenu_Barracks_WZ_WinRecordContainer.new = function(f1_arg0, f1_arg1, f1
 			modelName = "soloWins",
 		})
 	end, false)
-	SoloWins.GametypeTitle:setText(LocalizeToUpperString(0xF40E0D95F95E04E))
+	SoloWins.GametypeTitle:setText(LocalizeToUpperString(@"menu/solo_wins"))
 	SoloWins:subscribeToGlobalModel(f1_arg1, "BarrackWinsWZ", "soloWins", function(model)
 		local f12_local0 = model:get()
 		if f12_local0 ~= nil then
@@ -128,23 +128,23 @@ CoD.StartMenu_Barracks_WZ_WinRecordContainer.new = function(f1_arg0, f1_arg1, f1
 	self.SoloWins = SoloWins
 	DotlineTop = LUI.UIImage.new(0, 0, 8.5, 468.5, 0, 0, 224.5, 228.5)
 	DotlineTop:setAlpha(0.2)
-	DotlineTop:setImage(RegisterImage(0xF9C7F41C631866E))
-	DotlineTop:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	DotlineTop:setImage(RegisterImage(@"uie_ui_menu_social_emblem_dotline"))
+	DotlineTop:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	DotlineTop:setShaderVector(0, 1.2, 0, 0, 0)
 	self:addElement(DotlineTop)
 	self.DotlineTop = DotlineTop
 	DotlineBot = LUI.UIImage.new(0, 0, 8.5, 468.5, 0, 0, 446.5, 450.5)
 	DotlineBot:setAlpha(0.2)
-	DotlineBot:setImage(RegisterImage(0xF9C7F41C631866E))
-	DotlineBot:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	DotlineBot:setImage(RegisterImage(@"uie_ui_menu_social_emblem_dotline"))
+	DotlineBot:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	DotlineBot:setShaderVector(0, 1.2, 0, 0, 0)
 	self:addElement(DotlineBot)
 	self.DotlineBot = DotlineBot
 	Medals = CoD.StartMenu_Button_LG.new(f1_arg0, f1_arg1, 0.5, 0.5, -239, 239, 0.5, 0.5, 57, 335)
 	Medals:setAlpha(0)
-	Medals.ButtonInternal.ImageContainer.ImageContainer:setImage(RegisterImage(0xCB7B28E1ED13921))
+	Medals.ButtonInternal.ImageContainer.ImageContainer:setImage(RegisterImage(@"uie_ui_menu_start_menu_grid"))
 	Medals.ButtonInternal.StartMenuButtonFrame:changeFrameWidget(CoD.ButtonFrame_MedalWZ)
-	Medals.ButtonInternal.ButtonTitle.HeaderText:setText(LocalizeHash(0x8F69F5BDD4F7C26))
+	Medals.ButtonInternal.ButtonTitle.HeaderText:setText(LocalizeHash(@"hash_8F69F5BDD4F7C26"))
 	Medals:subscribeToGlobalModel(f1_arg1, "PlayerShowcase", "medal", function(model)
 		Medals.ButtonInternal.ButtonTitle.NewIcon:setModel(model, f1_arg1)
 	end)
@@ -155,10 +155,10 @@ CoD.StartMenu_Barracks_WZ_WinRecordContainer.new = function(f1_arg0, f1_arg1, f1
 		elseif element.super.gainFocus then
 			f15_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f15_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(Medals, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(Medals, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if IsInDefaultState(element) then
 			CoD.StartMenuUtility.OpenStartMenuOverlay(self, menu, controller, "Barracks_Medals")
 			PlaySoundAlias("uin_toggle_generic")
@@ -167,7 +167,7 @@ CoD.StartMenu_Barracks_WZ_WinRecordContainer.new = function(f1_arg0, f1_arg1, f1
 		end
 	end, function(element, menu, controller)
 		if IsInDefaultState(element) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false

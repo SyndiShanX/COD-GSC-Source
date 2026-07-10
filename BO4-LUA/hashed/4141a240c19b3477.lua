@@ -14,7 +14,7 @@ CoD.HealthBoostPlayerList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	PlayerList:setTopBottom(0, 0, 0, 190)
 	PlayerList:setWidgetType(CoD.HealthBoostPlayerListWidget)
 	PlayerList:setHorizontalCount(6)
-	PlayerList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	PlayerList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	PlayerList:setDataSource("HealthBoostPlayerList")
 	PlayerList:registerEventHandler("gain_focus", function(element, event)
 		local f2_local0 = nil
@@ -23,14 +23,14 @@ CoD.HealthBoostPlayerList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 		elseif element.super.gainFocus then
 			f2_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f2_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(PlayerList, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(PlayerList, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		CoD.ScorestreakInGameUtility.HealthBoostPlayerSelected(self, element, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, nil)
 		return false
 	end, false)
 	self:addElement(PlayerList)

@@ -8,10 +8,10 @@ CoD.LoadingScreenSkipPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local label = LUI.UIText.new(1, 1, -807, -26, 1, 1, -37, 0)
-	label:setText(Engine[0xF9F1239CFD921FE](0x8F7A20360760C))
+	label:setText(Engine[@"hash_4F9F1239CFD921FE"](@"platform/skip"))
 	label:setTTF("skorzhen")
-	label:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
-	label:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	label:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
+	label:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(label)
 	self.label = label
 	if PostLoadFunc then
@@ -23,7 +23,7 @@ end
 CoD.LoadingScreenSkipPrompt.__resetProperties = function(f2_arg0)
 	f2_arg0.label:completeAnimation()
 	f2_arg0.label:setAlpha(1)
-	f2_arg0.label:setText(Engine[0xF9F1239CFD921FE](0x8F7A20360760C))
+	f2_arg0.label:setText(Engine[@"hash_4F9F1239CFD921FE"](@"platform/skip"))
 end
 CoD.LoadingScreenSkipPrompt.__clipsPerState = {
 	DefaultState = {
@@ -56,7 +56,7 @@ CoD.LoadingScreenSkipPrompt.__clipsPerState = {
 			end
 			f4_arg0.label:completeAnimation()
 			f4_arg0.label:setAlpha(0)
-			f4_arg0.label:setText(Engine[0xF9F1239CFD921FE](0x3135E00B961022B))
+			f4_arg0.label:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_63135E00B961022B"))
 			f4_local0(f4_arg0.label)
 		end,
 	},

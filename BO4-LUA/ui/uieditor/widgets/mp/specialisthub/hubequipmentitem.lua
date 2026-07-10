@@ -17,8 +17,8 @@ CoD.HubEquipmentItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	name:setAlpha(0.5)
 	name:setText("")
 	name:setTTF("dinnext_regular")
-	name:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	name:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	name:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	name:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(name)
 	self.name = name
 	local categoryHeader = LUI.UIText.new(0.5, 0.5, -100, 100, 0, 0, 182, 200)
@@ -26,8 +26,8 @@ CoD.HubEquipmentItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	categoryHeader:setAlpha(0.15)
 	categoryHeader:setText("")
 	categoryHeader:setTTF("ttmussels_regular")
-	categoryHeader:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	categoryHeader:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	categoryHeader:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	categoryHeader:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	self:addElement(categoryHeader)
 	self.categoryHeader = categoryHeader
 	local statHeader = LUI.UIText.new(0.5, 0.5, -100, 100, 0, 0, 278, 296)
@@ -35,8 +35,8 @@ CoD.HubEquipmentItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	statHeader:setAlpha(0.15)
 	statHeader:setText("")
 	statHeader:setTTF("ttmussels_regular")
-	statHeader:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	statHeader:setAlignment(Enum[0x7A5123B654282D2][0x70510683C22104B])
+	statHeader:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	statHeader:setAlignment(Enum[@"luialignment"][@"lui_alignment_bottom"])
 	self:addElement(statHeader)
 	self.statHeader = statHeader
 	local statValue = LUI.UIText.new(0.5, 0.5, -100, 100, 0, 0, 301, 341)
@@ -44,7 +44,7 @@ CoD.HubEquipmentItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	statValue:setAlpha(0.5)
 	statValue:setText("")
 	statValue:setTTF("ttmussels_demibold")
-	statValue:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	statValue:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	self:addElement(statValue)
 	self.statValue = statValue
 	local RestrictedItemWarning = CoD.RestrictedItemWarning.new(f1_arg0, f1_arg1, 0, 0, 70, 130, 0, 0, 70, 120)

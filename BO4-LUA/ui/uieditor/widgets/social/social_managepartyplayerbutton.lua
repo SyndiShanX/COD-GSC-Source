@@ -22,7 +22,7 @@ CoD.Social_ManagePartyPlayerButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	local EmptyButton = CoD.DirectorButtonAdd.new(f1_arg0, f1_arg1, -0.01, 1, 4, 0, 0, 1, 0, 0)
 	EmptyButton:setAlpha(0)
 	EmptyButton:linkToElementModel(EmptyButton, "empty", true, function(model, f3_arg1)
-		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	EmptyButton:registerEventHandler("gain_focus", function(element, event)
 		local f4_local0 = nil
@@ -31,10 +31,10 @@ CoD.Social_ManagePartyPlayerButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 		elseif element.super.gainFocus then
 			f4_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f4_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(EmptyButton, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(EmptyButton, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if CoD.ModelUtility.IsSelfModelValueTrue(self, controller, "empty") then
 			OpenOverlay(self, "Social_InvitePlayersPopup", controller, nil)
 			PlaySoundAlias("uin_toggle_generic")
@@ -43,7 +43,7 @@ CoD.Social_ManagePartyPlayerButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 		end
 	end, function(element, menu, controller)
 		if CoD.ModelUtility.IsSelfModelValueTrue(self, controller, "empty") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xC4EB9FE5F09A2E7, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_C4EB9FE5F09A2E7", nil, "ui_confirm")
 			return true
 		else
 			return false
@@ -54,8 +54,8 @@ CoD.Social_ManagePartyPlayerButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	local FocusGlow = nil
 	FocusGlow = LUI.UIImage.new(0, 1, -37, 37, 0, 1, -37, 37)
 	FocusGlow:setAlpha(0)
-	FocusGlow:setImage(RegisterImage(0xB8F10D49D85E9C4))
-	FocusGlow:setMaterial(LUI.UIImage.GetCachedMaterial(0xDAB59B2CAE01851))
+	FocusGlow:setImage(RegisterImage(@"uie_ui_menu_common_focus_glow_small"))
+	FocusGlow:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_6DAB59B2CAE01851"))
 	FocusGlow:setShaderVector(0, 0, 0, 0.24, 0.24)
 	FocusGlow:setShaderVector(1, 1, 0, 0, 0)
 	FocusGlow:setupNineSliceShader(75, 75)
@@ -69,8 +69,8 @@ CoD.Social_ManagePartyPlayerButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	local FrontendFocusPip = nil
 	FrontendFocusPip = LUI.UIImage.new(0, 1, -6, 6, 0, 1, -6, 6)
 	FrontendFocusPip:setAlpha(0)
-	FrontendFocusPip:setImage(RegisterImage(0x793C73633F620BB))
-	FrontendFocusPip:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	FrontendFocusPip:setImage(RegisterImage(@"uie_ui_menu_store_focus_pips"))
+	FrontendFocusPip:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	FrontendFocusPip:setShaderVector(0, 0, 0, 0, 0)
 	FrontendFocusPip:setupNineSliceShader(40, 40)
 	self:addElement(FrontendFocusPip)
@@ -79,8 +79,8 @@ CoD.Social_ManagePartyPlayerButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	FrontendFrameSelected = LUI.UIImage.new(0, 1, -4, 4, 0, 1, -4, 4)
 	FrontendFrameSelected:setRGB(0.92, 0.89, 0.72)
 	FrontendFrameSelected:setAlpha(0)
-	FrontendFrameSelected:setImage(RegisterImage(0xCB07CCC28498CB2))
-	FrontendFrameSelected:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	FrontendFrameSelected:setImage(RegisterImage(@"uie_ui_menu_store_focus_frame"))
+	FrontendFrameSelected:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	FrontendFrameSelected:setShaderVector(0, 0, 0, 0, 0)
 	FrontendFrameSelected:setupNineSliceShader(12, 12)
 	self:addElement(FrontendFrameSelected)
@@ -89,8 +89,8 @@ CoD.Social_ManagePartyPlayerButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	FrontendFrameSelectedGlow = LUI.UIImage.new(0, 1, -8, 8, 0, 1, -8, 8)
 	FrontendFrameSelectedGlow:setRGB(0.92, 0.89, 0.72)
 	FrontendFrameSelectedGlow:setAlpha(0)
-	FrontendFrameSelectedGlow:setImage(RegisterImage(0xCB07CCC28498CB2))
-	FrontendFrameSelectedGlow:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	FrontendFrameSelectedGlow:setImage(RegisterImage(@"uie_ui_menu_store_focus_frame"))
+	FrontendFrameSelectedGlow:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	FrontendFrameSelectedGlow:setShaderVector(0, 0, 0, 0, 0)
 	FrontendFrameSelectedGlow:setupNineSliceShader(28, 28)
 	self:addElement(FrontendFrameSelectedGlow)
@@ -126,15 +126,15 @@ CoD.Social_ManagePartyPlayerButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	end)
 	self:appendEventHandler("input_source_changed", function(f11_arg0, f11_arg1)
 		f11_arg1.menu = f11_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f11_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+		CoD.Menu.UpdateButtonShownState(f11_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 	end)
 	local f1_local8 = self
 	local f1_local9 = self.subscribeToModel
-	local f1_local10 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local10 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local9(f1_local8, f1_local10.LastInput, function(f12_arg0, f12_arg1)
-		CoD.Menu.UpdateButtonShownState(f12_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+		CoD.Menu.UpdateButtonShownState(f12_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if IsPC() then
 			SetCurrentElementAsActive(self, self, controller)
 			CopyModelFindElement(menu, controller, self, "playerInfo")
@@ -144,13 +144,13 @@ CoD.Social_ManagePartyPlayerButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 		end
 	end, function(element, menu, controller)
 		if IsPC() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], nil, function(element, menu, controller, model)
 		if IsPC() and IsGamepad(controller) then
 			SetSelectedFriendXUID(self, self, controller)
 			OpenOverlay(self, "Social_PlayerDetailsPopup", controller, nil)
@@ -159,7 +159,7 @@ CoD.Social_ManagePartyPlayerButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 		end
 	end, function(element, menu, controller)
 		if IsPC() and IsGamepad(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0xE0254269ED8FFD3, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"hash_1E0254269ED8FFD3", nil, nil)
 			return true
 		else
 			return false

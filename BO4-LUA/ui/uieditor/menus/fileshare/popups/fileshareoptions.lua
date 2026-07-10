@@ -7,7 +7,7 @@ CoD.FileshareOptions = InheritFrom(CoD.Menu)
 LUI.createMenu.FileshareOptions = function(f1_arg0, f1_arg1)
 	local self = CoD.Menu.NewForUIEditor("FileshareOptions", f1_arg0)
 	local f1_local1 = self
-	SetGlobalModelValueArg("fileshareRoot.deleteTask.state", Enum[0xE798E99E27D081E][0x3D25EE7E8459854])
+	SetGlobalModelValueArg("fileshareRoot.deleteTask.state", Enum[@"filesharetaskuistate"][@"fileshare_task_ui_idle"])
 	CoD.FileshareUtility.UpdateCurrentQuota(f1_arg0)
 	self:setClass(CoD.FileshareOptions)
 	self.soundSet = "default"
@@ -24,8 +24,8 @@ LUI.createMenu.FileshareOptions = function(f1_arg0, f1_arg1)
 	self.Blackfade = Blackfade
 	local tileTexture = LUI.UIImage.new(1, 1, -532, 0, 0, 1, 0, 0)
 	tileTexture:setAlpha(0.5)
-	tileTexture:setImage(RegisterImage(0xA38BB233841162F))
-	tileTexture:setMaterial(LUI.UIImage.GetCachedMaterial(0xD8EA9FE9B0BCF75))
+	tileTexture:setImage(RegisterImage(@"uie_t7_tile_texture"))
+	tileTexture:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_tile_scroll"))
 	tileTexture:setShaderVector(0, 30, 55, 0, 0)
 	tileTexture:setShaderVector(1, 0, 0, 0, 0)
 	self:addElement(tileTexture)
@@ -39,7 +39,7 @@ LUI.createMenu.FileshareOptions = function(f1_arg0, f1_arg1)
 	OptionsList:setLeftRight(1, 1, -451, -51)
 	OptionsList:setTopBottom(0, 0, 498, 558)
 	OptionsList:setWidgetType(CoD.EmblemOptionsButton)
-	OptionsList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	OptionsList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	OptionsList:setDataSource("FileshareOptionsButtonList")
 	OptionsList:registerEventHandler("gain_focus", function(element, event)
 		local f2_local0 = nil
@@ -48,24 +48,24 @@ LUI.createMenu.FileshareOptions = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f2_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f2_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(OptionsList, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(OptionsList, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		ProcessListAction(self, element, controller, menu)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 		return true
 	end, false)
 	self:addElement(OptionsList)
 	self.OptionsList = OptionsList
 	local Title = LUI.UIText.new(1, 1, -451, -21, 0, 0, 35, 80)
 	Title:setRGB(ColorSet.T8__BEIGE__HEADER.r, ColorSet.T8__BEIGE__HEADER.g, ColorSet.T8__BEIGE__HEADER.b)
-	Title:setText(Engine[0xF9F1239CFD921FE](0x2FA47140D97F89D))
+	Title:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_2FA47140D97F89D"))
 	Title:setTTF("ttmussels_demibold")
-	Title:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Title:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Title:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Title:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(Title)
 	self.Title = Title
 	local Border00 = LUI.UIImage.new(1, 1, -533, -531, 0, 0, 0, 1080)
@@ -156,7 +156,7 @@ LUI.createMenu.FileshareOptions = function(f1_arg0, f1_arg1)
 	hintText:linkToElementModel(OptionsList, "hintText", true, function(model)
 		local f15_local0 = model:get()
 		if f15_local0 ~= nil then
-			hintText.ItemHintText:setText(Engine[0xF9F1239CFD921FE](f15_local0))
+			hintText.ItemHintText:setText(Engine[@"hash_4F9F1239CFD921FE"](f15_local0))
 		end
 	end)
 	self:mergeStateConditions({
@@ -167,11 +167,11 @@ LUI.createMenu.FileshareOptions = function(f1_arg0, f1_arg1)
 			end,
 		},
 	})
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		GoBack(self, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 		return true
 	end, false)
 	LUI.OverrideFunction_CallOriginalFirst(self, "close", function(element)
@@ -180,13 +180,13 @@ LUI.createMenu.FileshareOptions = function(f1_arg0, f1_arg1)
 	end)
 	self:subscribeToGlobalModel(f1_arg0, "GlobalModel", "fileshareRoot.publishTask.state", function(model)
 		local f20_local0 = self
-		if CoD.ModelUtility.IsGlobalModelValueEqualToEnum("fileshareRoot.publishTask.state", Enum[0xE798E99E27D081E][0xFE5B3BE5B00EEEA]) and CoD.ModelUtility.IsGlobalModelValueTrue("fileshareRoot.publishTask.success") then
+		if CoD.ModelUtility.IsGlobalModelValueEqualToEnum("fileshareRoot.publishTask.state", Enum[@"filesharetaskuistate"][@"fileshare_task_ui_done"]) and CoD.ModelUtility.IsGlobalModelValueTrue("fileshareRoot.publishTask.success") then
 			GoBack(self, f1_arg0)
 		end
 	end)
 	self:subscribeToGlobalModel(f1_arg0, "GlobalModel", "fileshareRoot.deleteTask.state", function(model)
 		local f21_local0 = self
-		if CoD.ModelUtility.IsGlobalModelValueEqualToEnum("fileshareRoot.deleteTask.state", Enum[0xE798E99E27D081E][0xFE5B3BE5B00EEEA]) and CoD.ModelUtility.IsGlobalModelValueTrue("fileshareRoot.deleteTask.success") then
+		if CoD.ModelUtility.IsGlobalModelValueEqualToEnum("fileshareRoot.deleteTask.state", Enum[@"filesharetaskuistate"][@"fileshare_task_ui_done"]) and CoD.ModelUtility.IsGlobalModelValueTrue("fileshareRoot.deleteTask.success") then
 			CoD.FileshareUtility.ShowToast(f1_arg0, CoD.FileshareUtility.ToastTypes.DELETE)
 			CoD.FileshareUtility.DeleteDone(self, f21_local0, f1_arg0, "", f1_local1)
 		end

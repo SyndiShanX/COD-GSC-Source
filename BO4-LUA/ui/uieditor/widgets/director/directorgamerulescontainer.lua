@@ -21,47 +21,47 @@ CoD.DirectorGameRulesContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	self.Backing = Backing
 	local NoiseTiledBacking = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	NoiseTiledBacking:setAlpha(0.4)
-	NoiseTiledBacking:setImage(RegisterImage(0x34839E8065B1E53))
-	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	NoiseTiledBacking:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	NoiseTiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	NoiseTiledBacking:setupNineSliceShader(196, 88)
 	self:addElement(NoiseTiledBacking)
 	self.NoiseTiledBacking = NoiseTiledBacking
 	local NoiseTiledBackingAdd = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	NoiseTiledBackingAdd:setAlpha(0.35)
-	NoiseTiledBackingAdd:setImage(RegisterImage(0x34839E8065B1E53))
-	NoiseTiledBackingAdd:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	NoiseTiledBackingAdd:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	NoiseTiledBackingAdd:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	NoiseTiledBackingAdd:setShaderVector(0, 0, 0, 0, 0)
 	NoiseTiledBackingAdd:setupNineSliceShader(196, 88)
 	self:addElement(NoiseTiledBackingAdd)
 	self.NoiseTiledBackingAdd = NoiseTiledBackingAdd
 	local FrontendFrameSelected = LUI.UIImage.new(0, 1, -4, 4, 0, 1, -4, 4)
 	FrontendFrameSelected:setAlpha(0)
-	FrontendFrameSelected:setImage(RegisterImage(0xCB07CCC28498CB2))
-	FrontendFrameSelected:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	FrontendFrameSelected:setImage(RegisterImage(@"uie_ui_menu_store_focus_frame"))
+	FrontendFrameSelected:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	FrontendFrameSelected:setShaderVector(0, 0, 0, 0, 0)
 	FrontendFrameSelected:setupNineSliceShader(12, 12)
 	self:addElement(FrontendFrameSelected)
 	self.FrontendFrameSelected = FrontendFrameSelected
 	local FrontendFrameSelectedGlow = LUI.UIImage.new(0, 1, -8, 8, 0, 1, -8, 8)
 	FrontendFrameSelectedGlow:setAlpha(0)
-	FrontendFrameSelectedGlow:setImage(RegisterImage(0xCB07CCC28498CB2))
-	FrontendFrameSelectedGlow:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	FrontendFrameSelectedGlow:setImage(RegisterImage(@"uie_ui_menu_store_focus_frame"))
+	FrontendFrameSelectedGlow:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	FrontendFrameSelectedGlow:setShaderVector(0, 0, 0, 0, 0)
 	FrontendFrameSelectedGlow:setupNineSliceShader(28, 28)
 	self:addElement(FrontendFrameSelectedGlow)
 	self.FrontendFrameSelectedGlow = FrontendFrameSelectedGlow
 	local FrontendFocusPip = LUI.UIImage.new(0, 1, -6, 6, 0, 1, -6, 6)
-	FrontendFocusPip:setImage(RegisterImage(0x793C73633F620BB))
-	FrontendFocusPip:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	FrontendFocusPip:setImage(RegisterImage(@"uie_ui_menu_store_focus_pips"))
+	FrontendFocusPip:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	FrontendFocusPip:setShaderVector(0, 0, 0, 0, 0)
 	FrontendFocusPip:setupNineSliceShader(40, 40)
 	self:addElement(FrontendFocusPip)
 	self.FrontendFocusPip = FrontendFocusPip
 	local FrontendFrame = LUI.UIImage.new(0, 1, -1, 1, 0, 1, -1, 1)
 	FrontendFrame:setAlpha(0.2)
-	FrontendFrame:setImage(RegisterImage(0x185E11D74ECA3D7))
-	FrontendFrame:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	FrontendFrame:setImage(RegisterImage(@"uie_ui_menu_store_common_frame"))
+	FrontendFrame:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	FrontendFrame:setShaderVector(0, 0, 0, 0, 0)
 	FrontendFrame:setupNineSliceShader(12, 12)
 	self:addElement(FrontendFrame)
@@ -69,17 +69,17 @@ CoD.DirectorGameRulesContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	local RulesImage = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	RulesImage:setRGB(0.78, 0.78, 0.78)
 	RulesImage:setAlpha(0)
-	RulesImage:setMaterial(LUI.UIImage.GetCachedMaterial(0xE8F55203998700A))
+	RulesImage:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_feather_blend"))
 	self:addElement(RulesImage)
 	self.RulesImage = RulesImage
 	local Official = CoD.MapVoteOfficial.new(f1_arg0, f1_arg1, 0.5, 0.5, -170, 170, 0, 0, 38, 60)
 	self:addElement(Official)
 	self.Official = Official
 	local SubTitle = LUI.UIText.new(0.5, 0.5, -170, 170, 0, 0, 8, 38)
-	SubTitle:setText(Engine[0xF9F1239CFD921FE](0x4168F7749B756F7))
+	SubTitle:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_64168F7749B756F7"))
 	SubTitle:setTTF("ttmussels_regular")
 	SubTitle:setLetterSpacing(6)
-	SubTitle:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	SubTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	LUI.OverrideFunction_CallOriginalFirst(SubTitle, "setText", function(element, controller)
 		ScaleWidgetToLabelLeftJustify(self, element, 2)
 	end)
@@ -106,7 +106,7 @@ CoD.DirectorGameRulesContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	end)
 	local f1_local13 = self
 	local f1_local14 = self.subscribeToModel
-	local f1_local15 = Engine[0x8DF2E5447F384B9]()
+	local f1_local15 = Engine[@"getglobalmodel"]()
 	f1_local14(f1_local13, f1_local15["lobbyRoot.lobbyNav"], function(f6_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -118,7 +118,7 @@ CoD.DirectorGameRulesContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	end, false)
 	f1_local13 = self
 	f1_local14 = self.subscribeToModel
-	f1_local15 = Engine[0x8DF2E5447F384B9]()
+	f1_local15 = Engine[@"getglobalmodel"]()
 	f1_local14(f1_local13, f1_local15["lobbyRoot.gameClient.update"], function(f7_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -130,7 +130,7 @@ CoD.DirectorGameRulesContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	end, false)
 	f1_local13 = self
 	f1_local14 = self.subscribeToModel
-	f1_local15 = Engine[0x8DF2E5447F384B9]()
+	f1_local15 = Engine[@"getglobalmodel"]()
 	f1_local14(f1_local13, f1_local15["lobbyRoot.privateClient.update"], function(f8_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

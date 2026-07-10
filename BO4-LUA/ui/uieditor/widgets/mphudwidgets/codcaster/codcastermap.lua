@@ -9,17 +9,17 @@ CoD.CodCasterMap.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local minimapMap = LUI.UIImage.new(-0.17, 1.17, 328, -328, 0, 1, -7, 7)
 	minimapMap:setAlpha(0.21)
-	minimapMap:setupCompassMap(Enum[0x398581F68B3E097][0x72D54007C707EBC])
+	minimapMap:setupCompassMap(Enum[@"compasstype"][@"compass_type_full"])
 	self:addElement(minimapMap)
 	self.minimapMap = minimapMap
 	local minimapOverlay = LUI.UIImage.new(-0.17, 1.17, 328, -328, 0, 1, -7, 7)
 	minimapOverlay:setAlpha(0.19)
-	minimapOverlay:setupCompassOverlay(Enum[0x398581F68B3E097][0x72D54007C707EBC])
+	minimapOverlay:setupCompassOverlay(Enum[@"compasstype"][@"compass_type_full"])
 	self:addElement(minimapOverlay)
 	self.minimapOverlay = minimapOverlay
 	local minimapItems = LUI.UIImage.new(-0.17, 1.17, 328, -328, 0, 1, -7, 7)
 	minimapItems:setAlpha(0.2)
-	minimapItems:setupCompassItems(Enum[0x398581F68B3E097][0x72D54007C707EBC])
+	minimapItems:setupCompassItems(Enum[@"compasstype"][@"compass_type_full"])
 	self:addElement(minimapItems)
 	self.minimapItems = minimapItems
 	self:mergeStateConditions({
@@ -32,7 +32,7 @@ CoD.CodCasterMap.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 	})
 	local f1_local4 = self
 	local f1_local5 = self.subscribeToModel
-	local f1_local6 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local6 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local5(f1_local4, f1_local6["CodCaster.showFullScreenMap"], function(f3_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

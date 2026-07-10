@@ -22,7 +22,7 @@ CoD.PrematchCountdown.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	PrematchCountdownNumbers:subscribeToGlobalModel(f1_arg1, "GameScore", "roundsPlayed", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			PrematchCountdownNumbers.MatchText.MatchText:setText(Engine[0xF9F1239CFD921FE](CoD.HUDUtility.MatchOrRoundBeginsIn(f2_local0)))
+			PrematchCountdownNumbers.MatchText.MatchText:setText(Engine[@"hash_4F9F1239CFD921FE"](CoD.HUDUtility.MatchOrRoundBeginsIn(f2_local0)))
 		end
 	end)
 	self.__on_menuOpened_PrematchCountdownNumbers = function(f3_arg0, f3_arg1, f3_arg2, f3_arg3)
@@ -48,7 +48,7 @@ CoD.PrematchCountdown.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	self.FactionIcon0 = FactionIcon0
 	local FactionIcon = LUI.UIImage.new(0, 0, 866, 1058, 0, 0, 54, 246)
 	FactionIcon:setAlpha(0)
-	FactionIcon:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	FactionIcon:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	FactionIcon:subscribeToGlobalModel(f1_arg1, "Factions", "playerFactionIcon", function(model)
 		local f5_local0 = model:get()
 		if f5_local0 ~= nil then
@@ -63,13 +63,13 @@ CoD.PrematchCountdown.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	self.GameTypeIcon = GameTypeIcon
 	local GameTypeHintText = CoD.PrematchCountdown_BeginsIn.new(f1_arg0, f1_arg1, 0.5, 0.5, -280, 276, 0, 0, 305, 353)
 	GameTypeHintText:setAlpha(0)
-	GameTypeHintText.MatchText:setText(Engine[0xF9F1239CFD921FE](0x7E04861C952E4AB))
+	GameTypeHintText.MatchText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_17E04861C952E4AB"))
 	GameTypeHintText.MatchText:setBackingAlpha(0.7)
 	self:addElement(GameTypeHintText)
 	self.GameTypeHintText = GameTypeHintText
 	local FactionName = CoD.PrematchCountdown_BeginsIn.new(f1_arg0, f1_arg1, 0.5, 0.5, -351, 327, 0.5, 0.5, -259, -211)
 	FactionName:setAlpha(0)
-	FactionName.MatchText:setText(LocalizeToUpperString(0x8E58CC95DB34427))
+	FactionName.MatchText:setText(LocalizeToUpperString(@"hash_18E58CC95DB34427"))
 	self:addElement(FactionName)
 	self.FactionName = FactionName
 	local Sound = LUI.UIElement.new(0, 0, -87, -15, 0, 0, 73, 142)
@@ -94,7 +94,7 @@ CoD.PrematchCountdown.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	})
 	local f1_local11 = self
 	local f1_local12 = self.subscribeToModel
-	local f1_local13 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local13 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local12(f1_local11, f1_local13["factions.isCoDCaster"], function(f7_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -366,30 +366,30 @@ CoD.PrematchCountdown.__clipsPerState = {
 									local f51_local0 = function(f52_arg0)
 										local f52_local0 = function(f53_arg0)
 											local f53_local0 = function(f54_arg0)
-												f54_arg0:beginAnimation(69, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+												f54_arg0:beginAnimation(69, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_out"])
 												f54_arg0:setAlpha(0)
 												f54_arg0:registerEventHandler("transition_complete_keyframe", f43_arg0.clipFinished)
 											end
-											f53_arg0:beginAnimation(90, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+											f53_arg0:beginAnimation(90, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_out"])
 											f53_arg0:setAlpha(0.92)
 											f53_arg0:registerEventHandler("transition_complete_keyframe", f53_local0)
 										end
-										f52_arg0:beginAnimation(90, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+										f52_arg0:beginAnimation(90, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_out"])
 										f52_arg0:setAlpha(0.13)
 										f52_arg0:registerEventHandler("transition_complete_keyframe", f52_local0)
 									end
 									f51_arg0:beginAnimation(1160)
 									f51_arg0:registerEventHandler("transition_complete_keyframe", f51_local0)
 								end
-								f50_arg0:beginAnimation(139, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+								f50_arg0:beginAnimation(139, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_out"])
 								f50_arg0:setAlpha(1)
 								f50_arg0:registerEventHandler("transition_complete_keyframe", f50_local0)
 							end
-							f49_arg0:beginAnimation(110, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+							f49_arg0:beginAnimation(110, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_out"])
 							f49_arg0:setAlpha(0.25)
 							f49_arg0:registerEventHandler("transition_complete_keyframe", f49_local0)
 						end
-						f48_arg0:beginAnimation(100, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+						f48_arg0:beginAnimation(100, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_out"])
 						f48_arg0:setAlpha(1)
 						f48_arg0:registerEventHandler("transition_complete_keyframe", f48_local0)
 					end

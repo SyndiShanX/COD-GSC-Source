@@ -28,23 +28,23 @@ LUI.createMenu.VoDViewer = function(f1_arg0, f1_arg1)
 		local f2_local0 = self
 		if not CoD.ModelUtility.IsGlobalModelValueTrue("VoDViewerFullscreen") and IsPC() then
 			SetElementStateByElementName(self, "LiveEventViewerMovieAndBackground", f2_arg1, "Windowed")
-			UpdateButtonPromptState(f2_arg2, f2_local0, f2_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
+			UpdateButtonPromptState(f2_arg2, f2_local0, f2_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
 		elseif not CoD.ModelUtility.IsGlobalModelValueTrue("VoDViewerFullscreen") then
 			SetElementStateByElementName(self, "LiveEventViewerMovieAndBackground", f2_arg1, "Windowed")
-			UpdateButtonPromptState(f2_arg2, f2_local0, f2_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
+			UpdateButtonPromptState(f2_arg2, f2_local0, f2_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
 			MenuHidesFreeCursor(f2_arg2, f2_arg1)
 		elseif CoD.ModelUtility.IsGlobalModelValueTrue("VoDViewerFullscreen") and IsPC() then
 			SetElementStateByElementName(self, "LiveEventViewerMovieAndBackground", f2_arg1, "DefaultState")
-			UpdateButtonPromptState(f2_arg2, f2_local0, f2_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
+			UpdateButtonPromptState(f2_arg2, f2_local0, f2_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
 		elseif CoD.ModelUtility.IsGlobalModelValueTrue("VoDViewerFullscreen") then
 			SetElementStateByElementName(self, "LiveEventViewerMovieAndBackground", f2_arg1, "DefaultState")
-			UpdateButtonPromptState(f2_arg2, f2_local0, f2_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
+			UpdateButtonPromptState(f2_arg2, f2_local0, f2_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
 			MenuHidesFreeCursor(f2_arg2, f2_arg1)
 		end
 	end
 	f1_local1:addMenuOpenedCallback(self.__on_menuOpened_self)
 	self:subscribeToGlobalModel(f1_arg0, "LiveEventViewer", "currentQuality", function(model)
-		UpdateButtonPromptState(f1_local1, self, f1_arg0, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+		UpdateButtonPromptState(f1_local1, self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 	end)
 	if CoD.isPC then
 		LiveEventViewerMovieAndBackground.id = "LiveEventViewerMovieAndBackground"

@@ -5,7 +5,7 @@ CoD.FeedUtility.FeedInsertionSide = LuaEnum.createEnum("BEGINNING", "END")
 CoD.FeedUtility.FeedTypes = {}
 CoD.FeedUtility.SetupFeed = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8)
 	local f1_local0 = f1_arg0
-	local f1_local1 = Engine[0x4DF5CFBC1771947](f1_arg8)
+	local f1_local1 = Engine[@"getmodelforcontroller"](f1_arg8)
 	local f1_local2 = f1_local1:create("feeds." .. f1_arg2 .. "." .. f1_arg3)
 	f1_local2:set(f1_arg2)
 	f1_arg1:setModel(f1_local2, f1_arg8)
@@ -27,12 +27,12 @@ CoD.FeedUtility.SetupFeed = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	if not f1_local0.managedFeeds then
 		f1_local0.managedFeeds = {}
 	end
-	f1_local0.managedFeeds[Engine[0xC53F8D38DF9042B](f1_arg3)] = f1_arg1
+	f1_local0.managedFeeds[Engine[@"converttoxhash"](f1_arg3)] = f1_arg1
 	SetupDynamicContainer(f1_arg1)
 end
 CoD.FeedUtility.CheckForFeedEvent = function(f2_arg0, f2_arg1, f2_arg2, f2_arg3, f2_arg4)
 	local f2_local0 = f2_arg0
-	if f2_arg4:get() == Engine[0xC53F8D38DF9042B](f2_arg3) and not CoD.SpawnSelectionUtility.IsSpawnSelectActive(f2_arg1) then
+	if f2_arg4:get() == Engine[@"converttoxhash"](f2_arg3) and not CoD.SpawnSelectionUtility.IsSpawnSelectActive(f2_arg1) then
 		CoD.FeedUtility.FeedTypes[f2_arg2].eventReceived(f2_local0, f2_arg3, CoD.GetScriptNotifyData(f2_arg4), f2_arg1)
 	end
 end

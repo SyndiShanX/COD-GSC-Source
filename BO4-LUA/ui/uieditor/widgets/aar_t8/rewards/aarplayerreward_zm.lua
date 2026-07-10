@@ -97,7 +97,7 @@ CoD.AARPlayerReward_ZM.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	self.VerticalListSpacer4 = VerticalListSpacer4
 	local InfoDotline2 = LUI.UIImage.new(0.5, 0.5, -196, 184, 0, 0, 641, 645)
 	InfoDotline2:setRGB(0.61, 0.1, 0.11)
-	InfoDotline2:setImage(RegisterImage(0x805FC715189E506))
+	InfoDotline2:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_info_dotline"))
 	self:addElement(InfoDotline2)
 	self.InfoDotline2 = InfoDotline2
 	local VerticalListSpacer5 = CoD.VerticalListSpacer.new(f1_arg0, f1_arg1, 0, 0, 0.5, 412.5, 0, 0, 645, 661)
@@ -176,7 +176,7 @@ CoD.AARPlayerReward_ZM.__clipsPerState = {
 			f17_arg0:__resetProperties()
 			f17_arg0:setupElementClipCounter(7)
 			local f17_local0 = function(f18_arg0)
-				f17_arg0.AARRewardHeaderZM:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f17_arg0.AARRewardHeaderZM:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f17_arg0.AARRewardHeaderZM:setAlpha(1)
 				f17_arg0.AARRewardHeaderZM:registerEventHandler("interrupted_keyframe", f17_arg0.clipInterrupted)
 				f17_arg0.AARRewardHeaderZM:registerEventHandler("transition_complete_keyframe", f17_arg0.clipFinished)
@@ -186,7 +186,7 @@ CoD.AARPlayerReward_ZM.__clipsPerState = {
 			f17_local0(f17_arg0.AARRewardHeaderZM)
 			local f17_local1 = function(f19_arg0)
 				local f19_local0 = function(f20_arg0)
-					f20_arg0:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f20_arg0:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 					f20_arg0:setAlpha(1)
 					f20_arg0:registerEventHandler("transition_complete_keyframe", f17_arg0.clipFinished)
 				end
@@ -219,7 +219,7 @@ CoD.AARPlayerReward_ZM.__clipsPerState = {
 			f21_arg0:__resetProperties()
 			f21_arg0:setupElementClipCounter(6)
 			local f21_local0 = function(f22_arg0)
-				f21_arg0.AARRewardHeaderZM:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f21_arg0.AARRewardHeaderZM:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f21_arg0.AARRewardHeaderZM:setAlpha(1)
 				f21_arg0.AARRewardHeaderZM:registerEventHandler("interrupted_keyframe", f21_arg0.clipInterrupted)
 				f21_arg0.AARRewardHeaderZM:registerEventHandler("transition_complete_keyframe", f21_arg0.clipFinished)
@@ -229,7 +229,7 @@ CoD.AARPlayerReward_ZM.__clipsPerState = {
 			f21_local0(f21_arg0.AARRewardHeaderZM)
 			local f21_local1 = function(f23_arg0)
 				local f23_local0 = function(f24_arg0)
-					f24_arg0:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f24_arg0:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 					f24_arg0:setAlpha(1)
 					f24_arg0:registerEventHandler("transition_complete_keyframe", f21_arg0.clipFinished)
 				end
@@ -242,7 +242,7 @@ CoD.AARPlayerReward_ZM.__clipsPerState = {
 			f21_local1(f21_arg0.ZMReward01)
 			local f21_local2 = function(f25_arg0)
 				local f25_local0 = function(f26_arg0)
-					f26_arg0:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f26_arg0:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 					f26_arg0:setAlpha(1)
 					f26_arg0:registerEventHandler("transition_complete_keyframe", f21_arg0.clipFinished)
 				end

@@ -22,22 +22,22 @@ CoD.SingleScoreNotification.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.ObjectiveProgressionFrame = ObjectiveProgressionFrame
 	local ObjectiveTextBox = LUI.UIText.new(0, 1, 0, 0, 0, 0, 20, 48)
 	ObjectiveTextBox:setTTF("default")
-	ObjectiveTextBox:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	ObjectiveTextBox:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	ObjectiveTextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	ObjectiveTextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	ObjectiveTextBox:subscribeToGlobalModel(f1_arg1, "WarData", "zone1.teamObjective", function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
-			ObjectiveTextBox:setText(Engine[0xF9F1239CFD921FE](f3_local0))
+			ObjectiveTextBox:setText(Engine[@"hash_4F9F1239CFD921FE"](f3_local0))
 		end
 	end)
 	self:addElement(ObjectiveTextBox)
 	self.ObjectiveTextBox = ObjectiveTextBox
 	local ContestedText = LUI.UIText.new(0, 1, 0, 0, 0, 0, 20, 48)
 	ContestedText:setAlpha(0)
-	ContestedText:setText(Engine[0xF9F1239CFD921FE](0xE57B38B7A8EE82E))
+	ContestedText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_2E57B38B7A8EE82E"))
 	ContestedText:setTTF("default")
-	ContestedText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	ContestedText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	ContestedText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	ContestedText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(ContestedText)
 	self.ContestedText = ContestedText
 	self:mergeStateConditions({
@@ -50,7 +50,7 @@ CoD.SingleScoreNotification.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	})
 	local f1_local4 = self
 	local f1_local5 = self.subscribeToModel
-	local f1_local6 = Engine[0x8DF2E5447F384B9]()
+	local f1_local6 = Engine[@"getglobalmodel"]()
 	f1_local5(f1_local4, f1_local6["hudItems.war.objectiveHeldByAttackingTeam"], function(f5_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -62,7 +62,7 @@ CoD.SingleScoreNotification.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	end, false)
 	f1_local4 = self
 	f1_local5 = self.subscribeToModel
-	f1_local6 = Engine[0x8DF2E5447F384B9]()
+	f1_local6 = Engine[@"getglobalmodel"]()
 	f1_local5(f1_local4, f1_local6["hudItems.war.objectiveHeldByDefendingTeam"], function(f6_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -106,7 +106,7 @@ CoD.SingleScoreNotification.__clipsPerState = {
 						f12_arg0:beginAnimation(1000)
 						f12_arg0:registerEventHandler("transition_complete_keyframe", f9_arg0.clipFinished)
 					end
-					f11_arg0:beginAnimation(600, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f11_arg0:beginAnimation(600, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_out"])
 					f11_arg0:setScale(1, 1)
 					f11_arg0:registerEventHandler("transition_complete_keyframe", f11_local0)
 				end

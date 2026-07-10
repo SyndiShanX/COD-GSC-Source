@@ -83,7 +83,7 @@ LUI.createMenu.DirectorGestureSelector = function(f1_arg0, f1_arg1)
 	self:addElement(BackingGrayMediumLeft)
 	self.BackingGrayMediumLeft = BackingGrayMediumLeft
 	local CommonHeader = CoD.CommonHeader.new(f1_local1, f1_arg0, 0.5, 0.5, -960, 960, 0, 0, 0, 67)
-	CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(0x40E4490CDB7B089))
+	CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(@"menu/play_gesture"))
 	CommonHeader.subtitle.subtitle:setAlpha(0)
 	CommonHeader.subtitle.subtitle:setText("")
 	self:addElement(CommonHeader)
@@ -97,22 +97,22 @@ LUI.createMenu.DirectorGestureSelector = function(f1_arg0, f1_arg1)
 	self.overheadNameContainerZM = overheadNameContainerZM
 	local circleTL = LUI.UIImage.new(0.5, 0.5, 598, 654, 1, 1, -442, -386)
 	circleTL:setAlpha(0.01)
-	circleTL:setImage(RegisterImage(0xF13D40449AE7486))
+	circleTL:setImage(RegisterImage(@"uie_ui_hud_vehicle_hellstorm_ring"))
 	self:addElement(circleTL)
 	self.circleTL = circleTL
 	local circleTR = LUI.UIImage.new(0.5, 0.5, 710, 654, 1, 1, -442, -386)
 	circleTR:setAlpha(0.01)
-	circleTR:setImage(RegisterImage(0xF13D40449AE7486))
+	circleTR:setImage(RegisterImage(@"uie_ui_hud_vehicle_hellstorm_ring"))
 	self:addElement(circleTR)
 	self.circleTR = circleTR
 	local circleBR = LUI.UIImage.new(0.5, 0.5, 710, 654, 1, 1, -330, -386)
 	circleBR:setAlpha(0.01)
-	circleBR:setImage(RegisterImage(0xF13D40449AE7486))
+	circleBR:setImage(RegisterImage(@"uie_ui_hud_vehicle_hellstorm_ring"))
 	self:addElement(circleBR)
 	self.circleBR = circleBR
 	local circleBL = LUI.UIImage.new(0.5, 0.5, 598, 654, 1, 1, -330, -386)
 	circleBL:setAlpha(0.01)
-	circleBL:setImage(RegisterImage(0xF13D40449AE7486))
+	circleBL:setImage(RegisterImage(@"uie_ui_hud_vehicle_hellstorm_ring"))
 	self:addElement(circleBL)
 	self.circleBL = circleBL
 	local SpraysAndGestures = LUI.WheelLayout.new(f1_local1, f1_arg0, nil)
@@ -213,15 +213,15 @@ LUI.createMenu.DirectorGestureSelector = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f18_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f18_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(emptyFocusable, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(emptyFocusable, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		CoD.PlayerRoleUtility.PlayDraftGesture(self.SpraysAndGestures, controller)
 		PlaySoundAlias("uin_radial_confirm")
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 		return true
 	end, false)
 	self:addElement(emptyFocusable)
@@ -229,7 +229,7 @@ LUI.createMenu.DirectorGestureSelector = function(f1_arg0, f1_arg1)
 	local AssignQuickTagButton = nil
 	AssignQuickTagButton = CoD.DirectorSimpleButton.new(f1_local1, f1_arg0, 0.5, 0.5, 653, 750, 1, 1, -775.5, -698.5)
 	AssignQuickTagButton:setAlpha(0)
-	AssignQuickTagButton.PlayText:setText(Engine[0xF9F1239CFD921FE](0x75188C80024BDE9))
+	AssignQuickTagButton.PlayText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_75188C80024BDE9"))
 	AssignQuickTagButton:registerEventHandler("gain_focus", function(element, event)
 		local f21_local0 = nil
 		if element.gainFocus then
@@ -237,7 +237,7 @@ LUI.createMenu.DirectorGestureSelector = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f21_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f21_local0
 	end)
 	AssignQuickTagButton:registerEventHandler("lose_focus", function(element, event)
@@ -249,7 +249,7 @@ LUI.createMenu.DirectorGestureSelector = function(f1_arg0, f1_arg1)
 		end
 		return f22_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(AssignQuickTagButton, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(AssignQuickTagButton, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if IsPC() then
 			CoD.PlayerRoleUtility.PlayQuickDraftGesture(controller)
 			return true
@@ -257,7 +257,7 @@ LUI.createMenu.DirectorGestureSelector = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if IsPC() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false
@@ -314,7 +314,7 @@ LUI.createMenu.DirectorGestureSelector = function(f1_arg0, f1_arg1)
 	end)
 	local f1_local21 = self
 	local f1_local22 = self.subscribeToModel
-	local f1_local23 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	local f1_local23 = Engine[@"getmodelforcontroller"](f1_arg0)
 	f1_local22(f1_local21, f1_local23.LastInput, function(f31_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",
@@ -326,29 +326,29 @@ LUI.createMenu.DirectorGestureSelector = function(f1_arg0, f1_arg1)
 	end, false)
 	self:appendEventHandler("input_source_changed", function(f32_arg0, f32_arg1)
 		f32_arg1.menu = f32_arg1.menu or f1_local1
-		CoD.Menu.UpdateButtonShownState(f32_arg0, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
-		CoD.Menu.UpdateButtonShownState(f32_arg0, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A])
-		CoD.Menu.UpdateButtonShownState(f32_arg0, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA])
-		CoD.Menu.UpdateButtonShownState(f32_arg0, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x571F08AD84807E0])
+		CoD.Menu.UpdateButtonShownState(f32_arg0, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_none"])
+		CoD.Menu.UpdateButtonShownState(f32_arg0, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"])
+		CoD.Menu.UpdateButtonShownState(f32_arg0, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_rtrig"])
+		CoD.Menu.UpdateButtonShownState(f32_arg0, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_right"])
 	end)
 	f1_local21 = self
 	f1_local22 = self.subscribeToModel
-	f1_local23 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	f1_local23 = Engine[@"getmodelforcontroller"](f1_arg0)
 	f1_local22(f1_local21, f1_local23.LastInput, function(f33_arg0, f33_arg1)
-		CoD.Menu.UpdateButtonShownState(f33_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
-		CoD.Menu.UpdateButtonShownState(f33_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A])
-		CoD.Menu.UpdateButtonShownState(f33_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA])
-		CoD.Menu.UpdateButtonShownState(f33_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x571F08AD84807E0])
+		CoD.Menu.UpdateButtonShownState(f33_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_none"])
+		CoD.Menu.UpdateButtonShownState(f33_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"])
+		CoD.Menu.UpdateButtonShownState(f33_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_rtrig"])
+		CoD.Menu.UpdateButtonShownState(f33_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_right"])
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		CoD.PlayerRoleUtility.PlayDraftGesture(self.SpraysAndGestures, controller)
 		PlaySoundAlias("uin_radial_confirm")
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 		return false
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "MOUSE1", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_none"], "MOUSE1", function(element, menu, controller, model)
 		if IsMouseOrKeyboard(controller) then
 			CoD.PlayerRoleUtility.PlayDraftGesture(self.SpraysAndGestures, controller)
 			PlaySoundAlias("uin_radial_confirm")
@@ -357,13 +357,13 @@ LUI.createMenu.DirectorGestureSelector = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if IsMouseOrKeyboard(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "MOUSE1")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "MOUSE1")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], "ui_contextual_2", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], "ui_contextual_2", function(element, menu, controller, model)
 		if IsGamepad(controller) then
 			CoD.PlayerRoleUtility.StopDraftGesture(menu, controller)
 			return true
@@ -374,16 +374,16 @@ LUI.createMenu.DirectorGestureSelector = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if IsGamepad(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x7DA356B9DECFFE5, nil, "ui_contextual_2")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"hash_67DA356B9DECFFE5", nil, "ui_contextual_2")
 			return true
 		elseif IsMouseOrKeyboard(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x78D439E1B360368, nil, "ui_contextual_2")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"hash_778D439E1B360368", nil, "ui_contextual_2")
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA], "ui_contextual_3", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_rtrig"], "ui_contextual_3", function(element, menu, controller, model)
 		if IsMouseOrKeyboard(controller) then
 			CoD.PlayerRoleUtility.StopDraftGesture(menu, controller)
 			return true
@@ -391,13 +391,13 @@ LUI.createMenu.DirectorGestureSelector = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if IsMouseOrKeyboard(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA], 0x7DA356B9DECFFE5, nil, "ui_contextual_3")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_rtrig"], @"hash_67DA356B9DECFFE5", nil, "ui_contextual_3")
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x571F08AD84807E0], "ui_contextual_1", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_right"], "ui_contextual_1", function(element, menu, controller, model)
 		if IsDpadButton(model) then
 			CoD.PlayerRoleUtility.PlayQuickDraftGesture(controller)
 			return true
@@ -408,10 +408,10 @@ LUI.createMenu.DirectorGestureSelector = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if IsDpadButton(nil) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x571F08AD84807E0], 0x0, nil, "ui_contextual_1")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_right"], @"hash_0", nil, "ui_contextual_1")
 			return false
 		elseif IsMouseOrKeyboard(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x571F08AD84807E0], 0x0, nil, "ui_contextual_1")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_right"], @"hash_0", nil, "ui_contextual_1")
 			return false
 		else
 			return false
@@ -425,13 +425,13 @@ LUI.createMenu.DirectorGestureSelector = function(f1_arg0, f1_arg1)
 	end)
 	self:subscribeToGlobalModel(f1_arg0, "LobbyRoot", "lobbyNav", function(model)
 		local f45_local0 = self
-		if not CoD.DirectorUtility[0x1E20A632CB63092](f1_arg0) then
+		if not CoD.DirectorUtility[@"hash_61E20A632CB63092"](f1_arg0) then
 			GoBack(self, f1_arg0)
 		end
 	end)
-	self:subscribeToGlobalModel(f1_arg0, "PerController", "ButtonBits." .. Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA], function(model)
+	self:subscribeToGlobalModel(f1_arg0, "PerController", "ButtonBits." .. Enum[@"luibutton"][@"lui_key_rtrig"], function(model)
 		local f46_local0 = self
-		if not CoD.ModelUtility.AreButtonModelValueBitsSet(f1_arg0, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA], Enum[0xE29E259801BC1A4][0x253A6F6CAAAE464]) and IsGamepad(f1_arg0) then
+		if not CoD.ModelUtility.AreButtonModelValueBitsSet(f1_arg0, Enum[@"luibutton"][@"lui_key_rtrig"], Enum[@"luibuttonflags"][@"flag_down"]) and IsGamepad(f1_arg0) then
 			GoBack(self, f1_arg0)
 		end
 	end)
@@ -563,7 +563,7 @@ CoD.DirectorGestureSelector.__clipsPerState = {
 						f60_arg0:setScale(0.7, 0.7)
 						f60_arg0:registerEventHandler("transition_complete_keyframe", f49_arg0.clipFinished)
 					end
-					f59_arg0:beginAnimation(100, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f59_arg0:beginAnimation(100, Enum[@"luitween"][@"luitween_ease_in"])
 					f59_arg0:setAlpha(1)
 					f59_arg0:setScale(0.75, 0.75)
 					f59_arg0:registerEventHandler("transition_complete_keyframe", f59_local0)

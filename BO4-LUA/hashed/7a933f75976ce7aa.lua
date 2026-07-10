@@ -10,22 +10,22 @@ CoD.MultiItemPickupTab.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Empty = LUI.UIImage.new(0.5, 0.5, -16, 16, 0.5, 0.5, -16, 16)
-	Empty:setImage(RegisterImage(0xEF617EA901D10C2))
+	Empty:setImage(RegisterImage(@"uie_ui_hud_wz_hud_core_qe_pip_empty"))
 	self:addElement(Empty)
 	self.Empty = Empty
 	local Selected = LUI.UIImage.new(0.5, 0.5, -16, 16, 0.5, 0.5, -16, 16)
-	Selected:setImage(RegisterImage(0xA6223620969586C))
+	Selected:setImage(RegisterImage(@"uie_ui_hud_wz_hud_core_qe_pip"))
 	self:addElement(Selected)
 	self.Selected = Selected
 	local RB = CoD.BumperButtonWithKeyMouseText.new(f1_arg0, f1_arg1, 0, 0, 4, 204, 0, 0, 0, 34)
 	RB:setAlpha(0)
-	RB.GamepadPrompt:setText(Engine[0xF9F1239CFD921FE](0xBFED5292621DA9A))
+	RB.GamepadPrompt:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_5BFED5292621DA9A"))
 	self:addElement(RB)
 	self.RB = RB
 	local LB = CoD.BumperButtonWithKeyMouseText.new(f1_arg0, f1_arg1, 0, 0, -154, 46, 0, 0, 0, 34)
 	LB:setAlpha(0)
-	LB.GamepadPrompt:setText(Engine[0xF9F1239CFD921FE](0xBDCD5292604F434))
-	LB.GamepadPrompt:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
+	LB.GamepadPrompt:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_5BDCD5292604F434"))
+	LB.GamepadPrompt:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
 	self:addElement(LB)
 	self.LB = LB
 	self:mergeStateConditions({

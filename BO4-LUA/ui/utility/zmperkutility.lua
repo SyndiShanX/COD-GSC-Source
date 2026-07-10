@@ -6,77 +6,77 @@ CoD.ZMPerkUtility.PerkSlotNameList = CoD.CACUtility.CreateList("specialty.", 1, 
 CoD.ZMPerkUtility.PerkVaporStates = LuaEnum.createEnum("DEFAULT", "CONSUMED", "COOLING_DOWN", "HIDDEN")
 CoD.ZMPerkUtility.PerkVaporAltarNamesPerStory = {
 	{
-		0x73FDE36F4E19E34,
-		0xD3F294208202CC1,
-		0x8BC38BA30AECE69,
-		0x58E91856722D715,
+		@"zombie/brew",
+		@"zombie/cola",
+		@"zombie/soda",
+		@"zombie/tonic",
 	},
 	{
-		0x711D749394A9FFA,
-		0x8BBD5E2E6D62625,
-		0x401D8F5C70A363D,
-		0x4F221A25F8163F8,
+		@"zombie/danu",
+		@"zombie/ra",
+		@"zombie/zeus",
+		@"zombie/odin",
 	},
 }
 CoD.ZMPerkUtility.PerkToBooleanGameSettingsHash = {
-	[0x259449C59FA169F] = {
-		0xA827056D0E273FD,
+	[@"perk_quick_revive"] = {
+		@"zmperksquickrevive",
 	},
-	[0x9FCF7D746EDEEAF] = {
-		0xE9FB2463E6EEE58,
+	[@"perk_cooldown"] = {
+		@"zmperkscooldown",
 	},
-	[0x3548DB163B3A77E] = {
-		0xD2A55A87F693582,
+	[@"perk_death_perception"] = {
+		@"zmperksdeathperception",
 	},
-	[0xB6804AAAAD14FA1] = {
-		0xA15DDCC25D689F6,
+	[@"perk_staminup"] = {
+		@"zmperksstaminup",
 	},
-	[0x82D5139616F522B] = {
-		0x7C5CC2D9B6CA16C,
+	[@"perk_electric_cherry"] = {
+		@"zmperkselectricburst",
 	},
-	[0xE58FF2DF5BFD9B3] = {
-		0x31B19618CA4F41,
+	[@"perk_dying_wish"] = {
+		@"zmperksdyingwish",
 	},
-	[0x52086E4C25A6FE4] = {
-		0x690C4DCC61973EC,
+	[@"perk_stronghold"] = {
+		@"zmperksstonecold",
 	},
-	[0xD1DFB82EBCBDB7D] = {
-		0xDD9D538CA5BC2D6,
+	[@"perk_tortoise"] = {
+		@"zmperksvictorious",
 	},
-	[0x47297C33B115641] = {
-		0x6407356B81A1957,
+	[@"perk_dead_shot"] = {
+		@"zmperksdeadshot",
 	},
-	[0x20C7FD6609F0966] = {
-		0xBDFB5736AD174A3,
+	[@"perk_bandolier"] = {
+		@"zmperksbandolier",
 	},
-	[0xF9EF78EFDDF61F] = {
-		0x57E3EDD7FE168C3,
+	[@"perk_widows_wine"] = {
+		@"zmperkswidowswail",
 	},
-	[0x8C176152188E03F] = {
-		0x347FF402123307A,
+	[@"perk_additional_primary_weapon"] = {
+		@"zmperksmulekick",
 	},
-	[0x3E46074D37D524B] = {
-		0x2B9D6529500B72,
+	[@"perk_slider"] = {
+		@"zmperksphdslider",
 	},
-	[0x952E08594E632F7] = {
-		0x79AE09979E80714,
+	[@"perk_mystery"] = {
+		@"zmperkssecretsauce",
 	},
-	[0x2C03EB685B6FE1B] = {
-		0x16DB8C2D7FCACFB,
-		0x635890F53E8633D,
+	[@"perk_ethereal_razor"] = {
+		@"zmweaponsmelee",
+		@"zmperksetherealrazor",
 	},
-	[0xFAC30B31B5BEC64] = {
-		0x9C28F0B2A623FA5,
+	[@"perk_zombshell"] = {
+		@"zmperkszombshell",
 	},
-	[0x334F2C7E1B57493] = {
-		0x75EC38C3F3487D5,
+	[@"perk_wolf_protector"] = {
+		@"zmperkswolfprotector",
 	},
-	[0x73D5CE33DD7CDE9] = {
-		0x44B157A9FA6573D,
+	[@"perk_death_dash"] = {
+		@"zmperksdeathdash",
 	},
 }
 DataSources.BleedoutPerkVapors = DataSourceHelpers.CustomListSetup("BleedoutPerkVapors", function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4)
-	CoD.CACUtility.GetCustomClassModel(f1_arg1, Engine[0xD2B2D1965173543](f1_arg1), f1_arg2:create("classModel"), nil, Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A])
+	CoD.CACUtility.GetCustomClassModel(f1_arg1, Engine[@"hash_3D2B2D1965173543"](f1_arg1), f1_arg2:create("classModel"), nil, Enum[@"emodes"][@"mode_zombies"])
 	local f1_local0 = function(f2_arg0, f2_arg1)
 		return f2_arg0.orderIndex < f2_arg1.orderIndex
 	end
@@ -155,7 +155,7 @@ CoD.ZMPerkUtility.CustomListSetupForPerkChargesList = function(f6_arg0, f6_arg1,
 			f6_local2:set(0)
 		end
 		local f6_local7 = f6_local2:get()
-		if Engine[0xC53F8D38DF9042B](Engine[0xD5D69BA555E016D](f6_local6.itemIndex:get(), Enum[0x6EB546760F890D2][0x9AF82A21BAD026D])) == f6_arg5 then
+		if Engine[@"converttoxhash"](Engine[@"getitemref"](f6_local6.itemIndex:get(), Enum[@"statindexoffset"][@"hash_49AF82A21BAD026D"])) == f6_arg5 then
 			f6_local1 = true
 			for f6_local8 = 0, f6_local7 - 1, 1 do
 				local f6_local11 = f6_local8
@@ -175,13 +175,13 @@ CoD.ZMPerkUtility.CustomListSetupForPerkChargesList = function(f6_arg0, f6_arg1,
 	end
 end
 DataSources.PerkVaporsDeadshotCharges = DataSourceHelpers.CustomListSetup("PerkVaporsDeadshotCharges", function(f8_arg0, f8_arg1, f8_arg2, f8_arg3, f8_arg4)
-	CoD.ZMPerkUtility.CustomListSetupForPerkChargesList(f8_arg0, f8_arg1, f8_arg2, f8_arg3, f8_arg4, 0x47297C33B115641)
+	CoD.ZMPerkUtility.CustomListSetupForPerkChargesList(f8_arg0, f8_arg1, f8_arg2, f8_arg3, f8_arg4, @"perk_dead_shot")
 end)
 DataSources.PerkVaporsWintersWailCharges = DataSourceHelpers.CustomListSetup("PerkVaporsWintersWailCharges", function(f9_arg0, f9_arg1, f9_arg2, f9_arg3, f9_arg4)
-	CoD.ZMPerkUtility.CustomListSetupForPerkChargesList(f9_arg0, f9_arg1, f9_arg2, f9_arg3, f9_arg4, 0xF9EF78EFDDF61F)
+	CoD.ZMPerkUtility.CustomListSetupForPerkChargesList(f9_arg0, f9_arg1, f9_arg2, f9_arg3, f9_arg4, @"perk_widows_wine")
 end)
 DataSources.PerkVapors = DataSourceHelpers.CustomListSetup("PerkVapors", function(f10_arg0, f10_arg1, f10_arg2, f10_arg3, f10_arg4)
-	CoD.CACUtility.GetCustomClassModel(f10_arg1, Engine[0xD2B2D1965173543](f10_arg1), f10_arg2:create("classModel"), nil, Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A])
+	CoD.CACUtility.GetCustomClassModel(f10_arg1, Engine[@"hash_3D2B2D1965173543"](f10_arg1), f10_arg2:create("classModel"), nil, Enum[@"emodes"][@"mode_zombies"])
 	local f10_local0 = CoD.ZMPerkUtility.PerkVaporAltarNamesPerStory[CoD.ZMStoryUtility.GetCurrentMapStory() + 1]
 	local f10_local1 = DataSources.HUDItems.getModel(f10_arg1)
 	for f10_local2 = 0, CoD.ZMPerkUtility.PerkVaporCount - 1, 1 do
@@ -233,12 +233,12 @@ DataSources.ZMEquippedPerks = {
 				return
 			end
 		end
-		local f12_local1 = Engine[0xE00B2F29271C60B](0xB80048F5443A1D1)
-		local f12_local2 = Engine[0x4DF5CFBC1771947](f12_arg0)
+		local f12_local1 = Engine[@"hash_2E00B2F29271C60B"](@"zm_altars_info")
+		local f12_local2 = Engine[@"getmodelforcontroller"](f12_arg0)
 		if not f12_local2.selectedZMStory then
 			CoD.ZMStoryUtility.SetSelectedStoryToCurrentMapStory(f12_arg0)
 		end
-		f12_local2 = Engine[0x4DF5CFBC1771947](f12_arg0)
+		f12_local2 = Engine[@"getmodelforcontroller"](f12_arg0)
 		f12_local2 = f12_local2.selectedZMStory
 		local f12_local3 = f12_local1[f12_local2:get() .. ""]
 		for f12_local9, f12_local10 in ipairs(CoD.ZMPerkUtility.PerkSlotNameList) do
@@ -247,13 +247,13 @@ DataSources.ZMEquippedPerks = {
 				local f12_local7 = f12_local11:create("slotIndex")
 				f12_local7:set(f12_local10)
 				f12_local7 = f12_local11:create("altarName")
-				f12_local7:set(f12_local3[f12_local9][0x9CF62F43204110C] or 0x0)
+				f12_local7:set(f12_local3[f12_local9][@"altarname"] or 0x0)
 				f12_local7 = f12_local11:create("altarImage")
-				f12_local7:set(f12_local3[f12_local9][0xF56F238CE31C394] or 0x0)
+				f12_local7:set(f12_local3[f12_local9][@"altarimage"] or 0x0)
 				f12_local7 = f12_local11:create("isModifierSlot")
 				f12_local7:set(f12_local9 == #CoD.ZMPerkUtility.PerkSlotNameList)
 				f12_local7 = nil
-				local f12_local8 = Engine[0x4DF5CFBC1771947](f12_arg0)
+				local f12_local8 = Engine[@"getmodelforcontroller"](f12_arg0)
 				f12_local8 = f12_local8:create("ZMEquippedPerks")
 				if f12_local8.currentSlot then
 					f12_local7 = f12_local8.currentSlot:get()
@@ -288,7 +288,7 @@ DataSources.ZMEquippedPerks = {
 		if DataSources.ZMEquippedPerks.__cachedModel[f17_arg0] then
 			return DataSources.ZMEquippedPerks.__cachedModel[f17_arg0]
 		end
-		local f17_local0 = Engine[0x4DF5CFBC1771947](f17_arg0)
+		local f17_local0 = Engine[@"getmodelforcontroller"](f17_arg0)
 		f17_local0 = f17_local0:create("ZMEquippedPerks")
 		local f17_local1 = f17_local0:create("currentSlot")
 		f17_local1:set(CoD.ZMPerkUtility.PerkSlotNameList[1])
@@ -318,13 +318,13 @@ DataSources.PerkSelectList = DataSourceHelpers.ListSetup("PerkSelectList", funct
 					displayName = f18_local10.displayName,
 					image = CoD.CACUtility.GetPreviewImageLarge(f18_local2, f18_local10),
 					description = f18_local10.description,
-					modifierName = Engine[0xF9F1239CFD921FE](0xEDA68561505E676, f18_local10[0x18FC01EA0DDD81D] or 0x0),
-					modifierDesc = f18_local10[0xF3026F8ACAB12DA] or 0x0,
+					modifierName = Engine[@"hash_4F9F1239CFD921FE"](@"menu/modifier", f18_local10[@"hash_18FC01EA0DDD81D"] or 0x0),
+					modifierDesc = f18_local10[@"modifierdescription"] or @"hash_0",
 					isRestricted = CoD.CACUtility.IsPerkRestricted(CoD.ZMPerkUtility.PerkToBooleanGameSettingsHash[f18_local10.nameHash], false),
 				},
 				properties = {
 					selectIndex = f18_local5 == f18_local10.itemIndex,
-					equipSound = f18_local10[0x87F8E9A3DEB31D2] or 0x858B7E73692FF70,
+					equipSound = f18_local10[@"equipsound"] or @"hash_858B7E73692FF70",
 				},
 			})
 		end
@@ -348,7 +348,7 @@ CoD.ZMPerkUtility.IsPerkLocked = function(f21_arg0, f21_arg1, f21_arg2)
 	else
 		local f21_local1 = f21_arg0:getModel()
 		if f21_local1 and f21_local1.globalItemIndex then
-			return Engine[0x191C1637A229078](f21_arg1, f21_local1.globalItemIndex:get(), f21_local0)
+			return Engine[@"isitemlocked"](f21_arg1, f21_local1.globalItemIndex:get(), f21_local0)
 		else
 		end
 	end
@@ -367,7 +367,7 @@ CoD.ZMPerkUtility.IsPerkSpecificItem = function(f23_arg0, f23_arg1, f23_arg2)
 	local f23_local0 = f23_arg0:getModel(f23_arg1, "itemIndex")
 	local f23_local1 = f23_local0 and f23_local0:get()
 	if f23_local1 and f23_local1 > CoD.CACUtility.EmptyItemIndex then
-		return Engine[0xC53F8D38DF9042B](Engine[0xD5D69BA555E016D](f23_local1, Enum[0x6EB546760F890D2][0x9AF82A21BAD026D])) == f23_arg2
+		return Engine[@"converttoxhash"](Engine[@"getitemref"](f23_local1, Enum[@"statindexoffset"][@"hash_49AF82A21BAD026D"])) == f23_arg2
 	else
 		return false
 	end
@@ -379,14 +379,14 @@ CoD.ZMPerkUtility.PerkOptionSelected = function(f24_arg0, f24_arg1, f24_arg2)
 	local f24_local2 = f24_local0.classNum:get()
 	local f24_local3 = f24_arg0:getModel()
 	local f24_local4 = f24_local3.itemIndex:get()
-	local f24_local5 = Engine[0x87395843D470BE2](f24_local4, Enum[0x6EB546760F890D2][0x9AF82A21BAD026D], Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A])
+	local f24_local5 = Engine[@"hash_487395843D470BE2"](f24_local4, Enum[@"statindexoffset"][@"hash_49AF82A21BAD026D"], Enum[@"emodes"][@"mode_zombies"])
 	local f24_local6 = CoD.CACUtility.GetClassItemOptionEquipSlot(f24_local4, f24_local0, CoD.ZMPerkUtility.PerkSlotNameList, CoD.ZMPerkUtility.PerkVaporCount)
 	if not f24_local6 or f24_local6 ~= f24_local1 then
-		if f24_local6 and f24_local5[0x2616A8F1602BB4B] ~= 1 then
-			CoD.CACUtility.SetClassItem(f24_arg2, f24_local2, f24_local6, CoD.CACUtility.GetItemEquippedInSlot(f24_local1, f24_arg2, f24_local0), nil, Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A])
+		if f24_local6 and f24_local5[@"hash_52616A8F1602BB4B"] ~= 1 then
+			CoD.CACUtility.SetClassItem(f24_arg2, f24_local2, f24_local6, CoD.CACUtility.GetItemEquippedInSlot(f24_local1, f24_arg2, f24_local0), nil, Enum[@"emodes"][@"mode_zombies"])
 		end
-		CoD.CACUtility.SetClassItem(f24_arg2, f24_local2, f24_local1, f24_local4, nil, Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A])
-		CoD.CACUtility.GetCustomClassModel(f24_arg2, f24_local2, f24_local0, nil, Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A])
+		CoD.CACUtility.SetClassItem(f24_arg2, f24_local2, f24_local1, f24_local4, nil, Enum[@"emodes"][@"mode_zombies"])
+		CoD.CACUtility.GetCustomClassModel(f24_arg2, f24_local2, f24_local0, nil, Enum[@"emodes"][@"mode_zombies"])
 		local f24_local7 = DataSources.ZMEquippedPerks.getModel(f24_arg2)
 		f24_local7.updateEquipped:forceNotifySubscriptions()
 	end
@@ -408,19 +408,19 @@ CoD.ZMPerkUtility.PerkSlotFocused = function(f26_arg0, f26_arg1, f26_arg2)
 	if not f26_local2 then
 		return
 	end
-	local f26_local3 = CoD.CACUtility.GetUnlockableItemInfo(Engine[0xE8B1E317B9DD6FE](f26_local2, Enum[0x6EB546760F890D2][0x9AF82A21BAD026D], f26_local0), f26_local0)
+	local f26_local3 = CoD.CACUtility.GetUnlockableItemInfo(Engine[@"hash_1E8B1E317B9DD6FE"](f26_local2, Enum[@"statindexoffset"][@"hash_49AF82A21BAD026D"], f26_local0), f26_local0)
 	if not f26_local3 then
 		return
 	end
 	local f26_local4 = f26_local3.displayName
 	local f26_local5 = f26_local3.description
-	local f26_local6 = Engine[0xF9F1239CFD921FE](0xEDA68561505E676, f26_local3[0x18FC01EA0DDD81D] or 0x0)
-	local f26_local7 = f26_local3[0xF3026F8ACAB12DA] or 0x0
+	local f26_local6 = Engine[@"hash_4F9F1239CFD921FE"](@"menu/modifier", f26_local3[@"hash_18FC01EA0DDD81D"] or 0x0)
+	local f26_local7 = f26_local3[@"modifierdescription"] or 0x0
 	if f26_arg0.PerkName and f26_local4 then
 		f26_arg0.PerkName:setText(LocalizeToUpperString(f26_local4))
 	end
 	if f26_arg0.PerkDescription and f26_local5 then
-		f26_arg0.PerkDescription:setText(Engine[0xF9F1239CFD921FE](f26_local5))
+		f26_arg0.PerkDescription:setText(Engine[@"hash_4F9F1239CFD921FE"](f26_local5))
 	end
 	if f26_arg0.ModifierInfo then
 		f26_arg0.ModifierInfo:setModel(f26_local1, f26_arg2)
@@ -428,7 +428,7 @@ CoD.ZMPerkUtility.PerkSlotFocused = function(f26_arg0, f26_arg1, f26_arg2)
 			f26_arg0.ModifierInfo.ModifierName:setText(ConvertToUpperString(f26_local6))
 		end
 		if f26_arg0.ModifierInfo.ModifierDescription and f26_local7 then
-			f26_arg0.ModifierInfo.ModifierDescription:setText(Engine[0xF9F1239CFD921FE](f26_local7))
+			f26_arg0.ModifierInfo.ModifierDescription:setText(Engine[@"hash_4F9F1239CFD921FE"](f26_local7))
 		end
 	end
 	if f26_arg0.RestrictedText then
@@ -436,9 +436,9 @@ CoD.ZMPerkUtility.PerkSlotFocused = function(f26_arg0, f26_arg1, f26_arg2)
 	end
 end
 CoD.ZMPerkUtility.GetPerkModifierName = function(f27_arg0, f27_arg1)
-	local f27_local0 = Engine[0x87395843D470BE2](f27_arg1, Enum[0x6EB546760F890D2][0x9AF82A21BAD026D], Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A])
-	if f27_local0 and f27_local0[0x18FC01EA0DDD81D] then
-		return Engine[0xF9F1239CFD921FE](0xEDA68561505E676, f27_local0[0x18FC01EA0DDD81D])
+	local f27_local0 = Engine[@"hash_487395843D470BE2"](f27_arg1, Enum[@"statindexoffset"][@"hash_49AF82A21BAD026D"], Enum[@"emodes"][@"mode_zombies"])
+	if f27_local0 and f27_local0[@"hash_18FC01EA0DDD81D"] then
+		return Engine[@"hash_4F9F1239CFD921FE"](@"menu/modifier", f27_local0[@"hash_18FC01EA0DDD81D"])
 	else
 		return f27_arg1
 	end

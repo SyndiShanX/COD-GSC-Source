@@ -44,19 +44,19 @@ LUI.createMenu.zm_red_challenges_hud = function(f1_arg0, f1_arg1)
 	zmredchallengeswidget:linkToElementModel(self, "challengeText", true, function(model)
 		local f5_local0 = model:get()
 		if f5_local0 ~= nil then
-			zmredchallengeswidget.ChallengeText.ChallengeText:setText(Engine[0xF9F1239CFD921FE](f5_local0))
+			zmredchallengeswidget.ChallengeText.ChallengeText:setText(Engine[@"hash_4F9F1239CFD921FE"](f5_local0))
 		end
 	end)
 	zmredchallengeswidget:linkToElementModel(self, "bottomText", true, function(model)
 		local f6_local0 = model:get()
 		if f6_local0 ~= nil then
-			zmredchallengeswidget.LocationText.LocationTextDark:setText(Engine[0xF9F1239CFD921FE](f6_local0))
+			zmredchallengeswidget.LocationText.LocationTextDark:setText(Engine[@"hash_4F9F1239CFD921FE"](f6_local0))
 		end
 	end)
 	zmredchallengeswidget:linkToElementModel(self, "bottomText", true, function(model)
 		local f7_local0 = model:get()
 		if f7_local0 ~= nil then
-			zmredchallengeswidget.LocationText.LocationText:setText(Engine[0xF9F1239CFD921FE](f7_local0))
+			zmredchallengeswidget.LocationText.LocationText:setText(Engine[@"hash_4F9F1239CFD921FE"](f7_local0))
 		end
 	end)
 	self:addElement(zmredchallengeswidget)
@@ -112,10 +112,10 @@ LUI.createMenu.zm_red_challenges_hud = function(f1_arg0, f1_arg1)
 	end)
 	self:addElement(AvailableItemText)
 	self.AvailableItemText = AvailableItemText
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_none"], nil, function(element, menu, controller, model)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, nil)
 		return false
 	end, false)
 	LUI.OverrideFunction_CallOriginalFirst(self, "setState", function(element, controller, f17_arg2, f17_arg3, f17_arg4)

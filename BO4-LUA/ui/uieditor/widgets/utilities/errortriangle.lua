@@ -9,13 +9,13 @@ CoD.ErrorTriangle.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local alertIcon = LUI.UIImage.new(0.5, 0.5, -16, 16, 1, 1, -16, 9)
 	alertIcon:setRGB(1, 0, 0)
-	alertIcon:setImage(RegisterImage(0xDF501A88BB578F))
+	alertIcon:setImage(RegisterImage(@"uie_t8_icon_restriction_warning"))
 	self:addElement(alertIcon)
 	self.alertIcon = alertIcon
 	local RestrictedBar = LUI.UIImage.new(0, 1, 20, -20, 1, 1, -16, 6)
 	RestrictedBar:setRGB(0.98, 0.13, 0.23)
-	RestrictedBar:setImage(RegisterImage(0x7E43D5F3E52081))
-	RestrictedBar:setMaterial(LUI.UIImage.GetCachedMaterial(0xE125638BF94665F))
+	RestrictedBar:setImage(RegisterImage(@"uie_ui_menu_common_tab_restriction_warning"))
+	RestrictedBar:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_feather_edges"))
 	RestrictedBar:setShaderVector(0, 0.4, 0.05, 0.4, 0.05)
 	self:addElement(RestrictedBar)
 	self.RestrictedBar = RestrictedBar

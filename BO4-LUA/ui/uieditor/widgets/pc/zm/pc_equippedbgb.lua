@@ -14,7 +14,7 @@ CoD.PC_EquippedBGB.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	DiamondBacking2:setRGB(ColorSet.T8__BEIGE__HEADER.r, ColorSet.T8__BEIGE__HEADER.g, ColorSet.T8__BEIGE__HEADER.b)
 	DiamondBacking2:setAlpha(0.5)
 	DiamondBacking2:setZRot(45)
-	DiamondBacking2:setImage(RegisterImage(0xB548E386E78802E))
+	DiamondBacking2:setImage(RegisterImage(@"uie_ui_menu_zombies_cac_elixir_loadout_box"))
 	self:addElement(DiamondBacking2)
 	self.DiamondBacking2 = DiamondBacking2
 	local Selected = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
@@ -25,13 +25,13 @@ CoD.PC_EquippedBGB.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	self.Selected = Selected
 	local EmptyHighlight2 = LUI.UIImage.new(-0.28, 1.28, 0, 0, -0.28, 1.28, 0, 0)
 	EmptyHighlight2:setAlpha(0)
-	EmptyHighlight2:setImage(RegisterImage(0xFA49018B8B7B52D))
+	EmptyHighlight2:setImage(RegisterImage(@"uie_ui_menu_zombies_cac_elixir_loadout_empty_highlight"))
 	self:addElement(EmptyHighlight2)
 	self.EmptyHighlight2 = EmptyHighlight2
 	local Dots2 = LUI.UIImage.new(-0.28, 1.28, 0, 0, -0.28, 1.28, 0, 0)
 	Dots2:setRGB(0.49, 0.09, 0.09)
 	Dots2:setZRot(45)
-	Dots2:setImage(RegisterImage(0x233E2450B088E37))
+	Dots2:setImage(RegisterImage(@"uie_ui_menu_zombies_cac_elixir_loadout_box_dots"))
 	self:addElement(Dots2)
 	self.Dots2 = Dots2
 	local ElixirImage = LUI.UIImage.new(0.15, 0.85, 0, 0, 0.15, 0.85, 0, 0)
@@ -49,7 +49,7 @@ CoD.PC_EquippedBGB.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 		{
 			stateName = "Hidden",
 			condition = function(menu, element, event)
-				return not CoD.CACUtility.IsCACItemConsumable(menu, element, Enum[0x6EB546760F890D2][0x48CD0338EE0B3AE])
+				return not CoD.CACUtility.IsCACItemConsumable(menu, element, Enum[@"statindexoffset"][@"hash_648CD0338EE0B3AE"])
 			end,
 		},
 	})
@@ -69,16 +69,16 @@ CoD.PC_EquippedBGB.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	BGBCount:linkToElementModel(self, "itemIndex", true, function(model)
 		local f6_local0 = model:get()
 		if f6_local0 ~= nil then
-			BGBCount.Count:setText(CoD.CACUtility.GetConsumableCountFromIndex(f1_arg1, f1_arg0, Enum[0x6EB546760F890D2][0x48CD0338EE0B3AE], f6_local0))
+			BGBCount.Count:setText(CoD.CACUtility.GetConsumableCountFromIndex(f1_arg1, f1_arg0, Enum[@"statindexoffset"][@"hash_648CD0338EE0B3AE"], f6_local0))
 		end
 	end)
 	self:addElement(BGBCount)
 	self.BGBCount = BGBCount
 	local PCkeybind = LUI.UIText.new(0.01, 0.99, 0, 0, 0, 0.2, 0, 0)
-	PCkeybind:setText(Engine[0xF9F1239CFD921FE](0x93E719493E9E18F))
+	PCkeybind:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	PCkeybind:setTTF("notosans_regular")
-	PCkeybind:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	PCkeybind:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	PCkeybind:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	PCkeybind:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(PCkeybind)
 	self.PCkeybind = PCkeybind
 	local RestrictionIcon = CoD.RestrictedItemWarning.new(f1_arg0, f1_arg1, 0.5, 0.5, -30, 30, 0.5, 0.5, -29, 21)

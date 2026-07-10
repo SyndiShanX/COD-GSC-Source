@@ -51,7 +51,7 @@ CoD.StartMenu_Options_PC_GraphicsOptions_SubOptionsNavigation.new = function(f1_
 	PCStartMenuOptionsDescription:linkToElementModel(PCStartMenuOptionsList.ScrollList.ScrollView.View, "desc", true, function(model)
 		local f7_local0 = model:get()
 		if f7_local0 ~= nil then
-			PCStartMenuOptionsDescription.DescriptionTextBox.detailedDescription:setText(Engine[0xF9F1239CFD921FE](f7_local0))
+			PCStartMenuOptionsDescription.DescriptionTextBox.detailedDescription:setText(Engine[@"hash_4F9F1239CFD921FE"](f7_local0))
 		end
 	end)
 	PCStartMenuOptionsDescription:linkToElementModel(PCStartMenuOptionsList.ScrollList.ScrollView.View, "name", true, function(model)

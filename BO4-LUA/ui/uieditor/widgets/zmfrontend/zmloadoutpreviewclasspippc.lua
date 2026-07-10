@@ -13,29 +13,29 @@ CoD.ZMLoadoutPreviewClassPipPC.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	self.BG = BG
 	local TiledBacking = LUI.UIImage.new(0.5, 0.5, -13, 13, 0.5, 0.5, -6, 6)
 	TiledBacking:setAlpha(0.75)
-	TiledBacking:setImage(RegisterImage(0x34839E8065B1E53))
-	TiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	TiledBacking:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	TiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	TiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	TiledBacking:setupNineSliceShader(28, 12)
 	self:addElement(TiledBacking)
 	self.TiledBacking = TiledBacking
 	local Border = LUI.UIImage.new(0.08, 0.93, 0, 0, 0.08, 0.93, 0, 0)
 	Border:setRGB(0.33, 0.33, 0.33)
-	Border:setImage(RegisterImage(0xF1E3082B39E99BB))
-	Border:setMaterial(LUI.UIImage.GetCachedMaterial(0x44484DDFAF5C093))
+	Border:setImage(RegisterImage(@"uie_highlight_border_line"))
+	Border:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_normal"))
 	Border:setShaderVector(0, 0, 0, 0, 0)
 	Border:setupNineSliceShader(7, 7)
 	self:addElement(Border)
 	self.Border = Border
 	local Pip = LUI.UIImage.new(0.08, 0.93, 0, 0, 0.08, 0.93, 0, 0)
 	Pip:setAlpha(0)
-	Pip:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Pip:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Pip)
 	self.Pip = Pip
 	local Glow = LUI.UIImage.new(-0.15, 1.15, 0, 0, -0.21, 1.21, 0, 0)
 	Glow:setAlpha(0)
-	Glow:setImage(RegisterImage(0xC58FF2328701EBA))
-	Glow:setMaterial(LUI.UIImage.GetCachedMaterial(0x2EEB1ECF1F211F5))
+	Glow:setImage(RegisterImage(@"uie_ui_hud_core_no_ammo_glow"))
+	Glow:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_delta"))
 	Glow:setShaderVector(0, 0.05, 0.95, 0, 0)
 	Glow:setShaderVector(1, 0.2, 0.2, 0, 0)
 	Glow:setShaderVector(2, 0, 1, 0, 0)
@@ -59,7 +59,7 @@ CoD.ZMLoadoutPreviewClassPipPC.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	})
 	local f1_local6 = self
 	local f1_local7 = self.subscribeToModel
-	local f1_local8 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local8 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local7(f1_local6, f1_local8.selectedCustomClass, function(f4_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -84,7 +84,7 @@ CoD.ZMLoadoutPreviewClassPipPC.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	end)
 	f1_local6 = self
 	f1_local7 = self.subscribeToModel
-	f1_local8 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local8 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local7(f1_local6, f1_local8.LastInput, function(f7_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -96,14 +96,14 @@ CoD.ZMLoadoutPreviewClassPipPC.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	end, false)
 	f1_local6 = self
 	f1_local7 = self.subscribeToModel
-	f1_local8 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local8 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local7(f1_local6, f1_local8.selectedCustomClass, function(f8_arg0, f8_arg1)
-		CoD.Menu.UpdateButtonShownState(f8_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(f8_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_none"])
 	end, false)
 	self:linkToElementModel(self, "classNum", true, function(model, f9_arg1)
-		CoD.Menu.UpdateButtonShownState(f9_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(f9_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_none"])
 	end)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "MOUSE1", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_none"], "MOUSE1", function(element, menu, controller, model)
 		if not CoD.ZMLoadoutUtility.ShouldHideLoadoutPreviewSelectButton(menu, element, controller, "selectedCustomClass", "classNum") then
 			CoD.ZMLoadoutUtility.SetEquippedBubbleGumPackToSelectedClass(element, controller, menu)
 			CoD.CACUtility.SelectCustomClass(controller, element)
@@ -113,7 +113,7 @@ CoD.ZMLoadoutPreviewClassPipPC.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 		end
 	end, function(element, menu, controller)
 		if not CoD.ZMLoadoutUtility.ShouldHideLoadoutPreviewSelectButton(menu, element, controller, "selectedCustomClass", "classNum") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "MOUSE1")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "MOUSE1")
 			return false
 		else
 			return false

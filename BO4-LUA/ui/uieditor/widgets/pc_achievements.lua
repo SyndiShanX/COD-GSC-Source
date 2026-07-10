@@ -21,8 +21,8 @@ CoD.PC_Achievements.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	local Border = LUI.UIImage.new(0, 1, -72, 72, 0.5, 0.5, -360, 360)
 	Border:setRGB(0.8, 0.76, 0.7)
 	Border:setAlpha(0.03)
-	Border:setImage(RegisterImage(0xF1E3082B39E99BB))
-	Border:setMaterial(LUI.UIImage.GetCachedMaterial(0x44484DDFAF5C093))
+	Border:setImage(RegisterImage(@"uie_highlight_border_line"))
+	Border:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_normal"))
 	Border:setShaderVector(0, 0, 0, 0, 0)
 	Border:setupNineSliceShader(6, 6)
 	self:addElement(Border)
@@ -108,7 +108,7 @@ CoD.PC_Achievements.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	DetailView:linkToElementModel(AchievementList.ScrollView.View, "desc", true, function(model)
 		local f13_local0 = model:get()
 		if f13_local0 ~= nil then
-			DetailView.Description.Description:setText(Engine[0xF9F1239CFD921FE](f13_local0))
+			DetailView.Description.Description:setText(Engine[@"hash_4F9F1239CFD921FE"](f13_local0))
 		end
 	end)
 	DetailView:linkToElementModel(AchievementList.ScrollView.View, "score", true, function(model)
@@ -143,7 +143,7 @@ CoD.PC_Achievements.__clipsPerState = {
 			f16_arg0:setupElementClipCounter(3)
 			local f16_local0 = function(f17_arg0)
 				local f17_local0 = function(f18_arg0)
-					f18_arg0:beginAnimation(150, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f18_arg0:beginAnimation(150, Enum[@"luitween"][@"luitween_ease_both"])
 					f18_arg0:setAlpha(1)
 					f18_arg0:registerEventHandler("transition_complete_keyframe", f16_arg0.clipFinished)
 				end
@@ -156,7 +156,7 @@ CoD.PC_Achievements.__clipsPerState = {
 			f16_local0(f16_arg0.AchievementList)
 			local f16_local1 = function(f19_arg0)
 				local f19_local0 = function(f20_arg0)
-					f20_arg0:beginAnimation(149, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f20_arg0:beginAnimation(149, Enum[@"luitween"][@"luitween_ease_both"])
 					f20_arg0:setAlpha(1)
 					f20_arg0:registerEventHandler("transition_complete_keyframe", f16_arg0.clipFinished)
 				end
@@ -169,7 +169,7 @@ CoD.PC_Achievements.__clipsPerState = {
 			f16_local1(f16_arg0.DetailView)
 			local f16_local2 = function(f21_arg0)
 				local f21_local0 = function(f22_arg0)
-					f22_arg0:beginAnimation(139, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f22_arg0:beginAnimation(139, Enum[@"luitween"][@"luitween_ease_both"])
 					f22_arg0:setAlpha(1)
 					f22_arg0:registerEventHandler("transition_complete_keyframe", f16_arg0.clipFinished)
 				end

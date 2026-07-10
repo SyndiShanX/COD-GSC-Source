@@ -10,7 +10,7 @@ CoD.ZMInvPaPItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Backing = LUI.UIImage.new(0.5, 0.5, -50, 50, 0.5, 0.5, -50, 50)
 	Backing:setAlpha(0)
-	Backing:setImage(RegisterImage(0x198E62429893867))
+	Backing:setImage(RegisterImage(@"hash_5198E62429893867"))
 	self:addElement(Backing)
 	self.Backing = Backing
 	local Stage3Image = LUI.UIImage.new(0.5, 0.5, -40, 40, 0.5, 0.5, -40, 40)

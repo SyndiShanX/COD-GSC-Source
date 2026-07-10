@@ -26,12 +26,12 @@ CoD.StartMenu_Options_TextBoxOption.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	local ActionText = LUI.UIText.new(0, 0, 12, 352, 0.5, 0.5, -10.5, 10.5)
 	ActionText:setRGB(0.78, 0.74, 0.67)
 	ActionText:setTTF("ttmussels_regular")
-	ActionText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	ActionText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	ActionText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	ActionText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	ActionText:linkToElementModel(self, "displayText", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			ActionText:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			ActionText:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	self:addElement(ActionText)
@@ -39,8 +39,8 @@ CoD.StartMenu_Options_TextBoxOption.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	local CurrentText = LUI.UIText.new(0, 0, 483, 738, 0.5, 0.5, -10.5, 10.5)
 	CurrentText:setRGB(0.78, 0.74, 0.67)
 	CurrentText:setTTF("notosans_regular")
-	CurrentText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	CurrentText:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	CurrentText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	CurrentText:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	CurrentText:linkToElementModel(self, "currentText", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then

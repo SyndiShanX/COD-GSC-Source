@@ -9,7 +9,7 @@ CoD.ScoreboardGameStatusMapMask.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local ScoreboardGameStatusMap = CoD.ScoreboardGameStatusMap.new(f1_arg0, f1_arg1, 0, 0, 0, 1000, 0, 0, -36.5, 526.5)
-	ScoreboardGameStatusMap:setRFTMaterial(LUI.UIImage.GetCachedMaterial(0xC212964B40FA826))
+	ScoreboardGameStatusMap:setRFTMaterial(LUI.UIImage.GetCachedMaterial(@"hash_5C212964B40FA826"))
 	self:addElement(ScoreboardGameStatusMap)
 	self.ScoreboardGameStatusMap = ScoreboardGameStatusMap
 	self:mergeStateConditions({
@@ -22,7 +22,7 @@ CoD.ScoreboardGameStatusMapMask.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	})
 	local f1_local2 = self
 	local f1_local3 = self.subscribeToModel
-	local f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local3(f1_local2, f1_local4["scoreboardInfo.activeTab"], function(f3_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

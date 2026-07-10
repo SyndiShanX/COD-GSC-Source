@@ -16,8 +16,8 @@ LUI.createMenu.zm_tut_hint_text = function(f1_arg0, f1_arg1)
 	f1_local1:addElementToPendingUpdateStateList(self)
 	local txtHintText = LUI.UIText.new(0, 1, 96, -96, 0.5, 0.5, -58.5, -25.5)
 	txtHintText:setTTF("skorzhen")
-	txtHintText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	txtHintText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	txtHintText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	txtHintText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	txtHintText:setBackingType(2)
 	txtHintText:setBackingColor(ColorSet.BadgeText.r, ColorSet.BadgeText.g, ColorSet.BadgeText.b)
 	txtHintText:setBackingAlpha(0.4)
@@ -26,7 +26,7 @@ LUI.createMenu.zm_tut_hint_text = function(f1_arg0, f1_arg1)
 	txtHintText.__String_Reference = function(f2_arg0)
 		local f2_local0 = f2_arg0:get()
 		if f2_local0 ~= nil then
-			txtHintText:setText(Engine[0xF9F1239CFD921FE](CoD.ZombieUtility.SetTutorialHintStringControllerDependant(self, f1_arg0, f2_local0)))
+			txtHintText:setText(Engine[@"hash_4F9F1239CFD921FE"](CoD.ZombieUtility.SetTutorialHintStringControllerDependant(self, f1_arg0, f2_local0)))
 		end
 	end
 	txtHintText:linkToElementModel(self, "text", true, txtHintText.__String_Reference)
@@ -45,7 +45,7 @@ LUI.createMenu.zm_tut_hint_text = function(f1_arg0, f1_arg1)
 	txtHintText:appendEventHandler("input_source_changed", txtHintText.__String_Reference_FullPath)
 	local f1_local3 = txtHintText
 	local f1_local4 = txtHintText.subscribeToModel
-	local f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	local f1_local5 = Engine[@"getmodelforcontroller"](f1_arg0)
 	f1_local4(f1_local3, f1_local5.LastInput, txtHintText.__String_Reference_FullPath)
 	self:processEvent({
 		name = "menu_loaded",

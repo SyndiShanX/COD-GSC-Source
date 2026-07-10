@@ -17,7 +17,7 @@ CoD.ZMLoadoutPreviewSelectClass.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self.SelectClassPrompt = LUI.UIElement.createFake()
 	local buttonPromptImagePC = nil
 	buttonPromptImagePC = LUI.UIImage.new(0, 0, 9, 39, 0, 0, 11, 41)
-	buttonPromptImagePC:setMaterial(LUI.UIImage.GetCachedMaterial(0x67D1E3A3D2D1BF))
+	buttonPromptImagePC:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_saturation_normal"))
 	buttonPromptImagePC:setShaderVector(0, 1, 0, 0, 0)
 	buttonPromptImagePC:subscribeToGlobalModel(f1_arg1, "Controller", "primary_button_image", function(model)
 		local f2_local0 = model:get()
@@ -29,16 +29,16 @@ CoD.ZMLoadoutPreviewSelectClass.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self.buttonPromptImagePC = buttonPromptImagePC
 	local buttonPromptStringPC = nil
 	buttonPromptStringPC = LUI.UIText.new(0.5, 0.5, -88, 212, 0.5, 0.5, -9, 8)
-	buttonPromptStringPC:setText(Engine[0xF9F1239CFD921FE](0xAC3B80C833B60E1))
+	buttonPromptStringPC:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_3AC3B80C833B60E1"))
 	buttonPromptStringPC:setTTF("ttmussels_regular")
-	buttonPromptStringPC:setMaterial(LUI.UIImage.GetCachedMaterial(0xAE166D9BA8C6907))
+	buttonPromptStringPC:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_2AE166D9BA8C6907"))
 	buttonPromptStringPC:setShaderVector(0, 0, 0, 0, 0)
 	buttonPromptStringPC:setShaderVector(1, 0, 0, 0, 0)
 	buttonPromptStringPC:setShaderVector(2, 1, 0, 0, 0)
-	buttonPromptStringPC:setRFTMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	buttonPromptStringPC:setRFTMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	buttonPromptStringPC:setLetterSpacing(0.5)
-	buttonPromptStringPC:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	buttonPromptStringPC:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	buttonPromptStringPC:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	buttonPromptStringPC:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(buttonPromptStringPC)
 	self.buttonPromptStringPC = buttonPromptStringPC
 	self:mergeStateConditions({
@@ -61,7 +61,7 @@ CoD.ZMLoadoutPreviewSelectClass.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	end)
 	local f1_local5 = self
 	local f1_local6 = self.subscribeToModel
-	local f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local6(f1_local5, f1_local7.LastInput, function(f6_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

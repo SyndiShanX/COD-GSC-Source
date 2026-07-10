@@ -12,7 +12,7 @@ CoD.DirectorLobbyLeader.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	self:addElement(LeaderBacking)
 	self.LeaderBacking = LeaderBacking
 	local PartyLeaderStar = LUI.UIImage.new(0.1, 0.96, 0, 0, 0.03, 0.22, 0, 0)
-	PartyLeaderStar:setImage(RegisterImage(0xCC30C39E4A100F))
+	PartyLeaderStar:setImage(RegisterImage(@"uie_ui_menu_director_icon_star"))
 	self:addElement(PartyLeaderStar)
 	self.PartyLeaderStar = PartyLeaderStar
 	self:mergeStateConditions({

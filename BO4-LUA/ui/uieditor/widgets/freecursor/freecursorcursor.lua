@@ -8,39 +8,39 @@ CoD.freeCursorCursor.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local middle_overlay = LUI.UIImage.new(0, 0, 42.5, 98.5, 0, 0, 40, 96)
-	middle_overlay:setImage(RegisterImage(0xDD0A252997B3A83))
+	middle_overlay:setImage(RegisterImage(@"uie_ui_menu_cursor_middle_overlay"))
 	self:addElement(middle_overlay)
 	self.middle_overlay = middle_overlay
 	local inner_ring = LUI.UIImage.new(0, 0, 42.5, 98.5, 0, 0, 40, 96)
 	inner_ring:setAlpha(0.3)
-	inner_ring:setImage(RegisterImage(0xF6896182F81702))
+	inner_ring:setImage(RegisterImage(@"uie_ui_menu_cursor_inner_ring"))
 	self:addElement(inner_ring)
 	self.inner_ring = inner_ring
 	local innerring = LUI.UIImage.new(0, 0, 42.5, 98.5, 0, 0, 40, 96)
 	innerring:setAlpha(0)
-	innerring:setImage(RegisterImage(0x548B4D2E38800BE))
+	innerring:setImage(RegisterImage(@"uie_ui_menu_cursor_focus_ring"))
 	self:addElement(innerring)
 	self.innerring = innerring
 	local middle_ring = LUI.UIImage.new(0, 0, 42.5, 98.5, 0, 0, 40, 96)
 	middle_ring:setAlpha(0.42)
-	middle_ring:setImage(RegisterImage(0xA70E45B13E481AB))
+	middle_ring:setImage(RegisterImage(@"uie_ui_menu_cursor_middle_ring"))
 	self:addElement(middle_ring)
 	self.middle_ring = middle_ring
 	local outer_ring = LUI.UIImage.new(0, 0, 42.5, 98.5, 0, 0, 40, 96)
 	outer_ring:setAlpha(0.4)
-	outer_ring:setImage(RegisterImage(0x6E934ACA6F508E7))
+	outer_ring:setImage(RegisterImage(@"uie_ui_menu_cursor_outer_ring"))
 	self:addElement(outer_ring)
 	self.outer_ring = outer_ring
 	local outerring2 = LUI.UIImage.new(0, 0, 42.5, 98.5, 0, 0, 40, 96)
 	outerring2:setAlpha(0)
 	outerring2:setScale(0.8, 0.8)
-	outerring2:setImage(RegisterImage(0x6E934ACA6F508E7))
+	outerring2:setImage(RegisterImage(@"uie_ui_menu_cursor_outer_ring"))
 	self:addElement(outerring2)
 	self.outerring2 = outerring2
 	local outerring = LUI.UIImage.new(0, 0, 42.5, 98.5, 0, 0, 40, 96)
 	outerring:setAlpha(0)
 	outerring:setScale(0.8, 0.8)
-	outerring:setImage(RegisterImage(0x6E934ACA6F508E7))
+	outerring:setImage(RegisterImage(@"uie_ui_menu_cursor_outer_ring"))
 	self:addElement(outerring)
 	self.outerring = outerring
 	self:mergeStateConditions({
@@ -69,7 +69,7 @@ CoD.freeCursorCursor.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	end)
 	local f1_local8 = self
 	local f1_local9 = self.subscribeToModel
-	local f1_local10 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local10 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local9(f1_local8, f1_local10.LastInput, function(f6_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -275,7 +275,7 @@ CoD.freeCursorCursor.__clipsPerState = {
 			f24_arg0:setupElementClipCounter(5)
 			local f24_local0 = function(f25_arg0)
 				local f25_local0 = function(f26_arg0)
-					f26_arg0:beginAnimation(150, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f26_arg0:beginAnimation(150, Enum[@"luitween"][@"luitween_ease_out"])
 					f26_arg0:setScale(0.66, 0.66)
 					f26_arg0:registerEventHandler("transition_complete_keyframe", f24_arg0.clipFinished)
 				end
@@ -289,7 +289,7 @@ CoD.freeCursorCursor.__clipsPerState = {
 			f24_local0(f24_arg0.middle_overlay)
 			local f24_local1 = function(f27_arg0)
 				local f27_local0 = function(f28_arg0)
-					f28_arg0:beginAnimation(150, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f28_arg0:beginAnimation(150, Enum[@"luitween"][@"luitween_ease_out"])
 					f28_arg0:setAlpha(0.3)
 					f28_arg0:setScale(1, 1)
 					f28_arg0:registerEventHandler("transition_complete_keyframe", f24_arg0.clipFinished)
@@ -316,7 +316,7 @@ CoD.freeCursorCursor.__clipsPerState = {
 			f24_local2(f24_arg0.innerring)
 			local f24_local3 = function(f30_arg0)
 				local f30_local0 = function(f31_arg0)
-					f31_arg0:beginAnimation(150, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f31_arg0:beginAnimation(150, Enum[@"luitween"][@"luitween_ease_out"])
 					f31_arg0:setAlpha(0.7)
 					f31_arg0:setScale(1, 1)
 					f31_arg0:registerEventHandler("transition_complete_keyframe", f24_arg0.clipFinished)
@@ -331,7 +331,7 @@ CoD.freeCursorCursor.__clipsPerState = {
 			f24_arg0.middle_ring:setScale(0.87, 0.87)
 			f24_local3(f24_arg0.middle_ring)
 			local f24_local4 = function(f32_arg0)
-				f24_arg0.outer_ring:beginAnimation(250, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f24_arg0.outer_ring:beginAnimation(250, Enum[@"luitween"][@"luitween_ease_out"])
 				f24_arg0.outer_ring:setAlpha(0.4)
 				f24_arg0.outer_ring:setScale(1, 1)
 				f24_arg0.outer_ring:registerEventHandler("interrupted_keyframe", f24_arg0.clipInterrupted)

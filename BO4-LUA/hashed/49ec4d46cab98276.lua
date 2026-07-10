@@ -15,13 +15,13 @@ LUI.createMenu.AARRewardOverlay_WZ = function(f1_arg0, f1_arg1)
 	self.anyChildUsesUpdateState = true
 	f1_local1:addElementToPendingUpdateStateList(self)
 	local Blur = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	Blur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	Blur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	Blur:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(Blur)
 	self.Blur = Blur
 	local BackgroundImage = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	BackgroundImage:setAlpha(0.85)
-	BackgroundImage:setImage(RegisterImage(0x4BF88A437F4C579))
+	BackgroundImage:setImage(RegisterImage(@"uie_fe_cp_background"))
 	self:addElement(BackgroundImage)
 	self.BackgroundImage = BackgroundImage
 	local BGEnhancement = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
@@ -31,16 +31,16 @@ LUI.createMenu.AARRewardOverlay_WZ = function(f1_arg0, f1_arg1)
 	self.BGEnhancement = BGEnhancement
 	local NoiseTiledBacking = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	NoiseTiledBacking:setAlpha(0)
-	NoiseTiledBacking:setImage(RegisterImage(0x34839E8065B1E53))
-	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	NoiseTiledBacking:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	NoiseTiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	NoiseTiledBacking:setupNineSliceShader(196, 88)
 	self:addElement(NoiseTiledBacking)
 	self.NoiseTiledBacking = NoiseTiledBacking
 	local TiledPlusGrid = LUI.UIImage.new(0, 0, -135, 1920, 0, 0, 0, 1080)
 	TiledPlusGrid:setAlpha(0.05)
-	TiledPlusGrid:setImage(RegisterImage(0x6E37BAE22631294))
-	TiledPlusGrid:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	TiledPlusGrid:setImage(RegisterImage(@"uie_ui_hud_vehicle_hellstorm_repeat_plusgrid"))
+	TiledPlusGrid:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	TiledPlusGrid:setShaderVector(0, 0, 0, 0, 0)
 	TiledPlusGrid:setupNineSliceShader(220, 220)
 	self:addElement(TiledPlusGrid)
@@ -83,11 +83,11 @@ LUI.createMenu.AARRewardOverlay_WZ = function(f1_arg0, f1_arg1)
 	self.RewardsTab = RewardsTab
 	local RewardsTitle = LUI.UIText.new(0.5, 0.5, -960, 960, 0, 0, 26, 77)
 	RewardsTitle:setRGB(ColorSet.T8_FactionTier_InProgress.r, ColorSet.T8_FactionTier_InProgress.g, ColorSet.T8_FactionTier_InProgress.b)
-	RewardsTitle:setText(LocalizeToUpperString(0x3EC1D01B53129AE))
+	RewardsTitle:setText(LocalizeToUpperString(@"aar/challenges"))
 	RewardsTitle:setTTF("ttmussels_regular")
 	RewardsTitle:setLetterSpacing(14)
-	RewardsTitle:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	RewardsTitle:setAlignment(Enum[0x7A5123B654282D2][0x70510683C22104B])
+	RewardsTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	RewardsTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_bottom"])
 	self:addElement(RewardsTitle)
 	self.RewardsTitle = RewardsTitle
 	local TrialInfoBannerWidget = CoD.TrialInfoBannerWidget.new(f1_local1, f1_arg0, 0, 0, 574.5, 1345.5, 0, 0, 927, 962)
@@ -105,18 +105,18 @@ LUI.createMenu.AARRewardOverlay_WZ = function(f1_arg0, f1_arg1)
 			end,
 		},
 	})
-	TrialInfoBannerWidget.InfoText:setText(Engine[0xF9F1239CFD921FE](0xC0FFDDCA009994B))
+	TrialInfoBannerWidget.InfoText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_6C0FFDDCA009994B"))
 	self:addElement(TrialInfoBannerWidget)
 	self.TrialInfoBannerWidget = TrialInfoBannerWidget
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		CoD.AARUtility.InitRewardsPaging(controller)
 		GoBack(self, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x6393FF34EA56966, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/continue", nil, "ui_confirm")
 		return true
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "ESCAPE", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_none"], "ESCAPE", function(element, menu, controller, model)
 		if IsPC() then
 			CoD.AARUtility.InitRewardsPaging(controller)
 			GoBack(self, controller)
@@ -125,13 +125,13 @@ LUI.createMenu.AARRewardOverlay_WZ = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if IsPC() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "ESCAPE")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "ESCAPE")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		if IsPC() then
 			CoD.AARUtility.InitRewardsPaging(controller)
 			GoBack(self, controller)
@@ -140,7 +140,7 @@ LUI.createMenu.AARRewardOverlay_WZ = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if IsPC() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 			return true
 		else
 			return false
@@ -193,7 +193,7 @@ CoD.AARRewardOverlay_WZ.__clipsPerState = {
 			f17_arg0:setupElementClipCounter(2)
 			local f17_local0 = function(f18_arg0)
 				local f18_local0 = function(f19_arg0)
-					f19_arg0:beginAnimation(149, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f19_arg0:beginAnimation(149, Enum[@"luitween"][@"luitween_ease_out"])
 					f19_arg0:setAlpha(1)
 					f19_arg0:registerEventHandler("transition_complete_keyframe", f17_arg0.clipFinished)
 				end
@@ -205,7 +205,7 @@ CoD.AARRewardOverlay_WZ.__clipsPerState = {
 			f17_arg0.RewardsTab:setAlpha(0)
 			f17_local0(f17_arg0.RewardsTab)
 			local f17_local1 = function(f20_arg0)
-				f17_arg0.RewardsTitle:beginAnimation(150, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f17_arg0.RewardsTitle:beginAnimation(150, Enum[@"luitween"][@"luitween_ease_in"])
 				f17_arg0.RewardsTitle:setAlpha(1)
 				f17_arg0.RewardsTitle:registerEventHandler("interrupted_keyframe", f17_arg0.clipInterrupted)
 				f17_arg0.RewardsTitle:registerEventHandler("transition_complete_keyframe", f17_arg0.clipFinished)

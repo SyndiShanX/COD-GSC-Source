@@ -1,23 +1,23 @@
 require("x64:3d33ce699f2ae4d")
 require("x64:c61249ff76c1459")
-CoD[0x2610197D1A9043B] = InheritFrom(LUI.UIElement)
-CoD[0x2610197D1A9043B].__defaultWidth = 960
-CoD[0x2610197D1A9043B].__defaultHeight = 240
-CoD[0x2610197D1A9043B].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+CoD[@"hash_62610197D1A9043B"] = InheritFrom(LUI.UIElement)
+CoD[@"hash_62610197D1A9043B"].__defaultWidth = 960
+CoD[@"hash_62610197D1A9043B"].__defaultHeight = 240
+CoD[@"hash_62610197D1A9043B"].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
 	local self = LUI.UIElement.new(f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
-	self:setClass(CoD[0x2610197D1A9043B])
+	self:setClass(CoD[@"hash_62610197D1A9043B"])
 	self.id = "CallingCards_Pirates"
 	self.soundSet = "none"
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local background = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	background:setImage(RegisterImage(0x2B382835DB80E2B))
+	background:setImage(RegisterImage(@"uie_ui_icon_callingcards_pirates_background"))
 	self:addElement(background)
 	self.background = background
 	local embers1 = LUI.UIImage.new(0, 0, 14.5, 598.5, 0, 0, 5, 317)
 	embers1:setAlpha(0.8)
-	embers1:setImage(RegisterImage(0x58C478C96427F76))
-	embers1:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	embers1:setImage(RegisterImage(@"uie_ui_icon_callingcards_pirates_embers1"))
+	embers1:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(embers1)
 	self.embers1 = embers1
 	local MastandFlag = CoD.CallingCards_Asset_Pirates_Mast.new(f1_arg0, f1_arg1, 0, 0, -24, 976, 0, 0, -20, 260)
@@ -28,15 +28,15 @@ CoD[0x2610197D1A9043B].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	self.piratebody = piratebody
 	local embers2 = LUI.UIImage.new(0, 0, 401.5, 1153.5, 0, 0, -39.5, 392.5)
 	embers2:setAlpha(0.5)
-	embers2:setImage(RegisterImage(0x58C478C96427F76))
-	embers2:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	embers2:setImage(RegisterImage(@"uie_ui_icon_callingcards_pirates_embers1"))
+	embers2:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(embers2)
 	self.embers2 = embers2
 	local embers3 = LUI.UIImage.new(0, 0, 319.5, 1071.5, 0, 0, 24, 456)
 	embers3:setAlpha(0)
 	embers3:setZRot(-39)
-	embers3:setImage(RegisterImage(0x58C478C96427F76))
-	embers3:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	embers3:setImage(RegisterImage(@"uie_ui_icon_callingcards_pirates_embers1"))
+	embers3:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(embers3)
 	self.embers3 = embers3
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)
@@ -45,7 +45,7 @@ CoD[0x2610197D1A9043B].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	end
 	return self
 end
-CoD[0x2610197D1A9043B].__resetProperties = function(f2_arg0)
+CoD[@"hash_62610197D1A9043B"].__resetProperties = function(f2_arg0)
 	f2_arg0.piratebody:completeAnimation()
 	f2_arg0.MastandFlag:completeAnimation()
 	f2_arg0.embers1:completeAnimation()
@@ -67,7 +67,7 @@ CoD[0x2610197D1A9043B].__resetProperties = function(f2_arg0)
 	f2_arg0.embers3:setAlpha(0)
 	f2_arg0.embers3:setZRot(-39)
 end
-CoD[0x2610197D1A9043B].__clipsPerState = {
+CoD[@"hash_62610197D1A9043B"].__clipsPerState = {
 	DefaultState = {
 		DefaultClip = function(f3_arg0, f3_arg1)
 			f3_arg0:__resetProperties()
@@ -97,7 +97,7 @@ CoD[0x2610197D1A9043B].__clipsPerState = {
 			f3_local0(f3_arg0.embers1)
 			local f3_local1 = function(f6_arg0)
 				local f6_local0 = function(f7_arg0)
-					f7_arg0:beginAnimation(1500, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f7_arg0:beginAnimation(1500, Enum[@"luitween"][@"luitween_ease_out"])
 					f7_arg0:setLeftRight(0, 0, -35, 965)
 					f7_arg0:registerEventHandler("transition_complete_keyframe", function(element, event)
 						element:playClip("DefaultClip")
@@ -105,7 +105,7 @@ CoD[0x2610197D1A9043B].__clipsPerState = {
 					end)
 				end
 				f3_arg0.MastandFlag:playClip("DefaultClip")
-				f3_arg0.MastandFlag:beginAnimation(1500, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f3_arg0.MastandFlag:beginAnimation(1500, Enum[@"luitween"][@"luitween_ease_out"])
 				f3_arg0.MastandFlag:setLeftRight(0, 0, -3, 997)
 				f3_arg0.MastandFlag:registerEventHandler("interrupted_keyframe", f3_arg0.clipInterrupted)
 				f3_arg0.MastandFlag:registerEventHandler("transition_complete_keyframe", f6_local0)
@@ -116,14 +116,14 @@ CoD[0x2610197D1A9043B].__clipsPerState = {
 			local f3_local2 = function(f9_arg0)
 				local f9_local0 = function(f10_arg0)
 					local f10_local0 = function(f11_arg0)
-						f11_arg0:beginAnimation(1600, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+						f11_arg0:beginAnimation(1600, Enum[@"luitween"][@"luitween_ease_out"])
 						f11_arg0:setLeftRight(0, 0, 60, 978)
 						f11_arg0:registerEventHandler("transition_complete_keyframe", function(element, event)
 							element:playClip("DefaultClip")
 							f3_arg0.clipFinished(element, event)
 						end)
 					end
-					f10_arg0:beginAnimation(700, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f10_arg0:beginAnimation(700, Enum[@"luitween"][@"luitween_ease_out"])
 					f10_arg0:setLeftRight(0, 0, -33, 885)
 					f10_arg0:setTopBottom(0, 0, 5, 285)
 					f10_arg0:registerEventHandler("transition_complete_keyframe", f10_local0)
@@ -193,7 +193,7 @@ CoD[0x2610197D1A9043B].__clipsPerState = {
 		end,
 	},
 }
-CoD[0x2610197D1A9043B].__onClose = function(f18_arg0)
+CoD[@"hash_62610197D1A9043B"].__onClose = function(f18_arg0)
 	f18_arg0.MastandFlag:close()
 	f18_arg0.piratebody:close()
 end

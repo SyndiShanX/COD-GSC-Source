@@ -8,13 +8,13 @@ CoD.CallingCards_Asset_future_car.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local car = LUI.UIImage.new(0, 0, 0, 720, 0, 0, 0, 180)
-	car:setImage(RegisterImage(0xCDAF062AD7C6AB1))
+	car:setImage(RegisterImage(@"uie_future_car"))
 	self:addElement(car)
 	self.car = car
 	local carWhite2 = LUI.UIImage.new(0, 0, 0, 720, 0, 0, 0, 180)
 	carWhite2:setAlpha(0.8)
-	carWhite2:setImage(RegisterImage(0x1C2F9314BCAAD47))
-	carWhite2:setMaterial(LUI.UIImage.GetCachedMaterial(0xB760921EE6B05E1))
+	carWhite2:setImage(RegisterImage(@"uie_future_car_white"))
+	carWhite2:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_spotlight"))
 	carWhite2:setShaderVector(0, 1.02, 0.67, 0, 0)
 	carWhite2:setShaderVector(1, 1.6, 0, 0, 0)
 	carWhite2:setShaderVector(2, 1, 0, 0, 0)
@@ -34,7 +34,7 @@ CoD.CallingCards_Asset_future_car.__resetProperties = function(f2_arg0)
 	f2_arg0.carWhite2:setShaderVector(1, 1.6, 0, 0, 0)
 	f2_arg0.carWhite2:setShaderVector(2, 1, 0, 0, 0)
 	f2_arg0.car:setAlpha(1)
-	f2_arg0.car:setMaterial(LUI.UIImage.GetCachedMaterial(0x6B34AA3F39208EF))
+	f2_arg0.car:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_normal"))
 end
 CoD.CallingCards_Asset_future_car.__clipsPerState = {
 	DefaultState = {
@@ -43,7 +43,7 @@ CoD.CallingCards_Asset_future_car.__clipsPerState = {
 			f3_arg0:setupElementClipCounter(2)
 			f3_arg0.car:completeAnimation()
 			f3_arg0.car:setAlpha(1)
-			f3_arg0.car:setMaterial(LUI.UIImage.GetCachedMaterial(0x6B34AA3F39208EF))
+			f3_arg0.car:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_normal"))
 			f3_arg0.clipFinished(f3_arg0.car)
 			local f3_local0 = function(f4_arg0)
 				local f4_local0 = function(f5_arg0)

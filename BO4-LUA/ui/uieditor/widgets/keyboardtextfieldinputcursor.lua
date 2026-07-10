@@ -12,8 +12,8 @@ CoD.KeyboardTextFieldInputCursor.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	text:setAlpha(0.8)
 	text:setText(CoD.BaseUtility.AlreadyLocalized("|"))
 	text:setTTF("notosans_regular")
-	text:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	text:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	text:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	text:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(text)
 	self.text = text
 	if PostLoadFunc then

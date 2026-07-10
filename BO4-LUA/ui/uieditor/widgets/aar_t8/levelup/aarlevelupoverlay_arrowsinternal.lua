@@ -10,19 +10,19 @@ CoD.AARLevelUpOverlay_ArrowsInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	local arrow1 = LUI.UIImage.new(0.5, 0.5, -12, 12, 1, 1, -24, 0)
 	arrow1:setRGB(0.89, 0.69, 0.04)
 	arrow1:setAlpha(0.15)
-	arrow1:setImage(RegisterImage(0xBB3DFD9899D61D8))
+	arrow1:setImage(RegisterImage(@"uie_ui_menu_aar_levelup_arrow"))
 	self:addElement(arrow1)
 	self.arrow1 = arrow1
 	local arrow2 = LUI.UIImage.new(0.5, 0.5, -12, 12, 1, 1, -38.5, -14.5)
 	arrow2:setRGB(0.89, 0.69, 0.04)
 	arrow2:setAlpha(0.1)
-	arrow2:setImage(RegisterImage(0xBB3DFD9899D61D8))
+	arrow2:setImage(RegisterImage(@"uie_ui_menu_aar_levelup_arrow"))
 	self:addElement(arrow2)
 	self.arrow2 = arrow2
 	local arrow3 = LUI.UIImage.new(0.5, 0.5, -12, 12, 1, 1, -53, -29)
 	arrow3:setRGB(0.89, 0.69, 0.04)
 	arrow3:setAlpha(0.05)
-	arrow3:setImage(RegisterImage(0xBB3DFD9899D61D8))
+	arrow3:setImage(RegisterImage(@"uie_ui_menu_aar_levelup_arrow"))
 	self:addElement(arrow3)
 	self.arrow3 = arrow3
 	if PostLoadFunc then
@@ -61,7 +61,7 @@ CoD.AARLevelUpOverlay_ArrowsInternal.__clipsPerState = {
 					f5_arg0:beginAnimation(300)
 					f5_arg0:registerEventHandler("transition_complete_keyframe", f5_local0)
 				end
-				f3_arg0.arrow1:beginAnimation(300, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f3_arg0.arrow1:beginAnimation(300, Enum[@"luitween"][@"luitween_ease_in"])
 				f3_arg0.arrow1:setAlpha(0.15)
 				f3_arg0.arrow1:registerEventHandler("interrupted_keyframe", f3_arg0.clipInterrupted)
 				f3_arg0.arrow1:registerEventHandler("transition_complete_keyframe", f4_local0)
@@ -84,7 +84,7 @@ CoD.AARLevelUpOverlay_ArrowsInternal.__clipsPerState = {
 						f11_arg0:beginAnimation(299)
 						f11_arg0:registerEventHandler("transition_complete_keyframe", f11_local0)
 					end
-					f10_arg0:beginAnimation(300, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f10_arg0:beginAnimation(300, Enum[@"luitween"][@"luitween_ease_in"])
 					f10_arg0:setAlpha(0.1)
 					f10_arg0:registerEventHandler("transition_complete_keyframe", f10_local0)
 				end
@@ -111,7 +111,7 @@ CoD.AARLevelUpOverlay_ArrowsInternal.__clipsPerState = {
 							f17_arg0:beginAnimation(300)
 							f17_arg0:registerEventHandler("transition_complete_keyframe", f17_local0)
 						end
-						f16_arg0:beginAnimation(299, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+						f16_arg0:beginAnimation(299, Enum[@"luitween"][@"luitween_ease_in"])
 						f16_arg0:setAlpha(0.05)
 						f16_arg0:registerEventHandler("transition_complete_keyframe", f16_local0)
 					end

@@ -11,7 +11,7 @@ CoD.button_internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	Text0:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	Text0:setText("")
 	Text0:setTTF("dinnext_regular")
-	Text0:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	Text0:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(Text0)
 	self.Text0 = Text0
 	if PostLoadFunc then

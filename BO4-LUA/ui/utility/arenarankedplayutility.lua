@@ -1,6 +1,6 @@
 CoD.ArenaRankedPlayUtility = {}
 CoD.ArenaRankedPlayUtility.Init = function()
-	CoD.ArenaRankedPlayUtility.Ranks = Engine[0xD72D2AD70F43966]()
+	CoD.ArenaRankedPlayUtility.Ranks = Engine[@"getarenainfo"]()
 	local f1_local0 = 0
 	for f1_local1 = 1, #CoD.ArenaRankedPlayUtility.Ranks, 1 do
 		local f1_local4 = CoD.ArenaRankedPlayUtility.Ranks[f1_local1]
@@ -35,10 +35,10 @@ CoD.ArenaRankedPlayUtility.GetDisplayRank = function(f5_arg0)
 end
 CoD.ArenaRankedPlayUtility.GetRankName = function(f6_arg0)
 	local f6_local0 = CoD.ArenaRankedPlayUtility.GetRankInfo(f6_arg0)
-	if f6_local0.mode == Engine[0xC53F8D38DF9042B]("stars_locked") then
-		return Engine[0xF9F1239CFD921FE](0xB6BFAA47BB29EA8, f6_local0.rank + 1)
-	elseif f6_local0.mode == Engine[0xC53F8D38DF9042B]("master") then
-		return Engine[0xF9F1239CFD921FE](0xB2C76F458B88732)
+	if f6_local0.mode == Engine[@"converttoxhash"]("stars_locked") then
+		return Engine[@"hash_4F9F1239CFD921FE"](@"menu/rank_n", f6_local0.rank + 1)
+	elseif f6_local0.mode == Engine[@"converttoxhash"]("master") then
+		return Engine[@"hash_4F9F1239CFD921FE"](@"hash_7B2C76F458B88732")
 	else
 		return ""
 	end
@@ -100,11 +100,11 @@ CoD.ArenaRankedPlayUtility.ArenaPregameStart = function(f15_arg0)
 	if not LuaUtils.IsArenaPublicGame() then
 		return
 	end
-	local f15_local0 = Engine[0x8BF970606552F4C](f15_arg0, Enum[0xBBD4F9E70101BA8][0xD5A7695E03A7A90])
+	local f15_local0 = Engine[@"storagegetbuffer"](f15_arg0, Enum[@"storagefiletype"][@"hash_5D5A7695E03A7A90"])
 	if f15_local0 ~= nil then
 		local f15_local1 = f15_local0.arenaStats
 		if f15_local1 ~= nil then
-			local f15_local2 = Engine[0xEF39E16C566439B]()
+			local f15_local2 = Engine[@"getcurrentarenaslot"]()
 			local f15_local3 = f15_local1[f15_local2]
 			if f15_local2 ~= -1 and f15_local3 ~= nil then
 				local f15_local4 = f15_local3.points:get()
@@ -114,7 +114,7 @@ CoD.ArenaRankedPlayUtility.ArenaPregameStart = function(f15_arg0)
 					f15_local3.points:set(f15_local6)
 				end
 				f15_local3.matchStartPoints:set(f15_local4)
-				Engine[0x7C75E608EA39B5C](f15_arg0, "uploadstats")
+				Engine[@"exec"](f15_arg0, "uploadstats")
 			end
 		end
 	end
@@ -123,18 +123,18 @@ CoD.ArenaRankedPlayUtility.ArenaPregameError = function(f16_arg0)
 	if not LuaUtils.IsArenaPublicGame() then
 		return
 	end
-	local f16_local0 = Engine[0x8BF970606552F4C](f16_arg0, Enum[0xBBD4F9E70101BA8][0xD5A7695E03A7A90])
+	local f16_local0 = Engine[@"storagegetbuffer"](f16_arg0, Enum[@"storagefiletype"][@"hash_5D5A7695E03A7A90"])
 	if f16_local0 ~= nil then
 		local f16_local1 = f16_local0.arenaStats
 		if f16_local1 ~= nil then
-			local f16_local2 = Engine[0xEF39E16C566439B]()
+			local f16_local2 = Engine[@"getcurrentarenaslot"]()
 			local f16_local3 = f16_local1[f16_local2]
 			if f16_local2 ~= -1 and f16_local3 ~= nil then
 				local f16_local4 = f16_local3.points:get()
 				local f16_local5 = f16_local3.matchStartPoints:get()
 				if f16_local4 ~= f16_local5 then
 					f16_local3.points:set(f16_local5)
-					Engine[0x7C75E608EA39B5C](f16_arg0, "uploadstats")
+					Engine[@"exec"](f16_arg0, "uploadstats")
 				end
 			end
 		end
@@ -151,7 +151,7 @@ DataSources.RankedPlay = {
 	end,
 	getModel = function(f18_arg0)
 		DataSources.Arena.Initialize()
-		local f18_local0 = Engine[0xA798E4552F5E872](Engine[0x8DF2E5447F384B9](), "Arena")
+		local f18_local0 = Engine[@"createmodel"](Engine[@"getglobalmodel"](), "Arena")
 		f18_local0:create("arenaRank")
 		f18_local0:create("arenaStars")
 		f18_local0:create("arenaRankedPlayStarList")
@@ -176,7 +176,7 @@ CoD.ArenaRankedPlayUtility.PopulateRankedPlayWidget = function(f20_arg0, f20_arg
 	end
 	local f20_local0 = 4
 	local f20_local1 = 45
-	local f20_local2 = Engine[0x130B239B214E881](Engine[0xA5B9C0111291A8B](), f20_arg0)
+	local f20_local2 = Engine[@"getarenapoints"](Engine[@"getprimarycontroller"](), f20_arg0)
 	local f20_local3 = CoD.ArenaRankedPlayUtility.GetRankInfo(f20_local2)
 	local f20_local4 = f20_local3.maxPoints - f20_local3.minPoints
 	local f20_local5 = math.min(f20_local4, f20_local0)
@@ -190,7 +190,7 @@ CoD.ArenaRankedPlayUtility.PopulateRankedPlayWidget = function(f20_arg0, f20_arg
 		if f20_local13 <= f20_local12 then
 			self:setImage(RegisterImage(0x43160B992233D7))
 		else
-			self:setImage(RegisterImage(0xECC3636F0ADB379))
+			self:setImage(RegisterImage(@"hash_ECC3636F0ADB379"))
 		end
 		f20_arg1:addElement(self)
 		if f20_local13 % f20_local0 == 0 then
@@ -201,7 +201,7 @@ CoD.ArenaRankedPlayUtility.PopulateRankedPlayWidget = function(f20_arg0, f20_arg
 		end
 		table.insert(f20_arg1.starList, self)
 	end
-	local f20_local13 = Engine[0xA798E4552F5E872](Engine[0x8DF2E5447F384B9](), "Arena")
+	local f20_local13 = Engine[@"createmodel"](Engine[@"getglobalmodel"](), "Arena")
 	local f20_local14 = CoD.ArenaRankedPlayUtility.GetArenaRankIconLarge(f20_local2)
 	local f20_local15 = f20_local13:create("arenaRankIconLarge")
 	f20_local15:set(f20_local14)
@@ -212,7 +212,7 @@ CoD.ArenaRankedPlayUtility.PopulateRankedPlayWidget = function(f20_arg0, f20_arg
 	f20_local17:set(f20_local12)
 end
 CoD.ArenaRankedPlayUtility.PopulateRankedPlayAARWidget = function(f21_arg0, f21_arg1)
-	local f21_local0 = Engine[0xA798E4552F5E872](Engine[0x8DF2E5447F384B9](), "Arena")
+	local f21_local0 = Engine[@"createmodel"](Engine[@"getglobalmodel"](), "Arena")
 	DataSources.RankedPlayStar = ListHelper_SetupDataSource("RankedPlayStar", function(f22_arg0)
 		local f22_local0 = {}
 		local f22_local1 = 45

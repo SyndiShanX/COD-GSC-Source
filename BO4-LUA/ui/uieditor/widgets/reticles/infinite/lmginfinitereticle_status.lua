@@ -7,21 +7,21 @@ CoD.lmgInfiniteReticle_Status.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self.id = "lmgInfiniteReticle_Status"
 	self.soundSet = "default"
 	local FrameTop = LUI.UIImage.new(0, 1, 0, 0, 0, 0, -2, 11)
-	FrameTop:setImage(RegisterImage(0xAF3C6E15AEDD887))
-	FrameTop:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	FrameTop:setImage(RegisterImage(@"uie_t7_weapon_lmg_screen_frame"))
+	FrameTop:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(FrameTop)
 	self.FrameTop = FrameTop
 	local FrameBottom = LUI.UIImage.new(0, 1, 0, 0, 0, 0, 22, 35)
 	FrameBottom:setXRot(180)
-	FrameBottom:setImage(RegisterImage(0xAF3C6E15AEDD887))
-	FrameBottom:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	FrameBottom:setImage(RegisterImage(@"uie_t7_weapon_lmg_screen_frame"))
+	FrameBottom:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(FrameBottom)
 	self.FrameBottom = FrameBottom
 	local Status = LUI.UIText.new(0, 0, 13, 183, 0, 0, 5, 28)
-	Status:setText(Engine[0xF9F1239CFD921FE](0xE20BF67125A4903))
+	Status:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_5E20BF67125A4903"))
 	Status:setTTF("default")
-	Status:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Status:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Status:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Status:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(Status)
 	self.Status = Status
 	if PostLoadFunc then

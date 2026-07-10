@@ -14,32 +14,32 @@ CoD.ZM_ReviveWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	GlowOrangeOver:setRGB(1, 0.31, 0)
 	GlowOrangeOver:setAlpha(0.4)
 	GlowOrangeOver:setZRot(90)
-	GlowOrangeOver:setImage(RegisterImage(0x5BE416E17DAB33B))
-	GlowOrangeOver:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	GlowOrangeOver:setImage(RegisterImage(@"uie_t7_core_hud_mapwidget_panelglow"))
+	GlowOrangeOver:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(GlowOrangeOver)
 	self.GlowOrangeOver = GlowOrangeOver
 	local glow = LUI.UIImage.new(0.5, 0.5, -105, 105, 0.5, 0.5, -105, 105)
-	glow:setImage(RegisterImage(0x67C14D1A4656E94))
+	glow:setImage(RegisterImage(@"uie_t7_zm_hud_revive_glow"))
 	self:addElement(glow)
 	self.glow = glow
 	local RingGlow = LUI.UIImage.new(0.5, 0.5, -105, 105, 0.5, 0.5, -105, 105)
 	RingGlow:setRGB(1, 0.72, 0)
 	RingGlow:setAlpha(0)
-	RingGlow:setImage(RegisterImage(0x452876CCDF0ED0E))
-	RingGlow:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	RingGlow:setImage(RegisterImage(@"uie_t7_zm_hud_revive_ringblur"))
+	RingGlow:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(RingGlow)
 	self.RingGlow = RingGlow
 	local RingMiddle = LUI.UIImage.new(0.5, 0.5, -105, 105, 0.5, 0.5, -105, 105)
 	RingMiddle:setRGB(1, 0.45, 0)
 	RingMiddle:setAlpha(0.1)
-	RingMiddle:setImage(RegisterImage(0xAF4C78023E45B3E))
-	RingMiddle:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	RingMiddle:setImage(RegisterImage(@"uie_t7_zm_hud_revive_ringmiddle"))
+	RingMiddle:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(RingMiddle)
 	self.RingMiddle = RingMiddle
 	local RingTopBleedOut = LUI.UIImage.new(0.5, 0.5, -105, 105, 0.5, 0.5, -105, 105)
 	RingTopBleedOut:setRGB(1, 0.92, 0)
-	RingTopBleedOut:setImage(RegisterImage(0x4A7976F6C3F7DA))
-	RingTopBleedOut:setMaterial(LUI.UIImage.GetCachedMaterial(0x9AD9C230B10C37))
+	RingTopBleedOut:setImage(RegisterImage(@"uie_t7_zm_hud_revive_ringtop"))
+	RingTopBleedOut:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_clock_add"))
 	RingTopBleedOut:setShaderVector(1, 0.5, 0, 0, 0)
 	RingTopBleedOut:setShaderVector(2, 0.5, 0, 0, 0)
 	RingTopBleedOut:setShaderVector(3, 0.05, 0, 0, 0)
@@ -55,8 +55,8 @@ CoD.ZM_ReviveWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	local RingTopRevive = LUI.UIImage.new(0.5, 0.5, -105, 105, 0.5, 0.5, -105, 105)
 	RingTopRevive:setRGB(0, 1, 0.01)
 	RingTopRevive:setAlpha(0)
-	RingTopRevive:setImage(RegisterImage(0x4A7976F6C3F7DA))
-	RingTopRevive:setMaterial(LUI.UIImage.GetCachedMaterial(0x9AD9C230B10C37))
+	RingTopRevive:setImage(RegisterImage(@"uie_t7_zm_hud_revive_ringtop"))
+	RingTopRevive:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_clock_add"))
 	RingTopRevive:setShaderVector(1, 0.5, 0, 0, 0)
 	RingTopRevive:setShaderVector(2, 0.65, 0, 0, 0)
 	RingTopRevive:setShaderVector(3, 0.34, 0, 0, 0)
@@ -70,15 +70,15 @@ CoD.ZM_ReviveWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	self:addElement(RingTopRevive)
 	self.RingTopRevive = RingTopRevive
 	local skull = LUI.UIImage.new(0.5, 0.5, -105, 105, 0.5, 0.5, -105, 105)
-	skull:setImage(RegisterImage(0xB467E3BF2B863A2))
+	skull:setImage(RegisterImage(@"uie_t7_zm_hud_revive_skull"))
 	self:addElement(skull)
 	self.skull = skull
 	local AbilitySwirl = LUI.UIImage.new(0.5, 0.5, -102, 103, 0.5, 0.5, -103, 102)
 	AbilitySwirl:setRGB(1, 0.64, 0)
 	AbilitySwirl:setAlpha(0)
 	AbilitySwirl:setScale(1.3, 1.3)
-	AbilitySwirl:setImage(RegisterImage(0xBBBD54E6E7B4493))
-	AbilitySwirl:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	AbilitySwirl:setImage(RegisterImage(@"uie_t7_core_hud_ammowidget_abilityswirl"))
+	AbilitySwirl:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(AbilitySwirl)
 	self.AbilitySwirl = AbilitySwirl
 	local ZMReviveBleedoutRedEyeGlow = CoD.ZM_ReviveBleedoutRedEyeGlow.new(f1_arg0, f1_arg1, 0.5, 0.5, -36, -10, 0.5, 0.5, 5, 32)
@@ -98,13 +98,13 @@ CoD.ZM_ReviveWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 		{
 			stateName = "Reviving",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEnumBitSet(element, f1_arg1, "stateFlags", Enum[0x3A1BF682942AEE9][0x388AB9DB3B39402]) and not CoD.HUDUtility.IsGameTypeEqualToString("zstandard")
+				return CoD.ModelUtility.IsSelfModelValueEnumBitSet(element, f1_arg1, "stateFlags", Enum[@"bleedoutstateflags"][@"bleedout_state_flag_being_revived"]) and not CoD.HUDUtility.IsGameTypeEqualToString("zstandard")
 			end,
 		},
 		{
 			stateName = "BleedingOut_Low",
 			condition = function(menu, element, event)
-				local f5_local0 = CoD.ModelUtility.IsSelfModelValueEnumBitSet(element, f1_arg1, "stateFlags", Enum[0x3A1BF682942AEE9][0x8013AC127C215B4])
+				local f5_local0 = CoD.ModelUtility.IsSelfModelValueEnumBitSet(element, f1_arg1, "stateFlags", Enum[@"bleedoutstateflags"][@"bleedout_state_flag_bleeding_out"])
 				if f5_local0 then
 					f5_local0 = CoD.ModelUtility.IsSelfModelValueLessThanOrEqualTo(element, f1_arg1, "bleedOutPercent", 0.3)
 					if f5_local0 then
@@ -117,7 +117,7 @@ CoD.ZM_ReviveWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 		{
 			stateName = "BleedingOut",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEnumBitSet(element, f1_arg1, "stateFlags", Enum[0x3A1BF682942AEE9][0x8013AC127C215B4]) and not CoD.HUDUtility.IsGameTypeEqualToString("zstandard")
+				return CoD.ModelUtility.IsSelfModelValueEnumBitSet(element, f1_arg1, "stateFlags", Enum[@"bleedoutstateflags"][@"bleedout_state_flag_bleeding_out"]) and not CoD.HUDUtility.IsGameTypeEqualToString("zstandard")
 			end,
 		},
 	})
@@ -183,7 +183,7 @@ CoD.ZM_ReviveWidget.__resetProperties = function(f9_arg0)
 	f9_arg0.Glow0:setRGB(1, 0.49, 0)
 	f9_arg0.Glow0:setAlpha(0)
 	f9_arg0.RingTopRevive:setAlpha(0)
-	f9_arg0.RingTopRevive:setMaterial(LUI.UIImage.GetCachedMaterial(0x9AD9C230B10C37))
+	f9_arg0.RingTopRevive:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_clock_add"))
 	f9_arg0.RingTopRevive:setShaderVector(1, 0.5, 0, 0, 0)
 	f9_arg0.RingTopRevive:setShaderVector(2, 0.65, 0, 0, 0)
 	f9_arg0.RingTopRevive:setShaderVector(3, 0.34, 0, 0, 0)
@@ -407,7 +407,7 @@ CoD.ZM_ReviveWidget.__clipsPerState = {
 			f32_arg0.clipFinished(f32_arg0.RingTopBleedOut)
 			f32_arg0.RingTopRevive:completeAnimation()
 			f32_arg0.RingTopRevive:setAlpha(1)
-			f32_arg0.RingTopRevive:setMaterial(LUI.UIImage.GetCachedMaterial(0x9AD9C230B10C37))
+			f32_arg0.RingTopRevive:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_clock_add"))
 			f32_arg0.RingTopRevive:setShaderVector(1, 0.5, 0, 0, 0)
 			f32_arg0.RingTopRevive:setShaderVector(2, 0.5, 0, 0, 0)
 			f32_arg0.RingTopRevive:setShaderVector(3, 0.05, 0, 0, 0)
@@ -620,7 +620,7 @@ CoD.ZM_ReviveWidget.__clipsPerState = {
 			end
 			f55_arg0.RingTopRevive:completeAnimation()
 			f55_arg0.RingTopRevive:setAlpha(0)
-			f55_arg0.RingTopRevive:setMaterial(LUI.UIImage.GetCachedMaterial(0x9AD9C230B10C37))
+			f55_arg0.RingTopRevive:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_clock_add"))
 			f55_arg0.RingTopRevive:setShaderVector(1, 0.5, 0, 0, 0)
 			f55_arg0.RingTopRevive:setShaderVector(2, 0.5, 0, 0, 0)
 			f55_arg0.RingTopRevive:setShaderVector(3, 0.05, 0, 0, 0)

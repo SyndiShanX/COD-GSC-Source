@@ -33,8 +33,8 @@ CoD.ShopReserveItemTall.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	self:addElement(DotTiledBacking)
 	self.DotTiledBacking = DotTiledBacking
 	local ContractCost = CoD.ContractItemCost.new(f1_arg0, f1_arg1, 0.5, 0.5, -92.5, 92.5, 1, 1, -31.5, -10.5)
-	ContractCost.Free:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	ContractCost.ContractCost:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	ContractCost.Free:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	ContractCost.ContractCost:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	ContractCost:linkToElementModel(self, nil, false, function(model)
 		ContractCost:setModel(model, f1_arg1)
 	end)
@@ -42,8 +42,8 @@ CoD.ShopReserveItemTall.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	self.ContractCost = ContractCost
 	local TabBottomLine = LUI.UIImage.new(0, 1, 0, 0, 1, 1, -96, -92)
 	TabBottomLine:setAlpha(0.09)
-	TabBottomLine:setImage(RegisterImage(0x5526CF3733E24C4))
-	TabBottomLine:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	TabBottomLine:setImage(RegisterImage(@"uie_ui_menu_common_tab_line_bottom"))
+	TabBottomLine:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(TabBottomLine)
 	self.TabBottomLine = TabBottomLine
 	local Darken = LUI.UIImage.new(0, 0, 0, 236, 0, 0, 0, 506)

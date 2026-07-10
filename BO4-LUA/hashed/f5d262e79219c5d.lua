@@ -15,7 +15,7 @@ CoD.SprintMeter.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_a
 	Bg:setRGB(0, 0, 0)
 	Bg:setAlpha(0.5)
 	Bg:setYRot(180)
-	Bg:setImage(RegisterImage(0x46C427DBED7301C))
+	Bg:setImage(RegisterImage(@"uie_hud_sprintmeter_bg"))
 	self:addElement(Bg)
 	self.Bg = Bg
 	local sprintMeter = CoD.SprintMeterDots.new(f1_arg0, f1_arg1, 0.5, 0.5, -105.5, 101.5, 1, 1, -54, 0)
@@ -42,7 +42,7 @@ CoD.SprintMeter.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_a
 	})
 	local f1_local4 = self
 	local f1_local5 = self.subscribeToModel
-	local f1_local6 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local6 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local5(f1_local4, f1_local6["playerAbilities.playerSprintExhausted"], function(f4_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

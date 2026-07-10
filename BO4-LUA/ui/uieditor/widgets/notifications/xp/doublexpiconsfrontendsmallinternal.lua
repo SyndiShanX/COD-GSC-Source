@@ -17,7 +17,7 @@ CoD.DoubleXPIconsFrontendSmallInternal.new = function(f1_arg0, f1_arg1, f1_arg2,
 		{
 			stateName = "VisibleWZ",
 			condition = function(menu, element, event)
-				return CoD.DoubleXPUtility.CurrentPlaylistHasDoubleXP(f1_arg1) and CoD.DoubleXPUtility.CurrentPlaylistHasMainMode(f1_arg1, Enum[0x9C0C2196D8313A0][0xBF1DCC8138A9D39])
+				return CoD.DoubleXPUtility.CurrentPlaylistHasDoubleXP(f1_arg1) and CoD.DoubleXPUtility.CurrentPlaylistHasMainMode(f1_arg1, Enum[@"emodes"][@"mode_warzone"])
 			end,
 		},
 		{
@@ -29,7 +29,7 @@ CoD.DoubleXPIconsFrontendSmallInternal.new = function(f1_arg0, f1_arg1, f1_arg2,
 	})
 	local TierBoost = DoubleXPIcon
 	local DoubleWeaponXPIcon = DoubleXPIcon.subscribeToModel
-	local ZMDoubleNPWidget = Engine[0x8DF2E5447F384B9]()
+	local ZMDoubleNPWidget = Engine[@"getglobalmodel"]()
 	DoubleWeaponXPIcon(TierBoost, ZMDoubleNPWidget["lobbyRoot.lobbyNav"], function(f4_arg0)
 		f1_arg0:updateElementState(DoubleXPIcon, {
 			name = "model_validation",
@@ -41,7 +41,7 @@ CoD.DoubleXPIconsFrontendSmallInternal.new = function(f1_arg0, f1_arg1, f1_arg2,
 	end, false)
 	TierBoost = DoubleXPIcon
 	DoubleWeaponXPIcon = DoubleXPIcon.subscribeToModel
-	ZMDoubleNPWidget = Engine[0x8DF2E5447F384B9]()
+	ZMDoubleNPWidget = Engine[@"getglobalmodel"]()
 	DoubleWeaponXPIcon(TierBoost, ZMDoubleNPWidget["lobbyRoot.playlistId"], function(f5_arg0)
 		f1_arg0:updateElementState(DoubleXPIcon, {
 			name = "model_validation",
@@ -76,7 +76,7 @@ CoD.DoubleXPIconsFrontendSmallInternal.new = function(f1_arg0, f1_arg1, f1_arg2,
 	})
 	ZMDoubleNPWidget = DoubleWeaponXPIcon
 	TierBoost = DoubleWeaponXPIcon.subscribeToModel
-	local f1_local5 = Engine[0x8DF2E5447F384B9]()
+	local f1_local5 = Engine[@"getglobalmodel"]()
 	TierBoost(ZMDoubleNPWidget, f1_local5["lobbyRoot.lobbyNav"], function(f8_arg0)
 		f1_arg0:updateElementState(DoubleWeaponXPIcon, {
 			name = "model_validation",
@@ -88,7 +88,7 @@ CoD.DoubleXPIconsFrontendSmallInternal.new = function(f1_arg0, f1_arg1, f1_arg2,
 	end, false)
 	ZMDoubleNPWidget = DoubleWeaponXPIcon
 	TierBoost = DoubleWeaponXPIcon.subscribeToModel
-	f1_local5 = Engine[0x8DF2E5447F384B9]()
+	f1_local5 = Engine[@"getglobalmodel"]()
 	TierBoost(ZMDoubleNPWidget, f1_local5["lobbyRoot.playlistId"], function(f9_arg0)
 		f1_arg0:updateElementState(DoubleWeaponXPIcon, {
 			name = "model_validation",
@@ -123,7 +123,7 @@ CoD.DoubleXPIconsFrontendSmallInternal.new = function(f1_arg0, f1_arg1, f1_arg2,
 	})
 	f1_local5 = TierBoost
 	ZMDoubleNPWidget = TierBoost.subscribeToModel
-	local f1_local6 = Engine[0x8DF2E5447F384B9]()
+	local f1_local6 = Engine[@"getglobalmodel"]()
 	ZMDoubleNPWidget(f1_local5, f1_local6["lobbyRoot.lobbyMainMode"], function(f12_arg0)
 		f1_arg0:updateElementState(TierBoost, {
 			name = "model_validation",

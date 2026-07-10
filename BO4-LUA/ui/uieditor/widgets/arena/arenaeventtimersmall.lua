@@ -23,14 +23,14 @@ CoD.ArenaEventTimerSmall.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 		{
 			stateName = "Event",
 			condition = function(menu, element, event)
-				return CoD.ArenaUtility.CurrentArenaEventTypeEquals(self, Enum[0xC0EA92D04BC003B][0xC32571741C5B730]) and CoD.ArenaUtility.IsEventCompleteTimer(self, f1_arg1, element)
+				return CoD.ArenaUtility.CurrentArenaEventTypeEquals(self, Enum[@"hash_6C0EA92D04BC003B"][@"hash_5C32571741C5B730"]) and CoD.ArenaUtility.IsEventCompleteTimer(self, f1_arg1, element)
 			end,
 		},
 		{
 			stateName = "NextEvent",
 			condition = function(menu, element, event)
 				local f3_local0
-				if not CoD.ArenaUtility.CurrentArenaEventTypeEquals(self, Enum[0xC0EA92D04BC003B][0xC32571741C5B730]) then
+				if not CoD.ArenaUtility.CurrentArenaEventTypeEquals(self, Enum[@"hash_6C0EA92D04BC003B"][@"hash_5C32571741C5B730"]) then
 					f3_local0 = CoD.ArenaUtility.IsNextEventCompleteTimer(self, f1_arg1, element)
 				else
 					f3_local0 = false
@@ -41,7 +41,7 @@ CoD.ArenaEventTimerSmall.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	})
 	local f1_local3 = self
 	local f1_local4 = self.subscribeToModel
-	local f1_local5 = Engine[0x8DF2E5447F384B9]()
+	local f1_local5 = Engine[@"getglobalmodel"]()
 	f1_local4(f1_local3, f1_local5["lobbyPlaylist.name"], function(f4_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -53,7 +53,7 @@ CoD.ArenaEventTimerSmall.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	end, false)
 	f1_local3 = self
 	f1_local4 = self.subscribeToModel
-	f1_local5 = Engine[0x8DF2E5447F384B9]()
+	f1_local5 = Engine[@"getglobalmodel"]()
 	f1_local4(f1_local3, f1_local5["lobbyRoot.lobbyNav"], function(f5_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

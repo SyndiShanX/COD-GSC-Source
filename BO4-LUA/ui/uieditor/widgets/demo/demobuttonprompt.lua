@@ -8,7 +8,7 @@ CoD.DemoButtonPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local buttonPromptImage = LUI.UIImage.new(0, 0, 0, 30, 0, 0, 0, 30)
-	buttonPromptImage:setMaterial(LUI.UIImage.GetCachedMaterial(0x67D1E3A3D2D1BF))
+	buttonPromptImage:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_saturation_normal"))
 	buttonPromptImage:setShaderVector(0, 1, 0, 0, 0)
 	buttonPromptImage:subscribeToGlobalModel(f1_arg1, "Controller", "secondary_button_image", function(model)
 		local f2_local0 = model:get()
@@ -21,7 +21,7 @@ CoD.DemoButtonPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	local label = LUI.UIText.new(0, 0, 45.5, 114.5, 0, 0, 4, 24)
 	label:setTTF("ttmussels_regular")
 	label:setLetterSpacing(6)
-	label:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	label:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	label:linkToElementModel(self, "Label", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -37,7 +37,7 @@ CoD.DemoButtonPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	KBMlabel:setAlpha(0)
 	KBMlabel:setTTF("ttmussels_regular")
 	KBMlabel:setLetterSpacing(6)
-	KBMlabel:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	KBMlabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	KBMlabel:linkToElementModel(self, "Label", true, function(model)
 		local f5_local0 = model:get()
 		if f5_local0 ~= nil then
@@ -63,7 +63,7 @@ CoD.DemoButtonPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	end)
 	local f1_local4 = self
 	local f1_local5 = self.subscribeToModel
-	local f1_local6 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local6 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local5(f1_local4, f1_local6.LastInput, function(f9_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

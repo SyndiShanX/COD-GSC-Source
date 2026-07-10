@@ -1,84 +1,84 @@
-CoD[0xD0E8C96FBEFA527] = InheritFrom(LUI.UIElement)
-CoD[0xD0E8C96FBEFA527].__defaultWidth = 960
-CoD[0xD0E8C96FBEFA527].__defaultHeight = 240
-CoD[0xD0E8C96FBEFA527].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+CoD[@"hash_5D0E8C96FBEFA527"] = InheritFrom(LUI.UIElement)
+CoD[@"hash_5D0E8C96FBEFA527"].__defaultWidth = 960
+CoD[@"hash_5D0E8C96FBEFA527"].__defaultHeight = 240
+CoD[@"hash_5D0E8C96FBEFA527"].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
 	local self = LUI.UIElement.new(f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
-	self:setClass(CoD[0xD0E8C96FBEFA527])
+	self:setClass(CoD[@"hash_5D0E8C96FBEFA527"])
 	self.id = "CallingCards_Professional_Master"
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local bg = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	bg:setImage(RegisterImage(0x1CB7225B02FA25B))
+	bg:setImage(RegisterImage(@"uie_ui_icon_callingcards_professional_master_background"))
 	self:addElement(bg)
 	self.bg = bg
 	local dust = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	dust:setImage(RegisterImage(0xE92D37BD42029C3))
-	dust:setMaterial(LUI.UIImage.GetCachedMaterial(0x73D72BCD14C2AAD))
+	dust:setImage(RegisterImage(@"uie_ui_icon_callingcards_professional_master_dust"))
+	dust:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_tile_scroll_normal"))
 	dust:setShaderVector(0, 1, 1, 0, 0)
 	dust:setShaderVector(1, 0.25, 0, 0, 0)
 	self:addElement(dust)
 	self.dust = dust
 	local caravan = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 6, 246)
 	caravan:setAlpha(0.5)
-	caravan:setImage(RegisterImage(0x2249DADC791B273))
-	caravan:setMaterial(LUI.UIImage.GetCachedMaterial(0x73D72BCD14C2AAD))
+	caravan:setImage(RegisterImage(@"uie_ui_icon_callingcards_professional_master_caravan"))
+	caravan:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_tile_scroll_normal"))
 	caravan:setShaderVector(0, 1, 1, 0, 0)
 	caravan:setShaderVector(1, -0.1, 0, 0, 0)
 	self:addElement(caravan)
 	self.caravan = caravan
 	local copters = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
 	copters:setAlpha(0.4)
-	copters:setImage(RegisterImage(0x293B223CD30264E))
-	copters:setMaterial(LUI.UIImage.GetCachedMaterial(0x73D72BCD14C2AAD))
+	copters:setImage(RegisterImage(@"uie_ui_icon_callingcards_professional_master_copter"))
+	copters:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_tile_scroll_normal"))
 	copters:setShaderVector(0, 1, 1, 0, 0)
 	copters:setShaderVector(1, -0.3, 0, 0, 0)
 	self:addElement(copters)
 	self.copters = copters
 	local flare1 = LUI.UIImage.new(0, 0, 615.5, 989.5, 0, 0, 94, 304)
-	flare1:setImage(RegisterImage(0x2E9DF61862ACD85))
-	flare1:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	flare1:setImage(RegisterImage(@"uie_ui_icon_callingcards_professional_master_flare2"))
+	flare1:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(flare1)
 	self.flare1 = flare1
 	local bg2 = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	bg2:setImage(RegisterImage(0xC555F0A60F0F86B))
+	bg2:setImage(RegisterImage(@"uie_ui_icon_callingcards_professional_master_background2"))
 	self:addElement(bg2)
 	self.bg2 = bg2
 	local smokeclouds = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
 	smokeclouds:setAlpha(0.25)
-	smokeclouds:setImage(RegisterImage(0x83102B0C36D16D5))
-	smokeclouds:setMaterial(LUI.UIImage.GetCachedMaterial(0x73D72BCD14C2AAD))
+	smokeclouds:setImage(RegisterImage(@"uie_ui_icon_callingcards_professional_master_clouds"))
+	smokeclouds:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_tile_scroll_normal"))
 	smokeclouds:setShaderVector(0, 1, 1, 0, 0)
 	smokeclouds:setShaderVector(1, 0.03, 0, 0, 0)
 	self:addElement(smokeclouds)
 	self.smokeclouds = smokeclouds
 	local soldier = LUI.UIImage.new(0, 0, 515.5, 715.5, 0, 0, 0, 240)
-	soldier:setImage(RegisterImage(0x33A51522915345F))
+	soldier:setImage(RegisterImage(@"uie_ui_icon_callingcards_professional_master_soldier"))
 	self:addElement(soldier)
 	self.soldier = soldier
 	local soldiergun = LUI.UIImage.new(0, 0, 515.5, 715.5, 0, 0, 0, 240)
-	soldiergun:setImage(RegisterImage(0x4C5B39295BEBE5A))
+	soldiergun:setImage(RegisterImage(@"uie_ui_icon_callingcards_professional_master_soldier_gun"))
 	self:addElement(soldiergun)
 	self.soldiergun = soldiergun
 	local flare2 = LUI.UIImage.new(0, 0, 255.5, 629.5, 0, 0, 57, 267)
-	flare2:setImage(RegisterImage(0x2E9DC61862AC86C))
-	flare2:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	flare2:setImage(RegisterImage(@"uie_ui_icon_callingcards_professional_master_flare1"))
+	flare2:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(flare2)
 	self.flare2 = flare2
 	local skulleyeglow2 = LUI.UIImage.new(0, 0, 570.5, 671.5, 0, 0, -3, 73)
 	skulleyeglow2:setScale(0.75, 0.75)
-	skulleyeglow2:setImage(RegisterImage(0xF9B84A9B59CFEC))
-	skulleyeglow2:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	skulleyeglow2:setImage(RegisterImage(@"uie_ui_icon_callingcards_professional_master_soldier_eyeglow"))
+	skulleyeglow2:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(skulleyeglow2)
 	self.skulleyeglow2 = skulleyeglow2
 	local skulleyeglow = LUI.UIImage.new(0, 0, 583.5, 684.5, 0, 0, -3, 73)
 	skulleyeglow:setScale(0.75, 0.75)
-	skulleyeglow:setImage(RegisterImage(0xF9B84A9B59CFEC))
-	skulleyeglow:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	skulleyeglow:setImage(RegisterImage(@"uie_ui_icon_callingcards_professional_master_soldier_eyeglow"))
+	skulleyeglow:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(skulleyeglow)
 	self.skulleyeglow = skulleyeglow
 	local cropper = LUI.UIImage.new(0, 0, -32, 992, 0, 0, -392, 632)
 	cropper:setAlpha(0)
-	cropper:setImage(RegisterImage(0x7EEE1693E39382A))
+	cropper:setImage(RegisterImage(@"uie_stage_crop_prop"))
 	self:addElement(cropper)
 	self.cropper = cropper
 	if PostLoadFunc then
@@ -86,7 +86,7 @@ CoD[0xD0E8C96FBEFA527].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	end
 	return self
 end
-CoD[0xD0E8C96FBEFA527].__resetProperties = function(f2_arg0)
+CoD[@"hash_5D0E8C96FBEFA527"].__resetProperties = function(f2_arg0)
 	f2_arg0.soldier:completeAnimation()
 	f2_arg0.soldiergun:completeAnimation()
 	f2_arg0.copters:completeAnimation()
@@ -103,14 +103,14 @@ CoD[0xD0E8C96FBEFA527].__resetProperties = function(f2_arg0)
 	f2_arg0.copters:setTopBottom(0, 0, 0, 240)
 	f2_arg0.skulleyeglow2:setAlpha(1)
 	f2_arg0.skulleyeglow2:setScale(0.75, 0.75)
-	f2_arg0.skulleyeglow2:setImage(RegisterImage(0xF9B84A9B59CFEC))
+	f2_arg0.skulleyeglow2:setImage(RegisterImage(@"uie_ui_icon_callingcards_professional_master_soldier_eyeglow"))
 	f2_arg0.skulleyeglow:setAlpha(1)
 	f2_arg0.skulleyeglow:setScale(0.75, 0.75)
-	f2_arg0.skulleyeglow:setImage(RegisterImage(0xF9B84A9B59CFEC))
+	f2_arg0.skulleyeglow:setImage(RegisterImage(@"uie_ui_icon_callingcards_professional_master_soldier_eyeglow"))
 	f2_arg0.flare2:setAlpha(1)
 	f2_arg0.flare1:setAlpha(1)
 end
-CoD[0xD0E8C96FBEFA527].__clipsPerState = {
+CoD[@"hash_5D0E8C96FBEFA527"].__clipsPerState = {
 	DefaultState = {
 		DefaultClip = function(f3_arg0, f3_arg1)
 			f3_arg0:__resetProperties()
@@ -215,7 +215,7 @@ CoD[0xD0E8C96FBEFA527].__clipsPerState = {
 			f3_arg0.skulleyeglow2:completeAnimation()
 			f3_arg0.skulleyeglow2:setAlpha(0)
 			f3_arg0.skulleyeglow2:setScale(1, 1)
-			f3_arg0.skulleyeglow2:setImage(RegisterImage(0xF9B84A9B59CFEC))
+			f3_arg0.skulleyeglow2:setImage(RegisterImage(@"uie_ui_icon_callingcards_professional_master_soldier_eyeglow"))
 			f3_local5(f3_arg0.skulleyeglow2)
 			local f3_local6 = function(f18_arg0)
 				local f18_local0 = function(f19_arg0)
@@ -239,7 +239,7 @@ CoD[0xD0E8C96FBEFA527].__clipsPerState = {
 			f3_arg0.skulleyeglow:completeAnimation()
 			f3_arg0.skulleyeglow:setAlpha(0)
 			f3_arg0.skulleyeglow:setScale(1, 1)
-			f3_arg0.skulleyeglow:setImage(RegisterImage(0xF9B84A9B59CFEC))
+			f3_arg0.skulleyeglow:setImage(RegisterImage(@"uie_ui_icon_callingcards_professional_master_soldier_eyeglow"))
 			f3_local6(f3_arg0.skulleyeglow)
 			f3_arg0.nextClip = "DefaultClip"
 		end,

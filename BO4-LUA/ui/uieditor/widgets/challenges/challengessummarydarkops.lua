@@ -11,7 +11,7 @@ CoD.ChallengesSummaryDarkOps.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local SummaryCategoryBlackOps = CoD.ChallengesSummaryDarkOps_Internal.new(f1_arg0, f1_arg1, 0.5, 0.5, -100, 100, 0.5, 0.5, -112.5, 112.5)
-	SummaryCategoryBlackOps.Classfied:setText(Engine[0xF9F1239CFD921FE](0x79E6AFC975F6E86))
+	SummaryCategoryBlackOps.Classfied:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_179E6AFC975F6E86"))
 	self:addElement(SummaryCategoryBlackOps)
 	self.SummaryCategoryBlackOps = SummaryCategoryBlackOps
 	self:mergeStateConditions({
@@ -24,7 +24,7 @@ CoD.ChallengesSummaryDarkOps.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	})
 	local f1_local2 = self
 	local f1_local3 = self.subscribeToModel
-	local f1_local4 = Engine[0x8DF2E5447F384B9]()
+	local f1_local4 = Engine[@"getglobalmodel"]()
 	f1_local3(f1_local2, f1_local4["lobbyRoot.lobbyNav"], function(f3_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

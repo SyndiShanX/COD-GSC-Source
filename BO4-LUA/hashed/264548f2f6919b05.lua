@@ -11,9 +11,9 @@ CoD.DossierProgressBulletPoint.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	local DossierProgressBulletPoint = LUI.UIText.new(0, 0, 37, 250, 0, 0, 5, 26)
 	DossierProgressBulletPoint:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	DossierProgressBulletPoint:setAlpha(0.5)
-	DossierProgressBulletPoint:setText(Engine[0xF9F1239CFD921FE](0x93E719493E9E18F))
+	DossierProgressBulletPoint:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	DossierProgressBulletPoint:setTTF("ttmussels_regular")
-	DossierProgressBulletPoint:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	DossierProgressBulletPoint:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(DossierProgressBulletPoint)
 	self.DossierProgressBulletPoint = DossierProgressBulletPoint
 	local Border = CoD.Border.new(f1_arg0, f1_arg1, 0, 0, 3, 29, 0, 0, 2, 28)
@@ -24,35 +24,35 @@ CoD.DossierProgressBulletPoint.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	self.BorderAdd = BorderAdd
 	local Empty = LUI.UIImage.new(0, 0, 0.5, 33.5, 0, 0, -1.5, 31.5)
 	Empty:setScale(0.67, 0.67)
-	Empty:setImage(RegisterImage(0xF53DA84C7B770BF))
-	Empty:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Empty:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_selectbox_empty"))
+	Empty:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Empty)
 	self.Empty = Empty
 	local dashBacking = LUI.UIImage.new(0, 0, 2, 32, 0, 0, 0.5, 30.5)
 	dashBacking:setScale(1.5, 1.5)
-	dashBacking:setImage(RegisterImage(0x4BB3E0B0E9A1D7E))
+	dashBacking:setImage(RegisterImage(@"uie_ui_menu_cac_allocation_pip_empty"))
 	self:addElement(dashBacking)
 	self.dashBacking = dashBacking
 	local dash = LUI.UIImage.new(0, 0, 2, 32, 0, 0, 0.5, 30.5)
 	dash:setScale(1.5, 1.5)
-	dash:setImage(RegisterImage(0xEEB4FB140EAEAC))
+	dash:setImage(RegisterImage(@"uie_ui_menu_cac_allocation_pip_full"))
 	self:addElement(dash)
 	self.dash = dash
 	local Glow = LUI.UIImage.new(0, 0, -3.5, 38.5, 0, 0, -20.5, 52.5)
 	Glow:setRGB(0.88, 0.8, 0.45)
 	Glow:setAlpha(0)
-	Glow:setImage(RegisterImage(0x1078C36A022A4FE))
-	Glow:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Glow:setImage(RegisterImage(@"uie_t7_menu_cac_glow"))
+	Glow:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Glow)
 	self.Glow = Glow
 	local CornerDots = LUI.UIImage.new(0, 0, 3.5, 30.5, 0, 0, 1.5, 28.5)
 	CornerDots:setScale(1.5, 1.5)
-	CornerDots:setImage(RegisterImage(0x1735E8FCAB0ED9))
+	CornerDots:setImage(RegisterImage(@"uie_ui_menu_cac_allocation_pip_dots"))
 	self:addElement(CornerDots)
 	self.CornerDots = CornerDots
 	local CursorOver = LUI.UIImage.new(0, 0, -5, 39, 0, 0, -6.5, 37.5)
 	CursorOver:setAlpha(0)
-	CursorOver:setImage(RegisterImage(0xFC2EE367F8C243F))
+	CursorOver:setImage(RegisterImage(@"uie_ui_menu_cac_allocation_pip_over"))
 	self:addElement(CursorOver)
 	self.CursorOver = CursorOver
 	self:mergeStateConditions({

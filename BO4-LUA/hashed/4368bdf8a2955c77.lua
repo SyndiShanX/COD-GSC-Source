@@ -20,12 +20,12 @@ CoD.ItemDetailsSunsetPurchaseContainer.new = function(f1_arg0, f1_arg1, f1_arg2,
 	PriceText:setRGB(ColorSet.CodPointsNumber.r, ColorSet.CodPointsNumber.g, ColorSet.CodPointsNumber.b)
 	PriceText:setTTF("ttmussels_demibold")
 	PriceText:setLetterSpacing(2)
-	PriceText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	PriceText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	PriceText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	PriceText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	PriceText:linkToElementModel(self, "price", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			PriceText:setText(LocalizeIntoString(0x6A3CC7BE3008989, f2_local0))
+			PriceText:setText(LocalizeIntoString(@"hash_56A3CC7BE3008989", f2_local0))
 		end
 	end)
 	self:addElement(PriceText)
@@ -63,13 +63,13 @@ CoD.ItemDetailsSunsetPurchaseContainer.new = function(f1_arg0, f1_arg1, f1_arg2,
 			end,
 		},
 	})
-	ItemShopButtonCP.MiddleText:setText(LocalizeToUpperString(0x85952ACC6D0C1B0))
-	ItemShopButtonCP.MiddleTextFocus:setText(LocalizeToUpperString(0x85952ACC6D0C1B0))
+	ItemShopButtonCP.MiddleText:setText(LocalizeToUpperString(@"menu/purchase"))
+	ItemShopButtonCP.MiddleTextFocus:setText(LocalizeToUpperString(@"menu/purchase"))
 	local f1_local4 = ItemShopButtonCP
 	local ItemShopButtonCases = ItemShopButtonCP.subscribeToModel
-	local f1_local6 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local6 = Engine[@"getmodelforcontroller"](f1_arg1)
 	ItemShopButtonCases(f1_local4, f1_local6["LootStreamProgress.codPoints"], function(f8_arg0, f8_arg1)
-		CoD.Menu.UpdateButtonShownState(f8_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f8_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	ItemShopButtonCP:registerEventHandler("gain_focus", function(element, event)
 		local f9_local0 = nil
@@ -79,10 +79,10 @@ CoD.ItemDetailsSunsetPurchaseContainer.new = function(f1_arg0, f1_arg1, f1_arg2,
 			f9_local0 = element.super:gainFocus(event)
 		end
 		CoD.BlackMarketUtility.ChangeSupplyChainCameraBySelection(f1_arg0, f1_arg1, f1_arg0)
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f9_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(ItemShopButtonCP, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(ItemShopButtonCP, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if MenuPropertyIsTrue(menu, "isSunsetPurchaseContractScreen") and CanPurchaseItem(controller, self) then
 			OpenPopup(self, "PurchaseContractConfirmationSunset", controller, {
 				_model = self:getModel(),
@@ -103,7 +103,7 @@ CoD.ItemDetailsSunsetPurchaseContainer.new = function(f1_arg0, f1_arg1, f1_arg2,
 			return true
 		end
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 		return true
 	end, false)
 	self:addElement(ItemShopButtonCP)
@@ -156,16 +156,16 @@ CoD.ItemDetailsSunsetPurchaseContainer.new = function(f1_arg0, f1_arg1, f1_arg2,
 			modelName = "casePrice",
 		})
 	end)
-	ItemShopButtonCases.MiddleText:setText(LocalizeToUpperString(0x7C2737E72EC4A26))
-	ItemShopButtonCases.MiddleTextFocus:setText(LocalizeToUpperString(0x7C2737E72EC4A26))
+	ItemShopButtonCases.MiddleText:setText(LocalizeToUpperString(@"hash_7C2737E72EC4A26"))
+	ItemShopButtonCases.MiddleTextFocus:setText(LocalizeToUpperString(@"hash_7C2737E72EC4A26"))
 	f1_local6 = ItemShopButtonCases
 	f1_local4 = ItemShopButtonCases.subscribeToModel
 	f1_local7 = DataSources.ReservesItemCounts.getModel(f1_arg1)
 	f1_local4(f1_local6, f1_local7.lootCaseCount, function(f18_arg0, f18_arg1)
-		CoD.Menu.UpdateButtonShownState(f18_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f18_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	ItemShopButtonCases:linkToElementModel(ItemShopButtonCases, "casePrice", true, function(model, f19_arg1)
-		CoD.Menu.UpdateButtonShownState(f19_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f19_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	ItemShopButtonCases:registerEventHandler("gain_focus", function(element, event)
 		local f20_local0 = nil
@@ -175,10 +175,10 @@ CoD.ItemDetailsSunsetPurchaseContainer.new = function(f1_arg0, f1_arg1, f1_arg2,
 			f20_local0 = element.super:gainFocus(event)
 		end
 		CoD.BlackMarketUtility.ChangeSupplyChainCameraBySelection(f1_arg0, f1_arg1, f1_arg0)
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f20_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(ItemShopButtonCases, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(ItemShopButtonCases, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if MenuPropertyIsTrue(menu, "isSunsetPurchaseContractScreen") and CoD.BlackMarketUtility.CanExchangeLootCases(controller, self) then
 			OpenPopup(self, "CaseExchangeContractConfirmation", controller, {
 				_model = self:getModel(),
@@ -197,10 +197,10 @@ CoD.ItemDetailsSunsetPurchaseContainer.new = function(f1_arg0, f1_arg1, f1_arg2,
 		end
 	end, function(element, menu, controller)
 		if MenuPropertyIsTrue(menu, "isSunsetPurchaseContractScreen") and CoD.BlackMarketUtility.CanExchangeLootCases(controller, self) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		elseif CoD.BlackMarketUtility.CanExchangeLootCases(controller, self) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		else
 			return false

@@ -28,7 +28,7 @@ CoD.vhud_hellstorm_reticle.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	local vignette2 = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	vignette2:setRGB(0, 0, 0)
 	vignette2:setAlpha(0.65)
-	vignette2:setImage(RegisterImage(0xB8D7548F3591A70))
+	vignette2:setImage(RegisterImage(@"uie_ui_hud_vehicle_hellstorm_vignette02"))
 	self:addElement(vignette2)
 	self.vignette2 = vignette2
 	local MissileContainer = CoD.genericVHUD2MissileCounter.new(f1_arg0, f1_arg1, 0.5, 0.5, 416.5, 491.5, 0.05, 0.05, 51, 97)
@@ -39,8 +39,8 @@ CoD.vhud_hellstorm_reticle.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self:addElement(MissileContainer)
 	self.MissileContainer = MissileContainer
 	local DotGridBlur = LUI.UIImage.new(-0, 1, -9, -9, -0, 1, -4, -4)
-	DotGridBlur:setImage(RegisterImage(0x56EB38F1457B4AE))
-	DotGridBlur:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	DotGridBlur:setImage(RegisterImage(@"hash_556EB38F1457B4AE"))
+	DotGridBlur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	DotGridBlur:setShaderVector(0, 0, 0, 0, 0)
 	DotGridBlur:setupNineSliceShader(108, 108)
 	self:addElement(DotGridBlur)
@@ -48,7 +48,7 @@ CoD.vhud_hellstorm_reticle.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	local vignette = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	vignette:setRGB(0, 0, 0)
 	vignette:setAlpha(0.4)
-	vignette:setImage(RegisterImage(0xB8D7548F3591A70))
+	vignette:setImage(RegisterImage(@"uie_ui_hud_vehicle_hellstorm_vignette02"))
 	self:addElement(vignette)
 	self.vignette = vignette
 	local f1_local6 = nil
@@ -66,8 +66,8 @@ CoD.vhud_hellstorm_reticle.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self.BGGraphics = BGGraphics
 	local DotGridBlur2 = LUI.UIImage.new(-0, 1, -9, -9, -0, 1, -4, -4)
 	DotGridBlur2:setAlpha(0)
-	DotGridBlur2:setImage(RegisterImage(0x56EB38F1457B4AE))
-	DotGridBlur2:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	DotGridBlur2:setImage(RegisterImage(@"hash_556EB38F1457B4AE"))
+	DotGridBlur2:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	DotGridBlur2:setShaderVector(0, 0, 0, 0, 0)
 	DotGridBlur2:setupNineSliceShader(108, 108)
 	self:addElement(DotGridBlur2)
@@ -75,8 +75,8 @@ CoD.vhud_hellstorm_reticle.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	local DotGridCenter = LUI.UIImage.new(0.5, 0.5, -233, 223, 0.5, 0.5, -217, 239)
 	DotGridCenter:setAlpha(0)
 	DotGridCenter:setScale(2, 2)
-	DotGridCenter:setImage(RegisterImage(0x39D7DB5DA7B7576))
-	DotGridCenter:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	DotGridCenter:setImage(RegisterImage(@"hash_139D7DB5DA7B7576"))
+	DotGridCenter:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	DotGridCenter:setShaderVector(0, 5, 0, 0, 0)
 	self:addElement(DotGridCenter)
 	self.DotGridCenter = DotGridCenter
@@ -120,8 +120,8 @@ CoD.vhud_hellstorm_reticle.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self:addElement(BGframeRight)
 	self.BGframeRight = BGframeRight
 	local CenterDot = LUI.UIImage.new(0.5, 0.5, -2, 2, 0.5, 0.5, -2, 2)
-	CenterDot:setImage(RegisterImage(0x3854665C02218EF))
-	CenterDot:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	CenterDot:setImage(RegisterImage(@"hash_73854665C02218EF"))
+	CenterDot:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	CenterDot:setShaderVector(0, 2, 0, 0, 0)
 	self:addElement(CenterDot)
 	self.CenterDot = CenterDot
@@ -146,14 +146,14 @@ CoD.vhud_hellstorm_reticle.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self.CenterFrame = CenterFrame
 	local TimerSegmentsBase = LUI.UIImage.new(0.5, 0.5, -210, 210, 0.5, 0.5, -208, 212)
 	TimerSegmentsBase:setAlpha(0.1)
-	TimerSegmentsBase:setImage(RegisterImage(0x9FDD95D9B71854D))
-	TimerSegmentsBase:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	TimerSegmentsBase:setImage(RegisterImage(@"uie_ui_hud_vehicle_hellstorm_timer"))
+	TimerSegmentsBase:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	TimerSegmentsBase:setShaderVector(0, 1.5, 0, 0, 0)
 	self:addElement(TimerSegmentsBase)
 	self.TimerSegmentsBase = TimerSegmentsBase
 	local TimerSegments = LUI.UIImage.new(0.5, 0.5, -210, 210, 0.5, 0.5, -208, 212)
-	TimerSegments:setImage(RegisterImage(0x9FDD95D9B71854D))
-	TimerSegments:setMaterial(LUI.UIImage.GetCachedMaterial(0x9AD9C230B10C37))
+	TimerSegments:setImage(RegisterImage(@"uie_ui_hud_vehicle_hellstorm_timer"))
+	TimerSegments:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_clock_add"))
 	TimerSegments:setShaderVector(1, 0.5, 0, 0, 0)
 	TimerSegments:setShaderVector(2, 5.5, 0, 0, 0)
 	TimerSegments:setShaderVector(3, 0, 0, 0, 0)
@@ -175,7 +175,7 @@ CoD.vhud_hellstorm_reticle.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self.MarkBot = MarkBot
 	local CenterMeter = CoD.vhud_HellstormCenterMeter.new(f1_arg0, f1_arg1, 0.5, 0.5, -412, 412, 0.5, 0.5, -412, 412)
 	CenterMeter:setScale(2, 2)
-	CenterMeter:setRFTMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	CenterMeter:setRFTMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	CenterMeter:linkToElementModel(self, "yaw", true, function(model)
 		local f11_local0 = model:get()
 		if f11_local0 ~= nil then
@@ -216,7 +216,7 @@ CoD.vhud_hellstorm_reticle.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	})
 	local f1_local28 = self
 	local f1_local29 = self.subscribeToModel
-	local f1_local30 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local30 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local29(f1_local28, f1_local30["hudItems.remoteMissilePhase2"], function(f16_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -371,7 +371,7 @@ CoD.vhud_hellstorm_reticle.__clipsPerState = {
 					f27_arg0:beginAnimation(49)
 					f27_arg0:registerEventHandler("transition_complete_keyframe", f27_local0)
 				end
-				f20_arg0.DotGridCenter:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f20_arg0.DotGridCenter:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f20_arg0.DotGridCenter:setAlpha(0.5)
 				f20_arg0.DotGridCenter:registerEventHandler("interrupted_keyframe", f20_arg0.clipInterrupted)
 				f20_arg0.DotGridCenter:registerEventHandler("transition_complete_keyframe", f26_local0)
@@ -659,7 +659,7 @@ CoD.vhud_hellstorm_reticle.__clipsPerState = {
 			f56_arg0.DotGridBlur:setAlpha(0.5)
 			f56_arg0.clipFinished(f56_arg0.DotGridBlur)
 			local f56_local0 = function(f57_arg0)
-				f56_arg0.BGBacking01:beginAnimation(150, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f56_arg0.BGBacking01:beginAnimation(150, Enum[@"luitween"][@"luitween_ease_both"])
 				f56_arg0.BGBacking01:setAlpha(0.9)
 				f56_arg0.BGBacking01:registerEventHandler("interrupted_keyframe", f56_arg0.clipInterrupted)
 				f56_arg0.BGBacking01:registerEventHandler("transition_complete_keyframe", f56_arg0.clipFinished)
@@ -727,7 +727,7 @@ CoD.vhud_hellstorm_reticle.__clipsPerState = {
 			f56_arg0.CenterReticleCircleWidget:setScale(1, 1)
 			f56_arg0.clipFinished(f56_arg0.CenterReticleCircleWidget)
 			local f56_local6 = function(f63_arg0)
-				f56_arg0.CenterFrame:beginAnimation(150, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f56_arg0.CenterFrame:beginAnimation(150, Enum[@"luitween"][@"luitween_ease_both"])
 				f56_arg0.CenterFrame:setScale(1, 1)
 				f56_arg0.CenterFrame:registerEventHandler("interrupted_keyframe", f56_arg0.clipInterrupted)
 				f56_arg0.CenterFrame:registerEventHandler("transition_complete_keyframe", f56_arg0.clipFinished)
@@ -935,7 +935,7 @@ CoD.vhud_hellstorm_reticle.__clipsPerState = {
 			f82_arg0.DotGridBlur:setAlpha(0.5)
 			f82_arg0.clipFinished(f82_arg0.DotGridBlur)
 			local f82_local0 = function(f83_arg0)
-				f82_arg0.BGBacking01:beginAnimation(150, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f82_arg0.BGBacking01:beginAnimation(150, Enum[@"luitween"][@"luitween_ease_both"])
 				f82_arg0.BGBacking01:setAlpha(0.9)
 				f82_arg0.BGBacking01:registerEventHandler("interrupted_keyframe", f82_arg0.clipInterrupted)
 				f82_arg0.BGBacking01:registerEventHandler("transition_complete_keyframe", f82_arg0.clipFinished)
@@ -1006,7 +1006,7 @@ CoD.vhud_hellstorm_reticle.__clipsPerState = {
 			f82_arg0.CenterReticleCircleWidget:setAlpha(0)
 			f82_arg0.clipFinished(f82_arg0.CenterReticleCircleWidget)
 			local f82_local6 = function(f89_arg0)
-				f82_arg0.CenterFrame:beginAnimation(150, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f82_arg0.CenterFrame:beginAnimation(150, Enum[@"luitween"][@"luitween_ease_both"])
 				f82_arg0.CenterFrame:setScale(1, 1)
 				f82_arg0.CenterFrame:registerEventHandler("interrupted_keyframe", f82_arg0.clipInterrupted)
 				f82_arg0.CenterFrame:registerEventHandler("transition_complete_keyframe", f82_arg0.clipFinished)
@@ -1128,7 +1128,7 @@ CoD.vhud_hellstorm_reticle.__clipsPerState = {
 			f90_arg0.DotGridCenter:setShaderVector(0, 2, 0, 0, 0)
 			f90_local4(f90_arg0.DotGridCenter)
 			local f90_local5 = function(f106_arg0)
-				f90_arg0.Speed:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f90_arg0.Speed:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f90_arg0.Speed:setAlpha(1)
 				f90_arg0.Speed:registerEventHandler("interrupted_keyframe", f90_arg0.clipInterrupted)
 				f90_arg0.Speed:registerEventHandler("transition_complete_keyframe", f90_arg0.clipFinished)
@@ -1137,7 +1137,7 @@ CoD.vhud_hellstorm_reticle.__clipsPerState = {
 			f90_arg0.Speed:setAlpha(0)
 			f90_local5(f90_arg0.Speed)
 			local f90_local6 = function(f107_arg0)
-				f90_arg0.AltMeterLeft:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f90_arg0.AltMeterLeft:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f90_arg0.AltMeterLeft:setAlpha(1)
 				f90_arg0.AltMeterLeft:registerEventHandler("interrupted_keyframe", f90_arg0.clipInterrupted)
 				f90_arg0.AltMeterLeft:registerEventHandler("transition_complete_keyframe", f90_arg0.clipFinished)
@@ -1233,7 +1233,7 @@ CoD.vhud_hellstorm_reticle.__clipsPerState = {
 					f119_arg0:setScale(2, 2)
 					f119_arg0:registerEventHandler("transition_complete_keyframe", f119_local0)
 				end
-				f90_arg0.RingGear:beginAnimation(180, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f90_arg0.RingGear:beginAnimation(180, Enum[@"luitween"][@"luitween_ease_out"])
 				f90_arg0.RingGear:setAlpha(0.5)
 				f90_arg0.RingGear:setScale(1.75, 1.75)
 				f90_arg0.RingGear:registerEventHandler("interrupted_keyframe", f90_arg0.clipInterrupted)

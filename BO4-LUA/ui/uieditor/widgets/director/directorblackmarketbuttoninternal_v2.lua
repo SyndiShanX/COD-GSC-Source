@@ -13,7 +13,7 @@ CoD.DirectorBlackMarketButtonInternal_v2.new = function(f1_arg0, f1_arg1, f1_arg
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local BlurBg = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	BlurBg:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	BlurBg:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	BlurBg:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(BlurBg)
 	self.BlurBg = BlurBg
@@ -41,7 +41,7 @@ CoD.DirectorBlackMarketButtonInternal_v2.new = function(f1_arg0, f1_arg1, f1_arg
 	self.DotTiledBackingTop = DotTiledBackingTop
 	local SpecialEventBanner = LUI.UIImage.new(0, 1, 4, -4, 0, 1, 4, -4)
 	SpecialEventBanner.__Image = function()
-		SpecialEventBanner:setImage(RegisterImage(CoD.BlackMarketUtility.GetCurrentBlackMarketBannerImage(0x7615068F50B3D66)))
+		SpecialEventBanner:setImage(RegisterImage(CoD.BlackMarketUtility.GetCurrentBlackMarketBannerImage(@"blacktransparent")))
 	end
 	SpecialEventBanner.__Image()
 	self:addElement(SpecialEventBanner)

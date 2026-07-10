@@ -8,7 +8,7 @@ CoD.MultiItemPickupItemBacking.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local blurPC = LUI.UIImage.new(0.02, 0.98, 0, 0, 0.02, 0.98, 0, 0)
-	blurPC:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	blurPC:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	blurPC:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(blurPC)
 	self.blurPC = blurPC
@@ -19,8 +19,8 @@ CoD.MultiItemPickupItemBacking.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	self.Backing = Backing
 	local TiledBacking = LUI.UIImage.new(0.02, 0.98, 0, 0, 0.02, 0.98, 0, 0)
 	TiledBacking:setAlpha(0.5)
-	TiledBacking:setImage(RegisterImage(0x34839E8065B1E53))
-	TiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	TiledBacking:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	TiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	TiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	TiledBacking:setupNineSliceShader(196, 88)
 	self:addElement(TiledBacking)
@@ -28,23 +28,23 @@ CoD.MultiItemPickupItemBacking.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	local FrameSelected = LUI.UIImage.new(0.08, 0.92, -10, 10, 0.08, 0.92, -10, 10)
 	FrameSelected:setAlpha(0)
 	FrameSelected:setScale(0.96, 0.96)
-	FrameSelected:setImage(RegisterImage(0xCB07CCC28498CB2))
-	FrameSelected:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	FrameSelected:setImage(RegisterImage(@"uie_ui_menu_store_focus_frame"))
+	FrameSelected:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	FrameSelected:setShaderVector(0, 0, 0, 0, 0)
 	FrameSelected:setupNineSliceShader(4, 4)
 	self:addElement(FrameSelected)
 	self.FrameSelected = FrameSelected
 	local FrontendFrame = LUI.UIImage.new(0.02, 0.98, -1, 1, 0.02, 0.98, -1, 1)
-	FrontendFrame:setImage(RegisterImage(0x185E11D74ECA3D7))
-	FrontendFrame:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	FrontendFrame:setImage(RegisterImage(@"uie_ui_menu_store_common_frame"))
+	FrontendFrame:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	FrontendFrame:setShaderVector(0, 0, 0, 0, 0)
 	FrontendFrame:setupNineSliceShader(12, 12)
 	self:addElement(FrontendFrame)
 	self.FrontendFrame = FrontendFrame
 	local FrameSelectedCorner = LUI.UIImage.new(0.04, 0.96, -10, 10, 0.04, 0.96, -10, 10)
 	FrameSelectedCorner:setAlpha(0)
-	FrameSelectedCorner:setImage(RegisterImage(0x793C73633F620BB))
-	FrameSelectedCorner:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	FrameSelectedCorner:setImage(RegisterImage(@"uie_ui_menu_store_focus_pips"))
+	FrameSelectedCorner:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	FrameSelectedCorner:setShaderVector(0, 0, 0, 0, 0)
 	FrameSelectedCorner:setupNineSliceShader(22, 22)
 	self:addElement(FrameSelectedCorner)
@@ -81,7 +81,7 @@ CoD.MultiItemPickupItemBacking.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	end)
 	local f1_local7 = self
 	local f1_local8 = self.subscribeToModel
-	local f1_local9 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local9 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local8(f1_local7, f1_local9.LastInput, function(f7_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

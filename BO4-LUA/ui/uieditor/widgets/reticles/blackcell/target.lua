@@ -10,26 +10,26 @@ CoD.Target.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, 
 	local timerbgshadow = LUI.UIImage.new(0.5, 0.5, -175, 203, 0.5, 0.5, -152, 136)
 	timerbgshadow:setRGB(0, 0, 0)
 	timerbgshadow:setAlpha(0.8)
-	timerbgshadow:setImage(RegisterImage(0x19AABF619BA81F))
+	timerbgshadow:setImage(RegisterImage(@"uie_t7_hud_rocketlauncher_timer"))
 	self:addElement(timerbgshadow)
 	self.timerbgshadow = timerbgshadow
 	local timerbg = LUI.UIImage.new(0.5, 0.5, -175, 203, 0.5, 0.5, -152, 136)
-	timerbg:setImage(RegisterImage(0x19AABF619BA81F))
+	timerbg:setImage(RegisterImage(@"uie_t7_hud_rocketlauncher_timer"))
 	self:addElement(timerbg)
 	self.timerbg = timerbg
 	local iconshadow = LUI.UIImage.new(0.5, 0.5, -114, 66, 0.5, 0.5, -103, 95)
 	iconshadow:setRGB(0, 0, 0)
-	iconshadow:setImage(RegisterImage(0x1EB601845E53335))
+	iconshadow:setImage(RegisterImage(@"uie_t7_hud_rocketlauncher_targetreticle"))
 	self:addElement(iconshadow)
 	self.iconshadow = iconshadow
 	local icon = LUI.UIImage.new(0.5, 0.5, -114, 66, 0.5, 0.5, -103, 95)
-	icon:setImage(RegisterImage(0x1EB601845E53335))
+	icon:setImage(RegisterImage(@"uie_t7_hud_rocketlauncher_targetreticle"))
 	self:addElement(icon)
 	self.icon = icon
 	local TimerShadow = LUI.UIText.new(0.5, 0.5, 29, 95, 0.5, 0.5, -30, 30)
 	TimerShadow:setRGB(0, 0, 0)
 	TimerShadow:setTTF("default")
-	TimerShadow:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	TimerShadow:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	TimerShadow:subscribeToGlobalModel(f1_arg1, "CurrentWeapon", "lockedOnEnemyMissilesRemaining", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -40,7 +40,7 @@ CoD.Target.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, 
 	self.TimerShadow = TimerShadow
 	local Timer0 = LUI.UIText.new(0.5, 0.5, 29, 95, 0.5, 0.5, -30, 30)
 	Timer0:setTTF("default")
-	Timer0:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	Timer0:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	Timer0:subscribeToGlobalModel(f1_arg1, "CurrentWeapon", "lockedOnEnemyMissilesRemaining", function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -53,7 +53,7 @@ CoD.Target.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, 
 		{
 			stateName = "LockedOn",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsGlobalDataSourceModelValueEnumBitSet(f1_arg1, "CurrentWeapon", "lockedOnEnemy", Enum[0xF041D1802ECFE69][0xFFFAB60076992A1])
+				return CoD.ModelUtility.IsGlobalDataSourceModelValueEnumBitSet(f1_arg1, "CurrentWeapon", "lockedOnEnemy", Enum[@"rocketlaunchertargetstatesflags"][@"rocket_launcher_target_found"])
 			end,
 		},
 	})

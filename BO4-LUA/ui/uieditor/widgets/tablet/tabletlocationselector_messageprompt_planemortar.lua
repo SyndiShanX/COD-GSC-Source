@@ -10,14 +10,14 @@ CoD.TabletLocationSelector_MessagePrompt_Planemortar.new = function(f1_arg0, f1_
 	self.soundSet = "default"
 	self.anyChildUsesUpdateState = true
 	local TabletLocationSelectorHintText = CoD.TabletLocationSelector_HintText.new(f1_arg0, f1_arg1, 0.5, 0.5, -285, 245, 0.5, 0.5, -20, 20)
-	TabletLocationSelectorHintText.CursorHintText:setText(Engine[0xF9F1239CFD921FE](0x397C7860EF08AA3))
+	TabletLocationSelectorHintText.CursorHintText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/remaining_target"))
 	self:addElement(TabletLocationSelectorHintText)
 	self.TabletLocationSelectorHintText = TabletLocationSelectorHintText
 	local SelectionCountText = LUI.UIText.new(0.5, 0.5, 245, 285, 0.5, 0.5, -12, 6)
 	SelectionCountText:setRGB(ColorSet.T8__RED.r, ColorSet.T8__RED.g, ColorSet.T8__RED.b)
 	SelectionCountText:setTTF("0arame_mono_stencil")
-	SelectionCountText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	SelectionCountText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	SelectionCountText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	SelectionCountText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	SelectionCountText:subscribeToGlobalModel(f1_arg1, "HUDItems", "tabletLocationSelectorText", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then

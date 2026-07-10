@@ -8,17 +8,17 @@ CoD.CodCasterSupportButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self.soundSet = "none"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local bg = LUI.UIImage.new(0.5, 0.5, -20, 20, 0.5, 0.5, -12, 12)
-	bg:setImage(RegisterImage(0x65F179D38251C83))
+	bg:setImage(RegisterImage(@"hash_465F179D38251C83"))
 	self:addElement(bg)
 	self.bg = bg
 	local blur = LUI.UIImage.new(0.5, 0.5, -20, 20, 0.5, 0.5, -12, 12)
-	blur:setImage(RegisterImage(0x2FF86414B30BA29))
+	blur:setImage(RegisterImage(@"hash_32FF86414B30BA29"))
 	self:addElement(blur)
 	self.blur = blur
 	local scorestreakicon = LUI.UIImage.new(0.51, 0.51, -20, 20, 0.5, 0.5, -12, 12)
 	scorestreakicon:setRGB(0, 0, 0)
 	scorestreakicon:setAlpha(0.05)
-	scorestreakicon:setImage(RegisterImage(0x76182927422079D))
+	scorestreakicon:setImage(RegisterImage(@"hash_476182927422079D"))
 	self:addElement(scorestreakicon)
 	self.scorestreakicon = scorestreakicon
 	self:mergeStateConditions({
@@ -73,7 +73,7 @@ CoD.CodCasterSupportButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	end)
 	local f1_local4 = self
 	local f1_local5 = self.subscribeToModel
-	local f1_local6 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local6 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local5(f1_local4, f1_local6.LastInput, function(f7_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

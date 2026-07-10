@@ -28,7 +28,7 @@ CoD.ButtonWeaponLevel.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	local progressBarBg = LUI.UIImage.new(0.5, 0.5, -269.5, -12.5, 0, 0, -96, 9)
 	progressBarBg:setRGB(0, 0, 0)
 	progressBarBg:setScale(1.1, 1.1)
-	progressBarBg:setImage(RegisterImage(0x136CEF79E2CB178))
+	progressBarBg:setImage(RegisterImage(@"uie_ui_menu_cac_weapon_select_button_bar"))
 	self:addElement(progressBarBg)
 	self.progressBarBg = progressBarBg
 	local progressBar = CoD.WeaponLevelMeterSmall.new(f1_arg0, f1_arg1, 0, 0, 0, 1580, 0, 0, 0, 12)
@@ -49,7 +49,7 @@ CoD.ButtonWeaponLevel.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	local LvlBg = LUI.UIImage.new(0, 0, -4.5, 105.5, 0, 0, -29.5, 0.5)
 	LvlBg:setAlpha(0)
 	LvlBg:setScale(1.05, 1.05)
-	LvlBg:setImage(RegisterImage(0xF1B341C43B520A4))
+	LvlBg:setImage(RegisterImage(@"uie_ui_menu_cac_attachment_lvl_bg_01"))
 	self:addElement(LvlBg)
 	self.LvlBg = LvlBg
 	local WeaponLevelWidget = CoD.WeaponLevelWidget.new(f1_arg0, f1_arg1, 0, 0, 0, 123, 0, 0, -130, -70)
@@ -115,7 +115,7 @@ CoD.ButtonWeaponLevel.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	})
 	local f1_local8 = self
 	local f1_local9 = self.subscribeToModel
-	local f1_local10 = Engine[0x8DF2E5447F384B9]()
+	local f1_local10 = Engine[@"getglobalmodel"]()
 	f1_local9(f1_local8, f1_local10["lobbyRoot.lobbyNav"], function(f8_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

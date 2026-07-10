@@ -17,8 +17,8 @@ CoD.MPSpecialistHUBBindWheelInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local TiledPlusGrid = LUI.UIImage.new(0, 0, -21.5, 1898.5, 0, 0, 0, 1082)
 	TiledPlusGrid:setAlpha(0.02)
-	TiledPlusGrid:setImage(RegisterImage(0x6E37BAE22631294))
-	TiledPlusGrid:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	TiledPlusGrid:setImage(RegisterImage(@"uie_ui_hud_vehicle_hellstorm_repeat_plusgrid"))
+	TiledPlusGrid:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	TiledPlusGrid:setShaderVector(0, 0, 0, 0, 0)
 	TiledPlusGrid:setupNineSliceShader(220, 220)
 	self:addElement(TiledPlusGrid)
@@ -154,30 +154,30 @@ CoD.MPSpecialistHUBBindWheelInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	self.RightDPadIcon = RightDPadIcon
 	local QuickSprayInstruct = LUI.UIText.new(0.5, 0.5, 424, 834, 0.5, 0.5, 183.5, 201.5)
 	QuickSprayInstruct:setRGB(ColorSet.T8__OFF__GRAY.r, ColorSet.T8__OFF__GRAY.g, ColorSet.T8__OFF__GRAY.b)
-	QuickSprayInstruct:setText(Engine[0xF9F1239CFD921FE](0x3C0A496B56DCF6B))
+	QuickSprayInstruct:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_3C0A496B56DCF6B"))
 	QuickSprayInstruct:setTTF("dinnext_regular")
 	QuickSprayInstruct:setLetterSpacing(2)
-	QuickSprayInstruct:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	QuickSprayInstruct:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	QuickSprayInstruct:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	QuickSprayInstruct:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(QuickSprayInstruct)
 	self.QuickSprayInstruct = QuickSprayInstruct
 	local TitleQuickAccess = LUI.UIText.new(0.5, 0.5, 424, 854, 0.5, 0.5, 96.5, 121.5)
 	TitleQuickAccess:setRGB(0.96, 0.93, 0.84)
 	TitleQuickAccess:setAlpha(0.7)
-	TitleQuickAccess:setText(Engine[0xF9F1239CFD921FE](0xFA68235049303DD))
+	TitleQuickAccess:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/quick_tag"))
 	TitleQuickAccess:setTTF("ttmussels_regular")
 	TitleQuickAccess:setLetterSpacing(3)
-	TitleQuickAccess:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	TitleQuickAccess:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(TitleQuickAccess)
 	self.TitleQuickAccess = TitleQuickAccess
 	local quickSprayGameInstructions = LUI.UIText.new(0.5, 0.5, 424, 836, 0.5, 0.5, 131.5, 147.5)
 	quickSprayGameInstructions:setRGB(ColorSet.T8__OFF__GRAY.r, ColorSet.T8__OFF__GRAY.g, ColorSet.T8__OFF__GRAY.b)
-	quickSprayGameInstructions:setText(Engine[0xF9F1239CFD921FE](0x72A9D48D0C0414B))
+	quickSprayGameInstructions:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_172A9D48D0C0414B"))
 	quickSprayGameInstructions:setTTF("dinnext_regular")
 	quickSprayGameInstructions:setLetterSpacing(2)
 	quickSprayGameInstructions:setLineSpacing(2)
-	quickSprayGameInstructions:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	quickSprayGameInstructions:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	quickSprayGameInstructions:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	quickSprayGameInstructions:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(quickSprayGameInstructions)
 	self.quickSprayGameInstructions = quickSprayGameInstructions
 	local emptyFocusable = nil
@@ -189,10 +189,10 @@ CoD.MPSpecialistHUBBindWheelInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f
 		elseif element.super.gainFocus then
 			f17_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f17_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(emptyFocusable, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(emptyFocusable, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if IsPC() then
 			CoD.PlayerRoleUtility.OpenGestureTagMenu(menu, controller)
 			return true
@@ -200,7 +200,7 @@ CoD.MPSpecialistHUBBindWheelInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f
 		end
 	end, function(element, menu, controller)
 		if IsPC() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false
@@ -210,7 +210,7 @@ CoD.MPSpecialistHUBBindWheelInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	self.emptyFocusable = emptyFocusable
 	local AssignQuickTagButton = nil
 	AssignQuickTagButton = CoD.DirectorSimpleButton.new(f1_arg0, f1_arg1, 0.5, 0.5, 424, 838, 1, 1, -283.5, -191.5)
-	AssignQuickTagButton.PlayText:setText(LocalizeToUpperString(0x61495B49D3FB4B9))
+	AssignQuickTagButton.PlayText:setText(LocalizeToUpperString(@"hash_361495B49D3FB4B9"))
 	AssignQuickTagButton:registerEventHandler("gain_focus", function(element, event)
 		local f20_local0 = nil
 		if element.gainFocus then
@@ -218,10 +218,10 @@ CoD.MPSpecialistHUBBindWheelInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f
 		elseif element.super.gainFocus then
 			f20_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f20_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(AssignQuickTagButton, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(AssignQuickTagButton, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if IsPC() then
 			CoD.PlayerRoleUtility.OpenQuickSlotGestureTagMenu(menu, controller)
 			return true
@@ -229,7 +229,7 @@ CoD.MPSpecialistHUBBindWheelInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f
 		end
 	end, function(element, menu, controller)
 		if IsPC() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false
@@ -241,61 +241,61 @@ CoD.MPSpecialistHUBBindWheelInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	PCtip = LUI.UIText.new(0.5, 0.5, -350, 350, 0.5, 0.5, 399.5, 424.5)
 	PCtip:setRGB(0.96, 0.93, 0.84)
 	PCtip:setAlpha(0.7)
-	PCtip:setText(Engine[0xF9F1239CFD921FE](0x8EECF8BBD6C55F9))
+	PCtip:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_78EECF8BBD6C55F9"))
 	PCtip:setTTF("dinnext_regular")
 	PCtip:setLetterSpacing(2)
-	PCtip:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	PCtip:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	PCtip:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	PCtip:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(PCtip)
 	self.PCtip = PCtip
 	local f1_local14 = nil
 	self.Consoletip = LUI.UIElement.createFake()
 	local halfCircleBR = LUI.UIImage.new(0.5, 0.5, 408, 0, 0.5, 0.5, 408, 0)
 	halfCircleBR:setAlpha(0.01)
-	halfCircleBR:setImage(RegisterImage(0xF13D40449AE7486))
-	halfCircleBR:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	halfCircleBR:setImage(RegisterImage(@"uie_ui_hud_vehicle_hellstorm_ring"))
+	halfCircleBR:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(halfCircleBR)
 	self.halfCircleBR = halfCircleBR
 	local halfCircleTR = LUI.UIImage.new(0.5, 0.5, 408, 0, 0.5, 0.5, -408, 0)
 	halfCircleTR:setAlpha(0.01)
-	halfCircleTR:setImage(RegisterImage(0xF13D40449AE7486))
-	halfCircleTR:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	halfCircleTR:setImage(RegisterImage(@"uie_ui_hud_vehicle_hellstorm_ring"))
+	halfCircleTR:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(halfCircleTR)
 	self.halfCircleTR = halfCircleTR
 	local halfCircleBL = LUI.UIImage.new(0.5, 0.5, -408, 0, 0.5, 0.5, 408, 0)
 	halfCircleBL:setAlpha(0.01)
-	halfCircleBL:setImage(RegisterImage(0xF13D40449AE7486))
-	halfCircleBL:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	halfCircleBL:setImage(RegisterImage(@"uie_ui_hud_vehicle_hellstorm_ring"))
+	halfCircleBL:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(halfCircleBL)
 	self.halfCircleBL = halfCircleBL
 	local halfCircleTL = LUI.UIImage.new(0.5, 0.5, -408, 0, 0.5, 0.5, -408, 0)
 	halfCircleTL:setAlpha(0.01)
-	halfCircleTL:setImage(RegisterImage(0xF13D40449AE7486))
-	halfCircleTL:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	halfCircleTL:setImage(RegisterImage(@"uie_ui_hud_vehicle_hellstorm_ring"))
+	halfCircleTL:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(halfCircleTL)
 	self.halfCircleTL = halfCircleTL
 	local halfCircleTR2 = LUI.UIImage.new(0.5, 0.5, 86, 0, 0.5, 0.5, -87.5, -1.5)
 	halfCircleTR2:setAlpha(0.01)
-	halfCircleTR2:setImage(RegisterImage(0xF13D40449AE7486))
-	halfCircleTR2:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	halfCircleTR2:setImage(RegisterImage(@"uie_ui_hud_vehicle_hellstorm_ring"))
+	halfCircleTR2:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(halfCircleTR2)
 	self.halfCircleTR2 = halfCircleTR2
 	local halfCircleBL2 = LUI.UIImage.new(0.5, 0.5, -86, 0, 0.5, 0.5, 84.5, -1.5)
 	halfCircleBL2:setAlpha(0.01)
-	halfCircleBL2:setImage(RegisterImage(0xF13D40449AE7486))
-	halfCircleBL2:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	halfCircleBL2:setImage(RegisterImage(@"uie_ui_hud_vehicle_hellstorm_ring"))
+	halfCircleBL2:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(halfCircleBL2)
 	self.halfCircleBL2 = halfCircleBL2
 	local halfCircleBR2 = LUI.UIImage.new(0.5, 0.5, 86, 0, 0.5, 0.5, 84.5, -1.5)
 	halfCircleBR2:setAlpha(0.01)
-	halfCircleBR2:setImage(RegisterImage(0xF13D40449AE7486))
-	halfCircleBR2:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	halfCircleBR2:setImage(RegisterImage(@"uie_ui_hud_vehicle_hellstorm_ring"))
+	halfCircleBR2:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(halfCircleBR2)
 	self.halfCircleBR2 = halfCircleBR2
 	local halfCircleTL2 = LUI.UIImage.new(0.5, 0.5, -86, 0, 0.5, 0.5, -87.5, -1.5)
 	halfCircleTL2:setAlpha(0.01)
-	halfCircleTL2:setImage(RegisterImage(0xF13D40449AE7486))
-	halfCircleTL2:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	halfCircleTL2:setImage(RegisterImage(@"uie_ui_hud_vehicle_hellstorm_ring"))
+	halfCircleTL2:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(halfCircleTL2)
 	self.halfCircleTL2 = halfCircleTL2
 	self:mergeStateConditions({
@@ -331,7 +331,7 @@ CoD.MPSpecialistHUBBindWheelInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	end)
 	local f1_local23 = self
 	local f1_local24 = self.subscribeToModel
-	local f1_local25 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local25 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local24(f1_local23, f1_local25.LastInput, function(f27_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -386,12 +386,12 @@ CoD.MPSpecialistHUBBindWheelInternal.__resetProperties = function(f29_arg0)
 	f29_arg0.quickSprayGameInstructions:setLeftRight(0.5, 0.5, 424, 836)
 	f29_arg0.quickSprayGameInstructions:setTopBottom(0.5, 0.5, 131.5, 147.5)
 	f29_arg0.quickSprayGameInstructions:setAlpha(1)
-	f29_arg0.quickSprayGameInstructions:setText(Engine[0xF9F1239CFD921FE](0x72A9D48D0C0414B))
-	f29_arg0.quickSprayGameInstructions:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	f29_arg0.quickSprayGameInstructions:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	f29_arg0.quickSprayGameInstructions:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_172A9D48D0C0414B"))
+	f29_arg0.quickSprayGameInstructions:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	f29_arg0.quickSprayGameInstructions:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	f29_arg0.TitleQuickAccess:setTopBottom(0.5, 0.5, 96.5, 121.5)
 	f29_arg0.TitleQuickAccess:setAlpha(0.7)
-	f29_arg0.TitleQuickAccess:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	f29_arg0.TitleQuickAccess:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	f29_arg0.AssignQuickTagButton:setTopBottom(1, 1, -283.5, -191.5)
 	f29_arg0.AssignQuickTagButton:setAlpha(1)
 	f29_arg0.IconFrame:setLeftRight(0.5, 0.5, 504, 664)
@@ -489,7 +489,7 @@ CoD.MPSpecialistHUBBindWheelInternal.__clipsPerState = {
 			f38_arg0.clipFinished(f38_arg0.QuickSprayInstruct)
 			f38_arg0.quickSprayGameInstructions:completeAnimation()
 			f38_arg0.quickSprayGameInstructions:setAlpha(0)
-			f38_arg0.quickSprayGameInstructions:setText(Engine[0xF9F1239CFD921FE](0x5784C4138C55065))
+			f38_arg0.quickSprayGameInstructions:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_45784C4138C55065"))
 			f38_arg0.clipFinished(f38_arg0.quickSprayGameInstructions)
 			f38_arg0.AssignQuickTagButton:completeAnimation()
 			f38_arg0.AssignQuickTagButton:setAlpha(0)
@@ -517,14 +517,14 @@ CoD.MPSpecialistHUBBindWheelInternal.__clipsPerState = {
 			f39_arg0.clipFinished(f39_arg0.QuickSprayInstruct)
 			f39_arg0.TitleQuickAccess:completeAnimation()
 			f39_arg0.TitleQuickAccess:setTopBottom(0.5, 0.5, -197.75, -160.75)
-			f39_arg0.TitleQuickAccess:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+			f39_arg0.TitleQuickAccess:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 			f39_arg0.clipFinished(f39_arg0.TitleQuickAccess)
 			f39_arg0.quickSprayGameInstructions:completeAnimation()
 			f39_arg0.quickSprayGameInstructions:setLeftRight(0.5, 0.5, 426, 838)
 			f39_arg0.quickSprayGameInstructions:setTopBottom(0.5, 0.5, -127.5, -111.5)
-			f39_arg0.quickSprayGameInstructions:setText(Engine[0xF9F1239CFD921FE](0x5784C4138C55065))
-			f39_arg0.quickSprayGameInstructions:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-			f39_arg0.quickSprayGameInstructions:setAlignment(Enum[0x7A5123B654282D2][0x6ED4298C93DC5ED])
+			f39_arg0.quickSprayGameInstructions:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_45784C4138C55065"))
+			f39_arg0.quickSprayGameInstructions:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+			f39_arg0.quickSprayGameInstructions:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
 			f39_arg0.clipFinished(f39_arg0.quickSprayGameInstructions)
 			f39_arg0.AssignQuickTagButton:completeAnimation()
 			f39_arg0.AssignQuickTagButton:setTopBottom(1, 1, -433, -341)
@@ -540,7 +540,7 @@ CoD.MPSpecialistHUBBindWheelInternal.__clipsPerState = {
 			f40_arg0:setupElementClipCounter(14)
 			local f40_local0 = function(f41_arg0)
 				local f41_local0 = function(f42_arg0)
-					f42_arg0:beginAnimation(150, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f42_arg0:beginAnimation(150, Enum[@"luitween"][@"luitween_ease_in"])
 					f42_arg0:setAlpha(1)
 					f42_arg0:registerEventHandler("transition_complete_keyframe", f40_arg0.clipFinished)
 				end
@@ -553,7 +553,7 @@ CoD.MPSpecialistHUBBindWheelInternal.__clipsPerState = {
 			f40_local0(f40_arg0.SpraysAndGestures)
 			local f40_local1 = function(f43_arg0)
 				local f43_local0 = function(f44_arg0)
-					f44_arg0:beginAnimation(150, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f44_arg0:beginAnimation(150, Enum[@"luitween"][@"luitween_ease_in"])
 					f44_arg0:setAlpha(1)
 					f44_arg0:registerEventHandler("transition_complete_keyframe", f40_arg0.clipFinished)
 				end
@@ -668,7 +668,7 @@ CoD.MPSpecialistHUBBindWheelInternal.__clipsPerState = {
 			end
 			f40_arg0.quickSprayGameInstructions:completeAnimation()
 			f40_arg0.quickSprayGameInstructions:setAlpha(0)
-			f40_arg0.quickSprayGameInstructions:setText(Engine[0xF9F1239CFD921FE](0x72A9D48D0C0414B))
+			f40_arg0.quickSprayGameInstructions:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_172A9D48D0C0414B"))
 			f40_local7(f40_arg0.quickSprayGameInstructions)
 			f40_arg0.PCtip:completeAnimation()
 			f40_arg0.PCtip:setAlpha(0)

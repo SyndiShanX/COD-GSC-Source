@@ -11,14 +11,14 @@ CoD.WeaponAttributeValueStat.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	local AttributeBaseValue = LUI.UIText.new(0, 0, 0, 32, 0, 1, 0, 0)
 	AttributeBaseValue:setText("")
 	AttributeBaseValue:setTTF("ttmussels_demibold")
-	AttributeBaseValue:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	AttributeBaseValue:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(AttributeBaseValue)
 	self.AttributeBaseValue = AttributeBaseValue
 	local AttributeAddedValue = LUI.UIText.new(0, 0, 35, 67, 0, 0, 0, 18)
 	AttributeAddedValue:setRGB(0, 1, 0)
 	AttributeAddedValue:setText("")
 	AttributeAddedValue:setTTF("ttmussels_demibold")
-	AttributeAddedValue:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	AttributeAddedValue:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(AttributeAddedValue)
 	self.AttributeAddedValue = AttributeAddedValue
 	if PostLoadFunc then

@@ -13,12 +13,12 @@ CoD.WarzoneUseTimerProgress.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.DotCorner9Slice = DotCorner9Slice
 	local progressBackground = LUI.UIImage.new(0, 0, 0, 480, 1, 1, -18, 0)
 	progressBackground:setAlpha(0.6)
-	progressBackground:setImage(RegisterImage(0x1DAC080D2A0206D))
+	progressBackground:setImage(RegisterImage(@"uie_ui_hud_wz_hud_revive_bar_empty"))
 	self:addElement(progressBackground)
 	self.progressBackground = progressBackground
 	local progressBar = LUI.UIImage.new(0, 0, 1, 481, 1, 1, -19, 1)
-	progressBar:setImage(RegisterImage(0xE64E796E85F4FA5))
-	progressBar:setMaterial(LUI.UIImage.GetCachedMaterial(0x910274CA3518744))
+	progressBar:setImage(RegisterImage(@"uie_ui_hud_wz_hud_revive_bar_fill"))
+	progressBar:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe"))
 	progressBar:setShaderVector(0, 0.64, 0, 0, 0)
 	progressBar:setShaderVector(1, 0, 0, 0, 0)
 	progressBar:setShaderVector(2, 1, 0, 0, 0)

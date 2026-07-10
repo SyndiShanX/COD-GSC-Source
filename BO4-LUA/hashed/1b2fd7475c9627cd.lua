@@ -11,7 +11,7 @@ CoD.WarzoneInventoryCounter.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	Counter:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	Counter:setTTF("0arame_mono_stencil")
 	Counter:setLetterSpacing(1)
-	Counter:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
+	Counter:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
 	Counter:setBackingType(2)
 	Counter:setBackingColor(0, 0, 0)
 	Counter:setBackingXPadding(5)

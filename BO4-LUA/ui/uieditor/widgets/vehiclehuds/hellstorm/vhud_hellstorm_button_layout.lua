@@ -13,16 +13,16 @@ CoD.vhud_hellstorm_button_layout.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	local KBMClusterBombActionName = nil
 	KBMClusterBombActionName = LUI.UIText.new(0.5, 0.5, -583, -283, 1, 1, -159, -143)
 	KBMClusterBombActionName:setAlpha(0)
-	KBMClusterBombActionName:setText(Engine[0xF9F1239CFD921FE](0x6368EB0A070207A))
+	KBMClusterBombActionName:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_6368EB0A070207A"))
 	KBMClusterBombActionName:setTTF("ttmussels_regular")
-	KBMClusterBombActionName:setMaterial(LUI.UIImage.GetCachedMaterial(0xAE166D9BA8C6907))
+	KBMClusterBombActionName:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_2AE166D9BA8C6907"))
 	KBMClusterBombActionName:setShaderVector(0, 0, 0, 0, 0)
 	KBMClusterBombActionName:setShaderVector(1, 0, 0, 0, 0)
 	KBMClusterBombActionName:setShaderVector(2, 1, 0, 0, 0)
-	KBMClusterBombActionName:setRFTMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	KBMClusterBombActionName:setRFTMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	KBMClusterBombActionName:setLetterSpacing(0.5)
-	KBMClusterBombActionName:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	KBMClusterBombActionName:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	KBMClusterBombActionName:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	KBMClusterBombActionName:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(KBMClusterBombActionName)
 	self.KBMClusterBombActionName = KBMClusterBombActionName
 	local KBMClusterBombPrompt = nil
@@ -35,16 +35,16 @@ CoD.vhud_hellstorm_button_layout.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	local KBMSlowDownActionName = nil
 	KBMSlowDownActionName = LUI.UIText.new(0.5, 0.5, 278.5, 578.5, 1, 1, -159, -143)
 	KBMSlowDownActionName:setAlpha(0)
-	KBMSlowDownActionName:setText(Engine[0xF9F1239CFD921FE](0xB1A03F2448A49D9))
+	KBMSlowDownActionName:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_B1A03F2448A49D9"))
 	KBMSlowDownActionName:setTTF("ttmussels_regular")
-	KBMSlowDownActionName:setMaterial(LUI.UIImage.GetCachedMaterial(0xAE166D9BA8C6907))
+	KBMSlowDownActionName:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_2AE166D9BA8C6907"))
 	KBMSlowDownActionName:setShaderVector(0, 0, 0, 0, 0)
 	KBMSlowDownActionName:setShaderVector(1, 0, 0, 0, 0)
 	KBMSlowDownActionName:setShaderVector(2, 1, 0, 0, 0)
-	KBMSlowDownActionName:setRFTMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	KBMSlowDownActionName:setRFTMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	KBMSlowDownActionName:setLetterSpacing(0.5)
-	KBMSlowDownActionName:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	KBMSlowDownActionName:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	KBMSlowDownActionName:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	KBMSlowDownActionName:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(KBMSlowDownActionName)
 	self.KBMSlowDownActionName = KBMSlowDownActionName
 	local KBMSlowDownPrompt = nil
@@ -57,16 +57,16 @@ CoD.vhud_hellstorm_button_layout.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	local KBMSpeedBoostActionName = nil
 	KBMSpeedBoostActionName = LUI.UIText.new(0.5, 0.5, -150, 150, 1, 1, -112, -96)
 	KBMSpeedBoostActionName:setAlpha(0)
-	KBMSpeedBoostActionName:setText(Engine[0xF9F1239CFD921FE](0x9D336E3DD657B0A))
+	KBMSpeedBoostActionName:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_79D336E3DD657B0A"))
 	KBMSpeedBoostActionName:setTTF("ttmussels_regular")
-	KBMSpeedBoostActionName:setMaterial(LUI.UIImage.GetCachedMaterial(0xAE166D9BA8C6907))
+	KBMSpeedBoostActionName:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_2AE166D9BA8C6907"))
 	KBMSpeedBoostActionName:setShaderVector(0, 0, 0, 0, 0)
 	KBMSpeedBoostActionName:setShaderVector(1, 0, 0, 0, 0)
 	KBMSpeedBoostActionName:setShaderVector(2, 1, 0, 0, 0)
-	KBMSpeedBoostActionName:setRFTMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	KBMSpeedBoostActionName:setRFTMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	KBMSpeedBoostActionName:setLetterSpacing(0.5)
-	KBMSpeedBoostActionName:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	KBMSpeedBoostActionName:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	KBMSpeedBoostActionName:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	KBMSpeedBoostActionName:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(KBMSpeedBoostActionName)
 	self.KBMSpeedBoostActionName = KBMSpeedBoostActionName
 	local KBMSpeedBoostPrompt = nil
@@ -96,7 +96,7 @@ CoD.vhud_hellstorm_button_layout.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	end)
 	local L3Button = LeftTrigger
 	local RightTrigger = LeftTrigger.subscribeToModel
-	local RightStick = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local RightStick = Engine[@"getmodelforcontroller"](f1_arg1)
 	RightTrigger(L3Button, RightStick["factions.isCoDCaster"], function(f4_arg0)
 		f1_arg0:updateElementState(LeftTrigger, {
 			name = "model_validation",
@@ -149,7 +149,7 @@ CoD.vhud_hellstorm_button_layout.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	LeftTrigger:linkToElementModel(self, "BUTTON_LTRIG.text", true, function(model)
 		local f10_local0 = model:get()
 		if f10_local0 ~= nil then
-			LeftTrigger.prompt:setText(Engine[0xF9F1239CFD921FE](f10_local0))
+			LeftTrigger.prompt:setText(Engine[@"hash_4F9F1239CFD921FE"](f10_local0))
 		end
 	end)
 	self:addElement(LeftTrigger)
@@ -174,7 +174,7 @@ CoD.vhud_hellstorm_button_layout.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	end)
 	RightStick = RightTrigger
 	L3Button = RightTrigger.subscribeToModel
-	local f1_local11 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local11 = Engine[@"getmodelforcontroller"](f1_arg1)
 	L3Button(RightStick, f1_local11["factions.isCoDCaster"], function(f13_arg0)
 		f1_arg0:updateElementState(RightTrigger, {
 			name = "model_validation",
@@ -227,7 +227,7 @@ CoD.vhud_hellstorm_button_layout.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	RightTrigger:linkToElementModel(self, "BUTTON_RTRIG.text", true, function(model)
 		local f19_local0 = model:get()
 		if f19_local0 ~= nil then
-			RightTrigger.prompt:setText(Engine[0xF9F1239CFD921FE](f19_local0))
+			RightTrigger.prompt:setText(Engine[@"hash_4F9F1239CFD921FE"](f19_local0))
 		end
 	end)
 	self:addElement(RightTrigger)
@@ -252,7 +252,7 @@ CoD.vhud_hellstorm_button_layout.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	end)
 	f1_local11 = L3Button
 	RightStick = L3Button.subscribeToModel
-	local f1_local12 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local12 = Engine[@"getmodelforcontroller"](f1_arg1)
 	RightStick(f1_local11, f1_local12["factions.isCoDCaster"], function(f22_arg0)
 		f1_arg0:updateElementState(L3Button, {
 			name = "model_validation",
@@ -305,7 +305,7 @@ CoD.vhud_hellstorm_button_layout.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	L3Button:linkToElementModel(self, "BUTTON_LSTICK.text", true, function(model)
 		local f28_local0 = model:get()
 		if f28_local0 ~= nil then
-			L3Button.prompt:setText(Engine[0xF9F1239CFD921FE](f28_local0))
+			L3Button.prompt:setText(Engine[@"hash_4F9F1239CFD921FE"](f28_local0))
 		end
 	end)
 	self:addElement(L3Button)
@@ -330,7 +330,7 @@ CoD.vhud_hellstorm_button_layout.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	end)
 	f1_local12 = RightStick
 	f1_local11 = RightStick.subscribeToModel
-	local f1_local13 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local13 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local11(f1_local12, f1_local13["factions.isCoDCaster"], function(f31_arg0)
 		f1_arg0:updateElementState(RightStick, {
 			name = "model_validation",
@@ -383,7 +383,7 @@ CoD.vhud_hellstorm_button_layout.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	RightStick:linkToElementModel(self, "R_STICK.text", true, function(model)
 		local f37_local0 = model:get()
 		if f37_local0 ~= nil then
-			RightStick.prompt:setText(Engine[0xF9F1239CFD921FE](f37_local0))
+			RightStick.prompt:setText(Engine[@"hash_4F9F1239CFD921FE"](f37_local0))
 		end
 	end)
 	self:addElement(RightStick)
@@ -402,7 +402,7 @@ CoD.vhud_hellstorm_button_layout.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	end)
 	f1_local12 = self
 	f1_local11 = self.subscribeToModel
-	f1_local13 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local13 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local11(f1_local12, f1_local13.LastInput, function(f40_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

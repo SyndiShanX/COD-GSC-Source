@@ -11,7 +11,7 @@ CoD.freeCursorInfoPanelContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local infoPanel = CoD.freeCursorInfoPanel.new(f1_arg0, f1_arg1, 0, 0, 0, 707, 0, 0, 0, 401)
-	infoPanel:setRFTMaterial(LUI.UIImage.GetCachedMaterial(0x7948AC2378B0CBF))
+	infoPanel:setRFTMaterial(LUI.UIImage.GetCachedMaterial(@"hash_7948AC2378B0CBF"))
 	infoPanel:setShaderVector(0, 1.05, 0, 0, 0)
 	infoPanel:setShaderVector(1, 0.05, 0, 0, 0)
 	infoPanel:setShaderVector(2, 1.05, 0, 0, 0)
@@ -51,7 +51,7 @@ CoD.freeCursorInfoPanelContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	end)
 	local f1_local2 = self
 	local f1_local3 = self.subscribeToModel
-	local f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local3(f1_local2, f1_local4.LastInput, function(f7_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -71,7 +71,7 @@ end
 CoD.freeCursorInfoPanelContainer.__resetProperties = function(f8_arg0)
 	f8_arg0.infoPanel:completeAnimation()
 	f8_arg0.infoPanel:setAlpha(1)
-	f8_arg0.infoPanel:setRFTMaterial(LUI.UIImage.GetCachedMaterial(0x7948AC2378B0CBF))
+	f8_arg0.infoPanel:setRFTMaterial(LUI.UIImage.GetCachedMaterial(@"hash_7948AC2378B0CBF"))
 	f8_arg0.infoPanel:setShaderVector(0, 1.05, 0, 0, 0)
 	f8_arg0.infoPanel:setShaderVector(1, 0.05, 0, 0, 0)
 	f8_arg0.infoPanel:setShaderVector(2, 1.05, 0, 0, 0)
@@ -98,7 +98,7 @@ CoD.freeCursorInfoPanelContainer.__clipsPerState = {
 			end
 			f10_arg0.infoPanel:completeAnimation()
 			f10_arg0.infoPanel:setAlpha(1)
-			f10_arg0.infoPanel:setRFTMaterial(LUI.UIImage.GetCachedMaterial(0x7948AC2378B0CBF))
+			f10_arg0.infoPanel:setRFTMaterial(LUI.UIImage.GetCachedMaterial(@"hash_7948AC2378B0CBF"))
 			f10_arg0.infoPanel:setShaderVector(0, 0, 0, 0, 0)
 			f10_arg0.infoPanel:setShaderVector(1, 0.05, 0, 0, 0)
 			f10_arg0.infoPanel:setShaderVector(2, 1.05, 0, 0, 0)
@@ -111,7 +111,7 @@ CoD.freeCursorInfoPanelContainer.__clipsPerState = {
 			f12_arg0:setupElementClipCounter(1)
 			f12_arg0.infoPanel:completeAnimation()
 			f12_arg0.infoPanel:setAlpha(1)
-			f12_arg0.infoPanel:setRFTMaterial(LUI.UIImage.GetCachedMaterial(0x7948AC2378B0CBF))
+			f12_arg0.infoPanel:setRFTMaterial(LUI.UIImage.GetCachedMaterial(@"hash_7948AC2378B0CBF"))
 			f12_arg0.infoPanel:setShaderVector(0, 1.05, 0, 0, 0)
 			f12_arg0.infoPanel:setShaderVector(1, 0.05, 0, 0, 0)
 			f12_arg0.infoPanel:setShaderVector(2, 1.05, 0, 0, 0)
@@ -136,7 +136,7 @@ CoD.freeCursorInfoPanelContainer.__clipsPerState = {
 			end
 			f14_arg0.infoPanel:completeAnimation()
 			f14_arg0.infoPanel:setAlpha(1)
-			f14_arg0.infoPanel:setRFTMaterial(LUI.UIImage.GetCachedMaterial(0x7948AC2378B0CBF))
+			f14_arg0.infoPanel:setRFTMaterial(LUI.UIImage.GetCachedMaterial(@"hash_7948AC2378B0CBF"))
 			f14_arg0.infoPanel:setShaderVector(0, 1.05, 0, 0, 0)
 			f14_arg0.infoPanel:setShaderVector(1, 0.05, 0, 0, 0)
 			f14_arg0.infoPanel:setShaderVector(2, 1.05, 0, 0, 0)

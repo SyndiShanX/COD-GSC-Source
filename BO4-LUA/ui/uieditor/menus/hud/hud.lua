@@ -66,7 +66,7 @@ LUI.createMenu.Hud = function(f1_arg0, f1_arg1)
 	})
 	local Stuck = OutOfBounds
 	local PreMatchTimer = OutOfBounds.subscribeToModel
-	local proximityAlarm = Engine[0x4DF5CFBC1771947](f1_arg0)
+	local proximityAlarm = Engine[@"getmodelforcontroller"](f1_arg0)
 	PreMatchTimer(Stuck, proximityAlarm["hudItems.outOfBoundsEndTime"], function(f4_arg0)
 		f1_local1:updateElementState(OutOfBounds, {
 			name = "model_validation",
@@ -78,7 +78,7 @@ LUI.createMenu.Hud = function(f1_arg0, f1_arg1)
 	end, false)
 	Stuck = OutOfBounds
 	PreMatchTimer = OutOfBounds.subscribeToModel
-	proximityAlarm = Engine[0x4DF5CFBC1771947](f1_arg0)
+	proximityAlarm = Engine[@"getmodelforcontroller"](f1_arg0)
 	PreMatchTimer(Stuck, proximityAlarm.displayTop3Players, function(f5_arg0)
 		f1_local1:updateElementState(OutOfBounds, {
 			name = "model_validation",
@@ -93,7 +93,7 @@ LUI.createMenu.Hud = function(f1_arg0, f1_arg1)
 	PreMatchTimer = LUI.UIText.new(0.5, 0.5, -101, 101, 0, 0, 449, 539)
 	PreMatchTimer:setAlpha(0)
 	PreMatchTimer:setTTF("default")
-	PreMatchTimer:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	PreMatchTimer:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	self:addElement(PreMatchTimer)
 	self.PreMatchTimer = PreMatchTimer
 	Stuck = CoD.Stuck.new(f1_local1, f1_arg0, 0.5, 0.5, -48, 208, 1, 1, -360, -104)
@@ -119,7 +119,7 @@ LUI.createMenu.Hud = function(f1_arg0, f1_arg1)
 			stateName = "VisiblePC",
 			condition = function(menu, element, event)
 				local f6_local0
-				if Engine[0xDD333420C49E6D0](f1_arg0, Enum[0x7F032C2EF103A1A][0xDFB7B5BCEFCABF6]) and not Engine[0xDD333420C49E6D0](f1_arg0, Enum[0x7F032C2EF103A1A][0x1CDCB451655ABCF]) and not Engine[0xDD333420C49E6D0](f1_arg0, Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2]) and not Engine[0xDD333420C49E6D0](f1_arg0, Enum[0x7F032C2EF103A1A][0x9BF57CE75A8755E]) and not Engine[0xDD333420C49E6D0](f1_arg0, Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F]) and not Engine[0xDD333420C49E6D0](f1_arg0, Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04]) and Engine[0xDD333420C49E6D0](f1_arg0, Enum[0x7F032C2EF103A1A][0x6FFF566DCC09BBD]) and not Engine[0xDD333420C49E6D0](f1_arg0, Enum[0x7F032C2EF103A1A][0xC57360571B0917E]) and not Engine[0xDD333420C49E6D0](f1_arg0, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) then
+				if Engine[@"isvisibilitybitset"](f1_arg0, Enum[@"uivisibilitybit"][@"bit_draw_spectator_messages"]) and not Engine[@"isvisibilitybitset"](f1_arg0, Enum[@"uivisibilitybit"][@"bit_final_killcam"]) and not Engine[@"isvisibilitybitset"](f1_arg0, Enum[@"uivisibilitybit"][@"bit_in_killcam"]) and not Engine[@"isvisibilitybitset"](f1_arg0, Enum[@"uivisibilitybit"][@"hash_29BF57CE75A8755E"]) and not Engine[@"isvisibilitybitset"](f1_arg0, Enum[@"uivisibilitybit"][@"bit_play_of_the_match"]) and not Engine[@"isvisibilitybitset"](f1_arg0, Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]) and Engine[@"isvisibilitybitset"](f1_arg0, Enum[@"uivisibilitybit"][@"bit_spectating_client"]) and not Engine[@"isvisibilitybitset"](f1_arg0, Enum[@"uivisibilitybit"][@"bit_team_spectator"]) and not Engine[@"isvisibilitybitset"](f1_arg0, Enum[@"uivisibilitybit"][@"bit_ui_active"]) then
 					f6_local0 = IsPC()
 					if f6_local0 then
 						f6_local0 = not IsWarzone()
@@ -134,7 +134,7 @@ LUI.createMenu.Hud = function(f1_arg0, f1_arg1)
 			stateName = "Visible",
 			condition = function(menu, element, event)
 				local f7_local0
-				if Engine[0xDD333420C49E6D0](f1_arg0, Enum[0x7F032C2EF103A1A][0xDFB7B5BCEFCABF6]) and not Engine[0xDD333420C49E6D0](f1_arg0, Enum[0x7F032C2EF103A1A][0x1CDCB451655ABCF]) and not Engine[0xDD333420C49E6D0](f1_arg0, Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2]) and not Engine[0xDD333420C49E6D0](f1_arg0, Enum[0x7F032C2EF103A1A][0x9BF57CE75A8755E]) and not Engine[0xDD333420C49E6D0](f1_arg0, Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F]) and not Engine[0xDD333420C49E6D0](f1_arg0, Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04]) and Engine[0xDD333420C49E6D0](f1_arg0, Enum[0x7F032C2EF103A1A][0x6FFF566DCC09BBD]) and not Engine[0xDD333420C49E6D0](f1_arg0, Enum[0x7F032C2EF103A1A][0xC57360571B0917E]) and not Engine[0xDD333420C49E6D0](f1_arg0, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) then
+				if Engine[@"isvisibilitybitset"](f1_arg0, Enum[@"uivisibilitybit"][@"bit_draw_spectator_messages"]) and not Engine[@"isvisibilitybitset"](f1_arg0, Enum[@"uivisibilitybit"][@"bit_final_killcam"]) and not Engine[@"isvisibilitybitset"](f1_arg0, Enum[@"uivisibilitybit"][@"bit_in_killcam"]) and not Engine[@"isvisibilitybitset"](f1_arg0, Enum[@"uivisibilitybit"][@"hash_29BF57CE75A8755E"]) and not Engine[@"isvisibilitybitset"](f1_arg0, Enum[@"uivisibilitybit"][@"bit_play_of_the_match"]) and not Engine[@"isvisibilitybitset"](f1_arg0, Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]) and Engine[@"isvisibilitybitset"](f1_arg0, Enum[@"uivisibilitybit"][@"bit_spectating_client"]) and not Engine[@"isvisibilitybitset"](f1_arg0, Enum[@"uivisibilitybit"][@"bit_team_spectator"]) and not Engine[@"isvisibilitybitset"](f1_arg0, Enum[@"uivisibilitybit"][@"bit_ui_active"]) then
 					f7_local0 = not IsWarzone()
 				else
 					f7_local0 = false
@@ -145,115 +145,115 @@ LUI.createMenu.Hud = function(f1_arg0, f1_arg1)
 	})
 	local SafeAreaContainerFront = DeadSpectate
 	local ConsoleCenter = DeadSpectate.subscribeToModel
-	local FactionInfo = Engine[0x4DF5CFBC1771947](f1_arg0)
-	ConsoleCenter(SafeAreaContainerFront, FactionInfo["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xDFB7B5BCEFCABF6]], function(f8_arg0)
+	local FactionInfo = Engine[@"getmodelforcontroller"](f1_arg0)
+	ConsoleCenter(SafeAreaContainerFront, FactionInfo["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_draw_spectator_messages"]], function(f8_arg0)
 		f1_local1:updateElementState(DeadSpectate, {
 			name = "model_validation",
 			menu = f1_local1,
 			controller = f1_arg0,
 			modelValue = f8_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xDFB7B5BCEFCABF6],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_draw_spectator_messages"],
 		})
 	end, false)
 	SafeAreaContainerFront = DeadSpectate
 	ConsoleCenter = DeadSpectate.subscribeToModel
-	FactionInfo = Engine[0x4DF5CFBC1771947](f1_arg0)
-	ConsoleCenter(SafeAreaContainerFront, FactionInfo["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x1CDCB451655ABCF]], function(f9_arg0)
+	FactionInfo = Engine[@"getmodelforcontroller"](f1_arg0)
+	ConsoleCenter(SafeAreaContainerFront, FactionInfo["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_final_killcam"]], function(f9_arg0)
 		f1_local1:updateElementState(DeadSpectate, {
 			name = "model_validation",
 			menu = f1_local1,
 			controller = f1_arg0,
 			modelValue = f9_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x1CDCB451655ABCF],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_final_killcam"],
 		})
 	end, false)
 	SafeAreaContainerFront = DeadSpectate
 	ConsoleCenter = DeadSpectate.subscribeToModel
-	FactionInfo = Engine[0x4DF5CFBC1771947](f1_arg0)
-	ConsoleCenter(SafeAreaContainerFront, FactionInfo["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2]], function(f10_arg0)
+	FactionInfo = Engine[@"getmodelforcontroller"](f1_arg0)
+	ConsoleCenter(SafeAreaContainerFront, FactionInfo["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"]], function(f10_arg0)
 		f1_local1:updateElementState(DeadSpectate, {
 			name = "model_validation",
 			menu = f1_local1,
 			controller = f1_arg0,
 			modelValue = f10_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"],
 		})
 	end, false)
 	SafeAreaContainerFront = DeadSpectate
 	ConsoleCenter = DeadSpectate.subscribeToModel
-	FactionInfo = Engine[0x4DF5CFBC1771947](f1_arg0)
-	ConsoleCenter(SafeAreaContainerFront, FactionInfo["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x9BF57CE75A8755E]], function(f11_arg0)
+	FactionInfo = Engine[@"getmodelforcontroller"](f1_arg0)
+	ConsoleCenter(SafeAreaContainerFront, FactionInfo["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"hash_29BF57CE75A8755E"]], function(f11_arg0)
 		f1_local1:updateElementState(DeadSpectate, {
 			name = "model_validation",
 			menu = f1_local1,
 			controller = f1_arg0,
 			modelValue = f11_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x9BF57CE75A8755E],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"hash_29BF57CE75A8755E"],
 		})
 	end, false)
 	SafeAreaContainerFront = DeadSpectate
 	ConsoleCenter = DeadSpectate.subscribeToModel
-	FactionInfo = Engine[0x4DF5CFBC1771947](f1_arg0)
-	ConsoleCenter(SafeAreaContainerFront, FactionInfo["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F]], function(f12_arg0)
+	FactionInfo = Engine[@"getmodelforcontroller"](f1_arg0)
+	ConsoleCenter(SafeAreaContainerFront, FactionInfo["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_play_of_the_match"]], function(f12_arg0)
 		f1_local1:updateElementState(DeadSpectate, {
 			name = "model_validation",
 			menu = f1_local1,
 			controller = f1_arg0,
 			modelValue = f12_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_play_of_the_match"],
 		})
 	end, false)
 	SafeAreaContainerFront = DeadSpectate
 	ConsoleCenter = DeadSpectate.subscribeToModel
-	FactionInfo = Engine[0x4DF5CFBC1771947](f1_arg0)
-	ConsoleCenter(SafeAreaContainerFront, FactionInfo["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04]], function(f13_arg0)
+	FactionInfo = Engine[@"getmodelforcontroller"](f1_arg0)
+	ConsoleCenter(SafeAreaContainerFront, FactionInfo["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]], function(f13_arg0)
 		f1_local1:updateElementState(DeadSpectate, {
 			name = "model_validation",
 			menu = f1_local1,
 			controller = f1_arg0,
 			modelValue = f13_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"],
 		})
 	end, false)
 	SafeAreaContainerFront = DeadSpectate
 	ConsoleCenter = DeadSpectate.subscribeToModel
-	FactionInfo = Engine[0x4DF5CFBC1771947](f1_arg0)
-	ConsoleCenter(SafeAreaContainerFront, FactionInfo["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x6FFF566DCC09BBD]], function(f14_arg0)
+	FactionInfo = Engine[@"getmodelforcontroller"](f1_arg0)
+	ConsoleCenter(SafeAreaContainerFront, FactionInfo["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_spectating_client"]], function(f14_arg0)
 		f1_local1:updateElementState(DeadSpectate, {
 			name = "model_validation",
 			menu = f1_local1,
 			controller = f1_arg0,
 			modelValue = f14_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x6FFF566DCC09BBD],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_spectating_client"],
 		})
 	end, false)
 	SafeAreaContainerFront = DeadSpectate
 	ConsoleCenter = DeadSpectate.subscribeToModel
-	FactionInfo = Engine[0x4DF5CFBC1771947](f1_arg0)
-	ConsoleCenter(SafeAreaContainerFront, FactionInfo["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xC57360571B0917E]], function(f15_arg0)
+	FactionInfo = Engine[@"getmodelforcontroller"](f1_arg0)
+	ConsoleCenter(SafeAreaContainerFront, FactionInfo["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_team_spectator"]], function(f15_arg0)
 		f1_local1:updateElementState(DeadSpectate, {
 			name = "model_validation",
 			menu = f1_local1,
 			controller = f1_arg0,
 			modelValue = f15_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xC57360571B0917E],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_team_spectator"],
 		})
 	end, false)
 	SafeAreaContainerFront = DeadSpectate
 	ConsoleCenter = DeadSpectate.subscribeToModel
-	FactionInfo = Engine[0x4DF5CFBC1771947](f1_arg0)
-	ConsoleCenter(SafeAreaContainerFront, FactionInfo["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]], function(f16_arg0)
+	FactionInfo = Engine[@"getmodelforcontroller"](f1_arg0)
+	ConsoleCenter(SafeAreaContainerFront, FactionInfo["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_ui_active"]], function(f16_arg0)
 		f1_local1:updateElementState(DeadSpectate, {
 			name = "model_validation",
 			menu = f1_local1,
 			controller = f1_arg0,
 			modelValue = f16_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_ui_active"],
 		})
 	end, false)
 	SafeAreaContainerFront = DeadSpectate
 	ConsoleCenter = DeadSpectate.subscribeToModel
-	FactionInfo = Engine[0x8DF2E5447F384B9]()
+	FactionInfo = Engine[@"getglobalmodel"]()
 	ConsoleCenter(SafeAreaContainerFront, FactionInfo["lobbyRoot.lobbyNav"], function(f17_arg0)
 		f1_local1:updateElementState(DeadSpectate, {
 			name = "model_validation",
@@ -294,12 +294,12 @@ LUI.createMenu.Hud = function(f1_arg0, f1_arg1)
 		{
 			stateName = "HideWaypoints",
 			condition = function(menu, element, event)
-				local f19_local0 = Engine[0xDD333420C49E6D0](f1_arg0, Enum[0x7F032C2EF103A1A][0x198075B069840DC])
+				local f19_local0 = Engine[@"isvisibilitybitset"](f1_arg0, Enum[@"uivisibilitybit"][@"bit_game_ended"])
 				if not f19_local0 then
-					if Engine[0xDD333420C49E6D0](f1_arg0, Enum[0x7F032C2EF103A1A][0xA76381CC97F0253]) then
-						f19_local0 = Engine[0xDD333420C49E6D0](f1_arg0, Enum[0x7F032C2EF103A1A][0x9BF57CE75A8755E])
+					if Engine[@"isvisibilitybitset"](f1_arg0, Enum[@"uivisibilitybit"][@"bit_hud_showobjicons"]) then
+						f19_local0 = Engine[@"isvisibilitybitset"](f1_arg0, Enum[@"uivisibilitybit"][@"hash_29BF57CE75A8755E"])
 						if not f19_local0 then
-							f19_local0 = Engine[0xDD333420C49E6D0](f1_arg0, Enum[0x7F032C2EF103A1A][0x3AEEAA452536E6E])
+							f19_local0 = Engine[@"isvisibilitybitset"](f1_arg0, Enum[@"uivisibilitybit"][@"bit_is_flash_banged"])
 						end
 					else
 						f19_local0 = true
@@ -323,55 +323,55 @@ LUI.createMenu.Hud = function(f1_arg0, f1_arg1)
 	})
 	local f1_local18 = self
 	local f1_local19 = self.subscribeToModel
-	local f1_local20 = Engine[0x4DF5CFBC1771947](f1_arg0)
-	f1_local19(f1_local18, f1_local20["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x198075B069840DC]], function(f22_arg0)
+	local f1_local20 = Engine[@"getmodelforcontroller"](f1_arg0)
+	f1_local19(f1_local18, f1_local20["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_game_ended"]], function(f22_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_local1,
 			controller = f1_arg0,
 			modelValue = f22_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x198075B069840DC],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_game_ended"],
 		})
 	end, false)
 	f1_local18 = self
 	f1_local19 = self.subscribeToModel
-	f1_local20 = Engine[0x4DF5CFBC1771947](f1_arg0)
-	f1_local19(f1_local18, f1_local20["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xA76381CC97F0253]], function(f23_arg0)
+	f1_local20 = Engine[@"getmodelforcontroller"](f1_arg0)
+	f1_local19(f1_local18, f1_local20["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_hud_showobjicons"]], function(f23_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_local1,
 			controller = f1_arg0,
 			modelValue = f23_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xA76381CC97F0253],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_hud_showobjicons"],
 		})
 	end, false)
 	f1_local18 = self
 	f1_local19 = self.subscribeToModel
-	f1_local20 = Engine[0x4DF5CFBC1771947](f1_arg0)
-	f1_local19(f1_local18, f1_local20["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x9BF57CE75A8755E]], function(f24_arg0)
+	f1_local20 = Engine[@"getmodelforcontroller"](f1_arg0)
+	f1_local19(f1_local18, f1_local20["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"hash_29BF57CE75A8755E"]], function(f24_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_local1,
 			controller = f1_arg0,
 			modelValue = f24_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x9BF57CE75A8755E],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"hash_29BF57CE75A8755E"],
 		})
 	end, false)
 	f1_local18 = self
 	f1_local19 = self.subscribeToModel
-	f1_local20 = Engine[0x4DF5CFBC1771947](f1_arg0)
-	f1_local19(f1_local18, f1_local20["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x3AEEAA452536E6E]], function(f25_arg0)
+	f1_local20 = Engine[@"getmodelforcontroller"](f1_arg0)
+	f1_local19(f1_local18, f1_local20["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_is_flash_banged"]], function(f25_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_local1,
 			controller = f1_arg0,
 			modelValue = f25_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x3AEEAA452536E6E],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_is_flash_banged"],
 		})
 	end, false)
 	f1_local18 = self
 	f1_local19 = self.subscribeToModel
-	f1_local20 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	f1_local20 = Engine[@"getmodelforcontroller"](f1_arg0)
 	f1_local19(f1_local18, f1_local20["hudItems.showSpawnSelect"], function(f26_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",
@@ -383,7 +383,7 @@ LUI.createMenu.Hud = function(f1_arg0, f1_arg1)
 	end, false)
 	f1_local18 = self
 	f1_local19 = self.subscribeToModel
-	f1_local20 = Engine[0x8DF2E5447F384B9]()
+	f1_local20 = Engine[@"getglobalmodel"]()
 	f1_local19(f1_local18, f1_local20["lobbyRoot.lobbyNav"], function(f27_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",
@@ -395,9 +395,9 @@ LUI.createMenu.Hud = function(f1_arg0, f1_arg1)
 	end, false)
 	f1_local18 = self
 	f1_local19 = self.subscribeToModel
-	f1_local20 = Engine[0x8DF2E5447F384B9]()
+	f1_local20 = Engine[@"getglobalmodel"]()
 	f1_local19(f1_local18, f1_local20["lobbyRoot.lobbyNav"], function(f28_arg0, f28_arg1)
-		CoD.Menu.UpdateButtonShownState(f28_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x93AB4C84F113EE1])
+		CoD.Menu.UpdateButtonShownState(f28_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_back"])
 	end, false)
 	self:registerEventHandler("hud_boot", function(self, event)
 		local f29_local0 = nil
@@ -409,7 +409,7 @@ LUI.createMenu.Hud = function(f1_arg0, f1_arg1)
 		end
 		return f29_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x93AB4C84F113EE1], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_back"], nil, function(element, menu, controller, model)
 		if CoD.ScoreboardUtility.CanShowScoreboard(controller) then
 			CoD.ScoreboardUtility.ShowScoreboard(controller)
 			return true
@@ -420,10 +420,10 @@ LUI.createMenu.Hud = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if CoD.ScoreboardUtility.CanShowScoreboard(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x93AB4C84F113EE1], 0x0, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_back"], @"hash_0", nil, nil)
 			return false
 		elseif CoD.ScoreboardUtility.CanHideScoreboard(controller) and not IsWarzone() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x93AB4C84F113EE1], 0x0, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_back"], @"hash_0", nil, nil)
 			return false
 		else
 			return false
@@ -431,18 +431,18 @@ LUI.createMenu.Hud = function(f1_arg0, f1_arg1)
 	end, false)
 	self:subscribeToGlobalModel(f1_arg0, "PerController", "scriptNotify", function(model)
 		local f32_local0 = self
-		if CoD.ModelUtility.IsParamModelEqualToHashString(model, 0x9FB0A7FE2E8EC41) and IsInPrematchPeriod(f1_arg0) and not IsCampaign() then
-		elseif CoD.ModelUtility.IsParamModelEqualToHashString(model, 0x9FB0A7FE2E8EC41) and not IsInPrematchPeriod(f1_arg0) and not IsCampaign() then
-		elseif CoD.ModelUtility.IsParamModelEqualToHashString(model, 0xB0B843215635D02) and not IsWarzone() then
+		if CoD.ModelUtility.IsParamModelEqualToHashString(model, @"player_spawned") and IsInPrematchPeriod(f1_arg0) and not IsCampaign() then
+		elseif CoD.ModelUtility.IsParamModelEqualToHashString(model, @"player_spawned") and not IsInPrematchPeriod(f1_arg0) and not IsCampaign() then
+		elseif CoD.ModelUtility.IsParamModelEqualToHashString(model, @"create_prematch_timer") and not IsWarzone() then
 			CreatePrematchTimer(self, f1_arg0, model)
-		elseif CoD.ModelUtility.IsParamModelEqualToHashString(model, 0x14431C3CAF07786) then
+		elseif CoD.ModelUtility.IsParamModelEqualToHashString(model, @"prematch_timer_ended") then
 			SetControllerModelValue(f1_arg0, "isInPrematchPeriod", 0)
-		elseif CoD.ModelUtility.IsParamModelEqualToHashString(model, 0x59653257FE765B6) then
+		elseif CoD.ModelUtility.IsParamModelEqualToHashString(model, @"draft_complete") then
 			CreatePrematchTimer(self, f1_arg0, model)
 			TryBootHUD(self, "0")
-		elseif CoD.ModelUtility.IsParamModelEqualToHashString(model, 0x739C4BD5BAF83BC) then
+		elseif CoD.ModelUtility.IsParamModelEqualToHashString(model, @"hash_1739C4BD5BAF83BC") then
 			CoD.BlackMarketUtility.RecordCompletedContractInGame(f1_arg0, model, f1_local1)
-		elseif CoD.ModelUtility.IsParamModelEqualToHashString(model, 0xB04B1CB4B3498D0) then
+		elseif CoD.ModelUtility.IsParamModelEqualToHashString(model, @"hash_4B04B1CB4B3498D0") then
 			CoD.BlackMarketUtility.UpdateInGameContractRecord(f1_arg0, model, f1_local1)
 		end
 	end)
@@ -461,7 +461,7 @@ LUI.createMenu.Hud = function(f1_arg0, f1_arg1)
 	CoD.HUDUtility.InitOverheadNames(self, f1_arg0, "OverheadNameContainer")
 	SetProperty(self, "m_inputDisabled", true)
 	SetProperty(self, "preserveLuiButton", {
-		[Enum[0x3DD78803F918E9D][0x93AB4C84F113EE1]] = true,
+		[Enum[@"luibutton"][@"lui_key_back"]] = true,
 	})
 	SetAllowCursorMovement(f1_local1, false)
 	CoD.HUDUtility.SetupWaypointContainerParent(WaypointContainer)

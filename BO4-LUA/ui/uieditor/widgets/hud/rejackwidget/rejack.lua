@@ -9,7 +9,7 @@ CoD.Rejack.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, 
 	self.soundSet = "default"
 	self.anyChildUsesUpdateState = true
 	local RejackInternal = CoD.RejackInternal.new(f1_arg0, f1_arg1, 0, 1, 0, 0, 0, 1, 0, 0)
-	Engine[0xF0AF2C4A29D15D7](f1_arg1, 4, 900, 450)
+	Engine[@"setupui3dwindow"](f1_arg1, 4, 900, 450)
 	RejackInternal:setUI3DWindow(4)
 	self:addElement(RejackInternal)
 	self.RejackInternal = RejackInternal

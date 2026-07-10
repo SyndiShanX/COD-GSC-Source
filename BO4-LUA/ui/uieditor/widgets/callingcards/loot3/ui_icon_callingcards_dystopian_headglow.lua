@@ -8,21 +8,21 @@ CoD.ui_icon_callingcards_dystopian_headglow.new = function(f1_arg0, f1_arg1, f1_
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local face = LUI.UIImage.new(0, 0, 0, 96, 0, 0, 0, 112)
-	face:setImage(RegisterImage(0x1ECF9AC837D919C))
+	face:setImage(RegisterImage(@"uie_ui_icon_callingcards_dystopian_head"))
 	self:addElement(face)
 	self.face = face
 	local faceglow = LUI.UIImage.new(0, 0, 0, 96, 0, 0, 0, 112)
-	faceglow:setImage(RegisterImage(0xAB452A73A419F64))
+	faceglow:setImage(RegisterImage(@"uie_ui_icon_callingcards_dystopian_headhighlight"))
 	self:addElement(faceglow)
 	self.faceglow = faceglow
 	local eyeglow = LUI.UIImage.new(0, 0, -3.5, 60.5, 0, 0, 20, 84)
-	eyeglow:setImage(RegisterImage(0x6DE7B21C34ECCEE))
-	eyeglow:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	eyeglow:setImage(RegisterImage(@"uie_ui_icon_callingcards_dystopian_eyeglow"))
+	eyeglow:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(eyeglow)
 	self.eyeglow = eyeglow
 	local eyeglow2 = LUI.UIImage.new(0, 0, 20.5, 84.5, 0, 0, 22, 86)
-	eyeglow2:setImage(RegisterImage(0x6DE7B21C34ECCEE))
-	eyeglow2:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	eyeglow2:setImage(RegisterImage(@"uie_ui_icon_callingcards_dystopian_eyeglow"))
+	eyeglow2:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(eyeglow2)
 	self.eyeglow2 = eyeglow2
 	if PostLoadFunc then

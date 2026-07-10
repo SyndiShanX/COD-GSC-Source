@@ -38,7 +38,7 @@ CoD.WeaponLevelMeterPrimary.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	local LvlBg = LUI.UIImage.new(0, 0, -4.5, 105.5, 0, 0, -29.5, 0.5)
 	LvlBg:setAlpha(0)
 	LvlBg:setScale(1.05, 1.05)
-	LvlBg:setImage(RegisterImage(0xF1B341C43B520A4))
+	LvlBg:setImage(RegisterImage(@"uie_ui_menu_cac_attachment_lvl_bg_01"))
 	self:addElement(LvlBg)
 	self.LvlBg = LvlBg
 	local WeaponLevelWidget = CoD.WeaponLevelWidget.new(f1_arg0, f1_arg1, 0, 0, 15, 138, 0, 0, -171.5, -111.5)
@@ -125,7 +125,7 @@ CoD.WeaponLevelMeterPrimary.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	end, false)
 	f1_local6 = self
 	f1_local7 = self.subscribeToModel
-	f1_local8 = Engine[0x8DF2E5447F384B9]()
+	f1_local8 = Engine[@"getglobalmodel"]()
 	f1_local7(f1_local6, f1_local8["lobbyRoot.lobbyNav"], function(f11_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

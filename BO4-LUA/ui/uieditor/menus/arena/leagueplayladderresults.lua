@@ -15,7 +15,7 @@ LUI.createMenu.LeaguePlayLadderResults = function(f1_arg0, f1_arg1)
 	self.anyChildUsesUpdateState = true
 	f1_local1:addElementToPendingUpdateStateList(self)
 	local BlurBG = LUI.UIImage.new(-0.5, 1.5, 0, 0, 0.5, 1.5, -540, -540)
-	BlurBG:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	BlurBG:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	BlurBG:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(BlurBG)
 	self.BlurBG = BlurBG
@@ -51,7 +51,7 @@ LUI.createMenu.LeaguePlayLadderResults = function(f1_arg0, f1_arg1)
 	})
 	local GrayHeader = LadderResults
 	local CommonHeader = LadderResults.subscribeToModel
-	local f1_local8 = Engine[0x8DF2E5447F384B9]()
+	local f1_local8 = Engine[@"getglobalmodel"]()
 	CommonHeader(GrayHeader, f1_local8["lobbyRoot.lobbyNav"], function(f4_arg0)
 		f1_local1:updateElementState(LadderResults, {
 			name = "model_validation",
@@ -68,12 +68,12 @@ LUI.createMenu.LeaguePlayLadderResults = function(f1_arg0, f1_arg1)
 	self:addElement(LadderResults)
 	self.LadderResults = LadderResults
 	CommonHeader = CoD.CommonHeader.new(f1_local1, f1_arg0, 0, 1, 0, 0, 0, 0, 0, 67)
-	CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(0x6FC3683B07036F8))
+	CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(@"hash_76FC3683B07036F8"))
 	CommonHeader.subtitle.subtitle:setAlpha(0)
 	CommonHeader:subscribeToGlobalModel(f1_arg0, "LobbyRoot", "lobbyTitle", function(model)
 		local f6_local0 = model:get()
 		if f6_local0 ~= nil then
-			CommonHeader.subtitle.subtitle:setText(Engine[0xF9F1239CFD921FE](f6_local0))
+			CommonHeader.subtitle.subtitle:setText(Engine[@"hash_4F9F1239CFD921FE"](f6_local0))
 		end
 	end)
 	CommonHeader:registerEventHandler("menu_loaded", function(element, event)
@@ -107,15 +107,15 @@ LUI.createMenu.LeaguePlayLadderResults = function(f1_arg0, f1_arg1)
 	end)
 	self:addElement(GrayHeader)
 	self.GrayHeader = GrayHeader
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		CoD.AARUtility.CloseArenaLeaguePlayLadderOverlay(menu, controller)
 		PlaySoundAlias("uin_toggle_generic")
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x6393FF34EA56966, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/continue", nil, "ui_confirm")
 		return true
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], "ESCAPE", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], "ESCAPE", function(element, menu, controller, model)
 		if IsPC() then
 			CoD.AARUtility.CloseArenaLeaguePlayLadderOverlay(menu, controller)
 			return true
@@ -123,7 +123,7 @@ LUI.createMenu.LeaguePlayLadderResults = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if IsPC() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, "ESCAPE")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, "ESCAPE")
 			return true
 		else
 			return false
@@ -179,7 +179,7 @@ CoD.LeaguePlayLadderResults.__clipsPerState = {
 			f14_local1(f14_arg0.Backing)
 			local f14_local2 = function(f17_arg0)
 				local f17_local0 = function(f18_arg0)
-					f18_arg0:beginAnimation(120, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f18_arg0:beginAnimation(120, Enum[@"luitween"][@"luitween_ease_out"])
 					f18_arg0:setAlpha(1)
 					f18_arg0:registerEventHandler("transition_complete_keyframe", f14_arg0.clipFinished)
 				end

@@ -8,18 +8,18 @@ CoD.InspectionPrestigeLevel.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.soundSet = "default"
 	local PrestigeText = LUI.UIText.new(0, 0, 0, 200, 0, 0, 0, 21)
 	PrestigeText:setRGB(0.13, 0.78, 1)
-	PrestigeText:setText(Engine[0xF9F1239CFD921FE](0x93E719493E9E18F))
+	PrestigeText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	PrestigeText:setTTF("dinnext_regular")
-	PrestigeText:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
-	PrestigeText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	PrestigeText:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
+	PrestigeText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(PrestigeText)
 	self.PrestigeText = PrestigeText
 	local PrestigeLevelNum = LUI.UIText.new(0, 0, 200, 400, 0, 0, 0, 21)
 	PrestigeLevelNum:setRGB(0.13, 0.78, 1)
-	PrestigeLevelNum:setText(Engine[0xF9F1239CFD921FE](0x93E719493E9E18F))
+	PrestigeLevelNum:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	PrestigeLevelNum:setTTF("dinnext_regular")
-	PrestigeLevelNum:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	PrestigeLevelNum:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	PrestigeLevelNum:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	PrestigeLevelNum:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(PrestigeLevelNum)
 	self.PrestigeLevelNum = PrestigeLevelNum
 	if PostLoadFunc then

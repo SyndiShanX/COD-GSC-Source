@@ -20,8 +20,8 @@ CoD.SpecialEventRewardsWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	MainRewardText:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	MainRewardText:setTTF("ttmussels_demibold")
 	MainRewardText:setLetterSpacing(2)
-	MainRewardText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	MainRewardText:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	MainRewardText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	MainRewardText:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	MainRewardText:linkToElementModel(self, "taskLargeRewardName", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -45,7 +45,7 @@ CoD.SpecialEventRewardsWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	RewardGrid:setWidgetType(CoD.SpecialEventRewardWidget)
 	RewardGrid:setHorizontalCount(2)
 	RewardGrid:setSpacing(-8)
-	RewardGrid:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	RewardGrid:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	RewardGrid:setDataSource("SpecialEventRewards")
 	self:addElement(RewardGrid)
 	self.RewardGrid = RewardGrid

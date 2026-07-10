@@ -7,20 +7,20 @@ CoD.zm_LaboratoryDescriptionDivider.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	self.id = "zm_LaboratoryDescriptionDivider"
 	self.soundSet = "none"
 	local StrokeCenter = LUI.UIImage.new(0, 1, 0, 0, 0.15, 0.85, 0, 0)
-	StrokeCenter:setImage(RegisterImage(0xA2435D4CA7897C6))
+	StrokeCenter:setImage(RegisterImage(@"hash_6A2435D4CA7897C6"))
 	self:addElement(StrokeCenter)
 	self.StrokeCenter = StrokeCenter
 	local Center = LUI.UIImage.new(0.5, 0.5, -75, 75, 0.5, 0.5, -7, 12)
 	Center:setScale(1.05, 1.05)
-	Center:setImage(RegisterImage(0x463D9B727066CEB))
+	Center:setImage(RegisterImage(@"uie_ui_zm_laboratory_ornamentbar"))
 	self:addElement(Center)
 	self.Center = Center
 	local R = LUI.UIImage.new(1, 1, -5, 5, 0.5, 0.5, -5, 5)
-	R:setImage(RegisterImage(0x1EC82771A88A0E6))
+	R:setImage(RegisterImage(@"hash_61EC82771A88A0E6"))
 	self:addElement(R)
 	self.R = R
 	local L = LUI.UIImage.new(0, 0, -5, 5, 0.5, 0.5, -5, 5)
-	L:setImage(RegisterImage(0x1EC82771A88A0E6))
+	L:setImage(RegisterImage(@"hash_61EC82771A88A0E6"))
 	self:addElement(L)
 	self.L = L
 	if PostLoadFunc then

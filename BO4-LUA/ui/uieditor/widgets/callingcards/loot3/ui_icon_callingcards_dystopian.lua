@@ -1,21 +1,21 @@
 require("x64:2f2a70c58600680")
-CoD[0x720E7CB0E9CFA73] = InheritFrom(LUI.UIElement)
-CoD[0x720E7CB0E9CFA73].__defaultWidth = 960
-CoD[0x720E7CB0E9CFA73].__defaultHeight = 240
-CoD[0x720E7CB0E9CFA73].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+CoD[@"hash_6720E7CB0E9CFA73"] = InheritFrom(LUI.UIElement)
+CoD[@"hash_6720E7CB0E9CFA73"].__defaultWidth = 960
+CoD[@"hash_6720E7CB0E9CFA73"].__defaultHeight = 240
+CoD[@"hash_6720E7CB0E9CFA73"].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
 	local self = LUI.UIElement.new(f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
-	self:setClass(CoD[0x720E7CB0E9CFA73])
+	self:setClass(CoD[@"hash_6720E7CB0E9CFA73"])
 	self.id = "ui_icon_callingcards_dystopian"
 	self.soundSet = "none"
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local background = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	background:setImage(RegisterImage(0x6A2F92BEC5D01B5))
+	background:setImage(RegisterImage(@"uie_ui_icon_callingcards_dystopian_bg"))
 	self:addElement(background)
 	self.background = background
 	local background2 = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
 	background2:setAlpha(0.55)
-	background2:setImage(RegisterImage(0xC9026E2920DBBAC))
+	background2:setImage(RegisterImage(@"uie_ui_icon_callingcards_dystopian_bgglow"))
 	self:addElement(background2)
 	self.background2 = background2
 	local characer = CoD.ui_icon_callingcards_dystopian_character.new(f1_arg0, f1_arg1, 0, 0, 564, 836, 0, 0, -13.5, 247.5)
@@ -27,7 +27,7 @@ CoD[0x720E7CB0E9CFA73].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	end
 	return self
 end
-CoD[0x720E7CB0E9CFA73].__resetProperties = function(f2_arg0)
+CoD[@"hash_6720E7CB0E9CFA73"].__resetProperties = function(f2_arg0)
 	f2_arg0.characer:completeAnimation()
 	f2_arg0.background2:completeAnimation()
 	f2_arg0.characer:setLeftRight(0, 0, 564, 836)
@@ -35,9 +35,9 @@ CoD[0x720E7CB0E9CFA73].__resetProperties = function(f2_arg0)
 	f2_arg0.characer:setAlpha(1)
 	f2_arg0.characer:setZRot(0)
 	f2_arg0.background2:setAlpha(0.55)
-	f2_arg0.background2:setImage(RegisterImage(0xC9026E2920DBBAC))
+	f2_arg0.background2:setImage(RegisterImage(@"uie_ui_icon_callingcards_dystopian_bgglow"))
 end
-CoD[0x720E7CB0E9CFA73].__clipsPerState = {
+CoD[@"hash_6720E7CB0E9CFA73"].__clipsPerState = {
 	DefaultState = {
 		DefaultClip = function(f3_arg0, f3_arg1)
 			f3_arg0:__resetProperties()
@@ -69,11 +69,11 @@ CoD[0x720E7CB0E9CFA73].__clipsPerState = {
 			end
 			f3_arg0.background2:completeAnimation()
 			f3_arg0.background2:setAlpha(1)
-			f3_arg0.background2:setImage(RegisterImage(0xC9026E2920DBBAC))
+			f3_arg0.background2:setImage(RegisterImage(@"uie_ui_icon_callingcards_dystopian_bgglow"))
 			f3_local0(f3_arg0.background2)
 			local f3_local1 = function(f9_arg0)
 				local f9_local0 = function(f10_arg0)
-					f10_arg0:beginAnimation(1400, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f10_arg0:beginAnimation(1400, Enum[@"luitween"][@"luitween_ease_both"])
 					f10_arg0:setLeftRight(0, 0, 608, 880)
 					f10_arg0:setTopBottom(0, 0, 0, 261)
 					f10_arg0:registerEventHandler("transition_complete_keyframe", function(element, event)
@@ -82,7 +82,7 @@ CoD[0x720E7CB0E9CFA73].__clipsPerState = {
 					end)
 				end
 				f3_arg0.characer:playClip("DefaultClip")
-				f3_arg0.characer:beginAnimation(1600, Enum[0xF50FFF429AB1890][0xE99F3A6467FC0CA] | Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f3_arg0.characer:beginAnimation(1600, Enum[@"luitween"][@"luitween_back"] | Enum[@"luitween"][@"luitween_ease_both"])
 				f3_arg0.characer:setLeftRight(0, 0, 549, 821)
 				f3_arg0.characer:setTopBottom(0, 0, -6.5, 254.5)
 				f3_arg0.characer:registerEventHandler("interrupted_keyframe", f3_arg0.clipInterrupted)
@@ -98,6 +98,6 @@ CoD[0x720E7CB0E9CFA73].__clipsPerState = {
 		end,
 	},
 }
-CoD[0x720E7CB0E9CFA73].__onClose = function(f12_arg0)
+CoD[@"hash_6720E7CB0E9CFA73"].__onClose = function(f12_arg0)
 	f12_arg0.characer:close()
 end

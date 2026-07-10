@@ -25,7 +25,7 @@ CoD.PositionDraft_FriendlyTeamStatusBar.new = function(f1_arg0, f1_arg1, f1_arg2
 	})
 	local Slot3 = Slot1
 	local Slot2 = Slot1.subscribeToModel
-	local Slot4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local Slot4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	Slot2(Slot3, Slot4["Clients.clientCount"], function(f4_arg0)
 		f1_arg0:updateElementState(Slot1, {
 			name = "model_validation",
@@ -37,7 +37,7 @@ CoD.PositionDraft_FriendlyTeamStatusBar.new = function(f1_arg0, f1_arg1, f1_arg2
 	end, false)
 	Slot3 = Slot1
 	Slot2 = Slot1.subscribeToModel
-	Slot4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	Slot4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	Slot2(Slot3, Slot4["Clients.clientReadyCount"], function(f5_arg0)
 		f1_arg0:updateElementState(Slot1, {
 			name = "model_validation",
@@ -49,7 +49,7 @@ CoD.PositionDraft_FriendlyTeamStatusBar.new = function(f1_arg0, f1_arg1, f1_arg2
 	end, false)
 	Slot3 = Slot1
 	Slot2 = Slot1.subscribeToModel
-	Slot4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	Slot4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	Slot2(Slot3, Slot4["Clients.enemyCount"], function(f6_arg0)
 		f1_arg0:updateElementState(Slot1, {
 			name = "model_validation",
@@ -61,7 +61,7 @@ CoD.PositionDraft_FriendlyTeamStatusBar.new = function(f1_arg0, f1_arg1, f1_arg2
 	end, false)
 	Slot3 = Slot1
 	Slot2 = Slot1.subscribeToModel
-	Slot4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	Slot4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	Slot2(Slot3, Slot4["Clients.enemiesReady"], function(f7_arg0)
 		f1_arg0:updateElementState(Slot1, {
 			name = "model_validation",
@@ -91,7 +91,7 @@ CoD.PositionDraft_FriendlyTeamStatusBar.new = function(f1_arg0, f1_arg1, f1_arg2
 	})
 	Slot4 = Slot2
 	Slot3 = Slot2.subscribeToModel
-	local Slot5 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local Slot5 = Engine[@"getmodelforcontroller"](f1_arg1)
 	Slot3(Slot4, Slot5["Clients.clientCount"], function(f10_arg0)
 		f1_arg0:updateElementState(Slot2, {
 			name = "model_validation",
@@ -103,7 +103,7 @@ CoD.PositionDraft_FriendlyTeamStatusBar.new = function(f1_arg0, f1_arg1, f1_arg2
 	end, false)
 	Slot4 = Slot2
 	Slot3 = Slot2.subscribeToModel
-	Slot5 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	Slot5 = Engine[@"getmodelforcontroller"](f1_arg1)
 	Slot3(Slot4, Slot5["Clients.clientReadyCount"], function(f11_arg0)
 		f1_arg0:updateElementState(Slot2, {
 			name = "model_validation",
@@ -115,7 +115,7 @@ CoD.PositionDraft_FriendlyTeamStatusBar.new = function(f1_arg0, f1_arg1, f1_arg2
 	end, false)
 	Slot4 = Slot2
 	Slot3 = Slot2.subscribeToModel
-	Slot5 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	Slot5 = Engine[@"getmodelforcontroller"](f1_arg1)
 	Slot3(Slot4, Slot5["Clients.enemyCount"], function(f12_arg0)
 		f1_arg0:updateElementState(Slot2, {
 			name = "model_validation",
@@ -127,7 +127,7 @@ CoD.PositionDraft_FriendlyTeamStatusBar.new = function(f1_arg0, f1_arg1, f1_arg2
 	end, false)
 	Slot4 = Slot2
 	Slot3 = Slot2.subscribeToModel
-	Slot5 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	Slot5 = Engine[@"getmodelforcontroller"](f1_arg1)
 	Slot3(Slot4, Slot5["Clients.enemiesReady"], function(f13_arg0)
 		f1_arg0:updateElementState(Slot2, {
 			name = "model_validation",
@@ -157,7 +157,7 @@ CoD.PositionDraft_FriendlyTeamStatusBar.new = function(f1_arg0, f1_arg1, f1_arg2
 	})
 	Slot5 = Slot3
 	Slot4 = Slot3.subscribeToModel
-	local f1_local6 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local6 = Engine[@"getmodelforcontroller"](f1_arg1)
 	Slot4(Slot5, f1_local6["Clients.clientCount"], function(f16_arg0)
 		f1_arg0:updateElementState(Slot3, {
 			name = "model_validation",
@@ -169,7 +169,7 @@ CoD.PositionDraft_FriendlyTeamStatusBar.new = function(f1_arg0, f1_arg1, f1_arg2
 	end, false)
 	Slot5 = Slot3
 	Slot4 = Slot3.subscribeToModel
-	f1_local6 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local6 = Engine[@"getmodelforcontroller"](f1_arg1)
 	Slot4(Slot5, f1_local6["Clients.clientReadyCount"], function(f17_arg0)
 		f1_arg0:updateElementState(Slot3, {
 			name = "model_validation",
@@ -181,7 +181,7 @@ CoD.PositionDraft_FriendlyTeamStatusBar.new = function(f1_arg0, f1_arg1, f1_arg2
 	end, false)
 	Slot5 = Slot3
 	Slot4 = Slot3.subscribeToModel
-	f1_local6 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local6 = Engine[@"getmodelforcontroller"](f1_arg1)
 	Slot4(Slot5, f1_local6["Clients.enemyCount"], function(f18_arg0)
 		f1_arg0:updateElementState(Slot3, {
 			name = "model_validation",
@@ -193,7 +193,7 @@ CoD.PositionDraft_FriendlyTeamStatusBar.new = function(f1_arg0, f1_arg1, f1_arg2
 	end, false)
 	Slot5 = Slot3
 	Slot4 = Slot3.subscribeToModel
-	f1_local6 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local6 = Engine[@"getmodelforcontroller"](f1_arg1)
 	Slot4(Slot5, f1_local6["Clients.enemiesReady"], function(f19_arg0)
 		f1_arg0:updateElementState(Slot3, {
 			name = "model_validation",
@@ -223,7 +223,7 @@ CoD.PositionDraft_FriendlyTeamStatusBar.new = function(f1_arg0, f1_arg1, f1_arg2
 	})
 	f1_local6 = Slot4
 	Slot5 = Slot4.subscribeToModel
-	local f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
 	Slot5(f1_local6, f1_local7["Clients.clientCount"], function(f22_arg0)
 		f1_arg0:updateElementState(Slot4, {
 			name = "model_validation",
@@ -235,7 +235,7 @@ CoD.PositionDraft_FriendlyTeamStatusBar.new = function(f1_arg0, f1_arg1, f1_arg2
 	end, false)
 	f1_local6 = Slot4
 	Slot5 = Slot4.subscribeToModel
-	f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
 	Slot5(f1_local6, f1_local7["Clients.clientReadyCount"], function(f23_arg0)
 		f1_arg0:updateElementState(Slot4, {
 			name = "model_validation",
@@ -247,7 +247,7 @@ CoD.PositionDraft_FriendlyTeamStatusBar.new = function(f1_arg0, f1_arg1, f1_arg2
 	end, false)
 	f1_local6 = Slot4
 	Slot5 = Slot4.subscribeToModel
-	f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
 	Slot5(f1_local6, f1_local7["Clients.enemyCount"], function(f24_arg0)
 		f1_arg0:updateElementState(Slot4, {
 			name = "model_validation",
@@ -259,7 +259,7 @@ CoD.PositionDraft_FriendlyTeamStatusBar.new = function(f1_arg0, f1_arg1, f1_arg2
 	end, false)
 	f1_local6 = Slot4
 	Slot5 = Slot4.subscribeToModel
-	f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
 	Slot5(f1_local6, f1_local7["Clients.enemiesReady"], function(f25_arg0)
 		f1_arg0:updateElementState(Slot4, {
 			name = "model_validation",
@@ -289,7 +289,7 @@ CoD.PositionDraft_FriendlyTeamStatusBar.new = function(f1_arg0, f1_arg1, f1_arg2
 	})
 	f1_local7 = Slot5
 	f1_local6 = Slot5.subscribeToModel
-	local f1_local8 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local8 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local6(f1_local7, f1_local8["Clients.clientCount"], function(f28_arg0)
 		f1_arg0:updateElementState(Slot5, {
 			name = "model_validation",
@@ -301,7 +301,7 @@ CoD.PositionDraft_FriendlyTeamStatusBar.new = function(f1_arg0, f1_arg1, f1_arg2
 	end, false)
 	f1_local7 = Slot5
 	f1_local6 = Slot5.subscribeToModel
-	f1_local8 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local8 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local6(f1_local7, f1_local8["Clients.clientReadyCount"], function(f29_arg0)
 		f1_arg0:updateElementState(Slot5, {
 			name = "model_validation",
@@ -313,7 +313,7 @@ CoD.PositionDraft_FriendlyTeamStatusBar.new = function(f1_arg0, f1_arg1, f1_arg2
 	end, false)
 	f1_local7 = Slot5
 	f1_local6 = Slot5.subscribeToModel
-	f1_local8 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local8 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local6(f1_local7, f1_local8["Clients.enemyCount"], function(f30_arg0)
 		f1_arg0:updateElementState(Slot5, {
 			name = "model_validation",
@@ -325,7 +325,7 @@ CoD.PositionDraft_FriendlyTeamStatusBar.new = function(f1_arg0, f1_arg1, f1_arg2
 	end, false)
 	f1_local7 = Slot5
 	f1_local6 = Slot5.subscribeToModel
-	f1_local8 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local8 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local6(f1_local7, f1_local8["Clients.enemiesReady"], function(f31_arg0)
 		f1_arg0:updateElementState(Slot5, {
 			name = "model_validation",

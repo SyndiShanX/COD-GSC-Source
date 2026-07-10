@@ -1,17 +1,17 @@
 require("x64:694c561e07c3d3b")
 require("x64:f2a39fa4fd0066b")
-CoD[0xB3EF12304073586] = InheritFrom(LUI.UIElement)
-CoD[0xB3EF12304073586].__defaultWidth = 960
-CoD[0xB3EF12304073586].__defaultHeight = 240
-CoD[0xB3EF12304073586].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+CoD[@"hash_7B3EF12304073586"] = InheritFrom(LUI.UIElement)
+CoD[@"hash_7B3EF12304073586"].__defaultWidth = 960
+CoD[@"hash_7B3EF12304073586"].__defaultHeight = 240
+CoD[@"hash_7B3EF12304073586"].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
 	local self = LUI.UIElement.new(f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
-	self:setClass(CoD[0xB3EF12304073586])
+	self:setClass(CoD[@"hash_7B3EF12304073586"])
 	self.id = "CallingCards_steampunkwarriors"
 	self.soundSet = "none"
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local background = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	background:setImage(RegisterImage(0x7BB8A78AF5B0E9B))
+	background:setImage(RegisterImage(@"hash_17BB8A78AF5B0E9B"))
 	self:addElement(background)
 	self.background = background
 	local arm = CoD.CallingCards_Asset_steampunkwarriors_gunarm.new(f1_arg0, f1_arg1, 0, 0, 534.5, 544.5, 0, 0, 178, 188)
@@ -19,25 +19,25 @@ CoD[0xB3EF12304073586].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	self:addElement(arm)
 	self.arm = arm
 	local body = LUI.UIImage.new(0, 0, 488, 960, 0, 0, 23, 240)
-	body:setImage(RegisterImage(0xD6EC887CAA058B4))
+	body:setImage(RegisterImage(@"hash_5D6EC887CAA058B4"))
 	self:addElement(body)
 	self.body = body
 	local HEAD = LUI.UIImage.new(0, 0, 553, 713, 0, 0, -16.5, 143.5)
-	HEAD:setImage(RegisterImage(0xE4525338A0F713A))
+	HEAD:setImage(RegisterImage(@"hash_E4525338A0F713A"))
 	self:addElement(HEAD)
 	self.HEAD = HEAD
 	local shoulder = CoD.CallingCards_Asset_steampunkwarriors_shoulder.new(f1_arg0, f1_arg1, 0, 0, 673, 873, 0, 0, 123, 243)
 	self:addElement(shoulder)
 	self.shoulder = shoulder
 	local light2 = LUI.UIImage.new(0, 0, 466.5, 539.5, 0, 0, 90, 163)
-	light2:setImage(RegisterImage(0xADBF2ABD5CCB0FC))
-	light2:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	light2:setImage(RegisterImage(@"hash_7ADBF2ABD5CCB0FC"))
+	light2:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(light2)
 	self.light2 = light2
 	local smoke = LUI.UIImage.new(0, 0, -200, 960, 0, 0, 28, 338)
 	smoke:setRGB(0.14, 0.62, 0.65)
 	smoke:setAlpha(0)
-	smoke:setImage(RegisterImage(0x2CEE357C2E51151))
+	smoke:setImage(RegisterImage(@"hash_52CEE357C2E51151"))
 	self:addElement(smoke)
 	self.smoke = smoke
 	local whitebox = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
@@ -49,7 +49,7 @@ CoD[0xB3EF12304073586].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	end
 	return self
 end
-CoD[0xB3EF12304073586].__resetProperties = function(f2_arg0)
+CoD[@"hash_7B3EF12304073586"].__resetProperties = function(f2_arg0)
 	f2_arg0.arm:completeAnimation()
 	f2_arg0.shoulder:completeAnimation()
 	f2_arg0.body:completeAnimation()
@@ -71,9 +71,9 @@ CoD[0xB3EF12304073586].__resetProperties = function(f2_arg0)
 	f2_arg0.smoke:setLeftRight(0, 0, -200, 960)
 	f2_arg0.smoke:setAlpha(0)
 	f2_arg0.whitebox:setAlpha(1)
-	f2_arg0.whitebox:setMaterial(LUI.UIImage.GetCachedMaterial(0x6B34AA3F39208EF))
+	f2_arg0.whitebox:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_normal"))
 end
-CoD[0xB3EF12304073586].__clipsPerState = {
+CoD[@"hash_7B3EF12304073586"].__clipsPerState = {
 	DefaultState = {
 		DefaultClip = function(f3_arg0, f3_arg1)
 			f3_arg0:__resetProperties()
@@ -275,12 +275,12 @@ CoD[0xB3EF12304073586].__clipsPerState = {
 			f3_local4(f3_arg0.light2)
 			local f3_local5 = function(f37_arg0)
 				local f37_local0 = function(f38_arg0)
-					f38_arg0:beginAnimation(1500, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f38_arg0:beginAnimation(1500, Enum[@"luitween"][@"luitween_ease_out"])
 					f38_arg0:setLeftRight(0, 0, 0, 1160)
 					f38_arg0:setAlpha(0)
 					f38_arg0:registerEventHandler("transition_complete_keyframe", f3_arg0.clipFinished)
 				end
-				f3_arg0.smoke:beginAnimation(1500, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f3_arg0.smoke:beginAnimation(1500, Enum[@"luitween"][@"luitween_ease_out"])
 				f3_arg0.smoke:setLeftRight(0, 0, -38.5, 1121.5)
 				f3_arg0.smoke:setAlpha(0.8)
 				f3_arg0.smoke:registerEventHandler("interrupted_keyframe", f3_arg0.clipInterrupted)
@@ -307,13 +307,13 @@ CoD[0xB3EF12304073586].__clipsPerState = {
 			end
 			f3_arg0.whitebox:completeAnimation()
 			f3_arg0.whitebox:setAlpha(0)
-			f3_arg0.whitebox:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+			f3_arg0.whitebox:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 			f3_local6(f3_arg0.whitebox)
 			f3_arg0.nextClip = "DefaultClip"
 		end,
 	},
 }
-CoD[0xB3EF12304073586].__onClose = function(f42_arg0)
+CoD[@"hash_7B3EF12304073586"].__onClose = function(f42_arg0)
 	f42_arg0.arm:close()
 	f42_arg0.shoulder:close()
 end

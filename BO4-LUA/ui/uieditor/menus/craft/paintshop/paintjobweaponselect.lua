@@ -68,11 +68,11 @@ LUI.createMenu.PaintjobWeaponSelect = function(f1_arg0, f1_arg1)
 	self.PaintjobWeaponSelectSafeAreaContainer = PaintjobWeaponSelectSafeAreaContainer
 	local f1_local7 = self
 	local f1_local8 = self.subscribeToModel
-	local f1_local9 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	local f1_local9 = Engine[@"getmodelforcontroller"](f1_arg0)
 	f1_local8(f1_local7, f1_local9.PaintjobWeaponVariantListShown, function(f4_arg0, f4_arg1)
-		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A])
+		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"])
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		if not CoD.ModelUtility.IsControllerModelValueTrue(controller, "PaintjobWeaponVariantListShown") then
 			PlaySoundAlias("uin_party_ease_slide_back")
 			GoBack(self, controller)
@@ -86,17 +86,17 @@ LUI.createMenu.PaintjobWeaponSelect = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if not CoD.ModelUtility.IsControllerModelValueTrue(controller, "PaintjobWeaponVariantListShown") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 			return true
 		elseif CoD.ModelUtility.IsControllerModelValueTrue(controller, "PaintjobWeaponVariantListShown") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 			return true
 		else
 			return false
 		end
 	end, false)
 	LUI.OverrideFunction_CallOriginalFirst(self, "close", function(element)
-		CoD.BreadcrumbUtility.UploadBuffer(f1_arg0, Enum[0xBBD4F9E70101BA8][0xFDE358A242AFA2C])
+		CoD.BreadcrumbUtility.UploadBuffer(f1_arg0, Enum[@"storagefiletype"][@"storage_mp_stats_online"])
 		SetControllerModelValue(f1_arg0, "isInPaintshop", false)
 		SendClientScriptNotifyForAdjustedClient(f1_arg0, "CustomClass_closed", "")
 		SendClientScriptMenuChangeNotify(f1_arg0, f1_local1, false)
@@ -144,7 +144,7 @@ CoD.PaintjobWeaponSelect.__clipsPerState = {
 			f10_arg0:setupElementClipCounter(1)
 			local f10_local0 = function(f11_arg0)
 				local f11_local0 = function(f12_arg0)
-					f12_arg0:beginAnimation(100, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f12_arg0:beginAnimation(100, Enum[@"luitween"][@"luitween_ease_both"])
 					f12_arg0:setTopBottom(0, 0, 672, 1294)
 					f12_arg0:setAlpha(1)
 					f12_arg0:registerEventHandler("transition_complete_keyframe", f10_arg0.clipFinished)
@@ -163,7 +163,7 @@ CoD.PaintjobWeaponSelect.__clipsPerState = {
 			f13_arg0:__resetProperties()
 			f13_arg0:setupElementClipCounter(1)
 			local f13_local0 = function(f14_arg0)
-				f13_arg0.BackgroundSlidePanel:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f13_arg0.BackgroundSlidePanel:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f13_arg0.BackgroundSlidePanel:setTopBottom(0, 0, 1072, 1694)
 				f13_arg0.BackgroundSlidePanel:setAlpha(0)
 				f13_arg0.BackgroundSlidePanel:registerEventHandler("interrupted_keyframe", f13_arg0.clipInterrupted)

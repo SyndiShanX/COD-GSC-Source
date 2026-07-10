@@ -54,7 +54,7 @@ CoD.WildcardSlotContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	end)
 	local f1_local2 = WildcardSlot
 	local f1_local3 = WildcardSlot.subscribeToModel
-	local f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local3(f1_local2, f1_local4["CustomClassList.equippedItemsChanged"], function(f8_arg0)
 		f1_arg0:updateElementState(WildcardSlot, {
 			name = "model_validation",
@@ -95,7 +95,7 @@ CoD.WildcardSlotContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	WildcardSlot:linkToElementModel(self, "displayNameShort", true, function(model)
 		local f13_local0 = model:get()
 		if f13_local0 ~= nil then
-			WildcardSlot.ItemName.TextBox:setText(Engine[0xF9F1239CFD921FE](f13_local0))
+			WildcardSlot.ItemName.TextBox:setText(Engine[@"hash_4F9F1239CFD921FE"](f13_local0))
 		end
 	end)
 	self:addElement(WildcardSlot)
@@ -129,7 +129,7 @@ CoD.WildcardSlotContainer.__clipsPerState = {
 			f17_arg0:__resetProperties()
 			f17_arg0:setupElementClipCounter(1)
 			local f17_local0 = function(f18_arg0)
-				f17_arg0.WildcardSlot:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f17_arg0.WildcardSlot:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f17_arg0.WildcardSlot:setScale(0.97, 0.97)
 				f17_arg0.WildcardSlot:registerEventHandler("interrupted_keyframe", f17_arg0.clipInterrupted)
 				f17_arg0.WildcardSlot:registerEventHandler("transition_complete_keyframe", f17_arg0.clipFinished)
@@ -142,7 +142,7 @@ CoD.WildcardSlotContainer.__clipsPerState = {
 			f19_arg0:__resetProperties()
 			f19_arg0:setupElementClipCounter(1)
 			local f19_local0 = function(f20_arg0)
-				f19_arg0.WildcardSlot:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f19_arg0.WildcardSlot:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f19_arg0.WildcardSlot:setScale(1, 1)
 				f19_arg0.WildcardSlot:registerEventHandler("interrupted_keyframe", f19_arg0.clipInterrupted)
 				f19_arg0.WildcardSlot:registerEventHandler("transition_complete_keyframe", f19_arg0.clipFinished)

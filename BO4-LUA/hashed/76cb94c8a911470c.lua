@@ -20,8 +20,8 @@ CoD.DupeMeter.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 	self.Box = Box
 	local NoiseTiledBacking = LUI.UIImage.new(0, 0, 171, 346, 0.09, 0.09, 0.5, 28.5)
 	NoiseTiledBacking:setAlpha(0.5)
-	NoiseTiledBacking:setImage(RegisterImage(0x34839E8065B1E53))
-	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	NoiseTiledBacking:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	NoiseTiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	NoiseTiledBacking:setupNineSliceShader(196, 88)
 	self:addElement(NoiseTiledBacking)
@@ -29,11 +29,11 @@ CoD.DupeMeter.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 	local Label = LUI.UIText.new(0.5, 0.5, -168.5, -9.5, 0, 0, 11, 25)
 	Label:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	Label:setAlpha(0.5)
-	Label:setText(LocalizeToUpperString(0x7A11286F9FD7520))
+	Label:setText(LocalizeToUpperString(@"ui/reroll_meter"))
 	Label:setTTF("ttmussels_demibold")
 	Label:setLetterSpacing(2)
-	Label:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	Label:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	Label:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	Label:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	self:addElement(Label)
 	self.Label = Label
 	local DupeMeter = CoD.DupeMeterInternal.new(f1_arg0, f1_arg1, 0, 0, 176, 294, 0, 0, 4.5, 31.5)
@@ -45,11 +45,11 @@ CoD.DupeMeter.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 	local Number = LUI.UIText.new(0, 0, 304, 343, 0, 0, 6, 28)
 	Number:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	Number:setAlpha(0)
-	Number:setText(Engine[0xF9F1239CFD921FE](0x93E719493E9E18F))
+	Number:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	Number:setTTF("ttmussels_regular")
 	Number:setLetterSpacing(1)
-	Number:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Number:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Number:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Number:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(Number)
 	self.Number = Number
 	self:mergeStateConditions({
@@ -62,7 +62,7 @@ CoD.DupeMeter.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 	})
 	local f1_local7 = self
 	local f1_local8 = self.subscribeToModel
-	local f1_local9 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local9 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local8(f1_local7, f1_local9["LootStreamProgress.allRngUnlocked"], function(f4_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

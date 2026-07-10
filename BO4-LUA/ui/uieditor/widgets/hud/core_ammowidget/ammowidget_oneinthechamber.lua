@@ -13,8 +13,8 @@ CoD.AmmoWidget_OneInTheChamber.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Backer = LUI.UIImage.new(0, 0, -77, 290, 0, 0, -15.5, 77.5)
 	Backer:setAlpha(0)
-	Backer:setImage(RegisterImage(0xA3887D32AFD1940))
-	Backer:setMaterial(LUI.UIImage.GetCachedMaterial(0xE125638BF94665F))
+	Backer:setImage(RegisterImage(@"uie_ui_hud_core_ammo_widget_backer"))
+	Backer:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_feather_edges"))
 	Backer:setShaderVector(0, 0.05, 0.2, 0.05, 0.2)
 	self:addElement(Backer)
 	self.Backer = Backer
@@ -31,11 +31,11 @@ CoD.AmmoWidget_OneInTheChamber.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	local LEDgraph = LUI.UIImage.new(0, 0, 20, 360, 0, 0, 1, 87)
 	LEDgraph:setRGB(0, 0, 0)
 	LEDgraph:setAlpha(0.75)
-	LEDgraph:setImage(RegisterImage(0x995EF23F488EAFE))
+	LEDgraph:setImage(RegisterImage(@"hash_2995EF23F488EAFE"))
 	self:addElement(LEDgraph)
 	self.LEDgraph = LEDgraph
 	local Frame = LUI.UIImage.new(0, 0, -1, 359, 0, 0, 1, 87)
-	Frame:setImage(RegisterImage(0xA956421DAB808DF))
+	Frame:setImage(RegisterImage(@"hash_7A956421DAB808DF"))
 	self:addElement(Frame)
 	self.Frame = Frame
 	local OneInTheChamberLives = CoD.OneInTheChamberLives.new(f1_arg0, f1_arg1, 0, 0, -9, 141, 0, 0, 24, 74)
@@ -48,14 +48,14 @@ CoD.AmmoWidget_OneInTheChamber.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	Hacked:setRGB(0.32, 0.44, 0.52)
 	Hacked:setAlpha(0)
 	Hacked:setZRot(180)
-	Hacked:setImage(RegisterImage(0x74A8C8624AAE4D2))
-	Hacked:setMaterial(LUI.UIImage.GetCachedMaterial(0x9227A50BA2B8D21))
+	Hacked:setImage(RegisterImage(@"uie_ui_hud_core_hacked_ammo_panel"))
+	Hacked:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_flipbook_add"))
 	Hacked:setShaderVector(0, 4, 4, 0, 0)
 	Hacked:setShaderVector(1, 30, 0, 0, 0)
 	self:addElement(Hacked)
 	self.Hacked = Hacked
 	local WeaponImage = LUI.UIFixedAspectRatioImage.new(0, 0, 221.5, 325.5, 0, 0, 15, 71)
-	WeaponImage:setMaterial(LUI.UIImage.GetCachedMaterial(0xF755127C95CF5B6))
+	WeaponImage:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_F755127C95CF5B6"))
 	WeaponImage:setShaderVector(0, 1, 0, 0, 0)
 	WeaponImage:setStretchedDimension(4)
 	WeaponImage:linkToElementModel(self, "weapon", true, function(model)
@@ -67,18 +67,18 @@ CoD.AmmoWidget_OneInTheChamber.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	self:addElement(WeaponImage)
 	self.WeaponImage = WeaponImage
 	local oicLED = LUI.UIImage.new(0, 0, 3, 363, 0, 0, 7, 95)
-	oicLED:setImage(RegisterImage(0xABF790B0DAA8AC7))
-	oicLED:setMaterial(LUI.UIImage.GetCachedMaterial(0x655565C7B387234))
+	oicLED:setImage(RegisterImage(@"hash_7ABF790B0DAA8AC7"))
+	oicLED:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_multiply"))
 	self:addElement(oicLED)
 	self.oicLED = oicLED
 	local Lives = LUI.UIText.new(0, 0, 21.5, 117.5, 0, 0, 18, 30)
 	Lives:setRGB(0.73, 0.71, 0.64)
-	Lives:setText(Engine[0xF9F1239CFD921FE](0x1E4F4E133081C25))
+	Lives:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_71E4F4E133081C25"))
 	Lives:setTTF("ttmussels_demibold")
-	Lives:setMaterial(LUI.UIImage.GetCachedMaterial(0x71E049B161CD00A))
+	Lives:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_171E049B161CD00A"))
 	Lives:setLetterSpacing(1)
-	Lives:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Lives:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Lives:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Lives:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(Lives)
 	self.Lives = Lives
 	local HeroAbilityUseString = CoD.AmmoWidget_WeaponName.new(f1_arg0, f1_arg1, 0, 0, 129.5, 249.5, 0, 0, 17.5, 29.5)
@@ -97,8 +97,8 @@ CoD.AmmoWidget_OneInTheChamber.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 			condition = function(menu, element, event)
 				local f4_local0 = CoD.ModelUtility.IsGlobalDataSourceModelValueEqualTo(f1_arg1, "HUDItems", "hacked", 1)
 				if f4_local0 then
-					if not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2]) then
-						f4_local0 = not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F])
+					if not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_in_killcam"]) then
+						f4_local0 = not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_play_of_the_match"])
 					else
 						f4_local0 = false
 					end
@@ -127,26 +127,26 @@ CoD.AmmoWidget_OneInTheChamber.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	end, false)
 	f1_local13 = self
 	f1_local14 = self.subscribeToModel
-	f1_local15 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local14(f1_local13, f1_local15["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2]], function(f7_arg0)
+	f1_local15 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local14(f1_local13, f1_local15["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"]], function(f7_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f7_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"],
 		})
 	end, false)
 	f1_local13 = self
 	f1_local14 = self.subscribeToModel
-	f1_local15 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local14(f1_local13, f1_local15["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F]], function(f8_arg0)
+	f1_local15 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local14(f1_local13, f1_local15["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_play_of_the_match"]], function(f8_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f8_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_play_of_the_match"],
 		})
 	end, false)
 	OneInTheChamberLives.id = "OneInTheChamberLives"

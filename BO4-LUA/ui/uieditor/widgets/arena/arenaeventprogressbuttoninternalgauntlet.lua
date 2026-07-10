@@ -10,17 +10,17 @@ CoD.ArenaEventProgressButtonInternalGauntlet.new = function(f1_arg0, f1_arg1, f1
 	self.anyChildUsesUpdateState = true
 	local EventTitle = LUI.UIText.new(0, 0, 9, 285, 0, 0, 10, 30)
 	EventTitle:setRGB(ColorSet.RewardChallenge.r, ColorSet.RewardChallenge.g, ColorSet.RewardChallenge.b)
-	EventTitle:setText(LocalizeToUpperString(0xA5CBEE1298159B6))
+	EventTitle:setText(LocalizeToUpperString(@"hash_A5CBEE1298159B6"))
 	EventTitle:setTTF("default")
-	EventTitle:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	EventTitle:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	EventTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	EventTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(EventTitle)
 	self.EventTitle = EventTitle
 	local Wins = LUI.UIText.new(0, 0, 9, 167, 0, 0, 35, 67)
 	Wins:setRGB(ColorSet.SelectedGreen.r, ColorSet.SelectedGreen.g, ColorSet.SelectedGreen.b)
 	Wins:setTTF("default")
-	Wins:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Wins:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Wins:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Wins:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	Wins:subscribeToGlobalModel(f1_arg1, "ArenaGauntlet", "wins", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -51,7 +51,7 @@ CoD.ArenaEventProgressButtonInternalGauntlet.new = function(f1_arg0, f1_arg1, f1
 	Losses:setTopBottom(0.5, 0.5, -20, 20)
 	Losses:setWidgetType(CoD.ArenaGauntletLossSlot)
 	Losses:setHorizontalCount(3)
-	Losses:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	Losses:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	Losses:subscribeToGlobalModel(f1_arg1, "ArenaGauntlet", "lossesListDataSource", function(model)
 		local f5_local0 = model:get()
 		if f5_local0 ~= nil then

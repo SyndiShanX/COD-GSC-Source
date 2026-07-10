@@ -20,8 +20,8 @@ CoD.MPSpecialistHUBTags_TagFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	self.FramingCornerBrackets = FramingCornerBrackets
 	local emblemListBg = LUI.UIImage.new(0, 0, 204.5, 1253.5, 0, 0, 81, 926)
 	emblemListBg:setScale(0.77, 0.77)
-	emblemListBg:setImage(RegisterImage(0xCE384B31419E220))
-	emblemListBg:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	emblemListBg:setImage(RegisterImage(@"uie_ui_menu_emblem_empty_bg"))
+	emblemListBg:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	emblemListBg:setShaderVector(0, 0, 0, 0, 0)
 	emblemListBg:setupNineSliceShader(212, 212)
 	self:addElement(emblemListBg)
@@ -33,13 +33,13 @@ CoD.MPSpecialistHUBTags_TagFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	tags:setHorizontalCount(5)
 	tags:setVerticalCount(4)
 	tags:setSpacing(11)
-	tags:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	tags:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	tags:setDataSource("SpecialistTagsList")
 	tags:linkToElementModel(tags, "owned", true, function(model, f2_arg1)
-		CoD.Menu.UpdateButtonShownState(f2_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f2_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	tags:linkToElementModel(tags, "trialLocked", true, function(model, f3_arg1)
-		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	tags:registerEventHandler("list_item_lose_focus", function(element, event)
 		local f4_local0 = nil
@@ -53,10 +53,10 @@ CoD.MPSpecialistHUBTags_TagFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 		elseif element.super.gainFocus then
 			f5_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f5_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(tags, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(tags, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "owned") and not CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "trialLocked") then
 			PlaySoundAlias("uin_main_edit")
 			CoD.PlayerRoleUtility.BindGestureTagToSlot(menu, element, controller)
@@ -65,7 +65,7 @@ CoD.MPSpecialistHUBTags_TagFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 		end
 	end, function(element, menu, controller)
 		if CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "owned") and not CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "trialLocked") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false
@@ -78,15 +78,15 @@ CoD.MPSpecialistHUBTags_TagFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	self.verticalCounter = verticalCounter
 	local DotLineTop = LUI.UIImage.new(0.5, 0.5, -636.5, 174.5, 0, 0, 161, 165)
 	DotLineTop:setAlpha(0.4)
-	DotLineTop:setImage(RegisterImage(0xF9C7F41C631866E))
-	DotLineTop:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	DotLineTop:setImage(RegisterImage(@"uie_ui_menu_social_emblem_dotline"))
+	DotLineTop:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	DotLineTop:setShaderVector(0, 1.2, 0, 0, 0)
 	self:addElement(DotLineTop)
 	self.DotLineTop = DotLineTop
 	local DotLineBottom = LUI.UIImage.new(0.5, 0.5, -636.5, 174.5, 0, 0, 859, 863)
 	DotLineBottom:setAlpha(0.4)
-	DotLineBottom:setImage(RegisterImage(0xF9C7F41C631866E))
-	DotLineBottom:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	DotLineBottom:setImage(RegisterImage(@"uie_ui_menu_social_emblem_dotline"))
+	DotLineBottom:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	DotLineBottom:setShaderVector(0, 1.2, 0, 0, 0)
 	self:addElement(DotLineBottom)
 	self.DotLineBottom = DotLineBottom
@@ -145,7 +145,7 @@ CoD.MPSpecialistHUBTags_TagFrame.__clipsPerState = {
 			f14_arg0:__resetProperties()
 			f14_arg0:setupElementClipCounter(1)
 			local f14_local0 = function(f15_arg0)
-				f15_arg0:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f15_arg0:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f15_arg0:setAlpha(1)
 				f15_arg0:registerEventHandler("transition_complete_keyframe", f14_arg0.clipFinished)
 			end

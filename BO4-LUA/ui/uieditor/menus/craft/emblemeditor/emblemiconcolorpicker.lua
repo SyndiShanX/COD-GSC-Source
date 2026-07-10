@@ -48,7 +48,7 @@ LUI.createMenu.EmblemIconColorPicker = function(f1_arg0, f1_arg1)
 		{
 			stateName = "Visible",
 			condition = function(menu, element, event)
-				return CoD.CraftUtility.IsEmblemEditorPropertyEqualToEnum(f1_arg0, "colorMode", Enum[0xC594B064FEDD0D6][0xC6A5FECEA7EADAA]) and CoD.CraftUtility.IsEmblemEditorPropertyEqualTo(f1_arg0, "isGradientMode", 0)
+				return CoD.CraftUtility.IsEmblemEditorPropertyEqualToEnum(f1_arg0, "colorMode", Enum[@"customizationcolormode"][@"customization_color_mode_mixer"]) and CoD.CraftUtility.IsEmblemEditorPropertyEqualTo(f1_arg0, "isGradientMode", 0)
 			end,
 		},
 	})
@@ -86,7 +86,7 @@ LUI.createMenu.EmblemIconColorPicker = function(f1_arg0, f1_arg1)
 		{
 			stateName = "Visible",
 			condition = function(menu, element, event)
-				return CoD.CraftUtility.IsEmblemEditorPropertyEqualToEnum(f1_arg0, "colorMode", Enum[0xC594B064FEDD0D6][0xC6A5FECEA7EADAA]) and CoD.CraftUtility.IsEmblemEditorPropertyEqualTo(f1_arg0, "isGradientMode", 1)
+				return CoD.CraftUtility.IsEmblemEditorPropertyEqualToEnum(f1_arg0, "colorMode", Enum[@"customizationcolormode"][@"customization_color_mode_mixer"]) and CoD.CraftUtility.IsEmblemEditorPropertyEqualTo(f1_arg0, "isGradientMode", 1)
 			end,
 		},
 	})
@@ -130,19 +130,19 @@ LUI.createMenu.EmblemIconColorPicker = function(f1_arg0, f1_arg1)
 		{
 			stateName = "Solid",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg0, "Emblem.EmblemProperties.colorMode", Enum[0xC594B064FEDD0D6][0xE692F9BF30BA124]) and CoD.ModelUtility.IsModelValueEqualTo(f1_arg0, "Emblem.EmblemProperties.isGradientMode", 0)
+				return CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg0, "Emblem.EmblemProperties.colorMode", Enum[@"customizationcolormode"][@"customization_color_mode_solid"]) and CoD.ModelUtility.IsModelValueEqualTo(f1_arg0, "Emblem.EmblemProperties.isGradientMode", 0)
 			end,
 		},
 		{
 			stateName = "Mixer",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg0, "Emblem.EmblemProperties.colorMode", Enum[0xC594B064FEDD0D6][0xC6A5FECEA7EADAA]) and CoD.ModelUtility.IsModelValueEqualTo(f1_arg0, "Emblem.EmblemProperties.isGradientMode", 0)
+				return CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg0, "Emblem.EmblemProperties.colorMode", Enum[@"customizationcolormode"][@"customization_color_mode_mixer"]) and CoD.ModelUtility.IsModelValueEqualTo(f1_arg0, "Emblem.EmblemProperties.isGradientMode", 0)
 			end,
 		},
 	})
 	PaintshopColorLayerInfo = EmblemEditorColorTypeHeader0
 	emblemEditorColorControls = EmblemEditorColorTypeHeader0.subscribeToModel
-	local emblemDrawWidget = Engine[0x4DF5CFBC1771947](f1_arg0)
+	local emblemDrawWidget = Engine[@"getmodelforcontroller"](f1_arg0)
 	emblemEditorColorControls(PaintshopColorLayerInfo, emblemDrawWidget["Emblem.EmblemProperties.isGradientMode"], function(f15_arg0)
 		f1_local1:updateElementState(EmblemEditorColorTypeHeader0, {
 			name = "model_validation",
@@ -154,7 +154,7 @@ LUI.createMenu.EmblemIconColorPicker = function(f1_arg0, f1_arg1)
 	end, false)
 	PaintshopColorLayerInfo = EmblemEditorColorTypeHeader0
 	emblemEditorColorControls = EmblemEditorColorTypeHeader0.subscribeToModel
-	emblemDrawWidget = Engine[0x4DF5CFBC1771947](f1_arg0)
+	emblemDrawWidget = Engine[@"getmodelforcontroller"](f1_arg0)
 	emblemEditorColorControls(PaintshopColorLayerInfo, emblemDrawWidget["Emblem.EmblemProperties.colorMode"], function(f16_arg0)
 		f1_local1:updateElementState(EmblemEditorColorTypeHeader0, {
 			name = "model_validation",
@@ -189,7 +189,7 @@ LUI.createMenu.EmblemIconColorPicker = function(f1_arg0, f1_arg1)
 	})
 	emblemDrawWidget = emblemEditorColorControls
 	PaintshopColorLayerInfo = emblemEditorColorControls.subscribeToModel
-	local MenuFrame = Engine[0x4DF5CFBC1771947](f1_arg0)
+	local MenuFrame = Engine[@"getmodelforcontroller"](f1_arg0)
 	PaintshopColorLayerInfo(emblemDrawWidget, MenuFrame["Emblem.EmblemProperties.isGradientMode"], function(f20_arg0)
 		f1_local1:updateElementState(emblemEditorColorControls, {
 			name = "model_validation",
@@ -201,7 +201,7 @@ LUI.createMenu.EmblemIconColorPicker = function(f1_arg0, f1_arg1)
 	end, false)
 	emblemDrawWidget = emblemEditorColorControls
 	PaintshopColorLayerInfo = emblemEditorColorControls.subscribeToModel
-	MenuFrame = Engine[0x4DF5CFBC1771947](f1_arg0)
+	MenuFrame = Engine[@"getmodelforcontroller"](f1_arg0)
 	PaintshopColorLayerInfo(emblemDrawWidget, MenuFrame["Emblem.EmblemProperties.isColor0NoColor"], function(f21_arg0)
 		f1_local1:updateElementState(emblemEditorColorControls, {
 			name = "model_validation",
@@ -213,7 +213,7 @@ LUI.createMenu.EmblemIconColorPicker = function(f1_arg0, f1_arg1)
 	end, false)
 	emblemDrawWidget = emblemEditorColorControls
 	PaintshopColorLayerInfo = emblemEditorColorControls.subscribeToModel
-	MenuFrame = Engine[0x4DF5CFBC1771947](f1_arg0)
+	MenuFrame = Engine[@"getmodelforcontroller"](f1_arg0)
 	PaintshopColorLayerInfo(emblemDrawWidget, MenuFrame["Emblem.EmblemProperties.isColor1NoColor"], function(f22_arg0)
 		f1_local1:updateElementState(emblemEditorColorControls, {
 			name = "model_validation",
@@ -225,7 +225,7 @@ LUI.createMenu.EmblemIconColorPicker = function(f1_arg0, f1_arg1)
 	end, false)
 	emblemDrawWidget = emblemEditorColorControls
 	PaintshopColorLayerInfo = emblemEditorColorControls.subscribeToModel
-	MenuFrame = Engine[0x4DF5CFBC1771947](f1_arg0)
+	MenuFrame = Engine[@"getmodelforcontroller"](f1_arg0)
 	PaintshopColorLayerInfo(emblemDrawWidget, MenuFrame["Emblem.EmblemProperties.colorNum"], function(f23_arg0)
 		f1_local1:updateElementState(emblemEditorColorControls, {
 			name = "model_validation",
@@ -248,7 +248,7 @@ LUI.createMenu.EmblemIconColorPicker = function(f1_arg0, f1_arg1)
 	})
 	MenuFrame = PaintshopColorLayerInfo
 	emblemDrawWidget = PaintshopColorLayerInfo.subscribeToModel
-	local f1_local13 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	local f1_local13 = Engine[@"getmodelforcontroller"](f1_arg0)
 	emblemDrawWidget(MenuFrame, f1_local13["Emblem.EmblemProperties.isGradientMode"], function(f25_arg0)
 		f1_local1:updateElementState(PaintshopColorLayerInfo, {
 			name = "model_validation",
@@ -264,11 +264,11 @@ LUI.createMenu.EmblemIconColorPicker = function(f1_arg0, f1_arg1)
 	self:addElement(emblemDrawWidget)
 	self.emblemDrawWidget = emblemDrawWidget
 	MenuFrame = CoD.GenericMenuFrame.new(f1_local1, f1_arg0, 0, 1, 0, 0, 0, 1, 0, 0)
-	MenuFrame.CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(0xE37FEB35F970A4C))
+	MenuFrame.CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(@"hash_4E37FEB35F970A4C"))
 	MenuFrame:subscribeToGlobalModel(f1_arg0, "LobbyRoot", "lobbyTitle", function(model)
 		local f26_local0 = model:get()
 		if f26_local0 ~= nil then
-			MenuFrame.CommonHeader.subtitle.subtitle:setText(Engine[0xF9F1239CFD921FE](f26_local0))
+			MenuFrame.CommonHeader.subtitle.subtitle:setText(Engine[@"hash_4F9F1239CFD921FE"](f26_local0))
 		end
 	end)
 	MenuFrame:registerEventHandler("menu_loaded", function(element, event)
@@ -294,7 +294,7 @@ LUI.createMenu.EmblemIconColorPicker = function(f1_arg0, f1_arg1)
 	actionsListPC:setWidgetType(CoD.CraftActionHeader)
 	actionsListPC:setVerticalCount(10)
 	actionsListPC:setSpacing(0)
-	actionsListPC:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	actionsListPC:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	actionsListPC:setDataSource("CraftColorActionsPC")
 	actionsListPC:subscribeToGlobalModel(f1_arg0, "PerController", "Emblem.EmblemProperties.isGradientMode", function(model)
 		UpdateDataSource(self, actionsListPC, f1_arg0)
@@ -321,7 +321,7 @@ LUI.createMenu.EmblemIconColorPicker = function(f1_arg0, f1_arg1)
 	end)
 	local f1_local15 = self
 	local f1_local16 = self.subscribeToModel
-	local f1_local17 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	local f1_local17 = Engine[@"getmodelforcontroller"](f1_arg0)
 	f1_local16(f1_local15, f1_local17.LastInput, function(f31_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",
@@ -333,20 +333,20 @@ LUI.createMenu.EmblemIconColorPicker = function(f1_arg0, f1_arg1)
 	end, false)
 	f1_local15 = self
 	f1_local16 = self.subscribeToModel
-	f1_local17 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	f1_local17 = Engine[@"getmodelforcontroller"](f1_arg0)
 	f1_local16(f1_local15, f1_local17["Emblem.EmblemProperties.isGradientMode"], function(f32_arg0, f32_arg1)
-		CoD.Menu.UpdateButtonShownState(f32_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A])
-		CoD.Menu.UpdateButtonShownState(f32_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC])
-		CoD.Menu.UpdateButtonShownState(f32_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA])
+		CoD.Menu.UpdateButtonShownState(f32_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"])
+		CoD.Menu.UpdateButtonShownState(f32_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_ltrig"])
+		CoD.Menu.UpdateButtonShownState(f32_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_rtrig"])
 	end, false)
 	f1_local15 = self
 	f1_local16 = self.subscribeToModel
-	f1_local17 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	f1_local17 = Engine[@"getmodelforcontroller"](f1_arg0)
 	f1_local16(f1_local15, f1_local17["Emblem.EmblemProperties.colorMode"], function(f33_arg0, f33_arg1)
-		CoD.Menu.UpdateButtonShownState(f33_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x93AB4C84F113EE1])
-		CoD.Menu.UpdateButtonShownState(f33_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A])
+		CoD.Menu.UpdateButtonShownState(f33_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_back"])
+		CoD.Menu.UpdateButtonShownState(f33_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"])
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		if CoD.ModelUtility.IsModelValueEqualTo(controller, "Emblem.EmblemProperties.isGradientMode", 0) and IsPC() then
 			GoBack(self, controller)
 			ClearMenuSavedState(menu)
@@ -356,70 +356,70 @@ LUI.createMenu.EmblemIconColorPicker = function(f1_arg0, f1_arg1)
 			GoBack(self, controller)
 			ClearMenuSavedState(menu)
 			return true
-		elseif CoD.ModelUtility.IsModelValueEqualTo(controller, "Emblem.EmblemProperties.isGradientMode", 1) and CoD.ModelUtility.IsModelValueEqualToEnum(controller, "Emblem.EmblemProperties.colorMode", Enum[0xC594B064FEDD0D6][0x8F7F4A0A6A3678B]) then
+		elseif CoD.ModelUtility.IsModelValueEqualTo(controller, "Emblem.EmblemProperties.isGradientMode", 1) and CoD.ModelUtility.IsModelValueEqualToEnum(controller, "Emblem.EmblemProperties.colorMode", Enum[@"customizationcolormode"][@"customization_color_mode_none"]) then
 			GoBack(self, controller)
 			ClearMenuSavedState(menu)
 			CoD.CraftUtility.EmblemGradient_BackFromGradientPicker(self, element, controller)
 			return true
-		elseif CoD.ModelUtility.IsModelValueEqualTo(controller, "Emblem.EmblemProperties.isGradientMode", 1) and not CoD.ModelUtility.IsModelValueEqualToEnum(controller, "Emblem.EmblemProperties.colorMode", Enum[0xC594B064FEDD0D6][0x8F7F4A0A6A3678B]) then
+		elseif CoD.ModelUtility.IsModelValueEqualTo(controller, "Emblem.EmblemProperties.isGradientMode", 1) and not CoD.ModelUtility.IsModelValueEqualToEnum(controller, "Emblem.EmblemProperties.colorMode", Enum[@"customizationcolormode"][@"customization_color_mode_none"]) then
 			CoD.CraftUtility.EmblemGradient_BackFromColorPicker(self, element, menu, controller)
 			return true
 		else
 		end
 	end, function(element, menu, controller)
 		if CoD.ModelUtility.IsModelValueEqualTo(controller, "Emblem.EmblemProperties.isGradientMode", 0) and IsPC() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 			return true
 		elseif CoD.ModelUtility.IsModelValueEqualTo(controller, "Emblem.EmblemProperties.isGradientMode", 0) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 			return true
-		elseif CoD.ModelUtility.IsModelValueEqualTo(controller, "Emblem.EmblemProperties.isGradientMode", 1) and CoD.ModelUtility.IsModelValueEqualToEnum(controller, "Emblem.EmblemProperties.colorMode", Enum[0xC594B064FEDD0D6][0x8F7F4A0A6A3678B]) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+		elseif CoD.ModelUtility.IsModelValueEqualTo(controller, "Emblem.EmblemProperties.isGradientMode", 1) and CoD.ModelUtility.IsModelValueEqualToEnum(controller, "Emblem.EmblemProperties.colorMode", Enum[@"customizationcolormode"][@"customization_color_mode_none"]) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 			return true
-		elseif CoD.ModelUtility.IsModelValueEqualTo(controller, "Emblem.EmblemProperties.isGradientMode", 1) and not CoD.ModelUtility.IsModelValueEqualToEnum(controller, "Emblem.EmblemProperties.colorMode", Enum[0xC594B064FEDD0D6][0x8F7F4A0A6A3678B]) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+		elseif CoD.ModelUtility.IsModelValueEqualTo(controller, "Emblem.EmblemProperties.isGradientMode", 1) and not CoD.ModelUtility.IsModelValueEqualToEnum(controller, "Emblem.EmblemProperties.colorMode", Enum[@"customizationcolormode"][@"customization_color_mode_none"]) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x493152B20AE4F58], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_lb"], nil, function(element, menu, controller, model)
 		CoD.CraftUtility.EmblemChooseColor_UpdateOpacityByStep(self, element, -0.01, controller, menu)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x493152B20AE4F58], 0x0, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_lb"], @"hash_0", nil, nil)
 		return false
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x49A252B20B48936], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_rb"], nil, function(element, menu, controller, model)
 		CoD.CraftUtility.EmblemChooseColor_UpdateOpacityByStep(self, element, 0.01, controller, menu)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x49A252B20B48936], 0x0, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_rb"], @"hash_0", nil, nil)
 		return false
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x93AB4C84F113EE1], "E", function(element, menu, controller, model)
-		if not CoD.ModelUtility.IsModelValueEqualToEnum(controller, "Emblem.EmblemProperties.colorMode", Enum[0xC594B064FEDD0D6][0x8F7F4A0A6A3678B]) then
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_back"], "E", function(element, menu, controller, model)
+		if not CoD.ModelUtility.IsModelValueEqualToEnum(controller, "Emblem.EmblemProperties.colorMode", Enum[@"customizationcolormode"][@"customization_color_mode_none"]) then
 			CoD.CraftUtility.EmblemChooseColor_ToggleColorMode(self, element, controller, menu)
 			PlaySoundSetSound(self, "toggle_color_picker")
 			return true
 		else
 		end
 	end, function(element, menu, controller)
-		if not CoD.ModelUtility.IsModelValueEqualToEnum(controller, "Emblem.EmblemProperties.colorMode", Enum[0xC594B064FEDD0D6][0x8F7F4A0A6A3678B]) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x93AB4C84F113EE1], 0x0, nil, "E")
+		if not CoD.ModelUtility.IsModelValueEqualToEnum(controller, "Emblem.EmblemProperties.colorMode", Enum[@"customizationcolormode"][@"customization_color_mode_none"]) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_back"], @"hash_0", nil, "E")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], "G", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], "G", function(element, menu, controller, model)
 		CoD.CraftUtility.EmblemChooseColor_ToggleGradientMode(self, element, controller, menu)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x0, nil, "G")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"hash_0", nil, "G")
 		return false
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_ltrig"], nil, function(element, menu, controller, model)
 		if CoD.ModelUtility.IsModelValueEqualTo(controller, "Emblem.EmblemProperties.isGradientMode", 1) then
 			CoD.CraftUtility.EmblemGradient_UpdateAngleByStep(self, element, -1, controller)
 			return true
@@ -427,13 +427,13 @@ LUI.createMenu.EmblemIconColorPicker = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if CoD.ModelUtility.IsModelValueEqualTo(controller, "Emblem.EmblemProperties.isGradientMode", 1) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC], 0x0, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_ltrig"], @"hash_0", nil, nil)
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_rtrig"], nil, function(element, menu, controller, model)
 		if CoD.ModelUtility.IsModelValueEqualTo(controller, "Emblem.EmblemProperties.isGradientMode", 1) then
 			CoD.CraftUtility.EmblemGradient_UpdateAngleByStep(self, element, 1, controller)
 			return true
@@ -441,7 +441,7 @@ LUI.createMenu.EmblemIconColorPicker = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if CoD.ModelUtility.IsModelValueEqualTo(controller, "Emblem.EmblemProperties.isGradientMode", 1) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA], 0x0, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_rtrig"], @"hash_0", nil, nil)
 			return false
 		else
 			return false

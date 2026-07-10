@@ -13,7 +13,7 @@ CoD.ObituaryCalloutExpandedContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	self.anyChildUsesUpdateState = true
 	local DamageDealtBackingBlur = LUI.UIImage.new(0.5, 0.5, -252.5, 252.5, 0.5, 0.5, -69, 2)
 	DamageDealtBackingBlur:setRGB(0, 0, 0)
-	DamageDealtBackingBlur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	DamageDealtBackingBlur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	DamageDealtBackingBlur:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(DamageDealtBackingBlur)
 	self.DamageDealtBackingBlur = DamageDealtBackingBlur
@@ -33,7 +33,7 @@ CoD.ObituaryCalloutExpandedContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	})
 	local f1_local4 = ObituaryKillerIdentity
 	local ContribText = ObituaryKillerIdentity.subscribeToModel
-	local f1_local6 = Engine[0x8DF2E5447F384B9]()
+	local f1_local6 = Engine[@"getglobalmodel"]()
 	ContribText(f1_local4, f1_local6["lobbyRoot.lobbyNav"], function(f3_arg0)
 		f1_arg0:updateElementState(ObituaryKillerIdentity, {
 			name = "model_validation",
@@ -43,7 +43,7 @@ CoD.ObituaryCalloutExpandedContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f
 			modelName = "lobbyRoot.lobbyNav",
 		})
 	end, false)
-	ObituaryKillerIdentity.KillerLabel:setText(LocalizeToUpperString(0x161ED05A4E04839))
+	ObituaryKillerIdentity.KillerLabel:setText(LocalizeToUpperString(@"warzone/killed"))
 	ObituaryKillerIdentity:linkToElementModel(self, nil, false, function(model)
 		ObituaryKillerIdentity:setModel(model, f1_arg1)
 	end)

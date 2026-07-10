@@ -14,27 +14,27 @@ CoD.horizontalCounterTriggerPrompts.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	currentItem:setAlpha(0.65)
 	currentItem:setText("")
 	currentItem:setTTF("ttmussels_regular")
-	currentItem:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
-	currentItem:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	currentItem:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
+	currentItem:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(currentItem)
 	self.currentItem = currentItem
 	local dividor = LUI.UIText.new(0.5, 0.5, -4.5, 4.5, 0.5, 0.5, -9, 9)
 	dividor:setAlpha(0.65)
-	dividor:setText(Engine[0xF9F1239CFD921FE](0x993C1A7DD3452BA))
+	dividor:setText(Engine[@"hash_4F9F1239CFD921FE"](@"mp/slash"))
 	dividor:setTTF("ttmussels_regular")
-	dividor:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	dividor:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	self:addElement(dividor)
 	self.dividor = dividor
 	local count = LUI.UIText.new(0.5, 0.5, 12, 57, 0.5, 0.5, -9, 9)
 	count:setAlpha(0.65)
 	count:setText(200)
 	count:setTTF("ttmussels_regular")
-	count:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	count:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	count:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	count:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(count)
 	self.count = count
 	local RightPageOver = CoD.BumperButtonWithKeyMouse.new(f1_arg0, f1_arg1, 0.5, 0.5, 34.5, 101.5, 0, 0, -4, 31)
-	RightPageOver.KeyMouseImage:setImage(RegisterImage(0x49AC5C845C7E582))
+	RightPageOver.KeyMouseImage:setImage(RegisterImage(@"uie_bumperright"))
 	RightPageOver:subscribeToGlobalModel(f1_arg1, "Controller", "right_trigger_button_image", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -43,13 +43,13 @@ CoD.horizontalCounterTriggerPrompts.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	end)
 	RightPageOver:appendEventHandler("input_source_changed", function(f3_arg0, f3_arg1)
 		f3_arg1.menu = f3_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f3_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f3_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	local f1_local5 = RightPageOver
 	local LeftPageOver = RightPageOver.subscribeToModel
-	local f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
 	LeftPageOver(f1_local5, f1_local7.LastInput, function(f4_arg0, f4_arg1)
-		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	RightPageOver:registerEventHandler("gain_focus", function(element, event)
 		local f5_local0 = nil
@@ -58,10 +58,10 @@ CoD.horizontalCounterTriggerPrompts.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 		elseif element.super.gainFocus then
 			f5_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f5_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(RightPageOver, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(RightPageOver, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if IsGamepad(controller) then
 			NavigateScrollButtonRight(self)
 			return true
@@ -72,10 +72,10 @@ CoD.horizontalCounterTriggerPrompts.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 		end
 	end, function(element, menu, controller)
 		if IsGamepad(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 			return false
 		elseif IsMouseOrKeyboard(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 			return false
 		else
 			return false
@@ -92,13 +92,13 @@ CoD.horizontalCounterTriggerPrompts.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	end)
 	LeftPageOver:appendEventHandler("input_source_changed", function(f9_arg0, f9_arg1)
 		f9_arg1.menu = f9_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f9_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f9_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	f1_local7 = LeftPageOver
 	f1_local5 = LeftPageOver.subscribeToModel
-	local f1_local8 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local8 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local5(f1_local7, f1_local8.LastInput, function(f10_arg0, f10_arg1)
-		CoD.Menu.UpdateButtonShownState(f10_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f10_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	LeftPageOver:registerEventHandler("gain_focus", function(element, event)
 		local f11_local0 = nil
@@ -107,10 +107,10 @@ CoD.horizontalCounterTriggerPrompts.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 		elseif element.super.gainFocus then
 			f11_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f11_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(LeftPageOver, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(LeftPageOver, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if IsGamepad(controller) then
 			NavigateScrollButtonLeft(self)
 			return true
@@ -121,10 +121,10 @@ CoD.horizontalCounterTriggerPrompts.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 		end
 	end, function(element, menu, controller)
 		if IsGamepad(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 			return false
 		elseif IsMouseOrKeyboard(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 			return false
 		else
 			return false

@@ -9,15 +9,15 @@ CoD.ReadyEvents_Scorestreaks_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, 
 	self.soundSet = "default"
 	self.anyChildUsesUpdateState = true
 	local Spacer = LUI.UIImage.new(0, 0, 62, 72, 0, 1, 0, 0)
-	Spacer:setImage(RegisterImage(0x7615068F50B3D66))
+	Spacer:setImage(RegisterImage(@"blacktransparent"))
 	self:addElement(Spacer)
 	self.Spacer = Spacer
 	local Text = LUI.UIText.new(0, 0, 72, 312, 0, 0, 5.5, 47.5)
 	Text:setRGB(0, 0, 0)
-	Text:setText(Engine[0xF9F1239CFD921FE](0x54EB85A28216D99))
+	Text:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/killstreak_ready"))
 	Text:setTTF("ttmussels_demibold")
 	Text:setLetterSpacing(1)
-	Text:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	Text:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	LUI.OverrideFunction_CallOriginalFirst(Text, "setText", function(element, controller)
 		RecalculateScaleToElementWidth(self, self)
 	end)

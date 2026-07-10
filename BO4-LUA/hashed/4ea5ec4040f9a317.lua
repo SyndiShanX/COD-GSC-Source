@@ -8,58 +8,58 @@ CoD.ShopReserveItemRarityBacking.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local CommonBacking = LUI.UIImage.new(0, 0, 0, 236, 0, 0, 0, 506)
-	CommonBacking:setImage(RegisterImage(0x498F0C9C6258148))
+	CommonBacking:setImage(RegisterImage(@"hash_1498F0C9C6258148"))
 	self:addElement(CommonBacking)
 	self.CommonBacking = CommonBacking
 	local RareBacking = LUI.UIImage.new(0, 0, 0, 236, 0, 0, 0, 506)
 	RareBacking:setAlpha(0)
-	RareBacking:setImage(RegisterImage(0xC33C8FB9CCFAF31))
+	RareBacking:setImage(RegisterImage(@"hash_6C33C8FB9CCFAF31"))
 	self:addElement(RareBacking)
 	self.RareBacking = RareBacking
 	local LegendaryBacking = LUI.UIImage.new(0, 0, 0, 236, 0, 0, 0, 506)
 	LegendaryBacking:setAlpha(0)
-	LegendaryBacking:setImage(RegisterImage(0x4CBF809785677FE))
+	LegendaryBacking:setImage(RegisterImage(@"hash_4CBF809785677FE"))
 	self:addElement(LegendaryBacking)
 	self.LegendaryBacking = LegendaryBacking
 	local EpicBacking = LUI.UIImage.new(0, 0, 0, 236, 0, 0, 0, 506)
 	EpicBacking:setAlpha(0)
-	EpicBacking:setImage(RegisterImage(0x42B6A8A46AF63DC))
+	EpicBacking:setImage(RegisterImage(@"hash_342B6A8A46AF63DC"))
 	self:addElement(EpicBacking)
 	self.EpicBacking = EpicBacking
 	local UltraBacking = LUI.UIImage.new(0, 0, 0, 236, 0, 0, 0, 506)
 	UltraBacking:setAlpha(0)
-	UltraBacking:setImage(RegisterImage(0x8CE2C8563E7BCD1))
+	UltraBacking:setImage(RegisterImage(@"hash_68CE2C8563E7BCD1"))
 	self:addElement(UltraBacking)
 	self.UltraBacking = UltraBacking
 	self:mergeStateConditions({
 		{
 			stateName = "Common",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "rarity", Enum[0x704F69F9B0BDCEC][0xFA11ABBEBCE1980])
+				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "rarity", Enum[@"lootraritytype"][@"loot_rarity_type_common"])
 			end,
 		},
 		{
 			stateName = "Rare",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "rarity", Enum[0x704F69F9B0BDCEC][0x895F040FAFBECB9])
+				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "rarity", Enum[@"lootraritytype"][@"loot_rarity_type_rare"])
 			end,
 		},
 		{
 			stateName = "Legendary",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "rarity", Enum[0x704F69F9B0BDCEC][0x35E4133DEF6B806])
+				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "rarity", Enum[@"lootraritytype"][@"loot_rarity_type_legendary"])
 			end,
 		},
 		{
 			stateName = "Epic",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "rarity", Enum[0x704F69F9B0BDCEC][0xC3B1CFA5096734])
+				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "rarity", Enum[@"lootraritytype"][@"loot_rarity_type_epic"])
 			end,
 		},
 		{
 			stateName = "Ultra",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "rarity", Enum[0x704F69F9B0BDCEC][0x3006FE890A202D9])
+				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "rarity", Enum[@"lootraritytype"][@"hash_63006FE890A202D9"])
 			end,
 		},
 	})

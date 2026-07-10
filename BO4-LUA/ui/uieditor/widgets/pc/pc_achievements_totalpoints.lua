@@ -15,7 +15,7 @@ CoD.PC_Achievements_TotalPoints.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	TotalPoints:setText(LocalizeToUpperString(0xA3BAB954D979BB))
 	TotalPoints:setTTF("ttmussels_regular")
 	TotalPoints:setLetterSpacing(6)
-	TotalPoints:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	TotalPoints:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(TotalPoints)
 	self.TotalPoints = TotalPoints
 	local Spacer2 = CoD.VerticalListSpacer.new(f1_arg0, f1_arg1, 0, 0, 167, 172, 0.5, 0.5, -14.5, 14.5)
@@ -25,7 +25,7 @@ CoD.PC_Achievements_TotalPoints.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	CurrentProgressValue:setRGB(0.71, 0.68, 0.65)
 	CurrentProgressValue:setTTF("ttmussels_demibold")
 	CurrentProgressValue:setLetterSpacing(3)
-	CurrentProgressValue:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	CurrentProgressValue:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	CurrentProgressValue:subscribeToGlobalModel(f1_arg1, "PCTotalAchievementsScore", "score", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -38,14 +38,14 @@ CoD.PC_Achievements_TotalPoints.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	Slash:setRGB(0.69, 0.67, 0.62)
 	Slash:setText(CoD.BaseUtility.AlreadyLocalized("/"))
 	Slash:setTTF("ttmussels_regular")
-	Slash:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	Slash:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(Slash)
 	self.Slash = Slash
 	local TotalProgressValue = LUI.UIText.new(0.5, 0.5, -133.5, -83.5, 0.5, 0.5, -11, 14)
 	TotalProgressValue:setRGB(0.69, 0.67, 0.62)
 	TotalProgressValue:setTTF("ttmussels_regular")
 	TotalProgressValue:setLetterSpacing(2)
-	TotalProgressValue:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	TotalProgressValue:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	TotalProgressValue:subscribeToGlobalModel(f1_arg1, "PCTotalAchievementsScore", "maxScore", function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then

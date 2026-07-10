@@ -11,11 +11,11 @@ CoD.ZMInvTalisman.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 	self:addElement(Image)
 	self.Image = Image
 	local Name = LUI.UIText.new(0, 0, -211, -11, 0, 0, 44.5, 65.5)
-	Name:setText(Engine[0xF9F1239CFD921FE](0x93E719493E9E18F))
+	Name:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	Name:setTTF("skorzhen")
 	Name:setLetterSpacing(1)
-	Name:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
-	Name:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Name:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
+	Name:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(Name)
 	self.Name = Name
 	self:mergeStateConditions({

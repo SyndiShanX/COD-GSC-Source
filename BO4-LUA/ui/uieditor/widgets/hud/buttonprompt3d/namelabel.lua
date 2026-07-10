@@ -10,8 +10,8 @@ CoD.nameLabel.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Glow = LUI.UIImage.new(0, 1, -80, 74, 0.5, 0.5, -45, 65)
 	Glow:setAlpha(0.14)
-	Glow:setImage(RegisterImage(0x1078C36A022A4FE))
-	Glow:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Glow:setImage(RegisterImage(@"uie_t7_menu_cac_glow"))
+	Glow:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Glow)
 	self.Glow = Glow
 	local TitleGlow1 = CoD.cac_ItemTitleGlow.new(f1_arg0, f1_arg1, 0, 1, -3, 5, 0, 1, -4, 4)
@@ -23,11 +23,11 @@ CoD.nameLabel.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 	nameLabel:setRGB(0, 0, 0)
 	nameLabel:setAlpha(0.92)
 	nameLabel:setTTF("default")
-	nameLabel:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	nameLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	nameLabel:linkToElementModel(self, "text", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			nameLabel:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			nameLabel:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	LUI.OverrideFunction_CallOriginalFirst(nameLabel, "setText", function(element, controller)
@@ -41,11 +41,11 @@ CoD.nameLabel.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 	distanceLabel:setRGB(0, 0, 0)
 	distanceLabel:setAlpha(0)
 	distanceLabel:setTTF("default")
-	distanceLabel:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	distanceLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	distanceLabel:linkToElementModel(self, "distanceText", true, function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
-			distanceLabel:setText(LocalizeIntoStringIfNotEmpty(0x7235825812D46C6, f4_local0))
+			distanceLabel:setText(LocalizeIntoStringIfNotEmpty(@"hash_37235825812D46C6", f4_local0))
 		end
 	end)
 	LUI.OverrideFunction_CallOriginalFirst(distanceLabel, "setText", function(element, controller)

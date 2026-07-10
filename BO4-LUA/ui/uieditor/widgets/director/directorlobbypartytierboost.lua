@@ -15,25 +15,25 @@ CoD.DirectorLobbyPartyTierBoost.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self:addElement(Backing)
 	self.Backing = Backing
 	local TierSkipIcon = LUI.UIImage.new(0, 0, -29, 31, 0.5, 0.5, -30, 30)
-	TierSkipIcon:setImage(RegisterImage(0x6EC674D21C5C218))
+	TierSkipIcon:setImage(RegisterImage(@"ui_icon_2xp_blackmarket"))
 	self:addElement(TierSkipIcon)
 	self.TierSkipIcon = TierSkipIcon
 	local Header = LUI.UIText.new(0, 0, 37, 369, 0.5, 0.5, -22, -1)
 	Header:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
-	Header:setText(LocalizeToUpperString(0x687BCA25FDF9F2B))
+	Header:setText(LocalizeToUpperString(@"menu/tier_boost"))
 	Header:setTTF("ttmussels_regular")
-	Header:setMaterial(LUI.UIImage.GetCachedMaterial(0x71E049B161CD00A))
+	Header:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_171E049B161CD00A"))
 	Header:setLetterSpacing(3)
-	Header:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Header:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	Header:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Header:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	self:addElement(Header)
 	self.Header = Header
 	local Description = LUI.UIText.new(0, 0, 37, 369, 0, 0, 33, 49)
 	Description:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
-	Description:setText(Engine[0xF9F1239CFD921FE](0xE1464E83FBCB490))
+	Description:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_E1464E83FBCB490"))
 	Description:setTTF("dinnext_regular")
-	Description:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Description:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	Description:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Description:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	self:addElement(Description)
 	self.Description = Description
 	local AmbientGlowAnim = CoD.TierBoostAmbientGlow.new(f1_arg0, f1_arg1, 0, 0, -36, 36, 0.5, 0.5, -36, 36)
@@ -68,7 +68,7 @@ CoD.DirectorLobbyPartyTierBoost.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	end, false)
 	f1_local6 = self
 	f1_local7 = self.subscribeToModel
-	f1_local8 = Engine[0x8DF2E5447F384B9]()
+	f1_local8 = Engine[@"getglobalmodel"]()
 	f1_local7(f1_local6, f1_local8["lobbyRoot.lobbyList.playerCount"], function(f5_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -80,7 +80,7 @@ CoD.DirectorLobbyPartyTierBoost.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	end, false)
 	f1_local6 = self
 	f1_local7 = self.subscribeToModel
-	f1_local8 = Engine[0x8DF2E5447F384B9]()
+	f1_local8 = Engine[@"getglobalmodel"]()
 	f1_local7(f1_local6, f1_local8["lobbyRoot.lobbyMainMode"], function(f6_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -103,7 +103,7 @@ CoD.DirectorLobbyPartyTierBoost.__resetProperties = function(f7_arg0)
 	f7_arg0.AmbientGlowAnim:completeAnimation()
 	f7_arg0.Backing:completeAnimation()
 	f7_arg0.Description:setAlpha(1)
-	f7_arg0.Description:setText(Engine[0xF9F1239CFD921FE](0xE1464E83FBCB490))
+	f7_arg0.Description:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_E1464E83FBCB490"))
 	f7_arg0.Header:setAlpha(1)
 	f7_arg0.TierSkipIcon:setAlpha(1)
 	f7_arg0.AmbientGlowAnim:setAlpha(1)
@@ -167,7 +167,7 @@ CoD.DirectorLobbyPartyTierBoost.__clipsPerState = {
 			f10_arg0.clipFinished(f10_arg0.Header)
 			f10_arg0.Description:completeAnimation()
 			f10_arg0.Description:setAlpha(1)
-			f10_arg0.Description:setText(Engine[0xF9F1239CFD921FE](0xFB8EDEED471C115))
+			f10_arg0.Description:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_7FB8EDEED471C115"))
 			f10_arg0.clipFinished(f10_arg0.Description)
 			f10_arg0.AmbientGlowAnim:completeAnimation()
 			f10_arg0.AmbientGlowAnim:setAlpha(1)

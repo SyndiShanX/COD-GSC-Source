@@ -10,11 +10,11 @@ CoD.PaintshopChoosePaintSide.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local PaintshopChooseSide = CoD.PaintshopChooseSide.new(f1_arg0, f1_arg1, 0, 1, 0, 0, 0, 1, 0, 0)
-	PaintshopChooseSide.text:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	PaintshopChooseSide.text:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	PaintshopChooseSide:subscribeToGlobalModel(f1_arg1, "Customization", "view_string_ref", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			PaintshopChooseSide.text:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			PaintshopChooseSide.text:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	self:addElement(PaintshopChooseSide)
@@ -39,14 +39,14 @@ CoD.PaintshopChoosePaintSide.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	downArrow:setRGB(0, 0, 0)
 	downArrow:setAlpha(0)
 	downArrow:setZRot(-90)
-	downArrow:setImage(RegisterImage(0x6E598C6D633ACF2))
+	downArrow:setImage(RegisterImage(@"uie_img_t7_menu_arrow"))
 	self:addElement(downArrow)
 	self.downArrow = downArrow
 	local upArrow = LUI.UIImage.new(0.5, 0.5, 76, 100, 0.5, 0.5, -8, 4)
 	upArrow:setRGB(0, 0, 0)
 	upArrow:setAlpha(0)
 	upArrow:setZRot(90)
-	upArrow:setImage(RegisterImage(0x6E598C6D633ACF2))
+	upArrow:setImage(RegisterImage(@"uie_img_t7_menu_arrow"))
 	self:addElement(upArrow)
 	self.upArrow = upArrow
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)

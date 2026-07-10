@@ -17,14 +17,14 @@ CoD.ScoreboardMapWZInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local BlurBG = LUI.UIImage.new(0.5, 1.5, -474, -484, 0.49, 1.49, -473, -483)
-	BlurBG:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	BlurBG:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	BlurBG:setShaderVector(0, 0.5, 0, 0, 0)
 	self:addElement(BlurBG)
 	self.BlurBG = BlurBG
 	local BlurBGTint = LUI.UIImage.new(0.5, 1.5, -475, -483, 0.49, 1.49, -474, -482)
 	BlurBGTint:setRGB(0.11, 0.11, 0.11)
 	BlurBGTint:setAlpha(0.9)
-	BlurBGTint:setMaterial(LUI.UIImage.GetCachedMaterial(0xF755127C95CF5B6))
+	BlurBGTint:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_F755127C95CF5B6"))
 	BlurBGTint:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(BlurBGTint)
 	self.BlurBGTint = BlurBGTint
@@ -32,8 +32,8 @@ CoD.ScoreboardMapWZInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self:addElement(ScoreboardGameStatusMap)
 	self.ScoreboardGameStatusMap = ScoreboardGameStatusMap
 	local MapGrid02 = LUI.UIImage.new(0.46, 1.46, -402, -474, 0.47, 1.47, -403, -469)
-	MapGrid02:setImage(RegisterImage(0xCABC1612E8ACC9B))
-	MapGrid02:setMaterial(LUI.UIImage.GetCachedMaterial(0x7EA4827662D4CD4))
+	MapGrid02:setImage(RegisterImage(@"uie_ui_menu_mp_scoreboard_map_grid01"))
+	MapGrid02:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_17EA4827662D4CD4"))
 	MapGrid02:setShaderVector(0, 4, 5.92, 0, 0)
 	MapGrid02:setShaderVector(1, 0, 1, 0, 1)
 	self:addElement(MapGrid02)
@@ -53,7 +53,7 @@ CoD.ScoreboardMapWZInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.ColumnHeadings = ColumnHeadings
 	local TopLeftCornerElement = LUI.UIImage.new(0, 0, 5.5, 45.5, 0, 0, 6, 46)
 	TopLeftCornerElement:setRGB(0, 0, 0)
-	TopLeftCornerElement:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	TopLeftCornerElement:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	TopLeftCornerElement:setShaderVector(0, 0, 0.5, 0, 0)
 	self:addElement(TopLeftCornerElement)
 	self.TopLeftCornerElement = TopLeftCornerElement
@@ -63,7 +63,7 @@ CoD.ScoreboardMapWZInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	local BlurBgTLCorner = LUI.UIImage.new(0, 0, 5.5, 46.5, 0, 0, 6, 47)
 	BlurBgTLCorner:setRGB(0, 0, 0)
 	BlurBgTLCorner:setAlpha(0.8)
-	BlurBgTLCorner:setMaterial(LUI.UIImage.GetCachedMaterial(0xF755127C95CF5B6))
+	BlurBgTLCorner:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_F755127C95CF5B6"))
 	BlurBgTLCorner:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(BlurBgTLCorner)
 	self.BlurBgTLCorner = BlurBgTLCorner
@@ -85,23 +85,23 @@ CoD.ScoreboardMapWZInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.BoundaryLine04 = BoundaryLine04
 	local TiledDotRight = LUI.UIImage.new(1, 1, -25, -5, 0.5, 1.49, -476, -476)
 	TiledDotRight:setAlpha(0.02)
-	TiledDotRight:setImage(RegisterImage(0x1D86AD0278EBECC))
-	TiledDotRight:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	TiledDotRight:setImage(RegisterImage(@"hash_71D86AD0278EBECC"))
+	TiledDotRight:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	TiledDotRight:setShaderVector(0, 0, 0, 0, 0)
 	TiledDotRight:setupNineSliceShader(12, 12)
 	self:addElement(TiledDotRight)
 	self.TiledDotRight = TiledDotRight
 	local TiledDotBot = LUI.UIImage.new(0.5, 0.5, -477.5, 458.5, 0.5, 0.5, 460, 478)
 	TiledDotBot:setAlpha(0.02)
-	TiledDotBot:setImage(RegisterImage(0x1D86AD0278EBECC))
-	TiledDotBot:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	TiledDotBot:setImage(RegisterImage(@"hash_71D86AD0278EBECC"))
+	TiledDotBot:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	TiledDotBot:setShaderVector(0, 0, 0, 0, 0)
 	TiledDotBot:setupNineSliceShader(12, 12)
 	self:addElement(TiledDotBot)
 	self.TiledDotBot = TiledDotBot
 	local MapFrame = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	MapFrame:setImage(RegisterImage(0x3D54BC53A40189A))
-	MapFrame:setMaterial(LUI.UIImage.GetCachedMaterial(0x44484DDFAF5C093))
+	MapFrame:setImage(RegisterImage(@"hash_33D54BC53A40189A"))
+	MapFrame:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_normal"))
 	MapFrame:setShaderVector(0, 0, 0, 0, 0)
 	MapFrame:setupNineSliceShader(16, 16)
 	self:addElement(MapFrame)
@@ -147,29 +147,29 @@ CoD.ScoreboardMapWZInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.MarkerImage = MarkerImage
 	local f1_local19 = self
 	local f1_local20 = self.subscribeToModel
-	local f1_local21 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local21 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local20(f1_local19, f1_local21["hudItems.waypointStatus"], function(f5_arg0, f5_arg1)
-		CoD.Menu.UpdateButtonShownState(f5_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x49A252B20B48936])
-		CoD.Menu.UpdateButtonShownState(f5_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x493152B20AE4F58])
+		CoD.Menu.UpdateButtonShownState(f5_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_rb"])
+		CoD.Menu.UpdateButtonShownState(f5_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_lb"])
 	end, false)
 	self:appendEventHandler("deadSpectator.playerIndex", function(f6_arg0, f6_arg1)
 		f6_arg1.menu = f6_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f6_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x49A252B20B48936])
-		CoD.Menu.UpdateButtonShownState(f6_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x493152B20AE4F58])
+		CoD.Menu.UpdateButtonShownState(f6_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_rb"])
+		CoD.Menu.UpdateButtonShownState(f6_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_lb"])
 	end)
 	self:appendEventHandler("input_source_changed", function(f7_arg0, f7_arg1)
 		f7_arg1.menu = f7_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f7_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x49A252B20B48936])
-		CoD.Menu.UpdateButtonShownState(f7_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x493152B20AE4F58])
+		CoD.Menu.UpdateButtonShownState(f7_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_rb"])
+		CoD.Menu.UpdateButtonShownState(f7_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_lb"])
 	end)
 	f1_local19 = self
 	f1_local20 = self.subscribeToModel
-	f1_local21 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local21 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local20(f1_local19, f1_local21.LastInput, function(f8_arg0, f8_arg1)
-		CoD.Menu.UpdateButtonShownState(f8_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x49A252B20B48936])
-		CoD.Menu.UpdateButtonShownState(f8_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x493152B20AE4F58])
+		CoD.Menu.UpdateButtonShownState(f8_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_rb"])
+		CoD.Menu.UpdateButtonShownState(f8_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_lb"])
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0x49A252B20B48936], "MOUSE1", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_rb"], "MOUSE1", function(element, menu, controller, model)
 		if not CoD.ModelUtility.IsModelValueEqualToEnum(controller, "hudItems.waypointStatus", CoD.WZUtility.WaypointStatus.POST_PLACEMENT_DELAY) and not CoD.ModelUtility.IsModelValueEqualToEnum(controller, "hudItems.waypointStatus", CoD.WZUtility.WaypointStatus.POST_DELETION_DELAY) and not CoD.WZUtility.IsControllerDeadAndNotRespawning(controller) then
 			CoD.WZUtility.PlaceMarker(controller, self.MarkerImage, self.ScoreboardGameStatusMap)
 			return true
@@ -180,16 +180,16 @@ CoD.ScoreboardMapWZInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 		end
 	end, function(element, menu, controller)
 		if not CoD.ModelUtility.IsModelValueEqualToEnum(controller, "hudItems.waypointStatus", CoD.WZUtility.WaypointStatus.POST_PLACEMENT_DELAY) and not CoD.ModelUtility.IsModelValueEqualToEnum(controller, "hudItems.waypointStatus", CoD.WZUtility.WaypointStatus.POST_DELETION_DELAY) and not CoD.WZUtility.IsControllerDeadAndNotRespawning(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x49A252B20B48936], 0x0, nil, "MOUSE1")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_rb"], @"hash_0", nil, "MOUSE1")
 			return false
 		elseif not CoD.WZUtility.IsControllerDeadAndNotRespawning(controller) and IsGamepad(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x49A252B20B48936], 0x0, nil, "MOUSE1")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_rb"], @"hash_0", nil, "MOUSE1")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0x493152B20AE4F58], "MOUSE3", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_lb"], "MOUSE3", function(element, menu, controller, model)
 		if CoD.ModelUtility.IsModelValueEqualToEnum(controller, "hudItems.waypointStatus", CoD.WZUtility.WaypointStatus.ALLOW_DELETION) and not CoD.WZUtility.IsControllerDeadAndNotRespawning(controller) then
 			CoD.WZUtility.RemoveMarker(controller, self.MarkerImage)
 			return true
@@ -200,34 +200,34 @@ CoD.ScoreboardMapWZInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 		end
 	end, function(element, menu, controller)
 		if CoD.ModelUtility.IsModelValueEqualToEnum(controller, "hudItems.waypointStatus", CoD.WZUtility.WaypointStatus.ALLOW_DELETION) and not CoD.WZUtility.IsControllerDeadAndNotRespawning(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x493152B20AE4F58], 0x0, nil, "MOUSE3")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_lb"], @"hash_0", nil, "MOUSE3")
 			return false
 		elseif not CoD.WZUtility.IsControllerDeadAndNotRespawning(controller) and IsGamepad(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x493152B20AE4F58], 0x0, nil, "MOUSE3")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_lb"], @"hash_0", nil, "MOUSE3")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC], "MWHEELDOWN", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_ltrig"], "MWHEELDOWN", function(element, menu, controller, model)
 		CoD.WZUtility.ZoomMap(controller, false, self.ScoreboardGameStatusMap)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC], 0x0, nil, "MWHEELDOWN")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_ltrig"], @"hash_0", nil, "MWHEELDOWN")
 		return false
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA], "MWHEELUP", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_rtrig"], "MWHEELUP", function(element, menu, controller, model)
 		CoD.WZUtility.ZoomMap(controller, true, self.ScoreboardGameStatusMap)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA], 0x0, nil, "MWHEELUP")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_rtrig"], @"hash_0", nil, "MWHEELUP")
 		return false
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0x6CE8023188D673F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_lstick_pressed"], nil, function(element, menu, controller, model)
 		CoD.WZUtility.CenterCursorOnPlayer(controller, self.ScoreboardGameStatusMap)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x6CE8023188D673F], 0x0, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_lstick_pressed"], @"hash_0", nil, nil)
 		return false
 	end, false)
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)

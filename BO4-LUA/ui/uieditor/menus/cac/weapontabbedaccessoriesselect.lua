@@ -13,7 +13,7 @@ LUI.createMenu.WeaponTabbedAccessoriesSelect = function(f1_arg0, f1_arg1)
 	self:playSound("menu_open", f1_arg0)
 	self.anyChildUsesUpdateState = true
 	local MenuFrame = CoD.GenericMenuFrame.new(f1_local1, f1_arg0, 0, 1, 0, 0, 0, 1, 0, 0)
-	MenuFrame.CommonHeader.subtitle.StageTitle:setText(Engine[0xF9F1239CFD921FE](CoD.WeaponOptionsUtility.GetWeaponPersonalizationHeader(f1_local1, f1_arg0, 0xF549344C4D372C)))
+	MenuFrame.CommonHeader.subtitle.StageTitle:setText(Engine[@"hash_4F9F1239CFD921FE"](CoD.WeaponOptionsUtility.GetWeaponPersonalizationHeader(f1_local1, f1_arg0, 0xF549344C4D372C)))
 	MenuFrame.CommonHeader.subtitle.subtitle:setText("")
 	self:addElement(MenuFrame)
 	self.MenuFrame = MenuFrame
@@ -40,26 +40,26 @@ LUI.createMenu.WeaponTabbedAccessoriesSelect = function(f1_arg0, f1_arg1)
 			InternalFrame:changeFrameWidget(f3_local0)
 		end
 	end)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		CoD.CACUtility.UpdateCustomClassModelIfModified(menu, controller)
 		GoBack(self, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 		return true
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], nil, function(element, menu, controller, model)
 		CoD.BaseUtility.UINoAction()
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x0, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"hash_0", nil, nil)
 		return false
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], nil, function(element, menu, controller, model)
 		CoD.BaseUtility.UINoAction()
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], 0x0, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], @"hash_0", nil, nil)
 		return false
 	end, false)
 	LUI.OverrideFunction_CallOriginalFirst(self, "close", function(element)

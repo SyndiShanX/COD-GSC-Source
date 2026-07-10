@@ -21,7 +21,7 @@ CoD.MatchStartWarningContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	self.BorderBakedSolid0 = BorderBakedSolid0
 	local text = CoD.ArabicAlignTextBox.new(f1_arg0, f1_arg1, 0, 1, 0, 0, 0, 0, 87.5, 120.5)
 	text:setScale(0.6, 0.6)
-	text.textBox:setText(LocalizeToUpperString(0xCCD3E1733C2481E))
+	text.textBox:setText(LocalizeToUpperString(@"hash_1CCD3E1733C2481E"))
 	text.textBox:setTTF("ttmussels_regular")
 	self:addElement(text)
 	self.text = text
@@ -52,7 +52,7 @@ CoD.MatchStartWarningContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	local Base = LUI.UIImage.new(0.5, 0.5, -55.5, 55.5, 0.5, 0.5, -55.5, 55.5)
 	Base:setRGB(ColorSet.T8__RED.r, ColorSet.T8__RED.g, ColorSet.T8__RED.b)
 	Base:setAlpha(0.3)
-	Base:setImage(RegisterImage(0xF52F421F52D0B40))
+	Base:setImage(RegisterImage(@"uie_ui_hud_common_draft_timer_backer"))
 	self:addElement(Base)
 	self.Base = Base
 	local timerText = CoD.ArabicAlignTextBox.new(f1_arg0, f1_arg1, 0.5, 0.5, -75, 75, 0.5, 0.5, -16.5, 16.5)
@@ -66,7 +66,7 @@ CoD.MatchStartWarningContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	self:addElement(timerText)
 	self.timerText = timerText
 	local Frame = LUI.UIImage.new(0.5, 0.5, -69, 69, 0.5, 0.5, -69, 69)
-	Frame:setImage(RegisterImage(0x1A4736A2632AE28))
+	Frame:setImage(RegisterImage(@"uie_ui_menu_popups_matchstart_circularframe"))
 	self:addElement(Frame)
 	self.Frame = Frame
 	local BoxL = LUI.UIImage.new(0, 0, 95.5, 96.5, 0, 0, 39.5, 40.5)

@@ -7,7 +7,7 @@ CoD.systemOverlay_Layout_Groups.__defaultWidth = 1920
 CoD.systemOverlay_Layout_Groups.__defaultHeight = 456
 CoD.systemOverlay_Layout_Groups.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
 	local self = LUI.UIElement.new(f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
-	CoD.CraftUtility.SetSlotCustomizationType(f1_arg1, Enum[0x63E5ADF9D95FC86][0x979B4C08E9D67B2])
+	CoD.CraftUtility.SetSlotCustomizationType(f1_arg1, Enum[@"customizationtype"][@"customization_type_emblem"])
 	self:setClass(CoD.systemOverlay_Layout_Groups)
 	self.id = "systemOverlay_Layout_Groups"
 	self.soundSet = "default"
@@ -45,7 +45,7 @@ CoD.systemOverlay_Layout_Groups.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	OptionList:setWidgetType(CoD.EmblemOptionsButton)
 	OptionList:setVerticalCount(3)
 	OptionList:setSpacing(10)
-	OptionList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	OptionList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	OptionList:linkToElementModel(self, "listDatasource", true, function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
@@ -53,7 +53,7 @@ CoD.systemOverlay_Layout_Groups.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 		end
 	end)
 	OptionList:linkToElementModel(OptionList, "disabled", true, function(model, f5_arg1)
-		CoD.Menu.UpdateButtonShownState(f5_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f5_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	OptionList:registerEventHandler("list_item_gain_focus", function(element, event)
 		local f6_local0 = nil
@@ -68,10 +68,10 @@ CoD.systemOverlay_Layout_Groups.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 		elseif element.super.gainFocus then
 			f7_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f7_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(OptionList, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(OptionList, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if not IsDisabled(element, controller) then
 			ProcessListAction(self, element, controller, menu)
 			return true
@@ -79,7 +79,7 @@ CoD.systemOverlay_Layout_Groups.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 		end
 	end, function(element, menu, controller)
 		if not IsDisabled(element, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false
@@ -102,8 +102,8 @@ CoD.systemOverlay_Layout_Groups.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	title:setRGB(ColorSet.T8__BEIGE__HEADER.r, ColorSet.T8__BEIGE__HEADER.g, ColorSet.T8__BEIGE__HEADER.b)
 	title:setTTF("ttmussels_demibold")
 	title:setLetterSpacing(6)
-	title:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	title:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	title:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	title:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	title:linkToElementModel(self, "title", true, function(model)
 		local f11_local0 = model:get()
 		if f11_local0 ~= nil then
@@ -124,8 +124,8 @@ CoD.systemOverlay_Layout_Groups.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self.categoryTypeImage = categoryTypeImage
 	local supporText = LUI.UIText.new(0, 0, 636, 1716, 0, 0, 96, 133)
 	supporText:setTTF("default")
-	supporText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	supporText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	supporText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	supporText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	supporText:subscribeToGlobalModel(f1_arg1, "GroupOverlayInfo", "infoText", function(model)
 		local f13_local0 = model:get()
 		if f13_local0 ~= nil then
@@ -136,8 +136,8 @@ CoD.systemOverlay_Layout_Groups.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self.supporText = supporText
 	local groupName = LUI.UIText.new(0, 0, 327, 527, 0, 0, 392.5, 429.5)
 	groupName:setTTF("default")
-	groupName:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	groupName:setAlignment(Enum[0x7A5123B654282D2][0x70510683C22104B])
+	groupName:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	groupName:setAlignment(Enum[@"luialignment"][@"lui_alignment_bottom"])
 	groupName:linkToElementModel(self, "groupName", true, function(model)
 		local f14_local0 = model:get()
 		if f14_local0 ~= nil then
@@ -157,7 +157,7 @@ CoD.systemOverlay_Layout_Groups.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	})
 	local f1_local10 = ImagePrompt
 	local f1_local11 = ImagePrompt.subscribeToModel
-	local f1_local12 = Engine[0x8DF2E5447F384B9]()
+	local f1_local12 = Engine[@"getglobalmodel"]()
 	f1_local11(f1_local10, f1_local12["GroupOverlayInfo.warningText"], function(f16_arg0)
 		f1_arg0:updateElementState(ImagePrompt, {
 			name = "model_validation",
@@ -167,7 +167,7 @@ CoD.systemOverlay_Layout_Groups.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 			modelName = "GroupOverlayInfo.warningText",
 		})
 	end, false)
-	ImagePrompt.ImagePromptInternal.warningIcon:setImage(RegisterImage(0xED86F0CE89E7B99))
+	ImagePrompt.ImagePromptInternal.warningIcon:setImage(RegisterImage(@"uie_t7_icon_menu_invite_fail"))
 	ImagePrompt:subscribeToGlobalModel(f1_arg1, "GroupOverlayInfo", "warningText", function(model)
 		local f17_local0 = model:get()
 		if f17_local0 ~= nil then

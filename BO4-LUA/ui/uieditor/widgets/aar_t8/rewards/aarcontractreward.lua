@@ -53,13 +53,13 @@ CoD.AARContractReward.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	AARRewardContractDesc:linkToElementModel(self, "contractDesc", true, function(model)
 		local f5_local0 = model:get()
 		if f5_local0 ~= nil then
-			AARRewardContractDesc.Description:setText(Engine[0xF9F1239CFD921FE](f5_local0))
+			AARRewardContractDesc.Description:setText(Engine[@"hash_4F9F1239CFD921FE"](f5_local0))
 		end
 	end)
 	AARRewardContractDesc:linkToElementModel(self, "contractName", true, function(model)
 		local f6_local0 = model:get()
 		if f6_local0 ~= nil then
-			AARRewardContractDesc.Title:setText(Engine[0xF9F1239CFD921FE](f6_local0))
+			AARRewardContractDesc.Title:setText(Engine[@"hash_4F9F1239CFD921FE"](f6_local0))
 		end
 	end)
 	self:addElement(AARRewardContractDesc)
@@ -92,7 +92,7 @@ CoD.AARContractReward.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	AARRewardsVariableContractReward:linkToElementModel(self, "contractRewardAmount", true, function(model)
 		local f9_local0 = model:get()
 		if f9_local0 ~= nil then
-			AARRewardsVariableContractReward.XP:setText(Engine[0xF9F1239CFD921FE](f9_local0))
+			AARRewardsVariableContractReward.XP:setText(Engine[@"hash_4F9F1239CFD921FE"](f9_local0))
 		end
 	end)
 	self:addElement(AARRewardsVariableContractReward)
@@ -101,7 +101,7 @@ CoD.AARContractReward.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	self:addElement(VerticalListSpacer5)
 	self.VerticalListSpacer5 = VerticalListSpacer5
 	local InfoDotline2 = LUI.UIImage.new(0.5, 0.5, -196, 184, 0, 0, 679, 683)
-	InfoDotline2:setImage(RegisterImage(0x805FC715189E506))
+	InfoDotline2:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_info_dotline"))
 	self:addElement(InfoDotline2)
 	self.InfoDotline2 = InfoDotline2
 	self:mergeStateConditions({

@@ -16,14 +16,14 @@ CoD.WarzoneContextualArmorStashItems.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	InventoryEquipmentLarge:setLeftRight(0.5, 0.5, 12, 82)
 	InventoryEquipmentLarge:setTopBottom(1, 1, -74, -4)
 	InventoryEquipmentLarge:setWidgetType(CoD.WarzoneQuickInventoryShardItem)
-	InventoryEquipmentLarge:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	InventoryEquipmentLarge:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	self:addElement(InventoryEquipmentLarge)
 	self.InventoryEquipmentLarge = InventoryEquipmentLarge
 	local InventoryEquipmentSmall = LUI.GridLayout.new(f1_arg0, f1_arg1, false, 0, 0, 2, 0, nil, nil, false, false, false, false)
 	InventoryEquipmentSmall:setLeftRight(0.5, 0.5, 25, 41)
 	InventoryEquipmentSmall:setTopBottom(1, 1, -24, -8)
 	InventoryEquipmentSmall:setWidgetType(CoD.WarzoneInventoryItemGrayBox)
-	InventoryEquipmentSmall:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	InventoryEquipmentSmall:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	self:addElement(InventoryEquipmentSmall)
 	self.InventoryEquipmentSmall = InventoryEquipmentSmall
 	local f1_local3 = nil
@@ -32,7 +32,7 @@ CoD.WarzoneContextualArmorStashItems.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	InventoryEquipmentStashCount:setTopBottom(1, 1, 77, 101)
 	InventoryEquipmentStashCount:setAlpha(0)
 	InventoryEquipmentStashCount:setWidgetType(CoD.WarzoneArmorStashCount_PC)
-	InventoryEquipmentStashCount:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	InventoryEquipmentStashCount:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	self:addElement(InventoryEquipmentStashCount)
 	self.InventoryEquipmentStashCount = InventoryEquipmentStashCount
 	self:mergeStateConditions({
@@ -57,7 +57,7 @@ CoD.WarzoneContextualArmorStashItems.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	})
 	local f1_local5 = self
 	local f1_local6 = self.subscribeToModel
-	local f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local6(f1_local5, f1_local7["hudItems.inventory.open"], function(f5_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -69,7 +69,7 @@ CoD.WarzoneContextualArmorStashItems.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	end, false)
 	f1_local5 = self
 	f1_local6 = self.subscribeToModel
-	f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local6(f1_local5, f1_local7.PlayerSettingsUpdate, function(f6_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -85,7 +85,7 @@ CoD.WarzoneContextualArmorStashItems.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	end)
 	f1_local5 = self
 	f1_local6 = self.subscribeToModel
-	f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local6(f1_local5, f1_local7.LastInput, function(f8_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

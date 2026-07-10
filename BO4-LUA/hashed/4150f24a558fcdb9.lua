@@ -8,18 +8,18 @@ CoD.zm_red_available_item_text_internal.new = function(f1_arg0, f1_arg1, f1_arg2
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local ItemText = LUI.UIText.new(0, 0, 145, 252, 0, 0, 0, 20)
-	ItemText:setText(Engine[0xF9F1239CFD921FE](0xBF4567204B3D868))
+	ItemText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_7BF4567204B3D868"))
 	ItemText:setTTF("skorzhen")
-	ItemText:setMaterial(LUI.UIImage.GetCachedMaterial(0x71E049B161CD00A))
-	ItemText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	ItemText:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	ItemText:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_171E049B161CD00A"))
+	ItemText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	ItemText:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	self:addElement(ItemText)
 	self.ItemText = ItemText
 	local AvailableItemText = LUI.UIText.new(0, 0, 0, 145, 0, 0, 0, 20)
-	AvailableItemText:setText(Engine[0xF9F1239CFD921FE](0x7F2DBA0199373EE))
+	AvailableItemText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_27F2DBA0199373EE"))
 	AvailableItemText:setTTF("skorzhen")
-	AvailableItemText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	AvailableItemText:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	AvailableItemText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	AvailableItemText:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	self:addElement(AvailableItemText)
 	self.AvailableItemText = AvailableItemText
 	self:mergeStateConditions({

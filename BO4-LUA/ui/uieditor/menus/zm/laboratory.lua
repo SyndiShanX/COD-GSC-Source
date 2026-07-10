@@ -93,8 +93,8 @@ LUI.createMenu.Laboratory = function(f1_arg0, f1_arg1)
 			end,
 		},
 	})
-	TransactionDeepLinkButton.DirectorCustomStartButton.MiddleText:setText(LocalizeToUpperString(0x4031C820A02E7BA))
-	TransactionDeepLinkButton.DirectorCustomStartButton.MiddleTextFocus:setText(LocalizeToUpperString(0x4031C820A02E7BA))
+	TransactionDeepLinkButton.DirectorCustomStartButton.MiddleText:setText(LocalizeToUpperString(@"hash_44031C820A02E7BA"))
+	TransactionDeepLinkButton.DirectorCustomStartButton.MiddleTextFocus:setText(LocalizeToUpperString(@"hash_44031C820A02E7BA"))
 	TransactionDeepLinkButton:registerEventHandler("gain_focus", function(element, event)
 		local f6_local0 = nil
 		if element.gainFocus then
@@ -102,10 +102,10 @@ LUI.createMenu.Laboratory = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f6_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_none"])
 		return f6_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(TransactionDeepLinkButton, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "MOUSE1", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(TransactionDeepLinkButton, f1_arg0, Enum[@"luibutton"][@"lui_key_none"], "MOUSE1", function(element, menu, controller, model)
 		if CoD.PCKoreaUtility.ShowTransactionHistoryButton() then
 			CoD.PCKoreaUtility.OpenTransactionsDeepLinkLab(controller)
 			return true
@@ -113,13 +113,13 @@ LUI.createMenu.Laboratory = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if CoD.PCKoreaUtility.ShowTransactionHistoryButton() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "MOUSE1")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "MOUSE1")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(TransactionDeepLinkButton, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "ui_confirm", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(TransactionDeepLinkButton, f1_arg0, Enum[@"luibutton"][@"lui_key_none"], "ui_confirm", function(element, menu, controller, model)
 		if CoD.PCKoreaUtility.ShowTransactionHistoryButton() then
 			CoD.PCKoreaUtility.OpenTransactionsDeepLinkLab(controller)
 			return true
@@ -127,7 +127,7 @@ LUI.createMenu.Laboratory = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if CoD.PCKoreaUtility.ShowTransactionHistoryButton() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "ui_confirm")
 			return false
 		else
 			return false
@@ -175,7 +175,7 @@ LUI.createMenu.Laboratory = function(f1_arg0, f1_arg1)
 	})
 	local f1_local10 = self
 	local f1_local11 = self.subscribeToModel
-	local f1_local12 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	local f1_local12 = Engine[@"getmodelforcontroller"](f1_arg0)
 	f1_local11(f1_local10, f1_local12["Laboratory.animState"], function(f15_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",
@@ -187,44 +187,44 @@ LUI.createMenu.Laboratory = function(f1_arg0, f1_arg1)
 	end, false)
 	f1_local10 = self
 	f1_local11 = self.subscribeToModel
-	f1_local12 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	f1_local12 = Engine[@"getmodelforcontroller"](f1_arg0)
 	f1_local11(f1_local10, f1_local12["Laboratory.animState"], function(f16_arg0, f16_arg1)
-		CoD.Menu.UpdateButtonShownState(f16_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
-		CoD.Menu.UpdateButtonShownState(f16_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A])
-		CoD.Menu.UpdateButtonShownState(f16_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(f16_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
-		CoD.Menu.UpdateButtonShownState(f16_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f16_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC])
+		CoD.Menu.UpdateButtonShownState(f16_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_none"])
+		CoD.Menu.UpdateButtonShownState(f16_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"])
+		CoD.Menu.UpdateButtonShownState(f16_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(f16_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+		CoD.Menu.UpdateButtonShownState(f16_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f16_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_ltrig"])
 	end, false)
 	f1_local10 = self
 	f1_local11 = self.subscribeToModel
-	f1_local12 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	f1_local12 = Engine[@"getmodelforcontroller"](f1_arg0)
 	f1_local11(f1_local10, f1_local12["Laboratory.disableInput"], function(f17_arg0, f17_arg1)
-		CoD.Menu.UpdateButtonShownState(f17_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
-		CoD.Menu.UpdateButtonShownState(f17_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A])
-		CoD.Menu.UpdateButtonShownState(f17_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
-		CoD.Menu.UpdateButtonShownState(f17_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+		CoD.Menu.UpdateButtonShownState(f17_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_none"])
+		CoD.Menu.UpdateButtonShownState(f17_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"])
+		CoD.Menu.UpdateButtonShownState(f17_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+		CoD.Menu.UpdateButtonShownState(f17_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 	end, false)
 	f1_local10 = self
 	f1_local11 = self.subscribeToModel
-	f1_local12 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	f1_local12 = Engine[@"getmodelforcontroller"](f1_arg0)
 	f1_local11(f1_local10, f1_local12["Laboratory.skipReady"], function(f18_arg0, f18_arg1)
-		CoD.Menu.UpdateButtonShownState(f18_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
-		CoD.Menu.UpdateButtonShownState(f18_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(f18_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f18_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC])
+		CoD.Menu.UpdateButtonShownState(f18_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_none"])
+		CoD.Menu.UpdateButtonShownState(f18_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(f18_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f18_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_ltrig"])
 	end, false)
 	self:appendEventHandler("input_source_changed", function(f19_arg0, f19_arg1)
 		f19_arg1.menu = f19_arg1.menu or f1_local1
-		CoD.Menu.UpdateButtonShownState(f19_arg0, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f19_arg0, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC])
+		CoD.Menu.UpdateButtonShownState(f19_arg0, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f19_arg0, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_ltrig"])
 	end)
 	f1_local10 = self
 	f1_local11 = self.subscribeToModel
-	f1_local12 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	f1_local12 = Engine[@"getmodelforcontroller"](f1_arg0)
 	f1_local11(f1_local10, f1_local12.LastInput, function(f20_arg0, f20_arg1)
-		CoD.Menu.UpdateButtonShownState(f20_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f20_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC])
+		CoD.Menu.UpdateButtonShownState(f20_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f20_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_ltrig"])
 	end, false)
 	self:registerEventHandler("occlusion_change", function(self, event)
 		local f21_local0 = nil
@@ -239,7 +239,7 @@ LUI.createMenu.Laboratory = function(f1_arg0, f1_arg1)
 		end
 		return f21_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "ESCAPE", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_none"], "ESCAPE", function(element, menu, controller, model)
 		if CoD.ZMLaboratoryUtility.IsInAnimState1(controller, CoD.ZMLaboratoryUtility.LabAnimState.NOT_PLAYING) and CoD.ModelUtility.IsModelValueEqualTo(controller, "Laboratory.disableInput", 0) then
 			DelayGoBack(menu, controller, 200)
 			SetControllerModelValue(controller, "Laboratory.disableInput", 1)
@@ -254,19 +254,19 @@ LUI.createMenu.Laboratory = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if CoD.ZMLaboratoryUtility.IsInAnimState1(controller, CoD.ZMLaboratoryUtility.LabAnimState.NOT_PLAYING) and CoD.ModelUtility.IsModelValueEqualTo(controller, "Laboratory.disableInput", 0) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x70A9FDC87CD3D48, nil, "ESCAPE")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"menu/back", nil, "ESCAPE")
 			return true
 		elseif CoD.ZMLaboratoryUtility.IsInAnimState1(controller, CoD.ZMLaboratoryUtility.LabAnimState.MIX_AGAIN) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x70A9FDC87CD3D48, nil, "ESCAPE")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"menu/back", nil, "ESCAPE")
 			return true
 		elseif CoD.ModelUtility.IsModelValueEqualToEnum(controller, "Laboratory.animState", CoD.ZMLaboratoryUtility.LabAnimState.PLAYING) and CoD.ModelUtility.IsModelValueTrue(controller, "Laboratory.skipReady") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0xFEC7D3E29D7EBCC, nil, "ESCAPE")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"zmui/skip", nil, "ESCAPE")
 			return true
 		else
 			return false
 		end
 	end, true)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		if CoD.ZMLaboratoryUtility.IsInAnimState1(controller, CoD.ZMLaboratoryUtility.LabAnimState.NOT_PLAYING) and CoD.ModelUtility.IsModelValueEqualTo(controller, "Laboratory.disableInput", 0) then
 			DelayGoBack(menu, controller, 200)
 			SetControllerModelValue(controller, "Laboratory.disableInput", 1)
@@ -277,7 +277,7 @@ LUI.createMenu.Laboratory = function(f1_arg0, f1_arg1)
 		else
 		end
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 		if CoD.ZMLaboratoryUtility.IsInAnimState1(controller, CoD.ZMLaboratoryUtility.LabAnimState.NOT_PLAYING) and CoD.ModelUtility.IsModelValueEqualTo(controller, "Laboratory.disableInput", 0) then
 			return true
 		elseif CoD.ZMLaboratoryUtility.IsInAnimState1(controller, CoD.ZMLaboratoryUtility.LabAnimState.MIX_AGAIN) then
@@ -286,7 +286,7 @@ LUI.createMenu.Laboratory = function(f1_arg0, f1_arg1)
 			return false
 		end
 	end, true)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if not IsPC() and CoD.ModelUtility.IsModelValueEqualToEnum(controller, "Laboratory.animState", CoD.ZMLaboratoryUtility.LabAnimState.PLAYING) and CoD.ModelUtility.IsModelValueTrue(controller, "Laboratory.skipReady") then
 			SendClientScriptNotify(controller, "skip_to_reveal", "")
 			return true
@@ -294,13 +294,13 @@ LUI.createMenu.Laboratory = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if not IsPC() and CoD.ModelUtility.IsModelValueEqualToEnum(controller, "Laboratory.animState", CoD.ZMLaboratoryUtility.LabAnimState.PLAYING) and CoD.ModelUtility.IsModelValueTrue(controller, "Laboratory.skipReady") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xFEC7D3E29D7EBCC, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"zmui/skip", nil, nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], "ui_contextual_1", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], "ui_contextual_1", function(element, menu, controller, model)
 		if CoD.ModelUtility.IsModelValueEqualToEnum(controller, "Laboratory.animState", CoD.ZMLaboratoryUtility.LabAnimState.NOT_PLAYING) and CoD.ModelUtility.IsModelValueEqualTo(controller, "Laboratory.disableInput", 0) and IsBooleanDvarSet("laboratory_codpoints_enabled") and not CoD.BlackMarketUtility.IsMenuOccluded(menu) then
 			OpenPopup(self, "PurchaseCodPoints", controller, nil)
 			UpdateAllMenuButtonPrompts(menu, controller)
@@ -309,13 +309,13 @@ LUI.createMenu.Laboratory = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if CoD.ModelUtility.IsModelValueEqualToEnum(controller, "Laboratory.animState", CoD.ZMLaboratoryUtility.LabAnimState.NOT_PLAYING) and CoD.ModelUtility.IsModelValueEqualTo(controller, "Laboratory.disableInput", 0) and IsBooleanDvarSet("laboratory_codpoints_enabled") and not CoD.BlackMarketUtility.IsMenuOccluded(menu) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], 0x63D5409DEC36DFA, nil, "ui_contextual_1")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], @"hash_263D5409DEC36DFA", nil, "ui_contextual_1")
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], "ui_contextual_2", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], "ui_contextual_2", function(element, menu, controller, model)
 		if CoD.ModelUtility.IsModelValueEqualToEnum(controller, "Laboratory.animState", CoD.ZMLaboratoryUtility.LabAnimState.NOT_PLAYING) and CoD.ModelUtility.IsModelValueEqualTo(controller, "Laboratory.disableInput", 0) and IsBooleanDvarSet("laboratory_codpoints_enabled") and not CoD.BlackMarketUtility.IsMenuOccluded(menu) then
 			OpenPopup(self, "PurchasePlasma", controller, nil)
 			UpdateAllMenuButtonPrompts(menu, controller)
@@ -327,16 +327,16 @@ LUI.createMenu.Laboratory = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if CoD.ModelUtility.IsModelValueEqualToEnum(controller, "Laboratory.animState", CoD.ZMLaboratoryUtility.LabAnimState.NOT_PLAYING) and CoD.ModelUtility.IsModelValueEqualTo(controller, "Laboratory.disableInput", 0) and IsBooleanDvarSet("laboratory_codpoints_enabled") and not CoD.BlackMarketUtility.IsMenuOccluded(menu) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x29616DF01C4B70B, nil, "ui_contextual_2")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"hash_29616DF01C4B70B", nil, "ui_contextual_2")
 			return true
 		elseif IsPC() and IsGamepad(controller) and CoD.ModelUtility.IsModelValueEqualToEnum(controller, "Laboratory.animState", CoD.ZMLaboratoryUtility.LabAnimState.PLAYING) and CoD.ModelUtility.IsModelValueTrue(controller, "Laboratory.skipReady") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0xFEC7D3E29D7EBCC, nil, "ui_contextual_2")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"zmui/skip", nil, "ui_contextual_2")
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC], "ui_confirm", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_ltrig"], "ui_confirm", function(element, menu, controller, model)
 		if IsPC() and not IsGamepad(controller) and CoD.ModelUtility.IsModelValueEqualToEnum(controller, "Laboratory.animState", CoD.ZMLaboratoryUtility.LabAnimState.PLAYING) and CoD.ModelUtility.IsModelValueTrue(controller, "Laboratory.skipReady") then
 			SendClientScriptNotify(controller, "skip_to_reveal", "")
 			return true
@@ -344,7 +344,7 @@ LUI.createMenu.Laboratory = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if IsPC() and not IsGamepad(controller) and CoD.ModelUtility.IsModelValueEqualToEnum(controller, "Laboratory.animState", CoD.ZMLaboratoryUtility.LabAnimState.PLAYING) and CoD.ModelUtility.IsModelValueTrue(controller, "Laboratory.skipReady") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC], 0xFEC7D3E29D7EBCC, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_ltrig"], @"zmui/skip", nil, "ui_confirm")
 			return true
 		else
 			return false

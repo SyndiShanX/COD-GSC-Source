@@ -9,20 +9,20 @@ CoD.callingcards_loot2_vikingbattles_characters.new = function(f1_arg0, f1_arg1,
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local helmet = LUI.UIImage.new(0, 0, 0, 152, 0, 0, 0, 184)
-	helmet:setImage(RegisterImage(0xF1B80FD6E4AF03C))
+	helmet:setImage(RegisterImage(@"uie_ui_menu_callingcards_vikingbattles_helm"))
 	self:addElement(helmet)
 	self.helmet = helmet
 	local character02lefthand = LUI.UIImage.new(0, 0, 301.5, 421.5, 0, 0, 59, 139)
-	character02lefthand:setImage(RegisterImage(0x283E927768570A6))
+	character02lefthand:setImage(RegisterImage(@"uie_ui_menu_callingcards_vikingbattles_char2lefthand"))
 	self:addElement(character02lefthand)
 	self.character02lefthand = character02lefthand
 	local character02 = LUI.UIImage.new(0, 0, 114, 356, 0, 0, 50, 450)
 	character02:setZRot(51)
-	character02:setImage(RegisterImage(0xDC302B66FA10222))
+	character02:setImage(RegisterImage(@"uie_ui_menu_callingcards_vikingbattles_char2"))
 	self:addElement(character02)
 	self.character02 = character02
 	local character01 = LUI.UIImage.new(0, 0, 163.5, 747.5, 0, 0, 0, 360)
-	character01:setImage(RegisterImage(0xDC301B66FA1006F))
+	character01:setImage(RegisterImage(@"uie_ui_menu_callingcards_vikingbattles_char1"))
 	self:addElement(character01)
 	self.character01 = character01
 	local character02righthand = CoD.callingcards_loot2_vikingbattles_righthand.new(f1_arg0, f1_arg1, 0, 0, 119, 129, 0, 0, 267, 277)

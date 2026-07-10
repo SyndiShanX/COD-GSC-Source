@@ -15,24 +15,24 @@ CoD.AARScoreWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	local ScoreLabel = LUI.UIText.new(0, 0, 18, 318, 0, 0, 12, 33)
 	ScoreLabel:setRGB(ColorSet.PlayerYellow.r, ColorSet.PlayerYellow.g, ColorSet.PlayerYellow.b)
 	ScoreLabel:setAlpha(0.2)
-	ScoreLabel:setText(LocalizeToUpperString(0x50C861EA97BB6F5))
+	ScoreLabel:setText(LocalizeToUpperString(@"hash_50C861EA97BB6F5"))
 	ScoreLabel:setTTF("dinnext_regular")
 	ScoreLabel:setLetterSpacing(2)
-	ScoreLabel:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	ScoreLabel:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	ScoreLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	ScoreLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(ScoreLabel)
 	self.ScoreLabel = ScoreLabel
 	local ScoreGlow = LUI.UIText.new(0, 0, 18, 318, 0, 0, 42, 122)
 	ScoreGlow:setRGB(ColorSet.PlayerYellow.r, ColorSet.PlayerYellow.g, ColorSet.PlayerYellow.b)
 	ScoreGlow:setAlpha(0.4)
 	ScoreGlow:setTTF("ttmussels_regular")
-	ScoreGlow:setMaterial(LUI.UIImage.GetCachedMaterial(0x90D57B1E92D39D7))
+	ScoreGlow:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_90D57B1E92D39D7"))
 	ScoreGlow:setShaderVector(0, 0.3, 0, 0, 0)
 	ScoreGlow:setShaderVector(1, 0, 0, 0, 0)
 	ScoreGlow:setShaderVector(2, 1, 0, 0, 0.8)
 	ScoreGlow:setLetterSpacing(2)
-	ScoreGlow:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	ScoreGlow:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	ScoreGlow:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	ScoreGlow:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	ScoreGlow:linkToElementModel(self, "score", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -46,7 +46,7 @@ CoD.AARScoreWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	Score:setAlpha(0.8)
 	Score:setTTF("ttmussels_regular")
 	Score:setLetterSpacing(2)
-	Score:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	Score:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	Score:linkToElementModel(self, "score", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -73,7 +73,7 @@ CoD.AARScoreWidget.__resetProperties = function(f5_arg0)
 	f5_arg0.ScoreGlow:completeAnimation()
 	f5_arg0.ScoreLabel:completeAnimation()
 	f5_arg0.ScoreGlow:setAlpha(0.4)
-	f5_arg0.ScoreLabel:setText(LocalizeToUpperString(0x50C861EA97BB6F5))
+	f5_arg0.ScoreLabel:setText(LocalizeToUpperString(@"hash_50C861EA97BB6F5"))
 end
 CoD.AARScoreWidget.__clipsPerState = {
 	DefaultState = {
@@ -86,11 +86,11 @@ CoD.AARScoreWidget.__clipsPerState = {
 						f9_arg0:beginAnimation(500)
 						f9_arg0:registerEventHandler("transition_complete_keyframe", f6_arg0.clipFinished)
 					end
-					f8_arg0:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f8_arg0:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 					f8_arg0:setAlpha(0.4)
 					f8_arg0:registerEventHandler("transition_complete_keyframe", f8_local0)
 				end
-				f6_arg0.ScoreGlow:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f6_arg0.ScoreGlow:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 				f6_arg0.ScoreGlow:setAlpha(0.55)
 				f6_arg0.ScoreGlow:registerEventHandler("interrupted_keyframe", f6_arg0.clipInterrupted)
 				f6_arg0.ScoreGlow:registerEventHandler("transition_complete_keyframe", f7_local0)
@@ -106,7 +106,7 @@ CoD.AARScoreWidget.__clipsPerState = {
 			f10_arg0:__resetProperties()
 			f10_arg0:setupElementClipCounter(1)
 			f10_arg0.ScoreLabel:completeAnimation()
-			f10_arg0.ScoreLabel:setText(LocalizeToUpperString(0x351AF85574BC384))
+			f10_arg0.ScoreLabel:setText(LocalizeToUpperString(@"mpui/cash"))
 			f10_arg0.clipFinished(f10_arg0.ScoreLabel)
 		end,
 	},

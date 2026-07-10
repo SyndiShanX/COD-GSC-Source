@@ -9,21 +9,21 @@ CoD.AARRewardBrackets.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	local Corner3 = LUI.UIImage.new(0, 0, 0, 12, 1, 1, -12, 0)
 	Corner3:setXRot(180)
 	Corner3:setYRot(180)
-	Corner3:setImage(RegisterImage(0xBCB7451C0F2DE33))
+	Corner3:setImage(RegisterImage(@"uie_ui_hud_notifications_bracket_topright"))
 	self:addElement(Corner3)
 	self.Corner3 = Corner3
 	local Corner4 = LUI.UIImage.new(1, 1, -12, 0, 1, 1, -12, 0)
 	Corner4:setXRot(180)
-	Corner4:setImage(RegisterImage(0xBCB7451C0F2DE33))
+	Corner4:setImage(RegisterImage(@"uie_ui_hud_notifications_bracket_topright"))
 	self:addElement(Corner4)
 	self.Corner4 = Corner4
 	local Corner2 = LUI.UIImage.new(1, 1, -12, 0, 0, 0, 0, 12)
-	Corner2:setImage(RegisterImage(0xBCB7451C0F2DE33))
+	Corner2:setImage(RegisterImage(@"uie_ui_hud_notifications_bracket_topright"))
 	self:addElement(Corner2)
 	self.Corner2 = Corner2
 	local Corner = LUI.UIImage.new(0, 0, 0, 12, 0, 0, 0, 12)
 	Corner:setYRot(180)
-	Corner:setImage(RegisterImage(0xBCB7451C0F2DE33))
+	Corner:setImage(RegisterImage(@"uie_ui_hud_notifications_bracket_topright"))
 	self:addElement(Corner)
 	self.Corner = Corner
 	if PostLoadFunc then

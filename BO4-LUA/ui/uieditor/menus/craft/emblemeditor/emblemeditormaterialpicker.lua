@@ -17,7 +17,7 @@ LUI.createMenu.EmblemEditorMaterialPicker = function(f1_arg0, f1_arg1)
 	self.anyChildUsesUpdateState = true
 	f1_local1:addElementToPendingUpdateStateList(self)
 	local Background = LUI.UIImage.new(0, 1, 3, 3, 0.5, 1.5, -540, -540)
-	Background:setImage(RegisterImage(0xEF427A6CB5D6885))
+	Background:setImage(RegisterImage(@"uie_t7_mp_menu_cac_version6_backdrop720p"))
 	self:addElement(Background)
 	self.Background = Background
 	local ScreenBkgd = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
@@ -42,19 +42,19 @@ LUI.createMenu.EmblemEditorMaterialPicker = function(f1_arg0, f1_arg1)
 		{
 			stateName = "FixedScale",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg0, "Emblem.EmblemProperties.materialScaleMode", Enum[0x46CD5114B8A5BFC][0x519A07F3DC9EF2D])
+				return CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg0, "Emblem.EmblemProperties.materialScaleMode", Enum[@"customizationscaletype"][@"customization_scale_type_fixed"])
 			end,
 		},
 		{
 			stateName = "FreeScale",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg0, "Emblem.EmblemProperties.materialScaleMode", Enum[0x46CD5114B8A5BFC][0x28641F0558446C7])
+				return CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg0, "Emblem.EmblemProperties.materialScaleMode", Enum[@"customizationscaletype"][@"customization_scale_type_free"])
 			end,
 		},
 	})
 	local actionsListPC = materialControls
 	local f1_local9 = materialControls.subscribeToModel
-	local EmblemEditorFrame = Engine[0x4DF5CFBC1771947](f1_arg0)
+	local EmblemEditorFrame = Engine[@"getmodelforcontroller"](f1_arg0)
 	f1_local9(actionsListPC, EmblemEditorFrame["Emblem.EmblemProperties.materialScaleMode"], function(f5_arg0)
 		f1_local1:updateElementState(materialControls, {
 			name = "model_validation",
@@ -74,16 +74,16 @@ LUI.createMenu.EmblemEditorMaterialPicker = function(f1_arg0, f1_arg1)
 	actionsListPC:setWidgetType(CoD.CraftActionHeader)
 	actionsListPC:setVerticalCount(10)
 	actionsListPC:setSpacing(0)
-	actionsListPC:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	actionsListPC:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	actionsListPC:setDataSource("CraftMaterialActionsPC")
 	self:addElement(actionsListPC)
 	self.actionsListPC = actionsListPC
 	EmblemEditorFrame = CoD.GenericMenuFrame.new(f1_local1, f1_arg0, 0, 1, 0, 0, 0, 1, 0, 0)
-	EmblemEditorFrame.CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(0xE8932DB4373E47F))
+	EmblemEditorFrame.CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(@"hash_7E8932DB4373E47F"))
 	EmblemEditorFrame:subscribeToGlobalModel(f1_arg0, "LobbyRoot", "lobbyTitle", function(model)
 		local f6_local0 = model:get()
 		if f6_local0 ~= nil then
-			EmblemEditorFrame.CommonHeader.subtitle.subtitle:setText(Engine[0xF9F1239CFD921FE](f6_local0))
+			EmblemEditorFrame.CommonHeader.subtitle.subtitle:setText(Engine[@"hash_4F9F1239CFD921FE"](f6_local0))
 		end
 	end)
 	self:addElement(EmblemEditorFrame)
@@ -108,7 +108,7 @@ LUI.createMenu.EmblemEditorMaterialPicker = function(f1_arg0, f1_arg1)
 	end)
 	local f1_local11 = self
 	local f1_local12 = self.subscribeToModel
-	local f1_local13 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	local f1_local13 = Engine[@"getmodelforcontroller"](f1_arg0)
 	f1_local12(f1_local11, f1_local13.LastInput, function(f9_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",
@@ -118,7 +118,7 @@ LUI.createMenu.EmblemEditorMaterialPicker = function(f1_arg0, f1_arg1)
 			modelName = "LastInput",
 		})
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		if IsPC() then
 			GoBack(self, controller)
 			ClearMenuSavedState(menu)
@@ -130,28 +130,28 @@ LUI.createMenu.EmblemEditorMaterialPicker = function(f1_arg0, f1_arg1)
 			return true
 		end
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 		return true
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_ltrig"], nil, function(element, menu, controller, model)
 		CoD.CraftUtility.EmblemChooseMaterial_UpdateMaterialAngleByStep(self, element, -1, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC], 0x0, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_ltrig"], @"hash_0", nil, nil)
 		return false
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_rtrig"], nil, function(element, menu, controller, model)
 		CoD.CraftUtility.EmblemChooseMaterial_UpdateMaterialAngleByStep(self, element, 1, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA], 0x0, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_rtrig"], @"hash_0", nil, nil)
 		return false
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x29E5695FF1401AD], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_rstick_pressed"], nil, function(element, menu, controller, model)
 		CoD.CraftUtility.EmblemChooseMaterial_ToggleScaleMode(self, element, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x29E5695FF1401AD], 0x0, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_rstick_pressed"], @"hash_0", nil, nil)
 		return false
 	end, false)
 	if CoD.isPC then

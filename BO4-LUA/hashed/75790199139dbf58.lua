@@ -21,7 +21,7 @@ CoD.StartMenu_Options_PC_Voice_VoiceBar.new = function(f1_arg0, f1_arg1, f1_arg2
 	Maximum:setText(LocalizeToUpperString(0x4EF66575DDB929))
 	Maximum:setTTF("dinnext_regular")
 	Maximum:setLetterSpacing(1)
-	Maximum:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
+	Maximum:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
 	self:addElement(Maximum)
 	self.Maximum = Maximum
 	local OverflowIndicator1 = LUI.UIImage.new(0.5, 0.5, 342.5, 347.5, 0.5, 0.5, -3, 5)
@@ -39,17 +39,17 @@ CoD.StartMenu_Options_PC_Voice_VoiceBar.new = function(f1_arg0, f1_arg1, f1_arg2
 	local OverflowIndicator4 = LUI.UIImage.new(0.5, 0.5, 337.5, 367.5, 0.5, 0.5, -34, -4)
 	OverflowIndicator4:setRGB(0.76, 0.76, 0.76)
 	OverflowIndicator4:setAlpha(0.44)
-	OverflowIndicator4:setImage(RegisterImage(0x7F2DD388A81D61))
+	OverflowIndicator4:setImage(RegisterImage(@"uie_warning_small"))
 	self:addElement(OverflowIndicator4)
 	self.OverflowIndicator4 = OverflowIndicator4
 	local TextBox = LUI.UIText.new(0.5, 0.5, -252.5, 171.5, 0.5, 0.5, -23.5, -6.5)
 	TextBox:setRGB(0.76, 0.76, 0.76)
 	TextBox:setAlpha(0.6)
-	TextBox:setText(LocalizeToUpperString(0x54E2339D1B444AD))
+	TextBox:setText(LocalizeToUpperString(@"hash_554E2339D1B444AD"))
 	TextBox:setTTF("dinnext_regular")
 	TextBox:setLetterSpacing(1)
-	TextBox:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	TextBox:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	TextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	TextBox:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	self:addElement(TextBox)
 	self.TextBox = TextBox
 	local TooltipFocus = CoD.emptyFocusable.new(f1_arg0, f1_arg1, 0, 0, 0, 366, 0, 0, 0, 62)
@@ -73,15 +73,15 @@ CoD.StartMenu_Options_PC_Voice_VoiceBar.new = function(f1_arg0, f1_arg1, f1_arg2
 	local MicImage = LUI.UIImage.new(0.5, 0.5, -299, -247, 0.5, 0.5, -26, 26)
 	MicImage:setRGB(0.76, 0.76, 0.76)
 	MicImage:setAlpha(0.8)
-	MicImage:setImage(RegisterImage(0x493FFCC947D770A))
+	MicImage:setImage(RegisterImage(@"uie_mic"))
 	self:addElement(MicImage)
 	self.MicImage = MicImage
 	local GenericSimpleButton = CoD.StartMenu_Options_PC_Voice_VoiceBar_RecordButton.new(f1_arg0, f1_arg1, 0.5, 0.5, -337.5, -295.5, 0.5, 0.5, -21, 21)
 	local f1_local12 = GenericSimpleButton
 	local f1_local13 = GenericSimpleButton.subscribeToModel
-	local f1_local14 = Engine[0x8DF2E5447F384B9]()
+	local f1_local14 = Engine[@"getglobalmodel"]()
 	f1_local13(f1_local12, f1_local14["SpeakingEnergy.isRecording"], function(f3_arg0, f3_arg1)
-		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	GenericSimpleButton:registerEventHandler("gain_focus", function(element, event)
 		local f4_local0 = nil
@@ -90,10 +90,10 @@ CoD.StartMenu_Options_PC_Voice_VoiceBar.new = function(f1_arg0, f1_arg1, f1_arg2
 		elseif element.super.gainFocus then
 			f4_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f4_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(GenericSimpleButton, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(GenericSimpleButton, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if not CoD.PCOptionsUtility.IsRecordingLoopBack(controller) then
 			CoD.PCOptionsUtility.StartLoopBackCalibrationRecording(controller)
 			return true
@@ -102,7 +102,7 @@ CoD.StartMenu_Options_PC_Voice_VoiceBar.new = function(f1_arg0, f1_arg1, f1_arg2
 			return true
 		end
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 		return false
 	end, false)
 	self:addElement(GenericSimpleButton)
@@ -119,7 +119,7 @@ CoD.StartMenu_Options_PC_Voice_VoiceBar.new = function(f1_arg0, f1_arg1, f1_arg2
 	end
 	f1_local13 = self
 	f1_local13 = TooltipFocus
-	CoD.PCWidgetUtility.SetupEmptyFocusableTooltip(f1_local13, f1_arg1, 0xCCC02F6B5D8DCE1, 0xA669610927190D)
+	CoD.PCWidgetUtility.SetupEmptyFocusableTooltip(f1_local13, f1_arg1, @"hash_5CCC02F6B5D8DCE1", 0xA669610927190D)
 	DisableKeyboardNavigationByElement(f1_local13)
 	return self
 end

@@ -10,8 +10,8 @@ CoD.PlayerStatsDetailed.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	local StatHeaderText = LUI.UIText.new(0, 0, 107, 302, 0.5, 0.5, -9, 9)
 	StatHeaderText:setText(LocalizeToUpperString(0x0))
 	StatHeaderText:setTTF("ttmussels_demibold")
-	StatHeaderText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	StatHeaderText:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	StatHeaderText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	StatHeaderText:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	self:addElement(StatHeaderText)
 	self.StatHeaderText = StatHeaderText
 	local StatValue = LUI.UIText.new(0, 0, 0, 98, 0.5, 0.5, -10.5, 10.5)
@@ -19,7 +19,7 @@ CoD.PlayerStatsDetailed.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	StatValue:setText("")
 	StatValue:setTTF("ttmussels_demibold")
 	StatValue:setLetterSpacing(1)
-	StatValue:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
+	StatValue:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
 	self:addElement(StatValue)
 	self.StatValue = StatValue
 	self:mergeStateConditions({

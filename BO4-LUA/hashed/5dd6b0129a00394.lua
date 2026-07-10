@@ -9,11 +9,11 @@ CoD.BM_ActiveContractItemRewardsContainer.new = function(f1_arg0, f1_arg1, f1_ar
 	self.soundSet = "none"
 	self.anyChildUsesUpdateState = true
 	local Rewards = LUI.UIText.new(0.5, 0.5, -248, 248, 0, 0, 11, 37)
-	Rewards:setText(LocalizeToUpperString(0x2ACBA21D0C15241))
+	Rewards:setText(LocalizeToUpperString(@"menu/rewards"))
 	Rewards:setTTF("ttmussels_regular")
 	Rewards:setLetterSpacing(2)
-	Rewards:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	Rewards:setAlignment(Enum[0x7A5123B654282D2][0x6ED4298C93DC5ED])
+	Rewards:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	Rewards:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
 	self:addElement(Rewards)
 	self.Rewards = Rewards
 	local BMActiveContractXpReward = CoD.BM_ActiveContractRewards.new(f1_arg0, f1_arg1, 0.5, 0.5, -220, 220, 0, 0, 71, 121)

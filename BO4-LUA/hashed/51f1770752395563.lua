@@ -15,18 +15,18 @@ CoD.ActiveCamoGrid.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	local BottomBracket9Slice = LUI.UIImage.new(0, 0, 0, 1254, 0, 0, 28, 37)
 	BottomBracket9Slice:setAlpha(0.5)
 	BottomBracket9Slice:setZRot(180)
-	BottomBracket9Slice:setImage(RegisterImage(0xC325BED3F226657))
-	BottomBracket9Slice:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	BottomBracket9Slice:setImage(RegisterImage(@"hash_4C325BED3F226657"))
+	BottomBracket9Slice:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	BottomBracket9Slice:setShaderVector(0, 0, 0, 0, 0)
 	BottomBracket9Slice:setupNineSliceShader(16, 4)
 	self:addElement(BottomBracket9Slice)
 	self.BottomBracket9Slice = BottomBracket9Slice
 	local Label = LUI.UIText.new(0, 0, 0, 316, 0, 0, 11, 27)
 	Label:setRGB(ColorSet.T8__OFF__GRAY.r, ColorSet.T8__OFF__GRAY.g, ColorSet.T8__OFF__GRAY.b)
-	Label:setText(LocalizeToUpperString(0x7A8BC9CB373E4C6))
+	Label:setText(LocalizeToUpperString(@"hash_57A8BC9CB373E4C6"))
 	Label:setTTF("default")
 	Label:setLetterSpacing(4)
-	Label:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	Label:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(Label)
 	self.Label = Label
 	local ActiveCamoList = LUI.UIList.new(f1_arg0, f1_arg1, 10, 0, nil, false, false, false, false)
@@ -43,30 +43,30 @@ CoD.ActiveCamoGrid.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	ActiveCamoList:setWidgetType(CoD.ActiveThemeSlot)
 	ActiveCamoList:setHorizontalCount(10)
 	ActiveCamoList:setSpacing(10)
-	ActiveCamoList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	ActiveCamoList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	ActiveCamoList:setHorizontalScrollbar(CoD.PC_GridHorizontalScrollbar)
 	ActiveCamoList:setHorizontalCounter(CoD.horizontalCounter)
 	ActiveCamoList:setDataSource("WeaponOptions")
 	ActiveCamoList:linkToElementModel(ActiveCamoList, "itemIndex", true, function(model, f3_arg1)
-		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
-		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
+		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"])
 	end)
 	ActiveCamoList:appendEventHandler("input_source_changed", function(f4_arg0, f4_arg1)
 		f4_arg1.menu = f4_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f4_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f4_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x4D2505E19049444])
-		CoD.Menu.UpdateButtonShownState(f4_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
-		CoD.Menu.UpdateButtonShownState(f4_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
+		CoD.Menu.UpdateButtonShownState(f4_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f4_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"hash_64D2505E19049444"])
+		CoD.Menu.UpdateButtonShownState(f4_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+		CoD.Menu.UpdateButtonShownState(f4_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"])
 	end)
 	local f1_local4 = ActiveCamoList
 	local CamosWillAppearHereText = ActiveCamoList.subscribeToModel
-	local f1_local6 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local6 = Engine[@"getmodelforcontroller"](f1_arg1)
 	CamosWillAppearHereText(f1_local4, f1_local6.LastInput, function(f5_arg0, f5_arg1)
-		CoD.Menu.UpdateButtonShownState(f5_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f5_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x4D2505E19049444])
-		CoD.Menu.UpdateButtonShownState(f5_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
-		CoD.Menu.UpdateButtonShownState(f5_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
+		CoD.Menu.UpdateButtonShownState(f5_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f5_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"hash_64D2505E19049444"])
+		CoD.Menu.UpdateButtonShownState(f5_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+		CoD.Menu.UpdateButtonShownState(f5_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"])
 	end, false)
 	ActiveCamoList:registerEventHandler("list_item_gain_focus", function(element, event)
 		local f6_local0 = nil
@@ -94,15 +94,15 @@ CoD.ActiveCamoGrid.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 		elseif element.super.gainFocus then
 			f8_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x4D2505E19049444])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"hash_64D2505E19049444"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_none"])
 		return f8_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(ActiveCamoList, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(ActiveCamoList, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if ShouldDisplayContextualMenuInActiveCamoList(controller, element) and not CoD.WeaponOptionsUtility.IsWeaponOptionEquipped(menu, element, controller, "camoIndex") and not CoD.WeaponOptionsUtility.IsItemWeaponOptionLocked(menu, element, controller) then
 			PlaySoundAlias("cac_equipment_add")
 			CoD.WeaponOptionsUtility.SetWeaponOptionClassItemHelper(self, element, controller, menu)
@@ -119,16 +119,16 @@ CoD.ActiveCamoGrid.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 		end
 	end, function(element, menu, controller)
 		if ShouldDisplayContextualMenuInActiveCamoList(controller, element) and not CoD.WeaponOptionsUtility.IsWeaponOptionEquipped(menu, element, controller, "camoIndex") and not CoD.WeaponOptionsUtility.IsItemWeaponOptionLocked(menu, element, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		elseif ShouldDisplayContextualMenuInActiveCamoList(controller, element) and CoD.WeaponOptionsUtility.IsWeaponOptionEquipped(menu, element, controller, "camoIndex") and not CoD.WeaponOptionsUtility.IsItemWeaponOptionLocked(menu, element, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(ActiveCamoList, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(ActiveCamoList, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], nil, function(element, menu, controller, model)
 		if IsGamepad(controller) and ShouldDisplayContextualMenuInActiveCamoList(controller, element) and CoD.WeaponOptionsUtility.IsWeaponOptionEquipped(menu, element, controller, "camoIndex") then
 			PlaySoundAlias("cac_equipment_remove")
 			CoD.WeaponOptionsUtility.ClearWeaponOptionsHelper(self, element, menu, controller)
@@ -139,13 +139,13 @@ CoD.ActiveCamoGrid.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 		end
 	end, function(element, menu, controller)
 		if IsGamepad(controller) and ShouldDisplayContextualMenuInActiveCamoList(controller, element) and CoD.WeaponOptionsUtility.IsWeaponOptionEquipped(menu, element, controller, "camoIndex") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x679ACA6FFC6C8F3, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"menu/remove", nil, nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(ActiveCamoList, f1_arg1, Enum[0x3DD78803F918E9D][0x4D2505E19049444], "ui_remove", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(ActiveCamoList, f1_arg1, Enum[@"luibutton"][@"hash_64D2505E19049444"], "ui_remove", function(element, menu, controller, model)
 		if IsMouseOrKeyboard(controller) and ShouldDisplayContextualMenuInActiveCamoList(controller, element) and CoD.WeaponOptionsUtility.IsWeaponOptionEquipped(menu, element, controller, "camoIndex") then
 			PlaySoundAlias("cac_equipment_remove")
 			CoD.WeaponOptionsUtility.ClearWeaponOptionsHelper(self, element, menu, controller)
@@ -156,13 +156,13 @@ CoD.ActiveCamoGrid.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 		end
 	end, function(element, menu, controller)
 		if IsMouseOrKeyboard(controller) and ShouldDisplayContextualMenuInActiveCamoList(controller, element) and CoD.WeaponOptionsUtility.IsWeaponOptionEquipped(menu, element, controller, "camoIndex") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x4D2505E19049444], 0x679ACA6FFC6C8F3, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "ui_remove")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"hash_64D2505E19049444"], @"menu/remove", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "ui_remove")
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(ActiveCamoList, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(ActiveCamoList, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], nil, function(element, menu, controller, model)
 		if IsGamepad(controller) and ShouldDisplayContextualMenuInActiveCamoList(controller, element) and not CoD.WeaponOptionsUtility.IsItemWeaponOptionCamoWrappedOrLocked(menu, element, controller) then
 			CoD.WeaponOptionsUtility.OpenActiveCamoStageDetailsOverlay(menu, controller, "CamoPersonalizationDetails", element, false)
 			return true
@@ -170,13 +170,13 @@ CoD.ActiveCamoGrid.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 		end
 	end, function(element, menu, controller)
 		if IsGamepad(controller) and ShouldDisplayContextualMenuInActiveCamoList(controller, element) and not CoD.WeaponOptionsUtility.IsItemWeaponOptionCamoWrappedOrLocked(menu, element, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], 0xB1A784560EDFEA7, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], @"menu/details", nil, nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(ActiveCamoList, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB], "ui_contextual_1", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(ActiveCamoList, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"], "ui_contextual_1", function(element, menu, controller, model)
 		if IsMouseOrKeyboard(controller) and ShouldDisplayContextualMenuInActiveCamoList(controller, element) and not CoD.WeaponOptionsUtility.IsItemWeaponOptionCamoWrapped(menu, element, controller) then
 			CoD.WeaponOptionsUtility.OpenActiveCamoStageDetailsOverlay(menu, controller, "CamoPersonalizationDetails", element, false)
 			return true
@@ -184,33 +184,33 @@ CoD.ActiveCamoGrid.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 		end
 	end, function(element, menu, controller)
 		if IsMouseOrKeyboard(controller) and ShouldDisplayContextualMenuInActiveCamoList(controller, element) and not CoD.WeaponOptionsUtility.IsItemWeaponOptionCamoWrapped(menu, element, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xA86619565BE54DB], 0xB1A784560EDFEA7, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "ui_contextual_1")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_pckey_2"], @"menu/details", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "ui_contextual_1")
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(ActiveCamoList, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "MWHEELUP", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(ActiveCamoList, f1_arg1, Enum[@"luibutton"][@"lui_key_none"], "MWHEELUP", function(element, menu, controller, model)
 		CoD.GridAndListUtility.ScrollLeft(self.ActiveCamoList)
 		CoD.GridAndListUtility.ValidateActiveItemVisibility(self.ActiveCamoList)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "MWHEELUP")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "MWHEELUP")
 		return false
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(ActiveCamoList, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "MWHEELDOWN", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(ActiveCamoList, f1_arg1, Enum[@"luibutton"][@"lui_key_none"], "MWHEELDOWN", function(element, menu, controller, model)
 		CoD.GridAndListUtility.ScrollRight(self.ActiveCamoList)
 		CoD.GridAndListUtility.ValidateActiveItemVisibility(self.ActiveCamoList)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "MWHEELDOWN")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "MWHEELDOWN")
 		return false
 	end, false)
 	ActiveCamoList:subscribeToGlobalModel(f1_arg1, "PerController", "WeaponPersonalization.listUpdate", function(model)
 		CoD.GridAndListUtility.UpdateDataSource(ActiveCamoList, true, false, true)
 		UpdateSelfState(self, f1_arg1)
 	end)
-	ActiveCamoList:AddContextualMenuAction(f1_arg0, f1_arg1, 0x679ACA6FFC6C8F3, function(f24_arg0, f24_arg1, f24_arg2, f24_arg3)
+	ActiveCamoList:AddContextualMenuAction(f1_arg0, f1_arg1, @"menu/remove", function(f24_arg0, f24_arg1, f24_arg2, f24_arg3)
 		if ShouldDisplayContextualMenuInActiveCamoList(f24_arg2, f24_arg0) and CoD.WeaponOptionsUtility.IsWeaponOptionEquipped(f24_arg1, f24_arg0, f24_arg2, "camoIndex") then
 			return function(f25_arg0, f25_arg1, f25_arg2, f25_arg3)
 				PlaySoundAlias("cac_equipment_remove")
@@ -221,7 +221,7 @@ CoD.ActiveCamoGrid.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 		else
 		end
 	end)
-	ActiveCamoList:AddContextualMenuAction(f1_arg0, f1_arg1, 0xB1A784560EDFEA7, function(f26_arg0, f26_arg1, f26_arg2, f26_arg3)
+	ActiveCamoList:AddContextualMenuAction(f1_arg0, f1_arg1, @"menu/details", function(f26_arg0, f26_arg1, f26_arg2, f26_arg3)
 		if IsPC() and ShouldDisplayContextualMenuInActiveCamoList(f26_arg2, f26_arg0) and not CoD.WeaponOptionsUtility.IsItemWeaponOptionCamoWrapped(f26_arg1, f26_arg0, f26_arg2) then
 			return function(f27_arg0, f27_arg1, f27_arg2, f27_arg3)
 				CoD.WeaponOptionsUtility.OpenActiveCamoStageDetailsOverlay(f27_arg1, f27_arg2, "CamoPersonalizationDetails", f27_arg0, false)
@@ -232,10 +232,10 @@ CoD.ActiveCamoGrid.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	self:addElement(ActiveCamoList)
 	self.ActiveCamoList = ActiveCamoList
 	CamosWillAppearHereText = LUI.UIText.new(0, 0, 12, 1242, 0, 0, 150, 180)
-	CamosWillAppearHereText:setText(Engine[0xF9F1239CFD921FE](0x9B15B2A5E21491C))
+	CamosWillAppearHereText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_79B15B2A5E21491C"))
 	CamosWillAppearHereText:setTTF("dinnext_regular")
-	CamosWillAppearHereText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	CamosWillAppearHereText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	CamosWillAppearHereText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	CamosWillAppearHereText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(CamosWillAppearHereText)
 	self.CamosWillAppearHereText = CamosWillAppearHereText
 	self:mergeStateConditions({

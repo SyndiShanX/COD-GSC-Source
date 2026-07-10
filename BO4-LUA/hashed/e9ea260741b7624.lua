@@ -13,7 +13,7 @@ CoD.SpawnSelectTeamStatus.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	TeamStatusList:setTopBottom(0, 1, 0, 0)
 	TeamStatusList:setWidgetType(CoD.SpawnSelectTeamStatusItem)
 	TeamStatusList:setHorizontalCount(5)
-	TeamStatusList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	TeamStatusList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	TeamStatusList:setDataSource("Clients")
 	self:addElement(TeamStatusList)
 	self.TeamStatusList = TeamStatusList

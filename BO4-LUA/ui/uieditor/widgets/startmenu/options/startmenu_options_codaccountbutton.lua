@@ -29,8 +29,8 @@ CoD.StartMenu_Options_CoDAccountButton.new = function(f1_arg0, f1_arg1, f1_arg2,
 	DirectorCustomStartButton.Tint:setRGB(0.05, 0.08, 0.11)
 	DirectorCustomStartButton.Tint:setAlpha(0.25)
 	DirectorCustomStartButton.LeaderActivityText:setText("")
-	DirectorCustomStartButton.MiddleText:setText(LocalizeToUpperString(0x30BC41F2404F851))
-	DirectorCustomStartButton.MiddleTextFocus:setText(LocalizeToUpperString(0x30BC41F2404F851))
+	DirectorCustomStartButton.MiddleText:setText(LocalizeToUpperString(@"hash_630BC41F2404F851"))
+	DirectorCustomStartButton.MiddleTextFocus:setText(LocalizeToUpperString(@"hash_630BC41F2404F851"))
 	self:addElement(DirectorCustomStartButton)
 	self.DirectorCustomStartButton = DirectorCustomStartButton
 	self:mergeStateConditions({
@@ -80,7 +80,7 @@ CoD.StartMenu_Options_CoDAccountButton.__clipsPerState = {
 			f9_arg0:__resetProperties()
 			f9_arg0:setupElementClipCounter(1)
 			local f9_local0 = function(f10_arg0)
-				f9_arg0.DirectorCustomStartButton:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f9_arg0.DirectorCustomStartButton:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f9_arg0.DirectorCustomStartButton:setScale(1.05, 1.05)
 				f9_arg0.DirectorCustomStartButton:registerEventHandler("interrupted_keyframe", f9_arg0.clipInterrupted)
 				f9_arg0.DirectorCustomStartButton:registerEventHandler("transition_complete_keyframe", f9_arg0.clipFinished)
@@ -93,7 +93,7 @@ CoD.StartMenu_Options_CoDAccountButton.__clipsPerState = {
 			f11_arg0:__resetProperties()
 			f11_arg0:setupElementClipCounter(1)
 			local f11_local0 = function(f12_arg0)
-				f11_arg0.DirectorCustomStartButton:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f11_arg0.DirectorCustomStartButton:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f11_arg0.DirectorCustomStartButton:setScale(1, 1)
 				f11_arg0.DirectorCustomStartButton:registerEventHandler("interrupted_keyframe", f11_arg0.clipInterrupted)
 				f11_arg0.DirectorCustomStartButton:registerEventHandler("transition_complete_keyframe", f11_arg0.clipFinished)

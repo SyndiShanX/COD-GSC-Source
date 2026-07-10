@@ -21,8 +21,8 @@ CoD.DirectorFindGameDetailModes.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	local description5 = LUI.UIText.new(0, 0, 0, 500, 0, 0, 25, 42)
 	description5:setRGB(ColorSet.T8__OFF__GRAY.r, ColorSet.T8__OFF__GRAY.g, ColorSet.T8__OFF__GRAY.b)
 	description5:setTTF("ttmussels_regular")
-	description5:setAlignment(Engine[0x7F8853DC3581AA4](Enum[0x7A5123B654282D2][0x58C8A85F2048829]))
-	description5:setAlignment(Engine[0x7F8853DC3581AA4](Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3]))
+	description5:setAlignment(Engine[@"hash_67F8853DC3581AA4"](Enum[@"luialignment"][@"lui_alignment_left"]))
+	description5:setAlignment(Engine[@"hash_67F8853DC3581AA4"](Enum[@"luialignment"][@"lui_alignment_top"]))
 	description5:linkToElementModel(self, "modesString", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -34,8 +34,8 @@ CoD.DirectorFindGameDetailModes.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	local warningText = LUI.UIText.new(0.5, 0.5, -250, 250, 0, 0, 45, 63)
 	warningText:setRGB(ColorSet.T8__RED.r, ColorSet.T8__RED.g, ColorSet.T8__RED.b)
 	warningText:setTTF("ttmussels_regular")
-	warningText:setAlignment(Engine[0x7F8853DC3581AA4](Enum[0x7A5123B654282D2][0x58C8A85F2048829]))
-	warningText:setAlignment(Engine[0x7F8853DC3581AA4](Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3]))
+	warningText:setAlignment(Engine[@"hash_67F8853DC3581AA4"](Enum[@"luialignment"][@"lui_alignment_left"]))
+	warningText:setAlignment(Engine[@"hash_67F8853DC3581AA4"](Enum[@"luialignment"][@"lui_alignment_top"]))
 	warningText:linkToElementModel(self, "maxPartySize", true, function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then

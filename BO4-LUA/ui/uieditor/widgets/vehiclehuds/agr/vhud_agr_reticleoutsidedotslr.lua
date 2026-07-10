@@ -10,15 +10,15 @@ CoD.vhud_agr_ReticleOutsideDotsLR.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	agrReticleOutsideDotsLR0:setAlpha(0.15)
 	agrReticleOutsideDotsLR0:setXRot(-180)
 	agrReticleOutsideDotsLR0:setZoom(-50)
-	agrReticleOutsideDotsLR0:setImage(RegisterImage(0x313A715108951EA))
-	agrReticleOutsideDotsLR0:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	agrReticleOutsideDotsLR0:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_agr_reticleoutsidedots"))
+	agrReticleOutsideDotsLR0:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(agrReticleOutsideDotsLR0)
 	self.agrReticleOutsideDotsLR0 = agrReticleOutsideDotsLR0
 	local agrReticleOutsideDotsLR = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	agrReticleOutsideDotsLR:setAlpha(0.7)
 	agrReticleOutsideDotsLR:setXRot(-180)
-	agrReticleOutsideDotsLR:setImage(RegisterImage(0x313A715108951EA))
-	agrReticleOutsideDotsLR:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	agrReticleOutsideDotsLR:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_agr_reticleoutsidedots"))
+	agrReticleOutsideDotsLR:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(agrReticleOutsideDotsLR)
 	self.agrReticleOutsideDotsLR = agrReticleOutsideDotsLR
 	if PostLoadFunc then

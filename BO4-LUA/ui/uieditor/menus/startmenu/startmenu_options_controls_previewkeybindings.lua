@@ -15,7 +15,7 @@ LUI.createMenu.StartMenu_Options_Controls_PreviewKeybindings = function(f1_arg0,
 	f1_local1:addElementToPendingUpdateStateList(self)
 	local Blur = LUI.UIImage.new(-0.1, 1.1, 0, 0, -0.1, 1.1, 0, 0)
 	Blur:setRGB(0.08, 0.08, 0.08)
-	Blur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	Blur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	Blur:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(Blur)
 	self.Blur = Blur
@@ -31,27 +31,27 @@ LUI.createMenu.StartMenu_Options_Controls_PreviewKeybindings = function(f1_arg0,
 	self.KeybindsPreview = KeybindsPreview
 	local PreloadImage1 = LUI.UIImage.new(0, 0, 1350, 1478, 0, 0, -223.5, -95.5)
 	PreloadImage1:setAlpha(0)
-	PreloadImage1:setImage(RegisterImage(0xD8060B016B78EC5))
+	PreloadImage1:setImage(RegisterImage(@"hash_6D8060B016B78EC5"))
 	self:addElement(PreloadImage1)
 	self.PreloadImage1 = PreloadImage1
 	local PreloadImage2 = LUI.UIImage.new(0, 0, 1496, 1624, 0, 0, -223.5, -95.5)
 	PreloadImage2:setAlpha(0)
-	PreloadImage2:setImage(RegisterImage(0xFC5C06AFCAE7380))
+	PreloadImage2:setImage(RegisterImage(@"hash_1FC5C06AFCAE7380"))
 	self:addElement(PreloadImage2)
 	self.PreloadImage2 = PreloadImage2
 	local PreloadImage3 = LUI.UIImage.new(0, 0, 1634, 1762, 0, 0, -223.5, -95.5)
 	PreloadImage3:setAlpha(0)
-	PreloadImage3:setImage(RegisterImage(0xE061B05A775D343))
+	PreloadImage3:setImage(RegisterImage(@"hash_6E061B05A775D343"))
 	self:addElement(PreloadImage3)
 	self.PreloadImage3 = PreloadImage3
 	local PreloadImage5 = LUI.UIImage.new(0, 0, 1890, 2018, 0, 0, -223.5, -95.5)
 	PreloadImage5:setAlpha(0)
-	PreloadImage5:setImage(RegisterImage(0x2C592ED9C8F62F0))
+	PreloadImage5:setImage(RegisterImage(@"hash_52C592ED9C8F62F0"))
 	self:addElement(PreloadImage5)
 	self.PreloadImage5 = PreloadImage5
 	local PreloadImage4 = LUI.UIImage.new(0, 0, 1890, 2018, 0, 0, -223.5, -95.5)
 	PreloadImage4:setAlpha(0)
-	PreloadImage4:setImage(RegisterImage(0x2D51E0C753FB7C9))
+	PreloadImage4:setImage(RegisterImage(@"hash_42D51E0C753FB7C9"))
 	self:addElement(PreloadImage4)
 	self.PreloadImage4 = PreloadImage4
 	local FooterContainerFrontendRight = CoD.FooterContainer_Frontend_Right.new(f1_local1, f1_arg0, 0, 1, 0, 0, 1, 1, -48, 0)
@@ -59,7 +59,7 @@ LUI.createMenu.StartMenu_Options_Controls_PreviewKeybindings = function(f1_arg0,
 	self.FooterContainerFrontendRight = FooterContainerFrontendRight
 	local PCStartMenuOptionsControlsTabContentKeyBindingPreviewButton2 = CoD.PC_StartMenu_Options_Controls_TabContent_KeyBinding_PreviewButton.new(f1_local1, f1_arg0, 0, 0, 1350, 1586, 0, 0, 104, 169)
 	PCStartMenuOptionsControlsTabContentKeyBindingPreviewButton2:setAlpha(0)
-	PCStartMenuOptionsControlsTabContentKeyBindingPreviewButton2.BtnText:setText(LocalizeToUpperString(0x1BA0AE610631004))
+	PCStartMenuOptionsControlsTabContentKeyBindingPreviewButton2.BtnText:setText(LocalizeToUpperString(@"hash_41BA0AE610631004"))
 	PCStartMenuOptionsControlsTabContentKeyBindingPreviewButton2:registerEventHandler("gain_focus", function(element, event)
 		local f2_local0 = nil
 		if element.gainFocus then
@@ -67,21 +67,21 @@ LUI.createMenu.StartMenu_Options_Controls_PreviewKeybindings = function(f1_arg0,
 		elseif element.super.gainFocus then
 			f2_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f2_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(PCStartMenuOptionsControlsTabContentKeyBindingPreviewButton2, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(PCStartMenuOptionsControlsTabContentKeyBindingPreviewButton2, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		CoD.PCWidgetUtility.DisplayApplyPresetConfirmationPopup(self, controller, self.PCStartMenuOptionsControlsTabContentDropDownPresetKeybindings, true, false)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 		return false
 	end, false)
 	self:addElement(PCStartMenuOptionsControlsTabContentKeyBindingPreviewButton2)
 	self.PCStartMenuOptionsControlsTabContentKeyBindingPreviewButton2 = PCStartMenuOptionsControlsTabContentKeyBindingPreviewButton2
 	local KeyboardOutlines = LUI.UIFixedAspectRatioImage.new(0.5, 0.5, -813.5, 813.5, 1, 1, -937.5, -302.5)
 	KeyboardOutlines:setAlpha(0.3)
-	KeyboardOutlines:setImage(RegisterImage(0xDA06C276EB39986))
+	KeyboardOutlines:setImage(RegisterImage(@"hash_4DA06C276EB39986"))
 	self:addElement(KeyboardOutlines)
 	self.KeyboardOutlines = KeyboardOutlines
 	local backing = LUI.UIImage.new(0.5, 0.5, -400, 400, 1, 1, -730, -510)
@@ -91,8 +91,8 @@ LUI.createMenu.StartMenu_Options_Controls_PreviewKeybindings = function(f1_arg0,
 	self.backing = backing
 	local NoiseTiledBacking = LUI.UIImage.new(0.5, 0.5, -400, 400, 1, 1, -730, -510)
 	NoiseTiledBacking:setAlpha(0.7)
-	NoiseTiledBacking:setImage(RegisterImage(0x34839E8065B1E53))
-	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	NoiseTiledBacking:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	NoiseTiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	NoiseTiledBacking:setupNineSliceShader(196, 88)
 	self:addElement(NoiseTiledBacking)
@@ -100,8 +100,8 @@ LUI.createMenu.StartMenu_Options_Controls_PreviewKeybindings = function(f1_arg0,
 	local Border = LUI.UIImage.new(0.5, 0.5, -400, 400, 1, 1, -730, -510)
 	Border:setRGB(0.8, 0.76, 0.7)
 	Border:setAlpha(0.15)
-	Border:setImage(RegisterImage(0xF1E3082B39E99BB))
-	Border:setMaterial(LUI.UIImage.GetCachedMaterial(0x44484DDFAF5C093))
+	Border:setImage(RegisterImage(@"uie_highlight_border_line"))
+	Border:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_normal"))
 	Border:setShaderVector(0, 0, 0, 0, 0)
 	Border:setupNineSliceShader(6, 6)
 	self:addElement(Border)
@@ -114,11 +114,11 @@ LUI.createMenu.StartMenu_Options_Controls_PreviewKeybindings = function(f1_arg0,
 	self.PCStartMenuOptionsControlsTabContentDropDownPresetKeybindings = PCStartMenuOptionsControlsTabContentDropDownPresetKeybindings
 	local title = LUI.UIText.new(0.5, 0.5, -352, 352, 1, 1, -688, -652)
 	title:setRGB(ColorSet.T8__BEIGE__HEADER.r, ColorSet.T8__BEIGE__HEADER.g, ColorSet.T8__BEIGE__HEADER.b)
-	title:setText(Engine[0xF9F1239CFD921FE](0x109C9B63520D921))
+	title:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_4109C9B63520D921"))
 	title:setTTF("ttmussels_demibold")
 	title:setLetterSpacing(6)
-	title:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	title:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	title:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	title:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(title)
 	self.title = title
 	self:registerEventHandler("close_all_ingame_menus", function(self, event)
@@ -146,14 +146,14 @@ LUI.createMenu.StartMenu_Options_Controls_PreviewKeybindings = function(f1_arg0,
 		end
 		return f7_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		CoD.PCWidgetUtility.DisplayApplyPresetConfirmationPopup(self, controller, self.PCStartMenuOptionsControlsTabContentDropDownPresetKeybindings, true, true)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 		return true
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], nil, function(element, menu, controller, model)
 		if IsSelfPropertyValue(self, "_parentMenuId", "Director") then
 			CoD.PCWidgetUtility.DisplayApplyPresetConfirmationPopupAndGoToSettings(self, controller, self.PCStartMenuOptionsControlsTabContentDropDownPresetKeybindings)
 			return true
@@ -161,7 +161,7 @@ LUI.createMenu.StartMenu_Options_Controls_PreviewKeybindings = function(f1_arg0,
 		end
 	end, function(element, menu, controller)
 		if IsSelfPropertyValue(self, "_parentMenuId", "Director") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x72149EF86CFB295, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"hash_372149EF86CFB295", nil, nil)
 			return true
 		else
 			return false

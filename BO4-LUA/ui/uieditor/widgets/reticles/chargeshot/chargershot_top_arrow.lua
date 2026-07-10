@@ -8,7 +8,7 @@ CoD.ChargerShot_top_Arrow.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	self.soundSet = "ChooseDecal"
 	local Image0 = LUI.UIImage.new(0, 1, 5, -3, 0, 1, 6, 0)
 	Image0:setRGB(0.29, 0.69, 0.95)
-	Image0:setImage(RegisterImage(0x6D3E0D51FD7A90))
+	Image0:setImage(RegisterImage(@"uie_t7_hud_chargeshot_reticle_top_arrow"))
 	self:addElement(Image0)
 	self.Image0 = Image0
 	if PostLoadFunc then

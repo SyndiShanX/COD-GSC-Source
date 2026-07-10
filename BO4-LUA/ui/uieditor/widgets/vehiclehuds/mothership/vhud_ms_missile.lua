@@ -9,15 +9,15 @@ CoD.vhud_ms_missile.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local agrIconMissileLine1 = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	agrIconMissileLine1:setRGB(0.74, 0.94, 0.99)
-	agrIconMissileLine1:setImage(RegisterImage(0xE70DFACD16DDC0F))
-	agrIconMissileLine1:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	agrIconMissileLine1:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_ms_notificationiconmissileoutline"))
+	agrIconMissileLine1:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(agrIconMissileLine1)
 	self.agrIconMissileLine1 = agrIconMissileLine1
 	local agrIconMissile1 = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	agrIconMissile1:setRGB(0.74, 0.94, 0.99)
 	agrIconMissile1:setAlpha(0)
-	agrIconMissile1:setImage(RegisterImage(0x9F5C45A223CC7AE))
-	agrIconMissile1:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	agrIconMissile1:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_ms_notificationiconmissile1"))
+	agrIconMissile1:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(agrIconMissile1)
 	self.agrIconMissile1 = agrIconMissile1
 	if PostLoadFunc then

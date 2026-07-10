@@ -41,13 +41,13 @@ CoD.ClassMiniPreviewEquipmentItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	local noslotIcon = LUI.UIImage.new(0.5, 0.5, -25, 25, 0, 0, 10, 60)
 	noslotIcon:setAlpha(0)
 	noslotIcon:setScale(0.4, 0.4)
-	noslotIcon:setImage(RegisterImage(0x35CB0919FD78E83))
+	noslotIcon:setImage(RegisterImage(@"uie_ui_menu_draft_attachment_noslot"))
 	self:addElement(noslotIcon)
 	self.noslotIcon = noslotIcon
 	local noslotIcon2 = LUI.UIImage.new(0, 0, 34, 84, 0, 0, 10, 60)
 	noslotIcon2:setAlpha(0)
 	noslotIcon2:setScale(0.4, 0.4)
-	noslotIcon2:setImage(RegisterImage(0x35CB0919FD78E83))
+	noslotIcon2:setImage(RegisterImage(@"uie_ui_menu_draft_attachment_noslot"))
 	self:addElement(noslotIcon2)
 	self.noslotIcon2 = noslotIcon2
 	local restrictedIcon = CoD.RestrictedItemWarning.new(f1_arg0, f1_arg1, 0.5, 0.5, -32.5, 32.5, 0.5, 0.5, -31.5, 23.5)

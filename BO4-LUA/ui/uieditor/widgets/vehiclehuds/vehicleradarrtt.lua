@@ -24,17 +24,17 @@ CoD.vehicleRadarRTT.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	local OuterRing = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	OuterRing:setRGB(0, 0, 0)
 	OuterRing:setAlpha(0.75)
-	OuterRing:setImage(RegisterImage(0x99AE5E7738A5587))
+	OuterRing:setImage(RegisterImage(@"uie_hud_minimap_outer_ring"))
 	self:addElement(OuterRing)
 	self.OuterRing = OuterRing
 	local InnerRing = LUI.UIImage.new(0, 1, 5, -5, 0, 1, 5, -5)
 	InnerRing:setRGB(0, 0, 0)
 	InnerRing:setAlpha(0.94)
-	InnerRing:setImage(RegisterImage(0x4C5101F002300A2))
+	InnerRing:setImage(RegisterImage(@"uie_hud_minimap_inner_ring"))
 	self:addElement(InnerRing)
 	self.InnerRing = InnerRing
 	local InnerDetail = LUI.UIImage.new(0, 1, 7, -7, 0, 1, 7, -7)
-	InnerDetail:setImage(RegisterImage(0x65814E308814E29))
+	InnerDetail:setImage(RegisterImage(@"uie_hud_minimap_inner_detail"))
 	self:addElement(InnerDetail)
 	self.InnerDetail = InnerDetail
 	local CompassOverlay = CoD.CompassMinimapOverlay.new(f1_arg0, f1_arg1, 0, 1, 0, 0, 0, 1, 0, 0)

@@ -33,8 +33,8 @@ CoD.StartMenu_Options_SettingSliderList.new = function(f1_arg0, f1_arg1, f1_arg2
 	local SettingLabel = LUI.UIText.new(0, 1, 5, -129, 0, 0, 17.5, 38.5)
 	SettingLabel:setRGB(0.78, 0.74, 0.67)
 	SettingLabel:setTTF("ttmussels_regular")
-	SettingLabel:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	SettingLabel:setAlignment(Enum[0x7A5123B654282D2][0x6ED4298C93DC5ED])
+	SettingLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	SettingLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
 	SettingLabel:linkToElementModel(self, "text", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -46,8 +46,8 @@ CoD.StartMenu_Options_SettingSliderList.new = function(f1_arg0, f1_arg1, f1_arg2
 	local OptionCountBorder = LUI.UIImage.new(0, 0.61, 0, 0, 1, 1, -4, 0)
 	OptionCountBorder:setRGB(0.3, 0.29, 0.28)
 	OptionCountBorder:setAlpha(0.9)
-	OptionCountBorder:setImage(RegisterImage(0x1B69BB6285C5BBB))
-	OptionCountBorder:setMaterial(LUI.UIImage.GetCachedMaterial(0x31E7B3C72564429))
+	OptionCountBorder:setImage(RegisterImage(@"uie_hud_core_loadout_panel1"))
+	OptionCountBorder:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_631E7B3C72564429"))
 	OptionCountBorder:setShaderVector(0, 0, 0, 0.55, 0.13)
 	OptionCountBorder:setShaderVector(2, 0, 1, 0, 1)
 	OptionCountBorder:setupNineSliceShader(25, 4)
@@ -61,8 +61,8 @@ CoD.StartMenu_Options_SettingSliderList.new = function(f1_arg0, f1_arg1, f1_arg2
 	self.OptionCountBorder = OptionCountBorder
 	local CurrentOptionBorder = LUI.UIImage.new(0, 0.61, 0, 0, 1, 1, -4, 0)
 	CurrentOptionBorder:setRGB(0.8, 0.8, 0.8)
-	CurrentOptionBorder:setImage(RegisterImage(0x1B69BB6285C5BBB))
-	CurrentOptionBorder:setMaterial(LUI.UIImage.GetCachedMaterial(0x31E7B3C72564429))
+	CurrentOptionBorder:setImage(RegisterImage(@"uie_hud_core_loadout_panel1"))
+	CurrentOptionBorder:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_631E7B3C72564429"))
 	CurrentOptionBorder:setShaderVector(0, 0, 0, 0.55, 0.13)
 	CurrentOptionBorder:setupNineSliceShader(25, 4)
 	CurrentOptionBorder:linkToElementModel(self, "totalOptionsCount", true, function(model)
@@ -88,14 +88,14 @@ CoD.StartMenu_Options_SettingSliderList.new = function(f1_arg0, f1_arg1, f1_arg2
 		elseif element.super.gainFocus then
 			f6_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f6_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(RightArrow, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
-		SendButtonPressToMenuEx(menu, controller, Enum[0x3DD78803F918E9D][0x571F08AD84807E0])
+	f1_arg0:AddButtonCallbackFunction(RightArrow, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
+		SendButtonPressToMenuEx(menu, controller, Enum[@"luibutton"][@"lui_key_right"])
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 		return true
 	end, false)
 	self:addElement(RightArrow)
@@ -109,14 +109,14 @@ CoD.StartMenu_Options_SettingSliderList.new = function(f1_arg0, f1_arg1, f1_arg2
 		elseif element.super.gainFocus then
 			f9_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f9_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(LeftArrow, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
-		SendButtonPressToMenuEx(menu, controller, Enum[0x3DD78803F918E9D][0x57783F8DA4AAEF])
+	f1_arg0:AddButtonCallbackFunction(LeftArrow, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
+		SendButtonPressToMenuEx(menu, controller, Enum[@"luibutton"][@"lui_key_left"])
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 		return true
 	end, false)
 	self:addElement(LeftArrow)

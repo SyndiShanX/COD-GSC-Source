@@ -10,20 +10,20 @@ CoD.CharacterSelection_CharacterRestrictedWarning.new = function(f1_arg0, f1_arg
 	local WarningIcon = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	WarningIcon:setRGB(ColorSet.ResistanceHigh.r, ColorSet.ResistanceHigh.g, ColorSet.ResistanceHigh.b)
 	WarningIcon:setAlpha(0)
-	WarningIcon:setImage(RegisterImage(0x1F10DEAAEFC50A4))
+	WarningIcon:setImage(RegisterImage(@"warning_triangle"))
 	self:addElement(WarningIcon)
 	self.WarningIcon = WarningIcon
 	self:mergeStateConditions({
 		{
 			stateName = "Visible",
 			condition = function(menu, element, event)
-				return CoD.PlayerRoleUtility[0x7B96724B9CBB296](element, f1_arg1)
+				return CoD.PlayerRoleUtility[@"hash_37B96724B9CBB296"](element, f1_arg1)
 			end,
 		},
 	})
 	local f1_local2 = self
 	local f1_local3 = self.subscribeToModel
-	local f1_local4 = Engine[0x8DF2E5447F384B9]()
+	local f1_local4 = Engine[@"getglobalmodel"]()
 	f1_local3(f1_local2, f1_local4["lobbyRoot.playlistId"], function(f3_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

@@ -8,19 +8,19 @@ CoD.FooterButtonDoublePrompts.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local buttonPromptImage = LUI.UIImage.new(0, 0, 16, 52, 0, 0, 10, 37)
-	buttonPromptImage:setMaterial(LUI.UIImage.GetCachedMaterial(0x67D1E3A3D2D1BF))
+	buttonPromptImage:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_saturation_normal"))
 	buttonPromptImage:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(buttonPromptImage)
 	self.buttonPromptImage = buttonPromptImage
 	local buttonPromptImage1 = LUI.UIImage.new(1, 1, -44, -8, 0, 0, 10, 37)
-	buttonPromptImage1:setMaterial(LUI.UIImage.GetCachedMaterial(0x67D1E3A3D2D1BF))
+	buttonPromptImage1:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_saturation_normal"))
 	buttonPromptImage1:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(buttonPromptImage1)
 	self.buttonPromptImage1 = buttonPromptImage1
 	local label = LUI.UIText.new(0, 0, 66, 236, 0, 0, 10, 37)
 	label:setTTF("ttmussels_regular")
 	label:setLetterSpacing(6)
-	label:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	label:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	label:linkToElementModel(self, "Label", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -36,7 +36,7 @@ CoD.FooterButtonDoublePrompts.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 		{
 			stateName = "Disabled",
 			condition = function(menu, element, event)
-				local f4_local0 = CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "", Enum[0xF4865E3551C3835][0x42F62C12777D074])
+				local f4_local0 = CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "", Enum[@"luibuttonpromptstates"][@"flag_disable_prompts"])
 				if f4_local0 then
 					f4_local0 = IsGamepad(f1_arg1)
 					if f4_local0 then
@@ -49,7 +49,7 @@ CoD.FooterButtonDoublePrompts.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 		{
 			stateName = "Enabled",
 			condition = function(menu, element, event)
-				local f5_local0 = CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "", Enum[0xF4865E3551C3835][0x901DFC093ED4187])
+				local f5_local0 = CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "", Enum[@"luibuttonpromptstates"][@"flag_enable_prompts"])
 				if f5_local0 then
 					f5_local0 = IsGamepad(f1_arg1)
 					if f5_local0 then
@@ -75,7 +75,7 @@ CoD.FooterButtonDoublePrompts.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	end)
 	local f1_local4 = self
 	local f1_local5 = self.subscribeToModel
-	local f1_local6 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local6 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local5(f1_local4, f1_local6.LastInput, function(f8_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -108,13 +108,13 @@ CoD.FooterButtonDoublePrompts.__resetProperties = function(f10_arg0)
 	f10_arg0.buttonPromptImage:setTopBottom(0, 0, 10, 37)
 	f10_arg0.buttonPromptImage:setRGB(1, 1, 1)
 	f10_arg0.buttonPromptImage:setAlpha(1)
-	f10_arg0.buttonPromptImage:setMaterial(LUI.UIImage.GetCachedMaterial(0x67D1E3A3D2D1BF))
+	f10_arg0.buttonPromptImage:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_saturation_normal"))
 	f10_arg0.buttonPromptImage:setShaderVector(0, 1, 0, 0, 0)
 	f10_arg0.label:setRGB(1, 1, 1)
 	f10_arg0.label:setAlpha(1)
 	f10_arg0.buttonPromptImage1:setRGB(1, 1, 1)
 	f10_arg0.buttonPromptImage1:setAlpha(1)
-	f10_arg0.buttonPromptImage1:setMaterial(LUI.UIImage.GetCachedMaterial(0x67D1E3A3D2D1BF))
+	f10_arg0.buttonPromptImage1:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_saturation_normal"))
 	f10_arg0.buttonPromptImage1:setShaderVector(0, 1, 0, 0, 0)
 end
 CoD.FooterButtonDoublePrompts.__clipsPerState = {
@@ -140,13 +140,13 @@ CoD.FooterButtonDoublePrompts.__clipsPerState = {
 			f12_arg0.buttonPromptImage:completeAnimation()
 			f12_arg0.buttonPromptImage:setRGB(0.5, 0.5, 0.5)
 			f12_arg0.buttonPromptImage:setAlpha(0.5)
-			f12_arg0.buttonPromptImage:setMaterial(LUI.UIImage.GetCachedMaterial(0x67D1E3A3D2D1BF))
+			f12_arg0.buttonPromptImage:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_saturation_normal"))
 			f12_arg0.buttonPromptImage:setShaderVector(0, 0, 0, 0, 0)
 			f12_arg0.clipFinished(f12_arg0.buttonPromptImage)
 			f12_arg0.buttonPromptImage1:completeAnimation()
 			f12_arg0.buttonPromptImage1:setRGB(0.5, 0.5, 0.5)
 			f12_arg0.buttonPromptImage1:setAlpha(0.5)
-			f12_arg0.buttonPromptImage1:setMaterial(LUI.UIImage.GetCachedMaterial(0x67D1E3A3D2D1BF))
+			f12_arg0.buttonPromptImage1:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_saturation_normal"))
 			f12_arg0.buttonPromptImage1:setShaderVector(0, 0, 0, 0, 0)
 			f12_arg0.clipFinished(f12_arg0.buttonPromptImage1)
 			f12_arg0.label:completeAnimation()

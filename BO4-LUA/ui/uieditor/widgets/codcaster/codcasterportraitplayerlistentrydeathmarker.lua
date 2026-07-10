@@ -9,7 +9,7 @@ CoD.CodCasterPortraitPlayerListEntryDeathMarker.new = function(f1_arg0, f1_arg1,
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local PlayerXDead = LUI.UIImage.new(0, 0, 0, 43, 0, 0, 0, 43)
 	PlayerXDead:setAlpha(0)
-	PlayerXDead:setImage(RegisterImage(0x1B2A931534C28C1))
+	PlayerXDead:setImage(RegisterImage(@"hash_51B2A931534C28C1"))
 	self:addElement(PlayerXDead)
 	self.PlayerXDead = PlayerXDead
 	self:mergeStateConditions({

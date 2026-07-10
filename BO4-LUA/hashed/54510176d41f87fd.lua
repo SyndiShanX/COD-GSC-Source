@@ -9,7 +9,7 @@ CoD.WZAARChallengeOrContract.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local ContractOrChallenge = LUI.UIImage.new(0, 0, 0, 36, 0, 0, 0, 36)
 	ContractOrChallenge:setRGB(0.61, 0.61, 0.61)
-	ContractOrChallenge:setImage(RegisterImage(0xE6A039E47F76367))
+	ContractOrChallenge:setImage(RegisterImage(@"uie_ui_menu_contracts_wz_challenge_icon"))
 	self:addElement(ContractOrChallenge)
 	self.ContractOrChallenge = ContractOrChallenge
 	self:mergeStateConditions({
@@ -36,7 +36,7 @@ CoD.WZAARChallengeOrContract.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 end
 CoD.WZAARChallengeOrContract.__resetProperties = function(f4_arg0)
 	f4_arg0.ContractOrChallenge:completeAnimation()
-	f4_arg0.ContractOrChallenge:setImage(RegisterImage(0xE6A039E47F76367))
+	f4_arg0.ContractOrChallenge:setImage(RegisterImage(@"uie_ui_menu_contracts_wz_challenge_icon"))
 end
 CoD.WZAARChallengeOrContract.__clipsPerState = {
 	DefaultState = {
@@ -50,7 +50,7 @@ CoD.WZAARChallengeOrContract.__clipsPerState = {
 			f6_arg0:__resetProperties()
 			f6_arg0:setupElementClipCounter(1)
 			f6_arg0.ContractOrChallenge:completeAnimation()
-			f6_arg0.ContractOrChallenge:setImage(RegisterImage(0xB2CE4A74953F52E))
+			f6_arg0.ContractOrChallenge:setImage(RegisterImage(@"uie_ui_menu_contracts_wz_contract_icon"))
 			f6_arg0.clipFinished(f6_arg0.ContractOrChallenge)
 		end,
 	},

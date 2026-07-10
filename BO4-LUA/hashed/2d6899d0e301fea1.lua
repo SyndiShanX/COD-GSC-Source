@@ -29,7 +29,7 @@ CoD.PurchaseableItemContentImageDaily.new = function(f1_arg0, f1_arg1, f1_arg2, 
 	self.DailyImageSmall = DailyImageSmall
 	local DailyImageCallingCard = LUI.UIImage.new(0, 0, 5, 243, 0, 0, 55.5, 164.5)
 	DailyImageCallingCard:setAlpha(0)
-	DailyImageCallingCard:setMaterial(LUI.UIImage.GetCachedMaterial(0xA02C44161370F6D))
+	DailyImageCallingCard:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_1A02C44161370F6D"))
 	DailyImageCallingCard:setShaderVector(0, 0, 0, 0, 0)
 	DailyImageCallingCard:setShaderVector(1, 1, 1, 0, 0)
 	DailyImageCallingCard:setShaderVector(2, 0, 0, 0, 0)
@@ -55,25 +55,25 @@ CoD.PurchaseableItemContentImageDaily.new = function(f1_arg0, f1_arg1, f1_arg2, 
 		{
 			stateName = "OutfitPalette",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", 0xDD691088352B680)
+				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", @"palette")
 			end,
 		},
 		{
 			stateName = "CallingCard",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", 0xCA2BC08C1A6BCF6)
+				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", @"calling_card")
 			end,
 		},
 		{
 			stateName = "Camo",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", 0xB0C9EF63048F282)
+				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", @"weapon_camo")
 			end,
 		},
 		{
 			stateName = "WarpaintBundle",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", 0x48B82A2276A1CAF)
+				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", @"hash_248B82A2276A1CAF")
 			end,
 		},
 	})

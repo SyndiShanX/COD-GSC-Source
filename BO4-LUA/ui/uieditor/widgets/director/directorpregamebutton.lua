@@ -62,7 +62,7 @@ CoD.DirectorPreGameButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	end)
 	local altNewIcon = DirectorCustomStartButton
 	local newIcon = DirectorCustomStartButton.subscribeToModel
-	local RestrictedIcon = Engine[0x8DF2E5447F384B9]()
+	local RestrictedIcon = Engine[@"getglobalmodel"]()
 	newIcon(altNewIcon, RestrictedIcon["lobbyRoot.lobbyNav"], function(f8_arg0)
 		f1_arg0:updateElementState(DirectorCustomStartButton, {
 			name = "model_validation",
@@ -105,7 +105,7 @@ CoD.DirectorPreGameButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	})
 	RestrictedIcon = newIcon
 	altNewIcon = newIcon.subscribeToModel
-	local f1_local5 = Engine[0x8DF2E5447F384B9]()
+	local f1_local5 = Engine[@"getglobalmodel"]()
 	altNewIcon(RestrictedIcon, f1_local5["lobbyRoot.lobbyNetworkMode"], function(f13_arg0)
 		f1_arg0:updateElementState(newIcon, {
 			name = "model_validation",
@@ -117,7 +117,7 @@ CoD.DirectorPreGameButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	end, false)
 	RestrictedIcon = newIcon
 	altNewIcon = newIcon.subscribeToModel
-	f1_local5 = Engine[0x8DF2E5447F384B9]()
+	f1_local5 = Engine[@"getglobalmodel"]()
 	altNewIcon(RestrictedIcon, f1_local5["lobbyRoot.lobbyNav"], function(f14_arg0)
 		f1_arg0:updateElementState(newIcon, {
 			name = "model_validation",
@@ -152,7 +152,7 @@ CoD.DirectorPreGameButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	})
 	f1_local5 = altNewIcon
 	RestrictedIcon = altNewIcon.subscribeToModel
-	local f1_local6 = Engine[0x8DF2E5447F384B9]()
+	local f1_local6 = Engine[@"getglobalmodel"]()
 	RestrictedIcon(f1_local5, f1_local6["lobbyRoot.lobbyNetworkMode"], function(f18_arg0)
 		f1_arg0:updateElementState(altNewIcon, {
 			name = "model_validation",
@@ -164,7 +164,7 @@ CoD.DirectorPreGameButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	end, false)
 	f1_local5 = altNewIcon
 	RestrictedIcon = altNewIcon.subscribeToModel
-	f1_local6 = Engine[0x8DF2E5447F384B9]()
+	f1_local6 = Engine[@"getglobalmodel"]()
 	RestrictedIcon(f1_local5, f1_local6["lobbyRoot.lobbyNav"], function(f19_arg0)
 		f1_arg0:updateElementState(altNewIcon, {
 			name = "model_validation",
@@ -221,7 +221,7 @@ CoD.DirectorPreGameButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	})
 	f1_local6 = RestrictedIcon
 	f1_local5 = RestrictedIcon.subscribeToModel
-	local f1_local7 = Engine[0x8DF2E5447F384B9]()
+	local f1_local7 = Engine[@"getglobalmodel"]()
 	f1_local5(f1_local6, f1_local7["lobbyRoot.lobbyNav"], function(f24_arg0)
 		f1_arg0:updateElementState(RestrictedIcon, {
 			name = "model_validation",
@@ -330,7 +330,7 @@ CoD.DirectorPreGameButton.__clipsPerState = {
 			f34_arg0:__resetProperties()
 			f34_arg0:setupElementClipCounter(4)
 			local f34_local0 = function(f35_arg0)
-				f34_arg0.DirectorCustomStartButton:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f34_arg0.DirectorCustomStartButton:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f34_arg0.DirectorCustomStartButton:setZoom(5)
 				f34_arg0.DirectorCustomStartButton:setScale(1.05, 1.05)
 				f34_arg0.DirectorCustomStartButton:registerEventHandler("interrupted_keyframe", f34_arg0.clipInterrupted)
@@ -382,7 +382,7 @@ CoD.DirectorPreGameButton.__clipsPerState = {
 			f39_arg0:__resetProperties()
 			f39_arg0:setupElementClipCounter(4)
 			local f39_local0 = function(f40_arg0)
-				f39_arg0.DirectorCustomStartButton:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f39_arg0.DirectorCustomStartButton:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f39_arg0.DirectorCustomStartButton:setZoom(0)
 				f39_arg0.DirectorCustomStartButton:setScale(1, 1)
 				f39_arg0.DirectorCustomStartButton:registerEventHandler("interrupted_keyframe", f39_arg0.clipInterrupted)
@@ -522,7 +522,7 @@ CoD.DirectorPreGameButton.__clipsPerState = {
 			f54_arg0:__resetProperties()
 			f54_arg0:setupElementClipCounter(4)
 			local f54_local0 = function(f55_arg0)
-				f54_arg0.DirectorCustomStartButton:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f54_arg0.DirectorCustomStartButton:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f54_arg0.DirectorCustomStartButton:setScale(1.05, 1.05)
 				f54_arg0.DirectorCustomStartButton:registerEventHandler("interrupted_keyframe", f54_arg0.clipInterrupted)
 				f54_arg0.DirectorCustomStartButton:registerEventHandler("transition_complete_keyframe", f54_arg0.clipFinished)
@@ -572,7 +572,7 @@ CoD.DirectorPreGameButton.__clipsPerState = {
 			f59_arg0:__resetProperties()
 			f59_arg0:setupElementClipCounter(4)
 			local f59_local0 = function(f60_arg0)
-				f59_arg0.DirectorCustomStartButton:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f59_arg0.DirectorCustomStartButton:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f59_arg0.DirectorCustomStartButton:setScale(1, 1)
 				f59_arg0.DirectorCustomStartButton:registerEventHandler("interrupted_keyframe", f59_arg0.clipInterrupted)
 				f59_arg0.DirectorCustomStartButton:registerEventHandler("transition_complete_keyframe", f59_arg0.clipFinished)

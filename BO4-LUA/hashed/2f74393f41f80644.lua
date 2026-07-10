@@ -8,7 +8,7 @@ CoD.CallingCardImage.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	self.soundSet = "none"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Image = LUI.UIImage.new(0, 1, 0, 0, 0.21, 0.79, 0, 0)
-	Image:setMaterial(LUI.UIImage.GetCachedMaterial(0xA02C44161370F6D))
+	Image:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_1A02C44161370F6D"))
 	Image:setShaderVector(0, 0.5, 0, 0, 0)
 	Image:setShaderVector(1, 1, 1, 0, 0)
 	Image:setShaderVector(2, 0, 0, 0, 0)
@@ -18,7 +18,7 @@ CoD.CallingCardImage.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 		{
 			stateName = "Show",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "category", 0xA1163B4DB78960A)
+				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "category", @"hash_5A1163B4DB78960A")
 			end,
 		},
 	})

@@ -34,7 +34,7 @@ CoD.JobFeedUtility.OnJobFeedItemInserted = function(f5_arg0, f5_arg1)
 	local f5_local1 = f5_arg1.multiUse
 	local f5_local2 = f5_arg1.multiKill
 	local f5_local3 = f5_arg0:getModel()
-	f5_local3.medalAsset:set(Engine[0x2DCF0973239E909](CoD.scoreInfoTable, Enum[0xD4C3CD6D885D4E5][0xB237CBC52108354], Enum[0xD4C3CD6D885D4E5][0x6F5F59B9644339], f5_arg0._scriptRef) or 0x0)
+	f5_local3.medalAsset:set(Engine[@"tablelookup"](CoD.scoreInfoTable, Enum[@"escoreinfotablecolumns"][@"hash_3B237CBC52108354"], Enum[@"escoreinfotablecolumns"][@"scoreinfotable_script_reference"], f5_arg0._scriptRef) or 0x0)
 	if not f5_arg0._parentFeed._numActiveCoins then
 		f5_arg0._parentFeed:playClip("ActivateFeed")
 		f5_arg0._parentFeed._numActiveCoins = 0
@@ -53,7 +53,7 @@ CoD.JobFeedUtility.OnJobFeedItemInserted = function(f5_arg0, f5_arg1)
 	else
 		f5_local3.isActiveMultiKill:set(false)
 	end
-	Engine[0xC4146BA76D0F982]("uin_jobfeed_core", f5_local0)
+	Engine[@"playsound"]("uin_jobfeed_core", f5_local0)
 end
 CoD.JobFeedUtility.OnJobFeedItemFreed = function(f6_arg0)
 	if f6_arg0._parentFeed._numActiveCoins then
@@ -88,7 +88,7 @@ CoD.JobFeedUtility.DecrementNonUniqueMultiUseActives = function(f10_arg0, f10_ar
 	end
 end
 CoD.JobFeedUtility.GetJobType = function(f11_arg0)
-	return Engine[0x5DC2BA4A99CE43E](CoD.scoreInfoTable, f11_arg0, Enum[0xD4C3CD6D885D4E5][0x6DD2AD27B53BEB])
+	return Engine[@"hash_25DC2BA4A99CE43E"](CoD.scoreInfoTable, f11_arg0, Enum[@"escoreinfotablecolumns"][0x6DD2AD27B53BEB])
 end
 CoD.JobFeedUtility.OnJobFeedFeedItemOverflowAtEnd = function(f12_arg0)
 	local f12_local0 = f12_arg0.feedItems[f12_arg0.currentIndex]
@@ -117,25 +117,25 @@ CoD.JobFeedUtility.JobFeedEventReceived = function(f13_arg0, f13_arg1, f13_arg2,
 			elseif not f13_local2._baseMedalGroups then
 				f13_local2._baseMedalGroups = {}
 			end
-			local f13_local3 = Engine[0x5DC2BA4A99CE43E](CoD.scoreInfoTable, f13_local0, Enum[0xD4C3CD6D885D4E5][0x6F5F59B9644339])
+			local f13_local3 = Engine[@"hash_25DC2BA4A99CE43E"](CoD.scoreInfoTable, f13_local0, Enum[@"escoreinfotablecolumns"][@"scoreinfotable_script_reference"])
 			if f13_arg1 == "challenge_coin_received" then
-				local f13_local4 = Engine[0x5DC2BA4A99CE43E](CoD.scoreInfoTable, f13_local0, Enum[0xD4C3CD6D885D4E5][0xC4972E817CC8B90])
-				local f13_local5 = Engine[0x5DC2BA4A99CE43E](CoD.scoreInfoTable, f13_local0, Enum[0xD4C3CD6D885D4E5][0xFE69ECFC89EDE2A])
-				local f13_local6 = Engine[0x5DC2BA4A99CE43E](CoD.scoreInfoTable, f13_local0, Enum[0xD4C3CD6D885D4E5][0xB237CBC52108354])
-				local f13_local7 = Engine[0x5DC2BA4A99CE43E](CoD.scoreInfoTable, f13_local0, Enum[0xD4C3CD6D885D4E5][0x2B88D3D2E541010])
+				local f13_local4 = Engine[@"hash_25DC2BA4A99CE43E"](CoD.scoreInfoTable, f13_local0, Enum[@"escoreinfotablecolumns"][@"hash_C4972E817CC8B90"])
+				local f13_local5 = Engine[@"hash_25DC2BA4A99CE43E"](CoD.scoreInfoTable, f13_local0, Enum[@"escoreinfotablecolumns"][@"hash_1FE69ECFC89EDE2A"])
+				local f13_local6 = Engine[@"hash_25DC2BA4A99CE43E"](CoD.scoreInfoTable, f13_local0, Enum[@"escoreinfotablecolumns"][@"hash_3B237CBC52108354"])
+				local f13_local7 = Engine[@"hash_25DC2BA4A99CE43E"](CoD.scoreInfoTable, f13_local0, Enum[@"escoreinfotablecolumns"][@"hash_12B88D3D2E541010"])
 				DebugPrint("Adding medal " .. tostring(f13_local6) .. " to feed " .. tostring(f13_local2))
 				local f13_local8 = {
 					f13_local3,
 					f13_arg3,
 					endedBy = f13_local7,
 				}
-				if f13_local4 == 0xA7CE19BAA54C278 or f13_local4 == 0xF312C483C3CB8A9 then
+				if f13_local4 == @"base" or f13_local4 == @"altbase" then
 					CoD.JobFeedUtility.JobFeedIncrementBaseMedalGroup(f13_local2, f13_local3)
-					if f13_local4 == 0xF312C483C3CB8A9 then
+					if f13_local4 == @"altbase" then
 						f13_local8.altBase = true
 					end
 					f13_local2:addFeedItem(f13_local8, 0)
-				elseif f13_local4 == 0xF9582D72160F199 then
+				elseif f13_local4 == @"kill" then
 					if f13_local5 ~= 0x0 then
 						CoD.JobFeedUtility.CashInJob(f13_local2, f13_local5, {
 							medalAssetName = f13_local6,
@@ -143,14 +143,14 @@ CoD.JobFeedUtility.JobFeedEventReceived = function(f13_arg0, f13_arg1, f13_arg2,
 					else
 						f13_local2:addFeedItem(f13_local8, 0)
 					end
-				elseif f13_local4 == 0x54A663DF6E5DEB5 then
+				elseif f13_local4 == @"combokill" then
 					if f13_local5 ~= 0x0 then
 						CoD.JobFeedUtility.CashInJob(f13_local2, f13_local5, {
 							medalAssetName = f13_local6,
 							comboCashIn = true,
 						})
 					end
-				elseif f13_local4 == 0xC856D95DB14B8C6 then
+				elseif f13_local4 == @"multikill" then
 					if not f13_local2._activeMultiKillItem then
 						f13_local8.multiKill = true
 						CoD.FeedUtility.AddFeedItemToBeginning(f13_local2, f13_local8, 0)
@@ -159,7 +159,7 @@ CoD.JobFeedUtility.JobFeedEventReceived = function(f13_arg0, f13_arg1, f13_arg2,
 							medalAssetName = f13_local6,
 						}, CoD.JobFeedUtility.IncrementMultiKill)
 					end
-				elseif f13_local4 == 0x5E13205E2BDEAE5 then
+				elseif f13_local4 == @"multiuse" then
 					local f13_local9 = CoD.JobFeedUtility.FindFirstItemOfType(f13_local2, f13_local3)
 					if f13_local9 then
 						CoD.JobFeedUtility.AddMultiEventToQueue(f13_local9, nil, CoD.JobFeedUtility.IncrementMultiUse)
@@ -167,9 +167,9 @@ CoD.JobFeedUtility.JobFeedEventReceived = function(f13_arg0, f13_arg1, f13_arg2,
 						f13_local8.multiUse = true
 						f13_local2:addFeedItem(f13_local8, 0)
 					end
-				elseif f13_local4 == 0x263112AE7BABF2F then
+				elseif f13_local4 == @"hash_2263112AE7BABF2F" then
 					CoD.JobFeedUtility.HandleNonUniqueMultiUse(f13_local2, f13_local8, f13_arg2)
-				elseif f13_local4 == 0x9FA22DABA3D7494 then
+				elseif f13_local4 == @"impulse" then
 					f13_local2:addFeedItem(f13_local8, CoD.JobFeedUtility.Lifetime)
 				end
 			elseif f13_arg1 == "end_sustaining_action" then

@@ -95,7 +95,7 @@ CoD.LeaguePlayLeaderboard_InfoPane.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	f1_local3(f1_local2, f1_local4["gameClient.update"], ArenaInfoWidget.SkillIcon.__SkillIcon_Image_FullPath)
 	f1_local2 = ArenaInfoWidget
 	f1_local3 = ArenaInfoWidget.subscribeToModel
-	f1_local4 = Engine[0x8DF2E5447F384B9]()
+	f1_local4 = Engine[@"getglobalmodel"]()
 	f1_local3(f1_local2, f1_local4["PartyPrivacy.privacy"], ArenaInfoWidget.SkillIcon.__SkillIcon_Image_FullPath)
 	f1_local2 = ArenaInfoWidget
 	f1_local3 = ArenaInfoWidget.subscribeToModel
@@ -111,7 +111,7 @@ CoD.LeaguePlayLeaderboard_InfoPane.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	f1_local3(f1_local2, f1_local4["gameClient.update"], ArenaInfoWidget.Rank.__xuid_FullPath)
 	f1_local2 = ArenaInfoWidget
 	f1_local3 = ArenaInfoWidget.subscribeToModel
-	f1_local4 = Engine[0x8DF2E5447F384B9]()
+	f1_local4 = Engine[@"getglobalmodel"]()
 	f1_local3(f1_local2, f1_local4["PartyPrivacy.privacy"], ArenaInfoWidget.Rank.__xuid_FullPath)
 	self:mergeStateConditions({
 		{

@@ -8,63 +8,63 @@ CoD.TabbedScoreboardRowSelected.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local SelectedDotGlow = LUI.UIImage.new(0, 0, -1, 685, 0, 0, 0, 56)
-	SelectedDotGlow:setImage(RegisterImage(0xDE89A66BFC55B6D))
+	SelectedDotGlow:setImage(RegisterImage(@"uie_ui_menu_mp_scoreboard_list_indicator_bg"))
 	self:addElement(SelectedDotGlow)
 	self.SelectedDotGlow = SelectedDotGlow
 	local SelectedDotGlowPC = nil
 	SelectedDotGlowPC = LUI.UIImage.new(0, 0, -1, 685, 0, 0, 0, 56)
 	SelectedDotGlowPC:setAlpha(0)
-	SelectedDotGlowPC:setImage(RegisterImage(0x6B7CDF731D0F3F6))
+	SelectedDotGlowPC:setImage(RegisterImage(@"hash_6B7CDF731D0F3F6"))
 	self:addElement(SelectedDotGlowPC)
 	self.SelectedDotGlowPC = SelectedDotGlowPC
 	local SelectedDotGlowAdd = LUI.UIImage.new(0, 0, -1, 685, 0, 0, 0, 56)
-	SelectedDotGlowAdd:setImage(RegisterImage(0xDE89A66BFC55B6D))
-	SelectedDotGlowAdd:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	SelectedDotGlowAdd:setImage(RegisterImage(@"uie_ui_menu_mp_scoreboard_list_indicator_bg"))
+	SelectedDotGlowAdd:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	SelectedDotGlowAdd:setShaderVector(0, 3, 0, 0, 0)
 	self:addElement(SelectedDotGlowAdd)
 	self.SelectedDotGlowAdd = SelectedDotGlowAdd
 	local SelectedDotGlowAddPC = nil
 	SelectedDotGlowAddPC = LUI.UIImage.new(0, 0, -1, 685, 0, 0, 0, 56)
 	SelectedDotGlowAddPC:setAlpha(0)
-	SelectedDotGlowAddPC:setImage(RegisterImage(0x6B7CDF731D0F3F6))
-	SelectedDotGlowAddPC:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	SelectedDotGlowAddPC:setImage(RegisterImage(@"hash_6B7CDF731D0F3F6"))
+	SelectedDotGlowAddPC:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	SelectedDotGlowAddPC:setShaderVector(0, 3, 0, 0, 0)
 	self:addElement(SelectedDotGlowAddPC)
 	self.SelectedDotGlowAddPC = SelectedDotGlowAddPC
 	local SelectedFrame = LUI.UIImage.new(0, 0, -7.5, 692.5, 0, 0, -9, 69)
 	SelectedFrame:setAlpha(0)
-	SelectedFrame:setImage(RegisterImage(0x8943740C9324811))
+	SelectedFrame:setImage(RegisterImage(@"uie_ui_menu_mp_scoreboard_list_indicator"))
 	self:addElement(SelectedFrame)
 	self.SelectedFrame = SelectedFrame
 	local SelectedFrameNeutral = LUI.UIImage.new(0, 0, -7.5, 692.5, 0, 0, -9, 69)
 	SelectedFrameNeutral:setRGB(0.85, 0.85, 0.85)
-	SelectedFrameNeutral:setImage(RegisterImage(0xC6D8034A245ACD9))
+	SelectedFrameNeutral:setImage(RegisterImage(@"uie_ui_menu_mp_scoreboard_list_indicator_gray"))
 	self:addElement(SelectedFrameNeutral)
 	self.SelectedFrameNeutral = SelectedFrameNeutral
 	local SelectedFrameNeutral2 = LUI.UIImage.new(0, 0, -7.5, 692.5, 0, 0, -9, 69)
 	SelectedFrameNeutral2:setRGB(0.85, 0.85, 0.85)
-	SelectedFrameNeutral2:setImage(RegisterImage(0xC6D8034A245ACD9))
-	SelectedFrameNeutral2:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	SelectedFrameNeutral2:setImage(RegisterImage(@"uie_ui_menu_mp_scoreboard_list_indicator_gray"))
+	SelectedFrameNeutral2:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(SelectedFrameNeutral2)
 	self.SelectedFrameNeutral2 = SelectedFrameNeutral2
 	local SelectedFrameNeutral3 = LUI.UIImage.new(0, 0, -7.5, 692.5, 0, 0, -9, 69)
 	SelectedFrameNeutral3:setRGB(0.85, 0.85, 0.85)
-	SelectedFrameNeutral3:setImage(RegisterImage(0xC6D8034A245ACD9))
-	SelectedFrameNeutral3:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	SelectedFrameNeutral3:setImage(RegisterImage(@"uie_ui_menu_mp_scoreboard_list_indicator_gray"))
+	SelectedFrameNeutral3:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(SelectedFrameNeutral3)
 	self.SelectedFrameNeutral3 = SelectedFrameNeutral3
 	local SelectedFrameAdd = LUI.UIImage.new(0, 0, -8, 692, 0, 0, -9, 69)
 	SelectedFrameAdd:setAlpha(0)
-	SelectedFrameAdd:setImage(RegisterImage(0xB2E10350E5EAFE7))
-	SelectedFrameAdd:setMaterial(LUI.UIImage.GetCachedMaterial(0xF755127C95CF5B6))
+	SelectedFrameAdd:setImage(RegisterImage(@"uie_ui_menu_mp_scoreboard_list_indicator_glow"))
+	SelectedFrameAdd:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_F755127C95CF5B6"))
 	SelectedFrameAdd:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(SelectedFrameAdd)
 	self.SelectedFrameAdd = SelectedFrameAdd
 	local SelectedFrameAddNeutral = LUI.UIImage.new(0, 0, -8, 692, 0, 0, -9, 69)
 	SelectedFrameAddNeutral:setRGB(0.85, 0.85, 0.85)
 	SelectedFrameAddNeutral:setAlpha(0)
-	SelectedFrameAddNeutral:setImage(RegisterImage(0x9D6F1F2500105F7))
-	SelectedFrameAddNeutral:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	SelectedFrameAddNeutral:setImage(RegisterImage(@"hash_59D6F1F2500105F7"))
+	SelectedFrameAddNeutral:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	SelectedFrameAddNeutral:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(SelectedFrameAddNeutral)
 	self.SelectedFrameAddNeutral = SelectedFrameAddNeutral
@@ -93,7 +93,7 @@ CoD.TabbedScoreboardRowSelected.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	end)
 	local f1_local11 = self
 	local f1_local12 = self.subscribeToModel
-	local f1_local13 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local13 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local12(f1_local11, f1_local13["deadSpectator.playerIndex"], function(f5_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -105,14 +105,14 @@ CoD.TabbedScoreboardRowSelected.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	end, false)
 	f1_local11 = self
 	f1_local12 = self.subscribeToModel
-	f1_local13 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local12(f1_local11, f1_local13["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x198075B069840DC]], function(f6_arg0)
+	f1_local13 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local12(f1_local11, f1_local13["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_game_ended"]], function(f6_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f6_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x198075B069840DC],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_game_ended"],
 		})
 	end, false)
 	if PostLoadFunc then
@@ -132,20 +132,20 @@ CoD.TabbedScoreboardRowSelected.__resetProperties = function(f7_arg0)
 	f7_arg0.SelectedDotGlow:completeAnimation()
 	f7_arg0.SelectedDotGlowPC:completeAnimation()
 	f7_arg0.SelectedDotGlowAdd:setAlpha(1)
-	f7_arg0.SelectedDotGlowAdd:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	f7_arg0.SelectedDotGlowAdd:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	f7_arg0.SelectedDotGlowAdd:setShaderVector(0, 3, 0, 0, 0)
 	f7_arg0.SelectedFrameNeutral:setAlpha(1)
 	f7_arg0.SelectedFrameNeutral2:setAlpha(1)
 	f7_arg0.SelectedFrameNeutral3:setAlpha(1)
 	f7_arg0.SelectedFrameAddNeutral:setAlpha(0)
-	f7_arg0.SelectedFrameAddNeutral:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	f7_arg0.SelectedFrameAddNeutral:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	f7_arg0.SelectedFrameAddNeutral:setShaderVector(0, 1, 0, 0, 0)
 	f7_arg0.SelectedFrameAdd:setAlpha(0)
-	f7_arg0.SelectedFrameAdd:setMaterial(LUI.UIImage.GetCachedMaterial(0xF755127C95CF5B6))
+	f7_arg0.SelectedFrameAdd:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_F755127C95CF5B6"))
 	f7_arg0.SelectedFrameAdd:setShaderVector(0, 1, 0, 0, 0)
 	f7_arg0.SelectedFrame:setAlpha(0)
 	f7_arg0.SelectedDotGlowAddPC:setAlpha(0)
-	f7_arg0.SelectedDotGlowAddPC:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	f7_arg0.SelectedDotGlowAddPC:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	f7_arg0.SelectedDotGlowAddPC:setShaderVector(0, 3, 0, 0, 0)
 	f7_arg0.SelectedDotGlow:setAlpha(1)
 	f7_arg0.SelectedDotGlowPC:setAlpha(0)
@@ -162,20 +162,20 @@ CoD.TabbedScoreboardRowSelected.__clipsPerState = {
 							f12_arg0:beginAnimation(799)
 							f12_arg0:registerEventHandler("transition_complete_keyframe", f8_arg0.clipFinished)
 						end
-						f11_arg0:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+						f11_arg0:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 						f11_arg0:setShaderVector(0, 1, 0, 0, 0)
 						f11_arg0:registerEventHandler("transition_complete_keyframe", f11_local0)
 					end
-					f10_arg0:beginAnimation(700, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f10_arg0:beginAnimation(700, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_both"])
 					f10_arg0:registerEventHandler("transition_complete_keyframe", f10_local0)
 				end
-				f8_arg0.SelectedDotGlowAdd:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f8_arg0.SelectedDotGlowAdd:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 				f8_arg0.SelectedDotGlowAdd:setShaderVector(0, 2, 0, 0, 0)
 				f8_arg0.SelectedDotGlowAdd:registerEventHandler("interrupted_keyframe", f8_arg0.clipInterrupted)
 				f8_arg0.SelectedDotGlowAdd:registerEventHandler("transition_complete_keyframe", f9_local0)
 			end
 			f8_arg0.SelectedDotGlowAdd:completeAnimation()
-			f8_arg0.SelectedDotGlowAdd:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+			f8_arg0.SelectedDotGlowAdd:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 			f8_arg0.SelectedDotGlowAdd:setShaderVector(0, 1, 0, 0, 0)
 			f8_local0(f8_arg0.SelectedDotGlowAdd)
 			f8_arg0.SelectedFrameNeutral:completeAnimation()
@@ -218,7 +218,7 @@ CoD.TabbedScoreboardRowSelected.__clipsPerState = {
 			end
 			f8_arg0.SelectedFrameAddNeutral:completeAnimation()
 			f8_arg0.SelectedFrameAddNeutral:setAlpha(1)
-			f8_arg0.SelectedFrameAddNeutral:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+			f8_arg0.SelectedFrameAddNeutral:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 			f8_arg0.SelectedFrameAddNeutral:setShaderVector(0, 2.5, 0, 0, 0)
 			f8_local1(f8_arg0.SelectedFrameAddNeutral)
 			f8_arg0.nextClip = "DefaultClip"
@@ -235,20 +235,20 @@ CoD.TabbedScoreboardRowSelected.__clipsPerState = {
 							f23_arg0:beginAnimation(799)
 							f23_arg0:registerEventHandler("transition_complete_keyframe", f19_arg0.clipFinished)
 						end
-						f22_arg0:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+						f22_arg0:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 						f22_arg0:setShaderVector(0, 1, 0, 0, 0)
 						f22_arg0:registerEventHandler("transition_complete_keyframe", f22_local0)
 					end
-					f21_arg0:beginAnimation(700, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f21_arg0:beginAnimation(700, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_both"])
 					f21_arg0:registerEventHandler("transition_complete_keyframe", f21_local0)
 				end
-				f19_arg0.SelectedDotGlowAdd:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f19_arg0.SelectedDotGlowAdd:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 				f19_arg0.SelectedDotGlowAdd:setShaderVector(0, 2, 0, 0, 0)
 				f19_arg0.SelectedDotGlowAdd:registerEventHandler("interrupted_keyframe", f19_arg0.clipInterrupted)
 				f19_arg0.SelectedDotGlowAdd:registerEventHandler("transition_complete_keyframe", f20_local0)
 			end
 			f19_arg0.SelectedDotGlowAdd:completeAnimation()
-			f19_arg0.SelectedDotGlowAdd:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+			f19_arg0.SelectedDotGlowAdd:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 			f19_arg0.SelectedDotGlowAdd:setShaderVector(0, 1, 0, 0, 0)
 			f19_local0(f19_arg0.SelectedDotGlowAdd)
 			f19_arg0.SelectedFrame:completeAnimation()
@@ -263,7 +263,7 @@ CoD.TabbedScoreboardRowSelected.__clipsPerState = {
 									f29_arg0:beginAnimation(799)
 									f29_arg0:registerEventHandler("transition_complete_keyframe", f19_arg0.clipFinished)
 								end
-								f28_arg0:beginAnimation(900, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+								f28_arg0:beginAnimation(900, Enum[@"luitween"][@"luitween_ease_out"])
 								f28_arg0:setShaderVector(0, 2.5, 0, 0, 0)
 								f28_arg0:registerEventHandler("transition_complete_keyframe", f28_local0)
 							end
@@ -278,14 +278,14 @@ CoD.TabbedScoreboardRowSelected.__clipsPerState = {
 					f25_arg0:setShaderVector(0, 3.4, 0, 0, 0)
 					f25_arg0:registerEventHandler("transition_complete_keyframe", f25_local0)
 				end
-				f19_arg0.SelectedFrameAdd:beginAnimation(900, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f19_arg0.SelectedFrameAdd:beginAnimation(900, Enum[@"luitween"][@"luitween_ease_in"])
 				f19_arg0.SelectedFrameAdd:setShaderVector(0, 4, 0, 0, 0)
 				f19_arg0.SelectedFrameAdd:registerEventHandler("interrupted_keyframe", f19_arg0.clipInterrupted)
 				f19_arg0.SelectedFrameAdd:registerEventHandler("transition_complete_keyframe", f24_local0)
 			end
 			f19_arg0.SelectedFrameAdd:completeAnimation()
 			f19_arg0.SelectedFrameAdd:setAlpha(1)
-			f19_arg0.SelectedFrameAdd:setMaterial(LUI.UIImage.GetCachedMaterial(0xF755127C95CF5B6))
+			f19_arg0.SelectedFrameAdd:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_F755127C95CF5B6"))
 			f19_arg0.SelectedFrameAdd:setShaderVector(0, 2.5, 0, 0, 0)
 			f19_local1(f19_arg0.SelectedFrameAdd)
 			f19_arg0.nextClip = "DefaultClip"
@@ -306,11 +306,11 @@ CoD.TabbedScoreboardRowSelected.__clipsPerState = {
 			f30_arg0.clipFinished(f30_arg0.SelectedDotGlowAdd)
 			f30_arg0.SelectedDotGlowAddPC:completeAnimation()
 			f30_arg0.SelectedDotGlowAddPC:setAlpha(0)
-			f30_arg0.SelectedDotGlowAddPC:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+			f30_arg0.SelectedDotGlowAddPC:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 			f30_arg0.SelectedDotGlowAddPC:setShaderVector(0, 1, 0, 0, 0)
 			f30_arg0.clipFinished(f30_arg0.SelectedDotGlowAddPC)
 			f30_arg0.SelectedFrameAdd:completeAnimation()
-			f30_arg0.SelectedFrameAdd:setMaterial(LUI.UIImage.GetCachedMaterial(0xF755127C95CF5B6))
+			f30_arg0.SelectedFrameAdd:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_F755127C95CF5B6"))
 			f30_arg0.SelectedFrameAdd:setShaderVector(0, 2.5, 0, 0, 0)
 			f30_arg0.clipFinished(f30_arg0.SelectedFrameAdd)
 			f30_arg0.nextClip = "DefaultClip"

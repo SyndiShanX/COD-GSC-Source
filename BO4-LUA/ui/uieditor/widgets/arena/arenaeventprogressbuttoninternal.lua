@@ -13,7 +13,7 @@ CoD.ArenaEventProgressButtonInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local BlurBg = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	BlurBg:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	BlurBg:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	BlurBg:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(BlurBg)
 	self.BlurBg = BlurBg
@@ -29,16 +29,16 @@ CoD.ArenaEventProgressButtonInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	self.BgTint = BgTint
 	local FrameBorder = LUI.UIImage.new(0, 1, -1, 1, 0, 1, -1, 1)
 	FrameBorder:setAlpha(0.05)
-	FrameBorder:setImage(RegisterImage(0x185E11D74ECA3D7))
-	FrameBorder:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	FrameBorder:setImage(RegisterImage(@"uie_ui_menu_store_common_frame"))
+	FrameBorder:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	FrameBorder:setShaderVector(0, 0, 0, 0, 0)
 	FrameBorder:setupNineSliceShader(12, 12)
 	self:addElement(FrameBorder)
 	self.FrameBorder = FrameBorder
 	local FrontendFrame = LUI.UIImage.new(0, 1, -1, 1, 0, 1, -1, 1)
 	FrontendFrame:setAlpha(0.05)
-	FrontendFrame:setImage(RegisterImage(0x185E11D74ECA3D7))
-	FrontendFrame:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	FrontendFrame:setImage(RegisterImage(@"uie_ui_menu_store_common_frame"))
+	FrontendFrame:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	FrontendFrame:setShaderVector(0, 0, 0, 0, 0)
 	FrontendFrame:setupNineSliceShader(12, 12)
 	self:addElement(FrontendFrame)
@@ -57,7 +57,7 @@ CoD.ArenaEventProgressButtonInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f
 		{
 			stateName = "LeaguePlay",
 			condition = function(menu, element, event)
-				return CoD.ArenaUtility.CurrentArenaEventTypeEquals(self, Enum[0xC0EA92D04BC003B][0xC32571741C5B730])
+				return CoD.ArenaUtility.CurrentArenaEventTypeEquals(self, Enum[@"hash_6C0EA92D04BC003B"][@"hash_5C32571741C5B730"])
 			end,
 		},
 		{
@@ -69,7 +69,7 @@ CoD.ArenaEventProgressButtonInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	})
 	local f1_local9 = self
 	local f1_local10 = self.subscribeToModel
-	local f1_local11 = Engine[0x8DF2E5447F384B9]()
+	local f1_local11 = Engine[@"getglobalmodel"]()
 	f1_local10(f1_local9, f1_local11["lobbyPlaylist.name"], function(f4_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -81,7 +81,7 @@ CoD.ArenaEventProgressButtonInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	end, false)
 	f1_local9 = self
 	f1_local10 = self.subscribeToModel
-	f1_local11 = Engine[0x8DF2E5447F384B9]()
+	f1_local11 = Engine[@"getglobalmodel"]()
 	f1_local10(f1_local9, f1_local11["lobbyRoot.lobbyNav"], function(f5_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

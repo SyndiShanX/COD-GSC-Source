@@ -10,7 +10,7 @@ CoD.freeCursorHeaderLabel.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	local backingDetailed = LUI.UIImage.new(0, 0, 0, 405, 0, 1, 0, 0)
 	backingDetailed:setRGB(0.08, 0.08, 0.08)
 	backingDetailed:setAlpha(0)
-	backingDetailed:setMaterial(LUI.UIImage.GetCachedMaterial(0x316E67E1DF2198E))
+	backingDetailed:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_normal"))
 	backingDetailed:setShaderVector(0, 1, 0, 0, 0)
 	backingDetailed:setShaderVector(1, 0, 0, 0, 0)
 	backingDetailed:setShaderVector(2, 1, 0, 0, 0)
@@ -25,9 +25,9 @@ CoD.freeCursorHeaderLabel.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	local title = LUI.UIText.new(0, 0, 7, 207, 0, 0, 7, 29)
 	title:setRGB(0.86, 0.74, 0.25)
 	title:setTTF("ttmussels_regular")
-	title:setMaterial(LUI.UIImage.GetCachedMaterial(0x71E049B161CD00A))
+	title:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_171E049B161CD00A"))
 	title:setLetterSpacing(6)
-	title:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	title:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	title:linkToElementModel(self, "title", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -67,14 +67,14 @@ CoD.freeCursorHeaderLabel.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	end)
 	local f1_local4 = self
 	local f1_local5 = self.subscribeToModel
-	local f1_local6 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local5(f1_local4, f1_local6["ButtonBits." .. Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA]], function(f7_arg0)
+	local f1_local6 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local5(f1_local4, f1_local6["ButtonBits." .. Enum[@"luibutton"][@"lui_key_rtrig"]], function(f7_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f7_arg0:get(),
-			modelName = "ButtonBits." .. Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA],
+			modelName = "ButtonBits." .. Enum[@"luibutton"][@"lui_key_rtrig"],
 		})
 	end, false)
 	self:linkToElementModel(self, "detailedViewPC", true, function(model)
@@ -111,7 +111,7 @@ CoD.freeCursorHeaderLabel.__resetProperties = function(f10_arg0)
 	f10_arg0.title:setAlpha(1)
 	f10_arg0.backing:setAlpha(1)
 	f10_arg0.backingDetailed:setAlpha(0)
-	f10_arg0.backingDetailed:setMaterial(LUI.UIImage.GetCachedMaterial(0x316E67E1DF2198E))
+	f10_arg0.backingDetailed:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_normal"))
 	f10_arg0.backingDetailed:setShaderVector(0, 1, 0, 0, 0)
 	f10_arg0.backingDetailed:setShaderVector(1, 0, 0, 0, 0)
 	f10_arg0.backingDetailed:setShaderVector(2, 1, 0, 0, 0)
@@ -141,7 +141,7 @@ CoD.freeCursorHeaderLabel.__clipsPerState = {
 			end
 			f12_arg0.backingDetailed:completeAnimation()
 			f12_arg0.backingDetailed:setAlpha(1)
-			f12_arg0.backingDetailed:setMaterial(LUI.UIImage.GetCachedMaterial(0x316E67E1DF2198E))
+			f12_arg0.backingDetailed:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_normal"))
 			f12_arg0.backingDetailed:setShaderVector(0, 0, 0, 0, 0)
 			f12_arg0.backingDetailed:setShaderVector(1, 0, 0, 0, 0)
 			f12_arg0.backingDetailed:setShaderVector(2, 1, 0, 0, 0)
@@ -178,7 +178,7 @@ CoD.freeCursorHeaderLabel.__clipsPerState = {
 			end
 			f15_arg0.backingDetailed:completeAnimation()
 			f15_arg0.backingDetailed:setAlpha(1)
-			f15_arg0.backingDetailed:setMaterial(LUI.UIImage.GetCachedMaterial(0x316E67E1DF2198E))
+			f15_arg0.backingDetailed:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_normal"))
 			f15_arg0.backingDetailed:setShaderVector(0, 0, 0, 0, 0)
 			f15_arg0.backingDetailed:setShaderVector(1, 0, 0, 0, 0)
 			f15_arg0.backingDetailed:setShaderVector(2, 1, 0, 0, 0)
@@ -199,7 +199,7 @@ CoD.freeCursorHeaderLabel.__clipsPerState = {
 			f17_arg0:setupElementClipCounter(3)
 			f17_arg0.backingDetailed:completeAnimation()
 			f17_arg0.backingDetailed:setAlpha(1)
-			f17_arg0.backingDetailed:setMaterial(LUI.UIImage.GetCachedMaterial(0x316E67E1DF2198E))
+			f17_arg0.backingDetailed:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_normal"))
 			f17_arg0.backingDetailed:setShaderVector(0, 1, 0, 0, 0)
 			f17_arg0.backingDetailed:setShaderVector(1, 0, 0, 0, 0)
 			f17_arg0.backingDetailed:setShaderVector(2, 1, 0, 0, 0)

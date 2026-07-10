@@ -15,12 +15,12 @@ CoD.Laboratory_SafeAreaContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local CACHeader = CoD.CommonHeader.new(f1_arg0, f1_arg1, 0.5, 0.5, -960, 960, 0, 0, 0, 67)
-	CACHeader.subtitle.StageTitle:setText(LocalizeToUpperString(0x96D9A8F7540D6B6))
+	CACHeader.subtitle.StageTitle:setText(LocalizeToUpperString(@"hash_96D9A8F7540D6B6"))
 	CACHeader.subtitle.subtitle:setAlpha(0)
 	CACHeader:subscribeToGlobalModel(f1_arg1, "LobbyRoot", "lobbyTitle", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			CACHeader.subtitle.subtitle:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			CACHeader.subtitle.subtitle:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	self:addElement(CACHeader)
@@ -58,7 +58,7 @@ CoD.Laboratory_SafeAreaContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	})
 	local CommonIdentityWidgetStreamlined = StartMenuCurrencyCounts
 	local SelfIdentityBadge = StartMenuCurrencyCounts.subscribeToModel
-	local f1_local6 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local6 = Engine[@"getmodelforcontroller"](f1_arg1)
 	SelfIdentityBadge(CommonIdentityWidgetStreamlined, f1_local6["LootStreamProgress.currentLootXP"], function(f6_arg0)
 		f1_arg0:updateElementState(StartMenuCurrencyCounts, {
 			name = "model_validation",
@@ -112,7 +112,7 @@ CoD.Laboratory_SafeAreaContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	})
 	local f1_local7 = self
 	f1_local6 = self.subscribeToModel
-	local f1_local8 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local8 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local6(f1_local7, f1_local8["Laboratory.animState"], function(f13_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

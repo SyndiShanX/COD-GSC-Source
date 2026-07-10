@@ -11,11 +11,11 @@ CoD.MeritReportHeaderText.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	local PlaceLabel = LUI.UIText.new(0, 0, 0, 262, 0, 0, 33, 87)
 	PlaceLabel:setRGB(0.92, 0.92, 0.92)
 	PlaceLabel:setAlpha(0.5)
-	PlaceLabel:setText(LocalizeToUpperString(0x62C273392778D63))
+	PlaceLabel:setText(LocalizeToUpperString(@"aar/place"))
 	PlaceLabel:setTTF("default")
 	PlaceLabel:setLetterSpacing(4)
-	PlaceLabel:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	PlaceLabel:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	PlaceLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	PlaceLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(PlaceLabel)
 	self.PlaceLabel = PlaceLabel
 	local Spacer = CoD.VerticalListSpacer.new(f1_arg0, f1_arg1, 0, 0, 262, 278, 0, 0, -11, 109)
@@ -23,8 +23,8 @@ CoD.MeritReportHeaderText.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	self.Spacer = Spacer
 	local Placement = LUI.UIText.new(0, 0, 278, 408, 0, 0, 24, 96)
 	Placement:setTTF("0arame_mono_stencil")
-	Placement:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	Placement:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Placement:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	Placement:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	Placement:linkToElementModel(self, "placement", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then

@@ -7,7 +7,7 @@ CoD.CompassMinimapItems.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	self.id = "CompassMinimapItems"
 	self.soundSet = "default"
 	local CompassMinimapItems = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	CompassMinimapItems:setupCompassItems(Enum[0x398581F68B3E097][0x87B41F155A4F8BA])
+	CompassMinimapItems:setupCompassItems(Enum[@"compasstype"][@"compass_type_partial"])
 	self:addElement(CompassMinimapItems)
 	self.CompassMinimapItems = CompassMinimapItems
 	if PostLoadFunc then

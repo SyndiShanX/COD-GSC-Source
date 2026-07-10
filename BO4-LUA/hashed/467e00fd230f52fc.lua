@@ -10,29 +10,29 @@ CoD.bleedOutHealthWZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local WaypointBackerBlur = LUI.UIImage.new(0.5, 0.5, -94, 94, 0.5, 0.5, -118, 70)
-	WaypointBackerBlur:setImage(RegisterImage(0x8DDD1FDE43242E1))
-	WaypointBackerBlur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	WaypointBackerBlur:setImage(RegisterImage(@"uie_ui_hud_core_waypoint_domination_backer"))
+	WaypointBackerBlur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	WaypointBackerBlur:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(WaypointBackerBlur)
 	self.WaypointBackerBlur = WaypointBackerBlur
 	local WaypointBacker = LUI.UIImage.new(0.5, 0.5, -94, 94, 0.5, 0.5, -118, 70)
-	WaypointBacker:setImage(RegisterImage(0x8DDD1FDE43242E1))
+	WaypointBacker:setImage(RegisterImage(@"uie_ui_hud_core_waypoint_domination_backer"))
 	self:addElement(WaypointBacker)
 	self.WaypointBacker = WaypointBacker
 	local WaypointProgressMeterEmpty = LUI.UIImage.new(0.5, 0.5, -94, 94, 0.5, 0.5, -118, 70)
 	WaypointProgressMeterEmpty:setRGB(1, 0.98, 0.91)
-	WaypointProgressMeterEmpty:setImage(RegisterImage(0x2608D8F924FABD2))
+	WaypointProgressMeterEmpty:setImage(RegisterImage(@"uie_ui_hud_core_waypoint_domination_empty"))
 	self:addElement(WaypointProgressMeterEmpty)
 	self.WaypointProgressMeterEmpty = WaypointProgressMeterEmpty
 	local reviveiconBackplate = LUI.UIImage.new(0.5, 0.5, -60, 60, 0.5, 0.5, -84, 36)
 	reviveiconBackplate:setRGB(0, 0, 0)
 	reviveiconBackplate:setAlpha(0.66)
-	reviveiconBackplate:setImage(RegisterImage(0x41C05E66E33E85A))
+	reviveiconBackplate:setImage(RegisterImage(@"uie_ui_icon_bounty_hunter_revive"))
 	self:addElement(reviveiconBackplate)
 	self.reviveiconBackplate = reviveiconBackplate
 	local CWOBacking = LUI.UIImage.new(0.5, 0.5, -66, 66, 0.5, 0.5, -90, 42)
 	CWOBacking:setAlpha(0)
-	CWOBacking:setImage(RegisterImage(0xB63170C49335443))
+	CWOBacking:setImage(RegisterImage(@"uie_ui_menu_cac_selection_circle"))
 	CWOBacking.__Color = function(f2_arg0)
 		local f2_local0 = f2_arg0:get()
 		if f2_local0 ~= nil then
@@ -54,19 +54,19 @@ CoD.bleedOutHealthWZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	self.CWOBacking = CWOBacking
 	local WaypointPattern = LUI.UIImage.new(0.5, 0.5, -80, 80, 0.5, 0.5, -104, 56)
 	WaypointPattern:setAlpha(0.4)
-	WaypointPattern:setImage(RegisterImage(0x159D9B7B7294C91))
-	WaypointPattern:setMaterial(LUI.UIImage.GetCachedMaterial(0xF755127C95CF5B6))
+	WaypointPattern:setImage(RegisterImage(@"uie_ui_hud_core_waypoint_led"))
+	WaypointPattern:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_F755127C95CF5B6"))
 	WaypointPattern:setShaderVector(0, 2, 0, 0, 0)
 	self:addElement(WaypointPattern)
 	self.WaypointPattern = WaypointPattern
 	local CWOicon = LUI.UIImage.new(0.5, 0.5, -60, 60, 0.5, 0.5, -88, 32)
 	CWOicon:setAlpha(0)
-	CWOicon:setImage(RegisterImage(0xC33BF43013D5A1))
+	CWOicon:setImage(RegisterImage(@"uie_ui_hud_wz_hud_cwo_icon"))
 	self:addElement(CWOicon)
 	self.CWOicon = CWOicon
 	local reviveicon = LUI.UIImage.new(0.5, 0.5, -64, 64, 0.5, 0.5, -87, 41)
-	reviveicon:setImage(RegisterImage(0x5655902DAB45F22))
-	reviveicon:setMaterial(LUI.UIImage.GetCachedMaterial(0xF755127C95CF5B6))
+	reviveicon:setImage(RegisterImage(@"uie_ui_hud_wz_hud_revive_plus_icon"))
+	reviveicon:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_F755127C95CF5B6"))
 	reviveicon:setShaderVector(0, 1.16, 0, 0, 0)
 	reviveicon.__Color = function(f4_arg0)
 		local f4_local0 = f4_arg0:get()
@@ -88,8 +88,8 @@ CoD.bleedOutHealthWZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	self:addElement(reviveicon)
 	self.reviveicon = reviveicon
 	local bleedingOutRing = LUI.UIImage.new(0.5, 0.5, -87, 87, 0.5, 0.5, -111, 63)
-	bleedingOutRing:setImage(RegisterImage(0x2E4DBA41E983343))
-	bleedingOutRing:setMaterial(LUI.UIImage.GetCachedMaterial(0xD5CA1A25ED87F4F))
+	bleedingOutRing:setImage(RegisterImage(@"uie_ui_hud_core_waypoint_domination_fill_02"))
+	bleedingOutRing:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_clock_normal"))
 	bleedingOutRing:setShaderVector(1, 0.5, 0, 0, 0)
 	bleedingOutRing:setShaderVector(2, 0.5, 0, 0, 0)
 	bleedingOutRing:setShaderVector(3, 0, 0, 0, 0)
@@ -103,8 +103,8 @@ CoD.bleedOutHealthWZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	self:addElement(bleedingOutRing)
 	self.bleedingOutRing = bleedingOutRing
 	local revivingRing = LUI.UIImage.new(0.5, 0.5, -87, 87, 0.5, 0.5, -111, 63)
-	revivingRing:setImage(RegisterImage(0x2E4DBA41E983343))
-	revivingRing:setMaterial(LUI.UIImage.GetCachedMaterial(0xD5CA1A25ED87F4F))
+	revivingRing:setImage(RegisterImage(@"uie_ui_hud_core_waypoint_domination_fill_02"))
+	revivingRing:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_clock_normal"))
 	revivingRing:setShaderVector(1, 0.5, 0, 0, 0)
 	revivingRing:setShaderVector(2, 0.5, 0, 0, 0)
 	revivingRing:setShaderVector(3, 0, 0, 0, 0)
@@ -120,8 +120,8 @@ CoD.bleedOutHealthWZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	self.revivingRing = revivingRing
 	local PlayerNumber = LUI.UIText.new(0.5, 0.5, -100, 100, 0.5, 0.5, -44.5, 0.5)
 	PlayerNumber:setTTF("ttmussels_demibold")
-	PlayerNumber:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	PlayerNumber:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	PlayerNumber:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	PlayerNumber:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	PlayerNumber:linkToElementModel(self, "clientnum", true, function(model)
 		local f8_local0 = model:get()
 		if f8_local0 ~= nil then
@@ -133,12 +133,12 @@ CoD.bleedOutHealthWZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	CWOBacking:linkToElementModel(self, "team", true, CWOBacking.__Color_FullPath)
 	local f1_local12 = CWOBacking
 	local f1_local13 = CWOBacking.subscribeToModel
-	local f1_local14 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local14 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local13(f1_local12, f1_local14["profile.colorblindMode"], CWOBacking.__Color_FullPath)
 	reviveicon:linkToElementModel(self, "team", true, reviveicon.__Color_FullPath)
 	f1_local12 = reviveicon
 	f1_local13 = reviveicon.subscribeToModel
-	f1_local14 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local14 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local13(f1_local12, f1_local14["profile.colorblindMode"], reviveicon.__Color_FullPath)
 	self:mergeStateConditions({
 		{

@@ -8,13 +8,13 @@ CoD.BM_Lock.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5,
 	self.soundSet = "FrontendMain"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local lockedIcon0 = LUI.UIImage.new(-0.62, 1, 0, 0, -0.62, 1, 3, 3)
-	lockedIcon0:setImage(RegisterImage(0x410BF8B0F9878A4))
+	lockedIcon0:setImage(RegisterImage(@"uie_ui_menu_item_shop_lock"))
 	self:addElement(lockedIcon0)
 	self.lockedIcon0 = lockedIcon0
 	local lockedIcon = LUI.UIImage.new(-0.62, 1, 0, 0, -0.62, 1, 3, 3)
 	lockedIcon:setAlpha(0.47)
-	lockedIcon:setImage(RegisterImage(0x410BF8B0F9878A4))
-	lockedIcon:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	lockedIcon:setImage(RegisterImage(@"uie_ui_menu_item_shop_lock"))
+	lockedIcon:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(lockedIcon)
 	self.lockedIcon = lockedIcon
 	if PostLoadFunc then

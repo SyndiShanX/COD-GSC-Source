@@ -10,7 +10,7 @@ CoD.Support_ButtonArrow.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	local ArrowBacking = LUI.UIImage.new(0, 0, 1, 13, 0, 0, 0, 16)
 	ArrowBacking:setRGB(0, 0, 0)
 	ArrowBacking:setAlpha(0)
-	ArrowBacking:setImage(RegisterImage(0x1226A0CC6137EEE))
+	ArrowBacking:setImage(RegisterImage(@"uie_ui_hud_common_triangle"))
 	self:addElement(ArrowBacking)
 	self.ArrowBacking = ArrowBacking
 	local Arrow = LUI.UIImage.new(0, 0, -2, 18, 0, 0, -2, 18)
@@ -18,7 +18,7 @@ CoD.Support_ButtonArrow.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	Arrow:setAlpha(0.9)
 	Arrow:setZRot(-90)
 	Arrow:setScale(0.8, 0.8)
-	Arrow:setImage(RegisterImage(0xEB2781B21317F05))
+	Arrow:setImage(RegisterImage(@"uie_ui_hud_core_streak_widget_pointer"))
 	self:addElement(Arrow)
 	self.Arrow = Arrow
 	if PostLoadFunc then

@@ -22,7 +22,7 @@ CoD.StartMenu_Options_PC_GamepadControls.new = function(f2_arg0, f2_arg1, f2_arg
 	keybindList:setWidgetType(CoD.StartMenu_Options_CheckBoxOption)
 	keybindList:setVerticalCount(7)
 	keybindList:setSpacing(0)
-	keybindList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	keybindList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	keybindList:setDataSource("OptionGamepadSettingsPC")
 	self:addElement(keybindList)
 	self.keybindList = keybindList
@@ -32,13 +32,13 @@ CoD.StartMenu_Options_PC_GamepadControls.new = function(f2_arg0, f2_arg1, f2_arg
 	optionInfo:linkToElementModel(keybindList, "description", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
-			optionInfo.description:setText(Engine[0xF9F1239CFD921FE](f3_local0))
+			optionInfo.description:setText(Engine[@"hash_4F9F1239CFD921FE"](f3_local0))
 		end
 	end)
 	optionInfo:linkToElementModel(keybindList, "label", true, function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
-			optionInfo.title.itemName:setText(Engine[0xF9F1239CFD921FE](f4_local0))
+			optionInfo.title.itemName:setText(Engine[@"hash_4F9F1239CFD921FE"](f4_local0))
 		end
 	end)
 	keybindList.id = "keybindList"

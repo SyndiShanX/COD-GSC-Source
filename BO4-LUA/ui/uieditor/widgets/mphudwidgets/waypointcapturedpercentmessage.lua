@@ -8,19 +8,19 @@ CoD.WaypointCapturedPercentMessage.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	self.id = "WaypointCapturedPercentMessage"
 	self.soundSet = "default"
 	local ContribText = LUI.UIText.new(0.5, 0.5, -310, 90, 0.5, 0.5, -13.5, 16.5)
-	ContribText:setText(LocalizeToUpperString(0x85431C36F266D33))
+	ContribText:setText(LocalizeToUpperString(@"hash_285431C36F266D33"))
 	ContribText:setTTF("ttmussels_demibold")
 	ContribText:setLetterSpacing(2)
-	ContribText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	ContribText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	ContribText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	ContribText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(ContribText)
 	self.ContribText = ContribText
 	local Percentage = LUI.UIText.new(0.5, 0.5, 110, 310, 0.5, 0.5, -13.5, 16.5)
 	Percentage:setRGB(ColorSet.FriendlyBlue.r, ColorSet.FriendlyBlue.g, ColorSet.FriendlyBlue.b)
 	Percentage:setTTF("ttmussels_demibold")
 	Percentage:setLetterSpacing(2)
-	Percentage:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Percentage:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Percentage:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Percentage:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	Percentage:linkToElementModel(self, "percentage", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then

@@ -9,7 +9,7 @@ CoD.DiscountDetailsInfoPanel.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local SceneBlur = LUI.UIImage.new(0, 0, 6, 552, 0, 0, 6.5, 231.5)
-	SceneBlur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	SceneBlur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	SceneBlur:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(SceneBlur)
 	self.SceneBlur = SceneBlur
@@ -23,16 +23,16 @@ CoD.DiscountDetailsInfoPanel.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	self.DotTiledBacking = DotTiledBacking
 	local ButtonTopLine9Slice = LUI.UIImage.new(0, 0, 0, 558, 0, 0, 0, 20)
 	ButtonTopLine9Slice:setAlpha(0.25)
-	ButtonTopLine9Slice:setImage(RegisterImage(0xC752149A1FA1AAE))
-	ButtonTopLine9Slice:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	ButtonTopLine9Slice:setImage(RegisterImage(@"uie_ui_menu_cac_secondary_button_top_line"))
+	ButtonTopLine9Slice:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	ButtonTopLine9Slice:setShaderVector(0, 0, 0, 0, 0)
 	ButtonTopLine9Slice:setupNineSliceShader(120, 10)
 	self:addElement(ButtonTopLine9Slice)
 	self.ButtonTopLine9Slice = ButtonTopLine9Slice
 	local ButtonBottomLine9Slice = LUI.UIImage.new(0, 0, 0, 558, 0, 0, 224, 244)
 	ButtonBottomLine9Slice:setAlpha(0.25)
-	ButtonBottomLine9Slice:setImage(RegisterImage(0xC752149A1FA1AAE))
-	ButtonBottomLine9Slice:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	ButtonBottomLine9Slice:setImage(RegisterImage(@"uie_ui_menu_cac_secondary_button_top_line"))
+	ButtonBottomLine9Slice:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	ButtonBottomLine9Slice:setShaderVector(0, 0, 0, 0, 0)
 	ButtonBottomLine9Slice:setupNineSliceShader(120, 10)
 	self:addElement(ButtonBottomLine9Slice)
@@ -40,12 +40,12 @@ CoD.DiscountDetailsInfoPanel.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	local SubExtraText = LUI.UIText.new(0, 0, 27, 527, 0, 0, 191, 209)
 	SubExtraText:setTTF("dinnext_regular")
 	SubExtraText:setLetterSpacing(1)
-	SubExtraText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	SubExtraText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	SubExtraText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	SubExtraText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	SubExtraText:linkToElementModel(self, "subExtraText", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			SubExtraText:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			SubExtraText:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	self:addElement(SubExtraText)
@@ -54,8 +54,8 @@ CoD.DiscountDetailsInfoPanel.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	MainExtraText:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	MainExtraText:setTTF("ttmussels_regular")
 	MainExtraText:setLetterSpacing(2)
-	MainExtraText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	MainExtraText:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	MainExtraText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	MainExtraText:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	MainExtraText:linkToElementModel(self, "mainExtraText", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -67,8 +67,8 @@ CoD.DiscountDetailsInfoPanel.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	local Desc = LUI.UIText.new(0, 0, 27, 527, 0, 0, 55.5, 73.5)
 	Desc:setTTF("dinnext_regular")
 	Desc:setLetterSpacing(1)
-	Desc:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Desc:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Desc:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Desc:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	Desc:linkToElementModel(self, "desc", true, function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
@@ -81,8 +81,8 @@ CoD.DiscountDetailsInfoPanel.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	Name:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
 	Name:setTTF("ttmussels_demibold")
 	Name:setLetterSpacing(4)
-	Name:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Name:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	Name:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Name:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	Name:linkToElementModel(self, "name", true, function(model)
 		local f5_local0 = model:get()
 		if f5_local0 ~= nil then
@@ -107,7 +107,7 @@ CoD.DiscountDetailsInfoPanel.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 		{
 			stateName = "NoRarity",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "rarity", Enum[0x704F69F9B0BDCEC][0x8556B83CAD0D180]) and not CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", 0x4F35AE761BD424)
+				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "rarity", Enum[@"lootraritytype"][@"loot_rarity_type_count"]) and not CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", @"specialist")
 			end,
 		},
 	})

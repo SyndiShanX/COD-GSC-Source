@@ -21,11 +21,11 @@ CoD.StartMenu_Options_GamepadLayoutOption.new = function(f1_arg0, f1_arg1, f1_ar
 	self.fullBorder = fullBorder
 	local actionText = LUI.UIText.new(0, 0, 12, 297, 0, 0, 11, 49)
 	actionText:setTTF("default")
-	actionText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	actionText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	actionText:linkToElementModel(self, "label", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			actionText:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			actionText:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	self:addElement(actionText)
@@ -36,10 +36,10 @@ CoD.StartMenu_Options_GamepadLayoutOption.new = function(f1_arg0, f1_arg1, f1_ar
 	self:addElement(valueBacking)
 	self.valueBacking = valueBacking
 	local valueText = LUI.UIText.new(1, 1, -375, -90, 0, 0, 11, 49)
-	valueText:setText(Engine[0xF9F1239CFD921FE](0x93E719493E9E18F))
+	valueText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	valueText:setTTF("default")
-	valueText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	valueText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	valueText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	valueText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(valueText)
 	self.valueText = valueText
 	local StartMenuframenoBG00 = CoD.StartMenu_frame_noBG.new(f1_arg0, f1_arg1, 0, 1, 0, 0, 0, 1, 0, 0)

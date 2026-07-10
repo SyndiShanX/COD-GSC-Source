@@ -12,7 +12,7 @@ CoD.StageNotificationContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local CommonHeader = CoD.CommonHeader.new(f1_arg0, f1_arg1, 0, 1, 0, 0, 0, 0, 0, 67)
-	CommonHeader.subtitle.subtitle:setText(Engine[0xF9F1239CFD921FE](0x27307830087A401))
+	CommonHeader.subtitle.subtitle:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_27307830087A401"))
 	self:addElement(CommonHeader)
 	self.CommonHeader = CommonHeader
 	local DirectorMatchmakingTimer = CoD.DirectorMatchmakingTimer.new(f1_arg0, f1_arg1, 0.95, 0.95, -286, 0, 0.9, 0.9, -90.5, -14.5)
@@ -38,7 +38,7 @@ CoD.StageNotificationContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	})
 	local f1_local3 = DirectorMatchmakingTimer
 	local DirectorStageIndicator = DirectorMatchmakingTimer.subscribeToModel
-	local f1_local5 = Engine[0x8DF2E5447F384B9]()
+	local f1_local5 = Engine[@"getglobalmodel"]()
 	DirectorStageIndicator(f1_local3, f1_local5["lobbyRoot.publicLobby.stage"], function(f5_arg0)
 		f1_arg0:updateElementState(DirectorMatchmakingTimer, {
 			name = "model_validation",
@@ -58,7 +58,7 @@ CoD.StageNotificationContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 		{
 			stateName = "Hidden",
 			condition = function(menu, element, event)
-				return CoD.DirectorUtility.IsMainMode(f1_arg1, Enum[0x89C1455C5032969][0x78C124999125C42]) and CoD.ModelUtility.IsGlobalModelValueEqualToEnum("lobbyRoot.publicLobby.stage", LuaEnum.PUBLIC_LOBBY.INVALID)
+				return CoD.DirectorUtility.IsMainMode(f1_arg1, Enum[@"lobbymainmode"][@"lobby_mainmode_wz"]) and CoD.ModelUtility.IsGlobalModelValueEqualToEnum("lobbyRoot.publicLobby.stage", LuaEnum.PUBLIC_LOBBY.INVALID)
 			end,
 		},
 		{
@@ -70,7 +70,7 @@ CoD.StageNotificationContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	})
 	f1_local5 = self
 	f1_local3 = self.subscribeToModel
-	local f1_local6 = Engine[0x8DF2E5447F384B9]()
+	local f1_local6 = Engine[@"getglobalmodel"]()
 	f1_local3(f1_local5, f1_local6["lobbyRoot.lobbyMainMode"], function(f8_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -82,7 +82,7 @@ CoD.StageNotificationContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	end, false)
 	f1_local5 = self
 	f1_local3 = self.subscribeToModel
-	f1_local6 = Engine[0x8DF2E5447F384B9]()
+	f1_local6 = Engine[@"getglobalmodel"]()
 	f1_local3(f1_local5, f1_local6["lobbyRoot.lobbyNav"], function(f9_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -94,7 +94,7 @@ CoD.StageNotificationContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	end, false)
 	f1_local5 = self
 	f1_local3 = self.subscribeToModel
-	f1_local6 = Engine[0x8DF2E5447F384B9]()
+	f1_local6 = Engine[@"getglobalmodel"]()
 	f1_local3(f1_local5, f1_local6["lobbyRoot.publicLobby.stage"], function(f10_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

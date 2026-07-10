@@ -8,7 +8,7 @@ CoD.HUD_VehiclePrompt_Container.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self.id = "HUD_VehiclePrompt_Container"
 	self.soundSet = "none"
 	local Blur = LUI.UIImage.new(0, 1, 4, -4, 0, 1, 4, -4)
-	Blur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	Blur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	Blur:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(Blur)
 	self.Blur = Blur
@@ -19,20 +19,20 @@ CoD.HUD_VehiclePrompt_Container.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self.Panel = Panel
 	local LED = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	LED:setAlpha(0.02)
-	LED:setImage(RegisterImage(0xDC42BC1DA3C1F61))
+	LED:setImage(RegisterImage(@"uie_vehicleprompt_led"))
 	self:addElement(LED)
 	self.LED = LED
 	local Frame = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	Frame:setImage(RegisterImage(0x46E840787F07249))
+	Frame:setImage(RegisterImage(@"uie_vehicleprompt_frame"))
 	self:addElement(Frame)
 	self.Frame = Frame
 	local KBMText = nil
 	KBMText = LUI.UIText.new(0.05, 0.95, 0, 0, 0.27, 0.27, -1, 22)
-	KBMText:setText(Engine[0xF9F1239CFD921FE](0x93E719493E9E18F))
+	KBMText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	KBMText:setTTF("notosans_bold")
 	KBMText:setLetterSpacing(-2)
-	KBMText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	KBMText:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	KBMText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	KBMText:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	self:addElement(KBMText)
 	self.KBMText = KBMText
 	if PostLoadFunc then

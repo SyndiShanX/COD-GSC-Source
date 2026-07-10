@@ -8,7 +8,7 @@ CoD.CustomGames_OfficialBadgeIcon.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local OfficialGameIcon = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	OfficialGameIcon:setImage(RegisterImage(0xA92DF43D53DFABF))
+	OfficialGameIcon:setImage(RegisterImage(@"uie_menu_mp_frontend_icon_medal"))
 	self:addElement(OfficialGameIcon)
 	self.OfficialGameIcon = OfficialGameIcon
 	if PostLoadFunc then

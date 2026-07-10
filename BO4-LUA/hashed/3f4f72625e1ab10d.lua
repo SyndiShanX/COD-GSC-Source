@@ -11,7 +11,7 @@ CoD.uplinkReticle.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 	local reticleNew = LUI.UIImage.new(0.5, 0.5, -98, 98, 0.5, 0.5, -98, 98)
 	reticleNew:setAlpha(0.9)
 	reticleNew:setScale(0.7, 0.7)
-	reticleNew:setImage(RegisterImage(0x85FBB920615FD67))
+	reticleNew:setImage(RegisterImage(@"uie_reticle_uplink"))
 	self:addElement(reticleNew)
 	self.reticleNew = reticleNew
 	self:mergeStateConditions({
@@ -24,7 +24,7 @@ CoD.uplinkReticle.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 	})
 	local f1_local2 = self
 	local f1_local3 = self.subscribeToModel
-	local f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local3(f1_local2, f1_local4["ballGametype.passOption"], function(f3_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

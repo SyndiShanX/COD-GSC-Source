@@ -29,7 +29,7 @@ CoD.WarScoreInfo_Notifications_ThreeStage.new = function(f1_arg0, f1_arg1, f1_ar
 	})
 	local StageNotification3 = StageNotification1
 	local StageNotification2 = StageNotification1.subscribeToModel
-	local f1_local4 = Engine[0x8DF2E5447F384B9]()
+	local f1_local4 = Engine[@"getglobalmodel"]()
 	StageNotification2(StageNotification3, f1_local4["hudItems.war.currentZone"], function(f4_arg0)
 		f1_arg0:updateElementState(StageNotification1, {
 			name = "model_validation",
@@ -41,7 +41,7 @@ CoD.WarScoreInfo_Notifications_ThreeStage.new = function(f1_arg0, f1_arg1, f1_ar
 	end, false)
 	StageNotification3 = StageNotification1
 	StageNotification2 = StageNotification1.subscribeToModel
-	f1_local4 = Engine[0x8DF2E5447F384B9]()
+	f1_local4 = Engine[@"getglobalmodel"]()
 	StageNotification2(StageNotification3, f1_local4["hudItems.war.objectiveHeldByAttackingTeam"], function(f5_arg0)
 		f1_arg0:updateElementState(StageNotification1, {
 			name = "model_validation",
@@ -53,7 +53,7 @@ CoD.WarScoreInfo_Notifications_ThreeStage.new = function(f1_arg0, f1_arg1, f1_ar
 	end, false)
 	StageNotification3 = StageNotification1
 	StageNotification2 = StageNotification1.subscribeToModel
-	f1_local4 = Engine[0x8DF2E5447F384B9]()
+	f1_local4 = Engine[@"getglobalmodel"]()
 	StageNotification2(StageNotification3, f1_local4["hudItems.war.objectiveHeldByDefendingTeam"], function(f6_arg0)
 		f1_arg0:updateElementState(StageNotification1, {
 			name = "model_validation",
@@ -78,7 +78,7 @@ CoD.WarScoreInfo_Notifications_ThreeStage.new = function(f1_arg0, f1_arg1, f1_ar
 	StageNotification1:subscribeToGlobalModel(f1_arg1, "WarData", "zone1.teamObjective", function(model)
 		local f9_local0 = model:get()
 		if f9_local0 ~= nil then
-			StageNotification1.ObjectiveTextBox:setText(Engine[0xF9F1239CFD921FE](f9_local0))
+			StageNotification1.ObjectiveTextBox:setText(Engine[@"hash_4F9F1239CFD921FE"](f9_local0))
 		end
 	end)
 	self:addElement(StageNotification1)
@@ -106,7 +106,7 @@ CoD.WarScoreInfo_Notifications_ThreeStage.new = function(f1_arg0, f1_arg1, f1_ar
 	})
 	f1_local4 = StageNotification2
 	StageNotification3 = StageNotification2.subscribeToModel
-	local f1_local5 = Engine[0x8DF2E5447F384B9]()
+	local f1_local5 = Engine[@"getglobalmodel"]()
 	StageNotification3(f1_local4, f1_local5["hudItems.war.currentZone"], function(f13_arg0)
 		f1_arg0:updateElementState(StageNotification2, {
 			name = "model_validation",
@@ -118,7 +118,7 @@ CoD.WarScoreInfo_Notifications_ThreeStage.new = function(f1_arg0, f1_arg1, f1_ar
 	end, false)
 	f1_local4 = StageNotification2
 	StageNotification3 = StageNotification2.subscribeToModel
-	f1_local5 = Engine[0x8DF2E5447F384B9]()
+	f1_local5 = Engine[@"getglobalmodel"]()
 	StageNotification3(f1_local4, f1_local5["hudItems.war.objectiveHeldByAttackingTeam"], function(f14_arg0)
 		f1_arg0:updateElementState(StageNotification2, {
 			name = "model_validation",
@@ -130,7 +130,7 @@ CoD.WarScoreInfo_Notifications_ThreeStage.new = function(f1_arg0, f1_arg1, f1_ar
 	end, false)
 	f1_local4 = StageNotification2
 	StageNotification3 = StageNotification2.subscribeToModel
-	f1_local5 = Engine[0x8DF2E5447F384B9]()
+	f1_local5 = Engine[@"getglobalmodel"]()
 	StageNotification3(f1_local4, f1_local5["hudItems.war.objectiveHeldByDefendingTeam"], function(f15_arg0)
 		f1_arg0:updateElementState(StageNotification2, {
 			name = "model_validation",
@@ -155,7 +155,7 @@ CoD.WarScoreInfo_Notifications_ThreeStage.new = function(f1_arg0, f1_arg1, f1_ar
 	StageNotification2:subscribeToGlobalModel(f1_arg1, "WarData", "zone2.teamObjective", function(model)
 		local f18_local0 = model:get()
 		if f18_local0 ~= nil then
-			StageNotification2.ObjectiveTextBox:setText(Engine[0xF9F1239CFD921FE](f18_local0))
+			StageNotification2.ObjectiveTextBox:setText(Engine[@"hash_4F9F1239CFD921FE"](f18_local0))
 		end
 	end)
 	self:addElement(StageNotification2)
@@ -177,7 +177,7 @@ CoD.WarScoreInfo_Notifications_ThreeStage.new = function(f1_arg0, f1_arg1, f1_ar
 	})
 	f1_local5 = StageNotification3
 	f1_local4 = StageNotification3.subscribeToModel
-	local f1_local6 = Engine[0x8DF2E5447F384B9]()
+	local f1_local6 = Engine[@"getglobalmodel"]()
 	f1_local4(f1_local5, f1_local6["hudItems.war.currentZone"], function(f21_arg0)
 		f1_arg0:updateElementState(StageNotification3, {
 			name = "model_validation",
@@ -189,7 +189,7 @@ CoD.WarScoreInfo_Notifications_ThreeStage.new = function(f1_arg0, f1_arg1, f1_ar
 	end, false)
 	f1_local5 = StageNotification3
 	f1_local4 = StageNotification3.subscribeToModel
-	f1_local6 = Engine[0x8DF2E5447F384B9]()
+	f1_local6 = Engine[@"getglobalmodel"]()
 	f1_local4(f1_local5, f1_local6["hudItems.war.objectiveHeldByAttackingTeam"], function(f22_arg0)
 		f1_arg0:updateElementState(StageNotification3, {
 			name = "model_validation",
@@ -201,7 +201,7 @@ CoD.WarScoreInfo_Notifications_ThreeStage.new = function(f1_arg0, f1_arg1, f1_ar
 	end, false)
 	f1_local5 = StageNotification3
 	f1_local4 = StageNotification3.subscribeToModel
-	f1_local6 = Engine[0x8DF2E5447F384B9]()
+	f1_local6 = Engine[@"getglobalmodel"]()
 	f1_local4(f1_local5, f1_local6["hudItems.war.objectiveHeldByDefendingTeam"], function(f23_arg0)
 		f1_arg0:updateElementState(StageNotification3, {
 			name = "model_validation",
@@ -226,7 +226,7 @@ CoD.WarScoreInfo_Notifications_ThreeStage.new = function(f1_arg0, f1_arg1, f1_ar
 	StageNotification3:subscribeToGlobalModel(f1_arg1, "WarData", "zone3.teamObjective", function(model)
 		local f26_local0 = model:get()
 		if f26_local0 ~= nil then
-			StageNotification3.ObjectiveTextBox:setText(Engine[0xF9F1239CFD921FE](f26_local0))
+			StageNotification3.ObjectiveTextBox:setText(Engine[@"hash_4F9F1239CFD921FE"](f26_local0))
 		end
 	end)
 	self:addElement(StageNotification3)
@@ -253,7 +253,7 @@ CoD.WarScoreInfo_Notifications_ThreeStage.new = function(f1_arg0, f1_arg1, f1_ar
 	})
 	f1_local5 = self
 	f1_local4 = self.subscribeToModel
-	f1_local6 = Engine[0x8DF2E5447F384B9]()
+	f1_local6 = Engine[@"getglobalmodel"]()
 	f1_local4(f1_local5, f1_local6["hudItems.war.currentZone"], function(f30_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

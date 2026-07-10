@@ -7,7 +7,7 @@ CoD.cac_background_slide_panel_short.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	self.id = "cac_background_slide_panel_short"
 	self.soundSet = "default"
 	local BackgroundBlur = LUI.UIImage.new(-0.1, 1.1, 0, 0, 1, 1, -588, -118)
-	BackgroundBlur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	BackgroundBlur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	BackgroundBlur:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(BackgroundBlur)
 	self.BackgroundBlur = BackgroundBlur
@@ -30,14 +30,14 @@ CoD.cac_background_slide_panel_short.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	local BackgroundGlow = LUI.UIImage.new(-0.5, 1.5, 0, 0, 1, 1, -582, 30)
 	BackgroundGlow:setRGB(0, 0, 0)
 	BackgroundGlow:setZoom(2)
-	BackgroundGlow:setImage(RegisterImage(0x418AFBD55D4236F))
+	BackgroundGlow:setImage(RegisterImage(@"uie_ui_menu_cac_glow_half"))
 	self:addElement(BackgroundGlow)
 	self.BackgroundGlow = BackgroundGlow
 	local GrainBGPattern = LUI.UIImage.new(-0.1, 1.1, 0, 0, 1, 1, -582, -114)
 	GrainBGPattern:setAlpha(0.25)
 	GrainBGPattern:setZoom(2)
-	GrainBGPattern:setImage(RegisterImage(0xB666F49E61F417C))
-	GrainBGPattern:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	GrainBGPattern:setImage(RegisterImage(@"uie_ui_menu_cac_grain_pattern_bg"))
+	GrainBGPattern:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	GrainBGPattern:setShaderVector(0, 0, 0, 0, 0)
 	GrainBGPattern:setupNineSliceShader(256, 256)
 	self:addElement(GrainBGPattern)
@@ -45,8 +45,8 @@ CoD.cac_background_slide_panel_short.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	local TriangleBGPattern01 = LUI.UIImage.new(-0.1, 1.1, 0, 0, 1, 1, -582, -114)
 	TriangleBGPattern01:setAlpha(0.04)
 	TriangleBGPattern01:setZoom(2)
-	TriangleBGPattern01:setImage(RegisterImage(0x59DE271312E12EA))
-	TriangleBGPattern01:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	TriangleBGPattern01:setImage(RegisterImage(@"uie_ui_menu_cac_grid_pattern_bg01"))
+	TriangleBGPattern01:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	TriangleBGPattern01:setShaderVector(0, 0, 0, 0, 0)
 	TriangleBGPattern01:setupNineSliceShader(256, 256)
 	self:addElement(TriangleBGPattern01)
@@ -54,8 +54,8 @@ CoD.cac_background_slide_panel_short.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	local TopBar = LUI.UIImage.new(-0.1, 1.1, 0, 0, 0, 0, 39, 42)
 	TopBar:setAlpha(0.2)
 	TopBar:setZoom(2)
-	TopBar:setImage(RegisterImage(0x42BCCF45B82FBED))
-	TopBar:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	TopBar:setImage(RegisterImage(@"uie_ui_menu_cac_primary_button_top_bar"))
+	TopBar:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(TopBar)
 	self.TopBar = TopBar
 	if PostLoadFunc then

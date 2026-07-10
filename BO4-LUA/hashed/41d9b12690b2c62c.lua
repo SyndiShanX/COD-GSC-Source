@@ -20,7 +20,7 @@ CoD.SpecialistInfoCTProgress.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	Header:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	Header:setAlpha(0.5)
 	Header:setTTF("ttmussels_regular")
-	Header:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	Header:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	Header:linkToElementModel(self, "header", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then

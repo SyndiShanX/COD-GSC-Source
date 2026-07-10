@@ -69,7 +69,7 @@ CoD.LoadoutClassItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	})
 	local f1_local6 = self
 	local f1_local7 = self.subscribeToModel
-	local f1_local8 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local8 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local7(f1_local6, f1_local8.BonuscardModifiedSlotEnum, function(f8_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -128,7 +128,7 @@ CoD.LoadoutClassItem.__clipsPerState = {
 			f14_arg0:__resetProperties()
 			f14_arg0:setupElementClipCounter(1)
 			local f14_local0 = function(f15_arg0)
-				f14_arg0.LoadoutClassItemContainer:beginAnimation(200, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f14_arg0.LoadoutClassItemContainer:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_in"])
 				f14_arg0.LoadoutClassItemContainer:setScale(1.02, 1.02)
 				f14_arg0.LoadoutClassItemContainer:registerEventHandler("interrupted_keyframe", f14_arg0.clipInterrupted)
 				f14_arg0.LoadoutClassItemContainer:registerEventHandler("transition_complete_keyframe", f14_arg0.clipFinished)
@@ -141,7 +141,7 @@ CoD.LoadoutClassItem.__clipsPerState = {
 			f16_arg0:__resetProperties()
 			f16_arg0:setupElementClipCounter(1)
 			local f16_local0 = function(f17_arg0)
-				f16_arg0.LoadoutClassItemContainer:beginAnimation(200, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f16_arg0.LoadoutClassItemContainer:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_out"])
 				f16_arg0.LoadoutClassItemContainer:setScale(1, 1)
 				f16_arg0.LoadoutClassItemContainer:registerEventHandler("interrupted_keyframe", f16_arg0.clipInterrupted)
 				f16_arg0.LoadoutClassItemContainer:registerEventHandler("transition_complete_keyframe", f16_arg0.clipFinished)
@@ -200,7 +200,7 @@ CoD.LoadoutClassItem.__clipsPerState = {
 			f22_arg0:__resetProperties()
 			f22_arg0:setupElementClipCounter(1)
 			local f22_local0 = function(f23_arg0)
-				f22_arg0.LoadoutClassItemContainer:beginAnimation(200, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f22_arg0.LoadoutClassItemContainer:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_in"])
 				f22_arg0.LoadoutClassItemContainer:setScale(1.02, 1.02)
 				f22_arg0.LoadoutClassItemContainer:registerEventHandler("interrupted_keyframe", f22_arg0.clipInterrupted)
 				f22_arg0.LoadoutClassItemContainer:registerEventHandler("transition_complete_keyframe", f22_arg0.clipFinished)
@@ -213,7 +213,7 @@ CoD.LoadoutClassItem.__clipsPerState = {
 			f24_arg0:__resetProperties()
 			f24_arg0:setupElementClipCounter(1)
 			local f24_local0 = function(f25_arg0)
-				f24_arg0.LoadoutClassItemContainer:beginAnimation(200, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f24_arg0.LoadoutClassItemContainer:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_out"])
 				f24_arg0.LoadoutClassItemContainer:setScale(1, 1)
 				f24_arg0.LoadoutClassItemContainer:registerEventHandler("interrupted_keyframe", f24_arg0.clipInterrupted)
 				f24_arg0.LoadoutClassItemContainer:registerEventHandler("transition_complete_keyframe", f24_arg0.clipFinished)

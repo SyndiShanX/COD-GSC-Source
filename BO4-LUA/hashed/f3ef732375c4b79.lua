@@ -15,7 +15,7 @@ CoD.PC_Korea_Event_Month_Progression.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	WeekList:setWidgetType(CoD.PC_Korea_Event_Week_Progression)
 	WeekList:setVerticalCount(4)
 	WeekList:setSpacing(0)
-	WeekList:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	WeekList:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	WeekList:setDataSource("PCKoreaEventWeekList")
 	self:addElement(WeekList)
 	self.WeekList = WeekList
@@ -36,7 +36,7 @@ CoD.PC_Korea_Event_Month_Progression.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	})
 	local DescriptionLineBorder2 = MonthRewardBG
 	local DescriptionLineBorder = MonthRewardBG.subscribeToModel
-	local DescriptionLineBorder3 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local DescriptionLineBorder3 = Engine[@"getmodelforcontroller"](f1_arg1)
 	DescriptionLineBorder(DescriptionLineBorder2, DescriptionLineBorder3["PCKoreaEventProgression.showCompletedMonthPopUp"], function(f4_arg0)
 		f1_arg0:updateElementState(MonthRewardBG, {
 			name = "model_validation",
@@ -48,7 +48,7 @@ CoD.PC_Korea_Event_Month_Progression.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	end, false)
 	DescriptionLineBorder2 = MonthRewardBG
 	DescriptionLineBorder = MonthRewardBG.subscribeToModel
-	DescriptionLineBorder3 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	DescriptionLineBorder3 = Engine[@"getmodelforcontroller"](f1_arg1)
 	DescriptionLineBorder(DescriptionLineBorder2, DescriptionLineBorder3["PCKoreaEventProgression.isCompleted"], function(f5_arg0)
 		f1_arg0:updateElementState(MonthRewardBG, {
 			name = "model_validation",
@@ -62,24 +62,24 @@ CoD.PC_Korea_Event_Month_Progression.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	self.MonthRewardBG = MonthRewardBG
 	DescriptionLineBorder = LUI.UIImage.new(0, 0, 0, 560, 0.5, 0.5, -116.5, -97.5)
 	DescriptionLineBorder:setRGB(0.8, 0.8, 0.8)
-	DescriptionLineBorder:setImage(RegisterImage(0xC752149A1FA1AAE))
-	DescriptionLineBorder:setMaterial(LUI.UIImage.GetCachedMaterial(0x44484DDFAF5C093))
+	DescriptionLineBorder:setImage(RegisterImage(@"uie_ui_menu_cac_secondary_button_top_line"))
+	DescriptionLineBorder:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_normal"))
 	DescriptionLineBorder:setShaderVector(0, 0, 0, 0, 0)
 	DescriptionLineBorder:setupNineSliceShader(6, 6)
 	self:addElement(DescriptionLineBorder)
 	self.DescriptionLineBorder = DescriptionLineBorder
 	DescriptionLineBorder2 = LUI.UIImage.new(0, 0, 0, 560, 0.5, 0.5, -4.5, 14.5)
 	DescriptionLineBorder2:setRGB(0.8, 0.8, 0.8)
-	DescriptionLineBorder2:setImage(RegisterImage(0xC752149A1FA1AAE))
-	DescriptionLineBorder2:setMaterial(LUI.UIImage.GetCachedMaterial(0x44484DDFAF5C093))
+	DescriptionLineBorder2:setImage(RegisterImage(@"uie_ui_menu_cac_secondary_button_top_line"))
+	DescriptionLineBorder2:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_normal"))
 	DescriptionLineBorder2:setShaderVector(0, 0, 0, 0, 0)
 	DescriptionLineBorder2:setupNineSliceShader(6, 6)
 	self:addElement(DescriptionLineBorder2)
 	self.DescriptionLineBorder2 = DescriptionLineBorder2
 	DescriptionLineBorder3 = LUI.UIImage.new(0, 0, 0, 560, 0.5, 0.5, 107.5, 126.5)
 	DescriptionLineBorder3:setRGB(0.8, 0.8, 0.8)
-	DescriptionLineBorder3:setImage(RegisterImage(0xC752149A1FA1AAE))
-	DescriptionLineBorder3:setMaterial(LUI.UIImage.GetCachedMaterial(0x44484DDFAF5C093))
+	DescriptionLineBorder3:setImage(RegisterImage(@"uie_ui_menu_cac_secondary_button_top_line"))
+	DescriptionLineBorder3:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_normal"))
 	DescriptionLineBorder3:setShaderVector(0, 0, 0, 0, 0)
 	DescriptionLineBorder3:setupNineSliceShader(6, 6)
 	self:addElement(DescriptionLineBorder3)
@@ -87,8 +87,8 @@ CoD.PC_Korea_Event_Month_Progression.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	local DescriptionLineBorder4 = LUI.UIImage.new(0.8, 0.8, -218, 229, 0.5, 0.5, -9.5, 9.5)
 	DescriptionLineBorder4:setRGB(0.59, 0.59, 0.59)
 	DescriptionLineBorder4:setZRot(90)
-	DescriptionLineBorder4:setImage(RegisterImage(0xC752149A1FA1AAE))
-	DescriptionLineBorder4:setMaterial(LUI.UIImage.GetCachedMaterial(0x44484DDFAF5C093))
+	DescriptionLineBorder4:setImage(RegisterImage(@"uie_ui_menu_cac_secondary_button_top_line"))
+	DescriptionLineBorder4:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_normal"))
 	DescriptionLineBorder4:setShaderVector(0, 0, 0, 0, 0)
 	DescriptionLineBorder4:setupNineSliceShader(6, 6)
 	self:addElement(DescriptionLineBorder4)
@@ -96,16 +96,16 @@ CoD.PC_Korea_Event_Month_Progression.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	local DescriptionLineBorder5 = LUI.UIImage.new(0.8, 0.8, -329, 118, 0.5, 0.5, -9.5, 9.5)
 	DescriptionLineBorder5:setRGB(0.59, 0.59, 0.59)
 	DescriptionLineBorder5:setZRot(90)
-	DescriptionLineBorder5:setImage(RegisterImage(0xC752149A1FA1AAE))
-	DescriptionLineBorder5:setMaterial(LUI.UIImage.GetCachedMaterial(0x44484DDFAF5C093))
+	DescriptionLineBorder5:setImage(RegisterImage(@"uie_ui_menu_cac_secondary_button_top_line"))
+	DescriptionLineBorder5:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_normal"))
 	DescriptionLineBorder5:setShaderVector(0, 0, 0, 0, 0)
 	DescriptionLineBorder5:setupNineSliceShader(6, 6)
 	self:addElement(DescriptionLineBorder5)
 	self.DescriptionLineBorder5 = DescriptionLineBorder5
 	local Border = LUI.UIImage.new(0.45, 1.45, -317.5, -317.5, 0.03, 1.03, -14, -14)
 	Border:setRGB(0.67, 0.67, 0.67)
-	Border:setImage(RegisterImage(0x15BB65132BCEED9))
-	Border:setMaterial(LUI.UIImage.GetCachedMaterial(0x44484DDFAF5C093))
+	Border:setImage(RegisterImage(@"hash_415BB65132BCEED9"))
+	Border:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_normal"))
 	Border:setShaderVector(0, 0, 0, 0, 0)
 	Border:setupNineSliceShader(11, 11)
 	self:addElement(Border)

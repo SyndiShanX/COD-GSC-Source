@@ -8,13 +8,13 @@ CoD.Rush_playercard_position_indicator.new = function(f1_arg0, f1_arg1, f1_arg2,
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local NumberBg = LUI.UIImage.new(0, 0, -19.5, 25.5, 0, 0, -13, 47)
-	NumberBg:setImage(RegisterImage(0x75D661B612187DF))
+	NumberBg:setImage(RegisterImage(@"hash_675D661B612187DF"))
 	self:addElement(NumberBg)
 	self.NumberBg = NumberBg
 	local PositionText = LUI.UIText.new(0, 0, -1, 14, 0, 0, 7, 40)
 	PositionText:setText(CoD.ZombieUtility.GetZombiesRushPositionForIndex(f1_arg1, 1))
 	PositionText:setTTF("skorzhen")
-	PositionText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	PositionText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	self:addElement(PositionText)
 	self.PositionText = PositionText
 	self:mergeStateConditions({
@@ -27,7 +27,7 @@ CoD.Rush_playercard_position_indicator.new = function(f1_arg0, f1_arg1, f1_arg2,
 	})
 	local f1_local3 = self
 	local f1_local4 = self.subscribeToModel
-	local f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local4(f1_local3, f1_local5["Clients.clientCount"], function(f3_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

@@ -17,24 +17,24 @@ CoD.PurchasedContractsMenuContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local NoiseTiledBacking = LUI.UIImage.new(0.5, 0.5, -658, 658, 0.5, 0.5, -302, 328)
 	NoiseTiledBacking:setAlpha(0.4)
-	NoiseTiledBacking:setImage(RegisterImage(0x34839E8065B1E53))
-	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	NoiseTiledBacking:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	NoiseTiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	NoiseTiledBacking:setupNineSliceShader(196, 88)
 	self:addElement(NoiseTiledBacking)
 	self.NoiseTiledBacking = NoiseTiledBacking
 	local DottedLineTop = LUI.UIImage.new(0.5, 0.5, -658, 658, 0, 0, 221, 225)
 	DottedLineTop:setAlpha(0.35)
-	DottedLineTop:setImage(RegisterImage(0xB20AD7A31239369))
-	DottedLineTop:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	DottedLineTop:setImage(RegisterImage(@"uie_ui_menu_social_emblem_dotline_tiled"))
+	DottedLineTop:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	DottedLineTop:setShaderVector(0, 0, 0, 0, 0)
 	DottedLineTop:setupNineSliceShader(16, 4)
 	self:addElement(DottedLineTop)
 	self.DottedLineTop = DottedLineTop
 	local DottedLineBtm = LUI.UIImage.new(0.5, 0.5, -658, 658, 0, 0, 881, 885)
 	DottedLineBtm:setAlpha(0.35)
-	DottedLineBtm:setImage(RegisterImage(0xB20AD7A31239369))
-	DottedLineBtm:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	DottedLineBtm:setImage(RegisterImage(@"uie_ui_menu_social_emblem_dotline_tiled"))
+	DottedLineBtm:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	DottedLineBtm:setShaderVector(0, 0, 0, 0, 0)
 	DottedLineBtm:setupNineSliceShader(16, 4)
 	self:addElement(DottedLineBtm)
@@ -52,8 +52,8 @@ CoD.PurchasedContractsMenuContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	NoContractsString:setTTF("ttmussels_demibold")
 	NoContractsString:setLetterSpacing(4)
 	NoContractsString:setLineSpacing(9)
-	NoContractsString:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	NoContractsString:setAlignment(Enum[0x7A5123B654282D2][0x6ED4298C93DC5ED])
+	NoContractsString:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	NoContractsString:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
 	NoContractsString:setBackingType(1)
 	NoContractsString:setBackingWidget(CoD.StoreCommonTextBacking02, f1_arg0, f1_arg1)
 	NoContractsString:setBackingXPadding(30)
@@ -69,7 +69,7 @@ CoD.PurchasedContractsMenuContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	ContractList:setHorizontalCount(3)
 	ContractList:setVerticalCount(3)
 	ContractList:setSpacing(17)
-	ContractList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	ContractList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	ContractList:setVerticalCounter(CoD.verticalCounter)
 	ContractList:registerEventHandler("gain_focus", function(element, event)
 		local f2_local0 = nil
@@ -78,10 +78,10 @@ CoD.PurchasedContractsMenuContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 		elseif element.super.gainFocus then
 			f2_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f2_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(ContractList, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(ContractList, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if not IsMenuInState(menu, "NoContracts") then
 			CoD.ContractUtility.OpenContractDetails(self, element, controller)
 			PlaySoundAlias("uin_toggle_generic")
@@ -90,7 +90,7 @@ CoD.PurchasedContractsMenuContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 		end
 	end, function(element, menu, controller)
 		if not IsMenuInState(menu, "NoContracts") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		else
 			return false

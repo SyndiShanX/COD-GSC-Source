@@ -65,7 +65,7 @@ CoD.TabbedMultiItemPickup_Header.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	end, false)
 	f1_local4 = self
 	f1_local5 = self.subscribeToModel
-	f1_local6 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local6 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local5(f1_local4, f1_local6["hudItems.inventory.filledSlots"], function(f8_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

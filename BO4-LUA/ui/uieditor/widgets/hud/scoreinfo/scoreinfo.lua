@@ -16,7 +16,7 @@ CoD.ScoreInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Blur = LUI.UIImage.new(0, 0, 2, 208, 0, 0, 2, 65)
-	Blur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	Blur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	Blur:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(Blur)
 	self.Blur = Blur
@@ -237,17 +237,17 @@ CoD.ScoreInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 	local LED = LUI.UIImage.new(0, 0, -5, 217, 0, 0, -45, 77)
 	LED:setRGB(0, 0, 0)
 	LED:setAlpha(0.2)
-	LED:setImage(RegisterImage(0x246EAAAA50A60D7))
+	LED:setImage(RegisterImage(@"uie_ui_hud_core_objective_widget_led_screen"))
 	self:addElement(LED)
 	self.LED = LED
 	local LEDFull = LUI.UIImage.new(0, 0, -5, 217, 0, 0, -45, 77)
 	LEDFull:setRGB(0, 0, 0)
 	LEDFull:setAlpha(0.2)
-	LEDFull:setImage(RegisterImage(0x322B09BC49B50F1))
+	LEDFull:setImage(RegisterImage(@"uie_ui_hud_core_objective_widget_led_screen_03"))
 	self:addElement(LEDFull)
 	self.LEDFull = LEDFull
 	local Frame = LUI.UIImage.new(0, 0, -5, 217, 0, 0, -45.5, 76.5)
-	Frame:setImage(RegisterImage(0x5410432CF8A125A))
+	Frame:setImage(RegisterImage(@"uie_ui_hud_core_frame_objective_widget"))
 	self:addElement(Frame)
 	self.Frame = Frame
 	local EscortScoreInfo = CoD.ScoreInfoEscort.new(f1_arg0, f1_arg1, 0, 0, -5, 217, 0, 0, -45.5, 76.5)
@@ -263,47 +263,47 @@ CoD.ScoreInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 	self.ScoreInfoCTF = ScoreInfoCTF
 	local f1_local11 = EnemyTeamScoreContainer
 	local f1_local12 = EnemyTeamScoreContainer.subscribeToModel
-	local f1_local13 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local13 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local12(f1_local11, f1_local13["gameScore.roundsPlayed"], EnemyTeamScoreContainer.ScoreContainerInternal.ScoreBar.MeterFill2.__ScoreContainerInternal_ScoreBar_Progress_Percent_FullPath)
 	f1_local11 = EnemyTeamScoreContainer
 	f1_local12 = EnemyTeamScoreContainer.subscribeToModel
-	f1_local13 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local13 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local12(f1_local11, f1_local13["gameScore.roundsPlayed"], EnemyTeamScoreContainer.ScoreContainerInternal.ScoreBar.MeterFill.__ScoreContainerInternal_ScoreBar_Progress_Percent_FullPath)
 	f1_local11 = EnemyTeamScoreContainer
 	f1_local12 = EnemyTeamScoreContainer.subscribeToModel
-	f1_local13 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local13 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local12(f1_local11, f1_local13["PlayerTeamLastLivesData.teamSize"], EnemyTeamScoreContainer.ScoreContainerInternal.TeamLives.TeamLivesCount2.__ScoreContainerInternal_TeamLives_Team_Lives_Count_FullPath)
 	f1_local11 = EnemyTeamScoreContainer
 	f1_local12 = EnemyTeamScoreContainer.subscribeToModel
-	f1_local13 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local13 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local12(f1_local11, f1_local13["EnemyTeamLastLivesData.teamSize"], EnemyTeamScoreContainer.ScoreContainerInternal.TeamLives.TeamLivesCount2.__ScoreContainerInternal_TeamLives_Team_Lives_Count_FullPath)
 	f1_local11 = EnemyTeamScoreContainer
 	f1_local12 = EnemyTeamScoreContainer.subscribeToModel
-	f1_local13 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local13 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local12(f1_local11, f1_local13["PlayerTeamLastLivesData.teamSize"], EnemyTeamScoreContainer.ScoreContainerInternal.TeamLives.TeamLivesCount.__Team_Lives_Count_FullPath)
 	f1_local11 = EnemyTeamScoreContainer
 	f1_local12 = EnemyTeamScoreContainer.subscribeToModel
-	f1_local13 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local13 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local12(f1_local11, f1_local13["EnemyTeamLastLivesData.teamSize"], EnemyTeamScoreContainer.ScoreContainerInternal.TeamLives.TeamLivesCount.__Team_Lives_Count_FullPath)
 	f1_local11 = PlayerTeamScoreContainer
 	f1_local12 = PlayerTeamScoreContainer.subscribeToModel
-	f1_local13 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local13 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local12(f1_local11, f1_local13["gameScore.roundsPlayed"], PlayerTeamScoreContainer.ScoreContainerInternal.ScoreBar.MeterFill.__ScoreContainerInternal_ScoreBar_Progress_Percent_FullPath)
 	f1_local11 = PlayerTeamScoreContainer
 	f1_local12 = PlayerTeamScoreContainer.subscribeToModel
-	f1_local13 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local13 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local12(f1_local11, f1_local13["PlayerTeamLastLivesData.teamSize"], PlayerTeamScoreContainer.ScoreContainerInternal.TeamLives.TeamLivesCount2.__ScoreContainerInternal_TeamLives_Team_Lives_Count_FullPath)
 	f1_local11 = PlayerTeamScoreContainer
 	f1_local12 = PlayerTeamScoreContainer.subscribeToModel
-	f1_local13 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local13 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local12(f1_local11, f1_local13["EnemyTeamLastLivesData.teamSize"], PlayerTeamScoreContainer.ScoreContainerInternal.TeamLives.TeamLivesCount2.__ScoreContainerInternal_TeamLives_Team_Lives_Count_FullPath)
 	f1_local11 = PlayerTeamScoreContainer
 	f1_local12 = PlayerTeamScoreContainer.subscribeToModel
-	f1_local13 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local13 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local12(f1_local11, f1_local13["PlayerTeamLastLivesData.teamSize"], PlayerTeamScoreContainer.ScoreContainerInternal.TeamLives.TeamLivesCount.__Team_Lives_Count_FullPath)
 	f1_local11 = PlayerTeamScoreContainer
 	f1_local12 = PlayerTeamScoreContainer.subscribeToModel
-	f1_local13 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local13 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local12(f1_local11, f1_local13["EnemyTeamLastLivesData.teamSize"], PlayerTeamScoreContainer.ScoreContainerInternal.TeamLives.TeamLivesCount.__Team_Lives_Count_FullPath)
 	self:mergeStateConditions({
 		{

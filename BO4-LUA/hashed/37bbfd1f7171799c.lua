@@ -10,7 +10,7 @@ CoD.ReservesButtonLayoutBacking.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self.soundSet = "default"
 	self.anyChildUsesUpdateState = true
 	local Blur = LUI.UIImage.new(0.03, 0.97, 0, 0, 0.5, 0.5, -243, 243)
-	Blur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	Blur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	Blur:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(Blur)
 	self.Blur = Blur
@@ -21,8 +21,8 @@ CoD.ReservesButtonLayoutBacking.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self.Backer = Backer
 	local TiledBacking = LUI.UIImage.new(0.03, 0.97, 0, 0, 0.5, 0.5, -243, 243)
 	TiledBacking:setAlpha(0.12)
-	TiledBacking:setImage(RegisterImage(0x34839E8065B1E53))
-	TiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	TiledBacking:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	TiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	TiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	TiledBacking:setupNineSliceShader(196, 88)
 	self:addElement(TiledBacking)
@@ -37,15 +37,15 @@ CoD.ReservesButtonLayoutBacking.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self.CommonSearchingBar = CommonSearchingBar
 	local DotLineBottom = LUI.UIImage.new(0.02, 0.98, 0, 0, 0.5, 0.5, 241, 245)
 	DotLineBottom:setAlpha(0.4)
-	DotLineBottom:setImage(RegisterImage(0xF9C7F41C631866E))
-	DotLineBottom:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	DotLineBottom:setImage(RegisterImage(@"uie_ui_menu_social_emblem_dotline"))
+	DotLineBottom:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	DotLineBottom:setShaderVector(0, 1.2, 0, 0, 0)
 	self:addElement(DotLineBottom)
 	self.DotLineBottom = DotLineBottom
 	local DotLineTop = LUI.UIImage.new(0.02, 0.98, 0, 0, 0.5, 0.5, -245, -241)
 	DotLineTop:setAlpha(0.4)
-	DotLineTop:setImage(RegisterImage(0xF9C7F41C631866E))
-	DotLineTop:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	DotLineTop:setImage(RegisterImage(@"uie_ui_menu_social_emblem_dotline"))
+	DotLineTop:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	DotLineTop:setShaderVector(0, 1.2, 0, 0, 0)
 	self:addElement(DotLineTop)
 	self.DotLineTop = DotLineTop

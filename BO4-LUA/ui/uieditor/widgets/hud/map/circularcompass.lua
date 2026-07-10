@@ -7,8 +7,8 @@ CoD.CircularCompass.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	self.id = "CircularCompass"
 	self.soundSet = "default"
 	local RingCompass = LUI.UIImage.new(0.5, 0.5, -166, 166, 0.5, 0.5, -166, 166)
-	RingCompass:setImage(RegisterImage(0xBEFBE481A16E2F9))
-	RingCompass:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	RingCompass:setImage(RegisterImage(@"hash_4BEFBE481A16E2F9"))
+	RingCompass:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(RingCompass)
 	self.RingCompass = RingCompass
 	local f1_local2 = nil

@@ -11,7 +11,7 @@ CoD.PurchaseItemShopContentImage.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local WarpaintBundle = LUI.UIFixedAspectRatioImage.new(0, 0, 418, 780, 0, 0, -8, 376)
 	WarpaintBundle:setAlpha(0)
-	WarpaintBundle:setMaterial(LUI.UIImage.GetCachedMaterial(0xE992BD5A540E2D))
+	WarpaintBundle:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_delta_normal"))
 	WarpaintBundle:setShaderVector(0, 0, 1, 0, 0)
 	WarpaintBundle:setShaderVector(1, 0.52, 0.39, 0, 0)
 	WarpaintBundle:setShaderVector(2, 0, 1, 0, 0)
@@ -41,7 +41,7 @@ CoD.PurchaseItemShopContentImage.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	local OutfitBundle = LUI.UIImage.new(0, 0, 478, 716, 0, 0, 76, 584)
 	OutfitBundle:setAlpha(0)
 	OutfitBundle:setScale(1.34, 1.34)
-	OutfitBundle:setMaterial(LUI.UIImage.GetCachedMaterial(0xE992BD5A540E2D))
+	OutfitBundle:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_delta_normal"))
 	OutfitBundle:setShaderVector(0, 0, 1, 0, 0)
 	OutfitBundle:setShaderVector(1, 0.17, 0.16, 0, 0)
 	OutfitBundle:setShaderVector(2, 0.08, 0.5, 0, 0)
@@ -58,7 +58,7 @@ CoD.PurchaseItemShopContentImage.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	local OutfitPalette = LUI.UIImage.new(0, 0, 478, 716, 0, 0, 76, 313)
 	OutfitPalette:setAlpha(0)
 	OutfitPalette:setScale(1.34, 1.34)
-	OutfitPalette:setMaterial(LUI.UIImage.GetCachedMaterial(0xA02C44161370F6D))
+	OutfitPalette:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_1A02C44161370F6D"))
 	OutfitPalette:setShaderVector(0, 0, 0.1, 0, 0)
 	OutfitPalette:setShaderVector(1, 1, 1, 0, 0)
 	OutfitPalette:setShaderVector(2, 0.2, 0.2, 0, 0)
@@ -73,7 +73,7 @@ CoD.PurchaseItemShopContentImage.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	local Character = LUI.UIImage.new(0, 0, 478, 716, 0, 0, 76, 584)
 	Character:setAlpha(0)
 	Character:setScale(1.34, 1.34)
-	Character:setMaterial(LUI.UIImage.GetCachedMaterial(0xE992BD5A540E2D))
+	Character:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_delta_normal"))
 	Character:setShaderVector(0, 0, 1, 0, 0)
 	Character:setShaderVector(1, 0.17, 0.16, 0, 0)
 	Character:setShaderVector(2, 0.08, 0.5, 0, 0)
@@ -89,7 +89,7 @@ CoD.PurchaseItemShopContentImage.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	self.Character = Character
 	local SignatureWeapon = LUI.UIImage.new(0.46, 0.46, -9.5, 238.5, 0.41, 0.41, -62.5, 185.5)
 	SignatureWeapon:setAlpha(0)
-	SignatureWeapon:setMaterial(LUI.UIImage.GetCachedMaterial(0xA02C44161370F6D))
+	SignatureWeapon:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_1A02C44161370F6D"))
 	SignatureWeapon:setShaderVector(0, 0.5, 0.5, 0, 0)
 	SignatureWeapon:setShaderVector(1, 1, 1, 0, 0)
 	SignatureWeapon:setShaderVector(2, 0, 0, 0, 0)
@@ -116,49 +116,49 @@ CoD.PurchaseItemShopContentImage.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 		{
 			stateName = "CallingCard",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "category", 0xA1163B4DB78960A)
+				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "category", @"hash_5A1163B4DB78960A")
 			end,
 		},
 		{
 			stateName = "OutfitPalette",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", 0xDD691088352B680)
+				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", @"palette")
 			end,
 		},
 		{
 			stateName = "OutfitWarpaint",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", 0xFB8B65946FBF7A2)
+				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", @"war_paint")
 			end,
 		},
 		{
 			stateName = "SignatureWeapon",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", 0xCC13B0F8EEFF726)
+				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", @"signature_weapon")
 			end,
 		},
 		{
 			stateName = "OutfitWarpaintBundle",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", 0x48B82A2276A1CAF)
+				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", @"hash_248B82A2276A1CAF")
 			end,
 		},
 		{
 			stateName = "OutfitBundle",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", 0xC398D8E22A2269B)
+				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", @"outfit_bundle")
 			end,
 		},
 		{
 			stateName = "Character",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", 0x2D79C9016401F0)
+				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", @"character")
 			end,
 		},
 		{
 			stateName = "TriplePlay",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", 0xF75BEEE07C5BC7D)
+				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", @"special_bundle")
 			end,
 		},
 	})

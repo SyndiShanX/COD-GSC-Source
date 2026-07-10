@@ -29,12 +29,12 @@ CoD.CamoListSelectionWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self:addElement(TechnicalGrid)
 	self.TechnicalGrid = TechnicalGrid
 	local PerformanceGrid = CoD.PerformanceOptionGrid.new(f1_arg0, f1_arg1, 0, 0, -9, 383, 0, 0, 25, 375)
-	PerformanceGrid.Label:setText(LocalizeToUpperString(0xE28A07E0C69E9E9))
+	PerformanceGrid.Label:setText(LocalizeToUpperString(@"hash_E28A07E0C69E9E9"))
 	self:addElement(PerformanceGrid)
 	self.PerformanceGrid = PerformanceGrid
 	local LootBaseOptionGrid = CoD.LootBaseOptionGrid.new(f1_arg0, f1_arg1, 0, 0, 0, 1214, 0, 0, 24, 374)
 	LootBaseOptionGrid:setAlpha(0)
-	LootBaseOptionGrid.Label:setText(LocalizeToUpperString(0xF602F1BAFC731B5))
+	LootBaseOptionGrid.Label:setText(LocalizeToUpperString(@"hash_3F602F1BAFC731B5"))
 	self:addElement(LootBaseOptionGrid)
 	self.LootBaseOptionGrid = LootBaseOptionGrid
 	self:mergeStateConditions({
@@ -71,7 +71,7 @@ CoD.CamoListSelectionWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	})
 	local f1_local7 = self
 	local f1_local8 = self.subscribeToModel
-	local f1_local9 = Engine[0x8DF2E5447F384B9]()
+	local f1_local9 = Engine[@"getglobalmodel"]()
 	f1_local8(f1_local7, f1_local9["lobbyRoot.lobbyNetworkMode"], function(f7_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -83,7 +83,7 @@ CoD.CamoListSelectionWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	end, false)
 	f1_local7 = self
 	f1_local8 = self.subscribeToModel
-	f1_local9 = Engine[0x8DF2E5447F384B9]()
+	f1_local9 = Engine[@"getglobalmodel"]()
 	f1_local8(f1_local7, f1_local9["lobbyRoot.lobbyNav"], function(f8_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -95,7 +95,7 @@ CoD.CamoListSelectionWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	end, false)
 	f1_local7 = self
 	f1_local8 = self.subscribeToModel
-	f1_local9 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local9 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local8(f1_local7, f1_local9["WeaponPersonalization.listUpdate"], function(f9_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

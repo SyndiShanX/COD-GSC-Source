@@ -11,7 +11,7 @@ CoD.CodCasterObjectiveStatusLifeCount.new = function(f1_arg0, f1_arg1, f1_arg2, 
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Blur = LUI.UIImage.new(0.5, 0.5, -205, 205, 0.5, 0.5, -13.5, 11.5)
-	Blur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	Blur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	Blur:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(Blur)
 	self.Blur = Blur
@@ -46,14 +46,14 @@ CoD.CodCasterObjectiveStatusLifeCount.new = function(f1_arg0, f1_arg1, f1_arg2, 
 	self:addElement(DarkBackingRight)
 	self.DarkBackingRight = DarkBackingRight
 	local objectiveStatusBackground = LUI.UIImage.new(0.5, 0.5, -260, 260, 0.5, 0.5, -16, 16)
-	objectiveStatusBackground:setImage(RegisterImage(0x4E12CF2E0563961))
+	objectiveStatusBackground:setImage(RegisterImage(@"uie_ui_codcaster_scoreboard_livebg"))
 	self:addElement(objectiveStatusBackground)
 	self.objectiveStatusBackground = objectiveStatusBackground
 	local RoundCount = LUI.UIText.new(0.5, 0.5, -49, 51, 0.08, 0.08, 1, 19)
-	RoundCount:setText(Engine[0xF9F1239CFD921FE](0x4583E7C93D5801E))
+	RoundCount:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_44583E7C93D5801E"))
 	RoundCount:setTTF("ttmussels_demibold")
-	RoundCount:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	RoundCount:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	RoundCount:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	RoundCount:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(RoundCount)
 	self.RoundCount = RoundCount
 	local CodCasterObjectiveStatusLifeTeam1 = CoD.CodCasterObjectiveStatusLifeTeam.new(f1_arg0, f1_arg1, 0.39, 0.39, -412, 0, 0.4, 0.4, -10, 10)
@@ -105,19 +105,19 @@ CoD.CodCasterObjectiveStatusLifeCount.new = function(f1_arg0, f1_arg1, f1_arg2, 
 	self.CodCasterObjectiveStatusLifeTeam2 = CodCasterObjectiveStatusLifeTeam2
 	local f1_local10 = CodCasterObjectiveStatusLifeTeam1
 	local f1_local11 = CodCasterObjectiveStatusLifeTeam1.subscribeToModel
-	local f1_local12 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local12 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local11(f1_local10, f1_local12["PlayerTeamLastLivesData.teamSize"], CodCasterObjectiveStatusLifeTeam1.teamLivesCount.teamLivesCount.__teamLivesCount_teamLivesCount_String_Reference_FullPath)
 	f1_local10 = CodCasterObjectiveStatusLifeTeam1
 	f1_local11 = CodCasterObjectiveStatusLifeTeam1.subscribeToModel
-	f1_local12 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local12 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local11(f1_local10, f1_local12["EnemyTeamLastLivesData.teamSize"], CodCasterObjectiveStatusLifeTeam1.teamLivesCount.teamLivesCount.__teamLivesCount_teamLivesCount_String_Reference_FullPath)
 	f1_local10 = CodCasterObjectiveStatusLifeTeam2
 	f1_local11 = CodCasterObjectiveStatusLifeTeam2.subscribeToModel
-	f1_local12 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local12 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local11(f1_local10, f1_local12["PlayerTeamLastLivesData.teamSize"], CodCasterObjectiveStatusLifeTeam2.teamLivesCount.teamLivesCount.__teamLivesCount_teamLivesCount_String_Reference_FullPath)
 	f1_local10 = CodCasterObjectiveStatusLifeTeam2
 	f1_local11 = CodCasterObjectiveStatusLifeTeam2.subscribeToModel
-	f1_local12 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local12 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local11(f1_local10, f1_local12["EnemyTeamLastLivesData.teamSize"], CodCasterObjectiveStatusLifeTeam2.teamLivesCount.teamLivesCount.__teamLivesCount_teamLivesCount_String_Reference_FullPath)
 	self:mergeStateConditions({
 		{

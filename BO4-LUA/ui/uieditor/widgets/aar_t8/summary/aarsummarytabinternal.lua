@@ -72,13 +72,13 @@ CoD.AARSummaryTabInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	AARTierBar:linkToElementModel(self, "barCurrentTier", true, function(model)
 		local f9_local0 = model:get()
 		if f9_local0 ~= nil then
-			AARTierBar.CurrentTier:setText(LocalizeStringWithParameter(0xE743A7E5D0C37CD, f9_local0))
+			AARTierBar.CurrentTier:setText(LocalizeStringWithParameter(@"hash_1E743A7E5D0C37CD", f9_local0))
 		end
 	end)
 	AARTierBar:linkToElementModel(self, "barNextTier", true, function(model)
 		local f10_local0 = model:get()
 		if f10_local0 ~= nil then
-			AARTierBar.NextTier:setText(LocalizeStringWithParameter(0xE743A7E5D0C37CD, f10_local0))
+			AARTierBar.NextTier:setText(LocalizeStringWithParameter(@"hash_1E743A7E5D0C37CD", f10_local0))
 		end
 	end)
 	self:addElement(AARTierBar)
@@ -138,7 +138,7 @@ CoD.AARSummaryTabInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 			modelName = "xpNeededToLevelUp",
 		})
 	end)
-	XPMeter.maxRankText:setText(Engine[0xF9F1239CFD921FE](0x648FC67DF4BF35E))
+	XPMeter.maxRankText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/max_level"))
 	XPMeter:linkToElementModel(self, nil, false, function(model)
 		XPMeter:setModel(model, f1_arg1)
 	end)
@@ -181,7 +181,7 @@ CoD.AARSummaryTabInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	XPMeter:linkToElementModel(self, "xpEarnedDuringMatch", true, function(model)
 		local f23_local0 = model:get()
 		if f23_local0 ~= nil then
-			XPMeter.xpEarnedText:setText(LocalizeIntoString(0x5C4E2BA06EA49A5, f23_local0))
+			XPMeter.xpEarnedText:setText(LocalizeIntoString(@"hash_75C4E2BA06EA49A5", f23_local0))
 		end
 	end)
 	XPMeter:linkToElementModel(self, "xpNeededToLevelUp", true, function(model)
@@ -218,11 +218,11 @@ CoD.AARSummaryTabInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	self.AARScoreWidget = AARScoreWidget
 	local PerformanceLabel = LUI.UIText.new(0, 0, 638.5, 1493.5, 0, 0, 91, 129)
 	PerformanceLabel:setRGB(0.9, 0.89, 0.78)
-	PerformanceLabel:setText(Engine[0xF9F1239CFD921FE](0x4B072C59118316))
+	PerformanceLabel:setText(Engine[@"hash_4F9F1239CFD921FE"](0x4B072C59118316))
 	PerformanceLabel:setTTF("ttmussels_demibold")
 	PerformanceLabel:setLetterSpacing(10)
-	PerformanceLabel:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	PerformanceLabel:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	PerformanceLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	PerformanceLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(PerformanceLabel)
 	self.PerformanceLabel = PerformanceLabel
 	local AARGameInfo = CoD.AARGameInfo.new(f1_arg0, f1_arg1, 0, 0, 0, 1920, 0, 0, -21, 179)
@@ -246,18 +246,18 @@ CoD.AARSummaryTabInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	ZmGenericSummaryList:setWidgetType(CoD.ZMGenericSummaryStatWidget)
 	ZmGenericSummaryList:setHorizontalCount(6)
 	ZmGenericSummaryList:setSpacing(14)
-	ZmGenericSummaryList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	ZmGenericSummaryList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	ZmGenericSummaryList:setDataSource("ZMSummaryListGeneric")
 	self:addElement(ZmGenericSummaryList)
 	self.ZmGenericSummaryList = ZmGenericSummaryList
 	local ZMPerformanceLabel = LUI.UIText.new(0, 0, 635.5, 1490.5, 0, 0, 87, 125)
 	ZMPerformanceLabel:setRGB(0.9, 0.89, 0.78)
 	ZMPerformanceLabel:setAlpha(0)
-	ZMPerformanceLabel:setText(Engine[0xF9F1239CFD921FE](0x4B072C59118316))
+	ZMPerformanceLabel:setText(Engine[@"hash_4F9F1239CFD921FE"](0x4B072C59118316))
 	ZMPerformanceLabel:setTTF("skorzhen")
 	ZMPerformanceLabel:setLetterSpacing(10)
-	ZMPerformanceLabel:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	ZMPerformanceLabel:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	ZMPerformanceLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	ZMPerformanceLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(ZMPerformanceLabel)
 	self.ZMPerformanceLabel = ZMPerformanceLabel
 	local ZMAARGameInfo = CoD.ZMAARGameInfo.new(f1_arg0, f1_arg1, 0, 0, 615, 1589, 0, 0, -45, 68)
@@ -328,7 +328,7 @@ CoD.AARSummaryTabInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	})
 	local f1_local14 = self
 	local f1_local15 = self.subscribeToModel
-	local f1_local16 = Engine[0x8DF2E5447F384B9]()
+	local f1_local16 = Engine[@"getglobalmodel"]()
 	f1_local15(f1_local14, f1_local16["lobbyRoot.lobbyNav"], function(f40_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -404,7 +404,7 @@ CoD.AARSummaryTabInternal.__clipsPerState = {
 			f43_local0(f43_arg0.AARTierBar)
 			local f43_local1 = function(f46_arg0)
 				local f46_local0 = function(f47_arg0)
-					f47_arg0:beginAnimation(99, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f47_arg0:beginAnimation(99, Enum[@"luitween"][@"luitween_ease_out"])
 					f47_arg0:setAlpha(1)
 					f47_arg0:registerEventHandler("transition_complete_keyframe", f43_arg0.clipFinished)
 				end
@@ -418,7 +418,7 @@ CoD.AARSummaryTabInternal.__clipsPerState = {
 			f43_local1(f43_arg0.XPMeter)
 			local f43_local2 = function(f48_arg0)
 				local f48_local0 = function(f49_arg0)
-					f49_arg0:beginAnimation(99, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f49_arg0:beginAnimation(99, Enum[@"luitween"][@"luitween_ease_out"])
 					f49_arg0:setAlpha(1)
 					f49_arg0:registerEventHandler("transition_complete_keyframe", f43_arg0.clipFinished)
 				end
@@ -483,7 +483,7 @@ CoD.AARSummaryTabInternal.__clipsPerState = {
 			f43_local6(f43_arg0.PerformanceLabel)
 			local f43_local7 = function(f58_arg0)
 				local f58_local0 = function(f59_arg0)
-					f59_arg0:beginAnimation(100, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f59_arg0:beginAnimation(100, Enum[@"luitween"][@"luitween_ease_in"])
 					f59_arg0:setAlpha(1)
 					f59_arg0:registerEventHandler("transition_complete_keyframe", f43_arg0.clipFinished)
 				end
@@ -518,7 +518,7 @@ CoD.AARSummaryTabInternal.__clipsPerState = {
 			f60_arg0.clipFinished(f60_arg0.AARTierBar)
 			local f60_local0 = function(f61_arg0)
 				local f61_local0 = function(f62_arg0)
-					f62_arg0:beginAnimation(99, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f62_arg0:beginAnimation(99, Enum[@"luitween"][@"luitween_ease_out"])
 					f62_arg0:setAlpha(1)
 					f62_arg0:registerEventHandler("transition_complete_keyframe", f60_arg0.clipFinished)
 				end
@@ -591,7 +591,7 @@ CoD.AARSummaryTabInternal.__clipsPerState = {
 			f60_local3(f60_arg0.ZMPerformanceLabel)
 			local f60_local4 = function(f69_arg0)
 				local f69_local0 = function(f70_arg0)
-					f70_arg0:beginAnimation(100, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f70_arg0:beginAnimation(100, Enum[@"luitween"][@"luitween_ease_in"])
 					f70_arg0:setAlpha(1)
 					f70_arg0:registerEventHandler("transition_complete_keyframe", f60_arg0.clipFinished)
 				end
@@ -635,7 +635,7 @@ CoD.AARSummaryTabInternal.__clipsPerState = {
 			f72_local0(f72_arg0.AARTierBar)
 			local f72_local1 = function(f75_arg0)
 				local f75_local0 = function(f76_arg0)
-					f76_arg0:beginAnimation(99, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f76_arg0:beginAnimation(99, Enum[@"luitween"][@"luitween_ease_out"])
 					f76_arg0:setAlpha(1)
 					f76_arg0:registerEventHandler("transition_complete_keyframe", f72_arg0.clipFinished)
 				end
@@ -648,7 +648,7 @@ CoD.AARSummaryTabInternal.__clipsPerState = {
 			f72_local1(f72_arg0.XPMeter)
 			local f72_local2 = function(f77_arg0)
 				local f77_local0 = function(f78_arg0)
-					f78_arg0:beginAnimation(99, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f78_arg0:beginAnimation(99, Enum[@"luitween"][@"luitween_ease_out"])
 					f78_arg0:setAlpha(1)
 					f78_arg0:registerEventHandler("transition_complete_keyframe", f72_arg0.clipFinished)
 				end
@@ -713,7 +713,7 @@ CoD.AARSummaryTabInternal.__clipsPerState = {
 			f72_local6(f72_arg0.PerformanceLabel)
 			local f72_local7 = function(f87_arg0)
 				local f87_local0 = function(f88_arg0)
-					f88_arg0:beginAnimation(100, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f88_arg0:beginAnimation(100, Enum[@"luitween"][@"luitween_ease_in"])
 					f88_arg0:setAlpha(1)
 					f88_arg0:registerEventHandler("transition_complete_keyframe", f72_arg0.clipFinished)
 				end
@@ -747,7 +747,7 @@ CoD.AARSummaryTabInternal.__clipsPerState = {
 			f89_arg0.clipFinished(f89_arg0.AARTierBar)
 			local f89_local0 = function(f90_arg0)
 				local f90_local0 = function(f91_arg0)
-					f91_arg0:beginAnimation(99, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f91_arg0:beginAnimation(99, Enum[@"luitween"][@"luitween_ease_out"])
 					f91_arg0:setAlpha(1)
 					f91_arg0:registerEventHandler("transition_complete_keyframe", f89_arg0.clipFinished)
 				end
@@ -820,7 +820,7 @@ CoD.AARSummaryTabInternal.__clipsPerState = {
 			f89_local3(f89_arg0.ZMPerformanceLabel)
 			local f89_local4 = function(f98_arg0)
 				local f98_local0 = function(f99_arg0)
-					f99_arg0:beginAnimation(100, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f99_arg0:beginAnimation(100, Enum[@"luitween"][@"luitween_ease_in"])
 					f99_arg0:setAlpha(1)
 					f99_arg0:registerEventHandler("transition_complete_keyframe", f89_arg0.clipFinished)
 				end

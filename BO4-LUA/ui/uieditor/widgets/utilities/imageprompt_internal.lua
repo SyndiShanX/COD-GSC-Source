@@ -19,12 +19,12 @@ CoD.ImagePrompt_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	local warningTextPrompt = LUI.UIText.new(0.02, 0.83, 50, 50, 0.3, 0.7, 0, 0)
 	warningTextPrompt:setRGB(ColorSet.T8__OFF__GRAY.r, ColorSet.T8__OFF__GRAY.g, ColorSet.T8__OFF__GRAY.b)
 	warningTextPrompt:setTTF("dinnext_regular")
-	warningTextPrompt:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	warningTextPrompt:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	warningTextPrompt:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	warningTextPrompt:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	warningTextPrompt:linkToElementModel(self, "description", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
-			warningTextPrompt:setText(Engine[0xF9F1239CFD921FE](f3_local0))
+			warningTextPrompt:setText(Engine[@"hash_4F9F1239CFD921FE"](f3_local0))
 		end
 	end)
 	self:addElement(warningTextPrompt)

@@ -8,17 +8,17 @@ CoD.CodCasterObjectiveStatusDominationSite.new = function(f1_arg0, f1_arg1, f1_a
 	self.soundSet = "none"
 	local siteBackground = LUI.UIImage.new(0, 0, 0, 60, 0, 0, 0, 60)
 	siteBackground:setScale(0.5, 0.5)
-	siteBackground:setImage(RegisterImage(0x159D9B7B7294C91))
+	siteBackground:setImage(RegisterImage(@"uie_ui_hud_core_waypoint_led"))
 	self:addElement(siteBackground)
 	self.siteBackground = siteBackground
 	local siteLetter = LUI.UIImage.new(0, 0, 0, 60, 0, 0, 0, 60)
 	siteLetter:setScale(0.5, 0.5)
-	siteLetter:setImage(RegisterImage(0x1859ED472AB4E4F))
+	siteLetter:setImage(RegisterImage(@"uie_ui_hud_core_waypoint_letter_a_02"))
 	self:addElement(siteLetter)
 	self.siteLetter = siteLetter
 	local siteBackground2 = LUI.UIImage.new(0, 0, 0, 60, 0, 0, 0, 60)
 	siteBackground2:setScale(0.5, 0.5)
-	siteBackground2:setImage(RegisterImage(0x2E4DBA41E983343))
+	siteBackground2:setImage(RegisterImage(@"uie_ui_hud_core_waypoint_domination_fill_02"))
 	self:addElement(siteBackground2)
 	self.siteBackground2 = siteBackground2
 	if PostLoadFunc then

@@ -18,7 +18,7 @@ CoD.WeaponPersonalizeSlotContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 			end,
 		},
 	})
-	DeathFxButton.ButtonName:setText(LocalizeToUpperString(0xD527320A0F9B5A))
+	DeathFxButton.ButtonName:setText(LocalizeToUpperString(@"menu/death_effects"))
 	DeathFxButton:subscribeToGlobalModel(f1_arg1, "LoadoutBreadcrumbs", "deathfx", function(model)
 		DeathFxButton.newIcon:setModel(model, f1_arg1)
 	end)
@@ -41,15 +41,15 @@ CoD.WeaponPersonalizeSlotContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	end
 	DeathFxButton:appendEventHandler("input_source_changed", function(f6_arg0, f6_arg1)
 		f6_arg1.menu = f6_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f6_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f6_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x4D2505E19049444])
+		CoD.Menu.UpdateButtonShownState(f6_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f6_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"hash_64D2505E19049444"])
 	end)
 	local f1_local2 = DeathFxButton
 	local AccessoriesButton = DeathFxButton.subscribeToModel
-	local f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	AccessoriesButton(f1_local2, f1_local4.LastInput, function(f7_arg0, f7_arg1)
-		CoD.Menu.UpdateButtonShownState(f7_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f7_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x4D2505E19049444])
+		CoD.Menu.UpdateButtonShownState(f7_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f7_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"hash_64D2505E19049444"])
 	end, false)
 	DeathFxButton:registerEventHandler("gain_focus", function(element, event)
 		local f8_local0 = nil
@@ -58,19 +58,19 @@ CoD.WeaponPersonalizeSlotContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 		elseif element.super.gainFocus then
 			f8_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x4D2505E19049444])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"hash_64D2505E19049444"])
 		return f8_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(DeathFxButton, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(DeathFxButton, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		CoD.CACUtility.OpenCACOverlay(self, menu, controller, "WeaponDeathFxSelect", element, "")
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 		return true
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(DeathFxButton, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(DeathFxButton, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], nil, function(element, menu, controller, model)
 		if CoD.WeaponOptionsUtility.IsDeathFxEquippedForWeapon(menu, controller) and IsGamepad(controller) then
 			CoD.WeaponOptionsUtility.ClearDeathFx(menu, controller)
 			UpdateAllMenuButtonPrompts(menu, controller)
@@ -79,13 +79,13 @@ CoD.WeaponPersonalizeSlotContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 		end
 	end, function(element, menu, controller)
 		if CoD.WeaponOptionsUtility.IsDeathFxEquippedForWeapon(menu, controller) and IsGamepad(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x679ACA6FFC6C8F3, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"menu/remove", nil, nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(DeathFxButton, f1_arg1, Enum[0x3DD78803F918E9D][0x4D2505E19049444], "ui_remove", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(DeathFxButton, f1_arg1, Enum[@"luibutton"][@"hash_64D2505E19049444"], "ui_remove", function(element, menu, controller, model)
 		if CoD.WeaponOptionsUtility.IsDeathFxEquippedForWeapon(menu, controller) and IsMouseOrKeyboard(controller) then
 			CoD.WeaponOptionsUtility.ClearDeathFx(menu, controller)
 			UpdateAllMenuButtonPrompts(menu, controller)
@@ -94,13 +94,13 @@ CoD.WeaponPersonalizeSlotContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 		end
 	end, function(element, menu, controller)
 		if CoD.WeaponOptionsUtility.IsDeathFxEquippedForWeapon(menu, controller) and IsMouseOrKeyboard(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x4D2505E19049444], 0x679ACA6FFC6C8F3, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "ui_remove")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"hash_64D2505E19049444"], @"menu/remove", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "ui_remove")
 			return true
 		else
 			return false
 		end
 	end, false)
-	DeathFxButton:AddContextualMenuAction(f1_arg0, f1_arg1, 0x679ACA6FFC6C8F3, function(f15_arg0, f15_arg1, f15_arg2, f15_arg3)
+	DeathFxButton:AddContextualMenuAction(f1_arg0, f1_arg1, @"menu/remove", function(f15_arg0, f15_arg1, f15_arg2, f15_arg3)
 		if CoD.WeaponOptionsUtility.IsDeathFxEquippedForWeapon(f15_arg1, f15_arg2) then
 			return function(f16_arg0, f16_arg1, f16_arg2, f16_arg3)
 				CoD.WeaponOptionsUtility.ClearDeathFx(f16_arg1, f16_arg2)
@@ -143,15 +143,15 @@ CoD.WeaponPersonalizeSlotContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	end
 	AccessoriesButton:appendEventHandler("input_source_changed", function(f21_arg0, f21_arg1)
 		f21_arg1.menu = f21_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f21_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f21_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x4D2505E19049444])
+		CoD.Menu.UpdateButtonShownState(f21_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f21_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"hash_64D2505E19049444"])
 	end)
 	f1_local4 = AccessoriesButton
 	f1_local2 = AccessoriesButton.subscribeToModel
-	local f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local2(f1_local4, f1_local5.LastInput, function(f22_arg0, f22_arg1)
-		CoD.Menu.UpdateButtonShownState(f22_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f22_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x4D2505E19049444])
+		CoD.Menu.UpdateButtonShownState(f22_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f22_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"hash_64D2505E19049444"])
 	end, false)
 	AccessoriesButton:registerEventHandler("gain_focus", function(element, event)
 		local f23_local0 = nil
@@ -160,19 +160,19 @@ CoD.WeaponPersonalizeSlotContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 		elseif element.super.gainFocus then
 			f23_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x4D2505E19049444])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"hash_64D2505E19049444"])
 		return f23_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(AccessoriesButton, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(AccessoriesButton, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		CoD.CACUtility.OpenCACOverlay(self, menu, controller, "WeaponAccessoriesSelect", element, "")
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 		return true
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(AccessoriesButton, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(AccessoriesButton, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], nil, function(element, menu, controller, model)
 		if CoD.WeaponOptionsUtility.IsCharmEquippedForWeapon(menu, controller) and IsGamepad(controller) then
 			CoD.WeaponOptionsUtility.ClearWeaponAccessory(menu, controller)
 			UpdateAllMenuButtonPrompts(menu, controller)
@@ -181,13 +181,13 @@ CoD.WeaponPersonalizeSlotContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 		end
 	end, function(element, menu, controller)
 		if CoD.WeaponOptionsUtility.IsCharmEquippedForWeapon(menu, controller) and IsGamepad(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x679ACA6FFC6C8F3, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"menu/remove", nil, nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(AccessoriesButton, f1_arg1, Enum[0x3DD78803F918E9D][0x4D2505E19049444], "ui_remove", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(AccessoriesButton, f1_arg1, Enum[@"luibutton"][@"hash_64D2505E19049444"], "ui_remove", function(element, menu, controller, model)
 		if CoD.WeaponOptionsUtility.IsCharmEquippedForWeapon(menu, controller) and IsMouseOrKeyboard(controller) then
 			CoD.WeaponOptionsUtility.ClearWeaponAccessory(menu, controller)
 			UpdateAllMenuButtonPrompts(menu, controller)
@@ -196,13 +196,13 @@ CoD.WeaponPersonalizeSlotContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 		end
 	end, function(element, menu, controller)
 		if CoD.WeaponOptionsUtility.IsCharmEquippedForWeapon(menu, controller) and IsMouseOrKeyboard(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x4D2505E19049444], 0x679ACA6FFC6C8F3, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "ui_remove")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"hash_64D2505E19049444"], @"menu/remove", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "ui_remove")
 			return true
 		else
 			return false
 		end
 	end, false)
-	AccessoriesButton:AddContextualMenuAction(f1_arg0, f1_arg1, 0x679ACA6FFC6C8F3, function(f30_arg0, f30_arg1, f30_arg2, f30_arg3)
+	AccessoriesButton:AddContextualMenuAction(f1_arg0, f1_arg1, @"menu/remove", function(f30_arg0, f30_arg1, f30_arg2, f30_arg3)
 		if CoD.WeaponOptionsUtility.IsCharmEquippedForWeapon(f30_arg1, f30_arg2) then
 			return function(f31_arg0, f31_arg1, f31_arg2, f31_arg3)
 				CoD.WeaponOptionsUtility.ClearWeaponAccessory(f31_arg1, f31_arg2)

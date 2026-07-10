@@ -20,7 +20,7 @@ CoD.Social_PartyList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	local PartyLeaderStar = LUI.UIImage.new(-0.19, -0.19, 65, 85, -2.39, -2.39, 58, 78)
 	PartyLeaderStar:setRGB(ColorSet.PartyFriendlyBlue.r, ColorSet.PartyFriendlyBlue.g, ColorSet.PartyFriendlyBlue.b)
 	PartyLeaderStar:setAlpha(0)
-	PartyLeaderStar:setImage(RegisterImage(0xCC30C39E4A100F))
+	PartyLeaderStar:setImage(RegisterImage(@"uie_ui_menu_director_icon_star"))
 	self:addElement(PartyLeaderStar)
 	self.PartyLeaderStar = PartyLeaderStar
 	self:mergeStateConditions({
@@ -33,7 +33,7 @@ CoD.Social_PartyList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	})
 	local f1_local3 = self
 	local f1_local4 = self.subscribeToModel
-	local f1_local5 = Engine[0x8DF2E5447F384B9]()
+	local f1_local5 = Engine[@"getglobalmodel"]()
 	f1_local4(f1_local3, f1_local5["socialRoot.party.leader"], function(f4_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

@@ -11,27 +11,27 @@ CoD.KillcamNemesisWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Nemesisbar = LUI.UIImage.new(0.5, 0.5, -538, 538, 0, 0, 128, 162)
 	Nemesisbar:setRGB(0.54, 0.01, 0.01)
-	Nemesisbar:setImage(RegisterImage(0x91D9C6D4106D23A))
+	Nemesisbar:setImage(RegisterImage(@"uie_ui_hud_nemesis_bar"))
 	self:addElement(Nemesisbar)
 	self.Nemesisbar = Nemesisbar
 	local KillsLabel20 = LUI.UIText.new(0.5, 0.5, -88, 91, 0, 0, 132, 159)
 	KillsLabel20:setRGB(0.92, 0.92, 0.92)
-	KillsLabel20:setText(Engine[0xF9F1239CFD921FE](0x30FB1CA77CF4B0C))
+	KillsLabel20:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_330FB1CA77CF4B0C"))
 	KillsLabel20:setTTF("0arame_mono_stencil")
 	KillsLabel20:setLetterSpacing(4)
-	KillsLabel20:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	KillsLabel20:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	KillsLabel20:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	KillsLabel20:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(KillsLabel20)
 	self.KillsLabel20 = KillsLabel20
 	local NemesisIcon = LUI.UIImage.new(0, 0, 42.5, 290.5, 0, 0, -14, 86)
 	NemesisIcon:setRGB(0.65, 0, 0)
 	NemesisIcon:setScale(0.8, 0.8)
-	NemesisIcon:setImage(RegisterImage(0x5A873CF40654090))
+	NemesisIcon:setImage(RegisterImage(@"uie_ui_hud_nemesis_icon"))
 	self:addElement(NemesisIcon)
 	self.NemesisIcon = NemesisIcon
 	local NemesisSkull = LUI.UIImage.new(0, 0, 42.5, 290.5, 0, 0, -24, 76)
 	NemesisSkull:setScale(0.75, 0.75)
-	NemesisSkull:setImage(RegisterImage(0x5DC0AF629835B8A))
+	NemesisSkull:setImage(RegisterImage(@"uie_ui_hud_nemesis_skull"))
 	self:addElement(NemesisSkull)
 	self.NemesisSkull = NemesisSkull
 	local KillcamNemesisArrow = CoD.KillcamNemesisArrow.new(f1_arg0, f1_arg1, 0, 0, 91, 237, 0, 0, -9, 51)
@@ -40,28 +40,28 @@ CoD.KillcamNemesisWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	self.KillcamNemesisArrow = KillcamNemesisArrow
 	local spark = LUI.UIImage.new(0, 0, -92, 420, 0, 0, -235, 277)
 	spark:setScale(1.2, 1.2)
-	spark:setImage(RegisterImage(0x86A85E0C09931D2))
-	spark:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	spark:setImage(RegisterImage(@"hash_786A85E0C09931D2"))
+	spark:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(spark)
 	self.spark = spark
 	self:mergeStateConditions({
 		{
 			stateName = "NemesisKillcam",
 			condition = function(menu, element, event)
-				return Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xA77EB9347BE4DFF])
+				return Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_nemesis_killcam"])
 			end,
 		},
 	})
 	local f1_local7 = self
 	local f1_local8 = self.subscribeToModel
-	local f1_local9 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local8(f1_local7, f1_local9["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xA77EB9347BE4DFF]], function(f3_arg0)
+	local f1_local9 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local8(f1_local7, f1_local9["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_nemesis_killcam"]], function(f3_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f3_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xA77EB9347BE4DFF],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_nemesis_killcam"],
 		})
 	end, false)
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)

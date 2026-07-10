@@ -112,7 +112,7 @@ CoD.AARChallengeReward.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	ChallengeItem:linkToElementModel(self, "challengeName", true, function(model)
 		local f13_local0 = model:get()
 		if f13_local0 ~= nil then
-			ChallengeItem.Title:setText(Engine[0xF9F1239CFD921FE](f13_local0))
+			ChallengeItem.Title:setText(Engine[@"hash_4F9F1239CFD921FE"](f13_local0))
 		end
 	end)
 	self:addElement(ChallengeItem)
@@ -121,7 +121,7 @@ CoD.AARChallengeReward.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	self:addElement(VerticalListSpacer3)
 	self.VerticalListSpacer3 = VerticalListSpacer3
 	local InfoDotline2 = LUI.UIImage.new(0.5, 0.5, -196, 184, 0, 0, 491, 495)
-	InfoDotline2:setImage(RegisterImage(0x805FC715189E506))
+	InfoDotline2:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_info_dotline"))
 	self:addElement(InfoDotline2)
 	self.InfoDotline2 = InfoDotline2
 	local XPReward = CoD.AARRewardsXP.new(f1_arg0, f1_arg1, 0, 0, 16.5, 396.5, 0, 0, 495, 589)
@@ -156,7 +156,7 @@ CoD.AARChallengeReward.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	end)
 	local VerticalListSpacer5 = XPReward
 	local VerticalListSpacer4 = XPReward.subscribeToModel
-	local AARTierItem = Engine[0x8DF2E5447F384B9]()
+	local AARTierItem = Engine[@"getglobalmodel"]()
 	VerticalListSpacer4(VerticalListSpacer5, AARTierItem["lobbyRoot.lobbyNav"], function(f18_arg0)
 		f1_arg0:updateElementState(XPReward, {
 			name = "model_validation",

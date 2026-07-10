@@ -61,7 +61,7 @@ CoD.WZAAR_MeritContainer.__clipsPerState = {
 			f7_arg0:__resetProperties()
 			f7_arg0:setupElementClipCounter(2)
 			local f7_local0 = function(f8_arg0)
-				f7_arg0.Title:beginAnimation(400, Enum[0xF50FFF429AB1890][0xE99F3A6467FC0CA] | Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f7_arg0.Title:beginAnimation(400, Enum[@"luitween"][@"luitween_back"] | Enum[@"luitween"][@"luitween_ease_both"])
 				f7_arg0.Title:setAlpha(1)
 				f7_arg0.Title:setScale(1, 1)
 				f7_arg0.Title:registerEventHandler("interrupted_keyframe", f7_arg0.clipInterrupted)

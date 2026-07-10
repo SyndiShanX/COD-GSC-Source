@@ -58,7 +58,7 @@ LUI.createMenu.Director = function(f1_arg0, f1_arg1)
 	SearchQoSJoinList:setTopBottom(0, 0, 80, 828)
 	SearchQoSJoinList:setWidgetType(CoD.SessionSearchQoSJoin)
 	SearchQoSJoinList:setVerticalCount(50)
-	SearchQoSJoinList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	SearchQoSJoinList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	SearchQoSJoinList:setDataSource("DebugSessionSearchQoSJoin")
 	self:addElement(SearchQoSJoinList)
 	self.SearchQoSJoinList = SearchQoSJoinList
@@ -305,10 +305,10 @@ LUI.createMenu.Director = function(f1_arg0, f1_arg1)
 	local KoreaErrorMessage = nil
 	KoreaErrorMessage = LUI.UIText.new(0, 0, 374.5, 1583.5, 0, 0, 417, 454)
 	KoreaErrorMessage:setAlpha(0)
-	KoreaErrorMessage:setText(Engine[0xF9F1239CFD921FE](0xB582AE90C06D4FF))
+	KoreaErrorMessage:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/korea_15plus_blocked_gamemode"))
 	KoreaErrorMessage:setTTF("default")
-	KoreaErrorMessage:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	KoreaErrorMessage:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	KoreaErrorMessage:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	KoreaErrorMessage:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(KoreaErrorMessage)
 	self.KoreaErrorMessage = KoreaErrorMessage
 	local BlackFadeForGameStart = LUI.UIImage.new(-0.05, 1.05, 0, 0, -0.05, 1.05, 0, 0)
@@ -405,7 +405,7 @@ LUI.createMenu.Director = function(f1_arg0, f1_arg1)
 	end, false)
 	f1_local25 = self
 	f1_local26 = self.subscribeToModel
-	f1_local27 = Engine[0x8DF2E5447F384B9]()
+	f1_local27 = Engine[@"getglobalmodel"]()
 	f1_local26(f1_local25, f1_local27["lobbyRoot.lobbyNav"], function(f28_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",
@@ -417,7 +417,7 @@ LUI.createMenu.Director = function(f1_arg0, f1_arg1)
 	end, false)
 	f1_local25 = self
 	f1_local26 = self.subscribeToModel
-	f1_local27 = Engine[0x8DF2E5447F384B9]()
+	f1_local27 = Engine[@"getglobalmodel"]()
 	f1_local26(f1_local25, f1_local27["lobbyRoot.showSelect"], function(f29_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",
@@ -429,98 +429,98 @@ LUI.createMenu.Director = function(f1_arg0, f1_arg1)
 	end, false)
 	f1_local25 = self
 	f1_local26 = self.subscribeToModel
-	f1_local27 = Engine[0x8DF2E5447F384B9]()
+	f1_local27 = Engine[@"getglobalmodel"]()
 	f1_local26(f1_local25, f1_local27["lobbyRoot.lobbyNetworkMode"], function(f30_arg0, f30_arg1)
-		CoD.Menu.UpdateButtonShownState(f30_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
-		CoD.Menu.UpdateButtonShownState(f30_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+		CoD.Menu.UpdateButtonShownState(f30_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+		CoD.Menu.UpdateButtonShownState(f30_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 	end, false)
 	f1_local25 = self
 	f1_local26 = self.subscribeToModel
-	f1_local27 = Engine[0x8DF2E5447F384B9]()
+	f1_local27 = Engine[@"getglobalmodel"]()
 	f1_local26(f1_local25, f1_local27["lobbyRoot.lobbyNav"], function(f31_arg0, f31_arg1)
-		CoD.Menu.UpdateButtonShownState(f31_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
-		CoD.Menu.UpdateButtonShownState(f31_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f31_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x4D2505E19049444])
-		CoD.Menu.UpdateButtonShownState(f31_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A])
-		CoD.Menu.UpdateButtonShownState(f31_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA])
+		CoD.Menu.UpdateButtonShownState(f31_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+		CoD.Menu.UpdateButtonShownState(f31_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f31_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"hash_64D2505E19049444"])
+		CoD.Menu.UpdateButtonShownState(f31_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"])
+		CoD.Menu.UpdateButtonShownState(f31_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_rtrig"])
 	end, false)
 	f1_local25 = self
 	f1_local26 = self.subscribeToModel
-	f1_local27 = Engine[0x8DF2E5447F384B9]()
+	f1_local27 = Engine[@"getglobalmodel"]()
 	f1_local26(f1_local25, f1_local27["lobbyRoot.privateClient.update"], function(f32_arg0, f32_arg1)
-		CoD.Menu.UpdateButtonShownState(f32_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
-		CoD.Menu.UpdateButtonShownState(f32_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x4D2505E19049444])
-		CoD.Menu.UpdateButtonShownState(f32_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A])
+		CoD.Menu.UpdateButtonShownState(f32_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+		CoD.Menu.UpdateButtonShownState(f32_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"hash_64D2505E19049444"])
+		CoD.Menu.UpdateButtonShownState(f32_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"])
 	end, false)
 	f1_local25 = self
 	f1_local26 = self.subscribeToModel
-	f1_local27 = Engine[0x8DF2E5447F384B9]()
+	f1_local27 = Engine[@"getglobalmodel"]()
 	f1_local26(f1_local25, f1_local27["lobbyRoot.showSelect"], function(f33_arg0, f33_arg1)
-		CoD.Menu.UpdateButtonShownState(f33_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f33_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x4D2505E19049444])
-		CoD.Menu.UpdateButtonShownState(f33_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A])
-		CoD.Menu.UpdateButtonShownState(f33_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
+		CoD.Menu.UpdateButtonShownState(f33_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f33_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"hash_64D2505E19049444"])
+		CoD.Menu.UpdateButtonShownState(f33_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"])
+		CoD.Menu.UpdateButtonShownState(f33_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
 	end, false)
 	self:appendEventHandler("input_source_changed", function(f34_arg0, f34_arg1)
 		f34_arg1.menu = f34_arg1.menu or f1_local1
-		CoD.Menu.UpdateButtonShownState(f34_arg0, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x4D2505E19049444])
-		CoD.Menu.UpdateButtonShownState(f34_arg0, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A])
+		CoD.Menu.UpdateButtonShownState(f34_arg0, f1_local1, f1_arg0, Enum[@"luibutton"][@"hash_64D2505E19049444"])
+		CoD.Menu.UpdateButtonShownState(f34_arg0, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"])
 	end)
 	f1_local25 = self
 	f1_local26 = self.subscribeToModel
-	f1_local27 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	f1_local27 = Engine[@"getmodelforcontroller"](f1_arg0)
 	f1_local26(f1_local25, f1_local27.LastInput, function(f35_arg0, f35_arg1)
-		CoD.Menu.UpdateButtonShownState(f35_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x4D2505E19049444])
-		CoD.Menu.UpdateButtonShownState(f35_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A])
+		CoD.Menu.UpdateButtonShownState(f35_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"hash_64D2505E19049444"])
+		CoD.Menu.UpdateButtonShownState(f35_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"])
 	end, false)
 	f1_local25 = self
 	f1_local26 = self.subscribeToModel
-	f1_local27 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	f1_local27 = Engine[@"getmodelforcontroller"](f1_arg0)
 	f1_local26(f1_local25, f1_local27["DirectorZMLoadoutPreview.ZMLoadoutPreviewWidgetShown"], function(f36_arg0, f36_arg1)
-		CoD.Menu.UpdateButtonShownState(f36_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x4D2505E19049444])
-		CoD.Menu.UpdateButtonShownState(f36_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A])
+		CoD.Menu.UpdateButtonShownState(f36_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"hash_64D2505E19049444"])
+		CoD.Menu.UpdateButtonShownState(f36_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"])
 	end, false)
 	self:linkToElementModel(self, "xuid", true, function(model, f37_arg1)
-		CoD.Menu.UpdateButtonShownState(f37_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x4D2505E19049444])
-		CoD.Menu.UpdateButtonShownState(f37_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A])
+		CoD.Menu.UpdateButtonShownState(f37_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"hash_64D2505E19049444"])
+		CoD.Menu.UpdateButtonShownState(f37_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"])
 	end)
 	f1_local25 = self
 	f1_local26 = self.subscribeToModel
-	f1_local27 = Engine[0x8DF2E5447F384B9]()
+	f1_local27 = Engine[@"getglobalmodel"]()
 	f1_local26(f1_local25, f1_local27["lobbyRoot.lobbyTimeRemaining"], function(f38_arg0, f38_arg1)
-		CoD.Menu.UpdateButtonShownState(f38_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x4D2505E19049444])
-		CoD.Menu.UpdateButtonShownState(f38_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A])
+		CoD.Menu.UpdateButtonShownState(f38_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"hash_64D2505E19049444"])
+		CoD.Menu.UpdateButtonShownState(f38_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"])
 	end, false)
 	f1_local25 = self
 	f1_local26 = self.subscribeToModel
-	f1_local27 = Engine[0x8DF2E5447F384B9]()
+	f1_local27 = Engine[@"getglobalmodel"]()
 	f1_local26(f1_local25, f1_local27["lobbyRoot.spinnerActive"], function(f39_arg0, f39_arg1)
-		CoD.Menu.UpdateButtonShownState(f39_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x4D2505E19049444])
-		CoD.Menu.UpdateButtonShownState(f39_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A])
+		CoD.Menu.UpdateButtonShownState(f39_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"hash_64D2505E19049444"])
+		CoD.Menu.UpdateButtonShownState(f39_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"])
 	end, false)
 	f1_local25 = self
 	f1_local26 = self.subscribeToModel
-	f1_local27 = Engine[0x8DF2E5447F384B9]()
+	f1_local27 = Engine[@"getglobalmodel"]()
 	f1_local26(f1_local25, f1_local27["lobbyRoot.publicLobby.stage"], function(f40_arg0, f40_arg1)
-		CoD.Menu.UpdateButtonShownState(f40_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x4D2505E19049444])
-		CoD.Menu.UpdateButtonShownState(f40_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A])
+		CoD.Menu.UpdateButtonShownState(f40_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"hash_64D2505E19049444"])
+		CoD.Menu.UpdateButtonShownState(f40_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"])
 	end, false)
 	self:appendEventHandler("on_session_start", function(f41_arg0, f41_arg1)
 		f41_arg1.menu = f41_arg1.menu or f1_local1
-		CoD.Menu.UpdateButtonShownState(f41_arg0, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x4D2505E19049444])
-		CoD.Menu.UpdateButtonShownState(f41_arg0, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A])
+		CoD.Menu.UpdateButtonShownState(f41_arg0, f1_local1, f1_arg0, Enum[@"luibutton"][@"hash_64D2505E19049444"])
+		CoD.Menu.UpdateButtonShownState(f41_arg0, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"])
 	end)
 	self:appendEventHandler("on_session_end", function(f42_arg0, f42_arg1)
 		f42_arg1.menu = f42_arg1.menu or f1_local1
-		CoD.Menu.UpdateButtonShownState(f42_arg0, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x4D2505E19049444])
-		CoD.Menu.UpdateButtonShownState(f42_arg0, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A])
+		CoD.Menu.UpdateButtonShownState(f42_arg0, f1_local1, f1_arg0, Enum[@"luibutton"][@"hash_64D2505E19049444"])
+		CoD.Menu.UpdateButtonShownState(f42_arg0, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"])
 	end)
 	f1_local25 = self
 	f1_local26 = self.subscribeToModel
-	f1_local27 = Engine[0x8DF2E5447F384B9]()
+	f1_local27 = Engine[@"getglobalmodel"]()
 	f1_local26(f1_local25, f1_local27["lobbyRoot.gameClient.update"], function(f43_arg0, f43_arg1)
-		CoD.Menu.UpdateButtonShownState(f43_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x4D2505E19049444])
-		CoD.Menu.UpdateButtonShownState(f43_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A])
+		CoD.Menu.UpdateButtonShownState(f43_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"hash_64D2505E19049444"])
+		CoD.Menu.UpdateButtonShownState(f43_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"])
 	end, false)
 	self:registerEventHandler("unused_gamepad_button", function(self, event)
 		local f44_local0 = nil
@@ -530,7 +530,7 @@ LUI.createMenu.Director = function(f1_arg0, f1_arg1)
 		end
 		return f44_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x22361E23588705A], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_start"], nil, function(element, menu, controller, model)
 		if not IsPC() then
 			PlaySoundAlias("uin_toggle_generic")
 			OpenOverlay(self, "StartMenu_Main", controller, nil)
@@ -539,13 +539,13 @@ LUI.createMenu.Director = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if not IsPC() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x22361E23588705A], 0x4DC58203AB2DE0, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_start"], @"menu/menu", nil, nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], nil, function(element, menu, controller, model)
 		if not IsPC() and not IsLAN() and not IsPlayerAGuest(controller) and IsPlayerAllowedToPlayOnline(controller) and not CoD.DirectorUtility.IsSocialButtonDisabledForDemo(controller) and not CoD.DirectorUtility.ShowDirectorTraining(controller) then
 			PlaySoundAlias("uin_toggle_generic")
 			OpenOverlay(self, "Social_Main", controller, nil)
@@ -557,16 +557,16 @@ LUI.createMenu.Director = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if not IsPC() and not IsLAN() and not IsPlayerAGuest(controller) and IsPlayerAllowedToPlayOnline(controller) and not CoD.DirectorUtility.IsSocialButtonDisabledForDemo(controller) and not CoD.DirectorUtility.ShowDirectorTraining(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], 0x478E0BA47CFB4A8, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], @"menu/social", nil, nil)
 			return true
 		elseif CoD.DirectorUtility.ShowDirectorSelect(controller) and IsPC() and not IsLAN() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], 0x0, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], @"hash_0", nil, nil)
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], nil, function(element, menu, controller, model)
 		if CoD.DirectorUtility.ShowDirectorCustom(self, controller) and CoD.DirectorUtility.IsOfflineDemo() and IsLobbyNetworkModeLAN() and CoD.BaseUtility.IsButtonHoldFinished(model) then
 			LobbyGoBack(self, controller)
 			return true
@@ -580,19 +580,19 @@ LUI.createMenu.Director = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if CoD.DirectorUtility.ShowDirectorCustom(self, controller) and CoD.DirectorUtility.IsOfflineDemo() and IsLobbyNetworkModeLAN() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x0, Enum[0xBEBDBAEEB3ECCCA][0x71B04FAC5BE0E35] | 1500 << Enum[0xBEBDBAEEB3ECCCA][0x76ADD225D738C93], nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"hash_0", Enum[@"luibuttonpromptflags"][@"hash_771B04FAC5BE0E35"] | 1500 << Enum[@"luibuttonpromptflags"][@"hash_176ADD225D738C93"], nil)
 			return false
 		elseif CoD.DirectorUtility.ShowDirectorSelect(controller) and CoD.DirectorUtility.IsOfflineDemo() and IsLobbyNetworkModeLAN() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x0, Enum[0xBEBDBAEEB3ECCCA][0x71B04FAC5BE0E35] | 1500 << Enum[0xBEBDBAEEB3ECCCA][0x76ADD225D738C93], nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"hash_0", Enum[@"luibuttonpromptflags"][@"hash_771B04FAC5BE0E35"] | 1500 << Enum[@"luibuttonpromptflags"][@"hash_176ADD225D738C93"], nil)
 			return false
 		elseif CoD.DirectorUtility.ShowDirectorSelect(controller) and not IsLAN() and not IsPC() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x0, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"hash_0", nil, nil)
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x4D2505E19049444], "ESCAPE", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"hash_64D2505E19049444"], "ESCAPE", function(element, menu, controller, model)
 		if IsMouseOrKeyboard(controller) and CoD.DirectorUtility.IsLoadoutPreviewWidgetShown(controller) then
 			CoD.DirectorUtility.HideLoadoutPreview(controller)
 			return true
@@ -645,55 +645,55 @@ LUI.createMenu.Director = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if IsMouseOrKeyboard(controller) and CoD.DirectorUtility.IsLoadoutPreviewWidgetShown(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x4D2505E19049444], 0x70A9FDC87CD3D48, nil, "ESCAPE")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"hash_64D2505E19049444"], @"menu/back", nil, "ESCAPE")
 			return true
 		elseif IsMouseOrKeyboard(controller) and CoD.DirectorUtility.ShowDirectorCustom(self, controller) and CoD.DirectorUtility.HasSelectedClient(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x4D2505E19049444], 0xC2E92C54C2BE289, nil, "ESCAPE")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"hash_64D2505E19049444"], @"menu/cancel", nil, "ESCAPE")
 			return true
 		elseif IsMouseOrKeyboard(controller) and CoD.DirectorUtility.IsLoadoutPreviewWidgetShown(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x4D2505E19049444], 0x70A9FDC87CD3D48, nil, "ESCAPE")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"hash_64D2505E19049444"], @"menu/back", nil, "ESCAPE")
 			return true
 		elseif IsMouseOrKeyboard(controller) and CoD.DirectorUtility.ShowDirectorCustom(self, controller) and not CoD.ModelUtility.IsGlobalModelValueGreaterThan("lobbyRoot.lobbyTimeRemaining", 0) and not CoD.DirectorUtility.IsOfflineDemo() and not CoD.DirectorUtility.ShowDirectorPregame(controller) and not CoD.ModelUtility.IsGlobalModelValueTrue("lobbyRoot.spinnerActive") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x4D2505E19049444], 0x70A9FDC87CD3D48, nil, "ESCAPE")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"hash_64D2505E19049444"], @"menu/back", nil, "ESCAPE")
 			return true
 		elseif IsMouseOrKeyboard(controller) and CoD.DirectorUtility.ShowDirectorArenaMatchmaking(controller) and not CoD.ModelUtility.IsGlobalModelValueTrue("lobbyRoot.spinnerActive") and not CoD.ArenaUtility.ArenaMatchSet(self) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x4D2505E19049444], 0x70A9FDC87CD3D48, nil, "ESCAPE")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"hash_64D2505E19049444"], @"menu/back", nil, "ESCAPE")
 			return true
 		elseif IsMouseOrKeyboard(controller) and CoD.DirectorUtility.ShowDirectorTheater(controller) and CoD.DirectorUtility.HasSelectedClient(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x4D2505E19049444], 0xC2E92C54C2BE289, nil, "ESCAPE")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"hash_64D2505E19049444"], @"menu/cancel", nil, "ESCAPE")
 			return true
 		elseif IsMouseOrKeyboard(controller) and CoD.DirectorUtility.ShowDirectorTheater(controller) and not CoD.ModelUtility.IsGlobalModelValueTrue("lobbyRoot.spinnerActive") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x4D2505E19049444], 0x70A9FDC87CD3D48, nil, "ESCAPE")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"hash_64D2505E19049444"], @"menu/back", nil, "ESCAPE")
 			return true
 		elseif IsMouseOrKeyboard(controller) and CoD.DirectorUtility.ShowDirectorPublic(controller) and not CoD.ModelUtility.IsGlobalModelValueTrue("lobbyRoot.spinnerActive") and IsLobbyPrivateHost() and IsWarzone() and IsPC() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x4D2505E19049444], 0x70A9FDC87CD3D48, nil, "ESCAPE")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"hash_64D2505E19049444"], @"menu/back", nil, "ESCAPE")
 			return true
 		elseif IsMouseOrKeyboard(controller) and CoD.DirectorUtility.ShowDirectorPublic(controller) and not CoD.ModelUtility.IsGlobalModelValueTrue("lobbyRoot.spinnerActive") and IsLobbyPrivateHost() and IsWarzone() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x4D2505E19049444], 0x70A9FDC87CD3D48, nil, "ESCAPE")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"hash_64D2505E19049444"], @"menu/back", nil, "ESCAPE")
 			return true
 		elseif IsMouseOrKeyboard(controller) and CoD.DirectorUtility.ShowDirectorPublic(controller) and not CoD.ModelUtility.IsGlobalModelValueTrue("lobbyRoot.spinnerActive") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x4D2505E19049444], 0x70A9FDC87CD3D48, nil, "ESCAPE")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"hash_64D2505E19049444"], @"menu/back", nil, "ESCAPE")
 			return true
 		elseif IsMouseOrKeyboard(controller) and CoD.LobbyUtility.ShouldShowLeaveLobbyPopup() and not CoD.DirectorUtility.ShowDirectorPublic(controller) and not CoD.DirectorUtility.IsOfflineDemo() and not CoD.DirectorUtility.ShowDirectorArenaMatchmaking(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x4D2505E19049444], 0x70A9FDC87CD3D48, nil, "ESCAPE")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"hash_64D2505E19049444"], @"menu/back", nil, "ESCAPE")
 			return true
 		elseif IsMouseOrKeyboard(controller) and CoD.DirectorUtility.ShowDirectorCustom(self, controller) and CoD.ModelUtility.IsGlobalModelValueGreaterThan("lobbyRoot.lobbyTimeRemaining", 0) and IsLobbyHostOfCurrentMenu() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x4D2505E19049444], 0xC2E92C54C2BE289, nil, "ESCAPE")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"hash_64D2505E19049444"], @"menu/cancel", nil, "ESCAPE")
 			return true
 		elseif IsMouseOrKeyboard(controller) and CoD.DirectorUtility.ShowDirectorTheater(controller) and CoD.ModelUtility.IsGlobalModelValueGreaterThan("lobbyRoot.lobbyTimeRemaining", 0) and IsLobbyHostOfCurrentMenu() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x4D2505E19049444], 0xC2E92C54C2BE289, nil, "ESCAPE")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"hash_64D2505E19049444"], @"menu/cancel", nil, "ESCAPE")
 			return true
 		elseif IsMouseOrKeyboard(controller) and CoD.DirectorUtility.ShowDirectorSelect(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x4D2505E19049444], 0xB2EF56B4AF147B8, nil, "ESCAPE")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"hash_64D2505E19049444"], @"menu/quit", nil, "ESCAPE")
 			return true
 		elseif IsMouseOrKeyboard(controller) and CoD.DirectorUtility.AllowShortPressToGoBack(self, controller) and not CoD.ModelUtility.IsGlobalModelValueTrue("lobbyRoot.spinnerActive") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x4D2505E19049444], 0x70A9FDC87CD3D48, nil, "ESCAPE")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"hash_64D2505E19049444"], @"menu/back", nil, "ESCAPE")
 			return true
 		else
 			return false
 		end
 	end, true)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		if IsGamepad(controller) and CoD.DirectorUtility.IsLoadoutPreviewWidgetShown(controller) and not IsPC() then
 			CoD.DirectorUtility.HideLoadoutPreview(controller)
 			return true
@@ -749,83 +749,83 @@ LUI.createMenu.Director = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if IsGamepad(controller) and CoD.DirectorUtility.IsLoadoutPreviewWidgetShown(controller) and not IsPC() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x6287CA575B55EC0, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/hide_loadout", nil, nil)
 			return true
 		elseif IsGamepad(controller) and CoD.DirectorUtility.ShowDirectorCustom(self, controller) and CoD.DirectorUtility.HasSelectedClient(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0xC2E92C54C2BE289, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/cancel", nil, nil)
 			return true
 		elseif IsGamepad(controller) and CoD.DirectorUtility.IsLoadoutPreviewWidgetShown(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0xEF2D3320785B51A, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/leave", nil, nil)
 			return true
 		elseif IsGamepad(controller) and CoD.DirectorUtility.ShowDirectorCustom(self, controller) and not CoD.ModelUtility.IsGlobalModelValueGreaterThan("lobbyRoot.lobbyTimeRemaining", 0) and not CoD.DirectorUtility.ShowDirectorPregame(controller) and not CoD.ModelUtility.IsGlobalModelValueTrue("lobbyRoot.spinnerActive") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0xEF2D3320785B51A, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/leave", nil, nil)
 			return true
 		elseif IsGamepad(controller) and CoD.DirectorUtility.ShowDirectorArenaMatchmaking(controller) and not CoD.ModelUtility.IsGlobalModelValueTrue("lobbyRoot.spinnerActive") and not CoD.ArenaUtility.ArenaMatchSet(self) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0xEF2D3320785B51A, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/leave", nil, nil)
 			return true
 		elseif IsGamepad(controller) and CoD.DirectorUtility.ShowDirectorTheater(controller) and CoD.DirectorUtility.HasSelectedClient(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0xC2E92C54C2BE289, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/cancel", nil, nil)
 			return true
 		elseif IsGamepad(controller) and CoD.DirectorUtility.ShowDirectorTheater(controller) and not CoD.ModelUtility.IsGlobalModelValueTrue("lobbyRoot.spinnerActive") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 			return true
 		elseif IsGamepad(controller) and CoD.DirectorUtility.ShowDirectorPublic(controller) and not CoD.ModelUtility.IsGlobalModelValueTrue("lobbyRoot.spinnerActive") and IsLobbyPrivateHost() and IsWarzone() and IsPC() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 			return true
 		elseif IsGamepad(controller) and CoD.DirectorUtility.ShowDirectorPublic(controller) and not CoD.ModelUtility.IsGlobalModelValueTrue("lobbyRoot.spinnerActive") and IsLobbyPrivateHost() and IsWarzone() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0xFF006933C958CA6, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"hash_FF006933C958CA6", nil, nil)
 			return true
 		elseif IsGamepad(controller) and CoD.DirectorUtility.ShowDirectorPublic(controller) and not CoD.ModelUtility.IsGlobalModelValueTrue("lobbyRoot.spinnerActive") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0xEF2D3320785B51A, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/leave", nil, nil)
 			return true
 		elseif IsGamepad(controller) and CoD.LobbyUtility.ShouldShowLeaveLobbyPopup() and not CoD.DirectorUtility.ShowDirectorPublic(controller) and not CoD.DirectorUtility.IsOfflineDemo() and not CoD.DirectorUtility.ShowDirectorArenaMatchmaking(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0xEF2D3320785B51A, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/leave", nil, nil)
 			return true
 		elseif IsGamepad(controller) and CoD.DirectorUtility.ShowDirectorCustom(self, controller) and CoD.ModelUtility.IsGlobalModelValueGreaterThan("lobbyRoot.lobbyTimeRemaining", 0) and IsLobbyHostOfCurrentMenu() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0xC2E92C54C2BE289, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/cancel", nil, nil)
 			return true
 		elseif IsGamepad(controller) and CoD.DirectorUtility.ShowDirectorTheater(controller) and CoD.ModelUtility.IsGlobalModelValueGreaterThan("lobbyRoot.lobbyTimeRemaining", 0) and IsLobbyHostOfCurrentMenu() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0xC2E92C54C2BE289, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/cancel", nil, nil)
 			return true
 		elseif IsGamepad(controller) and CoD.DirectorUtility.ShowDirectorSelect(controller) and IsPC() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0xB2EF56B4AF147B8, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/quit", nil, nil)
 			return true
 		elseif IsGamepad(controller) and CoD.DirectorUtility.AllowShortPressToGoBack(self, controller) and not CoD.ModelUtility.IsGlobalModelValueTrue("lobbyRoot.spinnerActive") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 			return true
 		elseif IsGamepad(controller) and CoD.DirectorUtility.IsLoadoutPreviewWidgetShown(controller) and IsPC() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x93AB4C84F113EE1], "ui_contextual_1", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_back"], "ui_contextual_1", function(element, menu, controller, model)
 		if CoD.AARUtility.CanShowAAR(menu, controller) then
 			CoD.AARUtility.OpenAAR(menu, controller)
-			UpdateButtonPromptState(menu, element, controller, Enum[0x3DD78803F918E9D][0x93AB4C84F113EE1])
+			UpdateButtonPromptState(menu, element, controller, Enum[@"luibutton"][@"lui_key_back"])
 			return true
 		else
 		end
 	end, function(element, menu, controller)
 		if CoD.AARUtility.CanShowAAR(menu, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x93AB4C84F113EE1], 0xEEF90B1483C4C23, nil, "ui_contextual_1")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_back"], @"hash_5EEF90B1483C4C23", nil, "ui_contextual_1")
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA], "ui_contextual_2", function(element, menu, controller, model)
-		if IsBooleanDvarSet("lobby_gestures_enabled") and CoD.DirectorUtility[0x1E20A632CB63092](controller) then
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_rtrig"], "ui_contextual_2", function(element, menu, controller, model)
+		if IsBooleanDvarSet("lobby_gestures_enabled") and CoD.DirectorUtility[@"hash_61E20A632CB63092"](controller) then
 			PlaySoundAlias("uin_toggle_generic")
-			CoD.BaseUtility.MenuPreservesButton(menu, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA], true)
+			CoD.BaseUtility.MenuPreservesButton(menu, Enum[@"luibutton"][@"lui_key_rtrig"], true)
 			OpenOverlay(self, "DirectorGestureSelector", controller)
 			return true
 		else
 		end
 	end, function(element, menu, controller)
-		if IsBooleanDvarSet("lobby_gestures_enabled") and CoD.DirectorUtility[0x1E20A632CB63092](controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA], 0x1C35414911C9A0E, nil, "ui_contextual_2")
+		if IsBooleanDvarSet("lobby_gestures_enabled") and CoD.DirectorUtility[@"hash_61E20A632CB63092"](controller) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_rtrig"], @"menu/gesture", nil, "ui_contextual_2")
 			return true
 		else
 			return false
@@ -834,16 +834,16 @@ LUI.createMenu.Director = function(f1_arg0, f1_arg1)
 	LUI.OverrideFunction_CallOriginalFirst(self, "setState", function(element, controller, f59_arg2, f59_arg3, f59_arg4)
 		if IsElementInState(f1_local1, "ShowArena") then
 			CoD.AARUtility.OpenAARIfNeeded(f1_local1, controller)
-			UpdateButtonPromptState(f1_local1, element, controller, Enum[0x3DD78803F918E9D][0x93AB4C84F113EE1])
+			UpdateButtonPromptState(f1_local1, element, controller, Enum[@"luibutton"][@"lui_key_back"])
 			CoD.DirectorUtility.ForceNotifyPrivateClientUpdate()
 			ForceNotifyControllerModel(controller, "Contracts.updateActiveContracts")
 		elseif IsElementInAnyState(f1_local1, "ShowCustom", "ShowArena", "ShowPublic", "ShowPrivate", "ShowPregame") then
 			CoD.AARUtility.OpenAARIfNeeded(f1_local1, controller)
-			UpdateButtonPromptState(f1_local1, element, controller, Enum[0x3DD78803F918E9D][0x93AB4C84F113EE1])
+			UpdateButtonPromptState(f1_local1, element, controller, Enum[@"luibutton"][@"lui_key_back"])
 			ForceNotifyControllerModel(controller, "Contracts.updateActiveContracts")
 		elseif IsElementInState(f1_local1, "ShowTraining") then
 			CoD.CTUtility.InitSpecialistHeadquarters(f1_local1, controller)
-			UpdateButtonPromptState(f1_local1, element, controller, Enum[0x3DD78803F918E9D][0x93AB4C84F113EE1])
+			UpdateButtonPromptState(f1_local1, element, controller, Enum[@"luibutton"][@"lui_key_back"])
 		elseif IsElementInState(f1_local1, "ShowArenaMatchmaking") then
 			CoD.DirectorUtility.ForceNotifyPrivateClientUpdate()
 			ForceNotifyControllerModel(controller, "Contracts.updateActiveContracts")

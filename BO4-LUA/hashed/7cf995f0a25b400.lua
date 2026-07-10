@@ -14,7 +14,7 @@ CoD.Prestige_PrestigeHeader.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	PrestigeMasterTiers:setTopBottom(0, 0, 0, 20)
 	PrestigeMasterTiers:setWidgetType(CoD.Prestige_PrestigeTierIndicator)
 	PrestigeMasterTiers:setHorizontalCount(10)
-	PrestigeMasterTiers:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	PrestigeMasterTiers:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	PrestigeMasterTiers:setDataSource("PrestigeMasterTiers")
 	PrestigeMasterTiers:subscribeToGlobalModel(f1_arg1, "PrestigeMenuInfo", "hasPrestiged", function(model)
 		CoD.GridAndListUtility.UpdateDataSource(PrestigeMasterTiers, false, true, true)

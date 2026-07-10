@@ -4,10 +4,10 @@ require("x64:b5d5f7ffe97a9a7")
 require("x64:c71b3cf9012e5dd")
 require("x64:c6e3b538b3d95e3")
 require("x64:dccf19cf34ca50f")
-if Engine[0x2DA54CF5D6B7F02]() then
+if Engine[@"isdevelopmentbuild"]() then
 	require("x64:3b9be7a3bb18b43")
 end
-if Engine[0x2DA54CF5D6B7F02]() or Engine[0xA056213B64313A6]() then
+if Engine[@"isdevelopmentbuild"]() or Engine[@"isprofilebuild"]() then
 	require("x64:6c682fb7f8b97de")
 end
 require("x64:30d588e2c6ed752")

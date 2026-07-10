@@ -38,7 +38,7 @@ CoD.WZObituaryVictim.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	self.Icon = Icon
 	local Name = LUI.UIText.new(0, 0, 42, 210, 0.48, 0.48, -12.5, 13.5)
 	Name:setTTF("notosans_regular")
-	Name:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	Name:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	Name.__Color = function(f5_arg0)
 		local f5_local0 = f5_arg0:get()
 		if f5_local0 ~= nil then
@@ -67,11 +67,11 @@ CoD.WZObituaryVictim.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	Icon:linkToElementModel(self, "team", true, Icon.Backer.__TeamColor_FullPath)
 	local f1_local3 = Icon
 	local f1_local4 = Icon.subscribeToModel
-	local f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local4(f1_local3, f1_local5["profile.colorblindMode"], Icon.Backer.__TeamColor_FullPath)
 	f1_local3 = Name
 	f1_local4 = Name.subscribeToModel
-	f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local4(f1_local3, f1_local5["profile.colorblindMode"], Name.__Color_FullPath)
 	self:mergeStateConditions({
 		{

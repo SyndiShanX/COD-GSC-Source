@@ -18,7 +18,7 @@ LUI.createMenu.wz_revive_prompt = function(f1_arg0, f1_arg1)
 	local playerName = LUI.UIText.new(0.5, 0.5, -134, 134, 0, 0, -177, -147)
 	playerName:setTTF("notosans_bold")
 	playerName:setLetterSpacing(1)
-	playerName:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	playerName:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	playerName:linkToElementModel(self, "clientnum", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -48,7 +48,7 @@ LUI.createMenu.wz_revive_prompt = function(f1_arg0, f1_arg1)
 	local iconarrow = LUI.UIImage.new(0.5, 0.5, -32, 32, 0.5, 0.5, -48, 16)
 	iconarrow:setAlpha(0.55)
 	iconarrow:setScale(0.75, 0.75)
-	iconarrow:setImage(RegisterImage(0xAB17136E34541E3))
+	iconarrow:setImage(RegisterImage(@"uie_ui_hud_revive_arrow"))
 	self:addElement(iconarrow)
 	self.iconarrow = iconarrow
 	self:mergeStateConditions({
@@ -63,8 +63,8 @@ LUI.createMenu.wz_revive_prompt = function(f1_arg0, f1_arg1)
 			condition = function(menu, element, event)
 				local f6_local0 = CoD.ModelUtility.IsSelfModelValueTrue(element, f1_arg0, "clamped")
 				if f6_local0 then
-					if not CoD.ModelUtility.IsControllerModelValueEqualToSelfModelValue(element, f1_arg0, "hudItems.laststand.revivingClientNum", "clientNum") and not Engine[0xDD333420C49E6D0](f1_arg0, Enum[0x7F032C2EF103A1A][0x198075B069840DC]) then
-						f6_local0 = not Engine[0xDD333420C49E6D0](f1_arg0, Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04])
+					if not CoD.ModelUtility.IsControllerModelValueEqualToSelfModelValue(element, f1_arg0, "hudItems.laststand.revivingClientNum", "clientNum") and not Engine[@"isvisibilitybitset"](f1_arg0, Enum[@"uivisibilitybit"][@"bit_game_ended"]) then
+						f6_local0 = not Engine[@"isvisibilitybitset"](f1_arg0, Enum[@"uivisibilitybit"][@"bit_scoreboard_open"])
 					else
 						f6_local0 = false
 					end
@@ -76,8 +76,8 @@ LUI.createMenu.wz_revive_prompt = function(f1_arg0, f1_arg1)
 			stateName = "Visible",
 			condition = function(menu, element, event)
 				local f7_local0
-				if not CoD.ModelUtility.IsControllerModelValueEqualToSelfModelValue(element, f1_arg0, "hudItems.laststand.revivingClientNum", "clientNum") and not Engine[0xDD333420C49E6D0](f1_arg0, Enum[0x7F032C2EF103A1A][0x198075B069840DC]) then
-					f7_local0 = not Engine[0xDD333420C49E6D0](f1_arg0, Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04])
+				if not CoD.ModelUtility.IsControllerModelValueEqualToSelfModelValue(element, f1_arg0, "hudItems.laststand.revivingClientNum", "clientNum") and not Engine[@"isvisibilitybitset"](f1_arg0, Enum[@"uivisibilitybit"][@"bit_game_ended"]) then
+					f7_local0 = not Engine[@"isvisibilitybitset"](f1_arg0, Enum[@"uivisibilitybit"][@"bit_scoreboard_open"])
 				else
 					f7_local0 = false
 				end
@@ -96,7 +96,7 @@ LUI.createMenu.wz_revive_prompt = function(f1_arg0, f1_arg1)
 	end)
 	local f1_local6 = self
 	local f1_local7 = self.subscribeToModel
-	local f1_local8 = Engine[0xE4D2F32833CFA6C](Engine[0x761955642304848](f1_arg0))
+	local f1_local8 = Engine[@"getmodelforclient"](Engine[@"getclientnum"](f1_arg0))
 	f1_local7(f1_local6, f1_local8.clientNum, function(f9_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",
@@ -117,7 +117,7 @@ LUI.createMenu.wz_revive_prompt = function(f1_arg0, f1_arg1)
 	end)
 	f1_local6 = self
 	f1_local7 = self.subscribeToModel
-	f1_local8 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	f1_local8 = Engine[@"getmodelforcontroller"](f1_arg0)
 	f1_local7(f1_local6, f1_local8["hudItems.laststand.revivingClientNum"], function(f11_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",
@@ -138,26 +138,26 @@ LUI.createMenu.wz_revive_prompt = function(f1_arg0, f1_arg1)
 	end)
 	f1_local6 = self
 	f1_local7 = self.subscribeToModel
-	f1_local8 = Engine[0x4DF5CFBC1771947](f1_arg0)
-	f1_local7(f1_local6, f1_local8["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x198075B069840DC]], function(f13_arg0)
+	f1_local8 = Engine[@"getmodelforcontroller"](f1_arg0)
+	f1_local7(f1_local6, f1_local8["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_game_ended"]], function(f13_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_local1,
 			controller = f1_arg0,
 			modelValue = f13_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x198075B069840DC],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_game_ended"],
 		})
 	end, false)
 	f1_local6 = self
 	f1_local7 = self.subscribeToModel
-	f1_local8 = Engine[0x4DF5CFBC1771947](f1_arg0)
-	f1_local7(f1_local6, f1_local8["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04]], function(f14_arg0)
+	f1_local8 = Engine[@"getmodelforcontroller"](f1_arg0)
+	f1_local7(f1_local6, f1_local8["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]], function(f14_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_local1,
 			controller = f1_arg0,
 			modelValue = f14_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"],
 		})
 	end, false)
 	self:processEvent({

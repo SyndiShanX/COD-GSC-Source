@@ -8,18 +8,18 @@ CoD.Hud_ZM_LastStand_DecorativeBGInternal.new = function(f1_arg0, f1_arg1, f1_ar
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local DecorativeTicks = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	DecorativeTicks:setImage(RegisterImage(0xC2D99032C6CFC12))
+	DecorativeTicks:setImage(RegisterImage(@"uie_zm_hud_revive_decorativebg02"))
 	self:addElement(DecorativeTicks)
 	self.DecorativeTicks = DecorativeTicks
 	local DecorativeCenter = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	DecorativeCenter:setImage(RegisterImage(0xC2D98032C6CFA5F))
-	DecorativeCenter:setMaterial(LUI.UIImage.GetCachedMaterial(0xF755127C95CF5B6))
+	DecorativeCenter:setImage(RegisterImage(@"uie_zm_hud_revive_decorativebg01"))
+	DecorativeCenter:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_F755127C95CF5B6"))
 	DecorativeCenter:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(DecorativeCenter)
 	self.DecorativeCenter = DecorativeCenter
 	local DecorativeRing = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	DecorativeRing:setImage(RegisterImage(0xC2D9A032C6CFDC5))
-	DecorativeRing:setMaterial(LUI.UIImage.GetCachedMaterial(0xF755127C95CF5B6))
+	DecorativeRing:setImage(RegisterImage(@"uie_zm_hud_revive_decorativebg03"))
+	DecorativeRing:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_F755127C95CF5B6"))
 	DecorativeRing:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(DecorativeRing)
 	self.DecorativeRing = DecorativeRing

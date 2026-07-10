@@ -18,12 +18,12 @@ CoD.WeaponPickupPromptInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	end
 	WeaponPickupWarzoneAction.__Alpha()
 	WeaponPickupWarzoneAction.__String_Reference = function()
-		WeaponPickupWarzoneAction:setText(Engine[0xF9F1239CFD921FE](CoD.HUDUtility.Get3DWeaponHintPickupHintTextWithPickUpOptions(f1_arg1)))
+		WeaponPickupWarzoneAction:setText(Engine[@"hash_4F9F1239CFD921FE"](CoD.HUDUtility.Get3DWeaponHintPickupHintTextWithPickUpOptions(f1_arg1)))
 	end
 	WeaponPickupWarzoneAction.__String_Reference()
 	WeaponPickupWarzoneAction:setTTF("dinnext_regular")
 	WeaponPickupWarzoneAction:setLetterSpacing(0.5)
-	WeaponPickupWarzoneAction:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	WeaponPickupWarzoneAction:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(WeaponPickupWarzoneAction)
 	self.WeaponPickupWarzoneAction = WeaponPickupWarzoneAction
 	local SpacerMiddle1 = CoD.VerticalListSpacer.new(f1_arg0, f1_arg1, 0, 0, 81, 83, 0.5, 0.5, -20, 20)
@@ -31,7 +31,7 @@ CoD.WeaponPickupPromptInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self.SpacerMiddle1 = SpacerMiddle1
 	local DividerLine = LUI.UIImage.new(0, 0, 87, 89, 0.5, 0.5, -17, 17)
 	DividerLine:setRGB(0.67, 0.67, 0.67)
-	DividerLine:setImage(RegisterImage(0x333A5BF1A8A0398))
+	DividerLine:setImage(RegisterImage(@"line_horizontal"))
 	self:addElement(DividerLine)
 	self.DividerLine = DividerLine
 	local SpacerMiddle2 = CoD.VerticalListSpacer.new(f1_arg0, f1_arg1, 0, 0, 93, 95, 0.5, 0.5, -20, 20)
@@ -40,7 +40,7 @@ CoD.WeaponPickupPromptInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	local CursorHintText = LUI.UIText.new(0, 0, 99, 176, 0.5, 0.5, -10, 10)
 	CursorHintText:setTTF("ttmussels_demibold")
 	CursorHintText:setLetterSpacing(0.5)
-	CursorHintText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	CursorHintText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	CursorHintText:subscribeToGlobalModel(f1_arg1, "HUDItems", "pickupHintText", function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
@@ -98,7 +98,7 @@ CoD.WeaponPickupPromptInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	f1_local14(f1_local13, f1_local15.heroHoldProgress, WeaponPickupWarzoneAction.__Alpha)
 	f1_local13 = WeaponPickupWarzoneAction
 	f1_local14 = WeaponPickupWarzoneAction.subscribeToModel
-	f1_local15 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local15 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local14(f1_local13, f1_local15["hudItems.inventory.filledSlots"], WeaponPickupWarzoneAction.__Alpha)
 	f1_local13 = WeaponPickupWarzoneAction
 	f1_local14 = WeaponPickupWarzoneAction.subscribeToModel
@@ -110,7 +110,7 @@ CoD.WeaponPickupPromptInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	f1_local14(f1_local13, f1_local15.heroHoldProgress, WeaponPickupWarzoneAction.__String_Reference)
 	f1_local13 = WeaponPickupWarzoneAction
 	f1_local14 = WeaponPickupWarzoneAction.subscribeToModel
-	f1_local15 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local15 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local14(f1_local13, f1_local15["hudItems.inventory.filledSlots"], WeaponPickupWarzoneAction.__String_Reference)
 	self:mergeStateConditions({
 		{

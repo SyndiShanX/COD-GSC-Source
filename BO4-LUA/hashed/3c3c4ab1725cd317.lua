@@ -16,8 +16,8 @@ CoD.WarzoneQuickInventoryShardItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	ActiveBG:setRGB(ColorSet.T8__OCHRE.r, ColorSet.T8__OCHRE.g, ColorSet.T8__OCHRE.b)
 	ActiveBG:setAlpha(0)
 	ActiveBG:setScale(0.9, 0.9)
-	ActiveBG:setImage(RegisterImage(0x7A63CD655CD7572))
-	ActiveBG:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	ActiveBG:setImage(RegisterImage(@"uie_ui_hud_wz_hud_core_qe_glow"))
+	ActiveBG:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	ActiveBG:setShaderVector(0, 2, 0, 0, 0)
 	self:addElement(ActiveBG)
 	self.ActiveBG = ActiveBG
@@ -27,73 +27,73 @@ CoD.WarzoneQuickInventoryShardItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 		Button:setModel(model, f1_arg1)
 	end)
 	Button:linkToElementModel(Button, "id", true, function(model, f3_arg1)
-		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 	end)
 	Button:linkToElementModel(Button, "availableAction", true, function(model, f4_arg1)
-		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 	end)
 	Button:linkToElementModel(Button, "castTime", true, function(model, f5_arg1)
-		CoD.Menu.UpdateButtonShownState(f5_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+		CoD.Menu.UpdateButtonShownState(f5_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 	end)
 	local SquarePrompt = Button
 	local ConsumedProgress = Button.subscribeToModel
 	local FocusSound = DataSources.HUDItems.getModel(f1_arg1)
 	ConsumedProgress(SquarePrompt, FocusSound.armorType, function(f6_arg0, f6_arg1)
-		CoD.Menu.UpdateButtonShownState(f6_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+		CoD.Menu.UpdateButtonShownState(f6_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 	end, false)
 	SquarePrompt = Button
 	ConsumedProgress = Button.subscribeToModel
-	FocusSound = Engine[0xE4D2F32833CFA6C](Engine[0x761955642304848](f1_arg1))
+	FocusSound = Engine[@"getmodelforclient"](Engine[@"getclientnum"](f1_arg1))
 	ConsumedProgress(SquarePrompt, FocusSound.armor, function(f7_arg0, f7_arg1)
-		CoD.Menu.UpdateButtonShownState(f7_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+		CoD.Menu.UpdateButtonShownState(f7_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 	end, false)
 	SquarePrompt = Button
 	ConsumedProgress = Button.subscribeToModel
-	FocusSound = Engine[0xE4D2F32833CFA6C](Engine[0x761955642304848](f1_arg1))
+	FocusSound = Engine[@"getmodelforclient"](Engine[@"getclientnum"](f1_arg1))
 	ConsumedProgress(SquarePrompt, FocusSound.armorMax, function(f8_arg0, f8_arg1)
-		CoD.Menu.UpdateButtonShownState(f8_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+		CoD.Menu.UpdateButtonShownState(f8_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 	end, false)
 	SquarePrompt = Button
 	ConsumedProgress = Button.subscribeToModel
-	FocusSound = Engine[0xE4D2F32833CFA6C](Engine[0x761955642304848](f1_arg1))
+	FocusSound = Engine[@"getmodelforclient"](Engine[@"getclientnum"](f1_arg1))
 	ConsumedProgress(SquarePrompt, FocusSound.isInVehicle, function(f9_arg0, f9_arg1)
-		CoD.Menu.UpdateButtonShownState(f9_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+		CoD.Menu.UpdateButtonShownState(f9_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 	end, false)
 	SquarePrompt = Button
 	ConsumedProgress = Button.subscribeToModel
-	FocusSound = Engine[0x4DF5CFBC1771947](f1_arg1)
+	FocusSound = Engine[@"getmodelforcontroller"](f1_arg1)
 	ConsumedProgress(SquarePrompt, FocusSound["vehicle.seatOccupantClientNum.0"], function(f10_arg0, f10_arg1)
-		CoD.Menu.UpdateButtonShownState(f10_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+		CoD.Menu.UpdateButtonShownState(f10_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 	end, false)
 	SquarePrompt = Button
 	ConsumedProgress = Button.subscribeToModel
-	FocusSound = Engine[0x4DF5CFBC1771947](f1_arg1)
+	FocusSound = Engine[@"getmodelforcontroller"](f1_arg1)
 	ConsumedProgress(SquarePrompt, FocusSound["vehicle.seatOccupantClientNum.1"], function(f11_arg0, f11_arg1)
-		CoD.Menu.UpdateButtonShownState(f11_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+		CoD.Menu.UpdateButtonShownState(f11_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 	end, false)
 	SquarePrompt = Button
 	ConsumedProgress = Button.subscribeToModel
-	FocusSound = Engine[0x4DF5CFBC1771947](f1_arg1)
+	FocusSound = Engine[@"getmodelforcontroller"](f1_arg1)
 	ConsumedProgress(SquarePrompt, FocusSound["vehicle.seatOccupantClientNum.2"], function(f12_arg0, f12_arg1)
-		CoD.Menu.UpdateButtonShownState(f12_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+		CoD.Menu.UpdateButtonShownState(f12_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 	end, false)
 	SquarePrompt = Button
 	ConsumedProgress = Button.subscribeToModel
-	FocusSound = Engine[0x4DF5CFBC1771947](f1_arg1)
+	FocusSound = Engine[@"getmodelforcontroller"](f1_arg1)
 	ConsumedProgress(SquarePrompt, FocusSound["vehicle.seatOccupantClientNum.3"], function(f13_arg0, f13_arg1)
-		CoD.Menu.UpdateButtonShownState(f13_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+		CoD.Menu.UpdateButtonShownState(f13_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 	end, false)
 	SquarePrompt = Button
 	ConsumedProgress = Button.subscribeToModel
-	FocusSound = Engine[0x4DF5CFBC1771947](f1_arg1)
+	FocusSound = Engine[@"getmodelforcontroller"](f1_arg1)
 	ConsumedProgress(SquarePrompt, FocusSound["vehicle.seatOccupantClientNum.4"], function(f14_arg0, f14_arg1)
-		CoD.Menu.UpdateButtonShownState(f14_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+		CoD.Menu.UpdateButtonShownState(f14_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 	end, false)
 	SquarePrompt = Button
 	ConsumedProgress = Button.subscribeToModel
-	FocusSound = Engine[0x4DF5CFBC1771947](f1_arg1)
+	FocusSound = Engine[@"getmodelforcontroller"](f1_arg1)
 	ConsumedProgress(SquarePrompt, FocusSound["hudItems.inventory.open"], function(f15_arg0, f15_arg1)
-		CoD.Menu.UpdateButtonShownState(f15_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+		CoD.Menu.UpdateButtonShownState(f15_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 	end, false)
 	Button:registerEventHandler("gain_focus", function(element, event)
 		local f16_local0 = nil
@@ -102,41 +102,41 @@ CoD.WarzoneQuickInventoryShardItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 		elseif element.super.gainFocus then
 			f16_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 		return f16_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(Button, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], nil, function(element, menu, controller, model)
-		if not CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "availableAction", CoD.WZUtility.ItemAvailableAction.REPAIR) and CoD.HUDUtility.PlayerHasPerk(controller, 0xEA01DCD66EB31BC) and CoD.ModelUtility.IsSelfModelValueLessThanOrEqualTo(element, controller, "castTime", 1) and not CoD.ModelUtility.IsGlobalDataSourceModelValueEqualTo(controller, "HUDItems", "armorType", 0) and not CoD.HUDUtility.IsArmorAtFullHealth(controller) and not CoD.WZUtility.CurrentlyIsDriverOrGunner(controller) and CoD.BaseUtility.IsButtonHoldFinished(model) then
+	f1_arg0:AddButtonCallbackFunction(Button, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], nil, function(element, menu, controller, model)
+		if not CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "availableAction", CoD.WZUtility.ItemAvailableAction.REPAIR) and CoD.HUDUtility.PlayerHasPerk(controller, @"specialty_consumer") and CoD.ModelUtility.IsSelfModelValueLessThanOrEqualTo(element, controller, "castTime", 1) and not CoD.ModelUtility.IsGlobalDataSourceModelValueEqualTo(controller, "HUDItems", "armorType", 0) and not CoD.HUDUtility.IsArmorAtFullHealth(controller) and not CoD.WZUtility.CurrentlyIsDriverOrGunner(controller) and CoD.BaseUtility.IsButtonHoldFinished(model) then
 			CoD.WZUtility.SendInventoryEquipNotify(controller, element, menu, true)
 			return true
 		elseif not CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "availableAction", CoD.WZUtility.ItemAvailableAction.REPAIR) and CoD.ModelUtility.IsSelfModelValueLessThanOrEqualTo(element, controller, "castTime", 1) and not CoD.ModelUtility.IsGlobalDataSourceModelValueEqualTo(controller, "HUDItems", "armorType", 0) and not CoD.HUDUtility.IsArmorAtFullHealth(controller) and not CoD.WZUtility.CurrentlyIsDriverOrGunner(controller) and CoD.BaseUtility.IsButtonHoldFinished(model) then
 			CoD.WZUtility.SendInventoryEquipNotify(controller, element, menu, true)
 			return true
-		elseif not CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "availableAction", CoD.WZUtility.ItemAvailableAction.REPAIR) and CoD.HUDUtility.PlayerHasPerk(controller, 0xEA01DCD66EB31BC) and CoD.ModelUtility.IsSelfModelValueLessThanOrEqualTo(element, controller, "castTime", 2) and not CoD.ModelUtility.IsGlobalDataSourceModelValueEqualTo(controller, "HUDItems", "armorType", 0) and not CoD.HUDUtility.IsArmorAtFullHealth(controller) and not CoD.WZUtility.CurrentlyIsDriverOrGunner(controller) and CoD.BaseUtility.IsButtonHoldFinished(model) then
+		elseif not CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "availableAction", CoD.WZUtility.ItemAvailableAction.REPAIR) and CoD.HUDUtility.PlayerHasPerk(controller, @"specialty_consumer") and CoD.ModelUtility.IsSelfModelValueLessThanOrEqualTo(element, controller, "castTime", 2) and not CoD.ModelUtility.IsGlobalDataSourceModelValueEqualTo(controller, "HUDItems", "armorType", 0) and not CoD.HUDUtility.IsArmorAtFullHealth(controller) and not CoD.WZUtility.CurrentlyIsDriverOrGunner(controller) and CoD.BaseUtility.IsButtonHoldFinished(model) then
 			CoD.WZUtility.SendInventoryEquipNotify(controller, element, menu, true)
 			return true
 		elseif not CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "availableAction", CoD.WZUtility.ItemAvailableAction.REPAIR) and CoD.ModelUtility.IsSelfModelValueLessThanOrEqualTo(element, controller, "castTime", 2) and not CoD.ModelUtility.IsGlobalDataSourceModelValueEqualTo(controller, "HUDItems", "armorType", 0) and not CoD.HUDUtility.IsArmorAtFullHealth(controller) and not CoD.WZUtility.CurrentlyIsDriverOrGunner(controller) and CoD.BaseUtility.IsButtonHoldFinished(model) then
 			CoD.WZUtility.SendInventoryEquipNotify(controller, element, menu, true)
 			return true
-		elseif not CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "availableAction", CoD.WZUtility.ItemAvailableAction.REPAIR) and CoD.HUDUtility.PlayerHasPerk(controller, 0xEA01DCD66EB31BC) and CoD.ModelUtility.IsSelfModelValueLessThanOrEqualTo(element, controller, "castTime", 3) and not CoD.ModelUtility.IsGlobalDataSourceModelValueEqualTo(controller, "HUDItems", "armorType", 0) and not CoD.HUDUtility.IsArmorAtFullHealth(controller) and not CoD.WZUtility.CurrentlyIsDriverOrGunner(controller) and CoD.BaseUtility.IsButtonHoldFinished(model) then
+		elseif not CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "availableAction", CoD.WZUtility.ItemAvailableAction.REPAIR) and CoD.HUDUtility.PlayerHasPerk(controller, @"specialty_consumer") and CoD.ModelUtility.IsSelfModelValueLessThanOrEqualTo(element, controller, "castTime", 3) and not CoD.ModelUtility.IsGlobalDataSourceModelValueEqualTo(controller, "HUDItems", "armorType", 0) and not CoD.HUDUtility.IsArmorAtFullHealth(controller) and not CoD.WZUtility.CurrentlyIsDriverOrGunner(controller) and CoD.BaseUtility.IsButtonHoldFinished(model) then
 			CoD.WZUtility.SendInventoryEquipNotify(controller, element, menu, true)
 			return true
 		elseif not CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "availableAction", CoD.WZUtility.ItemAvailableAction.REPAIR) and CoD.ModelUtility.IsSelfModelValueLessThanOrEqualTo(element, controller, "castTime", 3) and not CoD.ModelUtility.IsGlobalDataSourceModelValueEqualTo(controller, "HUDItems", "armorType", 0) and not CoD.HUDUtility.IsArmorAtFullHealth(controller) and not CoD.WZUtility.CurrentlyIsDriverOrGunner(controller) and CoD.BaseUtility.IsButtonHoldFinished(model) then
 			CoD.WZUtility.SendInventoryEquipNotify(controller, element, menu, true)
 			return true
-		elseif not CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "availableAction", CoD.WZUtility.ItemAvailableAction.REPAIR) and CoD.HUDUtility.PlayerHasPerk(controller, 0xEA01DCD66EB31BC) and CoD.ModelUtility.IsSelfModelValueLessThanOrEqualTo(element, controller, "castTime", 4) and not CoD.ModelUtility.IsGlobalDataSourceModelValueEqualTo(controller, "HUDItems", "armorType", 0) and not CoD.HUDUtility.IsArmorAtFullHealth(controller) and not CoD.WZUtility.CurrentlyIsDriverOrGunner(controller) and CoD.BaseUtility.IsButtonHoldFinished(model) then
+		elseif not CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "availableAction", CoD.WZUtility.ItemAvailableAction.REPAIR) and CoD.HUDUtility.PlayerHasPerk(controller, @"specialty_consumer") and CoD.ModelUtility.IsSelfModelValueLessThanOrEqualTo(element, controller, "castTime", 4) and not CoD.ModelUtility.IsGlobalDataSourceModelValueEqualTo(controller, "HUDItems", "armorType", 0) and not CoD.HUDUtility.IsArmorAtFullHealth(controller) and not CoD.WZUtility.CurrentlyIsDriverOrGunner(controller) and CoD.BaseUtility.IsButtonHoldFinished(model) then
 			CoD.WZUtility.SendInventoryEquipNotify(controller, element, menu, true)
 			return true
 		elseif not CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "availableAction", CoD.WZUtility.ItemAvailableAction.REPAIR) and CoD.ModelUtility.IsSelfModelValueLessThanOrEqualTo(element, controller, "castTime", 4) and not CoD.ModelUtility.IsGlobalDataSourceModelValueEqualTo(controller, "HUDItems", "armorType", 0) and not CoD.HUDUtility.IsArmorAtFullHealth(controller) and not CoD.WZUtility.CurrentlyIsDriverOrGunner(controller) and CoD.BaseUtility.IsButtonHoldFinished(model) then
 			CoD.WZUtility.SendInventoryEquipNotify(controller, element, menu, true)
 			return true
-		elseif not CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "availableAction", CoD.WZUtility.ItemAvailableAction.REPAIR) and CoD.HUDUtility.PlayerHasPerk(controller, 0xEA01DCD66EB31BC) and CoD.ModelUtility.IsSelfModelValueLessThanOrEqualTo(element, controller, "castTime", 5) and not CoD.ModelUtility.IsGlobalDataSourceModelValueEqualTo(controller, "HUDItems", "armorType", 0) and not CoD.HUDUtility.IsArmorAtFullHealth(controller) and not CoD.WZUtility.CurrentlyIsDriverOrGunner(controller) and CoD.BaseUtility.IsButtonHoldFinished(model) then
+		elseif not CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "availableAction", CoD.WZUtility.ItemAvailableAction.REPAIR) and CoD.HUDUtility.PlayerHasPerk(controller, @"specialty_consumer") and CoD.ModelUtility.IsSelfModelValueLessThanOrEqualTo(element, controller, "castTime", 5) and not CoD.ModelUtility.IsGlobalDataSourceModelValueEqualTo(controller, "HUDItems", "armorType", 0) and not CoD.HUDUtility.IsArmorAtFullHealth(controller) and not CoD.WZUtility.CurrentlyIsDriverOrGunner(controller) and CoD.BaseUtility.IsButtonHoldFinished(model) then
 			CoD.WZUtility.SendInventoryEquipNotify(controller, element, menu, true)
 			return true
 		elseif not CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "availableAction", CoD.WZUtility.ItemAvailableAction.REPAIR) and CoD.ModelUtility.IsSelfModelValueLessThanOrEqualTo(element, controller, "castTime", 5) and not CoD.ModelUtility.IsGlobalDataSourceModelValueEqualTo(controller, "HUDItems", "armorType", 0) and not CoD.HUDUtility.IsArmorAtFullHealth(controller) and not CoD.WZUtility.CurrentlyIsDriverOrGunner(controller) and CoD.BaseUtility.IsButtonHoldFinished(model) then
 			CoD.WZUtility.SendInventoryEquipNotify(controller, element, menu, true)
 			return true
-		elseif not CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "availableAction", CoD.WZUtility.ItemAvailableAction.REPAIR) and CoD.HUDUtility.PlayerHasPerk(controller, 0xEA01DCD66EB31BC) and not CoD.ModelUtility.IsGlobalDataSourceModelValueEqualTo(controller, "HUDItems", "armorType", 0) and not CoD.HUDUtility.IsArmorAtFullHealth(controller) and not CoD.WZUtility.CurrentlyIsDriverOrGunner(controller) and CoD.BaseUtility.IsButtonHoldFinished(model) then
+		elseif not CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "availableAction", CoD.WZUtility.ItemAvailableAction.REPAIR) and CoD.HUDUtility.PlayerHasPerk(controller, @"specialty_consumer") and not CoD.ModelUtility.IsGlobalDataSourceModelValueEqualTo(controller, "HUDItems", "armorType", 0) and not CoD.HUDUtility.IsArmorAtFullHealth(controller) and not CoD.WZUtility.CurrentlyIsDriverOrGunner(controller) and CoD.BaseUtility.IsButtonHoldFinished(model) then
 			CoD.WZUtility.SendInventoryEquipNotify(controller, element, menu, true)
 			return true
 		elseif not CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "availableAction", CoD.WZUtility.ItemAvailableAction.REPAIR) and not CoD.ModelUtility.IsGlobalDataSourceModelValueEqualTo(controller, "HUDItems", "armorType", 0) and not CoD.HUDUtility.IsArmorAtFullHealth(controller) and not CoD.WZUtility.CurrentlyIsDriverOrGunner(controller) and CoD.BaseUtility.IsButtonHoldFinished(model) then
@@ -148,44 +148,44 @@ CoD.WarzoneQuickInventoryShardItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 		else
 		end
 	end, function(element, menu, controller)
-		if not CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "availableAction", CoD.WZUtility.ItemAvailableAction.REPAIR) and CoD.HUDUtility.PlayerHasPerk(controller, 0xEA01DCD66EB31BC) and CoD.ModelUtility.IsSelfModelValueLessThanOrEqualTo(element, controller, "castTime", 1) and not CoD.ModelUtility.IsGlobalDataSourceModelValueEqualTo(controller, "HUDItems", "armorType", 0) and not CoD.HUDUtility.IsArmorAtFullHealth(controller) and not CoD.WZUtility.CurrentlyIsDriverOrGunner(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x2C27E2320C64A74, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3] | Enum[0xBEBDBAEEB3ECCCA][0x71B04FAC5BE0E35] | 500 << Enum[0xBEBDBAEEB3ECCCA][0x76ADD225D738C93], nil)
+		if not CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "availableAction", CoD.WZUtility.ItemAvailableAction.REPAIR) and CoD.HUDUtility.PlayerHasPerk(controller, @"specialty_consumer") and CoD.ModelUtility.IsSelfModelValueLessThanOrEqualTo(element, controller, "castTime", 1) and not CoD.ModelUtility.IsGlobalDataSourceModelValueEqualTo(controller, "HUDItems", "armorType", 0) and not CoD.HUDUtility.IsArmorAtFullHealth(controller) and not CoD.WZUtility.CurrentlyIsDriverOrGunner(controller) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"wz/repair_armor", Enum[@"luibuttonpromptflags"][@"bpf_contextual"] | Enum[@"luibuttonpromptflags"][@"hash_771B04FAC5BE0E35"] | 500 << Enum[@"luibuttonpromptflags"][@"hash_176ADD225D738C93"], nil)
 			return true
 		elseif not CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "availableAction", CoD.WZUtility.ItemAvailableAction.REPAIR) and CoD.ModelUtility.IsSelfModelValueLessThanOrEqualTo(element, controller, "castTime", 1) and not CoD.ModelUtility.IsGlobalDataSourceModelValueEqualTo(controller, "HUDItems", "armorType", 0) and not CoD.HUDUtility.IsArmorAtFullHealth(controller) and not CoD.WZUtility.CurrentlyIsDriverOrGunner(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x2C27E2320C64A74, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3] | Enum[0xBEBDBAEEB3ECCCA][0x71B04FAC5BE0E35] | 1000 << Enum[0xBEBDBAEEB3ECCCA][0x76ADD225D738C93], nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"wz/repair_armor", Enum[@"luibuttonpromptflags"][@"bpf_contextual"] | Enum[@"luibuttonpromptflags"][@"hash_771B04FAC5BE0E35"] | 1000 << Enum[@"luibuttonpromptflags"][@"hash_176ADD225D738C93"], nil)
 			return true
-		elseif not CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "availableAction", CoD.WZUtility.ItemAvailableAction.REPAIR) and CoD.HUDUtility.PlayerHasPerk(controller, 0xEA01DCD66EB31BC) and CoD.ModelUtility.IsSelfModelValueLessThanOrEqualTo(element, controller, "castTime", 2) and not CoD.ModelUtility.IsGlobalDataSourceModelValueEqualTo(controller, "HUDItems", "armorType", 0) and not CoD.HUDUtility.IsArmorAtFullHealth(controller) and not CoD.WZUtility.CurrentlyIsDriverOrGunner(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x2C27E2320C64A74, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3] | Enum[0xBEBDBAEEB3ECCCA][0x71B04FAC5BE0E35] | 1000 << Enum[0xBEBDBAEEB3ECCCA][0x76ADD225D738C93], nil)
+		elseif not CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "availableAction", CoD.WZUtility.ItemAvailableAction.REPAIR) and CoD.HUDUtility.PlayerHasPerk(controller, @"specialty_consumer") and CoD.ModelUtility.IsSelfModelValueLessThanOrEqualTo(element, controller, "castTime", 2) and not CoD.ModelUtility.IsGlobalDataSourceModelValueEqualTo(controller, "HUDItems", "armorType", 0) and not CoD.HUDUtility.IsArmorAtFullHealth(controller) and not CoD.WZUtility.CurrentlyIsDriverOrGunner(controller) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"wz/repair_armor", Enum[@"luibuttonpromptflags"][@"bpf_contextual"] | Enum[@"luibuttonpromptflags"][@"hash_771B04FAC5BE0E35"] | 1000 << Enum[@"luibuttonpromptflags"][@"hash_176ADD225D738C93"], nil)
 			return true
 		elseif not CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "availableAction", CoD.WZUtility.ItemAvailableAction.REPAIR) and CoD.ModelUtility.IsSelfModelValueLessThanOrEqualTo(element, controller, "castTime", 2) and not CoD.ModelUtility.IsGlobalDataSourceModelValueEqualTo(controller, "HUDItems", "armorType", 0) and not CoD.HUDUtility.IsArmorAtFullHealth(controller) and not CoD.WZUtility.CurrentlyIsDriverOrGunner(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x2C27E2320C64A74, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3] | Enum[0xBEBDBAEEB3ECCCA][0x71B04FAC5BE0E35] | 2000 << Enum[0xBEBDBAEEB3ECCCA][0x76ADD225D738C93], nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"wz/repair_armor", Enum[@"luibuttonpromptflags"][@"bpf_contextual"] | Enum[@"luibuttonpromptflags"][@"hash_771B04FAC5BE0E35"] | 2000 << Enum[@"luibuttonpromptflags"][@"hash_176ADD225D738C93"], nil)
 			return true
-		elseif not CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "availableAction", CoD.WZUtility.ItemAvailableAction.REPAIR) and CoD.HUDUtility.PlayerHasPerk(controller, 0xEA01DCD66EB31BC) and CoD.ModelUtility.IsSelfModelValueLessThanOrEqualTo(element, controller, "castTime", 3) and not CoD.ModelUtility.IsGlobalDataSourceModelValueEqualTo(controller, "HUDItems", "armorType", 0) and not CoD.HUDUtility.IsArmorAtFullHealth(controller) and not CoD.WZUtility.CurrentlyIsDriverOrGunner(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x2C27E2320C64A74, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3] | Enum[0xBEBDBAEEB3ECCCA][0x71B04FAC5BE0E35] | 1500 << Enum[0xBEBDBAEEB3ECCCA][0x76ADD225D738C93], nil)
+		elseif not CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "availableAction", CoD.WZUtility.ItemAvailableAction.REPAIR) and CoD.HUDUtility.PlayerHasPerk(controller, @"specialty_consumer") and CoD.ModelUtility.IsSelfModelValueLessThanOrEqualTo(element, controller, "castTime", 3) and not CoD.ModelUtility.IsGlobalDataSourceModelValueEqualTo(controller, "HUDItems", "armorType", 0) and not CoD.HUDUtility.IsArmorAtFullHealth(controller) and not CoD.WZUtility.CurrentlyIsDriverOrGunner(controller) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"wz/repair_armor", Enum[@"luibuttonpromptflags"][@"bpf_contextual"] | Enum[@"luibuttonpromptflags"][@"hash_771B04FAC5BE0E35"] | 1500 << Enum[@"luibuttonpromptflags"][@"hash_176ADD225D738C93"], nil)
 			return true
 		elseif not CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "availableAction", CoD.WZUtility.ItemAvailableAction.REPAIR) and CoD.ModelUtility.IsSelfModelValueLessThanOrEqualTo(element, controller, "castTime", 3) and not CoD.ModelUtility.IsGlobalDataSourceModelValueEqualTo(controller, "HUDItems", "armorType", 0) and not CoD.HUDUtility.IsArmorAtFullHealth(controller) and not CoD.WZUtility.CurrentlyIsDriverOrGunner(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x2C27E2320C64A74, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3] | Enum[0xBEBDBAEEB3ECCCA][0x71B04FAC5BE0E35] | 3000 << Enum[0xBEBDBAEEB3ECCCA][0x76ADD225D738C93], nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"wz/repair_armor", Enum[@"luibuttonpromptflags"][@"bpf_contextual"] | Enum[@"luibuttonpromptflags"][@"hash_771B04FAC5BE0E35"] | 3000 << Enum[@"luibuttonpromptflags"][@"hash_176ADD225D738C93"], nil)
 			return true
-		elseif not CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "availableAction", CoD.WZUtility.ItemAvailableAction.REPAIR) and CoD.HUDUtility.PlayerHasPerk(controller, 0xEA01DCD66EB31BC) and CoD.ModelUtility.IsSelfModelValueLessThanOrEqualTo(element, controller, "castTime", 4) and not CoD.ModelUtility.IsGlobalDataSourceModelValueEqualTo(controller, "HUDItems", "armorType", 0) and not CoD.HUDUtility.IsArmorAtFullHealth(controller) and not CoD.WZUtility.CurrentlyIsDriverOrGunner(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x2C27E2320C64A74, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3] | Enum[0xBEBDBAEEB3ECCCA][0x71B04FAC5BE0E35] | 2000 << Enum[0xBEBDBAEEB3ECCCA][0x76ADD225D738C93], nil)
+		elseif not CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "availableAction", CoD.WZUtility.ItemAvailableAction.REPAIR) and CoD.HUDUtility.PlayerHasPerk(controller, @"specialty_consumer") and CoD.ModelUtility.IsSelfModelValueLessThanOrEqualTo(element, controller, "castTime", 4) and not CoD.ModelUtility.IsGlobalDataSourceModelValueEqualTo(controller, "HUDItems", "armorType", 0) and not CoD.HUDUtility.IsArmorAtFullHealth(controller) and not CoD.WZUtility.CurrentlyIsDriverOrGunner(controller) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"wz/repair_armor", Enum[@"luibuttonpromptflags"][@"bpf_contextual"] | Enum[@"luibuttonpromptflags"][@"hash_771B04FAC5BE0E35"] | 2000 << Enum[@"luibuttonpromptflags"][@"hash_176ADD225D738C93"], nil)
 			return true
 		elseif not CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "availableAction", CoD.WZUtility.ItemAvailableAction.REPAIR) and CoD.ModelUtility.IsSelfModelValueLessThanOrEqualTo(element, controller, "castTime", 4) and not CoD.ModelUtility.IsGlobalDataSourceModelValueEqualTo(controller, "HUDItems", "armorType", 0) and not CoD.HUDUtility.IsArmorAtFullHealth(controller) and not CoD.WZUtility.CurrentlyIsDriverOrGunner(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x2C27E2320C64A74, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3] | Enum[0xBEBDBAEEB3ECCCA][0x71B04FAC5BE0E35] | 4000 << Enum[0xBEBDBAEEB3ECCCA][0x76ADD225D738C93], nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"wz/repair_armor", Enum[@"luibuttonpromptflags"][@"bpf_contextual"] | Enum[@"luibuttonpromptflags"][@"hash_771B04FAC5BE0E35"] | 4000 << Enum[@"luibuttonpromptflags"][@"hash_176ADD225D738C93"], nil)
 			return true
-		elseif not CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "availableAction", CoD.WZUtility.ItemAvailableAction.REPAIR) and CoD.HUDUtility.PlayerHasPerk(controller, 0xEA01DCD66EB31BC) and CoD.ModelUtility.IsSelfModelValueLessThanOrEqualTo(element, controller, "castTime", 5) and not CoD.ModelUtility.IsGlobalDataSourceModelValueEqualTo(controller, "HUDItems", "armorType", 0) and not CoD.HUDUtility.IsArmorAtFullHealth(controller) and not CoD.WZUtility.CurrentlyIsDriverOrGunner(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x2C27E2320C64A74, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3] | Enum[0xBEBDBAEEB3ECCCA][0x71B04FAC5BE0E35] | 2500 << Enum[0xBEBDBAEEB3ECCCA][0x76ADD225D738C93], nil)
+		elseif not CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "availableAction", CoD.WZUtility.ItemAvailableAction.REPAIR) and CoD.HUDUtility.PlayerHasPerk(controller, @"specialty_consumer") and CoD.ModelUtility.IsSelfModelValueLessThanOrEqualTo(element, controller, "castTime", 5) and not CoD.ModelUtility.IsGlobalDataSourceModelValueEqualTo(controller, "HUDItems", "armorType", 0) and not CoD.HUDUtility.IsArmorAtFullHealth(controller) and not CoD.WZUtility.CurrentlyIsDriverOrGunner(controller) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"wz/repair_armor", Enum[@"luibuttonpromptflags"][@"bpf_contextual"] | Enum[@"luibuttonpromptflags"][@"hash_771B04FAC5BE0E35"] | 2500 << Enum[@"luibuttonpromptflags"][@"hash_176ADD225D738C93"], nil)
 			return true
 		elseif not CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "availableAction", CoD.WZUtility.ItemAvailableAction.REPAIR) and CoD.ModelUtility.IsSelfModelValueLessThanOrEqualTo(element, controller, "castTime", 5) and not CoD.ModelUtility.IsGlobalDataSourceModelValueEqualTo(controller, "HUDItems", "armorType", 0) and not CoD.HUDUtility.IsArmorAtFullHealth(controller) and not CoD.WZUtility.CurrentlyIsDriverOrGunner(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x2C27E2320C64A74, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3] | Enum[0xBEBDBAEEB3ECCCA][0x71B04FAC5BE0E35] | 5000 << Enum[0xBEBDBAEEB3ECCCA][0x76ADD225D738C93], nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"wz/repair_armor", Enum[@"luibuttonpromptflags"][@"bpf_contextual"] | Enum[@"luibuttonpromptflags"][@"hash_771B04FAC5BE0E35"] | 5000 << Enum[@"luibuttonpromptflags"][@"hash_176ADD225D738C93"], nil)
 			return true
-		elseif not CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "availableAction", CoD.WZUtility.ItemAvailableAction.REPAIR) and CoD.HUDUtility.PlayerHasPerk(controller, 0xEA01DCD66EB31BC) and not CoD.ModelUtility.IsGlobalDataSourceModelValueEqualTo(controller, "HUDItems", "armorType", 0) and not CoD.HUDUtility.IsArmorAtFullHealth(controller) and not CoD.WZUtility.CurrentlyIsDriverOrGunner(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x2C27E2320C64A74, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3] | Enum[0xBEBDBAEEB3ECCCA][0x71B04FAC5BE0E35] | 3000 << Enum[0xBEBDBAEEB3ECCCA][0x76ADD225D738C93], nil)
+		elseif not CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "availableAction", CoD.WZUtility.ItemAvailableAction.REPAIR) and CoD.HUDUtility.PlayerHasPerk(controller, @"specialty_consumer") and not CoD.ModelUtility.IsGlobalDataSourceModelValueEqualTo(controller, "HUDItems", "armorType", 0) and not CoD.HUDUtility.IsArmorAtFullHealth(controller) and not CoD.WZUtility.CurrentlyIsDriverOrGunner(controller) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"wz/repair_armor", Enum[@"luibuttonpromptflags"][@"bpf_contextual"] | Enum[@"luibuttonpromptflags"][@"hash_771B04FAC5BE0E35"] | 3000 << Enum[@"luibuttonpromptflags"][@"hash_176ADD225D738C93"], nil)
 			return true
 		elseif not CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "availableAction", CoD.WZUtility.ItemAvailableAction.REPAIR) and not CoD.ModelUtility.IsGlobalDataSourceModelValueEqualTo(controller, "HUDItems", "armorType", 0) and not CoD.HUDUtility.IsArmorAtFullHealth(controller) and not CoD.WZUtility.CurrentlyIsDriverOrGunner(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x2C27E2320C64A74, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3] | Enum[0xBEBDBAEEB3ECCCA][0x71B04FAC5BE0E35] | 6000 << Enum[0xBEBDBAEEB3ECCCA][0x76ADD225D738C93], nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"wz/repair_armor", Enum[@"luibuttonpromptflags"][@"bpf_contextual"] | Enum[@"luibuttonpromptflags"][@"hash_771B04FAC5BE0E35"] | 6000 << Enum[@"luibuttonpromptflags"][@"hash_176ADD225D738C93"], nil)
 			return true
 		elseif CoD.WZUtility.IsQuickInventoryOpen(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x0, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"hash_0", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], nil)
 			return false
 		else
 			return false
@@ -201,7 +201,7 @@ CoD.WarzoneQuickInventoryShardItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	ConsumedProgress:setRGB(0, 0, 0)
 	ConsumedProgress:setAlpha(0.8)
 	ConsumedProgress:setScale(1.26, 1.26)
-	ConsumedProgress:setMaterial(LUI.UIImage.GetCachedMaterial(0xD5CA1A25ED87F4F))
+	ConsumedProgress:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_clock_normal"))
 	ConsumedProgress:setShaderVector(1, 0.5, 0, 0, 0)
 	ConsumedProgress:setShaderVector(2, 0.5, 0, 0, 0)
 	ConsumedProgress:setShaderVector(3, 0, 0, 0, 0)
@@ -222,8 +222,8 @@ CoD.WarzoneQuickInventoryShardItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	self:addElement(FocusSound)
 	self.FocusSound = FocusSound
 	local Bar = LUI.UIImage.new(0, 0, 22, 46, 0, 0, 45.5, 77.5)
-	Bar:setImage(RegisterImage(0x7967DBF4C7762B4))
-	Bar:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Bar:setImage(RegisterImage(@"uie_ui_hud_wz_hud_core_qe_selected_bar"))
+	Bar:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Bar)
 	self.Bar = Bar
 	local EMP = CoD.Warzone_EMP_QuickEquip.new(f1_arg0, f1_arg1, 0, 0, -13, 75, 0, 0, -6.5, 77.5)
@@ -296,7 +296,7 @@ CoD.WarzoneQuickInventoryShardItem.__resetProperties = function(f28_arg0)
 	f28_arg0.ActiveBG:setScale(0.9, 0.9)
 	f28_arg0.SquarePrompt:setLeftRight(0.5, 0.5, -75, 75)
 	f28_arg0.SquarePrompt:setAlpha(0)
-	f28_arg0.SquarePrompt.WarzoneQuickInventoryPromptInternal.label:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	f28_arg0.SquarePrompt.WarzoneQuickInventoryPromptInternal.label:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	f28_arg0.FocusSound:setPlaySoundDirect(false)
 end
 CoD.WarzoneQuickInventoryShardItem.__clipsPerState = {
@@ -342,7 +342,7 @@ CoD.WarzoneQuickInventoryShardItem.__clipsPerState = {
 			f31_arg0.ActiveBG:setScale(0.9, 0.9)
 			f31_local0(f31_arg0.ActiveBG)
 			local f31_local1 = function(f33_arg0)
-				f31_arg0.Button:beginAnimation(120, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f31_arg0.Button:beginAnimation(120, Enum[@"luitween"][@"luitween_ease_in"])
 				f31_arg0.Button:setScale(1, 1)
 				f31_arg0.Button:registerEventHandler("interrupted_keyframe", f31_arg0.clipInterrupted)
 				f31_arg0.Button:registerEventHandler("transition_complete_keyframe", f31_arg0.clipFinished)
@@ -383,7 +383,7 @@ CoD.WarzoneQuickInventoryShardItem.__clipsPerState = {
 			f35_arg0.ActiveBG:setScale(1, 1)
 			f35_local0(f35_arg0.ActiveBG)
 			local f35_local1 = function(f37_arg0)
-				f35_arg0.Button:beginAnimation(120, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f35_arg0.Button:beginAnimation(120, Enum[@"luitween"][@"luitween_ease_in"])
 				f35_arg0.Button:setScale(0.9, 0.9)
 				f35_arg0.Button:registerEventHandler("interrupted_keyframe", f35_arg0.clipInterrupted)
 				f35_arg0.Button:registerEventHandler("transition_complete_keyframe", f35_arg0.clipFinished)
@@ -425,7 +425,7 @@ CoD.WarzoneQuickInventoryShardItem.__clipsPerState = {
 			f41_arg0.SquarePrompt:completeAnimation()
 			f41_arg0.SquarePrompt.WarzoneQuickInventoryPromptInternal.label:completeAnimation()
 			f41_arg0.SquarePrompt:setLeftRight(0.5, 0.5, -115, 35)
-			f41_arg0.SquarePrompt.WarzoneQuickInventoryPromptInternal.label:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
+			f41_arg0.SquarePrompt.WarzoneQuickInventoryPromptInternal.label:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
 			f41_arg0.clipFinished(f41_arg0.SquarePrompt)
 			f41_arg0.Bar:completeAnimation()
 			f41_arg0.Bar:setAlpha(0)
@@ -446,7 +446,7 @@ CoD.WarzoneQuickInventoryShardItem.__clipsPerState = {
 			f42_arg0.SquarePrompt.WarzoneQuickInventoryPromptInternal.label:completeAnimation()
 			f42_arg0.SquarePrompt:setLeftRight(0.5, 0.5, -115, 35)
 			f42_arg0.SquarePrompt:setAlpha(1)
-			f42_arg0.SquarePrompt.WarzoneQuickInventoryPromptInternal.label:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
+			f42_arg0.SquarePrompt.WarzoneQuickInventoryPromptInternal.label:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
 			f42_arg0.clipFinished(f42_arg0.SquarePrompt)
 			f42_arg0.Bar:completeAnimation()
 			f42_arg0.Bar:setTopBottom(0, 0, 48.5, 80.5)
@@ -468,7 +468,7 @@ CoD.WarzoneQuickInventoryShardItem.__clipsPerState = {
 			f43_arg0.ActiveBG:setScale(0.9, 0.9)
 			f43_local0(f43_arg0.ActiveBG)
 			local f43_local1 = function(f45_arg0)
-				f43_arg0.Button:beginAnimation(120, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f43_arg0.Button:beginAnimation(120, Enum[@"luitween"][@"luitween_ease_in"])
 				f43_arg0.Button:setScale(1, 1)
 				f43_arg0.Button:registerEventHandler("interrupted_keyframe", f43_arg0.clipInterrupted)
 				f43_arg0.Button:registerEventHandler("transition_complete_keyframe", f43_arg0.clipFinished)
@@ -479,7 +479,7 @@ CoD.WarzoneQuickInventoryShardItem.__clipsPerState = {
 			f43_arg0.SquarePrompt:completeAnimation()
 			f43_arg0.SquarePrompt.WarzoneQuickInventoryPromptInternal.label:completeAnimation()
 			f43_arg0.SquarePrompt:setLeftRight(0.5, 0.5, -115, 35)
-			f43_arg0.SquarePrompt.WarzoneQuickInventoryPromptInternal.label:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
+			f43_arg0.SquarePrompt.WarzoneQuickInventoryPromptInternal.label:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
 			f43_arg0.clipFinished(f43_arg0.SquarePrompt)
 			f43_arg0.FocusSound:completeAnimation()
 			f43_arg0.FocusSound:setPlaySoundDirect(true)
@@ -514,7 +514,7 @@ CoD.WarzoneQuickInventoryShardItem.__clipsPerState = {
 			f47_arg0.ActiveBG:setScale(1, 1)
 			f47_local0(f47_arg0.ActiveBG)
 			local f47_local1 = function(f49_arg0)
-				f47_arg0.Button:beginAnimation(120, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f47_arg0.Button:beginAnimation(120, Enum[@"luitween"][@"luitween_ease_in"])
 				f47_arg0.Button:setScale(0.9, 0.9)
 				f47_arg0.Button:registerEventHandler("interrupted_keyframe", f47_arg0.clipInterrupted)
 				f47_arg0.Button:registerEventHandler("transition_complete_keyframe", f47_arg0.clipFinished)
@@ -525,7 +525,7 @@ CoD.WarzoneQuickInventoryShardItem.__clipsPerState = {
 			f47_arg0.SquarePrompt:completeAnimation()
 			f47_arg0.SquarePrompt.WarzoneQuickInventoryPromptInternal.label:completeAnimation()
 			f47_arg0.SquarePrompt:setLeftRight(0.5, 0.5, -115, 35)
-			f47_arg0.SquarePrompt.WarzoneQuickInventoryPromptInternal.label:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
+			f47_arg0.SquarePrompt.WarzoneQuickInventoryPromptInternal.label:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
 			f47_arg0.clipFinished(f47_arg0.SquarePrompt)
 			local f47_local2 = function(f50_arg0)
 				f47_arg0.Bar:beginAnimation(120)

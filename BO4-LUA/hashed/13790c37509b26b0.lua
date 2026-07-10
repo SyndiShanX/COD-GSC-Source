@@ -8,7 +8,7 @@ CoD.SpawnSelectIconLine.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local iconSelectedLine = LUI.UIImage.new(0, 0, 0, 12, 0, 0, 0, 6)
-	iconSelectedLine:setImage(RegisterImage(0xDBFD271C8814B4C))
+	iconSelectedLine:setImage(RegisterImage(@"uie_ui_hud_selectspawn_selected_line"))
 	self:addElement(iconSelectedLine)
 	self.iconSelectedLine = iconSelectedLine
 	if PostLoadFunc then

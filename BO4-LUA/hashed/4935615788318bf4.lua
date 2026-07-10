@@ -10,10 +10,10 @@ CoD.ContractActiveBanner.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local ActiveTitle = LUI.UIText.new(0.5, 0.5, -73, 73, 0.5, 0.5, -9, 9)
 	ActiveTitle:setRGB(0, 0.55, 0.33)
-	ActiveTitle:setText(LocalizeToUpperString(0x6073E151AD27004))
+	ActiveTitle:setText(LocalizeToUpperString(@"menu/contract_active"))
 	ActiveTitle:setTTF("ttmussels_demibold")
 	ActiveTitle:setLetterSpacing(4)
-	ActiveTitle:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	ActiveTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	ActiveTitle:setBackingType(1)
 	ActiveTitle:setBackingWidget(CoD.ContractActiveBannerBacker, f1_arg0, f1_arg1)
 	ActiveTitle:setBackingXPadding(8)
@@ -39,7 +39,7 @@ CoD.ContractActiveBanner.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	end)
 	local f1_local2 = self
 	local f1_local3 = self.subscribeToModel
-	local f1_local4 = Engine[0x8DF2E5447F384B9]()
+	local f1_local4 = Engine[@"getglobalmodel"]()
 	f1_local3(f1_local2, f1_local4.ContractsForceUpdate, function(f4_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -73,7 +73,7 @@ CoD.ContractActiveBanner.__clipsPerState = {
 			f7_arg0:__resetProperties()
 			f7_arg0:setupElementClipCounter(1)
 			local f7_local0 = function(f8_arg0)
-				f7_arg0.ActiveTitle:beginAnimation(100, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f7_arg0.ActiveTitle:beginAnimation(100, Enum[@"luitween"][@"luitween_ease_in"])
 				f7_arg0.ActiveTitle:setAlpha(1)
 				f7_arg0.ActiveTitle:registerEventHandler("interrupted_keyframe", f7_arg0.clipInterrupted)
 				f7_arg0.ActiveTitle:registerEventHandler("transition_complete_keyframe", f7_arg0.clipFinished)

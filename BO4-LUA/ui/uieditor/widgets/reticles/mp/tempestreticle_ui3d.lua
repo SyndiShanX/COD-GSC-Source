@@ -8,7 +8,7 @@ CoD.TempestReticle_UI3D.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	self.id = "TempestReticle_UI3D"
 	self.soundSet = "default"
 	local internal = CoD.TempestReticle_UI3D_Internal.new(f1_arg0, f1_arg1, 0, 1, 0, 0, 0, 1, 0, 0)
-	Engine[0xF0AF2C4A29D15D7](f1_arg1, 3, 450, 300)
+	Engine[@"setupui3dwindow"](f1_arg1, 3, 450, 300)
 	internal:setUI3DWindow(3)
 	self:addElement(internal)
 	self.internal = internal

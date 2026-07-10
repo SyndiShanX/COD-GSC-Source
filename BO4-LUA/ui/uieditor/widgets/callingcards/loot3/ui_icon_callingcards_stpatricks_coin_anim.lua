@@ -8,55 +8,55 @@ CoD.ui_icon_callingcards_stpatricks_coin_anim.new = function(f1_arg0, f1_arg1, f
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local coin1 = LUI.UIImage.new(0, 0, 0, 56, 0, 0, 52.5, 108.5)
-	coin1:setImage(RegisterImage(0x212788AB2D971F7))
+	coin1:setImage(RegisterImage(@"uie_st_patricks_frame_02_goldcoin"))
 	self:addElement(coin1)
 	self.coin1 = coin1
 	local coin2 = LUI.UIImage.new(0, 0, 33, 64, 0, 0, 13.5, 44.5)
-	coin2:setImage(RegisterImage(0x212788AB2D971F7))
+	coin2:setImage(RegisterImage(@"uie_st_patricks_frame_02_goldcoin"))
 	self:addElement(coin2)
 	self.coin2 = coin2
 	local coin3 = LUI.UIImage.new(0, 0, 38, 68, 0, 0, 97.5, 127.5)
-	coin3:setImage(RegisterImage(0x212788AB2D971F7))
+	coin3:setImage(RegisterImage(@"uie_st_patricks_frame_02_goldcoin"))
 	self:addElement(coin3)
 	self.coin3 = coin3
 	local coin4 = LUI.UIImage.new(0, 0, 82, 118, 0, 0, 62.5, 98.5)
-	coin4:setImage(RegisterImage(0x212788AB2D971F7))
+	coin4:setImage(RegisterImage(@"uie_st_patricks_frame_02_goldcoin"))
 	self:addElement(coin4)
 	self.coin4 = coin4
 	local coin5 = LUI.UIImage.new(0, 0, 127, 156, 0, 0, 62.5, 91.5)
-	coin5:setImage(RegisterImage(0x212788AB2D971F7))
+	coin5:setImage(RegisterImage(@"uie_st_patricks_frame_02_goldcoin"))
 	self:addElement(coin5)
 	self.coin5 = coin5
 	local coin6 = LUI.UIImage.new(0, 0, 141.5, 170.5, 0, 0, 0, 29)
-	coin6:setImage(RegisterImage(0x212788AB2D971F7))
+	coin6:setImage(RegisterImage(@"uie_st_patricks_frame_02_goldcoin"))
 	self:addElement(coin6)
 	self.coin6 = coin6
 	local coin7 = LUI.UIImage.new(0, 0, 192.5, 221.5, 0, 0, 64, 93)
-	coin7:setImage(RegisterImage(0x212788AB2D971F7))
+	coin7:setImage(RegisterImage(@"uie_st_patricks_frame_02_goldcoin"))
 	self:addElement(coin7)
 	self.coin7 = coin7
 	local coin8 = LUI.UIImage.new(0, 0, 195.5, 224.5, 0, 0, 111, 140)
-	coin8:setImage(RegisterImage(0x212788AB2D971F7))
+	coin8:setImage(RegisterImage(@"uie_st_patricks_frame_02_goldcoin"))
 	self:addElement(coin8)
 	self.coin8 = coin8
 	local coin9 = LUI.UIImage.new(0, 0, 277.5, 293.5, 0, 0, 117.5, 133.5)
-	coin9:setImage(RegisterImage(0x212788AB2D971F7))
+	coin9:setImage(RegisterImage(@"uie_st_patricks_frame_02_goldcoin"))
 	self:addElement(coin9)
 	self.coin9 = coin9
 	local coin10 = LUI.UIImage.new(0, 0, 295.5, 318.5, 0, 0, 80.5, 103.5)
-	coin10:setImage(RegisterImage(0x212788AB2D971F7))
+	coin10:setImage(RegisterImage(@"uie_st_patricks_frame_02_goldcoin"))
 	self:addElement(coin10)
 	self.coin10 = coin10
 	local coin11 = LUI.UIImage.new(0, 0, 300.5, 313.5, 0, 0, 133.5, 146.5)
-	coin11:setImage(RegisterImage(0x212788AB2D971F7))
+	coin11:setImage(RegisterImage(@"uie_st_patricks_frame_02_goldcoin"))
 	self:addElement(coin11)
 	self.coin11 = coin11
 	local coin12 = LUI.UIImage.new(0, 0, 316.5, 335.5, 0, 0, 110.5, 129.5)
-	coin12:setImage(RegisterImage(0x212788AB2D971F7))
+	coin12:setImage(RegisterImage(@"uie_st_patricks_frame_02_goldcoin"))
 	self:addElement(coin12)
 	self.coin12 = coin12
 	local coin13 = LUI.UIImage.new(0, 0, 328.5, 346.5, 0, 0, 140, 158)
-	coin13:setImage(RegisterImage(0x212788AB2D971F7))
+	coin13:setImage(RegisterImage(@"uie_st_patricks_frame_02_goldcoin"))
 	self:addElement(coin13)
 	self.coin13 = coin13
 	if PostLoadFunc then

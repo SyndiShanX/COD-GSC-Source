@@ -50,7 +50,7 @@ CoD.TalentLoadoutListItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	})
 	local f1_local4 = TalentSlot
 	local ButtonFrameSelected = TalentSlot.subscribeToModel
-	local f1_local6 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local6 = Engine[@"getmodelforcontroller"](f1_arg1)
 	ButtonFrameSelected(f1_local4, f1_local6["CustomClassList.equippedItemsChanged"], function(f6_arg0)
 		f1_arg0:updateElementState(TalentSlot, {
 			name = "model_validation",
@@ -108,7 +108,7 @@ CoD.TalentLoadoutListItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	TalentSlot.AttachmentName.TextBox.__Item_Name = function(f12_arg0)
 		local f12_local0 = f12_arg0:get()
 		if f12_local0 ~= nil then
-			TalentSlot.AttachmentName.TextBox:setText(Engine[0xF9F1239CFD921FE](f12_local0))
+			TalentSlot.AttachmentName.TextBox:setText(Engine[@"hash_4F9F1239CFD921FE"](f12_local0))
 		end
 	end
 	TalentSlot:linkToElementModel(self, "loadoutListItem", true, function(model, f13_arg1)
@@ -168,7 +168,7 @@ CoD.TalentLoadoutListItem.__clipsPerState = {
 			f18_arg0:__resetProperties()
 			f18_arg0:setupElementClipCounter(1)
 			local f18_local0 = function(f19_arg0)
-				f18_arg0.TalentSlot:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f18_arg0.TalentSlot:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f18_arg0.TalentSlot:setScale(1.05, 1.05)
 				f18_arg0.TalentSlot:registerEventHandler("interrupted_keyframe", f18_arg0.clipInterrupted)
 				f18_arg0.TalentSlot:registerEventHandler("transition_complete_keyframe", f18_arg0.clipFinished)
@@ -181,7 +181,7 @@ CoD.TalentLoadoutListItem.__clipsPerState = {
 			f20_arg0:__resetProperties()
 			f20_arg0:setupElementClipCounter(1)
 			local f20_local0 = function(f21_arg0)
-				f20_arg0.TalentSlot:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f20_arg0.TalentSlot:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f20_arg0.TalentSlot:setScale(1, 1)
 				f20_arg0.TalentSlot:registerEventHandler("interrupted_keyframe", f20_arg0.clipInterrupted)
 				f20_arg0.TalentSlot:registerEventHandler("transition_complete_keyframe", f20_arg0.clipFinished)

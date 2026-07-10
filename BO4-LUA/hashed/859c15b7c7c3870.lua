@@ -15,16 +15,16 @@ CoD.BountyHunterTrackBuy.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	PackageTiers:setWidgetType(CoD.BountyHunterPackageTier)
 	PackageTiers:setHorizontalCount(3)
 	PackageTiers:setSpacing(28)
-	PackageTiers:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	PackageTiers:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	PackageTiers:setDataSource("BountyHunterPackages")
 	self:addElement(PackageTiers)
 	self.PackageTiers = PackageTiers
 	local Header = LUI.UIText.new(0, 0, 3, 153, 0, 0, -21, -4)
 	Header:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
-	Header:setText(Engine[0xF9F1239CFD921FE](0x93E719493E9E18F))
+	Header:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	Header:setTTF("ttmussels_demibold")
 	Header:setLetterSpacing(4)
-	Header:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	Header:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(Header)
 	self.Header = Header
 	PackageTiers.id = "PackageTiers"

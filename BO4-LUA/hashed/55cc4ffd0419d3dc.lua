@@ -12,7 +12,7 @@ CoD.HVOCardInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Blur = LUI.UIImage.new(0, 0, 67, 566, 0, 0, 57, 904)
-	Blur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	Blur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	Blur:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(Blur)
 	self.Blur = Blur
@@ -29,34 +29,34 @@ CoD.HVOCardInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	local GridTiled = LUI.UIImage.new(0.2, 0.2, -63.5, 443.5, 0.19, 0.19, -39.5, 588.5)
 	GridTiled:setAlpha(0.2)
 	GridTiled:setScale(1.01, 1.01)
-	GridTiled:setImage(RegisterImage(0xCA386792563DE8))
-	GridTiled:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	GridTiled:setImage(RegisterImage(@"uie_ui_menu_store_bg_grid"))
+	GridTiled:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	GridTiled:setShaderVector(0, 0, 0, 0, 0)
 	GridTiled:setupNineSliceShader(64, 64)
 	self:addElement(GridTiled)
 	self.GridTiled = GridTiled
 	local PixelGridTiledBacking = LUI.UIImage.new(0.02, 0.02, 55.5, 560.5, 0.31, 0.31, -243, 471)
 	PixelGridTiledBacking:setAlpha(0.05)
-	PixelGridTiledBacking:setImage(RegisterImage(0x311E811A3183347))
-	PixelGridTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	PixelGridTiledBacking:setImage(RegisterImage(@"uie_ui_hud_notifications_pixelpattern"))
+	PixelGridTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	PixelGridTiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	PixelGridTiledBacking:setupNineSliceShader(128, 128)
 	self:addElement(PixelGridTiledBacking)
 	self.PixelGridTiledBacking = PixelGridTiledBacking
 	local PixelGridTiledBacking2 = LUI.UIImage.new(0.02, 0.02, 55.5, 560.5, 0.31, 0.31, 471, 604)
 	PixelGridTiledBacking2:setAlpha(0.15)
-	PixelGridTiledBacking2:setImage(RegisterImage(0x311E811A3183347))
-	PixelGridTiledBacking2:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	PixelGridTiledBacking2:setImage(RegisterImage(@"uie_ui_hud_notifications_pixelpattern"))
+	PixelGridTiledBacking2:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	PixelGridTiledBacking2:setShaderVector(0, 0, 0, 0, 0)
 	PixelGridTiledBacking2:setupNineSliceShader(128, 128)
 	self:addElement(PixelGridTiledBacking2)
 	self.PixelGridTiledBacking2 = PixelGridTiledBacking2
 	local BackerGold = LUI.UIImage.new(0, 0, -0.5, 631.5, 0, 0, 0, 964)
-	BackerGold:setImage(RegisterImage(0xA8B2771AD77EBF6))
+	BackerGold:setImage(RegisterImage(@"hash_3A8B2771AD77EBF6"))
 	self:addElement(BackerGold)
 	self.BackerGold = BackerGold
 	local BackerGray = LUI.UIImage.new(0, 0, -0.5, 631.5, 0, 0, 0, 964)
-	BackerGray:setImage(RegisterImage(0xA8B2771AD77EBF6))
+	BackerGray:setImage(RegisterImage(@"hash_3A8B2771AD77EBF6"))
 	self:addElement(BackerGray)
 	self.BackerGray = BackerGray
 	local Image = LUI.UIImage.new(0.5, 0.5, -185, 189, 0, 0, 141, 515)
@@ -85,13 +85,13 @@ CoD.HVOCardInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	Title:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	Title:setAlpha(0)
 	Title:setTTF("ttmussels_demibold")
-	Title:setMaterial(LUI.UIImage.GetCachedMaterial(0x90D57B1E92D39D7))
+	Title:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_90D57B1E92D39D7"))
 	Title:setShaderVector(0, 1.13, 0, 0, 0)
 	Title:setShaderVector(1, -0.29, 0, 0, 0)
 	Title:setShaderVector(2, 1, 1, 1, 0.2)
 	Title:setLetterSpacing(4)
-	Title:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	Title:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Title:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	Title:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	Title:linkToElementModel(self, "cardTitle", true, function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
@@ -105,12 +105,12 @@ CoD.HVOCardInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	Description:setAlpha(0)
 	Description:setTTF("dinnext_regular")
 	Description:setLetterSpacing(4)
-	Description:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	Description:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Description:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	Description:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	Description:linkToElementModel(self, "cardTitle", true, function(model)
 		local f5_local0 = model:get()
 		if f5_local0 ~= nil then
-			Description:setText(Engine[0xF9F1239CFD921FE](f5_local0))
+			Description:setText(Engine[@"hash_4F9F1239CFD921FE"](f5_local0))
 		end
 	end)
 	self:addElement(Description)
@@ -121,7 +121,7 @@ CoD.HVOCardInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	StatList:setWidgetType(CoD.HVOStat)
 	StatList:setVerticalCount(3)
 	StatList:setSpacing(8)
-	StatList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	StatList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	StatList:linkToElementModel(self, "statsDataSource", true, function(model)
 		local f6_local0 = model:get()
 		if f6_local0 ~= nil then
@@ -138,8 +138,8 @@ CoD.HVOCardInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	self:addElement(RankLevel)
 	self.RankLevel = RankLevel
 	local TeamBarAnim = LUI.UIImage.new(0, 0, 163.5, 469.5, 0, 0, 23, 86)
-	TeamBarAnim:setImage(RegisterImage(0x855C1829CEAEDB0))
-	TeamBarAnim:setMaterial(LUI.UIImage.GetCachedMaterial(0x9227A50BA2B8D21))
+	TeamBarAnim:setImage(RegisterImage(@"hash_3855C1829CEAEDB0"))
+	TeamBarAnim:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_flipbook_add"))
 	TeamBarAnim:setShaderVector(0, 3, 20, 0, 0)
 	TeamBarAnim:setShaderVector(1, 30, 0, 0, 0)
 	TeamBarAnim.__Color = function(f8_arg0)
@@ -165,7 +165,7 @@ CoD.HVOCardInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	self:addElement(TeamBarAnim)
 	self.TeamBarAnim = TeamBarAnim
 	local TeamBarBase = LUI.UIImage.new(0, 0, 151.5, 475.5, 0, 0, 36, 72)
-	TeamBarBase:setImage(RegisterImage(0x48863AFCAB54A9))
+	TeamBarBase:setImage(RegisterImage(@"hash_48863AFCAB54A9"))
 	TeamBarBase.__Color = function(f10_arg0)
 		local f10_local0 = f10_arg0:get()
 		if f10_local0 ~= nil then
@@ -189,8 +189,8 @@ CoD.HVOCardInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	self:addElement(TeamBarBase)
 	self.TeamBarBase = TeamBarBase
 	local TeamBarMuted = LUI.UIImage.new(0, 0, 151.5, 475.5, 0, 0, 49.5, 58.5)
-	TeamBarMuted:setImage(RegisterImage(0x48863AFCAB54A9))
-	TeamBarMuted:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	TeamBarMuted:setImage(RegisterImage(@"hash_48863AFCAB54A9"))
+	TeamBarMuted:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	TeamBarMuted.__Color = function(f12_arg0)
 		local f12_local0 = f12_arg0:get()
 		if f12_local0 ~= nil then
@@ -214,8 +214,8 @@ CoD.HVOCardInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	self:addElement(TeamBarMuted)
 	self.TeamBarMuted = TeamBarMuted
 	local TeamBarBright = LUI.UIImage.new(0, 0, 151.5, 475.5, 0, 0, 36, 72)
-	TeamBarBright:setImage(RegisterImage(0x48863AFCAB54A9))
-	TeamBarBright:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	TeamBarBright:setImage(RegisterImage(@"hash_48863AFCAB54A9"))
+	TeamBarBright:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	TeamBarBright:setShaderVector(0, 2, 0, 0, 0)
 	TeamBarBright.__Color = function(f14_arg0)
 		local f14_local0 = f14_arg0:get()
@@ -241,15 +241,15 @@ CoD.HVOCardInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	self.TeamBarBright = TeamBarBright
 	local TeamBarAnim2 = LUI.UIImage.new(0, 0, 163.5, 469.5, 0, 0, 32, 76)
 	TeamBarAnim2:setAlpha(0.7)
-	TeamBarAnim2:setImage(RegisterImage(0x855C1829CEAEDB0))
-	TeamBarAnim2:setMaterial(LUI.UIImage.GetCachedMaterial(0x9227A50BA2B8D21))
+	TeamBarAnim2:setImage(RegisterImage(@"hash_3855C1829CEAEDB0"))
+	TeamBarAnim2:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_flipbook_add"))
 	TeamBarAnim2:setShaderVector(0, 3, 20, 0, 0)
 	TeamBarAnim2:setShaderVector(1, 30, 0, 0, 0)
 	self:addElement(TeamBarAnim2)
 	self.TeamBarAnim2 = TeamBarAnim2
 	local GlowBase = LUI.UIImage.new(0, 0, 0, 632, 0, 0, 0, 964)
 	GlowBase:setAlpha(0)
-	GlowBase:setImage(RegisterImage(0x4D5B522898DA78D))
+	GlowBase:setImage(RegisterImage(@"hash_24D5B522898DA78D"))
 	GlowBase.__Color = function(f16_arg0)
 		local f16_local0 = f16_arg0:get()
 		if f16_local0 ~= nil then
@@ -274,8 +274,8 @@ CoD.HVOCardInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	self.GlowBase = GlowBase
 	local GlowMuted = LUI.UIImage.new(0, 0, 0, 632, 0, 0, 0, 964)
 	GlowMuted:setAlpha(0)
-	GlowMuted:setImage(RegisterImage(0x4D5B522898DA78D))
-	GlowMuted:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	GlowMuted:setImage(RegisterImage(@"hash_24D5B522898DA78D"))
+	GlowMuted:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	GlowMuted.__Color = function(f18_arg0)
 		local f18_local0 = f18_arg0:get()
 		if f18_local0 ~= nil then
@@ -300,8 +300,8 @@ CoD.HVOCardInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	self.GlowMuted = GlowMuted
 	local GlowBright = LUI.UIImage.new(0, 0, 0, 632, 0, 0, 0, 964)
 	GlowBright:setAlpha(0)
-	GlowBright:setImage(RegisterImage(0x4D5B522898DA78D))
-	GlowBright:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	GlowBright:setImage(RegisterImage(@"hash_24D5B522898DA78D"))
+	GlowBright:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	GlowBright:setShaderVector(0, 1.5, 0, 0, 0)
 	GlowBright.__Color = function(f20_arg0)
 		local f20_local0 = f20_arg0:get()

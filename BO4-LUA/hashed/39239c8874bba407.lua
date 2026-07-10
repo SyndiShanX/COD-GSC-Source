@@ -18,18 +18,18 @@ CoD.SpecialistHeadquartersDossierProgress.new = function(f1_arg0, f1_arg1, f1_ar
 	self.Backing = Backing
 	local NoiseTiledBacking = LUI.UIImage.new(0, 0, 0, 800, 0, 0, 0, 200)
 	NoiseTiledBacking:setAlpha(0.5)
-	NoiseTiledBacking:setImage(RegisterImage(0x34839E8065B1E53))
-	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	NoiseTiledBacking:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	NoiseTiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	NoiseTiledBacking:setupNineSliceShader(196, 88)
 	self:addElement(NoiseTiledBacking)
 	self.NoiseTiledBacking = NoiseTiledBacking
 	local DossierProgress = LUI.UIText.new(0, 0, 10, 785, 0, 0, 5, 32)
 	DossierProgress:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
-	DossierProgress:setText(LocalizeToUpperString(0x328824525DBC0EA))
+	DossierProgress:setText(LocalizeToUpperString(@"hash_2328824525DBC0EA"))
 	DossierProgress:setTTF("ttmussels_demibold")
 	DossierProgress:setLetterSpacing(6)
-	DossierProgress:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	DossierProgress:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(DossierProgress)
 	self.DossierProgress = DossierProgress
 	local DossierProgressBulletPoint1 = CoD.DossierProgressBulletPoint.new(f1_arg0, f1_arg1, 0, 0, 10, 260, 0, 0, 49, 79)
@@ -54,7 +54,7 @@ CoD.SpecialistHeadquartersDossierProgress.new = function(f1_arg0, f1_arg1, f1_ar
 			end,
 		},
 	})
-	DossierProgressBulletPoint1.DossierProgressBulletPoint:setText(Engine[0xF9F1239CFD921FE](0x271C65C6D7CABDA))
+	DossierProgressBulletPoint1.DossierProgressBulletPoint:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_6271C65C6D7CABDA"))
 	self:addElement(DossierProgressBulletPoint1)
 	self.DossierProgressBulletPoint1 = DossierProgressBulletPoint1
 	local DossierProgressBulletPoint3 = CoD.DossierProgressBulletPoint.new(f1_arg0, f1_arg1, 0, 0, 10, 260, 0, 0, 127, 157)
@@ -79,7 +79,7 @@ CoD.SpecialistHeadquartersDossierProgress.new = function(f1_arg0, f1_arg1, f1_ar
 			end,
 		},
 	})
-	DossierProgressBulletPoint3.DossierProgressBulletPoint:setText(Engine[0xF9F1239CFD921FE](0x271C45C6D7CA874))
+	DossierProgressBulletPoint3.DossierProgressBulletPoint:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_6271C45C6D7CA874"))
 	self:addElement(DossierProgressBulletPoint3)
 	self.DossierProgressBulletPoint3 = DossierProgressBulletPoint3
 	local DossierProgressBulletPoint2 = CoD.DossierProgressBulletPoint.new(f1_arg0, f1_arg1, 0, 0, 10, 260, 0, 0, 88, 118)
@@ -104,15 +104,15 @@ CoD.SpecialistHeadquartersDossierProgress.new = function(f1_arg0, f1_arg1, f1_ar
 			end,
 		},
 	})
-	DossierProgressBulletPoint2.DossierProgressBulletPoint:setText(Engine[0xF9F1239CFD921FE](0x271C55C6D7CAA27))
+	DossierProgressBulletPoint2.DossierProgressBulletPoint:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_6271C55C6D7CAA27"))
 	self:addElement(DossierProgressBulletPoint2)
 	self.DossierProgressBulletPoint2 = DossierProgressBulletPoint2
 	local Complete = LUI.UIText.new(0, 0, 15, 790, 0, 0, 165, 195)
 	Complete:setRGB(ColorSet.T8__GREEN.r, ColorSet.T8__GREEN.g, ColorSet.T8__GREEN.b)
 	Complete:setAlpha(0)
-	Complete:setText(LocalizeToUpperString(0xF0C75904F29F8BC))
+	Complete:setText(LocalizeToUpperString(@"menu/complete"))
 	Complete:setTTF("ttmussels_regular")
-	Complete:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	Complete:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(Complete)
 	self.Complete = Complete
 	local CommonCornerPips = CoD.CommonCornerPips01.new(f1_arg0, f1_arg1, 0, 1, 0, 0, 0, 1, 0, 0)
@@ -124,8 +124,8 @@ CoD.SpecialistHeadquartersDossierProgress.new = function(f1_arg0, f1_arg1, f1_ar
 	self.TabbedScoreboardFuiBox = TabbedScoreboardFuiBox
 	local DividerSolidBot = LUI.UIImage.new(0, 0, 12, 790, 0, 0, 35, 43)
 	DividerSolidBot:setAlpha(0.2)
-	DividerSolidBot:setImage(RegisterImage(0x84B43D5B04D263A))
-	DividerSolidBot:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	DividerSolidBot:setImage(RegisterImage(@"hash_484B43D5B04D263A"))
+	DividerSolidBot:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	DividerSolidBot:setShaderVector(0, 0, 0, 0, 0)
 	DividerSolidBot:setupNineSliceShader(16, 8)
 	self:addElement(DividerSolidBot)

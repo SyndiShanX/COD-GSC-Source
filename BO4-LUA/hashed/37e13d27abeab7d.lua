@@ -9,12 +9,12 @@ CoD.vhud_tank_robot_health.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self.id = "vhud_tank_robot_health"
 	self.soundSet = "default"
 	local VehicleHpBg = LUI.UIImage.new(0, 0, 1.5, 303.5, 0, 0, 1, 179)
-	VehicleHpBg:setImage(RegisterImage(0xE6BF37C3B5F9A2A))
+	VehicleHpBg:setImage(RegisterImage(@"uie_ui_hud_vehicle_ac130_hp_bg"))
 	self:addElement(VehicleHpBg)
 	self.VehicleHpBg = VehicleHpBg
 	local Health = CoD.vhud_attack_helicopter_health.new(f1_arg0, f1_arg1, 0, 0, 32.5, 277.5, 0, 0, 33, 147)
-	Health.BackImage:setImage(RegisterImage(0xF6E7E992111B6AE))
-	Health.Overlay:setImage(RegisterImage(0xA45692501DFF1B8))
+	Health.BackImage:setImage(RegisterImage(@"uie_ui_hud_vehicle_scarab_hp_icon_normal"))
+	Health.Overlay:setImage(RegisterImage(@"uie_ui_hud_vehicle_scarab_hp_icon_damaged"))
 	Health:linkToElementModel(self, nil, false, function(model)
 		Health:setModel(model, f1_arg1)
 	end)
@@ -27,29 +27,29 @@ CoD.vhud_tank_robot_health.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self:addElement(vhudmsTimebar)
 	self.vhudmsTimebar = vhudmsTimebar
 	local vehicleCornerRT = LUI.UIImage.new(0, 0, 280, 304, 0, 0, 0, 24)
-	vehicleCornerRT:setImage(RegisterImage(0x2A026C4CBC764C1))
-	vehicleCornerRT:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	vehicleCornerRT:setImage(RegisterImage(@"uie_ui_hud_vehicle_ac130_hp_layout_corner"))
+	vehicleCornerRT:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	vehicleCornerRT:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(vehicleCornerRT)
 	self.vehicleCornerRT = vehicleCornerRT
 	local vehicleCornerLT = LUI.UIImage.new(0, 0, 0, 24, 0, 0, 0, 24)
 	vehicleCornerLT:setZRot(90)
-	vehicleCornerLT:setImage(RegisterImage(0x2A026C4CBC764C1))
-	vehicleCornerLT:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	vehicleCornerLT:setImage(RegisterImage(@"uie_ui_hud_vehicle_ac130_hp_layout_corner"))
+	vehicleCornerLT:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	vehicleCornerLT:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(vehicleCornerLT)
 	self.vehicleCornerLT = vehicleCornerLT
 	local vehicleCornerLB = LUI.UIImage.new(0, 0, 0, 24, 0, 0, 156, 180)
 	vehicleCornerLB:setZRot(180)
-	vehicleCornerLB:setImage(RegisterImage(0x2A026C4CBC764C1))
-	vehicleCornerLB:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	vehicleCornerLB:setImage(RegisterImage(@"uie_ui_hud_vehicle_ac130_hp_layout_corner"))
+	vehicleCornerLB:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	vehicleCornerLB:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(vehicleCornerLB)
 	self.vehicleCornerLB = vehicleCornerLB
 	local vehicleCornerRT4 = LUI.UIImage.new(0, 0, 280.5, 304.5, 0, 0, 156, 180)
 	vehicleCornerRT4:setZRot(270)
-	vehicleCornerRT4:setImage(RegisterImage(0x2A026C4CBC764C1))
-	vehicleCornerRT4:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	vehicleCornerRT4:setImage(RegisterImage(@"uie_ui_hud_vehicle_ac130_hp_layout_corner"))
+	vehicleCornerRT4:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	vehicleCornerRT4:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(vehicleCornerRT4)
 	self.vehicleCornerRT4 = vehicleCornerRT4

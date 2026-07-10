@@ -11,17 +11,17 @@ CoD.vhud_ButtonPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local prompt = LUI.UIText.new(0.5, 0.5, -150, 150, 0.5, 0.5, 7.5, 24.5)
 	prompt:setTTF("ttmussels_regular")
-	prompt:setMaterial(LUI.UIImage.GetCachedMaterial(0xB0AEA8900F97CFB))
+	prompt:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_3B0AEA8900F97CFB"))
 	prompt:setShaderVector(0, 0, 0, 0, 0)
 	prompt:setShaderVector(1, 0, 0, 0, 0)
 	prompt:setShaderVector(2, 0.6, 0, 0, 0)
 	prompt:setLetterSpacing(0.5)
-	prompt:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	prompt:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	prompt:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	prompt:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	prompt:linkToElementModel(self, "text", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			prompt:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			prompt:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	self:addElement(prompt)
@@ -42,7 +42,7 @@ CoD.vhud_ButtonPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	self.button = button
 	local bind = LUI.UIText.new(0.5, 0.5, -20, 20, 0.5, 0.5, -37.5, -1.5)
 	bind:setTTF("default")
-	bind:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	bind:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	bind:linkToElementModel(self, "bind", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then

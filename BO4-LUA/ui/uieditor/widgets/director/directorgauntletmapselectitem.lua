@@ -21,7 +21,7 @@ CoD.DirectorGauntletMapSelectItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	})
 	local f1_local2 = Button
 	local f1_local3 = Button.subscribeToModel
-	local f1_local4 = Engine[0x8DF2E5447F384B9]()
+	local f1_local4 = Engine[@"getglobalmodel"]()
 	f1_local3(f1_local2, f1_local4["MapVote.mapVoteMapNext"], function(f3_arg0)
 		f1_arg0:updateElementState(Button, {
 			name = "model_validation",
@@ -42,7 +42,7 @@ CoD.DirectorGauntletMapSelectItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	end)
 	f1_local2 = Button
 	f1_local3 = Button.subscribeToModel
-	f1_local4 = Engine[0x8DF2E5447F384B9]()
+	f1_local4 = Engine[@"getglobalmodel"]()
 	f1_local3(f1_local2, f1_local4.localZMTrialVariant, function(f5_arg0)
 		f1_arg0:updateElementState(Button, {
 			name = "model_validation",
@@ -61,7 +61,7 @@ CoD.DirectorGauntletMapSelectItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 			modelName = "trialVariant",
 		})
 	end)
-	Button.FeaturedTag:setText(LocalizeToUpperString(0x7E251454EDF7A26))
+	Button.FeaturedTag:setText(LocalizeToUpperString(@"menu/public_tab"))
 	Button:linkToElementModel(self, nil, false, function(model)
 		Button:setModel(model, f1_arg1)
 	end)
@@ -74,7 +74,7 @@ CoD.DirectorGauntletMapSelectItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	Button.MapName.__MapName_String_Reference = function(f9_arg0)
 		local f9_local0 = f9_arg0:get()
 		if f9_local0 ~= nil then
-			Button.MapName:setText(Engine[0xF9F1239CFD921FE](CoD.ZombieUtility.GauntletMapNameToLocalizedMapDetailedName(f1_arg1, self:getModel(), f9_local0)))
+			Button.MapName:setText(Engine[@"hash_4F9F1239CFD921FE"](CoD.ZombieUtility.GauntletMapNameToLocalizedMapDetailedName(f1_arg1, self:getModel(), f9_local0)))
 		end
 	end
 	Button:linkToElementModel(self, "id", true, Button.MapName.__MapName_String_Reference)
@@ -91,7 +91,7 @@ CoD.DirectorGauntletMapSelectItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	Button:linkToElementModel(self, "id", true, function(model)
 		local f11_local0 = model:get()
 		if f11_local0 ~= nil then
-			Button.TeamName:setText(Engine[0xF9F1239CFD921FE](CoD.MapUtility.GetMapTeamNameFromMapID(f11_local0)))
+			Button.TeamName:setText(Engine[@"hash_4F9F1239CFD921FE"](CoD.MapUtility.GetMapTeamNameFromMapID(f11_local0)))
 		end
 	end)
 	self:addElement(Button)

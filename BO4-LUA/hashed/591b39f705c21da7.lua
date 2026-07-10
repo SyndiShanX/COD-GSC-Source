@@ -169,7 +169,7 @@ CoD.AARSquadRow.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_a
 	LongestKillStat:linkToElementModel(self, "longestKill", true, function(model)
 		local f21_local0 = model:get()
 		if f21_local0 ~= nil then
-			LongestKillStat.Value:setText(LocalizeStringWithParameter(0x2EAE727E6AD7528, UnitsToMeters(f21_local0)))
+			LongestKillStat.Value:setText(LocalizeStringWithParameter(@"menu/distance_m", UnitsToMeters(f21_local0)))
 		end
 	end)
 	self:addElement(LongestKillStat)

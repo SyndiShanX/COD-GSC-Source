@@ -17,7 +17,7 @@ CoD.Social_CallingCardSubTitle.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	Label0:setText("")
 	Label0:setTTF("dinnext_regular")
 	Label0:setLetterSpacing(0.5)
-	Label0:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	Label0:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	Label0:setBackingType(2)
 	Label0:setBackingColor(0, 0, 0)
 	LUI.OverrideFunction_CallOriginalFirst(Label0, "setText", function(element, controller)

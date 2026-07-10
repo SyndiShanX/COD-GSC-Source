@@ -21,40 +21,40 @@ CoD.HubShowcaseCheckbox.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	label:setAlpha(0.5)
 	label:setText("")
 	label:setTTF("ttmussels_regular")
-	label:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	label:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(label)
 	self.label = label
 	local Empty = LUI.UIImage.new(0, 0, -5, 43, 0, 0, -6, 42)
 	Empty:setScale(0.67, 0.67)
-	Empty:setImage(RegisterImage(0xF53DA84C7B770BF))
-	Empty:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Empty:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_selectbox_empty"))
+	Empty:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Empty)
 	self.Empty = Empty
 	local dashBacking = LUI.UIImage.new(0, 0, 3, 35, 0, 0, 2.5, 34.5)
 	dashBacking:setScale(1.5, 1.5)
-	dashBacking:setImage(RegisterImage(0x4BB3E0B0E9A1D7E))
+	dashBacking:setImage(RegisterImage(@"uie_ui_menu_cac_allocation_pip_empty"))
 	self:addElement(dashBacking)
 	self.dashBacking = dashBacking
 	local dash = LUI.UIImage.new(0, 0, 3, 35, 0, 0, 2.5, 34.5)
 	dash:setScale(1.5, 1.5)
-	dash:setImage(RegisterImage(0xEEB4FB140EAEAC))
+	dash:setImage(RegisterImage(@"uie_ui_menu_cac_allocation_pip_full"))
 	self:addElement(dash)
 	self.dash = dash
 	local Glow = LUI.UIImage.new(0, 0, -1.5, 40.5, 0, 0, -17.5, 55.5)
 	Glow:setRGB(0.88, 0.8, 0.45)
 	Glow:setAlpha(0)
-	Glow:setImage(RegisterImage(0x1078C36A022A4FE))
-	Glow:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Glow:setImage(RegisterImage(@"uie_t7_menu_cac_glow"))
+	Glow:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Glow)
 	self.Glow = Glow
 	local CornerDots = LUI.UIImage.new(0, 0, 3, 35, 0, 0, 2.5, 34.5)
 	CornerDots:setScale(1.5, 1.5)
-	CornerDots:setImage(RegisterImage(0x1735E8FCAB0ED9))
+	CornerDots:setImage(RegisterImage(@"uie_ui_menu_cac_allocation_pip_dots"))
 	self:addElement(CornerDots)
 	self.CornerDots = CornerDots
 	local CursorOver = LUI.UIImage.new(0, 0, -3, 41, 0, 0, -3.5, 40.5)
 	CursorOver:setAlpha(0)
-	CursorOver:setImage(RegisterImage(0xFC2EE367F8C243F))
+	CursorOver:setImage(RegisterImage(@"uie_ui_menu_cac_allocation_pip_over"))
 	self:addElement(CursorOver)
 	self.CursorOver = CursorOver
 	local squarePrompt = CoD.JoinButtonPrompt.new(f1_arg0, f1_arg1, 0, 0, 47, 86, 0, 0, 0, 39)
@@ -93,7 +93,7 @@ CoD.HubShowcaseCheckbox.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	end)
 	local f1_local11 = self
 	local f1_local12 = self.subscribeToModel
-	local f1_local13 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local13 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local12(f1_local11, f1_local13.LastInput, function(f7_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

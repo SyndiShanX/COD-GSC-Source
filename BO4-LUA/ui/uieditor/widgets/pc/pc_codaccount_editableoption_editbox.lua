@@ -25,7 +25,7 @@ CoD.PC_CoDAccount_EditableOption_EditBox.new = function(f1_arg0, f1_arg1, f1_arg
 	local TextBox = LUI.UIText.new(0, 0, 20, 320, 0.5, 0.5, -10.5, 10.5)
 	TextBox:setRGB(0.78, 0.74, 0.67)
 	TextBox:setTTF("notosans_regular")
-	TextBox:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	TextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	TextBox:linkToElementModel(self, "currentText", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then

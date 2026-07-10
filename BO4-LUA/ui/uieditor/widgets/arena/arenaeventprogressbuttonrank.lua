@@ -11,8 +11,8 @@ CoD.ArenaEventProgressButtonRank.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	Rank:setRGB(0.87, 0.65, 0.01)
 	Rank:setTTF("0arame_mono_stencil")
 	Rank:setLetterSpacing(2)
-	Rank:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Rank:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Rank:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Rank:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	Rank:subscribeToGlobalModel(f1_arg1, "LeaguePlayLadder", "entityLadderRank", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -24,13 +24,13 @@ CoD.ArenaEventProgressButtonRank.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	local leagueOrdinalRank = LUI.UIText.new(0, 0, 164, 192, 0, 0, -7, 18)
 	leagueOrdinalRank:setRGB(0.87, 0.65, 0.01)
 	leagueOrdinalRank:setTTF("0arame_mono_stencil")
-	leagueOrdinalRank:setMaterial(LUI.UIImage.GetCachedMaterial(0x71E049B161CD00A))
+	leagueOrdinalRank:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_171E049B161CD00A"))
 	leagueOrdinalRank:setLetterSpacing(2)
-	leagueOrdinalRank:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	leagueOrdinalRank:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	leagueOrdinalRank:subscribeToGlobalModel(f1_arg1, "LeaguePlayLadder", "entityLadderRank", function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
-			leagueOrdinalRank:setText(Engine[0xF9F1239CFD921FE](CoD.ArenaUtility.GetLadderPositionOrdinal(f3_local0)))
+			leagueOrdinalRank:setText(Engine[@"hash_4F9F1239CFD921FE"](CoD.ArenaUtility.GetLadderPositionOrdinal(f3_local0)))
 		end
 	end)
 	self:addElement(leagueOrdinalRank)

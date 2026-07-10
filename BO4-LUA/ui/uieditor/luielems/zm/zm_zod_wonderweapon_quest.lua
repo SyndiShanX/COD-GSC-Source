@@ -12,10 +12,10 @@ LUI.createMenu.zm_zod_wonderweapon_quest = function(f1_arg0, f1_arg1)
 	f1_local1:addElementToPendingUpdateStateList(self)
 	local CarryingDecay = LUI.UIText.new(0, 0, 1349, 1657, 0, 0, 796.5, 833.5)
 	CarryingDecay:setRGB(0.03, 0.81, 0.33)
-	CarryingDecay:setText(Engine[0xF9F1239CFD921FE](0x8AC3267C4DA5F02))
+	CarryingDecay:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_68AC3267C4DA5F02"))
 	CarryingDecay:setTTF("default")
-	CarryingDecay:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	CarryingDecay:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	CarryingDecay:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	CarryingDecay:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	CarryingDecay:linkToElementModel(self, "decay", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -26,10 +26,10 @@ LUI.createMenu.zm_zod_wonderweapon_quest = function(f1_arg0, f1_arg1)
 	self.CarryingDecay = CarryingDecay
 	local CarryingPurity = LUI.UIText.new(0, 0, 1349, 1657, 0, 0, 796.5, 833.5)
 	CarryingPurity:setRGB(0, 0.52, 0.82)
-	CarryingPurity:setText(Engine[0xF9F1239CFD921FE](0xF028C52DDB2044D))
+	CarryingPurity:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_F028C52DDB2044D"))
 	CarryingPurity:setTTF("default")
-	CarryingPurity:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	CarryingPurity:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	CarryingPurity:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	CarryingPurity:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	CarryingPurity:linkToElementModel(self, "purity", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -40,10 +40,10 @@ LUI.createMenu.zm_zod_wonderweapon_quest = function(f1_arg0, f1_arg1)
 	self.CarryingPurity = CarryingPurity
 	local CarryingPlasma = LUI.UIText.new(0, 0, 1349, 1657, 0, 0, 796.5, 833.5)
 	CarryingPlasma:setRGB(1, 0, 0)
-	CarryingPlasma:setText(Engine[0xF9F1239CFD921FE](0x19A6271DDFE132))
+	CarryingPlasma:setText(Engine[@"hash_4F9F1239CFD921FE"](0x19A6271DDFE132))
 	CarryingPlasma:setTTF("default")
-	CarryingPlasma:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	CarryingPlasma:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	CarryingPlasma:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	CarryingPlasma:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	CarryingPlasma:linkToElementModel(self, "plasma", true, function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
@@ -54,10 +54,10 @@ LUI.createMenu.zm_zod_wonderweapon_quest = function(f1_arg0, f1_arg1)
 	self.CarryingPlasma = CarryingPlasma
 	local CarryingRadiance = LUI.UIText.new(0, 0, 1349, 1657, 0, 0, 796.5, 833.5)
 	CarryingRadiance:setRGB(0.93, 1, 0)
-	CarryingRadiance:setText(Engine[0xF9F1239CFD921FE](0x9906C8B5560C85D))
+	CarryingRadiance:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_79906C8B5560C85D"))
 	CarryingRadiance:setTTF("default")
-	CarryingRadiance:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	CarryingRadiance:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	CarryingRadiance:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	CarryingRadiance:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	CarryingRadiance:linkToElementModel(self, "radiance", true, function(model)
 		local f5_local0 = model:get()
 		if f5_local0 ~= nil then
@@ -70,20 +70,20 @@ LUI.createMenu.zm_zod_wonderweapon_quest = function(f1_arg0, f1_arg1)
 		{
 			stateName = "Hidden",
 			condition = function(menu, element, event)
-				return not Engine[0xDD333420C49E6D0](f1_arg0, Enum[0x7F032C2EF103A1A][0xADC477DDE486DD7])
+				return not Engine[@"isvisibilitybitset"](f1_arg0, Enum[@"uivisibilitybit"][@"bit_hud_visible"])
 			end,
 		},
 	})
 	local f1_local6 = self
 	local f1_local7 = self.subscribeToModel
-	local f1_local8 = Engine[0x4DF5CFBC1771947](f1_arg0)
-	f1_local7(f1_local6, f1_local8["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xADC477DDE486DD7]], function(f7_arg0)
+	local f1_local8 = Engine[@"getmodelforcontroller"](f1_arg0)
+	f1_local7(f1_local6, f1_local8["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_hud_visible"]], function(f7_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_local1,
 			controller = f1_arg0,
 			modelValue = f7_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xADC477DDE486DD7],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_hud_visible"],
 		})
 	end, false)
 	self:processEvent({

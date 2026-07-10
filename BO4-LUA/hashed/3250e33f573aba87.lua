@@ -7,7 +7,7 @@ CoD.ui_icon_callingcards_assassin_bentarm.new = function(f1_arg0, f1_arg1, f1_ar
 	self.id = "ui_icon_callingcards_assassin_bentarm"
 	self.soundSet = "default"
 	local bentarm = LUI.UIImage.new(0, 0, -28, 196, 0, 0, -166, 130)
-	bentarm:setImage(RegisterImage(0xF7A9BB3478DF769))
+	bentarm:setImage(RegisterImage(@"uie_ui_icon_callingcards_assassin_bentarm"))
 	self:addElement(bentarm)
 	self.bentarm = bentarm
 	if PostLoadFunc then

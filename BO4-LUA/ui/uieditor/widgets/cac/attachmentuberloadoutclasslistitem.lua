@@ -79,7 +79,7 @@ CoD.AttachmentUberLoadoutClassListItem.new = function(f1_arg0, f1_arg1, f1_arg2,
 	end)
 	local ButtonFrameSelected = AttachmentSlot
 	local WildcardHighlightBottom = AttachmentSlot.subscribeToModel
-	local f1_local5 = Engine[0x8DF2E5447F384B9]()
+	local f1_local5 = Engine[@"getglobalmodel"]()
 	WildcardHighlightBottom(ButtonFrameSelected, f1_local5["lobbyRoot.lobbyNav"], function(f10_arg0)
 		f1_arg0:updateElementState(AttachmentSlot, {
 			name = "model_validation",
@@ -91,7 +91,7 @@ CoD.AttachmentUberLoadoutClassListItem.new = function(f1_arg0, f1_arg1, f1_arg2,
 	end, false)
 	ButtonFrameSelected = AttachmentSlot
 	WildcardHighlightBottom = AttachmentSlot.subscribeToModel
-	f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
 	WildcardHighlightBottom(ButtonFrameSelected, f1_local5["CustomClassList.equippedItemsChanged"], function(f11_arg0)
 		f1_arg0:updateElementState(AttachmentSlot, {
 			name = "model_validation",
@@ -149,7 +149,7 @@ CoD.AttachmentUberLoadoutClassListItem.new = function(f1_arg0, f1_arg1, f1_arg2,
 	AttachmentSlot.ItemName.TextBox.__Item_Name = function(f17_arg0)
 		local f17_local0 = f17_arg0:get()
 		if f17_local0 ~= nil then
-			AttachmentSlot.ItemName.TextBox:setText(Engine[0xF9F1239CFD921FE](f17_local0))
+			AttachmentSlot.ItemName.TextBox:setText(Engine[@"hash_4F9F1239CFD921FE"](f17_local0))
 		end
 	end
 	AttachmentSlot:linkToElementModel(self, "loadoutListItem", true, function(model, f18_arg1)
@@ -214,7 +214,7 @@ CoD.AttachmentUberLoadoutClassListItem.__clipsPerState = {
 			f23_arg0:__resetProperties()
 			f23_arg0:setupElementClipCounter(1)
 			local f23_local0 = function(f24_arg0)
-				f23_arg0.AttachmentSlot:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f23_arg0.AttachmentSlot:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f23_arg0.AttachmentSlot:setScale(1.05, 1.05)
 				f23_arg0.AttachmentSlot:registerEventHandler("interrupted_keyframe", f23_arg0.clipInterrupted)
 				f23_arg0.AttachmentSlot:registerEventHandler("transition_complete_keyframe", f23_arg0.clipFinished)
@@ -227,7 +227,7 @@ CoD.AttachmentUberLoadoutClassListItem.__clipsPerState = {
 			f25_arg0:__resetProperties()
 			f25_arg0:setupElementClipCounter(1)
 			local f25_local0 = function(f26_arg0)
-				f25_arg0.AttachmentSlot:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f25_arg0.AttachmentSlot:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f25_arg0.AttachmentSlot:setScale(1, 1)
 				f25_arg0.AttachmentSlot:registerEventHandler("interrupted_keyframe", f25_arg0.clipInterrupted)
 				f25_arg0.AttachmentSlot:registerEventHandler("transition_complete_keyframe", f25_arg0.clipFinished)

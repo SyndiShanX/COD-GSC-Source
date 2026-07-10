@@ -9,11 +9,11 @@ CoD.PlayerContextualMenu_Item.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local ActionName = LUI.UIText.new(0, 0, 0, 160, 0, 0, 0, 25)
 	ActionName:setTTF("default")
-	ActionName:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	ActionName:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	ActionName:linkToElementModel(self, "name", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			ActionName:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			ActionName:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	LUI.OverrideFunction_CallOriginalFirst(ActionName, "setText", function(element, controller)

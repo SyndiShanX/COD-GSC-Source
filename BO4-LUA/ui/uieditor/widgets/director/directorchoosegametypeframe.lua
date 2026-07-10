@@ -19,7 +19,7 @@ CoD.DirectorChooseGameTypeFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	GameTypeCategoryGridPC:setWidgetType(CoD.CustomGames_MapModeSlider)
 	GameTypeCategoryGridPC:setVerticalCount(14)
 	GameTypeCategoryGridPC:setSpacing(8)
-	GameTypeCategoryGridPC:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	GameTypeCategoryGridPC:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	GameTypeCategoryGridPC:setDataSource("GameTypeCategories")
 	GameTypeCategoryGridPC:registerEventHandler("gain_focus", function(element, event)
 		local f2_local0 = nil
@@ -28,17 +28,17 @@ CoD.DirectorChooseGameTypeFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 		elseif element.super.gainFocus then
 			f2_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f2_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(GameTypeCategoryGridPC, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(GameTypeCategoryGridPC, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		SetCurrentElementAsActive(self, element, controller)
 		SetControllerModelValue(controller, "mapModeSelection", true)
 		SetFocusToElement(self, "GameTypeListPC", controller)
 		PlaySoundAlias("cac_open_wpn_cust")
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 		return true
 	end, false)
 	self:addElement(GameTypeCategoryGridPC)
@@ -50,7 +50,7 @@ CoD.DirectorChooseGameTypeFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	GameTypeListPC:setWidgetType(CoD.CustomGames_MapModeSlider)
 	GameTypeListPC:setVerticalCount(14)
 	GameTypeListPC:setSpacing(8)
-	GameTypeListPC:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	GameTypeListPC:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	GameTypeListPC:setVerticalCounter(CoD.verticalCounter)
 	GameTypeListPC:registerEventHandler("list_item_gain_focus", function(element, event)
 		local f5_local0 = nil
@@ -64,26 +64,26 @@ CoD.DirectorChooseGameTypeFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 		elseif element.super.gainFocus then
 			f6_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbb_pscircle"])
 		return f6_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(GameTypeListPC, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(GameTypeListPC, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		GameModeSelected(element, controller)
 		PlaySoundAlias("cac_open_wpn_cust")
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 		return true
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(GameTypeListPC, f1_arg1, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(GameTypeListPC, f1_arg1, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		CoD.OptionsUtility.SetFocusToGrid(self.GameTypeCategoryGridPC)
 		SetControllerModelValue(controller, "mapModeSelection", false)
 		DataSourceHelperRecreate(controller, "MapModePreview")
 		PlaySoundAlias("cac_wpn_cust_exit")
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 		return true
 	end, false)
 	self:addElement(GameTypeListPC)
@@ -150,7 +150,7 @@ CoD.DirectorChooseGameTypeFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	})
 	local f1_local8 = self
 	local f1_local9 = self.subscribeToModel
-	local f1_local10 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local10 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local9(f1_local8, f1_local10.mapModeSelection, function(f18_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -166,7 +166,7 @@ CoD.DirectorChooseGameTypeFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	end)
 	f1_local8 = self
 	f1_local9 = self.subscribeToModel
-	f1_local10 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local10 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local9(f1_local8, f1_local10.LastInput, function(f20_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

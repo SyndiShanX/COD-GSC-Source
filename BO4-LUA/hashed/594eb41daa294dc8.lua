@@ -17,7 +17,7 @@ CoD.WarzoneContextualExtraItems.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	InventoryEquipmentLarge:setTopBottom(1, 1, -74, -4)
 	InventoryEquipmentLarge:setWidgetType(CoD.WarzoneQuickInventoryItem)
 	InventoryEquipmentLarge:setHorizontalCount(3)
-	InventoryEquipmentLarge:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	InventoryEquipmentLarge:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	InventoryEquipmentLarge:registerEventHandler("list_active_changed", function(element, event)
 		local f2_local0 = nil
 		UpdateSelfElementState(f1_arg0, self.ArrowL, f1_arg1)
@@ -31,7 +31,7 @@ CoD.WarzoneContextualExtraItems.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	InventoryEquipmentSmall:setTopBottom(1, 1, -24, -8)
 	InventoryEquipmentSmall:setWidgetType(CoD.WarzoneInventoryItemGrayBox)
 	InventoryEquipmentSmall:setHorizontalCount(3)
-	InventoryEquipmentSmall:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	InventoryEquipmentSmall:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	self:addElement(InventoryEquipmentSmall)
 	self.InventoryEquipmentSmall = InventoryEquipmentSmall
 	local ArrowR = CoD.WarzoneContextualExtraItemsArrow.new(f1_arg0, f1_arg1, 0, 0, 282, 298, 0, 0, 48, 64)
@@ -95,7 +95,7 @@ CoD.WarzoneContextualExtraItems.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	})
 	local f1_local5 = self
 	local f1_local6 = self.subscribeToModel
-	local f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local6(f1_local5, f1_local7["hudItems.inventory.open"], function(f12_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -107,7 +107,7 @@ CoD.WarzoneContextualExtraItems.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	end, false)
 	f1_local5 = self
 	f1_local6 = self.subscribeToModel
-	f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local6(f1_local5, f1_local7.PlayerSettingsUpdate, function(f13_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -123,7 +123,7 @@ CoD.WarzoneContextualExtraItems.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	end)
 	f1_local5 = self
 	f1_local6 = self.subscribeToModel
-	f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local6(f1_local5, f1_local7.LastInput, function(f15_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

@@ -13,8 +13,8 @@ CoD.CommonToolTip.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 	textCenterAlign:setText("")
 	textCenterAlign:setTTF("dinnext_regular")
 	textCenterAlign:setLineSpacing(2)
-	textCenterAlign:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	textCenterAlign:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	textCenterAlign:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	textCenterAlign:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	textCenterAlign:setBackingType(1)
 	textCenterAlign:setBackingWidget(CoD.CommonToolTipBacking, f1_arg0, f1_arg1)
 	textCenterAlign:setBackingXPadding(20)
@@ -47,7 +47,7 @@ CoD.CommonToolTip.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 	end)
 	local f1_local2 = self
 	local f1_local3 = self.subscribeToModel
-	local f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local3(f1_local2, f1_local4.LastInput, function(f6_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

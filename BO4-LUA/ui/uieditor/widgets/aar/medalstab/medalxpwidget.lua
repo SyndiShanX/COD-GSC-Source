@@ -10,19 +10,19 @@ CoD.MedalXpWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local XpIcon = LUI.UIImage.new(0, 0, 0, 69, 0, 0, 0, 69)
-	XpIcon:setImage(RegisterImage(0x7B197CE33A5602C))
+	XpIcon:setImage(RegisterImage(@"uie_t7_hud_mp_notifications_xp"))
 	self:addElement(XpIcon)
 	self.XpIcon = XpIcon
 	local XpValue = LUI.UIText.new(0, 0, 84, 376, 0, 0, 12, 57)
 	XpValue:setRGB(0.98, 0.77, 0.2)
 	XpValue:setText("")
 	XpValue:setTTF("ttmussels_demibold")
-	XpValue:setMaterial(LUI.UIImage.GetCachedMaterial(0x90D57B1E92D39D7))
+	XpValue:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_90D57B1E92D39D7"))
 	XpValue:setShaderVector(0, 0.71, 0, 0, 0)
 	XpValue:setShaderVector(1, 0, 0, 0, 0)
 	XpValue:setShaderVector(2, 1, 0.88, 0.01, 0.12)
 	XpValue:setLetterSpacing(4)
-	XpValue:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	XpValue:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(XpValue)
 	self.XpValue = XpValue
 	local Notification2xpReward = CoD.Notification2xpReward.new(f1_arg0, f1_arg1, 0, 0, -2, 70, 0, 0, -2, 70)
@@ -31,7 +31,7 @@ CoD.MedalXpWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 	self.Notification2xpReward = Notification2xpReward
 	local MeritIcon = LUI.UIImage.new(0, 0, -1.5, 70.5, 0, 0, -1.5, 70.5)
 	MeritIcon:setAlpha(0)
-	MeritIcon:setImage(RegisterImage(0x411C56F228B2CE3))
+	MeritIcon:setImage(RegisterImage(@"ui_icon_wz_merrit_small"))
 	self:addElement(MeritIcon)
 	self.MeritIcon = MeritIcon
 	self:mergeStateConditions({
@@ -64,7 +64,7 @@ CoD.MedalXpWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 	})
 	local f1_local5 = self
 	local f1_local6 = self.subscribeToModel
-	local f1_local7 = Engine[0x8DF2E5447F384B9]()
+	local f1_local7 = Engine[@"getglobalmodel"]()
 	f1_local6(f1_local5, f1_local7["lobbyRoot.lobbyNav"], function(f5_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -111,7 +111,7 @@ CoD.MedalXpWidget.__clipsPerState = {
 			f8_arg0.XpIcon:setAlpha(0)
 			f8_arg0.clipFinished(f8_arg0.XpIcon)
 			f8_arg0.XpValue:completeAnimation()
-			f8_arg0.XpValue:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+			f8_arg0.XpValue:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 			f8_arg0.clipFinished(f8_arg0.XpValue)
 			f8_arg0.MeritIcon:completeAnimation()
 			f8_arg0.MeritIcon:setAlpha(1)

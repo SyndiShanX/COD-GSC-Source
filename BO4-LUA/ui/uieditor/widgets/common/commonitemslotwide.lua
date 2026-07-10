@@ -27,8 +27,8 @@ CoD.CommonItemSlotWide.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	self.CustomizeClassAdd = CustomizeClassAdd
 	local FocusGlow = LUI.UIImage.new(0, 1, -49, 49, 0, 1, -38, 38)
 	FocusGlow:setAlpha(0)
-	FocusGlow:setImage(RegisterImage(0xB8F10D49D85E9C4))
-	FocusGlow:setMaterial(LUI.UIImage.GetCachedMaterial(0xDAB59B2CAE01851))
+	FocusGlow:setImage(RegisterImage(@"uie_ui_menu_common_focus_glow_small"))
+	FocusGlow:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_6DAB59B2CAE01851"))
 	FocusGlow:setShaderVector(0, 0, 0, 0.25, 0.25)
 	FocusGlow:setShaderVector(1, 1.2, 0, 0, 0)
 	FocusGlow:setupNineSliceShader(100, 100)
@@ -36,16 +36,16 @@ CoD.CommonItemSlotWide.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	self.FocusGlow = FocusGlow
 	local NoiseTiledBacking = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	NoiseTiledBacking:setAlpha(0.5)
-	NoiseTiledBacking:setImage(RegisterImage(0x34839E8065B1E53))
-	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	NoiseTiledBacking:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	NoiseTiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	NoiseTiledBacking:setupNineSliceShader(196, 88)
 	self:addElement(NoiseTiledBacking)
 	self.NoiseTiledBacking = NoiseTiledBacking
 	local FrameBorder = LUI.UIImage.new(0, 1, -1, 1, 0, 1, -1, 1)
 	FrameBorder:setAlpha(0.15)
-	FrameBorder:setImage(RegisterImage(0x185E11D74ECA3D7))
-	FrameBorder:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	FrameBorder:setImage(RegisterImage(@"uie_ui_menu_store_common_frame"))
+	FrameBorder:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	FrameBorder:setShaderVector(0, 0, 0, 0, 0)
 	FrameBorder:setupNineSliceShader(12, 12)
 	self:addElement(FrameBorder)
@@ -57,8 +57,8 @@ CoD.CommonItemSlotWide.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	local FocusBorder = LUI.UIImage.new(0, 1, -4, 4, 0, 1, -3, 3)
 	FocusBorder:setRGB(0.96, 0.94, 0.78)
 	FocusBorder:setAlpha(0)
-	FocusBorder:setImage(RegisterImage(0xCB07CCC28498CB2))
-	FocusBorder:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	FocusBorder:setImage(RegisterImage(@"uie_ui_menu_store_focus_frame"))
+	FocusBorder:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	FocusBorder:setShaderVector(0, 0, 0, 0, 0)
 	FocusBorder:setupNineSliceShader(10, 10)
 	self:addElement(FocusBorder)
@@ -70,14 +70,14 @@ CoD.CommonItemSlotWide.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	self.FocusBrackets = FocusBrackets
 	local BGGlow = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	BGGlow:setAlpha(0.3)
-	BGGlow:setImage(RegisterImage(0xC270E906CDA1B2E))
-	BGGlow:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	BGGlow:setImage(RegisterImage(@"uie_ui_menu_common_button_bg_glow_large"))
+	BGGlow:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(BGGlow)
 	self.BGGlow = BGGlow
 	local BGDotPatternLarge = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	BGDotPatternLarge:setAlpha(0.01)
-	BGDotPatternLarge:setImage(RegisterImage(0xFC21A8215EA012B))
-	BGDotPatternLarge:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	BGDotPatternLarge:setImage(RegisterImage(@"hash_7FC21A8215EA012B"))
+	BGDotPatternLarge:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	BGDotPatternLarge:setShaderVector(0, 0, 0, 0, 0)
 	BGDotPatternLarge:setupNineSliceShader(4, 4)
 	self:addElement(BGDotPatternLarge)
@@ -85,19 +85,19 @@ CoD.CommonItemSlotWide.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	local EquippedMarkerBG = LUI.UIImage.new(1, 1, -38, 6, 0, 0, -6, 38)
 	EquippedMarkerBG:setAlpha(0)
 	EquippedMarkerBG:setZoom(4)
-	EquippedMarkerBG:setImage(RegisterImage(0x7AF532D84DE505A))
-	EquippedMarkerBG:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	EquippedMarkerBG:setImage(RegisterImage(@"uie_ui_menu_cac_equipped_marker_bg"))
+	EquippedMarkerBG:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(EquippedMarkerBG)
 	self.EquippedMarkerBG = EquippedMarkerBG
 	local EquippedMarkerTick = LUI.UIImage.new(1, 1, -38, 6, 0, 0, -6, 38)
 	EquippedMarkerTick:setAlpha(0)
 	EquippedMarkerTick:setZoom(4)
-	EquippedMarkerTick:setImage(RegisterImage(0x9A8B26C9B001758))
+	EquippedMarkerTick:setImage(RegisterImage(@"uie_ui_menu_cac_equipped_marker_tick"))
 	self:addElement(EquippedMarkerTick)
 	self.EquippedMarkerTick = EquippedMarkerTick
 	local ItemImage = LUI.UIFixedAspectRatioImage.new(0.5, 0.5, -131.5, 132.5, 0.5, 0.5, -45.5, 30.5)
 	ItemImage:setZoom(3)
-	ItemImage:setImage(RegisterImage(0xA0DD9D34201E1F3))
+	ItemImage:setImage(RegisterImage(@"t7_icon_weapon_ar_damage_pu"))
 	self:addElement(ItemImage)
 	self.ItemImage = ItemImage
 	local BreadcrumbNew = CoD.ItemNewBreadcrumbWidget.new(f1_arg0, f1_arg1, 0.5, 0.5, -78, 78, 0.5, 0.5, -18, 18)
@@ -138,7 +138,7 @@ CoD.CommonItemSlotWide.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	end)
 	local Image = ItemName
 	local LockedIcon = ItemName.subscribeToModel
-	local RestrictionIcon = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local RestrictionIcon = Engine[@"getmodelforcontroller"](f1_arg1)
 	LockedIcon(Image, RestrictionIcon.LastInput, function(f7_arg0)
 		f1_arg0:updateElementState(ItemName, {
 			name = "model_validation",
@@ -150,14 +150,14 @@ CoD.CommonItemSlotWide.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	end, false)
 	Image = ItemName
 	LockedIcon = ItemName.subscribeToModel
-	RestrictionIcon = Engine[0x4DF5CFBC1771947](f1_arg1)
-	LockedIcon(Image, RestrictionIcon["ButtonBits." .. Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC]], function(f8_arg0)
+	RestrictionIcon = Engine[@"getmodelforcontroller"](f1_arg1)
+	LockedIcon(Image, RestrictionIcon["ButtonBits." .. Enum[@"luibutton"][@"lui_key_ltrig"]], function(f8_arg0)
 		f1_arg0:updateElementState(ItemName, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f8_arg0:get(),
-			modelName = "ButtonBits." .. Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC],
+			modelName = "ButtonBits." .. Enum[@"luibutton"][@"lui_key_ltrig"],
 		})
 	end, false)
 	ItemName:setRGB(0.58, 0.58, 0.58)
@@ -165,7 +165,7 @@ CoD.CommonItemSlotWide.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	ItemName.TextBox:setText("")
 	ItemName.TextBox:setTTF("ttmussels_demibold")
 	ItemName.TextBox:setLetterSpacing(2)
-	ItemName.TextBox:setAlignment(Enum[0x7A5123B654282D2][0x70510683C22104B])
+	ItemName.TextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_bottom"])
 	ItemName.TextBox:setBackingAlpha(0.8)
 	ItemName.TextBox:setBackingXPadding(3)
 	self:addElement(ItemName)
@@ -173,12 +173,12 @@ CoD.CommonItemSlotWide.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	LockedIcon = LUI.UIImage.new(0.5, 0.5, -24, 24, 0.5, 0.5, -31, 17)
 	LockedIcon:setAlpha(0)
 	LockedIcon:setScale(0.55, 0.55)
-	LockedIcon:setImage(RegisterImage(0xB8AD8D12CEB707D))
+	LockedIcon:setImage(RegisterImage(@"uie_icon_locks_lock_01"))
 	self:addElement(LockedIcon)
 	self.LockedIcon = LockedIcon
 	Image = nil
 	Image = LUI.UIImage.new(0, 0, -3.5, 18.5, 0, 0, 122, 146)
-	Image:setImage(RegisterImage(0x7615068F50B3D66))
+	Image:setImage(RegisterImage(@"blacktransparent"))
 	self:addElement(Image)
 	self.Image = Image
 	RestrictionIcon = CoD.RestrictedItemWarning.new(f1_arg0, f1_arg1, 0.5, 0.5, -30, 30, 0.5, 0.5, -25, 25)
@@ -325,7 +325,7 @@ CoD.CommonItemSlotWide.__clipsPerState = {
 			f13_local2(f13_arg0.FocusBorder)
 			local f13_local3 = function(f18_arg0)
 				local f18_local0 = function(f19_arg0)
-					f19_arg0:beginAnimation(50, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f19_arg0:beginAnimation(50, Enum[@"luitween"][@"luitween_ease_out"])
 					f19_arg0:setAlpha(1)
 					f19_arg0:setScale(0.93, 0.84)
 					f19_arg0:registerEventHandler("transition_complete_keyframe", f13_arg0.clipFinished)
@@ -963,7 +963,7 @@ CoD.CommonItemSlotWide.__clipsPerState = {
 			f77_arg0.clipFinished(f77_arg0.Lines)
 			local f77_local1 = function(f79_arg0)
 				local f79_local0 = function(f80_arg0)
-					f80_arg0:beginAnimation(50, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f80_arg0:beginAnimation(50, Enum[@"luitween"][@"luitween_ease_both"])
 					f80_arg0:setAlpha(1)
 					f80_arg0:setScale(0.93, 0.84)
 					f80_arg0:registerEventHandler("transition_complete_keyframe", f77_arg0.clipFinished)
@@ -1392,7 +1392,7 @@ CoD.CommonItemSlotWide.__clipsPerState = {
 			f109_local3(f109_arg0.FocusBorder)
 			local f109_local4 = function(f115_arg0)
 				local f115_local0 = function(f116_arg0)
-					f116_arg0:beginAnimation(50, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f116_arg0:beginAnimation(50, Enum[@"luitween"][@"luitween_ease_out"])
 					f116_arg0:setAlpha(1)
 					f116_arg0:setScale(0.94, 0.84)
 					f116_arg0:registerEventHandler("transition_complete_keyframe", f109_arg0.clipFinished)

@@ -12,12 +12,12 @@ CoD.Prestige_LoadoutInfoRow.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	CategoryName:setAlpha(0.5)
 	CategoryName:setTTF("ttmussels_regular")
 	CategoryName:setLetterSpacing(1)
-	CategoryName:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
-	CategoryName:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	CategoryName:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
+	CategoryName:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	CategoryName:linkToElementModel(self, "loadoutEntryCategory", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			CategoryName:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			CategoryName:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	self:addElement(CategoryName)
@@ -26,12 +26,12 @@ CoD.Prestige_LoadoutInfoRow.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	EntryName:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
 	EntryName:setTTF("ttmussels_demibold")
 	EntryName:setLetterSpacing(1)
-	EntryName:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	EntryName:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	EntryName:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	EntryName:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	EntryName:linkToElementModel(self, "loadoutEntryName", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
-			EntryName:setText(Engine[0xF9F1239CFD921FE](f3_local0))
+			EntryName:setText(Engine[@"hash_4F9F1239CFD921FE"](f3_local0))
 		end
 	end)
 	self:addElement(EntryName)
@@ -54,9 +54,9 @@ CoD.Prestige_LoadoutInfoRow.__resetProperties = function(f5_arg0)
 	f5_arg0.CategoryName:completeAnimation()
 	f5_arg0.EntryName:completeAnimation()
 	f5_arg0.CategoryName:setLeftRight(0, 0, 0, 150)
-	f5_arg0.CategoryName:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
+	f5_arg0.CategoryName:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
 	f5_arg0.EntryName:setLeftRight(1, 1, -240, 0)
-	f5_arg0.EntryName:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	f5_arg0.EntryName:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 end
 CoD.Prestige_LoadoutInfoRow.__clipsPerState = {
 	DefaultState = {
@@ -71,11 +71,11 @@ CoD.Prestige_LoadoutInfoRow.__clipsPerState = {
 			f7_arg0:setupElementClipCounter(2)
 			f7_arg0.CategoryName:completeAnimation()
 			f7_arg0.CategoryName:setLeftRight(0, 0, 220, 400)
-			f7_arg0.CategoryName:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+			f7_arg0.CategoryName:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 			f7_arg0.clipFinished(f7_arg0.CategoryName)
 			f7_arg0.EntryName:completeAnimation()
 			f7_arg0.EntryName:setLeftRight(0, 0, 0, 210)
-			f7_arg0.EntryName:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
+			f7_arg0.EntryName:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
 			f7_arg0.clipFinished(f7_arg0.EntryName)
 		end,
 	},

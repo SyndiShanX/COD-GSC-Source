@@ -35,7 +35,7 @@ CoD.SupportSelectionOption.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	end)
 	local f1_local2 = self
 	local f1_local3 = self.subscribeToModel
-	local f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local3(f1_local2, f1_local4["ScorestreakSelect.UpdateEquipped"], function(f5_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -45,7 +45,7 @@ CoD.SupportSelectionOption.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 			modelName = "ScorestreakSelect.UpdateEquipped",
 		})
 	end, false)
-	self:AddContextualMenuAction(f1_arg0, f1_arg1, 0x679ACA6FFC6C8F3, function(f6_arg0, f6_arg1, f6_arg2, f6_arg3)
+	self:AddContextualMenuAction(f1_arg0, f1_arg1, @"menu/remove", function(f6_arg0, f6_arg1, f6_arg2, f6_arg3)
 		if CoD.ScorestreakSelectUtility.IsScorestreakEquipped(f6_arg0, f6_arg1, f6_arg2) and not CoD.ScorestreakSelectUtility.IsScorestreakLocked(f6_arg0, f6_arg1, f6_arg2) then
 			return function(f7_arg0, f7_arg1, f7_arg2, f7_arg3)
 				CoD.ScorestreakSelectUtility.RemoveScorestreakOption(self, f7_arg1, f7_arg2)
@@ -126,7 +126,7 @@ CoD.SupportSelectionOption.__clipsPerState = {
 			f17_arg0:__resetProperties()
 			f17_arg0:setupElementClipCounter(1)
 			local f17_local0 = function(f18_arg0)
-				f17_arg0.WeaponSelectGridItemInternal:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f17_arg0.WeaponSelectGridItemInternal:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f17_arg0.WeaponSelectGridItemInternal:setScale(1.05, 1.05)
 				f17_arg0.WeaponSelectGridItemInternal:registerEventHandler("interrupted_keyframe", f17_arg0.clipInterrupted)
 				f17_arg0.WeaponSelectGridItemInternal:registerEventHandler("transition_complete_keyframe", f17_arg0.clipFinished)
@@ -139,7 +139,7 @@ CoD.SupportSelectionOption.__clipsPerState = {
 			f19_arg0:__resetProperties()
 			f19_arg0:setupElementClipCounter(1)
 			local f19_local0 = function(f20_arg0)
-				f19_arg0.WeaponSelectGridItemInternal:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f19_arg0.WeaponSelectGridItemInternal:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f19_arg0.WeaponSelectGridItemInternal:setScale(1, 1)
 				f19_arg0.WeaponSelectGridItemInternal:registerEventHandler("interrupted_keyframe", f19_arg0.clipInterrupted)
 				f19_arg0.WeaponSelectGridItemInternal:registerEventHandler("transition_complete_keyframe", f19_arg0.clipFinished)

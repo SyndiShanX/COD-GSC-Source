@@ -21,18 +21,18 @@ CoD.vhud_agr_reticle.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local TextureOverlayGrid = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	TextureOverlayGrid:setAlpha(0.45)
-	TextureOverlayGrid:setImage(RegisterImage(0xFB2DE01772BF700))
+	TextureOverlayGrid:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_agr_textureoverlaygrid"))
 	self:addElement(TextureOverlayGrid)
 	self.TextureOverlayGrid = TextureOverlayGrid
 	local agrCenterPoint = LUI.UIImage.new(0.5, 0.5, -14, 10, 0.5, 0.5, -12, 12)
-	agrCenterPoint:setImage(RegisterImage(0x3784284ACA2BA36))
-	agrCenterPoint:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	agrCenterPoint:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_agr_centerpoint"))
+	agrCenterPoint:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(agrCenterPoint)
 	self.agrCenterPoint = agrCenterPoint
 	local agrCenterPoint0 = LUI.UIImage.new(0.5, 0.5, -14, 10, 0.5, 0.5, -12, 12)
 	agrCenterPoint0:setAlpha(0)
-	agrCenterPoint0:setImage(RegisterImage(0x3784284ACA2BA36))
-	agrCenterPoint0:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	agrCenterPoint0:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_agr_centerpoint"))
+	agrCenterPoint0:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(agrCenterPoint0)
 	self.agrCenterPoint0 = agrCenterPoint0
 	local vhudmsLockOnNotification = CoD.vhud_ms_LockOnNotification.new(f1_arg0, f1_arg1, 0.5, 0.5, -28, 32, 0.5, 0.5, -289, -229)
@@ -40,71 +40,71 @@ CoD.vhud_agr_reticle.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	self.vhudmsLockOnNotification = vhudmsLockOnNotification
 	local agrReticleOutsideDotsBlurUR = LUI.UIImage.new(0.5, 0.5, 391, 634, 0.5, 0.5, -193, -103)
 	agrReticleOutsideDotsBlurUR:setAlpha(0.5)
-	agrReticleOutsideDotsBlurUR:setImage(RegisterImage(0xD6286A94A8DEE8D))
-	agrReticleOutsideDotsBlurUR:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	agrReticleOutsideDotsBlurUR:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_agr_reticleoutsidedotsrgb"))
+	agrReticleOutsideDotsBlurUR:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(agrReticleOutsideDotsBlurUR)
 	self.agrReticleOutsideDotsBlurUR = agrReticleOutsideDotsBlurUR
 	local agrReticleOutsideDotsBlurUL = LUI.UIImage.new(0.5, 0.5, -623, -380, 0.5, 0.5, -193, -103)
 	agrReticleOutsideDotsBlurUL:setAlpha(0.53)
 	agrReticleOutsideDotsBlurUL:setYRot(-180)
-	agrReticleOutsideDotsBlurUL:setImage(RegisterImage(0xD6286A94A8DEE8D))
-	agrReticleOutsideDotsBlurUL:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	agrReticleOutsideDotsBlurUL:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_agr_reticleoutsidedotsrgb"))
+	agrReticleOutsideDotsBlurUL:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(agrReticleOutsideDotsBlurUL)
 	self.agrReticleOutsideDotsBlurUL = agrReticleOutsideDotsBlurUL
 	local agrReticleOutsideDotsBlurLR = LUI.UIImage.new(0.5, 0.5, 390, 633, 0.5, 0.5, 113, 203)
 	agrReticleOutsideDotsBlurLR:setAlpha(0.53)
 	agrReticleOutsideDotsBlurLR:setXRot(-180)
-	agrReticleOutsideDotsBlurLR:setImage(RegisterImage(0xD6286A94A8DEE8D))
-	agrReticleOutsideDotsBlurLR:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	agrReticleOutsideDotsBlurLR:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_agr_reticleoutsidedotsrgb"))
+	agrReticleOutsideDotsBlurLR:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(agrReticleOutsideDotsBlurLR)
 	self.agrReticleOutsideDotsBlurLR = agrReticleOutsideDotsBlurLR
 	local agrReticleOutsideDotsBlurLL = LUI.UIImage.new(0.5, 0.5, -606, -363, 0.5, 0.5, 113, 203)
 	agrReticleOutsideDotsBlurLL:setAlpha(0.53)
 	agrReticleOutsideDotsBlurLL:setXRot(-180)
 	agrReticleOutsideDotsBlurLL:setYRot(-180)
-	agrReticleOutsideDotsBlurLL:setImage(RegisterImage(0xD6286A94A8DEE8D))
-	agrReticleOutsideDotsBlurLL:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	agrReticleOutsideDotsBlurLL:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_agr_reticleoutsidedotsrgb"))
+	agrReticleOutsideDotsBlurLL:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(agrReticleOutsideDotsBlurLL)
 	self.agrReticleOutsideDotsBlurLL = agrReticleOutsideDotsBlurLL
 	local agrReticleFocusBlurL = LUI.UIImage.new(0.5, 0.5, -441, -173, 0.5, 0.5, -139.5, 139.5)
 	agrReticleFocusBlurL:setAlpha(0.35)
 	agrReticleFocusBlurL:setYRot(-180)
-	agrReticleFocusBlurL:setImage(RegisterImage(0x1A4DD47A70C3880))
-	agrReticleFocusBlurL:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	agrReticleFocusBlurL:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_agr_reticlefocusblur"))
+	agrReticleFocusBlurL:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(agrReticleFocusBlurL)
 	self.agrReticleFocusBlurL = agrReticleFocusBlurL
 	local agrReticleFocusBlurR = LUI.UIImage.new(0.5, 0.5, 183, 451, 0.5, 0.5, -139.5, 139.5)
 	agrReticleFocusBlurR:setAlpha(0.35)
-	agrReticleFocusBlurR:setImage(RegisterImage(0x1A4DD47A70C3880))
-	agrReticleFocusBlurR:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	agrReticleFocusBlurR:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_agr_reticlefocusblur"))
+	agrReticleFocusBlurR:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(agrReticleFocusBlurR)
 	self.agrReticleFocusBlurR = agrReticleFocusBlurR
 	local Image0 = LUI.UIImage.new(0.5, 0.5, 444, 749, 0.5, 0.5, -466, -229)
 	Image0:setAlpha(0.15)
-	Image0:setImage(RegisterImage(0xE73C388F701F405))
-	Image0:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Image0:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_agr_reticleoutsidelineblur"))
+	Image0:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Image0)
 	self.Image0 = Image0
 	local Image1 = LUI.UIImage.new(0.5, 0.5, 444, 749, 0.5, 0.5, 225, 462)
 	Image1:setAlpha(0.15)
 	Image1:setXRot(-180)
-	Image1:setImage(RegisterImage(0xE73C388F701F405))
-	Image1:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Image1:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_agr_reticleoutsidelineblur"))
+	Image1:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Image1)
 	self.Image1 = Image1
 	local Image2 = LUI.UIImage.new(0.5, 0.5, -774, -469, 0.5, 0.5, -466, -229)
 	Image2:setAlpha(0.15)
 	Image2:setYRot(180)
-	Image2:setImage(RegisterImage(0xE73C388F701F405))
-	Image2:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Image2:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_agr_reticleoutsidelineblur"))
+	Image2:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Image2)
 	self.Image2 = Image2
 	local Image3 = LUI.UIImage.new(0.5, 0.5, -774, -469, 0.5, 0.5, 225, 462)
 	Image3:setAlpha(0.15)
 	Image3:setXRot(180)
 	Image3:setYRot(180)
-	Image3:setImage(RegisterImage(0xE73C388F701F405))
-	Image3:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Image3:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_agr_reticleoutsidelineblur"))
+	Image3:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Image3)
 	self.Image3 = Image3
 	local vhudagrReticleFocusFrameRight = CoD.vhud_agr_ReticleFocusFrameRight.new(f1_arg0, f1_arg1, 0.5, 0.5, 96, 337, 0.5, 0.5, -66.5, 66.5)
@@ -183,20 +183,20 @@ CoD.vhud_agr_reticle.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 		{
 			stateName = "Visible",
 			condition = function(menu, element, event)
-				return Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xADC477DDE486DD7])
+				return Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_hud_visible"])
 			end,
 		},
 	})
 	local f1_local34 = genericVHUDReticleOverlay
 	local TankUseString = genericVHUDReticleOverlay.subscribeToModel
-	local f1_local36 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	TankUseString(f1_local34, f1_local36["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xADC477DDE486DD7]], function(f3_arg0)
+	local f1_local36 = Engine[@"getmodelforcontroller"](f1_arg1)
+	TankUseString(f1_local34, f1_local36["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_hud_visible"]], function(f3_arg0)
 		f1_arg0:updateElementState(genericVHUDReticleOverlay, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f3_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xADC477DDE486DD7],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_hud_visible"],
 		})
 	end, false)
 	genericVHUDReticleOverlay:linkToElementModel(self, nil, false, function(model)
@@ -251,7 +251,7 @@ CoD.vhud_agr_reticle.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	})
 	f1_local36 = TankUseString
 	f1_local34 = TankUseString.subscribeToModel
-	local f1_local37 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local37 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local34(f1_local36, f1_local37["hudItems.tankState"], function(f10_arg0)
 		f1_arg0:updateElementState(TankUseString, {
 			name = "model_validation",
@@ -263,7 +263,7 @@ CoD.vhud_agr_reticle.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	end, false)
 	f1_local36 = TankUseString
 	f1_local34 = TankUseString.subscribeToModel
-	f1_local37 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local37 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local34(f1_local36, f1_local37["hudItems.smartCoverState"], function(f11_arg0)
 		f1_arg0:updateElementState(TankUseString, {
 			name = "model_validation",
@@ -279,7 +279,7 @@ CoD.vhud_agr_reticle.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	end)
 	f1_local36 = TankUseString
 	f1_local34 = TankUseString.subscribeToModel
-	f1_local37 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local37 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local34(f1_local36, f1_local37.LastInput, function(f13_arg0)
 		f1_arg0:updateElementState(TankUseString, {
 			name = "model_validation",
@@ -469,7 +469,7 @@ CoD.vhud_agr_reticle.__clipsPerState = {
 						f23_arg0:setAlpha(0)
 						f23_arg0:registerEventHandler("transition_complete_keyframe", f23_local0)
 					end
-					f22_arg0:beginAnimation(299, Enum[0xF50FFF429AB1890][0xE99F3A6467FC0CA] | Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f22_arg0:beginAnimation(299, Enum[@"luitween"][@"luitween_back"] | Enum[@"luitween"][@"luitween_ease_in"])
 					f22_arg0:setAlpha(0.5)
 					f22_arg0:registerEventHandler("transition_complete_keyframe", f22_local0)
 				end
@@ -493,7 +493,7 @@ CoD.vhud_agr_reticle.__clipsPerState = {
 					f26_arg0:setAlpha(0)
 					f26_arg0:registerEventHandler("transition_complete_keyframe", f26_local0)
 				end
-				f25_arg0:beginAnimation(299, Enum[0xF50FFF429AB1890][0xE99F3A6467FC0CA] | Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f25_arg0:beginAnimation(299, Enum[@"luitween"][@"luitween_back"] | Enum[@"luitween"][@"luitween_ease_in"])
 				f25_arg0:setAlpha(0.5)
 				f25_arg0:registerEventHandler("transition_complete_keyframe", f25_local0)
 			end
@@ -512,7 +512,7 @@ CoD.vhud_agr_reticle.__clipsPerState = {
 					f29_arg0:setAlpha(0)
 					f29_arg0:registerEventHandler("transition_complete_keyframe", f29_local0)
 				end
-				f28_arg0:beginAnimation(299, Enum[0xF50FFF429AB1890][0xE99F3A6467FC0CA] | Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f28_arg0:beginAnimation(299, Enum[@"luitween"][@"luitween_back"] | Enum[@"luitween"][@"luitween_ease_in"])
 				f28_arg0:setAlpha(0.5)
 				f28_arg0:registerEventHandler("transition_complete_keyframe", f28_local0)
 			end
@@ -532,7 +532,7 @@ CoD.vhud_agr_reticle.__clipsPerState = {
 						f33_arg0:setAlpha(0)
 						f33_arg0:registerEventHandler("transition_complete_keyframe", f33_local0)
 					end
-					f32_arg0:beginAnimation(299, Enum[0xF50FFF429AB1890][0xE99F3A6467FC0CA] | Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f32_arg0:beginAnimation(299, Enum[@"luitween"][@"luitween_back"] | Enum[@"luitween"][@"luitween_ease_in"])
 					f32_arg0:setAlpha(0.5)
 					f32_arg0:registerEventHandler("transition_complete_keyframe", f32_local0)
 				end
@@ -546,7 +546,7 @@ CoD.vhud_agr_reticle.__clipsPerState = {
 			f16_arg0.agrReticleOutsideDotsBlurLL:setAlpha(0)
 			f16_local6(f16_arg0.agrReticleOutsideDotsBlurLL)
 			local f16_local7 = function(f35_arg0)
-				f16_arg0.agrReticleFocusBlurL:beginAnimation(490, Enum[0xF50FFF429AB1890][0xE99F3A6467FC0CA] | Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f16_arg0.agrReticleFocusBlurL:beginAnimation(490, Enum[@"luitween"][@"luitween_back"] | Enum[@"luitween"][@"luitween_ease_in"])
 				f16_arg0.agrReticleFocusBlurL:setLeftRight(0.5, 0.5, -440, -172)
 				f16_arg0.agrReticleFocusBlurL:setAlpha(0.35)
 				f16_arg0.agrReticleFocusBlurL:registerEventHandler("interrupted_keyframe", f16_arg0.clipInterrupted)
@@ -558,7 +558,7 @@ CoD.vhud_agr_reticle.__clipsPerState = {
 			f16_arg0.agrReticleFocusBlurL:setAlpha(0)
 			f16_local7(f16_arg0.agrReticleFocusBlurL)
 			local f16_local8 = function(f36_arg0)
-				f16_arg0.agrReticleFocusBlurR:beginAnimation(490, Enum[0xF50FFF429AB1890][0xE99F3A6467FC0CA] | Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f16_arg0.agrReticleFocusBlurR:beginAnimation(490, Enum[@"luitween"][@"luitween_back"] | Enum[@"luitween"][@"luitween_ease_in"])
 				f16_arg0.agrReticleFocusBlurR:setLeftRight(0.5, 0.5, 184, 452)
 				f16_arg0.agrReticleFocusBlurR:setAlpha(0.35)
 				f16_arg0.agrReticleFocusBlurR:registerEventHandler("interrupted_keyframe", f16_arg0.clipInterrupted)
@@ -642,7 +642,7 @@ CoD.vhud_agr_reticle.__clipsPerState = {
 					f42_arg0:setAlpha(0.15)
 					f42_arg0:registerEventHandler("transition_complete_keyframe", f42_local0)
 				end
-				f16_arg0.vhudagrReticleFocusFrameRight:beginAnimation(490, Enum[0xF50FFF429AB1890][0xE99F3A6467FC0CA] | Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f16_arg0.vhudagrReticleFocusFrameRight:beginAnimation(490, Enum[@"luitween"][@"luitween_back"] | Enum[@"luitween"][@"luitween_ease_in"])
 				f16_arg0.vhudagrReticleFocusFrameRight:setLeftRight(0.5, 0.5, 96, 337)
 				f16_arg0.vhudagrReticleFocusFrameRight:setAlpha(0.5)
 				f16_arg0.vhudagrReticleFocusFrameRight:registerEventHandler("interrupted_keyframe", f16_arg0.clipInterrupted)
@@ -674,7 +674,7 @@ CoD.vhud_agr_reticle.__clipsPerState = {
 					f47_arg0:setAlpha(0.15)
 					f47_arg0:registerEventHandler("transition_complete_keyframe", f47_local0)
 				end
-				f16_arg0.vhudagrReticleFocusFrameLeft:beginAnimation(490, Enum[0xF50FFF429AB1890][0xE99F3A6467FC0CA] | Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f16_arg0.vhudagrReticleFocusFrameLeft:beginAnimation(490, Enum[@"luitween"][@"luitween_back"] | Enum[@"luitween"][@"luitween_ease_in"])
 				f16_arg0.vhudagrReticleFocusFrameLeft:setLeftRight(0.5, 0.5, -347, -106)
 				f16_arg0.vhudagrReticleFocusFrameLeft:setAlpha(0.5)
 				f16_arg0.vhudagrReticleFocusFrameLeft:registerEventHandler("interrupted_keyframe", f16_arg0.clipInterrupted)
@@ -745,7 +745,7 @@ CoD.vhud_agr_reticle.__clipsPerState = {
 						f61_arg0:setAlpha(0)
 						f61_arg0:registerEventHandler("transition_complete_keyframe", f61_local0)
 					end
-					f60_arg0:beginAnimation(299, Enum[0xF50FFF429AB1890][0xE99F3A6467FC0CA] | Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f60_arg0:beginAnimation(299, Enum[@"luitween"][@"luitween_back"] | Enum[@"luitween"][@"luitween_ease_in"])
 					f60_arg0:setLeftRight(0.5, 0.5, 260, 367)
 					f60_arg0:setTopBottom(0.5, 0.5, -264, -180)
 					f60_arg0:setAlpha(0.7)
@@ -914,7 +914,7 @@ CoD.vhud_agr_reticle.__clipsPerState = {
 						f89_arg0:setAlpha(0)
 						f89_arg0:registerEventHandler("transition_complete_keyframe", f89_local0)
 					end
-					f88_arg0:beginAnimation(249, Enum[0xF50FFF429AB1890][0xE99F3A6467FC0CA] | Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f88_arg0:beginAnimation(249, Enum[@"luitween"][@"luitween_back"] | Enum[@"luitween"][@"luitween_ease_in"])
 					f88_arg0:setLeftRight(0.5, 0.5, 27, 53)
 					f88_arg0:setAlpha(1)
 					f88_arg0:registerEventHandler("transition_complete_keyframe", f88_local0)
@@ -940,7 +940,7 @@ CoD.vhud_agr_reticle.__clipsPerState = {
 						f93_arg0:setAlpha(0)
 						f93_arg0:registerEventHandler("transition_complete_keyframe", f93_local0)
 					end
-					f92_arg0:beginAnimation(249, Enum[0xF50FFF429AB1890][0xE99F3A6467FC0CA] | Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f92_arg0:beginAnimation(249, Enum[@"luitween"][@"luitween_back"] | Enum[@"luitween"][@"luitween_ease_in"])
 					f92_arg0:setLeftRight(0.5, 0.5, -53, -27)
 					f92_arg0:setAlpha(1)
 					f92_arg0:registerEventHandler("transition_complete_keyframe", f92_local0)
@@ -966,7 +966,7 @@ CoD.vhud_agr_reticle.__clipsPerState = {
 						f97_arg0:setAlpha(0)
 						f97_arg0:registerEventHandler("transition_complete_keyframe", f97_local0)
 					end
-					f96_arg0:beginAnimation(299, Enum[0xF50FFF429AB1890][0xE99F3A6467FC0CA] | Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f96_arg0:beginAnimation(299, Enum[@"luitween"][@"luitween_back"] | Enum[@"luitween"][@"luitween_ease_in"])
 					f96_arg0:setLeftRight(0.5, 0.5, -376, -269)
 					f96_arg0:setTopBottom(0.5, 0.5, -267, -183)
 					f96_arg0:setAlpha(0.7)
@@ -993,7 +993,7 @@ CoD.vhud_agr_reticle.__clipsPerState = {
 						f101_arg0:setAlpha(0)
 						f101_arg0:registerEventHandler("transition_complete_keyframe", f101_local0)
 					end
-					f100_arg0:beginAnimation(299, Enum[0xF50FFF429AB1890][0xE99F3A6467FC0CA] | Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f100_arg0:beginAnimation(299, Enum[@"luitween"][@"luitween_back"] | Enum[@"luitween"][@"luitween_ease_in"])
 					f100_arg0:setLeftRight(0.5, 0.5, 256, 363)
 					f100_arg0:setTopBottom(0.5, 0.5, 186, 270)
 					f100_arg0:setAlpha(0.7)
@@ -1020,7 +1020,7 @@ CoD.vhud_agr_reticle.__clipsPerState = {
 						f105_arg0:setAlpha(0)
 						f105_arg0:registerEventHandler("transition_complete_keyframe", f105_local0)
 					end
-					f104_arg0:beginAnimation(299, Enum[0xF50FFF429AB1890][0xE99F3A6467FC0CA] | Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f104_arg0:beginAnimation(299, Enum[@"luitween"][@"luitween_back"] | Enum[@"luitween"][@"luitween_ease_in"])
 					f104_arg0:setLeftRight(0.5, 0.5, -372, -265)
 					f104_arg0:setTopBottom(0.5, 0.5, 183, 266)
 					f104_arg0:setAlpha(0.7)
@@ -1037,7 +1037,7 @@ CoD.vhud_agr_reticle.__clipsPerState = {
 			f16_local28(f16_arg0.vhudagrReticleOutsideLine2)
 			local f16_local29 = function(f107_arg0)
 				local f107_local0 = function(f108_arg0)
-					f108_arg0:beginAnimation(249, Enum[0xF50FFF429AB1890][0xE99F3A6467FC0CA] | Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f108_arg0:beginAnimation(249, Enum[@"luitween"][@"luitween_back"] | Enum[@"luitween"][@"luitween_ease_in"])
 					f108_arg0:setLeftRight(0.5, 0.5, 27, 53)
 					f108_arg0:setAlpha(1)
 					f108_arg0:registerEventHandler("transition_complete_keyframe", f16_arg0.clipFinished)
@@ -1053,7 +1053,7 @@ CoD.vhud_agr_reticle.__clipsPerState = {
 			f16_local29(f16_arg0.vhudagrReticleCenterHairline1)
 			local f16_local30 = function(f109_arg0)
 				local f109_local0 = function(f110_arg0)
-					f110_arg0:beginAnimation(249, Enum[0xF50FFF429AB1890][0xE99F3A6467FC0CA] | Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f110_arg0:beginAnimation(249, Enum[@"luitween"][@"luitween_back"] | Enum[@"luitween"][@"luitween_ease_in"])
 					f110_arg0:setLeftRight(0.5, 0.5, -53, -27)
 					f110_arg0:setAlpha(1)
 					f110_arg0:registerEventHandler("transition_complete_keyframe", f16_arg0.clipFinished)

@@ -7,7 +7,7 @@ CoD.TextBackingCommonWithBlur.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self.id = "TextBackingCommonWithBlur"
 	self.soundSet = "default"
 	local BlurBG = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	BlurBG:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	BlurBG:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	BlurBG:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(BlurBG)
 	self.BlurBG = BlurBG
@@ -17,23 +17,23 @@ CoD.TextBackingCommonWithBlur.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self:addElement(Base)
 	self.Base = Base
 	local PipBL = LUI.UIImage.new(0, 0, -4, 4, 1, 1, -4, 4)
-	PipBL:setImage(RegisterImage(0xAC3234E1F71D1D6))
-	PipBL:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	PipBL:setImage(RegisterImage(@"uie_hud_common_corner_pip"))
+	PipBL:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(PipBL)
 	self.PipBL = PipBL
 	local PipTL = LUI.UIImage.new(0, 0, -4, 4, 0, 0, -4, 4)
-	PipTL:setImage(RegisterImage(0xAC3234E1F71D1D6))
-	PipTL:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	PipTL:setImage(RegisterImage(@"uie_hud_common_corner_pip"))
+	PipTL:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(PipTL)
 	self.PipTL = PipTL
 	local PipTR = LUI.UIImage.new(1, 1, -4, 4, 0, 0, -4, 4)
-	PipTR:setImage(RegisterImage(0xAC3234E1F71D1D6))
-	PipTR:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	PipTR:setImage(RegisterImage(@"uie_hud_common_corner_pip"))
+	PipTR:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(PipTR)
 	self.PipTR = PipTR
 	local PipBR = LUI.UIImage.new(1, 1, -4, 4, 1, 1, -4, 4)
-	PipBR:setImage(RegisterImage(0xAC3234E1F71D1D6))
-	PipBR:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	PipBR:setImage(RegisterImage(@"uie_hud_common_corner_pip"))
+	PipBR:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(PipBR)
 	self.PipBR = PipBR
 	if PostLoadFunc then

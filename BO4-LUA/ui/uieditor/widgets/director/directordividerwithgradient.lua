@@ -7,7 +7,7 @@ CoD.DirectorDividerWithGradient.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self.id = "DirectorDividerWithGradient"
 	self.soundSet = "none"
 	local Divider = LUI.UIImage.new(0, 1, 0, 0, 0, 0, 0, 1)
-	Divider:setMaterial(LUI.UIImage.GetCachedMaterial(0xE992BD5A540E2D))
+	Divider:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_delta_normal"))
 	Divider:setShaderVector(0, 0, 1, 0, 0)
 	Divider:setShaderVector(1, 0, 0.5, 0, 0)
 	Divider:setShaderVector(2, 0, 1, 0, 0)

@@ -9,7 +9,7 @@ CoD.ScrStk_CombatEfficiencyBackGlow.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Image0 = LUI.UIImage.new(0, 0, 0, 318, 0, 0, 0, 370)
 	Image0:setRGB(0, 0.46, 1)
-	Image0:setImage(RegisterImage(0x5BE416E17DAB33B))
+	Image0:setImage(RegisterImage(@"uie_t7_core_hud_mapwidget_panelglow"))
 	self:addElement(Image0)
 	self.Image0 = Image0
 	self:mergeStateConditions({
@@ -63,11 +63,11 @@ CoD.ScrStk_CombatEfficiencyBackGlow.__clipsPerState = {
 			f7_arg0:setupElementClipCounter(1)
 			local f7_local0 = function(f8_arg0)
 				local f8_local0 = function(f9_arg0)
-					f9_arg0:beginAnimation(1790, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735])
+					f9_arg0:beginAnimation(1790, Enum[@"luitween"][@"luitween_bounce"])
 					f9_arg0:setAlpha(0)
 					f9_arg0:registerEventHandler("transition_complete_keyframe", f7_arg0.clipFinished)
 				end
-				f7_arg0.Image0:beginAnimation(190, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735])
+				f7_arg0.Image0:beginAnimation(190, Enum[@"luitween"][@"luitween_bounce"])
 				f7_arg0.Image0:setAlpha(1)
 				f7_arg0.Image0:registerEventHandler("interrupted_keyframe", f7_arg0.clipInterrupted)
 				f7_arg0.Image0:registerEventHandler("transition_complete_keyframe", f8_local0)

@@ -8,7 +8,7 @@ CoD.ChargerShot_Active_Center.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self.soundSet = "ChooseDecal"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Image0 = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	Image0:setImage(RegisterImage(0x95D78ACBAA9028C))
+	Image0:setImage(RegisterImage(@"uie_t7_hud_chargeshot_active_center"))
 	self:addElement(Image0)
 	self.Image0 = Image0
 	if PostLoadFunc then

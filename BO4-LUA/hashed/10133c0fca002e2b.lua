@@ -8,8 +8,8 @@ CoD.ui_icon_callingcards_fairytales_flame1.new = function(f1_arg0, f1_arg1, f1_a
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local fire = LUI.UIImage.new(0, 0, -220, 20, 0, 0, -92, 84)
-	fire:setImage(RegisterImage(0xFA81D113F99B252))
-	fire:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	fire:setImage(RegisterImage(@"uie_ui_icon_callingcards_fairytale_fire"))
+	fire:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(fire)
 	self.fire = fire
 	if PostLoadFunc then

@@ -9,7 +9,7 @@ CoD.codcaster_player_portrait_frames.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local frameLarge = LUI.UIImage.new(0, 0, 0, 132, 0, 0, 0, 156)
 	frameLarge:setAlpha(0)
-	frameLarge:setImage(RegisterImage(0xC8D12F1E779001C))
+	frameLarge:setImage(RegisterImage(@"hash_5C8D12F1E779001C"))
 	frameLarge:linkToElementModel(self, "clientNum", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -21,12 +21,12 @@ CoD.codcaster_player_portrait_frames.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	local frameLargeDead = LUI.UIImage.new(0, 0, 0, 132, 0, 0, 0, 156)
 	frameLargeDead:setRGB(ColorSet.T8__OFF__GRAY.r, ColorSet.T8__OFF__GRAY.g, ColorSet.T8__OFF__GRAY.b)
 	frameLargeDead:setAlpha(0)
-	frameLargeDead:setImage(RegisterImage(0xC8D12F1E779001C))
+	frameLargeDead:setImage(RegisterImage(@"hash_5C8D12F1E779001C"))
 	self:addElement(frameLargeDead)
 	self.frameLargeDead = frameLargeDead
 	local frameMedium = LUI.UIImage.new(0.5, 0.5, -66, 66, 0, 0, 0, 124)
 	frameMedium:setAlpha(0)
-	frameMedium:setImage(RegisterImage(0xE36BFACD2F7ECBC))
+	frameMedium:setImage(RegisterImage(@"hash_1E36BFACD2F7ECBC"))
 	frameMedium:linkToElementModel(self, "clientNum", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -38,11 +38,11 @@ CoD.codcaster_player_portrait_frames.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	local frameMediumDead = LUI.UIImage.new(0.5, 0.5, -66, 66, 0, 0, 0, 124)
 	frameMediumDead:setRGB(ColorSet.T8__OFF__GRAY.r, ColorSet.T8__OFF__GRAY.g, ColorSet.T8__OFF__GRAY.b)
 	frameMediumDead:setAlpha(0)
-	frameMediumDead:setImage(RegisterImage(0xE36BFACD2F7ECBC))
+	frameMediumDead:setImage(RegisterImage(@"hash_1E36BFACD2F7ECBC"))
 	self:addElement(frameMediumDead)
 	self.frameMediumDead = frameMediumDead
 	local frameSmall = LUI.UIImage.new(0, 0, 0, 132, 0, 0, 0, 92)
-	frameSmall:setImage(RegisterImage(0xCF38A5FC3EF32E4))
+	frameSmall:setImage(RegisterImage(@"hash_2CF38A5FC3EF32E4"))
 	frameSmall:linkToElementModel(self, "clientNum", true, function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
@@ -54,7 +54,7 @@ CoD.codcaster_player_portrait_frames.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	local frameSmallDead = LUI.UIImage.new(0, 0, 0, 132, 0, 0, 0, 92)
 	frameSmallDead:setRGB(ColorSet.T8__OFF__GRAY.r, ColorSet.T8__OFF__GRAY.g, ColorSet.T8__OFF__GRAY.b)
 	frameSmallDead:setAlpha(0)
-	frameSmallDead:setImage(RegisterImage(0xCF38A5FC3EF32E4))
+	frameSmallDead:setImage(RegisterImage(@"hash_2CF38A5FC3EF32E4"))
 	self:addElement(frameSmallDead)
 	self.frameSmallDead = frameSmallDead
 	self:mergeStateConditions({

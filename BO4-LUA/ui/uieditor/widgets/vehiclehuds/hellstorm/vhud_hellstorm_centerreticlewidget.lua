@@ -13,22 +13,22 @@ CoD.vhud_hellstorm_CenterReticleWidget.new = function(f1_arg0, f1_arg1, f1_arg2,
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Backing1 = LUI.UIImage.new(0, 0, 11, 110, 0, 0, 11, 110)
 	Backing1:setAlpha(0.8)
-	Backing1:setImage(RegisterImage(0x3C16EC027BEA49E))
+	Backing1:setImage(RegisterImage(@"uie_ui_hud_vehicle_hellstorm_centerbacking"))
 	self:addElement(Backing1)
 	self.Backing1 = Backing1
 	local Backing2 = LUI.UIImage.new(0, 0, 209, 110, 0, 0, 11, 110)
 	Backing2:setAlpha(0.8)
-	Backing2:setImage(RegisterImage(0x3C16EC027BEA49E))
+	Backing2:setImage(RegisterImage(@"uie_ui_hud_vehicle_hellstorm_centerbacking"))
 	self:addElement(Backing2)
 	self.Backing2 = Backing2
 	local Backing3 = LUI.UIImage.new(0, 0, 11, 110, 0, 0, 209, 110)
 	Backing3:setAlpha(0.8)
-	Backing3:setImage(RegisterImage(0x3C16EC027BEA49E))
+	Backing3:setImage(RegisterImage(@"uie_ui_hud_vehicle_hellstorm_centerbacking"))
 	self:addElement(Backing3)
 	self.Backing3 = Backing3
 	local Backing4 = LUI.UIImage.new(0, 0, 209, 110, 0, 0, 209, 110)
 	Backing4:setAlpha(0.8)
-	Backing4:setImage(RegisterImage(0x3C16EC027BEA49E))
+	Backing4:setImage(RegisterImage(@"uie_ui_hud_vehicle_hellstorm_centerbacking"))
 	self:addElement(Backing4)
 	self.Backing4 = Backing4
 	local RingSmall = CoD.vhud_HellstormRingSmall.new(f1_arg0, f1_arg1, 0, 0, 60, 160, 0, 0, 60, 160)

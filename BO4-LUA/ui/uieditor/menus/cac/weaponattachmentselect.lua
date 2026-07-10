@@ -38,15 +38,15 @@ LUI.createMenu.WeaponAttachmentSelect = function(f1_arg0, f1_arg1)
 	AttachmentName:setRGB(0.92, 0.89, 0.72)
 	AttachmentName:setTTF("ttmussels_demibold")
 	AttachmentName:setLetterSpacing(14)
-	AttachmentName:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	AttachmentName:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	AttachmentName:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	AttachmentName:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(AttachmentName)
 	self.AttachmentName = AttachmentName
 	local AttachmentDescription = LUI.UIText.new(0.5, 0.5, -790, -315, 0, 0, 540, 558)
 	AttachmentDescription:setRGB(0.8, 0.79, 0.78)
 	AttachmentDescription:setTTF("dinnext_regular")
-	AttachmentDescription:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	AttachmentDescription:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	AttachmentDescription:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	AttachmentDescription:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(AttachmentDescription)
 	self.AttachmentDescription = AttachmentDescription
 	local UnlockDescription = CoD.onOffText.new(f1_local1, f1_arg0, 0.5, 0.5, -793, -446, 0, 0, 451, 469)
@@ -75,12 +75,12 @@ LUI.createMenu.WeaponAttachmentSelect = function(f1_arg0, f1_arg1)
 	self:addElement(DirectorDividerWithGradient)
 	self.DirectorDividerWithGradient = DirectorDividerWithGradient
 	local CACHeader = CoD.CACHeader.new(f1_local1, f1_arg0, 0.5, 0.5, -960, 960, 0, 0, 0, 67)
-	CACHeader.subtitle.StageTitle:setText(LocalizeToUpperString(0x560ECCA7484F00E))
+	CACHeader.subtitle.StageTitle:setText(LocalizeToUpperString(@"hash_7560ECCA7484F00E"))
 	CACHeader.subtitle.subtitle:setAlpha(0)
 	CACHeader:subscribeToGlobalModel(f1_arg0, "LobbyRoot", "lobbyTitle", function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
-			CACHeader.subtitle.subtitle:setText(Engine[0xF9F1239CFD921FE](f4_local0))
+			CACHeader.subtitle.subtitle:setText(Engine[@"hash_4F9F1239CFD921FE"](f4_local0))
 		end
 	end)
 	CACHeader:linkToElementModel(self, nil, false, function(model)
@@ -166,7 +166,7 @@ LUI.createMenu.WeaponAttachmentSelect = function(f1_arg0, f1_arg1)
 	AttachmentName:linkToElementModel(WeaponAttachmentContainer.GeneralAttachmentContainer.AttachmentList, "displayName", true, function(model)
 		local f11_local0 = model:get()
 		if f11_local0 ~= nil then
-			AttachmentName:setText(Engine[0xF9F1239CFD921FE](f11_local0))
+			AttachmentName:setText(Engine[@"hash_4F9F1239CFD921FE"](f11_local0))
 		end
 	end)
 	AttachmentDescription:linkToElementModel(WeaponAttachmentContainer.GeneralAttachmentContainer.AttachmentList, "description", true, function(model)
@@ -181,7 +181,7 @@ LUI.createMenu.WeaponAttachmentSelect = function(f1_arg0, f1_arg1)
 	UnlockDescription:linkToElementModel(WeaponAttachmentContainer.GeneralAttachmentContainer.AttachmentList, "itemIndex", true, function(model)
 		local f14_local0 = model:get()
 		if f14_local0 ~= nil then
-			UnlockDescription.TextBox:setText(Engine[0xF9F1239CFD921FE](CoD.CACUtility.GetAttachmentUnlockDescription(f1_local1, f1_arg0, f14_local0)))
+			UnlockDescription.TextBox:setText(Engine[@"hash_4F9F1239CFD921FE"](CoD.CACUtility.GetAttachmentUnlockDescription(f1_local1, f1_arg0, f14_local0)))
 		end
 	end)
 	WeaponAttributes:linkToElementModel(WeaponAttachmentContainer.GeneralAttachmentContainer.AttachmentList, "weaponAttributes", false, function(model)
@@ -195,15 +195,15 @@ LUI.createMenu.WeaponAttachmentSelect = function(f1_arg0, f1_arg1)
 	end)
 	self:appendEventHandler("input_source_changed", function(f18_arg0, f18_arg1)
 		f18_arg1.menu = f18_arg1.menu or f1_local1
-		CoD.Menu.UpdateButtonShownState(f18_arg0, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA])
+		CoD.Menu.UpdateButtonShownState(f18_arg0, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_rtrig"])
 	end)
 	local f1_local16 = self
 	local f1_local17 = self.subscribeToModel
-	local f1_local18 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	local f1_local18 = Engine[@"getmodelforcontroller"](f1_arg0)
 	f1_local17(f1_local16, f1_local18.LastInput, function(f19_arg0, f19_arg1)
-		CoD.Menu.UpdateButtonShownState(f19_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA])
+		CoD.Menu.UpdateButtonShownState(f19_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_rtrig"])
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		if not IsPC() then
 			PlaySoundAlias("uin_party_ease_slide_back")
 			CoD.CACUtility.PlayChooseScreenOutro(menu, controller, "Close")
@@ -218,16 +218,16 @@ LUI.createMenu.WeaponAttachmentSelect = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if not IsPC() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 			return true
 		elseif IsPC() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA], "F10", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_rtrig"], "F10", function(element, menu, controller, model)
 		if IsMouseOrKeyboard(controller) then
 			CoD.CACUtility.RemoveAllAttachmentsFromClass(menu, controller)
 			return true
@@ -235,7 +235,7 @@ LUI.createMenu.WeaponAttachmentSelect = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if IsMouseOrKeyboard(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA], 0xE9CED3392B6716C, nil, "F10")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_rtrig"], @"hash_5E9CED3392B6716C", nil, "F10")
 			return true
 		else
 			return false
@@ -314,7 +314,7 @@ CoD.WeaponAttachmentSelect.__clipsPerState = {
 			f29_arg0:setupElementClipCounter(2)
 			local f29_local0 = function(f30_arg0)
 				local f30_local0 = function(f31_arg0)
-					f31_arg0:beginAnimation(100, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f31_arg0:beginAnimation(100, Enum[@"luitween"][@"luitween_ease_both"])
 					f31_arg0:setTopBottom(0, 0, 639, 1261)
 					f31_arg0:setAlpha(1)
 					f31_arg0:registerEventHandler("transition_complete_keyframe", f29_arg0.clipFinished)
@@ -350,7 +350,7 @@ CoD.WeaponAttachmentSelect.__clipsPerState = {
 			f34_arg0:setupElementClipCounter(2)
 			local f34_local0 = function(f35_arg0)
 				local f35_local0 = function(f36_arg0)
-					f36_arg0:beginAnimation(100, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f36_arg0:beginAnimation(100, Enum[@"luitween"][@"luitween_ease_both"])
 					f36_arg0:setTopBottom(0, 0, 1090, 1712)
 					f36_arg0:registerEventHandler("transition_complete_keyframe", f34_arg0.clipFinished)
 				end
@@ -366,7 +366,7 @@ CoD.WeaponAttachmentSelect.__clipsPerState = {
 			f34_local0(f34_arg0.BackgroundSlidePanel)
 			local f34_local1 = function(f37_arg0)
 				local f37_local0 = function(f38_arg0)
-					f38_arg0:beginAnimation(100, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f38_arg0:beginAnimation(100, Enum[@"luitween"][@"luitween_ease_both"])
 					f38_arg0:setTopBottom(0, 0, 1113, 1413)
 					f38_arg0:registerEventHandler("transition_complete_keyframe", f34_arg0.clipFinished)
 				end

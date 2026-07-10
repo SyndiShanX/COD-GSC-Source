@@ -10,12 +10,12 @@ CoD.basicTabWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local text = LUI.UIText.new(0, 1, 0, 0, 0, 0, 0, 60)
 	text:setTTF("default")
-	text:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	text:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	text:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	text:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	text:linkToElementModel(self, "tabName", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			text:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			text:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	self:addElement(text)
@@ -23,8 +23,8 @@ CoD.basicTabWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	local buttonText = LUI.UIText.new(0, 1, 0, 0, 0, 0, 16, 44)
 	buttonText:setAlpha(0)
 	buttonText:setTTF("default")
-	buttonText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	buttonText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	buttonText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	buttonText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	buttonText:linkToElementModel(self, "tabIcon", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then

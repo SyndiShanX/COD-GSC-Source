@@ -9,20 +9,20 @@ CoD.vhud_turret_reticle_center.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local ReticleU = LUI.UIImage.new(0.5, 0.5, -12, 12, 0.5, 0.5, -48, -12)
 	ReticleU:setRGB(1, 0.83, 0.39)
-	ReticleU:setImage(RegisterImage(0xA957A65BA47EC51))
-	ReticleU:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	ReticleU:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_ground_reticleu"))
+	ReticleU:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(ReticleU)
 	self.ReticleU = ReticleU
 	local ReticleLL = LUI.UIImage.new(0.5, 0.5, -40, -4, 0.5, 0.5, 12, 48)
 	ReticleLL:setRGB(1, 0.83, 0.39)
-	ReticleLL:setImage(RegisterImage(0x40339DB884B00EE))
-	ReticleLL:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	ReticleLL:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_ground_reticlell"))
+	ReticleLL:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(ReticleLL)
 	self.ReticleLL = ReticleLL
 	local ReticleLR = LUI.UIImage.new(0.5, 0.5, 4, 40, 0.5, 0.5, 12, 48)
 	ReticleLR:setRGB(1, 0.83, 0.39)
-	ReticleLR:setImage(RegisterImage(0x40323DB884ADB8C))
-	ReticleLR:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	ReticleLR:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_ground_reticlelr"))
+	ReticleLR:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(ReticleLR)
 	self.ReticleLR = ReticleLR
 	if PostLoadFunc then

@@ -19,30 +19,30 @@ CoD.ArenaRubyProgressThreeWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	self:addElement(RedBar02)
 	self.RedBar02 = RedBar02
 	local frame1 = LUI.UIImage.new(0, 0, 130, 170, 0, 0, 0, 40)
-	frame1:setImage(RegisterImage(0x81EAB9F8F5950E7))
+	frame1:setImage(RegisterImage(@"uie_ui_menu_arena_rubyframe"))
 	self:addElement(frame1)
 	self.frame1 = frame1
 	local gem1 = LUI.UIImage.new(0, 0, 130, 170, 0, 0, 0, 40)
 	gem1:setAlpha(0)
-	gem1:setImage(RegisterImage(0x17ED8E3A9A3FC36))
+	gem1:setImage(RegisterImage(@"uie_ui_menu_arena_ruby"))
 	self:addElement(gem1)
 	self.gem1 = gem1
 	local frame2 = LUI.UIImage.new(0, 0, 443, 483, 0, 0, 0, 40)
-	frame2:setImage(RegisterImage(0x81EAB9F8F5950E7))
+	frame2:setImage(RegisterImage(@"uie_ui_menu_arena_rubyframe"))
 	self:addElement(frame2)
 	self.frame2 = frame2
 	local gem2 = LUI.UIImage.new(0, 0, 443, 483, 0, 0, 0, 40)
 	gem2:setAlpha(0)
-	gem2:setImage(RegisterImage(0x17ED8E3A9A3FC36))
+	gem2:setImage(RegisterImage(@"uie_ui_menu_arena_ruby"))
 	self:addElement(gem2)
 	self.gem2 = gem2
 	local frame3 = LUI.UIImage.new(0, 0, 756, 796, 0, 0, 0, 40)
-	frame3:setImage(RegisterImage(0x81EAB9F8F5950E7))
+	frame3:setImage(RegisterImage(@"uie_ui_menu_arena_rubyframe"))
 	self:addElement(frame3)
 	self.frame3 = frame3
 	local gem3 = LUI.UIImage.new(0, 0, 756, 796, 0, 0, 0, 40)
 	gem3:setAlpha(0)
-	gem3:setImage(RegisterImage(0x17ED8E3A9A3FC36))
+	gem3:setImage(RegisterImage(@"uie_ui_menu_arena_ruby"))
 	self:addElement(gem3)
 	self.gem3 = gem3
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)
@@ -142,7 +142,7 @@ CoD.ArenaRubyProgressThreeWidget.__clipsPerState = {
 			f4_arg0.RedBar02.Dot01:setAlpha(0)
 			f4_arg0.clipFinished(f4_arg0.RedBar02)
 			local f4_local1 = function(f6_arg0)
-				f4_arg0.gem1:beginAnimation(300, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f4_arg0.gem1:beginAnimation(300, Enum[@"luitween"][@"luitween_ease_out"])
 				f4_arg0.gem1:setAlpha(1)
 				f4_arg0.gem1:registerEventHandler("interrupted_keyframe", f4_arg0.clipInterrupted)
 				f4_arg0.gem1:registerEventHandler("transition_complete_keyframe", f4_arg0.clipFinished)

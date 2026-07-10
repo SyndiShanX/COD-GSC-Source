@@ -8,7 +8,7 @@ CoD.Client_LeaderIcon.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local LeaderIcon = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	LeaderIcon:setImage(RegisterImage(0xCC30C39E4A100F))
+	LeaderIcon:setImage(RegisterImage(@"uie_ui_menu_director_icon_star"))
 	self:addElement(LeaderIcon)
 	self.LeaderIcon = LeaderIcon
 	self:mergeStateConditions({

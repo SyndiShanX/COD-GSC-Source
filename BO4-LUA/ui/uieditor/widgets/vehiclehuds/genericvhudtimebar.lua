@@ -13,8 +13,8 @@ CoD.genericVHUDTimeBar.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	Frame0:setRGB(0.74, 0.94, 0.99)
 	Frame0:setAlpha(0.3)
 	Frame0:setZoom(-15)
-	Frame0:setImage(RegisterImage(0x5534C48D872A06A))
-	Frame0:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Frame0:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_mothership_timebar"))
+	Frame0:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Frame0)
 	self.Frame0 = Frame0
 	local vhudModDNITime00 = CoD.vhud_ModDNITime.new(f1_arg0, f1_arg1, 0, 0, 0, 78, 0, 0, 0, 86)
@@ -27,8 +27,8 @@ CoD.genericVHUDTimeBar.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	self.vhudModDNITime0 = vhudModDNITime0
 	local Bar = LUI.UIImage.new(0, 0, 60, 372, 0, 0, 36, 48)
 	Bar:setRGB(0.74, 0.94, 0.99)
-	Bar:setImage(RegisterImage(0x7EA3B14064D93ED))
-	Bar:setMaterial(LUI.UIImage.GetCachedMaterial(0x910274CA3518744))
+	Bar:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_mothership_timebarsolid"))
+	Bar:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe"))
 	Bar:setShaderVector(1, 0, 0, 0, 0)
 	Bar:setShaderVector(2, 1, 0, 0, 0)
 	Bar:setShaderVector(3, 0, 0, 0, 0)
@@ -43,8 +43,8 @@ CoD.genericVHUDTimeBar.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	self.Bar = Bar
 	local Frame = LUI.UIImage.new(0, 0, 60, 372, 0, 0, 36, 48)
 	Frame:setRGB(0.74, 0.94, 0.99)
-	Frame:setImage(RegisterImage(0x5534C48D872A06A))
-	Frame:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Frame:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_mothership_timebar"))
+	Frame:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Frame)
 	self.Frame = Frame
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)

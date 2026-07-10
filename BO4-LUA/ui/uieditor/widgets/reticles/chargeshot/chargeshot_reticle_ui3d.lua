@@ -109,9 +109,9 @@ CoD.ChargeShot_reticle_ui3d.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.ChargeShotSmallCenter00 = ChargeShotSmallCenter00
 	self:linkToElementModel(self, "weaponDelayFiring", true, function(model)
 		local f2_local0 = self
-		if CoD.ModelUtility.IsParamModelEqualToEnum(model, Enum[0x9F4B605DFDC7FFF][0x53F33952DDBD5D0]) then
+		if CoD.ModelUtility.IsParamModelEqualToEnum(model, Enum[@"weaponfireevent"][@"weapon_event_firing"]) then
 			PlayClip(self, "Fire", f1_arg1)
-		elseif CoD.ModelUtility.IsParamModelEqualToEnum(model, Enum[0x9F4B605DFDC7FFF][0xC99AE754E850B12]) then
+		elseif CoD.ModelUtility.IsParamModelEqualToEnum(model, Enum[@"weaponfireevent"][@"weapon_event_cancelled"]) then
 			PlayClip(self, "Cancel", f1_arg1)
 		end
 	end)
@@ -299,7 +299,7 @@ CoD.ChargeShot_reticle_ui3d.__clipsPerState = {
 					local f27_local0 = function(f28_arg0)
 						local f28_local0 = function(f29_arg0)
 							local f29_local0 = function(f30_arg0)
-								f30_arg0:beginAnimation(260, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+								f30_arg0:beginAnimation(260, Enum[@"luitween"][@"luitween_ease_out"])
 								f30_arg0:setLeftRight(0.5, 0.5, -283.5, -194.5)
 								f30_arg0:registerEventHandler("transition_complete_keyframe", f5_arg0.clipFinished)
 							end
@@ -311,7 +311,7 @@ CoD.ChargeShot_reticle_ui3d.__clipsPerState = {
 						f28_arg0:setLeftRight(0.5, 0.5, -146, -58)
 						f28_arg0:registerEventHandler("transition_complete_keyframe", f28_local0)
 					end
-					f27_arg0:beginAnimation(210, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f27_arg0:beginAnimation(210, Enum[@"luitween"][@"luitween_ease_out"])
 					f27_arg0:setLeftRight(0.5, 0.5, -146.5, -57.5)
 					f27_arg0:registerEventHandler("transition_complete_keyframe", f27_local0)
 				end
@@ -329,7 +329,7 @@ CoD.ChargeShot_reticle_ui3d.__clipsPerState = {
 					local f32_local0 = function(f33_arg0)
 						local f33_local0 = function(f34_arg0)
 							local f34_local0 = function(f35_arg0)
-								f35_arg0:beginAnimation(260, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+								f35_arg0:beginAnimation(260, Enum[@"luitween"][@"luitween_ease_out"])
 								f35_arg0:setLeftRight(0.5, 0.5, 197, 281)
 								f35_arg0:registerEventHandler("transition_complete_keyframe", f5_arg0.clipFinished)
 							end
@@ -340,7 +340,7 @@ CoD.ChargeShot_reticle_ui3d.__clipsPerState = {
 						f33_arg0:beginAnimation(350)
 						f33_arg0:registerEventHandler("transition_complete_keyframe", f33_local0)
 					end
-					f32_arg0:beginAnimation(210, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f32_arg0:beginAnimation(210, Enum[@"luitween"][@"luitween_ease_out"])
 					f32_arg0:setLeftRight(0.5, 0.5, 52, 136)
 					f32_arg0:registerEventHandler("transition_complete_keyframe", f32_local0)
 				end
@@ -356,11 +356,11 @@ CoD.ChargeShot_reticle_ui3d.__clipsPerState = {
 			local f5_local5 = function(f36_arg0)
 				local f36_local0 = function(f37_arg0)
 					local f37_local0 = function(f38_arg0)
-						f38_arg0:beginAnimation(190, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+						f38_arg0:beginAnimation(190, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_both"])
 						f38_arg0:setAlpha(0)
 						f38_arg0:registerEventHandler("transition_complete_keyframe", f5_arg0.clipFinished)
 					end
-					f37_arg0:beginAnimation(440, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f37_arg0:beginAnimation(440, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_in"])
 					f37_arg0:setAlpha(0.25)
 					f37_arg0:registerEventHandler("transition_complete_keyframe", f37_local0)
 				end
@@ -376,11 +376,11 @@ CoD.ChargeShot_reticle_ui3d.__clipsPerState = {
 			local f5_local6 = function(f39_arg0)
 				local f39_local0 = function(f40_arg0)
 					local f40_local0 = function(f41_arg0)
-						f41_arg0:beginAnimation(190, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+						f41_arg0:beginAnimation(190, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_both"])
 						f41_arg0:setAlpha(0)
 						f41_arg0:registerEventHandler("transition_complete_keyframe", f5_arg0.clipFinished)
 					end
-					f40_arg0:beginAnimation(440, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f40_arg0:beginAnimation(440, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_in"])
 					f40_arg0:setAlpha(0.25)
 					f40_arg0:registerEventHandler("transition_complete_keyframe", f40_local0)
 				end
@@ -396,11 +396,11 @@ CoD.ChargeShot_reticle_ui3d.__clipsPerState = {
 			local f5_local7 = function(f42_arg0)
 				local f42_local0 = function(f43_arg0)
 					local f43_local0 = function(f44_arg0)
-						f44_arg0:beginAnimation(190, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+						f44_arg0:beginAnimation(190, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_both"])
 						f44_arg0:setAlpha(0)
 						f44_arg0:registerEventHandler("transition_complete_keyframe", f5_arg0.clipFinished)
 					end
-					f43_arg0:beginAnimation(440, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f43_arg0:beginAnimation(440, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_in"])
 					f43_arg0:setAlpha(0.25)
 					f43_arg0:registerEventHandler("transition_complete_keyframe", f43_local0)
 				end
@@ -416,11 +416,11 @@ CoD.ChargeShot_reticle_ui3d.__clipsPerState = {
 			local f5_local8 = function(f45_arg0)
 				local f45_local0 = function(f46_arg0)
 					local f46_local0 = function(f47_arg0)
-						f47_arg0:beginAnimation(190, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+						f47_arg0:beginAnimation(190, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_both"])
 						f47_arg0:setAlpha(0)
 						f47_arg0:registerEventHandler("transition_complete_keyframe", f5_arg0.clipFinished)
 					end
-					f46_arg0:beginAnimation(440, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f46_arg0:beginAnimation(440, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_in"])
 					f46_arg0:setAlpha(0.25)
 					f46_arg0:registerEventHandler("transition_complete_keyframe", f46_local0)
 				end
@@ -438,14 +438,14 @@ CoD.ChargeShot_reticle_ui3d.__clipsPerState = {
 					local f49_local0 = function(f50_arg0)
 						local f50_local0 = function(f51_arg0)
 							local f51_local0 = function(f52_arg0)
-								f52_arg0:beginAnimation(399, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+								f52_arg0:beginAnimation(399, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_both"])
 								f52_arg0:setScale(1, 1)
 								f52_arg0:registerEventHandler("transition_complete_keyframe", f5_arg0.clipFinished)
 							end
 							f51_arg0:beginAnimation(350)
 							f51_arg0:registerEventHandler("transition_complete_keyframe", f51_local0)
 						end
-						f50_arg0:beginAnimation(90, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+						f50_arg0:beginAnimation(90, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_both"])
 						f50_arg0:setScale(0.4, 0.4)
 						f50_arg0:registerEventHandler("transition_complete_keyframe", f50_local0)
 					end
@@ -469,18 +469,18 @@ CoD.ChargeShot_reticle_ui3d.__clipsPerState = {
 								f57_arg0:beginAnimation(190)
 								f57_arg0:registerEventHandler("transition_complete_keyframe", f5_arg0.clipFinished)
 							end
-							f56_arg0:beginAnimation(399, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+							f56_arg0:beginAnimation(399, Enum[@"luitween"][@"luitween_ease_both"])
 							f56_arg0:setScale(1.1, 1.1)
 							f56_arg0:registerEventHandler("transition_complete_keyframe", f56_local0)
 						end
 						f55_arg0:beginAnimation(350)
 						f55_arg0:registerEventHandler("transition_complete_keyframe", f55_local0)
 					end
-					f54_arg0:beginAnimation(90, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f54_arg0:beginAnimation(90, Enum[@"luitween"][@"luitween_ease_both"])
 					f54_arg0:setScale(0.8, 0.8)
 					f54_arg0:registerEventHandler("transition_complete_keyframe", f54_local0)
 				end
-				f5_arg0.ChargerShot4cornerBracket0:beginAnimation(160, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f5_arg0.ChargerShot4cornerBracket0:beginAnimation(160, Enum[@"luitween"][@"luitween_ease_out"])
 				f5_arg0.ChargerShot4cornerBracket0:setScale(1, 1)
 				f5_arg0.ChargerShot4cornerBracket0:registerEventHandler("interrupted_keyframe", f5_arg0.clipInterrupted)
 				f5_arg0.ChargerShot4cornerBracket0:registerEventHandler("transition_complete_keyframe", f53_local0)
@@ -589,7 +589,7 @@ CoD.ChargeShot_reticle_ui3d.__clipsPerState = {
 					f73_arg0:beginAnimation(160)
 					f73_arg0:registerEventHandler("transition_complete_keyframe", f73_local0)
 				end
-				f67_arg0.ChargerShotActiveLock0:beginAnimation(50, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f67_arg0.ChargerShotActiveLock0:beginAnimation(50, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_both"])
 				f67_arg0.ChargerShotActiveLock0:registerEventHandler("interrupted_keyframe", f67_arg0.clipInterrupted)
 				f67_arg0.ChargerShotActiveLock0:registerEventHandler("transition_complete_keyframe", f72_local0)
 			end
@@ -617,7 +617,7 @@ CoD.ChargeShot_reticle_ui3d.__clipsPerState = {
 						f77_arg0:setAlpha(0)
 						f77_arg0:registerEventHandler("transition_complete_keyframe", f77_local0)
 					end
-					f76_arg0:beginAnimation(0, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f76_arg0:beginAnimation(0, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_both"])
 					f76_arg0:setAlpha(1)
 					f76_arg0:registerEventHandler("transition_complete_keyframe", f76_local0)
 				end
@@ -649,7 +649,7 @@ CoD.ChargeShot_reticle_ui3d.__clipsPerState = {
 						f83_arg0:setAlpha(0)
 						f83_arg0:registerEventHandler("transition_complete_keyframe", f83_local0)
 					end
-					f82_arg0:beginAnimation(0, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f82_arg0:beginAnimation(0, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_both"])
 					f82_arg0:setAlpha(1)
 					f82_arg0:registerEventHandler("transition_complete_keyframe", f82_local0)
 				end
@@ -681,7 +681,7 @@ CoD.ChargeShot_reticle_ui3d.__clipsPerState = {
 						f89_arg0:setAlpha(0)
 						f89_arg0:registerEventHandler("transition_complete_keyframe", f89_local0)
 					end
-					f88_arg0:beginAnimation(0, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f88_arg0:beginAnimation(0, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_both"])
 					f88_arg0:setAlpha(1)
 					f88_arg0:registerEventHandler("transition_complete_keyframe", f88_local0)
 				end
@@ -730,7 +730,7 @@ CoD.ChargeShot_reticle_ui3d.__clipsPerState = {
 					f97_arg0:setScale(0.9, 0.9)
 					f97_arg0:registerEventHandler("transition_complete_keyframe", f97_local0)
 				end
-				f67_arg0.ChargerShot4cornerBracket0:beginAnimation(50, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f67_arg0.ChargerShot4cornerBracket0:beginAnimation(50, Enum[@"luitween"][@"luitween_ease_both"])
 				f67_arg0.ChargerShot4cornerBracket0:registerEventHandler("interrupted_keyframe", f67_arg0.clipInterrupted)
 				f67_arg0.ChargerShot4cornerBracket0:registerEventHandler("transition_complete_keyframe", f96_local0)
 			end

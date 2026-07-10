@@ -46,7 +46,7 @@ CoD.EmblemLayer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_a
 	end)
 	local f1_local4 = layerIcon
 	local f1_local5 = layerIcon.subscribeToModel
-	local f1_local6 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local6 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local5(f1_local4, f1_local6["Emblem.EmblemProperties.groupsUsed"], function(f5_arg0)
 		f1_arg0:updateElementState(layerIcon, {
 			name = "model_validation",
@@ -58,7 +58,7 @@ CoD.EmblemLayer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_a
 	end, false)
 	f1_local4 = layerIcon
 	f1_local5 = layerIcon.subscribeToModel
-	f1_local6 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local6 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local5(f1_local4, f1_local6["Emblem.EmblemProperties.layersUsed"], function(f6_arg0)
 		f1_arg0:updateElementState(layerIcon, {
 			name = "model_validation",

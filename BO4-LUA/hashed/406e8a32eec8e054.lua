@@ -12,11 +12,11 @@ LUI.createMenu.BribeMenu = function(f1_arg0, f1_arg1)
 	self:playSound("menu_open", f1_arg0)
 	self.anyChildUsesUpdateState = true
 	local GenericMenuFrameIdentity = CoD.GenericMenuFrameIdentity.new(f1_local1, f1_arg0, 0.5, 0.5, -960, 960, 0, 1, 0, 0)
-	GenericMenuFrameIdentity.CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(0xABC9E44852AC644))
+	GenericMenuFrameIdentity.CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(@"menu/bribes"))
 	GenericMenuFrameIdentity:subscribeToGlobalModel(f1_arg0, "LobbyRoot", "lobbyTitle", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			GenericMenuFrameIdentity.CommonHeader.subtitle.subtitle:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			GenericMenuFrameIdentity.CommonHeader.subtitle.subtitle:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	self:addElement(GenericMenuFrameIdentity)
@@ -28,7 +28,7 @@ LUI.createMenu.BribeMenu = function(f1_arg0, f1_arg1)
 	BribeList:setHorizontalCount(2)
 	BribeList:setVerticalCount(5)
 	BribeList:setSpacing(10)
-	BribeList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	BribeList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	BribeList:setDataSource("BribeListItem")
 	BribeList:registerEventHandler("gain_focus", function(element, event)
 		local f3_local0 = nil
@@ -37,10 +37,10 @@ LUI.createMenu.BribeMenu = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f3_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f3_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(BribeList, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(BribeList, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		local f4_local0 = CoD.BlackMarketUtility.TriggerOpenBribeSequence
 		local f4_local1 = controller
 		local f4_local2 = menu
@@ -50,16 +50,16 @@ LUI.createMenu.BribeMenu = function(f1_arg0, f1_arg1)
 		f4_local0(f4_local1, f4_local2, f4_local3)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x9C695BAD15F589A, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_9C695BAD15F589A", nil, nil)
 		return true
 	end, false)
 	self:addElement(BribeList)
 	self.BribeList = BribeList
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		GoBack(self, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 		return true
 	end, false)
 	GenericMenuFrameIdentity:setModel(self.buttonModel, f1_arg0)

@@ -55,7 +55,7 @@ Lobby.Events.OnMatchStart = {
 	Lobby.Debug.OnMatchStart,
 	Lobby.RecentPlayers.OnMatchStart,
 	function(f2_arg0)
-		Engine[0xDCB1C27FE7537E8](Enum[0xBF54BE1BB3D618B][0x92676CF5B6FCD43])
+		Engine[@"allowvoicechatforall"](Enum[@"lobbytype"][@"lobby_type_game"])
 	end,
 	LuaUtils.CycleContracts,
 	LuaUtils.UI_ClearErrorMessageDialog,
@@ -71,28 +71,28 @@ Lobby.Events.OnMatchEnd = {
 Lobby.Events.OnMatchLaunchClient = {
 	Lobby.Stats.OnMatchLaunchClient,
 	function(f3_arg0)
-		Engine[0xDE279ECDDDD966](Engine[0xA5B9C0111291A8B](), 0xACF4E8AA288B3A5, {
-			[0xA988C5BE2B9606C] = f3_arg0.lobbyModule,
-			[0x193F66F4B46350C] = f3_arg0.lobbyType,
-			[0x63C8C33B4DB02C7] = f3_arg0.lobbyMode,
+		Engine[0xDE279ECDDDD966](Engine[@"getprimarycontroller"](), @"hash_5ACF4E8AA288B3A5", {
+			[@"lobby_module"] = f3_arg0.lobbyModule,
+			[@"lobby_type"] = f3_arg0.lobbyType,
+			[@"lobby_mode"] = f3_arg0.lobbyMode,
 		})
 	end,
 }
 Lobby.Events.OnMatchRecordStart = {
 	function(f4_arg0)
-		Engine[0xDE279ECDDDD966](Engine[0xA5B9C0111291A8B](), 0x74FC8134F6D21DF, {
-			[0x336E379BA146826] = f4_arg0.matchId,
+		Engine[0xDE279ECDDDD966](Engine[@"getprimarycontroller"](), @"hash_374FC8134F6D21DF", {
+			[@"match_id"] = f4_arg0.matchId,
 		})
 	end,
 }
 Lobby.Events.OnJoinComplete = {
 	function(f5_arg0)
-		if not Engine[0xE39F1F30B306065]() then
-			local f5_local0 = Engine[0xC3DF042E7492B66](Enum[0x7CA2DE5266A94BF][0xC46B73E8E18BA2])
-			Engine[0x83C9B5DE1D9371](Engine[0xA798E4552F5E872](Engine[0x8DF2E5447F384B9](), "lobbyRoot.hostGamertag"), Engine[0xC2AA9A38AEA50F3](f5_local0))
-			Engine[0xE1789115A2356E7]("lobby_leader_activity_changed", {
+		if not Engine[@"isdedicatedserver"]() then
+			local f5_local0 = Engine[@"lobbygetcontrollinglobbysession"](Enum[@"lobbymodule"][@"lobby_module_client"])
+			Engine[@"setmodelvalue"](Engine[@"createmodel"](Engine[@"getglobalmodel"](), "lobbyRoot.hostGamertag"), Engine[@"getlobbyhostgamertag"](f5_local0))
+			Engine[@"luivm_event"]("lobby_leader_activity_changed", {
 				lobbyType = f5_local0,
-				activity = Engine[0x93A049DEA13587F](),
+				activity = Engine[@"getleaderactivity"](),
 			})
 		end
 	end,
@@ -298,10 +298,10 @@ Lobby.Events.EventDispatcher = function(f7_arg0, f7_arg1)
 			return
 		end
 	end
-	if not Engine[0x573048F8D3B4E25]() then
-		Engine[0x458FE92FEB39D4E](Enum[0x7A63DCD561B0FA8][0xA1C4971DA015C84], "Lobby.Events.EventDispatcher() - invalid event: " .. f7_arg0 .. ".\n")
+	if not Engine[@"isshipbuild"]() then
+		Engine[@"printerror"](Enum[@"consolelabel_e"][@"con_label_lobbyvm"], "Lobby.Events.EventDispatcher() - invalid event: " .. f7_arg0 .. ".\n")
 	else
-		Engine[0x458FE92FEB39D4E](Enum[0x7A63DCD561B0FA8][0xA1C4971DA015C84], "Lobby.Events.EventDispatcher() - invalid event: " .. f7_arg0 .. ".\n")
+		Engine[@"printerror"](Enum[@"consolelabel_e"][@"con_label_lobbyvm"], "Lobby.Events.EventDispatcher() - invalid event: " .. f7_arg0 .. ".\n")
 	end
 end
 Lobby.Events.eventReturnHandlers = {}
@@ -337,9 +337,9 @@ Lobby.Events.eventReturnHandlers.OnRequestGroupInfo = Lobby.Clans.OnRequestGroup
 Lobby.Events.ReturnEventDispatcher = function(f8_arg0, f8_arg1)
 	if Lobby.Events.eventReturnHandlers[f8_arg0] then
 		return Lobby.Events.eventReturnHandlers[f8_arg0](f8_arg1)
-	elseif not Engine[0x573048F8D3B4E25]() then
-		Engine[0x458FE92FEB39D4E](Enum[0x7A63DCD561B0FA8][0xA1C4971DA015C84], "Lobby.Events.ReturnEventDispatcher() - invalid event: " .. f8_arg0 .. ".\n")
+	elseif not Engine[@"isshipbuild"]() then
+		Engine[@"printerror"](Enum[@"consolelabel_e"][@"con_label_lobbyvm"], "Lobby.Events.ReturnEventDispatcher() - invalid event: " .. f8_arg0 .. ".\n")
 	else
-		Engine[0x458FE92FEB39D4E](Enum[0x7A63DCD561B0FA8][0xA1C4971DA015C84], "Lobby.Events.ReturnEventDispatcher() - invalid event: " .. f8_arg0 .. ".\n")
+		Engine[@"printerror"](Enum[@"consolelabel_e"][@"con_label_lobbyvm"], "Lobby.Events.ReturnEventDispatcher() - invalid event: " .. f8_arg0 .. ".\n")
 	end
 end

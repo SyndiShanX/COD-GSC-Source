@@ -11,8 +11,8 @@ CoD.DirectorLeaderActivityMain.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	LeaderActivityText:setRGB(0.63, 0.62, 0.61)
 	LeaderActivityText:setTTF("ttmussels_regular")
 	LeaderActivityText:setLetterSpacing(6)
-	LeaderActivityText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	LeaderActivityText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	LeaderActivityText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	LeaderActivityText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	LeaderActivityText:subscribeToGlobalModel(f1_arg1, "LobbyRoot", "leaderActivity", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -26,11 +26,11 @@ CoD.DirectorLeaderActivityMain.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	self.LeaderActivityText = LeaderActivityText
 	local Waiting = LUI.UIText.new(0, 0, 0, 178, 0, 0, 0, 20)
 	Waiting:setRGB(0.86, 0.74, 0.25)
-	Waiting:setText(LocalizeToUpperString(0xA43B10D9DA121A))
+	Waiting:setText(LocalizeToUpperString(@"hash_A43B10D9DA121A"))
 	Waiting:setTTF("ttmussels_demibold")
 	Waiting:setLetterSpacing(6)
-	Waiting:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Waiting:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Waiting:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Waiting:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(Waiting)
 	self.Waiting = Waiting
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)

@@ -14,12 +14,12 @@ LUI.createMenu.BetaCallingCardPopup = function(f1_arg0, f1_arg1)
 	local BetaRewardWidget = CoD.BetaRewardWidget.new(f1_local1, f1_arg0, 0, 1, 0, 0, 0, 1, 0, 0)
 	self:addElement(BetaRewardWidget)
 	self.BetaRewardWidget = BetaRewardWidget
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		CoD.EntitlementUtility.SetCurrentEntitlementViewed(controller)
 		CoD.EntitlementUtility.GoBackAndOpenEntitlementPopups(self, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x5BE4A02B20F31F1, Enum[0xBEBDBAEEB3ECCCA][0x2919C98A7A845F0] | 750 << Enum[0xBEBDBAEEB3ECCCA][0x76ADD225D738C93], nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/ok", Enum[@"luibuttonpromptflags"][@"hash_72919C98A7A845F0"] | 750 << Enum[@"luibuttonpromptflags"][@"hash_176ADD225D738C93"], nil)
 		return true
 	end, false)
 	if CoD.isPC then

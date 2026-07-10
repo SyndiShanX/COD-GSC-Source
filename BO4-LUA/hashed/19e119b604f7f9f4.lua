@@ -8,10 +8,10 @@ CoD.NewSpecialistFooter.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	self.soundSet = "none"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local SelForNewSpawn = LUI.UIText.new(0.5, 0.5, 102, 462, 0.5, 0.5, -18.5, 18.5)
-	SelForNewSpawn:setText(Engine[0xF9F1239CFD921FE](0xCC33FEF563991C6))
+	SelForNewSpawn:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_CC33FEF563991C6"))
 	SelForNewSpawn:setTTF("default")
-	SelForNewSpawn:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	SelForNewSpawn:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	SelForNewSpawn:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	SelForNewSpawn:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(SelForNewSpawn)
 	self.SelForNewSpawn = SelForNewSpawn
 	local SpecialistImage = LUI.UIFixedAspectRatioImage.new(0.5, 0.5, -73.5, 73.5, 0.5, 0.5, -73.5, 73.5)
@@ -25,12 +25,12 @@ CoD.NewSpecialistFooter.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	self.SpecialistImage = SpecialistImage
 	local SpecialistName = LUI.UIText.new(0.5, 0.5, -357.5, -101.5, 0.5, 0.5, -18.5, 18.5)
 	SpecialistName:setTTF("default")
-	SpecialistName:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
-	SpecialistName:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	SpecialistName:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
+	SpecialistName:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	SpecialistName:subscribeToGlobalModel(f1_arg1, "CharacterSelection", "characterIndex", function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
-			SpecialistName:setText(Engine[0xF9F1239CFD921FE](GetCharacterDisplayNameByIndex(f3_local0)))
+			SpecialistName:setText(Engine[@"hash_4F9F1239CFD921FE"](GetCharacterDisplayNameByIndex(f3_local0)))
 		end
 	end)
 	self:addElement(SpecialistName)

@@ -3,23 +3,23 @@ require("x64:438bb630d35a79")
 require("x64:82f6f87abb3f4e")
 require("x64:82e0f87abb19ec")
 require("x64:61367168c92655f")
-CoD[0x55901198AFBAC05] = InheritFrom(LUI.UIElement)
-CoD[0x55901198AFBAC05].__defaultWidth = 960
-CoD[0x55901198AFBAC05].__defaultHeight = 240
-CoD[0x55901198AFBAC05].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+CoD[@"hash_655901198AFBAC05"] = InheritFrom(LUI.UIElement)
+CoD[@"hash_655901198AFBAC05"].__defaultWidth = 960
+CoD[@"hash_655901198AFBAC05"].__defaultHeight = 240
+CoD[@"hash_655901198AFBAC05"].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
 	local self = LUI.UIElement.new(f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
-	self:setClass(CoD[0x55901198AFBAC05])
+	self:setClass(CoD[@"hash_655901198AFBAC05"])
 	self.id = "CallingCards_Prestige_Master"
 	self.soundSet = "default"
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local CardIcon = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	CardIcon:setImage(RegisterImage(0x434A15996B65B48))
-	CardIcon:setMaterial(LUI.UIImage.GetCachedMaterial(0xE8F55203998700A))
+	CardIcon:setImage(RegisterImage(@"uie_t7_icon_callingcard_temp2_lrg"))
+	CardIcon:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_feather_blend"))
 	self:addElement(CardIcon)
 	self.CardIcon = CardIcon
 	local background = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	background:setImage(RegisterImage(0xAF70F2BA74CA509))
+	background:setImage(RegisterImage(@"uie_ui_icon_callingcards_prestige_master_background"))
 	self:addElement(background)
 	self.background = background
 	local CallingCardsAssetvortex = CoD.CallingCards_Asset_vortex.new(f1_arg0, f1_arg1, 0, 0, 348, 860, 0, 0, -133, 379)
@@ -27,15 +27,15 @@ CoD[0x55901198AFBAC05].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	self:addElement(CallingCardsAssetvortex)
 	self.CallingCardsAssetvortex = CallingCardsAssetvortex
 	local rays = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	rays:setImage(RegisterImage(0x697CB32FF96C172))
-	rays:setMaterial(LUI.UIImage.GetCachedMaterial(0x9227A50BA2B8D21))
+	rays:setImage(RegisterImage(@"uie_ui_icon_callingcards_prestige_master_lightlaser_rays"))
+	rays:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_flipbook_add"))
 	rays:setShaderVector(0, 0, 3, 0, 0)
 	rays:setShaderVector(1, 15, 0, 0, 0)
 	self:addElement(rays)
 	self.rays = rays
 	local laserlight = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	laserlight:setImage(RegisterImage(0xB6E707FE680E0D6))
-	laserlight:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	laserlight:setImage(RegisterImage(@"uie_ui_icon_callingcards_prestige_master_lightlaser"))
+	laserlight:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(laserlight)
 	self.laserlight = laserlight
 	local party1 = CoD.CallingCards_Asset_party1.new(f1_arg0, f1_arg1, 0, 0, 0, 624, 0, 0, 0, 240)
@@ -49,14 +49,14 @@ CoD[0x55901198AFBAC05].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	self:addElement(party3)
 	self.party3 = party3
 	local racoonTail = LUI.UIImage.new(0, 0, 703, 855, 0, 0, 139, 243)
-	racoonTail:setImage(RegisterImage(0xAB1DC1DACCD772E))
+	racoonTail:setImage(RegisterImage(@"uie_ui_icon_callingcards_prestige_master_racoon_tail"))
 	self:addElement(racoonTail)
 	self.racoonTail = racoonTail
 	local firePlate = LUI.UIImage.new(0, 0, 447, 779, 0, 0, -77, 165)
 	firePlate:setRGB(0.24, 0.71, 0.99)
 	firePlate:setAlpha(0.9)
-	firePlate:setImage(RegisterImage(0x17FBA99AF3569DE))
-	firePlate:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD526D3FD71F281))
+	firePlate:setImage(RegisterImage(@"uie_ui_icon_callingcards_prestige_master_fire_plate"))
+	firePlate:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_flipbook"))
 	firePlate:setShaderVector(0, 0, 3, 0, 0)
 	firePlate:setShaderVector(1, 15, 0, 0, 0)
 	self:addElement(firePlate)
@@ -68,16 +68,16 @@ CoD[0x55901198AFBAC05].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	self:addElement(Rarm)
 	self.Rarm = Rarm
 	local racoonBody = LUI.UIImage.new(0, 0, 541, 685, 0, 0, 123, 243)
-	racoonBody:setImage(RegisterImage(0x90B88DC2923AB69))
+	racoonBody:setImage(RegisterImage(@"uie_ui_icon_callingcards_prestige_master_racoon_chest"))
 	self:addElement(racoonBody)
 	self.racoonBody = racoonBody
 	local racoonHead = LUI.UIImage.new(0, 0, 499, 731, 0, 0, -3, 165)
-	racoonHead:setImage(RegisterImage(0x31F6882DE81D3FE))
+	racoonHead:setImage(RegisterImage(@"uie_ui_icon_callingcards_prestige_master_racoon_head"))
 	self:addElement(racoonHead)
 	self.racoonHead = racoonHead
 	local cropper = LUI.UIImage.new(0, 0, -32, 992, 0, 0, -392, 632)
 	cropper:setAlpha(0)
-	cropper:setImage(RegisterImage(0x7EEE1693E39382A))
+	cropper:setImage(RegisterImage(@"uie_stage_crop_prop"))
 	self:addElement(cropper)
 	self.cropper = cropper
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)
@@ -86,7 +86,7 @@ CoD[0x55901198AFBAC05].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	end
 	return self
 end
-CoD[0x55901198AFBAC05].__resetProperties = function(f2_arg0)
+CoD[@"hash_655901198AFBAC05"].__resetProperties = function(f2_arg0)
 	f2_arg0.CallingCardsAssetvortex:completeAnimation()
 	f2_arg0.laserlight:completeAnimation()
 	f2_arg0.racoonBody:completeAnimation()
@@ -101,7 +101,7 @@ CoD[0x55901198AFBAC05].__resetProperties = function(f2_arg0)
 	f2_arg0.rays:completeAnimation()
 	f2_arg0.laserlight:setAlpha(1)
 	f2_arg0.laserlight:setScale(1, 1)
-	f2_arg0.laserlight:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	f2_arg0.laserlight:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	f2_arg0.racoonBody:setTopBottom(0, 0, 123, 243)
 	f2_arg0.racoonBody:setScale(1, 1)
 	f2_arg0.Rarm:setZRot(0)
@@ -122,7 +122,7 @@ CoD[0x55901198AFBAC05].__resetProperties = function(f2_arg0)
 	f2_arg0.party3:setAlpha(0.3)
 	f2_arg0.rays:setAlpha(1)
 end
-CoD[0x55901198AFBAC05].__clipsPerState = {
+CoD[@"hash_655901198AFBAC05"].__clipsPerState = {
 	DefaultState = {
 		DefaultClip = function(f3_arg0, f3_arg1)
 			f3_arg0:__resetProperties()
@@ -170,7 +170,7 @@ CoD[0x55901198AFBAC05].__clipsPerState = {
 			f3_arg0.laserlight:completeAnimation()
 			f3_arg0.laserlight:setAlpha(0)
 			f3_arg0.laserlight:setScale(1, 1)
-			f3_arg0.laserlight:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+			f3_arg0.laserlight:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 			f3_local1(f3_arg0.laserlight)
 			f3_arg0.party1:completeAnimation()
 			f3_arg0.party1:setAlpha(0.5)
@@ -450,7 +450,7 @@ CoD[0x55901198AFBAC05].__clipsPerState = {
 		end,
 	},
 }
-CoD[0x55901198AFBAC05].__onClose = function(f58_arg0)
+CoD[@"hash_655901198AFBAC05"].__onClose = function(f58_arg0)
 	f58_arg0.CallingCardsAssetvortex:close()
 	f58_arg0.party1:close()
 	f58_arg0.party2:close()

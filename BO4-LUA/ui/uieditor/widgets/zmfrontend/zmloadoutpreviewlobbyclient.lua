@@ -11,7 +11,7 @@ CoD.ZMLoadoutPreviewLobbyClient.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Blur = LUI.UIImage.new(0, 0, -4, 276, 0, 0, -4.5, 383.5)
-	Blur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	Blur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	Blur:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(Blur)
 	self.Blur = Blur
@@ -22,8 +22,8 @@ CoD.ZMLoadoutPreviewLobbyClient.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self.Panel = Panel
 	local TiledBacking = LUI.UIImage.new(-0.02, 1.02, 1, -1, 0.18, 1.01, -71, -73)
 	TiledBacking:setAlpha(0.5)
-	TiledBacking:setImage(RegisterImage(0x34839E8065B1E53))
-	TiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	TiledBacking:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	TiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	TiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	TiledBacking:setupNineSliceShader(196, 88)
 	self:addElement(TiledBacking)
@@ -46,14 +46,14 @@ CoD.ZMLoadoutPreviewLobbyClient.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 			modelName = "perk4index",
 		})
 	end)
-	Perk4.Name:setText(LocalizeToUpperString(0x93E719493E9E18F))
+	Perk4.Name:setText(LocalizeToUpperString(@"menu/new"))
 	Perk4:linkToElementModel(self, "loadout", false, function(model)
 		Perk4:setModel(model, f1_arg1)
 	end)
 	Perk4:linkToElementModel(self, "loadout.perk4Index", true, function(model)
 		local f5_local0 = model:get()
 		if f5_local0 ~= nil then
-			Perk4.itemImage:setImage(RegisterImage(GetItemImageFromIndex(Enum[0x6EB546760F890D2][0x9AF82A21BAD026D], f5_local0)))
+			Perk4.itemImage:setImage(RegisterImage(GetItemImageFromIndex(Enum[@"statindexoffset"][@"hash_49AF82A21BAD026D"], f5_local0)))
 		end
 	end)
 	Perk4:registerEventHandler("gain_focus", function(element, event)
@@ -63,22 +63,22 @@ CoD.ZMLoadoutPreviewLobbyClient.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 		elseif element.super.gainFocus then
 			f6_local0 = element.super:gainFocus(event)
 		end
-		CoD.ZombieUtility.SetZMLoadoutPreviewInfoIndex(self, "loadout.perk4Index", Enum[0x6EB546760F890D2][0x9AF82A21BAD026D], f1_arg1)
+		CoD.ZombieUtility.SetZMLoadoutPreviewInfoIndex(self, "loadout.perk4Index", Enum[@"statindexoffset"][@"hash_49AF82A21BAD026D"], f1_arg1)
 		return f6_local0
 	end)
 	Perk4:linkToElementModel(self, "loadout.perk4Index", true, function(model)
 		if IsElementInFocus(Perk4) then
-			CoD.ZombieUtility.SetZMLoadoutPreviewInfoIndex(self, "loadout.perk4Index", Enum[0x6EB546760F890D2][0x9AF82A21BAD026D], f1_arg1)
+			CoD.ZombieUtility.SetZMLoadoutPreviewInfoIndex(self, "loadout.perk4Index", Enum[@"statindexoffset"][@"hash_49AF82A21BAD026D"], f1_arg1)
 		end
 	end)
 	self:addElement(Perk4)
 	self.Perk4 = Perk4
 	local Perk3 = CoD.ZMLoadoutPreviewIndexItem.new(f1_arg0, f1_arg1, 0, 0, 136, 204, 0, 0, 310, 378)
-	Perk3.Name:setText(LocalizeToUpperString(0x93E719493E9E18F))
+	Perk3.Name:setText(LocalizeToUpperString(@"menu/new"))
 	Perk3:linkToElementModel(self, "loadout.perk3Index", true, function(model)
 		local f8_local0 = model:get()
 		if f8_local0 ~= nil then
-			Perk3.itemImage:setImage(RegisterImage(GetItemImageFromIndex(Enum[0x6EB546760F890D2][0x9AF82A21BAD026D], f8_local0)))
+			Perk3.itemImage:setImage(RegisterImage(GetItemImageFromIndex(Enum[@"statindexoffset"][@"hash_49AF82A21BAD026D"], f8_local0)))
 		end
 	end)
 	Perk3:registerEventHandler("gain_focus", function(element, event)
@@ -88,22 +88,22 @@ CoD.ZMLoadoutPreviewLobbyClient.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 		elseif element.super.gainFocus then
 			f9_local0 = element.super:gainFocus(event)
 		end
-		CoD.ZombieUtility.SetZMLoadoutPreviewInfoIndex(self, "loadout.perk3Index", Enum[0x6EB546760F890D2][0x9AF82A21BAD026D], f1_arg1)
+		CoD.ZombieUtility.SetZMLoadoutPreviewInfoIndex(self, "loadout.perk3Index", Enum[@"statindexoffset"][@"hash_49AF82A21BAD026D"], f1_arg1)
 		return f9_local0
 	end)
 	Perk3:linkToElementModel(self, "loadout.perk3Index", true, function(model)
 		if IsElementInFocus(Perk3) then
-			CoD.ZombieUtility.SetZMLoadoutPreviewInfoIndex(self, "loadout.perk3Index", Enum[0x6EB546760F890D2][0x9AF82A21BAD026D], f1_arg1)
+			CoD.ZombieUtility.SetZMLoadoutPreviewInfoIndex(self, "loadout.perk3Index", Enum[@"statindexoffset"][@"hash_49AF82A21BAD026D"], f1_arg1)
 		end
 	end)
 	self:addElement(Perk3)
 	self.Perk3 = Perk3
 	local Perk2 = CoD.ZMLoadoutPreviewIndexItem.new(f1_arg0, f1_arg1, 0, 0, 68, 136, 0, 0, 310, 378)
-	Perk2.Name:setText(LocalizeToUpperString(0x93E719493E9E18F))
+	Perk2.Name:setText(LocalizeToUpperString(@"menu/new"))
 	Perk2:linkToElementModel(self, "loadout.perk2Index", true, function(model)
 		local f11_local0 = model:get()
 		if f11_local0 ~= nil then
-			Perk2.itemImage:setImage(RegisterImage(GetItemImageFromIndex(Enum[0x6EB546760F890D2][0x9AF82A21BAD026D], f11_local0)))
+			Perk2.itemImage:setImage(RegisterImage(GetItemImageFromIndex(Enum[@"statindexoffset"][@"hash_49AF82A21BAD026D"], f11_local0)))
 		end
 	end)
 	Perk2:registerEventHandler("gain_focus", function(element, event)
@@ -113,22 +113,22 @@ CoD.ZMLoadoutPreviewLobbyClient.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 		elseif element.super.gainFocus then
 			f12_local0 = element.super:gainFocus(event)
 		end
-		CoD.ZombieUtility.SetZMLoadoutPreviewInfoIndex(self, "loadout.perk2Index", Enum[0x6EB546760F890D2][0x9AF82A21BAD026D], f1_arg1)
+		CoD.ZombieUtility.SetZMLoadoutPreviewInfoIndex(self, "loadout.perk2Index", Enum[@"statindexoffset"][@"hash_49AF82A21BAD026D"], f1_arg1)
 		return f12_local0
 	end)
 	Perk2:linkToElementModel(self, "loadout.perk2Index", true, function(model)
 		if IsElementInFocus(Perk2) then
-			CoD.ZombieUtility.SetZMLoadoutPreviewInfoIndex(self, "loadout.perk2Index", Enum[0x6EB546760F890D2][0x9AF82A21BAD026D], f1_arg1)
+			CoD.ZombieUtility.SetZMLoadoutPreviewInfoIndex(self, "loadout.perk2Index", Enum[@"statindexoffset"][@"hash_49AF82A21BAD026D"], f1_arg1)
 		end
 	end)
 	self:addElement(Perk2)
 	self.Perk2 = Perk2
 	local Perk1 = CoD.ZMLoadoutPreviewIndexItem.new(f1_arg0, f1_arg1, 0, 0, 0, 68, 0, 0, 310, 378)
-	Perk1.Name:setText(LocalizeToUpperString(0x93E719493E9E18F))
+	Perk1.Name:setText(LocalizeToUpperString(@"menu/new"))
 	Perk1:linkToElementModel(self, "loadout.perk1Index", true, function(model)
 		local f14_local0 = model:get()
 		if f14_local0 ~= nil then
-			Perk1.itemImage:setImage(RegisterImage(GetItemImageFromIndex(Enum[0x6EB546760F890D2][0x9AF82A21BAD026D], f14_local0)))
+			Perk1.itemImage:setImage(RegisterImage(GetItemImageFromIndex(Enum[@"statindexoffset"][@"hash_49AF82A21BAD026D"], f14_local0)))
 		end
 	end)
 	Perk1:registerEventHandler("gain_focus", function(element, event)
@@ -138,23 +138,23 @@ CoD.ZMLoadoutPreviewLobbyClient.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 		elseif element.super.gainFocus then
 			f15_local0 = element.super:gainFocus(event)
 		end
-		CoD.ZombieUtility.SetZMLoadoutPreviewInfoIndex(self, "loadout.perk1Index", Enum[0x6EB546760F890D2][0x9AF82A21BAD026D], f1_arg1)
+		CoD.ZombieUtility.SetZMLoadoutPreviewInfoIndex(self, "loadout.perk1Index", Enum[@"statindexoffset"][@"hash_49AF82A21BAD026D"], f1_arg1)
 		return f15_local0
 	end)
 	Perk1:linkToElementModel(self, "loadout.perk1Index", true, function(model)
 		if IsElementInFocus(Perk1) then
-			CoD.ZombieUtility.SetZMLoadoutPreviewInfoIndex(self, "loadout.perk1Index", Enum[0x6EB546760F890D2][0x9AF82A21BAD026D], f1_arg1)
+			CoD.ZombieUtility.SetZMLoadoutPreviewInfoIndex(self, "loadout.perk1Index", Enum[@"statindexoffset"][@"hash_49AF82A21BAD026D"], f1_arg1)
 		end
 	end)
 	self:addElement(Perk1)
 	self.Perk1 = Perk1
 	local BGB4 = CoD.ZMLoadoutPreviewIndexItem.new(f1_arg0, f1_arg1, 0, 0, 204, 272, 0, 0, 242, 310)
 	BGB4.itemImage:setScale(1.2, 1.2)
-	BGB4.Name:setText(LocalizeToUpperString(0x93E719493E9E18F))
+	BGB4.Name:setText(LocalizeToUpperString(@"menu/new"))
 	BGB4:linkToElementModel(self, "loadout.bgb4Index", true, function(model)
 		local f17_local0 = model:get()
 		if f17_local0 ~= nil then
-			BGB4.itemImage:setImage(RegisterImage(GetItemImageFromIndex(Enum[0x6EB546760F890D2][0x48CD0338EE0B3AE], f17_local0)))
+			BGB4.itemImage:setImage(RegisterImage(GetItemImageFromIndex(Enum[@"statindexoffset"][@"hash_648CD0338EE0B3AE"], f17_local0)))
 		end
 	end)
 	BGB4:registerEventHandler("gain_focus", function(element, event)
@@ -164,23 +164,23 @@ CoD.ZMLoadoutPreviewLobbyClient.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 		elseif element.super.gainFocus then
 			f18_local0 = element.super:gainFocus(event)
 		end
-		CoD.ZombieUtility.SetZMLoadoutPreviewInfoIndex(self, "loadout.bgb4Index", Enum[0x6EB546760F890D2][0x48CD0338EE0B3AE], f1_arg1)
+		CoD.ZombieUtility.SetZMLoadoutPreviewInfoIndex(self, "loadout.bgb4Index", Enum[@"statindexoffset"][@"hash_648CD0338EE0B3AE"], f1_arg1)
 		return f18_local0
 	end)
 	BGB4:linkToElementModel(self, "loadout.bgb4Index", true, function(model)
 		if IsElementInFocus(BGB4) then
-			CoD.ZombieUtility.SetZMLoadoutPreviewInfoIndex(self, "loadout.bgb4Index", Enum[0x6EB546760F890D2][0x48CD0338EE0B3AE], f1_arg1)
+			CoD.ZombieUtility.SetZMLoadoutPreviewInfoIndex(self, "loadout.bgb4Index", Enum[@"statindexoffset"][@"hash_648CD0338EE0B3AE"], f1_arg1)
 		end
 	end)
 	self:addElement(BGB4)
 	self.BGB4 = BGB4
 	local BGB3 = CoD.ZMLoadoutPreviewIndexItem.new(f1_arg0, f1_arg1, 0, 0, 136, 204, 0, 0, 242, 310)
 	BGB3.itemImage:setScale(1.2, 1.2)
-	BGB3.Name:setText(LocalizeToUpperString(0x93E719493E9E18F))
+	BGB3.Name:setText(LocalizeToUpperString(@"menu/new"))
 	BGB3:linkToElementModel(self, "loadout.bgb3Index", true, function(model)
 		local f20_local0 = model:get()
 		if f20_local0 ~= nil then
-			BGB3.itemImage:setImage(RegisterImage(GetItemImageFromIndex(Enum[0x6EB546760F890D2][0x48CD0338EE0B3AE], f20_local0)))
+			BGB3.itemImage:setImage(RegisterImage(GetItemImageFromIndex(Enum[@"statindexoffset"][@"hash_648CD0338EE0B3AE"], f20_local0)))
 		end
 	end)
 	BGB3:registerEventHandler("gain_focus", function(element, event)
@@ -190,23 +190,23 @@ CoD.ZMLoadoutPreviewLobbyClient.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 		elseif element.super.gainFocus then
 			f21_local0 = element.super:gainFocus(event)
 		end
-		CoD.ZombieUtility.SetZMLoadoutPreviewInfoIndex(self, "loadout.bgb3Index", Enum[0x6EB546760F890D2][0x48CD0338EE0B3AE], f1_arg1)
+		CoD.ZombieUtility.SetZMLoadoutPreviewInfoIndex(self, "loadout.bgb3Index", Enum[@"statindexoffset"][@"hash_648CD0338EE0B3AE"], f1_arg1)
 		return f21_local0
 	end)
 	BGB3:linkToElementModel(self, "loadout.bgb3Index", true, function(model)
 		if IsElementInFocus(BGB3) then
-			CoD.ZombieUtility.SetZMLoadoutPreviewInfoIndex(self, "loadout.bgb3Index", Enum[0x6EB546760F890D2][0x48CD0338EE0B3AE], f1_arg1)
+			CoD.ZombieUtility.SetZMLoadoutPreviewInfoIndex(self, "loadout.bgb3Index", Enum[@"statindexoffset"][@"hash_648CD0338EE0B3AE"], f1_arg1)
 		end
 	end)
 	self:addElement(BGB3)
 	self.BGB3 = BGB3
 	local BGB2 = CoD.ZMLoadoutPreviewIndexItem.new(f1_arg0, f1_arg1, 0, 0, 68, 136, 0, 0, 242, 310)
 	BGB2.itemImage:setScale(1.2, 1.2)
-	BGB2.Name:setText(LocalizeToUpperString(0x93E719493E9E18F))
+	BGB2.Name:setText(LocalizeToUpperString(@"menu/new"))
 	BGB2:linkToElementModel(self, "loadout.bgb2Index", true, function(model)
 		local f23_local0 = model:get()
 		if f23_local0 ~= nil then
-			BGB2.itemImage:setImage(RegisterImage(GetItemImageFromIndex(Enum[0x6EB546760F890D2][0x48CD0338EE0B3AE], f23_local0)))
+			BGB2.itemImage:setImage(RegisterImage(GetItemImageFromIndex(Enum[@"statindexoffset"][@"hash_648CD0338EE0B3AE"], f23_local0)))
 		end
 	end)
 	BGB2:registerEventHandler("gain_focus", function(element, event)
@@ -216,23 +216,23 @@ CoD.ZMLoadoutPreviewLobbyClient.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 		elseif element.super.gainFocus then
 			f24_local0 = element.super:gainFocus(event)
 		end
-		CoD.ZombieUtility.SetZMLoadoutPreviewInfoIndex(self, "loadout.bgb2Index", Enum[0x6EB546760F890D2][0x48CD0338EE0B3AE], f1_arg1)
+		CoD.ZombieUtility.SetZMLoadoutPreviewInfoIndex(self, "loadout.bgb2Index", Enum[@"statindexoffset"][@"hash_648CD0338EE0B3AE"], f1_arg1)
 		return f24_local0
 	end)
 	BGB2:linkToElementModel(self, "loadout.bgb2Index", true, function(model)
 		if IsElementInFocus(BGB2) then
-			CoD.ZombieUtility.SetZMLoadoutPreviewInfoIndex(self, "loadout.bgb2Index", Enum[0x6EB546760F890D2][0x48CD0338EE0B3AE], f1_arg1)
+			CoD.ZombieUtility.SetZMLoadoutPreviewInfoIndex(self, "loadout.bgb2Index", Enum[@"statindexoffset"][@"hash_648CD0338EE0B3AE"], f1_arg1)
 		end
 	end)
 	self:addElement(BGB2)
 	self.BGB2 = BGB2
 	local BGB1 = CoD.ZMLoadoutPreviewIndexItem.new(f1_arg0, f1_arg1, 0, 0, 0, 68, 0, 0, 242, 310)
 	BGB1.itemImage:setScale(1.2, 1.2)
-	BGB1.Name:setText(LocalizeToUpperString(0x93E719493E9E18F))
+	BGB1.Name:setText(LocalizeToUpperString(@"menu/new"))
 	BGB1:linkToElementModel(self, "loadout.bgb1Index", true, function(model)
 		local f26_local0 = model:get()
 		if f26_local0 ~= nil then
-			BGB1.itemImage:setImage(RegisterImage(GetItemImageFromIndex(Enum[0x6EB546760F890D2][0x48CD0338EE0B3AE], f26_local0)))
+			BGB1.itemImage:setImage(RegisterImage(GetItemImageFromIndex(Enum[@"statindexoffset"][@"hash_648CD0338EE0B3AE"], f26_local0)))
 		end
 	end)
 	BGB1:registerEventHandler("gain_focus", function(element, event)
@@ -242,12 +242,12 @@ CoD.ZMLoadoutPreviewLobbyClient.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 		elseif element.super.gainFocus then
 			f27_local0 = element.super:gainFocus(event)
 		end
-		CoD.ZombieUtility.SetZMLoadoutPreviewInfoIndex(self, "loadout.bgb1Index", Enum[0x6EB546760F890D2][0x48CD0338EE0B3AE], f1_arg1)
+		CoD.ZombieUtility.SetZMLoadoutPreviewInfoIndex(self, "loadout.bgb1Index", Enum[@"statindexoffset"][@"hash_648CD0338EE0B3AE"], f1_arg1)
 		return f27_local0
 	end)
 	BGB1:linkToElementModel(self, "loadout.bgb1Index", true, function(model)
 		if IsElementInFocus(BGB1) then
-			CoD.ZombieUtility.SetZMLoadoutPreviewInfoIndex(self, "loadout.bgb1Index", Enum[0x6EB546760F890D2][0x48CD0338EE0B3AE], f1_arg1)
+			CoD.ZombieUtility.SetZMLoadoutPreviewInfoIndex(self, "loadout.bgb1Index", Enum[@"statindexoffset"][@"hash_648CD0338EE0B3AE"], f1_arg1)
 		end
 	end)
 	self:addElement(BGB1)
@@ -265,13 +265,13 @@ CoD.ZMLoadoutPreviewLobbyClient.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	Talisman:linkToElementModel(self, "loadout.talismanItemIndex", true, function(model)
 		local f30_local0 = model:get()
 		if f30_local0 ~= nil then
-			Talisman.itemImage:setImage(RegisterImage(GetItemImageFromIndex(Enum[0x6EB546760F890D2][0x5544C104CD15F10], f30_local0)))
+			Talisman.itemImage:setImage(RegisterImage(GetItemImageFromIndex(Enum[@"statindexoffset"][@"hash_15544C104CD15F10"], f30_local0)))
 		end
 	end)
 	Talisman:linkToElementModel(self, "loadout.talismanItemIndex", true, function(model)
 		local f31_local0 = model:get()
 		if f31_local0 ~= nil then
-			Talisman.Name:setText(LocalizeToUpperString(GetItemNameFromIndex(Enum[0x6EB546760F890D2][0x5544C104CD15F10], f31_local0)))
+			Talisman.Name:setText(LocalizeToUpperString(GetItemNameFromIndex(Enum[@"statindexoffset"][@"hash_15544C104CD15F10"], f31_local0)))
 		end
 	end)
 	Talisman:registerEventHandler("gain_focus", function(element, event)
@@ -281,23 +281,23 @@ CoD.ZMLoadoutPreviewLobbyClient.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 		elseif element.super.gainFocus then
 			f32_local0 = element.super:gainFocus(event)
 		end
-		CoD.ZombieUtility.SetZMLoadoutPreviewInfoIndex(self, "loadout.talismanItemIndex", Enum[0x6EB546760F890D2][0x5544C104CD15F10], f1_arg1)
+		CoD.ZombieUtility.SetZMLoadoutPreviewInfoIndex(self, "loadout.talismanItemIndex", Enum[@"statindexoffset"][@"hash_15544C104CD15F10"], f1_arg1)
 		return f32_local0
 	end)
 	Talisman:linkToElementModel(self, "loadout.talismanItemIndex", true, function(model)
 		if IsElementInFocus(Talisman) then
-			CoD.ZombieUtility.SetZMLoadoutPreviewInfoIndex(self, "loadout.talismanItemIndex", Enum[0x6EB546760F890D2][0x5544C104CD15F10], f1_arg1)
+			CoD.ZombieUtility.SetZMLoadoutPreviewInfoIndex(self, "loadout.talismanItemIndex", Enum[@"statindexoffset"][@"hash_15544C104CD15F10"], f1_arg1)
 		end
 	end)
 	self:addElement(Talisman)
 	self.Talisman = Talisman
 	local Equipment = CoD.ZMLoadoutPreviewIndexItem.new(f1_arg0, f1_arg1, 0, 0, 136, 272, 0, 0, 100, 160)
 	Equipment.itemImage:setScale(0.84, 0.84)
-	Equipment.Name:setText(LocalizeToUpperString(0x93E719493E9E18F))
+	Equipment.Name:setText(LocalizeToUpperString(@"menu/new"))
 	Equipment:linkToElementModel(self, "loadout.primaryGrenadeItemIndex", true, function(model)
 		local f34_local0 = model:get()
 		if f34_local0 ~= nil then
-			Equipment.itemImage:setImage(RegisterImage(GetItemImageFromIndex(Enum[0x6EB546760F890D2][0x569E84652131CD7], f34_local0)))
+			Equipment.itemImage:setImage(RegisterImage(GetItemImageFromIndex(Enum[@"statindexoffset"][@"hash_6569E84652131CD7"], f34_local0)))
 		end
 	end)
 	Equipment:registerEventHandler("gain_focus", function(element, event)
@@ -307,23 +307,23 @@ CoD.ZMLoadoutPreviewLobbyClient.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 		elseif element.super.gainFocus then
 			f35_local0 = element.super:gainFocus(event)
 		end
-		CoD.ZombieUtility.SetZMLoadoutPreviewInfoIndex(self, "loadout.primaryGrenadeItemIndex", Enum[0x6EB546760F890D2][0x569E84652131CD7], f1_arg1)
+		CoD.ZombieUtility.SetZMLoadoutPreviewInfoIndex(self, "loadout.primaryGrenadeItemIndex", Enum[@"statindexoffset"][@"hash_6569E84652131CD7"], f1_arg1)
 		return f35_local0
 	end)
 	Equipment:linkToElementModel(self, "loadout.primaryGrenadeItemIndex", true, function(model)
 		if IsElementInFocus(Equipment) then
-			CoD.ZombieUtility.SetZMLoadoutPreviewInfoIndex(self, "loadout.primaryGrenadeItemIndex", Enum[0x6EB546760F890D2][0x569E84652131CD7], f1_arg1)
+			CoD.ZombieUtility.SetZMLoadoutPreviewInfoIndex(self, "loadout.primaryGrenadeItemIndex", Enum[@"statindexoffset"][@"hash_6569E84652131CD7"], f1_arg1)
 		end
 	end)
 	self:addElement(Equipment)
 	self.Equipment = Equipment
 	local StartWeapon = CoD.ZMLoadoutPreviewIndexItem.new(f1_arg0, f1_arg1, 0, 0, 0, 136, 0, 0, 100, 160)
 	StartWeapon.itemImage:setScale(0.9, 0.9)
-	StartWeapon.Name:setText(LocalizeToUpperString(0x93E719493E9E18F))
+	StartWeapon.Name:setText(LocalizeToUpperString(@"menu/new"))
 	StartWeapon:linkToElementModel(self, "loadout.primaryWeaponItemIndex", true, function(model)
 		local f37_local0 = model:get()
 		if f37_local0 ~= nil then
-			StartWeapon.itemImage:setImage(RegisterImage(GetItemImageFromIndex(Enum[0x6EB546760F890D2][0x569E84652131CD7], f37_local0)))
+			StartWeapon.itemImage:setImage(RegisterImage(GetItemImageFromIndex(Enum[@"statindexoffset"][@"hash_6569E84652131CD7"], f37_local0)))
 		end
 	end)
 	StartWeapon:registerEventHandler("gain_focus", function(element, event)
@@ -333,23 +333,23 @@ CoD.ZMLoadoutPreviewLobbyClient.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 		elseif element.super.gainFocus then
 			f38_local0 = element.super:gainFocus(event)
 		end
-		CoD.ZombieUtility.SetZMLoadoutPreviewInfoIndex(self, "loadout.primaryWeaponItemIndex", Enum[0x6EB546760F890D2][0x569E84652131CD7], f1_arg1)
+		CoD.ZombieUtility.SetZMLoadoutPreviewInfoIndex(self, "loadout.primaryWeaponItemIndex", Enum[@"statindexoffset"][@"hash_6569E84652131CD7"], f1_arg1)
 		return f38_local0
 	end)
 	StartWeapon:linkToElementModel(self, "loadout.primaryWeaponItemIndex", true, function(model)
 		if IsElementInFocus(StartWeapon) then
-			CoD.ZombieUtility.SetZMLoadoutPreviewInfoIndex(self, "loadout.primaryWeaponItemIndex", Enum[0x6EB546760F890D2][0x569E84652131CD7], f1_arg1)
+			CoD.ZombieUtility.SetZMLoadoutPreviewInfoIndex(self, "loadout.primaryWeaponItemIndex", Enum[@"statindexoffset"][@"hash_6569E84652131CD7"], f1_arg1)
 		end
 	end)
 	self:addElement(StartWeapon)
 	self.StartWeapon = StartWeapon
 	local SpecialWeapon = CoD.ZMLoadoutPreviewIndexItem.new(f1_arg0, f1_arg1, 0, 0, 0, 272, 0, 0, 0, 100)
 	SpecialWeapon.itemImage:setScale(1.66, 1.66)
-	SpecialWeapon.Name:setText(LocalizeToUpperString(0x93E719493E9E18F))
+	SpecialWeapon.Name:setText(LocalizeToUpperString(@"menu/new"))
 	SpecialWeapon:linkToElementModel(self, "loadout.heroGadgetItemIndex", true, function(model)
 		local f40_local0 = model:get()
 		if f40_local0 ~= nil then
-			SpecialWeapon.itemImage:setImage(RegisterImage(GetItemImageFromIndex(Enum[0x6EB546760F890D2][0x569E84652131CD7], f40_local0)))
+			SpecialWeapon.itemImage:setImage(RegisterImage(GetItemImageFromIndex(Enum[@"statindexoffset"][@"hash_6569E84652131CD7"], f40_local0)))
 		end
 	end)
 	SpecialWeapon:registerEventHandler("gain_focus", function(element, event)
@@ -359,22 +359,22 @@ CoD.ZMLoadoutPreviewLobbyClient.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 		elseif element.super.gainFocus then
 			f41_local0 = element.super:gainFocus(event)
 		end
-		CoD.ZombieUtility.SetZMLoadoutPreviewInfoIndex(self, "loadout.heroGadgetItemIndex", Enum[0x6EB546760F890D2][0x569E84652131CD7], f1_arg1)
+		CoD.ZombieUtility.SetZMLoadoutPreviewInfoIndex(self, "loadout.heroGadgetItemIndex", Enum[@"statindexoffset"][@"hash_6569E84652131CD7"], f1_arg1)
 		return f41_local0
 	end)
 	SpecialWeapon:linkToElementModel(self, "loadout.heroGadgetItemIndex", true, function(model)
 		if IsElementInFocus(SpecialWeapon) then
-			CoD.ZombieUtility.SetZMLoadoutPreviewInfoIndex(self, "loadout.heroGadgetItemIndex", Enum[0x6EB546760F890D2][0x569E84652131CD7], f1_arg1)
+			CoD.ZombieUtility.SetZMLoadoutPreviewInfoIndex(self, "loadout.heroGadgetItemIndex", Enum[@"statindexoffset"][@"hash_6569E84652131CD7"], f1_arg1)
 		end
 	end)
 	self:addElement(SpecialWeapon)
 	self.SpecialWeapon = SpecialWeapon
 	local Metalbar = LUI.UIImage.new(0, 0, -14, 286, 0, 0, -13.5, 2.5)
-	Metalbar:setImage(RegisterImage(0xF6761ADA7C49071))
+	Metalbar:setImage(RegisterImage(@"uie_ui_menu_zm_metal_bar"))
 	self:addElement(Metalbar)
 	self.Metalbar = Metalbar
 	local Metalbar2 = LUI.UIImage.new(0, 0, -14, 286, 0, 0, 376.5, 392.5)
-	Metalbar2:setImage(RegisterImage(0xF6761ADA7C49071))
+	Metalbar2:setImage(RegisterImage(@"uie_ui_menu_zm_metal_bar"))
 	self:addElement(Metalbar2)
 	self.Metalbar2 = Metalbar2
 	self:mergeStateConditions({

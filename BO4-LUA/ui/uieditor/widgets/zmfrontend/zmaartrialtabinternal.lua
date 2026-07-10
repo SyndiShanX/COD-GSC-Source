@@ -19,7 +19,7 @@ CoD.ZMAARTrialTabInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	RoundColumns:setWidgetType(CoD.ZMAARTrialTabRoundList)
 	RoundColumns:setHorizontalCount(3)
 	RoundColumns:setSpacing(5)
-	RoundColumns:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	RoundColumns:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	RoundColumns:setDataSource("ZmAarTrialRoundColumn")
 	self:addElement(RoundColumns)
 	self.RoundColumns = RoundColumns
@@ -71,7 +71,7 @@ CoD.ZMAARTrialTabInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	})
 	local ZMAARGameInfo = RoundDescriptionGrid
 	local MatchTimeText = RoundDescriptionGrid.subscribeToModel
-	local f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
 	MatchTimeText(ZMAARGameInfo, f1_local5["AAR.trialStats.roundsCompleted"], function(f6_arg0)
 		f1_arg0:updateElementState(RoundDescriptionGrid, {
 			name = "model_validation",
@@ -83,7 +83,7 @@ CoD.ZMAARTrialTabInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	end, false)
 	ZMAARGameInfo = RoundDescriptionGrid
 	MatchTimeText = RoundDescriptionGrid.subscribeToModel
-	f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
 	MatchTimeText(ZMAARGameInfo, f1_local5["AAR.trialStats.roundReached"], function(f7_arg0)
 		f1_arg0:updateElementState(RoundDescriptionGrid, {
 			name = "model_validation",
@@ -95,7 +95,7 @@ CoD.ZMAARTrialTabInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	end, false)
 	ZMAARGameInfo = RoundDescriptionGrid
 	MatchTimeText = RoundDescriptionGrid.subscribeToModel
-	f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
 	MatchTimeText(ZMAARGameInfo, f1_local5["AAR.trialStats.highestRound"], function(f8_arg0)
 		f1_arg0:updateElementState(RoundDescriptionGrid, {
 			name = "model_validation",
@@ -112,7 +112,7 @@ CoD.ZMAARTrialTabInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	RoundDescriptionGrid:setHorizontalCount(3)
 	RoundDescriptionGrid:setVerticalCount(10)
 	RoundDescriptionGrid:setSpacing(9)
-	RoundDescriptionGrid:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	RoundDescriptionGrid:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	RoundDescriptionGrid:setDataSource("ZmAarTrialRoundGrid")
 	self:addElement(RoundDescriptionGrid)
 	self.RoundDescriptionGrid = RoundDescriptionGrid
@@ -142,7 +142,7 @@ CoD.ZMAARTrialTabInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	})
 	local f1_local6 = self
 	f1_local5 = self.subscribeToModel
-	local f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local5(f1_local6, f1_local7["AAR.trialStats.isNewHighestRound"], function(f12_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -154,7 +154,7 @@ CoD.ZMAARTrialTabInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	end, false)
 	f1_local6 = self
 	f1_local5 = self.subscribeToModel
-	f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local5(f1_local6, f1_local7["AAR.trialStats.isNewBestTime"], function(f13_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -221,7 +221,7 @@ CoD.ZMAARTrialTabInternal.__clipsPerState = {
 			f16_local1(f16_arg0.RoundDescriptionGrid)
 			local f16_local2 = function(f21_arg0)
 				local f21_local0 = function(f22_arg0)
-					f22_arg0:beginAnimation(199, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f22_arg0:beginAnimation(199, Enum[@"luitween"][@"luitween_ease_both"])
 					f22_arg0:setAlpha(1)
 					f22_arg0:registerEventHandler("transition_complete_keyframe", f16_arg0.clipFinished)
 				end
@@ -234,7 +234,7 @@ CoD.ZMAARTrialTabInternal.__clipsPerState = {
 			f16_local2(f16_arg0.MatchTimeText)
 			local f16_local3 = function(f23_arg0)
 				local f23_local0 = function(f24_arg0)
-					f24_arg0:beginAnimation(100, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f24_arg0:beginAnimation(100, Enum[@"luitween"][@"luitween_ease_in"])
 					f24_arg0:setAlpha(1)
 					f24_arg0:registerEventHandler("transition_complete_keyframe", f16_arg0.clipFinished)
 				end
@@ -278,7 +278,7 @@ CoD.ZMAARTrialTabInternal.__clipsPerState = {
 			f25_arg0.RoundDescriptionGrid:setAlpha(0)
 			f25_local1(f25_arg0.RoundDescriptionGrid)
 			local f25_local2 = function(f30_arg0)
-				f30_arg0:beginAnimation(199, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f30_arg0:beginAnimation(199, Enum[@"luitween"][@"luitween_ease_out"])
 				f30_arg0:setAlpha(1)
 				f30_arg0:registerEventHandler("transition_complete_keyframe", f25_arg0.clipFinished)
 			end
@@ -288,7 +288,7 @@ CoD.ZMAARTrialTabInternal.__clipsPerState = {
 			f25_arg0.MatchTimeText:registerEventHandler("transition_complete_keyframe", f25_local2)
 			local f25_local3 = function(f31_arg0)
 				local f31_local0 = function(f32_arg0)
-					f32_arg0:beginAnimation(100, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f32_arg0:beginAnimation(100, Enum[@"luitween"][@"luitween_ease_in"])
 					f32_arg0:setAlpha(1)
 					f32_arg0:registerEventHandler("transition_complete_keyframe", f25_arg0.clipFinished)
 				end

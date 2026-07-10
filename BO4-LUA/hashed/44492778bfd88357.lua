@@ -11,7 +11,7 @@ CoD.vhud_gunship_ammo_dock.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self.soundSet = "none"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Backing = LUI.UIImage.new(0, 0, 0, 256, 0, 0, 0, 136)
-	Backing:setImage(RegisterImage(0x9734312A977FFBE))
+	Backing:setImage(RegisterImage(@"uie_ui_hud_vehicle_ac130_weapon_bg"))
 	self:addElement(Backing)
 	self.Backing = Backing
 	local Ammo105mm = CoD.vhud_gunship_105mm_ammocounter.new(f1_arg0, f1_arg1, 0, 0, 16, 164, 0, 0, 6.5, 124.5)
@@ -36,26 +36,26 @@ CoD.vhud_gunship_ammo_dock.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self.Ammo25mm = Ammo25mm
 	local AmmoRotateArrow01 = LUI.UIImage.new(0, 0, 171, 183, 0, 0, 86, 98)
 	AmmoRotateArrow01:setAlpha(0.5)
-	AmmoRotateArrow01:setImage(RegisterImage(0x2B3D30230F9AC54))
-	AmmoRotateArrow01:setMaterial(LUI.UIImage.GetCachedMaterial(0xF755127C95CF5B6))
+	AmmoRotateArrow01:setImage(RegisterImage(@"hash_52B3D30230F9AC54"))
+	AmmoRotateArrow01:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_F755127C95CF5B6"))
 	AmmoRotateArrow01:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(AmmoRotateArrow01)
 	self.AmmoRotateArrow01 = AmmoRotateArrow01
 	local AmmoRotateArrow02 = LUI.UIImage.new(0, 0, 171, 183, 0, 0, 21, 33)
 	AmmoRotateArrow02:setAlpha(0.5)
 	AmmoRotateArrow02:setZRot(180)
-	AmmoRotateArrow02:setImage(RegisterImage(0x2B3D30230F9AC54))
-	AmmoRotateArrow02:setMaterial(LUI.UIImage.GetCachedMaterial(0xF755127C95CF5B6))
+	AmmoRotateArrow02:setImage(RegisterImage(@"hash_52B3D30230F9AC54"))
+	AmmoRotateArrow02:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_F755127C95CF5B6"))
 	AmmoRotateArrow02:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(AmmoRotateArrow02)
 	self.AmmoRotateArrow02 = AmmoRotateArrow02
 	local AmmoRotateDivider = LUI.UIImage.new(0, 0, 204, 236, 0, 0, 58, 62)
-	AmmoRotateDivider:setImage(RegisterImage(0x9C721E9B72AA904))
+	AmmoRotateDivider:setImage(RegisterImage(@"hash_9C721E9B72AA904"))
 	self:addElement(AmmoRotateDivider)
 	self.AmmoRotateDivider = AmmoRotateDivider
 	local AmmoFrameOther = LUI.UIImage.new(0, 0, 279, 343, 0, 0, 32.5, 78.5)
 	AmmoFrameOther:setAlpha(0)
-	AmmoFrameOther:setImage(RegisterImage(0x1176D5A9FDE2ACF))
+	AmmoFrameOther:setImage(RegisterImage(@"uie_ui_hud_vehicle_ac130_weapon_frame_other"))
 	self:addElement(AmmoFrameOther)
 	self.AmmoFrameOther = AmmoFrameOther
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)
@@ -71,10 +71,10 @@ CoD.vhud_gunship_ammo_dock.__resetProperties = function(f5_arg0)
 	f5_arg0.Ammo40mm:completeAnimation()
 	f5_arg0.Ammo25mm:completeAnimation()
 	f5_arg0.AmmoRotateArrow02:setAlpha(0.5)
-	f5_arg0.AmmoRotateArrow02:setMaterial(LUI.UIImage.GetCachedMaterial(0xF755127C95CF5B6))
+	f5_arg0.AmmoRotateArrow02:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_F755127C95CF5B6"))
 	f5_arg0.AmmoRotateArrow02:setShaderVector(0, 1, 0, 0, 0)
 	f5_arg0.AmmoRotateArrow01:setAlpha(0.5)
-	f5_arg0.AmmoRotateArrow01:setMaterial(LUI.UIImage.GetCachedMaterial(0xF755127C95CF5B6))
+	f5_arg0.AmmoRotateArrow01:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_F755127C95CF5B6"))
 	f5_arg0.AmmoRotateArrow01:setShaderVector(0, 1, 0, 0, 0)
 	f5_arg0.Ammo105mm:setLeftRight(0, 0, 16, 164)
 	f5_arg0.Ammo105mm:setTopBottom(0, 0, 6.5, 124.5)
@@ -150,7 +150,7 @@ CoD.vhud_gunship_ammo_dock.__clipsPerState = {
 			end
 			f7_arg0.AmmoRotateArrow01:completeAnimation()
 			f7_arg0.AmmoRotateArrow01:setAlpha(0.5)
-			f7_arg0.AmmoRotateArrow01:setMaterial(LUI.UIImage.GetCachedMaterial(0xF755127C95CF5B6))
+			f7_arg0.AmmoRotateArrow01:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_F755127C95CF5B6"))
 			f7_arg0.AmmoRotateArrow01:setShaderVector(0, 1, 0, 0, 0)
 			f7_local3(f7_arg0.AmmoRotateArrow01)
 			local f7_local4 = function(f14_arg0)
@@ -172,7 +172,7 @@ CoD.vhud_gunship_ammo_dock.__clipsPerState = {
 			end
 			f7_arg0.AmmoRotateArrow02:completeAnimation()
 			f7_arg0.AmmoRotateArrow02:setAlpha(0.5)
-			f7_arg0.AmmoRotateArrow02:setMaterial(LUI.UIImage.GetCachedMaterial(0xF755127C95CF5B6))
+			f7_arg0.AmmoRotateArrow02:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_F755127C95CF5B6"))
 			f7_arg0.AmmoRotateArrow02:setShaderVector(0, 1, 0, 0, 0)
 			f7_local4(f7_arg0.AmmoRotateArrow02)
 		end,
@@ -255,7 +255,7 @@ CoD.vhud_gunship_ammo_dock.__clipsPerState = {
 			end
 			f18_arg0.AmmoRotateArrow01:completeAnimation()
 			f18_arg0.AmmoRotateArrow01:setAlpha(0.5)
-			f18_arg0.AmmoRotateArrow01:setMaterial(LUI.UIImage.GetCachedMaterial(0xF755127C95CF5B6))
+			f18_arg0.AmmoRotateArrow01:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_F755127C95CF5B6"))
 			f18_arg0.AmmoRotateArrow01:setShaderVector(0, 1, 0, 0, 0)
 			f18_local3(f18_arg0.AmmoRotateArrow01)
 			local f18_local4 = function(f25_arg0)
@@ -277,7 +277,7 @@ CoD.vhud_gunship_ammo_dock.__clipsPerState = {
 			end
 			f18_arg0.AmmoRotateArrow02:completeAnimation()
 			f18_arg0.AmmoRotateArrow02:setAlpha(0.5)
-			f18_arg0.AmmoRotateArrow02:setMaterial(LUI.UIImage.GetCachedMaterial(0xF755127C95CF5B6))
+			f18_arg0.AmmoRotateArrow02:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_F755127C95CF5B6"))
 			f18_arg0.AmmoRotateArrow02:setShaderVector(0, 1, 0, 0, 0)
 			f18_local4(f18_arg0.AmmoRotateArrow02)
 		end,
@@ -359,7 +359,7 @@ CoD.vhud_gunship_ammo_dock.__clipsPerState = {
 			end
 			f29_arg0.AmmoRotateArrow01:completeAnimation()
 			f29_arg0.AmmoRotateArrow01:setAlpha(0.5)
-			f29_arg0.AmmoRotateArrow01:setMaterial(LUI.UIImage.GetCachedMaterial(0xF755127C95CF5B6))
+			f29_arg0.AmmoRotateArrow01:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_F755127C95CF5B6"))
 			f29_arg0.AmmoRotateArrow01:setShaderVector(0, 1, 0, 0, 0)
 			f29_local3(f29_arg0.AmmoRotateArrow01)
 			local f29_local4 = function(f36_arg0)
@@ -381,7 +381,7 @@ CoD.vhud_gunship_ammo_dock.__clipsPerState = {
 			end
 			f29_arg0.AmmoRotateArrow02:completeAnimation()
 			f29_arg0.AmmoRotateArrow02:setAlpha(0.5)
-			f29_arg0.AmmoRotateArrow02:setMaterial(LUI.UIImage.GetCachedMaterial(0xF755127C95CF5B6))
+			f29_arg0.AmmoRotateArrow02:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_F755127C95CF5B6"))
 			f29_arg0.AmmoRotateArrow02:setShaderVector(0, 1, 0, 0, 0)
 			f29_local4(f29_arg0.AmmoRotateArrow02)
 		end,

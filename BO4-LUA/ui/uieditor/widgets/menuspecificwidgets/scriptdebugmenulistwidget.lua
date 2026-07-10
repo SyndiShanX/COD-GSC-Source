@@ -15,7 +15,7 @@ CoD.ScriptDebugMenuListWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	local listItemName = LUI.UIText.new(0, 0, 22, 277, 0.5, 0.5, -18, 12)
 	listItemName:setZoom(10)
 	listItemName:setTTF("default")
-	listItemName:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	listItemName:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(listItemName)
 	self.listItemName = listItemName
 	self.listItemName:linkToElementModel(self, "color", true, function(model)

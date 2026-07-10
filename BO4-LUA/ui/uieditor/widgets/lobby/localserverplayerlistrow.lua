@@ -17,8 +17,8 @@ CoD.LocalServerPlayerListRow.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	Gamertag:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	Gamertag:setTTF("notosans_regular")
 	Gamertag:setLetterSpacing(1)
-	Gamertag:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Gamertag:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Gamertag:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Gamertag:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(Gamertag)
 	self.Gamertag = Gamertag
 	local LobbyLeaderIcon = CoD.LobbyLeaderIcon.new(f1_arg0, f1_arg1, 0, 0, 4, 26, 0, 0, 9, 31)

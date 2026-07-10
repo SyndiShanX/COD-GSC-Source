@@ -10,7 +10,7 @@ CoD.HardpointObjectiveNotification.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	self.soundSet = "default"
 	self.anyChildUsesUpdateState = true
 	local HardpointTimer = CoD.WaypointRadialTimer.new(f1_arg0, f1_arg1, 0, 0, 0, 60, 0, 0, 0, 60)
-	HardpointTimer.WaypointTimerImage:setImage(RegisterImage(0x48ED8422CAFED83))
+	HardpointTimer.WaypointTimerImage:setImage(RegisterImage(@"uie_t7_codcaster_gamemode_hardpoint"))
 	HardpointTimer:subscribeToGlobalModel(f1_arg1, "WaypointObjectiveHardpoint", nil, function(model)
 		HardpointTimer:setModel(model, f1_arg1)
 	end)

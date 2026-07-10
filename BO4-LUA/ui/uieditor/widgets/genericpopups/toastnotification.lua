@@ -74,7 +74,7 @@ CoD.ToastNotification.__clipsPerState = {
 					f6_arg0:setAlpha(1)
 					f6_arg0:registerEventHandler("transition_complete_keyframe", f6_local0)
 				end
-				f4_arg0.ToastContainer:beginAnimation(230, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f4_arg0.ToastContainer:beginAnimation(230, Enum[@"luitween"][@"luitween_ease_out"])
 				f4_arg0.ToastContainer:setTopBottom(1, 1, -158.5, -71.5)
 				f4_arg0.ToastContainer:setAlpha(0.85)
 				f4_arg0.ToastContainer:registerEventHandler("interrupted_keyframe", f4_arg0.clipInterrupted)

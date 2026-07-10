@@ -9,8 +9,8 @@ CoD.bleedOutClampedArrow.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	local arrow = LUI.UIImage.new(0, 0, 325, 389, 0, 0, 16, 80)
 	arrow:setZRot(90)
 	arrow:setScale(1.5, 1.5)
-	arrow:setImage(RegisterImage(0xAB17136E34541E3))
-	arrow:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	arrow:setImage(RegisterImage(@"uie_ui_hud_revive_arrow"))
+	arrow:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(arrow)
 	self.arrow = arrow
 	if PostLoadFunc then

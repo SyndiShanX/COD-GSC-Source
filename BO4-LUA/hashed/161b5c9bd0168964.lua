@@ -9,17 +9,17 @@ CoD.SpawnSelectInfoArrow.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local SpawnWarningArrow03 = LUI.UIImage.new(0, 0, 0, 6, 0, 0, 0, 8)
 	SpawnWarningArrow03:setRGB(1, 0, 0)
-	SpawnWarningArrow03:setImage(RegisterImage(0xCC0A39499C4FD76))
+	SpawnWarningArrow03:setImage(RegisterImage(@"hash_CC0A39499C4FD76"))
 	self:addElement(SpawnWarningArrow03)
 	self.SpawnWarningArrow03 = SpawnWarningArrow03
 	local SpawnWarningArrow02 = LUI.UIImage.new(0, 0, 4, 10, 0, 0, 0, 8)
 	SpawnWarningArrow02:setRGB(1, 0, 0)
-	SpawnWarningArrow02:setImage(RegisterImage(0xCC0A39499C4FD76))
+	SpawnWarningArrow02:setImage(RegisterImage(@"hash_CC0A39499C4FD76"))
 	self:addElement(SpawnWarningArrow02)
 	self.SpawnWarningArrow02 = SpawnWarningArrow02
 	local SpawnWarningArrow01 = LUI.UIImage.new(0, 0, 8, 14, 0, 0, 0, 8)
 	SpawnWarningArrow01:setRGB(1, 0, 0)
-	SpawnWarningArrow01:setImage(RegisterImage(0xCC0A39499C4FD76))
+	SpawnWarningArrow01:setImage(RegisterImage(@"hash_CC0A39499C4FD76"))
 	self:addElement(SpawnWarningArrow01)
 	self.SpawnWarningArrow01 = SpawnWarningArrow01
 	self:mergeStateConditions({

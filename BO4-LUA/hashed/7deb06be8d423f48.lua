@@ -33,11 +33,11 @@ LUI.createMenu.SkippableVoDViewer = function(f1_arg0, f1_arg1)
 	self.MovieSubtitles = MovieSubtitles
 	local f1_local5 = self
 	local f1_local6 = self.subscribeToModel
-	local f1_local7 = Engine[0x8DF2E5447F384B9]()
+	local f1_local7 = Engine[@"getglobalmodel"]()
 	f1_local6(f1_local5, f1_local7.cutsceneSkippable, function(f3_arg0, f3_arg1)
-		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if CoD.ModelUtility.IsGlobalModelValueTrue("cutsceneSkippable") then
 			CoD.VideoStreamingUtility.SkipVoDViewer(menu, controller)
 			return true
@@ -45,7 +45,7 @@ LUI.createMenu.SkippableVoDViewer = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if CoD.ModelUtility.IsGlobalModelValueTrue("cutsceneSkippable") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 			return false
 		else
 			return false
@@ -58,7 +58,7 @@ LUI.createMenu.SkippableVoDViewer = function(f1_arg0, f1_arg1)
 	end
 	f1_local1:addMenuOpenedCallback(self.__on_menuOpened_self)
 	self:subscribeToGlobalModel(f1_arg0, "LiveEventViewer", "currentQuality", function(model)
-		UpdateButtonPromptState(f1_local1, self, f1_arg0, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+		UpdateButtonPromptState(f1_local1, self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 	end)
 	if CoD.isPC then
 		LiveEventViewerMovieAndBackground.id = "LiveEventViewerMovieAndBackground"

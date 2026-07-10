@@ -30,22 +30,22 @@ CoD.LootBaseOptionGrid.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	LootBaseGrid:setHorizontalCount(10)
 	LootBaseGrid:setVerticalCount(3)
 	LootBaseGrid:setSpacing(10)
-	LootBaseGrid:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	LootBaseGrid:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	LootBaseGrid:setDataSource("WeaponOptions")
 	LootBaseGrid:linkToElementModel(LootBaseGrid, "itemIndex", true, function(model, f4_arg1)
-		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	LootBaseGrid:appendEventHandler("input_source_changed", function(f5_arg0, f5_arg1)
 		f5_arg1.menu = f5_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f5_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f5_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x4D2505E19049444])
+		CoD.Menu.UpdateButtonShownState(f5_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f5_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"hash_64D2505E19049444"])
 	end)
 	local BottomBracket9Slice = LootBaseGrid
 	local Label = LootBaseGrid.subscribeToModel
-	local f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	Label(BottomBracket9Slice, f1_local4.LastInput, function(f6_arg0, f6_arg1)
-		CoD.Menu.UpdateButtonShownState(f6_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f6_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x4D2505E19049444])
+		CoD.Menu.UpdateButtonShownState(f6_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f6_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"hash_64D2505E19049444"])
 	end, false)
 	LootBaseGrid:registerEventHandler("list_item_gain_focus", function(element, event)
 		local f7_local0 = nil
@@ -74,12 +74,12 @@ CoD.LootBaseOptionGrid.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 		elseif element.super.gainFocus then
 			f10_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x4D2505E19049444])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"hash_64D2505E19049444"])
 		return f10_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(LootBaseGrid, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(LootBaseGrid, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if not CoD.WeaponOptionsUtility.IsItemWeaponOptionLocked(menu, element, controller) and CoD.WeaponOptionsUtility.IsItemWeaponOptionLootOwned(menu, element, controller) and not CoD.WeaponOptionsUtility.IsWeaponOptionEquipped(menu, element, controller, "camoIndex") then
 			PlaySoundAlias("cac_equipment_add")
 			CoD.WeaponOptionsUtility.SetWeaponOptionClassItemHelper(self, element, controller, menu)
@@ -96,16 +96,16 @@ CoD.LootBaseOptionGrid.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 		end
 	end, function(element, menu, controller)
 		if not CoD.WeaponOptionsUtility.IsItemWeaponOptionLocked(menu, element, controller) and CoD.WeaponOptionsUtility.IsItemWeaponOptionLootOwned(menu, element, controller) and not CoD.WeaponOptionsUtility.IsWeaponOptionEquipped(menu, element, controller, "camoIndex") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		elseif CoD.WeaponOptionsUtility.IsWeaponOptionEquipped(menu, element, controller, "camoIndex") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(LootBaseGrid, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(LootBaseGrid, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], nil, function(element, menu, controller, model)
 		if CoD.WeaponOptionsUtility.IsWeaponOptionEquipped(menu, element, controller, "camoIndex") and IsGamepad(controller) then
 			PlaySoundAlias("cac_equipment_remove")
 			CoD.WeaponOptionsUtility.ClearWeaponOptionsHelper(self, element, menu, controller)
@@ -116,13 +116,13 @@ CoD.LootBaseOptionGrid.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 		end
 	end, function(element, menu, controller)
 		if CoD.WeaponOptionsUtility.IsWeaponOptionEquipped(menu, element, controller, "camoIndex") and IsGamepad(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x679ACA6FFC6C8F3, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"menu/remove", nil, nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(LootBaseGrid, f1_arg1, Enum[0x3DD78803F918E9D][0x4D2505E19049444], "ui_remove", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(LootBaseGrid, f1_arg1, Enum[@"luibutton"][@"hash_64D2505E19049444"], "ui_remove", function(element, menu, controller, model)
 		if CoD.WeaponOptionsUtility.IsWeaponOptionEquipped(menu, element, controller, "camoIndex") and IsMouseOrKeyboard(controller) then
 			PlaySoundAlias("cac_equipment_remove")
 			CoD.WeaponOptionsUtility.ClearWeaponOptionsHelper(self, element, menu, controller)
@@ -133,7 +133,7 @@ CoD.LootBaseOptionGrid.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 		end
 	end, function(element, menu, controller)
 		if CoD.WeaponOptionsUtility.IsWeaponOptionEquipped(menu, element, controller, "camoIndex") and IsMouseOrKeyboard(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x4D2505E19049444], 0x679ACA6FFC6C8F3, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "ui_remove")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"hash_64D2505E19049444"], @"menu/remove", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "ui_remove")
 			return true
 		else
 			return false
@@ -143,7 +143,7 @@ CoD.LootBaseOptionGrid.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 		CoD.GridAndListUtility.UpdateDataSource(LootBaseGrid, true, false, true)
 		UpdateSelfState(self, f1_arg1)
 	end)
-	LootBaseGrid:AddContextualMenuAction(f1_arg0, f1_arg1, 0x679ACA6FFC6C8F3, function(f18_arg0, f18_arg1, f18_arg2, f18_arg3)
+	LootBaseGrid:AddContextualMenuAction(f1_arg0, f1_arg1, @"menu/remove", function(f18_arg0, f18_arg1, f18_arg2, f18_arg3)
 		if CoD.WeaponOptionsUtility.IsWeaponOptionEquipped(f18_arg1, f18_arg0, f18_arg2, "camoIndex") and IsPC() then
 			return function(f19_arg0, f19_arg1, f19_arg2, f19_arg3)
 				PlaySoundAlias("cac_equipment_remove")
@@ -158,18 +158,18 @@ CoD.LootBaseOptionGrid.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	self.LootBaseGrid = LootBaseGrid
 	Label = LUI.UIText.new(0, 0, 0.5, 340.5, 0, 0, 11, 27)
 	Label:setRGB(ColorSet.T8__OFF__GRAY.r, ColorSet.T8__OFF__GRAY.g, ColorSet.T8__OFF__GRAY.b)
-	Label:setText(LocalizeToUpperString(0xF602F1BAFC731B5))
+	Label:setText(LocalizeToUpperString(@"hash_3F602F1BAFC731B5"))
 	Label:setTTF("default")
 	Label:setLetterSpacing(4)
-	Label:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Label:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Label:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Label:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(Label)
 	self.Label = Label
 	BottomBracket9Slice = LUI.UIImage.new(0, 0, 0, 1214, 0, 0, 28, 37)
 	BottomBracket9Slice:setAlpha(0.5)
 	BottomBracket9Slice:setZRot(180)
-	BottomBracket9Slice:setImage(RegisterImage(0xC325BED3F226657))
-	BottomBracket9Slice:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	BottomBracket9Slice:setImage(RegisterImage(@"hash_4C325BED3F226657"))
+	BottomBracket9Slice:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	BottomBracket9Slice:setShaderVector(0, 0, 0, 0, 0)
 	BottomBracket9Slice:setupNineSliceShader(16, 4)
 	self:addElement(BottomBracket9Slice)

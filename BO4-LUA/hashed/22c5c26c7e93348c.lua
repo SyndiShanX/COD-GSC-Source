@@ -43,7 +43,7 @@ CoD.CharacterSelection_CharacterInfoSeparator.__clipsPerState = {
 			f4_arg0:setupElementClipCounter(2)
 			local f4_local0 = function(f5_arg0)
 				local f5_local0 = function(f6_arg0)
-					f6_arg0:beginAnimation(300, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f6_arg0:beginAnimation(300, Enum[@"luitween"][@"luitween_ease_in"])
 					f6_arg0:setLeftRight(0.5, 0.5, -186.5, 213.5)
 					f6_arg0:setAlpha(1)
 					f6_arg0:registerEventHandler("transition_complete_keyframe", f4_arg0.clipFinished)

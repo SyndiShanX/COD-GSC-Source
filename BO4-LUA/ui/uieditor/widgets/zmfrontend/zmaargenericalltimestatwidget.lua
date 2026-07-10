@@ -15,8 +15,8 @@ CoD.ZMAARGenericAllTimeStatWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	self:addElement(PerformBg)
 	self.PerformBg = PerformBg
 	local YellowLine = LUI.UIImage.new(0, 1, 0, 0, 0, 0, 22, 30)
-	YellowLine:setImage(RegisterImage(0xE6E505307F7B8D7))
-	YellowLine:setMaterial(LUI.UIImage.GetCachedMaterial(0x44484DDFAF5C093))
+	YellowLine:setImage(RegisterImage(@"hash_1E6E505307F7B8D7"))
+	YellowLine:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_normal"))
 	YellowLine:setShaderVector(0, 0, 0, 0, 0)
 	YellowLine:setupNineSliceShader(3, 60)
 	self:addElement(YellowLine)
@@ -26,8 +26,8 @@ CoD.ZMAARGenericAllTimeStatWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	Value:setAlpha(0.8)
 	Value:setTTF("skorzhen")
 	Value:setLetterSpacing(2)
-	Value:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	Value:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	Value:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	Value:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	Value:linkToElementModel(self, "value", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -41,8 +41,8 @@ CoD.ZMAARGenericAllTimeStatWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	Title:setAlpha(0.5)
 	Title:setTTF("dinnext_regular")
 	Title:setLetterSpacing(1)
-	Title:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	Title:setAlignment(Enum[0x7A5123B654282D2][0x70510683C22104B])
+	Title:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	Title:setAlignment(Enum[@"luialignment"][@"lui_alignment_bottom"])
 	Title:linkToElementModel(self, "title", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -52,8 +52,8 @@ CoD.ZMAARGenericAllTimeStatWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	self:addElement(Title)
 	self.Title = Title
 	local TopBar = LUI.UIImage.new(0, 1, -5, 5, 0, 0, 17, 25)
-	TopBar:setImage(RegisterImage(0x712894B3AB5924C))
-	TopBar:setMaterial(LUI.UIImage.GetCachedMaterial(0x44484DDFAF5C093))
+	TopBar:setImage(RegisterImage(@"uie_ui_hud_zm_aar_common_bar"))
+	TopBar:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_normal"))
 	TopBar:setShaderVector(0, 0, 0, 0, 0)
 	TopBar:setupNineSliceShader(20, 4)
 	self:addElement(TopBar)
@@ -74,7 +74,7 @@ CoD.ZMAARGenericAllTimeStatWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	})
 	local f1_local6 = self
 	local f1_local7 = self.subscribeToModel
-	local f1_local8 = Engine[0x8DF2E5447F384B9]()
+	local f1_local8 = Engine[@"getglobalmodel"]()
 	f1_local7(f1_local6, f1_local8["lobbyRoot.lobbyNav"], function(f6_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

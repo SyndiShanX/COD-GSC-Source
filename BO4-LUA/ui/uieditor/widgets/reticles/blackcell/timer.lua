@@ -10,11 +10,11 @@ CoD.Timer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f
 	local timerbgshadow = LUI.UIImage.new(0.5, 0.5, -186, 192, 0.5, 0.5, -148, 140)
 	timerbgshadow:setRGB(0, 0, 0)
 	timerbgshadow:setAlpha(0.8)
-	timerbgshadow:setImage(RegisterImage(0x19AABF619BA81F))
+	timerbgshadow:setImage(RegisterImage(@"uie_t7_hud_rocketlauncher_timer"))
 	self:addElement(timerbgshadow)
 	self.timerbgshadow = timerbgshadow
 	local timerbg = LUI.UIImage.new(0.5, 0.5, -186, 192, 0.5, 0.5, -148, 140)
-	timerbg:setImage(RegisterImage(0x19AABF619BA81F))
+	timerbg:setImage(RegisterImage(@"uie_t7_hud_rocketlauncher_timer"))
 	self:addElement(timerbg)
 	self.timerbg = timerbg
 	local TimerShadow = LUI.UIText.new(0.5, 0.5, -78, 72, 0.5, 0.5, -30, 30)
@@ -22,7 +22,7 @@ CoD.Timer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f
 	TimerShadow:setAlpha(0.8)
 	TimerShadow:setTTF("default")
 	TimerShadow:setLetterSpacing(1)
-	TimerShadow:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	TimerShadow:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	TimerShadow:subscribeToGlobalModel(f1_arg1, "CurrentWeapon", "lockedOnEnemyTimeRemaining", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -34,7 +34,7 @@ CoD.Timer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f
 	local Timer = LUI.UIText.new(0.5, 0.5, -78, 72, 0.5, 0.5, -30, 30)
 	Timer:setTTF("default")
 	Timer:setLetterSpacing(1)
-	Timer:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	Timer:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	Timer:subscribeToGlobalModel(f1_arg1, "CurrentWeapon", "lockedOnEnemyTimeRemaining", function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -47,7 +47,7 @@ CoD.Timer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f
 		{
 			stateName = "Targetting",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsGlobalDataSourceModelValueEnumBitSet(f1_arg1, "CurrentWeapon", "lockedOnEnemy", Enum[0xF041D1802ECFE69][0xFFFAB60076992A1]) and CoD.ModelUtility.IsGlobalDataSourceModelValueGreaterThan(f1_arg1, "CurrentWeapon", "lockedOnEnemyTimeRemaining", 0)
+				return CoD.ModelUtility.IsGlobalDataSourceModelValueEnumBitSet(f1_arg1, "CurrentWeapon", "lockedOnEnemy", Enum[@"rocketlaunchertargetstatesflags"][@"rocket_launcher_target_found"]) and CoD.ModelUtility.IsGlobalDataSourceModelValueGreaterThan(f1_arg1, "CurrentWeapon", "lockedOnEnemyTimeRemaining", 0)
 			end,
 		},
 	})

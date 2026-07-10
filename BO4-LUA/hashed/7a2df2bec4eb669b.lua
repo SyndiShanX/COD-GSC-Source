@@ -11,21 +11,21 @@ CoD.ArmorPortraitBG.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	local PanelSlideoutMask = LUI.UIImage.new(0.5, 0.5, -18, 43, 0.5, 0.5, -29.5, 29.5)
 	PanelSlideoutMask:setRGB(0, 0, 0)
 	PanelSlideoutMask:setScale(1.2, 1.2)
-	PanelSlideoutMask:setImage(RegisterImage(0xDC84B7C0F459539))
-	PanelSlideoutMask:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	PanelSlideoutMask:setImage(RegisterImage(@"uie_ui_hud_core_player_panel_slideout_bg_mask"))
+	PanelSlideoutMask:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	PanelSlideoutMask:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(PanelSlideoutMask)
 	self.PanelSlideoutMask = PanelSlideoutMask
 	local backplate = LUI.UIImage.new(0, 0, 0, 92, 0, 0, 0, 64)
 	backplate:setAlpha(0)
-	backplate:setImage(RegisterImage(0x96AD74FFDF79A6C))
+	backplate:setImage(RegisterImage(@"uie_ui_hud_core_carryitem_backplate2"))
 	self:addElement(backplate)
 	self.backplate = backplate
 	self:mergeStateConditions({
 		{
 			stateName = "Invisible",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualTo(self, f1_arg1, "hasArmorSpecialty", false) and not CoD.BaseUtility.IsCurrentSessionModeEqualTo(Enum[0x9C0C2196D8313A0][0xBF1DCC8138A9D39])
+				return CoD.ModelUtility.IsSelfModelValueEqualTo(self, f1_arg1, "hasArmorSpecialty", false) and not CoD.BaseUtility.IsCurrentSessionModeEqualTo(Enum[@"emodes"][@"mode_warzone"])
 			end,
 		},
 		{
@@ -67,7 +67,7 @@ CoD.ArmorPortraitBG.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	end)
 	local f1_local3 = self
 	local f1_local4 = self.subscribeToModel
-	local f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local4(f1_local3, f1_local5["hudItems.armorIsOnCooldown"], function(f8_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

@@ -18,7 +18,7 @@ CoD.Challenges_FrameWidget_NearCompletion.new = function(f1_arg0, f1_arg1, f1_ar
 	NearCompletionList:setWidgetType(CoD.ChallengesNearCompletionWidget)
 	NearCompletionList:setVerticalCount(10)
 	NearCompletionList:setSpacing(14)
-	NearCompletionList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	NearCompletionList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	NearCompletionList:setDataSource("ChallengesNearCompletionList")
 	self:addElement(NearCompletionList)
 	self.NearCompletionList = NearCompletionList

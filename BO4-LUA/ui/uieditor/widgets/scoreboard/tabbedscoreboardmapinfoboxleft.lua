@@ -9,56 +9,56 @@ CoD.TabbedScoreboardMapInfoboxLeft.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local InfoLeftBarBot = LUI.UIImage.new(0, 0, -1, 141, 0, 0, 141, 149)
 	InfoLeftBarBot:setRGB(0.95, 0.95, 0.95)
-	InfoLeftBarBot:setImage(RegisterImage(0xB4D6116B68B53D0))
+	InfoLeftBarBot:setImage(RegisterImage(@"hash_2B4D6116B68B53D0"))
 	self:addElement(InfoLeftBarBot)
 	self.InfoLeftBarBot = InfoLeftBarBot
 	local InfoLeftBGBlur = LUI.UIImage.new(0, 0, 0.5, 142.5, 0, 0, 11.5, 129.5)
 	InfoLeftBGBlur:setAlpha(0)
-	InfoLeftBGBlur:setImage(RegisterImage(0x226F117FFC94E7F))
+	InfoLeftBGBlur:setImage(RegisterImage(@"hash_1226F117FFC94E7F"))
 	self:addElement(InfoLeftBGBlur)
 	self.InfoLeftBGBlur = InfoLeftBGBlur
 	local InfoLeftBG = LUI.UIImage.new(0, 0, -1, 141, 0, 0, 128, 128)
 	InfoLeftBG:setAlpha(0)
-	InfoLeftBG:setImage(RegisterImage(0x226F117FFC94E7F))
+	InfoLeftBG:setImage(RegisterImage(@"hash_1226F117FFC94E7F"))
 	self:addElement(InfoLeftBG)
 	self.InfoLeftBG = InfoLeftBG
 	local InfoLeftBarRed = LUI.UIImage.new(0, 0, -7, 155, 0, 0, 121, 147)
-	InfoLeftBarRed:setImage(RegisterImage(0x5F904AB9EE1698C))
+	InfoLeftBarRed:setImage(RegisterImage(@"hash_25F904AB9EE1698C"))
 	self:addElement(InfoLeftBarRed)
 	self.InfoLeftBarRed = InfoLeftBarRed
 	local InfoLeftBarRedAdd = LUI.UIImage.new(0, 0, -7, 155, 0, 0, 121, 147)
 	InfoLeftBarRedAdd:setAlpha(0)
-	InfoLeftBarRedAdd:setImage(RegisterImage(0x5F904AB9EE1698C))
-	InfoLeftBarRedAdd:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	InfoLeftBarRedAdd:setImage(RegisterImage(@"hash_25F904AB9EE1698C"))
+	InfoLeftBarRedAdd:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	InfoLeftBarRedAdd:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(InfoLeftBarRedAdd)
 	self.InfoLeftBarRedAdd = InfoLeftBarRedAdd
 	local InfoLeftBarTop = LUI.UIImage.new(0, 0, -1, 141, 0, 0, 119, 127)
 	InfoLeftBarTop:setRGB(0.95, 0.95, 0.95)
-	InfoLeftBarTop:setImage(RegisterImage(0xB4D6116B68B53D0))
+	InfoLeftBarTop:setImage(RegisterImage(@"hash_2B4D6116B68B53D0"))
 	self:addElement(InfoLeftBarTop)
 	self.InfoLeftBarTop = InfoLeftBarTop
 	local TerminalNumber = LUI.UIImage.new(0, 0, 100, 138, 0, 0, 105, 121)
-	TerminalNumber:setImage(RegisterImage(0xA97042C69BD9D14))
+	TerminalNumber:setImage(RegisterImage(@"hash_7A97042C69BD9D14"))
 	self:addElement(TerminalNumber)
 	self.TerminalNumber = TerminalNumber
 	local VisibilityTextBlur = LUI.UIImage.new(0, 0, 11, 131, 0, 0, 130, 140)
 	VisibilityTextBlur:setAlpha(0.1)
-	VisibilityTextBlur:setImage(RegisterImage(0x2B45159FDA9D9AA))
-	VisibilityTextBlur:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	VisibilityTextBlur:setImage(RegisterImage(@"hash_42B45159FDA9D9AA"))
+	VisibilityTextBlur:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(VisibilityTextBlur)
 	self.VisibilityTextBlur = VisibilityTextBlur
 	local VisibilityText = LUI.UIImage.new(0, 0, 10, 130, 0, 0, 129, 139)
-	VisibilityText:setImage(RegisterImage(0x2B45159FDA9D9AA))
-	VisibilityText:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	VisibilityText:setImage(RegisterImage(@"hash_42B45159FDA9D9AA"))
+	VisibilityText:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(VisibilityText)
 	self.VisibilityText = VisibilityText
 	local FuiElements = LUI.UIImage.new(0, 0, -3, 143, 0, 0, 6, 124)
-	FuiElements:setImage(RegisterImage(0x14E6AA075E443C8))
+	FuiElements:setImage(RegisterImage(@"hash_714E6AA075E443C8"))
 	self:addElement(FuiElements)
 	self.FuiElements = FuiElements
 	local infoLeftText = LUI.UIImage.new(0, 0, 3, 145, 0, 0, 151, 169)
-	infoLeftText:setImage(RegisterImage(0x14E6DA075E448E1))
+	infoLeftText:setImage(RegisterImage(@"hash_714E6DA075E448E1"))
 	self:addElement(infoLeftText)
 	self.infoLeftText = infoLeftText
 	if PostLoadFunc then
@@ -133,11 +133,11 @@ CoD.TabbedScoreboardMapInfoboxLeft.__clipsPerState = {
 			f3_arg0.InfoLeftBarRed:registerEventHandler("transition_complete_keyframe", f3_local2)
 			local f3_local3 = function(f8_arg0)
 				local f8_local0 = function(f9_arg0)
-					f9_arg0:beginAnimation(200, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f9_arg0:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_in"])
 					f9_arg0:setAlpha(0.5)
 					f9_arg0:registerEventHandler("transition_complete_keyframe", f3_arg0.clipFinished)
 				end
-				f8_arg0:beginAnimation(600, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f8_arg0:beginAnimation(600, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_both"])
 				f8_arg0:setAlpha(1)
 				f8_arg0:registerEventHandler("transition_complete_keyframe", f8_local0)
 			end
@@ -183,7 +183,7 @@ CoD.TabbedScoreboardMapInfoboxLeft.__clipsPerState = {
 			f3_arg0.VisibilityText:registerEventHandler("transition_complete_keyframe", f3_local6)
 			local f3_local7 = function(f15_arg0)
 				local f15_local0 = function(f16_arg0)
-					f16_arg0:beginAnimation(300, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f16_arg0:beginAnimation(300, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_both"])
 					f16_arg0:setAlpha(1)
 					f16_arg0:registerEventHandler("transition_complete_keyframe", f3_arg0.clipFinished)
 				end

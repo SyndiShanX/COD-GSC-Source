@@ -1,28 +1,28 @@
 CoD.GameEndScoreUtility = {}
 CoD.GameEndScoreUtility.MaxTeamPoseClients = 6
 CoD.GameEndScoreUtility.ShowOutcomeTransition = function(f1_arg0)
-	if Engine[0xDD333420C49E6D0](f1_arg0, Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2]) or Engine[0xDD333420C49E6D0](f1_arg0, Enum[0x7F032C2EF103A1A][0x1CDCB451655ABCF]) or Engine[0xDD333420C49E6D0](f1_arg0, Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F]) or Engine[0xDD333420C49E6D0](f1_arg0, Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04]) then
+	if Engine[@"isvisibilitybitset"](f1_arg0, Enum[@"uivisibilitybit"][@"bit_in_killcam"]) or Engine[@"isvisibilitybitset"](f1_arg0, Enum[@"uivisibilitybit"][@"bit_final_killcam"]) or Engine[@"isvisibilitybitset"](f1_arg0, Enum[@"uivisibilitybit"][@"bit_play_of_the_match"]) or Engine[@"isvisibilitybitset"](f1_arg0, Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]) then
 		return false
 	else
-		local f1_local0 = Engine[0x4DF5CFBC1771947](f1_arg0)
+		local f1_local0 = Engine[@"getmodelforcontroller"](f1_arg0)
 		return f1_local0.gameScore.currentState:get() == "outcome"
 	end
 end
 CoD.GameEndScoreUtility.ShowOutcomeTransitionTransparent = function(f2_arg0)
-	if Engine[0xDD333420C49E6D0](f2_arg0, Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2]) or Engine[0xDD333420C49E6D0](f2_arg0, Enum[0x7F032C2EF103A1A][0x1CDCB451655ABCF]) or Engine[0xDD333420C49E6D0](f2_arg0, Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F]) or Engine[0xDD333420C49E6D0](f2_arg0, Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04]) then
+	if Engine[@"isvisibilitybitset"](f2_arg0, Enum[@"uivisibilitybit"][@"bit_in_killcam"]) or Engine[@"isvisibilitybitset"](f2_arg0, Enum[@"uivisibilitybit"][@"bit_final_killcam"]) or Engine[@"isvisibilitybitset"](f2_arg0, Enum[@"uivisibilitybit"][@"bit_play_of_the_match"]) or Engine[@"isvisibilitybitset"](f2_arg0, Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]) then
 		return false
 	else
-		local f2_local0 = Engine[0x4DF5CFBC1771947](f2_arg0)
+		local f2_local0 = Engine[@"getmodelforcontroller"](f2_arg0)
 		return f2_local0.gameScore.currentState:get() == "outcome_transparent"
 	end
 end
 CoD.GameEndScoreUtility.ShowOutcomeWithScoreTransition = function(f3_arg0)
-	if Engine[0xDD333420C49E6D0](f3_arg0, Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2]) or Engine[0xDD333420C49E6D0](f3_arg0, Enum[0x7F032C2EF103A1A][0x1CDCB451655ABCF]) or Engine[0xDD333420C49E6D0](f3_arg0, Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F]) or Engine[0xDD333420C49E6D0](f3_arg0, Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04]) then
+	if Engine[@"isvisibilitybitset"](f3_arg0, Enum[@"uivisibilitybit"][@"bit_in_killcam"]) or Engine[@"isvisibilitybitset"](f3_arg0, Enum[@"uivisibilitybit"][@"bit_final_killcam"]) or Engine[@"isvisibilitybitset"](f3_arg0, Enum[@"uivisibilitybit"][@"bit_play_of_the_match"]) or Engine[@"isvisibilitybitset"](f3_arg0, Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]) then
 		return false
 	end
-	local f3_local0 = Engine[0x4DF5CFBC1771947](f3_arg0)
+	local f3_local0 = Engine[@"getmodelforcontroller"](f3_arg0)
 	f3_local0 = f3_local0.forceScoreboard:get() == 1
-	local f3_local1 = Engine[0x4DF5CFBC1771947](f3_arg0)
+	local f3_local1 = Engine[@"getmodelforcontroller"](f3_arg0)
 	if f3_local1.gameScore.currentState:get() == "outcome_with_score" then
 		f3_local1 = not f3_local0
 	else
@@ -31,12 +31,12 @@ CoD.GameEndScoreUtility.ShowOutcomeWithScoreTransition = function(f3_arg0)
 	return f3_local1
 end
 CoD.GameEndScoreUtility.ShowOutcomeWithTimeTransition = function(f4_arg0)
-	if Engine[0xDD333420C49E6D0](f4_arg0, Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2]) or Engine[0xDD333420C49E6D0](f4_arg0, Enum[0x7F032C2EF103A1A][0x1CDCB451655ABCF]) or Engine[0xDD333420C49E6D0](f4_arg0, Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F]) or Engine[0xDD333420C49E6D0](f4_arg0, Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04]) then
+	if Engine[@"isvisibilitybitset"](f4_arg0, Enum[@"uivisibilitybit"][@"bit_in_killcam"]) or Engine[@"isvisibilitybitset"](f4_arg0, Enum[@"uivisibilitybit"][@"bit_final_killcam"]) or Engine[@"isvisibilitybitset"](f4_arg0, Enum[@"uivisibilitybit"][@"bit_play_of_the_match"]) or Engine[@"isvisibilitybitset"](f4_arg0, Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]) then
 		return false
 	end
-	local f4_local0 = Engine[0x4DF5CFBC1771947](f4_arg0)
+	local f4_local0 = Engine[@"getmodelforcontroller"](f4_arg0)
 	f4_local0 = f4_local0.forceScoreboard:get() == 1
-	local f4_local1 = Engine[0x4DF5CFBC1771947](f4_arg0)
+	local f4_local1 = Engine[@"getmodelforcontroller"](f4_arg0)
 	if f4_local1.gameScore.currentState:get() == "outcome_with_time" then
 		f4_local1 = not f4_local0
 	else
@@ -45,14 +45,14 @@ CoD.GameEndScoreUtility.ShowOutcomeWithTimeTransition = function(f4_arg0)
 	return f4_local1
 end
 CoD.GameEndScoreUtility.ShowOutcomeWithScoreOrTimeTransition = function(f5_arg0)
-	if Engine[0xDD333420C49E6D0](f5_arg0, Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2]) or Engine[0xDD333420C49E6D0](f5_arg0, Enum[0x7F032C2EF103A1A][0x1CDCB451655ABCF]) or Engine[0xDD333420C49E6D0](f5_arg0, Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F]) or Engine[0xDD333420C49E6D0](f5_arg0, Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04]) then
+	if Engine[@"isvisibilitybitset"](f5_arg0, Enum[@"uivisibilitybit"][@"bit_in_killcam"]) or Engine[@"isvisibilitybitset"](f5_arg0, Enum[@"uivisibilitybit"][@"bit_final_killcam"]) or Engine[@"isvisibilitybitset"](f5_arg0, Enum[@"uivisibilitybit"][@"bit_play_of_the_match"]) or Engine[@"isvisibilitybitset"](f5_arg0, Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]) then
 		return false
 	end
-	local f5_local0 = Engine[0x4DF5CFBC1771947](f5_arg0)
+	local f5_local0 = Engine[@"getmodelforcontroller"](f5_arg0)
 	f5_local0 = f5_local0.forceScoreboard:get() == 1
-	local f5_local1 = Engine[0x4DF5CFBC1771947](f5_arg0)
+	local f5_local1 = Engine[@"getmodelforcontroller"](f5_arg0)
 	if f5_local1.gameScore.currentState:get() ~= "outcome_with_score" then
-		f5_local1 = Engine[0x4DF5CFBC1771947](f5_arg0)
+		f5_local1 = Engine[@"getmodelforcontroller"](f5_arg0)
 		if f5_local1.gameScore.currentState:get() == "outcome_with_time" then
 			f5_local1 = not f5_local0
 		end
@@ -61,19 +61,19 @@ CoD.GameEndScoreUtility.ShowOutcomeWithScoreOrTimeTransition = function(f5_arg0)
 	f5_local1 = not f5_local0
 end
 CoD.GameEndScoreUtility.ShowWinningTeamTransition = function(f6_arg0)
-	if Engine[0xDD333420C49E6D0](f6_arg0, Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2]) or Engine[0xDD333420C49E6D0](f6_arg0, Enum[0x7F032C2EF103A1A][0x1CDCB451655ABCF]) or Engine[0xDD333420C49E6D0](f6_arg0, Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F]) or Engine[0xDD333420C49E6D0](f6_arg0, Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04]) then
+	if Engine[@"isvisibilitybitset"](f6_arg0, Enum[@"uivisibilitybit"][@"bit_in_killcam"]) or Engine[@"isvisibilitybitset"](f6_arg0, Enum[@"uivisibilitybit"][@"bit_final_killcam"]) or Engine[@"isvisibilitybitset"](f6_arg0, Enum[@"uivisibilitybit"][@"bit_play_of_the_match"]) or Engine[@"isvisibilitybitset"](f6_arg0, Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]) then
 		return false
 	else
-		local f6_local0 = Engine[0x4DF5CFBC1771947](f6_arg0)
+		local f6_local0 = Engine[@"getmodelforcontroller"](f6_arg0)
 		return f6_local0.gameScore.currentState:get() == "team_pose"
 	end
 end
 CoD.GameEndScoreUtility.IsGameScoreCurrentState = function(f7_arg0, f7_arg1)
-	local f7_local0 = Engine[0x4DF5CFBC1771947](f7_arg0)
+	local f7_local0 = Engine[@"getmodelforcontroller"](f7_arg0)
 	return f7_local0.gameScore.currentState:get() == f7_arg1
 end
 CoD.GameEndScoreUtility.ShowEliminationStateSkipButton = function(f8_arg0)
-	local f8_local0 = Engine[0x4DF5CFBC1771947](f8_arg0)
+	local f8_local0 = Engine[@"getmodelforcontroller"](f8_arg0)
 	f8_local0 = f8_local0.gameScore
 	if f8_local0.currentState:get() == "elimination" and f8_local0.postEliminationGameState:get() ~= "" then
 		return true
@@ -82,12 +82,12 @@ CoD.GameEndScoreUtility.ShowEliminationStateSkipButton = function(f8_arg0)
 	end
 end
 CoD.GameEndScoreUtility.CanShowWarzoneKillcam = function(f9_arg0)
-	if Engine[0xDBC2AD5002B261B](0x7878C82E15EEA35) == 1 and not Engine[0xBC62B0E988DCCAF]() then
-		local f9_local0 = Engine[0x4DF5CFBC1771947](f9_arg0)
-		if not f9_local0.gameScore.hasPlayedDeathCam:get() and (not CoD.GameEndScoreUtility.IsTeamAlive(f9_arg0) or Engine[0xDD333420C49E6D0](f9_arg0, Enum[0x7F032C2EF103A1A][0x198075B069840DC])) then
-			f9_local0 = Engine[0xDD333420C49E6D0](f9_arg0, Enum[0x7F032C2EF103A1A][0x534C7B2375D2D47])
+	if Engine[@"getgametypesetting"](@"allowkillcam") == 1 and not Engine[@"issplitscreen"]() then
+		local f9_local0 = Engine[@"getmodelforcontroller"](f9_arg0)
+		if not f9_local0.gameScore.hasPlayedDeathCam:get() and (not CoD.GameEndScoreUtility.IsTeamAlive(f9_arg0) or Engine[@"isvisibilitybitset"](f9_arg0, Enum[@"uivisibilitybit"][@"bit_game_ended"])) then
+			f9_local0 = Engine[@"isvisibilitybitset"](f9_arg0, Enum[@"uivisibilitybit"][@"bit_player_dead"])
 			if not f9_local0 then
-				f9_local0 = Engine[0xDD333420C49E6D0](f9_arg0, Enum[0x7F032C2EF103A1A][0x6FFF566DCC09BBD])
+				f9_local0 = Engine[@"isvisibilitybitset"](f9_arg0, Enum[@"uivisibilitybit"][@"bit_spectating_client"])
 			end
 			return f9_local0
 		end
@@ -95,9 +95,9 @@ CoD.GameEndScoreUtility.CanShowWarzoneKillcam = function(f9_arg0)
 	return false
 end
 CoD.GameEndScoreUtility.CanShowWarzoneSpectate = function(f10_arg0)
-	local f10_local0 = Engine[0x4DF5CFBC1771947](f10_arg0)
+	local f10_local0 = Engine[@"getmodelforcontroller"](f10_arg0)
 	f10_local0 = f10_local0.gameScore.currentState:get()
-	local f10_local1 = Engine[0x4DF5CFBC1771947](f10_arg0)
+	local f10_local1 = Engine[@"getmodelforcontroller"](f10_arg0)
 	local f10_local2
 	if IsBooleanDvarSet("ui_showWZAAR") then
 		f10_local2 = f10_local1.hudItems.warzone.aarViewed:get()
@@ -125,7 +125,7 @@ CoD.GameEndScoreUtility.ShowScoreInsteadOfPips = function(f11_arg0)
 			if not f11_local0 then
 				f11_local0 = CoD.HUDUtility.IsGameTypeEqualToString("dom_dm")
 				if not f11_local0 then
-					f11_local0 = Engine[0x4DF5CFBC1771947](f11_arg0)
+					f11_local0 = Engine[@"getmodelforcontroller"](f11_arg0)
 					f11_local0 = f11_local0.gameScore.roundWinLimit:get() > 4
 				end
 			end
@@ -134,7 +134,7 @@ CoD.GameEndScoreUtility.ShowScoreInsteadOfPips = function(f11_arg0)
 	return f11_local0
 end
 CoD.GameEndScoreUtility.ShowMatchBonus = function(f12_arg0, f12_arg1)
-	local f12_local0 = Engine[0x4DF5CFBC1771947](f12_arg1)
+	local f12_local0 = Engine[@"getmodelforcontroller"](f12_arg1)
 	f12_local0 = f12_local0.gameScore
 	if f12_local0 then
 		local f12_local1 = f12_local0.isRoundEnd
@@ -153,66 +153,66 @@ CoD.GameEndScoreUtility.ShowMatchBonus = function(f12_arg0, f12_arg1)
 	end
 end
 CoD.GameEndScoreUtility.GetEndTypeString = function(f13_arg0, f13_arg1, f13_arg2, f13_arg3)
-	local f13_local0 = 0x8B69A4A25A9ED2C
+	local f13_local0 = @"hash_48B69A4A25A9ED2C"
 	local f13_local1 = nil
 	if f13_arg3 then
-		f13_local1 = Engine[0x83B01F154A61015](f13_arg0)
+		f13_local1 = Engine[@"hash_83B01F154A61015"](f13_arg0)
 	else
-		f13_local1 = Engine[0x846CEC728EAE5BC](f13_arg0, f13_arg1)
+		f13_local1 = Engine[@"hash_6846CEC728EAE5BC"](f13_arg0, f13_arg1)
 	end
-	if f13_local1 == Enum[0xAA52C747CC1587A][0x1BBB87B87C962D] then
+	if f13_local1 == Enum[@"endroundtype"][0x1BBB87B87C962D] then
 		if f13_arg3 then
 			f13_local0 = f13_local0 .. "dnf_match"
 		else
 			f13_local0 = f13_local0 .. "dnf_round"
 		end
-	elseif f13_local1 == Enum[0xAA52C747CC1587A][0x683836650E29384] then
+	elseif f13_local1 == Enum[@"endroundtype"][@"hash_3683836650E29384"] then
 		if f13_arg2 then
 			f13_local0 = f13_local0 .. "completed_winner"
 		else
 			f13_local0 = f13_local0 .. "completed_loser"
 		end
-	elseif f13_local1 == Enum[0xAA52C747CC1587A][0xC9D96623F884FD1] then
+	elseif f13_local1 == Enum[@"endroundtype"][@"hash_3C9D96623F884FD1"] then
 		f13_local0 = f13_local0 .. "timelimit"
-	elseif f13_local1 == Enum[0xAA52C747CC1587A][0x6E013C97845C972] or f13_local1 == Enum[0xAA52C747CC1587A][0xE40EAEAF56BC228] then
+	elseif f13_local1 == Enum[@"endroundtype"][@"hash_36E013C97845C972"] or f13_local1 == Enum[@"endroundtype"][@"hash_6E40EAEAF56BC228"] then
 		f13_local0 = f13_local0 .. "scorelimit"
-	elseif f13_local1 == Enum[0xAA52C747CC1587A][0x1D01C89DF495850] then
+	elseif f13_local1 == Enum[@"endroundtype"][@"hash_71D01C89DF495850"] then
 		f13_local0 = f13_local0 .. "roundlimit"
-	elseif f13_local1 == Enum[0xAA52C747CC1587A][0x2DF76230CCB22BF] then
+	elseif f13_local1 == Enum[@"endroundtype"][@"hash_62DF76230CCB22BF"] then
 		if f13_arg2 then
 			f13_local0 = f13_local0 .. "eliminated_winner"
 		else
 			f13_local0 = f13_local0 .. "eliminated_loser"
 		end
-	elseif f13_local1 == Enum[0xAA52C747CC1587A][0x8C62F816D4E87FB] then
+	elseif f13_local1 == Enum[@"endroundtype"][@"hash_58C62F816D4E87FB"] then
 		f13_local0 = f13_local0 .. "forfeited"
-	elseif f13_local1 == Enum[0xAA52C747CC1587A][0x1011D71A3C6AEE9] then
+	elseif f13_local1 == Enum[@"endroundtype"][@"hash_21011D71A3C6AEE9"] then
 		f13_local0 = f13_local0 .. "ended"
-	elseif f13_local1 == Enum[0xAA52C747CC1587A][0x9896C618B952FEB] then
+	elseif f13_local1 == Enum[@"endroundtype"][@"hash_49896C618B952FEB"] then
 		f13_local0 = f13_local0 .. "host_ended"
-	elseif f13_local1 == Enum[0xAA52C747CC1587A][0xAD4085D51F9596D] then
+	elseif f13_local1 == Enum[@"endroundtype"][@"hash_1AD4085D51F9596D"] then
 		f13_local0 = f13_local0 .. "host_sucks"
 	end
 	return CoD.GameEndScoreUtility.EndTypeStrings[f13_local0] or 0x0
 end
 CoD.GameEndScoreUtility.GetChallengeCoinImage = function(f14_arg0)
-	local f14_local0 = Engine[0xC53F8D38DF9042B](Engine[0xFC38819EA2193BA]())
+	local f14_local0 = Engine[@"converttoxhash"](Engine[@"getcurrentgametype"]())
 	local f14_local1 = CoD.GetCurrentPlayerStats(f14_arg0)
 	if f14_local1 and f14_local1.PlayerStatsByGameType and f14_local1.PlayerStatsByGameType[f14_local0] then
-		return Engine[0x450462A7BEA79E5](f14_local1.PlayerStatsByGameType[f14_local0].WINS.StatValue:get())
+		return Engine[@"hash_2450462A7BEA79E5"](f14_local1.PlayerStatsByGameType[f14_local0].WINS.StatValue:get())
 	else
-		return 0x7615068F50B3D66
+		return @"blacktransparent"
 	end
 end
 CoD.GameEndScoreUtility.GetChallengeCoinImageForWins = function(f15_arg0)
-	return Engine[0x450462A7BEA79E5](f15_arg0)
+	return Engine[@"hash_2450462A7BEA79E5"](f15_arg0)
 end
 CoD.GameEndScoreUtility.IsSoloTeamGame = function()
-	local f16_local0 = Engine[0x1E32FEF495242B8]()
-	return (f16_local0 and f16_local0[0x75B6643FCFEB8CA]:get()) == 1
+	local f16_local0 = Engine[@"getgametypesettings"]()
+	return (f16_local0 and f16_local0[@"maxteamplayers"]:get()) == 1
 end
 CoD.GameEndScoreUtility.IsTeamAlive = function(f17_arg0)
-	local f17_local0 = Engine[0x4DF5CFBC1771947](f17_arg0)
+	local f17_local0 = Engine[@"getmodelforcontroller"](f17_arg0)
 	local f17_local1 = f17_local0["hudItems.aliveTeammateCount"]
 	local f17_local2
 	if f17_local1 then
@@ -238,39 +238,39 @@ CoD.GameEndScoreUtility.SetupTransition = function(f18_arg0, f18_arg1)
 	if not f18_local1 then
 		return
 	end
-	local f18_local3 = Engine[0x3EAC408F958FF05]()
+	local f18_local3 = Engine[@"currentsessionmode"]()
 	CoD.ScoreboardUtility.HideScoreboard(nil, f18_local0)
-	local f18_local4 = Engine[0x4DF5CFBC1771947](f18_local0)
+	local f18_local4 = Engine[@"getmodelforcontroller"](f18_local0)
 	f18_local4 = f18_local4.gameScore
-	local f18_local5 = Engine[0x9672E391E0BF3DD](f18_local0) + 1
+	local f18_local5 = Engine[@"getroundsplayed"](f18_local0) + 1
 	local f18_local6 = LuaDefine.INVALID_CLIENT_INDEX
 	if IsCodCaster(f18_local0) then
-		local f18_local7 = Engine[0x4DF5CFBC1771947](f18_local0)
+		local f18_local7 = Engine[@"getmodelforcontroller"](f18_local0)
 		f18_local6 = f18_local7.deadSpectator.playerIndex:get()
 	else
-		f18_local6 = Engine[0x761955642304848](f18_local0)
+		f18_local6 = Engine[@"getclientnum"](f18_local0)
 	end
-	local f18_local7 = Engine[0x2C6B07FD023877B](f18_local0, f18_local6)
-	local f18_local8 = Engine[0x9AF1C77D7ED8839](f18_local0, f18_local7)
-	local f18_local9 = Enum[0x13A4717E5AC547][0x5C697ECEC0E8AFC]
-	local f18_local10 = Engine[0xCFD8E3722B9896B](f18_local0)
+	local f18_local7 = Engine[@"getteamid"](f18_local0, f18_local6)
+	local f18_local8 = Engine[@"getteamplatoon"](f18_local0, f18_local7)
+	local f18_local9 = Enum[@"team_t"][@"team_bad"]
+	local f18_local10 = Engine[@"hash_1CFD8E3722B9896B"](f18_local0)
 	if f18_arg1.isMatchEnd then
-		f18_local9 = Engine[0x92D186356890261](f18_local0)
+		f18_local9 = Engine[@"hash_392D186356890261"](f18_local0)
 	else
-		f18_local9 = Engine[0x520A1FFDAFA7BE2](f18_local0, f18_local5)
+		f18_local9 = Engine[@"hash_7520A1FFDAFA7BE2"](f18_local0, f18_local5)
 	end
 	local f18_local11 = f18_local9 == f18_local7
 	if CoD.HUDUtility.IsGameTypeEqualToString("warzone_pandemic_quad") and CoD.ModelUtility.IsModelValueEqualTo(f18_local0, "hudItems.playerOnInfectedPlatoon", 0) then
 		f18_local11 = true
 	end
 	local f18_local12
-	if f18_local9 ~= Enum[0x13A4717E5AC547][0x5C697ECEC0E8AFC] or f18_local10 ~= Enum[0x8EE86CE494064A7][0xEF25F6E52F7B74F] then
+	if f18_local9 ~= Enum[@"team_t"][@"team_bad"] or f18_local10 ~= Enum[@"platoon_t"][@"platoon_none"] then
 		f18_local12 = false
 	else
 		f18_local12 = true
 	end
 	local f18_local13
-	if f18_local8 == Enum[0x8EE86CE494064A7][0xEF25F6E52F7B74F] or f18_local8 ~= f18_local10 then
+	if f18_local8 == Enum[@"platoon_t"][@"platoon_none"] or f18_local8 ~= f18_local10 then
 		f18_local13 = false
 	else
 		f18_local13 = true
@@ -280,39 +280,39 @@ CoD.GameEndScoreUtility.SetupTransition = function(f18_arg0, f18_arg1)
 	local f18_local14 = 0x0
 	local f18_local15 = CoD.GameEndScoreUtility.GetEndTypeString(f18_local0, f18_local5, f18_local11, f18_arg1.isMatchEnd)
 	if f18_local12 then
-		f18_local14 = f18_local1[0x4BBB1B212C02253]
-		if f18_local3 == Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5] and not IsGametypeTeambased() then
+		f18_local14 = f18_local1[@"text_tie"]
+		if f18_local3 == Enum[@"emodes"][@"mode_multiplayer"] and not IsGametypeTeambased() then
 			local f18_local16 = DataSources.FFALeader.getModel()
 			f18_local16 = f18_local16.clientNum:get()
 			local f18_local17 = DataSources.FFASecondBest.getModel()
 			f18_local17 = f18_local17.clientNum:get()
 			local f18_local18 = DataSources.FFAThirdBest.getModel()
 			if f18_local6 == f18_local16 or f18_local6 == f18_local17 or f18_local6 == f18_local18.clientNum:get() then
-				f18_local14 = 0x4BE6C7C5CB087D9
+				f18_local14 = @"hash_64BE6C7C5CB087D9"
 			end
 		end
 	elseif f18_local11 or f18_local13 then
-		f18_local14 = f18_local1[0x6F2C80DCC081C0C]
+		f18_local14 = f18_local1[@"text_winner"]
 	else
-		f18_local14 = f18_local1[0x47C78DE1DFF5D84]
+		f18_local14 = f18_local1[@"text_loser"]
 		if CoD.HUDUtility.IsGameTypeEqualToString("warzone_pandemic_quad") then
-			f18_local14 = 0x41C79E0A2E1383E
+			f18_local14 = @"hash_141C79E0A2E1383E"
 		end
-		if f18_local3 == Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5] and not IsGametypeTeambased() then
+		if f18_local3 == Enum[@"emodes"][@"mode_multiplayer"] and not IsGametypeTeambased() then
 			local f18_local16 = DataSources.FFALeader.getModel()
 			f18_local16 = f18_local16.clientNum:get()
 			local f18_local17 = DataSources.FFASecondBest.getModel()
 			f18_local17 = f18_local17.clientNum:get()
 			local f18_local18 = DataSources.FFAThirdBest.getModel()
 			if f18_local6 == f18_local16 or f18_local6 == f18_local17 or f18_local6 == f18_local18.clientNum:get() then
-				f18_local14 = 0x4BE6C7C5CB087D9
+				f18_local14 = @"hash_64BE6C7C5CB087D9"
 			end
 		end
 	end
-	if f18_local1[0x79439EF7BFA9C2D] == "outcome" then
+	if f18_local1[@"type"] == "outcome" then
 		f18_local4.showSwitchingSides:set(false)
 		f18_local4.victory:set(f18_local11 or f18_local13)
-		if f18_local3 == Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5] and not IsGametypeTeambased() then
+		if f18_local3 == Enum[@"emodes"][@"mode_multiplayer"] and not IsGametypeTeambased() then
 			local f18_local16 = DataSources.FFALeader.getModel()
 			f18_local16 = f18_local16.clientNum:get()
 			local f18_local17 = DataSources.FFASecondBest.getModel()
@@ -335,13 +335,13 @@ CoD.GameEndScoreUtility.SetupTransition = function(f18_arg0, f18_arg1)
 		f18_local16(f18_local17, f18_local18)
 		f18_local4.titleString:set(f18_local14)
 		f18_local4.subtitleString:set(f18_local15)
-		if f18_local3 == Enum[0x9C0C2196D8313A0][0xBF1DCC8138A9D39] then
+		if f18_local3 == Enum[@"emodes"][@"mode_warzone"] then
 			f18_local4.hasPlayedFirstTimeIntro:set(false)
 			if f18_local11 or f18_local13 then
 				f18_local4.challengeCoinImage:set(CoD.GameEndScoreUtility.GetChallengeCoinImage(f18_local0))
 				f18_local4.currentState:set("outcome")
 			else
-				f18_local4.challengeCoinImage:set(0x7615068F50B3D66)
+				f18_local4.challengeCoinImage:set(@"blacktransparent")
 				if not f18_local4.hasShownEliminationScreen:get() and not CoD.HUDUtility.IsGameTypeEqualToString("warzone_pandemic_quad") then
 					f18_local4.hasShownEliminationScreen:set(true)
 					f18_local4.postEliminationGameState:set("defeat")
@@ -350,28 +350,28 @@ CoD.GameEndScoreUtility.SetupTransition = function(f18_arg0, f18_arg1)
 					f18_local4.currentState:set("defeat")
 				end
 			end
-			SendClientScriptNotify(f18_local0, "wz_outcome" .. Engine[0x7192908F4764ED3](f18_local0))
+			SendClientScriptNotify(f18_local0, "wz_outcome" .. Engine[@"getlocalclientnum"](f18_local0))
 		else
 			f18_local4.currentState:set("outcome")
 		end
-	elseif f18_local1[0x79439EF7BFA9C2D] == "outcome_with_score" or f18_local1[0x79439EF7BFA9C2D] == "outcome_with_time" then
-		f18_local4.currentState:set(f18_local1[0x79439EF7BFA9C2D])
+	elseif f18_local1[@"type"] == "outcome_with_score" or f18_local1[@"type"] == "outcome_with_time" then
+		f18_local4.currentState:set(f18_local1[@"type"])
 		if IsCodCaster(f18_local0) then
-			f18_local7 = Enum[0x13A4717E5AC547][0x2A34B055ADD98AB]
+			f18_local7 = Enum[@"team_t"][@"team_allies"]
 		end
-		local f18_local16 = Enum[0x13A4717E5AC547][0x2A34B055ADD98AB]
+		local f18_local16 = Enum[@"team_t"][@"team_allies"]
 		if f18_local16 == f18_local7 then
-			f18_local16 = Enum[0x13A4717E5AC547][0x3F83D7CE4BD7B68]
+			f18_local16 = Enum[@"team_t"][@"team_axis"]
 		end
 		local f18_local17 = 0
 		local f18_local18 = 0
 		if IsGametypeTeambased() then
 			if f18_arg1.isMatchEnd then
-				f18_local17 = Engine[0xE488A0BF2D44AA3](f18_local0, f18_local7)
-				f18_local18 = Engine[0xE488A0BF2D44AA3](f18_local0, f18_local16)
+				f18_local17 = Engine[@"hash_4E488A0BF2D44AA3"](f18_local0, f18_local7)
+				f18_local18 = Engine[@"hash_4E488A0BF2D44AA3"](f18_local0, f18_local16)
 			else
-				f18_local17 = Engine[0xD21537F86A6EF8C](f18_local0, f18_local5, f18_local7)
-				f18_local18 = Engine[0xD21537F86A6EF8C](f18_local0, f18_local5, f18_local16)
+				f18_local17 = Engine[@"hash_D21537F86A6EF8C"](f18_local0, f18_local5, f18_local7)
+				f18_local18 = Engine[@"hash_D21537F86A6EF8C"](f18_local0, f18_local5, f18_local16)
 			end
 		else
 			f18_local17 = f18_local4.playerScore:get()
@@ -380,7 +380,7 @@ CoD.GameEndScoreUtility.SetupTransition = function(f18_arg0, f18_arg1)
 		f18_local4.playerScoreOrTime:set(tostring(f18_local17))
 		f18_local4.enemyScoreOrTime:set(tostring(f18_local18))
 		f18_local4.victory:set(f18_local11)
-		if f18_local3 == Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5] and not IsGametypeTeambased() then
+		if f18_local3 == Enum[@"emodes"][@"mode_multiplayer"] and not IsGametypeTeambased() then
 			local f18_local19 = DataSources.FFALeader.getModel()
 			f18_local19 = f18_local19.clientNum:get()
 			local f18_local20 = DataSources.FFASecondBest.getModel()
@@ -403,14 +403,14 @@ CoD.GameEndScoreUtility.SetupTransition = function(f18_arg0, f18_arg1)
 		f18_local19(f18_local20, f18_local21)
 		f18_local4.titleString:set(f18_local14)
 		f18_local4.subtitleString:set(f18_local15)
-	elseif f18_local1[0x79439EF7BFA9C2D] == "final_killcam" or f18_local1[0x79439EF7BFA9C2D] == "play_of_the_match" then
+	elseif f18_local1[@"type"] == "final_killcam" or f18_local1[@"type"] == "play_of_the_match" then
 		f18_local4.showSwitchingSides:set(false)
 		f18_local4.victory:set(false)
 		f18_local4.draw:set(false)
 		f18_local4.defeat:set(false)
 		f18_local4.titleString:set(f18_local14)
 		f18_local4.subtitleString:set(0x0)
-	elseif f18_local1[0x79439EF7BFA9C2D] == "switch_sides" then
+	elseif f18_local1[@"type"] == "switch_sides" then
 		f18_local4.showSwitchingSides:set(true)
 		f18_local4.victory:set(false)
 		f18_local4.draw:set(false)
@@ -418,13 +418,13 @@ CoD.GameEndScoreUtility.SetupTransition = function(f18_arg0, f18_arg1)
 		f18_local4.titleString:set(f18_local14)
 		f18_local4.subtitleString:set(0x0)
 		f18_local4.currentState:set("outcome")
-	elseif f18_local1[0x79439EF7BFA9C2D] == "team_pose" then
+	elseif f18_local1[@"type"] == "team_pose" then
 		f18_local4.currentState:set("team_pose")
 		f18_local4.titleString:set(f18_local14)
 		f18_local4.subtitleString:set(f18_local15)
 		local f18_local16 = {}
-		for f18_local17 = Enum[0x58D01C33B090AAD][0x9D9BB354A936FC8], Enum[0x58D01C33B090AAD][0x9032750BE2456E9] - 1, 1 do
-			local f18_local21 = Engine[0xE4D2F32833CFA6C](f18_local17)
+		for f18_local17 = Enum[@"clientnum_t"][@"client_index_first"], Enum[@"clientnum_t"][@"client_index_count"] - 1, 1 do
+			local f18_local21 = Engine[@"getmodelforclient"](f18_local17)
 			if f18_local21.team:get() == f18_local9 then
 				table.insert(f18_local16, f18_local21)
 			end
@@ -447,12 +447,12 @@ CoD.GameEndScoreUtility.SetupTransition = function(f18_arg0, f18_arg1)
 			end
 			f18_local22(f18_local23, f18_local24)
 		end
-	elseif f18_local1[0x79439EF7BFA9C2D] == "elimination" then
+	elseif f18_local1[@"type"] == "elimination" then
 		if f18_arg1.teamElimination then
-			Engine[0x39E704619FEB20F]("team_eliminated")
-			Engine[0xC4146BA76D0F982]("uin_endgame_team_eliminated", f18_local0)
-			f18_local4.titleString:set(f18_local1[0x47C78DE1DFF5D84])
-			if f18_local3 == Enum[0x9C0C2196D8313A0][0xBF1DCC8138A9D39] and not f18_local4.hasShownEliminationScreen:get() then
+			Engine[@"playmenumusic"]("team_eliminated")
+			Engine[@"playsound"]("uin_endgame_team_eliminated", f18_local0)
+			f18_local4.titleString:set(f18_local1[@"text_loser"])
+			if f18_local3 == Enum[@"emodes"][@"mode_warzone"] and not f18_local4.hasShownEliminationScreen:get() then
 				f18_local4.hasShownEliminationScreen:set(true)
 				f18_local4.postEliminationGameState:set("team_elimination")
 				f18_local4.currentState:set("elimination")
@@ -460,25 +460,25 @@ CoD.GameEndScoreUtility.SetupTransition = function(f18_arg0, f18_arg1)
 				f18_local4.currentState:set("team_elimination")
 			end
 		else
-			Engine[0x39E704619FEB20F]("player_eliminated")
-			Engine[0xC4146BA76D0F982]("uin_endgame_player_eliminated", f18_local0)
+			Engine[@"playmenumusic"]("player_eliminated")
+			Engine[@"playsound"]("uin_endgame_player_eliminated", f18_local0)
 			f18_local4.currentState:set("elimination")
 			f18_local4.hasShownEliminationScreen:set(true)
-			f18_local4.titleString:set(f18_local1[0x4BBB1B212C02253])
+			f18_local4.titleString:set(f18_local1[@"text_tie"])
 		end
 		f18_local4.subtitleString:set(0x0)
-	elseif f18_local1[0x79439EF7BFA9C2D] == "high_value_operatives" then
+	elseif f18_local1[@"type"] == "high_value_operatives" then
 		f18_local4.currentState:set("high_value_operatives")
 	end
 	CoD.GameEndScoreUtility.SetEndGameQuote(f18_local0, f18_local11)
-	if f18_local1[0xE5485EF2E9F9384] > 0 then
+	if f18_local1[@"time"] > 0 then
 		if f18_arg0._delayTimer then
 			f18_arg0._delayTimer:close()
 			f18_arg0._delayTimer = nil
 		end
-		local f18_local16 = Engine[0xB14120A96E4C52D](f18_local0) + f18_local1[0xE5485EF2E9F9384]
+		local f18_local16 = Engine[@"getservertime"](f18_local0) + f18_local1[@"time"]
 		f18_arg0._delayTimer = LUI.UITimer.newElementTimer(20, false, function()
-			local f20_local0 = f18_local16 - Engine[0xB14120A96E4C52D](f18_local0)
+			local f20_local0 = f18_local16 - Engine[@"getservertime"](f18_local0)
 			f18_local4.transitionTimeRemaining:set(f20_local0)
 			if f20_local0 < 0 and f18_arg0._delayTimer then
 				f18_arg0._delayTimer:close()
@@ -491,13 +491,13 @@ end
 CoD.GameEndScoreUtility.SetEndGameQuote = function(f21_arg0, f21_arg1)
 	local f21_local0 = 0x0
 	local f21_local1 = 0x0
-	local f21_local2 = Engine[0xA7E3CD65E63086F](0x88D3CC27BB78B7)
+	local f21_local2 = Engine[@"hash_7A7E3CD65E63086F"](0x88D3CC27BB78B7)
 	if f21_local2 then
 		local f21_local3 = nil
 		if f21_arg1 then
-			f21_local3 = Engine[0xA7E3CD65E63086F](0x92804C37CD213F0)
+			f21_local3 = Engine[@"hash_7A7E3CD65E63086F"](@"hash_392804C37CD213F0")
 		else
-			f21_local3 = Engine[0xA7E3CD65E63086F](0x316E10F9989CF79)
+			f21_local3 = Engine[@"hash_7A7E3CD65E63086F"](@"hash_4316E10F9989CF79")
 		end
 		if f21_local3 then
 			local f21_local4 = #f21_local2
@@ -508,11 +508,11 @@ CoD.GameEndScoreUtility.SetEndGameQuote = function(f21_arg0, f21_arg1)
 			else
 				f21_local6 = f21_local2[f21_local5]
 			end
-			f21_local0 = f21_local6[0xA60F1143B2FD6F7]
-			f21_local1 = f21_local6[0xC748AFA4D8DEF96]
+			f21_local0 = f21_local6[@"quote"]
+			f21_local1 = f21_local6[@"author"]
 		end
 	end
-	local f21_local3 = Engine[0x4DF5CFBC1771947](f21_arg0)
+	local f21_local3 = Engine[@"getmodelforcontroller"](f21_arg0)
 	f21_local3 = f21_local3.gameScore
 	local f21_local4 = f21_local3:create("quote")
 	f21_local4:set(f21_local0)
@@ -523,8 +523,8 @@ CoD.GameEndScoreUtility.SetEliminatorData = function(f22_arg0, f22_arg1)
 	local f22_local0 = f22_arg1.data[1]
 	local f22_local1 = f22_arg1.data[2]
 	local f22_local2 = f22_arg1.data[3]
-	local f22_local3 = Engine[0x3EAC408F958FF05]()
-	local f22_local4 = Engine[0xE4D2F32833CFA6C](f22_local0)
+	local f22_local3 = Engine[@"currentsessionmode"]()
+	local f22_local4 = Engine[@"getmodelforclient"](f22_local0)
 	local f22_local5 = 0x0
 	local f22_local6 = 0x0
 	local f22_local7 = CoD.CACUtility.GetUnlockableItemInfo(f22_local2, f22_local3)
@@ -533,13 +533,13 @@ CoD.GameEndScoreUtility.SetEliminatorData = function(f22_arg0, f22_arg1)
 		f22_local6 = f22_local7.previewImageLarge
 	end
 	local f22_local8 = 0x0
-	local f22_local9 = 0x7615068F50B3D66
+	local f22_local9 = @"blacktransparent"
 	local f22_local10 = CoD.HUDUtility.GetModInfo(f22_local1)
 	if f22_local10 then
-		f22_local8 = f22_local10[0x55F116BF695C8F6]
-		f22_local9 = f22_local10[0x8027A8209C5D65F]
+		f22_local8 = f22_local10[@"displayname"]
+		f22_local9 = f22_local10[@"iconlarge"]
 	end
-	local f22_local11 = Engine[0x4DF5CFBC1771947](f22_arg1.controller)
+	local f22_local11 = Engine[@"getmodelforcontroller"](f22_arg1.controller)
 	f22_local11 = f22_local11.gameScore
 	local f22_local12 = f22_local11:create("attackerClientModel")
 	f22_local12:set(f22_local4)
@@ -566,7 +566,7 @@ CoD.GameEndScoreUtility.SetupRoundEndPreKillcamModels = function(f23_arg0, f23_a
 	local f23_local3 = f23_arg1.data[3]
 	local f23_local4 = f23_arg1.data[4]
 	local f23_local5 = f23_arg1.data[5]
-	local f23_local6 = Engine[0x4DF5CFBC1771947](f23_local0)
+	local f23_local6 = Engine[@"getmodelforcontroller"](f23_local0)
 	f23_local6 = f23_local6.gameScore
 	if not f23_local1 then
 		f23_local6.currentState:set("")
@@ -580,19 +580,19 @@ CoD.GameEndScoreUtility.SetupRoundEndPreKillcamModels = function(f23_arg0, f23_a
 			if not f23_local9 then
 			else
 				f23_local7(f23_local8, f23_local9)
-				f23_local7 = Engine[0xEFE2F6436680CF3](f23_local3, "CS_LOCALIZED_STRINGS")
-				f23_local8 = Engine[0xEFE2F6436680CF3](f23_local4, "CS_LOCALIZED_STRINGS")
+				f23_local7 = Engine[@"getistring"](f23_local3, "CS_LOCALIZED_STRINGS")
+				f23_local8 = Engine[@"getistring"](f23_local4, "CS_LOCALIZED_STRINGS")
 				if CoD.IsShoutcaster(f23_local0) then
-					f23_local7 = Engine[0xED84C33EC5F01EA](f23_local7, CoD.TeamUtility.GetTeamName(f23_local2))
+					f23_local7 = Engine[@"localize"](f23_local7, CoD.TeamUtility.GetTeamName(f23_local2))
 				end
 				f23_local6.titleString:set(f23_local7)
 				f23_local6.subtitleString:set(f23_local8)
-				local f23_local10 = Engine[0x2C6B07FD023877B](f23_local0, Engine[0x761955642304848](f23_local0))
+				local f23_local10 = Engine[@"getteamid"](f23_local0, Engine[@"getclientnum"](f23_local0))
 				if IsCodCaster(f23_local0) then
-					f23_local10 = Enum[0x13A4717E5AC547][0x2A34B055ADD98AB]
-					f23_local2 = Enum[0x13A4717E5AC547][0x2A34B055ADD98AB]
+					f23_local10 = Enum[@"team_t"][@"team_allies"]
+					f23_local2 = Enum[@"team_t"][@"team_allies"]
 				end
-				local f23_local11 = f23_local2 == Enum[0x13A4717E5AC547][0x5C697ECEC0E8AFC]
+				local f23_local11 = f23_local2 == Enum[@"team_t"][@"team_bad"]
 				f23_local6.victory:set(false)
 				f23_local6.draw:set(false)
 				f23_local6.defeat:set(false)
@@ -611,7 +611,7 @@ CoD.GameEndScoreUtility.SetupRoundEndPreKillcamModels = function(f23_arg0, f23_a
 	end
 end
 CoD.GameEndScoreUtility.InitGameInfoTables = function()
-	local f24_local0 = Engine[0xEA74FA7EE46E195](Engine[0xFC38819EA2193BA]())
+	local f24_local0 = Engine[@"getgametypeinfo"](Engine[@"getcurrentgametype"]())
 	CoD.GameEndScoreUtility.RoundTransitions = f24_local0.roundDisplayTransition
 	CoD.GameEndScoreUtility.FinalTransitions = f24_local0.finalDisplayTransition
 	CoD.GameEndScoreUtility.EliminationTransitions = f24_local0.eliminatedDisplayTransition
@@ -623,7 +623,7 @@ CoD.GameEndScoreUtility.InitGameInfoTables = function()
 	end
 end
 CoD.GameEndScoreUtility.InitializeUIModels = function(f25_arg0)
-	local f25_local0 = Engine[0x4DF5CFBC1771947](f25_arg0)
+	local f25_local0 = Engine[@"getmodelforcontroller"](f25_arg0)
 	f25_local0 = f25_local0:create("gameScore")
 	local f25_local1 = f25_local0:create("draw")
 	f25_local1:set(false)
@@ -652,13 +652,13 @@ CoD.GameEndScoreUtility.InitializeUIModels = function(f25_arg0)
 	f25_local1 = f25_local0:create("showSwitchingSides")
 	f25_local1:set(false)
 	f25_local1 = f25_local0:create("winningTeam")
-	f25_local1:set(Enum[0x13A4717E5AC547][0x5C697ECEC0E8AFC])
+	f25_local1:set(Enum[@"team_t"][@"team_bad"])
 	f25_local1 = f25_local0:create("winningTeamTopScoreCount")
 	f25_local1:set(0)
 	f25_local1 = f25_local0:create("teamRanking")
 	f25_local1:set(0)
 	f25_local1 = f25_local0:create("attackerClientModel")
-	f25_local1:set(Engine[0xE4D2F32833CFA6C](-1))
+	f25_local1:set(Engine[@"getmodelforclient"](-1))
 	f25_local1 = f25_local0:create("meansOfDeath")
 	f25_local1:set(0)
 	f25_local1 = f25_local0:create("meansOfDeathLabel")
@@ -685,11 +685,11 @@ CoD.GameEndScoreUtility.InitializeUIModels = function(f25_arg0)
 	f25_local1 = f25_local0:create("postEliminationGameState")
 	f25_local1:set("")
 	f25_local1 = f25_local0:create("challengeCoinImage")
-	f25_local1:set(0x7615068F50B3D66)
+	f25_local1:set(@"blacktransparent")
 	for f25_local1 = 1, CoD.GameEndScoreUtility.MaxTeamPoseClients, 1 do
 		f25_local0:create("winningTeamTopScorer" .. f25_local1)
 	end
-	f25_local1 = Engine[0x8DF2E5447F384B9]()
+	f25_local1 = Engine[@"getglobalmodel"]()
 	f25_local1 = f25_local1:create("factions")
 	local f25_local2 = f25_local1:create("winningTeamScore")
 	f25_local2:set(0)
@@ -707,38 +707,38 @@ end
 CoD.GameEndScoreUtility.SetupGameEndScoreWidget = function(f26_arg0, f26_arg1)
 	CoD.GameEndScoreUtility.InitializeUIModels(f26_arg1)
 	CoD.GameEndScoreUtility.InitGameInfoTables()
-	local f26_local0 = Engine[0x4DF5CFBC1771947](f26_arg1)
+	local f26_local0 = Engine[@"getmodelforcontroller"](f26_arg1)
 	f26_local0 = f26_local0.gameScore
 	f26_arg0:subscribeToGlobalModel(f26_arg1, "PerController", "scriptNotify", function(model)
-		local f27_local0 = Engine[0x614D394F6F9A18D](model)
-		if LUI.DEV and Dvar[0x650576ADE369039]:get() == true then
-			Engine[0x8C5711DAACC99F4](Enum[0x7A63DCD561B0FA8][0x71E8B35DBF101D7], "LUI scriptNotify " .. tostring(f27_local0) .. "\n")
+		local f27_local0 = Engine[@"getmodelvalue"](model)
+		if LUI.DEV and Dvar[@"cg_luidebug"]:get() == true then
+			Engine[@"printinfo"](Enum[@"consolelabel_e"][@"con_label_lui"], "LUI scriptNotify " .. tostring(f27_local0) .. "\n")
 		end
-		local f27_local1 = Engine[0x3EAC408F958FF05]()
-		if f27_local0 == 0x32DE4DA05B73598 then
+		local f27_local1 = Engine[@"currentsessionmode"]()
+		if f27_local0 == @"pre_killcam_transition" then
 			CoD.GameEndScoreUtility.SetupRoundEndPreKillcamModels(f26_arg0, {
 				controller = f26_arg1,
 				name = f27_local0,
 				data = CoD.GetScriptNotifyData(model),
 			})
-		elseif f27_local0 == 0xEDDF3DE575BCDB5 then
-			local f27_local2 = Engine[0x4DF5CFBC1771947](f26_arg1)
-			f27_local2.scriptNotify:set(0x29BC32407856CBF)
-		elseif f27_local0 == 0xE1E0E4D8E06D7E0 then
-			local f27_local2 = Engine[0x4DF5CFBC1771947](f26_arg1)
-			f27_local2.scriptNotify:set(0xBF5198C95E4E20A)
-		elseif f27_local0 == 0xC7A41B42481D554 then
+		elseif f27_local0 == @"pre_potm_transition" then
+			local f27_local2 = Engine[@"getmodelforcontroller"](f26_arg1)
+			f27_local2.scriptNotify:set(@"quick_fade")
+		elseif f27_local0 == @"post_potm_transition" then
+			local f27_local2 = Engine[@"getmodelforcontroller"](f26_arg1)
+			f27_local2.scriptNotify:set(@"post_potm")
+		elseif f27_local0 == @"winners_circle" then
 			f26_local0.currentState:set("")
 			f26_local0.isRoundEnd:set(false)
-		elseif f27_local0 == 0x1404DD365704D77 then
+		elseif f27_local0 == @"round_transition" then
 			CoD.GameEndScoreUtility.SetupTransition(f26_arg0, {
 				controller = f26_arg1,
 				name = f27_local0,
 				isMatchEnd = false,
 				data = CoD.GetScriptNotifyData(model),
 			})
-		elseif f27_local0 == 0xC8D299DC7FB2944 then
-			local f27_local2 = Engine[0x4DF5CFBC1771947](f26_arg1)
+		elseif f27_local0 == @"match_transition" then
+			local f27_local2 = Engine[@"getmodelforcontroller"](f26_arg1)
 			local f27_local3 = f27_local2:create("hudItems.reEvalScoreboard")
 			f27_local3:forceNotifySubscriptions()
 			CoD.GameEndScoreUtility.SetupTransition(f26_arg0, {
@@ -747,7 +747,7 @@ CoD.GameEndScoreUtility.SetupGameEndScoreWidget = function(f26_arg0, f26_arg1)
 				isMatchEnd = true,
 				data = CoD.GetScriptNotifyData(model),
 			})
-		elseif f27_local0 == 0x7EEF30B79FD25F0 then
+		elseif f27_local0 == @"elimination_transition" then
 			CoD.GameEndScoreUtility.SetupTransition(f26_arg0, {
 				controller = f26_arg1,
 				name = f27_local0,
@@ -755,7 +755,7 @@ CoD.GameEndScoreUtility.SetupGameEndScoreWidget = function(f26_arg0, f26_arg1)
 				elimination = true,
 				data = CoD.GetScriptNotifyData(model),
 			})
-		elseif f27_local0 == 0xA3306CFCE6719BC then
+		elseif f27_local0 == @"hash_4A3306CFCE6719BC" then
 			CoD.GameEndScoreUtility.SetupTransition(f26_arg0, {
 				controller = f26_arg1,
 				name = f27_local0,
@@ -764,20 +764,20 @@ CoD.GameEndScoreUtility.SetupGameEndScoreWidget = function(f26_arg0, f26_arg1)
 				teamElimination = true,
 				data = CoD.GetScriptNotifyData(model),
 			})
-		elseif f27_local0 == 0x448C66C7F84AA68 then
+		elseif f27_local0 == @"clear_transition" then
 			CoD.GameEndScoreUtility.ClearTransition(f26_arg1)
-		elseif f27_local0 == 0xF354475CCE89512 then
+		elseif f27_local0 == @"eliminator_info" then
 			CoD.GameEndScoreUtility.SetEliminatorData(f26_arg0, {
 				controller = f26_arg1,
 				name = f27_local0,
 				data = CoD.GetScriptNotifyData(model),
 			})
-		elseif f27_local0 == 0x9CE008125B25ED9 then
+		elseif f27_local0 == @"team_eliminated" then
 			local f27_local2 = CoD.GetScriptNotifyData(model)
 			f26_local0.teamRanking:set(f27_local2[1])
-		elseif f27_local0 == 0xEAA776EDD5D85D3 then
+		elseif f27_local0 == @"hvo_card" then
 			CoD.GameEndScoreUtility.ProcessHVOCard(f26_arg1, CoD.GetScriptNotifyData(model))
-		elseif f27_local0 == 0x9DFC8D44EA4547E then
+		elseif f27_local0 == @"hash_9DFC8D44EA4547E" then
 			local f27_local2 = CoD.GetScriptNotifyData(model)
 			f26_local0.matchBonus:set(f27_local2[1])
 		end
@@ -785,7 +785,7 @@ CoD.GameEndScoreUtility.SetupGameEndScoreWidget = function(f26_arg0, f26_arg1)
 end
 CoD.GameEndScoreUtility.GetHVOCardList = function()
 	if not CoD.GameEndScoreUtility.HVOCardList then
-		CoD.GameEndScoreUtility.HVOCardList = Engine[0xA7E3CD65E63086F](0x9EEC78E87D57AFC)
+		CoD.GameEndScoreUtility.HVOCardList = Engine[@"hash_7A7E3CD65E63086F"](@"hvolist")
 	end
 	return CoD.GameEndScoreUtility.HVOCardList
 end
@@ -803,10 +803,10 @@ CoD.GameEndScoreUtility.ProcessHVOCard = function(f29_arg0, f29_arg1)
 		statValues = f29_local0,
 	})
 	if #CoD.GameEndScoreUtility.HVOCardData >= 3 then
-		local f29_local3 = Engine[0x4DF5CFBC1771947](f29_arg0)
+		local f29_local3 = Engine[@"getmodelforcontroller"](f29_arg0)
 		f29_local3 = f29_local3.gameScore
-		local f29_local4 = Engine[0x4DF5CFBC1771947](f29_arg0)
-		Engine[0x6A489878620F3BC](f29_local4.gameScore.hvoUpdate)
+		local f29_local4 = Engine[@"getmodelforcontroller"](f29_arg0)
+		Engine[@"forcenotifymodelsubscriptions"](f29_local4.gameScore.hvoUpdate)
 	end
 end
 CoD.GameEndScoreUtility.CreateHVOCardStatsDataSource = function(f30_arg0, f30_arg1, f30_arg2)
@@ -819,7 +819,7 @@ CoD.GameEndScoreUtility.CreateHVOCardStatsDataSource = function(f30_arg0, f30_ar
 				if f31_local4 then
 					local f31_local5 = {
 						models = {
-							label = f31_local4[0xCBDE97F51C10084],
+							label = f31_local4[@"displaystatname"],
 							value = f30_arg2[f31_local1] or 0,
 						},
 					}
@@ -841,26 +841,26 @@ DataSources.HighValueOperatives = DataSourceHelpers.ListSetup("HighValueOperativ
 	if not CoD.GameEndScoreUtility.HVOCardData then
 		return f33_local0
 	end
-	local f33_local1 = Engine[0x3EAC408F958FF05]()
+	local f33_local1 = Engine[@"currentsessionmode"]()
 	local f33_local2 = CoD.GameEndScoreUtility.GetHVOCardList()
 	local f33_local3 = function(f34_arg0, f34_arg1)
 		local f34_local0 = nil
 		if f34_arg0.imagearray then
 			for f34_local4, f34_local5 in ipairs(f34_arg0.imagearray) do
-				if f34_local5[0x4F35AE761BD424] == f34_arg1 then
-					f34_local0 = f34_local5[0xAB612888528489A]
+				if f34_local5[@"specialist"] == f34_arg1 then
+					f34_local0 = f34_local5[@"image"]
 				end
 			end
 		end
 		local f34_local6 = f34_local0
-		local f34_local1 = f34_arg0[0x3CD44D4A96C9C93]
+		local f34_local1 = f34_arg0[@"defaultimage"]
 		if not f34_local1 then
-			f34_local1 = f34_local6 or 0x7615068F50B3D66
+			f34_local1 = f34_local6 or @"blacktransparent"
 		end
 		return f34_local1
 	end
 	local f33_local4 = function(f35_arg0, f35_arg1, f35_arg2, f35_arg3)
-		local f35_local0 = Engine[0xE4D2F32833CFA6C](f35_arg0)
+		local f35_local0 = Engine[@"getmodelforclient"](f35_arg0)
 		local f35_local1 = CoD.PlayerRoleUtility.GetCachedHeroInfo(f33_local1, f35_local0.characterIndex:get() or 1)
 		local f35_local2 = f35_local1.assetName
 		local f35_local3 = f33_local2[f35_arg1]
@@ -868,7 +868,7 @@ DataSources.HighValueOperatives = DataSourceHelpers.ListSetup("HighValueOperativ
 			models = {
 				perClient = f35_local0,
 				clientNum = f35_arg0,
-				cardTitle = f35_local3[0xCE651195B920B9C],
+				cardTitle = f35_local3[@"cardname"],
 				cardImage = f33_local3(f35_local3, f35_local2),
 				statsDataSource = CoD.GameEndScoreUtility.CreateHVOCardStatsDataSource(f35_local3, f35_arg3, f35_arg2),
 			},
@@ -880,7 +880,7 @@ DataSources.HighValueOperatives = DataSourceHelpers.ListSetup("HighValueOperativ
 	return f33_local0
 end)
 CoD.GameEndScoreUtility.Redeploy = function(f36_arg0)
-	Engine[0xBA6C731FA654F3B](f36_arg0)
+	Engine[@"hash_6BA6C731FA654F3B"](f36_arg0)
 end
 CoD.GameEndScoreUtility.SetupHVOCard = function(f37_arg0, f37_arg1, f37_arg2, f37_arg3, f37_arg4)
 	local f37_local0 = DataSources[f37_arg3]
@@ -892,7 +892,7 @@ CoD.GameEndScoreUtility.SetupHVOCard = function(f37_arg0, f37_arg1, f37_arg2, f3
 	end
 end
 CoD.GameEndScoreUtility.ClearTransitionModels = function(f38_arg0)
-	local f38_local0 = Engine[0x4DF5CFBC1771947](f38_arg0)
+	local f38_local0 = Engine[@"getmodelforcontroller"](f38_arg0)
 	f38_local0 = f38_local0.gameScore
 	f38_local0.currentState:set("")
 	f38_local0.isRoundEnd:set(false)
@@ -902,26 +902,26 @@ CoD.GameEndScoreUtility.IsInTransition = function(f39_arg0)
 	return f39_local0.currentState and f39_local1 and f39_local0.currentState:get() ~= ""
 end
 CoD.GameEndScoreUtility.ClearTransition = function(f40_arg0)
-	local f40_local0 = Engine[0x3EAC408F958FF05]()
-	if f40_local0 ~= Enum[0x9C0C2196D8313A0][0xBF1DCC8138A9D39] then
-		local f40_local1 = Engine[0x4DF5CFBC1771947](f40_arg0)
-		f40_local1.scriptNotify:set(0x29BC32407856CBF)
+	local f40_local0 = Engine[@"currentsessionmode"]()
+	if f40_local0 ~= Enum[@"emodes"][@"mode_warzone"] then
+		local f40_local1 = Engine[@"getmodelforcontroller"](f40_arg0)
+		f40_local1.scriptNotify:set(@"quick_fade")
 	end
 	CoD.GameEndScoreUtility.ClearTransitionModels(f40_arg0)
-	if f40_local0 == Enum[0x9C0C2196D8313A0][0xBF1DCC8138A9D39] then
+	if f40_local0 == Enum[@"emodes"][@"mode_warzone"] then
 		CoD.BaseUtility.PlayMusic("death")
-		Engine[0xC4146BA76D0F982]("uin_endgame_screen_exit")
-	elseif f40_local0 == Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5] then
-		local f40_local1 = Engine[0x4DF5CFBC1771947](f40_arg0)
+		Engine[@"playsound"]("uin_endgame_screen_exit")
+	elseif f40_local0 == Enum[@"emodes"][@"mode_multiplayer"] then
+		local f40_local1 = Engine[@"getmodelforcontroller"](f40_arg0)
 		if f40_local1.StartMenu_Main and f40_local1.StartMenu_Main.clear_transition then
-			Engine[0x6A489878620F3BC](f40_local1.StartMenu_Main.clear_transition)
+			Engine[@"forcenotifymodelsubscriptions"](f40_local1.StartMenu_Main.clear_transition)
 		end
 	end
 end
 CoD.GameEndScoreUtility.PlayFirstTimeIntroClipIfNeeded = function(f41_arg0, f41_arg1)
-	local f41_local0 = Engine[0x4DF5CFBC1771947](f41_arg1)
+	local f41_local0 = Engine[@"getmodelforcontroller"](f41_arg1)
 	f41_local0 = f41_local0.gameScore
-	CoD.LobbyUtility.SetPlayerLocation(f41_arg1, Enum[0xC0AB9543C5C440B][0xB4603B82CB82E77])
+	CoD.LobbyUtility.SetPlayerLocation(f41_arg1, Enum[@"hash_C0AB9543C5C440B"][@"hash_B4603B82CB82E77"])
 	if not f41_local0.hasPlayedFirstTimeIntro:get() and f41_arg0:hasClip("FirstTimeIntro") then
 		f41_arg0:playClip("FirstTimeIntro")
 		f41_local0.hasPlayedFirstTimeIntro:set(true)
@@ -944,13 +944,13 @@ CoD.GameEndScoreUtility.PlayFirstTimeIntroClipIfNeeded = function(f41_arg0, f41_
 end
 CoD.GameEndScoreUtility.GetEliminatedString = function(f44_arg0, f44_arg1)
 	if f44_arg1 == 0 then
-		return 0x2C79EA24AB1A2BA
+		return @"hash_2C79EA24AB1A2BA"
 	else
-		return 0xDB82AD88E0752FB
+		return @"hash_5DB82AD88E0752FB"
 	end
 end
 CoD.GameEndScoreUtility.SetPostEliminationGameState = function(f45_arg0)
-	local f45_local0 = Engine[0x4DF5CFBC1771947](f45_arg0)
+	local f45_local0 = Engine[@"getmodelforcontroller"](f45_arg0)
 	f45_local0 = f45_local0.gameScore
 	local f45_local1 = f45_local0.postEliminationGameState:get()
 	if f45_local1 == "" then
@@ -962,7 +962,7 @@ end
 CoD.GameEndScoreUtility.HasViewedInGameReport = function(f46_arg0)
 	local f46_local0
 	if IsOnlineGame() then
-		f46_local0 = Engine[0x4DF5CFBC1771947](f46_arg0)
+		f46_local0 = Engine[@"getmodelforcontroller"](f46_arg0)
 		f46_local0 = f46_local0.hudItems.warzone.aarViewed:get()
 	else
 		f46_local0 = true

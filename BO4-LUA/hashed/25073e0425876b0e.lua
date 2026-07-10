@@ -14,33 +14,33 @@ CoD.PaintCanCount.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 	self.backing = backing
 	local NoiseTiledBacking = LUI.UIImage.new(0, 0, 0.5, 180.5, 0.09, 0.09, 41.5, 120.5)
 	NoiseTiledBacking:setAlpha(0.8)
-	NoiseTiledBacking:setImage(RegisterImage(0x34839E8065B1E53))
-	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	NoiseTiledBacking:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	NoiseTiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	NoiseTiledBacking:setupNineSliceShader(196, 88)
 	self:addElement(NoiseTiledBacking)
 	self.NoiseTiledBacking = NoiseTiledBacking
 	local StatLabel = LUI.UIText.new(0, 0, 0.5, 162.5, 0, 0, 30, 51)
 	StatLabel:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
-	StatLabel:setText(Engine[0xF9F1239CFD921FE](0x9FE863E6425C8CE))
+	StatLabel:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_49FE863E6425C8CE"))
 	StatLabel:setTTF("dinnext_regular")
 	StatLabel:setLetterSpacing(2)
-	StatLabel:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	StatLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(StatLabel)
 	self.StatLabel = StatLabel
 	local maxedLabel = LUI.UIText.new(0, 0, 0.5, 162.5, 0, 0, 136, 157)
 	maxedLabel:setRGB(1, 0, 0)
-	maxedLabel:setText(Engine[0xF9F1239CFD921FE](0xF3D13CF35DD7B2A))
+	maxedLabel:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_4F3D13CF35DD7B2A"))
 	maxedLabel:setTTF("dinnext_regular")
 	maxedLabel:setLetterSpacing(2)
-	maxedLabel:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	maxedLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(maxedLabel)
 	self.maxedLabel = maxedLabel
 	local StatValue = LUI.UIText.new(0, 0, 65.5, 168.5, 0, 0, 71.5, 116.5)
 	StatValue:setRGB(0.93, 0.91, 0.84)
 	StatValue:setTTF("ttmussels_demibold")
-	StatValue:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	StatValue:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	StatValue:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	StatValue:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	StatValue:subscribeToGlobalModel(f1_arg1, "PerController", "paintCanCount", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -50,13 +50,13 @@ CoD.PaintCanCount.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 	self:addElement(StatValue)
 	self.StatValue = StatValue
 	local PaintCanImage = LUI.UIImage.new(0, 0, 0, 80, 0, 0, 54, 134)
-	PaintCanImage:setImage(RegisterImage(0xB808223FCD4471D))
+	PaintCanImage:setImage(RegisterImage(@"ui_icon_inventory_spray_can"))
 	self:addElement(PaintCanImage)
 	self.PaintCanImage = PaintCanImage
 	local infoBracketBot = LUI.UIImage.new(0, 0, 0, 181, 0, 0, 124, 132)
 	infoBracketBot:setAlpha(0.26)
-	infoBracketBot:setImage(RegisterImage(0xC325BED3F226657))
-	infoBracketBot:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	infoBracketBot:setImage(RegisterImage(@"hash_4C325BED3F226657"))
+	infoBracketBot:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	infoBracketBot:setShaderVector(0, 0, 0, 0, 0)
 	infoBracketBot:setupNineSliceShader(16, 4)
 	self:addElement(infoBracketBot)
@@ -64,8 +64,8 @@ CoD.PaintCanCount.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 	local infoBracketBot2 = LUI.UIImage.new(0, 0, 0, 181, 0, 0, 52.5, 60.5)
 	infoBracketBot2:setAlpha(0.16)
 	infoBracketBot2:setZRot(180)
-	infoBracketBot2:setImage(RegisterImage(0xC325BED3F226657))
-	infoBracketBot2:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	infoBracketBot2:setImage(RegisterImage(@"hash_4C325BED3F226657"))
+	infoBracketBot2:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	infoBracketBot2:setShaderVector(0, 0, 0, 0, 0)
 	infoBracketBot2:setupNineSliceShader(16, 4)
 	self:addElement(infoBracketBot2)
@@ -94,7 +94,7 @@ CoD.PaintCanCount.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 	})
 	local f1_local9 = self
 	local f1_local10 = self.subscribeToModel
-	local f1_local11 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local11 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local10(f1_local9, f1_local11["WeaponPersonalization.listUpdate"], function(f5_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -106,7 +106,7 @@ CoD.PaintCanCount.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 	end, false)
 	f1_local9 = self
 	f1_local10 = self.subscribeToModel
-	f1_local11 = Engine[0x8DF2E5447F384B9]()
+	f1_local11 = Engine[@"getglobalmodel"]()
 	f1_local10(f1_local9, f1_local11["lobbyRoot.lobbyNetworkMode"], function(f6_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -118,7 +118,7 @@ CoD.PaintCanCount.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 	end, false)
 	f1_local9 = self
 	f1_local10 = self.subscribeToModel
-	f1_local11 = Engine[0x8DF2E5447F384B9]()
+	f1_local11 = Engine[@"getglobalmodel"]()
 	f1_local10(f1_local9, f1_local11["lobbyRoot.lobbyNav"], function(f7_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -169,7 +169,7 @@ CoD.PaintCanCount.__resetProperties = function(f9_arg0)
 	f9_arg0.maxedLabel:setRGB(1, 0, 0)
 	f9_arg0.maxedLabel:setAlpha(1)
 	f9_arg0.maxedLabel:setLetterSpacing(2)
-	f9_arg0.maxedLabel:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	f9_arg0.maxedLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 end
 CoD.PaintCanCount.__clipsPerState = {
 	DefaultState = {
@@ -208,8 +208,8 @@ CoD.PaintCanCount.__clipsPerState = {
 			f11_arg0.maxedLabel:setTopBottom(0, 0, 106.5, 120.5)
 			f11_arg0.maxedLabel:setRGB(1, 0, 0)
 			f11_arg0.maxedLabel:setLetterSpacing(0)
-			f11_arg0.maxedLabel:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-			f11_arg0.maxedLabel:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+			f11_arg0.maxedLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+			f11_arg0.maxedLabel:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 			f11_arg0.clipFinished(f11_arg0.maxedLabel)
 			f11_arg0.StatValue:completeAnimation()
 			f11_arg0.StatValue:setTopBottom(0, 0, 60.5, 105.5)

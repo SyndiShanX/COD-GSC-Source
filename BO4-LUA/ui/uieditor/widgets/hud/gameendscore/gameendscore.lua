@@ -28,7 +28,7 @@ CoD.GameEndScore.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 	Title:subscribeToGlobalModel(f1_arg1, "GameScore", "titleString", function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
-			Title.MatchInfo:setText(Engine[0xF9F1239CFD921FE](f3_local0))
+			Title.MatchInfo:setText(Engine[@"hash_4F9F1239CFD921FE"](f3_local0))
 		end
 	end)
 	self:addElement(Title)
@@ -37,7 +37,7 @@ CoD.GameEndScore.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 	Subtitle:subscribeToGlobalModel(f1_arg1, "GameScore", "subtitleString", function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
-			Subtitle.SubtitleText:setText(Engine[0xF9F1239CFD921FE](f4_local0))
+			Subtitle.SubtitleText:setText(Engine[@"hash_4F9F1239CFD921FE"](f4_local0))
 		end
 	end)
 	self:addElement(Subtitle)
@@ -76,7 +76,7 @@ CoD.GameEndScore.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 	})
 	local f1_local8 = self
 	local f1_local9 = self.subscribeToModel
-	local f1_local10 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local10 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local9(f1_local8, f1_local10["gameScore.currentState"], function(f8_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -88,55 +88,55 @@ CoD.GameEndScore.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 	end, false)
 	f1_local8 = self
 	f1_local9 = self.subscribeToModel
-	f1_local10 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local9(f1_local8, f1_local10["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2]], function(f9_arg0)
+	f1_local10 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local9(f1_local8, f1_local10["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"]], function(f9_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f9_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"],
 		})
 	end, false)
 	f1_local8 = self
 	f1_local9 = self.subscribeToModel
-	f1_local10 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local9(f1_local8, f1_local10["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x1CDCB451655ABCF]], function(f10_arg0)
+	f1_local10 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local9(f1_local8, f1_local10["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_final_killcam"]], function(f10_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f10_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x1CDCB451655ABCF],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_final_killcam"],
 		})
 	end, false)
 	f1_local8 = self
 	f1_local9 = self.subscribeToModel
-	f1_local10 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local9(f1_local8, f1_local10["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F]], function(f11_arg0)
+	f1_local10 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local9(f1_local8, f1_local10["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_play_of_the_match"]], function(f11_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f11_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_play_of_the_match"],
 		})
 	end, false)
 	f1_local8 = self
 	f1_local9 = self.subscribeToModel
-	f1_local10 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local9(f1_local8, f1_local10["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04]], function(f12_arg0)
+	f1_local10 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local9(f1_local8, f1_local10["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]], function(f12_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f12_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"],
 		})
 	end, false)
 	f1_local8 = self
 	f1_local9 = self.subscribeToModel
-	f1_local10 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local10 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local9(f1_local8, f1_local10.forceScoreboard, function(f13_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -204,7 +204,7 @@ CoD.GameEndScore.__clipsPerState = {
 			f17_arg0:__resetProperties()
 			f17_arg0:setupElementClipCounter(5)
 			local f17_local0 = function(f18_arg0)
-				f17_arg0.Bg:beginAnimation(400, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f17_arg0.Bg:beginAnimation(400, Enum[@"luitween"][@"luitween_ease_in"])
 				f17_arg0.Bg:setAlpha(0.4)
 				f17_arg0.Bg:registerEventHandler("interrupted_keyframe", f17_arg0.clipInterrupted)
 				f17_arg0.Bg:registerEventHandler("transition_complete_keyframe", f17_arg0.clipFinished)
@@ -283,7 +283,7 @@ CoD.GameEndScore.__clipsPerState = {
 			f24_local1(f24_arg0.Subtitle)
 			local f24_local2 = function(f28_arg0)
 				local f28_local0 = function(f29_arg0)
-					f29_arg0:beginAnimation(450, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f29_arg0:beginAnimation(450, Enum[@"luitween"][@"luitween_ease_in"])
 					f29_arg0:setAlpha(1)
 					f29_arg0:registerEventHandler("transition_complete_keyframe", f24_arg0.clipFinished)
 				end
@@ -344,7 +344,7 @@ CoD.GameEndScore.__clipsPerState = {
 			f32_local1(f32_arg0.Subtitle)
 			local f32_local2 = function(f36_arg0)
 				local f36_local0 = function(f37_arg0)
-					f37_arg0:beginAnimation(450, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f37_arg0:beginAnimation(450, Enum[@"luitween"][@"luitween_ease_in"])
 					f37_arg0:setAlpha(1)
 					f37_arg0:registerEventHandler("transition_complete_keyframe", f32_arg0.clipFinished)
 				end

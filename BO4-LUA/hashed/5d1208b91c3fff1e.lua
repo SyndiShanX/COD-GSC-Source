@@ -9,17 +9,17 @@ CoD.HealthDOT.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local damage = LUI.UIText.new(0, 0, 0, 100, 0, 0, 0, 26)
 	damage:setRGB(0.94, 0.07, 0.09)
-	damage:setText(Engine[0xF9F1239CFD921FE](0x8841A02137AEEDE))
+	damage:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_18841A02137AEEDE"))
 	damage:setTTF("0arame_mono_stencil")
 	damage:setLetterSpacing(2)
-	damage:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	damage:setAlignment(Enum[0x7A5123B654282D2][0x70510683C22104B])
+	damage:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	damage:setAlignment(Enum[@"luialignment"][@"lui_alignment_bottom"])
 	self:addElement(damage)
 	self.damage = damage
 	self:subscribeToGlobalModel(f1_arg1, "PerController", "scriptNotify", function(model)
 		local f2_local0 = self
-		if CoD.ModelUtility.IsParamModelEqualToHashString(model, 0x4E81262CAB0E101) then
-			CoD.HUDUtility.SetDOTDamage(self.damage, model, 0x8841A02137AEEDE)
+		if CoD.ModelUtility.IsParamModelEqualToHashString(model, @"damage_over_time") then
+			CoD.HUDUtility.SetDOTDamage(self.damage, model, @"hash_18841A02137AEEDE")
 			PlayClip(self, "Damaged", f1_arg1)
 		end
 	end)

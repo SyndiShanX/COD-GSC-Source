@@ -9,8 +9,8 @@ CoD.Hud_ZM_LastStand_Bleedout_Perk_Bar_Item.new = function(f1_arg0, f1_arg1, f1_
 	self.soundSet = "default"
 	self.anyChildUsesUpdateState = true
 	local MetalFrame = LUI.UIImage.new(0, 1, -2, 2, 0, 1, -2, 2)
-	MetalFrame:setImage(RegisterImage(0xAED94B38E8B3347))
-	MetalFrame:setMaterial(LUI.UIImage.GetCachedMaterial(0x44484DDFAF5C093))
+	MetalFrame:setImage(RegisterImage(@"uie_ui_zm_laboratory_buttonframe"))
+	MetalFrame:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_normal"))
 	MetalFrame:setShaderVector(0, 0, 0, 0, 0)
 	MetalFrame:setupNineSliceShader(14, 14)
 	self:addElement(MetalFrame)
@@ -25,7 +25,7 @@ CoD.Hud_ZM_LastStand_Bleedout_Perk_Bar_Item.new = function(f1_arg0, f1_arg1, f1_
 	PerkIconOveralay:setRGB(1, 0.98, 0.73)
 	PerkIconOveralay:setAlpha(0)
 	PerkIconOveralay:setZRot(90)
-	PerkIconOveralay:setMaterial(LUI.UIImage.GetCachedMaterial(0x316E67E1DF2198E))
+	PerkIconOveralay:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_normal"))
 	PerkIconOveralay:setShaderVector(0, 1, 0, 0, 0)
 	PerkIconOveralay:setShaderVector(1, 0, 0, 0, 0)
 	PerkIconOveralay:setShaderVector(3, 0, 0, 0, 0)

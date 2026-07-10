@@ -9,7 +9,7 @@ CoD.ContractSeasonalOverlay_PreviewButton.new = function(f1_arg0, f1_arg1, f1_ar
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Border2 = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	Border2:setRGB(0.67, 0.67, 0.67)
-	Border2:setMaterial(LUI.UIImage.GetCachedMaterial(0xE7BDCB879A5176D))
+	Border2:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_3E7BDCB879A5176D"))
 	Border2:setShaderVector(0, 0, 0, 0, 0)
 	Border2:setShaderVector(1, 0, 0, 0, 0)
 	Border2:setupNineSliceShader(1, 1)

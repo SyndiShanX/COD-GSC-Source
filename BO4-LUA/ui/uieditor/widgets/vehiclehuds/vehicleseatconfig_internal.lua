@@ -13,185 +13,185 @@ CoD.VehicleSeatConfig_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	local BoatBg = LUI.UIImage.new(0, 0, 47, 103, 0, 0, 84, 196)
 	BoatBg:setRGB(0.13, 0.13, 0.13)
 	BoatBg:setAlpha(0)
-	BoatBg:setImage(RegisterImage(0x3608506F67614DB))
-	BoatBg:setMaterial(LUI.UIImage.GetCachedMaterial(0xF755127C95CF5B6))
+	BoatBg:setImage(RegisterImage(@"uie_ui_icon_wz_hud_vehicle_boat"))
+	BoatBg:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_F755127C95CF5B6"))
 	BoatBg:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(BoatBg)
 	self.BoatBg = BoatBg
 	local BoatDamage = LUI.UIImage.new(0, 0, 47, 103, 0, 0, 84, 196)
 	BoatDamage:setAlpha(0)
-	BoatDamage:setImage(RegisterImage(0x9B538E09604DE4D))
+	BoatDamage:setImage(RegisterImage(@"uie_ui_icon_wz_hud_vehicle_boat_damage"))
 	self:addElement(BoatDamage)
 	self.BoatDamage = BoatDamage
 	local Boat = LUI.UIImage.new(0, 0, 47, 103, 0, 0, 84, 196)
 	Boat:setAlpha(0)
-	Boat:setImage(RegisterImage(0x3608506F67614DB))
-	Boat:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	Boat:setImage(RegisterImage(@"uie_ui_icon_wz_hud_vehicle_boat"))
+	Boat:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	Boat:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(Boat)
 	self.Boat = Boat
 	local BoatPatrolBG = LUI.UIImage.new(0, 0, 47, 103, 0, 0, 84, 196)
 	BoatPatrolBG:setRGB(0.13, 0.13, 0.13)
 	BoatPatrolBG:setAlpha(0)
-	BoatPatrolBG:setImage(RegisterImage(0x908D2A941C277FB))
-	BoatPatrolBG:setMaterial(LUI.UIImage.GetCachedMaterial(0xF755127C95CF5B6))
+	BoatPatrolBG:setImage(RegisterImage(@"uie_ui_icon_wz_hud_vehicle_patrol"))
+	BoatPatrolBG:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_F755127C95CF5B6"))
 	BoatPatrolBG:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(BoatPatrolBG)
 	self.BoatPatrolBG = BoatPatrolBG
 	local BoatPatrol = LUI.UIImage.new(0, 0, 47, 103, 0, 0, 84, 196)
 	BoatPatrol:setAlpha(0)
-	BoatPatrol:setImage(RegisterImage(0x908D2A941C277FB))
-	BoatPatrol:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	BoatPatrol:setImage(RegisterImage(@"uie_ui_icon_wz_hud_vehicle_patrol"))
+	BoatPatrol:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	BoatPatrol:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(BoatPatrol)
 	self.BoatPatrol = BoatPatrol
 	local BuggyBG = LUI.UIImage.new(0, 0, 47, 103, 0, 0, 84, 196)
 	BuggyBG:setRGB(0.13, 0.13, 0.13)
 	BuggyBG:setAlpha(0)
-	BuggyBG:setImage(RegisterImage(0x1262F047874FB9D))
-	BuggyBG:setMaterial(LUI.UIImage.GetCachedMaterial(0xF755127C95CF5B6))
+	BuggyBG:setImage(RegisterImage(@"uie_ui_icon_wz_hud_vehicle_buggy"))
+	BuggyBG:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_F755127C95CF5B6"))
 	BuggyBG:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(BuggyBG)
 	self.BuggyBG = BuggyBG
 	local Buggy = LUI.UIImage.new(0, 0, 47, 103, 0, 0, 84, 196)
 	Buggy:setAlpha(0)
-	Buggy:setImage(RegisterImage(0x1262F047874FB9D))
-	Buggy:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	Buggy:setImage(RegisterImage(@"uie_ui_icon_wz_hud_vehicle_buggy"))
+	Buggy:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	Buggy:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(Buggy)
 	self.Buggy = Buggy
 	local CivilanSUVBG = LUI.UIImage.new(0, 0, 47, 103, 0, 0, 84, 196)
 	CivilanSUVBG:setRGB(0.13, 0.13, 0.13)
 	CivilanSUVBG:setAlpha(0)
-	CivilanSUVBG:setImage(RegisterImage(0x671F299ABF645BE))
-	CivilanSUVBG:setMaterial(LUI.UIImage.GetCachedMaterial(0xF755127C95CF5B6))
+	CivilanSUVBG:setImage(RegisterImage(@"uie_ui_icon_wz_hud_vehicle_civiliansuv"))
+	CivilanSUVBG:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_F755127C95CF5B6"))
 	CivilanSUVBG:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(CivilanSUVBG)
 	self.CivilanSUVBG = CivilanSUVBG
 	local CivilianSUV = LUI.UIImage.new(0, 0, 47, 103, 0, 0, 84, 196)
 	CivilianSUV:setAlpha(0)
-	CivilianSUV:setImage(RegisterImage(0x671F299ABF645BE))
-	CivilianSUV:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	CivilianSUV:setImage(RegisterImage(@"uie_ui_icon_wz_hud_vehicle_civiliansuv"))
+	CivilianSUV:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	CivilianSUV:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(CivilianSUV)
 	self.CivilianSUV = CivilianSUV
 	local CivilanMusscleCarBG = LUI.UIImage.new(0, 0, 47, 103, 0, 0, 84, 196)
 	CivilanMusscleCarBG:setRGB(0.13, 0.13, 0.13)
 	CivilanMusscleCarBG:setAlpha(0)
-	CivilanMusscleCarBG:setImage(RegisterImage(0x13D67D76E30ED77))
-	CivilanMusscleCarBG:setMaterial(LUI.UIImage.GetCachedMaterial(0xF755127C95CF5B6))
+	CivilanMusscleCarBG:setImage(RegisterImage(@"uie_ui_icon_wz_hud_vehicle_civilianmusclecar"))
+	CivilanMusscleCarBG:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_F755127C95CF5B6"))
 	CivilanMusscleCarBG:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(CivilanMusscleCarBG)
 	self.CivilanMusscleCarBG = CivilanMusscleCarBG
 	local CivilianMuscleCar = LUI.UIImage.new(0, 0, 47, 103, 0, 0, 84, 196)
 	CivilianMuscleCar:setAlpha(0)
-	CivilianMuscleCar:setImage(RegisterImage(0x13D67D76E30ED77))
-	CivilianMuscleCar:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	CivilianMuscleCar:setImage(RegisterImage(@"uie_ui_icon_wz_hud_vehicle_civilianmusclecar"))
+	CivilianMuscleCar:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	CivilianMuscleCar:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(CivilianMuscleCar)
 	self.CivilianMuscleCar = CivilianMuscleCar
 	local HelicopterBg = LUI.UIImage.new(0, 0, -3, 153, 0, 0, 44.5, 244.5)
 	HelicopterBg:setRGB(0.13, 0.13, 0.13)
 	HelicopterBg:setAlpha(0)
-	HelicopterBg:setImage(RegisterImage(0x4EDB9070077F3D2))
-	HelicopterBg:setMaterial(LUI.UIImage.GetCachedMaterial(0xF755127C95CF5B6))
+	HelicopterBg:setImage(RegisterImage(@"uie_ui_icon_wz_hud_vehicle_bird"))
+	HelicopterBg:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_F755127C95CF5B6"))
 	HelicopterBg:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(HelicopterBg)
 	self.HelicopterBg = HelicopterBg
 	local HelicopterDamage = LUI.UIImage.new(0, 0, -3, 153, 0, 0, 44.5, 244.5)
 	HelicopterDamage:setAlpha(0)
-	HelicopterDamage:setImage(RegisterImage(0x5EC789DE6C6CF6))
+	HelicopterDamage:setImage(RegisterImage(@"uie_ui_icon_wz_hud_vehicle_bird_damage"))
 	self:addElement(HelicopterDamage)
 	self.HelicopterDamage = HelicopterDamage
 	local Helicopter = LUI.UIImage.new(0, 0, -3, 153, 0, 0, 44.5, 244.5)
 	Helicopter:setAlpha(0)
-	Helicopter:setImage(RegisterImage(0x4EDB9070077F3D2))
-	Helicopter:setMaterial(LUI.UIImage.GetCachedMaterial(0xF755127C95CF5B6))
+	Helicopter:setImage(RegisterImage(@"uie_ui_icon_wz_hud_vehicle_bird"))
+	Helicopter:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_F755127C95CF5B6"))
 	Helicopter:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(Helicopter)
 	self.Helicopter = Helicopter
 	local HelicopterUH1Dbg = LUI.UIImage.new(0, 0, -3, 153, 0, 0, 44.5, 244.5)
 	HelicopterUH1Dbg:setRGB(0.13, 0.13, 0.13)
 	HelicopterUH1Dbg:setAlpha(0)
-	HelicopterUH1Dbg:setImage(RegisterImage(0x6F29A4F97CE802D))
-	HelicopterUH1Dbg:setMaterial(LUI.UIImage.GetCachedMaterial(0xF755127C95CF5B6))
+	HelicopterUH1Dbg:setImage(RegisterImage(@"uie_ui_icon_wz_hud_vehicle_uh1d"))
+	HelicopterUH1Dbg:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_F755127C95CF5B6"))
 	HelicopterUH1Dbg:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(HelicopterUH1Dbg)
 	self.HelicopterUH1Dbg = HelicopterUH1Dbg
 	local HelicopterUH1D = LUI.UIImage.new(0, 0, -3, 153, 0, 0, 44.5, 244.5)
 	HelicopterUH1D:setAlpha(0)
-	HelicopterUH1D:setImage(RegisterImage(0x6F29A4F97CE802D))
-	HelicopterUH1D:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	HelicopterUH1D:setImage(RegisterImage(@"uie_ui_icon_wz_hud_vehicle_uh1d"))
+	HelicopterUH1D:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	HelicopterUH1D:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(HelicopterUH1D)
 	self.HelicopterUH1D = HelicopterUH1D
 	local CargoTruckBg = LUI.UIImage.new(0, 0, 49, 101, 0, 0, 76, 204)
 	CargoTruckBg:setRGB(0.13, 0.13, 0.13)
 	CargoTruckBg:setAlpha(0)
-	CargoTruckBg:setImage(RegisterImage(0xF2D2EC9113EFEA8))
-	CargoTruckBg:setMaterial(LUI.UIImage.GetCachedMaterial(0xF755127C95CF5B6))
+	CargoTruckBg:setImage(RegisterImage(@"uie_ui_icon_wz_hud_vehicle_truck"))
+	CargoTruckBg:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_F755127C95CF5B6"))
 	CargoTruckBg:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(CargoTruckBg)
 	self.CargoTruckBg = CargoTruckBg
 	local CargoTruckDamage = LUI.UIImage.new(0, 0, 49, 101, 0, 0, 76, 204)
 	CargoTruckDamage:setAlpha(0)
-	CargoTruckDamage:setImage(RegisterImage(0x9F258CF87FC6A10))
+	CargoTruckDamage:setImage(RegisterImage(@"uie_ui_icon_wz_hud_vehicle_truck_damage"))
 	self:addElement(CargoTruckDamage)
 	self.CargoTruckDamage = CargoTruckDamage
 	local CargoTruck = LUI.UIImage.new(0, 0, 49, 101, 0, 0, 76, 204)
 	CargoTruck:setAlpha(0)
-	CargoTruck:setImage(RegisterImage(0xF2D2EC9113EFEA8))
-	CargoTruck:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	CargoTruck:setImage(RegisterImage(@"uie_ui_icon_wz_hud_vehicle_truck"))
+	CargoTruck:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	CargoTruck:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(CargoTruck)
 	self.CargoTruck = CargoTruck
 	local AtvBg = LUI.UIImage.new(0, 0, 51, 99, 0, 0, 99, 191)
 	AtvBg:setRGB(0.13, 0.13, 0.13)
 	AtvBg:setAlpha(0)
-	AtvBg:setImage(RegisterImage(0x27E79F1D382A1DA))
-	AtvBg:setMaterial(LUI.UIImage.GetCachedMaterial(0xF755127C95CF5B6))
+	AtvBg:setImage(RegisterImage(@"uie_ui_icon_wz_hud_vehicle_atv"))
+	AtvBg:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_F755127C95CF5B6"))
 	AtvBg:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(AtvBg)
 	self.AtvBg = AtvBg
 	local AtvDamaged = LUI.UIImage.new(0, 0, 51, 99, 0, 0, 99, 191)
 	AtvDamaged:setAlpha(0)
-	AtvDamaged:setImage(RegisterImage(0x7CD4E682EB3E5EE))
+	AtvDamaged:setImage(RegisterImage(@"uie_ui_icon_wz_hud_vehicle_atv_damage"))
 	self:addElement(AtvDamaged)
 	self.AtvDamaged = AtvDamaged
 	local Atv = LUI.UIImage.new(0, 0, 51, 99, 0, 0, 99, 191)
 	Atv:setAlpha(0)
-	Atv:setImage(RegisterImage(0x27E79F1D382A1DA))
-	Atv:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	Atv:setImage(RegisterImage(@"uie_ui_icon_wz_hud_vehicle_atv"))
+	Atv:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	Atv:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(Atv)
 	self.Atv = Atv
 	local MotorCycleBg = LUI.UIImage.new(0, 0, 37, 109, 0, 0, 108, 188)
 	MotorCycleBg:setRGB(0.13, 0.13, 0.13)
 	MotorCycleBg:setAlpha(0)
-	MotorCycleBg:setImage(RegisterImage(0xF060EB214FA22F2))
-	MotorCycleBg:setMaterial(LUI.UIImage.GetCachedMaterial(0xF755127C95CF5B6))
+	MotorCycleBg:setImage(RegisterImage(@"ui_icon_wz_hud_vehicle_motorcycle"))
+	MotorCycleBg:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_F755127C95CF5B6"))
 	MotorCycleBg:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(MotorCycleBg)
 	self.MotorCycleBg = MotorCycleBg
 	local MotorCycle = LUI.UIImage.new(0, 0, 37, 109, 0, 0, 108, 188)
 	MotorCycle:setAlpha(0)
-	MotorCycle:setImage(RegisterImage(0xF060EB214FA22F2))
-	MotorCycle:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	MotorCycle:setImage(RegisterImage(@"ui_icon_wz_hud_vehicle_motorcycle"))
+	MotorCycle:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	MotorCycle:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(MotorCycle)
 	self.MotorCycle = MotorCycle
 	local TankBg = LUI.UIImage.new(0, 0, 43, 107, 0, 0, 52, 204)
 	TankBg:setRGB(0.13, 0.13, 0.13)
 	TankBg:setAlpha(0)
-	TankBg:setImage(RegisterImage(0x5A6DAAF42FA0323))
-	TankBg:setMaterial(LUI.UIImage.GetCachedMaterial(0xF755127C95CF5B6))
+	TankBg:setImage(RegisterImage(@"ui_icon_wz_hud_vehicle_tank"))
+	TankBg:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_F755127C95CF5B6"))
 	TankBg:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(TankBg)
 	self.TankBg = TankBg
 	local Tank = LUI.UIImage.new(0, 0, 43, 107, 0, 0, 52, 204)
 	Tank:setAlpha(0)
-	Tank:setImage(RegisterImage(0x5A6DAAF42FA0323))
-	Tank:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	Tank:setImage(RegisterImage(@"ui_icon_wz_hud_vehicle_tank"))
+	Tank:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	Tank:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(Tank)
 	self.Tank = Tank
@@ -200,17 +200,17 @@ CoD.VehicleSeatConfig_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 		{
 			stateName = "Empty",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfEnumModelValueEqualTo(element, f1_arg1, Enum[0x26C7FA1C9B93536][0xE5272DCE16A7680], -1)
+				return CoD.ModelUtility.IsSelfEnumModelValueEqualTo(element, f1_arg1, Enum[@"vehicleseatpositions"][@"veh_pos_driver"], -1)
 			end,
 		},
 	})
-	Driver:linkToElementModel(Driver, Enum[0x26C7FA1C9B93536][0xE5272DCE16A7680], true, function(model)
+	Driver:linkToElementModel(Driver, Enum[@"vehicleseatpositions"][@"veh_pos_driver"], true, function(model)
 		f1_arg0:updateElementState(Driver, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = model:get(),
-			modelName = Enum[0x26C7FA1C9B93536][0xE5272DCE16A7680],
+			modelName = Enum[@"vehicleseatpositions"][@"veh_pos_driver"],
 		})
 	end)
 	Driver:setAlpha(0)
@@ -247,17 +247,17 @@ CoD.VehicleSeatConfig_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 		{
 			stateName = "Empty",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfEnumModelValueEqualTo(element, f1_arg1, Enum[0x26C7FA1C9B93536][0xAC7DFD42E2D2CEA], -1)
+				return CoD.ModelUtility.IsSelfEnumModelValueEqualTo(element, f1_arg1, Enum[@"vehicleseatpositions"][@"veh_pos_passenger_5"], -1)
 			end,
 		},
 	})
-	CoPilot:linkToElementModel(CoPilot, Enum[0x26C7FA1C9B93536][0xAC7DFD42E2D2CEA], true, function(model)
+	CoPilot:linkToElementModel(CoPilot, Enum[@"vehicleseatpositions"][@"veh_pos_passenger_5"], true, function(model)
 		f1_arg0:updateElementState(CoPilot, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = model:get(),
-			modelName = Enum[0x26C7FA1C9B93536][0xAC7DFD42E2D2CEA],
+			modelName = Enum[@"vehicleseatpositions"][@"veh_pos_passenger_5"],
 		})
 	end)
 	CoPilot:setAlpha(0)
@@ -294,17 +294,17 @@ CoD.VehicleSeatConfig_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 		{
 			stateName = "Empty",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfEnumModelValueEqualTo(element, f1_arg1, Enum[0x26C7FA1C9B93536][0xAC7DBD42E2D261E], -1)
+				return CoD.ModelUtility.IsSelfEnumModelValueEqualTo(element, f1_arg1, Enum[@"vehicleseatpositions"][@"veh_pos_passenger_1"], -1)
 			end,
 		},
 	})
-	Passenger1:linkToElementModel(Passenger1, Enum[0x26C7FA1C9B93536][0xAC7DBD42E2D261E], true, function(model)
+	Passenger1:linkToElementModel(Passenger1, Enum[@"vehicleseatpositions"][@"veh_pos_passenger_1"], true, function(model)
 		f1_arg0:updateElementState(Passenger1, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = model:get(),
-			modelName = Enum[0x26C7FA1C9B93536][0xAC7DBD42E2D261E],
+			modelName = Enum[@"vehicleseatpositions"][@"veh_pos_passenger_1"],
 		})
 	end)
 	Passenger1:setAlpha(0)
@@ -341,17 +341,17 @@ CoD.VehicleSeatConfig_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 		{
 			stateName = "Empty",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfEnumModelValueEqualTo(element, f1_arg1, Enum[0x26C7FA1C9B93536][0xAC7DAD42E2D246B], -1)
+				return CoD.ModelUtility.IsSelfEnumModelValueEqualTo(element, f1_arg1, Enum[@"vehicleseatpositions"][@"veh_pos_passenger_2"], -1)
 			end,
 		},
 	})
-	Passenger2:linkToElementModel(Passenger2, Enum[0x26C7FA1C9B93536][0xAC7DAD42E2D246B], true, function(model)
+	Passenger2:linkToElementModel(Passenger2, Enum[@"vehicleseatpositions"][@"veh_pos_passenger_2"], true, function(model)
 		f1_arg0:updateElementState(Passenger2, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = model:get(),
-			modelName = Enum[0x26C7FA1C9B93536][0xAC7DAD42E2D246B],
+			modelName = Enum[@"vehicleseatpositions"][@"veh_pos_passenger_2"],
 		})
 	end)
 	Passenger2:setAlpha(0)
@@ -388,17 +388,17 @@ CoD.VehicleSeatConfig_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 		{
 			stateName = "Empty",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfEnumModelValueEqualTo(element, f1_arg1, Enum[0x26C7FA1C9B93536][0xAC7D9D42E2D22B8], -1)
+				return CoD.ModelUtility.IsSelfEnumModelValueEqualTo(element, f1_arg1, Enum[@"vehicleseatpositions"][@"veh_pos_passenger_3"], -1)
 			end,
 		},
 	})
-	Passenger3:linkToElementModel(Passenger3, Enum[0x26C7FA1C9B93536][0xAC7D9D42E2D22B8], true, function(model)
+	Passenger3:linkToElementModel(Passenger3, Enum[@"vehicleseatpositions"][@"veh_pos_passenger_3"], true, function(model)
 		f1_arg0:updateElementState(Passenger3, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = model:get(),
-			modelName = Enum[0x26C7FA1C9B93536][0xAC7D9D42E2D22B8],
+			modelName = Enum[@"vehicleseatpositions"][@"veh_pos_passenger_3"],
 		})
 	end)
 	Passenger3:setAlpha(0)
@@ -435,17 +435,17 @@ CoD.VehicleSeatConfig_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 		{
 			stateName = "Empty",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfEnumModelValueEqualTo(element, f1_arg1, Enum[0x26C7FA1C9B93536][0xAC7E0D42E2D2E9D], -1)
+				return CoD.ModelUtility.IsSelfEnumModelValueEqualTo(element, f1_arg1, Enum[@"vehicleseatpositions"][@"veh_pos_passenger_4"], -1)
 			end,
 		},
 	})
-	Passenger4:linkToElementModel(Passenger4, Enum[0x26C7FA1C9B93536][0xAC7E0D42E2D2E9D], true, function(model)
+	Passenger4:linkToElementModel(Passenger4, Enum[@"vehicleseatpositions"][@"veh_pos_passenger_4"], true, function(model)
 		f1_arg0:updateElementState(Passenger4, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = model:get(),
-			modelName = Enum[0x26C7FA1C9B93536][0xAC7E0D42E2D2E9D],
+			modelName = Enum[@"vehicleseatpositions"][@"veh_pos_passenger_4"],
 		})
 	end)
 	Passenger4:setAlpha(0)
@@ -482,17 +482,17 @@ CoD.VehicleSeatConfig_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 		{
 			stateName = "Empty",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfEnumModelValueEqualTo(element, f1_arg1, Enum[0x26C7FA1C9B93536][0x70DF4CF659F46C1], -1)
+				return CoD.ModelUtility.IsSelfEnumModelValueEqualTo(element, f1_arg1, Enum[@"vehicleseatpositions"][@"veh_pos_gunner_1"], -1)
 			end,
 		},
 	})
-	Gunner1:linkToElementModel(Gunner1, Enum[0x26C7FA1C9B93536][0x70DF4CF659F46C1], true, function(model)
+	Gunner1:linkToElementModel(Gunner1, Enum[@"vehicleseatpositions"][@"veh_pos_gunner_1"], true, function(model)
 		f1_arg0:updateElementState(Gunner1, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = model:get(),
-			modelName = Enum[0x26C7FA1C9B93536][0x70DF4CF659F46C1],
+			modelName = Enum[@"vehicleseatpositions"][@"veh_pos_gunner_1"],
 		})
 	end)
 	Gunner1:setAlpha(0)
@@ -529,17 +529,17 @@ CoD.VehicleSeatConfig_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 		{
 			stateName = "Empty",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfEnumModelValueEqualTo(element, f1_arg1, Enum[0x26C7FA1C9B93536][0x70DF1CF659F41A8], -1)
+				return CoD.ModelUtility.IsSelfEnumModelValueEqualTo(element, f1_arg1, Enum[@"vehicleseatpositions"][@"veh_pos_gunner_2"], -1)
 			end,
 		},
 	})
-	Gunner2:linkToElementModel(Gunner2, Enum[0x26C7FA1C9B93536][0x70DF1CF659F41A8], true, function(model)
+	Gunner2:linkToElementModel(Gunner2, Enum[@"vehicleseatpositions"][@"veh_pos_gunner_2"], true, function(model)
 		f1_arg0:updateElementState(Gunner2, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = model:get(),
-			modelName = Enum[0x26C7FA1C9B93536][0x70DF1CF659F41A8],
+			modelName = Enum[@"vehicleseatpositions"][@"veh_pos_gunner_2"],
 		})
 	end)
 	Gunner2:setAlpha(0)
@@ -576,17 +576,17 @@ CoD.VehicleSeatConfig_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 		{
 			stateName = "Empty",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfEnumModelValueEqualTo(element, f1_arg1, Enum[0x26C7FA1C9B93536][0x70DF2CF659F435B], -1)
+				return CoD.ModelUtility.IsSelfEnumModelValueEqualTo(element, f1_arg1, Enum[@"vehicleseatpositions"][@"veh_pos_gunner_3"], -1)
 			end,
 		},
 	})
-	Gunner3:linkToElementModel(Gunner3, Enum[0x26C7FA1C9B93536][0x70DF2CF659F435B], true, function(model)
+	Gunner3:linkToElementModel(Gunner3, Enum[@"vehicleseatpositions"][@"veh_pos_gunner_3"], true, function(model)
 		f1_arg0:updateElementState(Gunner3, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = model:get(),
-			modelName = Enum[0x26C7FA1C9B93536][0x70DF2CF659F435B],
+			modelName = Enum[@"vehicleseatpositions"][@"veh_pos_gunner_3"],
 		})
 	end)
 	Gunner3:setAlpha(0)
@@ -623,17 +623,17 @@ CoD.VehicleSeatConfig_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 		{
 			stateName = "Empty",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfEnumModelValueEqualTo(element, f1_arg1, Enum[0x26C7FA1C9B93536][0x70DF7CF659F4BDA], -1)
+				return CoD.ModelUtility.IsSelfEnumModelValueEqualTo(element, f1_arg1, Enum[@"vehicleseatpositions"][@"veh_pos_gunner_4"], -1)
 			end,
 		},
 	})
-	Gunner4:linkToElementModel(Gunner4, Enum[0x26C7FA1C9B93536][0x70DF7CF659F4BDA], true, function(model)
+	Gunner4:linkToElementModel(Gunner4, Enum[@"vehicleseatpositions"][@"veh_pos_gunner_4"], true, function(model)
 		f1_arg0:updateElementState(Gunner4, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = model:get(),
-			modelName = Enum[0x26C7FA1C9B93536][0x70DF7CF659F4BDA],
+			modelName = Enum[@"vehicleseatpositions"][@"veh_pos_gunner_4"],
 		})
 	end)
 	Gunner4:setAlpha(0)
@@ -671,52 +671,52 @@ CoD.VehicleSeatConfig_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	Driver:linkToElementModel(self, "team", true, Driver.OccupiedPip.__OccupiedPip_Color_FullPath)
 	local f1_local38 = Driver
 	local f1_local39 = Driver.subscribeToModel
-	local f1_local40 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local40 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local39(f1_local38, f1_local40["profile.colorblindMode"], Driver.OccupiedPip.__OccupiedPip_Color_FullPath)
 	CoPilot:linkToElementModel(self, "team", true, CoPilot.OccupiedPip.__OccupiedPip_Color_FullPath)
 	f1_local38 = CoPilot
 	f1_local39 = CoPilot.subscribeToModel
-	f1_local40 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local40 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local39(f1_local38, f1_local40["profile.colorblindMode"], CoPilot.OccupiedPip.__OccupiedPip_Color_FullPath)
 	Passenger1:linkToElementModel(self, "team", true, Passenger1.OccupiedPip.__OccupiedPip_Color_FullPath)
 	f1_local38 = Passenger1
 	f1_local39 = Passenger1.subscribeToModel
-	f1_local40 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local40 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local39(f1_local38, f1_local40["profile.colorblindMode"], Passenger1.OccupiedPip.__OccupiedPip_Color_FullPath)
 	Passenger2:linkToElementModel(self, "team", true, Passenger2.OccupiedPip.__OccupiedPip_Color_FullPath)
 	f1_local38 = Passenger2
 	f1_local39 = Passenger2.subscribeToModel
-	f1_local40 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local40 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local39(f1_local38, f1_local40["profile.colorblindMode"], Passenger2.OccupiedPip.__OccupiedPip_Color_FullPath)
 	Passenger3:linkToElementModel(self, "team", true, Passenger3.OccupiedPip.__OccupiedPip_Color_FullPath)
 	f1_local38 = Passenger3
 	f1_local39 = Passenger3.subscribeToModel
-	f1_local40 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local40 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local39(f1_local38, f1_local40["profile.colorblindMode"], Passenger3.OccupiedPip.__OccupiedPip_Color_FullPath)
 	Passenger4:linkToElementModel(self, "team", true, Passenger4.OccupiedPip.__OccupiedPip_Color_FullPath)
 	f1_local38 = Passenger4
 	f1_local39 = Passenger4.subscribeToModel
-	f1_local40 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local40 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local39(f1_local38, f1_local40["profile.colorblindMode"], Passenger4.OccupiedPip.__OccupiedPip_Color_FullPath)
 	Gunner1:linkToElementModel(self, "team", true, Gunner1.OccupiedPip.__OccupiedPip_Color_FullPath)
 	f1_local38 = Gunner1
 	f1_local39 = Gunner1.subscribeToModel
-	f1_local40 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local40 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local39(f1_local38, f1_local40["profile.colorblindMode"], Gunner1.OccupiedPip.__OccupiedPip_Color_FullPath)
 	Gunner2:linkToElementModel(self, "team", true, Gunner2.OccupiedPip.__OccupiedPip_Color_FullPath)
 	f1_local38 = Gunner2
 	f1_local39 = Gunner2.subscribeToModel
-	f1_local40 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local40 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local39(f1_local38, f1_local40["profile.colorblindMode"], Gunner2.OccupiedPip.__OccupiedPip_Color_FullPath)
 	Gunner3:linkToElementModel(self, "team", true, Gunner3.OccupiedPip.__OccupiedPip_Color_FullPath)
 	f1_local38 = Gunner3
 	f1_local39 = Gunner3.subscribeToModel
-	f1_local40 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local40 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local39(f1_local38, f1_local40["profile.colorblindMode"], Gunner3.OccupiedPip.__OccupiedPip_Color_FullPath)
 	Gunner4:linkToElementModel(self, "team", true, Gunner4.OccupiedPip.__OccupiedPip_Color_FullPath)
 	f1_local38 = Gunner4
 	f1_local39 = Gunner4.subscribeToModel
-	f1_local40 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local40 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local39(f1_local38, f1_local40["profile.colorblindMode"], Gunner4.OccupiedPip.__OccupiedPip_Color_FullPath)
 	self:mergeStateConditions({
 		{
@@ -933,7 +933,7 @@ CoD.VehicleSeatConfig_Internal.__clipsPerState = {
 			f77_arg0:__resetProperties()
 			f77_arg0:setupElementClipCounter(7)
 			local f77_local0 = function(f78_arg0)
-				f77_arg0.AtvBg:beginAnimation(300, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f77_arg0.AtvBg:beginAnimation(300, Enum[@"luitween"][@"luitween_ease_in"])
 				f77_arg0.AtvBg:setAlpha(0.8)
 				f77_arg0.AtvBg:registerEventHandler("interrupted_keyframe", f77_arg0.clipInterrupted)
 				f77_arg0.AtvBg:registerEventHandler("transition_complete_keyframe", f77_arg0.clipFinished)
@@ -942,7 +942,7 @@ CoD.VehicleSeatConfig_Internal.__clipsPerState = {
 			f77_arg0.AtvBg:setAlpha(0)
 			f77_local0(f77_arg0.AtvBg)
 			local f77_local1 = function(f79_arg0)
-				f77_arg0.Atv:beginAnimation(300, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f77_arg0.Atv:beginAnimation(300, Enum[@"luitween"][@"luitween_ease_in"])
 				f77_arg0.Atv:setAlpha(0.4)
 				f77_arg0.Atv:registerEventHandler("interrupted_keyframe", f77_arg0.clipInterrupted)
 				f77_arg0.Atv:registerEventHandler("transition_complete_keyframe", f77_arg0.clipFinished)
@@ -952,7 +952,7 @@ CoD.VehicleSeatConfig_Internal.__clipsPerState = {
 			f77_local1(f77_arg0.Atv)
 			local f77_local2 = function(f80_arg0)
 				local f80_local0 = function(f81_arg0)
-					f81_arg0:beginAnimation(199, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f81_arg0:beginAnimation(199, Enum[@"luitween"][@"luitween_ease_both"])
 					f81_arg0:setAlpha(1)
 					f81_arg0:registerEventHandler("transition_complete_keyframe", f77_arg0.clipFinished)
 				end
@@ -968,7 +968,7 @@ CoD.VehicleSeatConfig_Internal.__clipsPerState = {
 			f77_local2(f77_arg0.Driver)
 			local f77_local3 = function(f82_arg0)
 				local f82_local0 = function(f83_arg0)
-					f83_arg0:beginAnimation(199, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f83_arg0:beginAnimation(199, Enum[@"luitween"][@"luitween_ease_both"])
 					f83_arg0:setAlpha(1)
 					f83_arg0:registerEventHandler("transition_complete_keyframe", f77_arg0.clipFinished)
 				end
@@ -997,7 +997,7 @@ CoD.VehicleSeatConfig_Internal.__clipsPerState = {
 			f84_arg0:__resetProperties()
 			f84_arg0:setupElementClipCounter(7)
 			local f84_local0 = function(f85_arg0)
-				f84_arg0.BoatBg:beginAnimation(300, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f84_arg0.BoatBg:beginAnimation(300, Enum[@"luitween"][@"luitween_ease_in"])
 				f84_arg0.BoatBg:setAlpha(0.8)
 				f84_arg0.BoatBg:registerEventHandler("interrupted_keyframe", f84_arg0.clipInterrupted)
 				f84_arg0.BoatBg:registerEventHandler("transition_complete_keyframe", f84_arg0.clipFinished)
@@ -1007,7 +1007,7 @@ CoD.VehicleSeatConfig_Internal.__clipsPerState = {
 			f84_arg0.BoatBg:setAlpha(0)
 			f84_local0(f84_arg0.BoatBg)
 			local f84_local1 = function(f86_arg0)
-				f84_arg0.Boat:beginAnimation(300, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f84_arg0.Boat:beginAnimation(300, Enum[@"luitween"][@"luitween_ease_in"])
 				f84_arg0.Boat:setAlpha(0.4)
 				f84_arg0.Boat:registerEventHandler("interrupted_keyframe", f84_arg0.clipInterrupted)
 				f84_arg0.Boat:registerEventHandler("transition_complete_keyframe", f84_arg0.clipFinished)
@@ -1098,7 +1098,7 @@ CoD.VehicleSeatConfig_Internal.__clipsPerState = {
 			f97_arg0:__resetProperties()
 			f97_arg0:setupElementClipCounter(8)
 			local f97_local0 = function(f98_arg0)
-				f97_arg0.HelicopterBg:beginAnimation(300, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f97_arg0.HelicopterBg:beginAnimation(300, Enum[@"luitween"][@"luitween_ease_in"])
 				f97_arg0.HelicopterBg:setAlpha(0.8)
 				f97_arg0.HelicopterBg:registerEventHandler("interrupted_keyframe", f97_arg0.clipInterrupted)
 				f97_arg0.HelicopterBg:registerEventHandler("transition_complete_keyframe", f97_arg0.clipFinished)
@@ -1107,7 +1107,7 @@ CoD.VehicleSeatConfig_Internal.__clipsPerState = {
 			f97_arg0.HelicopterBg:setAlpha(0)
 			f97_local0(f97_arg0.HelicopterBg)
 			local f97_local1 = function(f99_arg0)
-				f97_arg0.Helicopter:beginAnimation(300, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f97_arg0.Helicopter:beginAnimation(300, Enum[@"luitween"][@"luitween_ease_in"])
 				f97_arg0.Helicopter:setAlpha(0.4)
 				f97_arg0.Helicopter:registerEventHandler("interrupted_keyframe", f97_arg0.clipInterrupted)
 				f97_arg0.Helicopter:registerEventHandler("transition_complete_keyframe", f97_arg0.clipFinished)
@@ -1282,14 +1282,14 @@ CoD.VehicleSeatConfig_Internal.__clipsPerState = {
 			local f119_local0 = function(f120_arg0)
 				local f120_local0 = function(f121_arg0)
 					local f121_local0 = function(f122_arg0)
-						f122_arg0:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+						f122_arg0:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 						f122_arg0:setAlpha(0.4)
 						f122_arg0:registerEventHandler("transition_complete_keyframe", f119_arg0.clipFinished)
 					end
 					f121_arg0:beginAnimation(200)
 					f121_arg0:registerEventHandler("transition_complete_keyframe", f121_local0)
 				end
-				f119_arg0.Atv:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f119_arg0.Atv:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 				f119_arg0.Atv:setAlpha(0.1)
 				f119_arg0.Atv:registerEventHandler("interrupted_keyframe", f119_arg0.clipInterrupted)
 				f119_arg0.Atv:registerEventHandler("transition_complete_keyframe", f120_local0)
@@ -1341,14 +1341,14 @@ CoD.VehicleSeatConfig_Internal.__clipsPerState = {
 			local f123_local0 = function(f124_arg0)
 				local f124_local0 = function(f125_arg0)
 					local f125_local0 = function(f126_arg0)
-						f126_arg0:beginAnimation(1020, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+						f126_arg0:beginAnimation(1020, Enum[@"luitween"][@"luitween_ease_both"])
 						f126_arg0:setAlpha(0.4)
 						f126_arg0:registerEventHandler("transition_complete_keyframe", f123_arg0.clipFinished)
 					end
 					f125_arg0:beginAnimation(190)
 					f125_arg0:registerEventHandler("transition_complete_keyframe", f125_local0)
 				end
-				f123_arg0.CargoTruck:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f123_arg0.CargoTruck:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 				f123_arg0.CargoTruck:setAlpha(0.1)
 				f123_arg0.CargoTruck:registerEventHandler("interrupted_keyframe", f123_arg0.clipInterrupted)
 				f123_arg0.CargoTruck:registerEventHandler("transition_complete_keyframe", f124_local0)
@@ -1403,14 +1403,14 @@ CoD.VehicleSeatConfig_Internal.__clipsPerState = {
 			local f127_local0 = function(f128_arg0)
 				local f128_local0 = function(f129_arg0)
 					local f129_local0 = function(f130_arg0)
-						f130_arg0:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+						f130_arg0:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 						f130_arg0:setAlpha(0.4)
 						f130_arg0:registerEventHandler("transition_complete_keyframe", f127_arg0.clipFinished)
 					end
 					f129_arg0:beginAnimation(200)
 					f129_arg0:registerEventHandler("transition_complete_keyframe", f129_local0)
 				end
-				f127_arg0.Helicopter:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f127_arg0.Helicopter:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 				f127_arg0.Helicopter:setAlpha(0.1)
 				f127_arg0.Helicopter:registerEventHandler("interrupted_keyframe", f127_arg0.clipInterrupted)
 				f127_arg0.Helicopter:registerEventHandler("transition_complete_keyframe", f128_local0)
@@ -1470,14 +1470,14 @@ CoD.VehicleSeatConfig_Internal.__clipsPerState = {
 			local f131_local0 = function(f132_arg0)
 				local f132_local0 = function(f133_arg0)
 					local f133_local0 = function(f134_arg0)
-						f134_arg0:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+						f134_arg0:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 						f134_arg0:setAlpha(0.4)
 						f134_arg0:registerEventHandler("transition_complete_keyframe", f131_arg0.clipFinished)
 					end
 					f133_arg0:beginAnimation(200)
 					f133_arg0:registerEventHandler("transition_complete_keyframe", f133_local0)
 				end
-				f131_arg0.Boat:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f131_arg0.Boat:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 				f131_arg0.Boat:setAlpha(0.1)
 				f131_arg0.Boat:registerEventHandler("interrupted_keyframe", f131_arg0.clipInterrupted)
 				f131_arg0.Boat:registerEventHandler("transition_complete_keyframe", f132_local0)
@@ -1805,14 +1805,14 @@ CoD.VehicleSeatConfig_Internal.__clipsPerState = {
 			local f155_local0 = function(f156_arg0)
 				local f156_local0 = function(f157_arg0)
 					local f157_local0 = function(f158_arg0)
-						f158_arg0:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+						f158_arg0:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 						f158_arg0:setAlpha(0.4)
 						f158_arg0:registerEventHandler("transition_complete_keyframe", f155_arg0.clipFinished)
 					end
 					f157_arg0:beginAnimation(200)
 					f157_arg0:registerEventHandler("transition_complete_keyframe", f157_local0)
 				end
-				f155_arg0.Helicopter:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f155_arg0.Helicopter:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 				f155_arg0.Helicopter:setAlpha(0.1)
 				f155_arg0.Helicopter:registerEventHandler("interrupted_keyframe", f155_arg0.clipInterrupted)
 				f155_arg0.Helicopter:registerEventHandler("transition_complete_keyframe", f156_local0)

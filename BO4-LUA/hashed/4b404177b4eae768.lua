@@ -10,7 +10,7 @@ CoD.TabletTak5_PlayerHealthInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	local BoostFlash = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	BoostFlash:setRGB(ColorSet.T8__GOLD.r, ColorSet.T8__GOLD.g, ColorSet.T8__GOLD.b)
 	BoostFlash:setAlpha(0)
-	BoostFlash:setMaterial(LUI.UIImage.GetCachedMaterial(0x92F09074FB20E6D))
+	BoostFlash:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_scanlines"))
 	BoostFlash:setShaderVector(0, 2, 0, 0, 0)
 	BoostFlash:setShaderVector(1, 0.4, 0, 0, 0)
 	BoostFlash:setShaderVector(2, 0.01, 0, 0, 0)
@@ -23,13 +23,13 @@ CoD.TabletTak5_PlayerHealthInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self.BoostSlide = BoostSlide
 	local PlayerImage = LUI.UIImage.new(0.5, 0.5, -45, 45, 0.5, 0.5, -90, 90)
 	PlayerImage:setAlpha(0.3)
-	PlayerImage:setImage(RegisterImage(0x23B74B667FE001))
+	PlayerImage:setImage(RegisterImage(@"uie_ui_hud_tak5_humanbody"))
 	self:addElement(PlayerImage)
 	self.PlayerImage = PlayerImage
 	local PlayerImageHealthWipe = LUI.UIImage.new(0.5, 0.5, -45, 45, 0.5, 0.5, -90, 90)
 	PlayerImageHealthWipe:setAlpha(0)
-	PlayerImageHealthWipe:setImage(RegisterImage(0x23B74B667FE001))
-	PlayerImageHealthWipe:setMaterial(LUI.UIImage.GetCachedMaterial(0x2EEB1ECF1F211F5))
+	PlayerImageHealthWipe:setImage(RegisterImage(@"uie_ui_hud_tak5_humanbody"))
+	PlayerImageHealthWipe:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_delta"))
 	PlayerImageHealthWipe:setShaderVector(0, 0, 1, 0, 0)
 	PlayerImageHealthWipe:setShaderVector(1, 0, 0, 0, 0)
 	PlayerImageHealthWipe:setShaderVector(3, 0, 0, 0, 0)
@@ -55,20 +55,20 @@ CoD.TabletTak5_PlayerHealthInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self.PlayerImageHealthWipe = PlayerImageHealthWipe
 	local playeroutline = LUI.UIImage.new(0.5, 0.5, -45, 45, 0.5, 0.5, -90, 90)
 	playeroutline:setAlpha(0.25)
-	playeroutline:setImage(RegisterImage(0x9C12642701A73C4))
+	playeroutline:setImage(RegisterImage(@"uie_ui_hud_tak5_humanbody_outline"))
 	self:addElement(playeroutline)
 	self.playeroutline = playeroutline
 	local playeroutlineAdd = LUI.UIImage.new(0.5, 0.5, -45, 45, 0.5, 0.5, -90, 90)
 	playeroutlineAdd:setAlpha(0.4)
-	playeroutlineAdd:setImage(RegisterImage(0x9C12642701A73C4))
-	playeroutlineAdd:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	playeroutlineAdd:setImage(RegisterImage(@"uie_ui_hud_tak5_humanbody_outline"))
+	playeroutlineAdd:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	playeroutlineAdd:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(playeroutlineAdd)
 	self.playeroutlineAdd = playeroutlineAdd
 	local PlayerImageLine = LUI.UIImage.new(0.5, 0.5, -45, 45, 0.5, 0.5, -90, 90)
 	PlayerImageLine:setAlpha(0.3)
-	PlayerImageLine:setImage(RegisterImage(0x23B74B667FE001))
-	PlayerImageLine:setMaterial(LUI.UIImage.GetCachedMaterial(0x92F09074FB20E6D))
+	PlayerImageLine:setImage(RegisterImage(@"uie_ui_hud_tak5_humanbody"))
+	PlayerImageLine:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_scanlines"))
 	PlayerImageLine:setShaderVector(0, 2, 0, 0, 0)
 	PlayerImageLine:setShaderVector(1, 1.5, 0, 0, 0)
 	PlayerImageLine:setShaderVector(2, 0.01, 0, 0, 0)
@@ -78,7 +78,7 @@ CoD.TabletTak5_PlayerHealthInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	PlayerImageHealthWipe:linkToElementModel(self, "health.maxHealthRegen", true, PlayerImageHealthWipe.__Y_Start___Y_End_FullPath)
 	self:subscribeToGlobalModel(f1_arg1, "PerController", "scriptNotify", function(model)
 		local f4_local0 = self
-		if CoD.ModelUtility.IsParamModelEqualToHashString(model, 0xC27B5E4F3724EA3) and CoD.ModelUtility.IsScriptNotifyDataArgEqualTo(model, 1, 1) then
+		if CoD.ModelUtility.IsParamModelEqualToHashString(model, @"localheal_fire") and CoD.ModelUtility.IsScriptNotifyDataArgEqualTo(model, 1, 1) then
 			PlayClip(self, "HealthBoost", f1_arg1)
 		end
 	end)
@@ -119,11 +119,11 @@ CoD.TabletTak5_PlayerHealthInfo.__clipsPerState = {
 			f6_arg0.clipFinished(f6_arg0.playeroutline)
 			local f6_local0 = function(f7_arg0)
 				local f7_local0 = function(f8_arg0)
-					f8_arg0:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f8_arg0:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 					f8_arg0:setAlpha(0.1)
 					f8_arg0:registerEventHandler("transition_complete_keyframe", f6_arg0.clipFinished)
 				end
-				f6_arg0.playeroutlineAdd:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f6_arg0.playeroutlineAdd:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 				f6_arg0.playeroutlineAdd:setAlpha(0)
 				f6_arg0.playeroutlineAdd:registerEventHandler("interrupted_keyframe", f6_arg0.clipInterrupted)
 				f6_arg0.playeroutlineAdd:registerEventHandler("transition_complete_keyframe", f7_local0)
@@ -202,7 +202,7 @@ CoD.TabletTak5_PlayerHealthInfo.__clipsPerState = {
 			f9_local0(f9_arg0.BoostFlash)
 			local f9_local1 = function(f22_arg0)
 				local f22_local0 = function(f23_arg0)
-					f23_arg0:beginAnimation(300, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f23_arg0:beginAnimation(300, Enum[@"luitween"][@"luitween_ease_in"])
 					f23_arg0:setTopBottom(0, 0, 0, 230)
 					f23_arg0:setAlpha(0)
 					f23_arg0:registerEventHandler("transition_complete_keyframe", f9_arg0.clipFinished)
@@ -240,7 +240,7 @@ CoD.TabletTak5_PlayerHealthInfo.__clipsPerState = {
 				local f27_local0 = function(f28_arg0)
 					local f28_local0 = function(f29_arg0)
 						local f29_local0 = function(f30_arg0)
-							f30_arg0:beginAnimation(199, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+							f30_arg0:beginAnimation(199, Enum[@"luitween"][@"luitween_ease_in"])
 							f30_arg0:setAlpha(0.1)
 							f30_arg0:registerEventHandler("transition_complete_keyframe", f9_arg0.clipFinished)
 						end

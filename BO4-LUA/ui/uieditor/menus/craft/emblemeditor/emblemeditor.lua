@@ -51,7 +51,7 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 	})
 	local GroupFull = emptyFocusable
 	local BgGrain = emptyFocusable.subscribeToModel
-	local f1_local6 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	local f1_local6 = Engine[@"getmodelforcontroller"](f1_arg0)
 	BgGrain(GroupFull, f1_local6["Emblem.EmblemProperties.editorMode"], function(f3_arg0)
 		f1_local1:updateElementState(emptyFocusable, {
 			name = "model_validation",
@@ -63,45 +63,45 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 	end, false)
 	GroupFull = emptyFocusable
 	BgGrain = emptyFocusable.subscribeToModel
-	f1_local6 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	f1_local6 = Engine[@"getmodelforcontroller"](f1_arg0)
 	BgGrain(GroupFull, f1_local6["Emblem.EmblemProperties.editorMode"], function(f4_arg0, f4_arg1)
-		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x57783F8DA4AAEF])
-		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x571F08AD84807E0])
-		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x4B11D2B20C75A7F])
-		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xD4C15FE32148D3A])
+		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_left"])
+		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_right"])
+		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_up"])
+		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_down"])
 	end, false)
 	emptyFocusable:appendEventHandler("input_source_changed", function(f5_arg0, f5_arg1)
 		f5_arg1.menu = f5_arg1.menu or f1_local1
-		CoD.Menu.UpdateButtonShownState(f5_arg0, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x57783F8DA4AAEF])
-		CoD.Menu.UpdateButtonShownState(f5_arg0, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x571F08AD84807E0])
+		CoD.Menu.UpdateButtonShownState(f5_arg0, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_left"])
+		CoD.Menu.UpdateButtonShownState(f5_arg0, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_right"])
 	end)
 	GroupFull = emptyFocusable
 	BgGrain = emptyFocusable.subscribeToModel
-	f1_local6 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	f1_local6 = Engine[@"getmodelforcontroller"](f1_arg0)
 	BgGrain(GroupFull, f1_local6.LastInput, function(f6_arg0, f6_arg1)
-		CoD.Menu.UpdateButtonShownState(f6_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x57783F8DA4AAEF])
-		CoD.Menu.UpdateButtonShownState(f6_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x571F08AD84807E0])
+		CoD.Menu.UpdateButtonShownState(f6_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_left"])
+		CoD.Menu.UpdateButtonShownState(f6_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_right"])
 	end, false)
 	emptyFocusable:linkToElementModel(emptyFocusable, "layerIndex", true, function(model, f7_arg1)
-		CoD.Menu.UpdateButtonShownState(f7_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x4B11D2B20C75A7F])
+		CoD.Menu.UpdateButtonShownState(f7_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_up"])
 	end)
 	emptyFocusable:linkToElementModel(emptyFocusable, "iconID", true, function(model, f8_arg1)
-		CoD.Menu.UpdateButtonShownState(f8_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x4B11D2B20C75A7F])
+		CoD.Menu.UpdateButtonShownState(f8_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_up"])
 	end)
 	GroupFull = emptyFocusable
 	BgGrain = emptyFocusable.subscribeToModel
-	f1_local6 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	f1_local6 = Engine[@"getmodelforcontroller"](f1_arg0)
 	BgGrain(GroupFull, f1_local6["Emblem.EmblemProperties.groupsUsed"], function(f9_arg0, f9_arg1)
-		CoD.Menu.UpdateButtonShownState(f9_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x4B11D2B20C75A7F])
+		CoD.Menu.UpdateButtonShownState(f9_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_up"])
 	end, false)
 	GroupFull = emptyFocusable
 	BgGrain = emptyFocusable.subscribeToModel
-	f1_local6 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	f1_local6 = Engine[@"getmodelforcontroller"](f1_arg0)
 	BgGrain(GroupFull, f1_local6["Emblem.EmblemProperties.layersUsed"], function(f10_arg0, f10_arg1)
-		CoD.Menu.UpdateButtonShownState(f10_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x4B11D2B20C75A7F])
+		CoD.Menu.UpdateButtonShownState(f10_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_up"])
 	end, false)
 	emptyFocusable:linkToElementModel(emptyFocusable, "isGrouped", true, function(model, f11_arg1)
-		CoD.Menu.UpdateButtonShownState(f11_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x4B11D2B20C75A7F])
+		CoD.Menu.UpdateButtonShownState(f11_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_up"])
 	end)
 	emptyFocusable:registerEventHandler("gain_focus", function(element, event)
 		local f12_local0 = nil
@@ -110,13 +110,13 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f12_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x57783F8DA4AAEF])
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x571F08AD84807E0])
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x4B11D2B20C75A7F])
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xD4C15FE32148D3A])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_left"])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_right"])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_up"])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_down"])
 		return f12_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(emptyFocusable, f1_arg0, Enum[0x3DD78803F918E9D][0x57783F8DA4AAEF], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(emptyFocusable, f1_arg0, Enum[@"luibutton"][@"lui_key_left"], nil, function(element, menu, controller, model)
 		if CoD.CraftUtility.IsEditMode(controller) and not IsRepeatButtonPress(model) and IsDpadButton(model) and IsGamepad(controller) then
 			CoD.CraftUtility.EmblemEditor_MoveLayer(self, menu, controller, "left")
 			PlaySoundSetSound(self, "layer_switch")
@@ -130,13 +130,13 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 	end, function(element, menu, controller)
 		local f14_local0 = nil
 		if CoD.CraftUtility.IsEditMode(controller) and not IsRepeatButtonPress(f14_local0) and IsDpadButton(f14_local0) and IsGamepad(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x57783F8DA4AAEF], 0x0, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_left"], @"hash_0", nil, nil)
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(emptyFocusable, f1_arg0, Enum[0x3DD78803F918E9D][0x571F08AD84807E0], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(emptyFocusable, f1_arg0, Enum[@"luibutton"][@"lui_key_right"], nil, function(element, menu, controller, model)
 		if CoD.CraftUtility.IsEditMode(controller) and not IsRepeatButtonPress(model) and IsDpadButton(model) and IsGamepad(controller) then
 			CoD.CraftUtility.EmblemEditor_MoveLayer(self, menu, controller, "right")
 			PlaySoundSetSound(self, "layer_switch")
@@ -150,13 +150,13 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 	end, function(element, menu, controller)
 		local f16_local0 = nil
 		if CoD.CraftUtility.IsEditMode(controller) and not IsRepeatButtonPress(f16_local0) and IsDpadButton(f16_local0) and IsGamepad(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x571F08AD84807E0], 0x0, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_right"], @"hash_0", nil, nil)
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(emptyFocusable, f1_arg0, Enum[0x3DD78803F918E9D][0x4B11D2B20C75A7F], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(emptyFocusable, f1_arg0, Enum[@"luibutton"][@"lui_key_up"], nil, function(element, menu, controller, model)
 		if CoD.CraftUtility.IsEditMode(controller) and not CoD.CraftUtility.IsLayerEmpty(self, self.layerCarousel, controller) and not CoD.CraftUtility.Emblems_IsLayerASticker(self.layerCarousel, controller) and not CoD.CraftUtility.Emblem_IsGroupedLayerWithSticker(self.layerCarousel, controller) and IsDpadButton(model) and CoD.BaseUtility.IsDvarEnabled("enable_material_picker") then
 			CoD.CraftUtility.EmblemEditor_SaveLayer(self, controller)
 			CoD.CraftUtility.EmblemEditor_EndEdit(self, element, controller)
@@ -166,13 +166,13 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if CoD.CraftUtility.IsEditMode(controller) and not CoD.CraftUtility.IsLayerEmpty(self, self.layerCarousel, controller) and not CoD.CraftUtility.Emblems_IsLayerASticker(self.layerCarousel, controller) and not CoD.CraftUtility.Emblem_IsGroupedLayerWithSticker(self.layerCarousel, controller) and IsDpadButton(nil) and CoD.BaseUtility.IsDvarEnabled("enable_material_picker") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x4B11D2B20C75A7F], 0x0, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_up"], @"hash_0", nil, nil)
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(emptyFocusable, f1_arg0, Enum[0x3DD78803F918E9D][0xD4C15FE32148D3A], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(emptyFocusable, f1_arg0, Enum[@"luibutton"][@"lui_key_down"], nil, function(element, menu, controller, model)
 		if CoD.CraftUtility.IsEditMode(controller) and not IsRepeatButtonPress(model) and IsDpadButton(model) and CoD.BaseUtility.IsDvarEnabled("enable_clip_mask") then
 			CoD.CraftUtility.EmblemEditor_ClipLayer(self, self.layerCarousel, controller)
 			return true
@@ -181,7 +181,7 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 	end, function(element, menu, controller)
 		local f20_local0 = nil
 		if CoD.CraftUtility.IsEditMode(controller) and not IsRepeatButtonPress(f20_local0) and IsDpadButton(f20_local0) and CoD.BaseUtility.IsDvarEnabled("enable_clip_mask") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xD4C15FE32148D3A], 0x0, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_down"], @"hash_0", nil, nil)
 			return false
 		else
 			return false
@@ -191,8 +191,8 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 	self.emptyFocusable = emptyFocusable
 	BgGrain = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	BgGrain:setAlpha(0.4)
-	BgGrain:setImage(RegisterImage(0x34839E8065B1E53))
-	BgGrain:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	BgGrain:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	BgGrain:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	BgGrain:setShaderVector(0, 0, 0, 0, 0)
 	BgGrain:setupNineSliceShader(196, 88)
 	self:addElement(BgGrain)
@@ -219,7 +219,7 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 	end)
 	local layerGrid = GroupFull
 	f1_local6 = GroupFull.subscribeToModel
-	local ChangeLayerArrows = Engine[0x4DF5CFBC1771947](f1_arg0)
+	local ChangeLayerArrows = Engine[@"getmodelforcontroller"](f1_arg0)
 	f1_local6(layerGrid, ChangeLayerArrows.LastInput, function(f24_arg0)
 		f1_local1:updateElementState(GroupFull, {
 			name = "model_validation",
@@ -230,8 +230,8 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 		})
 	end, false)
 	GroupFull:setAlpha(0)
-	GroupFull.buttonPromptImage:setImage(RegisterImage(0x1F10DEAAEFC50A4))
-	GroupFull.label:setText(Engine[0xF9F1239CFD921FE](0x35E24C3255091DF))
+	GroupFull.buttonPromptImage:setImage(RegisterImage(@"warning_triangle"))
+	GroupFull.label:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_35E24C3255091DF"))
 	self:addElement(GroupFull)
 	self.GroupFull = GroupFull
 	f1_local6 = nil
@@ -250,7 +250,7 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 	end)
 	local layerCarousel = layerGrid
 	ChangeLayerArrows = layerGrid.subscribeToModel
-	local emblemDrawWidget = Engine[0x4DF5CFBC1771947](f1_arg0)
+	local emblemDrawWidget = Engine[@"getmodelforcontroller"](f1_arg0)
 	ChangeLayerArrows(layerCarousel, emblemDrawWidget.LastInput, function(f27_arg0)
 		f1_local1:updateElementState(layerGrid, {
 			name = "model_validation",
@@ -267,51 +267,51 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 	layerGrid:setHorizontalCount(3)
 	layerGrid:setVerticalCount(5)
 	layerGrid:setSpacing(0)
-	layerGrid:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	layerGrid:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	layerGrid:setVerticalCounter(CoD.verticalCounter)
 	layerGrid:setDataSource("EmblemLayerList")
 	layerGrid:linkToElementModel(layerGrid, "layerIndex", true, function(model, f28_arg1)
-		CoD.Menu.UpdateButtonShownState(f28_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(f28_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_none"])
 	end)
 	layerGrid:linkToElementModel(layerGrid, "iconID", true, function(model, f29_arg1)
-		CoD.Menu.UpdateButtonShownState(f29_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(f29_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_none"])
 	end)
 	layerCarousel = layerGrid
 	ChangeLayerArrows = layerGrid.subscribeToModel
-	emblemDrawWidget = Engine[0x4DF5CFBC1771947](f1_arg0)
+	emblemDrawWidget = Engine[@"getmodelforcontroller"](f1_arg0)
 	ChangeLayerArrows(layerCarousel, emblemDrawWidget["Emblem.EmblemProperties.groupsUsed"], function(f30_arg0, f30_arg1)
-		CoD.Menu.UpdateButtonShownState(f30_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(f30_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_none"])
 	end, false)
 	layerCarousel = layerGrid
 	ChangeLayerArrows = layerGrid.subscribeToModel
-	emblemDrawWidget = Engine[0x4DF5CFBC1771947](f1_arg0)
+	emblemDrawWidget = Engine[@"getmodelforcontroller"](f1_arg0)
 	ChangeLayerArrows(layerCarousel, emblemDrawWidget["Emblem.EmblemProperties.layersUsed"], function(f31_arg0, f31_arg1)
-		CoD.Menu.UpdateButtonShownState(f31_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(f31_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_none"])
 	end, false)
 	layerCarousel = layerGrid
 	ChangeLayerArrows = layerGrid.subscribeToModel
-	emblemDrawWidget = Engine[0x4DF5CFBC1771947](f1_arg0)
+	emblemDrawWidget = Engine[@"getmodelforcontroller"](f1_arg0)
 	ChangeLayerArrows(layerCarousel, emblemDrawWidget["Emblem.EmblemProperties.editorMode"], function(f32_arg0, f32_arg1)
-		CoD.Menu.UpdateButtonShownState(f32_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(f32_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_none"])
 	end, false)
 	layerGrid:appendEventHandler("input_source_changed", function(f33_arg0, f33_arg1)
 		f33_arg1.menu = f33_arg1.menu or f1_local1
-		CoD.Menu.UpdateButtonShownState(f33_arg0, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(f33_arg0, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_none"])
 	end)
 	layerCarousel = layerGrid
 	ChangeLayerArrows = layerGrid.subscribeToModel
-	emblemDrawWidget = Engine[0x4DF5CFBC1771947](f1_arg0)
+	emblemDrawWidget = Engine[@"getmodelforcontroller"](f1_arg0)
 	ChangeLayerArrows(layerCarousel, emblemDrawWidget.LastInput, function(f34_arg0, f34_arg1)
-		CoD.Menu.UpdateButtonShownState(f34_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(f34_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_none"])
 	end, false)
 	layerCarousel = layerGrid
 	ChangeLayerArrows = layerGrid.subscribeToModel
-	emblemDrawWidget = Engine[0x4DF5CFBC1771947](f1_arg0)
+	emblemDrawWidget = Engine[@"getmodelforcontroller"](f1_arg0)
 	ChangeLayerArrows(layerCarousel, emblemDrawWidget["Emblem.EmblemProperties.isClipboardEmpty"], function(f35_arg0, f35_arg1)
-		CoD.Menu.UpdateButtonShownState(f35_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(f35_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_none"])
 	end, false)
 	layerGrid:linkToElementModel(layerGrid, "isLinked", true, function(model, f36_arg1)
-		CoD.Menu.UpdateButtonShownState(f36_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(f36_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_none"])
 	end)
 	layerGrid:registerEventHandler("gain_focus", function(element, event)
 		local f37_local0 = nil
@@ -320,10 +320,10 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f37_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_none"])
 		return f37_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(layerGrid, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "MOUSE1", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(layerGrid, f1_arg0, Enum[@"luibutton"][@"lui_key_none"], "MOUSE1", function(element, menu, controller, model)
 		if not CoD.CraftUtility.IsLayerEmpty(self, element, controller) then
 			CoD.CraftUtility.EmblemEditor_LayerGainFocus(menu, self, element, controller)
 			CoD.CraftUtility.EmblemEditor_EditSelectedLayer(self, element, controller)
@@ -344,16 +344,16 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if not CoD.CraftUtility.IsLayerEmpty(self, element, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "MOUSE1")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "MOUSE1")
 			return false
 		elseif CoD.CraftUtility.IsLayerEmpty(self, element, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "MOUSE1")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "MOUSE1")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(layerGrid, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "ui_link", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(layerGrid, f1_arg0, Enum[@"luibutton"][@"lui_key_none"], "ui_link", function(element, menu, controller, model)
 		if CoD.CraftUtility.IsBrowseMode(controller) and not CoD.CraftUtility.IsLayerEmpty(self, element, controller) and IsMouseOrKeyboard(controller) then
 			CoD.CraftUtility.EmblemEditor_LayerGainFocus(menu, self, element, controller)
 			CoD.CraftUtility.EmblemEditor_LinkUnlinkActiveLayer(self, controller, element)
@@ -365,13 +365,13 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if CoD.CraftUtility.IsBrowseMode(controller) and not CoD.CraftUtility.IsLayerEmpty(self, element, controller) and IsMouseOrKeyboard(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "ui_link")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "ui_link")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(layerGrid, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "ui_contextual_3", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(layerGrid, f1_arg0, Enum[@"luibutton"][@"lui_key_none"], "ui_contextual_3", function(element, menu, controller, model)
 		if CoD.CraftUtility.IsBrowseMode(controller) and not CoD.CraftUtility.IsClipboardEmpty(controller) and CoD.CraftUtility.Emblem_CanPastFromClipboard(element, controller) and CoD.CraftUtility.Clipboard_HasEnoughLayersToPaste(self, controller) and IsMouseOrKeyboard(controller) then
 			CoD.CraftUtility.EmblemEditor_LayerGainFocus(menu, self, element, controller)
 			CoD.CraftUtility.EmblemEditor_InsertLayer(self, element, controller)
@@ -382,13 +382,13 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if CoD.CraftUtility.IsBrowseMode(controller) and not CoD.CraftUtility.IsClipboardEmpty(controller) and CoD.CraftUtility.Emblem_CanPastFromClipboard(element, controller) and CoD.CraftUtility.Clipboard_HasEnoughLayersToPaste(self, controller) and IsMouseOrKeyboard(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "ui_contextual_3")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "ui_contextual_3")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(layerGrid, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "ui_remove", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(layerGrid, f1_arg0, Enum[@"luibutton"][@"lui_key_none"], "ui_remove", function(element, menu, controller, model)
 		if CoD.CraftUtility.IsBrowseMode(controller) and not CoD.CraftUtility.IsLayerEmpty(self, self.layerGrid, controller) and IsMouseOrKeyboard(controller) then
 			CoD.CraftUtility.EmblemEditor_LayerGainFocus(menu, self, element, controller)
 			CoD.CraftUtility.EmblemEditor_StoreSelectedLayer(self, controller)
@@ -400,13 +400,13 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if CoD.CraftUtility.IsBrowseMode(controller) and not CoD.CraftUtility.IsLayerEmpty(self, self.layerGrid, controller) and IsMouseOrKeyboard(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "ui_remove")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "ui_remove")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(layerGrid, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "ui_layertop", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(layerGrid, f1_arg0, Enum[@"luibutton"][@"lui_key_none"], "ui_layertop", function(element, menu, controller, model)
 		if CoD.CraftUtility.IsEditMode(controller) and IsMouseOrKeyboard(controller) then
 			CoD.CraftUtility.EmblemEditor_LayerGainFocus(menu, self, element, controller)
 			CoD.CraftUtility.EmblemEditor_EditSelectedLayer(self, element, controller)
@@ -426,13 +426,13 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if CoD.CraftUtility.IsEditMode(controller) and IsMouseOrKeyboard(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "ui_layertop")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "ui_layertop")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(layerGrid, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "ui_layerbottom", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(layerGrid, f1_arg0, Enum[@"luibutton"][@"lui_key_none"], "ui_layerbottom", function(element, menu, controller, model)
 		if CoD.CraftUtility.IsEditMode(controller) and IsMouseOrKeyboard(controller) then
 			CoD.CraftUtility.EmblemEditor_LayerGainFocus(menu, self, element, controller)
 			CoD.CraftUtility.EmblemEditor_EditSelectedLayer(self, element, controller)
@@ -452,13 +452,13 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if CoD.CraftUtility.IsEditMode(controller) and IsMouseOrKeyboard(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "ui_layerbottom")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "ui_layerbottom")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(layerGrid, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "ui_newlayer", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(layerGrid, f1_arg0, Enum[@"luibutton"][@"lui_key_none"], "ui_newlayer", function(element, menu, controller, model)
 		if CoD.CraftUtility.IsBrowseMode(controller) and not CoD.CraftUtility.IsLayerEmpty(self, element, controller) and CoD.CraftUtility.Emblem_IsAnyLayerEmpty(controller) and IsMouseOrKeyboard(controller) then
 			CoD.CraftUtility.EmblemEditor_StoreAllChanges(self, controller)
 			CoD.CraftUtility.EmblemEditor_LayerGainFocus(menu, self, element, controller)
@@ -469,13 +469,13 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if CoD.CraftUtility.IsBrowseMode(controller) and not CoD.CraftUtility.IsLayerEmpty(self, element, controller) and CoD.CraftUtility.Emblem_IsAnyLayerEmpty(controller) and IsMouseOrKeyboard(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "ui_newlayer")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "ui_newlayer")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(layerGrid, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "ui_cutlayer", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(layerGrid, f1_arg0, Enum[@"luibutton"][@"lui_key_none"], "ui_cutlayer", function(element, menu, controller, model)
 		if CoD.CraftUtility.IsBrowseMode(controller) and not CoD.CraftUtility.IsLayerEmpty(self, element, controller) and IsMouseOrKeyboard(controller) then
 			CoD.CraftUtility.EmblemEditor_LayerGainFocus(menu, self, element, controller)
 			CoD.CraftUtility.EmblemEditor_CutLayer(self, element, controller)
@@ -486,13 +486,13 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if CoD.CraftUtility.IsBrowseMode(controller) and not CoD.CraftUtility.IsLayerEmpty(self, element, controller) and IsMouseOrKeyboard(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "ui_cutlayer")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "ui_cutlayer")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(layerGrid, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "ui_copylayer", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(layerGrid, f1_arg0, Enum[@"luibutton"][@"lui_key_none"], "ui_copylayer", function(element, menu, controller, model)
 		if CoD.CraftUtility.IsBrowseMode(controller) and not CoD.CraftUtility.IsLayerEmpty(self, element, controller) and IsMouseOrKeyboard(controller) then
 			CoD.CraftUtility.EmblemEditor_LayerGainFocus(menu, self, element, controller)
 			CoD.CraftUtility.EmblemEditor_CopyLayerToClipboard(self, element, controller)
@@ -503,13 +503,13 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if CoD.CraftUtility.IsBrowseMode(controller) and not CoD.CraftUtility.IsLayerEmpty(self, element, controller) and IsMouseOrKeyboard(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "ui_copylayer")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "ui_copylayer")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(layerGrid, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "ui_group", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(layerGrid, f1_arg0, Enum[@"luibutton"][@"lui_key_none"], "ui_group", function(element, menu, controller, model)
 		if CoD.CraftUtility.IsBrowseMode(controller) and not CoD.CraftUtility.IsLayerEmpty(self, element, controller) and CoD.CraftUtility.Emblems_IsLayerLinked(element, controller) then
 			CoD.CraftUtility.EmblemEditor_LayerGainFocus(menu, self, element, controller)
 			CoD.CraftUtility.EmblemEditor_GroupUngroupLayers(self, controller, element)
@@ -520,13 +520,13 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if CoD.CraftUtility.IsBrowseMode(controller) and not CoD.CraftUtility.IsLayerEmpty(self, element, controller) and CoD.CraftUtility.Emblems_IsLayerLinked(element, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "ui_group")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "ui_group")
 			return false
 		else
 			return false
 		end
 	end, false)
-	layerGrid:AddContextualMenuAction(f1_local1, f1_arg0, 0x972C68080927021, function(f58_arg0, f58_arg1, f58_arg2, f58_arg3)
+	layerGrid:AddContextualMenuAction(f1_local1, f1_arg0, @"hash_972C68080927021", function(f58_arg0, f58_arg1, f58_arg2, f58_arg3)
 		if not CoD.CraftUtility.IsLayerEmpty(self, f58_arg0, f58_arg2) and not CoD.CraftUtility.Emblem_IsLayerGrouped(f58_arg0, f58_arg2) and not CoD.CraftUtility.Emblems_IsLayerLinked(f58_arg0, f58_arg2) then
 			return function(f59_arg0, f59_arg1, f59_arg2, f59_arg3)
 				CoD.CraftUtility.EmblemEditor_LayerGainFocus(f59_arg1, self, f59_arg0, f59_arg2)
@@ -536,7 +536,7 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 		else
 		end
 	end)
-	layerGrid:AddContextualMenuAction(f1_local1, f1_arg0, 0x82789B43F936B78, function(f60_arg0, f60_arg1, f60_arg2, f60_arg3)
+	layerGrid:AddContextualMenuAction(f1_local1, f1_arg0, @"hash_782789B43F936B78", function(f60_arg0, f60_arg1, f60_arg2, f60_arg3)
 		if not CoD.CraftUtility.IsLayerEmpty(self, f60_arg0, f60_arg2) and not CoD.CraftUtility.Emblem_IsLayerGrouped(f60_arg0, f60_arg2) and CoD.CraftUtility.Emblems_IsLayerLinked(f60_arg0, f60_arg2) then
 			return function(f61_arg0, f61_arg1, f61_arg2, f61_arg3)
 				CoD.CraftUtility.EmblemEditor_LayerGainFocus(f61_arg1, self, f61_arg0, f61_arg2)
@@ -546,7 +546,7 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 		else
 		end
 	end)
-	layerGrid:AddContextualMenuAction(f1_local1, f1_arg0, 0xE4FD6AD543818C0, function(f62_arg0, f62_arg1, f62_arg2, f62_arg3)
+	layerGrid:AddContextualMenuAction(f1_local1, f1_arg0, @"hash_E4FD6AD543818C0", function(f62_arg0, f62_arg1, f62_arg2, f62_arg3)
 		if not CoD.CraftUtility.IsLayerEmpty(self, f62_arg0, f62_arg2) then
 			return function(f63_arg0, f63_arg1, f63_arg2, f63_arg3)
 				CoD.CraftUtility.EmblemEditor_LayerGainFocus(f63_arg1, self, f63_arg0, f63_arg2)
@@ -556,7 +556,7 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 		else
 		end
 	end)
-	layerGrid:AddContextualMenuAction(f1_local1, f1_arg0, 0x5AEC3D591F4359E, function(f64_arg0, f64_arg1, f64_arg2, f64_arg3)
+	layerGrid:AddContextualMenuAction(f1_local1, f1_arg0, @"menu/copy", function(f64_arg0, f64_arg1, f64_arg2, f64_arg3)
 		if not CoD.CraftUtility.IsLayerEmpty(self, f64_arg0, f64_arg2) then
 			return function(f65_arg0, f65_arg1, f65_arg2, f65_arg3)
 				CoD.CraftUtility.EmblemEditor_LayerGainFocus(f65_arg1, self, f65_arg0, f65_arg2)
@@ -567,7 +567,7 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 		else
 		end
 	end)
-	layerGrid:AddContextualMenuAction(f1_local1, f1_arg0, 0xC557F1B0FF34983, function(f66_arg0, f66_arg1, f66_arg2, f66_arg3)
+	layerGrid:AddContextualMenuAction(f1_local1, f1_arg0, @"hash_C557F1B0FF34983", function(f66_arg0, f66_arg1, f66_arg2, f66_arg3)
 		if not CoD.CraftUtility.IsClipboardEmpty(f66_arg2) and CoD.CraftUtility.Emblem_CanPastFromClipboard(f66_arg0, f66_arg2) then
 			return function(f67_arg0, f67_arg1, f67_arg2, f67_arg3)
 				CoD.CraftUtility.EmblemEditor_LayerGainFocus(f67_arg1, self, f67_arg0, f67_arg2)
@@ -577,7 +577,7 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 		else
 		end
 	end)
-	layerGrid:AddContextualMenuAction(f1_local1, f1_arg0, 0x345431B325139E6, function(f68_arg0, f68_arg1, f68_arg2, f68_arg3)
+	layerGrid:AddContextualMenuAction(f1_local1, f1_arg0, @"menu/save_group", function(f68_arg0, f68_arg1, f68_arg2, f68_arg3)
 		if CoD.CraftUtility.Emblem_IsLayerGrouped(f68_arg0, f68_arg2) and CoD.CraftUtility.EmblemEditor_CustomDecalGroupsSlotsRemaining(f68_arg2) then
 			return function(f69_arg0, f69_arg1, f69_arg2, f69_arg3)
 				CoD.CraftUtility.EmblemEditor_LayerGainFocus(f69_arg1, self, f69_arg0, f69_arg2)
@@ -588,7 +588,7 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 		else
 		end
 	end)
-	layerGrid:AddContextualMenuAction(f1_local1, f1_arg0, 0x4389B00AC580011, function(f70_arg0, f70_arg1, f70_arg2, f70_arg3)
+	layerGrid:AddContextualMenuAction(f1_local1, f1_arg0, @"menu/change_decal", function(f70_arg0, f70_arg1, f70_arg2, f70_arg3)
 		if not CoD.CraftUtility.IsLayerEmpty(self, f70_arg0, f70_arg2) and not CoD.CraftUtility.Emblem_IsLayerGrouped(f70_arg0, f70_arg2) then
 			return function(f71_arg0, f71_arg1, f71_arg2, f71_arg3)
 				CoD.CraftUtility.EmblemEditor_LayerGainFocus(f71_arg1, self, f71_arg0, f71_arg2)
@@ -601,7 +601,7 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 		else
 		end
 	end)
-	layerGrid:AddContextualMenuAction(f1_local1, f1_arg0, 0x343441CAE04FDED, function(f72_arg0, f72_arg1, f72_arg2, f72_arg3)
+	layerGrid:AddContextualMenuAction(f1_local1, f1_arg0, @"hash_1343441CAE04FDED", function(f72_arg0, f72_arg1, f72_arg2, f72_arg3)
 		if not CoD.CraftUtility.IsLayerEmpty(self, f72_arg0, f72_arg2) and CoD.CraftUtility.Emblems_IsLayerLinked(f72_arg0, f72_arg2) and not CoD.CraftUtility.Emblem_IsLayerGrouped(f72_arg0, f72_arg2) then
 			return function(f73_arg0, f73_arg1, f73_arg2, f73_arg3)
 				CoD.CraftUtility.EmblemEditor_LayerGainFocus(f73_arg1, self, f73_arg0, f73_arg2)
@@ -611,7 +611,7 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 		else
 		end
 	end)
-	layerGrid:AddContextualMenuAction(f1_local1, f1_arg0, 0x6EA1EDF54B8F820, function(f74_arg0, f74_arg1, f74_arg2, f74_arg3)
+	layerGrid:AddContextualMenuAction(f1_local1, f1_arg0, @"hash_36EA1EDF54B8F820", function(f74_arg0, f74_arg1, f74_arg2, f74_arg3)
 		if not CoD.CraftUtility.IsLayerEmpty(self, f74_arg0, f74_arg2) and CoD.CraftUtility.Emblems_IsLayerLinked(f74_arg0, f74_arg2) and CoD.CraftUtility.Emblem_IsLayerGrouped(f74_arg0, f74_arg2) then
 			return function(f75_arg0, f75_arg1, f75_arg2, f75_arg3)
 				CoD.CraftUtility.EmblemEditor_LayerGainFocus(f75_arg1, self, f75_arg0, f75_arg2)
@@ -621,7 +621,7 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 		else
 		end
 	end)
-	layerGrid:AddContextualMenuAction(f1_local1, f1_arg0, 0x7E26022B0886ED3, function(f76_arg0, f76_arg1, f76_arg2, f76_arg3)
+	layerGrid:AddContextualMenuAction(f1_local1, f1_arg0, @"hash_7E26022B0886ED3", function(f76_arg0, f76_arg1, f76_arg2, f76_arg3)
 		if not CoD.CraftUtility.IsLayerEmpty(self, f76_arg0, f76_arg2) and CoD.CraftUtility.Emblem_IsAnyLayerEmpty(f76_arg2) then
 			return function(f77_arg0, f77_arg1, f77_arg2, f77_arg3)
 				CoD.CraftUtility.EmblemEditor_StoreAllChanges(self, f77_arg2)
@@ -656,7 +656,7 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 	})
 	local clipboard = layerCarousel
 	emblemDrawWidget = layerCarousel.subscribeToModel
-	local emblemHiddenPulseLayerPC = Engine[0x4DF5CFBC1771947](f1_arg0)
+	local emblemHiddenPulseLayerPC = Engine[@"getmodelforcontroller"](f1_arg0)
 	emblemDrawWidget(clipboard, emblemHiddenPulseLayerPC["Emblem.EmblemProperties.editorMode"], function(f80_arg0)
 		f1_local1:updateElementState(layerCarousel, {
 			name = "model_validation",
@@ -686,7 +686,7 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 	end)
 	clipboard = layerCarousel
 	emblemDrawWidget = layerCarousel.subscribeToModel
-	emblemHiddenPulseLayerPC = Engine[0x4DF5CFBC1771947](f1_arg0)
+	emblemHiddenPulseLayerPC = Engine[@"getmodelforcontroller"](f1_arg0)
 	emblemDrawWidget(clipboard, emblemHiddenPulseLayerPC["Emblem.EmblemProperties.groupsUsed"], function(f83_arg0)
 		f1_local1:updateElementState(layerCarousel, {
 			name = "model_validation",
@@ -698,7 +698,7 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 	end, false)
 	clipboard = layerCarousel
 	emblemDrawWidget = layerCarousel.subscribeToModel
-	emblemHiddenPulseLayerPC = Engine[0x4DF5CFBC1771947](f1_arg0)
+	emblemHiddenPulseLayerPC = Engine[@"getmodelforcontroller"](f1_arg0)
 	emblemDrawWidget(clipboard, emblemHiddenPulseLayerPC["Emblem.EmblemProperties.layersUsed"], function(f84_arg0)
 		f1_local1:updateElementState(layerCarousel, {
 			name = "model_validation",
@@ -713,41 +713,41 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 	layerCarousel:setWidgetType(CoD.EmblemLayerContainer)
 	layerCarousel:setHorizontalCount(16)
 	layerCarousel:setFirstElementXOffset(725)
-	layerCarousel:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	layerCarousel:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	layerCarousel:setDataSource("EmblemLayerList")
 	clipboard = layerCarousel
 	emblemDrawWidget = layerCarousel.subscribeToModel
-	emblemHiddenPulseLayerPC = Engine[0x4DF5CFBC1771947](f1_arg0)
+	emblemHiddenPulseLayerPC = Engine[@"getmodelforcontroller"](f1_arg0)
 	emblemDrawWidget(clipboard, emblemHiddenPulseLayerPC["Emblem.EmblemProperties.editorMode"], function(f85_arg0, f85_arg1)
-		CoD.Menu.UpdateButtonShownState(f85_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xD4C15FE32148D3A])
+		CoD.Menu.UpdateButtonShownState(f85_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_down"])
 	end, false)
 	layerCarousel:linkToElementModel(layerCarousel, "layerIndex", true, function(model, f86_arg1)
-		CoD.Menu.UpdateButtonShownState(f86_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xD4C15FE32148D3A])
+		CoD.Menu.UpdateButtonShownState(f86_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_down"])
 	end)
 	layerCarousel:linkToElementModel(layerCarousel, "iconID", true, function(model, f87_arg1)
-		CoD.Menu.UpdateButtonShownState(f87_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xD4C15FE32148D3A])
+		CoD.Menu.UpdateButtonShownState(f87_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_down"])
 	end)
 	clipboard = layerCarousel
 	emblemDrawWidget = layerCarousel.subscribeToModel
-	emblemHiddenPulseLayerPC = Engine[0x4DF5CFBC1771947](f1_arg0)
+	emblemHiddenPulseLayerPC = Engine[@"getmodelforcontroller"](f1_arg0)
 	emblemDrawWidget(clipboard, emblemHiddenPulseLayerPC["Emblem.EmblemProperties.groupsUsed"], function(f88_arg0, f88_arg1)
-		CoD.Menu.UpdateButtonShownState(f88_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xD4C15FE32148D3A])
+		CoD.Menu.UpdateButtonShownState(f88_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_down"])
 	end, false)
 	clipboard = layerCarousel
 	emblemDrawWidget = layerCarousel.subscribeToModel
-	emblemHiddenPulseLayerPC = Engine[0x4DF5CFBC1771947](f1_arg0)
+	emblemHiddenPulseLayerPC = Engine[@"getmodelforcontroller"](f1_arg0)
 	emblemDrawWidget(clipboard, emblemHiddenPulseLayerPC["Emblem.EmblemProperties.layersUsed"], function(f89_arg0, f89_arg1)
-		CoD.Menu.UpdateButtonShownState(f89_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xD4C15FE32148D3A])
+		CoD.Menu.UpdateButtonShownState(f89_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_down"])
 	end, false)
 	layerCarousel:appendEventHandler("input_source_changed", function(f90_arg0, f90_arg1)
 		f90_arg1.menu = f90_arg1.menu or f1_local1
-		CoD.Menu.UpdateButtonShownState(f90_arg0, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xD4C15FE32148D3A])
+		CoD.Menu.UpdateButtonShownState(f90_arg0, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_down"])
 	end)
 	clipboard = layerCarousel
 	emblemDrawWidget = layerCarousel.subscribeToModel
-	emblemHiddenPulseLayerPC = Engine[0x4DF5CFBC1771947](f1_arg0)
+	emblemHiddenPulseLayerPC = Engine[@"getmodelforcontroller"](f1_arg0)
 	emblemDrawWidget(clipboard, emblemHiddenPulseLayerPC.LastInput, function(f91_arg0, f91_arg1)
-		CoD.Menu.UpdateButtonShownState(f91_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xD4C15FE32148D3A])
+		CoD.Menu.UpdateButtonShownState(f91_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_down"])
 	end, false)
 	layerCarousel:registerEventHandler("list_item_gain_focus", function(element, event)
 		local f92_local0 = nil
@@ -769,10 +769,10 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f93_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xD4C15FE32148D3A])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_down"])
 		return f93_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(layerCarousel, f1_arg0, Enum[0x3DD78803F918E9D][0xD4C15FE32148D3A], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(layerCarousel, f1_arg0, Enum[@"luibutton"][@"lui_key_down"], nil, function(element, menu, controller, model)
 		if CoD.CraftUtility.IsBrowseMode(controller) and not CoD.CraftUtility.IsLayerEmpty(self, self.layerCarousel, controller) and IsDpadButton(model) and CoD.CraftUtility.Emblem_IsAnyLayerEmpty(controller) and IsGamepad(controller) then
 			CoD.CraftUtility.EmblemEditor_StoreAllChanges(self, controller)
 			CoD.CraftUtility.EmblemEditor_InsertDecalPressed(self, element, controller)
@@ -782,7 +782,7 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if CoD.CraftUtility.IsBrowseMode(controller) and not CoD.CraftUtility.IsLayerEmpty(self, self.layerCarousel, controller) and IsDpadButton(nil) and CoD.CraftUtility.Emblem_IsAnyLayerEmpty(controller) and IsGamepad(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xD4C15FE32148D3A], 0x0, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_down"], @"hash_0", nil, nil)
 			return false
 		else
 			return false
@@ -795,7 +795,7 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 		{
 			stateName = "EditMode",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg0, "Emblem.EmblemProperties.editorMode", Enum[0x3ED85BA45B1D650][0xE2FFAEFF67F59AD])
+				return CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg0, "Emblem.EmblemProperties.editorMode", Enum[@"customizationeditormode"][@"customization_editor_mode_edit"])
 			end,
 		},
 	})
@@ -819,7 +819,7 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 	end)
 	emblemHiddenPulseLayerPC = emblemDrawWidget
 	clipboard = emblemDrawWidget.subscribeToModel
-	local emblemHiddenPulseLayer = Engine[0x4DF5CFBC1771947](f1_arg0)
+	local emblemHiddenPulseLayer = Engine[@"getmodelforcontroller"](f1_arg0)
 	clipboard(emblemHiddenPulseLayerPC, emblemHiddenPulseLayer["Emblem.EmblemProperties.editorMode"], function(f99_arg0)
 		f1_local1:updateElementState(emblemDrawWidget, {
 			name = "model_validation",
@@ -844,7 +844,7 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 			condition = function(menu, element, event)
 				local f101_local0
 				if not IsGroupSlotAvailable(f1_arg0) then
-					f101_local0 = CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg0, "Emblem.EmblemProperties.editorMode", Enum[0x3ED85BA45B1D650][0x3EBDFD4FFDC7DA3])
+					f101_local0 = CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg0, "Emblem.EmblemProperties.editorMode", Enum[@"customizationeditormode"][@"customization_editor_mode_browse"])
 					if f101_local0 then
 						f101_local0 = CoD.CraftUtility.IsClipboardEmblemGrouped(f1_arg0)
 					end
@@ -863,7 +863,7 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 	})
 	emblemHiddenPulseLayer = clipboard
 	emblemHiddenPulseLayerPC = clipboard.subscribeToModel
-	local layerProperties = Engine[0x4DF5CFBC1771947](f1_arg0)
+	local layerProperties = Engine[@"getmodelforcontroller"](f1_arg0)
 	emblemHiddenPulseLayerPC(emblemHiddenPulseLayer, layerProperties["Emblem.EmblemProperties.editorMode"], function(f103_arg0)
 		f1_local1:updateElementState(clipboard, {
 			name = "model_validation",
@@ -875,7 +875,7 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 	end, false)
 	emblemHiddenPulseLayer = clipboard
 	emblemHiddenPulseLayerPC = clipboard.subscribeToModel
-	layerProperties = Engine[0x4DF5CFBC1771947](f1_arg0)
+	layerProperties = Engine[@"getmodelforcontroller"](f1_arg0)
 	emblemHiddenPulseLayerPC(emblemHiddenPulseLayer, layerProperties["Emblem.EmblemProperties.groupsUsed"], function(f104_arg0)
 		f1_local1:updateElementState(clipboard, {
 			name = "model_validation",
@@ -903,13 +903,13 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 		{
 			stateName = "KBMEditMode",
 			condition = function(menu, element, event)
-				return IsMouseOrKeyboard(f1_arg0) and CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg0, "Emblem.EmblemProperties.editorMode", Enum[0x3ED85BA45B1D650][0xE2FFAEFF67F59AD])
+				return IsMouseOrKeyboard(f1_arg0) and CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg0, "Emblem.EmblemProperties.editorMode", Enum[@"customizationeditormode"][@"customization_editor_mode_edit"])
 			end,
 		},
 		{
 			stateName = "EditModeLayerProperties",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg0, "Emblem.EmblemProperties.editorMode", Enum[0x3ED85BA45B1D650][0xE2FFAEFF67F59AD]) and not IsMouseOrKeyboard(f1_arg0)
+				return CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg0, "Emblem.EmblemProperties.editorMode", Enum[@"customizationeditormode"][@"customization_editor_mode_edit"]) and not IsMouseOrKeyboard(f1_arg0)
 			end,
 		},
 	})
@@ -919,7 +919,7 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 	end)
 	local layermofn = layerProperties
 	local layermofnPC = layerProperties.subscribeToModel
-	local BrowseControls = Engine[0x4DF5CFBC1771947](f1_arg0)
+	local BrowseControls = Engine[@"getmodelforcontroller"](f1_arg0)
 	layermofnPC(layermofn, BrowseControls.LastInput, function(f109_arg0)
 		f1_local1:updateElementState(layerProperties, {
 			name = "model_validation",
@@ -931,7 +931,7 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 	end, false)
 	layermofn = layerProperties
 	layermofnPC = layerProperties.subscribeToModel
-	BrowseControls = Engine[0x4DF5CFBC1771947](f1_arg0)
+	BrowseControls = Engine[@"getmodelforcontroller"](f1_arg0)
 	layermofnPC(layermofn, BrowseControls["Emblem.EmblemProperties.editorMode"], function(f110_arg0)
 		f1_local1:updateElementState(layerProperties, {
 			name = "model_validation",
@@ -976,7 +976,7 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 	end)
 	BrowseControls = layermofnPC
 	layermofn = layermofnPC.subscribeToModel
-	local EditControls = Engine[0x4DF5CFBC1771947](f1_arg0)
+	local EditControls = Engine[@"getmodelforcontroller"](f1_arg0)
 	layermofn(BrowseControls, EditControls["Emblem.EmblemProperties.groupsUsed"], function(f115_arg0)
 		f1_local1:updateElementState(layermofnPC, {
 			name = "model_validation",
@@ -988,7 +988,7 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 	end, false)
 	BrowseControls = layermofnPC
 	layermofn = layermofnPC.subscribeToModel
-	EditControls = Engine[0x4DF5CFBC1771947](f1_arg0)
+	EditControls = Engine[@"getmodelforcontroller"](f1_arg0)
 	layermofn(BrowseControls, EditControls["Emblem.EmblemProperties.layersUsed"], function(f116_arg0)
 		f1_local1:updateElementState(layermofnPC, {
 			name = "model_validation",
@@ -1030,7 +1030,7 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 	end)
 	EditControls = layermofn
 	BrowseControls = layermofn.subscribeToModel
-	local f1_local19 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	local f1_local19 = Engine[@"getmodelforcontroller"](f1_arg0)
 	BrowseControls(EditControls, f1_local19["Emblem.EmblemProperties.groupsUsed"], function(f120_arg0)
 		f1_local1:updateElementState(layermofn, {
 			name = "model_validation",
@@ -1042,7 +1042,7 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 	end, false)
 	EditControls = layermofn
 	BrowseControls = layermofn.subscribeToModel
-	f1_local19 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	f1_local19 = Engine[@"getmodelforcontroller"](f1_arg0)
 	BrowseControls(EditControls, f1_local19["Emblem.EmblemProperties.layersUsed"], function(f121_arg0)
 		f1_local1:updateElementState(layermofn, {
 			name = "model_validation",
@@ -1089,7 +1089,7 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 	})
 	f1_local19 = BrowseControls
 	EditControls = BrowseControls.subscribeToModel
-	local actionsListPC = Engine[0x4DF5CFBC1771947](f1_arg0)
+	local actionsListPC = Engine[@"getmodelforcontroller"](f1_arg0)
 	EditControls(f1_local19, actionsListPC["Emblem.EmblemProperties.editorMode"], function(f127_arg0)
 		f1_local1:updateElementState(BrowseControls, {
 			name = "model_validation",
@@ -1101,7 +1101,7 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 	end, false)
 	f1_local19 = BrowseControls
 	EditControls = BrowseControls.subscribeToModel
-	actionsListPC = Engine[0x4DF5CFBC1771947](f1_arg0)
+	actionsListPC = Engine[@"getmodelforcontroller"](f1_arg0)
 	EditControls(f1_local19, actionsListPC["Emblem.EmblemProperties.linkedLayerCount"], function(f128_arg0)
 		f1_local1:updateElementState(BrowseControls, {
 			name = "model_validation",
@@ -1113,7 +1113,7 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 	end, false)
 	f1_local19 = BrowseControls
 	EditControls = BrowseControls.subscribeToModel
-	actionsListPC = Engine[0x4DF5CFBC1771947](f1_arg0)
+	actionsListPC = Engine[@"getmodelforcontroller"](f1_arg0)
 	EditControls(f1_local19, actionsListPC["Emblem.EmblemProperties.groupsUsed"], function(f129_arg0)
 		f1_local1:updateElementState(BrowseControls, {
 			name = "model_validation",
@@ -1143,7 +1143,7 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 	end)
 	f1_local19 = BrowseControls
 	EditControls = BrowseControls.subscribeToModel
-	actionsListPC = Engine[0x4DF5CFBC1771947](f1_arg0)
+	actionsListPC = Engine[@"getmodelforcontroller"](f1_arg0)
 	EditControls(f1_local19, actionsListPC["Emblem.EmblemProperties.layersUsed"], function(f132_arg0)
 		f1_local1:updateElementState(BrowseControls, {
 			name = "model_validation",
@@ -1160,15 +1160,15 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 		{
 			stateName = "BrowseModeControlsState",
 			condition = function(menu, element, event)
-				return not CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg0, "Emblem.EmblemProperties.editorMode", Enum[0x3ED85BA45B1D650][0xE2FFAEFF67F59AD])
+				return not CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg0, "Emblem.EmblemProperties.editorMode", Enum[@"customizationeditormode"][@"customization_editor_mode_edit"])
 			end,
 		},
 		{
 			stateName = "FixedScale",
 			condition = function(menu, element, event)
-				local f134_local0 = CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg0, "Emblem.EmblemProperties.scaleMode", Enum[0x46CD5114B8A5BFC][0x519A07F3DC9EF2D])
+				local f134_local0 = CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg0, "Emblem.EmblemProperties.scaleMode", Enum[@"customizationscaletype"][@"customization_scale_type_fixed"])
 				if f134_local0 then
-					f134_local0 = CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg0, "Emblem.EmblemProperties.editorMode", Enum[0x3ED85BA45B1D650][0xE2FFAEFF67F59AD])
+					f134_local0 = CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg0, "Emblem.EmblemProperties.editorMode", Enum[@"customizationeditormode"][@"customization_editor_mode_edit"])
 					if f134_local0 then
 						if not CoD.CraftUtility.Emblems_IsLayerASticker(self.layerCarousel, f1_arg0) then
 							f134_local0 = not CoD.CraftUtility.Emblem_IsLayerGrouped(self.layerCarousel, f1_arg0)
@@ -1184,8 +1184,8 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 			stateName = "FreeScale",
 			condition = function(menu, element, event)
 				local f135_local0
-				if not CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg0, "Emblem.EmblemProperties.scaleMode", Enum[0x46CD5114B8A5BFC][0x519A07F3DC9EF2D]) then
-					f135_local0 = CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg0, "Emblem.EmblemProperties.editorMode", Enum[0x3ED85BA45B1D650][0xE2FFAEFF67F59AD])
+				if not CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg0, "Emblem.EmblemProperties.scaleMode", Enum[@"customizationscaletype"][@"customization_scale_type_fixed"]) then
+					f135_local0 = CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg0, "Emblem.EmblemProperties.editorMode", Enum[@"customizationeditormode"][@"customization_editor_mode_edit"])
 					if f135_local0 then
 						if not CoD.CraftUtility.Emblems_IsLayerASticker(self.layerCarousel, f1_arg0) then
 							f135_local0 = not CoD.CraftUtility.Emblem_IsLayerGrouped(self.layerCarousel, f1_arg0)
@@ -1202,9 +1202,9 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 		{
 			stateName = "StickerFixedScale",
 			condition = function(menu, element, event)
-				local f136_local0 = CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg0, "Emblem.EmblemProperties.scaleMode", Enum[0x46CD5114B8A5BFC][0x519A07F3DC9EF2D])
+				local f136_local0 = CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg0, "Emblem.EmblemProperties.scaleMode", Enum[@"customizationscaletype"][@"customization_scale_type_fixed"])
 				if f136_local0 then
-					f136_local0 = CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg0, "Emblem.EmblemProperties.editorMode", Enum[0x3ED85BA45B1D650][0xE2FFAEFF67F59AD])
+					f136_local0 = CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg0, "Emblem.EmblemProperties.editorMode", Enum[@"customizationeditormode"][@"customization_editor_mode_edit"])
 					if f136_local0 then
 						f136_local0 = CoD.CraftUtility.Emblems_IsLayerASticker(self.layerCarousel, f1_arg0)
 						if f136_local0 then
@@ -1219,8 +1219,8 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 			stateName = "StickerFreeScale",
 			condition = function(menu, element, event)
 				local f137_local0
-				if not CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg0, "Emblem.EmblemProperties.scaleMode", Enum[0x46CD5114B8A5BFC][0x519A07F3DC9EF2D]) then
-					f137_local0 = CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg0, "Emblem.EmblemProperties.editorMode", Enum[0x3ED85BA45B1D650][0xE2FFAEFF67F59AD])
+				if not CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg0, "Emblem.EmblemProperties.scaleMode", Enum[@"customizationscaletype"][@"customization_scale_type_fixed"]) then
+					f137_local0 = CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg0, "Emblem.EmblemProperties.editorMode", Enum[@"customizationeditormode"][@"customization_editor_mode_edit"])
 					if f137_local0 then
 						f137_local0 = CoD.CraftUtility.Emblems_IsLayerASticker(self.layerCarousel, f1_arg0)
 						if f137_local0 then
@@ -1236,9 +1236,9 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 		{
 			stateName = "FixedScaleOnly",
 			condition = function(menu, element, event)
-				local f138_local0 = CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg0, "Emblem.EmblemProperties.scaleMode", Enum[0x46CD5114B8A5BFC][0x519A07F3DC9EF2D])
+				local f138_local0 = CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg0, "Emblem.EmblemProperties.scaleMode", Enum[@"customizationscaletype"][@"customization_scale_type_fixed"])
 				if f138_local0 then
-					f138_local0 = CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg0, "Emblem.EmblemProperties.editorMode", Enum[0x3ED85BA45B1D650][0xE2FFAEFF67F59AD])
+					f138_local0 = CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg0, "Emblem.EmblemProperties.editorMode", Enum[@"customizationeditormode"][@"customization_editor_mode_edit"])
 					if f138_local0 then
 						f138_local0 = CoD.CraftUtility.Emblem_IsLayerGrouped(self.layerCarousel, f1_arg0)
 					end
@@ -1249,7 +1249,7 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 	})
 	actionsListPC = EditControls
 	f1_local19 = EditControls.subscribeToModel
-	local CraftNavigationWidget = Engine[0x4DF5CFBC1771947](f1_arg0)
+	local CraftNavigationWidget = Engine[@"getmodelforcontroller"](f1_arg0)
 	f1_local19(actionsListPC, CraftNavigationWidget["Emblem.EmblemProperties.editorMode"], function(f139_arg0)
 		f1_local1:updateElementState(EditControls, {
 			name = "model_validation",
@@ -1261,7 +1261,7 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 	end, false)
 	actionsListPC = EditControls
 	f1_local19 = EditControls.subscribeToModel
-	CraftNavigationWidget = Engine[0x4DF5CFBC1771947](f1_arg0)
+	CraftNavigationWidget = Engine[@"getmodelforcontroller"](f1_arg0)
 	f1_local19(actionsListPC, CraftNavigationWidget["Emblem.EmblemProperties.scaleMode"], function(f140_arg0)
 		f1_local1:updateElementState(EditControls, {
 			name = "model_validation",
@@ -1299,7 +1299,7 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 	actionsListPC:setWidgetType(CoD.CraftActionHeader)
 	actionsListPC:setVerticalCount(15)
 	actionsListPC:setSpacing(0)
-	actionsListPC:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	actionsListPC:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	actionsListPC:setDataSource("CraftActionsPC")
 	actionsListPC:subscribeToGlobalModel(f1_arg0, "PerController", "Emblem.EmblemProperties.editorMode", function(model)
 		UpdateDataSource(self, actionsListPC, f1_arg0)
@@ -1321,7 +1321,7 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 	EmblemEditorFrame:subscribeToGlobalModel(f1_arg0, "LobbyRoot", "lobbyTitle", function(model)
 		local f145_local0 = model:get()
 		if f145_local0 ~= nil then
-			EmblemEditorFrame.CommonHeader.subtitle.subtitle:setText(Engine[0xF9F1239CFD921FE](f145_local0))
+			EmblemEditorFrame.CommonHeader.subtitle.subtitle:setText(Engine[@"hash_4F9F1239CFD921FE"](f145_local0))
 		end
 	end)
 	self:addElement(EmblemEditorFrame)
@@ -1377,7 +1377,7 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 	layermofnPC.layerMOfN.__layermofntext = function(f154_arg0)
 		local f154_local0 = f154_arg0:get()
 		if f154_local0 ~= nil then
-			layermofnPC.layerMOfN:setText(LocalizeLayerMOfN(0x2769909B839C4BC, f1_arg0, f154_local0))
+			layermofnPC.layerMOfN:setText(LocalizeLayerMOfN(@"hash_32769909B839C4BC", f1_arg0, f154_local0))
 		end
 	end
 	layermofnPC:linkToElementModel(layerGrid, "layerNumberString", true, layermofnPC.layerMOfN.__layermofntext)
@@ -1393,7 +1393,7 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 	end
 	local f1_local24 = layermofnPC
 	local f1_local25 = layermofnPC.subscribeToModel
-	local f1_local26 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	local f1_local26 = Engine[@"getmodelforcontroller"](f1_arg0)
 	f1_local25(f1_local24, f1_local26["Emblem.EmblemProperties.layersUsed"], layermofnPC.layerMOfN.__layermofntext_FullPath)
 	layermofn:linkToElementModel(layerCarousel, nil, false, function(model)
 		layermofn:setModel(model, f1_arg0)
@@ -1401,7 +1401,7 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 	layermofn.layerMOfN.__layermofntext = function(f157_arg0)
 		local f157_local0 = f157_arg0:get()
 		if f157_local0 ~= nil then
-			layermofn.layerMOfN:setText(LocalizeLayerMOfN(0x2769909B839C4BC, f1_arg0, f157_local0))
+			layermofn.layerMOfN:setText(LocalizeLayerMOfN(@"hash_32769909B839C4BC", f1_arg0, f157_local0))
 		end
 	end
 	layermofn:linkToElementModel(layerCarousel, "layerNumberString", true, layermofn.layerMOfN.__layermofntext)
@@ -1417,7 +1417,7 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 	end
 	f1_local24 = layermofn
 	f1_local25 = layermofn.subscribeToModel
-	f1_local26 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	f1_local26 = Engine[@"getmodelforcontroller"](f1_arg0)
 	f1_local25(f1_local24, f1_local26["Emblem.EmblemProperties.layersUsed"], layermofn.layerMOfN.__layermofntext_FullPath)
 	BrowseControls:linkToElementModel(layerCarousel, nil, false, function(model)
 		BrowseControls:setModel(model, f1_arg0)
@@ -1427,7 +1427,7 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 	end)
 	f1_local24 = EmblemEditorFrame
 	f1_local25 = EmblemEditorFrame.subscribeToModel
-	f1_local26 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	f1_local26 = Engine[@"getmodelforcontroller"](f1_arg0)
 	f1_local25(f1_local24, f1_local26["Emblem.EmblemProperties.editorMode"], EmblemEditorFrame.CommonHeader.subtitle.StageTitle.__CommonHeader_subtitle_ScreenTitle)
 	self:mergeStateConditions({
 		{
@@ -1443,7 +1443,7 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 	end)
 	f1_local24 = self
 	f1_local25 = self.subscribeToModel
-	f1_local26 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	f1_local26 = Engine[@"getmodelforcontroller"](f1_arg0)
 	f1_local25(f1_local24, f1_local26.LastInput, function(f163_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",
@@ -1455,108 +1455,108 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 	end, false)
 	f1_local24 = self
 	f1_local25 = self.subscribeToModel
-	f1_local26 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	f1_local26 = Engine[@"getmodelforcontroller"](f1_arg0)
 	f1_local25(f1_local24, f1_local26["Emblem.EmblemProperties.editorMode"], function(f164_arg0, f164_arg1)
-		CoD.Menu.UpdateButtonShownState(f164_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x493152B20AE4F58])
-		CoD.Menu.UpdateButtonShownState(f164_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC])
-		CoD.Menu.UpdateButtonShownState(f164_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x49A252B20B48936])
-		CoD.Menu.UpdateButtonShownState(f164_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA])
-		CoD.Menu.UpdateButtonShownState(f164_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f164_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
-		CoD.Menu.UpdateButtonShownState(f164_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x93AB4C84F113EE1])
-		CoD.Menu.UpdateButtonShownState(f164_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A])
-		CoD.Menu.UpdateButtonShownState(f164_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x29E5695FF1401AD])
-		CoD.Menu.UpdateButtonShownState(f164_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
-		CoD.Menu.UpdateButtonShownState(f164_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(f164_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x22361E23588705A])
+		CoD.Menu.UpdateButtonShownState(f164_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_lb"])
+		CoD.Menu.UpdateButtonShownState(f164_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_ltrig"])
+		CoD.Menu.UpdateButtonShownState(f164_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_rb"])
+		CoD.Menu.UpdateButtonShownState(f164_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_rtrig"])
+		CoD.Menu.UpdateButtonShownState(f164_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f164_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+		CoD.Menu.UpdateButtonShownState(f164_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_back"])
+		CoD.Menu.UpdateButtonShownState(f164_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"])
+		CoD.Menu.UpdateButtonShownState(f164_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_rstick_pressed"])
+		CoD.Menu.UpdateButtonShownState(f164_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_none"])
+		CoD.Menu.UpdateButtonShownState(f164_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(f164_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_start"])
 	end, false)
 	self:linkToElementModel(self, "layerIndex", true, function(model, f165_arg1)
-		CoD.Menu.UpdateButtonShownState(f165_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x493152B20AE4F58])
-		CoD.Menu.UpdateButtonShownState(f165_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC])
-		CoD.Menu.UpdateButtonShownState(f165_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x49A252B20B48936])
-		CoD.Menu.UpdateButtonShownState(f165_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
-		CoD.Menu.UpdateButtonShownState(f165_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f165_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x93AB4C84F113EE1])
-		CoD.Menu.UpdateButtonShownState(f165_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(f165_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(f165_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_lb"])
+		CoD.Menu.UpdateButtonShownState(f165_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_ltrig"])
+		CoD.Menu.UpdateButtonShownState(f165_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_rb"])
+		CoD.Menu.UpdateButtonShownState(f165_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+		CoD.Menu.UpdateButtonShownState(f165_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f165_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_back"])
+		CoD.Menu.UpdateButtonShownState(f165_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(f165_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_none"])
 	end)
 	self:linkToElementModel(self, "iconID", true, function(model, f166_arg1)
-		CoD.Menu.UpdateButtonShownState(f166_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x493152B20AE4F58])
-		CoD.Menu.UpdateButtonShownState(f166_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC])
-		CoD.Menu.UpdateButtonShownState(f166_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x49A252B20B48936])
-		CoD.Menu.UpdateButtonShownState(f166_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f166_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
-		CoD.Menu.UpdateButtonShownState(f166_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x93AB4C84F113EE1])
-		CoD.Menu.UpdateButtonShownState(f166_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(f166_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(f166_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_lb"])
+		CoD.Menu.UpdateButtonShownState(f166_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_ltrig"])
+		CoD.Menu.UpdateButtonShownState(f166_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_rb"])
+		CoD.Menu.UpdateButtonShownState(f166_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f166_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+		CoD.Menu.UpdateButtonShownState(f166_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_back"])
+		CoD.Menu.UpdateButtonShownState(f166_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(f166_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_none"])
 	end)
 	f1_local24 = self
 	f1_local25 = self.subscribeToModel
-	f1_local26 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	f1_local26 = Engine[@"getmodelforcontroller"](f1_arg0)
 	f1_local25(f1_local24, f1_local26["Emblem.EmblemProperties.groupsUsed"], function(f167_arg0, f167_arg1)
-		CoD.Menu.UpdateButtonShownState(f167_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x493152B20AE4F58])
-		CoD.Menu.UpdateButtonShownState(f167_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC])
-		CoD.Menu.UpdateButtonShownState(f167_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x49A252B20B48936])
-		CoD.Menu.UpdateButtonShownState(f167_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
-		CoD.Menu.UpdateButtonShownState(f167_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f167_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x93AB4C84F113EE1])
-		CoD.Menu.UpdateButtonShownState(f167_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x29E5695FF1401AD])
-		CoD.Menu.UpdateButtonShownState(f167_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
-		CoD.Menu.UpdateButtonShownState(f167_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f167_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_lb"])
+		CoD.Menu.UpdateButtonShownState(f167_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_ltrig"])
+		CoD.Menu.UpdateButtonShownState(f167_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_rb"])
+		CoD.Menu.UpdateButtonShownState(f167_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+		CoD.Menu.UpdateButtonShownState(f167_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f167_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_back"])
+		CoD.Menu.UpdateButtonShownState(f167_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_rstick_pressed"])
+		CoD.Menu.UpdateButtonShownState(f167_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_none"])
+		CoD.Menu.UpdateButtonShownState(f167_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	f1_local24 = self
 	f1_local25 = self.subscribeToModel
-	f1_local26 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	f1_local26 = Engine[@"getmodelforcontroller"](f1_arg0)
 	f1_local25(f1_local24, f1_local26["Emblem.EmblemProperties.layersUsed"], function(f168_arg0, f168_arg1)
-		CoD.Menu.UpdateButtonShownState(f168_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x493152B20AE4F58])
-		CoD.Menu.UpdateButtonShownState(f168_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC])
-		CoD.Menu.UpdateButtonShownState(f168_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x49A252B20B48936])
-		CoD.Menu.UpdateButtonShownState(f168_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
-		CoD.Menu.UpdateButtonShownState(f168_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f168_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x93AB4C84F113EE1])
-		CoD.Menu.UpdateButtonShownState(f168_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x29E5695FF1401AD])
-		CoD.Menu.UpdateButtonShownState(f168_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
-		CoD.Menu.UpdateButtonShownState(f168_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f168_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_lb"])
+		CoD.Menu.UpdateButtonShownState(f168_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_ltrig"])
+		CoD.Menu.UpdateButtonShownState(f168_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_rb"])
+		CoD.Menu.UpdateButtonShownState(f168_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+		CoD.Menu.UpdateButtonShownState(f168_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f168_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_back"])
+		CoD.Menu.UpdateButtonShownState(f168_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_rstick_pressed"])
+		CoD.Menu.UpdateButtonShownState(f168_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_none"])
+		CoD.Menu.UpdateButtonShownState(f168_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	self:linkToElementModel(self, "isGrouped", true, function(model, f169_arg1)
-		CoD.Menu.UpdateButtonShownState(f169_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x493152B20AE4F58])
-		CoD.Menu.UpdateButtonShownState(f169_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC])
-		CoD.Menu.UpdateButtonShownState(f169_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA])
-		CoD.Menu.UpdateButtonShownState(f169_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
-		CoD.Menu.UpdateButtonShownState(f169_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x29E5695FF1401AD])
-		CoD.Menu.UpdateButtonShownState(f169_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(f169_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_lb"])
+		CoD.Menu.UpdateButtonShownState(f169_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_ltrig"])
+		CoD.Menu.UpdateButtonShownState(f169_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_rtrig"])
+		CoD.Menu.UpdateButtonShownState(f169_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+		CoD.Menu.UpdateButtonShownState(f169_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_rstick_pressed"])
+		CoD.Menu.UpdateButtonShownState(f169_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_none"])
 	end)
 	self:linkToElementModel(self, "isLinked", true, function(model, f170_arg1)
-		CoD.Menu.UpdateButtonShownState(f170_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x49A252B20B48936])
+		CoD.Menu.UpdateButtonShownState(f170_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_rb"])
 	end)
 	self:appendEventHandler("input_source_changed", function(f171_arg0, f171_arg1)
 		f171_arg1.menu = f171_arg1.menu or f1_local1
-		CoD.Menu.UpdateButtonShownState(f171_arg0, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f171_arg0, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x93AB4C84F113EE1])
-		CoD.Menu.UpdateButtonShownState(f171_arg0, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A])
-		CoD.Menu.UpdateButtonShownState(f171_arg0, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x29E5695FF1401AD])
-		CoD.Menu.UpdateButtonShownState(f171_arg0, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
-		CoD.Menu.UpdateButtonShownState(f171_arg0, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
-		CoD.Menu.UpdateButtonShownState(f171_arg0, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA])
+		CoD.Menu.UpdateButtonShownState(f171_arg0, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f171_arg0, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_back"])
+		CoD.Menu.UpdateButtonShownState(f171_arg0, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"])
+		CoD.Menu.UpdateButtonShownState(f171_arg0, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_rstick_pressed"])
+		CoD.Menu.UpdateButtonShownState(f171_arg0, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_none"])
+		CoD.Menu.UpdateButtonShownState(f171_arg0, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+		CoD.Menu.UpdateButtonShownState(f171_arg0, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_rtrig"])
 	end)
 	f1_local24 = self
 	f1_local25 = self.subscribeToModel
-	f1_local26 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	f1_local26 = Engine[@"getmodelforcontroller"](f1_arg0)
 	f1_local25(f1_local24, f1_local26.LastInput, function(f172_arg0, f172_arg1)
-		CoD.Menu.UpdateButtonShownState(f172_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f172_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x93AB4C84F113EE1])
-		CoD.Menu.UpdateButtonShownState(f172_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A])
-		CoD.Menu.UpdateButtonShownState(f172_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x29E5695FF1401AD])
-		CoD.Menu.UpdateButtonShownState(f172_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
-		CoD.Menu.UpdateButtonShownState(f172_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
-		CoD.Menu.UpdateButtonShownState(f172_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA])
+		CoD.Menu.UpdateButtonShownState(f172_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f172_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_back"])
+		CoD.Menu.UpdateButtonShownState(f172_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"])
+		CoD.Menu.UpdateButtonShownState(f172_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_rstick_pressed"])
+		CoD.Menu.UpdateButtonShownState(f172_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_none"])
+		CoD.Menu.UpdateButtonShownState(f172_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+		CoD.Menu.UpdateButtonShownState(f172_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_rtrig"])
 	end, false)
 	f1_local24 = self
 	f1_local25 = self.subscribeToModel
-	f1_local26 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	f1_local26 = Engine[@"getmodelforcontroller"](f1_arg0)
 	f1_local25(f1_local24, f1_local26["Emblem.EmblemProperties.isClipboardEmpty"], function(f173_arg0, f173_arg1)
-		CoD.Menu.UpdateButtonShownState(f173_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x29E5695FF1401AD])
-		CoD.Menu.UpdateButtonShownState(f173_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(f173_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_rstick_pressed"])
+		CoD.Menu.UpdateButtonShownState(f173_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_none"])
 	end, false)
 	self:registerEventHandler("menu_loaded", function(self, event)
 		local f174_local0 = nil
@@ -1597,7 +1597,7 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 		end
 		return f175_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x493152B20AE4F58], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_lb"], nil, function(element, menu, controller, model)
 		if CoD.CraftUtility.IsBrowseMode(controller) and not CoD.CraftUtility.IsLayerEmpty(self, self.layerCarousel, controller) and not CoD.CraftUtility.Emblem_IsLayerGrouped(self.layerCarousel, controller) and not IsRepeatButtonPress(model) then
 			CoD.CraftUtility.EmblemEditor_LinkUnlinkActiveLayer(self, controller, self)
 			UpdateElementState(self, "BrowseControls", controller)
@@ -1611,16 +1611,16 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if CoD.CraftUtility.IsBrowseMode(controller) and not CoD.CraftUtility.IsLayerEmpty(self, self.layerCarousel, controller) and not CoD.CraftUtility.Emblem_IsLayerGrouped(self.layerCarousel, controller) and not IsRepeatButtonPress(nil) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x493152B20AE4F58], 0x0, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_lb"], @"hash_0", nil, nil)
 			return false
 		elseif CoD.CraftUtility.IsEditMode(controller) and not CoD.CraftUtility.IsLayerEmpty(self, self.layerCarousel, controller) and not CoD.CraftUtility.Emblems_IsLayerASticker(self.layerCarousel, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x493152B20AE4F58], 0x0, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_lb"], @"hash_0", nil, nil)
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_ltrig"], nil, function(element, menu, controller, model)
 		if CoD.CraftUtility.IsBrowseMode(controller) and not CoD.CraftUtility.IsLayerEmpty(self, self.layerCarousel, controller) and not CoD.CraftUtility.IsEmblemEmpty(controller) and not CoD.CraftUtility.Emblem_IsLayerGrouped(self.layerCarousel, controller) and not IsRepeatButtonPress(model) then
 			CoD.CraftUtility.EmblemEditor_LinkAllLayers(self, controller)
 			UpdateElementState(self, "BrowseControls", controller)
@@ -1630,13 +1630,13 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if CoD.CraftUtility.IsBrowseMode(controller) and not CoD.CraftUtility.IsLayerEmpty(self, self.layerCarousel, controller) and not CoD.CraftUtility.IsEmblemEmpty(controller) and not CoD.CraftUtility.Emblem_IsLayerGrouped(self.layerCarousel, controller) and not IsRepeatButtonPress(nil) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC], 0x0, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_ltrig"], @"hash_0", nil, nil)
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x49A252B20B48936], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_rb"], nil, function(element, menu, controller, model)
 		if CoD.CraftUtility.IsBrowseMode(controller) and not CoD.CraftUtility.IsLayerEmpty(self, self.layerCarousel, controller) and CoD.CraftUtility.Emblems_IsLayerLinked(self.layerCarousel, controller) and not IsRepeatButtonPress(model) then
 			CoD.CraftUtility.EmblemEditor_GroupUngroupLayers(self, controller, element)
 			UpdateElementState(self, "BrowseControls", controller)
@@ -1650,16 +1650,16 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if CoD.CraftUtility.IsBrowseMode(controller) and not CoD.CraftUtility.IsLayerEmpty(self, self.layerCarousel, controller) and CoD.CraftUtility.Emblems_IsLayerLinked(self.layerCarousel, controller) and not IsRepeatButtonPress(nil) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x49A252B20B48936], 0x0, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_rb"], @"hash_0", nil, nil)
 			return false
 		elseif CoD.CraftUtility.IsEditMode(controller) and not CoD.CraftUtility.IsLayerEmpty(self, self.layerCarousel, controller) and not CoD.CraftUtility.Emblems_IsLayerASticker(self.layerCarousel, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x49A252B20B48936], 0x0, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_rb"], @"hash_0", nil, nil)
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA], "ui_contextual_2", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_rtrig"], "ui_contextual_2", function(element, menu, controller, model)
 		if CoD.CraftUtility.IsBrowseMode(controller) and CoD.CraftUtility.Emblem_IsLayerGrouped(self.layerCarousel, controller) and CoD.CraftUtility.EmblemEditor_CustomDecalGroupsSlotsRemaining(controller) then
 			CoD.CraftUtility.EmblemEditor_StoreSelectedGroup(self, controller)
 			CoD.CraftUtility.EmblemEditor_OpenSaveGroupPopup(self, element, controller)
@@ -1675,19 +1675,19 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if CoD.CraftUtility.IsBrowseMode(controller) and CoD.CraftUtility.Emblem_IsLayerGrouped(self.layerCarousel, controller) and CoD.CraftUtility.EmblemEditor_CustomDecalGroupsSlotsRemaining(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA], 0x0, nil, "ui_contextual_2")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_rtrig"], @"hash_0", nil, "ui_contextual_2")
 			return false
 		elseif IsElementInState(self.EmblemEditorPCLegend, "Close") and IsMouseOrKeyboard(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA], 0x90E9019810E01CA, nil, "ui_contextual_2")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_rtrig"], @"hash_490E9019810E01CA", nil, "ui_contextual_2")
 			return true
 		elseif IsElementInState(self.EmblemEditorPCLegend, "Open") and IsMouseOrKeyboard(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA], 0x90E9019810E01CA, nil, "ui_contextual_2")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_rtrig"], @"hash_490E9019810E01CA", nil, "ui_contextual_2")
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], nil, function(element, menu, controller, model)
 		if CoD.CraftUtility.IsEditMode(controller) and not CoD.CraftUtility.Emblems_IsLayerASticker(self.layerCarousel, controller) then
 			CoD.CraftUtility.EmblemEditor_ToggleOutline(self, element, controller)
 			PlaySoundSetSound(self, "toggle_outline")
@@ -1702,16 +1702,16 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if CoD.CraftUtility.IsEditMode(controller) and not CoD.CraftUtility.Emblems_IsLayerASticker(self.layerCarousel, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x0, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"hash_0", nil, nil)
 			return false
 		elseif CoD.CraftUtility.IsBrowseMode(controller) and not CoD.CraftUtility.IsLayerEmpty(self, self.layerCarousel, controller) and IsGamepad(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x0, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"hash_0", nil, nil)
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], nil, function(element, menu, controller, model)
 		if CoD.CraftUtility.IsEditMode(controller) and not CoD.CraftUtility.IsLayerEmpty(self, self.layerCarousel, controller) and not CoD.CraftUtility.Emblems_IsLayerASticker(self.layerCarousel, controller) and not CoD.CraftUtility.Emblem_IsGroupedLayerWithSticker(self.layerCarousel, controller) then
 			CoD.CraftUtility.EmblemEditor_SaveLayer(self, controller)
 			CoD.CraftUtility.EmblemEditor_EndEdit(self, element, controller)
@@ -1729,16 +1729,16 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if CoD.CraftUtility.IsEditMode(controller) and not CoD.CraftUtility.IsLayerEmpty(self, self.layerCarousel, controller) and not CoD.CraftUtility.Emblems_IsLayerASticker(self.layerCarousel, controller) and not CoD.CraftUtility.Emblem_IsGroupedLayerWithSticker(self.layerCarousel, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], 0x0, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], @"hash_0", nil, nil)
 			return false
 		elseif CoD.CraftUtility.IsBrowseMode(controller) and not CoD.CraftUtility.IsLayerEmpty(self, self.layerCarousel, controller) and IsGamepad(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], 0x0, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], @"hash_0", nil, nil)
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x93AB4C84F113EE1], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_back"], nil, function(element, menu, controller, model)
 		if CoD.CraftUtility.IsEditMode(controller) then
 			CoD.CraftUtility.EmblemEditor_FlipIcon(self, element, controller)
 			PlaySoundSetSound(self, "flip_image")
@@ -1752,16 +1752,16 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if CoD.CraftUtility.IsEditMode(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x93AB4C84F113EE1], 0x0, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_back"], @"hash_0", nil, nil)
 			return false
 		elseif CoD.CraftUtility.IsBrowseMode(controller) and not CoD.CraftUtility.IsLayerEmpty(self, self.layerCarousel, controller) and IsGamepad(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x93AB4C84F113EE1], 0x0, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_back"], @"hash_0", nil, nil)
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], "ESCAPE", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], "ESCAPE", function(element, menu, controller, model)
 		if IsPC() and IsElementInState(self.EmblemEditorPCLegend, "Open") then
 			SetElementState(self, self.EmblemEditorPCLegend, controller, "Close")
 			return true
@@ -1781,7 +1781,7 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 			UpdateElementState(self, "layermofn", controller)
 			UpdateElementState(self, "BrowseControls", controller)
 			UpdateElementState(self, "clipboard", controller)
-			UpdateButtonPromptState(menu, element, controller, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A])
+			UpdateButtonPromptState(menu, element, controller, Enum[@"luibutton"][@"lui_key_xbb_pscircle"])
 			return true
 		else
 			GoBack(self, controller)
@@ -1790,23 +1790,23 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if IsPC() and IsElementInState(self.EmblemEditorPCLegend, "Open") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, "ESCAPE")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, "ESCAPE")
 			return true
 		elseif CoD.CraftUtility.IsBrowseMode(controller) and not CoD.CraftUtility.IsEmblemEmpty(controller) and CoD.CraftUtility.Emblems_HasChanges(self, controller) and IsMouseOrKeyboard(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, "ESCAPE")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, "ESCAPE")
 			return true
 		elseif CoD.CraftUtility.IsBrowseMode(controller) and not CoD.CraftUtility.IsEmblemEmpty(controller) and CoD.CraftUtility.Emblems_HasChanges(self, controller) and IsGamepad(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0xAB744CDFD554F5F, nil, "ESCAPE")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"hash_7AB744CDFD554F5F", nil, "ESCAPE")
 			return true
 		elseif CoD.CraftUtility.IsEditMode(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, "ESCAPE")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, "ESCAPE")
 			return true
 		else
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, "ESCAPE")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, "ESCAPE")
 			return true
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x29E5695FF1401AD], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_rstick_pressed"], nil, function(element, menu, controller, model)
 		if CoD.CraftUtility.IsEditMode(controller) and not CoD.CraftUtility.Emblem_IsLayerGrouped(self.layerCarousel, controller) then
 			CoD.CraftUtility.EmblemEditor_ToggleScaleMode(self, element, controller)
 			return true
@@ -1819,16 +1819,16 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if CoD.CraftUtility.IsEditMode(controller) and not CoD.CraftUtility.Emblem_IsLayerGrouped(self.layerCarousel, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x29E5695FF1401AD], 0x0, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_rstick_pressed"], @"hash_0", nil, nil)
 			return false
 		elseif CoD.CraftUtility.IsBrowseMode(controller) and not CoD.CraftUtility.IsClipboardEmpty(controller) and CoD.CraftUtility.Emblem_CanPastFromClipboard(element, controller) and CoD.CraftUtility.Clipboard_HasEnoughLayersToPaste(self, controller) and IsGamepad(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x29E5695FF1401AD], 0x0, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_rstick_pressed"], @"hash_0", nil, nil)
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "ui_contextual_3", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_none"], "ui_contextual_3", function(element, menu, controller, model)
 		if CoD.CraftUtility.IsBrowseMode(controller) and not CoD.CraftUtility.IsClipboardEmpty(controller) and CoD.CraftUtility.Emblem_CanPastFromClipboard(element, controller) and CoD.CraftUtility.Clipboard_HasEnoughLayersToPaste(self, controller) and IsGamepad(controller) then
 			CoD.CraftUtility.EmblemEditor_InsertLayer(self, element, controller)
 			CoD.CraftUtility.EmblemEditor_UpdateLayerData(self, controller, self)
@@ -1838,13 +1838,13 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if CoD.CraftUtility.IsBrowseMode(controller) and not CoD.CraftUtility.IsClipboardEmpty(controller) and CoD.CraftUtility.Emblem_CanPastFromClipboard(element, controller) and CoD.CraftUtility.Clipboard_HasEnoughLayersToPaste(self, controller) and IsGamepad(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "ui_contextual_3")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "ui_contextual_3")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if CoD.CraftUtility.IsEditMode(controller) then
 			CoD.CraftUtility.EmblemEditor_HandleBackInEditMode(self, element, controller)
 			UpdateElementState(self, "layermofn", controller)
@@ -1871,19 +1871,19 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if CoD.CraftUtility.IsEditMode(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xE84DC9704A3FB30, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_7E84DC9704A3FB30", nil, "ui_confirm")
 			return true
 		elseif not CoD.CraftUtility.IsLayerEmpty(self, self.layerCarousel, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xE84DC9704A3FB30, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_7E84DC9704A3FB30", nil, "ui_confirm")
 			return true
 		elseif CoD.CraftUtility.IsLayerEmpty(self, self.layerCarousel, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xE84DC9704A3FB30, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_7E84DC9704A3FB30", nil, "ui_confirm")
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x22361E23588705A], "ui_contextual_1", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_start"], "ui_contextual_1", function(element, menu, controller, model)
 		if CoD.CraftUtility.IsBrowseMode(controller) and IsPC() then
 			CoD.CraftUtility.EmblemEditor_OpenSavePopup(self, element, controller, menu, "true")
 			return true
@@ -1898,19 +1898,19 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if CoD.CraftUtility.IsBrowseMode(controller) and IsPC() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x22361E23588705A], 0x2FA47140D97F89D, nil, "ui_contextual_1")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_start"], @"hash_2FA47140D97F89D", nil, "ui_contextual_1")
 			return true
 		elseif CoD.CraftUtility.IsBrowseMode(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x22361E23588705A], 0x2FA47140D97F89D, nil, "ui_contextual_1")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_start"], @"hash_2FA47140D97F89D", nil, "ui_contextual_1")
 			return true
 		elseif CoD.CraftUtility.IsEditMode(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x22361E23588705A], 0x0, nil, "ui_contextual_1")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_start"], @"hash_0", nil, "ui_contextual_1")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "ui_loweropacity", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_none"], "ui_loweropacity", function(element, menu, controller, model)
 		if CoD.CraftUtility.IsEditMode(controller) and not CoD.CraftUtility.IsLayerEmpty(self, self.layerGrid, controller) and not CoD.CraftUtility.Emblems_IsLayerASticker(self.layerGrid, controller) then
 			CoD.CraftUtility.EmblemChooseColor_UpdateBothColorOpacity(self, element, "-0.01", controller)
 			PlaySoundSetSound(self, "opacity")
@@ -1921,13 +1921,13 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if CoD.CraftUtility.IsEditMode(controller) and not CoD.CraftUtility.IsLayerEmpty(self, self.layerGrid, controller) and not CoD.CraftUtility.Emblems_IsLayerASticker(self.layerGrid, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "ui_loweropacity")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "ui_loweropacity")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "ui_raiseopacity", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_none"], "ui_raiseopacity", function(element, menu, controller, model)
 		if CoD.CraftUtility.IsEditMode(controller) and not CoD.CraftUtility.IsLayerEmpty(self, self.layerGrid, controller) and not CoD.CraftUtility.Emblems_IsLayerASticker(self.layerGrid, controller) then
 			CoD.CraftUtility.EmblemChooseColor_UpdateBothColorOpacity(self, element, "0.01", controller)
 			PlaySoundSetSound(self, "opacity")
@@ -1938,13 +1938,13 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if CoD.CraftUtility.IsEditMode(controller) and not CoD.CraftUtility.IsLayerEmpty(self, self.layerGrid, controller) and not CoD.CraftUtility.Emblems_IsLayerASticker(self.layerGrid, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "ui_raiseopacity")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "ui_raiseopacity")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "ui_prevtab", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_none"], "ui_prevtab", function(element, menu, controller, model)
 		if CoD.CraftUtility.IsEditMode(controller) and not CoD.CraftUtility.IsLayerEmpty(self, self.layerGrid, controller) then
 			CoD.CraftUtility.EmblemEditor_RotateLayer(-1)
 			CoD.CraftUtility.EmblemEditor_EditLayerListActive(self, controller, self.layerGrid)
@@ -1954,13 +1954,13 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if CoD.CraftUtility.IsEditMode(controller) and not CoD.CraftUtility.IsLayerEmpty(self, self.layerGrid, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "ui_prevtab")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "ui_prevtab")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "ui_nexttab", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_none"], "ui_nexttab", function(element, menu, controller, model)
 		if CoD.CraftUtility.IsEditMode(controller) and not CoD.CraftUtility.IsLayerEmpty(self, self.layerGrid, controller) then
 			CoD.CraftUtility.EmblemEditor_RotateLayer(1)
 			CoD.CraftUtility.EmblemEditor_EditLayerListActive(self, controller, self.layerGrid)
@@ -1970,13 +1970,13 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if CoD.CraftUtility.IsEditMode(controller) and not CoD.CraftUtility.IsLayerEmpty(self, self.layerGrid, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "ui_nexttab")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "ui_nexttab")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "ui_open", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_none"], "ui_open", function(element, menu, controller, model)
 		if CoD.CraftUtility.IsEditMode(controller) and not CoD.CraftUtility.IsLayerEmpty(self, self.layerGrid, controller) and not CoD.CraftUtility.Emblems_IsLayerASticker(self.layerGrid, controller) and not CoD.CraftUtility.Emblem_IsGroupedLayerWithSticker(self.layerGrid, controller) then
 			CoD.CraftUtility.EmblemEditor_SaveLayer(self, controller)
 			CoD.CraftUtility.EmblemEditor_EndEdit(self, element, controller)
@@ -1988,13 +1988,13 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if CoD.CraftUtility.IsEditMode(controller) and not CoD.CraftUtility.IsLayerEmpty(self, self.layerGrid, controller) and not CoD.CraftUtility.Emblems_IsLayerASticker(self.layerGrid, controller) and not CoD.CraftUtility.Emblem_IsGroupedLayerWithSticker(self.layerGrid, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "ui_open")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "ui_open")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "ui_toggleoutline", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_none"], "ui_toggleoutline", function(element, menu, controller, model)
 		if CoD.CraftUtility.IsEditMode(controller) and not CoD.CraftUtility.Emblems_IsLayerASticker(self.layerGrid, controller) then
 			CoD.CraftUtility.EmblemEditor_ToggleOutline(self, element, controller)
 			PlaySoundSetSound(self, "toggle_outline")
@@ -2004,7 +2004,7 @@ LUI.createMenu.EmblemEditor = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if CoD.CraftUtility.IsEditMode(controller) and not CoD.CraftUtility.Emblems_IsLayerASticker(self.layerGrid, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "ui_toggleoutline")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "ui_toggleoutline")
 			return false
 		else
 			return false

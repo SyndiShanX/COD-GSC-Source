@@ -18,7 +18,7 @@ CoD.BountyHunterBuyInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.onlyChildrenFocusable = true
 	self.anyChildUsesUpdateState = true
 	local SceneBlur = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	SceneBlur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	SceneBlur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	SceneBlur:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(SceneBlur)
 	self.SceneBlur = SceneBlur
@@ -34,8 +34,8 @@ CoD.BountyHunterBuyInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	local NoiseTiledBacking = LUI.UIImage.new(0.5, 0.5, -893.5, 893.5, 0.5, 0.5, -374.5, 440.5)
 	NoiseTiledBacking:setRGB(0.52, 0.52, 0.52)
 	NoiseTiledBacking:setAlpha(0.65)
-	NoiseTiledBacking:setImage(RegisterImage(0x34839E8065B1E53))
-	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	NoiseTiledBacking:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	NoiseTiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	NoiseTiledBacking:setupNineSliceShader(196, 88)
 	self:addElement(NoiseTiledBacking)
@@ -131,18 +131,18 @@ CoD.BountyHunterBuyInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.Bank = Bank
 	local StageTitle = LUI.UIText.new(0.5, 0.5, -335, 335, 0.5, 0.5, -506, -462)
 	StageTitle:setRGB(0, 0, 0)
-	StageTitle:setText(Engine[0xF9F1239CFD921FE](0xE8E14CAAF997B8))
+	StageTitle:setText(Engine[@"hash_4F9F1239CFD921FE"](0xE8E14CAAF997B8))
 	StageTitle:setTTF("ttmussels_demibold")
 	StageTitle:setLetterSpacing(8)
-	StageTitle:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	StageTitle:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	StageTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	StageTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(StageTitle)
 	self.StageTitle = StageTitle
 	local f1_local20 = nil
 	f1_local20 = LUI.UIElement.createFake()
 	self.FooterContainerFrontendRight = f1_local20
 	local PrimaryBuy = CoD.BountyHunterWeaponBuy.new(f1_arg0, f1_arg1, 0.5, 0.5, -692, -412, 0.5, 0.5, -329, -202)
-	PrimaryBuy.Header:setText(Engine[0xF9F1239CFD921FE](0x3F59D1A91AF7F94))
+	PrimaryBuy.Header:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_23F59D1A91AF7F94"))
 	PrimaryBuy:linkToElementModel(self, "primaryModel", false, function(model)
 		PrimaryBuy:setModel(model, f1_arg1)
 	end)
@@ -153,10 +153,10 @@ CoD.BountyHunterBuyInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 		elseif element.super.gainFocus then
 			f4_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f4_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(PrimaryBuy, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(PrimaryBuy, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if CoD.BountyHunterUtility.IsBuyMenuVisible(self) and not IsDemoPlaying() then
 			CoD.BountyHunterUtility.OpenBountyHunterOverlay(self, menu, controller, "BountyHunterPackageSelect", "primary")
 			return true
@@ -164,7 +164,7 @@ CoD.BountyHunterBuyInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 		end
 	end, function(element, menu, controller)
 		if CoD.BountyHunterUtility.IsBuyMenuVisible(self) and not IsDemoPlaying() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false
@@ -174,20 +174,20 @@ CoD.BountyHunterBuyInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.PrimaryBuy = PrimaryBuy
 	local SecondaryUpgradeHeader = LUI.UIText.new(0.5, 0.5, -238.5, -38.5, 0.5, 0.5, -137, -100)
 	SecondaryUpgradeHeader:setAlpha(0)
-	SecondaryUpgradeHeader:setText(Engine[0xF9F1239CFD921FE](0xB74FA313E2030A0))
+	SecondaryUpgradeHeader:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_6B74FA313E2030A0"))
 	SecondaryUpgradeHeader:setTTF("default")
-	SecondaryUpgradeHeader:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	SecondaryUpgradeHeader:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(SecondaryUpgradeHeader)
 	self.SecondaryUpgradeHeader = SecondaryUpgradeHeader
 	local PrimaryUpgradesHeader = LUI.UIText.new(0.5, 0.5, -146.5, 53.5, 0.5, 0.5, -337, -300)
 	PrimaryUpgradesHeader:setAlpha(0)
-	PrimaryUpgradesHeader:setText(Engine[0xF9F1239CFD921FE](0x27B1CF8082C4D08))
+	PrimaryUpgradesHeader:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_327B1CF8082C4D08"))
 	PrimaryUpgradesHeader:setTTF("default")
-	PrimaryUpgradesHeader:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	PrimaryUpgradesHeader:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(PrimaryUpgradesHeader)
 	self.PrimaryUpgradesHeader = PrimaryUpgradesHeader
 	local SecondaryBuy = CoD.BountyHunterWeaponBuy.new(f1_arg0, f1_arg1, 0.5, 0.5, -692, -412, 0.5, 0.5, -105, 22)
-	SecondaryBuy.Header:setText(Engine[0xF9F1239CFD921FE](0x296B5FAFF3D120C))
+	SecondaryBuy.Header:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_7296B5FAFF3D120C"))
 	SecondaryBuy:linkToElementModel(self, "secondaryModel", false, function(model)
 		SecondaryBuy:setModel(model, f1_arg1)
 	end)
@@ -198,10 +198,10 @@ CoD.BountyHunterBuyInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 		elseif element.super.gainFocus then
 			f8_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f8_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(SecondaryBuy, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(SecondaryBuy, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if CoD.BountyHunterUtility.IsBuyMenuVisible(self) and not IsDemoPlaying() then
 			CoD.BountyHunterUtility.OpenBountyHunterOverlay(self, menu, controller, "BountyHunterPackageSelect", "secondary")
 			return true
@@ -209,7 +209,7 @@ CoD.BountyHunterBuyInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 		end
 	end, function(element, menu, controller)
 		if CoD.BountyHunterUtility.IsBuyMenuVisible(self) and not IsDemoPlaying() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false
@@ -218,7 +218,7 @@ CoD.BountyHunterBuyInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self:addElement(SecondaryBuy)
 	self.SecondaryBuy = SecondaryBuy
 	local ArmorBuy = CoD.BountyHunterGenericBuy.new(f1_arg0, f1_arg1, 0.5, 0.5, -868, -741, 0.5, 0.5, -329, -202)
-	ArmorBuy.Header:setText(Engine[0xF9F1239CFD921FE](0xB1C3B30E1F15C09))
+	ArmorBuy.Header:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_5B1C3B30E1F15C09"))
 	ArmorBuy:linkToElementModel(self, "armorModel", false, function(model)
 		ArmorBuy:setModel(model, f1_arg1)
 	end)
@@ -229,10 +229,10 @@ CoD.BountyHunterBuyInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 		elseif element.super.gainFocus then
 			f12_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f12_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(ArmorBuy, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(ArmorBuy, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if CoD.BountyHunterUtility.IsBuyMenuVisible(self) and not IsDemoPlaying() then
 			CoD.BountyHunterUtility.OpenBountyHunterOverlay(self, menu, controller, "BountyHunterPackageSelect", "armor")
 			return true
@@ -240,7 +240,7 @@ CoD.BountyHunterBuyInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 		end
 	end, function(element, menu, controller)
 		if CoD.BountyHunterUtility.IsBuyMenuVisible(self) and not IsDemoPlaying() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false
@@ -249,7 +249,7 @@ CoD.BountyHunterBuyInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self:addElement(ArmorBuy)
 	self.ArmorBuy = ArmorBuy
 	local ScorestreakBuy = CoD.BountyHunterGenericBuy.new(f1_arg0, f1_arg1, 0.5, 0.5, -868, -741, 0.5, 0.5, -105, 22)
-	ScorestreakBuy.Header:setText(Engine[0xF9F1239CFD921FE](0x49F052E5AE3E0AA))
+	ScorestreakBuy.Header:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_549F052E5AE3E0AA"))
 	ScorestreakBuy:linkToElementModel(self, "scorestreakModel", false, function(model)
 		ScorestreakBuy:setModel(model, f1_arg1)
 	end)
@@ -260,10 +260,10 @@ CoD.BountyHunterBuyInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 		elseif element.super.gainFocus then
 			f16_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f16_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(ScorestreakBuy, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(ScorestreakBuy, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if CoD.BountyHunterUtility.IsBuyMenuVisible(self) and not IsDemoPlaying() then
 			CoD.BountyHunterUtility.OpenBountyHunterOverlay(self, menu, controller, "BountyHunterPackageSelect", "scorestreak")
 			return true
@@ -271,7 +271,7 @@ CoD.BountyHunterBuyInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 		end
 	end, function(element, menu, controller)
 		if CoD.BountyHunterUtility.IsBuyMenuVisible(self) and not IsDemoPlaying() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false
@@ -280,7 +280,7 @@ CoD.BountyHunterBuyInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self:addElement(ScorestreakBuy)
 	self.ScorestreakBuy = ScorestreakBuy
 	local EquipmentBuy = CoD.BountyHunterGenericBuy.new(f1_arg0, f1_arg1, 0.5, 0.5, -868, -741, 0.5, 0.5, 118, 245)
-	EquipmentBuy.Header:setText(Engine[0xF9F1239CFD921FE](0xE5B4A22F58A0272))
+	EquipmentBuy.Header:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_6E5B4A22F58A0272"))
 	EquipmentBuy:linkToElementModel(self, "equipmentModel", false, function(model)
 		EquipmentBuy:setModel(model, f1_arg1)
 	end)
@@ -291,10 +291,10 @@ CoD.BountyHunterBuyInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 		elseif element.super.gainFocus then
 			f20_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f20_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(EquipmentBuy, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(EquipmentBuy, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if CoD.BountyHunterUtility.IsBuyMenuVisible(self) and not IsDemoPlaying() then
 			CoD.BountyHunterUtility.OpenBountyHunterOverlay(self, menu, controller, "BountyHunterPackageSelect", "equipment")
 			return true
@@ -302,7 +302,7 @@ CoD.BountyHunterBuyInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 		end
 	end, function(element, menu, controller)
 		if CoD.BountyHunterUtility.IsBuyMenuVisible(self) and not IsDemoPlaying() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false
@@ -321,10 +321,10 @@ CoD.BountyHunterBuyInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 		elseif element.super.gainFocus then
 			f24_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f24_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(PrimaryAmmoBuy, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(PrimaryAmmoBuy, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if CoD.BountyHunterUtility.IsBuyMenuVisible(self) and not IsDemoPlaying() then
 			CoD.BountyHunterUtility.BuyBountyPackageAmmo(controller, menu, element)
 			return true
@@ -332,7 +332,7 @@ CoD.BountyHunterBuyInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 		end
 	end, function(element, menu, controller)
 		if CoD.BountyHunterUtility.IsBuyMenuVisible(self) and not IsDemoPlaying() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, nil)
 			return false
 		else
 			return false
@@ -351,10 +351,10 @@ CoD.BountyHunterBuyInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 		elseif element.super.gainFocus then
 			f28_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f28_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(SecondaryAmmoBuy, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(SecondaryAmmoBuy, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if CoD.BountyHunterUtility.IsBuyMenuVisible(self) and not IsDemoPlaying() then
 			CoD.BountyHunterUtility.BuyBountyPackageAmmo(controller, menu, element)
 			return true
@@ -362,7 +362,7 @@ CoD.BountyHunterBuyInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 		end
 	end, function(element, menu, controller)
 		if CoD.BountyHunterUtility.IsBuyMenuVisible(self) and not IsDemoPlaying() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, nil)
 			return false
 		else
 			return false
@@ -375,7 +375,7 @@ CoD.BountyHunterBuyInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 		return f31_arg0.packageType:get() == "mobility"
 	end)
 	MobilityUpgrades.PackageTiers:setDataSource("BountyHunterPackages")
-	MobilityUpgrades.Header:setText(Engine[0xF9F1239CFD921FE](0xAE4B345BCF69C5D))
+	MobilityUpgrades.Header:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_6AE4B345BCF69C5D"))
 	MobilityUpgrades:linkToElementModel(self, "mobilityTrack", false, function(model)
 		MobilityUpgrades:setModel(model, f1_arg1)
 	end)
@@ -386,7 +386,7 @@ CoD.BountyHunterBuyInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 		return f33_arg0.packageType:get() == "recon"
 	end)
 	ReconUpgrades.PackageTiers:setDataSource("BountyHunterPackages")
-	ReconUpgrades.Header:setText(Engine[0xF9F1239CFD921FE](0xC33A77C747F9BEF))
+	ReconUpgrades.Header:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_7C33A77C747F9BEF"))
 	ReconUpgrades:linkToElementModel(self, "reconTrack", false, function(model)
 		ReconUpgrades:setModel(model, f1_arg1)
 	end)
@@ -397,7 +397,7 @@ CoD.BountyHunterBuyInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 		return f35_arg0.packageType:get() == "support"
 	end)
 	SupportUpgrades.PackageTiers:setDataSource("BountyHunterPackages")
-	SupportUpgrades.Header:setText(Engine[0xF9F1239CFD921FE](0xBDD6ACC3F0AFE23))
+	SupportUpgrades.Header:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_3BDD6ACC3F0AFE23"))
 	SupportUpgrades:linkToElementModel(self, "supportTrack", false, function(model)
 		SupportUpgrades:setModel(model, f1_arg1)
 	end)
@@ -408,7 +408,7 @@ CoD.BountyHunterBuyInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 		return f37_arg0.packageType:get() == "assault"
 	end)
 	AssaultUpgrades.PackageTiers:setDataSource("BountyHunterPackages")
-	AssaultUpgrades.Header:setText(Engine[0xF9F1239CFD921FE](0xA150653B64E279F))
+	AssaultUpgrades.Header:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_5A150653B64E279F"))
 	AssaultUpgrades:linkToElementModel(self, "assaultTrack", false, function(model)
 		AssaultUpgrades:setModel(model, f1_arg1)
 	end)
@@ -416,12 +416,12 @@ CoD.BountyHunterBuyInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.AssaultUpgrades = AssaultUpgrades
 	local PrimaryAttachments = CoD.BountyHunterTrackBuy.new(f1_arg0, f1_arg1, 0.5, 0.5, -387, -260, 0.5, 0.5, -329, -202)
 	PrimaryAttachments.PackageTiers:setDataSource("BountyHunterPrimaryAttachments")
-	PrimaryAttachments.Header:setText(Engine[0xF9F1239CFD921FE](0x27B1CF8082C4D08))
+	PrimaryAttachments.Header:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_327B1CF8082C4D08"))
 	self:addElement(PrimaryAttachments)
 	self.PrimaryAttachments = PrimaryAttachments
 	local SecondaryAttachments = CoD.BountyHunterTrackBuy.new(f1_arg0, f1_arg1, 0.5, 0.5, -387, -260, 0.5, 0.5, -105, 22)
 	SecondaryAttachments.PackageTiers:setDataSource("BountyHunterSecondaryAttachments")
-	SecondaryAttachments.Header:setText(Engine[0xF9F1239CFD921FE](0xB74FA313E2030A0))
+	SecondaryAttachments.Header:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_6B74FA313E2030A0"))
 	self:addElement(SecondaryAttachments)
 	self.SecondaryAttachments = SecondaryAttachments
 	local PackagePreview = CoD.BountyHunterPackagePreview.new(f1_arg0, f1_arg1, 0.5, 0.5, 488.5, 868.5, 0.5, 0.5, -349, 416)
@@ -429,72 +429,72 @@ CoD.BountyHunterBuyInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.PackagePreview = PackagePreview
 	local HorizAccentTop = LUI.UIImage.new(0.5, 0.5, -870, 870, 0.5, 0.5, -388, -380)
 	HorizAccentTop:setAlpha(0.15)
-	HorizAccentTop:setImage(RegisterImage(0xFE30A9AF719A400))
-	HorizAccentTop:setMaterial(LUI.UIImage.GetCachedMaterial(0x44484DDFAF5C093))
+	HorizAccentTop:setImage(RegisterImage(@"hash_2FE30A9AF719A400"))
+	HorizAccentTop:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_normal"))
 	HorizAccentTop:setShaderVector(0, 0, 0, 0, 0)
 	HorizAccentTop:setupNineSliceShader(8, 4)
 	self:addElement(HorizAccentTop)
 	self.HorizAccentTop = HorizAccentTop
 	local HorizAccentTL = LUI.UIImage.new(0.5, 0.5, -896, -876, 0.5, 0.5, -388, -380)
 	HorizAccentTL:setAlpha(0.07)
-	HorizAccentTL:setImage(RegisterImage(0xFE30A9AF719A400))
-	HorizAccentTL:setMaterial(LUI.UIImage.GetCachedMaterial(0x44484DDFAF5C093))
+	HorizAccentTL:setImage(RegisterImage(@"hash_2FE30A9AF719A400"))
+	HorizAccentTL:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_normal"))
 	HorizAccentTL:setShaderVector(0, 0, 0, 0, 0)
 	HorizAccentTL:setupNineSliceShader(8, 4)
 	self:addElement(HorizAccentTL)
 	self.HorizAccentTL = HorizAccentTL
 	local HorizAccentTR = LUI.UIImage.new(0.5, 0.5, 874.5, 894.5, 0.5, 0.5, -388, -380)
 	HorizAccentTR:setAlpha(0.07)
-	HorizAccentTR:setImage(RegisterImage(0xFE30A9AF719A400))
-	HorizAccentTR:setMaterial(LUI.UIImage.GetCachedMaterial(0x44484DDFAF5C093))
+	HorizAccentTR:setImage(RegisterImage(@"hash_2FE30A9AF719A400"))
+	HorizAccentTR:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_normal"))
 	HorizAccentTR:setShaderVector(0, 0, 0, 0, 0)
 	HorizAccentTR:setupNineSliceShader(8, 4)
 	self:addElement(HorizAccentTR)
 	self.HorizAccentTR = HorizAccentTR
 	local HorizAccentBtm = LUI.UIImage.new(0.5, 0.5, -870, 870, 0.5, 0.5, 447, 455)
 	HorizAccentBtm:setAlpha(0.15)
-	HorizAccentBtm:setImage(RegisterImage(0xFE30A9AF719A400))
-	HorizAccentBtm:setMaterial(LUI.UIImage.GetCachedMaterial(0x44484DDFAF5C093))
+	HorizAccentBtm:setImage(RegisterImage(@"hash_2FE30A9AF719A400"))
+	HorizAccentBtm:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_normal"))
 	HorizAccentBtm:setShaderVector(0, 0, 0, 0, 0)
 	HorizAccentBtm:setupNineSliceShader(8, 4)
 	self:addElement(HorizAccentBtm)
 	self.HorizAccentBtm = HorizAccentBtm
 	local HorizAccentBL = LUI.UIImage.new(0.5, 0.5, -896, -876, 0.5, 0.5, 447, 455)
 	HorizAccentBL:setAlpha(0.07)
-	HorizAccentBL:setImage(RegisterImage(0xFE30A9AF719A400))
-	HorizAccentBL:setMaterial(LUI.UIImage.GetCachedMaterial(0x44484DDFAF5C093))
+	HorizAccentBL:setImage(RegisterImage(@"hash_2FE30A9AF719A400"))
+	HorizAccentBL:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_normal"))
 	HorizAccentBL:setShaderVector(0, 0, 0, 0, 0)
 	HorizAccentBL:setupNineSliceShader(8, 4)
 	self:addElement(HorizAccentBL)
 	self.HorizAccentBL = HorizAccentBL
 	local HorizAccentBR = LUI.UIImage.new(0.5, 0.5, 874.5, 894.5, 0.5, 0.5, 447, 455)
 	HorizAccentBR:setAlpha(0.07)
-	HorizAccentBR:setImage(RegisterImage(0xFE30A9AF719A400))
-	HorizAccentBR:setMaterial(LUI.UIImage.GetCachedMaterial(0x44484DDFAF5C093))
+	HorizAccentBR:setImage(RegisterImage(@"hash_2FE30A9AF719A400"))
+	HorizAccentBR:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_normal"))
 	HorizAccentBR:setShaderVector(0, 0, 0, 0, 0)
 	HorizAccentBR:setupNineSliceShader(8, 4)
 	self:addElement(HorizAccentBR)
 	self.HorizAccentBR = HorizAccentBR
 	local LinePattern01 = LUI.UIImage.new(0.5, 0.5, -868.5, 868.5, 0.5, 0.5, 458, 470)
 	LinePattern01:setAlpha(0.02)
-	LinePattern01:setImage(RegisterImage(0x6281F7B12FC1F02))
-	LinePattern01:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	LinePattern01:setImage(RegisterImage(@"uie_hud_common_stripe_pattern01"))
+	LinePattern01:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	LinePattern01:setShaderVector(0, 0, 0, 0, 0)
 	LinePattern01:setupNineSliceShader(24, 12)
 	self:addElement(LinePattern01)
 	self.LinePattern01 = LinePattern01
 	local BarAccentLeft = LUI.UIImage.new(0.5, 0.5, -951, -907, 0.5, 0.5, 27.5, 40.5)
 	BarAccentLeft:setAlpha(0.07)
-	BarAccentLeft:setImage(RegisterImage(0xFE30A9AF719A400))
-	BarAccentLeft:setMaterial(LUI.UIImage.GetCachedMaterial(0x44484DDFAF5C093))
+	BarAccentLeft:setImage(RegisterImage(@"hash_2FE30A9AF719A400"))
+	BarAccentLeft:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_normal"))
 	BarAccentLeft:setShaderVector(0, 0, 0, 0, 0)
 	BarAccentLeft:setupNineSliceShader(8, 2)
 	self:addElement(BarAccentLeft)
 	self.BarAccentLeft = BarAccentLeft
 	local BarAccentRight = LUI.UIImage.new(0.5, 0.5, 901, 945, 0.5, 0.5, 27.5, 40.5)
 	BarAccentRight:setAlpha(0.07)
-	BarAccentRight:setImage(RegisterImage(0xFE30A9AF719A400))
-	BarAccentRight:setMaterial(LUI.UIImage.GetCachedMaterial(0x44484DDFAF5C093))
+	BarAccentRight:setImage(RegisterImage(@"hash_2FE30A9AF719A400"))
+	BarAccentRight:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_normal"))
 	BarAccentRight:setShaderVector(0, 0, 0, 0, 0)
 	BarAccentRight:setupNineSliceShader(8, 2)
 	self:addElement(BarAccentRight)

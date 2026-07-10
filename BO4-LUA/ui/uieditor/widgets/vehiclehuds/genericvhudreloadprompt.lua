@@ -8,10 +8,10 @@ CoD.genericVHUDReloadPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local ReloadingText = LUI.UIText.new(0, 1, 0, 0, 1, 2, -10, -10)
-	ReloadingText:setText(LocalizeToUpperString(0x3C4EEC8614F780F))
+	ReloadingText:setText(LocalizeToUpperString(@"hash_73C4EEC8614F780F"))
 	ReloadingText:setTTF("ttmussels_regular")
-	ReloadingText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	ReloadingText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	ReloadingText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	ReloadingText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(ReloadingText)
 	self.ReloadingText = ReloadingText
 	self:mergeStateConditions({

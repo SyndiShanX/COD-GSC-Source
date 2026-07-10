@@ -11,31 +11,31 @@ CoD.PC_Korea_Event_Week_Progression.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local StarsBG = LUI.UIImage.new(0, 0, 0, 448, 0, 1, 0, 0)
-	StarsBG:setImage(RegisterImage(0x71725C005CBB558))
-	StarsBG:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	StarsBG:setImage(RegisterImage(@"uie_pc_igrevent_weekprogression_week_bg"))
+	StarsBG:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	StarsBG:setShaderVector(0, 0, 0, 0, 0)
 	StarsBG:setupNineSliceShader(64, 64)
 	self:addElement(StarsBG)
 	self.StarsBG = StarsBG
 	local CurrentWeekBG = LUI.UIImage.new(0, 0, 0, 448, 0, 1, 0, 0)
 	CurrentWeekBG:setAlpha(0)
-	CurrentWeekBG:setImage(RegisterImage(0xDE7C625D16367A3))
-	CurrentWeekBG:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	CurrentWeekBG:setImage(RegisterImage(@"uie_pc_igrevent_weekprogression_currentweek_bg"))
+	CurrentWeekBG:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	CurrentWeekBG:setShaderVector(0, 0, 0, 0, 0)
 	CurrentWeekBG:setupNineSliceShader(64, 64)
 	self:addElement(CurrentWeekBG)
 	self.CurrentWeekBG = CurrentWeekBG
 	local CompletedWeekBG = LUI.UIImage.new(0, 0, 0, 448, 0, 1, 0, 0)
 	CompletedWeekBG:setAlpha(0)
-	CompletedWeekBG:setImage(RegisterImage(0x5D7BA8C5FCCAE5F))
-	CompletedWeekBG:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	CompletedWeekBG:setImage(RegisterImage(@"uie_pc_igrevent_weekprogression_completedweek_bg"))
+	CompletedWeekBG:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	CompletedWeekBG:setShaderVector(0, 0, 0, 0, 0)
 	CompletedWeekBG:setupNineSliceShader(64, 64)
 	self:addElement(CompletedWeekBG)
 	self.CompletedWeekBG = CompletedWeekBG
 	local WeekDecoration = LUI.UIImage.new(0, 0, 0, 112, 0, 0, 0.5, 112.5)
 	WeekDecoration:setAlpha(0.5)
-	WeekDecoration:setImage(RegisterImage(0xFDAF43AD475F819))
+	WeekDecoration:setImage(RegisterImage(@"uie_pc_igrevent_weekprogression_number_deco"))
 	self:addElement(WeekDecoration)
 	self.WeekDecoration = WeekDecoration
 	local DayList = LUI.UIList.new(f1_arg0, f1_arg1, 2, 0, nil, false, false, false, false)
@@ -43,7 +43,7 @@ CoD.PC_Korea_Event_Week_Progression.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	DayList:setTopBottom(0.5, 0.5, -52, 60)
 	DayList:setWidgetType(CoD.PC_Korea_Event_Day_Progression)
 	DayList:setHorizontalCount(3)
-	DayList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	DayList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	DayList:linkToElementModel(self, "dayList", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -54,8 +54,8 @@ CoD.PC_Korea_Event_Week_Progression.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	self.DayList = DayList
 	local WeekText = LUI.UIText.new(0.5, 0.5, -271.5, -178.5, 0.5, 0.5, -19.5, 19.5)
 	WeekText:setTTF("ttmussels_demibold")
-	WeekText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	WeekText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	WeekText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	WeekText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	WeekText:linkToElementModel(self, "weekNumber", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -66,8 +66,8 @@ CoD.PC_Korea_Event_Week_Progression.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	self.WeekText = WeekText
 	local TimeRemainingBG = LUI.UIImage.new(0, 0, 0, 448, 1, 1, -19, 0)
 	TimeRemainingBG:setAlpha(0)
-	TimeRemainingBG:setImage(RegisterImage(0x44E36BB9FF6587A))
-	TimeRemainingBG:setMaterial(LUI.UIImage.GetCachedMaterial(0x44484DDFAF5C093))
+	TimeRemainingBG:setImage(RegisterImage(@"hash_644E36BB9FF6587A"))
+	TimeRemainingBG:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_normal"))
 	TimeRemainingBG:setShaderVector(0, 0, 0, 0, 0)
 	TimeRemainingBG:setupNineSliceShader(6, 6)
 	self:addElement(TimeRemainingBG)
@@ -76,8 +76,8 @@ CoD.PC_Korea_Event_Week_Progression.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	WeekEndingText:setRGB(0, 0, 0)
 	WeekEndingText:setAlpha(0)
 	WeekEndingText:setTTF("dinnext_regular")
-	WeekEndingText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	WeekEndingText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	WeekEndingText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	WeekEndingText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	WeekEndingText:linkToElementModel(self, "weekTimeRemaining", true, function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
@@ -152,7 +152,7 @@ CoD.PC_Korea_Event_Week_Progression.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	end)
 	local f1_local10 = CurrentWeekRewardBG
 	local CompletedBar = CurrentWeekRewardBG.subscribeToModel
-	local f1_local12 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local12 = Engine[@"getmodelforcontroller"](f1_arg1)
 	CompletedBar(f1_local10, f1_local12["PCKoreaEventProgression.isCurrentWeekCompleted"], function(f13_arg0)
 		f1_arg0:updateElementState(CurrentWeekRewardBG, {
 			name = "model_validation",
@@ -190,7 +190,7 @@ CoD.PC_Korea_Event_Week_Progression.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	self.CurrentWeekRewardBG = CurrentWeekRewardBG
 	CompletedBar = LUI.UIImage.new(0, 0, -16, 0, -0, 1, 0, 0)
 	CompletedBar:setAlpha(0)
-	CompletedBar:setImage(RegisterImage(0xB08D3C5F5377007))
+	CompletedBar:setImage(RegisterImage(@"uie_pc_igrevent_weekprogression_weekcompleted"))
 	self:addElement(CompletedBar)
 	self.CompletedBar = CompletedBar
 	self:mergeStateConditions({

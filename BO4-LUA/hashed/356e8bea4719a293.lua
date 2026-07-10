@@ -16,10 +16,10 @@ CoD.BountyHunterOpenPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self:addElement(Backing)
 	self.Backing = Backing
 	local Prompt = LUI.UIText.new(0.5, 0.5, -150, 150, 0.5, 0.5, -15, 15)
-	Prompt:setText(Engine[0xF9F1239CFD921FE](0x8CFE818E4F35809))
+	Prompt:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_38CFE818E4F35809"))
 	Prompt:setTTF("ttmussels_regular")
 	Prompt:setLetterSpacing(4)
-	Prompt:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	Prompt:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	Prompt:setBackingType(1)
 	Prompt:setBackingWidget(CoD.TextBackingCommonWithBlur, f1_arg0, f1_arg1)
 	Prompt:setBackingXPadding(6)
@@ -28,11 +28,11 @@ CoD.BountyHunterOpenPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	local PCPromptText = nil
 	PCPromptText = LUI.UIText.new(0, 0, 66, 300, 0.5, 0.5, -15, 15)
 	PCPromptText:setAlpha(0)
-	PCPromptText:setText(Engine[0xF9F1239CFD921FE](0xA2CE63A1E424223))
+	PCPromptText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_6A2CE63A1E424223"))
 	PCPromptText:setTTF("ttmussels_regular")
 	PCPromptText:setLetterSpacing(4)
-	PCPromptText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	PCPromptText:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	PCPromptText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	PCPromptText:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	PCPromptText:setBackingType(1)
 	PCPromptText:setBackingWidget(CoD.TextBackingCommonWithBlur, f1_arg0, f1_arg1)
 	PCPromptText:setBackingXPadding(6)
@@ -55,26 +55,26 @@ CoD.BountyHunterOpenPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	})
 	local f1_local5 = ControllerDependentTextBox
 	local f1_local6 = ControllerDependentTextBox.subscribeToModel
-	local f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local6(f1_local5, f1_local7["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2]], function(f4_arg0)
+	local f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local6(f1_local5, f1_local7["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"]], function(f4_arg0)
 		f1_arg0:updateElementState(ControllerDependentTextBox, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f4_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"],
 		})
 	end, false)
 	f1_local5 = ControllerDependentTextBox
 	f1_local6 = ControllerDependentTextBox.subscribeToModel
-	f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local6(f1_local5, f1_local7["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F]], function(f5_arg0)
+	f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local6(f1_local5, f1_local7["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_play_of_the_match"]], function(f5_arg0)
 		f1_arg0:updateElementState(ControllerDependentTextBox, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f5_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_play_of_the_match"],
 		})
 	end, false)
 	ControllerDependentTextBox:appendEventHandler("input_source_changed", function(f6_arg0, f6_arg1)
@@ -83,7 +83,7 @@ CoD.BountyHunterOpenPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	end)
 	f1_local5 = ControllerDependentTextBox
 	f1_local6 = ControllerDependentTextBox.subscribeToModel
-	f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local6(f1_local5, f1_local7.LastInput, function(f7_arg0)
 		f1_arg0:updateElementState(ControllerDependentTextBox, {
 			name = "model_validation",
@@ -96,8 +96,8 @@ CoD.BountyHunterOpenPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	ControllerDependentTextBox:setAlpha(0)
 	ControllerDependentTextBox.KBMText:setText(CoD.BaseUtility.AlreadyLocalized("[{+activate}]"))
 	ControllerDependentTextBox.GamepadText:setText(CoD.BaseUtility.AlreadyLocalized("^BBUTTON_CANCEL^"))
-	ControllerDependentTextBox.GamepadText:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
-	ControllerDependentTextBox.GamepadText:setAlignment(Enum[0x7A5123B654282D2][0x6ED4298C93DC5ED])
+	ControllerDependentTextBox.GamepadText:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
+	ControllerDependentTextBox.GamepadText:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
 	self:addElement(ControllerDependentTextBox)
 	self.ControllerDependentTextBox = ControllerDependentTextBox
 	self:mergeStateConditions({
@@ -114,7 +114,7 @@ CoD.BountyHunterOpenPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	end)
 	f1_local5 = self
 	f1_local6 = self.subscribeToModel
-	f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local6(f1_local5, f1_local7.LastInput, function(f10_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

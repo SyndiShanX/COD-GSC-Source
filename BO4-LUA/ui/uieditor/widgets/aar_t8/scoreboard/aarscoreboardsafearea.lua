@@ -79,7 +79,7 @@ CoD.AARScoreboardSafeArea.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	})
 	local f1_local2 = ScoreboardGameStatusScores
 	local f1_local3 = ScoreboardGameStatusScores.subscribeToModel
-	local f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local3(f1_local2, f1_local4["factions.isCoDCaster"], function(f13_arg0)
 		f1_arg0:updateElementState(ScoreboardGameStatusScores, {
 			name = "model_validation",
@@ -91,7 +91,7 @@ CoD.AARScoreboardSafeArea.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	end, false)
 	f1_local2 = ScoreboardGameStatusScores
 	f1_local3 = ScoreboardGameStatusScores.subscribeToModel
-	f1_local4 = Engine[0x8DF2E5447F384B9]()
+	f1_local4 = Engine[@"getglobalmodel"]()
 	f1_local3(f1_local2, f1_local4["scoreboard.team1.count"], function(f14_arg0)
 		f1_arg0:updateElementState(ScoreboardGameStatusScores, {
 			name = "model_validation",
@@ -103,7 +103,7 @@ CoD.AARScoreboardSafeArea.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	end, false)
 	f1_local2 = ScoreboardGameStatusScores
 	f1_local3 = ScoreboardGameStatusScores.subscribeToModel
-	f1_local4 = Engine[0x8DF2E5447F384B9]()
+	f1_local4 = Engine[@"getglobalmodel"]()
 	f1_local3(f1_local2, f1_local4["scoreboard.team2.count"], function(f15_arg0)
 		f1_arg0:updateElementState(ScoreboardGameStatusScores, {
 			name = "model_validation",

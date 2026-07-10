@@ -15,7 +15,7 @@ LUI.createMenu.AllRNGPopup = function(f1_arg0, f1_arg1)
 	f1_local1:addElementToPendingUpdateStateList(self)
 	local BgBlur = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	BgBlur:setRGB(0, 0, 0)
-	BgBlur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	BgBlur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	BgBlur:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(BgBlur)
 	self.BgBlur = BgBlur
@@ -25,44 +25,44 @@ LUI.createMenu.AllRNGPopup = function(f1_arg0, f1_arg1)
 	self:addElement(Background)
 	self.Background = Background
 	local Banner = LUI.UIImage.new(0.5, 0.5, -960, 960, 0.5, 0.5, -190, 190)
-	Banner:setImage(RegisterImage(0x1B35139AF5FC958))
+	Banner:setImage(RegisterImage(@"hash_31B35139AF5FC958"))
 	self:addElement(Banner)
 	self.Banner = Banner
 	local BannerAdd = LUI.UIImage.new(0.5, 0.5, -960, 960, 0.5, 0.5, -190, 190)
-	BannerAdd:setImage(RegisterImage(0x1B35139AF5FC958))
-	BannerAdd:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	BannerAdd:setImage(RegisterImage(@"hash_31B35139AF5FC958"))
+	BannerAdd:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(BannerAdd)
 	self.BannerAdd = BannerAdd
 	local Message = LUI.UIText.new(0.5, 0.5, -619, 619, 0.5, 0.5, 89, 119)
 	Message:setRGB(0.92, 0.92, 0.92)
-	Message:setText(Engine[0xF9F1239CFD921FE](0xA2536C60411E11C))
+	Message:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_1A2536C60411E11C"))
 	Message:setTTF("ttmussels_regular")
 	Message:setLetterSpacing(2)
-	Message:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	Message:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Message:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	Message:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(Message)
 	self.Message = Message
 	local CompleteText = LUI.UIText.new(0.5, 0.5, -750, 750, 0.5, 0.5, 9, 63)
 	CompleteText:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
-	CompleteText:setText(Engine[0xF9F1239CFD921FE](0x63075DE006C879D))
+	CompleteText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_463075DE006C879D"))
 	CompleteText:setTTF("dinnext_regular")
 	CompleteText:setLetterSpacing(8)
-	CompleteText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	CompleteText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	self:addElement(CompleteText)
 	self.CompleteText = CompleteText
 	local GenericMenuFrameIdentity = CoD.GenericMenuFrameIdentity.new(f1_local1, f1_arg0, 0.5, 0.5, -960, 960, 0, 1, 0, 0)
-	GenericMenuFrameIdentity.CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(0x29C903C6DF90D6F))
+	GenericMenuFrameIdentity.CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(@"menu/black_market"))
 	GenericMenuFrameIdentity:subscribeToGlobalModel(f1_arg0, "LobbyRoot", "lobbyTitle", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			GenericMenuFrameIdentity.CommonHeader.subtitle.subtitle:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			GenericMenuFrameIdentity.CommonHeader.subtitle.subtitle:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	self:addElement(GenericMenuFrameIdentity)
 	self.GenericMenuFrameIdentity = GenericMenuFrameIdentity
 	local PCButtons = nil
 	PCButtons = CoD.PC_MOTD_Buttons.new(f1_local1, f1_arg0, 0.5, 0.5, -632.5, -392.5, 1, 1, -167.5, -87.5)
-	PCButtons.OptionText:setText(LocalizeToUpperString(0x6393FF34EA56966))
+	PCButtons.OptionText:setText(LocalizeToUpperString(@"menu/continue"))
 	PCButtons:linkToElementModel(self, "image", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -76,19 +76,19 @@ LUI.createMenu.AllRNGPopup = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f4_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f4_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(PCButtons, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(PCButtons, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		GoBack(self, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 		return false
 	end, false)
 	self:addElement(PCButtons)
 	self.PCButtons = PCButtons
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if PropertyIsTrue(self, "goBackMultiple") then
 			PlaySoundAlias("uin_press_generic")
 			GoBackMultiple(menu, controller, 2)
@@ -99,7 +99,7 @@ LUI.createMenu.AllRNGPopup = function(f1_arg0, f1_arg1)
 			return true
 		end
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x6393FF34EA56966, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/continue", nil, nil)
 		return true
 	end, false)
 	GenericMenuFrameIdentity:setModel(self.buttonModel, f1_arg0)
@@ -138,7 +138,7 @@ CoD.AllRNGPopup.__clipsPerState = {
 			f10_arg0:__resetProperties()
 			f10_arg0:setupElementClipCounter(5)
 			local f10_local0 = function(f11_arg0)
-				f10_arg0.Background:beginAnimation(200, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f10_arg0.Background:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_out"])
 				f10_arg0.Background:setAlpha(0.8)
 				f10_arg0.Background:registerEventHandler("interrupted_keyframe", f10_arg0.clipInterrupted)
 				f10_arg0.Background:registerEventHandler("transition_complete_keyframe", f10_arg0.clipFinished)
@@ -148,7 +148,7 @@ CoD.AllRNGPopup.__clipsPerState = {
 			f10_local0(f10_arg0.Background)
 			local f10_local1 = function(f12_arg0)
 				local f12_local0 = function(f13_arg0)
-					f13_arg0:beginAnimation(199, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f13_arg0:beginAnimation(199, Enum[@"luitween"][@"luitween_ease_both"])
 					f13_arg0:setAlpha(1)
 					f13_arg0:registerEventHandler("transition_complete_keyframe", f10_arg0.clipFinished)
 				end
@@ -187,7 +187,7 @@ CoD.AllRNGPopup.__clipsPerState = {
 						f20_arg0:beginAnimation(399)
 						f20_arg0:registerEventHandler("transition_complete_keyframe", f10_arg0.clipFinished)
 					end
-					f19_arg0:beginAnimation(500, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f19_arg0:beginAnimation(500, Enum[@"luitween"][@"luitween_ease_out"])
 					f19_arg0:setAlpha(1)
 					f19_arg0:registerEventHandler("transition_complete_keyframe", f19_local0)
 				end
@@ -215,7 +215,7 @@ CoD.AllRNGPopup.__clipsPerState = {
 						f23_arg0:setScale(1.04, 1.04)
 						f23_arg0:registerEventHandler("transition_complete_keyframe", f23_local0)
 					end
-					f22_arg0:beginAnimation(99, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f22_arg0:beginAnimation(99, Enum[@"luitween"][@"luitween_ease_out"])
 					f22_arg0:setAlpha(1)
 					f22_arg0:setScale(0.94, 0.94)
 					f22_arg0:registerEventHandler("transition_complete_keyframe", f22_local0)

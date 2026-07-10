@@ -14,7 +14,7 @@ CoD.ShopItemTall.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local ImageBacking = LUI.UIImage.new(0, 0, 0, 236, 0, 0, 0, 506)
-	ImageBacking:setImage(RegisterImage(0x65F59B19E1CE1C7))
+	ImageBacking:setImage(RegisterImage(@"hash_765F59B19E1CE1C7"))
 	self:addElement(ImageBacking)
 	self.ImageBacking = ImageBacking
 	local FeaturedImage = LUI.UIFixedAspectRatioImage.new(0.5, 0.5, -118, 118, 0, 0, 0, 506)
@@ -58,8 +58,8 @@ CoD.ShopItemTall.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 	self:addElement(ContractRarityHeaderTile)
 	self.ContractRarityHeaderTile = ContractRarityHeaderTile
 	local ContractCost = CoD.ContractItemCost.new(f1_arg0, f1_arg1, 0.5, 0.5, -92.5, 92.5, 1, 1, -31.5, -10.5)
-	ContractCost.Free:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	ContractCost.ContractCost:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	ContractCost.Free:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	ContractCost.ContractCost:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	ContractCost:linkToElementModel(self, nil, false, function(model)
 		ContractCost:setModel(model, f1_arg1)
 	end)
@@ -67,8 +67,8 @@ CoD.ShopItemTall.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 	self.ContractCost = ContractCost
 	local TabBottomLine = LUI.UIImage.new(0, 1, 0, 0, 1, 1, -96, -92)
 	TabBottomLine:setAlpha(0.09)
-	TabBottomLine:setImage(RegisterImage(0x5526CF3733E24C4))
-	TabBottomLine:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	TabBottomLine:setImage(RegisterImage(@"uie_ui_menu_common_tab_line_bottom"))
+	TabBottomLine:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(TabBottomLine)
 	self.TabBottomLine = TabBottomLine
 	local Darken = LUI.UIImage.new(0, 0, 0, 236, 0, 0, 0, 506)
@@ -78,7 +78,7 @@ CoD.ShopItemTall.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 	self.Darken = Darken
 	local PurchasedBanner = CoD.ContractPurchasedBanner.new(f1_arg0, f1_arg1, 0.5, 0.5, -75, 75, 1, 1, -33.5, -8.5)
 	PurchasedBanner:setAlpha(0)
-	PurchasedBanner.PurchasedTitle:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	PurchasedBanner.PurchasedTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	self:addElement(PurchasedBanner)
 	self.PurchasedBanner = PurchasedBanner
 	local shopCategory = CoD.ShopItemTallDescContainer.new(f1_arg0, f1_arg1, 0, 0, 9, 227, 0, 0, 415, 452)

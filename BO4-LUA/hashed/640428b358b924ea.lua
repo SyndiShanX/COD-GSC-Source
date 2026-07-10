@@ -42,105 +42,105 @@ CoD.Barracks_StatsOverview_WZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self.bgWin = bgWin
 	local Header = LUI.UIText.new(0, 1, 0, 0, 0, 0, 10, 40)
 	Header:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
-	Header:setText(LocalizeToUpperString(0xCE8C743423F4D99))
+	Header:setText(LocalizeToUpperString(@"menu/career_stats"))
 	Header:setTTF("ttmussels_demibold")
 	Header:setLetterSpacing(4)
-	Header:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	Header:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	self:addElement(Header)
 	self.Header = Header
 	local TimePlayedText = LUI.UIText.new(0, 1, 0, 0, 0, 0, 44, 62)
 	TimePlayedText:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	TimePlayedText:setAlpha(0.5)
 	TimePlayedText.__String_Reference = function()
-		TimePlayedText:setText(SecondsAsTimePlayedString(CoD.PlayerStatsUtility.GetWZGameModePlayerStorageStat(f1_arg1, f1_arg0, 0x3BF15114F02AF7B, 0x0)))
+		TimePlayedText:setText(SecondsAsTimePlayedString(CoD.PlayerStatsUtility.GetWZGameModePlayerStorageStat(f1_arg1, f1_arg0, @"time_played_total", 0x0)))
 	end
 	TimePlayedText.__String_Reference()
 	TimePlayedText:setTTF("ttmussels_regular")
-	TimePlayedText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	TimePlayedText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	self:addElement(TimePlayedText)
 	self.TimePlayedText = TimePlayedText
 	local Wins = CoD.PlayerStatsMain.new(f1_arg0, f1_arg1, 0, 0, 19.5, 219.5, 0, 0, 115, 182)
 	Wins.StatValue.__Stat_Value = function()
-		Wins.StatValue:setText(CoD.PlayerStatsUtility.GetWZGameModePlayerStorageStat(f1_arg1, f1_arg0, 0x61FFBF65560C4BE, 11235))
+		Wins.StatValue:setText(CoD.PlayerStatsUtility.GetWZGameModePlayerStorageStat(f1_arg1, f1_arg0, @"wins", 11235))
 	end
 	Wins.StatValue.__Stat_Value()
-	Wins.StatHeaderText:setText(Engine[0xF9F1239CFD921FE](0x585891326C1258C))
+	Wins.StatHeaderText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_4585891326C1258C"))
 	self:addElement(Wins)
 	self.Wins = Wins
 	local Kills = CoD.PlayerStatsMain.new(f1_arg0, f1_arg1, 0, 0, 19.5, 219.5, 0, 0, 240, 307)
 	Kills.StatValue.__Stat_Value = function()
-		Kills.StatValue:setText(CoD.PlayerStatsUtility.GetWZGameModePlayerStorageStat(f1_arg1, f1_arg0, 0xBFF3D8DB7BB109E, 11235))
+		Kills.StatValue:setText(CoD.PlayerStatsUtility.GetWZGameModePlayerStorageStat(f1_arg1, f1_arg0, @"kills", 11235))
 	end
 	Kills.StatValue.__Stat_Value()
-	Kills.StatHeaderText:setText(Engine[0xF9F1239CFD921FE](0x6B234CB46B5ACD4))
+	Kills.StatHeaderText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_16B234CB46B5ACD4"))
 	self:addElement(Kills)
 	self.Kills = Kills
 	local KillsPerGame = CoD.PlayerStatsDetailed.new(f1_arg0, f1_arg1, 0, 0, 155, 467, 0, 0, 265, 286)
-	KillsPerGame.StatHeaderText:setText(LocalizeToUpperString(0xD9EF6EF1578BC4B))
+	KillsPerGame.StatHeaderText:setText(LocalizeToUpperString(@"menu/kills_game"))
 	KillsPerGame.StatValue.__Stat_Value = function()
-		KillsPerGame.StatValue:setText(CoD.PlayerStatsUtility.GetWZGameModeAveragePlayerStorageStatRatio(f1_arg1, f1_arg0, 0xBFF3D8DB7BB109E, 0x25E6910D90BDEA9, 11235))
+		KillsPerGame.StatValue:setText(CoD.PlayerStatsUtility.GetWZGameModeAveragePlayerStorageStatRatio(f1_arg1, f1_arg0, @"kills", @"total_games_played", 11235))
 	end
 	KillsPerGame.StatValue.__Stat_Value()
 	self:addElement(KillsPerGame)
 	self.KillsPerGame = KillsPerGame
 	local KillDeathRatio = CoD.PlayerStatsDetailed.new(f1_arg0, f1_arg1, 0, 0, 155, 467, 0, 0, 287, 308)
-	KillDeathRatio.StatHeaderText:setText(Engine[0xF9F1239CFD921FE](0x9F7AB977F072D55))
+	KillDeathRatio.StatHeaderText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/kd_short"))
 	KillDeathRatio.StatValue.__Stat_Value = function()
-		KillDeathRatio.StatValue:setText(CoD.PlayerStatsUtility.GetWZGameModeAveragePlayerStorageStatRatio(f1_arg1, f1_arg0, 0xBFF3D8DB7BB109E, 0x6ED920648D707FA, 11235))
+		KillDeathRatio.StatValue:setText(CoD.PlayerStatsUtility.GetWZGameModeAveragePlayerStorageStatRatio(f1_arg1, f1_arg0, @"kills", @"deaths", 11235))
 	end
 	KillDeathRatio.StatValue.__Stat_Value()
 	self:addElement(KillDeathRatio)
 	self.KillDeathRatio = KillDeathRatio
 	local HeadshotPct = CoD.PlayerStatsDetailed.new(f1_arg0, f1_arg1, 0, 0, 155, 467, 0, 0, 308, 329)
-	HeadshotPct.StatHeaderText:setText(LocalizeToUpperString(0xF1382FBC8E58E3D))
+	HeadshotPct.StatHeaderText:setText(LocalizeToUpperString(@"menu/headshot_pct"))
 	HeadshotPct.StatValue.__Stat_Value = function()
-		HeadshotPct.StatValue:setText(FractionToPercentageRounded(CoD.PlayerStatsUtility.GetWZGameModeAveragePlayerStorageStatRatio(f1_arg1, f1_arg0, 0x398F3A5D1263466, 0x32DFBCC9B0CF0BB, "88%")))
+		HeadshotPct.StatValue:setText(FractionToPercentageRounded(CoD.PlayerStatsUtility.GetWZGameModeAveragePlayerStorageStatRatio(f1_arg1, f1_arg0, @"hits_headshot", @"hits", "88%")))
 	end
 	HeadshotPct.StatValue.__Stat_Value()
 	self:addElement(HeadshotPct)
 	self.HeadshotPct = HeadshotPct
 	local KillsAfterRevivePct = CoD.PlayerStatsDetailed.new(f1_arg0, f1_arg1, 0, 0, 155, 467, 0, 0, 329, 350)
-	KillsAfterRevivePct.StatHeaderText:setText(LocalizeToUpperString(0x8A1E63E734BC103))
+	KillsAfterRevivePct.StatHeaderText:setText(LocalizeToUpperString(@"hash_58A1E63E734BC103"))
 	KillsAfterRevivePct.StatValue.__Stat_Value = function()
-		KillsAfterRevivePct.StatValue:setText(FractionToPercentageRounded(CoD.PlayerStatsUtility.GetWZGameModeAveragePlayerStorageStatRatio(f1_arg1, f1_arg0, 0x2E8101BD834F5D, 0xBFF3D8DB7BB109E, "88%")))
+		KillsAfterRevivePct.StatValue:setText(FractionToPercentageRounded(CoD.PlayerStatsUtility.GetWZGameModeAveragePlayerStorageStatRatio(f1_arg1, f1_arg0, @"kills_after_revive", @"kills", "88%")))
 	end
 	KillsAfterRevivePct.StatValue.__Stat_Value()
 	self:addElement(KillsAfterRevivePct)
 	self.KillsAfterRevivePct = KillsAfterRevivePct
 	local HotDropKillPct = CoD.PlayerStatsDetailed.new(f1_arg0, f1_arg1, 0, 0, 155, 467, 0, 0, 351, 372)
-	HotDropKillPct.StatHeaderText:setText(LocalizeToUpperString(0xC4C85FE1273E187))
+	HotDropKillPct.StatHeaderText:setText(LocalizeToUpperString(@"hash_7C4C85FE1273E187"))
 	HotDropKillPct.StatValue.__Stat_Value = function()
-		HotDropKillPct.StatValue:setText(FractionToPercentageRounded(CoD.PlayerStatsUtility.GetWZGameModeAveragePlayerStorageStatRatio(f1_arg1, f1_arg0, 0x99467721898923A, 0xBFF3D8DB7BB109E, "88%")))
+		HotDropKillPct.StatValue:setText(FractionToPercentageRounded(CoD.PlayerStatsUtility.GetWZGameModeAveragePlayerStorageStatRatio(f1_arg1, f1_arg0, @"kills_early", @"kills", "88%")))
 	end
 	HotDropKillPct.StatValue.__Stat_Value()
 	self:addElement(HotDropKillPct)
 	self.HotDropKillPct = HotDropKillPct
 	local MostKills = CoD.PlayerStatsDetailed.new(f1_arg0, f1_arg1, 0, 0, 155, 467, 0, 0, 373, 394)
-	MostKills.StatHeaderText:setText(LocalizeToUpperString(0x8F9242469C9FB22))
+	MostKills.StatHeaderText:setText(LocalizeToUpperString(@"menu/most_kills"))
 	MostKills.StatValue.__Stat_Value = function()
-		MostKills.StatValue:setText(CoD.PlayerStatsUtility.GetWZGameModeHighestPlayerStorageStat(f1_arg1, f1_arg0, 0xE4E1EB9512BA7B5, 11235))
+		MostKills.StatValue:setText(CoD.PlayerStatsUtility.GetWZGameModeHighestPlayerStorageStat(f1_arg1, f1_arg0, @"hash_6E4E1EB9512BA7B5", 11235))
 	end
 	MostKills.StatValue.__Stat_Value()
 	self:addElement(MostKills)
 	self.MostKills = MostKills
 	local LongestDistanceKill = CoD.PlayerStatsDetailed.new(f1_arg0, f1_arg1, 0, 0, 155, 467, 0, 0, 395, 416)
-	LongestDistanceKill.StatHeaderText:setText(LocalizeToUpperString(0xE3E72FE9F094F80))
+	LongestDistanceKill.StatHeaderText:setText(LocalizeToUpperString(@"hash_2E3E72FE9F094F80"))
 	LongestDistanceKill.StatValue.__Stat_Value = function()
-		LongestDistanceKill.StatValue:setText(DistanceInMetricString(UnitsToMeters(CoD.PlayerStatsUtility.GetWZGameModeHighestPlayerStorageStat(f1_arg1, f1_arg0, 0xBA73B8BC0FA3932, "112km 358m"))))
+		LongestDistanceKill.StatValue:setText(DistanceInMetricString(UnitsToMeters(CoD.PlayerStatsUtility.GetWZGameModeHighestPlayerStorageStat(f1_arg1, f1_arg0, @"longest_distance_kill", "112km 358m"))))
 	end
 	LongestDistanceKill.StatValue.__Stat_Value()
 	self:addElement(LongestDistanceKill)
 	self.LongestDistanceKill = LongestDistanceKill
 	local EfficiencyHeader = CoD.PlayerStatsHeader.new(f1_arg0, f1_arg1, 0, 0, 11, 467, 0, 0, 455, 476)
-	EfficiencyHeader.HeaderText:setText(LocalizeToUpperString(0x8CA99F2C517036))
+	EfficiencyHeader.HeaderText:setText(LocalizeToUpperString(@"menu/efficiency"))
 	self:addElement(EfficiencyHeader)
 	self.EfficiencyHeader = EfficiencyHeader
 	local AverageDamage = CoD.PlayerStatsMain.new(f1_arg0, f1_arg1, 0, 0, 19.5, 219.5, 0, 0, 485, 552)
 	AverageDamage.StatValue.__Stat_Value = function()
-		AverageDamage.StatValue:setText(CoD.PlayerStatsUtility.GetWZGameModeAveragePlayerStorageStatRatio(f1_arg1, f1_arg0, 0xD238EA28DDDB583, 0x25E6910D90BDEA9, 11235))
+		AverageDamage.StatValue:setText(CoD.PlayerStatsUtility.GetWZGameModeAveragePlayerStorageStatRatio(f1_arg1, f1_arg0, @"total_damage", @"total_games_played", 11235))
 	end
 	AverageDamage.StatValue.__Stat_Value()
-	AverageDamage.StatHeaderText:setText(LocalizeToUpperString(0x588676CED526A6F))
+	AverageDamage.StatHeaderText:setText(LocalizeToUpperString(@"menu/avg_damage"))
 	self:addElement(AverageDamage)
 	self.AverageDamage = AverageDamage
 	local CleanUpsPerGame = CoD.Barracks_StatsOverview_WZ_Efficiency.new(f1_arg0, f1_arg1, 0, 0, 155, 465, 0, 0, 507, 638)
@@ -168,42 +168,42 @@ CoD.Barracks_StatsOverview_WZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self.CleanUpsPerGame = CleanUpsPerGame
 	OtherHeader = CoD.PlayerStatsHeader.new(f1_arg0, f1_arg1, 0, 0, 15.5, 469.5, 0, 0, 560, 581)
 	OtherHeader:setAlpha(0)
-	OtherHeader.HeaderText:setText(LocalizeToUpperString(0x3EF00415621CE8B))
+	OtherHeader.HeaderText:setText(LocalizeToUpperString(@"menu/other"))
 	self:addElement(OtherHeader)
 	self.OtherHeader = OtherHeader
 	dotline01 = LUI.UIImage.new(0, 0, 8.5, 468.5, 0, 0, 224.5, 228.5)
 	dotline01:setAlpha(0.2)
-	dotline01:setImage(RegisterImage(0xF9C7F41C631866E))
-	dotline01:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	dotline01:setImage(RegisterImage(@"uie_ui_menu_social_emblem_dotline"))
+	dotline01:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	dotline01:setShaderVector(0, 1.2, 0, 0, 0)
 	self:addElement(dotline01)
 	self.dotline01 = dotline01
 	dotline02 = LUI.UIImage.new(0, 0, 8.5, 468.5, 0, 0, 446.5, 450.5)
 	dotline02:setAlpha(0.2)
-	dotline02:setImage(RegisterImage(0xF9C7F41C631866E))
-	dotline02:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	dotline02:setImage(RegisterImage(@"uie_ui_menu_social_emblem_dotline"))
+	dotline02:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	dotline02:setShaderVector(0, 1.2, 0, 0, 0)
 	self:addElement(dotline02)
 	self.dotline02 = dotline02
 	local FuiBoxRight = LUI.UIImage.new(0, 0, 435.5, 469.5, 0, 0, 42.5, 8.5)
 	FuiBoxRight:setAlpha(0.1)
-	FuiBoxRight:setImage(RegisterImage(0x811A80C0AADA825))
-	FuiBoxRight:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	FuiBoxRight:setImage(RegisterImage(@"uie_ui_hud_vehicle_ac130_fui_box01"))
+	FuiBoxRight:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	FuiBoxRight:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(FuiBoxRight)
 	self.FuiBoxRight = FuiBoxRight
 	local FuiBoxLeft = LUI.UIImage.new(0, 0, 10, 44, 0, 0, 42.5, 8.5)
 	FuiBoxLeft:setAlpha(0.1)
 	FuiBoxLeft:setZRot(90)
-	FuiBoxLeft:setImage(RegisterImage(0x811A80C0AADA825))
-	FuiBoxLeft:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	FuiBoxLeft:setImage(RegisterImage(@"uie_ui_hud_vehicle_ac130_fui_box01"))
+	FuiBoxLeft:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	FuiBoxLeft:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(FuiBoxLeft)
 	self.FuiBoxLeft = FuiBoxLeft
 	local WZGameModeFilter = LUI.UIText.new(0, 0, 20, 220, 0, 0, 76, 94)
 	WZGameModeFilter:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	WZGameModeFilter:setTTF("ttmussels_regular")
-	WZGameModeFilter:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	WZGameModeFilter:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	WZGameModeFilter:subscribeToGlobalModel(f1_arg1, "PlayerBarracksStats", "currentFilter", function(model)
 		local f15_local0 = model:get()
 		if f15_local0 ~= nil then
@@ -214,9 +214,9 @@ CoD.Barracks_StatsOverview_WZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self.WZGameModeFilter = WZGameModeFilter
 	local WZGameModeFilterButton = LUI.UIText.new(1, 1, -216.5, -16.5, 0, 0, 76, 94)
 	WZGameModeFilterButton:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
-	WZGameModeFilterButton:setText(Engine[0xF9F1239CFD921FE](0xDB718E1421D5D37))
+	WZGameModeFilterButton:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_4DB718E1421D5D37"))
 	WZGameModeFilterButton:setTTF("ttmussels_regular")
-	WZGameModeFilterButton:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
+	WZGameModeFilterButton:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
 	self:addElement(WZGameModeFilterButton)
 	self.WZGameModeFilterButton = WZGameModeFilterButton
 	local WZGameModeFilterButtonPC = nil
@@ -266,47 +266,47 @@ CoD.Barracks_StatsOverview_WZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self.WinLossRatio = WinLossRatio
 	f1_local29 = TimePlayedText
 	f1_local30 = TimePlayedText.subscribeToModel
-	f1_local31 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local31 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local30(f1_local29, f1_local31["PlayerBarracksStats.currentFilter"], TimePlayedText.__String_Reference)
 	f1_local29 = Wins
 	f1_local30 = Wins.subscribeToModel
-	f1_local31 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local31 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local30(f1_local29, f1_local31["PlayerBarracksStats.currentFilter"], Wins.StatValue.__Stat_Value)
 	f1_local29 = Kills
 	f1_local30 = Kills.subscribeToModel
-	f1_local31 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local31 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local30(f1_local29, f1_local31["PlayerBarracksStats.currentFilter"], Kills.StatValue.__Stat_Value)
 	f1_local29 = KillsPerGame
 	f1_local30 = KillsPerGame.subscribeToModel
-	f1_local31 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local31 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local30(f1_local29, f1_local31["PlayerBarracksStats.currentFilter"], KillsPerGame.StatValue.__Stat_Value)
 	f1_local29 = KillDeathRatio
 	f1_local30 = KillDeathRatio.subscribeToModel
-	f1_local31 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local31 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local30(f1_local29, f1_local31["PlayerBarracksStats.currentFilter"], KillDeathRatio.StatValue.__Stat_Value)
 	f1_local29 = HeadshotPct
 	f1_local30 = HeadshotPct.subscribeToModel
-	f1_local31 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local31 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local30(f1_local29, f1_local31["PlayerBarracksStats.currentFilter"], HeadshotPct.StatValue.__Stat_Value)
 	f1_local29 = KillsAfterRevivePct
 	f1_local30 = KillsAfterRevivePct.subscribeToModel
-	f1_local31 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local31 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local30(f1_local29, f1_local31["PlayerBarracksStats.currentFilter"], KillsAfterRevivePct.StatValue.__Stat_Value)
 	f1_local29 = HotDropKillPct
 	f1_local30 = HotDropKillPct.subscribeToModel
-	f1_local31 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local31 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local30(f1_local29, f1_local31["PlayerBarracksStats.currentFilter"], HotDropKillPct.StatValue.__Stat_Value)
 	f1_local29 = MostKills
 	f1_local30 = MostKills.subscribeToModel
-	f1_local31 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local31 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local30(f1_local29, f1_local31["PlayerBarracksStats.currentFilter"], MostKills.StatValue.__Stat_Value)
 	f1_local29 = LongestDistanceKill
 	f1_local30 = LongestDistanceKill.subscribeToModel
-	f1_local31 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local31 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local30(f1_local29, f1_local31["PlayerBarracksStats.currentFilter"], LongestDistanceKill.StatValue.__Stat_Value)
 	f1_local29 = AverageDamage
 	f1_local30 = AverageDamage.subscribeToModel
-	f1_local31 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local31 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local30(f1_local29, f1_local31["PlayerBarracksStats.currentFilter"], AverageDamage.StatValue.__Stat_Value)
 	self:mergeStateConditions({
 		{
@@ -328,7 +328,7 @@ CoD.Barracks_StatsOverview_WZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	end)
 	f1_local29 = self
 	f1_local30 = self.subscribeToModel
-	f1_local31 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local31 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local30(f1_local29, f1_local31.LastInput, function(f24_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

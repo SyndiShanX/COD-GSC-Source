@@ -27,8 +27,8 @@ LUI.createMenu.MPSpecialistHUBTags = function(f1_arg0, f1_arg1)
 	self.BlackBacking = BlackBacking
 	local TiledPlusGrid = LUI.UIImage.new(0.5, 0.5, -1095, 960, 0, 0, 0, 1080)
 	TiledPlusGrid:setAlpha(0.05)
-	TiledPlusGrid:setImage(RegisterImage(0x6E37BAE22631294))
-	TiledPlusGrid:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	TiledPlusGrid:setImage(RegisterImage(@"uie_ui_hud_vehicle_hellstorm_repeat_plusgrid"))
+	TiledPlusGrid:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	TiledPlusGrid:setShaderVector(0, 0, 0, 0, 0)
 	TiledPlusGrid:setupNineSliceShader(220, 220)
 	self:addElement(TiledPlusGrid)
@@ -43,11 +43,11 @@ LUI.createMenu.MPSpecialistHUBTags = function(f1_arg0, f1_arg1)
 	self:addElement(Frame)
 	self.Frame = Frame
 	local MPSpecialistHUBTagsSafeAreaContainer = CoD.MPSpecialistHUBTags_SafeAreaContainer.new(f1_local1, f1_arg0, 0, 1, 0, 0, 0, 1, 0, 0)
-	MPSpecialistHUBTagsSafeAreaContainer.CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(0x46EFDF3FB2763B5))
+	MPSpecialistHUBTagsSafeAreaContainer.CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(@"hash_246EFDF3FB2763B5"))
 	MPSpecialistHUBTagsSafeAreaContainer:subscribeToGlobalModel(f1_arg0, "LobbyRoot", "lobbyTitle", function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
-			MPSpecialistHUBTagsSafeAreaContainer.CommonHeader.subtitle.subtitle:setText(Engine[0xF9F1239CFD921FE](f3_local0))
+			MPSpecialistHUBTagsSafeAreaContainer.CommonHeader.subtitle.subtitle:setText(Engine[@"hash_4F9F1239CFD921FE"](f3_local0))
 		end
 	end)
 	MPSpecialistHUBTagsSafeAreaContainer:registerEventHandler("menu_loaded", function(element, event)
@@ -83,7 +83,7 @@ LUI.createMenu.MPSpecialistHUBTags = function(f1_arg0, f1_arg1)
 	})
 	local f1_local7 = self
 	local f1_local8 = self.subscribeToModel
-	local f1_local9 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	local f1_local9 = Engine[@"getmodelforcontroller"](f1_arg0)
 	f1_local8(f1_local7, f1_local9["MPSpecialistHUBBindWheel.NoBackground"], function(f7_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",
@@ -93,18 +93,18 @@ LUI.createMenu.MPSpecialistHUBTags = function(f1_arg0, f1_arg1)
 			modelName = "MPSpecialistHUBBindWheel.NoBackground",
 		})
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		GoBack(self, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 		return true
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], nil, function(element, menu, controller, model)
 		CoD.BaseUtility.UINoAction()
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x0, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"hash_0", nil, nil)
 		return false
 	end, false)
 	LUI.OverrideFunction_CallOriginalFirst(self, "close", function(element)

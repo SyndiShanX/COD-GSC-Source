@@ -15,7 +15,7 @@ CoD.SurveyResponseList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	ResponseOptions:setWidgetType(CoD.SurveyButton)
 	ResponseOptions:setVerticalCount(6)
 	ResponseOptions:setSpacing(20)
-	ResponseOptions:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	ResponseOptions:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	ResponseOptions:setDataSource("SurveyResponseOptions")
 	self:addElement(ResponseOptions)
 	self.ResponseOptions = ResponseOptions

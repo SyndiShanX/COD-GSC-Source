@@ -29,8 +29,8 @@ LUI.createMenu.PC_Store_Refund_Korea = function(f1_arg0, f1_arg1)
 	self.backing = backing
 	local NoiseTiledBacking = LUI.UIImage.new(0, 1, 0, 0, 0.5, 0.5, -228, 242)
 	NoiseTiledBacking:setAlpha(0.65)
-	NoiseTiledBacking:setImage(RegisterImage(0x34839E8065B1E53))
-	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	NoiseTiledBacking:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	NoiseTiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	NoiseTiledBacking:setupNineSliceShader(196, 88)
 	self:addElement(NoiseTiledBacking)
@@ -73,7 +73,7 @@ LUI.createMenu.PC_Store_Refund_Korea = function(f1_arg0, f1_arg1)
 	ButtonList:setWidgetType(CoD.featureOverlay_Button_Container)
 	ButtonList:setHorizontalCount(5)
 	ButtonList:setSpacing(28)
-	ButtonList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	ButtonList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	ButtonList:setDataSource("PCKoreaRefundButtons")
 	ButtonList:registerEventHandler("gain_focus", function(element, event)
 		local f6_local0 = nil
@@ -82,14 +82,14 @@ LUI.createMenu.PC_Store_Refund_Korea = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f6_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f6_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(ButtonList, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(ButtonList, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		ProcessListAction(self, element, controller, menu)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 		return false
 	end, false)
 	self:addElement(ButtonList)
@@ -97,8 +97,8 @@ LUI.createMenu.PC_Store_Refund_Korea = function(f1_arg0, f1_arg1)
 	local ValidityPeriod = LUI.UIText.new(0.5, 0.5, -271, 879, 0.5, 0.5, -58.5, -37.5)
 	ValidityPeriod:setRGB(ColorSet.T8_PC_CHAT_GAME_EVENT.r, ColorSet.T8_PC_CHAT_GAME_EVENT.g, ColorSet.T8_PC_CHAT_GAME_EVENT.b)
 	ValidityPeriod:setTTF("ttmussels_regular")
-	ValidityPeriod:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	ValidityPeriod:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	ValidityPeriod:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	ValidityPeriod:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	ValidityPeriod:linkToElementModel(self, "ValidityPeriod", true, function(model)
 		local f9_local0 = model:get()
 		if f9_local0 ~= nil then
@@ -113,8 +113,8 @@ LUI.createMenu.PC_Store_Refund_Korea = function(f1_arg0, f1_arg1)
 	local RefundOrNotText = LUI.UIText.new(0.5, 0.5, -208, 942, 0.5, 0.5, 29, 47)
 	RefundOrNotText:setRGB(0.39, 0.39, 0.39)
 	RefundOrNotText:setTTF("notosans_regular")
-	RefundOrNotText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	RefundOrNotText:setAlignment(Enum[0x7A5123B654282D2][0x6ED4298C93DC5ED])
+	RefundOrNotText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	RefundOrNotText:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
 	RefundOrNotText:linkToElementModel(self, "LegalText", true, function(model)
 		local f10_local0 = model:get()
 		if f10_local0 ~= nil then
@@ -134,7 +134,7 @@ LUI.createMenu.PC_Store_Refund_Korea = function(f1_arg0, f1_arg1)
 	})
 	local Title = CommonCheckbox
 	local blur = CommonCheckbox.subscribeToModel
-	local Description = Engine[0x8DF2E5447F384B9]()
+	local Description = Engine[@"getglobalmodel"]()
 	blur(Title, Description.PCStoreKoreaAccepts, function(f12_arg0)
 		f1_local1:updateElementState(CommonCheckbox, {
 			name = "model_validation",
@@ -151,22 +151,22 @@ LUI.createMenu.PC_Store_Refund_Korea = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f13_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f13_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(CommonCheckbox, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(CommonCheckbox, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		ToggleGlobalModelValueBoolean("PCStoreKoreaAccepts")
 		UpdateElementState(self, "ButtonList", controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 		return false
 	end, false)
 	self:addElement(CommonCheckbox)
 	self.CommonCheckbox = CommonCheckbox
 	blur = LUI.UIImage.new(0, 1, 0, 0, 0.5, 0.5, -229, 245)
 	blur:setAlpha(0)
-	blur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	blur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	blur:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(blur)
 	self.blur = blur
@@ -174,8 +174,8 @@ LUI.createMenu.PC_Store_Refund_Korea = function(f1_arg0, f1_arg1)
 	Title:setRGB(ColorSet.T8__BEIGE__HEADER.r, ColorSet.T8__BEIGE__HEADER.g, ColorSet.T8__BEIGE__HEADER.b)
 	Title:setTTF("ttmussels_demibold")
 	Title:setLetterSpacing(6)
-	Title:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Title:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Title:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Title:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	Title:linkToElementModel(self, "Title", true, function(model)
 		local f16_local0 = model:get()
 		if f16_local0 ~= nil then
@@ -188,8 +188,8 @@ LUI.createMenu.PC_Store_Refund_Korea = function(f1_arg0, f1_arg1)
 	Description:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	Description:setTTF("dinnext_regular")
 	Description:setLetterSpacing(1)
-	Description:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Description:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Description:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Description:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	Description:linkToElementModel(self, "Description", true, function(model)
 		local f17_local0 = model:get()
 		if f17_local0 ~= nil then
@@ -222,12 +222,12 @@ LUI.createMenu.PC_Store_Refund_Korea = function(f1_arg0, f1_arg1)
 	self.alertStatusBar2 = alertStatusBar2
 	local codpoints = LUI.UIImage.new(0.5, 0.5, -695, -661, 0.5, 0.5, 156, 190)
 	codpoints:setAlpha(0)
-	codpoints:setImage(RegisterImage(0xC7B458FB314A1E9))
+	codpoints:setImage(RegisterImage(@"uie_ui_codpoints_symbol_32x32"))
 	self:addElement(codpoints)
 	self.codpoints = codpoints
 	local vial = LUI.UIImage.new(0.5, 0.5, -698, -660, 0.5, 0.5, 153, 191)
 	vial:setAlpha(0)
-	vial:setImage(RegisterImage(0x5FBFE58B2BB38AC))
+	vial:setImage(RegisterImage(@"uie_t7_hud_zm_vial_aar_256"))
 	self:addElement(vial)
 	self.vial = vial
 	local CostWithText = LUI.UIText.new(0.5, 0.5, -708, -576, 0.5, 0.5, 157, 186)
@@ -235,7 +235,7 @@ LUI.createMenu.PC_Store_Refund_Korea = function(f1_arg0, f1_arg1)
 	CostWithText:setAlpha(0)
 	CostWithText:setTTF("ttmussels_demibold")
 	CostWithText:setLetterSpacing(1)
-	CostWithText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	CostWithText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	CostWithText:linkToElementModel(self, "CostString", true, function(model)
 		local f20_local0 = model:get()
 		if f20_local0 ~= nil then
@@ -249,7 +249,7 @@ LUI.createMenu.PC_Store_Refund_Korea = function(f1_arg0, f1_arg1)
 	Cost:setAlpha(0)
 	Cost:setTTF("ttmussels_demibold")
 	Cost:setLetterSpacing(1)
-	Cost:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	Cost:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	Cost:linkToElementModel(self, "Cost", true, function(model)
 		local f21_local0 = model:get()
 		if f21_local0 ~= nil then
@@ -266,14 +266,14 @@ LUI.createMenu.PC_Store_Refund_Korea = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f22_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f22_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(QuitBtn, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(QuitBtn, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		CoD.PCKoreaUtility.DeclineRefundPopup(menu, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 		return false
 	end, false)
 	self:addElement(QuitBtn)
@@ -285,7 +285,7 @@ LUI.createMenu.PC_Store_Refund_Korea = function(f1_arg0, f1_arg1)
 	StartMenuSmallTierLevel:linkToElementModel(self, "TierRef", true, function(model)
 		local f26_local0 = model:get()
 		if f26_local0 ~= nil then
-			StartMenuSmallTierLevel.Tiers:setText(Engine[0xF9F1239CFD921FE](f26_local0))
+			StartMenuSmallTierLevel.Tiers:setText(Engine[@"hash_4F9F1239CFD921FE"](f26_local0))
 		end
 	end)
 	self:addElement(StartMenuSmallTierLevel)
@@ -302,8 +302,8 @@ LUI.createMenu.PC_Store_Refund_Korea = function(f1_arg0, f1_arg1)
 	local Linker = LUI.UIImage.new(0.5, 0.5, -330, -326, 0.5, 0.5, -193, 204)
 	Linker:setRGB(ColorSet.T8__BEIGE__HEADER.r, ColorSet.T8__BEIGE__HEADER.g, ColorSet.T8__BEIGE__HEADER.b)
 	Linker:setAlpha(0.35)
-	Linker:setImage(RegisterImage(0xC49B0C8991A541F))
-	Linker:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	Linker:setImage(RegisterImage(@"hash_C49B0C8991A541F"))
+	Linker:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	Linker:setShaderVector(0, 0, 0, 0, 0)
 	Linker:setupNineSliceShader(4, 8)
 	self:addElement(Linker)
@@ -318,13 +318,13 @@ LUI.createMenu.PC_Store_Refund_Korea = function(f1_arg0, f1_arg1)
 		{
 			stateName = "IsPriceCoDPoints",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualToHashString(f1_arg0, element, "Currency", 0xB7F40FB4E8165B5)
+				return CoD.ModelUtility.IsSelfModelValueEqualToHashString(f1_arg0, element, "Currency", @"cod_points")
 			end,
 		},
 		{
 			stateName = "IsPriceVials",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualToHashString(f1_arg0, element, "Currency", 0x29BE58E64C4830B)
+				return CoD.ModelUtility.IsSelfModelValueEqualToHashString(f1_arg0, element, "Currency", @"nebulium_plasma")
 			end,
 		},
 	})
@@ -346,12 +346,12 @@ LUI.createMenu.PC_Store_Refund_Korea = function(f1_arg0, f1_arg1)
 			modelName = "Currency",
 		})
 	end)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], "ESCAPE", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], "ESCAPE", function(element, menu, controller, model)
 		SetGlobalModelValueFalse("PCStoreKoreaAccepts")
 		CoD.PCKoreaUtility.DeclineRefundPopup(menu, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x0, nil, "ESCAPE")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"hash_0", nil, "ESCAPE")
 		return false
 	end, false)
 	ButtonList.id = "ButtonList"

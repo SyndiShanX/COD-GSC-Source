@@ -31,15 +31,15 @@ LUI.createMenu.ct_shared_button_prompt = function(f1_arg0, f1_arg1)
 	f1_local1:addElementToPendingUpdateStateList(self)
 	local Prompt = LUI.UIText.new(0.5, 0.5, -960, 960, 0.5, 0.5, 265, 300)
 	Prompt:setAlpha(0)
-	Prompt:setText(Engine[0xF9F1239CFD921FE](0xD9839F8FF9FDC54))
+	Prompt:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_3D9839F8FF9FDC54"))
 	Prompt:setTTF("default")
-	Prompt:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	Prompt:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Prompt:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	Prompt:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	Prompt:setBackingType(2)
 	Prompt:setBackingAlpha(0.75)
 	Prompt:setBackingXPadding(14)
 	Prompt:setBackingYPadding(8)
-	Prompt:setBackingImage(RegisterImage(0xF5B05C37854785F))
+	Prompt:setBackingImage(RegisterImage(@"uie_ui_hud_core_match_begins_banner"))
 	self:addElement(Prompt)
 	self.Prompt = Prompt
 	self:processEvent({
@@ -57,7 +57,7 @@ CoD.ct_shared_button_prompt.__resetProperties = function(f2_arg0)
 	f2_arg0.Prompt:setTopBottom(0.5, 0.5, 265, 300)
 	f2_arg0.Prompt:setAlpha(0)
 	f2_arg0.Prompt:setScale(1, 1)
-	f2_arg0.Prompt:setText(Engine[0xF9F1239CFD921FE](0xD9839F8FF9FDC54))
+	f2_arg0.Prompt:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_3D9839F8FF9FDC54"))
 end
 CoD.ct_shared_button_prompt.__clipsPerState = {
 	DefaultState = {
@@ -72,7 +72,7 @@ CoD.ct_shared_button_prompt.__clipsPerState = {
 			end
 			f3_arg0.Prompt:completeAnimation()
 			f3_arg0.Prompt:setAlpha(0)
-			f3_arg0.Prompt:setText(Engine[0xF9F1239CFD921FE](0x1B01416865ABF59))
+			f3_arg0.Prompt:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_51B01416865ABF59"))
 			f3_local0(f3_arg0.Prompt)
 		end,
 	},
@@ -88,7 +88,7 @@ CoD.ct_shared_button_prompt.__clipsPerState = {
 			end
 			f5_arg0.Prompt:completeAnimation()
 			f5_arg0.Prompt:setAlpha(0)
-			f5_arg0.Prompt:setText(Engine[0xF9F1239CFD921FE](0xD0184DBAD302D84))
+			f5_arg0.Prompt:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_1D0184DBAD302D84"))
 			f5_local0(f5_arg0.Prompt)
 		end,
 	},
@@ -104,7 +104,7 @@ CoD.ct_shared_button_prompt.__clipsPerState = {
 			end
 			f7_arg0.Prompt:completeAnimation()
 			f7_arg0.Prompt:setAlpha(0)
-			f7_arg0.Prompt:setText(Engine[0xF9F1239CFD921FE](0x46C773F79101F9F))
+			f7_arg0.Prompt:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_346C773F79101F9F"))
 			f7_local0(f7_arg0.Prompt)
 		end,
 	},
@@ -121,7 +121,7 @@ CoD.ct_shared_button_prompt.__clipsPerState = {
 			f9_arg0.Prompt:completeAnimation()
 			f9_arg0.Prompt:setAlpha(1)
 			f9_arg0.Prompt:setScale(1, 1)
-			f9_arg0.Prompt:setText(Engine[0xF9F1239CFD921FE](0x46C773F79101F9F))
+			f9_arg0.Prompt:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_346C773F79101F9F"))
 			f9_local0(f9_arg0.Prompt)
 		end,
 	},
@@ -138,7 +138,7 @@ CoD.ct_shared_button_prompt.__clipsPerState = {
 			f11_arg0.Prompt:completeAnimation()
 			f11_arg0.Prompt:setAlpha(1)
 			f11_arg0.Prompt:setScale(1, 1)
-			f11_arg0.Prompt:setText(Engine[0xF9F1239CFD921FE](0xD0184DBAD302D84))
+			f11_arg0.Prompt:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_1D0184DBAD302D84"))
 			f11_local0(f11_arg0.Prompt)
 		end,
 	},
@@ -155,7 +155,7 @@ CoD.ct_shared_button_prompt.__clipsPerState = {
 			f13_arg0.Prompt:completeAnimation()
 			f13_arg0.Prompt:setTopBottom(0, 0, 805, 840)
 			f13_arg0.Prompt:setAlpha(0)
-			f13_arg0.Prompt:setText(Engine[0xF9F1239CFD921FE](0x1B01416865ABF59))
+			f13_arg0.Prompt:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_51B01416865ABF59"))
 			f13_local0(f13_arg0.Prompt)
 		end,
 	},
@@ -172,7 +172,7 @@ CoD.ct_shared_button_prompt.__clipsPerState = {
 			f15_arg0.Prompt:completeAnimation()
 			f15_arg0.Prompt:setAlpha(1)
 			f15_arg0.Prompt:setScale(1, 1)
-			f15_arg0.Prompt:setText(Engine[0xF9F1239CFD921FE](0x1B01416865ABF59))
+			f15_arg0.Prompt:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_51B01416865ABF59"))
 			f15_local0(f15_arg0.Prompt)
 		end,
 	},
@@ -189,7 +189,7 @@ CoD.ct_shared_button_prompt.__clipsPerState = {
 			f17_arg0.Prompt:completeAnimation()
 			f17_arg0.Prompt:setTopBottom(0, 0, 700, 735)
 			f17_arg0.Prompt:setAlpha(0)
-			f17_arg0.Prompt:setText(Engine[0xF9F1239CFD921FE](0xD0184DBAD302D84))
+			f17_arg0.Prompt:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_1D0184DBAD302D84"))
 			f17_local0(f17_arg0.Prompt)
 		end,
 	},
@@ -206,7 +206,7 @@ CoD.ct_shared_button_prompt.__clipsPerState = {
 			f19_arg0.Prompt:completeAnimation()
 			f19_arg0.Prompt:setTopBottom(0, 0, 700, 735)
 			f19_arg0.Prompt:setAlpha(0)
-			f19_arg0.Prompt:setText(Engine[0xF9F1239CFD921FE](0x46C773F79101F9F))
+			f19_arg0.Prompt:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_346C773F79101F9F"))
 			f19_local0(f19_arg0.Prompt)
 		end,
 	},
@@ -223,7 +223,7 @@ CoD.ct_shared_button_prompt.__clipsPerState = {
 			f21_arg0.Prompt:completeAnimation()
 			f21_arg0.Prompt:setTopBottom(0, 0, 700, 735)
 			f21_arg0.Prompt:setAlpha(0)
-			f21_arg0.Prompt:setText(Engine[0xF9F1239CFD921FE](0x1B01416865ABF59))
+			f21_arg0.Prompt:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_51B01416865ABF59"))
 			f21_local0(f21_arg0.Prompt)
 		end,
 	},
@@ -241,7 +241,7 @@ CoD.ct_shared_button_prompt.__clipsPerState = {
 			f23_arg0.Prompt:setTopBottom(0, 0, 700, 735)
 			f23_arg0.Prompt:setAlpha(1)
 			f23_arg0.Prompt:setScale(1, 1)
-			f23_arg0.Prompt:setText(Engine[0xF9F1239CFD921FE](0x1B01416865ABF59))
+			f23_arg0.Prompt:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_51B01416865ABF59"))
 			f23_local0(f23_arg0.Prompt)
 		end,
 	},
@@ -259,7 +259,7 @@ CoD.ct_shared_button_prompt.__clipsPerState = {
 			f25_arg0.Prompt:setTopBottom(0, 0, 700, 735)
 			f25_arg0.Prompt:setAlpha(1)
 			f25_arg0.Prompt:setScale(1, 1)
-			f25_arg0.Prompt:setText(Engine[0xF9F1239CFD921FE](0x46C773F79101F9F))
+			f25_arg0.Prompt:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_346C773F79101F9F"))
 			f25_local0(f25_arg0.Prompt)
 		end,
 	},
@@ -277,7 +277,7 @@ CoD.ct_shared_button_prompt.__clipsPerState = {
 			f27_arg0.Prompt:setTopBottom(0, 0, 700, 735)
 			f27_arg0.Prompt:setAlpha(1)
 			f27_arg0.Prompt:setScale(1, 1)
-			f27_arg0.Prompt:setText(Engine[0xF9F1239CFD921FE](0xD0184DBAD302D84))
+			f27_arg0.Prompt:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_1D0184DBAD302D84"))
 			f27_local0(f27_arg0.Prompt)
 		end,
 	},
@@ -294,7 +294,7 @@ CoD.ct_shared_button_prompt.__clipsPerState = {
 			f29_arg0.Prompt:completeAnimation()
 			f29_arg0.Prompt:setTopBottom(0, 0, 805, 840)
 			f29_arg0.Prompt:setAlpha(0)
-			f29_arg0.Prompt:setText(Engine[0xF9F1239CFD921FE](0x56002C860F8700C))
+			f29_arg0.Prompt:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_56002C860F8700C"))
 			f29_local0(f29_arg0.Prompt)
 		end,
 	},
@@ -311,7 +311,7 @@ CoD.ct_shared_button_prompt.__clipsPerState = {
 			f31_arg0.Prompt:completeAnimation()
 			f31_arg0.Prompt:setTopBottom(0, 0, 700, 735)
 			f31_arg0.Prompt:setAlpha(0)
-			f31_arg0.Prompt:setText(Engine[0xF9F1239CFD921FE](0x56002C860F8700C))
+			f31_arg0.Prompt:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_56002C860F8700C"))
 			f31_local0(f31_arg0.Prompt)
 		end,
 	},
@@ -329,7 +329,7 @@ CoD.ct_shared_button_prompt.__clipsPerState = {
 			f33_arg0.Prompt:setTopBottom(0, 0, 700, 735)
 			f33_arg0.Prompt:setAlpha(1)
 			f33_arg0.Prompt:setScale(1, 1)
-			f33_arg0.Prompt:setText(Engine[0xF9F1239CFD921FE](0x56002C860F8700C))
+			f33_arg0.Prompt:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_56002C860F8700C"))
 			f33_local0(f33_arg0.Prompt)
 		end,
 	},
@@ -346,7 +346,7 @@ CoD.ct_shared_button_prompt.__clipsPerState = {
 			f35_arg0.Prompt:completeAnimation()
 			f35_arg0.Prompt:setAlpha(1)
 			f35_arg0.Prompt:setScale(1, 1)
-			f35_arg0.Prompt:setText(Engine[0xF9F1239CFD921FE](0x56002C860F8700C))
+			f35_arg0.Prompt:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_56002C860F8700C"))
 			f35_local0(f35_arg0.Prompt)
 		end,
 	},

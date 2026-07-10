@@ -19,7 +19,7 @@ CoD.systemOverlay_Compact_Layout.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	self.background = background
 	local blur = LUI.UIImage.new(0, 1, 0, 0, 0, 0, 273, 575)
 	blur:setAlpha(0)
-	blur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	blur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	blur:setShaderVector(0, 0.2, 0, 0, 0)
 	self:addElement(blur)
 	self.blur = blur
@@ -30,8 +30,8 @@ CoD.systemOverlay_Compact_Layout.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	self.backing = backing
 	local NoiseTiledBacking = LUI.UIImage.new(0, 1, 0, 0, 0.09, 0.09, 183, 480)
 	NoiseTiledBacking:setAlpha(0.65)
-	NoiseTiledBacking:setImage(RegisterImage(0x34839E8065B1E53))
-	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	NoiseTiledBacking:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	NoiseTiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	NoiseTiledBacking:setupNineSliceShader(196, 88)
 	self:addElement(NoiseTiledBacking)
@@ -162,7 +162,7 @@ CoD.systemOverlay_Compact_Layout.__clipsPerState = {
 			f8_arg0.NoiseTiledBacking:setAlpha(0)
 			f8_local1(f8_arg0.NoiseTiledBacking)
 			local f8_local2 = function(f15_arg0)
-				f8_arg0.buttonBacking:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f8_arg0.buttonBacking:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f8_arg0.buttonBacking:registerEventHandler("interrupted_keyframe", f8_arg0.clipInterrupted)
 				f8_arg0.buttonBacking:registerEventHandler("transition_complete_keyframe", f8_arg0.clipFinished)
 			end
@@ -171,11 +171,11 @@ CoD.systemOverlay_Compact_Layout.__clipsPerState = {
 			f8_local2(f8_arg0.buttonBacking)
 			local f8_local3 = function(f16_arg0)
 				local f16_local0 = function(f17_arg0)
-					f17_arg0:beginAnimation(39, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f17_arg0:beginAnimation(39, Enum[@"luitween"][@"luitween_ease_both"])
 					f17_arg0:setAlpha(1)
 					f17_arg0:registerEventHandler("transition_complete_keyframe", f8_arg0.clipFinished)
 				end
-				f8_arg0.frameWidget:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f8_arg0.frameWidget:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f8_arg0.frameWidget:registerEventHandler("interrupted_keyframe", f8_arg0.clipInterrupted)
 				f8_arg0.frameWidget:registerEventHandler("transition_complete_keyframe", f16_local0)
 			end
@@ -216,7 +216,7 @@ CoD.systemOverlay_Compact_Layout.__clipsPerState = {
 					f22_arg0:setAlpha(0)
 					f22_arg0:registerEventHandler("transition_complete_keyframe", f22_local0)
 				end
-				f8_arg0.alertStatusBar:beginAnimation(30, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f8_arg0.alertStatusBar:beginAnimation(30, Enum[@"luitween"][@"luitween_ease_in"])
 				f8_arg0.alertStatusBar:setTopBottom(0, 0, 263, 269)
 				f8_arg0.alertStatusBar:setAlpha(1)
 				f8_arg0.alertStatusBar:registerEventHandler("interrupted_keyframe", f8_arg0.clipInterrupted)
@@ -229,11 +229,11 @@ CoD.systemOverlay_Compact_Layout.__clipsPerState = {
 			f8_local5(f8_arg0.alertStatusBar)
 			local f8_local6 = function(f24_arg0)
 				local f24_local0 = function(f25_arg0)
-					f25_arg0:beginAnimation(39, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f25_arg0:beginAnimation(39, Enum[@"luitween"][@"luitween_ease_both"])
 					f25_arg0:setAlpha(1)
 					f25_arg0:registerEventHandler("transition_complete_keyframe", f8_arg0.clipFinished)
 				end
-				f8_arg0.buttons:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f8_arg0.buttons:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f8_arg0.buttons:registerEventHandler("interrupted_keyframe", f8_arg0.clipInterrupted)
 				f8_arg0.buttons:registerEventHandler("transition_complete_keyframe", f24_local0)
 			end

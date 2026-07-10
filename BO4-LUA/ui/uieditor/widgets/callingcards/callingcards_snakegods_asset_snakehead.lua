@@ -7,7 +7,7 @@ CoD.callingcards_snakegods_asset_snakehead.new = function(f1_arg0, f1_arg1, f1_a
 	self.id = "callingcards_snakegods_asset_snakehead"
 	self.soundSet = "default"
 	local snakehead = LUI.UIImage.new(0, 0, -11, 205, 0, 0, -56, 56)
-	snakehead:setImage(RegisterImage(0x2DA9378FBE8C0E1))
+	snakehead:setImage(RegisterImage(@"uie_ui_menu_callingcards_snake_gods_snakehead"))
 	self:addElement(snakehead)
 	self.snakehead = snakehead
 	if PostLoadFunc then

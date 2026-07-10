@@ -32,7 +32,7 @@ CoD.CodCasterObjectiveStatusControl.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	self.CodCasterObjectiveStatusControlSiteA2 = CodCasterObjectiveStatusControlSiteA2
 	local CodCasterObjectiveStatusControlSiteB2 = CoD.CodCasterObjectiveStatusControlSite.new(f1_arg0, f1_arg1, 0.55, 0.55, -30, 30, 0.45, 0.45, -30, 30)
 	CodCasterObjectiveStatusControlSiteB2:setAlpha(0)
-	CodCasterObjectiveStatusControlSiteB2.siteLetter:setImage(RegisterImage(0xFEE9CEC7F9FF4BC))
+	CodCasterObjectiveStatusControlSiteB2.siteLetter:setImage(RegisterImage(@"uie_ui_hud_core_waypoint_letter_b_02"))
 	CodCasterObjectiveStatusControlSiteB2:subscribeToGlobalModel(f1_arg1, "HUDItems", "codcaster.ObjectiveB.color", function(model)
 		local f5_local0 = model:get()
 		if f5_local0 ~= nil then
@@ -54,7 +54,7 @@ CoD.CodCasterObjectiveStatusControl.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	self:addElement(CodCasterObjectiveStatusControlSiteB2)
 	self.CodCasterObjectiveStatusControlSiteB2 = CodCasterObjectiveStatusControlSiteB2
 	local CodCasterObjectiveStatusControlSiteB = CoD.CodCasterObjectiveStatusControlSite.new(f1_arg0, f1_arg1, 0.55, 0.55, -30, 30, 0.45, 0.45, -30, 30)
-	CodCasterObjectiveStatusControlSiteB.siteLetter:setImage(RegisterImage(0xFEE9CEC7F9FF4BC))
+	CodCasterObjectiveStatusControlSiteB.siteLetter:setImage(RegisterImage(@"uie_ui_hud_core_waypoint_letter_b_02"))
 	CodCasterObjectiveStatusControlSiteB:subscribeToGlobalModel(f1_arg1, "HUDItems", "codcaster.ObjectiveB.color", function(model)
 		local f8_local0 = model:get()
 		if f8_local0 ~= nil then
@@ -98,7 +98,7 @@ CoD.CodCasterObjectiveStatusControl.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	self.CodCasterObjectiveStatusControlSiteA = CodCasterObjectiveStatusControlSiteA
 	local glow = LUI.UIImage.new(0.5, 0.5, -16, 16, 0.5, 0.5, -19, 13)
 	glow:setAlpha(0)
-	glow:setImage(RegisterImage(0xD9007F963116063))
+	glow:setImage(RegisterImage(@"uie_codcaster_objectifstatusglow"))
 	self:addElement(glow)
 	self.glow = glow
 	self:mergeStateConditions({
@@ -129,7 +129,7 @@ CoD.CodCasterObjectiveStatusControl.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	})
 	local f1_local6 = self
 	local f1_local7 = self.subscribeToModel
-	local f1_local8 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local8 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local7(f1_local6, f1_local8["hudItems.codcaster.ObjectiveB.progress"], function(f18_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -141,7 +141,7 @@ CoD.CodCasterObjectiveStatusControl.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	end, false)
 	f1_local6 = self
 	f1_local7 = self.subscribeToModel
-	f1_local8 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local8 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local7(f1_local6, f1_local8["hudItems.codcaster.ObjectiveA.progress"], function(f19_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -238,7 +238,7 @@ CoD.CodCasterObjectiveStatusControl.__clipsPerState = {
 			f26_arg0.clipFinished(f26_arg0.CodCasterObjectiveStatusControlSiteB2)
 			local f26_local0 = function(f27_arg0)
 				local f27_local0 = function(f28_arg0)
-					f28_arg0:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f28_arg0:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 					f28_arg0:setLeftRight(0, 0, 176, 236)
 					f28_arg0:setAlpha(0)
 					f28_arg0:setScale(1, 1)
@@ -257,7 +257,7 @@ CoD.CodCasterObjectiveStatusControl.__clipsPerState = {
 			f26_local0(f26_arg0.CodCasterObjectiveStatusControlSiteB)
 			local f26_local1 = function(f29_arg0)
 				local f29_local0 = function(f30_arg0)
-					f30_arg0:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f30_arg0:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 					f30_arg0:setLeftRight(0, 0, 176, 236)
 					f30_arg0:setScale(1, 1)
 					f30_arg0:registerEventHandler("transition_complete_keyframe", f26_arg0.clipFinished)
@@ -300,7 +300,7 @@ CoD.CodCasterObjectiveStatusControl.__clipsPerState = {
 			f34_arg0:setupElementClipCounter(5)
 			local f34_local0 = function(f35_arg0)
 				local f35_local0 = function(f36_arg0)
-					f36_arg0:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f36_arg0:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 					f36_arg0:setLeftRight(0, 0, 176, 236)
 					f36_arg0:setAlpha(0)
 					f36_arg0:registerEventHandler("transition_complete_keyframe", f34_arg0.clipFinished)
@@ -317,7 +317,7 @@ CoD.CodCasterObjectiveStatusControl.__clipsPerState = {
 			f34_local0(f34_arg0.CodCasterObjectiveStatusControlSiteA2)
 			local f34_local1 = function(f37_arg0)
 				local f37_local0 = function(f38_arg0)
-					f38_arg0:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f38_arg0:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 					f38_arg0:setLeftRight(0, 0, 176, 236)
 					f38_arg0:setScale(1, 1)
 					f38_arg0:registerEventHandler("transition_complete_keyframe", f34_arg0.clipFinished)

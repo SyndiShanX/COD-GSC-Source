@@ -31,7 +31,7 @@ LUI.createMenu.PC_StartMenu_Options_New = function(f1_arg0, f1_arg1)
 	local Blur = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	Blur:setRGB(0.08, 0.08, 0.08)
 	Blur:setAlpha(0.7)
-	Blur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	Blur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	Blur:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(Blur)
 	self.Blur = Blur
@@ -68,7 +68,7 @@ LUI.createMenu.PC_StartMenu_Options_New = function(f1_arg0, f1_arg1)
 	})
 	local TabContent = VRAMBar
 	local VoiceBar = VRAMBar.subscribeToModel
-	local SeparationLine2 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	local SeparationLine2 = Engine[@"getmodelforcontroller"](f1_arg0)
 	VoiceBar(TabContent, SeparationLine2.CurrentOptionTab, function(f5_arg0)
 		f1_local1:updateElementState(VRAMBar, {
 			name = "model_validation",
@@ -80,7 +80,7 @@ LUI.createMenu.PC_StartMenu_Options_New = function(f1_arg0, f1_arg1)
 	end, false)
 	TabContent = VRAMBar
 	VoiceBar = VRAMBar.subscribeToModel
-	SeparationLine2 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	SeparationLine2 = Engine[@"getmodelforcontroller"](f1_arg0)
 	VoiceBar(TabContent, SeparationLine2["PC.VRAMBar"], function(f6_arg0)
 		f1_local1:updateElementState(VRAMBar, {
 			name = "model_validation",
@@ -115,7 +115,7 @@ LUI.createMenu.PC_StartMenu_Options_New = function(f1_arg0, f1_arg1)
 	})
 	SeparationLine2 = VoiceBar
 	TabContent = VoiceBar.subscribeToModel
-	local SeparationLine1 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	local SeparationLine1 = Engine[@"getmodelforcontroller"](f1_arg0)
 	TabContent(SeparationLine2, SeparationLine1.CurrentOptionTab, function(f10_arg0)
 		f1_local1:updateElementState(VoiceBar, {
 			name = "model_validation",
@@ -127,7 +127,7 @@ LUI.createMenu.PC_StartMenu_Options_New = function(f1_arg0, f1_arg1)
 	end, false)
 	SeparationLine2 = VoiceBar
 	TabContent = VoiceBar.subscribeToModel
-	SeparationLine1 = Engine[0x8DF2E5447F384B9]()
+	SeparationLine1 = Engine[@"getglobalmodel"]()
 	TabContent(SeparationLine2, SeparationLine1["SpeakingEnergy.displayText"], function(f11_arg0)
 		f1_local1:updateElementState(VoiceBar, {
 			name = "model_validation",
@@ -154,7 +154,7 @@ LUI.createMenu.PC_StartMenu_Options_New = function(f1_arg0, f1_arg1)
 	end)
 	SeparationLine1 = TabContent
 	SeparationLine2 = TabContent.subscribeToModel
-	local FTEDesc = Engine[0x4DF5CFBC1771947](f1_arg0)
+	local FTEDesc = Engine[@"getmodelforcontroller"](f1_arg0)
 	SeparationLine2(SeparationLine1, FTEDesc.CurrentOptionTab, function(f14_arg0)
 		f1_local1:updateElementState(TabContent, {
 			name = "model_validation",
@@ -191,7 +191,7 @@ LUI.createMenu.PC_StartMenu_Options_New = function(f1_arg0, f1_arg1)
 	})
 	local FooterBlocker = ControllerLayout
 	local FooterContainerFrontendRight = ControllerLayout.subscribeToModel
-	local UnbindMiddleMouseMessage = Engine[0x4DF5CFBC1771947](f1_arg0)
+	local UnbindMiddleMouseMessage = Engine[@"getmodelforcontroller"](f1_arg0)
 	FooterContainerFrontendRight(FooterBlocker, UnbindMiddleMouseMessage.CurrentOptionTab, function(f16_arg0)
 		f1_local1:updateElementState(ControllerLayout, {
 			name = "model_validation",
@@ -227,7 +227,7 @@ LUI.createMenu.PC_StartMenu_Options_New = function(f1_arg0, f1_arg1)
 	end)
 	local TopBar = UnbindMiddleMouseMessage
 	local CommonHeader = UnbindMiddleMouseMessage.subscribeToModel
-	local OptionsTabs = Engine[0x4DF5CFBC1771947](f1_arg0)
+	local OptionsTabs = Engine[@"getmodelforcontroller"](f1_arg0)
 	CommonHeader(TopBar, OptionsTabs.LastInput, function(f19_arg0)
 		f1_local1:updateElementState(UnbindMiddleMouseMessage, {
 			name = "model_validation",
@@ -239,7 +239,7 @@ LUI.createMenu.PC_StartMenu_Options_New = function(f1_arg0, f1_arg1)
 	end, false)
 	TopBar = UnbindMiddleMouseMessage
 	CommonHeader = UnbindMiddleMouseMessage.subscribeToModel
-	OptionsTabs = Engine[0x4DF5CFBC1771947](f1_arg0)
+	OptionsTabs = Engine[@"getmodelforcontroller"](f1_arg0)
 	CommonHeader(TopBar, OptionsTabs.CurrentOptionTab, function(f20_arg0)
 		f1_local1:updateElementState(UnbindMiddleMouseMessage, {
 			name = "model_validation",
@@ -253,12 +253,12 @@ LUI.createMenu.PC_StartMenu_Options_New = function(f1_arg0, f1_arg1)
 	self.UnbindMiddleMouseMessage = UnbindMiddleMouseMessage
 	CommonHeader = CoD.CommonHeader.new(f1_local1, f1_arg0, 0.5, 0.5, -960, 960, 0, 0, 0, 67)
 	CommonHeader.BGSceneBlur:setAlpha(0)
-	CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(0x1762CBFBF851D22))
+	CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(@"hash_11762CBFBF851D22"))
 	CommonHeader.subtitle.subtitle:setAlpha(0)
 	CommonHeader:subscribeToGlobalModel(f1_arg0, "LobbyRoot", "lobbyTitle", function(model)
 		local f21_local0 = model:get()
 		if f21_local0 ~= nil then
-			CommonHeader.subtitle.subtitle:setText(Engine[0xF9F1239CFD921FE](f21_local0))
+			CommonHeader.subtitle.subtitle:setText(Engine[@"hash_4F9F1239CFD921FE"](f21_local0))
 		end
 	end)
 	self:addElement(CommonHeader)
@@ -283,23 +283,23 @@ LUI.createMenu.PC_StartMenu_Options_New = function(f1_arg0, f1_arg1)
 	end)
 	local f1_local19 = self
 	local f1_local20 = self.subscribeToModel
-	local f1_local21 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	local f1_local21 = Engine[@"getmodelforcontroller"](f1_arg0)
 	f1_local20(f1_local19, f1_local21.CurrentOptionTab, function(f24_arg0, f24_arg1)
-		CoD.Menu.UpdateButtonShownState(f24_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A])
-		CoD.Menu.UpdateButtonShownState(f24_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
-		CoD.Menu.UpdateButtonShownState(f24_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(f24_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"])
+		CoD.Menu.UpdateButtonShownState(f24_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+		CoD.Menu.UpdateButtonShownState(f24_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_none"])
 	end, false)
 	f1_local19 = self
 	f1_local20 = self.subscribeToModel
-	f1_local21 = Engine[0x8DF2E5447F384B9]()
+	f1_local21 = Engine[@"getglobalmodel"]()
 	f1_local20(f1_local19, f1_local21["SpeakingEnergy.isRecording"], function(f25_arg0, f25_arg1)
-		CoD.Menu.UpdateButtonShownState(f25_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A])
+		CoD.Menu.UpdateButtonShownState(f25_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"])
 	end, false)
 	f1_local19 = self
 	f1_local20 = self.subscribeToModel
-	f1_local21 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	f1_local21 = Engine[@"getmodelforcontroller"](f1_arg0)
 	f1_local20(f1_local19, f1_local21["PC.OptionsDirty"], function(f26_arg0, f26_arg1)
-		CoD.Menu.UpdateButtonShownState(f26_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
+		CoD.Menu.UpdateButtonShownState(f26_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
 	end, false)
 	self:registerEventHandler("close_all_ingame_menus", function(self, event)
 		local f27_local0 = nil
@@ -310,7 +310,7 @@ LUI.createMenu.PC_StartMenu_Options_New = function(f1_arg0, f1_arg1)
 		end
 		return f27_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], "ESCAPE", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], "ESCAPE", function(element, menu, controller, model)
 		if CoD.PCOptionsUtility.IsAudioOptions(controller) and CoD.PCOptionsUtility.IsRecordingLoopBack(controller) then
 			CoD.PCOptionsUtility.StopLoopBackCalibrationRecordingIfRecording(controller)
 			return true
@@ -319,31 +319,31 @@ LUI.createMenu.PC_StartMenu_Options_New = function(f1_arg0, f1_arg1)
 			return true
 		end
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, "ESCAPE")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, "ESCAPE")
 		return true
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], "ui_contextual_2", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], "ui_contextual_2", function(element, menu, controller, model)
 		CoD.PCOptionsUtility.ResetOptionsValue(self, controller, element)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x2ED1CE9B3CDBA91, nil, "ui_contextual_2")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"hash_62ED1CE9B3CDBA91", nil, "ui_contextual_2")
 		return true
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], "ui_contextual_1", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], "ui_contextual_1", function(element, menu, controller, model)
 		if CoD.PCOptionsUtility.IsGraphicsOptions(controller) and CoD.PCOptionsUtility.AreOptionsDirty(controller) then
 			CoD.PCOptionsUtility.ApplyOptionsValue(self, controller)
 			return true
 		else
 		end
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], 0x7D14DF1D6CBE990, nil, "ui_contextual_1")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], @"hash_67D14DF1D6CBE990", nil, "ui_contextual_1")
 		if CoD.PCOptionsUtility.IsGraphicsOptions(controller) and CoD.PCOptionsUtility.AreOptionsDirty(controller) then
 			return true
 		else
 			return false
 		end
 	end, true)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_none"], nil, function(element, menu, controller, model)
 		if CoD.PCOptionsUtility.IsKeybindsOptions(controller) then
 			CoD.PCWidgetUtility.OpenPreviewKeybindsPopup(self, controller, "PC_StartMenu_Options_new")
 			return true
@@ -351,7 +351,7 @@ LUI.createMenu.PC_StartMenu_Options_New = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if CoD.PCOptionsUtility.IsKeybindsOptions(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x3A1720478353F60, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_3A1720478353F60", nil, nil)
 			return true
 		else
 			return false

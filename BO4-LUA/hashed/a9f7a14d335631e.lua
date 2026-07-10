@@ -21,7 +21,7 @@ CoD.BGBListItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_a
 		{
 			stateName = "NoConsumablesRemainingEquipped",
 			condition = function(menu, element, event)
-				return CoD.ZMLoadoutUtility.IsBubbleGumBuffEquippedInAnySlot(menu, self, f1_arg1) and not CoD.CACUtility.DoesCACItemHaveConsumablesRemaining(menu, element, f1_arg1, Enum[0x6EB546760F890D2][0x48CD0338EE0B3AE])
+				return CoD.ZMLoadoutUtility.IsBubbleGumBuffEquippedInAnySlot(menu, self, f1_arg1) and not CoD.CACUtility.DoesCACItemHaveConsumablesRemaining(menu, element, f1_arg1, Enum[@"statindexoffset"][@"hash_648CD0338EE0B3AE"])
 			end,
 		},
 		{
@@ -29,7 +29,7 @@ CoD.BGBListItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_a
 			condition = function(menu, element, event)
 				local f4_local0
 				if not CoD.ZMLoadoutUtility.IsBubbleGumBuffEquippedInAnySlot(menu, self, f1_arg1) then
-					f4_local0 = not CoD.CACUtility.DoesCACItemHaveConsumablesRemaining(menu, element, f1_arg1, Enum[0x6EB546760F890D2][0x48CD0338EE0B3AE])
+					f4_local0 = not CoD.CACUtility.DoesCACItemHaveConsumablesRemaining(menu, element, f1_arg1, Enum[@"statindexoffset"][@"hash_648CD0338EE0B3AE"])
 				else
 					f4_local0 = false
 				end
@@ -63,7 +63,7 @@ CoD.BGBListItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_a
 	end)
 	local f1_local2 = ZMElixirSlot
 	local f1_local3 = ZMElixirSlot.subscribeToModel
-	local f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local3(f1_local2, f1_local4.BubbleGumBuffUpdated, function(f8_arg0)
 		f1_arg0:updateElementState(ZMElixirSlot, {
 			name = "model_validation",
@@ -110,7 +110,7 @@ CoD.BGBListItem.__clipsPerState = {
 			f14_arg0:__resetProperties()
 			f14_arg0:setupElementClipCounter(1)
 			local f14_local0 = function(f15_arg0)
-				f14_arg0.ZMElixirSlot:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f14_arg0.ZMElixirSlot:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f14_arg0.ZMElixirSlot:setScale(1.03, 1.03)
 				f14_arg0.ZMElixirSlot:registerEventHandler("interrupted_keyframe", f14_arg0.clipInterrupted)
 				f14_arg0.ZMElixirSlot:registerEventHandler("transition_complete_keyframe", f14_arg0.clipFinished)
@@ -123,7 +123,7 @@ CoD.BGBListItem.__clipsPerState = {
 			f16_arg0:__resetProperties()
 			f16_arg0:setupElementClipCounter(1)
 			local f16_local0 = function(f17_arg0)
-				f16_arg0.ZMElixirSlot:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f16_arg0.ZMElixirSlot:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f16_arg0.ZMElixirSlot:setScale(1, 1)
 				f16_arg0.ZMElixirSlot:registerEventHandler("interrupted_keyframe", f16_arg0.clipInterrupted)
 				f16_arg0.ZMElixirSlot:registerEventHandler("transition_complete_keyframe", f16_arg0.clipFinished)

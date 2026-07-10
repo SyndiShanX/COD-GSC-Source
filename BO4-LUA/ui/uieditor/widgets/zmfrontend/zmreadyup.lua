@@ -9,9 +9,9 @@ CoD.ZMReadyUp.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local TextBox = LUI.UIText.new(0, 0, 0, 200, 0, 0, 0, 24)
 	TextBox:setAlpha(0)
-	TextBox:setText(LocalizeToUpperString(0x8E54FCC8151C19C))
+	TextBox:setText(LocalizeToUpperString(@"menu/not_ready"))
 	TextBox:setTTF("ttmussels_regular")
-	TextBox:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	TextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	self:addElement(TextBox)
 	self.TextBox = TextBox
 	self:mergeStateConditions({
@@ -46,7 +46,7 @@ CoD.ZMReadyUp.__resetProperties = function(f5_arg0)
 	f5_arg0.TextBox:completeAnimation()
 	f5_arg0.TextBox:setRGB(1, 1, 1)
 	f5_arg0.TextBox:setAlpha(0)
-	f5_arg0.TextBox:setText(LocalizeToUpperString(0x8E54FCC8151C19C))
+	f5_arg0.TextBox:setText(LocalizeToUpperString(@"menu/not_ready"))
 end
 CoD.ZMReadyUp.__clipsPerState = {
 	DefaultState = {
@@ -72,7 +72,7 @@ CoD.ZMReadyUp.__clipsPerState = {
 			f8_arg0.TextBox:completeAnimation()
 			f8_arg0.TextBox:setRGB(ColorSet.T8__GREEN.r, ColorSet.T8__GREEN.g, ColorSet.T8__GREEN.b)
 			f8_arg0.TextBox:setAlpha(1)
-			f8_arg0.TextBox:setText(LocalizeToUpperString(0xE6F6113B8B75F3E))
+			f8_arg0.TextBox:setText(LocalizeToUpperString(@"menu/ready"))
 			f8_arg0.clipFinished(f8_arg0.TextBox)
 		end,
 	},

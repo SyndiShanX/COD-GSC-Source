@@ -14,12 +14,12 @@ CoD.LaboratoryListItemInternalPurchaseLimit.new = function(f1_arg0, f1_arg1, f1_
 	self.limitBG = limitBG
 	local text = LUI.UIText.new(0, 1, 9, 1, 0, 0, 4, 18)
 	text:setTTF("dinnext_regular")
-	text:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	text:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	text:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	text:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	text:linkToElementModel(self, "maxQuantity", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			text:setText(LocalizeIntoString(0xA29379575EF77E5, f2_local0))
+			text:setText(LocalizeIntoString(@"hash_1A29379575EF77E5", f2_local0))
 		end
 	end)
 	self:addElement(text)

@@ -9,11 +9,11 @@ CoD.WarScoreInfo_RoundPip.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Backing = LUI.UIImage.new(0, 0, 5, 27, 0, 0, 12, 20)
 	Backing:setAlpha(0.15)
-	Backing:setImage(RegisterImage(0x90EA5DD0D52C921))
+	Backing:setImage(RegisterImage(@"hash_790EA5DD0D52C921"))
 	self:addElement(Backing)
 	self.Backing = Backing
 	local RoundFill = LUI.UIImage.new(0, 0, 5, 27, 0, 0, 9, 25)
-	RoundFill:setImage(RegisterImage(0x62CBF3EB8A7E651))
+	RoundFill:setImage(RegisterImage(@"hash_62CBF3EB8A7E651"))
 	RoundFill.__Color = function(f2_arg0)
 		local f2_local0 = f2_arg0:get()
 		if f2_local0 ~= nil then
@@ -35,11 +35,11 @@ CoD.WarScoreInfo_RoundPip.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	self.RoundFill = RoundFill
 	local f1_local3 = RoundFill
 	local f1_local4 = RoundFill.subscribeToModel
-	local f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local4(f1_local3, f1_local5["factions.actualTeam"], RoundFill.__Color_FullPath)
 	f1_local3 = RoundFill
 	f1_local4 = RoundFill.subscribeToModel
-	f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local4(f1_local3, f1_local5["profile.colorblindMode"], RoundFill.__Color_FullPath)
 	self:mergeStateConditions({
 		{

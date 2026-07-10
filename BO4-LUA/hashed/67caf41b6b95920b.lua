@@ -65,8 +65,8 @@ CoD.InGameTrialsRulesBackground.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 			modelName = "trials.roundNumber",
 		})
 	end, false)
-	Silver.Background:setImage(RegisterImage(0xD2773BA8C6EFDB))
-	Silver.Medal:setImage(RegisterImage(0xD56A5FDBB9721FB))
+	Silver.Background:setImage(RegisterImage(@"uie_trial_rules_silver_normal"))
+	Silver.Medal:setImage(RegisterImage(@"uie_trial_medal_silver"))
 	self:addElement(Silver)
 	self.Silver = Silver
 	Gold = CoD.InGameTrialsRulesColumn.new(f1_arg0, f1_arg1, 0.5, 0.5, 202, 590, 0.5, 0.5, -348, 348)
@@ -96,8 +96,8 @@ CoD.InGameTrialsRulesBackground.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 			modelName = "trials.roundNumber",
 		})
 	end, false)
-	Gold.Background:setImage(RegisterImage(0xDCF1B07E0539E4A))
-	Gold.Medal:setImage(RegisterImage(0x7775EF99258EEEC))
+	Gold.Background:setImage(RegisterImage(@"uie_trial_rules_gold_normal"))
+	Gold.Medal:setImage(RegisterImage(@"uie_trial_medal_gold"))
 	self:addElement(Gold)
 	self.Gold = Gold
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)

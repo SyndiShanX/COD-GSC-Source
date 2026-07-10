@@ -14,10 +14,10 @@ CoD.BM_ActiveBountyInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	MiddleText:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
 	MiddleText:setText(LocalizeToUpperString(0x0))
 	MiddleText:setTTF("ttmussels_regular")
-	MiddleText:setMaterial(LUI.UIImage.GetCachedMaterial(0x71E049B161CD00A))
+	MiddleText:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_171E049B161CD00A"))
 	MiddleText:setLetterSpacing(3)
-	MiddleText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	MiddleText:setAlignment(Enum[0x7A5123B654282D2][0x6ED4298C93DC5ED])
+	MiddleText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	MiddleText:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
 	self:addElement(MiddleText)
 	self.MiddleText = MiddleText
 	if PostLoadFunc then

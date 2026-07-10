@@ -27,7 +27,7 @@ CoD.PC_StartMenu_Options_Controls_KeyBinder.new = function(f1_arg0, f1_arg1, f1_
 	end)
 	local KeyBind1 = ListItem
 	local emptyFocusable = ListItem.subscribeToModel
-	local KeyBind2 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local KeyBind2 = Engine[@"getmodelforcontroller"](f1_arg1)
 	emptyFocusable(KeyBind1, KeyBind2.LastInput, function(f4_arg0)
 		f1_arg0:updateElementState(ListItem, {
 			name = "model_validation",
@@ -43,7 +43,7 @@ CoD.PC_StartMenu_Options_Controls_KeyBinder.new = function(f1_arg0, f1_arg1, f1_
 	ListItem:linkToElementModel(self, "name", true, function(model)
 		local f6_local0 = model:get()
 		if f6_local0 ~= nil then
-			ListItem.Title:setText(Engine[0xF9F1239CFD921FE](f6_local0))
+			ListItem.Title:setText(Engine[@"hash_4F9F1239CFD921FE"](f6_local0))
 		end
 	end)
 	self:addElement(ListItem)
@@ -72,7 +72,7 @@ CoD.PC_StartMenu_Options_Controls_KeyBinder.new = function(f1_arg0, f1_arg1, f1_
 	end)
 	local f1_local5 = KeyBind1
 	KeyBind2 = KeyBind1.subscribeToModel
-	local f1_local6 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local6 = Engine[@"getmodelforcontroller"](f1_arg1)
 	KeyBind2(f1_local5, f1_local6.LastInput, function(f10_arg0)
 		f1_arg0:updateElementState(KeyBind1, {
 			name = "model_validation",
@@ -123,7 +123,7 @@ CoD.PC_StartMenu_Options_Controls_KeyBinder.new = function(f1_arg0, f1_arg1, f1_
 	end)
 	f1_local6 = KeyBind2
 	f1_local5 = KeyBind2.subscribeToModel
-	local f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local5(f1_local6, f1_local7.LastInput, function(f17_arg0)
 		f1_arg0:updateElementState(KeyBind2, {
 			name = "model_validation",
@@ -173,7 +173,7 @@ CoD.PC_StartMenu_Options_Controls_KeyBinder.new = function(f1_arg0, f1_arg1, f1_
 	end)
 	f1_local6 = self
 	f1_local5 = self.subscribeToModel
-	f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local5(f1_local6, f1_local7.LastInput, function(f24_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

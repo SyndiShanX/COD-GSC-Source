@@ -11,8 +11,8 @@ CoD.CommonBgLayoutElement03.new = function ( f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	
 	local BlurBgBoxes01 = LUI.UIImage.new( 0, 0, 0, 76, 0, 0, 0, 380 )
 	BlurBgBoxes01:setAlpha( 0.5 )
-	BlurBgBoxes01:setImage( RegisterImage( 0x5985039BA568039 ) )
-	BlurBgBoxes01:setMaterial( LUI.UIImage.GetCachedMaterial( 0x7EA4827662D4CD4 ) )
+	BlurBgBoxes01:setImage( RegisterImage( @"uie_ui_menu_inspection_bg_element_boxes02" ) )
+	BlurBgBoxes01:setMaterial( LUI.UIImage.GetCachedMaterial( @"hash_17EA4827662D4CD4" ) )
 	BlurBgBoxes01:setShaderVector( 0, 1, 5, 0, 0 )
 	BlurBgBoxes01:setShaderVector( 1, 0, 1, 0, 1 )
 	self:addElement( BlurBgBoxes01 )
@@ -20,8 +20,8 @@ CoD.CommonBgLayoutElement03.new = function ( f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	
 	local BoxHighlighted = LUI.UIImage.new( 0, 0, 1, 37, 0, 0, 1, 37 )
 	BoxHighlighted:setAlpha( 0.2 )
-	BoxHighlighted:setImage( RegisterImage( 0xE24C99B4ACB5275 ) )
-	BoxHighlighted:setMaterial( LUI.UIImage.GetCachedMaterial( 0x1CC85D0A86303B0 ) )
+	BoxHighlighted:setImage( RegisterImage( @"uie_ui_menu_inspection_bg_element_box_selected" ) )
+	BoxHighlighted:setMaterial( LUI.UIImage.GetCachedMaterial( @"hash_31CC85D0A86303B0" ) )
 	BoxHighlighted:setShaderVector( 0, 2, 0, 0, 0 )
 	self:addElement( BoxHighlighted )
 	self.BoxHighlighted = BoxHighlighted
@@ -277,7 +277,7 @@ CoD.CommonBgLayoutElement03.__clipsPerState = {
 			f39_arg0:__resetProperties()
 			f39_arg0:setupElementClipCounter( 2 )
 			local f39_local0 = function ( f40_arg0 )
-				f39_arg0.BlurBgBoxes01:beginAnimation( 1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097] )
+				f39_arg0.BlurBgBoxes01:beginAnimation( 1000, Enum[@"luitween"][@"luitween_ease_both"] )
 				f39_arg0.BlurBgBoxes01:setAlpha( 0.3 )
 				f39_arg0.BlurBgBoxes01:registerEventHandler( "interrupted_keyframe", f39_arg0.clipInterrupted )
 				f39_arg0.BlurBgBoxes01:registerEventHandler( "transition_complete_keyframe", f39_arg0.clipFinished )

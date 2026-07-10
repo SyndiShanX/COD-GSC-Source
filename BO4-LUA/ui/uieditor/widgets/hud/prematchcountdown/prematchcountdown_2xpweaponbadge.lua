@@ -8,7 +8,7 @@ CoD.PrematchCountdown_2xpWeaponBadge.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local DoubleXPIcon = LUI.UIImage.new(0, 0, 0, 192, 0, 0, 0, 192)
-	DoubleXPIcon:setImage(RegisterImage(0x8B0FD32104E9EF1))
+	DoubleXPIcon:setImage(RegisterImage(@"ui_icon_2xp_weapon_large"))
 	self:addElement(DoubleXPIcon)
 	self.DoubleXPIcon = DoubleXPIcon
 	self:mergeStateConditions({

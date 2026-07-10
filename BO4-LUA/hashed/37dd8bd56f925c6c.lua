@@ -9,17 +9,17 @@ CoD.DupeIndicator.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local DupeIcon = LUI.UIImage.new(0, 0, 0, 20, 0, 0, 0, 20)
 	DupeIcon:setRGB(ColorSet.T8__OCHRE.r, ColorSet.T8__OCHRE.g, ColorSet.T8__OCHRE.b)
-	DupeIcon:setImage(RegisterImage(0xF395928C19E9B99))
+	DupeIcon:setImage(RegisterImage(@"hash_F395928C19E9B99"))
 	self:addElement(DupeIcon)
 	self.DupeIcon = DupeIcon
 	local RerollIcon = LUI.UIImage.new(0, 0, 0, 20, 0, 0, 0, 20)
 	RerollIcon:setRGB(0.54, 0.87, 0.31)
-	RerollIcon:setImage(RegisterImage(0xB259D817A83EFDB))
+	RerollIcon:setImage(RegisterImage(@"hash_7B259D817A83EFDB"))
 	self:addElement(RerollIcon)
 	self.RerollIcon = RerollIcon
 	local Contraband = LUI.UIImage.new(0, 0, 0, 40, 0, 0, 0, 20)
 	Contraband:setAlpha(0)
-	Contraband:setImage(RegisterImage(0x3AFA9E5CE99FEDF))
+	Contraband:setImage(RegisterImage(@"hash_73AFA9E5CE99FEDF"))
 	self:addElement(Contraband)
 	self.Contraband = Contraband
 	self:mergeStateConditions({
@@ -41,7 +41,7 @@ CoD.DupeIndicator.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 				local f4_local0 = CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "lootType", LuaEnum.LOOT_TYPE.CONTRABAND)
 				if f4_local0 then
 					if not CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemName", 0x0) then
-						f4_local0 = not CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemName", 0x37934F15B706913)
+						f4_local0 = not CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemName", @"contraband")
 					else
 						f4_local0 = false
 					end

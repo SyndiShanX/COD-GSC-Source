@@ -13,7 +13,7 @@ LUI.createMenu.MPSpecialistHUBBindWheel = function(f1_arg0, f1_arg1)
 	local Blur = SetMenuProperty
 	local Background = f1_local1
 	local framewidget = "_model"
-	local MPSpecialistHUBBindWheelSafeAreaContainer = Engine[0x4DF5CFBC1771947](f1_arg0)
+	local MPSpecialistHUBBindWheelSafeAreaContainer = Engine[@"getmodelforcontroller"](f1_arg0)
 	Blur(Background, framewidget, MPSpecialistHUBBindWheelSafeAreaContainer:create("MPSpecialistHUBBindWheel"))
 	CoD.BaseUtility.InitControllerModel(f1_arg0, "MPSpecialistHUBBindWheel.CanSelectWedge", false)
 	self:setClass(CoD.MPSpecialistHUBBindWheel)
@@ -26,7 +26,7 @@ LUI.createMenu.MPSpecialistHUBBindWheel = function(f1_arg0, f1_arg1)
 	Blur = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	Blur:setRGB(0.08, 0.08, 0.08)
 	Blur:setAlpha(0)
-	Blur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	Blur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	Blur:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(Blur)
 	self.Blur = Blur
@@ -42,11 +42,11 @@ LUI.createMenu.MPSpecialistHUBBindWheel = function(f1_arg0, f1_arg1)
 	self:addElement(framewidget)
 	self.framewidget = framewidget
 	MPSpecialistHUBBindWheelSafeAreaContainer = CoD.MPSpecialistHUBBindWheel_SafeAreaContainer.new(f1_local1, f1_arg0, 0, 0, 0, 1920, 0, 0, 0, 1080)
-	MPSpecialistHUBBindWheelSafeAreaContainer.CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(0x87EAA7A4C9006D2))
+	MPSpecialistHUBBindWheelSafeAreaContainer.CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(@"hash_687EAA7A4C9006D2"))
 	MPSpecialistHUBBindWheelSafeAreaContainer:subscribeToGlobalModel(f1_arg0, "LobbyRoot", "lobbyTitle", function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
-			MPSpecialistHUBBindWheelSafeAreaContainer.CommonHeader.subtitle.subtitle:setText(Engine[0xF9F1239CFD921FE](f3_local0))
+			MPSpecialistHUBBindWheelSafeAreaContainer.CommonHeader.subtitle.subtitle:setText(Engine[@"hash_4F9F1239CFD921FE"](f3_local0))
 		end
 	end)
 	self.__on_menuOpened_MPSpecialistHUBBindWheelSafeAreaContainer = function(f4_arg0, f4_arg1, f4_arg2, f4_arg3)
@@ -66,9 +66,9 @@ LUI.createMenu.MPSpecialistHUBBindWheel = function(f1_arg0, f1_arg1)
 	end)
 	local f1_local6 = self
 	local f1_local7 = self.subscribeToModel
-	local f1_local8 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	local f1_local8 = Engine[@"getmodelforcontroller"](f1_arg0)
 	f1_local7(f1_local6, f1_local8["MPSpecialistHUBBindWheel.CanSelectWedge"], function(f6_arg0, f6_arg1)
-		CoD.Menu.UpdateButtonShownState(f6_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f6_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	self:registerEventHandler("occlusion_change", function(self, event)
 		local f7_local0 = nil
@@ -87,15 +87,15 @@ LUI.createMenu.MPSpecialistHUBBindWheel = function(f1_arg0, f1_arg1)
 		end
 		return f7_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		PlaySoundAlias("uin_list_close_generic")
 		GoBack(self, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 		return true
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if IsDesiredFrameWidget(controller, self.framewidget, "MPSpecialistHUBBindWheelInternal") and CoD.ModelUtility.IsControllerModelValueTrue(controller, "MPSpecialistHUBBindWheel.CanSelectWedge") then
 			CoD.PlayerRoleUtility.OpenGestureTagMenu(menu, controller)
 			PlaySoundAlias("uin_radial_confirm")
@@ -104,13 +104,13 @@ LUI.createMenu.MPSpecialistHUBBindWheel = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if IsDesiredFrameWidget(controller, self.framewidget, "MPSpecialistHUBBindWheelInternal") and CoD.ModelUtility.IsControllerModelValueTrue(controller, "MPSpecialistHUBBindWheel.CanSelectWedge") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x571F08AD84807E0], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_right"], nil, function(element, menu, controller, model)
 		if MenuPropertyIsTrue(menu, "_allowsQuickSelect") and IsDpadButton(model) and IsDesiredFrameWidget(controller, self.framewidget, "MPSpecialistHUBBindWheelInternal") then
 			CoD.PlayerRoleUtility.OpenQuickSlotGestureTagMenu(menu, controller)
 			PlaySoundAlias("uin_radial_confirm")
@@ -119,7 +119,7 @@ LUI.createMenu.MPSpecialistHUBBindWheel = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if MenuPropertyIsTrue(menu, "_allowsQuickSelect") and IsDpadButton(nil) and IsDesiredFrameWidget(controller, self.framewidget, "MPSpecialistHUBBindWheelInternal") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x571F08AD84807E0], 0x0, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_right"], @"hash_0", nil, nil)
 			return false
 		else
 			return false

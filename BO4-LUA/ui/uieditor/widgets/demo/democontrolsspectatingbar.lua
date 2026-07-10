@@ -15,9 +15,9 @@ CoD.DemoControlsSpectatingBar.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	local PlayerName = LUI.UIText.new(0, 1, 34, -34, 0.5, 0.5, -10, 10)
 	PlayerName:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	PlayerName:setTTF("notosans_bold")
-	PlayerName:setMaterial(LUI.UIImage.GetCachedMaterial(0x71E049B161CD00A))
-	PlayerName:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	PlayerName:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	PlayerName:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_171E049B161CD00A"))
+	PlayerName:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	PlayerName:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	PlayerName:subscribeToGlobalModel(f1_arg1, "Demo", "clientNum", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -31,7 +31,7 @@ CoD.DemoControlsSpectatingBar.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	local LeftArrow = nil
 	LeftArrow = CoD.BumperButtonWithKeyMouse.new(f1_arg0, f1_arg1, 0, 0, 0, 67, 0, 0, -7.5, 37.5)
 	LeftArrow.KeyMouseImage:setYRot(180)
-	LeftArrow.KeyMouseImage:setImage(RegisterImage(0x5E74D00B45D12B6))
+	LeftArrow.KeyMouseImage:setImage(RegisterImage(@"uie_optionswidgets_arrow"))
 	LeftArrow:subscribeToGlobalModel(f1_arg1, "Controller", "left_shoulder_button_image", function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -60,21 +60,21 @@ CoD.DemoControlsSpectatingBar.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 		elseif element.super.gainFocus then
 			f5_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_none"])
 		return f5_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(LeftArrow, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "MOUSE1", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(LeftArrow, f1_arg1, Enum[@"luibutton"][@"lui_key_none"], "MOUSE1", function(element, menu, controller, model)
 		CoD.DemoUtility.LeftBumperAction(self, element, controller, menu)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "MOUSE1")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "MOUSE1")
 		return false
 	end, false)
 	self:addElement(LeftArrow)
 	self.LeftArrow = LeftArrow
 	local RightArrow = nil
 	RightArrow = CoD.BumperButtonWithKeyMouse.new(f1_arg0, f1_arg1, 0, 0, 223, 290, 0, 0, -7.5, 37.5)
-	RightArrow.KeyMouseImage:setImage(RegisterImage(0x5E74D00B45D12B6))
+	RightArrow.KeyMouseImage:setImage(RegisterImage(@"uie_optionswidgets_arrow"))
 	RightArrow:subscribeToGlobalModel(f1_arg1, "Controller", "right_shoulder_button_image", function(model)
 		local f8_local0 = model:get()
 		if f8_local0 ~= nil then
@@ -103,14 +103,14 @@ CoD.DemoControlsSpectatingBar.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 		elseif element.super.gainFocus then
 			f10_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_none"])
 		return f10_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(RightArrow, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "MOUSE1", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(RightArrow, f1_arg1, Enum[@"luibutton"][@"lui_key_none"], "MOUSE1", function(element, menu, controller, model)
 		CoD.DemoUtility.RightBumperAction(self, element, controller, menu)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "MOUSE1")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "MOUSE1")
 		return false
 	end, false)
 	self:addElement(RightArrow)
@@ -146,7 +146,7 @@ CoD.DemoControlsSpectatingBar.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	})
 	local f1_local6 = self
 	local f1_local7 = self.subscribeToModel
-	local f1_local8 = Engine[0x8DF2E5447F384B9]()
+	local f1_local8 = Engine[@"getglobalmodel"]()
 	f1_local7(f1_local6, f1_local8["demo.isFreeCameraLockedOnEntity"], function(f15_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -162,7 +162,7 @@ CoD.DemoControlsSpectatingBar.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	end)
 	f1_local6 = self
 	f1_local7 = self.subscribeToModel
-	f1_local8 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local8 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local7(f1_local6, f1_local8.LastInput, function(f17_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -174,7 +174,7 @@ CoD.DemoControlsSpectatingBar.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	end, false)
 	f1_local6 = self
 	f1_local7 = self.subscribeToModel
-	f1_local8 = Engine[0x8DF2E5447F384B9]()
+	f1_local8 = Engine[@"getglobalmodel"]()
 	f1_local7(f1_local6, f1_local8["demo.isDefaultCameraMode"], function(f18_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

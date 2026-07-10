@@ -11,7 +11,7 @@ CoD.DirectorMapSelectItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Button = CoD.DirectorZMMapSelectItemOffline_Internal.new(f1_arg0, f1_arg1, 0, 0, 0, 246, 0, 0, 0, 104)
-	Button.FeaturedTag:setText(LocalizeToUpperString(0x7E251454EDF7A26))
+	Button.FeaturedTag:setText(LocalizeToUpperString(@"menu/public_tab"))
 	Button:linkToElementModel(self, nil, false, function(model)
 		Button:setModel(model, f1_arg1)
 	end)
@@ -30,7 +30,7 @@ CoD.DirectorMapSelectItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	Button:linkToElementModel(self, "id", true, function(model)
 		local f5_local0 = model:get()
 		if f5_local0 ~= nil then
-			Button.TeamName:setText(Engine[0xF9F1239CFD921FE](CoD.MapUtility.GetMapTeamNameFromMapID(f5_local0)))
+			Button.TeamName:setText(Engine[@"hash_4F9F1239CFD921FE"](CoD.MapUtility.GetMapTeamNameFromMapID(f5_local0)))
 		end
 	end)
 	self:addElement(Button)

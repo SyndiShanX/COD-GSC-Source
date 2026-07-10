@@ -14,7 +14,7 @@ CoD.EmblemLayerNumber.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	self.topbar = topbar
 	local layerNumber = LUI.UIText.new(0, 0, 30, 75, 0, 1, 0, 0)
 	layerNumber:setTTF("ttmussels_demibold")
-	layerNumber:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	layerNumber:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	layerNumber:linkToElementModel(self, "layerNumberString", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -24,7 +24,7 @@ CoD.EmblemLayerNumber.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	self:addElement(layerNumber)
 	self.layerNumber = layerNumber
 	local groupIcon = LUI.UIImage.new(0, 0, 0, 30, 0.5, 0.5, -15, 15)
-	groupIcon:setImage(RegisterImage(0x964B04560791FCF))
+	groupIcon:setImage(RegisterImage(@"uie_t7_menu_emblem_group"))
 	self:addElement(groupIcon)
 	self.groupIcon = groupIcon
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)

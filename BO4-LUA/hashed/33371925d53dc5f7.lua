@@ -90,7 +90,7 @@ CoD.AARTierRewardShowcaseInternalRare.new = function(f1_arg0, f1_arg1, f1_arg2, 
 			condition = function(menu, element, event)
 				local f11_local0
 				if not CoD.ModelUtility.IsSelfModelValueTrue(element, f1_arg1, "unlocked") then
-					f11_local0 = CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "rarity", Enum[0x704F69F9B0BDCEC][0x895F040FAFBECB9])
+					f11_local0 = CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "rarity", Enum[@"lootraritytype"][@"loot_rarity_type_rare"])
 				else
 					f11_local0 = false
 				end
@@ -102,7 +102,7 @@ CoD.AARTierRewardShowcaseInternalRare.new = function(f1_arg0, f1_arg1, f1_arg2, 
 			condition = function(menu, element, event)
 				local f12_local0 = CoD.ModelUtility.IsSelfModelValueTrue(element, f1_arg1, "dupe")
 				if f12_local0 then
-					f12_local0 = CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "rarity", Enum[0x704F69F9B0BDCEC][0x895F040FAFBECB9])
+					f12_local0 = CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "rarity", Enum[@"lootraritytype"][@"loot_rarity_type_rare"])
 					if f12_local0 then
 						f12_local0 = CoD.ModelUtility.IsSelfModelValueTrue(element, f1_arg1, "unlocked")
 					end
@@ -115,7 +115,7 @@ CoD.AARTierRewardShowcaseInternalRare.new = function(f1_arg0, f1_arg1, f1_arg2, 
 			condition = function(menu, element, event)
 				local f13_local0 = CoD.ModelUtility.IsSelfModelValueTrue(element, f1_arg1, "reroll")
 				if f13_local0 then
-					f13_local0 = CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "rarity", Enum[0x704F69F9B0BDCEC][0x895F040FAFBECB9])
+					f13_local0 = CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "rarity", Enum[@"lootraritytype"][@"loot_rarity_type_rare"])
 					if f13_local0 then
 						f13_local0 = CoD.ModelUtility.IsSelfModelValueTrue(element, f1_arg1, "unlocked")
 					end
@@ -128,7 +128,7 @@ CoD.AARTierRewardShowcaseInternalRare.new = function(f1_arg0, f1_arg1, f1_arg2, 
 			condition = function(menu, element, event)
 				local f14_local0 = CoD.ModelUtility.IsSelfModelValueTrue(element, f1_arg1, "unlocked")
 				if f14_local0 then
-					f14_local0 = CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "rarity", Enum[0x704F69F9B0BDCEC][0x895F040FAFBECB9])
+					f14_local0 = CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "rarity", Enum[@"lootraritytype"][@"loot_rarity_type_rare"])
 					if f14_local0 then
 						f14_local0 = CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "lootType", LuaEnum.LOOT_TYPE.CONTRABAND)
 					end

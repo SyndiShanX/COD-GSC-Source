@@ -20,7 +20,7 @@ CoD.TabletIcePickGadget_ItemIcon.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	local SpecialistImageScan = LUI.UIFixedAspectRatioImage.new(0.5, 0.5, -68, 68, 1, 1, -136, 0)
 	SpecialistImageScan:setRGB(0.22, 0.77, 1)
 	SpecialistImageScan:setAlpha(0.6)
-	SpecialistImageScan:setMaterial(LUI.UIImage.GetCachedMaterial(0x92F09074FB20E6D))
+	SpecialistImageScan:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_scanlines"))
 	SpecialistImageScan:setShaderVector(0, 2, 0, 0, 0)
 	SpecialistImageScan:setShaderVector(1, 2, 0, 0, 0)
 	SpecialistImageScan:setShaderVector(2, 0.02, 0, 0, 0)
@@ -37,7 +37,7 @@ CoD.TabletIcePickGadget_ItemIcon.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	NonSpecialistImage:linkToElementModel(self, "hackableItemIndex", true, function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
-			NonSpecialistImage:setImage(RegisterImage(CoD.CACUtility.GetItemImageFromIndex(f1_arg0, Enum[0x6EB546760F890D2][0x569E84652131CD7], f4_local0)))
+			NonSpecialistImage:setImage(RegisterImage(CoD.CACUtility.GetItemImageFromIndex(f1_arg0, Enum[@"statindexoffset"][@"hash_6569E84652131CD7"], f4_local0)))
 		end
 	end)
 	self:addElement(NonSpecialistImage)
@@ -45,14 +45,14 @@ CoD.TabletIcePickGadget_ItemIcon.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	local NonSpecialistImageScan = LUI.UIFixedAspectRatioImage.new(0.5, 0.5, -72, 72, 0, 0, 0, 144)
 	NonSpecialistImageScan:setRGB(0.22, 0.77, 1)
 	NonSpecialistImageScan:setAlpha(0.6)
-	NonSpecialistImageScan:setMaterial(LUI.UIImage.GetCachedMaterial(0x92F09074FB20E6D))
+	NonSpecialistImageScan:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_scanlines"))
 	NonSpecialistImageScan:setShaderVector(0, 2, 0, 0, 0)
 	NonSpecialistImageScan:setShaderVector(1, 2, 0, 0, 0)
 	NonSpecialistImageScan:setShaderVector(2, 0.02, 0, 0, 0)
 	NonSpecialistImageScan:linkToElementModel(self, "hackableItemIndex", true, function(model)
 		local f5_local0 = model:get()
 		if f5_local0 ~= nil then
-			NonSpecialistImageScan:setImage(RegisterImage(CoD.CACUtility.GetItemImageFromIndex(f1_arg0, Enum[0x6EB546760F890D2][0x569E84652131CD7], f5_local0)))
+			NonSpecialistImageScan:setImage(RegisterImage(CoD.CACUtility.GetItemImageFromIndex(f1_arg0, Enum[@"statindexoffset"][@"hash_6569E84652131CD7"], f5_local0)))
 		end
 	end)
 	self:addElement(NonSpecialistImageScan)

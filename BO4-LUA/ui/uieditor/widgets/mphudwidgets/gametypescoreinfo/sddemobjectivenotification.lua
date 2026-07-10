@@ -91,43 +91,43 @@ CoD.SDDemObjectiveNotification.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 		{
 			stateName = "DisarmBombA",
 			condition = function(menu, element, event)
-				return Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xABEA46F8DE7F02F]) and not CoD.ModelUtility.IsModelValueTrue(f1_arg1, "SearchAndDestroy.defending")
+				return Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_bomb_timer_a"]) and not CoD.ModelUtility.IsModelValueTrue(f1_arg1, "SearchAndDestroy.defending")
 			end,
 		},
 		{
 			stateName = "DisarmBombB",
 			condition = function(menu, element, event)
-				return Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xABEA56F8DE7F1E2]) and not CoD.ModelUtility.IsModelValueTrue(f1_arg1, "SearchAndDestroy.defending")
+				return Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_bomb_timer_b"]) and not CoD.ModelUtility.IsModelValueTrue(f1_arg1, "SearchAndDestroy.defending")
 			end,
 		},
 		{
 			stateName = "DefendBombA",
 			condition = function(menu, element, event)
-				return Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xABEA46F8DE7F02F]) and CoD.ModelUtility.IsModelValueTrue(f1_arg1, "SearchAndDestroy.defending")
+				return Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_bomb_timer_a"]) and CoD.ModelUtility.IsModelValueTrue(f1_arg1, "SearchAndDestroy.defending")
 			end,
 		},
 		{
 			stateName = "DefendBombB",
 			condition = function(menu, element, event)
-				return Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xABEA56F8DE7F1E2]) and CoD.ModelUtility.IsModelValueTrue(f1_arg1, "SearchAndDestroy.defending")
+				return Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_bomb_timer_b"]) and CoD.ModelUtility.IsModelValueTrue(f1_arg1, "SearchAndDestroy.defending")
 			end,
 		},
 	})
 	local f1_local4 = BombPlanted
 	local f1_local5 = BombPlanted.subscribeToModel
-	local f1_local6 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local5(f1_local4, f1_local6["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xABEA46F8DE7F02F]], function(f16_arg0)
+	local f1_local6 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local5(f1_local4, f1_local6["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_bomb_timer_a"]], function(f16_arg0)
 		f1_arg0:updateElementState(BombPlanted, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f16_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xABEA46F8DE7F02F],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_bomb_timer_a"],
 		})
 	end, false)
 	f1_local4 = BombPlanted
 	f1_local5 = BombPlanted.subscribeToModel
-	f1_local6 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local6 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local5(f1_local4, f1_local6["SearchAndDestroy.defending"], function(f17_arg0)
 		f1_arg0:updateElementState(BombPlanted, {
 			name = "model_validation",
@@ -139,14 +139,14 @@ CoD.SDDemObjectiveNotification.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	end, false)
 	f1_local4 = BombPlanted
 	f1_local5 = BombPlanted.subscribeToModel
-	f1_local6 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local5(f1_local4, f1_local6["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xABEA56F8DE7F1E2]], function(f18_arg0)
+	f1_local6 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local5(f1_local4, f1_local6["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_bomb_timer_b"]], function(f18_arg0)
 		f1_arg0:updateElementState(BombPlanted, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f18_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xABEA56F8DE7F1E2],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_bomb_timer_b"],
 		})
 	end, false)
 	BombPlanted:setAlpha(0)
@@ -160,17 +160,17 @@ CoD.SDDemObjectiveNotification.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 			stateName = "BombPlanted",
 			condition = function(menu, element, event)
 				local f20_local0
-				if not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xABEA46F8DE7F02F]) then
-					f20_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xABEA56F8DE7F1E2])
+				if not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_bomb_timer_a"]) then
+					f20_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_bomb_timer_b"])
 					if f20_local0 then
-						if not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x4828BED794DA0A5]) then
-							f20_local0 = not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F])
+						if not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_round_end_killcam"]) then
+							f20_local0 = not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_play_of_the_match"])
 						else
 							f20_local0 = false
 						end
 					end
-				elseif not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x4828BED794DA0A5]) then
-					f20_local0 = not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F])
+				elseif not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_round_end_killcam"]) then
+					f20_local0 = not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_play_of_the_match"])
 				else
 					f20_local0 = false
 				end
@@ -180,50 +180,50 @@ CoD.SDDemObjectiveNotification.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	})
 	f1_local4 = self
 	f1_local5 = self.subscribeToModel
-	f1_local6 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local5(f1_local4, f1_local6["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xABEA46F8DE7F02F]], function(f21_arg0)
+	f1_local6 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local5(f1_local4, f1_local6["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_bomb_timer_a"]], function(f21_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f21_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xABEA46F8DE7F02F],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_bomb_timer_a"],
 		})
 	end, false)
 	f1_local4 = self
 	f1_local5 = self.subscribeToModel
-	f1_local6 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local5(f1_local4, f1_local6["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xABEA56F8DE7F1E2]], function(f22_arg0)
+	f1_local6 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local5(f1_local4, f1_local6["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_bomb_timer_b"]], function(f22_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f22_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xABEA56F8DE7F1E2],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_bomb_timer_b"],
 		})
 	end, false)
 	f1_local4 = self
 	f1_local5 = self.subscribeToModel
-	f1_local6 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local5(f1_local4, f1_local6["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x4828BED794DA0A5]], function(f23_arg0)
+	f1_local6 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local5(f1_local4, f1_local6["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_round_end_killcam"]], function(f23_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f23_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x4828BED794DA0A5],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_round_end_killcam"],
 		})
 	end, false)
 	f1_local4 = self
 	f1_local5 = self.subscribeToModel
-	f1_local6 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local5(f1_local4, f1_local6["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F]], function(f24_arg0)
+	f1_local6 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local5(f1_local4, f1_local6["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_play_of_the_match"]], function(f24_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f24_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_play_of_the_match"],
 		})
 	end, false)
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)

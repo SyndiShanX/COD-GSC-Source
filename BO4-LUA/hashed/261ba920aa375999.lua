@@ -10,7 +10,7 @@ CoD.PositionDraft_ReadyButtonContainer.new = function(f1_arg0, f1_arg1, f1_arg2,
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Blur = LUI.UIImage.new(0, 0, 0, 367, 0, 0, 0, 75)
-	Blur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	Blur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	Blur:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(Blur)
 	self.Blur = Blur
@@ -22,7 +22,7 @@ CoD.PositionDraft_ReadyButtonContainer.new = function(f1_arg0, f1_arg1, f1_arg2,
 	local Fill = LUI.UIImage.new(-0.5, 0.5, 184, 184, -0.5, 0.5, 37.5, 37.5)
 	Fill:setRGB(ColorSet.PlayerYellow.r, ColorSet.PlayerYellow.g, ColorSet.PlayerYellow.b)
 	Fill:setAlpha(0)
-	Fill:setMaterial(LUI.UIImage.GetCachedMaterial(0x316E67E1DF2198E))
+	Fill:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_normal"))
 	Fill:setShaderVector(1, 0, 0, 0, 0)
 	Fill:setShaderVector(2, 1, 0, 0, 0)
 	Fill:setShaderVector(3, 0, 0, 0, 0)
@@ -37,11 +37,11 @@ CoD.PositionDraft_ReadyButtonContainer.new = function(f1_arg0, f1_arg1, f1_arg2,
 	self.Fill = Fill
 	local ReadyText = LUI.UIText.new(-0.5, 0.5, 184, 184, 0, 0, 18.5, 56.5)
 	ReadyText:setRGB(ColorSet.PlayerYellow.r, ColorSet.PlayerYellow.g, ColorSet.PlayerYellow.b)
-	ReadyText:setText(Engine[0xF9F1239CFD921FE](0xB8B19A0CC3281E2))
+	ReadyText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_6B8B19A0CC3281E2"))
 	ReadyText:setTTF("ttmussels_regular")
 	ReadyText:setLetterSpacing(10)
-	ReadyText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	ReadyText:setAlignment(Enum[0x7A5123B654282D2][0x6ED4298C93DC5ED])
+	ReadyText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	ReadyText:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
 	self:addElement(ReadyText)
 	self.ReadyText = ReadyText
 	local barTop = LUI.UIImage.new(0, 0, 26, 342, 0, 0, -13, -6)
@@ -83,20 +83,20 @@ CoD.PositionDraft_ReadyButtonContainer.new = function(f1_arg0, f1_arg1, f1_arg2,
 	self.Corner3 = Corner3
 	local BarTopStripes2 = LUI.UIImage.new(0, 0, 0.5, 368.5, 0, 0, 81, 92)
 	BarTopStripes2:setAlpha(0.1)
-	BarTopStripes2:setImage(RegisterImage(0xA21C960676F4F2F))
-	BarTopStripes2:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	BarTopStripes2:setImage(RegisterImage(@"hash_3A21C960676F4F2F"))
+	BarTopStripes2:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	BarTopStripes2:setShaderVector(0, 0, 0, 0, 0)
 	BarTopStripes2:setupNineSliceShader(12, 12)
 	self:addElement(BarTopStripes2)
 	self.BarTopStripes2 = BarTopStripes2
 	local arrow01 = LUI.UIImage.new(0, 0, 353, 358, 0, 0, -12, -7)
 	arrow01:setRGB(0.06, 0.06, 0.06)
-	arrow01:setImage(RegisterImage(0x19A57A2805CEECA))
+	arrow01:setImage(RegisterImage(@"uie_ui_hud_common_line_arrow"))
 	self:addElement(arrow01)
 	self.arrow01 = arrow01
 	local arrow = LUI.UIImage.new(0, 0, 9.5, 14.5, 0, 0, -12, -7)
 	arrow:setRGB(0.06, 0.06, 0.06)
-	arrow:setImage(RegisterImage(0x19A57A2805CEECA))
+	arrow:setImage(RegisterImage(@"uie_ui_hud_common_line_arrow"))
 	self:addElement(arrow)
 	self.arrow = arrow
 	local PulseRight = CoD.PositionDraft_ReadyPulse.new(f1_arg0, f1_arg1, 0, 0, 364.5, 424.5, 0, 0, 0.5, 75.5)
@@ -110,15 +110,15 @@ CoD.PositionDraft_ReadyButtonContainer.new = function(f1_arg0, f1_arg1, f1_arg2,
 	self.PulseLeft = PulseLeft
 	self:appendEventHandler("input_source_changed", function(f3_arg0, f3_arg1)
 		f3_arg1.menu = f3_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f3_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(f3_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_none"])
 	end)
 	local f1_local18 = self
 	local f1_local19 = self.subscribeToModel
-	local f1_local20 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local20 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local19(f1_local18, f1_local20.LastInput, function(f4_arg0, f4_arg1)
-		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_none"])
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "SPACE", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_none"], "SPACE", function(element, menu, controller, model)
 		if IsMouseOrKeyboard(controller) then
 			PositionDraftReady(self, element, controller)
 			SetState(self, "Ready", controller)
@@ -129,13 +129,13 @@ CoD.PositionDraft_ReadyButtonContainer.new = function(f1_arg0, f1_arg1, f1_arg2,
 		end
 	end, function(element, menu, controller)
 		if IsMouseOrKeyboard(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "SPACE")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "SPACE")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_none"], "ui_confirm", function(element, menu, controller, model)
 		if IsMouseOrKeyboard(controller) then
 			PositionDraftReady(self, element, controller)
 			SetState(self, "Ready", controller)
@@ -146,7 +146,7 @@ CoD.PositionDraft_ReadyButtonContainer.new = function(f1_arg0, f1_arg1, f1_arg2,
 		end
 	end, function(element, menu, controller)
 		if IsMouseOrKeyboard(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "ui_confirm")
 			return false
 		else
 			return false
@@ -154,8 +154,8 @@ CoD.PositionDraft_ReadyButtonContainer.new = function(f1_arg0, f1_arg1, f1_arg2,
 	end, false)
 	LUI.OverrideFunction_CallOriginalFirst(self, "setState", function(element, controller, f9_arg2, f9_arg3, f9_arg4)
 		if IsElementInState(self, "Ready") then
-			UpdateButtonPromptState(f1_arg0, f1_arg0, controller, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A])
-			UpdateButtonPromptState(f1_arg0, f1_arg0, controller, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
+			UpdateButtonPromptState(f1_arg0, f1_arg0, controller, Enum[@"luibutton"][@"lui_key_xbb_pscircle"])
+			UpdateButtonPromptState(f1_arg0, f1_arg0, controller, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
 		end
 	end)
 	self:linkToElementModel(self, "progress", true, function(model)
@@ -168,7 +168,7 @@ CoD.PositionDraft_ReadyButtonContainer.new = function(f1_arg0, f1_arg1, f1_arg2,
 	end)
 	self:linkToElementModel(self, nil, true, function(model)
 		local f11_local0 = self
-		if CoD.ModelUtility.IsParamModelEqualTo(model, Enum[0xE29E259801BC1A4][0x715085B24AAB606] | Enum[0xE29E259801BC1A4][0x253A6F6CAAAE464]) and IsElementInFocus(f11_local0) then
+		if CoD.ModelUtility.IsParamModelEqualTo(model, Enum[@"luibuttonflags"][@"hash_4715085B24AAB606"] | Enum[@"luibuttonflags"][@"flag_down"]) and IsElementInFocus(f11_local0) then
 			PositionDraftReady(self, f11_local0, f1_arg1)
 			SetState(self, "Ready", f1_arg1)
 			CoD.BaseUtility.StopPlayOnceSound(f11_local0, "uin_draft_bar_fill_1shot")

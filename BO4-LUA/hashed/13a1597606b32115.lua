@@ -32,7 +32,7 @@ LUI.createMenu.PositionDraft = function(f2_arg0, f2_arg1)
 	SetProperty(self, "disablePopupOpenCloseAnim", true)
 	SetPerControllerTableProperty(f2_arg0, "showHealthBars", false)
 	SetProperty(self, "preserveLuiButton", {
-		[Enum[0x3DD78803F918E9D][0x93AB4C84F113EE1]] = true,
+		[Enum[@"luibutton"][@"lui_key_back"]] = true,
 	})
 	CoD.BaseUtility.InitControllerModel(f2_arg0, "isInPrematchPeriod", 0)
 	CoD.BaseUtility.CreateControllerModel(f2_arg0, "gametypeObjectiveHint")
@@ -57,7 +57,7 @@ LUI.createMenu.PositionDraft = function(f2_arg0, f2_arg1)
 	local blurbackgroundSelectedClassPC = nil
 	blurbackgroundSelectedClassPC = LUI.UIImage.new(-0.1, 1.1, 0, 0, 1, 1, -155, 95)
 	blurbackgroundSelectedClassPC:setRGB(0, 0, 0)
-	blurbackgroundSelectedClassPC:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	blurbackgroundSelectedClassPC:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	blurbackgroundSelectedClassPC:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(blurbackgroundSelectedClassPC)
 	self.blurbackgroundSelectedClassPC = blurbackgroundSelectedClassPC
@@ -73,11 +73,11 @@ LUI.createMenu.PositionDraft = function(f2_arg0, f2_arg1)
 	self:addElement(StatusTextBackground)
 	self.StatusTextBackground = StatusTextBackground
 	local StatusText = LUI.UIText.new(0.5, 0.5, -958.5, 958.5, 0.5, 0.5, 172, 220)
-	StatusText:setText(LocalizeToUpperString(0x2D67DCCB863C991))
+	StatusText:setText(LocalizeToUpperString(@"menu/select_specialist"))
 	StatusText:setTTF("ttmussels_regular")
 	StatusText:setLetterSpacing(14.7)
-	StatusText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	StatusText:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	StatusText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	StatusText:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	self:addElement(StatusText)
 	self.StatusText = StatusText
 	local CountdownTimerTintPanel = CoD.PositionDraft_CountdownTimerFUI.new(f2_local1, f2_arg0, 0.5, 0.5, -399, 401, 0.5, 0.5, 160, 480)
@@ -88,9 +88,9 @@ LUI.createMenu.PositionDraft = function(f2_arg0, f2_arg1)
 	CountdownTimer:setAlpha(0)
 	CountdownTimer:setScale(0.9, 0.9)
 	CountdownTimer:setTTF("0arame_mono_stencil")
-	CountdownTimer:setMaterial(LUI.UIImage.GetCachedMaterial(0x71E049B161CD00A))
-	CountdownTimer:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	CountdownTimer:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	CountdownTimer:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_171E049B161CD00A"))
+	CountdownTimer:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	CountdownTimer:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	CountdownTimer:subscribeToGlobalModel(f2_arg0, "PositionDraft", "timeRemaining", function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -128,7 +128,7 @@ LUI.createMenu.PositionDraft = function(f2_arg0, f2_arg1)
 			modelName = "timeRemaining",
 		})
 	end, false)
-	PositionDraftReadyButton:subscribeToGlobalModel(f2_arg0, "PerController", "ButtonBits." .. Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], function(model)
+	PositionDraftReadyButton:subscribeToGlobalModel(f2_arg0, "PerController", "ButtonBits." .. Enum[@"luibutton"][@"lui_key_xba_pscross"], function(model)
 		PositionDraftReadyButton:setModel(model, f2_arg0)
 	end)
 	self:addElement(PositionDraftReadyButton)
@@ -174,7 +174,7 @@ LUI.createMenu.PositionDraft = function(f2_arg0, f2_arg1)
 	})
 	local FocusedCharacterInfo = RadialTimerPC
 	local PositionDraftAttackDefend = RadialTimerPC.subscribeToModel
-	local ChangeClassButton = Engine[0x8DF2E5447F384B9]()
+	local ChangeClassButton = Engine[@"getglobalmodel"]()
 	PositionDraftAttackDefend(FocusedCharacterInfo, ChangeClassButton["PositionDraft.timeRemaining"], function(f8_arg0)
 		f2_local1:updateElementState(RadialTimerPC, {
 			name = "model_validation",
@@ -221,7 +221,7 @@ LUI.createMenu.PositionDraft = function(f2_arg0, f2_arg1)
 	})
 	local Characters = FocusedCharacterInfo
 	ChangeClassButton = FocusedCharacterInfo.subscribeToModel
-	local PCVoiceChatWidget = Engine[0x4DF5CFBC1771947](f2_arg0)
+	local PCVoiceChatWidget = Engine[@"getmodelforcontroller"](f2_arg0)
 	ChangeClassButton(Characters, PCVoiceChatWidget["PositionDraft.focusedCharacterIndex"], function(f12_arg0)
 		f2_local1:updateElementState(FocusedCharacterInfo, {
 			name = "model_validation",
@@ -245,19 +245,19 @@ LUI.createMenu.PositionDraft = function(f2_arg0, f2_arg1)
 	})
 	ChangeClassButton:setAlpha(0)
 	ChangeClassButton:setScale(0.8, 0.8)
-	ChangeClassButton.DirectorSelectButtonMiniInternal.MiddleText:setText(LocalizeToUpperString(0x83E3BA6F8C2DB04))
-	ChangeClassButton.DirectorSelectButtonMiniInternal.MiddleTextFocus:setText(LocalizeToUpperString(0x83E3BA6F8C2DB04))
+	ChangeClassButton.DirectorSelectButtonMiniInternal.MiddleText:setText(LocalizeToUpperString(@"hash_783E3BA6F8C2DB04"))
+	ChangeClassButton.DirectorSelectButtonMiniInternal.MiddleTextFocus:setText(LocalizeToUpperString(@"hash_783E3BA6F8C2DB04"))
 	PCVoiceChatWidget = ChangeClassButton
 	Characters = ChangeClassButton.subscribeToModel
-	local CommonHeader = Engine[0x4DF5CFBC1771947](f2_arg0)
+	local CommonHeader = Engine[@"getmodelforcontroller"](f2_arg0)
 	Characters(PCVoiceChatWidget, CommonHeader["PositionDraft.stage"], function(f14_arg0, f14_arg1)
-		CoD.Menu.UpdateButtonShownState(f14_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f14_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	PCVoiceChatWidget = ChangeClassButton
 	Characters = ChangeClassButton.subscribeToModel
-	CommonHeader = Engine[0x4DF5CFBC1771947](f2_arg0)
+	CommonHeader = Engine[@"getmodelforcontroller"](f2_arg0)
 	Characters(PCVoiceChatWidget, CommonHeader["factions.isCoDCaster"], function(f15_arg0, f15_arg1)
-		CoD.Menu.UpdateButtonShownState(f15_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f15_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	ChangeClassButton:registerEventHandler("gain_focus", function(element, event)
 		local f16_local0 = nil
@@ -266,10 +266,10 @@ LUI.createMenu.PositionDraft = function(f2_arg0, f2_arg1)
 		elseif element.super.gainFocus then
 			f16_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f16_local0
 	end)
-	f2_local1:AddButtonCallbackFunction(ChangeClassButton, f2_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f2_local1:AddButtonCallbackFunction(ChangeClassButton, f2_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if CoD.ModelUtility.IsModelValueLessThan(controller, "PositionDraft.stage", 6) and not CoD.BountyHunterUtility.GameTypeHidesChooseClass(controller) and not IsCodCaster(controller) then
 			CoD.StartMenuUtility.ShowClassSelectSlideout(menu, controller)
 			return true
@@ -277,7 +277,7 @@ LUI.createMenu.PositionDraft = function(f2_arg0, f2_arg1)
 		end
 	end, function(element, menu, controller)
 		if CoD.ModelUtility.IsModelValueLessThan(controller, "PositionDraft.stage", 6) and not CoD.BountyHunterUtility.GameTypeHidesChooseClass(controller) and not IsCodCaster(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 			return false
 		else
 			return false
@@ -294,11 +294,11 @@ LUI.createMenu.PositionDraft = function(f2_arg0, f2_arg1)
 	self.PCVoiceChatWidget = PCVoiceChatWidget
 	CommonHeader = nil
 	CommonHeader = CoD.CommonHeader.new(f2_local1, f2_arg0, 0.5, 0.5, -960, 960, 0, 0, 0, 67)
-	CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(0x2D67DCCB863C991))
+	CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(@"menu/select_specialist"))
 	CommonHeader:subscribeToGlobalModel(f2_arg0, "LobbyRoot", "lobbyTitle", function(model)
 		local f19_local0 = model:get()
 		if f19_local0 ~= nil then
-			CommonHeader.subtitle.subtitle:setText(Engine[0xF9F1239CFD921FE](f19_local0))
+			CommonHeader.subtitle.subtitle:setText(Engine[@"hash_4F9F1239CFD921FE"](f19_local0))
 		end
 	end)
 	self:addElement(CommonHeader)
@@ -448,7 +448,7 @@ LUI.createMenu.PositionDraft = function(f2_arg0, f2_arg1)
 	})
 	local f2_local32 = self
 	local f2_local33 = self.subscribeToModel
-	local f2_local34 = Engine[0x4DF5CFBC1771947](f2_arg0)
+	local f2_local34 = Engine[@"getmodelforcontroller"](f2_arg0)
 	f2_local33(f2_local32, f2_local34["factions.isCoDCaster"], function(f35_arg0)
 		f2_local1:updateElementState(self, {
 			name = "model_validation",
@@ -460,7 +460,7 @@ LUI.createMenu.PositionDraft = function(f2_arg0, f2_arg1)
 	end, false)
 	f2_local32 = self
 	f2_local33 = self.subscribeToModel
-	f2_local34 = Engine[0x4DF5CFBC1771947](f2_arg0)
+	f2_local34 = Engine[@"getmodelforcontroller"](f2_arg0)
 	f2_local33(f2_local32, f2_local34["PositionDraft.stage"], function(f36_arg0)
 		f2_local1:updateElementState(self, {
 			name = "model_validation",
@@ -472,7 +472,7 @@ LUI.createMenu.PositionDraft = function(f2_arg0, f2_arg1)
 	end, false)
 	f2_local32 = self
 	f2_local33 = self.subscribeToModel
-	f2_local34 = Engine[0x4DF5CFBC1771947](f2_arg0)
+	f2_local34 = Engine[@"getmodelforcontroller"](f2_arg0)
 	f2_local33(f2_local32, f2_local34["PositionDraft.characterSelected"], function(f37_arg0)
 		f2_local1:updateElementState(self, {
 			name = "model_validation",
@@ -484,7 +484,7 @@ LUI.createMenu.PositionDraft = function(f2_arg0, f2_arg1)
 	end, false)
 	f2_local32 = self
 	f2_local33 = self.subscribeToModel
-	f2_local34 = Engine[0x4DF5CFBC1771947](f2_arg0)
+	f2_local34 = Engine[@"getmodelforcontroller"](f2_arg0)
 	f2_local33(f2_local32, f2_local34["PositionDraft.introPlayed"], function(f38_arg0)
 		f2_local1:updateElementState(self, {
 			name = "model_validation",
@@ -496,54 +496,54 @@ LUI.createMenu.PositionDraft = function(f2_arg0, f2_arg1)
 	end, false)
 	self:appendEventHandler("record_curr_focused_elem_id", function(f39_arg0, f39_arg1)
 		f39_arg1.menu = f39_arg1.menu or f2_local1
-		CoD.Menu.UpdateButtonShownState(f39_arg0, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f39_arg0, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	f2_local32 = self
 	f2_local33 = self.subscribeToModel
-	f2_local34 = Engine[0x4DF5CFBC1771947](f2_arg0)
+	f2_local34 = Engine[@"getmodelforcontroller"](f2_arg0)
 	f2_local33(f2_local32, f2_local34["PositionDraft.characterSelected"], function(f40_arg0, f40_arg1)
-		CoD.Menu.UpdateButtonShownState(f40_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f40_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	f2_local32 = self
 	f2_local33 = self.subscribeToModel
-	f2_local34 = Engine[0x4DF5CFBC1771947](f2_arg0)
+	f2_local34 = Engine[@"getmodelforcontroller"](f2_arg0)
 	f2_local33(f2_local32, f2_local34["PositionDraft.stage"], function(f41_arg0, f41_arg1)
-		CoD.Menu.UpdateButtonShownState(f41_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0x22361E23588705A])
-		CoD.Menu.UpdateButtonShownState(f41_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA])
-		CoD.Menu.UpdateButtonShownState(f41_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC])
-		CoD.Menu.UpdateButtonShownState(f41_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0x93AB4C84F113EE1])
+		CoD.Menu.UpdateButtonShownState(f41_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_start"])
+		CoD.Menu.UpdateButtonShownState(f41_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_rtrig"])
+		CoD.Menu.UpdateButtonShownState(f41_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_ltrig"])
+		CoD.Menu.UpdateButtonShownState(f41_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_back"])
 	end, false)
 	f2_local32 = self
 	f2_local33 = self.subscribeToModel
-	f2_local34 = Engine[0x8DF2E5447F384B9]()
+	f2_local34 = Engine[@"getglobalmodel"]()
 	f2_local33(f2_local32, f2_local34["lobbyRoot.lobbyNav"], function(f42_arg0, f42_arg1)
-		CoD.Menu.UpdateButtonShownState(f42_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA])
-		CoD.Menu.UpdateButtonShownState(f42_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0x22361E23588705A])
+		CoD.Menu.UpdateButtonShownState(f42_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_rtrig"])
+		CoD.Menu.UpdateButtonShownState(f42_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_start"])
 	end, false)
 	self:appendEventHandler("input_source_changed", function(f43_arg0, f43_arg1)
 		f43_arg1.menu = f43_arg1.menu or f2_local1
-		CoD.Menu.UpdateButtonShownState(f43_arg0, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA])
-		CoD.Menu.UpdateButtonShownState(f43_arg0, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0x22361E23588705A])
+		CoD.Menu.UpdateButtonShownState(f43_arg0, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_rtrig"])
+		CoD.Menu.UpdateButtonShownState(f43_arg0, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_start"])
 	end)
 	f2_local32 = self
 	f2_local33 = self.subscribeToModel
-	f2_local34 = Engine[0x4DF5CFBC1771947](f2_arg0)
+	f2_local34 = Engine[@"getmodelforcontroller"](f2_arg0)
 	f2_local33(f2_local32, f2_local34.LastInput, function(f44_arg0, f44_arg1)
-		CoD.Menu.UpdateButtonShownState(f44_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA])
-		CoD.Menu.UpdateButtonShownState(f44_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0x22361E23588705A])
+		CoD.Menu.UpdateButtonShownState(f44_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_rtrig"])
+		CoD.Menu.UpdateButtonShownState(f44_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_start"])
 	end, false)
 	f2_local32 = self
 	f2_local33 = self.subscribeToModel
-	f2_local34 = Engine[0x4DF5CFBC1771947](f2_arg0)
+	f2_local34 = Engine[@"getmodelforcontroller"](f2_arg0)
 	f2_local33(f2_local32, f2_local34["factions.isCoDCaster"], function(f45_arg0, f45_arg1)
-		CoD.Menu.UpdateButtonShownState(f45_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0x49A252B20B48936])
-		CoD.Menu.UpdateButtonShownState(f45_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0x493152B20AE4F58])
+		CoD.Menu.UpdateButtonShownState(f45_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_rb"])
+		CoD.Menu.UpdateButtonShownState(f45_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_lb"])
 	end, false)
 	f2_local32 = self
 	f2_local33 = self.subscribeToModel
-	f2_local34 = Engine[0x4DF5CFBC1771947](f2_arg0)
+	f2_local34 = Engine[@"getmodelforcontroller"](f2_arg0)
 	f2_local33(f2_local32, f2_local34.isInPrematchPeriod, function(f46_arg0, f46_arg1)
-		CoD.Menu.UpdateButtonShownState(f46_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0x93AB4C84F113EE1])
+		CoD.Menu.UpdateButtonShownState(f46_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_back"])
 	end, false)
 	self:registerEventHandler("menu_loaded", function(self, event)
 		local f47_local0 = nil
@@ -560,7 +560,7 @@ LUI.createMenu.PositionDraft = function(f2_arg0, f2_arg1)
 		end
 		return f47_local0
 	end)
-	f2_local1:AddButtonCallbackFunction(self, f2_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], "ESCAPE", function(element, menu, controller, model)
+	f2_local1:AddButtonCallbackFunction(self, f2_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], "ESCAPE", function(element, menu, controller, model)
 		if not PlayerReadiedUp(controller) and IsElementInAnyState(menu, "CharacterSelectedPC", "CharacterSelected") then
 			ChangeCharacter(self, element, controller, -1)
 			SetControllerModelValue(controller, "PositionDraft.characterSelected", false)
@@ -578,29 +578,29 @@ LUI.createMenu.PositionDraft = function(f2_arg0, f2_arg1)
 		end
 	end, function(element, menu, controller)
 		if not PlayerReadiedUp(controller) and IsElementInAnyState(menu, "CharacterSelectedPC", "CharacterSelected") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, "ESCAPE")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, "ESCAPE")
 			return true
 		elseif IsMenuInState(menu, "EditLoadout") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x503EA7AC6A9A9DB, nil, "ESCAPE")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"hash_3503EA7AC6A9A9DB", nil, "ESCAPE")
 			return true
 		else
 			return false
 		end
 	end, false)
-	f2_local1:AddButtonCallbackFunction(self, f2_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "MOUSE1", function(element, menu, controller, model)
+	f2_local1:AddButtonCallbackFunction(self, f2_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "MOUSE1", function(element, menu, controller, model)
 		if CoD.BaseUtility.DoesElementOrChildHaveFocus(self, "PositionDraftReadyButton") and CoD.BaseUtility.IsWidgetVisible(self.PositionDraftReadyButton) and CoD.ModelUtility.IsControllerModelValueTrue(controller, "PositionDraft.characterSelected") then
 			return true
 		else
 		end
 	end, function(element, menu, controller)
 		if CoD.BaseUtility.DoesElementOrChildHaveFocus(self, "PositionDraftReadyButton") and CoD.BaseUtility.IsWidgetVisible(self.PositionDraftReadyButton) and CoD.ModelUtility.IsControllerModelValueTrue(controller, "PositionDraft.characterSelected") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, Enum[0xBEBDBAEEB3ECCCA][0x2919C98A7A845F0] | 750 << Enum[0xBEBDBAEEB3ECCCA][0x76ADD225D738C93], "MOUSE1")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", Enum[@"luibuttonpromptflags"][@"hash_72919C98A7A845F0"] | 750 << Enum[@"luibuttonpromptflags"][@"hash_176ADD225D738C93"], "MOUSE1")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f2_local1:AddButtonCallbackFunction(self, f2_arg0, Enum[0x3DD78803F918E9D][0x22361E23588705A], nil, function(element, menu, controller, model)
+	f2_local1:AddButtonCallbackFunction(self, f2_arg0, Enum[@"luibutton"][@"lui_key_start"], nil, function(element, menu, controller, model)
 		if not CoD.ModelUtility.IsModelValueEqualTo(controller, "PositionDraft.stage", 6) and not IsPC() then
 			CoD.HUDUtility.OpenStartMenu(self, controller)
 			return true
@@ -611,16 +611,16 @@ LUI.createMenu.PositionDraft = function(f2_arg0, f2_arg1)
 		end
 	end, function(element, menu, controller)
 		if not CoD.ModelUtility.IsModelValueEqualTo(controller, "PositionDraft.stage", 6) and not IsPC() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x22361E23588705A], 0x0, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_start"], @"hash_0", nil, nil)
 			return false
 		elseif not CoD.ModelUtility.IsModelValueEqualTo(controller, "PositionDraft.stage", 6) and IsCustomLobby() and IsGamepad(controller) and IsPC() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x22361E23588705A], 0xE3B1996EF83F7ED, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_start"], @"hash_4E3B1996EF83F7ED", nil, nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f2_local1:AddButtonCallbackFunction(self, f2_arg0, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA], "ui_contextual_2", function(element, menu, controller, model)
+	f2_local1:AddButtonCallbackFunction(self, f2_arg0, Enum[@"luibutton"][@"lui_key_rtrig"], "ui_contextual_2", function(element, menu, controller, model)
 		if not CoD.ModelUtility.IsModelValueEqualTo(controller, "PositionDraft.stage", 6) and IsCustomLobby() and IsMouseOrKeyboard(controller) then
 			CoD.HUDUtility.OpenStartMenu(self, controller)
 			return true
@@ -628,13 +628,13 @@ LUI.createMenu.PositionDraft = function(f2_arg0, f2_arg1)
 		end
 	end, function(element, menu, controller)
 		if not CoD.ModelUtility.IsModelValueEqualTo(controller, "PositionDraft.stage", 6) and IsCustomLobby() and IsMouseOrKeyboard(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA], 0xE3B1996EF83F7ED, nil, "ui_contextual_2")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_rtrig"], @"hash_4E3B1996EF83F7ED", nil, "ui_contextual_2")
 			return true
 		else
 			return false
 		end
 	end, false)
-	f2_local1:AddButtonCallbackFunction(self, f2_arg0, Enum[0x3DD78803F918E9D][0x49A252B20B48936], "MOUSE2", function(element, menu, controller, model)
+	f2_local1:AddButtonCallbackFunction(self, f2_arg0, Enum[@"luibutton"][@"lui_key_rb"], "MOUSE2", function(element, menu, controller, model)
 		if IsCodCaster(controller) and not IsRepeatButtonPress(model) then
 			AdjustShoutcasterTeam(self, element, controller, 1)
 			return true
@@ -642,13 +642,13 @@ LUI.createMenu.PositionDraft = function(f2_arg0, f2_arg1)
 		end
 	end, function(element, menu, controller)
 		if IsCodCaster(controller) and not IsRepeatButtonPress(nil) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x49A252B20B48936], 0xF0DF87756796D4E, nil, "MOUSE2")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_rb"], @"menu/next", nil, "MOUSE2")
 			return true
 		else
 			return false
 		end
 	end, false)
-	f2_local1:AddButtonCallbackFunction(self, f2_arg0, Enum[0x3DD78803F918E9D][0x493152B20AE4F58], "MOUSE1", function(element, menu, controller, model)
+	f2_local1:AddButtonCallbackFunction(self, f2_arg0, Enum[@"luibutton"][@"lui_key_lb"], "MOUSE1", function(element, menu, controller, model)
 		if IsCodCaster(controller) and not IsRepeatButtonPress(model) then
 			AdjustShoutcasterTeam(self, element, controller, -1)
 			return true
@@ -656,13 +656,13 @@ LUI.createMenu.PositionDraft = function(f2_arg0, f2_arg1)
 		end
 	end, function(element, menu, controller)
 		if IsCodCaster(controller) and not IsRepeatButtonPress(nil) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x493152B20AE4F58], 0xAF729B503010BCA, nil, "MOUSE1")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_lb"], @"hash_7AF729B503010BCA", nil, "MOUSE1")
 			return true
 		else
 			return false
 		end
 	end, false)
-	f2_local1:AddButtonCallbackFunction(self, f2_arg0, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC], "F1", function(element, menu, controller, model)
+	f2_local1:AddButtonCallbackFunction(self, f2_arg0, Enum[@"luibutton"][@"lui_key_ltrig"], "F1", function(element, menu, controller, model)
 		if not IsRepeatButtonPress(model) and CoD.ModelUtility.IsModelValueLessThan(controller, "PositionDraft.stage", 6) and AlwaysFalse() then
 			CoD.StartMenuUtility.ShowClassSelectSlideout(menu, controller)
 			return true
@@ -670,13 +670,13 @@ LUI.createMenu.PositionDraft = function(f2_arg0, f2_arg1)
 		end
 	end, function(element, menu, controller)
 		if not IsRepeatButtonPress(nil) and CoD.ModelUtility.IsModelValueLessThan(controller, "PositionDraft.stage", 6) and AlwaysFalse() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC], 0x0, nil, "F1")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_ltrig"], @"hash_0", nil, "F1")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f2_local1:AddButtonCallbackFunction(self, f2_arg0, Enum[0x3DD78803F918E9D][0x93AB4C84F113EE1], "TAB", function(element, menu, controller, model)
+	f2_local1:AddButtonCallbackFunction(self, f2_arg0, Enum[@"luibutton"][@"lui_key_back"], "TAB", function(element, menu, controller, model)
 		if CoD.ModelUtility.IsModelValueEqualTo(controller, "isInPrematchPeriod", 1) and CoD.ModelUtility.IsModelValueLessThanOrEqualTo(controller, "PositionDraft.stage", 3) and IsGametypeTeambased() then
 			OpenOverlay(self, "PositionDraft_Teams", controller, nil)
 			return true
@@ -684,7 +684,7 @@ LUI.createMenu.PositionDraft = function(f2_arg0, f2_arg1)
 		end
 	end, function(element, menu, controller)
 		if CoD.ModelUtility.IsModelValueEqualTo(controller, "isInPrematchPeriod", 1) and CoD.ModelUtility.IsModelValueLessThanOrEqualTo(controller, "PositionDraft.stage", 3) and IsGametypeTeambased() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x93AB4C84F113EE1], 0x7B9BD9B1628B977, nil, "TAB")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_back"], @"menu/view_teams", nil, "TAB")
 			return true
 		else
 			return false
@@ -702,19 +702,19 @@ LUI.createMenu.PositionDraft = function(f2_arg0, f2_arg1)
 		if IsMenuInState(f2_local1, "Draft") then
 			CoD.FreeCursorUtility.GiveFocusToElementsDefaultFocus(f2_local1, self.Characters, controller)
 			CheckDefaultPCFocus(self.Characters, f2_local1, controller)
-			UpdateButtonPromptState(f2_local1, element, controller, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
-			UpdateButtonPromptState(f2_local1, element, controller, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A])
+			UpdateButtonPromptState(f2_local1, element, controller, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+			UpdateButtonPromptState(f2_local1, element, controller, Enum[@"luibutton"][@"lui_key_xbb_pscircle"])
 			ClearButtonsFlags(f2_local1, "MOUSE1", true)
 		elseif IsMenuInState(f2_local1, "CharacterSelected") then
 			CoD.FreeCursorUtility.GiveFocusToElementsDefaultFocus(f2_local1, self.ChangeClassButton, controller)
 			CheckDefaultPCFocus(self.ChangeClassButton, f2_local1, controller)
-			UpdateButtonPromptState(f2_local1, element, controller, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
-			UpdateButtonPromptState(f2_local1, element, controller, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A])
-			UpdateButtonPromptState(f2_local1, element, controller, Enum[0x3DD78803F918E9D][0x4D2505E19049444])
+			UpdateButtonPromptState(f2_local1, element, controller, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+			UpdateButtonPromptState(f2_local1, element, controller, Enum[@"luibutton"][@"lui_key_xbb_pscircle"])
+			UpdateButtonPromptState(f2_local1, element, controller, Enum[@"luibutton"][@"hash_64D2505E19049444"])
 		else
-			UpdateButtonPromptState(f2_local1, element, controller, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
-			UpdateButtonPromptState(f2_local1, element, controller, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A])
-			UpdateButtonPromptState(f2_local1, element, controller, Enum[0x3DD78803F918E9D][0x4D2505E19049444])
+			UpdateButtonPromptState(f2_local1, element, controller, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+			UpdateButtonPromptState(f2_local1, element, controller, Enum[@"luibutton"][@"lui_key_xbb_pscircle"])
+			UpdateButtonPromptState(f2_local1, element, controller, Enum[@"luibutton"][@"hash_64D2505E19049444"])
 			CoD.FreeCursorUtility.RetriggerCursorPosition(f2_local1, controller)
 		end
 	end)
@@ -805,7 +805,7 @@ CoD.PositionDraft.__resetProperties = function(f68_arg0)
 	f68_arg0.StatusText:setTopBottom(0.5, 0.5, 172, 220)
 	f68_arg0.StatusText:setRGB(1, 1, 1)
 	f68_arg0.StatusText:setAlpha(1)
-	f68_arg0.StatusText:setText(LocalizeToUpperString(0x2D67DCCB863C991))
+	f68_arg0.StatusText:setText(LocalizeToUpperString(@"menu/select_specialist"))
 	f68_arg0.StatusText:setLetterSpacing(14.7)
 	f68_arg0.BLACKTint:setAlpha(0)
 	f68_arg0.AutoDrafted:setAlpha(1)
@@ -992,7 +992,7 @@ CoD.PositionDraft.__clipsPerState = {
 			f72_arg0.clipFinished(f72_arg0.blurbackgroundSelectedClassPC)
 			local f72_local0 = function(f73_arg0)
 				local f73_local0 = function(f74_arg0)
-					f74_arg0:beginAnimation(199, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f74_arg0:beginAnimation(199, Enum[@"luitween"][@"luitween_ease_in"])
 					f74_arg0:setAlpha(1)
 					f74_arg0:registerEventHandler("transition_complete_keyframe", f72_arg0.clipFinished)
 				end
@@ -1005,7 +1005,7 @@ CoD.PositionDraft.__clipsPerState = {
 			f72_local0(f72_arg0.StatusTextBackground)
 			local f72_local1 = function(f75_arg0)
 				local f75_local0 = function(f76_arg0)
-					f76_arg0:beginAnimation(500, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f76_arg0:beginAnimation(500, Enum[@"luitween"][@"luitween_ease_in"])
 					f76_arg0:setAlpha(1)
 					f76_arg0:registerEventHandler("transition_complete_keyframe", f72_arg0.clipFinished)
 				end
@@ -1016,11 +1016,11 @@ CoD.PositionDraft.__clipsPerState = {
 			f72_arg0.StatusText:completeAnimation()
 			f72_arg0.StatusText:setRGB(0.4, 0.55, 0.22)
 			f72_arg0.StatusText:setAlpha(0)
-			f72_arg0.StatusText:setText(LocalizeToUpperString(0x8E58CC95DB34427))
+			f72_arg0.StatusText:setText(LocalizeToUpperString(@"hash_18E58CC95DB34427"))
 			f72_local1(f72_arg0.StatusText)
 			local f72_local2 = function(f77_arg0)
 				local f77_local0 = function(f78_arg0)
-					f78_arg0:beginAnimation(199, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f78_arg0:beginAnimation(199, Enum[@"luitween"][@"luitween_ease_in"])
 					f78_arg0:setAlpha(0.7)
 					f78_arg0:registerEventHandler("transition_complete_keyframe", f72_arg0.clipFinished)
 				end
@@ -1033,7 +1033,7 @@ CoD.PositionDraft.__clipsPerState = {
 			f72_local2(f72_arg0.CountdownTimerTintPanel)
 			local f72_local3 = function(f79_arg0)
 				local f79_local0 = function(f80_arg0)
-					f80_arg0:beginAnimation(500, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f80_arg0:beginAnimation(500, Enum[@"luitween"][@"luitween_ease_in"])
 					f80_arg0:setAlpha(0.9)
 					f80_arg0:registerEventHandler("transition_complete_keyframe", f72_arg0.clipFinished)
 				end
@@ -1105,7 +1105,7 @@ CoD.PositionDraft.__clipsPerState = {
 			f84_arg0.StatusText:completeAnimation()
 			f84_arg0.StatusText:setRGB(ColorSet.T8__GREEN.r, ColorSet.T8__GREEN.g, ColorSet.T8__GREEN.b)
 			f84_arg0.StatusText:setAlpha(1)
-			f84_arg0.StatusText:setText(LocalizeToUpperString(0x8E58CC95DB34427))
+			f84_arg0.StatusText:setText(LocalizeToUpperString(@"hash_18E58CC95DB34427"))
 			f84_arg0.clipFinished(f84_arg0.StatusText)
 			f84_arg0.CountdownTimerTintPanel:completeAnimation()
 			f84_arg0.CountdownTimerTintPanel:setAlpha(1)
@@ -1281,7 +1281,7 @@ CoD.PositionDraft.__clipsPerState = {
 			f100_arg0:setupElementClipCounter(11)
 			local f100_local0 = function(f101_arg0)
 				local f101_local0 = function(f102_arg0)
-					f102_arg0:beginAnimation(199, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f102_arg0:beginAnimation(199, Enum[@"luitween"][@"luitween_ease_in"])
 					f102_arg0:setAlpha(1)
 					f102_arg0:registerEventHandler("transition_complete_keyframe", f100_arg0.clipFinished)
 				end
@@ -1296,7 +1296,7 @@ CoD.PositionDraft.__clipsPerState = {
 			f100_local0(f100_arg0.StatusTextBackground)
 			local f100_local1 = function(f103_arg0)
 				local f103_local0 = function(f104_arg0)
-					f104_arg0:beginAnimation(500, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f104_arg0:beginAnimation(500, Enum[@"luitween"][@"luitween_ease_in"])
 					f104_arg0:setAlpha(1)
 					f104_arg0:registerEventHandler("transition_complete_keyframe", f100_arg0.clipFinished)
 				end
@@ -1308,11 +1308,11 @@ CoD.PositionDraft.__clipsPerState = {
 			f100_arg0.StatusText:setTopBottom(0.5, 0.5, 93, 141)
 			f100_arg0.StatusText:setRGB(0.4, 0.55, 0.22)
 			f100_arg0.StatusText:setAlpha(0)
-			f100_arg0.StatusText:setText(LocalizeToUpperString(0x8E58CC95DB34427))
+			f100_arg0.StatusText:setText(LocalizeToUpperString(@"hash_18E58CC95DB34427"))
 			f100_local1(f100_arg0.StatusText)
 			local f100_local2 = function(f105_arg0)
 				local f105_local0 = function(f106_arg0)
-					f106_arg0:beginAnimation(199, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f106_arg0:beginAnimation(199, Enum[@"luitween"][@"luitween_ease_in"])
 					f106_arg0:setAlpha(0.7)
 					f106_arg0:registerEventHandler("transition_complete_keyframe", f100_arg0.clipFinished)
 				end
@@ -1327,7 +1327,7 @@ CoD.PositionDraft.__clipsPerState = {
 			f100_local2(f100_arg0.CountdownTimerTintPanel)
 			local f100_local3 = function(f107_arg0)
 				local f107_local0 = function(f108_arg0)
-					f108_arg0:beginAnimation(500, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f108_arg0:beginAnimation(500, Enum[@"luitween"][@"luitween_ease_in"])
 					f108_arg0:setAlpha(0.9)
 					f108_arg0:registerEventHandler("transition_complete_keyframe", f100_arg0.clipFinished)
 				end
@@ -1389,7 +1389,7 @@ CoD.PositionDraft.__clipsPerState = {
 			f111_arg0.StatusText:setTopBottom(0.5, 0.5, 93, 141)
 			f111_arg0.StatusText:setRGB(ColorSet.T8__GREEN.r, ColorSet.T8__GREEN.g, ColorSet.T8__GREEN.b)
 			f111_arg0.StatusText:setAlpha(1)
-			f111_arg0.StatusText:setText(LocalizeToUpperString(0x8E58CC95DB34427))
+			f111_arg0.StatusText:setText(LocalizeToUpperString(@"hash_18E58CC95DB34427"))
 			f111_arg0.clipFinished(f111_arg0.StatusText)
 			f111_arg0.CountdownTimerTintPanel:completeAnimation()
 			f111_arg0.CountdownTimerTintPanel:setLeftRight(0.5, 0.5, -400, 400)
@@ -1461,7 +1461,7 @@ CoD.PositionDraft.__clipsPerState = {
 			end
 			f114_arg0.StatusText:beginAnimation(9)
 			f114_arg0.StatusText:setAlpha(0)
-			f114_arg0.StatusText:setText(LocalizeToUpperString(0x704768AE118E4C9))
+			f114_arg0.StatusText:setText(LocalizeToUpperString(@"hash_6704768AE118E4C9"))
 			f114_arg0.StatusText:registerEventHandler("interrupted_keyframe", f114_arg0.clipInterrupted)
 			f114_arg0.StatusText:registerEventHandler("transition_complete_keyframe", f114_local1)
 			f114_arg0.AutoDrafted:completeAnimation()
@@ -1763,7 +1763,7 @@ CoD.PositionDraft.__clipsPerState = {
 			f134_arg0.StatusText:completeAnimation()
 			f134_arg0.StatusText:setRGB(ColorSet.T8__GREEN.r, ColorSet.T8__GREEN.g, ColorSet.T8__GREEN.b)
 			f134_arg0.StatusText:setAlpha(0.8)
-			f134_arg0.StatusText:setText(LocalizeToUpperString(0x41793C9651E000F))
+			f134_arg0.StatusText:setText(LocalizeToUpperString(@"hash_241793C9651E000F"))
 			f134_arg0.StatusText:setLetterSpacing(14.7)
 			f134_local1(f134_arg0.StatusText)
 			local f134_local2 = function(f137_arg0)
@@ -1823,7 +1823,7 @@ CoD.PositionDraft.__clipsPerState = {
 			f139_arg0.StatusText:completeAnimation()
 			f139_arg0.StatusText:setRGB(ColorSet.T8__GREEN.r, ColorSet.T8__GREEN.g, ColorSet.T8__GREEN.b)
 			f139_arg0.StatusText:setAlpha(0.8)
-			f139_arg0.StatusText:setText(LocalizeToUpperString(0x41793C9651E000F))
+			f139_arg0.StatusText:setText(LocalizeToUpperString(@"hash_241793C9651E000F"))
 			f139_local1(f139_arg0.StatusText)
 			f139_arg0.PositionDraftReadyButton:completeAnimation()
 			f139_arg0.PositionDraftReadyButton:setAlpha(0)
@@ -1848,7 +1848,7 @@ CoD.PositionDraft.__clipsPerState = {
 			f142_arg0:setupElementClipCounter(10)
 			local f142_local0 = function(f143_arg0)
 				local f143_local0 = function(f144_arg0)
-					f144_arg0:beginAnimation(199, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f144_arg0:beginAnimation(199, Enum[@"luitween"][@"luitween_ease_in"])
 					f144_arg0:setAlpha(1)
 					f144_arg0:registerEventHandler("transition_complete_keyframe", f142_arg0.clipFinished)
 				end
@@ -1861,7 +1861,7 @@ CoD.PositionDraft.__clipsPerState = {
 			f142_local0(f142_arg0.StatusTextBackground)
 			local f142_local1 = function(f145_arg0)
 				local f145_local0 = function(f146_arg0)
-					f146_arg0:beginAnimation(500, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f146_arg0:beginAnimation(500, Enum[@"luitween"][@"luitween_ease_in"])
 					f146_arg0:setAlpha(1)
 					f146_arg0:registerEventHandler("transition_complete_keyframe", f142_arg0.clipFinished)
 				end
@@ -1872,11 +1872,11 @@ CoD.PositionDraft.__clipsPerState = {
 			f142_arg0.StatusText:completeAnimation()
 			f142_arg0.StatusText:setRGB(0.4, 0.55, 0.22)
 			f142_arg0.StatusText:setAlpha(0)
-			f142_arg0.StatusText:setText(LocalizeToUpperString(0x8E58CC95DB34427))
+			f142_arg0.StatusText:setText(LocalizeToUpperString(@"hash_18E58CC95DB34427"))
 			f142_local1(f142_arg0.StatusText)
 			local f142_local2 = function(f147_arg0)
 				local f147_local0 = function(f148_arg0)
-					f148_arg0:beginAnimation(199, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f148_arg0:beginAnimation(199, Enum[@"luitween"][@"luitween_ease_in"])
 					f148_arg0:setAlpha(0.7)
 					f148_arg0:registerEventHandler("transition_complete_keyframe", f142_arg0.clipFinished)
 				end
@@ -1889,7 +1889,7 @@ CoD.PositionDraft.__clipsPerState = {
 			f142_local2(f142_arg0.CountdownTimerTintPanel)
 			local f142_local3 = function(f149_arg0)
 				local f149_local0 = function(f150_arg0)
-					f150_arg0:beginAnimation(500, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f150_arg0:beginAnimation(500, Enum[@"luitween"][@"luitween_ease_in"])
 					f150_arg0:setAlpha(0.9)
 					f150_arg0:registerEventHandler("transition_complete_keyframe", f142_arg0.clipFinished)
 				end
@@ -1940,7 +1940,7 @@ CoD.PositionDraft.__clipsPerState = {
 			f153_arg0.StatusText:completeAnimation()
 			f153_arg0.StatusText:setRGB(ColorSet.T8__GREEN.r, ColorSet.T8__GREEN.g, ColorSet.T8__GREEN.b)
 			f153_arg0.StatusText:setAlpha(1)
-			f153_arg0.StatusText:setText(LocalizeToUpperString(0x8E58CC95DB34427))
+			f153_arg0.StatusText:setText(LocalizeToUpperString(@"hash_18E58CC95DB34427"))
 			f153_arg0.clipFinished(f153_arg0.StatusText)
 			f153_arg0.CountdownTimerTintPanel:completeAnimation()
 			f153_arg0.CountdownTimerTintPanel:setAlpha(1)

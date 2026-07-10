@@ -29,7 +29,7 @@ LUI.createMenu.DirectorCodCasterTeamIdentitySettings = function(f1_arg0, f1_arg1
 	})
 	local FEMenuLeftGraphics = FadeForStreamer
 	local GenericMenuFrame = FadeForStreamer.subscribeToModel
-	local TeamColorList = Engine[0x8DF2E5447F384B9]()
+	local TeamColorList = Engine[@"getglobalmodel"]()
 	GenericMenuFrame(FEMenuLeftGraphics, TeamColorList.hideWorldForStreamer, function(f3_arg0)
 		f1_local1:updateElementState(FadeForStreamer, {
 			name = "model_validation",
@@ -42,11 +42,11 @@ LUI.createMenu.DirectorCodCasterTeamIdentitySettings = function(f1_arg0, f1_arg1
 	self:addElement(FadeForStreamer)
 	self.FadeForStreamer = FadeForStreamer
 	GenericMenuFrame = CoD.GenericMenuFrame.new(f1_local1, f1_arg0, 0, 1, 0, 0, 0, 1, 0, 0)
-	GenericMenuFrame.CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(0x7A023700261F0B2))
+	GenericMenuFrame.CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(@"hash_77A023700261F0B2"))
 	GenericMenuFrame:subscribeToGlobalModel(f1_arg0, "LobbyRoot", "lobbyTitle", function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
-			GenericMenuFrame.CommonHeader.subtitle.subtitle:setText(Engine[0xF9F1239CFD921FE](f4_local0))
+			GenericMenuFrame.CommonHeader.subtitle.subtitle:setText(Engine[@"hash_4F9F1239CFD921FE"](f4_local0))
 		end
 	end)
 	self:addElement(GenericMenuFrame)
@@ -71,19 +71,19 @@ LUI.createMenu.DirectorCodCasterTeamIdentitySettings = function(f1_arg0, f1_arg1
 		end
 		return f6_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		SaveShoutcasterSettings(self, element, controller)
 		RefreshLobbyGameClient(self, controller)
 		GoBack(self, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 		return true
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 		return true
 	end, false)
 	GenericMenuFrame:setModel(self.buttonModel, f1_arg0)

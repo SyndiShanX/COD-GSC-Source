@@ -9,8 +9,8 @@ CoD.codcaster_playerPortraitName.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local PlayerListEntryPlayerName = LUI.UIText.new(0, 1, 0, 0, 0, 0, 0, 17)
 	PlayerListEntryPlayerName:setTTF("notosans_bold")
-	PlayerListEntryPlayerName:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	PlayerListEntryPlayerName:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	PlayerListEntryPlayerName:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	PlayerListEntryPlayerName:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	PlayerListEntryPlayerName:linkToElementModel(self, "playerName", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -53,7 +53,7 @@ CoD.codcaster_playerPortraitName.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	end)
 	local f1_local2 = self
 	local f1_local3 = self.subscribeToModel
-	local f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local3(f1_local2, f1_local4["deadSpectator.playerIndex"], function(f7_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -65,14 +65,14 @@ CoD.codcaster_playerPortraitName.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	end, false)
 	f1_local2 = self
 	f1_local3 = self.subscribeToModel
-	f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local3(f1_local2, f1_local4["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x198075B069840DC]], function(f8_arg0)
+	f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local3(f1_local2, f1_local4["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_game_ended"]], function(f8_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f8_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x198075B069840DC],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_game_ended"],
 		})
 	end, false)
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)

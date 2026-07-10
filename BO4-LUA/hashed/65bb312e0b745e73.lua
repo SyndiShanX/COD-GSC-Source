@@ -12,7 +12,7 @@ CoD.Tak5Reticle_Range.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local CenterCircle = LUI.UIImage.new(0.5, 0.5, -9, 9, 0.5, 0.5, -9, 9)
-	CenterCircle:setImage(RegisterImage(0xABF5E0C677E796C))
+	CenterCircle:setImage(RegisterImage(@"uie_ui_hud_tak5_reticle_center_dot"))
 	self:addElement(CenterCircle)
 	self.CenterCircle = CenterCircle
 	local Tak5ReticleBracket = CoD.Tak5Reticle_Bracket.new(f1_arg0, f1_arg1, 0, 0, 0, 800, 0.5, 0.5, -190, 190)
@@ -20,16 +20,16 @@ CoD.Tak5Reticle_Range.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	self.Tak5ReticleBracket = Tak5ReticleBracket
 	local Tak5ReticleBracketAdd = CoD.Tak5Reticle_Bracket.new(f1_arg0, f1_arg1, 0, 0, 0, 800, 0.5, 0.5, -191, 189)
 	Tak5ReticleBracketAdd:setAlpha(0)
-	Tak5ReticleBracketAdd:setRFTMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Tak5ReticleBracketAdd:setRFTMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Tak5ReticleBracketAdd)
 	self.Tak5ReticleBracketAdd = Tak5ReticleBracketAdd
 	local ReticlePointerSmall = LUI.UIImage.new(0, 0, 380, 420, 0, 0, 80, 120)
-	ReticlePointerSmall:setImage(RegisterImage(0x9738C49AE7BF8A2))
+	ReticlePointerSmall:setImage(RegisterImage(@"uie_ui_hud_tak5_reticle_center_indicator"))
 	self:addElement(ReticlePointerSmall)
 	self.ReticlePointerSmall = ReticlePointerSmall
 	local ReticleDarkCircle = LUI.UIImage.new(0, 0, 347, 453, 0, 0, 47, 153)
 	ReticleDarkCircle:setAlpha(0.5)
-	ReticleDarkCircle:setImage(RegisterImage(0xA3B9AFDDFDE91F6))
+	ReticleDarkCircle:setImage(RegisterImage(@"uie_ui_hud_tak5_reticle_dark_circle"))
 	self:addElement(ReticleDarkCircle)
 	self.ReticleDarkCircle = ReticleDarkCircle
 	local ReticleBoxLeft = CoD.Tak5ReticleBracketBoxes.new(f1_arg0, f1_arg1, 0, 0, 65, 111, 0, 0, 92, 108)
@@ -166,7 +166,7 @@ CoD.Tak5Reticle_Range.__clipsPerState = {
 			f6_local1(f6_arg0.Tak5ReticleBracket)
 			local f6_local2 = function(f9_arg0)
 				local f9_local0 = function(f10_arg0)
-					f10_arg0:beginAnimation(100, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f10_arg0:beginAnimation(100, Enum[@"luitween"][@"luitween_ease_both"])
 					f10_arg0:setScale(1, 1)
 					f10_arg0:registerEventHandler("transition_complete_keyframe", f6_arg0.clipFinished)
 				end
@@ -223,7 +223,7 @@ CoD.Tak5Reticle_Range.__clipsPerState = {
 			f6_arg0.ReticleBoxRight:setAlpha(0)
 			f6_local5(f6_arg0.ReticleBoxRight)
 			local f6_local6 = function(f18_arg0)
-				f18_arg0:beginAnimation(100, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f18_arg0:beginAnimation(100, Enum[@"luitween"][@"luitween_ease_in"])
 				f18_arg0:registerEventHandler("transition_complete_keyframe", f6_arg0.clipFinished)
 			end
 			f6_arg0.ReticleBotRuler:beginAnimation(100)
@@ -231,7 +231,7 @@ CoD.Tak5Reticle_Range.__clipsPerState = {
 			f6_arg0.ReticleBotRuler:registerEventHandler("interrupted_keyframe", f6_arg0.clipInterrupted)
 			f6_arg0.ReticleBotRuler:registerEventHandler("transition_complete_keyframe", f6_local6)
 			local f6_local7 = function(f19_arg0)
-				f19_arg0:beginAnimation(100, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f19_arg0:beginAnimation(100, Enum[@"luitween"][@"luitween_ease_in"])
 				f19_arg0:registerEventHandler("transition_complete_keyframe", f6_arg0.clipFinished)
 			end
 			f6_arg0.ReticleTopRuler:beginAnimation(100)
@@ -246,7 +246,7 @@ CoD.Tak5Reticle_Range.__clipsPerState = {
 			f20_arg0.CenterCircle:setAlpha(1)
 			f20_arg0.clipFinished(f20_arg0.CenterCircle)
 			local f20_local0 = function(f21_arg0)
-				f20_arg0.Tak5ReticleBracket:beginAnimation(100, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f20_arg0.Tak5ReticleBracket:beginAnimation(100, Enum[@"luitween"][@"luitween_ease_both"])
 				f20_arg0.Tak5ReticleBracket:setScale(0.2, 0.2)
 				f20_arg0.Tak5ReticleBracket:registerEventHandler("interrupted_keyframe", f20_arg0.clipInterrupted)
 				f20_arg0.Tak5ReticleBracket:registerEventHandler("transition_complete_keyframe", f20_arg0.clipFinished)
@@ -262,7 +262,7 @@ CoD.Tak5Reticle_Range.__clipsPerState = {
 					f23_arg0:setZoom(0)
 					f23_arg0:registerEventHandler("transition_complete_keyframe", f20_arg0.clipFinished)
 				end
-				f20_arg0.Tak5ReticleBracketAdd:beginAnimation(100, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f20_arg0.Tak5ReticleBracketAdd:beginAnimation(100, Enum[@"luitween"][@"luitween_ease_both"])
 				f20_arg0.Tak5ReticleBracketAdd:setAlpha(1)
 				f20_arg0.Tak5ReticleBracketAdd:setZoom(40)
 				f20_arg0.Tak5ReticleBracketAdd:setScale(0.2, 0.2)
@@ -373,7 +373,7 @@ CoD.Tak5Reticle_Range.__clipsPerState = {
 			f30_arg0.CenterCircle:setAlpha(1)
 			f30_arg0.clipFinished(f30_arg0.CenterCircle)
 			local f30_local0 = function(f31_arg0)
-				f30_arg0.Tak5ReticleBracket:beginAnimation(100, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f30_arg0.Tak5ReticleBracket:beginAnimation(100, Enum[@"luitween"][@"luitween_ease_both"])
 				f30_arg0.Tak5ReticleBracket:setScale(1, 1)
 				f30_arg0.Tak5ReticleBracket:registerEventHandler("interrupted_keyframe", f30_arg0.clipInterrupted)
 				f30_arg0.Tak5ReticleBracket:registerEventHandler("transition_complete_keyframe", f30_arg0.clipFinished)
@@ -389,7 +389,7 @@ CoD.Tak5Reticle_Range.__clipsPerState = {
 					f33_arg0:setZoom(0)
 					f33_arg0:registerEventHandler("transition_complete_keyframe", f30_arg0.clipFinished)
 				end
-				f30_arg0.Tak5ReticleBracketAdd:beginAnimation(100, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f30_arg0.Tak5ReticleBracketAdd:beginAnimation(100, Enum[@"luitween"][@"luitween_ease_both"])
 				f30_arg0.Tak5ReticleBracketAdd:setAlpha(1)
 				f30_arg0.Tak5ReticleBracketAdd:setZoom(-30)
 				f30_arg0.Tak5ReticleBracketAdd:setScale(1, 1)
@@ -436,7 +436,7 @@ CoD.Tak5Reticle_Range.__clipsPerState = {
 			f30_arg0.ReticleBoxRight:setAlpha(1)
 			f30_local4(f30_arg0.ReticleBoxRight)
 			local f30_local5 = function(f37_arg0)
-				f30_arg0.ReticleBotRuler:beginAnimation(100, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f30_arg0.ReticleBotRuler:beginAnimation(100, Enum[@"luitween"][@"luitween_ease_in"])
 				f30_arg0.ReticleBotRuler:setTopBottom(0, 0, 275, 293)
 				f30_arg0.ReticleBotRuler:setAlpha(0)
 				f30_arg0.ReticleBotRuler:setScale(1, 1)
@@ -449,7 +449,7 @@ CoD.Tak5Reticle_Range.__clipsPerState = {
 			f30_arg0.ReticleBotRuler:setScale(0.2, 0.2)
 			f30_local5(f30_arg0.ReticleBotRuler)
 			local f30_local6 = function(f38_arg0)
-				f30_arg0.ReticleTopRuler:beginAnimation(100, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f30_arg0.ReticleTopRuler:beginAnimation(100, Enum[@"luitween"][@"luitween_ease_in"])
 				f30_arg0.ReticleTopRuler:setTopBottom(0, 0, -92, -74)
 				f30_arg0.ReticleTopRuler:setAlpha(0)
 				f30_arg0.ReticleTopRuler:setScale(1, 1)

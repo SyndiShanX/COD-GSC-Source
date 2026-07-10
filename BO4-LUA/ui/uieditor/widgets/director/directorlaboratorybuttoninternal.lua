@@ -13,7 +13,7 @@ CoD.DirectorLaboratoryButtonInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local BlurBg = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	BlurBg:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	BlurBg:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	BlurBg:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(BlurBg)
 	self.BlurBg = BlurBg
@@ -35,12 +35,12 @@ CoD.DirectorLaboratoryButtonInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	self.DotTiledBacking = DotTiledBacking
 	local BlackMarketName = LUI.UIText.new(0.5, 0.5, -200, 200, 0.5, 0.5, 8, 32)
 	BlackMarketName:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
-	BlackMarketName:setText(LocalizeToUpperString(0x96D9A8F7540D6B6))
+	BlackMarketName:setText(LocalizeToUpperString(@"hash_96D9A8F7540D6B6"))
 	BlackMarketName:setTTF("ttmussels_demibold")
-	BlackMarketName:setMaterial(LUI.UIImage.GetCachedMaterial(0x71E049B161CD00A))
+	BlackMarketName:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_171E049B161CD00A"))
 	BlackMarketName:setLetterSpacing(3)
-	BlackMarketName:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	BlackMarketName:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	BlackMarketName:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	BlackMarketName:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(BlackMarketName)
 	self.BlackMarketName = BlackMarketName
 	local CommonButtonOutline = CoD.CommonButtonOutline.new(f1_arg0, f1_arg1, 0, 1, 0, 0, 0, 1, 1, -1)
@@ -50,14 +50,14 @@ CoD.DirectorLaboratoryButtonInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	self:addElement(SpecialEventBanner)
 	self.SpecialEventBanner = SpecialEventBanner
 	local StreamImageSmall = LUI.UIFixedAspectRatioImage.new(0, 0, 1, 97, 1, 1, -124, -6)
-	StreamImageSmall:setImage(RegisterImage(0x76C393335224D3F))
+	StreamImageSmall:setImage(RegisterImage(@"ui_icon_nebulium_medium"))
 	StreamImageSmall:setStretchedDimension(5)
 	self:addElement(StreamImageSmall)
 	self.StreamImageSmall = StreamImageSmall
 	local vialCount = LUI.UIText.new(0, 0, 70, 132, 1, 1, -28, -6)
 	vialCount:setTTF("ttmussels_demibold")
-	vialCount:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	vialCount:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	vialCount:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	vialCount:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	vialCount:subscribeToGlobalModel(f1_arg1, "LootStreamProgress", "plasma", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then

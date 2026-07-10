@@ -11,12 +11,12 @@ CoD.WeaponCACPersonalizationName.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	BaseName:setRGB(ColorSet.T8__DARK__GOLD.r, ColorSet.T8__DARK__GOLD.g, ColorSet.T8__DARK__GOLD.b)
 	BaseName:setTTF("ttmussels_regular")
 	BaseName:setLetterSpacing(12)
-	BaseName:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	BaseName:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	BaseName:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	BaseName:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	BaseName:linkToElementModel(self, "weaponItemIndex", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			BaseName:setText(LocalizeToUpperString(CoD.CACUtility.GetItemNameFromIndex(f1_arg0, Enum[0x6EB546760F890D2][0x569E84652131CD7], f2_local0)))
+			BaseName:setText(LocalizeToUpperString(CoD.CACUtility.GetItemNameFromIndex(f1_arg0, Enum[@"statindexoffset"][@"hash_6569E84652131CD7"], f2_local0)))
 		end
 	end)
 	self:addElement(BaseName)

@@ -14,7 +14,7 @@ CoD.CustomGames_OptionCategoryButton.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	local ButtonBG = LUI.UIImage.new(0, 0, 0, 240, 0, 0, 0, 110)
 	ButtonBG:setRGB(0.38, 0.38, 0.38)
 	ButtonBG:setAlpha(0.8)
-	ButtonBG:setImage(RegisterImage(0xE3211044E61E1BB))
+	ButtonBG:setImage(RegisterImage(@"uie_ui_menu_cac_button_bg_generic01"))
 	self:addElement(ButtonBG)
 	self.ButtonBG = ButtonBG
 	local Corner = CoD.StartMenuOptionsMainCorners.new(f1_arg0, f1_arg1, 0, 0.96, 0, 0, 0, 1, 0, 0)
@@ -26,12 +26,12 @@ CoD.CustomGames_OptionCategoryButton.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	CategoryName:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	CategoryName:setTTF("ttmussels_regular")
 	CategoryName:setLetterSpacing(2)
-	CategoryName:setAlignment(Engine[0x7F8853DC3581AA4](Enum[0x7A5123B654282D2][0x58C8A85F2048829]))
-	CategoryName:setAlignment(Engine[0x7F8853DC3581AA4](Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3]))
+	CategoryName:setAlignment(Engine[@"hash_67F8853DC3581AA4"](Enum[@"luialignment"][@"lui_alignment_left"]))
+	CategoryName:setAlignment(Engine[@"hash_67F8853DC3581AA4"](Enum[@"luialignment"][@"lui_alignment_top"]))
 	CategoryName:linkToElementModel(self, "groupName", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			CategoryName:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			CategoryName:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	self:addElement(CategoryName)
@@ -53,7 +53,7 @@ CoD.CustomGames_OptionCategoryButton.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	})
 	local PixelGrid = CustomLabel
 	local SelectionOverlay = CustomLabel.subscribeToModel
-	local FlyoutIndicator = Engine[0x8DF2E5447F384B9]()
+	local FlyoutIndicator = Engine[@"getglobalmodel"]()
 	SelectionOverlay(PixelGrid, FlyoutIndicator["GametypeSettings.Update"], function(f5_arg0)
 		f1_arg0:updateElementState(CustomLabel, {
 			name = "model_validation",
@@ -75,8 +75,8 @@ CoD.CustomGames_OptionCategoryButton.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	self.SelectionOverlay = SelectionOverlay
 	PixelGrid = LUI.UIImage.new(0, 0.96, 0, 0, -0.11, 1, 12, 0)
 	PixelGrid:setAlpha(0.08)
-	PixelGrid:setImage(RegisterImage(0x311E811A3183347))
-	PixelGrid:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	PixelGrid:setImage(RegisterImage(@"uie_ui_hud_notifications_pixelpattern"))
+	PixelGrid:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	PixelGrid:setShaderVector(0, 0, 0, 0, 0)
 	PixelGrid:setupNineSliceShader(128, 128)
 	self:addElement(PixelGrid)
@@ -98,7 +98,7 @@ CoD.CustomGames_OptionCategoryButton.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	})
 	local FrameSelected = FlyoutIndicator
 	local ItemFrameAdd = FlyoutIndicator.subscribeToModel
-	local ItemFrame = Engine[0x8DF2E5447F384B9]()
+	local ItemFrame = Engine[@"getglobalmodel"]()
 	ItemFrameAdd(FrameSelected, ItemFrame["GametypeSettings.Update"], function(f9_arg0)
 		f1_arg0:updateElementState(FlyoutIndicator, {
 			name = "model_validation",
@@ -117,24 +117,24 @@ CoD.CustomGames_OptionCategoryButton.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	self.FlyoutIndicator = FlyoutIndicator
 	ItemFrameAdd = LUI.UIImage.new(0, 0, -3.5, 243.5, 0, 0, -1, 111)
 	ItemFrameAdd:setAlpha(0)
-	ItemFrameAdd:setImage(RegisterImage(0xC2AE59F4FA74812))
-	ItemFrameAdd:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	ItemFrameAdd:setImage(RegisterImage(@"uie_ui_menu_store_element_frame"))
+	ItemFrameAdd:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	ItemFrameAdd:setShaderVector(0, 0, 0, 0, 0)
 	ItemFrameAdd:setupNineSliceShader(12, 164)
 	self:addElement(ItemFrameAdd)
 	self.ItemFrameAdd = ItemFrameAdd
 	FrameSelected = LUI.UIImage.new(0, 0, -3.5, 243.5, 0, 0, -3.5, 113.5)
 	FrameSelected:setAlpha(0)
-	FrameSelected:setImage(RegisterImage(0xCB07CCC28498CB2))
-	FrameSelected:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	FrameSelected:setImage(RegisterImage(@"uie_ui_menu_store_focus_frame"))
+	FrameSelected:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	FrameSelected:setShaderVector(0, 0, 0, 0, 0)
 	FrameSelected:setupNineSliceShader(8, 8)
 	self:addElement(FrameSelected)
 	self.FrameSelected = FrameSelected
 	ItemFrame = LUI.UIImage.new(0, 0, -3.5, 243.5, 0, 0, -1, 111)
 	ItemFrame:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
-	ItemFrame:setImage(RegisterImage(0xD0077E26B9C8D34))
-	ItemFrame:setMaterial(LUI.UIImage.GetCachedMaterial(0x44484DDFAF5C093))
+	ItemFrame:setImage(RegisterImage(@"uie_ui_menu_store_element_frame_gray"))
+	ItemFrame:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_normal"))
 	ItemFrame:setShaderVector(0, 0, 0, 0, 0)
 	ItemFrame:setupNineSliceShader(12, 164)
 	self:addElement(ItemFrame)
@@ -143,16 +143,16 @@ CoD.CustomGames_OptionCategoryButton.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	TopBar:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	TopBar:setAlpha(0.2)
 	TopBar:setZRot(-90)
-	TopBar:setImage(RegisterImage(0x42BCCF45B82FBED))
-	TopBar:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	TopBar:setImage(RegisterImage(@"uie_ui_menu_cac_primary_button_top_bar"))
+	TopBar:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(TopBar)
 	self.TopBar = TopBar
 	local TopBarFocus = LUI.UIImage.new(0, 0, -60, 60, 0.5, 0.5, -1, 1)
 	TopBarFocus:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	TopBarFocus:setAlpha(0)
 	TopBarFocus:setZRot(-90)
-	TopBarFocus:setImage(RegisterImage(0x7E8B272A3927DAB))
-	TopBarFocus:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	TopBarFocus:setImage(RegisterImage(@"uie_ui_menu_cac_primary_button_top_bar_focused"))
+	TopBarFocus:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(TopBarFocus)
 	self.TopBarFocus = TopBarFocus
 	self:mergeStateConditions({
@@ -177,7 +177,7 @@ CoD.CustomGames_OptionCategoryButton.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	})
 	local f1_local13 = self
 	local f1_local14 = self.subscribeToModel
-	local f1_local15 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local15 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local14(f1_local13, f1_local15.customGamesEdit, function(f14_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -213,7 +213,7 @@ CoD.CustomGames_OptionCategoryButton.__resetProperties = function(f15_arg0)
 	f15_arg0.ButtonBG:setAlpha(0.8)
 	f15_arg0.SelectionOverlay:setRGB(1, 1, 1)
 	f15_arg0.SelectionOverlay:setAlpha(0)
-	f15_arg0.SelectionOverlay:setMaterial(LUI.UIImage.GetCachedMaterial(0x6B34AA3F39208EF))
+	f15_arg0.SelectionOverlay:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_normal"))
 	f15_arg0.CategoryName:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	f15_arg0.CategoryName:setAlpha(1)
 	f15_arg0.ItemFrame:setAlpha(1)
@@ -427,7 +427,7 @@ CoD.CustomGames_OptionCategoryButton.__clipsPerState = {
 			f35_arg0.SelectionOverlay:completeAnimation()
 			f35_arg0.SelectionOverlay:setRGB(0.92, 0.89, 0.72)
 			f35_arg0.SelectionOverlay:setAlpha(0.08)
-			f35_arg0.SelectionOverlay:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+			f35_arg0.SelectionOverlay:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 			f35_arg0.clipFinished(f35_arg0.SelectionOverlay)
 			f35_arg0.PixelGrid:completeAnimation()
 			f35_arg0.PixelGrid:setAlpha(0.15)

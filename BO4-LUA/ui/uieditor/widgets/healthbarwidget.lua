@@ -8,8 +8,8 @@ CoD.HealthBarWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	self.soundSet = "default"
 	local HealthBackground = LUI.UIImage.new(0.5, 0.5, -76, 76, 0, 0, 0, 12)
 	HealthBackground:setRGB(0.37, 0.4, 0.44)
-	HealthBackground:setImage(RegisterImage(0x75CDE8BCCBD6F24))
-	HealthBackground:setMaterial(LUI.UIImage.GetCachedMaterial(0xBEEFD90021D3628))
+	HealthBackground:setImage(RegisterImage(@"hash_75CDE8BCCBD6F24"))
+	HealthBackground:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_5BEEFD90021D3628"))
 	HealthBackground:setShaderVector(0, 0, 0, 0, 0)
 	HealthBackground:setShaderVector(1, 4, 1, 0, 0)
 	HealthBackground:setShaderVector(2, 0, 1, 0, 1)
@@ -17,7 +17,7 @@ CoD.HealthBarWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	self:addElement(HealthBackground)
 	self.HealthBackground = HealthBackground
 	local WoundBar = LUI.UIImage.new(0.5, 0.5, -75, 75, 0.5, 0.5, -1, 1)
-	WoundBar:setMaterial(LUI.UIImage.GetCachedMaterial(0xE992BD5A540E2D))
+	WoundBar:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_delta_normal"))
 	WoundBar:setShaderVector(0, 0, 1, 0, 0)
 	WoundBar:setShaderVector(1, 0, 0, 0, 0)
 	WoundBar:setShaderVector(2, 0, 1, 0, 0)
@@ -27,8 +27,8 @@ CoD.HealthBarWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	self.WoundBar = WoundBar
 	local CleanseBarBG = LUI.UIImage.new(0.5, 0.5, -76, 76, -0.07, -0.07, 0.5, 13.5)
 	CleanseBarBG:setRGB(ColorSet.CleanseBar.r, ColorSet.CleanseBar.g, ColorSet.CleanseBar.b)
-	CleanseBarBG:setImage(RegisterImage(0x75961ABECF3E11A))
-	CleanseBarBG:setMaterial(LUI.UIImage.GetCachedMaterial(0x7E89392B94A41DE))
+	CleanseBarBG:setImage(RegisterImage(@"hash_475961ABECF3E11A"))
+	CleanseBarBG:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_17E89392B94A41DE"))
 	CleanseBarBG:setShaderVector(0, 0, 0, 0, 0)
 	CleanseBarBG:setShaderVector(1, 4, 1, 0, 0)
 	CleanseBarBG:setShaderVector(2, 0, 1, 0, 1)
@@ -37,8 +37,8 @@ CoD.HealthBarWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	self.CleanseBarBG = CleanseBarBG
 	local HealthFill = LUI.UIImage.new(0.5, 0.5, -76, 76, 0, 0, 0, 12)
 	HealthFill:setRGB(0.92, 0.92, 0.92)
-	HealthFill:setImage(RegisterImage(0x700B275CC09FEF2))
-	HealthFill:setMaterial(LUI.UIImage.GetCachedMaterial(0xBEEFD90021D3628))
+	HealthFill:setImage(RegisterImage(@"hash_5700B275CC09FEF2"))
+	HealthFill:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_5BEEFD90021D3628"))
 	HealthFill:setShaderVector(0, 0, 0, 0, 0)
 	HealthFill:setShaderVector(1, 4, 1, 0, 0)
 	HealthFill:setShaderVector(2, 0, 1, 0, 1)
@@ -47,8 +47,8 @@ CoD.HealthBarWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	self.HealthFill = HealthFill
 	local CleanseBar = LUI.UIImage.new(0.5, 0.5, -76, 76, 0, 0, 0, 12)
 	CleanseBar:setRGB(ColorSet.CleanseBar.r, ColorSet.CleanseBar.g, ColorSet.CleanseBar.b)
-	CleanseBar:setImage(RegisterImage(0x700B275CC09FEF2))
-	CleanseBar:setMaterial(LUI.UIImage.GetCachedMaterial(0x7E89392B94A41DE))
+	CleanseBar:setImage(RegisterImage(@"hash_5700B275CC09FEF2"))
+	CleanseBar:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_17E89392B94A41DE"))
 	CleanseBar:setShaderVector(0, 0, 0, 0, 0)
 	CleanseBar:setShaderVector(1, 4, 1, 0, 0)
 	CleanseBar:setShaderVector(2, 0, 1, 0, 1)

@@ -17,28 +17,28 @@ CoD.ControllerDependent_TextBoxLargeGamepad.new = function(f1_arg0, f1_arg1, f1_
 	local KBMText = nil
 	KBMText = LUI.UIText.new(0.5, 0.5, -46.5, 18.5, 0.5, 0.5, -9, 9)
 	KBMText:setAlpha(0)
-	KBMText:setText(Engine[0xF9F1239CFD921FE](0x93E719493E9E18F))
+	KBMText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	KBMText:setTTF("ttmussels_demibold")
 	KBMText:setLetterSpacing(-2)
-	KBMText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	KBMText:setAlignment(Enum[0x7A5123B654282D2][0x6ED4298C93DC5ED])
+	KBMText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	KBMText:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
 	self:addElement(KBMText)
 	self.KBMText = KBMText
 	local GamepadText = LUI.UIText.new(-0.2, 1.2, 0, 0, -0.2, 1.2, 0, 0)
-	GamepadText:setText(Engine[0xF9F1239CFD921FE](0x93E719493E9E18F))
+	GamepadText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	GamepadText:setTTF("default")
 	GamepadText:setLetterSpacing(-1)
-	GamepadText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	GamepadText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	GamepadText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	GamepadText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(GamepadText)
 	self.GamepadText = GamepadText
 	self:mergeStateConditions({
 		{
 			stateName = "Hidden",
 			condition = function(menu, element, event)
-				local f2_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2])
+				local f2_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_in_killcam"])
 				if not f2_local0 then
-					f2_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F])
+					f2_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_play_of_the_match"])
 				end
 				return f2_local0
 			end,
@@ -52,26 +52,26 @@ CoD.ControllerDependent_TextBoxLargeGamepad.new = function(f1_arg0, f1_arg1, f1_
 	})
 	local f1_local4 = self
 	local f1_local5 = self.subscribeToModel
-	local f1_local6 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local5(f1_local4, f1_local6["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2]], function(f4_arg0)
+	local f1_local6 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local5(f1_local4, f1_local6["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"]], function(f4_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f4_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"],
 		})
 	end, false)
 	f1_local4 = self
 	f1_local5 = self.subscribeToModel
-	f1_local6 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local5(f1_local4, f1_local6["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F]], function(f5_arg0)
+	f1_local6 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local5(f1_local4, f1_local6["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_play_of_the_match"]], function(f5_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f5_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_play_of_the_match"],
 		})
 	end, false)
 	self:appendEventHandler("input_source_changed", function(f6_arg0, f6_arg1)
@@ -80,7 +80,7 @@ CoD.ControllerDependent_TextBoxLargeGamepad.new = function(f1_arg0, f1_arg1, f1_
 	end)
 	f1_local4 = self
 	f1_local5 = self.subscribeToModel
-	f1_local6 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local6 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local5(f1_local4, f1_local6.LastInput, function(f7_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

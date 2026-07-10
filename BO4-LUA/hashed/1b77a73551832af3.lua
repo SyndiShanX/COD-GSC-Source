@@ -34,7 +34,7 @@ CoD.GameEndScore_WZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Blur = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	Blur:setAlpha(0)
-	Blur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	Blur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	Blur:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(Blur)
 	self.Blur = Blur
@@ -55,8 +55,8 @@ CoD.GameEndScore_WZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	Outcome:setAlpha(0)
 	Outcome:setTTF("ttmussels_demibold")
 	Outcome:setLetterSpacing(24)
-	Outcome:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Outcome:setAlignment(Enum[0x7A5123B654282D2][0x6ED4298C93DC5ED])
+	Outcome:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Outcome:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
 	Outcome:subscribeToGlobalModel(f1_arg1, "GameScore", "titleString", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -84,16 +84,16 @@ CoD.GameEndScore_WZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	DownNotOut:setRGB(0.92, 0.92, 0.92)
 	DownNotOut:setAlpha(0)
 	DownNotOut:setTTF("default")
-	DownNotOut:setMaterial(LUI.UIImage.GetCachedMaterial(0x90D57B1E92D39D7))
+	DownNotOut:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_90D57B1E92D39D7"))
 	DownNotOut:setShaderVector(0, 0.2, 0, 0, 0)
 	DownNotOut:setShaderVector(1, 0.2, 0, 0, 0)
 	DownNotOut:setShaderVector(2, 0, 0, 0, 1)
-	DownNotOut:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	DownNotOut:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	DownNotOut:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	DownNotOut:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	DownNotOut:subscribeToGlobalModel(f1_arg1, "HUDItems", "aliveTeammateCount", function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
-			DownNotOut:setText(Engine[0xF9F1239CFD921FE](CoD.GameEndScoreUtility.GetEliminatedString(f1_arg1, f4_local0)))
+			DownNotOut:setText(Engine[@"hash_4F9F1239CFD921FE"](CoD.GameEndScoreUtility.GetEliminatedString(f1_arg1, f4_local0)))
 		end
 	end)
 	self:addElement(DownNotOut)
@@ -131,27 +131,27 @@ CoD.GameEndScore_WZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 				local f6_local0 = CoD.ModelUtility.IsModelValueTrue(f1_arg1, "hudItems.playerSpawned")
 				if f6_local0 then
 					if
-						Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x845D93DFB1D76DA])
-						and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xB8E9B69F4B87954])
-						and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xD3ABF9A2753CE40])
-						and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x198075B069840DC])
-						and Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xADC477DDE486DD7])
-						and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x23CD9BAB9B9F4C8])
-						and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2])
-						and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x7B52A87BC9AA4C7])
-						and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x3AEEAA452536E6E])
-						and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xD298E43D0B6FEF2])
-						and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F])
-						and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04])
-						and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x1C630DB86D235A5])
+						Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_compass_visible"])
+						and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_demo_all_game_hud_hidden"])
+						and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_demo_camera_mode_moviecam"])
+						and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_game_ended"])
+						and Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_hud_visible"])
+						and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_in_guided_missile"])
+						and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_in_killcam"])
+						and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_in_remote_killstreak_static"])
+						and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_is_flash_banged"])
+						and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_is_scoped"])
+						and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_play_of_the_match"])
+						and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_scoreboard_open"])
+						and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_selecting_locational_killstreak"])
 					then
-						f6_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6])
+						f6_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_ui_active"])
 						if f6_local0 then
 						else
 							return f6_local0
 						end
 					end
-					f6_local0 = not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04])
+					f6_local0 = not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_scoreboard_open"])
 				end
 				return f6_local0
 			end,
@@ -165,7 +165,7 @@ CoD.GameEndScore_WZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	})
 	local SoundGameOverSlam = VoipContainerNoCompass
 	local ChallengeCoinSound = VoipContainerNoCompass.subscribeToModel
-	local DirectorQuitButtonContainer = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local DirectorQuitButtonContainer = Engine[@"getmodelforcontroller"](f1_arg1)
 	ChallengeCoinSound(SoundGameOverSlam, DirectorQuitButtonContainer["hudItems.playerSpawned"], function(f8_arg0)
 		f1_arg0:updateElementState(VoipContainerNoCompass, {
 			name = "model_validation",
@@ -177,170 +177,170 @@ CoD.GameEndScore_WZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	end, false)
 	SoundGameOverSlam = VoipContainerNoCompass
 	ChallengeCoinSound = VoipContainerNoCompass.subscribeToModel
-	DirectorQuitButtonContainer = Engine[0x4DF5CFBC1771947](f1_arg1)
-	ChallengeCoinSound(SoundGameOverSlam, DirectorQuitButtonContainer["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x845D93DFB1D76DA]], function(f9_arg0)
+	DirectorQuitButtonContainer = Engine[@"getmodelforcontroller"](f1_arg1)
+	ChallengeCoinSound(SoundGameOverSlam, DirectorQuitButtonContainer["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_compass_visible"]], function(f9_arg0)
 		f1_arg0:updateElementState(VoipContainerNoCompass, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f9_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x845D93DFB1D76DA],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_compass_visible"],
 		})
 	end, false)
 	SoundGameOverSlam = VoipContainerNoCompass
 	ChallengeCoinSound = VoipContainerNoCompass.subscribeToModel
-	DirectorQuitButtonContainer = Engine[0x4DF5CFBC1771947](f1_arg1)
-	ChallengeCoinSound(SoundGameOverSlam, DirectorQuitButtonContainer["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xB8E9B69F4B87954]], function(f10_arg0)
+	DirectorQuitButtonContainer = Engine[@"getmodelforcontroller"](f1_arg1)
+	ChallengeCoinSound(SoundGameOverSlam, DirectorQuitButtonContainer["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_demo_all_game_hud_hidden"]], function(f10_arg0)
 		f1_arg0:updateElementState(VoipContainerNoCompass, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f10_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xB8E9B69F4B87954],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_demo_all_game_hud_hidden"],
 		})
 	end, false)
 	SoundGameOverSlam = VoipContainerNoCompass
 	ChallengeCoinSound = VoipContainerNoCompass.subscribeToModel
-	DirectorQuitButtonContainer = Engine[0x4DF5CFBC1771947](f1_arg1)
-	ChallengeCoinSound(SoundGameOverSlam, DirectorQuitButtonContainer["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xD3ABF9A2753CE40]], function(f11_arg0)
+	DirectorQuitButtonContainer = Engine[@"getmodelforcontroller"](f1_arg1)
+	ChallengeCoinSound(SoundGameOverSlam, DirectorQuitButtonContainer["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_demo_camera_mode_moviecam"]], function(f11_arg0)
 		f1_arg0:updateElementState(VoipContainerNoCompass, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f11_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xD3ABF9A2753CE40],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_demo_camera_mode_moviecam"],
 		})
 	end, false)
 	SoundGameOverSlam = VoipContainerNoCompass
 	ChallengeCoinSound = VoipContainerNoCompass.subscribeToModel
-	DirectorQuitButtonContainer = Engine[0x4DF5CFBC1771947](f1_arg1)
-	ChallengeCoinSound(SoundGameOverSlam, DirectorQuitButtonContainer["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x198075B069840DC]], function(f12_arg0)
+	DirectorQuitButtonContainer = Engine[@"getmodelforcontroller"](f1_arg1)
+	ChallengeCoinSound(SoundGameOverSlam, DirectorQuitButtonContainer["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_game_ended"]], function(f12_arg0)
 		f1_arg0:updateElementState(VoipContainerNoCompass, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f12_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x198075B069840DC],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_game_ended"],
 		})
 	end, false)
 	SoundGameOverSlam = VoipContainerNoCompass
 	ChallengeCoinSound = VoipContainerNoCompass.subscribeToModel
-	DirectorQuitButtonContainer = Engine[0x4DF5CFBC1771947](f1_arg1)
-	ChallengeCoinSound(SoundGameOverSlam, DirectorQuitButtonContainer["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xADC477DDE486DD7]], function(f13_arg0)
+	DirectorQuitButtonContainer = Engine[@"getmodelforcontroller"](f1_arg1)
+	ChallengeCoinSound(SoundGameOverSlam, DirectorQuitButtonContainer["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_hud_visible"]], function(f13_arg0)
 		f1_arg0:updateElementState(VoipContainerNoCompass, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f13_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xADC477DDE486DD7],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_hud_visible"],
 		})
 	end, false)
 	SoundGameOverSlam = VoipContainerNoCompass
 	ChallengeCoinSound = VoipContainerNoCompass.subscribeToModel
-	DirectorQuitButtonContainer = Engine[0x4DF5CFBC1771947](f1_arg1)
-	ChallengeCoinSound(SoundGameOverSlam, DirectorQuitButtonContainer["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x23CD9BAB9B9F4C8]], function(f14_arg0)
+	DirectorQuitButtonContainer = Engine[@"getmodelforcontroller"](f1_arg1)
+	ChallengeCoinSound(SoundGameOverSlam, DirectorQuitButtonContainer["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_guided_missile"]], function(f14_arg0)
 		f1_arg0:updateElementState(VoipContainerNoCompass, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f14_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x23CD9BAB9B9F4C8],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_guided_missile"],
 		})
 	end, false)
 	SoundGameOverSlam = VoipContainerNoCompass
 	ChallengeCoinSound = VoipContainerNoCompass.subscribeToModel
-	DirectorQuitButtonContainer = Engine[0x4DF5CFBC1771947](f1_arg1)
-	ChallengeCoinSound(SoundGameOverSlam, DirectorQuitButtonContainer["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2]], function(f15_arg0)
+	DirectorQuitButtonContainer = Engine[@"getmodelforcontroller"](f1_arg1)
+	ChallengeCoinSound(SoundGameOverSlam, DirectorQuitButtonContainer["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"]], function(f15_arg0)
 		f1_arg0:updateElementState(VoipContainerNoCompass, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f15_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"],
 		})
 	end, false)
 	SoundGameOverSlam = VoipContainerNoCompass
 	ChallengeCoinSound = VoipContainerNoCompass.subscribeToModel
-	DirectorQuitButtonContainer = Engine[0x4DF5CFBC1771947](f1_arg1)
-	ChallengeCoinSound(SoundGameOverSlam, DirectorQuitButtonContainer["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x7B52A87BC9AA4C7]], function(f16_arg0)
+	DirectorQuitButtonContainer = Engine[@"getmodelforcontroller"](f1_arg1)
+	ChallengeCoinSound(SoundGameOverSlam, DirectorQuitButtonContainer["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_remote_killstreak_static"]], function(f16_arg0)
 		f1_arg0:updateElementState(VoipContainerNoCompass, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f16_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x7B52A87BC9AA4C7],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_remote_killstreak_static"],
 		})
 	end, false)
 	SoundGameOverSlam = VoipContainerNoCompass
 	ChallengeCoinSound = VoipContainerNoCompass.subscribeToModel
-	DirectorQuitButtonContainer = Engine[0x4DF5CFBC1771947](f1_arg1)
-	ChallengeCoinSound(SoundGameOverSlam, DirectorQuitButtonContainer["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x3AEEAA452536E6E]], function(f17_arg0)
+	DirectorQuitButtonContainer = Engine[@"getmodelforcontroller"](f1_arg1)
+	ChallengeCoinSound(SoundGameOverSlam, DirectorQuitButtonContainer["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_is_flash_banged"]], function(f17_arg0)
 		f1_arg0:updateElementState(VoipContainerNoCompass, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f17_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x3AEEAA452536E6E],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_is_flash_banged"],
 		})
 	end, false)
 	SoundGameOverSlam = VoipContainerNoCompass
 	ChallengeCoinSound = VoipContainerNoCompass.subscribeToModel
-	DirectorQuitButtonContainer = Engine[0x4DF5CFBC1771947](f1_arg1)
-	ChallengeCoinSound(SoundGameOverSlam, DirectorQuitButtonContainer["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xD298E43D0B6FEF2]], function(f18_arg0)
+	DirectorQuitButtonContainer = Engine[@"getmodelforcontroller"](f1_arg1)
+	ChallengeCoinSound(SoundGameOverSlam, DirectorQuitButtonContainer["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_is_scoped"]], function(f18_arg0)
 		f1_arg0:updateElementState(VoipContainerNoCompass, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f18_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xD298E43D0B6FEF2],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_is_scoped"],
 		})
 	end, false)
 	SoundGameOverSlam = VoipContainerNoCompass
 	ChallengeCoinSound = VoipContainerNoCompass.subscribeToModel
-	DirectorQuitButtonContainer = Engine[0x4DF5CFBC1771947](f1_arg1)
-	ChallengeCoinSound(SoundGameOverSlam, DirectorQuitButtonContainer["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F]], function(f19_arg0)
+	DirectorQuitButtonContainer = Engine[@"getmodelforcontroller"](f1_arg1)
+	ChallengeCoinSound(SoundGameOverSlam, DirectorQuitButtonContainer["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_play_of_the_match"]], function(f19_arg0)
 		f1_arg0:updateElementState(VoipContainerNoCompass, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f19_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_play_of_the_match"],
 		})
 	end, false)
 	SoundGameOverSlam = VoipContainerNoCompass
 	ChallengeCoinSound = VoipContainerNoCompass.subscribeToModel
-	DirectorQuitButtonContainer = Engine[0x4DF5CFBC1771947](f1_arg1)
-	ChallengeCoinSound(SoundGameOverSlam, DirectorQuitButtonContainer["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04]], function(f20_arg0)
+	DirectorQuitButtonContainer = Engine[@"getmodelforcontroller"](f1_arg1)
+	ChallengeCoinSound(SoundGameOverSlam, DirectorQuitButtonContainer["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]], function(f20_arg0)
 		f1_arg0:updateElementState(VoipContainerNoCompass, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f20_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"],
 		})
 	end, false)
 	SoundGameOverSlam = VoipContainerNoCompass
 	ChallengeCoinSound = VoipContainerNoCompass.subscribeToModel
-	DirectorQuitButtonContainer = Engine[0x4DF5CFBC1771947](f1_arg1)
-	ChallengeCoinSound(SoundGameOverSlam, DirectorQuitButtonContainer["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x1C630DB86D235A5]], function(f21_arg0)
+	DirectorQuitButtonContainer = Engine[@"getmodelforcontroller"](f1_arg1)
+	ChallengeCoinSound(SoundGameOverSlam, DirectorQuitButtonContainer["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_selecting_locational_killstreak"]], function(f21_arg0)
 		f1_arg0:updateElementState(VoipContainerNoCompass, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f21_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x1C630DB86D235A5],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_selecting_locational_killstreak"],
 		})
 	end, false)
 	SoundGameOverSlam = VoipContainerNoCompass
 	ChallengeCoinSound = VoipContainerNoCompass.subscribeToModel
-	DirectorQuitButtonContainer = Engine[0x4DF5CFBC1771947](f1_arg1)
-	ChallengeCoinSound(SoundGameOverSlam, DirectorQuitButtonContainer["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]], function(f22_arg0)
+	DirectorQuitButtonContainer = Engine[@"getmodelforcontroller"](f1_arg1)
+	ChallengeCoinSound(SoundGameOverSlam, DirectorQuitButtonContainer["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_ui_active"]], function(f22_arg0)
 		f1_arg0:updateElementState(VoipContainerNoCompass, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f22_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_ui_active"],
 		})
 	end, false)
 	self:addElement(VoipContainerNoCompass)
@@ -361,10 +361,10 @@ CoD.GameEndScore_WZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 		elseif element.super.gainFocus then
 			f23_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f23_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(DirectorQuitButtonContainer, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "MOUSE1", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(DirectorQuitButtonContainer, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "MOUSE1", function(element, menu, controller, model)
 		if IsPC() then
 			OpenPCQuit(self, menu, self, controller)
 			return true
@@ -372,7 +372,7 @@ CoD.GameEndScore_WZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 		end
 	end, function(element, menu, controller)
 		if IsPC() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "MOUSE1")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "MOUSE1")
 			return false
 		else
 			return false
@@ -396,16 +396,16 @@ CoD.GameEndScore_WZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	local ChallengeCoinFlare2 = LUI.UIImage.new(0.5, 0.5, 515, 965, 0.5, 0.5, -626, -176)
 	ChallengeCoinFlare2:setRGB(ColorSet.ParagonRank.r, ColorSet.ParagonRank.g, ColorSet.ParagonRank.b)
 	ChallengeCoinFlare2:setAlpha(0)
-	ChallengeCoinFlare2:setImage(RegisterImage(0xC4CCD81B90B0241))
-	ChallengeCoinFlare2:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	ChallengeCoinFlare2:setImage(RegisterImage(@"uie_ui_menu_aar_levelup_flare"))
+	ChallengeCoinFlare2:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	ChallengeCoinFlare2:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(ChallengeCoinFlare2)
 	self.ChallengeCoinFlare2 = ChallengeCoinFlare2
 	local ChallengeCoinFlare3 = LUI.UIImage.new(0.5, 0.5, 515, 965, 0.5, 0.5, -626, -176)
 	ChallengeCoinFlare3:setRGB(0.96, 0.31, 0.06)
 	ChallengeCoinFlare3:setAlpha(0)
-	ChallengeCoinFlare3:setImage(RegisterImage(0xC4CCD81B90B0241))
-	ChallengeCoinFlare3:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	ChallengeCoinFlare3:setImage(RegisterImage(@"uie_ui_menu_aar_levelup_flare"))
+	ChallengeCoinFlare3:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	ChallengeCoinFlare3:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(ChallengeCoinFlare3)
 	self.ChallengeCoinFlare3 = ChallengeCoinFlare3
@@ -420,7 +420,7 @@ CoD.GameEndScore_WZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	})
 	local KillerIdentity = ChallengeCoin2
 	local HeaderTextTeamRank = ChallengeCoin2.subscribeToModel
-	local MistakesWereMade = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local MistakesWereMade = Engine[@"getmodelforcontroller"](f1_arg1)
 	HeaderTextTeamRank(KillerIdentity, MistakesWereMade["gameScore.victory"], function(f27_arg0)
 		f1_arg0:updateElementState(ChallengeCoin2, {
 			name = "model_validation",
@@ -465,8 +465,8 @@ CoD.GameEndScore_WZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 		})
 	end)
 	KillerIdentity:setAlpha(0)
-	KillerIdentity.TextBoxShadow:setText(LocalizeToUpperString(0x384588C2F4949A5))
-	KillerIdentity.TextBox:setText(LocalizeToUpperString(0x384588C2F4949A5))
+	KillerIdentity.TextBoxShadow:setText(LocalizeToUpperString(@"hash_5384588C2F4949A5"))
+	KillerIdentity.TextBox:setText(LocalizeToUpperString(@"hash_5384588C2F4949A5"))
 	KillerIdentity:subscribeToGlobalModel(f1_arg1, "GameScore", nil, function(model)
 		KillerIdentity:setModel(model, f1_arg1)
 	end)
@@ -539,7 +539,7 @@ CoD.GameEndScore_WZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	KillerIdentity.Rank.__rank = function(f40_arg0)
 		local f40_local0 = f40_arg0:get()
 		if f40_local0 ~= nil then
-			KillerIdentity.Rank:setText(CoD.PrestigeUtility.LocalizeIfMaxRank(0x4008CE61FE52DCD, SetValueIfEmptyString("1", f40_local0)))
+			KillerIdentity.Rank:setText(CoD.PrestigeUtility.LocalizeIfMaxRank(@"hash_54008CE61FE52DCD", SetValueIfEmptyString("1", f40_local0)))
 		end
 	end
 	KillerIdentity:linkToElementModel(self, "attackerClientModel", true, function(model, f41_arg1)
@@ -600,8 +600,8 @@ CoD.GameEndScore_WZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 		})
 	end, false)
 	MistakesWereMade:setAlpha(0)
-	MistakesWereMade.TextBoxShadow:setText(LocalizeToUpperString(0x1838FDD5EA1D43A))
-	MistakesWereMade.TextBox:setText(LocalizeToUpperString(0x1838FDD5EA1D43A))
+	MistakesWereMade.TextBoxShadow:setText(LocalizeToUpperString(@"hash_51838FDD5EA1D43A"))
+	MistakesWereMade.TextBox:setText(LocalizeToUpperString(@"hash_51838FDD5EA1D43A"))
 	MistakesWereMade.AttackerEmblem.__emblem = function(f46_arg0)
 		local f46_local0 = f46_arg0:get()
 		if f46_local0 ~= nil then
@@ -671,7 +671,7 @@ CoD.GameEndScore_WZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	MistakesWereMade.Rank.__rank = function(f53_arg0)
 		local f53_local0 = f53_arg0:get()
 		if f53_local0 ~= nil then
-			MistakesWereMade.Rank:setText(CoD.PrestigeUtility.LocalizeIfMaxRank(0x4008CE61FE52DCD, SetValueIfEmptyString("1", f53_local0)))
+			MistakesWereMade.Rank:setText(CoD.PrestigeUtility.LocalizeIfMaxRank(@"hash_54008CE61FE52DCD", SetValueIfEmptyString("1", f53_local0)))
 		end
 	end
 	MistakesWereMade:subscribeToGlobalModel(f1_arg1, "PerController", "clientModel", function(model, f54_arg1)
@@ -729,8 +729,8 @@ CoD.GameEndScore_WZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 		})
 	end)
 	WeaponIdentity:setAlpha(0)
-	WeaponIdentity.HeaderTextBoxShadow:setText(LocalizeToUpperString(0x3406303D9338A94))
-	WeaponIdentity.HeaderTextBox:setText(LocalizeToUpperString(0x3406303D9338A94))
+	WeaponIdentity.HeaderTextBoxShadow:setText(LocalizeToUpperString(@"ui/with"))
+	WeaponIdentity.HeaderTextBox:setText(LocalizeToUpperString(@"ui/with"))
 	WeaponIdentity:subscribeToGlobalModel(f1_arg1, "GameScore", nil, function(model)
 		WeaponIdentity:setModel(model, f1_arg1)
 	end)
@@ -743,7 +743,7 @@ CoD.GameEndScore_WZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	WeaponIdentity:linkToElementModel(self, "weaponName", true, function(model)
 		local f61_local0 = model:get()
 		if f61_local0 ~= nil then
-			WeaponIdentity.WeaponName:setText(Engine[0xF9F1239CFD921FE](f61_local0))
+			WeaponIdentity.WeaponName:setText(Engine[@"hash_4F9F1239CFD921FE"](f61_local0))
 		end
 	end)
 	self:addElement(WeaponIdentity)
@@ -770,8 +770,8 @@ CoD.GameEndScore_WZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 		})
 	end, false)
 	MeansOfDeath:setAlpha(0)
-	MeansOfDeath.HeaderTextBoxShadow:setText(LocalizeToUpperString(0x5E4FF44BBB1ACC4))
-	MeansOfDeath.HeaderTextBox:setText(LocalizeToUpperString(0x5E4FF44BBB1ACC4))
+	MeansOfDeath.HeaderTextBoxShadow:setText(LocalizeToUpperString(@"hash_65E4FF44BBB1ACC4"))
+	MeansOfDeath.HeaderTextBox:setText(LocalizeToUpperString(@"hash_65E4FF44BBB1ACC4"))
 	MeansOfDeath:subscribeToGlobalModel(f1_arg1, "GameScore", "meansOfDeathIcon", function(model)
 		local f64_local0 = model:get()
 		if f64_local0 ~= nil then
@@ -781,7 +781,7 @@ CoD.GameEndScore_WZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	MeansOfDeath:subscribeToGlobalModel(f1_arg1, "GameScore", "meansOfDeathLabel", function(model)
 		local f65_local0 = model:get()
 		if f65_local0 ~= nil then
-			MeansOfDeath.WeaponName:setText(Engine[0xF9F1239CFD921FE](f65_local0))
+			MeansOfDeath.WeaponName:setText(Engine[@"hash_4F9F1239CFD921FE"](f65_local0))
 		end
 	end)
 	self:addElement(MeansOfDeath)
@@ -791,7 +791,7 @@ CoD.GameEndScore_WZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	self.WZAAR = WZAAR
 	DirectorStageIndicator = CoD.WarzoneDirectorStageIndicator.new(f1_arg0, f1_arg1, 0, 0, 76, 605, 1, 1, -188, -118)
 	DirectorStageIndicator:setAlpha(0)
-	DirectorStageIndicator.StageTitle:setText(LocalizeToUpperString(0x968D3B043BAE7EA))
+	DirectorStageIndicator.StageTitle:setText(LocalizeToUpperString(@"hash_2968D3B043BAE7EA"))
 	self:addElement(DirectorStageIndicator)
 	self.DirectorStageIndicator = DirectorStageIndicator
 	CrosshairOccluder = LUI.UIImage.new(0, 0, 1859, 1987, 0, 0, 243, 371)
@@ -804,7 +804,7 @@ CoD.GameEndScore_WZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 			condition = function(menu, element, event)
 				local f66_local0 = CoD.GameEndScoreUtility.ShowOutcomeTransition(f1_arg1)
 				if f66_local0 then
-					if not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2]) then
+					if not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_in_killcam"]) then
 						f66_local0 = IsPC()
 						if f66_local0 then
 							f66_local0 = not IsGametypeSettingsValue("platoonCount", 0)
@@ -821,7 +821,7 @@ CoD.GameEndScore_WZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 			condition = function(menu, element, event)
 				local f67_local0 = CoD.GameEndScoreUtility.ShowOutcomeTransition(f1_arg1)
 				if f67_local0 then
-					if not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2]) then
+					if not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_in_killcam"]) then
 						f67_local0 = IsPC()
 					else
 						f67_local0 = false
@@ -835,7 +835,7 @@ CoD.GameEndScore_WZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 			condition = function(menu, element, event)
 				local f68_local0 = CoD.GameEndScoreUtility.IsGameScoreCurrentState(f1_arg1, "defeat")
 				if f68_local0 then
-					if not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2]) then
+					if not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_in_killcam"]) then
 						f68_local0 = IsPC()
 						if f68_local0 then
 							f68_local0 = not IsGametypeSettingsValue("platoonCount", 0)
@@ -852,7 +852,7 @@ CoD.GameEndScore_WZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 			condition = function(menu, element, event)
 				local f69_local0 = CoD.GameEndScoreUtility.IsGameScoreCurrentState(f1_arg1, "defeat")
 				if f69_local0 then
-					if not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2]) then
+					if not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_in_killcam"]) then
 						f69_local0 = IsPC()
 					else
 						f69_local0 = false
@@ -866,7 +866,7 @@ CoD.GameEndScore_WZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 			condition = function(menu, element, event)
 				local f70_local0 = CoD.GameEndScoreUtility.IsGameScoreCurrentState(f1_arg1, "team_elimination")
 				if f70_local0 then
-					if not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2]) then
+					if not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_in_killcam"]) then
 						f70_local0 = IsPC()
 					else
 						f70_local0 = false
@@ -886,7 +886,7 @@ CoD.GameEndScore_WZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 			condition = function(menu, element, event)
 				local f72_local0 = CoD.GameEndScoreUtility.ShowOutcomeTransition(f1_arg1)
 				if f72_local0 then
-					if not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2]) then
+					if not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_in_killcam"]) then
 						f72_local0 = not IsGametypeSettingsValue("platoonCount", 0)
 					else
 						f72_local0 = false
@@ -898,7 +898,7 @@ CoD.GameEndScore_WZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 		{
 			stateName = "Victory",
 			condition = function(menu, element, event)
-				return CoD.GameEndScoreUtility.ShowOutcomeTransition(f1_arg1) and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2])
+				return CoD.GameEndScoreUtility.ShowOutcomeTransition(f1_arg1) and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_in_killcam"])
 			end,
 		},
 		{
@@ -906,7 +906,7 @@ CoD.GameEndScore_WZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 			condition = function(menu, element, event)
 				local f74_local0 = CoD.GameEndScoreUtility.IsGameScoreCurrentState(f1_arg1, "defeat")
 				if f74_local0 then
-					if not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2]) then
+					if not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_in_killcam"]) then
 						f74_local0 = not IsGametypeSettingsValue("platoonCount", 0)
 					else
 						f74_local0 = false
@@ -918,13 +918,13 @@ CoD.GameEndScore_WZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 		{
 			stateName = "Defeat",
 			condition = function(menu, element, event)
-				return CoD.GameEndScoreUtility.IsGameScoreCurrentState(f1_arg1, "defeat") and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2])
+				return CoD.GameEndScoreUtility.IsGameScoreCurrentState(f1_arg1, "defeat") and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_in_killcam"])
 			end,
 		},
 		{
 			stateName = "GameOver",
 			condition = function(menu, element, event)
-				return CoD.GameEndScoreUtility.IsGameScoreCurrentState(f1_arg1, "team_elimination") and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2])
+				return CoD.GameEndScoreUtility.IsGameScoreCurrentState(f1_arg1, "team_elimination") and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_in_killcam"])
 			end,
 		},
 		{
@@ -936,7 +936,7 @@ CoD.GameEndScore_WZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	})
 	local f1_local31 = self
 	local f1_local32 = self.subscribeToModel
-	local f1_local33 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local33 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local32(f1_local31, f1_local33["gameScore.currentState"], function(f78_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -948,164 +948,164 @@ CoD.GameEndScore_WZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	end, false)
 	f1_local31 = self
 	f1_local32 = self.subscribeToModel
-	f1_local33 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local32(f1_local31, f1_local33["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2]], function(f79_arg0)
+	f1_local33 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local32(f1_local31, f1_local33["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"]], function(f79_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f79_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"],
 		})
 	end, false)
 	f1_local31 = self
 	f1_local32 = self.subscribeToModel
-	f1_local33 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local32(f1_local31, f1_local33["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x1CDCB451655ABCF]], function(f80_arg0)
+	f1_local33 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local32(f1_local31, f1_local33["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_final_killcam"]], function(f80_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f80_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x1CDCB451655ABCF],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_final_killcam"],
 		})
 	end, false)
 	f1_local31 = self
 	f1_local32 = self.subscribeToModel
-	f1_local33 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local32(f1_local31, f1_local33["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F]], function(f81_arg0)
+	f1_local33 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local32(f1_local31, f1_local33["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_play_of_the_match"]], function(f81_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f81_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_play_of_the_match"],
 		})
 	end, false)
 	f1_local31 = self
 	f1_local32 = self.subscribeToModel
-	f1_local33 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local32(f1_local31, f1_local33["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04]], function(f82_arg0)
+	f1_local33 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local32(f1_local31, f1_local33["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]], function(f82_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f82_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"],
 		})
 	end, false)
 	f1_local31 = self
 	f1_local32 = self.subscribeToModel
-	f1_local33 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local33 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local32(f1_local31, f1_local33["gameScore.currentState"], function(f83_arg0, f83_arg1)
-		CoD.Menu.UpdateButtonShownState(f83_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f83_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(f83_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A])
-		CoD.Menu.UpdateButtonShownState(f83_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(f83_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f83_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(f83_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbb_pscircle"])
+		CoD.Menu.UpdateButtonShownState(f83_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_none"])
 	end, false)
 	f1_local31 = self
 	f1_local32 = self.subscribeToModel
-	f1_local33 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local33 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local32(f1_local31, f1_local33["hudItems.warzone.aarViewed"], function(f84_arg0, f84_arg1)
-		CoD.Menu.UpdateButtonShownState(f84_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f84_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f84_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f84_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	f1_local31 = self
 	f1_local32 = self.subscribeToModel
-	f1_local33 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local32(f1_local31, f1_local33["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2]], function(f85_arg0, f85_arg1)
-		CoD.Menu.UpdateButtonShownState(f85_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+	f1_local33 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local32(f1_local31, f1_local33["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"]], function(f85_arg0, f85_arg1)
+		CoD.Menu.UpdateButtonShownState(f85_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 	end, false)
 	f1_local31 = self
 	f1_local32 = self.subscribeToModel
-	f1_local33 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local32(f1_local31, f1_local33["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x198075B069840DC]], function(f86_arg0, f86_arg1)
-		CoD.Menu.UpdateButtonShownState(f86_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+	f1_local33 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local32(f1_local31, f1_local33["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_game_ended"]], function(f86_arg0, f86_arg1)
+		CoD.Menu.UpdateButtonShownState(f86_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 	end, false)
 	f1_local31 = self
 	f1_local32 = self.subscribeToModel
-	f1_local33 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local33 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local32(f1_local31, f1_local33["hudItems.warzone.aarVisible"], function(f87_arg0, f87_arg1)
-		CoD.Menu.UpdateButtonShownState(f87_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+		CoD.Menu.UpdateButtonShownState(f87_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 	end, false)
 	f1_local31 = self
 	f1_local32 = self.subscribeToModel
-	f1_local33 = Engine[0x8DF2E5447F384B9]()
+	f1_local33 = Engine[@"getglobalmodel"]()
 	f1_local32(f1_local31, f1_local33["lobbyRoot.privateClient.update"], function(f88_arg0, f88_arg1)
-		CoD.Menu.UpdateButtonShownState(f88_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
+		CoD.Menu.UpdateButtonShownState(f88_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
 	end, false)
 	f1_local31 = self
 	f1_local32 = self.subscribeToModel
-	f1_local33 = Engine[0x8DF2E5447F384B9]()
+	f1_local33 = Engine[@"getglobalmodel"]()
 	f1_local32(f1_local31, f1_local33["lobbyRoot.lobbyNav"], function(f89_arg0, f89_arg1)
-		CoD.Menu.UpdateButtonShownState(f89_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
+		CoD.Menu.UpdateButtonShownState(f89_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
 	end, false)
 	f1_local31 = self
 	f1_local32 = self.subscribeToModel
-	f1_local33 = Engine[0x8DF2E5447F384B9]()
+	f1_local33 = Engine[@"getglobalmodel"]()
 	f1_local32(f1_local31, f1_local33["lobbyRoot.publicLobby.stage"], function(f90_arg0, f90_arg1)
-		CoD.Menu.UpdateButtonShownState(f90_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
+		CoD.Menu.UpdateButtonShownState(f90_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
 	end, false)
 	f1_local31 = self
 	f1_local32 = self.subscribeToModel
 	f1_local33 = DataSources.HUDItems.getModel(f1_arg1)
 	f1_local32(f1_local31, f1_local33.aliveTeammateCount, function(f91_arg0, f91_arg1)
-		CoD.Menu.UpdateButtonShownState(f91_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f91_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	f1_local31 = self
 	f1_local32 = self.subscribeToModel
-	f1_local33 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local33 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local32(f1_local31, f1_local33["gameScore.hasPlayedDeathCam"], function(f92_arg0, f92_arg1)
-		CoD.Menu.UpdateButtonShownState(f92_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f92_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	f1_local31 = self
 	f1_local32 = self.subscribeToModel
-	f1_local33 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local32(f1_local31, f1_local33["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x534C7B2375D2D47]], function(f93_arg0, f93_arg1)
-		CoD.Menu.UpdateButtonShownState(f93_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+	f1_local33 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local32(f1_local31, f1_local33["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_player_dead"]], function(f93_arg0, f93_arg1)
+		CoD.Menu.UpdateButtonShownState(f93_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	f1_local31 = self
 	f1_local32 = self.subscribeToModel
-	f1_local33 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local32(f1_local31, f1_local33["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x6FFF566DCC09BBD]], function(f94_arg0, f94_arg1)
-		CoD.Menu.UpdateButtonShownState(f94_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+	f1_local33 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local32(f1_local31, f1_local33["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_spectating_client"]], function(f94_arg0, f94_arg1)
+		CoD.Menu.UpdateButtonShownState(f94_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	f1_local31 = self
 	f1_local32 = self.subscribeToModel
-	f1_local33 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local32(f1_local31, f1_local33["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x198075B069840DC]], function(f95_arg0, f95_arg1)
-		CoD.Menu.UpdateButtonShownState(f95_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+	f1_local33 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local32(f1_local31, f1_local33["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_game_ended"]], function(f95_arg0, f95_arg1)
+		CoD.Menu.UpdateButtonShownState(f95_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	f1_local31 = self
 	f1_local32 = self.subscribeToModel
-	f1_local33 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local32(f1_local31, f1_local33["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]], function(f96_arg0, f96_arg1)
-		CoD.Menu.UpdateButtonShownState(f96_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+	f1_local33 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local32(f1_local31, f1_local33["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_ui_active"]], function(f96_arg0, f96_arg1)
+		CoD.Menu.UpdateButtonShownState(f96_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	f1_local31 = self
 	f1_local32 = self.subscribeToModel
-	f1_local33 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local32(f1_local31, f1_local33["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x6FFF566DCC09BBD]], function(f97_arg0, f97_arg1)
-		CoD.Menu.UpdateButtonShownState(f97_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A])
-		CoD.Menu.UpdateButtonShownState(f97_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+	f1_local33 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local32(f1_local31, f1_local33["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_spectating_client"]], function(f97_arg0, f97_arg1)
+		CoD.Menu.UpdateButtonShownState(f97_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbb_pscircle"])
+		CoD.Menu.UpdateButtonShownState(f97_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_none"])
 	end, false)
 	self:appendEventHandler("input_source_changed", function(f98_arg0, f98_arg1)
 		f98_arg1.menu = f98_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f98_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(f98_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_none"])
 	end)
 	f1_local31 = self
 	f1_local32 = self.subscribeToModel
-	f1_local33 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local33 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local32(f1_local31, f1_local33.LastInput, function(f99_arg0, f99_arg1)
-		CoD.Menu.UpdateButtonShownState(f99_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(f99_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_none"])
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], nil, function(element, menu, controller, model)
-		if CoD.GameEndScoreUtility.CanShowWarzoneSpectate(controller) and not IsPC() and not IsDemoPlaying() and not IsVisibilityBitSet(controller, Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2]) and not IsVisibilityBitSet(controller, Enum[0x7F032C2EF103A1A][0x198075B069840DC]) then
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], nil, function(element, menu, controller, model)
+		if CoD.GameEndScoreUtility.CanShowWarzoneSpectate(controller) and not IsPC() and not IsDemoPlaying() and not IsVisibilityBitSet(controller, Enum[@"uivisibilitybit"][@"bit_in_killcam"]) and not IsVisibilityBitSet(controller, Enum[@"uivisibilitybit"][@"bit_game_ended"]) then
 			SetControllerModelValue(controller, "huditems.warzone.aarVisible", false)
 			HideWidget(self.WZAAR)
 			SendMenuResponse(self, "GameEndScore", "skip_deathcam", controller)
 			CoD.GameEndScoreUtility.ClearTransition(controller)
-			CoD.LobbyUtility.SetPlayerLocation(controller, Enum[0xC0AB9543C5C440B][0x9B478094C85DBBB])
+			CoD.LobbyUtility.SetPlayerLocation(controller, Enum[@"hash_C0AB9543C5C440B"][@"hash_49B478094C85DBBB"])
 			HideWidget(self.CrosshairOccluder)
 			return true
 		elseif not IsPC() and CoD.ModelUtility.IsModelValueTrue(controller, "hudItems.warzone.aarVisible") and IsOnlineGame() and IsBooleanDvarSet("ui_showWZAAR") and not CoD.HUDUtility.IsWZCustomGame(controller) and not CoD.GameEndScoreUtility.CanShowWarzoneSpectate(controller) then
@@ -1116,17 +1116,17 @@ CoD.GameEndScore_WZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 		else
 		end
 	end, function(element, menu, controller)
-		if CoD.GameEndScoreUtility.CanShowWarzoneSpectate(controller) and not IsPC() and not IsDemoPlaying() and not IsVisibilityBitSet(controller, Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2]) and not IsVisibilityBitSet(controller, Enum[0x7F032C2EF103A1A][0x198075B069840DC]) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0xF8E8360C903175B, nil, nil)
+		if CoD.GameEndScoreUtility.CanShowWarzoneSpectate(controller) and not IsPC() and not IsDemoPlaying() and not IsVisibilityBitSet(controller, Enum[@"uivisibilitybit"][@"bit_in_killcam"]) and not IsVisibilityBitSet(controller, Enum[@"uivisibilitybit"][@"bit_game_ended"]) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"ui/spectate", nil, nil)
 			return true
 		elseif not IsPC() and CoD.ModelUtility.IsModelValueTrue(controller, "hudItems.warzone.aarVisible") and IsOnlineGame() and IsBooleanDvarSet("ui_showWZAAR") and not CoD.HUDUtility.IsWZCustomGame(controller) and not CoD.GameEndScoreUtility.CanShowWarzoneSpectate(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0xB914F387B0A33A9, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"hash_4B914F387B0A33A9", nil, nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], nil, function(element, menu, controller, model)
 		if IsLobbyPrivateHost() and CoD.LobbyUtility.AllMembersCanRedeploy() and not CoD.DirectorUtility.IsMatchmakingInProgress(controller) and IsBooleanDvarSet("redeploy_enabled") and not CoD.HUDUtility.IsWZCustomGame(controller) then
 			CoD.GameEndScoreUtility.Redeploy(controller)
 			return true
@@ -1134,14 +1134,14 @@ CoD.GameEndScore_WZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 		end
 	end, function(element, menu, controller)
 		if IsLobbyPrivateHost() and CoD.LobbyUtility.AllMembersCanRedeploy() and not CoD.DirectorUtility.IsMatchmakingInProgress(controller) and IsBooleanDvarSet("redeploy_enabled") and not CoD.HUDUtility.IsWZCustomGame(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], 0x4BA12BF6BDEAE57, Enum[0xBEBDBAEEB3ECCCA][0x2919C98A7A845F0] | 400 << Enum[0xBEBDBAEEB3ECCCA][0x76ADD225D738C93], nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], @"wz/redeploy", Enum[@"luibuttonpromptflags"][@"hash_72919C98A7A845F0"] | 400 << Enum[@"luibuttonpromptflags"][@"hash_176ADD225D738C93"], nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
-		if CoD.GameEndScoreUtility.CanShowWarzoneKillcam(controller) and not IsPC() and not IsBooleanDvarSet("ui_killcamButtonAlt") and not IsVisibilityBitSet(controller, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) and not IsDemoPlaying() and not IsInDefaultState(element) and CoD.GameEndScoreUtility.HasViewedInGameReport(controller) then
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
+		if CoD.GameEndScoreUtility.CanShowWarzoneKillcam(controller) and not IsPC() and not IsBooleanDvarSet("ui_killcamButtonAlt") and not IsVisibilityBitSet(controller, Enum[@"uivisibilitybit"][@"bit_ui_active"]) and not IsDemoPlaying() and not IsInDefaultState(element) and CoD.GameEndScoreUtility.HasViewedInGameReport(controller) then
 			SendMenuResponse(self, "GameEndScore", "play_deathcam", controller)
 			SetControllerModelValue(controller, "gameScore.hasPlayedDeathCam", true)
 			PlaySoundAlias("uin_killcam_start")
@@ -1150,18 +1150,18 @@ CoD.GameEndScore_WZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 		else
 		end
 	end, function(element, menu, controller)
-		if CoD.GameEndScoreUtility.CanShowWarzoneKillcam(controller) and not IsPC() and not IsBooleanDvarSet("ui_killcamButtonAlt") and not IsVisibilityBitSet(controller, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]) and not IsDemoPlaying() and not IsInDefaultState(element) and CoD.GameEndScoreUtility.HasViewedInGameReport(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, nil)
+		if CoD.GameEndScoreUtility.CanShowWarzoneKillcam(controller) and not IsPC() and not IsBooleanDvarSet("ui_killcamButtonAlt") and not IsVisibilityBitSet(controller, Enum[@"uivisibilitybit"][@"bit_ui_active"]) and not IsDemoPlaying() and not IsInDefaultState(element) and CoD.GameEndScoreUtility.HasViewedInGameReport(controller) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, nil)
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], "ESCAPE", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], "ESCAPE", function(element, menu, controller, model)
 		if not IsPC() and not IsDemoPlaying() and CoD.BaseUtility.IsButtonHoldFinished(model) then
 			QuitGame_Raw(self, element, controller, "", menu)
 			return true
-		elseif IsPC() and not IsVisibilityBitSet(controller, Enum[0x7F032C2EF103A1A][0x6FFF566DCC09BBD]) and not IsDemoPlaying() and not CoD.BaseUtility.IsButtonHoldFinished(model) then
+		elseif IsPC() and not IsVisibilityBitSet(controller, Enum[@"uivisibilitybit"][@"bit_spectating_client"]) and not IsDemoPlaying() and not CoD.BaseUtility.IsButtonHoldFinished(model) then
 			QuitPCGame_MP(self, controller, true)
 			BlockGameFromKeyEvent(controller)
 			return true
@@ -1173,20 +1173,20 @@ CoD.GameEndScore_WZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 		end
 	end, function(element, menu, controller)
 		if not IsPC() and not IsDemoPlaying() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x8E2D4EADF54AA3, Enum[0xBEBDBAEEB3ECCCA][0x71B04FAC5BE0E35] | 1500 << Enum[0xBEBDBAEEB3ECCCA][0x76ADD225D738C93], "ESCAPE")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], 0x8E2D4EADF54AA3, Enum[@"luibuttonpromptflags"][@"hash_771B04FAC5BE0E35"] | 1500 << Enum[@"luibuttonpromptflags"][@"hash_176ADD225D738C93"], "ESCAPE")
 			return true
-		elseif IsPC() and not IsVisibilityBitSet(controller, Enum[0x7F032C2EF103A1A][0x6FFF566DCC09BBD]) and not IsDemoPlaying() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x0, nil, "ESCAPE")
+		elseif IsPC() and not IsVisibilityBitSet(controller, Enum[@"uivisibilitybit"][@"bit_spectating_client"]) and not IsDemoPlaying() then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"hash_0", nil, "ESCAPE")
 			return false
 		elseif IsPC() and not CoD.GameEndScoreUtility.IsGameScoreCurrentState(controller, "") and not IsDemoPlaying() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x0, nil, "ESCAPE")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"hash_0", nil, "ESCAPE")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "ui_contextual_2", function(element, menu, controller, model)
-		if IsPC() and not IsVisibilityBitSet(controller, Enum[0x7F032C2EF103A1A][0x6FFF566DCC09BBD]) and not IsDemoPlaying() and IsMouseOrKeyboard(controller) then
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_none"], "ui_contextual_2", function(element, menu, controller, model)
+		if IsPC() and not IsVisibilityBitSet(controller, Enum[@"uivisibilitybit"][@"bit_spectating_client"]) and not IsDemoPlaying() and IsMouseOrKeyboard(controller) then
 			QuitPCGame_MP(self, controller, true)
 			BlockGameFromKeyEvent(controller)
 			return true
@@ -1197,11 +1197,11 @@ CoD.GameEndScore_WZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 		else
 		end
 	end, function(element, menu, controller)
-		if IsPC() and not IsVisibilityBitSet(controller, Enum[0x7F032C2EF103A1A][0x6FFF566DCC09BBD]) and not IsDemoPlaying() and IsMouseOrKeyboard(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "ui_contextual_2")
+		if IsPC() and not IsVisibilityBitSet(controller, Enum[@"uivisibilitybit"][@"bit_spectating_client"]) and not IsDemoPlaying() and IsMouseOrKeyboard(controller) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "ui_contextual_2")
 			return false
 		elseif IsPC() and not CoD.GameEndScoreUtility.IsGameScoreCurrentState(controller, "") and not IsDemoPlaying() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "ui_contextual_2")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "ui_contextual_2")
 			return false
 		else
 			return false
@@ -1456,7 +1456,7 @@ CoD.GameEndScore_WZ.__clipsPerState = {
 			f116_local1(f116_arg0.FooterContainerFrontendRight)
 			local f116_local2 = function(f121_arg0)
 				local f121_local0 = function(f122_arg0)
-					f122_arg0:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f122_arg0:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 					f122_arg0:setAlpha(1)
 					f122_arg0:registerEventHandler("transition_complete_keyframe", f116_arg0.clipFinished)
 				end
@@ -1506,22 +1506,22 @@ CoD.GameEndScore_WZ.__clipsPerState = {
 									f130_arg0:setAlpha(0)
 									f130_arg0:registerEventHandler("transition_complete_keyframe", f130_local0)
 								end
-								f129_arg0:beginAnimation(40, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+								f129_arg0:beginAnimation(40, Enum[@"luitween"][@"luitween_ease_out"])
 								f129_arg0:setTopBottom(0.5, 0.5, -441, -361)
 								f129_arg0:setAlpha(1)
 								f129_arg0:registerEventHandler("transition_complete_keyframe", f129_local0)
 							end
-							f128_arg0:beginAnimation(49, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+							f128_arg0:beginAnimation(49, Enum[@"luitween"][@"luitween_ease_out"])
 							f128_arg0:setTopBottom(0.5, 0.5, -431, -351)
 							f128_arg0:setAlpha(0.95)
 							f128_arg0:registerEventHandler("transition_complete_keyframe", f128_local0)
 						end
-						f127_arg0:beginAnimation(59, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+						f127_arg0:beginAnimation(59, Enum[@"luitween"][@"luitween_ease_out"])
 						f127_arg0:setTopBottom(0.5, 0.5, -441, -361)
 						f127_arg0:setAlpha(0.75)
 						f127_arg0:registerEventHandler("transition_complete_keyframe", f127_local0)
 					end
-					f126_arg0:beginAnimation(120, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f126_arg0:beginAnimation(120, Enum[@"luitween"][@"luitween_ease_out"])
 					f126_arg0:setTopBottom(0.5, 0.5, -421, -341)
 					f126_arg0:setAlpha(0.44)
 					f126_arg0:registerEventHandler("transition_complete_keyframe", f126_local0)
@@ -1582,20 +1582,20 @@ CoD.GameEndScore_WZ.__clipsPerState = {
 					local f141_local0 = function(f142_arg0)
 						local f142_local0 = function(f143_arg0)
 							local f143_local0 = function(f144_arg0)
-								f144_arg0:beginAnimation(29, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+								f144_arg0:beginAnimation(29, Enum[@"luitween"][@"luitween_ease_out"])
 								f144_arg0:setScale(10, 10)
 								f144_arg0:registerEventHandler("transition_complete_keyframe", f116_arg0.clipFinished)
 							end
-							f143_arg0:beginAnimation(519, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+							f143_arg0:beginAnimation(519, Enum[@"luitween"][@"luitween_ease_out"])
 							f143_arg0:setAlpha(0)
 							f143_arg0:setScale(9.97, 9.97)
 							f143_arg0:registerEventHandler("transition_complete_keyframe", f143_local0)
 						end
-						f142_arg0:beginAnimation(70, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+						f142_arg0:beginAnimation(70, Enum[@"luitween"][@"luitween_ease_out"])
 						f142_arg0:setScale(3.57, 3.57)
 						f142_arg0:registerEventHandler("transition_complete_keyframe", f142_local0)
 					end
-					f141_arg0:beginAnimation(149, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f141_arg0:beginAnimation(149, Enum[@"luitween"][@"luitween_ease_out"])
 					f141_arg0:setAlpha(1)
 					f141_arg0:setScale(2.75, 2.75)
 					f141_arg0:registerEventHandler("transition_complete_keyframe", f141_local0)
@@ -1642,19 +1642,19 @@ CoD.GameEndScore_WZ.__clipsPerState = {
 					local f151_local0 = function(f152_arg0)
 						local f152_local0 = function(f153_arg0)
 							local f153_local0 = function(f154_arg0)
-								f154_arg0:beginAnimation(50, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+								f154_arg0:beginAnimation(50, Enum[@"luitween"][@"luitween_ease_out"])
 								f154_arg0:setScale(1, 1)
 								f154_arg0:registerEventHandler("transition_complete_keyframe", f116_arg0.clipFinished)
 							end
-							f153_arg0:beginAnimation(39, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+							f153_arg0:beginAnimation(39, Enum[@"luitween"][@"luitween_ease_out"])
 							f153_arg0:setScale(1.2, 1.2)
 							f153_arg0:registerEventHandler("transition_complete_keyframe", f153_local0)
 						end
-						f152_arg0:beginAnimation(100, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+						f152_arg0:beginAnimation(100, Enum[@"luitween"][@"luitween_ease_out"])
 						f152_arg0:setScale(0.75, 0.75)
 						f152_arg0:registerEventHandler("transition_complete_keyframe", f152_local0)
 					end
-					f151_arg0:beginAnimation(149, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f151_arg0:beginAnimation(149, Enum[@"luitween"][@"luitween_ease_out"])
 					f151_arg0:setAlpha(1)
 					f151_arg0:setScale(3.95, 3.95)
 					f151_arg0:registerEventHandler("transition_complete_keyframe", f151_local0)
@@ -1756,7 +1756,7 @@ CoD.GameEndScore_WZ.__clipsPerState = {
 			f159_local1(f159_arg0.FooterContainerFrontendRight)
 			local f159_local2 = function(f164_arg0)
 				local f164_local0 = function(f165_arg0)
-					f165_arg0:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f165_arg0:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 					f165_arg0:setAlpha(1)
 					f165_arg0:registerEventHandler("transition_complete_keyframe", f159_arg0.clipFinished)
 				end
@@ -1806,22 +1806,22 @@ CoD.GameEndScore_WZ.__clipsPerState = {
 									f173_arg0:setAlpha(0)
 									f173_arg0:registerEventHandler("transition_complete_keyframe", f173_local0)
 								end
-								f172_arg0:beginAnimation(40, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+								f172_arg0:beginAnimation(40, Enum[@"luitween"][@"luitween_ease_out"])
 								f172_arg0:setTopBottom(0.5, 0.5, -441, -361)
 								f172_arg0:setAlpha(1)
 								f172_arg0:registerEventHandler("transition_complete_keyframe", f172_local0)
 							end
-							f171_arg0:beginAnimation(49, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+							f171_arg0:beginAnimation(49, Enum[@"luitween"][@"luitween_ease_out"])
 							f171_arg0:setTopBottom(0.5, 0.5, -431, -351)
 							f171_arg0:setAlpha(0.95)
 							f171_arg0:registerEventHandler("transition_complete_keyframe", f171_local0)
 						end
-						f170_arg0:beginAnimation(59, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+						f170_arg0:beginAnimation(59, Enum[@"luitween"][@"luitween_ease_out"])
 						f170_arg0:setTopBottom(0.5, 0.5, -441, -361)
 						f170_arg0:setAlpha(0.75)
 						f170_arg0:registerEventHandler("transition_complete_keyframe", f170_local0)
 					end
-					f169_arg0:beginAnimation(120, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f169_arg0:beginAnimation(120, Enum[@"luitween"][@"luitween_ease_out"])
 					f169_arg0:setTopBottom(0.5, 0.5, -421, -341)
 					f169_arg0:setAlpha(0.44)
 					f169_arg0:registerEventHandler("transition_complete_keyframe", f169_local0)
@@ -1882,20 +1882,20 @@ CoD.GameEndScore_WZ.__clipsPerState = {
 					local f184_local0 = function(f185_arg0)
 						local f185_local0 = function(f186_arg0)
 							local f186_local0 = function(f187_arg0)
-								f187_arg0:beginAnimation(29, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+								f187_arg0:beginAnimation(29, Enum[@"luitween"][@"luitween_ease_out"])
 								f187_arg0:setScale(10, 10)
 								f187_arg0:registerEventHandler("transition_complete_keyframe", f159_arg0.clipFinished)
 							end
-							f186_arg0:beginAnimation(519, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+							f186_arg0:beginAnimation(519, Enum[@"luitween"][@"luitween_ease_out"])
 							f186_arg0:setAlpha(0)
 							f186_arg0:setScale(9.97, 9.97)
 							f186_arg0:registerEventHandler("transition_complete_keyframe", f186_local0)
 						end
-						f185_arg0:beginAnimation(70, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+						f185_arg0:beginAnimation(70, Enum[@"luitween"][@"luitween_ease_out"])
 						f185_arg0:setScale(3.57, 3.57)
 						f185_arg0:registerEventHandler("transition_complete_keyframe", f185_local0)
 					end
-					f184_arg0:beginAnimation(149, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f184_arg0:beginAnimation(149, Enum[@"luitween"][@"luitween_ease_out"])
 					f184_arg0:setAlpha(1)
 					f184_arg0:setScale(2.75, 2.75)
 					f184_arg0:registerEventHandler("transition_complete_keyframe", f184_local0)
@@ -1942,19 +1942,19 @@ CoD.GameEndScore_WZ.__clipsPerState = {
 					local f194_local0 = function(f195_arg0)
 						local f195_local0 = function(f196_arg0)
 							local f196_local0 = function(f197_arg0)
-								f197_arg0:beginAnimation(50, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+								f197_arg0:beginAnimation(50, Enum[@"luitween"][@"luitween_ease_out"])
 								f197_arg0:setScale(1, 1)
 								f197_arg0:registerEventHandler("transition_complete_keyframe", f159_arg0.clipFinished)
 							end
-							f196_arg0:beginAnimation(39, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+							f196_arg0:beginAnimation(39, Enum[@"luitween"][@"luitween_ease_out"])
 							f196_arg0:setScale(1.2, 1.2)
 							f196_arg0:registerEventHandler("transition_complete_keyframe", f196_local0)
 						end
-						f195_arg0:beginAnimation(100, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+						f195_arg0:beginAnimation(100, Enum[@"luitween"][@"luitween_ease_out"])
 						f195_arg0:setScale(0.75, 0.75)
 						f195_arg0:registerEventHandler("transition_complete_keyframe", f195_local0)
 					end
-					f194_arg0:beginAnimation(149, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f194_arg0:beginAnimation(149, Enum[@"luitween"][@"luitween_ease_out"])
 					f194_arg0:setAlpha(1)
 					f194_arg0:setScale(3.95, 3.95)
 					f194_arg0:registerEventHandler("transition_complete_keyframe", f194_local0)
@@ -2044,7 +2044,7 @@ CoD.GameEndScore_WZ.__clipsPerState = {
 			f202_local1(f202_arg0.FooterContainerFrontendRight)
 			local f202_local2 = function(f207_arg0)
 				local f207_local0 = function(f208_arg0)
-					f208_arg0:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f208_arg0:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 					f208_arg0:setAlpha(1)
 					f208_arg0:registerEventHandler("transition_complete_keyframe", f202_arg0.clipFinished)
 				end
@@ -2234,7 +2234,7 @@ CoD.GameEndScore_WZ.__clipsPerState = {
 			f229_local1(f229_arg0.FooterContainerFrontendRight)
 			local f229_local2 = function(f234_arg0)
 				local f234_local0 = function(f235_arg0)
-					f235_arg0:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f235_arg0:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 					f235_arg0:setAlpha(1)
 					f235_arg0:registerEventHandler("transition_complete_keyframe", f229_arg0.clipFinished)
 				end
@@ -2437,7 +2437,7 @@ CoD.GameEndScore_WZ.__clipsPerState = {
 			f256_local2(f256_arg0.FooterContainerFrontendRight)
 			local f256_local3 = function(f262_arg0)
 				local f262_local0 = function(f263_arg0)
-					f263_arg0:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f263_arg0:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 					f263_arg0:setAlpha(1)
 					f263_arg0:registerEventHandler("transition_complete_keyframe", f256_arg0.clipFinished)
 				end
@@ -2670,7 +2670,7 @@ CoD.GameEndScore_WZ.__clipsPerState = {
 			f284_local3(f284_arg0.FooterContainerFrontendRight)
 			local f284_local4 = function(f292_arg0)
 				local f292_local0 = function(f293_arg0)
-					f293_arg0:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f293_arg0:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 					f293_arg0:setAlpha(1)
 					f293_arg0:registerEventHandler("transition_complete_keyframe", f284_arg0.clipFinished)
 				end
@@ -2943,7 +2943,7 @@ CoD.GameEndScore_WZ.__clipsPerState = {
 			f327_local1(f327_arg0.FooterContainerFrontendRight)
 			local f327_local2 = function(f332_arg0)
 				local f332_local0 = function(f333_arg0)
-					f333_arg0:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f333_arg0:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 					f333_arg0:setAlpha(1)
 					f333_arg0:registerEventHandler("transition_complete_keyframe", f327_arg0.clipFinished)
 				end
@@ -2993,22 +2993,22 @@ CoD.GameEndScore_WZ.__clipsPerState = {
 									f341_arg0:setAlpha(0)
 									f341_arg0:registerEventHandler("transition_complete_keyframe", f341_local0)
 								end
-								f340_arg0:beginAnimation(40, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+								f340_arg0:beginAnimation(40, Enum[@"luitween"][@"luitween_ease_out"])
 								f340_arg0:setTopBottom(0.5, 0.5, -441, -361)
 								f340_arg0:setAlpha(1)
 								f340_arg0:registerEventHandler("transition_complete_keyframe", f340_local0)
 							end
-							f339_arg0:beginAnimation(49, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+							f339_arg0:beginAnimation(49, Enum[@"luitween"][@"luitween_ease_out"])
 							f339_arg0:setTopBottom(0.5, 0.5, -431, -351)
 							f339_arg0:setAlpha(0.95)
 							f339_arg0:registerEventHandler("transition_complete_keyframe", f339_local0)
 						end
-						f338_arg0:beginAnimation(59, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+						f338_arg0:beginAnimation(59, Enum[@"luitween"][@"luitween_ease_out"])
 						f338_arg0:setTopBottom(0.5, 0.5, -441, -361)
 						f338_arg0:setAlpha(0.75)
 						f338_arg0:registerEventHandler("transition_complete_keyframe", f338_local0)
 					end
-					f337_arg0:beginAnimation(120, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f337_arg0:beginAnimation(120, Enum[@"luitween"][@"luitween_ease_out"])
 					f337_arg0:setTopBottom(0.5, 0.5, -421, -341)
 					f337_arg0:setAlpha(0.44)
 					f337_arg0:registerEventHandler("transition_complete_keyframe", f337_local0)
@@ -3069,20 +3069,20 @@ CoD.GameEndScore_WZ.__clipsPerState = {
 					local f352_local0 = function(f353_arg0)
 						local f353_local0 = function(f354_arg0)
 							local f354_local0 = function(f355_arg0)
-								f355_arg0:beginAnimation(29, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+								f355_arg0:beginAnimation(29, Enum[@"luitween"][@"luitween_ease_out"])
 								f355_arg0:setScale(10, 10)
 								f355_arg0:registerEventHandler("transition_complete_keyframe", f327_arg0.clipFinished)
 							end
-							f354_arg0:beginAnimation(519, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+							f354_arg0:beginAnimation(519, Enum[@"luitween"][@"luitween_ease_out"])
 							f354_arg0:setAlpha(0)
 							f354_arg0:setScale(9.97, 9.97)
 							f354_arg0:registerEventHandler("transition_complete_keyframe", f354_local0)
 						end
-						f353_arg0:beginAnimation(70, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+						f353_arg0:beginAnimation(70, Enum[@"luitween"][@"luitween_ease_out"])
 						f353_arg0:setScale(3.57, 3.57)
 						f353_arg0:registerEventHandler("transition_complete_keyframe", f353_local0)
 					end
-					f352_arg0:beginAnimation(149, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f352_arg0:beginAnimation(149, Enum[@"luitween"][@"luitween_ease_out"])
 					f352_arg0:setAlpha(1)
 					f352_arg0:setScale(2.75, 2.75)
 					f352_arg0:registerEventHandler("transition_complete_keyframe", f352_local0)
@@ -3129,19 +3129,19 @@ CoD.GameEndScore_WZ.__clipsPerState = {
 					local f362_local0 = function(f363_arg0)
 						local f363_local0 = function(f364_arg0)
 							local f364_local0 = function(f365_arg0)
-								f365_arg0:beginAnimation(50, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+								f365_arg0:beginAnimation(50, Enum[@"luitween"][@"luitween_ease_out"])
 								f365_arg0:setScale(1, 1)
 								f365_arg0:registerEventHandler("transition_complete_keyframe", f327_arg0.clipFinished)
 							end
-							f364_arg0:beginAnimation(39, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+							f364_arg0:beginAnimation(39, Enum[@"luitween"][@"luitween_ease_out"])
 							f364_arg0:setScale(1.2, 1.2)
 							f364_arg0:registerEventHandler("transition_complete_keyframe", f364_local0)
 						end
-						f363_arg0:beginAnimation(100, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+						f363_arg0:beginAnimation(100, Enum[@"luitween"][@"luitween_ease_out"])
 						f363_arg0:setScale(0.75, 0.75)
 						f363_arg0:registerEventHandler("transition_complete_keyframe", f363_local0)
 					end
-					f362_arg0:beginAnimation(149, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f362_arg0:beginAnimation(149, Enum[@"luitween"][@"luitween_ease_out"])
 					f362_arg0:setAlpha(1)
 					f362_arg0:setScale(3.95, 3.95)
 					f362_arg0:registerEventHandler("transition_complete_keyframe", f362_local0)
@@ -3247,7 +3247,7 @@ CoD.GameEndScore_WZ.__clipsPerState = {
 			f371_local1(f371_arg0.FooterContainerFrontendRight)
 			local f371_local2 = function(f376_arg0)
 				local f376_local0 = function(f377_arg0)
-					f377_arg0:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f377_arg0:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 					f377_arg0:setAlpha(1)
 					f377_arg0:registerEventHandler("transition_complete_keyframe", f371_arg0.clipFinished)
 				end
@@ -3297,22 +3297,22 @@ CoD.GameEndScore_WZ.__clipsPerState = {
 									f385_arg0:setAlpha(0)
 									f385_arg0:registerEventHandler("transition_complete_keyframe", f385_local0)
 								end
-								f384_arg0:beginAnimation(40, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+								f384_arg0:beginAnimation(40, Enum[@"luitween"][@"luitween_ease_out"])
 								f384_arg0:setTopBottom(0.5, 0.5, -441, -361)
 								f384_arg0:setAlpha(1)
 								f384_arg0:registerEventHandler("transition_complete_keyframe", f384_local0)
 							end
-							f383_arg0:beginAnimation(49, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+							f383_arg0:beginAnimation(49, Enum[@"luitween"][@"luitween_ease_out"])
 							f383_arg0:setTopBottom(0.5, 0.5, -431, -351)
 							f383_arg0:setAlpha(0.95)
 							f383_arg0:registerEventHandler("transition_complete_keyframe", f383_local0)
 						end
-						f382_arg0:beginAnimation(59, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+						f382_arg0:beginAnimation(59, Enum[@"luitween"][@"luitween_ease_out"])
 						f382_arg0:setTopBottom(0.5, 0.5, -441, -361)
 						f382_arg0:setAlpha(0.75)
 						f382_arg0:registerEventHandler("transition_complete_keyframe", f382_local0)
 					end
-					f381_arg0:beginAnimation(120, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f381_arg0:beginAnimation(120, Enum[@"luitween"][@"luitween_ease_out"])
 					f381_arg0:setTopBottom(0.5, 0.5, -421, -341)
 					f381_arg0:setAlpha(0.44)
 					f381_arg0:registerEventHandler("transition_complete_keyframe", f381_local0)
@@ -3373,20 +3373,20 @@ CoD.GameEndScore_WZ.__clipsPerState = {
 					local f396_local0 = function(f397_arg0)
 						local f397_local0 = function(f398_arg0)
 							local f398_local0 = function(f399_arg0)
-								f399_arg0:beginAnimation(29, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+								f399_arg0:beginAnimation(29, Enum[@"luitween"][@"luitween_ease_out"])
 								f399_arg0:setScale(10, 10)
 								f399_arg0:registerEventHandler("transition_complete_keyframe", f371_arg0.clipFinished)
 							end
-							f398_arg0:beginAnimation(519, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+							f398_arg0:beginAnimation(519, Enum[@"luitween"][@"luitween_ease_out"])
 							f398_arg0:setAlpha(0)
 							f398_arg0:setScale(9.97, 9.97)
 							f398_arg0:registerEventHandler("transition_complete_keyframe", f398_local0)
 						end
-						f397_arg0:beginAnimation(70, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+						f397_arg0:beginAnimation(70, Enum[@"luitween"][@"luitween_ease_out"])
 						f397_arg0:setScale(3.57, 3.57)
 						f397_arg0:registerEventHandler("transition_complete_keyframe", f397_local0)
 					end
-					f396_arg0:beginAnimation(149, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f396_arg0:beginAnimation(149, Enum[@"luitween"][@"luitween_ease_out"])
 					f396_arg0:setAlpha(1)
 					f396_arg0:setScale(2.75, 2.75)
 					f396_arg0:registerEventHandler("transition_complete_keyframe", f396_local0)
@@ -3433,19 +3433,19 @@ CoD.GameEndScore_WZ.__clipsPerState = {
 					local f406_local0 = function(f407_arg0)
 						local f407_local0 = function(f408_arg0)
 							local f408_local0 = function(f409_arg0)
-								f409_arg0:beginAnimation(50, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+								f409_arg0:beginAnimation(50, Enum[@"luitween"][@"luitween_ease_out"])
 								f409_arg0:setScale(1, 1)
 								f409_arg0:registerEventHandler("transition_complete_keyframe", f371_arg0.clipFinished)
 							end
-							f408_arg0:beginAnimation(39, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+							f408_arg0:beginAnimation(39, Enum[@"luitween"][@"luitween_ease_out"])
 							f408_arg0:setScale(1.2, 1.2)
 							f408_arg0:registerEventHandler("transition_complete_keyframe", f408_local0)
 						end
-						f407_arg0:beginAnimation(100, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+						f407_arg0:beginAnimation(100, Enum[@"luitween"][@"luitween_ease_out"])
 						f407_arg0:setScale(0.75, 0.75)
 						f407_arg0:registerEventHandler("transition_complete_keyframe", f407_local0)
 					end
-					f406_arg0:beginAnimation(149, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f406_arg0:beginAnimation(149, Enum[@"luitween"][@"luitween_ease_out"])
 					f406_arg0:setAlpha(1)
 					f406_arg0:setScale(3.95, 3.95)
 					f406_arg0:registerEventHandler("transition_complete_keyframe", f406_local0)
@@ -3539,7 +3539,7 @@ CoD.GameEndScore_WZ.__clipsPerState = {
 			f415_local1(f415_arg0.FooterContainerFrontendRight)
 			local f415_local2 = function(f420_arg0)
 				local f420_local0 = function(f421_arg0)
-					f421_arg0:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f421_arg0:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 					f421_arg0:setAlpha(1)
 					f421_arg0:registerEventHandler("transition_complete_keyframe", f415_arg0.clipFinished)
 				end
@@ -3733,7 +3733,7 @@ CoD.GameEndScore_WZ.__clipsPerState = {
 			f443_local1(f443_arg0.FooterContainerFrontendRight)
 			local f443_local2 = function(f448_arg0)
 				local f448_local0 = function(f449_arg0)
-					f449_arg0:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f449_arg0:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 					f449_arg0:setAlpha(1)
 					f449_arg0:registerEventHandler("transition_complete_keyframe", f443_arg0.clipFinished)
 				end
@@ -3942,7 +3942,7 @@ CoD.GameEndScore_WZ.__clipsPerState = {
 			f471_local2(f471_arg0.FooterContainerFrontendRight)
 			local f471_local3 = function(f477_arg0)
 				local f477_local0 = function(f478_arg0)
-					f478_arg0:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f478_arg0:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 					f478_arg0:setAlpha(1)
 					f478_arg0:registerEventHandler("transition_complete_keyframe", f471_arg0.clipFinished)
 				end
@@ -4186,7 +4186,7 @@ CoD.GameEndScore_WZ.__clipsPerState = {
 			f500_local3(f500_arg0.FooterContainerFrontendRight)
 			local f500_local4 = function(f508_arg0)
 				local f508_local0 = function(f509_arg0)
-					f509_arg0:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f509_arg0:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 					f509_arg0:setAlpha(1)
 					f509_arg0:registerEventHandler("transition_complete_keyframe", f500_arg0.clipFinished)
 				end

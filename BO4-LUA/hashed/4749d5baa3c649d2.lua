@@ -10,7 +10,7 @@ CoD.ui_icon_callingcards_assassin_attackergroup.new = function(f1_arg0, f1_arg1,
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local attacker = LUI.UIImage.new(0, 0, 464.5, 968.5, 0, 0, 0, 312)
-	attacker:setImage(RegisterImage(0x1F8A50A29EF677D))
+	attacker:setImage(RegisterImage(@"uie_ui_icon_callingcards_assassin_attacker"))
 	self:addElement(attacker)
 	self.attacker = attacker
 	local hand = CoD.ui_icon_callingcards_assassin_attackerarmgroup.new(f1_arg0, f1_arg1, 0, 0, 542.5, 552.5, 0, 0, 108, 118)

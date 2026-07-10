@@ -10,20 +10,20 @@ CoD.DupeMeterIcon.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 	local Empty = LUI.UIImage.new(0, 0, 0, 20, 0, 0, 0, 20)
 	Empty:setRGB(0.6, 0.6, 0.6)
 	Empty:setScale(0.9, 0.9)
-	Empty:setImage(RegisterImage(0x6EA29FB8CACC5EC))
+	Empty:setImage(RegisterImage(@"hash_76EA29FB8CACC5EC"))
 	self:addElement(Empty)
 	self.Empty = Empty
 	local Full = LUI.UIImage.new(0, 0, 0, 20, 0, 0, 0, 20)
 	Full:setRGB(ColorSet.T8__OCHRE.r, ColorSet.T8__OCHRE.g, ColorSet.T8__OCHRE.b)
 	Full:setAlpha(0)
-	Full:setImage(RegisterImage(0xF395928C19E9B99))
+	Full:setImage(RegisterImage(@"hash_F395928C19E9B99"))
 	self:addElement(Full)
 	self.Full = Full
 	local FullPulse = LUI.UIImage.new(0, 0, 0, 20, 0, 0, 0, 20)
 	FullPulse:setRGB(ColorSet.T8__OCHRE.r, ColorSet.T8__OCHRE.g, ColorSet.T8__OCHRE.b)
 	FullPulse:setAlpha(0)
-	FullPulse:setImage(RegisterImage(0xF395928C19E9B99))
-	FullPulse:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	FullPulse:setImage(RegisterImage(@"hash_F395928C19E9B99"))
+	FullPulse:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(FullPulse)
 	self.FullPulse = FullPulse
 	if PostLoadFunc then
@@ -75,7 +75,7 @@ CoD.DupeMeterIcon.__clipsPerState = {
 			f5_arg0.clipFinished(f5_arg0.Full)
 			local f5_local0 = function(f6_arg0)
 				local f6_local0 = function(f7_arg0)
-					f7_arg0:beginAnimation(300, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f7_arg0:beginAnimation(300, Enum[@"luitween"][@"luitween_ease_out"])
 					f7_arg0:setAlpha(0)
 					f7_arg0:setScale(3, 3)
 					f7_arg0:registerEventHandler("transition_complete_keyframe", f5_arg0.clipFinished)

@@ -12,8 +12,8 @@ CoD.EmblemEditorGradientTypeButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	local ThicknessValue = LUI.UIText.new(0, 0, 757, 807, 0, 0, 40, 65)
 	ThicknessValue:setRGB(0.92, 0.92, 0.92)
 	ThicknessValue:setTTF("dinnext_regular")
-	ThicknessValue:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
-	ThicknessValue:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	ThicknessValue:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
+	ThicknessValue:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	ThicknessValue:subscribeToGlobalModel(f1_arg1, "EmblemSelectedLayerProperties", "gradient_thickness", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -31,38 +31,38 @@ CoD.EmblemEditorGradientTypeButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 			f3_local0 = element.super:gainFocus(event)
 		end
 		CoD.CraftUtility.EmblemGradient_ColorGradientSliderGainFocus(self, element, f1_arg1)
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x57783F8DA4AAEF])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x571F08AD84807E0])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_left"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_right"])
 		return f3_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(ThicknessSlider, f1_arg1, Enum[0x3DD78803F918E9D][0x57783F8DA4AAEF], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(ThicknessSlider, f1_arg1, Enum[@"luibutton"][@"lui_key_left"], nil, function(element, menu, controller, model)
 		CoD.CraftUtility.EmblemGradient_UpdateThicknessByStep(self, element, -0.01, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x57783F8DA4AAEF], 0x0, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_left"], @"hash_0", nil, nil)
 		return false
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(ThicknessSlider, f1_arg1, Enum[0x3DD78803F918E9D][0x571F08AD84807E0], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(ThicknessSlider, f1_arg1, Enum[@"luibutton"][@"lui_key_right"], nil, function(element, menu, controller, model)
 		CoD.CraftUtility.EmblemGradient_UpdateThicknessByStep(self, element, 0.01, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x571F08AD84807E0], 0x0, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_right"], @"hash_0", nil, nil)
 		return false
 	end, false)
 	self:addElement(ThicknessSlider)
 	self.ThicknessSlider = ThicknessSlider
 	local ThicknessText = LUI.UIText.new(0, 0, 0, 116, 0, 0, 40, 60)
-	ThicknessText:setText(Engine[0xF9F1239CFD921FE](0x1960EFEF4BF9116))
+	ThicknessText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_21960EFEF4BF9116"))
 	ThicknessText:setTTF("default")
-	ThicknessText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	ThicknessText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	ThicknessText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	ThicknessText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(ThicknessText)
 	self.ThicknessText = ThicknessText
 	local HardnessValue = LUI.UIText.new(0, 0, 757, 807, 0, 0, 3, 28)
 	HardnessValue:setRGB(0.92, 0.92, 0.92)
 	HardnessValue:setTTF("dinnext_regular")
-	HardnessValue:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
-	HardnessValue:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	HardnessValue:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
+	HardnessValue:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	HardnessValue:subscribeToGlobalModel(f1_arg1, "EmblemSelectedLayerProperties", "gradient_fill", function(model)
 		local f8_local0 = model:get()
 		if f8_local0 ~= nil then
@@ -80,31 +80,31 @@ CoD.EmblemEditorGradientTypeButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 			f9_local0 = element.super:gainFocus(event)
 		end
 		CoD.CraftUtility.EmblemGradient_ColorGradientSliderGainFocus(self, element, f1_arg1)
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x57783F8DA4AAEF])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x571F08AD84807E0])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_left"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_right"])
 		return f9_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(HardnessSlider, f1_arg1, Enum[0x3DD78803F918E9D][0x57783F8DA4AAEF], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(HardnessSlider, f1_arg1, Enum[@"luibutton"][@"lui_key_left"], nil, function(element, menu, controller, model)
 		CoD.CraftUtility.EmblemGradient_UpdateGradientFillByStep(self, element, -0.01, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x57783F8DA4AAEF], 0x0, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_left"], @"hash_0", nil, nil)
 		return false
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(HardnessSlider, f1_arg1, Enum[0x3DD78803F918E9D][0x571F08AD84807E0], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(HardnessSlider, f1_arg1, Enum[@"luibutton"][@"lui_key_right"], nil, function(element, menu, controller, model)
 		CoD.CraftUtility.EmblemGradient_UpdateGradientFillByStep(self, element, 0.01, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x571F08AD84807E0], 0x0, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_right"], @"hash_0", nil, nil)
 		return false
 	end, false)
 	self:addElement(HardnessSlider)
 	self.HardnessSlider = HardnessSlider
 	local HardnessText = LUI.UIText.new(0, 0, 0, 116, 0, 0, 3, 23)
-	HardnessText:setText(Engine[0xF9F1239CFD921FE](0x373519BA1E3232E))
+	HardnessText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_373519BA1E3232E"))
 	HardnessText:setTTF("default")
-	HardnessText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	HardnessText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	HardnessText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	HardnessText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(HardnessText)
 	self.HardnessText = HardnessText
 	LUI.OverrideFunction_CallOriginalFirst(self, "setState", function(element, controller, f14_arg2, f14_arg3, f14_arg4)

@@ -71,7 +71,7 @@ LUI.UIElement.bindElementModel = function(f7_arg0, f7_arg1, f7_arg2, f7_arg3)
 	local f7_local0 = f7_arg1:getModel()
 	local f7_local1 = nil
 	if f7_local0 and f7_arg2.modelPath then
-		f7_local1 = Engine[0x40E824FE270E174](f7_local0, f7_arg2.modelPath)
+		f7_local1 = Engine[@"getmodel"](f7_local0, f7_arg2.modelPath)
 	else
 		f7_local1 = f7_local0
 	end
@@ -150,7 +150,7 @@ LUI.UIElement.bindGlobalModel = function(f13_arg0, f13_arg1, f13_arg2, f13_arg3)
 		if f13_local1 then
 			local f13_local2 = nil
 			if f13_arg2.modelPath then
-				f13_local2 = Engine[0x40E824FE270E174](f13_local1, f13_arg2.modelPath)
+				f13_local2 = Engine[@"getmodel"](f13_local1, f13_arg2.modelPath)
 			else
 				f13_local2 = f13_local1
 			end
@@ -202,11 +202,11 @@ LUI.UIElement.close = function(f17_arg0)
 			f17_local1 = f17_local1:getParent()
 		end
 		if not f17_local0 then
-			f17_local0 = Engine[0xA5B9C0111291A8B]()
+			f17_local0 = Engine[@"getprimarycontroller"]()
 		end
 	end
 	if f17_arg0 == Engine[0x4B06D9D6B673AA](f17_local0) then
-		Engine[0x18F7786899BA625](f17_local0)
+		Engine[@"hash_718F7786899BA625"](f17_local0)
 	end
 	if CoD.isPC then
 		f17_local1 = f17_arg0:getMenu()
@@ -275,16 +275,16 @@ LUI.UIElement.playSound = function(f24_arg0, f24_arg1, f24_arg2)
 		local f24_local0 = f24_arg0:findSoundAlias(f24_arg1)
 		if f24_local0 then
 			if f24_arg2 ~= nil then
-				Engine[0xC4146BA76D0F982](f24_local0, f24_arg2)
+				Engine[@"playsound"](f24_local0, f24_arg2)
 			else
-				Engine[0xC4146BA76D0F982](f24_local0)
+				Engine[@"playsound"](f24_local0)
 			end
 			return true
 		end
 	elseif f24_arg2 ~= nil then
-		Engine[0xC4146BA76D0F982](f24_arg1, f24_arg2)
+		Engine[@"playsound"](f24_arg1, f24_arg2)
 	else
-		Engine[0xC4146BA76D0F982](f24_arg1)
+		Engine[@"playsound"](f24_arg1)
 	end
 end
 LUI.UIElement.playActionSFX = function(f25_arg0)
@@ -345,10 +345,10 @@ end
 LUI.UIElement.GetMouseEventElementIntersection = function(f37_arg0, f37_arg1)
 	if f37_arg1.x == nil or f37_arg1.y == nil then
 		return false
-	elseif Engine[0x6C1F6DEE7AF457B](f37_arg1.controller) then
-		return Engine[0x879C9464C18718](f37_arg1.controller, f37_arg0, f37_arg1.rootName, f37_arg1.x, f37_arg1.y) and 1 or 0
+	elseif Engine[@"lastinput_mouse"](f37_arg1.controller) then
+		return Engine[@"ismouseinsideelement"](f37_arg1.controller, f37_arg0, f37_arg1.rootName, f37_arg1.x, f37_arg1.y) and 1 or 0
 	else
-		return Engine[0x57641002E21A351](f37_arg1.controller, f37_arg0, f37_arg1.rootName, f37_arg1.x, f37_arg1.y)
+		return Engine[@"getcircleinsideelement"](f37_arg1.controller, f37_arg0, f37_arg1.rootName, f37_arg1.x, f37_arg1.y)
 	end
 end
 LUI.UIElement.IsMouseEventInsideElement = function(f38_arg0, f38_arg1)
@@ -376,16 +376,16 @@ LUI.UIElement.allowsCursorMove = function(f40_arg0)
 end
 LUI.UIElement.cursorInsideElementPerc = function(f41_arg0, f41_arg1, f41_arg2, f41_arg3, f41_arg4)
 	if IsGamepad(f41_arg1) then
-		return Engine[0x57641002E21A351](f41_arg1, f41_arg0, f41_arg2, f41_arg3, f41_arg4)
+		return Engine[@"getcircleinsideelement"](f41_arg1, f41_arg0, f41_arg2, f41_arg3, f41_arg4)
 	else
-		return Engine[0x879C9464C18718](f41_arg1, f41_arg0, f41_arg2, f41_arg3, f41_arg4) and 1 or 0
+		return Engine[@"ismouseinsideelement"](f41_arg1, f41_arg0, f41_arg2, f41_arg3, f41_arg4) and 1 or 0
 	end
 end
 LUI.UIElement.cursorDistanceToElement = function(f42_arg0, f42_arg1, f42_arg2, f42_arg3, f42_arg4)
 	if IsGamepad(f42_arg1) then
-		return Engine[0x4EC51B8F2565913](f42_arg1, f42_arg0, f42_arg2, f42_arg3, f42_arg4)
+		return Engine[@"hash_34EC51B8F2565913"](f42_arg1, f42_arg0, f42_arg2, f42_arg3, f42_arg4)
 	else
-		return nil, Engine[0x879C9464C18718](f42_arg1, f42_arg0, f42_arg2, f42_arg3, f42_arg4) and 1 or 0
+		return nil, Engine[@"ismouseinsideelement"](f42_arg1, f42_arg0, f42_arg2, f42_arg3, f42_arg4) and 1 or 0
 	end
 end
 local f0_local0 = function(f43_arg0, f43_arg1)
@@ -488,7 +488,7 @@ end
 LUI.UIElement.AcceptGamePadButtonInput = function(f46_arg0, f46_arg1)
 	if f46_arg0.m_inputDisabled or f46_arg0.occludedBy then
 		return false
-	elseif not f46_arg0.m_ownerController or f46_arg0.m_ownerController == f46_arg1.controller or f46_arg0.anyControllerAllowed or Engine[0xF285055A1A895A1](f46_arg1.controller) then
+	elseif not f46_arg0.m_ownerController or f46_arg0.m_ownerController == f46_arg1.controller or f46_arg0.anyControllerAllowed or Engine[@"iscontrollerbeingused"](f46_arg1.controller) then
 		return true
 	elseif f46_arg0.m_ownerController and f46_arg0.m_ownerController ~= f46_arg1.controller then
 		local f46_local0 = f46_arg1.name
@@ -501,7 +501,7 @@ end
 LUI.UIElement.AcceptGamePadButtonInputFromModelCallback = function(f47_arg0, f47_arg1)
 	if f47_arg0.m_inputDisabled or f47_arg0.occludedBy then
 		return false
-	elseif not f47_arg0.m_ownerController or f47_arg0.m_ownerController == f47_arg1 or f47_arg0.anyControllerAllowed or Engine[0xF285055A1A895A1](f47_arg1) then
+	elseif not f47_arg0.m_ownerController or f47_arg0.m_ownerController == f47_arg1 or f47_arg0.anyControllerAllowed or Engine[@"iscontrollerbeingused"](f47_arg1) then
 		return true
 	else
 		return false
@@ -523,13 +523,13 @@ LUI.UIElement.GetCorrespondingGamepadButtonForKey = function(f48_arg0)
 	end
 end
 LUI.UIElement.GetCorrespondingGamepadButtonString = function(f49_arg0)
-	if f49_arg0 == Enum[0x3DD78803F918E9D][0xD4C15FE32148D3A] then
+	if f49_arg0 == Enum[@"luibutton"][@"lui_key_down"] then
 		return "down"
-	elseif f49_arg0 == Enum[0x3DD78803F918E9D][0x4B11D2B20C75A7F] then
+	elseif f49_arg0 == Enum[@"luibutton"][@"lui_key_up"] then
 		return "up"
-	elseif f49_arg0 == Enum[0x3DD78803F918E9D][0x57783F8DA4AAEF] then
+	elseif f49_arg0 == Enum[@"luibutton"][@"lui_key_left"] then
 		return "left"
-	elseif f49_arg0 == Enum[0x3DD78803F918E9D][0x571F08AD84807E0] then
+	elseif f49_arg0 == Enum[@"luibutton"][@"lui_key_right"] then
 		return "right"
 	else
 		return nil
@@ -676,7 +676,7 @@ LUI.UIElement.gainFocus = function(f54_arg0, f54_arg1)
 		f54_local0 = true
 	elseif f54_arg0.m_focusable and not f54_arg0.onlyChildrenFocusable then
 		f54_arg0:setFocus(true)
-		f54_arg0.lastFocusedTimestamp = Engine[0x9D33D652B9B0F3B]()
+		f54_arg0.lastFocusedTimestamp = Engine[@"milliseconds"]()
 		if f54_arg0.m_active then
 			f54_local0 = true
 		else
@@ -932,7 +932,7 @@ LUI.UIElement.makeFocusableWithoutResettingNavigation = function(f80_arg0, f80_a
 	local f80_local0 = CoD.GetMouseFocus(f80_arg1) == f80_arg0
 	if f80_arg0 == Engine[0x4B06D9D6B673AA](f80_arg1) then
 		f80_local0 = true
-		Engine[0x18F7786899BA625](f80_arg1)
+		Engine[@"hash_718F7786899BA625"](f80_arg1)
 	end
 	if f80_local0 then
 		CoD.FreeCursorUtility.RetriggerCursorPosition(f80_arg0, f80_arg1)
@@ -960,7 +960,7 @@ LUI.UIElement.makeNotFocusable = function(f81_arg0, f81_arg1)
 	local f81_local0 = CoD.GetMouseFocus(f81_arg1) == f81_arg0
 	if f81_arg0 == Engine[0x4B06D9D6B673AA](f81_arg1) then
 		f81_local0 = true
-		Engine[0x18F7786899BA625](f81_arg1)
+		Engine[@"hash_718F7786899BA625"](f81_arg1)
 	end
 	if f81_local0 then
 		CoD.FreeCursorUtility.RetriggerCursorPosition(f81_arg0, f81_arg1)
@@ -1054,7 +1054,7 @@ LUI.UIElement.UpdateSafeArea = function(f90_arg0, f90_arg1, f90_arg2, f90_arg3)
 	if f90_arg3 == nil then
 		f90_arg3 = false
 	end
-	local f90_local0, f90_local1, f90_local2, f90_local3 = Engine[0x26E31A9FDAA85EB](f90_arg2, f90_arg3)
+	local f90_local0, f90_local1, f90_local2, f90_local3 = Engine[@"getusersafeareaforcontroller"](f90_arg2, f90_arg3)
 	f90_arg0:setLeftRight(false, false, f90_local0, f90_local2)
 	f90_arg0:setTopBottom(false, false, f90_local1, f90_local3)
 end
@@ -1073,7 +1073,7 @@ LUI.UIElement.UpdateScreenSize = function(f93_arg0, f93_arg1, f93_arg2)
 	if f93_arg1 ~= nil and f93_arg2 == nil then
 		f93_arg2 = f93_arg1.controller
 	end
-	local f93_local0, f93_local1, f93_local2 = Engine[0x6913E41040C17FD](f93_arg2)
+	local f93_local0, f93_local1, f93_local2 = Engine[@"hash_6913E41040C17FD"](f93_arg2)
 	local f93_local3 = 1920
 	local f93_local4 = 0
 	local f93_local5 = f93_local3
@@ -1094,7 +1094,7 @@ end
 LUI.UIElement.setStateByHash = function(f95_arg0, f95_arg1, f95_arg2, f95_arg3, f95_arg4)
 	if f95_arg0.__clipsPerState then
 		for f95_local3, f95_local4 in pairs(f95_arg0.__clipsPerState) do
-			if f95_arg2 == Engine[0xC53F8D38DF9042B](f95_local3) then
+			if f95_arg2 == Engine[@"converttoxhash"](f95_local3) then
 				f95_arg0:setState(f95_arg1, f95_local3, f95_arg3, f95_arg4)
 				break
 			end
@@ -1141,9 +1141,9 @@ LUI.UIElement.setState = function(f96_arg0, f96_arg1, f96_arg2, f96_arg3, f96_ar
 			f96_arg0.nextClip = f96_local3
 			f96_arg0.currentClipIsTransitionClip = f96_local2
 		end
-		if LUI.DEV and f96_arg0.elementsPlayingClips > 0 and Dvar[0x418FCB2A75FD098]:get() then
+		if LUI.DEV and f96_arg0.elementsPlayingClips > 0 and Dvar[@"hash_6418FCB2A75FD098"]:get() then
 			f96_arg0._clipNameSentToDevhost = f96_local0 .. "." .. f96_arg2
-			Engine[0xE8C680715D701AE](LUI.DEV.DebugElementPath(f96_arg0), f96_arg0._clipNameSentToDevhost, true)
+			Engine[@"hash_4E8C680715D701AE"](LUI.DEV.DebugElementPath(f96_arg0), f96_arg0._clipNameSentToDevhost, true)
 		end
 	else
 		f96_arg0:playClip(f96_local3, f96_local4)
@@ -1176,8 +1176,8 @@ LUI.UIElement.mergeStateConditions = function(f97_arg0, f97_arg1, f97_arg2)
 end
 LUI.UIElement.clipOver = function(f99_arg0, f99_arg1)
 	if LUI.DEV and f99_arg0._clipNameSentToDevhost then
-		if Dvar[0x418FCB2A75FD098]:get() then
-			Engine[0xE8C680715D701AE](LUI.DEV.DebugElementPath(f99_arg0), f99_arg0._clipNameSentToDevhost, false)
+		if Dvar[@"hash_6418FCB2A75FD098"]:get() then
+			Engine[@"hash_4E8C680715D701AE"](LUI.DEV.DebugElementPath(f99_arg0), f99_arg0._clipNameSentToDevhost, false)
 		end
 		f99_arg0._clipNameSentToDevhost = nil
 	end
@@ -1193,7 +1193,7 @@ LUI.UIElement.playClip = function(f100_arg0, f100_arg1, f100_arg2, f100_arg3)
 	if f100_local0 then
 		local f100_local1 = f100_arg0.m_ownerController
 		if not f100_local1 then
-			f100_local1 = Engine[0xA5B9C0111291A8B]()
+			f100_local1 = Engine[@"getprimarycontroller"]()
 		end
 		if f100_arg3 and f100_local0[f100_arg1] == f100_arg0.__lastClipPlayed then
 			return false
@@ -1214,14 +1214,14 @@ LUI.UIElement.playClip = function(f100_arg0, f100_arg1, f100_arg2, f100_arg3)
 		else
 			return false
 		end
-		if LUI.DEV and f100_arg0.elementsPlayingClips > 0 and Dvar[0x418FCB2A75FD098]:get() then
+		if LUI.DEV and f100_arg0.elementsPlayingClips > 0 and Dvar[@"hash_6418FCB2A75FD098"]:get() then
 			local f100_local2 = f100_arg0.currentState
 			local f100_local3 = "."
 			if f100_local0[f100_arg2] then
 				local f100_local4 = f100_arg2
 			end
 			f100_arg0._clipNameSentToDevhost = f100_local2 .. f100_local3 .. (f100_local4 or f100_arg1)
-			Engine[0xE8C680715D701AE](LUI.DEV.DebugElementPath(f100_arg0), f100_arg0._clipNameSentToDevhost, true)
+			Engine[@"hash_4E8C680715D701AE"](LUI.DEV.DebugElementPath(f100_arg0), f100_arg0._clipNameSentToDevhost, true)
 		end
 		return true
 	else
@@ -1418,7 +1418,7 @@ LUI.UIElement.AddContextualMenuAction = function(f120_arg0, f120_arg1, f120_arg2
 	end
 	if not f120_arg0.__contextualMenuRightMouseEventRegistered[f120_arg1] then
 		f120_arg0.__contextualMenuRightMouseEventRegistered[f120_arg1] = true
-		f120_arg1:AddButtonCallbackFunction(f120_arg0, f120_arg2, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "MOUSE2", function(element, menu, controller, model)
+		f120_arg1:AddButtonCallbackFunction(f120_arg0, f120_arg2, Enum[@"luibutton"][@"lui_key_none"], "MOUSE2", function(element, menu, controller, model)
 			CoD.PCWidgetUtility.CloseContextualMenu(menu, controller)
 			if f120_arg0.__contextualMenuTitleModelPath then
 				CoD.PCWidgetUtility.ContextualMenuTitleModel = CoD.ModelUtility.GetSelfModelPath(element, f120_arg0.__contextualMenuTitleModelPath)
@@ -1455,7 +1455,7 @@ LUI.UIElement.AddContextualMenuAction = function(f120_arg0, f120_arg1, f120_arg2
 			LUI.GridLayout.menuOpened(f121_local0)
 			local f121_local5 = 1
 			local f121_local6 = 1
-			local f121_local7, f121_local8 = Engine[0x1A28BE9919661FA](controller)
+			local f121_local7, f121_local8 = Engine[@"getscreensize"](controller)
 			local f121_local9, f121_local10, f121_local11, f121_local12 = menu:getRect()
 			if f121_local9 ~= nil then
 				f121_local5 = f121_local7 / (f121_local11 - f121_local9)
@@ -1482,7 +1482,7 @@ LUI.UIElement.AddContextualMenuAction = function(f120_arg0, f120_arg1, f120_arg2
 			menu.ContextualMenu:setLeftRight(0, 0, f121_local15, f121_local19)
 			menu.ContextualMenu:setTopBottom(0, 0, f121_local16, f121_local20)
 			for f121_local24, f121_local25, f121_local26 in f121_local0:forEachElement() do
-				menu:AddButtonCallbackFunction(f121_local26, controller, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+				menu:AddButtonCallbackFunction(f121_local26, controller, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 					local f122_local0 = CoD.SafeGetModelValue(f121_local26:getModel(), "getActionFunction")
 					local f122_local1 = f122_local0 and f122_local0(element, menu, controller, model)
 					if f122_local1 then
@@ -1492,7 +1492,7 @@ LUI.UIElement.AddContextualMenuAction = function(f120_arg0, f120_arg1, f120_arg2
 					return true
 				end, nil, false)
 			end
-			menu:AddButtonCallbackFunction(menu.ContextualMenu, controller, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], "ESCAPE", function(element, menu, controller, model)
+			menu:AddButtonCallbackFunction(menu.ContextualMenu, controller, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], "ESCAPE", function(element, menu, controller, model)
 				CoD.PCWidgetUtility.CloseContextualMenu(menu, controller)
 				return true
 			end, nil, false)
@@ -1647,12 +1647,12 @@ LUI.UIElement.showDebugTimer = function(f135_arg0, f135_arg1)
 	f135_arg0.playClip = function(f136_arg0, f136_arg1)
 		f135_local0(f136_arg0, f136_arg1)
 		if f136_arg0.elementsPlayingClips ~= nil and f136_arg0.elementsPlayingClips > 0 then
-			f136_arg0._debugTimerIndex = Engine[0xCC4FC0E07DAC69F](f136_arg0.id .. ":" .. f136_arg0.currentState .. ":" .. f136_arg1, f136_arg0._debugTimerIndex)
+			f136_arg0._debugTimerIndex = Engine[@"setdebugtimerinfo"](f136_arg0.id .. ":" .. f136_arg0.currentState .. ":" .. f136_arg1, f136_arg0._debugTimerIndex)
 		end
 	end
 	f135_arg0:registerEventHandler("clip_over", function(element, event)
 		if element._debugTimerIndex ~= nil then
-			Engine[0xCC4FC0E07DAC69F]("", element._debugTimerIndex)
+			Engine[@"setdebugtimerinfo"]("", element._debugTimerIndex)
 			element._debugTimerIndex = nil
 		end
 		LUI.UIElement.clipOver(element, event)
@@ -1661,7 +1661,7 @@ LUI.UIElement.showDebugTimer = function(f135_arg0, f135_arg1)
 	f135_arg0.close = function(f138_arg0)
 		f135_local1(f138_arg0)
 		if f138_arg0._debugTimerIndex ~= nil then
-			Engine[0xCC4FC0E07DAC69F]("", f138_arg0._debugTimerIndex)
+			Engine[@"setdebugtimerinfo"]("", f138_arg0._debugTimerIndex)
 			f138_arg0._debugTimerIndex = nil
 		end
 	end

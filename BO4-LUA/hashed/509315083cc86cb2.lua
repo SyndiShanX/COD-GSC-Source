@@ -24,8 +24,8 @@ CoD.BlackJacksShopFrameSunset.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local TransactionDeepLinkButton = nil
 	TransactionDeepLinkButton = CoD.DirectorPreGameButton.new(f1_arg0, f1_arg1, 0.5, 0.5, -840, -610, 0, 0, 748, 818)
-	TransactionDeepLinkButton.DirectorCustomStartButton.MiddleText:setText(LocalizeToUpperString(0x4031C820A02E7BA))
-	TransactionDeepLinkButton.DirectorCustomStartButton.MiddleTextFocus:setText(LocalizeToUpperString(0x4031C820A02E7BA))
+	TransactionDeepLinkButton.DirectorCustomStartButton.MiddleText:setText(LocalizeToUpperString(@"hash_44031C820A02E7BA"))
+	TransactionDeepLinkButton.DirectorCustomStartButton.MiddleTextFocus:setText(LocalizeToUpperString(@"hash_44031C820A02E7BA"))
 	TransactionDeepLinkButton:registerEventHandler("gain_focus", function(element, event)
 		local f2_local0 = nil
 		if element.gainFocus then
@@ -33,10 +33,10 @@ CoD.BlackJacksShopFrameSunset.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 		elseif element.super.gainFocus then
 			f2_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_none"])
 		return f2_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(TransactionDeepLinkButton, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(TransactionDeepLinkButton, f1_arg1, Enum[@"luibutton"][@"lui_key_none"], "ui_confirm", function(element, menu, controller, model)
 		if IsPC() and CoD.PCKoreaUtility.IsInKorea() then
 			CoD.PCKoreaUtility.OpenTransactionsDeepLinkBlackmarket(controller)
 			return true
@@ -44,13 +44,13 @@ CoD.BlackJacksShopFrameSunset.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 		end
 	end, function(element, menu, controller)
 		if IsPC() and CoD.PCKoreaUtility.IsInKorea() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "ui_confirm")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(TransactionDeepLinkButton, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "MOUSE1", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(TransactionDeepLinkButton, f1_arg1, Enum[@"luibutton"][@"lui_key_none"], "MOUSE1", function(element, menu, controller, model)
 		if IsPC() and CoD.PCKoreaUtility.IsInKorea() then
 			CoD.PCKoreaUtility.OpenTransactionsDeepLinkBlackmarket(controller)
 			return true
@@ -58,7 +58,7 @@ CoD.BlackJacksShopFrameSunset.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 		end
 	end, function(element, menu, controller)
 		if IsPC() and CoD.PCKoreaUtility.IsInKorea() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "MOUSE1")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "MOUSE1")
 			return false
 		else
 			return false
@@ -71,34 +71,34 @@ CoD.BlackJacksShopFrameSunset.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	RNGItemSlot:setTopBottom(0.5, 0.5, -319, 191)
 	RNGItemSlot:setWidgetType(CoD.BMTallItemContainer)
 	RNGItemSlot:setSpacing(30)
-	RNGItemSlot:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	RNGItemSlot:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	RNGItemSlot:setHorizontalCounter(CoD.horizontalCounterTriggerPrompts)
 	RNGItemSlot:setDataSource("RNGSlotList")
 	RNGItemSlot:linkToElementModel(RNGItemSlot, "emptyItem", true, function(model, f7_arg1)
-		CoD.Menu.UpdateButtonShownState(f7_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(f7_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f7_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
+		CoD.Menu.UpdateButtonShownState(f7_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(f7_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f7_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"])
 	end)
 	RNGItemSlot:linkToElementModel(RNGItemSlot, "revealed", true, function(model, f8_arg1)
-		CoD.Menu.UpdateButtonShownState(f8_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(f8_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f8_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
+		CoD.Menu.UpdateButtonShownState(f8_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(f8_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f8_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"])
 	end)
 	RNGItemSlot:linkToElementModel(RNGItemSlot, "movieName", true, function(model, f9_arg1)
-		CoD.Menu.UpdateButtonShownState(f9_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f9_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
+		CoD.Menu.UpdateButtonShownState(f9_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f9_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"])
 	end)
 	RNGItemSlot:appendEventHandler("input_source_changed", function(f10_arg0, f10_arg1)
 		f10_arg1.menu = f10_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f10_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f10_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
+		CoD.Menu.UpdateButtonShownState(f10_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f10_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"])
 	end)
 	local DeterministicItemSlot1 = RNGItemSlot
 	local DeterministicItemSlot2 = RNGItemSlot.subscribeToModel
-	local RNGItemSlotTimer = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local RNGItemSlotTimer = Engine[@"getmodelforcontroller"](f1_arg1)
 	DeterministicItemSlot2(DeterministicItemSlot1, RNGItemSlotTimer.LastInput, function(f11_arg0, f11_arg1)
-		CoD.Menu.UpdateButtonShownState(f11_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f11_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
+		CoD.Menu.UpdateButtonShownState(f11_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f11_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"])
 	end, false)
 	RNGItemSlot:registerEventHandler("list_item_gain_focus", function(element, event)
 		local f12_local0 = nil
@@ -134,14 +134,14 @@ CoD.BlackJacksShopFrameSunset.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 		elseif element.super.gainFocus then
 			f15_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_rtrig"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_ltrig"])
 		return f15_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(RNGItemSlot, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(RNGItemSlot, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if not CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "emptyItem") and CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "revealed") then
 			CoD.BlackMarketUtility.PlayItemShopSelectSound(element, controller)
 			OpenOverlay(self, "ItemShopDetailsSunset", controller, {
@@ -153,13 +153,13 @@ CoD.BlackJacksShopFrameSunset.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 		end
 	end, function(element, menu, controller)
 		if not CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "emptyItem") and CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "revealed") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(RNGItemSlot, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(RNGItemSlot, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], nil, function(element, menu, controller, model)
 		if CoD.ModelUtility.IsSelfModelValueNonEmptyString(element, controller, "movieName") and IsGamepad(controller) and not CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "emptyItem") and CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "revealed") then
 			SetControllerModelValue(controller, "LootStreamProgress.playAnimation", false)
 			CoD.VideoStreamingUtility.SetupVoDMovie(controller, element, "")
@@ -171,13 +171,13 @@ CoD.BlackJacksShopFrameSunset.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 		end
 	end, function(element, menu, controller)
 		if CoD.ModelUtility.IsSelfModelValueNonEmptyString(element, controller, "movieName") and IsGamepad(controller) and not CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "emptyItem") and CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "revealed") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x52FB29ED3A3CA79, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"menu/preview", nil, nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(RNGItemSlot, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB], "ui_remove", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(RNGItemSlot, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"], "ui_remove", function(element, menu, controller, model)
 		if CoD.ModelUtility.IsSelfModelValueNonEmptyString(element, controller, "movieName") and IsMouseOrKeyboard(controller) and not CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "emptyItem") and CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "revealed") then
 			SetControllerModelValue(controller, "LootStreamProgress.playAnimation", false)
 			CoD.VideoStreamingUtility.SetupVoDMovie(controller, element, "")
@@ -189,13 +189,13 @@ CoD.BlackJacksShopFrameSunset.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 		end
 	end, function(element, menu, controller)
 		if CoD.ModelUtility.IsSelfModelValueNonEmptyString(element, controller, "movieName") and IsMouseOrKeyboard(controller) and not CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "emptyItem") and CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "revealed") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xA86619565BE54DB], 0x52FB29ED3A3CA79, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "ui_remove")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_pckey_2"], @"menu/preview", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "ui_remove")
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(RNGItemSlot, f1_arg1, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA], "MWHEELDOWN", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(RNGItemSlot, f1_arg1, Enum[@"luibutton"][@"lui_key_rtrig"], "MWHEELDOWN", function(element, menu, controller, model)
 		if not IsRepeatButtonPress(model) then
 			CoD.GridAndListUtility.NavigateGridItemOnParentGridOrList(element, controller, true)
 			return true
@@ -203,13 +203,13 @@ CoD.BlackJacksShopFrameSunset.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 		end
 	end, function(element, menu, controller)
 		if not IsRepeatButtonPress(nil) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA], 0x0, nil, "MWHEELDOWN")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_rtrig"], @"hash_0", nil, "MWHEELDOWN")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(RNGItemSlot, f1_arg1, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC], "MWHEELUP", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(RNGItemSlot, f1_arg1, Enum[@"luibutton"][@"lui_key_ltrig"], "MWHEELUP", function(element, menu, controller, model)
 		if not IsRepeatButtonPress(model) then
 			CoD.GridAndListUtility.NavigateGridItemOnParentGridOrList(element, controller, false)
 			return true
@@ -217,7 +217,7 @@ CoD.BlackJacksShopFrameSunset.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 		end
 	end, function(element, menu, controller)
 		if not IsRepeatButtonPress(nil) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC], 0x0, nil, "MWHEELUP")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_ltrig"], @"hash_0", nil, "MWHEELUP")
 			return false
 		else
 			return false
@@ -240,7 +240,7 @@ CoD.BlackJacksShopFrameSunset.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 			CoD.GridAndListUtility.UpdateDataSource(f29_local0, true, true, true)
 		end
 	end)
-	RNGItemSlot:AddContextualMenuAction(f1_arg0, f1_arg1, 0x52FB29ED3A3CA79, function(f30_arg0, f30_arg1, f30_arg2, f30_arg3)
+	RNGItemSlot:AddContextualMenuAction(f1_arg0, f1_arg1, @"menu/preview", function(f30_arg0, f30_arg1, f30_arg2, f30_arg3)
 		if CoD.ModelUtility.IsSelfModelValueNonEmptyString(f30_arg0, f30_arg2, "movieName") then
 			return function(f31_arg0, f31_arg1, f31_arg2, f31_arg3)
 				SetControllerModelValue(f31_arg2, "LootStreamProgress.playAnimation", false)
@@ -259,37 +259,37 @@ CoD.BlackJacksShopFrameSunset.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	DeterministicItemSlot2:setTopBottom(0.5, 0.5, -319, 191)
 	DeterministicItemSlot2:setWidgetType(CoD.BMTallItemContainer)
 	DeterministicItemSlot2:setSpacing(30)
-	DeterministicItemSlot2:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	DeterministicItemSlot2:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	DeterministicItemSlot2:setHorizontalCounter(CoD.horizontalCounterTriggerPrompts)
 	DeterministicItemSlot2:setDataSource("DeterministicSlot2List")
 	DeterministicItemSlot2:linkToElementModel(DeterministicItemSlot2, "lootType", true, function(model, f32_arg1)
-		CoD.Menu.UpdateButtonShownState(f32_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f32_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	DeterministicItemSlot2:linkToElementModel(DeterministicItemSlot2, "emptyItem", true, function(model, f33_arg1)
-		CoD.Menu.UpdateButtonShownState(f33_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(f33_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f33_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
+		CoD.Menu.UpdateButtonShownState(f33_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(f33_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f33_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"])
 	end)
 	DeterministicItemSlot2:linkToElementModel(DeterministicItemSlot2, "revealed", true, function(model, f34_arg1)
-		CoD.Menu.UpdateButtonShownState(f34_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(f34_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f34_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
+		CoD.Menu.UpdateButtonShownState(f34_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(f34_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f34_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"])
 	end)
 	DeterministicItemSlot2:linkToElementModel(DeterministicItemSlot2, "movieName", true, function(model, f35_arg1)
-		CoD.Menu.UpdateButtonShownState(f35_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f35_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
+		CoD.Menu.UpdateButtonShownState(f35_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f35_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"])
 	end)
 	DeterministicItemSlot2:appendEventHandler("input_source_changed", function(f36_arg0, f36_arg1)
 		f36_arg1.menu = f36_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f36_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f36_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
+		CoD.Menu.UpdateButtonShownState(f36_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f36_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"])
 	end)
 	RNGItemSlotTimer = DeterministicItemSlot2
 	DeterministicItemSlot1 = DeterministicItemSlot2.subscribeToModel
-	local DeterministicItemSlot2Timer = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local DeterministicItemSlot2Timer = Engine[@"getmodelforcontroller"](f1_arg1)
 	DeterministicItemSlot1(RNGItemSlotTimer, DeterministicItemSlot2Timer.LastInput, function(f37_arg0, f37_arg1)
-		CoD.Menu.UpdateButtonShownState(f37_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f37_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
+		CoD.Menu.UpdateButtonShownState(f37_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f37_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"])
 	end, false)
 	DeterministicItemSlot2:registerEventHandler("list_item_gain_focus", function(element, event)
 		local f38_local0 = nil
@@ -325,14 +325,14 @@ CoD.BlackJacksShopFrameSunset.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 		elseif element.super.gainFocus then
 			f41_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_rtrig"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_ltrig"])
 		return f41_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(DeterministicItemSlot2, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(DeterministicItemSlot2, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "lootType", LuaEnum.LOOT_TYPE.CONTRACT) and not CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "emptyItem") and CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "revealed") then
 			PlaySoundAlias("uin_toggle_generic")
 			SetControllerModelValue(controller, "LootStreamProgress.playAnimation", false)
@@ -349,16 +349,16 @@ CoD.BlackJacksShopFrameSunset.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 		end
 	end, function(element, menu, controller)
 		if CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "lootType", LuaEnum.LOOT_TYPE.CONTRACT) and not CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "emptyItem") and CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "revealed") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		elseif not CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "emptyItem") and CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "revealed") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(DeterministicItemSlot2, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(DeterministicItemSlot2, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], nil, function(element, menu, controller, model)
 		if CoD.ModelUtility.IsSelfModelValueNonEmptyString(element, controller, "movieName") and IsGamepad(controller) and not CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "emptyItem") and CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "revealed") then
 			SetControllerModelValue(controller, "LootStreamProgress.playAnimation", false)
 			CoD.VideoStreamingUtility.SetupVoDMovie(controller, element, "")
@@ -370,13 +370,13 @@ CoD.BlackJacksShopFrameSunset.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 		end
 	end, function(element, menu, controller)
 		if CoD.ModelUtility.IsSelfModelValueNonEmptyString(element, controller, "movieName") and IsGamepad(controller) and not CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "emptyItem") and CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "revealed") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x52FB29ED3A3CA79, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"menu/preview", nil, nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(DeterministicItemSlot2, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB], "ui_remove", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(DeterministicItemSlot2, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"], "ui_remove", function(element, menu, controller, model)
 		if CoD.ModelUtility.IsSelfModelValueNonEmptyString(element, controller, "movieName") and IsMouseOrKeyboard(controller) and not CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "emptyItem") and CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "revealed") then
 			SetControllerModelValue(controller, "LootStreamProgress.playAnimation", false)
 			CoD.VideoStreamingUtility.SetupVoDMovie(controller, element, "")
@@ -388,13 +388,13 @@ CoD.BlackJacksShopFrameSunset.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 		end
 	end, function(element, menu, controller)
 		if CoD.ModelUtility.IsSelfModelValueNonEmptyString(element, controller, "movieName") and IsMouseOrKeyboard(controller) and not CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "emptyItem") and CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "revealed") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xA86619565BE54DB], 0x52FB29ED3A3CA79, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "ui_remove")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_pckey_2"], @"menu/preview", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "ui_remove")
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(DeterministicItemSlot2, f1_arg1, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA], "MWHEELDOWN", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(DeterministicItemSlot2, f1_arg1, Enum[@"luibutton"][@"lui_key_rtrig"], "MWHEELDOWN", function(element, menu, controller, model)
 		if not IsRepeatButtonPress(model) then
 			CoD.GridAndListUtility.NavigateGridItemOnParentGridOrList(element, controller, true)
 			return true
@@ -402,13 +402,13 @@ CoD.BlackJacksShopFrameSunset.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 		end
 	end, function(element, menu, controller)
 		if not IsRepeatButtonPress(nil) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA], 0x0, nil, "MWHEELDOWN")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_rtrig"], @"hash_0", nil, "MWHEELDOWN")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(DeterministicItemSlot2, f1_arg1, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC], "MWHEELUP", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(DeterministicItemSlot2, f1_arg1, Enum[@"luibutton"][@"lui_key_ltrig"], "MWHEELUP", function(element, menu, controller, model)
 		if not IsRepeatButtonPress(model) then
 			CoD.GridAndListUtility.NavigateGridItemOnParentGridOrList(element, controller, false)
 			return true
@@ -416,7 +416,7 @@ CoD.BlackJacksShopFrameSunset.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 		end
 	end, function(element, menu, controller)
 		if not IsRepeatButtonPress(nil) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC], 0x0, nil, "MWHEELUP")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_ltrig"], @"hash_0", nil, "MWHEELUP")
 			return false
 		else
 			return false
@@ -439,7 +439,7 @@ CoD.BlackJacksShopFrameSunset.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 			CoD.GridAndListUtility.UpdateDataSource(f55_local0, true, true, true)
 		end
 	end)
-	DeterministicItemSlot2:AddContextualMenuAction(f1_arg0, f1_arg1, 0x52FB29ED3A3CA79, function(f56_arg0, f56_arg1, f56_arg2, f56_arg3)
+	DeterministicItemSlot2:AddContextualMenuAction(f1_arg0, f1_arg1, @"menu/preview", function(f56_arg0, f56_arg1, f56_arg2, f56_arg3)
 		if CoD.ModelUtility.IsSelfModelValueNonEmptyString(f56_arg0, f56_arg2, "movieName") then
 			return function(f57_arg0, f57_arg1, f57_arg2, f57_arg3)
 				SetControllerModelValue(f57_arg2, "LootStreamProgress.playAnimation", false)
@@ -458,37 +458,37 @@ CoD.BlackJacksShopFrameSunset.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	DeterministicItemSlot1:setTopBottom(0.5, 0.5, -319, 191)
 	DeterministicItemSlot1:setWidgetType(CoD.BMTallItemContainer)
 	DeterministicItemSlot1:setSpacing(30)
-	DeterministicItemSlot1:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	DeterministicItemSlot1:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	DeterministicItemSlot1:setHorizontalCounter(CoD.horizontalCounterTriggerPrompts)
 	DeterministicItemSlot1:setDataSource("DeterministicSlot1List")
 	DeterministicItemSlot1:linkToElementModel(DeterministicItemSlot1, "lootType", true, function(model, f58_arg1)
-		CoD.Menu.UpdateButtonShownState(f58_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f58_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	DeterministicItemSlot1:linkToElementModel(DeterministicItemSlot1, "emptyItem", true, function(model, f59_arg1)
-		CoD.Menu.UpdateButtonShownState(f59_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(f59_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f59_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
+		CoD.Menu.UpdateButtonShownState(f59_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(f59_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f59_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"])
 	end)
 	DeterministicItemSlot1:linkToElementModel(DeterministicItemSlot1, "revealed", true, function(model, f60_arg1)
-		CoD.Menu.UpdateButtonShownState(f60_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(f60_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f60_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
+		CoD.Menu.UpdateButtonShownState(f60_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(f60_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f60_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"])
 	end)
 	DeterministicItemSlot1:linkToElementModel(DeterministicItemSlot1, "movieName", true, function(model, f61_arg1)
-		CoD.Menu.UpdateButtonShownState(f61_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f61_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
+		CoD.Menu.UpdateButtonShownState(f61_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f61_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"])
 	end)
 	DeterministicItemSlot1:appendEventHandler("input_source_changed", function(f62_arg0, f62_arg1)
 		f62_arg1.menu = f62_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f62_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f62_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
+		CoD.Menu.UpdateButtonShownState(f62_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f62_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"])
 	end)
 	DeterministicItemSlot2Timer = DeterministicItemSlot1
 	RNGItemSlotTimer = DeterministicItemSlot1.subscribeToModel
-	local DeterministicItemSlot1Timer = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local DeterministicItemSlot1Timer = Engine[@"getmodelforcontroller"](f1_arg1)
 	RNGItemSlotTimer(DeterministicItemSlot2Timer, DeterministicItemSlot1Timer.LastInput, function(f63_arg0, f63_arg1)
-		CoD.Menu.UpdateButtonShownState(f63_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f63_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
+		CoD.Menu.UpdateButtonShownState(f63_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f63_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"])
 	end, false)
 	DeterministicItemSlot1:registerEventHandler("list_item_gain_focus", function(element, event)
 		local f64_local0 = nil
@@ -524,14 +524,14 @@ CoD.BlackJacksShopFrameSunset.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 		elseif element.super.gainFocus then
 			f67_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_rtrig"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_ltrig"])
 		return f67_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(DeterministicItemSlot1, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(DeterministicItemSlot1, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "lootType", LuaEnum.LOOT_TYPE.CONTRACT) and not CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "emptyItem") and CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "revealed") then
 			PlaySoundAlias("uin_toggle_generic")
 			SetControllerModelValue(controller, "LootStreamProgress.playAnimation", false)
@@ -548,16 +548,16 @@ CoD.BlackJacksShopFrameSunset.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 		end
 	end, function(element, menu, controller)
 		if CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "lootType", LuaEnum.LOOT_TYPE.CONTRACT) and not CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "emptyItem") and CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "revealed") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		elseif not CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "emptyItem") and CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "revealed") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(DeterministicItemSlot1, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(DeterministicItemSlot1, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], nil, function(element, menu, controller, model)
 		if CoD.ModelUtility.IsSelfModelValueNonEmptyString(element, controller, "movieName") and IsGamepad(controller) and not CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "emptyItem") and CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "revealed") then
 			SetControllerModelValue(controller, "LootStreamProgress.playAnimation", false)
 			CoD.VideoStreamingUtility.SetupVoDMovie(controller, element, "")
@@ -569,13 +569,13 @@ CoD.BlackJacksShopFrameSunset.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 		end
 	end, function(element, menu, controller)
 		if CoD.ModelUtility.IsSelfModelValueNonEmptyString(element, controller, "movieName") and IsGamepad(controller) and not CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "emptyItem") and CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "revealed") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x52FB29ED3A3CA79, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"menu/preview", nil, nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(DeterministicItemSlot1, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB], "ui_remove", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(DeterministicItemSlot1, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"], "ui_remove", function(element, menu, controller, model)
 		if CoD.ModelUtility.IsSelfModelValueNonEmptyString(element, controller, "movieName") and IsMouseOrKeyboard(controller) and not CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "emptyItem") and CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "revealed") then
 			SetControllerModelValue(controller, "LootStreamProgress.playAnimation", false)
 			CoD.VideoStreamingUtility.SetupVoDMovie(controller, element, "")
@@ -587,13 +587,13 @@ CoD.BlackJacksShopFrameSunset.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 		end
 	end, function(element, menu, controller)
 		if CoD.ModelUtility.IsSelfModelValueNonEmptyString(element, controller, "movieName") and IsMouseOrKeyboard(controller) and not CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "emptyItem") and CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "revealed") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xA86619565BE54DB], 0x52FB29ED3A3CA79, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "ui_remove")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_pckey_2"], @"menu/preview", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "ui_remove")
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(DeterministicItemSlot1, f1_arg1, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA], "MWHEELDOWN", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(DeterministicItemSlot1, f1_arg1, Enum[@"luibutton"][@"lui_key_rtrig"], "MWHEELDOWN", function(element, menu, controller, model)
 		if not IsRepeatButtonPress(model) then
 			CoD.GridAndListUtility.NavigateGridItemOnParentGridOrList(element, controller, true)
 			return true
@@ -601,13 +601,13 @@ CoD.BlackJacksShopFrameSunset.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 		end
 	end, function(element, menu, controller)
 		if not IsRepeatButtonPress(nil) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA], 0x0, nil, "MWHEELDOWN")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_rtrig"], @"hash_0", nil, "MWHEELDOWN")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(DeterministicItemSlot1, f1_arg1, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC], "MWHEELUP", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(DeterministicItemSlot1, f1_arg1, Enum[@"luibutton"][@"lui_key_ltrig"], "MWHEELUP", function(element, menu, controller, model)
 		if not IsRepeatButtonPress(model) then
 			CoD.GridAndListUtility.NavigateGridItemOnParentGridOrList(element, controller, false)
 			return true
@@ -615,7 +615,7 @@ CoD.BlackJacksShopFrameSunset.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 		end
 	end, function(element, menu, controller)
 		if not IsRepeatButtonPress(nil) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC], 0x0, nil, "MWHEELUP")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_ltrig"], @"hash_0", nil, "MWHEELUP")
 			return false
 		else
 			return false
@@ -638,7 +638,7 @@ CoD.BlackJacksShopFrameSunset.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 			CoD.GridAndListUtility.UpdateDataSource(f81_local0, true, true, true)
 		end
 	end)
-	DeterministicItemSlot1:AddContextualMenuAction(f1_arg0, f1_arg1, 0x52FB29ED3A3CA79, function(f82_arg0, f82_arg1, f82_arg2, f82_arg3)
+	DeterministicItemSlot1:AddContextualMenuAction(f1_arg0, f1_arg1, @"menu/preview", function(f82_arg0, f82_arg1, f82_arg2, f82_arg3)
 		if CoD.ModelUtility.IsSelfModelValueNonEmptyString(f82_arg0, f82_arg2, "movieName") then
 			return function(f83_arg0, f83_arg1, f83_arg2, f83_arg3)
 				SetControllerModelValue(f83_arg2, "LootStreamProgress.playAnimation", false)
@@ -742,16 +742,16 @@ CoD.BlackJacksShopFrameSunset.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	SpecialOrdersBracket = LUI.UIImage.new(0.5, 0.5, -277, -27, 0.5, 0.5, -373, -365)
 	SpecialOrdersBracket:setRGB(0.98, 1, 0.89)
 	SpecialOrdersBracket:setAlpha(0.5)
-	SpecialOrdersBracket:setImage(RegisterImage(0xC325BED3F226657))
-	SpecialOrdersBracket:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	SpecialOrdersBracket:setImage(RegisterImage(@"hash_4C325BED3F226657"))
+	SpecialOrdersBracket:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	SpecialOrdersBracket:setShaderVector(0, 0, 0, 0, 0)
 	SpecialOrdersBracket:setupNineSliceShader(16, 4)
 	self:addElement(SpecialOrdersBracket)
 	self.SpecialOrdersBracket = SpecialOrdersBracket
 	FeaturedItemsBracket = LUI.UIImage.new(0.5, 0.5, -846, -311, 0.5, 0.5, -373, -365)
 	FeaturedItemsBracket:setAlpha(0.5)
-	FeaturedItemsBracket:setImage(RegisterImage(0xC325BED3F226657))
-	FeaturedItemsBracket:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	FeaturedItemsBracket:setImage(RegisterImage(@"hash_4C325BED3F226657"))
+	FeaturedItemsBracket:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	FeaturedItemsBracket:setShaderVector(0, 0, 0, 0, 0)
 	FeaturedItemsBracket:setupNineSliceShader(16, 4)
 	self:addElement(FeaturedItemsBracket)
@@ -759,8 +759,8 @@ CoD.BlackJacksShopFrameSunset.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	TiledwhiteNoiseBacking = LUI.UIImage.new(0, 0, 115, 649, 0, 0, 148, 174)
 	TiledwhiteNoiseBacking:setRGB(0.81, 0.89, 0.93)
 	TiledwhiteNoiseBacking:setAlpha(0.04)
-	TiledwhiteNoiseBacking:setImage(RegisterImage(0x7167D8C33A06020))
-	TiledwhiteNoiseBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	TiledwhiteNoiseBacking:setImage(RegisterImage(@"uie_ui_menu_aar_repeat_white_bg"))
+	TiledwhiteNoiseBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	TiledwhiteNoiseBacking:setShaderVector(0, 0, 0, 0, 0)
 	TiledwhiteNoiseBacking:setupNineSliceShader(64, 64)
 	self:addElement(TiledwhiteNoiseBacking)
@@ -768,8 +768,8 @@ CoD.BlackJacksShopFrameSunset.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	local TiledwhiteNoiseBacking2 = LUI.UIImage.new(0, 0, 684, 933, 0, 0, 148, 174)
 	TiledwhiteNoiseBacking2:setRGB(0.81, 0.89, 0.93)
 	TiledwhiteNoiseBacking2:setAlpha(0.04)
-	TiledwhiteNoiseBacking2:setImage(RegisterImage(0x7167D8C33A06020))
-	TiledwhiteNoiseBacking2:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	TiledwhiteNoiseBacking2:setImage(RegisterImage(@"uie_ui_menu_aar_repeat_white_bg"))
+	TiledwhiteNoiseBacking2:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	TiledwhiteNoiseBacking2:setShaderVector(0, 0, 0, 0, 0)
 	TiledwhiteNoiseBacking2:setupNineSliceShader(64, 64)
 	self:addElement(TiledwhiteNoiseBacking2)
@@ -777,28 +777,28 @@ CoD.BlackJacksShopFrameSunset.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	local TiledwhiteNoiseBacking3 = LUI.UIImage.new(0, 0, 968, 1217, 0, 0, 148, 174)
 	TiledwhiteNoiseBacking3:setRGB(0.81, 0.89, 0.93)
 	TiledwhiteNoiseBacking3:setAlpha(0.04)
-	TiledwhiteNoiseBacking3:setImage(RegisterImage(0x7167D8C33A06020))
-	TiledwhiteNoiseBacking3:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	TiledwhiteNoiseBacking3:setImage(RegisterImage(@"uie_ui_menu_aar_repeat_white_bg"))
+	TiledwhiteNoiseBacking3:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	TiledwhiteNoiseBacking3:setShaderVector(0, 0, 0, 0, 0)
 	TiledwhiteNoiseBacking3:setupNineSliceShader(64, 64)
 	self:addElement(TiledwhiteNoiseBacking3)
 	self.TiledwhiteNoiseBacking3 = TiledwhiteNoiseBacking3
 	local RNGItemSlotLabel = LUI.UIText.new(0.5, 0.5, -270, -32, 0.5, 0.5, -388, -370)
 	RNGItemSlotLabel:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
-	RNGItemSlotLabel:setText(LocalizeToUpperString(0xDD64FB205312314))
+	RNGItemSlotLabel:setText(LocalizeToUpperString(@"hash_6DD64FB205312314"))
 	RNGItemSlotLabel:setTTF("ttmussels_regular")
 	RNGItemSlotLabel:setLetterSpacing(4)
-	RNGItemSlotLabel:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	RNGItemSlotLabel:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	RNGItemSlotLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	RNGItemSlotLabel:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	self:addElement(RNGItemSlotLabel)
 	self.RNGItemSlotLabel = RNGItemSlotLabel
 	local DeterministicItemLabel = LUI.UIText.new(0.5, 0.5, -840, -316, 0.5, 0.5, -388, -370)
 	DeterministicItemLabel:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
-	DeterministicItemLabel:setText(LocalizeToUpperString(0x5DAEFC4C9B0A8FA))
+	DeterministicItemLabel:setText(LocalizeToUpperString(@"menu/my_shop"))
 	DeterministicItemLabel:setTTF("ttmussels_regular")
 	DeterministicItemLabel:setLetterSpacing(4)
-	DeterministicItemLabel:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	DeterministicItemLabel:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	DeterministicItemLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	DeterministicItemLabel:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	self:addElement(DeterministicItemLabel)
 	self.DeterministicItemLabel = DeterministicItemLabel
 	local MyShopTimer = CoD.ListLabelHideable.new(f1_arg0, f1_arg1, 0.5, 0.5, 11, 253, 0.5, 0.5, -369, -319)
@@ -835,17 +835,17 @@ CoD.BlackJacksShopFrameSunset.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self.ReservesBribeStackCarouselTall = ReservesBribeStackCarouselTall
 	local MyShopLabel = LUI.UIText.new(0.5, 0.5, 14, 252, 0.5, 0.5, -388, -370)
 	MyShopLabel:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
-	MyShopLabel:setText(LocalizeToUpperString(0xFCC6C603186E74))
+	MyShopLabel:setText(LocalizeToUpperString(@"hash_FCC6C603186E74"))
 	MyShopLabel:setTTF("ttmussels_regular")
 	MyShopLabel:setLetterSpacing(4)
-	MyShopLabel:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	MyShopLabel:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	MyShopLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	MyShopLabel:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	self:addElement(MyShopLabel)
 	self.MyShopLabel = MyShopLabel
 	local MyShopBracket = LUI.UIImage.new(0.5, 0.5, 7, 257, 0.5, 0.5, -373, -365)
 	MyShopBracket:setAlpha(0.5)
-	MyShopBracket:setImage(RegisterImage(0xC325BED3F226657))
-	MyShopBracket:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	MyShopBracket:setImage(RegisterImage(@"hash_4C325BED3F226657"))
+	MyShopBracket:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	MyShopBracket:setShaderVector(0, 0, 0, 0, 0)
 	MyShopBracket:setupNineSliceShader(16, 4)
 	self:addElement(MyShopBracket)
@@ -880,7 +880,7 @@ CoD.BlackJacksShopFrameSunset.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	end)
 	local WeaponBribePreviewWidget = SupplyChainDetails
 	local DiscountTiersWidget = SupplyChainDetails.subscribeToModel
-	local f1_local22 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local22 = Engine[@"getmodelforcontroller"](f1_arg1)
 	DiscountTiersWidget(WeaponBribePreviewWidget, f1_local22.LastInput, function(f101_arg0)
 		f1_arg0:updateElementState(SupplyChainDetails, {
 			name = "model_validation",
@@ -952,7 +952,7 @@ CoD.BlackJacksShopFrameSunset.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	})
 	local f1_local23 = self
 	f1_local22 = self.subscribeToModel
-	local f1_local24 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local24 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local22(f1_local23, f1_local24.itemShopSunsetFocus, function(f110_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

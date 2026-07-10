@@ -28,7 +28,7 @@ CoD.StartMenu_Theater.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	ButtonList:setWidgetType(CoD.DemoSideBarButton)
 	ButtonList:setVerticalCount(4)
 	ButtonList:setSpacing(6)
-	ButtonList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	ButtonList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	ButtonList:setDataSource("StartMenuGameOptions")
 	ButtonList:registerEventHandler("list_item_gain_focus", function(element, event)
 		local f2_local0 = nil
@@ -42,14 +42,14 @@ CoD.StartMenu_Theater.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 		elseif element.super.gainFocus then
 			f3_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f3_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(ButtonList, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(ButtonList, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		ProcessListAction(self, element, controller, menu)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, nil)
 		return false
 	end, false)
 	self:addElement(ButtonList)
@@ -60,7 +60,7 @@ CoD.StartMenu_Theater.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	OptionGroups:setWidgetType(CoD.StartMenu_Options_SettingSlider_Wrapper)
 	OptionGroups:setVerticalCount(8)
 	OptionGroups:setSpacing(10)
-	OptionGroups:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	OptionGroups:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	OptionGroups:setDataSource("PlayerSettingsTheaterList")
 	OptionGroups:registerEventHandler("list_item_gain_focus", function(element, event)
 		local f6_local0 = nil
@@ -74,10 +74,10 @@ CoD.StartMenu_Theater.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 		elseif element.super.gainFocus then
 			f7_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f7_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(OptionGroups, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(OptionGroups, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if HasListAction(element, controller) then
 			ProcessListAction(self, element, controller, menu)
 			return true
@@ -85,7 +85,7 @@ CoD.StartMenu_Theater.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 		end
 	end, function(element, menu, controller)
 		if HasListAction(element, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		else
 			return false
@@ -124,7 +124,7 @@ CoD.StartMenu_Theater.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	end)
 	local f1_local8 = self
 	local f1_local9 = self.subscribeToModel
-	local f1_local10 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local10 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local9(f1_local8, f1_local10.LastInput, function(f12_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

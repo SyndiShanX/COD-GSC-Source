@@ -2,8 +2,8 @@ CoD.FreeCursorUtility = {}
 CoD.FreeCursorUtility.TooltipArchetypes = LuaEnum.createEnum("DEFAULT", "ACTION_PROMPT", "FEATURE_TITLE", "IDENTITY")
 CoD.FreeCursorUtility.LockTypes = LuaEnum.createEnum("PENDINGLOCK", "LOCKED")
 CoD.FreeCursorUtility.SetAllowFreeCursor = function(f1_arg0)
-	if Engine[0x8069F5969D47DEF]() then
-		Dvar[0x8E0F129D51A415C]:set(f1_arg0)
+	if Engine[@"usingfreecursor"]() then
+		Dvar[@"ui_usingfreecursor"]:set(f1_arg0)
 	end
 end
 CoD.FreeCursorUtility.AddLockedFocusLeftOrRightNavigation = function(f2_arg0, f2_arg1, f2_arg2, f2_arg3)
@@ -100,7 +100,7 @@ CoD.FreeCursorUtility.UpdateSetupContext = function(f12_arg0, f12_arg1)
 	end
 end
 CoD.FreeCursorUtility.RetriggerCursorPositionNoDelay = function(f13_arg0, f13_arg1)
-	if Engine[0x267ACA658A43FBD](f13_arg1) then
+	if Engine[@"hash_267ACA658A43FBD"](f13_arg1) then
 		return
 	elseif IsFreeCursorActive(f13_arg1) then
 		local f13_local0 = f13_arg0:getRoot()
@@ -452,7 +452,7 @@ CoD.FreeCursorUtility.ConfinePositionToScreenSafe = function(f43_arg0, f43_arg1)
 		local f44_local2, f44_local3 = f44_local0:get()
 		f44_local2 = math.floor(f44_local2 + 0.5)
 		f44_local3 = math.floor(f44_local3 + 0.5)
-		local f44_local4, f44_local5 = Engine[0x1A28BE9919661FA](f43_arg1)
+		local f44_local4, f44_local5 = Engine[@"getscreensize"](f43_arg1)
 		if CoD.isPC then
 			local f44_local6 = f43_arg0:getMenu()
 			if f44_local6 then
@@ -520,11 +520,11 @@ CoD.FreeCursorUtility.SetVisibilityToAnyContextualButtonVisible = function(f45_a
 		return
 	end
 	for f45_local4, f45_local5 in ipairs({
-		Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09],
-		Enum[0x3DD78803F918E9D][0xC083113BC81F23F],
-		Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F],
+		Enum[@"luibutton"][@"lui_key_xby_pstriangle"],
+		Enum[@"luibutton"][@"lui_key_xbx_pssquare"],
+		Enum[@"luibutton"][@"lui_key_xba_pscross"],
 	}) do
-		if f45_local0[f45_local5] and f45_local0[f45_local5]:get() == Enum[0xF4865E3551C3835][0x901DFC093ED4187] and f45_local0[f45_local5].flags and CoD.BitUtility.IsBitwiseAndNonZero(f45_local0[f45_local5].flags:get(), Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3]) then
+		if f45_local0[f45_local5] and f45_local0[f45_local5]:get() == Enum[@"luibuttonpromptstates"][@"flag_enable_prompts"] and f45_local0[f45_local5].flags and CoD.BitUtility.IsBitwiseAndNonZero(f45_local0[f45_local5].flags:get(), Enum[@"luibuttonpromptflags"][@"bpf_contextual"]) then
 			f45_arg2:setAlpha(1)
 			return
 		end
@@ -532,12 +532,12 @@ CoD.FreeCursorUtility.SetVisibilityToAnyContextualButtonVisible = function(f45_a
 	f45_arg2:setAlpha(0)
 end
 CoD.FreeCursorUtility.RecenterFreeCursorPosition = function(f46_arg0)
-	Engine[0xBDC053F9831198A](f46_arg0)
+	Engine[@"hash_BDC053F9831198A"](f46_arg0)
 end
 CoD.FreeCursorUtility.IsTooltipInDetailedView = function(f47_arg0, f47_arg1)
 	local f47_local0 = CoD.ModelUtility.IsSelfModelValueNonEmptyString(f47_arg0, f47_arg1, "detailedDescription")
 	if f47_local0 then
-		f47_local0 = CoD.ModelUtility.AreButtonModelValueBitsSet(f47_arg1, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA], Enum[0xE29E259801BC1A4][0x253A6F6CAAAE464])
+		f47_local0 = CoD.ModelUtility.AreButtonModelValueBitsSet(f47_arg1, Enum[@"luibutton"][@"lui_key_rtrig"], Enum[@"luibuttonflags"][@"flag_down"])
 		if not f47_local0 then
 			f47_local0 = CoD.FreeCursorUtility.IsDetailedViewPCActive(f47_arg1)
 		end
@@ -552,7 +552,7 @@ CoD.FreeCursorUtility.IsTooltipTitleVisible = function(f48_arg0, f48_arg1)
 		if not f48_local0 then
 			return false
 		elseif f48_local0 == CoD.FreeCursorUtility.TooltipArchetypes.DEFAULT then
-			local f48_local1 = CoD.ModelUtility.AreButtonModelValueBitsSet(f48_arg1, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA], Enum[0xE29E259801BC1A4][0x253A6F6CAAAE464])
+			local f48_local1 = CoD.ModelUtility.AreButtonModelValueBitsSet(f48_arg1, Enum[@"luibutton"][@"lui_key_rtrig"], Enum[@"luibuttonflags"][@"flag_down"])
 			if not f48_local1 then
 				f48_local1 = CoD.FreeCursorUtility.IsDetailedViewPCActive(f48_arg1)
 			end
@@ -571,10 +571,10 @@ CoD.FreeCursorUtility.ShowingContextualPromptForFlags = function(f49_arg0, f49_a
 			return f49_local0
 		end
 	end
-	f49_local0 = CoD.ModelUtility.IsSelfModelValueEnumFlagSet(f49_arg0, f49_arg1, "flags", Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3])
+	f49_local0 = CoD.ModelUtility.IsSelfModelValueEnumFlagSet(f49_arg0, f49_arg1, "flags", Enum[@"luibuttonpromptflags"][@"bpf_contextual"])
 end
 CoD.FreeCursorUtility.XUIDToClientName = function(f50_arg0, f50_arg1)
-	local f50_local0 = Engine[0x34E2C136520C3C8](Enum[0x7CA2DE5266A94BF][0xC46B73E8E18BA2], f50_arg1)
+	local f50_local0 = Engine[@"hash_334E2C136520C3C8"](Enum[@"lobbymodule"][@"lobby_module_client"], f50_arg1)
 	local f50_local1
 	if f50_local0 then
 		f50_local1 = f50_local0.client.gamertag
@@ -586,7 +586,7 @@ CoD.FreeCursorUtility.XUIDToClientName = function(f50_arg0, f50_arg1)
 	f50_local1 = ""
 end
 CoD.FreeCursorUtility.XUIDToClanTag = function(f51_arg0, f51_arg1)
-	local f51_local0 = Engine[0x34E2C136520C3C8](Enum[0x7CA2DE5266A94BF][0xC46B73E8E18BA2], f51_arg1)
+	local f51_local0 = Engine[@"hash_334E2C136520C3C8"](Enum[@"lobbymodule"][@"lobby_module_client"], f51_arg1)
 	local f51_local1
 	if f51_local0 then
 		f51_local1 = f51_local0.client.clantag
@@ -601,7 +601,7 @@ CoD.FreeCursorUtility.XUIDToEmblemBackgroundId = function(f52_arg0)
 	local f52_local0 = f52_arg0
 	local f52_local1
 	if f52_local0 then
-		f52_local1 = Engine[0x2BA5D66D21186AD](f52_local0)
+		f52_local1 = Engine[@"hash_72BA5D66D21186AD"](f52_local0)
 		if not f52_local1 then
 		else
 			return f52_local1
@@ -613,7 +613,7 @@ DataSources.FreeCursor = {
 	getModel = function(f53_arg0)
 		f53_arg0 = CoD.FreeCursorUtility.GetCursorControllerIndex(f53_arg0)
 		if not DataSources.FreeCursor.models[f53_arg0] then
-			local f53_local0 = Engine[0x4DF5CFBC1771947](f53_arg0)
+			local f53_local0 = Engine[@"getmodelforcontroller"](f53_arg0)
 			f53_local0 = f53_local0:create("FreeCursor")
 			local f53_local1 = f53_local0:create("hasFocus")
 			f53_local1:set(false)
@@ -638,8 +638,8 @@ DataSources.FreeCursor = {
 			if DataSources.FreeCursor.subscriptionElements[f53_arg0] == nil then
 				DataSources.FreeCursor.subscriptionElements[f53_arg0] = LUI.UIElement.new()
 				if not CoD.isPC then
-					DataSources.FreeCursor.subscriptionElements[f53_arg0]:subscribeToGlobalModel(f53_arg0, "PerController", "ButtonBits." .. Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA], function(model)
-						f53_local1.detailedView:set(CoD.BitUtility.IsBitwiseAndNonZero(model:get(), Enum[0xE29E259801BC1A4][0x253A6F6CAAAE464]))
+					DataSources.FreeCursor.subscriptionElements[f53_arg0]:subscribeToGlobalModel(f53_arg0, "PerController", "ButtonBits." .. Enum[@"luibutton"][@"lui_key_rtrig"], function(model)
+						f53_local1.detailedView:set(CoD.BitUtility.IsBitwiseAndNonZero(model:get(), Enum[@"luibuttonflags"][@"flag_down"]))
 					end)
 				end
 			end
@@ -726,7 +726,7 @@ DataSources.FreeCursor = {
 				"displayName",
 				"name",
 			},
-			default = 0x0,
+			default = @"hash_0",
 		},
 		{
 			name = "description",
@@ -734,7 +734,7 @@ DataSources.FreeCursor = {
 				"desc",
 				"description",
 			},
-			default = 0x0,
+			default = @"hash_0",
 		},
 		{
 			name = "detailedDescription",
@@ -749,14 +749,14 @@ DataSources.FreeCursor = {
 			paths = {
 				"headerName",
 			},
-			default = 0x0,
+			default = @"hash_0",
 		},
 		{
 			name = "headerUseString",
 			paths = {
 				"headerUseString",
 			},
-			default = 0x0,
+			default = @"hash_0",
 		},
 		{
 			name = "attachmentDataSource",
@@ -778,7 +778,7 @@ DataSources.FreeCursor = {
 				"unlockDescription",
 				"levelUnlockDescription",
 			},
-			default = 0x0,
+			default = @"hash_0",
 		},
 		{
 			name = "cautionDescription",
@@ -786,7 +786,7 @@ DataSources.FreeCursor = {
 				"cautionDesc",
 				"cautionDescription",
 			},
-			default = 0x0,
+			default = @"hash_0",
 		},
 		{
 			name = "characterIndex",
@@ -800,7 +800,7 @@ DataSources.FreeCursor = {
 			paths = {
 				"characterTraitSummary",
 			},
-			default = 0x0,
+			default = @"hash_0",
 		},
 		{
 			name = "clientNum",
@@ -866,7 +866,7 @@ end
 CoD.FreeCursorUtility.DisableFreeCursorSnapping = function(f65_arg0, f65_arg1)
 	f65_arg0.__freeCursorSnapDistance = nil
 	if not f65_arg0.occludedBy then
-		Engine[0x18F7786899BA625](f65_arg1)
+		Engine[@"hash_718F7786899BA625"](f65_arg1)
 	end
 end
 CoD.FreeCursorUtility.GiveFocusToElementsDefaultFocus = function(f66_arg0, f66_arg1, f66_arg2)
@@ -895,7 +895,7 @@ CoD.FreeCursorUtility.ShouldHideCursor = function(f68_arg0)
 	return f68_local1
 end
 CoD.FreeCursorUtility.UpdateFreeCursorState = function(f69_arg0, f69_arg1, f69_arg2)
-	if Engine[0x8069F5969D47DEF]() then
+	if Engine[@"usingfreecursor"]() then
 		local f69_local0 = DataSources.FreeCursor.getModel(f69_arg1)
 		if f69_arg2 ~= nil then
 			local f69_local1 = DataSources.FreeCursor.setupContext
@@ -921,7 +921,7 @@ CoD.FreeCursorUtility.UpdateFreeCursorState = function(f69_arg0, f69_arg1, f69_a
 end
 CoD.FreeCursorUtility.IsDetailedViewPCActive = function(f70_arg0)
 	if CoD.isPC then
-		local f70_local0 = Engine[0x4DF5CFBC1771947](f70_arg0)
+		local f70_local0 = Engine[@"getmodelforcontroller"](f70_arg0)
 		f70_local0 = f70_local0:create("FreeCursor")
 		local f70_local1 = f70_local0:create("contextualInfo")
 		return f70_local1.detailedViewPC:get()
@@ -1034,7 +1034,7 @@ CoD.FreeCursorUtility.ToggleDetailedViewPC = function(f79_arg0, f79_arg1, f79_ar
 	end
 end
 CoD.FreeCursorUtility.OpenDetailedViewPC = function(f80_arg0, f80_arg1)
-	local f80_local0 = Engine[0x4DF5CFBC1771947](f80_arg1)
+	local f80_local0 = Engine[@"getmodelforcontroller"](f80_arg1)
 	f80_local0 = f80_local0:create("FreeCursor")
 	local f80_local1 = f80_local0:create("contextualInfo")
 	if CoD.FreeCursorUtility.CanOpenTooltip(f80_arg1) and not f80_local1.detailedViewPC:get() then
@@ -1044,7 +1044,7 @@ CoD.FreeCursorUtility.OpenDetailedViewPC = function(f80_arg0, f80_arg1)
 	end
 end
 CoD.FreeCursorUtility.CloseDetailedViewPC = function(f81_arg0, f81_arg1)
-	local f81_local0 = Engine[0x4DF5CFBC1771947](f81_arg1)
+	local f81_local0 = Engine[@"getmodelforcontroller"](f81_arg1)
 	f81_local0 = f81_local0:create("FreeCursor")
 	local f81_local1 = f81_local0:create("contextualInfo")
 	if f81_local1.detailedViewPC:get() then
@@ -1063,7 +1063,7 @@ CoD.FreeCursorUtility.PrepareTooltipPC = function(f82_arg0, f82_arg1, f82_arg2)
 		end
 	end
 	local f82_local1 = function(f84_arg0, f84_arg1, f84_arg2, f84_arg3)
-		local f84_local0, f84_local1 = Engine[0x1A28BE9919661FA](f82_arg1)
+		local f84_local0, f84_local1 = Engine[@"getscreensize"](f82_arg1)
 		local f84_local2 = f84_arg0:customGetHeight(nil)
 		local f84_local3 = f84_arg0:customGetWidth()
 		local f84_local4 = math.floor(f84_local1 * 0.8)
@@ -1091,9 +1091,9 @@ CoD.FreeCursorUtility.PrepareTooltipPC = function(f82_arg0, f82_arg1, f82_arg2)
 				f85_local0 = f85_local0.tooltipArea
 			end
 			local f85_local3, f85_local4, f85_local5, f85_local6 = f85_local1:getRect()
-			local f85_local7, f85_local8, f85_local9, f85_local10 = Engine[0x695399A0E06EC35](f82_arg1, f85_local0)
+			local f85_local7, f85_local8, f85_local9, f85_local10 = Engine[@"hash_3695399A0E06EC35"](f82_arg1, f85_local0)
 			if f85_local3 ~= nil then
-				local f85_local11, f85_local12 = Engine[0x1A28BE9919661FA](f82_arg1)
+				local f85_local11, f85_local12 = Engine[@"getscreensize"](f82_arg1)
 				f85_local7 = f85_local7 * f85_local11 / (f85_local5 - f85_local3)
 				f85_local9 = f85_local9 * f85_local11 / (f85_local5 - f85_local3)
 				f85_local8 = f85_local8 * f85_local12 / (f85_local6 - f85_local4)
@@ -1137,7 +1137,7 @@ CoD.FreeCursorUtility.CanShowContextualButtonPromptPC = function(f90_arg0, f90_a
 end
 CoD.FreeCursorUtility.GetCursorControllerIndex = function(f91_arg0)
 	if CoD.isFrontend then
-		return Engine[0xA5B9C0111291A8B]()
+		return Engine[@"getprimarycontroller"]()
 	else
 		return f91_arg0
 	end
@@ -1146,7 +1146,7 @@ CoD.FreeCursorUtility.UpdateContextualPromptModelPC = function(f92_arg0, f92_arg
 	DataSources.FreeCursor.updateContextualPromptPC(f92_arg1)
 end
 CoD.FreeCursorUtility.SetIsShowingContextualPromptsModelPC = function(f93_arg0, f93_arg1, f93_arg2)
-	local f93_local0 = Engine[0x4DF5CFBC1771947](f93_arg1)
+	local f93_local0 = Engine[@"getmodelforcontroller"](f93_arg1)
 	f93_local0 = f93_local0:create("FreeCursor")
 	local f93_local1 = f93_local0:create("contextualInfo")
 	f93_arg0:subscribeToGlobalModel(f93_arg1, "FreeCursor", "contextualInfo.updateContextualPromptPC", function()

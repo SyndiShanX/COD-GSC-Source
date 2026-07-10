@@ -12,21 +12,21 @@ Lobby.Core.AddProcessBack(LuaEnum.UI.DIRECTOR_ONLINE_ZM_PREGAME, LuaEnum.UI.DIRE
 	return Lobby.ProcessNavigate.PrivateLobbyNavigate(f2_arg0, f2_arg1, f2_arg2, f2_arg3)
 end)
 Lobby.Core.AddProcessForward(LuaEnum.UI.DIRECTOR_ONLINE, LuaEnum.UI.DIRECTOR_ONLINE_ZM_PUBLIC, function(f3_arg0, f3_arg1, f3_arg2)
-	if Dvar[0x4BADE8473F0165F]:get() == true then
+	if Dvar[@"hash_44BADE8473F0165F"]:get() == true then
 		return Lobby.ProcessNavigate.CreatePublicGameLobbyAsyncMatchmaking(f3_arg0, f3_arg1, f3_arg2)
 	else
 		return Lobby.ProcessNavigate.CreatePublicGameLobby(f3_arg0, f3_arg1, f3_arg2)
 	end
 end)
 Lobby.Core.AddProcessForward(LuaEnum.UI.DIRECTOR_ONLINE_ZM_PREGAME, LuaEnum.UI.DIRECTOR_ONLINE_ZM_PUBLIC, function(f4_arg0, f4_arg1, f4_arg2)
-	if Dvar[0x4BADE8473F0165F]:get() == true then
+	if Dvar[@"hash_44BADE8473F0165F"]:get() == true then
 		return Lobby.ProcessNavigate.CreatePublicGameLobbyAsyncMatchmaking(f4_arg0, f4_arg1, f4_arg2)
 	else
 		return Lobby.ProcessNavigate.CreatePublicGameLobby(f4_arg0, f4_arg1, f4_arg2)
 	end
 end)
 Lobby.Core.AddProcessBack(LuaEnum.UI.DIRECTOR_ONLINE_ZM_PUBLIC, LuaEnum.UI.DIRECTOR_ONLINE_ZM_PREGAME, function(f5_arg0, f5_arg1, f5_arg2, f5_arg3)
-	if Dvar[0x4BADE8473F0165F]:get() == true then
+	if Dvar[@"hash_44BADE8473F0165F"]:get() == true then
 		return Lobby.ProcessNavigate.LeaveGameLobbyAsyncMatchmaking(f5_arg0, f5_arg1, f5_arg2, f5_arg3)
 	else
 		return Lobby.ProcessNavigate.LeaveGameLobby(f5_arg0, f5_arg1, f5_arg2, f5_arg3)
@@ -54,5 +54,5 @@ Lobby.Core.AddProcessForward(LuaEnum.UI.DIRECTOR_LAN_SELECT, LuaEnum.UI.DIRECTOR
 	return Lobby.ProcessNavigate.PrivateLobbyNavigate(f12_arg0, f12_arg1, f12_arg2)
 end)
 Lobby.Core.AddProcessBack(LuaEnum.UI.DIRECTOR_LAN_ZM, LuaEnum.UI.DIRECTOR_LAN_SELECT, function(f13_arg0, f13_arg1, f13_arg2, f13_arg3)
-	return Lobby.Process.ReloadPrivateLobby(f13_arg0, Enum[0xC84D3E505F1444][0xBAA8EC6F3E77255], f13_arg2)
+	return Lobby.Process.ReloadPrivateLobby(f13_arg0, Enum[@"lobbynetworkmode"][@"lobby_networkmode_lan"], f13_arg2)
 end)

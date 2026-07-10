@@ -22,7 +22,7 @@ CoD.Social_RecentPlayers.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	self.Background = Background
 	local SocialNoFriends = CoD.Social_NoFriends.new(f1_arg0, f1_arg1, 0.5, 0.5, -960, 960, 0, 0, 0, 1080)
 	SocialNoFriends:setAlpha(0)
-	SocialNoFriends.noFriends:setText(Engine[0xF9F1239CFD921FE](0x575DC659C9D5D27))
+	SocialNoFriends.noFriends:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_6575DC659C9D5D27"))
 	self:addElement(SocialNoFriends)
 	self.SocialNoFriends = SocialNoFriends
 	local f1_local3 = nil
@@ -33,10 +33,10 @@ CoD.Social_RecentPlayers.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	self.playerInfo = playerInfo
 	local Title = LUI.UIText.new(0.5, 0.5, -479, 4, 0, 0, 175, 209)
 	Title:setAlpha(0.8)
-	Title:setText(LocalizeToUpperString(0x5F155722E34DA5C))
+	Title:setText(LocalizeToUpperString(@"menu/recent"))
 	Title:setTTF("ttmussels_regular")
 	Title:setLetterSpacing(6)
-	Title:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	Title:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(Title)
 	self.Title = Title
 	local PCSimpleVScrollList = nil
@@ -60,8 +60,8 @@ CoD.Social_RecentPlayers.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	infoBracketBot:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	infoBracketBot:setAlpha(0.1)
 	infoBracketBot:setZRot(180)
-	infoBracketBot:setImage(RegisterImage(0xC325BED3F226657))
-	infoBracketBot:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	infoBracketBot:setImage(RegisterImage(@"hash_4C325BED3F226657"))
+	infoBracketBot:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	infoBracketBot:setShaderVector(0, 0, 0, 0, 0)
 	infoBracketBot:setupNineSliceShader(16, 4)
 	self:addElement(infoBracketBot)

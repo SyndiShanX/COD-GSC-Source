@@ -10,7 +10,7 @@ CoD.CallingCards_Asset_steampunkwarriors_gunarm.new = function(f1_arg0, f1_arg1,
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local arm = LUI.UIImage.new(0, 0, -204, 28, 0, 0, -12.5, 67.5)
-	arm:setImage(RegisterImage(0x3C51811F0DDA462))
+	arm:setImage(RegisterImage(@"hash_23C51811F0DDA462"))
 	self:addElement(arm)
 	self.arm = arm
 	local gun = CoD.CallingCards_Asset_steampunkwarriors_gun.new(f1_arg0, f1_arg1, 0, 0, -199.5, -189.5, 0, 0, 39.5, 49.5)
@@ -41,11 +41,11 @@ CoD.CallingCards_Asset_steampunkwarriors_gunarm.__clipsPerState = {
 								f3_arg0.clipFinished(element, event)
 							end)
 						end
-						f6_arg0:beginAnimation(390, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+						f6_arg0:beginAnimation(390, Enum[@"luitween"][@"luitween_ease_out"])
 						f6_arg0:setZRot(0)
 						f6_arg0:registerEventHandler("transition_complete_keyframe", f6_local0)
 					end
-					f5_arg0:beginAnimation(100, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f5_arg0:beginAnimation(100, Enum[@"luitween"][@"luitween_ease_out"])
 					f5_arg0:setZRot(-18)
 					f5_arg0:registerEventHandler("transition_complete_keyframe", f5_local0)
 				end

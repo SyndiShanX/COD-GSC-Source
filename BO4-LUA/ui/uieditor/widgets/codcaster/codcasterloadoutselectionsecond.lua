@@ -14,16 +14,16 @@ CoD.CodCasterLoadoutSelectionSecond.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	self:addElement(Center)
 	self.Center = Center
 	local ItemName = LUI.UIText.new(0.5, 0.5, -85.5, 85.5, 0, 0, -23.5, -5.5)
-	ItemName:setText(Engine[0xF9F1239CFD921FE](0x93E719493E9E18F))
+	ItemName:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	ItemName:setTTF("default")
-	ItemName:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	ItemName:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	ItemName:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	ItemName:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	ItemName:setBackingType(2)
 	ItemName:setBackingColor(0, 0, 0)
 	ItemName:setBackingAlpha(0.9)
 	ItemName:setBackingXPadding(10)
 	ItemName:setBackingYPadding(3)
-	ItemName:setBackingMaterial(LUI.UIImage.GetCachedMaterial(0xE8F55203998700A))
+	ItemName:setBackingMaterial(LUI.UIImage.GetCachedMaterial(@"uie_feather_blend"))
 	self:addElement(ItemName)
 	self.ItemName = ItemName
 	if PostLoadFunc then

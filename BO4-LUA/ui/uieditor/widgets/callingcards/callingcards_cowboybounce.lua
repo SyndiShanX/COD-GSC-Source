@@ -8,28 +8,28 @@ CoD.CallingCards_CowboyBounce.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local cowboy = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	cowboy:setImage(RegisterImage(0xFBA9530508945EC))
+	cowboy:setImage(RegisterImage(@"uie_cowboy"))
 	self:addElement(cowboy)
 	self.cowboy = cowboy
 	local lightFX1 = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
 	lightFX1:setAlpha(0)
-	lightFX1:setImage(RegisterImage(0xCD88B9F07075BDE))
+	lightFX1:setImage(RegisterImage(@"uie_light_fx_01"))
 	self:addElement(lightFX1)
 	self.lightFX1 = lightFX1
 	local lightFX2 = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
 	lightFX2:setAlpha(0)
-	lightFX2:setImage(RegisterImage(0xCD88A9F07075A2B))
+	lightFX2:setImage(RegisterImage(@"uie_light_fx_02"))
 	self:addElement(lightFX2)
 	self.lightFX2 = lightFX2
 	local bullet = LUI.UIImage.new(0, 0, 398, 614, 0, 0, 26, 90)
-	bullet:setImage(RegisterImage(0xDC3C3D72C0643D7))
-	bullet:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	bullet:setImage(RegisterImage(@"uie_bullet"))
+	bullet:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(bullet)
 	self.bullet = bullet
 	local bullet2 = LUI.UIImage.new(0, 0, 264, 480, 0, 0, 14, 78)
 	bullet2:setAlpha(0)
-	bullet2:setImage(RegisterImage(0xDC3C3D72C0643D7))
-	bullet2:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	bullet2:setImage(RegisterImage(@"uie_bullet"))
+	bullet2:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(bullet2)
 	self.bullet2 = bullet2
 	if PostLoadFunc then

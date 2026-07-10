@@ -15,19 +15,19 @@ CoD.PCSocialMenu_PlayersFilterTab.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	local GlowPC = nil
 	GlowPC = LUI.UIImage.new(0, 1, 17, -17, 0, 0, 8, 34)
 	GlowPC:setAlpha(0)
-	GlowPC:setImage(RegisterImage(0x3738D990402E4AF))
+	GlowPC:setImage(RegisterImage(@"uie_director_mode_text_tab_glow_pc"))
 	self:addElement(GlowPC)
 	self.GlowPC = GlowPC
 	local Name = LUI.UIText.new(0, 0, 0, 200, 0, 0, 7, 25)
 	Name:setRGB(0.92, 0.92, 0.92)
 	Name:setTTF("ttmussels_demibold")
 	Name:setLetterSpacing(4)
-	Name:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	Name:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Name:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	Name:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	Name:linkToElementModel(self, "name", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			Name:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			Name:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	self:addElement(Name)

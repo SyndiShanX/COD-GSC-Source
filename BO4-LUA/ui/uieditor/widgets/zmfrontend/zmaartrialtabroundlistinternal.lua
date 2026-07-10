@@ -8,29 +8,29 @@ CoD.ZMAARTrialTabRoundListInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local ListBg = LUI.UIImage.new(0, 0, 0, 388, 0, 0, 68, 764)
-	ListBg:setImage(RegisterImage(0xDCF1B07E0539E4A))
+	ListBg:setImage(RegisterImage(@"uie_trial_rules_gold_normal"))
 	self:addElement(ListBg)
 	self.ListBg = ListBg
 	local Medal = LUI.UIImage.new(0, 0, 148, 240, 0, 0, 64, 156)
 	Medal:setAlpha(0.9)
-	Medal:setImage(RegisterImage(0x7775EF99258EEEC))
+	Medal:setImage(RegisterImage(@"uie_trial_medal_gold"))
 	self:addElement(Medal)
 	self.Medal = Medal
 	local MedalText = LUI.UIText.new(0, 0, 4.5, 370.5, 0, 0, 47, 65)
-	MedalText:setText(LocalizeToUpperString(0x4F2A2FD2DB27D84))
+	MedalText:setText(LocalizeToUpperString(@"hash_4F2A2FD2DB27D84"))
 	MedalText:setTTF("skorzhen")
 	MedalText:setLetterSpacing(2)
-	MedalText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	MedalText:setAlignment(Enum[0x7A5123B654282D2][0x70510683C22104B])
+	MedalText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	MedalText:setAlignment(Enum[@"luialignment"][@"lui_alignment_bottom"])
 	self:addElement(MedalText)
 	self.MedalText = MedalText
 	local MedalAchievedText = LUI.UIText.new(0, 0, 4.5, 370.5, 0, 0, 47, 65)
 	MedalAchievedText:setAlpha(0)
-	MedalAchievedText:setText(LocalizeToUpperString(0x77E29E95B5D6719))
+	MedalAchievedText:setText(LocalizeToUpperString(@"hash_677E29E95B5D6719"))
 	MedalAchievedText:setTTF("skorzhen")
 	MedalAchievedText:setLetterSpacing(2)
-	MedalAchievedText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	MedalAchievedText:setAlignment(Enum[0x7A5123B654282D2][0x70510683C22104B])
+	MedalAchievedText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	MedalAchievedText:setAlignment(Enum[@"luialignment"][@"lui_alignment_bottom"])
 	self:addElement(MedalAchievedText)
 	self.MedalAchievedText = MedalAchievedText
 	self:mergeStateConditions({
@@ -61,7 +61,7 @@ CoD.ZMAARTrialTabRoundListInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	})
 	local f1_local5 = self
 	local f1_local6 = self.subscribeToModel
-	local f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local6(f1_local5, f1_local7["AAR.trialStats.prevHighestRoundCompleted"], function(f5_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -82,7 +82,7 @@ CoD.ZMAARTrialTabRoundListInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	end)
 	f1_local5 = self
 	f1_local6 = self.subscribeToModel
-	f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local6(f1_local5, f1_local7["AAR.trialStats.roundsCompleted"], function(f7_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -122,7 +122,7 @@ CoD.ZMAARTrialTabRoundListInternal.__clipsPerState = {
 			f10_arg0:__resetProperties()
 			f10_arg0:setupElementClipCounter(2)
 			local f10_local0 = function(f11_arg0)
-				f10_arg0.Medal:beginAnimation(200, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f10_arg0.Medal:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_in"])
 				f10_arg0.Medal:setAlpha(1)
 				f10_arg0.Medal:registerEventHandler("interrupted_keyframe", f10_arg0.clipInterrupted)
 				f10_arg0.Medal:registerEventHandler("transition_complete_keyframe", f10_arg0.clipFinished)
@@ -150,7 +150,7 @@ CoD.ZMAARTrialTabRoundListInternal.__clipsPerState = {
 			f14_arg0:__resetProperties()
 			f14_arg0:setupElementClipCounter(3)
 			local f14_local0 = function(f15_arg0)
-				f14_arg0.Medal:beginAnimation(200, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f14_arg0.Medal:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_in"])
 				f14_arg0.Medal:setAlpha(1)
 				f14_arg0.Medal:registerEventHandler("interrupted_keyframe", f14_arg0.clipInterrupted)
 				f14_arg0.Medal:registerEventHandler("transition_complete_keyframe", f14_arg0.clipFinished)
@@ -181,7 +181,7 @@ CoD.ZMAARTrialTabRoundListInternal.__clipsPerState = {
 			f18_arg0:__resetProperties()
 			f18_arg0:setupElementClipCounter(2)
 			local f18_local0 = function(f19_arg0)
-				f18_arg0.Medal:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f18_arg0.Medal:beginAnimation(200, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_in"])
 				f18_arg0.Medal:setAlpha(0.5)
 				f18_arg0.Medal:registerEventHandler("interrupted_keyframe", f18_arg0.clipInterrupted)
 				f18_arg0.Medal:registerEventHandler("transition_complete_keyframe", f18_arg0.clipFinished)

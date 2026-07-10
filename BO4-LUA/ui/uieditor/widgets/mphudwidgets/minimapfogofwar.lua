@@ -12,33 +12,33 @@ CoD.MinimapFogOfWar.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	self:addElement(Image)
 	self.Image = Image
 	local MinimapFogOfWar = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	MinimapFogOfWar:setImage(RegisterImage(0x6B3F6C9FC7AEC8A))
-	MinimapFogOfWar:setMaterial(LUI.UIImage.GetCachedMaterial(0xACA98D41A38E390))
+	MinimapFogOfWar:setImage(RegisterImage(@"uie_hud_mp_minimap_fogofwar_range"))
+	MinimapFogOfWar:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_ACA98D41A38E390"))
 	MinimapFogOfWar:setShaderVector(0, 1, 0.1, 0.05, 0)
-	MinimapFogOfWar:setupCompassFog(Enum[0x398581F68B3E097][0x87B41F155A4F8BA])
+	MinimapFogOfWar:setupCompassFog(Enum[@"compasstype"][@"compass_type_partial"])
 	MinimapFogOfWar:setupCompassFogImageDiameter(0.74)
 	self:addElement(MinimapFogOfWar)
 	self.MinimapFogOfWar = MinimapFogOfWar
 	local MinimapFogOfWarEnemyTearing = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	MinimapFogOfWarEnemyTearing:setImage(RegisterImage(0x706DFCD9F680830))
-	MinimapFogOfWarEnemyTearing:setMaterial(LUI.UIImage.GetCachedMaterial(0x72987F9CD841ED7))
+	MinimapFogOfWarEnemyTearing:setImage(RegisterImage(@"hash_4706DFCD9F680830"))
+	MinimapFogOfWarEnemyTearing:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_flipbook_animated"))
 	MinimapFogOfWarEnemyTearing:setShaderVector(0, 5, 1, 0, 0)
 	MinimapFogOfWarEnemyTearing:setShaderVector(1, 0, 0, 0, 0)
-	MinimapFogOfWarEnemyTearing:setupCompassEnemyTearingFog(Enum[0x398581F68B3E097][0x87B41F155A4F8BA])
+	MinimapFogOfWarEnemyTearing:setupCompassEnemyTearingFog(Enum[@"compasstype"][@"compass_type_partial"])
 	MinimapFogOfWarEnemyTearing:setupCompassFogImageDiameter(0.74)
 	self:addElement(MinimapFogOfWarEnemyTearing)
 	self.MinimapFogOfWarEnemyTearing = MinimapFogOfWarEnemyTearing
 	local CompassMinimapMap = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	CompassMinimapMap:setMaterial(LUI.UIImage.GetCachedMaterial(0x655565C7B387234))
-	CompassMinimapMap:setupCompassMap(Enum[0x398581F68B3E097][0x87B41F155A4F8BA])
+	CompassMinimapMap:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_multiply"))
+	CompassMinimapMap:setupCompassMap(Enum[@"compasstype"][@"compass_type_partial"])
 	self:addElement(CompassMinimapMap)
 	self.CompassMinimapMap = CompassMinimapMap
 	local MinimapDeathZoneMask = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	MinimapDeathZoneMask:setRGB(0.17, 0.17, 0.17)
 	MinimapDeathZoneMask:setAlpha(0)
-	MinimapDeathZoneMask:setMaterial(LUI.UIImage.GetCachedMaterial(0xA51F864ABFF9887))
+	MinimapDeathZoneMask:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_5A51F864ABFF9887"))
 	MinimapDeathZoneMask:setShaderVector(0, 0.5, 0.5, 0.2, 0.2)
-	MinimapDeathZoneMask:setupCompassDeathZoneMask(Enum[0x398581F68B3E097][0x87B41F155A4F8BA])
+	MinimapDeathZoneMask:setupCompassDeathZoneMask(Enum[@"compasstype"][@"compass_type_partial"])
 	self:addElement(MinimapDeathZoneMask)
 	self.MinimapDeathZoneMask = MinimapDeathZoneMask
 	self:mergeStateConditions({
@@ -51,7 +51,7 @@ CoD.MinimapFogOfWar.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	})
 	local f1_local6 = self
 	local f1_local7 = self.subscribeToModel
-	local f1_local8 = Engine[0x8DF2E5447F384B9]()
+	local f1_local8 = Engine[@"getglobalmodel"]()
 	f1_local7(f1_local6, f1_local8["lobbyRoot.lobbyNav"], function(f3_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

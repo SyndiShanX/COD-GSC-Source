@@ -15,28 +15,28 @@ CoD.CompetitiveOverviewProSerie.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	ModesMaps:setWidgetType(CoD.ArenaFindGameDetailModes)
 	ModesMaps:setHorizontalCount(3)
 	ModesMaps:setSpacing(25)
-	ModesMaps:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	ModesMaps:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	ModesMaps:setDataSource("ArenaPlaylistGameModesMaps")
 	self:addElement(ModesMaps)
 	self.ModesMaps = ModesMaps
 	local playlist = LUI.UIText.new(0, 0, 322, 850, 0, 0, 497, 515)
 	playlist:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	playlist:setAlpha(0)
-	playlist:setText(LocalizeToUpperString(0x2BBBEFE68E6FD2A))
+	playlist:setText(LocalizeToUpperString(@"hash_52BBBEFE68E6FD2A"))
 	playlist:setTTF("ttmussels_demibold")
 	playlist:setLetterSpacing(2)
-	playlist:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	playlist:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	playlist:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	playlist:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(playlist)
 	self.playlist = playlist
 	local modeMaps = LUI.UIText.new(0, 0, 322, 850, 0, 0, 642, 660)
 	modeMaps:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	modeMaps:setAlpha(0)
-	modeMaps:setText(LocalizeToUpperString(0x7114287D168D9DA))
+	modeMaps:setText(LocalizeToUpperString(@"hash_77114287D168D9DA"))
 	modeMaps:setTTF("ttmussels_demibold")
 	modeMaps:setLetterSpacing(2)
-	modeMaps:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	modeMaps:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	modeMaps:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	modeMaps:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(modeMaps)
 	self.modeMaps = modeMaps
 	local ArenaRules = CoD.CompetitiveOverviewArenaRules.new(f1_arg0, f1_arg1, 0, 0, 322, 1842, 0, 0, 602, 623)
@@ -44,19 +44,19 @@ CoD.CompetitiveOverviewProSerie.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self.ArenaRules = ArenaRules
 	local EventDescription = LUI.UIText.new(0, 0, 322, 1753, 0, 0, 564, 585)
 	EventDescription:setRGB(ColorSet.T8__OFF__GRAY.r, ColorSet.T8__OFF__GRAY.g, ColorSet.T8__OFF__GRAY.b)
-	EventDescription:setText(Engine[0xF9F1239CFD921FE](0xD86B33777B1B45F))
+	EventDescription:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_5D86B33777B1B45F"))
 	EventDescription:setTTF("ttmussels_regular")
 	EventDescription:setLetterSpacing(2)
-	EventDescription:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	EventDescription:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	EventDescription:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	EventDescription:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(EventDescription)
 	self.EventDescription = EventDescription
 	local PlaylistDesc = LUI.UIText.new(0, 0, 322, 852, 0, 0, 515, 560)
 	PlaylistDesc:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
 	PlaylistDesc:setTTF("ttmussels_demibold")
 	PlaylistDesc:setLetterSpacing(6)
-	PlaylistDesc:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	PlaylistDesc:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	PlaylistDesc:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	PlaylistDesc:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	PlaylistDesc.__String_Reference = function(f2_arg0)
 		local f2_local0 = f2_arg0:get()
 		if f2_local0 ~= nil then
@@ -75,7 +75,7 @@ CoD.CompetitiveOverviewProSerie.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self.PlaylistDesc = PlaylistDesc
 	local f1_local7 = PlaylistDesc
 	local f1_local8 = PlaylistDesc.subscribeToModel
-	local f1_local9 = Engine[0x8DF2E5447F384B9]()
+	local f1_local9 = Engine[@"getglobalmodel"]()
 	f1_local8(f1_local7, f1_local9["lobbyRoot.lobbyNetworkMode"], PlaylistDesc.__String_Reference_FullPath)
 	f1_local7 = PlaylistDesc
 	f1_local8 = PlaylistDesc.subscribeToModel

@@ -29,7 +29,7 @@ CoD.vhud_attack_helicopter_reticle.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	})
 	local CenterFrame = Reticle
 	local RingL = Reticle.subscribeToModel
-	local AltMeterL = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local AltMeterL = Engine[@"getmodelforcontroller"](f1_arg1)
 	RingL(CenterFrame, AltMeterL["luielement.remote_missile_target_lockon.target_locked"], function(f3_arg0)
 		f1_arg0:updateElementState(Reticle, {
 			name = "model_validation",

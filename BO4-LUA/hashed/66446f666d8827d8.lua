@@ -8,21 +8,21 @@ CoD.TabletTak5_HealthBonus.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self.soundSet = "none"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local BoostBacking = LUI.UIImage.new(0, 0, -1, 107, 0, 0, -9.5, 38.5)
-	BoostBacking:setImage(RegisterImage(0xE2400B0AFCCE216))
+	BoostBacking:setImage(RegisterImage(@"uie_ui_hud_tak5_score_stripe"))
 	self:addElement(BoostBacking)
 	self.BoostBacking = BoostBacking
 	local BoostBacking2 = LUI.UIImage.new(0, 0, -1, 107, 0, 0, -9.5, 38.5)
 	BoostBacking2:setAlpha(0.5)
-	BoostBacking2:setImage(RegisterImage(0xE2400B0AFCCE216))
-	BoostBacking2:setMaterial(LUI.UIImage.GetCachedMaterial(0x92F09074FB20E6D))
+	BoostBacking2:setImage(RegisterImage(@"uie_ui_hud_tak5_score_stripe"))
+	BoostBacking2:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_scanlines"))
 	BoostBacking2:setShaderVector(0, 2, 0, 0, 0)
 	BoostBacking2:setShaderVector(1, 2, 0, 0, 0)
 	BoostBacking2:setShaderVector(2, 0.03, 0, 0, 0)
 	self:addElement(BoostBacking2)
 	self.BoostBacking2 = BoostBacking2
 	local BoostBackingGlow = LUI.UIImage.new(0, 0, -1, 107, 0, 0, -9.5, 38.5)
-	BoostBackingGlow:setImage(RegisterImage(0xB0CF4FAE0C9D546))
-	BoostBackingGlow:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	BoostBackingGlow:setImage(RegisterImage(@"uie_ui_hud_tak5_score_stripe_glow"))
+	BoostBackingGlow:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	BoostBackingGlow:setShaderVector(0, 2, 0, 0, 0)
 	self:addElement(BoostBackingGlow)
 	self.BoostBackingGlow = BoostBackingGlow
@@ -30,34 +30,34 @@ CoD.TabletTak5_HealthBonus.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	ScoreBacking:setRGB(0.25, 0.25, 0.25)
 	ScoreBacking:setText(25)
 	ScoreBacking:setTTF("0arame_mono_stencil")
-	ScoreBacking:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	ScoreBacking:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	self:addElement(ScoreBacking)
 	self.ScoreBacking = ScoreBacking
 	local ScoreFlash = LUI.UIText.new(0, 0, 10, 42, 0, 0, 2, 34)
 	ScoreFlash:setRGB(ColorSet.CleanseBar.r, ColorSet.CleanseBar.g, ColorSet.CleanseBar.b)
 	ScoreFlash:setText(25)
 	ScoreFlash:setTTF("0arame_mono_stencil")
-	ScoreFlash:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	ScoreFlash:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	self:addElement(ScoreFlash)
 	self.ScoreFlash = ScoreFlash
 	local BonusText = LUI.UIText.new(0, 0, -15, 185, 0, 0, 12.5, 30.5)
 	BonusText:setRGB(ColorSet.CleanseBar.r, ColorSet.CleanseBar.g, ColorSet.CleanseBar.b)
-	BonusText:setText(Engine[0xF9F1239CFD921FE](0x800CBD9308E73C2))
+	BonusText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_7800CBD9308E73C2"))
 	BonusText:setTTF("0arame_mono_stencil")
-	BonusText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	BonusText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	self:addElement(BonusText)
 	self.BonusText = BonusText
 	local ScorePip = LUI.UIImage.new(0, 0, 0, 10, 0, 0, -9.5, 0.5)
-	ScorePip:setImage(RegisterImage(0x4FCFCDE5B5BEF0))
-	ScorePip:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	ScorePip:setImage(RegisterImage(@"hash_4FCFCDE5B5BEF0"))
+	ScorePip:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	ScorePip:setShaderVector(0, 2, 0, 0, 0)
 	self:addElement(ScorePip)
 	self.ScorePip = ScorePip
 	self:subscribeToGlobalModel(f1_arg1, "PerController", "scriptNotify", function(model)
 		local f2_local0 = self
-		if CoD.ModelUtility.IsParamModelEqualToHashString(model, 0xC27B5E4F3724EA3) and CoD.ModelUtility.IsScriptNotifyDataArgEqualTo(model, 1, 1) and CoD.ModelUtility.IsScriptNotifyDataArgEqualTo(model, 2, 1) then
+		if CoD.ModelUtility.IsParamModelEqualToHashString(model, @"localheal_fire") and CoD.ModelUtility.IsScriptNotifyDataArgEqualTo(model, 1, 1) and CoD.ModelUtility.IsScriptNotifyDataArgEqualTo(model, 2, 1) then
 			PlayClip(self, "BonusHealth", f1_arg1)
-		elseif CoD.ModelUtility.IsParamModelEqualToHashString(model, 0xC27B5E4F3724EA3) and CoD.ModelUtility.IsScriptNotifyDataArgEqualTo(model, 1, 1) then
+		elseif CoD.ModelUtility.IsParamModelEqualToHashString(model, @"localheal_fire") and CoD.ModelUtility.IsScriptNotifyDataArgEqualTo(model, 1, 1) then
 			PlayClip(self, "HealthBoost", f1_arg1)
 		end
 	end)
@@ -79,10 +79,10 @@ CoD.TabletTak5_HealthBonus.__resetProperties = function(f3_arg0)
 	f3_arg0.BonusText:setAlpha(1)
 	f3_arg0.BoostBackingGlow:setAlpha(1)
 	f3_arg0.ScorePip:setAlpha(1)
-	f3_arg0.ScorePip:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	f3_arg0.ScorePip:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	f3_arg0.ScorePip:setShaderVector(0, 2, 0, 0, 0)
 	f3_arg0.BoostBacking2:setAlpha(0.5)
-	f3_arg0.BoostBacking2:setMaterial(LUI.UIImage.GetCachedMaterial(0x92F09074FB20E6D))
+	f3_arg0.BoostBacking2:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_scanlines"))
 	f3_arg0.BoostBacking2:setShaderVector(0, 2, 0, 0, 0)
 	f3_arg0.BoostBacking2:setShaderVector(1, 2, 0, 0, 0)
 	f3_arg0.BoostBacking2:setShaderVector(2, 0.03, 0, 0, 0)
@@ -97,7 +97,7 @@ CoD.TabletTak5_HealthBonus.__clipsPerState = {
 			f4_arg0:setupElementClipCounter(5)
 			f4_arg0.BoostBacking2:completeAnimation()
 			f4_arg0.BoostBacking2:setAlpha(0.5)
-			f4_arg0.BoostBacking2:setMaterial(LUI.UIImage.GetCachedMaterial(0x92F09074FB20E6D))
+			f4_arg0.BoostBacking2:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_scanlines"))
 			f4_arg0.BoostBacking2:setShaderVector(0, 2, 0, 0, 0)
 			f4_arg0.BoostBacking2:setShaderVector(1, 2, 0, 0, 0)
 			f4_arg0.BoostBacking2:setShaderVector(2, 0.03, 0, 0, 0)
@@ -117,18 +117,18 @@ CoD.TabletTak5_HealthBonus.__clipsPerState = {
 						f7_arg0:beginAnimation(500)
 						f7_arg0:registerEventHandler("transition_complete_keyframe", f4_arg0.clipFinished)
 					end
-					f6_arg0:beginAnimation(500, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f6_arg0:beginAnimation(500, Enum[@"luitween"][@"luitween_ease_both"])
 					f6_arg0:setShaderVector(0, 2, 0, 0, 0)
 					f6_arg0:registerEventHandler("transition_complete_keyframe", f6_local0)
 				end
-				f4_arg0.ScorePip:beginAnimation(500, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f4_arg0.ScorePip:beginAnimation(500, Enum[@"luitween"][@"luitween_ease_both"])
 				f4_arg0.ScorePip:setShaderVector(0, 3, 0, 0, 0)
 				f4_arg0.ScorePip:registerEventHandler("interrupted_keyframe", f4_arg0.clipInterrupted)
 				f4_arg0.ScorePip:registerEventHandler("transition_complete_keyframe", f5_local0)
 			end
 			f4_arg0.ScorePip:completeAnimation()
 			f4_arg0.ScorePip:setAlpha(1)
-			f4_arg0.ScorePip:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+			f4_arg0.ScorePip:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 			f4_arg0.ScorePip:setShaderVector(0, 2, 0, 0, 0)
 			f4_local0(f4_arg0.ScorePip)
 			f4_arg0.nextClip = "DefaultClip"
@@ -145,7 +145,7 @@ CoD.TabletTak5_HealthBonus.__clipsPerState = {
 			local f8_local0 = function(f9_arg0)
 				local f9_local0 = function(f10_arg0)
 					local f10_local0 = function(f11_arg0)
-						f11_arg0:beginAnimation(500, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+						f11_arg0:beginAnimation(500, Enum[@"luitween"][@"luitween_ease_out"])
 						f11_arg0:setAlpha(0)
 						f11_arg0:registerEventHandler("transition_complete_keyframe", f8_arg0.clipFinished)
 					end
@@ -214,7 +214,7 @@ CoD.TabletTak5_HealthBonus.__clipsPerState = {
 			local f18_local0 = function(f19_arg0)
 				local f19_local0 = function(f20_arg0)
 					local f20_local0 = function(f21_arg0)
-						f21_arg0:beginAnimation(500, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+						f21_arg0:beginAnimation(500, Enum[@"luitween"][@"luitween_ease_out"])
 						f21_arg0:setAlpha(0)
 						f21_arg0:registerEventHandler("transition_complete_keyframe", f18_arg0.clipFinished)
 					end
@@ -239,7 +239,7 @@ CoD.TabletTak5_HealthBonus.__clipsPerState = {
 						local f24_local0 = function(f25_arg0)
 							local f25_local0 = function(f26_arg0)
 								local f26_local0 = function(f27_arg0)
-									f27_arg0:beginAnimation(500, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+									f27_arg0:beginAnimation(500, Enum[@"luitween"][@"luitween_ease_in"])
 									f27_arg0:setAlpha(0)
 									f27_arg0:registerEventHandler("transition_complete_keyframe", f18_arg0.clipFinished)
 								end
@@ -270,7 +270,7 @@ CoD.TabletTak5_HealthBonus.__clipsPerState = {
 				local f28_local0 = function(f29_arg0)
 					local f29_local0 = function(f30_arg0)
 						local f30_local0 = function(f31_arg0)
-							f31_arg0:beginAnimation(500, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+							f31_arg0:beginAnimation(500, Enum[@"luitween"][@"luitween_ease_out"])
 							f31_arg0:setAlpha(0)
 							f31_arg0:registerEventHandler("transition_complete_keyframe", f18_arg0.clipFinished)
 						end
@@ -304,7 +304,7 @@ CoD.TabletTak5_HealthBonus.__clipsPerState = {
 			end
 			f18_arg0.ScorePip:completeAnimation()
 			f18_arg0.ScorePip:setAlpha(1)
-			f18_arg0.ScorePip:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+			f18_arg0.ScorePip:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 			f18_arg0.ScorePip:setShaderVector(0, 3, 0, 0, 0)
 			f18_local3(f18_arg0.ScorePip)
 		end,

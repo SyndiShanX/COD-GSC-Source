@@ -15,8 +15,8 @@ CoD.ChatClientFilterList_Item.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	local Name = LUI.UIText.new(0.66, 0.66, -54.5, 54.5, 0.5, 0.5, -9, 9)
 	Name:setRGB(0.5, 0.51, 0.52)
 	Name:setTTF("ttmussels_regular")
-	Name:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Name:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Name:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Name:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	Name:linkToElementModel(self, "name", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -62,7 +62,7 @@ CoD.ChatClientFilterList_Item.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self:addElement(DotBoxTopLeft)
 	self.DotBoxTopLeft = DotBoxTopLeft
 	local CheckIcon = LUI.UIImage.new(0.03, 0.03, 0, 19, 0.5, 0.5, -9.5, 9.5)
-	CheckIcon:setImage(RegisterImage(0xFEAEC46BB618295))
+	CheckIcon:setImage(RegisterImage(@"uie_accept_icon"))
 	CheckIcon:linkToElementModel(self, "active", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then

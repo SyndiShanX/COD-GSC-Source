@@ -12,7 +12,7 @@ CoD.WaypointObjective.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local ProgressMeterFrame = LUI.UIImage.new(0.5, 0.5, -63, 65, 0.5, 0.5, -64, 64)
-	ProgressMeterFrame:setImage(RegisterImage(0x28E3C0049FF4CC9))
+	ProgressMeterFrame:setImage(RegisterImage(@"hash_128E3C0049FF4CC9"))
 	self:addElement(ProgressMeterFrame)
 	self.ProgressMeterFrame = ProgressMeterFrame
 	local WaypointArrowDownNotClampedContainer = CoD.WaypointArrowContainer.new(f1_arg0, f1_arg1, 0.5, 0.5, -21, 21, 0.5, 0.5, -25, 21)
@@ -60,8 +60,8 @@ CoD.WaypointObjective.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	self.WaypointArrowContainer = WaypointArrowContainer
 	local progressMeter = LUI.UIImage.new(0.5, 0.5, -63, 65, 0.5, 0.5, -65, 63)
 	progressMeter:setAlpha(0.9)
-	progressMeter:setImage(RegisterImage(0xE72D91F1F5D8EA4))
-	progressMeter:setMaterial(LUI.UIImage.GetCachedMaterial(0xD5CA1A25ED87F4F))
+	progressMeter:setImage(RegisterImage(@"hash_7E72D91F1F5D8EA4"))
+	progressMeter:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_clock_normal"))
 	progressMeter:setShaderVector(1, 0.5, 0, 0, 0)
 	progressMeter:setShaderVector(2, 0.43, 0, 0, 0)
 	progressMeter:setShaderVector(3, 0, 0, 0, 0)
@@ -77,8 +77,8 @@ CoD.WaypointObjective.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	local progressMeterContested = LUI.UIImage.new(0.5, 0.5, -34, 36, 0.5, 0.5, -36, 34)
 	progressMeterContested:setRGB(1, 0.4, 0)
 	progressMeterContested:setAlpha(0)
-	progressMeterContested:setImage(RegisterImage(0xB1F550BBC41155E))
-	progressMeterContested:setMaterial(LUI.UIImage.GetCachedMaterial(0xD5CA1A25ED87F4F))
+	progressMeterContested:setImage(RegisterImage(@"uie_t7_hud_interact_meter_diamond"))
+	progressMeterContested:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_clock_normal"))
 	progressMeterContested:setShaderVector(0, 1.03, 0.13, 0, 0)
 	progressMeterContested:setShaderVector(1, 0.5, 0, 0, 0)
 	progressMeterContested:setShaderVector(2, 0.5, 0, 0, 0)
@@ -93,13 +93,13 @@ CoD.WaypointObjective.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	WaypointText:linkToElementModel(self, "text", true, function(model)
 		local f9_local0 = model:get()
 		if f9_local0 ~= nil then
-			WaypointText.WaypointTextWithBG.text:setText(Engine[0xF9F1239CFD921FE](f9_local0))
+			WaypointText.WaypointTextWithBG.text:setText(Engine[@"hash_4F9F1239CFD921FE"](f9_local0))
 		end
 	end)
 	WaypointText:linkToElementModel(self, "distanceText", true, function(model)
 		local f10_local0 = model:get()
 		if f10_local0 ~= nil then
-			WaypointText.DistanceTextWithBG.text:setText(LocalizeIntoStringIfNotEmpty(0x7235825812D46C6, f10_local0))
+			WaypointText.DistanceTextWithBG.text:setText(LocalizeIntoStringIfNotEmpty(@"hash_37235825812D46C6", f10_local0))
 		end
 	end)
 	self:addElement(WaypointText)
@@ -184,7 +184,7 @@ CoD.WaypointObjective.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	end)
 	local f1_local8 = self
 	local f1_local9 = self.subscribeToModel
-	local f1_local10 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local10 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local9(f1_local8, f1_local10["interactivePrompt.activeObjectiveID"], function(f21_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -196,7 +196,7 @@ CoD.WaypointObjective.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	end, false)
 	f1_local8 = self
 	f1_local9 = self.subscribeToModel
-	f1_local10 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local10 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local9(f1_local8, f1_local10["hudItems.hacked"], function(f22_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -268,50 +268,50 @@ CoD.WaypointObjective.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	end, false)
 	f1_local8 = self
 	f1_local9 = self.subscribeToModel
-	f1_local10 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local9(f1_local8, f1_local10["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x6FFF566DCC09BBD]], function(f28_arg0)
+	f1_local10 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local9(f1_local8, f1_local10["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_spectating_client"]], function(f28_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f28_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x6FFF566DCC09BBD],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_spectating_client"],
 		})
 	end, false)
 	f1_local8 = self
 	f1_local9 = self.subscribeToModel
-	f1_local10 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local9(f1_local8, f1_local10["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xADC477DDE486DD7]], function(f29_arg0)
+	f1_local10 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local9(f1_local8, f1_local10["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_hud_visible"]], function(f29_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f29_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xADC477DDE486DD7],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_hud_visible"],
 		})
 	end, false)
 	f1_local8 = self
 	f1_local9 = self.subscribeToModel
-	f1_local10 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local9(f1_local8, f1_local10["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x59333FC97F7870]], function(f30_arg0)
+	f1_local10 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local9(f1_local8, f1_local10["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_emp_active"]], function(f30_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f30_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x59333FC97F7870],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_emp_active"],
 		})
 	end, false)
 	f1_local8 = self
 	f1_local9 = self.subscribeToModel
-	f1_local10 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local9(f1_local8, f1_local10["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x1C630DB86D235A5]], function(f31_arg0)
+	f1_local10 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local9(f1_local8, f1_local10["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_selecting_locational_killstreak"]], function(f31_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f31_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x1C630DB86D235A5],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_selecting_locational_killstreak"],
 		})
 	end, false)
 	self:linkToElementModel(self, "icon", true, function(model)
@@ -359,8 +359,8 @@ CoD.WaypointObjective.__resetProperties = function(f34_arg0)
 	f34_arg0.progressMeter:setAlpha(0.9)
 	f34_arg0.ProgressMeterFrame:setAlpha(1)
 	f34_arg0.progressMeterContested:setAlpha(0)
-	f34_arg0.progressMeterContested:setImage(RegisterImage(0xB1F550BBC41155E))
-	f34_arg0.progressMeterContested:setMaterial(LUI.UIImage.GetCachedMaterial(0xD5CA1A25ED87F4F))
+	f34_arg0.progressMeterContested:setImage(RegisterImage(@"uie_t7_hud_interact_meter_diamond"))
+	f34_arg0.progressMeterContested:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_clock_normal"))
 	f34_arg0.progressMeterContested:setShaderVector(0, 1.03, 0.13, 0, 0)
 	f34_arg0.progressMeterContested:setShaderVector(1, 0.5, 0, 0, 0)
 	f34_arg0.progressMeterContested:setShaderVector(2, 0.5, 0, 0, 0)
@@ -454,8 +454,8 @@ CoD.WaypointObjective.__clipsPerState = {
 			f39_arg0.clipFinished(f39_arg0.progressMeter)
 			f39_arg0.progressMeterContested:completeAnimation()
 			f39_arg0.progressMeterContested:setAlpha(0.9)
-			f39_arg0.progressMeterContested:setImage(RegisterImage(0x36313DCCFF75829))
-			f39_arg0.progressMeterContested:setMaterial(LUI.UIImage.GetCachedMaterial(0xD5CA1A25ED87F4F))
+			f39_arg0.progressMeterContested:setImage(RegisterImage(@"uie_hud_mp_waypoint_objective_diamond"))
+			f39_arg0.progressMeterContested:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_clock_normal"))
 			f39_arg0.progressMeterContested:setShaderVector(0, 1.03, 0.13, 0, 0)
 			f39_arg0.progressMeterContested:setShaderVector(1, 0.5, 0, 0, 0)
 			f39_arg0.progressMeterContested:setShaderVector(2, 0.5, 0, 0, 0)

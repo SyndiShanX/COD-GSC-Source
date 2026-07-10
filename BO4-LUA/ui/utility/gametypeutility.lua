@@ -1,12 +1,12 @@
 CoD.GameTypeUtility = {}
-CoD.GameTypeUtility.GameTypeTable = Engine[0x787E4B8EABFC69E]()
+CoD.GameTypeUtility.GameTypeTable = Engine[@"getgdtgametypetable"]()
 CoD.GameTypeUtility.GameModes = {}
 CoD.GameTypeUtility.StandardGameModes = {}
 CoD.GameTypeUtility.LimitedTimeModes = {}
 CoD.GameTypeUtility.GetLocalizedGameTypeValue = function(f1_arg0, f1_arg1, f1_arg2)
 	f1_arg0 = CoD.GameTypeUtility.ConvertMapNameToXHash(f1_arg0)
 	if CoD.GameTypeUtility.GameTypeTable[f1_arg0] ~= nil and CoD.GameTypeUtility.GameTypeTable[f1_arg0][f1_arg1] ~= nil then
-		return Engine[0xF9F1239CFD921FE](CoD.GameTypeUtility.GameTypeTable[f1_arg0][f1_arg1])
+		return Engine[@"hash_4F9F1239CFD921FE"](CoD.GameTypeUtility.GameTypeTable[f1_arg0][f1_arg1])
 	else
 		return f1_arg2
 	end
@@ -34,8 +34,8 @@ CoD.GameTypeUtility.GetAllGameModes = function(f4_arg0)
 		return CoD.GameTypeUtility.GameModes[f4_arg0]
 	end
 	CoD.GameTypeUtility.GameModes[f4_arg0] = {}
-	for f4_local7, f4_local8 in pairs(Engine[0xA195D59C70219EF](f4_arg0)) do
-		local f4_local9 = Engine[0xD492E0385F6D3E4](Engine[0xC53F8D38DF9042B](f4_local8.gametype))
+	for f4_local7, f4_local8 in pairs(Engine[@"getgametypesbase"](f4_arg0)) do
+		local f4_local9 = Engine[@"hash_7D492E0385F6D3E4"](Engine[@"converttoxhash"](f4_local8.gametype))
 		local f4_local3 = false
 		for f4_local4, f4_local5 in pairs(CoD.GameTypeUtility.GameModes[f4_arg0]) do
 			if f4_local5 == f4_local9 then
@@ -53,10 +53,10 @@ CoD.GameTypeUtility.GetStandardGameModes = function(f5_arg0)
 		return CoD.GameTypeUtility.StandardGameModes[f5_arg0]
 	end
 	CoD.GameTypeUtility.StandardGameModes[f5_arg0] = {}
-	for f5_local10, f5_local11 in pairs(Engine[0xA195D59C70219EF](f5_arg0)) do
-		local f5_local12 = Engine[0xEA74FA7EE46E195](f5_local11.gametype)
-		if f5_local12[0x1EBE909570DCA37] == 0 then
-			local f5_local3 = Engine[0xD492E0385F6D3E4](Engine[0xC53F8D38DF9042B](f5_local11.gametype))
+	for f5_local10, f5_local11 in pairs(Engine[@"getgametypesbase"](f5_arg0)) do
+		local f5_local12 = Engine[@"getgametypeinfo"](f5_local11.gametype)
+		if f5_local12[@"hash_31EBE909570DCA37"] == 0 then
+			local f5_local3 = Engine[@"hash_7D492E0385F6D3E4"](Engine[@"converttoxhash"](f5_local11.gametype))
 			local f5_local4 = false
 			for f5_local8, f5_local9 in pairs(CoD.GameTypeUtility.StandardGameModes[f5_arg0]) do
 				if f5_local9 == f5_local3 then
@@ -75,10 +75,10 @@ CoD.GameTypeUtility.GetLimitedTimeModes = function(f6_arg0)
 		return CoD.GameTypeUtility.LimitedTimeModes[f6_arg0]
 	end
 	CoD.GameTypeUtility.LimitedTimeModes[f6_arg0] = {}
-	for f6_local10, f6_local11 in pairs(Engine[0xA195D59C70219EF](f6_arg0)) do
-		local f6_local12 = Engine[0xEA74FA7EE46E195](f6_local11.gametype)
-		if f6_local12[0x1EBE909570DCA37] == 1 then
-			local f6_local3 = Engine[0xD492E0385F6D3E4](Engine[0xC53F8D38DF9042B](f6_local11.gametype))
+	for f6_local10, f6_local11 in pairs(Engine[@"getgametypesbase"](f6_arg0)) do
+		local f6_local12 = Engine[@"getgametypeinfo"](f6_local11.gametype)
+		if f6_local12[@"hash_31EBE909570DCA37"] == 1 then
+			local f6_local3 = Engine[@"hash_7D492E0385F6D3E4"](Engine[@"converttoxhash"](f6_local11.gametype))
 			local f6_local4 = false
 			for f6_local8, f6_local9 in pairs(CoD.GameTypeUtility.LimitedTimeModes[f6_arg0]) do
 				if f6_local9 == f6_local3 then
@@ -140,14 +140,14 @@ CoD.GameTypeUtility.DoesGameTypeSupportBots = function(f10_arg0)
 		return false
 	elseif f10_arg0 == "prop" or f10_arg0 == "bounty" or f10_arg0 == "escort" then
 		return false
-	elseif f10_arg0 == 0x572880E35379C18 or f10_arg0 == 0x32C064CAF1E3CA6 or f10_arg0 == 0xB60DB445FBF5155 then
+	elseif f10_arg0 == @"prop" or f10_arg0 == @"bounty" or f10_arg0 == @"escort" then
 		return false
 	else
 		return true
 	end
 end
 CoD.GameTypeUtility.ShowRoundPips = function()
-	local f11_local0 = Engine[0xDBC2AD5002B261B]("roundWinLimit")
+	local f11_local0 = Engine[@"getgametypesetting"]("roundWinLimit")
 	if f11_local0 ~= nil and f11_local0 > 0 and f11_local0 <= 4 then
 		return true
 	else
@@ -155,7 +155,7 @@ CoD.GameTypeUtility.ShowRoundPips = function()
 	end
 end
 CoD.GameTypeUtility.ShowSmallRoundPips = function()
-	local f12_local0 = Engine[0xDBC2AD5002B261B]("roundWinLimit")
+	local f12_local0 = Engine[@"getgametypesetting"]("roundWinLimit")
 	if f12_local0 ~= nil and f12_local0 > 4 and f12_local0 <= 6 then
 		return true
 	else
@@ -208,7 +208,7 @@ DataSources.GameTypeCategories = DataSourceHelpers.ListSetup("GameTypeCategories
 				end
 				table.insert(f14_local0[f14_local6].gametypeList, {
 					id = f14_local10.name,
-					name = Engine[0xF9F1239CFD921FE](f14_local10.nameRef),
+					name = Engine[@"hash_4F9F1239CFD921FE"](f14_local10.nameRef),
 					isOfficial = true,
 					sortIndex = f14_local10.uniqueID,
 					isLeagueMode = f14_local10.isLeagueMode,
@@ -243,7 +243,7 @@ DataSources.GameTypeListZM = DataSourceHelpers.ListSetup("GameTypeListZM", funct
 			table.insert(f16_local0, {
 				models = {
 					id = f16_local6.name,
-					name = Engine[0xF9F1239CFD921FE](f16_local6.nameRef),
+					name = Engine[@"hash_4F9F1239CFD921FE"](f16_local6.nameRef),
 					isOfficial = true,
 				},
 				properties = {
@@ -270,7 +270,7 @@ DataSources.GameTypeListWZ = DataSourceHelpers.ListSetup("GameTypeListWZ", funct
 			table.insert(f18_local0, {
 				models = {
 					id = f18_local7.name,
-					name = Engine[0xF9F1239CFD921FE](f18_local7.nameRef),
+					name = Engine[@"hash_4F9F1239CFD921FE"](f18_local7.nameRef),
 					isOfficial = true,
 				},
 				properties = {
@@ -285,7 +285,7 @@ DataSources.GameTypeListWZ = DataSourceHelpers.ListSetup("GameTypeListWZ", funct
 end, true)
 CoD.GameTypeUtility.ConvertMapNameToXHash = function(f20_arg0)
 	if type(f20_arg0) ~= "xhash" then
-		f20_arg0 = Engine[0xC53F8D38DF9042B](f20_arg0)
+		f20_arg0 = Engine[@"converttoxhash"](f20_arg0)
 	end
 	return f20_arg0
 end
@@ -293,13 +293,13 @@ CoD.GameTypeUtility.ConvertMapNameToLocalizedXHash = function(f21_arg0)
 	return CoD.GameTypeUtility.ConvertMapNameToXHash(f21_arg0)
 end
 CoD.GameTypeUtility.GameTypeToImage = function(f22_arg0)
-	return CoD.GameTypeUtility.GetGameTypeValue(f22_arg0, "image", 0x7615068F50B3D66)
+	return CoD.GameTypeUtility.GetGameTypeValue(f22_arg0, "image", @"blacktransparent")
 end
 CoD.GameTypeUtility.GameTypeToLocalizeName = function(f23_arg0)
 	return CoD.GameTypeUtility.GetLocalizedGameTypeValue(f23_arg0, "nameRef", "")
 end
 CoD.GameTypeUtility.GameTypeToLocalizeToUpperName = function(f24_arg0)
-	return Engine[0xB03220D3A4F3E38](CoD.GameTypeUtility.GetLocalizedGameTypeValue(f24_arg0, "nameRef", ""))
+	return Engine[@"toupper"](CoD.GameTypeUtility.GetLocalizedGameTypeValue(f24_arg0, "nameRef", ""))
 end
 CoD.GameTypeUtility.GameTypeToLocalizeDesc = function(f25_arg0)
 	return CoD.GameTypeUtility.GetLocalizedGameTypeValue(f25_arg0, "descriptionRef", "")
@@ -308,14 +308,14 @@ CoD.GameTypeUtility.GameTypeXHashToLocalizedGameType = function(f26_arg0)
 	if f26_arg0 == nil or f26_arg0 == 0x0 then
 		return ""
 	else
-		local f26_local0 = Engine[0x8D4B2F88BB8D5E7](f26_arg0)
+		local f26_local0 = Engine[@"hash_48D4B2F88BB8D5E7"](f26_arg0)
 		if f26_local0.nameRefCaps == nil then
 			return ""
 		else
-			return Engine[0xF9F1239CFD921FE](f26_local0.nameRefCaps)
+			return Engine[@"hash_4F9F1239CFD921FE"](f26_local0.nameRefCaps)
 		end
 	end
 end
 CoD.GameTypeUtility.RoundsWonOfRoundsTotal = function(f27_arg0)
-	return Engine[0xF9F1239CFD921FE](0x3CEC48B933807C, f27_arg0, Engine[0xDBC2AD5002B261B]("roundWinLimit"))
+	return Engine[@"hash_4F9F1239CFD921FE"](0x3CEC48B933807C, f27_arg0, Engine[@"getgametypesetting"]("roundWinLimit"))
 end

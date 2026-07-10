@@ -21,7 +21,7 @@ CoD.SpawnPromptContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	local KeyPrompt = nil
 	KeyPrompt = CoD.KeyPrompt.new(f1_arg0, f1_arg1, 0, 1, 0, 0, 0, 1, 0, 0)
 	KeyPrompt:setAlpha(0)
-	KeyPrompt.keybind:setText(Engine[0xF9F1239CFD921FE](0xA4153A04CFECFE9))
+	KeyPrompt.keybind:setText(Engine[@"hash_4F9F1239CFD921FE"](@"key/space"))
 	self:addElement(KeyPrompt)
 	self.KeyPrompt = KeyPrompt
 	self:mergeStateConditions({
@@ -50,7 +50,7 @@ CoD.SpawnPromptContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	end)
 	local f1_local3 = self
 	local f1_local4 = self.subscribeToModel
-	local f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local4(f1_local3, f1_local5.LastInput, function(f7_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

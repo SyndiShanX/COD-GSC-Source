@@ -12,7 +12,7 @@ CoD.vhud_ms_OutsideHashRing.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	local VehicleGroundHashRingLarge000 = CoD.VehicleGround_HashRingLarge.new(f1_arg0, f1_arg1, 0, 0, -205, -9, 0.5, 0.5, -208, 224)
 	VehicleGroundHashRingLarge000:setRGB(0.35, 0.35, 0.35)
 	VehicleGroundHashRingLarge000:setZoom(800)
-	VehicleGroundHashRingLarge000:setRFTMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	VehicleGroundHashRingLarge000:setRFTMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(VehicleGroundHashRingLarge000)
 	self.VehicleGroundHashRingLarge000 = VehicleGroundHashRingLarge000
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)

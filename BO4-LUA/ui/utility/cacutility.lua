@@ -30,17 +30,17 @@ CoD.CACUtility.mpPrestigeAttachments = {
 		ref = "clantag",
 		itemIndex = 4,
 		plevel = 1,
-		name = 0x17EEF154FE86377,
-		image = 0x6D0468E5DCF0064,
-		unlockDescRef = 0x66658F1A18557C1
+		name = @"hash_217EEF154FE86377",
+		image = @"cac_mods_clan_tag",
+		unlockDescRef = @"hash_766658F1A18557C1"
 	},
 	{
 		ref = "killcounter",
 		itemIndex = 34,
 		plevel = 2,
-		name = 0x9403D3AE8FEC071,
-		image = 0xDE50A0F088C9890,
-		unlockDescRef = 0xC8CDEE70D07873D
+		name = @"mpui/killcounter",
+		image = @"cac_mods_kill_counter",
+		unlockDescRef = @"hash_C8CDEE70D07873D"
 	}
 }
 CoD.CACUtility.primaryWeaponPrestigeSlot = "attachment." .. CoD.CACUtility.maxPrimaryAttachments + 1
@@ -148,19 +148,19 @@ CoD.CACUtility.PregameLoadoutFilters = {
 			primary = true,
 			secondary = true
 		},
-		title = 0xE8E97B711AC8F24
+		title = @"hash_2E8E97B711AC8F24"
 	},
 	{
 		filters = {
 			attachment = true
 		},
-		title = 0x56E6F15BA89EEED
+		title = @"hash_56E6F15BA89EEED"
 	},
 	{
 		filters = {
 			herogadget = true
 		},
-		title = 0xD12E79149B2165D
+		title = @"hash_3D12E79149B2165D"
 	},
 	{
 		filters = {
@@ -168,7 +168,7 @@ CoD.CACUtility.PregameLoadoutFilters = {
 			specialty2 = true,
 			specialty3 = true
 		},
-		title = 0x8BDD7F912E1E764
+		title = @"hash_28BDD7F912E1E764"
 	},
 	{
 		filters = {
@@ -176,7 +176,7 @@ CoD.CACUtility.PregameLoadoutFilters = {
 			killstreak2 = true,
 			killstreak3 = true
 		},
-		title = 0xD17CC7D16033AEA
+		title = @"hash_2D17CC7D16033AEA"
 	}
 }
 CoD.CACUtility.CreateList = function ( f1_arg0, f1_arg1, f1_arg2 )
@@ -249,200 +249,200 @@ CoD.CACUtility.HiddenSlotIndexForUber = 6
 CoD.CACUtility.talismanItemGroup = "invalidGroup"
 CoD.CACUtility.talismanItemGroupName = 0x0
 CoD.CACUtility.talismanItemGroup = "talisman"
-CoD.CACUtility.talismanItemGroupName = 0x9DFC3F74D959FCF
+CoD.CACUtility.talismanItemGroupName = @"hash_79DFC3F74D959FCF"
 CoD.CACUtility.ItemGroupInfo = {
 	{
-		itemGroupEnum = Enum[0xA518ABAB92DB212][0xBCE06767A091BE7],
+		itemGroupEnum = Enum[@"itemgroup_t"][@"itemgroup_smg"],
 		itemGroup = "weapon_smg",
-		name = 0xE9B2FF3482C8EA1
+		name = @"hash_1E9B2FF3482C8EA1"
 	},
 	{
-		itemGroupEnum = Enum[0xA518ABAB92DB212][0x4A0897271FB09AD],
+		itemGroupEnum = Enum[@"itemgroup_t"][@"itemgroup_assault"],
 		itemGroup = "weapon_assault",
 		name = 0x263912D4D64BFF
 	},
 	{
-		itemGroupEnum = Enum[0xA518ABAB92DB212][0x3DA6A4276EF1CEF],
+		itemGroupEnum = Enum[@"itemgroup_t"][@"itemgroup_tactical"],
 		itemGroup = "weapon_tactical",
-		name = 0x5ADE1A7D645B04D
+		name = @"hash_65ADE1A7D645B04D"
 	},
 	{
-		itemGroupEnum = Enum[0xA518ABAB92DB212][0x4BF8976C721AFFC],
+		itemGroupEnum = Enum[@"itemgroup_t"][@"itemgroup_cqb"],
 		itemGroup = "weapon_cqb",
-		name = 0x7C39AF395743C5E
+		name = @"hash_27C39AF395743C5E"
 	},
 	{
-		itemGroupEnum = Enum[0xA518ABAB92DB212][0x51D9B7706B5A416],
+		itemGroupEnum = Enum[@"itemgroup_t"][@"itemgroup_lmg"],
 		itemGroup = "weapon_lmg",
-		name = 0x74A30F3C2F15054
+		name = @"hash_774A30F3C2F15054"
 	},
 	{
-		itemGroupEnum = Enum[0xA518ABAB92DB212][0xD9E14963CFC3D79],
+		itemGroupEnum = Enum[@"itemgroup_t"][@"itemgroup_sniper"],
 		itemGroup = "weapon_sniper",
-		name = 0x24E0A3718D6D7BB
+		name = @"hash_724E0A3718D6D7BB"
 	},
 	{
-		itemGroupEnum = Enum[0xA518ABAB92DB212][0x1585BBF779B0319],
+		itemGroupEnum = Enum[@"itemgroup_t"][@"itemgroup_pistol"],
 		itemGroup = "weapon_pistol",
-		name = 0xEEF32CF83BA78B7
+		name = @"hash_5EEF32CF83BA78B7"
 	},
 	{
-		itemGroupEnum = Enum[0xA518ABAB92DB212][0xB76F7BBA22B4976],
+		itemGroupEnum = Enum[@"itemgroup_t"][@"itemgroup_launcher"],
 		itemGroup = "weapon_launcher",
-		name = 0x67CE9DB33F369C0
+		name = @"hash_767CE9DB33F369C0"
 	},
 	{
-		itemGroupEnum = Enum[0xA518ABAB92DB212][0x8C158486CCADDB],
+		itemGroupEnum = Enum[@"itemgroup_t"][@"itemgroup_knife"],
 		itemGroup = "weapon_knife",
-		name = 0x3FA68FFF58A9A11
+		name = @"hash_43FA68FFF58A9A11"
 	},
 	{
-		itemGroupEnum = Enum[0xA518ABAB92DB212][0x6F7EF424C78D2F9],
+		itemGroupEnum = Enum[@"itemgroup_t"][@"itemgroup_special"],
 		itemGroup = "weapon_special",
 		name = 0xA10CE7D326D52B
 	},
 	{
-		itemGroupEnum = Enum[0xA518ABAB92DB212][0xAA88E5BAE1CDEF8],
+		itemGroupEnum = Enum[@"itemgroup_t"][@"itemgroup_grenade"],
 		itemGroup = "weapon_grenade",
-		name = 0x19925BCDA35F9BE
+		name = @"hash_419925BCDA35F9BE"
 	},
 	{
-		itemGroupEnum = Enum[0xA518ABAB92DB212][0xA6E8DC332E430CF],
+		itemGroupEnum = Enum[@"itemgroup_t"][@"itemgroup_masterkey"],
 		itemGroup = "weapon_masterkey",
-		name = 0x69F815EDB5DE8CD
+		name = @"hash_469F815EDB5DE8CD"
 	},
 	{
-		itemGroupEnum = Enum[0xA518ABAB92DB212][0x67227F3B3E95D38],
+		itemGroupEnum = Enum[@"itemgroup_t"][@"itemgroup_grenadelauncher"],
 		itemGroup = "weapon_grenadelauncher",
-		name = 0xD630705EA8B45D2
+		name = @"hash_4D630705EA8B45D2"
 	},
 	{
-		itemGroupEnum = Enum[0xA518ABAB92DB212][0x9596E94EF45C34C],
+		itemGroupEnum = Enum[@"itemgroup_t"][@"itemgroup_flamethrower"],
 		itemGroup = "weapon_flamethrower",
-		name = 0xF38A8FD02924F86
+		name = @"hash_6F38A8FD02924F86"
 	},
 	{
-		itemGroupEnum = Enum[0xA518ABAB92DB212][0xED395F0727536A],
+		itemGroupEnum = Enum[@"itemgroup_t"][@"itemgroup_specialty"],
 		itemGroup = "specialty",
-		name = 0x4790C7DF71F21D4
+		name = @"menu/perks"
 	},
 	{
-		itemGroupEnum = Enum[0xA518ABAB92DB212][0x5C8E0CB1DDDEDCD],
+		itemGroupEnum = Enum[@"itemgroup_t"][@"itemgroup_talisman"],
 		itemGroup = CoD.CACUtility.talismanItemGroup,
 		name = CoD.CACUtility.talismanItemGroupName
 	},
 	{
-		itemGroupEnum = Enum[0xA518ABAB92DB212][0x2CDC5DD4EFC17D1],
+		itemGroupEnum = Enum[@"itemgroup_t"][@"itemgroup_specialgrenade"],
 		itemGroup = "specialgrenade",
-		name = 0xD69F54EAF20DCFF
+		name = @"hash_7D69F54EAF20DCFF"
 	},
 	{
-		itemGroupEnum = Enum[0xA518ABAB92DB212][0xD30500CB12ED9AA],
+		itemGroupEnum = Enum[@"itemgroup_t"][@"itemgroup_miscweapon"],
 		itemGroup = "miscweapon",
-		name = 0x2555CAB998C64C0
+		name = @"hash_32555CAB998C64C0"
 	},
 	{
-		itemGroupEnum = Enum[0xA518ABAB92DB212][0x1887D3AB6EBF24],
+		itemGroupEnum = Enum[@"itemgroup_t"][@"itemgroup_feature"],
 		itemGroup = "feature",
-		name = 0x7C2C9F4B09224A6
+		name = @"hash_47C2C9F4B09224A6"
 	},
 	{
-		itemGroupEnum = Enum[0xA518ABAB92DB212][0xAEEC16EABDC39AF],
+		itemGroupEnum = Enum[@"itemgroup_t"][@"itemgroup_bonuscard"],
 		itemGroup = "bonuscard",
-		name = 0x15A61D25BFBC0C5
+		name = @"hash_415A61D25BFBC0C5"
 	},
 	{
-		itemGroupEnum = Enum[0xA518ABAB92DB212][0x6B518795557DE5C],
+		itemGroupEnum = Enum[@"itemgroup_t"][@"itemgroup_killstreak"],
 		itemGroup = "killstreak",
-		name = 0x76B878474B7118E
+		name = @"hash_576B878474B7118E"
 	},
 	{
-		itemGroupEnum = Enum[0xA518ABAB92DB212][0xC79CC21826693E2],
+		itemGroupEnum = Enum[@"itemgroup_t"][@"itemgroup_hero"],
 		itemGroup = "hero",
-		name = 0x247ABAAC425E94C
+		name = @"hash_3247ABAAC425E94C"
 	},
 	{
-		itemGroupEnum = Enum[0xA518ABAB92DB212][0x95E11B924BB62DC],
+		itemGroupEnum = Enum[@"itemgroup_t"][@"itemgroup_talent"],
 		itemGroup = "talent",
-		name = 0x7090E9AC325856A
+		name = @"hash_77090E9AC325856A"
 	},
 	{
-		itemGroupEnum = Enum[0xA518ABAB92DB212][0x5703CED272B874B],
+		itemGroupEnum = Enum[@"itemgroup_t"][@"itemgroup_bubblegum"],
 		itemGroup = "bubblegum",
-		name = 0xF7823CCF486C039
+		name = @"hash_F7823CCF486C039"
 	},
 	{
-		itemGroupEnum = Enum[0xA518ABAB92DB212][0x222CEB2EEB25384],
+		itemGroupEnum = Enum[@"itemgroup_t"][@"hash_5222CEB2EEB25384"],
 		itemGroup = "bubblegum_consumable",
-		name = 0x2B979AF4577D926
+		name = @"hash_32B979AF4577D926"
 	}
 }
 CoD.CACUtility.PrimaryWeaponGroupNames = {
 	{
 		index = 1,
 		weapon_category = "weapon_assault",
-		name = 0xFE1B0B2003A6CC1,
-		itemGroup = Enum[0xA518ABAB92DB212][0x4A0897271FB09AD]
+		name = @"hash_7FE1B0B2003A6CC1",
+		itemGroup = Enum[@"itemgroup_t"][@"itemgroup_assault"]
 	},
 	{
 		index = 2,
 		weapon_category = "weapon_smg",
-		name = 0x5A1E94F52AC6DAB,
-		itemGroup = Enum[0xA518ABAB92DB212][0xBCE06767A091BE7]
+		name = @"hash_35A1E94F52AC6DAB",
+		itemGroup = Enum[@"itemgroup_t"][@"itemgroup_smg"]
 	},
 	{
 		index = 3,
 		weapon_category = "weapon_tactical",
-		name = 0xFB38D2633FBBEC7,
-		itemGroup = Enum[0xA518ABAB92DB212][0x3DA6A4276EF1CEF]
+		name = @"hash_1FB38D2633FBBEC7",
+		itemGroup = Enum[@"itemgroup_t"][@"itemgroup_tactical"]
 	},
 	{
 		index = 4,
 		weapon_category = "weapon_lmg",
-		name = 0xDB6F169E46CD4E4,
-		itemGroup = Enum[0xA518ABAB92DB212][0x51D9B7706B5A416]
+		name = @"hash_6DB6F169E46CD4E4",
+		itemGroup = Enum[@"itemgroup_t"][@"itemgroup_lmg"]
 	},
 	{
 		index = 5,
 		weapon_category = "weapon_sniper",
-		name = 0xEF865AD574F5FAD,
-		itemGroup = Enum[0xA518ABAB92DB212][0xD9E14963CFC3D79]
+		name = @"hash_2EF865AD574F5FAD",
+		itemGroup = Enum[@"itemgroup_t"][@"itemgroup_sniper"]
 	}
 }
 CoD.CACUtility.SecondaryWeaponGroupNames = {
 	{
 		index = 6,
 		weapon_category = "weapon_pistol",
-		name = 0x1F931942007CAB9,
-		itemGroup = Enum[0xA518ABAB92DB212][0x1585BBF779B0319]
+		name = @"hash_31F931942007CAB9",
+		itemGroup = Enum[@"itemgroup_t"][@"itemgroup_pistol"]
 	},
 	{
 		index = 7,
 		weapon_category = "weapon_cqb",
-		name = 0x2584C59DF32630E,
-		itemGroup = Enum[0xA518ABAB92DB212][0x4BF8976C721AFFC]
+		name = @"hash_72584C59DF32630E",
+		itemGroup = Enum[@"itemgroup_t"][@"itemgroup_cqb"]
 	},
 	{
 		index = 8,
 		weapon_category = "weapon_launcher",
-		name = 0xFB45C2314396720,
-		itemGroup = Enum[0xA518ABAB92DB212][0xB76F7BBA22B4976]
+		name = @"hash_3FB45C2314396720",
+		itemGroup = Enum[@"itemgroup_t"][@"itemgroup_launcher"]
 	},
 	{
 		index = 9,
 		weapon_category = "weapon_knife",
-		name = 0x8180FA72D55F45B,
-		itemGroup = Enum[0xA518ABAB92DB212][0x8C158486CCADDB]
+		name = @"hash_28180FA72D55F45B",
+		itemGroup = Enum[@"itemgroup_t"][@"itemgroup_knife"]
 	},
 	{
 		index = 10,
 		weapon_category = "weapon_special",
-		name = 0x3A21A8AF3E42CDD,
-		itemGroup = Enum[0xA518ABAB92DB212][0x6F7EF424C78D2F9]
+		name = @"hash_63A21A8AF3E42CDD",
+		itemGroup = Enum[@"itemgroup_t"][@"itemgroup_special"]
 	}
 }
 CoD.CACUtility.WeaponGroupDvarShown = {
-	weapon_special = 0x4A800EDD0C9BDE2
+	weapon_special = @"hash_54A800EDD0C9BDE2"
 }
 CoD.CACUtility.GetWeaponGroupsNames = function ( f2_arg0 )
 	local f2_local0 = {}
@@ -464,78 +464,78 @@ end
 CoD.CACUtility.talismanLoadoutSlot = "invalidGroup"
 CoD.CACUtility.talismanLoadoutSlotName = 0x0
 CoD.CACUtility.talismanLoadoutSlot = "talisman"
-CoD.CACUtility.talismanLoadoutSlotName = 0xA6D130CF0A0B9B0
+CoD.CACUtility.talismanLoadoutSlotName = @"hash_3A6D130CF0A0B9B0"
 CoD.CACUtility.loadoutSlotInfo = {
 	{
 		index = 1,
 		loadoutSlot = "primary",
-		name = 0xB484D92443361D8,
-		loadoutSlotEnum = Enum[0xF0AA273B133F18C][0xE66EC3B0C2CF943]
+		name = @"hash_7B484D92443361D8",
+		loadoutSlotEnum = Enum[@"loadoutslot_t"][@"loadoutslot_primary_weapon"]
 	},
 	{
 		index = 2,
 		loadoutSlot = "secondary",
-		name = 0xBB44C71D0F6B5C8,
-		loadoutSlotEnum = Enum[0xF0AA273B133F18C][0xB923BF9DF6E9AF7]
+		name = @"hash_6BB44C71D0F6B5C8",
+		loadoutSlotEnum = Enum[@"loadoutslot_t"][@"loadoutslot_secondary_weapon"]
 	},
 	{
 		index = 3,
 		loadoutSlot = "primarygrenade",
-		name = 0xDA102A6853690E6,
-		loadoutSlotEnum = Enum[0xF0AA273B133F18C][0x513F5D8C15D723]
+		name = @"hash_2DA102A6853690E6",
+		loadoutSlotEnum = Enum[@"loadoutslot_t"][@"loadoutslot_primary_grenade"]
 	},
 	{
 		index = 4,
 		loadoutSlot = "herogadget",
 		name = 0xA0BC550C54BD42,
 		zmName = 0x3377F50B93AB03,
-		loadoutSlotEnum = Enum[0xF0AA273B133F18C][0x8F84882D1B88CD5]
+		loadoutSlotEnum = Enum[@"loadoutslot_t"][@"loadoutslot_hero_gadget"]
 	},
 	{
 		index = 5,
 		loadoutSlot = "specialty",
-		name = 0x9A2653A123A01FD,
-		loadoutSlotEnum = Enum[0xF0AA273B133F18C][0xF0B21F87D7A9777]
+		name = @"hash_79A2653A123A01FD",
+		loadoutSlotEnum = Enum[@"loadoutslot_t"][@"loadoutslot_specialty1"]
 	},
 	{
 		index = 6,
 		loadoutSlot = CoD.CACUtility.talismanLoadoutSlot,
 		name = CoD.CACUtility.talismanLoadoutSlotName,
-		loadoutSlotEnum = Enum[0xF0AA273B133F18C][0xF8507A45DAC8D66]
+		loadoutSlotEnum = Enum[@"loadoutslot_t"][@"loadoutslot_talisman1"]
 	},
 	{
 		index = 7,
 		loadoutSlot = "tacticalgear",
-		name = 0x305E03714EE77FC,
-		loadoutSlotEnum = Enum[0xF0AA273B133F18C][0x2BC73D8834F0281]
+		name = @"hash_305E03714EE77FC",
+		loadoutSlotEnum = Enum[@"loadoutslot_t"][@"hash_22BC73D8834F0281"]
 	},
 	{
 		index = 8,
 		loadoutSlot = "talent",
-		name = 0x14FA585889B518B,
-		loadoutSlotEnum = Enum[0xF0AA273B133F18C][0x2BA0618DA75FC65]
+		name = @"hash_114FA585889B518B",
+		loadoutSlotEnum = Enum[@"loadoutslot_t"][@"loadoutslot_talent1"]
 	},
 	{
 		index = 9,
 		loadoutSlot = "bonuscard",
-		name = 0x8DEB3201AB34D8E,
-		loadoutSlotEnum = Enum[0xF0AA273B133F18C][0xA8664590559530]
+		name = @"hash_38DEB3201AB34D8E",
+		loadoutSlotEnum = Enum[@"loadoutslot_t"][@"loadoutslot_bonuscard1"]
 	},
 	{
 		index = 10,
 		loadoutSlot = "killstreak",
-		name = 0xB476D101217A723,
-		loadoutSlotEnum = Enum[0xF0AA273B133F18C][0x9AE0C71CEECE529]
+		name = @"hash_4B476D101217A723",
+		loadoutSlotEnum = Enum[@"loadoutslot_t"][@"loadoutslot_killstreak1"]
 	}
 }
 CoD.CACUtility.weaponOptionGroupNames = {
-	[Enum[0x3CBA8D054211104][0x393666961B28A15]] = "camo",
-	[Enum[0x3CBA8D054211104][0x8DC0A9744F7D997]] = "tag",
-	[Enum[0x3CBA8D054211104][0x1E766AF5C6025DF]] = "emblem",
-	[Enum[0x3CBA8D054211104][0x43A5BEA0FB2891E]] = "paintjob",
-	[Enum[0x3CBA8D054211104][0x6C9BD564F3BA48B]] = "reticle",
-	[Enum[0x3CBA8D054211104][0x6B0D6C3C000D4E1]] = "lens",
-	[Enum[0x3CBA8D054211104][0xAFFECF78A229CE3]] = "reticle_color"
+	[Enum[@"eweaponoptiongroup"][@"weaponoption_group_camo"]] = "camo",
+	[Enum[@"eweaponoptiongroup"][@"weaponoption_group_tag"]] = "tag",
+	[Enum[@"eweaponoptiongroup"][@"weaponoption_group_emblem"]] = "emblem",
+	[Enum[@"eweaponoptiongroup"][@"weaponoption_group_paintjob"]] = "paintjob",
+	[Enum[@"eweaponoptiongroup"][@"weaponoption_group_reticle"]] = "reticle",
+	[Enum[@"eweaponoptiongroup"][@"weaponoption_group_lens"]] = "lens",
+	[Enum[@"eweaponoptiongroup"][@"weaponoption_group_reticle_color"]] = "reticle_color"
 }
 CoD.CACUtility.maxWeaponCustomizationCategories = 3
 CoD.CACUtility.attachmentsWithCustReticle = {
@@ -546,31 +546,31 @@ CoD.CACUtility.attachmentsWithCustReticle = {
 	mms = true,
 	reflex = true
 }
-CoD.CACUtility.CACFeatureUnlockableItem = 0x15A957948D60D3B
+CoD.CACUtility.CACFeatureUnlockableItem = @"feature_cac"
 CoD.CACUtility.ClassesUnlockableItemInfo = {
 	prepared = false,
 	classNum_3 = {
-		featureItemRef = 0xBE0F42DFDDE3AFD,
+		featureItemRef = @"feature_custom_class_4",
 		featureItemIndex = CoDShared.EmptyItemIndex
 	},
 	classNum_4 = {
-		featureItemRef = 0xBE0F32DFDDE394A,
+		featureItemRef = @"feature_custom_class_5",
 		featureItemIndex = CoDShared.EmptyItemIndex
 	},
 	classNum_5 = {
-		featureItemRef = 0xBE0F22DFDDE3797,
+		featureItemRef = @"feature_custom_class_6",
 		featureItemIndex = CoDShared.EmptyItemIndex
 	},
 	classNum_15 = {
-		featureItemRef = 0x8AFB687AED12FCF,
+		featureItemRef = @"feature_default_class_4",
 		featureItemIndex = CoDShared.EmptyItemIndex
 	},
 	classNum_16 = {
-		featureItemRef = 0x8AFB587AED12E1C,
+		featureItemRef = @"feature_default_class_5",
 		featureItemIndex = CoDShared.EmptyItemIndex
 	},
 	classNum_17 = {
-		featureItemRef = 0x8AFB887AED13335,
+		featureItemRef = @"feature_default_class_6",
 		featureItemIndex = CoDShared.EmptyItemIndex
 	}
 }
@@ -583,99 +583,99 @@ CoD.CACUtility.ValidateMPClasses = function ( f3_arg0 )
 	CoD.CraftUtility.ValidateEquippedUGC( f3_arg0 )
 end
 CoD.CACUtility.MasteryCamos = {
-	[0x6C5B9DFD41304A0] = true,
-	[0xDCAF4647CD4E672] = true,
-	[0x229B17B6185BE37] = true
+	[@"camo_gold"] = true,
+	[@"camo_diamond"] = true,
+	[@"camo_darkmatter"] = true
 }
-CoD.CACUtility[0xE6E8B9715ECC201] = function ( f4_arg0, f4_arg1 )
-	local f4_local0 = Engine[0x3EAC408F958FF05]()
-	if f4_local0 == Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5] then
+CoD.CACUtility[@"hash_5E6E8B9715ECC201"] = function ( f4_arg0, f4_arg1 )
+	local f4_local0 = Engine[@"currentsessionmode"]()
+	if f4_local0 == Enum[@"emodes"][@"mode_multiplayer"] then
 		local f4_local1 = CoD.CACUtility.GetCustomClassCount( f4_arg0 )
 		for f4_local2 = 1, f4_local1, 1 do
-			local f4_local5 = Engine[0xED9C4D9D6233895]( f4_arg0, f4_local2 - 1, f4_local0 )
+			local f4_local5 = Engine[@"getcustomclasscacroot"]( f4_arg0, f4_local2 - 1, f4_local0 )
 			if f4_local5 then
 				for f4_local17, f4_local18 in ipairs( {
-					0xF31137FF783E939,
-					0x7FBC18FBDAA00D1
+					@"primary",
+					@"secondary"
 				} ) do
 					local f4_local19 = f4_local5[f4_local18]
 					if f4_local19 then
-						local f4_local9 = f4_local19[0x3460F2DA135912A]:get()
-						local f4_local10 = f4_local19[0xEE983B435CE4912]:get()
+						local f4_local9 = f4_local19[@"itemindex"]:get()
+						local f4_local10 = f4_local19[@"weaponmodelslot"]:get()
 						if f4_local9 ~= CoDShared.EmptyItemIndex then
-							local f4_local11 = Engine[0xB98952F69D937F9]( f4_local9 )
+							local f4_local11 = Engine[@"hash_7B98952F69D937F9"]( f4_local9 )
 							if f4_local11 ~= 0x0 then
-								local f4_local12 = Engine[0x9F0BB7D52A7A978]( f4_local11 )
+								local f4_local12 = Engine[@"hash_79F0BB7D52A7A978"]( f4_local11 )
 								local f4_local13 = f4_local12[f4_local10 + 1]
 								if not f4_local13 or not CoD.CACUtility.FilterSignatureWeapon( f4_arg0, f4_local13, false, true ) then
-									f4_local19[0xEE983B435CE4912]:set( 0 )
+									f4_local19[@"weaponmodelslot"]:set( 0 )
 								else
-									local f4_local14 = f4_local19[0xD7F884DAFFAA30F]:get()
+									local f4_local14 = f4_local19[@"camoindex"]:get()
 									if f4_local14 ~= 0 then
-										local f4_local15 = Engine[0x2DCF0973239E909]( CoD.CACUtility.CamoOptionsTable, Enum[0x5DD5CC8AEA7314B][0xAA94CABDA68EB21], Enum[0x5DD5CC8AEA7314B][0xB79D07B3744EA1A], "camo", Enum[0x5DD5CC8AEA7314B][0xA6342D60A0D5AAE], f4_local14 )
+										local f4_local15 = Engine[@"tablelookup"]( CoD.CACUtility.CamoOptionsTable, Enum[@"hash_25DD5CC8AEA7314B"][@"hash_3AA94CABDA68EB21"], Enum[@"hash_25DD5CC8AEA7314B"][@"hash_6B79D07B3744EA1A"], "camo", Enum[@"hash_25DD5CC8AEA7314B"][@"hash_6A6342D60A0D5AAE"], f4_local14 )
 										if f4_local15 and not CoD.CACUtility.MasteryCamos[f4_local15] then
 											local f4_local16 = CoD.CACUtility.AdjustCamoIfSignatureCamo( f4_arg0, f4_local14 )
 											if f4_local16 ~= f4_local14 then
-												f4_local19[0xD7F884DAFFAA30F]:set( f4_local16 )
+												f4_local19[@"camoindex"]:set( f4_local16 )
 											end
 										end
 									end
 								end
 							end
 						end
-						local f4_local11 = f4_local19[0xD7F884DAFFAA30F]:get()
+						local f4_local11 = f4_local19[@"camoindex"]:get()
 						if f4_local9 ~= CoDShared.EmptyItemIndex and f4_local11 > 0 then
 							local f4_local12 = CoD.WeaponOptionsUtility.GetCamoWeaponOptionIndexFromCamoOptionsIndex( f4_local11 )
-							if Engine[0xF1FD722970FDBA3]( f4_arg0, f4_local9, f4_local12, f4_local0 ) and not CoD.WeaponOptionsUtility.IsCamoWeaponOptionIndexActiveCamo( f4_local12 ) and f4_arg1 then
-								f4_local19[0xD7F884DAFFAA30F]:set( 0 )
-								CoDShared.ReportUser( f4_arg0, Engine[0x93B19E01B1FD1C7]( f4_arg0 ), "cheater_masterycamo_3", 1, true )
+							if Engine[@"hash_6F1FD722970FDBA3"]( f4_arg0, f4_local9, f4_local12, f4_local0 ) and not CoD.WeaponOptionsUtility.IsCamoWeaponOptionIndexActiveCamo( f4_local12 ) and f4_arg1 then
+								f4_local19[@"camoindex"]:set( 0 )
+								CoDShared.ReportUser( f4_arg0, Engine[@"getxuid64"]( f4_arg0 ), "cheater_masterycamo_3", 1, true )
 							end
 						end
 					end
 				end
-				f4_local6 = f4_local5[0x64BE52A1BDE5211]
+				f4_local6 = f4_local5[@"primarygrenade"]
 				if f4_local6 and f4_local6:get() == 0 then
-					f4_local6:set( Engine[0xD97229B24C685D5]( CoDShared.DefaultSpecialistEquipment, f4_local0 ) )
+					f4_local6:set( Engine[@"hash_2D97229B24C685D5"]( CoDShared.DefaultSpecialistEquipment, f4_local0 ) )
 				end
 			end
 		end
-		CoDLoadoutsShared[0x4F02E81CF4CC1BB]( f4_arg0, f4_arg1 )
-	elseif f4_local0 == Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A] and not IsLive() then
-		local f4_local1 = Engine[0xBBE3328FE08B8C7]()
+		CoDLoadoutsShared[@"validatemploadouts"]( f4_arg0, f4_arg1 )
+	elseif f4_local0 == Enum[@"emodes"][@"mode_zombies"] and not IsLive() then
+		local f4_local1 = Engine[@"hash_6BBE3328FE08B8C7"]()
 		local f4_local2 = CoD.CACUtility.GetCustomClassCount( f4_arg0 )
 		for f4_local3 = 0, CoD.ZMStoryUtility.StoryIndex.STORY_INDEX_COUNT - 1, 1 do
-			Engine[0x337129162C820FB]( f4_local3 )
+			Engine[@"hash_337129162C820FB"]( f4_local3 )
 			for f4_local5 = 1, f4_local2, 1 do
-				local f4_local18 = Engine[0xED9C4D9D6233895]( f4_arg0, f4_local5 - 1, f4_local0 )
+				local f4_local18 = Engine[@"getcustomclasscacroot"]( f4_arg0, f4_local5 - 1, f4_local0 )
 				if f4_local18 then
-					local f4_local19 = f4_local18[0x260D593D1AC699D]
+					local f4_local19 = f4_local18[@"talisman1"]
 					if f4_local19 then
 						f4_local19:set( CoD.CACUtility.EmptyItemIndex )
 					end
 				end
 			end
 		end
-		Engine[0x337129162C820FB]( f4_local1 )
+		Engine[@"hash_337129162C820FB"]( f4_local1 )
 	end
 end
-CoD.CACUtility[0xD1AA40064EFC4B7] = function ( f5_arg0, f5_arg1, f5_arg2 )
-	local f5_local0 = f5_arg1[0xA37A6E2D302839E .. f5_arg2]
+CoD.CACUtility[@"hash_2D1AA40064EFC4B7"] = function ( f5_arg0, f5_arg1, f5_arg2 )
+	local f5_local0 = f5_arg1[@"hash_7A37A6E2D302839E" .. f5_arg2]
 	if f5_local0 and f5_local0 ~= 0x0 then
 		return LuaUtils.FindItemInArray( f5_arg0, f5_local0, function ( f6_arg0, f6_arg1 )
-			return f6_arg1[0x14C91FFB3BA4240] == f6_arg0
+			return f6_arg1[@"assetname"] == f6_arg0
 		end
 		 )
 	else
 		
 	end
 end
-CoD.CACUtility[0x347CC8D49FF3E49] = function ( f7_arg0, f7_arg1 )
-	local f7_local0 = Engine[0xB2E4CCC119597B0]()
+CoD.CACUtility[@"hash_1347CC8D49FF3E49"] = function ( f7_arg0, f7_arg1 )
+	local f7_local0 = Engine[@"hash_2B2E4CCC119597B0"]()
 	if not f7_local0 then
 		return 
 	end
 	for f7_local4, f7_local5 in DDLUtils.ipairs( f7_arg0[0xD6751CB2F9CA09] ) do
-		local f7_local6 = CoD.CACUtility[0xD1AA40064EFC4B7]( f7_local0, f7_arg1, f7_local4 )
+		local f7_local6 = CoD.CACUtility[@"hash_2D1AA40064EFC4B7"]( f7_local0, f7_arg1, f7_local4 )
 		if f7_local6 then
 			f7_local5:set( f7_local6 )
 		end
@@ -685,64 +685,64 @@ CoD.CACUtility.SetDefaultLoadouts = function ( f8_arg0 )
 	local f8_local0 = f8_arg0.controller
 	local f8_local1 = f8_arg0.storageFileType
 	local f8_local2 = f8_arg0.statsNetworkType
-	local f8_local3 = Engine[0x3091707D0144833]()
-	if f8_local1 == Enum[0xBBD4F9E70101BA8][0x807B0F98163FB00] or f8_local1 == Enum[0xBBD4F9E70101BA8][0xB1C283C68D069C0] then
-		local f8_local4 = Engine[0x8BF970606552F4C]( f8_local0, f8_local1 )
+	local f8_local3 = Engine[@"hash_3091707D0144833"]()
+	if f8_local1 == Enum[@"storagefiletype"][@"storage_cp_loadouts"] or f8_local1 == Enum[@"storagefiletype"][@"storage_cp_loadouts_offline"] then
+		local f8_local4 = Engine[@"storagegetbuffer"]( f8_local0, f8_local1 )
 		if not f8_local4 then
 			return 
 		end
 		local f8_local5 = f8_local4.cacLoadouts
 		if f8_local5 then
-			local f8_local6 = Enum[0x9C0C2196D8313A0][0x60063C67132EB69]
-			local f8_local7 = Engine[0xE00B2F29271C60B]( 0x1C53105E8C011C4 )
+			local f8_local6 = Enum[@"emodes"][@"mode_campaign"]
+			local f8_local7 = Engine[@"hash_2E00B2F29271C60B"]( @"cp_default_loadouts" )
 			for f8_local8 = 1, #f8_local5.customclass, 1 do
 				CoDShared.SetCustomDefaultLoadout( f8_local5, f8_local8, f8_local7, f8_local6, nil )
 			end
-			Engine[0xE6C09FDF6C8D188]( f8_local0, f8_local6 )
+			Engine[@"saveloadout"]( f8_local0, f8_local6 )
 		end
-	elseif f8_local1 == Enum[0xBBD4F9E70101BA8][0x6C886CEB6BF4BCA] or f8_local1 == Enum[0xBBD4F9E70101BA8][0xA494758C2E9B27C] or f8_local1 == Enum[0xBBD4F9E70101BA8][0xF9A4C4451E3499E] or f8_local1 == Enum[0xBBD4F9E70101BA8][0x67DF1879D992E] or f8_local1 == Enum[0xBBD4F9E70101BA8][0xCEBE62E27709AD0] or f8_local1 == Enum[0xBBD4F9E70101BA8][0xD062FA7B47FC13A] then
-		local f8_local4 = Engine[0x8BF970606552F4C]( f8_local0, f8_local1 )
+	elseif f8_local1 == Enum[@"storagefiletype"][@"storage_mp_loadouts"] or f8_local1 == Enum[@"storagefiletype"][@"storage_mp_loadouts_custom"] or f8_local1 == Enum[@"storagefiletype"][@"storage_mp_loadouts_offline"] or f8_local1 == Enum[@"storagefiletype"][0x67DF1879D992E] or f8_local1 == Enum[@"storagefiletype"][@"hash_CEBE62E27709AD0"] or f8_local1 == Enum[@"storagefiletype"][@"hash_D062FA7B47FC13A"] then
+		local f8_local4 = Engine[@"storagegetbuffer"]( f8_local0, f8_local1 )
 		if not f8_local4 then
 			return 
 		end
 		local f8_local5 = f8_local4.cacLoadouts
 		if f8_local5 then
-			local f8_local6 = Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5]
+			local f8_local6 = Enum[@"emodes"][@"mode_multiplayer"]
 			local f8_local7 = nil
 			if f8_arg0.loadout ~= nil and f8_arg0.loadout ~= 0x0 then
-				f8_local7 = Engine[0xE00B2F29271C60B]( f8_arg0.loadout )
-			elseif f8_local1 == Enum[0xBBD4F9E70101BA8][0x67DF1879D992E] or f8_local1 == Enum[0xBBD4F9E70101BA8][0xCEBE62E27709AD0] or f8_local1 == Enum[0xBBD4F9E70101BA8][0xD062FA7B47FC13A] then
-				f8_local7 = Engine[0xE00B2F29271C60B]( 0x4FF2B60D157BBB2 )
+				f8_local7 = Engine[@"hash_2E00B2F29271C60B"]( f8_arg0.loadout )
+			elseif f8_local1 == Enum[@"storagefiletype"][0x67DF1879D992E] or f8_local1 == Enum[@"storagefiletype"][@"hash_CEBE62E27709AD0"] or f8_local1 == Enum[@"storagefiletype"][@"hash_D062FA7B47FC13A"] then
+				f8_local7 = Engine[@"hash_2E00B2F29271C60B"]( @"mp_arena_default_loadouts" )
 			else
-				f8_local7 = Engine[0xE00B2F29271C60B]( 0x705A80062BD09C2 )
+				f8_local7 = Engine[@"hash_2E00B2F29271C60B"]( @"mp_default_loadouts" )
 			end
 			if not f8_local7 then
 				return 
 			end
-			for f8_local8 = Enum[0x33AC0FF9A1537DE][0xB269FFE65DEF21C] + 1, Enum[0x33AC0FF9A1537DE][0x496B3CCA108698A], 1 do
+			for f8_local8 = Enum[@"loadoutclass_t"][@"custom_class_first"] + 1, Enum[@"loadoutclass_t"][@"basic_custom_class_count"], 1 do
 				CoDShared.SetCustomDefaultLoadout( f8_local5, f8_local8, f8_local7, f8_local6, nil )
-				CoDShared.SetDefaultLoadoutForClass( f8_local5, f8_local8 + Enum[0x33AC0FF9A1537DE][0x496B3CCA108698A], f8_local8, f8_local7, f8_local6, nil )
+				CoDShared.SetDefaultLoadoutForClass( f8_local5, f8_local8 + Enum[@"loadoutclass_t"][@"basic_custom_class_count"], f8_local8, f8_local7, f8_local6, nil )
 			end
 			if f8_local3 then
-				for f8_local8 = Enum[0x33AC0FF9A1537DE][0xFEA2C4AFF9A65EC] + 1, Enum[0x33AC0FF9A1537DE][0x46004DB4E087522] + 1, 1 do
+				for f8_local8 = Enum[@"loadoutclass_t"][@"default_class_first"] + 1, Enum[@"loadoutclass_t"][@"default_class_last"] + 1, 1 do
 					CoDShared.SetDefaultLoadout( f8_local5, f8_local8, f8_local7, f8_local6, nil )
 				end
 			end
 			CoDShared.SetDefaultGlobalLoadout( f8_local5, f8_local7, f8_local6 )
-			if f8_local1 == Enum[0xBBD4F9E70101BA8][0x6C886CEB6BF4BCA] then
-				CoD.CACUtility[0x347CC8D49FF3E49]( f8_local5, f8_local7 )
+			if f8_local1 == Enum[@"storagefiletype"][@"storage_mp_loadouts"] then
+				CoD.CACUtility[@"hash_1347CC8D49FF3E49"]( f8_local5, f8_local7 )
 			end
-			Engine[0xE6C09FDF6C8D188]( f8_local0, f8_local6 )
+			Engine[@"saveloadout"]( f8_local0, f8_local6 )
 		end
-	elseif f8_local1 == Enum[0xBBD4F9E70101BA8][0x9E5D6DF436F1EE] or f8_local1 == Enum[0xBBD4F9E70101BA8][0x3376D9E1C3C8130] or f8_local1 == Enum[0xBBD4F9E70101BA8][0xA621D7C69E5741A] then
-		local f8_local4 = Engine[0x8BF970606552F4C]( f8_local0, f8_local1 )
+	elseif f8_local1 == Enum[@"storagefiletype"][@"storage_zm_loadouts"] or f8_local1 == Enum[@"storagefiletype"][@"hash_33376D9E1C3C8130"] or f8_local1 == Enum[@"storagefiletype"][@"storage_zm_loadouts_offline"] then
+		local f8_local4 = Engine[@"storagegetbuffer"]( f8_local0, f8_local1 )
 		if not f8_local4 then
 			return 
 		end
 		local f8_local5 = f8_local4.cacLoadouts
 		if f8_local5 then
-			local f8_local6 = Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A]
-			local f8_local7 = Engine[0xE00B2F29271C60B]( 0x9EEE28789FE067A )
+			local f8_local6 = Enum[@"emodes"][@"mode_zombies"]
+			local f8_local7 = Engine[@"hash_2E00B2F29271C60B"]( @"zm_default_loadouts" )
 			for f8_local8 = 0, #f8_local5 - 1, 1 do
 				local f8_local11 = f8_local5[f8_local8]
 				for f8_local12 = 1, #f8_local11.customclass, 1 do
@@ -752,29 +752,29 @@ CoD.CACUtility.SetDefaultLoadouts = function ( f8_arg0 )
 					CoDShared.SetDefaultBubbleGumBuffs( f8_local11, f8_local12, f8_local7, f8_local6, f8_local8 )
 				end
 			end
-			Engine[0xE6C09FDF6C8D188]( f8_local0, f8_local6 )
+			Engine[@"saveloadout"]( f8_local0, f8_local6 )
 		end
-	elseif f8_local1 == Enum[0xBBD4F9E70101BA8][0xDF87425733853AE] then
-		local f8_local4 = Engine[0x8BF970606552F4C]( f8_local0, f8_local1 )
+	elseif f8_local1 == Enum[@"storagefiletype"][@"storage_wz_loadouts"] then
+		local f8_local4 = Engine[@"storagegetbuffer"]( f8_local0, f8_local1 )
 		if not f8_local4 then
 			return 
 		end
-		local f8_local5 = Enum[0x9C0C2196D8313A0][0xBF1DCC8138A9D39]
+		local f8_local5 = Enum[@"emodes"][@"mode_warzone"]
 		local f8_local6 = CoD.PlayerRoleUtility.GetHeroList( f8_local5 )
-		local f8_local7 = Engine[0xE00B2F29271C60B]( 0x5E2F5F439F26596 )
+		local f8_local7 = Engine[@"hash_2E00B2F29271C60B"]( @"wz_default_loadouts" )
 		local f8_local8 = {}
 		for f8_local11, f8_local12 in ipairs( f8_local6 ) do
 			local f8_local13 = f8_local12.bodyIndex
-			local f8_local14 = Engine[0xB678B832BC9DC0]( f8_local5, f8_local13 )
-			if f8_local14[0xC9366DE09ED7379] == 1 then
+			local f8_local14 = Engine[@"getpositionrolebundleinfo"]( f8_local5, f8_local13 )
+			if f8_local14[@"isdefaultcharacter"] == 1 then
 				table.insert( f8_local8, f8_local13 )
 			end
 		end
 		if #f8_local8 > 0 then
-			f8_local4[0x766CE60E25569A3][0xA8BD5071BCB463C]:set( f8_local8[math.random( #f8_local8 )] )
+			f8_local4[@"cacloadouts"][@"hash_6A8BD5071BCB463C"]:set( f8_local8[math.random( #f8_local8 )] )
 		end
-		CoD.CACUtility[0x347CC8D49FF3E49]( f8_local4[0x766CE60E25569A3], f8_local7 )
-		Engine[0xE6C09FDF6C8D188]( f8_local0, f8_local5 )
+		CoD.CACUtility[@"hash_1347CC8D49FF3E49"]( f8_local4[@"cacloadouts"], f8_local7 )
+		Engine[@"saveloadout"]( f8_local0, f8_local5 )
 	end
 end
 CoD.CACUtility.ValidateMPBlackMarketAttachments = function ( f9_arg0 )
@@ -803,32 +803,32 @@ CoD.CACUtility.ValidateMPBlackMarketAttachments = function ( f9_arg0 )
 			}
 		} ) do
 			local f10_local6 = CoD.SafeGetDDL( f10_arg0, f10_local5.slotName )
-			if f10_local6 and Engine[0x7366ABFE970F201]( f9_arg0, f10_local5.attachmentIndex, Engine[0x2DCF0973239E909]( CoD.attachmentTable, Enum[0xAAB93F26A00CE2][0xF088C41316871C0], Enum[0xAAB93F26A00CE2][0x5AE79C9066CF279], "reticle_" .. f10_local6 ) ) then
+			if f10_local6 and Engine[@"isweaponoptionlockedentitlement"]( f9_arg0, f10_local5.attachmentIndex, Engine[@"tablelookup"]( CoD.attachmentTable, Enum[@"attachmenttablecolumn_e"][@"attachmenttable_column_index"], Enum[@"attachmenttablecolumn_e"][@"attachmenttable_column_reference"], "reticle_" .. f10_local6 ) ) then
 				f10_arg0[f10_local5.slotName]:set( 0 )
 			end
 		end
 		for f10_local5, f10_local6 in ipairs( {
 			{
 				slotName = "primarycamo",
-				attachmentIndex = Enum[0xCE3E71B7308D03D][0xC5DF1BACB56F7AB]
+				attachmentIndex = Enum[@"eattachment"][@"attachment_none"]
 			},
 			{
 				slotName = "secondarycamo",
-				attachmentIndex = Enum[0xCE3E71B7308D03D][0xC5DF1BACB56F7AB]
+				attachmentIndex = Enum[@"eattachment"][@"attachment_none"]
 			}
 		} ) do
 			local f10_local7 = CoD.SafeGetDDL( f10_arg0, f10_local6.slotName )
-			if f10_local7 and Engine[0x7366ABFE970F201]( f9_arg0, f10_local6.attachmentIndex, f10_local7 ) then
+			if f10_local7 and Engine[@"isweaponoptionlockedentitlement"]( f9_arg0, f10_local6.attachmentIndex, f10_local7 ) then
 				f10_arg0[f10_local6.slotName]:set( 0 )
 			end
 		end
 	end
 	
 	local f9_local1 = {}
-	local f9_local2 = Engine[0x8BF970606552F4C]( f9_arg0, Enum[0xBBD4F9E70101BA8][0x67DF1879D992E] )
-	local f9_local3 = Engine[0x8BF970606552F4C]( f9_arg0, Enum[0xBBD4F9E70101BA8][0xCEBE62E27709AD0] )
-	local f9_local4 = Engine[0x8BF970606552F4C]( f9_arg0, Enum[0xBBD4F9E70101BA8][0xA494758C2E9B27C] )
-	local f9_local5 = Engine[0x8BF970606552F4C]( f9_arg0, Enum[0xBBD4F9E70101BA8][0x6C886CEB6BF4BCA] )
+	local f9_local2 = Engine[@"storagegetbuffer"]( f9_arg0, Enum[@"storagefiletype"][0x67DF1879D992E] )
+	local f9_local3 = Engine[@"storagegetbuffer"]( f9_arg0, Enum[@"storagefiletype"][@"hash_CEBE62E27709AD0"] )
+	local f9_local4 = Engine[@"storagegetbuffer"]( f9_arg0, Enum[@"storagefiletype"][@"storage_mp_loadouts_custom"] )
+	local f9_local5 = Engine[@"storagegetbuffer"]( f9_arg0, Enum[@"storagefiletype"][@"storage_mp_loadouts"] )
 	f9_local1 = f9_local2
 	for f9_local2 = 1, #f9_local1, 1 do
 		local f9_local6 = f9_local1[f9_local2]
@@ -838,7 +838,7 @@ CoD.CACUtility.ValidateMPBlackMarketAttachments = function ( f9_arg0 )
 			end
 		end
 	end
-	f9_local2 = Engine[0x8BF970606552F4C]( f9_arg0, Enum[0xBBD4F9E70101BA8][0x8DEDC9F84AAC4B7] )
+	f9_local2 = Engine[@"storagegetbuffer"]( f9_arg0, Enum[@"storagefiletype"][@"storage_mp_class_sets"] )
 	if f9_local2 then
 		for f9_local7, f9_local8 in ipairs( {
 			"publicMatchClassSets",
@@ -860,8 +860,8 @@ CoD.CACUtility.ValidateMPLootWeapons = function ( f11_arg0 )
 		local f12_local0 = 0
 		local f12_local1 = false
 		for f12_local6, f12_local7 in ipairs( f12_arg0 ) do
-			local f12_local8 = Engine[0xC6F8EC444864600]( CoD.BlackMarketUtility.lootTableName, f12_local7, f12_local0 )
-			local f12_local9 = Engine[0x81EDAAB868725C9]( f12_local8, Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5] )
+			local f12_local8 = Engine[@"hash_4C6F8EC444864600"]( CoD.BlackMarketUtility.lootTableName, f12_local7, f12_local0 )
+			local f12_local9 = Engine[@"getitemindexfromreference"]( f12_local8, Enum[@"emodes"][@"mode_multiplayer"] )
 			local f12_local10 = CoD.BlackMarketUtility.GetItemQuantity( f11_arg0, f12_local8 )
 			local f12_local11 = "itemstats." .. f12_local9 .. ".purchased"
 			if f12_local10 == 0 then
@@ -880,7 +880,7 @@ CoD.CACUtility.ValidateMPLootWeapons = function ( f11_arg0 )
 		return f12_local1
 	end
 	
-	local f11_local1 = Engine[0x8BF970606552F4C]( f11_arg0, Enum[0xBBD4F9E70101BA8][0xFDE358A242AFA2C] )
+	local f11_local1 = Engine[@"storagegetbuffer"]( f11_arg0, Enum[@"storagefiletype"][@"storage_mp_stats_online"] )
 	if f11_local1 then
 		local f11_local2 = false
 		if f11_local0( CoD.BlackMarketUtility.GetLootTypeRows( "weapon" ), f11_local1 ) or f11_local0( CoD.BlackMarketUtility.GetLootTypeRows( "melee_weapon" ), f11_local1 ) then
@@ -891,9 +891,9 @@ end
 CoD.CACUtility.ValidateZMBGBEntitlement = function ( f13_arg0 )
 	for f13_local0 = 0, 9, 1 do
 		for f13_local3 = 0, 4, 1 do
-			local f13_local6 = Engine[0x708EB21A8740A71]( Engine[0x2321ACE1C24455D]( f13_arg0, f13_local0, f13_local3 ), Enum[0x6EB546760F890D2][0x48CD0338EE0B3AE], Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A] )
-			if f13_local6 and f13_local6 ~= "" and not Engine[0xB521CB398C92692]( f13_arg0, Engine[0xC53F8D38DF9042B]( f13_local6 ) ) then
-				Engine[0x7C75E608EA39B5C]( f13_arg0, "resetBubbleGumPackOnline " .. f13_local0 .. " MENU_BGB_PACK_" .. f13_local0 + 1 )
+			local f13_local6 = Engine[@"getdlcnameforitem"]( Engine[@"getbubblegumbuff"]( f13_arg0, f13_local0, f13_local3 ), Enum[@"statindexoffset"][@"hash_648CD0338EE0B3AE"], Enum[@"emodes"][@"mode_zombies"] )
+			if f13_local6 and f13_local6 ~= "" and not Engine[@"hasentitlement"]( f13_arg0, Engine[@"converttoxhash"]( f13_local6 ) ) then
+				Engine[@"exec"]( f13_arg0, "resetBubbleGumPackOnline " .. f13_local0 .. " MENU_BGB_PACK_" .. f13_local0 + 1 )
 			end
 		end
 	end
@@ -902,54 +902,54 @@ CoD.OverlayUtility.AddSystemOverlay( "PrestigeWeapon", {
 	menuName = "SystemOverlay_Full",
 	frameWidget = "CoD.systemOverlay_Full_BasicFrame_Prestige",
 	title = function ( f14_arg0, f14_arg1 )
-		return Engine[0xB03220D3A4F3E38]( Engine[0xF9F1239CFD921FE]( 0x3FDEFB5DBDDE6EF, CoD.CACUtility.GetWeaponPLevel( f14_arg0, Engine[0x614D394F6F9A18D]( f14_arg1 ) ) + 1 ) )
+		return Engine[@"toupper"]( Engine[@"hash_4F9F1239CFD921FE"]( @"hash_73FDEFB5DBDDE6EF", CoD.CACUtility.GetWeaponPLevel( f14_arg0, Engine[@"getmodelvalue"]( f14_arg1 ) ) + 1 ) )
 	end,
 	description = function ( f15_arg0, f15_arg1 )
 		local f15_local0 = {
-			0xA5174662FAC1979,
-			0xA5171662FAC1460
+			@"hash_6A5174662FAC1979",
+			@"hash_6A5171662FAC1460"
 		}
-		return Engine[0xF9F1239CFD921FE]( f15_local0[CoD.CACUtility.GetWeaponPLevel( f15_arg0, Engine[0x614D394F6F9A18D]( f15_arg1 ) ) + 1], Engine[0x6B7AC889104DED3]( Engine[0x614D394F6F9A18D]( f15_arg1 ) ) )
+		return Engine[@"hash_4F9F1239CFD921FE"]( f15_local0[CoD.CACUtility.GetWeaponPLevel( f15_arg0, Engine[@"getmodelvalue"]( f15_arg1 ) ) + 1], Engine[@"getitemname"]( Engine[@"getmodelvalue"]( f15_arg1 ) ) )
 	end,
 	weaponName = function ( f16_arg0, f16_arg1 )
-		return Engine[0xF9F1239CFD921FE]( Engine[0x6B7AC889104DED3]( Engine[0x614D394F6F9A18D]( f16_arg1 ) ) )
+		return Engine[@"hash_4F9F1239CFD921FE"]( Engine[@"getitemname"]( Engine[@"getmodelvalue"]( f16_arg1 ) ) )
 	end,
 	weaponImage = function ( f17_arg0, f17_arg1 )
-		return Engine[0x8518E07C1C5BC6D]( Engine[0x614D394F6F9A18D]( f17_arg1 ) )
+		return Engine[@"getitemimage"]( Engine[@"getmodelvalue"]( f17_arg1 ) )
 	end,
 	weaponPrestigeReward = function ( f18_arg0, f18_arg1 )
 		local f18_local0 = {
-			0x87AD82563AAAC53,
-			0x9403D3AE8FEC071
+			@"hash_87AD82563AAAC53",
+			@"mpui/killcounter"
 		}
-		return Engine[0xF9F1239CFD921FE]( f18_local0[CoD.CACUtility.GetWeaponPLevel( f18_arg0, Engine[0x614D394F6F9A18D]( f18_arg1 ) ) + 1] )
+		return Engine[@"hash_4F9F1239CFD921FE"]( f18_local0[CoD.CACUtility.GetWeaponPLevel( f18_arg0, Engine[@"getmodelvalue"]( f18_arg1 ) ) + 1] )
 	end,
 	weaponPrestigeRewardIcon = function ( f19_arg0, f19_arg1 )
 		local f19_local0 = {
-			0x6D0468E5DCF0064,
-			0xDE50A0F088C9890
+			@"cac_mods_clan_tag",
+			@"cac_mods_kill_counter"
 		}
-		return f19_local0[CoD.CACUtility.GetWeaponPLevel( f19_arg0, Engine[0x614D394F6F9A18D]( f19_arg1 ) ) + 1]
+		return f19_local0[CoD.CACUtility.GetWeaponPLevel( f19_arg0, Engine[@"getmodelvalue"]( f19_arg1 ) ) + 1]
 	end,
 	weaponPrestigeRewardPreview = function ( f20_arg0, f20_arg1 )
-		if CoD.CACUtility.GetWeaponPLevel( f20_arg0, Engine[0x614D394F6F9A18D]( f20_arg1 ) ) + 1 == CoD.CACUtility.maxWeaponPrestige then
+		if CoD.CACUtility.GetWeaponPLevel( f20_arg0, Engine[@"getmodelvalue"]( f20_arg1 ) ) + 1 == CoD.CACUtility.maxWeaponPrestige then
 			local f20_local0 = CoD.PlayerStatsUtility.GetStorageBufferForPlayer( f20_arg0 )
 			local f20_local1 = 0
 			if f20_local0 then
-				local f20_local2 = CoD.CACUtility.GetUnlockableItemInfo( Engine[0x614D394F6F9A18D]( f20_arg1 ), Engine[0x3EAC408F958FF05]() )
+				local f20_local2 = CoD.CACUtility.GetUnlockableItemInfo( Engine[@"getmodelvalue"]( f20_arg1 ), Engine[@"currentsessionmode"]() )
 				f20_local1 = f20_local0.item_stats[f20_local2.nameHash].kills.statValue:get()
 			end
 			return f20_local1
 		end
 		local f20_local0 = ""
-		local f20_local3 = Engine[0xDC3B811A6]( f20_arg0, Engine[0x93B19E01B1FD1C7]( f20_arg0 ) )
+		local f20_local3 = Engine[@"getplayerinfo"]( f20_arg0, Engine[@"getxuid64"]( f20_arg0 ) )
 		if f20_local3 then
 			f20_local0 = f20_local3.info.clantag
 		end
 		return f20_local0
 	end,
 	weaponPrestigeLevel = function ( f21_arg0, f21_arg1 )
-		return CoD.CACUtility.GetWeaponPLevel( f21_arg0, Engine[0x614D394F6F9A18D]( f21_arg1 ) ) + 1
+		return CoD.CACUtility.GetWeaponPLevel( f21_arg0, Engine[@"getmodelvalue"]( f21_arg1 ) ) + 1
 	end,
 	categoryType = CoD.OverlayUtility.OverlayTypes.GenericMessage,
 	listDatasource = function ( f22_arg0, f22_arg1 )
@@ -969,11 +969,11 @@ CoD.OverlayUtility.AddSystemOverlay( "PrestigeWeapon", {
 			
 			local f23_local2 = function ( f25_arg0, f25_arg1, f25_arg2, f25_arg3, f25_arg4 )
 				local f25_local0 = CoD.CACUtility.GetCustomClassCount( f25_arg2 )
-				local f25_local1 = Engine[0x40E824FE270E174]( Engine[0x4DF5CFBC1771947]( f25_arg2 ), "CustomClassList" )
-				local f25_local2 = Engine[0x614D394F6F9A18D]( f22_arg1 )
-				local f25_local3 = Engine[0x3EAC408F958FF05]()
+				local f25_local1 = Engine[@"getmodel"]( Engine[@"getmodelforcontroller"]( f25_arg2 ), "CustomClassList" )
+				local f25_local2 = Engine[@"getmodelvalue"]( f22_arg1 )
+				local f25_local3 = Engine[@"currentsessionmode"]()
 				for f25_local4 = 1, f25_local0, 1 do
-					local f25_local7 = Engine[0x40E824FE270E174]( f25_local1, "class" .. f25_local4 )
+					local f25_local7 = Engine[@"getmodel"]( f25_local1, "class" .. f25_local4 )
 					local f25_local8 = f25_local4 - 1
 					if CoD.SafeGetModelValue( f25_local7, "primary.itemIndex" ) == f25_local2 then
 						local f25_local9 = nil
@@ -984,7 +984,7 @@ CoD.OverlayUtility.AddSystemOverlay( "PrestigeWeapon", {
 							end
 						end
 						for f25_local10 = 1, CoD.CACUtility.maxPrimaryAttachments, 1 do
-							Engine[0xDC8E7F5A60958D6]( f25_arg2, f25_local8, "primaryattachment" .. f25_local10, CoD.CACUtility.EmptyItemIndex )
+							Engine[@"setclassitem"]( f25_arg2, f25_local8, "primaryattachment" .. f25_local10, CoD.CACUtility.EmptyItemIndex )
 						end
 					end
 					if CoD.SafeGetModelValue( f25_local7, "secondary.itemIndex" ) == f25_local2 then
@@ -996,72 +996,72 @@ CoD.OverlayUtility.AddSystemOverlay( "PrestigeWeapon", {
 							end
 						end
 						for f25_local10 = 1, CoD.CACUtility.maxSecondaryAttachments, 1 do
-							Engine[0xDC8E7F5A60958D6]( f25_arg2, f25_local8, "secondaryattachment" .. f25_local10, CoD.CACUtility.EmptyItemIndex )
+							Engine[@"setclassitem"]( f25_arg2, f25_local8, "secondaryattachment" .. f25_local10, CoD.CACUtility.EmptyItemIndex )
 						end
 					end
 				end
-				local f25_local4 = Engine[0x4F79F8158B11A45]( f25_arg2 )
+				local f25_local4 = Engine[@"getnumberofclasssetsowned"]( f25_arg2 )
 				for f25_local5 = 1, f25_local4, 1 do
 					local f25_local8 = f25_local5 - 1
 					for f25_local9 = 1, f25_local0, 1 do
 						local f25_local13 = f25_local9 - 1
-						local f25_local14 = Engine[0x9FFA316C87667C8]( f25_arg2, f25_local8, f25_local13, "primary" )
-						local f25_local16 = Engine[0x9FFA316C87667C8]( f25_arg2, f25_local8, f25_local13, "secondary" )
+						local f25_local14 = Engine[@"getclasssetitem"]( f25_arg2, f25_local8, f25_local13, "primary" )
+						local f25_local16 = Engine[@"getclasssetitem"]( f25_arg2, f25_local8, f25_local13, "secondary" )
 						if f25_local14 == f25_local2 then
 							for f25_local17 = 1, CoD.CACUtility.maxPrimaryAttachments, 1 do
-								Engine[0xD0069F6BF65B974]( f25_arg2, f25_local8, f25_local13, "primaryattachment" .. f25_local17, CoD.CACUtility.EmptyItemIndex )
+								Engine[@"setclasssetitem"]( f25_arg2, f25_local8, f25_local13, "primaryattachment" .. f25_local17, CoD.CACUtility.EmptyItemIndex )
 							end
 						end
 						if f25_local16 == f25_local2 then
 							for f25_local17 = 1, CoD.CACUtility.maxPrimaryAttachments, 1 do
-								Engine[0xD0069F6BF65B974]( f25_arg2, f25_local8, f25_local13, "secondaryattachment" .. f25_local17, CoD.CACUtility.EmptyItemIndex )
+								Engine[@"setclasssetitem"]( f25_arg2, f25_local8, f25_local13, "secondaryattachment" .. f25_local17, CoD.CACUtility.EmptyItemIndex )
 							end
 						end
 					end
 				end
 				local f25_local5 = CoD.PlayerStatsUtility.GetStorageBufferForPlayer( f25_arg2 )
 				if f25_local5 then
-					local f25_local6 = Engine[0x614D394F6F9A18D]( f22_arg1 )
+					local f25_local6 = Engine[@"getmodelvalue"]( f22_arg1 )
 					local f25_local15 = CoD.CACUtility.GetUnlockableItemInfo( f25_local6, f25_local3 )
 					local f25_local8 = f25_local5.ranked_item_stats[f25_local15.nameHash]
 					f25_local8.pLevel:set( math.min( f25_local8.pLevel:get() + 1, CoD.CACUtility.maxWeaponPrestige ) )
 					f25_local8.xp:set( 0 )
-					Engine[0xC4146BA76D0F982]( "uin_prestige_activate" )
-					CoD.OverlayUtility.ShowToast( "Content", Engine[0xF9F1239CFD921FE]( 0x46ECE54C3471D89 ), Engine[0xF9F1239CFD921FE]( Engine[0x6B7AC889104DED3]( f25_local6 ) ), 0x7615068F50B3D66, nil, nil, nil, nil )
-					Engine[0x28A466EF7723621]( f25_arg2, CoD.PlayerStatsUtility.GetStorageBufferEnumForPlayer( f25_arg2 ) )
+					Engine[@"playsound"]( "uin_prestige_activate" )
+					CoD.OverlayUtility.ShowToast( "Content", Engine[@"hash_4F9F1239CFD921FE"]( @"hash_146ECE54C3471D89" ), Engine[@"hash_4F9F1239CFD921FE"]( Engine[@"getitemname"]( f25_local6 ) ), @"blacktransparent", nil, nil, nil, nil )
+					Engine[@"storagewrite"]( f25_arg2, CoD.PlayerStatsUtility.GetStorageBufferEnumForPlayer( f25_arg2 ) )
 					ForceNotifyControllerModel( f25_arg2, "Unlockables.listUpdate" )
 				end
 				UploadStats( f25_arg4, f25_arg2 )
 				SaveLoadout( f25_arg4, f25_arg2 )
 				for f25_local6 = 1, f25_local0, 1 do
-					local f25_local9 = Engine[0x40E824FE270E174]( f25_local1, "class" .. f25_local6 )
-					local f25_local10 = Engine[0x40E824FE270E174]( f25_local9, "primary.itemIndex" )
-					local f25_local11 = Engine[0x40E824FE270E174]( f25_local9, "secondary.itemIndex" )
-					Engine[0x6A489878620F3BC]( f25_local10 )
-					Engine[0x6A489878620F3BC]( f25_local11 )
+					local f25_local9 = Engine[@"getmodel"]( f25_local1, "class" .. f25_local6 )
+					local f25_local10 = Engine[@"getmodel"]( f25_local9, "primary.itemIndex" )
+					local f25_local11 = Engine[@"getmodel"]( f25_local9, "secondary.itemIndex" )
+					Engine[@"forcenotifymodelsubscriptions"]( f25_local10 )
+					Engine[@"forcenotifymodelsubscriptions"]( f25_local11 )
 				end
-				Engine[0x6A489878620F3BC]( f22_arg1 )
+				Engine[@"forcenotifymodelsubscriptions"]( f22_arg1 )
 				CoD.CACUtility.ValidateMPClasses( f25_arg2 )
 				GoBack( f25_arg4, f25_arg2 )
 			end
 			
 			local f23_local3 = function ( f26_arg0, f26_arg1, f26_arg2, f26_arg3, f26_arg4 )
 				local f26_local0 = CoD.PlayerStatsUtility.GetStorageBufferForPlayer( f26_arg2 )
-				local f26_local1 = Engine[0x3EAC408F958FF05]()
-				local f26_local2 = Engine[0x614D394F6F9A18D]( f22_arg1 )
+				local f26_local1 = Engine[@"currentsessionmode"]()
+				local f26_local2 = Engine[@"getmodelvalue"]( f22_arg1 )
 				if f26_local0 then
 					local f26_local3 = CoD.CACUtility.GetUnlockableItemInfo( f26_local2, f26_local1 )
 					local f26_local4 = f26_local0.ranked_item_stats[f26_local3.nameHash]
 					f26_local4.pLevel:set( math.min( f26_local4.pLevel:get() + 1, CoD.CACUtility.maxWeaponPrestige ) )
 					f26_local4.xp:set( 0 )
-					Engine[0x28A466EF7723621]( f26_arg2, CoD.PlayerStatsUtility.GetStorageBufferEnumForPlayer( f26_arg2 ) )
-					Engine[0xC4146BA76D0F982]( "uin_prestige_activate" )
-					CoD.OverlayUtility.ShowToast( "Content", Engine[0xF9F1239CFD921FE]( 0x46ECE54C3471D89 ), Engine[0xF9F1239CFD921FE]( Engine[0x6B7AC889104DED3]( f26_local2 ) ), 0x7615068F50B3D66, nil, nil, nil, nil )
+					Engine[@"storagewrite"]( f26_arg2, CoD.PlayerStatsUtility.GetStorageBufferEnumForPlayer( f26_arg2 ) )
+					Engine[@"playsound"]( "uin_prestige_activate" )
+					CoD.OverlayUtility.ShowToast( "Content", Engine[@"hash_4F9F1239CFD921FE"]( @"hash_146ECE54C3471D89" ), Engine[@"hash_4F9F1239CFD921FE"]( Engine[@"getitemname"]( f26_local2 ) ), @"blacktransparent", nil, nil, nil, nil )
 					ForceNotifyControllerModel( f26_arg2, "Unlockables.listUpdate" )
 				end
 				UploadStats( f26_arg4, f26_arg2 )
 				SaveLoadout( f26_arg4, f26_arg2 )
-				Engine[0x6A489878620F3BC]( f22_arg1 )
+				Engine[@"forcenotifymodelsubscriptions"]( f22_arg1 )
 				CoD.ZMLoadoutUtility.ClearAllAttachments( f26_arg2, f26_local2, f26_local1 )
 				GoBack( f26_arg4, f26_arg2 )
 			end
@@ -1070,13 +1070,13 @@ CoD.OverlayUtility.AddSystemOverlay( "PrestigeWeapon", {
 				GoBack( f27_arg4, f27_arg2 )
 			end
 			
-			local f23_local5 = Engine[0x3EAC408F958FF05]()
-			if f23_local5 == Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A] then
-				table.insert( f23_local0, f23_local1( Engine[0xF9F1239CFD921FE]( 0xCEB637ACD703940 ), f23_local3, false ) )
-			elseif f23_local5 == Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5] then
-				table.insert( f23_local0, f23_local1( Engine[0xF9F1239CFD921FE]( 0xCEB637ACD703940 ), f23_local2, false ) )
+			local f23_local5 = Engine[@"currentsessionmode"]()
+			if f23_local5 == Enum[@"emodes"][@"mode_zombies"] then
+				table.insert( f23_local0, f23_local1( Engine[@"hash_4F9F1239CFD921FE"]( @"hash_CEB637ACD703940" ), f23_local3, false ) )
+			elseif f23_local5 == Enum[@"emodes"][@"mode_multiplayer"] then
+				table.insert( f23_local0, f23_local1( Engine[@"hash_4F9F1239CFD921FE"]( @"hash_CEB637ACD703940" ), f23_local2, false ) )
 			end
-			table.insert( f23_local0, f23_local1( Engine[0xF9F1239CFD921FE]( 0xC2E92C54C2BE289 ), f23_local4, true ) )
+			table.insert( f23_local0, f23_local1( Engine[@"hash_4F9F1239CFD921FE"]( @"menu/cancel" ), f23_local4, true ) )
 			return f23_local0
 		end, true )
 		return "PrestigeWeaponOptionsList"
@@ -1113,10 +1113,10 @@ CoD.CACUtility.GetCameraNameForAttachments = function ( f28_arg0, f28_arg1 )
 	return f28_local2 .. f28_local3
 end
 CoD.CACUtility.GetImageForItemRefString = function ( f29_arg0 )
-	return Engine[0x8518E07C1C5BC6D]( Engine[0x81EDAAB868725C9]( f29_arg0 ) )
+	return Engine[@"getitemimage"]( Engine[@"getitemindexfromreference"]( f29_arg0 ) )
 end
 CoD.CACUtility.GetNameForItemRefString = function ( f30_arg0 )
-	return Engine[0x6B7AC889104DED3]( Engine[0x81EDAAB868725C9]( f30_arg0 ) )
+	return Engine[@"getitemname"]( Engine[@"getitemindexfromreference"]( f30_arg0 ) )
 end
 CoD.CACUtility.IsSlotNameInList = function ( f31_arg0, f31_arg1 )
 	for f31_local3, f31_local4 in ipairs( f31_arg0 ) do
@@ -1135,7 +1135,7 @@ CoD.CACUtility.GetSlotListWithSlot = function ( f32_arg0 )
 	return {}
 end
 CoD.CACUtility.GetClassAttachments = function ( f33_arg0, f33_arg1, f33_arg2, f33_arg3, f33_arg4 )
-	local f33_local0 = Engine[0xED9C4D9D6233895]( f33_arg0, f33_arg2, f33_arg1 )
+	local f33_local0 = Engine[@"getcustomclasscacroot"]( f33_arg0, f33_arg2, f33_arg1 )
 	local f33_local1 = f33_local0[f33_arg3][f33_arg4 - 1]
 	local f33_local2 = {}
 	if f33_local1 ~= nil then
@@ -1176,67 +1176,67 @@ CoD.CACUtility.GetWeaponGroupNamesForSlot = function ( f36_arg0 )
 end
 CoD.CACUtility.CACRewardComparisonFunction = function ( f37_arg0, f37_arg1 )
 	local f37_local0 = CoD.PrestigeUtility.GetPermanentUnlockMode()
-	local f37_local1 = Engine[0x981A63C8A70462F]( f37_arg0, f37_local0 )
-	local f37_local2 = Engine[0x981A63C8A70462F]( f37_arg1, f37_local0 )
+	local f37_local1 = Engine[@"getitemallocationcost"]( f37_arg0, f37_local0 )
+	local f37_local2 = Engine[@"getitemallocationcost"]( f37_arg1, f37_local0 )
 	if f37_local1 == f37_local2 then
-		return Engine[0xCA12C15EA870743]( f37_arg0, f37_local0 ) < Engine[0xCA12C15EA870743]( f37_arg1, f37_local0 )
+		return Engine[@"getitemmomentumcost"]( f37_arg0, f37_local0 ) < Engine[@"getitemmomentumcost"]( f37_arg1, f37_local0 )
 	else
 		return f37_local1 < f37_local2
 	end
 end
 CoD.CACUtility.GetLoadoutsMPOffline = function ( f38_arg0 )
-	local f38_local0 = Engine[0x8BF970606552F4C]( f38_arg0, Enum[0xBBD4F9E70101BA8][0xF9A4C4451E3499E] )
+	local f38_local0 = Engine[@"storagegetbuffer"]( f38_arg0, Enum[@"storagefiletype"][@"storage_mp_loadouts_offline"] )
 	return f38_local0.cacLoadouts
 end
 CoD.CACUtility.GetLoadoutsMPOnlinePublic = function ( f39_arg0 )
-	local f39_local0 = Engine[0x8BF970606552F4C]( f39_arg0, Enum[0xBBD4F9E70101BA8][0x6C886CEB6BF4BCA] )
+	local f39_local0 = Engine[@"storagegetbuffer"]( f39_arg0, Enum[@"storagefiletype"][@"storage_mp_loadouts"] )
 	return f39_local0.cacLoadouts
 end
 CoD.CACUtility.GetLoadoutsMPOnlineCustom = function ( f40_arg0 )
-	local f40_local0 = Engine[0x8BF970606552F4C]( f40_arg0, Enum[0xBBD4F9E70101BA8][0xA494758C2E9B27C] )
+	local f40_local0 = Engine[@"storagegetbuffer"]( f40_arg0, Enum[@"storagefiletype"][@"storage_mp_loadouts_custom"] )
 	return f40_local0.cacLoadouts
 end
 CoD.CACUtility.GetLoadoutsMPOnlineArenaPublic = function ( f41_arg0 )
-	local f41_local0 = Engine[0x8BF970606552F4C]( f41_arg0, Enum[0xBBD4F9E70101BA8][0x67DF1879D992E] )
+	local f41_local0 = Engine[@"storagegetbuffer"]( f41_arg0, Enum[@"storagefiletype"][0x67DF1879D992E] )
 	return f41_local0.cacLoadouts
 end
 CoD.CACUtility.GetLoadoutsMPOnlineArenaCustom = function ( f42_arg0 )
-	local f42_local0 = Engine[0x8BF970606552F4C]( f42_arg0, Enum[0xBBD4F9E70101BA8][0xCEBE62E27709AD0] )
+	local f42_local0 = Engine[@"storagegetbuffer"]( f42_arg0, Enum[@"storagefiletype"][@"hash_CEBE62E27709AD0"] )
 	return f42_local0.cacLoadouts
 end
 CoD.CACUtility.GetLoadoutsMPArenaOffline = function ( f43_arg0 )
-	local f43_local0 = Engine[0x8BF970606552F4C]( f43_arg0, Enum[0xBBD4F9E70101BA8][0xD062FA7B47FC13A] )
+	local f43_local0 = Engine[@"storagegetbuffer"]( f43_arg0, Enum[@"storagefiletype"][@"hash_D062FA7B47FC13A"] )
 	return f43_local0.cacLoadouts
 end
 CoD.CACUtility.GetLoadoutsCPOffline = function ( f44_arg0 )
-	local f44_local0 = Engine[0x8BF970606552F4C]( f44_arg0, Enum[0xBBD4F9E70101BA8][0xB1C283C68D069C0] )
+	local f44_local0 = Engine[@"storagegetbuffer"]( f44_arg0, Enum[@"storagefiletype"][@"storage_cp_loadouts_offline"] )
 	return f44_local0.cacLoadouts
 end
 CoD.CACUtility.GetLoadoutsCPOnline = function ( f45_arg0 )
-	local f45_local0 = Engine[0x8BF970606552F4C]( f45_arg0, Enum[0xBBD4F9E70101BA8][0x807B0F98163FB00] )
+	local f45_local0 = Engine[@"storagegetbuffer"]( f45_arg0, Enum[@"storagefiletype"][@"storage_cp_loadouts"] )
 	return f45_local0.cacLoadouts
 end
 CoD.CACUtility.GetLoadoutsZMOffline = function ( f46_arg0 )
-	local f46_local0 = Engine[0x8BF970606552F4C]( f46_arg0, Enum[0xBBD4F9E70101BA8][0xA621D7C69E5741A] )
+	local f46_local0 = Engine[@"storagegetbuffer"]( f46_arg0, Enum[@"storagefiletype"][@"storage_zm_loadouts_offline"] )
 	return f46_local0.cacLoadouts
 end
 CoD.CACUtility.GetLoadoutsZMOnline = function ( f47_arg0 )
-	local f47_local0 = Engine[0x8BF970606552F4C]( f47_arg0, Enum[0xBBD4F9E70101BA8][0x9E5D6DF436F1EE] )
+	local f47_local0 = Engine[@"storagegetbuffer"]( f47_arg0, Enum[@"storagefiletype"][@"storage_zm_loadouts"] )
 	return f47_local0.cacLoadouts
 end
 CoD.CACUtility.SetDefaultCACRoot = function ( f48_arg0 )
 	local f48_local0 = nil
 	if CoD.isOnlineGame() ~= true then
-		if Engine[0x994291BF56E485B]( Enum[0xF7AE5746E79F2CE][0x7B5630CD29180CB] ) then
+		if Engine[@"gamemodeismode"]( Enum[@"egamemodes"][@"hash_27B5630CD29180CB"] ) then
 			f48_local0 = CoD.CPMPZM( nil, CoD.CACUtility.GetLoadoutsMPArenaOffline, nil )
 		else
 			f48_local0 = CoD.CPMPZM( CoD.CACUtility.GetLoadoutsCPOffline, CoD.CACUtility.GetLoadoutsMPOffline, CoD.CACUtility.GetLoadoutsZMOffline )
 		end
-	elseif Engine[0x994291BF56E485B]( Enum[0xF7AE5746E79F2CE][0x58ECA70A244C08F] ) then
+	elseif Engine[@"gamemodeismode"]( Enum[@"egamemodes"][@"mode_game_league"] ) then
 		f48_local0 = CoD.CPMPZM( nil, CoD.CACUtility.GetLoadoutsMPOnlineArenaPublic, nil )
-	elseif Engine[0x994291BF56E485B]( Enum[0xF7AE5746E79F2CE][0x7B5630CD29180CB] ) then
+	elseif Engine[@"gamemodeismode"]( Enum[@"egamemodes"][@"hash_27B5630CD29180CB"] ) then
 		f48_local0 = CoD.CPMPZM( nil, CoD.CACUtility.GetLoadoutsMPOnlineArenaCustom, nil )
-	elseif Engine[0x994291BF56E485B]( Enum[0xF7AE5746E79F2CE][0x5E90ACB801E4A3D] ) then
+	elseif Engine[@"gamemodeismode"]( Enum[@"egamemodes"][@"mode_game_matchmaking_manual"] ) then
 		f48_local0 = CoD.CPMPZM( CoD.CACUtility.GetLoadoutsCPOnline, CoD.CACUtility.GetLoadoutsMPOnlineCustom, CoD.CACUtility.GetLoadoutsZMOnline )
 	else
 		f48_local0 = CoD.CPMPZM( CoD.CACUtility.GetLoadoutsCPOnline, CoD.CACUtility.GetLoadoutsMPOnlinePublic, CoD.CACUtility.GetLoadoutsZMOnline )
@@ -1249,13 +1249,13 @@ CoD.CACUtility.SetDefaultCACRoot = function ( f48_arg0 )
 end
 CoD.CACUtility.SetGametypeSettingsCACRoot = function ( f49_arg0, f49_arg1 )
 	local f49_local0 = nil
-	if f49_arg1 == Enum[0x13A4717E5AC547][0x97263B3C1ABADF7] then
+	if f49_arg1 == Enum[@"team_t"][@"team_free"] then
 		f49_local0 = 0
 	else
-		f49_local0 = f49_arg1 - Enum[0x13A4717E5AC547][0x43ACAE3F1DF1ED4] + 1
+		f49_local0 = f49_arg1 - Enum[@"team_t"][@"team_first_playing_team"] + 1
 	end
 	local f49_local1 = CoD.perController[f49_arg0]
-	local f49_local2 = Engine[0x1E32FEF495242B8]()
+	local f49_local2 = Engine[@"getgametypesettings"]()
 	f49_local1.cacRoot = f49_local2.cacLoadouts[f49_local0]
 end
 CoD.CACUtility.GetLoadoutSlotForAttachmentName = function ( f50_arg0, f50_arg1, f50_arg2 )
@@ -1264,10 +1264,10 @@ CoD.CACUtility.GetLoadoutSlotForAttachmentName = function ( f50_arg0, f50_arg1, 
 		f50_local0 = CoD.CACUtility.SecondaryAttachmentSlotNameList
 	end
 	for f50_local5, f50_local6 in ipairs( f50_local0 ) do
-		local f50_local7 = Engine[0x40E824FE270E174]( f50_arg0, f50_local6 )
+		local f50_local7 = Engine[@"getmodel"]( f50_arg0, f50_local6 )
 		if f50_local7 then
-			local f50_local4 = Engine[0x40E824FE270E174]( f50_local7, "ref" )
-			if f50_local4 and Engine[0x614D394F6F9A18D]( f50_local4 ) == f50_arg2 then
+			local f50_local4 = Engine[@"getmodel"]( f50_local7, "ref" )
+			if f50_local4 and Engine[@"getmodelvalue"]( f50_local4 ) == f50_arg2 then
 				return f50_local6
 			end
 		end
@@ -1291,7 +1291,7 @@ CoD.CACUtility.GetWeaponOptionTypeForName = function ( f52_arg0 )
 	return nil
 end
 CoD.CACUtility.IsAttachmentOptic = function ( f53_arg0, f53_arg1, f53_arg2 )
-	return Engine[0x689E378B0101DCE]( f53_arg0, f53_arg1, f53_arg2 )
+	return Engine[@"isoptic"]( f53_arg0, f53_arg1, f53_arg2 )
 end
 CoD.CACUtility.GetAttachedItemSlot = function ( f54_arg0, f54_arg1, f54_arg2 )
 	if not f54_arg2 then
@@ -1307,10 +1307,10 @@ CoD.CACUtility.GetAttachedItemSlot = function ( f54_arg0, f54_arg1, f54_arg2 )
 end
 CoD.CACUtility.FindFirstEmptySlotInList = function ( f55_arg0, f55_arg1 )
 	for f55_local4, f55_local5 in ipairs( f55_arg1 ) do
-		local f55_local6 = Engine[0x40E824FE270E174]( f55_arg0, f55_local5 )
+		local f55_local6 = Engine[@"getmodel"]( f55_arg0, f55_local5 )
 		if f55_local6 then
-			local f55_local3 = Engine[0x40E824FE270E174]( f55_local6, "itemIndex" )
-			if f55_local3 and Engine[0x614D394F6F9A18D]( f55_local3 ) <= CoD.CACUtility.EmptyItemIndex then
+			local f55_local3 = Engine[@"getmodel"]( f55_local6, "itemIndex" )
+			if f55_local3 and Engine[@"getmodelvalue"]( f55_local3 ) <= CoD.CACUtility.EmptyItemIndex then
 				return f55_local5
 			end
 		end
@@ -1397,14 +1397,14 @@ CoD.CACUtility.DoesWeaponHaveDWInSlot = function ( f65_arg0, f65_arg1, f65_arg2 
 	if f65_arg0 ~= "primary" and f65_arg0 ~= "secondary" then
 		return false
 	end
-	local f65_local0 = Engine[0x40E824FE270E174]( f65_arg2, f65_arg0 )
+	local f65_local0 = Engine[@"getmodel"]( f65_arg2, f65_arg0 )
 	if f65_local0 then
-		local f65_local1 = Engine[0x614D394F6F9A18D]( Engine[0x40E824FE270E174]( f65_local0, "itemIndex" ) )
+		local f65_local1 = Engine[@"getmodelvalue"]( Engine[@"getmodel"]( f65_local0, "itemIndex" ) )
 		if f65_local1 > CoD.CACUtility.EmptyItemIndex then
 			for f65_local6, f65_local7 in ipairs( CoD.CACUtility.GetAttachmentListForSlot( f65_arg0 ) ) do
-				local f65_local8 = Engine[0x614D394F6F9A18D]( Engine[0x40E824FE270E174]( f65_arg2, f65_local7 .. ".itemIndex" ) )
+				local f65_local8 = Engine[@"getmodelvalue"]( Engine[@"getmodel"]( f65_arg2, f65_local7 .. ".itemIndex" ) )
 				if f65_local8 > CoD.CACUtility.EmptyItemIndex then
-					local f65_local5 = Engine[0x2E29FB421AD554B]( f65_local1, f65_local8 )
+					local f65_local5 = Engine[@"getattachmentref"]( f65_local1, f65_local8 )
 					if f65_local5 and f65_local5 == "dw" then
 						return true
 					end
@@ -1416,9 +1416,9 @@ CoD.CACUtility.DoesWeaponHaveDWInSlot = function ( f65_arg0, f65_arg1, f65_arg2 
 end
 CoD.CACUtility.DoesUnlockableItemHaveAnyAttachments = function ( f66_arg0, f66_arg1 )
 	if CoD.CACUtility.EmptyItemIndex < f66_arg0 then
-		if CoD.CACUtility.DvarUnlockableItemHasNoAttachments( Engine[0xB98952F69D937F9]( f66_arg0, Enum[0x6EB546760F890D2][0x569E84652131CD7], f66_arg1 ), f66_arg1 ) then
+		if CoD.CACUtility.DvarUnlockableItemHasNoAttachments( Engine[@"hash_7B98952F69D937F9"]( f66_arg0, Enum[@"statindexoffset"][@"hash_6569E84652131CD7"], f66_arg1 ), f66_arg1 ) then
 			return false
-		elseif Engine[0xF8ECCDE64F061E1]( f66_arg0, f66_arg1 ) > 1 then
+		elseif Engine[@"getnumattachments"]( f66_arg0, f66_arg1 ) > 1 then
 			return true
 		end
 	end
@@ -1430,20 +1430,20 @@ CoD.CACUtility.GetItemName = function ( f67_arg0, f67_arg1, f67_arg2 )
 		f67_local0 = CoD.perController[f67_arg1].classModel
 	end
 	if f67_local0 then
-		local f67_local1 = Engine[0x40E824FE270E174]( f67_local0, f67_arg0 )
+		local f67_local1 = Engine[@"getmodel"]( f67_local0, f67_arg0 )
 		if f67_local1 then
-			local f67_local2 = Engine[0x40E824FE270E174]( f67_local1, "name" )
+			local f67_local2 = Engine[@"getmodel"]( f67_local1, "name" )
 			if f67_local2 then
-				return Engine[0x614D394F6F9A18D]( f67_local2 )
+				return Engine[@"getmodelvalue"]( f67_local2 )
 			end
 		end
 	end
 	return ""
 end
 CoD.CACUtility.GetItemReferenceName = function ( f68_arg0, f68_arg1 )
-	local f68_local0 = Engine[0x40E824FE270E174]( f68_arg0, "itemIndex" )
+	local f68_local0 = Engine[@"getmodel"]( f68_arg0, "itemIndex" )
 	if f68_local0 then
-		return Engine[0xD5D69BA555E016D]( Engine[0x614D394F6F9A18D]( f68_local0 ) )
+		return Engine[@"getitemref"]( Engine[@"getmodelvalue"]( f68_local0 ) )
 	else
 		return ""
 	end
@@ -1463,15 +1463,15 @@ CoD.CACUtility.GetMutuallyExclusiveSlotName = function ( f69_arg0, f69_arg1, f69
 	end
 	
 	if LUI.startswith( f69_arg2, "bonuscard" ) then
-		if f69_arg4 == 0x1F0C17573BB2E79 then
-			table.insert( f69_local0, CoD.BonuscardUtility.GetSlotWithEquippedBonuscard( f69_arg1, 0x439C6CFA8A0CFEB, f69_arg5 ) )
-		elseif f69_arg4 == 0x439C6CFA8A0CFEB then
-			table.insert( f69_local0, CoD.BonuscardUtility.GetSlotWithEquippedBonuscard( f69_arg1, 0x1F0C17573BB2E79, f69_arg5 ) )
-		elseif f69_arg4 == 0xCFB7582AD73158B then
+		if f69_arg4 == @"bonuscard_overkill" then
+			table.insert( f69_local0, CoD.BonuscardUtility.GetSlotWithEquippedBonuscard( f69_arg1, @"bonuscard_underkill", f69_arg5 ) )
+		elseif f69_arg4 == @"bonuscard_underkill" then
+			table.insert( f69_local0, CoD.BonuscardUtility.GetSlotWithEquippedBonuscard( f69_arg1, @"bonuscard_overkill", f69_arg5 ) )
+		elseif f69_arg4 == @"bonuscard_primary_operator_mod" then
 			table.insert( f69_local0, "primary.attachment.5" )
 			table.insert( f69_local0, "primary.attachment.6" )
 			f69_local1( "primary" )
-		elseif f69_arg4 == 0x846D8E9A76A4A77 then
+		elseif f69_arg4 == @"bonuscard_secondary_operator_mod" then
 			table.insert( f69_local0, "secondary.attachment.5" )
 			table.insert( f69_local0, "secondary.attachment.6" )
 			f69_local1( "secondary" )
@@ -1479,34 +1479,34 @@ CoD.CACUtility.GetMutuallyExclusiveSlotName = function ( f69_arg0, f69_arg1, f69
 			for f69_local5, f69_local6 in ipairs( CoD.BonuscardUtility.GetSlotsWithEquippedGluttony( f69_arg1, f69_arg5 ) ) do
 				table.insert( f69_local0, f69_local6 )
 			end
-			if f69_arg4 == 0xE8E25CA6D4FFCAA then
+			if f69_arg4 == @"bonuscard_perk_1_gluttony" then
 				if CoD.TalentSelectUtility.GetTalentFilterForEquippedSlot( f69_arg1, "talent.1", f69_arg5 ) ~= "talent1" then
 					table.insert( f69_local0, "talent.1" )
 				end
 				table.insert( f69_local0, "talent.2" )
 				table.insert( f69_local0, "talent.3" )
-				table.insert( f69_local0, CoD.BonuscardUtility.GetSlotWithEquippedBonuscard( f69_arg1, 0x927FEA821FFA36C, f69_arg5 ) )
-				table.insert( f69_local0, CoD.BonuscardUtility.GetSlotWithEquippedBonuscard( f69_arg1, 0xB03ADC532F77517, f69_arg5 ) )
-			elseif f69_arg4 == 0xE2D46C69C58DED1 then
+				table.insert( f69_local0, CoD.BonuscardUtility.GetSlotWithEquippedBonuscard( f69_arg1, @"bonuscard_perk_2_greed", f69_arg5 ) )
+				table.insert( f69_local0, CoD.BonuscardUtility.GetSlotWithEquippedBonuscard( f69_arg1, @"bonuscard_perk_3_greed", f69_arg5 ) )
+			elseif f69_arg4 == @"bonuscard_perk_2_gluttony" then
 				if CoD.TalentSelectUtility.GetTalentFilterForEquippedSlot( f69_arg1, "talent.2", f69_arg5 ) ~= "talent2" then
 					table.insert( f69_local0, "talent.2" )
 				end
 				table.insert( f69_local0, "talent.1" )
 				table.insert( f69_local0, "talent.3" )
-				table.insert( f69_local0, CoD.BonuscardUtility.GetSlotWithEquippedBonuscard( f69_arg1, 0x7D681250287807D, f69_arg5 ) )
-				table.insert( f69_local0, CoD.BonuscardUtility.GetSlotWithEquippedBonuscard( f69_arg1, 0xB03ADC532F77517, f69_arg5 ) )
-			elseif f69_arg4 == 0x8EC14572D948374 then
+				table.insert( f69_local0, CoD.BonuscardUtility.GetSlotWithEquippedBonuscard( f69_arg1, @"bonuscard_perk_1_greed", f69_arg5 ) )
+				table.insert( f69_local0, CoD.BonuscardUtility.GetSlotWithEquippedBonuscard( f69_arg1, @"bonuscard_perk_3_greed", f69_arg5 ) )
+			elseif f69_arg4 == @"bonuscard_perk_3_gluttony" then
 				if CoD.TalentSelectUtility.GetTalentFilterForEquippedSlot( f69_arg1, "talent.3", f69_arg5 ) ~= "talent3" then
 					table.insert( f69_local0, "talent.3" )
 				end
 				table.insert( f69_local0, "talent.1" )
 				table.insert( f69_local0, "talent.2" )
-				table.insert( f69_local0, CoD.BonuscardUtility.GetSlotWithEquippedBonuscard( f69_arg1, 0x7D681250287807D, f69_arg5 ) )
-				table.insert( f69_local0, CoD.BonuscardUtility.GetSlotWithEquippedBonuscard( f69_arg1, 0x927FEA821FFA36C, f69_arg5 ) )
+				table.insert( f69_local0, CoD.BonuscardUtility.GetSlotWithEquippedBonuscard( f69_arg1, @"bonuscard_perk_1_greed", f69_arg5 ) )
+				table.insert( f69_local0, CoD.BonuscardUtility.GetSlotWithEquippedBonuscard( f69_arg1, @"bonuscard_perk_2_greed", f69_arg5 ) )
 			end
 		end
 	elseif f69_arg2 == "primarygrenade" then
-		if f69_arg5 == Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5] then
+		if f69_arg5 == Enum[@"emodes"][@"mode_multiplayer"] then
 			table.insert( f69_local0, "primarygrenadecount" )
 		end
 	elseif CoD.CACUtility.IsSlotNameInList( CoD.CACUtility.PrimaryAttachmentSlotNameList, f69_arg2 ) or CoD.CACUtility.IsSlotNameInList( CoD.CACUtility.SecondaryAttachmentSlotNameList, f69_arg2 ) then
@@ -1516,8 +1516,8 @@ CoD.CACUtility.GetMutuallyExclusiveSlotName = function ( f69_arg0, f69_arg1, f69
 			f69_local2 = "secondary"
 		end
 		local f69_local3 = CoD.CACUtility.GetItemEquippedInSlot( f69_local2, f69_arg0, f69_arg1 )
-		local f69_local4 = CoD.CACUtility.GetUnlockableItemInfoField( f69_local3, f69_arg5, 0x5665460432375A7 )
-		local f69_local5 = Engine[0xB8DE256555CACF5]( f69_local3, f69_arg3, f69_arg5 ) == Enum[0x7420BCDBDE17A84][0x6EE211053211305]
+		local f69_local4 = CoD.CACUtility.GetUnlockableItemInfoField( f69_local3, f69_arg5, @"hash_5665460432375A7" )
+		local f69_local5 = Engine[@"hash_2B8DE256555CACF5"]( f69_local3, f69_arg3, f69_arg5 ) == Enum[@"eattachmentgroup"][@"hash_26EE211053211305"]
 		local f69_local6 = nil
 		if f69_local4 then
 			f69_local6 = LUI.splitString( f69_local4, " " )
@@ -1525,15 +1525,15 @@ CoD.CACUtility.GetMutuallyExclusiveSlotName = function ( f69_arg0, f69_arg1, f69
 		for f69_local18, f69_local19 in ipairs( f69_local7 ) do
 			local f69_local20 = CoD.CACUtility.GetItemEquippedInSlot( f69_local19, f69_arg0, f69_arg1 )
 			if f69_local20 > CoD.CACUtility.EmptyItemIndex and f69_local20 ~= f69_arg3 then
-				if not Engine[0x628AD12A64D07F]( f69_local3, f69_local20, f69_arg3, f69_arg5 ) and (not Engine[0x689E378B0101DCE]( f69_local3, f69_local20 ) or not Engine[0x689E378B0101DCE]( f69_local3, f69_arg3 )) then
+				if not Engine[@"areattachmentscompatible"]( f69_local3, f69_local20, f69_arg3, f69_arg5 ) and (not Engine[@"isoptic"]( f69_local3, f69_local20 ) or not Engine[@"isoptic"]( f69_local3, f69_arg3 )) then
 					table.insert( f69_local0, f69_local19 )
 				end
 				if f69_local6 then
-					local f69_local11 = Engine[0x2E29FB421AD554B]( f69_local3, f69_local20, f69_arg5 )
-					local f69_local12 = Engine[0xB8DE256555CACF5]( f69_local3, f69_local20, f69_arg5 ) == Enum[0x7420BCDBDE17A84][0x6EE211053211305]
+					local f69_local11 = Engine[@"getattachmentref"]( f69_local3, f69_local20, f69_arg5 )
+					local f69_local12 = Engine[@"hash_2B8DE256555CACF5"]( f69_local3, f69_local20, f69_arg5 ) == Enum[@"eattachmentgroup"][@"hash_26EE211053211305"]
 					if f69_local5 or f69_local12 then
 						if f69_local12 or not f69_local5 and not f69_arg4 then
-							f69_local11 = Engine[0x2E29FB421AD554B]( f69_local3, f69_arg3, f69_arg5 )
+							f69_local11 = Engine[@"getattachmentref"]( f69_local3, f69_arg3, f69_arg5 )
 						end
 						for f69_local16, f69_local17 in ipairs( f69_local6 ) do
 							if f69_local17 == f69_local11 then
@@ -1545,14 +1545,14 @@ CoD.CACUtility.GetMutuallyExclusiveSlotName = function ( f69_arg0, f69_arg1, f69
 			end
 		end
 	end
-	if CoD.BonuscardUtility.IsBonuscardEquipped( f69_arg1, 0x1F0C17573BB2E79, f69_arg5 ) then
+	if CoD.BonuscardUtility.IsBonuscardEquipped( f69_arg1, @"bonuscard_overkill", f69_arg5 ) then
 		if f69_arg2 == "secondary" and CoD.CACUtility.GetItemEquippedInSlot( "primary", f69_arg0, f69_arg1 ) == f69_arg3 then
 			table.insert( f69_local0, "primary" )
 		elseif f69_arg2 == "primary" and CoD.CACUtility.GetItemEquippedInSlot( "secondary", f69_arg0, f69_arg1 ) == f69_arg3 then
 			table.insert( f69_local0, "secondary" )
 		end
 	end
-	if CoD.BonuscardUtility.IsBonuscardEquipped( f69_arg1, 0x439C6CFA8A0CFEB, f69_arg5 ) then
+	if CoD.BonuscardUtility.IsBonuscardEquipped( f69_arg1, @"bonuscard_underkill", f69_arg5 ) then
 		if f69_arg2 == "primary" and CoD.CACUtility.GetItemEquippedInSlot( "secondary", f69_arg0, f69_arg1 ) == f69_arg3 then
 			table.insert( f69_local0, "secondary" )
 		elseif f69_arg2 == "secondary" and CoD.CACUtility.GetItemEquippedInSlot( "primary", f69_arg0, f69_arg1 ) == f69_arg3 then
@@ -1565,11 +1565,11 @@ CoD.CACUtility.AttachmentHasCustomReticle = function ( f71_arg0 )
 	return CoD.CACUtility.attachmentsWithCustReticle[f71_arg0] ~= nil
 end
 CoD.CACUtility.GetWeaponOptionId = function ( f72_arg0 )
-	return Engine[0x2DCF0973239E909]( CoD.attachmentTable, 4, 0, f72_arg0 )
+	return Engine[@"tablelookup"]( CoD.attachmentTable, 4, 0, f72_arg0 )
 end
 CoD.CACUtility.SelectedClassIndex = {}
 CoD.CACUtility.IsOnlineGame = function ()
-	if Engine[0x994291BF56E485B]( Enum[0xF7AE5746E79F2CE][0x742EDA85E48A7AB] ) == false and not Engine[0xA894A2525CABFEE]() then
+	if Engine[@"gamemodeismode"]( Enum[@"egamemodes"][@"mode_game_default"] ) == false and not Engine[@"sessionmode_issystemlinkgame"]() then
 		return true
 	else
 		return false
@@ -1578,14 +1578,14 @@ end
 CoD.CACUtility.SetProfileLoadoutChoice = function ( f74_arg0, f74_arg1 )
 	local f74_local0 = "lastLoadoutSystemlink"
 	if CoD.CACUtility.IsOnlineGame() == true then
-		if Engine[0x994291BF56E485B]( Enum[0xF7AE5746E79F2CE][0x58ECA70A244C08F] ) then
+		if Engine[@"gamemodeismode"]( Enum[@"egamemodes"][@"mode_game_league"] ) then
 			f74_local0 = "lastLoadoutLeague"
 		else
 			f74_local0 = "lastLoadoutOnline"
 		end
 	end
-	Engine[0x280E4C1191CC53D]( f74_arg0, f74_local0, f74_arg1 )
-	Engine[0x16C9486C6451EEE]( f74_arg0 )
+	Engine[@"setprofilevar"]( f74_arg0, f74_local0, f74_arg1 )
+	Engine[@"commitprofilechanges"]( f74_arg0 )
 	CoD.CACUtility.SelectedClassIndex[f74_arg0] = f74_arg1
 end
 CoD.CACUtility.GetCACSlotStatus = function ( f75_arg0, f75_arg1, f75_arg2, f75_arg3 )
@@ -1597,115 +1597,115 @@ CoD.CACUtility.GetCACSlotStatus = function ( f75_arg0, f75_arg1, f75_arg2, f75_a
 		f75_local1 = true
 		if f75_arg2 == "primary" or f75_arg2 == "secondary" then
 			if IsLive() then
-				f75_local2 = 0x2315E97C5F6E412
+				f75_local2 = @"hash_32315E97C5F6E412"
 			end
 		elseif LUI.startswith( f75_arg2, "primaryattachment" ) or LUI.startswith( f75_arg2, "secondaryattachment" ) then
 			if (f75_arg2 == "primaryattachment1" or f75_arg2 == "secondaryattachment1") and CoD.CACUtility.attachmentsWithCustReticle[CoD.CACUtility.GetItemRefHashEquippedInSlot( f75_arg2, f75_arg0, f75_arg1 )] and IsLive() then
-				f75_local2 = 0x2315E97C5F6E412
+				f75_local2 = @"hash_32315E97C5F6E412"
 			end
 		elseif f75_arg1[f75_arg2] and f75_arg1[f75_arg2].name then
 			f75_local2 = f75_arg1[f75_arg2].name:get()
 		end
 	elseif f75_arg2 == "primary" or f75_arg2 == "secondary" then
-		f75_local2 = 0x255295BBBE277A2
+		f75_local2 = @"hash_7255295BBBE277A2"
 	elseif LUI.startswith( f75_arg2, "talent" ) then
 		f75_local2 = 0xBFA59372F2ACBE
 		if f75_arg2 == "talent.4" then
-			if CoD.BonuscardUtility.IsBonuscardLocked( f75_arg0, 0x7D681250287807D, f75_arg3 ) then
-				f75_local2 = CoD.BonuscardUtility.GetBonucardUnlockHint( 0x7D681250287807D, f75_arg3 )
+			if CoD.BonuscardUtility.IsBonuscardLocked( f75_arg0, @"bonuscard_perk_1_greed", f75_arg3 ) then
+				f75_local2 = CoD.BonuscardUtility.GetBonucardUnlockHint( @"bonuscard_perk_1_greed", f75_arg3 )
 				f75_local0 = CoD.CACUtility.CACStatusAvailable.NOT_AVAILABLE
-			elseif not CoD.BonuscardUtility.IsBonuscardEquipped( f75_arg1, 0x7D681250287807D, f75_arg3 ) then
-				f75_local2 = 0xFE29AAA15234DF6
+			elseif not CoD.BonuscardUtility.IsBonuscardEquipped( f75_arg1, @"bonuscard_perk_1_greed", f75_arg3 ) then
+				f75_local2 = @"hash_5FE29AAA15234DF6"
 				f75_local0 = CoD.CACUtility.CACStatusAvailable.REQUIRES_WILDCARD
 			end
 		elseif f75_arg2 == "talent.5" then
-			if CoD.BonuscardUtility.IsBonuscardLocked( f75_arg0, 0x927FEA821FFA36C, f75_arg3 ) then
-				f75_local2 = CoD.BonuscardUtility.GetBonucardUnlockHint( 0x927FEA821FFA36C, f75_arg3 )
+			if CoD.BonuscardUtility.IsBonuscardLocked( f75_arg0, @"bonuscard_perk_2_greed", f75_arg3 ) then
+				f75_local2 = CoD.BonuscardUtility.GetBonucardUnlockHint( @"bonuscard_perk_2_greed", f75_arg3 )
 				f75_local0 = CoD.CACUtility.CACStatusAvailable.NOT_AVAILABLE
-			elseif not CoD.BonuscardUtility.IsBonuscardEquipped( f75_arg1, 0x927FEA821FFA36C, f75_arg3 ) then
-				f75_local2 = 0x95A3F78FC71190B
+			elseif not CoD.BonuscardUtility.IsBonuscardEquipped( f75_arg1, @"bonuscard_perk_2_greed", f75_arg3 ) then
+				f75_local2 = @"hash_95A3F78FC71190B"
 				f75_local0 = CoD.CACUtility.CACStatusAvailable.REQUIRES_WILDCARD
 			end
 		elseif f75_arg2 == "talent.6" then
-			if CoD.BonuscardUtility.IsBonuscardLocked( f75_arg0, 0xB03ADC532F77517, f75_arg3 ) then
-				f75_local2 = CoD.BonuscardUtility.GetBonucardUnlockHint( 0xB03ADC532F77517, f75_arg3 )
+			if CoD.BonuscardUtility.IsBonuscardLocked( f75_arg0, @"bonuscard_perk_3_greed", f75_arg3 ) then
+				f75_local2 = CoD.BonuscardUtility.GetBonucardUnlockHint( @"bonuscard_perk_3_greed", f75_arg3 )
 				f75_local0 = CoD.CACUtility.CACStatusAvailable.NOT_AVAILABLE
-			elseif not CoD.BonuscardUtility.IsBonuscardEquipped( f75_arg1, 0x927FEA821FFA36C, f75_arg3 ) then
-				f75_local2 = 0x1FF205BA14CD3F0
+			elseif not CoD.BonuscardUtility.IsBonuscardEquipped( f75_arg1, @"bonuscard_perk_2_greed", f75_arg3 ) then
+				f75_local2 = @"hash_31FF205BA14CD3F0"
 				f75_local0 = CoD.CACUtility.CACStatusAvailable.REQUIRES_WILDCARD
 			end
 		end
 	elseif LUI.startswith( f75_arg2, "primary.attachment" ) then
 		local f75_local4 = CoD.CACUtility.GetItemEquippedInSlot( "primary", f75_arg0, f75_arg1 )
-		local f75_local5 = Engine[0xF8ECCDE64F061E1]( f75_local4, f75_arg3 )
+		local f75_local5 = Engine[@"getnumattachments"]( f75_local4, f75_arg3 )
 		local f75_local6 = CoD.BonuscardUtility.IsOperatorModBonuscardEquipped( f75_arg1, "primary", f75_arg3 )
 		if f75_arg2 == "primary.attachment.1" then
-			f75_local2 = 0x9F5DC4A26E57427
+			f75_local2 = @"hash_49F5DC4A26E57427"
 		elseif f75_arg2 == "primary.attachment.5" and f75_local6 then
-			f75_local2 = 0x9F327BD38D330A6
+			f75_local2 = @"hash_39F327BD38D330A6"
 		else
-			f75_local2 = 0x5A98A0F0014797F
+			f75_local2 = @"hash_55A98A0F0014797F"
 		end
 		if f75_local4 <= CoD.CACUtility.EmptyItemIndex then
 			f75_local0 = CoD.CACUtility.CACStatusAvailable.NOT_AVAILABLE
 			if f75_arg2 == "primary.attachment.1" then
-				f75_local2 = 0x6968EFB9D8CC09F
+				f75_local2 = @"hash_16968EFB9D8CC09F"
 			else
-				f75_local2 = 0x77480FA0F47B62D
+				f75_local2 = @"hash_277480FA0F47B62D"
 			end
-		elseif f75_arg2 == "primary.attachment.1" and Engine[0xDADCBC194F892B7]( f75_local4, f75_arg3 ) <= 1 then
+		elseif f75_arg2 == "primary.attachment.1" and Engine[@"getnumoptics"]( f75_local4, f75_arg3 ) <= 1 then
 			f75_local0 = CoD.CACUtility.CACStatusAvailable.NOT_AVAILABLE
-			f75_local2 = 0x6968EFB9D8CC09F
+			f75_local2 = @"hash_16968EFB9D8CC09F"
 		elseif (f75_arg2 == "primary.attachment.2" or f75_arg2 == "primary.attachment.3") and f75_local5 <= 1 then
 			f75_local0 = CoD.CACUtility.CACStatusAvailable.NOT_AVAILABLE
-			f75_local2 = 0x77480FA0F47B62D
+			f75_local2 = @"hash_277480FA0F47B62D"
 		elseif f75_arg2 == "primary.attachment.4" or f75_arg2 == "primary.attachment.5" or f75_arg2 == "primary.attachment.6" then
 			if f75_local5 <= 1 then
 				f75_local0 = CoD.CACUtility.CACStatusAvailable.NOT_AVAILABLE
-				f75_local2 = 0x77480FA0F47B62D
+				f75_local2 = @"hash_277480FA0F47B62D"
 			elseif CoD.BonuscardUtility.IsAnyGunfighterForSlotLocked( f75_arg0, "primary", f75_arg3 ) then
-				f75_local2 = CoD.BonuscardUtility.GetBonucardUnlockHint( 0x4899EF258715D73, f75_arg3 )
+				f75_local2 = CoD.BonuscardUtility.GetBonucardUnlockHint( @"bonuscard_primary_gunfighter", f75_arg3 )
 				f75_local0 = CoD.CACUtility.CACStatusAvailable.NOT_AVAILABLE
 			else
 				local f75_local7 = CoD.BonuscardUtility.SpecificGunfighterEquippedCount( f75_arg1, CoD.BonuscardUtility.PrimaryGunfighterWildcards, f75_arg3 )
 				if not (f75_arg2 ~= "primary.attachment.4" or f75_local7 >= 1) or not (f75_arg2 ~= "primary.attachment.5" or f75_local7 >= 2 or f75_local6) or f75_arg2 == "primary.attachment.6" and f75_local7 < 3 then
-					f75_local2 = 0xCF12521CB1F1028
+					f75_local2 = @"hash_CF12521CB1F1028"
 					f75_local0 = CoD.CACUtility.CACStatusAvailable.REQUIRES_WILDCARD
 				end
 			end
 		end
 	elseif LUI.startswith( f75_arg2, "secondary.attachment" ) then
 		local f75_local4 = CoD.CACUtility.GetItemEquippedInSlot( "secondary", f75_arg0, f75_arg1 )
-		local f75_local5 = Engine[0xF8ECCDE64F061E1]( f75_local4, f75_arg3 )
+		local f75_local5 = Engine[@"getnumattachments"]( f75_local4, f75_arg3 )
 		if f75_arg2 == "secondary.attachment.1" then
-			f75_local2 = 0x9F5DC4A26E57427
+			f75_local2 = @"hash_49F5DC4A26E57427"
 		else
-			f75_local2 = 0x5A98A0F0014797F
+			f75_local2 = @"hash_55A98A0F0014797F"
 		end
 		if f75_local4 <= CoD.CACUtility.EmptyItemIndex then
 			f75_local0 = CoD.CACUtility.CACStatusAvailable.NOT_AVAILABLE
 			if f75_arg2 == "secondary.attachment.1" then
-				f75_local2 = 0x6968EFB9D8CC09F
+				f75_local2 = @"hash_16968EFB9D8CC09F"
 			else
-				f75_local2 = 0x77480FA0F47B62D
+				f75_local2 = @"hash_277480FA0F47B62D"
 			end
-		elseif f75_arg2 == "secondary.attachment.1" and Engine[0xDADCBC194F892B7]( f75_local4, f75_arg3 ) <= 1 then
+		elseif f75_arg2 == "secondary.attachment.1" and Engine[@"getnumoptics"]( f75_local4, f75_arg3 ) <= 1 then
 			f75_local0 = CoD.CACUtility.CACStatusAvailable.NOT_AVAILABLE
-			f75_local2 = 0x6968EFB9D8CC09F
+			f75_local2 = @"hash_16968EFB9D8CC09F"
 		elseif (f75_arg2 == "secondary.attachment.2" or f75_arg2 == "secondary.attachment.3") and f75_local5 <= 1 then
 			f75_local0 = CoD.CACUtility.CACStatusAvailable.NOT_AVAILABLE
-			f75_local2 = 0x77480FA0F47B62D
+			f75_local2 = @"hash_277480FA0F47B62D"
 		elseif f75_arg2 == "secondary.attachment.4" or f75_arg2 == "secondary.attachment.5" or f75_arg2 == "secondary.attachment.6" then
 			if f75_local5 <= 1 then
 				f75_local0 = CoD.CACUtility.CACStatusAvailable.NOT_AVAILABLE
-				f75_local2 = 0x77480FA0F47B62D
+				f75_local2 = @"hash_277480FA0F47B62D"
 			elseif CoD.BonuscardUtility.IsAnyGunfighterForSlotLocked( f75_arg0, "secondary", f75_arg3 ) then
-				f75_local2 = CoD.BonuscardUtility.GetBonucardUnlockHint( 0xAD296CFA27FA607, f75_arg3 )
+				f75_local2 = CoD.BonuscardUtility.GetBonucardUnlockHint( @"bonuscard_secondary_gunfighter", f75_arg3 )
 				f75_local0 = CoD.CACUtility.CACStatusAvailable.NOT_AVAILABLE
 			else
 				local f75_local6 = CoD.BonuscardUtility.SpecificGunfighterEquippedCount( f75_arg1, CoD.BonuscardUtility.SecondaryGunfighterWildcards, f75_arg3 )
 				if not (f75_arg2 ~= "secondary.attachment.4" or f75_local6 >= 1) or not (f75_arg2 ~= "secondary.attachment.5" or f75_local6 >= 2) or f75_arg2 == "secondary.attachment.6" and f75_local6 < 3 then
-					f75_local2 = 0x9C2D08EF8830FEC
+					f75_local2 = @"hash_59C2D08EF8830FEC"
 					f75_local0 = CoD.CACUtility.CACStatusAvailable.REQUIRES_WILDCARD
 				end
 			end
@@ -1714,11 +1714,11 @@ CoD.CACUtility.GetCACSlotStatus = function ( f75_arg0, f75_arg1, f75_arg2, f75_a
 		if CoD.CACUtility.EmptyItemIndex < f75_arg1.primarygrenade.itemIndex:get() and f75_arg1.canTakeTwo:get() then
 			f75_local3 = f75_arg1.primarygrenade.name:get()
 		end
-		f75_local2 = 0x51AE669EEB81040
+		f75_local2 = @"hash_151AE669EEB81040"
 	elseif f75_arg2 == "tacticalgear" then
-		f75_local2 = 0x3684B3BA88B8D30
+		f75_local2 = @"hash_33684B3BA88B8D30"
 	elseif LUI.startswith( f75_arg2, "bonuscard" ) then
-		f75_local2 = 0x9B69F69ABFD6250
+		f75_local2 = @"hash_29B69F69ABFD6250"
 	end
 	return f75_local0, f75_local1, f75_local2, f75_local3
 end
@@ -1729,15 +1729,15 @@ CoD.CACUtility.GetUnlockableItemsForItemGroup = function ( f77_arg0, f77_arg1, f
 	local f77_local0 = {}
 	for f77_local5, f77_local6 in pairs( CoD.CACUtility.GetUnlockableItemTable() ) do
 		local f77_local7 = f77_local6
-		if CoD.BitUtility.IsBitSet( f77_local7.modes, f77_arg1 ) and f77_local7.itemGroup == f77_arg2 and f77_local7[0x32A46624FFC3379] ~= 1 and not CoD.CACUtility.DvarHideUnlockableItem( f77_local7.nameHash, f77_arg1 ) then
+		if CoD.BitUtility.IsBitSet( f77_local7.modes, f77_arg1 ) and f77_local7.itemGroup == f77_arg2 and f77_local7[@"hideinmenu"] ~= 1 and not CoD.CACUtility.DvarHideUnlockableItem( f77_local7.nameHash, f77_arg1 ) then
 			local f77_local4 = CoD.BlackMarketTableUtility.LootInfoLookup( f77_arg0, f77_local7.nameHash )
 			if not f77_local4 or not f77_local4.isLoot or f77_local4.available then
 				table.insert( f77_local0, f77_local7 )
 			end
-			if f77_local7.nameHash == 0xC2D17D2F2C857E1 then
+			if f77_local7.nameHash == @"ar_galil_t8" then
 				table.insert( f77_local0, f77_local7 )
 			end
-			if f77_arg1 == Enum[0x9C0C2196D8313A0][0xBF1DCC8138A9D39] and CoD.WZUtility.WZDLC1WeaponNames and CoD.WZUtility.ArrayContains( CoD.WZUtility.WZDLC1WeaponNames, f77_local7.nameHash ) then
+			if f77_arg1 == Enum[@"emodes"][@"mode_warzone"] and CoD.WZUtility.WZDLC1WeaponNames and CoD.WZUtility.ArrayContains( CoD.WZUtility.WZDLC1WeaponNames, f77_local7.nameHash ) then
 				table.insert( f77_local0, f77_local7 )
 			end
 		end
@@ -1754,7 +1754,7 @@ end
 CoD.CACUtility.GetUnlockableItemsForLoadoutSlotExact = function ( f79_arg0, f79_arg1 )
 	local f79_local0 = {}
 	for f79_local4, f79_local5 in pairs( CoD.CACUtility.GetUnlockableItemTable() ) do
-		if CoD.BitUtility.IsBitSet( f79_local5.modes, f79_arg0 ) and f79_local5.loadoutSlot == f79_arg1 and f79_local5[0x32A46624FFC3379] ~= 1 then
+		if CoD.BitUtility.IsBitSet( f79_local5.modes, f79_arg0 ) and f79_local5.loadoutSlot == f79_arg1 and f79_local5[@"hideinmenu"] ~= 1 then
 			table.insert( f79_local0, f79_local5 )
 		end
 	end
@@ -1763,7 +1763,7 @@ end
 CoD.CACUtility.GetUnlockableBGBItemsForItemGroupAndRarity = function ( f80_arg0, f80_arg1, f80_arg2 )
 	local f80_local0 = {}
 	for f80_local4, f80_local5 in pairs( CoD.CACUtility.GetUnlockableItemTable() ) do
-		if CoD.BitUtility.IsBitSet( f80_local5.modes, f80_arg0 ) and f80_local5.itemGroup == f80_arg1 and f80_local5[0x32A46624FFC3379] ~= 1 and not CoD.CACUtility.DvarHideUnlockableItem( f80_local5.nameHash, f80_arg0 ) and (f80_arg2 == nil or f80_local5[0x71B3A5F87EA779F] == f80_arg2) then
+		if CoD.BitUtility.IsBitSet( f80_local5.modes, f80_arg0 ) and f80_local5.itemGroup == f80_arg1 and f80_local5[@"hideinmenu"] ~= 1 and not CoD.CACUtility.DvarHideUnlockableItem( f80_local5.nameHash, f80_arg0 ) and (f80_arg2 == nil or f80_local5[@"bgbrarity"] == f80_arg2) then
 			table.insert( f80_local0, f80_local5 )
 		end
 	end
@@ -1772,7 +1772,7 @@ end
 CoD.CACUtility.GetUnlockableTalismanItemsForRarity = function ( f81_arg0, f81_arg1 )
 	local f81_local0 = {}
 	for f81_local4, f81_local5 in pairs( CoD.CACUtility.GetUnlockableItemTable() ) do
-		if CoD.BitUtility.IsBitSet( f81_local5.modes, f81_arg0 ) and f81_local5.itemGroup == CoD.CACUtility.talismanItemGroup and f81_local5[0x32A46624FFC3379] ~= 1 and not CoD.CACUtility.DvarHideUnlockableItem( f81_local5.nameHash, f81_arg0 ) and f81_local5[0xEAC0467BA97BCA9] == f81_arg1 then
+		if CoD.BitUtility.IsBitSet( f81_local5.modes, f81_arg0 ) and f81_local5.itemGroup == CoD.CACUtility.talismanItemGroup and f81_local5[@"hideinmenu"] ~= 1 and not CoD.CACUtility.DvarHideUnlockableItem( f81_local5.nameHash, f81_arg0 ) and f81_local5[@"talismanrarity"] == f81_arg1 then
 			table.insert( f81_local0, f81_local5 )
 		end
 	end
@@ -1781,7 +1781,7 @@ end
 CoD.CACUtility.AnyTalismanRestrictedInTable = function ( f82_arg0 )
 	if f82_arg0 then
 		for f82_local3, f82_local4 in ipairs( f82_arg0 ) do
-			if CoD.CACUtility.AreTalismanGameSettingsRestricted( CoD.ZMTalismanUtility.TalismanToBooleanGameSettingsHash[f82_local4.nameHash], f82_local4[0xEAC0467BA97BCA9], false ) or CoD.CACUtility.AreGameSettingsStateOff( CoD.ZMTalismanUtility.TalismanToEnumGameSettingsHash[f82_local4.nameHash], false ) then
+			if CoD.CACUtility.AreTalismanGameSettingsRestricted( CoD.ZMTalismanUtility.TalismanToBooleanGameSettingsHash[f82_local4.nameHash], f82_local4[@"talismanrarity"], false ) or CoD.CACUtility.AreGameSettingsStateOff( CoD.ZMTalismanUtility.TalismanToEnumGameSettingsHash[f82_local4.nameHash], false ) then
 				return true
 			end
 		end
@@ -1789,7 +1789,7 @@ CoD.CACUtility.AnyTalismanRestrictedInTable = function ( f82_arg0 )
 	return false
 end
 CoD.CACUtility.AnyTalismanRestrictedForRarity = function ( f83_arg0 )
-	if CoD.CACUtility.AnyTalismanRestrictedInTable( CoD.CACUtility.GetUnlockableTalismanItemsForRarity( Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A], f83_arg0 ) ) then
+	if CoD.CACUtility.AnyTalismanRestrictedInTable( CoD.CACUtility.GetUnlockableTalismanItemsForRarity( Enum[@"emodes"][@"mode_zombies"], f83_arg0 ) ) then
 		return true
 	else
 		return false
@@ -1819,7 +1819,7 @@ CoD.CACUtility.GetUnlockableItemInfoField = function ( f85_arg0, f85_arg1, f85_a
 end
 CoD.CACUtility.GetUnlockableItemInfoByAssetHash = function ( f86_arg0, f86_arg1 )
 	for f86_local3, f86_local4 in pairs( CoD.CACUtility.GetUnlockableItemTable() ) do
-		if Engine[0xC53F8D38DF9042B]( f86_local4.name ) == f86_arg0 or f86_local4.nameHash == f86_arg0 then
+		if Engine[@"converttoxhash"]( f86_local4.name ) == f86_arg0 or f86_local4.nameHash == f86_arg0 then
 			if CoD.BitUtility.IsBitSet( f86_local4.modes, f86_arg1 ) then
 				return f86_local4
 			end
@@ -1829,9 +1829,9 @@ CoD.CACUtility.GetUnlockableItemInfoByAssetHash = function ( f86_arg0, f86_arg1 
 end
 CoD.CACUtility.GetUnlockableItemInfoByModeSuffixedAssetHash = function ( f87_arg0, f87_arg1 )
 	local f87_local0 = CoD.CACUtility.GetUnlockableItemTable()
-	local f87_local1 = "_" .. Engine[0x4967D1FBE8D3CB5]( f87_arg1 )
+	local f87_local1 = "_" .. Engine[@"getabbreviationformode"]( f87_arg1 )
 	for f87_local5, f87_local6 in pairs( f87_local0 ) do
-		if Engine[0xC53F8D38DF9042B]( f87_local6.name .. f87_local1 ) == f87_arg0 or f87_local6.nameHash .. f87_local1 == f87_arg0 then
+		if Engine[@"converttoxhash"]( f87_local6.name .. f87_local1 ) == f87_arg0 or f87_local6.nameHash .. f87_local1 == f87_arg0 then
 			if CoD.BitUtility.IsBitSet( f87_local6.modes, f87_arg1 ) then
 				return f87_local6
 			end
@@ -1852,7 +1852,7 @@ CoD.CACUtility.BuildItemModelDataFromUnlockableItem = function ( f89_arg0, f89_a
 	local f89_local9 = 0
 	if f89_arg2.itemGroup == "bonuscard" then
 		f89_local4 = 79
-		if f89_arg2.nameHash == 0xCFB7582AD73158B or f89_arg2.nameHash == 0x846D8E9A76A4A77 then
+		if f89_arg2.nameHash == @"bonuscard_primary_operator_mod" or f89_arg2.nameHash == @"bonuscard_secondary_operator_mod" then
 			f89_local3 = 44
 		end
 		f89_local5 = CoD.BonuscardUtility.GetInfoForBonuscard( f89_arg2, "modifiedSlotEnum" )
@@ -1866,18 +1866,18 @@ CoD.CACUtility.BuildItemModelDataFromUnlockableItem = function ( f89_arg0, f89_a
 		else
 			f89_local6 = CoD.BonuscardUtility.CanEquipBonuscard( f89_arg4, f89_arg2 )
 		end
-	elseif f89_local1 == Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5] and f89_arg2.itemGroup == "weapon_grenade" then
+	elseif f89_local1 == Enum[@"emodes"][@"mode_multiplayer"] and f89_arg2.itemGroup == "weapon_grenade" then
 		if f89_arg2.nameHash == CoDShared.DefaultSpecialistEquipment then
 			f89_local3 = 75
 		end
 	elseif f89_arg2.itemGroup == "bubblegum_consumable" or f89_arg2.itemGroup == "bubblegum" then
-		local f89_local10 = Engine[0x68C87A9FEAC28F6]( f89_arg1 )
+		local f89_local10 = Engine[@"getequippedbubblegumpack"]( f89_arg1 )
 		local f89_local11 = DataSources.BGBLoadout.getModel( f89_arg1 )
-		local f89_local12 = Engine[0x2321ACE1C24455D]( f89_arg1, f89_local10, f89_local11.selectedIndex:get() )
+		local f89_local12 = Engine[@"getbubblegumbuff"]( f89_arg1, f89_local10, f89_local11.selectedIndex:get() )
 		local f89_local13 = CoD.BGBUtility.ElixirToBooleanGameSettingsHash[f89_arg2.nameHash]
 		local f89_local14 = CoD.BGBUtility.ElixirToEnumGameSettingsHash[f89_arg2.nameHash]
 		if not CoD.DirectorUtility.ShowDirectorPregame( f89_arg1 ) then
-			local f89_local15 = CoD.CACUtility.AreElixirGameSettingsRestricted( f89_local13, f89_arg2[0x71B3A5F87EA779F], false )
+			local f89_local15 = CoD.CACUtility.AreElixirGameSettingsRestricted( f89_local13, f89_arg2[@"bgbrarity"], false )
 			f89_local8 = CoD.CACUtility.AreGameSettingsStateOff( f89_local14, false )
 		else
 			f89_local8 = false
@@ -1887,18 +1887,18 @@ CoD.CACUtility.BuildItemModelDataFromUnlockableItem = function ( f89_arg0, f89_a
 		local f89_local10 = CoD.ZMTalismanUtility.TalismanToBooleanGameSettingsHash[f89_arg2.nameHash]
 		local f89_local11 = CoD.ZMTalismanUtility.TalismanToEnumGameSettingsHash[f89_arg2.nameHash]
 		if not CoD.DirectorUtility.ShowDirectorPregame( f89_arg1 ) then
-			local f89_local16 = CoD.CACUtility.AreTalismanGameSettingsRestricted( f89_local10, f89_arg2[0xEAC0467BA97BCA9], false )
+			local f89_local16 = CoD.CACUtility.AreTalismanGameSettingsRestricted( f89_local10, f89_arg2[@"talismanrarity"], false )
 			f89_local8 = CoD.CACUtility.AreGameSettingsStateOff( f89_local11, false )
 		else
 			f89_local8 = false
 		end
-	elseif f89_local1 == Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A] and f89_arg2.loadoutSlot == "primarygrenade" then
+	elseif f89_local1 == Enum[@"emodes"][@"mode_zombies"] and f89_arg2.loadoutSlot == "primarygrenade" then
 		f89_local8 = CoD.CACUtility.AreEquipmentsRestricted( false )
 	elseif f89_arg0._loadoutSlot == CoD.ZMLoadoutUtility.StartWeaponLoadoutSlotName then
 		f89_local7 = f89_arg2.itemIndex == CoD.CACUtility.GetEquippedItemIndex( f89_arg0, f89_arg1 )
 		f89_local8 = CoD.CACUtility.IsItemGroupRestricted( f89_arg2.itemGroupIndex, false )
 	elseif f89_arg2.loadoutSlot == "primary" or f89_arg2.loadoutSlot == "secondary" then
-		if f89_local1 == Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A] then
+		if f89_local1 == Enum[@"emodes"][@"mode_zombies"] then
 			f89_local8 = CoD.CACUtility.IsItemGroupRestricted( f89_arg2.itemGroupIndex, false )
 		end
 		local f89_local11 = {
@@ -1923,9 +1923,9 @@ CoD.CACUtility.BuildItemModelDataFromUnlockableItem = function ( f89_arg0, f89_a
 	f89_local11[4] = f89_local17
 	f89_local11[5] = f89_local18
 	f89_local11[6] = f89_local19
-	if f89_arg2.attributesTable or f89_arg2.attributesTableZM and f89_local1 == Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A] then
+	if f89_arg2.attributesTable or f89_arg2.attributesTableZM and f89_local1 == Enum[@"emodes"][@"mode_zombies"] then
 		f89_local12 = f89_arg2.attributesTable
-		if f89_arg2.attributesTableZM and f89_local1 == Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A] then
+		if f89_arg2.attributesTableZM and f89_local1 == Enum[@"emodes"][@"mode_zombies"] then
 			f89_local12 = f89_arg2.attributesTableZM
 		end
 		if f89_local12 then
@@ -1940,18 +1940,18 @@ CoD.CACUtility.BuildItemModelDataFromUnlockableItem = function ( f89_arg0, f89_a
 				uberImage = f89_local12.uberImage
 			}
 		end
-		if f89_local1 ~= Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A] and not IsCustomLobby() and CoD.CACUtility.IsWeaponLevelMax( f89_arg1, f89_arg2.itemIndex, f89_local1 ) and not CoD.CACUtility.IsWeaponPrestigeLevelMax( f89_arg1, f89_arg2.itemIndex, f89_local1 ) then
-			f89_local10 = Engine[0xED84C33EC5F01EA]( 0xDEEE55C412CA473 )
+		if f89_local1 ~= Enum[@"emodes"][@"mode_zombies"] and not IsCustomLobby() and CoD.CACUtility.IsWeaponLevelMax( f89_arg1, f89_arg2.itemIndex, f89_local1 ) and not CoD.CACUtility.IsWeaponPrestigeLevelMax( f89_arg1, f89_arg2.itemIndex, f89_local1 ) then
+			f89_local10 = Engine[@"localize"]( @"hash_6DEEE55C412CA473" )
 		end
 	end
-	f89_local12 = Engine[0x8DF2E5447F384B9]()
+	f89_local12 = Engine[@"getglobalmodel"]()
 	f89_local13 = nil
 	if f89_local2 == "primary" or f89_local2 == "secondary" then
 		f89_local14 = DataSources.LoadoutBreadcrumbs.getModel( f89_arg1 )
-		f89_local12 = f89_local14.signature[f89_arg2.itemIndex] or Engine[0x8DF2E5447F384B9]()
+		f89_local12 = f89_local14.signature[f89_arg2.itemIndex] or Engine[@"getglobalmodel"]()
 		f89_local13 = 0
 	end
-	if f89_local1 == Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5] then
+	if f89_local1 == Enum[@"emodes"][@"mode_multiplayer"] then
 		f89_local8 = CoD.CACUtility.IsItemIndexRestricted( f89_arg2.globalItemIndex )
 	end
 	f89_local14 = CoD.BlackMarketTableUtility.LootInfoLookup( f89_arg1, f89_arg2.nameHash )
@@ -1961,7 +1961,7 @@ CoD.CACUtility.BuildItemModelDataFromUnlockableItem = function ( f89_arg0, f89_a
 		refHash = f89_arg2.nameHash,
 		globalItemIndex = f89_arg2.globalItemIndex,
 		itemIndex = f89_arg2.itemIndex,
-		displayName = Engine[0xF9F1239CFD921FE]( f89_arg2.displayName ),
+		displayName = Engine[@"hash_4F9F1239CFD921FE"]( f89_arg2.displayName ),
 		baseWeaponName = f89_arg2.displayName,
 		displayNameShort = f89_arg2.displayNameShort,
 		image = CoD.CACUtility.GetPreviewImage( f89_local1, f89_arg2 ),
@@ -1993,7 +1993,7 @@ CoD.CACUtility.BuildItemModelDataFromUnlockableItem = function ( f89_arg0, f89_a
 	}
 	local f89_local20 = CoD.BlackMarketUtility.LootIdRarities[f89_local14.rarity]
 	if not f89_local20 then
-		f89_local20 = Enum[0x704F69F9B0BDCEC][0x8556B83CAD0D180]
+		f89_local20 = Enum[@"lootraritytype"][@"loot_rarity_type_count"]
 	end
 	f89_local19.rarity = f89_local20
 	f89_local20 = f89_local14.unlockInfo
@@ -2008,8 +2008,8 @@ CoD.CACUtility.BuildItemModelDataFromUnlockableItem = function ( f89_arg0, f89_a
 	f89_local17.models = f89_local18
 	f89_local17.properties = {
 		selectIndex = f89_local7,
-		equipSound = f89_arg2[0x87F8E9A3DEB31D2],
-		unequipSound = f89_arg2[0xB608E98BF6A8991],
+		equipSound = f89_arg2[@"equipsound"],
+		unequipSound = f89_arg2[@"unequipsound"],
 		vSpacing = f89_local3,
 		hSpacing = f89_local4,
 		_useVariantSlot = f89_local13
@@ -2028,20 +2028,20 @@ CoD.CACUtility.BuildItemModelDataFromUnlockableItem = function ( f89_arg0, f89_a
 		if not f90_arg2 or f90_arg2 <= 0 then
 			return false
 		else
-			f90_local0 = Engine[0x9F0BB7D52A7A978]( f90_arg1 )
+			f90_local0 = Engine[@"hash_79F0BB7D52A7A978"]( f90_arg1 )
 			f90_local1 = f90_local0[f90_arg2 + 1]
 			if f90_local1 then
-				if f90_local1[0xC2AA73D9F82E9C2] and f90_local1[0x2861D919C8A4186] then
-					f90_arg3.displayName = Engine[0xF9F1239CFD921FE]( f90_local1[0x55F116BF695C8F6] )
+				if f90_local1[@"hash_5C2AA73D9F82E9C2"] and f90_local1[@"ismark2"] then
+					f90_arg3.displayName = Engine[@"hash_4F9F1239CFD921FE"]( f90_local1[@"displayname"] )
 				else
-					f90_arg3.displayName = Engine[0xF9F1239CFD921FE]( 0x41954FC612B5845, f90_arg3.displayName )
+					f90_arg3.displayName = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_341954FC612B5845", f90_arg3.displayName )
 					f90_arg3.isMastercraft = true
-					f90_arg3.signatureVariantName = f90_local1[0x55F116BF695C8F6]
+					f90_arg3.signatureVariantName = f90_local1[@"displayname"]
 				end
-				if f89_local1 == Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A] then
-					f90_arg3.image = f90_local1[0x6527D409DD29857]
+				if f89_local1 == Enum[@"emodes"][@"mode_zombies"] then
+					f90_arg3.image = f90_local1[@"imagezm"]
 				else
-					f90_arg3.image = f90_local1[0xAB612888528489A]
+					f90_arg3.image = f90_local1[@"image"]
 				end
 				return true
 			else
@@ -2095,7 +2095,7 @@ CoD.CACUtility.BuildItemModelDataFromUnlockableItem = function ( f89_arg0, f89_a
 			f89_local21.weaponModelSlot:set( f89_local20 )
 		end
 	end
-	if f89_local1 == Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5] and f89_local17.models.equipped and (f89_local2 == "primary" or f89_local2 == "secondary") then
+	if f89_local1 == Enum[@"emodes"][@"mode_multiplayer"] and f89_local17.models.equipped and (f89_local2 == "primary" or f89_local2 == "secondary") then
 		f89_local19 = f89_local17.models
 		f89_local20 = CoD.CACUtility.GetItemWeaponModelSlotIndexEquippedInSlot( f89_local2, f89_arg1, f89_local0 )
 		if not f89_local20 then
@@ -2170,29 +2170,29 @@ CoD.CACUtility.UpdateCustomClassModelsFromDDL = function ( f91_arg0, f91_arg1, f
 	f91_local0( f91_arg0, f91_arg1, f91_arg2 )
 end
 CoD.CACUtility.GetDefaultCustomClassNameForGametype = function ()
-	local f93_local0 = Engine[0x69811927938FCD7]()
+	local f93_local0 = Engine[@"lobbygetgametype"]()
 	if f93_local0 then
-		local f93_local1 = CoD.GameTypeUtility.GameTypeTable[Engine[0xC53F8D38DF9042B]( f93_local0 )]
+		local f93_local1 = CoD.GameTypeUtility.GameTypeTable[Engine[@"converttoxhash"]( f93_local0 )]
 		if f93_local1 and f93_local1.loadout and f93_local1.loadout ~= 0x0 then
-			return Engine[0xE00B2F29271C60B]( f93_local1.loadout )
+			return Engine[@"hash_2E00B2F29271C60B"]( f93_local1.loadout )
 		end
 	end
 end
 CoD.CACUtility.GetDefaultCustomClassName = function ( f94_arg0, f94_arg1 )
-	local f94_local0 = CoD.BaseUtility.GetLocStringListEntry( 0xB805A84582BCBAD, f94_arg0 )
-	if f94_arg1 == Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A] or f94_arg1 == Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5] then
+	local f94_local0 = CoD.BaseUtility.GetLocStringListEntry( @"lsl_class_sets", f94_arg0 )
+	if f94_arg1 == Enum[@"emodes"][@"mode_zombies"] or f94_arg1 == Enum[@"emodes"][@"mode_multiplayer"] then
 		local f94_local1 = nil
 		local f94_local2 = "defaultcustomloadouts"
-		if f94_arg1 == Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A] then
-			f94_local1 = Engine[0xE00B2F29271C60B]( 0x9EEE28789FE067A )
+		if f94_arg1 == Enum[@"emodes"][@"mode_zombies"] then
+			f94_local1 = Engine[@"hash_2E00B2F29271C60B"]( @"zm_default_loadouts" )
 		else
-			f94_local1 = Engine[0xE00B2F29271C60B]( LuaUtils.IsArenaMode() and 0x4FF2B60D157BBB2 or 0x705A80062BD09C2 )
+			f94_local1 = Engine[@"hash_2E00B2F29271C60B"]( LuaUtils.IsArenaMode() and @"mp_arena_default_loadouts" or @"mp_default_loadouts" )
 			local f94_local3 = CoD.CACUtility.GetDefaultCustomClassNameForGametype()
 			if f94_local3 then
 				f94_local1 = f94_local3
 			end
-			if f94_arg0 > Enum[0x33AC0FF9A1537DE][0x3618B16E81F1FBD] then
-				f94_arg0 = f94_arg0 - Enum[0x33AC0FF9A1537DE][0x3618B16E81F1FBD]
+			if f94_arg0 > Enum[@"loadoutclass_t"][@"custom_class_count"] then
+				f94_arg0 = f94_arg0 - Enum[@"loadoutclass_t"][@"custom_class_count"]
 				f94_local2 = "defaultloadouts"
 			end
 		end
@@ -2203,16 +2203,16 @@ CoD.CACUtility.GetDefaultCustomClassName = function ( f94_arg0, f94_arg1 )
 		if f94_local3 == nil then
 			return f94_local0
 		end
-		f94_local0 = f94_local3[0xC9C4F192EAB4DCD]
-		if f94_arg1 == Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A] then
-			local f94_local4 = Engine[0xBBE3328FE08B8C7]()
+		f94_local0 = f94_local3[@"customclassname"]
+		if f94_arg1 == Enum[@"emodes"][@"mode_zombies"] then
+			local f94_local4 = Engine[@"hash_6BBE3328FE08B8C7"]()
 			local f94_local5 = ""
 			if f94_local4 then
 				f94_local4 = f94_local4 + 1
 				f94_local5 = "_" .. f94_local4
 			end
 			if f94_local4 > 1 then
-				local f94_local6 = 0xC9C4F192EAB4DCD .. f94_local5
+				local f94_local6 = @"customclassname" .. f94_local5
 				if f94_local3[f94_local6] then
 					f94_local0 = f94_local3[f94_local6]
 				end
@@ -2225,10 +2225,10 @@ CoD.CACUtility.GetCustomClassModel = function ( f95_arg0, f95_arg1, f95_arg2, f9
 	if not f95_arg4 then
 		f95_arg4 = CoD.PrestigeUtility.GetPermanentUnlockMode()
 	end
-	if f95_arg4 == Enum[0x9C0C2196D8313A0][0xBF1DCC8138A9D39] then
+	if f95_arg4 == Enum[@"emodes"][@"mode_warzone"] then
 		return 
 	end
-	local f95_local0 = Engine[0xED9C4D9D6233895]( f95_arg0, f95_arg1, f95_arg4, f95_arg3 )
+	local f95_local0 = Engine[@"getcustomclasscacroot"]( f95_arg0, f95_arg1, f95_arg4, f95_arg3 )
 	if not f95_local0 then
 		return 
 	end
@@ -2236,23 +2236,23 @@ CoD.CACUtility.GetCustomClassModel = function ( f95_arg0, f95_arg1, f95_arg2, f9
 	f95_local1:set( f95_arg1 )
 	f95_local1 = 0
 	CoD.CACUtility.UpdateCustomClassModelsFromDDL( f95_local0, CoD.CACUtility.loadoutSlotDDLNames[f95_arg4], f95_arg2 )
-	local f95_local2 = Engine[0xE5BD7B646B44027]( f95_arg0, f95_arg1, f95_arg4, f95_arg3 )
+	local f95_local2 = Engine[@"hash_E5BD7B646B44027"]( f95_arg0, f95_arg1, f95_arg4, f95_arg3 )
 	if f95_local2 == "" then
 		f95_local2 = CoD.CACUtility.GetDefaultCustomClassName( f95_arg1 + 1, f95_arg4 )
 		if f95_local2 then
-			f95_local2 = Engine[0xF9F1239CFD921FE]( f95_local2 )
+			f95_local2 = Engine[@"hash_4F9F1239CFD921FE"]( f95_local2 )
 		end
 	end
 	if CoD.perController[f95_arg0].isPreset == true then
-		f95_local2 = Engine[0xED84C33EC5F01EA]( f95_local2 )
+		f95_local2 = Engine[@"localize"]( f95_local2 )
 	end
 	local f95_local3 = f95_arg2:create( "customClassName" )
 	f95_local3:set( f95_local2 )
 	f95_local3 = f95_arg2:create( "tabHasRestrictions" )
 	f95_local3:set( false )
-	if f95_arg1 >= Enum[0x33AC0FF9A1537DE][0x3618B16E81F1FBD] then
+	if f95_arg1 >= Enum[@"loadoutclass_t"][@"custom_class_count"] then
 		f95_local3 = f95_arg2:create( "defaultClassName" )
-		f95_local3:set( Engine[0x919A24F2BDFAA5B]( f95_arg1 - Enum[0x33AC0FF9A1537DE][0x3618B16E81F1FBD] ) )
+		f95_local3:set( Engine[@"getdefaultclassname"]( f95_arg1 - Enum[@"loadoutclass_t"][@"custom_class_count"] ) )
 	end
 	f95_local3 = function ( f96_arg0 )
 		local f96_local0 = f95_arg2[f96_arg0]
@@ -2261,7 +2261,7 @@ CoD.CACUtility.GetCustomClassModel = function ( f95_arg0, f95_arg1, f95_arg2, f9
 			local f96_local2 = LUI.splitString( f96_arg0, "." )
 			f96_local2 = f96_local2[1]
 			if f96_local2 and f96_local2 ~= "" then
-				local f96_local3 = CoD.BaseUtility.GetLocStringListEntry( 0xFD9EABBDB204D4D, f96_local2 )
+				local f96_local3 = CoD.BaseUtility.GetLocStringListEntry( @"lsl_loadout_slots", f96_local2 )
 				local f96_local4 = f96_local0:create( "headerName" )
 				f96_local4:set( f96_local3 )
 			else
@@ -2269,8 +2269,8 @@ CoD.CACUtility.GetCustomClassModel = function ( f95_arg0, f95_arg1, f95_arg2, f9
 				f96_local3:set( 0x0 )
 			end
 			if f96_local1 ~= CoDShared.EmptyItemIndex then
-				local f96_local3 = CoD.CACUtility.GetUnlockableItemInfoField( f96_local1, f95_arg4, "itemGroup", Enum[0xA518ABAB92DB212][0xA5CE5BEFC8BCAF9] )
-				if f96_local3 ~= Enum[0xA518ABAB92DB212][0xA5CE5BEFC8BCAF9] then
+				local f96_local3 = CoD.CACUtility.GetUnlockableItemInfoField( f96_local1, f95_arg4, "itemGroup", Enum[@"itemgroup_t"][@"itemgroup_invalid"] )
+				if f96_local3 ~= Enum[@"itemgroup_t"][@"itemgroup_invalid"] then
 					for f96_local8, f96_local9 in ipairs( CoD.CACUtility.ItemGroupInfo ) do
 						if f96_local9.itemGroup == f96_local3 then
 							local f96_local7 = f96_local0:create( "itemGroupName" )
@@ -2280,7 +2280,7 @@ CoD.CACUtility.GetCustomClassModel = function ( f95_arg0, f95_arg1, f95_arg2, f9
 					end
 				end
 			end
-			if CoD.isPC and f95_arg4 == Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5] and f96_local1 == CoD.CACUtility.EmptyItemIndex then
+			if CoD.isPC and f95_arg4 == Enum[@"emodes"][@"mode_multiplayer"] and f96_local1 == CoD.CACUtility.EmptyItemIndex then
 				local f96_local3 = f96_local0:create( "tooltipArchetype" )
 				f96_local3:set( CoD.FreeCursorUtility.TooltipArchetypes.DEFAULT )
 			end
@@ -2291,8 +2291,8 @@ CoD.CACUtility.GetCustomClassModel = function ( f95_arg0, f95_arg1, f95_arg2, f9
 		f95_local3( f95_local8.name )
 	end
 	f95_local4 = function ( f97_arg0, f97_arg1 )
-		if f95_arg4 == Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5] then
-			f95_local1 = f95_local1 + Engine[0x981A63C8A70462F]( f97_arg0, f97_arg1, f95_arg4 )
+		if f95_arg4 == Enum[@"emodes"][@"mode_multiplayer"] then
+			f95_local1 = f95_local1 + Engine[@"getitemallocationcost"]( f97_arg0, f97_arg1, f95_arg4 )
 		end
 	end
 	
@@ -2302,14 +2302,14 @@ CoD.CACUtility.GetCustomClassModel = function ( f95_arg0, f95_arg1, f95_arg2, f9
 			return 
 		end
 		local f98_local1 = f98_local0.itemIndex:get()
-		local f98_local2 = Engine[0xE8B1E317B9DD6FE]( f98_local1, f98_arg1, f95_arg4 ) or f98_local1
+		local f98_local2 = Engine[@"hash_1E8B1E317B9DD6FE"]( f98_local1, f98_arg1, f95_arg4 ) or f98_local1
 		local f98_local3 = false
 		if f98_local1 > CoD.CACUtility.EmptyItemIndex then
-			local f98_local4 = Engine[0xF9F1239CFD921FE]( Engine[0x6B7AC889104DED3]( f98_local1, f98_arg1, f95_arg4 ) )
-			local f98_local5 = Engine[0xB59BB374490E3AD]( f98_local1, f98_arg1, f95_arg4 )
-			local f98_local6 = Engine[0x8518E07C1C5BC6D]( f98_local1, f98_arg1, f95_arg4 )
+			local f98_local4 = Engine[@"hash_4F9F1239CFD921FE"]( Engine[@"getitemname"]( f98_local1, f98_arg1, f95_arg4 ) )
+			local f98_local5 = Engine[@"hash_1B59BB374490E3AD"]( f98_local1, f98_arg1, f95_arg4 )
+			local f98_local6 = Engine[@"getitemimage"]( f98_local1, f98_arg1, f95_arg4 )
 			local f98_local7 = CoD.CACUtility.GetUnlockableItemInfoField( f98_local2, f95_arg4, "previewImageLarge" )
-			local f98_local8 = Engine[0xB98952F69D937F9]( f98_local1, f98_arg1, f95_arg4 )
+			local f98_local8 = Engine[@"hash_7B98952F69D937F9"]( f98_local1, f98_arg1, f95_arg4 )
 			local f98_local9 = f95_arg2[f98_arg0].weaponModelSlot
 			local f98_local10 = false
 			local f98_local11 = 0x0
@@ -2324,21 +2324,21 @@ CoD.CACUtility.GetCustomClassModel = function ( f95_arg0, f95_arg1, f95_arg2, f9
 				f98_local15:set( f98_local14 )
 				f98_local15 = f98_local9:get()
 				if f98_local15 > 0 then
-					local f98_local16 = Engine[0x9F0BB7D52A7A978]( f98_local8 )
+					local f98_local16 = Engine[@"hash_79F0BB7D52A7A978"]( f98_local8 )
 					local f98_local17 = f98_local16[f98_local15 + 1]
 					if f98_local17 then
-						if f98_local17[0xC2AA73D9F82E9C2] and f98_local17[0x2861D919C8A4186] then
-							if f98_local17[0x55F116BF695C8F6] then
-								f98_local4 = Engine[0xF9F1239CFD921FE]( f98_local17[0x55F116BF695C8F6] ) or f98_local4
+						if f98_local17[@"hash_5C2AA73D9F82E9C2"] and f98_local17[@"ismark2"] then
+							if f98_local17[@"displayname"] then
+								f98_local4 = Engine[@"hash_4F9F1239CFD921FE"]( f98_local17[@"displayname"] ) or f98_local4
 							end
 						else
-							f98_local4 = Engine[0xF9F1239CFD921FE]( 0x41954FC612B5845, f98_local4 )
+							f98_local4 = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_341954FC612B5845", f98_local4 )
 							f98_local10 = true
-							f98_local11 = f98_local17[0x55F116BF695C8F6] or 0x0
+							f98_local11 = f98_local17[@"displayname"] or 0x0
 						end
-						if f95_arg4 ~= Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A] then
-							f98_local6 = f98_local17[0x5F42DCC540250D3] or f98_local6
-							f98_local7 = f98_local17[0xAB612888528489A] or f98_local7
+						if f95_arg4 ~= Enum[@"emodes"][@"mode_zombies"] then
+							f98_local6 = f98_local17[@"imageref"] or f98_local6
+							f98_local7 = f98_local17[@"image"] or f98_local7
 						end
 					end
 				end
@@ -2355,10 +2355,10 @@ CoD.CACUtility.GetCustomClassModel = function ( f95_arg0, f95_arg1, f95_arg2, f9
 			f98_local18 = f98_local0:create( "imageLarge" )
 			f98_local18:set( f98_local7 )
 			f98_local18 = f98_local0:create( "detailedDesc" )
-			f98_local18:set( Engine[0x3E0DA351EF48521]( f98_local1, f98_arg1, f95_arg4 ) )
+			f98_local18:set( Engine[@"getitemdesc"]( f98_local1, f98_arg1, f95_arg4 ) )
 			f98_local18 = f98_local0:create( "unequipSound" )
-			f98_local18:set( CoD.CACUtility.GetUnlockableItemInfoField( f98_local2, f95_arg4, 0xB608E98BF6A8991, 0x0 ) )
-			if CoD.isPC and f95_arg4 == Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5] then
+			f98_local18:set( CoD.CACUtility.GetUnlockableItemInfoField( f98_local2, f95_arg4, @"unequipsound", 0x0 ) )
+			if CoD.isPC and f95_arg4 == Enum[@"emodes"][@"mode_multiplayer"] then
 				f98_local18 = f98_local0:create( "tooltipArchetype" )
 				f98_local18:set( CoD.FreeCursorUtility.TooltipArchetypes.FEATURE_TITLE )
 			end
@@ -2367,9 +2367,9 @@ CoD.CACUtility.GetCustomClassModel = function ( f95_arg0, f95_arg1, f95_arg2, f9
 				f98_local18:set( CoD.CACUtility.VariantWeaponLoadoutListPrepareHelper( f95_arg0, f95_arg2, f98_arg0, f95_arg1, f95_arg4, f98_local1, true ) )
 				f98_local18 = f98_local0:create( "isMastercraft" )
 				f98_local18:set( f98_local10 )
-				if f95_arg4 == Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A] then
+				if f95_arg4 == Enum[@"emodes"][@"mode_zombies"] then
 					f98_local12 = CoD.ZMLoadoutUtility.GetArmoryCharmItemFromWeapon( f95_arg0, f98_local1 )
-				elseif f95_arg4 == Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5] then
+				elseif f95_arg4 == Enum[@"emodes"][@"mode_multiplayer"] then
 					f98_local12 = CoD.CACUtility.GetClassItem( f95_arg0, f95_arg1, f98_arg0 .. "." .. CoD.CACUtility.WeaponCharmAttachment.pathName, f95_arg4 )
 				end
 				f98_local18 = f98_local0:create( "charmIndex" )
@@ -2377,18 +2377,18 @@ CoD.CACUtility.GetCustomClassModel = function ( f95_arg0, f95_arg1, f95_arg2, f9
 			end
 		else
 			if not f98_arg2 then
-				f98_arg2 = 0xB67F7FB585D594C
+				f98_arg2 = @"menu/empty"
 			end
 			local f98_local4 = f98_local0:create( "name" )
-			f98_local4:set( Engine[0xF9F1239CFD921FE]( f98_arg2 ) )
+			f98_local4:set( Engine[@"hash_4F9F1239CFD921FE"]( f98_arg2 ) )
 			f98_local4 = f98_local0:create( "signatureVariantName" )
 			f98_local4:set( 0x0 )
 			f98_local4 = f98_local0:create( "displayNameShort" )
 			f98_local4:set( 0x0 )
 			f98_local4 = f98_local0:create( "image" )
-			f98_local4:set( 0x7615068F50B3D66 )
+			f98_local4:set( @"blacktransparent" )
 			f98_local4 = f98_local0:create( "imageLarge" )
-			f98_local4:set( RegisterImage( 0x7615068F50B3D66 ) )
+			f98_local4:set( RegisterImage( @"blacktransparent" ) )
 			f98_local4 = f98_local0:create( "detailedDesc" )
 			f98_local4:set( 0x0 )
 			f98_local4 = f98_local0:create( "unequipSound" )
@@ -2403,19 +2403,19 @@ CoD.CACUtility.GetCustomClassModel = function ( f95_arg0, f95_arg1, f95_arg2, f9
 			end
 		end
 		local f98_local4 = f98_local0:create( "ref" )
-		f98_local4:set( Engine[0xD5D69BA555E016D]( f98_local1, f98_arg1, f95_arg4 ) )
+		f98_local4:set( Engine[@"getitemref"]( f98_local1, f98_arg1, f95_arg4 ) )
 		f98_local4 = f98_local0:create( "refHash" )
-		f98_local4:set( Engine[0xB98952F69D937F9]( f98_local1, f98_arg1, f95_arg4 ) )
+		f98_local4:set( Engine[@"hash_7B98952F69D937F9"]( f98_local1, f98_arg1, f95_arg4 ) )
 		f98_local4 = f98_local0:create( "weaponSlot" )
 		f98_local4:set( f98_arg0 )
-		if f95_arg4 == Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5] then
+		if f95_arg4 == Enum[@"emodes"][@"mode_multiplayer"] then
 			f98_local3 = CoD.CACUtility.IsItemIndexRestricted( f98_local2 )
-		elseif f95_arg4 == Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A] then
-			if f98_arg1 == Enum[0x6EB546760F890D2][0x9AF82A21BAD026D] then
+		elseif f95_arg4 == Enum[@"emodes"][@"mode_zombies"] then
+			if f98_arg1 == Enum[@"statindexoffset"][@"hash_49AF82A21BAD026D"] then
 				f98_local3 = CoD.CACUtility.IsPerkRestricted( CoD.ZMPerkUtility.PerkToBooleanGameSettingsHash[f98_local0.refHash:get()], false )
-			elseif f98_arg1 == Enum[0x6EB546760F890D2][0x5544C104CD15F10] then
+			elseif f98_arg1 == Enum[@"statindexoffset"][@"hash_15544C104CD15F10"] then
 				f98_local4 = CoD.CACUtility.GetUnlockableItemInfo( f98_local2, f95_arg4 )
-				f98_local3 = CoD.CACUtility.AreTalismanGameSettingsRestricted( CoD.ZMTalismanUtility.TalismanToBooleanGameSettingsHash[f98_local0.refHash:get()], f98_local4[0xEAC0467BA97BCA9], false ) or CoD.CACUtility.AreGameSettingsStateOff( CoD.ZMTalismanUtility.TalismanToEnumGameSettingsHash[f98_local0.refHash:get()], false )
+				f98_local3 = CoD.CACUtility.AreTalismanGameSettingsRestricted( CoD.ZMTalismanUtility.TalismanToBooleanGameSettingsHash[f98_local0.refHash:get()], f98_local4[@"talismanrarity"], false ) or CoD.CACUtility.AreGameSettingsStateOff( CoD.ZMTalismanUtility.TalismanToEnumGameSettingsHash[f98_local0.refHash:get()], false )
 			elseif f98_arg0 == "herogadget" then
 				f98_local3 = CoD.CACUtility.AreSpecialWeaponsRestricted( false )
 			elseif f98_arg0 == "primarygrenade" then
@@ -2436,8 +2436,8 @@ CoD.CACUtility.GetCustomClassModel = function ( f95_arg0, f95_arg1, f95_arg2, f9
 		f95_local4( f98_local1, f98_arg1 )
 	end
 	
-	f95_local5( "primary", Enum[0x6EB546760F890D2][0x569E84652131CD7] )
-	f95_local5( "secondary", Enum[0x6EB546760F890D2][0x569E84652131CD7] )
+	f95_local5( "primary", Enum[@"statindexoffset"][@"hash_6569E84652131CD7"] )
+	f95_local5( "secondary", Enum[@"statindexoffset"][@"hash_6569E84652131CD7"] )
 	f95_local6 = function ( f99_arg0 )
 		local f99_local0 = f95_arg2[f99_arg0].itemIndex:get()
 		local f99_local1 = f95_local0[f99_arg0]
@@ -2447,10 +2447,10 @@ CoD.CACUtility.GetCustomClassModel = function ( f95_arg0, f95_arg1, f95_arg2, f9
 				local f100_local4 = f99_local1[f100_arg0][f100_local1 - 1]:get()
 				local f100_local5 = f100_local0:create( "" .. f100_local1 )
 				local f100_local6 = f99_arg0 .. "." .. f100_arg0 .. "." .. f100_local1
-				local f100_local7 = Engine[0x174D9B6F1E719ED]( f99_local0, f100_local4, f95_arg4 )
+				local f100_local7 = Engine[@"getitemattachment"]( f99_local0, f100_local4, f95_arg4 )
 				local f100_local8
 				if f100_local7 > CoD.CACUtility.EmptyItemIndex then
-					f100_local8 = Engine[0x1F444BD03EB910E]( f99_local0, f100_local7, f95_arg4 )
+					f100_local8 = Engine[@"hash_61F444BD03EB910E"]( f99_local0, f100_local7, f95_arg4 )
 				else
 					f100_local8 = false
 				end
@@ -2462,16 +2462,16 @@ CoD.CACUtility.GetCustomClassModel = function ( f95_arg0, f95_arg1, f95_arg2, f9
 				f100_local9:set( f100_local7 )
 				if f100_local7 > CoD.CACUtility.EmptyItemIndex then
 					f100_local9 = f100_local5:create( "image" )
-					f100_local9:set( Engine[0x8FD38AB8CA1FA21]( f99_local0, f100_local4, f95_arg4 ) )
+					f100_local9:set( Engine[@"getattachmentuniqueimagebyindex"]( f99_local0, f100_local4, f95_arg4 ) )
 					f100_local9 = f100_local5:create( "name" )
-					f100_local9:set( Engine[0xF9F1239CFD921FE]( Engine[0xD0520F158FE13E9]( f99_local0, f100_local4, f95_arg4 ) ) )
+					f100_local9:set( Engine[@"hash_4F9F1239CFD921FE"]( Engine[@"getattachmentname"]( f99_local0, f100_local4, f95_arg4 ) ) )
 					f100_local9 = f100_local5:create( "displayNameShort" )
-					f100_local9:set( Engine[0xA48813350B43601]( f99_local0, f100_local4, f95_arg4 ) )
+					f100_local9:set( Engine[@"getattachmentnameshort"]( f99_local0, f100_local4, f95_arg4 ) )
 					f100_local9 = f100_local5:create( "detailedDesc" )
-					f100_local9:set( Engine[0x808C08A4F50BB41]( f100_local7, f95_arg4 ) )
+					f100_local9:set( Engine[@"getattachmentdescbyattachmentindex"]( f100_local7, f95_arg4 ) )
 				else
 					f100_local9 = f100_local5:create( "image" )
-					f100_local9:set( 0x7615068F50B3D66 )
+					f100_local9:set( @"blacktransparent" )
 					f100_local9 = f100_local5:create( "name" )
 					f100_local9:set( "" )
 					f100_local9 = f100_local5:create( "displayNameShort" )
@@ -2479,18 +2479,18 @@ CoD.CACUtility.GetCustomClassModel = function ( f95_arg0, f95_arg1, f95_arg2, f9
 					f100_local9 = f100_local5:create( "detailedDesc" )
 					f100_local9:set( 0x0 )
 				end
-				f100_local9 = Engine[0xF04360CE55D41A]( f100_local7 )
+				f100_local9 = Engine[@"getattachmentrefbyindex"]( f100_local7 )
 				local f100_local10 = f100_local5:create( "ref" )
 				f100_local10:set( f100_local9 )
 				f100_local10 = f100_local5:create( "weaponSlot" )
 				f100_local10:set( f100_local6 )
-				f100_local10 = 0x20862A4CA76A9E2
+				f100_local10 = @"hash_220862A4CA76A9E2"
 				if f100_local8 and f100_local8.unequipSound ~= 0x0 then
 					f100_local10 = f100_local8.unequipSound
 				end
 				local f100_local11 = f100_local5:create( "unequipSound" )
 				f100_local11:set( f100_local10 )
-				f95_local1 = f95_local1 + Engine[0x73A2B3FF8B441AD]( f100_local7 )
+				f95_local1 = f95_local1 + Engine[@"getattachmentallocationcost"]( f100_local7 )
 			end
 		end
 		
@@ -2503,20 +2503,20 @@ CoD.CACUtility.GetCustomClassModel = function ( f95_arg0, f95_arg1, f95_arg2, f9
 	f95_local7:set( CoD.CACUtility.AttachmentLoadoutListPrepareHelper( f95_arg0, f95_arg2, "primary", f95_arg1, f95_arg4 ) )
 	f95_local7 = f95_arg2:create( "secondaryattachments" )
 	f95_local7:set( CoD.CACUtility.AttachmentLoadoutListPrepareHelper( f95_arg0, f95_arg2, "secondary", f95_arg1, f95_arg4 ) )
-	f95_local5( "primarygrenade", Enum[0x6EB546760F890D2][0x569E84652131CD7], 0x0 )
-	f95_local5( "tacticalgear", Enum[0x6EB546760F890D2][0x8EA6ADA81FD4511], 0x0 )
-	if f95_arg4 == Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A] then
-		f95_local5( "herogadget", Enum[0x6EB546760F890D2][0x569E84652131CD7] )
+	f95_local5( "primarygrenade", Enum[@"statindexoffset"][@"hash_6569E84652131CD7"], 0x0 )
+	f95_local5( "tacticalgear", Enum[@"statindexoffset"][@"hash_68EA6ADA81FD4511"], 0x0 )
+	if f95_arg4 == Enum[@"emodes"][@"mode_zombies"] then
+		f95_local5( "herogadget", Enum[@"statindexoffset"][@"hash_6569E84652131CD7"] )
 		for f95_local10, f95_local11 in ipairs( CoD.ZMPerkUtility.PerkSlotNameList ) do
-			f95_local5( f95_local11, Enum[0x6EB546760F890D2][0x9AF82A21BAD026D] )
+			f95_local5( f95_local11, Enum[@"statindexoffset"][@"hash_49AF82A21BAD026D"] )
 		end
 		for f95_local10, f95_local11 in ipairs( CoD.CACUtility.TalismanSlotNameList ) do
-			f95_local5( f95_local11, Enum[0x6EB546760F890D2][0x5544C104CD15F10] )
+			f95_local5( f95_local11, Enum[@"statindexoffset"][@"hash_15544C104CD15F10"] )
 		end
-		f95_local7 = Engine[0x4DF5CFBC1771947]( f95_arg0 )
+		f95_local7 = Engine[@"getmodelforcontroller"]( f95_arg0 )
 		CoD.ZMLoadoutUtility.SetupBGBLoadout( f95_local7:create( "BGBLoadout" ), f95_arg0, f95_arg1, f95_arg2 )
 	end
-	if f95_arg4 == Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5] then
+	if f95_arg4 == Enum[@"emodes"][@"mode_multiplayer"] then
 		f95_local7 = f95_arg2.primarygrenade
 		f95_local8 = f95_local7.itemIndex:get()
 		local f95_local9 = f95_arg2.primarygrenadecount
@@ -2524,16 +2524,16 @@ CoD.CACUtility.GetCustomClassModel = function ( f95_arg0, f95_arg1, f95_arg2, f9
 		f95_local10:set( "primarygrenadecount" )
 		f95_local10 = false
 		if CoD.CACUtility.EmptyItemIndex < f95_local8 then
-			local f95_local11 = Engine[0x2964239F2151F6F]( f95_local8, f95_arg4 )
+			local f95_local11 = Engine[@"getunlockableitemkvpinfo"]( f95_local8, f95_arg4 )
 			if f95_local11 then
-				f95_local10 = f95_local11[0xB451B56A0EE77E5] == 1
+				f95_local10 = f95_local11[@"hash_1B451B56A0EE77E5"] == 1
 			end
 		end
 		local f95_local11 = f95_arg2:create( "canTakeTwo" )
 		f95_local11:set( f95_local10 )
 		if CoD.CACUtility.EmptyItemIndex < f95_local9.itemIndex:get() then
 			f95_local11 = f95_local9:create( "name" )
-			f95_local11:set( Engine[0xF9F1239CFD921FE]( f95_local7.name:get() ) )
+			f95_local11:set( Engine[@"hash_4F9F1239CFD921FE"]( f95_local7.name:get() ) )
 			f95_local11 = f95_local9:create( "image" )
 			f95_local11:set( f95_local7.image:get() )
 			f95_local11 = f95_local9:create( "imageLarge" )
@@ -2555,9 +2555,9 @@ CoD.CACUtility.GetCustomClassModel = function ( f95_arg0, f95_arg1, f95_arg2, f9
 			f95_local11 = f95_local9:create( "name" )
 			f95_local11:set( "" )
 			f95_local11 = f95_local9:create( "image" )
-			f95_local11:set( 0x7615068F50B3D66 )
+			f95_local11:set( @"blacktransparent" )
 			f95_local11 = f95_local9:create( "imageLarge" )
-			f95_local11:set( RegisterImage( 0x7615068F50B3D66 ) )
+			f95_local11:set( RegisterImage( @"blacktransparent" ) )
 			f95_local11 = f95_local9:create( "detailedDesc" )
 			f95_local11:set( 0x0 )
 			f95_local11 = f95_local9:create( "ref" )
@@ -2572,14 +2572,14 @@ CoD.CACUtility.GetCustomClassModel = function ( f95_arg0, f95_arg1, f95_arg2, f9
 			end
 		end
 		for f95_local14, f95_local15 in ipairs( CoD.CACUtility.TalentSlotNameList ) do
-			f95_local5( f95_local15, Enum[0x6EB546760F890D2][0x8EA6ADA81FD4511], 0x0 )
+			f95_local5( f95_local15, Enum[@"statindexoffset"][@"hash_68EA6ADA81FD4511"], 0x0 )
 		end
 		f95_local11 = f95_arg2:create( "talents" )
 		f95_local11:set( CoD.CACUtility.TalentsLoadoutListPrepareHelper( f95_arg0, f95_arg2, "talent", f95_arg1, f95_arg4 ) )
 		f95_local11 = f95_arg2:create( "talentsMiniPreview" )
 		f95_local11:set( CoD.CACUtility.TalentsLoadoutListPrepareHelper( f95_arg0, f95_arg2, "talentMiniPreview", f95_arg1, f95_arg4 ) )
 		for f95_local14, f95_local15 in ipairs( CoD.CACUtility.BonuscardSlotNameList ) do
-			f95_local5( f95_local15, Enum[0x6EB546760F890D2][0x1A949B83CC070B0], 0x0 )
+			f95_local5( f95_local15, Enum[@"statindexoffset"][@"hash_1A949B83CC070B0"], 0x0 )
 		end
 		f95_local11 = f95_arg2:create( "bonuscards" )
 		f95_local11:set( CoD.CACUtility.BonuscardsLoadoutListPrepareHelper( f95_arg0, f95_arg2, f95_arg1, f95_arg4 ) )
@@ -2588,11 +2588,11 @@ CoD.CACUtility.GetCustomClassModel = function ( f95_arg0, f95_arg1, f95_arg2, f9
 		f95_local11 = f95_arg2.secondary:create( "numGunfightersEquipped" )
 		f95_local11:set( CoD.BonuscardUtility.SpecificGunfighterEquippedCount( f95_arg2, CoD.BonuscardUtility.SecondaryGunfighterWildcards, f95_arg4 ) )
 		f95_local11 = f95_arg2:create( "talent1Header" )
-		f95_local11:set( Engine[0xF9F1239CFD921FE]( 0xCC26359EAAED27A ) )
+		f95_local11:set( Engine[@"hash_4F9F1239CFD921FE"]( @"mpui/perk1" ) )
 		f95_local11 = f95_arg2:create( "talent2Header" )
-		f95_local11:set( Engine[0xF9F1239CFD921FE]( 0xCC26259EAAED0C7 ) )
+		f95_local11:set( Engine[@"hash_4F9F1239CFD921FE"]( @"mpui/perk2" ) )
 		f95_local11 = f95_arg2:create( "talent3Header" )
-		f95_local11:set( Engine[0xF9F1239CFD921FE]( 0xCC26159EAAECF14 ) )
+		f95_local11:set( Engine[@"hash_4F9F1239CFD921FE"]( @"mpui/perk3" ) )
 		f95_local11 = CoD.BonuscardUtility.GetTalentInfoForEquippedGluttony( f95_arg2, f95_arg4 )
 		if f95_local11 then
 			f95_local12 = CoD.BonuscardUtility.GetSlotWithEquippedBonuscard( f95_arg2, f95_local11.refHash, f95_arg4 )
@@ -2611,7 +2611,7 @@ CoD.CACUtility.GetCustomClassModel = function ( f95_arg0, f95_arg1, f95_arg2, f9
 	f95_local7:set( f95_local1 )
 	if not f95_arg2.tempLargeImageForModel then
 		f95_local7 = f95_arg2:create( "tempLargeImageForModel" )
-		f95_local7:set( RegisterImage( 0x7615068F50B3D66 ) )
+		f95_local7:set( RegisterImage( @"blacktransparent" ) )
 	end
 	if not f95_arg2.showSpecialistEquipmentWidgetModel then
 		f95_local7 = f95_arg2:create( "showSpecialistEquipmentWidgetModel" )
@@ -2631,14 +2631,14 @@ CoD.CACUtility.GetCustomClassModel = function ( f95_arg0, f95_arg1, f95_arg2, f9
 					f95_local13:set( "" )
 				end
 				if f95_local17 ~= nil then
-					f95_local13:set( Engine[0xED84C33EC5F01EA]( f95_local16, f95_local17 ) )
+					f95_local13:set( Engine[@"localize"]( f95_local16, f95_local17 ) )
 				else
-					f95_local13:set( Engine[0xED84C33EC5F01EA]( f95_local16 ) )
+					f95_local13:set( Engine[@"localize"]( f95_local16 ) )
 				end
 			end
 		end
 	end
-	Engine[0x83C9B5DE1D9371]( Engine[0xA798E4552F5E872]( f95_arg2, "disabled" ), CoD.BlackMarketUtility.ClassContainsLockedItems( f95_arg0, f95_arg2 ) )
+	Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f95_arg2, "disabled" ), CoD.BlackMarketUtility.ClassContainsLockedItems( f95_arg0, f95_arg2 ) )
 end
 CoD.CACUtility.AttachmentLoadoutListPrepareHelper = function ( f101_arg0, f101_arg1, f101_arg2, f101_arg3, f101_arg4 )
 	local f101_local0 = "CACAttachmentSlot_" .. f101_arg0 .. "_" .. f101_arg2 .. "_" .. f101_arg3
@@ -2647,7 +2647,7 @@ CoD.CACUtility.AttachmentLoadoutListPrepareHelper = function ( f101_arg0, f101_a
 		local f102_local1 = f101_arg1[f101_arg2].itemIndex:get()
 		local f102_local2 = CoD.CACUtility.DoesUnlockableItemHaveAnyAttachments( f102_local1, f101_arg4 )
 		local f102_local3 = CoD.CACUtility.GetAttachmentListForSlot( f101_arg2 )
-		local f102_local4 = Engine[0x2964239F2151F6F]( f102_local1, f101_arg4 )
+		local f102_local4 = Engine[@"getunlockableitemkvpinfo"]( f102_local1, f101_arg4 )
 		local f102_local5 = CoD.CACUtility.maxAttachments[f101_arg2]
 		if not f102_local5 then
 			f102_local5 = CoD.CACUtility.maxPrimaryAttachments
@@ -2671,9 +2671,9 @@ CoD.CACUtility.AttachmentLoadoutListPrepareHelper = function ( f101_arg0, f101_a
 				local f102_local16, f102_local17, f102_local18, f102_local19 = CoD.CACUtility.GetCACSlotStatus( f102_arg0, f101_arg1, f102_local9, f101_arg4 )
 				local f102_local20 = ""
 				if f102_local18 then
-					f102_local20 = Engine[0xF9F1239CFD921FE]( f102_local18 )
+					f102_local20 = Engine[@"hash_4F9F1239CFD921FE"]( f102_local18 )
 				end
-				local f102_local21 = Engine[0x93ABA160B5D7323]( f102_local1, Engine[0x58B87258E0EBAD0]( f102_local11 ), false )
+				local f102_local21 = Engine[@"hash_793ABA160B5D7323"]( f102_local1, Engine[@"getattachmentindexbyref"]( f102_local11 ), false )
 				local f102_local22 = {}
 				local f102_local23 = {
 					loadoutListItem = f102_local10,
@@ -2681,7 +2681,7 @@ CoD.CACUtility.AttachmentLoadoutListPrepareHelper = function ( f101_arg0, f101_a
 					attachmentSlotIndex = f102_local6,
 					baseWeaponSlotModel = f101_arg1[f101_arg2],
 					isAttachmentSlotAvailable = f102_local2,
-					bonuscardNeeded = CoD.BonuscardUtility.BonuscardNeededForAttachmentSlot[f102_local9] or 0x0,
+					bonuscardNeeded = CoD.BonuscardUtility.BonuscardNeededForAttachmentSlot[f102_local9] or @"hash_0",
 					numBonuscardNeeded = f102_local12,
 					isUberAttachmentSlot = f102_local13,
 					tierType = CoD.WeaponAttachmentsUtility.GetAttachmentTierType( f102_local4, f102_local11 ),
@@ -2690,7 +2690,7 @@ CoD.CACUtility.AttachmentLoadoutListPrepareHelper = function ( f101_arg0, f101_a
 					hintText = f102_local20
 				}
 				local f102_local24
-				if CoD.isPC and f101_arg4 == Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5] and f102_local17 then
+				if CoD.isPC and f101_arg4 == Enum[@"emodes"][@"mode_multiplayer"] and f102_local17 then
 					f102_local24 = CoD.FreeCursorUtility.TooltipArchetypes.FEATURE_TITLE
 					if not f102_local24 then
 					
@@ -2722,7 +2722,7 @@ CoD.CACUtility.AttachmentLoadoutListPrepareHelper = function ( f101_arg0, f101_a
 		end
 		local f102_local7 = f102_arg1
 		local f102_local6 = f102_arg1.subscribeToModel
-		local f102_local8 = Engine[0x4DF5CFBC1771947]( f102_arg0 )
+		local f102_local8 = Engine[@"getmodelforcontroller"]( f102_arg0 )
 		f102_arg1.equippedItemsChanged = f102_local6( f102_local7, f102_local8["CustomClassList.equippedItemsChanged"], function ()
 			f102_arg1:updateDataSource( false, true )
 		end, false )
@@ -2743,9 +2743,9 @@ CoD.CACUtility.TalentsLoadoutListPrepareHelper = function ( f105_arg0, f105_arg1
 					local f106_local6, f106_local7, f106_local8, f106_local9 = CoD.CACUtility.GetCACSlotStatus( f106_arg0, f105_arg1, f106_local17, f105_arg4 )
 					local f106_local10 = ""
 					if f106_local8 then
-						f106_local10 = Engine[0xF9F1239CFD921FE]( f106_local8 )
+						f106_local10 = Engine[@"hash_4F9F1239CFD921FE"]( f106_local8 )
 					end
-					local f106_local11 = Engine[0xE8B1E317B9DD6FE]( f106_local18.itemIndex:get(), CoD.CACUtility.GetStatIndexOffsetForLoadoutSlot( f106_local17, f105_arg4 ), f105_arg4 )
+					local f106_local11 = Engine[@"hash_1E8B1E317B9DD6FE"]( f106_local18.itemIndex:get(), CoD.CACUtility.GetStatIndexOffsetForLoadoutSlot( f106_local17, f105_arg4 ), f105_arg4 )
 					if not f106_local11 then
 						f106_local11 = CoD.CACUtility.EmptyItemIndex
 					end
@@ -2755,18 +2755,18 @@ CoD.CACUtility.TalentsLoadoutListPrepareHelper = function ( f105_arg0, f105_arg1
 						loadoutSlot = f106_local17,
 						talentFilter = f106_local4,
 						isTalentSlotAvailable = f106_local5,
-						bonuscardNeeded = CoD.BonuscardUtility.BonuscardNeededForTalentSlot[f106_local17] or 0x0,
+						bonuscardNeeded = CoD.BonuscardUtility.BonuscardNeededForTalentSlot[f106_local17] or @"hash_0",
 						bonuscardModifier = CoD.BonuscardUtility.GetBonuscardInfoForLoadoutSlot( f106_local17, "modifiedSlotEnum" ),
 						hintText = f106_local10
 					}
 					local f106_local14
-					if CoD.isPC and f105_arg4 == Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5] and f106_local7 then
+					if CoD.isPC and f105_arg4 == Enum[@"emodes"][@"mode_multiplayer"] and f106_local7 then
 						f106_local14 = CoD.FreeCursorUtility.TooltipArchetypes.FEATURE_TITLE
 						if not f106_local14 then
 						
 						else
 							f106_local13.tooltipArchetype = f106_local14
-							if CoD.isPC and f105_arg4 == Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5] and f106_local7 then
+							if CoD.isPC and f105_arg4 == Enum[@"emodes"][@"mode_multiplayer"] and f106_local7 then
 								local f106_local15 = f106_local8
 							end
 							f106_local13.freeCursorTitle = f106_local15 or nil
@@ -2784,7 +2784,7 @@ CoD.CACUtility.TalentsLoadoutListPrepareHelper = function ( f105_arg0, f105_arg1
 		end
 		local f106_local2 = f106_arg1
 		local f106_local1 = f106_arg1.subscribeToModel
-		local f106_local3 = Engine[0x4DF5CFBC1771947]( f106_arg0 )
+		local f106_local3 = Engine[@"getmodelforcontroller"]( f106_arg0 )
 		f106_arg1.equippedItemsChanged = f106_local1( f106_local2, f106_local3["CustomClassList.equippedItemsChanged"], function ()
 			f106_arg1:updateDataSource( true, true )
 		end, false )
@@ -2802,9 +2802,9 @@ CoD.CACUtility.BonuscardsLoadoutListPrepareHelper = function ( f108_arg0, f108_a
 				local f109_local13, f109_local14, f109_local15, f109_local16 = CoD.CACUtility.GetCACSlotStatus( f109_arg0, f108_arg1, f109_local11, f108_arg3 )
 				local f109_local4 = ""
 				if f109_local15 then
-					f109_local4 = Engine[0xF9F1239CFD921FE]( f109_local15 )
+					f109_local4 = Engine[@"hash_4F9F1239CFD921FE"]( f109_local15 )
 				end
-				local f109_local5 = Engine[0xE8B1E317B9DD6FE]( f109_local12.itemIndex:get(), CoD.CACUtility.GetStatIndexOffsetForLoadoutSlot( f109_local11, f108_arg3 ), f108_arg3 )
+				local f109_local5 = Engine[@"hash_1E8B1E317B9DD6FE"]( f109_local12.itemIndex:get(), CoD.CACUtility.GetStatIndexOffsetForLoadoutSlot( f109_local11, f108_arg3 ), f108_arg3 )
 				if not f109_local5 then
 					f109_local5 = CoD.CACUtility.EmptyItemIndex
 				end
@@ -2815,13 +2815,13 @@ CoD.CACUtility.BonuscardsLoadoutListPrepareHelper = function ( f108_arg0, f108_a
 					hintText = f109_local4
 				}
 				local f109_local8
-				if CoD.isPC and f108_arg3 == Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5] and f109_local14 then
+				if CoD.isPC and f108_arg3 == Enum[@"emodes"][@"mode_multiplayer"] and f109_local14 then
 					f109_local8 = CoD.FreeCursorUtility.TooltipArchetypes.FEATURE_TITLE
 					if not f109_local8 then
 					
 					else
 						f109_local7.tooltipArchetype = f109_local8
-						if CoD.isPC and f108_arg3 == Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5] and f109_local14 then
+						if CoD.isPC and f108_arg3 == Enum[@"emodes"][@"mode_multiplayer"] and f109_local14 then
 							local f109_local9 = f109_local15
 						end
 						f109_local7.freeCursorTitle = f109_local9 or nil
@@ -2838,7 +2838,7 @@ CoD.CACUtility.BonuscardsLoadoutListPrepareHelper = function ( f108_arg0, f108_a
 		end
 		local f109_local2 = f109_arg1
 		local f109_local1 = f109_arg1.subscribeToModel
-		local f109_local3 = Engine[0x4DF5CFBC1771947]( f109_arg0 )
+		local f109_local3 = Engine[@"getmodelforcontroller"]( f109_arg0 )
 		f109_arg1.equippedItemsChanged = f109_local1( f109_local2, f109_local3["CustomClassList.equippedItemsChanged"], function ()
 			f109_arg1:updateDataSource( true, true )
 		end, false )
@@ -2854,13 +2854,13 @@ CoD.CACUtility.GetSignatureWeaponsListInternal = function ( f111_arg0, f111_arg1
 	local f111_local4 = f111_local3 and f111_local3.nameHash
 	if f111_local4 and CoD.CACUtility.EmptyItemIndex < f111_arg6 then
 		for f111_local25, f111_local26 in CoD.CACUtility.ForAvailableSignatureWeapons( f111_arg0, f111_local4, not IsCurrentMenu( f111_arg2, "PaintjobWeaponSelect" ) ) do
-			local f111_local8 = Engine[0xF9F1239CFD921FE]( f111_local26[0x55F116BF695C8F6] )
-			local f111_local10 = f111_local26[0xAB612888528489A]
-			local f111_local11 = f111_local26[0xAB612888528489A]
-			local f111_local27 = f111_local26[0xC2AA73D9F82E9C2]
-			local f111_local28 = f111_local26[0x2861D919C8A4186]
+			local f111_local8 = Engine[@"hash_4F9F1239CFD921FE"]( f111_local26[@"displayname"] )
+			local f111_local10 = f111_local26[@"image"]
+			local f111_local11 = f111_local26[@"image"]
+			local f111_local27 = f111_local26[@"hash_5C2AA73D9F82E9C2"]
+			local f111_local28 = f111_local26[@"ismark2"]
 			local f111_local9 = f111_local3.displayName
-			local f111_local12 = CoD.BlackMarketTableUtility.LootInfoLookup( f111_arg0, f111_local26[0x28887F70BF5EBA] )
+			local f111_local12 = CoD.BlackMarketTableUtility.LootInfoLookup( f111_arg0, f111_local26[@"lootid"] )
 			local f111_local14 = 0x0
 			local f111_local15 = false
 			local f111_local20 = 0x0
@@ -2868,36 +2868,36 @@ CoD.CACUtility.GetSignatureWeaponsListInternal = function ( f111_arg0, f111_arg1
 			local f111_local29 = "theme"
 			local f111_local13 = 0x0
 			local f111_local22 = 0
-			if f111_local26[0x3CF8E8F9081468B] == 0 then
-				f111_local8 = Engine[0xF9F1239CFD921FE]( f111_local3.displayName )
+			if f111_local26[@"index"] == 0 then
+				f111_local8 = Engine[@"hash_4F9F1239CFD921FE"]( f111_local3.displayName )
 				f111_local9 = 0x0
 				f111_local10 = f111_local3.previewImage
 				f111_local11 = f111_local3.previewImage
 				f111_local12 = CoD.BlackMarketTableUtility.LootInfoLookup( f111_arg0, f111_local4 )
 			elseif not f111_local27 or not f111_local28 then
-				f111_local8 = Engine[0xF9F1239CFD921FE]( 0x41954FC612B5845, Engine[0xF9F1239CFD921FE]( f111_local3.displayName ) )
-				f111_local13 = f111_local26[0x55F116BF695C8F6]
-				f111_local14 = 0xDFBA506E7EAFCB9
+				f111_local8 = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_341954FC612B5845", Engine[@"hash_4F9F1239CFD921FE"]( f111_local3.displayName ) )
+				f111_local13 = f111_local26[@"displayname"]
+				f111_local14 = @"hash_DFBA506E7EAFCB9"
 				f111_local15 = true
-				local f111_local16 = Engine[0x910CBCCD3C164C9]( CoD.attachmentTable, Enum[0xAAB93F26A00CE2][0xBE9816FAD8AD2D2], f111_local29, Enum[0xAAB93F26A00CE2][0x9A2FFE632B9ED93], f111_local4 )
+				local f111_local16 = Engine[@"tablefindrows"]( CoD.attachmentTable, Enum[@"attachmenttablecolumn_e"][@"hash_2BE9816FAD8AD2D2"], f111_local29, Enum[@"attachmenttablecolumn_e"][@"hash_9A2FFE632B9ED93"], f111_local4 )
 				if f111_local16 and #f111_local16 > 0 then
 					for f111_local23, f111_local24 in ipairs( f111_local16 ) do
-						if tonumber( Engine[0xC6F8EC444864600]( CoD.attachmentTable, f111_local24, Enum[0xAAB93F26A00CE2][0x26CA7CCFF2886B5] ) ) == f111_local26[0x3CF8E8F9081468B] then
-							f111_local20 = Engine[0xC6F8EC444864600]( CoD.attachmentTable, f111_local24, Enum[0xAAB93F26A00CE2][0x419575E672F6FA2] )
-							f111_local21 = Engine[0xC6F8EC444864600]( CoD.attachmentTable, f111_local24, Enum[0xAAB93F26A00CE2][0x9CAE84BECEB0511] )
-							f111_local22 = CoD.CACUtility.AdjustCamoIfSignatureCamo( f111_arg0, Engine[0x2DCF0973239E909]( CoD.CACUtility.CamoOptionsTable, Enum[0x5DD5CC8AEA7314B][0xA6342D60A0D5AAE], Enum[0x5DD5CC8AEA7314B][0xB79D07B3744EA1A], "camo", Enum[0x5DD5CC8AEA7314B][0xAA94CABDA68EB21], f111_local20 ) )
+						if tonumber( Engine[@"hash_4C6F8EC444864600"]( CoD.attachmentTable, f111_local24, Enum[@"attachmenttablecolumn_e"][@"hash_726CA7CCFF2886B5"] ) ) == f111_local26[@"index"] then
+							f111_local20 = Engine[@"hash_4C6F8EC444864600"]( CoD.attachmentTable, f111_local24, Enum[@"attachmenttablecolumn_e"][@"hash_2419575E672F6FA2"] )
+							f111_local21 = Engine[@"hash_4C6F8EC444864600"]( CoD.attachmentTable, f111_local24, Enum[@"attachmenttablecolumn_e"][@"attachmenttable_column_image"] )
+							f111_local22 = CoD.CACUtility.AdjustCamoIfSignatureCamo( f111_arg0, Engine[@"tablelookup"]( CoD.CACUtility.CamoOptionsTable, Enum[@"hash_25DD5CC8AEA7314B"][@"hash_6A6342D60A0D5AAE"], Enum[@"hash_25DD5CC8AEA7314B"][@"hash_6B79D07B3744EA1A"], "camo", Enum[@"hash_25DD5CC8AEA7314B"][@"hash_3AA94CABDA68EB21"], f111_local20 ) )
 							break
 						end
 					end
 				end
 			end
-			if f111_arg7 == Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A] then
+			if f111_arg7 == Enum[@"emodes"][@"mode_zombies"] then
 				if f111_local3.zmPreviewImage then
 					f111_local11 = f111_local3.zmPreviewImage
 					f111_local10 = f111_local3.zmPreviewImage
 				end
-				if f111_local26[0x6527D409DD29857] and f111_local27 then
-					f111_local11 = f111_local26[0x6527D409DD29857]
+				if f111_local26[@"imagezm"] and f111_local27 then
+					f111_local11 = f111_local26[@"imagezm"]
 				end
 			end
 			local f111_local16 = {}
@@ -2909,9 +2909,9 @@ CoD.CACUtility.GetSignatureWeaponsListInternal = function ( f111_arg0, f111_arg1
 					previewImage = f111_local10,
 					image = f111_local21,
 					displayImage = f111_local11,
-					weaponModelSlotIndex = f111_local26[0x3CF8E8F9081468B],
+					weaponModelSlotIndex = f111_local26[@"index"],
 					isBaseSignatureWeapon = f111_local27,
-					lootID = f111_local26[0x28887F70BF5EBA]
+					lootID = f111_local26[@"lootid"]
 				}
 				local f111_local18 = {
 					owned = f111_local12.owned,
@@ -2919,7 +2919,7 @@ CoD.CACUtility.GetSignatureWeaponsListInternal = function ( f111_arg0, f111_arg1
 				}
 				local f111_local19 = CoD.BlackMarketUtility.LootIdRarities[f111_local12.rarity]
 				if not f111_local19 then
-					f111_local19 = Enum[0x704F69F9B0BDCEC][0x8556B83CAD0D180]
+					f111_local19 = Enum[@"lootraritytype"][@"loot_rarity_type_count"]
 				end
 				f111_local18.rarity = f111_local19
 				f111_local18.unlockInfo = f111_local12.unlockInfo or ""
@@ -2940,14 +2940,14 @@ CoD.CACUtility.GetSignatureWeaponsListInternal = function ( f111_arg0, f111_arg1
 				f111_local17.isMastercraft = f111_local15
 				f111_local17.ref = f111_local20
 				f111_local17.weaponOptionCategory = f111_local29
-				f111_local17.signatureWeaponModelSlot = f111_local26[0x3CF8E8F9081468B]
+				f111_local17.signatureWeaponModelSlot = f111_local26[@"index"]
 				f111_local17.signatureVariantName = f111_local13
 				f111_local17.weaponOptionSubIndex = f111_local22
 				f111_local16 = f111_local17
 			else
 				local f111_local17 = {
 					displayName = f111_local8,
-					weaponModelSlotIndex = f111_local26[0x3CF8E8F9081468B],
+					weaponModelSlotIndex = f111_local26[@"index"],
 					isMark2 = f111_local28,
 					selected = false
 				}
@@ -2961,39 +2961,39 @@ CoD.CACUtility.GetSignatureWeaponsListInternal = function ( f111_arg0, f111_arg1
 				f111_local16 = f111_local17
 			end
 			local f111_local17 = {
-				equipSound = f111_local3[0x87F8E9A3DEB31D2],
-				unequipSound = f111_local3[0xB608E98BF6A8991],
+				equipSound = f111_local3[@"equipsound"],
+				unequipSound = f111_local3[@"unequipsound"],
 				selectIndex = false
 			}
-			if f111_arg7 == Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5] then
+			if f111_arg7 == Enum[@"emodes"][@"mode_multiplayer"] then
 				local f111_local18 = CoD.CACUtility.GetItemIndexEquippedInSlot( f111_arg5, f111_arg0, f111_arg3 ) or 0
 				if f111_local18 ~= CoD.CACUtility.EmptyItemIndex and f111_local18 == f111_arg6 and (CoD.CACUtility.GetItemWeaponModelSlotIndexEquippedInSlot( f111_arg5, f111_arg0, f111_arg3 ) or 0) == f111_local16.weaponModelSlotIndex then
 					f111_local16.selected = true
 				end
 			end
-			if f111_arg7 == Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A] then
+			if f111_arg7 == Enum[@"emodes"][@"mode_zombies"] then
 				f111_local16.unlockableItemModel = f111_arg4
 				if f111_arg5 == CoD.ZMLoadoutUtility.StartWeaponLoadoutSlotName then
 					f111_local16.unlockableItemModel = f111_arg3 and f111_arg3.primary
 				end
-				f111_local16.selected = CoD.ZMLoadoutUtility.GetWeaponModelSlot( f111_arg6, f111_arg0 ) == f111_local26[0x3CF8E8F9081468B]
+				f111_local16.selected = CoD.ZMLoadoutUtility.GetWeaponModelSlot( f111_arg6, f111_arg0 ) == f111_local26[@"index"]
 				if f111_local16.selected and f111_arg5 == CoD.ZMLoadoutUtility.StartWeaponLoadoutSlotName then
 					f111_local16.selected = f111_arg6 == CoD.CACUtility.GetEquippedItemIndex( f111_arg2, f111_arg0 )
 				end
 				local f111_local18 = CoD.ZMLoadoutUtility.GetEquippedArmoryAttachments( f111_arg0, f111_arg6, f111_arg7 )
 				f111_local17.armoryAttachmentTable = f111_local18.attachmentList
 			end
-			if f111_arg7 == Enum[0x9C0C2196D8313A0][0xBF1DCC8138A9D39] then
+			if f111_arg7 == Enum[@"emodes"][@"mode_warzone"] then
 				f111_local16.unlockableItemModel = f111_arg4
-				f111_local16.selected = CoD.WZUtility.GetWeaponModelSlot( f111_arg6, f111_arg0 ) == f111_local26[0x3CF8E8F9081468B]
+				f111_local16.selected = CoD.WZUtility.GetWeaponModelSlot( f111_arg6, f111_arg0 ) == f111_local26[@"index"]
 			end
-			if f111_local26[0x28887F70BF5EBA] == 0x0 then
+			if f111_local26[@"lootid"] == 0x0 then
 				table.insert( f111_local0, {
 					models = f111_local16,
 					properties = f111_local17
 				} )
 			end
-			if not CoD.CACUtility.DvarHideUnlockableItem( f111_local26[0x28887F70BF5EBA], f111_arg7 ) then
+			if not CoD.CACUtility.DvarHideUnlockableItem( f111_local26[@"lootid"], f111_arg7 ) then
 				if f111_local16.isMark2 then
 					table.insert( f111_local1, {
 						models = f111_local16,
@@ -3017,7 +3017,7 @@ CoD.CACUtility.GetSignatureWeaponsListInternal = function ( f111_arg0, f111_arg1
 	end
 	
 	local f111_local6, f111_local7 = CoD.BlackMarketTableUtility.SimpleLootLookup( f111_arg0, f111_local4 )
-	if f111_local6 ~= CoD.BlackMarketTableUtility.SimpleLootLookupTypes[0xC0D17BAD169557B] and not f111_local7 then
+	if f111_local6 ~= CoD.BlackMarketTableUtility.SimpleLootLookupTypes[@"none"] and not f111_local7 then
 		f111_local0 = {}
 	end
 	local f111_local25 = {}
@@ -3077,7 +3077,7 @@ CoD.CACUtility.VariantWeaponLoadoutListPrepareHelper = function ( f113_arg0, f11
 		end
 		f114_local3 = f114_arg1
 		f114_local2 = f114_arg1.subscribeToModel
-		f114_local4 = Engine[0x4DF5CFBC1771947]( f114_arg0 )
+		f114_local4 = Engine[@"getmodelforcontroller"]( f114_arg0 )
 		f114_local4 = f114_local4:create( "CustomClassList" )
 		f114_arg1.equippedItemsChanged = f114_local2( f114_local3, f114_local4:create( "equippedItemsChanged" ), function ()
 			f114_arg1:updateDataSource( true, true )
@@ -3097,7 +3097,7 @@ CoD.CACUtility.VariantWeaponLoadoutListPrepareHelper = function ( f113_arg0, f11
 end
 CoD.CACUtility.UpdateAllClasses = function ( f117_arg0, f117_arg1 )
 	local f117_local0 = CoD.CACUtility.GetCustomClassCount( f117_arg0 )
-	local f117_local1 = Engine[0x40E824FE270E174]( Engine[0x4DF5CFBC1771947]( f117_arg0 ), "CustomClassList" )
+	local f117_local1 = Engine[@"getmodel"]( Engine[@"getmodelforcontroller"]( f117_arg0 ), "CustomClassList" )
 	for f117_local2 = 1, f117_local0, 1 do
 		CoD.CACUtility.GetCustomClassModel( f117_arg0, f117_local2 - 1, f117_local1["class" .. f117_local2], nil, f117_arg1 )
 	end
@@ -3109,12 +3109,12 @@ CoD.CACUtility.MasteryCamoStartStage = 1
 CoD.CACUtility.GetHighestPermanentlyCompletedActiveCamoStage = function ( f118_arg0, f118_arg1, f118_arg2 )
 	local f118_local0 = 1
 	local f118_local1 = CoD.PlayerStatsUtility.GetStorageBufferForPlayer( f118_arg0 )
-	f118_local1 = f118_local1 and f118_local1[0xD59E8BFAC78A33B]
+	f118_local1 = f118_local1 and f118_local1[@"playerstatslist"]
 	if not f118_local1 then
 		return f118_local0
 	elseif f118_arg2 then
 		for f118_local2 = 1, #f118_arg1.stages, 1 do
-			if f118_arg1.stages[f118_local2][0xFA3391DB68E4425] == 1 then
+			if f118_arg1.stages[f118_local2][@"disabled"] == 1 then
 				return f118_local0
 			end
 			f118_local0 = f118_local2
@@ -3124,12 +3124,12 @@ CoD.CACUtility.GetHighestPermanentlyCompletedActiveCamoStage = function ( f118_a
 		return CoD.CACUtility.BaseUnwrappedStageForActiveCamo
 	end
 	for f118_local6, f118_local7 in ipairs( f118_arg1.stages ) do
-		local f118_local8 = f118_local7[0x768B555A2983D54]
-		local f118_local9 = f118_local7[0x181D2404B77545F]
+		local f118_local8 = f118_local7[@"permanentstatname"]
+		local f118_local9 = f118_local7[@"hash_5181D2404B77545F"]
 		if f118_local8 and f118_local9 then
 			local f118_local5 = f118_local1[f118_local8]
 			if f118_local5 then
-				f118_local5 = f118_local1[f118_local8][0x24BA73A60546DFF]:get()
+				f118_local5 = f118_local1[f118_local8][@"challengevalue"]:get()
 			end
 			if f118_local5 and f118_local9 <= f118_local5 then
 				f118_local0 = f118_local6 + 1
@@ -3139,38 +3139,38 @@ CoD.CACUtility.GetHighestPermanentlyCompletedActiveCamoStage = function ( f118_a
 	return f118_local0
 end
 CoD.CACUtility.DefaultStageForActiveCamo = {
-	[0x91B1D38F4D65C14] = 0,
-	[0x73D8C7DF395D60B] = 0,
-	[0xCC835F621014977] = 0,
-	[0x78AF9539DECA7A9] = 0,
-	[0x9425B3230B40881] = 0,
-	[0x7EBCD2FC13F0FB9] = 0,
-	[0xC12ACB064553686] = 0,
-	[0x11C8ACF3A25160B] = 0,
-	[0x8A48122190BF6D] = 0,
-	[0xBD811DAFD012E6E] = 0,
-	[0x24838A737C11344] = 0,
-	[0x120F3A55434A57F] = 0,
-	[0x5A7E0FB400BAEBC] = 0,
-	[0x1E7134E1815FF94] = 0,
-	[0x8DBC1D6C2F4EF15] = 0,
-	[0x9CEC493A146E23] = 0,
-	[0xC36F7290367E65] = 0,
-	[0xE53D5CBF3A09349] = 0,
-	[0x56CA3964CD96D15] = 0,
-	[0xF495C5406E31596] = 0,
-	[0x70519C0BCCFA6EB] = 0,
-	[0x2374362C3F7B2CC] = 0
+	[@"activecamoinfo_t8_darkmatter"] = 0,
+	[@"activecamoinfo_t8_diamond"] = 0,
+	[@"activecamoinfo_t8_gold"] = 0,
+	[@"activecamoinfo_t8_ar_accurate"] = 0,
+	[@"activecamoinfo_t8_ar_fastfire"] = 0,
+	[@"activecamoinfo_t8_lmg_standard"] = 0,
+	[@"activecamoinfo_t8_pistol_standard"] = 0,
+	[@"activecamoinfo_t8_shotgun_semiauto"] = 0,
+	[@"activecamoinfo_t8_smg_accurate"] = 0,
+	[@"activecamoinfo_t8_smg_standard"] = 0,
+	[@"activecamoinfo_t8_sig_tr_midburst_bomber"] = 0,
+	[@"activecamoinfo_t8_sig_smg_handling_hunter"] = 0,
+	[@"activecamoinfo_t8_sig_sniper_powerbolt_viking"] = 0,
+	[@"activecamoinfo_t8_sig_pistol_revolver_cyberpunk"] = 0,
+	[@"activecamoinfo_t8_sig_ar_stealth_vampire"] = 0,
+	[@"activecamoinfo_t8_sig_ar_modular_porcelain"] = 0,
+	[@"activecamoinfo_t8_sig_shotgun_pump_police"] = 0,
+	[@"activecamoinfo_t8_sig_smg_capacity_spaceshuttle"] = 0,
+	[@"activecamoinfo_t8_sig_sniper_fastrechamber_western"] = 0,
+	[@"activecamoinfo_t8_sig_tr_powersemi_rustymech"] = 0,
+	[@"activecamoinfo_t8_sig_sniper_powersemi_vietnam"] = 0,
+	[@"activecamoinfo_t8_sig_pistol_burst_raven"] = 0
 }
 CoD.CACUtility.AdjustCamoIfSignatureCamo = function ( f119_arg0, f119_arg1, f119_arg2 )
 	local f119_local0 = f119_arg1
-	local f119_local1 = CoD.WeaponOptionsUtility.GetActiveCamoRefForBaseCamoIndex( Engine[0x3EAC408F958FF05](), f119_arg1 )
+	local f119_local1 = CoD.WeaponOptionsUtility.GetActiveCamoRefForBaseCamoIndex( Engine[@"currentsessionmode"](), f119_arg1 )
 	if f119_local1 and f119_local1 ~= 0x0 then
-		local f119_local2 = Engine[0xE00B2F29271C60B]( f119_local1 )
+		local f119_local2 = Engine[@"hash_2E00B2F29271C60B"]( f119_local1 )
 		if f119_local2 and f119_local2.stages then
 			local f119_local3 = f119_local2.stages[CoD.CACUtility.GetHighestPermanentlyCompletedActiveCamoStage( f119_arg0, f119_local2, f119_arg2 )]
 			if f119_local3 then
-				local f119_local4 = Engine[0x2DCF0973239E909]( CoD.CACUtility.CamoOptionsTable, Enum[0x5DD5CC8AEA7314B][0xA6342D60A0D5AAE], Enum[0x5DD5CC8AEA7314B][0xAA94CABDA68EB21], f119_local3[0xEB90A3D94D23B68] )
+				local f119_local4 = Engine[@"tablelookup"]( CoD.CACUtility.CamoOptionsTable, Enum[@"hash_25DD5CC8AEA7314B"][@"hash_6A6342D60A0D5AAE"], Enum[@"hash_25DD5CC8AEA7314B"][@"hash_3AA94CABDA68EB21"], f119_local3[@"camooption"] )
 				if f119_local4 ~= nil and f119_local4 ~= "" then
 					f119_local0 = f119_local4
 				end
@@ -3211,13 +3211,13 @@ CoD.CACUtility.GetWeaponOptionsFromClass = function ( f120_arg0, f120_arg1, f120
 	if IsLive() then
 		if f120_local2 then
 			local f120_local10 = f120_local2:get()
-			Engine[0xAF3C2D1A783917D]( f120_arg0, f120_local10 )
-			if f120_local10 ~= Enum[0xCA3F54D92F45B45][0x60CAA8D66ED63A5] then
+			Engine[@"setuppaintjobdata"]( f120_arg0, f120_local10 )
+			if f120_local10 ~= Enum[@"customizationpaintjobinvalidid"][@"customization_invalid_paintjob_slot"] then
 				f120_local7 = 1
 			end
 		end
 	else
-		Engine[0xFD21C01097A31AA]()
+		Engine[@"clearpaintjoblayerdata"]()
 	end
 	return CoD.WeaponOptionsUtility.GetWeaponOptionsString( f120_local5, f120_local6, f120_local7, f120_local8, CoD.WeaponOptionsUtility.GetRobStageForCamoIndex( f120_local5 ), f120_local9 )
 end
@@ -3247,8 +3247,8 @@ CoD.CACUtility.ClearWeaponOptionsForClass = function ( f121_arg0, f121_arg1, f12
 		CoD.CACUtility.SetClassItem( f121_arg0, f121_local0, f121_local1 .. ".weaponModelSlot", CoD.CACUtility.EmptyItemIndex )
 	end
 	if f121_local5 then
-		f121_local5:set( Enum[0xCA3F54D92F45B45][0x60CAA8D66ED63A5] )
-		CoD.CACUtility.SetClassItem( f121_arg0, f121_local0, f121_local1 .. ".paintjobSlot", Enum[0xCA3F54D92F45B45][0x60CAA8D66ED63A5] )
+		f121_local5:set( Enum[@"customizationpaintjobinvalidid"][@"customization_invalid_paintjob_slot"] )
+		CoD.CACUtility.SetClassItem( f121_arg0, f121_local0, f121_local1 .. ".paintjobSlot", Enum[@"customizationpaintjobinvalidid"][@"customization_invalid_paintjob_slot"] )
 	end
 end
 CoD.CACUtility.EmptyWeaponOptions = function ()
@@ -3283,31 +3283,31 @@ CoD.CACUtility.AttachmentEquippedInCACSlot = function ( f125_arg0, f125_arg1, f1
 		f125_local1 = CoD.CACUtility.SecondaryAttachmentSlotNameList
 	end
 	for f125_local5, f125_local6 in ipairs( f125_local1 ) do
-		if Engine[0x614D394F6F9A18D]( Engine[0x40E824FE270E174]( f125_local0, f125_local6 .. ".itemIndex" ) ) == f125_arg2 then
+		if Engine[@"getmodelvalue"]( Engine[@"getmodel"]( f125_local0, f125_local6 .. ".itemIndex" ) ) == f125_arg2 then
 			return f125_local5
 		end
 	end
 end
 CoD.CACUtility.CreateUnlockTokenModels = function ( f126_arg0 )
 	if not CoD.CACUtility.unlockTokenModel[f126_arg0] then
-		CoD.CACUtility.unlockTokenModel[f126_arg0] = Engine[0xA798E4552F5E872]( Engine[0x4DF5CFBC1771947]( f126_arg0 ), "UnlockTokenInfo" )
-		Engine[0xA798E4552F5E872]( CoD.CACUtility.unlockTokenModel[f126_arg0], "itemIndex" )
-		local f126_local0 = Engine[0xA798E4552F5E872]( CoD.CACUtility.unlockTokenModel[f126_arg0], "xpBarInfo" )
-		Engine[0xA798E4552F5E872]( f126_local0, "rankXP" )
-		Engine[0xA798E4552F5E872]( f126_local0, "xpEarned" )
-		Engine[0xA798E4552F5E872]( f126_local0, "xpNeeded" )
-		Engine[0xA798E4552F5E872]( f126_local0, "currLevel" )
-		Engine[0xA798E4552F5E872]( f126_local0, "currLevelIcon" )
-		Engine[0xA798E4552F5E872]( f126_local0, "nextLevel" )
-		Engine[0xA798E4552F5E872]( f126_local0, "nextLevelIcon" )
+		CoD.CACUtility.unlockTokenModel[f126_arg0] = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f126_arg0 ), "UnlockTokenInfo" )
+		Engine[@"createmodel"]( CoD.CACUtility.unlockTokenModel[f126_arg0], "itemIndex" )
+		local f126_local0 = Engine[@"createmodel"]( CoD.CACUtility.unlockTokenModel[f126_arg0], "xpBarInfo" )
+		Engine[@"createmodel"]( f126_local0, "rankXP" )
+		Engine[@"createmodel"]( f126_local0, "xpEarned" )
+		Engine[@"createmodel"]( f126_local0, "xpNeeded" )
+		Engine[@"createmodel"]( f126_local0, "currLevel" )
+		Engine[@"createmodel"]( f126_local0, "currLevelIcon" )
+		Engine[@"createmodel"]( f126_local0, "nextLevel" )
+		Engine[@"createmodel"]( f126_local0, "nextLevelIcon" )
 	end
-	local f126_local0 = Engine[0x40E824FE270E174]( Engine[0x4DF5CFBC1771947]( f126_arg0 ), "unlockTokensCount" )
+	local f126_local0 = Engine[@"getmodel"]( Engine[@"getmodelforcontroller"]( f126_arg0 ), "unlockTokensCount" )
 	local f126_local1 = "weapon_smg"
 	local f126_local2 = CoD.PlayerRoleUtility.customizationMode
 	if not f126_local2 then
 		f126_local2 = CoD.PrestigeUtility.GetPermanentUnlockMode()
 	end
-	Engine[0x83C9B5DE1D9371]( f126_local0, Engine[0x161E2E8C6B9894A]( f126_arg0, f126_local1, f126_local2 ) )
+	Engine[@"setmodelvalue"]( f126_local0, Engine[@"getcurrenttokens"]( f126_arg0, f126_local1, f126_local2 ) )
 end
 CoD.CACUtility.GetAllItems = function ( f127_arg0, f127_arg1 )
 	if f127_arg0 ~= true and CoD.CACUtility.Items then
@@ -3318,18 +3318,18 @@ CoD.CACUtility.GetAllItems = function ( f127_arg0, f127_arg1 )
 	for f127_local2 = 0, 43, 1 do
 		f127_local1[f127_local2] = {
 			index = f127_local2,
-			desc = Engine[0x808C08A4F50BB41]( f127_local2, f127_local0 ),
-			name = Engine[0x31B335F9A01DF74]( f127_local2 ),
-			image = Engine[0xDEF34906C8E4746]( f127_local2 ),
-			isOptic = Engine[0x879E3A35DC01D26]( f127_local2 ),
-			restrictionState = Enum[0x29982FCF939650D][0xDED62969E76CA24],
+			desc = Engine[@"getattachmentdescbyattachmentindex"]( f127_local2, f127_local0 ),
+			name = Engine[@"getattachmentnamebyindex"]( f127_local2 ),
+			image = Engine[@"getattachmentimagebyindex"]( f127_local2 ),
+			isOptic = Engine[@"isopticbyattachmentindex"]( f127_local2 ),
+			restrictionState = Enum[@"itemrestrictionstate"][@"item_restriction_state_none"],
 			items = {}
 		}
 	end
 	local f127_local2 = {}
 	for f127_local3 = 0, 255, 1 do
-		if Engine[0x4F26CFE792AD57C]( f127_local3, f127_local0 ) and not CoD.BlackMarketUtility.IsUnreleasedBlackMarketItem( Engine[0xD5D69BA555E016D]( f127_local3 ) ) then
-			local f127_local6 = Engine[0xCA0179D394E63CE]( f127_local3, f127_local0 )
+		if Engine[@"itemindexvalid"]( f127_local3, f127_local0 ) and not CoD.BlackMarketUtility.IsUnreleasedBlackMarketItem( Engine[@"getitemref"]( f127_local3 ) ) then
+			local f127_local6 = Engine[@"getunlockableinfobyindex"]( f127_local3, f127_local0 )
 			if f127_local6.allocation >= 0 then
 				local f127_local7 = {
 					index = f127_local3,
@@ -3351,15 +3351,15 @@ CoD.CACUtility.GetAllItems = function ( f127_arg0, f127_arg1 )
 					f127_local7.image = f127_local6.image .. "_menu"
 				end
 				if f127_local7.loadoutSlot == "primary" or f127_local7.loadoutSlot == "secondary" then
-					local f127_local8 = Engine[0xF8ECCDE64F061E1]( f127_local3 )
+					local f127_local8 = Engine[@"getnumattachments"]( f127_local3 )
 					if f127_local8 > 0 then
 						f127_local7.attachments = {}
 						for f127_local9 = 0, f127_local8 - 1, 1 do
-							local f127_local12 = Engine[0x174D9B6F1E719ED]( f127_local3, f127_local9 )
+							local f127_local12 = Engine[@"getitemattachment"]( f127_local3, f127_local9 )
 							if f127_local12 > CoD.CACUtility.EmptyItemIndex then
 								f127_local7.attachments[f127_local12] = {
 									attachmentIndex = f127_local12,
-									restrictionState = Engine[0x93ABA160B5D7323]( f127_local3, f127_local12, false )
+									restrictionState = Engine[@"hash_793ABA160B5D7323"]( f127_local3, f127_local12, false )
 								}
 								table.insert( f127_local1[f127_local12].items, {
 									itemIndex = f127_local3
@@ -3375,11 +3375,11 @@ CoD.CACUtility.GetAllItems = function ( f127_arg0, f127_arg1 )
 	if f127_arg1 == true then
 		local f127_local3 = function ( f128_arg0, f128_arg1 )
 			if f127_local1[f128_arg0].isOptic and f127_local1[f128_arg1].isOptic then
-				return Engine[0xED84C33EC5F01EA]( f127_local1[f128_arg0].name ) < Engine[0xED84C33EC5F01EA]( f127_local1[f128_arg1].name )
+				return Engine[@"localize"]( f127_local1[f128_arg0].name ) < Engine[@"localize"]( f127_local1[f128_arg1].name )
 			elseif f127_local1[f128_arg0].isOptic ~= f127_local1[f128_arg1].isOptic then
 				return f127_local1[f128_arg0].isOptic
 			else
-				return Engine[0xED84C33EC5F01EA]( f127_local1[f128_arg0].name ) < Engine[0xED84C33EC5F01EA]( f127_local1[f128_arg1].name )
+				return Engine[@"localize"]( f127_local1[f128_arg0].name ) < Engine[@"localize"]( f127_local1[f128_arg1].name )
 			end
 		end
 		
@@ -3393,9 +3393,9 @@ CoD.CACUtility.GetAllItems = function ( f127_arg0, f127_arg1 )
 			elseif f127_local2[f129_arg0].groupIndex ~= f127_local2[f129_arg1].groupIndex then
 				return f127_local2[f129_arg0].groupIndex < f127_local2[f129_arg1].groupIndex
 			elseif f127_local2[f129_arg0].loadoutSlot == f127_local2[f129_arg1].loadoutSlot then
-				return Engine[0xED84C33EC5F01EA]( f127_local2[f129_arg0].name ) < Engine[0xED84C33EC5F01EA]( f127_local2[f129_arg1].name )
+				return Engine[@"localize"]( f127_local2[f129_arg0].name ) < Engine[@"localize"]( f127_local2[f129_arg1].name )
 			else
-				return Engine[0xED84C33EC5F01EA]( f127_local2[f129_arg0].loadoutSlot ) < Engine[0xED84C33EC5F01EA]( f127_local2[f129_arg1].loadoutSlot )
+				return Engine[@"localize"]( f127_local2[f129_arg0].loadoutSlot ) < Engine[@"localize"]( f127_local2[f129_arg1].loadoutSlot )
 			end
 		end
 		
@@ -3426,14 +3426,14 @@ CoD.CACUtility.GetLoadout = function ( f130_arg0, f130_arg1 )
 		bonuscards = {},
 		streaks = {}
 	}
-	local f130_local1 = Engine[0xED2C19E68ED0E2C]( f130_arg0, f130_arg1 )
-	local f130_local2 = Engine[0x3EAC408F958FF05]()
+	local f130_local1 = Engine[@"getcustomclass"]( f130_arg0, f130_arg1 )
+	local f130_local2 = Engine[@"currentsessionmode"]()
 	for f130_local6, f130_local7 in pairs( f130_local1 ) do
 		if LUI.startswith( f130_local6, "primaryattachment" ) and f130_local1.primary then
-			table.insert( f130_local0.primaryAttachments, Engine[0x174D9B6F1E719ED]( f130_local1.primary, f130_local7, f130_local2 ) )
+			table.insert( f130_local0.primaryAttachments, Engine[@"getitemattachment"]( f130_local1.primary, f130_local7, f130_local2 ) )
 		end
 		if LUI.startswith( f130_local6, "secondaryattachment" ) and f130_local1.secondary then
-			table.insert( f130_local0.secondaryAttachments, Engine[0x174D9B6F1E719ED]( f130_local1.secondary, f130_local7, f130_local2 ) )
+			table.insert( f130_local0.secondaryAttachments, Engine[@"getitemattachment"]( f130_local1.secondary, f130_local7, f130_local2 ) )
 		end
 		if LUI.startswith( f130_local6, "killStreak" ) then
 			f130_local0.streaks[f130_local6] = f130_local7
@@ -3445,10 +3445,10 @@ CoD.CACUtility.GetLoadout = function ( f130_arg0, f130_arg1 )
 			f130_local0.perks[f130_local6] = f130_local7
 		end
 		if LUI.startswith( f130_local6, "talent" ) or LUI.startswith( f130_local6, "tacticalgear" ) then
-			f130_local0.talents[f130_local6] = Engine[0xE8B1E317B9DD6FE]( f130_local7, Enum[0x6EB546760F890D2][0x8EA6ADA81FD4511], f130_local2 ) or f130_local7
+			f130_local0.talents[f130_local6] = Engine[@"hash_1E8B1E317B9DD6FE"]( f130_local7, Enum[@"statindexoffset"][@"hash_68EA6ADA81FD4511"], f130_local2 ) or f130_local7
 		end
 		if LUI.startswith( f130_local6, "bonuscard" ) then
-			f130_local0.bonuscards[f130_local6] = Engine[0xE8B1E317B9DD6FE]( f130_local7, Enum[0x6EB546760F890D2][0x1A949B83CC070B0], f130_local2 ) or f130_local7
+			f130_local0.bonuscards[f130_local6] = Engine[@"hash_1E8B1E317B9DD6FE"]( f130_local7, Enum[@"statindexoffset"][@"hash_1A949B83CC070B0"], f130_local2 ) or f130_local7
 		end
 		if LUI.startswith( f130_local6, "primarygrenade" ) then
 			f130_local0.primaryGrenade = f130_local7
@@ -3478,31 +3478,31 @@ CoD.CACUtility.GetFullLoadout = function ( f131_arg0 )
 end
 CoD.CACUtility.SetShowcaseWeaponToClassPrimary = function ( f132_arg0, f132_arg1 )
 	local f132_local0 = CoD.PrestigeUtility.GetPermanentUnlockMode()
-	local f132_local1 = Engine[0x40E824FE270E174]( Engine[0x40E824FE270E174]( Engine[0x4DF5CFBC1771947]( f132_arg0 ), "CustomClassList" ), "class" .. f132_arg1 + 1 )
+	local f132_local1 = Engine[@"getmodel"]( Engine[@"getmodel"]( Engine[@"getmodelforcontroller"]( f132_arg0 ), "CustomClassList" ), "class" .. f132_arg1 + 1 )
 	local f132_local2 = CoD.InspectionUtility.GetShowcaseCategoryForCurrentSessionMode()
-	local f132_local3 = Engine[0x40E824FE270E174]( Engine[0x40E824FE270E174]( f132_local1, "primary" ), "variantName" )
+	local f132_local3 = Engine[@"getmodel"]( Engine[@"getmodel"]( f132_local1, "primary" ), "variantName" )
 	if f132_local3 then
-		Engine[0xE76C57FAF9FDBAC]( f132_arg0, f132_local0, f132_local2, Engine[0x614D394F6F9A18D]( f132_local3 ) )
+		Engine[@"setheroshowcaseweaponvariantname"]( f132_arg0, f132_local0, f132_local2, Engine[@"getmodelvalue"]( f132_local3 ) )
 	end
 	local f132_local4 = CoD.CACUtility.GetItemEquippedInSlot( "primary", f132_arg0, f132_local1 )
 	if CoD.CACUtility.EmptyItemIndex < f132_local4 then
-		Engine[0xFCCE0C9C2A40C9A]( f132_arg0, f132_local0, f132_local2, 0x56C9496D7E38137, f132_local4 )
+		Engine[@"setheroshowcaseweaponattribute"]( f132_arg0, f132_local0, f132_local2, @"weaponindex", f132_local4 )
 	end
 	for f132_local5 = 1, CoD.CACUtility.maxPrimaryAttachments, 1 do
 		local f132_local8 = CoD.CACUtility.GetItemEquippedInSlot( "primaryattachment" .. f132_local5, f132_arg0, f132_local1 )
 		if CoD.CACUtility.EmptyItemIndex < f132_local8 then
-			Engine[0xFCCE0C9C2A40C9A]( f132_arg0, f132_local0, f132_local2, 0x73F89AC8D3F248, f132_local8, f132_local5 - 1 )
+			Engine[@"setheroshowcaseweaponattribute"]( f132_arg0, f132_local0, f132_local2, @"attachment", f132_local8, f132_local5 - 1 )
 		end
 	end
-	Engine[0xFCCE0C9C2A40C9A]( f132_arg0, f132_local0, f132_local2, 0xD7F884DAFFAA30F, CoD.CACUtility.GetItemEquippedInSlot( "primaryCamo", f132_arg0, f132_local1 ) )
-	Engine[0xFCCE0C9C2A40C9A]( f132_arg0, f132_local0, f132_local2, 0xFAC82D8B8152CBE, CoD.CACUtility.GetItemEquippedInSlot( "primarypaintjobslot", f132_arg0, f132_local1 ) )
+	Engine[@"setheroshowcaseweaponattribute"]( f132_arg0, f132_local0, f132_local2, @"camoindex", CoD.CACUtility.GetItemEquippedInSlot( "primaryCamo", f132_arg0, f132_local1 ) )
+	Engine[@"setheroshowcaseweaponattribute"]( f132_arg0, f132_local0, f132_local2, @"paintjobslot", CoD.CACUtility.GetItemEquippedInSlot( "primarypaintjobslot", f132_arg0, f132_local1 ) )
 	MarkCACPaintshopDataDirty( nil, f132_arg0 )
 end
 CoD.CACUtility.SetShowcaseWeapon = function ( f133_arg0, f133_arg1, f133_arg2 )
 	if IsCustomLobby() or IsLocal() then
 		return 
 	end
-	local f133_local0 = Engine[0x3EAC408F958FF05]()
+	local f133_local0 = Engine[@"currentsessionmode"]()
 	local f133_local1 = CoD.BaseUtility.GetMenuSessionMode( f133_arg0 )
 	local f133_local2 = CoD.BaseUtility.GetMenuModel( f133_arg0 )
 	local f133_local3 = f133_arg2:getModel()
@@ -3510,7 +3510,7 @@ CoD.CACUtility.SetShowcaseWeapon = function ( f133_arg0, f133_arg1, f133_arg2 )
 	local f133_local5 = f133_local2[f133_local4].camoIndex
 	local f133_local6 = f133_local2[f133_local4].paintjobSlot
 	local f133_local7 = f133_local2[f133_local4].weaponModelSlot
-	if f133_local0 ~= Enum[0x9C0C2196D8313A0][0xB22E0240605CFFE] and (f133_local4 == "primary" or f133_local4 == "secondary") then
+	if f133_local0 ~= Enum[@"emodes"][@"mode_invalid"] and (f133_local4 == "primary" or f133_local4 == "secondary") then
 		local f133_local8 = nil
 		if f133_local3.itemIndex then
 			f133_local8 = f133_local3.itemIndex:get()
@@ -3518,26 +3518,26 @@ CoD.CACUtility.SetShowcaseWeapon = function ( f133_arg0, f133_arg1, f133_arg2 )
 		if f133_local8 and f133_local8 > CoD.CACUtility.EmptyItemIndex and f133_local5 and f133_local5:get() and f133_local6 and f133_local6:get() then
 			local f133_local9 = CoD.InspectionUtility.GetShowcaseCategoryForCurrentSessionMode()
 			local f133_local10, f133_local11 = CoD.CACUtility.GetWeaponNameHashAndAttachmentsForXcam( f133_arg1, f133_local2, f133_local4, nil, f133_local1, f133_local8, nil )
-			local f133_local12 = Engine[0x40E824FE270E174]( Engine[0x40E824FE270E174]( f133_local2, f133_local4 ), "variantName" )
+			local f133_local12 = Engine[@"getmodel"]( Engine[@"getmodel"]( f133_local2, f133_local4 ), "variantName" )
 			if f133_local12 then
-				Engine[0xE76C57FAF9FDBAC]( f133_arg1, f133_local1, f133_local9, Engine[0x614D394F6F9A18D]( f133_local12 ) )
+				Engine[@"setheroshowcaseweaponvariantname"]( f133_arg1, f133_local1, f133_local9, Engine[@"getmodelvalue"]( f133_local12 ) )
 			end
 			if f133_local8 > CoD.CACUtility.EmptyItemIndex then
-				Engine[0xFCCE0C9C2A40C9A]( f133_arg1, f133_local1, f133_local9, 0x56C9496D7E38137, f133_local8 )
+				Engine[@"setheroshowcaseweaponattribute"]( f133_arg1, f133_local1, f133_local9, @"weaponindex", f133_local8 )
 			end
 			for f133_local16, f133_local17 in ipairs( CoD.CACUtility.GetAttachmentListForSlot( f133_local4 ) ) do
-				Engine[0xFCCE0C9C2A40C9A]( f133_arg1, f133_local1, f133_local9, 0x73F89AC8D3F248, Engine[0x614D394F6F9A18D]( Engine[0x40E824FE270E174]( f133_local2, f133_local17 .. ".itemIndex" ) ), f133_local16 - 1 )
+				Engine[@"setheroshowcaseweaponattribute"]( f133_arg1, f133_local1, f133_local9, @"attachment", Engine[@"getmodelvalue"]( Engine[@"getmodel"]( f133_local2, f133_local17 .. ".itemIndex" ) ), f133_local16 - 1 )
 			end
-			Engine[0xFCCE0C9C2A40C9A]( f133_arg1, f133_local1, f133_local9, 0xD7F884DAFFAA30F, f133_local5:get() )
-			Engine[0xFCCE0C9C2A40C9A]( f133_arg1, f133_local1, f133_local9, 0xFAC82D8B8152CBE, f133_local6:get() )
-			Engine[0xFCCE0C9C2A40C9A]( f133_arg1, f133_local1, f133_local9, 0xEE983B435CE4912, f133_local7:get() )
-			CoD.OverlayUtility.ShowToast( nil, Engine[0xF9F1239CFD921FE]( 0x4D7E6B5D2385EE7 ), "", "ui_menu_popups_toastnotification_icon_gunrack" )
+			Engine[@"setheroshowcaseweaponattribute"]( f133_arg1, f133_local1, f133_local9, @"camoindex", f133_local5:get() )
+			Engine[@"setheroshowcaseweaponattribute"]( f133_arg1, f133_local1, f133_local9, @"paintjobslot", f133_local6:get() )
+			Engine[@"setheroshowcaseweaponattribute"]( f133_arg1, f133_local1, f133_local9, @"weaponmodelslot", f133_local7:get() )
+			CoD.OverlayUtility.ShowToast( nil, Engine[@"hash_4F9F1239CFD921FE"]( @"hash_24D7E6B5D2385EE7" ), "", "ui_menu_popups_toastnotification_icon_gunrack" )
 		end
 	end
 end
 CoD.CACUtility.AnyItemBanned = function ( f134_arg0 )
 	for f134_local3, f134_local4 in pairs( f134_arg0 ) do
-		if Engine[0x23577A128ED85F3]( f134_local4, false ) then
+		if Engine[@"isitemindexrestricted"]( f134_local4, false ) then
 			return true
 		end
 	end
@@ -3545,7 +3545,7 @@ CoD.CACUtility.AnyItemBanned = function ( f134_arg0 )
 end
 CoD.CACUtility.AnyUnlockableItemBanned = function ( f135_arg0 )
 	for f135_local3, f135_local4 in pairs( f135_arg0 ) do
-		if Engine[0x23577A128ED85F3]( f135_local4.globalItemIndex, false ) then
+		if Engine[@"isitemindexrestricted"]( f135_local4.globalItemIndex, false ) then
 			return true
 		end
 	end
@@ -3553,7 +3553,7 @@ CoD.CACUtility.AnyUnlockableItemBanned = function ( f135_arg0 )
 end
 CoD.CACUtility.AllUnlockableItemsBanned = function ( f136_arg0 )
 	for f136_local3, f136_local4 in pairs( f136_arg0 ) do
-		if not Engine[0x23577A128ED85F3]( f136_local4.globalItemIndex, false ) then
+		if not Engine[@"isitemindexrestricted"]( f136_local4.globalItemIndex, false ) then
 			return false
 		end
 	end
@@ -3561,23 +3561,23 @@ CoD.CACUtility.AllUnlockableItemsBanned = function ( f136_arg0 )
 end
 CoD.CACUtility.AnyAttachmentBanned = function ( f137_arg0, f137_arg1 )
 	for f137_local3, f137_local4 in ipairs( f137_arg1 ) do
-		if Engine[0xC2F74C45CEC9F1]( f137_local4, false ) == true then
+		if Engine[@"isattachmentrestricted"]( f137_local4, false ) == true then
 			return true
 		end
 	end
 	return false
 end
 CoD.CACUtility.IsItemGroupRestricted = function ( f138_arg0, f138_arg1 )
-	return Engine[0x3EAC75D44860D28]( f138_arg0, f138_arg1 )
+	return Engine[@"hash_3EAC75D44860D28"]( f138_arg0, f138_arg1 )
 end
 CoD.CACUtility.IsItemIndexRestricted = function ( f139_arg0 )
-	return Engine[0x23577A128ED85F3]( f139_arg0, false )
+	return Engine[@"isitemindexrestricted"]( f139_arg0, false )
 end
 CoD.CACUtility.AreEquipmentsRestricted = function ( f140_arg0 )
-	return Engine[0x5B143C4D6107325]( f140_arg0 )
+	return Engine[@"hash_5B143C4D6107325"]( f140_arg0 )
 end
 CoD.CACUtility.AreSpecialWeaponsRestricted = function ( f141_arg0 )
-	return Engine[0x345773EA5D5E534]( f141_arg0 )
+	return Engine[@"hash_3345773EA5D5E534"]( f141_arg0 )
 end
 CoD.CACUtility.AreTalismanGameSettingsRestricted = function ( f142_arg0, f142_arg1, f142_arg2 )
 	if f142_arg0 and f142_arg1 then
@@ -3592,7 +3592,7 @@ end
 CoD.CACUtility.IsPerkRestricted = function ( f143_arg0, f143_arg1 )
 	if f143_arg0 then
 		for f143_local3, f143_local4 in ipairs( f143_arg0 ) do
-			if f143_local4 and Engine[0x8CA09BCB6594784]( f143_local4, f143_arg1 ) then
+			if f143_local4 and Engine[@"hash_58CA09BCB6594784"]( f143_local4, f143_arg1 ) then
 				return true
 			end
 		end
@@ -3602,7 +3602,7 @@ end
 CoD.CACUtility.AreElixirGameSettingsRestricted = function ( f144_arg0, f144_arg1, f144_arg2 )
 	if f144_arg0 and f144_arg1 then
 		for f144_local3, f144_local4 in ipairs( f144_arg0 ) do
-			if f144_local4 and Engine[0xADF576B569F75B3]( f144_local4, f144_arg1, f144_arg2 ) then
+			if f144_local4 and Engine[@"hash_2ADF576B569F75B3"]( f144_local4, f144_arg1, f144_arg2 ) then
 				return true
 			end
 		end
@@ -3612,7 +3612,7 @@ end
 CoD.CACUtility.AnyElixirRestrictedInTable = function ( f145_arg0 )
 	if f145_arg0 then
 		for f145_local3, f145_local4 in ipairs( f145_arg0 ) do
-			if CoD.CACUtility.AreElixirGameSettingsRestricted( CoD.BGBUtility.ElixirToBooleanGameSettingsHash[f145_local4.nameHash], f145_local4[0x71B3A5F87EA779F], false ) or CoD.CACUtility.AreGameSettingsStateOff( CoD.BGBUtility.ElixirToEnumGameSettingsHash[f145_local4.nameHash], false ) then
+			if CoD.CACUtility.AreElixirGameSettingsRestricted( CoD.BGBUtility.ElixirToBooleanGameSettingsHash[f145_local4.nameHash], f145_local4[@"bgbrarity"], false ) or CoD.CACUtility.AreGameSettingsStateOff( CoD.BGBUtility.ElixirToEnumGameSettingsHash[f145_local4.nameHash], false ) then
 				return true
 			end
 		end
@@ -3620,7 +3620,7 @@ CoD.CACUtility.AnyElixirRestrictedInTable = function ( f145_arg0 )
 	return false
 end
 CoD.CACUtility.AnyElixirRestrictedForRarity = function ( f146_arg0, f146_arg1 )
-	if CoD.CACUtility.AnyElixirRestrictedInTable( CoD.CACUtility.GetUnlockableBGBItemsForItemGroupAndRarity( Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A], f146_arg1, f146_arg0 ) ) then
+	if CoD.CACUtility.AnyElixirRestrictedInTable( CoD.CACUtility.GetUnlockableBGBItemsForItemGroupAndRarity( Enum[@"emodes"][@"mode_zombies"], f146_arg1, f146_arg0 ) ) then
 		return true
 	else
 		return false
@@ -3629,7 +3629,7 @@ end
 CoD.CACUtility.AreGameSettingsStateOff = function ( f147_arg0, f147_arg1 )
 	if f147_arg0 then
 		for f147_local3, f147_local4 in ipairs( f147_arg0 ) do
-			if f147_local4 and Engine[0xDBC2AD5002B261B]( f147_local4.hash, f147_arg1 ) == f147_local4.restrictedValue then
+			if f147_local4 and Engine[@"getgametypesetting"]( f147_local4.hash, f147_arg1 ) == f147_local4.restrictedValue then
 				return true
 			end
 		end
@@ -3652,7 +3652,7 @@ CoD.CACUtility.ClassContainsRestrictedItems = function ( f150_arg0, f150_arg1 )
 	local f150_local0 = CoD.CACUtility.GetLoadout( f150_arg0, f150_arg1 )
 	if CoD.CACUtility.AnyItemBanned( f150_local0.weapons ) or CoD.CACUtility.AnyItemBanned( f150_local0.equipment ) or CoD.CACUtility.AnyItemBanned( f150_local0.perks ) or CoD.CACUtility.AnyItemBanned( f150_local0.talents ) or CoD.CACUtility.AnyItemBanned( f150_local0.bonuscards ) then
 		return true
-	elseif f150_local0.primaryGrenade ~= nil and Engine[0x23577A128ED85F3]( f150_local0.primaryGrenade, false ) then
+	elseif f150_local0.primaryGrenade ~= nil and Engine[@"isitemindexrestricted"]( f150_local0.primaryGrenade, false ) then
 		return true
 	elseif f150_local0.weapons.primary ~= nil and CoD.CACUtility.AnyAttachmentBanned( f150_local0.weapons.primary, f150_local0.primaryAttachments ) then
 		return true
@@ -3663,31 +3663,31 @@ CoD.CACUtility.ClassContainsRestrictedItems = function ( f150_arg0, f150_arg1 )
 	end
 end
 CoD.CACUtility.GetAllRestrictedItems = function ()
-	local f151_local0 = Engine[0x755D55B3813D249]( Enum[0x7CA2DE5266A94BF][0xC46B73E8E18BA2], Enum[0xBF54BE1BB3D618B][0x92676CF5B6FCD43] )
+	local f151_local0 = Engine[@"lobbygetsessionclients"]( Enum[@"lobbymodule"][@"lobby_module_client"], Enum[@"lobbytype"][@"lobby_type_game"] )
 	local f151_local1 = f151_local0.sessionClients
 	local f151_local2 = {}
 	local f151_local3, f151_local4 = CoD.CACUtility.GetAllItems( true, true )
 	for f151_local8, f151_local9 in pairs( f151_local3 ) do
-		if Engine[0x23577A128ED85F3]( f151_local9.index, false ) == true then
+		if Engine[@"isitemindexrestricted"]( f151_local9.index, false ) == true then
 			table.insert( f151_local2, {
 				globalVoteIndex = -1,
-				itemType = Enum[0x4AC3B18EEECCA6][0x9CA3BEF4CEA2F4C],
+				itemType = Enum[@"voteitemtype"][@"vote_item_type_item"],
 				itemIndex = f151_local9.index,
 				itemGroup = -1,
 				attachmentIndex = -1,
-				voteType = Enum[0xB4E67669EDDF5D][0xB7AC034CE116958]
+				voteType = Enum[@"votetype"][@"vote_type_ban"]
 			} )
 		end
 	end
 	for f151_local8, f151_local9 in pairs( f151_local4 ) do
-		if Engine[0xC2F74C45CEC9F1]( f151_local9.index ) == true then
+		if Engine[@"isattachmentrestricted"]( f151_local9.index ) == true then
 			table.insert( f151_local2, {
 				globalVoteIndex = -1,
-				itemType = Enum[0x4AC3B18EEECCA6][0x531597DBEBAD66],
+				itemType = Enum[@"voteitemtype"][@"vote_item_type_attachment"],
 				itemIndex = f151_local9.index,
 				itemGroup = -1,
 				attachmentIndex = -1,
-				voteType = Enum[0xB4E67669EDDF5D][0xB7AC034CE116958]
+				voteType = Enum[@"votetype"][@"vote_type_ban"]
 			} )
 		end
 	end
@@ -3695,18 +3695,18 @@ CoD.CACUtility.GetAllRestrictedItems = function ()
 end
 CoD.CACUtility.AnyCACItemsBanned = function ()
 	for f152_local4, f152_local5 in ipairs( CoD.CACUtility.GetAllRestrictedItems() ) do
-		if f152_local5.voteType == Enum[0xB4E67669EDDF5D][0xB7AC034CE116958] then
-			if f152_local5.itemType == Enum[0x4AC3B18EEECCA6][0x9CA3BEF4CEA2F4C] then
-				local f152_local3 = Engine[0xCA0179D394E63CE]( f152_local5.itemIndex )
+		if f152_local5.voteType == Enum[@"votetype"][@"vote_type_ban"] then
+			if f152_local5.itemType == Enum[@"voteitemtype"][@"vote_item_type_item"] then
+				local f152_local3 = Engine[@"getunlockableinfobyindex"]( f152_local5.itemIndex )
 				if not LuaUtils.StartsWith( f152_local3.loadoutSlot, "hero" ) and not LuaUtils.StartsWith( f152_local3.loadoutSlot, "killstreak" ) then
 					return true
 				end
 			end
-			if f152_local5.itemType == Enum[0x4AC3B18EEECCA6][0x531597DBEBAD66] then
+			if f152_local5.itemType == Enum[@"voteitemtype"][@"vote_item_type_attachment"] then
 				return true
-			elseif f152_local5.itemType == Enum[0x4AC3B18EEECCA6][0xC37980943B384C] then
+			elseif f152_local5.itemType == Enum[@"voteitemtype"][@"vote_item_type_item_attachment"] then
 				return true
-			elseif f152_local5.itemType == Enum[0x4AC3B18EEECCA6][0xDDA818CB3949372] then
+			elseif f152_local5.itemType == Enum[@"voteitemtype"][@"vote_item_type_attachment_group"] then
 				return true
 			end
 		end
@@ -3715,8 +3715,8 @@ CoD.CACUtility.AnyCACItemsBanned = function ()
 end
 CoD.CACUtility.AnyStreaksBanned = function ()
 	for f153_local4, f153_local5 in ipairs( CoD.CACUtility.GetAllRestrictedItems() ) do
-		if f153_local5.voteType == Enum[0xB4E67669EDDF5D][0xB7AC034CE116958] and f153_local5.itemType == Enum[0x4AC3B18EEECCA6][0x9CA3BEF4CEA2F4C] then
-			local f153_local3 = Engine[0xCA0179D394E63CE]( f153_local5.itemIndex )
+		if f153_local5.voteType == Enum[@"votetype"][@"vote_type_ban"] and f153_local5.itemType == Enum[@"voteitemtype"][@"vote_item_type_item"] then
+			local f153_local3 = Engine[@"getunlockableinfobyindex"]( f153_local5.itemIndex )
 			if LUI.startswith( f153_local3.loadoutSlot, "killstreak" ) then
 				return true
 			end
@@ -3727,7 +3727,7 @@ end
 CoD.CACUtility.AnySpecialistBanned = function ()
 	local f154_local0, f154_local1 = CoD.CACUtility.GetAllItems( false, true )
 	for f154_local5, f154_local6 in pairs( f154_local0 ) do
-		if LuaUtils.StartsWith( f154_local6.loadoutSlot, "hero" ) and Engine[0x23577A128ED85F3]( f154_local6.index, false ) then
+		if LuaUtils.StartsWith( f154_local6.loadoutSlot, "hero" ) and Engine[@"isitemindexrestricted"]( f154_local6.index, false ) then
 			return true
 		end
 	end
@@ -3736,7 +3736,7 @@ end
 CoD.CACUtility.EquippedSpecialistBanned = function ( f155_arg0 )
 	local f155_local0 = CoD.CACUtility.GetFullLoadout( f155_arg0 )
 	if f155_local0.heroItem then
-		return Engine[0x23577A128ED85F3]( f155_local0.heroItem, false )
+		return Engine[@"isitemindexrestricted"]( f155_local0.heroItem, false )
 	else
 		return false
 	end
@@ -3744,39 +3744,39 @@ end
 CoD.CACUtility.GetItemInfoFromElementModel = function ( f156_arg0, f156_arg1 )
 	if f156_arg1 then
 		local f156_local0 = {}
-		local f156_local1 = Engine[0x40E824FE270E174]( f156_arg1, "itemType" )
+		local f156_local1 = Engine[@"getmodel"]( f156_arg1, "itemType" )
 		if f156_local1 then
-			f156_local0.itemType = Engine[0x614D394F6F9A18D]( f156_local1 )
-			local f156_local2 = Engine[0x40E824FE270E174]( f156_arg1, "itemIndex" )
+			f156_local0.itemType = Engine[@"getmodelvalue"]( f156_local1 )
+			local f156_local2 = Engine[@"getmodel"]( f156_arg1, "itemIndex" )
 			if f156_local2 then
-				f156_local0.itemIndex = Engine[0x614D394F6F9A18D]( f156_local2 )
+				f156_local0.itemIndex = Engine[@"getmodelvalue"]( f156_local2 )
 			end
-			local f156_local3 = Engine[0x40E824FE270E174]( f156_arg1, "weaponIndex" )
+			local f156_local3 = Engine[@"getmodel"]( f156_arg1, "weaponIndex" )
 			if f156_local3 then
-				local f156_local4 = Engine[0x614D394F6F9A18D]( f156_local3 )
+				local f156_local4 = Engine[@"getmodelvalue"]( f156_local3 )
 				if f156_local4 > 0 then
 					f156_local0.itemIndex = f156_local4
 				end
 			end
-			local f156_local4 = Engine[0x40E824FE270E174]( f156_arg1, "attachmentIndex" )
+			local f156_local4 = Engine[@"getmodel"]( f156_arg1, "attachmentIndex" )
 			if f156_local4 then
-				f156_local0.attachmentIndex = Engine[0x614D394F6F9A18D]( f156_local4 )
+				f156_local0.attachmentIndex = Engine[@"getmodelvalue"]( f156_local4 )
 			end
-			local f156_local5 = Engine[0x40E824FE270E174]( f156_arg1, "itemGroup" )
+			local f156_local5 = Engine[@"getmodel"]( f156_arg1, "itemGroup" )
 			if f156_local5 then
-				f156_local0.itemGroup = Engine[0x614D394F6F9A18D]( f156_local5 )
+				f156_local0.itemGroup = Engine[@"getmodelvalue"]( f156_local5 )
 			end
-			local f156_local6 = Engine[0x40E824FE270E174]( f156_arg1, "weaponSlot" )
+			local f156_local6 = Engine[@"getmodel"]( f156_arg1, "weaponSlot" )
 			if f156_local6 then
-				f156_local0.weaponSlot = Engine[0x614D394F6F9A18D]( f156_local6 )
+				f156_local0.weaponSlot = Engine[@"getmodelvalue"]( f156_local6 )
 			end
-			local f156_local7 = Engine[0x40E824FE270E174]( f156_arg1, "loadoutSlot" )
+			local f156_local7 = Engine[@"getmodel"]( f156_arg1, "loadoutSlot" )
 			if f156_local7 then
-				f156_local0.loadoutSlot = Engine[0x614D394F6F9A18D]( f156_local7 )
+				f156_local0.loadoutSlot = Engine[@"getmodelvalue"]( f156_local7 )
 			end
-			local f156_local8 = Engine[0x40E824FE270E174]( f156_arg1, "restrictionState" )
+			local f156_local8 = Engine[@"getmodel"]( f156_arg1, "restrictionState" )
 			if f156_local8 then
-				f156_local0.restrictionState = Engine[0x614D394F6F9A18D]( f156_local8 )
+				f156_local0.restrictionState = Engine[@"getmodelvalue"]( f156_local8 )
 			end
 			return f156_local0
 		end
@@ -3784,45 +3784,45 @@ CoD.CACUtility.GetItemInfoFromElementModel = function ( f156_arg0, f156_arg1 )
 end
 CoD.CACUtility.ResetCPCustomClasses = function ( f157_arg0 )
 	if CoD.isCampaign then
-		local f157_local0 = Engine[0x4DF5CFBC1771947]( f157_arg0 )
-		local f157_local1 = Engine[0x40E824FE270E174]( Engine[0x4DF5CFBC1771947]( f157_arg0 ), "CustomClassList.prepared" )
+		local f157_local0 = Engine[@"getmodelforcontroller"]( f157_arg0 )
+		local f157_local1 = Engine[@"getmodel"]( Engine[@"getmodelforcontroller"]( f157_arg0 ), "CustomClassList.prepared" )
 		if f157_local1 then
-			Engine[0x8C7A8C4C5FD9892]( f157_local1 )
+			Engine[@"unsubscribeandfreemodel"]( f157_local1 )
 		end
-		local f157_local2 = Engine[0x40E824FE270E174]( f157_local0, "CustomClassList" )
+		local f157_local2 = Engine[@"getmodel"]( f157_local0, "CustomClassList" )
 		if f157_local2 then
 			for f157_local3 = 1, 6, 1 do
-				local f157_local6 = Engine[0x40E824FE270E174]( f157_local2, "class" .. f157_local3 )
+				local f157_local6 = Engine[@"getmodel"]( f157_local2, "class" .. f157_local3 )
 				if f157_local6 ~= nil then
-					Engine[0x8C7A8C4C5FD9892]( f157_local6 )
+					Engine[@"unsubscribeandfreemodel"]( f157_local6 )
 				end
 			end
 		end
 	end
 end
 CoD.CACUtility.GetItemVotedBy = function ( f158_arg0 )
-	local f158_local0 = Engine[0x755D55B3813D249]( Enum[0x7CA2DE5266A94BF][0xC46B73E8E18BA2], Enum[0xBF54BE1BB3D618B][0x92676CF5B6FCD43] )
+	local f158_local0 = Engine[@"lobbygetsessionclients"]( Enum[@"lobbymodule"][@"lobby_module_client"], Enum[@"lobbytype"][@"lobby_type_game"] )
 	local f158_local1 = f158_local0.sessionClients
 	local f158_local2 = {}
 	for f158_local11, f158_local12 in ipairs( f158_local1 ) do
 		if f158_local12.voteCount > 0 then
 			for f158_local9, f158_local10 in ipairs( f158_local12.votes ) do
-				if f158_local10.itemType == Enum[0x4AC3B18EEECCA6][0x9CA3BEF4CEA2F4C] and f158_arg0.itemType == Enum[0x4AC3B18EEECCA6][0x9CA3BEF4CEA2F4C] then
+				if f158_local10.itemType == Enum[@"voteitemtype"][@"vote_item_type_item"] and f158_arg0.itemType == Enum[@"voteitemtype"][@"vote_item_type_item"] then
 					if f158_local10.itemIndex == f158_arg0.itemIndex then
 						return f158_local12.gamertag
 					end
 				end
-				if f158_local10.itemType == Enum[0x4AC3B18EEECCA6][0x531597DBEBAD66] and f158_arg0.itemType == Enum[0x4AC3B18EEECCA6][0x531597DBEBAD66] then
+				if f158_local10.itemType == Enum[@"voteitemtype"][@"vote_item_type_attachment"] and f158_arg0.itemType == Enum[@"voteitemtype"][@"vote_item_type_attachment"] then
 					if f158_local10.attachmentIndex == f158_arg0.attachmentIndex then
 						return f158_local12.gamertag
 					end
 				end
-				if f158_local10.itemType == Enum[0x4AC3B18EEECCA6][0xC37980943B384C] and f158_arg0.itemType == Enum[0x4AC3B18EEECCA6][0xC37980943B384C] then
+				if f158_local10.itemType == Enum[@"voteitemtype"][@"vote_item_type_item_attachment"] and f158_arg0.itemType == Enum[@"voteitemtype"][@"vote_item_type_item_attachment"] then
 					if f158_local10.itemIndex == f158_arg0.itemIndex and f158_local10.attachmentIndex == f158_arg0.attachmentIndex then
 						return f158_local12.gamertag
 					end
 				end
-				if f158_local10.itemType == Enum[0x4AC3B18EEECCA6][0xDDA818CB3949372] and f158_arg0.itemType == Enum[0x4AC3B18EEECCA6][0xDDA818CB3949372] and f158_local10.itemGroup == f158_arg0.itemGroup then
+				if f158_local10.itemType == Enum[@"voteitemtype"][@"vote_item_type_attachment_group"] and f158_arg0.itemType == Enum[@"voteitemtype"][@"vote_item_type_attachment_group"] and f158_local10.itemGroup == f158_arg0.itemGroup then
 					return f158_local12.gamertag
 				end
 			end
@@ -3834,10 +3834,10 @@ CoD.CACUtility.GetItemInfoFromElement = function ( f159_arg0, f159_arg1 )
 	return CoD.CACUtility.GetItemInfoFromElementModel( f159_arg0, f159_arg1:getModel() )
 end
 CoD.CACUtility.IsItemConsumable = function ( f160_arg0, f160_arg1, f160_arg2 )
-	if f160_arg2 == Enum[0x9C0C2196D8313A0][0xB22E0240605CFFE] then
+	if f160_arg2 == Enum[@"emodes"][@"mode_invalid"] then
 		return false
 	end
-	local f160_local0 = Engine[0x86DC0510B2E2933]( f160_arg0, f160_arg1, f160_arg2 )
+	local f160_local0 = Engine[@"getitemgroup"]( f160_arg0, f160_arg1, f160_arg2 )
 	local f160_local1
 	if f160_local0 ~= "bubblegum_consumable" and f160_local0 ~= "talisman" then
 		f160_local1 = false
@@ -3847,9 +3847,9 @@ CoD.CACUtility.IsItemConsumable = function ( f160_arg0, f160_arg1, f160_arg2 )
 	return f160_local1
 end
 CoD.CACUtility.GetCurrentWeaponXP = function ( f161_arg0, f161_arg1, f161_arg2 )
-	local f161_local0 = Engine[0xA6C26EBACD7322D]( f161_arg0.CoD.STATS_LOCATION_NORMAL, Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5] )
+	local f161_local0 = Engine[@"getplayerstats"]( f161_arg0.CoD.STATS_LOCATION_NORMAL, Enum[@"emodes"][@"mode_multiplayer"] )
 	if f161_local0 ~= nil then
-		local f161_local1 = f161_local0.ranked_item_stats[Engine[0xE12950F85CC3F92]( f161_arg2, f161_arg1 )]
+		local f161_local1 = f161_local0.ranked_item_stats[Engine[@"hash_7E12950F85CC3F92"]( f161_arg2, f161_arg1 )]
 		if f161_local1 ~= nil then
 			return f161_local1.xp
 		end
@@ -3859,7 +3859,7 @@ end
 CoD.CACUtility.GetWeaponPLevel = function ( f162_arg0, f162_arg1 )
 	local f162_local0 = CoD.PlayerStatsUtility.GetStorageBufferForPlayer( f162_arg0 )
 	if f162_local0 then
-		return f162_local0.ranked_item_stats[Engine[0xB98952F69D937F9]( f162_arg1 )].pLevel:get()
+		return f162_local0.ranked_item_stats[Engine[@"hash_7B98952F69D937F9"]( f162_arg1 )].pLevel:get()
 	else
 		
 	end
@@ -3881,10 +3881,10 @@ CoD.CACUtility.GetUnlockableItemTable = function ()
 end
 CoD.CACUtility.GetPreviewImage = function ( f165_arg0, f165_arg1 )
 	local f165_local0
-	if f165_arg0 == Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A] then
+	if f165_arg0 == Enum[@"emodes"][@"mode_zombies"] then
 		f165_local0 = f165_arg1.zmPreviewImage
 		if not f165_local0 then
-			if f165_arg0 == Enum[0x9C0C2196D8313A0][0xBF1DCC8138A9D39] then
+			if f165_arg0 == Enum[@"emodes"][@"mode_warzone"] then
 				f165_local0 = f165_arg1.wzPreviewImage
 				if not f165_local0 then
 				
@@ -3895,7 +3895,7 @@ CoD.CACUtility.GetPreviewImage = function ( f165_arg0, f165_arg1 )
 			f165_local0 = f165_arg1.previewImage
 		end
 	else
-		if f165_arg0 == Enum[0x9C0C2196D8313A0][0xBF1DCC8138A9D39] then
+		if f165_arg0 == Enum[@"emodes"][@"mode_warzone"] then
 			f165_local0 = f165_arg1.wzPreviewImage
 			if not f165_local0 then
 			
@@ -3909,10 +3909,10 @@ CoD.CACUtility.GetPreviewImage = function ( f165_arg0, f165_arg1 )
 end
 CoD.CACUtility.GetPreviewImageLarge = function ( f166_arg0, f166_arg1 )
 	local f166_local0
-	if f166_arg0 == Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A] then
+	if f166_arg0 == Enum[@"emodes"][@"mode_zombies"] then
 		f166_local0 = f166_arg1.zmPreviewImageLarge
 		if not f166_local0 then
-			if f166_arg0 == Enum[0x9C0C2196D8313A0][0xBF1DCC8138A9D39] then
+			if f166_arg0 == Enum[@"emodes"][@"mode_warzone"] then
 				f166_local0 = f166_arg1.wzPreviewImageLarge
 				if not f166_local0 then
 				
@@ -3923,7 +3923,7 @@ CoD.CACUtility.GetPreviewImageLarge = function ( f166_arg0, f166_arg1 )
 			f166_local0 = f166_arg1.previewImageLarge
 		end
 	else
-		if f166_arg0 == Enum[0x9C0C2196D8313A0][0xBF1DCC8138A9D39] then
+		if f166_arg0 == Enum[@"emodes"][@"mode_warzone"] then
 			f166_local0 = f166_arg1.wzPreviewImageLarge
 			if not f166_local0 then
 			
@@ -3936,8 +3936,8 @@ CoD.CACUtility.GetPreviewImageLarge = function ( f166_arg0, f166_arg1 )
 	return f166_local0
 end
 CoD.CACUtility.GetDescription = function ( f167_arg0, f167_arg1 )
-	if f167_arg0 ~= Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A] or f167_arg1.zmDescription == 0x0 or not f167_arg1.zmDescription then
-		if f167_arg0 == Enum[0x9C0C2196D8313A0][0xBF1DCC8138A9D39] then
+	if f167_arg0 ~= Enum[@"emodes"][@"mode_zombies"] or f167_arg1.zmDescription == 0x0 or not f167_arg1.zmDescription then
+		if f167_arg0 == Enum[@"emodes"][@"mode_warzone"] then
 			local f167_local0 = f167_arg1.wzDescription
 			local f167_local1 = f167_arg1.wzDescription
 		end
@@ -3950,7 +3950,7 @@ CoD.CACUtility.GetSpecialIssueEquipmentItemIndex = function ()
 end
 CoD.CACUtility.GetFeatureCACItemIndex = function ()
 	if CoD.CACUtility.CACFeatureItemIndex == nil or CoD.CACUtility.CACFeatureItemIndex == CoD.CACUtility.EmptyItemIndex then
-		CoD.CACUtility.CACFeatureItemIndex = Engine[0xD97229B24C685D5]( CoD.CACUtility.CACFeatureUnlockableItem, Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5] )
+		CoD.CACUtility.CACFeatureItemIndex = Engine[@"hash_2D97229B24C685D5"]( CoD.CACUtility.CACFeatureUnlockableItem, Enum[@"emodes"][@"mode_multiplayer"] )
 	end
 	return CoD.CACUtility.CACFeatureItemIndex or 0
 end
@@ -3958,7 +3958,7 @@ CoD.CACUtility.GetClassesUnlockableItemUnlockInfo = function ( f170_arg0, f170_a
 	if not CoD.CACUtility.ClassesUnlockableItemInfo.prepared then
 		for f170_local3, f170_local4 in pairs( CoD.CACUtility.ClassesUnlockableItemInfo ) do
 			if LUI.startswith( f170_local3, "classNum" ) and f170_local4.featureItemRef then
-				f170_local4.featureItemIndex = Engine[0xD97229B24C685D5]( f170_local4.featureItemRef )
+				f170_local4.featureItemIndex = Engine[@"hash_2D97229B24C685D5"]( f170_local4.featureItemRef )
 			end
 		end
 		CoD.CACUtility.ClassesUnlockableItemInfo.prepared = true
@@ -3990,20 +3990,20 @@ CoD.CACUtility.UpdateUnlockableTableBMItems = function ( f171_arg0, f171_arg1 )
 					local f171_local4 = CoD.SafeGetModelValue( f171_local11, "itemIndex" )
 					local f171_local5 = false
 					if f171_local4 then
-						f171_local5 = CoD.BlackMarketUtility.IsItemLocked( f171_arg0, Engine[0xD5D69BA555E016D]( f171_local4 ) )
+						f171_local5 = CoD.BlackMarketUtility.IsItemLocked( f171_arg0, Engine[@"getitemref"]( f171_local4 ) )
 					end
-					local f171_local6 = Engine[0xA798E4552F5E872]( f171_local11, "isBMClassified" )
-					if Engine[0x614D394F6F9A18D]( f171_local6 ) ~= f171_local5 then
+					local f171_local6 = Engine[@"createmodel"]( f171_local11, "isBMClassified" )
+					if Engine[@"getmodelvalue"]( f171_local6 ) ~= f171_local5 then
 						f171_local0[f171_local11] = true
-						Engine[0x83C9B5DE1D9371]( f171_local6, f171_local5 )
-						local f171_local7 = Engine[0xA798E4552F5E872]( f171_local11, "name" )
-						local f171_local8 = Engine[0xA798E4552F5E872]( f171_local11, "description" )
+						Engine[@"setmodelvalue"]( f171_local6, f171_local5 )
+						local f171_local7 = Engine[@"createmodel"]( f171_local11, "name" )
+						local f171_local8 = Engine[@"createmodel"]( f171_local11, "description" )
 						if f171_local5 then
-							Engine[0x83C9B5DE1D9371]( f171_local7, CoD.BlackMarketUtility.ClassifiedName( false ) )
-							Engine[0x83C9B5DE1D9371]( f171_local8, "" )
+							Engine[@"setmodelvalue"]( f171_local7, CoD.BlackMarketUtility.ClassifiedName( false ) )
+							Engine[@"setmodelvalue"]( f171_local8, "" )
 						else
-							Engine[0x83C9B5DE1D9371]( f171_local7, Engine[0x6B7AC889104DED3]( f171_local4 ) )
-							Engine[0x83C9B5DE1D9371]( f171_local8, Engine[0x3E0DA351EF48521]( f171_local4 ) )
+							Engine[@"setmodelvalue"]( f171_local7, Engine[@"getitemname"]( f171_local4 ) )
+							Engine[@"setmodelvalue"]( f171_local8, Engine[@"getitemdesc"]( f171_local4 ) )
 						end
 						f171_local9 = true
 					end
@@ -4025,21 +4025,21 @@ CoD.CACUtility.GetCraftWeaponListTable = function ( f172_arg0, f172_arg1 )
 end
 CoD.CACUtility.GetEmblemColorList = function ( f173_arg0 )
 	local f173_local0 = {}
-	local f173_local1 = Engine[0xA798E4552F5E872]( Engine[0x4DF5CFBC1771947]( f173_arg0 ), "Emblem.EmblemColorList" )
-	local f173_local2 = Enum[0x552A19A66323FFD][0x91B5BD0C8216DCD]
-	local f173_local3 = Enum[0x552A19A66323FFD][0x2B0196023D491F3]
+	local f173_local1 = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f173_arg0 ), "Emblem.EmblemColorList" )
+	local f173_local2 = Enum[@"customizationcolorswatch"][@"customization_color_swatch_rows"]
+	local f173_local3 = Enum[@"customizationcolorswatch"][@"customization_color_swatch_columns"]
 	local f173_local4 = f173_local2 * f173_local3
 	for f173_local5 = 0, f173_local4 - 1, 1 do
-		local f173_local8, f173_local9, f173_local10 = Engine[0xC3BEB9D18E7E100]( f173_local5 / f173_local3, f173_local5 % f173_local3 )
-		local f173_local11 = Engine[0xA798E4552F5E872]( f173_local1, "color_" .. f173_local5 )
-		Engine[0x83C9B5DE1D9371]( Engine[0xA798E4552F5E872]( f173_local11, "color" ), string.format( "%d %d %d", f173_local8, f173_local9, f173_local10 ) )
+		local f173_local8, f173_local9, f173_local10 = Engine[@"getemblemswatchcolor"]( f173_local5 / f173_local3, f173_local5 % f173_local3 )
+		local f173_local11 = Engine[@"createmodel"]( f173_local1, "color_" .. f173_local5 )
+		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f173_local11, "color" ), string.format( "%d %d %d", f173_local8, f173_local9, f173_local10 ) )
 		table.insert( f173_local0, f173_local11 )
 	end
 	return f173_local0
 end
 CoD.CACUtility.GunsmithWeaponOptionsTable = nil
 CoD.CACUtility.GetGunsmithWeaponOptionsTable = function ( f174_arg0, f174_arg1, f174_arg2 )
-	return CoD.WeaponOptionsUtility.GetWeaponOptionsTableForCategory( f174_arg1.menu, f174_arg0, Enum[0x3CBA8D054211104][0x393666961B28A15], CoD.GetCustomization( f174_arg0, "weapon_index" ), 0, false )
+	return CoD.WeaponOptionsUtility.GetWeaponOptionsTableForCategory( f174_arg1.menu, f174_arg0, Enum[@"eweaponoptiongroup"][@"weaponoption_group_camo"], CoD.GetCustomization( f174_arg0, "weapon_index" ), 0, false )
 end
 CoD.CACUtility.OpenCACMenu = function ( f175_arg0, f175_arg1 )
 	CoD.perController[f175_arg1].enableClassOptions = true
@@ -4050,7 +4050,7 @@ CoD.CACUtility.OpenCACMenuEditClass = function ( f176_arg0, f176_arg1 )
 	return OpenOverlay( f176_arg0, "chooseClass", f176_arg1 )
 end
 CoD.CACUtility.GetAttachments = function ( f177_arg0 )
-	local f177_local0 = Engine[0xF8ECCDE64F061E1]( f177_arg0 )
+	local f177_local0 = Engine[@"getnumattachments"]( f177_arg0 )
 	if f177_local0 == nil then
 		return nil
 	end
@@ -4067,7 +4067,7 @@ CoD.CACUtility.GetClassItem = function ( f178_arg0, f178_arg1, f178_arg2, f178_a
 	if not f178_arg3 then
 		f178_arg3 = CoD.PrestigeUtility.GetPermanentUnlockMode()
 	end
-	local f178_local0 = Engine[0xED9C4D9D6233895]( f178_arg0, f178_arg1, f178_arg3 )
+	local f178_local0 = Engine[@"getcustomclasscacroot"]( f178_arg0, f178_arg1, f178_arg3 )
 	if f178_local0 then
 		local f178_local1 = LUI.getTableFromPath( CoD.CACUtility.GetDDLPathForModelPath( f178_local0, f178_arg2 ), f178_local0 )
 		return f178_local1:get()
@@ -4101,7 +4101,7 @@ CoD.CACUtility.SetClassItem = function ( f180_arg0, f180_arg1, f180_arg2, f180_a
 	if not f180_arg5 then
 		f180_arg5 = CoD.PrestigeUtility.GetPermanentUnlockMode()
 	end
-	local f180_local0 = Engine[0xED9C4D9D6233895]( f180_arg0, f180_arg1, f180_arg5 )
+	local f180_local0 = Engine[@"getcustomclasscacroot"]( f180_arg0, f180_arg1, f180_arg5 )
 	local f180_local1 = CoD.CACUtility.GetDDLPathForModelPath( f180_local0, f180_arg2 )
 	local f180_local2 = LUI.getTableFromPath( f180_local1, f180_local0 )
 	if not f180_local2 then
@@ -4168,15 +4168,15 @@ CoD.CACUtility.PrepareOverCapactiyList = function ( f182_arg0, f182_arg1 )
 	if LUI.startswith( f182_local5, "primary.attachment" ) or LUI.startswith( f182_local5, "secondary.attachment" ) then
 		local f182_local14 = LUI.splitString( f182_local5, "." )
 		local f182_local15 = f182_local3[f182_local14[1]].itemIndex:get()
-		local f182_local16 = Engine[0x2E29FB421AD554B]( f182_local15, f182_local6, f182_local4 )
-		local f182_local17 = Engine[0x2964239F2151F6F]( f182_local15, f182_local4 )
+		local f182_local16 = Engine[@"getattachmentref"]( f182_local15, f182_local6, f182_local4 )
+		local f182_local17 = Engine[@"getunlockableitemkvpinfo"]( f182_local15, f182_local4 )
 		if CoD.WeaponAttachmentsUtility.IsAttachmentUpgrade( f182_local17, f182_local16 ) then
 			if f182_local14[1] == "primary" then
 				f182_local10 = true
 			else
 				f182_local11 = true
 			end
-			f182_local12 = Engine[0xB99CB645DEAEB92]( f182_local15, Engine[0x58B87258E0EBAD0]( CoD.WeaponAttachmentsUtility.GetBaseAttachmentRef( f182_local17, f182_local16 ) ), f182_local4 )
+			f182_local12 = Engine[@"getattachmentindexbyattachmenttableindex"]( f182_local15, Engine[@"getattachmentindexbyref"]( CoD.WeaponAttachmentsUtility.GetBaseAttachmentRef( f182_local17, f182_local16 ) ), f182_local4 )
 			f182_local13 = CoD.BonuscardUtility.LoadoutSlotInfoTable[CoD.CACUtility.GetAttachedItemSlot( f182_local3, f182_local12, CoD.CACUtility.GetAttachmentListForSlot( f182_local14[1] ) )] ~= nil
 		end
 	end
@@ -4198,7 +4198,7 @@ CoD.CACUtility.PrepareOverCapactiyList = function ( f182_arg0, f182_arg1 )
 				if f182_local25 then
 					f182_local25 = f182_local28.weaponSlot:get()
 				end
-				if LUI.startswith( f182_local25, "primary.attachment" ) or LUI.startswith( f182_local25, "secondary.attachment" ) or Engine[0x981A63C8A70462F]( f182_local23, CoD.CACUtility.GetStatIndexOffsetForLoadoutSlot( f182_local25, f182_local4 ), f182_local4 ) > 0 then
+				if LUI.startswith( f182_local25, "primary.attachment" ) or LUI.startswith( f182_local25, "secondary.attachment" ) or Engine[@"getitemallocationcost"]( f182_local23, CoD.CACUtility.GetStatIndexOffsetForLoadoutSlot( f182_local25, f182_local4 ), f182_local4 ) > 0 then
 					if f182_local19 > 0 then
 						f182_local21 = f182_local0[f182_local19].models.loadoutSlot
 					end
@@ -4238,28 +4238,28 @@ CoD.CACUtility.PrepareOverCapactiyList = function ( f182_arg0, f182_arg1 )
 							end
 						end
 					end
-					if f182_local5 == "talent.4" and f182_local24 == 0x7D681250287807D then
+					if f182_local5 == "talent.4" and f182_local24 == @"bonuscard_perk_1_greed" then
 						
 					end
-					if f182_local5 == "talent.5" and f182_local24 == 0x927FEA821FFA36C then
+					if f182_local5 == "talent.5" and f182_local24 == @"bonuscard_perk_2_greed" then
 						
 					end
-					if f182_local5 == "talent.6" and f182_local24 == 0xB03ADC532F77517 then
+					if f182_local5 == "talent.6" and f182_local24 == @"bonuscard_perk_3_greed" then
 						
 					end
-					if (f182_local5 == "talent.2" or f182_local5 == "talent.3") and f182_local24 == 0xE8E25CA6D4FFCAA then
+					if (f182_local5 == "talent.2" or f182_local5 == "talent.3") and f182_local24 == @"bonuscard_perk_1_gluttony" then
 						
 					end
-					if (f182_local5 == "talent.1" or f182_local5 == "talent.3") and f182_local24 == 0xE2D46C69C58DED1 then
+					if (f182_local5 == "talent.1" or f182_local5 == "talent.3") and f182_local24 == @"bonuscard_perk_2_gluttony" then
 						
 					end
-					if (f182_local5 == "talent.1" or f182_local5 == "talent.2") and f182_local24 == 0x8EC14572D948374 then
+					if (f182_local5 == "talent.1" or f182_local5 == "talent.2") and f182_local24 == @"bonuscard_perk_3_gluttony" then
 						
 					end
-					if LUI.startswith( f182_local5, "primary" ) and f182_local24 == 0x439C6CFA8A0CFEB then
+					if LUI.startswith( f182_local5, "primary" ) and f182_local24 == @"bonuscard_underkill" then
 						
 					end
-					if LUI.startswith( f182_local5, "secondary" ) and f182_local24 == 0x1F0C17573BB2E79 then
+					if LUI.startswith( f182_local5, "secondary" ) and f182_local24 == @"bonuscard_overkill" then
 						
 					end
 					if (f182_local5 == "primary.attachment.4" or f182_local5 == "primary.attachment.5" or f182_local5 == "primary.attachment.6") and CoD.BonuscardUtility.IsBonuscardOfTypeList( CoD.BonuscardUtility.PrimaryGunfighterWildcards, f182_local24 ) then
@@ -4268,10 +4268,10 @@ CoD.CACUtility.PrepareOverCapactiyList = function ( f182_arg0, f182_arg1 )
 					if (f182_local5 == "secondary.attachment.4" or f182_local5 == "secondary.attachment.5" or f182_local5 == "secondary.attachment.6") and CoD.BonuscardUtility.IsBonuscardOfTypeList( CoD.BonuscardUtility.SecondaryGunfighterWildcards, f182_local24 ) then
 						
 					end
-					if f182_local5 == "primary.attachment.5" and f182_local24 == 0xCFB7582AD73158B and f182_local8 then
+					if f182_local5 == "primary.attachment.5" and f182_local24 == @"bonuscard_primary_operator_mod" and f182_local8 then
 						
 					end
-					if f182_local5 == "secondary.attachment.5" and f182_local24 == 0x846D8E9A76A4A77 and f182_local8 then
+					if f182_local5 == "secondary.attachment.5" and f182_local24 == @"bonuscard_secondary_operator_mod" and f182_local8 then
 						
 					end
 					if f182_local23 > CoD.CACUtility.EmptyItemIndex then
@@ -4356,13 +4356,13 @@ end
 CoD.CACUtility.GetWeaponAndAttachments = function ( f189_arg0, f189_arg1 )
 	local f189_local0 = 0
 	local f189_local1 = false
-	local f189_local2 = Engine[0x40E824FE270E174]( Engine[0x4DF5CFBC1771947]( f189_arg1 ), "currentWeapon" )
+	local f189_local2 = Engine[@"getmodel"]( Engine[@"getmodelforcontroller"]( f189_arg1 ), "currentWeapon" )
 	if f189_local2 == nil then
 		return f189_local0, f189_local1
 	end
 	for f189_local3 = 1, 4, 1 do
-		local f189_local6 = Engine[0x40E824FE270E174]( f189_local2, "attachmentName" .. f189_local3 )
-		local f189_local7 = Engine[0x614D394F6F9A18D]( f189_local6 )
+		local f189_local6 = Engine[@"getmodel"]( f189_local2, "attachmentName" .. f189_local3 )
+		local f189_local7 = Engine[@"getmodelvalue"]( f189_local6 )
 		if f189_local6 and f189_local7 ~= "" then
 			f189_local0 = f189_local0 + 1
 		end
@@ -4371,19 +4371,19 @@ CoD.CACUtility.GetWeaponAndAttachments = function ( f189_arg0, f189_arg1 )
 			f189_local1 = true
 		end
 	end
-	f189_arg0.currentWeapon = Engine[0x614D394F6F9A18D]( Engine[0x40E824FE270E174]( f189_local2, "weaponName" ) )
+	f189_arg0.currentWeapon = Engine[@"getmodelvalue"]( Engine[@"getmodel"]( f189_local2, "weaponName" ) )
 	return f189_local0, f189_local1
 end
 CoD.CACUtility.GetLocalizedAttachmentsString = function ( f190_arg0 )
 	local f190_local0 = ""
 	if f190_arg0.currentAttachment1 ~= nil and f190_arg0.currentAttachment1 ~= "" then
-		f190_local0 = Engine[0xED84C33EC5F01EA]( f190_arg0.currentAttachment1 )
+		f190_local0 = Engine[@"localize"]( f190_arg0.currentAttachment1 )
 	end
 	if f190_arg0.currentAttachment2 ~= nil and f190_arg0.currentAttachment2 ~= "" then
-		f190_local0 = f190_local0 .. " + " .. Engine[0xED84C33EC5F01EA]( f190_arg0.currentAttachment2 )
+		f190_local0 = f190_local0 .. " + " .. Engine[@"localize"]( f190_arg0.currentAttachment2 )
 	end
 	if f190_arg0.currentAttachment3 ~= nil and f190_arg0.currentAttachment3 ~= "" then
-		f190_local0 = f190_local0 .. " + " .. Engine[0xED84C33EC5F01EA]( f190_arg0.currentAttachment3 )
+		f190_local0 = f190_local0 .. " + " .. Engine[@"localize"]( f190_arg0.currentAttachment3 )
 	end
 	return f190_local0
 end
@@ -4396,14 +4396,14 @@ end
 CoD.CACUtility.ForceStreamCACImages = function ( f192_arg0, f192_arg1 )
 	local f192_local0 = {}
 	for f192_local4, f192_local5 in pairs( CoD.CACUtility.GetUnlockableItemTable() ) do
-		if CoD.BitUtility.IsBitSet( f192_local5.modes, f192_arg1 ) and f192_local5[0x32A46624FFC3379] ~= 1 then
-			CoD.CACUtility.AddToTableIfNotEmpty( f192_local0, Engine[0xBF99001028052B9]( CoD.CACUtility.GetPreviewImageLarge( f192_arg1, f192_local5 ) ) )
-			CoD.CACUtility.AddToTableIfNotEmpty( f192_local0, Engine[0xBF99001028052B9]( CoD.CACUtility.GetPreviewImage( f192_arg1, f192_local5 ) ) )
+		if CoD.BitUtility.IsBitSet( f192_local5.modes, f192_arg1 ) and f192_local5[@"hideinmenu"] ~= 1 then
+			CoD.CACUtility.AddToTableIfNotEmpty( f192_local0, Engine[@"hash_1BF99001028052B9"]( CoD.CACUtility.GetPreviewImageLarge( f192_arg1, f192_local5 ) ) )
+			CoD.CACUtility.AddToTableIfNotEmpty( f192_local0, Engine[@"hash_1BF99001028052B9"]( CoD.CACUtility.GetPreviewImage( f192_arg1, f192_local5 ) ) )
 		end
 	end
 	CoD.CACUtility.ForceStreamedImages = CoD.BaseUtility.ForceStreamHelper( CoD.CACUtility.ForceStreamedImages, f192_local0 )
-	if Engine[0x3EAC408F958FF05]() ~= Enum[0x9C0C2196D8313A0][0xB22E0240605CFFE] then
-		Engine[0xBB4D9766B6D0C88]( f192_arg0, CoD.CACUtility.GetSelectedCustomClass( f192_arg0, f192_arg1 ) )
+	if Engine[@"currentsessionmode"]() ~= Enum[@"emodes"][@"mode_invalid"] then
+		Engine[@"streamsetcustomclass"]( f192_arg0, CoD.CACUtility.GetSelectedCustomClass( f192_arg0, f192_arg1 ) )
 	end
 end
 CoD.CACUtility.ForceStreamedImagesInGame = {}
@@ -4421,7 +4421,7 @@ CoD.CACUtility.ForceStreamCACImagesInGame = function ( f193_arg0, f193_arg1 )
 		} ) do
 			if f193_local16[f193_local5] then
 				CoD.CACUtility.AddToTableIfNotEmpty( f193_local0, f193_local16[f193_local5].image:get() )
-				CoD.CACUtility.AddToTableIfNotEmpty( f193_local0, Engine[0xBF99001028052B9]( f193_local16[f193_local5].imageLarge:get() ) )
+				CoD.CACUtility.AddToTableIfNotEmpty( f193_local0, Engine[@"hash_1BF99001028052B9"]( f193_local16[f193_local5].imageLarge:get() ) )
 			end
 		end
 		for f193_local4, f193_local5 in ipairs( {
@@ -4438,7 +4438,7 @@ end
 CoD.WGSV_Category = {}
 CoD.WGSV_Category.WEAPON = 1
 CoD.WGSV_Category.GUNSMITH_VARIANT = 2
-DataSources.WGSV_Category = Engine[0xA798E4552F5E872]( Engine[0x8DF2E5447F384B9](), "WGSV_Category" )
+DataSources.WGSV_Category = Engine[@"createmodel"]( Engine[@"getglobalmodel"](), "WGSV_Category" )
 DataSourceHelpers.PerControllerDataSourceSetup( "AttachmentMenu", "AttachmentMenu", function ( f194_arg0, f194_arg1 )
 	local f194_local0 = CoD.perController[f194_arg1].classModel
 	local f194_local1 = CoD.perController[f194_arg1].weaponCategory
@@ -4461,10 +4461,10 @@ CoD.CACUtility.GetWeaponNameHashAndAttachmentsForXcam = function ( f195_arg0, f1
 	if f195_local1 or f195_arg5 then
 		local f195_local2 = f195_arg5 or f195_local1:get()
 		if f195_local2 == CoD.CACUtility.EmptyItemIndex then
-			return 0x0, ""
+			return @"hash_0", ""
 		end
-		local f195_local3 = Engine[0xB98952F69D937F9]( f195_local2, Enum[0x6EB546760F890D2][0x569E84652131CD7], f195_arg4 )
-		local f195_local4 = Engine[0x2964239F2151F6F]( f195_local2, f195_arg4 )
+		local f195_local3 = Engine[@"hash_7B98952F69D937F9"]( f195_local2, Enum[@"statindexoffset"][@"hash_6569E84652131CD7"], f195_arg4 )
+		local f195_local4 = Engine[@"getunlockableitemkvpinfo"]( f195_local2, f195_arg4 )
 		local f195_local5 = nil
 		if f195_arg2 == "primary" then
 			f195_local5 = CoD.CACUtility.PrimaryAttachmentSlotNameList
@@ -4485,12 +4485,12 @@ CoD.CACUtility.GetWeaponNameHashAndAttachmentsForXcam = function ( f195_arg0, f1
 				if f195_local16 > CoD.CACUtility.EmptyItemIndex and (f195_local16 ~= f195_local6 or not f195_local8) then
 					table.insert( f195_local10, {
 						itemIndex = f195_local16,
-						ref = Engine[0x2E29FB421AD554B]( f195_local2, f195_local16, f195_arg4 )
+						ref = Engine[@"getattachmentref"]( f195_local2, f195_local16, f195_arg4 )
 					} )
 				end
 			end
 			for f195_local14, f195_local15 in ipairs( f195_local10 ) do
-				if f195_arg6 == nil or Engine[0x628AD12A64D07F]( f195_local2, f195_arg6, f195_local15.itemIndex ) then
+				if f195_arg6 == nil or Engine[@"areattachmentscompatible"]( f195_local2, f195_arg6, f195_local15.itemIndex ) then
 					f195_local9 = LUI.appendStringWithDelimiter( f195_local9, f195_local15.ref, "+" )
 				end
 			end
@@ -4501,7 +4501,7 @@ CoD.CACUtility.GetWeaponNameHashAndAttachmentsForXcam = function ( f195_arg0, f1
 	end
 end
 CoD.CACUtility.UnequipIncompatibleAttachments = function ( f196_arg0, f196_arg1, f196_arg2, f196_arg3, f196_arg4 )
-	local f196_local0 = Engine[0xED9C4D9D6233895]( f196_arg0, f196_arg1, f196_arg4 )
+	local f196_local0 = Engine[@"getcustomclasscacroot"]( f196_arg0, f196_arg1, f196_arg4 )
 	local f196_local1 = f196_arg2
 	local f196_local2 = false
 	local f196_local3 = LUI.splitString( f196_local1, "." )
@@ -4510,7 +4510,7 @@ CoD.CACUtility.UnequipIncompatibleAttachments = function ( f196_arg0, f196_arg1,
 		local f196_local5 = LUI.getTableFromFieldList( f196_local3, f196_local0 )
 		if f196_local5 then
 			for f196_local6 = 0, #f196_local5 - 1, 1 do
-				if not Engine[0x628AD12A64D07F]( f196_local4, f196_arg3, f196_local5[f196_local6]:get(), f196_arg4 ) then
+				if not Engine[@"areattachmentscompatible"]( f196_local4, f196_arg3, f196_local5[f196_local6]:get(), f196_arg4 ) then
 					f196_local2 = true
 					f196_local5[f196_local6]:set( CoD.CACUtility.EmptyItemIndex )
 				end
@@ -4520,14 +4520,14 @@ CoD.CACUtility.UnequipIncompatibleAttachments = function ( f196_arg0, f196_arg1,
 	return f196_local2
 end
 CoD.CACUtility.AreAnyAttachmentsIncompatible = function ( f197_arg0, f197_arg1, f197_arg2, f197_arg3, f197_arg4 )
-	local f197_local0 = Engine[0xED9C4D9D6233895]( f197_arg0, f197_arg1, f197_arg4 )
+	local f197_local0 = Engine[@"getcustomclasscacroot"]( f197_arg0, f197_arg1, f197_arg4 )
 	local f197_local1 = LUI.splitString( CoD.CACUtility.GetDDLPathForModelPath( f197_local0, f197_arg2 ), "." )
 	if #f197_local1 > 1 then
 		local f197_local2 = f197_local0[f197_local1[1]].itemIndex:get()
 		local f197_local3 = LUI.getTableFromFieldList( f197_local1, f197_local0 )
 		if f197_local3 then
 			for f197_local4 = 0, #f197_local3 - 1, 1 do
-				if not Engine[0x628AD12A64D07F]( f197_local2, f197_arg3, f197_local3[f197_local4]:get(), f197_arg4 ) then
+				if not Engine[@"areattachmentscompatible"]( f197_local2, f197_arg3, f197_local3[f197_local4]:get(), f197_arg4 ) then
 					return true
 				end
 			end
@@ -4549,7 +4549,7 @@ CoD.CACUtility.GetAttachmentIndexForSlotOrList = function ( f198_arg0 )
 end
 CoD.CACUtility.GetAtachmentGroupForModel = function ( f199_arg0, f199_arg1 )
 	if f199_arg0 then
-		return Engine[0xB8DE256555CACF5]( f199_arg0.weaponIndex:get(), f199_arg0.itemIndex:get(), f199_arg1 )
+		return Engine[@"hash_2B8DE256555CACF5"]( f199_arg0.weaponIndex:get(), f199_arg0.itemIndex:get(), f199_arg1 )
 	else
 		
 	end
@@ -4585,7 +4585,7 @@ CoD.CACUtility.RemoveAttachmentFromClassHelper = function ( f202_arg0, f202_arg1
 	return f202_local0
 end
 CoD.CACUtility.GetMutuallyExclusiveAttachments = function ( f203_arg0, f203_arg1, f203_arg2, f203_arg3, f203_arg4 )
-	local f203_local0 = Engine[0xED9C4D9D6233895]( f203_arg0, f203_arg1, f203_arg4 )
+	local f203_local0 = Engine[@"getcustomclasscacroot"]( f203_arg0, f203_arg1, f203_arg4 )
 	local f203_local1 = LUI.splitString( CoD.CACUtility.GetDDLPathForModelPath( f203_local0, f203_arg2 ), "." )
 	if #f203_local1 > 1 then
 		local f203_local2 = tonumber( f203_local1[#f203_local1] )
@@ -4593,8 +4593,8 @@ CoD.CACUtility.GetMutuallyExclusiveAttachments = function ( f203_arg0, f203_arg1
 		local f203_local3 = f203_local0[f203_local1[1]].itemIndex:get()
 		local f203_local4 = LUI.getTableFromFieldList( f203_local1, f203_local0 )
 		local f203_local5 = {}
-		local f203_local6 = CoD.CACUtility.GetUnlockableItemInfoField( f203_local3, f203_arg4, 0x5665460432375A7 )
-		local f203_local7 = Engine[0xB8DE256555CACF5]( f203_local3, f203_arg3, f203_arg4 ) == Enum[0x7420BCDBDE17A84][0x6EE211053211305]
+		local f203_local6 = CoD.CACUtility.GetUnlockableItemInfoField( f203_local3, f203_arg4, @"hash_5665460432375A7" )
+		local f203_local7 = Engine[@"hash_2B8DE256555CACF5"]( f203_local3, f203_arg3, f203_arg4 ) == Enum[@"eattachmentgroup"][@"hash_26EE211053211305"]
 		local f203_local8 = nil
 		if f203_local6 then
 			f203_local8 = LUI.splitString( f203_local6, " " )
@@ -4603,19 +4603,19 @@ CoD.CACUtility.GetMutuallyExclusiveAttachments = function ( f203_arg0, f203_arg1
 			for f203_local9 = 0, #f203_local4 - 1, 1 do
 				local f203_local12 = f203_local4[f203_local9]:get()
 				if f203_local12 > CoD.CACUtility.EmptyItemIndex and f203_local12 ~= f203_arg3 then
-					if not Engine[0x628AD12A64D07F]( f203_local3, f203_arg3, f203_local12, f203_arg4 ) then
+					if not Engine[@"areattachmentscompatible"]( f203_local3, f203_arg3, f203_local12, f203_arg4 ) then
 						table.insert( f203_local5, {
-							ref = Engine[0x2E29FB421AD554B]( f203_local3, f203_local12, f203_arg4 ),
+							ref = Engine[@"getattachmentref"]( f203_local3, f203_local12, f203_arg4 ),
 							attachmentIndex = f203_local12
 						} )
 					end
 					if f203_local6 then
-						local f203_local13 = Engine[0x2E29FB421AD554B]( f203_local3, f203_local12, f203_arg4 )
-						local f203_local14 = Engine[0xB8DE256555CACF5]( f203_local3, f203_local12, f203_arg4 ) == Enum[0x7420BCDBDE17A84][0x6EE211053211305]
+						local f203_local13 = Engine[@"getattachmentref"]( f203_local3, f203_local12, f203_arg4 )
+						local f203_local14 = Engine[@"hash_2B8DE256555CACF5"]( f203_local3, f203_local12, f203_arg4 ) == Enum[@"eattachmentgroup"][@"hash_26EE211053211305"]
 						local f203_local15 = f203_local12
 						if f203_local7 or f203_local14 then
 							if f203_local14 then
-								f203_local13 = Engine[0x2E29FB421AD554B]( f203_local3, f203_arg3, f203_arg4 )
+								f203_local13 = Engine[@"getattachmentref"]( f203_local3, f203_arg3, f203_arg4 )
 								f203_local15 = f203_arg3
 							end
 							for f203_local19, f203_local20 in ipairs( f203_local8 ) do
@@ -4638,7 +4638,7 @@ CoD.CACUtility.GetMutuallyExclusiveAttachments = function ( f203_arg0, f203_arg1
 end
 CoD.CACUtility.GetUsedAllocation = function ( f204_arg0, f204_arg1, f204_arg2 )
 	local f204_local0 = 0
-	local f204_local1 = Engine[0xED9C4D9D6233895]( f204_arg0, f204_arg1, f204_arg2 )
+	local f204_local1 = Engine[@"getcustomclasscacroot"]( f204_arg0, f204_arg1, f204_arg2 )
 	for f204_local7, f204_local8 in ipairs( CoDLoadoutsShared.loadoutSlotNames[f204_arg2] ) do
 		local f204_local5 = nil
 		local f204_local9 = LUI.splitString( f204_local8.name, "." )
@@ -4659,14 +4659,14 @@ CoD.CACUtility.GetUsedAllocation = function ( f204_arg0, f204_arg1, f204_arg2 )
 					f204_local0 = f204_local0 + 1
 				end
 			end
-			f204_local0 = f204_local0 + Engine[0x981A63C8A70462F]( f204_local6, f204_local8.statIndexOffset, f204_arg2 )
+			f204_local0 = f204_local0 + Engine[@"getitemallocationcost"]( f204_local6, f204_local8.statIndexOffset, f204_arg2 )
 		end
 	end
 	f204_local2 = function ( f205_arg0 )
 		local f205_local0 = f204_local1[f205_arg0]
 		local f205_local1 = f205_local0.itemIndex:get()
 		for f205_local2 = 1, #f205_local0.attachment, 1 do
-			f204_local0 = f204_local0 + Engine[0x73A2B3FF8B441AD]( Engine[0x174D9B6F1E719ED]( f205_local1, f205_local0.attachment[f205_local2 - 1]:get(), f204_arg2 ) )
+			f204_local0 = f204_local0 + Engine[@"getattachmentallocationcost"]( Engine[@"getitemattachment"]( f205_local1, f205_local0.attachment[f205_local2 - 1]:get(), f204_arg2 ) )
 		end
 	end
 	
@@ -4675,34 +4675,34 @@ CoD.CACUtility.GetUsedAllocation = function ( f204_arg0, f204_arg1, f204_arg2 )
 	return f204_local0
 end
 CoD.CACUtility.GetMaxAllocation = function ( f206_arg0 )
-	local f206_local0 = Engine[0x3802266695B2721]( f206_arg0 )
+	local f206_local0 = Engine[@"getmaxallocation"]( f206_arg0 )
 	if f206_local0 > CoDLoadoutsShared.MaxAllocation and not IsCustomLobby() then
 		f206_local0 = CoDLoadoutsShared.MaxAllocation
 	end
 	return f206_local0
 end
 CoD.CACUtility.GetLastSelectedLoadoutState = function ( f207_arg0, f207_arg1 )
-	local f207_local0 = Engine[0x8BF970606552F4C]( f207_arg0, Enum[0xBBD4F9E70101BA8][0x9E0698F1D820882] )
+	local f207_local0 = Engine[@"storagegetbuffer"]( f207_arg0, Enum[@"storagefiletype"][@"storage_common_settings"] )
 	if f207_local0 then
 		if IsLobbyNetworkModeLAN() then
-			if f207_arg1 == Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5] then
-				return f207_local0[0xDB455FA658B331D]
-			elseif f207_arg1 == Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A] then
-				return f207_local0[0x969FE3983970BC9][Engine[0xBBE3328FE08B8C7]()]
+			if f207_arg1 == Enum[@"emodes"][@"mode_multiplayer"] then
+				return f207_local0[@"hash_3DB455FA658B331D"]
+			elseif f207_arg1 == Enum[@"emodes"][@"mode_zombies"] then
+				return f207_local0[@"hash_5969FE3983970BC9"][Engine[@"hash_6BBE3328FE08B8C7"]()]
 			end
-		elseif f207_arg1 == Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5] then
-			if Engine[0x994291BF56E485B]( Enum[0xF7AE5746E79F2CE][0x95910ACF90F64AD] ) then
-				return f207_local0[0xE2485ECD868DC8C]
-			elseif Engine[0x994291BF56E485B]( Enum[0xF7AE5746E79F2CE][0x5E90ACB801E4A3D] ) then
-				return f207_local0[0xCBB56AD27125D0A]
+		elseif f207_arg1 == Enum[@"emodes"][@"mode_multiplayer"] then
+			if Engine[@"gamemodeismode"]( Enum[@"egamemodes"][@"mode_game_matchmaking_playlist"] ) then
+				return f207_local0[@"hash_2E2485ECD868DC8C"]
+			elseif Engine[@"gamemodeismode"]( Enum[@"egamemodes"][@"mode_game_matchmaking_manual"] ) then
+				return f207_local0[@"hash_7CBB56AD27125D0A"]
 			else
-				return f207_local0[0x2ECD45414EE94FC]
+				return f207_local0[@"hash_22ECD45414EE94FC"]
 			end
-		elseif f207_arg1 == Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A] then
-			if Engine[0x994291BF56E485B]( Enum[0xF7AE5746E79F2CE][0x95910ACF90F64AD] ) then
-				return f207_local0[0xE39A74D8939A41D][Engine[0xBBE3328FE08B8C7]()]
+		elseif f207_arg1 == Enum[@"emodes"][@"mode_zombies"] then
+			if Engine[@"gamemodeismode"]( Enum[@"egamemodes"][@"mode_game_matchmaking_playlist"] ) then
+				return f207_local0[@"hash_4E39A74D8939A41D"][Engine[@"hash_6BBE3328FE08B8C7"]()]
 			else
-				return f207_local0[0x592D7220605B41D][Engine[0xBBE3328FE08B8C7]()]
+				return f207_local0[@"hash_7592D7220605B41D"][Engine[@"hash_6BBE3328FE08B8C7"]()]
 			end
 		end
 	end
@@ -4713,25 +4713,25 @@ CoD.CACUtility.SetSelectedCustomClass = function ( f208_arg0, f208_arg1, f208_ar
 	if f208_local0 then
 		f208_local0:set( f208_arg2 )
 	end
-	local f208_local1 = Engine[0x4DF5CFBC1771947]( f208_arg0 )
+	local f208_local1 = Engine[@"getmodelforcontroller"]( f208_arg0 )
 	local f208_local2 = f208_local1:create( "selectedCustomClass" )
 	f208_local2:set( f208_arg2 )
-	if f208_arg1 == Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A] and CoD.ZMLoadoutUtility then
+	if f208_arg1 == Enum[@"emodes"][@"mode_zombies"] and CoD.ZMLoadoutUtility then
 		CoD.ZMLoadoutUtility.SetEquippedClass( f208_arg0, f208_arg2 )
 	end
 end
 CoD.CACUtility.UpdateLastSelectLoadoutState = function ( f209_arg0 )
-	local f209_local0 = Engine[0x3EAC408F958FF05]()
-	if f209_local0 == Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A] then
+	local f209_local0 = Engine[@"currentsessionmode"]()
+	if f209_local0 == Enum[@"emodes"][@"mode_zombies"] then
 		local f209_local1 = CoD.CACUtility.GetLastSelectedLoadoutState( f209_arg0, f209_local0 )
 		if f209_local1 then
 			local f209_local2 = CoD.ZMLoadoutUtility.GetLoadoutStorageBuffer( f209_arg0 )
 			if f209_local2 then
 				local f209_local3 = f209_local2.cacLoadouts
 				if f209_local3 then
-					local f209_local4 = f209_local3[Engine[0xBBE3328FE08B8C7]()]
+					local f209_local4 = f209_local3[Engine[@"hash_6BBE3328FE08B8C7"]()]
 					if f209_local4 then
-						local f209_local5 = f209_local4[0x78E9CEF0ED273BD]
+						local f209_local5 = f209_local4[@"hash_78E9CEF0ED273BD"]
 						if f209_local5 then
 							f209_local1:set( f209_local5:get() )
 						end
@@ -4750,22 +4750,22 @@ CoD.CACUtility.GetSelectedCustomClass = function ( f210_arg0, f210_arg1 )
 	end
 end
 CoD.CACUtility.GetCustomClassCount = function ( f211_arg0, f211_arg1 )
-	if (Dvar[0xB2B2EC13351CADB]:get() == true or Dvar[0xB2B2EC13351CADB]:get() == 1) and IsArenaMode() then
-		return Enum[0x33AC0FF9A1537DE][0x3618B16E81F1FBD]
+	if (Dvar[@"hash_4B2B2EC13351CADB"]:get() == true or Dvar[@"hash_4B2B2EC13351CADB"]:get() == 1) and IsArenaMode() then
+		return Enum[@"loadoutclass_t"][@"custom_class_count"]
 	else
-		return Engine[0x590DA7CD01085D3]( f211_arg0, f211_arg1 )
+		return Engine[@"getcustomclasscount"]( f211_arg0, f211_arg1 )
 	end
 end
 CoD.CACUtility.SelectCustomClass = function ( f212_arg0, f212_arg1 )
 	local f212_local0 = f212_arg1:getModel()
 	f212_local0 = f212_local0.classNum:get()
-	CoD.CACUtility.SetSelectedCustomClass( f212_arg0, Engine[0x3EAC408F958FF05](), f212_local0 )
-	Engine[0xBB4D9766B6D0C88]( f212_arg0, f212_local0 )
+	CoD.CACUtility.SetSelectedCustomClass( f212_arg0, Engine[@"currentsessionmode"](), f212_local0 )
+	Engine[@"streamsetcustomclass"]( f212_arg0, f212_local0 )
 end
 CoD.CACUtility.InitSelectedCustomClassModel = function ( f213_arg0 )
 	CoD.CACUtility.UpdateLastSelectLoadoutState( f213_arg0 )
-	local f213_local0 = CoD.CACUtility.GetSelectedCustomClass( f213_arg0, Engine[0x3EAC408F958FF05]() )
-	local f213_local1 = Engine[0x4DF5CFBC1771947]( f213_arg0 )
+	local f213_local0 = CoD.CACUtility.GetSelectedCustomClass( f213_arg0, Engine[@"currentsessionmode"]() )
+	local f213_local1 = Engine[@"getmodelforcontroller"]( f213_arg0 )
 	local f213_local2 = f213_local1:create( "selectedCustomClass" )
 	f213_local2:set( f213_local0 )
 end
@@ -4798,14 +4798,14 @@ CoD.CACUtility.GetLoadoutSlotStringForRef = function ( f217_arg0 )
 	end
 end
 CoD.CACUtility.IsProgressionEnabled = function ( f218_arg0 )
-	if (f218_arg0 == Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5] or f218_arg0 == Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A]) and IsLive() and not Engine[0x994291BF56E485B]( Enum[0xF7AE5746E79F2CE][0x5E90ACB801E4A3D] ) and not Engine[0x994291BF56E485B]( Enum[0xF7AE5746E79F2CE][0x7B5630CD29180CB] ) then
+	if (f218_arg0 == Enum[@"emodes"][@"mode_multiplayer"] or f218_arg0 == Enum[@"emodes"][@"mode_zombies"]) and IsLive() and not Engine[@"gamemodeismode"]( Enum[@"egamemodes"][@"mode_game_matchmaking_manual"] ) and not Engine[@"gamemodeismode"]( Enum[@"egamemodes"][@"hash_27B5630CD29180CB"] ) then
 		return true
 	else
 		return false
 	end
 end
 CoD.CACUtility.IsProgressionWithWarzoneEnabled = function ( f219_arg0 )
-	if (f219_arg0 == Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5] or f219_arg0 == Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A] or f219_arg0 == Enum[0x9C0C2196D8313A0][0xBF1DCC8138A9D39]) and IsLive() and not Engine[0x994291BF56E485B]( Enum[0xF7AE5746E79F2CE][0x5E90ACB801E4A3D] ) and not Engine[0x994291BF56E485B]( Enum[0xF7AE5746E79F2CE][0x7B5630CD29180CB] ) then
+	if (f219_arg0 == Enum[@"emodes"][@"mode_multiplayer"] or f219_arg0 == Enum[@"emodes"][@"mode_zombies"] or f219_arg0 == Enum[@"emodes"][@"mode_warzone"]) and IsLive() and not Engine[@"gamemodeismode"]( Enum[@"egamemodes"][@"mode_game_matchmaking_manual"] ) and not Engine[@"gamemodeismode"]( Enum[@"egamemodes"][@"hash_27B5630CD29180CB"] ) then
 		return true
 	else
 		return false
@@ -4827,14 +4827,14 @@ CoD.CACUtility.GetLoadoutListForSlot = function ( f220_arg0 )
 	end
 end
 CoD.CACUtility.GetSpecialistEquipmentForSpecialistIndex = function ( f221_arg0, f221_arg1 )
-	local f221_local0 = Engine[0x4DF5CFBC1771947]( f221_arg0 )
+	local f221_local0 = Engine[@"getmodelforcontroller"]( f221_arg0 )
 	f221_local0 = f221_local0.PositionLoadoutList
 	local f221_local1 = CoD.PlayerRoleUtility.GetFirstHeroFromHeroListForMode( f221_arg1 )
 	if f221_local0 and f221_local0.SelectedCharacterIndex then
 		f221_local1 = f221_local0.SelectedCharacterIndex:get()
 	end
 	if f221_local1 then
-		local f221_local2 = Engine[0xE6A05FAABDB1597]( f221_arg1, f221_local1 )
+		local f221_local2 = Engine[@"getpositionroledefaultloadout"]( f221_arg1, f221_local1 )
 		return f221_local2.primarygrenade and f221_local2.primarygrenade.refHash or 0x0
 	else
 		
@@ -4853,7 +4853,7 @@ CoD.CACUtility.GetLoadoutListItemUnequipSound = function ( f222_arg0 )
 end
 CoD.CACUtility.GetTalentGearXModel = function ( f223_arg0, f223_arg1 )
 	if CoD.CACUtility.EmptyItemIndex < f223_arg0 then
-		return Engine[0xC53F8D38DF9042B]( "c_t8_mp_spe_cac_" .. Engine[0xD5D69BA555E016D]( f223_arg0, Enum[0x6EB546760F890D2][0x8EA6ADA81FD4511], f223_arg1 ) )
+		return Engine[@"converttoxhash"]( "c_t8_mp_spe_cac_" .. Engine[@"getitemref"]( f223_arg0, Enum[@"statindexoffset"][@"hash_68EA6ADA81FD4511"], f223_arg1 ) )
 	else
 		return 0x0
 	end
@@ -4865,13 +4865,13 @@ CoD.CACUtility.GetBonuscardXModel = function ( f225_arg0, f225_arg1 )
 	return 0x0
 end
 CoD.CACUtility.WeaponPersonalizationUpdated = function ( f226_arg0 )
-	local f226_local0 = Engine[0x4DF5CFBC1771947]( f226_arg0 )
+	local f226_local0 = Engine[@"getmodelforcontroller"]( f226_arg0 )
 	f226_local0["CustomClassList.weaponPersonalizationUpdated"].set( f226_local0["CustomClassList.weaponPersonalizationUpdated"], true )
 end
 CoD.CACUtility.UpdateCustomClassModelIfModified = function ( f227_arg0, f227_arg1 )
 	local f227_local0 = CoD.BaseUtility.GetMenuSessionMode( f227_arg0 )
-	if f227_local0 == Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5] then
-		local f227_local1 = Engine[0x4DF5CFBC1771947]( f227_arg1 )
+	if f227_local0 == Enum[@"emodes"][@"mode_multiplayer"] then
+		local f227_local1 = Engine[@"getmodelforcontroller"]( f227_arg1 )
 		f227_local1 = f227_local1["CustomClassList.weaponPersonalizationUpdated"]
 		if f227_local1 and f227_local1:get() then
 			f227_local1:set( false )
@@ -4895,7 +4895,7 @@ CoD.CACUtility.UpdateTempLargeImage = function ( f228_arg0, f228_arg1, f228_arg2
 				f228_local0 = f228_arg1[f228_arg2].imageLarge and f228_arg1[f228_arg2].imageLarge:get()
 			end
 			if not f228_local0 then
-				f228_local0 = RegisterImage( 0x7615068F50B3D66 )
+				f228_local0 = RegisterImage( @"blacktransparent" )
 			end
 			f228_arg1.tempLargeImageForModel:set( f228_local0 )
 			f228_arg1.tempLargeImageForModel:forceNotifySubscriptions()
@@ -4915,23 +4915,23 @@ CoD.CACUtility.UpdateWeaponModelHelper = function ( f229_arg0, f229_arg1, f229_a
 		if f229_arg3 == "primarygrenadecount" and f229_arg4 > CoD.CACUtility.EmptyItemIndex then
 			f229_arg4 = f229_arg2.primarygrenade.itemIndex:get()
 		end
-		f229_local0 = Engine[0xB98952F69D937F9]( f229_arg4, Enum[0x6EB546760F890D2][0x569E84652131CD7], f229_arg5 )
-		if f229_arg5 == Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5] then
+		f229_local0 = Engine[@"hash_7B98952F69D937F9"]( f229_arg4, Enum[@"statindexoffset"][@"hash_6569E84652131CD7"], f229_arg5 )
+		if f229_arg5 == Enum[@"emodes"][@"mode_multiplayer"] then
 			if f229_local0 == CoDShared.DefaultSpecialistEquipment then
 				f229_local0 = 0x0
 				if IsCurrentMenu( f229_arg0, "SpecialistEquipmentSelect" ) then
 					f229_local0 = CoD.CACUtility.GetSpecialistEquipmentForSpecialistIndex( f229_arg1, f229_arg5 )
 				end
 			end
-		elseif f229_arg5 == Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A] then
+		elseif f229_arg5 == Enum[@"emodes"][@"mode_zombies"] then
 			local f229_local4 = CoD.CACUtility.GetUnlockableItemInfo( f229_arg4, f229_arg5 )
-			if f229_local4 and f229_local4[0x5550F6A3B55C35] then
-				f229_local1 = f229_local4[0x5550F6A3B55C35]
-				f229_local3 = f229_local4[0xB49D7582CD08B0E] or 1
+			if f229_local4 and f229_local4[@"hash_5550F6A3B55C35"] then
+				f229_local1 = f229_local4[@"hash_5550F6A3B55C35"]
+				f229_local3 = f229_local4[@"previewmodelscale"] or 1
 			end
 		end
 	elseif f229_arg3 == "herogadget" then
-		f229_local0 = Engine[0xB98952F69D937F9]( f229_arg4, Enum[0x6EB546760F890D2][0x569E84652131CD7], f229_arg5 )
+		f229_local0 = Engine[@"hash_7B98952F69D937F9"]( f229_arg4, Enum[@"statindexoffset"][@"hash_6569E84652131CD7"], f229_arg5 )
 	elseif f229_arg3 == "tacticalgear" then
 		f229_local0 = CoD.CACUtility.GetTalentGearXModel( f229_arg4, f229_arg5 )
 	elseif LUI.startswith( f229_arg3, "talent" ) then
@@ -4942,7 +4942,7 @@ CoD.CACUtility.UpdateWeaponModelHelper = function ( f229_arg0, f229_arg1, f229_a
 	if not IsInGame() and f229_local0 then
 		local f229_local4 = CoD.CACUtility.EmptyWeaponOptions()
 		if f229_arg6 then
-			if f229_arg5 ~= Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A] then
+			if f229_arg5 ~= Enum[@"emodes"][@"mode_zombies"] then
 				f229_local4 = CoD.CACUtility.GetWeaponOptionsFromClass( f229_arg1, f229_arg2, f229_arg3 )
 			else
 				f229_local4 = CoD.WeaponOptionsUtility.GetWeaponOptionsStringFromTable( CoD.ZMLoadoutUtility.GetWeaponOptionsTableForIndex( f229_arg1, f229_arg4 ) )
@@ -4953,7 +4953,7 @@ CoD.CACUtility.UpdateWeaponModelHelper = function ( f229_arg0, f229_arg1, f229_a
 		if IsBooleanDvarSet( "ui_enableCACScene" ) then
 			CoD.CACUtility.SendCACSceneWeaponUpdate( f229_arg1, f229_arg3, f229_local0, f229_local2 )
 		else
-			Engine[0x6ABA4D7F0840A1E]( f229_arg1, "CustomClass_update" .. CoD.GetLocalClientAdjustedNum( f229_arg1 ), {
+			Engine[@"sendclientscriptnotify"]( f229_arg1, "CustomClass_update" .. CoD.GetLocalClientAdjustedNum( f229_arg1 ), {
 				base_weapon_slot = f229_arg3,
 				weapon = f229_local0,
 				attachments = f229_local2,
@@ -5027,7 +5027,7 @@ CoD.CACUtility.GetClassWeaponModelDefaultSlotAndItemIndex = function ( f232_arg0
 	return f232_local0, f232_local1
 end
 CoD.CACUtility.UpdateClassWeaponModel = function ( f233_arg0, f233_arg1, f233_arg2 )
-	if CoD.BaseUtility.IsMenuSessionModeEqualTo( f233_arg0, Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A] ) then
+	if CoD.BaseUtility.IsMenuSessionModeEqualTo( f233_arg0, Enum[@"emodes"][@"mode_zombies"] ) then
 		return 
 	end
 	local f233_local0, f233_local1, f233_local2 = CoD.BaseUtility.GetMenuModelModeLoadoutSlot( f233_arg0 )
@@ -5095,9 +5095,9 @@ end
 CoD.CACUtility.ClearClassWeaponModel = function ( f236_arg0, f236_arg1 )
 	local f236_local0 = CoD.BaseUtility.GetMenuLoadoutSlot( f236_arg0 )
 	if not IsInGame() and f236_local0 then
-		Engine[0x6ABA4D7F0840A1E]( f236_arg1, "CustomClass_update" .. CoD.GetLocalClientAdjustedNum( f236_arg1 ), {
+		Engine[@"sendclientscriptnotify"]( f236_arg1, "CustomClass_update" .. CoD.GetLocalClientAdjustedNum( f236_arg1 ), {
 			base_weapon_slot = f236_local0,
-			weapon = 0x0,
+			weapon = @"hash_0",
 			attachments = "",
 			camera = "select01",
 			options = CoD.CACUtility.EmptyWeaponOptions(),
@@ -5107,7 +5107,7 @@ CoD.CACUtility.ClearClassWeaponModel = function ( f236_arg0, f236_arg1 )
 	end
 end
 CoD.CACUtility.SetClassWeaponModelToDefault = function ( f237_arg0, f237_arg1 )
-	if CoD.BaseUtility.IsMenuSessionModeEqualTo( f237_arg0, Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A] ) then
+	if CoD.BaseUtility.IsMenuSessionModeEqualTo( f237_arg0, Enum[@"emodes"][@"mode_zombies"] ) then
 		return 
 	end
 	local f237_local0, f237_local1, f237_local2 = CoD.BaseUtility.GetMenuModelModeLoadoutSlot( f237_arg0 )
@@ -5164,11 +5164,11 @@ CoD.CACUtility.UpdateWeaponAttachmentModel = function ( f240_arg0, f240_arg1, f2
 			f240_local10 = f240_local10 .. "+" .. f240_local6
 		end
 		if CoD.CACUtility.EmptyItemIndex < f240_local8 then
-			f240_local10 = f240_local10 .. "+" .. Engine[0x2E29FB421AD554B]( f240_local0[f240_local2].itemIndex:get(), f240_local8, f240_local1 )
+			f240_local10 = f240_local10 .. "+" .. Engine[@"getattachmentref"]( f240_local0[f240_local2].itemIndex:get(), f240_local8, f240_local1 )
 		end
 	end
 	if not IsInGame() and f240_local9 ~= 0x0 then
-		Engine[0x6ABA4D7F0840A1E]( f240_arg2, "CustomClass_update" .. CoD.GetLocalClientAdjustedNum( f240_arg2 ), {
+		Engine[@"sendclientscriptnotify"]( f240_arg2, "CustomClass_update" .. CoD.GetLocalClientAdjustedNum( f240_arg2 ), {
 			base_weapon_slot = f240_local2,
 			weapon = f240_local9,
 			attachments = f240_local10,
@@ -5195,7 +5195,7 @@ CoD.CACUtility.UpdateEquipmentModelFromPositionList = function ( f241_arg0, f241
 		if IsBooleanDvarSet( "ui_enableCACScene" ) then
 			CoD.CACUtility.SendCACSceneWeaponUpdate( f241_arg2, f241_local0, f241_local2, f241_local3 )
 		else
-			Engine[0x6ABA4D7F0840A1E]( f241_arg2, "CustomClass_update" .. CoD.GetLocalClientAdjustedNum( f241_arg2 ), {
+			Engine[@"sendclientscriptnotify"]( f241_arg2, "CustomClass_update" .. CoD.GetLocalClientAdjustedNum( f241_arg2 ), {
 				base_weapon_slot = f241_local0,
 				weapon = f241_local2,
 				attachments = f241_local3,
@@ -5223,7 +5223,7 @@ CoD.CACUtility.SetWeaponAttachmentItem = function ( f245_arg0, f245_arg1, f245_a
 	local f245_local3 = f245_local0.classNum:get()
 	if AttemptAttachItem( f245_arg0, f245_arg3, f245_local1, f245_local0, CoD.BaseUtility.GetMenuLoadoutListItemSlot( f245_arg0 ), CoD.SafeGetModelValue( f245_arg2:getModel(), "itemIndex" ), nil ) then
 		if f245_arg2.equipSound then
-			Engine[0x98954175CA6A32C]( f245_arg2.equipSound )
+			Engine[@"hash_498954175CA6A32C"]( f245_arg2.equipSound )
 		end
 		CoD.WeaponAttachmentsUtility.ValidateUpgradeAttachmentLoadout( f245_arg0, f245_arg3, "" )
 		CoD.CACUtility.EquippedItemsChanged( f245_arg0, f245_arg3 )
@@ -5248,7 +5248,7 @@ CoD.CACUtility.RemoveAttachmentFromClass = function ( f246_arg0, f246_arg1, f246
 	local f246_local6 = CoD.CACUtility.GetLoadoutListItemUnequipSound( f246_arg0 )
 	if CoD.CACUtility.RemoveAttachmentFromClassHelper( f246_arg2, f246_local1, f246_local4, f246_local5, f246_local0 ) then
 		if f246_local6 then
-			Engine[0x98954175CA6A32C]( f246_local6 )
+			Engine[@"hash_498954175CA6A32C"]( f246_local6 )
 		end
 		CoD.CACUtility.GetCustomClassModel( f246_arg2, f246_local2, f246_local1, nil, f246_local0 )
 		CoD.CACUtility.EquippedItemsChanged( f246_arg1, f246_arg2 )
@@ -5285,7 +5285,7 @@ CoD.CACUtility.RemoveAllAttachmentsFromClass = function ( f249_arg0, f249_arg1 )
 	CoD.CACUtility.EquippedItemsChanged( f249_arg0, f249_arg1 )
 end
 CoD.CACUtility.EquippedItemsChanged = function ( f250_arg0, f250_arg1 )
-	local f250_local0 = Engine[0x4DF5CFBC1771947]( f250_arg1 )
+	local f250_local0 = Engine[@"getmodelforcontroller"]( f250_arg1 )
 	local f250_local1 = f250_local0:create( "CustomClassList.equippedItemsChanged" )
 	f250_local1:forceNotifySubscriptions()
 end
@@ -5297,11 +5297,11 @@ CoD.CACUtility.UpdateClassAttachmentsForItemChanged = function ( f251_arg0, f251
 	end
 end
 CoD.CACUtility.SetPerControllerClassNumFromCharacterIndex = function ( f252_arg0 )
-	CoD.perController[f252_arg0].classNum = Engine[0x6C0CB7BD099633F]( Engine[0x3EAC408F958FF05](), Engine[0x40145EEB2E913D2]( f252_arg0, Engine[0x761955642304848]( f252_arg0 ) ) )
+	CoD.perController[f252_arg0].classNum = Engine[@"getpositionrolecustomclassindex"]( Engine[@"currentsessionmode"](), Engine[@"getcharacterindexforclientnum"]( f252_arg0, Engine[@"getclientnum"]( f252_arg0 ) ) )
 end
 CoD.CACUtility.UpdateActiveAttachmentSlot = function ( f253_arg0, f253_arg1, f253_arg2, f253_arg3 )
 	SetPerControllerTableProperty( f253_arg3, "attachmentSlot", f253_arg2.attachmentSlotName )
-	local f253_local0 = Engine[0x4DF5CFBC1771947]( f253_arg3 )
+	local f253_local0 = Engine[@"getmodelforcontroller"]( f253_arg3 )
 	f253_local0 = f253_local0:create( "focusSlotGunfighterType" )
 	f253_local0:set( f253_arg2.gunfighterType )
 	f253_local0 = f253_arg0:getModel()
@@ -5316,10 +5316,10 @@ CoD.CACUtility.UpdateActiveAttachmentSlot = function ( f253_arg0, f253_arg1, f25
 	end
 end
 CoD.CACUtility.UpdateButtonPromptStatesForListSlots = function ( f254_arg0, f254_arg1, f254_arg2 )
-	UpdateButtonPromptState( f254_arg0, f254_arg1, f254_arg2, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F] )
-	UpdateButtonPromptState( f254_arg0, f254_arg1, f254_arg2, Enum[0x3DD78803F918E9D][0xC083113BC81F23F] )
+	UpdateButtonPromptState( f254_arg0, f254_arg1, f254_arg2, Enum[@"luibutton"][@"lui_key_xba_pscross"] )
+	UpdateButtonPromptState( f254_arg0, f254_arg1, f254_arg2, Enum[@"luibutton"][@"lui_key_xbx_pssquare"] )
 	if CoD.isPC then
-		UpdateButtonPromptState( f254_arg0, f254_arg1, f254_arg2, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC] )
+		UpdateButtonPromptState( f254_arg0, f254_arg1, f254_arg2, Enum[@"luibutton"][@"lui_key_ltrig"] )
 	end
 end
 CoD.CACUtility.UpdateItemListSlotSetupContext = function ( f255_arg0, f255_arg1 )
@@ -5340,14 +5340,14 @@ CoD.CACUtility.UpdateClassModelWeaponIfPrimary = function ( f256_arg0, f256_arg1
 	if f256_local0 and f256_local0.itemIndex then
 		local f256_local1 = f256_local0.weaponSlot
 		if f256_local1 and f256_local1:get() == "primary" then
-			Engine[0x6A489878620F3BC]( f256_local0.itemIndex )
+			Engine[@"forcenotifymodelsubscriptions"]( f256_local0.itemIndex )
 		end
 	end
 end
 CoD.CACUtility.SetActiveListItemToSelectedClass = function ( f257_arg0, f257_arg1, f257_arg2 )
 	local f257_local0 = CoD.BaseUtility.GetMenuSessionMode( f257_arg1 )
 	if not f257_local0 then
-		f257_local0 = Engine[0x3EAC408F958FF05]()
+		f257_local0 = Engine[@"currentsessionmode"]()
 	end
 	local f257_local1 = CoD.CACUtility.GetSelectedCustomClass( f257_arg0, f257_local0 )
 	if f257_local1 then
@@ -5358,7 +5358,7 @@ CoD.CACUtility.SetActiveListItemToSelectedClass = function ( f257_arg0, f257_arg
 end
 CoD.CACUtility.SendCACSceneWeaponUpdate = function ( f258_arg0, f258_arg1, f258_arg2, f258_arg3 )
 	if IsBooleanDvarSet( "ui_enableCACScene" ) then
-		Engine[0x6ABA4D7F0840A1E]( f258_arg0, "cac_scene_update", {
+		Engine[@"sendclientscriptnotify"]( f258_arg0, "cac_scene_update", {
 			type = "update_weapon",
 			slot = f258_arg1,
 			weaponNameHash = f258_arg2,
@@ -5367,8 +5367,8 @@ CoD.CACUtility.SendCACSceneWeaponUpdate = function ( f258_arg0, f258_arg1, f258_
 	end
 end
 CoD.CACUtility.SendCACSceneUpdatePrimaryWeapon = function ( f259_arg0, f259_arg1, f259_arg2 )
-	local f259_local0 = f259_arg1[0x3460F2DA135912A]:get()
-	local f259_local1 = Engine[0xB98952F69D937F9]( f259_local0 )
+	local f259_local0 = f259_arg1[@"itemindex"]:get()
+	local f259_local1 = Engine[@"hash_7B98952F69D937F9"]( f259_local0 )
 	local f259_local2 = ""
 	if f259_local0 ~= 0 then
 		for f259_local6, f259_local7 in DDLUtils.ipairs( f259_arg1.attachment ) do
@@ -5377,15 +5377,15 @@ CoD.CACUtility.SendCACSceneUpdatePrimaryWeapon = function ( f259_arg0, f259_arg1
 				if f259_local2 ~= "" then
 					f259_local2 = f259_local2 .. "+"
 				end
-				f259_local2 = f259_local2 .. Engine[0x2E29FB421AD554B]( f259_local0, f259_local8, f259_arg2 )
+				f259_local2 = f259_local2 .. Engine[@"getattachmentref"]( f259_local0, f259_local8, f259_arg2 )
 			end
 		end
 	end
 	CoD.CACUtility.SendCACSceneWeaponUpdate( f259_arg0, "primary", f259_local1, f259_local2 )
 end
 CoD.CACUtility.SendCACSceneUpdateSecondaryWeapon = function ( f260_arg0, f260_arg1, f260_arg2 )
-	local f260_local0 = f260_arg1[0x3460F2DA135912A]:get()
-	local f260_local1 = Engine[0xB98952F69D937F9]( f260_local0 )
+	local f260_local0 = f260_arg1[@"itemindex"]:get()
+	local f260_local1 = Engine[@"hash_7B98952F69D937F9"]( f260_local0 )
 	local f260_local2 = ""
 	if f260_local0 ~= 0 then
 		for f260_local6, f260_local7 in DDLUtils.ipairs( f260_arg1.attachment ) do
@@ -5394,7 +5394,7 @@ CoD.CACUtility.SendCACSceneUpdateSecondaryWeapon = function ( f260_arg0, f260_ar
 				if f260_local2 ~= "" then
 					f260_local2 = f260_local2 .. "+"
 				end
-				f260_local2 = f260_local2 .. Engine[0x2E29FB421AD554B]( f260_local0, f260_local8, f260_arg2 )
+				f260_local2 = f260_local2 .. Engine[@"getattachmentref"]( f260_local0, f260_local8, f260_arg2 )
 			end
 		end
 	end
@@ -5406,7 +5406,7 @@ CoD.CACUtility.UpdateSelectedCustomClass = function ( f261_arg0, f261_arg1, f261
 	f261_local1 = f261_local1.classNum:get()
 	CoD.CACUtility.SetSelectedCustomClass( f261_arg1, f261_local0, f261_local1 )
 	CoD.CACUtility.UpdateCACSceneForMode( f261_arg1, f261_arg0 )
-	Engine[0xBB4D9766B6D0C88]( f261_arg1, f261_local1 )
+	Engine[@"streamsetcustomclass"]( f261_arg1, f261_local1 )
 end
 CoD.CACUtility.UpdateLockedStateForCustomClass = function ( f262_arg0, f262_arg1 )
 	if CoD.CACUtility.IsCurrentClassLocked( f262_arg0, f262_arg1 ) then
@@ -5429,10 +5429,10 @@ end
 CoD.CACUtility.UpdateCACSceneForMode = function ( f263_arg0, f263_arg1 )
 	if IsBooleanDvarSet( "ui_enableCACScene" ) then
 		local f263_local0 = CoD.BaseUtility.GetMenuSessionMode( f263_arg1 )
-		if f263_local0 ~= Enum[0x9C0C2196D8313A0][0xB22E0240605CFFE] then
-			local f263_local1 = Engine[0xA6C26EBACD7322D]( f263_arg0, nil, f263_local0 )
-			if f263_local1[0xA738807BE622E31] then
-				local f263_local2 = Engine[0xED9C4D9D6233895]( f263_arg0, f263_local1[0xA738807BE622E31]:get(), f263_local0 )
+		if f263_local0 ~= Enum[@"emodes"][@"mode_invalid"] then
+			local f263_local1 = Engine[@"getplayerstats"]( f263_arg0, nil, f263_local0 )
+			if f263_local1[@"selectedcustomclass"] then
+				local f263_local2 = Engine[@"getcustomclasscacroot"]( f263_arg0, f263_local1[@"selectedcustomclass"]:get(), f263_local0 )
 				CoD.CACUtility.SendCACSceneUpdatePrimaryWeapon( f263_arg0, f263_local2.primary, f263_local0 )
 				CoD.CACUtility.SendCACSceneUpdateSecondaryWeapon( f263_arg0, f263_local2.secondary, f263_local0 )
 			end
@@ -5440,7 +5440,7 @@ CoD.CACUtility.UpdateCACSceneForMode = function ( f263_arg0, f263_arg1 )
 	end
 end
 CoD.CACUtility.SetListModelToSelectedClass = function ( f264_arg0, f264_arg1 )
-	local f264_local0 = CoD.CACUtility.GetSelectedCustomClass( f264_arg0, Engine[0x3EAC408F958FF05]() )
+	local f264_local0 = CoD.CACUtility.GetSelectedCustomClass( f264_arg0, Engine[@"currentsessionmode"]() )
 	if f264_local0 then
 		local f264_local1 = f264_arg1:getItemAtPosition( f264_local0 + 1, 1 )
 		if f264_local1 then
@@ -5478,7 +5478,7 @@ CoD.CACUtility.OpenCACAttachmentOverlay = function ( f267_arg0, f267_arg1, f267_
 	local f267_local3 = f267_arg1:getModel()
 	local f267_local4 = "attachment"
 	local f267_local5 = CoD.SafeGetModelValue( f267_local3, "loadoutSlot" )
-	if f267_local1 == Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5] then
+	if f267_local1 == Enum[@"emodes"][@"mode_multiplayer"] then
 		local f267_local6 = CoD.SafeGetModelValue( f267_local3, "attachmentSlotIndex" )
 		local f267_local7 = f267_arg6 and f267_local0 and CoD.BonuscardUtility.IsOperatorModBonuscardEquipped( f267_local0, f267_arg6, f267_local1 )
 		if f267_local6 == CoD.CACUtility.OpticSlotIndex then
@@ -5491,7 +5491,7 @@ CoD.CACUtility.OpenCACAttachmentOverlay = function ( f267_arg0, f267_arg1, f267_
 		if f267_local6 then
 			f267_local6 = f267_local3.attachmentGroup:get()
 		end
-		if f267_local6 == Enum[0x7420BCDBDE17A84][0x6AC43DB9B6634DA] then
+		if f267_local6 == Enum[@"eattachmentgroup"][@"attachment_group_optic"] then
 			f267_local4 = "optic"
 		end
 	end
@@ -5600,7 +5600,7 @@ CoD.CACUtility.EquipWeapon = function ( f274_arg0, f274_arg1, f274_arg2, f274_ar
 		end
 		if AttemptAttachItem( f274_arg0, f274_arg3, f274_local1, f274_local0, f274_local2, f274_local5, nil, true ) then
 			if f274_arg1.equipSound and f274_arg1.equipSound ~= 0x0 then
-				Engine[0x98954175CA6A32C]( f274_arg1.equipSound )
+				Engine[@"hash_498954175CA6A32C"]( f274_arg1.equipSound )
 			end
 			local f274_local6 = f274_local0.classNum:get()
 			local f274_local7 = f274_local4.useVariantSlot
@@ -5624,7 +5624,7 @@ CoD.CACUtility.EquipLoadoutListItem = function ( f275_arg0, f275_arg1, f275_arg2
 	local f275_local5 = f275_arg0:getModel()
 	if f275_local5 and AttemptAttachItem( f275_arg1, f275_arg2, f275_local1, f275_local0, f275_local3, f275_local5.itemIndex:get() ) then
 		if f275_arg0.equipSound and f275_arg0.equipSound ~= 0x0 then
-			Engine[0x98954175CA6A32C]( f275_arg0.equipSound )
+			Engine[@"hash_498954175CA6A32C"]( f275_arg0.equipSound )
 		end
 		if f275_arg3 then
 			GoBack( f275_arg1, f275_arg2 )
@@ -5634,7 +5634,7 @@ end
 CoD.CACUtility.PlayElementXHashSound = function ( f276_arg0, f276_arg1 )
 	local f276_local0 = f276_arg0[f276_arg1]
 	if f276_local0 and f276_local0 ~= 0x0 then
-		Engine[0x98954175CA6A32C]( f276_local0 )
+		Engine[@"hash_498954175CA6A32C"]( f276_local0 )
 	end
 end
 CoD.CACUtility.EquipSpecialIssueItem = function ( f277_arg0, f277_arg1, f277_arg2 )
@@ -5648,7 +5648,7 @@ CoD.CACUtility.EquipSpecialIssueItem = function ( f277_arg0, f277_arg1, f277_arg
 		CoD.FreeCursorUtility.UpdateSetupContext( f277_arg2, f277_arg0 )
 		CoD.FreeCursorUtility.RetriggerCursorPositionNoDelay( f277_arg2, f277_arg0 )
 		if f277_local4 and f277_local4 ~= 0x0 then
-			Engine[0x98954175CA6A32C]( f277_local4 )
+			Engine[@"hash_498954175CA6A32C"]( f277_local4 )
 		end
 	end
 end
@@ -5663,7 +5663,7 @@ CoD.CACUtility.UnequipItem = function ( f278_arg0, f278_arg1, f278_arg2 )
 		CoD.CACUtility.UpdateClassWeaponModel( f278_arg1, f278_arg2, f278_arg0 )
 		CoD.FreeCursorUtility.UpdateSetupContext( f278_arg2, f278_arg0 )
 		if f278_local4 and f278_local4 ~= 0x0 then
-			Engine[0x98954175CA6A32C]( f278_local4 )
+			Engine[@"hash_498954175CA6A32C"]( f278_local4 )
 		end
 	end
 end
@@ -5677,7 +5677,7 @@ CoD.CACUtility.UnequipLoadoutListItem = function ( f279_arg0, f279_arg1, f279_ar
 			CoD.CACUtility.GetCustomClassModel( f279_arg2, f279_local1.classNum:get(), f279_local1, nil, f279_local0 )
 			CoD.CACUtility.EquippedItemsChanged( f279_arg1, f279_arg2 )
 			if f279_local3 and f279_local3 ~= 0x0 then
-				Engine[0x98954175CA6A32C]( f279_local3 )
+				Engine[@"hash_498954175CA6A32C"]( f279_local3 )
 			end
 		end
 	end
@@ -5735,7 +5735,7 @@ CoD.CACUtility.UseEquippedItemAsDefaultFocus = function ( f286_arg0, f286_arg1, 
 end
 CoD.CACUtility.IsCurrentGameTypeBarebones = function ()
 	local f288_local0
-	if string.match( Engine[0x69811927938FCD7](), "_bb" ) then
+	if string.match( Engine[@"lobbygetgametype"](), "_bb" ) then
 		f288_local0 = true
 	else
 		f288_local0 = false
@@ -5753,7 +5753,7 @@ CoD.CACUtility.SetActiveListItemToEquippedItem = function ( f289_arg0, f289_arg1
 				f289_local2 = f289_local2[f289_local1]
 				if f289_local2 then
 					local f289_local3 = CoD.CACUtility.BuildItemModelDataFromUnlockableItem( f289_arg0, f289_arg1, f289_local2, nil, nil, nil, nil )
-					local f289_local4 = Engine[0xA798E4552F5E872]( Engine[0x4DF5CFBC1771947]( f289_arg1 ), "CACEquippedItem" )
+					local f289_local4 = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f289_arg1 ), "CACEquippedItem" )
 					LuaUtils.CreateModelsFromTable( f289_local4, f289_local3.models )
 					f289_arg2:setModel( f289_local4, f289_arg1 )
 				end
@@ -5808,15 +5808,15 @@ CoD.CACUtility.SetActiveListItemForWeaponGroup = function ( f292_arg0, f292_arg1
 	end
 	if f292_local2 == "primary" or f292_local2 == "secondary" then
 		if CoD.CACUtility.EmptyItemIndex < f292_local3 then
-			local f292_local5 = Engine[0x86DC0510B2E2933]( f292_local3, Enum[0x6EB546760F890D2][0x569E84652131CD7], f292_local1 )
+			local f292_local5 = Engine[@"getitemgroup"]( f292_local3, Enum[@"statindexoffset"][@"hash_6569E84652131CD7"], f292_local1 )
 			if f292_local4 and f292_local4:findItem( nil, {
 				category = f292_local5
 			}, true, nil ) then
 				f292_arg0.__itemGroup = f292_local5
 			end
 		else
-			local f292_local5 = CoD.BonuscardUtility.IsBonuscardEquipped( f292_local0, 0x1F0C17573BB2E79, f292_local1 )
-			local f292_local6 = CoD.BonuscardUtility.IsBonuscardEquipped( f292_local0, 0x439C6CFA8A0CFEB, f292_local1 )
+			local f292_local5 = CoD.BonuscardUtility.IsBonuscardEquipped( f292_local0, @"bonuscard_overkill", f292_local1 )
+			local f292_local6 = CoD.BonuscardUtility.IsBonuscardEquipped( f292_local0, @"bonuscard_underkill", f292_local1 )
 			local f292_local7 = f292_local2
 			if not (f292_local2 ~= "primary" or f292_local6) or f292_local5 then
 				f292_local7 = "primary"
@@ -5829,7 +5829,7 @@ CoD.CACUtility.SetActiveListItemForWeaponGroup = function ( f292_arg0, f292_arg1
 	elseif CoD.ZMLoadoutUtility and f292_local2 == CoD.ZMLoadoutUtility.StartWeaponLoadoutSlotName then
 		f292_local3 = CoD.CACUtility.GetItemIndexEquippedInSlot( "primary", f292_arg1, f292_local0 )
 		if CoD.CACUtility.EmptyItemIndex < f292_local3 then
-			local f292_local5 = Engine[0x86DC0510B2E2933]( f292_local3, Enum[0x6EB546760F890D2][0x569E84652131CD7], f292_local1 )
+			local f292_local5 = Engine[@"getitemgroup"]( f292_local3, Enum[@"statindexoffset"][@"hash_6569E84652131CD7"], f292_local1 )
 			if f292_local5 == "weapon_pistol" or f292_local5 == "weapon_cqb" then
 				f292_local5 = "weapon_secondaries"
 			end
@@ -5857,7 +5857,7 @@ CoD.CACUtility.OpenClassOptions = function ( f294_arg0, f294_arg1, f294_arg2, f2
 		local f294_local3 = f294_local0.customClassName:get()
 		f294_local2.customClassName:set( f294_local3 )
 		f294_local2.currentClassName:set( f294_local3 )
-		local f294_local4 = Engine[0x4DF5CFBC1771947]( f294_arg2 )
+		local f294_local4 = Engine[@"getmodelforcontroller"]( f294_arg2 )
 		f294_local4 = f294_local4.RenameClassText
 		if f294_local4 then
 			f294_local4:set( "" )
@@ -5890,14 +5890,14 @@ CoD.CACUtility.RemoveAdditionalEquipment = function ( f298_arg0, f298_arg1, f298
 	end
 end
 CoD.CACUtility.RenameCustomClass = function ( f299_arg0, f299_arg1, f299_arg2 )
-	local f299_local0 = Engine[0x4DF5CFBC1771947]( f299_arg2 )
+	local f299_local0 = Engine[@"getmodelforcontroller"]( f299_arg2 )
 	f299_local0 = f299_local0.RenameClassText:get()
-	if not Engine[0xE3FC4BECF450A06]( f299_arg2, f299_local0, Enum[0x85FCE2AA5391A7C][0x3089E4E9881A4E2] ) then
+	if not Engine[@"hash_E3FC4BECF450A06"]( f299_arg2, f299_local0, Enum[@"keyboardtype"][@"keyboard_type_custom_class"] ) then
 		local f299_local1 = CoD.BaseUtility.GetMenuSessionMode( f299_arg1 )
 		local f299_local2 = CoD.BaseUtility.GetMenuModel( f299_arg1 )
 		local f299_local3 = f299_local2.classNum:get()
 		if f299_local0 and f299_local0 ~= "" then
-			local f299_local4 = Engine[0x53803AC3BB0459C]( f299_arg2, f299_local3, f299_local1 )
+			local f299_local4 = Engine[@"getcacroot"]( f299_arg2, f299_local3, f299_local1 )
 			if f299_local4 and f299_local4.customClassName and f299_local4.customClassName[f299_local3] then
 				f299_local2.customClassName:set( f299_local0 )
 				f299_local4.customClassName[f299_local3]:set( f299_local0 )
@@ -5914,7 +5914,7 @@ CoD.CACUtility.GetSignatureWeaponOptionsHelper = function ( f300_arg0, f300_arg1
 	local f300_local1 = ""
 	local f300_local2 = CoD.CACUtility.GetUnlockableItemInfo( f300_arg2, f300_arg3 )
 	local f300_local3 = f300_local2.nameHash
-	if f300_arg3 == Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A] and f300_arg4 then
+	if f300_arg3 == Enum[@"emodes"][@"mode_zombies"] and f300_arg4 then
 		local f300_local4 = CoD.ZMLoadoutUtility.GetWeaponOptionsTableForIndex( f300_arg0, f300_arg2, f300_arg1 )
 		if CoD.SafeGetModelValue( f300_arg4:getModel(), "isMastercraft" ) then
 			f300_local4.camoIndex = 0
@@ -5922,7 +5922,7 @@ CoD.CACUtility.GetSignatureWeaponOptionsHelper = function ( f300_arg0, f300_arg1
 		f300_local0 = CoD.WeaponOptionsUtility.GetWeaponOptionsStringFromTable( f300_local4 )
 		f300_local1 = CoD.ZMLoadoutUtility.GetArmoryAttachmentStringForElement( f300_arg4, f300_arg0, f300_arg3 )
 	end
-	if f300_arg3 == Enum[0x9C0C2196D8313A0][0xBF1DCC8138A9D39] then
+	if f300_arg3 == Enum[@"emodes"][@"mode_warzone"] then
 		local f300_local4 = CoD.WZUtility.GetWeaponOptionsTableForIndex( f300_arg0, f300_arg2, f300_arg1 )
 		if f300_arg4 and CoD.SafeGetModelValue( f300_arg4:getModel(), "isMastercraft" ) then
 			f300_local4.camoIndex = 0
@@ -5938,7 +5938,7 @@ CoD.CACUtility.PreviewSignatureWeapon = function ( f301_arg0, f301_arg1, f301_ar
 	local f301_local3 = f301_arg0:getModel( f301_arg2, "weaponModelSlotIndex" )
 	if f301_local3 and f301_local2 then
 		local f301_local4, f301_local5, f301_local6 = CoD.CACUtility.GetSignatureWeaponOptionsHelper( f301_arg2, f301_local3:get(), f301_local2:get(), CoD.BaseUtility.GetMenuSessionMode( f301_arg1 ), f301_arg0 )
-		Engine[0x6ABA4D7F0840A1E]( f301_arg2, "CustomClass_update" .. CoD.GetLocalClientAdjustedNum( f301_arg2 ), {
+		Engine[@"sendclientscriptnotify"]( f301_arg2, "CustomClass_update" .. CoD.GetLocalClientAdjustedNum( f301_arg2 ), {
 			base_weapon_slot = f301_local0,
 			weapon = f301_local5,
 			attachments = f301_local6,
@@ -5958,7 +5958,7 @@ CoD.CACUtility.SetSignatureWeaponMPInternal = function ( f302_arg0, f302_arg1, f
 		local f302_local6 = f302_local2:get()
 		if not f302_arg6 or AttemptAttachItem( f302_arg0, f302_arg1, f302_local5, f302_arg3, f302_arg5, f302_local6 ) then
 			if f302_arg0.equipSound and f302_arg0.equipSound ~= 0x0 then
-				Engine[0x98954175CA6A32C]( f302_arg0.equipSound )
+				Engine[@"hash_498954175CA6A32C"]( f302_arg0.equipSound )
 			end
 			local f302_local7 = f302_local1 .. ".weaponModelSlot"
 			local f302_local8 = false
@@ -5992,7 +5992,7 @@ CoD.CACUtility.SetSignatureWeaponMPInternal = function ( f302_arg0, f302_arg1, f
 end
 CoD.CACUtility.SetSignatureWeapon = function ( f303_arg0, f303_arg1, f303_arg2 )
 	local f303_local0, f303_local1, f303_local2 = CoD.BaseUtility.GetMenuModelModeLoadoutSlot( f303_arg2 )
-	if f303_local1 == Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A] then
+	if f303_local1 == Enum[@"emodes"][@"mode_zombies"] then
 		local f303_local3 = CoD.ZMLoadoutUtility.SetSignatureWeapon( f303_arg0, f303_arg1, f303_arg2 )
 		CoD.WeaponOptionsUtility.UpdateWeaponOptionLists( f303_arg0, f303_arg1 )
 		if f303_local2 == CoD.ZMLoadoutUtility.StartWeaponLoadoutSlotName then
@@ -6003,7 +6003,7 @@ CoD.CACUtility.SetSignatureWeapon = function ( f303_arg0, f303_arg1, f303_arg2 )
 			CoD.CACUtility.GetCustomClassModel( f303_arg1, f303_local4, f303_local0 )
 		end
 		return 
-	elseif f303_local1 == Enum[0x9C0C2196D8313A0][0xBF1DCC8138A9D39] then
+	elseif f303_local1 == Enum[@"emodes"][@"mode_warzone"] then
 		CoD.WZUtility.SetSignatureWeapon( f303_arg0, f303_arg1, f303_arg2 )
 		CoD.WeaponOptionsUtility.UpdateWeaponOptionLists( f303_arg0, f303_arg1 )
 		return 
@@ -6023,11 +6023,11 @@ end
 CoD.CACUtility.SetSignatureWeaponFromCAC = function ( f304_arg0, f304_arg1, f304_arg2 )
 	local f304_local0, f304_local1, f304_local2 = CoD.BaseUtility.GetMenuModelModeLoadoutSlot( f304_arg2 )
 	f304_local2 = CoD.SafeGetModelValue( f304_arg0:getModel(), "loadoutSlot" )
-	if f304_local1 == Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A] then
+	if f304_local1 == Enum[@"emodes"][@"mode_zombies"] then
 		CoD.ZMLoadoutUtility.SetSignatureWeapon( f304_arg0, f304_arg1, f304_arg2 )
 		CoD.WeaponOptionsUtility.UpdateWeaponOptionLists( f304_arg0, f304_arg1 )
 		return 
-	elseif f304_local1 == Enum[0x9C0C2196D8313A0][0xBF1DCC8138A9D39] then
+	elseif f304_local1 == Enum[@"emodes"][@"mode_warzone"] then
 		CoD.WZUtility.SetSignatureWeapon( f304_arg0, f304_arg1, f304_arg2 )
 		CoD.WeaponOptionsUtility.UpdateWeaponOptionLists( f304_arg0, f304_arg1 )
 		return 
@@ -6050,9 +6050,9 @@ CoD.CACUtility.ShowEmptyWeaponCharmModel = function ( f307_arg0, f307_arg1 )
 	CoD.CACUtility.UpdateWeaponCharmModelInternal( f307_arg1, 0x0 )
 end
 CoD.CACUtility.UpdateWeaponCharmModelInternal = function ( f308_arg0, f308_arg1 )
-	Engine[0x6ABA4D7F0840A1E]( f308_arg0, "CustomClass_update" .. CoD.GetLocalClientAdjustedNum( f308_arg0 ), {
+	Engine[@"sendclientscriptnotify"]( f308_arg0, "CustomClass_update" .. CoD.GetLocalClientAdjustedNum( f308_arg0 ), {
 		base_weapon_slot = "charm",
-		weapon = 0x0,
+		weapon = @"hash_0",
 		attachments = "",
 		camera = "select01",
 		xmodel_name = f308_arg1,
@@ -6071,7 +6071,7 @@ CoD.CACUtility.DoesWeaponHaveAttachments = function ( f310_arg0, f310_arg1 )
 	local f310_local1 = CoD.CACUtility.EmptyItemIndex
 	local f310_local2 = CoD.PlayerRoleUtility.customizationMode
 	if not f310_local2 then
-		f310_local2 = Engine[0x3EAC408F958FF05]()
+		f310_local2 = Engine[@"currentsessionmode"]()
 	end
 	if f310_local0 and f310_local0.itemIndex then
 		f310_local1 = f310_local0.itemIndex:get()
@@ -6099,14 +6099,14 @@ CoD.CACUtility.IsBaseSignatureWeapon = function ( f312_arg0, f312_arg1, f312_arg
 	local f312_local3 = f312_arg1:getModel()
 	local f312_local4 = f312_local3.weaponItemIndex:get()
 	if f312_local0 and f312_local2 and f312_local1 and f312_local4 then
-		local f312_local5 = Engine[0x9F0BB7D52A7A978]( Engine[0xB98952F69D937F9]( f312_local4, Enum[0x6EB546760F890D2][0x569E84652131CD7], f312_local1 ) )
+		local f312_local5 = Engine[@"hash_79F0BB7D52A7A978"]( Engine[@"hash_7B98952F69D937F9"]( f312_local4, Enum[@"statindexoffset"][@"hash_6569E84652131CD7"], f312_local1 ) )
 		local f312_local6
-		if f312_local1 ~= Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A] then
+		if f312_local1 ~= Enum[@"emodes"][@"mode_zombies"] then
 			f312_local6 = f312_local0[f312_local2].weaponModelSlot:get() + 1
 			if not f312_local6 then
 			
 			elseif f312_local5 and f312_local6 then
-				return f312_local5[f312_local6][0xC2AA73D9F82E9C2]
+				return f312_local5[f312_local6][@"hash_5C2AA73D9F82E9C2"]
 			end
 		end
 		f312_local6 = CoD.ZMLoadoutUtility.GetWeaponModelSlot( f312_local4, f312_arg2 ) + 1
@@ -6126,7 +6126,7 @@ CoD.CACUtility.IsMark2WeaponInternal = function ( f313_arg0, f313_arg1 )
 		if not f313_local0 then
 			return false
 		end
-		return f313_local1[f313_local0 + 1] and f313_local1[f313_local0 + 1][0x2861D919C8A4186]
+		return f313_local1[f313_local0 + 1] and f313_local1[f313_local0 + 1][@"ismark2"]
 	else
 		return false
 	end
@@ -6148,11 +6148,11 @@ CoD.CACUtility.IsMastercraft = function ( f315_arg0, f315_arg1 )
 		if not f315_local1 then
 			return false
 		end
-		local f315_local2 = Engine[0x9F0BB7D52A7A978]( Engine[0xB98952F69D937F9]( f315_local0.itemIndex:get() ) )
+		local f315_local2 = Engine[@"hash_79F0BB7D52A7A978"]( Engine[@"hash_7B98952F69D937F9"]( f315_local0.itemIndex:get() ) )
 		local f315_local3 = f315_local2[f315_local1 + 1]
 		if f315_local3 then
-			if f315_local2[f315_local1 + 1][0x3CF8E8F9081468B] > 0 then
-				f315_local3 = not f315_local2[f315_local1 + 1][0x2861D919C8A4186]
+			if f315_local2[f315_local1 + 1][@"index"] > 0 then
+				f315_local3 = not f315_local2[f315_local1 + 1][@"ismark2"]
 			else
 				f315_local3 = false
 			end
@@ -6224,17 +6224,17 @@ CoD.CACUtility.EquippingFocusedItemWouldRemoveThisItem = function ( f322_arg0, f
 	elseif CoD.CACUtility.IsItemEquippedInCurrentSlot( f322_arg0, f322_arg1, f322_arg2 ) then
 		return false
 	elseif f322_local0 ~= nil then
-		local f322_local1 = Engine[0x4DF5CFBC1771947]( f322_arg2 )
+		local f322_local1 = Engine[@"getmodelforcontroller"]( f322_arg2 )
 		f322_local1 = f322_local1.focusedAttachmentIndex:get()
-		local f322_local2 = Engine[0xED9C4D9D6233895]( f322_arg2, classNum, Engine[0x3EAC408F958FF05]() )
-		if f322_local0 ~= f322_local1 and not Engine[0x628AD12A64D07F]( f322_local2[CoD.perController[f322_arg2].weaponCategory].itemIndex:get(), f322_local0, f322_local1 ) then
+		local f322_local2 = Engine[@"getcustomclasscacroot"]( f322_arg2, classNum, Engine[@"currentsessionmode"]() )
+		if f322_local0 ~= f322_local1 and not Engine[@"areattachmentscompatible"]( f322_local2[CoD.perController[f322_arg2].weaponCategory].itemIndex:get(), f322_local0, f322_local1 ) then
 			return true
 		end
 	end
 end
 CoD.CACUtility.IsAttachmentInSlotReplaceable = function ( f323_arg0, f323_arg1, f323_arg2 )
 	local f323_local0 = CoD.CACUtility.GetAttachmentIndexForSlotOrList( f323_arg1 )
-	local f323_local1 = Engine[0x4DF5CFBC1771947]( f323_arg2 )
+	local f323_local1 = Engine[@"getmodelforcontroller"]( f323_arg2 )
 	if f323_arg0.slotIndex and CoD.CACUtility.EmptyItemIndex < f323_local1.focusedAttachmentIndex:get() and not CoD.ModelUtility.IsModelValueEqualTo( f323_arg2, "AttachmentMenu.activeAttachmentSlotIndex", f323_arg0.slotIndex ) then
 		return true
 	else
@@ -6244,14 +6244,14 @@ end
 CoD.CACUtility.IsLoadoutEquipped = function ( f324_arg0, f324_arg1, f324_arg2 )
 	local f324_local0 = CoD.BaseUtility.GetMenuSessionMode( f324_arg0 )
 	if not f324_local0 then
-		f324_local0 = Engine[0x3EAC408F958FF05]()
+		f324_local0 = Engine[@"currentsessionmode"]()
 	end
 	return CoD.CACUtility.GetSelectedCustomClass( f324_arg2, f324_local0 ) == CoD.SafeGetModelValue( f324_arg1:getModel(), "classNumber" )
 end
 CoD.CACUtility.IsLoadoutLocked = function ( f325_arg0, f325_arg1, f325_arg2 )
 	local f325_local0 = CoD.BaseUtility.GetMenuSessionMode( f325_arg0 )
 	if not f325_local0 then
-		f325_local0 = Engine[0x3EAC408F958FF05]()
+		f325_local0 = Engine[@"currentsessionmode"]()
 	end
 	return CoD.CACUtility.IsFeatureItemLocked( f325_arg2, CoD.CACUtility.GetClassesUnlockableItemUnlockInfo( CoD.SafeGetModelValue( f325_arg1:getModel(), "classNumber" ), "featureItemIndex" ), f325_local0 )
 end
@@ -6327,7 +6327,7 @@ CoD.CACUtility.IsWeaponLevelMax = function ( f332_arg0, f332_arg1, f332_arg2 )
 		return false
 	end
 	local f332_local0
-	if Engine[0x1EA89C73C920CC2]( f332_arg0, f332_arg1, f332_arg2 ) ~= Engine[0xAB379E136B8EE0C]( f332_arg0, f332_arg1, f332_arg2 ) or Engine[0xFF3DA2744A0F3A3]( f332_arg0, f332_arg1, f332_arg2 ) > Engine[0x18AC0C24E21B61A]( f332_arg0, f332_arg1, f332_arg2 ) then
+	if Engine[@"getguncurrentrank"]( f332_arg0, f332_arg1, f332_arg2 ) ~= Engine[@"getgunnextrank"]( f332_arg0, f332_arg1, f332_arg2 ) or Engine[@"hash_7FF3DA2744A0F3A3"]( f332_arg0, f332_arg1, f332_arg2 ) > Engine[@"getguncurrentrankxp"]( f332_arg0, f332_arg1, f332_arg2 ) then
 		f332_local0 = false
 	else
 		f332_local0 = true
@@ -6335,13 +6335,13 @@ CoD.CACUtility.IsWeaponLevelMax = function ( f332_arg0, f332_arg1, f332_arg2 )
 	return f332_local0
 end
 CoD.CACUtility.WeaponHasLevels = function ( f333_arg0, f333_arg1, f333_arg2 )
-	return Engine[0xAB379E136B8EE0C]( f333_arg0, f333_arg1, f333_arg2 ) > 0
+	return Engine[@"getgunnextrank"]( f333_arg0, f333_arg1, f333_arg2 ) > 0
 end
 CoD.CACUtility.IsWeaponPrestigeLevelMax = function ( f334_arg0, f334_arg1, f334_arg2 )
 	local f334_local0 = CoD.PlayerStatsUtility.GetStorageBufferForPlayer( f334_arg0 )
 	local f334_local1 = 0
 	if f334_local0 then
-		local f334_local2 = Engine[0xB98952F69D937F9]( f334_arg1 )
+		local f334_local2 = Engine[@"hash_7B98952F69D937F9"]( f334_arg1 )
 		if f334_local2 ~= 0x0 and f334_local0.ranked_item_stats[f334_local2] then
 			f334_local1 = f334_local0.ranked_item_stats[f334_local2].pLevel:get()
 		end
@@ -6375,7 +6375,7 @@ CoD.CACUtility.IsCACGunPrestigeLevelOne = function ( f337_arg0, f337_arg1, f337_
 	local f337_local2 = CoD.PlayerStatsUtility.GetStorageBufferForPlayer( f337_arg2 )
 	local f337_local3 = 0
 	if f337_local2 then
-		local f337_local4 = Engine[0xB98952F69D937F9]( f337_local1 )
+		local f337_local4 = Engine[@"hash_7B98952F69D937F9"]( f337_local1 )
 		if f337_local4 ~= 0x0 then
 			f337_local3 = f337_local2.ranked_item_stats[f337_local4] and f337_local2.ranked_item_stats[f337_local4].pLevel:get()
 		end
@@ -6397,14 +6397,14 @@ CoD.CACUtility.IsCACGunLevelExists = function ( f338_arg0, f338_arg1, f338_arg2 
 end
 CoD.CACUtility.IsItemRefLocked = function ( f339_arg0, f339_arg1, f339_arg2 )
 	if not f339_arg2 then
-		f339_arg2 = Engine[0x3EAC408F958FF05]()
+		f339_arg2 = Engine[@"currentsessionmode"]()
 	end
 	if not CoD.CACUtility.IsProgressionEnabled( f339_arg2 ) then
 		return false
 	else
-		local f339_local0 = Engine[0xD97229B24C685D5]( f339_arg1, f339_arg2 )
+		local f339_local0 = Engine[@"hash_2D97229B24C685D5"]( f339_arg1, f339_arg2 )
 		if f339_local0 > CoD.CACUtility.EmptyItemIndex then
-			return Engine[0x191C1637A229078]( f339_arg0, f339_local0, f339_arg2 )
+			return Engine[@"isitemlocked"]( f339_arg0, f339_local0, f339_arg2 )
 		else
 			return false
 		end
@@ -6419,7 +6419,7 @@ CoD.CACUtility.IsCACItemLocked = function ( f340_arg0, f340_arg1, f340_arg2 )
 	else
 		local f340_local1 = f340_arg1:getModel()
 		if f340_local1 and f340_local1.globalItemIndex then
-			return Engine[0x191C1637A229078]( f340_arg2, f340_local1.globalItemIndex:get(), f340_local0 )
+			return Engine[@"isitemlocked"]( f340_arg2, f340_local1.globalItemIndex:get(), f340_local0 )
 		else
 			return false
 		end
@@ -6430,7 +6430,7 @@ CoD.CACUtility.IsCACBlackMarketItemLocked = function ( f341_arg0, f341_arg1, f34
 	local f341_local1 = f341_local0 and f341_local0:get()
 	if f341_local1 then
 		local f341_local2, f341_local3 = CoD.BlackMarketTableUtility.SimpleLootLookup( f341_arg2, f341_local1 )
-		if f341_local2 ~= CoD.BlackMarketTableUtility.SimpleLootLookupTypes[0xC0D17BAD169557B] then
+		if f341_local2 ~= CoD.BlackMarketTableUtility.SimpleLootLookupTypes[@"none"] then
 			local f341_local4
 			if not f341_local3 and not CoD.CACUtility.IsMark2Weapon( f341_arg2, f341_arg1 ) then
 				f341_local4 = not CoD.CACUtility.IsMastercraft( f341_arg2, f341_arg1 )
@@ -6451,7 +6451,7 @@ CoD.CACUtility.IsSignatureWeaponLockedByProgression = function ( f342_arg0, f342
 	else
 		local f342_local1 = f342_arg1:getModel()
 		if f342_local1 and f342_local1.itemIndex then
-			return Engine[0x191C1637A229078]( f342_arg2, f342_local1.itemIndex:get(), f342_local0 )
+			return Engine[@"isitemlocked"]( f342_arg2, f342_local1.itemIndex:get(), f342_local0 )
 		else
 			return false
 		end
@@ -6466,7 +6466,7 @@ CoD.CACUtility.IsCACAttachmentItemLocked = function ( f343_arg0, f343_arg1, f343
 	else
 		local f343_local3 = f343_arg1:getModel()
 		if f343_local0 and f343_local2 and f343_local3 then
-			return Engine[0x758EBFCB1826DAD]( f343_arg2, f343_local0[f343_local2].itemIndex:get(), f343_local3.itemIndex:get(), f343_local1 )
+			return Engine[@"isitemattachmentlocked"]( f343_arg2, f343_local0[f343_local2].itemIndex:get(), f343_local3.itemIndex:get(), f343_local1 )
 		else
 			return false
 		end
@@ -6475,8 +6475,8 @@ end
 CoD.CACUtility.ShouldHideItemNameText = function ( f344_arg0, f344_arg1 )
 	local f344_local0 = IsElementPropertyValue( f344_arg0, "_hideItemName", true )
 	if not f344_local0 then
-		if not IsElementPropertyValue( f344_arg0, "_showItemNameOnButtonHold", true ) or CoD.ModelUtility.AreButtonModelValueBitsSet( f344_arg1, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC], Enum[0xE29E259801BC1A4][0x253A6F6CAAAE464] ) then
-			f344_local0 = CoD.ModelUtility.AreButtonModelValueBitsSet( f344_arg1, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC], Enum[0xE29E259801BC1A4][0x253A6F6CAAAE464] )
+		if not IsElementPropertyValue( f344_arg0, "_showItemNameOnButtonHold", true ) or CoD.ModelUtility.AreButtonModelValueBitsSet( f344_arg1, Enum[@"luibutton"][@"lui_key_ltrig"], Enum[@"luibuttonflags"][@"flag_down"] ) then
+			f344_local0 = CoD.ModelUtility.AreButtonModelValueBitsSet( f344_arg1, Enum[@"luibutton"][@"lui_key_ltrig"], Enum[@"luibuttonflags"][@"flag_down"] )
 			if f344_local0 then
 				if f344_arg0.occludedBy == nil then
 					f344_local0 = false
@@ -6493,7 +6493,7 @@ CoD.CACUtility.ShouldHideItemNameText = function ( f344_arg0, f344_arg1 )
 end
 CoD.CACUtility.IsFeatureItemLocked = function ( f345_arg0, f345_arg1, f345_arg2 )
 	if CoD.CACUtility.IsProgressionEnabled( f345_arg2 ) then
-		return f345_arg1 and Engine[0x191C1637A229078]( f345_arg0, f345_arg1, f345_arg2 )
+		return f345_arg1 and Engine[@"isitemlocked"]( f345_arg0, f345_arg1, f345_arg2 )
 	else
 		return false
 	end
@@ -6509,7 +6509,7 @@ CoD.CACUtility.IsCurrentClassLocked = function ( f346_arg0, f346_arg1 )
 end
 CoD.CACUtility.IsClassLocked = function ( f347_arg0, f347_arg1 )
 	if not CoD.isFrontend then
-		return CoD.CACUtility.IsFeatureItemLocked( f347_arg0, CoD.CACUtility.GetClassesUnlockableItemUnlockInfo( f347_arg1, "featureItemIndex" ), Engine[0x3EAC408F958FF05]() )
+		return CoD.CACUtility.IsFeatureItemLocked( f347_arg0, CoD.CACUtility.GetClassesUnlockableItemUnlockInfo( f347_arg1, "featureItemIndex" ), Engine[@"currentsessionmode"]() )
 	else
 		return true
 	end
@@ -6601,7 +6601,7 @@ CoD.CACUtility.GetHeaderNameForLoadoutSlot = function ( f354_arg0, f354_arg1 )
 	if f354_local0 then
 		for f354_local4, f354_local5 in ipairs( CoD.CACUtility.loadoutSlotInfo ) do
 			if f354_local5.loadoutSlot == f354_local0 then
-				if f354_local5.zmName and CoD.BaseUtility.IsMenuSessionModeEqualTo( f354_arg0, Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A] ) then
+				if f354_local5.zmName and CoD.BaseUtility.IsMenuSessionModeEqualTo( f354_arg0, Enum[@"emodes"][@"mode_zombies"] ) then
 					return f354_local5.zmName
 				end
 				return f354_local5.name
@@ -6613,23 +6613,23 @@ end
 CoD.CACUtility.GetItemImageFromIndex = function ( f355_arg0, f355_arg1, f355_arg2 )
 	local f355_local0 = CoD.BaseUtility.GetMenuSessionMode( f355_arg0 )
 	if not f355_arg1 then
-		f355_arg1 = Enum[0x6EB546760F890D2][0x3057ABF96AF8289]
+		f355_arg1 = Enum[@"statindexoffset"][@"hash_13057ABF96AF8289"]
 	end
-	return Engine[0x8518E07C1C5BC6D]( f355_arg2, f355_arg1, f355_local0 )
+	return Engine[@"getitemimage"]( f355_arg2, f355_arg1, f355_local0 )
 end
 CoD.CACUtility.GetItemNameFromIndex = function ( f356_arg0, f356_arg1, f356_arg2 )
 	local f356_local0 = CoD.BaseUtility.GetMenuSessionMode( f356_arg0 )
 	if not f356_arg1 then
-		f356_arg1 = Enum[0x6EB546760F890D2][0x3057ABF96AF8289]
+		f356_arg1 = Enum[@"statindexoffset"][@"hash_13057ABF96AF8289"]
 	end
-	return Engine[0x6B7AC889104DED3]( f356_arg2, f356_arg1, f356_local0 )
+	return Engine[@"getitemname"]( f356_arg2, f356_arg1, f356_local0 )
 end
 CoD.CACUtility.GetItemDescriptionFromIndex = function ( f357_arg0, f357_arg1, f357_arg2 )
 	local f357_local0 = CoD.BaseUtility.GetMenuSessionMode( f357_arg0 )
 	if not f357_arg1 then
-		f357_arg1 = Enum[0x6EB546760F890D2][0x3057ABF96AF8289]
+		f357_arg1 = Enum[@"statindexoffset"][@"hash_13057ABF96AF8289"]
 	end
-	return Engine[0x3E0DA351EF48521]( f357_arg2, f357_arg1, f357_local0 )
+	return Engine[@"getitemdesc"]( f357_arg2, f357_arg1, f357_local0 )
 end
 CoD.CACUtility.GetCurrentWeaponLevel = function ( f358_arg0, f358_arg1, f358_arg2 )
 	local f358_local0 = f358_arg1
@@ -6641,9 +6641,9 @@ CoD.CACUtility.GetCurrentWeaponLevel = function ( f358_arg0, f358_arg1, f358_arg
 		if f358_local2 <= CoD.CACUtility.EmptyItemIndex then
 			return 1
 		else
-			local f358_local3 = Engine[0x1EA89C73C920CC2]( f358_local0, f358_local2, f358_local1 )
+			local f358_local3 = Engine[@"getguncurrentrank"]( f358_local0, f358_local2, f358_local1 )
 			if CoD.CACUtility.IsWeaponLevelMax( f358_local0, f358_local2, f358_local1 ) then
-				return Engine[0xF9F1239CFD921FE]( 0x4EF66575DDB929 )
+				return Engine[@"hash_4F9F1239CFD921FE"]( 0x4EF66575DDB929 )
 			else
 				return f358_local3 + 1
 			end
@@ -6651,7 +6651,7 @@ CoD.CACUtility.GetCurrentWeaponLevel = function ( f358_arg0, f358_arg1, f358_arg
 	end
 end
 CoD.CACUtility.LocalizeCurrentWeaponLevelIntoString = function ( f359_arg0, f359_arg1, f359_arg2, f359_arg3 )
-	return Engine[0xF9F1239CFD921FE]( f359_arg1, CoD.CACUtility.GetCurrentWeaponLevel( f359_arg0, f359_arg2, f359_arg3 ) )
+	return Engine[@"hash_4F9F1239CFD921FE"]( f359_arg1, CoD.CACUtility.GetCurrentWeaponLevel( f359_arg0, f359_arg2, f359_arg3 ) )
 end
 CoD.CACUtility.GetNextWeaponLevel = function ( f360_arg0, f360_arg1, f360_arg2 )
 	local f360_local0 = f360_arg1
@@ -6660,7 +6660,7 @@ CoD.CACUtility.GetNextWeaponLevel = function ( f360_arg0, f360_arg1, f360_arg2 )
 	if f360_local2 <= CoD.CACUtility.EmptyItemIndex then
 		return 1
 	else
-		return Engine[0x1EA89C73C920CC2]( f360_local0, f360_local2, f360_local1 ) + 2
+		return Engine[@"getguncurrentrank"]( f360_local0, f360_local2, f360_local1 ) + 2
 	end
 end
 CoD.CACUtility.GetCurrentWeaponXP = function ( f361_arg0, f361_arg1, f361_arg2, f361_arg3, f361_arg4, f361_arg5 )
@@ -6673,8 +6673,8 @@ CoD.CACUtility.GetCurrentWeaponXP = function ( f361_arg0, f361_arg1, f361_arg2, 
 		if f361_local2 <= CoD.CACUtility.EmptyItemIndex then
 			return 0, f361_arg3, f361_arg4, f361_arg5
 		else
-			local f361_local3 = Engine[0xD800E603BFE4D80]( f361_local0, f361_local2, f361_local1 )
-			return (Engine[0x18AC0C24E21B61A]( f361_local0, f361_local2, f361_local1 ) - f361_local3) / (Engine[0xFF3DA2744A0F3A3]( f361_local0, f361_local2, f361_local1 ) - f361_local3), f361_arg3, f361_arg4, f361_arg5
+			local f361_local3 = Engine[@"getgunprevrankxp"]( f361_local0, f361_local2, f361_local1 )
+			return (Engine[@"getguncurrentrankxp"]( f361_local0, f361_local2, f361_local1 ) - f361_local3) / (Engine[@"hash_7FF3DA2744A0F3A3"]( f361_local0, f361_local2, f361_local1 ) - f361_local3), f361_arg3, f361_arg4, f361_arg5
 		end
 	end
 end
@@ -6685,9 +6685,9 @@ CoD.CACUtility.GetAttachmentUnlockDescription = function ( f362_arg0, f362_arg1,
 	if CoD.CACUtility.IsProgressionEnabled( f362_local3 ) and f362_local2 and f362_local2[f362_local4] then
 		local f362_local5 = CoD.SafeGetModelValue( f362_local2[f362_local4], "itemIndex" )
 		if f362_local5 and f362_local5 > CoD.CACUtility.EmptyItemIndex then
-			local f362_local6 = Engine[0x2F222B10B26FCEF]( f362_local5, f362_local1, f362_local3 )
+			local f362_local6 = Engine[@"getitemattachmentrank"]( f362_local5, f362_local1, f362_local3 )
 			if f362_local6 then
-				return Engine[0xF9F1239CFD921FE]( 0xEF33BF324CE24F5, f362_local6 + 2 )
+				return Engine[@"hash_4F9F1239CFD921FE"]( @"hash_1EF33BF324CE24F5", f362_local6 + 2 )
 			end
 		end
 	end
@@ -6711,7 +6711,7 @@ CoD.CACUtility.GetUnlockDescriptionForFeature = function ( f364_arg0, f364_arg1,
 	if f364_local2 and f364_local1 and CoD.CACUtility.IsProgressionEnabled( f364_local1 ) then
 		local f364_local3 = CoD.CACUtility.GetClassesUnlockableItemUnlockInfo( f364_local2.classNum:get(), "featureItemIndex" )
 		if f364_local3 then
-			return CoD.GetUnlockStringForItemIndex( f364_local0, f364_local3, Enum[0x6EB546760F890D2][0x3057ABF96AF8289], f364_local1 )
+			return CoD.GetUnlockStringForItemIndex( f364_local0, f364_local3, Enum[@"statindexoffset"][@"hash_13057ABF96AF8289"], f364_local1 )
 		end
 	end
 	return ""
@@ -6722,30 +6722,30 @@ CoD.CACUtility.GetUnlockRankIconLargeForFeature = function ( f365_arg0, f365_arg
 	if f365_local1 and f365_local0 and CoD.CACUtility.IsProgressionEnabled( f365_local0 ) then
 		local f365_local2 = CoD.CACUtility.GetClassesUnlockableItemUnlockInfo( f365_local1.classNum:get(), "featureItemIndex" )
 		if f365_local2 then
-			return Engine[0xE1B786B1A765D9E]( Engine[0x6A28AE1C9C05372]( f365_local2, Enum[0x6EB546760F890D2][0x3057ABF96AF8289], f365_local0 ), f365_local0 )
+			return Engine[@"hash_7E1B786B1A765D9E"]( Engine[@"getitemunlocklevel"]( f365_local2, Enum[@"statindexoffset"][@"hash_13057ABF96AF8289"], f365_local0 ), f365_local0 )
 		end
 	end
 	return 0x0
 end
 CoD.CACUtility.GetRemoveItemString = function ( f366_arg0, f366_arg1, f366_arg2 )
 	local f366_local0 = f366_arg1
-	local f366_local1 = Engine[0x4DF5CFBC1771947]( f366_arg0 )
+	local f366_local1 = Engine[@"getmodelforcontroller"]( f366_arg0 )
 	local f366_local2 = f366_local1.CACMenu.numItemsToRemove:get()
 	if f366_local2 > 1 then
 		f366_local0 = f366_arg2
 	end
-	return Engine[0xF9F1239CFD921FE]( f366_local0, f366_local2 )
+	return Engine[@"hash_4F9F1239CFD921FE"]( f366_local0, f366_local2 )
 end
 CoD.CACUtility.GetRemoveItemTitle = function ( f367_arg0, f367_arg1 )
-	return GetRemoveItemString( f367_arg0, 0x893950C8EC6797B, 0xBEC830810F92DDE )
+	return GetRemoveItemString( f367_arg0, @"hash_5893950C8EC6797B", @"hash_BEC830810F92DDE" )
 end
 CoD.CACUtility.GetRemoveItemDescription = function ( f368_arg0, f368_arg1 )
-	return CoD.CACUtility.GetRemoveItemString( f368_arg0, 0x3F7843044F0AE6D, 0x4362982FF996EE )
+	return CoD.CACUtility.GetRemoveItemString( f368_arg0, @"hash_3F7843044F0AE6D", 0x4362982FF996EE )
 end
 CoD.CACUtility.RemoveEmptyString = function ( f369_arg0 )
-	if f369_arg0 == 0xB67F7FB585D594C then
+	if f369_arg0 == @"menu/empty" then
 		return 0x0
-	elseif type( f369_arg0 ) == "string" and Engine[0xF9F1239CFD921FE]( 0xB67F7FB585D594C ) == f369_arg0 then
+	elseif type( f369_arg0 ) == "string" and Engine[@"hash_4F9F1239CFD921FE"]( @"menu/empty" ) == f369_arg0 then
 		return ""
 	else
 		return f369_arg0
@@ -6753,15 +6753,15 @@ CoD.CACUtility.RemoveEmptyString = function ( f369_arg0 )
 end
 CoD.CACUtility.FilterSignatureWeapon = function ( f370_arg0, f370_arg1, f370_arg2, f370_arg3 )
 	if f370_arg2 then
-		local f370_local0 = f370_arg1[0xC2AA73D9F82E9C2]
-		if not f370_local0 and f370_arg1[0x3CF8E8F9081468B] ~= 0 then
+		local f370_local0 = f370_arg1[@"hash_5C2AA73D9F82E9C2"]
+		if not f370_local0 and f370_arg1[@"index"] ~= 0 then
 			return f370_local0
 		end
 	end
-	if CoD.CACUtility.DvarHideUnlockableItem( f370_arg1[0x28887F70BF5EBA] ) then
+	if CoD.CACUtility.DvarHideUnlockableItem( f370_arg1[@"lootid"] ) then
 		return false
 	end
-	local f370_local0 = CoD.BlackMarketTableUtility.LootInfoLookup( f370_arg0, f370_arg1[0x28887F70BF5EBA] )
+	local f370_local0 = CoD.BlackMarketTableUtility.LootInfoLookup( f370_arg0, f370_arg1[@"lootid"] )
 	if f370_local0.isLoot then
 		if f370_arg3 then
 			if not f370_local0.owned then
@@ -6772,13 +6772,13 @@ CoD.CACUtility.FilterSignatureWeapon = function ( f370_arg0, f370_arg1, f370_arg
 			return false
 		end
 		return true
-	elseif f370_arg1[0x562938AF86028A0] ~= 0x0 and Engine[0xB521CB398C92692]( f370_arg0, f370_arg1[0x562938AF86028A0] ) then
+	elseif f370_arg1[@"entitlement"] ~= 0x0 and Engine[@"hasentitlement"]( f370_arg0, f370_arg1[@"entitlement"] ) then
 		return true
 	end
-	return f370_arg1[0x3CF8E8F9081468B] == 0
+	return f370_arg1[@"index"] == 0
 end
 CoD.CACUtility.ForAvailableSignatureWeapons = function ( f371_arg0, f371_arg1, f371_arg2, f371_arg3 )
-	return LuaUtils.IterateFilteredArray( Engine[0x9F0BB7D52A7A978]( f371_arg1 ), function ( f372_arg0, f372_arg1 )
+	return LuaUtils.IterateFilteredArray( Engine[@"hash_79F0BB7D52A7A978"]( f371_arg1 ), function ( f372_arg0, f372_arg1 )
 		return CoD.CACUtility.FilterSignatureWeapon( f371_arg0, f372_arg1, not f371_arg2, f371_arg3 )
 	end
 	 )
@@ -6787,9 +6787,9 @@ CoD.CACUtility.GetConsumableCountFromIndex = function ( f373_arg0, f373_arg1, f3
 	local f373_local0 = f373_arg0
 	local f373_local1 = CoD.BaseUtility.GetMenuSessionMode( f373_arg1 )
 	if not f373_local1 then
-		f373_local1 = Engine[0x3EAC408F958FF05]()
+		f373_local1 = Engine[@"currentsessionmode"]()
 	end
-	local f373_local2 = Engine[0x475AAFCBC9AF822]( f373_local0, Engine[0xB98952F69D937F9]( f373_arg3, f373_arg2, f373_local1 ), f373_local1 )
+	local f373_local2 = Engine[@"hash_3475AAFCBC9AF822"]( f373_local0, Engine[@"hash_7B98952F69D937F9"]( f373_arg3, f373_arg2, f373_local1 ), f373_local1 )
 	if not f373_local2 then
 		return 0
 	else
@@ -6801,13 +6801,13 @@ CoD.CACUtility.SetBaseWeaponNameAlpha = function ( f374_arg0, f374_arg1, f374_ar
 	local f374_local1, f374_local2, f374_local3 = CoD.BaseUtility.GetMenuModelModeLoadoutSlot( f374_arg1 )
 	local f374_local4 = f374_arg4
 	if f374_local1 and f374_arg3 and f374_local2 and f374_local4 then
-		local f374_local5 = Engine[0x9F0BB7D52A7A978]( Engine[0xB98952F69D937F9]( f374_local4, Enum[0x6EB546760F890D2][0x569E84652131CD7], f374_local2 ) )
+		local f374_local5 = Engine[@"hash_79F0BB7D52A7A978"]( Engine[@"hash_7B98952F69D937F9"]( f374_local4, Enum[@"statindexoffset"][@"hash_6569E84652131CD7"], f374_local2 ) )
 		local f374_local6
-		if f374_local2 ~= Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A] then
+		if f374_local2 ~= Enum[@"emodes"][@"mode_zombies"] then
 			f374_local6 = f374_local1[f374_arg3].weaponModelSlot:get() + 1
 			if not f374_local6 then
 			
-			elseif f374_local5 and f374_local6 and f374_local5[f374_local6] and f374_local5[f374_local6][0xC2AA73D9F82E9C2] then
+			elseif f374_local5 and f374_local6 and f374_local5[f374_local6] and f374_local5[f374_local6][@"hash_5C2AA73D9F82E9C2"] then
 				f374_local0 = 1
 			end
 		end
@@ -6879,27 +6879,27 @@ CoD.CACUtility.ChangeClass = function ( f381_arg0, f381_arg1, f381_arg2 )
 	local f381_local1 = ""
 	if f381_arg2 ~= nil then
 		f381_local1 = string.lower( f381_arg2 )
-		f381_arg1 = Engine[0xA74AD889C428AA8]( f381_arg2 )
+		f381_arg1 = Engine[@"getclassindexfromname"]( f381_arg2 )
 	else
 		f381_local1 = "custom" .. f381_arg1
 	end
 	local f381_local2 = CoD.gameModeEnum
-	if f381_local2 == Enum[0x9C0C2196D8313A0][0x60063C67132EB69] and CoD.perController[f381_arg0].fieldOpsKitClassNum ~= f381_arg1 + 1 then
+	if f381_local2 == Enum[@"emodes"][@"mode_campaign"] and CoD.perController[f381_arg0].fieldOpsKitClassNum ~= f381_arg1 + 1 then
 		CoD.CACUtility.SetShowcaseWeaponToClassPrimary( f381_arg0, f381_arg1 )
 		SaveLoadoutGeneric( f381_arg0 )
 	end
-	if f381_local2 == Enum[0x9C0C2196D8313A0][0x60063C67132EB69] or f381_local2 == Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5] then
+	if f381_local2 == Enum[@"emodes"][@"mode_campaign"] or f381_local2 == Enum[@"emodes"][@"mode_multiplayer"] then
 		CoD.CACUtility.SetSelectedCustomClass( f381_arg0, f381_local2, f381_arg1 )
 	end
 	if IsMultiplayer() then
-		Engine[0xC554A8C36EF7EFF]( f381_arg0, CoD.CACUtility.PositionDraftMenuName, f381_local1, 0 )
+		Engine[@"sendmenuresponse"]( f381_arg0, CoD.CACUtility.PositionDraftMenuName, f381_local1, 0 )
 	end
 	CoD.CACUtility.SetProfileLoadoutChoice( f381_arg0, f381_arg1 )
 	if IsInGame() then
 		if not IsCampaign() then
 			HUD_IngameMenuClosed()
 		end
-		Engine[0xBB4D9766B6D0C88]( f381_arg0, f381_local0 )
+		Engine[@"streamsetcustomclass"]( f381_arg0, f381_local0 )
 	end
 end
 CoD.CACUtility.AddGlobalRightStickSingleItemControlForSessionMode = function ( f382_arg0, f382_arg1, f382_arg2, f382_arg3, f382_arg4 )
@@ -6908,7 +6908,7 @@ CoD.CACUtility.AddGlobalRightStickSingleItemControlForSessionMode = function ( f
 	end
 	f382_arg0._perModeGridOrList[f382_arg3] = f382_arg1
 	if IsFreeCursorActive( f382_arg2 ) then
-		f382_arg0:AddButtonCallbackFunction( f382_arg0, f382_arg2, Enum[0x3DD78803F918E9D][0x57783F8DA4AAEF], nil, function ( element, menu, controller, model )
+		f382_arg0:AddButtonCallbackFunction( f382_arg0, f382_arg2, Enum[@"luibutton"][@"lui_key_left"], nil, function ( element, menu, controller, model )
 			local f383_local0 = menu._perModeGridOrList[CoD.BaseUtility.GetMenuSessionMode( menu )]
 			if f383_local0 and IsFreeCursorActive( controller ) and not IsDpadButton( model ) and not PropertyIsTrue( f383_local0, "m_disableNavigation" ) then
 				f383_local0:navigateItemLeft()
@@ -6917,7 +6917,7 @@ CoD.CACUtility.AddGlobalRightStickSingleItemControlForSessionMode = function ( f
 				end
 			end
 		end, AlwaysFalse, false )
-		f382_arg0:AddButtonCallbackFunction( f382_arg0, f382_arg2, Enum[0x3DD78803F918E9D][0x571F08AD84807E0], nil, function ( element, menu, controller, model )
+		f382_arg0:AddButtonCallbackFunction( f382_arg0, f382_arg2, Enum[@"luibutton"][@"lui_key_right"], nil, function ( element, menu, controller, model )
 			local f384_local0 = menu._perModeGridOrList[CoD.BaseUtility.GetMenuSessionMode( menu )]
 			if f384_local0 and IsFreeCursorActive( controller ) and not IsDpadButton( model ) and not PropertyIsTrue( f384_local0, "m_disableNavigation" ) then
 				f384_local0:navigateItemRight()
@@ -6926,7 +6926,7 @@ CoD.CACUtility.AddGlobalRightStickSingleItemControlForSessionMode = function ( f
 				end
 			end
 		end, AlwaysFalse, false )
-		f382_arg0:AddButtonCallbackFunction( f382_arg0, f382_arg2, Enum[0x3DD78803F918E9D][0x4B11D2B20C75A7F], nil, function ( element, menu, controller, model )
+		f382_arg0:AddButtonCallbackFunction( f382_arg0, f382_arg2, Enum[@"luibutton"][@"lui_key_up"], nil, function ( element, menu, controller, model )
 			local f385_local0 = menu._perModeGridOrList[CoD.BaseUtility.GetMenuSessionMode( menu )]
 			if f385_local0 and IsFreeCursorActive( controller ) and not IsDpadButton( model ) and not PropertyIsTrue( f385_local0, "m_disableNavigation" ) then
 				f385_local0:navigateItemUp()
@@ -6935,7 +6935,7 @@ CoD.CACUtility.AddGlobalRightStickSingleItemControlForSessionMode = function ( f
 				end
 			end
 		end, AlwaysFalse, false )
-		f382_arg0:AddButtonCallbackFunction( f382_arg0, f382_arg2, Enum[0x3DD78803F918E9D][0xD4C15FE32148D3A], nil, function ( element, menu, controller, model )
+		f382_arg0:AddButtonCallbackFunction( f382_arg0, f382_arg2, Enum[@"luibutton"][@"lui_key_down"], nil, function ( element, menu, controller, model )
 			local f386_local0 = menu._perModeGridOrList[CoD.BaseUtility.GetMenuSessionMode( menu )]
 			if f386_local0 and IsFreeCursorActive( controller ) and not IsDpadButton( model ) and not PropertyIsTrue( f386_local0, "m_disableNavigation" ) then
 				f386_local0:navigateItemDown()
@@ -6950,7 +6950,7 @@ CoD.CACUtility.AddGlobalRightStickSingleItemControlForSessionMode = function ( f
 	end
 end
 CoD.CACUtility.MenuUsesAltWatermarkLocation = function ( f387_arg0 )
-	local f387_local0 = Engine[0x8DF2E5447F384B9]()
+	local f387_local0 = Engine[@"getglobalmodel"]()
 	f387_local0 = f387_local0.showPreAlphaText
 	local f387_local1 = f387_local0 and f387_local0:get()
 	if f387_local1 ~= nil and f387_local1 ~= 0 then
@@ -6978,7 +6978,7 @@ CoD.CACUtility.WeaponSelectUpdateSigListIfInFocus = function ( f389_arg0, f389_a
 	HideWidget( f389_arg3 )
 	ShowWidget( f389_arg2 )
 	if f389_local0 then
-		local f389_local1 = Engine[0x4DF5CFBC1771947]( f389_arg1 )
+		local f389_local1 = Engine[@"getmodelforcontroller"]( f389_arg1 )
 		f389_local1 = f389_local1.weaponSelectItemIndex
 		local f389_local2 = f389_local1
 		f389_local1 = f389_local1.set
@@ -6993,16 +6993,16 @@ CoD.CACUtility.WeaponSelectUpdateSigListIfInFocus = function ( f389_arg0, f389_a
 end
 CoD.CACUtility.UpdateCACCurrentActiveTabIndexValue = function ( f390_arg0, f390_arg1 )
 	if f390_arg1.activeWidget then
-		local f390_local0 = Engine[0x8DF2E5447F384B9]()
+		local f390_local0 = Engine[@"getglobalmodel"]()
 		f390_local0.CACCurrentActiveTabIndex:set( f390_arg1.activeWidget.gridInfoTable.gridColIndex )
 	end
 end
 CoD.CACUtility.IsFirstCACTabInRowActive = function ( f391_arg0 )
-	local f391_local0 = Engine[0x8DF2E5447F384B9]()
+	local f391_local0 = Engine[@"getglobalmodel"]()
 	return f391_local0.CACCurrentActiveTabIndex:get() == 1
 end
 CoD.CACUtility.IsLastCACTabInRowActive = function ( f392_arg0, f392_arg1 )
-	local f392_local0 = Engine[0x8DF2E5447F384B9]()
+	local f392_local0 = Engine[@"getglobalmodel"]()
 	f392_local0 = f392_local0.CACCurrentActiveTabIndex:get()
 	local f392_local1 = f392_arg1.itemCount
 	local f392_local2
@@ -7015,16 +7015,16 @@ CoD.CACUtility.IsLastCACTabInRowActive = function ( f392_arg0, f392_arg1 )
 end
 CoD.CACUtility.UpdateCommonCurrentActiveTabIndexValue = function ( f393_arg0, f393_arg1 )
 	if f393_arg1.Tabs and f393_arg1.Tabs.grid and f393_arg1.Tabs.grid.activeWidget then
-		local f393_local0 = Engine[0x8DF2E5447F384B9]()
+		local f393_local0 = Engine[@"getglobalmodel"]()
 		f393_local0.CommonCurrentActiveTabIndex:set( f393_arg1.Tabs.grid.activeWidget.gridInfoTable.gridColIndex )
 	end
 end
 CoD.CACUtility.IsFirstCommonTabInRowActive = function ( f394_arg0 )
-	local f394_local0 = Engine[0x8DF2E5447F384B9]()
+	local f394_local0 = Engine[@"getglobalmodel"]()
 	return f394_local0.CommonCurrentActiveTabIndex:get() == 1
 end
 CoD.CACUtility.IsLastCommonTabInRowActive = function ( f395_arg0, f395_arg1 )
-	local f395_local0 = Engine[0x8DF2E5447F384B9]()
+	local f395_local0 = Engine[@"getglobalmodel"]()
 	f395_local0 = f395_local0.CommonCurrentActiveTabIndex:get()
 	local f395_local1 = f395_arg1.grid.itemCount
 	local f395_local2
@@ -7037,7 +7037,7 @@ CoD.CACUtility.IsLastCommonTabInRowActive = function ( f395_arg0, f395_arg1 )
 end
 CoD.CACUtility.UpdateArmoryArrowState = function ( f396_arg0, f396_arg1, f396_arg2 )
 	local f396_local0 = "CommonCurrentActiveTabIndex"
-	local f396_local1 = Engine[0x8DF2E5447F384B9]()
+	local f396_local1 = Engine[@"getglobalmodel"]()
 	f396_arg0:updateElementState( f396_arg2, {
 		name = "model_validation",
 		menu = f396_arg0,
@@ -7047,10 +7047,10 @@ CoD.CACUtility.UpdateArmoryArrowState = function ( f396_arg0, f396_arg1, f396_ar
 	} )
 end
 CoD.CACUtility.DvarHiddenUnlockableItems = {
-	[0xB5FC66B55968364] = {
-		[0x65C22731C18755C] = {},
-		[0x242C2A18CEA5E1] = {},
-		[0x6F5A81348E35487] = {}
+	[@"hash_6B5FC66B55968364"] = {
+		[@"zm_bgb_conflagration_liquidation"] = {},
+		[@"zm_bgb_refresh_mint"] = {},
+		[@"zm_bgb_perk_up"] = {}
 	}
 }
 CoD.CACUtility.UnlockableItemsHiddenByDvar = {}
@@ -7062,124 +7062,124 @@ for f0_local7, f0_local8 in pairs( CoD.CACUtility.DvarHiddenUnlockableItems ) do
 	end
 end
 CoD.CACUtility.DvarShownUnlockableItems = {
-	[0x5BDF5CF34DD4A2D] = {
-		[0xD7835133AA2DAA1] = {
-			Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A]
+	[@"hash_65BDF5CF34DD4A2D"] = {
+		[@"smg_folding_t8"] = {
+			Enum[@"emodes"][@"mode_zombies"]
 		},
-		[0xA7BDA9AB5E9BF35] = {
-			Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A]
+		[@"shotgun_fullauto_t8"] = {
+			Enum[@"emodes"][@"mode_zombies"]
 		}
 	},
-	[0x4A35A9A09159E10] = {
-		[0x56FF889F3D0A15B] = {
-			Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A]
+	[@"hash_54A35A9A09159E10"] = {
+		[@"loot_pistol_fullauto_mk2"] = {
+			Enum[@"emodes"][@"mode_zombies"]
 		},
-		[0x1D27F11D2798FC1] = {
-			Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A]
+		[@"loot_smg_burst_mk2"] = {
+			Enum[@"emodes"][@"mode_zombies"]
 		},
-		[0x6A15EA8B6EE6E8] = {
-			Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A]
+		[@"loot_ar_standard_mk2"] = {
+			Enum[@"emodes"][@"mode_zombies"]
 		}
 	},
-	[0x9EF5478510B5AF3] = {
-		[0xFAC30B31B5BEC64] = {
-			Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A]
+	[@"hash_49EF5478510B5AF3"] = {
+		[@"perk_zombshell"] = {
+			Enum[@"emodes"][@"mode_zombies"]
 		}
 	},
-	[0x7C3EBC11793A175] = {
-		[0x3F12A7EBB3E91AC] = {
-			Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A]
+	[@"hash_37C3EBC11793A175"] = {
+		[@"zm_bgb_suit_up"] = {
+			Enum[@"emodes"][@"mode_zombies"]
 		},
-		[0xFD8F0866DBEDA28] = {
-			Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A]
+		[@"zm_bgb_dividend_yield"] = {
+			Enum[@"emodes"][@"mode_zombies"]
 		},
-		[0xFF20DC353CEB63] = {
-			Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A]
+		[@"zm_bgb_talkin_bout_regeneration"] = {
+			Enum[@"emodes"][@"mode_zombies"]
 		},
-		[0x9EAEF177AABC815] = {
-			Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A]
+		[@"zm_bgb_bullet_boost"] = {
+			Enum[@"emodes"][@"mode_zombies"]
 		},
-		[0x455490B99D4CBBB] = {
-			Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A]
+		[@"zm_bgb_quacknarok"] = {
+			Enum[@"emodes"][@"mode_zombies"]
 		}
 	},
-	[0x686ED971E896201] = {
-		[0x734F461CBE4850D] = {
-			Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A]
+	[@"hash_4686ED971E896201"] = {
+		[@"talisman_permanent_heroweap_armor"] = {
+			Enum[@"emodes"][@"mode_zombies"]
 		},
-		[0x53DCE90F31AA76] = {
-			Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A]
+		[@"talisman_extra_self_revive"] = {
+			Enum[@"emodes"][@"mode_zombies"]
 		}
 	},
-	[0x715F2013B7512B0] = {
-		[0x7F46C2CAF1DE7FC] = {
-			Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A]
+	[@"hash_5715F2013B7512B0"] = {
+		[@"lmg_stealth_t8"] = {
+			Enum[@"emodes"][@"mode_zombies"]
 		}
 	},
 	[0x956C9A593B283C] = {
-		[0xE05A4F677ADA872] = {
-			Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A]
+		[@"loot_dlc_full_autoshotgun_mk2"] = {
+			Enum[@"emodes"][@"mode_zombies"]
 		},
-		[0xD87BB98339A30C1] = {
-			Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A]
+		[@"loot_dlc_breifcase_smg_mk2"] = {
+			Enum[@"emodes"][@"mode_zombies"]
 		},
-		[0xCF9A61735076876] = {
-			Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A]
+		[@"loot_ar_stealth_mk2"] = {
+			Enum[@"emodes"][@"mode_zombies"]
 		},
-		[0xA783070BF65EBE5] = {
-			Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A]
+		[@"loot_smg_fastfire_mk2"] = {
+			Enum[@"emodes"][@"mode_zombies"]
 		}
 	},
-	[0x323F1A0F6C70ED0] = {
-		[0x9618269D014E1FE] = {
-			Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A]
+	[@"hash_3323F1A0F6C70ED0"] = {
+		[@"sniper_mini14_t8"] = {
+			Enum[@"emodes"][@"mode_zombies"]
 		}
 	},
-	[0xE30B8B2F3629DA3] = {
-		[0x913B5E2900CDF3F] = {
-			Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A]
+	[@"hash_1E30B8B2F3629DA3"] = {
+		[@"zm_bgb_perkaholic"] = {
+			Enum[@"emodes"][@"mode_zombies"]
 		},
-		[0xD13857AEB37FE53] = {
-			Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A]
+		[@"zm_bgb_near_death_experience"] = {
+			Enum[@"emodes"][@"mode_zombies"]
 		},
-		[0x2E9E5C5026C2620] = {
-			Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A]
+		[@"zm_bgb_shopping_free"] = {
+			Enum[@"emodes"][@"mode_zombies"]
 		},
-		[0x98BD245E259C64F] = {
-			Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A]
+		[@"zm_bgb_reign_drops"] = {
+			Enum[@"emodes"][@"mode_zombies"]
 		}
 	},
-	[0xBFA5BDA576BE7C4] = {
-		[0x7FB40C4D855E7AF] = {
-			Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A]
+	[@"hash_5BFA5BDA576BE7C4"] = {
+		[@"zm_bgb_head_drama"] = {
+			Enum[@"emodes"][@"mode_zombies"]
 		},
-		[0xEBE3A344FB54080] = {
-			Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A]
+		[@"zm_bgb_phoenix_up"] = {
+			Enum[@"emodes"][@"mode_zombies"]
 		}
 	},
-	[0x1232038A2928EDD] = {
-		[0xF8DD5E57E340A94] = {
-			Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A]
+	[@"hash_21232038A2928EDD"] = {
+		[@"zm_bgb_power_vacuum"] = {
+			Enum[@"emodes"][@"mode_zombies"]
 		},
-		[0x28619E07BF4DED1] = {
-			Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A]
+		[@"zm_bgb_secret_shopper"] = {
+			Enum[@"emodes"][@"mode_zombies"]
 		}
 	},
-	[0xE1190045EF3588B] = {
-		[0x334F2C7E1B57493] = {
-			Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A]
+	[@"hash_4E1190045EF3588B"] = {
+		[@"perk_wolf_protector"] = {
+			Enum[@"emodes"][@"mode_zombies"]
 		}
 	},
-	[0xC1A8ED8D0BF271C] = {
-		[0x73D5CE33DD7CDE9] = {
-			Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A]
+	[@"hash_1C1A8ED8D0BF271C"] = {
+		[@"perk_death_dash"] = {
+			Enum[@"emodes"][@"mode_zombies"]
 		}
 	}
 }
 CoD.CACUtility.DvarUnlockableItemsHasAttachments = {
-	[0xDC2E4C6EDDB0062] = {
-		[0xC2D17D2F2C857E1] = {
-			Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A]
+	[@"hash_7DC2E4C6EDDB0062"] = {
+		[@"ar_galil_t8"] = {
+			Enum[@"emodes"][@"mode_zombies"]
 		}
 	}
 }
@@ -7205,7 +7205,7 @@ CoD.CACUtility.DvarHideUnlockableItem = function ( f397_arg0, f397_arg1 )
 	end
 	
 	if f397_arg1 == nil then
-		f397_arg1 = Engine[0x3EAC408F958FF05]()
+		f397_arg1 = Engine[@"currentsessionmode"]()
 	end
 	local f397_local1 = CoD.CACUtility.UnlockableItemsShownByDvar[f397_arg0]
 	if f397_local1 and f397_local0( f397_arg1, f397_local1 ) and f397_local1.dvar ~= nil then
@@ -7241,7 +7241,7 @@ CoD.CACUtility.DvarUnlockableItemHasNoAttachments = function ( f399_arg0, f399_a
 	end
 	
 	if f399_arg1 == nil then
-		f399_arg1 = Engine[0x3EAC408F958FF05]()
+		f399_arg1 = Engine[@"currentsessionmode"]()
 	end
 	local f399_local1 = CoD.CACUtility.UnlockableItemsHaveAttachmentsByDvar[f399_arg0]
 	if f399_local1 and f399_local0( f399_arg1, f399_local1 ) and f399_local1.dvar ~= nil then
@@ -7283,7 +7283,7 @@ DataSources.Unlockables = ListHelper_SetupDataSource( "Unlockables", function ( 
 		if f401_local6 then
 			for f401_local13, f401_local14 in ipairs( f401_local6 ) do
 				if not CoD.BonuscardUtility.IsBonuscardEquipped( f401_local1, f401_local14, f401_local2 ) then
-					f401_local7 = Engine[0xD97229B24C685D5]( f401_local14, f401_local2 )
+					f401_local7 = Engine[@"hash_2D97229B24C685D5"]( f401_local14, f401_local2 )
 				end
 			end
 		end
@@ -7298,7 +7298,7 @@ DataSources.Unlockables = ListHelper_SetupDataSource( "Unlockables", function ( 
 				if not f401_local9 and f401_local15.properties and f401_local15.properties.selectIndex then
 					f401_local9 = true
 				end
-				if f401_local15.models and (f401_local2 == Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A] or not f401_local15.models.isRestricted) then
+				if f401_local15.models and (f401_local2 == Enum[@"emodes"][@"mode_zombies"] or not f401_local15.models.isRestricted) then
 					table.insert( f401_local0, f401_local15 )
 				end
 			end
@@ -7330,7 +7330,7 @@ DataSources.SignatureWeapons = ListHelper_SetupDataSource( "SignatureWeapons", f
 	local f404_local0 = {}
 	local f404_local1 = CoD.BaseUtility.GetMenuSessionMode( f404_arg1.menu )
 	local f404_local2 = f404_arg1:getParent()
-	local f404_local3 = Engine[0x4DF5CFBC1771947]( f404_arg0 )
+	local f404_local3 = Engine[@"getmodelforcontroller"]( f404_arg0 )
 	local f404_local4 = CoD.BaseUtility.GetMenuModel( f404_arg1.menu )
 	local f404_local5 = CoD.BaseUtility.GetMenuLoadoutSlot( f404_arg1.menu )
 	local f404_local6 = f404_local2:getModel()
@@ -7360,7 +7360,7 @@ DataSources.SignatureWeapons = ListHelper_SetupDataSource( "SignatureWeapons", f
 			if not f404_arg1.weaponPersonalizationUpdateSubscription then
 				f404_local9 = f404_arg1
 				f404_local8 = f404_arg1.subscribeToModel
-				f404_local10 = Engine[0x4DF5CFBC1771947]( f404_arg0 )
+				f404_local10 = Engine[@"getmodelforcontroller"]( f404_arg0 )
 				f404_arg1.weaponPersonalizationUpdateSubscription = f404_local8( f404_local9, f404_local10:create( "WeaponPersonalization.listUpdate" ), function ()
 					f404_arg1:updateDataSource( true, true )
 				end, false )
@@ -7402,8 +7402,8 @@ CoD.CACUtility.HideWeaponVariantList = function ( f407_arg0, f407_arg1 )
 	end
 	CoD.BaseUtility.EnableMenuGridNavigation( f407_arg0 )
 	f407_arg0._showWeaponVariantList = nil
-	local f407_local2 = Engine[0x4DF5CFBC1771947]( f407_arg1 )
-	Engine[0x6A489878620F3BC]( f407_local2:create( "VariantListShownUpdate" ) )
+	local f407_local2 = Engine[@"getmodelforcontroller"]( f407_arg1 )
+	Engine[@"forcenotifymodelsubscriptions"]( f407_local2:create( "VariantListShownUpdate" ) )
 end
 CoD.CACUtility.ShowWeaponVariantList = function ( f408_arg0, f408_arg1, f408_arg2 )
 	if f408_arg0._showWeaponVariantList then
@@ -7432,6 +7432,6 @@ CoD.CACUtility.ShowWeaponVariantList = function ( f408_arg0, f408_arg1, f408_arg
 	f408_arg0._variantListWidget = f408_arg2
 	CoD.BaseUtility.DisableMenuGridNavigation( f408_arg0 )
 	f408_arg0._showWeaponVariantList = true
-	local f408_local1 = Engine[0x4DF5CFBC1771947]( f408_arg1 )
-	Engine[0x6A489878620F3BC]( f408_local1:create( "VariantListShownUpdate" ) )
+	local f408_local1 = Engine[@"getmodelforcontroller"]( f408_arg1 )
+	Engine[@"forcenotifymodelsubscriptions"]( f408_local1:create( "VariantListShownUpdate" ) )
 end

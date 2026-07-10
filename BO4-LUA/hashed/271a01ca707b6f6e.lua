@@ -11,7 +11,7 @@ CoD.LaboratoryElixirLabel.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local SceneBlur = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	SceneBlur:setRGB(0, 0, 0)
-	SceneBlur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	SceneBlur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	SceneBlur:setShaderVector(0, 0, 0.4, 0, 0)
 	self:addElement(SceneBlur)
 	self.SceneBlur = SceneBlur
@@ -25,12 +25,12 @@ CoD.LaboratoryElixirLabel.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	name:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	name:setTTF("dinnext_regular")
 	name:setLetterSpacing(1)
-	name:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	name:setAlignment(Enum[0x7A5123B654282D2][0x6ED4298C93DC5ED])
+	name:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	name:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
 	name:linkToElementModel(self, "id", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
-			name:setText(Engine[0xF9F1239CFD921FE](GetItemNameFromRef(Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A], f3_local0)))
+			name:setText(Engine[@"hash_4F9F1239CFD921FE"](GetItemNameFromRef(Enum[@"emodes"][@"mode_zombies"], f3_local0)))
 		end
 	end)
 	self:addElement(name)
@@ -40,12 +40,12 @@ CoD.LaboratoryElixirLabel.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	quantity:setAlpha(0)
 	quantity:setTTF("dinnext_regular")
 	quantity:setLetterSpacing(1)
-	quantity:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	quantity:setAlignment(Enum[0x7A5123B654282D2][0x6ED4298C93DC5ED])
+	quantity:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	quantity:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
 	quantity:linkToElementModel(self, "quantity", true, function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
-			quantity:setText(LocalizeIntoStringIfNotEmpty(0x9DB9C526E6370AB, f4_local0))
+			quantity:setText(LocalizeIntoStringIfNotEmpty(@"menu/multiplier_x", f4_local0))
 		end
 	end)
 	self:addElement(quantity)

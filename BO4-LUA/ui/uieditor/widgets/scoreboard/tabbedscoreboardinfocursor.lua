@@ -8,16 +8,16 @@ CoD.TabbedScoreboardInfoCursor.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local CursorFocus = LUI.UIImage.new(0, 0, 5, 25, 0, 0, 6, 26)
-	CursorFocus:setImage(RegisterImage(0x8DD2B93D88D623D))
+	CursorFocus:setImage(RegisterImage(@"hash_78DD2B93D88D623D"))
 	self:addElement(CursorFocus)
 	self.CursorFocus = CursorFocus
 	local Cursor = LUI.UIImage.new(0, 0, 6, 24, 0, 0, 6, 24)
-	Cursor:setImage(RegisterImage(0x850AA28B0953D86))
+	Cursor:setImage(RegisterImage(@"hash_6850AA28B0953D86"))
 	self:addElement(Cursor)
 	self.Cursor = Cursor
 	local CursorGlow = LUI.UIImage.new(0, 0, 0, 30, 0, 0, 0, 30)
-	CursorGlow:setImage(RegisterImage(0xF6FD4C7B4310756))
-	CursorGlow:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	CursorGlow:setImage(RegisterImage(@"hash_4F6FD4C7B4310756"))
+	CursorGlow:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(CursorGlow)
 	self.CursorGlow = CursorGlow
 	if PostLoadFunc then
@@ -74,7 +74,7 @@ CoD.TabbedScoreboardInfoCursor.__clipsPerState = {
 					f9_arg0:beginAnimation(1200)
 					f9_arg0:registerEventHandler("transition_complete_keyframe", f9_local0)
 				end
-				f3_arg0.Cursor:beginAnimation(300, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f3_arg0.Cursor:beginAnimation(300, Enum[@"luitween"][@"luitween_ease_in"])
 				f3_arg0.Cursor:setAlpha(1)
 				f3_arg0.Cursor:registerEventHandler("interrupted_keyframe", f3_arg0.clipInterrupted)
 				f3_arg0.Cursor:registerEventHandler("transition_complete_keyframe", f8_local0)
@@ -97,7 +97,7 @@ CoD.TabbedScoreboardInfoCursor.__clipsPerState = {
 					f13_arg0:setAlpha(0.7)
 					f13_arg0:registerEventHandler("transition_complete_keyframe", f13_local0)
 				end
-				f3_arg0.CursorGlow:beginAnimation(300, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f3_arg0.CursorGlow:beginAnimation(300, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_both"])
 				f3_arg0.CursorGlow:setAlpha(1)
 				f3_arg0.CursorGlow:registerEventHandler("interrupted_keyframe", f3_arg0.clipInterrupted)
 				f3_arg0.CursorGlow:registerEventHandler("transition_complete_keyframe", f12_local0)

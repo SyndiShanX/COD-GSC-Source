@@ -11,14 +11,14 @@ CoD.ScoreInfoEscortBarProgress.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	meterBacking:setRGB(0.21, 0.21, 0.21)
 	meterBacking:setAlpha(0.8)
 	meterBacking:setScale(0.63, 0.63)
-	meterBacking:setImage(RegisterImage(0x3674F9B5EAEF4ED))
-	meterBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0xE125638BF94665F))
+	meterBacking:setImage(RegisterImage(@"uie_wz_hud_map_danger_bar_empty"))
+	meterBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_feather_edges"))
 	meterBacking:setShaderVector(0, 0.01, 0.02, 0.01, 0.02)
 	self:addElement(meterBacking)
 	self.meterBacking = meterBacking
 	local ProgressBar = LUI.UIImage.new(0, 1, 0, 0, 0, 0, -1, 7)
-	ProgressBar:setImage(RegisterImage(0x3B9CBB9BBA5608))
-	ProgressBar:setMaterial(LUI.UIImage.GetCachedMaterial(0x316E67E1DF2198E))
+	ProgressBar:setImage(RegisterImage(@"uie_wz_hud_map_escort_bar"))
+	ProgressBar:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_normal"))
 	ProgressBar:setShaderVector(1, 0, 0, 0, 0)
 	ProgressBar:setShaderVector(2, 1, 0, 0, 0)
 	ProgressBar:setShaderVector(3, 0, 0, 0, 0)
@@ -38,7 +38,7 @@ CoD.ScoreInfoEscortBarProgress.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	self:addElement(ProgressBar)
 	self.ProgressBar = ProgressBar
 	local ProgressToBeat = LUI.UIImage.new(0, 0, -5, 5, 0, 0, -2, 8)
-	ProgressToBeat:setImage(RegisterImage(0xD1DE2C85ADA1241))
+	ProgressToBeat:setImage(RegisterImage(@"t7_hud_minimap_diamond"))
 	ProgressToBeat:subscribeToGlobalModel(f1_arg1, "Escort", "robotProgressToBeat", function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
@@ -63,7 +63,7 @@ CoD.ScoreInfoEscortBarProgress.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	})
 	local f1_local4 = self
 	local f1_local5 = self.subscribeToModel
-	local f1_local6 = Engine[0x8DF2E5447F384B9]()
+	local f1_local6 = Engine[@"getglobalmodel"]()
 	f1_local5(f1_local4, f1_local6["Escort.robotProgressToBeat"], function(f7_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

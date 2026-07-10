@@ -22,7 +22,7 @@ CoD.WeaponPickupAttachmentIcon.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	self.AttachmentImage = AttachmentImage
 	self:linkToElementModel(self, "image", true, function(model)
 		local f3_local0 = self
-		if CoD.ModelUtility.IsParamModelEqualToHashString(model, 0x7615068F50B3D66) then
+		if CoD.ModelUtility.IsParamModelEqualToHashString(model, @"blacktransparent") then
 			HideWidget(self)
 		else
 			ShowWidget(self)

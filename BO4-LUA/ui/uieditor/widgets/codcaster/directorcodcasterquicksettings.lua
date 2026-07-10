@@ -19,7 +19,7 @@ CoD.DirectorCodCasterQuickSettings.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	ButtonList:setWidgetType(CoD.StartMenu_Options_SettingSlider)
 	ButtonList:setVerticalCount(9)
 	ButtonList:setSpacing(6)
-	ButtonList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	ButtonList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	ButtonList:setDataSource("CodCasterQuickSettingsList")
 	ButtonList:registerEventHandler("gain_focus", function(element, event)
 		local f2_local0 = nil
@@ -28,10 +28,10 @@ CoD.DirectorCodCasterQuickSettings.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 		elseif element.super.gainFocus then
 			f2_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbb_pscircle"])
 		return f2_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(ButtonList, f1_arg1, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(ButtonList, f1_arg1, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		if InFrontend() then
 			SaveShoutcasterSettings(self, element, controller)
 			GoBack(self, controller)
@@ -40,7 +40,7 @@ CoD.DirectorCodCasterQuickSettings.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 		end
 	end, function(element, menu, controller)
 		if InFrontend() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 			return true
 		else
 			return false

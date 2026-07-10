@@ -12,7 +12,7 @@ CoD.StartMenu_SignatureItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local backgroundBlur = LUI.UIImage.new(0, 0, 1, 537, 0, 0, 0, 115)
 	backgroundBlur:setRGB(0, 0, 0)
-	backgroundBlur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	backgroundBlur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	backgroundBlur:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(backgroundBlur)
 	self.backgroundBlur = backgroundBlur
@@ -23,20 +23,20 @@ CoD.StartMenu_SignatureItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.background = background
 	local LED = LUI.UIImage.new(0, 0, 0, 538, 0, 0, 0, 166)
 	LED:setAlpha(0.2)
-	LED:setImage(RegisterImage(0x35AB669B497516))
-	LED:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	LED:setImage(RegisterImage(@"uie_ui_hud_core_draft_info_led"))
+	LED:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(LED)
 	self.LED = LED
 	local descriptionTextBox = LUI.UIText.new(0, 0, 130, 521, 0, 0, 36, 54)
 	descriptionTextBox:setRGB(0.78, 0.78, 0.78)
 	descriptionTextBox:setZoom(10)
 	descriptionTextBox:setTTF("dinnext_regular")
-	descriptionTextBox:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	descriptionTextBox:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	descriptionTextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	descriptionTextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	descriptionTextBox:linkToElementModel(self, "description", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			descriptionTextBox:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			descriptionTextBox:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	self:addElement(descriptionTextBox)
@@ -46,7 +46,7 @@ CoD.StartMenu_SignatureItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	nameLabel:setZoom(10)
 	nameLabel:setTTF("ttmussels_demibold")
 	nameLabel:setLetterSpacing(5)
-	nameLabel:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	nameLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	nameLabel:linkToElementModel(self, "displayName", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -71,8 +71,8 @@ CoD.StartMenu_SignatureItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.Icon = Icon
 	local Bracket = LUI.UIImage.new(0, 0, -12, 552, 0, 0, -9.5, 122.5)
 	Bracket:setAlpha(0.5)
-	Bracket:setImage(RegisterImage(0xE657E04763BA68E))
-	Bracket:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Bracket:setImage(RegisterImage(@"uie_ui_hud_core_draft_brackets_info"))
+	Bracket:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Bracket)
 	self.Bracket = Bracket
 	local RestrictionIcon = CoD.RestrictedItemWarning.new(f1_arg0, f1_arg1, 0.5, 0.5, -243, -183, 0.5, 0.5, -29, 21)

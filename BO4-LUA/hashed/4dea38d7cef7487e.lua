@@ -19,8 +19,8 @@ CoD.BM_BountyDetails.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	Name:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
 	Name:setTTF("ttmussels_demibold")
 	Name:setLetterSpacing(4)
-	Name:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Name:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	Name:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Name:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	Name:linkToElementModel(self, "name", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -32,12 +32,12 @@ CoD.BM_BountyDetails.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	local Desc = LUI.UIText.new(0, 0, 0, 383, 0, 0, 70.5, 88.5)
 	Desc:setTTF("dinnext_regular")
 	Desc:setLetterSpacing(1)
-	Desc:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Desc:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Desc:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Desc:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	Desc:linkToElementModel(self, "desc", true, function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
-			Desc:setText(Engine[0xF9F1239CFD921FE](f4_local0))
+			Desc:setText(Engine[@"hash_4F9F1239CFD921FE"](f4_local0))
 		end
 	end)
 	self:addElement(Desc)

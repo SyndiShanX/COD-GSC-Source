@@ -13,7 +13,7 @@ CoD.HoldingPenNotification.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local PrematchCountdownNumbers = CoD.PrematchCountdown_Numbers.new(f1_arg0, f1_arg1, 0, 1, 0, 0, 0.5, 0.5, -45, 30)
-	PrematchCountdownNumbers.MatchText.MatchText:setText(Engine[0xF9F1239CFD921FE](0x1842D668F2BC505))
+	PrematchCountdownNumbers.MatchText.MatchText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_41842D668F2BC505"))
 	self.__on_menuOpened_PrematchCountdownNumbers = function(f2_arg0, f2_arg1, f2_arg2, f2_arg3)
 		local f2_local0 = PrematchCountdownNumbers
 		PlayClipOnElement(self, {
@@ -27,27 +27,27 @@ CoD.HoldingPenNotification.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	local PrematchCountdownNumbersSmall = CoD.PrematchCountdown_NumbersSmall.new(f1_arg0, f1_arg1, 0, 0, -7, 296, 0, 0, 341, 401)
 	PrematchCountdownNumbersSmall:setAlpha(0)
 	PrematchCountdownNumbersSmall.Message:setAlpha(0)
-	PrematchCountdownNumbersSmall.Message:setText(Engine[0xF9F1239CFD921FE](0x1D0DA5DFB8F016F))
+	PrematchCountdownNumbersSmall.Message:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_51D0DA5DFB8F016F"))
 	self:addElement(PrematchCountdownNumbersSmall)
 	self.PrematchCountdownNumbersSmall = PrematchCountdownNumbersSmall
 	local GameTypeHintText = CoD.PrematchCountdown_BeginsIn.new(f1_arg0, f1_arg1, 0.5, 0.5, -280, 276, 0, 0, 305, 353)
 	GameTypeHintText:setAlpha(0)
-	GameTypeHintText.MatchText:setText(Engine[0xF9F1239CFD921FE](0x7E04861C952E4AB))
+	GameTypeHintText.MatchText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_17E04861C952E4AB"))
 	GameTypeHintText.MatchText:setBackingAlpha(0.7)
 	self:addElement(GameTypeHintText)
 	self.GameTypeHintText = GameTypeHintText
 	local Message = LUI.UIText.new(0, 0, 7, 282, 0, 0, 354, 390)
 	Message:setRGB(0, 0.56, 1)
 	Message:setAlpha(0)
-	Message:setText(Engine[0xF9F1239CFD921FE](0x1D0DA5DFB8F016F))
+	Message:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_51D0DA5DFB8F016F"))
 	Message:setTTF("ttmussels_regular")
-	Message:setMaterial(LUI.UIImage.GetCachedMaterial(0x90D57B1E92D39D7))
+	Message:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_90D57B1E92D39D7"))
 	Message:setShaderVector(0, 1.02, 0, 0, 0)
 	Message:setShaderVector(1, -0.23, 0, 0, 0)
 	Message:setShaderVector(2, 0, 0, 1, 1)
 	Message:setLetterSpacing(2)
-	Message:setAlignment(Engine[0x7F8853DC3581AA4](Enum[0x7A5123B654282D2][0x58C8A85F2048829]))
-	Message:setAlignment(Engine[0x7F8853DC3581AA4](Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7]))
+	Message:setAlignment(Engine[@"hash_67F8853DC3581AA4"](Enum[@"luialignment"][@"lui_alignment_left"]))
+	Message:setAlignment(Engine[@"hash_67F8853DC3581AA4"](Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"]))
 	self:addElement(Message)
 	self.Message = Message
 	local DoubleXPNotification = CoD.PrematchCountdown_2xpNotification.new(f1_arg0, f1_arg1, 0.5, 0.5, -200, 200, 0, 0, 0, 255)
@@ -74,7 +74,7 @@ CoD.HoldingPenNotification.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	end)
 	local f1_local6 = self
 	local f1_local7 = self.subscribeToModel
-	local f1_local8 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local8 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local7(f1_local6, f1_local8.LastInput, function(f6_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

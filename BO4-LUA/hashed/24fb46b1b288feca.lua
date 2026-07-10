@@ -18,7 +18,7 @@ CoD.Rush_Gameover_Score_Entry.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self:addElement(blackBg)
 	self.blackBg = blackBg
 	local teamPlayercard = LUI.UIImage.new(0, 0, 198, 426, 0, 0, 0, 88)
-	teamPlayercard:setImage(RegisterImage(0x57737C6CB8A7315))
+	teamPlayercard:setImage(RegisterImage(@"hash_357737C6CB8A7315"))
 	self:addElement(teamPlayercard)
 	self.teamPlayercard = teamPlayercard
 	local teamPlayercardGold = LUI.UIImage.new(0, 0, 201, 426, 0, 0, 2, 84)
@@ -28,7 +28,7 @@ CoD.Rush_Gameover_Score_Entry.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self:addElement(teamPlayercardGold)
 	self.teamPlayercardGold = teamPlayercardGold
 	local ZombiesPortrait = CoD.ZombiesPortrait.new(f1_arg0, f1_arg1, 0, 0, 201, 281, 0, 0, 3, 83)
-	ZombiesPortrait:setRFTMaterial(LUI.UIImage.GetCachedMaterial(0xD79DB5C45AD6024))
+	ZombiesPortrait:setRFTMaterial(LUI.UIImage.GetCachedMaterial(@"hash_2D79DB5C45AD6024"))
 	ZombiesPortrait:setShaderVector(0, 34, 6, 0, 0)
 	ZombiesPortrait:setShaderVector(1, 80, 80, 0, 0)
 	ZombiesPortrait:setShaderVector(2, 0, 0.05, 0, 0)
@@ -44,8 +44,8 @@ CoD.Rush_Gameover_Score_Entry.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	local GamerTagShadow = LUI.UIText.new(0, 0, 54, 191, 0, 0, 53.5, 74.5)
 	GamerTagShadow:setRGB(ColorSet.BadgeText.r, ColorSet.BadgeText.g, ColorSet.BadgeText.b)
 	GamerTagShadow:setTTF("notosans_regular")
-	GamerTagShadow:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	GamerTagShadow:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	GamerTagShadow:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	GamerTagShadow:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	GamerTagShadow:linkToElementModel(self, "playerName", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -56,8 +56,8 @@ CoD.Rush_Gameover_Score_Entry.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self.GamerTagShadow = GamerTagShadow
 	local GamerTag = LUI.UIText.new(0, 0, 54, 191, 0, 0, 53.5, 74.5)
 	GamerTag:setTTF("notosans_regular")
-	GamerTag:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	GamerTag:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	GamerTag:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	GamerTag:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	GamerTag:linkToElementModel(self, "clientNum", true, function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
@@ -75,8 +75,8 @@ CoD.Rush_Gameover_Score_Entry.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	local Col1 = LUI.UIText.new(0, 0, 287, 423, 0, 0, 27, 71)
 	Col1:setTTF("skorzhen")
 	Col1:setLetterSpacing(0.5)
-	Col1:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Col1:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	Col1:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Col1:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	Col1:linkToElementModel(self, "clientNum", true, function(model)
 		local f6_local0 = model:get()
 		if f6_local0 ~= nil then
@@ -96,7 +96,7 @@ CoD.Rush_Gameover_Score_Entry.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self.Col1 = Col1
 	local Col2 = LUI.UIText.new(0, 0, 440, 521, 0, 0, 33.5, 58.5)
 	Col2:setTTF("skorzhen")
-	Col2:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	Col2:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	Col2:linkToElementModel(self, "clientNum", true, function(model)
 		local f9_local0 = model:get()
 		if f9_local0 ~= nil then
@@ -113,7 +113,7 @@ CoD.Rush_Gameover_Score_Entry.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self.Col2 = Col2
 	local Col3 = LUI.UIText.new(0, 0, 542, 667, 0, 0, 33.5, 58.5)
 	Col3:setTTF("skorzhen")
-	Col3:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	Col3:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	Col3:linkToElementModel(self, "clientNum", true, function(model)
 		local f11_local0 = model:get()
 		if f11_local0 ~= nil then
@@ -130,7 +130,7 @@ CoD.Rush_Gameover_Score_Entry.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self.Col3 = Col3
 	local Col4 = LUI.UIText.new(0, 0, 684, 809, 0, 0, 33.5, 58.5)
 	Col4:setTTF("skorzhen")
-	Col4:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	Col4:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	Col4:linkToElementModel(self, "clientNum", true, function(model)
 		local f13_local0 = model:get()
 		if f13_local0 ~= nil then
@@ -147,7 +147,7 @@ CoD.Rush_Gameover_Score_Entry.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self.Col4 = Col4
 	local Col5 = LUI.UIText.new(0, 0, 822, 947, 0, 0, 33.5, 58.5)
 	Col5:setTTF("skorzhen")
-	Col5:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	Col5:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	Col5:linkToElementModel(self, "clientNum", true, function(model)
 		local f15_local0 = model:get()
 		if f15_local0 ~= nil then
@@ -167,8 +167,8 @@ CoD.Rush_Gameover_Score_Entry.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	PositionShadow:setAlpha(0.5)
 	PositionShadow:setTTF("default")
 	PositionShadow:setLetterSpacing(2)
-	PositionShadow:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	PositionShadow:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	PositionShadow:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	PositionShadow:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	PositionShadow:linkToElementModel(self, "position", true, function(model)
 		local f17_local0 = model:get()
 		if f17_local0 ~= nil then
@@ -180,8 +180,8 @@ CoD.Rush_Gameover_Score_Entry.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	local Position = LUI.UIText.new(0, 0, 54, 175, 0, 0, 16.5, 55.5)
 	Position:setTTF("default")
 	Position:setLetterSpacing(2)
-	Position:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Position:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Position:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Position:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	Position:linkToElementModel(self, "position", true, function(model)
 		local f18_local0 = model:get()
 		if f18_local0 ~= nil then
@@ -191,7 +191,7 @@ CoD.Rush_Gameover_Score_Entry.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self:addElement(Position)
 	self.Position = Position
 	local FrameEnd = LUI.UIImage.new(0, 0, 863.5, 969.5, 0.5, 0.5, -46.5, 46.5)
-	FrameEnd:setImage(RegisterImage(0x8543CEDC14C64F7))
+	FrameEnd:setImage(RegisterImage(@"uie_zm_hud_scoreboard_frame_end"))
 	self:addElement(FrameEnd)
 	self.FrameEnd = FrameEnd
 	self:mergeStateConditions({
@@ -227,7 +227,7 @@ CoD.Rush_Gameover_Score_Entry.__resetProperties = function(f21_arg0)
 	f21_arg0.teamPlayercardGold:setAlpha(0)
 	f21_arg0.Col1:setLeftRight(0, 0, 287, 423)
 	f21_arg0.Col1:setTopBottom(0, 0, 27, 71)
-	f21_arg0.Col1:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	f21_arg0.Col1:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	f21_arg0.teamPlayercard:setAlpha(1)
 	f21_arg0.blackBg:setLeftRight(0, 0, 309.5, 920.5)
 	f21_arg0.blackBg:setRGB(ColorSet.BadgeText.r, ColorSet.BadgeText.g, ColorSet.BadgeText.b)

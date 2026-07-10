@@ -37,27 +37,27 @@ CoD.ArenaUtility.DaysColors = {
 	},
 }
 CoD.ArenaUtility.EventsColors = {
-	[Enum[0xC0EA92D04BC003B][0xA9E0B7849B16CD2]] = {
+	[Enum[@"hash_6C0EA92D04BC003B"][@"hash_4A9E0B7849B16CD2"]] = {
 		r = 0.5,
 		g = 0,
 		b = 0.7,
 	},
-	[Enum[0xC0EA92D04BC003B][0xC32571741C5B730]] = {
+	[Enum[@"hash_6C0EA92D04BC003B"][@"hash_5C32571741C5B730"]] = {
 		r = 0.15,
 		g = 0.5,
 		b = 0.15,
 	},
-	[Enum[0xC0EA92D04BC003B][0x70DF63F42A5E56A]] = {
+	[Enum[@"hash_6C0EA92D04BC003B"][@"hash_670DF63F42A5E56A"]] = {
 		r = 0,
 		g = 0,
 		b = 0,
 	},
-	[Enum[0xC0EA92D04BC003B][0x3603CAC0849A965]] = {
+	[Enum[@"hash_6C0EA92D04BC003B"][@"hash_33603CAC0849A965"]] = {
 		r = 1,
 		g = 0,
 		b = 0,
 	},
-	[Enum[0xC0EA92D04BC003B][0x185075D2D3D8497]] = {
+	[Enum[@"hash_6C0EA92D04BC003B"][@"hash_4185075D2D3D8497"]] = {
 		r = 0.5,
 		g = 0,
 		b = 0.7,
@@ -73,10 +73,10 @@ CoD.ArenaUtility.GetSeason = function()
 	local f1_local0, f1_local1 = nil
 	if not IsLobbyNetworkModeLAN() then
 		if CoD.ArenaUtility.SeasonsAsset == nil or CoD.ArenaUtility.SeasonsAsset.seasonlist.nSeasons <= 0 then
-			CoD.ArenaUtility.SeasonsAsset = Engine[0x349A8E5848A2FAC]()
+			CoD.ArenaUtility.SeasonsAsset = Engine[@"hash_2349A8E5848A2FAC"]()
 		end
 		local f1_local2 = CoD.ArenaUtility.SeasonsAsset
-		local f1_local3 = Engine[0x5A1049D8CEE36C2]()
+		local f1_local3 = Engine[@"getcurrentarenaseason"]()
 		if f1_local2 ~= nil and f1_local3 >= 0 then
 			local f1_local4 = f1_local2.seasonlist[f1_local3]
 			if f1_local4 ~= nil then
@@ -85,7 +85,7 @@ CoD.ArenaUtility.GetSeason = function()
 			end
 		end
 	end
-	if 0 < Engine[0xEDCFC612B39E0C0]("arena_day_overwrite") then
+	if 0 < Engine[@"getdvarfloat"]("arena_day_overwrite") then
 		f1_local1 = 0
 	end
 	return f1_local0, f1_local1
@@ -94,13 +94,13 @@ CoD.ArenaUtility.GetDaysHoursMinutesSecondsFromSeconds = function(f2_arg0)
 	return math.floor(f2_arg0 / CoD.ArenaUtility.secondsInDay), math.floor(f2_arg0 / CoD.ArenaUtility.secondsInHour) % 24, math.floor(f2_arg0 / CoD.ArenaUtility.secondsInMinute) % 60, f2_arg0 % 60
 end
 CoD.ArenaUtility.GetArenaSeasonElapsedSeconds = function()
-	local f3_local0 = Engine[0x783588166FFFE1E]()
-	if Engine[0xEDCFC612B39E0C0]("arena_day_overwrite") > 0 then
-		f3_local0 = Engine[0xEDCFC612B39E0C0]("arena_day_overwrite") * CoD.ArenaUtility.secondsInDay
+	local f3_local0 = Engine[@"hash_1783588166FFFE1E"]()
+	if Engine[@"getdvarfloat"]("arena_day_overwrite") > 0 then
+		f3_local0 = Engine[@"getdvarfloat"]("arena_day_overwrite") * CoD.ArenaUtility.secondsInDay
 		if CoD.ArenaUtility.ArenaDayOverwriteFixedTime == -1 then
-			CoD.ArenaUtility.ArenaDayOverwriteFixedTime = Engine[0xEFF639FB8A1BE0A]()
+			CoD.ArenaUtility.ArenaDayOverwriteFixedTime = Engine[@"seconds"]()
 		else
-			f3_local0 = f3_local0 + Engine[0xEFF639FB8A1BE0A]() - CoD.ArenaUtility.ArenaDayOverwriteFixedTime
+			f3_local0 = f3_local0 + Engine[@"seconds"]() - CoD.ArenaUtility.ArenaDayOverwriteFixedTime
 		end
 	end
 	return f3_local0
@@ -141,7 +141,7 @@ CoD.ArenaUtility.DrawScheduleDayBox = function(f5_arg0, f5_arg1, f5_arg2, f5_arg
 	local f5_local8 = LUI.UIText.new(0, 0, f5_local1, f5_local2, 0, 0, f5_local3 + f5_arg5, f5_local4 - f5_arg5)
 	f5_local8:setText(f5_local0[f5_local5 + 1])
 	f5_local8:setTTF("default")
-	f5_local8:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	f5_local8:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	f5_arg0:addElement(f5_local8)
 	CoD.ArenaUtility.DrawScheduleBox(f5_arg0, f5_arg1 * f5_arg2, 0, f5_arg2, f5_arg3, 0, 0, 0)
 end
@@ -161,31 +161,31 @@ CoD.ArenaUtility.CardDisplayDetails = function(f6_arg0, f6_arg1, f6_arg2, f6_arg
 	f6_local1.CurrentEventStartOffset = f6_local2
 end
 CoD.ArenaUtility.GetEventName = function(f7_arg0)
-	if f7_arg0.eventType == Enum[0xC0EA92D04BC003B][0xA9E0B7849B16CD2] then
+	if f7_arg0.eventType == Enum[@"hash_6C0EA92D04BC003B"][@"hash_4A9E0B7849B16CD2"] then
 		return "ARENA/EVENT_RANKED_PLAY_NAME"
-	elseif f7_arg0.eventType == Enum[0xC0EA92D04BC003B][0xC32571741C5B730] then
+	elseif f7_arg0.eventType == Enum[@"hash_6C0EA92D04BC003B"][@"hash_5C32571741C5B730"] then
 		return "ARENA/EVENT_LEAGUE_PLAY_NAME"
-	elseif f7_arg0.eventType == Enum[0xC0EA92D04BC003B][0x70DF63F42A5E56A] then
+	elseif f7_arg0.eventType == Enum[@"hash_6C0EA92D04BC003B"][@"hash_670DF63F42A5E56A"] then
 		return "ARENA/EVENT_INVITATIONAL_NAME"
-	elseif f7_arg0.eventType == Enum[0xC0EA92D04BC003B][0x3603CAC0849A965] then
+	elseif f7_arg0.eventType == Enum[@"hash_6C0EA92D04BC003B"][@"hash_33603CAC0849A965"] then
 		return "ARENA/EVENT_RUN_NAME"
-	elseif f7_arg0.eventType == Enum[0xC0EA92D04BC003B][0x185075D2D3D8497] then
+	elseif f7_arg0.eventType == Enum[@"hash_6C0EA92D04BC003B"][@"hash_4185075D2D3D8497"] then
 		return "ARENA/EVENT_SCRIMS_NAME"
 	else
 		return nil
 	end
 end
 CoD.ArenaUtility.GetEventDescription = function(f8_arg0)
-	if f8_arg0.eventType == Enum[0xC0EA92D04BC003B][0xA9E0B7849B16CD2] then
+	if f8_arg0.eventType == Enum[@"hash_6C0EA92D04BC003B"][@"hash_4A9E0B7849B16CD2"] then
 		return 0xFD3E00A4DF5D0B
-	elseif f8_arg0.eventType == Enum[0xC0EA92D04BC003B][0xC32571741C5B730] then
-		return 0x810D65D59C0D1E1
-	elseif f8_arg0.eventType == Enum[0xC0EA92D04BC003B][0x70DF63F42A5E56A] then
-		return 0xC54F06BDAF5C3D3
-	elseif f8_arg0.eventType == Enum[0xC0EA92D04BC003B][0x3603CAC0849A965] then
-		return 0x8622F1A00D53C00
-	elseif f8_arg0.eventType == Enum[0xC0EA92D04BC003B][0x185075D2D3D8497] then
-		return 0x79ED533954F2722
+	elseif f8_arg0.eventType == Enum[@"hash_6C0EA92D04BC003B"][@"hash_5C32571741C5B730"] then
+		return @"hash_3810D65D59C0D1E1"
+	elseif f8_arg0.eventType == Enum[@"hash_6C0EA92D04BC003B"][@"hash_670DF63F42A5E56A"] then
+		return @"hash_1C54F06BDAF5C3D3"
+	elseif f8_arg0.eventType == Enum[@"hash_6C0EA92D04BC003B"][@"hash_33603CAC0849A965"] then
+		return @"hash_78622F1A00D53C00"
+	elseif f8_arg0.eventType == Enum[@"hash_6C0EA92D04BC003B"][@"hash_4185075D2D3D8497"] then
+		return @"hash_79ED533954F2722"
 	else
 		return nil
 	end
@@ -225,8 +225,8 @@ end
 CoD.ArenaUtility.SetArenaDisplayRankAndIcon = function(f12_arg0)
 	local f12_local0 = nil
 	if f12_arg0.isLocal then
-		local f12_local1 = Engine[0x852F787399D3F90](f12_arg0.xuid)
-		if f12_local1 ~= Enum[0xC2BE37F789B0184][0xA839BDA461F49CD] then
+		local f12_local1 = Engine[@"getcontrollerforxuid"](f12_arg0.xuid)
+		if f12_local1 ~= Enum[@"controllerindex_t"][@"invalid_controller_port"] then
 			f12_local0 = CoD.ArenaLeaguePlayUtility.GetLeaguePlayIconAndRank(CoD.ArenaLeaguePlayUtility.GetPoints(f12_local1), CoD.ArenaLeaguePlayUtility.GetBestRank(f12_local1), CoD.ArenaLeaguePlayUtility.GetFirstPlaceCount(f12_local1))
 		end
 	end
@@ -236,7 +236,7 @@ CoD.ArenaUtility.SetArenaDisplayRankAndIcon = function(f12_arg0)
 	f12_arg0.displayRank = f12_local0.displayRank
 	f12_arg0.rankIcon = f12_local0.rankIcon
 	local f12_local1, f12_local2 = CoD.ArenaLeaguePlayUtility.GetBanner(f12_arg0.arenaLeaguePlayPoints, f12_arg0.arenaLeaguePlayBestSubdivisionRank, f12_arg0.arenaLeaguePlayFirstSubdivisionRankTotal)
-	return Engine[0xF9F1239CFD921FE](f12_local2)
+	return Engine[@"hash_4F9F1239CFD921FE"](f12_local2)
 end
 CoD.ArenaUtility.IsClientInTeam = function(f13_arg0, f13_arg1)
 	for f13_local3, f13_local4 in ipairs(f13_arg1) do
@@ -284,7 +284,7 @@ CoD.ArenaUtility.GetCurrentTeamIndexAndId = function(f15_arg0)
 end
 CoD.ArenaUtility.GetArenaSlot = function(f16_arg0)
 	local f16_local0 = nil
-	local f16_local1 = Engine[0x3ACB99DBAD24D55](f16_arg0)
+	local f16_local1 = Engine[@"getplaylistinfobyid"](f16_arg0)
 	if f16_local1 ~= nil then
 		f16_local0 = f16_local1.arenaSlot
 	end
@@ -292,9 +292,9 @@ CoD.ArenaUtility.GetArenaSlot = function(f16_arg0)
 end
 CoD.ArenaUtility.GetArenaSlotFromPlaylistOrEngine = function(f17_arg0)
 	if not f17_arg0 then
-		f17_arg0 = Engine[0x7B3B2B73B53EB34]()
+		f17_arg0 = Engine[@"getplaylistid"]()
 	end
-	local f17_local0 = Engine[0xEF39E16C566439B]()
+	local f17_local0 = Engine[@"getcurrentarenaslot"]()
 	if f17_local0 < 0 then
 		f17_local0 = CoD.ArenaUtility.GetArenaSlot(f17_arg0)
 	end
@@ -305,7 +305,7 @@ CoD.ArenaUtility.GetArenaSlotFromPlaylistOrEngine = function(f17_arg0)
 end
 CoD.ArenaUtility.CheckArenaStats = function(f18_arg0, f18_arg1)
 	if (CoD.ArenaLeaguePlayUtility.CheckLeagueID(f18_arg0, f18_arg1) or CoD.ArenaRankedPlayUtility.CheckSeason(f18_arg0)) == true then
-		Engine[0x7C75E608EA39B5C](f18_arg0, "uploadstats")
+		Engine[@"exec"](f18_arg0, "uploadstats")
 	end
 end
 CoD.ArenaUtility.ClearMatchesStats = function(f19_arg0)
@@ -369,26 +369,26 @@ CoD.ArenaUtility.ShowCurrentEventDetails = function(f26_arg0)
 	local f26_local1 = DataSources.Arena.getModel()
 	local f26_local2 = LuaUtils.GetArenaEventEntryPlaylistByName(f26_local0)
 	local f26_local3 = f26_local2.arenaSlot
-	local f26_local4 = Engine[0xA5B9C0111291A8B]()
-	if f26_local0.eventType == Enum[0xC0EA92D04BC003B][0xA9E0B7849B16CD2] then
+	local f26_local4 = Engine[@"getprimarycontroller"]()
+	if f26_local0.eventType == Enum[@"hash_6C0EA92D04BC003B"][@"hash_4A9E0B7849B16CD2"] then
 		local f26_local5 = f26_local1:create("arenaSubtitle")
-		f26_local5:set(0x5E9527E830C1784)
+		f26_local5:set(@"hash_75E9527E830C1784")
 		f26_arg0.RankedPlayDetails:show()
-	elseif f26_local0.eventType == Enum[0xC0EA92D04BC003B][0xC32571741C5B730] then
+	elseif f26_local0.eventType == Enum[@"hash_6C0EA92D04BC003B"][@"hash_5C32571741C5B730"] then
 		local f26_local5 = f26_local1:create("arenaSubtitle")
-		f26_local5:set(0xEA9804CE492884E)
+		f26_local5:set(@"hash_EA9804CE492884E")
 		f26_arg0.LeaguePlayDetails:show()
-	elseif f26_local0.eventType == Enum[0xC0EA92D04BC003B][0x70DF63F42A5E56A] then
-		DataSources.InvitationalDetails.PopulateWidget(f26_arg0.InvitationalDetails, f26_local4, f26_local3, Engine[0xE00B2F29271C60B](f26_local0.event))
+	elseif f26_local0.eventType == Enum[@"hash_6C0EA92D04BC003B"][@"hash_670DF63F42A5E56A"] then
+		DataSources.InvitationalDetails.PopulateWidget(f26_arg0.InvitationalDetails, f26_local4, f26_local3, Engine[@"hash_2E00B2F29271C60B"](f26_local0.event))
 		local f26_local6 = f26_local1:create("arenaSubtitle")
-		f26_local6:set(0x6842AF0D1EB283C)
+		f26_local6:set(@"hash_76842AF0D1EB283C")
 		f26_arg0.InvitationalDetails:show()
-	elseif f26_local0.eventType == Enum[0xC0EA92D04BC003B][0x3603CAC0849A965] then
+	elseif f26_local0.eventType == Enum[@"hash_6C0EA92D04BC003B"][@"hash_33603CAC0849A965"] then
 		local f26_local5 = f26_local1:create("arenaSubtitle")
-		f26_local5:set(0x6CCA3784D93761D)
-	elseif f26_local0.eventType == Enum[0xC0EA92D04BC003B][0x185075D2D3D8497] then
+		f26_local5:set(@"hash_56CCA3784D93761D")
+	elseif f26_local0.eventType == Enum[@"hash_6C0EA92D04BC003B"][@"hash_4185075D2D3D8497"] then
 		local f26_local5 = f26_local1:create("arenaSubtitle")
-		f26_local5:set(0x7F5ED5CC537D66B)
+		f26_local5:set(@"hash_47F5ED5CC537D66B")
 	end
 end
 CoD.ArenaUtility.UpdateNewsTabDisplay = function(f27_arg0, f27_arg1, f27_arg2, f27_arg3)
@@ -399,7 +399,7 @@ CoD.ArenaUtility.UpdateNewsTabDisplay = function(f27_arg0, f27_arg1, f27_arg2, f
 	end
 end
 CoD.ArenaUtility.GetDisplayName = function()
-	local f28_local0 = Engine[0xFB9BB235992D6F7]()
+	local f28_local0 = Engine[@"hash_1FB9BB235992D6F7"]()
 	local f28_local1 = ""
 	if f28_local0 then
 		f28_local1 = 0x29B029BA1AA475F
@@ -450,7 +450,7 @@ CoD.ArenaUtility.UpcomingArenaEventTypeEquals = function(f31_arg0, f31_arg1)
 end
 CoD.ArenaUtility.IsEventCompleteTimer = function(f32_arg0, f32_arg1, f32_arg2)
 	local f32_local0 = LuaUtils.GetCurrentEventEntry()
-	if f32_local0.eventType ~= Enum[0xC0EA92D04BC003B][0xC32571741C5B730] then
+	if f32_local0.eventType ~= Enum[@"hash_6C0EA92D04BC003B"][@"hash_5C32571741C5B730"] then
 		return false
 	else
 		return true
@@ -458,7 +458,7 @@ CoD.ArenaUtility.IsEventCompleteTimer = function(f32_arg0, f32_arg1, f32_arg2)
 end
 CoD.ArenaUtility.IsNextEventCompleteTimer = function(f33_arg0, f33_arg1, f33_arg2)
 	local f33_local0 = LuaUtils.GetUpcomingEventEntry()
-	if f33_local0 == nil or f33_local0.eventType ~= Enum[0xC0EA92D04BC003B][0xC32571741C5B730] then
+	if f33_local0 == nil or f33_local0.eventType ~= Enum[@"hash_6C0EA92D04BC003B"][@"hash_5C32571741C5B730"] then
 		return false
 	else
 		return true
@@ -468,9 +468,9 @@ CoD.ArenaUtility.IsArenaLeaguePlay = function(f34_arg0)
 	if not LuaUtils.IsArenaPublicGame() then
 		return false
 	end
-	local f34_local0 = CoD.ArenaUtility.CurrentArenaEventTypeEquals(nil, Enum[0xC0EA92D04BC003B][0xC32571741C5B730])
+	local f34_local0 = CoD.ArenaUtility.CurrentArenaEventTypeEquals(nil, Enum[@"hash_6C0EA92D04BC003B"][@"hash_5C32571741C5B730"])
 	if f34_arg0 and not f34_local0 then
-		f34_local0 = CoD.ArenaUtility.UpcomingArenaEventTypeEquals(nil, Enum[0xC0EA92D04BC003B][0xC32571741C5B730])
+		f34_local0 = CoD.ArenaUtility.UpcomingArenaEventTypeEquals(nil, Enum[@"hash_6C0EA92D04BC003B"][@"hash_5C32571741C5B730"])
 	end
 	return f34_local0
 end
@@ -487,20 +487,20 @@ CoD.ArenaUtility.ArenaMatchSet = function(f36_arg0)
 end
 CoD.ArenaUtility.IsDailyPoolRemainingCompleteTimer = function(f37_arg0, f37_arg1, f37_arg2)
 	local f37_local0 = LuaUtils.GetCurrentEventEntry()
-	if f37_local0.eventType ~= Enum[0xC0EA92D04BC003B][0xC32571741C5B730] then
+	if f37_local0.eventType ~= Enum[@"hash_6C0EA92D04BC003B"][@"hash_5C32571741C5B730"] then
 		return false
 	elseif f37_arg2.arenaLeaguePlayDailyPoolTimer then
 		f37_arg2.arenaLeaguePlayDailyPoolTimer:close()
 		f37_arg2.arenaLeaguePlayDailyPoolTimer = nil
 	end
-	local f37_local1 = Engine[0x40E824FE270E174](Engine[0x8DF2E5447F384B9](), "Arena.arenaLeaguePlayDailyPoolTimer")
+	local f37_local1 = Engine[@"getmodel"](Engine[@"getglobalmodel"](), "Arena.arenaLeaguePlayDailyPoolTimer")
 	if f37_local1 == nil then
 		return false
 	end
 	f37_arg2.arenaLeaguePlayDailyPoolTimer = LUI.UITimer.newElementTimer(500, false, function(f38_arg0)
 		local f38_local0 = CoD.ArenaLeaguePlayUtility.GetDailyBonusPoolTimeRemaining(f37_arg1, CoD.ArenaUtility.GetArenaSlotFromPlaylistOrEngine())
 		if f38_local0 > 0 then
-			f37_local1:set(Engine[0xEFB3C7874640AD1](f38_local0))
+			f37_local1:set(Engine[@"hash_2EFB3C7874640AD1"](f38_local0))
 		else
 			f37_local1:set("")
 			UpdateState(f37_arg2, {
@@ -519,19 +519,19 @@ CoD.ArenaUtility.IsPlayerMatchmakingLocked = function(f39_arg0)
 end
 CoD.ArenaUtility.UpdateArenaOnLobbyNav = function()
 	local f40_local0 = LobbyData.GetCurrentMenuTarget()
-	if f40_local0[0x8409AA0F01B5DBC] ~= Enum[0x8409AA0F01B5DBC][0xD42D003CEEA3F87] then
+	if f40_local0[@"lobbymode"] ~= Enum[@"lobbymode"][@"lobby_mode_arena"] then
 		return
 	end
-	local f40_local1 = CoD.ArenaUtility.GetArenaSlotFromPlaylistOrEngine(Engine[0x7B3B2B73B53EB34]())
-	local f40_local2 = Engine[0xA5B9C0111291A8B]()
-	local f40_local3 = Engine[0x8DF2E5447F384B9]()
+	local f40_local1 = CoD.ArenaUtility.GetArenaSlotFromPlaylistOrEngine(Engine[@"getplaylistid"]())
+	local f40_local2 = Engine[@"getprimarycontroller"]()
+	local f40_local3 = Engine[@"getglobalmodel"]()
 	local f40_local4 = f40_local3.Arena
 	local f40_local5 = f40_local3.LeaguePlay
-	if f40_local0[0x8B72E07B55C3AC0] == LobbyData.GetLobbyMenuIDByName(LuaEnum.UI.DIRECTOR_ONLINE_MP_ARENA_PREGAME) then
+	if f40_local0[@"id"] == LobbyData.GetLobbyMenuIDByName(LuaEnum.UI.DIRECTOR_ONLINE_MP_ARENA_PREGAME) then
 		CoD.ArenaUtility.CheckArenaStats(f40_local2, f40_local1)
 		CoD.ArenaLeaguePlayUtility.CheckIfProcessingLeagueID(f40_local2)
 	end
-	local f40_local6 = Engine[0x130B239B214E881](f40_local2, f40_local1)
+	local f40_local6 = Engine[@"getarenapoints"](f40_local2, f40_local1)
 	local f40_local7 = CoD.ArenaRankedPlayUtility.GetDisplayRankString(f40_local6)
 	local f40_local8 = CoD.ArenaRankedPlayUtility.GetStarCount(f40_local6)
 	local f40_local9 = CoD.ArenaRankedPlayUtility.GetArenaRankIcon(f40_local6)
@@ -547,25 +547,25 @@ CoD.ArenaUtility.UpdateArenaOnLobbyNav = function()
 	f40_local11 = LuaUtils.GetCurrentEventEntry()
 	local f40_local12 = LuaUtils.GetArenaEventEntryPlaylistByName(f40_local11)
 	local f40_local13 = f40_local4:create("arenaEventName")
-	f40_local13:set(Engine[0xF9F1239CFD921FE](CoD.ArenaUtility.GetEventName(f40_local11)))
+	f40_local13:set(Engine[@"hash_4F9F1239CFD921FE"](CoD.ArenaUtility.GetEventName(f40_local11)))
 	f40_local13 = f40_local4:create("arenaPlaylistName")
-	f40_local13:set(Engine[0xF9F1239CFD921FE](f40_local12.name))
+	f40_local13:set(Engine[@"hash_4F9F1239CFD921FE"](f40_local12.name))
 	local f40_local14, f40_local15, f40_local16, f40_local17 = CoD.ArenaUtility.GetDaysHoursMinutesSecondsFromSeconds(f40_local11.endOffset - CoD.ArenaUtility.GetArenaSeasonElapsedSeconds())
 	local f40_local18 = f40_local4:create("endsInInfo")
-	f40_local18:set(Engine[0xF9F1239CFD921FE](0x1F21B24D48D430C, f40_local14, f40_local15, f40_local16))
-	f40_local18 = Engine[0xA5B9C0111291A8B]()
+	f40_local18:set(Engine[@"hash_4F9F1239CFD921FE"](@"hash_21F21B24D48D430C", f40_local14, f40_local15, f40_local16))
+	f40_local18 = Engine[@"getprimarycontroller"]()
 	local f40_local19 = CoD.ArenaUtility.GetCurrentTeamIndexAndId(f40_local18)
 	if f40_local19.id ~= -1 then
 		local f40_local20 = f40_local4:create("currentTeamId")
 		f40_local20:set(f40_local19.id)
 		local f40_local21 = f40_local3.socialRoot:create("clans")
 		f40_local21 = f40_local21:create("listTeams")
-		local f40_local22 = f40_local21[Engine[0x5065E759595C457](f40_local19.id)]
+		local f40_local22 = f40_local21[Engine[@"xuidtostring"](f40_local19.id)]
 		if f40_local22 then
 			local f40_local23 = f40_local4:create("currentTeamName")
 			f40_local23:set(f40_local22.name:get())
 		end
-		local f40_local23 = Engine[0x8BF970606552F4C](f40_local18, Enum[0xBBD4F9E70101BA8][0x423A66A665DE4DF], LuaEnum.TEAM_STORAGE_SLOT.TEAM_1_DATA - 1 + f40_local19.index)
+		local f40_local23 = Engine[@"storagegetbuffer"](f40_local18, Enum[@"storagefiletype"][@"hash_6423A66A665DE4DF"], LuaEnum.TEAM_STORAGE_SLOT.TEAM_1_DATA - 1 + f40_local19.index)
 		if f40_local23 ~= nil and f40_local1 ~= -1 then
 			local f40_local24 = f40_local23.arenaStats[f40_local1].leaguePlayStats.subdivisionPoints:get()
 			local f40_local25 = f40_local23.arenaStats[f40_local1].leaguePlayStats.subdivisionRank:get()
@@ -604,7 +604,7 @@ DataSources.Arena = {
 			CoD.DirectorUtility.AddLobbyNavSubscriptionOnce(DataSources.Arena.subscriptionElement)
 			if not DataSources.Arena.subscriptionElement._hasTeamsChangeSubscription then
 				DataSources.Arena.subscriptionElement._hasTeamsChangeSubscription = true
-				DataSources.Arena.subscriptionElement:subscribeToModel(Engine[0xA798E4552F5E872](Engine[0x8DF2E5447F384B9](), "socialRoot.clans.listTeams"), function()
+				DataSources.Arena.subscriptionElement:subscribeToModel(Engine[@"createmodel"](Engine[@"getglobalmodel"](), "socialRoot.clans.listTeams"), function()
 					DataSources.Arena.subscriptionElement:updateDataSource(false, false)
 				end, false)
 			end
@@ -612,17 +612,17 @@ DataSources.Arena = {
 	end,
 	getModel = function()
 		DataSources.Arena.Initialize()
-		local f44_local0 = Engine[0x8DF2E5447F384B9]()
+		local f44_local0 = Engine[@"getglobalmodel"]()
 		if not DataSources.Arena.HasCreatedModels then
 			local f44_local1 = f44_local0:create("Arena")
-			local f44_local2 = Engine[0x5A1049D8CEE36C2]()
-			local f44_local3 = Engine[0xB8FCEC36F575B5D]()
+			local f44_local2 = Engine[@"getcurrentarenaseason"]()
+			local f44_local3 = Engine[@"getcurrentarenaseasontimeremaining"]()
 			local f44_local4 = f44_local1:create("season")
 			f44_local4:set(f44_local2)
 			f44_local4 = f44_local1:create("seasonTimeleft")
 			f44_local4:set(f44_local3)
 			f44_local4 = f44_local1:create("arenaTitle")
-			f44_local4:set(0xB59895A7A19714A)
+			f44_local4:set(@"hash_1B59895A7A19714A")
 			f44_local1:create("arenaSubtitle")
 			f44_local1:create("arenaEventName")
 			f44_local1:create("arenaPlaylistName")
@@ -654,7 +654,7 @@ DataSources.LeaguePlayLeaderboardMenuTabs = ListHelper_SetupDataSource("LeaguePl
 	local f45_local0 = {}
 	table.insert(f45_local0, {
 		models = {
-			tabName = 0xFBD29F62B3124E9,
+			tabName = @"hash_6FBD29F62B3124E9",
 			tabWidget = "CoD.LeaguePlayLeaderboardTab",
 			tabIcon = "",
 		},
@@ -666,11 +666,11 @@ DataSources.LeaguePlayLeaderboardMenuTabs = ListHelper_SetupDataSource("LeaguePl
 end, true)
 DataSources.ArenaPlaylistGameModesMaps = ListHelper_SetupDataSource("ArenaPlaylistGameModesMaps", function(f46_arg0)
 	local f46_local0 = {}
-	local f46_local1 = Engine[0x3ACB99DBAD24D55](Engine[0x7B3B2B73B53EB34]())
+	local f46_local1 = Engine[@"getplaylistinfobyid"](Engine[@"getplaylistid"]())
 	local f46_local2 = nil
 	for f46_local9, f46_local10 in ipairs(f46_local1.rotationList) do
 		if f46_local10.gametype ~= f46_local2 then
-			local f46_local6 = Engine[0xF2CD89B3C345FD3](f46_local10.gametype)
+			local f46_local6 = Engine[@"hash_1F2CD89B3C345FD3"](f46_local10.gametype)
 			local f46_local7 = f46_local6.gametype
 			table.insert(f46_local0, {
 				models = {
@@ -731,16 +731,16 @@ CoD.ArenaUtility.PopulateStats = function(f49_arg0)
 	local f49_local2 = LuaUtils.GetArenaEventEntryPlaylistByName(f49_local0)
 	local f49_local3 = DataSources.Arena.getModel()
 	local f49_local4 = f49_local3:create("arenaEventName")
-	f49_local4:set(Engine[0xF9F1239CFD921FE](CoD.ArenaUtility.GetEventName(f49_local0)))
+	f49_local4:set(Engine[@"hash_4F9F1239CFD921FE"](CoD.ArenaUtility.GetEventName(f49_local0)))
 	f49_local4 = f49_local3:create("arenaPlaylistName")
-	f49_local4:set(Engine[0xF9F1239CFD921FE](f49_local2.name))
+	f49_local4:set(Engine[@"hash_4F9F1239CFD921FE"](f49_local2.name))
 	f49_local4 = {}
 	local f49_local5 = {}
 	DataSources.PlaylistGameModes = ListHelper_SetupDataSource("PlaylistGameModes", function(f50_arg0)
 		local f50_local0 = ""
 		for f50_local6, f50_local7 in ipairs(f49_local2.rotationList) do
 			if f50_local7.gametype ~= f50_local0 then
-				local f50_local4 = Engine[0xF2CD89B3C345FD3](f50_local7.gametype)
+				local f50_local4 = Engine[@"hash_1F2CD89B3C345FD3"](f50_local7.gametype)
 				local f50_local5 = f50_local4.gametype
 				table.insert(f49_local5, {
 					models = {
@@ -789,61 +789,61 @@ CoD.ArenaUtility.PopulateStats = function(f49_arg0)
 	f49_local8:set(f49_local7)
 	f49_local8 = f49_local2.maxPartySize
 	f49_local9 = f49_local3:create("arenaEventDescription")
-	f49_local9:set(Engine[0xF9F1239CFD921FE](CoD.ArenaUtility.GetEventDescription(f49_local0)))
+	f49_local9:set(Engine[@"hash_4F9F1239CFD921FE"](CoD.ArenaUtility.GetEventDescription(f49_local0)))
 	f49_local9 = f49_local3:create("teamFormat")
-	f49_local9:set(Engine[0xF9F1239CFD921FE](0x4CFE4C1B8478DCF, f49_local8, f49_local8))
+	f49_local9:set(Engine[@"hash_4F9F1239CFD921FE"](@"hash_14CFE4C1B8478DCF", f49_local8, f49_local8))
 	f49_local9 = f49_local3:create("teamSize")
-	f49_local9:set(Engine[0xF9F1239CFD921FE](0x68C8D890C6A5835, f49_local8))
+	f49_local9:set(Engine[@"hash_4F9F1239CFD921FE"](@"hash_368C8D890C6A5835", f49_local8))
 	local f49_local10, f49_local11, f49_local12, f49_local13 = CoD.ArenaUtility.GetDaysHoursMinutesSecondsFromSeconds(f49_local0.endOffset - CoD.ArenaUtility.GetArenaSeasonElapsedSeconds())
 	if f49_local0.changesDaily and f49_local1 ~= nil then
 		local f49_local14 = LuaUtils.GetArenaEventEntryPlaylistByName(f49_local1)
-		local f49_local15 = Engine[0xF2CD89B3C345FD3](f49_local14.rotationList[1].gametype)
-		local f49_local16 = CoD.GameTypeUtility.GameTypeToLocalizeName(Engine[0xC53F8D38DF9042B](f49_local15.gametype))
+		local f49_local15 = Engine[@"hash_1F2CD89B3C345FD3"](f49_local14.rotationList[1].gametype)
+		local f49_local16 = CoD.GameTypeUtility.GameTypeToLocalizeName(Engine[@"converttoxhash"](f49_local15.gametype))
 		local f49_local17 = f49_local3:create("gameModeAdditionalInfo")
-		f49_local17:set(Engine[0xF9F1239CFD921FE](0x7E18E188D686F77, f49_local16, f49_local11, f49_local12))
+		f49_local17:set(Engine[@"hash_4F9F1239CFD921FE"](@"hash_17E18E188D686F77", f49_local16, f49_local11, f49_local12))
 	else
 		local f49_local14 = f49_local3:create("gameModeAdditionalInfo")
 		f49_local14:set("")
 	end
-	if f49_local0.eventType == Enum[0xC0EA92D04BC003B][0xC32571741C5B730] or f49_local0.eventType == Enum[0xC0EA92D04BC003B][0x3603CAC0849A965] then
+	if f49_local0.eventType == Enum[@"hash_6C0EA92D04BC003B"][@"hash_5C32571741C5B730"] or f49_local0.eventType == Enum[@"hash_6C0EA92D04BC003B"][@"hash_33603CAC0849A965"] then
 		local f49_local14 = LuaUtils.GetArenaSeason()
 		local f49_local18 = f49_local14.endTime - f49_local14.endTime
-		if f49_local0.eventType == Enum[0xC0EA92D04BC003B][0x3603CAC0849A965] then
+		if f49_local0.eventType == Enum[@"hash_6C0EA92D04BC003B"][@"hash_33603CAC0849A965"] then
 			f49_local18 = f49_local0.endOffset
 		elseif f49_local1 ~= nil then
 			f49_local18 = f49_local1.startOffset
 		end
 		f49_local10, f49_local11, f49_local12, f49_local13 = CoD.ArenaUtility.GetDaysHoursMinutesSecondsFromSeconds(f49_local18 - CoD.ArenaUtility.GetArenaSeasonElapsedSeconds())
 		local f49_local15 = f49_local3:create("endsInInfo")
-		f49_local15:set(Engine[0xF9F1239CFD921FE](0x1F21B24D48D430C, f49_local10, f49_local11, f49_local12))
+		f49_local15:set(Engine[@"hash_4F9F1239CFD921FE"](@"hash_21F21B24D48D430C", f49_local10, f49_local11, f49_local12))
 	else
 		local f49_local14 = f49_local3:create("endsInInfo")
 		f49_local14:set("")
 	end
 	local f49_local14 = CoD.ArenaUtility.GetArenaSeasonElapsedSeconds()
 	local f49_local18 = f49_local2.arenaSlot
-	if f49_local0.eventType == Enum[0xC0EA92D04BC003B][0xA9E0B7849B16CD2] then
+	if f49_local0.eventType == Enum[@"hash_6C0EA92D04BC003B"][@"hash_4A9E0B7849B16CD2"] then
 		local f49_local15 = f49_local3:create("arenaSubtitle")
-		f49_local15:set(0x5E9527E830C1784)
-	elseif f49_local0.eventType == Enum[0xC0EA92D04BC003B][0xC32571741C5B730] then
-		DataSources.LeaguePlay.PopulateWidget(f49_arg0, f49_local18, Engine[0xE00B2F29271C60B](f49_local0.event))
+		f49_local15:set(@"hash_75E9527E830C1784")
+	elseif f49_local0.eventType == Enum[@"hash_6C0EA92D04BC003B"][@"hash_5C32571741C5B730"] then
+		DataSources.LeaguePlay.PopulateWidget(f49_arg0, f49_local18, Engine[@"hash_2E00B2F29271C60B"](f49_local0.event))
 		DataSources.ArenaGauntlet.PopulateWidget(f49_arg0)
 		local f49_local19 = f49_local3:create("arenaSubtitle")
-		f49_local19:set(0xEA9804CE492884E)
-	elseif f49_local0.eventType == Enum[0xC0EA92D04BC003B][0x70DF63F42A5E56A] then
-		local f49_local15 = Engine[0xE00B2F29271C60B](f49_local0.event)
+		f49_local19:set(@"hash_EA9804CE492884E")
+	elseif f49_local0.eventType == Enum[@"hash_6C0EA92D04BC003B"][@"hash_670DF63F42A5E56A"] then
+		local f49_local15 = Engine[@"hash_2E00B2F29271C60B"](f49_local0.event)
 		local f49_local19 = f49_local0.startOffset <= f49_local14
 		local f49_local16 = f49_local3:create("arenaSubtitle")
-		f49_local16:set(0x6842AF0D1EB283C)
-	elseif f49_local0.eventType == Enum[0xC0EA92D04BC003B][0x3603CAC0849A965] then
+		f49_local16:set(@"hash_76842AF0D1EB283C")
+	elseif f49_local0.eventType == Enum[@"hash_6C0EA92D04BC003B"][@"hash_33603CAC0849A965"] then
 		local f49_local15 = f49_local3:create("arenaSubtitle")
-		f49_local15:set(0x6CCA3784D93761D)
-	elseif f49_local0.eventType == Enum[0xC0EA92D04BC003B][0x185075D2D3D8497] then
+		f49_local15:set(@"hash_56CCA3784D93761D")
+	elseif f49_local0.eventType == Enum[@"hash_6C0EA92D04BC003B"][@"hash_4185075D2D3D8497"] then
 		DataSources.LeaguePlay.PopulateWidget(f49_arg0, f49_local18, nil)
 		local f49_local15 = f49_local3:create("arenaSubtitle")
-		f49_local15:set(0x7F5ED5CC537D66B)
+		f49_local15:set(@"hash_47F5ED5CC537D66B")
 	end
-	if f49_local1 and f49_local1.eventType == Enum[0xC0EA92D04BC003B][0xC32571741C5B730] then
+	if f49_local1 and f49_local1.eventType == Enum[@"hash_6C0EA92D04BC003B"][@"hash_5C32571741C5B730"] then
 		DataSources.LeaguePlay.PopulateWidget(f49_arg0, f49_local18, nil)
 	end
 end
@@ -854,7 +854,7 @@ CoD.ArenaUtility.TryAddDevPlaylist = function(f51_arg0, f51_arg1, f51_arg2)
 		f51_arg0.cards[#f51_arg0.cards + 1] = {
 			id = f51_arg1 .. "Ent" .. 0,
 			playlist = f51_local1.id,
-			name = Engine[0xF9F1239CFD921FE](f51_local1.name),
+			name = Engine[@"hash_4F9F1239CFD921FE"](f51_local1.name),
 			detailedDesc = f51_local1.description,
 			icon = f51_local1.image,
 			iconBackground = f51_local1.imageBackground,
@@ -876,7 +876,7 @@ CoD.ArenaUtility.CreateArenaCards = function(f52_arg0, f52_arg1, f52_arg2, f52_a
 		return
 	end
 	local f52_local0 = CoD.ArenaUtility.GetArenaSeasonElapsedSeconds()
-	local f52_local1 = LuaUtils.ArenaSeasonAsset.seasonlist[Engine[0x5A1049D8CEE36C2]()]
+	local f52_local1 = LuaUtils.ArenaSeasonAsset.seasonlist[Engine[@"getcurrentarenaseason"]()]
 	local f52_local2 = {}
 	for f52_local12, f52_local13 in ipairs(f52_local1.schedulelist) do
 		for f52_local6, f52_local7 in ipairs(f52_local13.eventlist) do
@@ -901,9 +901,9 @@ CoD.ArenaUtility.CreateArenaCards = function(f52_arg0, f52_arg1, f52_arg2, f52_a
 			if not f52_local6 then
 				local f52_local9 = (f52_local15.startOffset - f52_local0) / CoD.ArenaUtility.secondsInDay
 				if f52_local9 == 1 then
-					f52_local7 = Engine[0xF9F1239CFD921FE](0x45217C57F61BD3C)
+					f52_local7 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_145217C57F61BD3C")
 				else
-					f52_local7 = LocalizeIntoString(0x855D6B0C3E27F88, f52_local9)
+					f52_local7 = LocalizeIntoString(@"hash_3855D6B0C3E27F88", f52_local9)
 				end
 			end
 			local f52_local9, f52_local10, f52_local11, f52_local16 = CoD.ArenaUtility.GetDaysHoursMinutesSecondsFromSeconds(f52_local15.endOffset - f52_local0)
@@ -911,36 +911,36 @@ CoD.ArenaUtility.CreateArenaCards = function(f52_arg0, f52_arg1, f52_arg2, f52_a
 			local f52_local18 = 0x214ECBA8C04D44C
 			local f52_local19 = f52_local6 and not f52_local15.changesDaily
 			local f52_local20 = not f52_local6
-			if f52_local15.eventType == Enum[0xC0EA92D04BC003B][0xA9E0B7849B16CD2] or f52_local15.eventType == Enum[0xC0EA92D04BC003B][0x185075D2D3D8497] then
+			if f52_local15.eventType == Enum[@"hash_6C0EA92D04BC003B"][@"hash_4A9E0B7849B16CD2"] or f52_local15.eventType == Enum[@"hash_6C0EA92D04BC003B"][@"hash_4185075D2D3D8497"] then
 				f52_local19 = false
 				if f52_local15.changesDaily then
-					f52_local17 = Engine[0xF9F1239CFD921FE](0x303C2808FF513FF)
+					f52_local17 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_4303C2808FF513FF")
 					if f52_local6 then
-						f52_local7 = Engine[0xF9F1239CFD921FE](0xF8ECCF00FD98637, f52_local10, f52_local11)
+						f52_local7 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_2F8ECCF00FD98637", f52_local10, f52_local11)
 					end
 				end
-			elseif f52_local15.eventType == Enum[0xC0EA92D04BC003B][0xC32571741C5B730] or f52_local15.eventType == Enum[0xC0EA92D04BC003B][0x3603CAC0849A965] then
-				f52_local17 = Engine[0xF9F1239CFD921FE](0x49073FF7D7F70AC)
+			elseif f52_local15.eventType == Enum[@"hash_6C0EA92D04BC003B"][@"hash_5C32571741C5B730"] or f52_local15.eventType == Enum[@"hash_6C0EA92D04BC003B"][@"hash_33603CAC0849A965"] then
+				f52_local17 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_149073FF7D7F70AC")
 				if f52_local6 then
-					f52_local7 = Engine[0xF9F1239CFD921FE](0x1F21B24D48D430C, f52_local9, f52_local10, f52_local11)
+					f52_local7 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_21F21B24D48D430C", f52_local9, f52_local10, f52_local11)
 				end
 			end
 			local f52_local21 = false
 			local f52_local22 = false
 			if CoD.DirectorUtility.DisableForCurrentMilestone(f52_arg1) then
-				local f52_local23 = Engine[0x4D0EB832239B417](f52_arg1)
+				local f52_local23 = Engine[@"getxpscale"](f52_arg1)
 				f52_local21 = f52_local23 and f52_local23 >= 2
-				local f52_local24 = Engine[0x25F4A23575D74FB](f52_arg1)
+				local f52_local24 = Engine[@"getgunxpscale"](f52_arg1)
 				f52_local22 = f52_local24 and f52_local24 >= 2
 			else
-				local f52_local23 = LuaUtils.PlaylistRulesIncludes(f52_local8.rules, 0x1ED2E7B5DD0BDD, "group_party2")
-				local f52_local25 = LuaUtils.PlaylistRulesIncludes(f52_local8.rules, 0x1F880DFEB7286D3, "2")
+				local f52_local23 = LuaUtils.PlaylistRulesIncludes(f52_local8.rules, @"xpgroups", "group_party2")
+				local f52_local25 = LuaUtils.PlaylistRulesIncludes(f52_local8.rules, @"scr_xpscalemp", "2")
 				if f52_local23 and 2 > totalPartyCount - guestCount then
 					f52_local21 = false
 				else
 					f52_local21 = f52_local25 and true
 				end
-				f52_local22 = LuaUtils.PlaylistRulesIncludes(f52_local8.rules, 0xC9735B7B2ADB9E1, "2")
+				f52_local22 = LuaUtils.PlaylistRulesIncludes(f52_local8.rules, @"scr_gunxpscalemp", "2")
 			end
 			if not f52_local3 then
 				f52_local3 = f52_local19
@@ -950,7 +950,7 @@ CoD.ArenaUtility.CreateArenaCards = function(f52_arg0, f52_arg1, f52_arg2, f52_a
 			local f52_local26 = {
 				id = f52_arg2 .. "Ent" .. f52_local13,
 				playlist = f52_local8.id,
-				name = Engine[0xF9F1239CFD921FE](f52_local8.name),
+				name = Engine[@"hash_4F9F1239CFD921FE"](f52_local8.name),
 				detailedDesc = f52_local8.description,
 				icon = f52_local8.image,
 				iconBackground = f52_local8.imageBackground,
@@ -975,7 +975,7 @@ CoD.ArenaUtility.CreateArenaCards = function(f52_arg0, f52_arg1, f52_arg2, f52_a
 					f52_local26.eventAdditionalInfo = f52_local17
 					f52_local26.eventName = CoD.ArenaUtility.GetEventName(f52_local15)
 					f52_local26.eventType = f52_local15.eventType
-					f52_local26.arenaPoints = Engine[0x130B239B214E881](f52_arg1, f52_local8.arenaSlot)
+					f52_local26.arenaPoints = Engine[@"getarenapoints"](f52_arg1, f52_local8.arenaSlot)
 					f52_local26.leaguePlayDivisionIcon = f52_local18
 					f52_local23[f52_local24] = f52_local26
 				end
@@ -990,41 +990,41 @@ end
 CoD.ArenaUtility.GetLadderPositionOrdinal = function(f53_arg0)
 	local f53_local0 = f53_arg0 % 10
 	if f53_arg0 == 11 or f53_arg0 == 12 or f53_arg0 == 13 then
-		f53_arg0 = 0x4411487E2A5D24A
+		f53_arg0 = @"hash_34411487E2A5D24A"
 	elseif f53_local0 == 1 then
-		f53_arg0 = 0x44B2A87E2AE4C31
+		f53_arg0 = @"hash_344B2A87E2AE4C31"
 	elseif f53_local0 == 2 then
-		f53_arg0 = 0x48C1487E2E5BDC4
+		f53_arg0 = @"hash_348C1487E2E5BDC4"
 	elseif f53_local0 == 3 then
-		f53_arg0 = 0x4481487E2ABF0F8
+		f53_arg0 = @"hash_34481487E2ABF0F8"
 	else
-		f53_arg0 = 0x4411487E2A5D24A
+		f53_arg0 = @"hash_34411487E2A5D24A"
 	end
 	return f53_arg0
 end
 CoD.ArenaUtility.GetLadderPositionResult = function(f54_arg0)
 	if f54_arg0 == 1 then
-		f54_arg0 = 0x3D5F1A3853D382D
+		f54_arg0 = @"hash_53D5F1A3853D382D"
 	elseif f54_arg0 <= 5 then
-		f54_arg0 = 0x8A53833E9EF12F2
+		f54_arg0 = @"hash_48A53833E9EF12F2"
 	elseif f54_arg0 <= 10 then
-		f54_arg0 = 0x43D5C06EB275969
+		f54_arg0 = @"hash_243D5C06EB275969"
 	elseif f54_arg0 <= 25 then
-		f54_arg0 = 0xC516D33B0595B88
+		f54_arg0 = @"hash_4C516D33B0595B88"
 	else
-		f54_arg0 = 0x3D5F1A3853D382D
+		f54_arg0 = @"hash_53D5F1A3853D382D"
 	end
 	return f54_arg0
 end
 CoD.ArenaUtility.GetLadderPositionRankUpResult = function(f55_arg0)
 	if f55_arg0 == 1 then
-		f55_arg0 = 0x3C506115779D2A6
+		f55_arg0 = @"hash_13C506115779D2A6"
 	elseif f55_arg0 <= 5 then
-		f55_arg0 = 0x8A53833E9EF12F2
+		f55_arg0 = @"hash_48A53833E9EF12F2"
 	elseif f55_arg0 <= 10 then
-		f55_arg0 = 0x43D5C06EB275969
+		f55_arg0 = @"hash_243D5C06EB275969"
 	elseif f55_arg0 <= 25 then
-		f55_arg0 = 0xC516D33B0595B88
+		f55_arg0 = @"hash_4C516D33B0595B88"
 	else
 		f55_arg0 = 0x0
 	end

@@ -19,16 +19,16 @@ CoD.AARLadderTab.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 	self.AarMpBacking = AarMpBacking
 	local TiledPlusGrid = LUI.UIImage.new(0, 0, -160.5, 1861.5, 0, 0, -85.5, 856.5)
 	TiledPlusGrid:setAlpha(0.05)
-	TiledPlusGrid:setImage(RegisterImage(0x6E37BAE22631294))
-	TiledPlusGrid:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	TiledPlusGrid:setImage(RegisterImage(@"uie_ui_hud_vehicle_hellstorm_repeat_plusgrid"))
+	TiledPlusGrid:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	TiledPlusGrid:setShaderVector(0, 0, 0, 0, 0)
 	TiledPlusGrid:setupNineSliceShader(220, 220)
 	self:addElement(TiledPlusGrid)
 	self.TiledPlusGrid = TiledPlusGrid
 	local PerformBg = LUI.UIImage.new(0, 0, 823, 1721, 0, 0, 210, 710)
 	PerformBg:setAlpha(0.8)
-	PerformBg:setImage(RegisterImage(0xF95A1671A1AB874))
-	PerformBg:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	PerformBg:setImage(RegisterImage(@"uie_ui_menu_aar_perform_repeat_bg"))
+	PerformBg:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	PerformBg:setShaderVector(0, 0, 0, 0, 0)
 	PerformBg:setupNineSliceShader(344, 136)
 	self:addElement(PerformBg)
@@ -67,8 +67,8 @@ CoD.AARLadderTab.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 	self.VictoryPoints = VictoryPoints
 	local Line = LUI.UIImage.new(0, 0, 709, 711, 0, 0, 208.5, 710.5)
 	Line:setAlpha(0.05)
-	Line:setImage(RegisterImage(0xC49B0C8991A541F))
-	Line:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	Line:setImage(RegisterImage(@"hash_C49B0C8991A541F"))
+	Line:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	Line:setShaderVector(0, 0, 0, 0, 0)
 	Line:setupNineSliceShader(4, 8)
 	self:addElement(Line)
@@ -86,7 +86,7 @@ CoD.AARLadderTab.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 	})
 	local f1_local9 = self
 	local f1_local10 = self.subscribeToModel
-	local f1_local11 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local11 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local10(f1_local9, f1_local11["AAR.activeTab"], function(f7_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -98,7 +98,7 @@ CoD.AARLadderTab.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 	end, false)
 	f1_local9 = self
 	f1_local10 = self.subscribeToModel
-	f1_local11 = Engine[0x8DF2E5447F384B9]()
+	f1_local11 = Engine[@"getglobalmodel"]()
 	f1_local10(f1_local9, f1_local11["lobbyRoot.lobbyNav"], function(f8_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

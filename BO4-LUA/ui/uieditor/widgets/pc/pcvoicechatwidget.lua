@@ -21,7 +21,7 @@ CoD.PCVoiceChatWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	ButtonList2:setScale(0.78, 0.78)
 	ButtonList2:setWidgetType(CoD.Social_Options_SliderNarrow)
 	ButtonList2:setSpacing(40)
-	ButtonList2:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	ButtonList2:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	ButtonList2:setDataSource("PartyVoiceChatControl")
 	ButtonList2:registerEventHandler("gain_focus", function(element, event)
 		local f2_local0 = nil
@@ -30,10 +30,10 @@ CoD.PCVoiceChatWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 		elseif element.super.gainFocus then
 			f2_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f2_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(ButtonList2, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(ButtonList2, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if HasProperty(element, "action") then
 			ProcessListAction(self, element, controller, menu)
 			return true
@@ -41,7 +41,7 @@ CoD.PCVoiceChatWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 		end
 	end, function(element, menu, controller)
 		if HasProperty(element, "action") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false

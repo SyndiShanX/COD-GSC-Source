@@ -20,32 +20,32 @@ CoD.AmmoWidgetMP_HeldItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 		{
 			stateName = "Hide",
 			condition = function(menu, element, event)
-				local f2_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xB8E9B69F4B87954])
+				local f2_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_demo_all_game_hud_hidden"])
 				if not f2_local0 then
-					f2_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xD3ABF9A2753CE40])
+					f2_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_demo_camera_mode_moviecam"])
 					if not f2_local0 then
-						f2_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x59333FC97F7870])
+						f2_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_emp_active"])
 						if not f2_local0 then
-							f2_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x198075B069840DC])
+							f2_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_game_ended"])
 							if not f2_local0 then
-								if Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xADC477DDE486DD7]) then
-									f2_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x23CD9BAB9B9F4C8])
+								if Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_hud_visible"]) then
+									f2_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_in_guided_missile"])
 									if not f2_local0 then
-										f2_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2])
+										f2_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_in_killcam"])
 										if not f2_local0 then
-											f2_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x7B52A87BC9AA4C7])
+											f2_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_in_remote_killstreak_static"])
 											if not f2_local0 then
-												f2_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x6668F0686232679])
+												f2_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_in_vehicle"])
 												if not f2_local0 then
-													f2_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x3AEEAA452536E6E])
+													f2_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_is_flash_banged"])
 													if not f2_local0 then
-														f2_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xD298E43D0B6FEF2])
+														f2_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_is_scoped"])
 														if not f2_local0 then
-															f2_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04])
+															f2_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_scoreboard_open"])
 															if not f2_local0 then
-																f2_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6])
+																f2_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_ui_active"])
 																if not f2_local0 then
-																	f2_local0 = not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xBB045E46E88E762])
+																	f2_local0 = not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_weapon_hud_visible"])
 																end
 															end
 														end
@@ -67,170 +67,170 @@ CoD.AmmoWidgetMP_HeldItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	})
 	local AmmoWidgetBall = AmmoWidgetCPDataPackage
 	local AmmoWidgetSDBomb = AmmoWidgetCPDataPackage.subscribeToModel
-	local AmmoWidgetCarryItemBattery = Engine[0x4DF5CFBC1771947](f1_arg1)
-	AmmoWidgetSDBomb(AmmoWidgetBall, AmmoWidgetCarryItemBattery["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xB8E9B69F4B87954]], function(f3_arg0)
+	local AmmoWidgetCarryItemBattery = Engine[@"getmodelforcontroller"](f1_arg1)
+	AmmoWidgetSDBomb(AmmoWidgetBall, AmmoWidgetCarryItemBattery["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_demo_all_game_hud_hidden"]], function(f3_arg0)
 		f1_arg0:updateElementState(AmmoWidgetCPDataPackage, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f3_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xB8E9B69F4B87954],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_demo_all_game_hud_hidden"],
 		})
 	end, false)
 	AmmoWidgetBall = AmmoWidgetCPDataPackage
 	AmmoWidgetSDBomb = AmmoWidgetCPDataPackage.subscribeToModel
-	AmmoWidgetCarryItemBattery = Engine[0x4DF5CFBC1771947](f1_arg1)
-	AmmoWidgetSDBomb(AmmoWidgetBall, AmmoWidgetCarryItemBattery["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xD3ABF9A2753CE40]], function(f4_arg0)
+	AmmoWidgetCarryItemBattery = Engine[@"getmodelforcontroller"](f1_arg1)
+	AmmoWidgetSDBomb(AmmoWidgetBall, AmmoWidgetCarryItemBattery["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_demo_camera_mode_moviecam"]], function(f4_arg0)
 		f1_arg0:updateElementState(AmmoWidgetCPDataPackage, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f4_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xD3ABF9A2753CE40],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_demo_camera_mode_moviecam"],
 		})
 	end, false)
 	AmmoWidgetBall = AmmoWidgetCPDataPackage
 	AmmoWidgetSDBomb = AmmoWidgetCPDataPackage.subscribeToModel
-	AmmoWidgetCarryItemBattery = Engine[0x4DF5CFBC1771947](f1_arg1)
-	AmmoWidgetSDBomb(AmmoWidgetBall, AmmoWidgetCarryItemBattery["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x59333FC97F7870]], function(f5_arg0)
+	AmmoWidgetCarryItemBattery = Engine[@"getmodelforcontroller"](f1_arg1)
+	AmmoWidgetSDBomb(AmmoWidgetBall, AmmoWidgetCarryItemBattery["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_emp_active"]], function(f5_arg0)
 		f1_arg0:updateElementState(AmmoWidgetCPDataPackage, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f5_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x59333FC97F7870],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_emp_active"],
 		})
 	end, false)
 	AmmoWidgetBall = AmmoWidgetCPDataPackage
 	AmmoWidgetSDBomb = AmmoWidgetCPDataPackage.subscribeToModel
-	AmmoWidgetCarryItemBattery = Engine[0x4DF5CFBC1771947](f1_arg1)
-	AmmoWidgetSDBomb(AmmoWidgetBall, AmmoWidgetCarryItemBattery["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x198075B069840DC]], function(f6_arg0)
+	AmmoWidgetCarryItemBattery = Engine[@"getmodelforcontroller"](f1_arg1)
+	AmmoWidgetSDBomb(AmmoWidgetBall, AmmoWidgetCarryItemBattery["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_game_ended"]], function(f6_arg0)
 		f1_arg0:updateElementState(AmmoWidgetCPDataPackage, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f6_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x198075B069840DC],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_game_ended"],
 		})
 	end, false)
 	AmmoWidgetBall = AmmoWidgetCPDataPackage
 	AmmoWidgetSDBomb = AmmoWidgetCPDataPackage.subscribeToModel
-	AmmoWidgetCarryItemBattery = Engine[0x4DF5CFBC1771947](f1_arg1)
-	AmmoWidgetSDBomb(AmmoWidgetBall, AmmoWidgetCarryItemBattery["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xADC477DDE486DD7]], function(f7_arg0)
+	AmmoWidgetCarryItemBattery = Engine[@"getmodelforcontroller"](f1_arg1)
+	AmmoWidgetSDBomb(AmmoWidgetBall, AmmoWidgetCarryItemBattery["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_hud_visible"]], function(f7_arg0)
 		f1_arg0:updateElementState(AmmoWidgetCPDataPackage, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f7_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xADC477DDE486DD7],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_hud_visible"],
 		})
 	end, false)
 	AmmoWidgetBall = AmmoWidgetCPDataPackage
 	AmmoWidgetSDBomb = AmmoWidgetCPDataPackage.subscribeToModel
-	AmmoWidgetCarryItemBattery = Engine[0x4DF5CFBC1771947](f1_arg1)
-	AmmoWidgetSDBomb(AmmoWidgetBall, AmmoWidgetCarryItemBattery["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x23CD9BAB9B9F4C8]], function(f8_arg0)
+	AmmoWidgetCarryItemBattery = Engine[@"getmodelforcontroller"](f1_arg1)
+	AmmoWidgetSDBomb(AmmoWidgetBall, AmmoWidgetCarryItemBattery["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_guided_missile"]], function(f8_arg0)
 		f1_arg0:updateElementState(AmmoWidgetCPDataPackage, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f8_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x23CD9BAB9B9F4C8],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_guided_missile"],
 		})
 	end, false)
 	AmmoWidgetBall = AmmoWidgetCPDataPackage
 	AmmoWidgetSDBomb = AmmoWidgetCPDataPackage.subscribeToModel
-	AmmoWidgetCarryItemBattery = Engine[0x4DF5CFBC1771947](f1_arg1)
-	AmmoWidgetSDBomb(AmmoWidgetBall, AmmoWidgetCarryItemBattery["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2]], function(f9_arg0)
+	AmmoWidgetCarryItemBattery = Engine[@"getmodelforcontroller"](f1_arg1)
+	AmmoWidgetSDBomb(AmmoWidgetBall, AmmoWidgetCarryItemBattery["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"]], function(f9_arg0)
 		f1_arg0:updateElementState(AmmoWidgetCPDataPackage, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f9_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"],
 		})
 	end, false)
 	AmmoWidgetBall = AmmoWidgetCPDataPackage
 	AmmoWidgetSDBomb = AmmoWidgetCPDataPackage.subscribeToModel
-	AmmoWidgetCarryItemBattery = Engine[0x4DF5CFBC1771947](f1_arg1)
-	AmmoWidgetSDBomb(AmmoWidgetBall, AmmoWidgetCarryItemBattery["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x7B52A87BC9AA4C7]], function(f10_arg0)
+	AmmoWidgetCarryItemBattery = Engine[@"getmodelforcontroller"](f1_arg1)
+	AmmoWidgetSDBomb(AmmoWidgetBall, AmmoWidgetCarryItemBattery["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_remote_killstreak_static"]], function(f10_arg0)
 		f1_arg0:updateElementState(AmmoWidgetCPDataPackage, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f10_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x7B52A87BC9AA4C7],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_remote_killstreak_static"],
 		})
 	end, false)
 	AmmoWidgetBall = AmmoWidgetCPDataPackage
 	AmmoWidgetSDBomb = AmmoWidgetCPDataPackage.subscribeToModel
-	AmmoWidgetCarryItemBattery = Engine[0x4DF5CFBC1771947](f1_arg1)
-	AmmoWidgetSDBomb(AmmoWidgetBall, AmmoWidgetCarryItemBattery["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x6668F0686232679]], function(f11_arg0)
+	AmmoWidgetCarryItemBattery = Engine[@"getmodelforcontroller"](f1_arg1)
+	AmmoWidgetSDBomb(AmmoWidgetBall, AmmoWidgetCarryItemBattery["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_vehicle"]], function(f11_arg0)
 		f1_arg0:updateElementState(AmmoWidgetCPDataPackage, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f11_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x6668F0686232679],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_vehicle"],
 		})
 	end, false)
 	AmmoWidgetBall = AmmoWidgetCPDataPackage
 	AmmoWidgetSDBomb = AmmoWidgetCPDataPackage.subscribeToModel
-	AmmoWidgetCarryItemBattery = Engine[0x4DF5CFBC1771947](f1_arg1)
-	AmmoWidgetSDBomb(AmmoWidgetBall, AmmoWidgetCarryItemBattery["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x3AEEAA452536E6E]], function(f12_arg0)
+	AmmoWidgetCarryItemBattery = Engine[@"getmodelforcontroller"](f1_arg1)
+	AmmoWidgetSDBomb(AmmoWidgetBall, AmmoWidgetCarryItemBattery["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_is_flash_banged"]], function(f12_arg0)
 		f1_arg0:updateElementState(AmmoWidgetCPDataPackage, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f12_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x3AEEAA452536E6E],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_is_flash_banged"],
 		})
 	end, false)
 	AmmoWidgetBall = AmmoWidgetCPDataPackage
 	AmmoWidgetSDBomb = AmmoWidgetCPDataPackage.subscribeToModel
-	AmmoWidgetCarryItemBattery = Engine[0x4DF5CFBC1771947](f1_arg1)
-	AmmoWidgetSDBomb(AmmoWidgetBall, AmmoWidgetCarryItemBattery["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xD298E43D0B6FEF2]], function(f13_arg0)
+	AmmoWidgetCarryItemBattery = Engine[@"getmodelforcontroller"](f1_arg1)
+	AmmoWidgetSDBomb(AmmoWidgetBall, AmmoWidgetCarryItemBattery["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_is_scoped"]], function(f13_arg0)
 		f1_arg0:updateElementState(AmmoWidgetCPDataPackage, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f13_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xD298E43D0B6FEF2],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_is_scoped"],
 		})
 	end, false)
 	AmmoWidgetBall = AmmoWidgetCPDataPackage
 	AmmoWidgetSDBomb = AmmoWidgetCPDataPackage.subscribeToModel
-	AmmoWidgetCarryItemBattery = Engine[0x4DF5CFBC1771947](f1_arg1)
-	AmmoWidgetSDBomb(AmmoWidgetBall, AmmoWidgetCarryItemBattery["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04]], function(f14_arg0)
+	AmmoWidgetCarryItemBattery = Engine[@"getmodelforcontroller"](f1_arg1)
+	AmmoWidgetSDBomb(AmmoWidgetBall, AmmoWidgetCarryItemBattery["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]], function(f14_arg0)
 		f1_arg0:updateElementState(AmmoWidgetCPDataPackage, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f14_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"],
 		})
 	end, false)
 	AmmoWidgetBall = AmmoWidgetCPDataPackage
 	AmmoWidgetSDBomb = AmmoWidgetCPDataPackage.subscribeToModel
-	AmmoWidgetCarryItemBattery = Engine[0x4DF5CFBC1771947](f1_arg1)
-	AmmoWidgetSDBomb(AmmoWidgetBall, AmmoWidgetCarryItemBattery["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]], function(f15_arg0)
+	AmmoWidgetCarryItemBattery = Engine[@"getmodelforcontroller"](f1_arg1)
+	AmmoWidgetSDBomb(AmmoWidgetBall, AmmoWidgetCarryItemBattery["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_ui_active"]], function(f15_arg0)
 		f1_arg0:updateElementState(AmmoWidgetCPDataPackage, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f15_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_ui_active"],
 		})
 	end, false)
 	AmmoWidgetBall = AmmoWidgetCPDataPackage
 	AmmoWidgetSDBomb = AmmoWidgetCPDataPackage.subscribeToModel
-	AmmoWidgetCarryItemBattery = Engine[0x4DF5CFBC1771947](f1_arg1)
-	AmmoWidgetSDBomb(AmmoWidgetBall, AmmoWidgetCarryItemBattery["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xBB045E46E88E762]], function(f16_arg0)
+	AmmoWidgetCarryItemBattery = Engine[@"getmodelforcontroller"](f1_arg1)
+	AmmoWidgetSDBomb(AmmoWidgetBall, AmmoWidgetCarryItemBattery["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_weapon_hud_visible"]], function(f16_arg0)
 		f1_arg0:updateElementState(AmmoWidgetCPDataPackage, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f16_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xBB045E46E88E762],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_weapon_hud_visible"],
 		})
 	end, false)
 	AmmoWidgetBall = AmmoWidgetCPDataPackage
@@ -253,32 +253,32 @@ CoD.AmmoWidgetMP_HeldItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 		{
 			stateName = "Hide",
 			condition = function(menu, element, event)
-				local f18_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xB8E9B69F4B87954])
+				local f18_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_demo_all_game_hud_hidden"])
 				if not f18_local0 then
-					f18_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xD3ABF9A2753CE40])
+					f18_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_demo_camera_mode_moviecam"])
 					if not f18_local0 then
-						f18_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x59333FC97F7870])
+						f18_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_emp_active"])
 						if not f18_local0 then
-							f18_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x198075B069840DC])
+							f18_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_game_ended"])
 							if not f18_local0 then
-								if Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xADC477DDE486DD7]) then
-									f18_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x23CD9BAB9B9F4C8])
+								if Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_hud_visible"]) then
+									f18_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_in_guided_missile"])
 									if not f18_local0 then
-										f18_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2])
+										f18_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_in_killcam"])
 										if not f18_local0 then
-											f18_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x7B52A87BC9AA4C7])
+											f18_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_in_remote_killstreak_static"])
 											if not f18_local0 then
-												f18_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x6668F0686232679])
+												f18_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_in_vehicle"])
 												if not f18_local0 then
-													f18_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x3AEEAA452536E6E])
+													f18_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_is_flash_banged"])
 													if not f18_local0 then
-														f18_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xD298E43D0B6FEF2])
+														f18_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_is_scoped"])
 														if not f18_local0 then
-															f18_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04])
+															f18_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_scoreboard_open"])
 															if not f18_local0 then
-																f18_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6])
+																f18_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_ui_active"])
 																if not f18_local0 then
-																	f18_local0 = not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xBB045E46E88E762])
+																	f18_local0 = not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_weapon_hud_visible"])
 																end
 															end
 														end
@@ -300,175 +300,175 @@ CoD.AmmoWidgetMP_HeldItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	})
 	AmmoWidgetCarryItemBattery = AmmoWidgetSDBomb
 	AmmoWidgetBall = AmmoWidgetSDBomb.subscribeToModel
-	local AmmoWidgetBountyBag = Engine[0x4DF5CFBC1771947](f1_arg1)
-	AmmoWidgetBall(AmmoWidgetCarryItemBattery, AmmoWidgetBountyBag["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xB8E9B69F4B87954]], function(f19_arg0)
+	local AmmoWidgetBountyBag = Engine[@"getmodelforcontroller"](f1_arg1)
+	AmmoWidgetBall(AmmoWidgetCarryItemBattery, AmmoWidgetBountyBag["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_demo_all_game_hud_hidden"]], function(f19_arg0)
 		f1_arg0:updateElementState(AmmoWidgetSDBomb, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f19_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xB8E9B69F4B87954],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_demo_all_game_hud_hidden"],
 		})
 	end, false)
 	AmmoWidgetCarryItemBattery = AmmoWidgetSDBomb
 	AmmoWidgetBall = AmmoWidgetSDBomb.subscribeToModel
-	AmmoWidgetBountyBag = Engine[0x4DF5CFBC1771947](f1_arg1)
-	AmmoWidgetBall(AmmoWidgetCarryItemBattery, AmmoWidgetBountyBag["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xD3ABF9A2753CE40]], function(f20_arg0)
+	AmmoWidgetBountyBag = Engine[@"getmodelforcontroller"](f1_arg1)
+	AmmoWidgetBall(AmmoWidgetCarryItemBattery, AmmoWidgetBountyBag["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_demo_camera_mode_moviecam"]], function(f20_arg0)
 		f1_arg0:updateElementState(AmmoWidgetSDBomb, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f20_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xD3ABF9A2753CE40],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_demo_camera_mode_moviecam"],
 		})
 	end, false)
 	AmmoWidgetCarryItemBattery = AmmoWidgetSDBomb
 	AmmoWidgetBall = AmmoWidgetSDBomb.subscribeToModel
-	AmmoWidgetBountyBag = Engine[0x4DF5CFBC1771947](f1_arg1)
-	AmmoWidgetBall(AmmoWidgetCarryItemBattery, AmmoWidgetBountyBag["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x59333FC97F7870]], function(f21_arg0)
+	AmmoWidgetBountyBag = Engine[@"getmodelforcontroller"](f1_arg1)
+	AmmoWidgetBall(AmmoWidgetCarryItemBattery, AmmoWidgetBountyBag["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_emp_active"]], function(f21_arg0)
 		f1_arg0:updateElementState(AmmoWidgetSDBomb, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f21_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x59333FC97F7870],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_emp_active"],
 		})
 	end, false)
 	AmmoWidgetCarryItemBattery = AmmoWidgetSDBomb
 	AmmoWidgetBall = AmmoWidgetSDBomb.subscribeToModel
-	AmmoWidgetBountyBag = Engine[0x4DF5CFBC1771947](f1_arg1)
-	AmmoWidgetBall(AmmoWidgetCarryItemBattery, AmmoWidgetBountyBag["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x198075B069840DC]], function(f22_arg0)
+	AmmoWidgetBountyBag = Engine[@"getmodelforcontroller"](f1_arg1)
+	AmmoWidgetBall(AmmoWidgetCarryItemBattery, AmmoWidgetBountyBag["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_game_ended"]], function(f22_arg0)
 		f1_arg0:updateElementState(AmmoWidgetSDBomb, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f22_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x198075B069840DC],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_game_ended"],
 		})
 	end, false)
 	AmmoWidgetCarryItemBattery = AmmoWidgetSDBomb
 	AmmoWidgetBall = AmmoWidgetSDBomb.subscribeToModel
-	AmmoWidgetBountyBag = Engine[0x4DF5CFBC1771947](f1_arg1)
-	AmmoWidgetBall(AmmoWidgetCarryItemBattery, AmmoWidgetBountyBag["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xADC477DDE486DD7]], function(f23_arg0)
+	AmmoWidgetBountyBag = Engine[@"getmodelforcontroller"](f1_arg1)
+	AmmoWidgetBall(AmmoWidgetCarryItemBattery, AmmoWidgetBountyBag["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_hud_visible"]], function(f23_arg0)
 		f1_arg0:updateElementState(AmmoWidgetSDBomb, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f23_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xADC477DDE486DD7],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_hud_visible"],
 		})
 	end, false)
 	AmmoWidgetCarryItemBattery = AmmoWidgetSDBomb
 	AmmoWidgetBall = AmmoWidgetSDBomb.subscribeToModel
-	AmmoWidgetBountyBag = Engine[0x4DF5CFBC1771947](f1_arg1)
-	AmmoWidgetBall(AmmoWidgetCarryItemBattery, AmmoWidgetBountyBag["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x23CD9BAB9B9F4C8]], function(f24_arg0)
+	AmmoWidgetBountyBag = Engine[@"getmodelforcontroller"](f1_arg1)
+	AmmoWidgetBall(AmmoWidgetCarryItemBattery, AmmoWidgetBountyBag["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_guided_missile"]], function(f24_arg0)
 		f1_arg0:updateElementState(AmmoWidgetSDBomb, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f24_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x23CD9BAB9B9F4C8],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_guided_missile"],
 		})
 	end, false)
 	AmmoWidgetCarryItemBattery = AmmoWidgetSDBomb
 	AmmoWidgetBall = AmmoWidgetSDBomb.subscribeToModel
-	AmmoWidgetBountyBag = Engine[0x4DF5CFBC1771947](f1_arg1)
-	AmmoWidgetBall(AmmoWidgetCarryItemBattery, AmmoWidgetBountyBag["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2]], function(f25_arg0)
+	AmmoWidgetBountyBag = Engine[@"getmodelforcontroller"](f1_arg1)
+	AmmoWidgetBall(AmmoWidgetCarryItemBattery, AmmoWidgetBountyBag["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"]], function(f25_arg0)
 		f1_arg0:updateElementState(AmmoWidgetSDBomb, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f25_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"],
 		})
 	end, false)
 	AmmoWidgetCarryItemBattery = AmmoWidgetSDBomb
 	AmmoWidgetBall = AmmoWidgetSDBomb.subscribeToModel
-	AmmoWidgetBountyBag = Engine[0x4DF5CFBC1771947](f1_arg1)
-	AmmoWidgetBall(AmmoWidgetCarryItemBattery, AmmoWidgetBountyBag["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x7B52A87BC9AA4C7]], function(f26_arg0)
+	AmmoWidgetBountyBag = Engine[@"getmodelforcontroller"](f1_arg1)
+	AmmoWidgetBall(AmmoWidgetCarryItemBattery, AmmoWidgetBountyBag["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_remote_killstreak_static"]], function(f26_arg0)
 		f1_arg0:updateElementState(AmmoWidgetSDBomb, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f26_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x7B52A87BC9AA4C7],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_remote_killstreak_static"],
 		})
 	end, false)
 	AmmoWidgetCarryItemBattery = AmmoWidgetSDBomb
 	AmmoWidgetBall = AmmoWidgetSDBomb.subscribeToModel
-	AmmoWidgetBountyBag = Engine[0x4DF5CFBC1771947](f1_arg1)
-	AmmoWidgetBall(AmmoWidgetCarryItemBattery, AmmoWidgetBountyBag["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x6668F0686232679]], function(f27_arg0)
+	AmmoWidgetBountyBag = Engine[@"getmodelforcontroller"](f1_arg1)
+	AmmoWidgetBall(AmmoWidgetCarryItemBattery, AmmoWidgetBountyBag["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_vehicle"]], function(f27_arg0)
 		f1_arg0:updateElementState(AmmoWidgetSDBomb, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f27_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x6668F0686232679],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_vehicle"],
 		})
 	end, false)
 	AmmoWidgetCarryItemBattery = AmmoWidgetSDBomb
 	AmmoWidgetBall = AmmoWidgetSDBomb.subscribeToModel
-	AmmoWidgetBountyBag = Engine[0x4DF5CFBC1771947](f1_arg1)
-	AmmoWidgetBall(AmmoWidgetCarryItemBattery, AmmoWidgetBountyBag["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x3AEEAA452536E6E]], function(f28_arg0)
+	AmmoWidgetBountyBag = Engine[@"getmodelforcontroller"](f1_arg1)
+	AmmoWidgetBall(AmmoWidgetCarryItemBattery, AmmoWidgetBountyBag["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_is_flash_banged"]], function(f28_arg0)
 		f1_arg0:updateElementState(AmmoWidgetSDBomb, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f28_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x3AEEAA452536E6E],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_is_flash_banged"],
 		})
 	end, false)
 	AmmoWidgetCarryItemBattery = AmmoWidgetSDBomb
 	AmmoWidgetBall = AmmoWidgetSDBomb.subscribeToModel
-	AmmoWidgetBountyBag = Engine[0x4DF5CFBC1771947](f1_arg1)
-	AmmoWidgetBall(AmmoWidgetCarryItemBattery, AmmoWidgetBountyBag["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xD298E43D0B6FEF2]], function(f29_arg0)
+	AmmoWidgetBountyBag = Engine[@"getmodelforcontroller"](f1_arg1)
+	AmmoWidgetBall(AmmoWidgetCarryItemBattery, AmmoWidgetBountyBag["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_is_scoped"]], function(f29_arg0)
 		f1_arg0:updateElementState(AmmoWidgetSDBomb, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f29_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xD298E43D0B6FEF2],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_is_scoped"],
 		})
 	end, false)
 	AmmoWidgetCarryItemBattery = AmmoWidgetSDBomb
 	AmmoWidgetBall = AmmoWidgetSDBomb.subscribeToModel
-	AmmoWidgetBountyBag = Engine[0x4DF5CFBC1771947](f1_arg1)
-	AmmoWidgetBall(AmmoWidgetCarryItemBattery, AmmoWidgetBountyBag["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04]], function(f30_arg0)
+	AmmoWidgetBountyBag = Engine[@"getmodelforcontroller"](f1_arg1)
+	AmmoWidgetBall(AmmoWidgetCarryItemBattery, AmmoWidgetBountyBag["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]], function(f30_arg0)
 		f1_arg0:updateElementState(AmmoWidgetSDBomb, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f30_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"],
 		})
 	end, false)
 	AmmoWidgetCarryItemBattery = AmmoWidgetSDBomb
 	AmmoWidgetBall = AmmoWidgetSDBomb.subscribeToModel
-	AmmoWidgetBountyBag = Engine[0x4DF5CFBC1771947](f1_arg1)
-	AmmoWidgetBall(AmmoWidgetCarryItemBattery, AmmoWidgetBountyBag["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]], function(f31_arg0)
+	AmmoWidgetBountyBag = Engine[@"getmodelforcontroller"](f1_arg1)
+	AmmoWidgetBall(AmmoWidgetCarryItemBattery, AmmoWidgetBountyBag["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_ui_active"]], function(f31_arg0)
 		f1_arg0:updateElementState(AmmoWidgetSDBomb, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f31_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_ui_active"],
 		})
 	end, false)
 	AmmoWidgetCarryItemBattery = AmmoWidgetSDBomb
 	AmmoWidgetBall = AmmoWidgetSDBomb.subscribeToModel
-	AmmoWidgetBountyBag = Engine[0x4DF5CFBC1771947](f1_arg1)
-	AmmoWidgetBall(AmmoWidgetCarryItemBattery, AmmoWidgetBountyBag["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xBB045E46E88E762]], function(f32_arg0)
+	AmmoWidgetBountyBag = Engine[@"getmodelforcontroller"](f1_arg1)
+	AmmoWidgetBall(AmmoWidgetCarryItemBattery, AmmoWidgetBountyBag["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_weapon_hud_visible"]], function(f32_arg0)
 		f1_arg0:updateElementState(AmmoWidgetSDBomb, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f32_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xBB045E46E88E762],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_weapon_hud_visible"],
 		})
 	end, false)
 	AmmoWidgetCarryItemBattery = AmmoWidgetSDBomb
 	AmmoWidgetBall = AmmoWidgetSDBomb.subscribeToModel
-	AmmoWidgetBountyBag = Engine[0x4DF5CFBC1771947](f1_arg1)
+	AmmoWidgetBountyBag = Engine[@"getmodelforcontroller"](f1_arg1)
 	AmmoWidgetBall(AmmoWidgetCarryItemBattery, AmmoWidgetBountyBag["hudItems.SDBombClient"], function(f33_arg0)
 		f1_arg0:updateElementState(AmmoWidgetSDBomb, {
 			name = "model_validation",
@@ -480,7 +480,7 @@ CoD.AmmoWidgetMP_HeldItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	end, false)
 	AmmoWidgetCarryItemBattery = AmmoWidgetSDBomb
 	AmmoWidgetBall = AmmoWidgetSDBomb.subscribeToModel
-	AmmoWidgetBountyBag = Engine[0x4DF5CFBC1771947](f1_arg1)
+	AmmoWidgetBountyBag = Engine[@"getmodelforcontroller"](f1_arg1)
 	AmmoWidgetBall(AmmoWidgetCarryItemBattery, AmmoWidgetBountyBag["deadSpectator.playerIndex"], function(f34_arg0)
 		f1_arg0:updateElementState(AmmoWidgetSDBomb, {
 			name = "model_validation",
@@ -492,7 +492,7 @@ CoD.AmmoWidgetMP_HeldItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	end, false)
 	AmmoWidgetCarryItemBattery = AmmoWidgetSDBomb
 	AmmoWidgetBall = AmmoWidgetSDBomb.subscribeToModel
-	AmmoWidgetBountyBag = Engine[0x4DF5CFBC1771947](f1_arg1)
+	AmmoWidgetBountyBag = Engine[@"getmodelforcontroller"](f1_arg1)
 	AmmoWidgetBall(AmmoWidgetCarryItemBattery, AmmoWidgetBountyBag["Demolition.defending"], function(f35_arg0)
 		f1_arg0:updateElementState(AmmoWidgetSDBomb, {
 			name = "model_validation",
@@ -504,7 +504,7 @@ CoD.AmmoWidgetMP_HeldItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	end, false)
 	AmmoWidgetCarryItemBattery = AmmoWidgetSDBomb
 	AmmoWidgetBall = AmmoWidgetSDBomb.subscribeToModel
-	AmmoWidgetBountyBag = Engine[0x4DF5CFBC1771947](f1_arg1)
+	AmmoWidgetBountyBag = Engine[@"getmodelforcontroller"](f1_arg1)
 	AmmoWidgetBall(AmmoWidgetCarryItemBattery, AmmoWidgetBountyBag["SearchAndDestroy.defending"], function(f36_arg0)
 		f1_arg0:updateElementState(AmmoWidgetSDBomb, {
 			name = "model_validation",
@@ -516,31 +516,31 @@ CoD.AmmoWidgetMP_HeldItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	end, false)
 	AmmoWidgetCarryItemBattery = AmmoWidgetSDBomb
 	AmmoWidgetBall = AmmoWidgetSDBomb.subscribeToModel
-	AmmoWidgetBountyBag = Engine[0x4DF5CFBC1771947](f1_arg1)
-	AmmoWidgetBall(AmmoWidgetCarryItemBattery, AmmoWidgetBountyBag["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xABEA46F8DE7F02F]], function(f37_arg0)
+	AmmoWidgetBountyBag = Engine[@"getmodelforcontroller"](f1_arg1)
+	AmmoWidgetBall(AmmoWidgetCarryItemBattery, AmmoWidgetBountyBag["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_bomb_timer_a"]], function(f37_arg0)
 		f1_arg0:updateElementState(AmmoWidgetSDBomb, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f37_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xABEA46F8DE7F02F],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_bomb_timer_a"],
 		})
 	end, false)
 	AmmoWidgetCarryItemBattery = AmmoWidgetSDBomb
 	AmmoWidgetBall = AmmoWidgetSDBomb.subscribeToModel
-	AmmoWidgetBountyBag = Engine[0x4DF5CFBC1771947](f1_arg1)
-	AmmoWidgetBall(AmmoWidgetCarryItemBattery, AmmoWidgetBountyBag["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xABEA56F8DE7F1E2]], function(f38_arg0)
+	AmmoWidgetBountyBag = Engine[@"getmodelforcontroller"](f1_arg1)
+	AmmoWidgetBall(AmmoWidgetCarryItemBattery, AmmoWidgetBountyBag["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_bomb_timer_b"]], function(f38_arg0)
 		f1_arg0:updateElementState(AmmoWidgetSDBomb, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f38_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xABEA56F8DE7F1E2],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_bomb_timer_b"],
 		})
 	end, false)
 	AmmoWidgetCarryItemBattery = AmmoWidgetSDBomb
 	AmmoWidgetBall = AmmoWidgetSDBomb.subscribeToModel
-	AmmoWidgetBountyBag = Engine[0x4DF5CFBC1771947](f1_arg1)
+	AmmoWidgetBountyBag = Engine[@"getmodelforcontroller"](f1_arg1)
 	AmmoWidgetBall(AmmoWidgetCarryItemBattery, AmmoWidgetBountyBag["factions.isCoDCaster"], function(f39_arg0)
 		f1_arg0:updateElementState(AmmoWidgetSDBomb, {
 			name = "model_validation",
@@ -557,32 +557,32 @@ CoD.AmmoWidgetMP_HeldItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 		{
 			stateName = "Hide",
 			condition = function(menu, element, event)
-				local f40_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xB8E9B69F4B87954])
+				local f40_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_demo_all_game_hud_hidden"])
 				if not f40_local0 then
-					f40_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xD3ABF9A2753CE40])
+					f40_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_demo_camera_mode_moviecam"])
 					if not f40_local0 then
-						f40_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x59333FC97F7870])
+						f40_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_emp_active"])
 						if not f40_local0 then
-							f40_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x198075B069840DC])
+							f40_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_game_ended"])
 							if not f40_local0 then
-								if Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xADC477DDE486DD7]) then
-									f40_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x23CD9BAB9B9F4C8])
+								if Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_hud_visible"]) then
+									f40_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_in_guided_missile"])
 									if not f40_local0 then
-										f40_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2])
+										f40_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_in_killcam"])
 										if not f40_local0 then
-											f40_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x7B52A87BC9AA4C7])
+											f40_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_in_remote_killstreak_static"])
 											if not f40_local0 then
-												f40_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x6668F0686232679])
+												f40_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_in_vehicle"])
 												if not f40_local0 then
-													f40_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x3AEEAA452536E6E])
+													f40_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_is_flash_banged"])
 													if not f40_local0 then
-														f40_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xD298E43D0B6FEF2])
+														f40_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_is_scoped"])
 														if not f40_local0 then
-															f40_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04])
+															f40_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_scoreboard_open"])
 															if not f40_local0 then
-																f40_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6])
+																f40_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_ui_active"])
 																if not f40_local0 then
-																	f40_local0 = not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xBB045E46E88E762])
+																	f40_local0 = not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_weapon_hud_visible"])
 																end
 															end
 														end
@@ -604,170 +604,170 @@ CoD.AmmoWidgetMP_HeldItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	})
 	AmmoWidgetBountyBag = AmmoWidgetBall
 	AmmoWidgetCarryItemBattery = AmmoWidgetBall.subscribeToModel
-	local AmmoWidgetctfflag = Engine[0x4DF5CFBC1771947](f1_arg1)
-	AmmoWidgetCarryItemBattery(AmmoWidgetBountyBag, AmmoWidgetctfflag["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xB8E9B69F4B87954]], function(f41_arg0)
+	local AmmoWidgetctfflag = Engine[@"getmodelforcontroller"](f1_arg1)
+	AmmoWidgetCarryItemBattery(AmmoWidgetBountyBag, AmmoWidgetctfflag["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_demo_all_game_hud_hidden"]], function(f41_arg0)
 		f1_arg0:updateElementState(AmmoWidgetBall, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f41_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xB8E9B69F4B87954],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_demo_all_game_hud_hidden"],
 		})
 	end, false)
 	AmmoWidgetBountyBag = AmmoWidgetBall
 	AmmoWidgetCarryItemBattery = AmmoWidgetBall.subscribeToModel
-	AmmoWidgetctfflag = Engine[0x4DF5CFBC1771947](f1_arg1)
-	AmmoWidgetCarryItemBattery(AmmoWidgetBountyBag, AmmoWidgetctfflag["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xD3ABF9A2753CE40]], function(f42_arg0)
+	AmmoWidgetctfflag = Engine[@"getmodelforcontroller"](f1_arg1)
+	AmmoWidgetCarryItemBattery(AmmoWidgetBountyBag, AmmoWidgetctfflag["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_demo_camera_mode_moviecam"]], function(f42_arg0)
 		f1_arg0:updateElementState(AmmoWidgetBall, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f42_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xD3ABF9A2753CE40],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_demo_camera_mode_moviecam"],
 		})
 	end, false)
 	AmmoWidgetBountyBag = AmmoWidgetBall
 	AmmoWidgetCarryItemBattery = AmmoWidgetBall.subscribeToModel
-	AmmoWidgetctfflag = Engine[0x4DF5CFBC1771947](f1_arg1)
-	AmmoWidgetCarryItemBattery(AmmoWidgetBountyBag, AmmoWidgetctfflag["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x59333FC97F7870]], function(f43_arg0)
+	AmmoWidgetctfflag = Engine[@"getmodelforcontroller"](f1_arg1)
+	AmmoWidgetCarryItemBattery(AmmoWidgetBountyBag, AmmoWidgetctfflag["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_emp_active"]], function(f43_arg0)
 		f1_arg0:updateElementState(AmmoWidgetBall, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f43_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x59333FC97F7870],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_emp_active"],
 		})
 	end, false)
 	AmmoWidgetBountyBag = AmmoWidgetBall
 	AmmoWidgetCarryItemBattery = AmmoWidgetBall.subscribeToModel
-	AmmoWidgetctfflag = Engine[0x4DF5CFBC1771947](f1_arg1)
-	AmmoWidgetCarryItemBattery(AmmoWidgetBountyBag, AmmoWidgetctfflag["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x198075B069840DC]], function(f44_arg0)
+	AmmoWidgetctfflag = Engine[@"getmodelforcontroller"](f1_arg1)
+	AmmoWidgetCarryItemBattery(AmmoWidgetBountyBag, AmmoWidgetctfflag["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_game_ended"]], function(f44_arg0)
 		f1_arg0:updateElementState(AmmoWidgetBall, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f44_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x198075B069840DC],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_game_ended"],
 		})
 	end, false)
 	AmmoWidgetBountyBag = AmmoWidgetBall
 	AmmoWidgetCarryItemBattery = AmmoWidgetBall.subscribeToModel
-	AmmoWidgetctfflag = Engine[0x4DF5CFBC1771947](f1_arg1)
-	AmmoWidgetCarryItemBattery(AmmoWidgetBountyBag, AmmoWidgetctfflag["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xADC477DDE486DD7]], function(f45_arg0)
+	AmmoWidgetctfflag = Engine[@"getmodelforcontroller"](f1_arg1)
+	AmmoWidgetCarryItemBattery(AmmoWidgetBountyBag, AmmoWidgetctfflag["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_hud_visible"]], function(f45_arg0)
 		f1_arg0:updateElementState(AmmoWidgetBall, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f45_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xADC477DDE486DD7],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_hud_visible"],
 		})
 	end, false)
 	AmmoWidgetBountyBag = AmmoWidgetBall
 	AmmoWidgetCarryItemBattery = AmmoWidgetBall.subscribeToModel
-	AmmoWidgetctfflag = Engine[0x4DF5CFBC1771947](f1_arg1)
-	AmmoWidgetCarryItemBattery(AmmoWidgetBountyBag, AmmoWidgetctfflag["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x23CD9BAB9B9F4C8]], function(f46_arg0)
+	AmmoWidgetctfflag = Engine[@"getmodelforcontroller"](f1_arg1)
+	AmmoWidgetCarryItemBattery(AmmoWidgetBountyBag, AmmoWidgetctfflag["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_guided_missile"]], function(f46_arg0)
 		f1_arg0:updateElementState(AmmoWidgetBall, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f46_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x23CD9BAB9B9F4C8],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_guided_missile"],
 		})
 	end, false)
 	AmmoWidgetBountyBag = AmmoWidgetBall
 	AmmoWidgetCarryItemBattery = AmmoWidgetBall.subscribeToModel
-	AmmoWidgetctfflag = Engine[0x4DF5CFBC1771947](f1_arg1)
-	AmmoWidgetCarryItemBattery(AmmoWidgetBountyBag, AmmoWidgetctfflag["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2]], function(f47_arg0)
+	AmmoWidgetctfflag = Engine[@"getmodelforcontroller"](f1_arg1)
+	AmmoWidgetCarryItemBattery(AmmoWidgetBountyBag, AmmoWidgetctfflag["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"]], function(f47_arg0)
 		f1_arg0:updateElementState(AmmoWidgetBall, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f47_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"],
 		})
 	end, false)
 	AmmoWidgetBountyBag = AmmoWidgetBall
 	AmmoWidgetCarryItemBattery = AmmoWidgetBall.subscribeToModel
-	AmmoWidgetctfflag = Engine[0x4DF5CFBC1771947](f1_arg1)
-	AmmoWidgetCarryItemBattery(AmmoWidgetBountyBag, AmmoWidgetctfflag["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x7B52A87BC9AA4C7]], function(f48_arg0)
+	AmmoWidgetctfflag = Engine[@"getmodelforcontroller"](f1_arg1)
+	AmmoWidgetCarryItemBattery(AmmoWidgetBountyBag, AmmoWidgetctfflag["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_remote_killstreak_static"]], function(f48_arg0)
 		f1_arg0:updateElementState(AmmoWidgetBall, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f48_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x7B52A87BC9AA4C7],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_remote_killstreak_static"],
 		})
 	end, false)
 	AmmoWidgetBountyBag = AmmoWidgetBall
 	AmmoWidgetCarryItemBattery = AmmoWidgetBall.subscribeToModel
-	AmmoWidgetctfflag = Engine[0x4DF5CFBC1771947](f1_arg1)
-	AmmoWidgetCarryItemBattery(AmmoWidgetBountyBag, AmmoWidgetctfflag["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x6668F0686232679]], function(f49_arg0)
+	AmmoWidgetctfflag = Engine[@"getmodelforcontroller"](f1_arg1)
+	AmmoWidgetCarryItemBattery(AmmoWidgetBountyBag, AmmoWidgetctfflag["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_vehicle"]], function(f49_arg0)
 		f1_arg0:updateElementState(AmmoWidgetBall, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f49_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x6668F0686232679],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_vehicle"],
 		})
 	end, false)
 	AmmoWidgetBountyBag = AmmoWidgetBall
 	AmmoWidgetCarryItemBattery = AmmoWidgetBall.subscribeToModel
-	AmmoWidgetctfflag = Engine[0x4DF5CFBC1771947](f1_arg1)
-	AmmoWidgetCarryItemBattery(AmmoWidgetBountyBag, AmmoWidgetctfflag["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x3AEEAA452536E6E]], function(f50_arg0)
+	AmmoWidgetctfflag = Engine[@"getmodelforcontroller"](f1_arg1)
+	AmmoWidgetCarryItemBattery(AmmoWidgetBountyBag, AmmoWidgetctfflag["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_is_flash_banged"]], function(f50_arg0)
 		f1_arg0:updateElementState(AmmoWidgetBall, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f50_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x3AEEAA452536E6E],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_is_flash_banged"],
 		})
 	end, false)
 	AmmoWidgetBountyBag = AmmoWidgetBall
 	AmmoWidgetCarryItemBattery = AmmoWidgetBall.subscribeToModel
-	AmmoWidgetctfflag = Engine[0x4DF5CFBC1771947](f1_arg1)
-	AmmoWidgetCarryItemBattery(AmmoWidgetBountyBag, AmmoWidgetctfflag["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xD298E43D0B6FEF2]], function(f51_arg0)
+	AmmoWidgetctfflag = Engine[@"getmodelforcontroller"](f1_arg1)
+	AmmoWidgetCarryItemBattery(AmmoWidgetBountyBag, AmmoWidgetctfflag["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_is_scoped"]], function(f51_arg0)
 		f1_arg0:updateElementState(AmmoWidgetBall, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f51_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xD298E43D0B6FEF2],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_is_scoped"],
 		})
 	end, false)
 	AmmoWidgetBountyBag = AmmoWidgetBall
 	AmmoWidgetCarryItemBattery = AmmoWidgetBall.subscribeToModel
-	AmmoWidgetctfflag = Engine[0x4DF5CFBC1771947](f1_arg1)
-	AmmoWidgetCarryItemBattery(AmmoWidgetBountyBag, AmmoWidgetctfflag["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04]], function(f52_arg0)
+	AmmoWidgetctfflag = Engine[@"getmodelforcontroller"](f1_arg1)
+	AmmoWidgetCarryItemBattery(AmmoWidgetBountyBag, AmmoWidgetctfflag["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]], function(f52_arg0)
 		f1_arg0:updateElementState(AmmoWidgetBall, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f52_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"],
 		})
 	end, false)
 	AmmoWidgetBountyBag = AmmoWidgetBall
 	AmmoWidgetCarryItemBattery = AmmoWidgetBall.subscribeToModel
-	AmmoWidgetctfflag = Engine[0x4DF5CFBC1771947](f1_arg1)
-	AmmoWidgetCarryItemBattery(AmmoWidgetBountyBag, AmmoWidgetctfflag["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]], function(f53_arg0)
+	AmmoWidgetctfflag = Engine[@"getmodelforcontroller"](f1_arg1)
+	AmmoWidgetCarryItemBattery(AmmoWidgetBountyBag, AmmoWidgetctfflag["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_ui_active"]], function(f53_arg0)
 		f1_arg0:updateElementState(AmmoWidgetBall, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f53_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_ui_active"],
 		})
 	end, false)
 	AmmoWidgetBountyBag = AmmoWidgetBall
 	AmmoWidgetCarryItemBattery = AmmoWidgetBall.subscribeToModel
-	AmmoWidgetctfflag = Engine[0x4DF5CFBC1771947](f1_arg1)
-	AmmoWidgetCarryItemBattery(AmmoWidgetBountyBag, AmmoWidgetctfflag["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xBB045E46E88E762]], function(f54_arg0)
+	AmmoWidgetctfflag = Engine[@"getmodelforcontroller"](f1_arg1)
+	AmmoWidgetCarryItemBattery(AmmoWidgetBountyBag, AmmoWidgetctfflag["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_weapon_hud_visible"]], function(f54_arg0)
 		f1_arg0:updateElementState(AmmoWidgetBall, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f54_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xBB045E46E88E762],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_weapon_hud_visible"],
 		})
 	end, false)
 	AmmoWidgetBountyBag = AmmoWidgetBall

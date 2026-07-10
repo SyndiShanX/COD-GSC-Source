@@ -9,11 +9,11 @@ CoD.ArenaEventTimerSmallEndsIn.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local EventEndsIn = LUI.UIText.new(0, 0, 0, 140, 0, 0, 0, 14)
 	EventEndsIn:setRGB(ColorSet.T8__OCHRE.r, ColorSet.T8__OCHRE.g, ColorSet.T8__OCHRE.b)
-	EventEndsIn:setText(Engine[0xF9F1239CFD921FE](0x93E719493E9E18F))
+	EventEndsIn:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	EventEndsIn:setTTF("dinnext_regular")
 	EventEndsIn:setLetterSpacing(1)
-	EventEndsIn:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	EventEndsIn:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	EventEndsIn:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	EventEndsIn:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	self:addElement(EventEndsIn)
 	self.EventEndsIn = EventEndsIn
 	self:mergeStateConditions({

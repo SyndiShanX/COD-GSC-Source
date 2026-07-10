@@ -191,7 +191,7 @@ CoD.HUD_PC_Vehicle.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	self:addElement(HUDVehiclePromptR4)
 	self.HUDVehiclePromptR4 = HUDVehiclePromptR4
 	local ExitPrompt = CoD.HUD_VehiclePrompt_Hold.new(f1_arg0, f1_arg1, 0, 0, 772.5, 867.5, 0, 0, 0, 65)
-	ExitPrompt.label:setText(LocalizeToUpperString(0xC7D903A026627FC))
+	ExitPrompt.label:setText(LocalizeToUpperString(@"hash_4C7D903A026627FC"))
 	ExitPrompt.HUDVehiclePromptContainer.KBMText:setText(CoD.PCUtility.GetKeybind(f1_arg1, "+activate"))
 	ExitPrompt:linkToElementModel(self, nil, false, function(model)
 		ExitPrompt:setModel(model, f1_arg1)

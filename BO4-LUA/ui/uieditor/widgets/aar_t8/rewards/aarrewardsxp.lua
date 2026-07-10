@@ -21,7 +21,7 @@ CoD.AARRewardsXP.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 	self:addElement(Frame)
 	self.Frame = Frame
 	local XPIcon = LUI.UIFixedAspectRatioImage.new(0, 0, 25, 85, 0, 0, 17, 77)
-	XPIcon:setImage(RegisterImage(0x620E589747ADBAB))
+	XPIcon:setImage(RegisterImage(@"t7_hud_mp_notifications_xp_blue"))
 	self:addElement(XPIcon)
 	self.XPIcon = XPIcon
 	local DoubleXP = CoD.Notification2xpReward.new(f1_arg0, f1_arg1, 0, 0, 19, 91, 0, 0, 11, 83)
@@ -34,8 +34,8 @@ CoD.AARRewardsXP.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 	XP:setText("")
 	XP:setTTF("ttmussels_demibold")
 	XP:setLetterSpacing(2)
-	XP:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	XP:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	XP:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	XP:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(XP)
 	self.XP = XP
 	local Corner = CoD.AARRewardBrackets.new(f1_arg0, f1_arg1, 0, 0, -1, 381, 0, 0, -1, 95)

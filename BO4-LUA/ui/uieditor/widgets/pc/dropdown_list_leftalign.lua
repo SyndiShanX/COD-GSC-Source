@@ -31,12 +31,12 @@ CoD.Dropdown_List_LeftAlign.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	VScrollbar:setAlpha(0)
 	self:addElement(VScrollbar)
 	self.VScrollbar = VScrollbar
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		CoD.PCWidgetUtility.DropdownClose(self)
 		CoD.PCWidgetUtility.DropdownGiveFocusBack(self, menu, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x0, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"hash_0", nil, nil)
 		return false
 	end, false)
 	self:linkToElementModel(self, "isOpen", true, function(model)

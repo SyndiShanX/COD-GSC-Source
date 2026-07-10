@@ -11,14 +11,14 @@ CoD.WarzoneCastTimeContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	Backing = LUI.UIImage.new(0.5, 0.5, -36, 32, 0.5, 0.5, -30, 30)
 	Backing:setRGB(0.34, 0.32, 0.2)
 	Backing:setAlpha(0)
-	Backing:setImage(RegisterImage(0xF3974F8EE78598C))
+	Backing:setImage(RegisterImage(@"uie_ui_hud_wz_hud_core_player_widget_ability_backer"))
 	self:addElement(Backing)
 	self.Backing = Backing
 	local ClockMeterAdd = nil
 	ClockMeterAdd = LUI.UIImage.new(0.5, 0.5, -35, 31, 0.5, 0.5, -29, 29)
 	ClockMeterAdd:setRGB(0, 0, 0)
 	ClockMeterAdd:setAlpha(0.8)
-	ClockMeterAdd:setMaterial(LUI.UIImage.GetCachedMaterial(0xD5CA1A25ED87F4F))
+	ClockMeterAdd:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_clock_normal"))
 	ClockMeterAdd:setShaderVector(1, 0.5, 0, 0, 0)
 	ClockMeterAdd:setShaderVector(2, 0.5, 0, 0, 0)
 	ClockMeterAdd:setShaderVector(3, 0, 0, 0, 0)

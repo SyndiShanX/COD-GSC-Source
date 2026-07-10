@@ -1,12 +1,12 @@
 CoD.PCAchievementsUtility = {}
 CoD.PCAchievementsUtility.CreatePCAchievementTable = function(f1_arg0, f1_arg1)
-	local f1_local0 = f1_arg1[0xD885806B56289E]
+	local f1_local0 = f1_arg1[@"enabled"]
 	local f1_local1 = {}
 	local f1_local2 = {
-		name = f1_arg1[0xA31296C0C1B6029],
-		desc = f1_arg1[0xCC44970C8397929],
-		image = f1_arg1[0xAB612888528489A],
-		score = f1_arg1[0x10E63FBE7F624F5],
+		name = f1_arg1[@"title"],
+		desc = f1_arg1[@"description"],
+		image = f1_arg1[@"image"],
+		score = f1_arg1[@"score"],
 		maxValue = 1,
 	}
 	local f1_local3
@@ -32,7 +32,7 @@ CoD.PCAchievementsUtility.CreatePCAchievementTable = function(f1_arg0, f1_arg1)
 end
 DataSources.PCAchievementNotification = {
 	getModel = function(f2_arg0)
-		local f2_local0 = Engine[0x4DF5CFBC1771947](f2_arg0)
+		local f2_local0 = Engine[@"getmodelforcontroller"](f2_arg0)
 		local f2_local1 = f2_local0["PC.Achievement.Notification"]
 		if not f2_local1 then
 			f2_local1 = f2_local0:create("PC.Achievement.Notification")
@@ -72,7 +72,7 @@ CoD.PCAchievementsUtility.ShowAchievementNotification = function(f3_arg0, f3_arg
 end
 DataSources.PCTotalAchievementsScore = {
 	getModel = function(f5_arg0)
-		local f5_local0 = Engine[0x4DF5CFBC1771947](f5_arg0)
+		local f5_local0 = Engine[@"getmodelforcontroller"](f5_arg0)
 		local f5_local1 = f5_local0["PC.Achievement.TotalScore"]
 		if not f5_local1 then
 			f5_local1 = f5_local0:create("PC.Achievement.TotalScore")
@@ -91,7 +91,7 @@ CoD.PCAchievementsUtility.PreparePCAchievementListFromAsset = function(f6_arg0)
 	local f6_local1 = 0
 	local f6_local2 = {}
 	local f6_local3 = DataSources.PCTotalAchievementsScore.getModel(f6_arg0)
-	for f6_local8, f6_local9 in ipairs(Engine[0x54F61DB6DD339F5](f6_arg0)) do
+	for f6_local8, f6_local9 in ipairs(Engine[@"hash_254F61DB6DD339F5"](f6_arg0)) do
 		local f6_local10 = CoD.PCAchievementsUtility.CreatePCAchievementTable(f6_arg0, f6_local9)
 		if f6_local10 then
 			table.insert(f6_local2, f6_local10)

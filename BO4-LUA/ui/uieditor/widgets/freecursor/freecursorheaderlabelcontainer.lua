@@ -37,14 +37,14 @@ CoD.freeCursorHeaderLabelContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	end)
 	local f1_local2 = titlePC
 	local title = titlePC.subscribeToModel
-	local f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	title(f1_local2, f1_local4["ButtonBits." .. Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA]], function(f5_arg0)
+	local f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
+	title(f1_local2, f1_local4["ButtonBits." .. Enum[@"luibutton"][@"lui_key_rtrig"]], function(f5_arg0)
 		f1_arg0:updateElementState(titlePC, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f5_arg0:get(),
-			modelName = "ButtonBits." .. Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA],
+			modelName = "ButtonBits." .. Enum[@"luibutton"][@"lui_key_rtrig"],
 		})
 	end, false)
 	titlePC:linkToElementModel(titlePC, "detailedViewPC", true, function(model)
@@ -96,14 +96,14 @@ CoD.freeCursorHeaderLabelContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	end)
 	f1_local4 = title
 	f1_local2 = title.subscribeToModel
-	local f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local2(f1_local4, f1_local5["ButtonBits." .. Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA]], function(f12_arg0)
+	local f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local2(f1_local4, f1_local5["ButtonBits." .. Enum[@"luibutton"][@"lui_key_rtrig"]], function(f12_arg0)
 		f1_arg0:updateElementState(title, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f12_arg0:get(),
-			modelName = "ButtonBits." .. Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA],
+			modelName = "ButtonBits." .. Enum[@"luibutton"][@"lui_key_rtrig"],
 		})
 	end, false)
 	title:linkToElementModel(title, "detailedViewPC", true, function(model)
@@ -143,7 +143,7 @@ CoD.freeCursorHeaderLabelContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	end)
 	f1_local4 = self
 	f1_local2 = self.subscribeToModel
-	f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local2(f1_local4, f1_local5.LastInput, function(f18_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

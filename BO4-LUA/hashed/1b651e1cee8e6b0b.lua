@@ -16,7 +16,7 @@ CoD.WZ_AARCharacterContainerInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	CharacterUnlocks:setLeftRight(0.5, 0.5, -212.5, 212.5)
 	CharacterUnlocks:setTopBottom(0, 0, 77, 562)
 	CharacterUnlocks:setWidgetType(CoD.WZAAR_UnlockedCharacter)
-	CharacterUnlocks:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	CharacterUnlocks:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	CharacterUnlocks:setDataSource("CharacterUnlock")
 	CharacterUnlocks:subscribeToGlobalModel(f1_arg1, "PerController", "gameScore.currentState", function(model)
 		local f2_local0 = CharacterUnlocks
@@ -28,11 +28,11 @@ CoD.WZ_AARCharacterContainerInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	self.CharacterUnlocks = CharacterUnlocks
 	local Title = LUI.UIText.new(0.5, 0.5, -248, 248, 0, 0, 19, 51)
 	Title:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
-	Title:setText(Engine[0xF9F1239CFD921FE](0x897061E92EE5BFC))
+	Title:setText(Engine[@"hash_4F9F1239CFD921FE"](@"aar/rewards"))
 	Title:setTTF("ttmussels_demibold")
 	Title:setLetterSpacing(4)
-	Title:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	Title:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	Title:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	Title:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	self:addElement(Title)
 	self.Title = Title
 	CharacterUnlocks.id = "CharacterUnlocks"

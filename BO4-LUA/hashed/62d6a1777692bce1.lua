@@ -9,8 +9,8 @@ CoD.PositionDraft_StatusBannerFui.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local LayoutLineBR = LUI.UIImage.new(0, 0, 20, 88, 0, 0, 15, 39)
 	LayoutLineBR:setAlpha(0.4)
-	LayoutLineBR:setImage(RegisterImage(0xE44ABB390F5F528))
-	LayoutLineBR:setMaterial(LUI.UIImage.GetCachedMaterial(0x2EEB1ECF1F211F5))
+	LayoutLineBR:setImage(RegisterImage(@"uie_ui_hud_tak5_layout_common_bar"))
+	LayoutLineBR:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_delta"))
 	LayoutLineBR:setShaderVector(0, 0, 1, 0, 0)
 	LayoutLineBR:setShaderVector(1, 0, 0, 0, 0)
 	LayoutLineBR:setShaderVector(2, 0, 1, 0, 0)
@@ -20,25 +20,25 @@ CoD.PositionDraft_StatusBannerFui.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	self.LayoutLineBR = LayoutLineBR
 	local LayoutLineBRAdd = LUI.UIImage.new(0, 0, 20, 88, 0, 0, 15, 39)
 	LayoutLineBRAdd:setAlpha(0.4)
-	LayoutLineBRAdd:setImage(RegisterImage(0xE44ABB390F5F528))
-	LayoutLineBRAdd:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	LayoutLineBRAdd:setImage(RegisterImage(@"uie_ui_hud_tak5_layout_common_bar"))
+	LayoutLineBRAdd:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	LayoutLineBRAdd:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(LayoutLineBRAdd)
 	self.LayoutLineBRAdd = LayoutLineBRAdd
 	local microtextImage2 = LUI.UIImage.new(0, 0, 0, 18, 0, 0, 24.5, 28.5)
 	microtextImage2:setAlpha(0.2)
 	microtextImage2:setZRot(180)
-	microtextImage2:setImage(RegisterImage(0x16C3274D8031268))
+	microtextImage2:setImage(RegisterImage(@"hash_116C3274D8031268"))
 	self:addElement(microtextImage2)
 	self.microtextImage2 = microtextImage2
 	local Pip = LUI.UIImage.new(0, 0, 80, 88, 0, 0, 0, 8)
-	Pip:setImage(RegisterImage(0x364778639313CE9))
-	Pip:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Pip:setImage(RegisterImage(@"hash_6364778639313CE9"))
+	Pip:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Pip)
 	self.Pip = Pip
 	local Pip02 = LUI.UIImage.new(0, 0, 80, 88, 0, 0, 46, 54)
-	Pip02:setImage(RegisterImage(0x364778639313CE9))
-	Pip02:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Pip02:setImage(RegisterImage(@"hash_6364778639313CE9"))
+	Pip02:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Pip02)
 	self.Pip02 = Pip02
 	if PostLoadFunc then

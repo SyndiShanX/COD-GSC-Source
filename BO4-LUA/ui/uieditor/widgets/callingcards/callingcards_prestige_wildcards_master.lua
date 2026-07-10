@@ -1,17 +1,17 @@
 require("x64:1d6eb9485cc5151")
-CoD[0x3004F877224BD45] = InheritFrom(LUI.UIElement)
-CoD[0x3004F877224BD45].__defaultWidth = 960
-CoD[0x3004F877224BD45].__defaultHeight = 240
-CoD[0x3004F877224BD45].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+CoD[@"hash_73004F877224BD45"] = InheritFrom(LUI.UIElement)
+CoD[@"hash_73004F877224BD45"].__defaultWidth = 960
+CoD[@"hash_73004F877224BD45"].__defaultHeight = 240
+CoD[@"hash_73004F877224BD45"].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
 	local self = LUI.UIElement.new(f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
-	self:setClass(CoD[0x3004F877224BD45])
+	self:setClass(CoD[@"hash_73004F877224BD45"])
 	self.id = "CallingCards_Prestige_Wildcards_Master"
 	self.soundSet = "default"
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Image = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 2, 240)
-	Image:setImage(RegisterImage(0xFB346382D35FD44))
-	Image:setMaterial(LUI.UIImage.GetCachedMaterial(0x73D72BCD14C2AAD))
+	Image:setImage(RegisterImage(@"uie_new_background"))
+	Image:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_tile_scroll_normal"))
 	Image:setShaderVector(0, 1, 1, 0, 0)
 	Image:setShaderVector(1, 0.03, 0, 0, 0)
 	self:addElement(Image)
@@ -19,8 +19,8 @@ CoD[0x3004F877224BD45].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	local walkingPeople = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 1, 241)
 	walkingPeople:setRGB(0, 0, 0)
 	walkingPeople:setAlpha(0.45)
-	walkingPeople:setImage(RegisterImage(0x86E0781E093B950))
-	walkingPeople:setMaterial(LUI.UIImage.GetCachedMaterial(0x73D72BCD14C2AAD))
+	walkingPeople:setImage(RegisterImage(@"uie_walking_people"))
+	walkingPeople:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_tile_scroll_normal"))
 	walkingPeople:setShaderVector(0, 1, 1, 0, 0)
 	walkingPeople:setShaderVector(1, -0.05, 0, 0, 0)
 	self:addElement(walkingPeople)
@@ -30,8 +30,8 @@ CoD[0x3004F877224BD45].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	walkingPeople2:setAlpha(0.2)
 	walkingPeople2:setXRot(180)
 	walkingPeople2:setZRot(180)
-	walkingPeople2:setImage(RegisterImage(0x86E0781E093B950))
-	walkingPeople2:setMaterial(LUI.UIImage.GetCachedMaterial(0x73D72BCD14C2AAD))
+	walkingPeople2:setImage(RegisterImage(@"uie_walking_people"))
+	walkingPeople2:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_tile_scroll_normal"))
 	walkingPeople2:setShaderVector(0, 1, 1, 0, 0)
 	walkingPeople2:setShaderVector(1, -0.04, 0, 0, 0)
 	self:addElement(walkingPeople2)
@@ -40,13 +40,13 @@ CoD[0x3004F877224BD45].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	self:addElement(car)
 	self.car = car
 	local girl = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	girl:setImage(RegisterImage(0xD0524D47A4AF66D))
+	girl:setImage(RegisterImage(@"uie_girl"))
 	self:addElement(girl)
 	self.girl = girl
 	local helmetVisor = LUI.UIImage.new(0, 0, 635, 771, 0, 0, 0, 88)
 	helmetVisor:setAlpha(0.8)
-	helmetVisor:setImage(RegisterImage(0x3BC31BAB27E9B18))
-	helmetVisor:setMaterial(LUI.UIImage.GetCachedMaterial(0x2EEB1ECF1F211F5))
+	helmetVisor:setImage(RegisterImage(@"uie_helmet_white"))
+	helmetVisor:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_delta"))
 	helmetVisor:setShaderVector(0, 0, 1, 0, 0)
 	helmetVisor:setShaderVector(1, 0, 0, 0, 0)
 	helmetVisor:setShaderVector(2, 0, 1, 0, 0)
@@ -57,8 +57,8 @@ CoD[0x3004F877224BD45].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	local helmetVisor2 = LUI.UIImage.new(0, 0, 635, 771, 0, 0, 0, 88)
 	helmetVisor2:setRGB(0.47, 0.69, 0.89)
 	helmetVisor2:setAlpha(0.25)
-	helmetVisor2:setImage(RegisterImage(0x3BC31BAB27E9B18))
-	helmetVisor2:setMaterial(LUI.UIImage.GetCachedMaterial(0x2EEB1ECF1F211F5))
+	helmetVisor2:setImage(RegisterImage(@"uie_helmet_white"))
+	helmetVisor2:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_delta"))
 	helmetVisor2:setShaderVector(0, 0.19, 0.31, 0, 0)
 	helmetVisor2:setShaderVector(1, 0.04, 0.04, 0, 0)
 	helmetVisor2:setShaderVector(2, 0, 1, 0, 0)
@@ -68,17 +68,17 @@ CoD[0x3004F877224BD45].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	self.helmetVisor2 = helmetVisor2
 	local caarForeground = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 2, 242)
 	caarForeground:setScale(1.01, 1.01)
-	caarForeground:setImage(RegisterImage(0x99F072009B6154B))
+	caarForeground:setImage(RegisterImage(@"uie_foreground_car"))
 	self:addElement(caarForeground)
 	self.caarForeground = caarForeground
 	local light = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	light:setImage(RegisterImage(0x9115CE4FE6BFC9C))
-	light:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	light:setImage(RegisterImage(@"uie_city_lights"))
+	light:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(light)
 	self.light = light
 	local cropper = LUI.UIImage.new(0, 0, -32, 992, 0, 0, -391, 633)
 	cropper:setAlpha(0)
-	cropper:setImage(RegisterImage(0x7EEE1693E39382A))
+	cropper:setImage(RegisterImage(@"uie_stage_crop_prop"))
 	self:addElement(cropper)
 	self.cropper = cropper
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)
@@ -87,7 +87,7 @@ CoD[0x3004F877224BD45].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	end
 	return self
 end
-CoD[0x3004F877224BD45].__resetProperties = function(f2_arg0)
+CoD[@"hash_73004F877224BD45"].__resetProperties = function(f2_arg0)
 	f2_arg0.car:completeAnimation()
 	f2_arg0.helmetVisor:completeAnimation()
 	f2_arg0.cropper:completeAnimation()
@@ -101,7 +101,7 @@ CoD[0x3004F877224BD45].__resetProperties = function(f2_arg0)
 	f2_arg0.helmetVisor:setShaderVector(4, 0, 0, 0, 0)
 	f2_arg0.cropper:setAlpha(0)
 end
-CoD[0x3004F877224BD45].__clipsPerState = {
+CoD[@"hash_73004F877224BD45"].__clipsPerState = {
 	DefaultState = {
 		DefaultClip = function(f3_arg0, f3_arg1)
 			f3_arg0:__resetProperties()
@@ -203,6 +203,6 @@ CoD[0x3004F877224BD45].__clipsPerState = {
 		end,
 	},
 }
-CoD[0x3004F877224BD45].__onClose = function(f17_arg0)
+CoD[@"hash_73004F877224BD45"].__onClose = function(f17_arg0)
 	f17_arg0.car:close()
 end

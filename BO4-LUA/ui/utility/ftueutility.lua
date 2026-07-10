@@ -11,35 +11,35 @@ CoD.FTUEUtility.FTUESequences.GameIntroduction = {
 	sequenceOverlays = {
 		{
 			overlayLayout = CoD.FTUEUtility.FTUELayouts.GameIntro,
-			overlayTitle = 0x9413BCBC84F738A,
+			overlayTitle = @"hash_59413BCBC84F738A",
 			overlayInfoEntries = {
 				{
 					models = {
-						displayTitle = 0x55D96CC762EABDD,
-						displayText = 0x92855996C8E28F2,
-						image = 0xC1C84968DF44116,
+						displayTitle = @"menu/multiplayer",
+						displayText = @"hash_192855996C8E28F2",
+						image = @"ui_menu_ftue_welcome_mp_sm",
 					},
 				},
 				{
 					models = {
-						displayTitle = 0xA2DD20750465431,
-						displayText = 0x90653996C713F26,
-						image = 0x108A4300846467E,
+						displayTitle = @"menu/warzone",
+						displayText = @"hash_190653996C713F26",
+						image = @"ui_menu_ftue_welcome_wz_sm",
 					},
 				},
 				{
 					models = {
-						displayTitle = 0xB06081B8B4567F2,
-						displayText = 0x8FC6A996C6911B6,
-						image = 0xDE4AFEABEFDCBE2,
+						displayTitle = @"menu/zombies",
+						displayText = @"hash_18FC6A996C6911B6",
+						image = @"ui_menu_ftue_welcome_zm_sm",
 						removedInKorea15 = true,
 					},
 				},
 				{
 					models = {
-						displayTitle = 0xA47F44E3C7592DE,
-						displayText = 0xC51E146D5995102,
-						image = 0x6B963BF71263EC8,
+						displayTitle = @"menu/specialist_hub",
+						displayText = @"hash_6C51E146D5995102",
+						image = @"ui_menu_ftue_welcome_hq_sm",
 					},
 				},
 			},
@@ -53,28 +53,28 @@ CoD.FTUEUtility.FTUESequences.WZIntroduction = {
 	sequenceOverlays = {
 		{
 			overlayLayout = CoD.FTUEUtility.FTUELayouts.Entries3,
-			overlayTitle = 0x511100B58E0378C,
+			overlayTitle = @"hash_3511100B58E0378C",
 			overlayInfoEntries = {
 				{
 					models = {
-						displayTitle = 0xED31E7E5010EC4A,
-						displayText = 0x82C11675D201653,
-						image = 0xB0740EFF786BB29,
+						displayTitle = @"hash_ED31E7E5010EC4A",
+						displayText = @"hash_582C11675D201653",
+						image = @"ui_menu_ftue_how_to_wz_01",
 					},
 				},
 				{
 					models = {
-						displayTitle = 0xED31D7E5010EA97,
-						displayText = 0x82C12675D201806,
-						image = 0xB073DEFF786B610,
-						korea15Image = 0x4806CFDC4641073,
+						displayTitle = @"hash_ED31D7E5010EA97",
+						displayText = @"hash_582C12675D201806",
+						image = @"ui_menu_ftue_how_to_wz_02",
+						korea15Image = @"ui_menu_ftue_how_to_wz_02_korea_pc",
 					},
 				},
 				{
 					models = {
-						displayTitle = 0xED31C7E5010E8E4,
-						displayText = 0x82C13675D2019B9,
-						image = 0xB073EEFF786B7C3,
+						displayTitle = @"hash_ED31C7E5010E8E4",
+						displayText = @"hash_582C13675D2019B9",
+						image = @"ui_menu_ftue_how_to_wz_03",
 					},
 				},
 			},
@@ -82,19 +82,19 @@ CoD.FTUEUtility.FTUESequences.WZIntroduction = {
 	},
 	sequenceEndFunc = function(f2_arg0, f2_arg1)
 		GoBack(f2_arg0, f2_arg1)
-		Engine[0x28A466EF7723621](f2_arg1, Enum[0xBBD4F9E70101BA8][0xD1A0F784B3C95A0])
+		Engine[@"storagewrite"](f2_arg1, Enum[@"storagefiletype"][@"storage_wz_stats_online"])
 	end,
 }
 CoD.FTUEUtility.FTUESequences.WZProgressionInfo = {
 	sequenceOverlays = {
 		{
 			overlayLayout = CoD.FTUEUtility.FTUELayouts.Echelon,
-			overlayTitle = 0x0,
+			overlayTitle = @"hash_0",
 			overlayInfoEntries = {
 				{
 					models = {
-						displayTitle = 0x0,
-						displayText = 0x0,
+						displayTitle = @"hash_0",
+						displayText = @"hash_0",
 						image = nil,
 					},
 				},
@@ -103,20 +103,20 @@ CoD.FTUEUtility.FTUESequences.WZProgressionInfo = {
 	},
 	sequenceEndFunc = function(f3_arg0, f3_arg1)
 		GoBack(f3_arg0, f3_arg1)
-		Engine[0x28A466EF7723621](f3_arg1, Enum[0xBBD4F9E70101BA8][0xD1A0F784B3C95A0])
+		Engine[@"storagewrite"](f3_arg1, Enum[@"storagefiletype"][@"storage_wz_stats_online"])
 	end,
 }
 CoD.FTUEUtility.FTUESequences.MPIntroduction = {
 	sequenceOverlays = {
 		{
 			overlayLayout = CoD.FTUEUtility.FTUELayouts.Entries1,
-			overlayTitle = 0xDCDBDBD84A037C2,
+			overlayTitle = @"hash_3DCDBDBD84A037C2",
 			overlayInfoEntries = {
 				{
 					models = {
-						displayTitle = 0x0,
-						displayText = 0x6F6EB618C89C652,
-						image = 0xD1FFDDEA7B28068,
+						displayTitle = @"hash_0",
+						displayText = @"hash_6F6EB618C89C652",
+						image = @"ui_menu_ftue_wz_mp",
 					},
 				},
 			},
@@ -124,47 +124,47 @@ CoD.FTUEUtility.FTUESequences.MPIntroduction = {
 	},
 	sequenceEndFunc = function(f4_arg0, f4_arg1)
 		GoBack(f4_arg0, f4_arg1)
-		Engine[0x28A466EF7723621](f4_arg1, Enum[0xBBD4F9E70101BA8][0xFDE358A242AFA2C])
+		Engine[@"storagewrite"](f4_arg1, Enum[@"storagefiletype"][@"storage_mp_stats_online"])
 	end,
 }
 CoD.FTUEUtility.FTUESequences.ZMIntroduction = {
 	sequenceOverlays = {
 		{
 			overlayLayout = CoD.FTUEUtility.FTUELayouts.Entries1,
-			overlayTitle = 0xE7C9BD874F4A11B,
+			overlayTitle = @"hash_6E7C9BD874F4A11B",
 			overlayInfoEntries = {
 				{
 					models = {
-						displayTitle = 0x0,
-						displayText = 0x3009B862F6F78CD,
-						image = 0xA4C07F5B49E0417,
+						displayTitle = @"hash_0",
+						displayText = @"hash_43009B862F6F78CD",
+						image = @"ui_menu_ftue_zm_welcome",
 					},
 				},
 			},
 		},
 		{
 			overlayLayout = CoD.FTUEUtility.FTUELayouts.Entries3,
-			overlayTitle = 0x78DE7ECBB713525,
+			overlayTitle = @"hash_78DE7ECBB713525",
 			overlayInfoEntries = {
 				{
 					models = {
-						displayTitle = 0xC3A14F195A42AC9,
-						displayText = 0xE300F74F4198B83,
-						image = 0xBDE120331D67BA7,
+						displayTitle = @"hash_C3A14F195A42AC9",
+						displayText = @"hash_E300F74F4198B83",
+						image = @"ui_menu_ftue_zm_tutorial_01",
 					},
 				},
 				{
 					models = {
 						displayTitle = 0x678399F6FD3847,
-						displayText = 0xFAA2C5D4BD4BED9,
-						image = 0x9AB768067565C1A,
+						displayText = @"hash_7FAA2C5D4BD4BED9",
+						image = @"ui_menu_ftue_zm_custom",
 					},
 				},
 				{
 					models = {
-						displayTitle = 0x862BE43BBA920BB,
-						displayText = 0x339944E55FBACAD,
-						image = 0x4A5BCDF8F80809B,
+						displayTitle = @"hash_2862BE43BBA920BB",
+						displayText = @"hash_339944E55FBACAD",
+						image = @"ui_menu_ftue_zm_public_02",
 					},
 				},
 			},
@@ -172,20 +172,20 @@ CoD.FTUEUtility.FTUESequences.ZMIntroduction = {
 	},
 	sequenceEndFunc = function(f5_arg0, f5_arg1)
 		GoBack(f5_arg0, f5_arg1)
-		Engine[0x28A466EF7723621](f5_arg1, Enum[0xBBD4F9E70101BA8][0xEC77AD28A19F8E0])
+		Engine[@"storagewrite"](f5_arg1, Enum[@"storagefiletype"][@"storage_zm_stats_online"])
 	end,
 }
 CoD.FTUEUtility.FTUESequences.ZMFeaturedPlaylistIntroduction = {
 	sequenceOverlays = {
 		{
 			overlayLayout = CoD.FTUEUtility.FTUELayouts.Entries1,
-			overlayTitle = 0xDC8670AD8269CF1,
+			overlayTitle = @"hash_7DC8670AD8269CF1",
 			overlayInfoEntries = {
 				{
 					models = {
-						displayTitle = 0x0,
-						displayText = 0xBC680D6F37FDC4B,
-						image = 0xF72D5BF816ACDA6,
+						displayTitle = @"hash_0",
+						displayText = @"hash_7BC680D6F37FDC4B",
+						image = @"ui_menu_ftue_zm_featured_playlist",
 					},
 				},
 			},
@@ -193,20 +193,20 @@ CoD.FTUEUtility.FTUESequences.ZMFeaturedPlaylistIntroduction = {
 	},
 	sequenceEndFunc = function(f6_arg0, f6_arg1)
 		GoBack(f6_arg0, f6_arg1)
-		Engine[0x28A466EF7723621](f6_arg1, Enum[0xBBD4F9E70101BA8][0xEC77AD28A19F8E0])
+		Engine[@"storagewrite"](f6_arg1, Enum[@"storagefiletype"][@"storage_zm_stats_online"])
 	end,
 }
 CoD.FTUEUtility.FTUESequences.ZMClassicPlaylistIntroduction = {
 	sequenceOverlays = {
 		{
 			overlayLayout = CoD.FTUEUtility.FTUELayouts.Entries1,
-			overlayTitle = 0x2C192F82B6EAE71,
+			overlayTitle = @"menu/classic_mode",
 			overlayInfoEntries = {
 				{
 					models = {
-						displayTitle = 0x0,
-						displayText = 0xA9104E2E61DA0CB,
-						image = 0x9A565D587CB7693,
+						displayTitle = @"hash_0",
+						displayText = @"hash_3A9104E2E61DA0CB",
+						image = @"ui_menu_ftue_zm_classic_mode",
 					},
 				},
 			},
@@ -214,20 +214,20 @@ CoD.FTUEUtility.FTUESequences.ZMClassicPlaylistIntroduction = {
 	},
 	sequenceEndFunc = function(f7_arg0, f7_arg1)
 		GoBack(f7_arg0, f7_arg1)
-		Engine[0x28A466EF7723621](f7_arg1, Enum[0xBBD4F9E70101BA8][0xEC77AD28A19F8E0])
+		Engine[@"storagewrite"](f7_arg1, Enum[@"storagefiletype"][@"storage_zm_stats_online"])
 	end,
 }
 CoD.FTUEUtility.FTUESequences.ZMZombieRushPlaylistIntroduction = {
 	sequenceOverlays = {
 		{
 			overlayLayout = CoD.FTUEUtility.FTUELayouts.Entries1,
-			overlayTitle = 0x80680DEAE7D6042,
+			overlayTitle = @"hash_680680DEAE7D6042",
 			overlayInfoEntries = {
 				{
 					models = {
-						displayTitle = 0x0,
-						displayText = 0x49529904F556FD2,
-						image = 0x64C57C756A1EA3C,
+						displayTitle = @"hash_0",
+						displayText = @"hash_449529904F556FD2",
+						image = @"ui_menu_ftue_zm_public",
 					},
 				},
 			},
@@ -235,20 +235,20 @@ CoD.FTUEUtility.FTUESequences.ZMZombieRushPlaylistIntroduction = {
 	},
 	sequenceEndFunc = function(f8_arg0, f8_arg1)
 		GoBack(f8_arg0, f8_arg1)
-		Engine[0x28A466EF7723621](f8_arg1, Enum[0xBBD4F9E70101BA8][0xEC77AD28A19F8E0])
+		Engine[@"storagewrite"](f8_arg1, Enum[@"storagefiletype"][@"storage_zm_stats_online"])
 	end,
 }
 CoD.FTUEUtility.FTUESequences.ZMTCMPlaylistIntroduction = {
 	sequenceOverlays = {
 		{
 			overlayLayout = CoD.FTUEUtility.FTUELayouts.Entries1,
-			overlayTitle = 0xC21959514E64ED1,
+			overlayTitle = @"menu/tcm",
 			overlayInfoEntries = {
 				{
 					models = {
-						displayTitle = 0x0,
-						displayText = 0x65631F4D4212EB,
-						image = 0x9456B1DAE237F21,
+						displayTitle = @"hash_0",
+						displayText = @"menu/tcm_desc",
+						image = @"ui_menu_ftue_zm_treyarch_custom",
 					},
 				},
 			},
@@ -256,20 +256,20 @@ CoD.FTUEUtility.FTUESequences.ZMTCMPlaylistIntroduction = {
 	},
 	sequenceEndFunc = function(f9_arg0, f9_arg1)
 		GoBack(f9_arg0, f9_arg1)
-		Engine[0x28A466EF7723621](f9_arg1, Enum[0xBBD4F9E70101BA8][0xEC77AD28A19F8E0])
+		Engine[@"storagewrite"](f9_arg1, Enum[@"storagefiletype"][@"storage_zm_stats_online"])
 	end,
 }
 CoD.FTUEUtility.FTUESequences.ZMGauntletPlaylistIntroduction = {
 	sequenceOverlays = {
 		{
 			overlayLayout = CoD.FTUEUtility.FTUELayouts.Entries1,
-			overlayTitle = 0xB09D4E74D55B35D,
+			overlayTitle = @"menu/gauntlet_mode",
 			overlayInfoEntries = {
 				{
 					models = {
-						displayTitle = 0x0,
-						displayText = 0x5DCD6630A166A67,
-						image = 0xF2BED0FDD3EF8B,
+						displayTitle = @"hash_0",
+						displayText = @"hash_5DCD6630A166A67",
+						image = @"ui_menu_ftue_zm_gauntlet_mode",
 					},
 				},
 			},
@@ -277,20 +277,20 @@ CoD.FTUEUtility.FTUESequences.ZMGauntletPlaylistIntroduction = {
 	},
 	sequenceEndFunc = function(f10_arg0, f10_arg1)
 		GoBack(f10_arg0, f10_arg1)
-		Engine[0x28A466EF7723621](f10_arg1, Enum[0xBBD4F9E70101BA8][0xEC77AD28A19F8E0])
+		Engine[@"storagewrite"](f10_arg1, Enum[@"storagefiletype"][@"storage_zm_stats_online"])
 	end,
 }
 CoD.FTUEUtility.FTUESequences.ZMTutorialPlaylistIntroduction = {
 	sequenceOverlays = {
 		{
 			overlayLayout = CoD.FTUEUtility.FTUELayouts.Entries1,
-			overlayTitle = 0xC79DDA4A0395229,
+			overlayTitle = @"menu/tutorial_mode",
 			overlayInfoEntries = {
 				{
 					models = {
-						displayTitle = 0x0,
-						displayText = 0x53C9892E9FF4223,
-						image = 0x7B9C4F7BC6616F7,
+						displayTitle = @"hash_0",
+						displayText = @"hash_153C9892E9FF4223",
+						image = @"ui_menu_ftue_zm_tutorial_mode",
 					},
 				},
 			},
@@ -298,7 +298,7 @@ CoD.FTUEUtility.FTUESequences.ZMTutorialPlaylistIntroduction = {
 	},
 	sequenceEndFunc = function(f11_arg0, f11_arg1)
 		GoBack(f11_arg0, f11_arg1)
-		Engine[0x28A466EF7723621](f11_arg1, Enum[0xBBD4F9E70101BA8][0xEC77AD28A19F8E0])
+		Engine[@"storagewrite"](f11_arg1, Enum[@"storagefiletype"][@"storage_zm_stats_online"])
 	end,
 }
 CoD.FTUEUtility.FTUESequences.ZMCustomGameIntroduction = {
@@ -309,9 +309,9 @@ CoD.FTUEUtility.FTUESequences.ZMCustomGameIntroduction = {
 			overlayInfoEntries = {
 				{
 					models = {
-						displayTitle = 0x0,
-						displayText = 0x6B72E64033999B1,
-						image = 0x6F01AB67C02345D,
+						displayTitle = @"hash_0",
+						displayText = @"hash_46B72E64033999B1",
+						image = @"ui_menu_ftue_zm_custom_mutations",
 					},
 				},
 			},
@@ -319,20 +319,20 @@ CoD.FTUEUtility.FTUESequences.ZMCustomGameIntroduction = {
 	},
 	sequenceEndFunc = function(f12_arg0, f12_arg1)
 		GoBack(f12_arg0, f12_arg1)
-		Engine[0x28A466EF7723621](f12_arg1, Enum[0xBBD4F9E70101BA8][0xEC77AD28A19F8E0])
+		Engine[@"storagewrite"](f12_arg1, Enum[@"storagefiletype"][@"storage_zm_stats_online"])
 	end,
 }
 CoD.FTUEUtility.FTUESequences.ZMLoadoutIntroduction = {
 	sequenceOverlays = {
 		{
 			overlayLayout = CoD.FTUEUtility.FTUELayouts.ZMLoadout,
-			overlayTitle = 0xAADDF41A08B2C4E,
+			overlayTitle = @"hash_3AADDF41A08B2C4E",
 			overlayInfoEntries = {
 				{
 					models = {
-						displayTitle = 0x0,
-						displayText = 0x0,
-						image = 0x2572A7D49208F63,
+						displayTitle = @"hash_0",
+						displayText = @"hash_0",
+						image = @"ui_menu_ftue_zm_armory",
 					},
 				},
 			},
@@ -340,20 +340,20 @@ CoD.FTUEUtility.FTUESequences.ZMLoadoutIntroduction = {
 	},
 	sequenceEndFunc = function(f13_arg0, f13_arg1)
 		GoBack(f13_arg0, f13_arg1)
-		Engine[0x28A466EF7723621](f13_arg1, Enum[0xBBD4F9E70101BA8][0xEC77AD28A19F8E0])
+		Engine[@"storagewrite"](f13_arg1, Enum[@"storagefiletype"][@"storage_zm_stats_online"])
 	end,
 }
 CoD.FTUEUtility.FTUESequences.ZMArmoryIntroduction = {
 	sequenceOverlays = {
 		{
 			overlayLayout = CoD.FTUEUtility.FTUELayouts.Entries1,
-			overlayTitle = 0xD6BF3A3749C31CD,
+			overlayTitle = @"menu/armory",
 			overlayInfoEntries = {
 				{
 					models = {
-						displayTitle = 0x0,
-						displayText = 0x61686A90FF924C3,
-						image = 0x2572A7D49208F63,
+						displayTitle = @"hash_0",
+						displayText = @"hash_561686A90FF924C3",
+						image = @"ui_menu_ftue_zm_armory",
 					},
 				},
 			},
@@ -361,20 +361,20 @@ CoD.FTUEUtility.FTUESequences.ZMArmoryIntroduction = {
 	},
 	sequenceEndFunc = function(f14_arg0, f14_arg1)
 		GoBack(f14_arg0, f14_arg1)
-		Engine[0x28A466EF7723621](f14_arg1, Enum[0xBBD4F9E70101BA8][0xEC77AD28A19F8E0])
+		Engine[@"storagewrite"](f14_arg1, Enum[@"storagefiletype"][@"storage_zm_stats_online"])
 	end,
 }
 CoD.FTUEUtility.FTUESequences.ZMLaboratoryIntroduction = {
 	sequenceOverlays = {
 		{
 			overlayLayout = CoD.FTUEUtility.FTUELayouts.Entries1,
-			overlayTitle = 0x96D9A8F7540D6B6,
+			overlayTitle = @"hash_96D9A8F7540D6B6",
 			overlayInfoEntries = {
 				{
 					models = {
-						displayTitle = 0x0,
-						displayText = 0x65A3A325CF99AC6,
-						image = 0xCA6C00CB8EFE760,
+						displayTitle = @"hash_0",
+						displayText = @"hash_165A3A325CF99AC6",
+						image = @"ui_menu_ftue_zm_alchemical_lab",
 					},
 				},
 			},
@@ -382,20 +382,20 @@ CoD.FTUEUtility.FTUESequences.ZMLaboratoryIntroduction = {
 	},
 	sequenceEndFunc = function(f15_arg0, f15_arg1)
 		GoBack(f15_arg0, f15_arg1)
-		Engine[0x28A466EF7723621](f15_arg1, Enum[0xBBD4F9E70101BA8][0xEC77AD28A19F8E0])
+		Engine[@"storagewrite"](f15_arg1, Enum[@"storagefiletype"][@"storage_zm_stats_online"])
 	end,
 }
 CoD.FTUEUtility.FTUESequences.BlackMarketIntroduction = {
 	sequenceOverlays = {
 		{
 			overlayLayout = CoD.FTUEUtility.FTUELayouts.Entries1,
-			overlayTitle = 0x29C903C6DF90D6F,
+			overlayTitle = @"menu/black_market",
 			overlayInfoEntries = {
 				{
 					models = {
-						displayTitle = 0x0,
-						displayText = 0x74DC5569EB9B521,
-						image = 0xE81C16CFA9CE128,
+						displayTitle = @"hash_0",
+						displayText = @"hash_774DC5569EB9B521",
+						image = @"ui_menu_ftue_blackmarket",
 					},
 				},
 			},
@@ -403,33 +403,33 @@ CoD.FTUEUtility.FTUESequences.BlackMarketIntroduction = {
 	},
 	sequenceEndFunc = function(f16_arg0, f16_arg1)
 		GoBack(f16_arg0, f16_arg1)
-		Engine[0x28A466EF7723621](f16_arg1, Enum[0xBBD4F9E70101BA8][0xFDE358A242AFA2C])
+		Engine[@"storagewrite"](f16_arg1, Enum[@"storagefiletype"][@"storage_mp_stats_online"])
 	end,
 }
 CoD.FTUEUtility.FTUESequences.GestureChanges = {
 	sequenceOverlays = {
 		{
 			overlayLayout = CoD.FTUEUtility.FTUELayouts.Entries1,
-			overlayTitle = 0x1F031657F740298,
+			overlayTitle = @"hash_51F031657F740298",
 			overlayInfoEntries = {
 				{
 					models = {
-						displayTitle = 0x0,
-						displayText = 0x96B7DBBFE1B0C80,
-						image = 0x6C6C5B2149933A0,
+						displayTitle = @"hash_0",
+						displayText = @"hash_496B7DBBFE1B0C80",
+						image = @"ui_menu_ftue_outfitupdates",
 					},
 				},
 			},
 		},
 		{
 			overlayLayout = CoD.FTUEUtility.FTUELayouts.Entries1,
-			overlayTitle = 0x1F034657F7407B1,
+			overlayTitle = @"hash_51F034657F7407B1",
 			overlayInfoEntries = {
 				{
 					models = {
-						displayTitle = 0x0,
-						displayText = CoD.isPC and 0x6CBA61000157D25 or 0xF6436C07D4A7D0B,
-						image = 0x172813CF3B30D10,
+						displayTitle = @"hash_0",
+						displayText = CoD.isPC and @"hash_6CBA61000157D25" or @"hash_4F6436C07D4A7D0B",
+						image = @"ui_menu_ftue_gesture",
 					},
 				},
 			},
@@ -437,20 +437,20 @@ CoD.FTUEUtility.FTUESequences.GestureChanges = {
 	},
 	sequenceEndFunc = function(f17_arg0, f17_arg1)
 		GoBack(f17_arg0, f17_arg1)
-		Engine[0x28A466EF7723621](f17_arg1, Enum[0xBBD4F9E70101BA8][0xFDE358A242AFA2C])
+		Engine[@"storagewrite"](f17_arg1, Enum[@"storagefiletype"][@"storage_mp_stats_online"])
 	end,
 }
 CoD.FTUEUtility.FTUESequences.ZMGestureChanges = {
 	sequenceOverlays = {
 		{
 			overlayLayout = CoD.FTUEUtility.FTUELayouts.Entries1,
-			overlayTitle = 0xFEEE47792CA83DC,
+			overlayTitle = @"hash_2FEEE47792CA83DC",
 			overlayInfoEntries = {
 				{
 					models = {
-						displayTitle = 0x0,
-						displayText = 0x86A4B78E7BE9A24,
-						image = 0x1F71D71AAC599C8,
+						displayTitle = @"hash_0",
+						displayText = @"hash_186A4B78E7BE9A24",
+						image = @"ui_menu_ftue_outfitupdates_zm",
 					},
 				},
 			},
@@ -458,20 +458,20 @@ CoD.FTUEUtility.FTUESequences.ZMGestureChanges = {
 	},
 	sequenceEndFunc = function(f18_arg0, f18_arg1)
 		GoBack(f18_arg0, f18_arg1)
-		Engine[0x28A466EF7723621](f18_arg1, Enum[0xBBD4F9E70101BA8][0xEC77AD28A19F8E0])
+		Engine[@"storagewrite"](f18_arg1, Enum[@"storagefiletype"][@"storage_zm_stats_online"])
 	end,
 }
 CoD.FTUEUtility.FTUESequences.WeaponPersonalizationChanges = {
 	sequenceOverlays = {
 		{
 			overlayLayout = CoD.FTUEUtility.FTUELayouts.Entries1,
-			overlayTitle = 0xC4D7803D4E195FA,
+			overlayTitle = @"hash_4C4D7803D4E195FA",
 			overlayInfoEntries = {
 				{
 					models = {
-						displayTitle = 0x0,
-						displayText = CoD.isPC and 0xD8E3FCE949A0E6A or 0xADB8634CCDA72CA,
-						image = 0x5C0688065801D0D,
+						displayTitle = @"hash_0",
+						displayText = CoD.isPC and @"hash_2D8E3FCE949A0E6A" or @"hash_6ADB8634CCDA72CA",
+						image = @"ui_menu_ftue_weaponupdates",
 					},
 				},
 			},
@@ -479,20 +479,20 @@ CoD.FTUEUtility.FTUESequences.WeaponPersonalizationChanges = {
 	},
 	sequenceEndFunc = function(f19_arg0, f19_arg1)
 		GoBack(f19_arg0, f19_arg1)
-		Engine[0x28A466EF7723621](f19_arg1, Enum[0xBBD4F9E70101BA8][0xFDE358A242AFA2C])
+		Engine[@"storagewrite"](f19_arg1, Enum[@"storagefiletype"][@"storage_mp_stats_online"])
 	end,
 }
 CoD.FTUEUtility.FTUESequences.KoreaSpecialEvent = {
 	sequenceOverlays = {
 		{
 			overlayLayout = CoD.FTUEUtility.FTUELayouts.Entries1,
-			overlayTitle = 0x5BD9225FA6071E5,
+			overlayTitle = @"hash_35BD9225FA6071E5",
 			overlayInfoEntries = {
 				{
 					models = {
-						displayTitle = 0x0,
-						displayText = 0x301910733BE3180,
-						image = 0xBD70D094E36B085,
+						displayTitle = @"hash_0",
+						displayText = @"hash_3301910733BE3180",
+						image = @"ui_menu_ftue_wz_mp_korea",
 					},
 				},
 			},
@@ -506,13 +506,13 @@ CoD.FTUEUtility.FTUESequences.LeaguePlayIntroduction = {
 	sequenceOverlays = {
 		{
 			overlayLayout = CoD.FTUEUtility.FTUELayouts.Entries1,
-			overlayTitle = 0x7022CD1299D402C,
+			overlayTitle = @"hash_7022CD1299D402C",
 			overlayInfoEntries = {
 				{
 					models = {
-						displayTitle = 0x0,
-						displayText = 0xEBC18FE024FCDD4,
-						image = 0x3C590AC3E812395,
+						displayTitle = @"hash_0",
+						displayText = @"hash_1EBC18FE024FCDD4",
+						image = @"ui_menu_ftue_wl_welcome",
 					},
 				},
 			},
@@ -520,23 +520,23 @@ CoD.FTUEUtility.FTUESequences.LeaguePlayIntroduction = {
 	},
 	sequenceEndFunc = function(f21_arg0, f21_arg1)
 		GoBack(f21_arg0, f21_arg1)
-		CoDLoadoutsShared[0x7243F374ADEF72D](f21_arg1, Enum[0xBBD4F9E70101BA8][0x67DF1879D992E], 0x4FF2B60D157BBB2)
-		CoDLoadoutsShared[0x7243F374ADEF72D](f21_arg1, Enum[0xBBD4F9E70101BA8][0xCEBE62E27709AD0], 0x4FF2B60D157BBB2)
-		CoDLoadoutsShared[0x7243F374ADEF72D](f21_arg1, Enum[0xBBD4F9E70101BA8][0xD062FA7B47FC13A], 0x4FF2B60D157BBB2)
-		Engine[0x28A466EF7723621](f21_arg1, Enum[0xBBD4F9E70101BA8][0xFDE358A242AFA2C])
+		CoDLoadoutsShared[@"hash_7243F374ADEF72D"](f21_arg1, Enum[@"storagefiletype"][0x67DF1879D992E], @"mp_arena_default_loadouts")
+		CoDLoadoutsShared[@"hash_7243F374ADEF72D"](f21_arg1, Enum[@"storagefiletype"][@"hash_CEBE62E27709AD0"], @"mp_arena_default_loadouts")
+		CoDLoadoutsShared[@"hash_7243F374ADEF72D"](f21_arg1, Enum[@"storagefiletype"][@"hash_D062FA7B47FC13A"], @"mp_arena_default_loadouts")
+		Engine[@"storagewrite"](f21_arg1, Enum[@"storagefiletype"][@"storage_mp_stats_online"])
 	end,
 }
 CoD.FTUEUtility.FTUESequences.BlackMarketSeasonThreeIntroduction = {
 	sequenceOverlays = {
 		{
 			overlayLayout = CoD.FTUEUtility.FTUELayouts.Entries1,
-			overlayTitle = 0x7FB0E22B54FE01,
+			overlayTitle = @"hash_7FB0E22B54FE01",
 			overlayInfoEntries = {
 				{
 					models = {
-						displayTitle = 0x0,
-						displayText = 0x25DEE051ED23C88,
-						image = 0x7A19866F330A927,
+						displayTitle = @"hash_0",
+						displayText = @"hash_225DEE051ED23C88",
+						image = @"ui_menu_ftue_contraband",
 					},
 				},
 			},
@@ -544,20 +544,20 @@ CoD.FTUEUtility.FTUESequences.BlackMarketSeasonThreeIntroduction = {
 	},
 	sequenceEndFunc = function(f22_arg0, f22_arg1)
 		GoBack(f22_arg0, f22_arg1)
-		Engine[0x28A466EF7723621](f22_arg1, Enum[0xBBD4F9E70101BA8][0xFDE358A242AFA2C])
+		Engine[@"storagewrite"](f22_arg1, Enum[@"storagefiletype"][@"storage_mp_stats_online"])
 	end,
 }
 CoD.FTUEUtility.FTUESequences.BlackjackReservesIntroduction = {
 	sequenceOverlays = {
 		{
 			overlayLayout = CoD.FTUEUtility.FTUELayouts.Entries1,
-			overlayTitle = 0x275A7D7A83013E5,
+			overlayTitle = @"hash_2275A7D7A83013E5",
 			overlayInfoEntries = {
 				{
 					models = {
-						displayTitle = 0x0,
-						displayText = 0xE5136996115F694,
-						image = 0x8D45BFD30C0E082,
+						displayTitle = @"hash_0",
+						displayText = @"hash_1E5136996115F694",
+						image = @"ui_menu_ftue_blackjackreserves",
 					},
 				},
 			},
@@ -565,23 +565,23 @@ CoD.FTUEUtility.FTUESequences.BlackjackReservesIntroduction = {
 	},
 	sequenceEndFunc = function(f23_arg0, f23_arg1)
 		local f23_local0 = GoBack(f23_arg0, f23_arg1)
-		if not IsBooleanDvarSet(0x1A8E4D68B803874) then
+		if not IsBooleanDvarSet(@"hash_1A8E4D68B803874") then
 			CoD.BlackMarketUtility.PlayReservesPreviewVideo(f23_arg1, f23_local0, true, true)
 		end
-		Engine[0x28A466EF7723621](f23_arg1, Enum[0xBBD4F9E70101BA8][0xFDE358A242AFA2C])
+		Engine[@"storagewrite"](f23_arg1, Enum[@"storagefiletype"][@"storage_mp_stats_online"])
 	end,
 }
 CoD.FTUEUtility.FTUESequences.BlackjackShopIntroduction = {
 	sequenceOverlays = {
 		{
 			overlayLayout = CoD.FTUEUtility.FTUELayouts.Entries1,
-			overlayTitle = 0xC2C43BD810C5C48,
+			overlayTitle = @"hash_3C2C43BD810C5C48",
 			overlayInfoEntries = {
 				{
 					models = {
-						displayTitle = 0x0,
-						displayText = 0x3BA06143D9A210F,
-						image = 0xF68A9822F64D456,
+						displayTitle = @"hash_0",
+						displayText = @"hash_3BA06143D9A210F",
+						image = @"ui_menu_ftue_itemshop",
 					},
 				},
 			},
@@ -589,20 +589,20 @@ CoD.FTUEUtility.FTUESequences.BlackjackShopIntroduction = {
 	},
 	sequenceEndFunc = function(f24_arg0, f24_arg1)
 		GoBack(f24_arg0, f24_arg1)
-		Engine[0x28A466EF7723621](f24_arg1, Enum[0xBBD4F9E70101BA8][0xFDE358A242AFA2C])
+		Engine[@"storagewrite"](f24_arg1, Enum[@"storagefiletype"][@"storage_mp_stats_online"])
 	end,
 }
 CoD.FTUEUtility.FTUESequences.BlackMarketInventoryIntroduction = {
 	sequenceOverlays = {
 		{
 			overlayLayout = CoD.FTUEUtility.FTUELayouts.Entries1,
-			overlayTitle = 0x7EFD3D64C509ABB,
+			overlayTitle = @"hash_67EFD3D64C509ABB",
 			overlayInfoEntries = {
 				{
 					models = {
-						displayTitle = 0x0,
-						displayText = 0x30E72AC1A617CD6,
-						image = 0xE375BCFE89C5E63,
+						displayTitle = @"hash_0",
+						displayText = @"hash_230E72AC1A617CD6",
+						image = @"ui_menu_ftue_inventory",
 					},
 				},
 			},
@@ -610,20 +610,20 @@ CoD.FTUEUtility.FTUESequences.BlackMarketInventoryIntroduction = {
 	},
 	sequenceEndFunc = function(f25_arg0, f25_arg1)
 		GoBack(f25_arg0, f25_arg1)
-		Engine[0x28A466EF7723621](f25_arg1, Enum[0xBBD4F9E70101BA8][0xFDE358A242AFA2C])
+		Engine[@"storagewrite"](f25_arg1, Enum[@"storagefiletype"][@"storage_mp_stats_online"])
 	end,
 }
 CoD.FTUEUtility.FTUESequences.BlackOpsPassUpsell = {
 	sequenceOverlays = {
 		{
 			overlayLayout = CoD.FTUEUtility.FTUELayouts.StoreUpsell,
-			overlayTitle = 0xBB8C7DC3C3EB0CB,
+			overlayTitle = @"hash_3BB8C7DC3C3EB0CB",
 			overlayInfoEntries = {
 				{
 					models = {
-						displayTitle = 0x0,
+						displayTitle = @"hash_0",
 						displayText = 0x9A35875D151FC1,
-						image = 0x845817FCED579E7,
+						image = @"ui_menu_ftue_store_blackopspass",
 					},
 				},
 			},
@@ -631,7 +631,7 @@ CoD.FTUEUtility.FTUESequences.BlackOpsPassUpsell = {
 	},
 	sequenceEndFunc = function(f26_arg0, f26_arg1)
 		GoBack(f26_arg0, f26_arg1)
-		local f26_local0 = Engine[0x40E824FE270E174](Engine[0x4DF5CFBC1771947](f26_arg1), "Store.FeaturedProductList")
+		local f26_local0 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f26_arg1), "Store.FeaturedProductList")
 		if f26_local0 then
 			local f26_local1 = 1
 			while f26_local0[f26_local1] ~= nil do
@@ -639,21 +639,21 @@ CoD.FTUEUtility.FTUESequences.BlackOpsPassUpsell = {
 				if f26_local2 then
 					f26_local2 = f26_local0[f26_local1].productNameHash:get()
 				end
-				if f26_local2 == 0x617848314938AB9 then
+				if f26_local2 == @"blackopspass" then
 					local f26_local3 = f26_local0[f26_local1].productID
 					if f26_local3 then
 						f26_local3 = f26_local0[f26_local1].productID:get()
 					end
 					if f26_local3 then
 						if IsDurango() then
-							Engine[0xD58E665ABB6A9AE](f26_arg1, "featured", f26_local3)
+							Engine[@"hash_1D58E665ABB6A9AE"](f26_arg1, "featured", f26_local3)
 						elseif IsOrbis() then
 							local f26_local4 = f26_local0[f26_local1].serviceLabel
 							if f26_local4 then
 								f26_local4 = f26_local0[f26_local1].serviceLabel:get()
 							end
 							if f26_local4 then
-								Engine[0xD58E665ABB6A9AE](f26_arg1, "featured", f26_local3, f26_local4)
+								Engine[@"hash_1D58E665ABB6A9AE"](f26_arg1, "featured", f26_local3, f26_local4)
 							end
 						end
 					end
@@ -668,13 +668,13 @@ CoD.FTUEUtility.FTUESequences.PromoEvent = {
 	sequenceOverlays = {
 		{
 			overlayLayout = CoD.FTUEUtility.FTUELayouts.PromoEvent,
-			overlayTitle = 0xC9B32C16D19F3C0,
+			overlayTitle = @"hash_1C9B32C16D19F3C0",
 			overlayInfoEntries = {
 				{
 					models = {
-						displayTitle = 0x0,
-						displayText = 0x2E59FC3EFBE5237,
-						image = 0x65D95F28D7925F5,
+						displayTitle = @"hash_0",
+						displayText = @"hash_2E59FC3EFBE5237",
+						image = @"ui_icon_blackmarket_promos_shamrock_and_awe",
 					},
 				},
 			},
@@ -686,14 +686,14 @@ CoD.FTUEUtility.FTUESequences.PromoEvent = {
 		if CoD.isPC then
 			f27_local1 = {
 				__onQuit = function()
-					Engine[0x87AE7E64BA5AD61]("OnGoForward", {
+					Engine[@"lobbyevent"]("OnGoForward", {
 						controller = f27_arg1,
 						navToMenu = "director",
 					})
 				end,
 			}
 		end
-		Engine[0x28A466EF7723621](f27_arg1, Enum[0xBBD4F9E70101BA8][0xFDE358A242AFA2C])
+		Engine[@"storagewrite"](f27_arg1, Enum[@"storagefiletype"][@"storage_mp_stats_online"])
 		OpenQuarterMaster(f27_local0, f27_local0, f27_arg1, f27_local1, f27_local0)
 	end,
 }
@@ -701,13 +701,13 @@ CoD.FTUEUtility.FTUESequences.BlackMarketSunsetIntroduction = {
 	sequenceOverlays = {
 		{
 			overlayLayout = CoD.FTUEUtility.FTUELayouts.HoldButtonEntries1,
-			overlayTitle = 0x98662FD51593715,
+			overlayTitle = @"hash_298662FD51593715",
 			overlayInfoEntries = {
 				{
 					models = {
-						displayTitle = 0x0,
-						displayText = 0x692701BEA54FDC4,
-						image = 0x8E8508A8B137347,
+						displayTitle = @"hash_0",
+						displayText = @"hash_1692701BEA54FDC4",
+						image = @"hash_28E8508A8B137347",
 					},
 				},
 			},
@@ -715,23 +715,23 @@ CoD.FTUEUtility.FTUESequences.BlackMarketSunsetIntroduction = {
 	},
 	sequenceEndFunc = function(f29_arg0, f29_arg1)
 		GoBack(f29_arg0, f29_arg1)
-		Engine[0x28A466EF7723621](f29_arg1, Enum[0xBBD4F9E70101BA8][0xFDE358A242AFA2C])
+		Engine[@"storagewrite"](f29_arg1, Enum[@"storagefiletype"][@"storage_mp_stats_online"])
 	end,
 }
 CoD.FTUEUtility.WriteMPStats = function(f30_arg0)
-	Engine[0x28A466EF7723621](f30_arg0, Enum[0xBBD4F9E70101BA8][0xFDE358A242AFA2C])
+	Engine[@"storagewrite"](f30_arg0, Enum[@"storagefiletype"][@"storage_mp_stats_online"])
 end
 CoD.FTUEUtility.FTUESequences.ZMFactionCallingsIntroduction = {
 	sequenceOverlays = {
 		{
 			overlayLayout = CoD.FTUEUtility.FTUELayouts.Entries1,
-			overlayTitle = 0xA8A1AE4754B2601,
+			overlayTitle = @"hash_5A8A1AE4754B2601",
 			overlayInfoEntries = {
 				{
 					models = {
-						displayTitle = 0x0,
-						displayText = 0x47E54D0C1B51F89,
-						image = 0xCA6C00CB8EFE760,
+						displayTitle = @"hash_0",
+						displayText = @"hash_247E54D0C1B51F89",
+						image = @"ui_menu_ftue_zm_alchemical_lab",
 					},
 				},
 			},
@@ -739,7 +739,7 @@ CoD.FTUEUtility.FTUESequences.ZMFactionCallingsIntroduction = {
 	},
 	sequenceEndFunc = function(f31_arg0, f31_arg1)
 		GoBack(f31_arg0, f31_arg1)
-		Engine[0x28A466EF7723621](f31_arg1, Enum[0xBBD4F9E70101BA8][0xEC77AD28A19F8E0])
+		Engine[@"storagewrite"](f31_arg1, Enum[@"storagefiletype"][@"storage_zm_stats_online"])
 	end,
 }
 CoD.FTUEUtility.PlaySpecialistHQIntroductionMovie = function(f32_arg0, f32_arg1)
@@ -749,24 +749,24 @@ CoD.FTUEUtility.PlaySpecialistHQIntroductionMovie = function(f32_arg0, f32_arg1)
 		f33_local0.StartFullscreenBlack:set(false)
 	end
 	local f32_local1 = CoD.CTUtility.GetArchivesBundle()
-	CoD.CTUtility.PlaySkippableVideo(f32_arg1, f32_arg0, f32_local1[0xC873FF231AABAE6], f32_local1[0x2EDACFCAA4E38C7] ~= 0, {
+	CoD.CTUtility.PlaySkippableVideo(f32_arg1, f32_arg0, f32_local1[@"hash_7C873FF231AABAE6"], f32_local1[@"hash_62EDACFCAA4E38C7"] ~= 0, {
 		onlySkippable = true,
 		on_pre_finished_movie_playback = f32_local0,
 	})
-	CoD.CTUtility.SetSeenMovie(f32_arg1, 0xA8C599171B6CDE3)
-	Engine[0x28A466EF7723621](f32_arg1, Enum[0xBBD4F9E70101BA8][0x7FA8C2EEB2B6F7A])
+	CoD.CTUtility.SetSeenMovie(f32_arg1, @"story_intro")
+	Engine[@"storagewrite"](f32_arg1, Enum[@"storagefiletype"][@"hash_77FA8C2EEB2B6F7A"])
 end
 CoD.FTUEUtility.FTUESequences.SpecialistHQIntroduction = {
 	sequenceOverlays = {
 		{
 			overlayLayout = CoD.FTUEUtility.FTUELayouts.WarningEntry,
-			overlayTitle = 0xC03DE6970599340,
+			overlayTitle = @"hash_2C03DE6970599340",
 			overlayInfoEntries = {
 				{
 					models = {
-						displayTitle = 0x0,
-						displayText = 0x53BB50D4C2574B7,
-						image = 0xD1FFDDEA7B28068,
+						displayTitle = @"hash_0",
+						displayText = @"hash_153BB50D4C2574B7",
+						image = @"ui_menu_ftue_wz_mp",
 					},
 				},
 			},
@@ -778,15 +778,15 @@ CoD.FTUEUtility.FTUESequences.SpecialistHQIntroduction = {
 		if f34_local1 then
 			f34_local1 = CoD.PCKoreaUtility.ShowKorea15Plus()
 		end
-		if not f34_local1 and f34_local0[0xC873FF231AABAE6] ~= nil and f34_local0[0xC873FF231AABAE6] ~= "" and CoD.CTUtility.CanPlayVideo(f34_arg1, f34_local0[0x41FF0587D0A3B33]) then
+		if not f34_local1 and f34_local0[@"hash_7C873FF231AABAE6"] ~= nil and f34_local0[@"hash_7C873FF231AABAE6"] ~= "" and CoD.CTUtility.CanPlayVideo(f34_arg1, f34_local0[@"hash_641FF0587D0A3B33"]) then
 			local f34_local2 = GoBack(f34_arg0, f34_arg1)
 			OpenSystemOverlay(f34_local2, f34_local2, f34_arg1, "SpecialistHQGraphicContentWarning", nil)
 		else
 			GoBack(f34_arg0, f34_arg1)
 			local f34_local2 = DataSources.SpecialistHeadquarters.getModel(f34_arg1)
 			f34_local2.StartFullscreenBlack:set(false)
-			CoD.CTUtility.SetSeenMovie(f34_arg1, 0xA8C599171B6CDE3)
-			Engine[0x28A466EF7723621](f34_arg1, Enum[0xBBD4F9E70101BA8][0x7FA8C2EEB2B6F7A])
+			CoD.CTUtility.SetSeenMovie(f34_arg1, @"story_intro")
+			Engine[@"storagewrite"](f34_arg1, Enum[@"storagefiletype"][@"hash_77FA8C2EEB2B6F7A"])
 		end
 	end,
 }
@@ -794,133 +794,133 @@ CoD.FTUEUtility.CurrentSequenceIndex = 1
 CoD.FTUEUtility.CurrentSequenceReference = ""
 CoD.FTUEUtility.CurrentListReference = nil
 CoD.FTUEUtility.FTUEGameModeToSequence = {
-	[Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5]] = "MPIntroduction",
-	[Enum[0x9C0C2196D8313A0][0xBF1DCC8138A9D39]] = "WZIntroduction",
-	[Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A]] = "ZMIntroduction",
+	[Enum[@"emodes"][@"mode_multiplayer"]] = "MPIntroduction",
+	[Enum[@"emodes"][@"mode_warzone"]] = "WZIntroduction",
+	[Enum[@"emodes"][@"mode_zombies"]] = "ZMIntroduction",
 }
 CoD.FTUEUtility.FTUESequenceToSequenceInfo = {
 	ZMFeaturedPlaylistIntroduction = {
-		gameMode = Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A],
+		gameMode = Enum[@"emodes"][@"mode_zombies"],
 		statsVariable = "completedFeaturedPlaylistIntroduction",
 		onlyShowForGivenMode = true,
 	},
 	ZMClassicPlaylistIntroduction = {
-		gameMode = Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A],
+		gameMode = Enum[@"emodes"][@"mode_zombies"],
 		statsVariable = "completedClassicPlaylistIntroduction",
 		onlyShowForGivenMode = true,
 	},
 	ZMZombieRushPlaylistIntroduction = {
-		gameMode = Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A],
+		gameMode = Enum[@"emodes"][@"mode_zombies"],
 		statsVariable = "completedZombieRushPlaylistIntroduction",
 		onlyShowForGivenMode = true,
 	},
 	ZMTCMPlaylistIntroduction = {
-		gameMode = Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A],
+		gameMode = Enum[@"emodes"][@"mode_zombies"],
 		statsVariable = "completedTCMPlaylistIntroduction",
 		onlyShowForGivenMode = true,
 	},
 	ZMGauntletPlaylistIntroduction = {
-		gameMode = Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A],
+		gameMode = Enum[@"emodes"][@"mode_zombies"],
 		statsVariable = "completedGauntletPlaylistIntroduction",
 		onlyShowForGivenMode = true,
 	},
 	ZMTutorialPlaylistIntroduction = {
-		gameMode = Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A],
+		gameMode = Enum[@"emodes"][@"mode_zombies"],
 		statsVariable = "completedTutorialPlaylistIntroduction",
 		onlyShowForGivenMode = true,
 	},
 	ZMCustomGameIntroduction = {
-		gameMode = Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A],
+		gameMode = Enum[@"emodes"][@"mode_zombies"],
 		statsVariable = "completedCustomGameFirstTimeFlow",
 		onlyShowForGivenMode = true,
 	},
 	ZMLoadoutIntroduction = {
-		gameMode = Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A],
+		gameMode = Enum[@"emodes"][@"mode_zombies"],
 		statsVariable = "completedLoadoutFirstTimeFlow",
 		onlyShowForGivenMode = true,
 	},
 	ZMArmoryIntroduction = {
-		gameMode = Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A],
+		gameMode = Enum[@"emodes"][@"mode_zombies"],
 		statsVariable = "completedArmoryFirstTimeFlow",
 		onlyShowForGivenMode = true,
 	},
 	ZMLaboratoryIntroduction = {
-		gameMode = Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A],
+		gameMode = Enum[@"emodes"][@"mode_zombies"],
 		statsVariable = "completedLaboratoryFirstTimeFlow",
 		onlyShowForGivenMode = true,
 	},
 	ZMFactionCallingsIntroduction = {
-		gameMode = Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A],
+		gameMode = Enum[@"emodes"][@"mode_zombies"],
 		statsVariable = "completedFactionCallingsFirstTimeFlow",
 		onlyShowForGivenMode = true,
 	},
 	ZMGestureChanges = {
-		gameMode = Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A],
+		gameMode = Enum[@"emodes"][@"mode_zombies"],
 		statsVariable = "completedUpdatedGestureFlow",
 		onlyShowForGivenMode = true,
 	},
 	WZProgressionInfo = {
-		gameMode = Enum[0x9C0C2196D8313A0][0xBF1DCC8138A9D39],
+		gameMode = Enum[@"emodes"][@"mode_warzone"],
 		statsVariable = "completedWZProgressionFirstTimeFlow",
 		onlyShowForGivenMode = true,
 	},
 	BlackMarketIntroduction = {
-		gameMode = Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5],
+		gameMode = Enum[@"emodes"][@"mode_multiplayer"],
 		statsVariable = "completedBlackMarketFirstTimeFlow",
 		onlyShowForGivenMode = false,
 	},
 	GestureChanges = {
-		gameMode = Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5],
+		gameMode = Enum[@"emodes"][@"mode_multiplayer"],
 		statsVariable = "completedUpdatedGestureFlow",
 		onlyShowForGivenMode = false,
 	},
 	WeaponPersonalizationChanges = {
-		gameMode = Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5],
+		gameMode = Enum[@"emodes"][@"mode_multiplayer"],
 		statsVariable = "completedUpdatedWeaponPersonalizationFlow",
 		onlyShowForGivenMode = false,
 	},
 	KoreaSpecialEvent = {
-		gameMode = Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5],
+		gameMode = Enum[@"emodes"][@"mode_multiplayer"],
 		statsVariable = "completedKoreaSpecialEventPopup",
 		onlyShowForGivenMode = false,
 	},
 	LeaguePlayIntroduction = {
-		gameMode = Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5],
+		gameMode = Enum[@"emodes"][@"mode_multiplayer"],
 		statsVariable = "completedArenaFirstTimeFlow",
 		onlyShowForGivenMode = true,
 	},
 	BlackMarketSeasonThreeIntroduction = {
-		gameMode = Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5],
+		gameMode = Enum[@"emodes"][@"mode_multiplayer"],
 		statsVariable = "completedBlackMarketSeasonThreeFirstTimeFlow",
 		onlyShowForGivenMode = false,
 	},
 	BlackjackReservesIntroduction = {
-		gameMode = Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5],
+		gameMode = Enum[@"emodes"][@"mode_multiplayer"],
 		statsVariable = "completedBlackjackReservesFirstTimeFlow",
 		onlyShowForGivenMode = false,
 	},
 	BlackjackShopIntroduction = {
-		gameMode = Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5],
+		gameMode = Enum[@"emodes"][@"mode_multiplayer"],
 		statsVariable = "completedBlackjackShopFirstTimeFlow",
 		onlyShowForGivenMode = false,
 	},
 	BlackMarketInventoryIntroduction = {
-		gameMode = Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5],
+		gameMode = Enum[@"emodes"][@"mode_multiplayer"],
 		statsVariable = "completedBlackMarketInventoryFirstTimeFlow",
 		onlyShowForGivenMode = false,
 	},
 	BlackOpsPassUpsell = {
-		gameMode = Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5],
+		gameMode = Enum[@"emodes"][@"mode_multiplayer"],
 		statsVariable = "unusedVariable",
 		onlyShowForGivenMode = false,
 	},
 	PromoEvent = {
-		gameMode = Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5],
+		gameMode = Enum[@"emodes"][@"mode_multiplayer"],
 		statsVariable = "completedShamrockPromoPopup",
 		onlyShowForGivenMode = false,
 	},
 	BlackMarketSunsetIntroduction = {
-		gameMode = Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5],
+		gameMode = Enum[@"emodes"][@"mode_multiplayer"],
 		statsVariable = "completedBlackMarketSunsetFlow",
 		onlyShowForGivenMode = false,
 	},
@@ -937,8 +937,8 @@ local f0_local0 = CoD.OverlayUtility.AddSystemOverlay
 local f0_local1 = "SpecialistHQGraphicContentWarning"
 local f0_local2 = {
 	menuName = "SystemOverlay_FreeCursor",
-	title = LocalizeToUpperString(0x9F837EEDFBB8117),
-	description = Engine[0xF9F1239CFD921FE](0x259511650450D25),
+	title = LocalizeToUpperString(@"menu/graphic_content"),
+	description = Engine[@"hash_4F9F1239CFD921FE"](@"hash_259511650450D25"),
 	categoryType = CoD.OverlayUtility.OverlayTypes.Alert,
 }
 if not CoD.isPC then
@@ -949,7 +949,7 @@ f0_local2.listDatasource = function()
 		return {
 			{
 				models = {
-					displayText = Engine[0xF9F1239CFD921FE](0xDFD294FC69F682),
+					displayText = Engine[@"hash_4F9F1239CFD921FE"](@"menu/yes"),
 				},
 				properties = {
 					action = function(f37_arg0, f37_arg1, f37_arg2, f37_arg3, f37_arg4)
@@ -959,7 +959,7 @@ f0_local2.listDatasource = function()
 			},
 			{
 				models = {
-					displayText = Engine[0xF9F1239CFD921FE](0x5C16E02B211A4F4),
+					displayText = Engine[@"hash_4F9F1239CFD921FE"](@"menu/no"),
 				},
 				properties = {
 					action = function(f38_arg0, f38_arg1, f38_arg2, f38_arg3, f38_arg4)
@@ -976,13 +976,13 @@ f0_local2[CoD.OverlayUtility.aCrossPromptFn] = function(f39_arg0)
 		CoD.FTUEUtility.PlaySpecialistHQIntroductionMovie(f40_arg0, f40_arg1)
 	end
 end
-f0_local2[CoD.OverlayUtility.aCrossPromptText] = 0xDFD294FC69F682
+f0_local2[CoD.OverlayUtility.aCrossPromptText] = @"menu/yes"
 f0_local2[CoD.OverlayUtility.bCirclePromptFn] = function(f41_arg0)
 	return function(f42_arg0, f42_arg1)
 		CoD.FTUEUtility.BackOutCurrentSequence(f42_arg0, f42_arg1)
 	end
 end
-f0_local2[CoD.OverlayUtility.bCirclePromptText] = 0x5C16E02B211A4F4
+f0_local2[CoD.OverlayUtility.bCirclePromptText] = @"menu/no"
 f0_local0(f0_local1, f0_local2)
 CoD.FTUEUtility.ShouldBlockMPFTUE = false
 CoD.FTUEUtility.ResetCurrentSequenceData = function()
@@ -1008,7 +1008,7 @@ end
 CoD.FTUEUtility.SetCurrentSequenceThroughMode = function(f45_arg0, f45_arg1, f45_arg2)
 	if not IsOnlineGame() then
 		return false
-	elseif f45_arg2 == Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A] and CoD.PCKoreaUtility.ShowKorea15Plus() then
+	elseif f45_arg2 == Enum[@"emodes"][@"mode_zombies"] and CoD.PCKoreaUtility.ShowKorea15Plus() then
 		return false
 	else
 		local f45_local0 = CoD.FTUEUtility.FTUEGameModeToSequence[f45_arg2]
@@ -1062,7 +1062,7 @@ CoD.FTUEUtility.DismissPromoEventPC = function(f51_arg0, f51_arg1)
 		return
 	else
 		GoBack(f51_arg0, f51_arg1)
-		Engine[0x87AE7E64BA5AD61]("OnGoForward", {
+		Engine[@"lobbyevent"]("OnGoForward", {
 			controller = f51_arg1,
 			navToMenu = "director",
 		})
@@ -1090,11 +1090,11 @@ CoD.FTUEUtility.ShowZMModeFTUESequenceIfNotSeen = function(f53_arg0, f53_arg1, f
 	end
 end
 CoD.FTUEUtility.ShouldShowFTUESequence = function(f54_arg0, f54_arg1)
-	local f54_local0 = Engine[0x3EAC408F958FF05]()
+	local f54_local0 = Engine[@"currentsessionmode"]()
 	local f54_local1 = CoD.FTUEUtility.FTUESequenceToSequenceInfo[f54_arg1]
 	if f54_local1.onlyShowForGivenMode and f54_local0 ~= f54_local1.gameMode then
 		return false
-	elseif Dvar[0x2BE8FB76AD6AEA3]:get() then
+	elseif Dvar[@"livestats_skipfirsttime"]:get() then
 		return false
 	else
 		local f54_local2 = CoD.BreadcrumbUtility.GetStorageClientBufferForPlayer(f54_arg0, f54_local1.gameMode)
@@ -1143,7 +1143,7 @@ end
 DataSources.FTUEEntries = DataSourceHelpers.ListSetup("FTUEEntries", CoD.FTUEUtility.PrepareOverlayInfoEntriesData, true)
 DataSources.FTUEInfo = {
 	getModel = function(f57_arg0)
-		local f57_local0 = Engine[0x4DF5CFBC1771947](f57_arg0)
+		local f57_local0 = Engine[@"getmodelforcontroller"](f57_arg0)
 		f57_local0 = f57_local0:create("FTUEInfo")
 		f57_local0:create("mainTitle")
 		f57_local0:create("mainImage")

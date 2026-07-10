@@ -1,10 +1,10 @@
 CoD.ContractUtility = {}
 CoD.ContractUtility.ActiveContractSlot = CoDShared.Loot.ContractSlots.SLOT_1
 CoD.ContractUtility.IsContractPurchased = function(f1_arg0, f1_arg1)
-	return Engine[0x352DC095BBB2A45](f1_arg0, f1_arg1) > 0
+	return Engine[@"hash_5352DC095BBB2A45"](f1_arg0, f1_arg1) > 0
 end
 CoD.ContractUtility.IsContractComplete = function(f2_arg0, f2_arg1)
-	return Engine[0x352DC095BBB2A45](f2_arg0, f2_arg1) > 1
+	return Engine[@"hash_5352DC095BBB2A45"](f2_arg0, f2_arg1) > 1
 end
 CoD.ContractUtility.SetActiveContract = function(f3_arg0, f3_arg1, f3_arg2)
 	local f3_local0 = f3_arg0:getModel(f3_arg1, "hashName")
@@ -32,7 +32,7 @@ CoD.ContractUtility.GetPurchasableContractIds = function()
 		end
 	end
 	table.sort(f6_local1, function(f7_arg0, f7_arg1)
-		return Engine[0x5DB5D55C0CDC74E](f7_arg0.start, f7_arg1.start)
+		return Engine[@"isgreaterthan"](f7_arg0.start, f7_arg1.start)
 	end)
 	for f6_local5, f6_local6 in ipairs(f6_local1) do
 		local f6_local7 = f6_local6 and CoD.BlackMarketTableUtility.GetContractId(f6_local6.name)
@@ -45,7 +45,7 @@ end
 CoD.ContractUtility.GetPurchasableContractHashes = function()
 	local f8_local0 = {}
 	for f8_local4, f8_local5 in ipairs(CoD.BlackMarketUtility.FeaturedSlot3Items) do
-		local f8_local6 = Engine[0xC53F8D38DF9042B](f8_local5.name)
+		local f8_local6 = Engine[@"converttoxhash"](f8_local5.name)
 		local f8_local7 = f8_local6 and CoD.BlackMarketTableUtility.GetContractId(f8_local6)
 		if f8_local7 and f8_local7 ~= "0" then
 			table.insert(f8_local0, f8_local6)
@@ -55,18 +55,18 @@ CoD.ContractUtility.GetPurchasableContractHashes = function()
 end
 CoD.ContractUtility.GetContractAsset = function(f9_arg0)
 	local f9_local0 = nil
-	if not IsBooleanDvarSet(0x1A8E4D68B803874) then
-		f9_local0 = Engine[0xE00B2F29271C60B](f9_arg0 .. "_presunset")
+	if not IsBooleanDvarSet(@"hash_1A8E4D68B803874") then
+		f9_local0 = Engine[@"hash_2E00B2F29271C60B"](f9_arg0 .. "_presunset")
 	end
 	if not f9_local0 then
-		f9_local0 = Engine[0xE00B2F29271C60B](f9_arg0)
+		f9_local0 = Engine[@"hash_2E00B2F29271C60B"](f9_arg0)
 	end
 	return f9_local0
 end
 CoD.ContractUtility.GetContractDisplayNameRef = function(f10_arg0)
 	local f10_local0 = CoD.ContractUtility.GetContractAsset(f10_arg0)
 	if f10_local0 then
-		return f10_local0[0x9E07BD5D1AC62D3] or 0x0
+		return f10_local0[@"contracttitle"] or 0x0
 	else
 		return 0x0
 	end
@@ -77,14 +77,14 @@ CoD.ContractUtility.GetContractListModels = function(f11_arg0, f11_arg1)
 		return {}
 	end
 	local f11_local1 = false
-	if f11_local0.namehash == 0xDB59140223584C0 then
+	if f11_local0.namehash == @"loot_contract_carbon_cobra" then
 		f11_local1 = true
 	end
 	local f11_local2 = CoD.ContractUtility.GetContractAsset(f11_local0.namehash)
 	local f11_local3 = CoD.BlackMarketTableUtility.GetContractTierCount(f11_arg1)
 	local f11_local4 = CoD.BlackMarketUtility.GetContractProgress(f11_arg0, f11_local0.namehash)
-	local f11_local5 = Engine[0xF9F1239CFD921FE]
-	local f11_local6 = f11_local2[0x87221D2B86F6077]
+	local f11_local5 = Engine[@"hash_4F9F1239CFD921FE"]
+	local f11_local6 = f11_local2[@"contractdescription"]
 	if not f11_local6 then
 		f11_local6 = 0x0
 	end
@@ -94,13 +94,13 @@ CoD.ContractUtility.GetContractListModels = function(f11_arg0, f11_arg1)
 	local f11_local8 = {}
 	if f11_local2.contentsdetaileddescincludelist then
 		for f11_local12, f11_local13 in ipairs(f11_local2.contentsdetaileddescincludelist) do
-			if f11_local13[0x19E25922B4AEDCF] then
-				table.insert(f11_local8, Engine[0xF9F1239CFD921FE](f11_local13[0x19E25922B4AEDCF]))
+			if f11_local13[@"hash_619E25922B4AEDCF"] then
+				table.insert(f11_local8, Engine[@"hash_4F9F1239CFD921FE"](f11_local13[@"hash_619E25922B4AEDCF"]))
 			end
 		end
 	end
-	local f11_local9 = Engine[0xF9F1239CFD921FE]
-	local f11_local10 = f11_local2[0x883881B5C75BF5E]
+	local f11_local9 = Engine[@"hash_4F9F1239CFD921FE"]
+	local f11_local10 = f11_local2[@"hash_7883881B5C75BF5E"]
 	if not f11_local10 then
 		f11_local10 = 0x0
 	end
@@ -109,20 +109,20 @@ CoD.ContractUtility.GetContractListModels = function(f11_arg0, f11_arg1)
 	local f11_local11 = nil
 	local f11_local12 = 0x0
 	local f11_local13, f11_local14 = nil
-	local f11_local15 = Engine[0xF9F1239CFD921FE](f11_local5)
+	local f11_local15 = Engine[@"hash_4F9F1239CFD921FE"](f11_local5)
 	local f11_local16 = false
 	local f11_local17 = 0x0
-	if not f11_local2[0x8375974176E0F64] then
+	if not f11_local2[@"relateditemname"] then
 		local f11_local18 = 0x0
 	end
-	if f11_local0.type == 0xBD6E1F8964DCE86 then
-		f11_local15 = Engine[0xF9F1239CFD921FE](0x41874BEA5451E9D, f11_local5)
-		local f11_local19 = Engine[0xF9F1239CFD921FE]
-		local f11_local20 = 0xEE92514250F3100
+	if f11_local0.type == @"outfit" then
+		f11_local15 = Engine[@"hash_4F9F1239CFD921FE"](@"menu/title_theme", f11_local5)
+		local f11_local19 = Engine[@"hash_4F9F1239CFD921FE"]
+		local f11_local20 = @"hash_6EE92514250F3100"
 		local f11_local21 = f11_local3
-		local f11_local22 = Engine[0xF9F1239CFD921FE]
-		local f11_local23 = 0xF03C71CBE2DC073
-		local f11_local24 = f11_local2[0x9E07BD5D1AC62D3]
+		local f11_local22 = Engine[@"hash_4F9F1239CFD921FE"]
+		local f11_local23 = @"menu/title_outfit"
+		local f11_local24 = f11_local2[@"contracttitle"]
 		if not f11_local24 then
 			f11_local24 = 0x0
 		end
@@ -134,13 +134,13 @@ CoD.ContractUtility.GetContractListModels = function(f11_arg0, f11_arg1)
 		end
 		f11_local16 = true
 		f11_local7 = LuaEnum.LOOT_CAMERA_TYPE.CHARACTER
-	elseif f11_local0.type == 0xCC13B0F8EEFF726 then
-		local f11_local19 = Engine[0xF9F1239CFD921FE]
-		local f11_local20 = 0xEE92514250F3100
+	elseif f11_local0.type == @"signature_weapon" then
+		local f11_local19 = Engine[@"hash_4F9F1239CFD921FE"]
+		local f11_local20 = @"hash_6EE92514250F3100"
 		local f11_local21 = f11_local3
-		local f11_local22 = Engine[0xF9F1239CFD921FE]
-		local f11_local23 = 0xD42C79FFC5F952E
-		local f11_local24 = f11_local2[0x9E07BD5D1AC62D3]
+		local f11_local22 = Engine[@"hash_4F9F1239CFD921FE"]
+		local f11_local23 = @"menu/x_weapon"
+		local f11_local24 = f11_local2[@"contracttitle"]
 		if not f11_local24 then
 			f11_local24 = 0x0
 		end
@@ -148,9 +148,9 @@ CoD.ContractUtility.GetContractListModels = function(f11_arg0, f11_arg1)
 		f11_local20 = CoD.BlackMarketUtility.GetSignatureWeaponRef(CoD.BlackMarketTableUtility.GetContractSignatureWeapon(f11_arg0, f11_arg1))
 		if f11_local20 then
 			f11_local12 = f11_local20.signatureWeaponInfo.ref
-			if f11_local20.signatureWeaponInfo.ref and CoD.CACUtility.GetItemGroupDisplayNameFromRef(Engine[0x86DC0510B2E2933](Engine[0x8FF94BB44442412](f11_local20.signatureWeaponInfo.ref, Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5]), Enum[0x6EB546760F890D2][0x569E84652131CD7], Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5])) then
-				f11_local24 = Engine[0xF9F1239CFD921FE]
-				local f11_local25 = f11_local2[0x87221D2B86F6077]
+			if f11_local20.signatureWeaponInfo.ref and CoD.CACUtility.GetItemGroupDisplayNameFromRef(Engine[@"getitemgroup"](Engine[@"hash_68FF94BB44442412"](f11_local20.signatureWeaponInfo.ref, Enum[@"emodes"][@"mode_multiplayer"]), Enum[@"statindexoffset"][@"hash_6569E84652131CD7"], Enum[@"emodes"][@"mode_multiplayer"])) then
+				f11_local24 = Engine[@"hash_4F9F1239CFD921FE"]
+				local f11_local25 = f11_local2[@"contractdescription"]
 				if not f11_local25 then
 					f11_local25 = 0x0
 				end
@@ -158,24 +158,24 @@ CoD.ContractUtility.GetContractListModels = function(f11_arg0, f11_arg1)
 			end
 		end
 		f11_local7 = LuaEnum.LOOT_CAMERA_TYPE.WEAPON
-	elseif f11_local0.type == 0xF6D84B91339C8B then
+	elseif f11_local0.type == @"reactive_camo" then
 		local f11_local19, f11_local20 = CoD.BlackMarketTableUtility.GetContractReactiveCamoRef(f11_arg0, f11_arg1)
 		f11_local17 = f11_local19
 		local f11_local21 = ""
-		local f11_local22 = Engine[0x910CBCCD3C164C9](CoD.attachmentTable, Enum[0xAAB93F26A00CE2][0x419575E672F6FA2], f11_local17)
+		local f11_local22 = Engine[@"tablefindrows"](CoD.attachmentTable, Enum[@"attachmenttablecolumn_e"][@"hash_2419575E672F6FA2"], f11_local17)
 		if f11_local22 ~= nil then
-			f11_local21 = Engine[0xC6F8EC444864600](CoD.attachmentTable, f11_local22[1], Enum[0xAAB93F26A00CE2][0xF65E25C47700E9F])
+			f11_local21 = Engine[@"hash_4C6F8EC444864600"](CoD.attachmentTable, f11_local22[1], Enum[@"attachmenttablecolumn_e"][@"attachmenttable_column_name"])
 		end
 		local f11_local23 = CoD.BlackMarketUtility.GetWeaponRef(f11_local20)
 		if f11_local23 then
 			f11_local14 = f11_local23.weaponInfo
 			f11_local12 = f11_local14.ref
 		end
-		local f11_local24 = Engine[0xF9F1239CFD921FE]
-		local f11_local25 = 0xEE92514250F3100
+		local f11_local24 = Engine[@"hash_4F9F1239CFD921FE"]
+		local f11_local25 = @"hash_6EE92514250F3100"
 		local f11_local26 = f11_local3
-		local f11_local27 = Engine[0xF9F1239CFD921FE]
-		local f11_local28 = 0xEB9F7EA3A0EC1C1
+		local f11_local27 = Engine[@"hash_4F9F1239CFD921FE"]
+		local f11_local28 = @"hash_5EB9F7EA3A0EC1C1"
 		local f11_local29 = f11_local21 or 0x0
 		local f11_local30 = f11_local14.displayNameRef
 		if not f11_local30 then
@@ -183,7 +183,7 @@ CoD.ContractUtility.GetContractListModels = function(f11_arg0, f11_arg1)
 		end
 		f11_local6 = f11_local24(f11_local25, f11_local26, f11_local27(f11_local28, f11_local29, f11_local30))
 		f11_local7 = LuaEnum.LOOT_CAMERA_TYPE.WEAPON
-	elseif f11_local0.type == 0xD74CF5A087733F7 or f11_local0.type == 0x7FB1719175C1461 then
+	elseif f11_local0.type == @"mastercraft" or f11_local0.type == @"mk2" then
 		local f11_local19 = CoD.BlackMarketTableUtility.GetContractMastercraft(f11_arg0, f11_arg1)
 		f11_local17 = f11_local19
 		local f11_local20 = CoD.BlackMarketUtility.GetMastercraftWeaponRef(f11_local19)
@@ -194,16 +194,16 @@ CoD.ContractUtility.GetContractListModels = function(f11_arg0, f11_arg1)
 				local f11_local18 = f11_local14.displayNameRef
 			end
 		end
-		if f11_local0.type == 0xD74CF5A087733F7 then
-			local f11_local31 = Engine[0xF9F1239CFD921FE](0x81782ED786B4A3)
+		if f11_local0.type == @"mastercraft" then
+			local f11_local31 = Engine[@"hash_4F9F1239CFD921FE"](0x81782ED786B4A3)
 		end
-		f11_local15 = f11_local31 or Engine[0xF9F1239CFD921FE](0xD4314C41E9C9CFC)
-		local f11_local21 = Engine[0xF9F1239CFD921FE]
-		local f11_local22 = 0xEE92514250F3100
+		f11_local15 = f11_local31 or Engine[@"hash_4F9F1239CFD921FE"](@"hash_1D4314C41E9C9CFC")
+		local f11_local21 = Engine[@"hash_4F9F1239CFD921FE"]
+		local f11_local22 = @"hash_6EE92514250F3100"
 		local f11_local23 = f11_local3
-		local f11_local24 = Engine[0xF9F1239CFD921FE]
-		local f11_local25 = 0xC130AF0934E5C11
-		local f11_local26 = f11_local2[0x9E07BD5D1AC62D3]
+		local f11_local24 = Engine[@"hash_4F9F1239CFD921FE"]
+		local f11_local25 = @"hash_5C130AF0934E5C11"
+		local f11_local26 = f11_local2[@"contracttitle"]
 		if not f11_local26 then
 			f11_local26 = 0x0
 		end
@@ -213,20 +213,20 @@ CoD.ContractUtility.GetContractListModels = function(f11_arg0, f11_arg1)
 		end
 		f11_local6 = f11_local21(f11_local22, f11_local23, f11_local24(f11_local25, f11_local26, f11_local27))
 		f11_local7 = LuaEnum.LOOT_CAMERA_TYPE.WEAPON
-	elseif f11_local0.type == 0x2D79C9016401F0 then
+	elseif f11_local0.type == @"character" then
 		local f11_local19 = CoD.BlackMarketTableUtility.GetContractCharacter(f11_arg0, f11_arg1)
-		local f11_local20 = Enum[0x9C0C2196D8313A0][0xBF1DCC8138A9D39]
+		local f11_local20 = Enum[@"emodes"][@"mode_warzone"]
 		local f11_local21 = CoD.PlayerRoleUtility.GetHeroList(f11_local20)
 		local f11_local22 = nil
 		for f11_local26, f11_local27 in ipairs(f11_local21) do
-			local f11_local28 = Engine[0xB678B832BC9DC0](f11_local20, f11_local27.bodyIndex)
-			if f11_local28 and f11_local19 == f11_local28[0x1D6157DBA773DA3] then
-				f11_local22 = Engine[0x82C5756563934AE](f11_local20, f11_local27.bodyIndex)
+			local f11_local28 = Engine[@"getpositionrolebundleinfo"](f11_local20, f11_local27.bodyIndex)
+			if f11_local28 and f11_local19 == f11_local28[@"hash_41D6157DBA773DA3"] then
+				f11_local22 = Engine[@"hash_682C5756563934AE"](f11_local20, f11_local27.bodyIndex)
 				break
 			end
 		end
 		if f11_local22 then
-			f11_local23 = Engine[0x84E3CB0C7D8BA11](f11_local20, f11_local22)
+			f11_local23 = Engine[@"hash_284E3CB0C7D8BA11"](f11_local20, f11_local22)
 			f11_local24 = CoD.PlayerRoleUtility.GetCachedHeroInfo(f11_local20, f11_local23)
 			f11_local25 = f11_local24.displayName
 			f11_local26 = {
@@ -235,16 +235,16 @@ CoD.ContractUtility.GetContractListModels = function(f11_arg0, f11_arg1)
 				outfitIndex = 0,
 				paletteIndex = 0,
 			}
-			f11_local27 = Engine[0x4C5185056289C6C](f11_local26.mode, f11_local26.characterIndex)
+			f11_local27 = Engine[@"getherocustomizationtable"](f11_local26.mode, f11_local26.characterIndex)
 			local f11_local28 = f11_local27.outfits[f11_local26.outfitIndex + 1]
 			f11_local10 = f11_local22
 			f11_local11 = f11_local26
 		end
-		f11_local23 = Engine[0xF9F1239CFD921FE]
-		f11_local24 = 0x55B333AF8D097F6
+		f11_local23 = Engine[@"hash_4F9F1239CFD921FE"]
+		f11_local24 = @"hash_55B333AF8D097F6"
 		f11_local25 = f11_local3
-		f11_local26 = Engine[0xF9F1239CFD921FE]
-		f11_local27 = f11_local2[0x9E07BD5D1AC62D3]
+		f11_local26 = Engine[@"hash_4F9F1239CFD921FE"]
+		f11_local27 = f11_local2[@"contracttitle"]
 		if not f11_local27 then
 			f11_local27 = 0x0
 		end
@@ -252,49 +252,49 @@ CoD.ContractUtility.GetContractListModels = function(f11_arg0, f11_arg1)
 		f11_local7 = LuaEnum.LOOT_CAMERA_TYPE.CHARACTER
 	end
 	if f11_local1 then
-		local f11_local19 = Engine[0xF9F1239CFD921FE]
-		local f11_local20 = 0x2FF79AC549C9A3B
-		local f11_local21 = Engine[0xF9F1239CFD921FE]
-		local f11_local22 = f11_local2[0x87221D2B86F6077]
+		local f11_local19 = Engine[@"hash_4F9F1239CFD921FE"]
+		local f11_local20 = @"hash_32FF79AC549C9A3B"
+		local f11_local21 = Engine[@"hash_4F9F1239CFD921FE"]
+		local f11_local22 = f11_local2[@"contractdescription"]
 		if not f11_local22 then
 			f11_local22 = 0x0
 		end
 		f11_local6 = f11_local19(f11_local20, f11_local21(f11_local22))
 	end
-	if f11_local9 == Engine[0xF9F1239CFD921FE](0x0) then
+	if f11_local9 == Engine[@"hash_4F9F1239CFD921FE"](0x0) then
 		f11_local9 = f11_local6
 	end
 	local f11_local19 = {
 		itemCategory = f11_local0.type,
 		lootType = LuaEnum.LOOT_TYPE.CONTRACT,
 		isContract = true,
-		name = f11_local2[0x9E07BD5D1AC62D3],
+		name = f11_local2[@"contracttitle"],
 		desc = f11_local6,
 		relatedItemName = f11_local18,
 		contentsDesc = f11_local6,
 		contentsDetailedDesc = f11_local9,
 		mainExtraText = f11_local15,
-		subExtraText = f11_local18 or 0x0,
-		icon = f11_local2[0xB008743FB85E8A2],
+		subExtraText = f11_local18 or @"hash_0",
+		icon = f11_local2[@"contracticon"],
 	}
-	local f11_local20 = f11_local2[0xB3DE4579D73CEB6]
+	local f11_local20 = f11_local2[@"hash_6B3DE4579D73CEB6"]
 	if not f11_local20 then
-		f11_local20 = f11_local2[0xB008743FB85E8A2]
+		f11_local20 = f11_local2[@"contracticon"]
 	end
 	f11_local19.inventoryIcon = f11_local20
-	f11_local20 = f11_local2[0xD63FBB2BF3F4957]
+	f11_local20 = f11_local2[@"hash_5D63FBB2BF3F4957"]
 	if not f11_local20 then
-		f11_local20 = f11_local2[0xB008743FB85E8A2]
+		f11_local20 = f11_local2[@"contracticon"]
 	end
 	f11_local19.detailsImage = f11_local20
 	f11_local19.popupImage = 0x0
 	f11_local19.primaryImage = 0x0
-	f11_local19.previewImage = f11_local2[0xB008743FB85E8A2]
-	f11_local19.category = 0x6FEB6C795532AF5
+	f11_local19.previewImage = f11_local2[@"contracticon"]
+	f11_local19.category = @"menu/special_order"
 	f11_local19.rarity = CoD.BlackMarketUtility.GetLootRarityType(f11_local0.rarity)
 	f11_local19.earnedRewardCount = f11_local4
 	f11_local19.totalRewardCount = f11_local3
-	f11_local19.rewardFractionString = Engine[0xF9F1239CFD921FE](0x1DD58AA20274399, f11_local4, f11_local3)
+	f11_local19.rewardFractionString = Engine[@"hash_4F9F1239CFD921FE"](@"hash_31DD58AA20274399", f11_local4, f11_local3)
 	f11_local19.setBonusImage = 0x0
 	f11_local19.hashName = f11_local0.namehash
 	f11_local19.contractId = f11_arg1
@@ -312,7 +312,7 @@ CoD.ContractUtility.GetContractListModels = function(f11_arg0, f11_arg1)
 	f11_local19.seasonal = f11_local1
 	f11_local19.allowTogglePreview = false
 	f11_local19.allowFrozenMoment = f11_local16
-	f11_local20 = f11_local2[0x72BCA0762CE7B9C]
+	f11_local20 = f11_local2[@"hash_572BCA0762CE7B9C"]
 	if not f11_local20 then
 		f11_local20 = ""
 	end
@@ -328,7 +328,7 @@ CoD.ContractUtility.GetContractListModels = function(f11_arg0, f11_arg1)
 	return f11_local19
 end
 CoD.ContractUtility.AppendPurchasableContractSlotModels = function(f12_arg0, f12_arg1, f12_arg2)
-	local f12_local0 = Engine[0xA798E4552F5E872](Engine[0x8DF2E5447F384B9](), "ItemshopRotation")
+	local f12_local0 = Engine[@"createmodel"](Engine[@"getglobalmodel"](), "ItemshopRotation")
 	f12_arg1.timerModel = f12_local0["loot_itemshop_slot" .. f12_arg2 .. "_timer"]
 end
 CoD.ContractUtility.GetSoonestContractTimer = function(f13_arg0)
@@ -366,8 +366,8 @@ CoD.ContractUtility.SortPurchasedContractModels = function(f15_arg0, f15_arg1)
 end
 CoD.ContractUtility.GetPurchasedContractsModels = function(f16_arg0, f16_arg1, f16_arg2, f16_arg3)
 	local f16_local0 = {}
-	for f16_local6, f16_local7 in ipairs(Engine[0x43149249AED4499](f16_arg0)) do
-		if not (Engine[0x2DCF0973239E909](CoD.BlackMarketTableUtility.MasterContractTable.name, CoD.BlackMarketTableUtility.MasterContractTable.COL_TYPE, CoD.BlackMarketTableUtility.MasterContractTable.COL_ID, f16_local7.id) == 0x12B8C0079B0649F) then
+	for f16_local6, f16_local7 in ipairs(Engine[@"hash_543149249AED4499"](f16_arg0)) do
+		if not (Engine[@"tablelookup"](CoD.BlackMarketTableUtility.MasterContractTable.name, CoD.BlackMarketTableUtility.MasterContractTable.COL_TYPE, CoD.BlackMarketTableUtility.MasterContractTable.COL_ID, f16_local7.id) == @"event") then
 			local f16_local4 = CoD.ContractUtility.GetContractListModels(f16_arg0, f16_local7.id)
 			if not (not f16_arg1 or f16_local4.complete) or f16_arg2 and f16_local4.complete then
 				local f16_local5
@@ -402,19 +402,19 @@ end
 CoD.ContractUtility.GetLootContractIcon = function(f17_arg0, f17_arg1)
 	if not CoD.ContractUtility.LootContractIconTable then
 		CoD.ContractUtility.LootContractIconTable = {}
-		local f17_local0 = CoD.ContractUtility.GetContractAsset(0x2C9E47E97711FC3)
+		local f17_local0 = CoD.ContractUtility.GetContractAsset(@"loot_contract_categories")
 		if f17_local0 and f17_local0.categories then
 			for f17_local9, f17_local10 in ipairs(f17_local0.categories) do
-				CoD.ContractUtility.LootContractIconTable[f17_local10[0x3DB283E907748A]] = {}
+				CoD.ContractUtility.LootContractIconTable[f17_local10[@"categoryname"]] = {}
 				if f17_local10.icons then
 					for f17_local7, f17_local8 in ipairs(f17_local10.icons) do
-						CoD.ContractUtility.LootContractIconTable[f17_local10[0x3DB283E907748A]][f17_local7 - 1] = f17_local8[0x99ED14867FF70BC]
+						CoD.ContractUtility.LootContractIconTable[f17_local10[@"categoryname"]][f17_local7 - 1] = f17_local8[@"categoryicon"]
 					end
 				end
 			end
 		end
 	end
-	return CoD.ContractUtility.LootContractIconTable[f17_arg0] and CoD.ContractUtility.LootContractIconTable[f17_arg0][f17_arg1] or 0x7615068F50B3D66
+	return CoD.ContractUtility.LootContractIconTable[f17_arg0] and CoD.ContractUtility.LootContractIconTable[f17_arg0][f17_arg1] or @"blacktransparent"
 end
 CoD.ContractUtility.PurchasedContractsTabDatasource = function(f18_arg0, f18_arg1, f18_arg2, f18_arg3)
 	local f18_local0 = "PurchasedContractsTabs_" .. f18_arg3
@@ -448,7 +448,7 @@ DataSources.PurchasableContracts = ListHelper_SetupDataSource(
 			f21_arg1.__purchasableContractsSubscriptions = true
 			local f21_local0 = f21_arg1
 			local f21_local1 = f21_arg1.subscribeToModel
-			local f21_local2 = Engine[0x8DF2E5447F384B9]()
+			local f21_local2 = Engine[@"getglobalmodel"]()
 			f21_local1(f21_local0, f21_local2:create("ContractsForceUpdate"), function()
 				f21_arg1:updateDataSource()
 			end, false)
@@ -469,7 +469,7 @@ DataSources.PurchasedContracts = ListHelper_SetupDataSource(
 		if f25_arg1.updateSubscription then
 			f25_arg1:removeSubscription(f25_arg1.updateSubscription)
 		end
-		local f25_local0 = Engine[0x8DF2E5447F384B9]()
+		local f25_local0 = Engine[@"getglobalmodel"]()
 		f25_arg1.updateSubscription = f25_arg1:subscribeToModel(f25_local0:create("ContractsForceUpdate"), function()
 			f25_arg1:updateDataSource()
 		end, false)
@@ -479,15 +479,15 @@ DataSources.PurchasedContractsTabs = ListHelper_SetupDataSource("PurchasedContra
 	return {
 		{
 			models = {
-				name = 0x8DF2A8D2479730B,
-				noContractsString = 0x11888F1F867EFA9,
+				name = @"hash_28DF2A8D2479730B",
+				noContractsString = @"hash_711888F1F867EFA9",
 				contractsListDatasource = CoD.ContractUtility.PurchasedContractsTabDatasource(f27_arg0, true, false, "Purchased"),
 			},
 		},
 		{
 			models = {
-				name = 0xC249C368451D708,
-				noContractsString = 0xBDBDB0BC28D465A,
+				name = @"menu/completed",
+				noContractsString = @"hash_5BDBDB0BC28D465A",
 				contractsListDatasource = CoD.ContractUtility.PurchasedContractsTabDatasource(f27_arg0, false, true, "Completed"),
 			},
 		},
@@ -499,7 +499,7 @@ DataSources.ReplaceContractList = ListHelper_SetupDataSource("ReplaceContractLis
 		local f28_local6 = CoD.ContractUtility.GetContractAsset(f28_local5.namehash)
 		table.insert(f28_local0, {
 			models = {
-				displayText = f28_local6[0x9E07BD5D1AC62D3],
+				displayText = f28_local6[@"contracttitle"],
 			},
 			properties = {
 				contractSlot = f28_local5.slot,
@@ -513,7 +513,7 @@ DataSources.PurchaseContractConfirmationButtons = ListHelper_SetupDataSource("Pu
 	local f29_local0 = function(f30_arg0, f30_arg1, f30_arg2, f30_arg3, f30_arg4)
 		local f30_local0 = f30_arg3
 		f30_arg4.__activatePurchasedContract = f30_local0
-		local f30_local1 = Engine[0x4DF5CFBC1771947](f30_arg2)
+		local f30_local1 = Engine[@"getmodelforcontroller"](f30_arg2)
 		f30_local1.purchaseContractNoActivate:set(f30_local0 ~= true)
 		SetWorkingStateAndPurchaseDWSKU(f30_arg0, f30_arg1, f30_arg2, false)
 	end
@@ -523,7 +523,7 @@ DataSources.PurchaseContractConfirmationButtons = ListHelper_SetupDataSource("Pu
 		return {
 			{
 				models = {
-					displayText = 0x58EF4E74415F4F3,
+					displayText = @"hash_258EF4E74415F4F3",
 				},
 				properties = {
 					action = f29_local0,
@@ -532,7 +532,7 @@ DataSources.PurchaseContractConfirmationButtons = ListHelper_SetupDataSource("Pu
 			},
 			{
 				models = {
-					displayText = 0x85952ACC6D0C1B0,
+					displayText = @"menu/purchase",
 				},
 				properties = {
 					action = f29_local0,
@@ -546,7 +546,7 @@ DataSources.CaseExchangeContractConfirmationButtons = ListHelper_SetupDataSource
 	local f31_local0 = function(f32_arg0, f32_arg1, f32_arg2, f32_arg3, f32_arg4)
 		local f32_local0 = f32_arg3
 		f32_arg4.__activatePurchasedContract = f32_local0
-		local f32_local1 = Engine[0x4DF5CFBC1771947](f32_arg2)
+		local f32_local1 = Engine[@"getmodelforcontroller"](f32_arg2)
 		f32_local1.purchaseContractNoActivate:set(f32_local0 ~= true)
 		CoD.BlackMarketUtility.SetWorkingStateAndExchangeLootCases(f32_arg0, f32_arg0, f32_arg2)
 	end
@@ -556,7 +556,7 @@ DataSources.CaseExchangeContractConfirmationButtons = ListHelper_SetupDataSource
 		return {
 			{
 				models = {
-					displayText = 0x387F37DE74A8D85,
+					displayText = @"hash_7387F37DE74A8D85",
 				},
 				properties = {
 					action = f31_local0,
@@ -565,7 +565,7 @@ DataSources.CaseExchangeContractConfirmationButtons = ListHelper_SetupDataSource
 			},
 			{
 				models = {
-					displayText = 0x7C2737E72EC4A26,
+					displayText = @"hash_7C2737E72EC4A26",
 				},
 				properties = {
 					action = f31_local0,
@@ -596,9 +596,9 @@ CoD.ContractUtility.OpenSupplyChainContractDetails = function(f35_arg0, f35_arg1
 	local f35_local0 = f35_arg1.contractModels
 	local f35_local1 = CoD.ContractUtility.GetContractAsset(f35_local0.hashName)
 	if f35_local1 then
-		f35_local0.movieName = f35_local1[0x72BCA0762CE7B9C] or ""
+		f35_local0.movieName = f35_local1[@"hash_572BCA0762CE7B9C"] or ""
 	end
-	local f35_local2 = Engine[0x4DF5CFBC1771947](f35_arg2)
+	local f35_local2 = Engine[@"getmodelforcontroller"](f35_arg2)
 	f35_local2 = f35_local2:create("SupplyChainContractDetailModel")
 	LuaUtils.CreateModelsFromTable(f35_local2, f35_local0)
 	return OpenOverlay(f35_arg0, "ContractDetails", f35_arg2, {
@@ -627,7 +627,7 @@ CoD.ContractUtility.ReplaceActiveContract = function(f37_arg0, f37_arg1, f37_arg
 		f37_arg0.streamUpdateTimer = LUI.UITimer.newElementTimer(500, false, function(f38_arg0)
 			local f38_local0 = true
 			for f38_local4, f38_local5 in ipairs(CoD.BlackMarketUtility.GetActiveContracts(f37_arg2)) do
-				if not Engine[0x39AD08FA7D6CF44](f37_arg2, f38_local5.namehash) then
+				if not Engine[@"hash_439AD08FA7D6CF44"](f37_arg2, f38_local5.namehash) then
 					f38_local0 = false
 					break
 				end
@@ -671,12 +671,12 @@ CoD.ContractUtility.IsElementContractActive = function(f40_arg0, f40_arg1)
 	end
 end
 CoD.ContractUtility.IsPurchasedContractCountGreaterThan = function(f41_arg0, f41_arg1)
-	return f41_arg1 < #Engine[0x43149249AED4499](f41_arg0)
+	return f41_arg1 < #Engine[@"hash_543149249AED4499"](f41_arg0)
 end
 CoD.ContractUtility.ShowPurchasedContractMenuButton = function(f42_arg0, f42_arg1)
 	local f42_local0 = 0
-	for f42_local4, f42_local5 in ipairs(Engine[0x43149249AED4499](f42_arg0)) do
-		if not (Engine[0x2DCF0973239E909](CoD.BlackMarketTableUtility.MasterContractTable.name, CoD.BlackMarketTableUtility.MasterContractTable.COL_TYPE, CoD.BlackMarketTableUtility.MasterContractTable.COL_ID, f42_local5.id) == 0x12B8C0079B0649F) then
+	for f42_local4, f42_local5 in ipairs(Engine[@"hash_543149249AED4499"](f42_arg0)) do
+		if not (Engine[@"tablelookup"](CoD.BlackMarketTableUtility.MasterContractTable.name, CoD.BlackMarketTableUtility.MasterContractTable.COL_TYPE, CoD.BlackMarketTableUtility.MasterContractTable.COL_ID, f42_local5.id) == @"event") then
 			if CoD.ContractUtility.IsContractComplete(f42_arg0, f42_local5.id) then
 				return true
 			elseif f42_arg1 < f42_local0 + 1 then
@@ -713,23 +713,23 @@ CoD.ContractUtility.GetPurchaseContractConfirmDesc = function(f45_arg0, f45_arg1
 		f45_local2 = f45_arg0.rarity:get()
 	end
 	if f45_local2 and CoD.BlackMarketUtility.LootRarityStrings[f45_local2] then
-		local f45_local3 = Engine[0xF9F1239CFD921FE](CoD.BlackMarketUtility.LootRarityStrings[f45_local2])
+		local f45_local3 = Engine[@"hash_4F9F1239CFD921FE"](CoD.BlackMarketUtility.LootRarityStrings[f45_local2])
 		if f45_arg0.seasonal:get() == true then
-			f45_local3 = Engine[0xF9F1239CFD921FE](0x66847BAEBB3A887)
+			f45_local3 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_366847BAEBB3A887")
 		end
-		f45_local0 = Engine[0xF9F1239CFD921FE](0x102F37DE5E04FC8, f45_local3, Engine[0xF9F1239CFD921FE](f45_arg2))
+		f45_local0 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_102F37DE5E04FC8", f45_local3, Engine[@"hash_4F9F1239CFD921FE"](f45_arg2))
 	end
 	if CoD.ContractUtility.IsActiveContractSlotOpen(f45_arg1) then
-		return Engine[0xF9F1239CFD921FE](0x2AA056D0232681A, f45_local0)
+		return Engine[@"hash_4F9F1239CFD921FE"](@"hash_2AA056D0232681A", f45_local0)
 	end
 	for f45_local7, f45_local8 in ipairs(CoD.BlackMarketUtility.GetActiveContracts(f45_arg1)) do
 		local f45_local9 = CoD.ContractUtility.GetContractAsset(f45_local8.namehash)
 		if f45_local9 then
-			f45_local1 = Engine[0xF9F1239CFD921FE](0x102F37DE5E04FC8, Engine[0xF9F1239CFD921FE](CoD.BlackMarketUtility.LootRarityStrings[CoD.BlackMarketUtility.GetLootRarityType(f45_local8.rarity)]), Engine[0xF9F1239CFD921FE](f45_local9[0x9E07BD5D1AC62D3]))
+			f45_local1 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_102F37DE5E04FC8", Engine[@"hash_4F9F1239CFD921FE"](CoD.BlackMarketUtility.LootRarityStrings[CoD.BlackMarketUtility.GetLootRarityType(f45_local8.rarity)]), Engine[@"hash_4F9F1239CFD921FE"](f45_local9[@"contracttitle"]))
 			break
 		end
 	end
-	return Engine[0xF9F1239CFD921FE](0xC37F781EACE9704, f45_local0, f45_local1)
+	return Engine[@"hash_4F9F1239CFD921FE"](@"hash_1C37F781EACE9704", f45_local0, f45_local1)
 end
 CoD.ContractUtility.GetCaseExchangeContractConfirmDesc = function(f46_arg0, f46_arg1, f46_arg2)
 	local f46_local0 = ""
@@ -739,40 +739,40 @@ CoD.ContractUtility.GetCaseExchangeContractConfirmDesc = function(f46_arg0, f46_
 		f46_local2 = f46_arg0.rarity:get()
 	end
 	if f46_local2 and CoD.BlackMarketUtility.LootRarityStrings[f46_local2] then
-		local f46_local3 = Engine[0xF9F1239CFD921FE](CoD.BlackMarketUtility.LootRarityStrings[f46_local2])
+		local f46_local3 = Engine[@"hash_4F9F1239CFD921FE"](CoD.BlackMarketUtility.LootRarityStrings[f46_local2])
 		if f46_arg0.seasonal:get() == true then
-			f46_local3 = Engine[0xF9F1239CFD921FE](0x66847BAEBB3A887)
+			f46_local3 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_366847BAEBB3A887")
 		end
-		f46_local0 = Engine[0xF9F1239CFD921FE](0x102F37DE5E04FC8, f46_local3, Engine[0xF9F1239CFD921FE](f46_arg2))
+		f46_local0 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_102F37DE5E04FC8", f46_local3, Engine[@"hash_4F9F1239CFD921FE"](f46_arg2))
 	end
 	if CoD.ContractUtility.IsActiveContractSlotOpen(f46_arg1) then
-		return Engine[0xF9F1239CFD921FE](0xB4BC2FFC33B5594, f46_local0)
+		return Engine[@"hash_4F9F1239CFD921FE"](@"hash_4B4BC2FFC33B5594", f46_local0)
 	end
 	for f46_local7, f46_local8 in ipairs(CoD.BlackMarketUtility.GetActiveContracts(f46_arg1)) do
 		local f46_local9 = CoD.ContractUtility.GetContractAsset(f46_local8.namehash)
 		if f46_local9 then
-			f46_local1 = Engine[0xF9F1239CFD921FE](0x102F37DE5E04FC8, Engine[0xF9F1239CFD921FE](CoD.BlackMarketUtility.LootRarityStrings[CoD.BlackMarketUtility.GetLootRarityType(f46_local8.rarity)]), Engine[0xF9F1239CFD921FE](f46_local9[0x9E07BD5D1AC62D3]))
+			f46_local1 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_102F37DE5E04FC8", Engine[@"hash_4F9F1239CFD921FE"](CoD.BlackMarketUtility.LootRarityStrings[CoD.BlackMarketUtility.GetLootRarityType(f46_local8.rarity)]), Engine[@"hash_4F9F1239CFD921FE"](f46_local9[@"contracttitle"]))
 			break
 		end
 	end
-	return Engine[0xF9F1239CFD921FE](0xC37F781EACE9704, f46_local0, f46_local1)
+	return Engine[@"hash_4F9F1239CFD921FE"](@"hash_1C37F781EACE9704", f46_local0, f46_local1)
 end
 CoD.ContractUtility.UsePurchaseAndActivateContractCompleteTitleIfNeeded = function(f47_arg0, f47_arg1)
 	if not CoD.ContractUtility.IsActiveContractSlotOpen(f47_arg0) then
-		local f47_local0 = Engine[0x4DF5CFBC1771947](f47_arg0)
+		local f47_local0 = Engine[@"getmodelforcontroller"](f47_arg0)
 		f47_local0 = f47_local0.purchaseContractNoActivate
 		if not (f47_local0 and f47_local0:get()) then
-			return 0x2B15E3C557617BA
+			return @"hash_32B15E3C557617BA"
 		end
 	end
 	return f47_arg1
 end
 CoD.ContractUtility.UseCaseExchangeAndActivateContractCompleteTitleIfNeeded = function(f48_arg0, f48_arg1)
 	if not CoD.ContractUtility.IsActiveContractSlotOpen(f48_arg0) then
-		local f48_local0 = Engine[0x4DF5CFBC1771947](f48_arg0)
+		local f48_local0 = Engine[@"getmodelforcontroller"](f48_arg0)
 		f48_local0 = f48_local0.purchaseContractNoActivate
 		if not (f48_local0 and f48_local0:get()) then
-			return 0x7870CD676671478
+			return @"hash_7870CD676671478"
 		end
 	end
 	return f48_arg1
@@ -785,24 +785,24 @@ CoD.ContractUtility.GetPurchaseContractCompleteDesc = function(f49_arg0, f49_arg
 		f49_local2 = f49_arg0.rarity:get()
 	end
 	if f49_local2 and CoD.BlackMarketUtility.LootRarityStrings[f49_local2] then
-		f49_local0 = Engine[0xF9F1239CFD921FE](0x102F37DE5E04FC8, Engine[0xF9F1239CFD921FE](CoD.BlackMarketUtility.LootRarityStrings[f49_local2]), Engine[0xF9F1239CFD921FE](f49_arg2))
+		f49_local0 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_102F37DE5E04FC8", Engine[@"hash_4F9F1239CFD921FE"](CoD.BlackMarketUtility.LootRarityStrings[f49_local2]), Engine[@"hash_4F9F1239CFD921FE"](f49_arg2))
 	end
 	if CoD.ContractUtility.IsActiveContractSlotOpen(f49_arg1) then
-		return Engine[0xF9F1239CFD921FE](0xE76A4CBE4AD2C43, f49_local0)
+		return Engine[@"hash_4F9F1239CFD921FE"](@"hash_5E76A4CBE4AD2C43", f49_local0)
 	end
-	local f49_local3 = Engine[0x4DF5CFBC1771947](f49_arg1)
+	local f49_local3 = Engine[@"getmodelforcontroller"](f49_arg1)
 	f49_local3 = f49_local3.purchaseContractNoActivate
 	if f49_local3 and f49_local3:get() then
-		return Engine[0xF9F1239CFD921FE](0x16157242367E325, f49_local0)
+		return Engine[@"hash_4F9F1239CFD921FE"](@"hash_116157242367E325", f49_local0)
 	end
 	for f49_local7, f49_local8 in ipairs(CoD.BlackMarketUtility.GetActiveContracts(f49_arg1)) do
 		local f49_local9 = CoD.ContractUtility.GetContractAsset(f49_local8.namehash)
 		if f49_local9 then
-			f49_local1 = Engine[0xF9F1239CFD921FE](0x102F37DE5E04FC8, Engine[0xF9F1239CFD921FE](CoD.BlackMarketUtility.LootRarityStrings[CoD.BlackMarketUtility.GetLootRarityType(f49_local8.rarity)]), Engine[0xF9F1239CFD921FE](f49_local9[0x9E07BD5D1AC62D3]))
+			f49_local1 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_102F37DE5E04FC8", Engine[@"hash_4F9F1239CFD921FE"](CoD.BlackMarketUtility.LootRarityStrings[CoD.BlackMarketUtility.GetLootRarityType(f49_local8.rarity)]), Engine[@"hash_4F9F1239CFD921FE"](f49_local9[@"contracttitle"]))
 			break
 		end
 	end
-	return Engine[0xF9F1239CFD921FE](0x8CD2826E5E9A35D, f49_local0, f49_local1, f49_local1)
+	return Engine[@"hash_4F9F1239CFD921FE"](@"hash_78CD2826E5E9A35D", f49_local0, f49_local1, f49_local1)
 end
 CoD.ContractUtility.GetCaseExchangeContractCompleteDesc = function(f50_arg0, f50_arg1, f50_arg2)
 	local f50_local0 = ""
@@ -812,24 +812,24 @@ CoD.ContractUtility.GetCaseExchangeContractCompleteDesc = function(f50_arg0, f50
 		f50_local2 = f50_arg0.rarity:get()
 	end
 	if f50_local2 and CoD.BlackMarketUtility.LootRarityStrings[f50_local2] then
-		f50_local0 = Engine[0xF9F1239CFD921FE](0x102F37DE5E04FC8, Engine[0xF9F1239CFD921FE](CoD.BlackMarketUtility.LootRarityStrings[f50_local2]), Engine[0xF9F1239CFD921FE](f50_arg2))
+		f50_local0 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_102F37DE5E04FC8", Engine[@"hash_4F9F1239CFD921FE"](CoD.BlackMarketUtility.LootRarityStrings[f50_local2]), Engine[@"hash_4F9F1239CFD921FE"](f50_arg2))
 	end
 	if CoD.ContractUtility.IsActiveContractSlotOpen(f50_arg1) then
-		return Engine[0xF9F1239CFD921FE](0xE76A4CBE4AD2C43, f50_local0)
+		return Engine[@"hash_4F9F1239CFD921FE"](@"hash_5E76A4CBE4AD2C43", f50_local0)
 	end
-	local f50_local3 = Engine[0x4DF5CFBC1771947](f50_arg1)
+	local f50_local3 = Engine[@"getmodelforcontroller"](f50_arg1)
 	f50_local3 = f50_local3.purchaseContractNoActivate
 	if f50_local3 and f50_local3:get() then
-		return Engine[0xF9F1239CFD921FE](0xD246DD880C2FE4F, f50_local0)
+		return Engine[@"hash_4F9F1239CFD921FE"](@"hash_7D246DD880C2FE4F", f50_local0)
 	end
 	for f50_local7, f50_local8 in ipairs(CoD.BlackMarketUtility.GetActiveContracts(f50_arg1)) do
 		local f50_local9 = CoD.ContractUtility.GetContractAsset(f50_local8.namehash)
 		if f50_local9 then
-			f50_local1 = Engine[0xF9F1239CFD921FE](0x102F37DE5E04FC8, Engine[0xF9F1239CFD921FE](CoD.BlackMarketUtility.LootRarityStrings[CoD.BlackMarketUtility.GetLootRarityType(f50_local8.rarity)]), Engine[0xF9F1239CFD921FE](f50_local9[0x9E07BD5D1AC62D3]))
+			f50_local1 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_102F37DE5E04FC8", Engine[@"hash_4F9F1239CFD921FE"](CoD.BlackMarketUtility.LootRarityStrings[CoD.BlackMarketUtility.GetLootRarityType(f50_local8.rarity)]), Engine[@"hash_4F9F1239CFD921FE"](f50_local9[@"contracttitle"]))
 			break
 		end
 	end
-	return Engine[0xF9F1239CFD921FE](0x99D0E4B9983D33F, f50_local0, f50_local1, f50_local1)
+	return Engine[@"hash_4F9F1239CFD921FE"](@"hash_799D0E4B9983D33F", f50_local0, f50_local1, f50_local1)
 end
 CoD.ContractUtility.GetActivateContractConfirmDesc = function(f51_arg0, f51_arg1, f51_arg2)
 	local f51_local0 = ""
@@ -839,16 +839,16 @@ CoD.ContractUtility.GetActivateContractConfirmDesc = function(f51_arg0, f51_arg1
 		f51_local2 = f51_arg0.rarity:get()
 	end
 	if f51_local2 and CoD.BlackMarketUtility.LootRarityStrings[f51_local2] then
-		f51_local0 = Engine[0xF9F1239CFD921FE](0x102F37DE5E04FC8, Engine[0xF9F1239CFD921FE](CoD.BlackMarketUtility.LootRarityStrings[f51_local2]), Engine[0xF9F1239CFD921FE](f51_arg2))
+		f51_local0 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_102F37DE5E04FC8", Engine[@"hash_4F9F1239CFD921FE"](CoD.BlackMarketUtility.LootRarityStrings[f51_local2]), Engine[@"hash_4F9F1239CFD921FE"](f51_arg2))
 	end
 	for f51_local6, f51_local7 in ipairs(CoD.BlackMarketUtility.GetActiveContracts(f51_arg1)) do
 		local f51_local8 = CoD.ContractUtility.GetContractAsset(f51_local7.namehash)
 		if f51_local8 then
-			f51_local1 = Engine[0xF9F1239CFD921FE](0x102F37DE5E04FC8, Engine[0xF9F1239CFD921FE](CoD.BlackMarketUtility.LootRarityStrings[CoD.BlackMarketUtility.GetLootRarityType(f51_local7.rarity)]), Engine[0xF9F1239CFD921FE](f51_local8[0x9E07BD5D1AC62D3]))
+			f51_local1 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_102F37DE5E04FC8", Engine[@"hash_4F9F1239CFD921FE"](CoD.BlackMarketUtility.LootRarityStrings[CoD.BlackMarketUtility.GetLootRarityType(f51_local7.rarity)]), Engine[@"hash_4F9F1239CFD921FE"](f51_local8[@"contracttitle"]))
 			break
 		end
 	end
-	return Engine[0xF9F1239CFD921FE](0x486419650A714D1, f51_local0, f51_local1)
+	return Engine[@"hash_4F9F1239CFD921FE"](@"hash_4486419650A714D1", f51_local0, f51_local1)
 end
 CoD.ContractUtility.OpenedContractExpired = function(f52_arg0, f52_arg1, f52_arg2)
 	return CoD.BlackMarketUtility.WasItemCycled(f52_arg2, f52_arg1)

@@ -16,7 +16,7 @@ CoD.StartMenu_Options_PC_GraphicsOptions_SubOptionsList.new = function(f1_arg0, 
 	List:setWidgetType(CoD.CyclingList)
 	List:setVerticalCount(11)
 	List:setSpacing(4)
-	List:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	List:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	List:setVerticalScrollbar(CoD.verticalScrollbar)
 	List:setDataSource("OptionGraphicsVideo")
 	List:registerEventHandler("gain_list_focus", function(element, event)

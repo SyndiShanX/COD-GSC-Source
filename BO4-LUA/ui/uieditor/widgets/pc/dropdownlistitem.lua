@@ -18,8 +18,8 @@ CoD.DropdownListItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	TextBox:setTTF("ttmussels_regular")
 	TextBox:setLetterSpacing(2)
 	TextBox:setLineSpacing(2)
-	TextBox:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	TextBox:setAlignment(Enum[0x7A5123B654282D2][0x6ED4298C93DC5ED])
+	TextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	TextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
 	TextBox:linkToElementModel(self, "name", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -52,8 +52,8 @@ CoD.DropdownListItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	GlowAdd:setAlpha(0)
 	GlowAdd:setZRot(-90)
 	GlowAdd:setScale(0.34, 0.48)
-	GlowAdd:setImage(RegisterImage(0xAD405802E3EEE94))
-	GlowAdd:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	GlowAdd:setImage(RegisterImage(@"uie_icon_frontend_navigation_glowmed"))
+	GlowAdd:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(GlowAdd)
 	self.GlowAdd = GlowAdd
 	LUI.OverrideFunction_CallOriginalFirst(self, "setModel", function(element, controller)

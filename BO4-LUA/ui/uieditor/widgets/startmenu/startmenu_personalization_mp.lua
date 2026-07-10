@@ -33,11 +33,11 @@ CoD.StartMenu_Personalization_MP.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	self:addElement(CommonInformationFrame)
 	self.CommonInformationFrame = CommonInformationFrame
 	local equipment = CoD.HubEquipmentItem.new(f1_arg0, f1_arg1, 0.5, 0.5, 582, 782, 0.5, 0.5, -100, 246)
-	equipment.categoryHeader:setText(LocalizeToUpperString(0x759164343B5C489))
+	equipment.categoryHeader:setText(LocalizeToUpperString(@"weapon/special_issue"))
 	self:addElement(equipment)
 	self.equipment = equipment
 	local weapon = CoD.HubEquipmentItem.new(f1_arg0, f1_arg1, 0.5, 0.5, 356.5, 556.5, 0.5, 0.5, -100, 246)
-	weapon.categoryHeader:setText(LocalizeToUpperString(0x71489612B1BCA6F))
+	weapon.categoryHeader:setText(LocalizeToUpperString(@"menu/weapon"))
 	self:addElement(weapon)
 	self.weapon = weapon
 	local specialists = LUI.UIList.new(f1_arg0, f1_arg1, 12, 0, nil, false, false, false, false)
@@ -47,30 +47,30 @@ CoD.StartMenu_Personalization_MP.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	specialists:setHorizontalCount(5)
 	specialists:setVerticalCount(3)
 	specialists:setSpacing(12)
-	specialists:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	specialists:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	specialists:setDataSource("PositionLoadoutList")
 	specialists:linkToElementModel(specialists, "isBMLocked", true, function(model, f2_arg1)
-		CoD.Menu.UpdateButtonShownState(f2_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(f2_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+		CoD.Menu.UpdateButtonShownState(f2_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(f2_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 	end)
 	specialists:linkToElementModel(specialists, "characterIndex", true, function(model, f3_arg1)
-		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 	end)
 	local SpecialistCornerTL = specialists
 	local SpecialistCornerTR = specialists.subscribeToModel
-	local SpecialistCornerBR = Engine[0x8DF2E5447F384B9]()
+	local SpecialistCornerBR = Engine[@"getglobalmodel"]()
 	SpecialistCornerTR(SpecialistCornerTL, SpecialistCornerBR.currentShowcasedCharacterIndex, function(f4_arg0, f4_arg1)
-		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 	end, false)
 	specialists:appendEventHandler("input_source_changed", function(f5_arg0, f5_arg1)
 		f5_arg1.menu = f5_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f5_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+		CoD.Menu.UpdateButtonShownState(f5_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 	end)
 	SpecialistCornerTL = specialists
 	SpecialistCornerTR = specialists.subscribeToModel
-	SpecialistCornerBR = Engine[0x4DF5CFBC1771947](f1_arg1)
+	SpecialistCornerBR = Engine[@"getmodelforcontroller"](f1_arg1)
 	SpecialistCornerTR(SpecialistCornerTL, SpecialistCornerBR.LastInput, function(f6_arg0, f6_arg1)
-		CoD.Menu.UpdateButtonShownState(f6_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+		CoD.Menu.UpdateButtonShownState(f6_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 	end, false)
 	specialists:registerEventHandler("gain_focus", function(element, event)
 		local f7_local0 = nil
@@ -79,11 +79,11 @@ CoD.StartMenu_Personalization_MP.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 		elseif element.super.gainFocus then
 			f7_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 		return f7_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(specialists, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(specialists, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if not CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "isBMLocked") then
 			PlaySoundAlias("uin_toggle_generic")
 			OpenOverlay(self, "PersonalizeCharacter", controller, {
@@ -98,13 +98,13 @@ CoD.StartMenu_Personalization_MP.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 		end
 	end, function(element, menu, controller)
 		if not CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "isBMLocked") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(specialists, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], "ui_contextual_1", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(specialists, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], "ui_contextual_1", function(element, menu, controller, model)
 		if not CoD.PlayerRoleUtility.IsSelectedShowcaseCharacter(element, controller) and CoD.PlayerRoleUtility.CanSetAsShowcaseCharacter(controller, element) and IsGamepad(controller) then
 			CoD.PlayerRoleUtility.SetAsSelectedShowcaseCharacter(element, controller)
 			UpdateSelfElementState(menu, self.showcaseCheckbox, controller)
@@ -114,22 +114,22 @@ CoD.StartMenu_Personalization_MP.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 			CoD.PlayerRoleUtility.SetAsSelectedShowcaseCharacter(element, controller)
 			UpdateSelfElementState(menu, self.showcaseCheckbox, controller)
 			PlaySoundAlias("uin_start_char_select")
-			UpdateButtonPromptState(menu, element, controller, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+			UpdateButtonPromptState(menu, element, controller, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 			return true
 		else
 		end
 	end, function(element, menu, controller)
 		if not CoD.PlayerRoleUtility.IsSelectedShowcaseCharacter(element, controller) and CoD.PlayerRoleUtility.CanSetAsShowcaseCharacter(controller, element) and IsGamepad(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x0, nil, "ui_contextual_1")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"hash_0", nil, "ui_contextual_1")
 			return false
 		elseif not CoD.PlayerRoleUtility.IsSelectedShowcaseCharacter(element, controller) and IsMouseOrKeyboard(controller) and CoD.PlayerRoleUtility.CanSetAsShowcaseCharacter(controller, element) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0xE14BE8E7A50BA2, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "ui_contextual_1")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"menu/showcase_character", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "ui_contextual_1")
 			return true
 		else
 			return false
 		end
 	end, false)
-	specialists:AddContextualMenuAction(f1_arg0, f1_arg1, 0xE14BE8E7A50BA2, function(f12_arg0, f12_arg1, f12_arg2, f12_arg3)
+	specialists:AddContextualMenuAction(f1_arg0, f1_arg1, @"menu/showcase_character", function(f12_arg0, f12_arg1, f12_arg2, f12_arg3)
 		if IsMultiplayer() and not IsGameTypeCombatTraining() and not CoD.PlayerRoleUtility.IsSelectedShowcaseCharacter(f12_arg0, f12_arg2) and CoD.PlayerRoleUtility.CanSetAsShowcaseCharacter(f12_arg2, f12_arg0) then
 			return function(f13_arg0, f13_arg1, f13_arg2, f13_arg3)
 				CoD.PlayerRoleUtility.SetAsSelectedShowcaseCharacter(f13_arg0, f13_arg2)
@@ -145,16 +145,16 @@ CoD.StartMenu_Personalization_MP.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	SpecialistCornerTR:setAlpha(0.25)
 	SpecialistCornerTR:setZRot(-90)
 	SpecialistCornerTR:setScale(0.5, 0.5)
-	SpecialistCornerTR:setImage(RegisterImage(0x8DC834094E7A02C))
-	SpecialistCornerTR:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	SpecialistCornerTR:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_window_corner"))
+	SpecialistCornerTR:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	SpecialistCornerTR:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(SpecialistCornerTR)
 	self.SpecialistCornerTR = SpecialistCornerTR
 	SpecialistCornerTL = LUI.UIImage.new(0.5, 0.5, -634, -610, 0.5, 0.5, -288, -264)
 	SpecialistCornerTL:setAlpha(0.2)
 	SpecialistCornerTL:setScale(0.5, 0.5)
-	SpecialistCornerTL:setImage(RegisterImage(0x8DC834094E7A02C))
-	SpecialistCornerTL:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	SpecialistCornerTL:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_window_corner"))
+	SpecialistCornerTL:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	SpecialistCornerTL:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(SpecialistCornerTL)
 	self.SpecialistCornerTL = SpecialistCornerTL
@@ -162,8 +162,8 @@ CoD.StartMenu_Personalization_MP.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	SpecialistCornerBR:setAlpha(0.2)
 	SpecialistCornerBR:setZRot(180)
 	SpecialistCornerBR:setScale(0.5, 0.5)
-	SpecialistCornerBR:setImage(RegisterImage(0x8DC834094E7A02C))
-	SpecialistCornerBR:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	SpecialistCornerBR:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_window_corner"))
+	SpecialistCornerBR:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	SpecialistCornerBR:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(SpecialistCornerBR)
 	self.SpecialistCornerBR = SpecialistCornerBR
@@ -197,7 +197,7 @@ CoD.StartMenu_Personalization_MP.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	end)
 	local CommonSearchingBar = showcaseCheckbox
 	local SpecialistCornerBL = showcaseCheckbox.subscribeToModel
-	local RestrictedItemWarningText = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local RestrictedItemWarningText = Engine[@"getmodelforcontroller"](f1_arg1)
 	SpecialistCornerBL(CommonSearchingBar, RestrictedItemWarningText.LastInput, function(f18_arg0)
 		f1_arg0:updateElementState(showcaseCheckbox, {
 			name = "model_validation",
@@ -218,7 +218,7 @@ CoD.StartMenu_Personalization_MP.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	end)
 	CommonSearchingBar = showcaseCheckbox
 	SpecialistCornerBL = showcaseCheckbox.subscribeToModel
-	RestrictedItemWarningText = Engine[0x8DF2E5447F384B9]()
+	RestrictedItemWarningText = Engine[@"getglobalmodel"]()
 	SpecialistCornerBL(CommonSearchingBar, RestrictedItemWarningText.currentShowcasedCharacterIndex, function(f20_arg0)
 		f1_arg0:updateElementState(showcaseCheckbox, {
 			name = "model_validation",
@@ -228,15 +228,15 @@ CoD.StartMenu_Personalization_MP.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 			modelName = "currentShowcasedCharacterIndex",
 		})
 	end, false)
-	showcaseCheckbox.label:setText(Engine[0xF9F1239CFD921FE](0xE14BE8E7A50BA2))
+	showcaseCheckbox.label:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/showcase_character"))
 	self:addElement(showcaseCheckbox)
 	self.showcaseCheckbox = showcaseCheckbox
 	SpecialistCornerBL = LUI.UIImage.new(0.5, 0.5, -634, -610, 0.5, 0.5, 288.5, 312.5)
 	SpecialistCornerBL:setAlpha(0.2)
 	SpecialistCornerBL:setZRot(90)
 	SpecialistCornerBL:setScale(0.5, 0.5)
-	SpecialistCornerBL:setImage(RegisterImage(0x8DC834094E7A02C))
-	SpecialistCornerBL:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	SpecialistCornerBL:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_window_corner"))
+	SpecialistCornerBL:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	SpecialistCornerBL:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(SpecialistCornerBL)
 	self.SpecialistCornerBL = SpecialistCornerBL
@@ -261,7 +261,7 @@ CoD.StartMenu_Personalization_MP.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	})
 	local f1_local14 = RestrictedItemWarningText
 	local f1_local15 = RestrictedItemWarningText.subscribeToModel
-	local f1_local16 = Engine[0x8DF2E5447F384B9]()
+	local f1_local16 = Engine[@"getglobalmodel"]()
 	f1_local15(f1_local14, f1_local16["lobbyRoot.lobbyNav"], function(f22_arg0)
 		f1_arg0:updateElementState(RestrictedItemWarningText, {
 			name = "model_validation",
@@ -276,7 +276,7 @@ CoD.StartMenu_Personalization_MP.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	CommonInformationFrame:linkToElementModel(specialists, "jobTitle", true, function(model)
 		local f23_local0 = model:get()
 		if f23_local0 ~= nil then
-			CommonInformationFrame.altHeader:setText(Engine[0xF9F1239CFD921FE](f23_local0))
+			CommonInformationFrame.altHeader:setText(Engine[@"hash_4F9F1239CFD921FE"](f23_local0))
 		end
 	end)
 	CommonInformationFrame:linkToElementModel(specialists, "name", true, function(model)
@@ -355,9 +355,9 @@ CoD.StartMenu_Personalization_MP.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	f1_local15 = self.subscribeToModel
 	f1_local16 = DataSources.CharacterBreadcrumbs.getModel(f1_arg1)
 	f1_local15(f1_local14, f1_local16.breadcrumbCount, function(f38_arg0, f38_arg1)
-		CoD.Menu.UpdateButtonShownState(f38_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x29E5695FF1401AD])
+		CoD.Menu.UpdateButtonShownState(f38_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_rstick_pressed"])
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0x29E5695FF1401AD], "ui_contextual_2", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_rstick_pressed"], "ui_contextual_2", function(element, menu, controller, model)
 		if CoD.ModelUtility.IsGlobalDataSourceModelValueGreaterThan(controller, "CharacterBreadcrumbs", "breadcrumbCount", 0) and not IsPC() then
 			CoD.BreadcrumbUtility.ClearAllPersonalizationBreadcrumbs(menu, controller)
 			UpdateElementState(self, "specialists", controller)
@@ -366,7 +366,7 @@ CoD.StartMenu_Personalization_MP.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 		end
 	end, function(element, menu, controller)
 		if CoD.ModelUtility.IsGlobalDataSourceModelValueGreaterThan(controller, "CharacterBreadcrumbs", "breadcrumbCount", 0) and not IsPC() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x29E5695FF1401AD], 0x5619D8212EDA599, nil, "ui_contextual_2")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_rstick_pressed"], @"hash_65619D8212EDA599", nil, "ui_contextual_2")
 			return true
 		else
 			return false

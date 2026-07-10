@@ -1,17 +1,17 @@
 local PostLoadFunc = function(f1_arg0)
-	local f1_local0 = f1_arg0:getModel(Engine[0xA5B9C0111291A8B](), "fadeOverTime")
+	local f1_local0 = f1_arg0:getModel(Engine[@"getprimarycontroller"](), "fadeOverTime")
 	if f1_local0 then
 		f1_arg0:subscribeToModel(f1_local0, function(model)
-			local f2_local0 = Engine[0x614D394F6F9A18D](model)
-			local f2_local1 = f1_arg0:getModel(Engine[0xA5B9C0111291A8B](), "startAlpha")
-			local f2_local2 = f1_arg0:getModel(Engine[0xA5B9C0111291A8B](), "endAlpha")
+			local f2_local0 = Engine[@"getmodelvalue"](model)
+			local f2_local1 = f1_arg0:getModel(Engine[@"getprimarycontroller"](), "startAlpha")
+			local f2_local2 = f1_arg0:getModel(Engine[@"getprimarycontroller"](), "endAlpha")
 			local f2_local3 = 0
 			local f2_local4 = 0
 			if f2_local1 then
-				f2_local3 = Engine[0x614D394F6F9A18D](f2_local1)
+				f2_local3 = Engine[@"getmodelvalue"](f2_local1)
 			end
 			if f2_local2 then
-				f2_local4 = Engine[0x614D394F6F9A18D](f2_local2)
+				f2_local4 = Engine[@"getmodelvalue"](f2_local2)
 			end
 			if f2_local0 then
 				if f2_local4 == 0 then

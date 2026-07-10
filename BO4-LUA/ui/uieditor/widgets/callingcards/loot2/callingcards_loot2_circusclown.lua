@@ -3,18 +3,18 @@ require("x64:12365e7693fd27f")
 require("x64:12364e7693fd0cc")
 require("x64:23eb4a04efa29ae")
 require("x64:9275cf8360faa11")
-CoD[0x659E736527D287A] = InheritFrom(LUI.UIElement)
-CoD[0x659E736527D287A].__defaultWidth = 960
-CoD[0x659E736527D287A].__defaultHeight = 240
-CoD[0x659E736527D287A].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+CoD[@"hash_2659E736527D287A"] = InheritFrom(LUI.UIElement)
+CoD[@"hash_2659E736527D287A"].__defaultWidth = 960
+CoD[@"hash_2659E736527D287A"].__defaultHeight = 240
+CoD[@"hash_2659E736527D287A"].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
 	local self = LUI.UIElement.new(f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
-	self:setClass(CoD[0x659E736527D287A])
+	self:setClass(CoD[@"hash_2659E736527D287A"])
 	self.id = "callingcards_loot2_circusclown"
 	self.soundSet = "none"
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local bg = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	bg:setImage(RegisterImage(0x3B02363429E7F84))
+	bg:setImage(RegisterImage(@"uie_ui_menu_callingcards_circusclown_bg"))
 	self:addElement(bg)
 	self.bg = bg
 	local fire01 = CoD.callingcards_loot2_circusclown_fire01.new(f1_arg0, f1_arg1, 0, 0, 164, 284, 0, 0, -16, 248)
@@ -24,8 +24,8 @@ CoD[0x659E736527D287A].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	local embers01 = LUI.UIImage.new(0.16, 0.29, 0, -28, -0.21, 0.93, 0, 0)
 	embers01:setAlpha(0.18)
 	embers01:setZRot(31)
-	embers01:setImage(RegisterImage(0xFDD0CE6F3895A6))
-	embers01:setMaterial(LUI.UIImage.GetCachedMaterial(0xD8EA9FE9B0BCF75))
+	embers01:setImage(RegisterImage(@"uie_t7_zm_hud_rnd_spk2"))
+	embers01:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_tile_scroll"))
 	embers01:setShaderVector(0, 1, 1, 0, 0)
 	embers01:setShaderVector(1, 0, 0.1, 0, 0)
 	self:addElement(embers01)
@@ -37,8 +37,8 @@ CoD[0x659E736527D287A].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	local embers02 = LUI.UIImage.new(0.34, 0.44, 0, -28, -0.2, 0.63, 0, 0)
 	embers02:setAlpha(0.18)
 	embers02:setZRot(31)
-	embers02:setImage(RegisterImage(0xFDD0CE6F3895A6))
-	embers02:setMaterial(LUI.UIImage.GetCachedMaterial(0xD8EA9FE9B0BCF75))
+	embers02:setImage(RegisterImage(@"uie_t7_zm_hud_rnd_spk2"))
+	embers02:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_tile_scroll"))
 	embers02:setShaderVector(0, 1, 1, 0, 0)
 	embers02:setShaderVector(1, 0, 0.08, 0, 0)
 	self:addElement(embers02)
@@ -50,8 +50,8 @@ CoD[0x659E736527D287A].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	local embers03 = LUI.UIImage.new(0.51, 0.64, 0, -28, -0.19, 0.3, 0, 0)
 	embers03:setAlpha(0.18)
 	embers03:setZRot(3)
-	embers03:setImage(RegisterImage(0xFDD0CE6F3895A6))
-	embers03:setMaterial(LUI.UIImage.GetCachedMaterial(0xD8EA9FE9B0BCF75))
+	embers03:setImage(RegisterImage(@"uie_t7_zm_hud_rnd_spk2"))
+	embers03:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_tile_scroll"))
 	embers03:setShaderVector(0, 1, 1, 0, 0)
 	embers03:setShaderVector(1, 0, 0.1, 0, 0)
 	self:addElement(embers03)
@@ -63,8 +63,8 @@ CoD[0x659E736527D287A].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	local embers04 = LUI.UIImage.new(0.72, 0.83, 0, -28, -0.3, 0.24, 0, 0)
 	embers04:setAlpha(0.18)
 	embers04:setZRot(3)
-	embers04:setImage(RegisterImage(0xFDD0CE6F3895A6))
-	embers04:setMaterial(LUI.UIImage.GetCachedMaterial(0xD8EA9FE9B0BCF75))
+	embers04:setImage(RegisterImage(@"uie_t7_zm_hud_rnd_spk2"))
+	embers04:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_tile_scroll"))
 	embers04:setShaderVector(0, 1, 1, 0, 0)
 	embers04:setShaderVector(1, 0, 0.1, 0, 0)
 	self:addElement(embers04)
@@ -76,8 +76,8 @@ CoD[0x659E736527D287A].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	local embers05 = LUI.UIImage.new(0.92, 1.03, 0, -28, -0.23, 0.31, 0, 0)
 	embers05:setAlpha(0.18)
 	embers05:setZRot(-9)
-	embers05:setImage(RegisterImage(0xFDD0CE6F3895A6))
-	embers05:setMaterial(LUI.UIImage.GetCachedMaterial(0xD8EA9FE9B0BCF75))
+	embers05:setImage(RegisterImage(@"uie_t7_zm_hud_rnd_spk2"))
+	embers05:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_tile_scroll"))
 	embers05:setShaderVector(0, 1, 1, 0, 0)
 	embers05:setShaderVector(1, 0, 0.1, 0, 0)
 	self:addElement(embers05)
@@ -91,19 +91,19 @@ CoD[0x659E736527D287A].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	self:addElement(leftarm)
 	self.leftarm = leftarm
 	local body = LUI.UIImage.new(0, 0, 574.5, 758.5, 0, 0, 72, 240)
-	body:setImage(RegisterImage(0xC1865350D1C42D3))
+	body:setImage(RegisterImage(@"uie_ui_menu_callingcards_circusclown_body"))
 	self:addElement(body)
 	self.body = body
 	local head = LUI.UIImage.new(0, 0, 603.5, 715.5, 0, 0, 12, 132)
-	head:setImage(RegisterImage(0xE2A7C00C4F897F1))
+	head:setImage(RegisterImage(@"uie_ui_menu_callingcards_circusclown_head"))
 	self:addElement(head)
 	self.head = head
 	local skull01 = LUI.UIImage.new(0, 0, 790.5, 862.5, 0, 0, 44, 124)
-	skull01:setImage(RegisterImage(0xA3EA092594CD0F))
+	skull01:setImage(RegisterImage(@"uie_ui_menu_callingcards_circusclown_skull01"))
 	self:addElement(skull01)
 	self.skull01 = skull01
 	local skull = LUI.UIImage.new(0, 0, 427, 555, 0, 0, 0, 80)
-	skull:setImage(RegisterImage(0xA3EB092594CEC2))
+	skull:setImage(RegisterImage(@"uie_ui_menu_callingcards_circusclown_skull02"))
 	self:addElement(skull)
 	self.skull = skull
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)
@@ -112,7 +112,7 @@ CoD[0x659E736527D287A].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	end
 	return self
 end
-CoD[0x659E736527D287A].__resetProperties = function(f2_arg0)
+CoD[@"hash_2659E736527D287A"].__resetProperties = function(f2_arg0)
 	f2_arg0.fire01:completeAnimation()
 	f2_arg0.fire02:completeAnimation()
 	f2_arg0.fire03:completeAnimation()
@@ -136,7 +136,7 @@ CoD[0x659E736527D287A].__resetProperties = function(f2_arg0)
 	f2_arg0.head:setYRot(0)
 	f2_arg0.head:setZRot(0)
 end
-CoD[0x659E736527D287A].__clipsPerState = {
+CoD[@"hash_2659E736527D287A"].__clipsPerState = {
 	DefaultState = {
 		DefaultClip = function(f3_arg0, f3_arg1)
 			f3_arg0:__resetProperties()
@@ -249,7 +249,7 @@ CoD[0x659E736527D287A].__clipsPerState = {
 		end,
 	},
 }
-CoD[0x659E736527D287A].__onClose = function(f14_arg0)
+CoD[@"hash_2659E736527D287A"].__onClose = function(f14_arg0)
 	f14_arg0.fire01:close()
 	f14_arg0.fire02:close()
 	f14_arg0.fire03:close()

@@ -15,21 +15,21 @@ CoD.PlayerInspection_InfoPaneWinStreak.new = function(f1_arg0, f1_arg1, f1_arg2,
 	self.Background = Background
 	local WinStreakTitle = LUI.UIText.new(0, 0, 51.5, 244.5, 0.5, 0.5, -9, 8)
 	WinStreakTitle:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
-	WinStreakTitle:setText(LocalizeToUpperString(0x106B091E85DC369))
+	WinStreakTitle:setText(LocalizeToUpperString(@"hash_2106B091E85DC369"))
 	WinStreakTitle:setTTF("ttmussels_regular")
-	WinStreakTitle:setMaterial(LUI.UIImage.GetCachedMaterial(0x90D57B1E92D39D7))
+	WinStreakTitle:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_90D57B1E92D39D7"))
 	WinStreakTitle:setShaderVector(0, 1, 0, 0, 0)
 	WinStreakTitle:setShaderVector(1, 0, 0, 0, 0)
 	WinStreakTitle:setShaderVector(2, 0, 0, 0, 0)
 	WinStreakTitle:setLetterSpacing(1)
 	WinStreakTitle:setLineSpacing(1)
-	WinStreakTitle:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	WinStreakTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(WinStreakTitle)
 	self.WinStreakTitle = WinStreakTitle
 	local WinStreak = LUI.UIText.new(0, 0, 254.5, 296.5, 0, 0, 0, 33)
 	WinStreak:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
 	WinStreak:setTTF("0arame_mono_stencil")
-	WinStreak:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	WinStreak:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	WinStreak:linkToElementModel(self, "arenaWinStreak", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -54,7 +54,7 @@ CoD.PlayerInspection_InfoPaneWinStreak.new = function(f1_arg0, f1_arg1, f1_arg2,
 	})
 	local f1_local4 = self
 	local f1_local5 = self.subscribeToModel
-	local f1_local6 = Engine[0x8DF2E5447F384B9]()
+	local f1_local6 = Engine[@"getglobalmodel"]()
 	f1_local5(f1_local4, f1_local6["lobbyRoot.rankMode"], function(f5_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

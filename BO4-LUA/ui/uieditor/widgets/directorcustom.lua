@@ -46,7 +46,7 @@ CoD.directorCustom.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	})
 	local f1_local3 = DirectorMapGameTypeAndDifficulty
 	local LeaderActivity = DirectorMapGameTypeAndDifficulty.subscribeToModel
-	local HomeOrPlayListFullPC = Engine[0x8DF2E5447F384B9]()
+	local HomeOrPlayListFullPC = Engine[@"getglobalmodel"]()
 	LeaderActivity(f1_local3, HomeOrPlayListFullPC["lobbyRoot.lobbyTimeRemaining"], function(f3_arg0)
 		f1_arg0:updateElementState(DirectorMapGameTypeAndDifficulty, {
 			name = "model_validation",
@@ -57,8 +57,8 @@ CoD.directorCustom.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 		})
 	end, false)
 	DirectorMapGameTypeAndDifficulty:setAlpha(0)
-	DirectorMapGameTypeAndDifficulty.DirectorMapAndGameInternal.PlaylistHeader.GameModeText:setText(Engine[0xF9F1239CFD921FE](0xBC441E8EF98063C))
-	DirectorMapGameTypeAndDifficulty.DirectorMapAndGameInternal.PlaylistHeaderNonHost.GameModeText:setText(Engine[0xF9F1239CFD921FE](0xC95DCE378B96DFF))
+	DirectorMapGameTypeAndDifficulty.DirectorMapAndGameInternal.PlaylistHeader.GameModeText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_2BC441E8EF98063C"))
+	DirectorMapGameTypeAndDifficulty.DirectorMapAndGameInternal.PlaylistHeaderNonHost.GameModeText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_1C95DCE378B96DFF"))
 	DirectorMapGameTypeAndDifficulty:subscribeToGlobalModel(f1_arg1, "MapVote", "mapVoteMapNext", function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
@@ -101,35 +101,35 @@ CoD.directorCustom.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	end)
 	DirectorMapGameTypeAndDifficulty:appendEventHandler("on_session_start", function(f10_arg0, f10_arg1)
 		f10_arg1.menu = f10_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f10_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f10_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	DirectorMapGameTypeAndDifficulty:appendEventHandler("on_session_end", function(f11_arg0, f11_arg1)
 		f11_arg1.menu = f11_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f11_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f11_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	f1_local3 = DirectorMapGameTypeAndDifficulty
 	LeaderActivity = DirectorMapGameTypeAndDifficulty.subscribeToModel
-	HomeOrPlayListFullPC = Engine[0x8DF2E5447F384B9]()
+	HomeOrPlayListFullPC = Engine[@"getglobalmodel"]()
 	LeaderActivity(f1_local3, HomeOrPlayListFullPC["lobbyRoot.lobbyNav"], function(f12_arg0, f12_arg1)
-		CoD.Menu.UpdateButtonShownState(f12_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f12_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	f1_local3 = DirectorMapGameTypeAndDifficulty
 	LeaderActivity = DirectorMapGameTypeAndDifficulty.subscribeToModel
-	HomeOrPlayListFullPC = Engine[0x8DF2E5447F384B9]()
+	HomeOrPlayListFullPC = Engine[@"getglobalmodel"]()
 	LeaderActivity(f1_local3, HomeOrPlayListFullPC["lobbyRoot.gameClient.update"], function(f13_arg0, f13_arg1)
-		CoD.Menu.UpdateButtonShownState(f13_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f13_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	f1_local3 = DirectorMapGameTypeAndDifficulty
 	LeaderActivity = DirectorMapGameTypeAndDifficulty.subscribeToModel
-	HomeOrPlayListFullPC = Engine[0x8DF2E5447F384B9]()
+	HomeOrPlayListFullPC = Engine[@"getglobalmodel"]()
 	LeaderActivity(f1_local3, HomeOrPlayListFullPC["lobbyRoot.privateClient.update"], function(f14_arg0, f14_arg1)
-		CoD.Menu.UpdateButtonShownState(f14_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f14_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	f1_local3 = DirectorMapGameTypeAndDifficulty
 	LeaderActivity = DirectorMapGameTypeAndDifficulty.subscribeToModel
-	HomeOrPlayListFullPC = Engine[0x8DF2E5447F384B9]()
+	HomeOrPlayListFullPC = Engine[@"getglobalmodel"]()
 	LeaderActivity(f1_local3, HomeOrPlayListFullPC["lobbyRoot.lobbyTimeRemaining"], function(f15_arg0, f15_arg1)
-		CoD.Menu.UpdateButtonShownState(f15_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f15_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	DirectorMapGameTypeAndDifficulty:registerEventHandler("gain_focus", function(element, event)
 		local f16_local0 = nil
@@ -138,10 +138,10 @@ CoD.directorCustom.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 		elseif element.super.gainFocus then
 			f16_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f16_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(DirectorMapGameTypeAndDifficulty, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(DirectorMapGameTypeAndDifficulty, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if IsLobbyHostOfCurrentMenu() and not CoD.BaseUtility.IsSelfInState(self, "ZMOfflinePrivate") and not CoD.ModelUtility.IsGlobalModelValueGreaterThan("lobbyRoot.lobbyTimeRemaining", 0) then
 			CoD.LobbyUtility.SetLeaderActivityAndOpenOverlay(self, controller, CoD.LobbyUtility.LeaderActivity.CHOOSING_MAP, "DirectorChooseMapAndGameType")
 			PlaySoundAlias("uin_toggle_generic")
@@ -154,10 +154,10 @@ CoD.directorCustom.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 		end
 	end, function(element, menu, controller)
 		if IsLobbyHostOfCurrentMenu() and not CoD.BaseUtility.IsSelfInState(self, "ZMOfflinePrivate") and not CoD.ModelUtility.IsGlobalModelValueGreaterThan("lobbyRoot.lobbyTimeRemaining", 0) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		elseif IsLobbyHostOfCurrentMenu() and CoD.BaseUtility.IsSelfInState(self, "ZMOfflinePrivate") and not CoD.ModelUtility.IsGlobalModelValueGreaterThan("lobbyRoot.lobbyTimeRemaining", 0) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false
@@ -236,7 +236,7 @@ CoD.directorCustom.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	end)
 	local ZMLoadoutPreviewInfo = SetUpMatchButton
 	local StartButton = SetUpMatchButton.subscribeToModel
-	local DirectorLobbyPoseMembersZM = Engine[0x8DF2E5447F384B9]()
+	local DirectorLobbyPoseMembersZM = Engine[@"getglobalmodel"]()
 	StartButton(ZMLoadoutPreviewInfo, DirectorLobbyPoseMembersZM["lobbyRoot.lobbyNav"], function(f27_arg0)
 		f1_arg0:updateElementState(SetUpMatchButton, {
 			name = "model_validation",
@@ -248,7 +248,7 @@ CoD.directorCustom.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	end, false)
 	ZMLoadoutPreviewInfo = SetUpMatchButton
 	StartButton = SetUpMatchButton.subscribeToModel
-	DirectorLobbyPoseMembersZM = Engine[0x8DF2E5447F384B9]()
+	DirectorLobbyPoseMembersZM = Engine[@"getglobalmodel"]()
 	StartButton(ZMLoadoutPreviewInfo, DirectorLobbyPoseMembersZM["lobbyRoot.gameClient.update"], function(f28_arg0)
 		f1_arg0:updateElementState(SetUpMatchButton, {
 			name = "model_validation",
@@ -260,7 +260,7 @@ CoD.directorCustom.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	end, false)
 	ZMLoadoutPreviewInfo = SetUpMatchButton
 	StartButton = SetUpMatchButton.subscribeToModel
-	DirectorLobbyPoseMembersZM = Engine[0x8DF2E5447F384B9]()
+	DirectorLobbyPoseMembersZM = Engine[@"getglobalmodel"]()
 	StartButton(ZMLoadoutPreviewInfo, DirectorLobbyPoseMembersZM["lobbyRoot.privateClient.update"], function(f29_arg0)
 		f1_arg0:updateElementState(SetUpMatchButton, {
 			name = "model_validation",
@@ -270,39 +270,39 @@ CoD.directorCustom.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 			modelName = "lobbyRoot.privateClient.update",
 		})
 	end, false)
-	SetUpMatchButton.MapImage.PlaylistHeader.GameModeText:setText(Engine[0xF9F1239CFD921FE](0x2FA47140D97F89D))
+	SetUpMatchButton.MapImage.PlaylistHeader.GameModeText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_2FA47140D97F89D"))
 	SetUpMatchButton.MapImage.PlaylistHeader.GameModeText:setTTF("ttmussels_regular")
 	ZMLoadoutPreviewInfo = SetUpMatchButton
 	StartButton = SetUpMatchButton.subscribeToModel
-	DirectorLobbyPoseMembersZM = Engine[0x8DF2E5447F384B9]()
+	DirectorLobbyPoseMembersZM = Engine[@"getglobalmodel"]()
 	StartButton(ZMLoadoutPreviewInfo, DirectorLobbyPoseMembersZM["lobbyRoot.lobbyNav"], function(f30_arg0, f30_arg1)
-		CoD.Menu.UpdateButtonShownState(f30_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f30_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	ZMLoadoutPreviewInfo = SetUpMatchButton
 	StartButton = SetUpMatchButton.subscribeToModel
-	DirectorLobbyPoseMembersZM = Engine[0x8DF2E5447F384B9]()
+	DirectorLobbyPoseMembersZM = Engine[@"getglobalmodel"]()
 	StartButton(ZMLoadoutPreviewInfo, DirectorLobbyPoseMembersZM["lobbyRoot.lobbyTimeRemaining"], function(f31_arg0, f31_arg1)
-		CoD.Menu.UpdateButtonShownState(f31_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f31_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	SetUpMatchButton:appendEventHandler("on_session_start", function(f32_arg0, f32_arg1)
 		f32_arg1.menu = f32_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f32_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f32_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	SetUpMatchButton:appendEventHandler("on_session_end", function(f33_arg0, f33_arg1)
 		f33_arg1.menu = f33_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f33_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f33_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	ZMLoadoutPreviewInfo = SetUpMatchButton
 	StartButton = SetUpMatchButton.subscribeToModel
-	DirectorLobbyPoseMembersZM = Engine[0x8DF2E5447F384B9]()
+	DirectorLobbyPoseMembersZM = Engine[@"getglobalmodel"]()
 	StartButton(ZMLoadoutPreviewInfo, DirectorLobbyPoseMembersZM["lobbyRoot.gameClient.update"], function(f34_arg0, f34_arg1)
-		CoD.Menu.UpdateButtonShownState(f34_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f34_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	ZMLoadoutPreviewInfo = SetUpMatchButton
 	StartButton = SetUpMatchButton.subscribeToModel
-	DirectorLobbyPoseMembersZM = Engine[0x8DF2E5447F384B9]()
+	DirectorLobbyPoseMembersZM = Engine[@"getglobalmodel"]()
 	StartButton(ZMLoadoutPreviewInfo, DirectorLobbyPoseMembersZM["lobbyRoot.privateClient.update"], function(f35_arg0, f35_arg1)
-		CoD.Menu.UpdateButtonShownState(f35_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f35_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	SetUpMatchButton:registerEventHandler("gain_focus", function(element, event)
 		local f36_local0 = nil
@@ -311,10 +311,10 @@ CoD.directorCustom.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 		elseif element.super.gainFocus then
 			f36_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f36_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(SetUpMatchButton, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(SetUpMatchButton, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if IsWarzone() and not CoD.ModelUtility.IsGlobalModelValueGreaterThan("lobbyRoot.lobbyTimeRemaining", 0) and IsLobbyHostOfCurrentMenu() then
 			SetFocusToElement(self, "StartButton", controller)
 			SetLoseFocusToElement(self, "SetUpMatchButton", controller)
@@ -331,10 +331,10 @@ CoD.directorCustom.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 		end
 	end, function(element, menu, controller)
 		if IsWarzone() and not CoD.ModelUtility.IsGlobalModelValueGreaterThan("lobbyRoot.lobbyTimeRemaining", 0) and IsLobbyHostOfCurrentMenu() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		elseif not CoD.ModelUtility.IsGlobalModelValueGreaterThan("lobbyRoot.lobbyTimeRemaining", 0) and IsLobbyHostOfCurrentMenu() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false
@@ -377,7 +377,7 @@ CoD.directorCustom.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	end, false)
 	DirectorLobbyPoseMembersZM = StartButton
 	ZMLoadoutPreviewInfo = StartButton.subscribeToModel
-	CustomGamesButton = Engine[0x8DF2E5447F384B9]()
+	CustomGamesButton = Engine[@"getglobalmodel"]()
 	ZMLoadoutPreviewInfo(DirectorLobbyPoseMembersZM, CustomGamesButton["lobbyRoot.lobbyTimeRemaining"], function(f42_arg0)
 		f1_arg0:updateElementState(StartButton, {
 			name = "model_validation",
@@ -389,7 +389,7 @@ CoD.directorCustom.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	end, false)
 	DirectorLobbyPoseMembersZM = StartButton
 	ZMLoadoutPreviewInfo = StartButton.subscribeToModel
-	CustomGamesButton = Engine[0x8DF2E5447F384B9]()
+	CustomGamesButton = Engine[@"getglobalmodel"]()
 	ZMLoadoutPreviewInfo(DirectorLobbyPoseMembersZM, CustomGamesButton["lobbyRoot.theaterDownloadPercent"], function(f43_arg0)
 		f1_arg0:updateElementState(StartButton, {
 			name = "model_validation",
@@ -401,7 +401,7 @@ CoD.directorCustom.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	end, false)
 	DirectorLobbyPoseMembersZM = StartButton
 	ZMLoadoutPreviewInfo = StartButton.subscribeToModel
-	CustomGamesButton = Engine[0x8DF2E5447F384B9]()
+	CustomGamesButton = Engine[@"getglobalmodel"]()
 	ZMLoadoutPreviewInfo(DirectorLobbyPoseMembersZM, CustomGamesButton["lobbyRoot.theaterDataDownloaded"], function(f44_arg0)
 		f1_arg0:updateElementState(StartButton, {
 			name = "model_validation",
@@ -413,7 +413,7 @@ CoD.directorCustom.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	end, false)
 	DirectorLobbyPoseMembersZM = StartButton
 	ZMLoadoutPreviewInfo = StartButton.subscribeToModel
-	CustomGamesButton = Engine[0x8DF2E5447F384B9]()
+	CustomGamesButton = Engine[@"getglobalmodel"]()
 	ZMLoadoutPreviewInfo(DirectorLobbyPoseMembersZM, CustomGamesButton["lobbyRoot.lobbyNav"], function(f45_arg0)
 		f1_arg0:updateElementState(StartButton, {
 			name = "model_validation",
@@ -425,7 +425,7 @@ CoD.directorCustom.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	end, false)
 	DirectorLobbyPoseMembersZM = StartButton
 	ZMLoadoutPreviewInfo = StartButton.subscribeToModel
-	CustomGamesButton = Engine[0x8DF2E5447F384B9]()
+	CustomGamesButton = Engine[@"getglobalmodel"]()
 	ZMLoadoutPreviewInfo(DirectorLobbyPoseMembersZM, CustomGamesButton["lobbyRoot.privateClient.isHost"], function(f46_arg0)
 		f1_arg0:updateElementState(StartButton, {
 			name = "model_validation",
@@ -437,7 +437,7 @@ CoD.directorCustom.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	end, false)
 	DirectorLobbyPoseMembersZM = StartButton
 	ZMLoadoutPreviewInfo = StartButton.subscribeToModel
-	CustomGamesButton = Engine[0x8DF2E5447F384B9]()
+	CustomGamesButton = Engine[@"getglobalmodel"]()
 	ZMLoadoutPreviewInfo(DirectorLobbyPoseMembersZM, CustomGamesButton["lobbyRoot.gameClient.isHost"], function(f47_arg0)
 		f1_arg0:updateElementState(StartButton, {
 			name = "model_validation",
@@ -457,7 +457,7 @@ CoD.directorCustom.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	end)
 	DirectorLobbyPoseMembersZM = StartButton
 	ZMLoadoutPreviewInfo = StartButton.subscribeToModel
-	CustomGamesButton = Engine[0x8DF2E5447F384B9]()
+	CustomGamesButton = Engine[@"getglobalmodel"]()
 	ZMLoadoutPreviewInfo(DirectorLobbyPoseMembersZM, CustomGamesButton["lobbyRoot.gameClient.update"], function(f50_arg0)
 		f1_arg0:updateElementState(StartButton, {
 			name = "model_validation",
@@ -469,7 +469,7 @@ CoD.directorCustom.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	end, false)
 	DirectorLobbyPoseMembersZM = StartButton
 	ZMLoadoutPreviewInfo = StartButton.subscribeToModel
-	CustomGamesButton = Engine[0x8DF2E5447F384B9]()
+	CustomGamesButton = Engine[@"getglobalmodel"]()
 	ZMLoadoutPreviewInfo(DirectorLobbyPoseMembersZM, CustomGamesButton["lobbyRoot.privateClient.update"], function(f51_arg0)
 		f1_arg0:updateElementState(StartButton, {
 			name = "model_validation",
@@ -481,45 +481,45 @@ CoD.directorCustom.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	end, false)
 	StartButton.DirectorCustomStartButton.MiddleText:setText(LocalizeToUpperString(0x0))
 	StartButton.DirectorCustomStartButton.MiddleTextFocus:setText(LocalizeToUpperString(0x0))
-	StartButton.PlayText:setText(LocalizeToUpperString(0xDDDA371285672BD))
-	StartButton.PlayTextFocus:setText(LocalizeToUpperString(0xDDDA371285672BD))
+	StartButton.PlayText:setText(LocalizeToUpperString(@"menu/play"))
+	StartButton.PlayTextFocus:setText(LocalizeToUpperString(@"menu/play"))
 	StartButton:appendEventHandler("on_session_start", function(f52_arg0, f52_arg1)
 		f52_arg1.menu = f52_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f52_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f52_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	StartButton:appendEventHandler("on_session_end", function(f53_arg0, f53_arg1)
 		f53_arg1.menu = f53_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f53_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f53_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	DirectorLobbyPoseMembersZM = StartButton
 	ZMLoadoutPreviewInfo = StartButton.subscribeToModel
-	CustomGamesButton = Engine[0x8DF2E5447F384B9]()
+	CustomGamesButton = Engine[@"getglobalmodel"]()
 	ZMLoadoutPreviewInfo(DirectorLobbyPoseMembersZM, CustomGamesButton["lobbyRoot.lobbyNav"], function(f54_arg0, f54_arg1)
-		CoD.Menu.UpdateButtonShownState(f54_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f54_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	DirectorLobbyPoseMembersZM = StartButton
 	ZMLoadoutPreviewInfo = StartButton.subscribeToModel
-	CustomGamesButton = Engine[0x8DF2E5447F384B9]()
+	CustomGamesButton = Engine[@"getglobalmodel"]()
 	ZMLoadoutPreviewInfo(DirectorLobbyPoseMembersZM, CustomGamesButton["lobbyRoot.gameClient.update"], function(f55_arg0, f55_arg1)
-		CoD.Menu.UpdateButtonShownState(f55_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f55_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	DirectorLobbyPoseMembersZM = StartButton
 	ZMLoadoutPreviewInfo = StartButton.subscribeToModel
-	CustomGamesButton = Engine[0x8DF2E5447F384B9]()
+	CustomGamesButton = Engine[@"getglobalmodel"]()
 	ZMLoadoutPreviewInfo(DirectorLobbyPoseMembersZM, CustomGamesButton["lobbyRoot.privateClient.update"], function(f56_arg0, f56_arg1)
-		CoD.Menu.UpdateButtonShownState(f56_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f56_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	DirectorLobbyPoseMembersZM = StartButton
 	ZMLoadoutPreviewInfo = StartButton.subscribeToModel
-	CustomGamesButton = Engine[0x8DF2E5447F384B9]()
+	CustomGamesButton = Engine[@"getglobalmodel"]()
 	ZMLoadoutPreviewInfo(DirectorLobbyPoseMembersZM, CustomGamesButton["lobbyRoot.selectedMapId"], function(f57_arg0, f57_arg1)
-		CoD.Menu.UpdateButtonShownState(f57_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f57_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	DirectorLobbyPoseMembersZM = StartButton
 	ZMLoadoutPreviewInfo = StartButton.subscribeToModel
-	CustomGamesButton = Engine[0x8DF2E5447F384B9]()
+	CustomGamesButton = Engine[@"getglobalmodel"]()
 	ZMLoadoutPreviewInfo(DirectorLobbyPoseMembersZM, CustomGamesButton["lobbyRoot.lobbyList.playerCount"], function(f58_arg0, f58_arg1)
-		CoD.Menu.UpdateButtonShownState(f58_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f58_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	StartButton:registerEventHandler("gain_focus", function(element, event)
 		local f59_local0 = nil
@@ -528,10 +528,10 @@ CoD.directorCustom.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 		elseif element.super.gainFocus then
 			f59_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f59_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(StartButton, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(StartButton, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if IsLobbyHostOfCurrentMenu() and CoD.DirectorUtility.AllClientsOwnDLCForMap(controller) then
 			LaunchGamePrototype(self, element, controller)
 			PlaySoundAlias("cac_open_wpn_cust")
@@ -544,10 +544,10 @@ CoD.directorCustom.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 		end
 	end, function(element, menu, controller)
 		if IsLobbyHostOfCurrentMenu() and CoD.DirectorUtility.AllClientsOwnDLCForMap(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 			return false
 		elseif IsLobbyHostOfCurrentMenu() and not CoD.DirectorUtility.AllClientsOwnDLCForMap(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 			return false
 		else
 			return false
@@ -624,7 +624,7 @@ CoD.directorCustom.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	end)
 	local DirectorLaboratoryButton = CustomGamesButton
 	local DirectorLobbySettingList = CustomGamesButton.subscribeToModel
-	local f1_local15 = Engine[0x8DF2E5447F384B9]()
+	local f1_local15 = Engine[@"getglobalmodel"]()
 	DirectorLobbySettingList(DirectorLaboratoryButton, f1_local15["lobbyRoot.lobbyNav"], function(f68_arg0)
 		f1_arg0:updateElementState(CustomGamesButton, {
 			name = "model_validation",
@@ -636,7 +636,7 @@ CoD.directorCustom.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	end, false)
 	DirectorLaboratoryButton = CustomGamesButton
 	DirectorLobbySettingList = CustomGamesButton.subscribeToModel
-	f1_local15 = Engine[0x8DF2E5447F384B9]()
+	f1_local15 = Engine[@"getglobalmodel"]()
 	DirectorLobbySettingList(DirectorLaboratoryButton, f1_local15["lobbyRoot.gameClient.update"], function(f69_arg0)
 		f1_arg0:updateElementState(CustomGamesButton, {
 			name = "model_validation",
@@ -648,7 +648,7 @@ CoD.directorCustom.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	end, false)
 	DirectorLaboratoryButton = CustomGamesButton
 	DirectorLobbySettingList = CustomGamesButton.subscribeToModel
-	f1_local15 = Engine[0x8DF2E5447F384B9]()
+	f1_local15 = Engine[@"getglobalmodel"]()
 	DirectorLobbySettingList(DirectorLaboratoryButton, f1_local15["lobbyRoot.privateClient.update"], function(f70_arg0)
 		f1_arg0:updateElementState(CustomGamesButton, {
 			name = "model_validation",
@@ -660,7 +660,7 @@ CoD.directorCustom.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	end, false)
 	DirectorLaboratoryButton = CustomGamesButton
 	DirectorLobbySettingList = CustomGamesButton.subscribeToModel
-	f1_local15 = Engine[0x8DF2E5447F384B9]()
+	f1_local15 = Engine[@"getglobalmodel"]()
 	DirectorLobbySettingList(DirectorLaboratoryButton, f1_local15.offlineScreenState, function(f71_arg0)
 		f1_arg0:updateElementState(CustomGamesButton, {
 			name = "model_validation",
@@ -672,20 +672,20 @@ CoD.directorCustom.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	end, false)
 	CustomGamesButton:setAlpha(0)
 	CustomGamesButton.DirectorSelectButtonMiniInternal.MiddleText.__MiddleText_StringReference = function()
-		CustomGamesButton.DirectorSelectButtonMiniInternal.MiddleText:setText(LocalizeToUpperString(CoD.DirectorUtility.GetCustomGamesName(0x85D9C7D7DDC8EE0)))
+		CustomGamesButton.DirectorSelectButtonMiniInternal.MiddleText:setText(LocalizeToUpperString(CoD.DirectorUtility.GetCustomGamesName(@"menu/custom_games")))
 	end
 	CustomGamesButton.DirectorSelectButtonMiniInternal.MiddleText.__MiddleText_StringReference()
 	CustomGamesButton.DirectorSelectButtonMiniInternal.MiddleText:setTTF("ttmussels_regular")
 	CustomGamesButton.DirectorSelectButtonMiniInternal.MiddleTextFocus.__MiddleTextFocus_String = function()
-		CustomGamesButton.DirectorSelectButtonMiniInternal.MiddleTextFocus:setText(LocalizeToUpperString(CoD.DirectorUtility.GetCustomGamesName(0x85D9C7D7DDC8EE0)))
+		CustomGamesButton.DirectorSelectButtonMiniInternal.MiddleTextFocus:setText(LocalizeToUpperString(CoD.DirectorUtility.GetCustomGamesName(@"menu/custom_games")))
 	end
 	CustomGamesButton.DirectorSelectButtonMiniInternal.MiddleTextFocus.__MiddleTextFocus_String()
 	CustomGamesButton.DirectorSelectButtonMiniInternal.MiddleTextFocus:setTTF("ttmussels_regular")
 	DirectorLaboratoryButton = CustomGamesButton
 	DirectorLobbySettingList = CustomGamesButton.subscribeToModel
-	f1_local15 = Engine[0x8DF2E5447F384B9]()
+	f1_local15 = Engine[@"getglobalmodel"]()
 	DirectorLobbySettingList(DirectorLaboratoryButton, f1_local15["lobbyRoot.lobbyNav"], function(f74_arg0, f74_arg1)
-		CoD.Menu.UpdateButtonShownState(f74_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f74_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	CustomGamesButton:registerEventHandler("gain_focus", function(element, event)
 		local f75_local0 = nil
@@ -694,10 +694,10 @@ CoD.directorCustom.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 		elseif element.super.gainFocus then
 			f75_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f75_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(CustomGamesButton, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(CustomGamesButton, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if IsZombies() then
 			PlaySoundAlias("uin_press_generic")
 			OpenSystemOverlay(self, menu, controller, "CustomMutationsNotification")
@@ -712,10 +712,10 @@ CoD.directorCustom.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 		end
 	end, function(element, menu, controller)
 		if IsZombies() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		elseif not IsZombies() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false
@@ -733,49 +733,49 @@ CoD.directorCustom.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	self.DirectorLaboratoryButton = DirectorLaboratoryButton
 	local f1_local16 = DirectorMapGameTypeAndDifficulty
 	f1_local15 = DirectorMapGameTypeAndDifficulty.subscribeToModel
-	local f1_local17 = Engine[0x8DF2E5447F384B9]()
+	local f1_local17 = Engine[@"getglobalmodel"]()
 	f1_local15(f1_local16, f1_local17.localZMDifficulty, DirectorMapGameTypeAndDifficulty.DirectorMapAndGameInternal.GamemodeIcon.__GamemodeIcon_Image_FullPath)
 	f1_local16 = DirectorMapGameTypeAndDifficulty
 	f1_local15 = DirectorMapGameTypeAndDifficulty.subscribeToModel
-	f1_local17 = Engine[0x8DF2E5447F384B9]()
+	f1_local17 = Engine[@"getglobalmodel"]()
 	f1_local15(f1_local16, f1_local17.offlineScreenState, DirectorMapGameTypeAndDifficulty.DirectorMapAndGameInternal.GamemodeIcon.__GamemodeIcon_Image_FullPath)
 	f1_local16 = DirectorMapGameTypeAndDifficulty
 	f1_local15 = DirectorMapGameTypeAndDifficulty.subscribeToModel
-	f1_local17 = Engine[0x8DF2E5447F384B9]()
+	f1_local17 = Engine[@"getglobalmodel"]()
 	f1_local15(f1_local16, f1_local17.localZMDifficulty, DirectorMapGameTypeAndDifficulty.DirectorMapAndGameInternal.DirectorMapAndGameTypeInternalTitles.Label.__Label_Desc_FullPath)
 	f1_local16 = DirectorMapGameTypeAndDifficulty
 	f1_local15 = DirectorMapGameTypeAndDifficulty.subscribeToModel
-	f1_local17 = Engine[0x8DF2E5447F384B9]()
+	f1_local17 = Engine[@"getglobalmodel"]()
 	f1_local15(f1_local16, f1_local17.localZMTrialVariant, DirectorMapGameTypeAndDifficulty.DirectorMapAndGameInternal.DirectorMapAndGameTypeInternalTitles.Label.__Label_Desc_FullPath)
 	f1_local16 = DirectorMapGameTypeAndDifficulty
 	f1_local15 = DirectorMapGameTypeAndDifficulty.subscribeToModel
-	f1_local17 = Engine[0x8DF2E5447F384B9]()
+	f1_local17 = Engine[@"getglobalmodel"]()
 	f1_local15(f1_local16, f1_local17["MapVote.mapVoteGameModeNext"], DirectorMapGameTypeAndDifficulty.DirectorMapAndGameInternal.DirectorMapAndGameTypeInternalTitles.Label.__Label_Desc_FullPath)
 	CommonHeader:appendEventHandler("on_session_start", CommonHeader.subtitle.subtitle.__subtitle_SubtitleText_FullPath)
 	CommonHeader:appendEventHandler("on_session_end", CommonHeader.subtitle.subtitle.__subtitle_SubtitleText_FullPath)
 	f1_local16 = CommonHeader
 	f1_local15 = CommonHeader.subscribeToModel
-	f1_local17 = Engine[0x8DF2E5447F384B9]()
+	f1_local17 = Engine[@"getglobalmodel"]()
 	f1_local15(f1_local16, f1_local17["lobbyRoot.lobbyNav"], CommonHeader.subtitle.subtitle.__subtitle_SubtitleText_FullPath)
 	f1_local16 = CommonHeader
 	f1_local15 = CommonHeader.subscribeToModel
-	f1_local17 = Engine[0x8DF2E5447F384B9]()
+	f1_local17 = Engine[@"getglobalmodel"]()
 	f1_local15(f1_local16, f1_local17["lobbyRoot.gameClient.update"], CommonHeader.subtitle.subtitle.__subtitle_SubtitleText_FullPath)
 	f1_local16 = CommonHeader
 	f1_local15 = CommonHeader.subscribeToModel
-	f1_local17 = Engine[0x8DF2E5447F384B9]()
+	f1_local17 = Engine[@"getglobalmodel"]()
 	f1_local15(f1_local16, f1_local17["lobbyRoot.privateClient.update"], CommonHeader.subtitle.subtitle.__subtitle_SubtitleText_FullPath)
 	f1_local16 = CommonHeader
 	f1_local15 = CommonHeader.subscribeToModel
-	f1_local17 = Engine[0x8DF2E5447F384B9]()
+	f1_local17 = Engine[@"getglobalmodel"]()
 	f1_local15(f1_local16, f1_local17.offlineScreenState, CommonHeader.subtitle.subtitle.__subtitle_SubtitleText_FullPath)
 	f1_local16 = CustomGamesButton
 	f1_local15 = CustomGamesButton.subscribeToModel
-	f1_local17 = Engine[0x8DF2E5447F384B9]()
+	f1_local17 = Engine[@"getglobalmodel"]()
 	f1_local15(f1_local16, f1_local17["lobbyRoot.lobbyNav"], CustomGamesButton.DirectorSelectButtonMiniInternal.MiddleText.__MiddleText_StringReference)
 	f1_local16 = CustomGamesButton
 	f1_local15 = CustomGamesButton.subscribeToModel
-	f1_local17 = Engine[0x8DF2E5447F384B9]()
+	f1_local17 = Engine[@"getglobalmodel"]()
 	f1_local15(f1_local16, f1_local17["lobbyRoot.lobbyNav"], CustomGamesButton.DirectorSelectButtonMiniInternal.MiddleTextFocus.__MiddleTextFocus_String)
 	self:mergeStateConditions({
 		{
@@ -840,7 +840,7 @@ CoD.directorCustom.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	})
 	f1_local16 = self
 	f1_local15 = self.subscribeToModel
-	f1_local17 = Engine[0x8DF2E5447F384B9]()
+	f1_local17 = Engine[@"getglobalmodel"]()
 	f1_local15(f1_local16, f1_local17["lobbyRoot.lobbyNav"], function(f85_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -860,7 +860,7 @@ CoD.directorCustom.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	end)
 	f1_local16 = self
 	f1_local15 = self.subscribeToModel
-	f1_local17 = Engine[0x8DF2E5447F384B9]()
+	f1_local17 = Engine[@"getglobalmodel"]()
 	f1_local15(f1_local16, f1_local17["lobbyRoot.gameClient.update"], function(f88_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -872,7 +872,7 @@ CoD.directorCustom.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	end, false)
 	f1_local16 = self
 	f1_local15 = self.subscribeToModel
-	f1_local17 = Engine[0x8DF2E5447F384B9]()
+	f1_local17 = Engine[@"getglobalmodel"]()
 	f1_local15(f1_local16, f1_local17["lobbyRoot.privateClient.update"], function(f89_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -884,7 +884,7 @@ CoD.directorCustom.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	end, false)
 	f1_local16 = self
 	f1_local15 = self.subscribeToModel
-	f1_local17 = Engine[0x8DF2E5447F384B9]()
+	f1_local17 = Engine[@"getglobalmodel"]()
 	f1_local15(f1_local16, f1_local17.offlineScreenState, function(f90_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

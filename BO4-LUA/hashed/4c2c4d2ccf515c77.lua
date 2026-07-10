@@ -16,14 +16,14 @@ CoD.SpawnSelectionMap.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local MinimapFogOfWar = CoD.MinimapFogOfWar.new(f1_arg0, f1_arg1, 0, 1, 0, 0, 0, 1, 0, 0)
-	MinimapFogOfWar.MinimapFogOfWar:setupCompassFog(Enum[0x398581F68B3E097][0x72D54007C707EBC])
-	MinimapFogOfWar.MinimapFogOfWarEnemyTearing:setupCompassEnemyTearingFog(Enum[0x398581F68B3E097][0x72D54007C707EBC])
-	MinimapFogOfWar.CompassMinimapMap:setupCompassMap(Enum[0x398581F68B3E097][0x72D54007C707EBC])
+	MinimapFogOfWar.MinimapFogOfWar:setupCompassFog(Enum[@"compasstype"][@"compass_type_full"])
+	MinimapFogOfWar.MinimapFogOfWarEnemyTearing:setupCompassEnemyTearingFog(Enum[@"compasstype"][@"compass_type_full"])
+	MinimapFogOfWar.CompassMinimapMap:setupCompassMap(Enum[@"compasstype"][@"compass_type_full"])
 	self:addElement(MinimapFogOfWar)
 	self.MinimapFogOfWar = MinimapFogOfWar
 	local MapItems = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	MapItems:setAlpha(0.6)
-	MapItems:setupCompassItems(Enum[0x398581F68B3E097][0xCB482ABCCF21CD8])
+	MapItems:setupCompassItems(Enum[@"compasstype"][@"compass_type_spawn"])
 	self:addElement(MapItems)
 	self.MapItems = MapItems
 	local DeathMarker = CoD.DeathMarker.new(f1_arg0, f1_arg1, 0, 0, 700, 740, 0, 0, 385, 425)

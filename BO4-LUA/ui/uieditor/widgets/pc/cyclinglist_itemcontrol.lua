@@ -17,11 +17,11 @@ CoD.CyclingList_ItemControl.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.center = center
 	local TextBox = LUI.UIText.new(0, 0.58, 6, 6, 0.5, 0.5, -10.5, 10.5)
 	TextBox:setRGB(0.76, 0.76, 0.76)
-	TextBox:setText(Engine[0xF9F1239CFD921FE](0x93E719493E9E18F))
+	TextBox:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	TextBox:setTTF("ttmussels_regular")
 	TextBox:setLetterSpacing(1)
-	TextBox:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	TextBox:setAlignment(Enum[0x7A5123B654282D2][0x6ED4298C93DC5ED])
+	TextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	TextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
 	self:addElement(TextBox)
 	self.TextBox = TextBox
 	local right = CoD.CyclingList_Arrow.new(f1_arg0, f1_arg1, 1, 1, -68, 0, 0, 1, 0, 0)
@@ -52,8 +52,8 @@ CoD.CyclingList_ItemControl.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.PCHighlightBorder = PCHighlightBorder
 	local OptionCountBorder = LUI.UIImage.new(0, 0, 0, 214, 1, 1, -5, -1)
 	OptionCountBorder:setAlpha(0.05)
-	OptionCountBorder:setImage(RegisterImage(0x1B69BB6285C5BBB))
-	OptionCountBorder:setMaterial(LUI.UIImage.GetCachedMaterial(0x31E7B3C72564429))
+	OptionCountBorder:setImage(RegisterImage(@"uie_hud_core_loadout_panel1"))
+	OptionCountBorder:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_631E7B3C72564429"))
 	OptionCountBorder:setShaderVector(0, 0, 0, 0.55, 0.13)
 	OptionCountBorder:setShaderVector(2, 0, 1, 0, 1)
 	OptionCountBorder:setupNineSliceShader(25, 4)
@@ -67,8 +67,8 @@ CoD.CyclingList_ItemControl.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.OptionCountBorder = OptionCountBorder
 	local CurrentOptionBorder = LUI.UIImage.new(0, 0, 0, 214, 1, 1, -5, -1)
 	CurrentOptionBorder:setRGB(0.8, 0.8, 0.8)
-	CurrentOptionBorder:setImage(RegisterImage(0x1B69BB6285C5BBB))
-	CurrentOptionBorder:setMaterial(LUI.UIImage.GetCachedMaterial(0x31E7B3C72564429))
+	CurrentOptionBorder:setImage(RegisterImage(@"uie_hud_core_loadout_panel1"))
+	CurrentOptionBorder:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_631E7B3C72564429"))
 	CurrentOptionBorder:setShaderVector(0, 0, 0, 0.55, 0.13)
 	CurrentOptionBorder:setupNineSliceShader(25, 4)
 	CurrentOptionBorder:linkToElementModel(self, "optionCount", true, function(model)

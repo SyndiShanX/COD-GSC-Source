@@ -9,21 +9,21 @@ CoD.WaypointBomb_PlantArrowWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Arrow4 = LUI.UIImage.new(0, 0, 71, 135, 0, 0, -4, 28)
 	Arrow4:setAlpha(0.1)
-	Arrow4:setImage(RegisterImage(0x78C80EBCBB9BAC9))
+	Arrow4:setImage(RegisterImage(@"uie_ui_hud_core_capture_chevrons_03"))
 	self:addElement(Arrow4)
 	self.Arrow4 = Arrow4
 	local Arrow3 = LUI.UIImage.new(0, 0, 48, 80, 0, 0, -4, 28)
 	Arrow3:setAlpha(0.4)
-	Arrow3:setImage(RegisterImage(0xA949B4D208E9AAF))
+	Arrow3:setImage(RegisterImage(@"uie_ui_hud_core_capture_chevrons"))
 	self:addElement(Arrow3)
 	self.Arrow3 = Arrow3
 	local Arrow2 = LUI.UIImage.new(0, 0, 25, 57, 0, 0, -4, 28)
 	Arrow2:setAlpha(0.7)
-	Arrow2:setImage(RegisterImage(0x78C7FEBCBB9B916))
+	Arrow2:setImage(RegisterImage(@"uie_ui_hud_core_capture_chevrons_02"))
 	self:addElement(Arrow2)
 	self.Arrow2 = Arrow2
 	local Arrow = LUI.UIImage.new(0, 0, 0, 32, 0, 0, -4, 28)
-	Arrow:setImage(RegisterImage(0xA949B4D208E9AAF))
+	Arrow:setImage(RegisterImage(@"uie_ui_hud_core_capture_chevrons"))
 	self:addElement(Arrow)
 	self.Arrow = Arrow
 	if PostLoadFunc then

@@ -7,8 +7,8 @@ CoD.ZMInvStageImage.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	self.id = "ZMInvStageImage"
 	self.soundSet = "default"
 	local Stage1Image = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	Stage1Image:setImage(RegisterImage(0x604E717CD284868))
-	Stage1Image:setMaterial(LUI.UIImage.GetCachedMaterial(0x6E9593DF28749F2))
+	Stage1Image:setImage(RegisterImage(@"uie_t7_icon_inventory_key_inuse"))
+	Stage1Image:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_6E9593DF28749F2"))
 	Stage1Image:setShaderVector(0, 1, 1, 0, 0)
 	Stage1Image:setShaderVector(1, 0, 1, 0, 1)
 	self:addElement(Stage1Image)

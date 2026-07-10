@@ -15,8 +15,8 @@ CoD.DirectorFindGamePlaylistInfoVerticalLayoutMP.new = function(f1_arg0, f1_arg1
 	TitlePC:setRGB(ColorSet.T8__OCHRE.r, ColorSet.T8__OCHRE.g, ColorSet.T8__OCHRE.b)
 	TitlePC:setTTF("ttmussels_regular")
 	TitlePC:setLetterSpacing(2)
-	TitlePC:setAlignment(Engine[0x7F8853DC3581AA4](Enum[0x7A5123B654282D2][0x58C8A85F2048829]))
-	TitlePC:setAlignment(Engine[0x7F8853DC3581AA4](Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7]))
+	TitlePC:setAlignment(Engine[@"hash_67F8853DC3581AA4"](Enum[@"luialignment"][@"lui_alignment_left"]))
+	TitlePC:setAlignment(Engine[@"hash_67F8853DC3581AA4"](Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"]))
 	TitlePC:linkToElementModel(self, "name", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -30,8 +30,8 @@ CoD.DirectorFindGamePlaylistInfoVerticalLayoutMP.new = function(f1_arg0, f1_arg1
 	local description = LUI.UIText.new(0.5, 0.5, -250, 250, 0, 0, 70, 87)
 	description:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	description:setTTF("ttmussels_regular")
-	description:setAlignment(Engine[0x7F8853DC3581AA4](Enum[0x7A5123B654282D2][0x58C8A85F2048829]))
-	description:setAlignment(Engine[0x7F8853DC3581AA4](Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3]))
+	description:setAlignment(Engine[@"hash_67F8853DC3581AA4"](Enum[@"luialignment"][@"lui_alignment_left"]))
+	description:setAlignment(Engine[@"hash_67F8853DC3581AA4"](Enum[@"luialignment"][@"lui_alignment_top"]))
 	description:linkToElementModel(self, "playlistDesc", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -43,8 +43,8 @@ CoD.DirectorFindGamePlaylistInfoVerticalLayoutMP.new = function(f1_arg0, f1_arg1
 	local playerRange = LUI.UIText.new(0.5, 0.5, -250, 250, 0, 0, 93, 111)
 	playerRange:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	playerRange:setTTF("ttmussels_regular")
-	playerRange:setAlignment(Engine[0x7F8853DC3581AA4](Enum[0x7A5123B654282D2][0x58C8A85F2048829]))
-	playerRange:setAlignment(Engine[0x7F8853DC3581AA4](Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3]))
+	playerRange:setAlignment(Engine[@"hash_67F8853DC3581AA4"](Enum[@"luialignment"][@"lui_alignment_left"]))
+	playerRange:setAlignment(Engine[@"hash_67F8853DC3581AA4"](Enum[@"luialignment"][@"lui_alignment_top"]))
 	playerRange:linkToElementModel(self, "playersString", true, function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
@@ -78,7 +78,7 @@ CoD.DirectorFindGamePlaylistInfoVerticalLayoutMP.new = function(f1_arg0, f1_arg1
 	self:addElement(warningText3)
 	self.warningText3 = warningText3
 	local warningText = CoD.DirectorFindGameDetailModes.new(f1_arg0, f1_arg1, 0, 0, 12, 512, 0, 0, 208, 300)
-	warningText.description4.description4:setText(Engine[0xF9F1239CFD921FE](0x57456FA52303FCB))
+	warningText.description4.description4:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_357456FA52303FCB"))
 	warningText.warningText:setAlpha(0)
 	warningText:linkToElementModel(self, nil, false, function(model)
 		warningText:setModel(model, f1_arg1)

@@ -69,7 +69,7 @@ CoD.AARSpecialEventReward_ZM.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	self.VerticalListSpacer3 = VerticalListSpacer3
 	local InfoDotline = LUI.UIImage.new(0.5, 0.5, -190, 190, 0, 0, 461, 465)
 	InfoDotline:setRGB(0.61, 0.1, 0.11)
-	InfoDotline:setImage(RegisterImage(0x805FC715189E506))
+	InfoDotline:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_info_dotline"))
 	self:addElement(InfoDotline)
 	self.InfoDotline = InfoDotline
 	local VerticalListSpacer4 = CoD.VerticalListSpacer.new(f1_arg0, f1_arg1, 0, 0, 0, 412, 0, 0, 465, 481)
@@ -111,7 +111,7 @@ CoD.AARSpecialEventReward_ZM.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	self.VerticalListSpacer5 = VerticalListSpacer5
 	local InfoDotline2 = LUI.UIImage.new(0.5, 0.5, -190, 190, 0, 0, 591, 595)
 	InfoDotline2:setRGB(0.61, 0.1, 0.11)
-	InfoDotline2:setImage(RegisterImage(0x805FC715189E506))
+	InfoDotline2:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_info_dotline"))
 	self:addElement(InfoDotline2)
 	self.InfoDotline2 = InfoDotline2
 	local VerticalListSpacer6 = CoD.VerticalListSpacer.new(f1_arg0, f1_arg1, 0, 0, 0, 412, 0, 0, 595, 611)
@@ -139,7 +139,7 @@ CoD.AARSpecialEventReward_ZM.__clipsPerState = {
 			f13_arg0:__resetProperties()
 			f13_arg0:setupElementClipCounter(1)
 			local f13_local0 = function(f14_arg0)
-				f13_arg0.AARRewardHeaderZM:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f13_arg0.AARRewardHeaderZM:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f13_arg0.AARRewardHeaderZM:setAlpha(1)
 				f13_arg0.AARRewardHeaderZM:registerEventHandler("interrupted_keyframe", f13_arg0.clipInterrupted)
 				f13_arg0.AARRewardHeaderZM:registerEventHandler("transition_complete_keyframe", f13_arg0.clipFinished)

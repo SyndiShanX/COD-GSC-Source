@@ -12,8 +12,8 @@ CoD.ui_icon_callingcards_fairytales_flames.new = function(f1_arg0, f1_arg1, f1_a
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local fire4 = LUI.UIImage.new(0, 0, 217, 457, 0, 0, -78, 98)
-	fire4:setImage(RegisterImage(0x45BCA4F122A2352))
-	fire4:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	fire4:setImage(RegisterImage(@"uie_ui_icon_callingcards_fairytale_fire4"))
+	fire4:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(fire4)
 	self.fire4 = fire4
 	local fire = CoD.ui_icon_callingcards_fairytales_flame1.new(f1_arg0, f1_arg1, 0, 0, 15, 35, 0, 0, 5, 25)
@@ -28,20 +28,20 @@ CoD.ui_icon_callingcards_fairytales_flames.new = function(f1_arg0, f1_arg1, f1_a
 	self:addElement(fire3)
 	self.fire3 = fire3
 	local smoke = LUI.UIImage.new(0, 0, -239, 65, 0, 0, -107, 117)
-	smoke:setImage(RegisterImage(0xDF04F0A3053647))
-	smoke:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	smoke:setImage(RegisterImage(@"uie_ui_icon_callingcards_fairytale_smoke"))
+	smoke:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(smoke)
 	self.smoke = smoke
 	local embers = LUI.UIImage.new(0, 0, -351, 97, 0, 0, -161, 231)
-	embers:setImage(RegisterImage(0xF7DD7C09334D9B2))
-	embers:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	embers:setImage(RegisterImage(@"uie_ui_icon_callingcards_fairytale_embers"))
+	embers:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(embers)
 	self.embers = embers
 	local embers2 = LUI.UIImage.new(0, 0, -339, 109, 0, 0, -155.5, 236.5)
 	embers2:setAlpha(0.35)
 	embers2:setScale(0.8, 0.8)
-	embers2:setImage(RegisterImage(0xF7DD7C09334D9B2))
-	embers2:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	embers2:setImage(RegisterImage(@"uie_ui_icon_callingcards_fairytale_embers"))
+	embers2:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(embers2)
 	self.embers2 = embers2
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)
@@ -112,19 +112,19 @@ CoD.ui_icon_callingcards_fairytales_flames.__clipsPerState = {
 				local f6_local0 = function(f7_arg0)
 					local f7_local0 = function(f8_arg0)
 						local f8_local0 = function(f9_arg0)
-							f9_arg0:beginAnimation(750, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+							f9_arg0:beginAnimation(750, Enum[@"luitween"][@"luitween_ease_out"])
 							f9_arg0:setScale(1, 1)
 							f9_arg0:registerEventHandler("transition_complete_keyframe", f3_arg0.clipFinished)
 						end
-						f8_arg0:beginAnimation(750, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+						f8_arg0:beginAnimation(750, Enum[@"luitween"][@"luitween_ease_out"])
 						f8_arg0:setScale(0.65, 0.87)
 						f8_arg0:registerEventHandler("transition_complete_keyframe", f8_local0)
 					end
-					f7_arg0:beginAnimation(750, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f7_arg0:beginAnimation(750, Enum[@"luitween"][@"luitween_ease_out"])
 					f7_arg0:setScale(1, 1)
 					f7_arg0:registerEventHandler("transition_complete_keyframe", f7_local0)
 				end
-				f3_arg0.fire:beginAnimation(750, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f3_arg0.fire:beginAnimation(750, Enum[@"luitween"][@"luitween_ease_out"])
 				f3_arg0.fire:setScale(0.63, 0.9)
 				f3_arg0.fire:registerEventHandler("interrupted_keyframe", f3_arg0.clipInterrupted)
 				f3_arg0.fire:registerEventHandler("transition_complete_keyframe", f6_local0)

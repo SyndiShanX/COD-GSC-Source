@@ -21,8 +21,8 @@ CoD.ContextualMenu.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	self.Background = Background
 	local Noise = LUI.UIImage.new(0, 1, 0, 0, 0, 0.94, 0, 0)
 	Noise:setAlpha(0.6)
-	Noise:setImage(RegisterImage(0x34839E8065B1E53))
-	Noise:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	Noise:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	Noise:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	Noise:setShaderVector(0, 0, 0, 0, 0)
 	Noise:setupNineSliceShader(64, 64)
 	self:addElement(Noise)
@@ -38,7 +38,7 @@ CoD.ContextualMenu.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	ActionList:setWidgetType(CoD.ContextualMenuAction)
 	ActionList:setVerticalCount(7)
 	ActionList:setSpacing(0)
-	ActionList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	ActionList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	ActionList:setDataSource("ContextualMenuActionsList")
 	self:addElement(ActionList)
 	self.ActionList = ActionList
@@ -47,7 +47,7 @@ CoD.ContextualMenu.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	TitleNonLocalized2:setAlpha(0)
 	TitleNonLocalized2:setTTF("notosans_light")
 	TitleNonLocalized2:setLetterSpacing(1)
-	TitleNonLocalized2:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	TitleNonLocalized2:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	TitleNonLocalized2:subscribeToGlobalModel(f1_arg1, "ContextualMenu", "secondLineTitle", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -61,7 +61,7 @@ CoD.ContextualMenu.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	TitleNonLocalized:setAlpha(0)
 	TitleNonLocalized:setTTF("notosans_light")
 	TitleNonLocalized:setLetterSpacing(1)
-	TitleNonLocalized:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	TitleNonLocalized:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	TitleNonLocalized:subscribeToGlobalModel(f1_arg1, "ContextualMenu", "titleNonLocalized", function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -74,11 +74,11 @@ CoD.ContextualMenu.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	Title:setRGB(0.86, 0.74, 0.25)
 	Title:setTTF("notosans_light")
 	Title:setLetterSpacing(1)
-	Title:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	Title:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	Title:subscribeToGlobalModel(f1_arg1, "ContextualMenu", "title", function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
-			Title:setText(Engine[0xF9F1239CFD921FE](f4_local0))
+			Title:setText(Engine[@"hash_4F9F1239CFD921FE"](f4_local0))
 		end
 	end)
 	self:addElement(Title)
@@ -90,8 +90,8 @@ CoD.ContextualMenu.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	local Border = LUI.UIImage.new(0, 1, 0, 0, 0, 0.95, 0, 0)
 	Border:setRGB(0.42, 0.42, 0.42)
 	Border:setAlpha(0.3)
-	Border:setImage(RegisterImage(0xF1E3082B39E99BB))
-	Border:setMaterial(LUI.UIImage.GetCachedMaterial(0x44484DDFAF5C093))
+	Border:setImage(RegisterImage(@"uie_highlight_border_line"))
+	Border:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_normal"))
 	Border:setShaderVector(0, 0, 0, 0, 0)
 	Border:setupNineSliceShader(4, 4)
 	self:addElement(Border)
@@ -130,7 +130,7 @@ CoD.ContextualMenu.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	})
 	local f1_local11 = self
 	local f1_local12 = self.subscribeToModel
-	local f1_local13 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local13 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local12(f1_local11, f1_local13["ContextualMenu.secondLineTitle"], function(f8_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -142,7 +142,7 @@ CoD.ContextualMenu.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	end, false)
 	f1_local11 = self
 	f1_local12 = self.subscribeToModel
-	f1_local13 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local13 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local12(f1_local11, f1_local13["ContextualMenu.title"], function(f9_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -154,7 +154,7 @@ CoD.ContextualMenu.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	end, false)
 	f1_local11 = self
 	f1_local12 = self.subscribeToModel
-	f1_local13 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local13 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local12(f1_local11, f1_local13["ContextualMenu.titleNonLocalized"], function(f10_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

@@ -19,22 +19,22 @@ CoD.MainOverlay.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_a
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local BuildInfo = LUI.UIText.new(0.5, 0.5, 608, 955, 0, 0, 29, 50)
 	BuildInfo:setAlpha(0.6)
-	BuildInfo:setText(Engine[0xF9F1239CFD921FE](0x4D16564DEF246AA))
+	BuildInfo:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_74D16564DEF246AA"))
 	BuildInfo:setTTF("0arame_mono_stencil")
-	BuildInfo:setMaterial(LUI.UIImage.GetCachedMaterial(0x90D57B1E92D39D7))
+	BuildInfo:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_90D57B1E92D39D7"))
 	BuildInfo:setShaderVector(0, 1, 0, 0, 0)
 	BuildInfo:setShaderVector(1, 0, 0, 0, 0)
 	BuildInfo:setShaderVector(2, 0, 0, 0, 0.5)
 	BuildInfo:setLetterSpacing(0.9)
-	BuildInfo:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
-	BuildInfo:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	BuildInfo:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
+	BuildInfo:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(BuildInfo)
 	self.BuildInfo = BuildInfo
 	local BuildInfo2 = LUI.UIText.new(0.5, 0.5, 615, 955, 0, 0, 14, 28)
 	BuildInfo2:setRGB(0.35, 0.35, 0.35)
 	BuildInfo2:setTTF("0arame_mono_stencil")
-	BuildInfo2:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
-	BuildInfo2:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	BuildInfo2:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
+	BuildInfo2:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	BuildInfo2:linkToElementModel(self, "buildInfo", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -46,7 +46,7 @@ CoD.MainOverlay.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_a
 	local BuildInfo3 = LUI.UIText.new(0.5, 0.5, 755, 955, 0, 0, 56, 70)
 	BuildInfo3:setRGB(0.47, 0.47, 0.47)
 	BuildInfo3:setTTF("0arame_mono_stencil")
-	BuildInfo3:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
+	BuildInfo3:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
 	BuildInfo3:linkToElementModel(self, "hostName", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -58,7 +58,7 @@ CoD.MainOverlay.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_a
 	local BuildInfo4 = LUI.UIText.new(0.5, 0.5, 755, 955, 0, 0, 75, 89)
 	BuildInfo4:setRGB(0.47, 0.47, 0.47)
 	BuildInfo4:setTTF("0arame_mono_stencil")
-	BuildInfo4:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
+	BuildInfo4:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
 	BuildInfo4:linkToElementModel(self, "fullBuildNameContext", true, function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
@@ -97,7 +97,7 @@ CoD.MainOverlay.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_a
 	})
 	local f1_local7 = self
 	local f1_local8 = self.subscribeToModel
-	local f1_local9 = Engine[0x8DF2E5447F384B9]()
+	local f1_local9 = Engine[@"getglobalmodel"]()
 	f1_local8(f1_local7, f1_local9.showPreAlphaText, function(f8_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -109,7 +109,7 @@ CoD.MainOverlay.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_a
 	end, false)
 	f1_local7 = self
 	f1_local8 = self.subscribeToModel
-	f1_local9 = Engine[0x8DF2E5447F384B9]()
+	f1_local9 = Engine[@"getglobalmodel"]()
 	f1_local8(f1_local7, f1_local9.showBuildInfo, function(f9_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -155,7 +155,7 @@ CoD.MainOverlay.__resetProperties = function(f13_arg0)
 	f13_arg0.BuildInfo2:completeAnimation()
 	f13_arg0.BuildInfo:setTopBottom(0, 0, 29, 50)
 	f13_arg0.BuildInfo:setAlpha(0.6)
-	f13_arg0.BuildInfo:setText(Engine[0xF9F1239CFD921FE](0x4D16564DEF246AA))
+	f13_arg0.BuildInfo:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_74D16564DEF246AA"))
 	f13_arg0.BuildInfo3:setTopBottom(0, 0, 56, 70)
 	f13_arg0.BuildInfo4:setTopBottom(0, 0, 75, 89)
 	f13_arg0.BuildInfo2:setTopBottom(0, 0, 14, 28)
@@ -185,7 +185,7 @@ CoD.MainOverlay.__clipsPerState = {
 			f15_arg0:__resetProperties()
 			f15_arg0:setupElementClipCounter(3)
 			f15_arg0.BuildInfo:completeAnimation()
-			f15_arg0.BuildInfo:setText(Engine[0xF9F1239CFD921FE](0x4D16564DEF246AA))
+			f15_arg0.BuildInfo:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_74D16564DEF246AA"))
 			f15_arg0.clipFinished(f15_arg0.BuildInfo)
 			f15_arg0.BuildInfo3:completeAnimation()
 			f15_arg0.BuildInfo3:setTopBottom(0, 0, 77, 91)
@@ -201,7 +201,7 @@ CoD.MainOverlay.__clipsPerState = {
 			f16_arg0:setupElementClipCounter(4)
 			f16_arg0.BuildInfo:completeAnimation()
 			f16_arg0.BuildInfo:setTopBottom(0, 0, 40, 61)
-			f16_arg0.BuildInfo:setText(Engine[0xF9F1239CFD921FE](0x4D16564DEF246AA))
+			f16_arg0.BuildInfo:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_74D16564DEF246AA"))
 			f16_arg0.clipFinished(f16_arg0.BuildInfo)
 			f16_arg0.BuildInfo2:completeAnimation()
 			f16_arg0.BuildInfo2:setTopBottom(0, 0, 4, 18)
@@ -220,7 +220,7 @@ CoD.MainOverlay.__clipsPerState = {
 			f17_arg0:setupElementClipCounter(3)
 			f17_arg0.BuildInfo:completeAnimation()
 			f17_arg0.BuildInfo:setAlpha(0)
-			f17_arg0.BuildInfo:setText(Engine[0xF9F1239CFD921FE](0x4D16564DEF246AA))
+			f17_arg0.BuildInfo:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_74D16564DEF246AA"))
 			f17_arg0.clipFinished(f17_arg0.BuildInfo)
 			f17_arg0.BuildInfo3:completeAnimation()
 			f17_arg0.BuildInfo3:setTopBottom(0, 0, 77, 91)

@@ -16,7 +16,7 @@ CoD.ScoreboardTabs.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	Tabs:setTopBottom(0, 0, 4, 38)
 	Tabs:setWidgetType(CoD.TabbedScoreboardTab)
 	Tabs:setHorizontalCount(2)
-	Tabs:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	Tabs:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	Tabs:setDataSource("TabbedScoreboardTabs")
 	Tabs:registerEventHandler("mouse_left_click", function(element, event)
 		local f2_local0 = nil
@@ -43,7 +43,7 @@ CoD.ScoreboardTabs.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	end)
 	local f1_local3 = RB
 	local LB = RB.subscribeToModel
-	local f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
 	LB(f1_local3, f1_local5.LastInput, function(f5_arg0)
 		f1_arg0:updateElementState(RB, {
 			name = "model_validation",
@@ -53,7 +53,7 @@ CoD.ScoreboardTabs.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 			modelName = "LastInput",
 		})
 	end, false)
-	RB.GamepadPrompt:setText(Engine[0xF9F1239CFD921FE](0xBFED5292621DA9A))
+	RB.GamepadPrompt:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_5BFED5292621DA9A"))
 	RB.KeyPrompt.keybind:setText(CoD.BaseUtility.AlreadyLocalized("E"))
 	self:addElement(RB)
 	self.RB = RB
@@ -72,7 +72,7 @@ CoD.ScoreboardTabs.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	end)
 	f1_local5 = LB
 	f1_local3 = LB.subscribeToModel
-	local f1_local6 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local6 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local3(f1_local5, f1_local6.LastInput, function(f8_arg0)
 		f1_arg0:updateElementState(LB, {
 			name = "model_validation",
@@ -82,7 +82,7 @@ CoD.ScoreboardTabs.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 			modelName = "LastInput",
 		})
 	end, false)
-	LB.GamepadPrompt:setText(Engine[0xF9F1239CFD921FE](0xBDCD5292604F434))
+	LB.GamepadPrompt:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_5BDCD5292604F434"))
 	LB.KeyPrompt.keybind:setText(CoD.BaseUtility.AlreadyLocalized("Q"))
 	self:addElement(LB)
 	self.LB = LB
@@ -106,7 +106,7 @@ CoD.ScoreboardTabs.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	end)
 	f1_local5 = self
 	f1_local3 = self.subscribeToModel
-	f1_local6 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local6 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local3(f1_local5, f1_local6.LastInput, function(f12_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -118,7 +118,7 @@ CoD.ScoreboardTabs.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	end, false)
 	f1_local5 = self
 	f1_local3 = self.subscribeToModel
-	f1_local6 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local6 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local3(f1_local5, f1_local6["factions.isCoDCaster"], function(f13_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

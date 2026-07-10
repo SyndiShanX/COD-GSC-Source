@@ -16,16 +16,16 @@ CoD.CallingCardsSet_BlackMarketWidgetInternal.new = function(f1_arg0, f1_arg1, f
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local NoiseTiledBacking = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	NoiseTiledBacking:setAlpha(0.8)
-	NoiseTiledBacking:setImage(RegisterImage(0x34839E8065B1E53))
-	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	NoiseTiledBacking:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	NoiseTiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	NoiseTiledBacking:setupNineSliceShader(196, 88)
 	self:addElement(NoiseTiledBacking)
 	self.NoiseTiledBacking = NoiseTiledBacking
 	local FocusGlow = LUI.UIImage.new(-0.09, 1.1, -110, 110, 0.5, 0.5, -99, 99)
 	FocusGlow:setAlpha(0)
-	FocusGlow:setImage(RegisterImage(0x8E79E4E42B6714C))
-	FocusGlow:setMaterial(LUI.UIImage.GetCachedMaterial(0xDAB59B2CAE01851))
+	FocusGlow:setImage(RegisterImage(@"uie_ui_menu_common_focus_glow_large"))
+	FocusGlow:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_6DAB59B2CAE01851"))
 	FocusGlow:setShaderVector(0, 0, 0, 0.25, 0.25)
 	FocusGlow:setShaderVector(1, 1.2, 0, 0, 0)
 	FocusGlow:setupNineSliceShader(300, 300)
@@ -33,8 +33,8 @@ CoD.CallingCardsSet_BlackMarketWidgetInternal.new = function(f1_arg0, f1_arg1, f
 	self.FocusGlow = FocusGlow
 	local FrameBorder = LUI.UIImage.new(0, 1, -1, 1, 0, 1, -1, 1)
 	FrameBorder:setAlpha(0.15)
-	FrameBorder:setImage(RegisterImage(0x185E11D74ECA3D7))
-	FrameBorder:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	FrameBorder:setImage(RegisterImage(@"uie_ui_menu_store_common_frame"))
+	FrameBorder:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	FrameBorder:setShaderVector(0, 0, 0, 0, 0)
 	FrameBorder:setupNineSliceShader(12, 12)
 	self:addElement(FrameBorder)
@@ -42,8 +42,8 @@ CoD.CallingCardsSet_BlackMarketWidgetInternal.new = function(f1_arg0, f1_arg1, f
 	local FocusBorder = LUI.UIImage.new(0, 1, -4, 4, 0, 1, -4, 4)
 	FocusBorder:setRGB(0.96, 0.94, 0.78)
 	FocusBorder:setAlpha(0)
-	FocusBorder:setImage(RegisterImage(0xCB07CCC28498CB2))
-	FocusBorder:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	FocusBorder:setImage(RegisterImage(@"uie_ui_menu_store_focus_frame"))
+	FocusBorder:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	FocusBorder:setShaderVector(0, 0, 0, 0, 0)
 	FocusBorder:setupNineSliceShader(10, 10)
 	self:addElement(FocusBorder)
@@ -75,8 +75,8 @@ CoD.CallingCardsSet_BlackMarketWidgetInternal.new = function(f1_arg0, f1_arg1, f
 	Label:setAlpha(0.85)
 	Label:setTTF("ttmussels_regular")
 	Label:setLetterSpacing(2)
-	Label:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	Label:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Label:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	Label:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	Label:linkToElementModel(self, "displayName", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -99,7 +99,7 @@ CoD.CallingCardsSet_BlackMarketWidgetInternal.new = function(f1_arg0, f1_arg1, f
 	local EquippedMarkerTick = LUI.UIImage.new(1, 1, -35, 9, 0, 0, -9, 35)
 	EquippedMarkerTick:setAlpha(0)
 	EquippedMarkerTick:setZoom(4)
-	EquippedMarkerTick:setImage(RegisterImage(0x9A8B26C9B001758))
+	EquippedMarkerTick:setImage(RegisterImage(@"uie_ui_menu_cac_equipped_marker_tick"))
 	self:addElement(EquippedMarkerTick)
 	self.EquippedMarkerTick = EquippedMarkerTick
 	self:mergeStateConditions({
@@ -157,7 +157,7 @@ CoD.CallingCardsSet_BlackMarketWidgetInternal.new = function(f1_arg0, f1_arg1, f
 	end)
 	local f1_local15 = self
 	local f1_local16 = self.subscribeToModel
-	local f1_local17 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local17 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local16(f1_local15, f1_local17["hudItems.evalEquippedCard"], function(f11_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

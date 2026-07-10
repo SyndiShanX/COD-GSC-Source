@@ -1,27 +1,27 @@
 CoD.MOTDUtility = {}
 CoD.MOTDUtility.MOTD_GetMOTDChannel = function()
-	if Engine[0xCB675CA7856DA25]() and Dvar[0x67981552D919873]:exists() and Dvar[0x67981552D919873]:get() then
+	if Engine[@"hash_5CB675CA7856DA25"]() and Dvar[@"hash_167981552D919873"]:exists() and Dvar[@"hash_167981552D919873"]:get() then
 		return "motd_trial"
 	else
 		return "motd"
 	end
 end
 CoD.MOTDUtility.MOTD_IsLocationEnabled = function(f2_arg0)
-	return Engine[0xCF9DD4167E9CE89](f2_arg0)
+	return Engine[@"hash_2CF9DD4167E9CE89"](f2_arg0)
 end
 CoD.MOTDUtility.MOTD_AlreadyOpened = function()
-	return Engine[0x40E824FE270E174](Engine[0x8DF2E5447F384B9](), "lobbyRoot.shownMOTD") ~= nil
+	return Engine[@"getmodel"](Engine[@"getglobalmodel"](), "lobbyRoot.shownMOTD") ~= nil
 end
 CoD.MOTDUtility.MOTD_ShouldShowMOTD = function(f4_arg0)
-	if not Dvar[0x4FF2012C26D8FB]:get() then
+	if not Dvar[@"motd_enabled"]:get() then
 		return false
-	elseif Dvar[0x61B37B5CD0C5CC1]:get() then
+	elseif Dvar[@"hash_261B37B5CD0C5CC1"]:get() then
 		return true
 	end
-	local f4_local0 = Engine[0xD30724405ED0D69](CoD.MOTDUtility.MOTD_GetMOTDChannel())
+	local f4_local0 = Engine[@"hash_1D30724405ED0D69"](CoD.MOTDUtility.MOTD_GetMOTDChannel())
 	for f4_local1 = 1, f4_local0, 1 do
 		local f4_local4 = f4_local1 - 1
-		local f4_local5 = Engine[0x5451F941503DA5A](f4_arg0, CoD.MOTDUtility.MOTD_GetMOTDChannel(), f4_local4)
+		local f4_local5 = Engine[@"hash_15451F941503DA5A"](f4_arg0, CoD.MOTDUtility.MOTD_GetMOTDChannel(), f4_local4)
 		if f4_local5 ~= nil and f4_local5.messageID > 0 and CoD.MOTDUtility.MOTD_IsLocationEnabled(f4_local5.locationID) and not CoD.MOTDUtility.ShouldSkipMessage(f4_local5, f4_local4, f4_arg0) and (CoDShared.IsERegEnabled(f4_arg0) or f4_local5.action == nil or f4_local5.action ~= "registration") then
 			return true
 		end
@@ -47,7 +47,7 @@ CoD.MOTDUtility.MOTD_GetFocusedBannerOffset = function(f7_arg0)
 end
 CoD.MOTDUtility.MOTD_GetFirstMOTDTab = function(f8_arg0)
 	for f8_local3, f8_local4 in ipairs(CoD.MOTDUtility.MOTD_TABS) do
-		local f8_local5 = Engine[0x5451F941503DA5A](f8_arg0, f8_local4.location)
+		local f8_local5 = Engine[@"hash_15451F941503DA5A"](f8_arg0, f8_local4.location)
 		if f8_local5 ~= nil then
 			return f8_local5
 		end
@@ -58,9 +58,9 @@ CoD.MOTDUtility.MOTD_UnhandledAction = function(f9_arg0, f9_arg1, f9_arg2, f9_ar
 	local f9_local0 = -1
 	local f9_local1 = CoD.MOTDUtility.MOTD_GetModel(f9_arg2, "offset")
 	if f9_local1 then
-		f9_local0 = Engine[0x614D394F6F9A18D](f9_local1)
+		f9_local0 = Engine[@"getmodelvalue"](f9_local1)
 	end
-	Engine[0x458FE92FEB39D4E](Enum[0x7A63DCD561B0FA8][0x1725ABF82092BD8], "MOTD: Unhandled action: " .. f9_arg3 .. " at offset: " .. tostring(f9_local0) .. ".\n")
+	Engine[@"printerror"](Enum[@"consolelabel_e"][@"con_label_default"], "MOTD: Unhandled action: " .. f9_arg3 .. " at offset: " .. tostring(f9_local0) .. ".\n")
 	CoD.MOTDUtility.Close(f9_arg0, f9_arg1, true)
 end
 CoD.MOTDUtility.MOTD_HandlePopAction = function(f10_arg0, f10_arg1, f10_arg2, f10_arg3, f10_arg4, f10_arg5)
@@ -83,13 +83,13 @@ CoD.MOTDUtility.MOTD_HandlePopAction = function(f10_arg0, f10_arg1, f10_arg2, f1
 	elseif f10_arg5 == "bj_reserves" then
 		OpenQuarterMaster(f10_arg0, f10_arg2, f10_arg1, "reserves", f10_arg3)
 	elseif f10_arg5 == "mp_contracts" then
-		CoD.MOTDUtility.FeatureCard_OpenContracts(f10_arg0, f10_arg2, f10_arg1, Enum[0x1B899F51A938E95][0xF1D72D16310405B], f10_arg3)
+		CoD.MOTDUtility.FeatureCard_OpenContracts(f10_arg0, f10_arg2, f10_arg1, Enum[@"hash_41B899F51A938E95"][@"hash_6F1D72D16310405B"], f10_arg3)
 	elseif f10_arg5 == "wl_contracts" then
-		CoD.MOTDUtility.FeatureCard_OpenContracts(f10_arg0, f10_arg2, f10_arg1, Enum[0x1B899F51A938E95][0xEFB62D162F33EC5], f10_arg3)
+		CoD.MOTDUtility.FeatureCard_OpenContracts(f10_arg0, f10_arg2, f10_arg1, Enum[@"hash_41B899F51A938E95"][@"hash_6EFB62D162F33EC5"], f10_arg3)
 	elseif f10_arg5 == "zm_contracts" then
-		CoD.MOTDUtility.FeatureCard_OpenContracts(f10_arg0, f10_arg2, f10_arg1, Enum[0x1B899F51A938E95][0xEEA5DD162E4C313], f10_arg3)
+		CoD.MOTDUtility.FeatureCard_OpenContracts(f10_arg0, f10_arg2, f10_arg1, Enum[@"hash_41B899F51A938E95"][@"hash_6EEA5DD162E4C313"], f10_arg3)
 	elseif f10_arg5 == "wz_contracts" then
-		CoD.MOTDUtility.FeatureCard_OpenContracts(f10_arg0, f10_arg2, f10_arg1, Enum[0x1B899F51A938E95][0xEFB6CD162F34FC3], f10_arg3)
+		CoD.MOTDUtility.FeatureCard_OpenContracts(f10_arg0, f10_arg2, f10_arg1, Enum[@"hash_41B899F51A938E95"][@"hash_6EFB6CD162F34FC3"], f10_arg3)
 	elseif f10_arg5 == "crate_purchase" then
 		CoD.BlackMarketUtility.OpenBlackjackReservesAndItemPurchaseOverlay(f10_arg0, f10_arg2, f10_arg1, "crate", f10_arg3)
 	elseif f10_arg5 == "challenge_status" then
@@ -102,17 +102,17 @@ CoD.MOTDUtility.MOTD_HandlePopAction = function(f10_arg0, f10_arg1, f10_arg2, f1
 end
 CoD.MOTDUtility.Close = function(f11_arg0, f11_arg1, f11_arg2)
 	if CoD.isPC then
-		local f11_local0 = Engine[0x8DF2E5447F384B9]()
+		local f11_local0 = Engine[@"getglobalmodel"]()
 		f11_local0 = f11_local0["lobbyRoot.postPopups"]
 		if f11_local0 then
 			f11_local0:set(CoD.BitUtility.ClearBit(f11_local0:get(), LuaEnum.POST_POPUPS.MOTD))
 		end
 	end
-	local f11_local0 = Engine[0x8DF2E5447F384B9]()
+	local f11_local0 = Engine[@"getglobalmodel"]()
 	f11_local0 = f11_local0:create("lobbyRoot.motdOpened", true)
 	f11_local0:set(true)
-	if CoD.perController[f11_arg1].isMOTDInLobbyVM and Engine[0x9882F293C327557]() == LobbyData.GetLobbyMenuIDByName(LuaEnum.UI.MAIN) then
-		Engine[0x87AE7E64BA5AD61]("OnGoForward", {
+	if CoD.perController[f11_arg1].isMOTDInLobbyVM and Engine[@"getlobbyuiscreen"]() == LobbyData.GetLobbyMenuIDByName(LuaEnum.UI.MAIN) then
+		Engine[@"lobbyevent"]("OnGoForward", {
 			controller = f11_arg1,
 			navToMenu = "director",
 			showMOTD = false,
@@ -130,7 +130,7 @@ CoD.MOTDUtility.AllActionsDisabled = function()
 end
 CoD.MOTDUtility.MOTD_HasAction = function(f13_arg0)
 	local f13_local0
-	if Engine[0x614D394F6F9A18D](f13_arg0) ~= "" then
+	if Engine[@"getmodelvalue"](f13_arg0) ~= "" then
 		f13_local0 = not CoD.MOTDUtility.AllActionsDisabled()
 	else
 		f13_local0 = false
@@ -138,14 +138,14 @@ CoD.MOTDUtility.MOTD_HasAction = function(f13_arg0)
 	return f13_local0
 end
 CoD.MOTDUtility.MOTD_ShouldReportMessage = function()
-	return not Dvar[0x61B37B5CD0C5CC1]:get()
+	return not Dvar[@"hash_261B37B5CD0C5CC1"]:get()
 end
 CoD.MOTDUtility.MOTD_AttemptToReportMessage = function(f15_arg0, f15_arg1)
 	if CoD.MOTDUtility.MOTD_ShouldReportMessage() then
 		local f15_local0 = CoD.MOTDUtility.MOTD_GetModel(f15_arg1, "offset")
 		local f15_local1 = CoD.MOTDUtility.MOTD_GetMOTDChannel()
 		if f15_local0 then
-			Engine[0x7C75E608EA39B5C](f15_arg0, "marketing_markmessageasviewed " .. f15_local1 .. " " .. f15_local0:get())
+			Engine[@"exec"](f15_arg0, "marketing_markmessageasviewed " .. f15_local1 .. " " .. f15_local0:get())
 		else
 			print("Error: MOTDBannerList Datasource is missing model <offset> for current banner.")
 		end
@@ -153,7 +153,7 @@ CoD.MOTDUtility.MOTD_AttemptToReportMessage = function(f15_arg0, f15_arg1)
 end
 CoD.MOTDUtility.MOTD_ReportMessageasViewed = function(f16_arg0, f16_arg1)
 	if CoD.MOTDUtility.MOTD_ShouldReportMessage() then
-		Engine[0x7C75E608EA39B5C](f16_arg0, "marketing_markmessageasviewed " .. CoD.MOTDUtility.MOTD_GetMOTDChannel() .. " " .. f16_arg1)
+		Engine[@"exec"](f16_arg0, "marketing_markmessageasviewed " .. CoD.MOTDUtility.MOTD_GetMOTDChannel() .. " " .. f16_arg1)
 	end
 end
 CoD.MOTDUtility.ShouldSkipMessage = function(f17_arg0, f17_arg1, f17_arg2)
@@ -169,10 +169,10 @@ CoD.MOTDUtility.ShouldSkipMessage = function(f17_arg0, f17_arg1, f17_arg2)
 	end
 	local f17_local2 = CoD.MOTDUtility.MOTD_GetMOTDChannel()
 	if f17_local1 and CoD.MOTDUtility.MOTD_ShouldReportMessage() then
-		Engine[0x7C75E608EA39B5C](f17_arg2, "marketing_markmessageasviewed " .. f17_local2 .. " " .. f17_arg1)
+		Engine[@"exec"](f17_arg2, "marketing_markmessageasviewed " .. f17_local2 .. " " .. f17_arg1)
 		return true
 	elseif (f17_arg0.action == "registration" or f17_arg0.popupAction == "registration") and not CoD.CoDAccountUtility.IsAccountFeatureEnabled(f17_arg2) then
-		Engine[0x7C75E608EA39B5C](f17_arg2, "marketing_markmessageasviewed " .. f17_local2 .. " " .. f17_arg1)
+		Engine[@"exec"](f17_arg2, "marketing_markmessageasviewed " .. f17_local2 .. " " .. f17_arg1)
 		return true
 	else
 		return false
@@ -196,14 +196,14 @@ CoD.MOTDUtility.MOTD_GetActiveTabModel = function(f19_arg0)
 	return nil
 end
 CoD.MOTDUtility.CreateMOTDFeatureCard = function(f20_arg0, f20_arg1)
-	if Dvar[0x61B37B5CD0C5CC1]:exists() and Dvar[0x61B37B5CD0C5CC1]:get() then
+	if Dvar[@"hash_261B37B5CD0C5CC1"]:exists() and Dvar[@"hash_261B37B5CD0C5CC1"]:get() then
 		table.insert(f20_arg0, {
 			models = {
 				locked = false,
-				name = Engine[0xF9F1239CFD921FE](0x2DEBC821FE9A08B),
-				iconBackground = 0xCDCA8E930C437EF,
-				iconBackgroundFocus = 0xCDCA8E930C437EF,
-				descriptionText = 0x3EEC1A0B3A25B5F,
+				name = Engine[@"hash_4F9F1239CFD921FE"](@"menu/motd"),
+				iconBackground = @"ui_icon_crm_featured_thanks",
+				iconBackgroundFocus = @"ui_icon_crm_featured_thanks",
+				descriptionText = @"hash_33EEC1A0B3A25B5F",
 				action = CoD.MOTDUtility.MOTD_OpenMOTDPopup,
 				actionString = "motd",
 				param = false,
@@ -233,16 +233,16 @@ CoD.MOTDUtility.MOTD_ShouldLogInteraction = function(f23_arg0)
 		if CoD.MOTDUtility.ReportCount < CoD.MOTDUtility.MaxReportCount then
 			CoD.MOTDUtility.ReportCount = CoD.MOTDUtility.ReportCount + 1
 			return true
-		elseif CoD.MOTDUtility.NextReportTime > Engine[0x9D33D652B9B0F3B]() then
+		elseif CoD.MOTDUtility.NextReportTime > Engine[@"milliseconds"]() then
 			return false
 		else
-			CoD.MOTDUtility.NextReportTime = Engine[0x9D33D652B9B0F3B]() + CoD.MOTDUtility.ReportInterval * 1000
+			CoD.MOTDUtility.NextReportTime = Engine[@"milliseconds"]() + CoD.MOTDUtility.ReportInterval * 1000
 			return true
 		end
 	end
 end
 CoD.MOTDUtility.MOTD_DLogInteraction = function(f24_arg0, f24_arg1, f24_arg2, f24_arg3)
-	if not Dvar[0x61B37B5CD0C5CC1]:exists() or not Dvar[0x61B37B5CD0C5CC1]:get() then
+	if not Dvar[@"hash_261B37B5CD0C5CC1"]:exists() or not Dvar[@"hash_261B37B5CD0C5CC1"]:get() then
 		local f24_local0, f24_local1 = nil
 		if f24_arg3 == "FW" then
 			f24_local0 = CoD.MOTDUtility.MOTD_GetModel(f24_arg1, "actionString")
@@ -261,18 +261,18 @@ CoD.MOTDUtility.MOTD_DLogInteraction = function(f24_arg0, f24_arg1, f24_arg2, f2
 					f24_local3 = f24_local1:get()
 					if not f24_local3 then
 					else
-						local f24_local4 = Engine[0x6D9D7474CDD485B]()
+						local f24_local4 = Engine[@"hash_36D9D7474CDD485B"]()
 						local f24_local5 = 0
 						if f24_arg2 then
 							f24_local5 = CoD.MetricsUtility.GetButtonPressed(f24_arg0)
 						end
 						if f24_local3 and f24_local4 and (f24_arg2 or CoD.MOTDUtility.MOTD_ShouldLogInteraction(f24_local3)) then
-							Engine[0xDE279ECDDDD966](f24_arg0, 0x6647F4E58A2A212, {
-								[0x72F1795FF3E15F4] = f24_local2,
-								[0x3C83260DD96C90C] = f24_arg3,
-								[0x3A1A70556201A2D] = f24_local3,
-								[0x31A5D51248A1D2C] = f24_local5,
-								[0x2FD35287F0A935B] = f24_local4,
+							Engine[0xDE279ECDDDD966](f24_arg0, @"hash_46647F4E58A2A212", {
+								[@"interaction_type"] = f24_local2,
+								[@"hash_43C83260DD96C90C"] = f24_arg3,
+								[@"hash_13A1A70556201A2D"] = f24_local3,
+								[@"hash_31A5D51248A1D2C"] = f24_local5,
+								[@"language"] = f24_local4,
 							})
 						end
 					end
@@ -378,37 +378,37 @@ DataSources.PCMOTDOptions = DataSourceHelpers.ListSetup("PCMOTDOptions", functio
 	if f25_local2(f25_local1) then
 		if not CoD.MOTDUtility.AllActionsDisabled() then
 			if not f25_local5() then
-				table.insert(f25_local0, CoD.MOTDUtility.packageMOTDButtonData(0x191CDDA584B4408, f25_local3, f25_local5))
+				table.insert(f25_local0, CoD.MOTDUtility.packageMOTDButtonData(@"hash_4191CDDA584B4408", f25_local3, f25_local5))
 			end
 			if not f25_local6() then
-				table.insert(f25_local0, CoD.MOTDUtility.packageMOTDButtonData(0x977A022B8323362, f25_local3, f25_local6))
+				table.insert(f25_local0, CoD.MOTDUtility.packageMOTDButtonData(@"hash_2977A022B8323362", f25_local3, f25_local6))
 			end
 			if not f25_local7() then
-				table.insert(f25_local0, CoD.MOTDUtility.packageMOTDButtonData(0x29C903C6DF90D6F, f25_local3, f25_local7))
+				table.insert(f25_local0, CoD.MOTDUtility.packageMOTDButtonData(@"menu/black_market", f25_local3, f25_local7))
 			end
 			if not f25_local8() then
-				table.insert(f25_local0, CoD.MOTDUtility.packageMOTDButtonData(0x90379DA9EEC8DB9, f25_local3, f25_local8))
+				table.insert(f25_local0, CoD.MOTDUtility.packageMOTDButtonData(@"hash_790379DA9EEC8DB9", f25_local3, f25_local8))
 			end
 			if not f25_local9() then
-				table.insert(f25_local0, CoD.MOTDUtility.packageMOTDButtonData(0x655207CC013B5BD, f25_local3, f25_local9))
+				table.insert(f25_local0, CoD.MOTDUtility.packageMOTDButtonData(@"hash_7655207CC013B5BD", f25_local3, f25_local9))
 			end
 			if not f25_local10() then
-				table.insert(f25_local0, CoD.MOTDUtility.packageMOTDButtonData(0xE07AF27BEA3B907, f25_local3, f25_local10))
+				table.insert(f25_local0, CoD.MOTDUtility.packageMOTDButtonData(@"menu/motd_contracts", f25_local3, f25_local10))
 			end
 			if not f25_local11() then
-				table.insert(f25_local0, CoD.MOTDUtility.packageMOTDButtonData(0xAF6650B811A502B, f25_local3, f25_local11))
+				table.insert(f25_local0, CoD.MOTDUtility.packageMOTDButtonData(@"hash_3AF6650B811A502B", f25_local3, f25_local11))
 			end
 			if not f25_local12() then
-				table.insert(f25_local0, CoD.MOTDUtility.packageMOTDButtonData(0xFF19F036B1F8248, f25_local3, f25_local12))
+				table.insert(f25_local0, CoD.MOTDUtility.packageMOTDButtonData(@"menu/motd_inventory", f25_local3, f25_local12))
 			end
 			if not f25_local13() then
-				table.insert(f25_local0, CoD.MOTDUtility.packageMOTDButtonData(0xE1FEFD9287CA008, f25_local3, f25_local13))
+				table.insert(f25_local0, CoD.MOTDUtility.packageMOTDButtonData(@"hash_3E1FEFD9287CA008", f25_local3, f25_local13))
 			end
 			if not f25_local14() then
-				table.insert(f25_local0, CoD.MOTDUtility.packageMOTDButtonData(0xDDDA371285672BD, f25_local3, f25_local14))
+				table.insert(f25_local0, CoD.MOTDUtility.packageMOTDButtonData(@"menu/play", f25_local3, f25_local14))
 			end
 		end
-		table.insert(f25_local0, CoD.MOTDUtility.packageMOTDButtonData(0x6C253CF816B40B5, f25_local4, AlwaysFalse))
+		table.insert(f25_local0, CoD.MOTDUtility.packageMOTDButtonData(@"menu/close", f25_local4, AlwaysFalse))
 	end
 	return f25_local0
 end, true)
@@ -424,9 +424,9 @@ CoD.MOTDUtility.packageMOTDButtonData = function(f39_arg0, f39_arg1, f39_arg2)
 	}
 end
 CoD.MOTDUtility.HasMessageAtLocation = function(f40_arg0, f40_arg1)
-	local f40_local0 = Engine[0xD30724405ED0D69](f40_arg1)
+	local f40_local0 = Engine[@"hash_1D30724405ED0D69"](f40_arg1)
 	for f40_local1 = 1, f40_local0, 1 do
-		local f40_local4 = Engine[0xE205100C694EF74](f40_arg0, f40_arg1, f40_local1 - 1)
+		local f40_local4 = Engine[@"getmarketingmessage"](f40_arg0, f40_arg1, f40_local1 - 1)
 		if f40_local4 and f40_local4.messageID > 0 then
 			return true
 		end
@@ -464,7 +464,7 @@ CoD.MOTDUtility.MOTD_AcceptAction = function(f46_arg0, f46_arg1, f46_arg2, f46_a
 	CoD.MOTDUtility.MOTD_DLogInteraction(f46_arg1, f46_local0, true, "MOTD")
 	local f46_local1 = CoD.MOTDUtility.MOTD_GetModel(f46_local0, "action")
 	if f46_local1 ~= nil and CoD.MOTDUtility.MOTD_HasAction(f46_local1) then
-		CoD.MOTDUtility.MOTD_HandlePopAction(f46_arg0, f46_arg1, f46_arg3, f46_arg2, f46_local0, Engine[0x614D394F6F9A18D](f46_local1))
+		CoD.MOTDUtility.MOTD_HandlePopAction(f46_arg0, f46_arg1, f46_arg3, f46_arg2, f46_local0, Engine[@"getmodelvalue"](f46_local1))
 	else
 		CoD.MOTDUtility.Close(f46_arg0, f46_arg1, true)
 	end
@@ -475,7 +475,7 @@ CoD.MOTDUtility.MOTD_Close = function(f47_arg0, f47_arg1, f47_arg2, f47_arg3)
 end
 CoD.MOTDUtility.MOTD_IsBannerPNGImage = function(f48_arg0, f48_arg1, f48_arg2)
 	local f48_local0 = f48_arg2:getModel(f48_arg1, "image")
-	if f48_local0 and string.match(Engine[0x614D394F6F9A18D](f48_local0), ".png") then
+	if f48_local0 and string.match(Engine[@"getmodelvalue"](f48_local0), ".png") then
 		return true
 	else
 		return false
@@ -507,7 +507,7 @@ end
 DataSources.MOTDBannerList = ListHelper_SetupDataSource("MOTDBannerList", function(f51_arg0, f51_arg1)
 	local f51_local0 = {}
 	local f51_local1 = 1
-	if Dvar[0x61B37B5CD0C5CC1]:get() then
+	if Dvar[@"hash_261B37B5CD0C5CC1"]:get() then
 		local f51_local2 = function(f52_arg0, f52_arg1, f52_arg2, f52_arg3, f52_arg4, f52_arg5, f52_arg6, f52_arg7, f52_arg8, f52_arg9, f52_arg10)
 			local f52_local0 = {
 				models = {},
@@ -519,9 +519,9 @@ DataSources.MOTDBannerList = ListHelper_SetupDataSource("MOTDBannerList", functi
 			f52_local0.models.action_title = ""
 			f52_local0.models.popup_image = f52_arg3
 			f52_local0.models.messageViewReported = false
-			f52_local0.models.locationID = Engine[0x8506F73B393062F](1)
+			f52_local0.models.locationID = Engine[@"numbertouint64"](1)
 			f52_local0.models.image = f52_arg2
-			f52_local0.models.messageID = Engine[0x8506F73B393062F](f52_arg9)
+			f52_local0.models.messageID = Engine[@"numbertouint64"](f52_arg9)
 			f52_local0.models.action = f52_arg6
 			f52_local0.models.actionParam = f52_arg7
 			f52_local0.models.content_short = f52_arg5
@@ -550,10 +550,10 @@ DataSources.MOTDBannerList = ListHelper_SetupDataSource("MOTDBannerList", functi
 		table.insert(f51_local0, f51_local2("This is testing content layout D. You should not see this.", "Content Layout D Test", "t7_store_featured_message", "t7_store_featured_message", "CoD.MOTD_TopBottomText_HeavyImage", "Testing content layout D. You should see this.", nil, nil, nil, 4, 4))
 	else
 		local f51_local2 = false
-		local f51_local3 = Engine[0xD30724405ED0D69](CoD.MOTDUtility.MOTD_GetMOTDChannel())
+		local f51_local3 = Engine[@"hash_1D30724405ED0D69"](CoD.MOTDUtility.MOTD_GetMOTDChannel())
 		for f51_local4 = 1, f51_local3, 1 do
 			local f51_local7 = f51_local4 - 1
-			local f51_local8 = Engine[0x5451F941503DA5A](f51_arg0, CoD.MOTDUtility.MOTD_GetMOTDChannel(), f51_local7)
+			local f51_local8 = Engine[@"hash_15451F941503DA5A"](f51_arg0, CoD.MOTDUtility.MOTD_GetMOTDChannel(), f51_local7)
 			if f51_local8 ~= nil and f51_local8.messageID > 0 and CoD.MOTDUtility.MOTD_IsLocationEnabled(f51_local8.locationID) and not CoD.MOTDUtility.ShouldSkipMessage(f51_local8, f51_local7, f51_arg0) then
 				CoD.MOTDUtility.MOTD_ReportMessageasViewed(f51_arg0, f51_local7)
 				local f51_local9 = {}
@@ -584,13 +584,13 @@ DataSources.MOTDBannerList = ListHelper_SetupDataSource("MOTDBannerList", functi
 					f51_local9.models[f51_local14] = f51_local15
 				end
 				if f51_local9.models.frameLayout == nil then
-					if f51_local8.action == "vod" and Dvar[0x94C1F8422ADD572]:get() then
+					if f51_local8.action == "vod" and Dvar[@"hash_194C1F8422ADD572"]:get() then
 						f51_local9.models.frameLayout = "CoD.MOTD_VoDPreviewWidget"
 					else
 						f51_local9.models.frameLayout = "CoD.MOTD_LightText_HeavyImage"
 					end
 				end
-				if Dvar[0x9138E75A5678EB5]:get() and Dvar[0xDEE3EA6C922C336]:get() and f51_local9.models.image then
+				if Dvar[@"hash_39138E75A5678EB5"]:get() and Dvar[@"hash_4DEE3EA6C922C336"]:get() and f51_local9.models.image then
 					f51_local11 = f51_local9.models.image:get()
 					if f51_local11 and not LuaUtils.EndsWith(f51_local11, ".png") then
 						f51_local9.models.image:set(f51_local11 .. ".png")
@@ -610,9 +610,9 @@ DataSources.MOTDBannerList = ListHelper_SetupDataSource("MOTDBannerList", functi
 end)
 DataSources.MOTDVoDPreview = {
 	getModel = function(f54_arg0)
-		local f54_local0 = Engine[0x40E824FE270E174](Engine[0x8DF2E5447F384B9](), "MOTDVoDPreviewFrame")
+		local f54_local0 = Engine[@"getmodel"](Engine[@"getglobalmodel"](), "MOTDVoDPreviewFrame")
 		if not f54_local0 then
-			f54_local0 = Engine[0xA798E4552F5E872](Engine[0x8DF2E5447F384B9](), "MOTDVoDPreviewFrame")
+			f54_local0 = Engine[@"createmodel"](Engine[@"getglobalmodel"](), "MOTDVoDPreviewFrame")
 			local f54_local1 = f54_local0:create("frame")
 			f54_local1:set("CoD.VoDPreviewWidgetImage")
 		end
@@ -668,13 +668,13 @@ CoD.MOTDUtility.FeatureCard_GetAction = function(f61_arg0, f61_arg1)
 	elseif f61_arg0.action == "bj_reserves" then
 		return OpenQuarterMaster, "reserves"
 	elseif f61_arg0.action == "mp_contracts" then
-		return FeatureCard_OpenContracts, Enum[0x1B899F51A938E95][0xF1D72D16310405B]
+		return FeatureCard_OpenContracts, Enum[@"hash_41B899F51A938E95"][@"hash_6F1D72D16310405B"]
 	elseif f61_arg0.action == "wl_contracts" then
-		return FeatureCard_OpenContracts, Enum[0x1B899F51A938E95][0xEFB62D162F33EC5]
+		return FeatureCard_OpenContracts, Enum[@"hash_41B899F51A938E95"][@"hash_6EFB62D162F33EC5"]
 	elseif f61_arg0.action == "zm_contracts" then
-		return FeatureCard_OpenContracts, Enum[0x1B899F51A938E95][0xEEA5DD162E4C313]
+		return FeatureCard_OpenContracts, Enum[@"hash_41B899F51A938E95"][@"hash_6EEA5DD162E4C313"]
 	elseif f61_arg0.action == "wz_contracts" then
-		return FeatureCard_OpenContracts, Enum[0x1B899F51A938E95][0xEFB6CD162F34FC3]
+		return FeatureCard_OpenContracts, Enum[@"hash_41B899F51A938E95"][@"hash_6EFB6CD162F34FC3"]
 	elseif f61_arg0.action == "crate_purchase" then
 		return CoD.BlackMarketUtility.OpenBlackjackReservesAndItemPurchaseOverlay, "crate"
 	elseif f61_arg0.action == "challenge_status" then
@@ -699,13 +699,13 @@ CoD.MOTDUtility.FeatureCard_GetPopupAction = function(f62_arg0, f62_arg1)
 	elseif f62_arg0.popup_action == "bj_reserves" then
 		return OpenQuarterMaster, "reserves"
 	elseif f62_arg0.popup_action == "mp_contracts" then
-		return FeatureCard_OpenContracts, Enum[0x1B899F51A938E95][0xF1D72D16310405B]
+		return FeatureCard_OpenContracts, Enum[@"hash_41B899F51A938E95"][@"hash_6F1D72D16310405B"]
 	elseif f62_arg0.popup_action == "wl_contracts" then
-		return FeatureCard_OpenContracts, Enum[0x1B899F51A938E95][0xEFB62D162F33EC5]
+		return FeatureCard_OpenContracts, Enum[@"hash_41B899F51A938E95"][@"hash_6EFB62D162F33EC5"]
 	elseif f62_arg0.popup_action == "zm_contracts" then
-		return FeatureCard_OpenContracts, Enum[0x1B899F51A938E95][0xEEA5DD162E4C313]
+		return FeatureCard_OpenContracts, Enum[@"hash_41B899F51A938E95"][@"hash_6EEA5DD162E4C313"]
 	elseif f62_arg0.popup_action == "wz_contracts" then
-		return FeatureCard_OpenContracts, Enum[0x1B899F51A938E95][0xEFB6CD162F34FC3]
+		return FeatureCard_OpenContracts, Enum[@"hash_41B899F51A938E95"][@"hash_6EFB6CD162F34FC3"]
 	elseif f62_arg0.popup_action == "crate_purchase" then
 		return CoD.BlackMarketUtility.OpenBlackjackReservesAndItemPurchaseOverlay, "crate"
 	elseif f62_arg0.popup_action == "challenge_status" then
@@ -716,17 +716,17 @@ CoD.MOTDUtility.FeatureCard_GetPopupAction = function(f62_arg0, f62_arg1)
 	end
 end
 CoD.MOTDUtility.FeatureCard_AddFeatureCardsByLocation = function(f63_arg0, f63_arg1, f63_arg2, f63_arg3)
-	local f63_local0 = Engine[0xD30724405ED0D69](f63_arg2)
+	local f63_local0 = Engine[@"hash_1D30724405ED0D69"](f63_arg2)
 	local f63_local1 = function(f64_arg0, f64_arg1)
 		if f64_arg1 == CoD.MOTDUtility.MOTD_GetMOTDChannel() then
-			return Engine[0xF9F1239CFD921FE](0xEA2339DFD00ADED)
+			return Engine[@"hash_4F9F1239CFD921FE"](@"hash_3EA2339DFD00ADED")
 		else
 			return f64_arg0.content_short or ""
 		end
 	end
 	for f63_local2 = 1, f63_local0, 1 do
 		local f63_local5 = f63_local2 - 1
-		local f63_local6 = Engine[0xE205100C694EF74](f63_arg1, f63_arg2, f63_local5)
+		local f63_local6 = Engine[@"getmarketingmessage"](f63_arg1, f63_arg2, f63_local5)
 		if f63_local6 and f63_local6.messageID > 0 then
 			if not CoD.MOTDUtility.ShouldSkipMessage(f63_local6, f63_local5, f63_arg1) then
 				local f63_local7, f63_local8 = f63_arg3(f63_local6, f63_local5)
@@ -735,7 +735,7 @@ CoD.MOTDUtility.FeatureCard_AddFeatureCardsByLocation = function(f63_arg0, f63_a
 					id = f63_local6.messageID,
 					name = f63_local6.title,
 					descriptionText = f63_local1(f63_local6, f63_arg2),
-					iconBackground = f63_local6.image or 0x7615068F50B3D66,
+					iconBackground = f63_local6.image or @"blacktransparent",
 					action = f63_local7,
 					param = f63_local8,
 					actionString = f63_local6.action,
@@ -777,7 +777,7 @@ CoD.MOTDUtility.FeatureCard_MarkAsViewed = function(f66_arg0, f66_arg1, f66_arg2
 	local f66_local1 = f66_arg2:getModel(f66_arg1, "location")
 	if f66_local0 and f66_local1 then
 		if f66_local1:get() == "crm_featured" then
-			Engine[0x7C75E608EA39B5C](f66_arg1, "marketing_markmessageasviewed" .. " " .. f66_local1:get() .. " " .. f66_local0:get())
+			Engine[@"exec"](f66_arg1, "marketing_markmessageasviewed" .. " " .. f66_local1:get() .. " " .. f66_local0:get())
 		end
 		CoD.MOTDUtility.MOTD_DLogInteraction(f66_arg1, f66_arg2:getModel(), false, "FW")
 	end
@@ -799,23 +799,23 @@ CoD.MOTDUtility.FeatureCard_SetPopupActionButtonName = function(f68_arg0, f68_ar
 	if f68_local0 then
 		local f68_local1 = f68_local0:get()
 		if f68_local1 == "store" then
-			CoD.Menu.SetButtonLabel(f68_arg3, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x3C12F98C86B4DA8)
+			CoD.Menu.SetButtonLabel(f68_arg3, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"menu/store")
 		elseif f68_local1 == "registration" then
-			CoD.Menu.SetButtonLabel(f68_arg3, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x1AF6B0A327DB28A)
+			CoD.Menu.SetButtonLabel(f68_arg3, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"hash_11AF6B0A327DB28A")
 		elseif f68_local1 == "depot" then
-			CoD.Menu.SetButtonLabel(f68_arg3, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x29C903C6DF90D6F)
+			CoD.Menu.SetButtonLabel(f68_arg3, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"menu/black_market")
 		elseif f68_local1 == "shop" then
-			CoD.Menu.SetButtonLabel(f68_arg3, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x90379DA9EEC8DB9)
+			CoD.Menu.SetButtonLabel(f68_arg3, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"hash_790379DA9EEC8DB9")
 		end
 	end
 end
 DataSources.RedeemCouponTask = {
 	getModel = function(f69_arg0)
-		local f69_local0 = Engine[0x40E824FE270E174](Engine[0x8DF2E5447F384B9](), "RedeemCouponTask")
+		local f69_local0 = Engine[@"getmodel"](Engine[@"getglobalmodel"](), "RedeemCouponTask")
 		if not f69_local0 then
-			f69_local0 = Engine[0xA798E4552F5E872](Engine[0x8DF2E5447F384B9](), "RedeemCouponTask")
+			f69_local0 = Engine[@"createmodel"](Engine[@"getglobalmodel"](), "RedeemCouponTask")
 			local f69_local1 = f69_local0:create("status")
-			f69_local1:set(Enum[0x69792B066B9E7F9][0xDAD2C8A42CA7DE])
+			f69_local1:set(Enum[@"hash_669792B066B9E7F9"][0xDAD2C8A42CA7DE])
 			f69_local1 = f69_local0:create("errorCode")
 			f69_local1:set(0)
 		end
@@ -833,21 +833,21 @@ CoD.MOTDUtility.Coupons_RedeemCode = function(f70_arg0, f70_arg1, f70_arg2, f70_
 end
 CoD.MOTDUtility.Coupons_TriggerRedeemptionTask = function(f71_arg0, f71_arg1, f71_arg2)
 	local f71_local0 = DataSources.RedeemCouponTask.getModel(data.controlller)
-	f71_local0.status:set(Enum[0x69792B066B9E7F9][0x9A59ED2AED67A97])
+	f71_local0.status:set(Enum[@"hash_669792B066B9E7F9"][@"hash_19A59ED2AED67A97"])
 	f71_local0.errorCode:set(0)
-	return Engine[0xC4C5E6C6D96727D](f71_arg0, f71_arg1, f71_arg2)
+	return Engine[@"hash_5C4C5E6C6D96727D"](f71_arg0, f71_arg1, f71_arg2)
 end
 CoD.MOTDUtility.Coupons_RedeemTaskSuccess = function(f72_arg0)
 	local f72_local0 = DataSources.RedeemCouponTask.getModel(f72_arg0.controlller)
-	f72_local0.status:set(Enum[0x69792B066B9E7F9][0xF5FB6532EFCD65F])
+	f72_local0.status:set(Enum[@"hash_669792B066B9E7F9"][@"hash_7F5FB6532EFCD65F"])
 end
 CoD.MOTDUtility.Coupons_RedeemTaskFailure = function(f73_arg0)
 	local f73_local0 = DataSources.RedeemCouponTask.getModel(f73_arg0.controlller)
-	f73_local0.status:set(Enum[0x69792B066B9E7F9][0x141FD2303EB637E])
+	f73_local0.status:set(Enum[@"hash_669792B066B9E7F9"][@"hash_7141FD2303EB637E"])
 	f73_local0.errorCode:set(f73_arg0.errorCode)
 end
 CoD.MOTDUtility.IsLibPNGImage = function(f74_arg0, f74_arg1, f74_arg2)
-	if Dvar[0x9138E75A5678EB5]:get() then
+	if Dvar[@"hash_39138E75A5678EB5"]:get() then
 		local f74_local0 = f74_arg2:getModel(f74_arg1, "image")
 		if f74_local0 then
 			return LuaUtils.EndsWith(f74_local0:get(), ".png")
@@ -859,7 +859,7 @@ CoD.MOTDUtility.SetTextAsHTMLText = function(f75_arg0, f75_arg1, f75_arg2)
 	f75_arg2:hasHTMLContent(true)
 end
 CoD.MOTDUtility.EReg_OpenOverlay = function(f76_arg0, f76_arg1, f76_arg2, f76_arg3, f76_arg4)
-	if Engine[0x4A9D1DAC0556BB1](f76_arg2) then
+	if Engine[@"hash_24A9D1DAC0556BB1"](f76_arg2) then
 		OpenOverlay(f76_arg4, "StartMenu_Options_CoDAccount_ManageAccount", f76_arg2)
 	else
 		OpenOverlay(f76_arg4, "StartMenu_Options_CoDAccount_CTA", f76_arg2)

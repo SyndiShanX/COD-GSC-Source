@@ -20,16 +20,16 @@ CoD.DirectorLobbySettingList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 			end,
 		},
 	})
-	DirectorCustomCodcaster.ButtonName:setText(LocalizeToUpperString(0x700AE5902F5ECF7))
+	DirectorCustomCodcaster.ButtonName:setText(LocalizeToUpperString(@"hash_7700AE5902F5ECF7"))
 	DirectorCustomCodcaster:appendEventHandler("input_source_changed", function(f3_arg0, f3_arg1)
 		f3_arg1.menu = f3_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f3_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f3_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	local BotSettingsButton = DirectorCustomCodcaster
 	local DirectorCustomLobbySettings = DirectorCustomCodcaster.subscribeToModel
-	local AddBotButton = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local AddBotButton = Engine[@"getmodelforcontroller"](f1_arg1)
 	DirectorCustomLobbySettings(BotSettingsButton, AddBotButton.LastInput, function(f4_arg0, f4_arg1)
-		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	DirectorCustomCodcaster:registerEventHandler("gain_focus", function(element, event)
 		local f5_local0 = nil
@@ -38,10 +38,10 @@ CoD.DirectorLobbySettingList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 		elseif element.super.gainFocus then
 			f5_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f5_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(DirectorCustomCodcaster, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(DirectorCustomCodcaster, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if IsMouseOrKeyboard(controller) then
 			SetCharacterModeToCurrentSessionMode(self, element, controller)
 			CoD.DirectorUtility.ClearSelectedClient(controller)
@@ -57,10 +57,10 @@ CoD.DirectorLobbySettingList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 		end
 	end, function(element, menu, controller)
 		if IsMouseOrKeyboard(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 			return false
 		else
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x61333AE050EC552, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_761333AE050EC552", nil, "ui_confirm")
 			return true
 		end
 	end, false)
@@ -77,7 +77,7 @@ CoD.DirectorLobbySettingList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	})
 	AddBotButton = DirectorCustomLobbySettings
 	BotSettingsButton = DirectorCustomLobbySettings.subscribeToModel
-	local RemoveBotButton = Engine[0x8DF2E5447F384B9]()
+	local RemoveBotButton = Engine[@"getglobalmodel"]()
 	BotSettingsButton(AddBotButton, RemoveBotButton["lobbyRoot.lobbyNav"], function(f9_arg0)
 		f1_arg0:updateElementState(DirectorCustomLobbySettings, {
 			name = "model_validation",
@@ -87,42 +87,42 @@ CoD.DirectorLobbySettingList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 			modelName = "lobbyRoot.lobbyNav",
 		})
 	end, false)
-	DirectorCustomLobbySettings.ButtonName:setText(LocalizeToUpperString(0xD4B192986909843))
+	DirectorCustomLobbySettings.ButtonName:setText(LocalizeToUpperString(@"menu/lobby_settings"))
 	DirectorCustomLobbySettings:appendEventHandler("on_session_start", function(f10_arg0, f10_arg1)
 		f10_arg1.menu = f10_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f10_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f10_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	DirectorCustomLobbySettings:appendEventHandler("on_session_end", function(f11_arg0, f11_arg1)
 		f11_arg1.menu = f11_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f11_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f11_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	AddBotButton = DirectorCustomLobbySettings
 	BotSettingsButton = DirectorCustomLobbySettings.subscribeToModel
-	RemoveBotButton = Engine[0x8DF2E5447F384B9]()
+	RemoveBotButton = Engine[@"getglobalmodel"]()
 	BotSettingsButton(AddBotButton, RemoveBotButton["lobbyRoot.lobbyNav"], function(f12_arg0, f12_arg1)
-		CoD.Menu.UpdateButtonShownState(f12_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f12_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	AddBotButton = DirectorCustomLobbySettings
 	BotSettingsButton = DirectorCustomLobbySettings.subscribeToModel
-	RemoveBotButton = Engine[0x8DF2E5447F384B9]()
+	RemoveBotButton = Engine[@"getglobalmodel"]()
 	BotSettingsButton(AddBotButton, RemoveBotButton["lobbyRoot.gameClient.update"], function(f13_arg0, f13_arg1)
-		CoD.Menu.UpdateButtonShownState(f13_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f13_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	AddBotButton = DirectorCustomLobbySettings
 	BotSettingsButton = DirectorCustomLobbySettings.subscribeToModel
-	RemoveBotButton = Engine[0x8DF2E5447F384B9]()
+	RemoveBotButton = Engine[@"getglobalmodel"]()
 	BotSettingsButton(AddBotButton, RemoveBotButton["lobbyRoot.privateClient.update"], function(f14_arg0, f14_arg1)
-		CoD.Menu.UpdateButtonShownState(f14_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f14_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	DirectorCustomLobbySettings:appendEventHandler("input_source_changed", function(f15_arg0, f15_arg1)
 		f15_arg1.menu = f15_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f15_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f15_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	AddBotButton = DirectorCustomLobbySettings
 	BotSettingsButton = DirectorCustomLobbySettings.subscribeToModel
-	RemoveBotButton = Engine[0x4DF5CFBC1771947](f1_arg1)
+	RemoveBotButton = Engine[@"getmodelforcontroller"](f1_arg1)
 	BotSettingsButton(AddBotButton, RemoveBotButton.LastInput, function(f16_arg0, f16_arg1)
-		CoD.Menu.UpdateButtonShownState(f16_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f16_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	DirectorCustomLobbySettings:registerEventHandler("gain_focus", function(element, event)
 		local f17_local0 = nil
@@ -131,10 +131,10 @@ CoD.DirectorLobbySettingList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 		elseif element.super.gainFocus then
 			f17_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f17_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(DirectorCustomLobbySettings, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(DirectorCustomLobbySettings, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if IsLobbyHostOfCurrentMenu() and IsMouseOrKeyboard(controller) then
 			CoD.DirectorUtility.ClearSelectedClient(controller)
 			OpenPopup(self, "CustomGames_LobbySettings", controller)
@@ -149,10 +149,10 @@ CoD.DirectorLobbySettingList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 		end
 	end, function(element, menu, controller)
 		if IsLobbyHostOfCurrentMenu() and IsMouseOrKeyboard(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 			return false
 		elseif IsLobbyHostOfCurrentMenu() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x61333AE050EC552, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_761333AE050EC552", nil, "ui_confirm")
 			return true
 		else
 			return false
@@ -171,7 +171,7 @@ CoD.DirectorLobbySettingList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	})
 	RemoveBotButton = BotSettingsButton
 	AddBotButton = BotSettingsButton.subscribeToModel
-	local f1_local6 = Engine[0x8DF2E5447F384B9]()
+	local f1_local6 = Engine[@"getglobalmodel"]()
 	AddBotButton(RemoveBotButton, f1_local6["lobbyRoot.lobbyNav"], function(f21_arg0)
 		f1_arg0:updateElementState(BotSettingsButton, {
 			name = "model_validation",
@@ -183,7 +183,7 @@ CoD.DirectorLobbySettingList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	end, false)
 	RemoveBotButton = BotSettingsButton
 	AddBotButton = BotSettingsButton.subscribeToModel
-	f1_local6 = Engine[0x8DF2E5447F384B9]()
+	f1_local6 = Engine[@"getglobalmodel"]()
 	AddBotButton(RemoveBotButton, f1_local6["MapVote.mapVoteGameModeNext"], function(f22_arg0)
 		f1_arg0:updateElementState(BotSettingsButton, {
 			name = "model_validation",
@@ -193,42 +193,42 @@ CoD.DirectorLobbySettingList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 			modelName = "MapVote.mapVoteGameModeNext",
 		})
 	end, false)
-	BotSettingsButton.ButtonName:setText(LocalizeToUpperString(0x5025AFE42DB30DC))
+	BotSettingsButton.ButtonName:setText(LocalizeToUpperString(@"menu/bot_settings"))
 	BotSettingsButton:appendEventHandler("on_session_start", function(f23_arg0, f23_arg1)
 		f23_arg1.menu = f23_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f23_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f23_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	BotSettingsButton:appendEventHandler("on_session_end", function(f24_arg0, f24_arg1)
 		f24_arg1.menu = f24_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f24_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f24_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	RemoveBotButton = BotSettingsButton
 	AddBotButton = BotSettingsButton.subscribeToModel
-	f1_local6 = Engine[0x8DF2E5447F384B9]()
+	f1_local6 = Engine[@"getglobalmodel"]()
 	AddBotButton(RemoveBotButton, f1_local6["lobbyRoot.lobbyNav"], function(f25_arg0, f25_arg1)
-		CoD.Menu.UpdateButtonShownState(f25_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f25_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	RemoveBotButton = BotSettingsButton
 	AddBotButton = BotSettingsButton.subscribeToModel
-	f1_local6 = Engine[0x8DF2E5447F384B9]()
+	f1_local6 = Engine[@"getglobalmodel"]()
 	AddBotButton(RemoveBotButton, f1_local6["lobbyRoot.gameClient.update"], function(f26_arg0, f26_arg1)
-		CoD.Menu.UpdateButtonShownState(f26_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f26_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	RemoveBotButton = BotSettingsButton
 	AddBotButton = BotSettingsButton.subscribeToModel
-	f1_local6 = Engine[0x8DF2E5447F384B9]()
+	f1_local6 = Engine[@"getglobalmodel"]()
 	AddBotButton(RemoveBotButton, f1_local6["lobbyRoot.privateClient.update"], function(f27_arg0, f27_arg1)
-		CoD.Menu.UpdateButtonShownState(f27_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f27_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	BotSettingsButton:appendEventHandler("input_source_changed", function(f28_arg0, f28_arg1)
 		f28_arg1.menu = f28_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f28_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f28_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	RemoveBotButton = BotSettingsButton
 	AddBotButton = BotSettingsButton.subscribeToModel
-	f1_local6 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local6 = Engine[@"getmodelforcontroller"](f1_arg1)
 	AddBotButton(RemoveBotButton, f1_local6.LastInput, function(f29_arg0, f29_arg1)
-		CoD.Menu.UpdateButtonShownState(f29_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f29_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	BotSettingsButton:registerEventHandler("gain_focus", function(element, event)
 		local f30_local0 = nil
@@ -237,10 +237,10 @@ CoD.DirectorLobbySettingList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 		elseif element.super.gainFocus then
 			f30_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f30_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(BotSettingsButton, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(BotSettingsButton, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if IsLobbyHostOfCurrentMenu() and IsMouseOrKeyboard(controller) then
 			CoD.DirectorUtility.ClearSelectedClient(controller)
 			OpenBotSettings(menu, controller)
@@ -255,10 +255,10 @@ CoD.DirectorLobbySettingList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 		end
 	end, function(element, menu, controller)
 		if IsLobbyHostOfCurrentMenu() and IsMouseOrKeyboard(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 			return false
 		elseif IsLobbyHostOfCurrentMenu() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x61333AE050EC552, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_761333AE050EC552", nil, "ui_confirm")
 			return true
 		else
 			return false
@@ -277,7 +277,7 @@ CoD.DirectorLobbySettingList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	})
 	f1_local6 = AddBotButton
 	RemoveBotButton = AddBotButton.subscribeToModel
-	local f1_local7 = Engine[0x8DF2E5447F384B9]()
+	local f1_local7 = Engine[@"getglobalmodel"]()
 	RemoveBotButton(f1_local6, f1_local7["lobbyRoot.lobbyNav"], function(f34_arg0)
 		f1_arg0:updateElementState(AddBotButton, {
 			name = "model_validation",
@@ -289,7 +289,7 @@ CoD.DirectorLobbySettingList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	end, false)
 	f1_local6 = AddBotButton
 	RemoveBotButton = AddBotButton.subscribeToModel
-	f1_local7 = Engine[0x8DF2E5447F384B9]()
+	f1_local7 = Engine[@"getglobalmodel"]()
 	RemoveBotButton(f1_local6, f1_local7["MapVote.mapVoteGameModeNext"], function(f35_arg0)
 		f1_arg0:updateElementState(AddBotButton, {
 			name = "model_validation",
@@ -299,42 +299,42 @@ CoD.DirectorLobbySettingList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 			modelName = "MapVote.mapVoteGameModeNext",
 		})
 	end, false)
-	AddBotButton.ButtonName:setText(LocalizeToUpperString(0x41A80D9A928673E))
+	AddBotButton.ButtonName:setText(LocalizeToUpperString(@"hash_141A80D9A928673E"))
 	AddBotButton:appendEventHandler("on_session_start", function(f36_arg0, f36_arg1)
 		f36_arg1.menu = f36_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f36_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f36_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	AddBotButton:appendEventHandler("on_session_end", function(f37_arg0, f37_arg1)
 		f37_arg1.menu = f37_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f37_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f37_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	f1_local6 = AddBotButton
 	RemoveBotButton = AddBotButton.subscribeToModel
-	f1_local7 = Engine[0x8DF2E5447F384B9]()
+	f1_local7 = Engine[@"getglobalmodel"]()
 	RemoveBotButton(f1_local6, f1_local7["lobbyRoot.lobbyNav"], function(f38_arg0, f38_arg1)
-		CoD.Menu.UpdateButtonShownState(f38_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f38_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	f1_local6 = AddBotButton
 	RemoveBotButton = AddBotButton.subscribeToModel
-	f1_local7 = Engine[0x8DF2E5447F384B9]()
+	f1_local7 = Engine[@"getglobalmodel"]()
 	RemoveBotButton(f1_local6, f1_local7["lobbyRoot.gameClient.update"], function(f39_arg0, f39_arg1)
-		CoD.Menu.UpdateButtonShownState(f39_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f39_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	f1_local6 = AddBotButton
 	RemoveBotButton = AddBotButton.subscribeToModel
-	f1_local7 = Engine[0x8DF2E5447F384B9]()
+	f1_local7 = Engine[@"getglobalmodel"]()
 	RemoveBotButton(f1_local6, f1_local7["lobbyRoot.privateClient.update"], function(f40_arg0, f40_arg1)
-		CoD.Menu.UpdateButtonShownState(f40_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f40_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	AddBotButton:appendEventHandler("input_source_changed", function(f41_arg0, f41_arg1)
 		f41_arg1.menu = f41_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f41_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f41_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	f1_local6 = AddBotButton
 	RemoveBotButton = AddBotButton.subscribeToModel
-	f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
 	RemoveBotButton(f1_local6, f1_local7.LastInput, function(f42_arg0, f42_arg1)
-		CoD.Menu.UpdateButtonShownState(f42_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f42_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	AddBotButton:registerEventHandler("gain_focus", function(element, event)
 		local f43_local0 = nil
@@ -343,10 +343,10 @@ CoD.DirectorLobbySettingList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 		elseif element.super.gainFocus then
 			f43_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f43_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(AddBotButton, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(AddBotButton, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if IsLobbyHostOfCurrentMenu() and IsBooleanDvarSet("lobby_hostBots") and IsMouseOrKeyboard(controller) then
 			CoD.DirectorUtility.ClearSelectedClient(controller)
 			AddLobbyBots(menu, controller)
@@ -359,10 +359,10 @@ CoD.DirectorLobbySettingList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 		end
 	end, function(element, menu, controller)
 		if IsLobbyHostOfCurrentMenu() and IsBooleanDvarSet("lobby_hostBots") and IsMouseOrKeyboard(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 			return false
 		elseif IsLobbyHostOfCurrentMenu() and IsBooleanDvarSet("lobby_hostBots") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x61333AE050EC552, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_761333AE050EC552", nil, "ui_confirm")
 			return true
 		else
 			return false
@@ -381,7 +381,7 @@ CoD.DirectorLobbySettingList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	})
 	f1_local7 = RemoveBotButton
 	f1_local6 = RemoveBotButton.subscribeToModel
-	local f1_local8 = Engine[0x8DF2E5447F384B9]()
+	local f1_local8 = Engine[@"getglobalmodel"]()
 	f1_local6(f1_local7, f1_local8["lobbyRoot.lobbyNav"], function(f47_arg0)
 		f1_arg0:updateElementState(RemoveBotButton, {
 			name = "model_validation",
@@ -393,7 +393,7 @@ CoD.DirectorLobbySettingList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	end, false)
 	f1_local7 = RemoveBotButton
 	f1_local6 = RemoveBotButton.subscribeToModel
-	f1_local8 = Engine[0x8DF2E5447F384B9]()
+	f1_local8 = Engine[@"getglobalmodel"]()
 	f1_local6(f1_local7, f1_local8["MapVote.mapVoteGameModeNext"], function(f48_arg0)
 		f1_arg0:updateElementState(RemoveBotButton, {
 			name = "model_validation",
@@ -403,42 +403,42 @@ CoD.DirectorLobbySettingList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 			modelName = "MapVote.mapVoteGameModeNext",
 		})
 	end, false)
-	RemoveBotButton.ButtonName:setText(LocalizeToUpperString(0xFD88DBB329D1EC9))
+	RemoveBotButton.ButtonName:setText(LocalizeToUpperString(@"hash_5FD88DBB329D1EC9"))
 	RemoveBotButton:appendEventHandler("on_session_start", function(f49_arg0, f49_arg1)
 		f49_arg1.menu = f49_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f49_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f49_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	RemoveBotButton:appendEventHandler("on_session_end", function(f50_arg0, f50_arg1)
 		f50_arg1.menu = f50_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f50_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f50_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	f1_local7 = RemoveBotButton
 	f1_local6 = RemoveBotButton.subscribeToModel
-	f1_local8 = Engine[0x8DF2E5447F384B9]()
+	f1_local8 = Engine[@"getglobalmodel"]()
 	f1_local6(f1_local7, f1_local8["lobbyRoot.lobbyNav"], function(f51_arg0, f51_arg1)
-		CoD.Menu.UpdateButtonShownState(f51_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f51_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	f1_local7 = RemoveBotButton
 	f1_local6 = RemoveBotButton.subscribeToModel
-	f1_local8 = Engine[0x8DF2E5447F384B9]()
+	f1_local8 = Engine[@"getglobalmodel"]()
 	f1_local6(f1_local7, f1_local8["lobbyRoot.gameClient.update"], function(f52_arg0, f52_arg1)
-		CoD.Menu.UpdateButtonShownState(f52_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f52_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	f1_local7 = RemoveBotButton
 	f1_local6 = RemoveBotButton.subscribeToModel
-	f1_local8 = Engine[0x8DF2E5447F384B9]()
+	f1_local8 = Engine[@"getglobalmodel"]()
 	f1_local6(f1_local7, f1_local8["lobbyRoot.privateClient.update"], function(f53_arg0, f53_arg1)
-		CoD.Menu.UpdateButtonShownState(f53_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f53_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	RemoveBotButton:appendEventHandler("input_source_changed", function(f54_arg0, f54_arg1)
 		f54_arg1.menu = f54_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f54_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f54_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	f1_local7 = RemoveBotButton
 	f1_local6 = RemoveBotButton.subscribeToModel
-	f1_local8 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local8 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local6(f1_local7, f1_local8.LastInput, function(f55_arg0, f55_arg1)
-		CoD.Menu.UpdateButtonShownState(f55_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f55_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	RemoveBotButton:registerEventHandler("gain_focus", function(element, event)
 		local f56_local0 = nil
@@ -447,10 +447,10 @@ CoD.DirectorLobbySettingList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 		elseif element.super.gainFocus then
 			f56_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f56_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(RemoveBotButton, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(RemoveBotButton, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if IsLobbyHostOfCurrentMenu() and IsBooleanDvarSet("lobby_hostBots") and IsMouseOrKeyboard(controller) then
 			CoD.DirectorUtility.ClearSelectedClient(controller)
 			RemoveLobbyBots(self, element, controller, "", menu)
@@ -463,10 +463,10 @@ CoD.DirectorLobbySettingList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 		end
 	end, function(element, menu, controller)
 		if IsLobbyHostOfCurrentMenu() and IsBooleanDvarSet("lobby_hostBots") and IsMouseOrKeyboard(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 			return false
 		elseif IsLobbyHostOfCurrentMenu() and IsBooleanDvarSet("lobby_hostBots") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x61333AE050EC552, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_761333AE050EC552", nil, "ui_confirm")
 			return true
 		else
 			return false

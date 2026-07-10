@@ -18,10 +18,10 @@ CoD.PC_StartMenu_Options_Controls_TabContent_KeyBinding_PreviewButton.new = func
 	self.Image = Image
 	local BtnText = LUI.UIText.new(0, 1, 0, 0, 0.5, 0.5, -9, 9)
 	BtnText:setRGB(0.76, 0.76, 0.76)
-	BtnText:setText(Engine[0xF9F1239CFD921FE](0x3A1720478353F60))
+	BtnText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_3A1720478353F60"))
 	BtnText:setTTF("ttmussels_regular")
-	BtnText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	BtnText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	BtnText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	BtnText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(BtnText)
 	self.BtnText = BtnText
 	local emptyFocusable = CoD.emptyFocusable.new(f1_arg0, f1_arg1, 0, 0, 0.5, 199.5, 0, 0, 1, 59)

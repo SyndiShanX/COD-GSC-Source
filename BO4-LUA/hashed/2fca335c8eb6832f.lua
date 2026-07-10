@@ -26,7 +26,7 @@ CoD.SpawnSelectionLabel.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	self:addElement(DotTiledBacking)
 	self.DotTiledBacking = DotTiledBacking
 	local DotTiledBacking2 = CoD.StoreCommonTextBacking.new(f1_arg0, f1_arg1, 0, 0, -36, 144, 0, 0, 44, 79)
-	DotTiledBacking2:setRFTMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	DotTiledBacking2:setRFTMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(DotTiledBacking2)
 	self.DotTiledBacking2 = DotTiledBacking2
 	local SpawnPromptContainer = CoD.SpawnPromptContainer.new(f1_arg0, f1_arg1, 0, 0, -34, -4, 0, 0, 47, 77)
@@ -37,15 +37,15 @@ CoD.SpawnSelectionLabel.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	self:addElement(SpawnPromptContainer)
 	self.SpawnPromptContainer = SpawnPromptContainer
 	local Name = LUI.UIText.new(0, 0, -1, 145, 0, 0, 51.5, 72.5)
-	Name:setText(Engine[0xF9F1239CFD921FE](0x591C6D74E2FC045))
+	Name:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_7591C6D74E2FC045"))
 	Name:setTTF("0arame_mono_stencil")
-	Name:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	Name:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	Name:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	Name:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	self:addElement(Name)
 	self.Name = Name
 	local ButtonBottomBracket9Slice = LUI.UIImage.new(0, 0, -40, 149, 1, 1, 33, 45)
-	ButtonBottomBracket9Slice:setImage(RegisterImage(0x55942079F1B70E6))
-	ButtonBottomBracket9Slice:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	ButtonBottomBracket9Slice:setImage(RegisterImage(@"uie_ui_menu_cac_secondary_button_bottom_line"))
+	ButtonBottomBracket9Slice:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	ButtonBottomBracket9Slice:setShaderVector(0, 0, 0, 0, 0)
 	ButtonBottomBracket9Slice:setupNineSliceShader(120, 12)
 	self:addElement(ButtonBottomBracket9Slice)
@@ -94,7 +94,7 @@ CoD.SpawnSelectionLabel.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	end)
 	local f1_local9 = self
 	local f1_local10 = self.subscribeToModel
-	local f1_local11 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local11 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local10(f1_local9, f1_local11.LastInput, function(f9_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

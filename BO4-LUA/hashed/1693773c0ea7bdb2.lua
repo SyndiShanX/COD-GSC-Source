@@ -20,7 +20,7 @@ CoD.WZStatusIcon.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 	local VehicleBacking = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	VehicleBacking:setAlpha(0)
 	VehicleBacking:setScale(0.98, 0.98)
-	VehicleBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0xE125638BF94665F))
+	VehicleBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_feather_edges"))
 	VehicleBacking:setShaderVector(0, 0.05, 0.05, 0.05, 0.05)
 	VehicleBacking.__Color = function(f3_arg0)
 		local f3_local0 = f3_arg0:get()
@@ -52,7 +52,7 @@ CoD.WZStatusIcon.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 	self:addElement(VehicleIcon)
 	self.VehicleIcon = VehicleIcon
 	local ParachuteClientIcon = LUI.UIImage.new(0, 0, 0, 44, 0, 0, 0, 44)
-	ParachuteClientIcon:setImage(RegisterImage(0xA912D9E22E33B69))
+	ParachuteClientIcon:setImage(RegisterImage(@"hash_2A912D9E22E33B69"))
 	ParachuteClientIcon.__Color = function(f6_arg0)
 		local f6_local0 = f6_arg0:get()
 		if f6_local0 ~= nil then
@@ -79,7 +79,7 @@ CoD.WZStatusIcon.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 	self:addElement(ParachuteClientIcon)
 	self.ParachuteClientIcon = ParachuteClientIcon
 	local WingsuitIcon = LUI.UIImage.new(0, 0, -2, 42, 0, 0, 0, 44)
-	WingsuitIcon:setImage(RegisterImage(0x9D3717D7C3A9ECC))
+	WingsuitIcon:setImage(RegisterImage(@"hash_19D3717D7C3A9ECC"))
 	WingsuitIcon.__Color = function(f9_arg0)
 		local f9_local0 = f9_arg0:get()
 		if f9_local0 ~= nil then
@@ -108,23 +108,23 @@ CoD.WZStatusIcon.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 	VehicleBacking:linkToElementModel(self, "team", true, VehicleBacking.__Color_FullPath)
 	local f1_local6 = VehicleBacking
 	local f1_local7 = VehicleBacking.subscribeToModel
-	local f1_local8 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local8 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local7(f1_local6, f1_local8["profile.colorblindMode"], VehicleBacking.__Color_FullPath)
 	ParachuteClientIcon:linkToElementModel(self, "team", true, ParachuteClientIcon.__Color_FullPath)
 	f1_local6 = ParachuteClientIcon
 	f1_local7 = ParachuteClientIcon.subscribeToModel
-	f1_local8 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local8 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local7(f1_local6, f1_local8["profile.colorblindMode"], ParachuteClientIcon.__Color_FullPath)
 	WingsuitIcon:linkToElementModel(self, "team", true, WingsuitIcon.__Color_FullPath)
 	f1_local6 = WingsuitIcon
 	f1_local7 = WingsuitIcon.subscribeToModel
-	f1_local8 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local8 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local7(f1_local6, f1_local8["profile.colorblindMode"], WingsuitIcon.__Color_FullPath)
 	self:mergeStateConditions({
 		{
 			stateName = "InVehicle",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "inGamePlayerStatus", Enum[0x4A07561A78E340B][0x751743BBF671EDC])
+				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "inGamePlayerStatus", Enum[@"hash_14A07561A78E340B"][@"hash_7751743BBF671EDC"])
 			end,
 		},
 	})

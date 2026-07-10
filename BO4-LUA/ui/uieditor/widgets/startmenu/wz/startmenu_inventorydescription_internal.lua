@@ -18,12 +18,12 @@ CoD.StartMenu_InventoryDescription_Internal.new = function(f1_arg0, f1_arg1, f1_
 	description:setRGB(ColorSet.T8__BEIGE__HEADER.r, ColorSet.T8__BEIGE__HEADER.g, ColorSet.T8__BEIGE__HEADER.b)
 	description:setTTF("ttmussels_regular")
 	description:setLetterSpacing(1)
-	description:setAlignment(Engine[0x7F8853DC3581AA4](Enum[0x7A5123B654282D2][0x58C8A85F2048829]))
-	description:setAlignment(Engine[0x7F8853DC3581AA4](Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3]))
+	description:setAlignment(Engine[@"hash_67F8853DC3581AA4"](Enum[@"luialignment"][@"lui_alignment_left"]))
+	description:setAlignment(Engine[@"hash_67F8853DC3581AA4"](Enum[@"luialignment"][@"lui_alignment_top"]))
 	description:linkToElementModel(self, "description", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			description:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			description:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	self:addElement(description)
@@ -46,7 +46,7 @@ CoD.StartMenu_InventoryDescription_Internal.new = function(f1_arg0, f1_arg1, f1_
 			modelName = "damage",
 		})
 	end)
-	DamageAttribute.attributeName:setText(LocalizeToUpperString(0xCFFC6656E99316E))
+	DamageAttribute.attributeName:setText(LocalizeToUpperString(@"hash_6CFFC6656E99316E"))
 	DamageAttribute:linkToElementModel(self, "attributes.damage", true, function(model)
 		local f5_local0 = model:get()
 		if f5_local0 ~= nil then
@@ -79,7 +79,7 @@ CoD.StartMenu_InventoryDescription_Internal.new = function(f1_arg0, f1_arg1, f1_
 			modelName = "range",
 		})
 	end)
-	RangeAttribute.attributeName:setText(LocalizeToUpperString(0x470B2F1C3BDE7F4))
+	RangeAttribute.attributeName:setText(LocalizeToUpperString(@"hash_7470B2F1C3BDE7F4"))
 	RangeAttribute:linkToElementModel(self, "attributes.range", true, function(model)
 		local f9_local0 = model:get()
 		if f9_local0 ~= nil then
@@ -112,7 +112,7 @@ CoD.StartMenu_InventoryDescription_Internal.new = function(f1_arg0, f1_arg1, f1_
 			modelName = "fireRate",
 		})
 	end)
-	FireRateAttribute.attributeName:setText(LocalizeToUpperString(0xA995770D23477EE))
+	FireRateAttribute.attributeName:setText(LocalizeToUpperString(@"hash_2A995770D23477EE"))
 	FireRateAttribute:linkToElementModel(self, "attributes.fireRate", true, function(model)
 		local f13_local0 = model:get()
 		if f13_local0 ~= nil then
@@ -145,7 +145,7 @@ CoD.StartMenu_InventoryDescription_Internal.new = function(f1_arg0, f1_arg1, f1_
 			modelName = "accuracy",
 		})
 	end)
-	AccuracyAttribute.attributeName:setText(LocalizeToUpperString(0xF669512DF581896))
+	AccuracyAttribute.attributeName:setText(LocalizeToUpperString(@"hash_4F669512DF581896"))
 	AccuracyAttribute:linkToElementModel(self, "attributes.accuracy", true, function(model)
 		local f17_local0 = model:get()
 		if f17_local0 ~= nil then

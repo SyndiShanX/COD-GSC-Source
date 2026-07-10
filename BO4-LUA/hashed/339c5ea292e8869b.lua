@@ -11,8 +11,8 @@ CoD.JobFeedItemBattleCommand.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	BattleCommandGlow:setRGB(0.15, 0.97, 1)
 	BattleCommandGlow:setAlpha(0)
 	BattleCommandGlow:setScale(0.65, 0.9)
-	BattleCommandGlow:setImage(RegisterImage(0xD4F7AA0A4512AE0))
-	BattleCommandGlow:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	BattleCommandGlow:setImage(RegisterImage(@"uie_ui_hud_core_hero_widget_glow_hero"))
+	BattleCommandGlow:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	BattleCommandGlow:setShaderVector(0, 3, 0, 0, 0)
 	self:addElement(BattleCommandGlow)
 	self.BattleCommandGlow = BattleCommandGlow
@@ -26,7 +26,7 @@ CoD.JobFeedItemBattleCommand.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	})
 	local f1_local2 = self
 	local f1_local3 = self.subscribeToModel
-	local f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local3(f1_local2, f1_local4["hudItems.combatEfficiencyActive"], function(f3_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

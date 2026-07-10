@@ -28,7 +28,7 @@ CoD.ButtonFrame_MeritRecord.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 			end,
 		},
 	})
-	RankInfo.LevelText:setText(LocalizeToUpperString(0x3547050A22D0BD0))
+	RankInfo.LevelText:setText(LocalizeToUpperString(@"hash_53547050A22D0BD0"))
 	RankInfo:subscribeToGlobalModel(f1_arg1, "PrestigeMenuInfo", "hasPrestiged", function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
@@ -62,44 +62,44 @@ CoD.ButtonFrame_MeritRecord.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.Scorebacking = Scorebacking
 	local MeritsText = LUI.UIText.new(0, 0, 256, 373, 0, 0, 189.5, 207.5)
 	MeritsText:setRGB(ColorSet.T8__OFF__GRAY.r, ColorSet.T8__OFF__GRAY.g, ColorSet.T8__OFF__GRAY.b)
-	MeritsText:setText(LocalizeToUpperString(0x1A6986D07D40B76))
+	MeritsText:setText(LocalizeToUpperString(@"hash_41A6986D07D40B76"))
 	MeritsText:setTTF("ttmussels_regular")
 	MeritsText:setLetterSpacing(1)
-	MeritsText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	MeritsText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	self:addElement(MeritsText)
 	self.MeritsText = MeritsText
 	local TotalMeritsText = LUI.UIText.new(0, 0, 496, 635, 0, 0, 189.5, 207.5)
 	TotalMeritsText:setRGB(ColorSet.T8__OFF__GRAY.r, ColorSet.T8__OFF__GRAY.g, ColorSet.T8__OFF__GRAY.b)
-	TotalMeritsText:setText(LocalizeToUpperString(0x2FD7986ED047F25))
+	TotalMeritsText:setText(LocalizeToUpperString(@"hash_32FD7986ED047F25"))
 	TotalMeritsText:setTTF("ttmussels_regular")
 	TotalMeritsText:setLetterSpacing(1)
-	TotalMeritsText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	TotalMeritsText:setAlignment(Enum[0x7A5123B654282D2][0x70510683C22104B])
+	TotalMeritsText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	TotalMeritsText:setAlignment(Enum[@"luialignment"][@"lui_alignment_bottom"])
 	self:addElement(TotalMeritsText)
 	self.TotalMeritsText = TotalMeritsText
 	local KillMerits = CoD.PlayerStatsMerits.new(f1_arg0, f1_arg1, 0, 0, 23, 523, 0, 0, 218.5, 237.5)
-	KillMerits.TypeText:setText(Engine[0xF9F1239CFD921FE](0x6B234CB46B5ACD4))
+	KillMerits.TypeText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_16B234CB46B5ACD4"))
 	KillMerits:subscribeToGlobalModel(f1_arg1, "PlayerBarracksMerits", "kills", function(model)
 		KillMerits:setModel(model, f1_arg1)
 	end)
 	self:addElement(KillMerits)
 	self.KillMerits = KillMerits
 	local PlacementMerits = CoD.PlayerStatsMerits.new(f1_arg0, f1_arg1, 0, 0, 23, 523, 0, 0, 247, 265)
-	PlacementMerits.TypeText:setText(LocalizeToUpperString(0x971770DEFE5452D))
+	PlacementMerits.TypeText:setText(LocalizeToUpperString(@"hash_6971770DEFE5452D"))
 	PlacementMerits:subscribeToGlobalModel(f1_arg1, "PlayerBarracksMerits", "top5", function(model)
 		PlacementMerits:setModel(model, f1_arg1)
 	end)
 	self:addElement(PlacementMerits)
 	self.PlacementMerits = PlacementMerits
 	local WinMerits = CoD.PlayerStatsMerits.new(f1_arg0, f1_arg1, 0, 0, 23, 523, 0, 0, 276, 294)
-	WinMerits.TypeText:setText(Engine[0xF9F1239CFD921FE](0x585891326C1258C))
+	WinMerits.TypeText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_4585891326C1258C"))
 	WinMerits:subscribeToGlobalModel(f1_arg1, "PlayerBarracksMerits", "wins", function(model)
 		WinMerits:setModel(model, f1_arg1)
 	end)
 	self:addElement(WinMerits)
 	self.WinMerits = WinMerits
 	local ChallengeMerits = CoD.PlayerStatsMerits.new(f1_arg0, f1_arg1, 0, 0, 23, 523, 0, 0, 305, 323)
-	ChallengeMerits.TypeText:setText(Engine[0xF9F1239CFD921FE](0x99CD580A52B2E53))
+	ChallengeMerits.TypeText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_99CD580A52B2E53"))
 	ChallengeMerits:subscribeToGlobalModel(f1_arg1, "PlayerBarracksMerits", "challenges", function(model)
 		ChallengeMerits:setModel(model, f1_arg1)
 	end)
@@ -108,12 +108,12 @@ CoD.ButtonFrame_MeritRecord.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	local TotalMeritsValue = LUI.UIText.new(0, 0, 463.5, 663.5, 0, 0, 259.5, 293.5)
 	TotalMeritsValue:setRGB(0.69, 0.56, 0.04)
 	TotalMeritsValue.__String_Reference = function()
-		TotalMeritsValue:setText(CoD.PlayerStatsUtility.GetPlayerStorageStat(f1_arg0, 0x8928A12A20A9D67, ""))
+		TotalMeritsValue:setText(CoD.PlayerStatsUtility.GetPlayerStorageStat(f1_arg0, @"rankxp", ""))
 	end
 	TotalMeritsValue.__String_Reference()
 	TotalMeritsValue:setTTF("default")
 	TotalMeritsValue:setLetterSpacing(2)
-	TotalMeritsValue:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	TotalMeritsValue:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	self:addElement(TotalMeritsValue)
 	self.TotalMeritsValue = TotalMeritsValue
 	local RankProgress = CoD.ButtonFrame_XPMeterInfo.new(f1_arg0, f1_arg1, 0.5, 0.5, -300, 302, 0.5, 0.5, 129.5, 180.5)
@@ -133,7 +133,7 @@ CoD.ButtonFrame_MeritRecord.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	RankProgress:subscribeToGlobalModel(f1_arg1, "PrestigeMenuInfo", "hasPrestiged", function(model)
 		local f15_local0 = model:get()
 		if f15_local0 ~= nil then
-			RankProgress.NeededXPText:setText(Engine[0xF9F1239CFD921FE](CoD.PrestigeUtility.GetNextLevelXPText(f1_arg0, f1_arg1, CoD.PlayerStatsUtility.GetXPToNextRank(f1_arg0, f15_local0))))
+			RankProgress.NeededXPText:setText(Engine[@"hash_4F9F1239CFD921FE"](CoD.PrestigeUtility.GetNextLevelXPText(f1_arg0, f1_arg1, CoD.PlayerStatsUtility.GetXPToNextRank(f1_arg0, f15_local0))))
 		end
 	end)
 	RankProgress:subscribeToGlobalModel(f1_arg1, "PrestigeMenuInfo", "hasPrestiged", function(model)
@@ -167,8 +167,8 @@ CoD.ButtonFrame_MeritRecord.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	local BracketTop = LUI.UIImage.new(0.5, 0.5, -316, 316, 0, 0, 207.5, 215.5)
 	BracketTop:setRGB(ColorSet.T8__OFF__GRAY.r, ColorSet.T8__OFF__GRAY.g, ColorSet.T8__OFF__GRAY.b)
 	BracketTop:setZRot(180)
-	BracketTop:setImage(RegisterImage(0xC325BED3F226657))
-	BracketTop:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	BracketTop:setImage(RegisterImage(@"hash_4C325BED3F226657"))
+	BracketTop:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	BracketTop:setShaderVector(0, 0, 0, 0, 0)
 	BracketTop:setupNineSliceShader(16, 4)
 	self:addElement(BracketTop)
@@ -179,7 +179,7 @@ CoD.ButtonFrame_MeritRecord.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.MaxLevelNotify = MaxLevelNotify
 	local f1_local17 = TotalMeritsValue
 	local f1_local18 = TotalMeritsValue.subscribeToModel
-	local f1_local19 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local19 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local18(f1_local17, f1_local19["PrestigeMenuInfo.hasPrestiged"], TotalMeritsValue.__String_Reference)
 	self:mergeStateConditions({
 		{

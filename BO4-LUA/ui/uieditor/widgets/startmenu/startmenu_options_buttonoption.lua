@@ -26,12 +26,12 @@ CoD.StartMenu_Options_ButtonOption.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	local actionText = LUI.UIText.new(0, 0, 12, 352, 0, 0, 19.5, 40.5)
 	actionText:setRGB(0.78, 0.74, 0.67)
 	actionText:setTTF("ttmussels_regular")
-	actionText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	actionText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	actionText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	actionText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	actionText:linkToElementModel(self, "displayText", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			actionText:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			actionText:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	self:addElement(actionText)

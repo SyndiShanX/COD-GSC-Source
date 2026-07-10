@@ -8,11 +8,11 @@ CoD.vhud_gunship_flare_indicator.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local FlareStatusText = LUI.UIText.new(0, 0, 0, 80, 0, 0, 0, 15)
-	FlareStatusText:setText(Engine[0xF9F1239CFD921FE](0xE6D5A4CC38BEBB7))
+	FlareStatusText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_4E6D5A4CC38BEBB7"))
 	FlareStatusText:setTTF("ttmussels_regular")
 	FlareStatusText:setLetterSpacing(1)
-	FlareStatusText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	FlareStatusText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	FlareStatusText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	FlareStatusText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(FlareStatusText)
 	self.FlareStatusText = FlareStatusText
 	if PostLoadFunc then

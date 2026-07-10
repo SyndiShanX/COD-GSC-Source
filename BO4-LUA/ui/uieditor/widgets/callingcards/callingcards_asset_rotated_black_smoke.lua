@@ -8,7 +8,7 @@ CoD.CallingCards_Asset_rotated_black_smoke.new = function(f1_arg0, f1_arg1, f1_a
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local smokeRotate = LUI.UIImage.new(0, 0, 0, 256, 0, 0, 0, 256)
-	smokeRotate:setImage(RegisterImage(0x3103713215C1B24))
+	smokeRotate:setImage(RegisterImage(@"uie_callingcards_heroics_master_black_smokerotate"))
 	self:addElement(smokeRotate)
 	self.smokeRotate = smokeRotate
 	if PostLoadFunc then

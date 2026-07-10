@@ -8,35 +8,35 @@ CoD.CompassAwarenessRingBacker.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local AwarenessBannerBlur = LUI.UIImage.new(0.5, 0.5, -175, 175, 0.5, 0.5, -175, 175)
-	AwarenessBannerBlur:setImage(RegisterImage(0xBC3E9B04A60DE79))
-	AwarenessBannerBlur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	AwarenessBannerBlur:setImage(RegisterImage(@"hash_3BC3E9B04A60DE79"))
+	AwarenessBannerBlur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	AwarenessBannerBlur:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(AwarenessBannerBlur)
 	self.AwarenessBannerBlur = AwarenessBannerBlur
 	local AwarenessBanner = LUI.UIImage.new(0.5, 0.5, -175, 175, 0.5, 0.5, -175, 175)
 	AwarenessBanner:setAlpha(0.5)
-	AwarenessBanner:setImage(RegisterImage(0xBC3E9B04A60DE79))
+	AwarenessBanner:setImage(RegisterImage(@"hash_3BC3E9B04A60DE79"))
 	self:addElement(AwarenessBanner)
 	self.AwarenessBanner = AwarenessBanner
 	local AwarenessPanel = LUI.UIImage.new(0.5, 0.5, -175, 175, 0.5, 0.5, -175, 175)
 	AwarenessPanel:setRGB(0.06, 0.06, 0.06)
 	AwarenessPanel:setAlpha(0.98)
-	AwarenessPanel:setImage(RegisterImage(0xD1522FFA5C848A3))
+	AwarenessPanel:setImage(RegisterImage(@"hash_6D1522FFA5C848A3"))
 	self:addElement(AwarenessPanel)
 	self.AwarenessPanel = AwarenessPanel
 	local RingPanelBlur = LUI.UIImage.new(0.5, 0.5, -175, 175, 0.5, 0.5, -175, 175)
-	RingPanelBlur:setImage(RegisterImage(0x8A1C50744198A2B))
-	RingPanelBlur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	RingPanelBlur:setImage(RegisterImage(@"hash_48A1C50744198A2B"))
+	RingPanelBlur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	RingPanelBlur:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(RingPanelBlur)
 	self.RingPanelBlur = RingPanelBlur
 	local RingBanner = LUI.UIImage.new(0.5, 0.5, -175, 175, 0.5, 0.5, -175, 175)
 	RingBanner:setAlpha(0.5)
-	RingBanner:setImage(RegisterImage(0x8A1C50744198A2B))
+	RingBanner:setImage(RegisterImage(@"hash_48A1C50744198A2B"))
 	self:addElement(RingBanner)
 	self.RingBanner = RingBanner
 	local RingPanel = LUI.UIImage.new(0.5, 0.5, -175, 175, 0.5, 0.5, -175, 175)
-	RingPanel:setImage(RegisterImage(0x7D623AC5A21228E))
+	RingPanel:setImage(RegisterImage(@"hash_27D623AC5A21228E"))
 	self:addElement(RingPanel)
 	self.RingPanel = RingPanel
 	self:mergeStateConditions({
@@ -49,7 +49,7 @@ CoD.CompassAwarenessRingBacker.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	})
 	local f1_local7 = self
 	local f1_local8 = self.subscribeToModel
-	local f1_local9 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local9 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local8(f1_local7, f1_local9["huditems.awareness"], function(f3_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

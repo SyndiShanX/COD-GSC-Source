@@ -13,15 +13,15 @@ LUI.createMenu.veTransitionPrompt = function(f1_arg0, f1_arg1)
 	local Prompt = LUI.UIText.new(0, 0, 612, 1307, 0, 0, 926, 970)
 	Prompt:setText("")
 	Prompt:setTTF("default")
-	Prompt:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	Prompt:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Prompt:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	Prompt:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(Prompt)
 	self.Prompt = Prompt
 	local Prompt2 = LUI.UIText.new(0, 0, 612, 1307, 0, 0, 926, 970)
-	Prompt2:setText(Engine[0xF9F1239CFD921FE](0x3524F3946846790))
+	Prompt2:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_73524F3946846790"))
 	Prompt2:setTTF("default")
-	Prompt2:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	Prompt2:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Prompt2:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	Prompt2:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(Prompt2)
 	self.Prompt2 = Prompt2
 	self:mergeStateConditions({
@@ -50,7 +50,7 @@ LUI.createMenu.veTransitionPrompt = function(f1_arg0, f1_arg1)
 end
 CoD.veTransitionPrompt.__resetProperties = function(f4_arg0)
 	f4_arg0.Prompt2:completeAnimation()
-	f4_arg0.Prompt2:setText(Engine[0xF9F1239CFD921FE](0x3524F3946846790))
+	f4_arg0.Prompt2:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_73524F3946846790"))
 end
 CoD.veTransitionPrompt.__clipsPerState = {
 	DefaultState = {
@@ -70,7 +70,7 @@ CoD.veTransitionPrompt.__clipsPerState = {
 			f7_arg0:__resetProperties()
 			f7_arg0:setupElementClipCounter(1)
 			f7_arg0.Prompt2:completeAnimation()
-			f7_arg0.Prompt2:setText(Engine[0xF9F1239CFD921FE](0x7DA41F4105CA4E))
+			f7_arg0.Prompt2:setText(Engine[@"hash_4F9F1239CFD921FE"](0x7DA41F4105CA4E))
 			f7_arg0.clipFinished(f7_arg0.Prompt2)
 		end,
 	},

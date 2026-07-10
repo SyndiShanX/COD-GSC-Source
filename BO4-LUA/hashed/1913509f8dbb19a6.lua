@@ -26,7 +26,7 @@ CoD.uplinkBallReticle.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	self:addElement(armorBorder)
 	self.armorBorder = armorBorder
 	local armorFill = LUI.UIImage.new(0.5, 0.5, -135, 133, 0.5, 0.5, 274, 276)
-	armorFill:setMaterial(LUI.UIImage.GetCachedMaterial(0x910274CA3518744))
+	armorFill:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe"))
 	armorFill:setShaderVector(1, 0, 0, 0, 0)
 	armorFill:setShaderVector(2, 1, 0, 0, 0)
 	armorFill:setShaderVector(3, 0, 0, 0, 0)
@@ -61,17 +61,17 @@ CoD.uplinkBallReticle.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	self:addElement(uplinkReticle)
 	self.uplinkReticle = uplinkReticle
 	local Trow = LUI.UIText.new(0, 0, 1107, 1212, 0, 0, 800, 830)
-	Trow:setText(Engine[0xF9F1239CFD921FE](0xB416BCD1752EC4D))
+	Trow:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_5B416BCD1752EC4D"))
 	Trow:setTTF("default")
-	Trow:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
-	Trow:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Trow:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
+	Trow:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(Trow)
 	self.Trow = Trow
 	local Pass = LUI.UIText.new(0, 0, 711, 815, 0, 0, 799, 829)
-	Pass:setText(Engine[0xF9F1239CFD921FE](0xE42DC5C81202D0E))
+	Pass:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_5E42DC5C81202D0E"))
 	Pass:setTTF("default")
-	Pass:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Pass:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Pass:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Pass:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(Pass)
 	self.Pass = Pass
 	self:mergeStateConditions({
@@ -79,15 +79,15 @@ CoD.uplinkBallReticle.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 			stateName = "Hidden",
 			condition = function(menu, element, event)
 				local f5_local0
-				if Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xBFB2BDEC98D0644]) then
-					f5_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x198075B069840DC])
+				if Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_draw_reticle"]) then
+					f5_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_game_ended"])
 					if not f5_local0 then
-						f5_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x69C28E2FCA82769])
+						f5_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_hud_hardcore"])
 						if not f5_local0 then
-							if Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xADC477DDE486DD7]) then
-								f5_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04])
+							if Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_hud_visible"]) then
+								f5_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_scoreboard_open"])
 								if not f5_local0 then
-									f5_local0 = not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xBB045E46E88E762])
+									f5_local0 = not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_weapon_hud_visible"])
 								end
 							else
 								f5_local0 = true
@@ -121,74 +121,74 @@ CoD.uplinkBallReticle.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	})
 	local f1_local10 = self
 	local f1_local11 = self.subscribeToModel
-	local f1_local12 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local11(f1_local10, f1_local12["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xBFB2BDEC98D0644]], function(f8_arg0)
+	local f1_local12 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local11(f1_local10, f1_local12["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_draw_reticle"]], function(f8_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f8_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xBFB2BDEC98D0644],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_draw_reticle"],
 		})
 	end, false)
 	f1_local10 = self
 	f1_local11 = self.subscribeToModel
-	f1_local12 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local11(f1_local10, f1_local12["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x198075B069840DC]], function(f9_arg0)
+	f1_local12 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local11(f1_local10, f1_local12["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_game_ended"]], function(f9_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f9_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x198075B069840DC],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_game_ended"],
 		})
 	end, false)
 	f1_local10 = self
 	f1_local11 = self.subscribeToModel
-	f1_local12 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local11(f1_local10, f1_local12["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x69C28E2FCA82769]], function(f10_arg0)
+	f1_local12 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local11(f1_local10, f1_local12["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_hud_hardcore"]], function(f10_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f10_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x69C28E2FCA82769],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_hud_hardcore"],
 		})
 	end, false)
 	f1_local10 = self
 	f1_local11 = self.subscribeToModel
-	f1_local12 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local11(f1_local10, f1_local12["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xADC477DDE486DD7]], function(f11_arg0)
+	f1_local12 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local11(f1_local10, f1_local12["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_hud_visible"]], function(f11_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f11_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xADC477DDE486DD7],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_hud_visible"],
 		})
 	end, false)
 	f1_local10 = self
 	f1_local11 = self.subscribeToModel
-	f1_local12 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local11(f1_local10, f1_local12["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04]], function(f12_arg0)
+	f1_local12 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local11(f1_local10, f1_local12["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]], function(f12_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f12_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"],
 		})
 	end, false)
 	f1_local10 = self
 	f1_local11 = self.subscribeToModel
-	f1_local12 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local11(f1_local10, f1_local12["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xBB045E46E88E762]], function(f13_arg0)
+	f1_local12 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local11(f1_local10, f1_local12["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_weapon_hud_visible"]], function(f13_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f13_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xBB045E46E88E762],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_weapon_hud_visible"],
 		})
 	end, false)
 	f1_local10 = self
@@ -209,7 +209,7 @@ CoD.uplinkBallReticle.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	end)
 	f1_local10 = self
 	f1_local11 = self.subscribeToModel
-	f1_local12 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local12 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local11(f1_local10, f1_local12.LastInput, function(f16_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

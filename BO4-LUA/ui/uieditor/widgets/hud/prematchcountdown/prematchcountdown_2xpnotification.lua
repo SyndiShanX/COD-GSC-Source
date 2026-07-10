@@ -13,7 +13,7 @@ CoD.PrematchCountdown_2xpNotification.new = function(f1_arg0, f1_arg1, f1_arg2, 
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local DoubleXPText = CoD.PrematchCountdown_BeginsIn.new(f1_arg0, f1_arg1, 0.5, 0.5, -213, 213, 0, 0, 177, 225)
-	DoubleXPText.MatchText:setText(Engine[0xF9F1239CFD921FE](0xA2F4D3BF4BFC6E7))
+	DoubleXPText.MatchText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/double_xp"))
 	DoubleXPText.MatchText:setBackingAlpha(0.7)
 	self:addElement(DoubleXPText)
 	self.DoubleXPText = DoubleXPText
@@ -36,7 +36,7 @@ CoD.PrematchCountdown_2xpNotification.new = function(f1_arg0, f1_arg1, f1_arg2, 
 	})
 	local f1_local5 = TierBoost
 	local f1_local6 = TierBoost.subscribeToModel
-	local f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local6(f1_local5, f1_local7["gameScore.roundsPlayed"], function(f3_arg0)
 		f1_arg0:updateElementState(TierBoost, {
 			name = "model_validation",
@@ -48,7 +48,7 @@ CoD.PrematchCountdown_2xpNotification.new = function(f1_arg0, f1_arg1, f1_arg2, 
 	end, false)
 	TierBoost:setAlpha(0)
 	TierBoost:setScale(0.75, 0.75)
-	TierBoost.XpSmall:setImage(RegisterImage(0x6EC674D21C5C218))
+	TierBoost.XpSmall:setImage(RegisterImage(@"ui_icon_2xp_blackmarket"))
 	self:addElement(TierBoost)
 	self.TierBoost = TierBoost
 	self:mergeStateConditions({
@@ -159,7 +159,7 @@ CoD.PrematchCountdown_2xpNotification.new = function(f1_arg0, f1_arg1, f1_arg2, 
 	})
 	f1_local5 = self
 	f1_local6 = self.subscribeToModel
-	f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local6(f1_local5, f1_local7["gameScore.roundsPlayed"], function(f12_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -171,7 +171,7 @@ CoD.PrematchCountdown_2xpNotification.new = function(f1_arg0, f1_arg1, f1_arg2, 
 	end, false)
 	f1_local5 = self
 	f1_local6 = self.subscribeToModel
-	f1_local7 = Engine[0x8DF2E5447F384B9]()
+	f1_local7 = Engine[@"getglobalmodel"]()
 	f1_local6(f1_local5, f1_local7["lobbyRoot.lobbyNav"], function(f13_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -197,7 +197,7 @@ CoD.PrematchCountdown_2xpNotification.__resetProperties = function(f14_arg0)
 	f14_arg0.PrematchCountdown2xpBadge:setLeftRight(0.5, 0.5, -192, 0)
 	f14_arg0.PrematchCountdown2xpBadge:setAlpha(1)
 	f14_arg0.DoubleXPText:setAlpha(1)
-	f14_arg0.DoubleXPText.MatchText:setText(Engine[0xF9F1239CFD921FE](0xA2F4D3BF4BFC6E7))
+	f14_arg0.DoubleXPText.MatchText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/double_xp"))
 	f14_arg0.TierBoost:setLeftRight(0, 0, 104, 296)
 	f14_arg0.TierBoost:setAlpha(0)
 end
@@ -227,7 +227,7 @@ CoD.PrematchCountdown_2xpNotification.__clipsPerState = {
 			f16_arg0.DoubleXPText:completeAnimation()
 			f16_arg0.DoubleXPText.MatchText:completeAnimation()
 			f16_arg0.DoubleXPText:setAlpha(0)
-			f16_arg0.DoubleXPText.MatchText:setText(Engine[0xF9F1239CFD921FE](0xBACB4D078E5C949))
+			f16_arg0.DoubleXPText.MatchText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/triple_double"))
 			f16_arg0.clipFinished(f16_arg0.DoubleXPText)
 			f16_arg0.PrematchCountdown2xpBadge:completeAnimation()
 			f16_arg0.PrematchCountdown2xpBadge:setLeftRight(0.5, 0.5, -96, 96)
@@ -329,7 +329,7 @@ CoD.PrematchCountdown_2xpNotification.__clipsPerState = {
 			f17_arg0.DoubleXPText:completeAnimation()
 			f17_arg0.DoubleXPText.MatchText:completeAnimation()
 			f17_arg0.DoubleXPText:setAlpha(0)
-			f17_arg0.DoubleXPText.MatchText:setText(Engine[0xF9F1239CFD921FE](0xBACB4D078E5C949))
+			f17_arg0.DoubleXPText.MatchText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/triple_double"))
 			f17_local0(f17_arg0.DoubleXPText)
 			local f17_local1 = function(f35_arg0)
 				local f35_local0 = function(f36_arg0)
@@ -487,7 +487,7 @@ CoD.PrematchCountdown_2xpNotification.__clipsPerState = {
 			f62_arg0.DoubleXPText:completeAnimation()
 			f62_arg0.DoubleXPText.MatchText:completeAnimation()
 			f62_arg0.DoubleXPText:setAlpha(0)
-			f62_arg0.DoubleXPText.MatchText:setText(Engine[0xF9F1239CFD921FE](0x7AF43698F175B3A))
+			f62_arg0.DoubleXPText.MatchText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/double_double"))
 			f62_arg0.clipFinished(f62_arg0.DoubleXPText)
 			f62_arg0.PrematchCountdown2xpBadge:completeAnimation()
 			f62_arg0.PrematchCountdown2xpBadge:setAlpha(0)
@@ -583,7 +583,7 @@ CoD.PrematchCountdown_2xpNotification.__clipsPerState = {
 			f63_arg0.DoubleXPText:completeAnimation()
 			f63_arg0.DoubleXPText.MatchText:completeAnimation()
 			f63_arg0.DoubleXPText:setAlpha(0)
-			f63_arg0.DoubleXPText.MatchText:setText(Engine[0xF9F1239CFD921FE](0x7AF43698F175B3A))
+			f63_arg0.DoubleXPText.MatchText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/double_double"))
 			f63_local0(f63_arg0.DoubleXPText)
 			local f63_local1 = function(f81_arg0)
 				local f81_local0 = function(f82_arg0)
@@ -594,30 +594,30 @@ CoD.PrematchCountdown_2xpNotification.__clipsPerState = {
 									local f86_local0 = function(f87_arg0)
 										local f87_local0 = function(f88_arg0)
 											local f88_local0 = function(f89_arg0)
-												f89_arg0:beginAnimation(69, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+												f89_arg0:beginAnimation(69, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_out"])
 												f89_arg0:setAlpha(0)
 												f89_arg0:registerEventHandler("transition_complete_keyframe", f63_arg0.clipFinished)
 											end
-											f88_arg0:beginAnimation(90, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+											f88_arg0:beginAnimation(90, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_out"])
 											f88_arg0:setAlpha(1)
 											f88_arg0:registerEventHandler("transition_complete_keyframe", f88_local0)
 										end
-										f87_arg0:beginAnimation(90, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+										f87_arg0:beginAnimation(90, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_out"])
 										f87_arg0:setAlpha(0.2)
 										f87_arg0:registerEventHandler("transition_complete_keyframe", f87_local0)
 									end
 									f86_arg0:beginAnimation(1160)
 									f86_arg0:registerEventHandler("transition_complete_keyframe", f86_local0)
 								end
-								f85_arg0:beginAnimation(139, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+								f85_arg0:beginAnimation(139, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_out"])
 								f85_arg0:setAlpha(1)
 								f85_arg0:registerEventHandler("transition_complete_keyframe", f85_local0)
 							end
-							f84_arg0:beginAnimation(110, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+							f84_arg0:beginAnimation(110, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_out"])
 							f84_arg0:setAlpha(0.2)
 							f84_arg0:registerEventHandler("transition_complete_keyframe", f84_local0)
 						end
-						f83_arg0:beginAnimation(100, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+						f83_arg0:beginAnimation(100, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_out"])
 						f83_arg0:setAlpha(1)
 						f83_arg0:registerEventHandler("transition_complete_keyframe", f83_local0)
 					end
@@ -690,7 +690,7 @@ CoD.PrematchCountdown_2xpNotification.__clipsPerState = {
 			f99_arg0.DoubleXPText:completeAnimation()
 			f99_arg0.DoubleXPText.MatchText:completeAnimation()
 			f99_arg0.DoubleXPText:setAlpha(0)
-			f99_arg0.DoubleXPText.MatchText:setText(Engine[0xF9F1239CFD921FE](0x7AF43698F175B3A))
+			f99_arg0.DoubleXPText.MatchText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/double_double"))
 			f99_arg0.clipFinished(f99_arg0.DoubleXPText)
 			f99_arg0.PrematchCountdown2xpBadge:completeAnimation()
 			f99_arg0.PrematchCountdown2xpBadge:setAlpha(0)
@@ -789,7 +789,7 @@ CoD.PrematchCountdown_2xpNotification.__clipsPerState = {
 			f100_arg0.DoubleXPText:completeAnimation()
 			f100_arg0.DoubleXPText.MatchText:completeAnimation()
 			f100_arg0.DoubleXPText:setAlpha(0)
-			f100_arg0.DoubleXPText.MatchText:setText(Engine[0xF9F1239CFD921FE](0x7AF43698F175B3A))
+			f100_arg0.DoubleXPText.MatchText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/double_double"))
 			f100_local0(f100_arg0.DoubleXPText)
 			local f100_local1 = function(f118_arg0)
 				local f118_local0 = function(f119_arg0)
@@ -902,7 +902,7 @@ CoD.PrematchCountdown_2xpNotification.__clipsPerState = {
 			f136_arg0.DoubleXPText:completeAnimation()
 			f136_arg0.DoubleXPText.MatchText:completeAnimation()
 			f136_arg0.DoubleXPText:setAlpha(0)
-			f136_arg0.DoubleXPText.MatchText:setText(Engine[0xF9F1239CFD921FE](0x7AF43698F175B3A))
+			f136_arg0.DoubleXPText.MatchText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/double_double"))
 			f136_arg0.clipFinished(f136_arg0.DoubleXPText)
 			f136_arg0.PrematchCountdown2xpBadge:completeAnimation()
 			f136_arg0.PrematchCountdown2xpBadge:setLeftRight(0.5, 0.5, -96, 96)
@@ -1004,7 +1004,7 @@ CoD.PrematchCountdown_2xpNotification.__clipsPerState = {
 			f137_arg0.DoubleXPText:completeAnimation()
 			f137_arg0.DoubleXPText.MatchText:completeAnimation()
 			f137_arg0.DoubleXPText:setAlpha(0)
-			f137_arg0.DoubleXPText.MatchText:setText(Engine[0xF9F1239CFD921FE](0x7AF43698F175B3A))
+			f137_arg0.DoubleXPText.MatchText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/double_double"))
 			f137_local0(f137_arg0.DoubleXPText)
 			f137_arg0.PrematchCountdown2xpBadge:completeAnimation()
 			f137_arg0.PrematchCountdown2xpBadge:setLeftRight(0.5, 0.5, -96, 96)
@@ -1117,7 +1117,7 @@ CoD.PrematchCountdown_2xpNotification.__clipsPerState = {
 			f173_arg0.DoubleXPText:completeAnimation()
 			f173_arg0.DoubleXPText.MatchText:completeAnimation()
 			f173_arg0.DoubleXPText:setAlpha(0)
-			f173_arg0.DoubleXPText.MatchText:setText(Engine[0xF9F1239CFD921FE](0xA2F4D3BF4BFC6E7))
+			f173_arg0.DoubleXPText.MatchText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/double_xp"))
 			f173_arg0.clipFinished(f173_arg0.DoubleXPText)
 			f173_arg0.PrematchCountdown2xpBadge:completeAnimation()
 			f173_arg0.PrematchCountdown2xpBadge:setAlpha(0)
@@ -1213,7 +1213,7 @@ CoD.PrematchCountdown_2xpNotification.__clipsPerState = {
 			f174_arg0.DoubleXPText:completeAnimation()
 			f174_arg0.DoubleXPText.MatchText:completeAnimation()
 			f174_arg0.DoubleXPText:setAlpha(0)
-			f174_arg0.DoubleXPText.MatchText:setText(Engine[0xF9F1239CFD921FE](0xA2F4D3BF4BFC6E7))
+			f174_arg0.DoubleXPText.MatchText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/double_xp"))
 			f174_local0(f174_arg0.DoubleXPText)
 			local f174_local1 = function(f192_arg0)
 				local f192_local0 = function(f193_arg0)
@@ -1224,30 +1224,30 @@ CoD.PrematchCountdown_2xpNotification.__clipsPerState = {
 									local f197_local0 = function(f198_arg0)
 										local f198_local0 = function(f199_arg0)
 											local f199_local0 = function(f200_arg0)
-												f200_arg0:beginAnimation(69, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+												f200_arg0:beginAnimation(69, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_out"])
 												f200_arg0:setAlpha(0)
 												f200_arg0:registerEventHandler("transition_complete_keyframe", f174_arg0.clipFinished)
 											end
-											f199_arg0:beginAnimation(90, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+											f199_arg0:beginAnimation(90, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_out"])
 											f199_arg0:setAlpha(1)
 											f199_arg0:registerEventHandler("transition_complete_keyframe", f199_local0)
 										end
-										f198_arg0:beginAnimation(90, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+										f198_arg0:beginAnimation(90, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_out"])
 										f198_arg0:setAlpha(0.2)
 										f198_arg0:registerEventHandler("transition_complete_keyframe", f198_local0)
 									end
 									f197_arg0:beginAnimation(1160)
 									f197_arg0:registerEventHandler("transition_complete_keyframe", f197_local0)
 								end
-								f196_arg0:beginAnimation(139, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+								f196_arg0:beginAnimation(139, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_out"])
 								f196_arg0:setAlpha(1)
 								f196_arg0:registerEventHandler("transition_complete_keyframe", f196_local0)
 							end
-							f195_arg0:beginAnimation(110, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+							f195_arg0:beginAnimation(110, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_out"])
 							f195_arg0:setAlpha(0.2)
 							f195_arg0:registerEventHandler("transition_complete_keyframe", f195_local0)
 						end
-						f194_arg0:beginAnimation(100, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+						f194_arg0:beginAnimation(100, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_out"])
 						f194_arg0:setAlpha(1)
 						f194_arg0:registerEventHandler("transition_complete_keyframe", f194_local0)
 					end
@@ -1276,7 +1276,7 @@ CoD.PrematchCountdown_2xpNotification.__clipsPerState = {
 			f201_arg0.DoubleXPText:completeAnimation()
 			f201_arg0.DoubleXPText.MatchText:completeAnimation()
 			f201_arg0.DoubleXPText:setAlpha(0)
-			f201_arg0.DoubleXPText.MatchText:setText(Engine[0xF9F1239CFD921FE](0xFF550687ED9925D))
+			f201_arg0.DoubleXPText.MatchText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_FF550687ED9925D"))
 			f201_arg0.clipFinished(f201_arg0.DoubleXPText)
 			f201_arg0.PrematchCountdown2xpBadge:completeAnimation()
 			f201_arg0.PrematchCountdown2xpBadge:setAlpha(0)
@@ -1372,7 +1372,7 @@ CoD.PrematchCountdown_2xpNotification.__clipsPerState = {
 			f202_arg0.DoubleXPText:completeAnimation()
 			f202_arg0.DoubleXPText.MatchText:completeAnimation()
 			f202_arg0.DoubleXPText:setAlpha(0)
-			f202_arg0.DoubleXPText.MatchText:setText(Engine[0xF9F1239CFD921FE](0xFF550687ED9925D))
+			f202_arg0.DoubleXPText.MatchText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_FF550687ED9925D"))
 			f202_local0(f202_arg0.DoubleXPText)
 			local f202_local1 = function(f220_arg0)
 				local f220_local0 = function(f221_arg0)
@@ -1383,30 +1383,30 @@ CoD.PrematchCountdown_2xpNotification.__clipsPerState = {
 									local f225_local0 = function(f226_arg0)
 										local f226_local0 = function(f227_arg0)
 											local f227_local0 = function(f228_arg0)
-												f228_arg0:beginAnimation(69, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+												f228_arg0:beginAnimation(69, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_out"])
 												f228_arg0:setAlpha(0)
 												f228_arg0:registerEventHandler("transition_complete_keyframe", f202_arg0.clipFinished)
 											end
-											f227_arg0:beginAnimation(90, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+											f227_arg0:beginAnimation(90, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_out"])
 											f227_arg0:setAlpha(1)
 											f227_arg0:registerEventHandler("transition_complete_keyframe", f227_local0)
 										end
-										f226_arg0:beginAnimation(90, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+										f226_arg0:beginAnimation(90, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_out"])
 										f226_arg0:setAlpha(0.2)
 										f226_arg0:registerEventHandler("transition_complete_keyframe", f226_local0)
 									end
 									f225_arg0:beginAnimation(1160)
 									f225_arg0:registerEventHandler("transition_complete_keyframe", f225_local0)
 								end
-								f224_arg0:beginAnimation(139, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+								f224_arg0:beginAnimation(139, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_out"])
 								f224_arg0:setAlpha(1)
 								f224_arg0:registerEventHandler("transition_complete_keyframe", f224_local0)
 							end
-							f223_arg0:beginAnimation(110, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+							f223_arg0:beginAnimation(110, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_out"])
 							f223_arg0:setAlpha(0.2)
 							f223_arg0:registerEventHandler("transition_complete_keyframe", f223_local0)
 						end
-						f222_arg0:beginAnimation(100, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+						f222_arg0:beginAnimation(100, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_out"])
 						f222_arg0:setAlpha(1)
 						f222_arg0:registerEventHandler("transition_complete_keyframe", f222_local0)
 					end
@@ -1435,7 +1435,7 @@ CoD.PrematchCountdown_2xpNotification.__clipsPerState = {
 			f229_arg0.DoubleXPText:completeAnimation()
 			f229_arg0.DoubleXPText.MatchText:completeAnimation()
 			f229_arg0.DoubleXPText:setAlpha(0)
-			f229_arg0.DoubleXPText.MatchText:setText(Engine[0xF9F1239CFD921FE](0xA2F4D3BF4BFC6E7))
+			f229_arg0.DoubleXPText.MatchText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/double_xp"))
 			f229_arg0.clipFinished(f229_arg0.DoubleXPText)
 			f229_arg0.PrematchCountdown2xpBadge:completeAnimation()
 			f229_arg0.PrematchCountdown2xpBadge:setAlpha(0)
@@ -1531,7 +1531,7 @@ CoD.PrematchCountdown_2xpNotification.__clipsPerState = {
 			f230_arg0.DoubleXPText:completeAnimation()
 			f230_arg0.DoubleXPText.MatchText:completeAnimation()
 			f230_arg0.DoubleXPText:setAlpha(0)
-			f230_arg0.DoubleXPText.MatchText:setText(Engine[0xF9F1239CFD921FE](0xA2F4D3BF4BFC6E7))
+			f230_arg0.DoubleXPText.MatchText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/double_xp"))
 			f230_local0(f230_arg0.DoubleXPText)
 			f230_arg0.PrematchCountdown2xpBadge:completeAnimation()
 			f230_arg0.PrematchCountdown2xpBadge:setAlpha(0)
@@ -1545,30 +1545,30 @@ CoD.PrematchCountdown_2xpNotification.__clipsPerState = {
 									local f253_local0 = function(f254_arg0)
 										local f254_local0 = function(f255_arg0)
 											local f255_local0 = function(f256_arg0)
-												f256_arg0:beginAnimation(69, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+												f256_arg0:beginAnimation(69, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_out"])
 												f256_arg0:setAlpha(0)
 												f256_arg0:registerEventHandler("transition_complete_keyframe", f230_arg0.clipFinished)
 											end
-											f255_arg0:beginAnimation(90, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+											f255_arg0:beginAnimation(90, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_out"])
 											f255_arg0:setAlpha(1)
 											f255_arg0:registerEventHandler("transition_complete_keyframe", f255_local0)
 										end
-										f254_arg0:beginAnimation(90, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+										f254_arg0:beginAnimation(90, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_out"])
 										f254_arg0:setAlpha(0.2)
 										f254_arg0:registerEventHandler("transition_complete_keyframe", f254_local0)
 									end
 									f253_arg0:beginAnimation(1160)
 									f253_arg0:registerEventHandler("transition_complete_keyframe", f253_local0)
 								end
-								f252_arg0:beginAnimation(139, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+								f252_arg0:beginAnimation(139, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_out"])
 								f252_arg0:setAlpha(1)
 								f252_arg0:registerEventHandler("transition_complete_keyframe", f252_local0)
 							end
-							f251_arg0:beginAnimation(110, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+							f251_arg0:beginAnimation(110, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_out"])
 							f251_arg0:setAlpha(0.2)
 							f251_arg0:registerEventHandler("transition_complete_keyframe", f251_local0)
 						end
-						f250_arg0:beginAnimation(100, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+						f250_arg0:beginAnimation(100, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_out"])
 						f250_arg0:setAlpha(1)
 						f250_arg0:registerEventHandler("transition_complete_keyframe", f250_local0)
 					end
@@ -1594,7 +1594,7 @@ CoD.PrematchCountdown_2xpNotification.__clipsPerState = {
 			f257_arg0.DoubleXPText:completeAnimation()
 			f257_arg0.DoubleXPText.MatchText:completeAnimation()
 			f257_arg0.DoubleXPText:setAlpha(0)
-			f257_arg0.DoubleXPText.MatchText:setText(Engine[0xF9F1239CFD921FE](0x687BCA25FDF9F2B))
+			f257_arg0.DoubleXPText.MatchText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/tier_boost"))
 			f257_arg0.clipFinished(f257_arg0.DoubleXPText)
 			f257_arg0.PrematchCountdown2xpBadge:completeAnimation()
 			f257_arg0.PrematchCountdown2xpBadge:setAlpha(0)
@@ -1693,7 +1693,7 @@ CoD.PrematchCountdown_2xpNotification.__clipsPerState = {
 			f258_arg0.DoubleXPText:completeAnimation()
 			f258_arg0.DoubleXPText.MatchText:completeAnimation()
 			f258_arg0.DoubleXPText:setAlpha(0)
-			f258_arg0.DoubleXPText.MatchText:setText(Engine[0xF9F1239CFD921FE](0x687BCA25FDF9F2B))
+			f258_arg0.DoubleXPText.MatchText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/tier_boost"))
 			f258_local0(f258_arg0.DoubleXPText)
 			f258_arg0.PrematchCountdown2xpBadge:completeAnimation()
 			f258_arg0.PrematchCountdown2xpBadge:setAlpha(0)

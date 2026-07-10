@@ -9,11 +9,11 @@ CoD.CallingCardProfilerXP.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local XPText = LUI.UIText.new(0, 0, 54, 158, 0, 0, 17.5, 38.5)
 	XPText:setTTF("default")
-	XPText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	XPText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	XPText:linkToElementModel(self, "xp", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			XPText:setText(LocalizeIntoString(0xC0E387C289AD7A9, f2_local0))
+			XPText:setText(LocalizeIntoString(@"hash_1C0E387C289AD7A9", f2_local0))
 		end
 	end)
 	self:addElement(XPText)
@@ -22,17 +22,17 @@ CoD.CallingCardProfilerXP.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	MeritsText:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	MeritsText:setAlpha(0)
 	MeritsText:setTTF("default")
-	MeritsText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	MeritsText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	MeritsText:linkToElementModel(self, "xp", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
-			MeritsText:setText(LocalizeIntoString(0x5B30C9471AAF95D, f3_local0))
+			MeritsText:setText(LocalizeIntoString(@"hash_5B30C9471AAF95D", f3_local0))
 		end
 	end)
 	self:addElement(MeritsText)
 	self.MeritsText = MeritsText
 	local XPIcon = LUI.UIImage.new(0, 0, 0, 54, 0, 0, 0, 54)
-	XPIcon:setImage(RegisterImage(0x7B197CE33A5602C))
+	XPIcon:setImage(RegisterImage(@"uie_t7_hud_mp_notifications_xp"))
 	self:addElement(XPIcon)
 	self.XPIcon = XPIcon
 	self:mergeStateConditions({
@@ -65,7 +65,7 @@ CoD.CallingCardProfilerXP.__resetProperties = function(f6_arg0)
 	f6_arg0.XPIcon:setAlpha(1)
 	f6_arg0.MeritsText:setLeftRight(0, 0, 54, 158)
 	f6_arg0.MeritsText:setAlpha(0)
-	f6_arg0.MeritsText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	f6_arg0.MeritsText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	f6_arg0.XPText:setAlpha(1)
 end
 CoD.CallingCardProfilerXP.__clipsPerState = {
@@ -85,7 +85,7 @@ CoD.CallingCardProfilerXP.__clipsPerState = {
 			f8_arg0.MeritsText:completeAnimation()
 			f8_arg0.MeritsText:setLeftRight(0.5, 0.5, -75, 75)
 			f8_arg0.MeritsText:setAlpha(1)
-			f8_arg0.MeritsText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+			f8_arg0.MeritsText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 			f8_arg0.clipFinished(f8_arg0.MeritsText)
 			f8_arg0.XPIcon:completeAnimation()
 			f8_arg0.XPIcon:setAlpha(0)

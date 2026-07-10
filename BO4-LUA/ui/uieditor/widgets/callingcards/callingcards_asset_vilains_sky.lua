@@ -8,12 +8,12 @@ CoD.CallingCards_Asset_vilains_sky.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local bg = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	bg:setImage(RegisterImage(0x6990A27E3DE26BC))
+	bg:setImage(RegisterImage(@"hash_56990A27E3DE26BC"))
 	self:addElement(bg)
 	self.bg = bg
 	local bg2 = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
 	bg2:setZRot(180)
-	bg2:setImage(RegisterImage(0x6990A27E3DE26BC))
+	bg2:setImage(RegisterImage(@"hash_56990A27E3DE26BC"))
 	self:addElement(bg2)
 	self.bg2 = bg2
 	if PostLoadFunc then

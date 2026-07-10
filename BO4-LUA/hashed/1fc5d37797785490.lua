@@ -127,7 +127,7 @@ CoD.vhud_gunship_recticle.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	})
 	local f1_local12 = self
 	local f1_local13 = self.subscribeToModel
-	local f1_local14 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local14 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local13(f1_local12, f1_local14["factions.isCoDCaster"], function(f15_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

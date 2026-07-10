@@ -18,7 +18,7 @@ LUI.createMenu.KillcamMenu_WZ = function(f1_arg0, f1_arg1)
 	self.anyChildUsesUpdateState = true
 	f1_local1:addElementToPendingUpdateStateList(self)
 	local BlurBG = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	BlurBG:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	BlurBG:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	BlurBG:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(BlurBG)
 	self.BlurBG = BlurBG
@@ -31,8 +31,8 @@ LUI.createMenu.KillcamMenu_WZ = function(f1_arg0, f1_arg1)
 	self:addElement(DeathCamLabel)
 	self.DeathCamLabel = DeathCamLabel
 	local RedBarLargeThinBtm = LUI.UIImage.new(0.5, 0.5, -570, 570, 0.5, 0.5, 61, 101)
-	RedBarLargeThinBtm:setImage(RegisterImage(0x61F5031E336929F))
-	RedBarLargeThinBtm:setMaterial(LUI.UIImage.GetCachedMaterial(0xE992BD5A540E2D))
+	RedBarLargeThinBtm:setImage(RegisterImage(@"uie_ui_hud_wz_deathcam_red_bar_lg_thin"))
+	RedBarLargeThinBtm:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_delta_normal"))
 	RedBarLargeThinBtm:setShaderVector(0, 0, 1, 0, 0)
 	RedBarLargeThinBtm:setShaderVector(1, 0, 0, 0, 0)
 	RedBarLargeThinBtm:setShaderVector(2, 0, 1, 0, 0)
@@ -41,8 +41,8 @@ LUI.createMenu.KillcamMenu_WZ = function(f1_arg0, f1_arg1)
 	self:addElement(RedBarLargeThinBtm)
 	self.RedBarLargeThinBtm = RedBarLargeThinBtm
 	local RedBarLargeThinTop = LUI.UIImage.new(0.5, 0.5, -570, 570, 0.5, 0.5, -101, -61)
-	RedBarLargeThinTop:setImage(RegisterImage(0x61F5031E336929F))
-	RedBarLargeThinTop:setMaterial(LUI.UIImage.GetCachedMaterial(0xE992BD5A540E2D))
+	RedBarLargeThinTop:setImage(RegisterImage(@"uie_ui_hud_wz_deathcam_red_bar_lg_thin"))
+	RedBarLargeThinTop:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_delta_normal"))
 	RedBarLargeThinTop:setShaderVector(0, 0, 1, 0, 0)
 	RedBarLargeThinTop:setShaderVector(1, 0, 0, 0, 0)
 	RedBarLargeThinTop:setShaderVector(2, 0, 1, 0, 0)
@@ -51,8 +51,8 @@ LUI.createMenu.KillcamMenu_WZ = function(f1_arg0, f1_arg1)
 	self:addElement(RedBarLargeThinTop)
 	self.RedBarLargeThinTop = RedBarLargeThinTop
 	local RedBarLargeThickBtm = LUI.UIImage.new(0.5, 0.5, -570, 570, 0.5, 0.5, 66, 114)
-	RedBarLargeThickBtm:setImage(RegisterImage(0xDD230C515C3FB89))
-	RedBarLargeThickBtm:setMaterial(LUI.UIImage.GetCachedMaterial(0xE992BD5A540E2D))
+	RedBarLargeThickBtm:setImage(RegisterImage(@"uie_ui_hud_wz_deathcam_red_bar_lg_thick"))
+	RedBarLargeThickBtm:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_delta_normal"))
 	RedBarLargeThickBtm:setShaderVector(0, 0, 1, 0, 0)
 	RedBarLargeThickBtm:setShaderVector(1, 0, 0, 0, 0)
 	RedBarLargeThickBtm:setShaderVector(2, 0, 1, 0, 0)
@@ -61,8 +61,8 @@ LUI.createMenu.KillcamMenu_WZ = function(f1_arg0, f1_arg1)
 	self:addElement(RedBarLargeThickBtm)
 	self.RedBarLargeThickBtm = RedBarLargeThickBtm
 	local RedBarLargeThickTop = LUI.UIImage.new(0.5, 0.5, -570, 570, 0.5, 0.5, -114, -66)
-	RedBarLargeThickTop:setImage(RegisterImage(0xDD230C515C3FB89))
-	RedBarLargeThickTop:setMaterial(LUI.UIImage.GetCachedMaterial(0xE992BD5A540E2D))
+	RedBarLargeThickTop:setImage(RegisterImage(@"uie_ui_hud_wz_deathcam_red_bar_lg_thick"))
+	RedBarLargeThickTop:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_delta_normal"))
 	RedBarLargeThickTop:setShaderVector(0, 0, 1, 0, 0)
 	RedBarLargeThickTop:setShaderVector(1, 0, 0, 0, 0)
 	RedBarLargeThickTop:setShaderVector(2, 0, 1, 0, 0)
@@ -71,23 +71,23 @@ LUI.createMenu.KillcamMenu_WZ = function(f1_arg0, f1_arg1)
 	self:addElement(RedBarLargeThickTop)
 	self.RedBarLargeThickTop = RedBarLargeThickTop
 	local TextBGTiled = LUI.UIImage.new(0.5, 0.5, -552, 552, 0.5, 0.5, -72, 72)
-	TextBGTiled:setImage(RegisterImage(0x22666E7FB297C80))
-	TextBGTiled:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	TextBGTiled:setImage(RegisterImage(@"uie_ui_hud_wz_deathcam_text_bg_tileable"))
+	TextBGTiled:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	TextBGTiled:setShaderVector(0, 0, 0, 0.32, 0.6)
 	TextBGTiled:setupNineSliceShader(48, 48)
 	self:addElement(TextBGTiled)
 	self.TextBGTiled = TextBGTiled
 	local DeathCamLabel2 = LUI.UIText.new(0.5, 0.5, -450, 450, 0.5, 0.5, -65, 75)
 	DeathCamLabel2:setRGB(1, 0.9, 0.9)
-	DeathCamLabel2:setText(LocalizeToUpperString(0xA8BAC035CE51600))
+	DeathCamLabel2:setText(LocalizeToUpperString(@"wz/deathcam"))
 	DeathCamLabel2:setTTF("ttmussels_demibold")
-	DeathCamLabel2:setMaterial(LUI.UIImage.GetCachedMaterial(0x90D57B1E92D39D7))
+	DeathCamLabel2:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_90D57B1E92D39D7"))
 	DeathCamLabel2:setShaderVector(0, 1, 0, 0, 0)
 	DeathCamLabel2:setShaderVector(1, 0, 0, 0, 0)
 	DeathCamLabel2:setShaderVector(2, 1, 0, 0, 0.2)
 	DeathCamLabel2:setLetterSpacing(20)
-	DeathCamLabel2:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	DeathCamLabel2:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	DeathCamLabel2:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	DeathCamLabel2:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	self:addElement(DeathCamLabel2)
 	self.DeathCamLabel2 = DeathCamLabel2
 	local TriangleBGCorner = CoD.WarzoneDeathCamTriangleBGCorners.new(f1_local1, f1_arg0, 0.5, 0.5, -254, 254, 0.5, 0.5, -180.5, 256.5)
@@ -95,26 +95,26 @@ LUI.createMenu.KillcamMenu_WZ = function(f1_arg0, f1_arg1)
 	self:addElement(TriangleBGCorner)
 	self.TriangleBGCorner = TriangleBGCorner
 	local TextBGTiledAdd = LUI.UIImage.new(0.5, 0.5, -552, 552, 0.5, 0.5, -72, 72)
-	TextBGTiledAdd:setImage(RegisterImage(0x22666E7FB297C80))
-	TextBGTiledAdd:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	TextBGTiledAdd:setImage(RegisterImage(@"uie_ui_hud_wz_deathcam_text_bg_tileable"))
+	TextBGTiledAdd:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	TextBGTiledAdd:setShaderVector(0, 0, 0, 0, 0)
 	TextBGTiledAdd:setupNineSliceShader(48, 48)
 	self:addElement(TextBGTiledAdd)
 	self.TextBGTiledAdd = TextBGTiledAdd
 	local TriangleBGMain = LUI.UIImage.new(0.5, 0.5, -240, 240, 0.5, 0.5, -233, 191)
 	TriangleBGMain:setAlpha(0.33)
-	TriangleBGMain:setImage(RegisterImage(0x5A6B14D153D571E))
-	TriangleBGMain:setMaterial(LUI.UIImage.GetCachedMaterial(0xF755127C95CF5B6))
+	TriangleBGMain:setImage(RegisterImage(@"uie_ui_hud_wz_deathcam_triangle_bg_main"))
+	TriangleBGMain:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_F755127C95CF5B6"))
 	TriangleBGMain:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(TriangleBGMain)
 	self.TriangleBGMain = TriangleBGMain
 	local LineAccents = CoD.WarzoneDeathCamLineAccents.new(f1_local1, f1_arg0, 0.5, 0.5, -555, 555, 0.5, 0.5, -108, 108)
-	LineAccents:setRFTMaterial(LUI.UIImage.GetCachedMaterial(0xC212964B40FA826))
+	LineAccents:setRFTMaterial(LUI.UIImage.GetCachedMaterial(@"hash_5C212964B40FA826"))
 	self:addElement(LineAccents)
 	self.LineAccents = LineAccents
 	local warningStripeR = CoD.WarzoneWarningStripe.new(f1_local1, f1_arg0, 0.5, 0.5, 635, 1027, 0.5, 0.5, -54, 58)
 	warningStripeR:setScale(1.4, 1.4)
-	warningStripeR:setRFTMaterial(LUI.UIImage.GetCachedMaterial(0xB17513E9D94CE76))
+	warningStripeR:setRFTMaterial(LUI.UIImage.GetCachedMaterial(@"hash_5B17513E9D94CE76"))
 	warningStripeR:setShaderVector(0, 0, 1, 0, 0)
 	warningStripeR:setShaderVector(1, 0, 0.8, 0, 0)
 	warningStripeR:setShaderVector(2, 0, 1, 0, 0)
@@ -124,7 +124,7 @@ LUI.createMenu.KillcamMenu_WZ = function(f1_arg0, f1_arg1)
 	local warningStripeR2 = CoD.WarzoneWarningStripe.new(f1_local1, f1_arg0, 0.5, 0.5, -1027, -635, 0.5, 0.5, -54, 58)
 	warningStripeR2:setYRot(180)
 	warningStripeR2:setScale(1.4, 1.4)
-	warningStripeR2:setRFTMaterial(LUI.UIImage.GetCachedMaterial(0xB17513E9D94CE76))
+	warningStripeR2:setRFTMaterial(LUI.UIImage.GetCachedMaterial(@"hash_5B17513E9D94CE76"))
 	warningStripeR2:setShaderVector(0, 0, 1, 0, 0)
 	warningStripeR2:setShaderVector(1, 0.8, 0, 0, 0)
 	warningStripeR2:setShaderVector(2, 0, 1, 0, 0)
@@ -140,20 +140,20 @@ LUI.createMenu.KillcamMenu_WZ = function(f1_arg0, f1_arg1)
 		{
 			stateName = "Killcam",
 			condition = function(menu, element, event)
-				return Engine[0xDD333420C49E6D0](f1_arg0, Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2])
+				return Engine[@"isvisibilitybitset"](f1_arg0, Enum[@"uivisibilitybit"][@"bit_in_killcam"])
 			end,
 		},
 	})
 	local f1_local18 = self
 	local f1_local19 = self.subscribeToModel
-	local f1_local20 = Engine[0x4DF5CFBC1771947](f1_arg0)
-	f1_local19(f1_local18, f1_local20["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2]], function(f3_arg0)
+	local f1_local20 = Engine[@"getmodelforcontroller"](f1_arg0)
+	f1_local19(f1_local18, f1_local20["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"]], function(f3_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_local1,
 			controller = f1_arg0,
 			modelValue = f3_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"],
 		})
 	end, false)
 	LUI.OverrideFunction_CallOriginalFirst(self, "close", function(element)
@@ -162,7 +162,7 @@ LUI.createMenu.KillcamMenu_WZ = function(f1_arg0, f1_arg1)
 	end)
 	self:subscribeToGlobalModel(f1_arg0, "PerController", "scriptNotify", function(model)
 		local f5_local0 = self
-		if CoD.ModelUtility.IsParamModelEqualToHashString(model, 0x937494C549C06BB) then
+		if CoD.ModelUtility.IsParamModelEqualToHashString(model, @"post_killcam_transition") then
 			PlayClip(self, "EndTransition", f1_arg0)
 		end
 	end)
@@ -338,7 +338,7 @@ CoD.KillcamMenu_WZ.__clipsPerState = {
 							f23_arg0:setAlpha(0.07)
 							f23_arg0:registerEventHandler("transition_complete_keyframe", f23_local0)
 						end
-						f22_arg0:beginAnimation(99, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+						f22_arg0:beginAnimation(99, Enum[@"luitween"][@"luitween_ease_both"])
 						f22_arg0:setAlpha(0.93)
 						f22_arg0:setShaderVector(0, 0, 1, 0, 0)
 						f22_arg0:registerEventHandler("transition_complete_keyframe", f22_local0)
@@ -377,7 +377,7 @@ CoD.KillcamMenu_WZ.__clipsPerState = {
 							f29_arg0:setAlpha(0.07)
 							f29_arg0:registerEventHandler("transition_complete_keyframe", f29_local0)
 						end
-						f28_arg0:beginAnimation(99, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+						f28_arg0:beginAnimation(99, Enum[@"luitween"][@"luitween_ease_both"])
 						f28_arg0:setAlpha(0.93)
 						f28_arg0:setShaderVector(0, 0, 1, 0, 0)
 						f28_arg0:registerEventHandler("transition_complete_keyframe", f28_local0)
@@ -416,7 +416,7 @@ CoD.KillcamMenu_WZ.__clipsPerState = {
 							f35_arg0:beginAnimation(1400)
 							f35_arg0:registerEventHandler("transition_complete_keyframe", f35_local0)
 						end
-						f34_arg0:beginAnimation(99, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+						f34_arg0:beginAnimation(99, Enum[@"luitween"][@"luitween_ease_both"])
 						f34_arg0:setTopBottom(0.5, 0.5, 66, 114)
 						f34_arg0:registerEventHandler("transition_complete_keyframe", f34_local0)
 					end
@@ -456,7 +456,7 @@ CoD.KillcamMenu_WZ.__clipsPerState = {
 							f41_arg0:beginAnimation(1400)
 							f41_arg0:registerEventHandler("transition_complete_keyframe", f41_local0)
 						end
-						f40_arg0:beginAnimation(99, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+						f40_arg0:beginAnimation(99, Enum[@"luitween"][@"luitween_ease_both"])
 						f40_arg0:setTopBottom(0.5, 0.5, -114, -66)
 						f40_arg0:registerEventHandler("transition_complete_keyframe", f40_local0)
 					end
@@ -604,10 +604,10 @@ CoD.KillcamMenu_WZ.__clipsPerState = {
 					f56_arg0.TriangleBGCornerLeft:setShaderVector(0, 8.18, 0, 0, 0)
 					f56_arg0:registerEventHandler("transition_complete_keyframe", f56_local0)
 				end
-				f8_arg0.TriangleBGCorner:beginAnimation(150, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
-				f8_arg0.TriangleBGCorner.TriangleBGCornerTop:beginAnimation(150, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
-				f8_arg0.TriangleBGCorner.TriangleBGCornerRight:beginAnimation(150, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
-				f8_arg0.TriangleBGCorner.TriangleBGCornerLeft:beginAnimation(150, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f8_arg0.TriangleBGCorner:beginAnimation(150, Enum[@"luitween"][@"luitween_ease_out"])
+				f8_arg0.TriangleBGCorner.TriangleBGCornerTop:beginAnimation(150, Enum[@"luitween"][@"luitween_ease_out"])
+				f8_arg0.TriangleBGCorner.TriangleBGCornerRight:beginAnimation(150, Enum[@"luitween"][@"luitween_ease_out"])
+				f8_arg0.TriangleBGCorner.TriangleBGCornerLeft:beginAnimation(150, Enum[@"luitween"][@"luitween_ease_out"])
 				f8_arg0.TriangleBGCorner:setAlpha(0.5)
 				f8_arg0.TriangleBGCorner:setZRot(0)
 				f8_arg0.TriangleBGCorner.TriangleBGCornerTop:setShaderVector(0, 7.45, 0, 0, 0)
@@ -674,7 +674,7 @@ CoD.KillcamMenu_WZ.__clipsPerState = {
 						f71_arg0:setShaderVector(0, 1, 0, 0, 0)
 						f71_arg0:registerEventHandler("transition_complete_keyframe", f71_local0)
 					end
-					f70_arg0:beginAnimation(49, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f70_arg0:beginAnimation(49, Enum[@"luitween"][@"luitween_ease_both"])
 					f70_arg0:setAlpha(0.33)
 					f70_arg0:setScale(1, 1)
 					f70_arg0:setShaderVector(0, 2, 0, 0, 0)

@@ -14,13 +14,13 @@ CoD.lmgInfiniteReticle_UI3D_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Bg0 = LUI.UIImage.new(0, 0, -15, 337, 0, 0, -17, 160)
 	Bg0:setAlpha(0.25)
-	Bg0:setImage(RegisterImage(0xE30A82E14EBA741))
-	Bg0:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Bg0:setImage(RegisterImage(@"uie_t7_weapon_lmg_screen_bg"))
+	Bg0:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Bg0)
 	self.Bg0 = Bg0
 	local Bg = LUI.UIImage.new(0, 0, -17, 334, 0, 0, -16, 161)
-	Bg:setImage(RegisterImage(0xA764852C247E1E1))
-	Bg:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Bg:setImage(RegisterImage(@"uie_t7_weapon_lmg_screen_bg_add"))
+	Bg:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Bg)
 	self.Bg = Bg
 	local AmmoBarTop = CoD.lmgInfiniteReticle_AmmoBar.new(f1_arg0, f1_arg1, 0, 0, 67, 255, 0, 0, 44, 68)
@@ -42,7 +42,7 @@ CoD.lmgInfiniteReticle_UI3D_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	self:addElement(AmmoBarBottom)
 	self.AmmoBarBottom = AmmoBarBottom
 	local Status = CoD.lmgInfiniteReticle_Status.new(f1_arg0, f1_arg1, 0, 0, 62, 264, 0, 0, 9, 43)
-	Status.Status:setText(Engine[0xF9F1239CFD921FE](0xADE90237E6498C0))
+	Status.Status:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_4ADE90237E6498C0"))
 	self:addElement(Status)
 	self.Status = Status
 	local lmgInfiniteReticleExtras = CoD.lmgInfiniteReticle_Extras.new(f1_arg0, f1_arg1, 0, 0, 68, 261, 0, 0, 97, 124)
@@ -51,13 +51,13 @@ CoD.lmgInfiniteReticle_UI3D_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	self.lmgInfiniteReticleExtras = lmgInfiniteReticleExtras
 	local lightRight = LUI.UIImage.new(0, 0, 242, 336, 0, 0, 5, 134)
 	lightRight:setYRot(180)
-	lightRight:setImage(RegisterImage(0x7A9673BAD84CFAF))
-	lightRight:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	lightRight:setImage(RegisterImage(@"uie_t7_weapon_lmg_lights_02"))
+	lightRight:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(lightRight)
 	self.lightRight = lightRight
 	local lightsLeft = LUI.UIImage.new(0, 0, -17, 77, 0, 0, 5, 134)
-	lightsLeft:setImage(RegisterImage(0x7A9673BAD84CFAF))
-	lightsLeft:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	lightsLeft:setImage(RegisterImage(@"uie_t7_weapon_lmg_lights_02"))
+	lightsLeft:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(lightsLeft)
 	self.lightsLeft = lightsLeft
 	local lmgInfiniteReticlelightLeft = CoD.lmgInfiniteReticle_light.new(f1_arg0, f1_arg1, 0.5, 0.5, -177, -83, 0.5, 0.5, -65, 64)
@@ -68,45 +68,45 @@ CoD.lmgInfiniteReticle_UI3D_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	self:addElement(lmgInfiniteReticlelightRight)
 	self.lmgInfiniteReticlelightRight = lmgInfiniteReticlelightRight
 	local Bg10 = LUI.UIImage.new(0, 0, -17, 334, 0, 0, -16, 161)
-	Bg10:setImage(RegisterImage(0xEDEB7A02024B989))
-	Bg10:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Bg10:setImage(RegisterImage(@"uie_t7_weapon_lmg_screen_bg_add2"))
+	Bg10:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Bg10)
 	self.Bg10 = Bg10
 	local Bg100 = LUI.UIImage.new(0, 0, -17, 334, 0, 0, -16, 161)
-	Bg100:setImage(RegisterImage(0xEDEB7A02024B989))
-	Bg100:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Bg100:setImage(RegisterImage(@"uie_t7_weapon_lmg_screen_bg_add2"))
+	Bg100:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Bg100)
 	self.Bg100 = Bg100
 	local lightsLeft0 = LUI.UIImage.new(0, 0, -17, 77, 0, 0, 5, 134)
 	lightsLeft0:setAlpha(0)
-	lightsLeft0:setImage(RegisterImage(0x7A9673BAD84CFAF))
-	lightsLeft0:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	lightsLeft0:setImage(RegisterImage(@"uie_t7_weapon_lmg_lights_02"))
+	lightsLeft0:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(lightsLeft0)
 	self.lightsLeft0 = lightsLeft0
 	local lightRight0 = LUI.UIImage.new(0, 0, 242, 336, 0, 0, 5, 134)
 	lightRight0:setAlpha(0)
 	lightRight0:setYRot(180)
-	lightRight0:setImage(RegisterImage(0x7A9673BAD84CFAF))
-	lightRight0:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	lightRight0:setImage(RegisterImage(@"uie_t7_weapon_lmg_lights_02"))
+	lightRight0:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(lightRight0)
 	self.lightRight0 = lightRight0
 	self:mergeStateConditions({
 		{
 			stateName = "LowAmmoPrinting",
 			condition = function(menu, element, event)
-				return IsLowAmmoClip(f1_arg1) and CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "lmgInfiniteState", Enum[0x87A77AF492BFD8C][0x295DB253B71992E])
+				return IsLowAmmoClip(f1_arg1) and CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "lmgInfiniteState", Enum[@"lmginfinitestate"][@"lmg_infinite_state_printing"])
 			end,
 		},
 		{
 			stateName = "Printing",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "lmgInfiniteState", Enum[0x87A77AF492BFD8C][0x295DB253B71992E])
+				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "lmgInfiniteState", Enum[@"lmginfinitestate"][@"lmg_infinite_state_printing"])
 			end,
 		},
 		{
 			stateName = "EmptyMagazine",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "lmgInfiniteState", Enum[0x87A77AF492BFD8C][0x148E92C8946BC80])
+				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "lmgInfiniteState", Enum[@"lmginfinitestate"][@"lmg_infinite_state_empty"])
 			end,
 		},
 		{
@@ -118,13 +118,13 @@ CoD.lmgInfiniteReticle_UI3D_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f
 		{
 			stateName = "WeaponFiring",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "lmgInfiniteState", Enum[0x87A77AF492BFD8C][0x7C27984CC3D2C88])
+				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "lmgInfiniteState", Enum[@"lmginfinitestate"][@"lmg_infinite_state_firing"])
 			end,
 		},
 		{
 			stateName = "MagazineFull",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "lmgInfiniteState", Enum[0x87A77AF492BFD8C][0xF571695EFBA24BE])
+				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "lmgInfiniteState", Enum[@"lmginfinitestate"][@"lmg_infinite_state_full"])
 			end,
 		},
 	})
@@ -172,11 +172,11 @@ CoD.lmgInfiniteReticle_UI3D_Internal.__resetProperties = function(f12_arg0)
 	f12_arg0.Bg100:completeAnimation()
 	f12_arg0.Bg0:setRGB(1, 1, 1)
 	f12_arg0.Bg0:setAlpha(0.25)
-	f12_arg0.Bg0:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	f12_arg0.Bg0:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	f12_arg0.Status:setRGB(1, 1, 1)
 	f12_arg0.Status.FrameTop:setRGB(1, 1, 1)
 	f12_arg0.Status.FrameBottom:setRGB(1, 1, 1)
-	f12_arg0.Status.Status:setText(Engine[0xF9F1239CFD921FE](0xADE90237E6498C0))
+	f12_arg0.Status.Status:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_4ADE90237E6498C0"))
 	f12_arg0.AmmoBarTop.ammoFull:setRGB(0.33, 0.95, 0.81)
 	f12_arg0.AmmoBarBottom.ammoFull:setRGB(0.33, 0.95, 0.81)
 	f12_arg0.lightRight:setRGB(1, 1, 1)
@@ -218,7 +218,7 @@ CoD.lmgInfiniteReticle_UI3D_Internal.__clipsPerState = {
 			f14_arg0.clipFinished(f14_arg0.AmmoBarBottom)
 			f14_arg0.Status:completeAnimation()
 			f14_arg0.Status.Status:completeAnimation()
-			f14_arg0.Status.Status:setText(Engine[0xF9F1239CFD921FE](0xE1F5BC23CBDE755))
+			f14_arg0.Status.Status:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_2E1F5BC23CBDE755"))
 			f14_arg0.clipFinished(f14_arg0.Status)
 		end,
 	},
@@ -232,7 +232,7 @@ CoD.lmgInfiniteReticle_UI3D_Internal.__clipsPerState = {
 			f15_arg0.clipFinished(f15_arg0.AmmoBarBottom)
 			f15_arg0.Status:completeAnimation()
 			f15_arg0.Status.Status:completeAnimation()
-			f15_arg0.Status.Status:setText(Engine[0xF9F1239CFD921FE](0xE1F5BC23CBDE755))
+			f15_arg0.Status.Status:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_2E1F5BC23CBDE755"))
 			f15_arg0.clipFinished(f15_arg0.Status)
 			f15_arg0.lightRight:completeAnimation()
 			f15_arg0.lightRight:setAlpha(0.65)
@@ -299,7 +299,7 @@ CoD.lmgInfiniteReticle_UI3D_Internal.__clipsPerState = {
 			f21_arg0.Bg0:completeAnimation()
 			f21_arg0.Bg0:setRGB(1, 0, 0)
 			f21_arg0.Bg0:setAlpha(1)
-			f21_arg0.Bg0:setMaterial(LUI.UIImage.GetCachedMaterial(0x6B34AA3F39208EF))
+			f21_arg0.Bg0:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_normal"))
 			f21_arg0.clipFinished(f21_arg0.Bg0)
 			f21_arg0.Bg:completeAnimation()
 			f21_arg0.Bg:setRGB(1, 0, 0)
@@ -319,7 +319,7 @@ CoD.lmgInfiniteReticle_UI3D_Internal.__clipsPerState = {
 			f21_arg0.Status:setRGB(1, 0, 0)
 			f21_arg0.Status.FrameTop:setRGB(1, 0, 0)
 			f21_arg0.Status.FrameBottom:setRGB(1, 0, 0)
-			f21_arg0.Status.Status:setText(Engine[0xF9F1239CFD921FE](0x74D7427BD9FB2F2))
+			f21_arg0.Status.Status:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_74D7427BD9FB2F2"))
 			f21_arg0.clipFinished(f21_arg0.Status)
 			f21_arg0.lmgInfiniteReticleExtras:completeAnimation()
 			f21_arg0.lmgInfiniteReticleExtras:setRGB(1, 0, 0)
@@ -366,7 +366,7 @@ CoD.lmgInfiniteReticle_UI3D_Internal.__clipsPerState = {
 			f22_arg0.clipFinished(f22_arg0.AmmoBarBottom)
 			f22_arg0.Status:completeAnimation()
 			f22_arg0.Status.Status:completeAnimation()
-			f22_arg0.Status.Status:setText(Engine[0xF9F1239CFD921FE](0x1805DFD9DFF5613))
+			f22_arg0.Status.Status:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_11805DFD9DFF5613"))
 			f22_arg0.clipFinished(f22_arg0.Status)
 		end,
 	},
@@ -380,7 +380,7 @@ CoD.lmgInfiniteReticle_UI3D_Internal.__clipsPerState = {
 			f23_arg0.clipFinished(f23_arg0.AmmoBarBottom)
 			f23_arg0.Status:completeAnimation()
 			f23_arg0.Status.Status:completeAnimation()
-			f23_arg0.Status.Status:setText(Engine[0xF9F1239CFD921FE](0x1805DFD9DFF5613))
+			f23_arg0.Status.Status:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_11805DFD9DFF5613"))
 			f23_arg0.clipFinished(f23_arg0.Status)
 			f23_arg0.lmgInfiniteReticlelightLeft:completeAnimation()
 			f23_arg0.lmgInfiniteReticlelightLeft:setAlpha(0)
@@ -406,7 +406,7 @@ CoD.lmgInfiniteReticle_UI3D_Internal.__clipsPerState = {
 			f24_arg0.clipFinished(f24_arg0.AmmoBarBottom)
 			f24_arg0.Status:completeAnimation()
 			f24_arg0.Status.Status:completeAnimation()
-			f24_arg0.Status.Status:setText(Engine[0xF9F1239CFD921FE](0xADE90237E6498C0))
+			f24_arg0.Status.Status:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_4ADE90237E6498C0"))
 			f24_arg0.clipFinished(f24_arg0.Status)
 			f24_arg0.lmgInfiniteReticlelightLeft:completeAnimation()
 			f24_arg0.lmgInfiniteReticlelightLeft:setAlpha(0)

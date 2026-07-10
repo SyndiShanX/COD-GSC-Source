@@ -13,21 +13,21 @@ CoD.EmblemIconClipboard.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Backing = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	Backing:setRGB(0, 0, 0)
-	Backing:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	Backing:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	Backing:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(Backing)
 	self.Backing = Backing
 	local NoiseTiledBacking2 = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	NoiseTiledBacking2:setImage(RegisterImage(0x34839E8065B1E53))
-	NoiseTiledBacking2:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	NoiseTiledBacking2:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	NoiseTiledBacking2:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	NoiseTiledBacking2:setShaderVector(0, 0, 0, 0, 0)
 	NoiseTiledBacking2:setupNineSliceShader(196, 88)
 	self:addElement(NoiseTiledBacking2)
 	self.NoiseTiledBacking2 = NoiseTiledBacking2
 	local NoiseTiledBackingAdd = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	NoiseTiledBackingAdd:setAlpha(0.2)
-	NoiseTiledBackingAdd:setImage(RegisterImage(0x34839E8065B1E53))
-	NoiseTiledBackingAdd:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	NoiseTiledBackingAdd:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	NoiseTiledBackingAdd:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	NoiseTiledBackingAdd:setShaderVector(0, 0, 0, 0, 0)
 	NoiseTiledBackingAdd:setupNineSliceShader(196, 88)
 	self:addElement(NoiseTiledBackingAdd)
@@ -53,7 +53,7 @@ CoD.EmblemIconClipboard.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	end)
 	local bgBorder = Paste
 	local Copy = Paste.subscribeToModel
-	local bgMask = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local bgMask = Engine[@"getmodelforcontroller"](f1_arg1)
 	Copy(bgBorder, bgMask.LastInput, function(f5_arg0)
 		f1_arg0:updateElementState(Paste, {
 			name = "model_validation",
@@ -64,7 +64,7 @@ CoD.EmblemIconClipboard.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 		})
 	end, false)
 	Paste:setAlpha(0.25)
-	Paste.label:setText(Engine[0xF9F1239CFD921FE](0xC557F1B0FF34983))
+	Paste.label:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_C557F1B0FF34983"))
 	Paste:subscribeToGlobalModel(f1_arg1, "Controller", "right_stick_button_image", function(model)
 		local f6_local0 = model:get()
 		if f6_local0 ~= nil then
@@ -94,7 +94,7 @@ CoD.EmblemIconClipboard.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	end)
 	bgMask = Copy
 	bgBorder = Copy.subscribeToModel
-	local allGroupsUsedText = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local allGroupsUsedText = Engine[@"getmodelforcontroller"](f1_arg1)
 	bgBorder(bgMask, allGroupsUsedText.LastInput, function(f10_arg0)
 		f1_arg0:updateElementState(Copy, {
 			name = "model_validation",
@@ -104,7 +104,7 @@ CoD.EmblemIconClipboard.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 			modelName = "LastInput",
 		})
 	end, false)
-	Copy.label:setText(Engine[0xF9F1239CFD921FE](0x5942F6C8861D985))
+	Copy.label:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_35942F6C8861D985"))
 	Copy:subscribeToGlobalModel(f1_arg1, "Controller", "back_button_image", function(model)
 		local f11_local0 = model:get()
 		if f11_local0 ~= nil then
@@ -126,16 +126,16 @@ CoD.EmblemIconClipboard.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	allGroupsUsedText = LUI.UIText.new(0, 0, 7, 244, 0, 0, 245, 270)
 	allGroupsUsedText:setRGB(1, 0, 0)
 	allGroupsUsedText:setAlpha(0)
-	allGroupsUsedText:setText(Engine[0xF9F1239CFD921FE](0x7E72EBA24396E53))
+	allGroupsUsedText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_77E72EBA24396E53"))
 	allGroupsUsedText:setTTF("ttmussels_regular")
-	allGroupsUsedText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	allGroupsUsedText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	allGroupsUsedText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	allGroupsUsedText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(allGroupsUsedText)
 	self.allGroupsUsedText = allGroupsUsedText
 	local Frame = LUI.UIImage.new(0, 1, -1, 1, 0, 1, -1, 1)
 	Frame:setAlpha(0.2)
-	Frame:setImage(RegisterImage(0x185E11D74ECA3D7))
-	Frame:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	Frame:setImage(RegisterImage(@"uie_ui_menu_store_common_frame"))
+	Frame:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	Frame:setShaderVector(0, 0, 0, 0, 0)
 	Frame:setupNineSliceShader(16, 16)
 	self:addElement(Frame)
@@ -156,7 +156,7 @@ CoD.EmblemIconClipboard.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	})
 	local FooterStripe1 = CraftLayerCount
 	local PaintshopChooseSide = CraftLayerCount.subscribeToModel
-	local dividerH02 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local dividerH02 = Engine[@"getmodelforcontroller"](f1_arg1)
 	PaintshopChooseSide(FooterStripe1, dividerH02["Emblem.EmblemProperties.layersUsed"], function(f13_arg0)
 		f1_arg0:updateElementState(CraftLayerCount, {
 			name = "model_validation",
@@ -168,7 +168,7 @@ CoD.EmblemIconClipboard.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	end, false)
 	FooterStripe1 = CraftLayerCount
 	PaintshopChooseSide = CraftLayerCount.subscribeToModel
-	dividerH02 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	dividerH02 = Engine[@"getmodelforcontroller"](f1_arg1)
 	PaintshopChooseSide(FooterStripe1, dividerH02["Emblem.EmblemProperties.groupsUsed"], function(f14_arg0)
 		f1_arg0:updateElementState(CraftLayerCount, {
 			name = "model_validation",
@@ -182,29 +182,29 @@ CoD.EmblemIconClipboard.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	self:addElement(CraftLayerCount)
 	self.CraftLayerCount = CraftLayerCount
 	PaintshopChooseSide = CoD.PaintshopChooseSide.new(f1_arg0, f1_arg1, 0, 0, 7, 327, 0, 0, 3, 35)
-	PaintshopChooseSide.text:setText(LocalizeToUpperString(0x3F566919BED4406))
+	PaintshopChooseSide.text:setText(LocalizeToUpperString(@"hash_43F566919BED4406"))
 	self:addElement(PaintshopChooseSide)
 	self.PaintshopChooseSide = PaintshopChooseSide
 	FooterStripe1 = LUI.UIImage.new(0, 0, 0, 252, 1, 1, -36, -1)
 	FooterStripe1:setAlpha(0.1)
-	FooterStripe1:setImage(RegisterImage(0xC7A051F5EFC70E5))
-	FooterStripe1:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	FooterStripe1:setImage(RegisterImage(@"hash_2C7A051F5EFC70E5"))
+	FooterStripe1:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	FooterStripe1:setShaderVector(0, 0, 0, 0, 0)
 	FooterStripe1:setupNineSliceShader(245, 40)
 	self:addElement(FooterStripe1)
 	self.FooterStripe1 = FooterStripe1
 	dividerH02 = LUI.UIImage.new(0, 0, 1, 252, 0, 0, 237, 241)
 	dividerH02:setAlpha(0.2)
-	dividerH02:setImage(RegisterImage(0x84B43D5B04D263A))
-	dividerH02:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	dividerH02:setImage(RegisterImage(@"hash_484B43D5B04D263A"))
+	dividerH02:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	dividerH02:setShaderVector(0, 0, 0, 0, 0)
 	dividerH02:setupNineSliceShader(8, 4)
 	self:addElement(dividerH02)
 	self.dividerH02 = dividerH02
 	local dividerH03 = LUI.UIImage.new(0, 0, 0, 252, 0, 0, 20, 24)
 	dividerH03:setAlpha(0.2)
-	dividerH03:setImage(RegisterImage(0x84B43D5B04D263A))
-	dividerH03:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	dividerH03:setImage(RegisterImage(@"hash_484B43D5B04D263A"))
+	dividerH03:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	dividerH03:setShaderVector(0, 0, 0, 0, 0)
 	dividerH03:setupNineSliceShader(8, 4)
 	self:addElement(dividerH03)

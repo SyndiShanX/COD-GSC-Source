@@ -13,7 +13,7 @@ CoD.ZMLoadoutPreviewInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Blur = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	Blur:setAlpha(0.7)
-	Blur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	Blur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	Blur:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(Blur)
 	self.Blur = Blur
@@ -24,16 +24,16 @@ CoD.ZMLoadoutPreviewInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	self.Panel = Panel
 	local TiledBacking = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	TiledBacking:setAlpha(0.4)
-	TiledBacking:setImage(RegisterImage(0x34839E8065B1E53))
-	TiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	TiledBacking:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	TiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	TiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	TiledBacking:setupNineSliceShader(196, 88)
 	self:addElement(TiledBacking)
 	self.TiledBacking = TiledBacking
 	local LinePattern = LUI.UIImage.new(0, 0, 0, 313, 0, 1, 0, 0)
 	LinePattern:setAlpha(0.5)
-	LinePattern:setImage(RegisterImage(0xB8CFFD5326CFE1B))
-	LinePattern:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	LinePattern:setImage(RegisterImage(@"uie_ui_menu_zombies_cac_grunge_pattern"))
+	LinePattern:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	LinePattern:setShaderVector(0, 0, 0, 0, 0)
 	LinePattern:setupNineSliceShader(256, 256)
 	self:addElement(LinePattern)
@@ -51,12 +51,12 @@ CoD.ZMLoadoutPreviewInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	local detailedDesc = LUI.UIText.new(0, 0, 330, 922, 0.5, 0.5, -24, -8)
 	detailedDesc:setRGB(0.92, 0.92, 0.92)
 	detailedDesc:setTTF("dinnext_regular")
-	detailedDesc:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	detailedDesc:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	detailedDesc:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	detailedDesc:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	detailedDesc:subscribeToGlobalModel(f1_arg1, "DirectorZMLoadoutPreview", "ZMLoadoutPreviewItemDesc", function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
-			detailedDesc:setText(Engine[0xF9F1239CFD921FE](f3_local0))
+			detailedDesc:setText(Engine[@"hash_4F9F1239CFD921FE"](f3_local0))
 		end
 	end)
 	self:addElement(detailedDesc)
@@ -64,7 +64,7 @@ CoD.ZMLoadoutPreviewInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	local SubHeaderDivider = LUI.UIImage.new(0, 0, 331, 929, 0.5, 0.5, -33, -31)
 	SubHeaderDivider:setRGB(0.92, 0.92, 0.92)
 	SubHeaderDivider:setAlpha(0.25)
-	SubHeaderDivider:setMaterial(LUI.UIImage.GetCachedMaterial(0xE992BD5A540E2D))
+	SubHeaderDivider:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_delta_normal"))
 	SubHeaderDivider:setShaderVector(0, 0, 1, 0, 0)
 	SubHeaderDivider:setShaderVector(1, 0, 1.24, 0, 0)
 	SubHeaderDivider:setShaderVector(2, 0, 1, 0, 0)
@@ -76,8 +76,8 @@ CoD.ZMLoadoutPreviewInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	name:setRGB(0.58, 0.85, 1)
 	name:setTTF("ttmussels_demibold")
 	name:setLetterSpacing(10)
-	name:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	name:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	name:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	name:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	name:subscribeToGlobalModel(f1_arg1, "DirectorZMLoadoutPreview", "ZMLoadoutPreviewItemName", function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
@@ -88,12 +88,12 @@ CoD.ZMLoadoutPreviewInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	self.name = name
 	local Corner9Slice2 = CoD.Corner9Slice.new(f1_arg0, f1_arg1, 0.01, 0.01, 302.5, 923.5, -0.01, 1.01, 1, -1)
 	Corner9Slice2:setAlpha(0.6)
-	Corner9Slice2:setRFTMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Corner9Slice2:setRFTMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Corner9Slice2)
 	self.Corner9Slice2 = Corner9Slice2
 	local Corner9Slice = CoD.Corner9Slice.new(f1_arg0, f1_arg1, 0.01, 0.01, -6, 308, 0.17, 1.19, -22, -24)
 	Corner9Slice:setAlpha(0.6)
-	Corner9Slice:setRFTMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Corner9Slice:setRFTMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Corner9Slice)
 	self.Corner9Slice = Corner9Slice
 	local RestrictionIcon = CoD.RestrictedItemWarning.new(f1_arg0, f1_arg1, 0.5, 0.5, -460, -400, 0.5, 0.5, -56, -6)
@@ -113,7 +113,7 @@ CoD.ZMLoadoutPreviewInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	})
 	local f1_local12 = RestrictionIcon
 	local RestrictedText = RestrictionIcon.subscribeToModel
-	local f1_local14 = Engine[0x8DF2E5447F384B9]()
+	local f1_local14 = Engine[@"getglobalmodel"]()
 	RestrictedText(f1_local12, f1_local14["lobbyRoot.lobbyNav"], function(f6_arg0)
 		f1_arg0:updateElementState(RestrictionIcon, {
 			name = "model_validation",
@@ -154,7 +154,7 @@ CoD.ZMLoadoutPreviewInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	})
 	f1_local14 = RestrictedText
 	f1_local12 = RestrictedText.subscribeToModel
-	local f1_local15 = Engine[0x8DF2E5447F384B9]()
+	local f1_local15 = Engine[@"getglobalmodel"]()
 	f1_local12(f1_local14, f1_local15["lobbyRoot.lobbyNav"], function(f10_arg0)
 		f1_arg0:updateElementState(RestrictedText, {
 			name = "model_validation",

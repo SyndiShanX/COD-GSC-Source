@@ -9,7 +9,7 @@ CoD.systemOverlay_SavePaintjobFrame.__defaultWidth = 1920
 CoD.systemOverlay_SavePaintjobFrame.__defaultHeight = 456
 CoD.systemOverlay_SavePaintjobFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
 	local self = LUI.UIElement.new(f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
-	CoD.CraftUtility.SetSlotCustomizationType(f1_arg1, Enum[0x63E5ADF9D95FC86][0x4E4802F1ABF1844])
+	CoD.CraftUtility.SetSlotCustomizationType(f1_arg1, Enum[@"customizationtype"][@"customization_type_paintshop_view_left"])
 	CoD.CraftUtility.InvalidateWCItemRenderAction(f1_arg1)
 	self:setClass(CoD.systemOverlay_SavePaintjobFrame)
 	self.id = "systemOverlay_SavePaintjobFrame"
@@ -100,7 +100,7 @@ CoD.systemOverlay_SavePaintjobFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	optionButtons:setWidgetType(CoD.EmblemOptionsButton)
 	optionButtons:setVerticalCount(3)
 	optionButtons:setSpacing(10)
-	optionButtons:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	optionButtons:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	optionButtons:linkToElementModel(self, "listDatasource", true, function(model)
 		local f11_local0 = model:get()
 		if f11_local0 ~= nil then
@@ -108,7 +108,7 @@ CoD.systemOverlay_SavePaintjobFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 		end
 	end)
 	optionButtons:linkToElementModel(optionButtons, "disabled", true, function(model, f12_arg1)
-		CoD.Menu.UpdateButtonShownState(f12_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f12_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	optionButtons:registerEventHandler("gain_focus", function(element, event)
 		local f13_local0 = nil
@@ -117,10 +117,10 @@ CoD.systemOverlay_SavePaintjobFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 		elseif element.super.gainFocus then
 			f13_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f13_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(optionButtons, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(optionButtons, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if not IsDisabled(element, controller) then
 			ProcessListAction(self, element, controller, menu)
 			return true
@@ -128,7 +128,7 @@ CoD.systemOverlay_SavePaintjobFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 		end
 	end, function(element, menu, controller)
 		if not IsDisabled(element, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false
@@ -156,8 +156,8 @@ CoD.systemOverlay_SavePaintjobFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	title:setRGB(ColorSet.T8__BEIGE__HEADER.r, ColorSet.T8__BEIGE__HEADER.g, ColorSet.T8__BEIGE__HEADER.b)
 	title:setTTF("ttmussels_demibold")
 	title:setLetterSpacing(6)
-	title:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	title:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	title:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	title:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	title:linkToElementModel(self, "title", true, function(model)
 		local f17_local0 = model:get()
 		if f17_local0 ~= nil then

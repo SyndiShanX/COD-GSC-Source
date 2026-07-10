@@ -8,7 +8,7 @@ CoD.vhud_ms_DamageIconSide.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local msDamageRight = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	msDamageRight:setImage(RegisterImage(0x27F44A01723A157))
+	msDamageRight:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_mothership_damageredside"))
 	self:addElement(msDamageRight)
 	self.msDamageRight = msDamageRight
 	if PostLoadFunc then

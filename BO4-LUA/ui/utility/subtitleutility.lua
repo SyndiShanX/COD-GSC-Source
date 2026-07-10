@@ -20,7 +20,7 @@ CoD.SubtitleUtility.UpdateSubtitle = function(f1_arg0)
 		f1_arg0.lines[f1_local2].element:forceHideSubtitleEntry()
 	end
 	local f1_local4 = f1_arg0.controller
-	if not Engine[0xDD333420C49E6D0](f1_local4, Enum[0x7F032C2EF103A1A][0xD3ABF9A2753CE40]) then
+	if not Engine[@"isvisibilitybitset"](f1_local4, Enum[@"uivisibilitybit"][@"bit_demo_camera_mode_moviecam"]) then
 		if CoD.IsShoutcaster(f1_local4) and not CoD.ShoutcasterProfileVarBool(f1_local4, "shoutcaster_ds_killfeed") then
 		else
 			f1_arg0.lines[f1_local2].element:showSubtitleEntry(f1_local2)

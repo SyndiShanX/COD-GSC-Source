@@ -22,8 +22,8 @@ CoD.StartMenu_WZTeamScoreboard.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	self.BlurTint01 = BlurTint01
 	local BackingNoise = LUI.UIImage.new(-0.25, 1.25, 0, 0, 1, 1, -165, -65)
 	BackingNoise:setAlpha(0.5)
-	BackingNoise:setImage(RegisterImage(0x34839E8065B1E53))
-	BackingNoise:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	BackingNoise:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	BackingNoise:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	BackingNoise:setShaderVector(0, 0, 0, 0, 0)
 	BackingNoise:setupNineSliceShader(196, 88)
 	self:addElement(BackingNoise)
@@ -39,8 +39,8 @@ CoD.StartMenu_WZTeamScoreboard.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	self.WZTeamScoreboard = WZTeamScoreboard
 	local FuiBox02Right = LUI.UIImage.new(1, 1, -50, -16, 1, 1, -122, -156)
 	FuiBox02Right:setAlpha(0.2)
-	FuiBox02Right:setImage(RegisterImage(0x811A80C0AADA825))
-	FuiBox02Right:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	FuiBox02Right:setImage(RegisterImage(@"uie_ui_hud_vehicle_ac130_fui_box01"))
+	FuiBox02Right:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	FuiBox02Right:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(FuiBox02Right)
 	self.FuiBox02Right = FuiBox02Right

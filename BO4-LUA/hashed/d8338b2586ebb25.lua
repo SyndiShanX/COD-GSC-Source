@@ -26,7 +26,7 @@ CoD.MP_ObjectiveNotificationWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	GameTypeHintText:subscribeToGlobalModel(f1_arg1, "PerController", "gametypeObjectiveHint", function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
-			GameTypeHintText.MatchText:setText(Engine[0xF9F1239CFD921FE](f3_local0))
+			GameTypeHintText.MatchText:setText(Engine[@"hash_4F9F1239CFD921FE"](f3_local0))
 		end
 	end)
 	self:addElement(GameTypeHintText)
@@ -34,8 +34,8 @@ CoD.MP_ObjectiveNotificationWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	local GameTypeText = LUI.UIText.new(0.5, 0.5, -864, 864, 0, 0, 203, 298)
 	GameTypeText:setTTF("ttmussels_regular")
 	GameTypeText:setLetterSpacing(-6.7)
-	GameTypeText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	GameTypeText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	GameTypeText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	GameTypeText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	GameTypeText:setBackingType(1)
 	GameTypeText:setBackingWidget(CoD.FE_ButtonPanel, f1_arg0, f1_arg1)
 	GameTypeText:setBackingColor(0, 0, 0)
@@ -44,7 +44,7 @@ CoD.MP_ObjectiveNotificationWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	GameTypeText:subscribeToGlobalModel(f1_arg1, "PerController", "gametypeObjective", function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
-			GameTypeText:setText(Engine[0xF9F1239CFD921FE](f4_local0))
+			GameTypeText:setText(Engine[@"hash_4F9F1239CFD921FE"](f4_local0))
 		end
 	end)
 	self:addElement(GameTypeText)
@@ -72,7 +72,7 @@ CoD.MP_ObjectiveNotificationWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	})
 	local f1_local4 = self
 	local f1_local5 = self.subscribeToModel
-	local f1_local6 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local6 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local5(f1_local4, f1_local6.showGametypeObjectiveHint, function(f7_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -84,7 +84,7 @@ CoD.MP_ObjectiveNotificationWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	end, false)
 	f1_local4 = self
 	f1_local5 = self.subscribeToModel
-	f1_local6 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local6 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local5(f1_local4, f1_local6.gameTypeAttackers, function(f8_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -126,14 +126,14 @@ CoD.MP_ObjectiveNotificationWidget.__clipsPerState = {
 			local f11_local0 = function(f12_arg0)
 				local f12_local0 = function(f13_arg0)
 					local f13_local0 = function(f14_arg0)
-						f14_arg0:beginAnimation(500, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+						f14_arg0:beginAnimation(500, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_in"])
 						f14_arg0:setAlpha(0)
 						f14_arg0:registerEventHandler("transition_complete_keyframe", f11_arg0.clipFinished)
 					end
 					f13_arg0:beginAnimation(1500)
 					f13_arg0:registerEventHandler("transition_complete_keyframe", f13_local0)
 				end
-				f11_arg0.Icon:beginAnimation(500, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f11_arg0.Icon:beginAnimation(500, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_in"])
 				f11_arg0.Icon:setAlpha(1)
 				f11_arg0.Icon:registerEventHandler("interrupted_keyframe", f11_arg0.clipInterrupted)
 				f11_arg0.Icon:registerEventHandler("transition_complete_keyframe", f12_local0)
@@ -144,14 +144,14 @@ CoD.MP_ObjectiveNotificationWidget.__clipsPerState = {
 			local f11_local1 = function(f15_arg0)
 				local f15_local0 = function(f16_arg0)
 					local f16_local0 = function(f17_arg0)
-						f17_arg0:beginAnimation(500, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+						f17_arg0:beginAnimation(500, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_in"])
 						f17_arg0:setAlpha(0)
 						f17_arg0:registerEventHandler("transition_complete_keyframe", f11_arg0.clipFinished)
 					end
 					f16_arg0:beginAnimation(1500)
 					f16_arg0:registerEventHandler("transition_complete_keyframe", f16_local0)
 				end
-				f11_arg0.GameTypeHintText:beginAnimation(500, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f11_arg0.GameTypeHintText:beginAnimation(500, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_in"])
 				f11_arg0.GameTypeHintText:setAlpha(1)
 				f11_arg0.GameTypeHintText:registerEventHandler("interrupted_keyframe", f11_arg0.clipInterrupted)
 				f11_arg0.GameTypeHintText:registerEventHandler("transition_complete_keyframe", f15_local0)
@@ -168,14 +168,14 @@ CoD.MP_ObjectiveNotificationWidget.__clipsPerState = {
 			local f18_local0 = function(f19_arg0)
 				local f19_local0 = function(f20_arg0)
 					local f20_local0 = function(f21_arg0)
-						f21_arg0:beginAnimation(500, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+						f21_arg0:beginAnimation(500, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_in"])
 						f21_arg0:setAlpha(0)
 						f21_arg0:registerEventHandler("transition_complete_keyframe", f18_arg0.clipFinished)
 					end
 					f20_arg0:beginAnimation(1500)
 					f20_arg0:registerEventHandler("transition_complete_keyframe", f20_local0)
 				end
-				f18_arg0.Icon:beginAnimation(500, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f18_arg0.Icon:beginAnimation(500, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_in"])
 				f18_arg0.Icon:setAlpha(1)
 				f18_arg0.Icon:registerEventHandler("interrupted_keyframe", f18_arg0.clipInterrupted)
 				f18_arg0.Icon:registerEventHandler("transition_complete_keyframe", f19_local0)
@@ -186,14 +186,14 @@ CoD.MP_ObjectiveNotificationWidget.__clipsPerState = {
 			local f18_local1 = function(f22_arg0)
 				local f22_local0 = function(f23_arg0)
 					local f23_local0 = function(f24_arg0)
-						f24_arg0:beginAnimation(500, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+						f24_arg0:beginAnimation(500, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_in"])
 						f24_arg0:setAlpha(0)
 						f24_arg0:registerEventHandler("transition_complete_keyframe", f18_arg0.clipFinished)
 					end
 					f23_arg0:beginAnimation(1500)
 					f23_arg0:registerEventHandler("transition_complete_keyframe", f23_local0)
 				end
-				f18_arg0.GameTypeHintText:beginAnimation(500, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f18_arg0.GameTypeHintText:beginAnimation(500, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_in"])
 				f18_arg0.GameTypeHintText:setAlpha(1)
 				f18_arg0.GameTypeHintText:registerEventHandler("interrupted_keyframe", f18_arg0.clipInterrupted)
 				f18_arg0.GameTypeHintText:registerEventHandler("transition_complete_keyframe", f22_local0)

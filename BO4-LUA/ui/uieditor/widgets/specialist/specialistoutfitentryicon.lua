@@ -9,7 +9,7 @@ CoD.SpecialistOutfitEntryIcon.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Warpaint = LUI.UIImage.new(0, 1, 2, -2, 0, 1, 2, -2)
 	Warpaint:setAlpha(0)
-	Warpaint:setMaterial(LUI.UIImage.GetCachedMaterial(0xA02C44161370F6D))
+	Warpaint:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_1A02C44161370F6D"))
 	Warpaint:setShaderVector(0, 0.5, 0, 0, 0)
 	Warpaint:setShaderVector(1, 1, 1, 0, 0)
 	Warpaint:setShaderVector(2, 0, 0, 0, 0)
@@ -22,7 +22,7 @@ CoD.SpecialistOutfitEntryIcon.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self:addElement(Warpaint)
 	self.Warpaint = Warpaint
 	local Outfit = LUI.UIImage.new(0, 1, 2, -2, 0, 1, 2, -2)
-	Outfit:setMaterial(LUI.UIImage.GetCachedMaterial(0xA02C44161370F6D))
+	Outfit:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_1A02C44161370F6D"))
 	Outfit:setShaderVector(0, 0.5, 0, 0, 0)
 	Outfit:setShaderVector(1, 1.05, 1.05, 0, 0)
 	Outfit:setShaderVector(2, 0.04, 0, 0, 0)
@@ -38,7 +38,7 @@ CoD.SpecialistOutfitEntryIcon.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 		{
 			stateName = "Warpaint",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "itemType", Enum[0xFCC6A2D2EB0FDA7][0x8E3A65D78229DC1])
+				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "itemType", Enum[@"characteritemtype"][@"hash_48E3A65D78229DC1"])
 			end,
 		},
 	})

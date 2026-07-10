@@ -15,7 +15,7 @@ CoD.DirectorBlackMarketButtonInternal.new = function(f1_arg0, f1_arg1, f1_arg2, 
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local BlurBg = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	BlurBg:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	BlurBg:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	BlurBg:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(BlurBg)
 	self.BlurBg = BlurBg
@@ -44,10 +44,10 @@ CoD.DirectorBlackMarketButtonInternal.new = function(f1_arg0, f1_arg1, f1_arg2, 
 	self.DotTiledBackingTop = DotTiledBackingTop
 	local SpecialEventBanner = LUI.UIImage.new(0, 1, 4, -4, 0, 1, 4, -4)
 	SpecialEventBanner.__Image = function()
-		SpecialEventBanner:setImage(RegisterImage(CoD.BlackMarketUtility.GetCurrentBlackMarketBannerImage(0x7615068F50B3D66)))
+		SpecialEventBanner:setImage(RegisterImage(CoD.BlackMarketUtility.GetCurrentBlackMarketBannerImage(@"blacktransparent")))
 	end
 	SpecialEventBanner.__Image()
-	SpecialEventBanner:setMaterial(LUI.UIImage.GetCachedMaterial(0xA02C44161370F6D))
+	SpecialEventBanner:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_1A02C44161370F6D"))
 	SpecialEventBanner:setShaderVector(0, 0.5, 0.5, 0, 0)
 	SpecialEventBanner:setShaderVector(1, 1, 1, 0, 0)
 	SpecialEventBanner:setShaderVector(2, 0, 0, 0, 0)
@@ -55,28 +55,28 @@ CoD.DirectorBlackMarketButtonInternal.new = function(f1_arg0, f1_arg1, f1_arg2, 
 	self.SpecialEventBanner = SpecialEventBanner
 	local FrontendFrame02 = LUI.UIImage.new(0.4, 0.4, -125.5, 125.5, 0, 0, 89, 101)
 	FrontendFrame02:setRGB(0, 0.66, 1)
-	FrontendFrame02:setImage(RegisterImage(0x185E11D74ECA3D7))
-	FrontendFrame02:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	FrontendFrame02:setImage(RegisterImage(@"uie_ui_menu_store_common_frame"))
+	FrontendFrame02:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	FrontendFrame02:setShaderVector(0, 0, 0, 0, 0)
 	FrontendFrame02:setupNineSliceShader(6, 6)
 	self:addElement(FrontendFrame02)
 	self.FrontendFrame02 = FrontendFrame02
 	local tierProgressBackground = LUI.UIImage.new(0.4, 0.4, -125, 125, 1, 1, -21, -9)
 	tierProgressBackground:setRGB(0.09, 0.09, 0.09)
-	tierProgressBackground:setImage(RegisterImage(0x2F80AF66C054F97))
+	tierProgressBackground:setImage(RegisterImage(@"hash_32F80AF66C054F97"))
 	self:addElement(tierProgressBackground)
 	self.tierProgressBackground = tierProgressBackground
 	local Border = LUI.UIImage.new(0.4, 0.4, -125, 125, 1, 1, -21, -9)
 	Border:setRGB(0.08, 0.14, 0.18)
 	Border:setAlpha(0.8)
-	Border:setMaterial(LUI.UIImage.GetCachedMaterial(0xE125638BF94665F))
+	Border:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_feather_edges"))
 	Border:setShaderVector(0, 0, 0.1, 0, 0.1)
 	self:addElement(Border)
 	self.Border = Border
 	local tierProgress = LUI.UIImage.new(0.4, 0.4, -125, 125, 1, 1, -21, -9)
 	tierProgress:setRGB(0.5, 0.85, 1)
-	tierProgress:setImage(RegisterImage(0xE51FDFB95E8F82B))
-	tierProgress:setMaterial(LUI.UIImage.GetCachedMaterial(0x316E67E1DF2198E))
+	tierProgress:setImage(RegisterImage(@"hash_3E51FDFB95E8F82B"))
+	tierProgress:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_normal"))
 	tierProgress:setShaderVector(1, 0, 0, 0, 0)
 	tierProgress:setShaderVector(2, 1, 0, 0, 0)
 	tierProgress:setShaderVector(3, 0, 0, 0, 0)
@@ -91,8 +91,8 @@ CoD.DirectorBlackMarketButtonInternal.new = function(f1_arg0, f1_arg1, f1_arg2, 
 	self.tierProgress = tierProgress
 	local tierProgressAdd = LUI.UIImage.new(0.4, 0.4, -125, 125, 1, 1, -21, -9)
 	tierProgressAdd:setRGB(0.5, 0.85, 1)
-	tierProgressAdd:setImage(RegisterImage(0xE51FDFB95E8F82B))
-	tierProgressAdd:setMaterial(LUI.UIImage.GetCachedMaterial(0xE992BD5A540E2D))
+	tierProgressAdd:setImage(RegisterImage(@"hash_3E51FDFB95E8F82B"))
+	tierProgressAdd:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_delta_normal"))
 	tierProgressAdd:setShaderVector(1, 0, 0, 0, 0)
 	tierProgressAdd:setShaderVector(2, 0, 1, 0, 0)
 	tierProgressAdd:setShaderVector(3, 0, 0, 0, 0)
@@ -108,10 +108,10 @@ CoD.DirectorBlackMarketButtonInternal.new = function(f1_arg0, f1_arg1, f1_arg2, 
 	local TierText = LUI.UIText.new(0.4, 0.4, -137.5, 137.5, 1, 1, -42, -25)
 	TierText:setRGB(0.92, 0.92, 0.92)
 	TierText:setTTF("ttmussels_demibold")
-	TierText:setMaterial(LUI.UIImage.GetCachedMaterial(0x71E049B161CD00A))
+	TierText:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_171E049B161CD00A"))
 	TierText:setLetterSpacing(4)
-	TierText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	TierText:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	TierText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	TierText:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	TierText:subscribeToGlobalModel(f1_arg1, "LootStreamProgress", "currentTier", function(model)
 		local f5_local0 = model:get()
 		if f5_local0 ~= nil then
@@ -124,36 +124,36 @@ CoD.DirectorBlackMarketButtonInternal.new = function(f1_arg0, f1_arg1, f1_arg2, 
 	StreamName:setRGB(ColorSet.T8__OCHRE.r, ColorSet.T8__OCHRE.g, ColorSet.T8__OCHRE.b)
 	StreamName:setAlpha(0)
 	StreamName.__String_Reference = function()
-		StreamName:setText(LocalizeToUpperString(CoD.BlackMarketUtility.GetCurrentBlackMarketSeasonName(0xED95336C9E8FA66)))
+		StreamName:setText(LocalizeToUpperString(CoD.BlackMarketUtility.GetCurrentBlackMarketSeasonName(@"hash_7ED95336C9E8FA66")))
 	end
 	StreamName.__String_Reference()
 	StreamName:setTTF("ttmussels_regular")
-	StreamName:setMaterial(LUI.UIImage.GetCachedMaterial(0x71E049B161CD00A))
+	StreamName:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_171E049B161CD00A"))
 	StreamName:setLetterSpacing(6)
-	StreamName:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	StreamName:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	self:addElement(StreamName)
 	self.StreamName = StreamName
 	local BlackMarketNameGlow = LUI.UIText.new(0.4, 0.4, -135.5, 135.5, 0, 0, 40.5, 64.5)
 	BlackMarketNameGlow:setRGB(0, 0, 0)
-	BlackMarketNameGlow:setText(LocalizeToUpperString(0x29C903C6DF90D6F))
+	BlackMarketNameGlow:setText(LocalizeToUpperString(@"menu/black_market"))
 	BlackMarketNameGlow:setTTF("ttmussels_demibold")
-	BlackMarketNameGlow:setMaterial(LUI.UIImage.GetCachedMaterial(0xAE166D9BA8C6907))
+	BlackMarketNameGlow:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_2AE166D9BA8C6907"))
 	BlackMarketNameGlow:setShaderVector(0, 0.81, 0, 0, 0)
 	BlackMarketNameGlow:setShaderVector(1, 0, 0, 0, 0)
 	BlackMarketNameGlow:setShaderVector(2, 0, 0, 0, 0)
 	BlackMarketNameGlow:setLetterSpacing(3)
-	BlackMarketNameGlow:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	BlackMarketNameGlow:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	BlackMarketNameGlow:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	BlackMarketNameGlow:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(BlackMarketNameGlow)
 	self.BlackMarketNameGlow = BlackMarketNameGlow
 	local BlackMarketName = LUI.UIText.new(0.4, 0.4, -135.5, 135.5, 0, 0, 40.5, 64.5)
 	BlackMarketName:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
-	BlackMarketName:setText(LocalizeToUpperString(0x29C903C6DF90D6F))
+	BlackMarketName:setText(LocalizeToUpperString(@"menu/black_market"))
 	BlackMarketName:setTTF("ttmussels_demibold")
-	BlackMarketName:setMaterial(LUI.UIImage.GetCachedMaterial(0x71E049B161CD00A))
+	BlackMarketName:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_171E049B161CD00A"))
 	BlackMarketName:setLetterSpacing(3)
-	BlackMarketName:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	BlackMarketName:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	BlackMarketName:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	BlackMarketName:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(BlackMarketName)
 	self.BlackMarketName = BlackMarketName
 	local CommonButtonOutline = CoD.CommonButtonOutline.new(f1_arg0, f1_arg1, 0, 1, 0, 0, 0, 1, 1, -1)
@@ -195,7 +195,7 @@ CoD.DirectorBlackMarketButtonInternal.new = function(f1_arg0, f1_arg1, f1_arg2, 
 	})
 	local f1_local19 = LootTierBoostPercentContraband
 	local f1_local20 = LootTierBoostPercentContraband.subscribeToModel
-	local f1_local21 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local21 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local20(f1_local19, f1_local21["LootStreamProgress.personalTierBoost"], function(f11_arg0)
 		f1_arg0:updateElementState(LootTierBoostPercentContraband, {
 			name = "model_validation",
@@ -205,7 +205,7 @@ CoD.DirectorBlackMarketButtonInternal.new = function(f1_arg0, f1_arg1, f1_arg2, 
 			modelName = "LootStreamProgress.personalTierBoost",
 		})
 	end, false)
-	LootTierBoostPercentContraband.TierBoost:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	LootTierBoostPercentContraband.TierBoost:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	self:addElement(LootTierBoostPercentContraband)
 	self.LootTierBoostPercentContraband = LootTierBoostPercentContraband
 	f1_local19 = SpecialEventBanner
@@ -250,11 +250,11 @@ CoD.DirectorBlackMarketButtonInternal.__clipsPerState = {
 						f17_arg0:beginAnimation(500)
 						f17_arg0:registerEventHandler("transition_complete_keyframe", f14_arg0.clipFinished)
 					end
-					f16_arg0:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f16_arg0:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 					f16_arg0:setAlpha(1)
 					f16_arg0:registerEventHandler("transition_complete_keyframe", f16_local0)
 				end
-				f14_arg0.tierProgressAdd:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f14_arg0.tierProgressAdd:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 				f14_arg0.tierProgressAdd:setAlpha(0.5)
 				f14_arg0.tierProgressAdd:registerEventHandler("interrupted_keyframe", f14_arg0.clipInterrupted)
 				f14_arg0.tierProgressAdd:registerEventHandler("transition_complete_keyframe", f15_local0)
@@ -282,11 +282,11 @@ CoD.DirectorBlackMarketButtonInternal.__clipsPerState = {
 						f22_arg0:beginAnimation(500)
 						f22_arg0:registerEventHandler("transition_complete_keyframe", f19_arg0.clipFinished)
 					end
-					f21_arg0:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f21_arg0:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 					f21_arg0:setAlpha(1)
 					f21_arg0:registerEventHandler("transition_complete_keyframe", f21_local0)
 				end
-				f19_arg0.tierProgressAdd:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f19_arg0.tierProgressAdd:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 				f19_arg0.tierProgressAdd:setAlpha(0.5)
 				f19_arg0.tierProgressAdd:registerEventHandler("interrupted_keyframe", f19_arg0.clipInterrupted)
 				f19_arg0.tierProgressAdd:registerEventHandler("transition_complete_keyframe", f20_local0)

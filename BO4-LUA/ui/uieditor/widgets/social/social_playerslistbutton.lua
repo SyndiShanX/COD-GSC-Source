@@ -25,10 +25,10 @@ CoD.Social_PlayersListButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 		elseif element.super.gainFocus then
 			f3_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f3_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(ButtonInternal, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(ButtonInternal, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if IsPC() then
 			SetCurrentElementAsActive(self, self, controller)
 			CopyModelFindElement(menu, controller, element, "playerInfo")
@@ -38,7 +38,7 @@ CoD.Social_PlayersListButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 		end
 	end, function(element, menu, controller)
 		if IsPC() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 			return false
 		else
 			return false
@@ -69,8 +69,8 @@ CoD.Social_PlayersListButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	self.PartyBar = PartyBar
 	local BarPixelGridTiledBacking = LUI.UIImage.new(0, 0, 477, 482, 0.31, 0.31, -12.5, 27.5)
 	BarPixelGridTiledBacking:setAlpha(0.4)
-	BarPixelGridTiledBacking:setImage(RegisterImage(0x311E811A3183347))
-	BarPixelGridTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	BarPixelGridTiledBacking:setImage(RegisterImage(@"uie_ui_hud_notifications_pixelpattern"))
+	BarPixelGridTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	BarPixelGridTiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	BarPixelGridTiledBacking:setupNineSliceShader(128, 128)
 	self:addElement(BarPixelGridTiledBacking)
@@ -87,20 +87,20 @@ CoD.Social_PlayersListButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 		elseif element.super.gainFocus then
 			f9_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f9_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(SocialPlayersListButtonJoinAndInviteButton, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(SocialPlayersListButtonJoinAndInviteButton, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if IsElementInState(self.SocialPlayersListButtonJoinAndInviteButton, "Joinable") then
 			SetControllerModelValue(controller, "PositionDraft.ResetOnCloseCharacterSelection", 1)
 			SetSelectedFriendXUID(self, self, controller)
-			LobbyQuickJoin(menu, self, self, controller, Enum[0xC018C5F55467EB1][0xC21E48130C4B82B], true)
+			LobbyQuickJoin(menu, self, self, controller, Enum[@"jointype"][@"join_type_friend"], true)
 			return true
 		else
 		end
 	end, function(element, menu, controller)
 		if IsElementInState(self.SocialPlayersListButtonJoinAndInviteButton, "Joinable") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 			return false
 		else
 			return false
@@ -112,7 +112,7 @@ CoD.Social_PlayersListButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 		{
 			stateName = "Empty",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "xuid", Engine[0x9073FBE2D48C156]("0"))
+				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "xuid", Engine[@"stringtoxuiddecimal"]("0"))
 			end,
 		},
 		{
@@ -154,21 +154,21 @@ CoD.Social_PlayersListButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	end)
 	self:appendEventHandler("input_source_changed", function(f18_arg0, f18_arg1)
 		f18_arg1.menu = f18_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f18_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+		CoD.Menu.UpdateButtonShownState(f18_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 	end)
 	local f1_local7 = self
 	local f1_local8 = self.subscribeToModel
-	local f1_local9 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local9 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local8(f1_local7, f1_local9.LastInput, function(f19_arg0, f19_arg1)
-		CoD.Menu.UpdateButtonShownState(f19_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+		CoD.Menu.UpdateButtonShownState(f19_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 	end, false)
 	f1_local7 = self
 	f1_local8 = self.subscribeToModel
-	f1_local9 = Engine[0x8DF2E5447F384B9]()
+	f1_local9 = Engine[@"getglobalmodel"]()
 	f1_local8(f1_local7, f1_local9["socialRoot.leaderboardsPlayerListActive"], function(f20_arg0, f20_arg1)
-		CoD.Menu.UpdateButtonShownState(f20_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+		CoD.Menu.UpdateButtonShownState(f20_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], nil, function(element, menu, controller, model)
 		if IsPC() and IsGamepad(controller) and not CoD.ModelUtility.IsGlobalModelValueTrue("socialRoot.leaderboardsPlayerListActive") then
 			SetSelectedFriendXUID(self, element, controller)
 			OpenOverlay(self, "Social_PlayerDetailsPopup", controller, nil)
@@ -177,7 +177,7 @@ CoD.Social_PlayersListButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 		end
 	end, function(element, menu, controller)
 		if IsPC() and IsGamepad(controller) and not CoD.ModelUtility.IsGlobalModelValueTrue("socialRoot.leaderboardsPlayerListActive") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0xE0254269ED8FFD3, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"hash_1E0254269ED8FFD3", nil, nil)
 			return true
 		else
 			return false

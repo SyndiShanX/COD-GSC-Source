@@ -8,12 +8,12 @@ CoD.TabbedScoreboardInfoTerrain.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Terrain = LUI.UIImage.new(0, 0, 0, 190, 0, 0, 0, 70)
-	Terrain:setImage(RegisterImage(0x7DF0D9748126905))
+	Terrain:setImage(RegisterImage(@"hash_67DF0D9748126905"))
 	self:addElement(Terrain)
 	self.Terrain = Terrain
 	local TerrainAdd = LUI.UIImage.new(0, 0, 0, 190, 0, 0, 0, 70)
-	TerrainAdd:setImage(RegisterImage(0x7DF0D9748126905))
-	TerrainAdd:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	TerrainAdd:setImage(RegisterImage(@"hash_67DF0D9748126905"))
+	TerrainAdd:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	TerrainAdd:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(TerrainAdd)
 	self.TerrainAdd = TerrainAdd
@@ -24,7 +24,7 @@ CoD.TabbedScoreboardInfoTerrain.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 end
 CoD.TabbedScoreboardInfoTerrain.__resetProperties = function(f2_arg0)
 	f2_arg0.TerrainAdd:completeAnimation()
-	f2_arg0.TerrainAdd:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	f2_arg0.TerrainAdd:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	f2_arg0.TerrainAdd:setShaderVector(0, 1, 0, 0, 0)
 end
 CoD.TabbedScoreboardInfoTerrain.__clipsPerState = {
@@ -48,7 +48,7 @@ CoD.TabbedScoreboardInfoTerrain.__clipsPerState = {
 				f3_arg0.TerrainAdd:registerEventHandler("transition_complete_keyframe", f4_local0)
 			end
 			f3_arg0.TerrainAdd:completeAnimation()
-			f3_arg0.TerrainAdd:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+			f3_arg0.TerrainAdd:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 			f3_arg0.TerrainAdd:setShaderVector(0, 0, 0, 0, 0)
 			f3_local0(f3_arg0.TerrainAdd)
 			f3_arg0.nextClip = "DefaultClip"

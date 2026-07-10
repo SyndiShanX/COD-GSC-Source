@@ -7,7 +7,7 @@ CoD.ui_icon_callingcards_assassin_attackerhand.new = function(f1_arg0, f1_arg1, 
 	self.id = "ui_icon_callingcards_assassin_attackerhand"
 	self.soundSet = "default"
 	local hand = LUI.UIImage.new(0, 0, -217, 23, 0, 0, -68, 36)
-	hand:setImage(RegisterImage(0xCBEF29DD42F9D3))
+	hand:setImage(RegisterImage(@"uie_ui_icon_callingcards_assassin_hand"))
 	self:addElement(hand)
 	self.hand = hand
 	if PostLoadFunc then

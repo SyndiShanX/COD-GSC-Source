@@ -12,8 +12,8 @@ CoD.AARLevelUpRank.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local ZMCroppedBacking = LUI.UIImage.new(0, 0, -1, 401, 0, 0, -4.5, 398.5)
 	ZMCroppedBacking:setAlpha(0)
-	ZMCroppedBacking:setImage(RegisterImage(0xA8FC401C1972BDE))
-	ZMCroppedBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0xA02C44161370F6D))
+	ZMCroppedBacking:setImage(RegisterImage(@"uie_ui_hud_zm_aar_reward_bg"))
+	ZMCroppedBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_1A02C44161370F6D"))
 	ZMCroppedBacking:setShaderVector(0, 0, 0, 0, 0)
 	ZMCroppedBacking:setShaderVector(1, 1, 1, 0, 0)
 	ZMCroppedBacking:setShaderVector(2, 0, 0, 0, 0)
@@ -26,8 +26,8 @@ CoD.AARLevelUpRank.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	self.Backing = Backing
 	local TiledwhiteNoiseBacking = LUI.UIImage.new(0, 0, 4, 396, 0, 0, 4, 396)
 	TiledwhiteNoiseBacking:setAlpha(0.02)
-	TiledwhiteNoiseBacking:setImage(RegisterImage(0x7167D8C33A06020))
-	TiledwhiteNoiseBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	TiledwhiteNoiseBacking:setImage(RegisterImage(@"uie_ui_menu_aar_repeat_white_bg"))
+	TiledwhiteNoiseBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	TiledwhiteNoiseBacking:setShaderVector(0, 0, 0, 0, 0)
 	TiledwhiteNoiseBacking:setupNineSliceShader(64, 64)
 	self:addElement(TiledwhiteNoiseBacking)
@@ -35,15 +35,15 @@ CoD.AARLevelUpRank.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	local FlareLevel = LUI.UIImage.new(0.5, 0.5, -201, 201, 0.5, 0.5, 198.5, 234.5)
 	FlareLevel:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
 	FlareLevel:setScale(0, 0)
-	FlareLevel:setImage(RegisterImage(0xC4CCD81B90B0241))
-	FlareLevel:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	FlareLevel:setImage(RegisterImage(@"uie_ui_menu_aar_levelup_flare"))
+	FlareLevel:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	FlareLevel:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(FlareLevel)
 	self.FlareLevel = FlareLevel
 	local LevelUpText = LUI.UIText.new(0.5, 0.5, -200, 200, 0, 0, 406, 436)
 	LevelUpText:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
 	LevelUpText:setTTF("0arame_mono_stencil")
-	LevelUpText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	LevelUpText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	LevelUpText:subscribeToGlobalModel(f1_arg1, "AARLevelUp", "rankLabel", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -61,7 +61,7 @@ CoD.AARLevelUpRank.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	ZMLevelUpText:setAlpha(0)
 	ZMLevelUpText:setTTF("skorzhen")
 	ZMLevelUpText:setLetterSpacing(4)
-	ZMLevelUpText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	ZMLevelUpText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	ZMLevelUpText:subscribeToGlobalModel(f1_arg1, "AARLevelUp", "rankLabel", function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
@@ -77,9 +77,9 @@ CoD.AARLevelUpRank.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	local RankName = LUI.UIText.new(0, 1, 0, 0, 0.9, 0.9, 7, 32)
 	RankName:setRGB(ColorSet.Title.r, ColorSet.Title.g, ColorSet.Title.b)
 	RankName:setTTF("ttmussels_regular")
-	RankName:setMaterial(LUI.UIImage.GetCachedMaterial(0x336C1AE82B1520A))
-	RankName:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	RankName:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	RankName:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_3336C1AE82B1520A"))
+	RankName:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	RankName:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	RankName:linkToElementModel(self, "rankName", true, function(model)
 		local f6_local0 = model:get()
 		if f6_local0 ~= nil then
@@ -100,8 +100,8 @@ CoD.AARLevelUpRank.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	local Flare = LUI.UIImage.new(0.5, 0.5, -350, 350, 0.5, 0.5, -90, 90)
 	Flare:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
 	Flare:setScale(0, 0)
-	Flare:setImage(RegisterImage(0xC4CCD81B90B0241))
-	Flare:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	Flare:setImage(RegisterImage(@"uie_ui_menu_aar_levelup_flare"))
+	Flare:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	Flare:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(Flare)
 	self.Flare = Flare
@@ -113,28 +113,28 @@ CoD.AARLevelUpRank.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	self.HeaderDiagonalBarTop = HeaderDiagonalBarTop
 	local infoBracketBot = LUI.UIImage.new(0, 0, 2.5, 397.5, 0, 0, 389, 397)
 	infoBracketBot:setAlpha(0.6)
-	infoBracketBot:setImage(RegisterImage(0xC325BED3F226657))
-	infoBracketBot:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	infoBracketBot:setImage(RegisterImage(@"hash_4C325BED3F226657"))
+	infoBracketBot:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	infoBracketBot:setShaderVector(0, 0, 0, 0, 0)
 	infoBracketBot:setupNineSliceShader(16, 4)
 	self:addElement(infoBracketBot)
 	self.infoBracketBot = infoBracketBot
 	local infoBracketTop = LUI.UIImage.new(0, 0, 2.5, 397.5, 0, 0, 0, 32)
 	infoBracketTop:setAlpha(0.6)
-	infoBracketTop:setImage(RegisterImage(0xCAD52FFFB7C32C1))
-	infoBracketTop:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	infoBracketTop:setImage(RegisterImage(@"uie_ui_menu_aar_common_bracket"))
+	infoBracketTop:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	infoBracketTop:setShaderVector(0, 0, 0, 0, 0)
 	infoBracketTop:setupNineSliceShader(10, 16)
 	self:addElement(infoBracketTop)
 	self.infoBracketTop = infoBracketTop
 	local ZMBotBar = LUI.UIImage.new(0, 0, -12, 412, 1, 1, -16.5, 23.5)
 	ZMBotBar:setAlpha(0)
-	ZMBotBar:setImage(RegisterImage(0x24F1A68C216ACF6))
+	ZMBotBar:setImage(RegisterImage(@"uie_ui_hud_zm_aar_bot_bar"))
 	self:addElement(ZMBotBar)
 	self.ZMBotBar = ZMBotBar
 	local ZMTopBar = LUI.UIImage.new(0, 0, -12, 412, 0, 0, -10.5, 13.5)
 	ZMTopBar:setAlpha(0)
-	ZMTopBar:setImage(RegisterImage(0x45C555C45B1E6E4))
+	ZMTopBar:setImage(RegisterImage(@"uie_ui_hud_zm_aar_top_bar"))
 	self:addElement(ZMTopBar)
 	self.ZMTopBar = ZMTopBar
 	self:mergeStateConditions({
@@ -162,7 +162,7 @@ CoD.AARLevelUpRank.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	end)
 	local f1_local16 = self
 	local f1_local17 = self.subscribeToModel
-	local f1_local18 = Engine[0x8DF2E5447F384B9]()
+	local f1_local18 = Engine[@"getglobalmodel"]()
 	f1_local17(f1_local16, f1_local18["lobbyRoot.lobbyNav"], function(f11_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -235,7 +235,7 @@ CoD.AARLevelUpRank.__clipsPerState = {
 			f14_arg0:__resetProperties()
 			f14_arg0:setupElementClipCounter(9)
 			local f14_local0 = function(f15_arg0)
-				f14_arg0.Backing:beginAnimation(100, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f14_arg0.Backing:beginAnimation(100, Enum[@"luitween"][@"luitween_ease_in"])
 				f14_arg0.Backing:setAlpha(0.03)
 				f14_arg0.Backing:registerEventHandler("interrupted_keyframe", f14_arg0.clipInterrupted)
 				f14_arg0.Backing:registerEventHandler("transition_complete_keyframe", f14_arg0.clipFinished)
@@ -288,7 +288,7 @@ CoD.AARLevelUpRank.__clipsPerState = {
 			f14_arg0.Corners:setScale(0.25, 0.25)
 			f14_local2(f14_arg0.Corners)
 			local f14_local3 = function(f21_arg0)
-				f21_arg0:beginAnimation(100, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f21_arg0:beginAnimation(100, Enum[@"luitween"][@"luitween_ease_in"])
 				f21_arg0:setAlpha(1)
 				f21_arg0:registerEventHandler("transition_complete_keyframe", f14_arg0.clipFinished)
 			end
@@ -308,7 +308,7 @@ CoD.AARLevelUpRank.__clipsPerState = {
 					f23_arg0:setAlpha(0.46)
 					f23_arg0:registerEventHandler("transition_complete_keyframe", f23_local0)
 				end
-				f14_arg0.infoBracketBot:beginAnimation(160, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f14_arg0.infoBracketBot:beginAnimation(160, Enum[@"luitween"][@"luitween_ease_in"])
 				f14_arg0.infoBracketBot:setTopBottom(0, 0, 383, 391)
 				f14_arg0.infoBracketBot:setAlpha(0.37)
 				f14_arg0.infoBracketBot:registerEventHandler("interrupted_keyframe", f14_arg0.clipInterrupted)
@@ -330,7 +330,7 @@ CoD.AARLevelUpRank.__clipsPerState = {
 					f26_arg0:setAlpha(0.46)
 					f26_arg0:registerEventHandler("transition_complete_keyframe", f26_local0)
 				end
-				f14_arg0.infoBracketTop:beginAnimation(160, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f14_arg0.infoBracketTop:beginAnimation(160, Enum[@"luitween"][@"luitween_ease_in"])
 				f14_arg0.infoBracketTop:setTopBottom(0, 0, 3, 35)
 				f14_arg0.infoBracketTop:setAlpha(0.37)
 				f14_arg0.infoBracketTop:registerEventHandler("interrupted_keyframe", f14_arg0.clipInterrupted)
@@ -519,7 +519,7 @@ CoD.AARLevelUpRank.__clipsPerState = {
 			f52_arg0:__resetProperties()
 			f52_arg0:setupElementClipCounter(11)
 			local f52_local0 = function(f53_arg0)
-				f52_arg0.ZMCroppedBacking:beginAnimation(100, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f52_arg0.ZMCroppedBacking:beginAnimation(100, Enum[@"luitween"][@"luitween_ease_in"])
 				f52_arg0.ZMCroppedBacking:setAlpha(1)
 				f52_arg0.ZMCroppedBacking:registerEventHandler("interrupted_keyframe", f52_arg0.clipInterrupted)
 				f52_arg0.ZMCroppedBacking:registerEventHandler("transition_complete_keyframe", f52_arg0.clipFinished)
@@ -676,7 +676,7 @@ CoD.AARLevelUpRank.__clipsPerState = {
 			f57_local4(f57_arg0.ZMLevelUpText)
 			local f57_local5 = function(f71_arg0)
 				local f71_local0 = function(f72_arg0)
-					f72_arg0:beginAnimation(100, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f72_arg0:beginAnimation(100, Enum[@"luitween"][@"luitween_ease_both"])
 					f72_arg0:setAlpha(1)
 					f72_arg0:registerEventHandler("transition_complete_keyframe", f57_arg0.clipFinished)
 				end

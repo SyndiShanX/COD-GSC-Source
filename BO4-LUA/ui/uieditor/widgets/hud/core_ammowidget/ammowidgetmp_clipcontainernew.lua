@@ -26,7 +26,7 @@ CoD.AmmoWidgetMP_ClipContainerNew.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	})
 	local f1_local3 = ClipContainerPress
 	local Bounce = ClipContainerPress.subscribeToModel
-	local f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
 	Bounce(f1_local3, f1_local5["hudItems.pulseNoAmmo"], function(f3_arg0)
 		f1_arg0:updateElementState(ClipContainerPress, {
 			name = "model_validation",
@@ -41,8 +41,8 @@ CoD.AmmoWidgetMP_ClipContainerNew.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	self.ClipContainerPress = ClipContainerPress
 	Bounce = LUI.UIImage.new(0, 0, -9.5, 64.5, 0, 0, -19, 9)
 	Bounce:setAlpha(0)
-	Bounce:setImage(RegisterImage(0x11B3A87BB555593))
-	Bounce:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Bounce:setImage(RegisterImage(@"hash_711B3A87BB555593"))
+	Bounce:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Bounce)
 	self.Bounce = Bounce
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)

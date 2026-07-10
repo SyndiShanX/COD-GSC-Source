@@ -8,7 +8,7 @@ CoD.PlayerPortraitHoverBottom.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self.soundSet = "none"
 	local bottomselector = LUI.UIImage.new(0.5, 0.5, -66, 66, 0, 0, 0, 16)
 	bottomselector:setAlpha(0)
-	bottomselector:setImage(RegisterImage(0x1250D548347B092))
+	bottomselector:setImage(RegisterImage(@"hash_1250D548347B092"))
 	self:addElement(bottomselector)
 	self.bottomselector = bottomselector
 	if PostLoadFunc then

@@ -14,21 +14,21 @@ CoD.Loading_WZ_TrialBanner.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self:addElement(Backing)
 	self.Backing = Backing
 	local TrialInfoTop = LUI.UIText.new(1, 1, -609, -200, 0.5, 0.5, -147, -75)
-	TrialInfoTop:setText(LocalizeToUpperString(0x18058A1BEEE18EA))
+	TrialInfoTop:setText(LocalizeToUpperString(@"hash_118058A1BEEE18EA"))
 	TrialInfoTop:setTTF("ttmussels_regular")
-	TrialInfoTop:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	TrialInfoTop:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	self:addElement(TrialInfoTop)
 	self.TrialInfoTop = TrialInfoTop
 	local TrialInfoMid = LUI.UIText.new(1, 1, -609, -200, 0.5, 0.5, -75, 75)
-	TrialInfoMid:setText(LocalizeToUpperString(0xA2DD20750465431))
+	TrialInfoMid:setText(LocalizeToUpperString(@"menu/warzone"))
 	TrialInfoMid:setTTF("ttmussels_demibold")
-	TrialInfoMid:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	TrialInfoMid:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	self:addElement(TrialInfoMid)
 	self.TrialInfoMid = TrialInfoMid
 	local TrialInfoBot = LUI.UIText.new(1, 1, -609, -200, 0.5, 0.5, 75, 147)
-	TrialInfoBot:setText(LocalizeToUpperString(0x82CDAA1F009C7D0))
+	TrialInfoBot:setText(LocalizeToUpperString(@"hash_682CDAA1F009C7D0"))
 	TrialInfoBot:setTTF("ttmussels_regular")
-	TrialInfoBot:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	TrialInfoBot:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	self:addElement(TrialInfoBot)
 	self.TrialInfoBot = TrialInfoBot
 	self:mergeStateConditions({

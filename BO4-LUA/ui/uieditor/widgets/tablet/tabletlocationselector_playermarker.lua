@@ -10,11 +10,11 @@ CoD.TabletLocationSelector_PlayerMarker.new = function(f1_arg0, f1_arg1, f1_arg2
 	local IconFrame = LUI.UIImage.new(0.74, 0.74, -44, 20, 0.76, 0.76, -44, 20)
 	IconFrame:setAlpha(0)
 	IconFrame:setScale(1.74, 1.74)
-	IconFrame:setImage(RegisterImage(0x87A7AC36F9F587F))
+	IconFrame:setImage(RegisterImage(@"uie_ui_hud_cp_hud_tacmode_echo"))
 	self:addElement(IconFrame)
 	self.IconFrame = IconFrame
 	local Icon = LUI.UIImage.new(0, 0, -7, 57, -0.04, -0.04, -4, 60)
-	Icon:setImage(RegisterImage(0x87A7AC36F9F587F))
+	Icon:setImage(RegisterImage(@"uie_ui_hud_cp_hud_tacmode_echo"))
 	self:addElement(Icon)
 	self.Icon = Icon
 	if PostLoadFunc then

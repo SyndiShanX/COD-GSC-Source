@@ -11,7 +11,7 @@ CoD.BM_ItemInfoPanel.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local SceneBlur = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	SceneBlur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	SceneBlur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	SceneBlur:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(SceneBlur)
 	self.SceneBlur = SceneBlur
@@ -26,8 +26,8 @@ CoD.BM_ItemInfoPanel.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	self.DotTiledBacking = DotTiledBacking
 	local ButtonBottomLine9Slice = LUI.UIImage.new(0, 1, -6, 6, 0, 0, 143.5, 163.5)
 	ButtonBottomLine9Slice:setAlpha(0.25)
-	ButtonBottomLine9Slice:setImage(RegisterImage(0xC752149A1FA1AAE))
-	ButtonBottomLine9Slice:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	ButtonBottomLine9Slice:setImage(RegisterImage(@"uie_ui_menu_cac_secondary_button_top_line"))
+	ButtonBottomLine9Slice:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	ButtonBottomLine9Slice:setShaderVector(0, 0, 0, 0, 0)
 	ButtonBottomLine9Slice:setupNineSliceShader(120, 10)
 	self:addElement(ButtonBottomLine9Slice)
@@ -36,7 +36,7 @@ CoD.BM_ItemInfoPanel.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	displayName:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
 	displayName:setTTF("ttmussels_demibold")
 	displayName:setLetterSpacing(4)
-	displayName:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	displayName:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	displayName:linkToElementModel(self, "displayName", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -48,7 +48,7 @@ CoD.BM_ItemInfoPanel.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	local SetInfo = LUI.UIText.new(0, 0, 22, 518, 0, 0, 68, 86)
 	SetInfo:setRGB(0.92, 0.92, 0.92)
 	SetInfo:setTTF("ttmussels_demibold")
-	SetInfo:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	SetInfo:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	SetInfo:linkToElementModel(self, "setInfo", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -60,8 +60,8 @@ CoD.BM_ItemInfoPanel.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	local UnlockInfo = LUI.UIText.new(0, 0, 22, 518, 0, 0, 90, 108)
 	UnlockInfo:setRGB(0.92, 0.92, 0.92)
 	UnlockInfo:setTTF("dinnext_regular")
-	UnlockInfo:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	UnlockInfo:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	UnlockInfo:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	UnlockInfo:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	UnlockInfo:linkToElementModel(self, "unlockInfo", true, function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
@@ -74,8 +74,8 @@ CoD.BM_ItemInfoPanel.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	Description:setRGB(0.92, 0.92, 0.92)
 	Description:setAlpha(0)
 	Description:setTTF("dinnext_regular")
-	Description:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Description:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Description:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Description:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	Description:linkToElementModel(self, "description", true, function(model)
 		local f5_local0 = model:get()
 		if f5_local0 ~= nil then
@@ -88,8 +88,8 @@ CoD.BM_ItemInfoPanel.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	alertMessage:setRGB(ColorSet.T8__RED.r, ColorSet.T8__RED.g, ColorSet.T8__RED.b)
 	alertMessage:setAlpha(0)
 	alertMessage:setTTF("ttmussels_demibold")
-	alertMessage:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	alertMessage:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	alertMessage:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	alertMessage:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	alertMessage:linkToElementModel(self, "alertMessage", true, function(model)
 		local f6_local0 = model:get()
 		if f6_local0 ~= nil then
@@ -100,8 +100,8 @@ CoD.BM_ItemInfoPanel.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	self.alertMessage = alertMessage
 	local ButtonTopLine9Slice = LUI.UIImage.new(0, 1, -6, 6, 0, 0, -6, 14)
 	ButtonTopLine9Slice:setAlpha(0.25)
-	ButtonTopLine9Slice:setImage(RegisterImage(0xC752149A1FA1AAE))
-	ButtonTopLine9Slice:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	ButtonTopLine9Slice:setImage(RegisterImage(@"uie_ui_menu_cac_secondary_button_top_line"))
+	ButtonTopLine9Slice:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	ButtonTopLine9Slice:setShaderVector(0, 0, 0, 0, 0)
 	ButtonTopLine9Slice:setupNineSliceShader(120, 10)
 	self:addElement(ButtonTopLine9Slice)

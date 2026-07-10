@@ -23,11 +23,11 @@ CoD.ScoreboardButtonPrompts.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	local muteText = LUI.UIText.new(0, 0, 56, 256, 0, 0, 27, 64)
 	muteText:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	muteText:setTTF("default")
-	muteText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	muteText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	muteText:subscribeToGlobalModel(f1_arg1, "Scoreboard", "muteButtonPromptText", function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
-			muteText:setText(Engine[0xF9F1239CFD921FE](f3_local0))
+			muteText:setText(Engine[@"hash_4F9F1239CFD921FE"](f3_local0))
 		end
 	end)
 	self:addElement(muteText)
@@ -48,7 +48,7 @@ CoD.ScoreboardButtonPrompts.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	})
 	local f1_local3 = self
 	local f1_local4 = self.subscribeToModel
-	local f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local4(f1_local3, f1_local5["scoreboardInfo.muteButtonPromptVisible"], function(f6_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -60,7 +60,7 @@ CoD.ScoreboardButtonPrompts.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	end, false)
 	f1_local3 = self
 	f1_local4 = self.subscribeToModel
-	f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local4(f1_local3, f1_local5.forceScoreboard, function(f7_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

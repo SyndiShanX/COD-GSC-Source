@@ -9,7 +9,7 @@ CoD.GameEndScore_HeaderBarTip.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self.soundSet = "none"
 	local BackingBlur = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	BackingBlur:setRGB(0, 0, 0)
-	BackingBlur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	BackingBlur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	BackingBlur:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(BackingBlur)
 	self.BackingBlur = BackingBlur
@@ -21,8 +21,8 @@ CoD.GameEndScore_HeaderBarTip.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	local Grid = LUI.UIImage.new(0, 0.89, 0, 0, -0, 1, 0, 0)
 	Grid:setRGB(0, 0, 0)
 	Grid:setAlpha(0.25)
-	Grid:setImage(RegisterImage(0x2F926473EDCBFCA))
-	Grid:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	Grid:setImage(RegisterImage(@"uie_ui_hud_vehicle_lightstrike_grid"))
+	Grid:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	Grid:setShaderVector(0, 0, 0, 0, 0)
 	Grid:setupNineSliceShader(22, 20)
 	self:addElement(Grid)
@@ -41,19 +41,19 @@ CoD.GameEndScore_HeaderBarTip.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	Arrow:setRGB(0, 0, 0)
 	Arrow:setAlpha(0.85)
 	Arrow:setYRot(180)
-	Arrow:setImage(RegisterImage(0x408E29FE6FA534D))
+	Arrow:setImage(RegisterImage(@"uie_ui_hud_wz_endgame_end_arrow"))
 	self:addElement(Arrow)
 	self.Arrow = Arrow
 	local CrossMarkTop = LUI.UIImage.new(0, 0, 34.5, 53.5, 0, 0, 3, 22)
 	CrossMarkTop:setRGB(0, 0, 0)
 	CrossMarkTop:setAlpha(0.25)
-	CrossMarkTop:setImage(RegisterImage(0xD89B11EC41D18DF))
+	CrossMarkTop:setImage(RegisterImage(@"hash_5D89B11EC41D18DF"))
 	self:addElement(CrossMarkTop)
 	self.CrossMarkTop = CrossMarkTop
 	local CrossMarkBot = LUI.UIImage.new(0, 0, 34.5, 53.5, 0, 0, 59, 78)
 	CrossMarkBot:setRGB(0, 0, 0)
 	CrossMarkBot:setAlpha(0.25)
-	CrossMarkBot:setImage(RegisterImage(0xD89B11EC41D18DF))
+	CrossMarkBot:setImage(RegisterImage(@"hash_5D89B11EC41D18DF"))
 	self:addElement(CrossMarkBot)
 	self.CrossMarkBot = CrossMarkBot
 	local StartMenuOptionsMainFrame = CoD.StartMenuOptionsMainFrame.new(f1_arg0, f1_arg1, 0, 0, 2.5, 32.5, 0, 0, 32.5, 47.5)
@@ -69,16 +69,16 @@ CoD.GameEndScore_HeaderBarTip.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	local CrossMarkMid = LUI.UIImage.new(0, 0, 34.5, 53.5, 0, 0, 30.5, 49.5)
 	CrossMarkMid:setRGB(0, 0, 0)
 	CrossMarkMid:setAlpha(0.6)
-	CrossMarkMid:setImage(RegisterImage(0xD89B11EC41D18DF))
+	CrossMarkMid:setImage(RegisterImage(@"hash_5D89B11EC41D18DF"))
 	self:addElement(CrossMarkMid)
 	self.CrossMarkMid = CrossMarkMid
 	local FrameTop2 = LUI.UIImage.new(0, 1, 0, 0, 0, 0, -1, 15)
-	FrameTop2:setImage(RegisterImage(0x5FDC97796CA8AC2))
+	FrameTop2:setImage(RegisterImage(@"uie_ui_hud_wz_endgame_frame_short"))
 	self:addElement(FrameTop2)
 	self.FrameTop2 = FrameTop2
 	local FrameBot = LUI.UIImage.new(0, 1, 0, 0, 1, 1, -15, 1)
 	FrameBot:setXRot(180)
-	FrameBot:setImage(RegisterImage(0x5FDC97796CA8AC2))
+	FrameBot:setImage(RegisterImage(@"uie_ui_hud_wz_endgame_frame_short"))
 	self:addElement(FrameBot)
 	self.FrameBot = FrameBot
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)

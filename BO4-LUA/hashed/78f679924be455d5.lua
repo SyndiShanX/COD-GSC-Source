@@ -37,8 +37,8 @@ CoD.ReserveTall.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_a
 	local Category = LUI.UIText.new(0, 0, 0, 236, 0, 0, 2, 20)
 	Category:setTTF("ttmussels_regular")
 	Category:setLetterSpacing(2)
-	Category:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	Category:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	Category:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	Category:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	Category:linkToElementModel(self, "rarity", true, function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
@@ -85,8 +85,8 @@ CoD.ReserveTall.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_a
 	local Rarity = LUI.UIText.new(0, 0, 7, 230, 0, 0, 298, 315)
 	Rarity:setTTF("ttmussels_demibold")
 	Rarity:setLetterSpacing(2)
-	Rarity:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Rarity:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	Rarity:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Rarity:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	Rarity:linkToElementModel(self, "rarity", true, function(model)
 		local f10_local0 = model:get()
 		if f10_local0 ~= nil then
@@ -105,12 +105,12 @@ CoD.ReserveTall.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_a
 	Name:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	Name:setTTF("ttmussels_demibold")
 	Name:setLetterSpacing(2)
-	Name:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Name:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	Name:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Name:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	Name:linkToElementModel(self, "name", true, function(model)
 		local f12_local0 = model:get()
 		if f12_local0 ~= nil then
-			Name:setText(Engine[0xF9F1239CFD921FE](f12_local0))
+			Name:setText(Engine[@"hash_4F9F1239CFD921FE"](f12_local0))
 		end
 	end)
 	self:addElement(Name)
@@ -118,8 +118,8 @@ CoD.ReserveTall.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_a
 	local Desc = LUI.UIText.new(0, 0, 7, 230, 0, 0, 352, 369)
 	Desc:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	Desc:setTTF("dinnext_regular")
-	Desc:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Desc:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Desc:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Desc:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	Desc:linkToElementModel(self, "desc", true, function(model)
 		local f13_local0 = model:get()
 		if f13_local0 ~= nil then
@@ -131,7 +131,7 @@ CoD.ReserveTall.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_a
 	local mainExtraText = LUI.UIText.new(0, 0, 7, 230, 0, 0, 467, 483)
 	mainExtraText:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	mainExtraText:setTTF("dinnext_regular")
-	mainExtraText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	mainExtraText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	mainExtraText:linkToElementModel(self, "mainExtraText", true, function(model)
 		local f14_local0 = model:get()
 		if f14_local0 ~= nil then
@@ -143,11 +143,11 @@ CoD.ReserveTall.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_a
 	local subExtraText = LUI.UIText.new(0, 0, 7, 230, 0, 0, 488, 504)
 	subExtraText:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	subExtraText:setTTF("dinnext_regular")
-	subExtraText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	subExtraText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	subExtraText:linkToElementModel(self, "subExtraText", true, function(model)
 		local f15_local0 = model:get()
 		if f15_local0 ~= nil then
-			subExtraText:setText(Engine[0xF9F1239CFD921FE](f15_local0))
+			subExtraText:setText(Engine[@"hash_4F9F1239CFD921FE"](f15_local0))
 		end
 	end)
 	self:addElement(subExtraText)

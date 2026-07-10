@@ -41,7 +41,7 @@ CoD.ui_icon_callingcards_dystopian_character.__clipsPerState = {
 			f3_arg0:setupElementClipCounter(3)
 			local f3_local0 = function(f4_arg0)
 				local f4_local0 = function(f5_arg0)
-					f5_arg0:beginAnimation(1500, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f5_arg0:beginAnimation(1500, Enum[@"luitween"][@"luitween_ease_both"])
 					f5_arg0:setZRot(0)
 					f5_arg0:registerEventHandler("transition_complete_keyframe", function(element, event)
 						element:playClip("DefaultClip")
@@ -49,7 +49,7 @@ CoD.ui_icon_callingcards_dystopian_character.__clipsPerState = {
 					end)
 				end
 				f3_arg0.arm:playClip("DefaultClip")
-				f3_arg0.arm:beginAnimation(1500, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f3_arg0.arm:beginAnimation(1500, Enum[@"luitween"][@"luitween_ease_both"])
 				f3_arg0.arm:setZRot(24)
 				f3_arg0.arm:registerEventHandler("interrupted_keyframe", f3_arg0.clipInterrupted)
 				f3_arg0.arm:registerEventHandler("transition_complete_keyframe", f4_local0)

@@ -21,7 +21,7 @@ LUI.createMenu.AARLevelUpOverlay = function(f1_arg0, f1_arg1)
 	self.anyChildUsesUpdateState = true
 	f1_local1:addElementToPendingUpdateStateList(self)
 	local BlurBg = LUI.UIImage.new(0, 0, 0, 1920, 0, 0, 0, 1080)
-	BlurBg:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	BlurBg:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	BlurBg:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(BlurBg)
 	self.BlurBg = BlurBg
@@ -32,8 +32,8 @@ LUI.createMenu.AARLevelUpOverlay = function(f1_arg0, f1_arg1)
 	self.Backing = Backing
 	local FractalGrid = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	FractalGrid:setAlpha(0)
-	FractalGrid:setImage(RegisterImage(0x1DF4C930E69FFB0))
-	FractalGrid:setMaterial(LUI.UIImage.GetCachedMaterial(0xD8EA9FE9B0BCF75))
+	FractalGrid:setImage(RegisterImage(@"uie_ui_menu_aar_levelup_fractalgrid"))
+	FractalGrid:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_tile_scroll"))
 	FractalGrid:setShaderVector(0, 1, 1, 0, 0)
 	FractalGrid:setShaderVector(1, 0, 0, 0, 0)
 	self:addElement(FractalGrid)
@@ -111,13 +111,13 @@ LUI.createMenu.AARLevelUpOverlay = function(f1_arg0, f1_arg1)
 	XpMeter:linkToElementModel(self, "xpEarnedDuringMatch", true, function(model)
 		local f10_local0 = model:get()
 		if f10_local0 ~= nil then
-			XpMeter.xpEarnedText:setText(LocalizeIntoString(0x5C4E2BA06EA49A5, f10_local0))
+			XpMeter.xpEarnedText:setText(LocalizeIntoString(@"hash_75C4E2BA06EA49A5", f10_local0))
 		end
 	end)
 	XpMeter:linkToElementModel(self, "xpNeededToLevelUp", true, function(model)
 		local f11_local0 = model:get()
 		if f11_local0 ~= nil then
-			XpMeter.xpNeededText:setText(LocalizeIntoString(0x2B924F206C5B4D8, f11_local0))
+			XpMeter.xpNeededText:setText(LocalizeIntoString(@"hash_42B924F206C5B4D8", f11_local0))
 		end
 	end)
 	self:addElement(XpMeter)
@@ -128,12 +128,12 @@ LUI.createMenu.AARLevelUpOverlay = function(f1_arg0, f1_arg1)
 	local MainCornerL = LUI.UIImage.new(0.5, 0.5, -784, -754, 0, 0, 146, 176)
 	MainCornerL:setAlpha(0.04)
 	MainCornerL:setYRot(180)
-	MainCornerL:setImage(RegisterImage(0xBCB7451C0F2DE33))
+	MainCornerL:setImage(RegisterImage(@"uie_ui_hud_notifications_bracket_topright"))
 	self:addElement(MainCornerL)
 	self.MainCornerL = MainCornerL
 	local MainCornerR = LUI.UIImage.new(0.5, 0.5, 756, 786, 0, 0, 145, 175)
 	MainCornerR:setAlpha(0.04)
-	MainCornerR:setImage(RegisterImage(0xBCB7451C0F2DE33))
+	MainCornerR:setImage(RegisterImage(@"uie_ui_hud_notifications_bracket_topright"))
 	self:addElement(MainCornerR)
 	self.MainCornerR = MainCornerR
 	local Reward = CoD.AARLevelUpReward.new(f1_local1, f1_arg0, 0.5, 0.5, -400, 400, 0.5, 0.5, 55.5, 335.5)
@@ -171,7 +171,7 @@ LUI.createMenu.AARLevelUpOverlay = function(f1_arg0, f1_arg1)
 	})
 	local Rewardsound = LevelUpText
 	local Ranksound = LevelUpText.subscribeToModel
-	local f1_local20 = Engine[0x8DF2E5447F384B9]()
+	local f1_local20 = Engine[@"getglobalmodel"]()
 	Ranksound(Rewardsound, f1_local20["lobbyRoot.lobbyNav"], function(f16_arg0)
 		f1_local1:updateElementState(LevelUpText, {
 			name = "model_validation",
@@ -213,7 +213,7 @@ LUI.createMenu.AARLevelUpOverlay = function(f1_arg0, f1_arg1)
 	})
 	local f1_local21 = self
 	f1_local20 = self.subscribeToModel
-	local f1_local22 = Engine[0x8DF2E5447F384B9]()
+	local f1_local22 = Engine[@"getglobalmodel"]()
 	f1_local20(f1_local21, f1_local22["lobbyRoot.lobbyNav"], function(f20_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",
@@ -225,15 +225,15 @@ LUI.createMenu.AARLevelUpOverlay = function(f1_arg0, f1_arg1)
 	end, false)
 	self:appendEventHandler("input_source_changed", function(f21_arg0, f21_arg1)
 		f21_arg1.menu = f21_arg1.menu or f1_local1
-		CoD.Menu.UpdateButtonShownState(f21_arg0, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f21_arg0, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	f1_local21 = self
 	f1_local20 = self.subscribeToModel
-	f1_local22 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	f1_local22 = Engine[@"getmodelforcontroller"](f1_arg0)
 	f1_local20(f1_local21, f1_local22.LastInput, function(f22_arg0, f22_arg1)
-		CoD.Menu.UpdateButtonShownState(f22_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f22_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if not IsPC() then
 			CoD.AARUtility.CloseLevelUpOverlay(menu, controller)
 			PlaySoundAlias("uin_toggle_generic")
@@ -245,16 +245,16 @@ LUI.createMenu.AARLevelUpOverlay = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if not IsPC() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x6393FF34EA56966, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/continue", nil, nil)
 			return true
 		elseif IsPC() and IsGamepad(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, nil)
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		if IsPC() then
 			CoD.AARUtility.CloseLevelUpOverlay(menu, controller)
 			return true
@@ -262,24 +262,24 @@ LUI.createMenu.AARLevelUpOverlay = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if IsPC() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "MOUSE1", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_none"], "MOUSE1", function(element, menu, controller, model)
 		CoD.AARUtility.CloseLevelUpOverlay(menu, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "MOUSE1")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "MOUSE1")
 		return false
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "ui_confirm", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_none"], "ui_confirm", function(element, menu, controller, model)
 		CoD.AARUtility.CloseLevelUpOverlay(menu, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "ui_confirm")
 		return false
 	end, false)
 	FooterContainerFrontendRight:setModel(self.buttonModel, f1_arg0)
@@ -358,7 +358,7 @@ CoD.AARLevelUpOverlay.__clipsPerState = {
 			f32_local1(f32_arg0.BgElements)
 			local f32_local2 = function(f35_arg0)
 				local f35_local0 = function(f36_arg0)
-					f36_arg0:beginAnimation(99, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f36_arg0:beginAnimation(99, Enum[@"luitween"][@"luitween_ease_out"])
 					f36_arg0:setAlpha(1)
 					f36_arg0:registerEventHandler("transition_complete_keyframe", f32_arg0.clipFinished)
 				end
@@ -371,7 +371,7 @@ CoD.AARLevelUpOverlay.__clipsPerState = {
 			f32_local2(f32_arg0.XpMeter)
 			local f32_local3 = function(f37_arg0)
 				local f37_local0 = function(f38_arg0)
-					f38_arg0:beginAnimation(99, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f38_arg0:beginAnimation(99, Enum[@"luitween"][@"luitween_ease_out"])
 					f38_arg0:setAlpha(1)
 					f38_arg0:registerEventHandler("transition_complete_keyframe", f32_arg0.clipFinished)
 				end
@@ -423,7 +423,7 @@ CoD.AARLevelUpOverlay.__clipsPerState = {
 			f32_local6(f32_arg0.Reward)
 			local f32_local7 = function(f45_arg0)
 				local f45_local0 = function(f46_arg0)
-					f46_arg0:beginAnimation(99, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f46_arg0:beginAnimation(99, Enum[@"luitween"][@"luitween_ease_both"])
 					f46_arg0:setAlpha(1)
 					f46_arg0:registerEventHandler("transition_complete_keyframe", f32_arg0.clipFinished)
 				end
@@ -436,7 +436,7 @@ CoD.AARLevelUpOverlay.__clipsPerState = {
 			f32_local7(f32_arg0.ArrowL)
 			local f32_local8 = function(f47_arg0)
 				local f47_local0 = function(f48_arg0)
-					f48_arg0:beginAnimation(99, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f48_arg0:beginAnimation(99, Enum[@"luitween"][@"luitween_ease_both"])
 					f48_arg0:setAlpha(1)
 					f48_arg0:registerEventHandler("transition_complete_keyframe", f32_arg0.clipFinished)
 				end
@@ -461,7 +461,7 @@ CoD.AARLevelUpOverlay.__clipsPerState = {
 			f32_arg0.Rank:setAlpha(0)
 			f32_local9(f32_arg0.Rank)
 			local f32_local10 = function(f51_arg0)
-				f32_arg0.LevelUpText:beginAnimation(100, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f32_arg0.LevelUpText:beginAnimation(100, Enum[@"luitween"][@"luitween_ease_in"])
 				f32_arg0.LevelUpText:setAlpha(1)
 				f32_arg0.LevelUpText:registerEventHandler("interrupted_keyframe", f32_arg0.clipInterrupted)
 				f32_arg0.LevelUpText:registerEventHandler("transition_complete_keyframe", f32_arg0.clipFinished)
@@ -522,7 +522,7 @@ CoD.AARLevelUpOverlay.__clipsPerState = {
 			f54_arg0.clipFinished(f54_arg0.BgElements)
 			local f54_local3 = function(f58_arg0)
 				local f58_local0 = function(f59_arg0)
-					f59_arg0:beginAnimation(99, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f59_arg0:beginAnimation(99, Enum[@"luitween"][@"luitween_ease_out"])
 					f59_arg0:setAlpha(1)
 					f59_arg0:registerEventHandler("transition_complete_keyframe", f54_arg0.clipFinished)
 				end
@@ -535,7 +535,7 @@ CoD.AARLevelUpOverlay.__clipsPerState = {
 			f54_local3(f54_arg0.XpMeter)
 			local f54_local4 = function(f60_arg0)
 				local f60_local0 = function(f61_arg0)
-					f61_arg0:beginAnimation(99, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f61_arg0:beginAnimation(99, Enum[@"luitween"][@"luitween_ease_out"])
 					f61_arg0:setAlpha(1)
 					f61_arg0:registerEventHandler("transition_complete_keyframe", f54_arg0.clipFinished)
 				end
@@ -585,7 +585,7 @@ CoD.AARLevelUpOverlay.__clipsPerState = {
 			f54_arg0.Rank:setAlpha(0)
 			f54_local6(f54_arg0.Rank)
 			local f54_local7 = function(f66_arg0)
-				f54_arg0.LevelUpText:beginAnimation(100, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f54_arg0.LevelUpText:beginAnimation(100, Enum[@"luitween"][@"luitween_ease_in"])
 				f54_arg0.LevelUpText:setAlpha(1)
 				f54_arg0.LevelUpText:registerEventHandler("interrupted_keyframe", f54_arg0.clipInterrupted)
 				f54_arg0.LevelUpText:registerEventHandler("transition_complete_keyframe", f54_arg0.clipFinished)

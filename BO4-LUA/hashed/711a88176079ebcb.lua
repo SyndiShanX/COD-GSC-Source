@@ -2,10 +2,10 @@ require("x64:3fe9229739d3d5")
 require("x64:e5ec0232d310fb6")
 local PostLoadFunc = function(f1_arg0)
 	f1_arg0.EmpRebootIndicatorWidget.ProgressBar:subscribeToElementModel(f1_arg0, "startTime", function(f2_arg0)
-		local f2_local0 = Engine[0x40E824FE270E174](f1_arg0:getModel(), "endTime")
-		local f2_local1 = Engine[0x614D394F6F9A18D](f2_arg0)
-		local f2_local2 = Engine[0x614D394F6F9A18D](f2_local0) - f2_local1
-		f1_arg0.EmpRebootIndicatorWidget.ProgressBar:setShaderVector(0, (Engine[0xB07E933C9E5CEB1]() - Engine[0x5F56FDEECC040A0]() - f2_local1) / f2_local2, 0, 0, 0)
+		local f2_local0 = Engine[@"getmodel"](f1_arg0:getModel(), "endTime")
+		local f2_local1 = Engine[@"getmodelvalue"](f2_arg0)
+		local f2_local2 = Engine[@"getmodelvalue"](f2_local0) - f2_local1
+		f1_arg0.EmpRebootIndicatorWidget.ProgressBar:setShaderVector(0, (Engine[@"currentgametime"]() - Engine[@"snapshotdeltatime"]() - f2_local1) / f2_local2, 0, 0, 0)
 		f1_arg0.EmpRebootIndicatorWidget.ProgressBar:beginAnimation("updateProgress", f2_local2)
 		f1_arg0.EmpRebootIndicatorWidget.ProgressBar:setShaderVector(0, 1, 0, 0, 0)
 	end)
@@ -33,13 +33,13 @@ LUI.createMenu.EmpRebootIndicator = function(f3_arg0, f3_arg1)
 		{
 			stateName = "Invisible",
 			condition = function(menu, element, event)
-				local f4_local0 = Engine[0xDD333420C49E6D0](f3_arg0, Enum[0x7F032C2EF103A1A][0x6668F0686232679])
+				local f4_local0 = Engine[@"isvisibilitybitset"](f3_arg0, Enum[@"uivisibilitybit"][@"bit_in_vehicle"])
 				if not f4_local0 then
-					f4_local0 = Engine[0xDD333420C49E6D0](f3_arg0, Enum[0x7F032C2EF103A1A][0x23CD9BAB9B9F4C8])
+					f4_local0 = Engine[@"isvisibilitybitset"](f3_arg0, Enum[@"uivisibilitybit"][@"bit_in_guided_missile"])
 					if not f4_local0 then
-						f4_local0 = Engine[0xDD333420C49E6D0](f3_arg0, Enum[0x7F032C2EF103A1A][0x1C630DB86D235A5])
+						f4_local0 = Engine[@"isvisibilitybitset"](f3_arg0, Enum[@"uivisibilitybit"][@"bit_selecting_locational_killstreak"])
 						if not f4_local0 then
-							f4_local0 = Engine[0xDD333420C49E6D0](f3_arg0, Enum[0x7F032C2EF103A1A][0xDA8E6697A56A554])
+							f4_local0 = Engine[@"isvisibilitybitset"](f3_arg0, Enum[@"uivisibilitybit"][@"bit_migrating_host"])
 						end
 					end
 				end
@@ -55,55 +55,55 @@ LUI.createMenu.EmpRebootIndicator = function(f3_arg0, f3_arg1)
 	})
 	local f3_local4 = self
 	local f3_local5 = self.subscribeToModel
-	local f3_local6 = Engine[0x4DF5CFBC1771947](f3_arg0)
-	f3_local5(f3_local4, f3_local6["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x6668F0686232679]], function(f6_arg0)
+	local f3_local6 = Engine[@"getmodelforcontroller"](f3_arg0)
+	f3_local5(f3_local4, f3_local6["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_vehicle"]], function(f6_arg0)
 		f3_local1:updateElementState(self, {
 			name = "model_validation",
 			menu = f3_local1,
 			controller = f3_arg0,
 			modelValue = f6_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x6668F0686232679],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_vehicle"],
 		})
 	end, false)
 	f3_local4 = self
 	f3_local5 = self.subscribeToModel
-	f3_local6 = Engine[0x4DF5CFBC1771947](f3_arg0)
-	f3_local5(f3_local4, f3_local6["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x23CD9BAB9B9F4C8]], function(f7_arg0)
+	f3_local6 = Engine[@"getmodelforcontroller"](f3_arg0)
+	f3_local5(f3_local4, f3_local6["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_guided_missile"]], function(f7_arg0)
 		f3_local1:updateElementState(self, {
 			name = "model_validation",
 			menu = f3_local1,
 			controller = f3_arg0,
 			modelValue = f7_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x23CD9BAB9B9F4C8],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_guided_missile"],
 		})
 	end, false)
 	f3_local4 = self
 	f3_local5 = self.subscribeToModel
-	f3_local6 = Engine[0x4DF5CFBC1771947](f3_arg0)
-	f3_local5(f3_local4, f3_local6["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x1C630DB86D235A5]], function(f8_arg0)
+	f3_local6 = Engine[@"getmodelforcontroller"](f3_arg0)
+	f3_local5(f3_local4, f3_local6["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_selecting_locational_killstreak"]], function(f8_arg0)
 		f3_local1:updateElementState(self, {
 			name = "model_validation",
 			menu = f3_local1,
 			controller = f3_arg0,
 			modelValue = f8_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x1C630DB86D235A5],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_selecting_locational_killstreak"],
 		})
 	end, false)
 	f3_local4 = self
 	f3_local5 = self.subscribeToModel
-	f3_local6 = Engine[0x4DF5CFBC1771947](f3_arg0)
-	f3_local5(f3_local4, f3_local6["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xDA8E6697A56A554]], function(f9_arg0)
+	f3_local6 = Engine[@"getmodelforcontroller"](f3_arg0)
+	f3_local5(f3_local4, f3_local6["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_migrating_host"]], function(f9_arg0)
 		f3_local1:updateElementState(self, {
 			name = "model_validation",
 			menu = f3_local1,
 			controller = f3_arg0,
 			modelValue = f9_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xDA8E6697A56A554],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_migrating_host"],
 		})
 	end, false)
 	f3_local4 = self
 	f3_local5 = self.subscribeToModel
-	f3_local6 = Engine[0x4DF5CFBC1771947](f3_arg0)
+	f3_local6 = Engine[@"getmodelforcontroller"](f3_arg0)
 	f3_local5(f3_local4, f3_local6["hudItems.killCamHideEmpReboot"], function(f10_arg0)
 		f3_local1:updateElementState(self, {
 			name = "model_validation",
@@ -158,7 +158,7 @@ CoD.EmpRebootIndicator.__clipsPerState = {
 			f14_arg0:__resetProperties()
 			f14_arg0:setupElementClipCounter(2)
 			local f14_local0 = function(f15_arg0)
-				f14_arg0.EmpRebootIndicatorWidget:beginAnimation(400, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f14_arg0.EmpRebootIndicatorWidget:beginAnimation(400, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_in"])
 				f14_arg0.EmpRebootIndicatorWidget:setAlpha(1)
 				f14_arg0.EmpRebootIndicatorWidget:registerEventHandler("interrupted_keyframe", f14_arg0.clipInterrupted)
 				f14_arg0.EmpRebootIndicatorWidget:registerEventHandler("transition_complete_keyframe", f14_arg0.clipFinished)
@@ -167,7 +167,7 @@ CoD.EmpRebootIndicator.__clipsPerState = {
 			f14_arg0.EmpRebootIndicatorWidget:setAlpha(0)
 			f14_local0(f14_arg0.EmpRebootIndicatorWidget)
 			local f14_local1 = function(f16_arg0)
-				f14_arg0.EmpRebootElectromagneticWidget0:beginAnimation(400, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f14_arg0.EmpRebootElectromagneticWidget0:beginAnimation(400, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_in"])
 				f14_arg0.EmpRebootElectromagneticWidget0:setAlpha(1)
 				f14_arg0.EmpRebootElectromagneticWidget0:registerEventHandler("interrupted_keyframe", f14_arg0.clipInterrupted)
 				f14_arg0.EmpRebootElectromagneticWidget0:registerEventHandler("transition_complete_keyframe", f14_arg0.clipFinished)

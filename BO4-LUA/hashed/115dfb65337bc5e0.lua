@@ -9,7 +9,7 @@ CoD.WarzoneDpadButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local downImage = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	downImage:setAlpha(0)
-	downImage:setMaterial(LUI.UIImage.GetCachedMaterial(0xE992BD5A540E2D))
+	downImage:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_delta_normal"))
 	downImage:setShaderVector(0, 0.33, 0.67, 0, 0)
 	downImage:setShaderVector(1, 0, 0, 0, 0)
 	downImage:setShaderVector(2, 0, 0.4, 0, 0)
@@ -24,7 +24,7 @@ CoD.WarzoneDpadButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	self:addElement(downImage)
 	self.downImage = downImage
 	local downImage2 = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	downImage2:setImage(RegisterImage(0x6D448065C5FDC56))
+	downImage2:setImage(RegisterImage(@"uie_ui_hud_wz_hud_core_qe_dpad_up"))
 	self:addElement(downImage2)
 	self.downImage2 = downImage2
 	self:mergeStateConditions({

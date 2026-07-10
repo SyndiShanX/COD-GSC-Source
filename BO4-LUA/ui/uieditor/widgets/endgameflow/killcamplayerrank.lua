@@ -15,7 +15,7 @@ CoD.KillcamPlayerRank.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	local Rank = LUI.UIText.new(0.5, 0.5, 0, 74, 0.5, 0.5, -16, 20)
 	Rank:setText(88)
 	Rank:setTTF("0arame_mono_stencil")
-	Rank:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	Rank:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(Rank)
 	self.Rank = Rank
 	local RankIcon = LUI.UIImage.new(0.5, 0.5, -45, -5, 0.5, 0.5, -20, 20)
@@ -31,7 +31,7 @@ CoD.KillcamPlayerRank.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	})
 	local f1_local4 = self
 	local f1_local5 = self.subscribeToModel
-	local f1_local6 = Engine[0x8DF2E5447F384B9]()
+	local f1_local6 = Engine[@"getglobalmodel"]()
 	f1_local5(f1_local4, f1_local6["lobbyRoot.lobbyNetworkMode"], function(f3_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -43,7 +43,7 @@ CoD.KillcamPlayerRank.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	end, false)
 	f1_local4 = self
 	f1_local5 = self.subscribeToModel
-	f1_local6 = Engine[0x8DF2E5447F384B9]()
+	f1_local6 = Engine[@"getglobalmodel"]()
 	f1_local5(f1_local4, f1_local6["lobbyRoot.lobbyNav"], function(f4_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

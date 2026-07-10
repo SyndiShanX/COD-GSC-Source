@@ -17,7 +17,7 @@ CoD.DirectorCustomStartButtonContainer.new = function(f1_arg0, f1_arg1, f1_arg2,
 	circle:setAlpha(0)
 	circle:setZRot(180)
 	circle:setScale(1.05, 1.05)
-	circle:setMaterial(LUI.UIImage.GetCachedMaterial(0x15B163CA03FCE8B))
+	circle:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_elliptical_ring_normal"))
 	circle:setShaderVector(0, 4.66, 0, 0, 0)
 	circle:setShaderVector(1, 80, 80, 0, 0)
 	circle:setShaderVector(2, 0, 0, 0, 0)
@@ -28,8 +28,8 @@ CoD.DirectorCustomStartButtonContainer.new = function(f1_arg0, f1_arg1, f1_arg2,
 	timer:setAlpha(0)
 	timer:setTTF("ttmussels_demibold")
 	timer:setLetterSpacing(-6.3)
-	timer:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	timer:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	timer:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	timer:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	timer:subscribeToGlobalModel(f1_arg1, "LobbyRoot", "lobbyTimeRemaining", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -42,7 +42,7 @@ CoD.DirectorCustomStartButtonContainer.new = function(f1_arg0, f1_arg1, f1_arg2,
 	CountdownText:setRGB(0.05, 0.05, 0.05)
 	CountdownText:setAlpha(0)
 	CountdownText:setTTF("ttmussels_regular")
-	CountdownText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	CountdownText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	CountdownText:subscribeToGlobalModel(f1_arg1, "LobbyRoot", "lobbyStatus", function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -54,7 +54,7 @@ CoD.DirectorCustomStartButtonContainer.new = function(f1_arg0, f1_arg1, f1_arg2,
 	local glow = LUI.UIImage.new(-0.01, 1.02, -3.5, -3.5, -0.5, 0.98, -41, -41)
 	glow:setAlpha(0)
 	glow:setZRot(180)
-	glow:setImage(RegisterImage(0xAD405802E3EEE94))
+	glow:setImage(RegisterImage(@"uie_icon_frontend_navigation_glowmed"))
 	self:addElement(glow)
 	self.glow = glow
 	local Background2 = LUI.UIImage.new(0, 0, 0, 520, 0, 0, -9, -4)
@@ -64,16 +64,16 @@ CoD.DirectorCustomStartButtonContainer.new = function(f1_arg0, f1_arg1, f1_arg2,
 	self.Background2 = Background2
 	local PlayText = LUI.UIText.new(0, 0, 0, 520, 0, 0, 16.5, 53.5)
 	PlayText:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
-	PlayText:setText(LocalizeToUpperString(0xDDDA371285672BD))
+	PlayText:setText(LocalizeToUpperString(@"menu/play"))
 	PlayText:setTTF("ttmussels_demibold")
 	PlayText:setLetterSpacing(6)
-	PlayText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	PlayText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	PlayText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	PlayText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(PlayText)
 	self.PlayText = PlayText
 	local glow2 = LUI.UIImage.new(0, 0, 0, 456, 0, 0, -69, -3)
 	glow2:setAlpha(0)
-	glow2:setImage(RegisterImage(0xC3B2316BAE91099))
+	glow2:setImage(RegisterImage(@"hash_6C3B2316BAE91099"))
 	self:addElement(glow2)
 	self.glow2 = glow2
 	local CornerDotBR = LUI.UIImage.new(0, 0, 519, 520, 0, 0, 1, 2)

@@ -34,7 +34,7 @@ CoD.PC_StartMenu_Options_Controls_TabContent_DropDownPresetKeybindings.new = fun
 	ListItem:linkToElementModel(self, "name", true, function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
-			ListItem.Title:setText(Engine[0xF9F1239CFD921FE](f4_local0))
+			ListItem.Title:setText(Engine[@"hash_4F9F1239CFD921FE"](f4_local0))
 		end
 	end)
 	self:addElement(ListItem)

@@ -23,8 +23,8 @@ CoD.JobFeedItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_a
 	local Glow = LUI.UIImage.new(0.5, 0.5, -64, 64, 0.5, 0.5, -64, 64)
 	Glow:setAlpha(0)
 	Glow:setScale(0.8, 0.8)
-	Glow:setImage(RegisterImage(0xD4F7AA0A4512AE0))
-	Glow:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	Glow:setImage(RegisterImage(@"uie_ui_hud_core_hero_widget_glow_hero"))
+	Glow:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	Glow:setShaderVector(0, 3, 0, 0, 0)
 	self:addElement(Glow)
 	self.Glow = Glow
@@ -129,7 +129,7 @@ CoD.JobFeedItem.__clipsPerState = {
 					f15_arg0:setScale(1.3, 1.3)
 					f15_arg0:registerEventHandler("transition_complete_keyframe", f6_arg0.clipFinished)
 				end
-				f6_arg0.Icons:beginAnimation(360, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f6_arg0.Icons:beginAnimation(360, Enum[@"luitween"][@"luitween_ease_out"])
 				f6_arg0.Icons:setAlpha(0.92)
 				f6_arg0.Icons:setScale(1.2, 1.2)
 				f6_arg0.Icons:registerEventHandler("interrupted_keyframe", f6_arg0.clipInterrupted)

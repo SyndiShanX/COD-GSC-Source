@@ -13,7 +13,7 @@ CoD.vhud_ms_ButtonWidgetCooldown.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	self:addElement(backing)
 	self.backing = backing
 	local fill = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	fill:setMaterial(LUI.UIImage.GetCachedMaterial(0x316E67E1DF2198E))
+	fill:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_normal"))
 	fill:setShaderVector(1, 0, 0, 0, 0)
 	fill:setShaderVector(2, 1, 0, 0, 0)
 	fill:setShaderVector(3, 0, 0, 0, 0)

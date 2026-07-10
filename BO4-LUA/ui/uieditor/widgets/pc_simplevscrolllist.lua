@@ -22,7 +22,7 @@ CoD.PC_SimpleVScrollList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	self.VScrollbar = VScrollbar
 	self:subscribeToGlobalModel(f1_arg1, "PerController", "scriptNotify", function(model)
 		local f2_local0 = self
-		if CoD.ModelUtility.IsParamModelEqualToHashString(model, 0xC72FFE9CF2F9FFA) then
+		if CoD.ModelUtility.IsParamModelEqualToHashString(model, @"hash_7C72FFE9CF2F9FFA") then
 			CoD.PCWidgetUtility.ScrollUpDown(self, f1_arg1, f1_arg0, model)
 		end
 	end)

@@ -8,8 +8,8 @@ CoD.PurchaseHighlight.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	self.soundSet = "none"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local PurchaseBand = LUI.UIImage.new(0, 0, -9, 149, 0, 0, 2, 18)
-	PurchaseBand:setImage(RegisterImage(0xD77FEBA1B6DF8BA))
-	PurchaseBand:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	PurchaseBand:setImage(RegisterImage(@"hash_7D77FEBA1B6DF8BA"))
+	PurchaseBand:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	PurchaseBand:setShaderVector(0, 0, 0, 0, 0)
 	PurchaseBand:setupNineSliceShader(20, 8)
 	self:addElement(PurchaseBand)

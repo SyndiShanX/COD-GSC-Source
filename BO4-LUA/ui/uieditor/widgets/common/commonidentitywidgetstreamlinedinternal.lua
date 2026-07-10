@@ -66,7 +66,7 @@ CoD.CommonIdentityWidgetStreamlinedInternal.new = function(f1_arg0, f1_arg1, f1_
 	})
 	local f1_local5 = self
 	local f1_local6 = self.subscribeToModel
-	local f1_local7 = Engine[0x8DF2E5447F384B9]()
+	local f1_local7 = Engine[@"getglobalmodel"]()
 	f1_local6(f1_local5, f1_local7["lobbyRoot.lobbyNav"], function(f8_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -78,7 +78,7 @@ CoD.CommonIdentityWidgetStreamlinedInternal.new = function(f1_arg0, f1_arg1, f1_
 	end, false)
 	f1_local5 = self
 	f1_local6 = self.subscribeToModel
-	f1_local7 = Engine[0x8DF2E5447F384B9]()
+	f1_local7 = Engine[@"getglobalmodel"]()
 	f1_local6(f1_local5, f1_local7["lobbyRoot.lobbyMainMode"], function(f9_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

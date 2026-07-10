@@ -26,11 +26,11 @@ CoD.KillcamPlayerInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	self:addElement(BottomBackplateLeft)
 	self.BottomBackplateLeft = BottomBackplateLeft
 	local CallingCardPanelLeft = LUI.UIImage.new(0, 0, 7, 562, 0, 0, 18.5, 191.5)
-	CallingCardPanelLeft:setImage(RegisterImage(0x2504876AAAB7FA7))
+	CallingCardPanelLeft:setImage(RegisterImage(@"hash_2504876AAAB7FA7"))
 	self:addElement(CallingCardPanelLeft)
 	self.CallingCardPanelLeft = CallingCardPanelLeft
 	local CallingCardPanelRight = LUI.UIImage.new(0, 0, 1358, 1913, 0, 0, 18.5, 191.5)
-	CallingCardPanelRight:setImage(RegisterImage(0x9EAB6A40169CA2F))
+	CallingCardPanelRight:setImage(RegisterImage(@"hash_19EAB6A40169CA2F"))
 	self:addElement(CallingCardPanelRight)
 	self.CallingCardPanelRight = CallingCardPanelRight
 	local AttackerEmblem = LUI.UIImage.new(0, 0, 16, 152, 0, 0, 28, 164)
@@ -146,33 +146,33 @@ CoD.KillcamPlayerInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	local BottomTopbar = LUI.UIImage.new(0, 0, 554, 1367, 0, 0, 47, 65)
 	BottomTopbar:setRGB(0.22, 0.22, 0.22)
 	BottomTopbar:setAlpha(0.75)
-	BottomTopbar:setImage(RegisterImage(0x6F16BAE9F34A41C))
+	BottomTopbar:setImage(RegisterImage(@"hash_46F16BAE9F34A41C"))
 	self:addElement(BottomTopbar)
 	self.BottomTopbar = BottomTopbar
 	local MiddleDiamond = LUI.UIImage.new(0, 0, 922, 997, 0, 0, 63, 138)
 	MiddleDiamond:setRGB(0.22, 0.22, 0.22)
 	MiddleDiamond:setAlpha(0.75)
-	MiddleDiamond:setImage(RegisterImage(0xC6712D6C0EC235A))
+	MiddleDiamond:setImage(RegisterImage(@"hash_6C6712D6C0EC235A"))
 	self:addElement(MiddleDiamond)
 	self.MiddleDiamond = MiddleDiamond
 	local KillerLabel = LUI.UIText.new(0.5, 0.5, -385.5, -104.5, 0.5, 0.5, -47, -17)
 	KillerLabel:setRGB(ColorSet.EnemyOrange.r, ColorSet.EnemyOrange.g, ColorSet.EnemyOrange.b)
 	KillerLabel:setScale(0.6, 0.6)
-	KillerLabel:setText(LocalizeToUpperString(0x91876E35BECF3CD))
+	KillerLabel:setText(LocalizeToUpperString(@"menu/enemy"))
 	KillerLabel:setTTF("0arame_mono_stencil")
 	KillerLabel:setLetterSpacing(7)
-	KillerLabel:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
-	KillerLabel:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	KillerLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
+	KillerLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(KillerLabel)
 	self.KillerLabel = KillerLabel
 	local YouLabel = LUI.UIText.new(0.5, 0.5, 132, 357, 0.5, 0.5, -49, -19)
 	YouLabel:setRGB(ColorSet.PlayerYellow.r, ColorSet.PlayerYellow.g, ColorSet.PlayerYellow.b)
 	YouLabel:setScale(0.6, 0.6)
-	YouLabel:setText(LocalizeToUpperString(0x1F9844545CB4FF6))
+	YouLabel:setText(LocalizeToUpperString(@"hash_51F9844545CB4FF6"))
 	YouLabel:setTTF("0arame_mono_stencil")
 	YouLabel:setLetterSpacing(7)
-	YouLabel:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	YouLabel:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	YouLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	YouLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(YouLabel)
 	self.YouLabel = YouLabel
 	local AttackerKillsNew = CoD.KillcamWidgetNumbers.new(f1_arg0, f1_arg1, 0.5, 0.5, -253, -73, 0.5, 0.5, -19, 45)
@@ -196,24 +196,24 @@ CoD.KillcamPlayerInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	local VSLabel = LUI.UIText.new(0.5, 0.5, -50, 50, 0, 0, 81, 121)
 	VSLabel:setRGB(0.7, 0.7, 0.7)
 	VSLabel:setScale(0.9, 0.9)
-	VSLabel:setText(Engine[0xF9F1239CFD921FE](0x4F347C78B3F5793))
+	VSLabel:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_34F347C78B3F5793"))
 	VSLabel:setTTF("0arame_mono_stencil")
-	VSLabel:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	VSLabel:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	VSLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	VSLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(VSLabel)
 	self.VSLabel = VSLabel
 	local KillcamNemesisWidget = CoD.KillcamNemesisWidget.new(f1_arg0, f1_arg1, 0, 0, 793, 1120, 0, 0, 1, 169)
 	self:addElement(KillcamNemesisWidget)
 	self.KillcamNemesisWidget = KillcamNemesisWidget
 	local SmashFlare3 = LUI.UIImage.new(0, 0, 448, 1472, 0, 0, -412, 612)
-	SmashFlare3:setImage(RegisterImage(0x3BEA16D33C8F870))
-	SmashFlare3:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	SmashFlare3:setImage(RegisterImage(@"hash_43BEA16D33C8F870"))
+	SmashFlare3:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(SmashFlare3)
 	self.SmashFlare3 = SmashFlare3
 	local SmashFlare = LUI.UIImage.new(0, 0, 448, 1472, 0, 0, -412, 612)
 	SmashFlare:setZRot(90)
-	SmashFlare:setImage(RegisterImage(0x86A85E0C09931D2))
-	SmashFlare:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	SmashFlare:setImage(RegisterImage(@"hash_786A85E0C09931D2"))
+	SmashFlare:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(SmashFlare)
 	self.SmashFlare = SmashFlare
 	self:mergeStateConditions({
@@ -221,8 +221,8 @@ CoD.KillcamPlayerInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 			stateName = "KillcamArena",
 			condition = function(menu, element, event)
 				local f18_local0
-				if not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2]) then
-					f18_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xA77EB9347BE4DFF])
+				if not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_in_killcam"]) then
+					f18_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_nemesis_killcam"])
 					if f18_local0 then
 					else
 						return f18_local0
@@ -234,9 +234,9 @@ CoD.KillcamPlayerInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 		{
 			stateName = "Killcam",
 			condition = function(menu, element, event)
-				local f19_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2])
+				local f19_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_in_killcam"])
 				if not f19_local0 then
-					f19_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xA77EB9347BE4DFF])
+					f19_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_nemesis_killcam"])
 				end
 				return f19_local0
 			end,
@@ -244,31 +244,31 @@ CoD.KillcamPlayerInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	})
 	local f1_local25 = self
 	local f1_local26 = self.subscribeToModel
-	local f1_local27 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local26(f1_local25, f1_local27["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2]], function(f20_arg0)
+	local f1_local27 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local26(f1_local25, f1_local27["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"]], function(f20_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f20_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"],
 		})
 	end, false)
 	f1_local25 = self
 	f1_local26 = self.subscribeToModel
-	f1_local27 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local26(f1_local25, f1_local27["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xA77EB9347BE4DFF]], function(f21_arg0)
+	f1_local27 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local26(f1_local25, f1_local27["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_nemesis_killcam"]], function(f21_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f21_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xA77EB9347BE4DFF],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_nemesis_killcam"],
 		})
 	end, false)
 	f1_local25 = self
 	f1_local26 = self.subscribeToModel
-	f1_local27 = Engine[0x8DF2E5447F384B9]()
+	f1_local27 = Engine[@"getglobalmodel"]()
 	f1_local26(f1_local25, f1_local27["lobbyRoot.lobbyNav"], function(f22_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -514,7 +514,7 @@ CoD.KillcamPlayerInfo.__clipsPerState = {
 			f27_arg0.VictimEmblem:setAlpha(0)
 			f27_local5(f27_arg0.VictimEmblem)
 			local f27_local6 = function(f38_arg0)
-				f27_arg0.AttackerPlayerCard:beginAnimation(700, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f27_arg0.AttackerPlayerCard:beginAnimation(700, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_both"])
 				f27_arg0.AttackerPlayerCard:setAlpha(1)
 				f27_arg0.AttackerPlayerCard:registerEventHandler("interrupted_keyframe", f27_arg0.clipInterrupted)
 				f27_arg0.AttackerPlayerCard:registerEventHandler("transition_complete_keyframe", f27_arg0.clipFinished)
@@ -523,7 +523,7 @@ CoD.KillcamPlayerInfo.__clipsPerState = {
 			f27_arg0.AttackerPlayerCard:setAlpha(0)
 			f27_local6(f27_arg0.AttackerPlayerCard)
 			local f27_local7 = function(f39_arg0)
-				f27_arg0.VictimPlayerCard:beginAnimation(700, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f27_arg0.VictimPlayerCard:beginAnimation(700, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_both"])
 				f27_arg0.VictimPlayerCard:setAlpha(1)
 				f27_arg0.VictimPlayerCard:registerEventHandler("interrupted_keyframe", f27_arg0.clipInterrupted)
 				f27_arg0.VictimPlayerCard:registerEventHandler("transition_complete_keyframe", f27_arg0.clipFinished)
@@ -573,7 +573,7 @@ CoD.KillcamPlayerInfo.__clipsPerState = {
 			f27_arg0.ArenaVictimRank:setAlpha(0)
 			f27_local10(f27_arg0.ArenaVictimRank)
 			local f27_local11 = function(f46_arg0)
-				f27_arg0.AttackerHealth:beginAnimation(700, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f27_arg0.AttackerHealth:beginAnimation(700, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_both"])
 				f27_arg0.AttackerHealth:setAlpha(1)
 				f27_arg0.AttackerHealth:registerEventHandler("interrupted_keyframe", f27_arg0.clipInterrupted)
 				f27_arg0.AttackerHealth:registerEventHandler("transition_complete_keyframe", f27_arg0.clipFinished)
@@ -582,7 +582,7 @@ CoD.KillcamPlayerInfo.__clipsPerState = {
 			f27_arg0.AttackerHealth:setAlpha(0)
 			f27_local11(f27_arg0.AttackerHealth)
 			local f27_local12 = function(f47_arg0)
-				f27_arg0.VictimHealth:beginAnimation(700, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f27_arg0.VictimHealth:beginAnimation(700, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_both"])
 				f27_arg0.VictimHealth:setAlpha(1)
 				f27_arg0.VictimHealth:registerEventHandler("interrupted_keyframe", f27_arg0.clipInterrupted)
 				f27_arg0.VictimHealth:registerEventHandler("transition_complete_keyframe", f27_arg0.clipFinished)
@@ -636,7 +636,7 @@ CoD.KillcamPlayerInfo.__clipsPerState = {
 			f27_local15(f27_arg0.KillerLabel)
 			local f27_local16 = function(f54_arg0)
 				local f54_local0 = function(f55_arg0)
-					f55_arg0:beginAnimation(280, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735])
+					f55_arg0:beginAnimation(280, Enum[@"luitween"][@"luitween_bounce"])
 					f55_arg0:setAlpha(1)
 					f55_arg0:registerEventHandler("transition_complete_keyframe", f27_arg0.clipFinished)
 				end
@@ -649,7 +649,7 @@ CoD.KillcamPlayerInfo.__clipsPerState = {
 			f27_local16(f27_arg0.YouLabel)
 			local f27_local17 = function(f56_arg0)
 				local f56_local0 = function(f57_arg0)
-					f57_arg0:beginAnimation(280, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735])
+					f57_arg0:beginAnimation(280, Enum[@"luitween"][@"luitween_bounce"])
 					f57_arg0:setAlpha(1)
 					f57_arg0:registerEventHandler("transition_complete_keyframe", f27_arg0.clipFinished)
 				end
@@ -662,7 +662,7 @@ CoD.KillcamPlayerInfo.__clipsPerState = {
 			f27_local17(f27_arg0.AttackerKillsNew)
 			local f27_local18 = function(f58_arg0)
 				local f58_local0 = function(f59_arg0)
-					f59_arg0:beginAnimation(280, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735])
+					f59_arg0:beginAnimation(280, Enum[@"luitween"][@"luitween_bounce"])
 					f59_arg0:setAlpha(1)
 					f59_arg0:registerEventHandler("transition_complete_keyframe", f27_arg0.clipFinished)
 				end
@@ -674,7 +674,7 @@ CoD.KillcamPlayerInfo.__clipsPerState = {
 			f27_arg0.VictimKillsNew:setAlpha(0)
 			f27_local18(f27_arg0.VictimKillsNew)
 			local f27_local19 = function(f60_arg0)
-				f60_arg0:beginAnimation(199, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f60_arg0:beginAnimation(199, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_both"])
 				f60_arg0:setAlpha(1)
 				f60_arg0:registerEventHandler("transition_complete_keyframe", f27_arg0.clipFinished)
 			end
@@ -815,7 +815,7 @@ CoD.KillcamPlayerInfo.__clipsPerState = {
 			f70_arg0.VictimEmblem:setAlpha(0)
 			f70_local5(f70_arg0.VictimEmblem)
 			local f70_local6 = function(f81_arg0)
-				f70_arg0.AttackerPlayerCard:beginAnimation(700, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f70_arg0.AttackerPlayerCard:beginAnimation(700, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_both"])
 				f70_arg0.AttackerPlayerCard:setAlpha(1)
 				f70_arg0.AttackerPlayerCard:registerEventHandler("interrupted_keyframe", f70_arg0.clipInterrupted)
 				f70_arg0.AttackerPlayerCard:registerEventHandler("transition_complete_keyframe", f70_arg0.clipFinished)
@@ -824,7 +824,7 @@ CoD.KillcamPlayerInfo.__clipsPerState = {
 			f70_arg0.AttackerPlayerCard:setAlpha(0)
 			f70_local6(f70_arg0.AttackerPlayerCard)
 			local f70_local7 = function(f82_arg0)
-				f70_arg0.VictimPlayerCard:beginAnimation(700, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f70_arg0.VictimPlayerCard:beginAnimation(700, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_both"])
 				f70_arg0.VictimPlayerCard:setAlpha(1)
 				f70_arg0.VictimPlayerCard:registerEventHandler("interrupted_keyframe", f70_arg0.clipInterrupted)
 				f70_arg0.VictimPlayerCard:registerEventHandler("transition_complete_keyframe", f70_arg0.clipFinished)
@@ -865,7 +865,7 @@ CoD.KillcamPlayerInfo.__clipsPerState = {
 			f70_arg0.ArenaVictimRank:setAlpha(0)
 			f70_arg0.clipFinished(f70_arg0.ArenaVictimRank)
 			local f70_local10 = function(f87_arg0)
-				f70_arg0.AttackerHealth:beginAnimation(700, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f70_arg0.AttackerHealth:beginAnimation(700, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_both"])
 				f70_arg0.AttackerHealth:setAlpha(1)
 				f70_arg0.AttackerHealth:registerEventHandler("interrupted_keyframe", f70_arg0.clipInterrupted)
 				f70_arg0.AttackerHealth:registerEventHandler("transition_complete_keyframe", f70_arg0.clipFinished)
@@ -874,7 +874,7 @@ CoD.KillcamPlayerInfo.__clipsPerState = {
 			f70_arg0.AttackerHealth:setAlpha(0)
 			f70_local10(f70_arg0.AttackerHealth)
 			local f70_local11 = function(f88_arg0)
-				f70_arg0.VictimHealth:beginAnimation(700, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f70_arg0.VictimHealth:beginAnimation(700, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_both"])
 				f70_arg0.VictimHealth:setAlpha(1)
 				f70_arg0.VictimHealth:registerEventHandler("interrupted_keyframe", f70_arg0.clipInterrupted)
 				f70_arg0.VictimHealth:registerEventHandler("transition_complete_keyframe", f70_arg0.clipFinished)
@@ -928,7 +928,7 @@ CoD.KillcamPlayerInfo.__clipsPerState = {
 			f70_local14(f70_arg0.KillerLabel)
 			local f70_local15 = function(f95_arg0)
 				local f95_local0 = function(f96_arg0)
-					f96_arg0:beginAnimation(280, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735])
+					f96_arg0:beginAnimation(280, Enum[@"luitween"][@"luitween_bounce"])
 					f96_arg0:setAlpha(1)
 					f96_arg0:registerEventHandler("transition_complete_keyframe", f70_arg0.clipFinished)
 				end
@@ -941,7 +941,7 @@ CoD.KillcamPlayerInfo.__clipsPerState = {
 			f70_local15(f70_arg0.YouLabel)
 			local f70_local16 = function(f97_arg0)
 				local f97_local0 = function(f98_arg0)
-					f98_arg0:beginAnimation(280, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735])
+					f98_arg0:beginAnimation(280, Enum[@"luitween"][@"luitween_bounce"])
 					f98_arg0:setAlpha(1)
 					f98_arg0:registerEventHandler("transition_complete_keyframe", f70_arg0.clipFinished)
 				end
@@ -954,7 +954,7 @@ CoD.KillcamPlayerInfo.__clipsPerState = {
 			f70_local16(f70_arg0.AttackerKillsNew)
 			local f70_local17 = function(f99_arg0)
 				local f99_local0 = function(f100_arg0)
-					f100_arg0:beginAnimation(280, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735])
+					f100_arg0:beginAnimation(280, Enum[@"luitween"][@"luitween_bounce"])
 					f100_arg0:setAlpha(1)
 					f100_arg0:registerEventHandler("transition_complete_keyframe", f70_arg0.clipFinished)
 				end
@@ -966,7 +966,7 @@ CoD.KillcamPlayerInfo.__clipsPerState = {
 			f70_arg0.VictimKillsNew:setAlpha(0)
 			f70_local17(f70_arg0.VictimKillsNew)
 			local f70_local18 = function(f101_arg0)
-				f101_arg0:beginAnimation(199, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f101_arg0:beginAnimation(199, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_both"])
 				f101_arg0:setAlpha(1)
 				f101_arg0:registerEventHandler("transition_complete_keyframe", f70_arg0.clipFinished)
 			end

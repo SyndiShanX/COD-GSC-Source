@@ -11,15 +11,15 @@ CoD.Mark2BonusExpLongBadge.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	Text:setRGB(0.54, 0.98, 1)
 	Text:setZoom(3)
 	Text:setScale(LanguageOverrideNumberForScale("korean", 0.9, LanguageOverrideNumberForScale("chinese", 0.9, 1, 1)))
-	Text:setText(LocalizeToUpperString(0xBBAD8A3AF74F8F6))
+	Text:setText(LocalizeToUpperString(@"hash_BBAD8A3AF74F8F6"))
 	Text:setTTF("ttmussels_demibold")
 	Text:setLetterSpacing(2)
-	Text:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Text:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Text:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Text:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	Text:setBackingType(2)
 	Text:setBackingColor(0.13, 0.25, 0.6)
 	Text:setBackingXPadding(3)
-	Text:setBackingMaterial(LUI.UIImage.GetCachedMaterial(0xDE760AC0E801E57))
+	Text:setBackingMaterial(LUI.UIImage.GetCachedMaterial(@"uie_gradient_normal"))
 	Text:setBackingShaderVector(0, 1, 1, 1, 1)
 	Text:setBackingShaderVector(1, 0, 0, 0, 0)
 	Text:setBackingShaderVector(2, 0.5, 0, 0, 0)
@@ -87,7 +87,7 @@ end
 CoD.Mark2BonusExpLongBadge.__resetProperties = function(f7_arg0)
 	f7_arg0.Text:completeAnimation()
 	f7_arg0.Text:setAlpha(1)
-	f7_arg0.Text:setText(LocalizeToUpperString(0xBBAD8A3AF74F8F6))
+	f7_arg0.Text:setText(LocalizeToUpperString(@"hash_BBAD8A3AF74F8F6"))
 end
 CoD.Mark2BonusExpLongBadge.__clipsPerState = {
 	DefaultState = {
@@ -110,7 +110,7 @@ CoD.Mark2BonusExpLongBadge.__clipsPerState = {
 			f10_arg0:__resetProperties()
 			f10_arg0:setupElementClipCounter(1)
 			f10_arg0.Text:completeAnimation()
-			f10_arg0.Text:setText(LocalizeToUpperString(0x418ACAE8409A0B8))
+			f10_arg0.Text:setText(LocalizeToUpperString(@"hash_4418ACAE8409A0B8"))
 			f10_arg0.clipFinished(f10_arg0.Text)
 		end,
 	},

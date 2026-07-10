@@ -12,11 +12,11 @@ CoD.ArenaLeaguePlay_LadderSkillDivisionSubTitle.new = function(f1_arg0, f1_arg1,
 	Subdivision:setAlpha(0.5)
 	Subdivision:setTTF("ttmussels_regular")
 	Subdivision:setLetterSpacing(4)
-	Subdivision:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	Subdivision:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	Subdivision:subscribeToGlobalModel(f1_arg1, "LeaguePlayLadder", "leagueNameCode", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			Subdivision:setText(LocalizeToUpperString(LocalizeIntoString(0xFB7575B725F90E9, CoD.ArenaLeaguePlayUtility.ConvertLadderNameCode(f2_local0))))
+			Subdivision:setText(LocalizeToUpperString(LocalizeIntoString(@"hash_6FB7575B725F90E9", CoD.ArenaLeaguePlayUtility.ConvertLadderNameCode(f2_local0))))
 		end
 	end)
 	self:addElement(Subdivision)

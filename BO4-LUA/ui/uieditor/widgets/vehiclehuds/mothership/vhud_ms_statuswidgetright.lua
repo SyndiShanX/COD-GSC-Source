@@ -12,14 +12,14 @@ CoD.vhud_ms_StatusWidgetRight.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self.anyChildUsesUpdateState = true
 	local SpeedNumbers = LUI.UIText.new(0, 1, 0, 0, 0, 0, 38, 62)
 	SpeedNumbers:setTTF("default")
-	SpeedNumbers:setRFTMaterial(LUI.UIImage.GetCachedMaterial(0xD756CD9A5F1F1B4))
+	SpeedNumbers:setRFTMaterial(LUI.UIImage.GetCachedMaterial(@"uie_aberration_cheap_blur"))
 	SpeedNumbers:setShaderVector(0, 0, 1, 0, 0)
 	SpeedNumbers:setShaderVector(1, 0, 0, 0, 0)
 	SpeedNumbers:setShaderVector(2, 0, 0, 0, 0)
 	SpeedNumbers:setShaderVector(3, 0, 0, 0, 0)
 	SpeedNumbers:setShaderVector(4, 0, 0, 0, 0)
-	SpeedNumbers:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	SpeedNumbers:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	SpeedNumbers:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	SpeedNumbers:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	SpeedNumbers:linkToElementModel(self, "speed", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -34,7 +34,7 @@ CoD.vhud_ms_StatusWidgetRight.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self:addElement(vhudsentinelNotificationLine)
 	self.vhudsentinelNotificationLine = vhudsentinelNotificationLine
 	local vhudmsNotificationBox = CoD.vhud_ms_NotificationBox.new(f1_arg0, f1_arg1, 0.5, 0.5, -62, 62, 0, 0, -0.5, 44.5)
-	vhudmsNotificationBox.ALTtext:setText(Engine[0xF9F1239CFD921FE](0x3755C926654C027))
+	vhudmsNotificationBox.ALTtext:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_43755C926654C027"))
 	self:addElement(vhudmsNotificationBox)
 	self.vhudmsNotificationBox = vhudmsNotificationBox
 	local vhudmsmissilesWidget = CoD.vhud_ms_missilesWidget.new(f1_arg0, f1_arg1, 0.5, 0.5, -49, 45, 0, 0, 93, 178)
@@ -57,17 +57,17 @@ CoD.vhud_ms_StatusWidgetRight.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self:addElement(vhudsentinelNotificationLine0)
 	self.vhudsentinelNotificationLine0 = vhudsentinelNotificationLine0
 	local MISSILEStext = LUI.UIText.new(0, 1, 0, 0, 0, 0, 221, 243)
-	MISSILEStext:setText(Engine[0xF9F1239CFD921FE](0xEF98B8EA89AA3E5))
+	MISSILEStext:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_2EF98B8EA89AA3E5"))
 	MISSILEStext:setTTF("default")
-	MISSILEStext:setRFTMaterial(LUI.UIImage.GetCachedMaterial(0xD756CD9A5F1F1B4))
+	MISSILEStext:setRFTMaterial(LUI.UIImage.GetCachedMaterial(@"uie_aberration_cheap_blur"))
 	MISSILEStext:setShaderVector(0, 0, 1, 0, 0)
 	MISSILEStext:setShaderVector(1, 0, 0, 0, 0)
 	MISSILEStext:setShaderVector(2, 0, 0, 0, 0)
 	MISSILEStext:setShaderVector(3, 0, 0, 0, 0)
 	MISSILEStext:setShaderVector(4, 0, 0, 0, 0)
 	MISSILEStext:setLetterSpacing(0.5)
-	MISSILEStext:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	MISSILEStext:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	MISSILEStext:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	MISSILEStext:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(MISSILEStext)
 	self.MISSILEStext = MISSILEStext
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)

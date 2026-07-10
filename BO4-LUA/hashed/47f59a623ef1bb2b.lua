@@ -24,10 +24,10 @@ CoD.SpecialistHeadquartersButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	self.SpecialistPersonalizationButtonOptionInternal = SpecialistPersonalizationButtonOptionInternal
 	local Header = LUI.UIText.new(0, 1, 0, 0, 0.5, 0.5, -16.5, 16.5)
 	Header:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
-	Header:setText(Engine[0xF9F1239CFD921FE](0x93E719493E9E18F))
+	Header:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	Header:setTTF("ttmussels_regular")
 	Header:setLetterSpacing(5)
-	Header:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	Header:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	self:addElement(Header)
 	self.Header = Header
 	local circle = LUI.UIImage.new(0, 0, 59.5, 119.5, 0.56, 0.56, -38, 22)
@@ -35,7 +35,7 @@ CoD.SpecialistHeadquartersButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	circle:setAlpha(0)
 	circle:setZRot(180)
 	circle:setScale(1.05, 1.05)
-	circle:setMaterial(LUI.UIImage.GetCachedMaterial(0x15B163CA03FCE8B))
+	circle:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_elliptical_ring_normal"))
 	circle:setShaderVector(0, 4.66, 0, 0, 0)
 	circle:setShaderVector(1, 80, 80, 0, 0)
 	circle:setShaderVector(2, 0, 0, 0, 0)
@@ -44,7 +44,7 @@ CoD.SpecialistHeadquartersButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	local CountdownText = LUI.UIText.new(0, 0, 129.5, 184.5, 0.56, 0.56, -20, 4)
 	CountdownText:setAlpha(0)
 	CountdownText:setTTF("ttmussels_regular")
-	CountdownText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	CountdownText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	CountdownText:subscribeToGlobalModel(f1_arg1, "LobbyRoot", "lobbyStatus", function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -56,8 +56,8 @@ CoD.SpecialistHeadquartersButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	local timer = LUI.UIText.new(0, 0, 49.5, 129.5, 0.61, 0.61, -34, 11)
 	timer:setAlpha(0)
 	timer:setTTF("ttmussels_demibold")
-	timer:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	timer:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	timer:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	timer:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	timer:subscribeToGlobalModel(f1_arg1, "LobbyRoot", "lobbyTimeRemaining", function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
@@ -76,7 +76,7 @@ CoD.SpecialistHeadquartersButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	})
 	local f1_local6 = self
 	local f1_local7 = self.subscribeToModel
-	local f1_local8 = Engine[0x8DF2E5447F384B9]()
+	local f1_local8 = Engine[@"getglobalmodel"]()
 	f1_local7(f1_local6, f1_local8["lobbyRoot.lobbyTimeRemaining"], function(f6_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

@@ -12,7 +12,7 @@ CoD.freeCursorButtonPromptArea.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local buttonBacking = LUI.UIImage.new(0, 0, 0, 430, 0, 0, 0, 36)
 	buttonBacking:setRGB(0.06, 0.06, 0.06)
-	buttonBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x316E67E1DF2198E))
+	buttonBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_normal"))
 	buttonBacking:setShaderVector(0, 1, 0, 0, 0)
 	buttonBacking:setShaderVector(1, 0, 0, 0, 0)
 	buttonBacking:setShaderVector(2, 1, 0, 0, 0)
@@ -28,12 +28,12 @@ CoD.freeCursorButtonPromptArea.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	warzonePickupHint:setRGB(1, 0, 0)
 	warzonePickupHint:setAlpha(0)
 	warzonePickupHint:setTTF("dinnext_regular")
-	warzonePickupHint:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	warzonePickupHint:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	warzonePickupHint:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	warzonePickupHint:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	warzonePickupHint:linkToElementModel(self, "pickupHintWarzone", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			warzonePickupHint:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			warzonePickupHint:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	self:addElement(warzonePickupHint)
@@ -78,7 +78,7 @@ CoD.freeCursorButtonPromptArea.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	end)
 	local f1_local4 = self
 	local f1_local5 = self.subscribeToModel
-	local f1_local6 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local6 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local5(f1_local4, f1_local6.LastInput, function(f7_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -158,7 +158,7 @@ CoD.freeCursorButtonPromptArea.__resetProperties = function(f13_arg0)
 	f13_arg0.buttonBacking:setTopBottom(0, 0, 0, 36)
 	f13_arg0.buttonBacking:setRGB(0.06, 0.06, 0.06)
 	f13_arg0.buttonBacking:setAlpha(1)
-	f13_arg0.buttonBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x316E67E1DF2198E))
+	f13_arg0.buttonBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_normal"))
 	f13_arg0.buttonBacking:setShaderVector(0, 1, 0, 0, 0)
 	f13_arg0.buttonBacking:setShaderVector(1, 0, 0, 0, 0)
 	f13_arg0.buttonBacking:setShaderVector(2, 1, 0, 0, 0)
@@ -188,7 +188,7 @@ CoD.freeCursorButtonPromptArea.__clipsPerState = {
 				f15_arg0.buttonBacking:registerEventHandler("transition_complete_keyframe", f15_arg0.clipFinished)
 			end
 			f15_arg0.buttonBacking:completeAnimation()
-			f15_arg0.buttonBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x316E67E1DF2198E))
+			f15_arg0.buttonBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_normal"))
 			f15_arg0.buttonBacking:setShaderVector(0, 0.1, 0, 0, 0)
 			f15_arg0.buttonBacking:setShaderVector(1, 0, 0, 0, 0)
 			f15_arg0.buttonBacking:setShaderVector(2, 1, 0, 0, 0)

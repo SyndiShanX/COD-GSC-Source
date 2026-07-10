@@ -40,7 +40,7 @@ LUI.createMenu.LobbyInspection = function(f1_arg0, f1_arg1)
 	})
 	local CommonHeader = InspectionWidget
 	local FooterContainerFrontendRight = InspectionWidget.subscribeToModel
-	local HeaderTopBar = Engine[0x8DF2E5447F384B9]()
+	local HeaderTopBar = Engine[@"getglobalmodel"]()
 	FooterContainerFrontendRight(CommonHeader, HeaderTopBar["lobbyRoot.lobbyNav"], function(f5_arg0)
 		f1_local1:updateElementState(InspectionWidget, {
 			name = "model_validation",
@@ -69,7 +69,7 @@ LUI.createMenu.LobbyInspection = function(f1_arg0, f1_arg1)
 	self:addElement(FooterContainerFrontendRight)
 	self.FooterContainerFrontendRight = FooterContainerFrontendRight
 	CommonHeader = CoD.CommonHeader.new(f1_local1, f1_arg0, 0.5, 0.5, -960, 960, 0, 0, 0, 67)
-	CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(0x22CC1B322BAEC69))
+	CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(@"hash_322CC1B322BAEC69"))
 	CommonHeader:subscribeToGlobalModel(f1_arg0, "LobbyRoot", "lobbyMainMode", function(model)
 		local f7_local0 = model:get()
 		if f7_local0 ~= nil then
@@ -129,21 +129,21 @@ LUI.createMenu.LobbyInspection = function(f1_arg0, f1_arg1)
 			InspectionWidget.InspectionSinglePlayerLevel:setModel(f12_local0, f1_arg0)
 		end
 	end)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		SendClientScriptMenuChangeNotify(controller, menu, false)
 		GoBack(self, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 		return true
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], "ui_contextual_1", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], "ui_contextual_1", function(element, menu, controller, model)
 		OpenOverlay(self, "Social_PlayerDetailsPopup", controller, {
 			disableInspection = true,
 		})
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], 0xE0254269ED8FFD3, nil, "ui_contextual_1")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], @"hash_1E0254269ED8FFD3", nil, "ui_contextual_1")
 		return true
 	end, false)
 	InspectionWidget.id = "InspectionWidget"

@@ -32,8 +32,8 @@ CoD.AARChallengeItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	Description:setText("")
 	Description:setTTF("ttmussels_regular")
 	Description:setLetterSpacing(1)
-	Description:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Description:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Description:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Description:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(Description)
 	self.Description = Description
 	local Title = LUI.UIText.new(0.5, 0.5, -171, 179, 0, 0, 120.5, 141.5)
@@ -41,8 +41,8 @@ CoD.AARChallengeItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	Title:setText("")
 	Title:setTTF("ttmussels_demibold")
 	Title:setLetterSpacing(2)
-	Title:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Title:setAlignment(Enum[0x7A5123B654282D2][0x70510683C22104B])
+	Title:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Title:setAlignment(Enum[@"luialignment"][@"lui_alignment_bottom"])
 	self:addElement(Title)
 	self.Title = Title
 	local Corner = CoD.AARRewardBrackets.new(f1_arg0, f1_arg1, 0, 1, 0, 0, 0, 1, 0, 0)
@@ -51,7 +51,7 @@ CoD.AARChallengeItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	self.Corner = Corner
 	local LockImage = LUI.UIFixedAspectRatioImage.new(0, 0, 164, 214, 0, 0, 35.5, 85.5)
 	LockImage:setAlpha(0)
-	LockImage:setImage(RegisterImage(0xB8AD8D12CEB707D))
+	LockImage:setImage(RegisterImage(@"uie_icon_locks_lock_01"))
 	self:addElement(LockImage)
 	self.LockImage = LockImage
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)

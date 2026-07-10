@@ -15,7 +15,7 @@ CoD.GameSettings_Background.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self:addElement(StartMenuBackground0)
 	self.StartMenuBackground0 = StartMenuBackground0
 	local BackingBlur = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	BackingBlur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	BackingBlur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	BackingBlur:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(BackingBlur)
 	self.BackingBlur = BackingBlur
@@ -26,8 +26,8 @@ CoD.GameSettings_Background.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.BackingTint = BackingTint
 	local BackingNoise = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	BackingNoise:setAlpha(0.5)
-	BackingNoise:setImage(RegisterImage(0x34839E8065B1E53))
-	BackingNoise:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	BackingNoise:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	BackingNoise:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	BackingNoise:setShaderVector(0, 0, 0, 0, 0)
 	BackingNoise:setupNineSliceShader(196, 88)
 	self:addElement(BackingNoise)
@@ -38,11 +38,11 @@ CoD.GameSettings_Background.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.FEButtonPanelShaderContainer0 = FEButtonPanelShaderContainer0
 	local MenuFrame = CoD.GenericMenuFrame.new(f1_arg0, f1_arg1, 0, 1, 0, 0, 0, 1, 0, 0)
 	MenuFrame.CommonHeader.BGSceneBlur:setAlpha(1)
-	MenuFrame.CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(0xBB7AA7A26F39DFA))
+	MenuFrame.CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(@"hash_BB7AA7A26F39DFA"))
 	MenuFrame:subscribeToGlobalModel(f1_arg1, "LobbyRoot", "lobbyTitle", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			MenuFrame.CommonHeader.subtitle.subtitle:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			MenuFrame.CommonHeader.subtitle.subtitle:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	self:addElement(MenuFrame)

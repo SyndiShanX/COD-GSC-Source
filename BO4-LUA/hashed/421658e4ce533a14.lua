@@ -8,14 +8,14 @@ CoD.VodButtonPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	self.soundSet = "default"
 	local Play = LUI.UIText.new(0, 0, 33, 200, 0, 0, 4.5, 28.5)
 	Play:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
-	Play:setText(Engine[0xF9F1239CFD921FE](0xD31D493AE40DA0F))
+	Play:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_D31D493AE40DA0F"))
 	Play:setTTF("ttmussels_regular")
 	Play:setLetterSpacing(6)
-	Play:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	Play:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(Play)
 	self.Play = Play
 	local buttonPromptImage = LUI.UIImage.new(0, 0, 1.5, 31.5, 0, 0, 1.5, 31.5)
-	buttonPromptImage:setMaterial(LUI.UIImage.GetCachedMaterial(0x67D1E3A3D2D1BF))
+	buttonPromptImage:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_saturation_normal"))
 	buttonPromptImage:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(buttonPromptImage)
 	self.buttonPromptImage = buttonPromptImage

@@ -38,7 +38,7 @@ CoD.vhud_attack_helicopter_button_layout.new = function(f1_arg0, f1_arg1, f1_arg
 	RightStick:linkToElementModel(self, "R_STICK.text", true, function(model)
 		local f6_local0 = model:get()
 		if f6_local0 ~= nil then
-			RightStick.prompt:setText(Engine[0xF9F1239CFD921FE](f6_local0))
+			RightStick.prompt:setText(Engine[@"hash_4F9F1239CFD921FE"](f6_local0))
 		end
 	end)
 	self:addElement(RightStick)
@@ -68,7 +68,7 @@ CoD.vhud_attack_helicopter_button_layout.new = function(f1_arg0, f1_arg1, f1_arg
 	RightBumper:linkToElementModel(self, "BUTTON_RSHLDR.text", true, function(model)
 		local f11_local0 = model:get()
 		if f11_local0 ~= nil then
-			RightBumper.prompt:setText(Engine[0xF9F1239CFD921FE](f11_local0))
+			RightBumper.prompt:setText(Engine[@"hash_4F9F1239CFD921FE"](f11_local0))
 		end
 	end)
 	self:addElement(RightBumper)
@@ -98,7 +98,7 @@ CoD.vhud_attack_helicopter_button_layout.new = function(f1_arg0, f1_arg1, f1_arg
 	LeftTrigger:linkToElementModel(self, "BUTTON_LTRIG.text", true, function(model)
 		local f16_local0 = model:get()
 		if f16_local0 ~= nil then
-			LeftTrigger.prompt:setText(Engine[0xF9F1239CFD921FE](f16_local0))
+			LeftTrigger.prompt:setText(Engine[@"hash_4F9F1239CFD921FE"](f16_local0))
 		end
 	end)
 	self:addElement(LeftTrigger)
@@ -128,7 +128,7 @@ CoD.vhud_attack_helicopter_button_layout.new = function(f1_arg0, f1_arg1, f1_arg
 	LeftBumper:linkToElementModel(self, "BUTTON_LSHLDR.text", true, function(model)
 		local f21_local0 = model:get()
 		if f21_local0 ~= nil then
-			LeftBumper.prompt:setText(Engine[0xF9F1239CFD921FE](f21_local0))
+			LeftBumper.prompt:setText(Engine[@"hash_4F9F1239CFD921FE"](f21_local0))
 		end
 	end)
 	self:addElement(LeftBumper)
@@ -158,7 +158,7 @@ CoD.vhud_attack_helicopter_button_layout.new = function(f1_arg0, f1_arg1, f1_arg
 	L3Button:linkToElementModel(self, "BUTTON_LSTICK.text", true, function(model)
 		local f26_local0 = model:get()
 		if f26_local0 ~= nil then
-			L3Button.prompt:setText(Engine[0xF9F1239CFD921FE](f26_local0))
+			L3Button.prompt:setText(Engine[@"hash_4F9F1239CFD921FE"](f26_local0))
 		end
 	end)
 	self:addElement(L3Button)
@@ -188,7 +188,7 @@ CoD.vhud_attack_helicopter_button_layout.new = function(f1_arg0, f1_arg1, f1_arg
 	RightTrigger:linkToElementModel(self, "BUTTON_RTRIG.text", true, function(model)
 		local f31_local0 = model:get()
 		if f31_local0 ~= nil then
-			RightTrigger.prompt:setText(Engine[0xF9F1239CFD921FE](f31_local0))
+			RightTrigger.prompt:setText(Engine[@"hash_4F9F1239CFD921FE"](f31_local0))
 		end
 	end)
 	self:addElement(RightTrigger)
@@ -218,7 +218,7 @@ CoD.vhud_attack_helicopter_button_layout.new = function(f1_arg0, f1_arg1, f1_arg
 	LeftBumper2:linkToElementModel(self, "BUTTON_X.text", true, function(model)
 		local f36_local0 = model:get()
 		if f36_local0 ~= nil then
-			LeftBumper2.prompt:setText(Engine[0xF9F1239CFD921FE](f36_local0))
+			LeftBumper2.prompt:setText(Engine[@"hash_4F9F1239CFD921FE"](f36_local0))
 		end
 	end)
 	self:addElement(LeftBumper2)

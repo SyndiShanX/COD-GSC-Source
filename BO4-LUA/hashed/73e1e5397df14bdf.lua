@@ -17,17 +17,17 @@ CoD.IcePickHacked.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 	self.Background = Background
 	local Stripe = LUI.UIImage.new(0, 0, 0, 320, 0, 0, 34.5, 74.5)
 	Stripe:setAlpha(0)
-	Stripe:setImage(RegisterImage(0x649895CFFA4963D))
-	Stripe:setMaterial(LUI.UIImage.GetCachedMaterial(0x7EA4827662D4CD4))
+	Stripe:setImage(RegisterImage(@"uie_ui_menu_common_stripes01"))
+	Stripe:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_17EA4827662D4CD4"))
 	Stripe:setShaderVector(0, 4, 1, 0, 0)
 	Stripe:setShaderVector(1, 0, 1, 0, 1)
 	self:addElement(Stripe)
 	self.Stripe = Stripe
 	local StatusText = LUI.UIText.new(0.5, 0.5, -155, 155, 0.5, 0.5, -6.5, 18.5)
-	StatusText:setText(Engine[0xF9F1239CFD921FE](0xEA2BAF60DA12D67))
+	StatusText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_4EA2BAF60DA12D67"))
 	StatusText:setTTF("ttmussels_demibold")
-	StatusText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	StatusText:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	StatusText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	StatusText:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	self:addElement(StatusText)
 	self.StatusText = StatusText
 	local RebootBackground = LUI.UIImage.new(0, 0, 10, 310, 0, 0, 78, 96)
@@ -37,7 +37,7 @@ CoD.IcePickHacked.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 	local RebootFillBg = LUI.UIImage.new(0, 0, 15, 305, 0, 0, 81, 93)
 	RebootFillBg:setRGB(0.35, 0.35, 0.35)
 	RebootFillBg:setAlpha(0)
-	RebootFillBg:setMaterial(LUI.UIImage.GetCachedMaterial(0xE992BD5A540E2D))
+	RebootFillBg:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_delta_normal"))
 	RebootFillBg:setShaderVector(0, 0, 1, 0, 0)
 	RebootFillBg:setShaderVector(1, 0, 0, 0, 0)
 	RebootFillBg:setShaderVector(2, 0, 1, 0, 0)
@@ -48,8 +48,8 @@ CoD.IcePickHacked.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 	local bar = LUI.UIImage.new(0, 0, 15, 305, 1, 1, -22, -4)
 	bar:setRGB(0.92, 0.92, 0.92)
 	bar:setAlpha(0)
-	bar:setImage(RegisterImage(0x63FAF44D3935DE4))
-	bar:setMaterial(LUI.UIImage.GetCachedMaterial(0x910274CA3518744))
+	bar:setImage(RegisterImage(@"uie_ui_hud_core_capture_bar"))
+	bar:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe"))
 	bar:setShaderVector(0, 1, 0, 0, 0)
 	bar:setShaderVector(1, 0, 0, 0, 0)
 	bar:setShaderVector(2, 1, 0, 0, 0)
@@ -62,7 +62,7 @@ CoD.IcePickHacked.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 	self.bar = bar
 	local RebootFill = LUI.UIImage.new(0, 0, 15, 305, 0, 0, 81, 93)
 	RebootFill:setRGB(0.92, 0.92, 0.92)
-	RebootFill:setMaterial(LUI.UIImage.GetCachedMaterial(0xE992BD5A540E2D))
+	RebootFill:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_delta_normal"))
 	RebootFill:setShaderVector(1, 0, 0, 0, 0)
 	RebootFill:setShaderVector(2, 0, 1, 0, 0)
 	RebootFill:setShaderVector(3, 0, 0, 0, 0)
@@ -80,8 +80,8 @@ CoD.IcePickHacked.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 	LED:setRGB(0, 0, 0)
 	LED:setAlpha(0.3)
 	LED:setScale(0.94, 0.94)
-	LED:setImage(RegisterImage(0x832BA507D0E7663))
-	LED:setMaterial(LUI.UIImage.GetCachedMaterial(0xE992BD5A540E2D))
+	LED:setImage(RegisterImage(@"uie_ui_hud_core_player_widget_led_status"))
+	LED:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_delta_normal"))
 	LED:setShaderVector(0, 0, 1, 0, 0)
 	LED:setShaderVector(1, 0, 0, 0, 0)
 	LED:setShaderVector(2, 0.24, 0.6, 0, 0)
@@ -93,8 +93,8 @@ CoD.IcePickHacked.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 	LED2:setRGB(0, 0, 0)
 	LED2:setAlpha(0.3)
 	LED2:setScale(0.94, 0.94)
-	LED2:setImage(RegisterImage(0x832BA507D0E7663))
-	LED2:setMaterial(LUI.UIImage.GetCachedMaterial(0xE992BD5A540E2D))
+	LED2:setImage(RegisterImage(@"uie_ui_hud_core_player_widget_led_status"))
+	LED2:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_delta_normal"))
 	LED2:setShaderVector(0, 0, 0.84, 0, 0)
 	LED2:setShaderVector(1, 0, 0, 0, 0)
 	LED2:setShaderVector(2, 0.24, 0.6, 0, 0)
@@ -110,8 +110,8 @@ CoD.IcePickHacked.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 				if f4_local0 then
 					f4_local0 = CoD.ModelUtility.IsModelValueGreaterThan(f1_arg1, "hudItems.hackedRebootProgress", 0)
 					if f4_local0 then
-						if not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x59333FC97F7870]) and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F]) then
-							f4_local0 = not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2])
+						if not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_emp_active"]) and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_play_of_the_match"]) then
+							f4_local0 = not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_in_killcam"])
 						else
 							f4_local0 = false
 						end
@@ -125,8 +125,8 @@ CoD.IcePickHacked.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 			condition = function(menu, element, event)
 				local f5_local0 = CoD.ModelUtility.IsModelValueGreaterThan(f1_arg1, "hudItems.hacked", 0)
 				if f5_local0 then
-					if not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x59333FC97F7870]) and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F]) then
-						f5_local0 = not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2])
+					if not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_emp_active"]) and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_play_of_the_match"]) then
+						f5_local0 = not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_in_killcam"])
 					else
 						f5_local0 = false
 					end
@@ -137,7 +137,7 @@ CoD.IcePickHacked.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 	})
 	local f1_local11 = self
 	local f1_local12 = self.subscribeToModel
-	local f1_local13 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local13 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local12(f1_local11, f1_local13["hudItems.hacked"], function(f6_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -149,7 +149,7 @@ CoD.IcePickHacked.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 	end, false)
 	f1_local11 = self
 	f1_local12 = self.subscribeToModel
-	f1_local13 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local13 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local12(f1_local11, f1_local13["hudItems.hackedRebootProgress"], function(f7_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -161,38 +161,38 @@ CoD.IcePickHacked.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 	end, false)
 	f1_local11 = self
 	f1_local12 = self.subscribeToModel
-	f1_local13 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local12(f1_local11, f1_local13["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x59333FC97F7870]], function(f8_arg0)
+	f1_local13 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local12(f1_local11, f1_local13["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_emp_active"]], function(f8_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f8_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x59333FC97F7870],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_emp_active"],
 		})
 	end, false)
 	f1_local11 = self
 	f1_local12 = self.subscribeToModel
-	f1_local13 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local12(f1_local11, f1_local13["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F]], function(f9_arg0)
+	f1_local13 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local12(f1_local11, f1_local13["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_play_of_the_match"]], function(f9_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f9_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_play_of_the_match"],
 		})
 	end, false)
 	f1_local11 = self
 	f1_local12 = self.subscribeToModel
-	f1_local13 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local12(f1_local11, f1_local13["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2]], function(f10_arg0)
+	f1_local13 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local12(f1_local11, f1_local13["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"]], function(f10_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f10_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"],
 		})
 	end, false)
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)
@@ -215,7 +215,7 @@ CoD.IcePickHacked.__resetProperties = function(f11_arg0)
 	f11_arg0.RebootFill:setAlpha(1)
 	f11_arg0.RebootBackground:setAlpha(1)
 	f11_arg0.StatusText:setAlpha(1)
-	f11_arg0.StatusText:setText(Engine[0xF9F1239CFD921FE](0xEA2BAF60DA12D67))
+	f11_arg0.StatusText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_4EA2BAF60DA12D67"))
 	f11_arg0.Background:setRGB(0.91, 0.23, 0.23)
 	f11_arg0.Background:setAlpha(1)
 	f11_arg0.LED:setAlpha(0.3)
@@ -284,7 +284,7 @@ CoD.IcePickHacked.__clipsPerState = {
 			end
 			f13_arg0.StatusText:completeAnimation()
 			f13_arg0.StatusText:setAlpha(0)
-			f13_arg0.StatusText:setText(Engine[0xF9F1239CFD921FE](0x367CE4D1F202B65))
+			f13_arg0.StatusText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_367CE4D1F202B65"))
 			f13_local2(f13_arg0.StatusText)
 			local f13_local3 = function(f17_arg0)
 				local f17_local0 = function(f18_arg0)

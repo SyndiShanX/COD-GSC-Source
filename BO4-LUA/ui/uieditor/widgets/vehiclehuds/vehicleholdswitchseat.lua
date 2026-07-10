@@ -10,10 +10,10 @@ CoD.VehicleHoldSwitchSeat.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local label = LUI.UIText.new(0, 0, 46, 200, 0, 0, 17, 31)
-	label:setText(LocalizeToUpperString(0xCE3EF50B2B067C3))
+	label:setText(LocalizeToUpperString(@"menu/driver_seat"))
 	label:setTTF("ttmussels_regular")
 	label:setLetterSpacing(2)
-	label:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	label:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	LUI.OverrideFunction_CallOriginalFirst(label, "setState", function(element, controller, f2_arg2, f2_arg3, f2_arg4)
 		ScaleWidgetToLabel(self, element, -35)
 	end)
@@ -46,10 +46,10 @@ CoD.VehicleHoldSwitchSeat.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	self:addElement(progressRing)
 	self.progressRing = progressRing
 	local BtnLabel = LUI.UIText.new(0, 0, 6, 36, 0, 0, 9, 39)
-	BtnLabel:setText(LocalizeToUpperString(0x4E0796B86F15082))
+	BtnLabel:setText(LocalizeToUpperString(@"hash_44E0796B86F15082"))
 	BtnLabel:setTTF("ttmussels_regular")
 	BtnLabel:setLetterSpacing(2)
-	BtnLabel:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	BtnLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(BtnLabel)
 	self.BtnLabel = BtnLabel
 	self:mergeStateConditions({
@@ -75,7 +75,7 @@ CoD.VehicleHoldSwitchSeat.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	end)
 	local f1_local4 = self
 	local f1_local5 = self.subscribeToModel
-	local f1_local6 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local6 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local5(f1_local4, f1_local6.LastInput, function(f9_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

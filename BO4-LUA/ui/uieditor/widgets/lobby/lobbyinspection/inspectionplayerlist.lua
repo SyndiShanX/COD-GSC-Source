@@ -13,8 +13,8 @@ CoD.InspectionPlayerList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local LB = CoD.BumperButtonWithKeyMouseText.new(f1_arg0, f1_arg1, 0.5, 0.5, -665.5, -465.5, 0.5, 0.5, -17, 17)
-	LB.GamepadPrompt:setText(Engine[0xF9F1239CFD921FE](0xBDCD5292604F434))
-	LB.GamepadPrompt:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
+	LB.GamepadPrompt:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_5BDCD5292604F434"))
+	LB.GamepadPrompt:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
 	self:addElement(LB)
 	self.LB = LB
 	local PartyList = LUI.UIList.new(f1_arg0, f1_arg1, 5, 0, nil, false, false, false, false)
@@ -23,7 +23,7 @@ CoD.InspectionPlayerList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	PartyList:setWidgetType(CoD.DirectorLobbyMember)
 	PartyList:setHorizontalCount(12)
 	PartyList:setSpacing(5)
-	PartyList:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	PartyList:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	PartyList:setBackingWidgetYPadding(-7)
 	PartyList:setDataSource("DirectorLobbyListAll")
 	PartyList:registerEventHandler("list_active_changed", function(element, event)
@@ -36,7 +36,7 @@ CoD.InspectionPlayerList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	self:addElement(PartyList)
 	self.PartyList = PartyList
 	local RB = CoD.BumperButtonWithKeyMouseText.new(f1_arg0, f1_arg1, 0, 0, 1425.5, 1625.5, 0.5, 0.5, -17, 17)
-	RB.GamepadPrompt:setText(Engine[0xF9F1239CFD921FE](0xBFED5292621DA9A))
+	RB.GamepadPrompt:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_5BFED5292621DA9A"))
 	self:addElement(RB)
 	self.RB = RB
 	self:mergeStateConditions({
@@ -77,7 +77,7 @@ CoD.InspectionPlayerList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	end)
 	local f1_local4 = self
 	local f1_local5 = self.subscribeToModel
-	local f1_local6 = Engine[0x8DF2E5447F384B9]()
+	local f1_local6 = Engine[@"getglobalmodel"]()
 	f1_local5(f1_local4, f1_local6["lobbyRoot.publicLobby.stage"], function(f7_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -89,7 +89,7 @@ CoD.InspectionPlayerList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	end, false)
 	f1_local4 = self
 	f1_local5 = self.subscribeToModel
-	f1_local6 = Engine[0x8DF2E5447F384B9]()
+	f1_local6 = Engine[@"getglobalmodel"]()
 	f1_local5(f1_local4, f1_local6["lobbyRoot.lobbyNav"], function(f8_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

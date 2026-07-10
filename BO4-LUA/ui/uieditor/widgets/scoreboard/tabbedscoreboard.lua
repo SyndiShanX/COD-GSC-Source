@@ -40,7 +40,7 @@ CoD.TabbedScoreboard.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	})
 	local TabbedScoreboardScores = ScoreboardGameStatusScores
 	local TabbedScoreboardHeader = ScoreboardGameStatusScores.subscribeToModel
-	local ScoreboardTabs = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local ScoreboardTabs = Engine[@"getmodelforcontroller"](f1_arg1)
 	TabbedScoreboardHeader(TabbedScoreboardScores, ScoreboardTabs["scoreboardInfo.activeTab"], function(f3_arg0)
 		f1_arg0:updateElementState(ScoreboardGameStatusScores, {
 			name = "model_validation",
@@ -52,7 +52,7 @@ CoD.TabbedScoreboard.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	end, false)
 	TabbedScoreboardScores = ScoreboardGameStatusScores
 	TabbedScoreboardHeader = ScoreboardGameStatusScores.subscribeToModel
-	ScoreboardTabs = Engine[0x4DF5CFBC1771947](f1_arg1)
+	ScoreboardTabs = Engine[@"getmodelforcontroller"](f1_arg1)
 	TabbedScoreboardHeader(TabbedScoreboardScores, ScoreboardTabs["factions.isCoDCaster"], function(f4_arg0)
 		f1_arg0:updateElementState(ScoreboardGameStatusScores, {
 			name = "model_validation",
@@ -64,7 +64,7 @@ CoD.TabbedScoreboard.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	end, false)
 	TabbedScoreboardScores = ScoreboardGameStatusScores
 	TabbedScoreboardHeader = ScoreboardGameStatusScores.subscribeToModel
-	ScoreboardTabs = Engine[0x8DF2E5447F384B9]()
+	ScoreboardTabs = Engine[@"getglobalmodel"]()
 	TabbedScoreboardHeader(TabbedScoreboardScores, ScoreboardTabs["scoreboard.team1.count"], function(f5_arg0)
 		f1_arg0:updateElementState(ScoreboardGameStatusScores, {
 			name = "model_validation",
@@ -76,7 +76,7 @@ CoD.TabbedScoreboard.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	end, false)
 	TabbedScoreboardScores = ScoreboardGameStatusScores
 	TabbedScoreboardHeader = ScoreboardGameStatusScores.subscribeToModel
-	ScoreboardTabs = Engine[0x8DF2E5447F384B9]()
+	ScoreboardTabs = Engine[@"getglobalmodel"]()
 	TabbedScoreboardHeader(TabbedScoreboardScores, ScoreboardTabs["scoreboard.team2.count"], function(f6_arg0)
 		f1_arg0:updateElementState(ScoreboardGameStatusScores, {
 			name = "model_validation",
@@ -111,7 +111,7 @@ CoD.TabbedScoreboard.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 		{
 			stateName = "Active",
 			condition = function(menu, element, event)
-				return Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04])
+				return Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_scoreboard_open"])
 			end,
 		},
 		{
@@ -123,19 +123,19 @@ CoD.TabbedScoreboard.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	})
 	local f1_local8 = self
 	local f1_local9 = self.subscribeToModel
-	local f1_local10 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local9(f1_local8, f1_local10["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04]], function(f10_arg0)
+	local f1_local10 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local9(f1_local8, f1_local10["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]], function(f10_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f10_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"],
 		})
 	end, false)
 	f1_local8 = self
 	f1_local9 = self.subscribeToModel
-	f1_local10 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local10 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local9(f1_local8, f1_local10.forceScoreboard, function(f11_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

@@ -13,7 +13,7 @@ CoD.Leaderboard_GameModeFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Leaderboard = CoD.Leaderboard.new(f1_arg0, f1_arg1, 0, 0, 31, 1201, 0, 0, 0, 757)
-	Leaderboard.LeaderboardEmptyText:setText(Engine[0xF9F1239CFD921FE](0x297DDF6F8B1ABCF))
+	Leaderboard.LeaderboardEmptyText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/lb_empty"))
 	Leaderboard:subscribeToGlobalModel(f1_arg1, "LeaderboardHeader", nil, function(model)
 		Leaderboard.LeaderboardHeader:setModel(model, f1_arg1)
 	end)
@@ -164,7 +164,7 @@ CoD.Leaderboard_GameModeFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	RankAndStatsWidget:linkToElementModel(Leaderboard.LeaderboardRows, "stat0label", true, function(model)
 		local f20_local0 = model:get()
 		if f20_local0 ~= nil then
-			RankAndStatsWidget.StatWidget1.btnDisplayTextStroke:setText(Engine[0xF9F1239CFD921FE](f20_local0))
+			RankAndStatsWidget.StatWidget1.btnDisplayTextStroke:setText(Engine[@"hash_4F9F1239CFD921FE"](f20_local0))
 		end
 	end)
 	RankAndStatsWidget:linkToElementModel(Leaderboard.LeaderboardRows, "stat1color", true, function(model)
@@ -182,7 +182,7 @@ CoD.Leaderboard_GameModeFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	RankAndStatsWidget:linkToElementModel(Leaderboard.LeaderboardRows, "stat1label", true, function(model)
 		local f23_local0 = model:get()
 		if f23_local0 ~= nil then
-			RankAndStatsWidget.StatWidget2.btnDisplayTextStroke:setText(Engine[0xF9F1239CFD921FE](f23_local0))
+			RankAndStatsWidget.StatWidget2.btnDisplayTextStroke:setText(Engine[@"hash_4F9F1239CFD921FE"](f23_local0))
 		end
 	end)
 	RankAndStatsWidget:linkToElementModel(Leaderboard.LeaderboardRows, "stat2color", true, function(model)
@@ -200,7 +200,7 @@ CoD.Leaderboard_GameModeFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	RankAndStatsWidget:linkToElementModel(Leaderboard.LeaderboardRows, "stat2label", true, function(model)
 		local f26_local0 = model:get()
 		if f26_local0 ~= nil then
-			RankAndStatsWidget.StatWidget3.btnDisplayTextStroke:setText(Engine[0xF9F1239CFD921FE](f26_local0))
+			RankAndStatsWidget.StatWidget3.btnDisplayTextStroke:setText(Engine[@"hash_4F9F1239CFD921FE"](f26_local0))
 		end
 	end)
 	self:mergeStateConditions({

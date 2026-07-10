@@ -13,27 +13,27 @@ CoD.ArmorPortrait.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 	self.IntroSound = IntroSound
 	local armor = LUI.UIImage.new(0, 0, 0, 50, 0, 0, 0, 50)
 	armor:setAlpha(0)
-	armor:setImage(RegisterImage(0xB5BC23908F1D357))
+	armor:setImage(RegisterImage(@"hash_4B5BC23908F1D357"))
 	self:addElement(armor)
 	self.armor = armor
 	local armordamage4 = LUI.UIImage.new(0, 0, 0, 50, 0, 0, 0, 50)
 	armordamage4:setAlpha(0)
-	armordamage4:setImage(RegisterImage(0xF27BC40343E5340))
+	armordamage4:setImage(RegisterImage(@"hash_7F27BC40343E5340"))
 	self:addElement(armordamage4)
 	self.armordamage4 = armordamage4
 	local armordamage3 = LUI.UIImage.new(0, 0, 0, 50, 0, 0, 0, 50)
 	armordamage3:setAlpha(0)
-	armordamage3:setImage(RegisterImage(0xF27C340343E5F25))
+	armordamage3:setImage(RegisterImage(@"hash_7F27C340343E5F25"))
 	self:addElement(armordamage3)
 	self.armordamage3 = armordamage3
 	local armordamage2 = LUI.UIImage.new(0, 0, 0, 50, 0, 0, 0, 50)
 	armordamage2:setAlpha(0)
-	armordamage2:setImage(RegisterImage(0xF27C240343E5D72))
+	armordamage2:setImage(RegisterImage(@"hash_7F27C240343E5D72"))
 	self:addElement(armordamage2)
 	self.armordamage2 = armordamage2
 	local armordamage1 = LUI.UIImage.new(0, 0, 0, 50, 0, 0, 0, 50)
 	armordamage1:setAlpha(0)
-	armordamage1:setImage(RegisterImage(0xF27C140343E5BBF))
+	armordamage1:setImage(RegisterImage(@"hash_7F27C140343E5BBF"))
 	self:addElement(armordamage1)
 	self.armordamage1 = armordamage1
 	self:mergeStateConditions({
@@ -46,7 +46,7 @@ CoD.ArmorPortrait.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 		{
 			stateName = "Invisible",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualTo(self, f1_arg1, "hasArmorSpecialty", false) and not CoD.BaseUtility.IsCurrentSessionModeEqualTo(Enum[0x9C0C2196D8313A0][0xBF1DCC8138A9D39])
+				return CoD.ModelUtility.IsSelfModelValueEqualTo(self, f1_arg1, "hasArmorSpecialty", false) and not CoD.BaseUtility.IsCurrentSessionModeEqualTo(Enum[@"emodes"][@"mode_warzone"])
 			end,
 		},
 		{
@@ -70,7 +70,7 @@ CoD.ArmorPortrait.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 	})
 	local f1_local7 = self
 	local f1_local8 = self.subscribeToModel
-	local f1_local9 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local9 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local8(f1_local7, f1_local9["factions.isCoDCaster"], function(f7_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -100,7 +100,7 @@ CoD.ArmorPortrait.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 	end)
 	f1_local7 = self
 	f1_local8 = self.subscribeToModel
-	f1_local9 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local9 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local8(f1_local7, f1_local9["hudItems.armorIsOnCooldown"], function(f10_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

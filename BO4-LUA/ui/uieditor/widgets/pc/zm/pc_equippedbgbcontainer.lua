@@ -16,17 +16,17 @@ CoD.PC_EquippedBGBContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	FourthBGB:subscribeToGlobalModel(f1_arg1, "BGBLoadout", "Left.promptPC", function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
-			FourthBGB.PCkeybind:setText(Engine[0xF9F1239CFD921FE](f3_local0))
+			FourthBGB.PCkeybind:setText(Engine[@"hash_4F9F1239CFD921FE"](f3_local0))
 		end
 	end)
 	local SecondBGB = FourthBGB
 	local ThirdBGB = FourthBGB.subscribeToModel
 	local FirstBGB = DataSources.BGBLoadout.getModel(f1_arg1)
 	ThirdBGB(SecondBGB, FirstBGB.selectedIndex, function(f4_arg0, f4_arg1)
-		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	FourthBGB:linkToElementModel(FourthBGB, "slotIndex", true, function(model, f5_arg1)
-		CoD.Menu.UpdateButtonShownState(f5_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f5_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	FourthBGB:registerEventHandler("gain_focus", function(element, event)
 		local f6_local0 = nil
@@ -39,11 +39,11 @@ CoD.PC_EquippedBGBContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 			CoD.ZMLoadoutUtility.UpdateBGBInfoFromEquippedSlots(f1_arg0, element, f1_arg1)
 			CoD.ZMLoadoutUtility.ShowBubblegumBuffModel(f1_arg0, self, element, f1_arg1)
 		else
-			CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+			CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		end
 		return f6_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(FourthBGB, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(FourthBGB, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if not IsCurrentMenu(menu, "BubblegumBuffSelect") then
 			CoD.BaseUtility.SetControllerModelToSelfModelValue(controller, element, "BGBLoadout.selectedIndex", "slotIndex")
 			CoD.ZMLoadoutUtility.OpenBGBSelectionMenu(self, menu, controller, self)
@@ -56,10 +56,10 @@ CoD.PC_EquippedBGBContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 		end
 	end, function(element, menu, controller)
 		if not IsCurrentMenu(menu, "BubblegumBuffSelect") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		elseif not CoD.ModelUtility.IsGlobalDataSourceModelValueEqualToSelfModelValue(element, controller, "BGBLoadout", "selectedIndex", "slotIndex") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		else
 			return false
@@ -74,17 +74,17 @@ CoD.PC_EquippedBGBContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	ThirdBGB:subscribeToGlobalModel(f1_arg1, "BGBLoadout", "Down.promptPC", function(model)
 		local f10_local0 = model:get()
 		if f10_local0 ~= nil then
-			ThirdBGB.PCkeybind:setText(Engine[0xF9F1239CFD921FE](f10_local0))
+			ThirdBGB.PCkeybind:setText(Engine[@"hash_4F9F1239CFD921FE"](f10_local0))
 		end
 	end)
 	FirstBGB = ThirdBGB
 	SecondBGB = ThirdBGB.subscribeToModel
 	local f1_local5 = DataSources.BGBLoadout.getModel(f1_arg1)
 	SecondBGB(FirstBGB, f1_local5.selectedIndex, function(f11_arg0, f11_arg1)
-		CoD.Menu.UpdateButtonShownState(f11_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f11_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	ThirdBGB:linkToElementModel(ThirdBGB, "slotIndex", true, function(model, f12_arg1)
-		CoD.Menu.UpdateButtonShownState(f12_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f12_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	ThirdBGB:registerEventHandler("gain_focus", function(element, event)
 		local f13_local0 = nil
@@ -97,11 +97,11 @@ CoD.PC_EquippedBGBContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 			CoD.ZMLoadoutUtility.UpdateBGBInfoFromEquippedSlots(f1_arg0, element, f1_arg1)
 			CoD.ZMLoadoutUtility.ShowBubblegumBuffModel(f1_arg0, self, element, f1_arg1)
 		else
-			CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+			CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		end
 		return f13_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(ThirdBGB, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(ThirdBGB, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if not IsCurrentMenu(menu, "BubblegumBuffSelect") then
 			CoD.BaseUtility.SetControllerModelToSelfModelValue(controller, element, "BGBLoadout.selectedIndex", "slotIndex")
 			CoD.ZMLoadoutUtility.OpenBGBSelectionMenu(self, menu, controller, self)
@@ -114,10 +114,10 @@ CoD.PC_EquippedBGBContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 		end
 	end, function(element, menu, controller)
 		if not IsCurrentMenu(menu, "BubblegumBuffSelect") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		elseif not CoD.ModelUtility.IsGlobalDataSourceModelValueEqualToSelfModelValue(element, controller, "BGBLoadout", "selectedIndex", "slotIndex") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		else
 			return false
@@ -132,17 +132,17 @@ CoD.PC_EquippedBGBContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	SecondBGB:subscribeToGlobalModel(f1_arg1, "BGBLoadout", "Right.promptPC", function(model)
 		local f17_local0 = model:get()
 		if f17_local0 ~= nil then
-			SecondBGB.PCkeybind:setText(Engine[0xF9F1239CFD921FE](f17_local0))
+			SecondBGB.PCkeybind:setText(Engine[@"hash_4F9F1239CFD921FE"](f17_local0))
 		end
 	end)
 	f1_local5 = SecondBGB
 	FirstBGB = SecondBGB.subscribeToModel
 	local f1_local6 = DataSources.BGBLoadout.getModel(f1_arg1)
 	FirstBGB(f1_local5, f1_local6.selectedIndex, function(f18_arg0, f18_arg1)
-		CoD.Menu.UpdateButtonShownState(f18_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f18_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	SecondBGB:linkToElementModel(SecondBGB, "slotIndex", true, function(model, f19_arg1)
-		CoD.Menu.UpdateButtonShownState(f19_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f19_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	SecondBGB:registerEventHandler("gain_focus", function(element, event)
 		local f20_local0 = nil
@@ -155,11 +155,11 @@ CoD.PC_EquippedBGBContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 			CoD.ZMLoadoutUtility.UpdateBGBInfoFromEquippedSlots(f1_arg0, element, f1_arg1)
 			CoD.ZMLoadoutUtility.ShowBubblegumBuffModel(f1_arg0, self, element, f1_arg1)
 		else
-			CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+			CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		end
 		return f20_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(SecondBGB, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(SecondBGB, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if not IsCurrentMenu(menu, "BubblegumBuffSelect") then
 			CoD.BaseUtility.SetControllerModelToSelfModelValue(controller, element, "BGBLoadout.selectedIndex", "slotIndex")
 			CoD.ZMLoadoutUtility.OpenBGBSelectionMenu(self, menu, controller, self)
@@ -172,10 +172,10 @@ CoD.PC_EquippedBGBContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 		end
 	end, function(element, menu, controller)
 		if not IsCurrentMenu(menu, "BubblegumBuffSelect") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		elseif not CoD.ModelUtility.IsGlobalDataSourceModelValueEqualToSelfModelValue(element, controller, "BGBLoadout", "selectedIndex", "slotIndex") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		else
 			return false
@@ -190,17 +190,17 @@ CoD.PC_EquippedBGBContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	FirstBGB:subscribeToGlobalModel(f1_arg1, "BGBLoadout", "Up.promptPC", function(model)
 		local f24_local0 = model:get()
 		if f24_local0 ~= nil then
-			FirstBGB.PCkeybind:setText(Engine[0xF9F1239CFD921FE](f24_local0))
+			FirstBGB.PCkeybind:setText(Engine[@"hash_4F9F1239CFD921FE"](f24_local0))
 		end
 	end)
 	f1_local6 = FirstBGB
 	f1_local5 = FirstBGB.subscribeToModel
 	local f1_local7 = DataSources.BGBLoadout.getModel(f1_arg1)
 	f1_local5(f1_local6, f1_local7.selectedIndex, function(f25_arg0, f25_arg1)
-		CoD.Menu.UpdateButtonShownState(f25_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f25_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	FirstBGB:linkToElementModel(FirstBGB, "slotIndex", true, function(model, f26_arg1)
-		CoD.Menu.UpdateButtonShownState(f26_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f26_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	FirstBGB:registerEventHandler("gain_focus", function(element, event)
 		local f27_local0 = nil
@@ -213,11 +213,11 @@ CoD.PC_EquippedBGBContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 			CoD.ZMLoadoutUtility.UpdateBGBInfoFromEquippedSlots(f1_arg0, element, f1_arg1)
 			CoD.ZMLoadoutUtility.ShowBubblegumBuffModel(f1_arg0, self, element, f1_arg1)
 		else
-			CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+			CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		end
 		return f27_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(FirstBGB, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(FirstBGB, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if not IsCurrentMenu(menu, "BubblegumBuffSelect") then
 			CoD.BaseUtility.SetControllerModelToSelfModelValue(controller, element, "BGBLoadout.selectedIndex", "slotIndex")
 			CoD.ZMLoadoutUtility.OpenBGBSelectionMenu(self, menu, controller, self)
@@ -230,10 +230,10 @@ CoD.PC_EquippedBGBContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 		end
 	end, function(element, menu, controller)
 		if not IsCurrentMenu(menu, "BubblegumBuffSelect") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		elseif not CoD.ModelUtility.IsGlobalDataSourceModelValueEqualToSelfModelValue(element, controller, "BGBLoadout", "selectedIndex", "slotIndex") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		else
 			return false

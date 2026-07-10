@@ -51,7 +51,7 @@ CoD.ItemShopTabBarContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	end)
 	local f1_local3 = FETabBar
 	local StartMenuCODpoints = FETabBar.subscribeToModel
-	local f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
 	StartMenuCODpoints(f1_local3, f1_local5.LastInput, function(f6_arg0)
 		f1_arg0:updateElementState(FETabBar, {
 			name = "model_validation",
@@ -85,7 +85,7 @@ CoD.ItemShopTabBarContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	})
 	f1_local5 = self
 	f1_local3 = self.subscribeToModel
-	local f1_local6 = Engine[0x8DF2E5447F384B9]()
+	local f1_local6 = Engine[@"getglobalmodel"]()
 	f1_local3(f1_local5, f1_local6["lobbyRoot.lobbyNetworkMode"], function(f9_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

@@ -15,7 +15,7 @@ CoD.MultiItemPickupTabBar.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	Tabs:setWidgetType(CoD.MultiItemPickupTab)
 	Tabs:setHorizontalCount(10)
 	Tabs:setSpacing(0)
-	Tabs:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	Tabs:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	Tabs:setDataSource("MultiItemPickupTab")
 	self:addElement(Tabs)
 	self.Tabs = Tabs

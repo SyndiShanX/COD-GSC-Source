@@ -1,56 +1,56 @@
-CoD[0x90EBA40764624FE] = InheritFrom(LUI.UIElement)
-CoD[0x90EBA40764624FE].__defaultWidth = 960
-CoD[0x90EBA40764624FE].__defaultHeight = 240
-CoD[0x90EBA40764624FE].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+CoD[@"hash_90EBA40764624FE"] = InheritFrom(LUI.UIElement)
+CoD[@"hash_90EBA40764624FE"].__defaultWidth = 960
+CoD[@"hash_90EBA40764624FE"].__defaultHeight = 240
+CoD[@"hash_90EBA40764624FE"].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
 	local self = LUI.UIElement.new(f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
-	self:setClass(CoD[0x90EBA40764624FE])
+	self:setClass(CoD[@"hash_90EBA40764624FE"])
 	self.id = "callingcards_loot2_steampunk"
 	self.soundSet = "none"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local bg = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	bg:setImage(RegisterImage(0x44C8129F988FE50))
+	bg:setImage(RegisterImage(@"uie_ui_menu_callingcards_steampunk_bg"))
 	self:addElement(bg)
 	self.bg = bg
 	local fogtubes = LUI.UIImage.new(0, 0, 12, 452, 0, 0, -14, 130)
-	fogtubes:setImage(RegisterImage(0x280127F94509C50))
+	fogtubes:setImage(RegisterImage(@"uie_ui_menu_callingcards_steampunk_fogtubes"))
 	self:addElement(fogtubes)
 	self.fogtubes = fogtubes
 	local lefthand = LUI.UIImage.new(0, 0, 555, 867, 0, 0, 92, 252)
-	lefthand:setImage(RegisterImage(0xB38B2FBBC95088B))
+	lefthand:setImage(RegisterImage(@"uie_ui_menu_callingcards_steampunk_lefthand"))
 	self:addElement(lefthand)
 	self.lefthand = lefthand
 	local leftshoulder = LUI.UIImage.new(0, 0, 493, 645, 0, 0, 44, 252)
-	leftshoulder:setImage(RegisterImage(0xFDBC3506D1582F2))
+	leftshoulder:setImage(RegisterImage(@"uie_ui_menu_callingcards_steampunk_shoulderleft"))
 	self:addElement(leftshoulder)
 	self.leftshoulder = leftshoulder
 	local body = LUI.UIImage.new(0, 0, 276, 604, 0, 0, 11, 258)
-	body:setImage(RegisterImage(0xD73A40F934784C7))
+	body:setImage(RegisterImage(@"uie_ui_menu_callingcards_steampunk_body"))
 	self:addElement(body)
 	self.body = body
 	local gunright = LUI.UIImage.new(0, 0, 86, 390, 0, 0, 72, 272)
-	gunright:setImage(RegisterImage(0x7E75FF6FE70228F))
+	gunright:setImage(RegisterImage(@"uie_ui_menu_callingcards_steampunk_gunright"))
 	self:addElement(gunright)
 	self.gunright = gunright
 	local particles1 = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 12, 276)
-	particles1:setImage(RegisterImage(0x906C5BC40962EF5))
-	particles1:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	particles1:setImage(RegisterImage(@"uie_ui_menu_callingcards_steampunk_particles1"))
+	particles1:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(particles1)
 	self.particles1 = particles1
 	local particles2 = LUI.UIImage.new(0, 0, 452, 932, 0, 0, 4, 148)
-	particles2:setImage(RegisterImage(0x906C2BC409629DC))
-	particles2:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	particles2:setImage(RegisterImage(@"uie_ui_menu_callingcards_steampunk_particles2"))
+	particles2:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(particles2)
 	self.particles2 = particles2
 	local particles3 = LUI.UIImage.new(0, 0, -18, 878, 0, 0, -16, 240)
-	particles3:setImage(RegisterImage(0x906C3BC40962B8F))
-	particles3:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	particles3:setImage(RegisterImage(@"uie_ui_menu_callingcards_steampunk_particles3"))
+	particles3:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(particles3)
 	self.particles3 = particles3
 	local glow = LUI.UIImage.new(0, 0, 377, 569, 0, 0, 16, 120)
 	glow:setAlpha(0.6)
 	glow:setZRot(-14)
-	glow:setImage(RegisterImage(0x49F2EE5CDB7AB7A))
-	glow:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	glow:setImage(RegisterImage(@"uie_ui_menu_callingcards_steampunk_glow"))
+	glow:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(glow)
 	self.glow = glow
 	if PostLoadFunc then
@@ -58,7 +58,7 @@ CoD[0x90EBA40764624FE].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	end
 	return self
 end
-CoD[0x90EBA40764624FE].__resetProperties = function(f2_arg0)
+CoD[@"hash_90EBA40764624FE"].__resetProperties = function(f2_arg0)
 	f2_arg0.body:completeAnimation()
 	f2_arg0.particles2:completeAnimation()
 	f2_arg0.particles3:completeAnimation()
@@ -91,18 +91,18 @@ CoD[0x90EBA40764624FE].__resetProperties = function(f2_arg0)
 	f2_arg0.particles1:setTopBottom(0, 0, 12, 276)
 	f2_arg0.particles1:setAlpha(1)
 end
-CoD[0x90EBA40764624FE].__clipsPerState = {
+CoD[@"hash_90EBA40764624FE"].__clipsPerState = {
 	DefaultState = {
 		DefaultClip = function(f3_arg0, f3_arg1)
 			f3_arg0:__resetProperties()
 			f3_arg0:setupElementClipCounter(9)
 			local f3_local0 = function(f4_arg0)
 				local f4_local0 = function(f5_arg0)
-					f5_arg0:beginAnimation(1069, Enum[0xF50FFF429AB1890][0xE99F3A6467FC0CA] | Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f5_arg0:beginAnimation(1069, Enum[@"luitween"][@"luitween_back"] | Enum[@"luitween"][@"luitween_ease_out"])
 					f5_arg0:setTopBottom(0, 0, -14, 130)
 					f5_arg0:registerEventHandler("transition_complete_keyframe", f3_arg0.clipFinished)
 				end
-				f4_arg0:beginAnimation(830, Enum[0xF50FFF429AB1890][0xE99F3A6467FC0CA] | Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f4_arg0:beginAnimation(830, Enum[@"luitween"][@"luitween_back"] | Enum[@"luitween"][@"luitween_ease_out"])
 				f4_arg0:setTopBottom(0, 0, -25, 119)
 				f4_arg0:registerEventHandler("transition_complete_keyframe", f4_local0)
 			end
@@ -113,11 +113,11 @@ CoD[0x90EBA40764624FE].__clipsPerState = {
 			f3_arg0.fogtubes:registerEventHandler("transition_complete_keyframe", f3_local0)
 			local f3_local1 = function(f6_arg0)
 				local f6_local0 = function(f7_arg0)
-					f7_arg0:beginAnimation(1000, Enum[0xF50FFF429AB1890][0xE99F3A6467FC0CA] | Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f7_arg0:beginAnimation(1000, Enum[@"luitween"][@"luitween_back"] | Enum[@"luitween"][@"luitween_ease_out"])
 					f7_arg0:setTopBottom(0, 0, 105, 265)
 					f7_arg0:registerEventHandler("transition_complete_keyframe", f3_arg0.clipFinished)
 				end
-				f6_arg0:beginAnimation(1000, Enum[0xF50FFF429AB1890][0xE99F3A6467FC0CA] | Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f6_arg0:beginAnimation(1000, Enum[@"luitween"][@"luitween_back"] | Enum[@"luitween"][@"luitween_ease_out"])
 				f6_arg0:setTopBottom(0, 0, 75, 235)
 				f6_arg0:registerEventHandler("transition_complete_keyframe", f6_local0)
 			end
@@ -128,11 +128,11 @@ CoD[0x90EBA40764624FE].__clipsPerState = {
 			f3_arg0.lefthand:registerEventHandler("transition_complete_keyframe", f3_local1)
 			local f3_local2 = function(f8_arg0)
 				local f8_local0 = function(f9_arg0)
-					f9_arg0:beginAnimation(999, Enum[0xF50FFF429AB1890][0xE99F3A6467FC0CA] | Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f9_arg0:beginAnimation(999, Enum[@"luitween"][@"luitween_back"] | Enum[@"luitween"][@"luitween_ease_out"])
 					f9_arg0:setTopBottom(0, 0, 65, 273)
 					f9_arg0:registerEventHandler("transition_complete_keyframe", f3_arg0.clipFinished)
 				end
-				f8_arg0:beginAnimation(1000, Enum[0xF50FFF429AB1890][0xE99F3A6467FC0CA] | Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f8_arg0:beginAnimation(1000, Enum[@"luitween"][@"luitween_back"] | Enum[@"luitween"][@"luitween_ease_out"])
 				f8_arg0:setTopBottom(0, 0, 44, 252)
 				f8_arg0:registerEventHandler("transition_complete_keyframe", f8_local0)
 			end
@@ -143,11 +143,11 @@ CoD[0x90EBA40764624FE].__clipsPerState = {
 			f3_arg0.leftshoulder:registerEventHandler("transition_complete_keyframe", f3_local2)
 			local f3_local3 = function(f10_arg0)
 				local f10_local0 = function(f11_arg0)
-					f11_arg0:beginAnimation(1000, Enum[0xF50FFF429AB1890][0xE99F3A6467FC0CA] | Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f11_arg0:beginAnimation(1000, Enum[@"luitween"][@"luitween_back"] | Enum[@"luitween"][@"luitween_ease_out"])
 					f11_arg0:setTopBottom(0, 0, 11, 258)
 					f11_arg0:registerEventHandler("transition_complete_keyframe", f3_arg0.clipFinished)
 				end
-				f3_arg0.body:beginAnimation(1000, Enum[0xF50FFF429AB1890][0xE99F3A6467FC0CA] | Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f3_arg0.body:beginAnimation(1000, Enum[@"luitween"][@"luitween_back"] | Enum[@"luitween"][@"luitween_ease_out"])
 				f3_arg0.body:setTopBottom(0, 0, 0, 247)
 				f3_arg0.body:registerEventHandler("interrupted_keyframe", f3_arg0.clipInterrupted)
 				f3_arg0.body:registerEventHandler("transition_complete_keyframe", f10_local0)
@@ -158,11 +158,11 @@ CoD[0x90EBA40764624FE].__clipsPerState = {
 			f3_local3(f3_arg0.body)
 			local f3_local4 = function(f12_arg0)
 				local f12_local0 = function(f13_arg0)
-					f13_arg0:beginAnimation(999, Enum[0xF50FFF429AB1890][0xE99F3A6467FC0CA] | Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f13_arg0:beginAnimation(999, Enum[@"luitween"][@"luitween_back"] | Enum[@"luitween"][@"luitween_ease_out"])
 					f13_arg0:setTopBottom(0, 0, 72, 272)
 					f13_arg0:registerEventHandler("transition_complete_keyframe", f3_arg0.clipFinished)
 				end
-				f12_arg0:beginAnimation(1000, Enum[0xF50FFF429AB1890][0xE99F3A6467FC0CA] | Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f12_arg0:beginAnimation(1000, Enum[@"luitween"][@"luitween_back"] | Enum[@"luitween"][@"luitween_ease_out"])
 				f12_arg0:setTopBottom(0, 0, 52, 252)
 				f12_arg0:registerEventHandler("transition_complete_keyframe", f12_local0)
 			end
@@ -241,7 +241,7 @@ CoD[0x90EBA40764624FE].__clipsPerState = {
 										local f26_local0 = function(f27_arg0)
 											local f27_local0 = function(f28_arg0)
 												local f28_local0 = function(f29_arg0)
-													f29_arg0:beginAnimation(200, Enum[0xF50FFF429AB1890][0xE99F3A6467FC0CA] | Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+													f29_arg0:beginAnimation(200, Enum[@"luitween"][@"luitween_back"] | Enum[@"luitween"][@"luitween_ease_out"])
 													f29_arg0:setLeftRight(0, 0, 370, 562)
 													f29_arg0:setTopBottom(0, 0, 17, 121)
 													f29_arg0:setAlpha(0)
@@ -271,7 +271,7 @@ CoD[0x90EBA40764624FE].__clipsPerState = {
 									f25_arg0:setAlpha(0)
 									f25_arg0:registerEventHandler("transition_complete_keyframe", f25_local0)
 								end
-								f24_arg0:beginAnimation(329, Enum[0xF50FFF429AB1890][0xE99F3A6467FC0CA] | Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+								f24_arg0:beginAnimation(329, Enum[@"luitween"][@"luitween_back"] | Enum[@"luitween"][@"luitween_ease_out"])
 								f24_arg0:setLeftRight(0, 0, 375, 567)
 								f24_arg0:setTopBottom(0, 0, 5, 109)
 								f24_arg0:setAlpha(0.3)

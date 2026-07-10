@@ -8,8 +8,8 @@ CoD.lmgInfiniteReticle_light.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local lights100 = LUI.UIImage.new(0, 0, 0, 94, 0, 0, 0, 129)
-	lights100:setImage(RegisterImage(0x7A9673BAD84CFAF))
-	lights100:setMaterial(LUI.UIImage.GetCachedMaterial(0x2EEB1ECF1F211F5))
+	lights100:setImage(RegisterImage(@"uie_t7_weapon_lmg_lights_02"))
+	lights100:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_delta"))
 	lights100:setShaderVector(0, 0.85, 1, 0, 0)
 	lights100:setShaderVector(1, 0.13, 0.05, 0, 0)
 	lights100:setShaderVector(2, 0, 1, 0, 0)
@@ -25,7 +25,7 @@ end
 CoD.lmgInfiniteReticle_light.__resetProperties = function(f2_arg0)
 	f2_arg0.lights100:completeAnimation()
 	f2_arg0.lights100:setAlpha(1)
-	f2_arg0.lights100:setMaterial(LUI.UIImage.GetCachedMaterial(0x2EEB1ECF1F211F5))
+	f2_arg0.lights100:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_delta"))
 	f2_arg0.lights100:setShaderVector(0, 0.85, 1, 0, 0)
 	f2_arg0.lights100:setShaderVector(1, 0.13, 0.05, 0, 0)
 	f2_arg0.lights100:setShaderVector(2, 0, 1, 0, 0)
@@ -104,7 +104,7 @@ CoD.lmgInfiniteReticle_light.__clipsPerState = {
 			end
 			f3_arg0.lights100:completeAnimation()
 			f3_arg0.lights100:setAlpha(0)
-			f3_arg0.lights100:setMaterial(LUI.UIImage.GetCachedMaterial(0x2EEB1ECF1F211F5))
+			f3_arg0.lights100:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_delta"))
 			f3_arg0.lights100:setShaderVector(0, 0, 0.22, 0, 0)
 			f3_arg0.lights100:setShaderVector(1, 0.1, 0.1, 0, 0)
 			f3_arg0.lights100:setShaderVector(2, 0.14, 0.86, 0, 0)

@@ -54,8 +54,8 @@ CoD.DirectorMapAndGameType.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	local DownloadPercent = LUI.UIText.new(0.5, 0.5, -186.5, 186.5, 0, 0, 149, 187)
 	DownloadPercent:setAlpha(0)
 	DownloadPercent:setTTF("default")
-	DownloadPercent:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	DownloadPercent:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	DownloadPercent:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	DownloadPercent:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	DownloadPercent:subscribeToGlobalModel(f1_arg1, "LobbyRoot", "theaterDownloadPercent", function(model)
 		if model:get() ~= nil then
 			DownloadPercent:setText(FileshareGetDownloadProgress())
@@ -65,12 +65,12 @@ CoD.DirectorMapAndGameType.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self.DownloadPercent = DownloadPercent
 	local TeamName = LUI.UIText.new(0, 0, 149.5, 349.5, 0, 0, 163, 193)
 	TeamName:setTTF("default")
-	TeamName:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
-	TeamName:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	TeamName:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
+	TeamName:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	TeamName:subscribeToGlobalModel(f1_arg1, "MapVote", "mapVoteMapNext", function(model)
 		local f7_local0 = model:get()
 		if f7_local0 ~= nil then
-			TeamName:setText(Engine[0xF9F1239CFD921FE](CoD.MapUtility.GetMapTeamNameFromMapID(f7_local0)))
+			TeamName:setText(Engine[@"hash_4F9F1239CFD921FE"](CoD.MapUtility.GetMapTeamNameFromMapID(f7_local0)))
 		end
 	end)
 	self:addElement(TeamName)
@@ -78,7 +78,7 @@ CoD.DirectorMapAndGameType.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	local PCTooltipExceptionWidget = nil
 	PCTooltipExceptionWidget = CoD.PC_TooltipExceptionWidget.new(f1_arg0, f1_arg1, 0.5, 0.5, -178, 178, 1, 1, -28, 0)
 	PCTooltipExceptionWidget:setAlpha(0)
-	PCTooltipExceptionWidget.Tip:setText(LocalizeToUpperString(0x1496B17DC3093F9))
+	PCTooltipExceptionWidget.Tip:setText(LocalizeToUpperString(@"hash_11496B17DC3093F9"))
 	self:addElement(PCTooltipExceptionWidget)
 	self.PCTooltipExceptionWidget = PCTooltipExceptionWidget
 	self:mergeStateConditions({
@@ -104,7 +104,7 @@ CoD.DirectorMapAndGameType.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	})
 	local f1_local7 = self
 	local f1_local8 = self.subscribeToModel
-	local f1_local9 = Engine[0x8DF2E5447F384B9]()
+	local f1_local9 = Engine[@"getglobalmodel"]()
 	f1_local8(f1_local7, f1_local9["lobbyRoot.lobbyNav"], function(f10_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -116,7 +116,7 @@ CoD.DirectorMapAndGameType.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	end, false)
 	f1_local7 = self
 	f1_local8 = self.subscribeToModel
-	f1_local9 = Engine[0x8DF2E5447F384B9]()
+	f1_local9 = Engine[@"getglobalmodel"]()
 	f1_local8(f1_local7, f1_local9["lobbyRoot.theaterDataDownloaded"], function(f11_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -128,7 +128,7 @@ CoD.DirectorMapAndGameType.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	end, false)
 	f1_local7 = self
 	f1_local8 = self.subscribeToModel
-	f1_local9 = Engine[0x8DF2E5447F384B9]()
+	f1_local9 = Engine[@"getglobalmodel"]()
 	f1_local8(f1_local7, f1_local9["lobbyRoot.theaterDownloadPercent"], function(f12_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

@@ -45,7 +45,7 @@ CoD.TabbedScoreboardHeaderScores.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	FriendlyControlRoundPips:setScale(0.8, 0.8)
 	FriendlyControlRoundPips:setWidgetType(CoD.GameEndScoreRoundPip)
 	FriendlyControlRoundPips:setSpacing(20)
-	FriendlyControlRoundPips:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	FriendlyControlRoundPips:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	FriendlyControlRoundPips:setDataSource("PlayerTeamRoundPips")
 	FriendlyControlRoundPips:subscribeToGlobalModel(f1_arg1, "GameScore", "roundWinLimit", function(model)
 		local f5_local0 = model:get()
@@ -56,7 +56,7 @@ CoD.TabbedScoreboardHeaderScores.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	self:addElement(FriendlyControlRoundPips)
 	self.FriendlyControlRoundPips = FriendlyControlRoundPips
 	local spacer = LUI.UIImage.new(0, 0, 182.5, 256.5, 0, 0, -31, 97)
-	spacer:setImage(RegisterImage(0x7615068F50B3D66))
+	spacer:setImage(RegisterImage(@"blacktransparent"))
 	self:addElement(spacer)
 	self.spacer = spacer
 	local EnemyControlRoundPips = LUI.UIList.new(f1_arg0, f1_arg1, 20, 0, nil, false, false, false, false)
@@ -82,7 +82,7 @@ CoD.TabbedScoreboardHeaderScores.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	EnemyControlRoundPips:setScale(0.8, 0.8)
 	EnemyControlRoundPips:setWidgetType(CoD.GameEndScoreRoundPip)
 	EnemyControlRoundPips:setSpacing(20)
-	EnemyControlRoundPips:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	EnemyControlRoundPips:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	EnemyControlRoundPips:setDataSource("EnemyTeamRoundPips")
 	EnemyControlRoundPips:subscribeToGlobalModel(f1_arg1, "GameScore", "roundWinLimit", function(model)
 		local f8_local0 = model:get()

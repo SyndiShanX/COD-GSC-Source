@@ -22,7 +22,7 @@ CoD.StartMenu_Options_RegistrationForm.new = function(f1_arg0, f1_arg1, f1_arg2,
 	registrationFormStrings:setWidgetType(CoD.StartMenu_Options_TextBoxOption)
 	registrationFormStrings:setVerticalCount(3)
 	registrationFormStrings:setSpacing(12)
-	registrationFormStrings:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	registrationFormStrings:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	registrationFormStrings:setDataSource("CODAccountRegisterInfoBasic")
 	registrationFormStrings:registerEventHandler("gain_focus", function(element, event)
 		local f2_local0 = nil
@@ -31,14 +31,14 @@ CoD.StartMenu_Options_RegistrationForm.new = function(f1_arg0, f1_arg1, f1_arg2,
 		elseif element.super.gainFocus then
 			f2_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f2_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(registrationFormStrings, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(registrationFormStrings, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		ProcessListAction(self, element, controller, menu)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 		return false
 	end, false)
 	self:addElement(registrationFormStrings)
@@ -49,7 +49,7 @@ CoD.StartMenu_Options_RegistrationForm.new = function(f1_arg0, f1_arg1, f1_arg2,
 	registrationFormDob:setWidgetType(CoD.StartMenu_Options_NumOption)
 	registrationFormDob:setVerticalCount(3)
 	registrationFormDob:setSpacing(12)
-	registrationFormDob:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	registrationFormDob:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	registrationFormDob:setDataSource("CODAccountRegisterInfoDob")
 	self:addElement(registrationFormDob)
 	self.registrationFormDob = registrationFormDob
@@ -57,7 +57,7 @@ CoD.StartMenu_Options_RegistrationForm.new = function(f1_arg0, f1_arg1, f1_arg2,
 	registrationFormRegion:setLeftRight(0.5, 0.5, -375, 375)
 	registrationFormRegion:setTopBottom(0, 0, 129.5, 189.5)
 	registrationFormRegion:setWidgetType(CoD.StartMenu_Options_NumOption)
-	registrationFormRegion:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	registrationFormRegion:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	registrationFormRegion:setDataSource("CODAccountRegisterInfoRegion")
 	self:addElement(registrationFormRegion)
 	self.registrationFormRegion = registrationFormRegion
@@ -67,7 +67,7 @@ CoD.StartMenu_Options_RegistrationForm.new = function(f1_arg0, f1_arg1, f1_arg2,
 	registrationFormOptions:setWidgetType(CoD.StartMenu_Options_SimpleCheckOption)
 	registrationFormOptions:setVerticalCount(2)
 	registrationFormOptions:setSpacing(12)
-	registrationFormOptions:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	registrationFormOptions:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	registrationFormOptions:setDataSource("CODAccountRegisterInfoOptions")
 	registrationFormOptions:registerEventHandler("gain_focus", function(element, event)
 		local f5_local0 = nil
@@ -76,15 +76,15 @@ CoD.StartMenu_Options_RegistrationForm.new = function(f1_arg0, f1_arg1, f1_arg2,
 		elseif element.super.gainFocus then
 			f5_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f5_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(registrationFormOptions, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(registrationFormOptions, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		ProcessListAction(self, element, controller, menu)
 		PlaySoundAlias("uin_paint_image_flip_toggle")
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, nil)
 		return false
 	end, false)
 	self:addElement(registrationFormOptions)
@@ -93,7 +93,7 @@ CoD.StartMenu_Options_RegistrationForm.new = function(f1_arg0, f1_arg1, f1_arg2,
 	registerButton:setLeftRight(0.5, 0.5, -380, 380)
 	registerButton:setTopBottom(0, 0, 889.5, 949.5)
 	registerButton:setWidgetType(CoD.StartMenu_Options_ButtonAction)
-	registerButton:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	registerButton:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	registerButton:setDataSource("CODAccountRegisterConfirmation")
 	registerButton:registerEventHandler("gain_focus", function(element, event)
 		local f8_local0 = nil
@@ -102,14 +102,14 @@ CoD.StartMenu_Options_RegistrationForm.new = function(f1_arg0, f1_arg1, f1_arg2,
 		elseif element.super.gainFocus then
 			f8_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f8_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(registerButton, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(registerButton, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		ProcessListAction(self, element, controller, menu)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, nil)
 		return false
 	end, false)
 	self:addElement(registerButton)
@@ -118,22 +118,22 @@ CoD.StartMenu_Options_RegistrationForm.new = function(f1_arg0, f1_arg1, f1_arg2,
 	InfoText:setRGB(0.96, 0.93, 0.84)
 	InfoText:setAlpha(0.3)
 	InfoText:setTTF("ttmussels_regular")
-	InfoText:setAlignment(Engine[0x7F8853DC3581AA4](Enum[0x7A5123B654282D2][0x58C8A85F2048829]))
-	InfoText:setAlignment(Engine[0x7F8853DC3581AA4](Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3]))
+	InfoText:setAlignment(Engine[@"hash_67F8853DC3581AA4"](Enum[@"luialignment"][@"lui_alignment_left"]))
+	InfoText:setAlignment(Engine[@"hash_67F8853DC3581AA4"](Enum[@"luialignment"][@"lui_alignment_top"]))
 	InfoText:linkToElementModel(self, "hintText", true, function(model)
 		local f11_local0 = model:get()
 		if f11_local0 ~= nil then
-			InfoText:setText(Engine[0xF9F1239CFD921FE](f11_local0))
+			InfoText:setText(Engine[@"hash_4F9F1239CFD921FE"](f11_local0))
 		end
 	end)
 	self:addElement(InfoText)
 	self.InfoText = InfoText
 	local DateOfBirthHeader = LUI.UIText.new(0.35, 0.35, -87, 663, 0, 0, 445.5, 470.5)
 	DateOfBirthHeader:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
-	DateOfBirthHeader:setText(Engine[0xF9F1239CFD921FE](0x3BA3C3532BBA47A))
+	DateOfBirthHeader:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_43BA3C3532BBA47A"))
 	DateOfBirthHeader:setTTF("ttmussels_regular")
-	DateOfBirthHeader:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	DateOfBirthHeader:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	DateOfBirthHeader:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	DateOfBirthHeader:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(DateOfBirthHeader)
 	self.DateOfBirthHeader = DateOfBirthHeader
 	local GUIDE = LUI.UIImage.new(0, 0, 1104, 1164, 0, 0, 89.5, 149.5)

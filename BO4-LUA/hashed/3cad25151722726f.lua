@@ -16,8 +16,8 @@ CoD.ReservesSpecialContractInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	local FocusGlow = LUI.UIImage.new(0, 1, -69, 69, 0, 1, -51, 51)
 	FocusGlow:setAlpha(0)
 	FocusGlow:setScale(1.01, 1)
-	FocusGlow:setImage(RegisterImage(0xB8F10D49D85E9C4))
-	FocusGlow:setMaterial(LUI.UIImage.GetCachedMaterial(0xDAB59B2CAE01851))
+	FocusGlow:setImage(RegisterImage(@"uie_ui_menu_common_focus_glow_small"))
+	FocusGlow:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_6DAB59B2CAE01851"))
 	FocusGlow:setShaderVector(0, 0, 0, 0.24, 0.24)
 	FocusGlow:setShaderVector(1, 1.2, 0, 0, 0)
 	FocusGlow:setupNineSliceShader(160, 160)
@@ -34,7 +34,7 @@ CoD.ReservesSpecialContractInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	self.PreviewScene = PreviewScene
 	local gradient = LUI.UIImage.new(0, 0, 5.5, 525.5, 0, 0, 5, 127)
 	gradient:setAlpha(0.9)
-	gradient:setMaterial(LUI.UIImage.GetCachedMaterial(0xDE760AC0E801E57))
+	gradient:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_gradient_normal"))
 	gradient:setShaderVector(0, 0, 0, 0, 1)
 	gradient:setShaderVector(1, 0, 0, 0, 0)
 	gradient:setShaderVector(2, 0.67, 0, 0, 0)
@@ -42,15 +42,15 @@ CoD.ReservesSpecialContractInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	self.gradient = gradient
 	local PreviewButton = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 1, 1)
 	PreviewButton:setAlpha(0)
-	PreviewButton:setImage(RegisterImage(0x9B5AB12D437292D))
+	PreviewButton:setImage(RegisterImage(@"hash_9B5AB12D437292D"))
 	self:addElement(PreviewButton)
 	self.PreviewButton = PreviewButton
 	local Title = LUI.UIText.new(0, 0, 17, 452, 0, 0, 10.5, 34.5)
 	Title:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	Title:setTTF("ttmussels_demibold")
 	Title:setLetterSpacing(2)
-	Title:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Title:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Title:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Title:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	Title:linkToElementModel(self, "categoryString", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -62,8 +62,8 @@ CoD.ReservesSpecialContractInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	local Description = LUI.UIText.new(0, 0, 19, 491, 0, 0, 37.5, 52.5)
 	Description:setRGB(ColorSet.T8__OFF__GRAY.r, ColorSet.T8__OFF__GRAY.g, ColorSet.T8__OFF__GRAY.b)
 	Description:setTTF("ttmussels_demibold")
-	Description:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Description:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Description:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Description:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	Description:linkToElementModel(self, "description", true, function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
@@ -76,8 +76,8 @@ CoD.ReservesSpecialContractInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	RewardName:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
 	RewardName:setTTF("ttmussels_demibold")
 	RewardName:setLetterSpacing(4)
-	RewardName:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	RewardName:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	RewardName:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	RewardName:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	RewardName:linkToElementModel(self, "rewardName", true, function(model)
 		local f5_local0 = model:get()
 		if f5_local0 ~= nil then
@@ -87,7 +87,7 @@ CoD.ReservesSpecialContractInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	self:addElement(RewardName)
 	self.RewardName = RewardName
 	local Timer = CoD.TimerRight.new(f1_arg0, f1_arg1, 1, 1, -436, -400, 1, 1, -43, -28)
-	Timer.TextBox2:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	Timer.TextBox2:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	Timer:subscribeToGlobalModel(f1_arg1, "AutoEvents", "autoevent_special_contract_timer", function(model)
 		local f6_local0 = model:get()
 		if f6_local0 ~= nil then
@@ -122,8 +122,8 @@ CoD.ReservesSpecialContractInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 			end,
 		},
 	})
-	ProgressBar.Progress:setImage(RegisterImage(0x6D2FBF31F53910C))
-	ProgressBar.ProgressGlow:setImage(RegisterImage(0xA7D61A3302B55D0))
+	ProgressBar.Progress:setImage(RegisterImage(@"uie_ui_menu_aar_levelup_bar"))
+	ProgressBar.ProgressGlow:setImage(RegisterImage(@"uie_ui_menu_aar_levelup_bar_glow"))
 	ProgressBar:linkToElementModel(self, "progress", true, function(model)
 		local f10_local0 = model:get()
 		if f10_local0 ~= nil then
@@ -150,8 +150,8 @@ CoD.ReservesSpecialContractInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	self:addElement(Darken)
 	self.Darken = Darken
 	local NineSliceBMFrame = LUI.UIImage.new(0, 1, -2, 2, 0, 1, -2, 2)
-	NineSliceBMFrame:setImage(RegisterImage(0x1AC151A09D526DC))
-	NineSliceBMFrame:setMaterial(LUI.UIImage.GetCachedMaterial(0x44484DDFAF5C093))
+	NineSliceBMFrame:setImage(RegisterImage(@"hash_71AC151A09D526DC"))
+	NineSliceBMFrame:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_normal"))
 	NineSliceBMFrame:setShaderVector(0, 0, 0, 0, 0)
 	NineSliceBMFrame:setupNineSliceShader(162, 52)
 	self:addElement(NineSliceBMFrame)
@@ -159,8 +159,8 @@ CoD.ReservesSpecialContractInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	local FocusBorder = LUI.UIImage.new(0, 1, -5, 5, 0, 1, -5, 5)
 	FocusBorder:setRGB(1, 0.75, 0.47)
 	FocusBorder:setAlpha(0)
-	FocusBorder:setImage(RegisterImage(0xCB07CCC28498CB2))
-	FocusBorder:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	FocusBorder:setImage(RegisterImage(@"uie_ui_menu_store_focus_frame"))
+	FocusBorder:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	FocusBorder:setShaderVector(0, 0, 0, 0, 0)
 	FocusBorder:setupNineSliceShader(18, 18)
 	self:addElement(FocusBorder)
@@ -211,7 +211,7 @@ CoD.ReservesSpecialContractInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	ItemHintText:linkToElementModel(self, "toolTip", true, function(model)
 		local f18_local0 = model:get()
 		if f18_local0 ~= nil then
-			ItemHintText.textCenterAlign:setText(Engine[0xF9F1239CFD921FE](f18_local0))
+			ItemHintText.textCenterAlign:setText(Engine[@"hash_4F9F1239CFD921FE"](f18_local0))
 		end
 	end)
 	self:addElement(ItemHintText)
@@ -301,7 +301,7 @@ CoD.ReservesSpecialContractInternal.__clipsPerState = {
 			f26_arg0.FocusGlow:setAlpha(0)
 			f26_local0(f26_arg0.FocusGlow)
 			local f26_local1 = function(f28_arg0)
-				f26_arg0.FocusBorder:beginAnimation(200, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f26_arg0.FocusBorder:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_in"])
 				f26_arg0.FocusBorder:setAlpha(1)
 				f26_arg0.FocusBorder:registerEventHandler("interrupted_keyframe", f26_arg0.clipInterrupted)
 				f26_arg0.FocusBorder:registerEventHandler("transition_complete_keyframe", f26_arg0.clipFinished)
@@ -421,7 +421,7 @@ CoD.ReservesSpecialContractInternal.__clipsPerState = {
 			f35_arg0.Darken:setAlpha(0.8)
 			f35_arg0.clipFinished(f35_arg0.Darken)
 			local f35_local1 = function(f37_arg0)
-				f35_arg0.FocusBorder:beginAnimation(200, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f35_arg0.FocusBorder:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_in"])
 				f35_arg0.FocusBorder:setAlpha(1)
 				f35_arg0.FocusBorder:registerEventHandler("interrupted_keyframe", f35_arg0.clipInterrupted)
 				f35_arg0.FocusBorder:registerEventHandler("transition_complete_keyframe", f35_arg0.clipFinished)

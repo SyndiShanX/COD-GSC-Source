@@ -12,7 +12,7 @@ CoD.TabletTak5.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_ar
 	self:setClass(CoD.TabletTak5)
 	self.id = "TabletTak5"
 	self.soundSet = "none"
-	Engine[0xF0AF2C4A29D15D7](f1_arg1, 3, 500, 500)
+	Engine[@"setupui3dwindow"](f1_arg1, 3, 500, 500)
 	self:setUI3DWindow(3)
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
@@ -22,8 +22,8 @@ CoD.TabletTak5.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_ar
 	self:addElement(background)
 	self.background = background
 	local GridBackground = LUI.UIImage.new(0, 0, -30, 530, 0, 0, 108, 392)
-	GridBackground:setImage(RegisterImage(0xA01874D41AD67C))
-	GridBackground:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	GridBackground:setImage(RegisterImage(@"uie_ui_hud_tak5_bg_grid"))
+	GridBackground:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	GridBackground:setShaderVector(0, 2, 0, 0, 0)
 	self:addElement(GridBackground)
 	self.GridBackground = GridBackground
@@ -224,36 +224,36 @@ CoD.TabletTak5.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_ar
 	takNumber01 = LUI.UIText.new(0, 0, 309, 340, 0, 0, 216.5, 224.5)
 	takNumber01:setText(1)
 	takNumber01:setTTF("ttmussels_demibold")
-	takNumber01:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	takNumber01:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	takNumber01:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	takNumber01:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(takNumber01)
 	self.takNumber01 = takNumber01
 	takNumber02 = LUI.UIText.new(0, 0, 258.5, 289.5, 0, 0, 216.5, 224.5)
 	takNumber02:setText(2)
 	takNumber02:setTTF("ttmussels_demibold")
-	takNumber02:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	takNumber02:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	takNumber02:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	takNumber02:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(takNumber02)
 	self.takNumber02 = takNumber02
 	takNumber03 = LUI.UIText.new(0, 0, 207.5, 238.5, 0, 0, 216.5, 224.5)
 	takNumber03:setText(3)
 	takNumber03:setTTF("ttmussels_demibold")
-	takNumber03:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	takNumber03:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	takNumber03:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	takNumber03:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(takNumber03)
 	self.takNumber03 = takNumber03
 	local takNumber04 = LUI.UIText.new(0, 0, 157.5, 188.5, 0, 0, 216.5, 224.5)
 	takNumber04:setText(4)
 	takNumber04:setTTF("ttmussels_demibold")
-	takNumber04:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	takNumber04:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	takNumber04:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	takNumber04:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(takNumber04)
 	self.takNumber04 = takNumber04
 	local takNumber05 = LUI.UIText.new(0, 0, 157.5, 188.5, 0, 0, 245, 253)
 	takNumber05:setText(5)
 	takNumber05:setTTF("ttmussels_demibold")
-	takNumber05:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	takNumber05:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	takNumber05:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	takNumber05:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(takNumber05)
 	self.takNumber05 = takNumber05
 	local HealthBonus = CoD.TabletTak5_HealthBonus.new(f1_arg0, f1_arg1, 0, 0, 150, 200, 0, 0, 335, 375)
@@ -269,8 +269,8 @@ CoD.TabletTak5.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_ar
 	self.BorderBottom = BorderBottom
 	local Tak5Version = LUI.UIImage.new(0, 0, 246, 350, 0, 0, 242, 264)
 	Tak5Version:setAlpha(0.25)
-	Tak5Version:setImage(RegisterImage(0xD5E0EBBEF0B319F))
-	Tak5Version:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	Tak5Version:setImage(RegisterImage(@"uie_ui_hud_tak5_module_version"))
+	Tak5Version:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	Tak5Version:setShaderVector(0, 2, 0, 0, 0)
 	self:addElement(Tak5Version)
 	self.Tak5Version = Tak5Version
@@ -289,7 +289,7 @@ CoD.TabletTak5.__resetProperties = function(f20_arg0)
 	f20_arg0.GridBackground:completeAnimation()
 	f20_arg0.BorderTop:setAlpha(1)
 	f20_arg0.BorderBottom:setAlpha(1)
-	f20_arg0.GridBackground:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	f20_arg0.GridBackground:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	f20_arg0.GridBackground:setShaderVector(0, 2, 0, 0, 0)
 end
 CoD.TabletTak5.__clipsPerState = {
@@ -298,7 +298,7 @@ CoD.TabletTak5.__clipsPerState = {
 			f21_arg0:__resetProperties()
 			f21_arg0:setupElementClipCounter(3)
 			f21_arg0.GridBackground:completeAnimation()
-			f21_arg0.GridBackground:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+			f21_arg0.GridBackground:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 			f21_arg0.GridBackground:setShaderVector(0, 2.2, 0, 0, 0)
 			f21_arg0.clipFinished(f21_arg0.GridBackground)
 			f21_arg0.BorderTop:completeAnimation()

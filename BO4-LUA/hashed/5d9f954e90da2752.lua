@@ -14,7 +14,7 @@ CoD.BM_SmallContractStatusContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	ActiveContracts:setWidgetType(CoD.BM_SmallContractProgress)
 	ActiveContracts:setHorizontalCount(3)
 	ActiveContracts:setSpacing(15)
-	ActiveContracts:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	ActiveContracts:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	ActiveContracts:setDataSource("BlackMarketActiveContracts")
 	ActiveContracts:subscribeToGlobalModel(f1_arg1, "PerController", "Contracts.updateActiveContracts", function(model)
 		CoD.GridAndListUtility.UpdateDataSource(ActiveContracts, true, true, true)

@@ -7,15 +7,15 @@ CoD.WeaponLevelUpNotification_FooterBacking01.new = function(f1_arg0, f1_arg1, f
 	self.id = "WeaponLevelUpNotification_FooterBacking01"
 	self.soundSet = "HUD"
 	local Image0 = LUI.UIImage.new(0, 0, 0, 24, 0, 0, 0, 48)
-	Image0:setImage(RegisterImage(0x690CA9685E097BE))
+	Image0:setImage(RegisterImage(@"uie_t7_hud_notificaiton_footer_left"))
 	self:addElement(Image0)
 	self.Image0 = Image0
 	local Image1 = LUI.UIImage.new(0, 1, 24, -24, 0, 0, 0, 48)
-	Image1:setImage(RegisterImage(0x8A844EB8F4D1854))
+	Image1:setImage(RegisterImage(@"uie_t7_hud_notificaiton_footer_stretch"))
 	self:addElement(Image1)
 	self.Image1 = Image1
 	local Image2 = LUI.UIImage.new(1, 1, -24, 0, 0, 0, 0, 48)
-	Image2:setImage(RegisterImage(0x217E0B98B3B41B3))
+	Image2:setImage(RegisterImage(@"uie_t7_hud_notificaiton_footer_right"))
 	self:addElement(Image2)
 	self.Image2 = Image2
 	if PostLoadFunc then

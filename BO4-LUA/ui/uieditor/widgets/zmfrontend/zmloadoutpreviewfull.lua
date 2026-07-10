@@ -16,7 +16,7 @@ CoD.ZMLoadoutPreviewFull.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Blur = LUI.UIImage.new(0, 0, -4, 276, 0, 0, 12.5, 455.5)
-	Blur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	Blur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	Blur:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(Blur)
 	self.Blur = Blur
@@ -27,8 +27,8 @@ CoD.ZMLoadoutPreviewFull.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	self.Panel = Panel
 	local TiledBacking = LUI.UIImage.new(-0.02, -0.02, 1, 281, 0.04, 0.04, -4, 440)
 	TiledBacking:setAlpha(0.5)
-	TiledBacking:setImage(RegisterImage(0x34839E8065B1E53))
-	TiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	TiledBacking:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	TiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	TiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	TiledBacking:setupNineSliceShader(196, 88)
 	self:addElement(TiledBacking)
@@ -66,7 +66,7 @@ CoD.ZMLoadoutPreviewFull.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	end)
 	local Metalbar = SelectedClass
 	local ActiveClassTab = SelectedClass.subscribeToModel
-	local Metalbar3 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local Metalbar3 = Engine[@"getmodelforcontroller"](f1_arg1)
 	ActiveClassTab(Metalbar, Metalbar3.LastInput, function(f6_arg0)
 		f1_arg0:updateElementState(SelectedClass, {
 			name = "model_validation",
@@ -78,7 +78,7 @@ CoD.ZMLoadoutPreviewFull.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	end, false)
 	Metalbar = SelectedClass
 	ActiveClassTab = SelectedClass.subscribeToModel
-	Metalbar3 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	Metalbar3 = Engine[@"getmodelforcontroller"](f1_arg1)
 	ActiveClassTab(Metalbar, Metalbar3.selectedCustomClass, function(f7_arg0)
 		f1_arg0:updateElementState(SelectedClass, {
 			name = "model_validation",
@@ -107,15 +107,15 @@ CoD.ZMLoadoutPreviewFull.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	self:addElement(ActiveClassTab)
 	self.ActiveClassTab = ActiveClassTab
 	Metalbar = LUI.UIImage.new(0, 0, -14, 286, 0, 0, 59.5, 75.5)
-	Metalbar:setImage(RegisterImage(0xF6761ADA7C49071))
+	Metalbar:setImage(RegisterImage(@"uie_ui_menu_zm_metal_bar"))
 	self:addElement(Metalbar)
 	self.Metalbar = Metalbar
 	Metalbar3 = LUI.UIImage.new(0, 0, -14, 286, 0, 0, 3.5, 19.5)
-	Metalbar3:setImage(RegisterImage(0xF6761ADA7C49071))
+	Metalbar3:setImage(RegisterImage(@"uie_ui_menu_zm_metal_bar"))
 	self:addElement(Metalbar3)
 	self.Metalbar3 = Metalbar3
 	local Metalbar2 = LUI.UIImage.new(0, 0, -14, 286, 0, 0, 449, 465)
-	Metalbar2:setImage(RegisterImage(0xF6761ADA7C49071))
+	Metalbar2:setImage(RegisterImage(@"uie_ui_menu_zm_metal_bar"))
 	self:addElement(Metalbar2)
 	self.Metalbar2 = Metalbar2
 	local PCSmallCloseButton = nil
@@ -127,21 +127,21 @@ CoD.ZMLoadoutPreviewFull.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 		elseif element.super.gainFocus then
 			f10_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_none"])
 		return f10_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(PCSmallCloseButton, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(PCSmallCloseButton, f1_arg1, Enum[@"luibutton"][@"lui_key_none"], "ui_confirm", function(element, menu, controller, model)
 		CoD.DirectorUtility.HideLoadoutPreview(controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "ui_confirm")
 		return false
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(PCSmallCloseButton, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "MOUSE1", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(PCSmallCloseButton, f1_arg1, Enum[@"luibutton"][@"lui_key_none"], "MOUSE1", function(element, menu, controller, model)
 		CoD.DirectorUtility.HideLoadoutPreview(controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "MOUSE1")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "MOUSE1")
 		return false
 	end, false)
 	self:addElement(PCSmallCloseButton)
@@ -163,7 +163,7 @@ CoD.ZMLoadoutPreviewFull.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 			end,
 		},
 	})
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if IsElementInState(self.SelectedClass, "Visible") then
 			CoD.ZMLoadoutUtility.SetEquippedBubbleGumPackToSelectedClass(self.ActiveClassTab, controller, menu)
 			CoD.CACUtility.SelectCustomClass(controller, self.SelectedClass)
@@ -174,7 +174,7 @@ CoD.ZMLoadoutPreviewFull.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 		end
 	end, function(element, menu, controller)
 		if IsElementInState(self.SelectedClass, "Visible") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, nil)
 			return false
 		else
 			return false

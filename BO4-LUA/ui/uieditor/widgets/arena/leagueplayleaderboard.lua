@@ -15,10 +15,10 @@ CoD.LeaguePlayLeaderboard.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local ErrorText = LUI.UIText.new(0, 0, 544, 1344, 0, 0, 521.5, 558.5)
 	ErrorText:setAlpha(0)
-	ErrorText:setText(Engine[0xF9F1239CFD921FE](0x354A89EC41ABE97))
+	ErrorText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_1354A89EC41ABE97"))
 	ErrorText:setTTF("default")
-	ErrorText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	ErrorText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	ErrorText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	ErrorText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(ErrorText)
 	self.ErrorText = ErrorText
 	local LeaderboardEntries = LUI.UIList.new(f1_arg0, f1_arg1, 13, 0, nil, false, false, false, false)
@@ -27,7 +27,7 @@ CoD.LeaguePlayLeaderboard.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	LeaderboardEntries:setWidgetType(CoD.LeaguePlayLeaderboardEntry)
 	LeaderboardEntries:setVerticalCount(10)
 	LeaderboardEntries:setSpacing(13)
-	LeaderboardEntries:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	LeaderboardEntries:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	LeaderboardEntries:setVerticalCounter(CoD.verticalCounter)
 	LeaderboardEntries:setDataSource("LeaguePlayLadderMemberList")
 	LeaderboardEntries:subscribeToGlobalModel(f1_arg1, "LeaguePlayLadderMemberList", "allXuidInfoLoaded", function(model)
@@ -39,26 +39,26 @@ CoD.LeaguePlayLeaderboard.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	self.LeaderboardEntries = LeaderboardEntries
 	local RankPointsTitle = LUI.UIText.new(0, 0, 855, 1005, 0, 0, 286, 301)
 	RankPointsTitle:setRGB(0.92, 0.92, 0.92)
-	RankPointsTitle:setText(Engine[0xF9F1239CFD921FE](0x1275B8C997A0D5E))
+	RankPointsTitle:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_21275B8C997A0D5E"))
 	RankPointsTitle:setTTF("0arame_mono_stencil")
-	RankPointsTitle:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	RankPointsTitle:setAlignment(Enum[0x7A5123B654282D2][0x70510683C22104B])
+	RankPointsTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	RankPointsTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_bottom"])
 	self:addElement(RankPointsTitle)
 	self.RankPointsTitle = RankPointsTitle
 	local GemReward = LUI.UIText.new(0, 0, 1019, 1169, 0, 0, 286, 301)
 	GemReward:setRGB(0.92, 0.92, 0.92)
-	GemReward:setText(Engine[0xF9F1239CFD921FE](0x7A8731E3BA139AF))
+	GemReward:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_7A8731E3BA139AF"))
 	GemReward:setTTF("0arame_mono_stencil")
-	GemReward:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	GemReward:setAlignment(Enum[0x7A5123B654282D2][0x70510683C22104B])
+	GemReward:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	GemReward:setAlignment(Enum[@"luialignment"][@"lui_alignment_bottom"])
 	self:addElement(GemReward)
 	self.GemReward = GemReward
 	local RankTitle = LUI.UIText.new(0, 0, 250, 410, 0, 0, 286, 301)
 	RankTitle:setRGB(0.92, 0.92, 0.92)
-	RankTitle:setText(LocalizeToUpperString(0x49C509B807FDA37))
+	RankTitle:setText(LocalizeToUpperString(@"hash_49C509B807FDA37"))
 	RankTitle:setTTF("0arame_mono_stencil")
-	RankTitle:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	RankTitle:setAlignment(Enum[0x7A5123B654282D2][0x70510683C22104B])
+	RankTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	RankTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_bottom"])
 	self:addElement(RankTitle)
 	self.RankTitle = RankTitle
 	local topline5 = LUI.UIImage.new(0, 0, 1004, 1184, 0, 0, 303, 306)
@@ -88,10 +88,10 @@ CoD.LeaguePlayLeaderboard.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	self.topline1 = topline1
 	local RefreshingLabel = LUI.UIText.new(0, 0, 704, 1184, 0, 0, 178, 203)
 	RefreshingLabel:setRGB(ColorSet.T8__DARK__GOLD.r, ColorSet.T8__DARK__GOLD.g, ColorSet.T8__DARK__GOLD.b)
-	RefreshingLabel:setText(Engine[0xF9F1239CFD921FE](0x74560BEAFB9F4D1))
+	RefreshingLabel:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_274560BEAFB9F4D1"))
 	RefreshingLabel:setTTF("ttmussels_regular")
-	RefreshingLabel:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
-	RefreshingLabel:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	RefreshingLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
+	RefreshingLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(RefreshingLabel)
 	self.RefreshingLabel = RefreshingLabel
 	local ArenaLeaguePlayLadderSkillDivision = CoD.ArenaLeaguePlay_LadderSkillDivision.new(f1_arg0, f1_arg1, 0, 0, 283, 1181, 0, 0, 120, 216)
@@ -101,7 +101,7 @@ CoD.LeaguePlayLeaderboard.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 		{
 			stateName = "DailyBonusAvailable",
 			condition = function(menu, element, event)
-				local f3_local0 = CoD.ArenaUtility.CurrentArenaEventTypeEquals(self, Enum[0xC0EA92D04BC003B][0xC32571741C5B730])
+				local f3_local0 = CoD.ArenaUtility.CurrentArenaEventTypeEquals(self, Enum[@"hash_6C0EA92D04BC003B"][@"hash_5C32571741C5B730"])
 				if f3_local0 then
 					f3_local0 = CoD.ArenaLeaguePlayUtility.HasOneMatchPlayed(self, f1_arg1)
 					if f3_local0 then
@@ -120,7 +120,7 @@ CoD.LeaguePlayLeaderboard.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	})
 	local f1_local13 = self
 	local f1_local14 = self.subscribeToModel
-	local f1_local15 = Engine[0x8DF2E5447F384B9]()
+	local f1_local15 = Engine[@"getglobalmodel"]()
 	f1_local14(f1_local13, f1_local15["lobbyPlaylist.name"], function(f5_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -132,7 +132,7 @@ CoD.LeaguePlayLeaderboard.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	end, false)
 	f1_local13 = self
 	f1_local14 = self.subscribeToModel
-	f1_local15 = Engine[0x8DF2E5447F384B9]()
+	f1_local15 = Engine[@"getglobalmodel"]()
 	f1_local14(f1_local13, f1_local15["lobbyRoot.lobbyNav"], function(f6_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -144,7 +144,7 @@ CoD.LeaguePlayLeaderboard.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	end, false)
 	f1_local13 = self
 	f1_local14 = self.subscribeToModel
-	f1_local15 = Engine[0x8DF2E5447F384B9]()
+	f1_local15 = Engine[@"getglobalmodel"]()
 	f1_local14(f1_local13, f1_local15["LeaguePlayLadder.entityLadderRank"], function(f7_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

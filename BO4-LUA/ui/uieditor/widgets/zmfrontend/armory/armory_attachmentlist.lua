@@ -16,23 +16,23 @@ CoD.Armory_AttachmentList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	BlackGradientBG:setAlpha(0.3)
 	BlackGradientBG:setZRot(180)
 	BlackGradientBG:setZoom(10)
-	BlackGradientBG:setImage(RegisterImage(0x78A6742E3F9A2ED))
+	BlackGradientBG:setImage(RegisterImage(@"hash_78A6742E3F9A2ED"))
 	self:addElement(BlackGradientBG)
 	self.BlackGradientBG = BlackGradientBG
 	local TopLine = LUI.UIImage.new(0, 1.01, -3, -5, 0, 0, 31, 49)
 	TopLine:setAlpha(0.5)
 	TopLine:setZoom(10)
-	TopLine:setImage(RegisterImage(0xD55B3068BF9FD12))
-	TopLine:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	TopLine:setImage(RegisterImage(@"uie_ui_menu_cac_primary_button_top_line"))
+	TopLine:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(TopLine)
 	self.TopLine = TopLine
 	local AttachmentHeader = LUI.UIText.new(0.5, 0.5, -392.5, 392.5, 0, 0, -8, 10)
 	AttachmentHeader:setRGB(0.39, 0.39, 0.39)
-	AttachmentHeader:setText(Engine[0xF9F1239CFD921FE](0x56E6F15BA89EEED))
+	AttachmentHeader:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_56E6F15BA89EEED"))
 	AttachmentHeader:setTTF("ttmussels_demibold")
 	AttachmentHeader:setLetterSpacing(4)
-	AttachmentHeader:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	AttachmentHeader:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	AttachmentHeader:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	AttachmentHeader:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(AttachmentHeader)
 	self.AttachmentHeader = AttachmentHeader
 	local Attachments = LUI.UIList.new(f1_arg0, f1_arg1, 15, 0, nil, false, false, false, false)
@@ -43,35 +43,35 @@ CoD.Armory_AttachmentList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	Attachments:setHorizontalCount(4)
 	Attachments:setVerticalCount(2)
 	Attachments:setSpacing(15)
-	Attachments:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	Attachments:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	Attachments:setFilter(function(f2_arg0)
-		return f2_arg0.attachmentGroup:get() ~= Enum[0x7420BCDBDE17A84][0x6AC43DB9B6634DA]
+		return f2_arg0.attachmentGroup:get() ~= Enum[@"eattachmentgroup"][@"attachment_group_optic"]
 	end)
 	Attachments:setDataSource("ArmoryWeaponAttachments")
 	Attachments:linkToElementModel(Attachments, "itemIndex", true, function(model, f3_arg1)
-		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_none"])
 	end)
 	local f1_local5 = Attachments
 	local ArmoryAttachmentPipContainer = Attachments.subscribeToModel
-	local f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
 	ArmoryAttachmentPipContainer(f1_local5, f1_local7.armoryAttachmentUpdated, function(f4_arg0, f4_arg1)
-		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_none"])
 	end, false)
 	Attachments:appendEventHandler("input_source_changed", function(f5_arg0, f5_arg1)
 		f5_arg1.menu = f5_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f5_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f5_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(f5_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f5_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_none"])
 	end)
 	f1_local5 = Attachments
 	ArmoryAttachmentPipContainer = Attachments.subscribeToModel
-	f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
 	ArmoryAttachmentPipContainer(f1_local5, f1_local7.LastInput, function(f6_arg0, f6_arg1)
-		CoD.Menu.UpdateButtonShownState(f6_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f6_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(f6_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f6_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_none"])
 	end, false)
 	Attachments:registerEventHandler("list_item_gain_focus", function(element, event)
 		local f7_local0 = nil
@@ -96,12 +96,12 @@ CoD.Armory_AttachmentList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 		elseif element.super.gainFocus then
 			f10_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_none"])
 		return f10_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(Attachments, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(Attachments, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if not IsListElementChildInState(element, "AttachmentSlot", "NotAvailable") and not CoD.ZMLoadoutUtility.IsArmoryAttachmentItemLocked(menu, element, controller) and not CoD.ZMLoadoutUtility.IsArmoryElementAttachmentEquipped(element, controller, menu) and CoD.ZMLoadoutUtility.CanArmoryElementAttachmentBeEquipped(element, controller, menu) then
 			CoD.ZMLoadoutUtility.EquipArmoryElementAttachment(element, controller, menu)
 			return true
@@ -115,19 +115,19 @@ CoD.Armory_AttachmentList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 		end
 	end, function(element, menu, controller)
 		if not IsListElementChildInState(element, "AttachmentSlot", "NotAvailable") and not CoD.ZMLoadoutUtility.IsArmoryAttachmentItemLocked(menu, element, controller) and not CoD.ZMLoadoutUtility.IsArmoryElementAttachmentEquipped(element, controller, menu) and CoD.ZMLoadoutUtility.CanArmoryElementAttachmentBeEquipped(element, controller, menu) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		elseif IsPC() and not IsListElementChildInState(element, "AttachmentSlot", "NotAvailable") and not CoD.ZMLoadoutUtility.IsArmoryAttachmentItemLocked(menu, element, controller) and CoD.ZMLoadoutUtility.CanArmoryElementAttachmentBeEquipped(element, controller, menu) and not CoD.ZMLoadoutUtility.IsArmoryElementAttachmentEquipped(element, controller, menu) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		elseif IsPC() and not IsListElementChildInState(element, "AttachmentSlot", "NotAvailable") and CoD.ZMLoadoutUtility.IsArmoryElementAttachmentEquipped(element, controller, menu) and not CoD.ZMLoadoutUtility.IsArmoryAttachmentItemLocked(menu, element, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(Attachments, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(Attachments, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], nil, function(element, menu, controller, model)
 		if IsGamepad(controller) and CoD.ZMLoadoutUtility.IsArmoryElementAttachmentEquipped(element, controller, menu) then
 			CoD.ZMLoadoutUtility.RemoveArmoryElementAttachment(element, controller, menu)
 			return true
@@ -135,13 +135,13 @@ CoD.Armory_AttachmentList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 		end
 	end, function(element, menu, controller)
 		if IsGamepad(controller) and CoD.ZMLoadoutUtility.IsArmoryElementAttachmentEquipped(element, controller, menu) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x679ACA6FFC6C8F3, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"menu/remove", nil, nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(Attachments, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "ui_remove", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(Attachments, f1_arg1, Enum[@"luibutton"][@"lui_key_none"], "ui_remove", function(element, menu, controller, model)
 		if IsMouseOrKeyboard(controller) and CoD.ZMLoadoutUtility.IsArmoryElementAttachmentEquipped(element, controller, menu) then
 			CoD.ZMLoadoutUtility.RemoveArmoryElementAttachment(element, controller, menu)
 			return true
@@ -149,7 +149,7 @@ CoD.Armory_AttachmentList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 		end
 	end, function(element, menu, controller)
 		if IsMouseOrKeyboard(controller) and CoD.ZMLoadoutUtility.IsArmoryElementAttachmentEquipped(element, controller, menu) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "ui_remove")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "ui_remove")
 			return false
 		else
 			return false

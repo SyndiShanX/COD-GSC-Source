@@ -8,9 +8,9 @@ CoD.ZMAARTimeText.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local MatchTimeText = LUI.UIText.new(1, 1, -200, 0, 0, 0, 0, 33)
-	MatchTimeText:setText(LocalizeToUpperString(0xBD36CB2DA85CF8C))
+	MatchTimeText:setText(LocalizeToUpperString(@"hash_2BD36CB2DA85CF8C"))
 	MatchTimeText:setTTF("skorzhen")
-	MatchTimeText:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
+	MatchTimeText:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
 	self:addElement(MatchTimeText)
 	self.MatchTimeText = MatchTimeText
 	self:mergeStateConditions({
@@ -35,7 +35,7 @@ CoD.ZMAARTimeText.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 	})
 	local f1_local2 = self
 	local f1_local3 = self.subscribeToModel
-	local f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local3(f1_local2, f1_local4["AAR.trialStats.isNewBestTime"], function(f5_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -54,8 +54,8 @@ CoD.ZMAARTimeText.__resetProperties = function(f6_arg0)
 	f6_arg0.MatchTimeText:completeAnimation()
 	f6_arg0.MatchTimeText:setLeftRight(1, 1, -200, 0)
 	f6_arg0.MatchTimeText:setAlpha(1)
-	f6_arg0.MatchTimeText:setText(LocalizeToUpperString(0xBD36CB2DA85CF8C))
-	f6_arg0.MatchTimeText:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
+	f6_arg0.MatchTimeText:setText(LocalizeToUpperString(@"hash_2BD36CB2DA85CF8C"))
+	f6_arg0.MatchTimeText:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
 end
 CoD.ZMAARTimeText.__clipsPerState = {
 	DefaultState = {
@@ -71,9 +71,9 @@ CoD.ZMAARTimeText.__clipsPerState = {
 			f8_arg0.MatchTimeText:completeAnimation()
 			f8_arg0.MatchTimeText:setLeftRight(0, 0, -33, 200)
 			f8_arg0.MatchTimeText:setAlpha(1)
-			f8_arg0.MatchTimeText:setText(LocalizeToUpperString(0x6EDD470FE48F6F9))
-			f8_arg0.MatchTimeText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-			f8_arg0.MatchTimeText:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+			f8_arg0.MatchTimeText:setText(LocalizeToUpperString(@"hash_26EDD470FE48F6F9"))
+			f8_arg0.MatchTimeText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+			f8_arg0.MatchTimeText:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 			f8_arg0.clipFinished(f8_arg0.MatchTimeText)
 		end,
 	},
@@ -84,9 +84,9 @@ CoD.ZMAARTimeText.__clipsPerState = {
 			f9_arg0.MatchTimeText:completeAnimation()
 			f9_arg0.MatchTimeText:setLeftRight(0, 0, -33, 200)
 			f9_arg0.MatchTimeText:setAlpha(1)
-			f9_arg0.MatchTimeText:setText(LocalizeToUpperString(0x6EDD470FE48F6F9))
-			f9_arg0.MatchTimeText:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
-			f9_arg0.MatchTimeText:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+			f9_arg0.MatchTimeText:setText(LocalizeToUpperString(@"hash_26EDD470FE48F6F9"))
+			f9_arg0.MatchTimeText:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
+			f9_arg0.MatchTimeText:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 			f9_arg0.clipFinished(f9_arg0.MatchTimeText)
 		end,
 	},
@@ -95,7 +95,7 @@ CoD.ZMAARTimeText.__clipsPerState = {
 			f10_arg0:__resetProperties()
 			f10_arg0:setupElementClipCounter(1)
 			f10_arg0.MatchTimeText:completeAnimation()
-			f10_arg0.MatchTimeText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+			f10_arg0.MatchTimeText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 			f10_arg0.clipFinished(f10_arg0.MatchTimeText)
 		end,
 	},

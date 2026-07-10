@@ -32,7 +32,7 @@ CoD.StoreCategoryButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	itemName:linkToElementModel(self, "categoryNameRefXhash", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			itemName.itemName:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			itemName.itemName:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	self:addElement(itemName)
@@ -131,7 +131,7 @@ CoD.StoreCategoryButton.__clipsPerState = {
 			f11_arg0:__resetProperties()
 			f11_arg0:setupElementClipCounter(2)
 			local f11_local0 = function(f12_arg0)
-				f11_arg0.itemImageBg:beginAnimation(200, Enum[0xF50FFF429AB1890][0xE99F3A6467FC0CA] | Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f11_arg0.itemImageBg:beginAnimation(200, Enum[@"luitween"][@"luitween_back"] | Enum[@"luitween"][@"luitween_ease_out"])
 				f11_arg0.itemImageBg:registerEventHandler("interrupted_keyframe", f11_arg0.clipInterrupted)
 				f11_arg0.itemImageBg:registerEventHandler("transition_complete_keyframe", f11_arg0.clipFinished)
 			end

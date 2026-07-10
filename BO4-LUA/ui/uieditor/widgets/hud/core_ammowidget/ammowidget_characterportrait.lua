@@ -9,7 +9,7 @@ CoD.AmmoWidget_CharacterPortrait.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Healing = LUI.UIImage.new(0.5, 0.5, -38, 38, 0.5, 0.5, -27.5, 27.5)
 	Healing:setAlpha(0)
-	Healing:setMaterial(LUI.UIImage.GetCachedMaterial(0xE8F55203998700A))
+	Healing:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_feather_blend"))
 	Healing:subscribeToGlobalModel(f1_arg1, "CharacterSelection", "characterIndex", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -20,7 +20,7 @@ CoD.AmmoWidget_CharacterPortrait.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	self.Healing = Healing
 	local Wounded = LUI.UIImage.new(0.5, 0.5, -38, 38, 0.5, 0.5, -27.5, 27.5)
 	Wounded:setAlpha(0)
-	Wounded:setMaterial(LUI.UIImage.GetCachedMaterial(0xE8F55203998700A))
+	Wounded:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_feather_blend"))
 	Wounded:subscribeToGlobalModel(f1_arg1, "CharacterSelection", "characterIndex", function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -31,7 +31,7 @@ CoD.AmmoWidget_CharacterPortrait.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	self.Wounded = Wounded
 	local Buffed = LUI.UIImage.new(0.5, 0.5, -38, 38, 0.5, 0.5, -27.5, 27.5)
 	Buffed:setAlpha(0)
-	Buffed:setMaterial(LUI.UIImage.GetCachedMaterial(0xE8F55203998700A))
+	Buffed:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_feather_blend"))
 	Buffed:subscribeToGlobalModel(f1_arg1, "CharacterSelection", "characterIndex", function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
@@ -52,7 +52,7 @@ CoD.AmmoWidget_CharacterPortrait.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	self.Critical = Critical
 	local Normal = LUI.UIImage.new(0.5, 0.5, -38, 38, 0.5, 0.5, -27.5, 27.5)
 	Normal:setAlpha(0)
-	Normal:setMaterial(LUI.UIImage.GetCachedMaterial(0xE8F55203998700A))
+	Normal:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_feather_blend"))
 	Normal:subscribeToGlobalModel(f1_arg1, "CharacterSelection", "characterIndex", function(model)
 		local f6_local0 = model:get()
 		if f6_local0 ~= nil then

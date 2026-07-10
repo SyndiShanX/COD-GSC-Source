@@ -22,16 +22,16 @@ CoD.Prestige_LevelContentWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self.BodyBacker = BodyBacker
 	local NoiseTiledBacking = LUI.UIImage.new(0, 0, 128, 1230, 0, 0, -40, 522)
 	NoiseTiledBacking:setAlpha(0.5)
-	NoiseTiledBacking:setImage(RegisterImage(0x34839E8065B1E53))
-	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	NoiseTiledBacking:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	NoiseTiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	NoiseTiledBacking:setupNineSliceShader(196, 88)
 	self:addElement(NoiseTiledBacking)
 	self.NoiseTiledBacking = NoiseTiledBacking
 	local NoiseTiledBackingAdd = LUI.UIImage.new(0, 0, 128, 1230, 0, 0, 506, 522)
 	NoiseTiledBackingAdd:setAlpha(0.5)
-	NoiseTiledBackingAdd:setImage(RegisterImage(0x34839E8065B1E53))
-	NoiseTiledBackingAdd:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	NoiseTiledBackingAdd:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	NoiseTiledBackingAdd:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	NoiseTiledBackingAdd:setShaderVector(0, 0, 0, 0, 0)
 	NoiseTiledBackingAdd:setupNineSliceShader(196, 88)
 	self:addElement(NoiseTiledBackingAdd)
@@ -39,17 +39,17 @@ CoD.Prestige_LevelContentWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	local RewardsTitle = LUI.UIText.new(0, 0, 30, 1328, 0, 0, -34, -9)
 	RewardsTitle:setRGB(0.92, 0.92, 0.92)
 	RewardsTitle:setAlpha(0.5)
-	RewardsTitle:setText(LocalizeToUpperString(0xD9F7FF213498C55))
+	RewardsTitle:setText(LocalizeToUpperString(@"menu/level_content"))
 	RewardsTitle:setTTF("ttmussels_regular")
 	RewardsTitle:setLetterSpacing(2)
-	RewardsTitle:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	RewardsTitle:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	RewardsTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	RewardsTitle:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	self:addElement(RewardsTitle)
 	self.RewardsTitle = RewardsTitle
 	local DotGrid = LUI.UIImage.new(0, 0, 128, 1230, 0, 0, 0, 506)
 	DotGrid:setAlpha(0.01)
-	DotGrid:setImage(RegisterImage(0x6975DA716B3A3FD))
-	DotGrid:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	DotGrid:setImage(RegisterImage(@"uie_ui_menu_aar_info_grid_sub"))
+	DotGrid:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	DotGrid:setShaderVector(0, 0, 0, 0, 0)
 	DotGrid:setupNineSliceShader(292, 236)
 	self:addElement(DotGrid)
@@ -86,7 +86,7 @@ CoD.Prestige_LevelContentWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	WLRewardList:setWidgetType(CoD.Prestige_WLRewardsWidget)
 	WLRewardList:setHorizontalCount(8)
 	WLRewardList:setSpacing(6)
-	WLRewardList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	WLRewardList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	WLRewardList:setDataSource("WorldLeagueRankInfo")
 	self:addElement(WLRewardList)
 	self.WLRewardList = WLRewardList
@@ -97,7 +97,7 @@ CoD.Prestige_LevelContentWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	WZRewardsList:setWidgetType(CoD.Prestige_WZRewardsWidget)
 	WZRewardsList:setHorizontalCount(8)
 	WZRewardsList:setSpacing(6)
-	WZRewardsList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	WZRewardsList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	WZRewardsList:setDataSource("PrestigeRankInfo")
 	self:addElement(WZRewardsList)
 	self.WZRewardsList = WZRewardsList
@@ -107,7 +107,7 @@ CoD.Prestige_LevelContentWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	RewardsList:setWidgetType(CoD.Prestige_LevelRewardsWidget)
 	RewardsList:setHorizontalCount(8)
 	RewardsList:setSpacing(6)
-	RewardsList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	RewardsList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	RewardsList:setDataSource("PrestigeRankInfo")
 	RewardsList:subscribeToGlobalModel(f1_arg1, "GlobalModel", "RefreshDWInventoryMenu", function(model)
 		UpdateDataSource(self, RewardsList, f1_arg1)
@@ -118,43 +118,43 @@ CoD.Prestige_LevelContentWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self:addElement(RewardsList)
 	self.RewardsList = RewardsList
 	local LeftTriggerText = LUI.UIText.new(0, 0, 79.5, 124.5, 0, 0, 0, 37)
-	LeftTriggerText:setText(Engine[0xF9F1239CFD921FE](0xBA3A27E061CC812))
+	LeftTriggerText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/l_trigger"))
 	LeftTriggerText:setTTF("default")
-	LeftTriggerText:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
-	LeftTriggerText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	LeftTriggerText:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
+	LeftTriggerText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(LeftTriggerText)
 	self.LeftTriggerText = LeftTriggerText
 	local RightTriggerText = LUI.UIText.new(0, 0, 1230, 1275, 0, 0, -0.5, 36.5)
-	RightTriggerText:setText(Engine[0xF9F1239CFD921FE](0x2B144B0EB22E484))
+	RightTriggerText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/r_trigger"))
 	RightTriggerText:setTTF("default")
-	RightTriggerText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	RightTriggerText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	RightTriggerText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	RightTriggerText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(RightTriggerText)
 	self.RightTriggerText = RightTriggerText
 	local ArrowL = LUI.UIImage.new(0, 0, 124.5, 156.5, 0, 0, -3, 39)
-	ArrowL:setImage(RegisterImage(0xA70A9A6629BB835))
-	ArrowL:setMaterial(LUI.UIImage.GetCachedMaterial(0xF755127C95CF5B6))
+	ArrowL:setImage(RegisterImage(@"uie_ui_menu_item_shop_tier_pointer"))
+	ArrowL:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_F755127C95CF5B6"))
 	ArrowL:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(ArrowL)
 	self.ArrowL = ArrowL
 	local dotlineR = LUI.UIImage.new(0, 0, 146, 1212, 0, 0, -6, -2)
 	dotlineR:setAlpha(0.2)
-	dotlineR:setImage(RegisterImage(0xF9C7F41C631866E))
-	dotlineR:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	dotlineR:setImage(RegisterImage(@"uie_ui_menu_social_emblem_dotline"))
+	dotlineR:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	dotlineR:setShaderVector(0, 1.2, 0, 0, 0)
 	self:addElement(dotlineR)
 	self.dotlineR = dotlineR
 	local ArrowR = LUI.UIImage.new(0, 0, 1233.5, 1201.5, 0, 0, -3, 39)
-	ArrowR:setImage(RegisterImage(0xA70A9A6629BB835))
-	ArrowR:setMaterial(LUI.UIImage.GetCachedMaterial(0xF755127C95CF5B6))
+	ArrowR:setImage(RegisterImage(@"uie_ui_menu_item_shop_tier_pointer"))
+	ArrowR:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_F755127C95CF5B6"))
 	ArrowR:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(ArrowR)
 	self.ArrowR = ArrowR
 	local infoBracketTop = LUI.UIImage.new(0, 0, 126.5, 1230.5, 0, 0, -41, -33)
 	infoBracketTop:setAlpha(0.05)
 	infoBracketTop:setZRot(180)
-	infoBracketTop:setImage(RegisterImage(0xC325BED3F226657))
-	infoBracketTop:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	infoBracketTop:setImage(RegisterImage(@"hash_4C325BED3F226657"))
+	infoBracketTop:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	infoBracketTop:setShaderVector(0, 0, 0, 0, 0)
 	infoBracketTop:setupNineSliceShader(16, 4)
 	self:addElement(infoBracketTop)
@@ -203,7 +203,7 @@ CoD.Prestige_LevelContentWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	end)
 	local f1_local21 = self
 	local f1_local22 = self.subscribeToModel
-	local f1_local23 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local23 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local22(f1_local21, f1_local23.LastInput, function(f10_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -215,7 +215,7 @@ CoD.Prestige_LevelContentWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	end, false)
 	f1_local21 = self
 	f1_local22 = self.subscribeToModel
-	f1_local23 = Engine[0x8DF2E5447F384B9]()
+	f1_local23 = Engine[@"getglobalmodel"]()
 	f1_local22(f1_local21, f1_local23["lobbyRoot.lobbyNav"], function(f11_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -328,11 +328,11 @@ CoD.Prestige_LevelContentWidget.__clipsPerState = {
 						f17_arg0:beginAnimation(500)
 						f17_arg0:registerEventHandler("transition_complete_keyframe", f14_arg0.clipFinished)
 					end
-					f16_arg0:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f16_arg0:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 					f16_arg0:setAlpha(1)
 					f16_arg0:registerEventHandler("transition_complete_keyframe", f16_local0)
 				end
-				f14_arg0.LeftTriggerText:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f14_arg0.LeftTriggerText:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 				f14_arg0.LeftTriggerText:setAlpha(0.5)
 				f14_arg0.LeftTriggerText:registerEventHandler("interrupted_keyframe", f14_arg0.clipInterrupted)
 				f14_arg0.LeftTriggerText:registerEventHandler("transition_complete_keyframe", f15_local0)
@@ -346,11 +346,11 @@ CoD.Prestige_LevelContentWidget.__clipsPerState = {
 						f20_arg0:beginAnimation(500)
 						f20_arg0:registerEventHandler("transition_complete_keyframe", f14_arg0.clipFinished)
 					end
-					f19_arg0:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f19_arg0:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 					f19_arg0:setAlpha(1)
 					f19_arg0:registerEventHandler("transition_complete_keyframe", f19_local0)
 				end
-				f14_arg0.RightTriggerText:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f14_arg0.RightTriggerText:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 				f14_arg0.RightTriggerText:setAlpha(0.5)
 				f14_arg0.RightTriggerText:registerEventHandler("interrupted_keyframe", f14_arg0.clipInterrupted)
 				f14_arg0.RightTriggerText:registerEventHandler("transition_complete_keyframe", f18_local0)
@@ -364,11 +364,11 @@ CoD.Prestige_LevelContentWidget.__clipsPerState = {
 						f23_arg0:beginAnimation(500)
 						f23_arg0:registerEventHandler("transition_complete_keyframe", f14_arg0.clipFinished)
 					end
-					f22_arg0:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f22_arg0:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 					f22_arg0:setShaderVector(0, 1, 0, 0, 0)
 					f22_arg0:registerEventHandler("transition_complete_keyframe", f22_local0)
 				end
-				f14_arg0.ArrowL:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f14_arg0.ArrowL:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 				f14_arg0.ArrowL:setShaderVector(0, 2, 0, 0, 0)
 				f14_arg0.ArrowL:registerEventHandler("interrupted_keyframe", f14_arg0.clipInterrupted)
 				f14_arg0.ArrowL:registerEventHandler("transition_complete_keyframe", f21_local0)
@@ -382,11 +382,11 @@ CoD.Prestige_LevelContentWidget.__clipsPerState = {
 						f26_arg0:beginAnimation(500)
 						f26_arg0:registerEventHandler("transition_complete_keyframe", f14_arg0.clipFinished)
 					end
-					f25_arg0:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f25_arg0:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 					f25_arg0:setShaderVector(0, 1, 0, 0, 0)
 					f25_arg0:registerEventHandler("transition_complete_keyframe", f25_local0)
 				end
-				f14_arg0.ArrowR:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f14_arg0.ArrowR:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 				f14_arg0.ArrowR:setShaderVector(0, 2, 0, 0, 0)
 				f14_arg0.ArrowR:registerEventHandler("interrupted_keyframe", f14_arg0.clipInterrupted)
 				f14_arg0.ArrowR:registerEventHandler("transition_complete_keyframe", f24_local0)
@@ -471,11 +471,11 @@ CoD.Prestige_LevelContentWidget.__clipsPerState = {
 						f31_arg0:beginAnimation(500)
 						f31_arg0:registerEventHandler("transition_complete_keyframe", f28_arg0.clipFinished)
 					end
-					f30_arg0:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f30_arg0:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 					f30_arg0:setAlpha(1)
 					f30_arg0:registerEventHandler("transition_complete_keyframe", f30_local0)
 				end
-				f28_arg0.LeftTriggerText:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f28_arg0.LeftTriggerText:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 				f28_arg0.LeftTriggerText:setAlpha(0.5)
 				f28_arg0.LeftTriggerText:registerEventHandler("interrupted_keyframe", f28_arg0.clipInterrupted)
 				f28_arg0.LeftTriggerText:registerEventHandler("transition_complete_keyframe", f29_local0)
@@ -490,11 +490,11 @@ CoD.Prestige_LevelContentWidget.__clipsPerState = {
 						f34_arg0:beginAnimation(500)
 						f34_arg0:registerEventHandler("transition_complete_keyframe", f28_arg0.clipFinished)
 					end
-					f33_arg0:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f33_arg0:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 					f33_arg0:setAlpha(1)
 					f33_arg0:registerEventHandler("transition_complete_keyframe", f33_local0)
 				end
-				f28_arg0.RightTriggerText:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f28_arg0.RightTriggerText:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 				f28_arg0.RightTriggerText:setAlpha(0.5)
 				f28_arg0.RightTriggerText:registerEventHandler("interrupted_keyframe", f28_arg0.clipInterrupted)
 				f28_arg0.RightTriggerText:registerEventHandler("transition_complete_keyframe", f32_local0)
@@ -509,11 +509,11 @@ CoD.Prestige_LevelContentWidget.__clipsPerState = {
 						f37_arg0:beginAnimation(500)
 						f37_arg0:registerEventHandler("transition_complete_keyframe", f28_arg0.clipFinished)
 					end
-					f36_arg0:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f36_arg0:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 					f36_arg0:setShaderVector(0, 1, 0, 0, 0)
 					f36_arg0:registerEventHandler("transition_complete_keyframe", f36_local0)
 				end
-				f28_arg0.ArrowL:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f28_arg0.ArrowL:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 				f28_arg0.ArrowL:setShaderVector(0, 2, 0, 0, 0)
 				f28_arg0.ArrowL:registerEventHandler("interrupted_keyframe", f28_arg0.clipInterrupted)
 				f28_arg0.ArrowL:registerEventHandler("transition_complete_keyframe", f35_local0)
@@ -527,11 +527,11 @@ CoD.Prestige_LevelContentWidget.__clipsPerState = {
 						f40_arg0:beginAnimation(500)
 						f40_arg0:registerEventHandler("transition_complete_keyframe", f28_arg0.clipFinished)
 					end
-					f39_arg0:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f39_arg0:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 					f39_arg0:setShaderVector(0, 1, 0, 0, 0)
 					f39_arg0:registerEventHandler("transition_complete_keyframe", f39_local0)
 				end
-				f28_arg0.ArrowR:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f28_arg0.ArrowR:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 				f28_arg0.ArrowR:setShaderVector(0, 2, 0, 0, 0)
 				f28_arg0.ArrowR:registerEventHandler("interrupted_keyframe", f28_arg0.clipInterrupted)
 				f28_arg0.ArrowR:registerEventHandler("transition_complete_keyframe", f38_local0)
@@ -625,11 +625,11 @@ CoD.Prestige_LevelContentWidget.__clipsPerState = {
 						f45_arg0:beginAnimation(500)
 						f45_arg0:registerEventHandler("transition_complete_keyframe", f42_arg0.clipFinished)
 					end
-					f44_arg0:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f44_arg0:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 					f44_arg0:setAlpha(1)
 					f44_arg0:registerEventHandler("transition_complete_keyframe", f44_local0)
 				end
-				f42_arg0.LeftTriggerText:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f42_arg0.LeftTriggerText:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 				f42_arg0.LeftTriggerText:setAlpha(0.5)
 				f42_arg0.LeftTriggerText:registerEventHandler("interrupted_keyframe", f42_arg0.clipInterrupted)
 				f42_arg0.LeftTriggerText:registerEventHandler("transition_complete_keyframe", f43_local0)
@@ -644,11 +644,11 @@ CoD.Prestige_LevelContentWidget.__clipsPerState = {
 						f48_arg0:beginAnimation(500)
 						f48_arg0:registerEventHandler("transition_complete_keyframe", f42_arg0.clipFinished)
 					end
-					f47_arg0:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f47_arg0:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 					f47_arg0:setAlpha(1)
 					f47_arg0:registerEventHandler("transition_complete_keyframe", f47_local0)
 				end
-				f42_arg0.RightTriggerText:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f42_arg0.RightTriggerText:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 				f42_arg0.RightTriggerText:setAlpha(0.5)
 				f42_arg0.RightTriggerText:registerEventHandler("interrupted_keyframe", f42_arg0.clipInterrupted)
 				f42_arg0.RightTriggerText:registerEventHandler("transition_complete_keyframe", f46_local0)
@@ -663,11 +663,11 @@ CoD.Prestige_LevelContentWidget.__clipsPerState = {
 						f51_arg0:beginAnimation(500)
 						f51_arg0:registerEventHandler("transition_complete_keyframe", f42_arg0.clipFinished)
 					end
-					f50_arg0:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f50_arg0:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 					f50_arg0:setShaderVector(0, 1, 0, 0, 0)
 					f50_arg0:registerEventHandler("transition_complete_keyframe", f50_local0)
 				end
-				f42_arg0.ArrowL:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f42_arg0.ArrowL:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 				f42_arg0.ArrowL:setShaderVector(0, 2, 0, 0, 0)
 				f42_arg0.ArrowL:registerEventHandler("interrupted_keyframe", f42_arg0.clipInterrupted)
 				f42_arg0.ArrowL:registerEventHandler("transition_complete_keyframe", f49_local0)
@@ -681,11 +681,11 @@ CoD.Prestige_LevelContentWidget.__clipsPerState = {
 						f54_arg0:beginAnimation(500)
 						f54_arg0:registerEventHandler("transition_complete_keyframe", f42_arg0.clipFinished)
 					end
-					f53_arg0:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f53_arg0:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 					f53_arg0:setShaderVector(0, 1, 0, 0, 0)
 					f53_arg0:registerEventHandler("transition_complete_keyframe", f53_local0)
 				end
-				f42_arg0.ArrowR:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f42_arg0.ArrowR:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 				f42_arg0.ArrowR:setShaderVector(0, 2, 0, 0, 0)
 				f42_arg0.ArrowR:registerEventHandler("interrupted_keyframe", f42_arg0.clipInterrupted)
 				f42_arg0.ArrowR:registerEventHandler("transition_complete_keyframe", f52_local0)

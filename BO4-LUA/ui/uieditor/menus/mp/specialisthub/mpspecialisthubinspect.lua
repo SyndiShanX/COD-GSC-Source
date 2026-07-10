@@ -13,7 +13,7 @@ CoD.MPSpecialistHUBInspect = InheritFrom(CoD.Menu)
 LUI.createMenu.MPSpecialistHUBInspect = function(f1_arg0, f1_arg1)
 	local self = CoD.Menu.NewForUIEditor("MPSpecialistHUBInspect", f1_arg0)
 	local f1_local1 = self
-	CoD.PlayerRoleUtility[0x2B307D12327547E](f1_arg0)
+	CoD.PlayerRoleUtility[@"hash_12B307D12327547E"](f1_arg0)
 	CoD.BaseUtility.SetPropertiesFromUserData(self, f1_arg1)
 	SendClientScriptMenuChangeNotify(f1_arg0, f1_local1, true)
 	CoD.BaseUtility.CreateControllerModel(f1_arg0, "PositionLoadoutList.SelectedCharacterIndex")
@@ -31,11 +31,11 @@ LUI.createMenu.MPSpecialistHUBInspect = function(f1_arg0, f1_arg1)
 	self.XCamMouseControl = XCamMouseControl
 	local BackingFrame = CoD.GenericMenuFrame.new(f1_local1, f1_arg0, 0, 1, 0, 0, 0, 1, 0, 0)
 	BackingFrame.CommonHeader.BGSceneBlur:setAlpha(1)
-	BackingFrame.CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(0x46EFDF3FB2763B5))
+	BackingFrame.CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(@"hash_246EFDF3FB2763B5"))
 	BackingFrame:subscribeToGlobalModel(f1_arg0, "LobbyRoot", "lobbyTitle", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			BackingFrame.CommonHeader.subtitle.subtitle:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			BackingFrame.CommonHeader.subtitle.subtitle:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	self:addElement(BackingFrame)
@@ -56,7 +56,7 @@ LUI.createMenu.MPSpecialistHUBInspect = function(f1_arg0, f1_arg1)
 	end)
 	local MouseWheelFocusable = RightArrow
 	local LeftArrow = RightArrow.subscribeToModel
-	local SpecialistName = Engine[0x4DF5CFBC1771947](f1_arg0)
+	local SpecialistName = Engine[@"getmodelforcontroller"](f1_arg0)
 	LeftArrow(MouseWheelFocusable, SpecialistName.LastInput, function(f5_arg0)
 		f1_local1:updateElementState(RightArrow, {
 			name = "model_validation",
@@ -66,8 +66,8 @@ LUI.createMenu.MPSpecialistHUBInspect = function(f1_arg0, f1_arg1)
 			modelName = "LastInput",
 		})
 	end, false)
-	RightArrow.KeyMouseImage:setImage(RegisterImage(0x5E74D00B45D12B6))
-	RightArrow.ControllerImage:setImage(RegisterImage(0x5E74D00B45D12B6))
+	RightArrow.KeyMouseImage:setImage(RegisterImage(@"uie_optionswidgets_arrow"))
+	RightArrow.ControllerImage:setImage(RegisterImage(@"uie_optionswidgets_arrow"))
 	RightArrow:registerEventHandler("gain_focus", function(element, event)
 		local f6_local0 = nil
 		if element.gainFocus then
@@ -75,14 +75,14 @@ LUI.createMenu.MPSpecialistHUBInspect = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f6_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_none"])
 		return f6_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(RightArrow, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "MOUSE1", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(RightArrow, f1_arg0, Enum[@"luibutton"][@"lui_key_none"], "MOUSE1", function(element, menu, controller, model)
 		CoD.GridAndListUtility.NavigateGridItemInChild(self.SpecialListTab, controller, "positions", true)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "MOUSE1")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "MOUSE1")
 		return false
 	end, false)
 	self:addElement(RightArrow)
@@ -103,7 +103,7 @@ LUI.createMenu.MPSpecialistHUBInspect = function(f1_arg0, f1_arg1)
 	end)
 	SpecialistName = LeftArrow
 	MouseWheelFocusable = LeftArrow.subscribeToModel
-	local JobTitle = Engine[0x4DF5CFBC1771947](f1_arg0)
+	local JobTitle = Engine[@"getmodelforcontroller"](f1_arg0)
 	MouseWheelFocusable(SpecialistName, JobTitle.LastInput, function(f11_arg0)
 		f1_local1:updateElementState(LeftArrow, {
 			name = "model_validation",
@@ -114,8 +114,8 @@ LUI.createMenu.MPSpecialistHUBInspect = function(f1_arg0, f1_arg1)
 		})
 	end, false)
 	LeftArrow:setZRot(180)
-	LeftArrow.KeyMouseImage:setImage(RegisterImage(0x5E74D00B45D12B6))
-	LeftArrow.ControllerImage:setImage(RegisterImage(0x5E74D00B45D12B6))
+	LeftArrow.KeyMouseImage:setImage(RegisterImage(@"uie_optionswidgets_arrow"))
+	LeftArrow.ControllerImage:setImage(RegisterImage(@"uie_optionswidgets_arrow"))
 	LeftArrow:registerEventHandler("gain_focus", function(element, event)
 		local f12_local0 = nil
 		if element.gainFocus then
@@ -123,14 +123,14 @@ LUI.createMenu.MPSpecialistHUBInspect = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f12_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_none"])
 		return f12_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(LeftArrow, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "MOUSE1", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(LeftArrow, f1_arg0, Enum[@"luibutton"][@"lui_key_none"], "MOUSE1", function(element, menu, controller, model)
 		CoD.GridAndListUtility.NavigateGridItemInChild(self.SpecialListTab, controller, "positions", false)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "MOUSE1")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "MOUSE1")
 		return false
 	end, false)
 	self:addElement(LeftArrow)
@@ -144,21 +144,21 @@ LUI.createMenu.MPSpecialistHUBInspect = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f15_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_none"])
 		return f15_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(MouseWheelFocusable, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "MWHEELUP", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(MouseWheelFocusable, f1_arg0, Enum[@"luibutton"][@"lui_key_none"], "MWHEELUP", function(element, menu, controller, model)
 		CoD.GridAndListUtility.NavigateGridItemInChild(self.SpecialListTab, controller, "positions", false)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "MWHEELUP")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "MWHEELUP")
 		return false
 	end, false)
-	f1_local1:AddButtonCallbackFunction(MouseWheelFocusable, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "MWHEELDOWN", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(MouseWheelFocusable, f1_arg0, Enum[@"luibutton"][@"lui_key_none"], "MWHEELDOWN", function(element, menu, controller, model)
 		CoD.GridAndListUtility.NavigateGridItemInChild(self.SpecialListTab, controller, "positions", true)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "MWHEELDOWN")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "MWHEELDOWN")
 		return false
 	end, false)
 	self:addElement(MouseWheelFocusable)
@@ -169,7 +169,7 @@ LUI.createMenu.MPSpecialistHUBInspect = function(f1_arg0, f1_arg1)
 	SpecialistName:setZoom(3)
 	SpecialistName:setTTF("ttmussels_regular")
 	SpecialistName:setLetterSpacing(10)
-	SpecialistName:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	SpecialistName:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	self:addElement(SpecialistName)
 	self.SpecialistName = SpecialistName
 	JobTitle = LUI.UIText.new(0.5, 0.5, -171, 171, 0, 0, 781, 801)
@@ -177,7 +177,7 @@ LUI.createMenu.MPSpecialistHUBInspect = function(f1_arg0, f1_arg1)
 	JobTitle:setZoom(3)
 	JobTitle:setTTF("ttmussels_regular")
 	JobTitle:setLetterSpacing(10)
-	JobTitle:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	JobTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	self:addElement(JobTitle)
 	self.JobTitle = JobTitle
 	local HubStatsButton = CoD.HubStatsButton.new(f1_local1, f1_arg0, 0.5, 0.5, 420, 813, 0, 0, 638.5, 815.5)
@@ -191,17 +191,17 @@ LUI.createMenu.MPSpecialistHUBInspect = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f20_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f20_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(HubWeaponsButton, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(HubWeaponsButton, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		PlaySoundAlias("uin_main_edit")
 		OpenOverlay(self, "MPSpecialistHUBWeapons", controller, {
 			_model = element:getModel(),
 		})
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 		return true
 	end, false)
 	self:addElement(HubWeaponsButton)
@@ -212,7 +212,7 @@ LUI.createMenu.MPSpecialistHUBInspect = function(f1_arg0, f1_arg1)
 	options:setWidgetType(CoD.SpecialistPersonalizationButtonOption)
 	options:setVerticalCount(4)
 	options:setSpacing(13)
-	options:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	options:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	options:setDataSource("MPSpecialistHUBOptions")
 	options:registerEventHandler("gain_focus", function(element, event)
 		local f23_local0 = nil
@@ -221,15 +221,15 @@ LUI.createMenu.MPSpecialistHUBInspect = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f23_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f23_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(options, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(options, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		PlaySoundAlias("uin_toggle_generic")
 		ProcessListAction(self, element, controller, menu)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 		return true
 	end, false)
 	options:subscribeToGlobalModel(f1_arg0, "PerController", "PositionLoadoutList.SelectedCharacterIndex", function(model)
@@ -275,19 +275,19 @@ LUI.createMenu.MPSpecialistHUBInspect = function(f1_arg0, f1_arg1)
 	HubWeaponsButton:linkToElementModel(SpecialListTab.positions, nil, false, function(model)
 		HubWeaponsButton:setModel(model, f1_arg0)
 	end)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		GoBack(self, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 		return true
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], "ui_contextual_2", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], "ui_contextual_2", function(element, menu, controller, model)
 		PlaySoundAlias("uin_main_edit")
 		OpenOverlay(self, "MPSpecialistHUBPreviewMoment", controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x52FB29ED3A3CA79, nil, "ui_contextual_2")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"menu/preview", nil, "ui_contextual_2")
 		return true
 	end, false)
 	LUI.OverrideFunction_CallOriginalFirst(self, "close", function(element)
@@ -353,7 +353,7 @@ CoD.MPSpecialistHUBInspect.__clipsPerState = {
 			f38_arg0:setupElementClipCounter(3)
 			local f38_local0 = function(f39_arg0)
 				local f39_local0 = function(f40_arg0)
-					f40_arg0:beginAnimation(150, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f40_arg0:beginAnimation(150, Enum[@"luitween"][@"luitween_ease_out"])
 					f40_arg0:setAlpha(1)
 					f40_arg0:registerEventHandler("transition_complete_keyframe", f38_arg0.clipFinished)
 				end
@@ -379,7 +379,7 @@ CoD.MPSpecialistHUBInspect.__clipsPerState = {
 			f38_local1(f38_arg0.HubWeaponsButton)
 			local f38_local2 = function(f43_arg0)
 				local f43_local0 = function(f44_arg0)
-					f44_arg0:beginAnimation(150, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f44_arg0:beginAnimation(150, Enum[@"luitween"][@"luitween_ease_both"])
 					f44_arg0:setAlpha(1)
 					f44_arg0:registerEventHandler("transition_complete_keyframe", f38_arg0.clipFinished)
 				end

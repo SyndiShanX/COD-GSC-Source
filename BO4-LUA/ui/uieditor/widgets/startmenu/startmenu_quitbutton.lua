@@ -58,22 +58,22 @@ CoD.StartMenu_QuitButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 		f1_arg0:updateElementState(HoldButtonFill, f5_arg1)
 	end)
 	HoldButtonFill:setAlpha(0)
-	HoldButtonFill:linkToElementModel(self, "" .. Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], false, function(model)
+	HoldButtonFill:linkToElementModel(self, "" .. Enum[@"luibutton"][@"lui_key_xba_pscross"], false, function(model)
 		HoldButtonFill:setModel(model, f1_arg1)
 	end)
 	self:addElement(HoldButtonFill)
 	self.HoldButtonFill = HoldButtonFill
 	local TextBox = LUI.UIText.new(0, 0, 0, 250, 0, 0, 34, 58)
 	TextBox:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
-	TextBox:setText(LocalizeToUpperString(0xD6D98060CE88B87))
+	TextBox:setText(LocalizeToUpperString(@"menu/quit_game"))
 	TextBox:setTTF("ttmussels_demibold")
-	TextBox:setMaterial(LUI.UIImage.GetCachedMaterial(0xAE166D9BA8C6907))
+	TextBox:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_2AE166D9BA8C6907"))
 	TextBox:setShaderVector(0, 0, 0, 0, 0)
 	TextBox:setShaderVector(1, 0, 0, 0, 0)
 	TextBox:setShaderVector(2, 1, 0, 0, 0)
 	TextBox:setLetterSpacing(3)
-	TextBox:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	TextBox:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	TextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	TextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(TextBox)
 	self.TextBox = TextBox
 	self:mergeStateConditions({
@@ -106,7 +106,7 @@ CoD.StartMenu_QuitButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	end)
 	local f1_local4 = self
 	local f1_local5 = self.subscribeToModel
-	local f1_local6 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local6 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local5(f1_local4, f1_local6.LastInput, function(f11_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

@@ -8,7 +8,7 @@ CoD.Tak5ReticleBracketRuler.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local ReticleBotRuler = LUI.UIImage.new(0, 0, 0, 362, 0, 0, 0, 18)
-	ReticleBotRuler:setImage(RegisterImage(0xEFFFC10064131AD))
+	ReticleBotRuler:setImage(RegisterImage(@"uie_ui_hud_tak5_reticle_bot_ruler"))
 	self:addElement(ReticleBotRuler)
 	self.ReticleBotRuler = ReticleBotRuler
 	if PostLoadFunc then

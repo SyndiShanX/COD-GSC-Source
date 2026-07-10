@@ -29,7 +29,7 @@ LUI.createMenu.FileshareOptions_Delete = function(f1_arg0, f1_arg1)
 	})
 	local FileshareSelectedItemPreview = FullscreenPopupTemplate0
 	local buttons = FullscreenPopupTemplate0.subscribeToModel
-	local f1_local5 = Engine[0x8DF2E5447F384B9]()
+	local f1_local5 = Engine[@"getglobalmodel"]()
 	buttons(FileshareSelectedItemPreview, f1_local5["fileshareRoot.deleteTask.state"], function(f4_arg0)
 		f1_local1:updateElementState(FullscreenPopupTemplate0, {
 			name = "model_validation",
@@ -40,11 +40,11 @@ LUI.createMenu.FileshareOptions_Delete = function(f1_arg0, f1_arg1)
 		})
 	end, false)
 	FullscreenPopupTemplate0.ButtonList:setDataSource("FileshareOptionsDeleteButtonList")
-	FullscreenPopupTemplate0.Subtitle:setText(Engine[0xF9F1239CFD921FE](0xE14B8D67CB9DA83))
-	FullscreenPopupTemplate0.ErrorSubtitle:setText(Engine[0xF9F1239CFD921FE](0xA4F6521ABCD39B3))
-	FullscreenPopupTemplate0.WorkingTitle:setText(Engine[0xF9F1239CFD921FE](0x8873C1F9EB8F341))
-	FullscreenPopupTemplate0.Title:setText(Engine[0xF9F1239CFD921FE](0x310C36882644FC9))
-	FullscreenPopupTemplate0.DoneTitle:setText(Engine[0xF9F1239CFD921FE](0x961E616AE14B756))
+	FullscreenPopupTemplate0.Subtitle:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_E14B8D67CB9DA83"))
+	FullscreenPopupTemplate0.ErrorSubtitle:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_A4F6521ABCD39B3"))
+	FullscreenPopupTemplate0.WorkingTitle:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_18873C1F9EB8F341"))
+	FullscreenPopupTemplate0.Title:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_2310C36882644FC9"))
+	FullscreenPopupTemplate0.DoneTitle:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_1961E616AE14B756"))
 	self:addElement(FullscreenPopupTemplate0)
 	self.FullscreenPopupTemplate0 = FullscreenPopupTemplate0
 	buttons = CoD.fe_LeftContainer_NOTLobby.new(f1_local1, f1_arg0, 0.5, 0.5, -811, -163, 0.5, 0.5, 258, 306)
@@ -56,22 +56,22 @@ LUI.createMenu.FileshareOptions_Delete = function(f1_arg0, f1_arg1)
 	end)
 	self:addElement(FileshareSelectedItemPreview)
 	self.FileshareSelectedItemPreview = FileshareSelectedItemPreview
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		GoBack(self, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 		return true
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ENTER", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ENTER", function(element, menu, controller, model)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ENTER")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ENTER")
 		return false
 	end, false)
 	self:subscribeToGlobalModel(f1_arg0, "GlobalModel", "fileshareRoot.deleteTask.state", function(model)
 		local f10_local0 = self
-		if CoD.ModelUtility.IsGlobalModelValueEqualToEnum("fileshareRoot.deleteTask.state", Enum[0xE798E99E27D081E][0xFE5B3BE5B00EEEA]) then
+		if CoD.ModelUtility.IsGlobalModelValueEqualToEnum("fileshareRoot.deleteTask.state", Enum[@"filesharetaskuistate"][@"fileshare_task_ui_done"]) then
 			CoD.FileshareUtility.DeleteDone(self, f10_local0, f1_arg0, "", f1_local1)
 			GoBackToMenu(f1_local1, f1_arg0, "Theater_SelectFilm")
 		end
@@ -97,7 +97,7 @@ LUI.createMenu.FileshareOptions_Delete = function(f1_arg0, f1_arg1)
 	f1_local5 = self
 	f1_local5 = FullscreenPopupTemplate0
 	if IsPC() then
-		CoD.PCUtility.LinkPCSmallCloseButtonToInput(f1_local1, f1_arg0, f1_local5, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A])
+		CoD.PCUtility.LinkPCSmallCloseButtonToInput(f1_local1, f1_arg0, f1_local5, Enum[@"luibutton"][@"lui_key_xbb_pscircle"])
 	end
 	return self
 end

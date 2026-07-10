@@ -24,12 +24,12 @@ CoD.MPSpecialistHUBBindWheel_SafeAreaContainer.new = function(f1_arg0, f1_arg1, 
 	self.FooterContainerFrontendRight = FooterContainerFrontendRight
 	local CommonHeader = CoD.CommonHeader.new(f1_arg0, f1_arg1, 0, 1, 0, 0, 0, 0, 0, 67)
 	CommonHeader.BGSceneBlur:setAlpha(0)
-	CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(0xBB7AA7A26F39DFA))
+	CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(@"hash_BB7AA7A26F39DFA"))
 	CommonHeader.subtitle.subtitle:setAlpha(0)
 	CommonHeader:subscribeToGlobalModel(f1_arg1, "LobbyRoot", "lobbyTitle", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			CommonHeader.subtitle.subtitle:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			CommonHeader.subtitle.subtitle:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	self:addElement(CommonHeader)
@@ -45,7 +45,7 @@ CoD.MPSpecialistHUBBindWheel_SafeAreaContainer.new = function(f1_arg0, f1_arg1, 
 	})
 	local HeaderStripe = CommonTabBarLeftAlign
 	local CommonIdentityWidgetStreamlinedSafeAreaContainer = CommonTabBarLeftAlign.subscribeToModel
-	local f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
 	CommonIdentityWidgetStreamlinedSafeAreaContainer(HeaderStripe, f1_local7["PersonalizationCategories.showPersonalizationTabs"], function(f4_arg0)
 		f1_arg0:updateElementState(CommonTabBarLeftAlign, {
 			name = "model_validation",

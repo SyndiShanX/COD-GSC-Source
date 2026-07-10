@@ -26,30 +26,30 @@ CoD.EmblemEditorColorMixer.new = function(f3_arg0, f3_arg1, f3_arg2, f3_arg3, f3
 	self.anyChildUsesUpdateState = true
 	local Backing = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	Backing:setAlpha(0.5)
-	Backing:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	Backing:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	Backing:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(Backing)
 	self.Backing = Backing
 	local NoiseTiledBacking = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	NoiseTiledBacking:setAlpha(0.5)
-	NoiseTiledBacking:setImage(RegisterImage(0x34839E8065B1E53))
-	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	NoiseTiledBacking:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	NoiseTiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	NoiseTiledBacking:setupNineSliceShader(196, 88)
 	self:addElement(NoiseTiledBacking)
 	self.NoiseTiledBacking = NoiseTiledBacking
 	local BotTiledBackingAdd = LUI.UIImage.new(0, 1, 0, 0, 0.85, 1, 0, 0)
 	BotTiledBackingAdd:setAlpha(0.1)
-	BotTiledBackingAdd:setImage(RegisterImage(0x34839E8065B1E53))
-	BotTiledBackingAdd:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	BotTiledBackingAdd:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	BotTiledBackingAdd:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	BotTiledBackingAdd:setShaderVector(0, 0, 0, 0, 0)
 	BotTiledBackingAdd:setupNineSliceShader(196, 88)
 	self:addElement(BotTiledBackingAdd)
 	self.BotTiledBackingAdd = BotTiledBackingAdd
 	local Frame = LUI.UIImage.new(0, 1, -1, 1, 0, 1, -1, 1)
 	Frame:setAlpha(0.2)
-	Frame:setImage(RegisterImage(0x185E11D74ECA3D7))
-	Frame:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	Frame:setImage(RegisterImage(@"uie_ui_menu_store_common_frame"))
+	Frame:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	Frame:setShaderVector(0, 0, 0, 0, 0)
 	Frame:setupNineSliceShader(16, 16)
 	self:addElement(Frame)
@@ -67,8 +67,8 @@ CoD.EmblemEditorColorMixer.new = function(f3_arg0, f3_arg1, f3_arg2, f3_arg3, f3
 	local blueColorValue = LUI.UIText.new(0, 0, 811, 858, 0, 0, 162, 188)
 	blueColorValue:setTTF("dinnext_regular")
 	blueColorValue:setLetterSpacing(1)
-	blueColorValue:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	blueColorValue:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	blueColorValue:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	blueColorValue:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	blueColorValue:linkToElementModel(self, "blue", true, function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
@@ -80,8 +80,8 @@ CoD.EmblemEditorColorMixer.new = function(f3_arg0, f3_arg1, f3_arg2, f3_arg3, f3
 	local greenColorValue = LUI.UIText.new(0, 0, 811, 858, 0, 0, 95.5, 120.5)
 	greenColorValue:setTTF("dinnext_regular")
 	greenColorValue:setLetterSpacing(1)
-	greenColorValue:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	greenColorValue:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	greenColorValue:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	greenColorValue:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	greenColorValue:linkToElementModel(self, "green", true, function(model)
 		local f5_local0 = model:get()
 		if f5_local0 ~= nil then
@@ -93,8 +93,8 @@ CoD.EmblemEditorColorMixer.new = function(f3_arg0, f3_arg1, f3_arg2, f3_arg3, f3
 	local redColorValue = LUI.UIText.new(0, 0, 811, 858, 0, 0, 26, 51)
 	redColorValue:setTTF("dinnext_regular")
 	redColorValue:setLetterSpacing(1)
-	redColorValue:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	redColorValue:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	redColorValue:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	redColorValue:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	redColorValue:linkToElementModel(self, "red", true, function(model)
 		local f6_local0 = model:get()
 		if f6_local0 ~= nil then
@@ -117,48 +117,48 @@ CoD.EmblemEditorColorMixer.new = function(f3_arg0, f3_arg1, f3_arg2, f3_arg3, f3
 	self.ColorCornerPips = ColorCornerPips
 	local ColorFrame = LUI.UIImage.new(0, 0, 20.5, 73.5, 0, 0, 23.5, 186.5)
 	ColorFrame:setAlpha(0.5)
-	ColorFrame:setImage(RegisterImage(0x185E11D74ECA3D7))
-	ColorFrame:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	ColorFrame:setImage(RegisterImage(@"uie_ui_menu_store_common_frame"))
+	ColorFrame:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	ColorFrame:setShaderVector(0, 0, 0, 0, 0)
 	ColorFrame:setupNineSliceShader(4, 4)
 	self:addElement(ColorFrame)
 	self.ColorFrame = ColorFrame
 	local redColor = LUI.UIText.new(0, 0, 107.5, 227.5, 0, 0, 24.5, 51.5)
 	redColor:setRGB(0.92, 0.92, 0.92)
-	redColor:setText(LocalizeToUpperString(0xD6726B93C89AA3D))
+	redColor:setText(LocalizeToUpperString(@"hash_7D6726B93C89AA3D"))
 	redColor:setTTF("ttmussels_regular")
 	redColor:setLetterSpacing(2)
-	redColor:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	redColor:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(redColor)
 	self.redColor = redColor
 	local greenColor = LUI.UIText.new(0, 0, 107.5, 227.5, 0, 0, 93.5, 120.5)
 	greenColor:setRGB(0.92, 0.92, 0.92)
-	greenColor:setText(LocalizeToUpperString(0xBCBD80A292877C1))
+	greenColor:setText(LocalizeToUpperString(@"hash_1BCBD80A292877C1"))
 	greenColor:setTTF("ttmussels_regular")
 	greenColor:setLetterSpacing(2)
-	greenColor:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	greenColor:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(greenColor)
 	self.greenColor = greenColor
 	local blueColor = LUI.UIText.new(0, 0, 107.5, 227.5, 0, 0, 161, 188)
 	blueColor:setRGB(0.92, 0.92, 0.92)
-	blueColor:setText(LocalizeToUpperString(0x714D845DAF54E6E))
+	blueColor:setText(LocalizeToUpperString(@"hash_2714D845DAF54E6E"))
 	blueColor:setTTF("ttmussels_regular")
 	blueColor:setLetterSpacing(2)
-	blueColor:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	blueColor:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(blueColor)
 	self.blueColor = blueColor
 	local redBar = CoD.EmblemEditorColorMixerBar.new(f3_arg0, f3_arg1, 0, 0, 221, 773, 0, 0, 27.5, 47.5)
 	local blueBar = redBar
 	local greenBar = redBar.subscribeToModel
-	local toggleSolidColorButton = Engine[0x4DF5CFBC1771947](f3_arg1)
+	local toggleSolidColorButton = Engine[@"getmodelforcontroller"](f3_arg1)
 	greenBar(blueBar, toggleSolidColorButton["Emblem.EmblemProperties.isGradientMode"], function(f8_arg0, f8_arg1)
-		CoD.Menu.UpdateButtonShownState(f8_arg1, f3_arg0, f3_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f8_arg1, f3_arg0, f3_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	blueBar = redBar
 	greenBar = redBar.subscribeToModel
-	toggleSolidColorButton = Engine[0x4DF5CFBC1771947](f3_arg1)
+	toggleSolidColorButton = Engine[@"getmodelforcontroller"](f3_arg1)
 	greenBar(blueBar, toggleSolidColorButton["Emblem.EmblemProperties.colorMode"], function(f9_arg0, f9_arg1)
-		CoD.Menu.UpdateButtonShownState(f9_arg1, f3_arg0, f3_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f9_arg1, f3_arg0, f3_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	redBar:registerEventHandler("gain_focus", function(element, event)
 		local f10_local0 = nil
@@ -167,42 +167,42 @@ CoD.EmblemEditorColorMixer.new = function(f3_arg0, f3_arg1, f3_arg2, f3_arg3, f3
 		elseif element.super.gainFocus then
 			f10_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f3_arg0, f3_arg1, Enum[0x3DD78803F918E9D][0x57783F8DA4AAEF])
-		CoD.Menu.UpdateButtonShownState(element, f3_arg0, f3_arg1, Enum[0x3DD78803F918E9D][0x571F08AD84807E0])
-		CoD.Menu.UpdateButtonShownState(element, f3_arg0, f3_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f3_arg0, f3_arg1, Enum[@"luibutton"][@"lui_key_left"])
+		CoD.Menu.UpdateButtonShownState(element, f3_arg0, f3_arg1, Enum[@"luibutton"][@"lui_key_right"])
+		CoD.Menu.UpdateButtonShownState(element, f3_arg0, f3_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f10_local0
 	end)
-	f3_arg0:AddButtonCallbackFunction(redBar, f3_arg1, Enum[0x3DD78803F918E9D][0x57783F8DA4AAEF], nil, function(element, menu, controller, model)
+	f3_arg0:AddButtonCallbackFunction(redBar, f3_arg1, Enum[@"luibutton"][@"lui_key_left"], nil, function(element, menu, controller, model)
 		CoD.CraftUtility.EmblemChooseColor_DecrementColorComponent(self, element, controller, "red")
 		PlaySoundSetSound(self, "manipulate_slider")
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x57783F8DA4AAEF], 0x0, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_left"], @"hash_0", nil, nil)
 		return false
 	end, false)
-	f3_arg0:AddButtonCallbackFunction(redBar, f3_arg1, Enum[0x3DD78803F918E9D][0x571F08AD84807E0], nil, function(element, menu, controller, model)
+	f3_arg0:AddButtonCallbackFunction(redBar, f3_arg1, Enum[@"luibutton"][@"lui_key_right"], nil, function(element, menu, controller, model)
 		CoD.CraftUtility.EmblemChooseColor_IncrementColorComponent(self, element, controller, "red")
 		PlaySoundSetSound(self, "manipulate_slider")
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x571F08AD84807E0], 0x0, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_right"], @"hash_0", nil, nil)
 		return false
 	end, false)
-	f3_arg0:AddButtonCallbackFunction(redBar, f3_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
-		if CoD.ModelUtility.IsModelValueEqualTo(controller, "Emblem.EmblemProperties.isGradientMode", 1) and not CoD.ModelUtility.IsModelValueEqualToEnum(controller, "Emblem.EmblemProperties.colorMode", Enum[0xC594B064FEDD0D6][0x8F7F4A0A6A3678B]) then
+	f3_arg0:AddButtonCallbackFunction(redBar, f3_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
+		if CoD.ModelUtility.IsModelValueEqualTo(controller, "Emblem.EmblemProperties.isGradientMode", 1) and not CoD.ModelUtility.IsModelValueEqualToEnum(controller, "Emblem.EmblemProperties.colorMode", Enum[@"customizationcolormode"][@"customization_color_mode_none"]) then
 			CoD.CraftUtility.EmblemGradient_BackFromColorPicker(self, element, menu, controller)
 			return true
-		elseif CoD.ModelUtility.IsModelValueEqualTo(controller, "Emblem.EmblemProperties.isGradientMode", 1) and CoD.ModelUtility.IsModelValueEqualToEnum(controller, "Emblem.EmblemProperties.colorMode", Enum[0xC594B064FEDD0D6][0x8F7F4A0A6A3678B]) then
+		elseif CoD.ModelUtility.IsModelValueEqualTo(controller, "Emblem.EmblemProperties.isGradientMode", 1) and CoD.ModelUtility.IsModelValueEqualToEnum(controller, "Emblem.EmblemProperties.colorMode", Enum[@"customizationcolormode"][@"customization_color_mode_none"]) then
 			CoD.CraftUtility.EmblemGradient_ShowSwatchContainer(self, element, menu, controller)
 			return true
 		else
 		end
 	end, function(element, menu, controller)
-		if CoD.ModelUtility.IsModelValueEqualTo(controller, "Emblem.EmblemProperties.isGradientMode", 1) and not CoD.ModelUtility.IsModelValueEqualToEnum(controller, "Emblem.EmblemProperties.colorMode", Enum[0xC594B064FEDD0D6][0x8F7F4A0A6A3678B]) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+		if CoD.ModelUtility.IsModelValueEqualTo(controller, "Emblem.EmblemProperties.isGradientMode", 1) and not CoD.ModelUtility.IsModelValueEqualToEnum(controller, "Emblem.EmblemProperties.colorMode", Enum[@"customizationcolormode"][@"customization_color_mode_none"]) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
-		elseif CoD.ModelUtility.IsModelValueEqualTo(controller, "Emblem.EmblemProperties.isGradientMode", 1) and CoD.ModelUtility.IsModelValueEqualToEnum(controller, "Emblem.EmblemProperties.colorMode", Enum[0xC594B064FEDD0D6][0x8F7F4A0A6A3678B]) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+		elseif CoD.ModelUtility.IsModelValueEqualTo(controller, "Emblem.EmblemProperties.isGradientMode", 1) and CoD.ModelUtility.IsModelValueEqualToEnum(controller, "Emblem.EmblemProperties.colorMode", Enum[@"customizationcolormode"][@"customization_color_mode_none"]) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		else
 			return false
@@ -213,15 +213,15 @@ CoD.EmblemEditorColorMixer.new = function(f3_arg0, f3_arg1, f3_arg2, f3_arg3, f3
 	greenBar = CoD.EmblemEditorColorMixerBar.new(f3_arg0, f3_arg1, 0, 0, 221, 773, 0, 0, 96.5, 116.5)
 	toggleSolidColorButton = greenBar
 	blueBar = greenBar.subscribeToModel
-	local dividerH = Engine[0x4DF5CFBC1771947](f3_arg1)
+	local dividerH = Engine[@"getmodelforcontroller"](f3_arg1)
 	blueBar(toggleSolidColorButton, dividerH["Emblem.EmblemProperties.isGradientMode"], function(f17_arg0, f17_arg1)
-		CoD.Menu.UpdateButtonShownState(f17_arg1, f3_arg0, f3_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f17_arg1, f3_arg0, f3_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	toggleSolidColorButton = greenBar
 	blueBar = greenBar.subscribeToModel
-	dividerH = Engine[0x4DF5CFBC1771947](f3_arg1)
+	dividerH = Engine[@"getmodelforcontroller"](f3_arg1)
 	blueBar(toggleSolidColorButton, dividerH["Emblem.EmblemProperties.colorMode"], function(f18_arg0, f18_arg1)
-		CoD.Menu.UpdateButtonShownState(f18_arg1, f3_arg0, f3_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f18_arg1, f3_arg0, f3_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	greenBar:registerEventHandler("gain_focus", function(element, event)
 		local f19_local0 = nil
@@ -230,42 +230,42 @@ CoD.EmblemEditorColorMixer.new = function(f3_arg0, f3_arg1, f3_arg2, f3_arg3, f3
 		elseif element.super.gainFocus then
 			f19_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f3_arg0, f3_arg1, Enum[0x3DD78803F918E9D][0x57783F8DA4AAEF])
-		CoD.Menu.UpdateButtonShownState(element, f3_arg0, f3_arg1, Enum[0x3DD78803F918E9D][0x571F08AD84807E0])
-		CoD.Menu.UpdateButtonShownState(element, f3_arg0, f3_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f3_arg0, f3_arg1, Enum[@"luibutton"][@"lui_key_left"])
+		CoD.Menu.UpdateButtonShownState(element, f3_arg0, f3_arg1, Enum[@"luibutton"][@"lui_key_right"])
+		CoD.Menu.UpdateButtonShownState(element, f3_arg0, f3_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f19_local0
 	end)
-	f3_arg0:AddButtonCallbackFunction(greenBar, f3_arg1, Enum[0x3DD78803F918E9D][0x57783F8DA4AAEF], nil, function(element, menu, controller, model)
+	f3_arg0:AddButtonCallbackFunction(greenBar, f3_arg1, Enum[@"luibutton"][@"lui_key_left"], nil, function(element, menu, controller, model)
 		CoD.CraftUtility.EmblemChooseColor_DecrementColorComponent(self, element, controller, "green")
 		PlaySoundSetSound(self, "manipulate_slider")
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x57783F8DA4AAEF], 0x0, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_left"], @"hash_0", nil, nil)
 		return false
 	end, false)
-	f3_arg0:AddButtonCallbackFunction(greenBar, f3_arg1, Enum[0x3DD78803F918E9D][0x571F08AD84807E0], nil, function(element, menu, controller, model)
+	f3_arg0:AddButtonCallbackFunction(greenBar, f3_arg1, Enum[@"luibutton"][@"lui_key_right"], nil, function(element, menu, controller, model)
 		CoD.CraftUtility.EmblemChooseColor_IncrementColorComponent(self, element, controller, "green")
 		PlaySoundSetSound(self, "manipulate_slider")
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x571F08AD84807E0], 0x0, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_right"], @"hash_0", nil, nil)
 		return false
 	end, false)
-	f3_arg0:AddButtonCallbackFunction(greenBar, f3_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
-		if CoD.ModelUtility.IsModelValueEqualTo(controller, "Emblem.EmblemProperties.isGradientMode", 1) and not CoD.ModelUtility.IsModelValueEqualToEnum(controller, "Emblem.EmblemProperties.colorMode", Enum[0xC594B064FEDD0D6][0x8F7F4A0A6A3678B]) then
+	f3_arg0:AddButtonCallbackFunction(greenBar, f3_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
+		if CoD.ModelUtility.IsModelValueEqualTo(controller, "Emblem.EmblemProperties.isGradientMode", 1) and not CoD.ModelUtility.IsModelValueEqualToEnum(controller, "Emblem.EmblemProperties.colorMode", Enum[@"customizationcolormode"][@"customization_color_mode_none"]) then
 			CoD.CraftUtility.EmblemGradient_BackFromColorPicker(self, element, menu, controller)
 			return true
-		elseif CoD.ModelUtility.IsModelValueEqualTo(controller, "Emblem.EmblemProperties.isGradientMode", 1) and CoD.ModelUtility.IsModelValueEqualToEnum(controller, "Emblem.EmblemProperties.colorMode", Enum[0xC594B064FEDD0D6][0x8F7F4A0A6A3678B]) then
+		elseif CoD.ModelUtility.IsModelValueEqualTo(controller, "Emblem.EmblemProperties.isGradientMode", 1) and CoD.ModelUtility.IsModelValueEqualToEnum(controller, "Emblem.EmblemProperties.colorMode", Enum[@"customizationcolormode"][@"customization_color_mode_none"]) then
 			CoD.CraftUtility.EmblemGradient_ShowSwatchContainer(self, element, menu, controller)
 			return true
 		else
 		end
 	end, function(element, menu, controller)
-		if CoD.ModelUtility.IsModelValueEqualTo(controller, "Emblem.EmblemProperties.isGradientMode", 1) and not CoD.ModelUtility.IsModelValueEqualToEnum(controller, "Emblem.EmblemProperties.colorMode", Enum[0xC594B064FEDD0D6][0x8F7F4A0A6A3678B]) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+		if CoD.ModelUtility.IsModelValueEqualTo(controller, "Emblem.EmblemProperties.isGradientMode", 1) and not CoD.ModelUtility.IsModelValueEqualToEnum(controller, "Emblem.EmblemProperties.colorMode", Enum[@"customizationcolormode"][@"customization_color_mode_none"]) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
-		elseif CoD.ModelUtility.IsModelValueEqualTo(controller, "Emblem.EmblemProperties.isGradientMode", 1) and CoD.ModelUtility.IsModelValueEqualToEnum(controller, "Emblem.EmblemProperties.colorMode", Enum[0xC594B064FEDD0D6][0x8F7F4A0A6A3678B]) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+		elseif CoD.ModelUtility.IsModelValueEqualTo(controller, "Emblem.EmblemProperties.isGradientMode", 1) and CoD.ModelUtility.IsModelValueEqualToEnum(controller, "Emblem.EmblemProperties.colorMode", Enum[@"customizationcolormode"][@"customization_color_mode_none"]) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		else
 			return false
@@ -276,15 +276,15 @@ CoD.EmblemEditorColorMixer.new = function(f3_arg0, f3_arg1, f3_arg2, f3_arg3, f3
 	blueBar = CoD.EmblemEditorColorMixerBar.new(f3_arg0, f3_arg1, 0, 0, 221, 773, 0, 0, 163.5, 183.5)
 	dividerH = blueBar
 	toggleSolidColorButton = blueBar.subscribeToModel
-	local dividerV = Engine[0x4DF5CFBC1771947](f3_arg1)
+	local dividerV = Engine[@"getmodelforcontroller"](f3_arg1)
 	toggleSolidColorButton(dividerH, dividerV["Emblem.EmblemProperties.isGradientMode"], function(f26_arg0, f26_arg1)
-		CoD.Menu.UpdateButtonShownState(f26_arg1, f3_arg0, f3_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f26_arg1, f3_arg0, f3_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	dividerH = blueBar
 	toggleSolidColorButton = blueBar.subscribeToModel
-	dividerV = Engine[0x4DF5CFBC1771947](f3_arg1)
+	dividerV = Engine[@"getmodelforcontroller"](f3_arg1)
 	toggleSolidColorButton(dividerH, dividerV["Emblem.EmblemProperties.colorMode"], function(f27_arg0, f27_arg1)
-		CoD.Menu.UpdateButtonShownState(f27_arg1, f3_arg0, f3_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f27_arg1, f3_arg0, f3_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	blueBar:registerEventHandler("gain_focus", function(element, event)
 		local f28_local0 = nil
@@ -293,42 +293,42 @@ CoD.EmblemEditorColorMixer.new = function(f3_arg0, f3_arg1, f3_arg2, f3_arg3, f3
 		elseif element.super.gainFocus then
 			f28_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f3_arg0, f3_arg1, Enum[0x3DD78803F918E9D][0x57783F8DA4AAEF])
-		CoD.Menu.UpdateButtonShownState(element, f3_arg0, f3_arg1, Enum[0x3DD78803F918E9D][0x571F08AD84807E0])
-		CoD.Menu.UpdateButtonShownState(element, f3_arg0, f3_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f3_arg0, f3_arg1, Enum[@"luibutton"][@"lui_key_left"])
+		CoD.Menu.UpdateButtonShownState(element, f3_arg0, f3_arg1, Enum[@"luibutton"][@"lui_key_right"])
+		CoD.Menu.UpdateButtonShownState(element, f3_arg0, f3_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f28_local0
 	end)
-	f3_arg0:AddButtonCallbackFunction(blueBar, f3_arg1, Enum[0x3DD78803F918E9D][0x57783F8DA4AAEF], nil, function(element, menu, controller, model)
+	f3_arg0:AddButtonCallbackFunction(blueBar, f3_arg1, Enum[@"luibutton"][@"lui_key_left"], nil, function(element, menu, controller, model)
 		CoD.CraftUtility.EmblemChooseColor_DecrementColorComponent(self, element, controller, "blue")
 		PlaySoundSetSound(self, "manipulate_slider")
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x57783F8DA4AAEF], 0x0, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_left"], @"hash_0", nil, nil)
 		return false
 	end, false)
-	f3_arg0:AddButtonCallbackFunction(blueBar, f3_arg1, Enum[0x3DD78803F918E9D][0x571F08AD84807E0], nil, function(element, menu, controller, model)
+	f3_arg0:AddButtonCallbackFunction(blueBar, f3_arg1, Enum[@"luibutton"][@"lui_key_right"], nil, function(element, menu, controller, model)
 		CoD.CraftUtility.EmblemChooseColor_IncrementColorComponent(self, element, controller, "blue")
 		PlaySoundSetSound(self, "manipulate_slider")
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x571F08AD84807E0], 0x0, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_right"], @"hash_0", nil, nil)
 		return false
 	end, false)
-	f3_arg0:AddButtonCallbackFunction(blueBar, f3_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
-		if CoD.ModelUtility.IsModelValueEqualTo(controller, "Emblem.EmblemProperties.isGradientMode", 1) and not CoD.ModelUtility.IsModelValueEqualToEnum(controller, "Emblem.EmblemProperties.colorMode", Enum[0xC594B064FEDD0D6][0x8F7F4A0A6A3678B]) then
+	f3_arg0:AddButtonCallbackFunction(blueBar, f3_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
+		if CoD.ModelUtility.IsModelValueEqualTo(controller, "Emblem.EmblemProperties.isGradientMode", 1) and not CoD.ModelUtility.IsModelValueEqualToEnum(controller, "Emblem.EmblemProperties.colorMode", Enum[@"customizationcolormode"][@"customization_color_mode_none"]) then
 			CoD.CraftUtility.EmblemGradient_BackFromColorPicker(self, element, menu, controller)
 			return true
-		elseif CoD.ModelUtility.IsModelValueEqualTo(controller, "Emblem.EmblemProperties.isGradientMode", 1) and CoD.ModelUtility.IsModelValueEqualToEnum(controller, "Emblem.EmblemProperties.colorMode", Enum[0xC594B064FEDD0D6][0x8F7F4A0A6A3678B]) then
+		elseif CoD.ModelUtility.IsModelValueEqualTo(controller, "Emblem.EmblemProperties.isGradientMode", 1) and CoD.ModelUtility.IsModelValueEqualToEnum(controller, "Emblem.EmblemProperties.colorMode", Enum[@"customizationcolormode"][@"customization_color_mode_none"]) then
 			CoD.CraftUtility.EmblemGradient_ShowSwatchContainer(self, element, menu, controller)
 			return true
 		else
 		end
 	end, function(element, menu, controller)
-		if CoD.ModelUtility.IsModelValueEqualTo(controller, "Emblem.EmblemProperties.isGradientMode", 1) and not CoD.ModelUtility.IsModelValueEqualToEnum(controller, "Emblem.EmblemProperties.colorMode", Enum[0xC594B064FEDD0D6][0x8F7F4A0A6A3678B]) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+		if CoD.ModelUtility.IsModelValueEqualTo(controller, "Emblem.EmblemProperties.isGradientMode", 1) and not CoD.ModelUtility.IsModelValueEqualToEnum(controller, "Emblem.EmblemProperties.colorMode", Enum[@"customizationcolormode"][@"customization_color_mode_none"]) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
-		elseif CoD.ModelUtility.IsModelValueEqualTo(controller, "Emblem.EmblemProperties.isGradientMode", 1) and CoD.ModelUtility.IsModelValueEqualToEnum(controller, "Emblem.EmblemProperties.colorMode", Enum[0xC594B064FEDD0D6][0x8F7F4A0A6A3678B]) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+		elseif CoD.ModelUtility.IsModelValueEqualTo(controller, "Emblem.EmblemProperties.isGradientMode", 1) and CoD.ModelUtility.IsModelValueEqualToEnum(controller, "Emblem.EmblemProperties.colorMode", Enum[@"customizationcolormode"][@"customization_color_mode_none"]) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		else
 			return false
@@ -357,7 +357,7 @@ CoD.EmblemEditorColorMixer.new = function(f3_arg0, f3_arg1, f3_arg2, f3_arg3, f3
 	end)
 	dividerV = toggleSolidColorButton
 	dividerH = toggleSolidColorButton.subscribeToModel
-	local FooterStripe1 = Engine[0x4DF5CFBC1771947](f3_arg1)
+	local FooterStripe1 = Engine[@"getmodelforcontroller"](f3_arg1)
 	dividerH(dividerV, FooterStripe1.LastInput, function(f38_arg0)
 		f3_arg0:updateElementState(toggleSolidColorButton, {
 			name = "model_validation",
@@ -367,7 +367,7 @@ CoD.EmblemEditorColorMixer.new = function(f3_arg0, f3_arg1, f3_arg2, f3_arg3, f3
 			modelName = "LastInput",
 		})
 	end, false)
-	toggleSolidColorButton.label:setText(Engine[0xF9F1239CFD921FE](0xC01001B9AF5D45E))
+	toggleSolidColorButton.label:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_4C01001B9AF5D45E"))
 	toggleSolidColorButton:subscribeToGlobalModel(f3_arg1, "Controller", "back_button_image", function(model)
 		local f39_local0 = model:get()
 		if f39_local0 ~= nil then
@@ -378,24 +378,24 @@ CoD.EmblemEditorColorMixer.new = function(f3_arg0, f3_arg1, f3_arg2, f3_arg3, f3
 	self.toggleSolidColorButton = toggleSolidColorButton
 	dividerH = LUI.UIImage.new(0, 0, 0, 880, 0, 0, 201, 205)
 	dividerH:setAlpha(0.2)
-	dividerH:setImage(RegisterImage(0x84B43D5B04D263A))
-	dividerH:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	dividerH:setImage(RegisterImage(@"hash_484B43D5B04D263A"))
+	dividerH:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	dividerH:setShaderVector(0, 0, 0, 0, 0)
 	dividerH:setupNineSliceShader(8, 4)
 	self:addElement(dividerH)
 	self.dividerH = dividerH
 	dividerV = LUI.UIImage.new(0, 0, 90, 94, 0, 0, 0, 202)
 	dividerV:setAlpha(0.1)
-	dividerV:setImage(RegisterImage(0xC49B0C8991A541F))
-	dividerV:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	dividerV:setImage(RegisterImage(@"hash_C49B0C8991A541F"))
+	dividerV:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	dividerV:setShaderVector(0, 0, 0, 0, 0)
 	dividerV:setupNineSliceShader(4, 8)
 	self:addElement(dividerV)
 	self.dividerV = dividerV
 	FooterStripe1 = LUI.UIImage.new(0, 1, 0, 0, 1, 1, -38, 0)
 	FooterStripe1:setAlpha(0.1)
-	FooterStripe1:setImage(RegisterImage(0xC7A051F5EFC70E5))
-	FooterStripe1:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	FooterStripe1:setImage(RegisterImage(@"hash_2C7A051F5EFC70E5"))
+	FooterStripe1:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	FooterStripe1:setShaderVector(0, 0, 0, 0, 0)
 	FooterStripe1:setupNineSliceShader(245, 40)
 	self:addElement(FooterStripe1)

@@ -10,13 +10,13 @@ CoD.PlayersListCountandMax.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local PlayersListCountAndMax = LUI.UIText.new(0, 0, 4, 302, 0, 0, 0, 21)
 	PlayersListCountAndMax.__String_Reference = function()
-		PlayersListCountAndMax:setText(Engine[0xF9F1239CFD921FE](CoD.LeaderboardUtility.PlayerListCountAndMax(0x6F5CB6FA437BAEF)))
+		PlayersListCountAndMax:setText(Engine[@"hash_4F9F1239CFD921FE"](CoD.LeaderboardUtility.PlayerListCountAndMax(@"hash_6F5CB6FA437BAEF")))
 	end
 	PlayersListCountAndMax.__String_Reference()
 	PlayersListCountAndMax:setTTF("ttmussels_regular")
 	PlayersListCountAndMax:setLineSpacing(4)
-	PlayersListCountAndMax:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	PlayersListCountAndMax:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	PlayersListCountAndMax:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	PlayersListCountAndMax:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(PlayersListCountAndMax)
 	self.PlayersListCountAndMax = PlayersListCountAndMax
 	local PlayerNumberFrame = CoD.StartMenuOptionsMainFrame.new(f1_arg0, f1_arg1, 0, 0, 0, 298, 1, 1, 0, 26)
@@ -26,7 +26,7 @@ CoD.PlayersListCountandMax.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self.PlayerNumberFrame = PlayerNumberFrame
 	local f1_local3 = PlayersListCountAndMax
 	local f1_local4 = PlayersListCountAndMax.subscribeToModel
-	local f1_local5 = Engine[0x8DF2E5447F384B9]()
+	local f1_local5 = Engine[@"getglobalmodel"]()
 	f1_local4(f1_local3, f1_local5["socialRoot.playersListCount"], PlayersListCountAndMax.__String_Reference)
 	self:mergeStateConditions({
 		{

@@ -16,7 +16,7 @@ CoD.ChatClientFilterList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	FiltersList:setWidgetType(CoD.ChatClientFilterList_Item)
 	FiltersList:setVerticalCount(8)
 	FiltersList:setSpacing(0)
-	FiltersList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	FiltersList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	FiltersList:setDataSource("ChatClientFiltersOptionsList")
 	self:addElement(FiltersList)
 	self.FiltersList = FiltersList

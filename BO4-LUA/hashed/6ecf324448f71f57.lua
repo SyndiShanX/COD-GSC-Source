@@ -10,7 +10,7 @@ CoD.ClassMiniPreviewAttachmentPip.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	local Backing = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	Backing:setRGB(0.58, 0.58, 0.59)
 	Backing:setScale(0.8, 0.8)
-	Backing:setImage(RegisterImage(0xBE5700B754DF5C1))
+	Backing:setImage(RegisterImage(@"uie_ui_menu_draft_attachment_pip"))
 	self:addElement(Backing)
 	self.Backing = Backing
 	if PostLoadFunc then

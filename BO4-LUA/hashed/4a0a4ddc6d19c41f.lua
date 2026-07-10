@@ -9,7 +9,7 @@ CoD.ReservesContentImage.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Image = LUI.UIFixedAspectRatioImage.new(0.5, 0.5, -146, 146, 0, 0, 0, 378)
-	Image:setMaterial(LUI.UIImage.GetCachedMaterial(0xA02C44161370F6D))
+	Image:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_1A02C44161370F6D"))
 	Image:setShaderVector(0, 0, 0, 0, 0)
 	Image:setShaderVector(1, 1, 1, 0, 0)
 	Image:setShaderVector(2, 0, 0, 0, 0)
@@ -24,7 +24,7 @@ CoD.ReservesContentImage.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	self.Image = Image
 	local Camo = LUI.UIImage.new(0, 0, 0, 292, 0, 0, 81.5, 296.5)
 	Camo:setAlpha(0)
-	Camo:setMaterial(LUI.UIImage.GetCachedMaterial(0xA02C44161370F6D))
+	Camo:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_1A02C44161370F6D"))
 	Camo:setShaderVector(0, 0.65, 0, 0, 0)
 	Camo:setShaderVector(1, 1, 1, 0, 0)
 	Camo:setShaderVector(2, 0, 0, 0, 0)
@@ -46,13 +46,13 @@ CoD.ReservesContentImage.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 		{
 			stateName = "CamoImage",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", 0xA40B9ADF060FA4A)
+				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", @"single_camo")
 			end,
 		},
 		{
 			stateName = "CharmOrDeathFX",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualToEitherValue(self, f1_arg1, "itemCategory", 0x73452998C43A16, 0xAD68520D53FDBFB)
+				return CoD.ModelUtility.IsSelfModelValueEqualToEitherValue(self, f1_arg1, "itemCategory", @"single_weapon_charm", @"hash_1AD68520D53FDBFB")
 			end,
 		},
 	})

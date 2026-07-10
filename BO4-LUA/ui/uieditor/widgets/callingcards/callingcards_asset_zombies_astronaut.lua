@@ -9,7 +9,7 @@ CoD.CallingCards_Asset_zombies_astronaut.new = function(f1_arg0, f1_arg1, f1_arg
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local astronaut = LUI.UIImage.new(0, 0, 0, 392, 0, 0, 0, 240)
-	astronaut:setImage(RegisterImage(0x1F1548BBF6B8059))
+	astronaut:setImage(RegisterImage(@"uie_ui_icon_callingcard_zombie_astronaut"))
 	self:addElement(astronaut)
 	self.astronaut = astronaut
 	local arm = CoD.CallingCards_Asset_zombies_arm.new(f1_arg0, f1_arg1, 0, 0, 249, 279, 0, 0, 138.5, 168.5)
@@ -32,11 +32,11 @@ CoD.CallingCards_Asset_zombies_astronaut.__clipsPerState = {
 			f3_arg0:setupElementClipCounter(1)
 			local f3_local0 = function(f4_arg0)
 				local f4_local0 = function(f5_arg0)
-					f5_arg0:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f5_arg0:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_out"])
 					f5_arg0:setZRot(0)
 					f5_arg0:registerEventHandler("transition_complete_keyframe", f3_arg0.clipFinished)
 				end
-				f3_arg0.arm:beginAnimation(2000, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f3_arg0.arm:beginAnimation(2000, Enum[@"luitween"][@"luitween_ease_out"])
 				f3_arg0.arm:setZRot(-18)
 				f3_arg0.arm:registerEventHandler("interrupted_keyframe", f3_arg0.clipInterrupted)
 				f3_arg0.arm:registerEventHandler("transition_complete_keyframe", f4_local0)

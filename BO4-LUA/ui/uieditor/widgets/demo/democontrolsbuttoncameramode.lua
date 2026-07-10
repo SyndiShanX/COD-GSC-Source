@@ -3,17 +3,17 @@ require("x64:4fb5d5732c72812")
 require("x64:2675595fa323085")
 local PostLoadFunc = function(self, controller, menu)
 	self.mode:subscribeToGlobalModel(controller, "Demo", "cameraMode", function(model)
-		local f2_local0 = Engine[0x614D394F6F9A18D](model)
+		local f2_local0 = Engine[@"getmodelvalue"](model)
 		if f2_local0 then
-			local f2_local1 = 0x3EF6A41762515E9
-			if f2_local0 == Enum[0xF432DF404208022][0x448CED16817146D] then
-				f2_local1 = 0xD52B52EF950D3EF
-			elseif f2_local0 == Enum[0xF432DF404208022][0xFCA80C27FBE8269] then
-				f2_local1 = 0x134DF9F49965B8C
-			elseif f2_local0 == Enum[0xF432DF404208022][0x3B1995A6E46FA28] then
-				f2_local1 = 0xBBB247300B3AE21
+			local f2_local1 = @"mp/unknown"
+			if f2_local0 == Enum[@"democameramode"][@"demo_camera_mode_none"] then
+				f2_local1 = @"hash_7D52B52EF950D3EF"
+			elseif f2_local0 == Enum[@"democameramode"][@"demo_camera_mode_thirdperson"] then
+				f2_local1 = @"hash_2134DF9F49965B8C"
+			elseif f2_local0 == Enum[@"democameramode"][@"demo_camera_mode_freecam"] then
+				f2_local1 = @"hash_4BBB247300B3AE21"
 			end
-			self.mode:setText(Engine[0xF9F1239CFD921FE](f2_local1))
+			self.mode:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local1))
 		end
 	end)
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", function(element)
@@ -37,7 +37,7 @@ CoD.DemoControlsButtonCameraMode.new = function(f4_arg0, f4_arg1, f4_arg2, f4_ar
 	local Backing = LUI.UIImage.new(0.5, 0.5, -19, 19, 0, 0, 23.5, 36.5)
 	Backing:setRGB(0, 0, 0)
 	Backing:setAlpha(0.85)
-	Backing:setMaterial(LUI.UIImage.GetCachedMaterial(0xE125638BF94665F))
+	Backing:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_feather_edges"))
 	Backing:setShaderVector(0, 0.05, 0.05, 0.05, 0.05)
 	self:addElement(Backing)
 	self.Backing = Backing
@@ -46,10 +46,10 @@ CoD.DemoControlsButtonCameraMode.new = function(f4_arg0, f4_arg1, f4_arg2, f4_ar
 	self.icon = icon
 	local mode = LUI.UIText.new(0.5, 0.5, -19, 19, 0.5, 0.5, -14.5, -0.5)
 	mode:setScale(0.9, 0.9)
-	mode:setText(LocalizeToUpperString(0xBBB247300B3AE21))
+	mode:setText(LocalizeToUpperString(@"hash_4BBB247300B3AE21"))
 	mode:setTTF("dinnext_regular")
-	mode:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	mode:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	mode:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	mode:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(mode)
 	self.mode = mode
 	local progressRing = CoD.ButtonProgressRingContainer.new(f4_arg0, f4_arg1, 0.5, 0.5, -21, 21, 1, 1, -40, 2)
@@ -62,7 +62,7 @@ CoD.DemoControlsButtonCameraMode.new = function(f4_arg0, f4_arg1, f4_arg2, f4_ar
 	self.progressRing = progressRing
 	local buttonPromptImage = LUI.UIImage.new(0.5, 0.5, -15, 15, 0, 0, 42, 72)
 	buttonPromptImage:setScale(0.75, 0.75)
-	buttonPromptImage:setMaterial(LUI.UIImage.GetCachedMaterial(0x67D1E3A3D2D1BF))
+	buttonPromptImage:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_saturation_normal"))
 	buttonPromptImage:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(buttonPromptImage)
 	self.buttonPromptImage = buttonPromptImage
@@ -117,7 +117,7 @@ CoD.DemoControlsButtonCameraMode.new = function(f4_arg0, f4_arg1, f4_arg2, f4_ar
 	end)
 	local f4_local8 = self
 	local f4_local9 = self.subscribeToModel
-	local f4_local10 = Engine[0x4DF5CFBC1771947](f4_arg1)
+	local f4_local10 = Engine[@"getmodelforcontroller"](f4_arg1)
 	f4_local9(f4_local8, f4_local10.LastInput, function(f13_arg0)
 		f4_arg0:updateElementState(self, {
 			name = "model_validation",

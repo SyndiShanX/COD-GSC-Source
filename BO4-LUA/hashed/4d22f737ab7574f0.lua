@@ -24,15 +24,15 @@ CoD.ItemShopCyclePrompts.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 		elseif element.super.gainFocus then
 			f3_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f3_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(RightPageOver2, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(RightPageOver2, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		PlaySoundAlias("uin_trigger_slide")
 		SetFocusedTierModelValue(controller, "5", "decrement")
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, nil)
 		return false
 	end, false)
 	self:addElement(RightPageOver2)
@@ -40,18 +40,18 @@ CoD.ItemShopCyclePrompts.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	local Pointer2 = LUI.UIImage.new(0.5, 0.5, 354, 442, 0, 0, 0, 184)
 	Pointer2:setAlpha(0.8)
 	Pointer2:setZRot(180)
-	Pointer2:setImage(RegisterImage(0xB90695A7BFF35F9))
-	Pointer2:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Pointer2:setImage(RegisterImage(@"uie_ui_menu_item_shop_tier_pointer_large"))
+	Pointer2:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Pointer2)
 	self.Pointer2 = Pointer2
 	local Pointer = LUI.UIImage.new(0.5, 0.5, -443, -355, 0, 0, 0, 184)
 	Pointer:setAlpha(0.8)
-	Pointer:setImage(RegisterImage(0xB90695A7BFF35F9))
-	Pointer:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Pointer:setImage(RegisterImage(@"uie_ui_menu_item_shop_tier_pointer_large"))
+	Pointer:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Pointer)
 	self.Pointer = Pointer
 	local RightPageOver = CoD.BumperButtonWithKeyMouse.new(f1_arg0, f1_arg1, 0.5, 0.5, 401.5, 468.5, 0, 0, 73, 118)
-	RightPageOver.KeyMouseImage:setImage(RegisterImage(0x49AC5C845C7E582))
+	RightPageOver.KeyMouseImage:setImage(RegisterImage(@"uie_bumperright"))
 	RightPageOver:subscribeToGlobalModel(f1_arg1, "Controller", "right_trigger_button_image", function(model)
 		local f6_local0 = model:get()
 		if f6_local0 ~= nil then
@@ -65,15 +65,15 @@ CoD.ItemShopCyclePrompts.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 		elseif element.super.gainFocus then
 			f7_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f7_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(RightPageOver, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(RightPageOver, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		PlaySoundAlias("uin_trigger_slide")
 		SetFocusedTierModelValue(controller, "5", "increment")
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, nil)
 		return false
 	end, false)
 	self:addElement(RightPageOver)

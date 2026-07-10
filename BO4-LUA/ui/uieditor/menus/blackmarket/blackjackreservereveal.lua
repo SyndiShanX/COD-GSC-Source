@@ -22,13 +22,13 @@ LUI.createMenu.BlackjackReserveReveal = function(f1_arg0, f1_arg1)
 	f1_local1:addElementToPendingUpdateStateList(self)
 	local backing = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	backing:setRGB(0, 0, 0)
-	backing:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	backing:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	backing:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(backing)
 	self.backing = backing
 	local BackgroundImage = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	BackgroundImage:setAlpha(0.85)
-	BackgroundImage:setImage(RegisterImage(0x4BF88A437F4C579))
+	BackgroundImage:setImage(RegisterImage(@"uie_fe_cp_background"))
 	self:addElement(BackgroundImage)
 	self.BackgroundImage = BackgroundImage
 	local FramingCornerBrackets = CoD.CommonCornerBrackets01.new(f1_local1, f1_arg0, 0.5, 0.5, -598.5, 598.5, 0.5, 0.5, -374, 374)
@@ -37,34 +37,34 @@ LUI.createMenu.BlackjackReserveReveal = function(f1_arg0, f1_arg1)
 	self.FramingCornerBrackets = FramingCornerBrackets
 	local NoiseTiledBackingRight = LUI.UIImage.new(0.5, 0.5, -565.5, 565.5, 0.5, 0.5, -342, 342)
 	NoiseTiledBackingRight:setAlpha(0.4)
-	NoiseTiledBackingRight:setImage(RegisterImage(0x34839E8065B1E53))
-	NoiseTiledBackingRight:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	NoiseTiledBackingRight:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	NoiseTiledBackingRight:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	NoiseTiledBackingRight:setShaderVector(0, 0, 0, 0, 0)
 	NoiseTiledBackingRight:setupNineSliceShader(196, 88)
 	self:addElement(NoiseTiledBackingRight)
 	self.NoiseTiledBackingRight = NoiseTiledBackingRight
 	local DottedLineBtm = LUI.UIImage.new(0.5, 0.5, -566, 566, 0.5, 0.5, 354, 358)
 	DottedLineBtm:setAlpha(0.35)
-	DottedLineBtm:setImage(RegisterImage(0xB20AD7A31239369))
-	DottedLineBtm:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	DottedLineBtm:setImage(RegisterImage(@"uie_ui_menu_social_emblem_dotline_tiled"))
+	DottedLineBtm:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	DottedLineBtm:setShaderVector(0, 0, 0, 0, 0)
 	DottedLineBtm:setupNineSliceShader(16, 4)
 	self:addElement(DottedLineBtm)
 	self.DottedLineBtm = DottedLineBtm
 	local DottedLineTop = LUI.UIImage.new(0.5, 0.5, -566, 566, 0.5, 0.5, -359, -355)
 	DottedLineTop:setAlpha(0.35)
-	DottedLineTop:setImage(RegisterImage(0xB20AD7A31239369))
-	DottedLineTop:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	DottedLineTop:setImage(RegisterImage(@"uie_ui_menu_social_emblem_dotline_tiled"))
+	DottedLineTop:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	DottedLineTop:setShaderVector(0, 0, 0, 0, 0)
 	DottedLineTop:setupNineSliceShader(16, 4)
 	self:addElement(DottedLineTop)
 	self.DottedLineTop = DottedLineTop
 	local GenericMenuFrameIdentity = CoD.GenericMenuFrameIdentity.new(f1_local1, f1_arg0, 0.5, 0.5, -960, 960, 0, 1, 0, 0)
-	GenericMenuFrameIdentity.CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(0xB59099CB3805DEB))
+	GenericMenuFrameIdentity.CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(@"hash_5B59099CB3805DEB"))
 	GenericMenuFrameIdentity:subscribeToGlobalModel(f1_arg0, "LobbyRoot", "lobbyTitle", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			GenericMenuFrameIdentity.CommonHeader.subtitle.subtitle:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			GenericMenuFrameIdentity.CommonHeader.subtitle.subtitle:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	self:addElement(GenericMenuFrameIdentity)
@@ -80,7 +80,7 @@ LUI.createMenu.BlackjackReserveReveal = function(f1_arg0, f1_arg1)
 		{
 			stateName = "AllRngUnlocked",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualToHashString(f1_arg0, element, "name", 0x717FF140F30014C) and AlwaysFalse()
+				return CoD.ModelUtility.IsSelfModelValueEqualToHashString(f1_arg0, element, "name", @"hash_1717FF140F30014C") and AlwaysFalse()
 			end,
 		},
 	})
@@ -108,7 +108,7 @@ LUI.createMenu.BlackjackReserveReveal = function(f1_arg0, f1_arg1)
 	RevealList:setWidgetType(CoD.ReservesRevealItem)
 	RevealList:setHorizontalCount(3)
 	RevealList:setSpacing(80)
-	RevealList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	RevealList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	RevealList:setDataSource("BlackjackReserveRevealList")
 	self:addElement(RevealList)
 	self.RevealList = RevealList
@@ -140,7 +140,7 @@ LUI.createMenu.BlackjackReserveReveal = function(f1_arg0, f1_arg1)
 	})
 	local f1_local13 = self
 	local f1_local14 = self.subscribeToModel
-	local f1_local15 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	local f1_local15 = Engine[@"getmodelforcontroller"](f1_arg0)
 	f1_local14(f1_local13, f1_local15["LootRNGResult.ready"], function(f11_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",
@@ -152,7 +152,7 @@ LUI.createMenu.BlackjackReserveReveal = function(f1_arg0, f1_arg1)
 	end, false)
 	f1_local13 = self
 	f1_local14 = self.subscribeToModel
-	f1_local15 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	f1_local15 = Engine[@"getmodelforcontroller"](f1_arg0)
 	f1_local14(f1_local13, f1_local15.reservesRevealComplete, function(f12_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",
@@ -164,30 +164,30 @@ LUI.createMenu.BlackjackReserveReveal = function(f1_arg0, f1_arg1)
 	end, false)
 	f1_local13 = self
 	f1_local14 = self.subscribeToModel
-	f1_local15 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	f1_local15 = Engine[@"getmodelforcontroller"](f1_arg0)
 	f1_local14(f1_local13, f1_local15.reservesRevealComplete, function(f13_arg0, f13_arg1)
-		CoD.Menu.UpdateButtonShownState(f13_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A])
-		CoD.Menu.UpdateButtonShownState(f13_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f13_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"])
+		CoD.Menu.UpdateButtonShownState(f13_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	f1_local13 = self
 	f1_local14 = self.subscribeToModel
-	f1_local15 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	f1_local15 = Engine[@"getmodelforcontroller"](f1_arg0)
 	f1_local14(f1_local13, f1_local15["LootRNGResult.ready"], function(f14_arg0, f14_arg1)
-		CoD.Menu.UpdateButtonShownState(f14_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f14_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	f1_local13 = self
 	f1_local14 = self.subscribeToModel
-	f1_local15 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	f1_local15 = Engine[@"getmodelforcontroller"](f1_arg0)
 	f1_local14(f1_local13, f1_local15["LootRNGResult.allBribeItemsOwned"], function(f15_arg0, f15_arg1)
-		CoD.Menu.UpdateButtonShownState(f15_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f15_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	f1_local13 = self
 	f1_local14 = self.subscribeToModel
-	f1_local15 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	f1_local15 = Engine[@"getmodelforcontroller"](f1_arg0)
 	f1_local14(f1_local13, f1_local15.reservesRevealSkipAvailable, function(f16_arg0, f16_arg1)
-		CoD.Menu.UpdateButtonShownState(f16_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f16_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], "ESCAPE", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], "ESCAPE", function(element, menu, controller, model)
 		if CoD.ModelUtility.IsModelValueTrue(controller, "reservesRevealComplete") then
 			GoBack(self, controller)
 			return true
@@ -195,13 +195,13 @@ LUI.createMenu.BlackjackReserveReveal = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if CoD.ModelUtility.IsModelValueTrue(controller, "reservesRevealComplete") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, "ESCAPE")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, "ESCAPE")
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if CoD.BlackMarketUtility.CanSkipReservesRevealAnimation(controller) then
 			CoD.BlackMarketUtility.SkipReservesRevealAnimation(controller, menu, self.RevealList)
 			return true
@@ -209,7 +209,7 @@ LUI.createMenu.BlackjackReserveReveal = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if CoD.BlackMarketUtility.CanSkipReservesRevealAnimation(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, nil)
 			return false
 		else
 			return false

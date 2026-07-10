@@ -71,7 +71,7 @@ CoD.DirectorPublicPlayerLists.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	end)
 	local f1_local3 = PartyList
 	local VerticalListSpacer = PartyList.subscribeToModel
-	local dotline = Engine[0x8DF2E5447F384B9]()
+	local dotline = Engine[@"getglobalmodel"]()
 	VerticalListSpacer(f1_local3, dotline["lobbyRoot.publicLobby.stage"], function(f8_arg0)
 		f1_arg0:updateElementState(PartyList, {
 			name = "model_validation",
@@ -83,7 +83,7 @@ CoD.DirectorPublicPlayerLists.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	end, false)
 	f1_local3 = PartyList
 	VerticalListSpacer = PartyList.subscribeToModel
-	dotline = Engine[0x8DF2E5447F384B9]()
+	dotline = Engine[@"getglobalmodel"]()
 	VerticalListSpacer(f1_local3, dotline["lobbyRoot.lobbyNav"], function(f9_arg0)
 		f1_arg0:updateElementState(PartyList, {
 			name = "model_validation",
@@ -97,22 +97,22 @@ CoD.DirectorPublicPlayerLists.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	PartyList:setTopBottom(0, 0, 37, 395)
 	PartyList:setWidgetType(CoD.DirectorExpandedLobbyMember)
 	PartyList:setVerticalCount(5)
-	PartyList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	PartyList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	PartyList:setDataSource("DirectorPartyListWithFirstEmpty")
 	PartyList:linkToElementModel(PartyList, "clientListFlags", true, function(model, f10_arg1)
-		CoD.Menu.UpdateButtonShownState(f10_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f10_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	f1_local3 = PartyList
 	VerticalListSpacer = PartyList.subscribeToModel
-	dotline = Engine[0x8DF2E5447F384B9]()
+	dotline = Engine[@"getglobalmodel"]()
 	VerticalListSpacer(f1_local3, dotline["lobbyRoot.lobbyNetworkMode"], function(f11_arg0, f11_arg1)
-		CoD.Menu.UpdateButtonShownState(f11_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f11_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	f1_local3 = PartyList
 	VerticalListSpacer = PartyList.subscribeToModel
-	dotline = Engine[0x8DF2E5447F384B9]()
+	dotline = Engine[@"getglobalmodel"]()
 	VerticalListSpacer(f1_local3, dotline["lobbyRoot.lobbyNav"], function(f12_arg0, f12_arg1)
-		CoD.Menu.UpdateButtonShownState(f12_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f12_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	PartyList:registerEventHandler("gain_list_focus", function(element, event)
 		local f13_local0 = nil
@@ -140,10 +140,10 @@ CoD.DirectorPublicPlayerLists.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 		elseif element.super.gainFocus then
 			f16_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f16_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(PartyList, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(PartyList, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if CoD.ModelUtility.IsSelfModelValueEnumFlagSet(element, controller, "clientListFlags", CoD.DirectorUtility.ClientListFlags.FIRST_EMPTY) and not IsPC() and not IsLAN() and IsPlayerAllowedToPlayOnline(controller) then
 			OpenOverlay(self, "Social_InvitePlayersPopup", controller, nil)
 			return true
@@ -157,13 +157,13 @@ CoD.DirectorPublicPlayerLists.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 		end
 	end, function(element, menu, controller)
 		if CoD.ModelUtility.IsSelfModelValueEnumFlagSet(element, controller, "clientListFlags", CoD.DirectorUtility.ClientListFlags.FIRST_EMPTY) and not IsPC() and not IsLAN() and IsPlayerAllowedToPlayOnline(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x2EA47C1D2988981, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_42EA47C1D2988981", nil, "ui_confirm")
 			return true
 		elseif CoD.ModelUtility.IsSelfModelValueEnumFlagSet(element, controller, "clientListFlags", CoD.DirectorUtility.ClientListFlags.FIRST_EMPTY) and IsPC() and not IsLAN() and IsPlayerAllowedToPlayOnline(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 			return false
 		elseif not CoD.ModelUtility.IsSelfModelValueEnumFlagSet(element, controller, "clientListFlags", CoD.DirectorUtility.ClientListFlags.FIRST_EMPTY) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xFF0DBCF80106E7B, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_FF0DBCF80106E7B", nil, "ui_confirm")
 			return true
 		else
 			return false
@@ -180,8 +180,8 @@ CoD.DirectorPublicPlayerLists.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	f1_local3 = nil
 	self.FooterButtonAddControllerHelpContainer = LUI.UIElement.createFake()
 	dotline = LUI.UIImage.new(0, 0, 4, 425, 0, 0, 419, 425)
-	dotline:setImage(RegisterImage(0xF9C7F41C631866E))
-	dotline:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	dotline:setImage(RegisterImage(@"uie_ui_menu_social_emblem_dotline"))
+	dotline:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	dotline:setShaderVector(0, 1.2, 0, 0, 0)
 	self:addElement(dotline)
 	self.dotline = dotline
@@ -252,7 +252,7 @@ CoD.DirectorPublicPlayerLists.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	end)
 	local f1_local8 = LobbyList
 	local VerticalListSpacer01 = LobbyList.subscribeToModel
-	local f1_local10 = Engine[0x8DF2E5447F384B9]()
+	local f1_local10 = Engine[@"getglobalmodel"]()
 	VerticalListSpacer01(f1_local8, f1_local10["lobbyRoot.publicLobby.stage"], function(f26_arg0)
 		f1_arg0:updateElementState(LobbyList, {
 			name = "model_validation",
@@ -264,7 +264,7 @@ CoD.DirectorPublicPlayerLists.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	end, false)
 	f1_local8 = LobbyList
 	VerticalListSpacer01 = LobbyList.subscribeToModel
-	f1_local10 = Engine[0x8DF2E5447F384B9]()
+	f1_local10 = Engine[@"getglobalmodel"]()
 	VerticalListSpacer01(f1_local8, f1_local10["lobbyRoot.lobbyNav"], function(f27_arg0)
 		f1_arg0:updateElementState(LobbyList, {
 			name = "model_validation",
@@ -278,22 +278,22 @@ CoD.DirectorPublicPlayerLists.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	LobbyList:setTopBottom(0, 0, 427, 785)
 	LobbyList:setWidgetType(CoD.DirectorExpandedLobbyMember)
 	LobbyList:setVerticalCount(5)
-	LobbyList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	LobbyList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	LobbyList:setDataSource("DirectorLobbyNonPartyList")
 	LobbyList:linkToElementModel(LobbyList, "clientListFlags", true, function(model, f28_arg1)
-		CoD.Menu.UpdateButtonShownState(f28_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f28_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	f1_local8 = LobbyList
 	VerticalListSpacer01 = LobbyList.subscribeToModel
-	f1_local10 = Engine[0x8DF2E5447F384B9]()
+	f1_local10 = Engine[@"getglobalmodel"]()
 	VerticalListSpacer01(f1_local8, f1_local10["lobbyRoot.lobbyNetworkMode"], function(f29_arg0, f29_arg1)
-		CoD.Menu.UpdateButtonShownState(f29_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f29_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	f1_local8 = LobbyList
 	VerticalListSpacer01 = LobbyList.subscribeToModel
-	f1_local10 = Engine[0x8DF2E5447F384B9]()
+	f1_local10 = Engine[@"getglobalmodel"]()
 	VerticalListSpacer01(f1_local8, f1_local10["lobbyRoot.lobbyNav"], function(f30_arg0, f30_arg1)
-		CoD.Menu.UpdateButtonShownState(f30_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f30_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	LobbyList:registerEventHandler("gain_list_focus", function(element, event)
 		local f31_local0 = nil
@@ -321,10 +321,10 @@ CoD.DirectorPublicPlayerLists.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 		elseif element.super.gainFocus then
 			f34_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f34_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(LobbyList, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(LobbyList, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if CoD.ModelUtility.IsSelfModelValueEnumFlagSet(element, controller, "clientListFlags", CoD.DirectorUtility.ClientListFlags.FIRST_EMPTY) and not IsPC() and not IsLAN() and IsPlayerAllowedToPlayOnline(controller) then
 			OpenOverlay(self, "Social_Main", controller, nil)
 			return true
@@ -338,13 +338,13 @@ CoD.DirectorPublicPlayerLists.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 		end
 	end, function(element, menu, controller)
 		if CoD.ModelUtility.IsSelfModelValueEnumFlagSet(element, controller, "clientListFlags", CoD.DirectorUtility.ClientListFlags.FIRST_EMPTY) and not IsPC() and not IsLAN() and IsPlayerAllowedToPlayOnline(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x2EA47C1D2988981, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_42EA47C1D2988981", nil, "ui_confirm")
 			return true
 		elseif CoD.ModelUtility.IsSelfModelValueEnumFlagSet(element, controller, "clientListFlags", CoD.DirectorUtility.ClientListFlags.FIRST_EMPTY) and IsPC() and not IsLAN() and IsPlayerAllowedToPlayOnline(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 			return false
 		elseif not CoD.ModelUtility.IsSelfModelValueEnumFlagSet(element, controller, "clientListFlags", CoD.DirectorUtility.ClientListFlags.FIRST_EMPTY) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xFF0DBCF80106E7B, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_FF0DBCF80106E7B", nil, "ui_confirm")
 			return true
 		else
 			return false
@@ -374,7 +374,7 @@ CoD.DirectorPublicPlayerLists.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	})
 	f1_local10 = self
 	f1_local8 = self.subscribeToModel
-	local f1_local11 = Engine[0x8DF2E5447F384B9]()
+	local f1_local11 = Engine[@"getglobalmodel"]()
 	f1_local8(f1_local10, f1_local11["lobbyRoot.lobbyNav"], function(f40_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -386,7 +386,7 @@ CoD.DirectorPublicPlayerLists.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	end, false)
 	f1_local10 = self
 	f1_local8 = self.subscribeToModel
-	f1_local11 = Engine[0x8DF2E5447F384B9]()
+	f1_local11 = Engine[@"getglobalmodel"]()
 	f1_local8(f1_local10, f1_local11["lobbyRoot.publicLobby.stage"], function(f41_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

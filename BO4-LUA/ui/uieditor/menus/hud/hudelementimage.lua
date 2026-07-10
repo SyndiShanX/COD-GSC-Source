@@ -25,24 +25,24 @@ local f0_local4 = function(f5_arg0)
 	end
 end
 local PostLoadFunc = function(f6_arg0)
-	local f6_local0 = f6_arg0:getModel(Engine[0xA5B9C0111291A8B](), "x")
-	local f6_local1 = f6_arg0:getModel(Engine[0xA5B9C0111291A8B](), "y")
-	local f6_local2 = f6_arg0:getModel(Engine[0xA5B9C0111291A8B](), "width")
-	local f6_local3 = f6_arg0:getModel(Engine[0xA5B9C0111291A8B](), "height")
-	local f6_local4 = f6_arg0:getModel(Engine[0xA5B9C0111291A8B](), "alpha")
-	local f6_local5 = f6_arg0:getModel(Engine[0xA5B9C0111291A8B](), "material")
-	local f6_local6 = f6_arg0:getModel(Engine[0xA5B9C0111291A8B](), "fadeOverTime")
-	local f6_local7 = f6_arg0:getModel(Engine[0xA5B9C0111291A8B](), "red")
-	local f6_local8 = f6_arg0:getModel(Engine[0xA5B9C0111291A8B](), "green")
-	local f6_local9 = f6_arg0:getModel(Engine[0xA5B9C0111291A8B](), "blue")
-	local f6_local10 = f6_arg0:getModel(Engine[0xA5B9C0111291A8B](), "zRot")
+	local f6_local0 = f6_arg0:getModel(Engine[@"getprimarycontroller"](), "x")
+	local f6_local1 = f6_arg0:getModel(Engine[@"getprimarycontroller"](), "y")
+	local f6_local2 = f6_arg0:getModel(Engine[@"getprimarycontroller"](), "width")
+	local f6_local3 = f6_arg0:getModel(Engine[@"getprimarycontroller"](), "height")
+	local f6_local4 = f6_arg0:getModel(Engine[@"getprimarycontroller"](), "alpha")
+	local f6_local5 = f6_arg0:getModel(Engine[@"getprimarycontroller"](), "material")
+	local f6_local6 = f6_arg0:getModel(Engine[@"getprimarycontroller"](), "fadeOverTime")
+	local f6_local7 = f6_arg0:getModel(Engine[@"getprimarycontroller"](), "red")
+	local f6_local8 = f6_arg0:getModel(Engine[@"getprimarycontroller"](), "green")
+	local f6_local9 = f6_arg0:getModel(Engine[@"getprimarycontroller"](), "blue")
+	local f6_local10 = f6_arg0:getModel(Engine[@"getprimarycontroller"](), "zRot")
 	f6_arg0.red = 1
 	f6_arg0.green = 1
 	f6_arg0.blue = 1
 	f6_arg0:setPriority(-1)
 	if f6_local0 then
 		f6_arg0:subscribeToModel(f6_local0, function(model)
-			local f7_local0 = Engine[0x614D394F6F9A18D](model)
+			local f7_local0 = Engine[@"getmodelvalue"](model)
 			if f7_local0 then
 				f6_arg0.x = f7_local0
 				f0_local0(f6_arg0)
@@ -51,7 +51,7 @@ local PostLoadFunc = function(f6_arg0)
 	end
 	if f6_local1 then
 		f6_arg0:subscribeToModel(f6_local1, function(model)
-			local f8_local0 = Engine[0x614D394F6F9A18D](model)
+			local f8_local0 = Engine[@"getmodelvalue"](model)
 			if f8_local0 then
 				f6_arg0.y = f8_local0
 				f0_local0(f6_arg0)
@@ -60,7 +60,7 @@ local PostLoadFunc = function(f6_arg0)
 	end
 	if f6_local2 then
 		f6_arg0:subscribeToModel(f6_local2, function(model)
-			local f9_local0 = Engine[0x614D394F6F9A18D](model)
+			local f9_local0 = Engine[@"getmodelvalue"](model)
 			if f9_local0 then
 				f6_arg0.width = f9_local0
 				f0_local0(f6_arg0)
@@ -69,7 +69,7 @@ local PostLoadFunc = function(f6_arg0)
 	end
 	if f6_local3 then
 		f6_arg0:subscribeToModel(f6_local3, function(model)
-			local f10_local0 = Engine[0x614D394F6F9A18D](model)
+			local f10_local0 = Engine[@"getmodelvalue"](model)
 			if f10_local0 then
 				f6_arg0.height = f10_local0
 				f0_local0(f6_arg0)
@@ -78,7 +78,7 @@ local PostLoadFunc = function(f6_arg0)
 	end
 	if f6_local4 then
 		f6_arg0:subscribeToModel(f6_local4, function(model)
-			local f11_local0 = Engine[0x614D394F6F9A18D](model)
+			local f11_local0 = Engine[@"getmodelvalue"](model)
 			if f11_local0 then
 				f6_arg0.alpha = f11_local0
 				f0_local1(f6_arg0)
@@ -87,7 +87,7 @@ local PostLoadFunc = function(f6_arg0)
 	end
 	if f6_local5 then
 		f6_arg0:subscribeToModel(f6_local5, function(model)
-			local f12_local0 = Engine[0x614D394F6F9A18D](model)
+			local f12_local0 = Engine[@"getmodelvalue"](model)
 			if f12_local0 then
 				f6_arg0.imageMaterialName = f12_local0
 				f0_local2(f6_arg0)
@@ -96,7 +96,7 @@ local PostLoadFunc = function(f6_arg0)
 	end
 	if f6_local6 then
 		f6_arg0:subscribeToModel(f6_local6, function(model)
-			local f13_local0 = Engine[0x614D394F6F9A18D](model)
+			local f13_local0 = Engine[@"getmodelvalue"](model)
 			if f13_local0 and tonumber(f13_local0) then
 				f6_arg0.Image:setAlpha(0)
 				f6_arg0.Image:beginAnimation("fadeOverTime", f13_local0)
@@ -106,7 +106,7 @@ local PostLoadFunc = function(f6_arg0)
 	end
 	if f6_local7 then
 		f6_arg0:subscribeToModel(f6_local7, function(model)
-			local f14_local0 = Engine[0x614D394F6F9A18D](model)
+			local f14_local0 = Engine[@"getmodelvalue"](model)
 			if f14_local0 then
 				f6_arg0.red = f14_local0
 				f0_local3(f6_arg0)
@@ -115,7 +115,7 @@ local PostLoadFunc = function(f6_arg0)
 	end
 	if f6_local8 then
 		f6_arg0:subscribeToModel(f6_local8, function(model)
-			local f15_local0 = Engine[0x614D394F6F9A18D](model)
+			local f15_local0 = Engine[@"getmodelvalue"](model)
 			if f15_local0 then
 				f6_arg0.green = f15_local0
 				f0_local3(f6_arg0)
@@ -124,7 +124,7 @@ local PostLoadFunc = function(f6_arg0)
 	end
 	if f6_local9 then
 		f6_arg0:subscribeToModel(f6_local9, function(model)
-			local f16_local0 = Engine[0x614D394F6F9A18D](model)
+			local f16_local0 = Engine[@"getmodelvalue"](model)
 			if f16_local0 then
 				f6_arg0.blue = f16_local0
 				f0_local3(f6_arg0)
@@ -133,7 +133,7 @@ local PostLoadFunc = function(f6_arg0)
 	end
 	if f6_local10 then
 		f6_arg0:subscribeToModel(f6_local10, function(model)
-			local f17_local0 = Engine[0x614D394F6F9A18D](model)
+			local f17_local0 = Engine[@"getmodelvalue"](model)
 			if f17_local0 then
 				f6_arg0.zRot = f17_local0
 				f0_local4(f6_arg0)

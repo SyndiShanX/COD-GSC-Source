@@ -23,7 +23,7 @@ CoD.DirectorCharacterDynamic.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	DirectorStickyPartyStatus.TextBox.__stickyPartyStatus = function(f3_arg0)
 		local f3_local0 = f3_arg0:get()
 		if f3_local0 ~= nil then
-			DirectorStickyPartyStatus.TextBox:setText(Engine[0xF9F1239CFD921FE](StickyPartyStatusToString(f3_local0)))
+			DirectorStickyPartyStatus.TextBox:setText(Engine[@"hash_4F9F1239CFD921FE"](StickyPartyStatusToString(f3_local0)))
 		end
 	end
 	DirectorStickyPartyStatus:linkToElementModel(self, "info", true, function(model, f4_arg1)
@@ -80,7 +80,7 @@ CoD.DirectorCharacterDynamic.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	end)
 	local f1_local3 = self
 	local f1_local4 = self.subscribeToModel
-	local f1_local5 = Engine[0x8DF2E5447F384B9]()
+	local f1_local5 = Engine[@"getglobalmodel"]()
 	f1_local4(f1_local3, f1_local5["lobbyRoot.lobbyNav"], function(f9_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -92,7 +92,7 @@ CoD.DirectorCharacterDynamic.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	end, false)
 	f1_local3 = self
 	f1_local4 = self.subscribeToModel
-	f1_local5 = Engine[0x8DF2E5447F384B9]()
+	f1_local5 = Engine[@"getglobalmodel"]()
 	f1_local4(f1_local3, f1_local5["lobbyRoot.privateClient.update"], function(f10_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

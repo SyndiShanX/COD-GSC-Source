@@ -17,7 +17,7 @@ CoD.FrontendChatClient.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	self:addElement(emptyFocusable)
 	self.emptyFocusable = emptyFocusable
 	local FrontendChatBG = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	FrontendChatBG:setImage(RegisterImage(0xFECB0E0003975BA))
+	FrontendChatBG:setImage(RegisterImage(@"hash_6FECB0E0003975BA"))
 	self:addElement(FrontendChatBG)
 	self.FrontendChatBG = FrontendChatBG
 	local InputText = CoD.ChatClientInputTextBox.new(f1_arg0, f1_arg1, 0.03, 0.03, -6, 514, 0.97, 0.97, -30, 0)
@@ -46,7 +46,7 @@ CoD.FrontendChatClient.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	})
 	local f1_local6 = self
 	local f1_local7 = self.subscribeToModel
-	local f1_local8 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local8 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local7(f1_local6, f1_local8["ChatGlobal.Event"], function(f5_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

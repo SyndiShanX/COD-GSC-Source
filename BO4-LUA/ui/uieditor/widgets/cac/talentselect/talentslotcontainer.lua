@@ -72,7 +72,7 @@ CoD.TalentSlotContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	end)
 	local f1_local2 = TalentSlot
 	local f1_local3 = TalentSlot.subscribeToModel
-	local f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local3(f1_local2, f1_local4["CustomClassList.equippedItemsChanged"], function(f11_arg0)
 		f1_arg0:updateElementState(TalentSlot, {
 			name = "model_validation",
@@ -103,7 +103,7 @@ CoD.TalentSlotContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	TalentSlot:linkToElementModel(self, "displayNameShort", true, function(model)
 		local f15_local0 = model:get()
 		if f15_local0 ~= nil then
-			TalentSlot.AttachmentName.TextBox:setText(Engine[0xF9F1239CFD921FE](f15_local0))
+			TalentSlot.AttachmentName.TextBox:setText(Engine[@"hash_4F9F1239CFD921FE"](f15_local0))
 		end
 	end)
 	self:addElement(TalentSlot)
@@ -127,7 +127,7 @@ CoD.TalentSlotContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	end)
 	f1_local2 = self
 	f1_local3 = self.subscribeToModel
-	f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local3(f1_local2, f1_local4["CustomClassList.equippedItemsChanged"], function(f18_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -166,7 +166,7 @@ CoD.TalentSlotContainer.__clipsPerState = {
 			f22_arg0:__resetProperties()
 			f22_arg0:setupElementClipCounter(1)
 			local f22_local0 = function(f23_arg0)
-				f22_arg0.TalentSlot:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f22_arg0.TalentSlot:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f22_arg0.TalentSlot:setScale(1.05, 1.05)
 				f22_arg0.TalentSlot:registerEventHandler("interrupted_keyframe", f22_arg0.clipInterrupted)
 				f22_arg0.TalentSlot:registerEventHandler("transition_complete_keyframe", f22_arg0.clipFinished)
@@ -179,7 +179,7 @@ CoD.TalentSlotContainer.__clipsPerState = {
 			f24_arg0:__resetProperties()
 			f24_arg0:setupElementClipCounter(1)
 			local f24_local0 = function(f25_arg0)
-				f24_arg0.TalentSlot:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f24_arg0.TalentSlot:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f24_arg0.TalentSlot:setScale(1, 1)
 				f24_arg0.TalentSlot:registerEventHandler("interrupted_keyframe", f24_arg0.clipInterrupted)
 				f24_arg0.TalentSlot:registerEventHandler("transition_complete_keyframe", f24_arg0.clipFinished)
@@ -205,7 +205,7 @@ CoD.TalentSlotContainer.__clipsPerState = {
 			f28_arg0:__resetProperties()
 			f28_arg0:setupElementClipCounter(1)
 			local f28_local0 = function(f29_arg0)
-				f28_arg0.TalentSlot:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f28_arg0.TalentSlot:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f28_arg0.TalentSlot:setScale(1.05, 1.05)
 				f28_arg0.TalentSlot:registerEventHandler("interrupted_keyframe", f28_arg0.clipInterrupted)
 				f28_arg0.TalentSlot:registerEventHandler("transition_complete_keyframe", f28_arg0.clipFinished)
@@ -218,7 +218,7 @@ CoD.TalentSlotContainer.__clipsPerState = {
 			f30_arg0:__resetProperties()
 			f30_arg0:setupElementClipCounter(1)
 			local f30_local0 = function(f31_arg0)
-				f30_arg0.TalentSlot:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f30_arg0.TalentSlot:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f30_arg0.TalentSlot:setScale(1, 1)
 				f30_arg0.TalentSlot:registerEventHandler("interrupted_keyframe", f30_arg0.clipInterrupted)
 				f30_arg0.TalentSlot:registerEventHandler("transition_complete_keyframe", f30_arg0.clipFinished)

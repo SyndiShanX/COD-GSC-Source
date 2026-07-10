@@ -47,8 +47,8 @@ CoD.Armory_AttachmentInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	local AttachmentDescription = LUI.UIText.new(0, 0, 0, 600, 0, 0, 87, 105)
 	AttachmentDescription:setRGB(0.8, 0.79, 0.78)
 	AttachmentDescription:setTTF("dinnext_regular")
-	AttachmentDescription:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	AttachmentDescription:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	AttachmentDescription:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	AttachmentDescription:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	AttachmentDescription:linkToElementModel(self, "description", true, function(model)
 		local f6_local0 = model:get()
 		if f6_local0 ~= nil then
@@ -61,8 +61,8 @@ CoD.Armory_AttachmentInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	AttachmentName:setRGB(0.58, 0.85, 1)
 	AttachmentName:setTTF("ttmussels_demibold")
 	AttachmentName:setLetterSpacing(14)
-	AttachmentName:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	AttachmentName:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	AttachmentName:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	AttachmentName:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	AttachmentName:linkToElementModel(self, "displayName", true, function(model)
 		local f7_local0 = model:get()
 		if f7_local0 ~= nil then

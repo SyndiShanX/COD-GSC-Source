@@ -15,14 +15,14 @@ CoD.Support_Button.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Background = LUI.UIImage.new(0, 0, -22, 60, 0, 0, -19, 64)
 	Background:setAlpha(0.2)
-	Background:setImage(RegisterImage(0x75825763EF40352))
-	Background:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Background:setImage(RegisterImage(@"uie_streak_flare"))
+	Background:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Background)
 	self.Background = Background
 	local LED = LUI.UIImage.new(0, 0, -11.5, 52.5, 0, 0, -13, 51)
 	LED:setRGB(0.79, 0.45, 0.05)
 	LED:setAlpha(0)
-	LED:setImage(RegisterImage(0xBA589418FAFF06D))
+	LED:setImage(RegisterImage(@"uie_ui_hud_core_streak_led_button"))
 	self:addElement(LED)
 	self.LED = LED
 	local buttonInternal = CoD.Support_ButtonInternal.new(f1_arg0, f1_arg1, 0, 0, 0, 40, 0, 0, 2, 43)
@@ -87,26 +87,26 @@ CoD.Support_Button.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	})
 	local ArrowDown = ControllerDependentTextBox
 	local ArrowUp = ControllerDependentTextBox.subscribeToModel
-	local Rule = Engine[0x4DF5CFBC1771947](f1_arg1)
-	ArrowUp(ArrowDown, Rule["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2]], function(f10_arg0)
+	local Rule = Engine[@"getmodelforcontroller"](f1_arg1)
+	ArrowUp(ArrowDown, Rule["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"]], function(f10_arg0)
 		f1_arg0:updateElementState(ControllerDependentTextBox, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f10_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"],
 		})
 	end, false)
 	ArrowDown = ControllerDependentTextBox
 	ArrowUp = ControllerDependentTextBox.subscribeToModel
-	Rule = Engine[0x4DF5CFBC1771947](f1_arg1)
-	ArrowUp(ArrowDown, Rule["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F]], function(f11_arg0)
+	Rule = Engine[@"getmodelforcontroller"](f1_arg1)
+	ArrowUp(ArrowDown, Rule["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_play_of_the_match"]], function(f11_arg0)
 		f1_arg0:updateElementState(ControllerDependentTextBox, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f11_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_play_of_the_match"],
 		})
 	end, false)
 	ControllerDependentTextBox:appendEventHandler("input_source_changed", function(f12_arg0, f12_arg1)
@@ -115,7 +115,7 @@ CoD.Support_Button.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	end)
 	ArrowDown = ControllerDependentTextBox
 	ArrowUp = ControllerDependentTextBox.subscribeToModel
-	Rule = Engine[0x4DF5CFBC1771947](f1_arg1)
+	Rule = Engine[@"getmodelforcontroller"](f1_arg1)
 	ArrowUp(ArrowDown, Rule.LastInput, function(f13_arg0)
 		f1_arg0:updateElementState(ControllerDependentTextBox, {
 			name = "model_validation",
@@ -129,7 +129,7 @@ CoD.Support_Button.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	ControllerDependentTextBox.KBMText:setLetterSpacing(0)
 	ControllerDependentTextBox.GamepadText:setText(CoD.BaseUtility.AlreadyLocalized("[{+weapnext_inventory}]"))
 	ControllerDependentTextBox.GamepadText:setLetterSpacing(0)
-	ControllerDependentTextBox.GamepadText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	ControllerDependentTextBox.GamepadText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	ControllerDependentTextBox:linkToElementModel(self, nil, false, function(model)
 		ControllerDependentTextBox:setModel(model, f1_arg1)
 	end)
@@ -194,45 +194,45 @@ CoD.Support_Button.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	Rule = LUI.UIImage.new(0, 0, 0, 40, 0, 0, -6, 2)
 	Rule:setRGB(ColorSet.T8__OCHRE.r, ColorSet.T8__OCHRE.g, ColorSet.T8__OCHRE.b)
 	Rule:setAlpha(0)
-	Rule:setImage(RegisterImage(0x44F091BA4D4DD60))
-	Rule:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Rule:setImage(RegisterImage(@"uie_ui_hud_core_streak_widget_rule_thin"))
+	Rule:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Rule)
 	self.Rule = Rule
 	local Rule2 = LUI.UIImage.new(0, 0, 0, 40, 0, 0, 41.5, 49.5)
 	Rule2:setRGB(ColorSet.T8__OCHRE.r, ColorSet.T8__OCHRE.g, ColorSet.T8__OCHRE.b)
 	Rule2:setAlpha(0)
-	Rule2:setImage(RegisterImage(0x44F091BA4D4DD60))
-	Rule2:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Rule2:setImage(RegisterImage(@"uie_ui_hud_core_streak_widget_rule_thin"))
+	Rule2:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Rule2)
 	self.Rule2 = Rule2
 	local Bar2 = LUI.UIImage.new(0, 0, -0.5, 39.5, 0, 0, 41.5, 49.5)
 	Bar2:setRGB(ColorSet.T8__OCHRE.r, ColorSet.T8__OCHRE.g, ColorSet.T8__OCHRE.b)
 	Bar2:setAlpha(0)
-	Bar2:setImage(RegisterImage(0x755ACF915D91894))
-	Bar2:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	Bar2:setImage(RegisterImage(@"uie_ui_hud_core_streak_widget_rule_thick"))
+	Bar2:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	Bar2:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(Bar2)
 	self.Bar2 = Bar2
 	local Bar3 = LUI.UIImage.new(0, 0, -0.5, 39.5, 0, 0, -6, 2)
 	Bar3:setRGB(ColorSet.T8__OCHRE.r, ColorSet.T8__OCHRE.g, ColorSet.T8__OCHRE.b)
 	Bar3:setAlpha(0)
-	Bar3:setImage(RegisterImage(0x755ACF915D91894))
-	Bar3:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	Bar3:setImage(RegisterImage(@"uie_ui_hud_core_streak_widget_rule_thick"))
+	Bar3:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	Bar3:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(Bar3)
 	self.Bar3 = Bar3
 	local FUItop2 = LUI.UIImage.new(0, 0, 0.5, 40.5, 0, 0, 36, 44)
 	FUItop2:setRGB(ColorSet.T8__OCHRE.r, ColorSet.T8__OCHRE.g, ColorSet.T8__OCHRE.b)
 	FUItop2:setAlpha(0)
-	FUItop2:setImage(RegisterImage(0xD21881AE56187FC))
-	FUItop2:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	FUItop2:setImage(RegisterImage(@"uie_ui_hud_core_streak_widget_fui_selector"))
+	FUItop2:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(FUItop2)
 	self.FUItop2 = FUItop2
 	local FUItop = LUI.UIImage.new(0, 0, 0.5, 40.5, 0, 0, -5, 3)
 	FUItop:setRGB(ColorSet.T8__OCHRE.r, ColorSet.T8__OCHRE.g, ColorSet.T8__OCHRE.b)
 	FUItop:setAlpha(0)
-	FUItop:setImage(RegisterImage(0xD21881AE56187FC))
-	FUItop:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	FUItop:setImage(RegisterImage(@"uie_ui_hud_core_streak_widget_fui_selector"))
+	FUItop:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(FUItop)
 	self.FUItop = FUItop
 	self:mergeStateConditions({
@@ -287,7 +287,7 @@ CoD.Support_Button.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	end)
 	local f1_local15 = self
 	local f1_local16 = self.subscribeToModel
-	local f1_local17 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local17 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local16(f1_local15, f1_local17.LastInput, function(f27_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -390,7 +390,7 @@ CoD.Support_Button.__clipsPerState = {
 			f32_arg0:__resetProperties()
 			f32_arg0:setupElementClipCounter(14)
 			local f32_local0 = function(f33_arg0)
-				f32_arg0.Background:beginAnimation(230, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f32_arg0.Background:beginAnimation(230, Enum[@"luitween"][@"luitween_ease_both"])
 				f32_arg0.Background:setScale(1, 1)
 				f32_arg0.Background:registerEventHandler("interrupted_keyframe", f32_arg0.clipInterrupted)
 				f32_arg0.Background:registerEventHandler("transition_complete_keyframe", f32_arg0.clipFinished)
@@ -404,7 +404,7 @@ CoD.Support_Button.__clipsPerState = {
 			f32_arg0.LED:setAlpha(0.34)
 			f32_arg0.clipFinished(f32_arg0.LED)
 			local f32_local1 = function(f34_arg0)
-				f32_arg0.buttonInternal:beginAnimation(230, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f32_arg0.buttonInternal:beginAnimation(230, Enum[@"luitween"][@"luitween_ease_both"])
 				f32_arg0.buttonInternal:setScale(1.1, 1.1)
 				f32_arg0.buttonInternal:registerEventHandler("interrupted_keyframe", f32_arg0.clipInterrupted)
 				f32_arg0.buttonInternal:registerEventHandler("transition_complete_keyframe", f32_arg0.clipFinished)

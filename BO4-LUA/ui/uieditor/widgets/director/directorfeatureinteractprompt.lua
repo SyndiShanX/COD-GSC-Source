@@ -10,14 +10,14 @@ CoD.DirectorFeatureInteractPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	Description:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	Description:setTTF("dinnext_regular")
 	Description:setLetterSpacing(1)
-	Description:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Description:setAlignment(Enum[0x7A5123B654282D2][0x70510683C22104B])
+	Description:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Description:setAlignment(Enum[@"luialignment"][@"lui_alignment_bottom"])
 	Description:setBackingType(2)
 	Description:setBackingColor(0, 0, 0)
 	Description:setBackingAlpha(0.7)
 	Description:setBackingXPadding(10)
 	Description:setBackingYPadding(4)
-	Description:setBackingImage(RegisterImage(0xC229CEBABEEAB0E))
+	Description:setBackingImage(RegisterImage(@"hash_7C229CEBABEEAB0E"))
 	Description:linkToElementModel(self, "descriptionText", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -28,7 +28,7 @@ CoD.DirectorFeatureInteractPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	self.Description = Description
 	local buttonPromptImagePC = nil
 	buttonPromptImagePC = LUI.UIImage.new(0, 0, 3, 29, 1, 1, -33, -7)
-	buttonPromptImagePC:setMaterial(LUI.UIImage.GetCachedMaterial(0x67D1E3A3D2D1BF))
+	buttonPromptImagePC:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_saturation_normal"))
 	buttonPromptImagePC:setShaderVector(0, 1, 0, 0, 0)
 	buttonPromptImagePC:subscribeToGlobalModel(f1_arg1, "Controller", "alt2_button_image", function(model)
 		local f3_local0 = model:get()

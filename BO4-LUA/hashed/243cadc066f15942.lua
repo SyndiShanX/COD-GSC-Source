@@ -11,7 +11,7 @@ CoD.RadiationBlastNeedle.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	self:addElement(Needle)
 	self.Needle = Needle
 	local Line = LUI.UIImage.new(0, 0, -11, 25, 0, 0, -12, 176)
-	Line:setImage(RegisterImage(0xDCF0360C4FE3FC))
+	Line:setImage(RegisterImage(@"uie_hud_radiationmeter_line"))
 	self:addElement(Line)
 	self.Line = Line
 	if PostLoadFunc then

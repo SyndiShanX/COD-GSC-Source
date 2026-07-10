@@ -8,7 +8,7 @@ CoD.CodCasterPlayerListRowHighlight.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local alliesbg = LUI.UIImage.new(0.5, 0.5, -202, 202, 0, 0, 0, 16)
-	alliesbg:setImage(RegisterImage(0xBD8D43404DC456))
+	alliesbg:setImage(RegisterImage(@"hash_BD8D43404DC456"))
 	alliesbg:subscribeToGlobalModel(f1_arg1, "Factions", "alliesFactionColor", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -18,7 +18,7 @@ CoD.CodCasterPlayerListRowHighlight.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	self:addElement(alliesbg)
 	self.alliesbg = alliesbg
 	local axisbg = LUI.UIImage.new(0.5, 0.5, -202, 202, 0, 0, 0, 16)
-	axisbg:setImage(RegisterImage(0xBD8D43404DC456))
+	axisbg:setImage(RegisterImage(@"hash_BD8D43404DC456"))
 	axisbg:subscribeToGlobalModel(f1_arg1, "Factions", "axisFactionColor", function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -28,14 +28,14 @@ CoD.CodCasterPlayerListRowHighlight.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	self:addElement(axisbg)
 	self.axisbg = axisbg
 	local freebg = LUI.UIImage.new(0.5, 0.5, -202, 202, 0, 0, 0, 16)
-	freebg:setImage(RegisterImage(0xBD8D43404DC456))
+	freebg:setImage(RegisterImage(@"hash_BD8D43404DC456"))
 	self:addElement(freebg)
 	self.freebg = freebg
 	self:mergeStateConditions({
 		{
 			stateName = "Allies",
 			condition = function(menu, element, event)
-				local f4_local0 = CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "team", Enum[0x13A4717E5AC547][0x2A34B055ADD98AB])
+				local f4_local0 = CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "team", Enum[@"team_t"][@"team_allies"])
 				if f4_local0 then
 					f4_local0 = IsGametypeTeambased()
 					if f4_local0 then
@@ -48,7 +48,7 @@ CoD.CodCasterPlayerListRowHighlight.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 		{
 			stateName = "Axis",
 			condition = function(menu, element, event)
-				local f5_local0 = CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "team", Enum[0x13A4717E5AC547][0x3F83D7CE4BD7B68])
+				local f5_local0 = CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "team", Enum[@"team_t"][@"team_axis"])
 				if f5_local0 then
 					f5_local0 = IsGametypeTeambased()
 					if f5_local0 then

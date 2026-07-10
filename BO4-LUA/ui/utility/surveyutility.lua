@@ -1,45 +1,45 @@
 CoD.SurveyUtility = {}
 CoD.SurveyUtility.GetAARSurveyType = function()
-	local f1_local0 = Engine[0x80964E6C43E0C4B]()
-	if f1_local0 == Enum[0x89C1455C5032969][0x7E41449995CD57E] then
+	local f1_local0 = Engine[@"getlobbymainmode"]()
+	if f1_local0 == Enum[@"lobbymainmode"][@"lobby_mainmode_mp"] then
 		if LuaUtils.IsArenaPublicGame() then
-			return Enum[0xC20EF6D686D1E5F][0x9C29FF5FD1A1A8C]
+			return Enum[@"surveytype"][@"hash_39C29FF5FD1A1A8C"]
 		else
-			return Enum[0xC20EF6D686D1E5F][0x643D8CABE3C78B2]
+			return Enum[@"surveytype"][@"hash_5643D8CABE3C78B2"]
 		end
-	elseif f1_local0 == Enum[0x89C1455C5032969][0x79D01499920B292] then
-		return Enum[0xC20EF6D686D1E5F][0x4FC6F1FD23A171E]
-	elseif f1_local0 == Enum[0x89C1455C5032969][0x78C124999125C42] then
-		return Enum[0xC20EF6D686D1E5F][0xA6900E33A2623FA]
+	elseif f1_local0 == Enum[@"lobbymainmode"][@"lobby_mainmode_zm"] then
+		return Enum[@"surveytype"][@"hash_74FC6F1FD23A171E"]
+	elseif f1_local0 == Enum[@"lobbymainmode"][@"lobby_mainmode_wz"] then
+		return Enum[@"surveytype"][@"hash_4A6900E33A2623FA"]
 	else
 		return nil
 	end
 end
 CoD.SurveyUtility.GetIntroSurveyType = function()
-	local f2_local0 = Engine[0x80964E6C43E0C4B]()
-	if f2_local0 == Enum[0x89C1455C5032969][0x7E41449995CD57E] then
+	local f2_local0 = Engine[@"getlobbymainmode"]()
+	if f2_local0 == Enum[@"lobbymainmode"][@"lobby_mainmode_mp"] then
 		if LuaUtils.IsArenaPublicGame() then
-			return Enum[0xC20EF6D686D1E5F][0xE44CE1C86C2E982]
+			return Enum[@"surveytype"][@"hash_7E44CE1C86C2E982"]
 		else
-			return Enum[0xC20EF6D686D1E5F][0x9B7ED8B31C66B88]
+			return Enum[@"surveytype"][@"hash_39B7ED8B31C66B88"]
 		end
-	elseif f2_local0 == Enum[0x89C1455C5032969][0x79D01499920B292] then
-		return Enum[0xC20EF6D686D1E5F][0x7DEDB07DD9AAFFC]
-	elseif f2_local0 == Enum[0x89C1455C5032969][0x78C124999125C42] then
-		return Enum[0xC20EF6D686D1E5F][0xD61D949562AB120]
+	elseif f2_local0 == Enum[@"lobbymainmode"][@"lobby_mainmode_zm"] then
+		return Enum[@"surveytype"][@"hash_67DEDB07DD9AAFFC"]
+	elseif f2_local0 == Enum[@"lobbymainmode"][@"lobby_mainmode_wz"] then
+		return Enum[@"surveytype"][@"hash_7D61D949562AB120"]
 	else
 		return nil
 	end
 end
 CoD.SurveyUtility.OpenSurvey = function(f3_arg0, f3_arg1, f3_arg2)
-	if Engine[0x8BF601ABD141DF9]() == false then
+	if Engine[@"sessionmode_ispubliconlinegame"]() == false then
 		return false
 	elseif f3_arg0 and f3_arg0:getParent() == nil then
 		return false
 	elseif f3_arg2 == nil then
 		return false
 	end
-	local f3_local0 = Engine[0xC1BC66C1628B74D](f3_arg2, math.random())
+	local f3_local0 = Engine[@"getsurvey"](f3_arg2, math.random())
 	if f3_local0 == nil then
 		return false
 	elseif f3_local0.randomizeButtonOrder == true then
@@ -59,14 +59,14 @@ CoD.SurveyUtility.BuildSurveyTable = function(f5_arg0)
 end
 CoD.SurveyUtility.TestOpenSurvey = function(f6_arg0, f6_arg1)
 	CoD.SurveyUtility.BuildSurveyTable({
-		title = 0x5C8B3FBEB3A367E,
-		description = 0x34FA766E33F1A64,
+		title = @"hash_65C8B3FBEB3A367E",
+		description = @"hash_234FA766E33F1A64",
 		responseOptions = {
-			0xFD0A4EC72EF5F3F,
-			0x9374CB5F1C473B8,
-			0x1A71767CB661181,
-			0x95F0F01B84486F8,
-			0xC9EBE411155B7FC,
+			@"menu/decline",
+			@"menu/10_points",
+			@"menu/1_flag",
+			@"menu/specialist_outfit",
+			@"hash_C9EBE411155B7FC",
 		},
 	})
 	local f6_local0 = DataSources.SurveyQuestion.getModel(f6_arg1)
@@ -80,14 +80,14 @@ CoD.SurveyUtility.SendSurveyDlogResponse = function(f7_arg0, f7_arg1)
 	f7_local1 = f7_local0.title
 	local f7_local2 = f7_arg0:getModel()
 	f7_local2 = f7_local2.optionText:get()
-	local f7_local3 = Engine[0xD52E2360F482280]()
-	local f7_local4 = Engine[0x3EAC408F958FF05]()
+	local f7_local3 = Engine[@"hash_6D52E2360F482280"]()
+	local f7_local4 = Engine[@"currentsessionmode"]()
 	local f7_local5 = false
-	Engine[0xDE279ECDDDD966](f7_arg1, 0x218DD882E1DEBD5, {
-		[0x86E8661F478F5EB] = f7_local1,
-		[0x76D620761488EBE] = f7_local2,
-		[0x274D6DC485E5069] = f7_local3,
-		[0x301FC2C39A80AAB] = f7_local4,
+	Engine[0xDE279ECDDDD966](f7_arg1, @"hash_5218DD882E1DEBD5", {
+		[@"survey_name"] = f7_local1,
+		[@"response"] = f7_local2,
+		[@"hash_4274D6DC485E5069"] = f7_local3,
+		[@"session_mode"] = f7_local4,
 	})
 end
 CoD.SurveyUtility.CloseSurvey = function(f8_arg0, f8_arg1)
@@ -96,21 +96,21 @@ CoD.SurveyUtility.CloseSurvey = function(f8_arg0, f8_arg1)
 		f8_local0 = CoD.SurveyUtility.GetSurveyTable()
 		local f8_local1 = f8_local0.title
 		local f8_local2 = nil
-		local f8_local3 = Engine[0xD52E2360F482280]()
-		local f8_local4 = Engine[0x3EAC408F958FF05]()
+		local f8_local3 = Engine[@"hash_6D52E2360F482280"]()
+		local f8_local4 = Engine[@"currentsessionmode"]()
 		local f8_local5 = true
-		Engine[0xDE279ECDDDD966](f8_arg1, 0x218DD882E1DEBD5, {
-			[0x86E8661F478F5EB] = f8_local1,
-			[0x76D620761488EBE] = f8_local2,
-			[0x274D6DC485E5069] = f8_local3,
-			[0x301FC2C39A80AAB] = f8_local4,
+		Engine[0xDE279ECDDDD966](f8_arg1, @"hash_5218DD882E1DEBD5", {
+			[@"survey_name"] = f8_local1,
+			[@"response"] = f8_local2,
+			[@"hash_4274D6DC485E5069"] = f8_local3,
+			[@"session_mode"] = f8_local4,
 		})
 	end
 	GoBack(f8_arg0, f8_arg1)
 end
 CoD.SurveyUtility.SelectRatingOption = function(f9_arg0, f9_arg1)
 	local f9_local0 = f9_arg0:getModel()
-	local f9_local1 = Engine[0x4DF5CFBC1771947](f9_arg1)
+	local f9_local1 = Engine[@"getmodelforcontroller"](f9_arg1)
 	local f9_local2 = "SurveyResponseOptions."
 	local f9_local3 = f9_local0.responseOptionIndex
 	f9_local1[f9_local2 .. REG5:get()].selectedIndex:set(f9_local0.ratingIndex:get())
@@ -118,7 +118,7 @@ end
 CoD.SurveyUtility.SetupSelectedIndexSubscription = function(f10_arg0, f10_arg1)
 	local f10_local0 = f10_arg0:getModel()
 	if f10_local0 then
-		local f10_local1 = Engine[0x4DF5CFBC1771947](f10_arg1)
+		local f10_local1 = Engine[@"getmodelforcontroller"](f10_arg1)
 		local f10_local2 = "SurveyResponseOptions."
 		local f10_local3 = f10_local0.responseOptionIndex
 		local f10_local4 = f10_local1[f10_local2 .. f10_local4:get()].selectedIndex
@@ -138,7 +138,7 @@ CoD.SurveyUtility.SetupSelectedIndexSubscription = function(f10_arg0, f10_arg1)
 end
 DataSources.SurveyQuestion = {
 	getModel = function(f12_arg0)
-		local f12_local0 = Engine[0x4DF5CFBC1771947](f12_arg0)
+		local f12_local0 = Engine[@"getmodelforcontroller"](f12_arg0)
 		local f12_local1 = f12_local0:create("SurveyQuestion")
 		local f12_local2 = CoD.SurveyUtility.GetSurveyTable()
 		local f12_local3 = f12_local1:create("questionText")
@@ -152,7 +152,7 @@ DataSources.SurveyQuestion = {
 	end,
 }
 DataSources.SurveyResponseOptions = ListHelper_SetupDataSource("SurveyResponseOptions", function(f13_arg0, f13_arg1)
-	local f13_local0 = Engine[0x4DF5CFBC1771947](f13_arg0)
+	local f13_local0 = Engine[@"getmodelforcontroller"](f13_arg0)
 	local f13_local1 = CoD.SurveyUtility.GetSurveyTable()
 	local f13_local2 = {}
 	for f13_local6, f13_local7 in ipairs(f13_local1.responseOptions) do

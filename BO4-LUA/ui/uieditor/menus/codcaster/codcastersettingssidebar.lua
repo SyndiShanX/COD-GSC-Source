@@ -24,7 +24,7 @@ LUI.createMenu.CodCasterSettingsSideBar = function(f1_arg0, f1_arg1)
 	f1_local1:addElementToPendingUpdateStateList(self)
 	local texture = LUI.UIImage.new(1, 1, -1050, 0, 0, 0, 0, 1080)
 	texture:setAlpha(0.75)
-	texture:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	texture:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	texture:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(texture)
 	self.texture = texture
@@ -61,8 +61,8 @@ LUI.createMenu.CodCasterSettingsSideBar = function(f1_arg0, f1_arg1)
 	local TopBar2 = LUI.UIImage.new(1, 1, -1050, 0, 0, 0, 50.5, 51.5)
 	TopBar2:setRGB(0.46, 0.46, 0.51)
 	TopBar2:setAlpha(0.8)
-	TopBar2:setImage(RegisterImage(0x42BCCF45B82FBED))
-	TopBar2:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	TopBar2:setImage(RegisterImage(@"uie_ui_menu_cac_primary_button_top_bar"))
+	TopBar2:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	TopBar2:setShaderVector(0, 2, 0, 0, 0)
 	self:addElement(TopBar2)
 	self.TopBar2 = TopBar2
@@ -71,10 +71,10 @@ LUI.createMenu.CodCasterSettingsSideBar = function(f1_arg0, f1_arg1)
 	self.BackingGrayMediumLeft = BackingGrayMediumLeft
 	local Title = LUI.UIText.new(1, 1, -1020, -702, 0, 0, 15.5, 45.5)
 	Title:setRGB(ColorSet.T8__GOLD.r, ColorSet.T8__GOLD.g, ColorSet.T8__GOLD.b)
-	Title:setText(LocalizeToUpperString(0xE2311AD89D11E7C))
+	Title:setText(LocalizeToUpperString(@"hash_7E2311AD89D11E7C"))
 	Title:setTTF("ttmussels_regular")
-	Title:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Title:setAlignment(Enum[0x7A5123B654282D2][0x6ED4298C93DC5ED])
+	Title:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Title:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
 	self:addElement(Title)
 	self.Title = Title
 	local FooterContainerIngameRight = CoD.CodCasterSettingsSideBarLeftbuttoncontainer.new(f1_local1, f1_arg0, 1, 1, -1000, -420, 1, 1, -48, 0)
@@ -99,7 +99,7 @@ LUI.createMenu.CodCasterSettingsSideBar = function(f1_arg0, f1_arg1)
 	self.CatgeoryTab = CatgeoryTab
 	local quitButton = nil
 	quitButton = CoD.featureOverlay_Button.new(f1_local1, f1_arg0, 1, 1, -319, -119, 0, 0, 924, 984)
-	quitButton.ButtonContainer.Title:setText(Engine[0xF9F1239CFD921FE](0x70A9FDC87CD3D48))
+	quitButton.ButtonContainer.Title:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/back"))
 	quitButton:registerEventHandler("gain_focus", function(element, event)
 		local f3_local0 = nil
 		if element.gainFocus then
@@ -107,23 +107,23 @@ LUI.createMenu.CodCasterSettingsSideBar = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f3_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f3_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(quitButton, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "MOUSE1", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(quitButton, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "MOUSE1", function(element, menu, controller, model)
 		SaveShoutcasterSettings(self, element, controller)
 		GoBack(self, controller)
 		SetLuiKeyCatcher(false)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "MOUSE1")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "MOUSE1")
 		return false
 	end, false)
 	self:addElement(quitButton)
 	self.quitButton = quitButton
 	local resetButton = nil
 	resetButton = CoD.featureOverlay_Button.new(f1_local1, f1_arg0, 1, 1, -550, -350, 0, 0, 924, 984)
-	resetButton.ButtonContainer.Title:setText(Engine[0xF9F1239CFD921FE](0xFA987631536BD44))
+	resetButton.ButtonContainer.Title:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_5FA987631536BD44"))
 	resetButton:registerEventHandler("gain_focus", function(element, event)
 		local f6_local0 = nil
 		if element.gainFocus then
@@ -131,14 +131,14 @@ LUI.createMenu.CodCasterSettingsSideBar = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f6_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f6_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(resetButton, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "MOUSE1", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(resetButton, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "MOUSE1", function(element, menu, controller, model)
 		CoD.CodCasterUtility.OpenResetCodCasterSettingsPopup(self, element, controller, "", menu)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "MOUSE1")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "MOUSE1")
 		return false
 	end, false)
 	self:addElement(resetButton)
@@ -159,7 +159,7 @@ LUI.createMenu.CodCasterSettingsSideBar = function(f1_arg0, f1_arg1)
 		{
 			stateName = "Hidden",
 			condition = function(menu, element, event)
-				return Engine[0xDD333420C49E6D0](f1_arg0, Enum[0x7F032C2EF103A1A][0x198075B069840DC])
+				return Engine[@"isvisibilitybitset"](f1_arg0, Enum[@"uivisibilitybit"][@"bit_game_ended"])
 			end,
 		},
 		{
@@ -177,14 +177,14 @@ LUI.createMenu.CodCasterSettingsSideBar = function(f1_arg0, f1_arg1)
 	})
 	local f1_local19 = self
 	local f1_local20 = self.subscribeToModel
-	local f1_local21 = Engine[0x4DF5CFBC1771947](f1_arg0)
-	f1_local20(f1_local19, f1_local21["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x198075B069840DC]], function(f14_arg0)
+	local f1_local21 = Engine[@"getmodelforcontroller"](f1_arg0)
+	f1_local20(f1_local19, f1_local21["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_game_ended"]], function(f14_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_local1,
 			controller = f1_arg0,
 			modelValue = f14_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x198075B069840DC],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_game_ended"],
 		})
 	end, false)
 	self:appendEventHandler("input_source_changed", function(f15_arg0, f15_arg1)
@@ -193,7 +193,7 @@ LUI.createMenu.CodCasterSettingsSideBar = function(f1_arg0, f1_arg1)
 	end)
 	f1_local19 = self
 	f1_local20 = self.subscribeToModel
-	f1_local21 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	f1_local21 = Engine[@"getmodelforcontroller"](f1_arg0)
 	f1_local20(f1_local19, f1_local21.LastInput, function(f16_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",
@@ -205,15 +205,15 @@ LUI.createMenu.CodCasterSettingsSideBar = function(f1_arg0, f1_arg1)
 	end, false)
 	self:appendEventHandler("input_source_changed", function(f17_arg0, f17_arg1)
 		f17_arg1.menu = f17_arg1.menu or f1_local1
-		CoD.Menu.UpdateButtonShownState(f17_arg0, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+		CoD.Menu.UpdateButtonShownState(f17_arg0, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 	end)
 	f1_local19 = self
 	f1_local20 = self.subscribeToModel
-	f1_local21 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	f1_local21 = Engine[@"getmodelforcontroller"](f1_arg0)
 	f1_local20(f1_local19, f1_local21.LastInput, function(f18_arg0, f18_arg1)
-		CoD.Menu.UpdateButtonShownState(f18_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+		CoD.Menu.UpdateButtonShownState(f18_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA], "Y", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_rtrig"], "Y", function(element, menu, controller, model)
 		if not IsRepeatButtonPress(model) then
 			SaveShoutcasterSettings(self, element, controller)
 			GoBack(self, controller)
@@ -223,13 +223,13 @@ LUI.createMenu.CodCasterSettingsSideBar = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if not IsRepeatButtonPress(nil) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA], 0x70A9FDC87CD3D48, nil, "Y")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_rtrig"], @"menu/back", nil, "Y")
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], "ui_contextual_2", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], "ui_contextual_2", function(element, menu, controller, model)
 		if IsGamepad(controller) then
 			CoD.CodCasterUtility.ResetCodcasterSettingsGamepad(controller, menu)
 			PlaySoundAlias("uin_party_ease_slide")
@@ -238,7 +238,7 @@ LUI.createMenu.CodCasterSettingsSideBar = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if IsGamepad(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0xFA987631536BD44, Enum[0xBEBDBAEEB3ECCCA][0x2919C98A7A845F0] | 750 << Enum[0xBEBDBAEEB3ECCCA][0x76ADD225D738C93], "ui_contextual_2")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"hash_5FA987631536BD44", Enum[@"luibuttonpromptflags"][@"hash_72919C98A7A845F0"] | 750 << Enum[@"luibuttonpromptflags"][@"hash_176ADD225D738C93"], "ui_contextual_2")
 			return true
 		else
 			return false

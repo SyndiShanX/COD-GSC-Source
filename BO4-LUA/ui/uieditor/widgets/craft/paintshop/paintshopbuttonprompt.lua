@@ -14,8 +14,8 @@ CoD.PaintshopButtonPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	label:setText("")
 	label:setTTF("ttmussels_regular")
 	label:setLetterSpacing(2)
-	label:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	label:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	label:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	label:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(label)
 	self.label = label
 	self:mergeStateConditions({
@@ -44,7 +44,7 @@ CoD.PaintshopButtonPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	end)
 	local f1_local3 = self
 	local f1_local4 = self.subscribeToModel
-	local f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local4(f1_local3, f1_local5.LastInput, function(f6_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -63,7 +63,7 @@ CoD.PaintshopButtonPrompt.__resetProperties = function(f7_arg0)
 	f7_arg0.label:completeAnimation()
 	f7_arg0.buttonPromptImage:completeAnimation()
 	f7_arg0.label:setAlpha(1)
-	f7_arg0.label:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	f7_arg0.label:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	f7_arg0.buttonPromptImage:setLeftRight(0, 0, 0, 36)
 	f7_arg0.buttonPromptImage:setTopBottom(0, 0, 0, 36)
 	f7_arg0.buttonPromptImage:setAlpha(1)
@@ -96,7 +96,7 @@ CoD.PaintshopButtonPrompt.__clipsPerState = {
 			f10_arg0.clipFinished(f10_arg0.buttonPromptImage)
 			f10_arg0.label:completeAnimation()
 			f10_arg0.label:setAlpha(1)
-			f10_arg0.label:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
+			f10_arg0.label:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
 			f10_arg0.clipFinished(f10_arg0.label)
 		end,
 	},

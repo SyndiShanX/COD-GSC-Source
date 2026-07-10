@@ -85,7 +85,7 @@ CoD.ChallengesStickerbookDarkOps.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	CallingCardGrid:setHorizontalCount(3)
 	CallingCardGrid:setVerticalCount(4)
 	CallingCardGrid:setSpacing(20)
-	CallingCardGrid:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	CallingCardGrid:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	CallingCardGrid:setVerticalCounter(CoD.verticalCounter)
 	CallingCardGrid:setDataSource("DarkOpsCallingCards")
 	CallingCardGrid:registerEventHandler("list_item_gain_focus", function(element, event)

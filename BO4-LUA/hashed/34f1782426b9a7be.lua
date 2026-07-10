@@ -9,27 +9,27 @@ CoD.SuveryBackground.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local BackgroundImage = LUI.UIImage.new(0.5, 0.5, -720, 720, 0.5, 0.5, -405, 405)
 	BackgroundImage:setAlpha(0)
-	BackgroundImage:setImage(RegisterImage(0x892DDBDC34BEE3B))
+	BackgroundImage:setImage(RegisterImage(@"img_t7_menu_mp_loadscreen_splash"))
 	self:addElement(BackgroundImage)
 	self.BackgroundImage = BackgroundImage
 	local SurveyBackgroundArena = LUI.UIImage.new(0, 0, 0, 1440, 0, 0, 0, 812)
 	SurveyBackgroundArena:setAlpha(0)
-	SurveyBackgroundArena:setImage(RegisterImage(0xDE0D93C57EEE5C4))
+	SurveyBackgroundArena:setImage(RegisterImage(@"uie_ui_menu_survey_arena"))
 	self:addElement(SurveyBackgroundArena)
 	self.SurveyBackgroundArena = SurveyBackgroundArena
 	local SurveyBackgroundMP = LUI.UIImage.new(0, 0, 0, 1440, 0, 0, 0, 812)
 	SurveyBackgroundMP:setAlpha(0)
-	SurveyBackgroundMP:setImage(RegisterImage(0xCD52BB31BEAFFA4))
+	SurveyBackgroundMP:setImage(RegisterImage(@"uie_ui_menu_survey_mp"))
 	self:addElement(SurveyBackgroundMP)
 	self.SurveyBackgroundMP = SurveyBackgroundMP
 	local SurveyBackgroundWZ = LUI.UIImage.new(0, 0, 0, 1440, 0, 0, 0, 812)
 	SurveyBackgroundWZ:setAlpha(0)
-	SurveyBackgroundWZ:setImage(RegisterImage(0xCC11DB31BDA3ED0))
+	SurveyBackgroundWZ:setImage(RegisterImage(@"uie_ui_menu_survey_wz"))
 	self:addElement(SurveyBackgroundWZ)
 	self.SurveyBackgroundWZ = SurveyBackgroundWZ
 	local SurveyBackgroundZM = LUI.UIImage.new(0, 0, 0, 1440, 0, 0, 0, 812)
 	SurveyBackgroundZM:setAlpha(0)
-	SurveyBackgroundZM:setImage(RegisterImage(0xC9B30B31BB98FDC))
+	SurveyBackgroundZM:setImage(RegisterImage(@"uie_ui_menu_survey_zm"))
 	self:addElement(SurveyBackgroundZM)
 	self.SurveyBackgroundZM = SurveyBackgroundZM
 	self:mergeStateConditions({
@@ -60,7 +60,7 @@ CoD.SuveryBackground.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	})
 	local f1_local6 = self
 	local f1_local7 = self.subscribeToModel
-	local f1_local8 = Engine[0x8DF2E5447F384B9]()
+	local f1_local8 = Engine[@"getglobalmodel"]()
 	f1_local7(f1_local6, f1_local8["lobbyRoot.lobbyNav"], function(f6_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

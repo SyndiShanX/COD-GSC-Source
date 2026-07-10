@@ -11,13 +11,13 @@ CoD.Hud_ZM_Perks_Disabled_Container.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local redL = LUI.UIImage.new(0, 0.96, 0, 0, 0, 1.07, 0, 0)
 	redL:setAlpha(0)
-	redL:setImage(RegisterImage(0xF6B5AA144406F52))
+	redL:setImage(RegisterImage(@"uie_cross_l_red"))
 	self:addElement(redL)
 	self.redL = redL
 	local redLyellow = LUI.UIImage.new(0, 0.96, 0, 0, 0, 1.07, 0, 0)
 	redLyellow:setAlpha(0)
-	redLyellow:setImage(RegisterImage(0x2112FF4D8EA5A27))
-	redLyellow:setMaterial(LUI.UIImage.GetCachedMaterial(0x910274CA3518744))
+	redLyellow:setImage(RegisterImage(@"uie_cross_l_yellow"))
+	redLyellow:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe"))
 	redLyellow:setShaderVector(0, 1, 0, 0, 0)
 	redLyellow:setShaderVector(1, 0, 0, 0, 0)
 	redLyellow:setShaderVector(2, 1, 0, 0, 0)
@@ -27,18 +27,18 @@ CoD.Hud_ZM_Perks_Disabled_Container.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	self.redLyellow = redLyellow
 	local redLglow = LUI.UIImage.new(0, 0.96, 0, 0, 0, 1.07, 0, 0)
 	redLglow:setAlpha(0)
-	redLglow:setImage(RegisterImage(0xCEEB0A2A202880E))
+	redLglow:setImage(RegisterImage(@"uie_cross_l_glow"))
 	self:addElement(redLglow)
 	self.redLglow = redLglow
 	local redR = LUI.UIImage.new(0, 0.96, 0, 0, 0, 1.07, 0, 0)
 	redR:setAlpha(0)
-	redR:setImage(RegisterImage(0x8A24E6CCDA57C48))
+	redR:setImage(RegisterImage(@"uie_cross_r_red"))
 	self:addElement(redR)
 	self.redR = redR
 	local redRyellow = LUI.UIImage.new(0, 0.96, 0, 0, 0, 1.07, 0, 0)
 	redRyellow:setAlpha(0)
-	redRyellow:setImage(RegisterImage(0x15CA934E38DAE5))
-	redRyellow:setMaterial(LUI.UIImage.GetCachedMaterial(0x910274CA3518744))
+	redRyellow:setImage(RegisterImage(@"uie_cross_r_yellow"))
+	redRyellow:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe"))
 	redRyellow:setShaderVector(0, 1, 0, 0, 0)
 	redRyellow:setShaderVector(1, 0, 0, 0, 0)
 	redRyellow:setShaderVector(2, 1, 0, 0, 0)
@@ -48,24 +48,24 @@ CoD.Hud_ZM_Perks_Disabled_Container.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	self.redRyellow = redRyellow
 	local redRglow = LUI.UIImage.new(0, 0.96, 0, 0, 0, 1.07, 0, 0)
 	redRglow:setAlpha(0)
-	redRglow:setImage(RegisterImage(0xAE3358229731260))
+	redRglow:setImage(RegisterImage(@"uie_cross_r_glow"))
 	self:addElement(redRglow)
 	self.redRglow = redRglow
 	local ZmFxSpark2Ext0 = CoD.ZmFx_Spark2Ext.new(f1_arg0, f1_arg1, 0, 0.32, -34, -34, 0, 1.02, 8, 8)
 	ZmFxSpark2Ext0:setAlpha(0)
 	ZmFxSpark2Ext0:setZRot(9)
-	ZmFxSpark2Ext0:setRFTMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	ZmFxSpark2Ext0:setRFTMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(ZmFxSpark2Ext0)
 	self.ZmFxSpark2Ext0 = ZmFxSpark2Ext0
 	local ZmFxSpark2Ext = CoD.ZmFx_Spark2Ext.new(f1_arg0, f1_arg1, 0, 0.51, -36, -36, 0, 1.62, -201, -201)
 	ZmFxSpark2Ext:setAlpha(0)
 	ZmFxSpark2Ext:setZRot(9)
-	ZmFxSpark2Ext:setRFTMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	ZmFxSpark2Ext:setRFTMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(ZmFxSpark2Ext)
 	self.ZmFxSpark2Ext = ZmFxSpark2Ext
 	local ZmFxFlsh10 = CoD.ZmFx_Flsh1.new(f1_arg0, f1_arg1, 0, 1.26, -56, -56, 0, 1.8, -62, -62)
 	ZmFxFlsh10:setAlpha(0)
-	ZmFxFlsh10:setRFTMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	ZmFxFlsh10:setRFTMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(ZmFxFlsh10)
 	self.ZmFxFlsh10 = ZmFxFlsh10
 	self:mergeStateConditions({
@@ -96,7 +96,7 @@ CoD.Hud_ZM_Perks_Disabled_Container.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	})
 	local f1_local10 = self
 	local f1_local11 = self.subscribeToModel
-	local f1_local12 = Engine[0x8DF2E5447F384B9]()
+	local f1_local12 = Engine[@"getglobalmodel"]()
 	f1_local11(f1_local10, f1_local12["ZMHudGlobal.trials.disablePerks"], function(f6_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -108,7 +108,7 @@ CoD.Hud_ZM_Perks_Disabled_Container.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	end, false)
 	f1_local10 = self
 	f1_local11 = self.subscribeToModel
-	f1_local12 = Engine[0x8DF2E5447F384B9]()
+	f1_local12 = Engine[@"getglobalmodel"]()
 	f1_local11(f1_local10, f1_local12["ZMHudGlobal.trials.infoHidden"], function(f7_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

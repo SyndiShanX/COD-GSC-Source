@@ -30,40 +30,40 @@ CoD.DirectorGamemodeSelectionZMInternal.new = function(f1_arg0, f1_arg1, f1_arg2
 	Maps:setHorizontalCount(4)
 	Maps:setVerticalCount(5)
 	Maps:setSpacing(20)
-	Maps:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	Maps:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	Maps:setVerticalCounter(CoD.verticalCounter)
 	Maps:setDataSource("DirectorPlaylistMapList")
 	Maps:appendEventHandler("on_session_start", function(f3_arg0, f3_arg1)
 		f3_arg1.menu = f3_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f3_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f3_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	Maps:appendEventHandler("on_session_end", function(f4_arg0, f4_arg1)
 		f4_arg1.menu = f4_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f4_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f4_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	local Tutorial = Maps
 	local Playlists = Maps.subscribeToModel
-	local DottedDivider = Engine[0x8DF2E5447F384B9]()
+	local DottedDivider = Engine[@"getglobalmodel"]()
 	Playlists(Tutorial, DottedDivider["lobbyRoot.lobbyNav"], function(f5_arg0, f5_arg1)
-		CoD.Menu.UpdateButtonShownState(f5_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f5_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	Tutorial = Maps
 	Playlists = Maps.subscribeToModel
-	DottedDivider = Engine[0x8DF2E5447F384B9]()
+	DottedDivider = Engine[@"getglobalmodel"]()
 	Playlists(Tutorial, DottedDivider["lobbyRoot.gameClient.update"], function(f6_arg0, f6_arg1)
-		CoD.Menu.UpdateButtonShownState(f6_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f6_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	Tutorial = Maps
 	Playlists = Maps.subscribeToModel
-	DottedDivider = Engine[0x8DF2E5447F384B9]()
+	DottedDivider = Engine[@"getglobalmodel"]()
 	Playlists(Tutorial, DottedDivider["lobbyRoot.privateClient.update"], function(f7_arg0, f7_arg1)
-		CoD.Menu.UpdateButtonShownState(f7_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f7_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	Maps:linkToElementModel(Maps, "locked", true, function(model, f8_arg1)
-		CoD.Menu.UpdateButtonShownState(f8_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f8_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	Maps:linkToElementModel(Maps, "lockState", true, function(model, f9_arg1)
-		CoD.Menu.UpdateButtonShownState(f9_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f9_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	Maps:registerEventHandler("list_item_gain_focus", function(element, event)
 		local f10_local0 = nil
@@ -77,32 +77,32 @@ CoD.DirectorGamemodeSelectionZMInternal.new = function(f1_arg0, f1_arg1, f1_arg2
 		elseif element.super.gainFocus then
 			f11_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f11_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(Maps, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(Maps, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if IsLobbyHostOfCurrentMenu() and not IsElementPropertyValue(element, "purchasable", true) and not CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "locked") then
 			CoD.DirectorUtility.SetPlaylist(controller, element)
 			PlaySoundSetSound(self, "action")
 			GoBack(self, controller)
 			return true
-		elseif CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "lockState", Enum[0xDACBB5C5F26BCD9][0x9B632F6362EA1BE]) then
+		elseif CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "lockState", Enum[@"playlistlockstate"][@"pls_required_dlc_not_available"]) then
 			CoD.StoreUtility.OpenStoreToDLCPack(self, element, controller, "DirectorFindGame", menu)
 			return true
-		elseif CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "lockState", Enum[0xDACBB5C5F26BCD9][0x4BDEB566326AC98]) then
+		elseif CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "lockState", Enum[@"playlistlockstate"][@"hash_4BDEB566326AC98"]) then
 			CoD.StoreUtility.OpenStoreToDLCPack(self, element, controller, "DirectorFindGame", menu)
 			return true
 		else
 		end
 	end, function(element, menu, controller)
 		if IsLobbyHostOfCurrentMenu() and not IsElementPropertyValue(element, "purchasable", true) and not CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "locked") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
-		elseif CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "lockState", Enum[0xDACBB5C5F26BCD9][0x9B632F6362EA1BE]) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+		elseif CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "lockState", Enum[@"playlistlockstate"][@"pls_required_dlc_not_available"]) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
-		elseif CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "lockState", Enum[0xDACBB5C5F26BCD9][0x4BDEB566326AC98]) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+		elseif CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "lockState", Enum[@"playlistlockstate"][@"hash_4BDEB566326AC98"]) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false
@@ -121,40 +121,40 @@ CoD.DirectorGamemodeSelectionZMInternal.new = function(f1_arg0, f1_arg1, f1_arg2
 	Playlists:setHorizontalCount(3)
 	Playlists:setVerticalCount(4)
 	Playlists:setSpacing(20)
-	Playlists:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	Playlists:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	Playlists:setVerticalCounter(CoD.verticalCounter)
 	Playlists:setDataSource("DirectorPlaylistMapList")
 	Playlists:appendEventHandler("on_session_start", function(f15_arg0, f15_arg1)
 		f15_arg1.menu = f15_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f15_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f15_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	Playlists:appendEventHandler("on_session_end", function(f16_arg0, f16_arg1)
 		f16_arg1.menu = f16_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f16_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f16_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	DottedDivider = Playlists
 	Tutorial = Playlists.subscribeToModel
-	local DifficultyList = Engine[0x8DF2E5447F384B9]()
+	local DifficultyList = Engine[@"getglobalmodel"]()
 	Tutorial(DottedDivider, DifficultyList["lobbyRoot.lobbyNav"], function(f17_arg0, f17_arg1)
-		CoD.Menu.UpdateButtonShownState(f17_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f17_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	DottedDivider = Playlists
 	Tutorial = Playlists.subscribeToModel
-	DifficultyList = Engine[0x8DF2E5447F384B9]()
+	DifficultyList = Engine[@"getglobalmodel"]()
 	Tutorial(DottedDivider, DifficultyList["lobbyRoot.gameClient.update"], function(f18_arg0, f18_arg1)
-		CoD.Menu.UpdateButtonShownState(f18_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f18_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	DottedDivider = Playlists
 	Tutorial = Playlists.subscribeToModel
-	DifficultyList = Engine[0x8DF2E5447F384B9]()
+	DifficultyList = Engine[@"getglobalmodel"]()
 	Tutorial(DottedDivider, DifficultyList["lobbyRoot.privateClient.update"], function(f19_arg0, f19_arg1)
-		CoD.Menu.UpdateButtonShownState(f19_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f19_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	Playlists:linkToElementModel(Playlists, "locked", true, function(model, f20_arg1)
-		CoD.Menu.UpdateButtonShownState(f20_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f20_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	Playlists:linkToElementModel(Playlists, "lockState", true, function(model, f21_arg1)
-		CoD.Menu.UpdateButtonShownState(f21_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f21_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	Playlists:registerEventHandler("list_item_gain_focus", function(element, event)
 		local f22_local0 = nil
@@ -168,32 +168,32 @@ CoD.DirectorGamemodeSelectionZMInternal.new = function(f1_arg0, f1_arg1, f1_arg2
 		elseif element.super.gainFocus then
 			f23_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f23_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(Playlists, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(Playlists, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if IsLobbyHostOfCurrentMenu() and not IsElementPropertyValue(element, "purchasable", true) and not CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "locked") then
 			CoD.DirectorUtility.SetPlaylist(controller, element)
 			PlaySoundSetSound(self, "action")
 			GoBack(self, controller)
 			return true
-		elseif CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "lockState", Enum[0xDACBB5C5F26BCD9][0x9B632F6362EA1BE]) then
+		elseif CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "lockState", Enum[@"playlistlockstate"][@"pls_required_dlc_not_available"]) then
 			CoD.StoreUtility.OpenStoreToDLCPack(self, element, controller, "DirectorFindGame", menu)
 			return true
-		elseif CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "lockState", Enum[0xDACBB5C5F26BCD9][0x4BDEB566326AC98]) then
+		elseif CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "lockState", Enum[@"playlistlockstate"][@"hash_4BDEB566326AC98"]) then
 			CoD.StoreUtility.OpenStoreToDLCPack(self, element, controller, "DirectorFindGame", menu)
 			return true
 		else
 		end
 	end, function(element, menu, controller)
 		if IsLobbyHostOfCurrentMenu() and not IsElementPropertyValue(element, "purchasable", true) and not CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "locked") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
-		elseif CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "lockState", Enum[0xDACBB5C5F26BCD9][0x9B632F6362EA1BE]) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+		elseif CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "lockState", Enum[@"playlistlockstate"][@"pls_required_dlc_not_available"]) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
-		elseif CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "lockState", Enum[0xDACBB5C5F26BCD9][0x4BDEB566326AC98]) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+		elseif CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "lockState", Enum[@"playlistlockstate"][@"hash_4BDEB566326AC98"]) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false
@@ -211,34 +211,34 @@ CoD.DirectorGamemodeSelectionZMInternal.new = function(f1_arg0, f1_arg1, f1_arg2
 	Tutorial:setWidgetType(CoD.DirectorZMTutorialSelectItem)
 	Tutorial:setHorizontalCount(2)
 	Tutorial:setSpacing(20)
-	Tutorial:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	Tutorial:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	Tutorial:setVerticalCounter(CoD.verticalCounter)
 	Tutorial:setDataSource("DirectorPlaylistMapList")
 	Tutorial:appendEventHandler("on_session_start", function(f27_arg0, f27_arg1)
 		f27_arg1.menu = f27_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f27_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f27_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	Tutorial:appendEventHandler("on_session_end", function(f28_arg0, f28_arg1)
 		f28_arg1.menu = f28_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f28_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f28_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	DifficultyList = Tutorial
 	DottedDivider = Tutorial.subscribeToModel
-	local f1_local7 = Engine[0x8DF2E5447F384B9]()
+	local f1_local7 = Engine[@"getglobalmodel"]()
 	DottedDivider(DifficultyList, f1_local7["lobbyRoot.lobbyNav"], function(f29_arg0, f29_arg1)
-		CoD.Menu.UpdateButtonShownState(f29_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f29_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	DifficultyList = Tutorial
 	DottedDivider = Tutorial.subscribeToModel
-	f1_local7 = Engine[0x8DF2E5447F384B9]()
+	f1_local7 = Engine[@"getglobalmodel"]()
 	DottedDivider(DifficultyList, f1_local7["lobbyRoot.gameClient.update"], function(f30_arg0, f30_arg1)
-		CoD.Menu.UpdateButtonShownState(f30_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f30_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	DifficultyList = Tutorial
 	DottedDivider = Tutorial.subscribeToModel
-	f1_local7 = Engine[0x8DF2E5447F384B9]()
+	f1_local7 = Engine[@"getglobalmodel"]()
 	DottedDivider(DifficultyList, f1_local7["lobbyRoot.privateClient.update"], function(f31_arg0, f31_arg1)
-		CoD.Menu.UpdateButtonShownState(f31_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f31_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	Tutorial:registerEventHandler("list_item_gain_focus", function(element, event)
 		local f32_local0 = nil
@@ -252,10 +252,10 @@ CoD.DirectorGamemodeSelectionZMInternal.new = function(f1_arg0, f1_arg1, f1_arg2
 		elseif element.super.gainFocus then
 			f33_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f33_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(Tutorial, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(Tutorial, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if IsLobbyHostOfCurrentMenu() and not IsElementPropertyValue(element, "purchasable", true) then
 			CoD.DirectorUtility.SetPlaylist(controller, element)
 			PlaySoundSetSound(self, "action")
@@ -268,10 +268,10 @@ CoD.DirectorGamemodeSelectionZMInternal.new = function(f1_arg0, f1_arg1, f1_arg2
 		end
 	end, function(element, menu, controller)
 		if IsLobbyHostOfCurrentMenu() and not IsElementPropertyValue(element, "purchasable", true) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		elseif IsLobbyHostOfCurrentMenu() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false
@@ -285,8 +285,8 @@ CoD.DirectorGamemodeSelectionZMInternal.new = function(f1_arg0, f1_arg1, f1_arg2
 	DottedDivider = LUI.UIImage.new(0, 0, 615, 619, 0, 0, -261, 783)
 	DottedDivider:setAlpha(0)
 	DottedDivider:setZRot(90)
-	DottedDivider:setImage(RegisterImage(0xC49B0C8991A541F))
-	DottedDivider:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	DottedDivider:setImage(RegisterImage(@"hash_C49B0C8991A541F"))
+	DottedDivider:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	DottedDivider:setShaderVector(0, 0, 0, 0, 0)
 	DottedDivider:setupNineSliceShader(4, 8)
 	self:addElement(DottedDivider)
@@ -298,7 +298,7 @@ CoD.DirectorGamemodeSelectionZMInternal.new = function(f1_arg0, f1_arg1, f1_arg2
 	DifficultyList:setWidgetType(CoD.ZMDifficultySelectButton)
 	DifficultyList:setHorizontalCount(4)
 	DifficultyList:setSpacing(20)
-	DifficultyList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	DifficultyList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	DifficultyList:setDataSource("ZMDifficultyList")
 	DifficultyList:registerEventHandler("gain_focus", function(element, event)
 		local f37_local0 = nil
@@ -307,15 +307,15 @@ CoD.DirectorGamemodeSelectionZMInternal.new = function(f1_arg0, f1_arg1, f1_arg2
 		elseif element.super.gainFocus then
 			f37_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f37_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(DifficultyList, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(DifficultyList, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		CoD.ZombieUtility.SelectDifficulty(element, controller)
 		PlaySoundAlias("uin_toggle_generic")
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xAC3B80C833B60E1, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_3AC3B80C833B60E1", nil, "ui_confirm")
 		return true
 	end, false)
 	self:addElement(DifficultyList)
@@ -360,7 +360,7 @@ CoD.DirectorGamemodeSelectionZMInternal.new = function(f1_arg0, f1_arg1, f1_arg2
 	})
 	local f1_local8 = self
 	f1_local7 = self.subscribeToModel
-	local f1_local9 = Engine[0x8DF2E5447F384B9]()
+	local f1_local9 = Engine[@"getglobalmodel"]()
 	f1_local7(f1_local8, f1_local9["ZMLobbyExclusions.ZMPlaylistTab"], function(f46_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

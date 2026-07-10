@@ -14,8 +14,8 @@ CoD.LaboratoryOfferNameAndDescription.new = function(f1_arg0, f1_arg1, f1_arg2, 
 	name:setRGB(0.58, 0.85, 1)
 	name:setTTF("skorzhen")
 	name:setLetterSpacing(3)
-	name:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	name:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	name:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	name:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	name:linkToElementModel(self, "labelName", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -29,12 +29,12 @@ CoD.LaboratoryOfferNameAndDescription.new = function(f1_arg0, f1_arg1, f1_arg2, 
 	description:setTTF("dinnext_regular")
 	description:setLetterSpacing(2)
 	description:setLineSpacing(1)
-	description:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	description:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	description:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	description:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	description:linkToElementModel(self, "description", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
-			description:setText(Engine[0xF9F1239CFD921FE](f3_local0))
+			description:setText(Engine[@"hash_4F9F1239CFD921FE"](f3_local0))
 		end
 	end)
 	self:addElement(description)

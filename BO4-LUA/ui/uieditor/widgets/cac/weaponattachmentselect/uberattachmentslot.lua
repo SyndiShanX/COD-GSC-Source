@@ -49,7 +49,7 @@ CoD.UberAttachmentSlot.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	end)
 	local f1_local2 = CommonItemSlotWide
 	local MutuallyExclusiveIcon = CommonItemSlotWide.subscribeToModel
-	local f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	MutuallyExclusiveIcon(f1_local2, f1_local4["CustomClassList.equippedItemsChanged"], function(f7_arg0)
 		f1_arg0:updateElementState(CommonItemSlotWide, {
 			name = "model_validation",
@@ -71,7 +71,7 @@ CoD.UberAttachmentSlot.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	CommonItemSlotWide:linkToElementModel(self, "displayNameShort", true, function(model)
 		local f10_local0 = model:get()
 		if f10_local0 ~= nil then
-			CommonItemSlotWide.ItemName.TextBox:setText(Engine[0xF9F1239CFD921FE](f10_local0))
+			CommonItemSlotWide.ItemName.TextBox:setText(Engine[@"hash_4F9F1239CFD921FE"](f10_local0))
 		end
 	end)
 	self:addElement(CommonItemSlotWide)
@@ -86,7 +86,7 @@ CoD.UberAttachmentSlot.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 		},
 	})
 	MutuallyExclusiveIcon:setRGB(1, 0.41, 0)
-	MutuallyExclusiveIcon.image:setImage(RegisterImage(0x11D4E13C821CCE3))
+	MutuallyExclusiveIcon.image:setImage(RegisterImage(@"hash_111D4E13C821CCE3"))
 	MutuallyExclusiveIcon:linkToElementModel(self, nil, false, function(model)
 		MutuallyExclusiveIcon:setModel(model, f1_arg1)
 	end)
@@ -130,7 +130,7 @@ CoD.UberAttachmentSlot.__clipsPerState = {
 			f18_arg0:__resetProperties()
 			f18_arg0:setupElementClipCounter(1)
 			local f18_local0 = function(f19_arg0)
-				f18_arg0.CommonItemSlotWide:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f18_arg0.CommonItemSlotWide:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f18_arg0.CommonItemSlotWide:setScale(1.05, 1.05)
 				f18_arg0.CommonItemSlotWide:registerEventHandler("interrupted_keyframe", f18_arg0.clipInterrupted)
 				f18_arg0.CommonItemSlotWide:registerEventHandler("transition_complete_keyframe", f18_arg0.clipFinished)
@@ -143,7 +143,7 @@ CoD.UberAttachmentSlot.__clipsPerState = {
 			f20_arg0:__resetProperties()
 			f20_arg0:setupElementClipCounter(1)
 			local f20_local0 = function(f21_arg0)
-				f20_arg0.CommonItemSlotWide:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f20_arg0.CommonItemSlotWide:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f20_arg0.CommonItemSlotWide:setScale(1, 1)
 				f20_arg0.CommonItemSlotWide:registerEventHandler("interrupted_keyframe", f20_arg0.clipInterrupted)
 				f20_arg0.CommonItemSlotWide:registerEventHandler("transition_complete_keyframe", f20_arg0.clipFinished)

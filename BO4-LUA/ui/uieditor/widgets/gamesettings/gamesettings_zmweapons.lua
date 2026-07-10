@@ -23,7 +23,7 @@ CoD.GameSettings_ZMWeapons.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	OptionCategoryGrid:setTopBottom(0, 0, 0, 782)
 	OptionCategoryGrid:setWidgetType(CoD.CustomGames_OptionCategoryButton)
 	OptionCategoryGrid:setVerticalCount(7)
-	OptionCategoryGrid:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	OptionCategoryGrid:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	OptionCategoryGrid:setDataSource("ZMWeaponsOptionCategories")
 	OptionCategoryGrid:registerEventHandler("gain_focus", function(element, event)
 		local f2_local0 = nil
@@ -32,17 +32,17 @@ CoD.GameSettings_ZMWeapons.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 		elseif element.super.gainFocus then
 			f2_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f2_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(OptionCategoryGrid, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(OptionCategoryGrid, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		ShowWidget(self.SlidersPC)
 		SetCurrentElementAsActive(self, element, controller)
 		SetFocusToElement(self, "SlidersPC", controller)
 		PlaySoundAlias("uin_party_ease_slide")
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 		return true
 	end, false)
 	self:addElement(OptionCategoryGrid)
@@ -53,7 +53,7 @@ CoD.GameSettings_ZMWeapons.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	SlidersPC:setTopBottom(0, 0, 0, 742)
 	SlidersPC:setWidgetType(CoD.CustomGames_SettingSlider)
 	SlidersPC:setVerticalCount(12)
-	SlidersPC:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	SlidersPC:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	SlidersPC:setVerticalCounter(CoD.verticalCounter)
 	SlidersPC:registerEventHandler("list_item_gain_focus", function(element, event)
 		local f5_local0 = nil
@@ -70,8 +70,8 @@ CoD.GameSettings_ZMWeapons.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 			f6_local0 = element.super:gainFocus(event)
 		end
 		SetElementCanBeNavigatedTo(self.OptionCategoryGrid, false)
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x22361E23588705A])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_start"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbb_pscircle"])
 		return f6_local0
 	end)
 	SlidersPC:registerEventHandler("lose_focus", function(element, event)
@@ -84,7 +84,7 @@ CoD.GameSettings_ZMWeapons.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 		SetElementCanBeNavigatedTo(self.OptionCategoryGrid, true)
 		return f7_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(SlidersPC, f1_arg1, Enum[0x3DD78803F918E9D][0x22361E23588705A], "ui_contextual_1", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(SlidersPC, f1_arg1, Enum[@"luibutton"][@"lui_key_start"], "ui_contextual_1", function(element, menu, controller, model)
 		if AlwaysFalse() then
 			OpenGameSettingsOptionsMenu(self, element, controller, menu)
 			PlaySoundAlias("cac_open_wpn_cust_sub")
@@ -93,19 +93,19 @@ CoD.GameSettings_ZMWeapons.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 		end
 	end, function(element, menu, controller)
 		if AlwaysFalse() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x22361E23588705A], 0x8E7772DFD9BBDEB, nil, "ui_contextual_1")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_start"], @"menu/options", nil, "ui_contextual_1")
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(SlidersPC, f1_arg1, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(SlidersPC, f1_arg1, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		SetFocusToElement(self, "OptionCategoryGrid", controller)
 		CoD.OptionsUtility.SetFocusToGrid(self.OptionCategoryGrid)
 		PlaySoundAlias("uin_party_ease_slide_back")
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x0, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"hash_0", nil, nil)
 		return false
 	end, false)
 	self:addElement(SlidersPC)
@@ -144,7 +144,7 @@ CoD.GameSettings_ZMWeapons.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	})
 	local f1_local8 = self
 	local f1_local9 = self.subscribeToModel
-	local f1_local10 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local10 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local9(f1_local8, f1_local10.customGamesEdit, function(f16_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

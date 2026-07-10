@@ -8,7 +8,7 @@ CoD.ZM_ReviveClampedArrow.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	self.soundSet = "default"
 	local arrow = LUI.UIImage.new(1, 1, -96, 0, 0, 1, 0, 0)
 	arrow:setZRot(90)
-	arrow:setImage(RegisterImage(0x83A063C5DEBF2DE))
+	arrow:setImage(RegisterImage(@"uie_t7_zm_hud_revive_arrow"))
 	self:addElement(arrow)
 	self.arrow = arrow
 	if PostLoadFunc then

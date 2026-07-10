@@ -15,7 +15,7 @@ CoD.WarzoneGameStatusIndicatorDisplay.new = function(f1_arg0, f1_arg1, f1_arg2, 
 	GameStatusIndicatorsRightSolo:setWidgetType(CoD.WarzoneGameStatusIndicatorListItem)
 	GameStatusIndicatorsRightSolo:setHorizontalCount(2)
 	GameStatusIndicatorsRightSolo:setSpacing(4)
-	GameStatusIndicatorsRightSolo:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
+	GameStatusIndicatorsRightSolo:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
 	self:addElement(GameStatusIndicatorsRightSolo)
 	self.GameStatusIndicatorsRightSolo = GameStatusIndicatorsRightSolo
 	local GameStatusIndicatorsLeftSolo = LUI.UIList.new(f1_arg0, f1_arg1, 4, 0, nil, false, false, false, false)
@@ -23,7 +23,7 @@ CoD.WarzoneGameStatusIndicatorDisplay.new = function(f1_arg0, f1_arg1, f1_arg2, 
 	GameStatusIndicatorsLeftSolo:setTopBottom(0, 0, 0, 44)
 	GameStatusIndicatorsLeftSolo:setWidgetType(CoD.WarzoneGameStatusIndicatorListItem)
 	GameStatusIndicatorsLeftSolo:setSpacing(4)
-	GameStatusIndicatorsLeftSolo:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
+	GameStatusIndicatorsLeftSolo:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
 	self:addElement(GameStatusIndicatorsLeftSolo)
 	self.GameStatusIndicatorsLeftSolo = GameStatusIndicatorsLeftSolo
 	local GameStatusIndicators = LUI.UIList.new(f1_arg0, f1_arg1, 2, 0, nil, false, false, false, false)
@@ -31,7 +31,7 @@ CoD.WarzoneGameStatusIndicatorDisplay.new = function(f1_arg0, f1_arg1, f1_arg2, 
 	GameStatusIndicators:setTopBottom(0, 0, 0, 44)
 	GameStatusIndicators:setWidgetType(CoD.WarzoneGameStatusIndicatorListItem)
 	GameStatusIndicators:setHorizontalCount(5)
-	GameStatusIndicators:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	GameStatusIndicators:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(GameStatusIndicators)
 	self.GameStatusIndicators = GameStatusIndicators
 	self:mergeStateConditions({
@@ -69,7 +69,7 @@ CoD.WarzoneGameStatusIndicatorDisplay.__resetProperties = function(f5_arg0)
 	f5_arg0.GameStatusIndicatorsLeftSolo:completeAnimation()
 	f5_arg0.GameStatusIndicators:setLeftRight(0, 0, 1, 399)
 	f5_arg0.GameStatusIndicators:setAlpha(1)
-	f5_arg0.GameStatusIndicators:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	f5_arg0.GameStatusIndicators:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	f5_arg0.GameStatusIndicatorsRightSolo:setAlpha(1)
 	f5_arg0.GameStatusIndicatorsLeftSolo:setLeftRight(0, 0, 81, 159)
 	f5_arg0.GameStatusIndicatorsLeftSolo:setAlpha(1)
@@ -114,7 +114,7 @@ CoD.WarzoneGameStatusIndicatorDisplay.__clipsPerState = {
 			f8_arg0.clipFinished(f8_arg0.GameStatusIndicatorsLeftSolo)
 			f8_arg0.GameStatusIndicators:completeAnimation()
 			f8_arg0.GameStatusIndicators:setLeftRight(1, 1, -398, 0)
-			f8_arg0.GameStatusIndicators:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
+			f8_arg0.GameStatusIndicators:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
 			f8_arg0.clipFinished(f8_arg0.GameStatusIndicators)
 		end,
 	},

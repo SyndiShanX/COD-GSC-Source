@@ -18,7 +18,7 @@ CoD.SupplyChainDetails_ButtonPromptContainer.new = function(f1_arg0, f1_arg1, f1
 				if f2_local0 then
 					f2_local0 = CoD.ModelUtility.IsSelfModelValueTrue(element, f1_arg1, "allowTogglePreview")
 					if f2_local0 then
-						f2_local0 = not CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", 0xCC13B0F8EEFF726)
+						f2_local0 = not CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", @"signature_weapon")
 					end
 				end
 				return f2_local0
@@ -33,7 +33,7 @@ CoD.SupplyChainDetails_ButtonPromptContainer.new = function(f1_arg0, f1_arg1, f1
 		{
 			stateName = "Visible",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueTrue(element, f1_arg1, "allowTogglePreview") and not CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", 0xCC13B0F8EEFF726)
+				return CoD.ModelUtility.IsSelfModelValueTrue(element, f1_arg1, "allowTogglePreview") and not CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", @"signature_weapon")
 			end,
 		},
 	})
@@ -43,7 +43,7 @@ CoD.SupplyChainDetails_ButtonPromptContainer.new = function(f1_arg0, f1_arg1, f1
 	end)
 	local PreviewGesture = ToggleOutfitPreview
 	local ToggleWeaponPreview = ToggleOutfitPreview.subscribeToModel
-	local VideoPreview = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local VideoPreview = Engine[@"getmodelforcontroller"](f1_arg1)
 	ToggleWeaponPreview(PreviewGesture, VideoPreview.LastInput, function(f6_arg0)
 		f1_arg0:updateElementState(ToggleOutfitPreview, {
 			name = "model_validation",
@@ -72,7 +72,7 @@ CoD.SupplyChainDetails_ButtonPromptContainer.new = function(f1_arg0, f1_arg1, f1
 		})
 	end)
 	ToggleOutfitPreview.KeyPrompt.keybind:setText(CoD.BaseUtility.AlreadyLocalized("[{ui_contextual_1}]"))
-	ToggleOutfitPreview.togglePreviewLabel:setText(Engine[0xF9F1239CFD921FE](0x7C59A6407407976))
+	ToggleOutfitPreview.togglePreviewLabel:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/hide_details"))
 	ToggleOutfitPreview:subscribeToGlobalModel(f1_arg1, "Controller", "back_button_image", function(model)
 		local f9_local0 = model:get()
 		if f9_local0 ~= nil then
@@ -93,7 +93,7 @@ CoD.SupplyChainDetails_ButtonPromptContainer.new = function(f1_arg0, f1_arg1, f1
 				if f11_local0 then
 					f11_local0 = CoD.ModelUtility.IsSelfModelValueTrue(element, f1_arg1, "allowTogglePreview")
 					if f11_local0 then
-						f11_local0 = CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", 0xCC13B0F8EEFF726)
+						f11_local0 = CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", @"signature_weapon")
 					end
 				end
 				return f11_local0
@@ -108,7 +108,7 @@ CoD.SupplyChainDetails_ButtonPromptContainer.new = function(f1_arg0, f1_arg1, f1
 		{
 			stateName = "Visible",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueTrue(element, f1_arg1, "allowTogglePreview") and CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", 0xCC13B0F8EEFF726)
+				return CoD.ModelUtility.IsSelfModelValueTrue(element, f1_arg1, "allowTogglePreview") and CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", @"signature_weapon")
 			end,
 		},
 	})
@@ -118,7 +118,7 @@ CoD.SupplyChainDetails_ButtonPromptContainer.new = function(f1_arg0, f1_arg1, f1
 	end)
 	VideoPreview = ToggleWeaponPreview
 	PreviewGesture = ToggleWeaponPreview.subscribeToModel
-	local FrozenMomentPreview = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local FrozenMomentPreview = Engine[@"getmodelforcontroller"](f1_arg1)
 	PreviewGesture(VideoPreview, FrozenMomentPreview.LastInput, function(f15_arg0)
 		f1_arg0:updateElementState(ToggleWeaponPreview, {
 			name = "model_validation",
@@ -200,7 +200,7 @@ CoD.SupplyChainDetails_ButtonPromptContainer.new = function(f1_arg0, f1_arg1, f1
 	end)
 	FrozenMomentPreview = PreviewGesture
 	VideoPreview = PreviewGesture.subscribeToModel
-	local f1_local6 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local6 = Engine[@"getmodelforcontroller"](f1_arg1)
 	VideoPreview(FrozenMomentPreview, f1_local6.LastInput, function(f25_arg0)
 		f1_arg0:updateElementState(PreviewGesture, {
 			name = "model_validation",
@@ -211,7 +211,7 @@ CoD.SupplyChainDetails_ButtonPromptContainer.new = function(f1_arg0, f1_arg1, f1
 		})
 	end, false)
 	PreviewGesture.KeyPrompt.keybind:setText(CoD.BaseUtility.AlreadyLocalized("[{ui_contextual_2}]"))
-	PreviewGesture.togglePreviewLabel:setText(Engine[0xF9F1239CFD921FE](0xDE61F05A2F38605))
+	PreviewGesture.togglePreviewLabel:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/preview_gesture"))
 	PreviewGesture:subscribeToGlobalModel(f1_arg1, "Controller", "right_stick_button_image", function(model)
 		local f26_local0 = model:get()
 		if f26_local0 ~= nil then
@@ -259,7 +259,7 @@ CoD.SupplyChainDetails_ButtonPromptContainer.new = function(f1_arg0, f1_arg1, f1
 	end)
 	f1_local6 = VideoPreview
 	FrozenMomentPreview = VideoPreview.subscribeToModel
-	local f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
 	FrozenMomentPreview(f1_local6, f1_local7.LastInput, function(f33_arg0)
 		f1_arg0:updateElementState(VideoPreview, {
 			name = "model_validation",
@@ -270,7 +270,7 @@ CoD.SupplyChainDetails_ButtonPromptContainer.new = function(f1_arg0, f1_arg1, f1
 		})
 	end, false)
 	VideoPreview.KeyPrompt.keybind:setText(CoD.BaseUtility.AlreadyLocalized("[{ui_remove}]"))
-	VideoPreview.togglePreviewLabel:setText(Engine[0xF9F1239CFD921FE](0x612B1DD49195D5))
+	VideoPreview.togglePreviewLabel:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/play_video"))
 	VideoPreview:subscribeToGlobalModel(f1_arg1, "Controller", "primary_button_image", function(model)
 		local f34_local0 = model:get()
 		if f34_local0 ~= nil then
@@ -316,7 +316,7 @@ CoD.SupplyChainDetails_ButtonPromptContainer.new = function(f1_arg0, f1_arg1, f1
 	end)
 	f1_local7 = FrozenMomentPreview
 	f1_local6 = FrozenMomentPreview.subscribeToModel
-	local f1_local8 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local8 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local6(f1_local7, f1_local8.LastInput, function(f40_arg0)
 		f1_arg0:updateElementState(FrozenMomentPreview, {
 			name = "model_validation",
@@ -345,7 +345,7 @@ CoD.SupplyChainDetails_ButtonPromptContainer.new = function(f1_arg0, f1_arg1, f1
 		})
 	end)
 	FrozenMomentPreview.KeyPrompt.keybind:setText(CoD.BaseUtility.AlreadyLocalized("[{ui_remove}]"))
-	FrozenMomentPreview.togglePreviewLabel:setText(Engine[0xF9F1239CFD921FE](0x23594B6BDE14144))
+	FrozenMomentPreview.togglePreviewLabel:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_323594B6BDE14144"))
 	FrozenMomentPreview:subscribeToGlobalModel(f1_arg1, "Controller", "primary_button_image", function(model)
 		local f43_local0 = model:get()
 		if f43_local0 ~= nil then

@@ -50,11 +50,11 @@ CoD.MapVote.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5,
 	self:addElement(MapVoteItemVoteDecided)
 	self.MapVoteItemVoteDecided = MapVoteItemVoteDecided
 	local MapVoteItemRandom = CoD.MapVoteItem.new(f1_arg0, f1_arg1, 0, 0, 538, 801, 0, 0, 37, 217)
-	MapVoteItemRandom.MapImage:setImage(RegisterImage(0xEDBAE30E94D38D3))
-	MapVoteItemRandom.MapVoteMapNameGameModeLayout.MapName:setText(LocalizeToUpperString(0x8C899D3B96CB850))
-	MapVoteItemRandom.MapVoteMapNameGameModeLayout.GameMode:setText(LocalizeToUpperString(0xFDFC63B040DE92E))
-	MapVoteItemRandom.GameModeIcon:setImage(RegisterImage(0x7615068F50B3D66))
-	MapVoteItemRandom.VoteType:setText(LocalizeToUpperString(0xA0C72A43293DDE0))
+	MapVoteItemRandom.MapImage:setImage(RegisterImage(@"uie_lui_random_map_vote"))
+	MapVoteItemRandom.MapVoteMapNameGameModeLayout.MapName:setText(LocalizeToUpperString(@"menu/classified"))
+	MapVoteItemRandom.MapVoteMapNameGameModeLayout.GameMode:setText(LocalizeToUpperString(@"menu/mode_classified"))
+	MapVoteItemRandom.GameModeIcon:setImage(RegisterImage(@"blacktransparent"))
+	MapVoteItemRandom.VoteType:setText(LocalizeToUpperString(@"menu/random"))
 	MapVoteItemRandom:subscribeToGlobalModel(f1_arg1, "MapVote", "mapVoteCountRandom", function(model)
 		local f7_local0 = model:get()
 		if f7_local0 ~= nil then
@@ -76,14 +76,14 @@ CoD.MapVote.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5,
 		elseif element.super.gainFocus then
 			f9_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f9_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(MapVoteItemRandom, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(MapVoteItemRandom, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		CoD.LobbyUtility.LobbyMapVoteSelectRandom(self, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 		return true
 	end, false)
 	self:addElement(MapVoteItemRandom)
@@ -99,7 +99,7 @@ CoD.MapVote.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5,
 	})
 	local LobbyStatus = MapVoteItemPrevious
 	local MapVoteItemNext = MapVoteItemPrevious.subscribeToModel
-	local f1_local6 = Engine[0x8DF2E5447F384B9]()
+	local f1_local6 = Engine[@"getglobalmodel"]()
 	MapVoteItemNext(LobbyStatus, f1_local6["lobbyRoot.mapVote"], function(f13_arg0)
 		f1_arg0:updateElementState(MapVoteItemPrevious, {
 			name = "model_validation",
@@ -111,7 +111,7 @@ CoD.MapVote.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5,
 	end, false)
 	LobbyStatus = MapVoteItemPrevious
 	MapVoteItemNext = MapVoteItemPrevious.subscribeToModel
-	f1_local6 = Engine[0x8DF2E5447F384B9]()
+	f1_local6 = Engine[@"getglobalmodel"]()
 	MapVoteItemNext(LobbyStatus, f1_local6["lobbyRoot.lobbyNav"], function(f14_arg0)
 		f1_arg0:updateElementState(MapVoteItemPrevious, {
 			name = "model_validation",
@@ -121,7 +121,7 @@ CoD.MapVote.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5,
 			modelName = "lobbyRoot.lobbyNav",
 		})
 	end, false)
-	MapVoteItemPrevious.VoteType:setText(LocalizeToUpperString(0x1AC7271BB7AB90A))
+	MapVoteItemPrevious.VoteType:setText(LocalizeToUpperString(@"menu/prev"))
 	MapVoteItemPrevious:subscribeToGlobalModel(f1_arg1, "MapVote", "mapVoteMapPrevious", function(model)
 		local f15_local0 = model:get()
 		if f15_local0 ~= nil then
@@ -154,15 +154,15 @@ CoD.MapVote.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5,
 	end)
 	LobbyStatus = MapVoteItemPrevious
 	MapVoteItemNext = MapVoteItemPrevious.subscribeToModel
-	f1_local6 = Engine[0x8DF2E5447F384B9]()
+	f1_local6 = Engine[@"getglobalmodel"]()
 	MapVoteItemNext(LobbyStatus, f1_local6["lobbyRoot.mapVote"], function(f20_arg0, f20_arg1)
-		CoD.Menu.UpdateButtonShownState(f20_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f20_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	LobbyStatus = MapVoteItemPrevious
 	MapVoteItemNext = MapVoteItemPrevious.subscribeToModel
-	f1_local6 = Engine[0x8DF2E5447F384B9]()
+	f1_local6 = Engine[@"getglobalmodel"]()
 	MapVoteItemNext(LobbyStatus, f1_local6["lobbyRoot.lobbyNav"], function(f21_arg0, f21_arg1)
-		CoD.Menu.UpdateButtonShownState(f21_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f21_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	MapVoteItemPrevious:registerEventHandler("lobby_map_vote_previous_chosen", function(element, event)
 		local f22_local0 = nil
@@ -179,10 +179,10 @@ CoD.MapVote.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5,
 		elseif element.super.gainFocus then
 			f23_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f23_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(MapVoteItemPrevious, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(MapVoteItemPrevious, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if CoD.LobbyUtility.MapVotePreviousSelectable() then
 			CoD.LobbyUtility.LobbyMapVoteSelectPrevious(self, controller)
 			return true
@@ -190,7 +190,7 @@ CoD.MapVote.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5,
 		end
 	end, function(element, menu, controller)
 		if CoD.LobbyUtility.MapVotePreviousSelectable() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false
@@ -199,7 +199,7 @@ CoD.MapVote.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5,
 	self:addElement(MapVoteItemPrevious)
 	self.MapVoteItemPrevious = MapVoteItemPrevious
 	MapVoteItemNext = CoD.MapVoteItem.new(f1_arg0, f1_arg1, 0, 0, 0, 263, 0, 0, 37, 217)
-	MapVoteItemNext.VoteType:setText(LocalizeToUpperString(0xF0DF87756796D4E))
+	MapVoteItemNext.VoteType:setText(LocalizeToUpperString(@"menu/next"))
 	MapVoteItemNext:subscribeToGlobalModel(f1_arg1, "MapVote", "mapVoteMapNext", function(model)
 		local f26_local0 = model:get()
 		if f26_local0 ~= nil then
@@ -245,14 +245,14 @@ CoD.MapVote.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5,
 		elseif element.super.gainFocus then
 			f32_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f32_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(MapVoteItemNext, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(MapVoteItemNext, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		CoD.LobbyUtility.LobbyMapVoteSelectNext(self, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 		return true
 	end, false)
 	self:addElement(MapVoteItemNext)
@@ -261,8 +261,8 @@ CoD.MapVote.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5,
 	LobbyStatus:setRGB(0.63, 0.62, 0.61)
 	LobbyStatus:setTTF("ttmussels_regular")
 	LobbyStatus:setLetterSpacing(6)
-	LobbyStatus:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	LobbyStatus:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	LobbyStatus:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	LobbyStatus:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	LobbyStatus:subscribeToGlobalModel(f1_arg1, "LobbyRoot", "lobbyStatus", function(model)
 		local f35_local0 = model:get()
 		if f35_local0 ~= nil then
@@ -281,19 +281,19 @@ CoD.MapVote.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5,
 		{
 			stateName = "MapVoteChosenNext",
 			condition = function(menu, element, event)
-				return CoD.LobbyUtility.MapVoteInState(LuaEnum.MAP_VOTE_STATE.LOCKEDIN) and CoD.ModelUtility.IsGlobalModelValueEqualToEnum("MapVote.lobbyMapVoteType", Enum[0xF116421015E781B][0x658B6B1B964D38A])
+				return CoD.LobbyUtility.MapVoteInState(LuaEnum.MAP_VOTE_STATE.LOCKEDIN) and CoD.ModelUtility.IsGlobalModelValueEqualToEnum("MapVote.lobbyMapVoteType", Enum[@"lobbymapvote"][@"lobby_mapvote_next"])
 			end,
 		},
 		{
 			stateName = "MapVoteChosenPrevious",
 			condition = function(menu, element, event)
-				return CoD.LobbyUtility.MapVoteInState(LuaEnum.MAP_VOTE_STATE.LOCKEDIN) and CoD.ModelUtility.IsGlobalModelValueEqualToEnum("MapVote.lobbyMapVoteType", Enum[0xF116421015E781B][0xD8A67C2C1AF1036])
+				return CoD.LobbyUtility.MapVoteInState(LuaEnum.MAP_VOTE_STATE.LOCKEDIN) and CoD.ModelUtility.IsGlobalModelValueEqualToEnum("MapVote.lobbyMapVoteType", Enum[@"lobbymapvote"][@"lobby_mapvote_previous"])
 			end,
 		},
 		{
 			stateName = "MapVoteChosenRandom",
 			condition = function(menu, element, event)
-				return CoD.LobbyUtility.MapVoteInState(LuaEnum.MAP_VOTE_STATE.LOCKEDIN) and CoD.ModelUtility.IsGlobalModelValueEqualToEnum("MapVote.lobbyMapVoteType", Enum[0xF116421015E781B][0x74A46A6237E75F4])
+				return CoD.LobbyUtility.MapVoteInState(LuaEnum.MAP_VOTE_STATE.LOCKEDIN) and CoD.ModelUtility.IsGlobalModelValueEqualToEnum("MapVote.lobbyMapVoteType", Enum[@"lobbymapvote"][@"lobby_mapvote_random"])
 			end,
 		},
 		{
@@ -305,7 +305,7 @@ CoD.MapVote.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5,
 	})
 	local f1_local7 = self
 	f1_local6 = self.subscribeToModel
-	local f1_local8 = Engine[0x8DF2E5447F384B9]()
+	local f1_local8 = Engine[@"getglobalmodel"]()
 	f1_local6(f1_local7, f1_local8["lobbyRoot.mapVote"], function(f41_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -317,7 +317,7 @@ CoD.MapVote.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5,
 	end, false)
 	f1_local7 = self
 	f1_local6 = self.subscribeToModel
-	f1_local8 = Engine[0x8DF2E5447F384B9]()
+	f1_local8 = Engine[@"getglobalmodel"]()
 	f1_local6(f1_local7, f1_local8["lobbyRoot.lobbyNav"], function(f42_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -329,7 +329,7 @@ CoD.MapVote.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5,
 	end, false)
 	f1_local7 = self
 	f1_local6 = self.subscribeToModel
-	f1_local8 = Engine[0x8DF2E5447F384B9]()
+	f1_local8 = Engine[@"getglobalmodel"]()
 	f1_local6(f1_local7, f1_local8["MapVote.lobbyMapVoteType"], function(f43_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -677,7 +677,7 @@ CoD.MapVote.__clipsPerState = {
 						f84_arg0:setAlpha(0)
 						f84_arg0:registerEventHandler("transition_complete_keyframe", f78_arg0.clipFinished)
 					end
-					f83_arg0:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f83_arg0:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 					f83_arg0:setLeftRight(0, 0, 0, 263)
 					f83_arg0:registerEventHandler("transition_complete_keyframe", f83_local0)
 				end
@@ -722,7 +722,7 @@ CoD.MapVote.__clipsPerState = {
 						f91_arg0:setAlpha(0)
 						f91_arg0:registerEventHandler("transition_complete_keyframe", f86_arg0.clipFinished)
 					end
-					f90_arg0:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f90_arg0:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 					f90_arg0:setLeftRight(0, 0, 0, 263)
 					f90_arg0:registerEventHandler("transition_complete_keyframe", f90_local0)
 				end
@@ -855,7 +855,7 @@ CoD.MapVote.__clipsPerState = {
 			f102_arg0:__resetProperties()
 			f102_arg0:setupElementClipCounter(4)
 			local f102_local0 = function(f103_arg0)
-				f102_arg0.MapVoteItemVoteDecided:beginAnimation(500, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f102_arg0.MapVoteItemVoteDecided:beginAnimation(500, Enum[@"luitween"][@"luitween_ease_out"])
 				f102_arg0.MapVoteItemVoteDecided:setLeftRight(0, 0, 0, 632)
 				f102_arg0.MapVoteItemVoteDecided:registerEventHandler("interrupted_keyframe", f102_arg0.clipInterrupted)
 				f102_arg0.MapVoteItemVoteDecided:registerEventHandler("transition_complete_keyframe", f102_arg0.clipFinished)

@@ -16,8 +16,8 @@ CoD.KeyboardTextFieldInputContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	local inputText = LUI.UIText.new(0, 0.98, 5, 5, 0, 1, 0, 0)
 	inputText:setText("")
 	inputText:setTTF("notosans_regular")
-	inputText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	inputText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	inputText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	inputText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(inputText)
 	self.inputText = inputText
 	local cursorText = CoD.KeyboardTextFieldInputCursor.new(f1_arg0, f1_arg1, 0, 0, -1, 194, 0, 1, 0, 0)

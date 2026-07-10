@@ -9,8 +9,8 @@ CoD.AmmoWidget_BackLine.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	local Image0 = LUI.UIImage.new(0, 1, 0, 0, 0.5, 0.5, -2, 2)
 	Image0:setRGB(0.24, 0.49, 0.65)
 	Image0:setAlpha(0.3)
-	Image0:setImage(RegisterImage(0x290182866A00727))
-	Image0:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Image0:setImage(RegisterImage(@"uie_t7_core_hud_ammowidget_backline"))
+	Image0:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Image0)
 	self.Image0 = Image0
 	if PostLoadFunc then

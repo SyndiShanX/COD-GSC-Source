@@ -12,29 +12,29 @@ CoD.vhud_sentinel_iris.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local vignetteCenter = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	vignetteCenter:setAlpha(0.3)
-	vignetteCenter:setImage(RegisterImage(0xEE4980C2A8CEA50))
+	vignetteCenter:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_agr_backgroundtint"))
 	self:addElement(vignetteCenter)
 	self.vignetteCenter = vignetteCenter
 	local VignetteR1 = LUI.UIImage.new(1, 1, -870, -383, 0.5, 0.5, -540, 540)
 	VignetteR1:setAlpha(0.15)
-	VignetteR1:setImage(RegisterImage(0x3F022F57715FF56))
+	VignetteR1:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_wasp_reticlevignetteblackblur"))
 	self:addElement(VignetteR1)
 	self.VignetteR1 = VignetteR1
 	local VignetteL1 = LUI.UIImage.new(0, 0, 379, 866, 0.5, 0.5, -540, 540)
 	VignetteL1:setAlpha(0.15)
 	VignetteL1:setZRot(180)
-	VignetteL1:setImage(RegisterImage(0x3F022F57715FF56))
+	VignetteL1:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_wasp_reticlevignetteblackblur"))
 	self:addElement(VignetteL1)
 	self.VignetteL1 = VignetteL1
 	local VignetteR2 = LUI.UIImage.new(1, 1, -835, -228, 0.5, 0.5, -673.5, 673.5)
 	VignetteR2:setAlpha(0.5)
-	VignetteR2:setImage(RegisterImage(0x3F022F57715FF56))
+	VignetteR2:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_wasp_reticlevignetteblackblur"))
 	self:addElement(VignetteR2)
 	self.VignetteR2 = VignetteR2
 	local VignetteL2 = LUI.UIImage.new(0, 0, 226, 833, 0.5, 0.5, -673.5, 673.5)
 	VignetteL2:setAlpha(0.5)
 	VignetteL2:setZRot(180)
-	VignetteL2:setImage(RegisterImage(0x3F022F57715FF56))
+	VignetteL2:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_wasp_reticlevignetteblackblur"))
 	self:addElement(VignetteL2)
 	self.VignetteL2 = VignetteL2
 	local VignetteContainer = CoD.VehicleGround_VignetteContainer.new(f1_arg0, f1_arg1, 0, 1, 304, -304, 0, 1, 172, -172)
@@ -98,7 +98,7 @@ CoD.vhud_sentinel_iris.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	})
 	local f1_local8 = self
 	local f1_local9 = self.subscribeToModel
-	local f1_local10 = Engine[0x8DF2E5447F384B9]()
+	local f1_local10 = Engine[@"getglobalmodel"]()
 	f1_local9(f1_local8, f1_local10["lobbyRoot.lobbyNav"], function(f8_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

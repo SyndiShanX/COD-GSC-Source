@@ -8,8 +8,8 @@ CoD.GameEndScoreCenterArrow.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local EndFui = LUI.UIImage.new(0, 0, 0, 160, 0, 0, 1, 73)
-	EndFui:setImage(RegisterImage(0x3A4620C75ACB27C))
-	EndFui:setMaterial(LUI.UIImage.GetCachedMaterial(0x2EEB1ECF1F211F5))
+	EndFui:setImage(RegisterImage(@"hash_23A4620C75ACB27C"))
+	EndFui:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_delta"))
 	EndFui:setShaderVector(0, 0, 1, 0, 0)
 	EndFui:setShaderVector(1, 0, 0, 0, 0)
 	EndFui:setShaderVector(2, 0, 1, 0, 0)
@@ -18,8 +18,8 @@ CoD.GameEndScoreCenterArrow.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self:addElement(EndFui)
 	self.EndFui = EndFui
 	local EndFuiAdd = LUI.UIImage.new(0, 0, 0, 160, 0, 0, 0, 72)
-	EndFuiAdd:setImage(RegisterImage(0x3A4620C75ACB27C))
-	EndFuiAdd:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	EndFuiAdd:setImage(RegisterImage(@"hash_23A4620C75ACB27C"))
+	EndFuiAdd:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	EndFuiAdd:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(EndFuiAdd)
 	self.EndFuiAdd = EndFuiAdd
@@ -55,12 +55,12 @@ CoD.GameEndScoreCenterArrow.__clipsPerState = {
 			f4_arg0:setupElementClipCounter(2)
 			local f4_local0 = function(f5_arg0)
 				local f5_local0 = function(f6_arg0)
-					f6_arg0:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f6_arg0:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 					f6_arg0:setAlpha(0.5)
 					f6_arg0:setShaderVector(0, 1, 1, 0, 0)
 					f6_arg0:registerEventHandler("transition_complete_keyframe", f4_arg0.clipFinished)
 				end
-				f4_arg0.EndFui:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f4_arg0.EndFui:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 				f4_arg0.EndFui:setAlpha(1)
 				f4_arg0.EndFui:setShaderVector(0, 0, 1, 0, 0)
 				f4_arg0.EndFui:registerEventHandler("interrupted_keyframe", f4_arg0.clipInterrupted)

@@ -13,8 +13,8 @@ CoD.ChallengesNotification.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self.image = image
 	local Text = LUI.UIText.new(0.5, 0.5, -306, 306, 0, 0, 267, 312)
 	Text:setTTF("ttmussels_demibold")
-	Text:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	Text:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Text:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	Text:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	LUI.OverrideFunction_CallOriginalFirst(Text, "setText", function(element, controller)
 		ScaleWidgetToLabelCenteredWrapped(self, element, 40, 40)
 	end)
@@ -44,7 +44,7 @@ CoD.ChallengesNotification.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self.WeaponLevelUpNotificationFooterLabel01:linkToElementModel(self, "subtitle", true, function(model)
 		local f6_local0 = model:get()
 		if f6_local0 ~= nil then
-			WeaponLevelUpNotificationFooterLabel01.SubText:setText(Engine[0xF9F1239CFD921FE](f6_local0))
+			WeaponLevelUpNotificationFooterLabel01.SubText:setText(Engine[@"hash_4F9F1239CFD921FE"](f6_local0))
 		end
 	end)
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)

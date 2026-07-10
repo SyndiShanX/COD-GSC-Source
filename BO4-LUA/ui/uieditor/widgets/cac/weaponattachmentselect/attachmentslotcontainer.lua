@@ -55,7 +55,7 @@ CoD.AttachmentSlotContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	end)
 	local f1_local2 = AttachmentSlot
 	local MutuallyExclusiveIcon = AttachmentSlot.subscribeToModel
-	local f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	MutuallyExclusiveIcon(f1_local2, f1_local4["CustomClassList.equippedItemsChanged"], function(f8_arg0)
 		f1_arg0:updateElementState(AttachmentSlot, {
 			name = "model_validation",
@@ -77,7 +77,7 @@ CoD.AttachmentSlotContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	AttachmentSlot:linkToElementModel(self, "displayNameShort", true, function(model)
 		local f11_local0 = model:get()
 		if f11_local0 ~= nil then
-			AttachmentSlot.AttachmentName.TextBox:setText(Engine[0xF9F1239CFD921FE](f11_local0))
+			AttachmentSlot.AttachmentName.TextBox:setText(Engine[@"hash_4F9F1239CFD921FE"](f11_local0))
 		end
 	end)
 	self:addElement(AttachmentSlot)
@@ -92,7 +92,7 @@ CoD.AttachmentSlotContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 		},
 	})
 	MutuallyExclusiveIcon:setRGB(1, 0.41, 0)
-	MutuallyExclusiveIcon.image:setImage(RegisterImage(0x11D4E13C821CCE3))
+	MutuallyExclusiveIcon.image:setImage(RegisterImage(@"hash_111D4E13C821CCE3"))
 	MutuallyExclusiveIcon:linkToElementModel(self, nil, false, function(model)
 		MutuallyExclusiveIcon:setModel(model, f1_arg1)
 	end)
@@ -117,7 +117,7 @@ CoD.AttachmentSlotContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	end)
 	f1_local4 = self
 	f1_local2 = self.subscribeToModel
-	local f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local2(f1_local4, f1_local5["CustomClassList.equippedItemsChanged"], function(f16_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -174,7 +174,7 @@ CoD.AttachmentSlotContainer.__clipsPerState = {
 			f23_arg0:__resetProperties()
 			f23_arg0:setupElementClipCounter(1)
 			local f23_local0 = function(f24_arg0)
-				f23_arg0.AttachmentSlot:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f23_arg0.AttachmentSlot:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f23_arg0.AttachmentSlot:setZoom(20)
 				f23_arg0.AttachmentSlot:setScale(1.05, 1.05)
 				f23_arg0.AttachmentSlot:registerEventHandler("interrupted_keyframe", f23_arg0.clipInterrupted)
@@ -189,7 +189,7 @@ CoD.AttachmentSlotContainer.__clipsPerState = {
 			f25_arg0:__resetProperties()
 			f25_arg0:setupElementClipCounter(1)
 			local f25_local0 = function(f26_arg0)
-				f25_arg0.AttachmentSlot:beginAnimation(200, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f25_arg0.AttachmentSlot:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_out"])
 				f25_arg0.AttachmentSlot:setZoom(0)
 				f25_arg0.AttachmentSlot:setScale(1, 1)
 				f25_arg0.AttachmentSlot:registerEventHandler("interrupted_keyframe", f25_arg0.clipInterrupted)
@@ -218,7 +218,7 @@ CoD.AttachmentSlotContainer.__clipsPerState = {
 			f29_arg0:__resetProperties()
 			f29_arg0:setupElementClipCounter(1)
 			local f29_local0 = function(f30_arg0)
-				f29_arg0.AttachmentSlot:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f29_arg0.AttachmentSlot:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f29_arg0.AttachmentSlot:setZoom(20)
 				f29_arg0.AttachmentSlot:setScale(1.05, 1.05)
 				f29_arg0.AttachmentSlot:registerEventHandler("interrupted_keyframe", f29_arg0.clipInterrupted)
@@ -233,7 +233,7 @@ CoD.AttachmentSlotContainer.__clipsPerState = {
 			f31_arg0:__resetProperties()
 			f31_arg0:setupElementClipCounter(1)
 			local f31_local0 = function(f32_arg0)
-				f31_arg0.AttachmentSlot:beginAnimation(200, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f31_arg0.AttachmentSlot:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_out"])
 				f31_arg0.AttachmentSlot:setZoom(0)
 				f31_arg0.AttachmentSlot:setScale(1, 1)
 				f31_arg0.AttachmentSlot:registerEventHandler("interrupted_keyframe", f31_arg0.clipInterrupted)

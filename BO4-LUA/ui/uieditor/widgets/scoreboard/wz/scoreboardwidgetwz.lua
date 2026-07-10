@@ -40,7 +40,7 @@ CoD.ScoreboardWidgetWZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 		{
 			stateName = "InventoryVisiblePC",
 			condition = function(menu, element, event)
-				local f2_local0 = IsVisibilityBitSet(f1_arg1, Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04])
+				local f2_local0 = IsVisibilityBitSet(f1_arg1, Enum[@"uivisibilitybit"][@"bit_scoreboard_open"])
 				if f2_local0 then
 					f2_local0 = CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg1, "scoreboardInfo.activeTab", CoD.HUDUtility.GameStatusMode.MODE_SHOW_INVENTORY)
 					if f2_local0 then
@@ -53,7 +53,7 @@ CoD.ScoreboardWidgetWZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 		{
 			stateName = "MapVisiblePC",
 			condition = function(menu, element, event)
-				local f3_local0 = IsVisibilityBitSet(f1_arg1, Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04])
+				local f3_local0 = IsVisibilityBitSet(f1_arg1, Enum[@"uivisibilitybit"][@"bit_scoreboard_open"])
 				if f3_local0 then
 					f3_local0 = CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg1, "scoreboardInfo.activeTab", CoD.HUDUtility.GameStatusMode.MODE_SHOW_MAP)
 					if f3_local0 then
@@ -69,7 +69,7 @@ CoD.ScoreboardWidgetWZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 		{
 			stateName = "ScoreboardVisiblePC",
 			condition = function(menu, element, event)
-				local f4_local0 = IsVisibilityBitSet(f1_arg1, Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04])
+				local f4_local0 = IsVisibilityBitSet(f1_arg1, Enum[@"uivisibilitybit"][@"bit_scoreboard_open"])
 				if f4_local0 then
 					f4_local0 = CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg1, "scoreboardInfo.activeTab", CoD.HUDUtility.GameStatusMode.MODE_SHOW_SCORES)
 					if f4_local0 then
@@ -82,7 +82,7 @@ CoD.ScoreboardWidgetWZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 		{
 			stateName = "Visible",
 			condition = function(menu, element, event)
-				return Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04]) and not IsMouseOrKeyboard(f1_arg1)
+				return Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]) and not IsMouseOrKeyboard(f1_arg1)
 			end,
 		},
 		{
@@ -94,19 +94,19 @@ CoD.ScoreboardWidgetWZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	})
 	local f1_local5 = self
 	local f1_local6 = self.subscribeToModel
-	local f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local6(f1_local5, f1_local7["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04]], function(f7_arg0)
+	local f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local6(f1_local5, f1_local7["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]], function(f7_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f7_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"],
 		})
 	end, false)
 	f1_local5 = self
 	f1_local6 = self.subscribeToModel
-	f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local6(f1_local5, f1_local7["scoreboardInfo.activeTab"], function(f8_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -122,7 +122,7 @@ CoD.ScoreboardWidgetWZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	end)
 	f1_local5 = self
 	f1_local6 = self.subscribeToModel
-	f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local6(f1_local5, f1_local7.LastInput, function(f10_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -134,19 +134,19 @@ CoD.ScoreboardWidgetWZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	end, false)
 	f1_local5 = self
 	f1_local6 = self.subscribeToModel
-	f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local6(f1_local5, f1_local7["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04]], function(f11_arg0)
+	f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local6(f1_local5, f1_local7["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]], function(f11_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f11_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"],
 		})
 	end, false)
 	f1_local5 = self
 	f1_local6 = self.subscribeToModel
-	f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local6(f1_local5, f1_local7.forceScoreboard, function(f12_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

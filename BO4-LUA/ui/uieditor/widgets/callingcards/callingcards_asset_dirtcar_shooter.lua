@@ -8,15 +8,15 @@ CoD.CallingCards_Asset_dirtcar_shooter.new = function(f1_arg0, f1_arg1, f1_arg2,
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local car = LUI.UIImage.new(0, 0, 0, 970, 0, 0, 0, 250)
-	car:setImage(RegisterImage(0x5AE42CF5FA4D43))
+	car:setImage(RegisterImage(@"uie_dirt_car"))
 	self:addElement(car)
 	self.car = car
 	local dude = LUI.UIImage.new(0, 0, 441, 659, 0, 0, 8, 218)
-	dude:setImage(RegisterImage(0xBA1A5D2D0356F1C))
+	dude:setImage(RegisterImage(@"uie_dude_shoots"))
 	self:addElement(dude)
 	self.dude = dude
 	local dude2 = LUI.UIImage.new(0, 0, 441, 659, 0, 0, 8, 218)
-	dude2:setImage(RegisterImage(0x8F551B499E9592D))
+	dude2:setImage(RegisterImage(@"uie_dude_shoots_fire"))
 	self:addElement(dude2)
 	self.dude2 = dude2
 	if PostLoadFunc then

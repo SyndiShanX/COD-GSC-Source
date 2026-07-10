@@ -9,7 +9,7 @@ CoD.ScoreInfo_PanelScale.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local ScoreInfoPanelScaleContainer0 = CoD.ScoreInfo_PanelScaleContainer.new(f1_arg0, f1_arg1, 0, 1, 0, 0, 0, 1, 0, 0)
-	ScoreInfoPanelScaleContainer0:setRFTMaterial(LUI.UIImage.GetCachedMaterial(0x5073BBE3838C63E))
+	ScoreInfoPanelScaleContainer0:setRFTMaterial(LUI.UIImage.GetCachedMaterial(@"uie_scene_blur_pass_2_highquality"))
 	ScoreInfoPanelScaleContainer0:setShaderVector(0, 30, 10, 0, 0)
 	self:addElement(ScoreInfoPanelScaleContainer0)
 	self.ScoreInfoPanelScaleContainer0 = ScoreInfoPanelScaleContainer0

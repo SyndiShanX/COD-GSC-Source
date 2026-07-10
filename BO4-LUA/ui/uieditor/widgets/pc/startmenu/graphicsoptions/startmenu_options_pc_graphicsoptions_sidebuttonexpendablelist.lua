@@ -51,11 +51,11 @@ CoD.StartMenu_Options_PC_GraphicsOptions_SideButtonExpendableList.new = function
 	self:addElement(SideButtonExpendable)
 	self.SideButtonExpendable = SideButtonExpendable
 	local SideButtonExpendable2 = CoD.SideButtonExpendable.new(f1_arg0, f1_arg1, 0, 0, 0, 390, 0, 0, 94, 178)
-	SideButtonExpendable2.ButtonLabel:setText(Engine[0xF9F1239CFD921FE](0xB32524670765A1B))
+	SideButtonExpendable2.ButtonLabel:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_4B32524670765A1B"))
 	self:addElement(SideButtonExpendable2)
 	self.SideButtonExpendable2 = SideButtonExpendable2
 	local SideButtonExpendable3 = CoD.SideButtonExpendable.new(f1_arg0, f1_arg1, 0, 0, 0, 390, 0, 0, 187.5, 271.5)
-	SideButtonExpendable3.ButtonLabel:setText(Engine[0xF9F1239CFD921FE](0x6315A7DFF851A75))
+	SideButtonExpendable3.ButtonLabel:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_76315A7DFF851A75"))
 	self:addElement(SideButtonExpendable3)
 	self.SideButtonExpendable3 = SideButtonExpendable3
 	SideButtonExpendable.id = "SideButtonExpendable"

@@ -9,19 +9,19 @@ CoD.PlayerWidget_ZM_Trials.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self.soundSet = "none"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local CheckBox2 = LUI.UIImage.new(0, 0, 0, 45, 0, 0, 10, 55)
-	CheckBox2:setImage(RegisterImage(0x3A6C1FB3B354832))
+	CheckBox2:setImage(RegisterImage(@"hash_63A6C1FB3B354832"))
 	self:addElement(CheckBox2)
 	self.CheckBox2 = CheckBox2
 	local white = LUI.UIImage.new(0, 0, 0, 55, 0, 0, 0, 55)
 	white:setAlpha(0)
-	white:setImage(RegisterImage(0xC7BD74A16D7054B))
+	white:setImage(RegisterImage(@"hash_7C7BD74A16D7054B"))
 	self:addElement(white)
 	self.white = white
 	local yellow = LUI.UIImage.new(0, 0, 0, 55, 0, 0, 0, 55)
 	yellow:setRGB(ColorSet.EnemyOrange.r, ColorSet.EnemyOrange.g, ColorSet.EnemyOrange.b)
 	yellow:setAlpha(0)
 	yellow:setImage(RegisterImage(0x1E5C0EED08D22D))
-	yellow:setMaterial(LUI.UIImage.GetCachedMaterial(0x316E67E1DF2198E))
+	yellow:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_normal"))
 	yellow:setShaderVector(0, 1, 0, 0, 0)
 	yellow:setShaderVector(1, 0, 0, 0, 0)
 	yellow:setShaderVector(2, 1, 0, 0, 0)
@@ -38,12 +38,12 @@ CoD.PlayerWidget_ZM_Trials.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	local ZmFxSpark2Ext0 = CoD.ZmFx_Spark2Ext.new(f1_arg0, f1_arg1, 0, 0, -1, 84, 0, 0, -68, 60)
 	ZmFxSpark2Ext0:setAlpha(0)
 	ZmFxSpark2Ext0:setZRot(9)
-	ZmFxSpark2Ext0:setRFTMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	ZmFxSpark2Ext0:setRFTMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(ZmFxSpark2Ext0)
 	self.ZmFxSpark2Ext0 = ZmFxSpark2Ext0
 	local Counter = LUI.UIText.new(0, 0, 0, 129, 0, 0, 22, 49)
 	Counter:setTTF("skorzhen")
-	Counter:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	Counter:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	Counter.__String_Reference = function(f2_arg0)
 		local f2_local0 = f2_arg0:get()
 		if f2_local0 ~= nil then
@@ -65,7 +65,7 @@ CoD.PlayerWidget_ZM_Trials.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self.Counter = Counter
 	local f1_local7 = Counter
 	local f1_local8 = Counter.subscribeToModel
-	local f1_local9 = Engine[0x8DF2E5447F384B9]()
+	local f1_local9 = Engine[@"getglobalmodel"]()
 	f1_local8(f1_local7, f1_local9["ZMHudGlobal.trials.playerCounterMax"], Counter.__String_Reference_FullPath)
 	self:mergeStateConditions({
 		{
@@ -95,7 +95,7 @@ CoD.PlayerWidget_ZM_Trials.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	})
 	f1_local7 = self
 	f1_local8 = self.subscribeToModel
-	f1_local9 = Engine[0x8DF2E5447F384B9]()
+	f1_local9 = Engine[@"getglobalmodel"]()
 	f1_local8(f1_local7, f1_local9["ZMHudGlobal.trials.infoHidden"], function(f8_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -132,9 +132,9 @@ CoD.PlayerWidget_ZM_Trials.__resetProperties = function(f10_arg0)
 	f10_arg0.glow:completeAnimation()
 	f10_arg0.Counter:setAlpha(1)
 	f10_arg0.CheckBox2:setAlpha(1)
-	f10_arg0.CheckBox2:setImage(RegisterImage(0x3A6C1FB3B354832))
+	f10_arg0.CheckBox2:setImage(RegisterImage(@"hash_63A6C1FB3B354832"))
 	f10_arg0.white:setAlpha(0)
-	f10_arg0.white:setImage(RegisterImage(0xC7BD74A16D7054B))
+	f10_arg0.white:setImage(RegisterImage(@"hash_7C7BD74A16D7054B"))
 	f10_arg0.ZmFxSpark2Ext0:setLeftRight(0, 0, -1, 84)
 	f10_arg0.ZmFxSpark2Ext0:setTopBottom(0, 0, -68, 60)
 	f10_arg0.ZmFxSpark2Ext0:setAlpha(0)
@@ -197,7 +197,7 @@ CoD.PlayerWidget_ZM_Trials.__clipsPerState = {
 			end
 			f14_arg0.white:completeAnimation()
 			f14_arg0.white:setAlpha(0)
-			f14_arg0.white:setImage(RegisterImage(0xC7BD74A16D7054B))
+			f14_arg0.white:setImage(RegisterImage(@"hash_7C7BD74A16D7054B"))
 			f14_local0(f14_arg0.white)
 			local f14_local1 = function(f18_arg0)
 				local f18_local0 = function(f19_arg0)
@@ -263,7 +263,7 @@ CoD.PlayerWidget_ZM_Trials.__clipsPerState = {
 			f26_arg0:__resetProperties()
 			f26_arg0:setupElementClipCounter(3)
 			f26_arg0.CheckBox2:completeAnimation()
-			f26_arg0.CheckBox2:setImage(RegisterImage(0x3A6C1FB3B354832))
+			f26_arg0.CheckBox2:setImage(RegisterImage(@"hash_63A6C1FB3B354832"))
 			f26_arg0.clipFinished(f26_arg0.CheckBox2)
 			f26_arg0.white:completeAnimation()
 			f26_arg0.white:setAlpha(1)
@@ -303,7 +303,7 @@ CoD.PlayerWidget_ZM_Trials.__clipsPerState = {
 			end
 			f28_arg0.white:completeAnimation()
 			f28_arg0.white:setAlpha(0)
-			f28_arg0.white:setImage(RegisterImage(0xC7BD74A16D7054B))
+			f28_arg0.white:setImage(RegisterImage(@"hash_7C7BD74A16D7054B"))
 			f28_local0(f28_arg0.white)
 			local f28_local1 = function(f32_arg0)
 				local f32_local0 = function(f33_arg0)

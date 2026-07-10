@@ -16,7 +16,7 @@ CoD.DirectorSelectButtonInternalCard.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local SceneBlur = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	SceneBlur:setRGB(0, 0, 0)
-	SceneBlur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	SceneBlur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	SceneBlur:setShaderVector(0, 0, 0.4, 0, 0)
 	self:addElement(SceneBlur)
 	self.SceneBlur = SceneBlur
@@ -26,24 +26,24 @@ CoD.DirectorSelectButtonInternalCard.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	self.FocusBrackets = FocusBrackets
 	local FocusGlow = LUI.UIImage.new(-0.02, 1.02, -136, 136, -0, 1, -108, 108)
 	FocusGlow:setAlpha(0)
-	FocusGlow:setImage(RegisterImage(0x8E79E4E42B6714C))
-	FocusGlow:setMaterial(LUI.UIImage.GetCachedMaterial(0xDAB59B2CAE01851))
+	FocusGlow:setImage(RegisterImage(@"uie_ui_menu_common_focus_glow_large"))
+	FocusGlow:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_6DAB59B2CAE01851"))
 	FocusGlow:setShaderVector(0, 0, 0, 0.25, 0.25)
 	FocusGlow:setShaderVector(1, 1.2, 0, 0, 0)
 	FocusGlow:setupNineSliceShader(300, 300)
 	self:addElement(FocusGlow)
 	self.FocusGlow = FocusGlow
 	local NoiseTiledBacking = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	NoiseTiledBacking:setImage(RegisterImage(0x34839E8065B1E53))
-	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	NoiseTiledBacking:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	NoiseTiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	NoiseTiledBacking:setupNineSliceShader(196, 88)
 	self:addElement(NoiseTiledBacking)
 	self.NoiseTiledBacking = NoiseTiledBacking
 	local NoiseTiledBackingAdd = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	NoiseTiledBackingAdd:setAlpha(0)
-	NoiseTiledBackingAdd:setImage(RegisterImage(0x34839E8065B1E53))
-	NoiseTiledBackingAdd:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	NoiseTiledBackingAdd:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	NoiseTiledBackingAdd:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	NoiseTiledBackingAdd:setShaderVector(0, 0, 0, 0, 0)
 	NoiseTiledBackingAdd:setupNineSliceShader(196, 88)
 	self:addElement(NoiseTiledBackingAdd)
@@ -54,7 +54,7 @@ CoD.DirectorSelectButtonInternalCard.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	self.SelectorOverlay = SelectorOverlay
 	local ImageNotFocus = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	ImageNotFocus:setAlpha(0)
-	ImageNotFocus:setMaterial(LUI.UIImage.GetCachedMaterial(0x67D1E3A3D2D1BF))
+	ImageNotFocus:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_saturation_normal"))
 	ImageNotFocus:setShaderVector(0, 1, 0, 0, 0)
 	ImageNotFocus:linkToElementModel(self, "iconBackground", true, function(model)
 		local f2_local0 = model:get()
@@ -75,7 +75,7 @@ CoD.DirectorSelectButtonInternalCard.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	self.ImageMask = ImageMask
 	local gradientBTM = LUI.UIImage.new(0.21, 1.21, -64, -64, 1, 1, -144.5, 0.5)
 	gradientBTM:setAlpha(0)
-	gradientBTM:setMaterial(LUI.UIImage.GetCachedMaterial(0xDE760AC0E801E57))
+	gradientBTM:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_gradient_normal"))
 	gradientBTM:setShaderVector(0, 0, 0, 0, 0)
 	gradientBTM:setShaderVector(1, 0, 0, 0, 1)
 	gradientBTM:setShaderVector(2, 0.33, 90, 0, 0)
@@ -95,8 +95,8 @@ CoD.DirectorSelectButtonInternalCard.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	self.GameMode = GameMode
 	local FrameBorder = LUI.UIImage.new(0, 1, -1, 1, 0, 1, -1, 1)
 	FrameBorder:setAlpha(0.15)
-	FrameBorder:setImage(RegisterImage(0x185E11D74ECA3D7))
-	FrameBorder:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	FrameBorder:setImage(RegisterImage(@"uie_ui_menu_store_common_frame"))
+	FrameBorder:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	FrameBorder:setShaderVector(0, 0, 0, 0, 0)
 	FrameBorder:setupNineSliceShader(12, 12)
 	self:addElement(FrameBorder)
@@ -108,27 +108,27 @@ CoD.DirectorSelectButtonInternalCard.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	local LeaderActivityText = LUI.UIText.new(0, 0, 9, 278, 1, 1, -53.5, -33.5)
 	LeaderActivityText:setRGB(0.63, 0.62, 0.61)
 	LeaderActivityText:setAlpha(0)
-	LeaderActivityText:setText(Engine[0xF9F1239CFD921FE](0x93E719493E9E18F))
+	LeaderActivityText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	LeaderActivityText:setTTF("ttmussels_regular")
 	LeaderActivityText:setLetterSpacing(4)
-	LeaderActivityText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	LeaderActivityText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	LeaderActivityText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	LeaderActivityText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(LeaderActivityText)
 	self.LeaderActivityText = LeaderActivityText
 	local MiddleText = LUI.UIText.new(0.02, 0.98, 0, 0, 0.5, 0.5, -10, 12)
 	MiddleText:setAlpha(0)
-	MiddleText:setText(LocalizeToUpperString(0xA43B10D9DA121A))
+	MiddleText:setText(LocalizeToUpperString(@"hash_A43B10D9DA121A"))
 	MiddleText:setTTF("ttmussels_regular")
 	MiddleText:setLetterSpacing(6)
-	MiddleText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	MiddleText:setAlignment(Enum[0x7A5123B654282D2][0x6ED4298C93DC5ED])
+	MiddleText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	MiddleText:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
 	self:addElement(MiddleText)
 	self.MiddleText = MiddleText
 	local CountdownText = LUI.UIText.new(0.5, 0.5, -75, -20, 0.55, 0.55, 0, 33)
 	CountdownText:setRGB(0.05, 0.05, 0.05)
 	CountdownText:setAlpha(0)
 	CountdownText:setTTF("ttmussels_regular")
-	CountdownText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	CountdownText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	CountdownText:subscribeToGlobalModel(f1_arg1, "LobbyRoot", "lobbyStatus", function(model)
 		local f5_local0 = model:get()
 		if f5_local0 ~= nil then
@@ -142,8 +142,8 @@ CoD.DirectorSelectButtonInternalCard.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	timer:setAlpha(0)
 	timer:setTTF("ttmussels_demibold")
 	timer:setLetterSpacing(-6.3)
-	timer:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	timer:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	timer:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	timer:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	timer:subscribeToGlobalModel(f1_arg1, "LobbyRoot", "lobbyTimeRemaining", function(model)
 		local f6_local0 = model:get()
 		if f6_local0 ~= nil then
@@ -162,9 +162,9 @@ CoD.DirectorSelectButtonInternalCard.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	GameModeDescription:setRGB(0.47, 0.47, 0.47)
 	GameModeDescription:setAlpha(0)
 	GameModeDescription:setTTF("dinnext_regular")
-	GameModeDescription:setMaterial(LUI.UIImage.GetCachedMaterial(0x71E049B161CD00A))
-	GameModeDescription:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	GameModeDescription:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	GameModeDescription:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_171E049B161CD00A"))
+	GameModeDescription:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	GameModeDescription:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	GameModeDescription:linkToElementModel(self, "descriptionText", true, function(model)
 		local f8_local0 = model:get()
 		if f8_local0 ~= nil then
@@ -175,12 +175,12 @@ CoD.DirectorSelectButtonInternalCard.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	self.GameModeDescription = GameModeDescription
 	local lockImage = LUI.UIImage.new(0.5, 0.5, -25, 25, 0.5, 0.5, -20, 30)
 	lockImage:setAlpha(0)
-	lockImage:setImage(RegisterImage(0xE1E7C490B2BA4FB))
+	lockImage:setImage(RegisterImage(@"uie_ui_icon_global_lock"))
 	self:addElement(lockImage)
 	self.lockImage = lockImage
 	local downloadIcon = LUI.UIImage.new(0, 0, 220, 300, 0, 0, 258, 338)
 	downloadIcon:setAlpha(0)
-	downloadIcon:setImage(RegisterImage(0x9D993738EE5B550))
+	downloadIcon:setImage(RegisterImage(@"t7_icon_menu_options_download"))
 	self:addElement(downloadIcon)
 	self.downloadIcon = downloadIcon
 	local UpsellWidget = CoD.UpsellWidget.new(f1_arg0, f1_arg1, 0.5, 0.5, -100, 100, 0.5, 0.5, -26.5, 45.5)
@@ -190,8 +190,8 @@ CoD.DirectorSelectButtonInternalCard.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	local FocusBorder = LUI.UIImage.new(0, 1, -4, 4, 0, 1, -4, 4)
 	FocusBorder:setRGB(0.96, 0.94, 0.78)
 	FocusBorder:setAlpha(0)
-	FocusBorder:setImage(RegisterImage(0xCB07CCC28498CB2))
-	FocusBorder:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	FocusBorder:setImage(RegisterImage(@"uie_ui_menu_store_focus_frame"))
+	FocusBorder:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	FocusBorder:setShaderVector(0, 0, 0, 0, 0)
 	FocusBorder:setupNineSliceShader(10, 10)
 	self:addElement(FocusBorder)
@@ -200,8 +200,8 @@ CoD.DirectorSelectButtonInternalCard.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	PercentInstalled:setRGB(0.56, 0.56, 0.56)
 	PercentInstalled:setAlpha(0)
 	PercentInstalled:setTTF("default")
-	PercentInstalled:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	PercentInstalled:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	PercentInstalled:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	PercentInstalled:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	PercentInstalled:subscribeToGlobalModel(f1_arg1, "LobbyRoot", "percentInstalled", function(model)
 		local f9_local0 = model:get()
 		if f9_local0 ~= nil then
@@ -221,7 +221,7 @@ CoD.DirectorSelectButtonInternalCard.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	})
 	local f1_local26 = PartyLeaderOnlyPrompt
 	local f1_local27 = PartyLeaderOnlyPrompt.subscribeToModel
-	local f1_local28 = Engine[0x8DF2E5447F384B9]()
+	local f1_local28 = Engine[@"getglobalmodel"]()
 	f1_local27(f1_local26, f1_local28["lobbyRoot.lobbyNav"], function(f11_arg0)
 		f1_arg0:updateElementState(PartyLeaderOnlyPrompt, {
 			name = "model_validation",
@@ -233,7 +233,7 @@ CoD.DirectorSelectButtonInternalCard.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	end, false)
 	f1_local26 = PartyLeaderOnlyPrompt
 	f1_local27 = PartyLeaderOnlyPrompt.subscribeToModel
-	f1_local28 = Engine[0x8DF2E5447F384B9]()
+	f1_local28 = Engine[@"getglobalmodel"]()
 	f1_local27(f1_local26, f1_local28["lobbyRoot.gameClient.update"], function(f12_arg0)
 		f1_arg0:updateElementState(PartyLeaderOnlyPrompt, {
 			name = "model_validation",
@@ -245,7 +245,7 @@ CoD.DirectorSelectButtonInternalCard.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	end, false)
 	f1_local26 = PartyLeaderOnlyPrompt
 	f1_local27 = PartyLeaderOnlyPrompt.subscribeToModel
-	f1_local28 = Engine[0x8DF2E5447F384B9]()
+	f1_local28 = Engine[@"getglobalmodel"]()
 	f1_local27(f1_local26, f1_local28["lobbyRoot.privateClient.update"], function(f13_arg0)
 		f1_arg0:updateElementState(PartyLeaderOnlyPrompt, {
 			name = "model_validation",
@@ -287,8 +287,8 @@ CoD.DirectorSelectButtonInternalCard.new = function(f1_arg0, f1_arg1, f1_arg2, f
 			condition = function(menu, element, event)
 				local f18_local0 = CoD.ModelUtility.IsSelfModelValueTrue(element, f1_arg1, "locked")
 				if f18_local0 then
-					if not CoD.ModelUtility.IsGlobalModelValueEqualTo("lobbyRoot.percentInstalled", 100) and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "lockState", Enum[0xDACBB5C5F26BCD9][0x4BDEB566326AC98]) then
-						f18_local0 = not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "lockState", Enum[0xDACBB5C5F26BCD9][0x9B632F6362EA1BE])
+					if not CoD.ModelUtility.IsGlobalModelValueEqualTo("lobbyRoot.percentInstalled", 100) and not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "lockState", Enum[@"playlistlockstate"][@"hash_4BDEB566326AC98"]) then
+						f18_local0 = not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "lockState", Enum[@"playlistlockstate"][@"pls_required_dlc_not_available"])
 					else
 						f18_local0 = false
 					end
@@ -301,8 +301,8 @@ CoD.DirectorSelectButtonInternalCard.new = function(f1_arg0, f1_arg1, f1_arg2, f
 			condition = function(menu, element, event)
 				local f19_local0 = CoD.ModelUtility.IsSelfModelValueTrue(element, f1_arg1, "locked")
 				if f19_local0 then
-					if not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "lockState", Enum[0xDACBB5C5F26BCD9][0x4BDEB566326AC98]) then
-						f19_local0 = not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "lockState", Enum[0xDACBB5C5F26BCD9][0x9B632F6362EA1BE])
+					if not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "lockState", Enum[@"playlistlockstate"][@"hash_4BDEB566326AC98"]) then
+						f19_local0 = not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "lockState", Enum[@"playlistlockstate"][@"pls_required_dlc_not_available"])
 					else
 						f19_local0 = false
 					end
@@ -319,13 +319,13 @@ CoD.DirectorSelectButtonInternalCard.new = function(f1_arg0, f1_arg1, f1_arg2, f
 		{
 			stateName = "Upsell",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "lockState", Enum[0xDACBB5C5F26BCD9][0x4BDEB566326AC98])
+				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "lockState", Enum[@"playlistlockstate"][@"hash_4BDEB566326AC98"])
 			end,
 		},
 		{
 			stateName = "Download",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "lockState", Enum[0xDACBB5C5F26BCD9][0x9B632F6362EA1BE])
+				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "lockState", Enum[@"playlistlockstate"][@"pls_required_dlc_not_available"])
 			end,
 		},
 	})
@@ -349,7 +349,7 @@ CoD.DirectorSelectButtonInternalCard.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	end)
 	f1_local26 = self
 	f1_local27 = self.subscribeToModel
-	f1_local28 = Engine[0x8DF2E5447F384B9]()
+	f1_local28 = Engine[@"getglobalmodel"]()
 	f1_local27(f1_local26, f1_local28["lobbyRoot.percentInstalled"], function(f25_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -409,7 +409,7 @@ CoD.DirectorSelectButtonInternalCard.__resetProperties = function(f27_arg0)
 	f27_arg0.FocusBrackets:setAlpha(0)
 	f27_arg0.GameModeDescription:setRGB(0.47, 0.47, 0.47)
 	f27_arg0.ImageNotFocus:setRGB(1, 1, 1)
-	f27_arg0.ImageNotFocus:setMaterial(LUI.UIImage.GetCachedMaterial(0x67D1E3A3D2D1BF))
+	f27_arg0.ImageNotFocus:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_saturation_normal"))
 	f27_arg0.ImageNotFocus:setShaderVector(0, 1, 0, 0, 0)
 	f27_arg0.GameMode:setAlpha(1)
 	f27_arg0.DoubleXPCardIconsLeftAligned:setAlpha(1)
@@ -475,7 +475,7 @@ CoD.DirectorSelectButtonInternalCard.__clipsPerState = {
 			f32_arg0:setupElementClipCounter(10)
 			local f32_local0 = function(f33_arg0)
 				local f33_local0 = function(f34_arg0)
-					f34_arg0:beginAnimation(50, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f34_arg0:beginAnimation(50, Enum[@"luitween"][@"luitween_ease_out"])
 					f34_arg0:setLeftRight(0, 1, -10, 10)
 					f34_arg0:setTopBottom(0, 1, -10, 10)
 					f34_arg0:setAlpha(1)
@@ -494,7 +494,7 @@ CoD.DirectorSelectButtonInternalCard.__clipsPerState = {
 			f32_arg0.FocusBrackets:setAlpha(0)
 			f32_local0(f32_arg0.FocusBrackets)
 			local f32_local1 = function(f35_arg0)
-				f32_arg0.FocusGlow:beginAnimation(200, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f32_arg0.FocusGlow:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_out"])
 				f32_arg0.FocusGlow:setAlpha(0.6)
 				f32_arg0.FocusGlow:registerEventHandler("interrupted_keyframe", f32_arg0.clipInterrupted)
 				f32_arg0.FocusGlow:registerEventHandler("transition_complete_keyframe", f32_arg0.clipFinished)
@@ -579,7 +579,7 @@ CoD.DirectorSelectButtonInternalCard.__clipsPerState = {
 			f44_arg0:__resetProperties()
 			f44_arg0:setupElementClipCounter(9)
 			local f44_local0 = function(f45_arg0)
-				f44_arg0.FocusBrackets:beginAnimation(60, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f44_arg0.FocusBrackets:beginAnimation(60, Enum[@"luitween"][@"luitween_ease_in"])
 				f44_arg0.FocusBrackets:setAlpha(0)
 				f44_arg0.FocusBrackets:registerEventHandler("interrupted_keyframe", f44_arg0.clipInterrupted)
 				f44_arg0.FocusBrackets:registerEventHandler("transition_complete_keyframe", f44_arg0.clipFinished)
@@ -669,7 +669,7 @@ CoD.DirectorSelectButtonInternalCard.__clipsPerState = {
 			f54_arg0:setupElementClipCounter(7)
 			f54_arg0.ImageNotFocus:completeAnimation()
 			f54_arg0.ImageNotFocus:setRGB(0.44, 0.44, 0.44)
-			f54_arg0.ImageNotFocus:setMaterial(LUI.UIImage.GetCachedMaterial(0x67D1E3A3D2D1BF))
+			f54_arg0.ImageNotFocus:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_saturation_normal"))
 			f54_arg0.ImageNotFocus:setShaderVector(0, 0.5, 0, 0, 0)
 			f54_arg0.clipFinished(f54_arg0.ImageNotFocus)
 			f54_arg0.GameMode:completeAnimation()
@@ -703,7 +703,7 @@ CoD.DirectorSelectButtonInternalCard.__clipsPerState = {
 			f55_arg0.clipFinished(f55_arg0.FocusBrackets)
 			f55_arg0.ImageNotFocus:completeAnimation()
 			f55_arg0.ImageNotFocus:setRGB(0.44, 0.44, 0.44)
-			f55_arg0.ImageNotFocus:setMaterial(LUI.UIImage.GetCachedMaterial(0x67D1E3A3D2D1BF))
+			f55_arg0.ImageNotFocus:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_saturation_normal"))
 			f55_arg0.ImageNotFocus:setShaderVector(0, 0.5, 0, 0, 0)
 			f55_arg0.clipFinished(f55_arg0.ImageNotFocus)
 			f55_arg0.GameMode:completeAnimation()
@@ -756,7 +756,7 @@ CoD.DirectorSelectButtonInternalCard.__clipsPerState = {
 			f56_local0(f56_arg0.FocusBrackets)
 			f56_arg0.ImageNotFocus:completeAnimation()
 			f56_arg0.ImageNotFocus:setRGB(0.44, 0.44, 0.44)
-			f56_arg0.ImageNotFocus:setMaterial(LUI.UIImage.GetCachedMaterial(0x67D1E3A3D2D1BF))
+			f56_arg0.ImageNotFocus:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_saturation_normal"))
 			f56_arg0.ImageNotFocus:setShaderVector(0, 0.5, 0, 0, 0)
 			f56_arg0.clipFinished(f56_arg0.ImageNotFocus)
 			f56_arg0.GameMode:completeAnimation()
@@ -817,7 +817,7 @@ CoD.DirectorSelectButtonInternalCard.__clipsPerState = {
 			f62_local0(f62_arg0.FocusBrackets)
 			f62_arg0.ImageNotFocus:completeAnimation()
 			f62_arg0.ImageNotFocus:setRGB(0.44, 0.44, 0.44)
-			f62_arg0.ImageNotFocus:setMaterial(LUI.UIImage.GetCachedMaterial(0x67D1E3A3D2D1BF))
+			f62_arg0.ImageNotFocus:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_saturation_normal"))
 			f62_arg0.ImageNotFocus:setShaderVector(0, 0.5, 0, 0, 0)
 			f62_arg0.clipFinished(f62_arg0.ImageNotFocus)
 			f62_arg0.GameMode:completeAnimation()
@@ -869,7 +869,7 @@ CoD.DirectorSelectButtonInternalCard.__clipsPerState = {
 			f67_arg0:setupElementClipCounter(6)
 			f67_arg0.ImageNotFocus:completeAnimation()
 			f67_arg0.ImageNotFocus:setRGB(0.44, 0.44, 0.44)
-			f67_arg0.ImageNotFocus:setMaterial(LUI.UIImage.GetCachedMaterial(0x67D1E3A3D2D1BF))
+			f67_arg0.ImageNotFocus:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_saturation_normal"))
 			f67_arg0.ImageNotFocus:setShaderVector(0, 0.5, 0, 0, 0)
 			f67_arg0.clipFinished(f67_arg0.ImageNotFocus)
 			f67_arg0.GameMode:completeAnimation()
@@ -898,7 +898,7 @@ CoD.DirectorSelectButtonInternalCard.__clipsPerState = {
 			f68_arg0.clipFinished(f68_arg0.FocusBrackets)
 			f68_arg0.ImageNotFocus:completeAnimation()
 			f68_arg0.ImageNotFocus:setRGB(0.44, 0.44, 0.44)
-			f68_arg0.ImageNotFocus:setMaterial(LUI.UIImage.GetCachedMaterial(0x67D1E3A3D2D1BF))
+			f68_arg0.ImageNotFocus:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_saturation_normal"))
 			f68_arg0.ImageNotFocus:setShaderVector(0, 0.5, 0, 0, 0)
 			f68_arg0.clipFinished(f68_arg0.ImageNotFocus)
 			f68_arg0.LeaderActivityText:completeAnimation()
@@ -943,7 +943,7 @@ CoD.DirectorSelectButtonInternalCard.__clipsPerState = {
 			f69_local0(f69_arg0.FocusBrackets)
 			f69_arg0.ImageNotFocus:completeAnimation()
 			f69_arg0.ImageNotFocus:setRGB(0.44, 0.44, 0.44)
-			f69_arg0.ImageNotFocus:setMaterial(LUI.UIImage.GetCachedMaterial(0x67D1E3A3D2D1BF))
+			f69_arg0.ImageNotFocus:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_saturation_normal"))
 			f69_arg0.ImageNotFocus:setShaderVector(0, 0.5, 0, 0, 0)
 			f69_arg0.clipFinished(f69_arg0.ImageNotFocus)
 			local f69_local1 = function(f72_arg0)
@@ -990,7 +990,7 @@ CoD.DirectorSelectButtonInternalCard.__clipsPerState = {
 			f74_local0(f74_arg0.FocusBrackets)
 			f74_arg0.ImageNotFocus:completeAnimation()
 			f74_arg0.ImageNotFocus:setRGB(0.44, 0.44, 0.44)
-			f74_arg0.ImageNotFocus:setMaterial(LUI.UIImage.GetCachedMaterial(0x67D1E3A3D2D1BF))
+			f74_arg0.ImageNotFocus:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_saturation_normal"))
 			f74_arg0.ImageNotFocus:setShaderVector(0, 0.5, 0, 0, 0)
 			f74_arg0.clipFinished(f74_arg0.ImageNotFocus)
 			local f74_local1 = function(f76_arg0)
@@ -1028,7 +1028,7 @@ CoD.DirectorSelectButtonInternalCard.__clipsPerState = {
 			f78_arg0:setupElementClipCounter(6)
 			f78_arg0.ImageNotFocus:completeAnimation()
 			f78_arg0.ImageNotFocus:setRGB(0.44, 0.44, 0.44)
-			f78_arg0.ImageNotFocus:setMaterial(LUI.UIImage.GetCachedMaterial(0x67D1E3A3D2D1BF))
+			f78_arg0.ImageNotFocus:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_saturation_normal"))
 			f78_arg0.ImageNotFocus:setShaderVector(0, 0.5, 0, 0, 0)
 			f78_arg0.clipFinished(f78_arg0.ImageNotFocus)
 			f78_arg0.GameMode:completeAnimation()
@@ -1057,7 +1057,7 @@ CoD.DirectorSelectButtonInternalCard.__clipsPerState = {
 			f79_arg0.clipFinished(f79_arg0.FocusBrackets)
 			f79_arg0.ImageNotFocus:completeAnimation()
 			f79_arg0.ImageNotFocus:setRGB(0.44, 0.44, 0.44)
-			f79_arg0.ImageNotFocus:setMaterial(LUI.UIImage.GetCachedMaterial(0x67D1E3A3D2D1BF))
+			f79_arg0.ImageNotFocus:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_saturation_normal"))
 			f79_arg0.ImageNotFocus:setShaderVector(0, 0.5, 0, 0, 0)
 			f79_arg0.clipFinished(f79_arg0.ImageNotFocus)
 			f79_arg0.GameMode:completeAnimation()
@@ -1105,7 +1105,7 @@ CoD.DirectorSelectButtonInternalCard.__clipsPerState = {
 			f80_local0(f80_arg0.FocusBrackets)
 			f80_arg0.ImageNotFocus:completeAnimation()
 			f80_arg0.ImageNotFocus:setRGB(0.44, 0.44, 0.44)
-			f80_arg0.ImageNotFocus:setMaterial(LUI.UIImage.GetCachedMaterial(0x67D1E3A3D2D1BF))
+			f80_arg0.ImageNotFocus:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_saturation_normal"))
 			f80_arg0.ImageNotFocus:setShaderVector(0, 0.5, 0, 0, 0)
 			f80_arg0.clipFinished(f80_arg0.ImageNotFocus)
 			f80_arg0.GameMode:completeAnimation()
@@ -1155,7 +1155,7 @@ CoD.DirectorSelectButtonInternalCard.__clipsPerState = {
 			f85_local0(f85_arg0.FocusBrackets)
 			f85_arg0.ImageNotFocus:completeAnimation()
 			f85_arg0.ImageNotFocus:setRGB(0.44, 0.44, 0.44)
-			f85_arg0.ImageNotFocus:setMaterial(LUI.UIImage.GetCachedMaterial(0x67D1E3A3D2D1BF))
+			f85_arg0.ImageNotFocus:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_saturation_normal"))
 			f85_arg0.ImageNotFocus:setShaderVector(0, 0.5, 0, 0, 0)
 			f85_arg0.clipFinished(f85_arg0.ImageNotFocus)
 			f85_arg0.GameMode:completeAnimation()
@@ -1214,7 +1214,7 @@ CoD.DirectorSelectButtonInternalCard.__clipsPerState = {
 			f90_arg0:setupElementClipCounter(6)
 			f90_arg0.ImageNotFocus:completeAnimation()
 			f90_arg0.ImageNotFocus:setRGB(0.44, 0.44, 0.44)
-			f90_arg0.ImageNotFocus:setMaterial(LUI.UIImage.GetCachedMaterial(0x67D1E3A3D2D1BF))
+			f90_arg0.ImageNotFocus:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_saturation_normal"))
 			f90_arg0.ImageNotFocus:setShaderVector(0, 0.5, 0, 0, 0)
 			f90_arg0.clipFinished(f90_arg0.ImageNotFocus)
 			f90_arg0.GameMode:completeAnimation()
@@ -1246,7 +1246,7 @@ CoD.DirectorSelectButtonInternalCard.__clipsPerState = {
 			f91_arg0.clipFinished(f91_arg0.FocusGlow)
 			f91_arg0.ImageNotFocus:completeAnimation()
 			f91_arg0.ImageNotFocus:setRGB(0.44, 0.44, 0.44)
-			f91_arg0.ImageNotFocus:setMaterial(LUI.UIImage.GetCachedMaterial(0x67D1E3A3D2D1BF))
+			f91_arg0.ImageNotFocus:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_saturation_normal"))
 			f91_arg0.ImageNotFocus:setShaderVector(0, 0.5, 0, 0, 0)
 			f91_arg0.clipFinished(f91_arg0.ImageNotFocus)
 			f91_arg0.GameMode:completeAnimation()
@@ -1303,7 +1303,7 @@ CoD.DirectorSelectButtonInternalCard.__clipsPerState = {
 			f92_local1(f92_arg0.FocusGlow)
 			f92_arg0.ImageNotFocus:completeAnimation()
 			f92_arg0.ImageNotFocus:setRGB(0.44, 0.44, 0.44)
-			f92_arg0.ImageNotFocus:setMaterial(LUI.UIImage.GetCachedMaterial(0x67D1E3A3D2D1BF))
+			f92_arg0.ImageNotFocus:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_saturation_normal"))
 			f92_arg0.ImageNotFocus:setShaderVector(0, 0.5, 0, 0, 0)
 			f92_arg0.clipFinished(f92_arg0.ImageNotFocus)
 			f92_arg0.GameMode:completeAnimation()
@@ -1364,7 +1364,7 @@ CoD.DirectorSelectButtonInternalCard.__clipsPerState = {
 			f98_local1(f98_arg0.FocusGlow)
 			f98_arg0.ImageNotFocus:completeAnimation()
 			f98_arg0.ImageNotFocus:setRGB(0.44, 0.44, 0.44)
-			f98_arg0.ImageNotFocus:setMaterial(LUI.UIImage.GetCachedMaterial(0x67D1E3A3D2D1BF))
+			f98_arg0.ImageNotFocus:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_saturation_normal"))
 			f98_arg0.ImageNotFocus:setShaderVector(0, 0.5, 0, 0, 0)
 			f98_arg0.clipFinished(f98_arg0.ImageNotFocus)
 			f98_arg0.GameMode:completeAnimation()
@@ -1407,7 +1407,7 @@ CoD.DirectorSelectButtonInternalCard.__clipsPerState = {
 			f103_arg0:setupElementClipCounter(6)
 			f103_arg0.ImageNotFocus:completeAnimation()
 			f103_arg0.ImageNotFocus:setRGB(0.44, 0.44, 0.44)
-			f103_arg0.ImageNotFocus:setMaterial(LUI.UIImage.GetCachedMaterial(0x67D1E3A3D2D1BF))
+			f103_arg0.ImageNotFocus:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_saturation_normal"))
 			f103_arg0.ImageNotFocus:setShaderVector(0, 0.5, 0, 0, 0)
 			f103_arg0.clipFinished(f103_arg0.ImageNotFocus)
 			f103_arg0.GameMode:completeAnimation()
@@ -1439,7 +1439,7 @@ CoD.DirectorSelectButtonInternalCard.__clipsPerState = {
 			f104_arg0.clipFinished(f104_arg0.FocusGlow)
 			f104_arg0.ImageNotFocus:completeAnimation()
 			f104_arg0.ImageNotFocus:setRGB(0.44, 0.44, 0.44)
-			f104_arg0.ImageNotFocus:setMaterial(LUI.UIImage.GetCachedMaterial(0x67D1E3A3D2D1BF))
+			f104_arg0.ImageNotFocus:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_saturation_normal"))
 			f104_arg0.ImageNotFocus:setShaderVector(0, 0.5, 0, 0, 0)
 			f104_arg0.clipFinished(f104_arg0.ImageNotFocus)
 			f104_arg0.GameMode:completeAnimation()
@@ -1496,7 +1496,7 @@ CoD.DirectorSelectButtonInternalCard.__clipsPerState = {
 			f105_local1(f105_arg0.FocusGlow)
 			f105_arg0.ImageNotFocus:completeAnimation()
 			f105_arg0.ImageNotFocus:setRGB(0.44, 0.44, 0.44)
-			f105_arg0.ImageNotFocus:setMaterial(LUI.UIImage.GetCachedMaterial(0x67D1E3A3D2D1BF))
+			f105_arg0.ImageNotFocus:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_saturation_normal"))
 			f105_arg0.ImageNotFocus:setShaderVector(0, 0.5, 0, 0, 0)
 			f105_arg0.clipFinished(f105_arg0.ImageNotFocus)
 			f105_arg0.GameMode:completeAnimation()
@@ -1557,7 +1557,7 @@ CoD.DirectorSelectButtonInternalCard.__clipsPerState = {
 			f111_local1(f111_arg0.FocusGlow)
 			f111_arg0.ImageNotFocus:completeAnimation()
 			f111_arg0.ImageNotFocus:setRGB(0.44, 0.44, 0.44)
-			f111_arg0.ImageNotFocus:setMaterial(LUI.UIImage.GetCachedMaterial(0x67D1E3A3D2D1BF))
+			f111_arg0.ImageNotFocus:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_saturation_normal"))
 			f111_arg0.ImageNotFocus:setShaderVector(0, 0.5, 0, 0, 0)
 			f111_arg0.clipFinished(f111_arg0.ImageNotFocus)
 			f111_arg0.GameMode:completeAnimation()

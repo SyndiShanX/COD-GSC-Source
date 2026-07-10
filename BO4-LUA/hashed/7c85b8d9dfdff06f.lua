@@ -10,7 +10,7 @@ CoD.BGBSelectButtonPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	self.anyChildUsesUpdateState = true
 	local Backer = LUI.UIImage.new(0, 0, 3.5, 71.5, 0, 0, 5, 73)
 	Backer:setScale(1.4, 1.4)
-	Backer:setImage(RegisterImage(0x67143B4B1C4D00C))
+	Backer:setImage(RegisterImage(@"uie_zm_hud_elixirdpadbacking"))
 	self:addElement(Backer)
 	self.Backer = Backer
 	local DownArrow = CoD.ZmAmmo_BGBCarouselButtonFactory.new(f1_arg0, f1_arg1, 0.5, 0.5, -13.5, 18.5, 0.5, 0.5, 7.5, 39.5)

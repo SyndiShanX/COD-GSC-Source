@@ -13,7 +13,7 @@ CoD.EmblemEditorButtonPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	local label = LUI.UIText.new(1, 1, -169, -45, 0, 0, 6, 30)
 	label:setText("")
 	label:setTTF("dinnext_regular")
-	label:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
+	label:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
 	self:addElement(label)
 	self.label = label
 	if PostLoadFunc then

@@ -21,7 +21,7 @@ CoD.PlayerContextualMenu.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	ActionsList:setAutoScaleContent(true)
 	ActionsList:setWidgetType(CoD.PlayerContextualMenu_Item)
 	ActionsList:setVerticalCount(7)
-	ActionsList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	ActionsList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	ActionsList:setDataSource("PlayerContextualMenuOptionsList")
 	self:addElement(ActionsList)
 	self.ActionsList = ActionsList

@@ -15,8 +15,8 @@ CoD.PurchaseTiers.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 	self:addElement(Black)
 	self.Black = Black
 	local PurchaseBand3 = LUI.UIImage.new(0, 0, 11, 169, 0, 0, -404.5, -388.5)
-	PurchaseBand3:setImage(RegisterImage(0xD77FEBA1B6DF8BA))
-	PurchaseBand3:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	PurchaseBand3:setImage(RegisterImage(@"hash_7D77FEBA1B6DF8BA"))
+	PurchaseBand3:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	PurchaseBand3:setShaderVector(0, 0, 0, 0, 0)
 	PurchaseBand3:setupNineSliceShader(20, 8)
 	self:addElement(PurchaseBand3)

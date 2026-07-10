@@ -18,9 +18,9 @@ CoD.PaintshopBlendButtonPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	self.buttonPromptImage = buttonPromptImage
 	local label = LUI.UIText.new(0, 0, 62, 321, 0, 0, 5, 30)
 	label:setRGB(0.92, 0.92, 0.92)
-	label:setText(Engine[0xF9F1239CFD921FE](0x4336F8BDF41A51E))
+	label:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_54336F8BDF41A51E"))
 	label:setTTF("ttmussels_regular")
-	label:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	label:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(label)
 	self.label = label
 	self:mergeStateConditions({
@@ -54,7 +54,7 @@ CoD.PaintshopBlendButtonPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 end
 CoD.PaintshopBlendButtonPrompt.__resetProperties = function(f6_arg0)
 	f6_arg0.label:completeAnimation()
-	f6_arg0.label:setText(Engine[0xF9F1239CFD921FE](0x4336F8BDF41A51E))
+	f6_arg0.label:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_54336F8BDF41A51E"))
 end
 CoD.PaintshopBlendButtonPrompt.__clipsPerState = {
 	DefaultState = {
@@ -62,7 +62,7 @@ CoD.PaintshopBlendButtonPrompt.__clipsPerState = {
 			f7_arg0:__resetProperties()
 			f7_arg0:setupElementClipCounter(1)
 			f7_arg0.label:completeAnimation()
-			f7_arg0.label:setText(Engine[0xF9F1239CFD921FE](0xCB9F26855E3227A))
+			f7_arg0.label:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_CB9F26855E3227A"))
 			f7_arg0.clipFinished(f7_arg0.label)
 		end,
 	},
@@ -77,7 +77,7 @@ CoD.PaintshopBlendButtonPrompt.__clipsPerState = {
 			f9_arg0:__resetProperties()
 			f9_arg0:setupElementClipCounter(1)
 			f9_arg0.label:completeAnimation()
-			f9_arg0.label:setText(Engine[0xF9F1239CFD921FE](0xCB9F26855E3227A))
+			f9_arg0.label:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_CB9F26855E3227A"))
 			f9_arg0.clipFinished(f9_arg0.label)
 		end,
 	},

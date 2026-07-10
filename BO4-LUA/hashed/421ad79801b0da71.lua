@@ -21,30 +21,30 @@ CoD.vhud_tank_robot_reticle.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.TiledShaderImage = LUI.UIElement.createFake()
 	local reticle105OuterTL = LUI.UIImage.new(0, 0, 354, 544, 0, 0, 213.5, 346.5)
 	reticle105OuterTL:setAlpha(0.2)
-	reticle105OuterTL:setImage(RegisterImage(0x566E0B014A6CDAC))
-	reticle105OuterTL:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	reticle105OuterTL:setImage(RegisterImage(@"uie_ui_hud_vehicle_scarab_reticle_corner"))
+	reticle105OuterTL:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(reticle105OuterTL)
 	self.reticle105OuterTL = reticle105OuterTL
 	local reticle105OuterBL = LUI.UIImage.new(0, 0, 354, 544, 1, 1, -326.5, -193.5)
 	reticle105OuterBL:setAlpha(0.2)
 	reticle105OuterBL:setXRot(180)
-	reticle105OuterBL:setImage(RegisterImage(0x566E0B014A6CDAC))
-	reticle105OuterBL:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	reticle105OuterBL:setImage(RegisterImage(@"uie_ui_hud_vehicle_scarab_reticle_corner"))
+	reticle105OuterBL:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(reticle105OuterBL)
 	self.reticle105OuterBL = reticle105OuterBL
 	local reticle105OuterBR = LUI.UIImage.new(1, 1, -544, -354, 1, 1, -326.5, -193.5)
 	reticle105OuterBR:setAlpha(0.2)
 	reticle105OuterBR:setXRot(180)
 	reticle105OuterBR:setYRot(180)
-	reticle105OuterBR:setImage(RegisterImage(0x566E0B014A6CDAC))
-	reticle105OuterBR:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	reticle105OuterBR:setImage(RegisterImage(@"uie_ui_hud_vehicle_scarab_reticle_corner"))
+	reticle105OuterBR:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(reticle105OuterBR)
 	self.reticle105OuterBR = reticle105OuterBR
 	local reticle105OuterTR = LUI.UIImage.new(1, 1, -543, -353, 0, 0, 213.5, 346.5)
 	reticle105OuterTR:setAlpha(0.2)
 	reticle105OuterTR:setYRot(180)
-	reticle105OuterTR:setImage(RegisterImage(0x566E0B014A6CDAC))
-	reticle105OuterTR:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	reticle105OuterTR:setImage(RegisterImage(@"uie_ui_hud_vehicle_scarab_reticle_corner"))
+	reticle105OuterTR:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(reticle105OuterTR)
 	self.reticle105OuterTR = reticle105OuterTR
 	local layoutPlusGrid = CoD.vhud_layoutPlusGridLarge.new(f1_arg0, f1_arg1, 0.5, 0.5, -441.5, 441.5, 0.5, 0.5, -321.5, 345.5)
@@ -117,28 +117,28 @@ CoD.vhud_tank_robot_reticle.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	FuiLayoutTL:setAlpha(0.15)
 	FuiLayoutTL:setXRot(180)
 	FuiLayoutTL:setYRot(180)
-	FuiLayoutTL:setImage(RegisterImage(0x5338AA8246DD618))
-	FuiLayoutTL:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	FuiLayoutTL:setImage(RegisterImage(@"uie_ui_hud_vehicle_ac130_frame_engine"))
+	FuiLayoutTL:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(FuiLayoutTL)
 	self.FuiLayoutTL = FuiLayoutTL
 	local FuiLayoutTR = LUI.UIImage.new(1, 1, -120, -40, 0, 0, 120, 24)
 	FuiLayoutTR:setAlpha(0.15)
 	FuiLayoutTR:setXRot(180)
 	FuiLayoutTR:setYRot(180)
-	FuiLayoutTR:setImage(RegisterImage(0x5338AA8246DD618))
-	FuiLayoutTR:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	FuiLayoutTR:setImage(RegisterImage(@"uie_ui_hud_vehicle_ac130_frame_engine"))
+	FuiLayoutTR:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(FuiLayoutTR)
 	self.FuiLayoutTR = FuiLayoutTR
 	local StripeL = LUI.UIImage.new(0, 0, 134, 354, 0, 0, 34.5, 44.5)
 	StripeL:setAlpha(0.05)
-	StripeL:setImage(RegisterImage(0x5AFE39B9B2E68FE))
-	StripeL:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	StripeL:setImage(RegisterImage(@"uie_ui_hud_vehicle_ac130_message_layout_stripe"))
+	StripeL:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(StripeL)
 	self.StripeL = StripeL
 	local StripeR = LUI.UIImage.new(1, 1, -353, -133, 0, 0, 34.5, 44.5)
 	StripeR:setAlpha(0.05)
-	StripeR:setImage(RegisterImage(0x5AFE39B9B2E68FE))
-	StripeR:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	StripeR:setImage(RegisterImage(@"uie_ui_hud_vehicle_ac130_message_layout_stripe"))
+	StripeR:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(StripeR)
 	self.StripeR = StripeR
 	local HeroAbilityHoldStringPC = nil
@@ -186,7 +186,7 @@ CoD.vhud_tank_robot_reticle.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	end)
 	local f1_local20 = self
 	local f1_local21 = self.subscribeToModel
-	local f1_local22 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local22 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local21(f1_local20, f1_local22.LastInput, function(f17_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -198,7 +198,7 @@ CoD.vhud_tank_robot_reticle.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	end, false)
 	f1_local20 = self
 	f1_local21 = self.subscribeToModel
-	f1_local22 = Engine[0x8DF2E5447F384B9]()
+	f1_local22 = Engine[@"getglobalmodel"]()
 	f1_local21(f1_local20, f1_local22["lobbyRoot.lobbyNav"], function(f18_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

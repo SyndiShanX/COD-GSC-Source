@@ -14,8 +14,8 @@ CoD.SessionSearchQoSJoin.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	self.Background = Background
 	local Status = LUI.UIText.new(0, 0, 626, 760, 0, 0, -3, 17)
 	Status:setTTF("default")
-	Status:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Status:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Status:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Status:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	Status:linkToElementModel(self, "status", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -26,8 +26,8 @@ CoD.SessionSearchQoSJoin.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	self.Status = Status
 	local QoSPing = LUI.UIText.new(0, 0, 552, 615, 0, 0, -3, 17)
 	QoSPing:setTTF("default")
-	QoSPing:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	QoSPing:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	QoSPing:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	QoSPing:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	QoSPing:linkToElementModel(self, "qosPing", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -38,8 +38,8 @@ CoD.SessionSearchQoSJoin.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	self.QoSPing = QoSPing
 	local NATType = LUI.UIText.new(0, 0, 492, 547, 0, 0, -3, 17)
 	NATType:setTTF("default")
-	NATType:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	NATType:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	NATType:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	NATType:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	NATType:linkToElementModel(self, "natType", true, function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
@@ -50,8 +50,8 @@ CoD.SessionSearchQoSJoin.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	self.NATType = NATType
 	local PrivateIPAddress = LUI.UIText.new(0, 0, 398, 489, 0, 0, -3, 17)
 	PrivateIPAddress:setTTF("default")
-	PrivateIPAddress:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	PrivateIPAddress:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	PrivateIPAddress:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	PrivateIPAddress:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	PrivateIPAddress:linkToElementModel(self, "privateIPAddress", true, function(model)
 		local f5_local0 = model:get()
 		if f5_local0 ~= nil then
@@ -62,8 +62,8 @@ CoD.SessionSearchQoSJoin.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	self.PrivateIPAddress = PrivateIPAddress
 	local PublicIPAddress = LUI.UIText.new(0, 0, 267, 398, 0, 0, -3, 17)
 	PublicIPAddress:setTTF("default")
-	PublicIPAddress:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	PublicIPAddress:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	PublicIPAddress:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	PublicIPAddress:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	PublicIPAddress:linkToElementModel(self, "publicIPAddress", true, function(model)
 		local f6_local0 = model:get()
 		if f6_local0 ~= nil then
@@ -74,8 +74,8 @@ CoD.SessionSearchQoSJoin.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	self.PublicIPAddress = PublicIPAddress
 	local Gamertag = LUI.UIText.new(0, 0, 112, 256, 0, 0, -3, 17)
 	Gamertag:setTTF("notosans_regular")
-	Gamertag:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Gamertag:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Gamertag:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Gamertag:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	Gamertag:linkToElementModel(self, "gamertag", true, function(model)
 		local f7_local0 = model:get()
 		if f7_local0 ~= nil then
@@ -86,8 +86,8 @@ CoD.SessionSearchQoSJoin.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	self.Gamertag = Gamertag
 	local Xuid = LUI.UIText.new(0, 0, 0, 110, 0, 0, -3, 17)
 	Xuid:setTTF("default")
-	Xuid:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Xuid:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Xuid:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Xuid:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	Xuid:linkToElementModel(self, "xuid", true, function(model)
 		local f8_local0 = model:get()
 		if f8_local0 ~= nil then
@@ -98,8 +98,8 @@ CoD.SessionSearchQoSJoin.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	self.Xuid = Xuid
 	local NoResults = LUI.UIText.new(0, 1, 0, 0, 0, 0, -2, 13)
 	NoResults:setTTF("default")
-	NoResults:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	NoResults:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	NoResults:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	NoResults:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	NoResults:linkToElementModel(self, "noResults", true, function(model)
 		local f9_local0 = model:get()
 		if f9_local0 ~= nil then
@@ -110,8 +110,8 @@ CoD.SessionSearchQoSJoin.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	self.NoResults = NoResults
 	local AsyncMatchmakingString = LUI.UIText.new(0, 1, 0, 0, 0, 0, -2, 13)
 	AsyncMatchmakingString:setTTF("default")
-	AsyncMatchmakingString:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	AsyncMatchmakingString:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	AsyncMatchmakingString:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	AsyncMatchmakingString:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	AsyncMatchmakingString:linkToElementModel(self, "asyncMatchmakingString", true, function(model)
 		local f10_local0 = model:get()
 		if f10_local0 ~= nil then

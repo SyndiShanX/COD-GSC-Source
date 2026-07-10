@@ -8,10 +8,10 @@ CoD.Barracks_TimeDisplayText.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	self.soundSet = "none"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local DailyTimerText = LUI.UIText.new(1, 1, -250, 0, 1, 1, -15, 0)
-	DailyTimerText:setText(Engine[0xF9F1239CFD921FE](0xC0CE2452CF87DB1))
+	DailyTimerText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_1C0CE2452CF87DB1"))
 	DailyTimerText:setTTF("ttmussels_demibold")
-	DailyTimerText:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
-	DailyTimerText:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	DailyTimerText:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
+	DailyTimerText:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	self:addElement(DailyTimerText)
 	self.DailyTimerText = DailyTimerText
 	self:mergeStateConditions({

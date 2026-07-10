@@ -8,7 +8,7 @@ CoD.MOTD_BannerRender.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	self.soundSet = "none"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local EngineRefImage = LUI.UIImage.new(0, 0, 0, 328, 0, 0, 0, 160)
-	EngineRefImage:setMaterial(LUI.UIImage.GetCachedMaterial(0xA02C44161370F6D))
+	EngineRefImage:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_1A02C44161370F6D"))
 	EngineRefImage:setShaderVector(0, 0.5, 0.5, 0, 0)
 	EngineRefImage:setShaderVector(1, 1, 1, 0, 0)
 	EngineRefImage:setShaderVector(2, 0, 0, 0, 0)

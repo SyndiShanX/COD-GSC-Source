@@ -13,8 +13,8 @@ CoD.PC_BnetStore_Background.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.BG = BG
 	local VerticalBGPattern2 = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	VerticalBGPattern2:setAlpha(0.05)
-	VerticalBGPattern2:setImage(RegisterImage(0x5D167EAB3F49E4B))
-	VerticalBGPattern2:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	VerticalBGPattern2:setImage(RegisterImage(@"uie_ui_menu_cac_vertical_pattern_bg"))
+	VerticalBGPattern2:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	VerticalBGPattern2:setShaderVector(0, 0, 0, 0, 0)
 	VerticalBGPattern2:setupNineSliceShader(256, 256)
 	self:addElement(VerticalBGPattern2)

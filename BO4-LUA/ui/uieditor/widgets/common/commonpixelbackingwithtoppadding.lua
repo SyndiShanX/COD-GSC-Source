@@ -9,7 +9,7 @@ CoD.CommonPixelBackingWithTopPadding.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	self.soundSet = "default"
 	local SceneBlur = LUI.UIImage.new(0, 1, 0, 0, 0, 1, -30, 0)
 	SceneBlur:setRGB(0, 0, 0)
-	SceneBlur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	SceneBlur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	SceneBlur:setShaderVector(0, 0, 0.4, 0, 0)
 	self:addElement(SceneBlur)
 	self.SceneBlur = SceneBlur
@@ -19,7 +19,7 @@ CoD.CommonPixelBackingWithTopPadding.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	self:addElement(Tint)
 	self.Tint = Tint
 	local DotTiledBacking = CoD.CommonPixelBacking.new(f1_arg0, f1_arg1, 0, 1, 4, -4, 0, 1, -26, -4)
-	DotTiledBacking:setRFTMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	DotTiledBacking:setRFTMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	DotTiledBacking.NoiseBacking:setAlpha(1)
 	DotTiledBacking.TiledShaderImage:setRGB(0.22, 0.22, 0.22)
 	DotTiledBacking.TiledShaderImage:setAlpha(0.15)

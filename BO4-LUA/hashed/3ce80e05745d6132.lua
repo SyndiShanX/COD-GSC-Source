@@ -9,7 +9,7 @@ CoD.ui_icon_callingcards_assassin_attackerarmgroup.new = function(f1_arg0, f1_ar
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local arm = LUI.UIImage.new(0, 0, -330, 46, 0, 0, -47, 57)
-	arm:setImage(RegisterImage(0xC3012BDC2E18E30))
+	arm:setImage(RegisterImage(@"uie_ui_icon_callingcards_assassin_arm"))
 	self:addElement(arm)
 	self.arm = arm
 	local hand = CoD.ui_icon_callingcards_assassin_attackerhand.new(f1_arg0, f1_arg1, 0, 0, -322.5, -312.5, 0, 0, 0, 10)

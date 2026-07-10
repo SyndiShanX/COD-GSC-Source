@@ -10,16 +10,16 @@ CoD.LeaguePlayEndRankUpRank.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	local CurrentRank = LUI.UIText.new(0.5, 0.5, -100, 100, 1, 1, -72, 0)
 	CurrentRank:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
 	CurrentRank:setTTF("ttmussels_demibold")
-	CurrentRank:setMaterial(LUI.UIImage.GetCachedMaterial(0x90D57B1E92D39D7))
+	CurrentRank:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_90D57B1E92D39D7"))
 	CurrentRank:setShaderVector(0, 0.3, 0, 0, 0)
 	CurrentRank:setShaderVector(1, 0, 0, 0, 0)
 	CurrentRank:setShaderVector(2, 0.4, 0.3, 0, 0.6)
 	CurrentRank:setLetterSpacing(8)
-	CurrentRank:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	CurrentRank:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	CurrentRank:linkToElementModel(self, "leaguePlayRank", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			CurrentRank:setText(ToUpper(LocalizeStringWithParameter(0x47AC0462E4B2132, f2_local0)))
+			CurrentRank:setText(ToUpper(LocalizeStringWithParameter(@"hash_447AC0462E4B2132", f2_local0)))
 		end
 	end)
 	self:addElement(CurrentRank)
@@ -45,7 +45,7 @@ CoD.LeaguePlayEndRankUpRank.__clipsPerState = {
 			f5_arg0:setupElementClipCounter(1)
 			local f5_local0 = function(f6_arg0)
 				local f6_local0 = function(f7_arg0)
-					f7_arg0:beginAnimation(149, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f7_arg0:beginAnimation(149, Enum[@"luitween"][@"luitween_ease_in"])
 					f7_arg0:setAlpha(1)
 					f7_arg0:registerEventHandler("transition_complete_keyframe", f5_arg0.clipFinished)
 				end
@@ -63,7 +63,7 @@ CoD.LeaguePlayEndRankUpRank.__clipsPerState = {
 			local f8_local0 = function(f9_arg0)
 				local f9_local0 = function(f10_arg0)
 					local f10_local0 = function(f11_arg0)
-						f11_arg0:beginAnimation(300, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+						f11_arg0:beginAnimation(300, Enum[@"luitween"][@"luitween_ease_in"])
 						f11_arg0:setAlpha(1)
 						f11_arg0:registerEventHandler("transition_complete_keyframe", f8_arg0.clipFinished)
 					end

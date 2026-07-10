@@ -15,8 +15,8 @@ CoD.BountyHunterHealthCount.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	local Text = LUI.UIText.new(0, 0, 2.5, 24.5, 0, 0, 1.5, 22.5)
 	Text:setAlpha(0)
 	Text:setTTF("0arame_mono_stencil")
-	Text:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	Text:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Text:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	Text:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	Text:subscribeToGlobalModel(f1_arg1, "HUDItems", "numHealthPickups", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -35,7 +35,7 @@ CoD.BountyHunterHealthCount.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	})
 	local f1_local3 = self
 	local f1_local4 = self.subscribeToModel
-	local f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local4(f1_local3, f1_local5["hudItems.numHealthPickups"], function(f4_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

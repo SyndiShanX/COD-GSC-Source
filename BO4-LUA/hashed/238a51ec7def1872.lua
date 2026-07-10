@@ -8,16 +8,16 @@ CoD.WarzoneDirectorStageBar.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.soundSet = "none"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local bg = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	bg:setImage(RegisterImage(0x82B8B1E3E73BCF5))
+	bg:setImage(RegisterImage(@"uie_ui_menu_director_stage_bar_bg"))
 	self:addElement(bg)
 	self.bg = bg
 	local Bar = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	Bar:setAlpha(0)
-	Bar:setImage(RegisterImage(0x87BE43A2A727AF))
+	Bar:setImage(RegisterImage(@"uie_ui_menu_director_stage_bar_fill"))
 	self:addElement(Bar)
 	self.Bar = Bar
 	local dots = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	dots:setImage(RegisterImage(0xD264154A80493DE))
+	dots:setImage(RegisterImage(@"uie_ui_menu_director_stage_bar_dots"))
 	self:addElement(dots)
 	self.dots = dots
 	if PostLoadFunc then

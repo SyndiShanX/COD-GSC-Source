@@ -8,14 +8,14 @@ CoD.callingcards_loot2_circusclown_fire01.new = function(f1_arg0, f1_arg1, f1_ar
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local fire01 = LUI.UIImage.new(0, 0, 0, 120, 0, 0, 0, 264)
-	fire01:setImage(RegisterImage(0x6A790D54B4178CC))
-	fire01:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	fire01:setImage(RegisterImage(@"uie_ui_menu_callingcards_circusclown_fire01"))
+	fire01:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(fire01)
 	self.fire01 = fire01
 	local fire02 = LUI.UIImage.new(0, 0, 0, 120, 0, 0, 0, 264)
 	fire02:setAlpha(0.6)
-	fire02:setImage(RegisterImage(0x6A792D54B417C32))
-	fire02:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	fire02:setImage(RegisterImage(@"uie_ui_menu_callingcards_circusclown_fire03"))
+	fire02:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(fire02)
 	self.fire02 = fire02
 	if PostLoadFunc then
@@ -34,7 +34,7 @@ CoD.callingcards_loot2_circusclown_fire01.__resetProperties = function(f2_arg0)
 	f2_arg0.fire02:setTopBottom(0, 0, 0, 264)
 	f2_arg0.fire02:setAlpha(0.6)
 	f2_arg0.fire02:setScale(1, 1)
-	f2_arg0.fire02:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	f2_arg0.fire02:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 end
 CoD.callingcards_loot2_circusclown_fire01.__clipsPerState = {
 	DefaultState = {
@@ -174,7 +174,7 @@ CoD.callingcards_loot2_circusclown_fire01.__clipsPerState = {
 			f3_arg0.fire02:setTopBottom(0, 0, 0, 264)
 			f3_arg0.fire02:setAlpha(0.4)
 			f3_arg0.fire02:setScale(1, 1)
-			f3_arg0.fire02:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+			f3_arg0.fire02:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 			f3_local1(f3_arg0.fire02)
 			f3_arg0.nextClip = "DefaultClip"
 		end,

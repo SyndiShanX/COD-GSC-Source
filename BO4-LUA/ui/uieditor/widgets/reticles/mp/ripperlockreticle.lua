@@ -128,13 +128,13 @@ CoD.RipperLockReticle.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 		{
 			stateName = "Locked",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "status", Enum[0x1EB07D7F21FBDB3][0x906AAA6F41B8384])
+				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "status", Enum[@"armbladelockstate"][@"armblade_targetted"])
 			end,
 		},
 		{
 			stateName = "Attack",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "status", Enum[0x1EB07D7F21FBDB3][0x415C300A374283A])
+				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "status", Enum[@"armbladelockstate"][@"armblade_attacking"])
 			end,
 		},
 	})

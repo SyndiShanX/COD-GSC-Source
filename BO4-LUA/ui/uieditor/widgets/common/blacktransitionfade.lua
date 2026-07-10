@@ -19,15 +19,15 @@ CoD.BlackTransitionFade.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	self.CrosshairOccluder = CrosshairOccluder
 	self:subscribeToGlobalModel(f1_arg1, "PerController", "scriptNotify", function(model)
 		local f2_local0 = self
-		if CoD.ModelUtility.IsParamModelEqualToHashString(model, 0x29BC32407856CBF) then
+		if CoD.ModelUtility.IsParamModelEqualToHashString(model, @"quick_fade") then
 			PlayClip(self, "QuickFade", f1_arg1)
-		elseif CoD.ModelUtility.IsParamModelEqualToHashString(model, 0x175F8739ED7A932) then
+		elseif CoD.ModelUtility.IsParamModelEqualToHashString(model, @"hash_175F8739ED7A932") then
 			PlayClip(self, "MediumLengthFade", f1_arg1)
-		elseif CoD.ModelUtility.IsParamModelEqualToHashString(model, 0xB2D65A026DE792D) then
+		elseif CoD.ModelUtility.IsParamModelEqualToHashString(model, @"hash_5B2D65A026DE792D") then
 			PlayClip(self, "QuickFadeUp", f1_arg1)
-		elseif CoD.ModelUtility.IsParamModelEqualToHashString(model, 0xBF5198C95E4E20A) then
+		elseif CoD.ModelUtility.IsParamModelEqualToHashString(model, @"post_potm") then
 			PlayClip(self, "PostPOTM", f1_arg1)
-		elseif CoD.ModelUtility.IsParamModelEqualToHashString(model, 0x1B9CFC69E007BC4) then
+		elseif CoD.ModelUtility.IsParamModelEqualToHashString(model, @"hash_21B9CFC69E007BC4") then
 			PlayClip(self, "InfectionFade", f1_arg1)
 		end
 	end)

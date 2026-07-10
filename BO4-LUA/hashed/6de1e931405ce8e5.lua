@@ -9,9 +9,9 @@ CoD.HealthBoostNotification.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Text = LUI.UIText.new(0, 0, 0, 64, 0, 0, 0, 26)
 	Text:setRGB(ColorSet.CleanseBar.r, ColorSet.CleanseBar.g, ColorSet.CleanseBar.b)
-	Text:setText(Engine[0xF9F1239CFD921FE](0xA0F614541A9DE14))
+	Text:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_6A0F614541A9DE14"))
 	Text:setTTF("0arame_mono_stencil")
-	Text:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	Text:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	self:addElement(Text)
 	self.Text = Text
 	if PostLoadFunc then

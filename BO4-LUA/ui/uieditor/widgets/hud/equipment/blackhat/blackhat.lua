@@ -9,7 +9,7 @@ CoD.BlackHat.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5
 	self.soundSet = "default"
 	self.anyChildUsesUpdateState = true
 	local internal = CoD.BlackHat_Internal.new(f1_arg0, f1_arg1, 0, 1, 0, 0, 0, 1, 0, 0)
-	Engine[0xF0AF2C4A29D15D7](f1_arg1, 0, 384, 384)
+	Engine[@"setupui3dwindow"](f1_arg1, 0, 384, 384)
 	internal:setUI3DWindow(0)
 	self:addElement(internal)
 	self.internal = internal

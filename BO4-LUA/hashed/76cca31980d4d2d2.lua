@@ -10,16 +10,16 @@ CoD.HUD_ZM_ServerPauseNotification.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	local Backing = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	Backing:setRGB(ColorSet.Disabled.r, ColorSet.Disabled.g, ColorSet.Disabled.b)
 	Backing:setAlpha(0)
-	Backing:setMaterial(LUI.UIImage.GetCachedMaterial(0x92677F19E79D991))
+	Backing:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_scene_blur_pass_1"))
 	Backing:setShaderVector(0, 3, 0, 0, 0)
 	self:addElement(Backing)
 	self.Backing = Backing
 	local Paused = LUI.UIText.new(0.5, 0.5, -960, 960, 0, 0, 480, 600)
 	Paused:setAlpha(0)
-	Paused:setText(LocalizeToUpperString(0x3563FAD2ACF2D91))
+	Paused:setText(LocalizeToUpperString(@"menu/paused"))
 	Paused:setTTF("ttmussels_demibold")
-	Paused:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	Paused:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Paused:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	Paused:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(Paused)
 	self.Paused = Paused
 	self:mergeStateConditions({
@@ -32,7 +32,7 @@ CoD.HUD_ZM_ServerPauseNotification.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	})
 	local f1_local3 = self
 	local f1_local4 = self.subscribeToModel
-	local f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local4(f1_local3, f1_local5["hudItems.serverPaused"], function(f3_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

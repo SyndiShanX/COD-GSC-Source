@@ -7,7 +7,7 @@ CoD.CallingCards_replacer_smoke.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self.id = "CallingCards_replacer_smoke"
 	self.soundSet = "default"
 	local smoke = LUI.UIImage.new(0, 0, -40, 456, 0, 0, -202, 38)
-	smoke:setImage(RegisterImage(0xF63B04BC0AA5720))
+	smoke:setImage(RegisterImage(@"hash_F63B04BC0AA5720"))
 	self:addElement(smoke)
 	self.smoke = smoke
 	if PostLoadFunc then

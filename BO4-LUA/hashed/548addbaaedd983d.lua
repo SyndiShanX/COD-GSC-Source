@@ -12,13 +12,13 @@ CoD.PositionDraft_CountdownTimerFUI.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	local microtext = LUI.UIImage.new(0, 0, 669, 705, 0, 0, 150.5, 158.5)
 	microtext:setRGB(ColorSet.T8__GREEN.r, ColorSet.T8__GREEN.g, ColorSet.T8__GREEN.b)
 	microtext:setAlpha(0.2)
-	microtext:setImage(RegisterImage(0x16C3274D8031268))
+	microtext:setImage(RegisterImage(@"hash_116C3274D8031268"))
 	self:addElement(microtext)
 	self.microtext = microtext
 	local microtext2 = LUI.UIImage.new(0, 0, 127, 91, 0, 0, 150.5, 158.5)
 	microtext2:setRGB(ColorSet.T8__GREEN.r, ColorSet.T8__GREEN.g, ColorSet.T8__GREEN.b)
 	microtext2:setAlpha(0.2)
-	microtext2:setImage(RegisterImage(0x16C3274D8031268))
+	microtext2:setImage(RegisterImage(@"hash_116C3274D8031268"))
 	self:addElement(microtext2)
 	self.microtext2 = microtext2
 	local ArrowRight = CoD.GameEndScoreCenterArrow.new(f1_arg0, f1_arg1, 0, 0, 482.5, 642.5, 0, 0, 118, 191)
@@ -105,7 +105,7 @@ CoD.PositionDraft_CountdownTimerFUI.__clipsPerState = {
 					f11_arg0:beginAnimation(700)
 					f11_arg0:registerEventHandler("transition_complete_keyframe", f3_arg0.clipFinished)
 				end
-				f3_arg0.ArrowRight:beginAnimation(300, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f3_arg0.ArrowRight:beginAnimation(300, Enum[@"luitween"][@"luitween_ease_in"])
 				f3_arg0.ArrowRight:setAlpha(1)
 				f3_arg0.ArrowRight:registerEventHandler("interrupted_keyframe", f3_arg0.clipInterrupted)
 				f3_arg0.ArrowRight:registerEventHandler("transition_complete_keyframe", f10_local0)
@@ -119,7 +119,7 @@ CoD.PositionDraft_CountdownTimerFUI.__clipsPerState = {
 					f13_arg0:beginAnimation(700)
 					f13_arg0:registerEventHandler("transition_complete_keyframe", f3_arg0.clipFinished)
 				end
-				f3_arg0.ArrowRight2:beginAnimation(300, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f3_arg0.ArrowRight2:beginAnimation(300, Enum[@"luitween"][@"luitween_ease_in"])
 				f3_arg0.ArrowRight2:setAlpha(1)
 				f3_arg0.ArrowRight2:registerEventHandler("interrupted_keyframe", f3_arg0.clipInterrupted)
 				f3_arg0.ArrowRight2:registerEventHandler("transition_complete_keyframe", f12_local0)
@@ -130,7 +130,7 @@ CoD.PositionDraft_CountdownTimerFUI.__clipsPerState = {
 			f3_local3(f3_arg0.ArrowRight2)
 			local f3_local4 = function(f14_arg0)
 				local f14_local0 = function(f15_arg0)
-					f15_arg0:beginAnimation(200, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f15_arg0:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_in"])
 					f15_arg0:setAlpha(0.4)
 					f15_arg0:registerEventHandler("transition_complete_keyframe", f3_arg0.clipFinished)
 				end
@@ -151,7 +151,7 @@ CoD.PositionDraft_CountdownTimerFUI.__clipsPerState = {
 							f19_arg0:setAlpha(0.6)
 							f19_arg0:registerEventHandler("transition_complete_keyframe", f3_arg0.clipFinished)
 						end
-						f18_arg0:beginAnimation(199, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+						f18_arg0:beginAnimation(199, Enum[@"luitween"][@"luitween_ease_in"])
 						f18_arg0:setAlpha(0.7)
 						f18_arg0:registerEventHandler("transition_complete_keyframe", f18_local0)
 					end
@@ -170,7 +170,7 @@ CoD.PositionDraft_CountdownTimerFUI.__clipsPerState = {
 			local f3_local6 = function(f20_arg0)
 				local f20_local0 = function(f21_arg0)
 					local f21_local0 = function(f22_arg0)
-						f22_arg0:beginAnimation(199, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+						f22_arg0:beginAnimation(199, Enum[@"luitween"][@"luitween_ease_in"])
 						f22_arg0:setAlpha(1)
 						f22_arg0:registerEventHandler("transition_complete_keyframe", f3_arg0.clipFinished)
 					end

@@ -19,7 +19,7 @@ CoD.AARXpMeterNextLevel.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	local RankLabel = LUI.UIText.new(0, 0, 56, 162, 0, 0, 4, 26)
 	RankLabel:setTTF("ttmussels_demibold")
 	RankLabel:setLetterSpacing(2)
-	RankLabel:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	RankLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	RankLabel:linkToElementModel(self, "nextRankLabel", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -32,7 +32,7 @@ CoD.AARXpMeterNextLevel.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	ZMRankLabel:setAlpha(0)
 	ZMRankLabel:setTTF("skorzhen")
 	ZMRankLabel:setLetterSpacing(4)
-	ZMRankLabel:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	ZMRankLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	ZMRankLabel:linkToElementModel(self, "nextRankLabel", true, function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
@@ -51,7 +51,7 @@ CoD.AARXpMeterNextLevel.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	})
 	local f1_local4 = self
 	local f1_local5 = self.subscribeToModel
-	local f1_local6 = Engine[0x8DF2E5447F384B9]()
+	local f1_local6 = Engine[@"getglobalmodel"]()
 	f1_local5(f1_local4, f1_local6["lobbyRoot.lobbyNav"], function(f6_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

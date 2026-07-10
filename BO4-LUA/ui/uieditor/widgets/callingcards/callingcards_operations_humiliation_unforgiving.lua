@@ -1,18 +1,18 @@
 require("x64:4217923ce9c1614")
 require("x64:5f067625bb89e44")
-CoD[0x4D725BD127611CA] = InheritFrom(LUI.UIElement)
-CoD[0x4D725BD127611CA].__defaultWidth = 960
-CoD[0x4D725BD127611CA].__defaultHeight = 240
-CoD[0x4D725BD127611CA].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+CoD[@"hash_44D725BD127611CA"] = InheritFrom(LUI.UIElement)
+CoD[@"hash_44D725BD127611CA"].__defaultWidth = 960
+CoD[@"hash_44D725BD127611CA"].__defaultHeight = 240
+CoD[@"hash_44D725BD127611CA"].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
 	local self = LUI.UIElement.new(f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
-	self:setClass(CoD[0x4D725BD127611CA])
+	self:setClass(CoD[@"hash_44D725BD127611CA"])
 	self.id = "CallingCards_Operations_Humiliation_Unforgiving"
 	self.soundSet = "default"
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local bg = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	bg:setImage(RegisterImage(0x5463302DF43EDC2))
-	bg:setMaterial(LUI.UIImage.GetCachedMaterial(0x73D72BCD14C2AAD))
+	bg:setImage(RegisterImage(@"uie_ui_icon_callingcards_operations_humiliation_unforgiving_background"))
+	bg:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_tile_scroll_normal"))
 	bg:setShaderVector(0, 1, 1, 0, 0)
 	bg:setShaderVector(1, -0.01, 0, 0, 0)
 	self:addElement(bg)
@@ -21,8 +21,8 @@ CoD[0x4D725BD127611CA].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	self:addElement(rays)
 	self.rays = rays
 	local clouds = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	clouds:setImage(RegisterImage(0x6457751B2BA9906))
-	clouds:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD526D3FD71F281))
+	clouds:setImage(RegisterImage(@"uie_ui_icon_callingcards_operations_humiliation_unforgiving_animated_clouds"))
+	clouds:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_flipbook"))
 	clouds:setShaderVector(0, 0, 5, 0, 0)
 	clouds:setShaderVector(1, 15, 0, 0, 0)
 	self:addElement(clouds)
@@ -33,7 +33,7 @@ CoD[0x4D725BD127611CA].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	self.gang3 = gang3
 	local cropper = LUI.UIImage.new(0, 0, -32, 992, 0, 0, -392, 632)
 	cropper:setAlpha(0)
-	cropper:setImage(RegisterImage(0x7EEE1693E39382A))
+	cropper:setImage(RegisterImage(@"uie_stage_crop_prop"))
 	self:addElement(cropper)
 	self.cropper = cropper
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)
@@ -42,12 +42,12 @@ CoD[0x4D725BD127611CA].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	end
 	return self
 end
-CoD[0x4D725BD127611CA].__resetProperties = function(f2_arg0)
+CoD[@"hash_44D725BD127611CA"].__resetProperties = function(f2_arg0)
 	f2_arg0.gang3:completeAnimation()
 	f2_arg0.rays:completeAnimation()
 	f2_arg0.gang3:setTopBottom(0, 0, 0, 240)
 end
-CoD[0x4D725BD127611CA].__clipsPerState = {
+CoD[@"hash_44D725BD127611CA"].__clipsPerState = {
 	DefaultState = {
 		DefaultClip = function(f3_arg0, f3_arg1)
 			f3_arg0:__resetProperties()
@@ -147,7 +147,7 @@ CoD[0x4D725BD127611CA].__clipsPerState = {
 		end,
 	},
 }
-CoD[0x4D725BD127611CA].__onClose = function(f21_arg0)
+CoD[@"hash_44D725BD127611CA"].__onClose = function(f21_arg0)
 	f21_arg0.rays:close()
 	f21_arg0.gang3:close()
 end

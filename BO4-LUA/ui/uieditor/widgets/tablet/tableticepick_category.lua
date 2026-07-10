@@ -13,8 +13,8 @@ CoD.TabletIcePick_Category.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local HackBg = LUI.UIImage.new(0, 0, 0, 1224, 0, 0, 33, 177)
 	HackBg:setAlpha(0)
-	HackBg:setImage(RegisterImage(0x816694178B99B8A))
-	HackBg:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	HackBg:setImage(RegisterImage(@"hash_2816694178B99B8A"))
+	HackBg:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	HackBg:setShaderVector(0, 0, 0, 0, 0)
 	HackBg:setupNineSliceShader(72, 72)
 	self:addElement(HackBg)
@@ -25,27 +25,27 @@ CoD.TabletIcePick_Category.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	Entries:setWidgetType(CoD.TabletIcePickGadget_Item)
 	Entries:setHorizontalCount(6)
 	Entries:setSpacing(36)
-	Entries:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	Entries:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(Entries)
 	self.Entries = Entries
 	local Category = LUI.UIText.new(0, 0, 22, 362, 0, 0, 0, 30)
 	Category:setRGB(0.49, 0.85, 1)
 	Category:setText("")
 	Category:setTTF("ttmussels_demibold")
-	Category:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Category:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	Category:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Category:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	self:addElement(Category)
 	self.Category = Category
 	local HackBotBar = LUI.UIImage.new(0, 0, -1, 1227, 0, 0, 180, 196)
 	HackBotBar:setAlpha(0.4)
-	HackBotBar:setImage(RegisterImage(0x89157CA6DBDA2C5))
-	HackBotBar:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	HackBotBar:setImage(RegisterImage(@"hash_489157CA6DBDA2C5"))
+	HackBotBar:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(HackBotBar)
 	self.HackBotBar = HackBotBar
 	local HackBotBarWipe = LUI.UIImage.new(0, 0, -1, 1227, 0, 0, 180, 196)
 	HackBotBarWipe:setAlpha(0)
-	HackBotBarWipe:setImage(RegisterImage(0x89157CA6DBDA2C5))
-	HackBotBarWipe:setMaterial(LUI.UIImage.GetCachedMaterial(0x2EEB1ECF1F211F5))
+	HackBotBarWipe:setImage(RegisterImage(@"hash_489157CA6DBDA2C5"))
+	HackBotBarWipe:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_delta"))
 	HackBotBarWipe:setShaderVector(0, 0, 1, 0, 0)
 	HackBotBarWipe:setShaderVector(1, 0, 0, 0, 0)
 	HackBotBarWipe:setShaderVector(2, 0, 1, 0, 0)
@@ -55,8 +55,8 @@ CoD.TabletIcePick_Category.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self.HackBotBarWipe = HackBotBarWipe
 	local HackBotBarWipe2 = LUI.UIImage.new(0, 0, -1, 1227, 0, 0, 180, 196)
 	HackBotBarWipe2:setAlpha(0)
-	HackBotBarWipe2:setImage(RegisterImage(0x89157CA6DBDA2C5))
-	HackBotBarWipe2:setMaterial(LUI.UIImage.GetCachedMaterial(0x2EEB1ECF1F211F5))
+	HackBotBarWipe2:setImage(RegisterImage(@"hash_489157CA6DBDA2C5"))
+	HackBotBarWipe2:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_delta"))
 	HackBotBarWipe2:setShaderVector(0, 0, 1, 0, 0)
 	HackBotBarWipe2:setShaderVector(1, 0, 0, 0, 0)
 	HackBotBarWipe2:setShaderVector(2, 0, 1, 0, 0)
@@ -69,8 +69,8 @@ CoD.TabletIcePick_Category.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self.GraphFrame01 = GraphFrame01
 	local ProgressBg = LUI.UIImage.new(0, 0, -4, 20, 0, 0, 2, 26)
 	ProgressBg:setAlpha(0)
-	ProgressBg:setImage(RegisterImage(0x3B6AB72F71A2482))
-	ProgressBg:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	ProgressBg:setImage(RegisterImage(@"hash_53B6AB72F71A2482"))
+	ProgressBg:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(ProgressBg)
 	self.ProgressBg = ProgressBg
 	local Progress = CoD.TabletIcePick_CategoryProg.new(f1_arg0, f1_arg1, 0, 0, -6, 22, 0, 0, -4, 32)
@@ -239,7 +239,7 @@ CoD.TabletIcePick_Category.__clipsPerState = {
 						f27_arg0:setAlpha(0)
 						f27_arg0:registerEventHandler("transition_complete_keyframe", f4_arg0.clipFinished)
 					end
-					f26_arg0:beginAnimation(159, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f26_arg0:beginAnimation(159, Enum[@"luitween"][@"luitween_ease_out"])
 					f26_arg0:setAlpha(0.5)
 					f26_arg0:registerEventHandler("transition_complete_keyframe", f26_local0)
 				end
@@ -252,7 +252,7 @@ CoD.TabletIcePick_Category.__clipsPerState = {
 			f4_local2(f4_arg0.HackBotBarWipe)
 			local f4_local3 = function(f28_arg0)
 				local f28_local0 = function(f29_arg0)
-					f29_arg0:beginAnimation(159, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f29_arg0:beginAnimation(159, Enum[@"luitween"][@"luitween_ease_out"])
 					f29_arg0:setAlpha(1)
 					f29_arg0:registerEventHandler("transition_complete_keyframe", f4_arg0.clipFinished)
 				end
@@ -338,7 +338,7 @@ CoD.TabletIcePick_Category.__clipsPerState = {
 			f40_local0(f40_arg0.HackBg)
 			local f40_local1 = function(f43_arg0)
 				local f43_local0 = function(f44_arg0)
-					f44_arg0:beginAnimation(350, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f44_arg0:beginAnimation(350, Enum[@"luitween"][@"luitween_ease_out"])
 					f44_arg0:setRGB(0.71, 0.71, 0.71)
 					f44_arg0:registerEventHandler("transition_complete_keyframe", f40_arg0.clipFinished)
 				end
@@ -353,7 +353,7 @@ CoD.TabletIcePick_Category.__clipsPerState = {
 			local f40_local2 = function(f45_arg0)
 				local f45_local0 = function(f46_arg0)
 					local f46_local0 = function(f47_arg0)
-						f47_arg0:beginAnimation(150, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+						f47_arg0:beginAnimation(150, Enum[@"luitween"][@"luitween_ease_out"])
 						f47_arg0:setAlpha(0.25)
 						f47_arg0:registerEventHandler("transition_complete_keyframe", f40_arg0.clipFinished)
 					end
@@ -547,7 +547,7 @@ CoD.TabletIcePick_Category.__clipsPerState = {
 					f76_arg0:beginAnimation(199)
 					f76_arg0:registerEventHandler("transition_complete_keyframe", f76_local0)
 				end
-				f40_arg0.Progress:beginAnimation(150, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f40_arg0.Progress:beginAnimation(150, Enum[@"luitween"][@"luitween_ease_out"])
 				f40_arg0.Progress:registerEventHandler("interrupted_keyframe", f40_arg0.clipInterrupted)
 				f40_arg0.Progress:registerEventHandler("transition_complete_keyframe", f75_local0)
 			end

@@ -15,7 +15,7 @@ CoD.DoubleXPPromotionalIcon.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 		{
 			stateName = "VisibleWZ",
 			condition = function(menu, element, event)
-				return CoD.DoubleXPUtility.HasDoubleXP(f1_arg1, element) and CoD.DoubleXPUtility.HasMainMode(f1_arg1, element, Enum[0x9C0C2196D8313A0][0xBF1DCC8138A9D39])
+				return CoD.DoubleXPUtility.HasDoubleXP(f1_arg1, element) and CoD.DoubleXPUtility.HasMainMode(f1_arg1, element, Enum[@"emodes"][@"mode_warzone"])
 			end,
 		},
 		{

@@ -25,7 +25,7 @@ LUI.createMenu.LeaguePlayOverview = function(f1_arg0, f1_arg1)
 	local BlackBGBlur = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	BlackBGBlur:setRGB(0, 0, 0)
 	BlackBGBlur:setAlpha(0)
-	BlackBGBlur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	BlackBGBlur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	BlackBGBlur:setShaderVector(0, 0.01, 0.5, 0, 0)
 	self:addElement(BlackBGBlur)
 	self.BlackBGBlur = BlackBGBlur
@@ -56,21 +56,21 @@ LUI.createMenu.LeaguePlayOverview = function(f1_arg0, f1_arg1)
 	local TopTiledBG = LUI.UIImage.new(0.5, 0.5, -960, 960, 0.5, 0.5, -488, 475)
 	TopTiledBG:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	TopTiledBG:setAlpha(0.01)
-	TopTiledBG:setImage(RegisterImage(0x7167D8C33A06020))
-	TopTiledBG:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	TopTiledBG:setImage(RegisterImage(@"uie_ui_menu_aar_repeat_white_bg"))
+	TopTiledBG:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	TopTiledBG:setShaderVector(0, 0, 0, 0, 0)
 	TopTiledBG:setupNineSliceShader(64, 64)
 	self:addElement(TopTiledBG)
 	self.TopTiledBG = TopTiledBG
 	local CurrentEventImage = LUI.UIImage.new(0.5, 0.5, -960, 0, 0.5, 0.5, -488.5, -96.5)
 	CurrentEventImage:setAlpha(0.35)
-	CurrentEventImage:setImage(RegisterImage(0x7BF16DA64DC086E))
+	CurrentEventImage:setImage(RegisterImage(@"uie_ui_menu_arena_league_banner"))
 	self:addElement(CurrentEventImage)
 	self.CurrentEventImage = CurrentEventImage
 	local AARPerformBg = LUI.UIImage.new(0.5, 0.5, -960, 960, 0.5, 0.5, -489.5, -96.5)
 	AARPerformBg:setAlpha(0.5)
-	AARPerformBg:setImage(RegisterImage(0xF95A1671A1AB874))
-	AARPerformBg:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	AARPerformBg:setImage(RegisterImage(@"uie_ui_menu_aar_perform_repeat_bg"))
+	AARPerformBg:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	AARPerformBg:setShaderVector(0, 0, 0, 0, 0)
 	AARPerformBg:setupNineSliceShader(344, 136)
 	self:addElement(AARPerformBg)
@@ -82,8 +82,8 @@ LUI.createMenu.LeaguePlayOverview = function(f1_arg0, f1_arg1)
 	self:addElement(CompetitiveOverviewProSeries)
 	self.CompetitiveOverviewProSeries = CompetitiveOverviewProSeries
 	local ModeRulesButton = CoD.CommonButtonGeneric.new(f1_local1, f1_arg0, 0.5, 0.5, -300, 0, 0.5, 0.5, 352, 422)
-	ModeRulesButton.ButtonGeneric.MiddleText:setText(LocalizeToUpperString(0xF02855900FC19D5))
-	ModeRulesButton.ButtonGeneric.MiddleTextFocus:setText(LocalizeToUpperString(0xF02855900FC19D5))
+	ModeRulesButton.ButtonGeneric.MiddleText:setText(LocalizeToUpperString(@"hash_7F02855900FC19D5"))
+	ModeRulesButton.ButtonGeneric.MiddleTextFocus:setText(LocalizeToUpperString(@"hash_7F02855900FC19D5"))
 	ModeRulesButton:registerEventHandler("gain_focus", function(element, event)
 		local f3_local0 = nil
 		if element.gainFocus then
@@ -91,22 +91,22 @@ LUI.createMenu.LeaguePlayOverview = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f3_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f3_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(ModeRulesButton, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(ModeRulesButton, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		OpenPopup(self, "LeaguePlayGameModeRules", controller)
 		PlaySoundAlias("uin_party_ease_slide")
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 		return true
 	end, false)
 	self:addElement(ModeRulesButton)
 	self.ModeRulesButton = ModeRulesButton
 	local ContentRulesButton = CoD.CommonButtonGeneric.new(f1_local1, f1_arg0, 0.5, 0.5, -638, -338, 0.5, 0.5, 352, 422)
-	ContentRulesButton.ButtonGeneric.MiddleText:setText(LocalizeToUpperString(0xF794CE5D3A3BE33))
-	ContentRulesButton.ButtonGeneric.MiddleTextFocus:setText(LocalizeToUpperString(0xF794CE5D3A3BE33))
+	ContentRulesButton.ButtonGeneric.MiddleText:setText(LocalizeToUpperString(@"hash_1F794CE5D3A3BE33"))
+	ContentRulesButton.ButtonGeneric.MiddleTextFocus:setText(LocalizeToUpperString(@"hash_1F794CE5D3A3BE33"))
 	ContentRulesButton:registerEventHandler("gain_focus", function(element, event)
 		local f6_local0 = nil
 		if element.gainFocus then
@@ -114,37 +114,37 @@ LUI.createMenu.LeaguePlayOverview = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f6_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f6_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(ContentRulesButton, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(ContentRulesButton, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		OpenPopup(self, "LeaguePlayContentRules", controller)
 		PlaySoundAlias("uin_party_ease_slide")
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 		return true
 	end, false)
 	self:addElement(ContentRulesButton)
 	self.ContentRulesButton = ContentRulesButton
 	local FuiBox02Right = LUI.UIImage.new(0.5, 0.5, 912.5, 946.5, 0.5, 0.5, -142.5, -108.5)
 	FuiBox02Right:setAlpha(0.05)
-	FuiBox02Right:setImage(RegisterImage(0x811A80C0AADA825))
-	FuiBox02Right:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	FuiBox02Right:setImage(RegisterImage(@"uie_ui_hud_vehicle_ac130_fui_box01"))
+	FuiBox02Right:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	FuiBox02Right:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(FuiBox02Right)
 	self.FuiBox02Right = FuiBox02Right
 	local TiledPlusGrid = LUI.UIImage.new(0.5, 0.5, -1096, 960, 0.5, 0.5, -558, -96)
 	TiledPlusGrid:setAlpha(0.05)
-	TiledPlusGrid:setImage(RegisterImage(0x6E37BAE22631294))
-	TiledPlusGrid:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	TiledPlusGrid:setImage(RegisterImage(@"uie_ui_hud_vehicle_hellstorm_repeat_plusgrid"))
+	TiledPlusGrid:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	TiledPlusGrid:setShaderVector(0, 0, 0, 0, 0)
 	TiledPlusGrid:setupNineSliceShader(220, 220)
 	self:addElement(TiledPlusGrid)
 	self.TiledPlusGrid = TiledPlusGrid
 	local RankRulesButton = CoD.CommonButtonGeneric.new(f1_local1, f1_arg0, 0.5, 0.5, -638, -338, 0.5, 0.5, -214, -142)
-	RankRulesButton.ButtonGeneric.MiddleText:setText(LocalizeToUpperString(0xEED661A0489A4FF))
-	RankRulesButton.ButtonGeneric.MiddleTextFocus:setText(LocalizeToUpperString(0xEED661A0489A4FF))
+	RankRulesButton.ButtonGeneric.MiddleText:setText(LocalizeToUpperString(@"hash_5EED661A0489A4FF"))
+	RankRulesButton.ButtonGeneric.MiddleTextFocus:setText(LocalizeToUpperString(@"hash_5EED661A0489A4FF"))
 	RankRulesButton:registerEventHandler("gain_focus", function(element, event)
 		local f9_local0 = nil
 		if element.gainFocus then
@@ -152,15 +152,15 @@ LUI.createMenu.LeaguePlayOverview = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f9_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f9_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(RankRulesButton, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(RankRulesButton, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		OpenPopup(self, "LeaguePlayRankRules", controller)
 		PlaySoundAlias("uin_party_ease_slide")
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 		return true
 	end, false)
 	self:addElement(RankRulesButton)
@@ -168,21 +168,21 @@ LUI.createMenu.LeaguePlayOverview = function(f1_arg0, f1_arg1)
 	local TopTriangle = LUI.UIImage.new(0.5, 0.5, -680, -588, 0.5, 0.5, -97, -53)
 	TopTriangle:setRGB(0, 0, 0)
 	TopTriangle:setAlpha(0.3)
-	TopTriangle:setImage(RegisterImage(0xE8103AAF0932DB4))
+	TopTriangle:setImage(RegisterImage(@"uie_ui_menu_arena_league_hub_triangle"))
 	self:addElement(TopTriangle)
 	self.TopTriangle = TopTriangle
 	local NextEventBar = LUI.UIImage.new(0.5, 0.5, 214, 218, 0.5, 0.5, -439, -139)
 	NextEventBar:setAlpha(0.4)
-	NextEventBar:setImage(RegisterImage(0xC082CFCA3C180E5))
-	NextEventBar:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	NextEventBar:setImage(RegisterImage(@"uie_ui_menu_store_price_bg"))
+	NextEventBar:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	NextEventBar:setShaderVector(0, 0, 0, 0, 0)
 	NextEventBar:setupNineSliceShader(24, 24)
 	self:addElement(NextEventBar)
 	self.NextEventBar = NextEventBar
 	local NextEventBar2 = LUI.UIImage.new(0, 1, 0, 0, 0, 0, 440, 444)
 	NextEventBar2:setAlpha(0.4)
-	NextEventBar2:setImage(RegisterImage(0xC082CFCA3C180E5))
-	NextEventBar2:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	NextEventBar2:setImage(RegisterImage(@"uie_ui_menu_store_price_bg"))
+	NextEventBar2:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	NextEventBar2:setShaderVector(0, 0, 0, 0, 0)
 	NextEventBar2:setupNineSliceShader(24, 24)
 	self:addElement(NextEventBar2)
@@ -191,7 +191,7 @@ LUI.createMenu.LeaguePlayOverview = function(f1_arg0, f1_arg1)
 	NextEventTriangle:setRGB(0, 0, 0)
 	NextEventTriangle:setAlpha(0.4)
 	NextEventTriangle:setZRot(-90)
-	NextEventTriangle:setImage(RegisterImage(0xE8103AAF0932DB4))
+	NextEventTriangle:setImage(RegisterImage(@"uie_ui_menu_arena_league_hub_triangle"))
 	self:addElement(NextEventTriangle)
 	self.NextEventTriangle = NextEventTriangle
 	local NextEvent = CoD.LeaguePlayEventTimeInfo.new(f1_local1, f1_arg0, 0.5, 0.5, 255, 1055, 0.5, 0.5, -409, -169)
@@ -205,7 +205,7 @@ LUI.createMenu.LeaguePlayOverview = function(f1_arg0, f1_arg1)
 	})
 	local Header = NextEvent
 	local CurrentEvent = NextEvent.subscribeToModel
-	local BackingGrayMediumLeft = Engine[0x8DF2E5447F384B9]()
+	local BackingGrayMediumLeft = Engine[@"getglobalmodel"]()
 	CurrentEvent(Header, BackingGrayMediumLeft["lobbyPlaylist.name"], function(f13_arg0)
 		f1_local1:updateElementState(NextEvent, {
 			name = "model_validation",
@@ -217,7 +217,7 @@ LUI.createMenu.LeaguePlayOverview = function(f1_arg0, f1_arg1)
 	end, false)
 	Header = NextEvent
 	CurrentEvent = NextEvent.subscribeToModel
-	BackingGrayMediumLeft = Engine[0x8DF2E5447F384B9]()
+	BackingGrayMediumLeft = Engine[@"getglobalmodel"]()
 	CurrentEvent(Header, BackingGrayMediumLeft["lobbyRoot.lobbyNav"], function(f14_arg0)
 		f1_local1:updateElementState(NextEvent, {
 			name = "model_validation",
@@ -240,7 +240,7 @@ LUI.createMenu.LeaguePlayOverview = function(f1_arg0, f1_arg1)
 	})
 	BackingGrayMediumLeft = CurrentEvent
 	Header = CurrentEvent.subscribeToModel
-	local SkillDivisionsButton = Engine[0x8DF2E5447F384B9]()
+	local SkillDivisionsButton = Engine[@"getglobalmodel"]()
 	Header(BackingGrayMediumLeft, SkillDivisionsButton["lobbyPlaylist.name"], function(f16_arg0)
 		f1_local1:updateElementState(CurrentEvent, {
 			name = "model_validation",
@@ -252,7 +252,7 @@ LUI.createMenu.LeaguePlayOverview = function(f1_arg0, f1_arg1)
 	end, false)
 	BackingGrayMediumLeft = CurrentEvent
 	Header = CurrentEvent.subscribeToModel
-	SkillDivisionsButton = Engine[0x8DF2E5447F384B9]()
+	SkillDivisionsButton = Engine[@"getglobalmodel"]()
 	Header(BackingGrayMediumLeft, SkillDivisionsButton["lobbyRoot.lobbyNav"], function(f17_arg0)
 		f1_local1:updateElementState(CurrentEvent, {
 			name = "model_validation",
@@ -275,7 +275,7 @@ LUI.createMenu.LeaguePlayOverview = function(f1_arg0, f1_arg1)
 	Header:subscribeToGlobalModel(f1_arg0, "LobbyRoot", "lobbyTitle", function(model)
 		local f19_local0 = model:get()
 		if f19_local0 ~= nil then
-			Header.subtitle.subtitle:setText(Engine[0xF9F1239CFD921FE](f19_local0))
+			Header.subtitle.subtitle:setText(Engine[@"hash_4F9F1239CFD921FE"](f19_local0))
 		end
 	end)
 	Header:registerEventHandler("menu_loaded", function(element, event)
@@ -310,8 +310,8 @@ LUI.createMenu.LeaguePlayOverview = function(f1_arg0, f1_arg1)
 	self:addElement(BackingGrayMediumLeft)
 	self.BackingGrayMediumLeft = BackingGrayMediumLeft
 	SkillDivisionsButton = CoD.CommonButtonGeneric.new(f1_local1, f1_arg0, 0.5, 0.5, -300, 0, 0.5, 0.5, -212.5, -142.5)
-	SkillDivisionsButton.ButtonGeneric.MiddleText:setText(LocalizeToUpperString(0x92A27F7A5B7166D))
-	SkillDivisionsButton.ButtonGeneric.MiddleTextFocus:setText(LocalizeToUpperString(0x92A27F7A5B7166D))
+	SkillDivisionsButton.ButtonGeneric.MiddleText:setText(LocalizeToUpperString(@"hash_792A27F7A5B7166D"))
+	SkillDivisionsButton.ButtonGeneric.MiddleTextFocus:setText(LocalizeToUpperString(@"hash_792A27F7A5B7166D"))
 	SkillDivisionsButton:registerEventHandler("gain_focus", function(element, event)
 		local f22_local0 = nil
 		if element.gainFocus then
@@ -319,15 +319,15 @@ LUI.createMenu.LeaguePlayOverview = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f22_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f22_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(SkillDivisionsButton, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(SkillDivisionsButton, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		OpenPopup(self, "LeaguePlaySkillDivisionRules", controller)
 		PlaySoundAlias("uin_party_ease_slide")
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 		return true
 	end, false)
 	self:addElement(SkillDivisionsButton)
@@ -336,7 +336,7 @@ LUI.createMenu.LeaguePlayOverview = function(f1_arg0, f1_arg1)
 		{
 			stateName = "Unranked",
 			condition = function(menu, element, event)
-				return CoD.ArenaUtility.CurrentArenaEventTypeEquals(self, Enum[0xC0EA92D04BC003B][0x185075D2D3D8497])
+				return CoD.ArenaUtility.CurrentArenaEventTypeEquals(self, Enum[@"hash_6C0EA92D04BC003B"][@"hash_4185075D2D3D8497"])
 			end,
 		},
 		{
@@ -348,7 +348,7 @@ LUI.createMenu.LeaguePlayOverview = function(f1_arg0, f1_arg1)
 	})
 	local f1_local25 = self
 	local f1_local26 = self.subscribeToModel
-	local f1_local27 = Engine[0x8DF2E5447F384B9]()
+	local f1_local27 = Engine[@"getglobalmodel"]()
 	f1_local26(f1_local25, f1_local27["lobbyPlaylist.name"], function(f27_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",
@@ -360,7 +360,7 @@ LUI.createMenu.LeaguePlayOverview = function(f1_arg0, f1_arg1)
 	end, false)
 	f1_local25 = self
 	f1_local26 = self.subscribeToModel
-	f1_local27 = Engine[0x8DF2E5447F384B9]()
+	f1_local27 = Engine[@"getglobalmodel"]()
 	f1_local26(f1_local25, f1_local27["lobbyRoot.lobbyNav"], function(f28_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",
@@ -370,11 +370,11 @@ LUI.createMenu.LeaguePlayOverview = function(f1_arg0, f1_arg1)
 			modelName = "lobbyRoot.lobbyNav",
 		})
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		GoBack(self, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 		return true
 	end, false)
 	LUI.OverrideFunction_CallOriginalFirst(self, "close", function(element)

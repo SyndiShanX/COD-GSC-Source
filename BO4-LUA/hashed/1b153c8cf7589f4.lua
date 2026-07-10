@@ -8,8 +8,8 @@ CoD.ActorOverheadName_ZM.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	self.soundSet = "default"
 	local PlayerName = LUI.UIText.new(0, 0, 0, 200, 0, 0, 26.5, 53.5)
 	PlayerName:setTTF("notosans_regular")
-	PlayerName:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	PlayerName:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	PlayerName:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	PlayerName:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	PlayerName:linkToElementModel(self, "displayName", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then

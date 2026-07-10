@@ -10,7 +10,7 @@ CoD.PC_SocialMenu_AddFriendTextBox.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	local Blur = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	Blur:setRGB(0.08, 0.08, 0.08)
 	Blur:setAlpha(0.8)
-	Blur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	Blur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	Blur:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(Blur)
 	self.Blur = Blur
@@ -42,10 +42,10 @@ CoD.PC_SocialMenu_AddFriendTextBox.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	self.BorderTop = BorderTop
 	local SearchPlaceholderText = LUI.UIText.new(0, 0, 11, 250, 0.5, 0.5, -16.5, 16.5)
 	SearchPlaceholderText:setAlpha(0)
-	SearchPlaceholderText:setText(Engine[0xF9F1239CFD921FE](0x236F2E52CE62AFE))
+	SearchPlaceholderText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_1236F2E52CE62AFE"))
 	SearchPlaceholderText:setTTF("default")
-	SearchPlaceholderText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	SearchPlaceholderText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	SearchPlaceholderText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	SearchPlaceholderText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(SearchPlaceholderText)
 	self.SearchPlaceholderText = SearchPlaceholderText
 	local CornerTopL = LUI.UIImage.new(0, 0, 0, 1, 0, 0, 0, 1)
@@ -67,8 +67,8 @@ CoD.PC_SocialMenu_AddFriendTextBox.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	local TextBox = LUI.UIText.new(0, 0.95, 11, 11, 0.19, 0.82, 0, 0)
 	TextBox:setText("")
 	TextBox:setTTF("default")
-	TextBox:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	TextBox:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	TextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	TextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(TextBox)
 	self.TextBox = TextBox
 	if PostLoadFunc then

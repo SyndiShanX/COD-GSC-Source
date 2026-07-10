@@ -17,11 +17,11 @@ CoD.PC_SocialMenu_PartyInvitesTab.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	self:addElement(ReceivedInvites)
 	self.ReceivedInvites = ReceivedInvites
 	local Title = LUI.UIText.new(-0.01, 0.99, 0, 0, 0, 0, 0, 37)
-	Title:setText(Engine[0xF9F1239CFD921FE](0x8F2C8CBB96C1826))
+	Title:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_18F2C8CBB96C1826"))
 	Title:setTTF("ttmussels_demibold")
 	Title:setLetterSpacing(3)
-	Title:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	Title:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Title:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	Title:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(Title)
 	self.Title = Title
 	ReceivedInvites.id = "ReceivedInvites"

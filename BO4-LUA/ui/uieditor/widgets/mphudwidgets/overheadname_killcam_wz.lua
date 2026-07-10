@@ -11,14 +11,14 @@ CoD.OverheadName_Killcam_WZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.anyChildUsesUpdateState = true
 	local YouCircle = LUI.UIImage.new(0.5, 0.5, -32, 32, 0, 0, -71, -7)
 	YouCircle:setRGB(0, 0.76, 1)
-	YouCircle:setImage(RegisterImage(0xB63170C49335443))
+	YouCircle:setImage(RegisterImage(@"uie_ui_menu_cac_selection_circle"))
 	self:addElement(YouCircle)
 	self.YouCircle = YouCircle
 	local YouText = LUI.UIText.new(0, 0, 71, 129, 0, 0, -49.5, -28.5)
-	YouText:setText(LocalizeToUpperString(0x4657C39C60632A0))
+	YouText:setText(LocalizeToUpperString(@"wz/you"))
 	YouText:setTTF("default")
-	YouText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	YouText:setAlignment(Enum[0x7A5123B654282D2][0x6ED4298C93DC5ED])
+	YouText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	YouText:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
 	self:addElement(YouText)
 	self.YouText = YouText
 	local PlayerNameAndClanTag = CoD.OverheadName_PlayerNameAndClanTag.new(f1_arg0, f1_arg1, 0, 0, 32.5, 167.5, 0, 0, 15, 45)

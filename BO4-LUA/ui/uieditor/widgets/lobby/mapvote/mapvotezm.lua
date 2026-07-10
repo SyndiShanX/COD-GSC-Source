@@ -21,8 +21,8 @@ CoD.MapVoteZM.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 		},
 	})
 	DirectorMapGameTypeAndDifficulty:setAlpha(0)
-	DirectorMapGameTypeAndDifficulty.DirectorMapAndGameInternal.PlaylistHeader.GameModeText:setText(Engine[0xF9F1239CFD921FE](0xC95DCE378B96DFF))
-	DirectorMapGameTypeAndDifficulty.DirectorMapAndGameInternal.PlaylistHeaderNonHost.GameModeText:setText(Engine[0xF9F1239CFD921FE](0xC95DCE378B96DFF))
+	DirectorMapGameTypeAndDifficulty.DirectorMapAndGameInternal.PlaylistHeader.GameModeText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_1C95DCE378B96DFF"))
+	DirectorMapGameTypeAndDifficulty.DirectorMapAndGameInternal.PlaylistHeaderNonHost.GameModeText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_1C95DCE378B96DFF"))
 	DirectorMapGameTypeAndDifficulty:subscribeToGlobalModel(f1_arg1, "MapVote", "mapVoteMapNext", function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -66,11 +66,11 @@ CoD.MapVoteZM.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 	self:addElement(DirectorMapGameTypeAndDifficulty)
 	self.DirectorMapGameTypeAndDifficulty = DirectorMapGameTypeAndDifficulty
 	local MapVoteItemRandomZM = CoD.MapVoteItemZM.new(f1_arg0, f1_arg1, 0, 0, 0, 394, 0, 0, 249, 355)
-	MapVoteItemRandomZM.MapImage:setImage(RegisterImage(0xEDBAE30E94D38D3))
-	MapVoteItemRandomZM.GameMode:setText(LocalizeToUpperString(0xFDFC63B040DE92E))
-	MapVoteItemRandomZM.MapName:setText(LocalizeToUpperString(0x8C899D3B96CB850))
-	MapVoteItemRandomZM.GameModeIcon:setImage(RegisterImage(0x7615068F50B3D66))
-	MapVoteItemRandomZM.VoteType:setText(LocalizeToUpperString(0xA0C72A43293DDE0))
+	MapVoteItemRandomZM.MapImage:setImage(RegisterImage(@"uie_lui_random_map_vote"))
+	MapVoteItemRandomZM.GameMode:setText(LocalizeToUpperString(@"menu/mode_classified"))
+	MapVoteItemRandomZM.MapName:setText(LocalizeToUpperString(@"menu/classified"))
+	MapVoteItemRandomZM.GameModeIcon:setImage(RegisterImage(@"blacktransparent"))
+	MapVoteItemRandomZM.VoteType:setText(LocalizeToUpperString(@"menu/random"))
 	MapVoteItemRandomZM:subscribeToGlobalModel(f1_arg1, "MapVote", "mapVoteCountRandom", function(model)
 		local f9_local0 = model:get()
 		if f9_local0 ~= nil then
@@ -92,14 +92,14 @@ CoD.MapVoteZM.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 		elseif element.super.gainFocus then
 			f11_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f11_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(MapVoteItemRandomZM, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(MapVoteItemRandomZM, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		CoD.LobbyUtility.LobbyMapVoteSelectRandom(self, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 		return true
 	end, false)
 	self:addElement(MapVoteItemRandomZM)
@@ -115,7 +115,7 @@ CoD.MapVoteZM.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 	})
 	local LobbyStatus = MapVoteItemPreviousZM
 	local MapVoteItemNextZM = MapVoteItemPreviousZM.subscribeToModel
-	local f1_local6 = Engine[0x8DF2E5447F384B9]()
+	local f1_local6 = Engine[@"getglobalmodel"]()
 	MapVoteItemNextZM(LobbyStatus, f1_local6["lobbyRoot.mapVote"], function(f15_arg0)
 		f1_arg0:updateElementState(MapVoteItemPreviousZM, {
 			name = "model_validation",
@@ -127,7 +127,7 @@ CoD.MapVoteZM.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 	end, false)
 	LobbyStatus = MapVoteItemPreviousZM
 	MapVoteItemNextZM = MapVoteItemPreviousZM.subscribeToModel
-	f1_local6 = Engine[0x8DF2E5447F384B9]()
+	f1_local6 = Engine[@"getglobalmodel"]()
 	MapVoteItemNextZM(LobbyStatus, f1_local6["lobbyRoot.lobbyNav"], function(f16_arg0)
 		f1_arg0:updateElementState(MapVoteItemPreviousZM, {
 			name = "model_validation",
@@ -137,7 +137,7 @@ CoD.MapVoteZM.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 			modelName = "lobbyRoot.lobbyNav",
 		})
 	end, false)
-	MapVoteItemPreviousZM.VoteType:setText(LocalizeToUpperString(0x1AC7271BB7AB90A))
+	MapVoteItemPreviousZM.VoteType:setText(LocalizeToUpperString(@"menu/prev"))
 	MapVoteItemPreviousZM:subscribeToGlobalModel(f1_arg1, "MapVote", "mapVoteMapPrevious", function(model)
 		local f17_local0 = model:get()
 		if f17_local0 ~= nil then
@@ -183,20 +183,20 @@ CoD.MapVoteZM.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 		elseif element.super.gainFocus then
 			f23_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f23_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(MapVoteItemPreviousZM, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(MapVoteItemPreviousZM, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		CoD.LobbyUtility.LobbyMapVoteSelectPrevious(self, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 		return true
 	end, false)
 	self:addElement(MapVoteItemPreviousZM)
 	self.MapVoteItemPreviousZM = MapVoteItemPreviousZM
 	MapVoteItemNextZM = CoD.MapVoteItemZM.new(f1_arg0, f1_arg1, 0, 0, 0, 394, 0, 0, 37, 143)
-	MapVoteItemNextZM.VoteType:setText(LocalizeToUpperString(0xF0DF87756796D4E))
+	MapVoteItemNextZM.VoteType:setText(LocalizeToUpperString(@"menu/next"))
 	MapVoteItemNextZM:subscribeToGlobalModel(f1_arg1, "MapVote", "mapVoteMapNext", function(model)
 		local f26_local0 = model:get()
 		if f26_local0 ~= nil then
@@ -242,14 +242,14 @@ CoD.MapVoteZM.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 		elseif element.super.gainFocus then
 			f32_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f32_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(MapVoteItemNextZM, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(MapVoteItemNextZM, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		CoD.LobbyUtility.LobbyMapVoteSelectNext(self, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 		return true
 	end, false)
 	self:addElement(MapVoteItemNextZM)
@@ -258,8 +258,8 @@ CoD.MapVoteZM.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 	LobbyStatus:setRGB(0.63, 0.62, 0.61)
 	LobbyStatus:setTTF("ttmussels_regular")
 	LobbyStatus:setLetterSpacing(6)
-	LobbyStatus:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	LobbyStatus:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	LobbyStatus:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	LobbyStatus:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	LobbyStatus:subscribeToGlobalModel(f1_arg1, "LobbyRoot", "lobbyStatus", function(model)
 		local f35_local0 = model:get()
 		if f35_local0 ~= nil then
@@ -270,23 +270,23 @@ CoD.MapVoteZM.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 	self.LobbyStatus = LobbyStatus
 	local f1_local7 = DirectorMapGameTypeAndDifficulty
 	f1_local6 = DirectorMapGameTypeAndDifficulty.subscribeToModel
-	local f1_local8 = Engine[0x8DF2E5447F384B9]()
+	local f1_local8 = Engine[@"getglobalmodel"]()
 	f1_local6(f1_local7, f1_local8.localZMDifficulty, DirectorMapGameTypeAndDifficulty.DirectorMapAndGameInternal.GamemodeIcon.__GamemodeIcon_Image_FullPath)
 	f1_local7 = DirectorMapGameTypeAndDifficulty
 	f1_local6 = DirectorMapGameTypeAndDifficulty.subscribeToModel
-	f1_local8 = Engine[0x8DF2E5447F384B9]()
+	f1_local8 = Engine[@"getglobalmodel"]()
 	f1_local6(f1_local7, f1_local8.offlineScreenState, DirectorMapGameTypeAndDifficulty.DirectorMapAndGameInternal.GamemodeIcon.__GamemodeIcon_Image_FullPath)
 	f1_local7 = DirectorMapGameTypeAndDifficulty
 	f1_local6 = DirectorMapGameTypeAndDifficulty.subscribeToModel
-	f1_local8 = Engine[0x8DF2E5447F384B9]()
+	f1_local8 = Engine[@"getglobalmodel"]()
 	f1_local6(f1_local7, f1_local8.localZMDifficulty, DirectorMapGameTypeAndDifficulty.DirectorMapAndGameInternal.DirectorMapAndGameTypeInternalTitles.Label.__Label_Desc_FullPath)
 	f1_local7 = DirectorMapGameTypeAndDifficulty
 	f1_local6 = DirectorMapGameTypeAndDifficulty.subscribeToModel
-	f1_local8 = Engine[0x8DF2E5447F384B9]()
+	f1_local8 = Engine[@"getglobalmodel"]()
 	f1_local6(f1_local7, f1_local8.localZMTrialVariant, DirectorMapGameTypeAndDifficulty.DirectorMapAndGameInternal.DirectorMapAndGameTypeInternalTitles.Label.__Label_Desc_FullPath)
 	f1_local7 = DirectorMapGameTypeAndDifficulty
 	f1_local6 = DirectorMapGameTypeAndDifficulty.subscribeToModel
-	f1_local8 = Engine[0x8DF2E5447F384B9]()
+	f1_local8 = Engine[@"getglobalmodel"]()
 	f1_local6(f1_local7, f1_local8["MapVote.mapVoteGameModeNext"], DirectorMapGameTypeAndDifficulty.DirectorMapAndGameInternal.DirectorMapAndGameTypeInternalTitles.Label.__Label_Desc_FullPath)
 	self:mergeStateConditions({
 		{
@@ -298,19 +298,19 @@ CoD.MapVoteZM.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 		{
 			stateName = "MapVoteChosenNext",
 			condition = function(menu, element, event)
-				return CoD.LobbyUtility.MapVoteInState(LuaEnum.MAP_VOTE_STATE.LOCKEDIN) and CoD.ModelUtility.IsGlobalModelValueEqualToEnum("MapVote.lobbyMapVoteType", Enum[0xF116421015E781B][0x658B6B1B964D38A])
+				return CoD.LobbyUtility.MapVoteInState(LuaEnum.MAP_VOTE_STATE.LOCKEDIN) and CoD.ModelUtility.IsGlobalModelValueEqualToEnum("MapVote.lobbyMapVoteType", Enum[@"lobbymapvote"][@"lobby_mapvote_next"])
 			end,
 		},
 		{
 			stateName = "MapVoteChosenPrevious",
 			condition = function(menu, element, event)
-				return CoD.LobbyUtility.MapVoteInState(LuaEnum.MAP_VOTE_STATE.LOCKEDIN) and CoD.ModelUtility.IsGlobalModelValueEqualToEnum("MapVote.lobbyMapVoteType", Enum[0xF116421015E781B][0xD8A67C2C1AF1036])
+				return CoD.LobbyUtility.MapVoteInState(LuaEnum.MAP_VOTE_STATE.LOCKEDIN) and CoD.ModelUtility.IsGlobalModelValueEqualToEnum("MapVote.lobbyMapVoteType", Enum[@"lobbymapvote"][@"lobby_mapvote_previous"])
 			end,
 		},
 		{
 			stateName = "MapVoteChosenRandom",
 			condition = function(menu, element, event)
-				return CoD.LobbyUtility.MapVoteInState(LuaEnum.MAP_VOTE_STATE.LOCKEDIN) and CoD.ModelUtility.IsGlobalModelValueEqualToEnum("MapVote.lobbyMapVoteType", Enum[0xF116421015E781B][0x74A46A6237E75F4])
+				return CoD.LobbyUtility.MapVoteInState(LuaEnum.MAP_VOTE_STATE.LOCKEDIN) and CoD.ModelUtility.IsGlobalModelValueEqualToEnum("MapVote.lobbyMapVoteType", Enum[@"lobbymapvote"][@"lobby_mapvote_random"])
 			end,
 		},
 		{
@@ -322,7 +322,7 @@ CoD.MapVoteZM.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 	})
 	f1_local7 = self
 	f1_local6 = self.subscribeToModel
-	f1_local8 = Engine[0x8DF2E5447F384B9]()
+	f1_local8 = Engine[@"getglobalmodel"]()
 	f1_local6(f1_local7, f1_local8["lobbyRoot.mapVote"], function(f41_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -334,7 +334,7 @@ CoD.MapVoteZM.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 	end, false)
 	f1_local7 = self
 	f1_local6 = self.subscribeToModel
-	f1_local8 = Engine[0x8DF2E5447F384B9]()
+	f1_local8 = Engine[@"getglobalmodel"]()
 	f1_local6(f1_local7, f1_local8["lobbyRoot.lobbyNav"], function(f42_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -346,7 +346,7 @@ CoD.MapVoteZM.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 	end, false)
 	f1_local7 = self
 	f1_local6 = self.subscribeToModel
-	f1_local8 = Engine[0x8DF2E5447F384B9]()
+	f1_local8 = Engine[@"getglobalmodel"]()
 	f1_local6(f1_local7, f1_local8["MapVote.lobbyMapVoteType"], function(f43_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -678,7 +678,7 @@ CoD.MapVoteZM.__clipsPerState = {
 						f84_arg0:setAlpha(0)
 						f84_arg0:registerEventHandler("transition_complete_keyframe", f78_arg0.clipFinished)
 					end
-					f83_arg0:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f83_arg0:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 					f83_arg0:setTopBottom(0, 0, 37, 143)
 					f83_arg0:registerEventHandler("transition_complete_keyframe", f83_local0)
 				end
@@ -723,7 +723,7 @@ CoD.MapVoteZM.__clipsPerState = {
 						f91_arg0:setAlpha(0)
 						f91_arg0:registerEventHandler("transition_complete_keyframe", f86_arg0.clipFinished)
 					end
-					f90_arg0:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f90_arg0:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 					f90_arg0:setTopBottom(0, 0, 37, 143)
 					f90_arg0:registerEventHandler("transition_complete_keyframe", f90_local0)
 				end
@@ -854,7 +854,7 @@ CoD.MapVoteZM.__clipsPerState = {
 			f102_arg0:__resetProperties()
 			f102_arg0:setupElementClipCounter(5)
 			local f102_local0 = function(f103_arg0)
-				f102_arg0.DirectorMapGameTypeAndDifficulty:beginAnimation(500, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f102_arg0.DirectorMapGameTypeAndDifficulty:beginAnimation(500, Enum[@"luitween"][@"luitween_ease_out"])
 				f102_arg0.DirectorMapGameTypeAndDifficulty:setTopBottom(0, 0, 175, 355)
 				f102_arg0.DirectorMapGameTypeAndDifficulty:registerEventHandler("interrupted_keyframe", f102_arg0.clipInterrupted)
 				f102_arg0.DirectorMapGameTypeAndDifficulty:registerEventHandler("transition_complete_keyframe", f102_arg0.clipFinished)
@@ -873,7 +873,7 @@ CoD.MapVoteZM.__clipsPerState = {
 			f102_arg0.MapVoteItemNextZM:setAlpha(0)
 			f102_arg0.clipFinished(f102_arg0.MapVoteItemNextZM)
 			local f102_local1 = function(f104_arg0)
-				f102_arg0.LobbyStatus:beginAnimation(500, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f102_arg0.LobbyStatus:beginAnimation(500, Enum[@"luitween"][@"luitween_ease_out"])
 				f102_arg0.LobbyStatus:setTopBottom(0, 0, 150, 170)
 				f102_arg0.LobbyStatus:registerEventHandler("interrupted_keyframe", f102_arg0.clipInterrupted)
 				f102_arg0.LobbyStatus:registerEventHandler("transition_complete_keyframe", f102_arg0.clipFinished)

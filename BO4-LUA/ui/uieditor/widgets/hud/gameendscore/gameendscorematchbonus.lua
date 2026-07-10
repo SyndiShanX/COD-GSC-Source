@@ -15,19 +15,19 @@ CoD.GameEndScoreMatchBonus.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self:addElement(DoubleXPIcon)
 	self.DoubleXPIcon = DoubleXPIcon
 	local XpIcon = LUI.UIImage.new(0.5, 0.5, -36, 36, 0, 0, 0, 72)
-	XpIcon:setImage(RegisterImage(0x7B197CE33A5602C))
+	XpIcon:setImage(RegisterImage(@"uie_t7_hud_mp_notifications_xp"))
 	self:addElement(XpIcon)
 	self.XpIcon = XpIcon
 	local MatchBonusValue = LUI.UIText.new(0.5, 0.5, -250, 250, 0, 0, 130.5, 175.5)
 	MatchBonusValue:setRGB(ColorSet.RewardRankup.r, ColorSet.RewardRankup.g, ColorSet.RewardRankup.b)
 	MatchBonusValue:setTTF("ttmussels_demibold")
-	MatchBonusValue:setMaterial(LUI.UIImage.GetCachedMaterial(0x90D57B1E92D39D7))
+	MatchBonusValue:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_90D57B1E92D39D7"))
 	MatchBonusValue:setShaderVector(0, 0.3, 0, 0, 0)
 	MatchBonusValue:setShaderVector(1, 0, 0, 0, 0)
 	MatchBonusValue:setShaderVector(2, 0, 0.2, 0.7, 0.8)
 	MatchBonusValue:setLetterSpacing(4)
-	MatchBonusValue:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	MatchBonusValue:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	MatchBonusValue:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	MatchBonusValue:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	MatchBonusValue:subscribeToGlobalModel(f1_arg1, "GameScore", "matchBonus", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -40,13 +40,13 @@ CoD.GameEndScoreMatchBonus.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	MatchBonusValueAdd:setRGB(ColorSet.RewardRankup.r, ColorSet.RewardRankup.g, ColorSet.RewardRankup.b)
 	MatchBonusValueAdd:setAlpha(0)
 	MatchBonusValueAdd:setTTF("ttmussels_demibold")
-	MatchBonusValueAdd:setMaterial(LUI.UIImage.GetCachedMaterial(0x93F361CC41C94AF))
+	MatchBonusValueAdd:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_593F361CC41C94AF"))
 	MatchBonusValueAdd:setShaderVector(0, 0.15, 0, 0, 0)
 	MatchBonusValueAdd:setShaderVector(1, 0, 0, 0, 0)
 	MatchBonusValueAdd:setShaderVector(2, 0, 1, 0.7, 0.5)
 	MatchBonusValueAdd:setLetterSpacing(4)
-	MatchBonusValueAdd:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	MatchBonusValueAdd:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	MatchBonusValueAdd:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	MatchBonusValueAdd:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	MatchBonusValueAdd:subscribeToGlobalModel(f1_arg1, "GameScore", "matchBonus", function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -74,7 +74,7 @@ CoD.GameEndScoreMatchBonus.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	})
 	local f1_local6 = self
 	local f1_local7 = self.subscribeToModel
-	local f1_local8 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local8 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local7(f1_local6, f1_local8["gameScore.isRoundEnd"], function(f6_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -86,7 +86,7 @@ CoD.GameEndScoreMatchBonus.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	end, false)
 	f1_local6 = self
 	f1_local7 = self.subscribeToModel
-	f1_local8 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local8 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local7(f1_local6, f1_local8["gameScore.matchBonus"], function(f7_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -109,7 +109,7 @@ CoD.GameEndScoreMatchBonus.__resetProperties = function(f8_arg0)
 	f8_arg0.MatchBonusTitle:completeAnimation()
 	f8_arg0.DoubleXPIcon:completeAnimation()
 	f8_arg0.MatchBonusValueAdd:setAlpha(0)
-	f8_arg0.MatchBonusValueAdd:setMaterial(LUI.UIImage.GetCachedMaterial(0x93F361CC41C94AF))
+	f8_arg0.MatchBonusValueAdd:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_593F361CC41C94AF"))
 	f8_arg0.MatchBonusValue:setAlpha(1)
 	f8_arg0.XpIcon:setAlpha(1)
 	f8_arg0.MatchBonusTitle:setAlpha(1)
@@ -133,7 +133,7 @@ CoD.GameEndScoreMatchBonus.__clipsPerState = {
 			end
 			f9_arg0.MatchBonusValueAdd:completeAnimation()
 			f9_arg0.MatchBonusValueAdd:setAlpha(0)
-			f9_arg0.MatchBonusValueAdd:setMaterial(LUI.UIImage.GetCachedMaterial(0x336C1AE82B1520A))
+			f9_arg0.MatchBonusValueAdd:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_3336C1AE82B1520A"))
 			f9_local0(f9_arg0.MatchBonusValueAdd)
 		end,
 	},

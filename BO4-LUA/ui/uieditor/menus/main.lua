@@ -36,14 +36,14 @@ LUI.createMenu.Main = function(f1_arg0, f1_arg1)
 	local AspectRatioBorder = nil
 	AspectRatioBorder = LUI.UIImage.new(0.5, 0.5, -2066, -197, 0, 1, 0, 0)
 	AspectRatioBorder:setRGB(0, 0, 0)
-	AspectRatioBorder:setMaterial(LUI.UIImage.GetCachedMaterial(0xE125638BF94665F))
+	AspectRatioBorder:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_feather_edges"))
 	AspectRatioBorder:setShaderVector(0, 0, 0, 0.39, 0)
 	self:addElement(AspectRatioBorder)
 	self.AspectRatioBorder = AspectRatioBorder
 	local AspectRatioBorder2 = nil
 	AspectRatioBorder2 = LUI.UIImage.new(0.5, 0.5, 303, 2172, 0, 1, 0, 0)
 	AspectRatioBorder2:setRGB(0, 0, 0)
-	AspectRatioBorder2:setMaterial(LUI.UIImage.GetCachedMaterial(0xE125638BF94665F))
+	AspectRatioBorder2:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_feather_edges"))
 	AspectRatioBorder2:setShaderVector(0, 0.39, 0, 0, 0)
 	self:addElement(AspectRatioBorder2)
 	self.AspectRatioBorder2 = AspectRatioBorder2
@@ -71,14 +71,14 @@ LUI.createMenu.Main = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f3_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xA86639565BE5841])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_pckey_0"])
 		return f3_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(StartLabel, f1_arg0, Enum[0x3DD78803F918E9D][0xA86639565BE5841], nil, function(element, menu, controller, model)
-		SendButtonPressToMenu(menu, controller, model, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+	f1_local1:AddButtonCallbackFunction(StartLabel, f1_arg0, Enum[@"luibutton"][@"lui_key_pckey_0"], nil, function(element, menu, controller, model)
+		SendButtonPressToMenu(menu, controller, model, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xA86639565BE5841], 0x0, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_pckey_0"], @"hash_0", nil, nil)
 		return false
 	end, false)
 	self:addElement(StartLabel)
@@ -176,7 +176,7 @@ LUI.createMenu.Main = function(f1_arg0, f1_arg1)
 		end
 		return f12_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x93AB4C84F113EE1], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_back"], nil, function(element, menu, controller, model)
 		if IsDurango() then
 			ShowAccountPicker(controller)
 			return true
@@ -184,7 +184,7 @@ LUI.createMenu.Main = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if IsDurango() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x93AB4C84F113EE1], 0x0, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_back"], @"hash_0", nil, nil)
 			return false
 		else
 			return false

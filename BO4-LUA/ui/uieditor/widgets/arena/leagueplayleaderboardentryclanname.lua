@@ -10,8 +10,8 @@ CoD.LeaguePlayLeaderboardEntryClanName.new = function(f1_arg0, f1_arg1, f1_arg2,
 	local ClanTag = LUI.UIText.new(0, 0, 0, 100, 0, 0, 0, 30)
 	ClanTag:setAlpha(0.8)
 	ClanTag:setTTF("notosans_regular")
-	ClanTag:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	ClanTag:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	ClanTag:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	ClanTag:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	ClanTag:linkToElementModel(self, "clantag", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -23,8 +23,8 @@ CoD.LeaguePlayLeaderboardEntryClanName.new = function(f1_arg0, f1_arg1, f1_arg2,
 	local Name = LUI.UIText.new(0, 0, 105, 468, 0, 0, 0, 30)
 	Name:setAlpha(0.8)
 	Name:setTTF("notosans_regular")
-	Name:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Name:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Name:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Name:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	Name:linkToElementModel(self, "gamertag", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then

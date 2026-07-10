@@ -9,7 +9,7 @@ CoD.OverheadNameWZCash.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local OverheadNameWZCash = LUI.UIImage.new(0, 0, 0, 32, 0, 0, 0, 32)
 	OverheadNameWZCash:setRGB(ColorSet.FriendlyBlue.r, ColorSet.FriendlyBlue.g, ColorSet.FriendlyBlue.b)
-	OverheadNameWZCash:setImage(RegisterImage(0x165A58BC1D90709))
+	OverheadNameWZCash:setImage(RegisterImage(@"ui_icon_wz_hud_cash"))
 	self:addElement(OverheadNameWZCash)
 	self.OverheadNameWZCash = OverheadNameWZCash
 	self:mergeStateConditions({

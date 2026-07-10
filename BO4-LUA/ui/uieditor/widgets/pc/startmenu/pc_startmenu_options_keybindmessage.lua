@@ -93,7 +93,7 @@ CoD.PC_StartMenu_Options_KeybindMessage.new = function(f1_arg0, f1_arg1, f1_arg2
 	end, false)
 	f1_local2 = Background
 	KeybindMessage = Background.subscribeToModel
-	f1_local4 = Engine[0x8DF2E5447F384B9]()
+	f1_local4 = Engine[@"getglobalmodel"]()
 	KeybindMessage(f1_local2, f1_local4["SpeakingEnergy.isRecording"], function(f11_arg0)
 		f1_arg0:updateElementState(Background, {
 			name = "model_validation",
@@ -188,7 +188,7 @@ CoD.PC_StartMenu_Options_KeybindMessage.new = function(f1_arg0, f1_arg1, f1_arg2
 	end, false)
 	f1_local4 = KeybindMessage
 	f1_local2 = KeybindMessage.subscribeToModel
-	f1_local5 = Engine[0x8DF2E5447F384B9]()
+	f1_local5 = Engine[@"getglobalmodel"]()
 	f1_local2(f1_local4, f1_local5["SpeakingEnergy.isRecording"], function(f21_arg0)
 		f1_arg0:updateElementState(KeybindMessage, {
 			name = "model_validation",
@@ -282,7 +282,7 @@ CoD.PC_StartMenu_Options_KeybindMessage.new = function(f1_arg0, f1_arg1, f1_arg2
 	end, false)
 	f1_local4 = self
 	f1_local2 = self.subscribeToModel
-	f1_local5 = Engine[0x8DF2E5447F384B9]()
+	f1_local5 = Engine[@"getglobalmodel"]()
 	f1_local2(f1_local4, f1_local5["SpeakingEnergy.isRecording"], function(f31_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

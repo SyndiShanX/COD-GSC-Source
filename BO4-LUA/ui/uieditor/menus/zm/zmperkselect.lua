@@ -9,11 +9,11 @@ require("x64:83bf909ab80816a")
 require("x64:a79cd5379458ac3")
 require("x64:d13dde082cbfc3a")
 local PostLoadFunc = function(f1_arg0, f1_arg1)
-	if not IsBooleanDvarSet(0xBAB0CFB192B09C9) then
+	if not IsBooleanDvarSet(@"hash_7BAB0CFB192B09C9") then
 		local f1_local0 = f1_arg0.PerksList
 		f1_local0:setLeftRight(0.5, 0.5, -486, 486)
 		f1_local0:setHorizontalCount(7)
-		f1_local0:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+		f1_local0:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	end
 end
 CoD.ZMPerkSelect = InheritFrom(CoD.Menu)
@@ -49,12 +49,12 @@ LUI.createMenu.ZMPerkSelect = function(f2_arg0, f2_arg1)
 	self:addElement(FooterContainerFrontendRight)
 	self.FooterContainerFrontendRight = FooterContainerFrontendRight
 	local CACHeader = CoD.CommonHeader.new(f2_local1, f2_arg0, 0.5, 0.5, -960, 960, 0, 0, 0, 67)
-	CACHeader.subtitle.StageTitle:setText(LocalizeToUpperString(0x8BDD7F912E1E764))
+	CACHeader.subtitle.StageTitle:setText(LocalizeToUpperString(@"hash_28BDD7F912E1E764"))
 	CACHeader.subtitle.subtitle:setAlpha(0)
 	CACHeader:subscribeToGlobalModel(f2_arg0, "LobbyRoot", "lobbyTitle", function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
-			CACHeader.subtitle.subtitle:setText(Engine[0xF9F1239CFD921FE](f4_local0))
+			CACHeader.subtitle.subtitle:setText(Engine[@"hash_4F9F1239CFD921FE"](f4_local0))
 		end
 	end)
 	CACHeader:registerEventHandler("menu_loaded", function(element, event)
@@ -99,23 +99,23 @@ LUI.createMenu.ZMPerkSelect = function(f2_arg0, f2_arg1)
 	PerksList:setHorizontalCount(8)
 	PerksList:setVerticalCount(2)
 	PerksList:setSpacing(8)
-	PerksList:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
+	PerksList:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
 	PerksList:setVerticalCounter(CoD.verticalCounter)
 	PerksList:setDataSource("PerkSelectList")
 	local PerkName = PerksList
 	local PerkAltar = PerksList.subscribeToModel
 	local SubHeaderDivider = DataSources.ZMEquippedPerks.getModel(f2_arg0)
 	PerkAltar(PerkName, SubHeaderDivider.updateEquipped, function(f7_arg0, f7_arg1)
-		CoD.Menu.UpdateButtonShownState(f7_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f7_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	PerksList:linkToElementModel(PerksList, "globalItemIndex", true, function(model, f8_arg1)
-		CoD.Menu.UpdateButtonShownState(f8_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f8_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	PerkName = PerksList
 	PerkAltar = PerksList.subscribeToModel
 	SubHeaderDivider = DataSources.ZMEquippedPerks.getModel(f2_arg0)
 	PerkAltar(PerkName, SubHeaderDivider.currentSlot, function(f9_arg0, f9_arg1)
-		CoD.Menu.UpdateButtonShownState(f9_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f9_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	PerksList:registerEventHandler("gain_focus", function(element, event)
 		local f10_local0 = nil
@@ -124,10 +124,10 @@ LUI.createMenu.ZMPerkSelect = function(f2_arg0, f2_arg1)
 		elseif element.super.gainFocus then
 			f10_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f10_local0
 	end)
-	f2_local1:AddButtonCallbackFunction(PerksList, f2_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f2_local1:AddButtonCallbackFunction(PerksList, f2_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if not CoD.ZMPerkUtility.IsPerkLocked(element, controller, menu) and not CoD.ZMPerkUtility.IsPerkEquippedInCurrentSlot(element, controller, menu) then
 			CoD.ZMPerkUtility.PerkOptionSelected(element, menu, controller)
 			CoD.CACUtility.PlayElementXHashSound(element, "equipSound")
@@ -136,7 +136,7 @@ LUI.createMenu.ZMPerkSelect = function(f2_arg0, f2_arg1)
 		end
 	end, function(element, menu, controller)
 		if not CoD.ZMPerkUtility.IsPerkLocked(element, controller, menu) and not CoD.ZMPerkUtility.IsPerkEquippedInCurrentSlot(element, controller, menu) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		else
 			return false
@@ -171,16 +171,16 @@ LUI.createMenu.ZMPerkSelect = function(f2_arg0, f2_arg1)
 	PerkAltar:setWidgetType(CoD.ZMPerkSlot)
 	PerkAltar:setHorizontalCount(4)
 	PerkAltar:setSpacing(10)
-	PerkAltar:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	PerkAltar:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	PerkAltar:setDataSource("ZMEquippedPerks")
 	SubHeaderDivider = PerkAltar
 	PerkName = PerkAltar.subscribeToModel
 	local PerkDescription = DataSources.ZMEquippedPerks.getModel(f2_arg0)
 	PerkName(SubHeaderDivider, PerkDescription.currentSlot, function(f16_arg0, f16_arg1)
-		CoD.Menu.UpdateButtonShownState(f16_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f16_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	PerkAltar:linkToElementModel(PerkAltar, "slotIndex", true, function(model, f17_arg1)
-		CoD.Menu.UpdateButtonShownState(f17_arg1, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f17_arg1, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	PerkAltar:registerEventHandler("list_active_changed", function(element, event)
 		local f18_local0 = nil
@@ -194,10 +194,10 @@ LUI.createMenu.ZMPerkSelect = function(f2_arg0, f2_arg1)
 		elseif element.super.gainFocus then
 			f19_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f2_local1, f2_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f19_local0
 	end)
-	f2_local1:AddButtonCallbackFunction(PerkAltar, f2_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f2_local1:AddButtonCallbackFunction(PerkAltar, f2_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if not CoD.ModelUtility.IsGlobalDataSourceModelValueEqualToSelfModelValue(element, controller, "ZMEquippedPerks", "currentSlot", "slotIndex") then
 			SelectItemIfPossible(self, element, controller)
 			PlaySoundAlias("uin_zcac_elixir_slot")
@@ -206,7 +206,7 @@ LUI.createMenu.ZMPerkSelect = function(f2_arg0, f2_arg1)
 		end
 	end, function(element, menu, controller)
 		if not CoD.ModelUtility.IsGlobalDataSourceModelValueEqualToSelfModelValue(element, controller, "ZMEquippedPerks", "currentSlot", "slotIndex") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], nil)
 			return true
 		else
 			return false
@@ -221,13 +221,13 @@ LUI.createMenu.ZMPerkSelect = function(f2_arg0, f2_arg1)
 	PerkName:setRGB(0.58, 0.85, 1)
 	PerkName:setTTF("ttmussels_demibold")
 	PerkName:setLetterSpacing(7)
-	PerkName:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	PerkName:setAlignment(Enum[0x7A5123B654282D2][0x70510683C22104B])
+	PerkName:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	PerkName:setAlignment(Enum[@"luialignment"][@"lui_alignment_bottom"])
 	self:addElement(PerkName)
 	self.PerkName = PerkName
 	SubHeaderDivider = LUI.UIImage.new(0.5, 0.5, 492.5, 882.5, 0.5, 0.5, 194, 195)
 	SubHeaderDivider:setRGB(0.92, 0.92, 0.92)
-	SubHeaderDivider:setMaterial(LUI.UIImage.GetCachedMaterial(0xE992BD5A540E2D))
+	SubHeaderDivider:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_delta_normal"))
 	SubHeaderDivider:setShaderVector(0, 0, 1, 0, 0)
 	SubHeaderDivider:setShaderVector(1, 0, 1.24, 0, 0)
 	SubHeaderDivider:setShaderVector(2, 0, 1, 0, 0)
@@ -238,8 +238,8 @@ LUI.createMenu.ZMPerkSelect = function(f2_arg0, f2_arg1)
 	PerkDescription = LUI.UIText.new(0.5, 0.5, 491.5, 851.5, 0.5, 0.5, 204, 221)
 	PerkDescription:setRGB(0.92, 0.92, 0.92)
 	PerkDescription:setTTF("dinnext_regular")
-	PerkDescription:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	PerkDescription:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	PerkDescription:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	PerkDescription:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(PerkDescription)
 	self.PerkDescription = PerkDescription
 	local UnlockDescription = CoD.onOffText.new(f2_local1, f2_arg0, 0.5, 0.5, 489.5, 836.5, 0.5, 0.5, 369, 387)
@@ -296,12 +296,12 @@ LUI.createMenu.ZMPerkSelect = function(f2_arg0, f2_arg1)
 	self:addElement(ModifierInfo)
 	self.ModifierInfo = ModifierInfo
 	RB = CoD.BumperButtonWithKeyMouseText.new(f2_local1, f2_arg0, 0, 0, 1435, 1635, 0, 0, 160, 194)
-	RB.GamepadPrompt:setText(Engine[0xF9F1239CFD921FE](0xBFED5292621DA9A))
+	RB.GamepadPrompt:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_5BFED5292621DA9A"))
 	self:addElement(RB)
 	self.RB = RB
 	LB = CoD.BumperButtonWithKeyMouseText.new(f2_local1, f2_arg0, 0, 0, 285, 485, 0, 0, 160, 194)
-	LB.GamepadPrompt:setText(Engine[0xF9F1239CFD921FE](0xBDCD5292604F434))
-	LB.GamepadPrompt:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
+	LB.GamepadPrompt:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_5BDCD5292604F434"))
+	LB.GamepadPrompt:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
 	self:addElement(LB)
 	self.LB = LB
 	RestrictedText:linkToElementModel(PerksList, nil, false, function(model)
@@ -316,7 +316,7 @@ LUI.createMenu.ZMPerkSelect = function(f2_arg0, f2_arg1)
 	PerkDescription:linkToElementModel(PerksList, "description", true, function(model)
 		local f30_local0 = model:get()
 		if f30_local0 ~= nil then
-			PerkDescription:setText(Engine[0xF9F1239CFD921FE](f30_local0))
+			PerkDescription:setText(Engine[@"hash_4F9F1239CFD921FE"](f30_local0))
 		end
 	end)
 	UnlockDescription:linkToElementModel(PerksList, nil, false, function(model)
@@ -334,7 +334,7 @@ LUI.createMenu.ZMPerkSelect = function(f2_arg0, f2_arg1)
 	ModifierInfo:linkToElementModel(PerksList, "modifierDesc", true, function(model)
 		local f34_local0 = model:get()
 		if f34_local0 ~= nil then
-			ModifierInfo.ModifierDescription:setText(Engine[0xF9F1239CFD921FE](f34_local0))
+			ModifierInfo.ModifierDescription:setText(Engine[@"hash_4F9F1239CFD921FE"](f34_local0))
 		end
 	end)
 	ModifierInfo:linkToElementModel(PerksList, "modifierName", true, function(model)
@@ -351,11 +351,11 @@ LUI.createMenu.ZMPerkSelect = function(f2_arg0, f2_arg1)
 			end,
 		},
 	})
-	f2_local1:AddButtonCallbackFunction(self, f2_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f2_local1:AddButtonCallbackFunction(self, f2_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		GoBack(self, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 		return true
 	end, false)
 	LUI.OverrideFunction_CallOriginalFirst(self, "close", function(element)

@@ -18,11 +18,11 @@ CoD.systemOverlay_Layout_ClassOptions.new = function(f1_arg0, f1_arg1, f1_arg2, 
 	title:setRGB(ColorSet.T8__BEIGE__HEADER.r, ColorSet.T8__BEIGE__HEADER.g, ColorSet.T8__BEIGE__HEADER.b)
 	title:setTTF("ttmussels_demibold")
 	title:setLetterSpacing(6)
-	title:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	title:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	title:linkToElementModel(self, "title", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			title:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			title:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	self:addElement(title)
@@ -42,7 +42,7 @@ CoD.systemOverlay_Layout_ClassOptions.new = function(f1_arg0, f1_arg1, f1_arg2, 
 	options:setWidgetType(CoD.List1ButtonChooseClass)
 	options:setVerticalCount(6)
 	options:setSpacing(4)
-	options:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	options:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	options:setVerticalCounter(CoD.verticalCounter)
 	options:linkToElementModel(self, "listDatasource", true, function(model)
 		local f4_local0 = model:get()
@@ -51,7 +51,7 @@ CoD.systemOverlay_Layout_ClassOptions.new = function(f1_arg0, f1_arg1, f1_arg2, 
 		end
 	end)
 	options:linkToElementModel(options, "disabled", true, function(model, f5_arg1)
-		CoD.Menu.UpdateButtonShownState(f5_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f5_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	options:registerEventHandler("gain_focus", function(element, event)
 		local f6_local0 = nil
@@ -60,10 +60,10 @@ CoD.systemOverlay_Layout_ClassOptions.new = function(f1_arg0, f1_arg1, f1_arg2, 
 		elseif element.super.gainFocus then
 			f6_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f6_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(options, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(options, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if not IsDisabled(element, controller) then
 			ProcessClassOptionAction(self, element, controller, menu)
 			return true
@@ -71,7 +71,7 @@ CoD.systemOverlay_Layout_ClassOptions.new = function(f1_arg0, f1_arg1, f1_arg2, 
 		end
 	end, function(element, menu, controller)
 		if not IsDisabled(element, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false

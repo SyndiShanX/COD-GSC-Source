@@ -8,13 +8,13 @@ CoD.VehicleGround_IrisOutterDigi.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local IrisOutterDigiL = LUI.UIImage.new(0, 0, 0, 600, 0, 1, 0, 0)
-	IrisOutterDigiL:setImage(RegisterImage(0x36F7E6FEA080763))
-	IrisOutterDigiL:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	IrisOutterDigiL:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_ground_irisoutterdigil"))
+	IrisOutterDigiL:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(IrisOutterDigiL)
 	self.IrisOutterDigiL = IrisOutterDigiL
 	local IrisOutterDigiR = LUI.UIImage.new(1, 1, -540, 0, 0, 1, 0, 0)
-	IrisOutterDigiR:setImage(RegisterImage(0x36F7C6FEA0803FD))
-	IrisOutterDigiR:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	IrisOutterDigiR:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_ground_irisoutterdigir"))
+	IrisOutterDigiR:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(IrisOutterDigiR)
 	self.IrisOutterDigiR = IrisOutterDigiR
 	self:mergeStateConditions({

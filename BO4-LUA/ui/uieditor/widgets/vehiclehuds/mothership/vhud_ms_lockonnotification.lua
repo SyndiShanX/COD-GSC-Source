@@ -14,7 +14,7 @@ CoD.vhud_ms_LockOnNotification.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 		{
 			stateName = "On",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfEnumModelValueTrue(element, f1_arg1, Enum[0x979CFAE6F7955F9][0x7459C01AD9B3104])
+				return CoD.ModelUtility.IsSelfEnumModelValueTrue(element, f1_arg1, Enum[@"missilelockedondirection"][@"missile_locked_on_direction_center"])
 			end,
 		},
 		{
@@ -24,13 +24,13 @@ CoD.vhud_ms_LockOnNotification.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 			end,
 		},
 	})
-	vhudmsLockBox:linkToElementModel(vhudmsLockBox, Enum[0x979CFAE6F7955F9][0x7459C01AD9B3104], true, function(model)
+	vhudmsLockBox:linkToElementModel(vhudmsLockBox, Enum[@"missilelockedondirection"][@"missile_locked_on_direction_center"], true, function(model)
 		f1_arg0:updateElementState(vhudmsLockBox, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = model:get(),
-			modelName = Enum[0x979CFAE6F7955F9][0x7459C01AD9B3104],
+			modelName = Enum[@"missilelockedondirection"][@"missile_locked_on_direction_center"],
 		})
 	end)
 	vhudmsLockBox:linkToElementModel(vhudmsLockBox, nil, true, function(model)
@@ -52,17 +52,17 @@ CoD.vhud_ms_LockOnNotification.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 		{
 			stateName = "On",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfEnumModelValueTrue(element, f1_arg1, Enum[0x979CFAE6F7955F9][0x654066BD0500BF0])
+				return CoD.ModelUtility.IsSelfEnumModelValueTrue(element, f1_arg1, Enum[@"missilelockedondirection"][@"missile_locked_on_direction_left"])
 			end,
 		},
 	})
-	vhudmsLockArrow:linkToElementModel(vhudmsLockArrow, Enum[0x979CFAE6F7955F9][0x654066BD0500BF0], true, function(model)
+	vhudmsLockArrow:linkToElementModel(vhudmsLockArrow, Enum[@"missilelockedondirection"][@"missile_locked_on_direction_left"], true, function(model)
 		f1_arg0:updateElementState(vhudmsLockArrow, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = model:get(),
-			modelName = Enum[0x979CFAE6F7955F9][0x654066BD0500BF0],
+			modelName = Enum[@"missilelockedondirection"][@"missile_locked_on_direction_left"],
 		})
 	end)
 	vhudmsLockArrow:linkToElementModel(self, nil, false, function(model)
@@ -75,17 +75,17 @@ CoD.vhud_ms_LockOnNotification.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 		{
 			stateName = "On",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfEnumModelValueTrue(element, f1_arg1, Enum[0x979CFAE6F7955F9][0x63CE4D237D81945])
+				return CoD.ModelUtility.IsSelfEnumModelValueTrue(element, f1_arg1, Enum[@"missilelockedondirection"][@"missile_locked_on_direction_right"])
 			end,
 		},
 	})
-	vhudmsLockArrow0:linkToElementModel(vhudmsLockArrow0, Enum[0x979CFAE6F7955F9][0x63CE4D237D81945], true, function(model)
+	vhudmsLockArrow0:linkToElementModel(vhudmsLockArrow0, Enum[@"missilelockedondirection"][@"missile_locked_on_direction_right"], true, function(model)
 		f1_arg0:updateElementState(vhudmsLockArrow0, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = model:get(),
-			modelName = Enum[0x979CFAE6F7955F9][0x63CE4D237D81945],
+			modelName = Enum[@"missilelockedondirection"][@"missile_locked_on_direction_right"],
 		})
 	end)
 	vhudmsLockArrow0:setZRot(180)
@@ -99,17 +99,17 @@ CoD.vhud_ms_LockOnNotification.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 		{
 			stateName = "On",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfEnumModelValueTrue(element, f1_arg1, Enum[0x979CFAE6F7955F9][0x3BBA82A75213295])
+				return CoD.ModelUtility.IsSelfEnumModelValueTrue(element, f1_arg1, Enum[@"missilelockedondirection"][@"missile_locked_on_direction_down"])
 			end,
 		},
 	})
-	vhudmsLockArrow1:linkToElementModel(vhudmsLockArrow1, Enum[0x979CFAE6F7955F9][0x3BBA82A75213295], true, function(model)
+	vhudmsLockArrow1:linkToElementModel(vhudmsLockArrow1, Enum[@"missilelockedondirection"][@"missile_locked_on_direction_down"], true, function(model)
 		f1_arg0:updateElementState(vhudmsLockArrow1, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = model:get(),
-			modelName = Enum[0x979CFAE6F7955F9][0x3BBA82A75213295],
+			modelName = Enum[@"missilelockedondirection"][@"missile_locked_on_direction_down"],
 		})
 	end)
 	vhudmsLockArrow1:setZRot(90)
@@ -123,17 +123,17 @@ CoD.vhud_ms_LockOnNotification.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 		{
 			stateName = "On",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfEnumModelValueTrue(element, f1_arg1, Enum[0x979CFAE6F7955F9][0x1091C5D63A96BC0])
+				return CoD.ModelUtility.IsSelfEnumModelValueTrue(element, f1_arg1, Enum[@"missilelockedondirection"][@"missile_locked_on_direction_up"])
 			end,
 		},
 	})
-	vhudmsLockArrow2:linkToElementModel(vhudmsLockArrow2, Enum[0x979CFAE6F7955F9][0x1091C5D63A96BC0], true, function(model)
+	vhudmsLockArrow2:linkToElementModel(vhudmsLockArrow2, Enum[@"missilelockedondirection"][@"missile_locked_on_direction_up"], true, function(model)
 		f1_arg0:updateElementState(vhudmsLockArrow2, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = model:get(),
-			modelName = Enum[0x979CFAE6F7955F9][0x1091C5D63A96BC0],
+			modelName = Enum[@"missilelockedondirection"][@"missile_locked_on_direction_up"],
 		})
 	end)
 	vhudmsLockArrow2:setZRot(-90)

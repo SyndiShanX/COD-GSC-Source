@@ -10,8 +10,8 @@ CoD.ArenaProgressWidgetRubyInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	local RubyProgress = LUI.UIText.new(0, 0, 0, 200, 0, 0, 0, 18)
 	RubyProgress:setRGB(0.82, 0.03, 0.03)
 	RubyProgress:setTTF("ttmussels_regular")
-	RubyProgress:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	RubyProgress:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	RubyProgress:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	RubyProgress:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	RubyProgress:subscribeToGlobalModel(f1_arg1, "LeaguePlay", "leaguePlayRubiesCount", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -23,12 +23,12 @@ CoD.ArenaProgressWidgetRubyInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	local RubyProgressRequirement = LUI.UIText.new(0, 0, 202, 402, 0, 0, 0, 18)
 	RubyProgressRequirement:setRGB(0.92, 0.92, 0.92)
 	RubyProgressRequirement:setTTF("ttmussels_regular")
-	RubyProgressRequirement:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	RubyProgressRequirement:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	RubyProgressRequirement:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	RubyProgressRequirement:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	RubyProgressRequirement:subscribeToGlobalModel(f1_arg1, "LeaguePlay", "leaguePlayRank", function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
-			RubyProgressRequirement:setText(Engine[0xF9F1239CFD921FE](SetProgressTarget(CoD.ArenaLeaguePlayUtility.GetRubyRequirementFromRank(f3_local0))))
+			RubyProgressRequirement:setText(Engine[@"hash_4F9F1239CFD921FE"](SetProgressTarget(CoD.ArenaLeaguePlayUtility.GetRubyRequirementFromRank(f3_local0))))
 		end
 	end)
 	self:addElement(RubyProgressRequirement)

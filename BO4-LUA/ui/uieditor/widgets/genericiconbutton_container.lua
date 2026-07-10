@@ -10,7 +10,7 @@ CoD.GenericIconButton_Container.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	local Blur = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 14, 0)
 	Blur:setRGB(0.08, 0.08, 0.08)
 	Blur:setAlpha(0.8)
-	Blur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	Blur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	Blur:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(Blur)
 	self.Blur = Blur
@@ -20,11 +20,11 @@ CoD.GenericIconButton_Container.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self:addElement(Background)
 	self.Background = Background
 	local Title = LUI.UIText.new(0, 1, 64, -12, 0.5, 0.5, -8, 16)
-	Title:setText(Engine[0xF9F1239CFD921FE](0x93E719493E9E18F))
+	Title:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	Title:setTTF("ttmussels_demibold")
 	Title:setLetterSpacing(3)
-	Title:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Title:setAlignment(Enum[0x7A5123B654282D2][0x6ED4298C93DC5ED])
+	Title:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Title:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
 	self:addElement(Title)
 	self.Title = Title
 	local CornerDotBLAnim = LUI.UIImage.new(0, 0, 1, 2, 1, 1, -2, -1)
@@ -41,7 +41,7 @@ CoD.GenericIconButton_Container.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self.CornerDotBL = CornerDotBL
 	local Glow = LUI.UIImage.new(0, 1, 0, 0, 0, 0, -55, 7)
 	Glow:setAlpha(0)
-	Glow:setImage(RegisterImage(0xC3B2316BAE91099))
+	Glow:setImage(RegisterImage(@"hash_6C3B2316BAE91099"))
 	self:addElement(Glow)
 	self.Glow = Glow
 	local TopBorder = LUI.UIImage.new(0, 1, 0, 0, 0, 0, 0, 6)
@@ -50,7 +50,7 @@ CoD.GenericIconButton_Container.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self:addElement(TopBorder)
 	self.TopBorder = TopBorder
 	local icon = LUI.UIImage.new(0, 0, 2, 62, 0.5, 0.5, -26, 34)
-	icon:setImage(RegisterImage(0xB7A1CFD87AACAEA))
+	icon:setImage(RegisterImage(@"uie_t8_mp_setup_bots"))
 	self:addElement(icon)
 	self.icon = icon
 	if PostLoadFunc then

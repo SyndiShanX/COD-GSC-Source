@@ -23,10 +23,10 @@ LUI.createMenu.BlackMarketContracts = function(f1_arg0, f1_arg1)
 	local DailyContracts = LUI.UIText.new(0.5, 0.5, -960.5, 959.5, 0.5, 0.5, -85.5, -35.5)
 	DailyContracts:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
 	DailyContracts:setAlpha(0)
-	DailyContracts:setText(LocalizeToUpperString(0x1CE4BBA3DD91278))
+	DailyContracts:setText(LocalizeToUpperString(@"hash_1CE4BBA3DD91278"))
 	DailyContracts:setTTF("ttmussels_demibold")
 	DailyContracts:setLetterSpacing(2)
-	DailyContracts:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	DailyContracts:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	self:addElement(DailyContracts)
 	self.DailyContracts = DailyContracts
 	local BMContractsFrame = CoD.BM_ContractsFrame.new(f1_local1, f1_arg0, 0, 1, 0, 0, 0, 1, 0, 0)
@@ -36,13 +36,13 @@ LUI.createMenu.BlackMarketContracts = function(f1_arg0, f1_arg1)
 	GenericMenuFrameIdentity:subscribeToGlobalModel(f1_arg0, "LobbyRoot", "lobbyMainMode", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			GenericMenuFrameIdentity.CommonHeader.subtitle.StageTitle:setText(Engine[0xF9F1239CFD921FE](CoD.BlackMarketUtility.GetContractHeaderStringFromLobbyMainMode(f1_arg0, f2_local0)))
+			GenericMenuFrameIdentity.CommonHeader.subtitle.StageTitle:setText(Engine[@"hash_4F9F1239CFD921FE"](CoD.BlackMarketUtility.GetContractHeaderStringFromLobbyMainMode(f1_arg0, f2_local0)))
 		end
 	end)
 	GenericMenuFrameIdentity:subscribeToGlobalModel(f1_arg0, "LobbyRoot", "lobbyTitle", function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
-			GenericMenuFrameIdentity.CommonHeader.subtitle.subtitle:setText(Engine[0xF9F1239CFD921FE](f3_local0))
+			GenericMenuFrameIdentity.CommonHeader.subtitle.subtitle:setText(Engine[@"hash_4F9F1239CFD921FE"](f3_local0))
 		end
 	end)
 	self:addElement(GenericMenuFrameIdentity)
@@ -61,7 +61,7 @@ LUI.createMenu.BlackMarketContracts = function(f1_arg0, f1_arg1)
 	})
 	local f1_local7 = self
 	local f1_local8 = self.subscribeToModel
-	local f1_local9 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	local f1_local9 = Engine[@"getmodelforcontroller"](f1_arg0)
 	f1_local8(f1_local7, f1_local9["Contracts.contractsAvailable"], function(f5_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",
@@ -71,13 +71,13 @@ LUI.createMenu.BlackMarketContracts = function(f1_arg0, f1_arg1)
 			modelName = "Contracts.contractsAvailable",
 		})
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		ForceNotifyControllerModel(controller, "Contracts.updateActiveContracts")
 		GoBack(self, controller)
 		PlaySoundAlias("uin_cmn_backout")
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 		return true
 	end, false)
 	LUI.OverrideFunction_CallOriginalFirst(self, "close", function(element)

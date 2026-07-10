@@ -57,26 +57,26 @@ CoD.ArenaMapAndGameType.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 		elseif element.super.gainFocus then
 			f7_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f7_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(ArenaMapAndGameType, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(ArenaMapAndGameType, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		CoD.DirectorUtility.DirectorOpenOverlayWithCurrentMenuMode(menu, controller, "LeaguePlayOverview")
 		PlaySoundAlias("uin_press_generic")
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 		return true
 	end, false)
 	self:addElement(ArenaMapAndGameType)
 	self.ArenaMapAndGameType = ArenaMapAndGameType
 	local f1_local2 = ArenaMapAndGameType
 	local f1_local3 = ArenaMapAndGameType.subscribeToModel
-	local f1_local4 = Engine[0x8DF2E5447F384B9]()
+	local f1_local4 = Engine[@"getglobalmodel"]()
 	f1_local3(f1_local2, f1_local4["lobbyRoot.lobbyNetworkMode"], ArenaMapAndGameType.ArenaMapAndGameTypeInternal.MapImage.__MapImage_Image_FullPath)
 	f1_local2 = ArenaMapAndGameType
 	f1_local3 = ArenaMapAndGameType.subscribeToModel
-	f1_local4 = Engine[0x8DF2E5447F384B9]()
+	f1_local4 = Engine[@"getglobalmodel"]()
 	f1_local3(f1_local2, f1_local4["lobbyRoot.lobbyNetworkMode"], ArenaMapAndGameType.ArenaMapAndGameTypeInternal.DirectorMapAndGameTypeInternalTitles.Label.__Lable_Desc_FullPath)
 	f1_local2 = ArenaMapAndGameType
 	f1_local3 = ArenaMapAndGameType.subscribeToModel
@@ -86,13 +86,13 @@ CoD.ArenaMapAndGameType.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 		{
 			stateName = "Event",
 			condition = function(menu, element, event)
-				return CoD.ArenaUtility.CurrentArenaEventTypeEquals(self, Enum[0xC0EA92D04BC003B][0xC32571741C5B730])
+				return CoD.ArenaUtility.CurrentArenaEventTypeEquals(self, Enum[@"hash_6C0EA92D04BC003B"][@"hash_5C32571741C5B730"])
 			end,
 		},
 	})
 	f1_local2 = self
 	f1_local3 = self.subscribeToModel
-	f1_local4 = Engine[0x8DF2E5447F384B9]()
+	f1_local4 = Engine[@"getglobalmodel"]()
 	f1_local3(f1_local2, f1_local4["lobbyPlaylist.name"], function(f11_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -104,7 +104,7 @@ CoD.ArenaMapAndGameType.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	end, false)
 	f1_local2 = self
 	f1_local3 = self.subscribeToModel
-	f1_local4 = Engine[0x8DF2E5447F384B9]()
+	f1_local4 = Engine[@"getglobalmodel"]()
 	f1_local3(f1_local2, f1_local4["lobbyRoot.lobbyNav"], function(f12_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

@@ -1,73 +1,73 @@
 require("x64:302bdaa9b4d7f46")
-CoD[0x60D0B6654F8E009] = InheritFrom(LUI.UIElement)
-CoD[0x60D0B6654F8E009].__defaultWidth = 960
-CoD[0x60D0B6654F8E009].__defaultHeight = 240
-CoD[0x60D0B6654F8E009].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+CoD[@"hash_660D0B6654F8E009"] = InheritFrom(LUI.UIElement)
+CoD[@"hash_660D0B6654F8E009"].__defaultWidth = 960
+CoD[@"hash_660D0B6654F8E009"].__defaultHeight = 240
+CoD[@"hash_660D0B6654F8E009"].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
 	local self = LUI.UIElement.new(f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
-	self:setClass(CoD[0x60D0B6654F8E009])
+	self:setClass(CoD[@"hash_660D0B6654F8E009"])
 	self.id = "CallingCards_Loot_CowboyAndMonsters"
 	self.soundSet = "default"
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local clouds = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	clouds:setImage(RegisterImage(0x69B5828A5280860))
-	clouds:setMaterial(LUI.UIImage.GetCachedMaterial(0x73D72BCD14C2AAD))
+	clouds:setImage(RegisterImage(@"uie_ui_icon_callingcards_loot_cowboysandmonsters_clouds"))
+	clouds:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_tile_scroll_normal"))
 	clouds:setShaderVector(0, 1, 1, 0, 0)
 	clouds:setShaderVector(1, 0.01, 0, 0, 0)
 	self:addElement(clouds)
 	self.clouds = clouds
 	local bg = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	bg:setImage(RegisterImage(0x33C84F39FDB1447))
+	bg:setImage(RegisterImage(@"uie_ui_icon_callingcards_loot_cowboysandmonsters_backgrounds"))
 	self:addElement(bg)
 	self.bg = bg
 	local tail = LUI.UIImage.new(0, 0, -16, 121, 0, 0, 27, 164)
 	tail:setZRot(-34)
-	tail:setImage(RegisterImage(0x6010168A9A0D3F2))
+	tail:setImage(RegisterImage(@"uie_ui_icon_callingcards_loot_cowboysandmonsters_fishtail"))
 	self:addElement(tail)
 	self.tail = tail
 	local fishdonut = CoD.CallingCards_Asset_fish_donut.new(f1_arg0, f1_arg1, 0, 0, 21, 260, 0, 0, 53, 292)
 	self:addElement(fishdonut)
 	self.fishdonut = fishdonut
 	local fish = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	fish:setImage(RegisterImage(0x742B2A10066C1E0))
+	fish:setImage(RegisterImage(@"uie_ui_icon_callingcards_loot_cowboysandmonsters_fish"))
 	self:addElement(fish)
 	self.fish = fish
 	local cowboy4 = LUI.UIImage.new(0, 0, 399, 751, 0, 0, 32, 192)
-	cowboy4:setImage(RegisterImage(0x14D996E034FD6E3))
+	cowboy4:setImage(RegisterImage(@"uie_ui_icon_callingcards_loot_cowboysandmonsters_cowboy4"))
 	self:addElement(cowboy4)
 	self.cowboy4 = cowboy4
 	local cowboy1 = LUI.UIImage.new(0, 0, 784, 960, 0, 0, 48, 240)
-	cowboy1:setImage(RegisterImage(0x14D9C6E034FDBFC))
+	cowboy1:setImage(RegisterImage(@"uie_ui_icon_callingcards_loot_cowboysandmonsters_cowboy1"))
 	self:addElement(cowboy1)
 	self.cowboy1 = cowboy1
 	local watersplash = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	watersplash:setImage(RegisterImage(0x1C347B2ACD70891))
+	watersplash:setImage(RegisterImage(@"uie_ui_icon_callingcards_loot_cowboysandmonsters_water_splash"))
 	self:addElement(watersplash)
 	self.watersplash = watersplash
 	local watersplashAnimate = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
 	watersplashAnimate:setAlpha(0.4)
-	watersplashAnimate:setImage(RegisterImage(0x7E8B34879C1B0A))
-	watersplashAnimate:setMaterial(LUI.UIImage.GetCachedMaterial(0xD8EA9FE9B0BCF75))
+	watersplashAnimate:setImage(RegisterImage(@"uie_ui_icon_callingcards_loot_cowboysandmonsters_water_splash_overlay"))
+	watersplashAnimate:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_tile_scroll"))
 	watersplashAnimate:setShaderVector(0, 1, 1, 0, 0)
 	watersplashAnimate:setShaderVector(1, -0.08, 0, 0, 0)
 	self:addElement(watersplashAnimate)
 	self.watersplashAnimate = watersplashAnimate
 	local cowboy2 = LUI.UIImage.new(0, 0, 784, 856, 0, 0, 84, 156)
-	cowboy2:setImage(RegisterImage(0x14D9F6E034FE115))
+	cowboy2:setImage(RegisterImage(@"uie_ui_icon_callingcards_loot_cowboysandmonsters_cowboy2"))
 	self:addElement(cowboy2)
 	self.cowboy2 = cowboy2
 	local cowboy3 = LUI.UIImage.new(0, 0, 588.5, 756.5, 0, 0, 120, 240)
-	cowboy3:setImage(RegisterImage(0x14D9E6E034FDF62))
+	cowboy3:setImage(RegisterImage(@"uie_ui_icon_callingcards_loot_cowboysandmonsters_cowboy3"))
 	self:addElement(cowboy3)
 	self.cowboy3 = cowboy3
 	local yelloweye = LUI.UIImage.new(0, 0, 369, 600, 0, 0, -43, 130)
-	yelloweye:setImage(RegisterImage(0x44AF50247B88F60))
-	yelloweye:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	yelloweye:setImage(RegisterImage(@"uie_ui_icon_callingcards_loot_cowboysandmonsters_yellow_eye_glow"))
+	yelloweye:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(yelloweye)
 	self.yelloweye = yelloweye
 	local cropper = LUI.UIImage.new(0, 0, -32, 992, 0, 0, -392, 632)
 	cropper:setAlpha(0)
-	cropper:setImage(RegisterImage(0x7EEE1693E39382A))
+	cropper:setImage(RegisterImage(@"uie_stage_crop_prop"))
 	self:addElement(cropper)
 	self.cropper = cropper
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)
@@ -76,7 +76,7 @@ CoD[0x60D0B6654F8E009].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	end
 	return self
 end
-CoD[0x60D0B6654F8E009].__resetProperties = function(f2_arg0)
+CoD[@"hash_660D0B6654F8E009"].__resetProperties = function(f2_arg0)
 	f2_arg0.watersplash:completeAnimation()
 	f2_arg0.watersplashAnimate:completeAnimation()
 	f2_arg0.tail:completeAnimation()
@@ -100,7 +100,7 @@ CoD[0x60D0B6654F8E009].__resetProperties = function(f2_arg0)
 	f2_arg0.yelloweye:setTopBottom(0, 0, -43, 130)
 	f2_arg0.yelloweye:setAlpha(1)
 end
-CoD[0x60D0B6654F8E009].__clipsPerState = {
+CoD[@"hash_660D0B6654F8E009"].__clipsPerState = {
 	DefaultState = {
 		DefaultClip = function(f3_arg0, f3_arg1)
 			f3_arg0:__resetProperties()
@@ -455,6 +455,6 @@ CoD[0x60D0B6654F8E009].__clipsPerState = {
 		end,
 	},
 }
-CoD[0x60D0B6654F8E009].__onClose = function(f64_arg0)
+CoD[@"hash_660D0B6654F8E009"].__onClose = function(f64_arg0)
 	f64_arg0.fishdonut:close()
 end

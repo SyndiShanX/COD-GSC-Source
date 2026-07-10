@@ -11,14 +11,14 @@ CoD.PlayerStatsMerits.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	TypeText:setText("")
 	TypeText:setTTF("ttmussels_demibold")
 	TypeText:setLetterSpacing(1)
-	TypeText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	TypeText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(TypeText)
 	self.TypeText = TypeText
 	local MeritsValue = LUI.UIText.new(0, 0, 191, 390, 0, 0, 0, 18)
 	MeritsValue:setRGB(0.69, 0.56, 0.04)
 	MeritsValue:setTTF("ttmussels_demibold")
 	MeritsValue:setLetterSpacing(1)
-	MeritsValue:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	MeritsValue:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	MeritsValue:linkToElementModel(self, "statMerits", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then

@@ -13,14 +13,14 @@ CoD.TitleTextWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	self.titleGlow = titleGlow
 	local itemName = LUI.UIText.new(0, 0, 4, 109, 0.5, 0.5, -22, 26)
 	itemName:setRGB(0, 0, 0)
-	itemName:setText(Engine[0xF9F1239CFD921FE](0x93E719493E9E18F))
+	itemName:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	itemName:setTTF("ttmussels_demibold")
-	itemName:setMaterial(LUI.UIImage.GetCachedMaterial(0xAE166D9BA8C6907))
+	itemName:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_2AE166D9BA8C6907"))
 	itemName:setShaderVector(0, 0.06, 0, 0, 0)
 	itemName:setShaderVector(1, 0.02, 0, 0, 0)
 	itemName:setShaderVector(2, 1, 0, 0, 0)
 	itemName:setLetterSpacing(0.6)
-	itemName:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	itemName:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	LUI.OverrideFunction_CallOriginalFirst(itemName, "setText", function(element, controller)
 		ScaleWidgetToLabel(self, element, 5)
 	end)
@@ -28,8 +28,8 @@ CoD.TitleTextWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	self.itemName = itemName
 	local Glow = LUI.UIImage.new(0, 1, -80, 74, 0.5, 0.5, -45, 65)
 	Glow:setAlpha(0.14)
-	Glow:setImage(RegisterImage(0x1078C36A022A4FE))
-	Glow:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Glow:setImage(RegisterImage(@"uie_t7_menu_cac_glow"))
+	Glow:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Glow)
 	self.Glow = Glow
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)

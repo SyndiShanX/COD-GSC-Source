@@ -14,12 +14,12 @@ CoD.rocketLauncherReticle_UI3D_Internal.new = function(f1_arg0, f1_arg1, f1_arg2
 	local GreenBacking = LUI.UIImage.new(0, 0, 0, 759, 0, 0, 101, 667)
 	GreenBacking:setRGB(0.64, 1, 0.81)
 	GreenBacking:setAlpha(0.45)
-	GreenBacking:setImage(RegisterImage(0xD2B81E07F5D9C6E))
+	GreenBacking:setImage(RegisterImage(@"uie_t7_hud_launcher_mainreticlebacking"))
 	self:addElement(GreenBacking)
 	self.GreenBacking = GreenBacking
 	local reticle = LUI.UIImage.new(0, 0, 12, 762, 0, 0, 90, 649)
 	reticle:setRGB(0.64, 1, 0.81)
-	reticle:setImage(RegisterImage(0xFFC4F3156666395))
+	reticle:setImage(RegisterImage(@"uie_t7_hud_launcher_mainreticle"))
 	self:addElement(reticle)
 	self.reticle = reticle
 	local Target = CoD.Target.new(f1_arg0, f1_arg1, 0, 0, 573, 750, 0, 0, 386, 476)

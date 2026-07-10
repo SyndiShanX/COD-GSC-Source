@@ -16,22 +16,22 @@ CoD.Prestige_DetailsUnlockedIndicator.new = function(f1_arg0, f1_arg1, f1_arg2, 
 	RankUnlockRequirementText:setAlpha(0)
 	RankUnlockRequirementText:setTTF("ttmussels_regular")
 	RankUnlockRequirementText:setLetterSpacing(2)
-	RankUnlockRequirementText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	RankUnlockRequirementText:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	RankUnlockRequirementText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	RankUnlockRequirementText:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	RankUnlockRequirementText:linkToElementModel(self, "itemIndex", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			RankUnlockRequirementText:setText(Engine[0xF9F1239CFD921FE](CoD.PrestigeUtility.GetUnlockedIndicatorString(self:getModel(), f1_arg1, f2_local0)))
+			RankUnlockRequirementText:setText(Engine[@"hash_4F9F1239CFD921FE"](CoD.PrestigeUtility.GetUnlockedIndicatorString(self:getModel(), f1_arg1, f2_local0)))
 		end
 	end)
 	self:addElement(RankUnlockRequirementText)
 	self.RankUnlockRequirementText = RankUnlockRequirementText
 	local PermanentUnlockText = LUI.UIText.new(0.5, 0.5, -200, 200, 0, 0, -2, 16)
 	PermanentUnlockText:setRGB(ColorSet.Orange.r, ColorSet.Orange.g, ColorSet.Orange.b)
-	PermanentUnlockText:setText(LocalizeToUpperString(0x8539BFDAD37E114))
+	PermanentUnlockText:setText(LocalizeToUpperString(@"hash_58539BFDAD37E114"))
 	PermanentUnlockText:setTTF("ttmussels_regular")
-	PermanentUnlockText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	PermanentUnlockText:setAlignment(Enum[0x7A5123B654282D2][0x70510683C22104B])
+	PermanentUnlockText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	PermanentUnlockText:setAlignment(Enum[@"luialignment"][@"lui_alignment_bottom"])
 	self:addElement(PermanentUnlockText)
 	self.PermanentUnlockText = PermanentUnlockText
 	self:mergeStateConditions({
@@ -114,7 +114,7 @@ CoD.Prestige_DetailsUnlockedIndicator.__resetProperties = function(f9_arg0)
 	f9_arg0.PrestigeUnlockTokenIndicator:completeAnimation()
 	f9_arg0.RankUnlockRequirementText:completeAnimation()
 	f9_arg0.PermanentUnlockText:setAlpha(1)
-	f9_arg0.PermanentUnlockText:setText(LocalizeToUpperString(0x8539BFDAD37E114))
+	f9_arg0.PermanentUnlockText:setText(LocalizeToUpperString(@"hash_58539BFDAD37E114"))
 	f9_arg0.PrestigeUnlockTokenIndicator:setAlpha(1)
 	f9_arg0.PrestigeUnlockTokenIndicator.UnlockImage:setAlpha(1)
 	f9_arg0.RankUnlockRequirementText:setAlpha(0)
@@ -159,7 +159,7 @@ CoD.Prestige_DetailsUnlockedIndicator.__clipsPerState = {
 			f12_arg0.PrestigeUnlockTokenIndicator.UnlockImage:setAlpha(0)
 			f12_arg0.clipFinished(f12_arg0.PrestigeUnlockTokenIndicator)
 			f12_arg0.PermanentUnlockText:completeAnimation()
-			f12_arg0.PermanentUnlockText:setText(LocalizeToUpperString(0xD5A696D6B841CE6))
+			f12_arg0.PermanentUnlockText:setText(LocalizeToUpperString(@"hash_3D5A696D6B841CE6"))
 			f12_arg0.clipFinished(f12_arg0.PermanentUnlockText)
 		end,
 	},

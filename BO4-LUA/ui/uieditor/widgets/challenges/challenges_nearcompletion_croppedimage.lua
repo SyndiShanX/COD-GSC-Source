@@ -7,7 +7,7 @@ CoD.Challenges_NearCompletion_CroppedImage.new = function(f1_arg0, f1_arg1, f1_a
 	self.id = "Challenges_NearCompletion_CroppedImage"
 	self.soundSet = "ChooseDecal"
 	local Image = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	Image:setMaterial(LUI.UIImage.GetCachedMaterial(0xA02C44161370F6D))
+	Image:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_1A02C44161370F6D"))
 	Image:setShaderVector(0, 0, 0.5, 0, 0)
 	Image:setShaderVector(1, 1, 1, 0, 0)
 	Image:setShaderVector(2, 0, 0, 0, 0)

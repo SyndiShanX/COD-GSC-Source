@@ -22,11 +22,11 @@ LUI.createMenu.WZPersonalizeCharacter = function(f1_arg0, f1_arg1)
 	self:addElement(XCamMouseControl)
 	self.XCamMouseControl = XCamMouseControl
 	local GenericMenuFrame = CoD.GenericMenuFrame.new(f1_local1, f1_arg0, 0, 1, 0, 0, 0, 1, 0, 0)
-	GenericMenuFrame.CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(0x46EFDF3FB2763B5))
+	GenericMenuFrame.CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(@"hash_246EFDF3FB2763B5"))
 	GenericMenuFrame:subscribeToGlobalModel(f1_arg0, "LobbyRoot", "lobbyTitle", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			GenericMenuFrame.CommonHeader.subtitle.subtitle:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			GenericMenuFrame.CommonHeader.subtitle.subtitle:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	self:addElement(GenericMenuFrame)
@@ -42,36 +42,36 @@ LUI.createMenu.WZPersonalizeCharacter = function(f1_arg0, f1_arg1)
 	outfitsPC:setHorizontalCount(4)
 	outfitsPC:setVerticalCount(10)
 	outfitsPC:setSpacing(4)
-	outfitsPC:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	outfitsPC:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	outfitsPC:linkToElementModel(outfitsPC, "owned", true, function(model, f3_arg1)
-		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	outfitsPC:linkToElementModel(outfitsPC, "itemType", true, function(model, f4_arg1)
-		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
+		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_pckey_2"])
 	end)
 	local f1_local7 = outfitsPC
 	local f1_local8 = outfitsPC.subscribeToModel
 	local themesPC = DataSources.MPSpecialistThemes.getModel(f1_arg0)
 	f1_local8(f1_local7, themesPC.update, function(f5_arg0, f5_arg1)
-		CoD.Menu.UpdateButtonShownState(f5_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f5_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
+		CoD.Menu.UpdateButtonShownState(f5_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f5_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_pckey_2"])
 	end, false)
 	outfitsPC:linkToElementModel(outfitsPC, "itemIndex", true, function(model, f6_arg1)
-		CoD.Menu.UpdateButtonShownState(f6_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f6_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
+		CoD.Menu.UpdateButtonShownState(f6_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f6_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_pckey_2"])
 	end)
 	outfitsPC:appendEventHandler("input_source_changed", function(f7_arg0, f7_arg1)
 		f7_arg1.menu = f7_arg1.menu or f1_local1
-		CoD.Menu.UpdateButtonShownState(f7_arg0, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f7_arg0, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
+		CoD.Menu.UpdateButtonShownState(f7_arg0, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f7_arg0, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_pckey_2"])
 	end)
 	f1_local7 = outfitsPC
 	f1_local8 = outfitsPC.subscribeToModel
-	themesPC = Engine[0x4DF5CFBC1771947](f1_arg0)
+	themesPC = Engine[@"getmodelforcontroller"](f1_arg0)
 	f1_local8(f1_local7, themesPC.LastInput, function(f8_arg0, f8_arg1)
-		CoD.Menu.UpdateButtonShownState(f8_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f8_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
+		CoD.Menu.UpdateButtonShownState(f8_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f8_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_pckey_2"])
 	end, false)
 	outfitsPC:registerEventHandler("list_item_gain_focus", function(element, event)
 		local f9_local0 = nil
@@ -97,12 +97,12 @@ LUI.createMenu.WZPersonalizeCharacter = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f11_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_pckey_2"])
 		return f11_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(outfitsPC, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(outfitsPC, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "owned") then
 			CoD.PlayerRoleUtility.EquipOutfitItem(menu, controller, element)
 			return true
@@ -110,44 +110,44 @@ LUI.createMenu.WZPersonalizeCharacter = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "owned") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xBDF67DCF97EBC09, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/equip", nil, nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(outfitsPC, f1_arg0, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], nil, function(element, menu, controller, model)
-		if not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "itemType", Enum[0xFCC6A2D2EB0FDA7][0x922FE5C41D9EE8B]) and CoD.PlayerRoleUtility.IsSelectedOutfitItemIndex(element, controller) and IsGamepad(controller) then
+	f1_local1:AddButtonCallbackFunction(outfitsPC, f1_arg0, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], nil, function(element, menu, controller, model)
+		if not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "itemType", Enum[@"characteritemtype"][@"hash_4922FE5C41D9EE8B"]) and CoD.PlayerRoleUtility.IsSelectedOutfitItemIndex(element, controller) and IsGamepad(controller) then
 			CoD.PlayerRoleUtility.UnequipOutfitItem(menu, controller, element)
 			CoD.PlayerRoleUtility.ResetPersonalizeSpecialistOutfitItemType(controller, element)
 			return true
 		else
 		end
 	end, function(element, menu, controller)
-		if not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "itemType", Enum[0xFCC6A2D2EB0FDA7][0x922FE5C41D9EE8B]) and CoD.PlayerRoleUtility.IsSelectedOutfitItemIndex(element, controller) and IsGamepad(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x679ACA6FFC6C8F3, nil, nil)
+		if not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "itemType", Enum[@"characteritemtype"][@"hash_4922FE5C41D9EE8B"]) and CoD.PlayerRoleUtility.IsSelectedOutfitItemIndex(element, controller) and IsGamepad(controller) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"menu/remove", nil, nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(outfitsPC, f1_arg0, Enum[0x3DD78803F918E9D][0xA86619565BE54DB], "ui_remove", function(element, menu, controller, model)
-		if not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "itemType", Enum[0xFCC6A2D2EB0FDA7][0x922FE5C41D9EE8B]) and CoD.PlayerRoleUtility.IsSelectedOutfitItemIndex(element, controller) and IsMouseOrKeyboard(controller) then
+	f1_local1:AddButtonCallbackFunction(outfitsPC, f1_arg0, Enum[@"luibutton"][@"lui_key_pckey_2"], "ui_remove", function(element, menu, controller, model)
+		if not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "itemType", Enum[@"characteritemtype"][@"hash_4922FE5C41D9EE8B"]) and CoD.PlayerRoleUtility.IsSelectedOutfitItemIndex(element, controller) and IsMouseOrKeyboard(controller) then
 			CoD.PlayerRoleUtility.UnequipOutfitItem(menu, controller, element)
 			CoD.PlayerRoleUtility.ResetPersonalizeSpecialistOutfitItemType(controller, element)
 			return true
 		else
 		end
 	end, function(element, menu, controller)
-		if not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "itemType", Enum[0xFCC6A2D2EB0FDA7][0x922FE5C41D9EE8B]) and CoD.PlayerRoleUtility.IsSelectedOutfitItemIndex(element, controller) and IsMouseOrKeyboard(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xA86619565BE54DB], 0x679ACA6FFC6C8F3, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "ui_remove")
+		if not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "itemType", Enum[@"characteritemtype"][@"hash_4922FE5C41D9EE8B"]) and CoD.PlayerRoleUtility.IsSelectedOutfitItemIndex(element, controller) and IsMouseOrKeyboard(controller) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_pckey_2"], @"menu/remove", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "ui_remove")
 			return true
 		else
 			return false
 		end
 	end, false)
-	outfitsPC:AddContextualMenuAction(f1_local1, f1_arg0, 0x679ACA6FFC6C8F3, function(f18_arg0, f18_arg1, f18_arg2, f18_arg3)
-		if not CoD.ModelUtility.IsSelfModelValueEqualToEnum(f18_arg0, f18_arg2, "itemType", Enum[0xFCC6A2D2EB0FDA7][0x922FE5C41D9EE8B]) and CoD.PlayerRoleUtility.IsSelectedOutfitItemIndex(f18_arg0, f18_arg2) then
+	outfitsPC:AddContextualMenuAction(f1_local1, f1_arg0, @"menu/remove", function(f18_arg0, f18_arg1, f18_arg2, f18_arg3)
+		if not CoD.ModelUtility.IsSelfModelValueEqualToEnum(f18_arg0, f18_arg2, "itemType", Enum[@"characteritemtype"][@"hash_4922FE5C41D9EE8B"]) and CoD.PlayerRoleUtility.IsSelectedOutfitItemIndex(f18_arg0, f18_arg2) then
 			return function(f19_arg0, f19_arg1, f19_arg2, f19_arg3)
 				PlaySoundAlias("uin_cac_equip_remove")
 				CoD.PlayerRoleUtility.UnequipOutfitItem(f19_arg1, f19_arg2, f19_arg0)
@@ -168,7 +168,7 @@ LUI.createMenu.WZPersonalizeCharacter = function(f1_arg0, f1_arg1)
 	themesPC:setWidgetType(CoD.SpecialistOutfitCategory)
 	themesPC:setVerticalCount(8)
 	themesPC:setSpacing(4)
-	themesPC:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	themesPC:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	themesPC:setDataSource("ZMOutfitCategories")
 	themesPC:registerEventHandler("list_item_gain_focus", function(element, event)
 		local f20_local0 = nil
@@ -182,14 +182,14 @@ LUI.createMenu.WZPersonalizeCharacter = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f21_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f21_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(themesPC, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(themesPC, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		CoD.PlayerRoleUtility.EquipOutfit(menu, controller, element)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 		return true
 	end, false)
 	self:addElement(themesPC)
@@ -222,11 +222,11 @@ LUI.createMenu.WZPersonalizeCharacter = function(f1_arg0, f1_arg1)
 			outfitsPC:setDataSource(f26_local0)
 		end
 	end)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		GoBack(self, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 		return true
 	end, false)
 	LUI.OverrideFunction_CallOriginalFirst(self, "close", function(element)

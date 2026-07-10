@@ -12,12 +12,12 @@ CoD.LobbyMemberStarCount.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	self:addElement(Backing)
 	self.Backing = Backing
 	local StarImage = LUI.UIImage.new(0.5, 0.5, -17.5, 17.5, 0, 0, 4, 39)
-	StarImage:setImage(RegisterImage(0xA5CED7A3CD5BCF1))
+	StarImage:setImage(RegisterImage(@"ui_icon_trainingstars_progression"))
 	self:addElement(StarImage)
 	self.StarImage = StarImage
 	local StarCount = LUI.UIText.new(0, 0, 0, 65, 0, 0, 41, 65)
 	StarCount:setTTF("ttmussels_regular")
-	StarCount:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	StarCount:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	StarCount:subscribeToGlobalModel(f1_arg1, "SpecialistHeadquarters", "StarCount", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then

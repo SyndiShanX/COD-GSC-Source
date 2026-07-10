@@ -19,14 +19,14 @@ CoD.ArenaMapAndGameTypeInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local BackingBlur = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	BackingBlur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	BackingBlur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	BackingBlur:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(BackingBlur)
 	self.BackingBlur = BackingBlur
 	local FocusGlow = LUI.UIImage.new(0, 1, -80, 80, -0, 1, -50, 50)
 	FocusGlow:setAlpha(0)
-	FocusGlow:setImage(RegisterImage(0xB8F10D49D85E9C4))
-	FocusGlow:setMaterial(LUI.UIImage.GetCachedMaterial(0xDAB59B2CAE01851))
+	FocusGlow:setImage(RegisterImage(@"uie_ui_menu_common_focus_glow_small"))
+	FocusGlow:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_6DAB59B2CAE01851"))
 	FocusGlow:setShaderVector(0, 0, 0, 0.24, 0.24)
 	FocusGlow:setShaderVector(1, 1.2, 0, 0, 0)
 	FocusGlow:setupNineSliceShader(160, 100)
@@ -34,8 +34,8 @@ CoD.ArenaMapAndGameTypeInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self.FocusGlow = FocusGlow
 	local NoiseTiledBacking = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	NoiseTiledBacking:setAlpha(0.5)
-	NoiseTiledBacking:setImage(RegisterImage(0x34839E8065B1E53))
-	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	NoiseTiledBacking:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	NoiseTiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	NoiseTiledBacking:setupNineSliceShader(196, 88)
 	self:addElement(NoiseTiledBacking)
@@ -51,7 +51,7 @@ CoD.ArenaMapAndGameTypeInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	})
 	local MapImage = ArenaEventTimer
 	local FocusBrackets = ArenaEventTimer.subscribeToModel
-	local NoiseTiledBacking2 = Engine[0x8DF2E5447F384B9]()
+	local NoiseTiledBacking2 = Engine[@"getglobalmodel"]()
 	FocusBrackets(MapImage, NoiseTiledBacking2["lobbyPlaylist.name"], function(f3_arg0)
 		f1_arg0:updateElementState(ArenaEventTimer, {
 			name = "model_validation",
@@ -63,7 +63,7 @@ CoD.ArenaMapAndGameTypeInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	end, false)
 	MapImage = ArenaEventTimer
 	FocusBrackets = ArenaEventTimer.subscribeToModel
-	NoiseTiledBacking2 = Engine[0x8DF2E5447F384B9]()
+	NoiseTiledBacking2 = Engine[@"getglobalmodel"]()
 	FocusBrackets(MapImage, NoiseTiledBacking2["lobbyRoot.lobbyNav"], function(f4_arg0)
 		f1_arg0:updateElementState(ArenaEventTimer, {
 			name = "model_validation",
@@ -86,8 +86,8 @@ CoD.ArenaMapAndGameTypeInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self:addElement(FocusBrackets)
 	self.FocusBrackets = FocusBrackets
 	MapImage = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	MapImage:setImage(RegisterImage(0xAA9981A158D630C))
-	MapImage:setMaterial(LUI.UIImage.GetCachedMaterial(0xA02C44161370F6D))
+	MapImage:setImage(RegisterImage(@"img_t7_menu_mp_preview_sector"))
+	MapImage:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_1A02C44161370F6D"))
 	MapImage:setShaderVector(0, 0.5, 0.2, 0, 0)
 	MapImage:setShaderVector(1, 1, 1, 0, 0)
 	MapImage:setShaderVector(2, 0, 0, 0, 0)
@@ -95,14 +95,14 @@ CoD.ArenaMapAndGameTypeInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self.MapImage = MapImage
 	NoiseTiledBacking2 = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	NoiseTiledBacking2:setAlpha(0.9)
-	NoiseTiledBacking2:setImage(RegisterImage(0x34839E8065B1E53))
-	NoiseTiledBacking2:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	NoiseTiledBacking2:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	NoiseTiledBacking2:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	NoiseTiledBacking2:setShaderVector(0, 0, 0, 0, 0)
 	NoiseTiledBacking2:setupNineSliceShader(196, 88)
 	self:addElement(NoiseTiledBacking2)
 	self.NoiseTiledBacking2 = NoiseTiledBacking2
 	local DotTiledBacking = CoD.CommonPixelBacking.new(f1_arg0, f1_arg1, 0, 1, 4, -4, 0, 1, 4, -4)
-	DotTiledBacking:setRFTMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	DotTiledBacking:setRFTMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	DotTiledBacking.NoiseBacking:setAlpha(1)
 	DotTiledBacking.TiledShaderImage:setRGB(0.22, 0.22, 0.22)
 	DotTiledBacking.TiledShaderImage:setAlpha(0.15)
@@ -111,8 +111,8 @@ CoD.ArenaMapAndGameTypeInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self.DotTiledBacking = DotTiledBacking
 	local FrontendFrame = LUI.UIImage.new(0, 1, -1, 1, 0, 1, -1, 1)
 	FrontendFrame:setAlpha(0.05)
-	FrontendFrame:setImage(RegisterImage(0x185E11D74ECA3D7))
-	FrontendFrame:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	FrontendFrame:setImage(RegisterImage(@"uie_ui_menu_store_common_frame"))
+	FrontendFrame:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	FrontendFrame:setShaderVector(0, 0, 0, 0, 0)
 	FrontendFrame:setupNineSliceShader(12, 12)
 	self:addElement(FrontendFrame)
@@ -122,8 +122,8 @@ CoD.ArenaMapAndGameTypeInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self.GamemodeIcon = GamemodeIcon
 	local DirectorMapAndGameTypeInternalTitles = CoD.DirectorMapAndGameTypeInternalTitles.new(f1_arg0, f1_arg1, 0, 0, -1, 383, 1, 1, -56, -4)
 	DirectorMapAndGameTypeInternalTitles:setAlpha(0)
-	DirectorMapAndGameTypeInternalTitles.Label:setText(Engine[0xF9F1239CFD921FE](0xD68F0B827BDBA25))
-	DirectorMapAndGameTypeInternalTitles.SubTitle:setText(Engine[0xF9F1239CFD921FE](0xED2FACC41C9E672))
+	DirectorMapAndGameTypeInternalTitles.Label:setText(Engine[@"hash_4F9F1239CFD921FE"](@"mpui/seaside"))
+	DirectorMapAndGameTypeInternalTitles.SubTitle:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_5ED2FACC41C9E672"))
 	self:addElement(DirectorMapAndGameTypeInternalTitles)
 	self.DirectorMapAndGameTypeInternalTitles = DirectorMapAndGameTypeInternalTitles
 	local PlaylistHeaderBacking = LUI.UIImage.new(0, 1, 0, 0, 0, 0, 0, 30)
@@ -150,7 +150,7 @@ CoD.ArenaMapAndGameTypeInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	end)
 	local FrameBorder = PlaylistHeader
 	local PlaylistHeaderNonHost = PlaylistHeader.subscribeToModel
-	local Lines = Engine[0x8DF2E5447F384B9]()
+	local Lines = Engine[@"getglobalmodel"]()
 	PlaylistHeaderNonHost(FrameBorder, Lines["lobbyRoot.lobbyNav"], function(f9_arg0)
 		f1_arg0:updateElementState(PlaylistHeader, {
 			name = "model_validation",
@@ -162,7 +162,7 @@ CoD.ArenaMapAndGameTypeInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	end, false)
 	FrameBorder = PlaylistHeader
 	PlaylistHeaderNonHost = PlaylistHeader.subscribeToModel
-	Lines = Engine[0x8DF2E5447F384B9]()
+	Lines = Engine[@"getglobalmodel"]()
 	PlaylistHeaderNonHost(FrameBorder, Lines["lobbyRoot.gameClient.update"], function(f10_arg0)
 		f1_arg0:updateElementState(PlaylistHeader, {
 			name = "model_validation",
@@ -174,7 +174,7 @@ CoD.ArenaMapAndGameTypeInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	end, false)
 	FrameBorder = PlaylistHeader
 	PlaylistHeaderNonHost = PlaylistHeader.subscribeToModel
-	Lines = Engine[0x8DF2E5447F384B9]()
+	Lines = Engine[@"getglobalmodel"]()
 	PlaylistHeaderNonHost(FrameBorder, Lines["lobbyRoot.privateClient.update"], function(f11_arg0)
 		f1_arg0:updateElementState(PlaylistHeader, {
 			name = "model_validation",
@@ -206,7 +206,7 @@ CoD.ArenaMapAndGameTypeInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	end)
 	Lines = PlaylistHeaderNonHost
 	FrameBorder = PlaylistHeaderNonHost.subscribeToModel
-	local FocusBorder = Engine[0x8DF2E5447F384B9]()
+	local FocusBorder = Engine[@"getglobalmodel"]()
 	FrameBorder(Lines, FocusBorder["lobbyRoot.lobbyNav"], function(f15_arg0)
 		f1_arg0:updateElementState(PlaylistHeaderNonHost, {
 			name = "model_validation",
@@ -218,7 +218,7 @@ CoD.ArenaMapAndGameTypeInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	end, false)
 	Lines = PlaylistHeaderNonHost
 	FrameBorder = PlaylistHeaderNonHost.subscribeToModel
-	FocusBorder = Engine[0x8DF2E5447F384B9]()
+	FocusBorder = Engine[@"getglobalmodel"]()
 	FrameBorder(Lines, FocusBorder["lobbyRoot.gameClient.update"], function(f16_arg0)
 		f1_arg0:updateElementState(PlaylistHeaderNonHost, {
 			name = "model_validation",
@@ -230,7 +230,7 @@ CoD.ArenaMapAndGameTypeInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	end, false)
 	Lines = PlaylistHeaderNonHost
 	FrameBorder = PlaylistHeaderNonHost.subscribeToModel
-	FocusBorder = Engine[0x8DF2E5447F384B9]()
+	FocusBorder = Engine[@"getglobalmodel"]()
 	FrameBorder(Lines, FocusBorder["lobbyRoot.privateClient.update"], function(f17_arg0)
 		f1_arg0:updateElementState(PlaylistHeaderNonHost, {
 			name = "model_validation",
@@ -245,8 +245,8 @@ CoD.ArenaMapAndGameTypeInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self.PlaylistHeaderNonHost = PlaylistHeaderNonHost
 	FrameBorder = LUI.UIImage.new(0, 1, -1, 1, 0, 1, -1, 1)
 	FrameBorder:setAlpha(0.05)
-	FrameBorder:setImage(RegisterImage(0x185E11D74ECA3D7))
-	FrameBorder:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	FrameBorder:setImage(RegisterImage(@"uie_ui_menu_store_common_frame"))
+	FrameBorder:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	FrameBorder:setShaderVector(0, 0, 0, 0, 0)
 	FrameBorder:setupNineSliceShader(12, 12)
 	self:addElement(FrameBorder)
@@ -258,8 +258,8 @@ CoD.ArenaMapAndGameTypeInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	FocusBorder = LUI.UIImage.new(0, 1, -4, 4, 0, 1, -4, 4)
 	FocusBorder:setRGB(0.96, 0.94, 0.78)
 	FocusBorder:setAlpha(0)
-	FocusBorder:setImage(RegisterImage(0xCB07CCC28498CB2))
-	FocusBorder:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	FocusBorder:setImage(RegisterImage(@"uie_ui_menu_store_focus_frame"))
+	FocusBorder:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	FocusBorder:setShaderVector(0, 0, 0, 0, 0)
 	FocusBorder:setupNineSliceShader(10, 10)
 	self:addElement(FocusBorder)
@@ -287,7 +287,7 @@ CoD.ArenaMapAndGameTypeInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	})
 	local CustomGamesOfficialBadgeIcon = DirectorPartyLeaderOnlyPrompt
 	local DoubleXPIconsLeftAligned = DirectorPartyLeaderOnlyPrompt.subscribeToModel
-	local ButtonText = Engine[0x8DF2E5447F384B9]()
+	local ButtonText = Engine[@"getglobalmodel"]()
 	DoubleXPIconsLeftAligned(CustomGamesOfficialBadgeIcon, ButtonText["lobbyRoot.lobbyNav"], function(f20_arg0)
 		f1_arg0:updateElementState(DirectorPartyLeaderOnlyPrompt, {
 			name = "model_validation",
@@ -299,7 +299,7 @@ CoD.ArenaMapAndGameTypeInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	end, false)
 	CustomGamesOfficialBadgeIcon = DirectorPartyLeaderOnlyPrompt
 	DoubleXPIconsLeftAligned = DirectorPartyLeaderOnlyPrompt.subscribeToModel
-	ButtonText = Engine[0x8DF2E5447F384B9]()
+	ButtonText = Engine[@"getglobalmodel"]()
 	DoubleXPIconsLeftAligned(CustomGamesOfficialBadgeIcon, ButtonText["lobbyRoot.privateClient.isHost"], function(f21_arg0)
 		f1_arg0:updateElementState(DirectorPartyLeaderOnlyPrompt, {
 			name = "model_validation",
@@ -311,7 +311,7 @@ CoD.ArenaMapAndGameTypeInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	end, false)
 	CustomGamesOfficialBadgeIcon = DirectorPartyLeaderOnlyPrompt
 	DoubleXPIconsLeftAligned = DirectorPartyLeaderOnlyPrompt.subscribeToModel
-	ButtonText = Engine[0x8DF2E5447F384B9]()
+	ButtonText = Engine[@"getglobalmodel"]()
 	DoubleXPIconsLeftAligned(CustomGamesOfficialBadgeIcon, ButtonText["lobbyRoot.gameClient.isHost"], function(f22_arg0)
 		f1_arg0:updateElementState(DirectorPartyLeaderOnlyPrompt, {
 			name = "model_validation",
@@ -337,7 +337,7 @@ CoD.ArenaMapAndGameTypeInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	})
 	local f1_local22 = CustomGamesOfficialBadgeIcon
 	ButtonText = CustomGamesOfficialBadgeIcon.subscribeToModel
-	local f1_local23 = Engine[0x8DF2E5447F384B9]()
+	local f1_local23 = Engine[@"getglobalmodel"]()
 	ButtonText(f1_local22, f1_local23["lobbyRoot.lobbyNav"], function(f24_arg0)
 		f1_arg0:updateElementState(CustomGamesOfficialBadgeIcon, {
 			name = "model_validation",
@@ -349,7 +349,7 @@ CoD.ArenaMapAndGameTypeInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	end, false)
 	f1_local22 = CustomGamesOfficialBadgeIcon
 	ButtonText = CustomGamesOfficialBadgeIcon.subscribeToModel
-	f1_local23 = Engine[0x8DF2E5447F384B9]()
+	f1_local23 = Engine[@"getglobalmodel"]()
 	ButtonText(f1_local22, f1_local23["GametypeSettings.Update"], function(f25_arg0)
 		f1_arg0:updateElementState(CustomGamesOfficialBadgeIcon, {
 			name = "model_validation",
@@ -430,7 +430,7 @@ CoD.ArenaMapAndGameTypeInternal.__clipsPerState = {
 			f31_arg0:__resetProperties()
 			f31_arg0:setupElementClipCounter(3)
 			local f31_local0 = function(f32_arg0)
-				f31_arg0.FocusGlow:beginAnimation(200, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f31_arg0.FocusGlow:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_out"])
 				f31_arg0.FocusGlow:setAlpha(0.6)
 				f31_arg0.FocusGlow:registerEventHandler("interrupted_keyframe", f31_arg0.clipInterrupted)
 				f31_arg0.FocusGlow:registerEventHandler("transition_complete_keyframe", f31_arg0.clipFinished)
@@ -440,7 +440,7 @@ CoD.ArenaMapAndGameTypeInternal.__clipsPerState = {
 			f31_local0(f31_arg0.FocusGlow)
 			local f31_local1 = function(f33_arg0)
 				local f33_local0 = function(f34_arg0)
-					f34_arg0:beginAnimation(50, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f34_arg0:beginAnimation(50, Enum[@"luitween"][@"luitween_ease_out"])
 					f34_arg0:setLeftRight(0, 1, -10, 10)
 					f34_arg0:setTopBottom(0, 1, -10, 10)
 					f34_arg0:setAlpha(1)
@@ -459,7 +459,7 @@ CoD.ArenaMapAndGameTypeInternal.__clipsPerState = {
 			f31_arg0.FocusBrackets:setAlpha(0)
 			f31_local1(f31_arg0.FocusBrackets)
 			local f31_local2 = function(f35_arg0)
-				f31_arg0.FocusBorder:beginAnimation(200, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f31_arg0.FocusBorder:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_out"])
 				f31_arg0.FocusBorder:setAlpha(1)
 				f31_arg0.FocusBorder:registerEventHandler("interrupted_keyframe", f31_arg0.clipInterrupted)
 				f31_arg0.FocusBorder:registerEventHandler("transition_complete_keyframe", f31_arg0.clipFinished)
@@ -481,7 +481,7 @@ CoD.ArenaMapAndGameTypeInternal.__clipsPerState = {
 			f36_arg0.FocusGlow:setAlpha(0.6)
 			f36_local0(f36_arg0.FocusGlow)
 			local f36_local1 = function(f38_arg0)
-				f36_arg0.FocusBrackets:beginAnimation(60, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f36_arg0.FocusBrackets:beginAnimation(60, Enum[@"luitween"][@"luitween_ease_in"])
 				f36_arg0.FocusBrackets:setAlpha(0)
 				f36_arg0.FocusBrackets:registerEventHandler("interrupted_keyframe", f36_arg0.clipInterrupted)
 				f36_arg0.FocusBrackets:registerEventHandler("transition_complete_keyframe", f36_arg0.clipFinished)
@@ -542,7 +542,7 @@ CoD.ArenaMapAndGameTypeInternal.__clipsPerState = {
 			f43_arg0:setupElementClipCounter(4)
 			local f43_local0 = function(f44_arg0)
 				local f44_local0 = function(f45_arg0)
-					f45_arg0:beginAnimation(50, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f45_arg0:beginAnimation(50, Enum[@"luitween"][@"luitween_ease_out"])
 					f45_arg0:setLeftRight(0, 1, -10, 10)
 					f45_arg0:setTopBottom(0, 1, -10, 10)
 					f45_arg0:setAlpha(1)

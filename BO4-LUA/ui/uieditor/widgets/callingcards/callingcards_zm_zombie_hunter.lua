@@ -1,17 +1,17 @@
 require("x64:812997896dcee2d")
-CoD[0xA27938018C1FFD4] = InheritFrom(LUI.UIElement)
-CoD[0xA27938018C1FFD4].__defaultWidth = 960
-CoD[0xA27938018C1FFD4].__defaultHeight = 240
-CoD[0xA27938018C1FFD4].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+CoD[@"hash_6A27938018C1FFD4"] = InheritFrom(LUI.UIElement)
+CoD[@"hash_6A27938018C1FFD4"].__defaultWidth = 960
+CoD[@"hash_6A27938018C1FFD4"].__defaultHeight = 240
+CoD[@"hash_6A27938018C1FFD4"].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
 	local self = LUI.UIElement.new(f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
-	self:setClass(CoD[0xA27938018C1FFD4])
+	self:setClass(CoD[@"hash_6A27938018C1FFD4"])
 	self.id = "CallingCards_zm_Zombie_Hunter"
 	self.soundSet = "default"
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local bg = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	bg:setImage(RegisterImage(0x3DC4209DACB6529))
-	bg:setMaterial(LUI.UIImage.GetCachedMaterial(0x73D72BCD14C2AAD))
+	bg:setImage(RegisterImage(@"uie_ui_icon_callingcard_zombie_hunter_background"))
+	bg:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_tile_scroll_normal"))
 	bg:setShaderVector(0, 1, 1, 0, 0)
 	bg:setShaderVector(1, 0.03, 0, 0, 0)
 	self:addElement(bg)
@@ -20,58 +20,58 @@ CoD[0xA27938018C1FFD4].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	self:addElement(CallingCardsAssetblackhole)
 	self.CallingCardsAssetblackhole = CallingCardsAssetblackhole
 	local rocks = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	rocks:setImage(RegisterImage(0x230D1252BC74FF9))
+	rocks:setImage(RegisterImage(@"uie_ui_icon_callingcard_zombie_hunter_rocks"))
 	self:addElement(rocks)
 	self.rocks = rocks
 	local tail = LUI.UIImage.new(0, 0, 416, 480, 0, 0, 120, 224)
-	tail:setImage(RegisterImage(0x29E1F34D2442087))
+	tail:setImage(RegisterImage(@"uie_ui_icon_callingcard_zombie_hunter_tail"))
 	self:addElement(tail)
 	self.tail = tail
 	local rightEar = LUI.UIImage.new(0, 0, 696.5, 848.5, 0, 0, -6, 218)
 	rightEar:setScale(1, 1)
-	rightEar:setImage(RegisterImage(0x1DDEFB1731B1C42))
+	rightEar:setImage(RegisterImage(@"uie_ui_icon_callingcard_zombie_hunter_right_ear"))
 	self:addElement(rightEar)
 	self.rightEar = rightEar
 	local elephant = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	elephant:setImage(RegisterImage(0x1FBE6000CAC1DD0))
+	elephant:setImage(RegisterImage(@"uie_ui_icon_callingcard_zombie_hunter_elephant"))
 	self:addElement(elephant)
 	self.elephant = elephant
 	local leftEar = LUI.UIImage.new(0, 0, 423, 631, 0, 0, -8, 216)
 	leftEar:setScale(1, 1)
-	leftEar:setImage(RegisterImage(0x27322D890F1159E))
+	leftEar:setImage(RegisterImage(@"uie_ui_icon_callingcard_zombie_hunter_left_earcopy"))
 	self:addElement(leftEar)
 	self.leftEar = leftEar
 	local trunk1 = LUI.UIImage.new(0, 0, 683, 907, 0, 0, 0, 208)
-	trunk1:setImage(RegisterImage(0xFEAA9355B5B11DC))
+	trunk1:setImage(RegisterImage(@"uie_ui_icon_callingcard_zombie_hunter_elephant_trunk1"))
 	self:addElement(trunk1)
 	self.trunk1 = trunk1
 	local trunk2 = LUI.UIImage.new(0, 0, 683, 907, 0, 0, 0, 208)
 	trunk2:setAlpha(0)
-	trunk2:setImage(RegisterImage(0xFEAAC355B5B16F5))
+	trunk2:setImage(RegisterImage(@"uie_ui_icon_callingcard_zombie_hunter_elephant_trunk2"))
 	self:addElement(trunk2)
 	self.trunk2 = trunk2
 	local trunk3 = LUI.UIImage.new(0, 0, 683, 907, 0, 0, 2, 210)
 	trunk3:setAlpha(0)
-	trunk3:setImage(RegisterImage(0xFEAAB355B5B1542))
+	trunk3:setImage(RegisterImage(@"uie_ui_icon_callingcard_zombie_hunter_elephant_trunk3"))
 	self:addElement(trunk3)
 	self.trunk3 = trunk3
 	local trunk4 = LUI.UIImage.new(0, 0, 682, 906, 0, 0, 3, 211)
 	trunk4:setAlpha(0)
-	trunk4:setImage(RegisterImage(0xFEAA6355B5B0CC3))
+	trunk4:setImage(RegisterImage(@"uie_ui_icon_callingcard_zombie_hunter_elephant_trunk4"))
 	self:addElement(trunk4)
 	self.trunk4 = trunk4
 	local trunkCharge = LUI.UIImage.new(0, 0, 797, 957, 0, 0, 60, 212)
 	trunkCharge:setAlpha(0)
-	trunkCharge:setImage(RegisterImage(0x620FCD7599ACA2D))
-	trunkCharge:setMaterial(LUI.UIImage.GetCachedMaterial(0x9227A50BA2B8D21))
+	trunkCharge:setImage(RegisterImage(@"uie_ui_icon_callingcard_zombie_hunter_trunkcharge"))
+	trunkCharge:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_flipbook_add"))
 	trunkCharge:setShaderVector(0, 0, 3, 0, 0)
 	trunkCharge:setShaderVector(1, 9, 0, 0, 0)
 	self:addElement(trunkCharge)
 	self.trunkCharge = trunkCharge
 	local elephantGlow = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
 	elephantGlow:setAlpha(0)
-	elephantGlow:setImage(RegisterImage(0xF43090D28AB6C34))
-	elephantGlow:setMaterial(LUI.UIImage.GetCachedMaterial(0x9227A50BA2B8D21))
+	elephantGlow:setImage(RegisterImage(@"uie_ui_icon_callingcard_zombie_hunter_elephant_glow"))
+	elephantGlow:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_flipbook_add"))
 	elephantGlow:setShaderVector(0, 0, 2, 0, 0)
 	elephantGlow:setShaderVector(1, 8, 0, 0, 0)
 	self:addElement(elephantGlow)
@@ -79,15 +79,15 @@ CoD[0xA27938018C1FFD4].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	local laser = LUI.UIImage.new(0, 0, 871, 1220, 0, 0, 104, 174)
 	laser:setAlpha(0)
 	laser:setZRot(-2)
-	laser:setImage(RegisterImage(0xA6E8755F86FAA98))
-	laser:setMaterial(LUI.UIImage.GetCachedMaterial(0x9227A50BA2B8D21))
+	laser:setImage(RegisterImage(@"uie_ui_icon_callingcard_zombie_hunter_laser"))
+	laser:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_flipbook_add"))
 	laser:setShaderVector(0, 0, 3, 0, 0)
 	laser:setShaderVector(1, 9, 0, 0, 0)
 	self:addElement(laser)
 	self.laser = laser
 	local cropper = LUI.UIImage.new(0, 0, -32, 992, 0, 0, -392, 632)
 	cropper:setAlpha(0)
-	cropper:setImage(RegisterImage(0x7EEE1693E39382A))
+	cropper:setImage(RegisterImage(@"uie_stage_crop_prop"))
 	self:addElement(cropper)
 	self.cropper = cropper
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)
@@ -96,7 +96,7 @@ CoD[0xA27938018C1FFD4].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	end
 	return self
 end
-CoD[0xA27938018C1FFD4].__resetProperties = function(f2_arg0)
+CoD[@"hash_6A27938018C1FFD4"].__resetProperties = function(f2_arg0)
 	f2_arg0.tail:completeAnimation()
 	f2_arg0.rightEar:completeAnimation()
 	f2_arg0.leftEar:completeAnimation()
@@ -110,33 +110,33 @@ CoD[0xA27938018C1FFD4].__resetProperties = function(f2_arg0)
 	f2_arg0.trunkCharge:completeAnimation()
 	f2_arg0.elephant:completeAnimation()
 	f2_arg0.tail:setTopBottom(0, 0, 120, 224)
-	f2_arg0.tail:setImage(RegisterImage(0x29E1F34D2442087))
+	f2_arg0.tail:setImage(RegisterImage(@"uie_ui_icon_callingcard_zombie_hunter_tail"))
 	f2_arg0.rightEar:setLeftRight(0, 0, 696.5, 848.5)
 	f2_arg0.rightEar:setScale(1, 1)
-	f2_arg0.rightEar:setImage(RegisterImage(0x1DDEFB1731B1C42))
+	f2_arg0.rightEar:setImage(RegisterImage(@"uie_ui_icon_callingcard_zombie_hunter_right_ear"))
 	f2_arg0.leftEar:setScale(1, 1)
-	f2_arg0.leftEar:setImage(RegisterImage(0x27322D890F1159E))
+	f2_arg0.leftEar:setImage(RegisterImage(@"uie_ui_icon_callingcard_zombie_hunter_left_earcopy"))
 	f2_arg0.trunk1:setAlpha(1)
-	f2_arg0.trunk1:setImage(RegisterImage(0xFEAA9355B5B11DC))
+	f2_arg0.trunk1:setImage(RegisterImage(@"uie_ui_icon_callingcard_zombie_hunter_elephant_trunk1"))
 	f2_arg0.trunk2:setAlpha(0)
-	f2_arg0.trunk2:setImage(RegisterImage(0xFEAAC355B5B16F5))
+	f2_arg0.trunk2:setImage(RegisterImage(@"uie_ui_icon_callingcard_zombie_hunter_elephant_trunk2"))
 	f2_arg0.trunk3:setAlpha(0)
-	f2_arg0.trunk3:setImage(RegisterImage(0xFEAAB355B5B1542))
+	f2_arg0.trunk3:setImage(RegisterImage(@"uie_ui_icon_callingcard_zombie_hunter_elephant_trunk3"))
 	f2_arg0.trunk4:setAlpha(0)
-	f2_arg0.trunk4:setImage(RegisterImage(0xFEAA6355B5B0CC3))
+	f2_arg0.trunk4:setImage(RegisterImage(@"uie_ui_icon_callingcard_zombie_hunter_elephant_trunk4"))
 	f2_arg0.elephantGlow:setAlpha(0)
-	f2_arg0.elephantGlow:setImage(RegisterImage(0xF43090D28AB6C34))
+	f2_arg0.elephantGlow:setImage(RegisterImage(@"uie_ui_icon_callingcard_zombie_hunter_elephant_glow"))
 	f2_arg0.elephantGlow:setShaderVector(0, 0, 2, 0, 0)
 	f2_arg0.elephantGlow:setShaderVector(1, 8, 0, 0, 0)
 	f2_arg0.laser:setAlpha(0)
-	f2_arg0.laser:setImage(RegisterImage(0xA6E8755F86FAA98))
+	f2_arg0.laser:setImage(RegisterImage(@"uie_ui_icon_callingcard_zombie_hunter_laser"))
 	f2_arg0.trunkCharge:setAlpha(0)
-	f2_arg0.trunkCharge:setImage(RegisterImage(0x620FCD7599ACA2D))
+	f2_arg0.trunkCharge:setImage(RegisterImage(@"uie_ui_icon_callingcard_zombie_hunter_trunkcharge"))
 	f2_arg0.trunkCharge:setShaderVector(0, 0, 3, 0, 0)
 	f2_arg0.trunkCharge:setShaderVector(1, 9, 0, 0, 0)
-	f2_arg0.elephant:setImage(RegisterImage(0x1FBE6000CAC1DD0))
+	f2_arg0.elephant:setImage(RegisterImage(@"uie_ui_icon_callingcard_zombie_hunter_elephant"))
 end
-CoD[0xA27938018C1FFD4].__clipsPerState = {
+CoD[@"hash_6A27938018C1FFD4"].__clipsPerState = {
 	DefaultState = {
 		DefaultClip = function(f3_arg0, f3_arg1)
 			f3_arg0:__resetProperties()
@@ -192,7 +192,7 @@ CoD[0xA27938018C1FFD4].__clipsPerState = {
 			end
 			f3_arg0.tail:completeAnimation()
 			f3_arg0.tail:setTopBottom(0, 0, 120, 224)
-			f3_arg0.tail:setImage(RegisterImage(0x29E1F34D2442087))
+			f3_arg0.tail:setImage(RegisterImage(@"uie_ui_icon_callingcard_zombie_hunter_tail"))
 			f3_local0(f3_arg0.tail)
 			local f3_local1 = function(f13_arg0)
 				local f13_local0 = function(f14_arg0)
@@ -244,10 +244,10 @@ CoD[0xA27938018C1FFD4].__clipsPerState = {
 			f3_arg0.rightEar:completeAnimation()
 			f3_arg0.rightEar:setLeftRight(0, 0, 697.5, 849.5)
 			f3_arg0.rightEar:setScale(1, 1)
-			f3_arg0.rightEar:setImage(RegisterImage(0x1DDEFB1731B1C42))
+			f3_arg0.rightEar:setImage(RegisterImage(@"uie_ui_icon_callingcard_zombie_hunter_right_ear"))
 			f3_local1(f3_arg0.rightEar)
 			f3_arg0.elephant:beginAnimation(1980)
-			f3_arg0.elephant:setImage(RegisterImage(0x1FBE6000CAC1DD0))
+			f3_arg0.elephant:setImage(RegisterImage(@"uie_ui_icon_callingcard_zombie_hunter_elephant"))
 			f3_arg0.elephant:registerEventHandler("interrupted_keyframe", f3_arg0.clipInterrupted)
 			f3_arg0.elephant:registerEventHandler("transition_complete_keyframe", f3_arg0.clipFinished)
 			local f3_local2 = function(f22_arg0)
@@ -298,7 +298,7 @@ CoD[0xA27938018C1FFD4].__clipsPerState = {
 			end
 			f3_arg0.leftEar:completeAnimation()
 			f3_arg0.leftEar:setScale(1, 1)
-			f3_arg0.leftEar:setImage(RegisterImage(0x27322D890F1159E))
+			f3_arg0.leftEar:setImage(RegisterImage(@"uie_ui_icon_callingcard_zombie_hunter_left_earcopy"))
 			f3_local2(f3_arg0.leftEar)
 			local f3_local3 = function(f31_arg0)
 				local f31_local0 = function(f32_arg0)
@@ -346,7 +346,7 @@ CoD[0xA27938018C1FFD4].__clipsPerState = {
 			end
 			f3_arg0.trunk1:beginAnimation(980)
 			f3_arg0.trunk1:setAlpha(1)
-			f3_arg0.trunk1:setImage(RegisterImage(0xFEAA9355B5B11DC))
+			f3_arg0.trunk1:setImage(RegisterImage(@"uie_ui_icon_callingcard_zombie_hunter_elephant_trunk1"))
 			f3_arg0.trunk1:registerEventHandler("interrupted_keyframe", f3_arg0.clipInterrupted)
 			f3_arg0.trunk1:registerEventHandler("transition_complete_keyframe", f3_local3)
 			local f3_local4 = function(f41_arg0)
@@ -423,7 +423,7 @@ CoD[0xA27938018C1FFD4].__clipsPerState = {
 			end
 			f3_arg0.trunk2:beginAnimation(1070)
 			f3_arg0.trunk2:setAlpha(0)
-			f3_arg0.trunk2:setImage(RegisterImage(0xFEAAC355B5B16F5))
+			f3_arg0.trunk2:setImage(RegisterImage(@"uie_ui_icon_callingcard_zombie_hunter_elephant_trunk2"))
 			f3_arg0.trunk2:registerEventHandler("interrupted_keyframe", f3_arg0.clipInterrupted)
 			f3_arg0.trunk2:registerEventHandler("transition_complete_keyframe", f3_local4)
 			local f3_local5 = function(f57_arg0)
@@ -500,7 +500,7 @@ CoD[0xA27938018C1FFD4].__clipsPerState = {
 			end
 			f3_arg0.trunk3:beginAnimation(1170)
 			f3_arg0.trunk3:setAlpha(0)
-			f3_arg0.trunk3:setImage(RegisterImage(0xFEAAB355B5B1542))
+			f3_arg0.trunk3:setImage(RegisterImage(@"uie_ui_icon_callingcard_zombie_hunter_elephant_trunk3"))
 			f3_arg0.trunk3:registerEventHandler("interrupted_keyframe", f3_arg0.clipInterrupted)
 			f3_arg0.trunk3:registerEventHandler("transition_complete_keyframe", f3_local5)
 			local f3_local6 = function(f73_arg0)
@@ -541,7 +541,7 @@ CoD[0xA27938018C1FFD4].__clipsPerState = {
 			end
 			f3_arg0.trunk4:beginAnimation(1270)
 			f3_arg0.trunk4:setAlpha(0)
-			f3_arg0.trunk4:setImage(RegisterImage(0xFEAA6355B5B0CC3))
+			f3_arg0.trunk4:setImage(RegisterImage(@"uie_ui_icon_callingcard_zombie_hunter_elephant_trunk4"))
 			f3_arg0.trunk4:registerEventHandler("interrupted_keyframe", f3_arg0.clipInterrupted)
 			f3_arg0.trunk4:registerEventHandler("transition_complete_keyframe", f3_local6)
 			local f3_local7 = function(f81_arg0)
@@ -582,7 +582,7 @@ CoD[0xA27938018C1FFD4].__clipsPerState = {
 			end
 			f3_arg0.trunkCharge:beginAnimation(1670)
 			f3_arg0.trunkCharge:setAlpha(0)
-			f3_arg0.trunkCharge:setImage(RegisterImage(0x620FCD7599ACA2D))
+			f3_arg0.trunkCharge:setImage(RegisterImage(@"uie_ui_icon_callingcard_zombie_hunter_trunkcharge"))
 			f3_arg0.trunkCharge:setShaderVector(0, 0, 3, 0, 0)
 			f3_arg0.trunkCharge:setShaderVector(1, 9, 0, 0, 0)
 			f3_arg0.trunkCharge:registerEventHandler("interrupted_keyframe", f3_arg0.clipInterrupted)
@@ -631,7 +631,7 @@ CoD[0xA27938018C1FFD4].__clipsPerState = {
 			end
 			f3_arg0.elephantGlow:beginAnimation(1670)
 			f3_arg0.elephantGlow:setAlpha(0)
-			f3_arg0.elephantGlow:setImage(RegisterImage(0xF43090D28AB6C34))
+			f3_arg0.elephantGlow:setImage(RegisterImage(@"uie_ui_icon_callingcard_zombie_hunter_elephant_glow"))
 			f3_arg0.elephantGlow:setShaderVector(0, 0, 2, 0, 0)
 			f3_arg0.elephantGlow:setShaderVector(1, 12, 0, 0, 0)
 			f3_arg0.elephantGlow:registerEventHandler("interrupted_keyframe", f3_arg0.clipInterrupted)
@@ -674,13 +674,13 @@ CoD[0xA27938018C1FFD4].__clipsPerState = {
 			end
 			f3_arg0.laser:beginAnimation(1670)
 			f3_arg0.laser:setAlpha(0)
-			f3_arg0.laser:setImage(RegisterImage(0xA6E8755F86FAA98))
+			f3_arg0.laser:setImage(RegisterImage(@"uie_ui_icon_callingcard_zombie_hunter_laser"))
 			f3_arg0.laser:registerEventHandler("interrupted_keyframe", f3_arg0.clipInterrupted)
 			f3_arg0.laser:registerEventHandler("transition_complete_keyframe", f3_local9)
 			f3_arg0.nextClip = "DefaultClip"
 		end,
 	},
 }
-CoD[0xA27938018C1FFD4].__onClose = function(f105_arg0)
+CoD[@"hash_6A27938018C1FFD4"].__onClose = function(f105_arg0)
 	f105_arg0.CallingCardsAssetblackhole:close()
 end

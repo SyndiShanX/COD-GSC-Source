@@ -9,12 +9,12 @@ CoD.CustomizeClassSignatureItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local BGMain = LUI.UIImage.new(0, 0, 0, 222, 0, 0, 0, 176)
 	BGMain:setZoom(10)
-	BGMain:setImage(RegisterImage(0x291549F923145AE))
+	BGMain:setImage(RegisterImage(@"uie_ui_menu_cac_equipment_bg"))
 	self:addElement(BGMain)
 	self.BGMain = BGMain
 	local BGBrackets = LUI.UIImage.new(0, 0, 0, 222, 0, 0, 0, 176)
 	BGBrackets:setZoom(12)
-	BGBrackets:setImage(RegisterImage(0x3ACFD068143D7A))
+	BGBrackets:setImage(RegisterImage(@"uie_ui_menu_cac_equipment_bg_brackets"))
 	self:addElement(BGBrackets)
 	self.BGBrackets = BGBrackets
 	local Image = LUI.UIImage.new(0, 0, 47, 175, 0, 0, 33, 161)
@@ -32,7 +32,7 @@ CoD.CustomizeClassSignatureItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	nameLabel:setZoom(10)
 	nameLabel:setTTF("ttmussels_demibold")
 	nameLabel:setLetterSpacing(3)
-	nameLabel:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	nameLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	nameLabel:linkToElementModel(self, "displayName", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then

@@ -19,8 +19,8 @@ CoD.WZAARTierLock.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 	self.LockedIcon = LockedIcon
 	local LockedTier = LUI.UIText.new(0, 0, 28, 228, 0, 0, 7.5, 29.5)
 	LockedTier:setTTF("ttmussels_regular")
-	LockedTier:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	LockedTier:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	LockedTier:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	LockedTier:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	LockedTier:linkToElementModel(self, "maxTier", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then

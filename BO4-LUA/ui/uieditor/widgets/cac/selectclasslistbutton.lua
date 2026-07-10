@@ -11,7 +11,7 @@ CoD.SelectClassListButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local ImageGlow = LUI.UIImage.new(0, 1, 0, 0, 1, 1, -34, 0)
 	ImageGlow:setAlpha(0)
-	ImageGlow:setImage(RegisterImage(0x7B23E8B1ACF3472))
+	ImageGlow:setImage(RegisterImage(@"hash_27B23E8B1ACF3472"))
 	self:addElement(ImageGlow)
 	self.ImageGlow = ImageGlow
 	local BottomLine = LUI.UIImage.new(0, 1, 0, 0, 1, 1, -1, 0)
@@ -23,8 +23,8 @@ CoD.SelectClassListButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	ClassName:setRGB(0.39, 0.39, 0.39)
 	ClassName:setTTF("notosans_regular")
 	ClassName:setLetterSpacing(3)
-	ClassName:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	ClassName:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	ClassName:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	ClassName:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	ClassName:linkToElementModel(self, "customClassName", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -38,8 +38,8 @@ CoD.SelectClassListButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	ClassName2:setAlpha(0)
 	ClassName2:setTTF("notosans_bold")
 	ClassName2:setLetterSpacing(3)
-	ClassName2:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	ClassName2:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	ClassName2:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	ClassName2:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	ClassName2:linkToElementModel(self, "customClassName", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -132,7 +132,7 @@ CoD.SelectClassListButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	end)
 	local f1_local8 = vhudButtonPromptMinimal
 	local f1_local9 = vhudButtonPromptMinimal.subscribeToModel
-	local f1_local10 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local10 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local9(f1_local8, f1_local10["factions.isCoDCaster"], function(f11_arg0)
 		f1_arg0:updateElementState(vhudButtonPromptMinimal, {
 			name = "model_validation",
@@ -148,7 +148,7 @@ CoD.SelectClassListButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	end)
 	f1_local8 = vhudButtonPromptMinimal
 	f1_local9 = vhudButtonPromptMinimal.subscribeToModel
-	f1_local10 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local10 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local9(f1_local8, f1_local10.LastInput, function(f13_arg0)
 		f1_arg0:updateElementState(vhudButtonPromptMinimal, {
 			name = "model_validation",
@@ -159,7 +159,7 @@ CoD.SelectClassListButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 		})
 	end, false)
 	vhudButtonPromptMinimal:setAlpha(0)
-	vhudButtonPromptMinimal.prompt:setText(Engine[0xF9F1239CFD921FE](0xAC3B80C833B60E1))
+	vhudButtonPromptMinimal.prompt:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_3AC3B80C833B60E1"))
 	vhudButtonPromptMinimal:subscribeToGlobalModel(f1_arg1, "Controller", "primary_button_image", function(model)
 		local f14_local0 = model:get()
 		if f14_local0 ~= nil then
@@ -182,7 +182,7 @@ CoD.SelectClassListButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	end)
 	f1_local8 = self
 	f1_local9 = self.subscribeToModel
-	f1_local10 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local10 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local9(f1_local8, f1_local10.LastInput, function(f17_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

@@ -95,12 +95,12 @@ CoD.OverheadName_ZM.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	self.Rank = Rank
 	local f1_local8 = PlayerNameAndClanTag
 	local f1_local9 = PlayerNameAndClanTag.subscribeToModel
-	local f1_local10 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local10 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local9(f1_local8, f1_local10["profile.colorblindMode"], PlayerNameAndClanTag.__Color_FullPath)
 	PlayerNameAndClanTag:linkToElementModel(self, "team", true, PlayerNameAndClanTag.__Color_FullPath)
 	f1_local8 = HealthBar
 	f1_local9 = HealthBar.subscribeToModel
-	f1_local10 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local10 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local9(f1_local8, f1_local10["profile.colorblindMode"], HealthBar.HealthFill.__Health_Bar_Color_FullPath)
 	HealthBar:linkToElementModel(self, "team", true, HealthBar.HealthFill.__Health_Bar_Color_FullPath)
 	self:mergeStateConditions({
@@ -114,7 +114,7 @@ CoD.OverheadName_ZM.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 			stateName = "VisibleShowRank",
 			condition = function(menu, element, event)
 				local f14_local0
-				if not CoD.ModelUtility.IsSelfModelValueTrue(element, f1_arg1, "dead") and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x3AEEAA452536E6E]) then
+				if not CoD.ModelUtility.IsSelfModelValueTrue(element, f1_arg1, "dead") and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_is_flash_banged"]) then
 					f14_local0 = IsPublicOnlineGame()
 				else
 					f14_local0 = false
@@ -126,7 +126,7 @@ CoD.OverheadName_ZM.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 			stateName = "Visible",
 			condition = function(menu, element, event)
 				local f15_local0
-				if not CoD.ModelUtility.IsSelfModelValueTrue(element, f1_arg1, "dead") and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x3AEEAA452536E6E]) then
+				if not CoD.ModelUtility.IsSelfModelValueTrue(element, f1_arg1, "dead") and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_is_flash_banged"]) then
 					f15_local0 = not IsPublicOnlineGame()
 				else
 					f15_local0 = false
@@ -155,14 +155,14 @@ CoD.OverheadName_ZM.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	end)
 	f1_local8 = self
 	f1_local9 = self.subscribeToModel
-	f1_local10 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local9(f1_local8, f1_local10["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x3AEEAA452536E6E]], function(f18_arg0)
+	f1_local10 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local9(f1_local8, f1_local10["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_is_flash_banged"]], function(f18_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f18_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x3AEEAA452536E6E],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_is_flash_banged"],
 		})
 	end, false)
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)

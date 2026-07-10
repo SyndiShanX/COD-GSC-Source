@@ -20,7 +20,7 @@ CoD.BountyHunterRadialTimer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	})
 	local f1_local2 = RadialTimer
 	local f1_local3 = RadialTimer.subscribeToModel
-	local f1_local4 = Engine[0x8DF2E5447F384B9]()
+	local f1_local4 = Engine[@"getglobalmodel"]()
 	f1_local3(f1_local2, f1_local4["BountyHunterLoadout.timeRemaining"], function(f3_arg0)
 		f1_arg0:updateElementState(RadialTimer, {
 			name = "model_validation",
@@ -54,7 +54,7 @@ CoD.BountyHunterRadialTimer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	})
 	f1_local2 = self
 	f1_local3 = self.subscribeToModel
-	f1_local4 = Engine[0x8DF2E5447F384B9]()
+	f1_local4 = Engine[@"getglobalmodel"]()
 	f1_local3(f1_local2, f1_local4["BountyHunterLoadout.timeRemaining"], function(f7_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

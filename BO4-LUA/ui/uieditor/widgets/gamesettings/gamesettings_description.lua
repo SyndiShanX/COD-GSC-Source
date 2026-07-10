@@ -29,21 +29,21 @@ CoD.GameSettings_Description.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	GameSettingsOptionstextbox:subscribeToGlobalModel(f1_arg1, "GametypeSettings", "description", function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
-			GameSettingsOptionstextbox.TextBox:setText(Engine[0xF9F1239CFD921FE](f3_local0))
+			GameSettingsOptionstextbox.TextBox:setText(Engine[@"hash_4F9F1239CFD921FE"](f3_local0))
 		end
 	end)
 	self:addElement(GameSettingsOptionstextbox)
 	self.GameSettingsOptionstextbox = GameSettingsOptionstextbox
 	local Dotline = LUI.UIImage.new(0.5, 0.5, -337, 337, 0, 0, 46, 48)
-	Dotline:setImage(RegisterImage(0xF9C7F41C631866E))
-	Dotline:setMaterial(LUI.UIImage.GetCachedMaterial(0x73D72BCD14C2AAD))
+	Dotline:setImage(RegisterImage(@"uie_ui_menu_social_emblem_dotline"))
+	Dotline:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_tile_scroll_normal"))
 	Dotline:setShaderVector(0, 1.2, 1, 0, 0)
 	Dotline:setShaderVector(1, 0, 0, 0, 0)
 	self:addElement(Dotline)
 	self.Dotline = Dotline
 	local Dotline2 = LUI.UIImage.new(0.5, 0.5, -337, 337, 0, 0, 46, 48)
-	Dotline2:setImage(RegisterImage(0xF9C7F41C631866E))
-	Dotline2:setMaterial(LUI.UIImage.GetCachedMaterial(0xD8EA9FE9B0BCF75))
+	Dotline2:setImage(RegisterImage(@"uie_ui_menu_social_emblem_dotline"))
+	Dotline2:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_tile_scroll"))
 	Dotline2:setShaderVector(0, 1.2, 1, 0, 0)
 	Dotline2:setShaderVector(1, 0, 0, 0, 0)
 	self:addElement(Dotline2)

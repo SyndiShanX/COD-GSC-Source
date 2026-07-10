@@ -12,27 +12,27 @@ CoD.PaintshopBrowseControlsFull.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local BackingMid = LUI.UIImage.new(0, 0, 0, 420, 0, 0, 237, 420)
-	BackingMid:setImage(RegisterImage(0x34839E8065B1E53))
-	BackingMid:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	BackingMid:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	BackingMid:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	BackingMid:setShaderVector(0, 0, 0, 0, 0)
 	BackingMid:setupNineSliceShader(196, 88)
 	self:addElement(BackingMid)
 	self.BackingMid = BackingMid
 	local BackingTop = LUI.UIImage.new(0, 0, 0, 420, 0, 0, 0, 190)
-	BackingTop:setImage(RegisterImage(0x34839E8065B1E53))
-	BackingTop:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	BackingTop:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	BackingTop:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	BackingTop:setShaderVector(0, 0, 0, 0, 0)
 	BackingTop:setupNineSliceShader(196, 88)
 	self:addElement(BackingTop)
 	self.BackingTop = BackingTop
 	local SlotsFull = CoD.PaintshopButtonPrompt.new(f1_arg0, f1_arg1, 0, 0, 20, 420, 0, 0, 420, 460)
 	SlotsFull:setAlpha(0)
-	SlotsFull.buttonPromptImage:setImage(RegisterImage(0x1F10DEAAEFC50A4))
-	SlotsFull.label:setText(Engine[0xF9F1239CFD921FE](0x345431B325139E6))
+	SlotsFull.buttonPromptImage:setImage(RegisterImage(@"warning_triangle"))
+	SlotsFull.label:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/save_group"))
 	self:addElement(SlotsFull)
 	self.SlotsFull = SlotsFull
 	local SaveGroup = CoD.PaintshopButtonPrompt.new(f1_arg0, f1_arg1, 0, 0, 20, 420, 0, 0, 380, 420)
-	SaveGroup.label:setText(Engine[0xF9F1239CFD921FE](0x345431B325139E6))
+	SaveGroup.label:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/save_group"))
 	SaveGroup:subscribeToGlobalModel(f1_arg1, "VehicleController", "right_trigger_button_image", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -42,7 +42,7 @@ CoD.PaintshopBrowseControlsFull.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self:addElement(SaveGroup)
 	self.SaveGroup = SaveGroup
 	local GroupLinkedLayers = CoD.PaintshopButtonPrompt.new(f1_arg0, f1_arg1, 0, 0, 20, 420, 0, 0, 340, 380)
-	GroupLinkedLayers.label:setText(Engine[0xF9F1239CFD921FE](0x343441CAE04FDED))
+	GroupLinkedLayers.label:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_1343441CAE04FDED"))
 	GroupLinkedLayers:subscribeToGlobalModel(f1_arg1, "VehicleController", "right_shoulder_button_image", function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -52,7 +52,7 @@ CoD.PaintshopBrowseControlsFull.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self:addElement(GroupLinkedLayers)
 	self.GroupLinkedLayers = GroupLinkedLayers
 	local LinkAll = CoD.PaintshopButtonPrompt.new(f1_arg0, f1_arg1, 0, 0, 20, 420, 0, 0, 304, 350)
-	LinkAll.label:setText(Engine[0xF9F1239CFD921FE](0x18BF56C4998FCB2))
+	LinkAll.label:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_218BF56C4998FCB2"))
 	LinkAll:subscribeToGlobalModel(f1_arg1, "VehicleController", "left_trigger_button_image", function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
@@ -62,7 +62,7 @@ CoD.PaintshopBrowseControlsFull.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self:addElement(LinkAll)
 	self.LinkAll = LinkAll
 	local LinkLayers = CoD.PaintshopButtonPrompt.new(f1_arg0, f1_arg1, 0, 0, 20, 420, 0, 0, 264, 304)
-	LinkLayers.label:setText(Engine[0xF9F1239CFD921FE](0x972C68080927021))
+	LinkLayers.label:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_972C68080927021"))
 	LinkLayers:subscribeToGlobalModel(f1_arg1, "VehicleController", "left_shoulder_button_image", function(model)
 		local f5_local0 = model:get()
 		if f5_local0 ~= nil then
@@ -72,7 +72,7 @@ CoD.PaintshopBrowseControlsFull.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self:addElement(LinkLayers)
 	self.LinkLayers = LinkLayers
 	local GroupingTitle = CoD.EmblemEditorHeaderRight.new(f1_arg0, f1_arg1, 0, 0, 5, 325, 0, 0, 239, 276)
-	GroupingTitle.text:setText(LocalizeToUpperString(0x7619D823AA62EBA))
+	GroupingTitle.text:setText(LocalizeToUpperString(@"menu/grouping"))
 	self:addElement(GroupingTitle)
 	self.GroupingTitle = GroupingTitle
 	local NewLayerBelow = CoD.PaintshopButtonPrompt.new(f1_arg0, f1_arg1, 0, 0, 20, 371, 0, 0, 111, 157)
@@ -90,7 +90,7 @@ CoD.PaintshopBrowseControlsFull.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	end)
 	local ChangeDecal = NewLayerBelow
 	local Cut = NewLayerBelow.subscribeToModel
-	local PaintshopChooseSide = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local PaintshopChooseSide = Engine[@"getmodelforcontroller"](f1_arg1)
 	Cut(ChangeDecal, PaintshopChooseSide.LastInput, function(f8_arg0)
 		f1_arg0:updateElementState(NewLayerBelow, {
 			name = "model_validation",
@@ -120,7 +120,7 @@ CoD.PaintshopBrowseControlsFull.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	end)
 	ChangeDecal = NewLayerBelow
 	Cut = NewLayerBelow.subscribeToModel
-	PaintshopChooseSide = Engine[0x4DF5CFBC1771947](f1_arg1)
+	PaintshopChooseSide = Engine[@"getmodelforcontroller"](f1_arg1)
 	Cut(ChangeDecal, PaintshopChooseSide["Emblem.EmblemProperties.groupsUsed"], function(f11_arg0)
 		f1_arg0:updateElementState(NewLayerBelow, {
 			name = "model_validation",
@@ -132,7 +132,7 @@ CoD.PaintshopBrowseControlsFull.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	end, false)
 	ChangeDecal = NewLayerBelow
 	Cut = NewLayerBelow.subscribeToModel
-	PaintshopChooseSide = Engine[0x4DF5CFBC1771947](f1_arg1)
+	PaintshopChooseSide = Engine[@"getmodelforcontroller"](f1_arg1)
 	Cut(ChangeDecal, PaintshopChooseSide["Emblem.EmblemProperties.layersUsed"], function(f12_arg0)
 		f1_arg0:updateElementState(NewLayerBelow, {
 			name = "model_validation",
@@ -142,7 +142,7 @@ CoD.PaintshopBrowseControlsFull.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 			modelName = "Emblem.EmblemProperties.layersUsed",
 		})
 	end, false)
-	NewLayerBelow.label:setText(Engine[0xF9F1239CFD921FE](0x7E26022B0886ED3))
+	NewLayerBelow.label:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_7E26022B0886ED3"))
 	NewLayerBelow:subscribeToGlobalModel(f1_arg1, "VehicleController", "dpad_down_button_image", function(model)
 		local f13_local0 = model:get()
 		if f13_local0 ~= nil then
@@ -166,7 +166,7 @@ CoD.PaintshopBrowseControlsFull.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	end)
 	PaintshopChooseSide = Cut
 	ChangeDecal = Cut.subscribeToModel
-	local dividerH01 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local dividerH01 = Engine[@"getmodelforcontroller"](f1_arg1)
 	ChangeDecal(PaintshopChooseSide, dividerH01.LastInput, function(f16_arg0)
 		f1_arg0:updateElementState(Cut, {
 			name = "model_validation",
@@ -196,7 +196,7 @@ CoD.PaintshopBrowseControlsFull.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	end)
 	PaintshopChooseSide = Cut
 	ChangeDecal = Cut.subscribeToModel
-	dividerH01 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	dividerH01 = Engine[@"getmodelforcontroller"](f1_arg1)
 	ChangeDecal(PaintshopChooseSide, dividerH01["Emblem.EmblemProperties.groupsUsed"], function(f19_arg0)
 		f1_arg0:updateElementState(Cut, {
 			name = "model_validation",
@@ -208,7 +208,7 @@ CoD.PaintshopBrowseControlsFull.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	end, false)
 	PaintshopChooseSide = Cut
 	ChangeDecal = Cut.subscribeToModel
-	dividerH01 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	dividerH01 = Engine[@"getmodelforcontroller"](f1_arg1)
 	ChangeDecal(PaintshopChooseSide, dividerH01["Emblem.EmblemProperties.layersUsed"], function(f20_arg0)
 		f1_arg0:updateElementState(Cut, {
 			name = "model_validation",
@@ -218,7 +218,7 @@ CoD.PaintshopBrowseControlsFull.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 			modelName = "Emblem.EmblemProperties.layersUsed",
 		})
 	end, false)
-	Cut.label:setText(Engine[0xF9F1239CFD921FE](0xE4FD6AD543818C0))
+	Cut.label:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_E4FD6AD543818C0"))
 	Cut:subscribeToGlobalModel(f1_arg1, "Controller", "alt1_button_image", function(model)
 		local f21_local0 = model:get()
 		if f21_local0 ~= nil then
@@ -242,7 +242,7 @@ CoD.PaintshopBrowseControlsFull.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	end)
 	dividerH01 = ChangeDecal
 	PaintshopChooseSide = ChangeDecal.subscribeToModel
-	local dividerH02 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local dividerH02 = Engine[@"getmodelforcontroller"](f1_arg1)
 	PaintshopChooseSide(dividerH01, dividerH02.LastInput, function(f24_arg0)
 		f1_arg0:updateElementState(ChangeDecal, {
 			name = "model_validation",
@@ -272,7 +272,7 @@ CoD.PaintshopBrowseControlsFull.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	end)
 	dividerH01 = ChangeDecal
 	PaintshopChooseSide = ChangeDecal.subscribeToModel
-	dividerH02 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	dividerH02 = Engine[@"getmodelforcontroller"](f1_arg1)
 	PaintshopChooseSide(dividerH01, dividerH02["Emblem.EmblemProperties.groupsUsed"], function(f27_arg0)
 		f1_arg0:updateElementState(ChangeDecal, {
 			name = "model_validation",
@@ -284,7 +284,7 @@ CoD.PaintshopBrowseControlsFull.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	end, false)
 	dividerH01 = ChangeDecal
 	PaintshopChooseSide = ChangeDecal.subscribeToModel
-	dividerH02 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	dividerH02 = Engine[@"getmodelforcontroller"](f1_arg1)
 	PaintshopChooseSide(dividerH01, dividerH02["Emblem.EmblemProperties.layersUsed"], function(f28_arg0)
 		f1_arg0:updateElementState(ChangeDecal, {
 			name = "model_validation",
@@ -294,7 +294,7 @@ CoD.PaintshopBrowseControlsFull.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 			modelName = "Emblem.EmblemProperties.layersUsed",
 		})
 	end, false)
-	ChangeDecal.label:setText(Engine[0xF9F1239CFD921FE](0x4389B00AC580011))
+	ChangeDecal.label:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/change_decal"))
 	ChangeDecal:subscribeToGlobalModel(f1_arg1, "Controller", "alt2_button_image", function(model)
 		local f29_local0 = model:get()
 		if f29_local0 ~= nil then
@@ -304,37 +304,37 @@ CoD.PaintshopBrowseControlsFull.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self:addElement(ChangeDecal)
 	self.ChangeDecal = ChangeDecal
 	PaintshopChooseSide = CoD.PaintshopChooseSide.new(f1_arg0, f1_arg1, 0, 0, 5, 325, 0, 0, 4, 36)
-	PaintshopChooseSide.text:setText(LocalizeToUpperString(0xF5CA503839CA925))
+	PaintshopChooseSide.text:setText(LocalizeToUpperString(@"hash_5F5CA503839CA925"))
 	self:addElement(PaintshopChooseSide)
 	self.PaintshopChooseSide = PaintshopChooseSide
 	dividerH01 = LUI.UIImage.new(0, 0, 0, 420, 0, 0, 22, 26)
 	dividerH01:setAlpha(0.2)
-	dividerH01:setImage(RegisterImage(0x84B43D5B04D263A))
-	dividerH01:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	dividerH01:setImage(RegisterImage(@"hash_484B43D5B04D263A"))
+	dividerH01:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	dividerH01:setShaderVector(0, 0, 0, 0, 0)
 	dividerH01:setupNineSliceShader(8, 4)
 	self:addElement(dividerH01)
 	self.dividerH01 = dividerH01
 	dividerH02 = LUI.UIImage.new(0, 0, 0, 420, 0, 0, 260, 264)
 	dividerH02:setAlpha(0.2)
-	dividerH02:setImage(RegisterImage(0x84B43D5B04D263A))
-	dividerH02:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	dividerH02:setImage(RegisterImage(@"hash_484B43D5B04D263A"))
+	dividerH02:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	dividerH02:setShaderVector(0, 0, 0, 0, 0)
 	dividerH02:setupNineSliceShader(8, 4)
 	self:addElement(dividerH02)
 	self.dividerH02 = dividerH02
 	local Frame01 = LUI.UIImage.new(0, 1, -1, 1, 0, 0, 0, 190)
 	Frame01:setAlpha(0.2)
-	Frame01:setImage(RegisterImage(0x185E11D74ECA3D7))
-	Frame01:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	Frame01:setImage(RegisterImage(@"uie_ui_menu_store_common_frame"))
+	Frame01:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	Frame01:setShaderVector(0, 0, 0, 0, 0)
 	Frame01:setupNineSliceShader(16, 16)
 	self:addElement(Frame01)
 	self.Frame01 = Frame01
 	local Frame02 = LUI.UIImage.new(0, 1, -1, 1, 0, 0, 237, 420)
 	Frame02:setAlpha(0.2)
-	Frame02:setImage(RegisterImage(0x185E11D74ECA3D7))
-	Frame02:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	Frame02:setImage(RegisterImage(@"uie_ui_menu_store_common_frame"))
+	Frame02:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	Frame02:setShaderVector(0, 0, 0, 0, 0)
 	Frame02:setupNineSliceShader(16, 16)
 	self:addElement(Frame02)
@@ -364,7 +364,7 @@ CoD.PaintshopBrowseControlsFull.__resetProperties = function(f30_arg0)
 	f30_arg0.SlotsFull:completeAnimation()
 	f30_arg0.SaveGroup:setAlpha(1)
 	f30_arg0.GroupLinkedLayers:setAlpha(1)
-	f30_arg0.GroupLinkedLayers.label:setText(Engine[0xF9F1239CFD921FE](0x343441CAE04FDED))
+	f30_arg0.GroupLinkedLayers.label:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_1343441CAE04FDED"))
 	f30_arg0.ChangeDecal:setAlpha(1)
 	f30_arg0.Cut:setAlpha(1)
 	f30_arg0.NewLayerBelow:setAlpha(1)
@@ -381,12 +381,12 @@ CoD.PaintshopBrowseControlsFull.__resetProperties = function(f30_arg0)
 	f30_arg0.dividerH02:setAlpha(0.2)
 	f30_arg0.dividerH01:setAlpha(0.2)
 	f30_arg0.LinkLayers:setAlpha(1)
-	f30_arg0.LinkLayers.label:setText(Engine[0xF9F1239CFD921FE](0x972C68080927021))
+	f30_arg0.LinkLayers.label:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_972C68080927021"))
 	f30_arg0.SlotsFull:setTopBottom(0, 0, 420, 460)
 	f30_arg0.SlotsFull:setRGB(1, 1, 1)
 	f30_arg0.SlotsFull:setAlpha(0)
-	f30_arg0.SlotsFull.buttonPromptImage:setImage(RegisterImage(0x1F10DEAAEFC50A4))
-	f30_arg0.SlotsFull.label:setText(Engine[0xF9F1239CFD921FE](0x345431B325139E6))
+	f30_arg0.SlotsFull.buttonPromptImage:setImage(RegisterImage(@"warning_triangle"))
+	f30_arg0.SlotsFull.label:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/save_group"))
 end
 CoD.PaintshopBrowseControlsFull.__clipsPerState = {
 	DefaultState = {
@@ -461,7 +461,7 @@ CoD.PaintshopBrowseControlsFull.__clipsPerState = {
 			f33_arg0.clipFinished(f33_arg0.SaveGroup)
 			f33_arg0.LinkLayers:completeAnimation()
 			f33_arg0.LinkLayers.label:completeAnimation()
-			f33_arg0.LinkLayers.label:setText(Engine[0xF9F1239CFD921FE](0x82789B43F936B78))
+			f33_arg0.LinkLayers.label:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_782789B43F936B78"))
 			f33_arg0.clipFinished(f33_arg0.LinkLayers)
 		end,
 	},
@@ -471,7 +471,7 @@ CoD.PaintshopBrowseControlsFull.__clipsPerState = {
 			f34_arg0:setupElementClipCounter(3)
 			f34_arg0.GroupLinkedLayers:completeAnimation()
 			f34_arg0.GroupLinkedLayers.label:completeAnimation()
-			f34_arg0.GroupLinkedLayers.label:setText(Engine[0xF9F1239CFD921FE](0x6EA1EDF54B8F820))
+			f34_arg0.GroupLinkedLayers.label:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_36EA1EDF54B8F820"))
 			f34_arg0.clipFinished(f34_arg0.GroupLinkedLayers)
 			f34_arg0.LinkAll:completeAnimation()
 			f34_arg0.LinkAll:setAlpha(0.2)
@@ -494,15 +494,15 @@ CoD.PaintshopBrowseControlsFull.__clipsPerState = {
 			f35_arg0.SlotsFull:setTopBottom(0, 0, 420, 460)
 			f35_arg0.SlotsFull:setRGB(1, 0, 0)
 			f35_arg0.SlotsFull:setAlpha(1)
-			f35_arg0.SlotsFull.buttonPromptImage:setImage(RegisterImage(0x1F10DEAAEFC50A4))
-			f35_arg0.SlotsFull.label:setText(Engine[0xF9F1239CFD921FE](0x35E24C3255091DF))
+			f35_arg0.SlotsFull.buttonPromptImage:setImage(RegisterImage(@"warning_triangle"))
+			f35_arg0.SlotsFull.label:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_35E24C3255091DF"))
 			f35_arg0.clipFinished(f35_arg0.SlotsFull)
 			f35_arg0.SaveGroup:completeAnimation()
 			f35_arg0.SaveGroup:setAlpha(0.2)
 			f35_arg0.clipFinished(f35_arg0.SaveGroup)
 			f35_arg0.GroupLinkedLayers:completeAnimation()
 			f35_arg0.GroupLinkedLayers.label:completeAnimation()
-			f35_arg0.GroupLinkedLayers.label:setText(Engine[0xF9F1239CFD921FE](0x6EA1EDF54B8F820))
+			f35_arg0.GroupLinkedLayers.label:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_36EA1EDF54B8F820"))
 			f35_arg0.clipFinished(f35_arg0.GroupLinkedLayers)
 			f35_arg0.LinkAll:completeAnimation()
 			f35_arg0.LinkAll:setAlpha(0.2)

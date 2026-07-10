@@ -14,7 +14,7 @@ CoD.AAR_LeaguePlay_PlacementList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	PlacementCompletePips:setWidgetType(CoD.AAR_LeaguePlay_PlacementPip)
 	PlacementCompletePips:setHorizontalCount(5)
 	PlacementCompletePips:setSpacing(12)
-	PlacementCompletePips:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	PlacementCompletePips:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	PlacementCompletePips:setDataSource("LeaguePlayPlacementPips")
 	self:addElement(PlacementCompletePips)
 	self.PlacementCompletePips = PlacementCompletePips

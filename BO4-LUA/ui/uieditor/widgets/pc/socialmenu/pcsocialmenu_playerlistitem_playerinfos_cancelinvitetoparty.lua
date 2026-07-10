@@ -9,17 +9,17 @@ CoD.PCSocialMenu_PlayerListItem_PlayerInfos_CancelInviteToParty.new = function(f
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Border = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	Border:setRGB(0.79, 0.73, 0)
-	Border:setImage(RegisterImage(0xF1E3082B39E99BB))
-	Border:setMaterial(LUI.UIImage.GetCachedMaterial(0x44484DDFAF5C093))
+	Border:setImage(RegisterImage(@"uie_highlight_border_line"))
+	Border:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_normal"))
 	Border:setShaderVector(0, 0, 0, 0, 0)
 	Border:setupNineSliceShader(12, 16)
 	self:addElement(Border)
 	self.Border = Border
 	local TextBox = LUI.UIText.new(0, 0, 6, 206, 0, 0, 5, 25)
-	TextBox:setText(Engine[0xF9F1239CFD921FE](0x9477D8B17843EA2))
+	TextBox:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_79477D8B17843EA2"))
 	TextBox:setTTF("ttmussels_regular")
-	TextBox:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	TextBox:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	TextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	TextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(TextBox)
 	self.TextBox = TextBox
 	if PostLoadFunc then

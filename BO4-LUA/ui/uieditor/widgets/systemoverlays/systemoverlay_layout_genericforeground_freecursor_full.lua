@@ -21,7 +21,7 @@ CoD.systemOverlay_Layout_GenericForeground_FreeCursor_Full.new = function(f1_arg
 	title:setRGB(ColorSet.T8__BEIGE__HEADER.r, ColorSet.T8__BEIGE__HEADER.g, ColorSet.T8__BEIGE__HEADER.b)
 	title:setTTF("ttmussels_demibold")
 	title:setLetterSpacing(6)
-	title:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	title:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	title:linkToElementModel(self, "title", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then

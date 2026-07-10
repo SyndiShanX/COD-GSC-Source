@@ -10,8 +10,8 @@ CoD.CodCasterLivesCount2.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	local teamLivesCount = LUI.UIText.new(0.66, 0.66, -64, 36, 0.08, 0.08, -1.5, 16.5)
 	teamLivesCount:setText(99)
 	teamLivesCount:setTTF("ttmussels_demibold")
-	teamLivesCount:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	teamLivesCount:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	teamLivesCount:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	teamLivesCount:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(teamLivesCount)
 	self.teamLivesCount = teamLivesCount
 	self:mergeStateConditions({

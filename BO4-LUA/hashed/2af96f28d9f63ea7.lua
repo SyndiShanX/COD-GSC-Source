@@ -10,9 +10,9 @@ CoD.Barracks_StatsOverview_WZ_FilterPCString.new = function(f1_arg0, f1_arg1, f1
 	self.id = "Barracks_StatsOverview_WZ_FilterPCString"
 	self.soundSet = "default"
 	local WZGameModeFilterButtonPC = LUI.UIText.new(0, 0, 111, 200, 0.5, 0.5, -9, 9)
-	WZGameModeFilterButtonPC:setText(Engine[0xF9F1239CFD921FE](0x2077705355095C1))
+	WZGameModeFilterButtonPC:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_12077705355095C1"))
 	WZGameModeFilterButtonPC:setTTF("ttmussels_regular")
-	WZGameModeFilterButtonPC:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	WZGameModeFilterButtonPC:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(WZGameModeFilterButtonPC)
 	self.WZGameModeFilterButtonPC = WZGameModeFilterButtonPC
 	local VerticalListSpacer = CoD.VerticalListSpacer.new(f1_arg0, f1_arg1, 0, 0, 101, 111, 0.5, 0.5, -13.5, 13.5)

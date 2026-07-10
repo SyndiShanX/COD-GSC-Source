@@ -11,7 +11,7 @@ CoD.ScoreInfoProp.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local FrameProp = LUI.UIImage.new(0, 0, 0, 221, 0, 0, 40, 118)
-	FrameProp:setImage(RegisterImage(0xBB98C5B85B952AD))
+	FrameProp:setImage(RegisterImage(@"uie_ui_hud_prophunt_match_widget_frame"))
 	self:addElement(FrameProp)
 	self.FrameProp = FrameProp
 	local FriendlyWinPips = CoD.ScoreInfo_RoundList.new(f1_arg0, f1_arg1, 0.5, 0.5, -104, -32, 0, 0, 34, 66)
@@ -99,7 +99,7 @@ CoD.ScoreInfoProp.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 	})
 	local f1_local6 = self
 	local f1_local7 = self.subscribeToModel
-	local f1_local8 = Engine[0x8DF2E5447F384B9]()
+	local f1_local8 = Engine[@"getglobalmodel"]()
 	f1_local7(f1_local6, f1_local8["hudItems.war.attackingTeam"], function(f12_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

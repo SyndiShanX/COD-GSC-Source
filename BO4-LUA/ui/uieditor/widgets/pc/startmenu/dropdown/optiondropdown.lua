@@ -40,7 +40,7 @@ local f0_local1 = function(f2_arg0, f2_arg1, f2_arg2)
 	f2_arg0:setForceMouseEventDispatch(true)
 	f2_arg0:registerEventHandler("dropdown_item_selected", function(element, event)
 		if type(element.dropDownItemSelected) == "function" and element.inUse then
-			element.currentValueText:setText(Engine[0xED84C33EC5F01EA](element.dropDownItemSelected(f2_arg1, element, event.element)))
+			element.currentValueText:setText(Engine[@"localize"](element.dropDownItemSelected(f2_arg1, element, event.element)))
 		end
 		f0_local0(element, f2_arg1)
 		UpdateState(element, event)
@@ -59,12 +59,12 @@ local f0_local1 = function(f2_arg0, f2_arg1, f2_arg2)
 	f2_arg0:registerEventHandler("options_refresh", function(element, event)
 		element.DropDownList:updateDataSource()
 		if type(element.dropDownRefresh) == "function" then
-			element.currentValueText:setText(Engine[0xED84C33EC5F01EA](element.dropDownRefresh(event.controller, element, element.DropDownList)))
+			element.currentValueText:setText(Engine[@"localize"](element.dropDownRefresh(event.controller, element, element.DropDownList)))
 		end
 		UpdateState(element, event)
 	end)
 	f2_arg0.listBackground:setHandleMouseButton(true)
-	CoD.Menu.AddButtonCallbackFunction(f2_arg2, f2_arg0, f2_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, f6_arg3)
+	CoD.Menu.AddButtonCallbackFunction(f2_arg2, f2_arg0, f2_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, f6_arg3)
 		if not f2_arg0.disabled and not menu.m_disableNavigation and menu:AcceptGamePadButtonInputFromModelCallback(controller) then
 			if not f2_arg0.inUse then
 				f0_local0(f2_arg0, controller)
@@ -107,10 +107,10 @@ CoD.OptionDropdown.new = function(f8_arg0, f8_arg1, f8_arg2, f8_arg3, f8_arg4, f
 	self:addElement(StartMenuframenoBG00)
 	self.StartMenuframenoBG00 = StartMenuframenoBG00
 	local labelText = LUI.UIText.new(0, 0, 14, 427, 0, 0, 7, 45)
-	labelText:setText(Engine[0xF9F1239CFD921FE](0x93E719493E9E18F))
+	labelText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	labelText:setTTF("default")
-	labelText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	labelText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	labelText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	labelText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(labelText)
 	self.labelText = labelText
 	local dropdownBacking = LUI.UIImage.new(0, 0, 375, 737, 0, 0, 11, 40)
@@ -121,8 +121,8 @@ CoD.OptionDropdown.new = function(f8_arg0, f8_arg1, f8_arg2, f8_arg3, f8_arg4, f
 	local currentValueText = LUI.UIText.new(0, 0, 383, 705, 0, 0, 6, 44)
 	currentValueText:setText("")
 	currentValueText:setTTF("default")
-	currentValueText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	currentValueText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	currentValueText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	currentValueText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(currentValueText)
 	self.currentValueText = currentValueText
 	local FocusBarB = CoD.FE_FocusBarContainer.new(f8_arg0, f8_arg1, 0, 1, 0, 0, 1, 1, -8, 0)
@@ -142,7 +142,7 @@ CoD.OptionDropdown.new = function(f8_arg0, f8_arg1, f8_arg2, f8_arg3, f8_arg4, f
 	DropDownList:setWidgetType(CoD.OptionDropdownItem)
 	DropDownList:setVerticalCount(10)
 	DropDownList:setFirstElementXOffset(1)
-	DropDownList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	DropDownList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	DropDownList:setVerticalScrollbar(CoD.verticalScrollbar)
 	DropDownList:setDataSource("DropdownListTest")
 	self:addElement(DropDownList)
@@ -150,7 +150,7 @@ CoD.OptionDropdown.new = function(f8_arg0, f8_arg1, f8_arg2, f8_arg3, f8_arg4, f
 	local Arrow = LUI.UIImage.new(0, 1, 702, -2, 0, 1, 7, -7)
 	Arrow:setZRot(90)
 	Arrow:setScale(0.6, 0.6)
-	Arrow:setImage(RegisterImage(0xBDC6779FD55FF49))
+	Arrow:setImage(RegisterImage(@"uie_characterminiselectorarrow"))
 	self:addElement(Arrow)
 	self.Arrow = Arrow
 	self:mergeStateConditions({

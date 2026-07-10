@@ -18,22 +18,22 @@ CoD.DemoControlsButtonDollyCameraTimeScale.new = function(f1_arg0, f1_arg1, f1_a
 	local Backing = LUI.UIImage.new(0.5, 0.5, -19, 19, 0, 0, 23.5, 36.5)
 	Backing:setRGB(0, 0, 0)
 	Backing:setAlpha(0.85)
-	Backing:setMaterial(LUI.UIImage.GetCachedMaterial(0xE125638BF94665F))
+	Backing:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_feather_edges"))
 	Backing:setShaderVector(0, 0.05, 0.05, 0.05, 0.05)
 	self:addElement(Backing)
 	self.Backing = Backing
 	local x = LUI.UIText.new(0.5, 0.5, -17.5, -3.5, 0.5, 0.5, -15.5, -1.5)
 	x:setText(CoD.BaseUtility.AlreadyLocalized("x"))
 	x:setTTF("dinnext_regular")
-	x:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	x:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	x:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	x:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(x)
 	self.x = x
 	local timescale = LUI.UIText.new(0.5, 0.5, -21, 17, 0.5, 0.5, -14.5, -0.5)
 	timescale:setScale(0.9, 0.9)
 	timescale:setTTF("dinnext_regular")
-	timescale:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
-	timescale:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	timescale:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
+	timescale:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	timescale:subscribeToGlobalModel(f1_arg1, "Demo", "currentDollyCamMarkerTimeScaleValue", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -52,7 +52,7 @@ CoD.DemoControlsButtonDollyCameraTimeScale.new = function(f1_arg0, f1_arg1, f1_a
 	self.progressRing = progressRing
 	local buttonPromptImage = LUI.UIImage.new(0.5, 0.5, -15, 15, 0, 0, 42, 72)
 	buttonPromptImage:setScale(0.75, 0.75)
-	buttonPromptImage:setMaterial(LUI.UIImage.GetCachedMaterial(0x67D1E3A3D2D1BF))
+	buttonPromptImage:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_saturation_normal"))
 	buttonPromptImage:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(buttonPromptImage)
 	self.buttonPromptImage = buttonPromptImage
@@ -122,7 +122,7 @@ CoD.DemoControlsButtonDollyCameraTimeScale.new = function(f1_arg0, f1_arg1, f1_a
 	end)
 	local f1_local9 = self
 	local f1_local10 = self.subscribeToModel
-	local f1_local11 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local11 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local10(f1_local9, f1_local11.LastInput, function(f13_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

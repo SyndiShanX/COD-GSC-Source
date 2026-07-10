@@ -49,8 +49,8 @@ CoD.HealthBoostPlayerListWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	local HealthValue = LUI.UIText.new(0, 0, 57.5, 117.5, 0, 0, 149, 170)
 	HealthValue:setTTF("0arame_mono_stencil")
 	HealthValue:setLetterSpacing(2)
-	HealthValue:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	HealthValue:setAlignment(Enum[0x7A5123B654282D2][0x70510683C22104B])
+	HealthValue:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	HealthValue:setAlignment(Enum[@"luialignment"][@"lui_alignment_bottom"])
 	HealthValue:linkToElementModel(self, "health.healthValue", true, function(model)
 		local f6_local0 = model:get()
 		if f6_local0 ~= nil then
@@ -62,8 +62,8 @@ CoD.HealthBoostPlayerListWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	local ClanAndGamerName = LUI.UIText.new(0, 0, -10, 185, 0, 0, 169, 190)
 	ClanAndGamerName:setAlpha(0.8)
 	ClanAndGamerName:setTTF("ttmussels_regular")
-	ClanAndGamerName:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	ClanAndGamerName:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	ClanAndGamerName:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	ClanAndGamerName:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	ClanAndGamerName:linkToElementModel(self, "clientNum", true, function(model)
 		local f7_local0 = model:get()
 		if f7_local0 ~= nil then
@@ -74,11 +74,11 @@ CoD.HealthBoostPlayerListWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self.ClanAndGamerName = ClanAndGamerName
 	local f1_local6 = HealthBar
 	local f1_local7 = HealthBar.subscribeToModel
-	local f1_local8 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local8 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local7(f1_local6, f1_local8["factions.playerFactionTeamEnum"], HealthBar.HealthFill.__Health_Bar_Color_FullPath)
 	f1_local6 = HealthBar
 	f1_local7 = HealthBar.subscribeToModel
-	f1_local8 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local8 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local7(f1_local6, f1_local8["profile.colorblindMode"], HealthBar.HealthFill.__Health_Bar_Color_FullPath)
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)
 	if PostLoadFunc then

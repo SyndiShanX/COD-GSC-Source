@@ -9,10 +9,10 @@ CoD.ScoreboardMapColumnHeadingWZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	local Section = LUI.UIText.new(0, 1, 0, 0, 0, 0, 8, 34)
 	Section:setRGB(0.92, 0.92, 0.92)
 	Section:setAlpha(0.7)
-	Section:setText(Engine[0xF9F1239CFD921FE](0x93E719493E9E18F))
+	Section:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	Section:setTTF("ttmussels_demibold")
-	Section:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	Section:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Section:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	Section:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(Section)
 	self.Section = Section
 	local BetweenColumns = LUI.UIImage.new(1, 1, -1, 0, 0, 0, 0, 40)

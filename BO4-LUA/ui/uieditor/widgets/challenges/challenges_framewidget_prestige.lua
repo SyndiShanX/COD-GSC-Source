@@ -16,15 +16,15 @@ CoD.Challenges_FrameWidget_Prestige.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	self:addElement(TitleBG)
 	self.TitleBG = TitleBG
 	local Title = CoD.Challenges_Category_Title.new(f1_arg0, f1_arg1, 0, 0, 112.5, 412.5, 0.5, 0.5, -300, 300)
-	Title.ChallengesPercentCompleteWidgetLG.Name:setText(Engine[0xF9F1239CFD921FE](0xF45564D1E059F32))
-	Title.ChallengesPercentCompleteWidgetLG.Icon:setImage(RegisterImage(0x3526A2A4380EDF9))
+	Title.ChallengesPercentCompleteWidgetLG.Name:setText(Engine[@"hash_4F9F1239CFD921FE"](@"challenge/prestige"))
+	Title.ChallengesPercentCompleteWidgetLG.Icon:setImage(RegisterImage(@"ui_icon_challenges_mpprestige_large"))
 	Title:subscribeToGlobalModel(f1_arg1, "ChallengesMPCategoryStats", "prestige", function(model)
 		Title:setModel(model, f1_arg1)
 	end)
 	self:addElement(Title)
 	self.Title = Title
 	local Handling = CoD.ChallengesCategoryButton.new(f1_arg0, f1_arg1, 0, 0, 555, 1555, 0, 0, 3, 103)
-	Handling.ChallengesCategoryButtonInternal.Name:setText(Engine[0xF9F1239CFD921FE](0x5286388DDB2A3DE))
+	Handling.ChallengesCategoryButtonInternal.Name:setText(Engine[@"hash_4F9F1239CFD921FE"](@"challenge/handling"))
 	Handling:subscribeToGlobalModel(f1_arg1, "ChallengesMPCategoryStats", "handling", function(model)
 		Handling:setModel(model, f1_arg1)
 	end)
@@ -35,10 +35,10 @@ CoD.Challenges_FrameWidget_Prestige.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 		elseif element.super.gainFocus then
 			f4_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f4_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(Handling, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(Handling, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if not IsElementInState(element, "Disabled") then
 			SetGlobalModelValue("challengeCategory", "handling")
 			PlaySoundAlias("uin_toggle_generic")
@@ -48,7 +48,7 @@ CoD.Challenges_FrameWidget_Prestige.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 		end
 	end, function(element, menu, controller)
 		if not IsElementInState(element, "Disabled") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false
@@ -57,7 +57,7 @@ CoD.Challenges_FrameWidget_Prestige.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	self:addElement(Handling)
 	self.Handling = Handling
 	local Efficiency = CoD.ChallengesCategoryButton.new(f1_arg0, f1_arg1, 0, 0, 555, 1555, 0, 0, 115, 215)
-	Efficiency.ChallengesCategoryButtonInternal.Name:setText(Engine[0xF9F1239CFD921FE](0x43286D0DE2B2332))
+	Efficiency.ChallengesCategoryButtonInternal.Name:setText(Engine[@"hash_4F9F1239CFD921FE"](@"challenge/efficiency"))
 	Efficiency:subscribeToGlobalModel(f1_arg1, "ChallengesMPCategoryStats", "efficiency", function(model)
 		Efficiency:setModel(model, f1_arg1)
 	end)
@@ -68,10 +68,10 @@ CoD.Challenges_FrameWidget_Prestige.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 		elseif element.super.gainFocus then
 			f8_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f8_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(Efficiency, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(Efficiency, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if not IsElementInState(element, "Disabled") then
 			SetGlobalModelValue("challengeCategory", "efficiency")
 			PlaySoundAlias("uin_toggle_generic")
@@ -81,7 +81,7 @@ CoD.Challenges_FrameWidget_Prestige.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 		end
 	end, function(element, menu, controller)
 		if not IsElementInState(element, "Disabled") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false
@@ -90,7 +90,7 @@ CoD.Challenges_FrameWidget_Prestige.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	self:addElement(Efficiency)
 	self.Efficiency = Efficiency
 	local TacticalKits = CoD.ChallengesCategoryButton.new(f1_arg0, f1_arg1, 0, 0, 555, 1555, 0, 0, 227, 327)
-	TacticalKits.ChallengesCategoryButtonInternal.Name:setText(Engine[0xF9F1239CFD921FE](0x80013311B8CB58F))
+	TacticalKits.ChallengesCategoryButtonInternal.Name:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_780013311B8CB58F"))
 	TacticalKits:subscribeToGlobalModel(f1_arg1, "ChallengesMPCategoryStats", "tacticalkits", function(model)
 		TacticalKits:setModel(model, f1_arg1)
 	end)
@@ -101,10 +101,10 @@ CoD.Challenges_FrameWidget_Prestige.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 		elseif element.super.gainFocus then
 			f12_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f12_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(TacticalKits, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(TacticalKits, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if not IsElementInState(element, "Disabled") then
 			SetGlobalModelValue("challengeCategory", "tacticalkits")
 			PlaySoundAlias("uin_toggle_generic")
@@ -114,7 +114,7 @@ CoD.Challenges_FrameWidget_Prestige.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 		end
 	end, function(element, menu, controller)
 		if not IsElementInState(element, "Disabled") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false
@@ -123,7 +123,7 @@ CoD.Challenges_FrameWidget_Prestige.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	self:addElement(TacticalKits)
 	self.TacticalKits = TacticalKits
 	local Gear = CoD.ChallengesCategoryButton.new(f1_arg0, f1_arg1, 0, 0, 555, 1555, 0, 0, 340, 440)
-	Gear.ChallengesCategoryButtonInternal.Name:setText(Engine[0xF9F1239CFD921FE](0x4AEF303ED69E004))
+	Gear.ChallengesCategoryButtonInternal.Name:setText(Engine[@"hash_4F9F1239CFD921FE"](@"challenge/gear"))
 	Gear:subscribeToGlobalModel(f1_arg1, "ChallengesMPCategoryStats", "gear", function(model)
 		Gear:setModel(model, f1_arg1)
 	end)
@@ -134,10 +134,10 @@ CoD.Challenges_FrameWidget_Prestige.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 		elseif element.super.gainFocus then
 			f16_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f16_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(Gear, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(Gear, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if not IsElementInState(element, "Disabled") then
 			SetGlobalModelValue("challengeCategory", "gear")
 			PlaySoundAlias("uin_toggle_generic")
@@ -147,7 +147,7 @@ CoD.Challenges_FrameWidget_Prestige.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 		end
 	end, function(element, menu, controller)
 		if not IsElementInState(element, "Disabled") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false
@@ -156,7 +156,7 @@ CoD.Challenges_FrameWidget_Prestige.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	self:addElement(Gear)
 	self.Gear = Gear
 	local Perks = CoD.ChallengesCategoryButton.new(f1_arg0, f1_arg1, 0, 0, 555, 1555, 0, 0, 451, 551)
-	Perks.ChallengesCategoryButtonInternal.Name:setText(Engine[0xF9F1239CFD921FE](0x6F78F5AEA99A7E8))
+	Perks.ChallengesCategoryButtonInternal.Name:setText(Engine[@"hash_4F9F1239CFD921FE"](@"challenge/perks"))
 	Perks:subscribeToGlobalModel(f1_arg1, "ChallengesMPCategoryStats", "perks", function(model)
 		Perks:setModel(model, f1_arg1)
 	end)
@@ -167,10 +167,10 @@ CoD.Challenges_FrameWidget_Prestige.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 		elseif element.super.gainFocus then
 			f20_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f20_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(Perks, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(Perks, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if not IsElementInState(element, "Disabled") then
 			SetGlobalModelValue("challengeCategory", "perks")
 			PlaySoundAlias("uin_toggle_generic")
@@ -180,7 +180,7 @@ CoD.Challenges_FrameWidget_Prestige.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 		end
 	end, function(element, menu, controller)
 		if not IsElementInState(element, "Disabled") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false
@@ -189,7 +189,7 @@ CoD.Challenges_FrameWidget_Prestige.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	self:addElement(Perks)
 	self.Perks = Perks
 	local Equipmen = CoD.ChallengesCategoryButton.new(f1_arg0, f1_arg1, 0, 0, 555, 1555, 0, 0, 563, 663)
-	Equipmen.ChallengesCategoryButtonInternal.Name:setText(Engine[0xF9F1239CFD921FE](0x7DC3FC26D23E8ED))
+	Equipmen.ChallengesCategoryButtonInternal.Name:setText(Engine[@"hash_4F9F1239CFD921FE"](@"challenge/equipment"))
 	Equipmen:subscribeToGlobalModel(f1_arg1, "ChallengesMPCategoryStats", "equipment", function(model)
 		Equipmen:setModel(model, f1_arg1)
 	end)
@@ -200,10 +200,10 @@ CoD.Challenges_FrameWidget_Prestige.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 		elseif element.super.gainFocus then
 			f24_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f24_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(Equipmen, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(Equipmen, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if not IsElementInState(element, "Disabled") then
 			SetGlobalModelValue("challengeCategory", "equipment")
 			PlaySoundAlias("uin_toggle_generic")
@@ -213,7 +213,7 @@ CoD.Challenges_FrameWidget_Prestige.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 		end
 	end, function(element, menu, controller)
 		if not IsElementInState(element, "Disabled") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false
@@ -222,7 +222,7 @@ CoD.Challenges_FrameWidget_Prestige.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	self:addElement(Equipmen)
 	self.Equipmen = Equipmen
 	local Wildcards = CoD.ChallengesCategoryButton.new(f1_arg0, f1_arg1, 0, 0, 555, 1555, 0, 0, 675, 775)
-	Wildcards.ChallengesCategoryButtonInternal.Name:setText(Engine[0xF9F1239CFD921FE](0x454D80797ED0C36))
+	Wildcards.ChallengesCategoryButtonInternal.Name:setText(Engine[@"hash_4F9F1239CFD921FE"](@"challenge/wildcards"))
 	Wildcards:subscribeToGlobalModel(f1_arg1, "ChallengesMPCategoryStats", "wildcards", function(model)
 		Wildcards:setModel(model, f1_arg1)
 	end)
@@ -233,10 +233,10 @@ CoD.Challenges_FrameWidget_Prestige.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 		elseif element.super.gainFocus then
 			f28_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f28_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(Wildcards, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(Wildcards, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if not IsElementInState(element, "Disabled") then
 			SetGlobalModelValue("challengeCategory", "wildcards")
 			PlaySoundAlias("uin_toggle_generic")
@@ -246,7 +246,7 @@ CoD.Challenges_FrameWidget_Prestige.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 		end
 	end, function(element, menu, controller)
 		if not IsElementInState(element, "Disabled") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false

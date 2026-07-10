@@ -9,7 +9,7 @@ CoD.CodCasterObjectiveStatusDomination.new = function(f1_arg0, f1_arg1, f1_arg2,
 	self.soundSet = "none"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local CodCasterObjectiveStatusDominationSiteB = CoD.CodCasterObjectiveStatusDominationSite.new(f1_arg0, f1_arg1, 0.5, 0.5, -30, 30, 0.5, 0.5, -29.5, 30.5)
-	CodCasterObjectiveStatusDominationSiteB.siteLetter:setImage(RegisterImage(0xFEE9CEC7F9FF4BC))
+	CodCasterObjectiveStatusDominationSiteB.siteLetter:setImage(RegisterImage(@"uie_ui_hud_core_waypoint_letter_b_02"))
 	CodCasterObjectiveStatusDominationSiteB:subscribeToGlobalModel(f1_arg1, "HUDItems", "codcaster.ObjectiveB.color", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -25,7 +25,7 @@ CoD.CodCasterObjectiveStatusDomination.new = function(f1_arg0, f1_arg1, f1_arg2,
 	self:addElement(CodCasterObjectiveStatusDominationSiteB)
 	self.CodCasterObjectiveStatusDominationSiteB = CodCasterObjectiveStatusDominationSiteB
 	local CodCasterObjectiveStatusDominationSiteC = CoD.CodCasterObjectiveStatusDominationSite.new(f1_arg0, f1_arg1, 0.6, 0.6, -35, 25, 0.5, 0.5, -29.5, 30.5)
-	CodCasterObjectiveStatusDominationSiteC.siteLetter:setImage(RegisterImage(0xEB356E758926279))
+	CodCasterObjectiveStatusDominationSiteC.siteLetter:setImage(RegisterImage(@"uie_ui_hud_core_waypoint_letter_c_02"))
 	CodCasterObjectiveStatusDominationSiteC:subscribeToGlobalModel(f1_arg1, "HUDItems", "codcaster.ObjectiveC.color", function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then

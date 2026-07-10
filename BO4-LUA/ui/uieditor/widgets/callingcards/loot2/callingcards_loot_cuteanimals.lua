@@ -1,29 +1,29 @@
 require("x64:9fc49de026d9299")
-CoD[0x6E6DDD790C76F5E] = InheritFrom(LUI.UIElement)
-CoD[0x6E6DDD790C76F5E].__defaultWidth = 720
-CoD[0x6E6DDD790C76F5E].__defaultHeight = 180
-CoD[0x6E6DDD790C76F5E].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+CoD[@"hash_56E6DDD790C76F5E"] = InheritFrom(LUI.UIElement)
+CoD[@"hash_56E6DDD790C76F5E"].__defaultWidth = 720
+CoD[@"hash_56E6DDD790C76F5E"].__defaultHeight = 180
+CoD[@"hash_56E6DDD790C76F5E"].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
 	local self = LUI.UIElement.new(f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
-	self:setClass(CoD[0x6E6DDD790C76F5E])
+	self:setClass(CoD[@"hash_56E6DDD790C76F5E"])
 	self.id = "CallingCards_loot_CuteAnimals"
 	self.soundSet = "default"
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Image0 = LUI.UIImage.new(0, 0, 0, 720, 0, 0, 0, 180)
-	Image0:setImage(RegisterImage(0xA0922EE446FF0DC))
+	Image0:setImage(RegisterImage(@"uie_t7_loot_callingcard_cutie_animals_master_bg"))
 	self:addElement(Image0)
 	self.Image0 = Image0
 	local Image1 = LUI.UIImage.new(0, 0, 0, 720, 0, 0, 0, 180)
-	Image1:setImage(RegisterImage(0xC88813FE9210D5A))
+	Image1:setImage(RegisterImage(@"uie_t7_loot_callingcard_cutie_animals_master_rays"))
 	self:addElement(Image1)
 	self.Image1 = Image1
 	local Image2 = LUI.UIImage.new(0, 0, 0, 720, 0, 0, 0, 180)
-	Image2:setImage(RegisterImage(0x7BEA97DC20CDCA6))
+	Image2:setImage(RegisterImage(@"uie_t7_loot_callingcard_cutie_animals_master_chicks"))
 	self:addElement(Image2)
 	self.Image2 = Image2
 	local Image20 = LUI.UIImage.new(0, 0, 0, 720, 0, 0, 0, 180)
 	Image20:setAlpha(0)
-	Image20:setImage(RegisterImage(0x5D694B0BBDACF7C))
+	Image20:setImage(RegisterImage(@"uie_t7_loot_callingcard_cutie_animals_master_chicks2"))
 	self:addElement(Image20)
 	self.Image20 = Image20
 	local CallingCardsGoldFrame = CoD.CallingCards_GoldFrame.new(f1_arg0, f1_arg1, 0, 1, 0, 0, 0, 1, 0, 0)
@@ -35,7 +35,7 @@ CoD[0x6E6DDD790C76F5E].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	end
 	return self
 end
-CoD[0x6E6DDD790C76F5E].__resetProperties = function(f2_arg0)
+CoD[@"hash_56E6DDD790C76F5E"].__resetProperties = function(f2_arg0)
 	f2_arg0.Image0:completeAnimation()
 	f2_arg0.Image2:completeAnimation()
 	f2_arg0.Image20:completeAnimation()
@@ -44,7 +44,7 @@ CoD[0x6E6DDD790C76F5E].__resetProperties = function(f2_arg0)
 	f2_arg0.Image20:setAlpha(0)
 	f2_arg0.Image20:setScale(1, 1)
 end
-CoD[0x6E6DDD790C76F5E].__clipsPerState = {
+CoD[@"hash_56E6DDD790C76F5E"].__clipsPerState = {
 	DefaultState = {
 		DefaultClip = function(f3_arg0, f3_arg1)
 			f3_arg0:__resetProperties()
@@ -142,6 +142,6 @@ CoD[0x6E6DDD790C76F5E].__clipsPerState = {
 		end,
 	},
 }
-CoD[0x6E6DDD790C76F5E].__onClose = function(f18_arg0)
+CoD[@"hash_56E6DDD790C76F5E"].__onClose = function(f18_arg0)
 	f18_arg0.CallingCardsGoldFrame:close()
 end

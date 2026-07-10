@@ -18,8 +18,8 @@ CoD.CoDPoints_Container.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	self.backing = backing
 	local NoiseTiledBacking = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	NoiseTiledBacking:setAlpha(0.65)
-	NoiseTiledBacking:setImage(RegisterImage(0x34839E8065B1E53))
-	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	NoiseTiledBacking:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	NoiseTiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	NoiseTiledBacking:setupNineSliceShader(196, 88)
 	self:addElement(NoiseTiledBacking)
@@ -36,8 +36,8 @@ CoD.CoDPoints_Container.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	glow:setRGB(0.42, 0.4, 0.31)
 	glow:setAlpha(0.5)
 	glow:setZRot(90)
-	glow:setImage(RegisterImage(0x333C8E36E45B362))
-	glow:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	glow:setImage(RegisterImage(@"hash_5333C8E36E45B362"))
+	glow:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(glow)
 	self.glow = glow
 	local bar4 = nil
@@ -55,32 +55,32 @@ CoD.CoDPoints_Container.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	glow2:setRGB(0.42, 0.4, 0.31)
 	glow2:setAlpha(0.5)
 	glow2:setZRot(90)
-	glow2:setImage(RegisterImage(0x333C8E36E45B362))
-	glow2:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	glow2:setImage(RegisterImage(@"hash_5333C8E36E45B362"))
+	glow2:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(glow2)
 	self.glow2 = glow2
 	local PurchaseCPText = LUI.UIText.new(0.5, 0.5, -327, 359, 0, 0, 190, 235)
 	PurchaseCPText:setRGB(ColorSet.T8__BEIGE__HEADER.r, ColorSet.T8__BEIGE__HEADER.g, ColorSet.T8__BEIGE__HEADER.b)
-	PurchaseCPText:setText(Engine[0xF9F1239CFD921FE](0x63D5409DEC36DFA))
+	PurchaseCPText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_263D5409DEC36DFA"))
 	PurchaseCPText:setTTF("ttmussels_demibold")
 	PurchaseCPText:setLetterSpacing(6)
-	PurchaseCPText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	PurchaseCPText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	PurchaseCPText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	PurchaseCPText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(PurchaseCPText)
 	self.PurchaseCPText = PurchaseCPText
 	local NeedCPText = LUI.UIText.new(0.5, 0.5, -327, 359, 0, 0, 167.5, 212.5)
 	NeedCPText:setRGB(ColorSet.T8__BEIGE__HEADER.r, ColorSet.T8__BEIGE__HEADER.g, ColorSet.T8__BEIGE__HEADER.b)
-	NeedCPText:setText(Engine[0xF9F1239CFD921FE](0xD010971235E8E91))
+	NeedCPText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_6D010971235E8E91"))
 	NeedCPText:setTTF("ttmussels_demibold")
 	NeedCPText:setLetterSpacing(6)
-	NeedCPText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	NeedCPText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	NeedCPText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	NeedCPText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(NeedCPText)
 	self.NeedCPText = NeedCPText
 	local DescTextBox = LUI.UIText.new(0.5, 0.5, -327, 323, 0, 0, 215.5, 237.5)
 	DescTextBox:setTTF("dinnext_regular")
-	DescTextBox:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	DescTextBox:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	DescTextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	DescTextBox:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	DescTextBox.__String_Reference = function(f2_arg0)
 		local f2_local0 = f2_arg0:get()
 		if f2_local0 ~= nil then
@@ -106,7 +106,7 @@ CoD.CoDPoints_Container.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	List:setWidgetType(CoD.CoDPoints_ListButton)
 	List:setVerticalCount(6)
 	List:setSpacing(20)
-	List:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	List:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	List:setDataSource("CoDPointStoreList")
 	List:registerEventHandler("gain_list_focus", function(element, event)
 		local f4_local0 = nil
@@ -122,10 +122,10 @@ CoD.CoDPoints_Container.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 		elseif element.super.gainFocus then
 			f5_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f5_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(List, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(List, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if not MenuPropertyIsTrue(menu, "dontCloseOnStoreOpen") and not IsPC() then
 			PlaySoundAlias("uin_points_purchase")
 			PurchaseProduct(self, menu, element, controller)
@@ -144,13 +144,13 @@ CoD.CoDPoints_Container.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 		end
 	end, function(element, menu, controller)
 		if not MenuPropertyIsTrue(menu, "dontCloseOnStoreOpen") and not IsPC() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		elseif MenuPropertyIsTrue(menu, "dontCloseOnStoreOpen") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		elseif not MenuPropertyIsTrue(menu, "dontCloseOnStoreOpen") and IsPC() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		else
 			return false
@@ -179,8 +179,8 @@ CoD.CoDPoints_Container.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	Linker:setRGB(ColorSet.T8__BEIGE__HEADER.r, ColorSet.T8__BEIGE__HEADER.g, ColorSet.T8__BEIGE__HEADER.b)
 	Linker:setAlpha(0.5)
 	Linker:setZRot(90)
-	Linker:setImage(RegisterImage(0xC49B0C8991A541F))
-	Linker:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	Linker:setImage(RegisterImage(@"hash_C49B0C8991A541F"))
+	Linker:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	Linker:setShaderVector(0, 0, 0, 0, 0)
 	Linker:setupNineSliceShader(4, 8)
 	self:addElement(Linker)
@@ -189,8 +189,8 @@ CoD.CoDPoints_Container.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	Linker2:setRGB(ColorSet.T8__BEIGE__HEADER.r, ColorSet.T8__BEIGE__HEADER.g, ColorSet.T8__BEIGE__HEADER.b)
 	Linker2:setAlpha(0.5)
 	Linker2:setZRot(90)
-	Linker2:setImage(RegisterImage(0xC49B0C8991A541F))
-	Linker2:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	Linker2:setImage(RegisterImage(@"hash_C49B0C8991A541F"))
+	Linker2:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	Linker2:setShaderVector(0, 0, 0, 0, 0)
 	Linker2:setupNineSliceShader(4, 8)
 	self:addElement(Linker2)
@@ -210,7 +210,7 @@ CoD.CoDPoints_Container.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	end)
 	local CommonIdentityWidgetStreamlined = featureOverlayButtonContainer
 	local Backer = featureOverlayButtonContainer.subscribeToModel
-	local TiledwhiteNoiseBacking = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local TiledwhiteNoiseBacking = Engine[@"getmodelforcontroller"](f1_arg1)
 	Backer(CommonIdentityWidgetStreamlined, TiledwhiteNoiseBacking.LastInput, function(f12_arg0)
 		f1_arg0:updateElementState(featureOverlayButtonContainer, {
 			name = "model_validation",
@@ -220,7 +220,7 @@ CoD.CoDPoints_Container.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 			modelName = "LastInput",
 		})
 	end, false)
-	featureOverlayButtonContainer.Title:setText(Engine[0xF9F1239CFD921FE](0x70A9FDC87CD3D48))
+	featureOverlayButtonContainer.Title:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/back"))
 	featureOverlayButtonContainer:registerEventHandler("gain_focus", function(element, event)
 		local f13_local0 = nil
 		if element.gainFocus then
@@ -228,14 +228,14 @@ CoD.CoDPoints_Container.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 		elseif element.super.gainFocus then
 			f13_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f13_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(featureOverlayButtonContainer, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(featureOverlayButtonContainer, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		GoBack(self, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, nil)
 		return false
 	end, false)
 	self:addElement(featureOverlayButtonContainer)
@@ -261,15 +261,15 @@ CoD.CoDPoints_Container.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	self.CommonIdentityWidgetStreamlined = CommonIdentityWidgetStreamlined
 	TiledwhiteNoiseBacking = LUI.UIImage.new(0, 0, 74, 82, 0, 0, 85, 127)
 	TiledwhiteNoiseBacking:setAlpha(0.02)
-	TiledwhiteNoiseBacking:setImage(RegisterImage(0x7167D8C33A06020))
-	TiledwhiteNoiseBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	TiledwhiteNoiseBacking:setImage(RegisterImage(@"uie_ui_menu_aar_repeat_white_bg"))
+	TiledwhiteNoiseBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	TiledwhiteNoiseBacking:setShaderVector(0, 0, 0, 0, 0)
 	TiledwhiteNoiseBacking:setupNineSliceShader(64, 64)
 	self:addElement(TiledwhiteNoiseBacking)
 	self.TiledwhiteNoiseBacking = TiledwhiteNoiseBacking
 	local f1_local19 = DescTextBox
 	local f1_local20 = DescTextBox.subscribeToModel
-	local f1_local21 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local21 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local20(f1_local19, f1_local21["LootStreamProgress.codPoints"], DescTextBox.__String_Reference_FullPath)
 	self:mergeStateConditions({
 		{

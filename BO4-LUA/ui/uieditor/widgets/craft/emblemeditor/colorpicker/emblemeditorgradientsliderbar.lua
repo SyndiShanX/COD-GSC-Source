@@ -18,14 +18,14 @@ CoD.EmblemEditorGradientSliderBar.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	self.BgWhite = BgWhite
 	local Frame = LUI.UIImage.new(0, 1, -2, 2, 0, 1, -2, 2)
 	Frame:setAlpha(0.5)
-	Frame:setImage(RegisterImage(0x185E11D74ECA3D7))
-	Frame:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	Frame:setImage(RegisterImage(@"uie_ui_menu_store_common_frame"))
+	Frame:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	Frame:setShaderVector(0, 0, 0, 0, 0)
 	Frame:setupNineSliceShader(4, 4)
 	self:addElement(Frame)
 	self.Frame = Frame
 	local bar = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	bar:setMaterial(LUI.UIImage.GetCachedMaterial(0xDE760AC0E801E57))
+	bar:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_gradient_normal"))
 	bar:setShaderVector(0, 0, 0, 0, 1)
 	bar:setShaderVector(1, 1, 1, 1, 1)
 	bar:setShaderVector(2, 0.5, 0, 0, 0)

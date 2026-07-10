@@ -14,8 +14,8 @@ CoD.UserScoreContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	UserScore:setRGB(ColorSet.FriendlyBlue.r, ColorSet.FriendlyBlue.g, ColorSet.FriendlyBlue.b)
 	UserScore:setTTF("ttmussels_demibold")
 	UserScore:setLetterSpacing(-1.9)
-	UserScore:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	UserScore:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	UserScore:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	UserScore:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	UserScore:linkToElementModel(self, "playerScore", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -66,7 +66,7 @@ CoD.UserScoreContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	})
 	local f1_local4 = MeterLine
 	local f1_local5 = MeterLine.subscribeToModel
-	local f1_local6 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local6 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local5(f1_local4, f1_local6["gameScore.playerScore"], function(f7_arg0)
 		f1_arg0:updateElementState(MeterLine, {
 			name = "model_validation",
@@ -78,7 +78,7 @@ CoD.UserScoreContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	end, false)
 	f1_local4 = MeterLine
 	f1_local5 = MeterLine.subscribeToModel
-	f1_local6 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local6 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local5(f1_local4, f1_local6["gameScore.scoreLimit"], function(f8_arg0)
 		f1_arg0:updateElementState(MeterLine, {
 			name = "model_validation",
@@ -93,7 +93,7 @@ CoD.UserScoreContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	self.MeterLine = MeterLine
 	f1_local4 = Meter
 	f1_local5 = Meter.subscribeToModel
-	f1_local6 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local6 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local5(f1_local4, f1_local6["gameScore.roundsPlayed"], Meter.ImgMeterEnvFillLine.__ScoreMeterUpperWipe_FullPath)
 	self:mergeStateConditions({
 		{
@@ -129,7 +129,7 @@ CoD.UserScoreContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	})
 	f1_local4 = self
 	f1_local5 = self.subscribeToModel
-	f1_local6 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local6 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local5(f1_local4, f1_local6["gameScore.playerScore"], function(f14_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

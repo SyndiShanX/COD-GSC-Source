@@ -29,7 +29,7 @@ CoD.BM_ActivateBountyButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.DirectorSelectButtonMiniInternal = DirectorSelectButtonMiniInternal
 	local BMActiveBountyInternal = CoD.BM_ActiveBountyInternal.new(f1_arg0, f1_arg1, 0, 1, 0, 0, 0, 1, 0, 0)
 	BMActiveBountyInternal:setAlpha(0)
-	BMActiveBountyInternal.MiddleText:setText(LocalizeToUpperString(0xE4B5517E8F20677))
+	BMActiveBountyInternal.MiddleText:setText(LocalizeToUpperString(@"hash_2E4B5517E8F20677"))
 	self:addElement(BMActiveBountyInternal)
 	self.BMActiveBountyInternal = BMActiveBountyInternal
 	DirectorSelectButtonMiniInternal.id = "DirectorSelectButtonMiniInternal"

@@ -17,14 +17,14 @@ CoD.EmblemEditorColorSwatchContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	local ColorPickerBkgd = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	ColorPickerBkgd:setAlpha(0.5)
 	ColorPickerBkgd:setZRot(180)
-	ColorPickerBkgd:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	ColorPickerBkgd:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	ColorPickerBkgd:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(ColorPickerBkgd)
 	self.ColorPickerBkgd = ColorPickerBkgd
 	local NoiseTiledBacking = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
 	NoiseTiledBacking:setAlpha(0.5)
-	NoiseTiledBacking:setImage(RegisterImage(0x34839E8065B1E53))
-	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	NoiseTiledBacking:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	NoiseTiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	NoiseTiledBacking:setupNineSliceShader(196, 88)
 	self:addElement(NoiseTiledBacking)
@@ -41,16 +41,16 @@ CoD.EmblemEditorColorSwatchContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	self.ColorBacking = ColorBacking
 	local Frame = LUI.UIImage.new(0, 1, -1, 1, 0, 1, -1, 1)
 	Frame:setAlpha(0.2)
-	Frame:setImage(RegisterImage(0x185E11D74ECA3D7))
-	Frame:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	Frame:setImage(RegisterImage(@"uie_ui_menu_store_common_frame"))
+	Frame:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	Frame:setShaderVector(0, 0, 0, 0, 0)
 	Frame:setupNineSliceShader(16, 16)
 	self:addElement(Frame)
 	self.Frame = Frame
 	local FooterStripe1 = LUI.UIImage.new(0, 1, 0, 0, 1, 1, -38, 0)
 	FooterStripe1:setAlpha(0.1)
-	FooterStripe1:setImage(RegisterImage(0xC7A051F5EFC70E5))
-	FooterStripe1:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	FooterStripe1:setImage(RegisterImage(@"hash_2C7A051F5EFC70E5"))
+	FooterStripe1:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	FooterStripe1:setShaderVector(0, 0, 0, 0, 0)
 	FooterStripe1:setupNineSliceShader(245, 40)
 	self:addElement(FooterStripe1)
@@ -62,9 +62,9 @@ CoD.EmblemEditorColorSwatchContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	end)
 	local EmblemEditorFrame0 = lastSavedColor
 	local emblemColorSwatch = lastSavedColor.subscribeToModel
-	local toggleColorMixerButton = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local toggleColorMixerButton = Engine[@"getmodelforcontroller"](f1_arg1)
 	emblemColorSwatch(EmblemEditorFrame0, toggleColorMixerButton["Emblem.EmblemProperties.isGradientMode"], function(f3_arg0, f3_arg1)
-		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	lastSavedColor:registerEventHandler("gain_focus", function(element, event)
 		local f4_local0 = nil
@@ -76,12 +76,12 @@ CoD.EmblemEditorColorSwatchContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f
 		if IsGamepad(f1_arg1) then
 			CoD.CraftUtility.EmblemChooseColor_SelectionChanged(self, element, f1_arg1)
 		else
-			CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-			CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+			CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+			CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_none"])
 		end
 		return f4_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(lastSavedColor, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(lastSavedColor, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if CoD.ModelUtility.IsModelValueEqualTo(controller, "Emblem.EmblemProperties.isGradientMode", 0) then
 			GoBack(self, controller)
 			ClearMenuSavedState(menu)
@@ -90,17 +90,17 @@ CoD.EmblemEditorColorSwatchContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f
 		end
 	end, function(element, menu, controller)
 		if CoD.ModelUtility.IsModelValueEqualTo(controller, "Emblem.EmblemProperties.isGradientMode", 0) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(lastSavedColor, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "MOUSE1", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(lastSavedColor, f1_arg1, Enum[@"luibutton"][@"lui_key_none"], "MOUSE1", function(element, menu, controller, model)
 		CoD.CraftUtility.EmblemChooseColor_SelectionChanged(self, element, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "MOUSE1")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "MOUSE1")
 		return false
 	end, false)
 	self:addElement(lastSavedColor)
@@ -112,7 +112,7 @@ CoD.EmblemEditorColorSwatchContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	emblemColorSwatch:setHorizontalCount(13)
 	emblemColorSwatch:setVerticalCount(9)
 	emblemColorSwatch:setSpacing(-1)
-	emblemColorSwatch:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	emblemColorSwatch:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	emblemColorSwatch:setDataSource("EmblemColorList")
 	emblemColorSwatch:registerEventHandler("list_item_gain_focus", function(element, event)
 		local f9_local0 = nil
@@ -128,10 +128,10 @@ CoD.EmblemEditorColorSwatchContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f
 		elseif element.super.gainFocus then
 			f10_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_none"])
 		return f10_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(emblemColorSwatch, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "MOUSE1", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(emblemColorSwatch, f1_arg1, Enum[@"luibutton"][@"lui_key_none"], "MOUSE1", function(element, menu, controller, model)
 		if IsPC() then
 			CoD.CraftUtility.EmblemChooseColor_SelectionChanged(self, element, controller)
 			return true
@@ -139,7 +139,7 @@ CoD.EmblemEditorColorSwatchContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f
 		end
 	end, function(element, menu, controller)
 		if IsPC() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "MOUSE1")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "MOUSE1")
 			return false
 		else
 			return false
@@ -171,7 +171,7 @@ CoD.EmblemEditorColorSwatchContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	end)
 	local ColorFrame = toggleColorMixerButton
 	local ColorCornerPips = toggleColorMixerButton.subscribeToModel
-	local dividerV = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local dividerV = Engine[@"getmodelforcontroller"](f1_arg1)
 	ColorCornerPips(ColorFrame, dividerV.LastInput, function(f16_arg0)
 		f1_arg0:updateElementState(toggleColorMixerButton, {
 			name = "model_validation",
@@ -181,7 +181,7 @@ CoD.EmblemEditorColorSwatchContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f
 			modelName = "LastInput",
 		})
 	end, false)
-	toggleColorMixerButton.label:setText(Engine[0xF9F1239CFD921FE](0xC8E4DA2A7FB0D28))
+	toggleColorMixerButton.label:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_C8E4DA2A7FB0D28"))
 	toggleColorMixerButton:subscribeToGlobalModel(f1_arg1, "Controller", "back_button_image", function(model)
 		local f17_local0 = model:get()
 		if f17_local0 ~= nil then
@@ -195,24 +195,24 @@ CoD.EmblemEditorColorSwatchContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	self.ColorCornerPips = ColorCornerPips
 	ColorFrame = LUI.UIImage.new(0, 0, 6, 63, 0, 0, 6.5, 196.5)
 	ColorFrame:setAlpha(0.5)
-	ColorFrame:setImage(RegisterImage(0x185E11D74ECA3D7))
-	ColorFrame:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	ColorFrame:setImage(RegisterImage(@"uie_ui_menu_store_common_frame"))
+	ColorFrame:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	ColorFrame:setShaderVector(0, 0, 0, 0, 0)
 	ColorFrame:setupNineSliceShader(4, 4)
 	self:addElement(ColorFrame)
 	self.ColorFrame = ColorFrame
 	dividerV = LUI.UIImage.new(0.5, 0.5, -409.5, -405.5, 0, 0, 0.5, 202.5)
 	dividerV:setAlpha(0.1)
-	dividerV:setImage(RegisterImage(0xC49B0C8991A541F))
-	dividerV:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	dividerV:setImage(RegisterImage(@"hash_C49B0C8991A541F"))
+	dividerV:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	dividerV:setShaderVector(0, 0, 0, 0, 0)
 	dividerV:setupNineSliceShader(4, 8)
 	self:addElement(dividerV)
 	self.dividerV = dividerV
 	local dividerH = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 201, 205)
 	dividerH:setAlpha(0.2)
-	dividerH:setImage(RegisterImage(0x84B43D5B04D263A))
-	dividerH:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	dividerH:setImage(RegisterImage(@"hash_484B43D5B04D263A"))
+	dividerH:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	dividerH:setShaderVector(0, 0, 0, 0, 0)
 	dividerH:setupNineSliceShader(8, 4)
 	self:addElement(dividerH)
@@ -221,7 +221,7 @@ CoD.EmblemEditorColorSwatchContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f
 		{
 			stateName = "Visible",
 			condition = function(menu, element, event)
-				return CoD.CraftUtility.IsEmblemEditorPropertyEqualTo(f1_arg1, "isGradientMode", 0) and CoD.CraftUtility.IsEmblemEditorPropertyEqualToEnum(f1_arg1, "colorMode", Enum[0xC594B064FEDD0D6][0xE692F9BF30BA124])
+				return CoD.CraftUtility.IsEmblemEditorPropertyEqualTo(f1_arg1, "isGradientMode", 0) and CoD.CraftUtility.IsEmblemEditorPropertyEqualToEnum(f1_arg1, "colorMode", Enum[@"customizationcolormode"][@"customization_color_mode_solid"])
 			end,
 		},
 	})

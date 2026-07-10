@@ -13,8 +13,8 @@ CoD.AARTierItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_a
 	TierText:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	TierText:setTTF("ttmussels_demibold")
 	TierText:setLetterSpacing(4)
-	TierText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	TierText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	TierText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	TierText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	TierText:linkToElementModel(self, "tierProgressText", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then

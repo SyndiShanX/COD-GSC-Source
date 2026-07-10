@@ -16,8 +16,8 @@ CoD.AmmoWidget_OIC_Bullets.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	end
 	AmmoCount.__String_Reference()
 	AmmoCount:setTTF("default")
-	AmmoCount:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	AmmoCount:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	AmmoCount:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	AmmoCount:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(AmmoCount)
 	self.AmmoCount = AmmoCount
 	local BulletList = LUI.UIList.new(f1_arg0, f1_arg1, -2, 0, nil, false, false, false, false)
@@ -26,7 +26,7 @@ CoD.AmmoWidget_OIC_Bullets.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	BulletList:setWidgetType(CoD.AmmoWidget_OIC_bulletPip)
 	BulletList:setHorizontalCount(5)
 	BulletList:setSpacing(-2)
-	BulletList:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	BulletList:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	BulletList:setDataSource("OneInTheChamberBulletList")
 	self:addElement(BulletList)
 	self.BulletList = BulletList

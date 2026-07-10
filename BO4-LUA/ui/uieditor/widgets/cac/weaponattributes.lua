@@ -30,7 +30,7 @@ CoD.WeaponAttributes.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 			modelName = "damage",
 		})
 	end)
-	DamageAttribute.attributeName:setText(LocalizeToUpperString(0xCFFC6656E99316E))
+	DamageAttribute.attributeName:setText(LocalizeToUpperString(@"hash_6CFFC6656E99316E"))
 	DamageAttribute:linkToElementModel(self, nil, false, function(model)
 		DamageAttribute:setModel(model, f1_arg1)
 	end)
@@ -66,7 +66,7 @@ CoD.WeaponAttributes.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 			modelName = "range",
 		})
 	end)
-	RangeAttribute.attributeName:setText(LocalizeToUpperString(0x470B2F1C3BDE7F4))
+	RangeAttribute.attributeName:setText(LocalizeToUpperString(@"hash_7470B2F1C3BDE7F4"))
 	RangeAttribute:linkToElementModel(self, nil, false, function(model)
 		RangeAttribute:setModel(model, f1_arg1)
 	end)
@@ -102,7 +102,7 @@ CoD.WeaponAttributes.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 			modelName = "fireRate",
 		})
 	end)
-	FireRateAttribute.attributeName:setText(LocalizeToUpperString(0xA995770D23477EE))
+	FireRateAttribute.attributeName:setText(LocalizeToUpperString(@"hash_2A995770D23477EE"))
 	FireRateAttribute:linkToElementModel(self, nil, false, function(model)
 		FireRateAttribute:setModel(model, f1_arg1)
 	end)
@@ -138,7 +138,7 @@ CoD.WeaponAttributes.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 			modelName = "accuracy",
 		})
 	end)
-	AccuracyAttribute.attributeName:setText(LocalizeToUpperString(0xF669512DF581896))
+	AccuracyAttribute.attributeName:setText(LocalizeToUpperString(@"hash_4F669512DF581896"))
 	AccuracyAttribute:linkToElementModel(self, nil, false, function(model)
 		AccuracyAttribute:setModel(model, f1_arg1)
 	end)
@@ -228,18 +228,18 @@ CoD.WeaponAttributes.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	self.MagSizeAttribute = MagSizeAttribute
 	local MagCountName = LUI.UIText.new(0, 0, 9, 139, 0, 0, 154, 172)
 	MagCountName:setRGB(0.39, 0.39, 0.39)
-	MagCountName:setText(LocalizeToUpperString(0xCFA9EEE073FD746))
+	MagCountName:setText(LocalizeToUpperString(@"weapon/mags"))
 	MagCountName:setTTF("ttmussels_regular")
 	MagCountName:setLetterSpacing(3)
-	MagCountName:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
+	MagCountName:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
 	self:addElement(MagCountName)
 	self.MagCountName = MagCountName
 	local UberAttachmentName = LUI.UIText.new(0, 0, 234, 364, 0, 0, 154, 172)
 	UberAttachmentName:setRGB(0.39, 0.39, 0.39)
-	UberAttachmentName:setText(LocalizeToUpperString(0xD3E9656E7289B9B))
+	UberAttachmentName:setText(LocalizeToUpperString(@"hash_4D3E9656E7289B9B"))
 	UberAttachmentName:setTTF("ttmussels_regular")
 	UberAttachmentName:setLetterSpacing(3)
-	UberAttachmentName:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
+	UberAttachmentName:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
 	self:addElement(UberAttachmentName)
 	self.UberAttachmentName = UberAttachmentName
 	local UberAttachmentIcon = CoD.WeaponAttributeUberInfo.new(f1_arg0, f1_arg1, 0, 0, -5, 245, 0, 0, 164, 228)

@@ -34,12 +34,12 @@ LUI.createMenu.WeaponSelectFlyout = function(f1_arg0, f1_arg1)
 	self:addElement(BackgroundSlidePanel)
 	self.BackgroundSlidePanel = BackgroundSlidePanel
 	local CACHeader = CoD.CACHeader.new(f1_local1, f1_arg0, 0.5, 0.5, -960, 960, 0, 0, 0, 67)
-	CACHeader.subtitle.StageTitle:setText(LocalizeToUpperString(0x93CE015442D7E04))
+	CACHeader.subtitle.StageTitle:setText(LocalizeToUpperString(@"hash_493CE015442D7E04"))
 	CACHeader.subtitle.subtitle:setAlpha(0)
 	CACHeader:subscribeToGlobalModel(f1_arg0, "LobbyRoot", "lobbyTitle", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			CACHeader.subtitle.subtitle:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			CACHeader.subtitle.subtitle:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	CACHeader:linkToElementModel(self, nil, false, function(model)
@@ -82,7 +82,7 @@ LUI.createMenu.WeaponSelectFlyout = function(f1_arg0, f1_arg1)
 	})
 	local ItemInfo = Mark2BonusExpLongBadge
 	local WeaponLevel = Mark2BonusExpLongBadge.subscribeToModel
-	local WeaponAttributes = Engine[0x4DF5CFBC1771947](f1_arg0)
+	local WeaponAttributes = Engine[@"getmodelforcontroller"](f1_arg0)
 	WeaponLevel(ItemInfo, WeaponAttributes["hudItems.previewingMK2Weapon"], function(f6_arg0)
 		f1_local1:updateElementState(Mark2BonusExpLongBadge, {
 			name = "model_validation",
@@ -183,7 +183,7 @@ LUI.createMenu.WeaponSelectFlyout = function(f1_arg0, f1_arg1)
 	RestrictedText:linkToElementModel(WeaponListWidget.weaponList, nil, false, function(model)
 		RestrictedText:setModel(model, f1_arg0)
 	end)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		if MenuPropertyIsTrue(menu, "_showWeaponVariantList") and IsPC() then
 			CoD.CACUtility.HideWeaponVariantList(menu, controller)
 			return true
@@ -201,13 +201,13 @@ LUI.createMenu.WeaponSelectFlyout = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if MenuPropertyIsTrue(menu, "_showWeaponVariantList") and IsPC() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 			return true
 		elseif not IsPC() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 			return true
 		elseif IsPC() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 			return true
 		else
 			return false
@@ -279,7 +279,7 @@ CoD.WeaponSelectFlyout.__clipsPerState = {
 			f21_arg0:setupElementClipCounter(2)
 			local f21_local0 = function(f22_arg0)
 				local f22_local0 = function(f23_arg0)
-					f23_arg0:beginAnimation(100, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f23_arg0:beginAnimation(100, Enum[@"luitween"][@"luitween_ease_both"])
 					f23_arg0:setTopBottom(0, 0, 672, 1294)
 					f23_arg0:setAlpha(1)
 					f23_arg0:registerEventHandler("transition_complete_keyframe", f21_arg0.clipFinished)
@@ -300,7 +300,7 @@ CoD.WeaponSelectFlyout.__clipsPerState = {
 					f25_arg0:setAlpha(1)
 					f25_arg0:registerEventHandler("transition_complete_keyframe", f21_arg0.clipFinished)
 				end
-				f21_arg0.WeaponListWidget:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f21_arg0.WeaponListWidget:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f21_arg0.WeaponListWidget:setTopBottom(0, 0, 700, 1190)
 				f21_arg0.WeaponListWidget:registerEventHandler("interrupted_keyframe", f21_arg0.clipInterrupted)
 				f21_arg0.WeaponListWidget:registerEventHandler("transition_complete_keyframe", f24_local0)
@@ -314,7 +314,7 @@ CoD.WeaponSelectFlyout.__clipsPerState = {
 			f26_arg0:__resetProperties()
 			f26_arg0:setupElementClipCounter(2)
 			local f26_local0 = function(f27_arg0)
-				f26_arg0.BackgroundSlidePanel:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f26_arg0.BackgroundSlidePanel:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f26_arg0.BackgroundSlidePanel:setTopBottom(0, 0, 1072, 1694)
 				f26_arg0.BackgroundSlidePanel:setAlpha(0)
 				f26_arg0.BackgroundSlidePanel:registerEventHandler("interrupted_keyframe", f26_arg0.clipInterrupted)
@@ -325,7 +325,7 @@ CoD.WeaponSelectFlyout.__clipsPerState = {
 			f26_arg0.BackgroundSlidePanel:setAlpha(1)
 			f26_local0(f26_arg0.BackgroundSlidePanel)
 			local f26_local1 = function(f28_arg0)
-				f26_arg0.WeaponListWidget:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f26_arg0.WeaponListWidget:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f26_arg0.WeaponListWidget:setTopBottom(0, 0, 1080, 1570)
 				f26_arg0.WeaponListWidget:setAlpha(0)
 				f26_arg0.WeaponListWidget:registerEventHandler("interrupted_keyframe", f26_arg0.clipInterrupted)

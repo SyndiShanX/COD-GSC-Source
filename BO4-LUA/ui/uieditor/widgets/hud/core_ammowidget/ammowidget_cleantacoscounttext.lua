@@ -9,14 +9,14 @@ CoD.AmmoWidget_CleanTacosCountText.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local NumberCount = LUI.UIText.new(0, 0, 0, 51, 0, 0, 0, 16)
 	NumberCount:setRGB(0, 0, 0)
-	NumberCount:setText(Engine[0xF9F1239CFD921FE](0x93E719493E9E18F))
+	NumberCount:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	NumberCount:setTTF("ttmussels_demibold")
-	NumberCount:setMaterial(LUI.UIImage.GetCachedMaterial(0x90D57B1E92D39D7))
+	NumberCount:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_90D57B1E92D39D7"))
 	NumberCount:setShaderVector(0, 0.68, 0, 0, 0)
 	NumberCount:setShaderVector(1, 0, 0, 0, 0)
 	NumberCount:setShaderVector(2, 0.07, 0.09, 0.04, 0.4)
-	NumberCount:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	NumberCount:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	NumberCount:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	NumberCount:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	self:addElement(NumberCount)
 	self.NumberCount = NumberCount
 	self:mergeStateConditions({

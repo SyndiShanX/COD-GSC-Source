@@ -15,30 +15,30 @@ CoD.SpawnRegionAutoSpawn.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	local DangerText = LUI.UIText.new(0, 0, -39.5, 119.5, 0, 0, 68, 88)
 	DangerText:setRGB(1, 0, 0)
 	DangerText:setAlpha(0)
-	DangerText:setText(Engine[0xF9F1239CFD921FE](0x57915A72383BA7C))
+	DangerText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_357915A72383BA7C"))
 	DangerText:setTTF("ttmussels_demibold")
-	DangerText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	DangerText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	DangerText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	DangerText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(DangerText)
 	self.DangerText = DangerText
 	local iconFrameBacking = LUI.UIImage.new(0, 0, 16, 64, 0, 0, 16, 64)
 	iconFrameBacking:setAlpha(0)
-	iconFrameBacking:setImage(RegisterImage(0x6BAB388F74F4130))
+	iconFrameBacking:setImage(RegisterImage(@"uie_ui_hud_selectspawn_point_bg"))
 	self:addElement(iconFrameBacking)
 	self.iconFrameBacking = iconFrameBacking
 	local iconFrameSelected = LUI.UIImage.new(0, 0, 16, 64, 0, 0, 16, 64)
 	iconFrameSelected:setAlpha(0)
-	iconFrameSelected:setImage(RegisterImage(0xBDB803803D3EBB8))
+	iconFrameSelected:setImage(RegisterImage(@"uie_ui_hud_selectspawn_point_pulse"))
 	self:addElement(iconFrameSelected)
 	self.iconFrameSelected = iconFrameSelected
 	local iconFrame = LUI.UIImage.new(0, 0, 16, 64, 0, 0, 16, 64)
 	iconFrame:setAlpha(0)
-	iconFrame:setImage(RegisterImage(0xC8EC26A4504B31))
-	iconFrame:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	iconFrame:setImage(RegisterImage(@"uie_ui_hud_selectspawn_point_boundary"))
+	iconFrame:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(iconFrame)
 	self.iconFrame = iconFrame
 	local AutoSpawnIcon = LUI.UIImage.new(0, 0, 16, 64, 0, 0, 16, 64)
-	AutoSpawnIcon:setImage(RegisterImage(0x453ECA2D605AA1E))
+	AutoSpawnIcon:setImage(RegisterImage(@"uie_ui_hud_selectspawn_point_icon"))
 	self:addElement(AutoSpawnIcon)
 	self.AutoSpawnIcon = AutoSpawnIcon
 	if PostLoadFunc then

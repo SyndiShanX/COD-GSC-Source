@@ -9,17 +9,17 @@ CoD.CodCasterPortraitPlayerListEntrySpecialistHeadIcon.new = function(f1_arg0, f
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Healing = LUI.UIImage.new(0.5, 0.5, -38, 38, 0.5, 0.5, -27.5, 27.5)
 	Healing:setAlpha(0)
-	Healing:setMaterial(LUI.UIImage.GetCachedMaterial(0xE8F55203998700A))
+	Healing:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_feather_blend"))
 	self:addElement(Healing)
 	self.Healing = Healing
 	local Wounded = LUI.UIImage.new(0.5, 0.5, -38, 38, 0.5, 0.5, -27.5, 27.5)
 	Wounded:setAlpha(0)
-	Wounded:setMaterial(LUI.UIImage.GetCachedMaterial(0xE8F55203998700A))
+	Wounded:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_feather_blend"))
 	self:addElement(Wounded)
 	self.Wounded = Wounded
 	local Buffed = LUI.UIImage.new(0.5, 0.5, -38, 38, 0.5, 0.5, -27.5, 27.5)
 	Buffed:setAlpha(0)
-	Buffed:setMaterial(LUI.UIImage.GetCachedMaterial(0xE8F55203998700A))
+	Buffed:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_feather_blend"))
 	self:addElement(Buffed)
 	self.Buffed = Buffed
 	local Critical = LUI.UIImage.new(0.5, 0.5, -38, 38, 0.5, 0.5, -27.5, 27.5)
@@ -28,7 +28,7 @@ CoD.CodCasterPortraitPlayerListEntrySpecialistHeadIcon.new = function(f1_arg0, f
 	self.Critical = Critical
 	local Normal = LUI.UIImage.new(0.5, 0.5, -38, 38, 0.5, 0.5, -27.5, 27.5)
 	Normal:setAlpha(0)
-	Normal:setMaterial(LUI.UIImage.GetCachedMaterial(0xE8F55203998700A))
+	Normal:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_feather_blend"))
 	self:addElement(Normal)
 	self.Normal = Normal
 	self:mergeStateConditions({

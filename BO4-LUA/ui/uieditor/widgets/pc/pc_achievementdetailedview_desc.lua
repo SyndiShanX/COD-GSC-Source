@@ -18,12 +18,12 @@ CoD.PC_AchievementDetailedView_Desc.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	self.VerticalListSpacer = VerticalListSpacer
 	local Name = LUI.UIText.new(0, 1, 25, -25, 0, 0, 25, 50)
 	Name:setRGB(0.7, 0.67, 0.62)
-	Name:setText(Engine[0xF9F1239CFD921FE](0x93E719493E9E18F))
+	Name:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	Name:setTTF("ttmussels_demibold")
 	Name:setLetterSpacing(4)
 	Name:setLineSpacing(3)
-	Name:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	Name:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Name:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	Name:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(Name)
 	self.Name = Name
 	local Separator = LUI.UIImage.new(0, 1, 20, -20, 0, 0, 60, 61)
@@ -32,12 +32,12 @@ CoD.PC_AchievementDetailedView_Desc.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	self.Separator = Separator
 	local Description = LUI.UIText.new(0, 1, 25, -25, 0, 0, 71, 89)
 	Description:setRGB(0.49, 0.47, 0.45)
-	Description:setText(Engine[0xF9F1239CFD921FE](0x93E719493E9E18F))
+	Description:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	Description:setTTF("dinnext_regular")
 	Description:setLetterSpacing(1)
 	Description:setLineSpacing(3)
-	Description:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	Description:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Description:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	Description:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(Description)
 	self.Description = Description
 	local VerticalListSpacer2 = CoD.VerticalListSpacer.new(f1_arg0, f1_arg1, -0.01, 0.99, 0, 0, 0, 0, 99, 111)

@@ -18,7 +18,7 @@ CoD.SubtitleEntryContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 		PostLoadFunc(self, f1_arg1, f1_arg0)
 	end
 	local f1_local2 = self
-	CoD.SubtitleUtility.EntryInit(self, f1_arg1, Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	CoD.SubtitleUtility.EntryInit(self, f1_arg1, Enum[@"luialignment"][@"lui_alignment_center"])
 	return self
 end
 CoD.SubtitleEntryContainer.__onClose = function(f3_arg0)

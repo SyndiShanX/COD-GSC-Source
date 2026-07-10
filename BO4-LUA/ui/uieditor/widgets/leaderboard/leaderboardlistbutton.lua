@@ -11,7 +11,7 @@ CoD.LeaderboardListButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local CommonListButtonShortInternal = CoD.CommonListButtonShort_Internal.new(f1_arg0, f1_arg1, 0.5, 0.5, -151.5, 151.5, 0.5, 0.5, -46, 46)
-	CommonListButtonShortInternal.Title:setText(Engine[0xF9F1239CFD921FE](0x93E719493E9E18F))
+	CommonListButtonShortInternal.Title:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	self:addElement(CommonListButtonShortInternal)
 	self.CommonListButtonShortInternal = CommonListButtonShortInternal
 	CommonListButtonShortInternal.id = "CommonListButtonShortInternal"

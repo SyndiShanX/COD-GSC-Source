@@ -19,7 +19,7 @@ CoD.SupplyChainDetailImage3d.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	self.FixedAspectRatioImage = FixedAspectRatioImage
 	local DecalImage = LUI.UIFixedAspectRatioImage.new(0, 0, 92, 352, 0, 0, 92, 352)
 	DecalImage:setAlpha(0)
-	DecalImage:setMaterial(LUI.UIImage.GetCachedMaterial(0x146ECDAC27D1842))
+	DecalImage:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_5146ECDAC27D1842"))
 	DecalImage:setShaderVector(0, 1, 0, 0, 0)
 	DecalImage:setShaderVector(1, 200, 200, 0, 0)
 	DecalImage:setStretchedDimension(6)
@@ -41,7 +41,7 @@ CoD.SupplyChainDetailImage3d.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 		{
 			stateName = "Decal",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", 0x1FE4C75ACC7DF0E)
+				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", @"decal")
 			end,
 		},
 	})
@@ -157,7 +157,7 @@ CoD.SupplyChainDetailImage3d.__clipsPerState = {
 			f22_arg0:setupElementClipCounter(1)
 			local f22_local0 = function(f23_arg0)
 				local f23_local0 = function(f24_arg0)
-					f24_arg0:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f24_arg0:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 					f24_arg0:setAlpha(1)
 					f24_arg0:registerEventHandler("transition_complete_keyframe", f22_arg0.clipFinished)
 				end
@@ -278,7 +278,7 @@ CoD.SupplyChainDetailImage3d.__clipsPerState = {
 			f39_arg0.clipFinished(f39_arg0.FixedAspectRatioImage)
 			local f39_local0 = function(f40_arg0)
 				local f40_local0 = function(f41_arg0)
-					f41_arg0:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f41_arg0:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 					f41_arg0:setAlpha(1)
 					f41_arg0:registerEventHandler("transition_complete_keyframe", f39_arg0.clipFinished)
 				end

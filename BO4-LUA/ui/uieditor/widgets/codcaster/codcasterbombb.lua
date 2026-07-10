@@ -8,7 +8,7 @@ CoD.codcasterBombB.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	self.soundSet = "default"
 	local siteBLED = LUI.UIImage.new(0.55, 0.55, -33, 27, 0.45, 0.45, -27, 33)
 	siteBLED:setScale(0.45, 0.45)
-	siteBLED:setImage(RegisterImage(0x159D9B7B7294C91))
+	siteBLED:setImage(RegisterImage(@"uie_ui_hud_core_waypoint_led"))
 	siteBLED:subscribeToGlobalModel(f1_arg1, "HUDItems", "codcaster.ObjectiveB.color", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -19,13 +19,13 @@ CoD.codcasterBombB.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	self.siteBLED = siteBLED
 	local siteBEmpty = LUI.UIImage.new(0.55, 0.55, -33, 27, 0.45, 0.45, -27, 33)
 	siteBEmpty:setScale(0.45, 0.45)
-	siteBEmpty:setImage(RegisterImage(0x2608D8F924FABD2))
+	siteBEmpty:setImage(RegisterImage(@"uie_ui_hud_core_waypoint_domination_empty"))
 	self:addElement(siteBEmpty)
 	self.siteBEmpty = siteBEmpty
 	local siteBFill = LUI.UIImage.new(0.55, 0.55, -33, 27, 0.45, 0.45, -27, 33)
 	siteBFill:setScale(0.45, 0.45)
-	siteBFill:setImage(RegisterImage(0x2E4DBA41E983343))
-	siteBFill:setMaterial(LUI.UIImage.GetCachedMaterial(0xD5CA1A25ED87F4F))
+	siteBFill:setImage(RegisterImage(@"uie_ui_hud_core_waypoint_domination_fill_02"))
+	siteBFill:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_clock_normal"))
 	siteBFill:setShaderVector(1, 0.5, 0, 0, 0)
 	siteBFill:setShaderVector(2, 0.5, 0, 0, 0)
 	siteBFill:setShaderVector(3, 0, 0, 0, 0)
@@ -46,7 +46,7 @@ CoD.codcasterBombB.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	self.siteBFill = siteBFill
 	local siteBLetter = LUI.UIImage.new(0.55, 0.55, -33, 27, 0.45, 0.45, -27, 33)
 	siteBLetter:setScale(0.45, 0.45)
-	siteBLetter:setImage(RegisterImage(0xFEE9CEC7F9FF4BC))
+	siteBLetter:setImage(RegisterImage(@"uie_ui_hud_core_waypoint_letter_b_02"))
 	siteBLetter:subscribeToGlobalModel(f1_arg1, "HUDItems", "codcaster.ObjectiveB.color", function(model)
 		local f5_local0 = model:get()
 		if f5_local0 ~= nil then

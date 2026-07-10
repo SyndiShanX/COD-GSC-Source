@@ -9,17 +9,17 @@ CoD.CodCasterTimer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local GameTimer = LUI.UIText.new(0.5, 0.5, -46, 46, 0, 0, 6, 31)
 	GameTimer:setTTF("ttmussels_demibold")
-	GameTimer:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	GameTimer:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	GameTimer:setupGameTimer()
-	GameTimer:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	GameTimer:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	self:addElement(GameTimer)
 	self.GameTimer = GameTimer
 	local NoTimeLimit = LUI.UIText.new(0.5, 0.5, -54, 54, 0, 0, 9, 27)
-	NoTimeLimit:setText(Engine[0xF9F1239CFD921FE](0x8E8304D25283DA6))
+	NoTimeLimit:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_18E8304D25283DA6"))
 	NoTimeLimit:setTTF("ttmussels_demibold")
 	NoTimeLimit:setLetterSpacing(-0.5)
-	NoTimeLimit:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	NoTimeLimit:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	NoTimeLimit:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	NoTimeLimit:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(NoTimeLimit)
 	self.NoTimeLimit = NoTimeLimit
 	self:mergeStateConditions({
@@ -44,7 +44,7 @@ CoD.CodCasterTimer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	})
 	local f1_local3 = self
 	local f1_local4 = self.subscribeToModel
-	local f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local4(f1_local3, f1_local5["gameScore.gameTimeEnd"], function(f5_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -56,7 +56,7 @@ CoD.CodCasterTimer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	end, false)
 	f1_local3 = self
 	f1_local4 = self.subscribeToModel
-	f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local4(f1_local3, f1_local5["gameScore.gameTimeLow"], function(f6_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -68,7 +68,7 @@ CoD.CodCasterTimer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	end, false)
 	f1_local3 = self
 	f1_local4 = self.subscribeToModel
-	f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local4(f1_local3, f1_local5["gameScore.gameTimeLimit"], function(f7_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

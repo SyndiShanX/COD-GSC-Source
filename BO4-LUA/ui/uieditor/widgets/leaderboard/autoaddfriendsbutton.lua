@@ -21,7 +21,7 @@ CoD.AutoAddFriendsButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	})
 	local f1_local2 = AutoAddFriendsButton
 	local TextBox = AutoAddFriendsButton.subscribeToModel
-	local f1_local4 = Engine[0x8DF2E5447F384B9]()
+	local f1_local4 = Engine[@"getglobalmodel"]()
 	TextBox(f1_local2, f1_local4["socialRoot.showPlayersList"], function(f3_arg0)
 		f1_arg0:updateElementState(AutoAddFriendsButton, {
 			name = "model_validation",
@@ -31,12 +31,12 @@ CoD.AutoAddFriendsButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 			modelName = "socialRoot.showPlayersList",
 		})
 	end, false)
-	AutoAddFriendsButton.Title:setText(Engine[0xF9F1239CFD921FE](0x83B7C8E45BB59D2))
+	AutoAddFriendsButton.Title:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_283B7C8E45BB59D2"))
 	f1_local2 = AutoAddFriendsButton
 	TextBox = AutoAddFriendsButton.subscribeToModel
-	f1_local4 = Engine[0x8DF2E5447F384B9]()
+	f1_local4 = Engine[@"getglobalmodel"]()
 	TextBox(f1_local2, f1_local4["socialRoot.showPlayersList"], function(f4_arg0, f4_arg1)
-		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	AutoAddFriendsButton:registerEventHandler("gain_focus", function(element, event)
 		local f5_local0 = nil
@@ -45,10 +45,10 @@ CoD.AutoAddFriendsButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 		elseif element.super.gainFocus then
 			f5_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f5_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(AutoAddFriendsButton, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(AutoAddFriendsButton, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if CoD.LeaderboardUtility.GetAutoAddFriends(controller) then
 			PlaySoundSetSound(self, "tab_changed")
 			CoD.LeaderboardUtility.SetAutoAddFriendsFalse(controller)
@@ -66,10 +66,10 @@ CoD.AutoAddFriendsButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 		end
 	end, function(element, menu, controller)
 		if CoD.LeaderboardUtility.GetAutoAddFriends(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xAC3B80C833B60E1, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_3AC3B80C833B60E1", nil, "ui_confirm")
 			return true
 		elseif not CoD.LeaderboardUtility.GetAutoAddFriends(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xAC3B80C833B60E1, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_3AC3B80C833B60E1", nil, "ui_confirm")
 			return true
 		else
 			return false
@@ -80,10 +80,10 @@ CoD.AutoAddFriendsButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	TextBox = LUI.UIText.new(0, 0, 0, 303, 0, 0, 113.5, 146.5)
 	TextBox:setRGB(ColorSet.InsufficientFunds.r, ColorSet.InsufficientFunds.g, ColorSet.InsufficientFunds.b)
 	TextBox:setAlpha(0)
-	TextBox:setText(Engine[0xF9F1239CFD921FE](0xDDD4B3AA4AA58B0))
+	TextBox:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_1DDD4B3AA4AA58B0"))
 	TextBox:setTTF("default")
-	TextBox:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	TextBox:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	TextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	TextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(TextBox)
 	self.TextBox = TextBox
 	self:mergeStateConditions({
@@ -108,7 +108,7 @@ CoD.AutoAddFriendsButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	})
 	f1_local4 = self
 	f1_local2 = self.subscribeToModel
-	local f1_local5 = Engine[0x8DF2E5447F384B9]()
+	local f1_local5 = Engine[@"getglobalmodel"]()
 	f1_local2(f1_local4, f1_local5["socialRoot.showPlayersList"], function(f11_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

@@ -15,12 +15,12 @@ CoD.AttackerVictimInfoBar.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	local versus_backing_right = LUI.UIImage.new(0, 0, 960, 1920, 0, 0, 0, 180)
 	versus_backing_right:setRGB(0.1, 0.1, 0.1)
 	versus_backing_right:setZRot(180)
-	versus_backing_right:setImage(RegisterImage(0x57BF858D15699B4))
+	versus_backing_right:setImage(RegisterImage(@"uie_ui_hud_spawnselect_versus_backing"))
 	self:addElement(versus_backing_right)
 	self.versus_backing_right = versus_backing_right
 	local versus_backing_left = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 180)
 	versus_backing_left:setRGB(0.1, 0.1, 0.1)
-	versus_backing_left:setImage(RegisterImage(0x57BF858D15699B4))
+	versus_backing_left:setImage(RegisterImage(@"uie_ui_hud_spawnselect_versus_backing"))
 	self:addElement(versus_backing_left)
 	self.versus_backing_left = versus_backing_left
 	local IdentityBackingFillVictim = LUI.UIImage.new(0, 0, 1283, 1729, 0, 0, 0, 180)
@@ -30,7 +30,7 @@ CoD.AttackerVictimInfoBar.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	self.IdentityBackingFillVictim = IdentityBackingFillVictim
 	local IdentityBackerVictim = LUI.UIImage.new(0, 0, 1279, 1735, 0, 0, 0, 180)
 	IdentityBackerVictim:setRGB(0, 0, 0)
-	IdentityBackerVictim:setImage(RegisterImage(0xF5C02167B78BCD4))
+	IdentityBackerVictim:setImage(RegisterImage(@"uie_ui_hud_spawnselect_identity_backing"))
 	self:addElement(IdentityBackerVictim)
 	self.IdentityBackerVictim = IdentityBackerVictim
 	local IdentityBackingFillAttacker = LUI.UIImage.new(0, 0, 191, 637, 0, 0, 0, 180)
@@ -40,7 +40,7 @@ CoD.AttackerVictimInfoBar.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	self.IdentityBackingFillAttacker = IdentityBackingFillAttacker
 	local IdentityBackerAttacker = LUI.UIImage.new(0, 0, 186, 642, 0, 0, 0, 180)
 	IdentityBackerAttacker:setRGB(0, 0, 0)
-	IdentityBackerAttacker:setImage(RegisterImage(0xF5C02167B78BCD4))
+	IdentityBackerAttacker:setImage(RegisterImage(@"uie_ui_hud_spawnselect_identity_backing"))
 	self:addElement(IdentityBackerAttacker)
 	self.IdentityBackerAttacker = IdentityBackerAttacker
 	local KillsBacking = LUI.UIImage.new(0, 0, 899.5, 1019.5, 0, 0, 35, 65)
@@ -49,27 +49,27 @@ CoD.AttackerVictimInfoBar.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	self.KillsBacking = KillsBacking
 	local KillsLabel = LUI.UIText.new(0.5, 0.5, -62.5, 62.5, 0.5, 0.5, -57, -24)
 	KillsLabel:setRGB(0, 0, 0)
-	KillsLabel:setText(Engine[0xF9F1239CFD921FE](0x149A2DE2833BAD4))
+	KillsLabel:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_3149A2DE2833BAD4"))
 	KillsLabel:setTTF("ttmussels_demibold")
 	KillsLabel:setLetterSpacing(10)
-	KillsLabel:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	KillsLabel:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	KillsLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	KillsLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(KillsLabel)
 	self.KillsLabel = KillsLabel
 	local VSLabel = LUI.UIText.new(0.5, 0.5, -62.5, 62.5, 0.5, 0.5, -20, 42)
 	VSLabel:setRGB(0.81, 0.38, 0.07)
-	VSLabel:setText(Engine[0xF9F1239CFD921FE](0x4AE51EFE63F0158))
+	VSLabel:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_74AE51EFE63F0158"))
 	VSLabel:setTTF("ttmussels_demibold")
-	VSLabel:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	VSLabel:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	VSLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	VSLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(VSLabel)
 	self.VSLabel = VSLabel
 	local KilledByLabel = LUI.UIText.new(0, 0, 199.5, 322.5, 0, 0, 13, 37)
 	KilledByLabel:setRGB(0.63, 0.63, 0.63)
-	KilledByLabel:setText(Engine[0xF9F1239CFD921FE](0x69B24B4F4628C7C))
+	KilledByLabel:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_69B24B4F4628C7C"))
 	KilledByLabel:setTTF("default")
-	KilledByLabel:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	KilledByLabel:setAlignment(Enum[0x7A5123B654282D2][0x6ED4298C93DC5ED])
+	KilledByLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	KilledByLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
 	self:addElement(KilledByLabel)
 	self.KilledByLabel = KilledByLabel
 	local KillcamWeaponInfo = CoD.KillcamWeaponInfo.new(f1_arg0, f1_arg1, 0.18, 1.48, 77, 77, 0.5, 0.5, -77, -45)
@@ -110,7 +110,7 @@ CoD.AttackerVictimInfoBar.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	VictimPlayerCard:linkToElementModel(self, "heading", true, function(model)
 		local f6_local0 = model:get()
 		if f6_local0 ~= nil then
-			VictimPlayerCard.CalloutHeading:setText(Engine[0xF9F1239CFD921FE](f6_local0))
+			VictimPlayerCard.CalloutHeading:setText(Engine[@"hash_4F9F1239CFD921FE"](f6_local0))
 		end
 	end)
 	self:addElement(VictimPlayerCard)
@@ -122,7 +122,7 @@ CoD.AttackerVictimInfoBar.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	AttackerPlayerCard:linkToElementModel(self, "heading", true, function(model)
 		local f8_local0 = model:get()
 		if f8_local0 ~= nil then
-			AttackerPlayerCard.CalloutHeading:setText(Engine[0xF9F1239CFD921FE](f8_local0))
+			AttackerPlayerCard.CalloutHeading:setText(Engine[@"hash_4F9F1239CFD921FE"](f8_local0))
 		end
 	end)
 	self:addElement(AttackerPlayerCard)
@@ -146,84 +146,84 @@ CoD.AttackerVictimInfoBar.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	self:addElement(KillcamKillCountAttacker2)
 	self.KillcamKillCountAttacker2 = KillcamKillCountAttacker2
 	local IdentityHeaderVicitm = LUI.UIImage.new(0, 0, 181, 647, 0, 0, 0, 12)
-	IdentityHeaderVicitm:setImage(RegisterImage(0xBD85B69D819BB24))
+	IdentityHeaderVicitm:setImage(RegisterImage(@"uie_ui_hud_spawnselect_identity_bar"))
 	self:addElement(IdentityHeaderVicitm)
 	self.IdentityHeaderVicitm = IdentityHeaderVicitm
 	local IdentityCornerBottomRight = LUI.UIImage.new(0, 0, 1014.5, 1024.5, 0, 0, 140, 150)
 	IdentityCornerBottomRight:setAlpha(0.1)
 	IdentityCornerBottomRight:setZRot(-180)
-	IdentityCornerBottomRight:setImage(RegisterImage(0xD7AC5089314462A))
+	IdentityCornerBottomRight:setImage(RegisterImage(@"hash_1D7AC5089314462A"))
 	self:addElement(IdentityCornerBottomRight)
 	self.IdentityCornerBottomRight = IdentityCornerBottomRight
 	local IdentityCornerTopRight = LUI.UIImage.new(0, 0, 1015, 1025, 0, 0, 30, 40)
 	IdentityCornerTopRight:setAlpha(0.1)
 	IdentityCornerTopRight:setZRot(-90)
-	IdentityCornerTopRight:setImage(RegisterImage(0xD7AC5089314462A))
+	IdentityCornerTopRight:setImage(RegisterImage(@"hash_1D7AC5089314462A"))
 	self:addElement(IdentityCornerTopRight)
 	self.IdentityCornerTopRight = IdentityCornerTopRight
 	local IdentityCornerTopLeft = LUI.UIImage.new(0, 0, 894.5, 904.5, 0, 0, 30, 40)
 	IdentityCornerTopLeft:setAlpha(0.1)
-	IdentityCornerTopLeft:setImage(RegisterImage(0xD7AC5089314462A))
+	IdentityCornerTopLeft:setImage(RegisterImage(@"hash_1D7AC5089314462A"))
 	self:addElement(IdentityCornerTopLeft)
 	self.IdentityCornerTopLeft = IdentityCornerTopLeft
 	local IdentityCornerBottomLeft = LUI.UIImage.new(0, 0, 894.5, 904.5, 0, 0, 140, 150)
 	IdentityCornerBottomLeft:setAlpha(0.1)
 	IdentityCornerBottomLeft:setZRot(90)
-	IdentityCornerBottomLeft:setImage(RegisterImage(0xD7AC5089314462A))
+	IdentityCornerBottomLeft:setImage(RegisterImage(@"hash_1D7AC5089314462A"))
 	self:addElement(IdentityCornerBottomLeft)
 	self.IdentityCornerBottomLeft = IdentityCornerBottomLeft
 	local IdentityHeaderVicitm2 = LUI.UIImage.new(0, 0, 1274, 1740, 0, 0, 0, 12)
-	IdentityHeaderVicitm2:setImage(RegisterImage(0xBD85B69D819BB24))
+	IdentityHeaderVicitm2:setImage(RegisterImage(@"uie_ui_hud_spawnselect_identity_bar"))
 	self:addElement(IdentityHeaderVicitm2)
 	self.IdentityHeaderVicitm2 = IdentityHeaderVicitm2
 	local IdentityConnectorBackingAttacker = LUI.UIImage.new(0, 0, 643.5, 751.5, 0, 0, 69.5, 111.5)
 	IdentityConnectorBackingAttacker:setAlpha(0.02)
-	IdentityConnectorBackingAttacker:setImage(RegisterImage(0xC89F7D573D5B4E6))
+	IdentityConnectorBackingAttacker:setImage(RegisterImage(@"uie_ui_hud_spawnselect_identity_connector"))
 	self:addElement(IdentityConnectorBackingAttacker)
 	self.IdentityConnectorBackingAttacker = IdentityConnectorBackingAttacker
 	local IdentityConnectorLinesAttacker = LUI.UIImage.new(0, 0, 643.5, 751.5, 0, 0, 70, 112)
 	IdentityConnectorLinesAttacker:setAlpha(0.5)
-	IdentityConnectorLinesAttacker:setImage(RegisterImage(0x3A45AE0D7B6C206))
+	IdentityConnectorLinesAttacker:setImage(RegisterImage(@"uie_ui_hud_spawnselect_identity_connector_lines"))
 	self:addElement(IdentityConnectorLinesAttacker)
 	self.IdentityConnectorLinesAttacker = IdentityConnectorLinesAttacker
 	local IdentityConnectorBackingVictim = LUI.UIImage.new(0, 0, 1168.5, 1276.5, 0, 0, 69.5, 111.5)
 	IdentityConnectorBackingVictim:setAlpha(0.03)
 	IdentityConnectorBackingVictim:setZRot(180)
-	IdentityConnectorBackingVictim:setImage(RegisterImage(0xC89F7D573D5B4E6))
+	IdentityConnectorBackingVictim:setImage(RegisterImage(@"uie_ui_hud_spawnselect_identity_connector"))
 	self:addElement(IdentityConnectorBackingVictim)
 	self.IdentityConnectorBackingVictim = IdentityConnectorBackingVictim
 	local IdentityConnectorLinesVicitm = LUI.UIImage.new(0, 0, 1168.5, 1276.5, 0, 0, 69.5, 111.5)
 	IdentityConnectorLinesVicitm:setAlpha(0.5)
 	IdentityConnectorLinesVicitm:setZRot(180)
-	IdentityConnectorLinesVicitm:setImage(RegisterImage(0x3A45AE0D7B6C206))
+	IdentityConnectorLinesVicitm:setImage(RegisterImage(@"uie_ui_hud_spawnselect_identity_connector_lines"))
 	self:addElement(IdentityConnectorLinesVicitm)
 	self.IdentityConnectorLinesVicitm = IdentityConnectorLinesVicitm
 	local NemesisLabel = LUI.UIText.new(0.5, 0.5, -50, 50, 0, 0, -35, 2)
 	NemesisLabel:setAlpha(0)
-	NemesisLabel:setText(Engine[0xF9F1239CFD921FE](0x30FB1CA77CF4B0C))
+	NemesisLabel:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_330FB1CA77CF4B0C"))
 	NemesisLabel:setTTF("default")
-	NemesisLabel:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	NemesisLabel:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	NemesisLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	NemesisLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(NemesisLabel)
 	self.NemesisLabel = NemesisLabel
 	self:mergeStateConditions({
 		{
 			stateName = "NemesisKillcam",
 			condition = function(menu, element, event)
-				return Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xA77EB9347BE4DFF])
+				return Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_nemesis_killcam"])
 			end,
 		},
 	})
 	local f1_local30 = self
 	local f1_local31 = self.subscribeToModel
-	local f1_local32 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local31(f1_local30, f1_local32["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xA77EB9347BE4DFF]], function(f12_arg0)
+	local f1_local32 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local31(f1_local30, f1_local32["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_nemesis_killcam"]], function(f12_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f12_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xA77EB9347BE4DFF],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_nemesis_killcam"],
 		})
 	end, false)
 	VictimPlayerCard.id = "VictimPlayerCard"

@@ -8,7 +8,7 @@ CoD.PlayerPortraitHoverTop.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self.soundSet = "none"
 	local topselector = LUI.UIImage.new(0.5, 0.5, -66, 66, 0, 0, 0, 16)
 	topselector:setAlpha(0)
-	topselector:setImage(RegisterImage(0xE6E323EF8904EF4))
+	topselector:setImage(RegisterImage(@"hash_6E6E323EF8904EF4"))
 	self:addElement(topselector)
 	self.topselector = topselector
 	if PostLoadFunc then

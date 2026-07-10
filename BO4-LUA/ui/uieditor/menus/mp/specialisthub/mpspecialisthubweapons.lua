@@ -27,25 +27,25 @@ LUI.createMenu.MPSpecialistHUBWeapons = function(f1_arg0, f1_arg1)
 	self.BlackBacking = BlackBacking
 	local TiledPlusGrid = LUI.UIImage.new(0, 0, -135, 1920, 0, 0, 0, 1080)
 	TiledPlusGrid:setAlpha(0.05)
-	TiledPlusGrid:setImage(RegisterImage(0x6E37BAE22631294))
-	TiledPlusGrid:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	TiledPlusGrid:setImage(RegisterImage(@"uie_ui_hud_vehicle_hellstorm_repeat_plusgrid"))
+	TiledPlusGrid:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	TiledPlusGrid:setShaderVector(0, 0, 0, 0, 0)
 	TiledPlusGrid:setupNineSliceShader(220, 220)
 	self:addElement(TiledPlusGrid)
 	self.TiledPlusGrid = TiledPlusGrid
 	local weapon = CoD.HubWeaponVideoButton.new(f1_local1, f1_arg0, 0.5, 0.5, -615, -155, 0.5, 0.5, -296, 326)
 	weapon.schemaHeader:setAlpha(0.3)
-	weapon.mainHeader:setText(LocalizeToUpperString(0x3AF8C1C40386D94))
+	weapon.mainHeader:setText(LocalizeToUpperString(@"menu/weapons"))
 	weapon:linkToElementModel(self, "ability.description", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			weapon.description:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			weapon.description:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	weapon.schema.__schema = function(f3_arg0)
 		local f3_local0 = f3_arg0:get()
 		if f3_local0 ~= nil then
-			weapon.schema:setText(Engine[0xF9F1239CFD921FE](CoD.PlayerRoleUtility.SetWeaponSchemaString(self, f1_arg0, f3_local0)))
+			weapon.schema:setText(Engine[@"hash_4F9F1239CFD921FE"](CoD.PlayerRoleUtility.SetWeaponSchemaString(self, f1_arg0, f3_local0)))
 		end
 	end
 	weapon:linkToElementModel(self, "weaponSchema", true, weapon.schema.__schema)
@@ -69,7 +69,7 @@ LUI.createMenu.MPSpecialistHUBWeapons = function(f1_arg0, f1_arg1)
 		end
 	end)
 	weapon:linkToElementModel(weapon, "weaponMovie.hiResVideo.movieName", true, function(model, f7_arg1)
-		CoD.Menu.UpdateButtonShownState(f7_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f7_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	weapon:registerEventHandler("gain_focus", function(element, event)
 		local f8_local0 = nil
@@ -78,10 +78,10 @@ LUI.createMenu.MPSpecialistHUBWeapons = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f8_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f8_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(weapon, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(weapon, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if CoD.ModelUtility.IsSelfModelValueNonEmptyString(self, controller, "weaponMovie.hiResVideo.movieName") then
 			CoD.VideoStreamingUtility.SetupVoDMovie(controller, self, "weaponMovie.hiResVideo")
 			SetLoseFocusToElement(self, "weapon", controller)
@@ -91,7 +91,7 @@ LUI.createMenu.MPSpecialistHUBWeapons = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if CoD.ModelUtility.IsSelfModelValueNonEmptyString(self, controller, "weaponMovie.hiResVideo.movieName") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		else
 			return false
@@ -101,17 +101,17 @@ LUI.createMenu.MPSpecialistHUBWeapons = function(f1_arg0, f1_arg1)
 	self.weapon = weapon
 	local speccialIssue = CoD.HubWeaponVideoButton.new(f1_local1, f1_arg0, 0.5, 0.5, 155, 615, 0.5, 0.5, -296, 326)
 	speccialIssue.schemaHeader:setAlpha(0.3)
-	speccialIssue.mainHeader:setText(LocalizeToUpperString(0x759164343B5C489))
+	speccialIssue.mainHeader:setText(LocalizeToUpperString(@"weapon/special_issue"))
 	speccialIssue:linkToElementModel(self, "equipment.description", true, function(model)
 		local f11_local0 = model:get()
 		if f11_local0 ~= nil then
-			speccialIssue.description:setText(Engine[0xF9F1239CFD921FE](f11_local0))
+			speccialIssue.description:setText(Engine[@"hash_4F9F1239CFD921FE"](f11_local0))
 		end
 	end)
 	speccialIssue:linkToElementModel(self, "specialIssueSchema", true, function(model)
 		local f12_local0 = model:get()
 		if f12_local0 ~= nil then
-			speccialIssue.schema:setText(Engine[0xF9F1239CFD921FE](f12_local0))
+			speccialIssue.schema:setText(Engine[@"hash_4F9F1239CFD921FE"](f12_local0))
 		end
 	end)
 	speccialIssue:linkToElementModel(self, "specialIssueMovie", false, function(model)
@@ -124,7 +124,7 @@ LUI.createMenu.MPSpecialistHUBWeapons = function(f1_arg0, f1_arg1)
 		end
 	end)
 	speccialIssue:linkToElementModel(speccialIssue, "specialIssueMovie.hiResVideo.movieName", true, function(model, f15_arg1)
-		CoD.Menu.UpdateButtonShownState(f15_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f15_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	speccialIssue:registerEventHandler("gain_focus", function(element, event)
 		local f16_local0 = nil
@@ -133,10 +133,10 @@ LUI.createMenu.MPSpecialistHUBWeapons = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f16_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f16_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(speccialIssue, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(speccialIssue, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if CoD.ModelUtility.IsSelfModelValueNonEmptyString(self, controller, "specialIssueMovie.hiResVideo.movieName") then
 			CoD.VideoStreamingUtility.SetupVoDMovie(controller, self, "specialIssueMovie.hiResVideo")
 			SetLoseFocusToElement(self, "speccialIssue", controller)
@@ -146,7 +146,7 @@ LUI.createMenu.MPSpecialistHUBWeapons = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if CoD.ModelUtility.IsSelfModelValueNonEmptyString(self, controller, "specialIssueMovie.hiResVideo.movieName") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		else
 			return false
@@ -158,19 +158,19 @@ LUI.createMenu.MPSpecialistHUBWeapons = function(f1_arg0, f1_arg1)
 	tips:setAlpha(0)
 	tips.schema:setText("")
 	tips.schemaHeader:setAlpha(0)
-	tips.itemName:setText(LocalizeToUpperString(0x8004CEB4C794986))
-	tips.mainHeader:setText(LocalizeToUpperString(0x28040DA29EA28E3))
+	tips.itemName:setText(LocalizeToUpperString(@"hash_28004CEB4C794986"))
+	tips.mainHeader:setText(LocalizeToUpperString(@"menu/in_action"))
 	tips:linkToElementModel(self, "name", true, function(model)
 		local f19_local0 = model:get()
 		if f19_local0 ~= nil then
-			tips.description:setText(LocalizeIntoString(0x44724E9BB68E576, f19_local0))
+			tips.description:setText(LocalizeIntoString(@"hash_444724E9BB68E576", f19_local0))
 		end
 	end)
 	tips:linkToElementModel(self, "tipsMovie", false, function(model)
 		tips.VoDPreviewWidget:setModel(model, f1_arg0)
 	end)
 	tips:linkToElementModel(tips, "tipsMovie.hiResVideo.movieName", true, function(model, f21_arg1)
-		CoD.Menu.UpdateButtonShownState(f21_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f21_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	tips:registerEventHandler("gain_focus", function(element, event)
 		local f22_local0 = nil
@@ -179,10 +179,10 @@ LUI.createMenu.MPSpecialistHUBWeapons = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f22_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f22_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(tips, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(tips, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if CoD.ModelUtility.IsSelfModelValueNonEmptyString(self, controller, "tipsMovie.hiResVideo.movieName") then
 			CoD.VideoStreamingUtility.SetupVoDMovie(controller, self, "tipsMovie.hiResVideo")
 			SetLoseFocusToElement(self, "tips", controller)
@@ -192,7 +192,7 @@ LUI.createMenu.MPSpecialistHUBWeapons = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if CoD.ModelUtility.IsSelfModelValueNonEmptyString(self, controller, "tipsMovie.hiResVideo.movieName") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		else
 			return false
@@ -218,18 +218,18 @@ LUI.createMenu.MPSpecialistHUBWeapons = function(f1_arg0, f1_arg1)
 	self.FooterContainerFrontendRight = FooterContainerFrontendRight
 	local BarRight = LUI.UIImage.new(0.5, 0.5, 841, 899, 0.5, 0.5, -22, 6)
 	BarRight:setAlpha(0.3)
-	BarRight:setImage(RegisterImage(0x1A7EE226176D9CB))
+	BarRight:setImage(RegisterImage(@"uie_ui_hud_selectspawn_layout_boxside"))
 	self:addElement(BarRight)
 	self.BarRight = BarRight
 	local BarLeft = LUI.UIImage.new(0.5, 0.5, -899, -841, 0.5, 0.5, -22, 6)
 	BarLeft:setAlpha(0.3)
-	BarLeft:setImage(RegisterImage(0x1A7EE226176D9CB))
+	BarLeft:setImage(RegisterImage(@"uie_ui_hud_selectspawn_layout_boxside"))
 	self:addElement(BarLeft)
 	self.BarLeft = BarLeft
 	local LayoutBotStripe = LUI.UIImage.new(0.5, 0.5, -683, 693, 0.5, 0.5, 403.5, 431.5)
 	LayoutBotStripe:setAlpha(0.5)
-	LayoutBotStripe:setImage(RegisterImage(0x36E1590316DA74B))
-	LayoutBotStripe:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	LayoutBotStripe:setImage(RegisterImage(@"hash_36E1590316DA74B"))
+	LayoutBotStripe:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(LayoutBotStripe)
 	self.LayoutBotStripe = LayoutBotStripe
 	local LayoutCornerTL = LUI.UIImage.new(0.5, 0.5, -888, -832, 0.5, 0.5, -448, -392)
@@ -257,8 +257,8 @@ LUI.createMenu.MPSpecialistHUBWeapons = function(f1_arg0, f1_arg1)
 	self.LayoutCornerBR = LayoutCornerBR
 	local LayoutTopBar = LUI.UIImage.new(0.5, 0.5, -888, 888, 0.5, 0.5, -505.5, -485.5)
 	LayoutTopBar:setAlpha(0.6)
-	LayoutTopBar:setImage(RegisterImage(0x1426C1694668EB3))
-	LayoutTopBar:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	LayoutTopBar:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_layout_topbar"))
+	LayoutTopBar:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	LayoutTopBar:setShaderVector(0, 0, 0, 0, 0)
 	LayoutTopBar:setupNineSliceShader(6, 6)
 	self:addElement(LayoutTopBar)
@@ -268,14 +268,14 @@ LUI.createMenu.MPSpecialistHUBWeapons = function(f1_arg0, f1_arg1)
 	header:setAlpha(0.7)
 	header:setTTF("ttmussels_regular")
 	header:setLetterSpacing(14)
-	header:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	header:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(header)
 	self.header = header
 	local GridOutlineBL = LUI.UIImage.new(0.5, 0.5, -1033, -693, 0.5, 0.5, 189, 191)
 	GridOutlineBL:setAlpha(0.1)
 	GridOutlineBL:setZRot(90)
-	GridOutlineBL:setImage(RegisterImage(0x84B43D5B04D263A))
-	GridOutlineBL:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	GridOutlineBL:setImage(RegisterImage(@"hash_484B43D5B04D263A"))
+	GridOutlineBL:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	GridOutlineBL:setShaderVector(0, 0, 0, 0, 0)
 	GridOutlineBL:setupNineSliceShader(4, 2)
 	self:addElement(GridOutlineBL)
@@ -283,8 +283,8 @@ LUI.createMenu.MPSpecialistHUBWeapons = function(f1_arg0, f1_arg1)
 	local GridOutlineTL = LUI.UIImage.new(0.5, 0.5, -1033, -693, 0.5, 0.5, -209, -207)
 	GridOutlineTL:setAlpha(0.1)
 	GridOutlineTL:setZRot(90)
-	GridOutlineTL:setImage(RegisterImage(0x84B43D5B04D263A))
-	GridOutlineTL:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	GridOutlineTL:setImage(RegisterImage(@"hash_484B43D5B04D263A"))
+	GridOutlineTL:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	GridOutlineTL:setShaderVector(0, 0, 0, 0, 0)
 	GridOutlineTL:setupNineSliceShader(4, 2)
 	self:addElement(GridOutlineTL)
@@ -292,8 +292,8 @@ LUI.createMenu.MPSpecialistHUBWeapons = function(f1_arg0, f1_arg1)
 	local GridOutlineBR = LUI.UIImage.new(0.5, 0.5, 704, 1044, 0.5, 0.5, 190, 192)
 	GridOutlineBR:setAlpha(0.1)
 	GridOutlineBR:setZRot(90)
-	GridOutlineBR:setImage(RegisterImage(0x84B43D5B04D263A))
-	GridOutlineBR:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	GridOutlineBR:setImage(RegisterImage(@"hash_484B43D5B04D263A"))
+	GridOutlineBR:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	GridOutlineBR:setShaderVector(0, 0, 0, 0, 0)
 	GridOutlineBR:setupNineSliceShader(4, 2)
 	self:addElement(GridOutlineBR)
@@ -301,8 +301,8 @@ LUI.createMenu.MPSpecialistHUBWeapons = function(f1_arg0, f1_arg1)
 	local GridOutlineTR = LUI.UIImage.new(0.5, 0.5, 704, 1044, 0.5, 0.5, -207, -205)
 	GridOutlineTR:setAlpha(0.1)
 	GridOutlineTR:setZRot(90)
-	GridOutlineTR:setImage(RegisterImage(0x84B43D5B04D263A))
-	GridOutlineTR:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	GridOutlineTR:setImage(RegisterImage(@"hash_484B43D5B04D263A"))
+	GridOutlineTR:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	GridOutlineTR:setShaderVector(0, 0, 0, 0, 0)
 	GridOutlineTR:setupNineSliceShader(4, 2)
 	self:addElement(GridOutlineTR)
@@ -316,27 +316,27 @@ LUI.createMenu.MPSpecialistHUBWeapons = function(f1_arg0, f1_arg1)
 	local DividerCenter = LUI.UIImage.new(0.5, 0.5, -247, 245, 0, 0, 555, 561)
 	DividerCenter:setAlpha(0.3)
 	DividerCenter:setZRot(90)
-	DividerCenter:setImage(RegisterImage(0x805FC715189E506))
-	DividerCenter:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	DividerCenter:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_info_dotline"))
+	DividerCenter:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	DividerCenter:setShaderVector(0, 1.5, 0, 0, 0)
 	self:addElement(DividerCenter)
 	self.DividerCenter = DividerCenter
 	weapon:appendEventHandler("input_source_changed", weapon.schema.__schema_FullPath)
 	local f1_local24 = weapon
 	local f1_local25 = weapon.subscribeToModel
-	local f1_local26 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	local f1_local26 = Engine[@"getmodelforcontroller"](f1_arg0)
 	f1_local25(f1_local24, f1_local26.LastInput, weapon.schema.__schema_FullPath)
 	self.header:linkToElementModel(self, "name", true, function(model)
 		local f26_local0 = model:get()
 		if f26_local0 ~= nil then
-			header:setText(LocalizeToUpperString(LocalizeIntoString(0xD39A0B9A6D35B18, f26_local0)))
+			header:setText(LocalizeToUpperString(LocalizeIntoString(@"hash_6D39A0B9A6D35B18", f26_local0)))
 		end
 	end)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		GoBack(self, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 		return true
 	end, false)
 	LUI.OverrideFunction_CallOriginalFirst(self, "close", function(element)

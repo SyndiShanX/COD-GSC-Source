@@ -20,8 +20,8 @@ CoD.ListItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5
 	Title:setText("")
 	Title:setTTF("dinnext_regular")
 	Title:setLetterSpacing(1)
-	Title:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Title:setAlignment(Enum[0x7A5123B654282D2][0x6ED4298C93DC5ED])
+	Title:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Title:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
 	self:addElement(Title)
 	self.Title = Title
 	local Glow = CoD.PC_StartMenu_Options_Glow.new(f1_arg0, f1_arg1, 0, 0, 0, 40, 0, 1, 0, 0)
@@ -39,7 +39,7 @@ CoD.ListItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5
 	})
 	local Lock = Tick
 	local GlowAdd = Tick.subscribeToModel
-	local f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
 	GlowAdd(Lock, f1_local7.PlayerSettingsUpdate, function(f3_arg0)
 		f1_arg0:updateElementState(Tick, {
 			name = "model_validation",
@@ -50,20 +50,20 @@ CoD.ListItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5
 		})
 	end, false)
 	Tick:setAlpha(0.75)
-	Tick:setRFTMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Tick:setRFTMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Tick)
 	self.Tick = Tick
 	GlowAdd = LUI.UIImage.new(0, 0, -33, 95, 0, 0, -31, 97)
 	GlowAdd:setAlpha(0)
 	GlowAdd:setZRot(-90)
 	GlowAdd:setScale(0.35, 0.52)
-	GlowAdd:setImage(RegisterImage(0xAD405802E3EEE94))
-	GlowAdd:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	GlowAdd:setImage(RegisterImage(@"uie_icon_frontend_navigation_glowmed"))
+	GlowAdd:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(GlowAdd)
 	self.GlowAdd = GlowAdd
 	Lock = LUI.UIImage.new(1, 1, -372, -350, 0.5, 0.5, -12.5, 12.5)
 	Lock:setAlpha(0)
-	Lock:setImage(RegisterImage(0xB8AD8D12CEB707D))
+	Lock:setImage(RegisterImage(@"uie_icon_locks_lock_01"))
 	self:addElement(Lock)
 	self.Lock = Lock
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)

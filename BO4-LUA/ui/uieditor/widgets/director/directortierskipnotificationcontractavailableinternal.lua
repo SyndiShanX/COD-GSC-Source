@@ -13,22 +13,22 @@ CoD.DirectorTierSkipNotificationContractAvailableInternal.new = function(f1_arg0
 	self.Backing = Backing
 	local Header = LUI.UIText.new(0, 0, 56, 642, 0, 0, 5, 29)
 	Header:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
-	Header:setText(LocalizeToUpperString(0x7AA3CA056EF6DC5))
+	Header:setText(LocalizeToUpperString(@"hash_77AA3CA056EF6DC5"))
 	Header:setTTF("ttmussels_regular")
-	Header:setMaterial(LUI.UIImage.GetCachedMaterial(0x71E049B161CD00A))
+	Header:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_171E049B161CD00A"))
 	Header:setLetterSpacing(3)
-	Header:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Header:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	Header:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Header:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	self:addElement(Header)
 	self.Header = Header
 	local Description = LUI.UIText.new(0, 0, 56, 642, 0, 0, 33.5, 49.5)
 	Description:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
-	Description:setText(CoD.WZUtility.TrialSpecificTierSkip(0x20765F8B6C184AA))
+	Description:setText(CoD.WZUtility.TrialSpecificTierSkip(@"hash_120765F8B6C184AA"))
 	Description:setTTF("dinnext_regular")
 	Description:setLetterSpacing(1)
 	Description:setLineSpacing(1)
-	Description:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Description:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Description:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Description:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(Description)
 	self.Description = Description
 	self:mergeStateConditions({
@@ -61,7 +61,7 @@ CoD.DirectorTierSkipNotificationContractAvailableInternal.__resetProperties = fu
 	f5_arg0.Description:completeAnimation()
 	f5_arg0.Header:completeAnimation()
 	f5_arg0.Description:setTopBottom(0, 0, 33.5, 49.5)
-	f5_arg0.Description:setText(CoD.WZUtility.TrialSpecificTierSkip(0x20765F8B6C184AA))
+	f5_arg0.Description:setText(CoD.WZUtility.TrialSpecificTierSkip(@"hash_120765F8B6C184AA"))
 	f5_arg0.Header:setTopBottom(0, 0, 5, 29)
 end
 CoD.DirectorTierSkipNotificationContractAvailableInternal.__clipsPerState = {
@@ -76,7 +76,7 @@ CoD.DirectorTierSkipNotificationContractAvailableInternal.__clipsPerState = {
 			f7_arg0:__resetProperties()
 			f7_arg0:setupElementClipCounter(1)
 			f7_arg0.Description:completeAnimation()
-			f7_arg0.Description:setText(CoD.WZUtility.TrialSpecificTierSkip(0xF8EF1BE7608E431))
+			f7_arg0.Description:setText(CoD.WZUtility.TrialSpecificTierSkip(@"hash_6F8EF1BE7608E431"))
 			f7_arg0.clipFinished(f7_arg0.Description)
 		end,
 	},

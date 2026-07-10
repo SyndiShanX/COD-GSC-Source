@@ -19,19 +19,19 @@ CoD.ZMTalismanStatusButtonInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	self:addElement(Talisman)
 	self.Talisman = Talisman
 	local BannerBG = LUI.UIImage.new(0.5, 0.5, -45, 45, 1, 1, -61, -16)
-	BannerBG:setImage(RegisterImage(0xA938C74C48DDB56))
+	BannerBG:setImage(RegisterImage(@"hash_2A938C74C48DDB56"))
 	self:addElement(BannerBG)
 	self.BannerBG = BannerBG
 	local Brackets = LUI.UIImage.new(0, 0, 0, 216, 0, 0, 0, 216)
 	Brackets:setRGB(ColorSet.T8__BEIGE__HEADER.r, ColorSet.T8__BEIGE__HEADER.g, ColorSet.T8__BEIGE__HEADER.b)
 	Brackets:setAlpha(0.5)
-	Brackets:setImage(RegisterImage(0x61E31A40BB33DD9))
+	Brackets:setImage(RegisterImage(@"hash_661E31A40BB33DD9"))
 	self:addElement(Brackets)
 	self.Brackets = Brackets
 	local Dots = LUI.UIImage.new(0, 0, 0, 216, 0, 0, 0, 216)
 	Dots:setRGB(0.59, 0.13, 0.13)
 	Dots:setAlpha(0.3)
-	Dots:setImage(RegisterImage(0xEC502DE0EAF1860))
+	Dots:setImage(RegisterImage(@"hash_4EC502DE0EAF1860"))
 	self:addElement(Dots)
 	self.Dots = Dots
 	local ElixirCount = CoD.EquippedBGBCount.new(f1_arg0, f1_arg1, 0.5, 0.5, -39, 39, 1, 1, -57, -33)
@@ -39,7 +39,7 @@ CoD.ZMTalismanStatusButtonInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 		{
 			stateName = "Hidden",
 			condition = function(menu, element, event)
-				return not CoD.CACUtility.IsCACItemConsumable(menu, element, Enum[0x6EB546760F890D2][0x5544C104CD15F10])
+				return not CoD.CACUtility.IsCACItemConsumable(menu, element, Enum[@"statindexoffset"][@"hash_15544C104CD15F10"])
 			end,
 		},
 	})
@@ -59,7 +59,7 @@ CoD.ZMTalismanStatusButtonInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	ElixirCount:linkToElementModel(self, "itemIndex", true, function(model)
 		local f6_local0 = model:get()
 		if f6_local0 ~= nil then
-			ElixirCount.Count:setText(CoD.CACUtility.GetConsumableCountFromIndex(f1_arg1, f1_arg0, Enum[0x6EB546760F890D2][0x5544C104CD15F10], f6_local0))
+			ElixirCount.Count:setText(CoD.CACUtility.GetConsumableCountFromIndex(f1_arg1, f1_arg0, Enum[@"statindexoffset"][@"hash_15544C104CD15F10"], f6_local0))
 		end
 	end)
 	self:addElement(ElixirCount)
@@ -75,7 +75,7 @@ CoD.ZMTalismanStatusButtonInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	})
 	local f1_local7 = CommonButtonOutline
 	local Lock = CommonButtonOutline.subscribeToModel
-	local f1_local9 = Engine[0x8DF2E5447F384B9]()
+	local f1_local9 = Engine[@"getglobalmodel"]()
 	Lock(f1_local7, f1_local9["lobbyRoot.lobbyNetworkMode"], function(f8_arg0)
 		f1_arg0:updateElementState(CommonButtonOutline, {
 			name = "model_validation",
@@ -87,7 +87,7 @@ CoD.ZMTalismanStatusButtonInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	end, false)
 	f1_local7 = CommonButtonOutline
 	Lock = CommonButtonOutline.subscribeToModel
-	f1_local9 = Engine[0x8DF2E5447F384B9]()
+	f1_local9 = Engine[@"getglobalmodel"]()
 	Lock(f1_local7, f1_local9["lobbyRoot.lobbyNav"], function(f9_arg0)
 		f1_arg0:updateElementState(CommonButtonOutline, {
 			name = "model_validation",
@@ -103,7 +103,7 @@ CoD.ZMTalismanStatusButtonInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	self.CommonButtonOutline = CommonButtonOutline
 	Lock = LUI.UIImage.new(0.5, 0.5, -25, 25, 0.5, 0.5, -25, 25)
 	Lock:setAlpha(0)
-	Lock:setImage(RegisterImage(0xE1E7C490B2BA4FB))
+	Lock:setImage(RegisterImage(@"uie_ui_icon_global_lock"))
 	self:addElement(Lock)
 	self.Lock = Lock
 	self:mergeStateConditions({
@@ -116,7 +116,7 @@ CoD.ZMTalismanStatusButtonInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	})
 	f1_local9 = self
 	f1_local7 = self.subscribeToModel
-	local f1_local10 = Engine[0x8DF2E5447F384B9]()
+	local f1_local10 = Engine[@"getglobalmodel"]()
 	f1_local7(f1_local9, f1_local10["lobbyRoot.lobbyNetworkMode"], function(f11_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -128,7 +128,7 @@ CoD.ZMTalismanStatusButtonInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	end, false)
 	f1_local9 = self
 	f1_local7 = self.subscribeToModel
-	f1_local10 = Engine[0x8DF2E5447F384B9]()
+	f1_local10 = Engine[@"getglobalmodel"]()
 	f1_local7(f1_local9, f1_local10["lobbyRoot.lobbyNav"], function(f12_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

@@ -6,19 +6,19 @@ local PostLoadFunc = function(self, controller)
 	end
 	local f1_local1 = self
 	local f1_local2 = self.subscribeToModel
-	local f1_local3 = Engine[0x4DF5CFBC1771947](controller)
+	local f1_local3 = Engine[@"getmodelforcontroller"](controller)
 	f1_local2(f1_local1, f1_local3:create("Clients.clientCount"), function(f3_arg0)
 		f1_local0()
 	end)
 	f1_local1 = self
 	f1_local2 = self.subscribeToModel
-	f1_local3 = Engine[0x4DF5CFBC1771947](controller)
+	f1_local3 = Engine[@"getmodelforcontroller"](controller)
 	f1_local2(f1_local1, f1_local3:create("Clients.clientChangedTeam"), function(f4_arg0)
 		f1_local0()
 	end)
 	f1_local1 = self
 	f1_local2 = self.subscribeToModel
-	f1_local3 = Engine[0x4DF5CFBC1771947](controller)
+	f1_local3 = Engine[@"getmodelforcontroller"](controller)
 	f1_local2(f1_local1, f1_local3:create("CharacterSelection.clientUpdated"), function(f5_arg0)
 		f1_local0()
 	end)
@@ -38,7 +38,7 @@ CoD.StartMenu_ChangeTeam.new = function(f6_arg0, f6_arg1, f6_arg2, f6_arg3, f6_a
 	playerList:setTopBottom(0, 0, 150, 850)
 	playerList:setWidgetType(CoD.InGamePlayerListRow)
 	playerList:setVerticalCount(18)
-	playerList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	playerList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	playerList:setDataSource("InGamePlayerListRowData")
 	self:addElement(playerList)
 	self.playerList = playerList
@@ -49,10 +49,10 @@ CoD.StartMenu_ChangeTeam.new = function(f6_arg0, f6_arg1, f6_arg2, f6_arg3, f6_a
 	buttonList:setHorizontalCount(3)
 	buttonList:setVerticalCount(2)
 	buttonList:setSpacing(26)
-	buttonList:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
+	buttonList:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
 	buttonList:setDataSource("ChangeTeamOptions")
 	buttonList:linkToElementModel(buttonList, "disabled", true, function(model, f7_arg1)
-		CoD.Menu.UpdateButtonShownState(f7_arg1, f6_arg0, f6_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f7_arg1, f6_arg0, f6_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	buttonList:registerEventHandler("gain_focus", function(element, event)
 		local f8_local0 = nil
@@ -61,10 +61,10 @@ CoD.StartMenu_ChangeTeam.new = function(f6_arg0, f6_arg1, f6_arg2, f6_arg3, f6_a
 		elseif element.super.gainFocus then
 			f8_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f6_arg0, f6_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f6_arg0, f6_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f8_local0
 	end)
-	f6_arg0:AddButtonCallbackFunction(buttonList, f6_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f6_arg0:AddButtonCallbackFunction(buttonList, f6_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if not CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "disabled") then
 			ProcessListAction(self, element, controller, menu)
 			return true
@@ -72,7 +72,7 @@ CoD.StartMenu_ChangeTeam.new = function(f6_arg0, f6_arg1, f6_arg2, f6_arg3, f6_a
 		end
 	end, function(element, menu, controller)
 		if not CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "disabled") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x2641978FD3DC17A, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_72641978FD3DC17A", nil, "ui_confirm")
 			return true
 		else
 			return false

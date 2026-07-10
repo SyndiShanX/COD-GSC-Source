@@ -7,14 +7,14 @@ CoD.BM_GoldBarMed.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 	self.id = "BM_GoldBarMed"
 	self.soundSet = "default"
 	local backing = LUI.UIImage.new(0, 1, 0, 0, 0, 0, 0, 30)
-	backing:setImage(RegisterImage(0x5A386F24ED7BB86))
-	backing:setMaterial(LUI.UIImage.GetCachedMaterial(0x44484DDFAF5C093))
+	backing:setImage(RegisterImage(@"ui_icon_blackmarket_lockbar_large"))
+	backing:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_normal"))
 	backing:setShaderVector(0, 0, 0, 0, 0)
 	backing:setupNineSliceShader(150, 53)
 	self:addElement(backing)
 	self.backing = backing
 	local skull = LUI.UIImage.new(0.5, 0.5, -32, 32, 0.5, 0.5, -32, 32)
-	skull:setImage(RegisterImage(0x5B182E59E86600C))
+	skull:setImage(RegisterImage(@"ui_icon_blackmarket_lockskull_128"))
 	self:addElement(skull)
 	self.skull = skull
 	if PostLoadFunc then

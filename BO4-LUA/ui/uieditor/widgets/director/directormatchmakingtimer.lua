@@ -20,7 +20,7 @@ CoD.DirectorMatchmakingTimer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	})
 	local MatchStartLabel = DirectorMatchmakingTimerInternal
 	local MatchStartTime = DirectorMatchmakingTimerInternal.subscribeToModel
-	local IntermissionTime = Engine[0x8DF2E5447F384B9]()
+	local IntermissionTime = Engine[@"getglobalmodel"]()
 	MatchStartTime(MatchStartLabel, IntermissionTime["lobbyRoot.publicLobby.matchmakingElapsedTime"], function(f3_arg0)
 		f1_arg0:updateElementState(DirectorMatchmakingTimerInternal, {
 			name = "model_validation",
@@ -32,7 +32,7 @@ CoD.DirectorMatchmakingTimer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	end, false)
 	MatchStartLabel = DirectorMatchmakingTimerInternal
 	MatchStartTime = DirectorMatchmakingTimerInternal.subscribeToModel
-	IntermissionTime = Engine[0x8DF2E5447F384B9]()
+	IntermissionTime = Engine[@"getglobalmodel"]()
 	MatchStartTime(MatchStartLabel, IntermissionTime["lobbyRoot.publicLobby.matchmakingEstimatedTime"], function(f4_arg0)
 		f1_arg0:updateElementState(DirectorMatchmakingTimerInternal, {
 			name = "model_validation",
@@ -48,8 +48,8 @@ CoD.DirectorMatchmakingTimer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	MatchStartTime:setAlpha(0)
 	MatchStartTime:setTTF("ttmussels_demibold")
 	MatchStartTime:setLetterSpacing(6)
-	MatchStartTime:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	MatchStartTime:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	MatchStartTime:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	MatchStartTime:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	MatchStartTime:subscribeToGlobalModel(f1_arg1, "LobbyRoot", "publicLobby.matchmakingStartTime", function(model)
 		local f5_local0 = model:get()
 		if f5_local0 ~= nil then
@@ -60,11 +60,11 @@ CoD.DirectorMatchmakingTimer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	self.MatchStartTime = MatchStartTime
 	MatchStartLabel = LUI.UIText.new(0, 0, 10, 310, 0, 0, 30, 48)
 	MatchStartLabel:setAlpha(0)
-	MatchStartLabel:setText(LocalizeToUpperString(0x55976A26B75E99D))
+	MatchStartLabel:setText(LocalizeToUpperString(@"hash_555976A26B75E99D"))
 	MatchStartLabel:setTTF("ttmussels_demibold")
 	MatchStartLabel:setLetterSpacing(6)
-	MatchStartLabel:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	MatchStartLabel:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	MatchStartLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	MatchStartLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(MatchStartLabel)
 	self.MatchStartLabel = MatchStartLabel
 	IntermissionTime = LUI.UIText.new(0, 0, 10, 310, 0, 0, 10, 28)
@@ -72,8 +72,8 @@ CoD.DirectorMatchmakingTimer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	IntermissionTime:setAlpha(0)
 	IntermissionTime:setTTF("ttmussels_demibold")
 	IntermissionTime:setLetterSpacing(6)
-	IntermissionTime:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	IntermissionTime:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	IntermissionTime:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	IntermissionTime:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	IntermissionTime:subscribeToGlobalModel(f1_arg1, "LobbyRoot", "publicLobby.matchmakingIntermissionTime", function(model)
 		local f6_local0 = model:get()
 		if f6_local0 ~= nil then
@@ -85,11 +85,11 @@ CoD.DirectorMatchmakingTimer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	local IntermissionLabel = LUI.UIText.new(0, 0, 10, 310, 0, 0, 30, 48)
 	IntermissionLabel:setRGB(0.92, 0.92, 0.92)
 	IntermissionLabel:setAlpha(0)
-	IntermissionLabel:setText(LocalizeToUpperString(0xEF8850D6ECCE2FA))
+	IntermissionLabel:setText(LocalizeToUpperString(@"hash_4EF8850D6ECCE2FA"))
 	IntermissionLabel:setTTF("ttmussels_demibold")
 	IntermissionLabel:setLetterSpacing(6)
-	IntermissionLabel:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	IntermissionLabel:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	IntermissionLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	IntermissionLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(IntermissionLabel)
 	self.IntermissionLabel = IntermissionLabel
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)

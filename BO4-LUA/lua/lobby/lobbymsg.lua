@@ -62,7 +62,7 @@ LobbyMsg.OnTestHostPacket = function(f3_arg0, f3_arg1, f3_arg2, f3_arg3, f3_arg4
 end
 LobbyMsg.OnTestClientPacket = function(f4_arg0)
 	local f4_local0 = 0
-	local f4_local1 = Engine[0xE42CF04B7DDD5DE](LobbyMsg.EncodeToLobbyMsgType(LobbyMsg.LuaMsgType.LUA_MESSAGE_TYPE_TEST), Enum[0x7CA2DE5266A94BF][0xC46B73E8E18BA2], Engine[0xC3DF042E7492B66](Enum[0x7CA2DE5266A94BF][0xC46B73E8E18BA2]))
+	local f4_local1 = Engine[@"hash_1E42CF04B7DDD5DE"](LobbyMsg.EncodeToLobbyMsgType(LobbyMsg.LuaMsgType.LUA_MESSAGE_TYPE_TEST), Enum[@"lobbymodule"][@"lobby_module_client"], Engine[@"lobbygetcontrollinglobbysession"](Enum[@"lobbymodule"][@"lobby_module_client"]))
 	local f4_local2 = {
 		integer32 = -23345,
 		uInteger32 = 23345,
@@ -71,16 +71,16 @@ LobbyMsg.OnTestClientPacket = function(f4_arg0)
 		ushort = 2437,
 		character = -56,
 		uCharacter = 132,
-		int64 = Engine[0x8506F73B393062F](123456792) + Engine[0x8506F73B393062F](123456792),
-		uInt64 = Engine[0x8506F73B393062F](11121314) * Engine[0x8506F73B393062F](11121314),
+		int64 = Engine[@"numbertouint64"](123456792) + Engine[@"numbertouint64"](123456792),
+		uInt64 = Engine[@"numbertouint64"](11121314) * Engine[@"numbertouint64"](11121314),
 		float = 3.14,
-		xuid = Engine[0x93B19E01B1FD1C7](0),
+		xuid = Engine[@"getxuid64"](0),
 		StringTest = "Hello Host",
-		testBigToSmall = Engine[0x8506F73B393062F](12345),
+		testBigToSmall = Engine[@"numbertouint64"](12345),
 	}
 	LobbyMsg.OnTestHostPacket(f4_local1, f4_local2.integer32, f4_local2.uInteger32, f4_local2.boolean, f4_local2.short, f4_local2.ushort, f4_local2.character, f4_local2.uCharacter, f4_local2.int64, f4_local2.uInt64, f4_local2.float, f4_local2.xuid, f4_local2.StringTest, f4_local2.testBigToSmall)
 	f4_local1:debugPrint()
-	f4_local1:sendTo(f4_local0, Enum[0x7CA2DE5266A94BF][0xF90DB2D4085A3E0], Enum[0xBF5D4C4954EF3E5][0xADB9CF01A956BFF])
+	f4_local1:sendTo(f4_local0, Enum[@"lobbymodule"][@"hash_3F90DB2D4085A3E0"], Enum[@"netchanmsgtype_e"][@"netchan_lobbygame_unreliable"])
 	f4_local1:free()
 end
 LobbyMsg.handleTestClientPacket = function(f5_arg0)
@@ -97,10 +97,10 @@ LobbyMsg.handleTestClientPacket = function(f5_arg0)
 	return f5_local4
 end
 LobbyMsg.ConvertToLuaMsgType = function(f6_arg0)
-	return f6_arg0 - Enum[0x3901A96E6973A52][0x8D9789F91FCDB78]
+	return f6_arg0 - Enum[@"msgtype"][@"hash_28D9789F91FCDB78"]
 end
 LobbyMsg.EncodeToLobbyMsgType = function(f7_arg0)
-	return f7_arg0 + Enum[0x3901A96E6973A52][0x8D9789F91FCDB78]
+	return f7_arg0 + Enum[@"msgtype"][@"hash_28D9789F91FCDB78"]
 end
 LobbyMsg.PackageLobbyType = function(f8_arg0, f8_arg1, f8_arg2, f8_arg3)
 	local f8_local0, f8_local1 = LobbyMsg.PackageMessage(f8_arg1, f8_arg0, f8_arg0.packageInt8, "lobbyType", f8_arg3)

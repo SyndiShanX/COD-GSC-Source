@@ -39,7 +39,7 @@ LUI.createMenu.LiveEventViewer = function(f1_arg0, f1_arg1)
 	self.__on_menuOpened_self = function(f3_arg0, f3_arg1, f3_arg2, f3_arg3)
 		local f3_local0 = self
 		SetElementStateByElementName(self, "LiveEventViewerMovieAndBackground", f3_arg1, "Windowed")
-		UpdateButtonPromptState(f3_arg2, f3_local0, f3_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
+		UpdateButtonPromptState(f3_arg2, f3_local0, f3_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
 		MenuHidesFreeCursor(f3_arg2, f3_arg1)
 	end
 	f1_local1:addMenuOpenedCallback(self.__on_menuOpened_self)

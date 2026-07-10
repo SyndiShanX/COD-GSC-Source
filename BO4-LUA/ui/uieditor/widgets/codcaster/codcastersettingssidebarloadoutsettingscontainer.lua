@@ -17,7 +17,7 @@ CoD.CodCasterSettingsSideBarLoadoutSettingsContainer.new = function(f1_arg0, f1_
 	ButtonList:setWidgetType(CoD.StartMenu_Options_SettingSlider)
 	ButtonList:setVerticalCount(13)
 	ButtonList:setSpacing(6)
-	ButtonList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	ButtonList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	ButtonList:registerEventHandler("list_item_gain_focus", function(element, event)
 		local f2_local0 = nil
 		ProcessListAction(self, element, f1_arg1, f1_arg0)

@@ -19,7 +19,7 @@ CoD.ListButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_ar
 	Text:linkToElementModel(self, "displayText", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			Text.Text0:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			Text.Text0:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	self:addElement(Text)
@@ -106,7 +106,7 @@ CoD.ListButton.__clipsPerState = {
 			f12_arg0:setupElementClipCounter(2)
 			local f12_local0 = function(f13_arg0)
 				local f13_local0 = function(f14_arg0)
-					f14_arg0:beginAnimation(500, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f14_arg0:beginAnimation(500, Enum[@"luitween"][@"luitween_ease_both"])
 					f14_arg0:setAlpha(1)
 					f14_arg0:registerEventHandler("transition_complete_keyframe", f12_arg0.clipFinished)
 				end
@@ -119,7 +119,7 @@ CoD.ListButton.__clipsPerState = {
 			f12_arg0.Background:setAlpha(1)
 			f12_local0(f12_arg0.Background)
 			local f12_local1 = function(f15_arg0)
-				f12_arg0.Text:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f12_arg0.Text:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 				f12_arg0.Text:registerEventHandler("interrupted_keyframe", f12_arg0.clipInterrupted)
 				f12_arg0.Text:registerEventHandler("transition_complete_keyframe", f12_arg0.clipFinished)
 			end

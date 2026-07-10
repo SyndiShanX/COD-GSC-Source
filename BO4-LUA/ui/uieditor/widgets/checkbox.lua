@@ -26,18 +26,18 @@ CoD.checkbox.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5
 	self.checkboxBacking = checkboxBacking
 	local CheckboxBkg = LUI.UIImage.new(0, 0, 22, 50, 0, 0, 13, 39)
 	CheckboxBkg:setAlpha(0)
-	CheckboxBkg:setImage(RegisterImage(0x8598719B0D5778E))
+	CheckboxBkg:setImage(RegisterImage(@"uie_t7_menu_cacselection_checkbox_empty"))
 	self:addElement(CheckboxBkg)
 	self.CheckboxBkg = CheckboxBkg
 	local checkboxCheck = LUI.UIImage.new(0, 0, 22, 50, 0, 0, 13, 39)
 	checkboxCheck:setRGB(1, 0.45, 0)
-	checkboxCheck:setImage(RegisterImage(0x7A44A1F2889C2B8))
+	checkboxCheck:setImage(RegisterImage(@"uie_t7_menu_cacselection_checkbox"))
 	self:addElement(checkboxCheck)
 	self.checkboxCheck = checkboxCheck
 	local labelText = LUI.UIText.new(0, 0, 70, 750, 0, 0, 7, 45)
-	labelText:setText(Engine[0xF9F1239CFD921FE](0x93E719493E9E18F))
+	labelText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	labelText:setTTF("default")
-	labelText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	labelText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(labelText)
 	self.labelText = labelText
 	local tooltip = CoD.StartMenu_Options_PC_KeyBinderTooltip.new(f1_arg0, f1_arg1, 0, 0, 776, 1076, 0, 0, -53, 97)

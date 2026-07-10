@@ -17,7 +17,7 @@ CoD.CodCasterLoadoutModulePrimaryWildcard.new = function(f1_arg0, f1_arg1, f1_ar
 	CodCasterLoadoutWildcards:setTopBottom(0, 0, 5, 65)
 	CodCasterLoadoutWildcards:setWidgetType(CoD.CodCasterLoadoutWildcard)
 	CodCasterLoadoutWildcards:setSpacing(6)
-	CodCasterLoadoutWildcards:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	CodCasterLoadoutWildcards:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	CodCasterLoadoutWildcards:setDataSource("WildcardPrimaryList")
 	CodCasterLoadoutWildcards:subscribeToGlobalModel(f1_arg1, "PerController", "wildcards.primaryCount", function(model)
 		local f2_local0 = model:get()

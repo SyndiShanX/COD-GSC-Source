@@ -10,11 +10,11 @@ CoD.ArenaLobbyButtonText.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local ButtonText = LUI.UIText.new(0.5, 0.5, -101.5, 101.5, 0.5, 0.5, -12, 12)
 	ButtonText:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
-	ButtonText:setText(LocalizeToUpperString(0xCBB14C4892283F2))
+	ButtonText:setText(LocalizeToUpperString(@"hash_7CBB14C4892283F2"))
 	ButtonText:setTTF("ttmussels_regular")
 	ButtonText:setLetterSpacing(3)
-	ButtonText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	ButtonText:setAlignment(Enum[0x7A5123B654282D2][0x6ED4298C93DC5ED])
+	ButtonText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	ButtonText:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
 	self:addElement(ButtonText)
 	self.ButtonText = ButtonText
 	self:mergeStateConditions({
@@ -27,13 +27,13 @@ CoD.ArenaLobbyButtonText.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 		{
 			stateName = "Unranked",
 			condition = function(menu, element, event)
-				return CoD.ArenaUtility.CurrentArenaEventTypeEquals(self, Enum[0xC0EA92D04BC003B][0x185075D2D3D8497])
+				return CoD.ArenaUtility.CurrentArenaEventTypeEquals(self, Enum[@"hash_6C0EA92D04BC003B"][@"hash_4185075D2D3D8497"])
 			end,
 		},
 	})
 	local f1_local2 = self
 	local f1_local3 = self.subscribeToModel
-	local f1_local4 = Engine[0x8DF2E5447F384B9]()
+	local f1_local4 = Engine[@"getglobalmodel"]()
 	f1_local3(f1_local2, f1_local4["lobbyRoot.lobbyNav"], function(f4_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -45,7 +45,7 @@ CoD.ArenaLobbyButtonText.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	end, false)
 	f1_local2 = self
 	f1_local3 = self.subscribeToModel
-	f1_local4 = Engine[0x8DF2E5447F384B9]()
+	f1_local4 = Engine[@"getglobalmodel"]()
 	f1_local3(f1_local2, f1_local4["lobbyPlaylist.name"], function(f5_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -62,7 +62,7 @@ CoD.ArenaLobbyButtonText.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 end
 CoD.ArenaLobbyButtonText.__resetProperties = function(f6_arg0)
 	f6_arg0.ButtonText:completeAnimation()
-	f6_arg0.ButtonText:setText(LocalizeToUpperString(0xCBB14C4892283F2))
+	f6_arg0.ButtonText:setText(LocalizeToUpperString(@"hash_7CBB14C4892283F2"))
 end
 CoD.ArenaLobbyButtonText.__clipsPerState = {
 	DefaultState = {
@@ -76,7 +76,7 @@ CoD.ArenaLobbyButtonText.__clipsPerState = {
 			f8_arg0:__resetProperties()
 			f8_arg0:setupElementClipCounter(1)
 			f8_arg0.ButtonText:completeAnimation()
-			f8_arg0.ButtonText:setText(LocalizeToUpperString(0x3E56959987630DF))
+			f8_arg0.ButtonText:setText(LocalizeToUpperString(@"hash_33E56959987630DF"))
 			f8_arg0.clipFinished(f8_arg0.ButtonText)
 		end,
 	},

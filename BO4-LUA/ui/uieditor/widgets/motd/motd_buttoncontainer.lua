@@ -17,7 +17,7 @@ CoD.MOTD_ButtonContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 			Abtn.buttonPromptImage:setImage(RegisterImage(f2_local0))
 		end
 	end)
-	Abtn:linkToElementModel(self, "" .. Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], false, function(model)
+	Abtn:linkToElementModel(self, "" .. Enum[@"luibutton"][@"lui_key_xba_pscross"], false, function(model)
 		Abtn:setModel(model, f1_arg1)
 	end)
 	LUI.OverrideFunction_CallOriginalFirst(Abtn, "setState", function(element, controller, f4_arg2, f4_arg3, f4_arg4)
@@ -36,7 +36,7 @@ CoD.MOTD_ButtonContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 			Bbtn.buttonPromptImage:setImage(RegisterImage(f5_local0))
 		end
 	end)
-	Bbtn:linkToElementModel(self, "" .. Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], false, function(model)
+	Bbtn:linkToElementModel(self, "" .. Enum[@"luibutton"][@"lui_key_xbb_pscircle"], false, function(model)
 		Bbtn:setModel(model, f1_arg1)
 	end)
 	LUI.OverrideFunction_CallOriginalFirst(Bbtn, "setState", function(element, controller, f7_arg2, f7_arg3, f7_arg4)

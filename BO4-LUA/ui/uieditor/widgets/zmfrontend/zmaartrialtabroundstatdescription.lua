@@ -9,11 +9,11 @@ CoD.ZMAARTrialTabRoundStatDescription.new = function(f1_arg0, f1_arg1, f1_arg2, 
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Desc = LUI.UIText.new(0, 0, 0, 337, 1, 1, -16, -2)
 	Desc:setRGB(0.92, 0.92, 0.92)
-	Desc:setText(Engine[0xF9F1239CFD921FE](0xF762115B6FAF2DB))
+	Desc:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_2F762115B6FAF2DB"))
 	Desc:setTTF("skorzhen")
 	Desc:setLineSpacing(1)
-	Desc:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Desc:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Desc:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Desc:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(Desc)
 	self.Desc = Desc
 	self:mergeStateConditions({

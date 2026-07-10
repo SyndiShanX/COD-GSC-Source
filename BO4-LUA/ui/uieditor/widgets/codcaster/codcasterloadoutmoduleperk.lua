@@ -17,7 +17,7 @@ CoD.CodCasterLoadoutModulePerk.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	CodCasterLoadoutPerkList:setTopBottom(0, 0, 5, 65)
 	CodCasterLoadoutPerkList:setWidgetType(CoD.CodCasterLoadoutPerks)
 	CodCasterLoadoutPerkList:setSpacing(-5)
-	CodCasterLoadoutPerkList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	CodCasterLoadoutPerkList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	CodCasterLoadoutPerkList:setDataSource("PerkList")
 	CodCasterLoadoutPerkList:subscribeToGlobalModel(f1_arg1, "PerController", "talents.perkCount", function(model)
 		local f2_local0 = model:get()

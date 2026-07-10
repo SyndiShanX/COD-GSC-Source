@@ -17,8 +17,8 @@ CoD.SpecialEventWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	HeaderText:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	HeaderText:setTTF("ttmussels_regular")
 	HeaderText:setLetterSpacing(4)
-	HeaderText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	HeaderText:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	HeaderText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	HeaderText:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	HeaderText:linkToElementModel(self, "eventName", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -29,21 +29,21 @@ CoD.SpecialEventWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	self.HeaderText = HeaderText
 	local SpecialSubtitleText = LUI.UIText.new(0, 0, 9, 215, 0, 0, 35, 53)
 	SpecialSubtitleText:setRGB(ColorSet.T8_PC_CHAT_PARTY.r, ColorSet.T8_PC_CHAT_PARTY.g, ColorSet.T8_PC_CHAT_PARTY.b)
-	SpecialSubtitleText:setText(LocalizeToUpperString(0x9D2993B90351AC9))
+	SpecialSubtitleText:setText(LocalizeToUpperString(@"hash_9D2993B90351AC9"))
 	SpecialSubtitleText:setTTF("ttmussels_regular")
-	SpecialSubtitleText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	SpecialSubtitleText:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	SpecialSubtitleText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	SpecialSubtitleText:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	self:addElement(SpecialSubtitleText)
 	self.SpecialSubtitleText = SpecialSubtitleText
 	local TimerText = LUI.UIText.new(0, 0, 215, 465, 0, 0, 35, 50)
 	TimerText:setRGB(ColorSet.T8__OCHRE.r, ColorSet.T8__OCHRE.g, ColorSet.T8__OCHRE.b)
 	TimerText:setTTF("ttmussels_demibold")
-	TimerText:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
-	TimerText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	TimerText:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
+	TimerText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	TimerText:subscribeToGlobalModel(f1_arg1, "AutoEvents", "zm_halloween_2018_timer", function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
-			TimerText:setText(LocalizeIntoStringIfNotEmpty(0xC0CE2452CF87DB1, f3_local0))
+			TimerText:setText(LocalizeIntoStringIfNotEmpty(@"hash_1C0CE2452CF87DB1", f3_local0))
 		end
 	end)
 	self:addElement(TimerText)
@@ -52,11 +52,11 @@ CoD.SpecialEventWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	NextDailyTimerText:setRGB(ColorSet.GroupName.r, ColorSet.GroupName.g, ColorSet.GroupName.b)
 	NextDailyTimerText:setAlpha(0)
 	NextDailyTimerText:setTTF("ttmussels_demibold")
-	NextDailyTimerText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	NextDailyTimerText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	NextDailyTimerText:subscribeToGlobalModel(f1_arg1, "AutoEvents", "zm_daily_callings_timer", function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
-			NextDailyTimerText:setText(LocalizeIntoStringIfNotEmpty(0xF79DED252995605, f4_local0))
+			NextDailyTimerText:setText(LocalizeIntoStringIfNotEmpty(@"hash_5F79DED252995605", f4_local0))
 		end
 	end)
 	self:addElement(NextDailyTimerText)
@@ -65,8 +65,8 @@ CoD.SpecialEventWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	StepText:setRGB(ColorSet.T8__OFF__GRAY.r, ColorSet.T8__OFF__GRAY.g, ColorSet.T8__OFF__GRAY.b)
 	StepText:setTTF("ttmussels_regular")
 	StepText:setLetterSpacing(1)
-	StepText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	StepText:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	StepText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	StepText:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	StepText:linkToElementModel(self, "stepProgress", true, function(model)
 		local f5_local0 = model:get()
 		if f5_local0 ~= nil then
@@ -83,11 +83,11 @@ CoD.SpecialEventWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	self.TaskInfo = TaskInfo
 	local RewardsHeader = LUI.UIText.new(0, 0, 12, 228, 0, 0, 224.5, 240.5)
 	RewardsHeader:setRGB(ColorSet.T8__OFF__GRAY.r, ColorSet.T8__OFF__GRAY.g, ColorSet.T8__OFF__GRAY.b)
-	RewardsHeader:setText(LocalizeToUpperString(0x2ACBA21D0C15241))
+	RewardsHeader:setText(LocalizeToUpperString(@"menu/rewards"))
 	RewardsHeader:setTTF("ttmussels_regular")
 	RewardsHeader:setLetterSpacing(1)
-	RewardsHeader:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	RewardsHeader:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	RewardsHeader:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	RewardsHeader:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	self:addElement(RewardsHeader)
 	self.RewardsHeader = RewardsHeader
 	local RewardQuantityText = CoD.SpecialEventRewardsWidget.new(f1_arg0, f1_arg1, 0, 0, 12, 465, 0, 0, 244.5, 344.5)
@@ -100,8 +100,8 @@ CoD.SpecialEventWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	local CompleteText = LUI.UIText.new(0.5, 0.5, -194, 194, 0.5, 0.5, -12, 12)
 	CompleteText:setAlpha(0)
 	CompleteText:setTTF("ttmussels_demibold")
-	CompleteText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	CompleteText:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	CompleteText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	CompleteText:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	CompleteText:linkToElementModel(self, "allTasksCompleteText", true, function(model)
 		local f8_local0 = model:get()
 		if f8_local0 ~= nil then
@@ -117,7 +117,7 @@ CoD.SpecialEventWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	SpecialEventPips:setWidgetType(CoD.SpecialEventProgressPip)
 	SpecialEventPips:setHorizontalCount(4)
 	SpecialEventPips:setSpacing(4)
-	SpecialEventPips:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
+	SpecialEventPips:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
 	SpecialEventPips:setDataSource("SpecialEventSteps")
 	self:addElement(SpecialEventPips)
 	self.SpecialEventPips = SpecialEventPips
@@ -129,7 +129,7 @@ CoD.SpecialEventWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	BarracksTimeDisplayText:subscribeToGlobalModel(f1_arg1, "AutoEvents", "zm_daily_callings_timer", function(model)
 		local f10_local0 = model:get()
 		if f10_local0 ~= nil then
-			BarracksTimeDisplayText.DailyTimerText:setText(LocalizeIntoStringIfNotEmpty(0xC0CE2452CF87DB1, f10_local0))
+			BarracksTimeDisplayText.DailyTimerText:setText(LocalizeIntoStringIfNotEmpty(@"hash_1C0CE2452CF87DB1", f10_local0))
 		end
 	end)
 	self:addElement(BarracksTimeDisplayText)

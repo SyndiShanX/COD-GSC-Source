@@ -15,7 +15,7 @@ LUI.createMenu.AAR_LeaguePlay_PlacementMatchesProgress = function(f1_arg0, f1_ar
 	self.anyChildUsesUpdateState = true
 	f1_local1:addElementToPendingUpdateStateList(self)
 	local BlurBg = LUI.UIImage.new(-0.5, 1.5, 0, 0, 0.5, 1.5, -540, -540)
-	BlurBg:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	BlurBg:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	BlurBg:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(BlurBg)
 	self.BlurBg = BlurBg
@@ -46,12 +46,12 @@ LUI.createMenu.AAR_LeaguePlay_PlacementMatchesProgress = function(f1_arg0, f1_ar
 	local MainCornerL = LUI.UIImage.new(0.5, 0.5, -759, -729, 0.5, 0.5, -394, -364)
 	MainCornerL:setAlpha(0.04)
 	MainCornerL:setYRot(180)
-	MainCornerL:setImage(RegisterImage(0xBCB7451C0F2DE33))
+	MainCornerL:setImage(RegisterImage(@"uie_ui_hud_notifications_bracket_topright"))
 	self:addElement(MainCornerL)
 	self.MainCornerL = MainCornerL
 	local MainCornerR = LUI.UIImage.new(0.5, 0.5, 737, 767, 0.5, 0.5, -395, -365)
 	MainCornerR:setAlpha(0.04)
-	MainCornerR:setImage(RegisterImage(0xBCB7451C0F2DE33))
+	MainCornerR:setImage(RegisterImage(@"uie_ui_hud_notifications_bracket_topright"))
 	self:addElement(MainCornerR)
 	self.MainCornerR = MainCornerR
 	local ArenaSkillEvaluationWidget = CoD.ArenaSkillEvaluationWidget.new(f1_local1, f1_arg0, 0.5, 0.5, -480, 480, 0.5, 0.5, -351.5, 388.5)
@@ -59,7 +59,7 @@ LUI.createMenu.AAR_LeaguePlay_PlacementMatchesProgress = function(f1_arg0, f1_ar
 	self.ArenaSkillEvaluationWidget = ArenaSkillEvaluationWidget
 	local featureOverlayButtonMouseOnly = nil
 	featureOverlayButtonMouseOnly = CoD.featureOverlay_Button_MouseOnly.new(f1_local1, f1_arg0, 0.5, 0.5, 403, 589, 0.5, 0.5, 340, 400)
-	featureOverlayButtonMouseOnly.featureOverlayButtonContainer.Title:setText(Engine[0xF9F1239CFD921FE](0x78D439E1B360368))
+	featureOverlayButtonMouseOnly.featureOverlayButtonContainer.Title:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_778D439E1B360368"))
 	featureOverlayButtonMouseOnly:registerEventHandler("gain_focus", function(element, event)
 		local f3_local0 = nil
 		if element.gainFocus then
@@ -67,26 +67,26 @@ LUI.createMenu.AAR_LeaguePlay_PlacementMatchesProgress = function(f1_arg0, f1_ar
 		elseif element.super.gainFocus then
 			f3_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f3_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(featureOverlayButtonMouseOnly, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(featureOverlayButtonMouseOnly, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		CoD.AARUtility.ClosePlacementMatchesProgressOverlay(menu, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x6393FF34EA56966, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/continue", nil, "ui_confirm")
 		return true
 	end, false)
 	self:addElement(featureOverlayButtonMouseOnly)
 	self.featureOverlayButtonMouseOnly = featureOverlayButtonMouseOnly
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		CoD.AARUtility.ClosePlacementMatchesProgressOverlay(menu, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x6393FF34EA56966, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/continue", nil, "ui_confirm")
 		return true
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], "ESCAPE", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], "ESCAPE", function(element, menu, controller, model)
 		if IsPC() then
 			CoD.AARUtility.ClosePlacementMatchesProgressOverlay(menu, controller)
 			return true
@@ -94,7 +94,7 @@ LUI.createMenu.AAR_LeaguePlay_PlacementMatchesProgress = function(f1_arg0, f1_ar
 		end
 	end, function(element, menu, controller)
 		if IsPC() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, "ESCAPE")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, "ESCAPE")
 			return true
 		else
 			return false

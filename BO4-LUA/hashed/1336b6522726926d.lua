@@ -9,7 +9,7 @@ CoD.AARTierRewardItemImage.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local CroppedImage = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	CroppedImage:setAlpha(0)
-	CroppedImage:setMaterial(LUI.UIImage.GetCachedMaterial(0xA02C44161370F6D))
+	CroppedImage:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_1A02C44161370F6D"))
 	CroppedImage:setShaderVector(0, 0.5, 0.5, 0, 0)
 	CroppedImage:setShaderVector(1, 1, 1, 0, 0)
 	CroppedImage:setShaderVector(2, 0, 0, 0, 0)
@@ -23,7 +23,7 @@ CoD.AARTierRewardItemImage.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self.CroppedImage = CroppedImage
 	local CroppedImageOutfit = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	CroppedImageOutfit:setAlpha(0)
-	CroppedImageOutfit:setMaterial(LUI.UIImage.GetCachedMaterial(0xA02C44161370F6D))
+	CroppedImageOutfit:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_1A02C44161370F6D"))
 	CroppedImageOutfit:setShaderVector(0, 0.5, 0, 0, 0)
 	CroppedImageOutfit:setShaderVector(1, 1, 1, 0, 0)
 	CroppedImageOutfit:setShaderVector(2, 0, 0, 0, 0)
@@ -36,7 +36,7 @@ CoD.AARTierRewardItemImage.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self:addElement(CroppedImageOutfit)
 	self.CroppedImageOutfit = CroppedImageOutfit
 	local ImageCropped = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	ImageCropped:setMaterial(LUI.UIImage.GetCachedMaterial(0xA02C44161370F6D))
+	ImageCropped:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_1A02C44161370F6D"))
 	ImageCropped:setShaderVector(0, 0.5, 0.5, 0, 0)
 	ImageCropped:setShaderVector(1, 1, 1, 0, 0)
 	ImageCropped:setShaderVector(2, 0, 0, 0, 0)
@@ -58,25 +58,25 @@ CoD.AARTierRewardItemImage.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 		{
 			stateName = "OutfitWarPaint",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", 0xFB8B65946FBF7A2)
+				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", @"war_paint")
 			end,
 		},
 		{
 			stateName = "OutfitWarPaintBundle",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", 0x48B82A2276A1CAF)
+				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", @"hash_248B82A2276A1CAF")
 			end,
 		},
 		{
 			stateName = "OutfitPalette",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", 0xDD691088352B680)
+				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", @"palette")
 			end,
 		},
 		{
 			stateName = "OutfitBundle",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", 0xC398D8E22A2269B)
+				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "itemCategory", @"outfit_bundle")
 			end,
 		},
 	})

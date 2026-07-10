@@ -33,7 +33,7 @@ CoD.PlayerCard_Callout.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	})
 	local f1_local2 = PlayerCard
 	local f1_local3 = PlayerCard.subscribeToModel
-	local f1_local4 = Engine[0x8DF2E5447F384B9]()
+	local f1_local4 = Engine[@"getglobalmodel"]()
 	f1_local3(f1_local2, f1_local4["lobbyRoot.lobbyNav"], function(f4_arg0)
 		f1_arg0:updateElementState(PlayerCard, {
 			name = "model_validation",
@@ -64,9 +64,9 @@ CoD.PlayerCard_Callout.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 		{
 			stateName = "Hidden",
 			condition = function(menu, element, event)
-				local f8_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xB8E9B69F4B87954])
+				local f8_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_demo_all_game_hud_hidden"])
 				if not f8_local0 then
-					f8_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xD3ABF9A2753CE40])
+					f8_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_demo_camera_mode_moviecam"])
 				end
 				return f8_local0
 			end,
@@ -74,7 +74,7 @@ CoD.PlayerCard_Callout.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	})
 	f1_local2 = self
 	f1_local3 = self.subscribeToModel
-	f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local3(f1_local2, f1_local4["factions.isCoDCaster"], function(f9_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -98,35 +98,35 @@ CoD.PlayerCard_Callout.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	end, false)
 	f1_local2 = self
 	f1_local3 = self.subscribeToModel
-	f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local3(f1_local2, f1_local4["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xB8E9B69F4B87954]], function(f11_arg0)
+	f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local3(f1_local2, f1_local4["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_demo_all_game_hud_hidden"]], function(f11_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f11_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xB8E9B69F4B87954],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_demo_all_game_hud_hidden"],
 		})
 	end, false)
 	f1_local2 = self
 	f1_local3 = self.subscribeToModel
-	f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local3(f1_local2, f1_local4["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xD3ABF9A2753CE40]], function(f12_arg0)
+	f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local3(f1_local2, f1_local4["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_demo_camera_mode_moviecam"]], function(f12_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f12_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xD3ABF9A2753CE40],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_demo_camera_mode_moviecam"],
 		})
 	end, false)
 	self:subscribeToGlobalModel(f1_arg1, "PerController", "scriptNotify", function(model)
 		local f13_local0 = self
-		if CoD.ModelUtility.IsParamModelEqualToHashString(model, 0x1CC3F0A4046194B) then
+		if CoD.ModelUtility.IsParamModelEqualToHashString(model, @"player_callout") then
 			CoD.HUDUtility.ProcessPlayerCallout(f13_local0, f1_arg1, model)
-		elseif CoD.ModelUtility.IsParamModelEqualToHashString(model, 0x2B5B25BE43AD2D7) then
+		elseif CoD.ModelUtility.IsParamModelEqualToHashString(model, @"hash_22B5B25BE43AD2D7") then
 			CoD.HUDUtility.ProcessPlayerCalloutWithColon(f13_local0, f1_arg1, model)
-		elseif CoD.ModelUtility.IsParamModelEqualToHashString(model, 0xA3C608F65B1CEAD) then
+		elseif CoD.ModelUtility.IsParamModelEqualToHashString(model, @"hash_2A3C608F65B1CEAD") then
 			CoD.HUDUtility.ProcessPlayerCalloutWithNumber(f13_local0, f1_arg1, model)
 		end
 	end)
@@ -168,14 +168,14 @@ CoD.PlayerCard_Callout.__clipsPerState = {
 							f20_arg0:setAlpha(1)
 							f20_arg0:registerEventHandler("transition_complete_keyframe", f20_local0)
 						end
-						f19_arg0:beginAnimation(49, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+						f19_arg0:beginAnimation(49, Enum[@"luitween"][@"luitween_ease_both"])
 						f19_arg0:setAlpha(0)
 						f19_arg0:registerEventHandler("transition_complete_keyframe", f19_local0)
 					end
 					f18_arg0:beginAnimation(2280)
 					f18_arg0:registerEventHandler("transition_complete_keyframe", f18_local0)
 				end
-				f16_arg0.PlayerCard:beginAnimation(270, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f16_arg0.PlayerCard:beginAnimation(270, Enum[@"luitween"][@"luitween_ease_out"])
 				f16_arg0.PlayerCard:setLeftRight(0, 0, 0, 414)
 				f16_arg0.PlayerCard:setAlpha(1)
 				f16_arg0.PlayerCard:registerEventHandler("interrupted_keyframe", f16_arg0.clipInterrupted)

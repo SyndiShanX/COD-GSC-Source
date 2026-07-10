@@ -8,15 +8,15 @@ CoD.ItemShopRarityBackgroundStream_Ultra.new = function(f1_arg0, f1_arg1, f1_arg
 	self.soundSet = "none"
 	local NoiseTiledBacking = LUI.UIImage.new(0, 1, 0, 0, -0, 1, 0, 0)
 	NoiseTiledBacking:setAlpha(0.85)
-	NoiseTiledBacking:setImage(RegisterImage(0x34839E8065B1E53))
-	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	NoiseTiledBacking:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	NoiseTiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	NoiseTiledBacking:setupNineSliceShader(196, 88)
 	self:addElement(NoiseTiledBacking)
 	self.NoiseTiledBacking = NoiseTiledBacking
 	local CommonOuterGlow = LUI.UIImage.new(0, 1, -11, 11, 0, 1, -12, 12)
-	CommonOuterGlow:setImage(RegisterImage(0xAE13B63B2001396))
-	CommonOuterGlow:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	CommonOuterGlow:setImage(RegisterImage(@"uie_ui_menu_common_outer_glow01"))
+	CommonOuterGlow:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	CommonOuterGlow:setShaderVector(0, 0, 0, 0, 0)
 	CommonOuterGlow:setupNineSliceShader(32, 32)
 	CommonOuterGlow:linkToElementModel(self, "rarity", true, function(model)
@@ -39,8 +39,8 @@ CoD.ItemShopRarityBackgroundStream_Ultra.new = function(f1_arg0, f1_arg1, f1_arg
 	self.BGBrighten = BGBrighten
 	local BGPatternThin = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	BGPatternThin:setAlpha(0.3)
-	BGPatternThin:setImage(RegisterImage(0xC740F3CC5928DAB))
-	BGPatternThin:setMaterial(LUI.UIImage.GetCachedMaterial(0xC221B51E4063E3D))
+	BGPatternThin:setImage(RegisterImage(@"uie_ui_menu_common_mtx_button_bg_ultra_thin"))
+	BGPatternThin:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_C221B51E4063E3D"))
 	BGPatternThin:setShaderVector(0, 0, 0, 0, 0)
 	BGPatternThin:setShaderVector(1, 1, 1, 0, 0)
 	BGPatternThin:setShaderVector(2, 0, 0, 0, 0)
@@ -55,7 +55,7 @@ CoD.ItemShopRarityBackgroundStream_Ultra.new = function(f1_arg0, f1_arg1, f1_arg
 	local Wipe = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	Wipe:setRGB(0, 0, 0)
 	Wipe:setAlpha(0.9)
-	Wipe:setMaterial(LUI.UIImage.GetCachedMaterial(0xE992BD5A540E2D))
+	Wipe:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_delta_normal"))
 	Wipe:setShaderVector(0, 0, 1, 0, 0)
 	Wipe:setShaderVector(1, 0, 0, 0, 0)
 	Wipe:setShaderVector(2, 0.36, 1, 0, 0)
@@ -65,7 +65,7 @@ CoD.ItemShopRarityBackgroundStream_Ultra.new = function(f1_arg0, f1_arg1, f1_arg
 	self.Wipe = Wipe
 	local Gradient = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	Gradient:setRGB(0, 0, 0)
-	Gradient:setImage(RegisterImage(0x8F71B593239CEE7))
+	Gradient:setImage(RegisterImage(@"hash_58F71B593239CEE7"))
 	self:addElement(Gradient)
 	self.Gradient = Gradient
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)

@@ -94,7 +94,7 @@ CoD.GameEndScoreOutcome.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 		{
 			stateName = "OutcomeWithTimeAxis",
 			condition = function(menu, element, event)
-				return CoD.GameEndScoreUtility.ShowOutcomeWithTimeTransition(f1_arg1) and CoD.ModelUtility.IsModelValueEqualTo(f1_arg1, "factions.actualTeam", Enum[0x13A4717E5AC547][0x3F83D7CE4BD7B68])
+				return CoD.GameEndScoreUtility.ShowOutcomeWithTimeTransition(f1_arg1) and CoD.ModelUtility.IsModelValueEqualTo(f1_arg1, "factions.actualTeam", Enum[@"team_t"][@"team_axis"])
 			end,
 		},
 		{
@@ -106,7 +106,7 @@ CoD.GameEndScoreOutcome.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	})
 	local f1_local8 = self
 	local f1_local9 = self.subscribeToModel
-	local f1_local10 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local10 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local9(f1_local8, f1_local10["gameScore.currentState"], function(f12_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -118,55 +118,55 @@ CoD.GameEndScoreOutcome.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	end, false)
 	f1_local8 = self
 	f1_local9 = self.subscribeToModel
-	f1_local10 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local9(f1_local8, f1_local10["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2]], function(f13_arg0)
+	f1_local10 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local9(f1_local8, f1_local10["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"]], function(f13_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f13_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"],
 		})
 	end, false)
 	f1_local8 = self
 	f1_local9 = self.subscribeToModel
-	f1_local10 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local9(f1_local8, f1_local10["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x1CDCB451655ABCF]], function(f14_arg0)
+	f1_local10 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local9(f1_local8, f1_local10["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_final_killcam"]], function(f14_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f14_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x1CDCB451655ABCF],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_final_killcam"],
 		})
 	end, false)
 	f1_local8 = self
 	f1_local9 = self.subscribeToModel
-	f1_local10 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local9(f1_local8, f1_local10["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F]], function(f15_arg0)
+	f1_local10 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local9(f1_local8, f1_local10["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_play_of_the_match"]], function(f15_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f15_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_play_of_the_match"],
 		})
 	end, false)
 	f1_local8 = self
 	f1_local9 = self.subscribeToModel
-	f1_local10 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local9(f1_local8, f1_local10["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04]], function(f16_arg0)
+	f1_local10 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local9(f1_local8, f1_local10["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]], function(f16_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f16_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xF4EDA8B636F3F04],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"],
 		})
 	end, false)
 	f1_local8 = self
 	f1_local9 = self.subscribeToModel
-	f1_local10 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local10 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local9(f1_local8, f1_local10.forceScoreboard, function(f17_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -178,7 +178,7 @@ CoD.GameEndScoreOutcome.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	end, false)
 	f1_local8 = self
 	f1_local9 = self.subscribeToModel
-	f1_local10 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local10 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local9(f1_local8, f1_local10["factions.actualTeam"], function(f18_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -267,7 +267,7 @@ CoD.GameEndScoreOutcome.__clipsPerState = {
 			f22_arg0.clipFinished(f22_arg0.CenterWidget)
 			local f22_local0 = function(f23_arg0)
 				local f23_local0 = function(f24_arg0)
-					f24_arg0:beginAnimation(450, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f24_arg0:beginAnimation(450, Enum[@"luitween"][@"luitween_ease_in"])
 					f24_arg0:setAlpha(1)
 					f24_arg0:registerEventHandler("transition_complete_keyframe", f22_arg0.clipFinished)
 				end
@@ -280,7 +280,7 @@ CoD.GameEndScoreOutcome.__clipsPerState = {
 			f22_local0(f22_arg0.PlayerRoundScore)
 			local f22_local1 = function(f25_arg0)
 				local f25_local0 = function(f26_arg0)
-					f26_arg0:beginAnimation(450, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f26_arg0:beginAnimation(450, Enum[@"luitween"][@"luitween_ease_in"])
 					f26_arg0:setAlpha(1)
 					f26_arg0:registerEventHandler("transition_complete_keyframe", f22_arg0.clipFinished)
 				end
@@ -293,7 +293,7 @@ CoD.GameEndScoreOutcome.__clipsPerState = {
 			f22_local1(f22_arg0.EnemyRoundScore)
 			local f22_local2 = function(f27_arg0)
 				local f27_local0 = function(f28_arg0)
-					f28_arg0:beginAnimation(450, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f28_arg0:beginAnimation(450, Enum[@"luitween"][@"luitween_ease_in"])
 					f28_arg0:setAlpha(1)
 					f28_arg0:registerEventHandler("transition_complete_keyframe", f22_arg0.clipFinished)
 				end
@@ -306,7 +306,7 @@ CoD.GameEndScoreOutcome.__clipsPerState = {
 			f22_local2(f22_arg0.EnemyRoundPipList)
 			local f22_local3 = function(f29_arg0)
 				local f29_local0 = function(f30_arg0)
-					f30_arg0:beginAnimation(450, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f30_arg0:beginAnimation(450, Enum[@"luitween"][@"luitween_ease_in"])
 					f30_arg0:setAlpha(1)
 					f30_arg0:registerEventHandler("transition_complete_keyframe", f22_arg0.clipFinished)
 				end

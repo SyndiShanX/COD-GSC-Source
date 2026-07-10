@@ -25,8 +25,8 @@ CoD.WarzoneUseTimerPlayerIcon.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self.Backer = Backer
 	local TeamNumber = LUI.UIText.new(0, 0, 0, 36, 0, 0, 3, 33)
 	TeamNumber:setTTF("dinnext_regular")
-	TeamNumber:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	TeamNumber:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	TeamNumber:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	TeamNumber:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	TeamNumber:subscribeToGlobalModel(f1_arg1, "HUDItems", "laststand.revivingClientNum", function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
@@ -38,7 +38,7 @@ CoD.WarzoneUseTimerPlayerIcon.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	Backer:linkToElementModel(self, "team", true, Backer.__Color_FullPath)
 	local f1_local3 = Backer
 	local f1_local4 = Backer.subscribeToModel
-	local f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local4(f1_local3, f1_local5["profile.colorblindMode"], Backer.__Color_FullPath)
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)
 	if PostLoadFunc then

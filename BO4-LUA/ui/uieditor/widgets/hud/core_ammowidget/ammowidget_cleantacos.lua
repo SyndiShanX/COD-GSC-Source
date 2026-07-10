@@ -10,18 +10,18 @@ CoD.AmmoWidget_CleanTacos.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local backplate = LUI.UIImage.new(0, 0, 15, 107, 0, 0, 20.5, 84.5)
-	backplate:setImage(RegisterImage(0xDD08B725AA00DD6))
+	backplate:setImage(RegisterImage(@"uie_ui_hud_core_carryitem_backplate"))
 	self:addElement(backplate)
 	self.backplate = backplate
 	local TacoImage = LUI.UIImage.new(0, 0, 3, 119, 0, 0, 6.5, 98.5)
-	TacoImage:setImage(RegisterImage(0xE964C548DC2ADB7))
+	TacoImage:setImage(RegisterImage(@"uie_ui_hud_core_carryitem_fracture"))
 	self:addElement(TacoImage)
 	self.TacoImage = TacoImage
 	local PanelGlow = LUI.UIImage.new(0, 0, -24, 127, 0, 0, -22, 131)
 	PanelGlow:setRGB(0.08, 0.17, 0.56)
 	PanelGlow:setAlpha(0.9)
-	PanelGlow:setImage(RegisterImage(0x5BE416E17DAB33B))
-	PanelGlow:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	PanelGlow:setImage(RegisterImage(@"uie_t7_core_hud_mapwidget_panelglow"))
+	PanelGlow:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(PanelGlow)
 	self.PanelGlow = PanelGlow
 	local TacoCount = CoD.AmmoWidget_CleanTacosCountText.new(f1_arg0, f1_arg1, 0, 0, 24, 75, 0, 0, 62.5, 78.5)
@@ -50,7 +50,7 @@ end
 CoD.AmmoWidget_CleanTacos.__resetProperties = function(f4_arg0)
 	f4_arg0.TacoImage:completeAnimation()
 	f4_arg0.PanelGlow:completeAnimation()
-	f4_arg0.TacoImage:setImage(RegisterImage(0xE964C548DC2ADB7))
+	f4_arg0.TacoImage:setImage(RegisterImage(@"uie_ui_hud_core_carryitem_fracture"))
 	f4_arg0.PanelGlow:setRGB(0.08, 0.17, 0.56)
 end
 CoD.AmmoWidget_CleanTacos.__clipsPerState = {
@@ -65,7 +65,7 @@ CoD.AmmoWidget_CleanTacos.__clipsPerState = {
 			f6_arg0:__resetProperties()
 			f6_arg0:setupElementClipCounter(2)
 			f6_arg0.TacoImage:completeAnimation()
-			f6_arg0.TacoImage:setImage(RegisterImage(0x173D4867E8A1E4B))
+			f6_arg0.TacoImage:setImage(RegisterImage(@"ui_hud_core_carryitem_fracture_clover"))
 			f6_arg0.clipFinished(f6_arg0.TacoImage)
 			f6_arg0.PanelGlow:completeAnimation()
 			f6_arg0.PanelGlow:setRGB(0.08, 0.56, 0.16)

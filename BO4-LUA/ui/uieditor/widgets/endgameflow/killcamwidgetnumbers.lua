@@ -9,10 +9,10 @@ CoD.KillcamWidgetNumbers.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Numbers = LUI.UIText.new(0.5, 0.5, -120, 120, 0, 1, 0, 0)
 	Numbers:setRGB(0.92, 0.92, 0.92)
-	Numbers:setText(Engine[0xF9F1239CFD921FE](0x4323579690CF719))
+	Numbers:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_4323579690CF719"))
 	Numbers:setTTF("0arame_mono_stencil")
-	Numbers:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	Numbers:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Numbers:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	Numbers:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(Numbers)
 	self.Numbers = Numbers
 	if PostLoadFunc then

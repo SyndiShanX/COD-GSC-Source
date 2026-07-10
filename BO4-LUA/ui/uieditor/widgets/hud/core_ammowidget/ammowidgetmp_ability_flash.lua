@@ -15,15 +15,15 @@ CoD.AmmoWidgetMP_Ability_Flash.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	Backing:setRGB(0.89, 0.89, 0.89)
 	Backing:setAlpha(0)
 	Backing:setZRot(180)
-	Backing:setImage(RegisterImage(0x7B36897EA2EA839))
-	Backing:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Backing:setImage(RegisterImage(@"hash_47B36897EA2EA839"))
+	Backing:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Backing)
 	self.Backing = Backing
 	local scanline = LUI.UIImage.new(0, 0, -1, 65, 0, 0, 20, 48)
 	scanline:setRGB(0.8, 0.8, 0.8)
 	scanline:setAlpha(0)
-	scanline:setImage(RegisterImage(0xB905E625E84E15))
-	scanline:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	scanline:setImage(RegisterImage(@"uie_hud_common_core_ammo_scanline"))
+	scanline:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(scanline)
 	self.scanline = scanline
 	local Mask3 = LUI.UIImage.new(0.5, 0.5, -63, 63, 0, 0, 63, 94)
@@ -52,7 +52,7 @@ CoD.AmmoWidgetMP_Ability_Flash.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 		{
 			stateName = "Deployed",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(self, f1_arg1, "state", Enum[0xF0447219F15F7F3][0x1873A43E9D1620E])
+				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(self, f1_arg1, "state", Enum[@"weapongadgetstates"][@"player_ability_state_inuse"])
 			end,
 		},
 	})

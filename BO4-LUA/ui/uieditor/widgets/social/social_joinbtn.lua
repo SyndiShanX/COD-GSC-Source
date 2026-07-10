@@ -22,11 +22,11 @@ CoD.Social_JoinBtn.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	self.JoinButtonPrompt = JoinButtonPrompt
 	local joinLabel = LUI.UIText.new(0, 0, 52, 124, 0.5, 0.5, -7, 11)
 	joinLabel:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
-	joinLabel:setText(Engine[0xF9F1239CFD921FE](0x32C830F2EA4EA2D))
+	joinLabel:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_732C830F2EA4EA2D"))
 	joinLabel:setTTF("dinnext_regular")
 	joinLabel:setLetterSpacing(2)
-	joinLabel:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	joinLabel:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	joinLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	joinLabel:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	self:addElement(joinLabel)
 	self.joinLabel = joinLabel
 	self:mergeStateConditions({

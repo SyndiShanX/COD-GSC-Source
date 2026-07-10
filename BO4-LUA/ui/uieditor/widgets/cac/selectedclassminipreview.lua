@@ -18,7 +18,7 @@ CoD.SelectedClassMiniPreview.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	ClassList:setAlpha(0)
 	ClassList:setWidgetType(CoD.CustomClassListButton)
 	ClassList:setHorizontalCount(5)
-	ClassList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	ClassList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	ClassList:setDataSource("ChooseClass_InGame")
 	self.__on_menuOpened_ClassList = function(f2_arg0, f2_arg1, f2_arg2, f2_arg3)
 		CoD.CACUtility.SetActiveListItemToSelectedClass(f2_arg1, f2_arg2, ClassList)
@@ -91,19 +91,19 @@ CoD.SelectedClassMiniPreview.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	self.panelbackingTop = panelbackingTop
 	local SelectedClassLabel = LUI.UIText.new(0.5, 0.5, -512, 28, 1, 1, -287.5, -267.5)
 	SelectedClassLabel:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
-	SelectedClassLabel:setText(Engine[0xF9F1239CFD921FE](0xAAFF2AE8CD4664))
+	SelectedClassLabel:setText(Engine[@"hash_4F9F1239CFD921FE"](0xAAFF2AE8CD4664))
 	SelectedClassLabel:setTTF("ttmussels_regular")
 	SelectedClassLabel:setLetterSpacing(2)
-	SelectedClassLabel:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
-	SelectedClassLabel:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	SelectedClassLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
+	SelectedClassLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(SelectedClassLabel)
 	self.SelectedClassLabel = SelectedClassLabel
 	local ClassName = LUI.UIText.new(0.5, 0.5, 33.5, 573.5, 1, 1, -287.5, -267.5)
 	ClassName:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
 	ClassName:setTTF("notosans_bold")
 	ClassName:setLetterSpacing(2)
-	ClassName:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	ClassName:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	ClassName:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	ClassName:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(ClassName)
 	self.ClassName = ClassName
 	local nameline = LUI.UIImage.new(-0.05, 1.05, 0, 0, 1, 1, -265.5, -264.5)
@@ -129,7 +129,7 @@ CoD.SelectedClassMiniPreview.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	self:addElement(ClassMiniPreview)
 	self.ClassMiniPreview = ClassMiniPreview
 	local lightblurbar = LUI.UIImage.new(-0.05, 1.05, 0, 0, 1, 1, -272.5, -256.5)
-	lightblurbar:setImage(RegisterImage(0xD844960B6DEFCA1))
+	lightblurbar:setImage(RegisterImage(@"uie_ui_menu_draft_barflare"))
 	lightblurbar:registerEventHandler("menu_loaded", function(element, event)
 		local f8_local0 = nil
 		if element.menuLoaded then
@@ -188,10 +188,10 @@ CoD.SelectedClassMiniPreview.__resetProperties = function(f14_arg0)
 	f14_arg0.ClassMiniPreview:setAlpha(1)
 	f14_arg0.SelectedClassLabel:setLeftRight(0.5, 0.5, -512, 28)
 	f14_arg0.SelectedClassLabel:setAlpha(1)
-	f14_arg0.SelectedClassLabel:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
+	f14_arg0.SelectedClassLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
 	f14_arg0.ClassName:setLeftRight(0.5, 0.5, 33.5, 573.5)
 	f14_arg0.ClassName:setAlpha(1)
-	f14_arg0.ClassName:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	f14_arg0.ClassName:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 end
 CoD.SelectedClassMiniPreview.__clipsPerState = {
 	DefaultState = {
@@ -221,11 +221,11 @@ CoD.SelectedClassMiniPreview.__clipsPerState = {
 			f17_arg0:setupElementClipCounter(2)
 			f17_arg0.SelectedClassLabel:completeAnimation()
 			f17_arg0.SelectedClassLabel:setLeftRight(0.5, 0.5, 33.5, 573.5)
-			f17_arg0.SelectedClassLabel:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+			f17_arg0.SelectedClassLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 			f17_arg0.clipFinished(f17_arg0.SelectedClassLabel)
 			f17_arg0.ClassName:completeAnimation()
 			f17_arg0.ClassName:setLeftRight(0.5, 0.5, -512, 28)
-			f17_arg0.ClassName:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
+			f17_arg0.ClassName:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
 			f17_arg0.clipFinished(f17_arg0.ClassName)
 		end,
 	},

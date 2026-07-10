@@ -21,12 +21,12 @@ CoD.ArchivesVideoButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	ButtonText:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	ButtonText:setAlpha(0)
 	ButtonText:setTTF("ttmussels_regular")
-	ButtonText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	ButtonText:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	ButtonText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	ButtonText:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	ButtonText:linkToElementModel(self, "title", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
-			ButtonText:setText(Engine[0xF9F1239CFD921FE](f3_local0))
+			ButtonText:setText(Engine[@"hash_4F9F1239CFD921FE"](f3_local0))
 		end
 	end)
 	self:addElement(ButtonText)
@@ -34,16 +34,16 @@ CoD.ArchivesVideoButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	local MatureContentText = LUI.UIText.new(0, 1, 5, -5, 0, 0, 5, 38)
 	MatureContentText:setRGB(0.5, 0.5, 0.5)
 	MatureContentText:setAlpha(0)
-	MatureContentText:setText(LocalizeToUpperString(0xC52F8F8D0D51561))
+	MatureContentText:setText(LocalizeToUpperString(@"hash_C52F8F8D0D51561"))
 	MatureContentText:setTTF("ttmussels_demibold")
-	MatureContentText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	MatureContentText:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	MatureContentText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	MatureContentText:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	self:addElement(MatureContentText)
 	self.MatureContentText = MatureContentText
 	local lockImage = LUI.UIImage.new(1, 1, -55, -5, 0.5, 0.5, -25, 25)
 	lockImage:setAlpha(0)
 	lockImage:setScale(0.6, 0.6)
-	lockImage:setImage(RegisterImage(0xE1E7C490B2BA4FB))
+	lockImage:setImage(RegisterImage(@"uie_ui_icon_global_lock"))
 	self:addElement(lockImage)
 	self.lockImage = lockImage
 	self:mergeStateConditions({
@@ -71,7 +71,7 @@ CoD.ArchivesVideoButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	end)
 	local f1_local5 = self
 	local f1_local6 = self.subscribeToModel
-	local f1_local7 = Engine[0x8DF2E5447F384B9]()
+	local f1_local7 = Engine[@"getglobalmodel"]()
 	f1_local6(f1_local5, f1_local7["storageGlobalRoot.user_settings"], function(f7_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

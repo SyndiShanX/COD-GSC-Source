@@ -17,8 +17,8 @@ CoD.systemOverlay_PrestigeRewardItem.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	self.RewardImage = RewardImage
 	local RewardLabel = LUI.UIText.new(0, 1, 0, 0, 0, 0, 142, 160)
 	RewardLabel:setTTF("ttmussels_regular")
-	RewardLabel:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	RewardLabel:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	RewardLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	RewardLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	RewardLabel:linkToElementModel(self, "rewardText", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then

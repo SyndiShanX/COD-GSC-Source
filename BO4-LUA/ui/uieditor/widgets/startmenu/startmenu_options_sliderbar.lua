@@ -69,7 +69,7 @@ local PostLoadFunc = function(self, controller, menu)
 	end)
 	self.m_timer = LUI.UITimer.new(1, "update_bar", false)
 	self.m_heartbeat = LUI.UITimer.new(100, "check_pulse", false)
-	CoD.Menu.AddButtonCallbackFunction(menu, self, controller, Enum[0x3DD78803F918E9D][0x57783F8DA4AAEF], "ui_navleft", function(element, menu, controller, f10_arg3)
+	CoD.Menu.AddButtonCallbackFunction(menu, self, controller, Enum[@"luibutton"][@"lui_key_left"], "ui_navleft", function(element, menu, controller, f10_arg3)
 		if not self.m_disableNavigation then
 			if not self.m_beat then
 				self:updateSlideDirection(-1)
@@ -84,7 +84,7 @@ local PostLoadFunc = function(self, controller, menu)
 			end
 		end
 	end)
-	CoD.Menu.AddButtonCallbackFunction(menu, self, controller, Enum[0x3DD78803F918E9D][0x571F08AD84807E0], "ui_navright", function(element, menu, controller, f11_arg3)
+	CoD.Menu.AddButtonCallbackFunction(menu, self, controller, Enum[@"luibutton"][@"lui_key_right"], "ui_navright", function(element, menu, controller, f11_arg3)
 		if not self.m_disableNavigation then
 			if not self.m_beat then
 				self:updateSlideDirection(1)
@@ -120,16 +120,16 @@ CoD.StartMenu_Options_SliderBar.new = function(f12_arg0, f12_arg1, f12_arg2, f12
 	self:addElement(frameOutline)
 	self.frameOutline = frameOutline
 	local label = LUI.UIText.new(0, 0, 12, 352, 0, 0, 8, 46)
-	label:setText(Engine[0xF9F1239CFD921FE](0x93E719493E9E18F))
+	label:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	label:setTTF("default")
-	label:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	label:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	label:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	label:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(label)
 	self.label = label
 	local numeric = LUI.UIText.new(0, 0, 679, 741, 0, 0, 8, 46)
-	numeric:setText(Engine[0xF9F1239CFD921FE](0x93E719493E9E18F))
+	numeric:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	numeric:setTTF("default")
-	numeric:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	numeric:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(numeric)
 	self.numeric = numeric
 	local FilledPartBg = LUI.UIImage.new(0, 0, 382, 652, 0.5, 0.5, -1, 1)

@@ -18,12 +18,12 @@ CoD.WeaponPersonalizationHeaderContainer.new = function(f1_arg0, f1_arg1, f1_arg
 	self:addElement(TabBacking)
 	self.TabBacking = TabBacking
 	local CommonHeader = CoD.CommonHeader.new(f1_arg0, f1_arg1, 0, 1, 0, 0, 0, 0, 0, 67)
-	CommonHeader.subtitle.StageTitle:setText(Engine[0xF9F1239CFD921FE](CoD.WeaponOptionsUtility.GetWeaponPersonalizationHeader(f1_arg0, f1_arg1, 0xF5D230DCF3311CC)))
+	CommonHeader.subtitle.StageTitle:setText(Engine[@"hash_4F9F1239CFD921FE"](CoD.WeaponOptionsUtility.GetWeaponPersonalizationHeader(f1_arg0, f1_arg1, @"hash_5F5D230DCF3311CC")))
 	CommonHeader.subtitle.subtitle:setAlpha(0)
 	CommonHeader:subscribeToGlobalModel(f1_arg1, "LobbyRoot", "lobbyTitle", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			CommonHeader.subtitle.subtitle:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			CommonHeader.subtitle.subtitle:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	self:addElement(CommonHeader)

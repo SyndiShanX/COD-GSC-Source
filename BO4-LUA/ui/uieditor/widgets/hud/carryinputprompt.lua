@@ -18,7 +18,7 @@ CoD.CarryInputPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 		{
 			stateName = "Hidden",
 			condition = function(menu, element, event)
-				return CoD.HUDUtility.IsObjectiveXHashPropertyValueEqualTo(self, 0x1BB6EE6EB270DC8, nil)
+				return CoD.HUDUtility.IsObjectiveXHashPropertyValueEqualTo(self, @"hash_1BB6EE6EB270DC8", nil)
 			end,
 		},
 	})
@@ -107,7 +107,7 @@ CoD.CarryInputPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 		{
 			stateName = "OffscreenInteractable",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueTrue(element, f1_arg1, "isOffscreen") and CoD.HUDUtility.IsObjectiveXHashPropertyValueEqualTo(self, 0x44AC803636BB2F2, 1)
+				return CoD.ModelUtility.IsSelfModelValueTrue(element, f1_arg1, "isOffscreen") and CoD.HUDUtility.IsObjectiveXHashPropertyValueEqualTo(self, @"hash_44AC803636BB2F2", 1)
 			end,
 		},
 	})
@@ -158,7 +158,7 @@ CoD.CarryInputPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	end)
 	local f1_local6 = self
 	local f1_local7 = self.subscribeToModel
-	local f1_local8 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local8 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local7(f1_local6, f1_local8["interactivePrompt.activeObjectiveID"], function(f21_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -170,7 +170,7 @@ CoD.CarryInputPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	end, false)
 	f1_local6 = self
 	f1_local7 = self.subscribeToModel
-	f1_local8 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local8 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local7(f1_local6, f1_local8["hudItems.hacked"], function(f22_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -242,50 +242,50 @@ CoD.CarryInputPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	end, false)
 	f1_local6 = self
 	f1_local7 = self.subscribeToModel
-	f1_local8 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local7(f1_local6, f1_local8["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x6FFF566DCC09BBD]], function(f28_arg0)
+	f1_local8 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local7(f1_local6, f1_local8["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_spectating_client"]], function(f28_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f28_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x6FFF566DCC09BBD],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_spectating_client"],
 		})
 	end, false)
 	f1_local6 = self
 	f1_local7 = self.subscribeToModel
-	f1_local8 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local7(f1_local6, f1_local8["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xADC477DDE486DD7]], function(f29_arg0)
+	f1_local8 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local7(f1_local6, f1_local8["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_hud_visible"]], function(f29_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f29_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xADC477DDE486DD7],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_hud_visible"],
 		})
 	end, false)
 	f1_local6 = self
 	f1_local7 = self.subscribeToModel
-	f1_local8 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local7(f1_local6, f1_local8["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x59333FC97F7870]], function(f30_arg0)
+	f1_local8 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local7(f1_local6, f1_local8["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_emp_active"]], function(f30_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f30_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x59333FC97F7870],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_emp_active"],
 		})
 	end, false)
 	f1_local6 = self
 	f1_local7 = self.subscribeToModel
-	f1_local8 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local7(f1_local6, f1_local8["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x1C630DB86D235A5]], function(f31_arg0)
+	f1_local8 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local7(f1_local6, f1_local8["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_selecting_locational_killstreak"]], function(f31_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f31_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x1C630DB86D235A5],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_selecting_locational_killstreak"],
 		})
 	end, false)
 	self:linkToElementModel(self, "clamped", true, function(model)
@@ -333,7 +333,7 @@ CoD.CarryInputPrompt.__resetProperties = function(f35_arg0)
 	f35_arg0.ButtonPromptText:setLeftRight(0.5, 0.5, -120, 120)
 	f35_arg0.ButtonPromptText:setTopBottom(0, 0, -38, 0)
 	f35_arg0.ButtonPromptText:setAlpha(0)
-	f35_arg0.ButtonPromptText.text:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	f35_arg0.ButtonPromptText.text:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	f35_arg0.ObjectiveWaypointText:setAlpha(0)
 end
 CoD.CarryInputPrompt.__clipsPerState = {
@@ -588,7 +588,7 @@ CoD.CarryInputPrompt.__clipsPerState = {
 			f62_arg0.ButtonPromptText:setLeftRight(0, 0, 135, 335)
 			f62_arg0.ButtonPromptText:setTopBottom(0, 0, 21, 51)
 			f62_arg0.ButtonPromptText:setAlpha(1)
-			f62_arg0.ButtonPromptText.text:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+			f62_arg0.ButtonPromptText.text:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 			f62_arg0.clipFinished(f62_arg0.ButtonPromptText)
 			f62_arg0.ButtonPrompt:completeAnimation()
 			f62_arg0.ButtonPrompt:setAlpha(1)

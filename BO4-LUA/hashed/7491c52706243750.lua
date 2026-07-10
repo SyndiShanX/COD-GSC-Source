@@ -15,10 +15,10 @@ CoD.SpawnRegionName.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	local DangerText = LUI.UIText.new(0, 0, -39.5, 119.5, 0, 0, 68, 88)
 	DangerText:setRGB(1, 0, 0)
 	DangerText:setAlpha(0)
-	DangerText:setText(Engine[0xF9F1239CFD921FE](0x57915A72383BA7C))
+	DangerText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_357915A72383BA7C"))
 	DangerText:setTTF("0arame_mono_stencil")
-	DangerText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	DangerText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	DangerText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	DangerText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(DangerText)
 	self.DangerText = DangerText
 	local TimerBacking = LUI.UIImage.new(0, 0, -16.5, 96.5, 0, 0, 91.5, 128.5)
@@ -29,12 +29,12 @@ CoD.SpawnRegionName.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	local HardpointTimer = LUI.UIText.new(0, 0, 13.5, 66.5, 0, 0, 91.5, 128.5)
 	HardpointTimer:setAlpha(0)
 	HardpointTimer:setTTF("default")
-	HardpointTimer:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	HardpointTimer:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	HardpointTimer:setupBombTimer(0, true)
 	self:addElement(HardpointTimer)
 	self.HardpointTimer = HardpointTimer
 	local SpawnBeaconIcon = LUI.UIImage.new(0, 0, 16, 64, 0, 0, 16, 64)
-	SpawnBeaconIcon:setImage(RegisterImage(0x5C6AA755A21F500))
+	SpawnBeaconIcon:setImage(RegisterImage(@"uie_ui_hud_selectspawn_beacon_icon"))
 	self:addElement(SpawnBeaconIcon)
 	self.SpawnBeaconIcon = SpawnBeaconIcon
 	if PostLoadFunc then
@@ -53,7 +53,7 @@ CoD.SpawnRegionName.__resetProperties = function(f2_arg0)
 	f2_arg0.DangerText:setTopBottom(0, 0, 68, 88)
 	f2_arg0.DangerText:setRGB(1, 0, 0)
 	f2_arg0.DangerText:setAlpha(0)
-	f2_arg0.DangerText:setText(Engine[0xF9F1239CFD921FE](0x57915A72383BA7C))
+	f2_arg0.DangerText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_357915A72383BA7C"))
 	f2_arg0.HardpointTimer:setLeftRight(0, 0, 13.5, 66.5)
 	f2_arg0.HardpointTimer:setTopBottom(0, 0, 91.5, 128.5)
 	f2_arg0.HardpointTimer:setAlpha(0)
@@ -85,7 +85,7 @@ CoD.SpawnRegionName.__clipsPerState = {
 			f4_arg0.DangerText:setTopBottom(0, 0, 69, 89)
 			f4_arg0.DangerText:setRGB(0.58, 0.58, 0.58)
 			f4_arg0.DangerText:setAlpha(0)
-			f4_arg0.DangerText:setText(Engine[0xF9F1239CFD921FE](0x5630C8431CF6803))
+			f4_arg0.DangerText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_5630C8431CF6803"))
 			f4_arg0.clipFinished(f4_arg0.DangerText)
 		end,
 	},
@@ -111,7 +111,7 @@ CoD.SpawnRegionName.__clipsPerState = {
 			f6_arg0.DangerText:completeAnimation()
 			f6_arg0.DangerText:setRGB(1, 0.61, 0)
 			f6_arg0.DangerText:setAlpha(0)
-			f6_arg0.DangerText:setText(Engine[0xF9F1239CFD921FE](0xE1A66DD4446C000))
+			f6_arg0.DangerText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_7E1A66DD4446C000"))
 			f6_arg0.clipFinished(f6_arg0.DangerText)
 		end,
 	},
@@ -127,7 +127,7 @@ CoD.SpawnRegionName.__clipsPerState = {
 			f7_arg0.DangerText:setTopBottom(0, 0, 68, 88)
 			f7_arg0.DangerText:setRGB(1, 0, 0)
 			f7_arg0.DangerText:setAlpha(0)
-			f7_arg0.DangerText:setText(Engine[0xF9F1239CFD921FE](0x57915A72383BA7C))
+			f7_arg0.DangerText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_357915A72383BA7C"))
 			f7_arg0.clipFinished(f7_arg0.DangerText)
 		end,
 	},
@@ -141,7 +141,7 @@ CoD.SpawnRegionName.__clipsPerState = {
 			f8_arg0.DangerText:completeAnimation()
 			f8_arg0.DangerText:setRGB(0.58, 0.58, 0.58)
 			f8_arg0.DangerText:setAlpha(0)
-			f8_arg0.DangerText:setText(Engine[0xF9F1239CFD921FE](0x94EB0E3329EDF5F))
+			f8_arg0.DangerText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/disabled"))
 			f8_arg0.clipFinished(f8_arg0.DangerText)
 			f8_arg0.TimerBacking:completeAnimation()
 			f8_arg0.TimerBacking:setAlpha(0)
@@ -166,7 +166,7 @@ CoD.SpawnRegionName.__clipsPerState = {
 			f9_arg0.DangerText:setTopBottom(0, 0, 69, 89)
 			f9_arg0.DangerText:setRGB(0.58, 0.58, 0.58)
 			f9_arg0.DangerText:setAlpha(0)
-			f9_arg0.DangerText:setText(Engine[0xF9F1239CFD921FE](0xA1B60EEA7D768AB))
+			f9_arg0.DangerText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_1A1B60EEA7D768AB"))
 			f9_arg0.clipFinished(f9_arg0.DangerText)
 		end,
 	},

@@ -29,15 +29,15 @@ CoD.systemOverlay_QuitLeaguePlay.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	PenaltyAmount:setRGB(1, 0, 0)
 	PenaltyAmount:setText(CoD.StartMenuUtility.GetArenaQuitPenaltyText(f1_arg1, ""))
 	PenaltyAmount:setTTF("ttmussels_regular")
-	PenaltyAmount:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	PenaltyAmount:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	PenaltyAmount:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	PenaltyAmount:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(PenaltyAmount)
 	self.PenaltyAmount = PenaltyAmount
 	local PenaltyText = LUI.UIText.new(0, 0, 174.5, 374.5, 0, 0, 216.5, 249.5)
-	PenaltyText:setText(Engine[0xF9F1239CFD921FE](0x89D3338A869821C))
+	PenaltyText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_589D3338A869821C"))
 	PenaltyText:setTTF("ttmussels_regular")
-	PenaltyText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	PenaltyText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	PenaltyText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	PenaltyText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(PenaltyText)
 	self.PenaltyText = PenaltyText
 	if CoD.isPC then

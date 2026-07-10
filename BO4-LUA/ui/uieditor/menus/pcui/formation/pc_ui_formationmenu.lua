@@ -2,70 +2,70 @@ DataSources.PCUIFormationDataSource = DataSourceHelpers.ListSetup("PCUIFormation
 	local f1_local0 = {}
 	table.insert(f1_local0, {
 		models = {
-			name = 0xEEF690E6416EA77,
+			name = @"hash_5EEF690E6416EA77",
 			desc = "No Desc",
 		},
 		properties = {},
 	})
 	table.insert(f1_local0, {
 		models = {
-			name = 0xEEF6A0E6416EC2A,
+			name = @"hash_5EEF6A0E6416EC2A",
 			desc = "No Desc",
 		},
 		properties = {},
 	})
 	table.insert(f1_local0, {
 		models = {
-			name = 0xEEF690E6416EA77,
+			name = @"hash_5EEF690E6416EA77",
 			desc = "No Desc",
 		},
 		properties = {},
 	})
 	table.insert(f1_local0, {
 		models = {
-			name = 0xEEF6A0E6416EC2A,
+			name = @"hash_5EEF6A0E6416EC2A",
 			desc = "No Desc",
 		},
 		properties = {},
 	})
 	table.insert(f1_local0, {
 		models = {
-			name = 0xEEF690E6416EA77,
+			name = @"hash_5EEF690E6416EA77",
 			desc = "No Desc",
 		},
 		properties = {},
 	})
 	table.insert(f1_local0, {
 		models = {
-			name = 0xEEF6A0E6416EC2A,
+			name = @"hash_5EEF6A0E6416EC2A",
 			desc = "No Desc",
 		},
 		properties = {},
 	})
 	table.insert(f1_local0, {
 		models = {
-			name = 0xEEF690E6416EA77,
+			name = @"hash_5EEF690E6416EA77",
 			desc = "No Desc",
 		},
 		properties = {},
 	})
 	table.insert(f1_local0, {
 		models = {
-			name = 0xEEF6A0E6416EC2A,
+			name = @"hash_5EEF6A0E6416EC2A",
 			desc = "No Desc",
 		},
 		properties = {},
 	})
 	table.insert(f1_local0, {
 		models = {
-			name = 0xEEF690E6416EA77,
+			name = @"hash_5EEF690E6416EA77",
 			desc = "No Desc",
 		},
 		properties = {},
 	})
 	table.insert(f1_local0, {
 		models = {
-			name = 0xEEF6A0E6416EC2A,
+			name = @"hash_5EEF6A0E6416EC2A",
 			desc = "No Desc",
 		},
 		properties = {},
@@ -84,14 +84,14 @@ LUI.createMenu.PC_UI_FormationMenu = function(f2_arg0, f2_arg1)
 	self:playSound("menu_open", f2_arg0)
 	self.ignoreCursor = true
 	local Background = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	Background:setImage(RegisterImage(0x4BF88A437F4C579))
+	Background:setImage(RegisterImage(@"uie_fe_cp_background"))
 	self:addElement(Background)
 	self.Background = Background
-	f2_local1:AddButtonCallbackFunction(self, f2_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], "ESCAPE", function(element, menu, controller, model)
+	f2_local1:AddButtonCallbackFunction(self, f2_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], "ESCAPE", function(element, menu, controller, model)
 		SendMenuResponse(self, "PC_UI_FormationMenu", "success", controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0xB2EF56B4AF147B8, nil, "ESCAPE")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/quit", nil, "ESCAPE")
 		return true
 	end, false)
 	self:processEvent({

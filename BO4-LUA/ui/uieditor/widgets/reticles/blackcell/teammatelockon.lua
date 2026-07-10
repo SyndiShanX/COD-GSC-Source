@@ -10,62 +10,62 @@ CoD.TeamMateLockOn.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	local PanelGlow = LUI.UIImage.new(0.5, 0.5, -152, 149, 0.5, 0.5, -101, 105)
 	PanelGlow:setRGB(0.97, 0.36, 0.07)
 	PanelGlow:setAlpha(0.49)
-	PanelGlow:setImage(RegisterImage(0x5BE416E17DAB33B))
-	PanelGlow:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	PanelGlow:setImage(RegisterImage(@"uie_t7_core_hud_mapwidget_panelglow"))
+	PanelGlow:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(PanelGlow)
 	self.PanelGlow = PanelGlow
 	local teamLockOn = LUI.UIImage.new(0.5, 0.5, -114, 118, 0.5, 0.5, -85, -25)
-	teamLockOn:setImage(RegisterImage(0xD4D03B92B49DA4D))
+	teamLockOn:setImage(RegisterImage(@"uie_t7_hud_blackcell_teamlockline"))
 	self:addElement(teamLockOn)
 	self.teamLockOn = teamLockOn
 	local teamLockOn0 = LUI.UIImage.new(0.5, 0.5, -114, 118, 0.5, 0.5, 28, 88)
-	teamLockOn0:setImage(RegisterImage(0xD4D03B92B49DA4D))
+	teamLockOn0:setImage(RegisterImage(@"uie_t7_hud_blackcell_teamlockline"))
 	self:addElement(teamLockOn0)
 	self.teamLockOn0 = teamLockOn0
 	local TeammateLockonShadow = LUI.UIText.new(0.5, 0.5, -89, 95, 0.5, 0.5, -43, 2)
 	TeammateLockonShadow:setRGB(0, 0, 0)
 	TeammateLockonShadow:setAlpha(0.8)
-	TeammateLockonShadow:setText(LocalizeToUpperString(0x7E386673A19B47C))
+	TeammateLockonShadow:setText(LocalizeToUpperString(@"hash_37E386673A19B47C"))
 	TeammateLockonShadow:setTTF("ttmussels_demibold")
-	TeammateLockonShadow:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	TeammateLockonShadow:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	TeammateLockonShadow:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	TeammateLockonShadow:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(TeammateLockonShadow)
 	self.TeammateLockonShadow = TeammateLockonShadow
 	local TeammateLockon = LUI.UIText.new(0.5, 0.5, -89, 95, 0.5, 0.5, -43, 2)
-	TeammateLockon:setText(LocalizeToUpperString(0x7E386673A19B47C))
+	TeammateLockon:setText(LocalizeToUpperString(@"hash_37E386673A19B47C"))
 	TeammateLockon:setTTF("ttmussels_demibold")
-	TeammateLockon:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	TeammateLockon:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	TeammateLockon:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	TeammateLockon:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(TeammateLockon)
 	self.TeammateLockon = TeammateLockon
 	local TeammateHackingShadow = LUI.UIText.new(0.5, 0.5, -85, 89, 0.5, 0.5, -43, 2)
 	TeammateHackingShadow:setRGB(0, 0, 0)
 	TeammateHackingShadow:setAlpha(0)
-	TeammateHackingShadow:setText(Engine[0xF9F1239CFD921FE](0xCAA2EBE5B5EFE52))
+	TeammateHackingShadow:setText(Engine[@"hash_4F9F1239CFD921FE"](@"weapon/teammate_hacking"))
 	TeammateHackingShadow:setTTF("ttmussels_demibold")
-	TeammateHackingShadow:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	TeammateHackingShadow:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	TeammateHackingShadow:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	TeammateHackingShadow:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(TeammateHackingShadow)
 	self.TeammateHackingShadow = TeammateHackingShadow
 	local TeammateHacking = LUI.UIText.new(0.5, 0.5, -85, 89, 0.5, 0.5, -43, 2)
 	TeammateHacking:setAlpha(0)
-	TeammateHacking:setText(Engine[0xF9F1239CFD921FE](0xCAA2EBE5B5EFE52))
+	TeammateHacking:setText(Engine[@"hash_4F9F1239CFD921FE"](@"weapon/teammate_hacking"))
 	TeammateHacking:setTTF("ttmussels_demibold")
-	TeammateHacking:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	TeammateHacking:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	TeammateHacking:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	TeammateHacking:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(TeammateHacking)
 	self.TeammateHacking = TeammateHacking
 	self:mergeStateConditions({
 		{
 			stateName = "Hacking",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsGlobalDataSourceModelValueTrue(f1_arg1, "CurrentWeapon", "lockedOnEnemyTeamHacking") and CoD.ModelUtility.IsGlobalDataSourceModelValueEnumBitSet(f1_arg1, "CurrentWeapon", "lockedOnEnemy", Enum[0xF041D1802ECFE69][0xFFFAB60076992A1])
+				return CoD.ModelUtility.IsGlobalDataSourceModelValueTrue(f1_arg1, "CurrentWeapon", "lockedOnEnemyTeamHacking") and CoD.ModelUtility.IsGlobalDataSourceModelValueEnumBitSet(f1_arg1, "CurrentWeapon", "lockedOnEnemy", Enum[@"rocketlaunchertargetstatesflags"][@"rocket_launcher_target_found"])
 			end,
 		},
 		{
 			stateName = "Locked",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsGlobalDataSourceModelValueTrue(f1_arg1, "CurrentWeapon", "lockedOnEnemyTeamTargetting") and CoD.ModelUtility.IsGlobalDataSourceModelValueEnumBitSet(f1_arg1, "CurrentWeapon", "lockedOnEnemy", Enum[0xF041D1802ECFE69][0xFFFAB60076992A1])
+				return CoD.ModelUtility.IsGlobalDataSourceModelValueTrue(f1_arg1, "CurrentWeapon", "lockedOnEnemyTeamTargetting") and CoD.ModelUtility.IsGlobalDataSourceModelValueEnumBitSet(f1_arg1, "CurrentWeapon", "lockedOnEnemy", Enum[@"rocketlaunchertargetstatesflags"][@"rocket_launcher_target_found"])
 			end,
 		},
 	})

@@ -9,13 +9,13 @@ CoD.ThrustMeterChevron.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Image0 = LUI.UIImage.new(0.5, 0.5, -15, 5, 1, 1, -20, 2)
 	Image0:setScale(1.2, 1.2)
-	Image0:setImage(RegisterImage(0x2AD80FE2CFE89F1))
+	Image0:setImage(RegisterImage(@"uie_ui_hud_core_thrust_widget_spark"))
 	self:addElement(Image0)
 	self.Image0 = Image0
 	local Image00 = LUI.UIImage.new(0.5, 0.5, -15, 5, 1, 1, -3, 9)
 	Image00:setScale(1.2, 1.2)
-	Image00:setImage(RegisterImage(0xEE825D8EFAAEE5D))
-	Image00:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Image00:setImage(RegisterImage(@"hash_EE825D8EFAAEE5D"))
+	Image00:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Image00)
 	self.Image00 = Image00
 	if PostLoadFunc then

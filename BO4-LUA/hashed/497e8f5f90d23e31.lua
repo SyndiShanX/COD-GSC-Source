@@ -8,7 +8,7 @@ CoD.BlackJacksShopCardStackSunset.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	self.soundSet = "none"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Image = LUI.UIImage.new(0.5, 0.5, -32, 32, 0.5, 0.5, -256, 256)
-	Image:setImage(RegisterImage(0xC1151517416D65C))
+	Image:setImage(RegisterImage(@"hash_5C1151517416D65C"))
 	self:addElement(Image)
 	self.Image = Image
 	self:mergeStateConditions({

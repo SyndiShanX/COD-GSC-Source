@@ -16,8 +16,8 @@ LUI.createMenu.DirectorFirstTimeContentWarning = function(f1_arg0, f1_arg1)
 	self.anyChildUsesUpdateState = true
 	f1_local1:addElementToPendingUpdateStateList(self)
 	local CommomCenteredPopup = CoD.CommonCenteredPopup.new(f1_local1, f1_arg0, 0, 1, 0, 0, 0, 1, 0, 0)
-	CommomCenteredPopup.featureOverlayButtonMouseOnly.featureOverlayButtonContainer.Title:setText(Engine[0xF9F1239CFD921FE](0xD8FF5E03592FD99))
-	CommomCenteredPopup.TitleText:setText(LocalizeToUpperString(0xD52DB291DBBD257))
+	CommomCenteredPopup.featureOverlayButtonMouseOnly.featureOverlayButtonContainer.Title:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/confirm"))
+	CommomCenteredPopup.TitleText:setText(LocalizeToUpperString(@"menu/content_filter"))
 	self:addElement(CommomCenteredPopup)
 	self.CommomCenteredPopup = CommomCenteredPopup
 	local f1_local3 = nil
@@ -28,7 +28,7 @@ LUI.createMenu.DirectorFirstTimeContentWarning = function(f1_arg0, f1_arg1)
 	PCOptionGroup:setAutoScaleContent(true)
 	PCOptionGroup:setWidgetType(CoD.PC_StartMenu_Options_Controls_KeyBinder)
 	PCOptionGroup:setVerticalCount(3)
-	PCOptionGroup:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	PCOptionGroup:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	PCOptionGroup:setDataSource("OptionGraphicContentPC")
 	self:addElement(PCOptionGroup)
 	self.PCOptionGroup = PCOptionGroup
@@ -37,7 +37,7 @@ LUI.createMenu.DirectorFirstTimeContentWarning = function(f1_arg0, f1_arg1)
 	OptionGroups:setTopBottom(0.5, 0.5, -23, 23)
 	OptionGroups:setWidgetType(CoD.StartMenu_Options_SettingSlider_Wrapper)
 	OptionGroups:setSpacing(10)
-	OptionGroups:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	OptionGroups:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	OptionGroups:setDataSource("PlayerSettingsFirstTimeContentList")
 	OptionGroups:registerEventHandler("gain_focus", function(element, event)
 		local f2_local0 = nil
@@ -46,10 +46,10 @@ LUI.createMenu.DirectorFirstTimeContentWarning = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f2_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f2_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(OptionGroups, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(OptionGroups, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if HasListAction(element, controller) then
 			ProcessListAction(self, element, controller, menu)
 			return true
@@ -57,7 +57,7 @@ LUI.createMenu.DirectorFirstTimeContentWarning = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if HasListAction(element, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		else
 			return false
@@ -67,18 +67,18 @@ LUI.createMenu.DirectorFirstTimeContentWarning = function(f1_arg0, f1_arg1)
 	self.OptionGroups = OptionGroups
 	local OptionDesc = LUI.UIText.new(0.5, 0.5, -328, 321, 0.5, 0.5, -351, -330)
 	OptionDesc:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
-	OptionDesc:setText(Engine[0xF9F1239CFD921FE](0x562DFE5E1BB4809))
+	OptionDesc:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_3562DFE5E1BB4809"))
 	OptionDesc:setTTF("dinnext_regular")
-	OptionDesc:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	OptionDesc:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	OptionDesc:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	OptionDesc:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(OptionDesc)
 	self.OptionDesc = OptionDesc
 	local OptionTitle = LUI.UIText.new(0.5, 0.5, -328, 321, 0.5, 0.5, -400, -370)
 	OptionTitle:setRGB(0.63, 0.57, 0.2)
-	OptionTitle:setText(LocalizeToUpperString(0x9F837EEDFBB8117))
+	OptionTitle:setText(LocalizeToUpperString(@"menu/graphic_content"))
 	OptionTitle:setTTF("ttmussels_regular")
-	OptionTitle:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	OptionTitle:setAlignment(Enum[0x7A5123B654282D2][0x70510683C22104B])
+	OptionTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	OptionTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_bottom"])
 	self:addElement(OptionTitle)
 	self.OptionTitle = OptionTitle
 	self:mergeStateConditions({
@@ -95,7 +95,7 @@ LUI.createMenu.DirectorFirstTimeContentWarning = function(f1_arg0, f1_arg1)
 	end)
 	local f1_local8 = self
 	local f1_local9 = self.subscribeToModel
-	local f1_local10 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	local f1_local10 = Engine[@"getmodelforcontroller"](f1_arg0)
 	f1_local9(f1_local8, f1_local10.LastInput, function(f7_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",
@@ -115,12 +115,12 @@ LUI.createMenu.DirectorFirstTimeContentWarning = function(f1_arg0, f1_arg1)
 		end
 		return f8_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		ClearMenuSavedState(menu)
 		CoD.LobbyUtility.CompleteFirstTimeContentWarning(menu, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD8FF5E03592FD99, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/confirm", nil, nil)
 		return true
 	end, false)
 	LUI.OverrideFunction_CallOriginalFirst(self, "close", function(element)

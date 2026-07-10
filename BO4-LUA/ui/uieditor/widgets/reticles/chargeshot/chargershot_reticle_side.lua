@@ -8,7 +8,7 @@ CoD.ChargerShot_Reticle_Side.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	self.soundSet = "ChooseDecal"
 	local Image0 = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 19, -19)
 	Image0:setRGB(0.29, 0.69, 0.95)
-	Image0:setImage(RegisterImage(0xA06492010B553DC))
+	Image0:setImage(RegisterImage(@"uie_t7_hud_chargeshot_reticle_side"))
 	self:addElement(Image0)
 	self.Image0 = Image0
 	if PostLoadFunc then

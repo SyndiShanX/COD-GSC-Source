@@ -18,7 +18,7 @@ CoD.WZPersonalizeCharacter_StandardFrameWidget.new = function(f1_arg0, f1_arg1, 
 	Characters:setHorizontalCount(5)
 	Characters:setVerticalCount(5)
 	Characters:setSpacing(0)
-	Characters:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	Characters:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	Characters:linkToElementModel(self, "characterDatasource", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -26,10 +26,10 @@ CoD.WZPersonalizeCharacter_StandardFrameWidget.new = function(f1_arg0, f1_arg1, 
 		end
 	end)
 	Characters:linkToElementModel(Characters, "purchasable", true, function(model, f3_arg1)
-		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	Characters:linkToElementModel(Characters, "disabled", true, function(model, f4_arg1)
-		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	Characters:registerEventHandler("list_item_gain_focus", function(element, event)
 		local f5_local0 = nil
@@ -51,10 +51,10 @@ CoD.WZPersonalizeCharacter_StandardFrameWidget.new = function(f1_arg0, f1_arg1, 
 		elseif element.super.gainFocus then
 			f7_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f7_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(Characters, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(Characters, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "purchasable") and not IsGameTrial() then
 			OpenOverlay(self, "Store", controller)
 			return true
@@ -71,10 +71,10 @@ CoD.WZPersonalizeCharacter_StandardFrameWidget.new = function(f1_arg0, f1_arg1, 
 		end
 	end, function(element, menu, controller)
 		if CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "purchasable") and not IsGameTrial() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x191CDDA584B4408, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_4191CDDA584B4408", nil, "ui_confirm")
 			return true
 		elseif not CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "disabled") and not IsGameTrial() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false

@@ -11,15 +11,15 @@ CoD.JobFeedItemIcons.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	CoinImage:linkToElementModel(self, "medalAsset", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			CoinImage:setImage(RegisterImage(CoD.HUDUtility.GetScriptBundleField(f1_arg1, 0xDA32D2BFAA81507, f2_local0)))
+			CoinImage:setImage(RegisterImage(CoD.HUDUtility.GetScriptBundleField(f1_arg1, @"iconsmall", f2_local0)))
 		end
 	end)
 	self:addElement(CoinImage)
 	self.CoinImage = CoinImage
 	local MultiUseCounter = LUI.UIImage.new(0.5, 0.5, -32, 32, 0.5, 0.5, -32, 32)
 	MultiUseCounter:setScale(1.05, 1.05)
-	MultiUseCounter:setImage(RegisterImage(0x9596C0AC009E6C7))
-	MultiUseCounter:setMaterial(LUI.UIImage.GetCachedMaterial(0xD5CA1A25ED87F4F))
+	MultiUseCounter:setImage(RegisterImage(@"uie_ui_icon_jobfeed_special_coinpips"))
+	MultiUseCounter:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_clock_normal"))
 	MultiUseCounter:setShaderVector(1, 0.5, 0, 0, 0)
 	MultiUseCounter:setShaderVector(2, 0.5, 0, 0, 0)
 	MultiUseCounter:setShaderVector(3, 0, 0, 0, 0)

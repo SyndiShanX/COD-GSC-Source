@@ -11,8 +11,8 @@ CoD.ZM_ReviveBleedoutRedEyeGlow.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	GlowOrangeOver0:setRGB(1, 0, 0.03)
 	GlowOrangeOver0:setAlpha(0.46)
 	GlowOrangeOver0:setZRot(90)
-	GlowOrangeOver0:setImage(RegisterImage(0x5BE416E17DAB33B))
-	GlowOrangeOver0:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	GlowOrangeOver0:setImage(RegisterImage(@"uie_t7_core_hud_mapwidget_panelglow"))
+	GlowOrangeOver0:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(GlowOrangeOver0)
 	self.GlowOrangeOver0 = GlowOrangeOver0
 	if PostLoadFunc then

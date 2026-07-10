@@ -11,11 +11,11 @@ LUI.createMenu.SpectreRisingIndicator = function(f1_arg0, f1_arg1)
 	self.ignoreCursor = true
 	f1_local1:addElementToPendingUpdateStateList(self)
 	local BountyIndicator = LUI.UIImage.new(0.5, 0.5, -30, 30, 0.5, 0.5, -30, 30)
-	BountyIndicator:setImage(RegisterImage(0x651B795DA754E93))
+	BountyIndicator:setImage(RegisterImage(@"uie_ui_hud_wz_hud_bounty"))
 	self:addElement(BountyIndicator)
 	self.BountyIndicator = BountyIndicator
 	local pointer = LUI.UIImage.new(0.5, 0.5, -37.5, 37.5, 0.5, 0.5, -1, 74)
-	pointer:setImage(RegisterImage(0x63910B0A0B26F0D))
+	pointer:setImage(RegisterImage(@"uie_ui_hud_wz_hud_bounty_pointer"))
 	self:addElement(pointer)
 	self.pointer = pointer
 	self:mergeStateConditions({
@@ -36,7 +36,7 @@ LUI.createMenu.SpectreRisingIndicator = function(f1_arg0, f1_arg1)
 	})
 	local f1_local4 = self
 	local f1_local5 = self.subscribeToModel
-	local f1_local6 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	local f1_local6 = Engine[@"getmodelforcontroller"](f1_arg0)
 	f1_local5(f1_local4, f1_local6["hudItems.isSpectre"], function(f3_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",
@@ -57,7 +57,7 @@ LUI.createMenu.SpectreRisingIndicator = function(f1_arg0, f1_arg1)
 	end)
 	f1_local4 = self
 	f1_local5 = self.subscribeToModel
-	f1_local6 = Engine[0xE4D2F32833CFA6C](Engine[0x761955642304848](f1_arg0))
+	f1_local6 = Engine[@"getmodelforclient"](Engine[@"getclientnum"](f1_arg0))
 	f1_local5(f1_local4, f1_local6.clientNum, function(f5_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",

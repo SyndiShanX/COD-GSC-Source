@@ -14,8 +14,8 @@ CoD.AARNemesis.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_ar
 	self:addElement(Backing)
 	self.Backing = Backing
 	local EnemeyBacking = LUI.UIImage.new(0.5, 0.5, -75, 75, -0.02, -0.02, -32, -1)
-	EnemeyBacking:setImage(RegisterImage(0x20D05B34D3128F9))
-	EnemeyBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0xA02C44161370F6D))
+	EnemeyBacking:setImage(RegisterImage(@"hash_620D05B34D3128F9"))
+	EnemeyBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_1A02C44161370F6D"))
 	EnemeyBacking:setShaderVector(0, 0, 0, 0, 0)
 	EnemeyBacking:setShaderVector(1, 1.01, 0.22, 0, 0)
 	EnemeyBacking:setShaderVector(2, 0, 0, 0, 0)
@@ -23,13 +23,13 @@ CoD.AARNemesis.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_ar
 	self.EnemeyBacking = EnemeyBacking
 	local EnemyBotLineGlow = LUI.UIImage.new(0, 0, -8, 158, -0.03, -0.03, -13, 11)
 	EnemyBotLineGlow:setAlpha(0.5)
-	EnemyBotLineGlow:setImage(RegisterImage(0xA4F022E73A1CAC4))
-	EnemyBotLineGlow:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	EnemyBotLineGlow:setImage(RegisterImage(@"hash_2A4F022E73A1CAC4"))
+	EnemyBotLineGlow:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(EnemyBotLineGlow)
 	self.EnemyBotLineGlow = EnemyBotLineGlow
 	local TopBarRight = LUI.UIImage.new(0, 0, 0, 150, -0.01, -0.01, -1, 5)
-	TopBarRight:setImage(RegisterImage(0x414B157493C31E2))
-	TopBarRight:setMaterial(LUI.UIImage.GetCachedMaterial(0xA02C44161370F6D))
+	TopBarRight:setImage(RegisterImage(@"hash_4414B157493C31E2"))
+	TopBarRight:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_1A02C44161370F6D"))
 	TopBarRight:setShaderVector(0, 0.13, -0.09, 0, 0)
 	TopBarRight:setShaderVector(1, 2.01, 0.04, 0, 0)
 	TopBarRight:setShaderVector(2, 0, 0, 0, 0)
@@ -37,8 +37,8 @@ CoD.AARNemesis.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_ar
 	self.TopBarRight = TopBarRight
 	local SelectedDotGlowAdd = LUI.UIImage.new(0, 0, 0, 150, 0, 0, 0, 60)
 	SelectedDotGlowAdd:setRGB(ColorSet.EnemyOrange.r, ColorSet.EnemyOrange.g, ColorSet.EnemyOrange.b)
-	SelectedDotGlowAdd:setImage(RegisterImage(0xDE89A66BFC55B6D))
-	SelectedDotGlowAdd:setMaterial(LUI.UIImage.GetCachedMaterial(0xA02C44161370F6D))
+	SelectedDotGlowAdd:setImage(RegisterImage(@"uie_ui_menu_mp_scoreboard_list_indicator_bg"))
+	SelectedDotGlowAdd:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_1A02C44161370F6D"))
 	SelectedDotGlowAdd:setShaderVector(0, 0.2, 0, 0, 0)
 	SelectedDotGlowAdd:setShaderVector(1, 5, 0.41, 0, 0)
 	SelectedDotGlowAdd:setShaderVector(2, 0, 0, 0, 0)
@@ -46,8 +46,8 @@ CoD.AARNemesis.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_ar
 	self.SelectedDotGlowAdd = SelectedDotGlowAdd
 	local SelectedDotGlowAdd2 = LUI.UIImage.new(0, 0, 0, 150, 0, 0, 0, 60)
 	SelectedDotGlowAdd2:setRGB(ColorSet.EnemyOrange.r, ColorSet.EnemyOrange.g, ColorSet.EnemyOrange.b)
-	SelectedDotGlowAdd2:setImage(RegisterImage(0xDE89A66BFC55B6D))
-	SelectedDotGlowAdd2:setMaterial(LUI.UIImage.GetCachedMaterial(0xA02C44161370F6D))
+	SelectedDotGlowAdd2:setImage(RegisterImage(@"uie_ui_menu_mp_scoreboard_list_indicator_bg"))
+	SelectedDotGlowAdd2:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_1A02C44161370F6D"))
 	SelectedDotGlowAdd2:setShaderVector(0, 0.2, 0, 0, 0)
 	SelectedDotGlowAdd2:setShaderVector(1, 5, 0.41, 0, 0)
 	SelectedDotGlowAdd2:setShaderVector(2, 0, 0, 0, 0)
@@ -55,8 +55,8 @@ CoD.AARNemesis.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_ar
 	self.SelectedDotGlowAdd2 = SelectedDotGlowAdd2
 	local SelectedDotGlowAdd3 = LUI.UIImage.new(0, 0, 0, 150, 0, 0, 0, 60)
 	SelectedDotGlowAdd3:setRGB(ColorSet.EnemyOrange.r, ColorSet.EnemyOrange.g, ColorSet.EnemyOrange.b)
-	SelectedDotGlowAdd3:setImage(RegisterImage(0xDE89A66BFC55B6D))
-	SelectedDotGlowAdd3:setMaterial(LUI.UIImage.GetCachedMaterial(0xA02C44161370F6D))
+	SelectedDotGlowAdd3:setImage(RegisterImage(@"uie_ui_menu_mp_scoreboard_list_indicator_bg"))
+	SelectedDotGlowAdd3:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_1A02C44161370F6D"))
 	SelectedDotGlowAdd3:setShaderVector(0, 0.2, 0, 0, 0)
 	SelectedDotGlowAdd3:setShaderVector(1, 5, 0.41, 0, 0)
 	SelectedDotGlowAdd3:setShaderVector(2, 0, 0, 0, 0)
@@ -73,22 +73,22 @@ CoD.AARNemesis.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_ar
 	self:addElement(Line)
 	self.Line = Line
 	local TopBarRight01 = LUI.UIImage.new(0, 0, 0, 150, 0, 0, 54, 60)
-	TopBarRight01:setImage(RegisterImage(0x414B157493C31E2))
-	TopBarRight01:setMaterial(LUI.UIImage.GetCachedMaterial(0xA02C44161370F6D))
+	TopBarRight01:setImage(RegisterImage(@"hash_4414B157493C31E2"))
+	TopBarRight01:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_1A02C44161370F6D"))
 	TopBarRight01:setShaderVector(0, 0.13, -0.09, 0, 0)
 	TopBarRight01:setShaderVector(1, 2.01, 0.07, 0, 0)
 	TopBarRight01:setShaderVector(2, 0, 0, 0, 0)
 	self:addElement(TopBarRight01)
 	self.TopBarRight01 = TopBarRight01
 	local NemesisLabel = LUI.UIText.new(0, 0, 7, 207, 0, 0, -27, -5)
-	NemesisLabel:setText(Engine[0xF9F1239CFD921FE](0xFAD031D22FA608C))
+	NemesisLabel:setText(Engine[@"hash_4F9F1239CFD921FE"](@"aar/nemesis"))
 	NemesisLabel:setTTF("ttmussels_demibold")
-	NemesisLabel:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	NemesisLabel:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	NemesisLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	NemesisLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(NemesisLabel)
 	self.NemesisLabel = NemesisLabel
 	local NemesisKilledBy = CoD.AARNemesisStat.new(f1_arg0, f1_arg1, 0, 0, 73, 152, 0, 0, 7, 47)
-	NemesisKilledBy.Label:setText(Engine[0xF9F1239CFD921FE](0x9266D7D9B2162F1))
+	NemesisKilledBy.Label:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_69266D7D9B2162F1"))
 	NemesisKilledBy:linkToElementModel(self, "killedBy", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -98,7 +98,7 @@ CoD.AARNemesis.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_ar
 	self:addElement(NemesisKilledBy)
 	self.NemesisKilledBy = NemesisKilledBy
 	local NemesisKilled = CoD.AARNemesisStat.new(f1_arg0, f1_arg1, 0, 0, 7, 67, 0, 0, 7, 47)
-	NemesisKilled.Label:setText(Engine[0xF9F1239CFD921FE](0x3B16F3D5BAEE9E4))
+	NemesisKilled.Label:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_33B16F3D5BAEE9E4"))
 	NemesisKilled:linkToElementModel(self, "killed", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -108,12 +108,12 @@ CoD.AARNemesis.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_ar
 	self:addElement(NemesisKilled)
 	self.NemesisKilled = NemesisKilled
 	local Skull = LUI.UIImage.new(0, 0, 102, 192, 0, 0, -34, 4)
-	Skull:setImage(RegisterImage(0x5DC0AF629835B8A))
+	Skull:setImage(RegisterImage(@"uie_ui_hud_nemesis_skull"))
 	self:addElement(Skull)
 	self.Skull = Skull
 	local arrow = LUI.UIImage.new(0, 0, -30, 2, 0, 0, 14, 46)
 	arrow:setRGB(ColorSet.EnemyOrange.r, ColorSet.EnemyOrange.g, ColorSet.EnemyOrange.b)
-	arrow:setImage(RegisterImage(0x3E7760566946173))
+	arrow:setImage(RegisterImage(@"hash_3E7760566946173"))
 	self:addElement(arrow)
 	self.arrow = arrow
 	self:mergeStateConditions({
@@ -138,7 +138,7 @@ CoD.AARNemesis.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_ar
 	})
 	local f1_local16 = self
 	local f1_local17 = self.subscribeToModel
-	local f1_local18 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local18 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local17(f1_local16, f1_local18.currentFocusedClient, function(f7_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

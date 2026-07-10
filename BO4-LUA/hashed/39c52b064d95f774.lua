@@ -15,12 +15,12 @@ CoD.AARMissionReward_CharacterName.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	UnlockCondition:setAlpha(0.5)
 	UnlockCondition:setTTF("ttmussels_regular")
 	UnlockCondition:setLetterSpacing(2)
-	UnlockCondition:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	UnlockCondition:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	UnlockCondition:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	UnlockCondition:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	UnlockCondition:linkToElementModel(self, "unlockDesc", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			UnlockCondition:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			UnlockCondition:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	self:addElement(UnlockCondition)
@@ -30,8 +30,8 @@ CoD.AARMissionReward_CharacterName.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	CharacterName:setAlpha(0.5)
 	CharacterName:setTTF("ttmussels_demibold")
 	CharacterName:setLetterSpacing(8)
-	CharacterName:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	CharacterName:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	CharacterName:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	CharacterName:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	CharacterName:linkToElementModel(self, "name", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then

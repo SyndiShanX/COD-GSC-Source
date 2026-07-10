@@ -31,7 +31,7 @@ CoD.PC_StartMenu_Options_TabContent.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	})
 	local Description = SideButtons
 	local OptionsList = SideButtons.subscribeToModel
-	local SeparationLineVertical = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local SeparationLineVertical = Engine[@"getmodelforcontroller"](f1_arg1)
 	OptionsList(Description, SeparationLineVertical["PC.CurrentCategory"], function(f4_arg0)
 		f1_arg0:updateElementState(SideButtons, {
 			name = "model_validation",
@@ -56,7 +56,7 @@ CoD.PC_StartMenu_Options_TabContent.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	SideButtons:setWidgetType(CoD.CategoryExpendableButton)
 	SideButtons:setVerticalCount(5)
 	SideButtons:setSpacing(10)
-	SideButtons:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	SideButtons:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	SideButtons:setStaggeredIntroTime(-1)
 	SideButtons:setDataSource("OptionGameplayCategories")
 	self:addElement(SideButtons)
@@ -116,7 +116,7 @@ CoD.PC_StartMenu_Options_TabContent.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	Description:linkToElementModel(OptionsList.ScrollList.ScrollView.View, "desc", true, function(model)
 		local f12_local0 = model:get()
 		if f12_local0 ~= nil then
-			Description.DescriptionTextBox.detailedDescription:setText(Engine[0xF9F1239CFD921FE](f12_local0))
+			Description.DescriptionTextBox.detailedDescription:setText(Engine[@"hash_4F9F1239CFD921FE"](f12_local0))
 		end
 	end)
 	Description:linkToElementModel(OptionsList.ScrollList.ScrollView.View, "name", true, function(model)
@@ -238,7 +238,7 @@ CoD.PC_StartMenu_Options_TabContent.__clipsPerState = {
 			f27_arg0:__resetProperties()
 			f27_arg0:setupElementClipCounter(2)
 			local f27_local0 = function(f28_arg0)
-				f27_arg0.SideButtons:beginAnimation(200, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f27_arg0.SideButtons:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_out"])
 				f27_arg0.SideButtons:setLeftRight(0, 0, 196, 586)
 				f27_arg0.SideButtons:registerEventHandler("interrupted_keyframe", f27_arg0.clipInterrupted)
 				f27_arg0.SideButtons:registerEventHandler("transition_complete_keyframe", f27_arg0.clipFinished)
@@ -248,7 +248,7 @@ CoD.PC_StartMenu_Options_TabContent.__clipsPerState = {
 			f27_arg0.SideButtons:setTopBottom(0, 0, 92, 368)
 			f27_local0(f27_arg0.SideButtons)
 			local f27_local1 = function(f29_arg0)
-				f27_arg0.OptionsList:beginAnimation(200, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f27_arg0.OptionsList:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_out"])
 				f27_arg0.OptionsList:setLeftRight(0.5, 0.5, -347, 347)
 				f27_arg0.OptionsList:registerEventHandler("interrupted_keyframe", f27_arg0.clipInterrupted)
 				f27_arg0.OptionsList:registerEventHandler("transition_complete_keyframe", f27_arg0.clipFinished)

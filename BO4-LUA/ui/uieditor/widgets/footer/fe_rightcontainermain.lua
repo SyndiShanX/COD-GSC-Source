@@ -17,18 +17,18 @@ CoD.fe_RightContainerMain.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	local Username = LUI.UIText.new(0, 0, 555, 1065, 1, 1, -40, -13)
 	Username:setText(GetFirstSignedInController())
 	Username:setTTF("ttmussels_regular")
-	Username:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	Username:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(Username)
 	self.Username = Username
 	local feFooterButtonPromptWithContainer0 = CoD.fe_FooterButtonPromptWithContainerMain.new(f1_arg0, f1_arg1, 0, 0, 1115, 1251, 1, 1, -72.5, 19.5)
-	feFooterButtonPromptWithContainer0.label:setText(LocalizeToUpperString(0xC2DF00C35019DD3))
+	feFooterButtonPromptWithContainer0.label:setText(LocalizeToUpperString(@"menu/switch_user"))
 	feFooterButtonPromptWithContainer0:subscribeToGlobalModel(f1_arg1, "Controller", "back_button_image", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
 			feFooterButtonPromptWithContainer0.buttonPromptImage:setImage(RegisterImage(f2_local0))
 		end
 	end)
-	feFooterButtonPromptWithContainer0:linkToElementModel(self, "" .. Enum[0x3DD78803F918E9D][0x93AB4C84F113EE1], false, function(model)
+	feFooterButtonPromptWithContainer0:linkToElementModel(self, "" .. Enum[@"luibutton"][@"lui_key_back"], false, function(model)
 		feFooterButtonPromptWithContainer0:setModel(model, f1_arg1)
 	end)
 	self:addElement(feFooterButtonPromptWithContainer0)

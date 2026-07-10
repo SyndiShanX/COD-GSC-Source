@@ -19,7 +19,7 @@ CoD.ZM_Restart_Level_Prompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 			end,
 		},
 	})
-	YesPrompt.Text:setText(LocalizeToUpperString(0xDFD294FC69F682))
+	YesPrompt.Text:setText(LocalizeToUpperString(@"menu/yes"))
 	YesPrompt:registerEventHandler("gain_focus", function(element, event)
 		local f3_local0 = nil
 		if element.gainFocus then
@@ -27,10 +27,10 @@ CoD.ZM_Restart_Level_Prompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 		elseif element.super.gainFocus then
 			f3_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f3_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(YesPrompt, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(YesPrompt, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if IsSelfInState(self, "Shown") and IsPC() then
 			RestartGameImmediate(menu, controller)
 			LockInput(self, controller, false)
@@ -42,10 +42,10 @@ CoD.ZM_Restart_Level_Prompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 		end
 	end, function(element, menu, controller)
 		if IsSelfInState(self, "Shown") and IsPC() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 			return false
 		elseif IsSelfInState(self, "Shown") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 			return false
 		else
 			return false
@@ -62,7 +62,7 @@ CoD.ZM_Restart_Level_Prompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 			end,
 		},
 	})
-	NoPrompt.Text:setText(LocalizeToUpperString(0x5C16E02B211A4F4))
+	NoPrompt.Text:setText(LocalizeToUpperString(@"menu/no"))
 	NoPrompt:registerEventHandler("gain_focus", function(element, event)
 		local f7_local0 = nil
 		if element.gainFocus then
@@ -70,10 +70,10 @@ CoD.ZM_Restart_Level_Prompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 		elseif element.super.gainFocus then
 			f7_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f7_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(NoPrompt, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(NoPrompt, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if IsSelfInState(self, "Shown") then
 			ResumeEndGame(menu, controller)
 			return true
@@ -81,7 +81,7 @@ CoD.ZM_Restart_Level_Prompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 		end
 	end, function(element, menu, controller)
 		if IsSelfInState(self, "Shown") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 			return false
 		else
 			return false
@@ -90,10 +90,10 @@ CoD.ZM_Restart_Level_Prompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self:addElement(NoPrompt)
 	self.NoPrompt = NoPrompt
 	local Prompt = LUI.UIText.new(0.5, 0.5, -350, 350, 0, 0, 0, 33)
-	Prompt:setText(Engine[0xF9F1239CFD921FE](0x48E5FC10A26A69D))
+	Prompt:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_148E5FC10A26A69D"))
 	Prompt:setTTF("skorzhen")
-	Prompt:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	Prompt:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Prompt:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	Prompt:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(Prompt)
 	self.Prompt = Prompt
 	self:mergeStateConditions({

@@ -37,11 +37,11 @@ LUI.createMenu.QuarterMasterMenu = function(f1_arg0, f1_arg1)
 	self:addElement(Frame)
 	self.Frame = Frame
 	local GenericMenuFrameIdentity = CoD.GenericMenuFrameIdentity.new(f1_local1, f1_arg0, 0.5, 0.5, -960, 960, 0, 1, 0, 0)
-	GenericMenuFrameIdentity.CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(0x29C903C6DF90D6F))
+	GenericMenuFrameIdentity.CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(@"menu/black_market"))
 	GenericMenuFrameIdentity:subscribeToGlobalModel(f1_arg0, "LobbyRoot", "lobbyTitle", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			GenericMenuFrameIdentity.CommonHeader.subtitle.subtitle:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			GenericMenuFrameIdentity.CommonHeader.subtitle.subtitle:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	self:addElement(GenericMenuFrameIdentity)
@@ -97,7 +97,7 @@ LUI.createMenu.QuarterMasterMenu = function(f1_arg0, f1_arg1)
 	})
 	local f1_local7 = self
 	local f1_local8 = self.subscribeToModel
-	local f1_local9 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	local f1_local9 = Engine[@"getmodelforcontroller"](f1_arg0)
 	f1_local8(f1_local7, f1_local9["LootStreamProgress.pagedRequestStatus"], function(f7_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",
@@ -109,35 +109,35 @@ LUI.createMenu.QuarterMasterMenu = function(f1_arg0, f1_arg1)
 	end, false)
 	f1_local7 = self
 	f1_local8 = self.subscribeToModel
-	f1_local9 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	f1_local9 = Engine[@"getmodelforcontroller"](f1_arg0)
 	f1_local8(f1_local7, f1_local9["LootStreamProgress.pagedRequestStatus"], function(f8_arg0, f8_arg1)
-		CoD.Menu.UpdateButtonShownState(f8_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
+		CoD.Menu.UpdateButtonShownState(f8_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
 	end, false)
 	f1_local7 = self
 	f1_local8 = self.subscribeToModel
-	f1_local9 = Engine[0x8DF2E5447F384B9]()
+	f1_local9 = Engine[@"getglobalmodel"]()
 	f1_local8(f1_local7, f1_local9["lobbyRoot.lobbyNetworkMode"], function(f9_arg0, f9_arg1)
-		CoD.Menu.UpdateButtonShownState(f9_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
-		CoD.Menu.UpdateButtonShownState(f9_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+		CoD.Menu.UpdateButtonShownState(f9_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+		CoD.Menu.UpdateButtonShownState(f9_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 	end, false)
 	f1_local7 = self
 	f1_local8 = self.subscribeToModel
 	f1_local9 = DataSources.AutoEvents.getModel(f1_arg0)
 	f1_local8(f1_local7, f1_local9.cycled, function(f10_arg0, f10_arg1)
-		CoD.Menu.UpdateButtonShownState(f10_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f10_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f10_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f10_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	self:appendEventHandler("input_source_changed", function(f11_arg0, f11_arg1)
 		f11_arg1.menu = f11_arg1.menu or f1_local1
-		CoD.Menu.UpdateButtonShownState(f11_arg0, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f11_arg0, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f11_arg0, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f11_arg0, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	f1_local7 = self
 	f1_local8 = self.subscribeToModel
-	f1_local9 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	f1_local9 = Engine[@"getmodelforcontroller"](f1_arg0)
 	f1_local8(f1_local7, f1_local9.LastInput, function(f12_arg0, f12_arg1)
-		CoD.Menu.UpdateButtonShownState(f12_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
-		CoD.Menu.UpdateButtonShownState(f12_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f12_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f12_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	self:registerEventHandler("occlusion_change", function(self, event)
 		local f13_local0 = nil
@@ -157,15 +157,15 @@ LUI.createMenu.QuarterMasterMenu = function(f1_arg0, f1_arg1)
 		CoD.BlackMarketUtility.MarkTabAsSeen(f1_arg0, f1_local1)
 		return f14_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		GoBack(self, controller)
 		PlaySoundAlias("uin_cmn_backout")
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 		return true
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], "ui_contextual_3", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], "ui_contextual_3", function(element, menu, controller, model)
 		if not CoD.ModelUtility.IsModelValueEqualTo(controller, "LootStreamProgress.pagedRequestStatus", "Requested") and IsCommerceEnabledOnPC() and AreCodPointsEnabled(controller) and not CoD.BlackMarketUtility.IsMenuOccluded(menu) and not IsGameTrial() then
 			OpenPopup(self, "PurchaseCodPoints", controller)
 			SetControllerModelValue(controller, "LootStreamProgress.playAnimation", false)
@@ -174,14 +174,14 @@ LUI.createMenu.QuarterMasterMenu = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if not CoD.ModelUtility.IsModelValueEqualTo(controller, "LootStreamProgress.pagedRequestStatus", "Requested") and IsCommerceEnabledOnPC() and AreCodPointsEnabled(controller) and not CoD.BlackMarketUtility.IsMenuOccluded(menu) and not IsGameTrial() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], 0x63D5409DEC36DFA, nil, "ui_contextual_3")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], @"hash_263D5409DEC36DFA", nil, "ui_contextual_3")
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA], nil, function(element, menu, controller, model)
-		if CoD.BlackMarketUtility.IsPageStreamHoldActionReady(menu, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA]) and IsDesiredFrameWidget(controller, self.Frame, "SupplyChainFrame") and not IsMenuInState(menu, "Processing") and IsPerControllerTablePropertyValue(controller, "allowTierPurchase", true) then
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_rtrig"], nil, function(element, menu, controller, model)
+		if CoD.BlackMarketUtility.IsPageStreamHoldActionReady(menu, Enum[@"luibutton"][@"lui_key_rtrig"]) and IsDesiredFrameWidget(controller, self.Frame, "SupplyChainFrame") and not IsMenuInState(menu, "Processing") and IsPerControllerTablePropertyValue(controller, "allowTierPurchase", true) then
 			CoD.BlackMarketUtility.PageStreamHoldUpdateAction(menu)
 			PlaySoundAlias("uin_trigger_slide")
 			SetFocusedTierModelValue(controller, "5", "increment")
@@ -190,15 +190,15 @@ LUI.createMenu.QuarterMasterMenu = function(f1_arg0, f1_arg1)
 		else
 		end
 	end, function(element, menu, controller)
-		if CoD.BlackMarketUtility.IsPageStreamHoldActionReady(menu, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA]) and IsDesiredFrameWidget(controller, self.Frame, "SupplyChainFrame") and not IsMenuInState(menu, "Processing") and IsPerControllerTablePropertyValue(controller, "allowTierPurchase", true) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA], 0x0, nil, nil)
+		if CoD.BlackMarketUtility.IsPageStreamHoldActionReady(menu, Enum[@"luibutton"][@"lui_key_rtrig"]) and IsDesiredFrameWidget(controller, self.Frame, "SupplyChainFrame") and not IsMenuInState(menu, "Processing") and IsPerControllerTablePropertyValue(controller, "allowTierPurchase", true) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_rtrig"], @"hash_0", nil, nil)
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC], nil, function(element, menu, controller, model)
-		if CoD.BlackMarketUtility.IsPageStreamHoldActionReady(menu, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC]) and IsDesiredFrameWidget(controller, self.Frame, "SupplyChainFrame") and not IsMenuInState(menu, "Processing") and IsPerControllerTablePropertyValue(controller, "allowTierPurchase", true) then
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_ltrig"], nil, function(element, menu, controller, model)
+		if CoD.BlackMarketUtility.IsPageStreamHoldActionReady(menu, Enum[@"luibutton"][@"lui_key_ltrig"]) and IsDesiredFrameWidget(controller, self.Frame, "SupplyChainFrame") and not IsMenuInState(menu, "Processing") and IsPerControllerTablePropertyValue(controller, "allowTierPurchase", true) then
 			CoD.BlackMarketUtility.PageStreamHoldUpdateAction(menu)
 			PlaySoundAlias("uin_trigger_slide")
 			SetFocusedTierModelValue(controller, "5", "decrement")
@@ -207,14 +207,14 @@ LUI.createMenu.QuarterMasterMenu = function(f1_arg0, f1_arg1)
 		else
 		end
 	end, function(element, menu, controller)
-		if CoD.BlackMarketUtility.IsPageStreamHoldActionReady(menu, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC]) and IsDesiredFrameWidget(controller, self.Frame, "SupplyChainFrame") and not IsMenuInState(menu, "Processing") and IsPerControllerTablePropertyValue(controller, "allowTierPurchase", true) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC], 0x0, nil, nil)
+		if CoD.BlackMarketUtility.IsPageStreamHoldActionReady(menu, Enum[@"luibutton"][@"lui_key_ltrig"]) and IsDesiredFrameWidget(controller, self.Frame, "SupplyChainFrame") and not IsMenuInState(menu, "Processing") and IsPerControllerTablePropertyValue(controller, "allowTierPurchase", true) then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_ltrig"], @"hash_0", nil, nil)
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], nil, function(element, menu, controller, model)
 		if IsDesiredFrameWidget(controller, self.Frame, "SupplyChainFrame") and not IsMenuInState(menu, "Processing") and CoD.BlackMarketUtility.ShowPurchaseTiersPrompt(controller, self.Frame, "PurchaseTiers") and AreCodPointsEnabled(controller) and IsPerControllerTablePropertyValue(controller, "allowTierPurchase", true) and not IsGameTrial() then
 			CoD.BlackMarketUtility.SetHighlightedPurchaseTier(controller, self.Frame)
 			CoD.BlackMarketUtility.OpenPurchaseTiersConfirmation(controller, self, self.Frame)
@@ -232,19 +232,19 @@ LUI.createMenu.QuarterMasterMenu = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if IsDesiredFrameWidget(controller, self.Frame, "SupplyChainFrame") and not IsMenuInState(menu, "Processing") and CoD.BlackMarketUtility.ShowPurchaseTiersPrompt(controller, self.Frame, "PurchaseTiers") and AreCodPointsEnabled(controller) and IsPerControllerTablePropertyValue(controller, "allowTierPurchase", true) and not IsGameTrial() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0xFAF2C4773992641, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"hash_5FAF2C4773992641", nil, nil)
 			return true
 		elseif IsDesiredFrameWidget(controller, self.Frame, "SupplyChainFrame") and not IsMenuInState(menu, "Processing") and AreCodPointsEnabled(controller) and IsPerControllerTablePropertyValue(controller, "allowTierPurchase", true) and not IsGameTrial() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x0, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"hash_0", nil, nil)
 			return false
 		elseif IsDesiredFrameWidget(controller, self.Frame, "BlackjackReserveFrame") and CoD.BlackMarketUtility.CanShowReservesPreview(controller) and IsGamepad(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x0, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"hash_0", nil, nil)
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_remove", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_remove", function(element, menu, controller, model)
 		if IsDesiredFrameWidget(controller, self.Frame, "BlackjackReserveFrame") and CoD.BlackMarketUtility.CanShowReservesPreview(controller) and IsMouseOrKeyboard(controller) then
 			CoD.BlackMarketUtility.PlayReservesPreviewVideo(controller, menu, false, true)
 			return true
@@ -263,19 +263,19 @@ LUI.createMenu.QuarterMasterMenu = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if IsDesiredFrameWidget(controller, self.Frame, "BlackjackReserveFrame") and CoD.BlackMarketUtility.CanShowReservesPreview(controller) and IsMouseOrKeyboard(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_remove")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_remove")
 			return false
 		elseif IsDesiredFrameWidget(controller, self.Frame, "SupplyChainFrame") and not CoD.BlackMarketUtility.IsSupplyChainActiveWidgetModelValueNil(self.Frame, controller, "movieName") and not CoD.BlackMarketUtility.IsSupplyChainActiveWidgetModelValueEqualTo(self.Frame, controller, "movieName", "") and not IsMenuInState(menu, "Processing") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_remove")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_remove")
 			return false
 		elseif IsDesiredFrameWidget(controller, self.Frame, "SupplyChainFrame") and CoD.BlackMarketUtility.IsSupplyChainActiveWidgetModelValueEqualTo(self.Frame, controller, "allowFrozenMoment", true) and not IsMenuInState(menu, "Processing") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_remove")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_remove")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x29E5695FF1401AD], "ui_contextual_2", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_rstick_pressed"], "ui_contextual_2", function(element, menu, controller, model)
 		if IsDesiredFrameWidget(controller, self.Frame, "SupplyChainFrame") and CoD.BlackMarketUtility.CanPlayGesture(self.Frame) and not IsMenuInState(menu, "Processing") then
 			PlaySoundAlias("uin_toggle_generic")
 			CoD.BlackMarketUtility.PlayGesture(self, self.Frame, controller)
@@ -288,37 +288,37 @@ LUI.createMenu.QuarterMasterMenu = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if IsDesiredFrameWidget(controller, self.Frame, "SupplyChainFrame") and CoD.BlackMarketUtility.CanPlayGesture(self.Frame) and not IsMenuInState(menu, "Processing") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x29E5695FF1401AD], 0x0, nil, "ui_contextual_2")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_rstick_pressed"], @"hash_0", nil, "ui_contextual_2")
 			return false
 		elseif IsDesiredFrameWidget(controller, self.Frame, "ItemShopFrame") and CoD.BlackMarketUtility.CanPlayGesture(self.Frame) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x29E5695FF1401AD], 0x0, nil, "ui_contextual_2")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_rstick_pressed"], @"hash_0", nil, "ui_contextual_2")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x93AB4C84F113EE1], "ui_contextual_1", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_back"], "ui_contextual_1", function(element, menu, controller, model)
 		if not IsMenuInState(menu, "Processing") and CoD.BlackMarketUtility.CanToggleSignatureWeapon(self.Frame) then
 			PlaySoundAlias("uin_toggle_generic")
 			CoD.BlackMarketUtility.ToggleSignatureWeapon(menu, controller, self.Frame)
 			return true
-		elseif IsDesiredFrameWidget(controller, self.Frame, "SupplyChainFrame") and CoD.BlackMarketUtility.IsSupplyChainActiveWidgetModelValueEqualTo(self.Frame, controller, "allowTogglePreview", true) and not CoD.BlackMarketUtility.IsSupplyChainActiveWidgetModelValueEqualTo(self.Frame, controller, "itemCategory", 0xCC13B0F8EEFF726) then
+		elseif IsDesiredFrameWidget(controller, self.Frame, "SupplyChainFrame") and CoD.BlackMarketUtility.IsSupplyChainActiveWidgetModelValueEqualTo(self.Frame, controller, "allowTogglePreview", true) and not CoD.BlackMarketUtility.IsSupplyChainActiveWidgetModelValueEqualTo(self.Frame, controller, "itemCategory", @"signature_weapon") then
 			CoD.BlackMarketUtility.ToggleCharacterModelCamera(menu, self.Frame, controller)
 			return true
 		else
 		end
 	end, function(element, menu, controller)
 		if not IsMenuInState(menu, "Processing") and CoD.BlackMarketUtility.CanToggleSignatureWeapon(self.Frame) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x93AB4C84F113EE1], 0x0, nil, "ui_contextual_1")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_back"], @"hash_0", nil, "ui_contextual_1")
 			return false
-		elseif IsDesiredFrameWidget(controller, self.Frame, "SupplyChainFrame") and CoD.BlackMarketUtility.IsSupplyChainActiveWidgetModelValueEqualTo(self.Frame, controller, "allowTogglePreview", true) and not CoD.BlackMarketUtility.IsSupplyChainActiveWidgetModelValueEqualTo(self.Frame, controller, "itemCategory", 0xCC13B0F8EEFF726) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x93AB4C84F113EE1], 0x0, nil, "ui_contextual_1")
+		elseif IsDesiredFrameWidget(controller, self.Frame, "SupplyChainFrame") and CoD.BlackMarketUtility.IsSupplyChainActiveWidgetModelValueEqualTo(self.Frame, controller, "allowTogglePreview", true) and not CoD.BlackMarketUtility.IsSupplyChainActiveWidgetModelValueEqualTo(self.Frame, controller, "itemCategory", @"signature_weapon") then
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_back"], @"hash_0", nil, "ui_contextual_1")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "MWHEELDOWN", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_none"], "MWHEELDOWN", function(element, menu, controller, model)
 		if not IsRepeatButtonPress(model) and IsDesiredFrameWidget(controller, self.Frame, "SupplyChainFrame") and not IsMenuInState(menu, "Processing") then
 			PlaySoundAlias("uin_trigger_slide")
 			SetFocusedTierModelValue(controller, "5", "increment")
@@ -328,13 +328,13 @@ LUI.createMenu.QuarterMasterMenu = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if not IsRepeatButtonPress(nil) and IsDesiredFrameWidget(controller, self.Frame, "SupplyChainFrame") and not IsMenuInState(menu, "Processing") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "MWHEELDOWN")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "MWHEELDOWN")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "MWHEELUP", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_none"], "MWHEELUP", function(element, menu, controller, model)
 		if not IsRepeatButtonPress(model) and IsDesiredFrameWidget(controller, self.Frame, "SupplyChainFrame") and not IsMenuInState(menu, "Processing") then
 			PlaySoundAlias("uin_trigger_slide")
 			SetFocusedTierModelValue(controller, "5", "decrement")
@@ -344,7 +344,7 @@ LUI.createMenu.QuarterMasterMenu = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if not IsRepeatButtonPress(nil) and IsDesiredFrameWidget(controller, self.Frame, "SupplyChainFrame") and not IsMenuInState(menu, "Processing") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "MWHEELUP")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "MWHEELUP")
 			return false
 		else
 			return false
@@ -396,7 +396,7 @@ LUI.createMenu.QuarterMasterMenu = function(f1_arg0, f1_arg1)
 		CoD.BlackMarketUtility.QuarterMasterFrameChangeActions(f1_local1, self.Frame, f1_arg0)
 		CoD.BlackMarketUtility.PlayBlackMarketFrontendMusic(self, f1_arg0)
 		AutoSelectCodPointCategory(self, f1_arg0)
-		CoD.BlackMarketUtility.SetupPageStreamHoldActionReadyCheck(f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xD2F467A6C6DA1AC], Enum[0x3DD78803F918E9D][0x820DDD869ABBFAA])
+		CoD.BlackMarketUtility.SetupPageStreamHoldActionReadyCheck(f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_ltrig"], Enum[@"luibutton"][@"lui_key_rtrig"])
 		CoD.BlackMarketUtility.ShowFreeBundlePopupIfNeeded(self.Frame, f1_arg0)
 		CoD.BlackMarketUtility.SetBlackMarketMenuForTest(f1_arg0, f1_local1)
 	end

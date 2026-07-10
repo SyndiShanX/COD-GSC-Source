@@ -15,12 +15,12 @@ LUI.createMenu.VHUD_HCXD = function(f1_arg0, f1_arg1)
 	f1_local1:addElementToPendingUpdateStateList(self)
 	local vignette = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	vignette:setAlpha(0)
-	vignette:setImage(RegisterImage(0xA3FCEE6B2432ABF))
+	vignette:setImage(RegisterImage(@"uie_t7_hcxd_vignette_score_streak"))
 	self:addElement(vignette)
 	self.vignette = vignette
 	local vignetteCenter = LUI.UIImage.new(0, 1, -304, 304, 0, 1, -177, 165)
 	vignetteCenter:setAlpha(0)
-	vignetteCenter:setImage(RegisterImage(0xEE4980C2A8CEA50))
+	vignetteCenter:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_agr_backgroundtint"))
 	self:addElement(vignetteCenter)
 	self.vignetteCenter = vignetteCenter
 	local hudspeedometerwidget = CoD.hud_speedometer_widget.new(f1_local1, f1_arg0, 0.5, 0.5, -785, -533, 1, 1, -305.5, -173.5)
@@ -47,7 +47,7 @@ LUI.createMenu.VHUD_HCXD = function(f1_arg0, f1_arg1)
 	end)
 	local f1_local6 = self
 	local f1_local7 = self.subscribeToModel
-	local f1_local8 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	local f1_local8 = Engine[@"getmodelforcontroller"](f1_arg0)
 	f1_local7(f1_local6, f1_local8.LastInput, function(f5_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",

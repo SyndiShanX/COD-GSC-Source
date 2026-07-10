@@ -50,7 +50,7 @@ CoD.BMTallItemContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	ItemHintText:linkToElementModel(self, "toolTipText", true, function(model)
 		local f7_local0 = model:get()
 		if f7_local0 ~= nil then
-			ItemHintText.textCenterAlign:setText(Engine[0xF9F1239CFD921FE](f7_local0))
+			ItemHintText.textCenterAlign:setText(Engine[@"hash_4F9F1239CFD921FE"](f7_local0))
 		end
 	end)
 	self:addElement(ItemHintText)
@@ -157,7 +157,7 @@ CoD.BMTallItemContainer.__clipsPerState = {
 			f20_arg0:__resetProperties()
 			f20_arg0:setupElementClipCounter(3)
 			local f20_local0 = function(f21_arg0)
-				f20_arg0.BMTallItem:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f20_arg0.BMTallItem:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f20_arg0.BMTallItem:setScale(1.05, 1.05)
 				f20_arg0.BMTallItem:registerEventHandler("interrupted_keyframe", f20_arg0.clipInterrupted)
 				f20_arg0.BMTallItem:registerEventHandler("transition_complete_keyframe", f20_arg0.clipFinished)
@@ -182,7 +182,7 @@ CoD.BMTallItemContainer.__clipsPerState = {
 			f23_arg0:__resetProperties()
 			f23_arg0:setupElementClipCounter(1)
 			local f23_local0 = function(f24_arg0)
-				f23_arg0.BMTallItem:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f23_arg0.BMTallItem:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_both"])
 				f23_arg0.BMTallItem:setScale(1, 1)
 				f23_arg0.BMTallItem:registerEventHandler("interrupted_keyframe", f23_arg0.clipInterrupted)
 				f23_arg0.BMTallItem:registerEventHandler("transition_complete_keyframe", f23_arg0.clipFinished)

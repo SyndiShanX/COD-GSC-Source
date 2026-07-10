@@ -18,8 +18,8 @@ CoD.LiveEventViewerFooter.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	self.blackleftBG = blackleftBG
 	local LineLeft = LUI.UIImage.new(0, 1, -185, 197, 1, 1, -63, -57)
 	LineLeft:setAlpha(0.55)
-	LineLeft:setImage(RegisterImage(0x563843FB53DC2A3))
-	LineLeft:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	LineLeft:setImage(RegisterImage(@"uie_t7_menu_frontend_featuredframeum"))
+	LineLeft:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(LineLeft)
 	self.LineLeft = LineLeft
 	local feLeftContainer = CoD.fe_LeftContainer_NOTLobby.new(f1_arg0, f1_arg1, 0, 0, 23, 825, 1, 1, -72, -6)
@@ -39,7 +39,7 @@ CoD.LiveEventViewerFooter.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	})
 	local f1_local5 = twitchIcon
 	local LiveEventViewerStreamerCount0 = twitchIcon.subscribeToModel
-	local f1_local7 = Engine[0x8DF2E5447F384B9]()
+	local f1_local7 = Engine[@"getglobalmodel"]()
 	LiveEventViewerStreamerCount0(f1_local5, f1_local7["liveEventViewer.stream"], function(f4_arg0)
 		f1_arg0:updateElementState(twitchIcon, {
 			name = "model_validation",
@@ -49,7 +49,7 @@ CoD.LiveEventViewerFooter.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 			modelName = "liveEventViewer.stream",
 		})
 	end, false)
-	twitchIcon.image:setImage(RegisterImage(0x259F69CEC0E85FA))
+	twitchIcon.image:setImage(RegisterImage(@"uie_twitch_icon_white"))
 	self:addElement(twitchIcon)
 	self.twitchIcon = twitchIcon
 	LiveEventViewerStreamerCount0 = CoD.LiveEventViewerStreamerCount.new(f1_arg0, f1_arg1, 1, 1, -285, -49, 1, 1, -49, -11)

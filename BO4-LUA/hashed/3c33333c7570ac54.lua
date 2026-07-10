@@ -10,8 +10,8 @@ CoD.UnlockBonusAndXPIcon.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	local UnlockBonus = LUI.UIText.new(0, 0, 23, 223, 0, 0, 0, 21)
 	UnlockBonus:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	UnlockBonus:setTTF("ttmussels_regular")
-	UnlockBonus:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	UnlockBonus:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	UnlockBonus:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	UnlockBonus:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	UnlockBonus:linkToElementModel(self, "unlockReward", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -21,7 +21,7 @@ CoD.UnlockBonusAndXPIcon.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	self:addElement(UnlockBonus)
 	self.UnlockBonus = UnlockBonus
 	local XPIcon = LUI.UIImage.new(0, 0, 0, 20, 0, 0, 0, 20)
-	XPIcon:setImage(RegisterImage(0x26A772C784CD242))
+	XPIcon:setImage(RegisterImage(@"t7_hud_mp_notifications_xp_alt"))
 	self:addElement(XPIcon)
 	self.XPIcon = XPIcon
 	self:mergeStateConditions({
@@ -29,8 +29,8 @@ CoD.UnlockBonusAndXPIcon.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 			stateName = "Hidden",
 			condition = function(menu, element, event)
 				local f3_local0
-				if not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "unlockSessionMode", Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5]) then
-					f3_local0 = not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "unlockSessionMode", Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A])
+				if not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "unlockSessionMode", Enum[@"emodes"][@"mode_multiplayer"]) then
+					f3_local0 = not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "unlockSessionMode", Enum[@"emodes"][@"mode_zombies"])
 				else
 					f3_local0 = false
 				end

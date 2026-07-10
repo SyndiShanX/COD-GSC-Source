@@ -52,7 +52,7 @@ CoD.Hud_ZM_Trial_Objective.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	})
 	local f1_local4 = ObjectiveScratchOut
 	local ZMTitleFog = ObjectiveScratchOut.subscribeToModel
-	local f1_local6 = Engine[0x8DF2E5447F384B9]()
+	local f1_local6 = Engine[@"getglobalmodel"]()
 	ZMTitleFog(f1_local4, f1_local6["ZMHudGlobal.trials.roundSuccess"], function(f6_arg0)
 		f1_arg0:updateElementState(ObjectiveScratchOut, {
 			name = "model_validation",
@@ -64,7 +64,7 @@ CoD.Hud_ZM_Trial_Objective.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	end, false)
 	f1_local4 = ObjectiveScratchOut
 	ZMTitleFog = ObjectiveScratchOut.subscribeToModel
-	f1_local6 = Engine[0x8DF2E5447F384B9]()
+	f1_local6 = Engine[@"getglobalmodel"]()
 	ZMTitleFog(f1_local4, f1_local6["ZMHudGlobal.trials.infoHidden"], function(f7_arg0)
 		f1_arg0:updateElementState(ObjectiveScratchOut, {
 			name = "model_validation",
@@ -92,7 +92,7 @@ CoD.Hud_ZM_Trial_Objective.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 			stateName = "ShowHudDeactivatedTrial",
 			condition = function(menu, element, event)
 				local f9_local0
-				if not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x198075B069840DC]) and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F]) and not CoD.ModelUtility.IsGlobalModelValueTrue("ZMHudGlobal.trials.infoHidden") then
+				if not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_game_ended"]) and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_play_of_the_match"]) and not CoD.ModelUtility.IsGlobalModelValueTrue("ZMHudGlobal.trials.infoHidden") then
 					f9_local0 = CoD.HUDUtility.IsAnyGameType(f1_arg1, "ztrials")
 					if f9_local0 then
 						f9_local0 = CoD.ModelUtility.IsGlobalModelValueEqualTo("ZMHudGlobal.trials.hudDeactivated", 1)
@@ -107,7 +107,7 @@ CoD.Hud_ZM_Trial_Objective.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 			stateName = "RoundSuccess",
 			condition = function(menu, element, event)
 				local f10_local0
-				if not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x198075B069840DC]) and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F]) and not CoD.ModelUtility.IsGlobalModelValueTrue("ZMHudGlobal.trials.infoHidden") then
+				if not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_game_ended"]) and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_play_of_the_match"]) and not CoD.ModelUtility.IsGlobalModelValueTrue("ZMHudGlobal.trials.infoHidden") then
 					f10_local0 = CoD.HUDUtility.IsAnyGameType(f1_arg1, "ztrials")
 					if f10_local0 then
 						f10_local0 = CoD.ModelUtility.IsGlobalModelValueEqualTo("ZMHudGlobal.trials.roundSuccess", 1)
@@ -122,7 +122,7 @@ CoD.Hud_ZM_Trial_Objective.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 			stateName = "Show",
 			condition = function(menu, element, event)
 				local f11_local0
-				if not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x198075B069840DC]) and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F]) and not CoD.ModelUtility.IsGlobalModelValueTrue("ZMHudGlobal.trials.infoHidden") then
+				if not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_game_ended"]) and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_play_of_the_match"]) and not CoD.ModelUtility.IsGlobalModelValueTrue("ZMHudGlobal.trials.infoHidden") then
 					f11_local0 = CoD.HUDUtility.IsAnyGameType(f1_arg1, "ztrials")
 				else
 					f11_local0 = false
@@ -133,7 +133,7 @@ CoD.Hud_ZM_Trial_Objective.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	})
 	f1_local6 = self
 	f1_local4 = self.subscribeToModel
-	local f1_local7 = Engine[0x8DF2E5447F384B9]()
+	local f1_local7 = Engine[@"getglobalmodel"]()
 	f1_local4(f1_local6, f1_local7["ZMHudGlobal.trials.infoHidden"], function(f12_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -145,31 +145,31 @@ CoD.Hud_ZM_Trial_Objective.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	end, false)
 	f1_local6 = self
 	f1_local4 = self.subscribeToModel
-	f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local4(f1_local6, f1_local7["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x198075B069840DC]], function(f13_arg0)
+	f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local4(f1_local6, f1_local7["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_game_ended"]], function(f13_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f13_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x198075B069840DC],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_game_ended"],
 		})
 	end, false)
 	f1_local6 = self
 	f1_local4 = self.subscribeToModel
-	f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local4(f1_local6, f1_local7["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F]], function(f14_arg0)
+	f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local4(f1_local6, f1_local7["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_play_of_the_match"]], function(f14_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f14_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_play_of_the_match"],
 		})
 	end, false)
 	f1_local6 = self
 	f1_local4 = self.subscribeToModel
-	f1_local7 = Engine[0x8DF2E5447F384B9]()
+	f1_local7 = Engine[@"getglobalmodel"]()
 	f1_local4(f1_local6, f1_local7["ZMHudGlobal.trials.hudDeactivated"], function(f15_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -181,7 +181,7 @@ CoD.Hud_ZM_Trial_Objective.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	end, false)
 	f1_local6 = self
 	f1_local4 = self.subscribeToModel
-	f1_local7 = Engine[0x8DF2E5447F384B9]()
+	f1_local7 = Engine[@"getglobalmodel"]()
 	f1_local4(f1_local6, f1_local7["ZMHudGlobal.trials.roundSuccess"], function(f16_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

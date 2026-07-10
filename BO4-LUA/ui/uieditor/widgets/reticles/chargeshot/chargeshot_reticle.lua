@@ -8,7 +8,7 @@ CoD.ChargeShot_reticle.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	self.id = "ChargeShot_reticle"
 	self.soundSet = "ChooseDecal"
 	local ui3d = CoD.ChargeShot_reticle_ui3d.new(f1_arg0, f1_arg1, 0.5, 0.5, -524, 524, 0.5, 0.5, -444, 442)
-	Engine[0xF0AF2C4A29D15D7](f1_arg1, 3, 1048, 886)
+	Engine[@"setupui3dwindow"](f1_arg1, 3, 1048, 886)
 	ui3d:setUI3DWindow(3)
 	ui3d:subscribeToGlobalModel(f1_arg1, "CurrentWeapon", nil, function(model)
 		ui3d:setModel(model, f1_arg1)

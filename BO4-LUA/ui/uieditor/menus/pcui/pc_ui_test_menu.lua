@@ -12,15 +12,15 @@ LUI.createMenu.PC_UI_Test_Menu = function(f1_arg0, f1_arg1)
 	self:playSound("menu_open", f1_arg0)
 	self.anyChildUsesUpdateState = true
 	local Background = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	Background:setImage(RegisterImage(0x4BF88A437F4C579))
+	Background:setImage(RegisterImage(@"uie_fe_cp_background"))
 	self:addElement(Background)
 	self.Background = Background
 	local MenuFrame = CoD.GenericMenuFrame.new(f1_local1, f1_arg0, 0, 1, 0, 0, 0, 1, 0, 0)
-	MenuFrame.CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(0xBB7AA7A26F39DFA))
+	MenuFrame.CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(@"hash_BB7AA7A26F39DFA"))
 	MenuFrame:subscribeToGlobalModel(f1_arg0, "LobbyRoot", "lobbyTitle", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			MenuFrame.CommonHeader.subtitle.subtitle:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			MenuFrame.CommonHeader.subtitle.subtitle:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	self:addElement(MenuFrame)
@@ -33,11 +33,11 @@ LUI.createMenu.PC_UI_Test_Menu = function(f1_arg0, f1_arg1)
 	TabFrame:setTopBottom(0, 0.74, 187.5, 187.5)
 	self:addElement(TabFrame)
 	self.TabFrame = TabFrame
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], "ESCAPE", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], "ESCAPE", function(element, menu, controller, model)
 		SendMenuResponse(self, "PC_UI_Test_Menu", "closing", controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x6C253CF816B40B5, nil, "ESCAPE")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/close", nil, "ESCAPE")
 		return true
 	end, false)
 	MenuFrame:setModel(self.buttonModel, f1_arg0)

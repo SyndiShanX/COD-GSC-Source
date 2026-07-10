@@ -16,7 +16,7 @@ CoD.vhud_ms_StatusWidgetBottom.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 		{
 			stateName = "Active",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "fullscreenFilter", Enum[0xE70CC98CD3717D0][0x2F62AA55E8A2010])
+				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "fullscreenFilter", Enum[@"vehiclefullscreenfilter"][@"vehicle_fullscreen_filter_infrared"])
 			end,
 		},
 	})
@@ -39,7 +39,7 @@ CoD.vhud_ms_StatusWidgetBottom.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 		{
 			stateName = "Active",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "fullscreenFilter", Enum[0xE70CC98CD3717D0][0x13D609C34003A6C])
+				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "fullscreenFilter", Enum[@"vehiclefullscreenfilter"][@"vehicle_fullscreen_filter_flir"])
 			end,
 		},
 	})

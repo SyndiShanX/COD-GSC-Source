@@ -1,7 +1,7 @@
 CoD.ZMAmmoWidgetUtility = {}
 CoD.ZMAmmoWidgetUtility.AmmoWidgetZMEquipedWeaponsListPipState = LuaEnum.createEnum("NO_WEAPON", "HAS_WEAPON", "HAS_EQUIPPED_WEAPON")
 CoD.ZMAmmoWidgetUtility.HasPerk = function(f1_arg0, f1_arg1, f1_arg2)
-	local f1_local0 = Engine[0xD97229B24C685D5](f1_arg1, f1_arg2)
+	local f1_local0 = Engine[@"hash_2D97229B24C685D5"](f1_arg1, f1_arg2)
 	for f1_local1 = 0, CoD.ZMPerkUtility.PerkVaporCount - 1, 1 do
 		local f1_local4 = DataSources.HUDItems.getModel(f1_arg0)
 		f1_local4 = f1_local4["perkVapor." .. f1_local1]
@@ -18,11 +18,11 @@ CoD.ZMAmmoWidgetUtility.HasPerk = function(f1_arg0, f1_arg1, f1_arg2)
 	end
 end
 CoD.ZMAmmoWidgetUtility.GetHeldWeaponsUpdatedModel = function(f2_arg0)
-	local f2_local0 = Engine[0x4DF5CFBC1771947](f2_arg0)
+	local f2_local0 = Engine[@"getmodelforcontroller"](f2_arg0)
 	return f2_local0:create("heldWeaponsUpdated")
 end
 CoD.ZMAmmoWidgetUtility.GetHeldWeaponsList = function(f3_arg0, f3_arg1)
-	local f3_local0 = Engine[0x4DF5CFBC1771947](f3_arg0)
+	local f3_local0 = Engine[@"getmodelforcontroller"](f3_arg0)
 	local f3_local1 = f3_local0.heldWeapons
 	local f3_local2 = {}
 	for f3_local3 = 0, CoD.WeaponUtility.MaxHeldWeapons - 1, 1 do
@@ -30,7 +30,7 @@ CoD.ZMAmmoWidgetUtility.GetHeldWeaponsList = function(f3_arg0, f3_arg1)
 		if f3_local6 then
 			local f3_local7 = f3_local6.weapon:get()
 			if f3_local7 and f3_local7 > 0 then
-				local f3_local8 = Engine[0xB8891E0F105C51F](f3_local7)
+				local f3_local8 = Engine[@"getloadoutslotforitem"](f3_local7)
 				if f3_local8 == "primary" or f3_local8 == "secondary" then
 					table.insert(f3_local2, f3_local7)
 				end
@@ -48,7 +48,7 @@ CoD.ZMAmmoWidgetUtility.WeaponsListHasWeapon = function(f4_arg0, f4_arg1)
 end
 DataSources.AmmoWidgetZMEquippedWeaponsList = DataSourceHelpers.CustomListSetup("AmmoWidgetZMEquippedWeaponsList", function(f5_arg0, f5_arg1, f5_arg2, f5_arg3, f5_arg4)
 	local f5_local0 = 2
-	if CoD.ZMAmmoWidgetUtility.HasPerk(f5_arg1, 0x8C176152188E03F, Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A]) then
+	if CoD.ZMAmmoWidgetUtility.HasPerk(f5_arg1, @"perk_additional_primary_weapon", Enum[@"emodes"][@"mode_zombies"]) then
 		f5_local0 = 3
 	end
 	local f5_local1 = CoD.ZMAmmoWidgetUtility.GetHeldWeaponsList(f5_arg1, f5_local0)
@@ -115,7 +115,7 @@ DataSources.AmmoWidgetZMEquippedWeaponsList = DataSourceHelpers.CustomListSetup(
 	if f5_arg0.__numWeaponSlotsChangedSubscription then
 		f5_arg0:removeSubscription(f5_arg0.__numWeaponSlotsChangedSubscription)
 	end
-	f5_local3 = Engine[0x4DF5CFBC1771947](f5_arg1)
+	f5_local3 = Engine[@"getmodelforcontroller"](f5_arg1)
 	f5_arg0.__numWeaponSlotsChangedSubscription = f5_arg0:subscribeToModel(f5_local3:create("PerkVaporStateUpdated"), function()
 		f5_arg0:updateDataSource()
 	end, false)

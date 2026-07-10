@@ -9,7 +9,7 @@ CoD.CallingCards_replacer_scooter.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local scooter = LUI.UIImage.new(0, 0, 0, 496, 0, 0, 0, 240)
-	scooter:setImage(RegisterImage(0x992AED67DBD0726))
+	scooter:setImage(RegisterImage(@"hash_5992AED67DBD0726"))
 	self:addElement(scooter)
 	self.scooter = scooter
 	local smoke = CoD.CallingCards_replacer_smoke.new(f1_arg0, f1_arg1, 0, 0, 474.5, 484.5, 0, 0, 224.5, 234.5)

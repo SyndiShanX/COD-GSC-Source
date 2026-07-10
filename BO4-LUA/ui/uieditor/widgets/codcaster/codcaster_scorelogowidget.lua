@@ -8,11 +8,11 @@ CoD.codcaster_ScoreLogoWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local teamcolor = LUI.UIImage.new(0.5, 0.5, -157.5, 157.5, 0, 0, 0, 98)
-	teamcolor:setImage(RegisterImage(0x23D16DB74116F90))
+	teamcolor:setImage(RegisterImage(@"uie_t7_codcaster_colorback"))
 	self:addElement(teamcolor)
 	self.teamcolor = teamcolor
 	local logobacking = LUI.UIImage.new(0, 0, 107, 273, 0, 0, 3, 101)
-	logobacking:setImage(RegisterImage(0x2AC54E7868409F8))
+	logobacking:setImage(RegisterImage(@"uie_t7_codcaster_logobottom"))
 	self:addElement(logobacking)
 	self.logobacking = logobacking
 	local emblem = LUI.UIImage.new(0, 0, 138, 256, 0, 0, 8, 95)
@@ -22,15 +22,15 @@ CoD.codcaster_ScoreLogoWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self:addElement(logo)
 	self.logo = logo
 	local logotopRight = LUI.UIImage.new(0, 0, 108, 280, 0, 0, 3, 101)
-	logotopRight:setImage(RegisterImage(0x91669C6409EFB66))
+	logotopRight:setImage(RegisterImage(@"uie_t7_codcaster_logotop"))
 	self:addElement(logotopRight)
 	self.logotopRight = logotopRight
 	local numberbacking = LUI.UIImage.new(0, 0, 2, 138, 0, 0, 2, 101)
-	numberbacking:setImage(RegisterImage(0x6CDBC64E321582))
+	numberbacking:setImage(RegisterImage(@"uie_t7_codcaster_numberbacking"))
 	self:addElement(numberbacking)
 	self.numberbacking = numberbacking
 	local teamiconbg = LUI.UIImage.new(0.5, 0.5, 90, 126, 0, 0, 2, 100)
-	teamiconbg:setImage(RegisterImage(0x5840333C83A0F2C))
+	teamiconbg:setImage(RegisterImage(@"uie_t7_codcaster_blackbar"))
 	self:addElement(teamiconbg)
 	self.teamiconbg = teamiconbg
 	self:mergeStateConditions({

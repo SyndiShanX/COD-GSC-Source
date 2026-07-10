@@ -8,14 +8,14 @@ CoD.VehicleGround_ModT5.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Image5 = LUI.UIImage.new(0, 0, 0, 168, 0, 0, 0, 54)
-	Image5:setImage(RegisterImage(0xE96BD34BB0997BC))
-	Image5:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Image5:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_ground_modulest5"))
+	Image5:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Image5)
 	self.Image5 = Image5
 	local Image0 = LUI.UIImage.new(0, 0, 126, 138, 0, 0, 34, 46)
 	Image0:setAlpha(0.2)
-	Image0:setImage(RegisterImage(0xB0113AB62B1A835))
-	Image0:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Image0:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_ground_modulespixel"))
+	Image0:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Image0)
 	self.Image0 = Image0
 	self:mergeStateConditions({

@@ -33,13 +33,13 @@ LUI.createMenu.ZMSpecialWeaponSelect = function(f1_arg0, f1_arg1)
 	itemList:setWidgetType(CoD.ZMItemGridButton)
 	itemList:setHorizontalCount(4)
 	itemList:setSpacing(9)
-	itemList:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	itemList:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	itemList:setDataSource("ZMSpecialWeapons")
 	itemList:linkToElementModel(itemList, "globalItemIndex", true, function(model, f2_arg1)
-		CoD.Menu.UpdateButtonShownState(f2_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f2_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	itemList:linkToElementModel(itemList, "refHash", true, function(model, f3_arg1)
-		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	itemList:registerEventHandler("list_item_gain_focus", function(element, event)
 		local f4_local0 = nil
@@ -61,10 +61,10 @@ LUI.createMenu.ZMSpecialWeaponSelect = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f6_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f6_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(itemList, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(itemList, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if not CoD.CACUtility.IsCACItemLocked(menu, element, controller) and not CoD.CACUtility.IsCACBlackMarketItemLocked(menu, element, controller) then
 			CoD.CACUtility.EquipWeapon(self, element, menu, controller, false)
 			UpdateSelfElementState(menu, self, controller)
@@ -73,7 +73,7 @@ LUI.createMenu.ZMSpecialWeaponSelect = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if not CoD.CACUtility.IsCACItemLocked(menu, element, controller) and not CoD.CACUtility.IsCACBlackMarketItemLocked(menu, element, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false
@@ -98,23 +98,23 @@ LUI.createMenu.ZMSpecialWeaponSelect = function(f1_arg0, f1_arg1)
 	self.ItemInfo = ItemInfo
 	local TopBar = LUI.UIImage.new(-0.07, 1.13, 0, 0, 0.5, 0.5, 171, 174)
 	TopBar:setRGB(0.32, 0.55, 0.67)
-	TopBar:setImage(RegisterImage(0x42BCCF45B82FBED))
+	TopBar:setImage(RegisterImage(@"uie_ui_menu_cac_primary_button_top_bar"))
 	self:addElement(TopBar)
 	self.TopBar = TopBar
 	local TopBar2 = LUI.UIImage.new(-0.07, 1.13, 0, 0, 0.5, 0.5, 247, 250)
 	TopBar2:setRGB(0.36, 0.61, 0.74)
 	TopBar2:setZoom(2)
-	TopBar2:setImage(RegisterImage(0x42BCCF45B82FBED))
-	TopBar2:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	TopBar2:setImage(RegisterImage(@"uie_ui_menu_cac_primary_button_top_bar"))
+	TopBar2:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(TopBar2)
 	self.TopBar2 = TopBar2
 	local hint = LUI.UIText.new(0.5, 0.5, -960, 960, 0.5, 0.5, 145, 163)
 	hint:setRGB(0.58, 0.58, 0.58)
-	hint:setText(Engine[0xF9F1239CFD921FE](0xAF3B94B4D16A655))
+	hint:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_4AF3B94B4D16A655"))
 	hint:setTTF("ttmussels_regular")
 	hint:setLetterSpacing(2)
-	hint:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	hint:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	hint:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	hint:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(hint)
 	self.hint = hint
 	local StageList = LUI.UIList.new(f1_local1, f1_arg0, 144, 0, nil, false, false, false, false)
@@ -123,7 +123,7 @@ LUI.createMenu.ZMSpecialWeaponSelect = function(f1_arg0, f1_arg1)
 	StageList:setWidgetType(CoD.ZMSpecialWeapon_StageInfo)
 	StageList:setHorizontalCount(3)
 	StageList:setSpacing(144)
-	StageList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	StageList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	StageList:registerEventHandler("list_item_gain_focus", function(element, event)
 		local f11_local0 = nil
 		CoD.ZMLoadoutUtility.UpdateZMSpecialWeaponStageModel(f1_local1, element, f1_arg0)
@@ -157,12 +157,12 @@ LUI.createMenu.ZMSpecialWeaponSelect = function(f1_arg0, f1_arg1)
 	self:addElement(FooterContainerFrontendRight)
 	self.FooterContainerFrontendRight = FooterContainerFrontendRight
 	local CACHeader = CoD.CommonHeader.new(f1_local1, f1_arg0, 0.5, 0.5, -960, 960, 0, 0, 0, 67)
-	CACHeader.subtitle.StageTitle:setText(LocalizeToUpperString(CoD.CACUtility.GetHeaderNameForLoadoutSlot(self, 0x5C60F77B9332E5B)))
+	CACHeader.subtitle.StageTitle:setText(LocalizeToUpperString(CoD.CACUtility.GetHeaderNameForLoadoutSlot(self, @"hash_15C60F77B9332E5B")))
 	CACHeader.subtitle.subtitle:setAlpha(0)
 	CACHeader:subscribeToGlobalModel(f1_arg0, "LobbyRoot", "lobbyTitle", function(model)
 		local f14_local0 = model:get()
 		if f14_local0 ~= nil then
-			CACHeader.subtitle.subtitle:setText(Engine[0xF9F1239CFD921FE](f14_local0))
+			CACHeader.subtitle.subtitle:setText(Engine[@"hash_4F9F1239CFD921FE"](f14_local0))
 		end
 	end)
 	CACHeader:linkToElementModel(self, nil, false, function(model)
@@ -200,11 +200,11 @@ LUI.createMenu.ZMSpecialWeaponSelect = function(f1_arg0, f1_arg1)
 	self:addElement(BackingGrayMediumLeft)
 	self.BackingGrayMediumLeft = BackingGrayMediumLeft
 	local arrow = LUI.UIImage.new(0.5, 0.5, -318, -154, 0.5, 0.5, 174, 250)
-	arrow:setImage(RegisterImage(0xFCA9CA5BDA28506))
+	arrow:setImage(RegisterImage(@"uie_ui_menu_zombies_cac_special_weapon_arrow"))
 	self:addElement(arrow)
 	self.arrow = arrow
 	local arrow2 = LUI.UIImage.new(0.5, 0.5, 126, 290, 0.5, 0.5, 174, 250)
-	arrow2:setImage(RegisterImage(0xFCA9CA5BDA28506))
+	arrow2:setImage(RegisterImage(@"uie_ui_menu_zombies_cac_special_weapon_arrow"))
 	self:addElement(arrow2)
 	self.arrow2 = arrow2
 	local XCamMouseControl = nil
@@ -236,11 +236,11 @@ LUI.createMenu.ZMSpecialWeaponSelect = function(f1_arg0, f1_arg1)
 		end
 		return f21_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		GoBack(self, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 		return true
 	end, false)
 	LUI.OverrideFunction_CallOriginalFirst(self, "close", function(element)

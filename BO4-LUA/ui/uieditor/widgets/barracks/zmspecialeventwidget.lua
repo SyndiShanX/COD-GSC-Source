@@ -41,8 +41,8 @@ CoD.ZMSpecialEventWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 			end,
 		},
 	})
-	FactionRewards.ButtonInternal.ImageContainer.ImageContainer:setImage(RegisterImage(0x7C4CA71FFE4CB25))
-	FactionRewards.ButtonInternal.ButtonTitle.HeaderText:setText(LocalizeToUpperString(0x2ACBA21D0C15241))
+	FactionRewards.ButtonInternal.ImageContainer.ImageContainer:setImage(RegisterImage(@"uie_ui_menu_start_menu_small_grid"))
+	FactionRewards.ButtonInternal.ButtonTitle.HeaderText:setText(LocalizeToUpperString(@"menu/rewards"))
 	FactionRewards:registerEventHandler("gain_focus", function(element, event)
 		local f5_local0 = nil
 		if element.gainFocus then
@@ -50,10 +50,10 @@ CoD.ZMSpecialEventWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 		elseif element.super.gainFocus then
 			f5_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f5_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(FactionRewards, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(FactionRewards, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if IsInDefaultState(element) then
 			PlaySoundAlias("uin_toggle_generic")
 			CoD.StartMenuUtility.OpenStartMenuOverlay(self, menu, controller, "FactionRewards")
@@ -62,7 +62,7 @@ CoD.ZMSpecialEventWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 		end
 	end, function(element, menu, controller)
 		if IsInDefaultState(element) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false
@@ -78,10 +78,10 @@ CoD.ZMSpecialEventWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 		elseif element.super.gainFocus then
 			f8_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f8_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(FactionCallings, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(FactionCallings, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if IsInDefaultState(element) then
 			PlaySoundAlias("uin_toggle_generic")
 			CoD.StartMenuUtility.OpenStartMenuOverlay(self, menu, controller, "FactionCalling")
@@ -90,7 +90,7 @@ CoD.ZMSpecialEventWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 		end
 	end, function(element, menu, controller)
 		if IsInDefaultState(element) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false

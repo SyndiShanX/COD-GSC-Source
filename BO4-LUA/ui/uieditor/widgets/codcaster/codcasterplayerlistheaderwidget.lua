@@ -15,12 +15,12 @@ CoD.CodCasterPlayerListHeaderWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	TeamName:setAlpha(0)
 	TeamName:setText("")
 	TeamName:setTTF("ttmussels_demibold")
-	TeamName:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	TeamName:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	TeamName:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	TeamName:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(TeamName)
 	self.TeamName = TeamName
 	local TeamColor = LUI.UIImage.new(0, 0, 0, 408, 0.5, 0.5, -4, 4)
-	TeamColor:setImage(RegisterImage(0xEC8BB204A4E0070))
+	TeamColor:setImage(RegisterImage(@"hash_2EC8BB204A4E0070"))
 	self:addElement(TeamColor)
 	self.TeamColor = TeamColor
 	local TEMPScoreColumn2Header = CoD.TextWithBg.new(f1_arg0, f1_arg1, 1, 1, -111, -73, 0.5, 0.5, -22, 26)
@@ -44,12 +44,12 @@ CoD.CodCasterPlayerListHeaderWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	local KD = LUI.UIText.new(1, 1, -169, -100, 0, 0, 11, 35)
 	KD:setRGB(0, 0, 0)
 	KD:setAlpha(0)
-	KD:setText(Engine[0xF9F1239CFD921FE](0x9F7AB977F072D55))
+	KD:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/kd_short"))
 	KD:setTTF("ttmussels_regular")
 	KD:setLetterSpacing(2)
 	KD:setLineSpacing(5)
-	KD:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	KD:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	KD:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	KD:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(KD)
 	self.KD = KD
 	local ScoreColumn3Header = CoD.CodCasterPlayerListHeaderObjectiveColumn.new(f1_arg0, f1_arg1, 1, 1, -47, -17, 0, 0, 5, 35)
@@ -58,25 +58,25 @@ CoD.CodCasterPlayerListHeaderWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	self.ScoreColumn3Header = ScoreColumn3Header
 	local Killstreak = LUI.UIImage.new(1, 1, -95, -59, 0, 0, 3, 39)
 	Killstreak:setAlpha(0)
-	Killstreak:setImage(RegisterImage(0x7FCFF2E6BE4FFBC))
+	Killstreak:setImage(RegisterImage(@"uie_t7_codcaster_gamemode_killstreak"))
 	self:addElement(Killstreak)
 	self.Killstreak = Killstreak
 	local KillIcon = LUI.UIImage.new(0, 0, 298, 318, 0, 0, 10, 30)
 	KillIcon:setRGB(0.06, 0.06, 0.06)
 	KillIcon:setAlpha(0)
-	KillIcon:setImage(RegisterImage(0xD6EA61A12AEADCE))
+	KillIcon:setImage(RegisterImage(@"hash_6D6EA61A12AEADCE"))
 	self:addElement(KillIcon)
 	self.KillIcon = KillIcon
 	local DeathIcon = LUI.UIImage.new(0, 0, 326, 346, 0, 0, 10, 30)
 	DeathIcon:setRGB(0.09, 0.08, 0.08)
 	DeathIcon:setAlpha(0)
-	DeathIcon:setImage(RegisterImage(0x9E55E6818C34348))
+	DeathIcon:setImage(RegisterImage(@"hash_39E55E6818C34348"))
 	self:addElement(DeathIcon)
 	self.DeathIcon = DeathIcon
 	local KillStreakIcon = LUI.UIImage.new(0, 0, 382, 402, 0, 0, 10, 30)
 	KillStreakIcon:setRGB(0.14, 0.13, 0.13)
 	KillStreakIcon:setAlpha(0)
-	KillStreakIcon:setImage(RegisterImage(0x6323B83A0678830))
+	KillStreakIcon:setImage(RegisterImage(@"uie_codcaster_player_list_entry_streak"))
 	self:addElement(KillStreakIcon)
 	self.KillStreakIcon = KillStreakIcon
 	local ObjectiveIcon = LUI.UIImage.new(0, 0, 425, 445, 0, 0, 10, 30)
@@ -88,7 +88,7 @@ CoD.CodCasterPlayerListHeaderWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	local HealthIcon = LUI.UIImage.new(0, 0, 249, 272, 0, 0, 8, 31)
 	HealthIcon:setRGB(0, 0, 0)
 	HealthIcon:setAlpha(0)
-	HealthIcon:setImage(RegisterImage(0x5655902DAB45F22))
+	HealthIcon:setImage(RegisterImage(@"uie_ui_hud_wz_hud_revive_plus_icon"))
 	self:addElement(HealthIcon)
 	self.HealthIcon = HealthIcon
 	self:mergeStateConditions({

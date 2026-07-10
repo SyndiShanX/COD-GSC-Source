@@ -12,12 +12,12 @@ CoD.AARStatTypeTabHeader.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	StatName:setRGB(ColorSet.T8__BEIGE__HEADER.r, ColorSet.T8__BEIGE__HEADER.g, ColorSet.T8__BEIGE__HEADER.b)
 	StatName:setTTF("ttmussels_regular")
 	StatName:setLetterSpacing(3)
-	StatName:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	StatName:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	StatName:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	StatName:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	StatName:linkToElementModel(self, "title", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			StatName:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			StatName:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	LUI.OverrideFunction_CallOriginalFirst(StatName, "setText", function(element, controller)
@@ -25,11 +25,11 @@ CoD.AARStatTypeTabHeader.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	end)
 	self:addElement(StatName)
 	self.StatName = StatName
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "MOUSE1", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_none"], "MOUSE1", function(element, menu, controller, model)
 		CoD.PCUtility.ActiveParentElementGrid(self, menu, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "MOUSE1")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "MOUSE1")
 		return false
 	end, false)
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)

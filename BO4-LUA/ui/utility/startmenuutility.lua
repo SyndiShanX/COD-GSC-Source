@@ -1,13 +1,13 @@
 CoD.StartMenuUtility = {}
 CoD.StartMenuUtility.GetSessionModeFromLobby = function()
-	local f1_local0 = Engine[0x8DF2E5447F384B9]()
+	local f1_local0 = Engine[@"getglobalmodel"]()
 	f1_local0 = f1_local0["lobbyRoot.lobbyMainMode"]
 	local f1_local1 = nil
 	if f1_local0 then
 		f1_local1 = LuaUtils.GetEModeForLobbyMainMode(f1_local0:get())
 	end
 	if not f1_local1 then
-		f1_local1 = Enum[0x9C0C2196D8313A0][0xB22E0240605CFFE]
+		f1_local1 = Enum[@"emodes"][@"mode_invalid"]
 	end
 	return f1_local1
 end
@@ -20,7 +20,7 @@ CoD.StartMenuUtility.InitDataForStartMenu = function(f2_arg0, f2_arg1, f2_arg2)
 	CoD.StartMenuUtility.SetModeForStartMenu(f2_arg1)
 	CoD.StartMenuUtility.SetStorageBufferForMenu(f2_arg1, f2_arg2)
 	CoD.StartMenuUtility.SetLoadoutStorageBufferForMenu(f2_arg1, f2_arg2)
-	CoD.BreadcrumbUtility.SetClientStorageBufferForMode(f2_arg1, f2_arg2, Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5])
+	CoD.BreadcrumbUtility.SetClientStorageBufferForMode(f2_arg1, f2_arg2, Enum[@"emodes"][@"mode_multiplayer"])
 	CoD.LobbyUtility.SetMenuControllerRestriction(f2_arg0, f2_arg2, 1)
 end
 CoD.StartMenuUtility.OpenStartMenuOverlay = function(f3_arg0, f3_arg1, f3_arg2, f3_arg3)
@@ -32,9 +32,9 @@ end
 CoD.StartMenuUtility.OpenSpecialistOverlay = function(f4_arg0, f4_arg1, f4_arg2)
 	local f4_local0 = CoD.BaseUtility.GetMenuSessionMode(f4_arg1)
 	local f4_local1 = "MPSpecialistHUB"
-	if f4_local0 == Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A] then
+	if f4_local0 == Enum[@"emodes"][@"mode_zombies"] then
 		f4_local1 = "ZMPersonalizeCharacterMain"
-	elseif f4_local0 == Enum[0x9C0C2196D8313A0][0xBF1DCC8138A9D39] then
+	elseif f4_local0 == Enum[@"emodes"][@"mode_warzone"] then
 		f4_local1 = "WZPersonalizeCharacterMain"
 	end
 	return OpenOverlay(f4_arg0, f4_local1, f4_arg2, {
@@ -54,25 +54,25 @@ CoD.StartMenuUtility.SetModeForStartMenu = function(f6_arg0)
 end
 CoD.StartMenuUtility.SetStorageBufferForMenu = function(f7_arg0, f7_arg1)
 	local f7_local0 = CoD.BaseUtility.GetMenuSessionMode(f7_arg0)
-	local f7_local1 = Enum[0xBBD4F9E70101BA8][0xD5A7695E03A7A90]
-	if f7_local0 == Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A] then
-		f7_local1 = Enum[0xBBD4F9E70101BA8][0xA57D6164B91A8FC]
-	elseif f7_local0 == Enum[0x9C0C2196D8313A0][0xBF1DCC8138A9D39] then
-		f7_local1 = Enum[0xBBD4F9E70101BA8][0xAB0E693244221BC]
+	local f7_local1 = Enum[@"storagefiletype"][@"hash_5D5A7695E03A7A90"]
+	if f7_local0 == Enum[@"emodes"][@"mode_zombies"] then
+		f7_local1 = Enum[@"storagefiletype"][@"hash_A57D6164B91A8FC"]
+	elseif f7_local0 == Enum[@"emodes"][@"mode_warzone"] then
+		f7_local1 = Enum[@"storagefiletype"][@"hash_1AB0E693244221BC"]
 	end
-	f7_arg0._storageBuffer = Engine[0x8BF970606552F4C](f7_arg1, f7_local1)
+	f7_arg0._storageBuffer = Engine[@"storagegetbuffer"](f7_arg1, f7_local1)
 end
 CoD.StartMenuUtility.SetLoadoutStorageBufferForMenu = function(f8_arg0, f8_arg1)
 	local f8_local0 = CoD.BaseUtility.GetMenuSessionMode(f8_arg0)
-	local f8_local1 = Enum[0xBBD4F9E70101BA8][0x6C886CEB6BF4BCA]
-	if f8_local0 == Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A] then
-		f8_local1 = Enum[0xBBD4F9E70101BA8][0x9E5D6DF436F1EE]
-	elseif f8_local0 == Enum[0x9C0C2196D8313A0][0xBF1DCC8138A9D39] then
-		f8_local1 = Enum[0xBBD4F9E70101BA8][0xDF87425733853AE]
+	local f8_local1 = Enum[@"storagefiletype"][@"storage_mp_loadouts"]
+	if f8_local0 == Enum[@"emodes"][@"mode_zombies"] then
+		f8_local1 = Enum[@"storagefiletype"][@"storage_zm_loadouts"]
+	elseif f8_local0 == Enum[@"emodes"][@"mode_warzone"] then
+		f8_local1 = Enum[@"storagefiletype"][@"storage_wz_loadouts"]
 	end
-	local f8_local2 = Engine[0x8BF970606552F4C](f8_arg1, f8_local1)
+	local f8_local2 = Engine[@"storagegetbuffer"](f8_arg1, f8_local1)
 	if f8_local2 then
-		f8_arg0._storageLoadoutBuffer = f8_local2[0x766CE60E25569A3]
+		f8_arg0._storageLoadoutBuffer = f8_local2[@"cacloadouts"]
 	end
 end
 CoD.StartMenuUtility.CleanUpBarracksTab = function(f9_arg0, f9_arg1)
@@ -99,7 +99,7 @@ CoD.StartMenuUtility.AddClassSelectSlideout = function(f11_arg0, f11_arg1)
 		}
 	end
 	local f11_local0 = CoD.StartMenuUtility.CachedClassSelectSlideoutInfo[f11_arg1]
-	local f11_local1 = Engine[0x4DF5CFBC1771947](f11_arg1)
+	local f11_local1 = Engine[@"getmodelforcontroller"](f11_arg1)
 	local f11_local2 = f11_local1.StartMenu_Main:create("ShowClassSelect")
 	f11_local2:set(false)
 	f11_local2 = f11_local1.StartMenu_Main:create("clear_transition")
@@ -136,7 +136,7 @@ CoD.StartMenuUtility.ShowClassSelectSlideout = function(f13_arg0, f13_arg1)
 		f13_arg0.ClassSelectPopup:setPriority(1000)
 		f13_arg0:addElement(f13_arg0.ClassSelectPopup)
 	end
-	local f13_local0 = Engine[0x4DF5CFBC1771947](f13_arg1)
+	local f13_local0 = Engine[@"getmodelforcontroller"](f13_arg1)
 	if f13_arg0.ClassSelectPopup then
 		CoD.Menu.SetAsPriority(f13_arg0.ClassSelectPopup, f13_arg1)
 		f13_arg0.ClassSelectPopup.m_disableAllButtonActions = nil
@@ -145,7 +145,7 @@ CoD.StartMenuUtility.ShowClassSelectSlideout = function(f13_arg0, f13_arg1)
 	f13_local0.StartMenu_Main.ShowClassSelect:set(true)
 end
 CoD.StartMenuUtility.HideClassSelectSlideout = function(f14_arg0, f14_arg1)
-	local f14_local0 = Engine[0x4DF5CFBC1771947](f14_arg1)
+	local f14_local0 = Engine[@"getmodelforcontroller"](f14_arg1)
 	f14_arg0.m_disableAllButtonActions = true
 	CoD.Menu.SetAsNotPriority(f14_arg0, f14_arg1)
 	f14_arg0.ignoreCursor = true
@@ -159,7 +159,7 @@ CoD.StartMenuUtility.CanChangeWZStatsFilter = function(f15_arg0, f15_arg1, f15_a
 	end
 end
 CoD.StartMenuUtility.IsClassSelectSlideoutOpen = function(f16_arg0)
-	local f16_local0 = Engine[0x4DF5CFBC1771947](f16_arg0)
+	local f16_local0 = Engine[@"getmodelforcontroller"](f16_arg0)
 	local f16_local1
 	if not CoD.isFrontend then
 		local f16_local2 = f16_local0
@@ -178,22 +178,22 @@ end
 DataSources.StartMenuTabs = ListHelper_SetupDataSource("StartMenuTabs", function(f17_arg0, f17_arg1)
 	local f17_local0 = {}
 	local f17_local1 = CoD.StartMenuUtility.GetSessionModeFromLobby()
-	local f17_local2 = Engine[0x4DF5CFBC1771947](f17_arg0)
-	if Engine[0xA55C3ACD0D2BCF0]() then
+	local f17_local2 = Engine[@"getmodelforcontroller"](f17_arg0)
+	if Engine[@"isdemoplaying"]() then
 		table.insert(f17_local0, {
 			models = {
-				name = Engine[0xF9F1239CFD921FE](0x4C78B93031D0F44),
+				name = Engine[@"hash_4F9F1239CFD921FE"](@"hash_74C78B93031D0F44"),
 				tabWidget = "CoD.StartMenu_Theater",
 			},
 			properties = {
 				tabId = "theater",
 			},
 		})
-	elseif Engine[0x7B48C1ABFF0F764]() then
-		if Engine[0x8EF5BEFA0AE50FE]() then
+	elseif Engine[@"isingame"]() then
+		if Engine[@"iszombiesgame"]() then
 			table.insert(f17_local0, {
 				models = {
-					name = SessionModeToUnlocalizedSessionModeCaps(Engine[0x3EAC408F958FF05]()),
+					name = SessionModeToUnlocalizedSessionModeCaps(Engine[@"currentsessionmode"]()),
 					tabWidget = "CoD.StartMenu_GameOptions_ZM",
 				},
 				properties = {
@@ -203,7 +203,7 @@ DataSources.StartMenuTabs = ListHelper_SetupDataSource("StartMenuTabs", function
 			if CoD.BaseUtility.IsDvarEnabled("ui_enableContractsAndBounties") and IsPublicOnlineGame() then
 				table.insert(f17_local0, {
 					models = {
-						name = 0x616EBD2B8F67E64,
+						name = @"hash_6616EBD2B8F67E64",
 						tabWidget = "CoD.StartMenu_Contracts",
 					},
 					properties = {
@@ -215,7 +215,7 @@ DataSources.StartMenuTabs = ListHelper_SetupDataSource("StartMenuTabs", function
 			if CoD.isWarzone then
 				table.insert(f17_local0, {
 					models = {
-						name = 0x315E0B90BD1F6DD,
+						name = @"menu/team_scoreboard",
 						tabWidget = "CoD.StartMenu_WZTeamScoreboard",
 					},
 					properties = {
@@ -224,18 +224,18 @@ DataSources.StartMenuTabs = ListHelper_SetupDataSource("StartMenuTabs", function
 				})
 				local f17_local3 = f17_local2.deadSpectator.playerIndex
 				local f17_local4
-				if f17_local3:get() == Engine[0x761955642304848](f17_arg0) or f17_local3:get() == -1 then
+				if f17_local3:get() == Engine[@"getclientnum"](f17_arg0) or f17_local3:get() == -1 then
 					f17_local4 = false
 				else
 					f17_local4 = true
 				end
 				f17_arg1._isPlayerSpectating = f17_local4
 				if not f17_arg1._isPlayerSpectating then
-					f17_local4 = Engine[0x4DF5CFBC1771947](f17_arg0)
+					f17_local4 = Engine[@"getmodelforcontroller"](f17_arg0)
 					if f17_local4.hudItems.playerOnInfectedPlatoon:get() == 0 then
 						table.insert(f17_local0, {
 							models = {
-								name = 0x1346019482BDC3C,
+								name = @"warzone/inventory",
 								tabWidget = "CoD.StartMenu_Inventory",
 							},
 							properties = {
@@ -248,7 +248,7 @@ DataSources.StartMenuTabs = ListHelper_SetupDataSource("StartMenuTabs", function
 				if CoD.BaseUtility.IsDvarEnabled("ui_enableContractsAndBounties") and IsPublicOnlineGame() then
 					table.insert(f17_local0, {
 						models = {
-							name = 0x616EBD2B8F67E64,
+							name = @"hash_6616EBD2B8F67E64",
 							tabWidget = "CoD.StartMenu_Contracts",
 						},
 						properties = {
@@ -259,7 +259,7 @@ DataSources.StartMenuTabs = ListHelper_SetupDataSource("StartMenuTabs", function
 			elseif CoD.isCampaign then
 				table.insert(f17_local0, {
 					models = {
-						name = SessionModeToUnlocalizedSessionModeCaps(Engine[0x3EAC408F958FF05]()),
+						name = SessionModeToUnlocalizedSessionModeCaps(Engine[@"currentsessionmode"]()),
 						tabWidget = "CoD.StartMenu_GameOptions_ZM",
 					},
 					properties = {
@@ -269,7 +269,7 @@ DataSources.StartMenuTabs = ListHelper_SetupDataSource("StartMenuTabs", function
 			elseif IsGameTypeCombatTraining() then
 				table.insert(f17_local0, {
 					models = {
-						name = 0x8B0D8B4A861BBC5,
+						name = @"hash_18B0D8B4A861BBC5",
 						tabWidget = "CoD.StartMenu_ChangeSpecialist_CT",
 					},
 					properties = {
@@ -277,11 +277,11 @@ DataSources.StartMenuTabs = ListHelper_SetupDataSource("StartMenuTabs", function
 					},
 				})
 			elseif not CoD.CodCasterUtility.IsCodCasterOrAssigned(f17_arg0) then
-				local f17_local3 = Engine[0x4DF5CFBC1771947](f17_arg0)
+				local f17_local3 = Engine[@"getmodelforcontroller"](f17_arg0)
 				if f17_local3.PositionDraft.stage:get() ~= CoD.PlayerRoleUtility.DraftStage.DRAFT_STAGE_DRAFT then
 					table.insert(f17_local0, {
 						models = {
-							name = 0x8B0D8B4A861BBC5,
+							name = @"hash_18B0D8B4A861BBC5",
 							tabWidget = "CoD.StartMenu_ChangeSpecialist",
 						},
 						properties = {
@@ -292,7 +292,7 @@ DataSources.StartMenuTabs = ListHelper_SetupDataSource("StartMenuTabs", function
 				if CoD.BaseUtility.IsDvarEnabled("ui_enableContractsAndBounties") and IsPublicOnlineGame() then
 					table.insert(f17_local0, {
 						models = {
-							name = 0x616EBD2B8F67E64,
+							name = @"hash_6616EBD2B8F67E64",
 							tabWidget = "CoD.StartMenu_Contracts",
 						},
 						properties = {
@@ -301,10 +301,10 @@ DataSources.StartMenuTabs = ListHelper_SetupDataSource("StartMenuTabs", function
 					})
 				end
 			end
-			if Engine[0x994291BF56E485B](Enum[0xF7AE5746E79F2CE][0x95910ACF90F64AD]) == false and Engine[0x994291BF56E485B](Enum[0xF7AE5746E79F2CE][0x58ECA70A244C08F]) == false and (not CoD.CodCasterUtility.IsCodCasterOrAssigned(f17_arg0) or Engine[0x22EAAB59AA27E9B]("allow_shoutcaster_team_switch") == 1) and not Engine[0xDD333420C49E6D0](f17_arg0, Enum[0x7F032C2EF103A1A][0x4828BED794DA0A5]) and not Engine[0xDD333420C49E6D0](f17_arg0, Enum[0x7F032C2EF103A1A][0x1CDCB451655ABCF]) and not Engine[0xDD333420C49E6D0](f17_arg0, Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F]) and CoD.IsTeamChangeAllowed(f17_arg0) then
+			if Engine[@"gamemodeismode"](Enum[@"egamemodes"][@"mode_game_matchmaking_playlist"]) == false and Engine[@"gamemodeismode"](Enum[@"egamemodes"][@"mode_game_league"]) == false and (not CoD.CodCasterUtility.IsCodCasterOrAssigned(f17_arg0) or Engine[@"getdvarint"]("allow_shoutcaster_team_switch") == 1) and not Engine[@"isvisibilitybitset"](f17_arg0, Enum[@"uivisibilitybit"][@"bit_round_end_killcam"]) and not Engine[@"isvisibilitybitset"](f17_arg0, Enum[@"uivisibilitybit"][@"bit_final_killcam"]) and not Engine[@"isvisibilitybitset"](f17_arg0, Enum[@"uivisibilitybit"][@"bit_play_of_the_match"]) and CoD.IsTeamChangeAllowed(f17_arg0) then
 				table.insert(f17_local0, {
 					models = {
-						name = 0xE3B1996EF83F7ED,
+						name = @"hash_4E3B1996EF83F7ED",
 						tabWidget = "CoD.StartMenu_ChangeTeam",
 					},
 					properties = {
@@ -315,14 +315,14 @@ DataSources.StartMenuTabs = ListHelper_SetupDataSource("StartMenuTabs", function
 		end
 	elseif not LuaUtils.OfflineOnlyDemo() and not IsPlayerAGuest(f17_arg0) then
 		local f17_local4 = LobbyData.GetCurrentMenuTarget()
-		local f17_local5 = f17_local4[0x8B72E07B55C3AC0] == LobbyData.GetLobbyMenuIDByName(LuaEnum.UI.DIRECTOR_ONLINE_MP_TRAINING)
+		local f17_local5 = f17_local4[@"id"] == LobbyData.GetLobbyMenuIDByName(LuaEnum.UI.DIRECTOR_ONLINE_MP_TRAINING)
 		local f17_local6 = DataSources.StartMenuBreadcrumbs.getModel(f17_arg0)
 		DataSources.StartMenuBreadcrumbs.recreateStartTabBreadcrumbModelsIfNeeded(f17_arg0, f17_local1, f17_local6)
-		if not IsLobbyNetworkModeLAN() and (not CoD.DirectorUtility.IsOfflineDemo() or Engine[0xCB675CA7856DA25]()) and f17_local1 ~= Enum[0x9C0C2196D8313A0][0xB22E0240605CFFE] and not f17_local5 then
+		if not IsLobbyNetworkModeLAN() and (not CoD.DirectorUtility.IsOfflineDemo() or Engine[@"hash_5CB675CA7856DA25"]()) and f17_local1 ~= Enum[@"emodes"][@"mode_invalid"] and not f17_local5 then
 			local f17_local7 = "CoD.StartMenu_Barracks"
-			if f17_local1 == Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A] then
+			if f17_local1 == Enum[@"emodes"][@"mode_zombies"] then
 				f17_local7 = "CoD.StartMenu_Barracks_ZM"
-			elseif f17_local1 == Enum[0x9C0C2196D8313A0][0xBF1DCC8138A9D39] then
+			elseif f17_local1 == Enum[@"emodes"][@"mode_warzone"] then
 				f17_local7 = "CoD.StartMenu_Barracks_WZ"
 			elseif IsArenaMode() then
 				f17_local7 = "CoD.StartMenu_Barracks_WL"
@@ -330,7 +330,7 @@ DataSources.StartMenuTabs = ListHelper_SetupDataSource("StartMenuTabs", function
 			if not IsCustomLobby() then
 				table.insert(f17_local0, {
 					models = {
-						name = 0x10B1AA71AB55844,
+						name = @"hash_310B1AA71AB55844",
 						tabWidget = f17_local7,
 					},
 					properties = {
@@ -339,13 +339,13 @@ DataSources.StartMenuTabs = ListHelper_SetupDataSource("StartMenuTabs", function
 				})
 			end
 		end
-		if not CoD.DirectorUtility.DisableForCurrentMilestone(f17_arg0) or Engine[0xCB675CA7856DA25]() then
+		if not CoD.DirectorUtility.DisableForCurrentMilestone(f17_arg0) or Engine[@"hash_5CB675CA7856DA25"]() then
 			if not IsLobbyNetworkModeLAN() and (not IsCustomLobby() or f17_local5) then
-				if f17_local1 == Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5] then
+				if f17_local1 == Enum[@"emodes"][@"mode_multiplayer"] then
 					if f17_local5 then
 						table.insert(f17_local0, {
 							models = {
-								name = 0xE66423FDAAC9FBF,
+								name = @"hash_5E66423FDAAC9FBF",
 								tabWidget = "CoD.Challenges_MP_Stickerbook_CombatTraining",
 							},
 							properties = {
@@ -355,7 +355,7 @@ DataSources.StartMenuTabs = ListHelper_SetupDataSource("StartMenuTabs", function
 					else
 						table.insert(f17_local0, {
 							models = {
-								name = 0xE66423FDAAC9FBF,
+								name = @"hash_5E66423FDAAC9FBF",
 								tabWidget = "CoD.Challenges_MP_Summary",
 							},
 							properties = {
@@ -363,20 +363,20 @@ DataSources.StartMenuTabs = ListHelper_SetupDataSource("StartMenuTabs", function
 							},
 						})
 					end
-				elseif f17_local1 == Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A] then
+				elseif f17_local1 == Enum[@"emodes"][@"mode_zombies"] then
 					table.insert(f17_local0, {
 						models = {
-							name = 0xE66423FDAAC9FBF,
+							name = @"hash_5E66423FDAAC9FBF",
 							tabWidget = "CoD.Challenges_ZM_Summary",
 						},
 						properties = {
 							tabId = "challenges",
 						},
 					})
-				elseif f17_local1 == Enum[0x9C0C2196D8313A0][0xBF1DCC8138A9D39] then
+				elseif f17_local1 == Enum[@"emodes"][@"mode_warzone"] then
 					table.insert(f17_local0, {
 						models = {
-							name = 0xE66423FDAAC9FBF,
+							name = @"hash_5E66423FDAAC9FBF",
 							tabWidget = "CoD.ChallengesWZSummary",
 						},
 						properties = {
@@ -386,7 +386,7 @@ DataSources.StartMenuTabs = ListHelper_SetupDataSource("StartMenuTabs", function
 				else
 					table.insert(f17_local0, {
 						models = {
-							name = 0xE66423FDAAC9FBF,
+							name = @"hash_5E66423FDAAC9FBF",
 							tabWidget = "CoD.ChallengesGlobalStickerbook",
 						},
 						properties = {
@@ -409,21 +409,21 @@ DataSources.StartMenuTabs = ListHelper_SetupDataSource("StartMenuTabs", function
 			end
 		end
 	end
-	if IsGameTypeDOA() and Engine[0x7B48C1ABFF0F764]() then
+	if IsGameTypeDOA() and Engine[@"isingame"]() then
 		local f17_local3 = table.insert
 		local f17_local4 = f17_local0
 		local f17_local5 = {
 			models = {
-				name = 0xCD4D3B3B862F8C1,
+				name = @"hash_1CD4D3B3B862F8C1",
 				tabWidget = "CoD.StartMenu_Options_DOA",
 			},
 		}
 		local f17_local6 = {
 			tabId = "options",
 		}
-		local f17_local7 = Dvar[0xE017690F8837DD6]:get()
+		local f17_local7 = Dvar[@"ui_execdemo"]:get()
 		if f17_local7 then
-			f17_local7 = not Engine[0x7B48C1ABFF0F764]()
+			f17_local7 = not Engine[@"isingame"]()
 		end
 		f17_local6.selectIndex = f17_local7
 		f17_local5.properties = f17_local6
@@ -433,16 +433,16 @@ DataSources.StartMenuTabs = ListHelper_SetupDataSource("StartMenuTabs", function
 		local f17_local4 = f17_local0
 		local f17_local5 = {
 			models = {
-				name = 0xCD4D3B3B862F8C1,
+				name = @"hash_1CD4D3B3B862F8C1",
 				tabWidget = "CoD.StartMenu_Options",
 			},
 		}
 		local f17_local6 = {
 			tabId = "options",
 		}
-		local f17_local7 = Dvar[0xF52444CC548D39F]:get()
+		local f17_local7 = Dvar[@"ui_execdemo_gamescom"]:get()
 		if f17_local7 then
-			f17_local7 = not Engine[0x7B48C1ABFF0F764]()
+			f17_local7 = not Engine[@"isingame"]()
 		end
 		f17_local6.selectIndex = f17_local7
 		f17_local5.properties = f17_local6
@@ -463,7 +463,7 @@ DataSources.StartMenuTabs = ListHelper_SetupDataSource("StartMenuTabs", function
 	end
 	if not f17_arg1._hasSubscriptions then
 		f17_arg1._hasSubscriptions = true
-		if Engine[0x7B48C1ABFF0F764]() and CoD.isMultiplayer then
+		if Engine[@"isingame"]() and CoD.isMultiplayer then
 			f17_local4 = f17_local2.PositionDraft.stage
 			f17_arg1:subscribeToModel(f17_local4, function()
 				local f18_local0 = f17_local4:get() == CoD.PlayerRoleUtility.DraftStage.DRAFT_STAGE_DRAFT
@@ -473,11 +473,11 @@ DataSources.StartMenuTabs = ListHelper_SetupDataSource("StartMenuTabs", function
 				end
 			end, false)
 		end
-		if Engine[0x7B48C1ABFF0F764]() and CoD.isWarzone then
+		if Engine[@"isingame"]() and CoD.isWarzone then
 			f17_local4 = f17_local2.deadSpectator.playerIndex
 			f17_arg1:subscribeToModel(f17_local4, function()
 				local f19_local0
-				if f17_local4:get() == Engine[0x761955642304848](f17_arg0) or f17_local4:get() == -1 then
+				if f17_local4:get() == Engine[@"getclientnum"](f17_arg0) or f17_local4:get() == -1 then
 					f19_local0 = false
 				else
 					f19_local0 = true
@@ -494,7 +494,7 @@ DataSources.WZTrialUpsellOptions = ListHelper_SetupDataSource("WZTrialUpsellOpti
 	local f20_local0 = {}
 	table.insert(f20_local0, {
 		models = {
-			displayText = 0x624939A0A9E40C3,
+			displayText = @"hash_3624939A0A9E40C3",
 		},
 		properties = {
 			action = function(f21_arg0, f21_arg1, f21_arg2, f21_arg3, f21_arg4)
@@ -511,9 +511,9 @@ DataSources.WZTrialUpsellOptions = ListHelper_SetupDataSource("WZTrialUpsellOpti
 end, true)
 CoD.StartMenuUtility.GetArenaQuitPenaltyText = function(f22_arg0, f22_arg1)
 	local f22_local0 = CoD.TeamUtility.GetTeamCount(CoD.TeamUtility.GetTeamID(f22_arg0))
-	local f22_local1 = Engine[0xE00B2F29271C60B](0xEF165671949ADD6)
+	local f22_local1 = Engine[@"hash_2E00B2F29271C60B"](@"arena_event_league_play_default")
 	if f22_local1 then
-		if f22_local1[0xA1ACED8DDF5F039] < f22_local0 then
+		if f22_local1[@"hash_6A1ACED8DDF5F039"] < f22_local0 then
 			return tostring(-CoD.StartMenuUtility.GetArenaQuitPenalty(f22_local1, true))
 		else
 			return tostring(-CoD.StartMenuUtility.GetArenaQuitPenalty(f22_local1, false))
@@ -525,9 +525,9 @@ end
 CoD.StartMenuUtility.GetArenaQuitPenalty = function(f23_arg0, f23_arg1)
 	local f23_local0 = 0
 	if f23_arg0 then
-		f23_local0 = f23_arg0.losepointstreak[1][0x3FEAB3544C345B1]
+		f23_local0 = f23_arg0.losepointstreak[1][@"point"]
 		if f23_arg1 then
-			f23_local0 = f23_local0 + f23_arg0[0xA210A5E11BA587C]
+			f23_local0 = f23_local0 + f23_arg0[@"hash_7A210A5E11BA587C"]
 		end
 	end
 	return f23_local0
@@ -535,46 +535,46 @@ end
 CoD.StartMenuUtility.GetArenaQuitDeservesExtraPenalty = function(f24_arg0)
 	if LuaUtils.IsArenaPublicGame() then
 		local f24_local0 = CoD.TeamUtility.GetTeamCount(CoD.TeamUtility.GetTeamID(f24_arg0))
-		local f24_local1 = Engine[0xE00B2F29271C60B](0xEF165671949ADD6)
+		local f24_local1 = Engine[@"hash_2E00B2F29271C60B"](@"arena_event_league_play_default")
 		if f24_local1 then
-			return f24_local1[0xA1ACED8DDF5F039] < f24_local0
+			return f24_local1[@"hash_6A1ACED8DDF5F039"] < f24_local0
 		end
 	end
 	return false
 end
 CoD.StartMenuUtility.GetArenaQuitPopupDesc = function(f25_arg0)
-	local f25_local0 = Engine[0xE00B2F29271C60B](0xEF165671949ADD6)
+	local f25_local0 = Engine[@"hash_2E00B2F29271C60B"](@"arena_event_league_play_default")
 	if f25_local0 then
 		if CoD.StartMenuUtility.GetArenaQuitDeservesExtraPenalty(f25_arg0) then
-			return Engine[0xF9F1239CFD921FE](0xBB9A12E59003F27, f25_local0[0xA1ACED8DDF5F039] + 1, CoD.StartMenuUtility.GetArenaQuitPenalty(f25_local0, true))
+			return Engine[@"hash_4F9F1239CFD921FE"](@"hash_7BB9A12E59003F27", f25_local0[@"hash_6A1ACED8DDF5F039"] + 1, CoD.StartMenuUtility.GetArenaQuitPenalty(f25_local0, true))
 		else
-			return Engine[0xF9F1239CFD921FE](0x2F64488102F358D, f25_local0[0xA1ACED8DDF5F039], CoD.StartMenuUtility.GetArenaQuitPenalty(f25_local0, false))
+			return Engine[@"hash_4F9F1239CFD921FE"](@"hash_12F64488102F358D", f25_local0[@"hash_6A1ACED8DDF5F039"], CoD.StartMenuUtility.GetArenaQuitPenalty(f25_local0, false))
 		end
 	else
-		return Engine[0xF9F1239CFD921FE](0x896B29D6A289A61)
+		return Engine[@"hash_4F9F1239CFD921FE"](@"hash_7896B29D6A289A61")
 	end
 end
 CoD.StartMenuUtility.QuitGameWarningPrompt = function(f26_arg0, f26_arg1)
 	CoD.OverlayUtility.AddAutoDetectOverlay("QuitWarningPopup", {
 		title = function()
-			local f27_local0 = 0xD6D98060CE88B87
+			local f27_local0 = @"menu/quit_game"
 			if not CoD.isOnlineGame() then
-				f27_local0 = 0x954494EB4C452D3
+				f27_local0 = @"menu/end_game"
 			end
-			return Engine[0xF9F1239CFD921FE](f27_local0)
+			return Engine[@"hash_4F9F1239CFD921FE"](f27_local0)
 		end,
 		description = function(f28_arg0)
 			local f28_local0 = 0x0
-			if Engine[0x32ABAFDCA93FDF9]() then
+			if Engine[@"ismultiplayergame"]() then
 				if LuaUtils.IsArenaPublicGame() then
 					return CoD.StartMenuUtility.GetArenaQuitPopupDesc(f26_arg0)
 				elseif CoD.isPublicOnlineGame() then
-					f28_local0 = 0xFC9034400BFB613
+					f28_local0 = @"hash_6FC9034400BFB613"
 				end
-			elseif Engine[0x56B4618D857143D]() and CoD.isOnlineGame() then
-				f28_local0 = 0xFDE0D4400D2231B
+			elseif Engine[@"hash_356B4618D857143D"]() and CoD.isOnlineGame() then
+				f28_local0 = @"hash_6FDE0D4400D2231B"
 			end
-			return Engine[0xF9F1239CFD921FE](f28_local0)
+			return Engine[@"hash_4F9F1239CFD921FE"](f28_local0)
 		end,
 		categoryType = CoD.OverlayUtility.OverlayTypes.Quit,
 		getGoBackFn = function()
@@ -593,12 +593,12 @@ CoD.StartMenuUtility.QuitGameWarningPrompt = function(f26_arg0, f26_arg1)
 			local f32_local0 = {}
 			table.insert(f32_local0, {
 				action = GoBack,
-				text = 0xC2E92C54C2BE289,
+				text = @"menu/cancel",
 				isCancelOption = true,
 			})
-			local f32_local1 = 0xAD8B52FCDEF75D6
+			local f32_local1 = @"menu/quit_match"
 			if not CoD.isOnlineGame() then
-				f32_local1 = 0x954494EB4C452D3
+				f32_local1 = @"menu/end_game"
 			end
 			table.insert(f32_local0, {
 				action = CoD.OverlayUtility.Overlays.QuitWarningPopup.getGoBackFn(),
@@ -612,9 +612,9 @@ end
 CoD.StartMenuUtility.QuitGameWZ = function(f33_arg0, f33_arg1, f33_arg2, f33_arg3, f33_arg4)
 	StartMenuGoBack(f33_arg4, f33_arg2)
 	local f33_local0 = 0
-	local f33_local1 = Engine[0x370E918BE7B2017]() - 1
+	local f33_local1 = Engine[@"getmaxlocalcontrollers"]() - 1
 	for f33_local2 = f33_local0, f33_local1, 1 do
-		if Engine[0xF285055A1A895A1](f33_local2) then
+		if Engine[@"iscontrollerbeingused"](f33_local2) then
 			CoDShared.QuitGame(f33_local2)
 		end
 	end

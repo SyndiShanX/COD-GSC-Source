@@ -84,7 +84,7 @@ CoD.ActiveThemeSlot.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	end)
 	local f1_local3 = ItemHintText
 	local NewBreadcrumb = ItemHintText.subscribeToModel
-	local f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
 	NewBreadcrumb(f1_local3, f1_local5.LastInput, function(f10_arg0)
 		f1_arg0:updateElementState(ItemHintText, {
 			name = "model_validation",
@@ -104,7 +104,7 @@ CoD.ActiveThemeSlot.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 		})
 	end)
 	ItemHintText:setAlpha(0)
-	ItemHintText.textCenterAlign:setText(Engine[0xF9F1239CFD921FE](0xD087E4011D7527C))
+	ItemHintText.textCenterAlign:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/details_button"))
 	self:addElement(ItemHintText)
 	self.ItemHintText = ItemHintText
 	NewBreadcrumb = CoD.ItemNewBreadcrumbWidget.new(f1_arg0, f1_arg1, 0, 0, -21, 135, 0, 0, 112, 148)

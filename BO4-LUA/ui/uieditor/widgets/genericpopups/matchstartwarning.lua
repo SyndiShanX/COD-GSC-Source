@@ -21,7 +21,7 @@ CoD.MatchStartWarning.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	local Frame = LUI.UIImage.new(0.5, 0.5, -65, 65, 0, 0, 55, 185)
 	Frame:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
 	Frame:setAlpha(0.9)
-	Frame:setImage(RegisterImage(0x1A4736A2632AE28))
+	Frame:setImage(RegisterImage(@"uie_ui_menu_popups_matchstart_circularframe"))
 	self:addElement(Frame)
 	self.Frame = Frame
 	local RadialTimer = CoD.MatchstartRadialTimer.new(f1_arg0, f1_arg1, 0.5, 0.5, -44.5, 44.5, 0, 0, 75.5, 164.5)
@@ -65,7 +65,7 @@ CoD.MatchStartWarning.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	Base:setRGB(ColorSet.T8__RED.r, ColorSet.T8__RED.g, ColorSet.T8__RED.b)
 	Base:setAlpha(0.4)
 	Base:setScale(0, 0)
-	Base:setImage(RegisterImage(0xEE39ABD2A43A84))
+	Base:setImage(RegisterImage(@"uie_ui_menu_popups_matchstart_ring"))
 	self:addElement(Base)
 	self.Base = Base
 	local Team1PlayerList = LUI.GridLayout.new(f1_arg0, f1_arg1, false, 0, 0, 8, 0, nil, nil, false, false, false, false)
@@ -75,7 +75,7 @@ CoD.MatchStartWarning.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	Team1PlayerList:setWidgetType(CoD.LoadingScreenTalkerWidgetCPZM)
 	Team1PlayerList:setVerticalCount(4)
 	Team1PlayerList:setSpacing(8)
-	Team1PlayerList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	Team1PlayerList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	Team1PlayerList:setDataSource("LoadingScreenPlayerListTeam1")
 	self:addElement(Team1PlayerList)
 	self.Team1PlayerList = Team1PlayerList
@@ -105,7 +105,7 @@ CoD.MatchStartWarning.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	})
 	local f1_local11 = self
 	local f1_local12 = self.subscribeToModel
-	local f1_local13 = Engine[0x8DF2E5447F384B9]()
+	local f1_local13 = Engine[@"getglobalmodel"]()
 	f1_local12(f1_local11, f1_local13["lobbyRoot.lobbyNav"], function(f6_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -117,7 +117,7 @@ CoD.MatchStartWarning.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	end, false)
 	f1_local11 = self
 	f1_local12 = self.subscribeToModel
-	f1_local13 = Engine[0x8DF2E5447F384B9]()
+	f1_local13 = Engine[@"getglobalmodel"]()
 	f1_local12(f1_local11, f1_local13["lobbyRoot.lobbyTimeRemaining"], function(f7_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -129,7 +129,7 @@ CoD.MatchStartWarning.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	end, false)
 	f1_local11 = self
 	f1_local12 = self.subscribeToModel
-	f1_local13 = Engine[0x8DF2E5447F384B9]()
+	f1_local13 = Engine[@"getglobalmodel"]()
 	f1_local12(f1_local11, f1_local13["lobbyRoot.lobbyMenuOccluded"], function(f8_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -209,15 +209,15 @@ CoD.MatchStartWarning.__clipsPerState = {
 			local f11_local0 = function(f12_arg0)
 				local f12_local0 = function(f13_arg0)
 					local f13_local0 = function(f14_arg0)
-						f14_arg0:beginAnimation(89, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+						f14_arg0:beginAnimation(89, Enum[@"luitween"][@"luitween_ease_out"])
 						f14_arg0:setTopBottom(0, 0, 46.5, 121.5)
 						f14_arg0:registerEventHandler("transition_complete_keyframe", f11_arg0.clipFinished)
 					end
-					f13_arg0:beginAnimation(50, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f13_arg0:beginAnimation(50, Enum[@"luitween"][@"luitween_ease_out"])
 					f13_arg0:setTopBottom(0, 0, 37.5, 112.5)
 					f13_arg0:registerEventHandler("transition_complete_keyframe", f13_local0)
 				end
-				f12_arg0:beginAnimation(199, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f12_arg0:beginAnimation(199, Enum[@"luitween"][@"luitween_ease_out"])
 				f12_arg0:setTopBottom(0, 0, 68.5, 143.5)
 				f12_arg0:registerEventHandler("transition_complete_keyframe", f12_local0)
 			end
@@ -235,7 +235,7 @@ CoD.MatchStartWarning.__clipsPerState = {
 						f17_arg0:setScale(1, 1)
 						f17_arg0:registerEventHandler("transition_complete_keyframe", f11_arg0.clipFinished)
 					end
-					f16_arg0:beginAnimation(120, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f16_arg0:beginAnimation(120, Enum[@"luitween"][@"luitween_ease_in"])
 					f16_arg0:setAlpha(0.75)
 					f16_arg0:setScale(0.8, 0.8)
 					f16_arg0:registerEventHandler("transition_complete_keyframe", f16_local0)
@@ -256,7 +256,7 @@ CoD.MatchStartWarning.__clipsPerState = {
 						f20_arg0:setScale(1, 1)
 						f20_arg0:registerEventHandler("transition_complete_keyframe", f11_arg0.clipFinished)
 					end
-					f19_arg0:beginAnimation(119, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f19_arg0:beginAnimation(119, Enum[@"luitween"][@"luitween_ease_in"])
 					f19_arg0:setAlpha(0.75)
 					f19_arg0:setScale(1.2, 1.2)
 					f19_arg0:registerEventHandler("transition_complete_keyframe", f19_local0)
@@ -341,11 +341,11 @@ CoD.MatchStartWarning.__clipsPerState = {
 			f31_arg0:setupElementClipCounter(7)
 			local f31_local0 = function(f32_arg0)
 				local f32_local0 = function(f33_arg0)
-					f33_arg0:beginAnimation(140, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f33_arg0:beginAnimation(140, Enum[@"luitween"][@"luitween_ease_out"])
 					f33_arg0:setTopBottom(0, 0, -98.5, -23.5)
 					f33_arg0:registerEventHandler("transition_complete_keyframe", f31_arg0.clipFinished)
 				end
-				f31_arg0.MatchStartWarningContainer0:beginAnimation(160, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f31_arg0.MatchStartWarningContainer0:beginAnimation(160, Enum[@"luitween"][@"luitween_ease_out"])
 				f31_arg0.MatchStartWarningContainer0:setTopBottom(0, 0, 67.5, 142.5)
 				f31_arg0.MatchStartWarningContainer0:registerEventHandler("interrupted_keyframe", f31_arg0.clipInterrupted)
 				f31_arg0.MatchStartWarningContainer0:registerEventHandler("transition_complete_keyframe", f32_local0)
@@ -390,7 +390,7 @@ CoD.MatchStartWarning.__clipsPerState = {
 			f31_arg0.RadialTimer:registerEventHandler("interrupted_keyframe", f31_arg0.clipInterrupted)
 			f31_arg0.RadialTimer:registerEventHandler("transition_complete_keyframe", f31_local2)
 			local f31_local3 = function(f38_arg0)
-				f38_arg0:beginAnimation(300, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f38_arg0:beginAnimation(300, Enum[@"luitween"][@"luitween_ease_in"])
 				f38_arg0:setAlpha(0)
 				f38_arg0:registerEventHandler("transition_complete_keyframe", f31_arg0.clipFinished)
 			end
@@ -469,15 +469,15 @@ CoD.MatchStartWarning.__clipsPerState = {
 			local f44_local0 = function(f45_arg0)
 				local f45_local0 = function(f46_arg0)
 					local f46_local0 = function(f47_arg0)
-						f47_arg0:beginAnimation(89, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+						f47_arg0:beginAnimation(89, Enum[@"luitween"][@"luitween_ease_out"])
 						f47_arg0:setTopBottom(0, 0, 46.5, 121.5)
 						f47_arg0:registerEventHandler("transition_complete_keyframe", f44_arg0.clipFinished)
 					end
-					f46_arg0:beginAnimation(50, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f46_arg0:beginAnimation(50, Enum[@"luitween"][@"luitween_ease_out"])
 					f46_arg0:setTopBottom(0, 0, 37.5, 112.5)
 					f46_arg0:registerEventHandler("transition_complete_keyframe", f46_local0)
 				end
-				f45_arg0:beginAnimation(199, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f45_arg0:beginAnimation(199, Enum[@"luitween"][@"luitween_ease_out"])
 				f45_arg0:setTopBottom(0, 0, 68.5, 143.5)
 				f45_arg0:registerEventHandler("transition_complete_keyframe", f45_local0)
 			end
@@ -495,7 +495,7 @@ CoD.MatchStartWarning.__clipsPerState = {
 						f50_arg0:setScale(1, 1)
 						f50_arg0:registerEventHandler("transition_complete_keyframe", f44_arg0.clipFinished)
 					end
-					f49_arg0:beginAnimation(120, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f49_arg0:beginAnimation(120, Enum[@"luitween"][@"luitween_ease_in"])
 					f49_arg0:setAlpha(0.75)
 					f49_arg0:setScale(0.8, 0.8)
 					f49_arg0:registerEventHandler("transition_complete_keyframe", f49_local0)
@@ -516,7 +516,7 @@ CoD.MatchStartWarning.__clipsPerState = {
 						f53_arg0:setScale(1, 1)
 						f53_arg0:registerEventHandler("transition_complete_keyframe", f44_arg0.clipFinished)
 					end
-					f52_arg0:beginAnimation(119, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f52_arg0:beginAnimation(119, Enum[@"luitween"][@"luitween_ease_in"])
 					f52_arg0:setAlpha(0.75)
 					f52_arg0:setScale(1.2, 1.2)
 					f52_arg0:registerEventHandler("transition_complete_keyframe", f52_local0)

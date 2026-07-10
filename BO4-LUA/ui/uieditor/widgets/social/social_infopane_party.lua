@@ -12,11 +12,11 @@ CoD.Social_InfoPane_Party.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	local partyHeader = LUI.UIText.new(0, 0, 0, 290, 0, 0, 0, 18)
 	partyHeader:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	partyHeader:setZoom(5)
-	partyHeader:setText(LocalizeToUpperString(0xCF48FF8759D4662))
+	partyHeader:setText(LocalizeToUpperString(@"hash_1CF48FF8759D4662"))
 	partyHeader:setTTF("ttmussels_regular")
 	partyHeader:setLetterSpacing(3)
 	partyHeader:setLineSpacing(1)
-	partyHeader:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	partyHeader:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(partyHeader)
 	self.partyHeader = partyHeader
 	local PlayerList = LUI.UIList.new(f1_arg0, f1_arg1, 2, 0, nil, false, false, false, false)
@@ -24,7 +24,7 @@ CoD.Social_InfoPane_Party.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	PlayerList:setTopBottom(0, 0, 23, 151)
 	PlayerList:setWidgetType(CoD.Social_PartyList)
 	PlayerList:setVerticalCount(5)
-	PlayerList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	PlayerList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	PlayerList:setDataSource("SocialPlayerPartyList")
 	self:addElement(PlayerList)
 	self.PlayerList = PlayerList
@@ -38,7 +38,7 @@ CoD.Social_InfoPane_Party.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	})
 	local f1_local3 = self
 	local f1_local4 = self.subscribeToModel
-	local f1_local5 = Engine[0x8DF2E5447F384B9]()
+	local f1_local5 = Engine[@"getglobalmodel"]()
 	f1_local4(f1_local3, f1_local5["socialRoot.tab"], function(f3_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

@@ -13,8 +13,8 @@ CoD.LaboratoryMixAgain.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local NoiseTiledBacking = LUI.UIImage.new(-1, 1, 0.5, 0.5, 0, 1, 0, 0)
 	NoiseTiledBacking:setAlpha(0.5)
-	NoiseTiledBacking:setImage(RegisterImage(0x34839E8065B1E53))
-	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	NoiseTiledBacking:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	NoiseTiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	NoiseTiledBacking:setupNineSliceShader(196, 88)
 	self:addElement(NoiseTiledBacking)
@@ -22,8 +22,8 @@ CoD.LaboratoryMixAgain.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	local StoneTiledBacking = LUI.UIImage.new(-1, 1, 0, 0, 0.09, 0.09, -91, 116)
 	StoneTiledBacking:setRGB(0.83, 0.11, 0.01)
 	StoneTiledBacking:setAlpha(0.5)
-	StoneTiledBacking:setImage(RegisterImage(0x33757173B476ACD))
-	StoneTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	StoneTiledBacking:setImage(RegisterImage(@"uie_ui_zm_laboratory_buttonbgtile"))
+	StoneTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	StoneTiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	StoneTiledBacking:setupNineSliceShader(196, 88)
 	self:addElement(StoneTiledBacking)
@@ -45,18 +45,18 @@ CoD.LaboratoryMixAgain.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	self.FixedAspectRatioImage = FixedAspectRatioImage
 	local MixAgain = LUI.UIText.new(0.5, 1.5, -124, -156, 0, 0, 175.5, 205.5)
 	MixAgain:setRGB(0.58, 0.85, 1)
-	MixAgain:setText(LocalizeToUpperString(0x1496C7B4FF40634))
+	MixAgain:setText(LocalizeToUpperString(@"hash_1496C7B4FF40634"))
 	MixAgain:setTTF("skorzhen")
-	MixAgain:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	MixAgain:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	MixAgain:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	MixAgain:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(MixAgain)
 	self.MixAgain = MixAgain
 	local Name = LUI.UIText.new(0, 1, 16, -16, 0, 0, 527.5, 557.5)
 	Name:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	Name:setTTF("default")
 	Name:setLetterSpacing(1)
-	Name:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Name:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Name:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Name:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	Name:linkToElementModel(self, "name", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -70,12 +70,12 @@ CoD.LaboratoryMixAgain.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	Description:setTTF("default")
 	Description:setLetterSpacing(1)
 	Description:setLineSpacing(1)
-	Description:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Description:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Description:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Description:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	Description:linkToElementModel(self, "description", true, function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
-			Description:setText(Engine[0xF9F1239CFD921FE](f4_local0))
+			Description:setText(Engine[@"hash_4F9F1239CFD921FE"](f4_local0))
 		end
 	end)
 	self:addElement(Description)
@@ -87,20 +87,20 @@ CoD.LaboratoryMixAgain.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	LaboratoryMixAgainButton:linkToElementModel(self, "plasmaPrice", true, function(model)
 		local f6_local0 = model:get()
 		if f6_local0 ~= nil then
-			LaboratoryMixAgainButton.Button.Cost:setText(ConvertToUpperString(LocalizeIntoStringIfNotEmpty(0x10EE05AA87A5498, f6_local0)))
+			LaboratoryMixAgainButton.Button.Cost:setText(ConvertToUpperString(LocalizeIntoStringIfNotEmpty(@"hash_310EE05AA87A5498", f6_local0)))
 		end
 	end)
 	local TopBar = LaboratoryMixAgainButton
 	local DoneButton = LaboratoryMixAgainButton.subscribeToModel
-	local BgZmStar = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local BgZmStar = Engine[@"getmodelforcontroller"](f1_arg1)
 	DoneButton(TopBar, BgZmStar["Laboratory.animState"], function(f7_arg0, f7_arg1)
-		CoD.Menu.UpdateButtonShownState(f7_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f7_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	TopBar = LaboratoryMixAgainButton
 	DoneButton = LaboratoryMixAgainButton.subscribeToModel
-	BgZmStar = Engine[0x4DF5CFBC1771947](f1_arg1)
+	BgZmStar = Engine[@"getmodelforcontroller"](f1_arg1)
 	DoneButton(TopBar, BgZmStar["Laboratory.disableInput"], function(f8_arg0, f8_arg1)
-		CoD.Menu.UpdateButtonShownState(f8_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f8_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	LaboratoryMixAgainButton:registerEventHandler("gain_focus", function(element, event)
 		local f9_local0 = nil
@@ -109,10 +109,10 @@ CoD.LaboratoryMixAgain.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 		elseif element.super.gainFocus then
 			f9_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f9_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(LaboratoryMixAgainButton, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(LaboratoryMixAgainButton, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if CoD.ZMLaboratoryUtility.IsInAnimState1(controller, CoD.ZMLaboratoryUtility.LabAnimState.MIX_AGAIN) and CoD.ZMLaboratoryUtility.CanPurchase(controller, element) and CoD.ModelUtility.IsModelValueEqualTo(controller, "Laboratory.disableInput", 0) then
 			CoD.ZMLaboratoryUtility.CacheOfferButtonModel(controller, element, menu)
 			CoD.ZMLaboratoryUtility.MixAgain(self, menu, controller)
@@ -137,13 +137,13 @@ CoD.LaboratoryMixAgain.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 		end
 	end, function(element, menu, controller)
 		if CoD.ZMLaboratoryUtility.IsInAnimState1(controller, CoD.ZMLaboratoryUtility.LabAnimState.MIX_AGAIN) and CoD.ZMLaboratoryUtility.CanPurchase(controller, element) and CoD.ModelUtility.IsModelValueEqualTo(controller, "Laboratory.disableInput", 0) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		elseif CoD.ZMLaboratoryUtility.IsInAnimState1(controller, CoD.ZMLaboratoryUtility.LabAnimState.MIX_AGAIN) and not CoD.ZMLaboratoryUtility.CanPurchase(controller, element) and CoD.ModelUtility.IsModelValueEqualTo(controller, "Laboratory.disableInput", 0) and IsBooleanDvarSet("laboratory_codpoints_enabled") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		elseif CoD.ZMLaboratoryUtility.IsInAnimState1(controller, CoD.ZMLaboratoryUtility.LabAnimState.MIX_AGAIN) and not CoD.ZMLaboratoryUtility.CanPurchase(controller, element) and CoD.ModelUtility.IsModelValueEqualTo(controller, "Laboratory.disableInput", 0) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		else
 			return false
@@ -153,20 +153,20 @@ CoD.LaboratoryMixAgain.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	self.LaboratoryMixAgainButton = LaboratoryMixAgainButton
 	DoneButton = nil
 	DoneButton = CoD.LaboratoryMixAgainButton.new(f1_arg0, f1_arg1, 0.5, 0.5, -115, 115, 0, 0, 900.5, 976.5)
-	DoneButton.Button.Cost:setText(LocalizeToUpperString(0x6C253CF816B40B5))
+	DoneButton.Button.Cost:setText(LocalizeToUpperString(@"menu/close"))
 	BgZmStar = DoneButton
 	TopBar = DoneButton.subscribeToModel
-	local SideBar = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local SideBar = Engine[@"getmodelforcontroller"](f1_arg1)
 	TopBar(BgZmStar, SideBar["Laboratory.animState"], function(f12_arg0, f12_arg1)
-		CoD.Menu.UpdateButtonShownState(f12_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(f12_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(f12_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(f12_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_none"])
 	end, false)
 	BgZmStar = DoneButton
 	TopBar = DoneButton.subscribeToModel
-	SideBar = Engine[0x4DF5CFBC1771947](f1_arg1)
+	SideBar = Engine[@"getmodelforcontroller"](f1_arg1)
 	TopBar(BgZmStar, SideBar["Laboratory.disableInput"], function(f13_arg0, f13_arg1)
-		CoD.Menu.UpdateButtonShownState(f13_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(f13_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(f13_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(f13_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_none"])
 	end, false)
 	DoneButton:registerEventHandler("gain_focus", function(element, event)
 		local f14_local0 = nil
@@ -175,11 +175,11 @@ CoD.LaboratoryMixAgain.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 		elseif element.super.gainFocus then
 			f14_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_none"])
 		return f14_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(DoneButton, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(DoneButton, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if CoD.ZMLaboratoryUtility.IsInAnimState1(controller, CoD.ZMLaboratoryUtility.LabAnimState.MIX_AGAIN) and CoD.ModelUtility.IsModelValueEqualTo(controller, "Laboratory.disableInput", 0) then
 			SendClientScriptNotify(controller, "mix_again", "0")
 			return true
@@ -187,13 +187,13 @@ CoD.LaboratoryMixAgain.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 		end
 	end, function(element, menu, controller)
 		if CoD.ZMLaboratoryUtility.IsInAnimState1(controller, CoD.ZMLaboratoryUtility.LabAnimState.MIX_AGAIN) and CoD.ModelUtility.IsModelValueEqualTo(controller, "Laboratory.disableInput", 0) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(DoneButton, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "MOUSE1", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(DoneButton, f1_arg1, Enum[@"luibutton"][@"lui_key_none"], "MOUSE1", function(element, menu, controller, model)
 		if CoD.ZMLaboratoryUtility.IsInAnimState1(controller, CoD.ZMLaboratoryUtility.LabAnimState.MIX_AGAIN) and CoD.ModelUtility.IsModelValueEqualTo(controller, "Laboratory.disableInput", 0) then
 			SendClientScriptNotify(controller, "mix_again", "0")
 			return true
@@ -201,7 +201,7 @@ CoD.LaboratoryMixAgain.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 		end
 	end, function(element, menu, controller)
 		if CoD.ZMLaboratoryUtility.IsInAnimState1(controller, CoD.ZMLaboratoryUtility.LabAnimState.MIX_AGAIN) and CoD.ModelUtility.IsModelValueEqualTo(controller, "Laboratory.disableInput", 0) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "MOUSE1")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "MOUSE1")
 			return false
 		else
 			return false
@@ -210,27 +210,27 @@ CoD.LaboratoryMixAgain.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	self:addElement(DoneButton)
 	self.DoneButton = DoneButton
 	TopBar = LUI.UIImage.new(0.5, 0.5, -120, 120, 0, 0, 202.5, 217.5)
-	TopBar:setImage(RegisterImage(0x45C555C45B1E6E4))
+	TopBar:setImage(RegisterImage(@"uie_ui_hud_zm_aar_top_bar"))
 	self:addElement(TopBar)
 	self.TopBar = TopBar
 	BgZmStar = LUI.UIImage.new(0.5, 0.5, -100, 100, 0, 0, 107, 307)
 	BgZmStar:setRGB(ColorSet.T8__OFF__GRAY.r, ColorSet.T8__OFF__GRAY.g, ColorSet.T8__OFF__GRAY.b)
 	BgZmStar:setAlpha(0.4)
-	BgZmStar:setImage(RegisterImage(0x37B9CCC18877DAA))
-	BgZmStar:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	BgZmStar:setImage(RegisterImage(@"uie_ui_hud_zm_arr_reward_star"))
+	BgZmStar:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	BgZmStar:setShaderVector(0, 4, 0, 0, 0)
 	self:addElement(BgZmStar)
 	self.BgZmStar = BgZmStar
 	SideBar = LUI.UIImage.new(1, 1, -5, 0, 0, 1, 0, 0)
 	SideBar:setAlpha(0.25)
-	SideBar:setImage(RegisterImage(0x38DA8EF7E70CB06))
+	SideBar:setImage(RegisterImage(@"hash_638DA8EF7E70CB06"))
 	self:addElement(SideBar)
 	self.SideBar = SideBar
 	local SideBar2 = nil
 	SideBar2 = LUI.UIImage.new(0, 0, 0, 5, 0, 1, 0, 0)
 	SideBar2:setAlpha(0.25)
 	SideBar2:setZRot(180)
-	SideBar2:setImage(RegisterImage(0x38DA8EF7E70CB06))
+	SideBar2:setImage(RegisterImage(@"hash_638DA8EF7E70CB06"))
 	self:addElement(SideBar2)
 	self.SideBar2 = SideBar2
 	self:mergeStateConditions({

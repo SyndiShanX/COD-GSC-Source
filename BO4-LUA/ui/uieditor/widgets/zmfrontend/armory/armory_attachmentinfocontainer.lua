@@ -38,7 +38,7 @@ CoD.Armory_AttachmentInfoContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	})
 	local f1_local3 = self
 	local f1_local4 = self.subscribeToModel
-	local f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local4(f1_local3, f1_local5.armoryAttachmentListFocus, function(f4_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -50,7 +50,7 @@ CoD.Armory_AttachmentInfoContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	end, false)
 	f1_local3 = self
 	f1_local4 = self.subscribeToModel
-	f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local4(f1_local3, f1_local5.armoryOpticListFocus, function(f5_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

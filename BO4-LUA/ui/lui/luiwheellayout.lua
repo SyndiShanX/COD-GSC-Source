@@ -214,9 +214,9 @@ LUI.WheelLayout.createWidgetForPosition = function(f22_arg0, f22_arg1)
 				f22_local6:setModel(f22_local3, f22_arg0.controller, true)
 			end
 			if f22_local3 then
-				local f22_local7 = Engine[0x40E824FE270E174](f22_local3, "customId")
+				local f22_local7 = Engine[@"getmodel"](f22_local3, "customId")
 				if f22_local7 then
-					LUI_WheelLayout_ChangeWidgetId(f22_arg0.itemStencil, f22_local6, Engine[0x614D394F6F9A18D](f22_local7))
+					LUI_WheelLayout_ChangeWidgetId(f22_arg0.itemStencil, f22_local6, Engine[@"getmodelvalue"](f22_local7))
 				end
 			end
 			f22_arg0.menu:sendInitializationEvents(f22_arg0.controller, f22_local6)

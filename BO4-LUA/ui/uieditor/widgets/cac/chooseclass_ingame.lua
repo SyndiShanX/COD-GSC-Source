@@ -33,10 +33,10 @@ CoD.ChooseClass_InGame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	customClasssList:setWidgetType(CoD.CustomClassListButton)
 	customClasssList:setVerticalCount(5)
 	customClasssList:setSpacing(5)
-	customClasssList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	customClasssList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	customClasssList:setDataSource("ChooseClass_InGame")
 	customClasssList:linkToElementModel(customClasssList, "disabled", true, function(model, f2_arg1)
-		CoD.Menu.UpdateButtonShownState(f2_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f2_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	customClasssList:registerEventHandler("list_item_gain_focus", function(element, event)
 		local f3_local0 = nil
@@ -55,10 +55,10 @@ CoD.ChooseClass_InGame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 		elseif element.super.gainFocus then
 			f5_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f5_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(customClasssList, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(customClasssList, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if IsPerControllerTablePropertyValue(controller, "isInMobileArmory", true) then
 			ChangeClass(menu, self, element, controller)
 			LockInput(self, controller, false)
@@ -77,13 +77,13 @@ CoD.ChooseClass_InGame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 		end
 	end, function(element, menu, controller)
 		if IsPerControllerTablePropertyValue(controller, "isInMobileArmory", true) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], nil)
 			return true
 		elseif IsCurrentMenu(menu, "PositionDraft") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], nil)
 			return true
 		elseif not IsDisabled(element, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], nil)
 			return true
 		else
 			return false
@@ -99,8 +99,8 @@ CoD.ChooseClass_InGame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	customClassName:setZoom(80)
 	customClassName:setTTF("ttmussels_demibold")
 	customClassName:setLetterSpacing(14)
-	customClassName:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	customClassName:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	customClassName:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	customClassName:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(customClassName)
 	self.customClassName = customClassName
 	local primaryAttachments = LUI.GridLayout.new(f1_arg0, f1_arg1, false, 0, 0, 10, 0, nil, nil, false, false, false, false)
@@ -110,7 +110,7 @@ CoD.ChooseClass_InGame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	primaryAttachments:setWidgetType(CoD.AttachmentLoadoutClassListItem)
 	primaryAttachments:setHorizontalCount(5)
 	primaryAttachments:setSpacing(10)
-	primaryAttachments:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	primaryAttachments:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(primaryAttachments)
 	self.primaryAttachments = primaryAttachments
 	local secondaryAttachments = LUI.GridLayout.new(f1_arg0, f1_arg1, false, 0, 0, 10, 0, nil, nil, false, false, false, false)
@@ -120,7 +120,7 @@ CoD.ChooseClass_InGame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	secondaryAttachments:setWidgetType(CoD.AttachmentLoadoutClassListItem)
 	secondaryAttachments:setHorizontalCount(3)
 	secondaryAttachments:setSpacing(10)
-	secondaryAttachments:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	secondaryAttachments:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(secondaryAttachments)
 	self.secondaryAttachments = secondaryAttachments
 	primary:linkToElementModel(customClasssList, "primary", false, function(model)
@@ -149,12 +149,12 @@ CoD.ChooseClass_InGame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	end)
 	local f1_local8 = self
 	local f1_local9 = self.subscribeToModel
-	local f1_local10 = Engine[0x8DF2E5447F384B9]()
+	local f1_local10 = Engine[@"getglobalmodel"]()
 	f1_local9(f1_local8, f1_local10["lobbyRoot.lobbyNav"], function(f14_arg0, f14_arg1)
-		CoD.Menu.UpdateButtonShownState(f14_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x493152B20AE4F58])
-		CoD.Menu.UpdateButtonShownState(f14_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x49A252B20B48936])
+		CoD.Menu.UpdateButtonShownState(f14_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_lb"])
+		CoD.Menu.UpdateButtonShownState(f14_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_rb"])
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
 		if IsCurrentMenu(menu, "PositionDraft") then
 			SetMenuState(menu, "CharacterSelected", controller)
 			return true
@@ -167,10 +167,10 @@ CoD.ChooseClass_InGame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 			return true
 		end
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 		return true
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0x493152B20AE4F58], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_lb"], nil, function(element, menu, controller, model)
 		if IsMultiplayer() and not IsCACCustomClassCountDefault(controller) then
 			chooseClass_TabMPClassesListLeft(self, controller)
 			return true
@@ -178,13 +178,13 @@ CoD.ChooseClass_InGame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 		end
 	end, function(element, menu, controller)
 		if IsMultiplayer() and not IsCACCustomClassCountDefault(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x493152B20AE4F58], 0x0, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_lb"], @"hash_0", nil, nil)
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0x49A252B20B48936], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_rb"], nil, function(element, menu, controller, model)
 		if IsMultiplayer() and not IsCACCustomClassCountDefault(controller) then
 			chooseClass_TabMPClassesListRight(self, controller)
 			return true
@@ -192,7 +192,7 @@ CoD.ChooseClass_InGame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 		end
 	end, function(element, menu, controller)
 		if IsMultiplayer() and not IsCACCustomClassCountDefault(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x49A252B20B48936], 0x0, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_rb"], @"hash_0", nil, nil)
 			return false
 		else
 			return false

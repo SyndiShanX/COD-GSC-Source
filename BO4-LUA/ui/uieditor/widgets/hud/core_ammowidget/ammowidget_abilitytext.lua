@@ -14,10 +14,10 @@ CoD.AmmoWidget_AbilityText.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local AbilityTextInfo = LUI.UIText.new(0, 1, 0, 0, 0.5, 0.5, -12.5, 5.5)
-	AbilityTextInfo:setText(Engine[0xF9F1239CFD921FE](0x811F06542057CEC))
+	AbilityTextInfo:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_7811F06542057CEC"))
 	AbilityTextInfo:setTTF("ttmussels_regular")
-	AbilityTextInfo:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	AbilityTextInfo:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	AbilityTextInfo:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	AbilityTextInfo:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(AbilityTextInfo)
 	self.AbilityTextInfo = AbilityTextInfo
 	local Text_Prompt_Arrow = CoD.Prompt_Arrow.new(f1_arg0, f1_arg1, 0, 0, -10, 0, 0.5, 0.5, -5, 5)
@@ -31,7 +31,7 @@ CoD.AmmoWidget_AbilityText.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self.TextPromptArrow = TextPromptArrow
 	local TabletLocationSelectorFlare = LUI.UIImage.new(0, 0, 23, 151, 0, 0, -56.5, 71.5)
 	TabletLocationSelectorFlare:setScale(0, 0)
-	TabletLocationSelectorFlare:setImage(RegisterImage(0x3F79D2A45FD842E))
+	TabletLocationSelectorFlare:setImage(RegisterImage(@"uie_ui_hud_cp_hud_tacmode_flare"))
 	self:addElement(TabletLocationSelectorFlare)
 	self.TabletLocationSelectorFlare = TabletLocationSelectorFlare
 	local HeroAbilityUseString = CoD.ControllerDependent_TextBox.new(f1_arg0, f1_arg1, 0.5, 0.5, -44.5, 44.5, 0, 0, 24, 46)
@@ -63,26 +63,26 @@ CoD.AmmoWidget_AbilityText.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	})
 	local f1_local6 = HeroAbilityUseString
 	local f1_local7 = HeroAbilityUseString.subscribeToModel
-	local f1_local8 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local7(f1_local6, f1_local8["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2]], function(f6_arg0)
+	local f1_local8 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local7(f1_local6, f1_local8["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"]], function(f6_arg0)
 		f1_arg0:updateElementState(HeroAbilityUseString, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f6_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"],
 		})
 	end, false)
 	f1_local6 = HeroAbilityUseString
 	f1_local7 = HeroAbilityUseString.subscribeToModel
-	f1_local8 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local7(f1_local6, f1_local8["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F]], function(f7_arg0)
+	f1_local8 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local7(f1_local6, f1_local8["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_play_of_the_match"]], function(f7_arg0)
 		f1_arg0:updateElementState(HeroAbilityUseString, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f7_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_play_of_the_match"],
 		})
 	end, false)
 	HeroAbilityUseString:appendEventHandler("input_source_changed", function(f8_arg0, f8_arg1)
@@ -91,7 +91,7 @@ CoD.AmmoWidget_AbilityText.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	end)
 	f1_local6 = HeroAbilityUseString
 	f1_local7 = HeroAbilityUseString.subscribeToModel
-	f1_local8 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local8 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local7(f1_local6, f1_local8.LastInput, function(f9_arg0)
 		f1_arg0:updateElementState(HeroAbilityUseString, {
 			name = "model_validation",
@@ -102,10 +102,10 @@ CoD.AmmoWidget_AbilityText.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 		})
 	end, false)
 	HeroAbilityUseString:setAlpha(0)
-	HeroAbilityUseString.KBMText:setText(Engine[0xF9F1239CFD921FE](0xEC61C43D90FCF56))
-	HeroAbilityUseString.GamepadText:setText(Engine[0xF9F1239CFD921FE](0x9E6A8D0F83F4FC6))
+	HeroAbilityUseString.KBMText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_2EC61C43D90FCF56"))
+	HeroAbilityUseString.GamepadText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_29E6A8D0F83F4FC6"))
 	HeroAbilityUseString.GamepadText:setTTF("ttmussels_regular")
-	HeroAbilityUseString.GamepadText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	HeroAbilityUseString.GamepadText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	self:addElement(HeroAbilityUseString)
 	self.HeroAbilityUseString = HeroAbilityUseString
 	self:mergeStateConditions({
@@ -160,7 +160,7 @@ CoD.AmmoWidget_AbilityText.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	})
 	f1_local6 = self
 	f1_local7 = self.subscribeToModel
-	f1_local8 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local8 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local7(f1_local6, f1_local8["hudItems.tankState"], function(f18_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -172,7 +172,7 @@ CoD.AmmoWidget_AbilityText.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	end, false)
 	f1_local6 = self
 	f1_local7 = self.subscribeToModel
-	f1_local8 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local8 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local7(f1_local6, f1_local8["hudItems.smartCoverState"], function(f19_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -184,7 +184,7 @@ CoD.AmmoWidget_AbilityText.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	end, false)
 	f1_local6 = self
 	f1_local7 = self.subscribeToModel
-	f1_local8 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local8 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local7(f1_local6, f1_local8["hudItems.dogState"], function(f20_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -200,7 +200,7 @@ CoD.AmmoWidget_AbilityText.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	end)
 	f1_local6 = self
 	f1_local7 = self.subscribeToModel
-	f1_local8 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local8 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local7(f1_local6, f1_local8.LastInput, function(f22_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -225,7 +225,7 @@ CoD.AmmoWidget_AbilityText.__resetProperties = function(f23_arg0)
 	f23_arg0.AbilityTextInfo:setLeftRight(0, 1, 0, 0)
 	f23_arg0.AbilityTextInfo:setTopBottom(0.5, 0.5, -12.5, 5.5)
 	f23_arg0.AbilityTextInfo:setAlpha(1)
-	f23_arg0.AbilityTextInfo:setText(Engine[0xF9F1239CFD921FE](0x811F06542057CEC))
+	f23_arg0.AbilityTextInfo:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_7811F06542057CEC"))
 	f23_arg0.Text_Prompt_Arrow:setLeftRight(0, 0, -10, 0)
 	f23_arg0.Text_Prompt_Arrow:setTopBottom(0.5, 0.5, -5, 5)
 	f23_arg0.Text_Prompt_Arrow:setAlpha(0)
@@ -240,8 +240,8 @@ CoD.AmmoWidget_AbilityText.__resetProperties = function(f23_arg0)
 	f23_arg0.TabletLocationSelectorFlare:setTopBottom(0, 0, -56.5, 71.5)
 	f23_arg0.TabletLocationSelectorFlare:setAlpha(1)
 	f23_arg0.TabletLocationSelectorFlare:setScale(0, 0)
-	f23_arg0.TabletLocationSelectorFlare:setImage(RegisterImage(0x3F79D2A45FD842E))
-	f23_arg0.TabletLocationSelectorFlare:setMaterial(LUI.UIImage.GetCachedMaterial(0x6B34AA3F39208EF))
+	f23_arg0.TabletLocationSelectorFlare:setImage(RegisterImage(@"uie_ui_hud_cp_hud_tacmode_flare"))
+	f23_arg0.TabletLocationSelectorFlare:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_normal"))
 end
 CoD.AmmoWidget_AbilityText.__clipsPerState = {
 	DefaultState = {
@@ -250,7 +250,7 @@ CoD.AmmoWidget_AbilityText.__clipsPerState = {
 			f24_arg0:setupElementClipCounter(1)
 			f24_arg0.AbilityTextInfo:completeAnimation()
 			f24_arg0.AbilityTextInfo:setAlpha(0)
-			f24_arg0.AbilityTextInfo:setText(Engine[0xF9F1239CFD921FE](0xD23BFBCD5F26261))
+			f24_arg0.AbilityTextInfo:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_1D23BFBCD5F26261"))
 			f24_arg0.clipFinished(f24_arg0.AbilityTextInfo)
 		end,
 		TankInbound = function(f25_arg0, f25_arg1)
@@ -301,7 +301,7 @@ CoD.AmmoWidget_AbilityText.__clipsPerState = {
 			f29_arg0:setupElementClipCounter(3)
 			f29_arg0.AbilityTextInfo:completeAnimation()
 			f29_arg0.AbilityTextInfo:setAlpha(1)
-			f29_arg0.AbilityTextInfo:setText(Engine[0xF9F1239CFD921FE](0xD23BFBCD5F26261))
+			f29_arg0.AbilityTextInfo:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_1D23BFBCD5F26261"))
 			f29_arg0.clipFinished(f29_arg0.AbilityTextInfo)
 			f29_arg0.Text_Prompt_Arrow:completeAnimation()
 			f29_arg0.Text_Prompt_Arrow:setLeftRight(0, 0, -10, 0)
@@ -317,13 +317,13 @@ CoD.AmmoWidget_AbilityText.__clipsPerState = {
 			f30_arg0:setupElementClipCounter(5)
 			local f30_local0 = function(f31_arg0)
 				f30_arg0.AbilityTextInfo:beginAnimation(390)
-				f30_arg0.AbilityTextInfo:setText(Engine[0xF9F1239CFD921FE](0xFBCFC36F0C79D9A))
+				f30_arg0.AbilityTextInfo:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_FBCFC36F0C79D9A"))
 				f30_arg0.AbilityTextInfo:registerEventHandler("interrupted_keyframe", f30_arg0.clipInterrupted)
 				f30_arg0.AbilityTextInfo:registerEventHandler("transition_complete_keyframe", f30_arg0.clipFinished)
 			end
 			f30_arg0.AbilityTextInfo:completeAnimation()
 			f30_arg0.AbilityTextInfo:setAlpha(1)
-			f30_arg0.AbilityTextInfo:setText(Engine[0xF9F1239CFD921FE](0xD23BFBCD5F26261))
+			f30_arg0.AbilityTextInfo:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_1D23BFBCD5F26261"))
 			f30_local0(f30_arg0.AbilityTextInfo)
 			f30_arg0.Text_Prompt_Arrow:completeAnimation()
 			f30_arg0.Text_Prompt_Arrow:setAlpha(0.99)
@@ -357,8 +357,8 @@ CoD.AmmoWidget_AbilityText.__clipsPerState = {
 			f30_arg0.TabletLocationSelectorFlare:setTopBottom(0, 0, -56.5, 71.5)
 			f30_arg0.TabletLocationSelectorFlare:setAlpha(0)
 			f30_arg0.TabletLocationSelectorFlare:setScale(1.75, 1.75)
-			f30_arg0.TabletLocationSelectorFlare:setImage(RegisterImage(0x3F79D2A45FD842E))
-			f30_arg0.TabletLocationSelectorFlare:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+			f30_arg0.TabletLocationSelectorFlare:setImage(RegisterImage(@"uie_ui_hud_cp_hud_tacmode_flare"))
+			f30_arg0.TabletLocationSelectorFlare:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 			f30_local1(f30_arg0.TabletLocationSelectorFlare)
 			local f30_local2 = function(f36_arg0)
 				f30_arg0.HeroAbilityUseString:beginAnimation(390)
@@ -377,7 +377,7 @@ CoD.AmmoWidget_AbilityText.__clipsPerState = {
 			f37_arg0:setupElementClipCounter(4)
 			f37_arg0.AbilityTextInfo:completeAnimation()
 			f37_arg0.AbilityTextInfo:setAlpha(1)
-			f37_arg0.AbilityTextInfo:setText(Engine[0xF9F1239CFD921FE](0xFBCFC36F0C79D9A))
+			f37_arg0.AbilityTextInfo:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_FBCFC36F0C79D9A"))
 			f37_arg0.clipFinished(f37_arg0.AbilityTextInfo)
 			f37_arg0.Text_Prompt_Arrow:completeAnimation()
 			f37_arg0.Text_Prompt_Arrow:setAlpha(0.99)
@@ -394,13 +394,13 @@ CoD.AmmoWidget_AbilityText.__clipsPerState = {
 			f38_arg0:setupElementClipCounter(5)
 			local f38_local0 = function(f39_arg0)
 				f38_arg0.AbilityTextInfo:beginAnimation(200)
-				f38_arg0.AbilityTextInfo:setText(Engine[0xF9F1239CFD921FE](0xD23BFBCD5F26261))
+				f38_arg0.AbilityTextInfo:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_1D23BFBCD5F26261"))
 				f38_arg0.AbilityTextInfo:registerEventHandler("interrupted_keyframe", f38_arg0.clipInterrupted)
 				f38_arg0.AbilityTextInfo:registerEventHandler("transition_complete_keyframe", f38_arg0.clipFinished)
 			end
 			f38_arg0.AbilityTextInfo:completeAnimation()
 			f38_arg0.AbilityTextInfo:setAlpha(1)
-			f38_arg0.AbilityTextInfo:setText(Engine[0xF9F1239CFD921FE](0xFBCFC36F0C79D9A))
+			f38_arg0.AbilityTextInfo:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_FBCFC36F0C79D9A"))
 			f38_local0(f38_arg0.AbilityTextInfo)
 			f38_arg0.Text_Prompt_Arrow:completeAnimation()
 			f38_arg0.Text_Prompt_Arrow:setLeftRight(0, 0, -10, 0)
@@ -436,8 +436,8 @@ CoD.AmmoWidget_AbilityText.__clipsPerState = {
 			f38_arg0.TabletLocationSelectorFlare:setTopBottom(0, 0, -56.5, 71.5)
 			f38_arg0.TabletLocationSelectorFlare:setAlpha(0)
 			f38_arg0.TabletLocationSelectorFlare:setScale(1.75, 1.75)
-			f38_arg0.TabletLocationSelectorFlare:setImage(RegisterImage(0x3F79D2A45FD842E))
-			f38_arg0.TabletLocationSelectorFlare:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+			f38_arg0.TabletLocationSelectorFlare:setImage(RegisterImage(@"uie_ui_hud_cp_hud_tacmode_flare"))
+			f38_arg0.TabletLocationSelectorFlare:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 			f38_local1(f38_arg0.TabletLocationSelectorFlare)
 			local f38_local2 = function(f44_arg0)
 				f38_arg0.HeroAbilityUseString:beginAnimation(200)
@@ -458,7 +458,7 @@ CoD.AmmoWidget_AbilityText.__clipsPerState = {
 			f45_arg0.AbilityTextInfo:setLeftRight(0, 1, 0, 0)
 			f45_arg0.AbilityTextInfo:setTopBottom(0.5, 0.5, -9, 9)
 			f45_arg0.AbilityTextInfo:setAlpha(1)
-			f45_arg0.AbilityTextInfo:setText(Engine[0xF9F1239CFD921FE](0x7ED51B55D2D46E4))
+			f45_arg0.AbilityTextInfo:setText(Engine[@"hash_4F9F1239CFD921FE"](@"mp/remote_exit"))
 			f45_arg0.clipFinished(f45_arg0.AbilityTextInfo)
 			f45_arg0.Text_Prompt_Arrow:completeAnimation()
 			f45_arg0.Text_Prompt_Arrow:setAlpha(0.99)
@@ -481,13 +481,13 @@ CoD.AmmoWidget_AbilityText.__clipsPerState = {
 			f46_arg0:setupElementClipCounter(5)
 			local f46_local0 = function(f47_arg0)
 				f46_arg0.AbilityTextInfo:beginAnimation(200)
-				f46_arg0.AbilityTextInfo:setText(Engine[0xF9F1239CFD921FE](0xFBCFC36F0C79D9A))
+				f46_arg0.AbilityTextInfo:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_FBCFC36F0C79D9A"))
 				f46_arg0.AbilityTextInfo:registerEventHandler("interrupted_keyframe", f46_arg0.clipInterrupted)
 				f46_arg0.AbilityTextInfo:registerEventHandler("transition_complete_keyframe", f46_arg0.clipFinished)
 			end
 			f46_arg0.AbilityTextInfo:completeAnimation()
 			f46_arg0.AbilityTextInfo:setAlpha(1)
-			f46_arg0.AbilityTextInfo:setText(Engine[0xF9F1239CFD921FE](0xCBFB7C2C1736BB0))
+			f46_arg0.AbilityTextInfo:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_2CBFB7C2C1736BB0"))
 			f46_local0(f46_arg0.AbilityTextInfo)
 			f46_arg0.Text_Prompt_Arrow:completeAnimation()
 			f46_arg0.Text_Prompt_Arrow:setAlpha(0.99)
@@ -521,8 +521,8 @@ CoD.AmmoWidget_AbilityText.__clipsPerState = {
 			f46_arg0.TabletLocationSelectorFlare:setTopBottom(0, 0, -56.5, 71.5)
 			f46_arg0.TabletLocationSelectorFlare:setAlpha(0)
 			f46_arg0.TabletLocationSelectorFlare:setScale(1.75, 1.75)
-			f46_arg0.TabletLocationSelectorFlare:setImage(RegisterImage(0x3F79D2A45FD842E))
-			f46_arg0.TabletLocationSelectorFlare:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+			f46_arg0.TabletLocationSelectorFlare:setImage(RegisterImage(@"uie_ui_hud_cp_hud_tacmode_flare"))
+			f46_arg0.TabletLocationSelectorFlare:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 			f46_local1(f46_arg0.TabletLocationSelectorFlare)
 			f46_arg0.HeroAbilityUseString:completeAnimation()
 			f46_arg0.HeroAbilityUseString:setAlpha(1)
@@ -547,7 +547,7 @@ CoD.AmmoWidget_AbilityText.__clipsPerState = {
 			f53_arg0:setupElementClipCounter(2)
 			f53_arg0.AbilityTextInfo:completeAnimation()
 			f53_arg0.AbilityTextInfo:setAlpha(1)
-			f53_arg0.AbilityTextInfo:setText(Engine[0xF9F1239CFD921FE](0xDDC1166E6112C8B))
+			f53_arg0.AbilityTextInfo:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_4DDC1166E6112C8B"))
 			f53_arg0.clipFinished(f53_arg0.AbilityTextInfo)
 			f53_arg0.HeroAbilityUseString:completeAnimation()
 			f53_arg0.HeroAbilityUseString:setLeftRight(0.5, 0.5, -44.5, 44.5)
@@ -561,7 +561,7 @@ CoD.AmmoWidget_AbilityText.__clipsPerState = {
 			f54_arg0:__resetProperties()
 			f54_arg0:setupElementClipCounter(2)
 			f54_arg0.AbilityTextInfo:completeAnimation()
-			f54_arg0.AbilityTextInfo:setText(Engine[0xF9F1239CFD921FE](0x811F06542057CEC))
+			f54_arg0.AbilityTextInfo:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_7811F06542057CEC"))
 			f54_arg0.clipFinished(f54_arg0.AbilityTextInfo)
 			f54_arg0.HeroAbilityUseString:completeAnimation()
 			f54_arg0.HeroAbilityUseString:setLeftRight(0.5, 0.5, -44.5, 44.5)
@@ -578,7 +578,7 @@ CoD.AmmoWidget_AbilityText.__clipsPerState = {
 			f55_arg0.AbilityTextInfo:setLeftRight(0, 1, 1, 1)
 			f55_arg0.AbilityTextInfo:setTopBottom(0.5, 0.5, -35.5, -17.5)
 			f55_arg0.AbilityTextInfo:setAlpha(1)
-			f55_arg0.AbilityTextInfo:setText(Engine[0xF9F1239CFD921FE](0xDDC1166E6112C8B))
+			f55_arg0.AbilityTextInfo:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_4DDC1166E6112C8B"))
 			f55_arg0.clipFinished(f55_arg0.AbilityTextInfo)
 			f55_arg0.HeroAbilityUseString:completeAnimation()
 			f55_arg0.HeroAbilityUseString:setLeftRight(0.5, 0.5, -45.5, 43.5)
@@ -595,7 +595,7 @@ CoD.AmmoWidget_AbilityText.__clipsPerState = {
 			f56_arg0.AbilityTextInfo:setLeftRight(0, 1, 1, 1)
 			f56_arg0.AbilityTextInfo:setTopBottom(0.5, 0.5, -35.5, -17.5)
 			f56_arg0.AbilityTextInfo:setAlpha(1)
-			f56_arg0.AbilityTextInfo:setText(Engine[0xF9F1239CFD921FE](0x811F06542057CEC))
+			f56_arg0.AbilityTextInfo:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_7811F06542057CEC"))
 			f56_arg0.clipFinished(f56_arg0.AbilityTextInfo)
 			f56_arg0.HeroAbilityUseString:completeAnimation()
 			f56_arg0.HeroAbilityUseString:setLeftRight(0.5, 0.5, -45.5, 43.5)

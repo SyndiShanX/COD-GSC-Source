@@ -16,13 +16,13 @@ CoD.WZTeamListItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Blur = LUI.UIImage.new(0, 0, 0, 274, 0, 0, 1, 49)
-	Blur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	Blur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	Blur:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(Blur)
 	self.Blur = Blur
 	local Backer = LUI.UIImage.new(0, 0, -4, 296, 0, 0, -1, 51)
 	Backer:setRGB(0, 0, 0)
-	Backer:setImage(RegisterImage(0x53750D521737D1B))
+	Backer:setImage(RegisterImage(@"uie_ui_hud_wz_hud_core_team_widget_backer"))
 	self:addElement(Backer)
 	self.Backer = Backer
 	local ArmorBar = CoD.ArmorBarWZ.new(f1_arg0, f1_arg1, 0, 0, 43, 169, 0, 0, 26, 34)
@@ -89,13 +89,13 @@ CoD.WZTeamListItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 		{
 			stateName = "DeadDisconnected",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualToEnumEitherValue(element, f1_arg1, "inGamePlayerStatus", Enum[0x4A07561A78E340B][0xC233F1FA9F35C02], Enum[0x4A07561A78E340B][0x58F9A363F8FBB07])
+				return CoD.ModelUtility.IsSelfModelValueEqualToEnumEitherValue(element, f1_arg1, "inGamePlayerStatus", Enum[@"hash_14A07561A78E340B"][@"hash_3C233F1FA9F35C02"], Enum[@"hash_14A07561A78E340B"][@"hash_358F9A363F8FBB07"])
 			end,
 		},
 		{
 			stateName = "LastStand",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "inGamePlayerStatus", Enum[0x4A07561A78E340B][0x9BD8FECA6158847])
+				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "inGamePlayerStatus", Enum[@"hash_14A07561A78E340B"][@"hash_9BD8FECA6158847"])
 			end,
 		},
 	})

@@ -9,9 +9,9 @@ CoD.PC_KillCamHint.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local PcHint = nil
 	PcHint = LUI.UIText.new(0, 1, 0, 0, 0, 1, 0, 0)
-	PcHint:setText(Engine[0xF9F1239CFD921FE](0x93E719493E9E18F))
+	PcHint:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	PcHint:setTTF("ttmussels_regular")
-	PcHint:setAlignment(Engine[0x7F8853DC3581AA4](Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041]))
+	PcHint:setAlignment(Engine[@"hash_67F8853DC3581AA4"](Enum[@"luialignment"][@"lui_alignment_center"]))
 	self:addElement(PcHint)
 	self.PcHint = PcHint
 	self:mergeStateConditions({
@@ -28,7 +28,7 @@ CoD.PC_KillCamHint.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	end)
 	local f1_local2 = self
 	local f1_local3 = self.subscribeToModel
-	local f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local3(f1_local2, f1_local4.LastInput, function(f4_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

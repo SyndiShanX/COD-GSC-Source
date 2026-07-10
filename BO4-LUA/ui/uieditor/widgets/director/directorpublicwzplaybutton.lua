@@ -21,7 +21,7 @@ CoD.DirectorPublicWzPlayButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	})
 	local f1_local2 = DirectorSelectButtonMiniInternal
 	local f1_local3 = DirectorSelectButtonMiniInternal.subscribeToModel
-	local f1_local4 = Engine[0x8DF2E5447F384B9]()
+	local f1_local4 = Engine[@"getglobalmodel"]()
 	f1_local3(f1_local2, f1_local4["lobbyRoot.privateClient.update"], function(f3_arg0)
 		f1_arg0:updateElementState(DirectorSelectButtonMiniInternal, {
 			name = "model_validation",
@@ -31,8 +31,8 @@ CoD.DirectorPublicWzPlayButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 			modelName = "lobbyRoot.privateClient.update",
 		})
 	end, false)
-	DirectorSelectButtonMiniInternal.MiddleText:setText(LocalizeToUpperString(0xA43B10D9DA121A))
-	DirectorSelectButtonMiniInternal.MiddleTextFocus:setText(LocalizeToUpperString(0xA43B10D9DA121A))
+	DirectorSelectButtonMiniInternal.MiddleText:setText(LocalizeToUpperString(@"hash_A43B10D9DA121A"))
+	DirectorSelectButtonMiniInternal.MiddleTextFocus:setText(LocalizeToUpperString(@"hash_A43B10D9DA121A"))
 	self:addElement(DirectorSelectButtonMiniInternal)
 	self.DirectorSelectButtonMiniInternal = DirectorSelectButtonMiniInternal
 	self:mergeStateConditions({

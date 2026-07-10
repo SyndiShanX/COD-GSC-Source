@@ -10,18 +10,18 @@ CoD.ScrStk_MeterPanel.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Fill2 = LUI.UIImage.new(0, 0, -13, 20, 0.5, 0.5, -62, 96)
 	Fill2:setRGB(0, 0, 0)
-	Fill2:setImage(RegisterImage(0x611F9CF3D5F823))
+	Fill2:setImage(RegisterImage(@"uie_ui_hud_core_streak_widget_meter_empty"))
 	self:addElement(Fill2)
 	self.Fill2 = Fill2
 	local Fill = LUI.UIImage.new(0, 0, -2, 10, 0.5, 0.5, -90, 90)
 	Fill:setRGB(0, 0, 0)
 	Fill:setAlpha(0)
-	Fill:setImage(RegisterImage(0xA1726B8A4CE14DC))
+	Fill:setImage(RegisterImage(@"uie_t7_mp_hud_scorestreak_meterfill"))
 	self:addElement(Fill)
 	self.Fill = Fill
 	local Slots = LUI.UIImage.new(0, 0, -4, 12, 0, 0, 28, 182)
 	Slots:setAlpha(0.08)
-	Slots:setImage(RegisterImage(0xBECC85DF0ADD5A3))
+	Slots:setImage(RegisterImage(@"uie_ui_hud_core_streak_widget_meter_fill"))
 	self:addElement(Slots)
 	self.Slots = Slots
 	local FEButtonPanel0 = CoD.FE_ButtonPanel.new(f1_arg0, f1_arg1, 0, 0, -6, 15, 0, 0, 0, 180)
@@ -32,7 +32,7 @@ CoD.ScrStk_MeterPanel.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	local Image0 = LUI.UIImage.new(0, 0, -76, 80, 0, 0, -49, 219)
 	Image0:setRGB(0, 0, 0)
 	Image0:setAlpha(0)
-	Image0:setImage(RegisterImage(0x5BE416E17DAB33B))
+	Image0:setImage(RegisterImage(@"uie_t7_core_hud_mapwidget_panelglow"))
 	self:addElement(Image0)
 	self.Image0 = Image0
 	self:mergeStateConditions({

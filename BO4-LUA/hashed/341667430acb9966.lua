@@ -19,19 +19,19 @@ CoD.SpawnBeaconDeathCam.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	self:addElement(DotTiledBacking)
 	self.DotTiledBacking = DotTiledBacking
 	local DotTiledBacking2 = CoD.StoreCommonTextBacking.new(f1_arg0, f1_arg1, 0, 0, 0, 180, 0, 0, 0, 35)
-	DotTiledBacking2:setRFTMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	DotTiledBacking2:setRFTMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(DotTiledBacking2)
 	self.DotTiledBacking2 = DotTiledBacking2
 	local Name = LUI.UIText.new(0.5, 0.5, -56, 84, 0.5, 0.5, -10, 11)
-	Name:setText(Engine[0xF9F1239CFD921FE](0x83F60BB7B4AED37))
+	Name:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_183F60BB7B4AED37"))
 	Name:setTTF("0arame_mono_stencil")
-	Name:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	Name:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	Name:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	Name:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	self:addElement(Name)
 	self.Name = Name
 	local ButtonBottomBracket9Slice = LUI.UIImage.new(0, 0, -4.5, 184.5, 1, 1, -5, 7)
-	ButtonBottomBracket9Slice:setImage(RegisterImage(0x55942079F1B70E6))
-	ButtonBottomBracket9Slice:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	ButtonBottomBracket9Slice:setImage(RegisterImage(@"uie_ui_menu_cac_secondary_button_bottom_line"))
+	ButtonBottomBracket9Slice:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	ButtonBottomBracket9Slice:setShaderVector(0, 0, 0, 0, 0)
 	ButtonBottomBracket9Slice:setupNineSliceShader(120, 12)
 	self:addElement(ButtonBottomBracket9Slice)
@@ -41,7 +41,7 @@ CoD.SpawnBeaconDeathCam.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	self.SpawnLocationDetail = SpawnLocationDetail
 	local BeaconImage = LUI.UIImage.new(0, 0, 2.5, 32.5, 0, 0, 3, 33)
 	BeaconImage:setRGB(ColorSet.FriendlyBlue.r, ColorSet.FriendlyBlue.g, ColorSet.FriendlyBlue.b)
-	BeaconImage:setImage(RegisterImage(0xE402A35E2041056))
+	BeaconImage:setImage(RegisterImage(@"icons_equipment_spawnbeacon"))
 	self:addElement(BeaconImage)
 	self.BeaconImage = BeaconImage
 	self:mergeStateConditions({
@@ -50,7 +50,7 @@ CoD.SpawnBeaconDeathCam.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 			condition = function(menu, element, event)
 				local f2_local0
 				if not CoD.SpawnSelectionUtility.IsSpawnSelectActive(f1_arg1) then
-					f2_local0 = IsVisibilityBitSet(f1_arg1, Enum[0x7F032C2EF103A1A][0x534C7B2375D2D47])
+					f2_local0 = IsVisibilityBitSet(f1_arg1, Enum[@"uivisibilitybit"][@"bit_player_dead"])
 					if f2_local0 then
 						f2_local0 = CoD.SpawnSelectionUtility.IsSpawnBeaconActive(f1_arg1, self.SpawnLocationDetail)
 					end
@@ -63,7 +63,7 @@ CoD.SpawnBeaconDeathCam.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	})
 	local f1_local8 = self
 	local f1_local9 = self.subscribeToModel
-	local f1_local10 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local10 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local9(f1_local8, f1_local10["hudItems.showSpawnSelect"], function(f3_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -75,14 +75,14 @@ CoD.SpawnBeaconDeathCam.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	end, false)
 	f1_local8 = self
 	f1_local9 = self.subscribeToModel
-	f1_local10 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local9(f1_local8, f1_local10["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x534C7B2375D2D47]], function(f4_arg0)
+	f1_local10 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local9(f1_local8, f1_local10["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_player_dead"]], function(f4_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f4_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x534C7B2375D2D47],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_player_dead"],
 		})
 	end, false)
 	self:linkToElementModel(self, "state", true, function(model)

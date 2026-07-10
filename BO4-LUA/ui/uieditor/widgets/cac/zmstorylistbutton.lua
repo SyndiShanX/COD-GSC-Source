@@ -13,13 +13,13 @@ CoD.ZMStoryListButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	internal:linkToElementModel(self, "storyName", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			internal.Text:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			internal.Text:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	internal:linkToElementModel(self, "storyName", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
-			internal.TextFocus:setText(Engine[0xF9F1239CFD921FE](f3_local0))
+			internal.TextFocus:setText(Engine[@"hash_4F9F1239CFD921FE"](f3_local0))
 		end
 	end)
 	self:addElement(internal)

@@ -20,7 +20,7 @@ CoD.StartMenu_Button_SM.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	self.BlackLine = BlackLine
 	local LockIcon = LUI.UIImage.new(0.5, 0.5, -25, 25, 0.5, 0.5, -25, 25)
 	LockIcon:setAlpha(0)
-	LockIcon:setImage(RegisterImage(0xE1E7C490B2BA4FB))
+	LockIcon:setImage(RegisterImage(@"uie_ui_icon_global_lock"))
 	self:addElement(LockIcon)
 	self.LockIcon = LockIcon
 	self:mergeStateConditions({

@@ -9,10 +9,10 @@ CoD.ContractPurchasedBanner.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.soundSet = "none"
 	local PurchasedTitle = LUI.UIText.new(0.5, 0.5, -73, 73, 0.5, 0.5, -9, 9)
 	PurchasedTitle:setRGB(ColorSet.CodPointsNumber.r, ColorSet.CodPointsNumber.g, ColorSet.CodPointsNumber.b)
-	PurchasedTitle:setText(LocalizeToUpperString(0x8DF2A8D2479730B))
+	PurchasedTitle:setText(LocalizeToUpperString(@"hash_28DF2A8D2479730B"))
 	PurchasedTitle:setTTF("ttmussels_demibold")
 	PurchasedTitle:setLetterSpacing(4)
-	PurchasedTitle:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	PurchasedTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	PurchasedTitle:setBackingType(1)
 	PurchasedTitle:setBackingWidget(CoD.ContractActiveBannerBacker, f1_arg0, f1_arg1)
 	PurchasedTitle:setBackingXPadding(8)

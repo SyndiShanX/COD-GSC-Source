@@ -10,8 +10,8 @@ CoD.WarzoneInventoryPickupPulse.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	local image = LUI.UIImage.new(-0.35, 1.35, 0, 0, -0.4, 1.4, 0, 0)
 	image:setRGB(0.06, 0.29, 0.87)
 	image:setAlpha(0)
-	image:setImage(RegisterImage(0xC58FF2328701EBA))
-	image:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	image:setImage(RegisterImage(@"uie_ui_hud_core_no_ammo_glow"))
+	image:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(image)
 	self.image = image
 	self:mergeStateConditions({
@@ -110,11 +110,11 @@ CoD.WarzoneInventoryPickupPulse.__clipsPerState = {
 						f14_arg0:beginAnimation(260)
 						f14_arg0:registerEventHandler("transition_complete_keyframe", f11_arg0.clipFinished)
 					end
-					f13_arg0:beginAnimation(229, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f13_arg0:beginAnimation(229, Enum[@"luitween"][@"luitween_ease_both"])
 					f13_arg0:setAlpha(0)
 					f13_arg0:registerEventHandler("transition_complete_keyframe", f13_local0)
 				end
-				f11_arg0.image:beginAnimation(190, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f11_arg0.image:beginAnimation(190, Enum[@"luitween"][@"luitween_ease_both"])
 				f11_arg0.image:setAlpha(0.3)
 				f11_arg0.image:setScale(1.05, 1.05)
 				f11_arg0.image:registerEventHandler("interrupted_keyframe", f11_arg0.clipInterrupted)
@@ -137,11 +137,11 @@ CoD.WarzoneInventoryPickupPulse.__clipsPerState = {
 						f18_arg0:beginAnimation(600)
 						f18_arg0:registerEventHandler("transition_complete_keyframe", f15_arg0.clipFinished)
 					end
-					f17_arg0:beginAnimation(399, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f17_arg0:beginAnimation(399, Enum[@"luitween"][@"luitween_ease_both"])
 					f17_arg0:setAlpha(0)
 					f17_arg0:registerEventHandler("transition_complete_keyframe", f17_local0)
 				end
-				f15_arg0.image:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f15_arg0.image:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 				f15_arg0.image:setAlpha(0.3)
 				f15_arg0.image:setScale(1.05, 1.05)
 				f15_arg0.image:registerEventHandler("interrupted_keyframe", f15_arg0.clipInterrupted)
@@ -165,11 +165,11 @@ CoD.WarzoneInventoryPickupPulse.__clipsPerState = {
 						f22_arg0:beginAnimation(600)
 						f22_arg0:registerEventHandler("transition_complete_keyframe", f19_arg0.clipFinished)
 					end
-					f21_arg0:beginAnimation(399, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f21_arg0:beginAnimation(399, Enum[@"luitween"][@"luitween_ease_both"])
 					f21_arg0:setAlpha(0)
 					f21_arg0:registerEventHandler("transition_complete_keyframe", f21_local0)
 				end
-				f19_arg0.image:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f19_arg0.image:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 				f19_arg0.image:setAlpha(0.3)
 				f19_arg0.image:setScale(1.05, 1.05)
 				f19_arg0.image:registerEventHandler("interrupted_keyframe", f19_arg0.clipInterrupted)

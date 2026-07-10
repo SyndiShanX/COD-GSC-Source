@@ -7,7 +7,7 @@ CoD.ArenaDirectorLobbyRankIcon.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	self.id = "ArenaDirectorLobbyRankIcon"
 	self.soundSet = "none"
 	local fireStreak = LUI.UIImage.new(0, 0, -20, 64, 0, 0, -20, 64)
-	fireStreak:setMaterial(LUI.UIImage.GetCachedMaterial(0x9227A50BA2B8D21))
+	fireStreak:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_flipbook_add"))
 	fireStreak:setShaderVector(0, 4, 4, 0, 0)
 	fireStreak:setShaderVector(1, 8, 0, 0, 0)
 	fireStreak:linkToElementModel(self, "xuid", true, function(model)
@@ -52,7 +52,7 @@ CoD.ArenaDirectorLobbyRankIcon.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	f1_local4(f1_local3, f1_local5["gameClient.update"], LeagueRankIcon.__Image_FullPath)
 	f1_local3 = LeagueRankIcon
 	f1_local4 = LeagueRankIcon.subscribeToModel
-	f1_local5 = Engine[0x8DF2E5447F384B9]()
+	f1_local5 = Engine[@"getglobalmodel"]()
 	f1_local4(f1_local3, f1_local5["PartyPrivacy.privacy"], LeagueRankIcon.__Image_FullPath)
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)
 	if PostLoadFunc then

@@ -28,10 +28,10 @@ LUI.createMenu.mp_prop_timer = function(f1_arg0, f1_arg1)
 	self:addElement(RadialTimer)
 	self.RadialTimer = RadialTimer
 	local TextBox = LUI.UIText.new(0.5, 0.5, -587, 587, 0.5, 0.5, -142, -100)
-	TextBox:setText(Engine[0xF9F1239CFD921FE](0x470E5C5DDEDDE54))
+	TextBox:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_2470E5C5DDEDDE54"))
 	TextBox:setTTF("default")
-	TextBox:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	TextBox:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	TextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	TextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(TextBox)
 	self.TextBox = TextBox
 	self:mergeStateConditions({
@@ -64,7 +64,7 @@ LUI.createMenu.mp_prop_timer = function(f1_arg0, f1_arg1)
 end
 CoD.mp_prop_timer.__resetProperties = function(f6_arg0)
 	f6_arg0.TextBox:completeAnimation()
-	f6_arg0.TextBox:setText(Engine[0xF9F1239CFD921FE](0x470E5C5DDEDDE54))
+	f6_arg0.TextBox:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_2470E5C5DDEDDE54"))
 end
 CoD.mp_prop_timer.__clipsPerState = {
 	DefaultState = {
@@ -72,7 +72,7 @@ CoD.mp_prop_timer.__clipsPerState = {
 			f7_arg0:__resetProperties()
 			f7_arg0:setupElementClipCounter(1)
 			f7_arg0.TextBox:completeAnimation()
-			f7_arg0.TextBox:setText(Engine[0xF9F1239CFD921FE](0xBB4BF1BB569F057))
+			f7_arg0.TextBox:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_1BB4BF1BB569F057"))
 			f7_arg0.clipFinished(f7_arg0.TextBox)
 		end,
 	},
@@ -81,7 +81,7 @@ CoD.mp_prop_timer.__clipsPerState = {
 			f8_arg0:__resetProperties()
 			f8_arg0:setupElementClipCounter(1)
 			f8_arg0.TextBox:completeAnimation()
-			f8_arg0.TextBox:setText(Engine[0xF9F1239CFD921FE](0x470E5C5DDEDDE54))
+			f8_arg0.TextBox:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_2470E5C5DDEDDE54"))
 			f8_arg0.clipFinished(f8_arg0.TextBox)
 		end,
 	},

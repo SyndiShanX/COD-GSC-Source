@@ -14,28 +14,28 @@ CoD.DirectorWarningMessage.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self.Backing = Backing
 	local Description = LUI.UIText.new(0.05, 0.95, 0, 0, 0.35, 0.35, -8, 8)
 	Description:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
-	Description:setText(Engine[0xF9F1239CFD921FE](0x9EFE6AE2751120B))
+	Description:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_69EFE6AE2751120B"))
 	Description:setTTF("dinnext_regular")
-	Description:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Description:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Description:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Description:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(Description)
 	self.Description = Description
 	local WarningIcon = LUI.UIImage.new(0, 0, -41, -9, 0.5, 0.5, -16, 16)
 	WarningIcon:setRGB(ColorSet.ResistanceHigh.r, ColorSet.ResistanceHigh.g, ColorSet.ResistanceHigh.b)
-	WarningIcon:setImage(RegisterImage(0x1F10DEAAEFC50A4))
+	WarningIcon:setImage(RegisterImage(@"warning_triangle"))
 	self:addElement(WarningIcon)
 	self.WarningIcon = WarningIcon
 	self:mergeStateConditions({
 		{
 			stateName = "Visible_SR",
 			condition = function(menu, element, event)
-				return CoD.WZUtility[0xE6C072866FEDB9F]()
+				return CoD.WZUtility[@"hash_E6C072866FEDB9F"]()
 			end,
 		},
 	})
 	local f1_local4 = self
 	local f1_local5 = self.subscribeToModel
-	local f1_local6 = Engine[0x8DF2E5447F384B9]()
+	local f1_local6 = Engine[@"getglobalmodel"]()
 	f1_local5(f1_local4, f1_local6["lobbyRoot.playlistId"], function(f3_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -57,7 +57,7 @@ CoD.DirectorWarningMessage.__resetProperties = function(f4_arg0)
 	f4_arg0.WarningIcon:completeAnimation()
 	f4_arg0.Backing:setAlpha(1)
 	f4_arg0.Description:setAlpha(1)
-	f4_arg0.Description:setText(Engine[0xF9F1239CFD921FE](0x9EFE6AE2751120B))
+	f4_arg0.Description:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_69EFE6AE2751120B"))
 	f4_arg0.WarningIcon:setAlpha(1)
 end
 CoD.DirectorWarningMessage.__clipsPerState = {
@@ -85,7 +85,7 @@ CoD.DirectorWarningMessage.__clipsPerState = {
 			f6_arg0.clipFinished(f6_arg0.Backing)
 			f6_arg0.Description:completeAnimation()
 			f6_arg0.Description:setAlpha(1)
-			f6_arg0.Description:setText(Engine[0xF9F1239CFD921FE](0x9EFE6AE2751120B))
+			f6_arg0.Description:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_69EFE6AE2751120B"))
 			f6_arg0.clipFinished(f6_arg0.Description)
 			f6_arg0.WarningIcon:completeAnimation()
 			f6_arg0.WarningIcon:setAlpha(1)

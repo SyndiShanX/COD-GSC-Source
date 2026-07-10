@@ -7,10 +7,10 @@ CoD.ArenaInfoTabTeams.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	self.id = "ArenaInfoTabTeams"
 	self.soundSet = "none"
 	local TextBox = LUI.UIText.new(0, 0, 1059.5, 1259.5, 0, 0, 448, 485)
-	TextBox:setText(Engine[0xF9F1239CFD921FE](0xE5BEBF8672AE588))
+	TextBox:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_3E5BEBF8672AE588"))
 	TextBox:setTTF("default")
-	TextBox:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	TextBox:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	TextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	TextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(TextBox)
 	self.TextBox = TextBox
 	if PostLoadFunc then

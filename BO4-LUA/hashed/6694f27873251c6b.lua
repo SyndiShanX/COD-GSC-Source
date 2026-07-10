@@ -13,15 +13,15 @@ Lobby.Merge.Complete = function()
 	end
 end
 Lobby.Merge.IsMergingAllowed = function(f2_arg0)
-	if Engine[0x7B48C1ABFF0F764]() then
+	if Engine[@"isingame"]() then
 		return
 	elseif Lobby.ProcessQueue.IsQueueEmpty() == false then
 		return false
-	elseif Engine[0xC9190AFD905AC12]() > 0 then
+	elseif Engine[@"lobbyjoincount"]() > 0 then
 		return false
-	elseif Engine[0x44FC97037CE42ED](Enum[0x7CA2DE5266A94BF][0x98EA1BB7164D103], f2_arg0, Enum[0x575E471C039DBD6][0x92BC25E18D296F]) >= Dvar[0x500E4DB2F10F5EE]:get() then
+	elseif Engine[@"getlobbyclientcount"](Enum[@"lobbymodule"][@"lobby_module_host"], f2_arg0, Enum[@"lobbyclientfiltertype"][@"lobby_client_filter_type_all"]) >= Dvar[@"party_minplayers"]:get() then
 		return false
-	elseif Engine[0x68A5A7A41567A63] and Engine[0x68A5A7A41567A63](f2_arg0) ~= Enum[0x5A046D0646801][0x4787E42BE26EFCD] then
+	elseif Engine[@"getsessionstatus"] and Engine[@"getsessionstatus"](f2_arg0) ~= Enum[@"sessionstatus"][@"session_status_idle"] then
 		return false
 	else
 		local f2_local0 = Lobby.Timer.GetTimerStatus()
@@ -36,14 +36,14 @@ Lobby.Merge.Update = function()
 	if Lobby.Merge.mergeData == nil then
 		return
 	elseif Lobby.Merge.mergeData.merging == false then
-		if Lobby.Merge.mergeData.timer > Engine[0x9D33D652B9B0F3B]() then
+		if Lobby.Merge.mergeData.timer > Engine[@"milliseconds"]() then
 			return
 		end
-		local f3_local0 = Engine[0x3797858022DCB59](Enum[0xBF54BE1BB3D618B][0x92676CF5B6FCD43])
+		local f3_local0 = Engine[@"getlobbyhostcontrollerindex"](Enum[@"lobbytype"][@"lobby_type_game"])
 		if f3_local0 == -1 then
 			f3_local0 = 0
 		end
-		if Engine[0xE39F1F30B306065]() == true then
+		if Engine[@"isdedicatedserver"]() == true then
 			Lobby.ProcessQueue.AddToQueue("Merge", Lobby.Process.MergePublicDedicatedLobby(f3_local0))
 		else
 			Lobby.ProcessQueue.AddToQueue("Merge", Lobby.Process.MergePublicGameLobby(f3_local0))
@@ -52,23 +52,23 @@ Lobby.Merge.Update = function()
 	end
 end
 Lobby.Merge.Pump = function()
-	if Dvar[0x6AB21D919144AA]:get() == false or Dvar[0x4BADE8473F0165F]:get() == true then
+	if Dvar[@"lobbymergeenabled"]:get() == false or Dvar[@"hash_44BADE8473F0165F"]:get() == true then
 		return
-	elseif Engine[0xE39F1F30B306065]() and Dvar[0x6D033E0551BFF83]:get() == false then
+	elseif Engine[@"isdedicatedserver"]() and Dvar[@"lobbymergededicatedenabled"]:get() == false then
 		return
-	elseif false == Engine[0x3E68E350BEFE50D](Enum[0x7CA2DE5266A94BF][0x98EA1BB7164D103], Enum[0xBF54BE1BB3D618B][0x92676CF5B6FCD43]) then
+	elseif false == Engine[@"islobbyactive"](Enum[@"lobbymodule"][@"lobby_module_host"], Enum[@"lobbytype"][@"lobby_type_game"]) then
 		Lobby.Merge.mergeData = nil
 		return
 	elseif Lobby.Timer.GetTimerType() ~= LuaEnum.TIMER_TYPE.AUTO_MP then
 		Lobby.Merge.mergeData = nil
 		return
-	elseif Engine[0x9882F293C327557]() ~= LobbyData.GetLobbyMenuIDByName(LuaEnum.UI.DIRECTOR_ONLINE_MP_PUBLIC) then
+	elseif Engine[@"getlobbyuiscreen"]() ~= LobbyData.GetLobbyMenuIDByName(LuaEnum.UI.DIRECTOR_ONLINE_MP_PUBLIC) then
 		Lobby.Merge.mergeData = nil
 		return
-	elseif Lobby.Merge.IsMergingAllowed(Enum[0xBF54BE1BB3D618B][0x92676CF5B6FCD43]) then
+	elseif Lobby.Merge.IsMergingAllowed(Enum[@"lobbytype"][@"lobby_type_game"]) then
 		if Lobby.Merge.mergeData == nil then
 			Lobby.Merge.mergeData = {}
-			Lobby.Merge.mergeData.timer = Engine[0x9D33D652B9B0F3B]() + Dvar[0x47EDB66E0FE444C]:get()
+			Lobby.Merge.mergeData.timer = Engine[@"milliseconds"]() + Dvar[@"lobbymergeinterval"]:get()
 			Lobby.Merge.mergeData.merging = false
 		end
 		Lobby.Merge.Update()

@@ -8,12 +8,12 @@ CoD.WeaponLevelMeter.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local progressBarBg = LUI.UIImage.new(0, 0, 0, 1580, 0, 0, 2, 10)
-	progressBarBg:setImage(RegisterImage(0x45A18362FE3CA31))
+	progressBarBg:setImage(RegisterImage(@"uie_ui_menu_cac_attachment_meter_backing_01"))
 	self:addElement(progressBarBg)
 	self.progressBarBg = progressBarBg
 	local progressBarColorless = LUI.UIImage.new(0, 0, -5, 1585, 0, 0, 2, 10)
-	progressBarColorless:setImage(RegisterImage(0xFE3BC2EF75DDD79))
-	progressBarColorless:setMaterial(LUI.UIImage.GetCachedMaterial(0x316E67E1DF2198E))
+	progressBarColorless:setImage(RegisterImage(@"uie_ui_menu_cac_button_bottom_line_lvl_colorless"))
+	progressBarColorless:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_normal"))
 	progressBarColorless:setShaderVector(1, 0, 0, 0, 0)
 	progressBarColorless:setShaderVector(2, 1, 0, 0, 0)
 	progressBarColorless:setShaderVector(3, 0, 0, 0, 0)

@@ -16,8 +16,8 @@ CoD.PaintCanIdentityWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self.membername = membername
 	local StatValue = LUI.UIText.new(0, 0, 238, 305, 0, 0, 10, 32)
 	StatValue:setTTF("ttmussels_demibold")
-	StatValue:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	StatValue:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	StatValue:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	StatValue:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	StatValue:subscribeToGlobalModel(f1_arg1, "PerController", "paintCanCount", function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -27,7 +27,7 @@ CoD.PaintCanIdentityWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self:addElement(StatValue)
 	self.StatValue = StatValue
 	local PaintCanImage = LUI.UIImage.new(0, 0, 194, 246, 0, 0, -6, 46)
-	PaintCanImage:setImage(RegisterImage(0xB808223FCD4471D))
+	PaintCanImage:setImage(RegisterImage(@"ui_icon_inventory_spray_can"))
 	self:addElement(PaintCanImage)
 	self.PaintCanImage = PaintCanImage
 	LUI.OverrideFunction_CallOriginalFirst(self, "setModel", function(element, controller)

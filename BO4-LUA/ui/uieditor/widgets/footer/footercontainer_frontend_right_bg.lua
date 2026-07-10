@@ -24,8 +24,8 @@ CoD.FooterContainer_Frontend_Right_BG.new = function(f1_arg0, f1_arg1, f1_arg2, 
 	self:addElement(BackingGraySmallTop)
 	self.BackingGraySmallTop = BackingGraySmallTop
 	local GrainBG01 = LUI.UIImage.new(0, 1, 0, 0, 1, 1, -253, 0)
-	GrainBG01:setImage(RegisterImage(0x1FC25912CF54567))
-	GrainBG01:setMaterial(LUI.UIImage.GetCachedMaterial(0x3C40D6180864128))
+	GrainBG01:setImage(RegisterImage(@"uie_ui_menu_director_grain_bg01"))
+	GrainBG01:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_multiplyinverse"))
 	self:addElement(GrainBG01)
 	self.GrainBG01 = GrainBG01
 	self:mergeStateConditions({

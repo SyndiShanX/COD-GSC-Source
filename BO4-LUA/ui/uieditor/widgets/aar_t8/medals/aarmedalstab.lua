@@ -23,7 +23,7 @@ CoD.AARMedalsTab.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 	})
 	local f1_local2 = self
 	local f1_local3 = self.subscribeToModel
-	local f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local3(f1_local2, f1_local4["AAR.activeTab"], function(f3_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -60,7 +60,7 @@ CoD.AARMedalsTab.__clipsPerState = {
 			f6_arg0:__resetProperties()
 			f6_arg0:setupElementClipCounter(1)
 			local f6_local0 = function(f7_arg0)
-				f6_arg0.GametypeAndMap:beginAnimation(150, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f6_arg0.GametypeAndMap:beginAnimation(150, Enum[@"luitween"][@"luitween_ease_in"])
 				f6_arg0.GametypeAndMap:setAlpha(1)
 				f6_arg0.GametypeAndMap:registerEventHandler("interrupted_keyframe", f6_arg0.clipInterrupted)
 				f6_arg0.GametypeAndMap:registerEventHandler("transition_complete_keyframe", f6_arg0.clipFinished)

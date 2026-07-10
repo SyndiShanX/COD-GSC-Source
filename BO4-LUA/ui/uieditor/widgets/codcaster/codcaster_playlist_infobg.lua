@@ -8,7 +8,7 @@ CoD.codcaster_playlist_infobg.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local blur = LUI.UIImage.new(0, 0, 4.5, 194.5, 0, 0, 4.5, 29.5)
-	blur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	blur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	blur:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(blur)
 	self.blur = blur
@@ -18,32 +18,32 @@ CoD.codcaster_playlist_infobg.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self:addElement(window)
 	self.window = window
 	local topimage = LUI.UIImage.new(1, 1, -200, 0, 0, 0, 0, 116)
-	topimage:setImage(RegisterImage(0x6E780FC6AD8437D))
+	topimage:setImage(RegisterImage(@"hash_36E780FC6AD8437D"))
 	self:addElement(topimage)
 	self.topimage = topimage
 	local KillIcon = LUI.UIImage.new(0, 0, 56, 76, 0, 0, 6.5, 26.5)
 	KillIcon:setScale(0.8, 0.8)
-	KillIcon:setImage(RegisterImage(0xD6EA61A12AEADCE))
+	KillIcon:setImage(RegisterImage(@"hash_6D6EA61A12AEADCE"))
 	self:addElement(KillIcon)
 	self.KillIcon = KillIcon
 	local DeathIcon = LUI.UIImage.new(0, 0, 94, 118, 0, 0, 6, 26)
 	DeathIcon:setScale(0.8, 0.8)
-	DeathIcon:setImage(RegisterImage(0x9E55E6818C34348))
+	DeathIcon:setImage(RegisterImage(@"hash_39E55E6818C34348"))
 	self:addElement(DeathIcon)
 	self.DeathIcon = DeathIcon
 	local heal = LUI.UIImage.new(0, 0, 13, 33, 0, 0, 6, 26)
 	heal:setScale(0.8, 0.8)
-	heal:setImage(RegisterImage(0x5655902DAB45F22))
+	heal:setImage(RegisterImage(@"uie_ui_hud_wz_hud_revive_plus_icon"))
 	self:addElement(heal)
 	self.heal = heal
 	local KillStreakIcon = LUI.UIImage.new(0, 0, 132, 158, 0, 0, 6, 26)
 	KillStreakIcon:setScale(0.7, 0.7)
-	KillStreakIcon:setImage(RegisterImage(0x6323B83A0678830))
+	KillStreakIcon:setImage(RegisterImage(@"uie_codcaster_player_list_entry_streak"))
 	self:addElement(KillStreakIcon)
 	self.KillStreakIcon = KillStreakIcon
 	local ObjectiveIcon = LUI.UIImage.new(0, 0, 167, 187, 0, 0, 6, 26)
 	ObjectiveIcon:setScale(0.8, 0.8)
-	ObjectiveIcon:setImage(RegisterImage(0x2E4DBA41E983343))
+	ObjectiveIcon:setImage(RegisterImage(@"uie_ui_hud_core_waypoint_domination_fill_02"))
 	self:addElement(ObjectiveIcon)
 	self.ObjectiveIcon = ObjectiveIcon
 	if PostLoadFunc then

@@ -14,7 +14,7 @@ CoD.OverheadName_MP.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	CoD.BaseUtility.InitControllerModelIfNotSet(f1_arg1, "luielement.mp_revive_prompt_1.clientnum", 0)
 	CoD.BaseUtility.InitControllerModelIfNotSet(f1_arg1, "luielement.mp_revive_prompt_2.clientnum", 0)
 	CoD.BaseUtility.InitControllerModelIfNotSet(f1_arg1, "luielement.mp_revive_prompt_3.clientnum", 0)
-	CoD.BaseUtility.InitGlobalModel("demo.cameraMode", Enum[0xF432DF404208022][0x448CED16817146D])
+	CoD.BaseUtility.InitGlobalModel("demo.cameraMode", Enum[@"democameramode"][@"demo_camera_mode_none"])
 	self:setClass(CoD.OverheadName_MP)
 	self.id = "OverheadName_MP"
 	self.soundSet = "default"
@@ -71,7 +71,7 @@ CoD.OverheadName_MP.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	})
 	local ArmorOverheadName = HealthBar
 	local tagged = HealthBar.subscribeToModel
-	local HealthBoostNotificationContainer = Engine[0x8DF2E5447F384B9]()
+	local HealthBoostNotificationContainer = Engine[@"getglobalmodel"]()
 	tagged(ArmorOverheadName, HealthBoostNotificationContainer["lobbyRoot.lobbyNav"], function(f9_arg0)
 		f1_arg0:updateElementState(HealthBar, {
 			name = "model_validation",
@@ -92,7 +92,7 @@ CoD.OverheadName_MP.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	end)
 	ArmorOverheadName = HealthBar
 	tagged = HealthBar.subscribeToModel
-	HealthBoostNotificationContainer = Engine[0x4DF5CFBC1771947](f1_arg1)
+	HealthBoostNotificationContainer = Engine[@"getmodelforcontroller"](f1_arg1)
 	tagged(ArmorOverheadName, HealthBoostNotificationContainer["factions.playerFactionTeamEnum"], function(f11_arg0)
 		f1_arg0:updateElementState(HealthBar, {
 			name = "model_validation",
@@ -157,7 +157,7 @@ CoD.OverheadName_MP.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 		})
 	end)
 	tagged:setRGB(ColorSet.EnemyOrange.r, ColorSet.EnemyOrange.g, ColorSet.EnemyOrange.b)
-	tagged.image:setImage(RegisterImage(0xB6471C9D32214F3))
+	tagged.image:setImage(RegisterImage(@"t7_mp_hud_inventory_icon_inworld_arrow"))
 	tagged:linkToElementModel(self, nil, false, function(model)
 		tagged:setModel(model, f1_arg1)
 	end)
@@ -179,29 +179,29 @@ CoD.OverheadName_MP.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	local FlashWhite = LUI.UIImage.new(0.5, 0.5, -56.5, 81.5, 0.5, 0.5, -18, -15)
 	FlashWhite:setRGB(0.66, 0.28, 0.28)
 	FlashWhite:setAlpha(0)
-	FlashWhite:setImage(RegisterImage(0x8FEB6143419D031))
-	FlashWhite:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	FlashWhite:setImage(RegisterImage(@"hash_68FEB6143419D031"))
+	FlashWhite:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(FlashWhite)
 	self.FlashWhite = FlashWhite
 	local FlashRed = LUI.UIImage.new(0.5, 0.5, -56.5, 81.5, 0.5, 0.5, -20, -13)
 	FlashRed:setRGB(ColorSet.T8__RED.r, ColorSet.T8__RED.g, ColorSet.T8__RED.b)
 	FlashRed:setAlpha(0)
-	FlashRed:setImage(RegisterImage(0x8FEB6143419D031))
-	FlashRed:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	FlashRed:setImage(RegisterImage(@"hash_68FEB6143419D031"))
+	FlashRed:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(FlashRed)
 	self.FlashRed = FlashRed
 	local Flash = LUI.UIImage.new(0.5, 0.5, -56.5, 81.5, 0.5, 0.5, -21.5, -11.5)
 	Flash:setRGB(ColorSet.EnemyOrange_Bright.r, ColorSet.EnemyOrange_Bright.g, ColorSet.EnemyOrange_Bright.b)
 	Flash:setAlpha(0)
-	Flash:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Flash:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Flash)
 	self.Flash = Flash
 	local GlowBloom = LUI.UIImage.new(0.5, 0.5, -25, 55, 0.5, 0.5, -56.5, 23.5)
 	GlowBloom:setRGB(0.66, 0.33, 0.33)
 	GlowBloom:setAlpha(0)
 	GlowBloom:setScale(0, 0)
-	GlowBloom:setImage(RegisterImage(0x4AEE67767498FE4))
-	GlowBloom:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	GlowBloom:setImage(RegisterImage(@"hash_4AEE67767498FE4"))
+	GlowBloom:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(GlowBloom)
 	self.GlowBloom = GlowBloom
 	local RankIcon = LUI.UIImage.new(0, 0, -8.5, 43.5, 0, 0, -1.5, 50.5)
@@ -236,70 +236,70 @@ CoD.OverheadName_MP.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	self.ArenaRankIcon = ArenaRankIcon
 	local f1_local14 = PlayerNameAndClanTag
 	local f1_local15 = PlayerNameAndClanTag.subscribeToModel
-	local f1_local16 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local16 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local15(f1_local14, f1_local16["factions.actualTeam"], PlayerNameAndClanTag.__Color_FullPath)
 	f1_local14 = PlayerNameAndClanTag
 	f1_local15 = PlayerNameAndClanTag.subscribeToModel
-	f1_local16 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local16 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local15(f1_local14, f1_local16["profile.colorblindMode"], PlayerNameAndClanTag.__Color_FullPath)
 	ArmorBar:linkToElementModel(self, "team", true, ArmorBar.__Alpha)
 	f1_local14 = ArmorBar
 	f1_local15 = ArmorBar.subscribeToModel
-	f1_local16 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local16 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local15(f1_local14, f1_local16["factions.playerFactionTeamEnum"], ArmorBar.__Alpha)
 	f1_local14 = ArmorBar
 	f1_local15 = ArmorBar.subscribeToModel
-	f1_local16 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local16 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local15(f1_local14, f1_local16["GameplayFeedbackSettings.healthBarEnemyAlpha"], ArmorBar.__Alpha)
 	f1_local14 = ArmorBar
 	f1_local15 = ArmorBar.subscribeToModel
-	f1_local16 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local16 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local15(f1_local14, f1_local16["GameplayFeedbackSettings.healthBarAllyAlpha"], ArmorBar.__Alpha)
 	f1_local14 = ArmorBar
 	f1_local15 = ArmorBar.subscribeToModel
-	f1_local16 = Engine[0x8DF2E5447F384B9]()
+	f1_local16 = Engine[@"getglobalmodel"]()
 	f1_local15(f1_local14, f1_local16["demo.cameraMode"], ArmorBar.__Alpha)
 	HealthBar:linkToElementModel(self, "team", true, HealthBar.__Alpha)
 	f1_local14 = HealthBar
 	f1_local15 = HealthBar.subscribeToModel
-	f1_local16 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local16 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local15(f1_local14, f1_local16["factions.playerFactionTeamEnum"], HealthBar.__Alpha)
 	f1_local14 = HealthBar
 	f1_local15 = HealthBar.subscribeToModel
-	f1_local16 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local16 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local15(f1_local14, f1_local16["GameplayFeedbackSettings.healthBarEnemyAlpha"], HealthBar.__Alpha)
 	f1_local14 = HealthBar
 	f1_local15 = HealthBar.subscribeToModel
-	f1_local16 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local16 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local15(f1_local14, f1_local16["GameplayFeedbackSettings.healthBarAllyAlpha"], HealthBar.__Alpha)
 	f1_local14 = HealthBar
 	f1_local15 = HealthBar.subscribeToModel
-	f1_local16 = Engine[0x8DF2E5447F384B9]()
+	f1_local16 = Engine[@"getglobalmodel"]()
 	f1_local15(f1_local14, f1_local16["demo.cameraMode"], HealthBar.__Alpha)
 	f1_local14 = HealthBar
 	f1_local15 = HealthBar.subscribeToModel
-	f1_local16 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local16 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local15(f1_local14, f1_local16["factions.playerFactionTeamEnum"], HealthBar.HealthFill.__Health_Bar_Color_FullPath)
 	f1_local14 = HealthBar
 	f1_local15 = HealthBar.subscribeToModel
-	f1_local16 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local16 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local15(f1_local14, f1_local16["profile.colorblindMode"], HealthBar.HealthFill.__Health_Bar_Color_FullPath)
 	ArmorOverheadName:linkToElementModel(self, "team", true, ArmorOverheadName.__Alpha)
 	f1_local14 = ArmorOverheadName
 	f1_local15 = ArmorOverheadName.subscribeToModel
-	f1_local16 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local16 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local15(f1_local14, f1_local16["factions.playerFactionTeamEnum"], ArmorOverheadName.__Alpha)
 	f1_local14 = ArmorOverheadName
 	f1_local15 = ArmorOverheadName.subscribeToModel
-	f1_local16 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local16 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local15(f1_local14, f1_local16["GameplayFeedbackSettings.healthBarEnemyAlpha"], ArmorOverheadName.__Alpha)
 	f1_local14 = ArmorOverheadName
 	f1_local15 = ArmorOverheadName.subscribeToModel
-	f1_local16 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local16 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local15(f1_local14, f1_local16["GameplayFeedbackSettings.healthBarAllyAlpha"], ArmorOverheadName.__Alpha)
 	f1_local14 = ArmorOverheadName
 	f1_local15 = ArmorOverheadName.subscribeToModel
-	f1_local16 = Engine[0x8DF2E5447F384B9]()
+	f1_local16 = Engine[@"getglobalmodel"]()
 	f1_local15(f1_local14, f1_local16["demo.cameraMode"], ArmorOverheadName.__Alpha)
 	f1_local14 = ArenaRankIcon
 	f1_local15 = ArenaRankIcon.subscribeToModel
@@ -315,7 +315,7 @@ CoD.OverheadName_MP.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	f1_local15(f1_local14, f1_local16["gameClient.update"], ArenaRankIcon.__Image_FullPath)
 	f1_local14 = ArenaRankIcon
 	f1_local15 = ArenaRankIcon.subscribeToModel
-	f1_local16 = Engine[0x8DF2E5447F384B9]()
+	f1_local16 = Engine[@"getglobalmodel"]()
 	f1_local15(f1_local14, f1_local16["PartyPrivacy.privacy"], ArenaRankIcon.__Image_FullPath)
 	self:mergeStateConditions({
 		{
@@ -355,8 +355,8 @@ CoD.OverheadName_MP.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 			condition = function(menu, element, event)
 				local f29_local0 = CoD.ModelUtility.IsSelfModelValueTrue(element, f1_arg1, "showHealthBar")
 				if f29_local0 then
-					if not IsInPrematchPeriod(f1_arg1) and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x3AEEAA452536E6E]) then
-						f29_local0 = IsVisibilityBitSet(f1_arg1, Enum[0x7F032C2EF103A1A][0x69C28E2FCA82769])
+					if not IsInPrematchPeriod(f1_arg1) and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_is_flash_banged"]) then
+						f29_local0 = IsVisibilityBitSet(f1_arg1, Enum[@"uivisibilitybit"][@"bit_hud_hardcore"])
 						if f29_local0 then
 							f29_local0 = CoD.HUDUtility.VisibleIfInDemoPlayback()
 							if f29_local0 then
@@ -375,7 +375,7 @@ CoD.OverheadName_MP.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 			condition = function(menu, element, event)
 				local f30_local0 = CoD.ModelUtility.IsSelfModelValueTrue(element, f1_arg1, "showHealthBar")
 				if f30_local0 then
-					if not IsInPrematchPeriod(f1_arg1) and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x3AEEAA452536E6E]) and not IsVisibilityBitSet(f1_arg1, Enum[0x7F032C2EF103A1A][0x69C28E2FCA82769]) then
+					if not IsInPrematchPeriod(f1_arg1) and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_is_flash_banged"]) and not IsVisibilityBitSet(f1_arg1, Enum[@"uivisibilitybit"][@"bit_hud_hardcore"]) then
 						f30_local0 = CoD.HUDUtility.VisibleIfInDemoPlayback()
 						if f30_local0 then
 							f30_local0 = IsArenaMode()
@@ -392,7 +392,7 @@ CoD.OverheadName_MP.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 			condition = function(menu, element, event)
 				local f31_local0 = CoD.ModelUtility.IsSelfModelValueTrue(element, f1_arg1, "showHealthBar")
 				if f31_local0 then
-					if not IsInPrematchPeriod(f1_arg1) and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x3AEEAA452536E6E]) and not IsVisibilityBitSet(f1_arg1, Enum[0x7F032C2EF103A1A][0x69C28E2FCA82769]) then
+					if not IsInPrematchPeriod(f1_arg1) and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_is_flash_banged"]) and not IsVisibilityBitSet(f1_arg1, Enum[@"uivisibilitybit"][@"bit_hud_hardcore"]) then
 						f31_local0 = CoD.HUDUtility.VisibleIfInDemoPlayback()
 						if f31_local0 then
 							f31_local0 = not IsPublicOnlineGame()
@@ -409,7 +409,7 @@ CoD.OverheadName_MP.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 			condition = function(menu, element, event)
 				local f32_local0 = CoD.ModelUtility.IsSelfModelValueTrue(element, f1_arg1, "showHealthBar")
 				if f32_local0 then
-					if not IsInPrematchPeriod(f1_arg1) and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x3AEEAA452536E6E]) and not IsVisibilityBitSet(f1_arg1, Enum[0x7F032C2EF103A1A][0x69C28E2FCA82769]) then
+					if not IsInPrematchPeriod(f1_arg1) and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_is_flash_banged"]) and not IsVisibilityBitSet(f1_arg1, Enum[@"uivisibilitybit"][@"bit_hud_hardcore"]) then
 						f32_local0 = CoD.HUDUtility.VisibleIfInDemoPlayback()
 					else
 						f32_local0 = false
@@ -421,7 +421,7 @@ CoD.OverheadName_MP.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	})
 	f1_local14 = self
 	f1_local15 = self.subscribeToModel
-	f1_local16 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local16 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local15(f1_local14, f1_local16["factions.isCoDCaster"], function(f33_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -445,7 +445,7 @@ CoD.OverheadName_MP.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	end, false)
 	f1_local14 = self
 	f1_local15 = self.subscribeToModel
-	f1_local16 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local16 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local15(f1_local14, f1_local16["deadSpectator.playerTeam"], function(f35_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -475,7 +475,7 @@ CoD.OverheadName_MP.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	end)
 	f1_local14 = self
 	f1_local15 = self.subscribeToModel
-	f1_local16 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local16 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local15(f1_local14, f1_local16.isInPrematchPeriod, function(f38_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -487,26 +487,26 @@ CoD.OverheadName_MP.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	end, false)
 	f1_local14 = self
 	f1_local15 = self.subscribeToModel
-	f1_local16 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local15(f1_local14, f1_local16["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x3AEEAA452536E6E]], function(f39_arg0)
+	f1_local16 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local15(f1_local14, f1_local16["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_is_flash_banged"]], function(f39_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f39_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x3AEEAA452536E6E],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_is_flash_banged"],
 		})
 	end, false)
 	f1_local14 = self
 	f1_local15 = self.subscribeToModel
-	f1_local16 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	f1_local15(f1_local14, f1_local16["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x69C28E2FCA82769]], function(f40_arg0)
+	f1_local16 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local15(f1_local14, f1_local16["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_hud_hardcore"]], function(f40_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f40_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x69C28E2FCA82769],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_hud_hardcore"],
 		})
 	end, false)
 	self:linkToElementModel(self, "team", true, function(model)
@@ -532,7 +532,7 @@ CoD.OverheadName_MP.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	end, false)
 	f1_local14 = self
 	f1_local15 = self.subscribeToModel
-	f1_local16 = Engine[0x8DF2E5447F384B9]()
+	f1_local16 = Engine[@"getglobalmodel"]()
 	f1_local15(f1_local14, f1_local16["lobbyRoot.lobbyNav"], function(f43_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -886,7 +886,7 @@ CoD.OverheadName_MP.__clipsPerState = {
 			f56_arg0.Flash:beginAnimation(50)
 			f56_arg0.Flash:setAlpha(1)
 			f56_arg0.Flash:setScale(0, 0)
-			f56_arg0.Flash:setImage(RegisterImage(0x8FEB6143419D031))
+			f56_arg0.Flash:setImage(RegisterImage(@"hash_68FEB6143419D031"))
 			f56_arg0.Flash:registerEventHandler("interrupted_keyframe", f56_arg0.clipInterrupted)
 			f56_arg0.Flash:registerEventHandler("transition_complete_keyframe", f56_local3)
 			local f56_local4 = function(f72_arg0)
@@ -895,7 +895,7 @@ CoD.OverheadName_MP.__clipsPerState = {
 					f73_arg0:setAlpha(0)
 					f73_arg0:registerEventHandler("transition_complete_keyframe", f56_arg0.clipFinished)
 				end
-				f72_arg0:beginAnimation(100, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f72_arg0:beginAnimation(100, Enum[@"luitween"][@"luitween_ease_in"])
 				f72_arg0:setAlpha(0.76)
 				f72_arg0:setScale(1.5, 1.5)
 				f72_arg0:registerEventHandler("transition_complete_keyframe", f72_local0)
@@ -1061,7 +1061,7 @@ CoD.OverheadName_MP.__clipsPerState = {
 			f79_arg0.Flash:beginAnimation(50)
 			f79_arg0.Flash:setAlpha(1)
 			f79_arg0.Flash:setScale(0, 0)
-			f79_arg0.Flash:setImage(RegisterImage(0x8FEB6143419D031))
+			f79_arg0.Flash:setImage(RegisterImage(@"hash_68FEB6143419D031"))
 			f79_arg0.Flash:registerEventHandler("interrupted_keyframe", f79_arg0.clipInterrupted)
 			f79_arg0.Flash:registerEventHandler("transition_complete_keyframe", f79_local3)
 			local f79_local4 = function(f95_arg0)
@@ -1070,7 +1070,7 @@ CoD.OverheadName_MP.__clipsPerState = {
 					f96_arg0:setAlpha(0)
 					f96_arg0:registerEventHandler("transition_complete_keyframe", f79_arg0.clipFinished)
 				end
-				f95_arg0:beginAnimation(100, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f95_arg0:beginAnimation(100, Enum[@"luitween"][@"luitween_ease_in"])
 				f95_arg0:setAlpha(0.76)
 				f95_arg0:setScale(1.5, 1.5)
 				f95_arg0:registerEventHandler("transition_complete_keyframe", f95_local0)
@@ -1233,7 +1233,7 @@ CoD.OverheadName_MP.__clipsPerState = {
 			f102_arg0.Flash:beginAnimation(50)
 			f102_arg0.Flash:setAlpha(1)
 			f102_arg0.Flash:setScale(0, 0)
-			f102_arg0.Flash:setImage(RegisterImage(0x8FEB6143419D031))
+			f102_arg0.Flash:setImage(RegisterImage(@"hash_68FEB6143419D031"))
 			f102_arg0.Flash:registerEventHandler("interrupted_keyframe", f102_arg0.clipInterrupted)
 			f102_arg0.Flash:registerEventHandler("transition_complete_keyframe", f102_local3)
 			local f102_local4 = function(f118_arg0)
@@ -1242,7 +1242,7 @@ CoD.OverheadName_MP.__clipsPerState = {
 					f119_arg0:setAlpha(0)
 					f119_arg0:registerEventHandler("transition_complete_keyframe", f102_arg0.clipFinished)
 				end
-				f118_arg0:beginAnimation(100, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f118_arg0:beginAnimation(100, Enum[@"luitween"][@"luitween_ease_in"])
 				f118_arg0:setAlpha(0.76)
 				f118_arg0:setScale(1.5, 1.5)
 				f118_arg0:registerEventHandler("transition_complete_keyframe", f118_local0)

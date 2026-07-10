@@ -14,7 +14,7 @@ CoD.ContractRarityHeader.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	local RarityLabel = LUI.UIText.new(0, 0, 0, 104, 0, 0, 1, 21)
 	RarityLabel:setTTF("ttmussels_demibold")
 	RarityLabel:setLetterSpacing(4)
-	RarityLabel:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	RarityLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	RarityLabel:setBackingType(1)
 	RarityLabel:setBackingWidget(CoD.ContractRarityBackground, f1_arg0, f1_arg1)
 	RarityLabel:setBackingXPadding(22)
@@ -40,7 +40,7 @@ CoD.ContractRarityHeader.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	Category:setAlpha(0.94)
 	Category:setTTF("ttmussels_regular")
 	Category:setLetterSpacing(4)
-	Category:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	Category:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	Category.__String_Reference = function(f5_arg0)
 		local f5_local0 = f5_arg0:get()
 		if f5_local0 ~= nil then
@@ -91,7 +91,7 @@ CoD.ContractRarityHeader.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 		{
 			stateName = "NoRarity",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "rarity", Enum[0x704F69F9B0BDCEC][0x8556B83CAD0D180])
+				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "rarity", Enum[@"lootraritytype"][@"loot_rarity_type_count"])
 			end,
 		},
 	})

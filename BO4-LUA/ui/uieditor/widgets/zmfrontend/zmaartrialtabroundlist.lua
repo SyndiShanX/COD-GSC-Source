@@ -10,8 +10,8 @@ CoD.ZMAARTrialTabRoundList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local ZMAARTrialTabRoundListInternal = CoD.ZMAARTrialTabRoundListInternal.new(f1_arg0, f1_arg1, 0.5, 0.5, -194, 194, 0.5, 0.5, -317.5, 317.5)
-	ZMAARTrialTabRoundListInternal.MedalText:setText(LocalizeToUpperString(0x4F2A2FD2DB27D84))
-	ZMAARTrialTabRoundListInternal.MedalAchievedText:setText(LocalizeToUpperString(0x77E29E95B5D6719))
+	ZMAARTrialTabRoundListInternal.MedalText:setText(LocalizeToUpperString(@"hash_4F2A2FD2DB27D84"))
+	ZMAARTrialTabRoundListInternal.MedalAchievedText:setText(LocalizeToUpperString(@"hash_677E29E95B5D6719"))
 	ZMAARTrialTabRoundListInternal:linkToElementModel(self, nil, false, function(model)
 		ZMAARTrialTabRoundListInternal:setModel(model, f1_arg1)
 	end)
@@ -66,7 +66,7 @@ CoD.ZMAARTrialTabRoundList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	end)
 	local f1_local2 = self
 	local f1_local3 = self.subscribeToModel
-	local f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local3(f1_local2, f1_local4["AAR.trialStats.zmTrialsVariant"], function(f10_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -84,12 +84,12 @@ CoD.ZMAARTrialTabRoundList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 end
 CoD.ZMAARTrialTabRoundList.__resetProperties = function(f11_arg0)
 	f11_arg0.ZMAARTrialTabRoundListInternal:completeAnimation()
-	f11_arg0.ZMAARTrialTabRoundListInternal.ListBg:setImage(RegisterImage(0xDCF1B07E0539E4A))
-	f11_arg0.ZMAARTrialTabRoundListInternal.Medal:setImage(RegisterImage(0x7775EF99258EEEC))
+	f11_arg0.ZMAARTrialTabRoundListInternal.ListBg:setImage(RegisterImage(@"uie_trial_rules_gold_normal"))
+	f11_arg0.ZMAARTrialTabRoundListInternal.Medal:setImage(RegisterImage(@"uie_trial_medal_gold"))
 	f11_arg0.ZMAARTrialTabRoundListInternal.MedalText:setRGB(1, 1, 1)
-	f11_arg0.ZMAARTrialTabRoundListInternal.MedalText:setText(LocalizeToUpperString(0x4F2A2FD2DB27D84))
+	f11_arg0.ZMAARTrialTabRoundListInternal.MedalText:setText(LocalizeToUpperString(@"hash_4F2A2FD2DB27D84"))
 	f11_arg0.ZMAARTrialTabRoundListInternal.MedalAchievedText:setRGB(1, 1, 1)
-	f11_arg0.ZMAARTrialTabRoundListInternal.MedalAchievedText:setText(LocalizeToUpperString(0x77E29E95B5D6719))
+	f11_arg0.ZMAARTrialTabRoundListInternal.MedalAchievedText:setText(LocalizeToUpperString(@"hash_677E29E95B5D6719"))
 end
 CoD.ZMAARTrialTabRoundList.__clipsPerState = {
 	DefaultState = {
@@ -107,12 +107,12 @@ CoD.ZMAARTrialTabRoundList.__clipsPerState = {
 			f13_arg0.ZMAARTrialTabRoundListInternal.Medal:completeAnimation()
 			f13_arg0.ZMAARTrialTabRoundListInternal.MedalText:completeAnimation()
 			f13_arg0.ZMAARTrialTabRoundListInternal.MedalAchievedText:completeAnimation()
-			f13_arg0.ZMAARTrialTabRoundListInternal.ListBg:setImage(RegisterImage(0xA703FE14F98C63C))
-			f13_arg0.ZMAARTrialTabRoundListInternal.Medal:setImage(RegisterImage(0x2638A7737E9BD02))
+			f13_arg0.ZMAARTrialTabRoundListInternal.ListBg:setImage(RegisterImage(@"uie_trial_rules_bronze_normal"))
+			f13_arg0.ZMAARTrialTabRoundListInternal.Medal:setImage(RegisterImage(@"uie_trial_medal_bronze"))
 			f13_arg0.ZMAARTrialTabRoundListInternal.MedalText:setRGB(0.66, 0.3, 0.2)
-			f13_arg0.ZMAARTrialTabRoundListInternal.MedalText:setText(LocalizeToUpperString(0xF90209F61BD41EA))
+			f13_arg0.ZMAARTrialTabRoundListInternal.MedalText:setText(LocalizeToUpperString(@"hash_6F90209F61BD41EA"))
 			f13_arg0.ZMAARTrialTabRoundListInternal.MedalAchievedText:setRGB(0.66, 0.3, 0.2)
-			f13_arg0.ZMAARTrialTabRoundListInternal.MedalAchievedText:setText(LocalizeToUpperString(0xC951B199209617A))
+			f13_arg0.ZMAARTrialTabRoundListInternal.MedalAchievedText:setText(LocalizeToUpperString(@"hash_4C951B199209617A"))
 			f13_arg0.clipFinished(f13_arg0.ZMAARTrialTabRoundListInternal)
 		end,
 	},
@@ -125,12 +125,12 @@ CoD.ZMAARTrialTabRoundList.__clipsPerState = {
 			f14_arg0.ZMAARTrialTabRoundListInternal.Medal:completeAnimation()
 			f14_arg0.ZMAARTrialTabRoundListInternal.MedalText:completeAnimation()
 			f14_arg0.ZMAARTrialTabRoundListInternal.MedalAchievedText:completeAnimation()
-			f14_arg0.ZMAARTrialTabRoundListInternal.ListBg:setImage(RegisterImage(0xD2773BA8C6EFDB))
-			f14_arg0.ZMAARTrialTabRoundListInternal.Medal:setImage(RegisterImage(0xD56A5FDBB9721FB))
+			f14_arg0.ZMAARTrialTabRoundListInternal.ListBg:setImage(RegisterImage(@"uie_trial_rules_silver_normal"))
+			f14_arg0.ZMAARTrialTabRoundListInternal.Medal:setImage(RegisterImage(@"uie_trial_medal_silver"))
 			f14_arg0.ZMAARTrialTabRoundListInternal.MedalText:setRGB(0.79, 0.79, 0.79)
-			f14_arg0.ZMAARTrialTabRoundListInternal.MedalText:setText(LocalizeToUpperString(0x56AFC9EB0C32053))
+			f14_arg0.ZMAARTrialTabRoundListInternal.MedalText:setText(LocalizeToUpperString(@"hash_356AFC9EB0C32053"))
 			f14_arg0.ZMAARTrialTabRoundListInternal.MedalAchievedText:setRGB(0.79, 0.79, 0.79)
-			f14_arg0.ZMAARTrialTabRoundListInternal.MedalAchievedText:setText(LocalizeToUpperString(0xFE924858B948E51))
+			f14_arg0.ZMAARTrialTabRoundListInternal.MedalAchievedText:setText(LocalizeToUpperString(@"hash_6FE924858B948E51"))
 			f14_arg0.clipFinished(f14_arg0.ZMAARTrialTabRoundListInternal)
 		end,
 	},
@@ -143,12 +143,12 @@ CoD.ZMAARTrialTabRoundList.__clipsPerState = {
 			f15_arg0.ZMAARTrialTabRoundListInternal.Medal:completeAnimation()
 			f15_arg0.ZMAARTrialTabRoundListInternal.MedalText:completeAnimation()
 			f15_arg0.ZMAARTrialTabRoundListInternal.MedalAchievedText:completeAnimation()
-			f15_arg0.ZMAARTrialTabRoundListInternal.ListBg:setImage(RegisterImage(0xDCF1B07E0539E4A))
-			f15_arg0.ZMAARTrialTabRoundListInternal.Medal:setImage(RegisterImage(0x7775EF99258EEEC))
+			f15_arg0.ZMAARTrialTabRoundListInternal.ListBg:setImage(RegisterImage(@"uie_trial_rules_gold_normal"))
+			f15_arg0.ZMAARTrialTabRoundListInternal.Medal:setImage(RegisterImage(@"uie_trial_medal_gold"))
 			f15_arg0.ZMAARTrialTabRoundListInternal.MedalText:setRGB(1, 0.74, 0.28)
-			f15_arg0.ZMAARTrialTabRoundListInternal.MedalText:setText(LocalizeToUpperString(0x4F2A2FD2DB27D84))
+			f15_arg0.ZMAARTrialTabRoundListInternal.MedalText:setText(LocalizeToUpperString(@"hash_4F2A2FD2DB27D84"))
 			f15_arg0.ZMAARTrialTabRoundListInternal.MedalAchievedText:setRGB(1, 0.74, 0.28)
-			f15_arg0.ZMAARTrialTabRoundListInternal.MedalAchievedText:setText(LocalizeToUpperString(0x77E29E95B5D6719))
+			f15_arg0.ZMAARTrialTabRoundListInternal.MedalAchievedText:setText(LocalizeToUpperString(@"hash_677E29E95B5D6719"))
 			f15_arg0.clipFinished(f15_arg0.ZMAARTrialTabRoundListInternal)
 		end,
 	},
@@ -161,12 +161,12 @@ CoD.ZMAARTrialTabRoundList.__clipsPerState = {
 			f16_arg0.ZMAARTrialTabRoundListInternal.Medal:completeAnimation()
 			f16_arg0.ZMAARTrialTabRoundListInternal.MedalText:completeAnimation()
 			f16_arg0.ZMAARTrialTabRoundListInternal.MedalAchievedText:completeAnimation()
-			f16_arg0.ZMAARTrialTabRoundListInternal.ListBg:setImage(RegisterImage(0xBD93EB9B6EAD186))
+			f16_arg0.ZMAARTrialTabRoundListInternal.ListBg:setImage(RegisterImage(@"hash_3BD93EB9B6EAD186"))
 			f16_arg0.ZMAARTrialTabRoundListInternal.Medal:setImage(RegisterImage(0x772C55AAA62BD0))
 			f16_arg0.ZMAARTrialTabRoundListInternal.MedalText:setRGB(0.79, 0.79, 0.79)
-			f16_arg0.ZMAARTrialTabRoundListInternal.MedalText:setText(LocalizeToUpperString(0x74B40DC9E8748CA))
+			f16_arg0.ZMAARTrialTabRoundListInternal.MedalText:setText(LocalizeToUpperString(@"hash_774B40DC9E8748CA"))
 			f16_arg0.ZMAARTrialTabRoundListInternal.MedalAchievedText:setRGB(0.79, 0.79, 0.79)
-			f16_arg0.ZMAARTrialTabRoundListInternal.MedalAchievedText:setText(LocalizeToUpperString(0xE964B7C1F487D1A))
+			f16_arg0.ZMAARTrialTabRoundListInternal.MedalAchievedText:setText(LocalizeToUpperString(@"hash_3E964B7C1F487D1A"))
 			f16_arg0.clipFinished(f16_arg0.ZMAARTrialTabRoundListInternal)
 		end,
 	},
@@ -179,12 +179,12 @@ CoD.ZMAARTrialTabRoundList.__clipsPerState = {
 			f17_arg0.ZMAARTrialTabRoundListInternal.Medal:completeAnimation()
 			f17_arg0.ZMAARTrialTabRoundListInternal.MedalText:completeAnimation()
 			f17_arg0.ZMAARTrialTabRoundListInternal.MedalAchievedText:completeAnimation()
-			f17_arg0.ZMAARTrialTabRoundListInternal.ListBg:setImage(RegisterImage(0x4230D3A2AA576B2))
-			f17_arg0.ZMAARTrialTabRoundListInternal.Medal:setImage(RegisterImage(0xFD6B3DF8A0BA964))
+			f17_arg0.ZMAARTrialTabRoundListInternal.ListBg:setImage(RegisterImage(@"hash_34230D3A2AA576B2"))
+			f17_arg0.ZMAARTrialTabRoundListInternal.Medal:setImage(RegisterImage(@"hash_FD6B3DF8A0BA964"))
 			f17_arg0.ZMAARTrialTabRoundListInternal.MedalText:setRGB(0.84, 0.84, 0.84)
-			f17_arg0.ZMAARTrialTabRoundListInternal.MedalText:setText(LocalizeToUpperString(0x6C5F4DF36C73F36))
+			f17_arg0.ZMAARTrialTabRoundListInternal.MedalText:setText(LocalizeToUpperString(@"hash_6C5F4DF36C73F36"))
 			f17_arg0.ZMAARTrialTabRoundListInternal.MedalAchievedText:setRGB(0.84, 0.84, 0.84)
-			f17_arg0.ZMAARTrialTabRoundListInternal.MedalAchievedText:setText(LocalizeToUpperString(0x869344F2E6672B6))
+			f17_arg0.ZMAARTrialTabRoundListInternal.MedalAchievedText:setText(LocalizeToUpperString(@"hash_869344F2E6672B6"))
 			f17_arg0.clipFinished(f17_arg0.ZMAARTrialTabRoundListInternal)
 		end,
 	},
@@ -197,12 +197,12 @@ CoD.ZMAARTrialTabRoundList.__clipsPerState = {
 			f18_arg0.ZMAARTrialTabRoundListInternal.Medal:completeAnimation()
 			f18_arg0.ZMAARTrialTabRoundListInternal.MedalText:completeAnimation()
 			f18_arg0.ZMAARTrialTabRoundListInternal.MedalAchievedText:completeAnimation()
-			f18_arg0.ZMAARTrialTabRoundListInternal.ListBg:setImage(RegisterImage(0xC026AC93C711B7D))
-			f18_arg0.ZMAARTrialTabRoundListInternal.Medal:setImage(RegisterImage(0x8F9261A2CAA7739))
+			f18_arg0.ZMAARTrialTabRoundListInternal.ListBg:setImage(RegisterImage(@"hash_3C026AC93C711B7D"))
+			f18_arg0.ZMAARTrialTabRoundListInternal.Medal:setImage(RegisterImage(@"hash_18F9261A2CAA7739"))
 			f18_arg0.ZMAARTrialTabRoundListInternal.MedalText:setRGB(0.66, 0.28, 1)
-			f18_arg0.ZMAARTrialTabRoundListInternal.MedalText:setText(LocalizeToUpperString(0x254131A56580416))
+			f18_arg0.ZMAARTrialTabRoundListInternal.MedalText:setText(LocalizeToUpperString(@"hash_1254131A56580416"))
 			f18_arg0.ZMAARTrialTabRoundListInternal.MedalAchievedText:setRGB(0.66, 0.28, 1)
-			f18_arg0.ZMAARTrialTabRoundListInternal.MedalAchievedText:setText(LocalizeToUpperString(0x2AB6C638ED90856))
+			f18_arg0.ZMAARTrialTabRoundListInternal.MedalAchievedText:setText(LocalizeToUpperString(@"hash_42AB6C638ED90856"))
 			f18_arg0.clipFinished(f18_arg0.ZMAARTrialTabRoundListInternal)
 		end,
 	},

@@ -29,7 +29,7 @@ CoD.directorArenaPregame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	local Header = CoD.DirectorScreenHeader.new(f1_arg0, f1_arg1, 0.5, 0.5, -870, -227, 0, 0, 301, 401)
 	Header:setAlpha(0)
 	Header:setZoom(75)
-	Header.Header:setText(LocalizeToUpperString(0x56CB4013028D74E))
+	Header.Header:setText(LocalizeToUpperString(@"menu/local"))
 	self:addElement(Header)
 	self.Header = Header
 	local pckeyboardNavigationRedirector2 = nil
@@ -63,7 +63,7 @@ CoD.directorArenaPregame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	})
 	local CompetitiveOverviewRankBanner = FindMatchButton
 	local DirectorLobbyPoseMembers = FindMatchButton.subscribeToModel
-	local LeagueEventEndDelayMessageTitle = Engine[0x8DF2E5447F384B9]()
+	local LeagueEventEndDelayMessageTitle = Engine[@"getglobalmodel"]()
 	DirectorLobbyPoseMembers(CompetitiveOverviewRankBanner, LeagueEventEndDelayMessageTitle["Arena.lockoutTimeRemaining"], function(f5_arg0)
 		f1_arg0:updateElementState(FindMatchButton, {
 			name = "model_validation",
@@ -75,7 +75,7 @@ CoD.directorArenaPregame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	end, false)
 	CompetitiveOverviewRankBanner = FindMatchButton
 	DirectorLobbyPoseMembers = FindMatchButton.subscribeToModel
-	LeagueEventEndDelayMessageTitle = Engine[0x8DF2E5447F384B9]()
+	LeagueEventEndDelayMessageTitle = Engine[@"getglobalmodel"]()
 	DirectorLobbyPoseMembers(CompetitiveOverviewRankBanner, LeagueEventEndDelayMessageTitle["lobbyRoot.lobbyNav"], function(f6_arg0)
 		f1_arg0:updateElementState(FindMatchButton, {
 			name = "model_validation",
@@ -87,7 +87,7 @@ CoD.directorArenaPregame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	end, false)
 	CompetitiveOverviewRankBanner = FindMatchButton
 	DirectorLobbyPoseMembers = FindMatchButton.subscribeToModel
-	LeagueEventEndDelayMessageTitle = Engine[0x8DF2E5447F384B9]()
+	LeagueEventEndDelayMessageTitle = Engine[@"getglobalmodel"]()
 	DirectorLobbyPoseMembers(CompetitiveOverviewRankBanner, LeagueEventEndDelayMessageTitle["lobbyRoot.privateClient.isHost"], function(f7_arg0)
 		f1_arg0:updateElementState(FindMatchButton, {
 			name = "model_validation",
@@ -99,7 +99,7 @@ CoD.directorArenaPregame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	end, false)
 	CompetitiveOverviewRankBanner = FindMatchButton
 	DirectorLobbyPoseMembers = FindMatchButton.subscribeToModel
-	LeagueEventEndDelayMessageTitle = Engine[0x8DF2E5447F384B9]()
+	LeagueEventEndDelayMessageTitle = Engine[@"getglobalmodel"]()
 	DirectorLobbyPoseMembers(CompetitiveOverviewRankBanner, LeagueEventEndDelayMessageTitle["lobbyRoot.gameClient.isHost"], function(f8_arg0)
 		f1_arg0:updateElementState(FindMatchButton, {
 			name = "model_validation",
@@ -119,7 +119,7 @@ CoD.directorArenaPregame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	end)
 	CompetitiveOverviewRankBanner = FindMatchButton
 	DirectorLobbyPoseMembers = FindMatchButton.subscribeToModel
-	LeagueEventEndDelayMessageTitle = Engine[0x8DF2E5447F384B9]()
+	LeagueEventEndDelayMessageTitle = Engine[@"getglobalmodel"]()
 	DirectorLobbyPoseMembers(CompetitiveOverviewRankBanner, LeagueEventEndDelayMessageTitle["lobbyRoot.gameClient.update"], function(f11_arg0)
 		f1_arg0:updateElementState(FindMatchButton, {
 			name = "model_validation",
@@ -131,7 +131,7 @@ CoD.directorArenaPregame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	end, false)
 	CompetitiveOverviewRankBanner = FindMatchButton
 	DirectorLobbyPoseMembers = FindMatchButton.subscribeToModel
-	LeagueEventEndDelayMessageTitle = Engine[0x8DF2E5447F384B9]()
+	LeagueEventEndDelayMessageTitle = Engine[@"getglobalmodel"]()
 	DirectorLobbyPoseMembers(CompetitiveOverviewRankBanner, LeagueEventEndDelayMessageTitle["lobbyRoot.privateClient.update"], function(f12_arg0)
 		f1_arg0:updateElementState(FindMatchButton, {
 			name = "model_validation",
@@ -143,7 +143,7 @@ CoD.directorArenaPregame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	end, false)
 	CompetitiveOverviewRankBanner = FindMatchButton
 	DirectorLobbyPoseMembers = FindMatchButton.subscribeToModel
-	LeagueEventEndDelayMessageTitle = Engine[0x8DF2E5447F384B9]()
+	LeagueEventEndDelayMessageTitle = Engine[@"getglobalmodel"]()
 	DirectorLobbyPoseMembers(CompetitiveOverviewRankBanner, LeagueEventEndDelayMessageTitle.offlineScreenState, function(f13_arg0)
 		f1_arg0:updateElementState(FindMatchButton, {
 			name = "model_validation",
@@ -153,37 +153,37 @@ CoD.directorArenaPregame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 			modelName = "offlineScreenState",
 		})
 	end, false)
-	FindMatchButton.DirectorSelectButtonMiniInternal.MiddleText:setText(LocalizeToUpperString(0xA14B986BB3C650A))
-	FindMatchButton.DirectorSelectButtonMiniInternal.MiddleTextFocus:setText(LocalizeToUpperString(0xA14B986BB3C650A))
+	FindMatchButton.DirectorSelectButtonMiniInternal.MiddleText:setText(LocalizeToUpperString(@"menu/find_match"))
+	FindMatchButton.DirectorSelectButtonMiniInternal.MiddleTextFocus:setText(LocalizeToUpperString(@"menu/find_match"))
 	CompetitiveOverviewRankBanner = FindMatchButton
 	DirectorLobbyPoseMembers = FindMatchButton.subscribeToModel
-	LeagueEventEndDelayMessageTitle = Engine[0x8DF2E5447F384B9]()
+	LeagueEventEndDelayMessageTitle = Engine[@"getglobalmodel"]()
 	DirectorLobbyPoseMembers(CompetitiveOverviewRankBanner, LeagueEventEndDelayMessageTitle["lobbyRoot.lobbyNav"], function(f14_arg0, f14_arg1)
-		CoD.Menu.UpdateButtonShownState(f14_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f14_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	CompetitiveOverviewRankBanner = FindMatchButton
 	DirectorLobbyPoseMembers = FindMatchButton.subscribeToModel
-	LeagueEventEndDelayMessageTitle = Engine[0x8DF2E5447F384B9]()
+	LeagueEventEndDelayMessageTitle = Engine[@"getglobalmodel"]()
 	DirectorLobbyPoseMembers(CompetitiveOverviewRankBanner, LeagueEventEndDelayMessageTitle["lobbyRoot.privateClient.isHost"], function(f15_arg0, f15_arg1)
-		CoD.Menu.UpdateButtonShownState(f15_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f15_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	CompetitiveOverviewRankBanner = FindMatchButton
 	DirectorLobbyPoseMembers = FindMatchButton.subscribeToModel
-	LeagueEventEndDelayMessageTitle = Engine[0x8DF2E5447F384B9]()
+	LeagueEventEndDelayMessageTitle = Engine[@"getglobalmodel"]()
 	DirectorLobbyPoseMembers(CompetitiveOverviewRankBanner, LeagueEventEndDelayMessageTitle["lobbyRoot.gameClient.isHost"], function(f16_arg0, f16_arg1)
-		CoD.Menu.UpdateButtonShownState(f16_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f16_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	CompetitiveOverviewRankBanner = FindMatchButton
 	DirectorLobbyPoseMembers = FindMatchButton.subscribeToModel
-	LeagueEventEndDelayMessageTitle = Engine[0x8DF2E5447F384B9]()
+	LeagueEventEndDelayMessageTitle = Engine[@"getglobalmodel"]()
 	DirectorLobbyPoseMembers(CompetitiveOverviewRankBanner, LeagueEventEndDelayMessageTitle["lobbyRoot.playlistId"], function(f17_arg0, f17_arg1)
-		CoD.Menu.UpdateButtonShownState(f17_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f17_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	CompetitiveOverviewRankBanner = FindMatchButton
 	DirectorLobbyPoseMembers = FindMatchButton.subscribeToModel
-	LeagueEventEndDelayMessageTitle = Engine[0x8DF2E5447F384B9]()
+	LeagueEventEndDelayMessageTitle = Engine[@"getglobalmodel"]()
 	DirectorLobbyPoseMembers(CompetitiveOverviewRankBanner, LeagueEventEndDelayMessageTitle["lobbyRoot.lobbyList.playerCount"], function(f18_arg0, f18_arg1)
-		CoD.Menu.UpdateButtonShownState(f18_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f18_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	FindMatchButton:registerEventHandler("gain_focus", function(element, event)
 		local f19_local0 = nil
@@ -192,10 +192,10 @@ CoD.directorArenaPregame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 		elseif element.super.gainFocus then
 			f19_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f19_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(FindMatchButton, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(FindMatchButton, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if IsPartyLeader(controller) and not CoD.ArenaLeaguePlayUtility.ForceCheckLeaverLockoutActive() and not CoD.DirectorUtility.IsNumClientsExceeded(controller) then
 			CoD.DirectorUtility.NavigateToArenaMatchmakingLobby(self, menu, controller, element)
 			PlaySoundAlias("uin_press_generic")
@@ -208,10 +208,10 @@ CoD.directorArenaPregame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 		end
 	end, function(element, menu, controller)
 		if IsPartyLeader(controller) and not CoD.ArenaLeaguePlayUtility.ForceCheckLeaverLockoutActive() and not CoD.DirectorUtility.IsNumClientsExceeded(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		elseif IsPartyLeader(controller) and CoD.DirectorUtility.IsNumClientsExceeded(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false
@@ -251,7 +251,7 @@ CoD.directorArenaPregame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	})
 	local CustomGamesButton = CompetitiveOverviewRankBanner
 	LeagueEventEndDelayMessageTitle = CompetitiveOverviewRankBanner.subscribeToModel
-	local CommonHeader = Engine[0x8DF2E5447F384B9]()
+	local CommonHeader = Engine[@"getglobalmodel"]()
 	LeagueEventEndDelayMessageTitle(CustomGamesButton, CommonHeader["lobbyRoot.lobbyNav"], function(f25_arg0)
 		f1_arg0:updateElementState(CompetitiveOverviewRankBanner, {
 			name = "model_validation",
@@ -295,7 +295,7 @@ CoD.directorArenaPregame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	end)
 	local DirectorLeaderActivitySelect = CustomGamesButton
 	CommonHeader = CustomGamesButton.subscribeToModel
-	local ArenaEventButtons = Engine[0x8DF2E5447F384B9]()
+	local ArenaEventButtons = Engine[@"getglobalmodel"]()
 	CommonHeader(DirectorLeaderActivitySelect, ArenaEventButtons["lobbyRoot.lobbyNav"], function(f30_arg0)
 		f1_arg0:updateElementState(CustomGamesButton, {
 			name = "model_validation",
@@ -307,7 +307,7 @@ CoD.directorArenaPregame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	end, false)
 	DirectorLeaderActivitySelect = CustomGamesButton
 	CommonHeader = CustomGamesButton.subscribeToModel
-	ArenaEventButtons = Engine[0x8DF2E5447F384B9]()
+	ArenaEventButtons = Engine[@"getglobalmodel"]()
 	CommonHeader(DirectorLeaderActivitySelect, ArenaEventButtons["lobbyRoot.gameClient.update"], function(f31_arg0)
 		f1_arg0:updateElementState(CustomGamesButton, {
 			name = "model_validation",
@@ -319,7 +319,7 @@ CoD.directorArenaPregame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	end, false)
 	DirectorLeaderActivitySelect = CustomGamesButton
 	CommonHeader = CustomGamesButton.subscribeToModel
-	ArenaEventButtons = Engine[0x8DF2E5447F384B9]()
+	ArenaEventButtons = Engine[@"getglobalmodel"]()
 	CommonHeader(DirectorLeaderActivitySelect, ArenaEventButtons["lobbyRoot.privateClient.update"], function(f32_arg0)
 		f1_arg0:updateElementState(CustomGamesButton, {
 			name = "model_validation",
@@ -331,7 +331,7 @@ CoD.directorArenaPregame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	end, false)
 	DirectorLeaderActivitySelect = CustomGamesButton
 	CommonHeader = CustomGamesButton.subscribeToModel
-	ArenaEventButtons = Engine[0x8DF2E5447F384B9]()
+	ArenaEventButtons = Engine[@"getglobalmodel"]()
 	CommonHeader(DirectorLeaderActivitySelect, ArenaEventButtons.offlineScreenState, function(f33_arg0)
 		f1_arg0:updateElementState(CustomGamesButton, {
 			name = "model_validation",
@@ -342,12 +342,12 @@ CoD.directorArenaPregame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 		})
 	end, false)
 	CustomGamesButton.DirectorSelectButtonMiniInternal.MiddleText.__MiddleText_StringReference = function()
-		CustomGamesButton.DirectorSelectButtonMiniInternal.MiddleText:setText(LocalizeToUpperString(CoD.DirectorUtility.GetCustomGamesName(0x85D9C7D7DDC8EE0)))
+		CustomGamesButton.DirectorSelectButtonMiniInternal.MiddleText:setText(LocalizeToUpperString(CoD.DirectorUtility.GetCustomGamesName(@"menu/custom_games")))
 	end
 	CustomGamesButton.DirectorSelectButtonMiniInternal.MiddleText.__MiddleText_StringReference()
 	CustomGamesButton.DirectorSelectButtonMiniInternal.MiddleText:setTTF("ttmussels_regular")
 	CustomGamesButton.DirectorSelectButtonMiniInternal.MiddleTextFocus.__MiddleTextFocus_String = function()
-		CustomGamesButton.DirectorSelectButtonMiniInternal.MiddleTextFocus:setText(LocalizeToUpperString(CoD.DirectorUtility.GetCustomGamesName(0x85D9C7D7DDC8EE0)))
+		CustomGamesButton.DirectorSelectButtonMiniInternal.MiddleTextFocus:setText(LocalizeToUpperString(CoD.DirectorUtility.GetCustomGamesName(@"menu/custom_games")))
 	end
 	CustomGamesButton.DirectorSelectButtonMiniInternal.MiddleTextFocus.__MiddleTextFocus_String()
 	CustomGamesButton.DirectorSelectButtonMiniInternal.MiddleTextFocus:setTTF("ttmussels_regular")
@@ -358,10 +358,10 @@ CoD.directorArenaPregame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 		elseif element.super.gainFocus then
 			f36_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f36_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(CustomGamesButton, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(CustomGamesButton, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if IsPC() then
 			PlaySoundAlias("uin_press_generic")
 			OpenCustomGamesLobby(menu, controller)
@@ -373,7 +373,7 @@ CoD.directorArenaPregame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 			return true
 		end
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 		return true
 	end, false)
 	self:addElement(CustomGamesButton)
@@ -408,7 +408,7 @@ CoD.directorArenaPregame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	end)
 	local ArenaEventProgressButton = DirectorLeaderActivitySelect
 	ArenaEventButtons = DirectorLeaderActivitySelect.subscribeToModel
-	local ArenaTeamDisplay = Engine[0x8DF2E5447F384B9]()
+	local ArenaTeamDisplay = Engine[@"getglobalmodel"]()
 	ArenaEventButtons(ArenaEventProgressButton, ArenaTeamDisplay["lobbyRoot.lobbyNav"], function(f43_arg0)
 		f1_arg0:updateElementState(DirectorLeaderActivitySelect, {
 			name = "model_validation",
@@ -420,7 +420,7 @@ CoD.directorArenaPregame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	end, false)
 	ArenaEventProgressButton = DirectorLeaderActivitySelect
 	ArenaEventButtons = DirectorLeaderActivitySelect.subscribeToModel
-	ArenaTeamDisplay = Engine[0x8DF2E5447F384B9]()
+	ArenaTeamDisplay = Engine[@"getglobalmodel"]()
 	ArenaEventButtons(ArenaEventProgressButton, ArenaTeamDisplay["lobbyRoot.gameClient.update"], function(f44_arg0)
 		f1_arg0:updateElementState(DirectorLeaderActivitySelect, {
 			name = "model_validation",
@@ -432,7 +432,7 @@ CoD.directorArenaPregame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	end, false)
 	ArenaEventProgressButton = DirectorLeaderActivitySelect
 	ArenaEventButtons = DirectorLeaderActivitySelect.subscribeToModel
-	ArenaTeamDisplay = Engine[0x8DF2E5447F384B9]()
+	ArenaTeamDisplay = Engine[@"getglobalmodel"]()
 	ArenaEventButtons(ArenaEventProgressButton, ArenaTeamDisplay["lobbyRoot.privateClient.update"], function(f45_arg0)
 		f1_arg0:updateElementState(DirectorLeaderActivitySelect, {
 			name = "model_validation",
@@ -464,11 +464,11 @@ CoD.directorArenaPregame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	self.ArenaMapAndGameType = ArenaMapAndGameType
 	local f1_local16 = CustomGamesButton
 	local f1_local17 = CustomGamesButton.subscribeToModel
-	local f1_local18 = Engine[0x8DF2E5447F384B9]()
+	local f1_local18 = Engine[@"getglobalmodel"]()
 	f1_local17(f1_local16, f1_local18["lobbyRoot.lobbyNav"], CustomGamesButton.DirectorSelectButtonMiniInternal.MiddleText.__MiddleText_StringReference)
 	f1_local16 = CustomGamesButton
 	f1_local17 = CustomGamesButton.subscribeToModel
-	f1_local18 = Engine[0x8DF2E5447F384B9]()
+	f1_local18 = Engine[@"getglobalmodel"]()
 	f1_local17(f1_local16, f1_local18["lobbyRoot.lobbyNav"], CustomGamesButton.DirectorSelectButtonMiniInternal.MiddleTextFocus.__MiddleTextFocus_String)
 	self:mergeStateConditions({
 		{

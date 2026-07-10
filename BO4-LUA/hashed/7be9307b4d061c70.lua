@@ -9,12 +9,12 @@ CoD.WZCamoOriginWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local CamoOriginWidget = LUI.UIText.new(0, 0, 0, 540, 0.5, 0.5, -10, 10)
 	CamoOriginWidget:setTTF("dinnext_regular")
-	CamoOriginWidget:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	CamoOriginWidget:setAlignment(Enum[0x7A5123B654282D2][0x6ED4298C93DC5ED])
+	CamoOriginWidget:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	CamoOriginWidget:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
 	CamoOriginWidget:linkToElementModel(self, "origin", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			CamoOriginWidget:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			CamoOriginWidget:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	self:addElement(CamoOriginWidget)

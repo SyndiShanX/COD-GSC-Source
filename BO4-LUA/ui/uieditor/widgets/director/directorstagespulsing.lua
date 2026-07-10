@@ -20,7 +20,7 @@ CoD.DirectorStagesPulsing.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	})
 	local Stage4 = Stage6
 	local Stage5 = Stage6.subscribeToModel
-	local f1_local4 = Engine[0x8DF2E5447F384B9]()
+	local f1_local4 = Engine[@"getglobalmodel"]()
 	Stage5(Stage4, f1_local4["lobbyRoot.publicLobby.stage"], function(f3_arg0)
 		f1_arg0:updateElementState(Stage6, {
 			name = "model_validation",
@@ -43,7 +43,7 @@ CoD.DirectorStagesPulsing.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	})
 	f1_local4 = Stage5
 	Stage4 = Stage5.subscribeToModel
-	local f1_local5 = Engine[0x8DF2E5447F384B9]()
+	local f1_local5 = Engine[@"getglobalmodel"]()
 	Stage4(f1_local4, f1_local5["lobbyRoot.publicLobby.stage"], function(f5_arg0)
 		f1_arg0:updateElementState(Stage5, {
 			name = "model_validation",
@@ -66,7 +66,7 @@ CoD.DirectorStagesPulsing.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	})
 	f1_local5 = Stage4
 	f1_local4 = Stage4.subscribeToModel
-	local f1_local6 = Engine[0x8DF2E5447F384B9]()
+	local f1_local6 = Engine[@"getglobalmodel"]()
 	f1_local4(f1_local5, f1_local6["lobbyRoot.publicLobby.stage"], function(f7_arg0)
 		f1_arg0:updateElementState(Stage4, {
 			name = "model_validation",
@@ -88,7 +88,7 @@ CoD.DirectorStagesPulsing.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	})
 	f1_local5 = self
 	f1_local4 = self.subscribeToModel
-	f1_local6 = Engine[0x8DF2E5447F384B9]()
+	f1_local6 = Engine[@"getglobalmodel"]()
 	f1_local4(f1_local5, f1_local6["lobbyRoot.publicLobby.waitingAnimation"], function(f9_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

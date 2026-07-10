@@ -8,7 +8,7 @@ CoD.DirectorFindGamePlaylistInfoTimed2xp.new = function(f1_arg0, f1_arg1, f1_arg
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local XpSmall = LUI.UIImage.new(0, 1, 0, 0, 0, 0, 0, 72)
-	XpSmall:setImage(RegisterImage(0x657862AC1A60EB4))
+	XpSmall:setImage(RegisterImage(@"ui_icon_2xp"))
 	self:addElement(XpSmall)
 	self.XpSmall = XpSmall
 	local PromoBG = LUI.UIImage.new(0, 0, 0, 72, 0, 0, 72, 89)
@@ -16,10 +16,10 @@ CoD.DirectorFindGamePlaylistInfoTimed2xp.new = function(f1_arg0, f1_arg1, f1_arg
 	self:addElement(PromoBG)
 	self.PromoBG = PromoBG
 	local PromoLabel = LUI.UIText.new(0, 0, 0, 72, 0, 0, 72, 89)
-	PromoLabel:setText(Engine[0xF9F1239CFD921FE](0x911577C5D3F5B1A))
+	PromoLabel:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_4911577C5D3F5B1A"))
 	PromoLabel:setTTF("default")
-	PromoLabel:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	PromoLabel:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	PromoLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	PromoLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(PromoLabel)
 	self.PromoLabel = PromoLabel
 	local TimeBG = LUI.UIImage.new(0, 0, 0, 72, 0, 0, 89, 106)
@@ -28,12 +28,12 @@ CoD.DirectorFindGamePlaylistInfoTimed2xp.new = function(f1_arg0, f1_arg1, f1_arg
 	local Time = LUI.UIText.new(0, 0, 0, 72, 0, 0, 89, 106)
 	Time:setRGB(0, 0, 0)
 	Time:setTTF("default")
-	Time:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	Time:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Time:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	Time:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	Time:subscribeToGlobalModel(f1_arg1, "PromotionalDoubleXP", "dailyDoubleXPTimeLeft", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			Time:setText(LocalizeIntoString(0xACC0A2311E2A5EA, f2_local0))
+			Time:setText(LocalizeIntoString(@"hash_6ACC0A2311E2A5EA", f2_local0))
 		end
 	end)
 	self:addElement(Time)

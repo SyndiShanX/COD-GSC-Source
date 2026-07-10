@@ -7,7 +7,7 @@ CoD.grenadeWarningArrow.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	self.id = "grenadeWarningArrow"
 	self.soundSet = "default"
 	local arrow = LUI.UIImage.new(0.5, 0.5, -32, 32, 0.5, 0.5, 17.5, 81.5)
-	arrow:setImage(RegisterImage(0xA329D34E09A410))
+	arrow:setImage(RegisterImage(@"uie_ui_hud_core_waypoint_arrow_02"))
 	self:addElement(arrow)
 	self.arrow = arrow
 	if PostLoadFunc then

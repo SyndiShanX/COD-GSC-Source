@@ -37,11 +37,11 @@ CoD.SupplyChainFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	local CurrentSeasonText = LUI.UIText.new(0.5, 0.5, -814, 310, 0, 0, 135, 172)
 	CurrentSeasonText:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	CurrentSeasonText:setAlpha(0)
-	CurrentSeasonText:setText(LocalizeToUpperString(0x6CBF773605247A2))
+	CurrentSeasonText:setText(LocalizeToUpperString(@"hash_26CBF773605247A2"))
 	CurrentSeasonText:setTTF("ttmussels_regular")
 	CurrentSeasonText:setLetterSpacing(8)
-	CurrentSeasonText:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	CurrentSeasonText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	CurrentSeasonText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	CurrentSeasonText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(CurrentSeasonText)
 	self.CurrentSeasonText = CurrentSeasonText
 	local ItemList = LUI.UIList.new(f1_arg0, f1_arg1, 4, 0, nil, false, false, false, false)
@@ -51,17 +51,17 @@ CoD.SupplyChainFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	ItemList:setHorizontalCount(5)
 	ItemList:setVerticalCount(5)
 	ItemList:setSpacing(4)
-	ItemList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	ItemList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	ItemList:setDataSource("LootTierItems")
 	ItemList:appendEventHandler("input_source_changed", function(f2_arg0, f2_arg1)
 		f2_arg1.menu = f2_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f2_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f2_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	local CurrentTier = ItemList
 	local SupplyChainDetails = ItemList.subscribeToModel
-	local PurchaseTiers = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local PurchaseTiers = Engine[@"getmodelforcontroller"](f1_arg1)
 	SupplyChainDetails(CurrentTier, PurchaseTiers.LastInput, function(f3_arg0, f3_arg1)
-		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end, false)
 	ItemList:registerEventHandler("list_item_gain_focus", function(element, event)
 		local f4_local0 = nil
@@ -145,12 +145,12 @@ CoD.SupplyChainFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 		elseif element.super.gainFocus then
 			f9_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x57783F8DA4AAEF])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x571F08AD84807E0])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_left"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_right"])
 		return f9_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(ItemList, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(ItemList, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if IsMouseOrKeyboard(controller) then
 			SetCurrentElementAsActive(self, element, controller)
 			CoD.BlackMarketUtility.AutoPlayGestureIfApplicable(menu, element, controller)
@@ -163,16 +163,16 @@ CoD.SupplyChainFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 		end
 	end, function(element, menu, controller)
 		if IsMouseOrKeyboard(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, nil)
 			return false
 		elseif AlwaysFalse() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x871519113740169, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_2871519113740169", nil, nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(ItemList, f1_arg1, Enum[0x3DD78803F918E9D][0x57783F8DA4AAEF], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(ItemList, f1_arg1, Enum[@"luibutton"][@"lui_key_left"], nil, function(element, menu, controller, model)
 		if IsDpadButton(model) and CoD.GridAndListUtility.IsElementAtColumnIndex(element, 1) and not CoD.BlackMarketUtility.IsTierItemInUpsellRow(controller, element) and not IsMenuInState(menu, "Processing") then
 			SetFocusedTierModelValue(controller, "1", "decrement")
 			CoD.PlayerRoleUtility.StopGesturePreview(menu, controller)
@@ -182,13 +182,13 @@ CoD.SupplyChainFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 		end
 	end, function(element, menu, controller)
 		if IsDpadButton(nil) and CoD.GridAndListUtility.IsElementAtColumnIndex(element, 1) and not CoD.BlackMarketUtility.IsTierItemInUpsellRow(controller, element) and not IsMenuInState(menu, "Processing") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x57783F8DA4AAEF], 0x0, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_left"], @"hash_0", nil, nil)
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(ItemList, f1_arg1, Enum[0x3DD78803F918E9D][0x571F08AD84807E0], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(ItemList, f1_arg1, Enum[@"luibutton"][@"lui_key_right"], nil, function(element, menu, controller, model)
 		if IsDpadButton(model) and CoD.GridAndListUtility.IsElementAtColumnIndex(element, 5) and not IsMenuInState(menu, "Processing") then
 			SetFocusedTierModelValue(controller, "1", "increment")
 			CoD.PlayerRoleUtility.StopGesturePreview(menu, controller)
@@ -198,7 +198,7 @@ CoD.SupplyChainFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 		end
 	end, function(element, menu, controller)
 		if IsDpadButton(nil) and CoD.GridAndListUtility.IsElementAtColumnIndex(element, 5) and not IsMenuInState(menu, "Processing") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x571F08AD84807E0], 0x0, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_right"], @"hash_0", nil, nil)
 			return false
 		else
 			return false
@@ -266,7 +266,7 @@ CoD.SupplyChainFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	self:addElement(PurchaseTiers)
 	self.PurchaseTiers = PurchaseTiers
 	local RightPageOver = CoD.BumperButtonWithKeyMouse.new(f1_arg0, f1_arg1, 0.5, 0.5, 236.5, 303.5, 0, 0, 194, 239)
-	RightPageOver.KeyMouseImage:setImage(RegisterImage(0x49AC5C845C7E582))
+	RightPageOver.KeyMouseImage:setImage(RegisterImage(@"uie_bumperright"))
 	RightPageOver:subscribeToGlobalModel(f1_arg1, "Controller", "right_trigger_button_image", function(model)
 		local f24_local0 = model:get()
 		if f24_local0 ~= nil then
@@ -280,15 +280,15 @@ CoD.SupplyChainFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 		elseif element.super.gainFocus then
 			f25_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f25_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(RightPageOver, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(RightPageOver, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		PlaySoundAlias("uin_trigger_slide")
 		SetFocusedTierModelValue(controller, "5", "increment")
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, nil)
 		return false
 	end, false)
 	self:addElement(RightPageOver)
@@ -307,15 +307,15 @@ CoD.SupplyChainFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 		elseif element.super.gainFocus then
 			f29_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f29_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(RightPageOver2, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(RightPageOver2, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		PlaySoundAlias("uin_trigger_slide")
 		SetFocusedTierModelValue(controller, "5", "decrement")
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, nil)
 		return false
 	end, false)
 	self:addElement(RightPageOver2)
@@ -333,8 +333,8 @@ CoD.SupplyChainFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	infoBracketBot:setRGB(0.98, 1, 0.89)
 	infoBracketBot:setAlpha(0.35)
 	infoBracketBot:setZRot(180)
-	infoBracketBot:setImage(RegisterImage(0xC325BED3F226657))
-	infoBracketBot:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	infoBracketBot:setImage(RegisterImage(@"hash_4C325BED3F226657"))
+	infoBracketBot:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
 	infoBracketBot:setShaderVector(0, 0, 0, 0, 0)
 	infoBracketBot:setupNineSliceShader(16, 4)
 	self:addElement(infoBracketBot)
@@ -357,7 +357,7 @@ CoD.SupplyChainFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	})
 	local StartMenuSmallTierLevel = PurchaseButton
 	local TransactionDeepLinkButton = PurchaseButton.subscribeToModel
-	local StreamList = Engine[0x8DF2E5447F384B9]()
+	local StreamList = Engine[@"getglobalmodel"]()
 	TransactionDeepLinkButton(StartMenuSmallTierLevel, StreamList["lobbyRoot.lobbyNetworkMode"], function(f34_arg0)
 		f1_arg0:updateElementState(PurchaseButton, {
 			name = "model_validation",
@@ -373,7 +373,7 @@ CoD.SupplyChainFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	end)
 	StartMenuSmallTierLevel = PurchaseButton
 	TransactionDeepLinkButton = PurchaseButton.subscribeToModel
-	StreamList = Engine[0x4DF5CFBC1771947](f1_arg1)
+	StreamList = Engine[@"getmodelforcontroller"](f1_arg1)
 	TransactionDeepLinkButton(StartMenuSmallTierLevel, StreamList.LastInput, function(f36_arg0)
 		f1_arg0:updateElementState(PurchaseButton, {
 			name = "model_validation",
@@ -383,7 +383,7 @@ CoD.SupplyChainFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 			modelName = "LastInput",
 		})
 	end, false)
-	PurchaseButton.ButtonTitle:setText(LocalizeToUpperString(0x85952ACC6D0C1B0))
+	PurchaseButton.ButtonTitle:setText(LocalizeToUpperString(@"menu/purchase"))
 	PurchaseButton:registerEventHandler("gain_focus", function(element, event)
 		local f37_local0 = nil
 		if element.gainFocus then
@@ -391,15 +391,15 @@ CoD.SupplyChainFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 		elseif element.super.gainFocus then
 			f37_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f37_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(PurchaseButton, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(PurchaseButton, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		CoD.BlackMarketUtility.SetHighlightedPurchaseTierFromItemList(controller, self.ItemList)
 		CoD.BlackMarketUtility.PCOpenPurchaseTiersConfirmation(self, "PurchaseTiersConfirmation", controller, self.ItemList)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, nil)
 		return false
 	end, false)
 	self:addElement(PurchaseButton)
@@ -414,8 +414,8 @@ CoD.SupplyChainFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 			end,
 		},
 	})
-	TransactionDeepLinkButton.DirectorCustomStartButton.MiddleText:setText(LocalizeToUpperString(0x4031C820A02E7BA))
-	TransactionDeepLinkButton.DirectorCustomStartButton.MiddleTextFocus:setText(LocalizeToUpperString(0x4031C820A02E7BA))
+	TransactionDeepLinkButton.DirectorCustomStartButton.MiddleText:setText(LocalizeToUpperString(@"hash_44031C820A02E7BA"))
+	TransactionDeepLinkButton.DirectorCustomStartButton.MiddleTextFocus:setText(LocalizeToUpperString(@"hash_44031C820A02E7BA"))
 	TransactionDeepLinkButton:registerEventHandler("gain_focus", function(element, event)
 		local f41_local0 = nil
 		if element.gainFocus then
@@ -423,10 +423,10 @@ CoD.SupplyChainFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 		elseif element.super.gainFocus then
 			f41_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_none"])
 		return f41_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(TransactionDeepLinkButton, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(TransactionDeepLinkButton, f1_arg1, Enum[@"luibutton"][@"lui_key_none"], "ui_confirm", function(element, menu, controller, model)
 		if IsPC() and CoD.PCKoreaUtility.IsInKorea() then
 			CoD.PCKoreaUtility.OpenTransactionsDeepLinkBlackmarket(controller)
 			return true
@@ -434,13 +434,13 @@ CoD.SupplyChainFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 		end
 	end, function(element, menu, controller)
 		if IsPC() and CoD.PCKoreaUtility.IsInKorea() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "ui_confirm")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(TransactionDeepLinkButton, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "MOUSE1", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(TransactionDeepLinkButton, f1_arg1, Enum[@"luibutton"][@"lui_key_none"], "MOUSE1", function(element, menu, controller, model)
 		if IsPC() and CoD.PCKoreaUtility.IsInKorea() then
 			CoD.PCKoreaUtility.OpenTransactionsDeepLinkBlackmarket(controller)
 			return true
@@ -448,7 +448,7 @@ CoD.SupplyChainFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 		end
 	end, function(element, menu, controller)
 		if IsPC() and CoD.PCKoreaUtility.IsInKorea() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "MOUSE1")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "MOUSE1")
 			return false
 		else
 			return false
@@ -478,10 +478,10 @@ CoD.SupplyChainFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 		elseif element.super.gainFocus then
 			f47_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f47_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(SpecialDeal, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(SpecialDeal, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if IsElementInState(element, "HasAction") then
 			CoD.BlackMarketUtility.SpecialDealAction(self, element, controller, menu)
 			return true
@@ -489,7 +489,7 @@ CoD.SupplyChainFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 		end
 	end, function(element, menu, controller)
 		if IsElementInState(element, "HasAction") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		else
 			return false
@@ -524,19 +524,19 @@ CoD.SupplyChainFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	self:addElement(DiscountTiersWidget)
 	self.DiscountTiersWidget = DiscountTiersWidget
 	self:linkToElementModel(self, "movieName", true, function(model, f54_arg1)
-		CoD.Menu.UpdateButtonShownState(f54_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
+		CoD.Menu.UpdateButtonShownState(f54_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"])
 	end)
 	self:appendEventHandler("input_source_changed", function(f55_arg0, f55_arg1)
 		f55_arg1.menu = f55_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f55_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
+		CoD.Menu.UpdateButtonShownState(f55_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"])
 	end)
 	local f1_local18 = self
 	local f1_local19 = self.subscribeToModel
-	local f1_local20 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local20 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local19(f1_local18, f1_local20.LastInput, function(f56_arg0, f56_arg1)
-		CoD.Menu.UpdateButtonShownState(f56_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
+		CoD.Menu.UpdateButtonShownState(f56_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"])
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB], "ui_remove", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"], "ui_remove", function(element, menu, controller, model)
 		if CoD.ModelUtility.IsSelfModelValueNonEmptyString(self.ItemList, controller, "movieName") and IsMouseOrKeyboard(controller) then
 			SetControllerModelValue(controller, "LootStreamProgress.playAnimation", false)
 			CoD.VideoStreamingUtility.SetupVoDMovie(controller, self.ItemList, "")
@@ -548,7 +548,7 @@ CoD.SupplyChainFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 		end
 	end, function(element, menu, controller)
 		if CoD.ModelUtility.IsSelfModelValueNonEmptyString(self.ItemList, controller, "movieName") and IsMouseOrKeyboard(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xA86619565BE54DB], 0x0, nil, "ui_remove")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_pckey_2"], @"hash_0", nil, "ui_remove")
 			return false
 		else
 			return false

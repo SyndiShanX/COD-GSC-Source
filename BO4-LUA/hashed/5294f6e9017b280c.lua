@@ -16,29 +16,29 @@ CoD.WeaponVariantListWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	SignatureWeaponList:setWidgetType(CoD.SignatureWeaponGridItem)
 	SignatureWeaponList:setHorizontalCount(5)
 	SignatureWeaponList:setSpacing(0)
-	SignatureWeaponList:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	SignatureWeaponList:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	SignatureWeaponList:setDataSource("SignatureWeapons")
 	SignatureWeaponList:linkToElementModel(SignatureWeaponList, "owned", true, function(model, f2_arg1)
-		CoD.Menu.UpdateButtonShownState(f2_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f2_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	SignatureWeaponList:linkToElementModel(SignatureWeaponList, "itemIndex", true, function(model, f3_arg1)
-		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	SignatureWeaponList:appendEventHandler("input_source_changed", function(f4_arg0, f4_arg1)
 		f4_arg1.menu = f4_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f4_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
-		CoD.Menu.UpdateButtonShownState(f4_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+		CoD.Menu.UpdateButtonShownState(f4_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+		CoD.Menu.UpdateButtonShownState(f4_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 	end)
 	local f1_local2 = SignatureWeaponList
 	local WeaponVariantHeader = SignatureWeaponList.subscribeToModel
-	local f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	WeaponVariantHeader(f1_local2, f1_local4.LastInput, function(f5_arg0, f5_arg1)
-		CoD.Menu.UpdateButtonShownState(f5_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
-		CoD.Menu.UpdateButtonShownState(f5_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+		CoD.Menu.UpdateButtonShownState(f5_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+		CoD.Menu.UpdateButtonShownState(f5_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 	end, false)
 	SignatureWeaponList:linkToElementModel(SignatureWeaponList, "ref", true, function(model, f6_arg1)
-		CoD.Menu.UpdateButtonShownState(f6_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
-		CoD.Menu.UpdateButtonShownState(f6_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+		CoD.Menu.UpdateButtonShownState(f6_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+		CoD.Menu.UpdateButtonShownState(f6_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 	end)
 	SignatureWeaponList:registerEventHandler("list_item_gain_focus", function(element, event)
 		local f7_local0 = nil
@@ -54,12 +54,12 @@ CoD.WeaponVariantListWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 		elseif element.super.gainFocus then
 			f8_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 		return f8_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(SignatureWeaponList, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(SignatureWeaponList, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if IsSelfPropertyValue(self, "_forPaintshop", true) and CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "owned") and not CoD.CACUtility.IsSignatureWeaponLockedByProgression(menu, element, controller) then
 			CoD.CACUtility.HideWeaponVariantList(menu, controller)
 			SetControllerModelValue(controller, "PaintjobWeaponVariantListShown", false)
@@ -96,25 +96,25 @@ CoD.WeaponVariantListWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 		end
 	end, function(element, menu, controller)
 		if IsSelfPropertyValue(self, "_forPaintshop", true) and CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "owned") and not CoD.CACUtility.IsSignatureWeaponLockedByProgression(menu, element, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		elseif IsSelfPropertyValue(self, "_forWZArmory", true) and CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "owned") and not CoD.CACUtility.IsSignatureWeaponLockedByProgression(menu, element, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		elseif IsSelfPropertyValue(self, "_forZMArmory", true) and IsElementPropertyValue(menu, "_loadoutSlot", CoD.ZMLoadoutUtility.StartWeaponLoadoutSlotName) and CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "owned") and not CoD.CACUtility.IsSignatureWeaponLockedByProgression(menu, element, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		elseif IsSelfPropertyValue(self, "_forZMArmory", true) and IsElementPropertyValue(menu, "_loadoutSlot", "armory") and CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "owned") and not CoD.CACUtility.IsSignatureWeaponLockedByProgression(menu, element, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		elseif CoD.ModelUtility.IsSelfModelValueTrue(element, controller, "owned") and not CoD.CACUtility.IsSignatureWeaponLockedByProgression(menu, element, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(SignatureWeaponList, f1_arg1, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(SignatureWeaponList, f1_arg1, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], nil, function(element, menu, controller, model)
 		if IsGamepad(controller) and CoD.ModelUtility.IsSelfModelValueNonEmptyString(element, controller, "ref") then
 			CoD.WeaponOptionsUtility.OpenActiveCamoStageDetailsOverlay(menu, controller, "CamoPersonalizationDetails", element, true)
 			return true
@@ -122,13 +122,13 @@ CoD.WeaponVariantListWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 		end
 	end, function(element, menu, controller)
 		if IsGamepad(controller) and CoD.ModelUtility.IsSelfModelValueNonEmptyString(element, controller, "ref") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xE6DB407A2AF8B09], 0xB1A784560EDFEA7, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], @"menu/details", nil, nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(SignatureWeaponList, f1_arg1, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], "ui_contextual_1", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(SignatureWeaponList, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], "ui_contextual_1", function(element, menu, controller, model)
 		if IsMouseOrKeyboard(controller) and CoD.ModelUtility.IsSelfModelValueNonEmptyString(element, controller, "ref") then
 			CoD.WeaponOptionsUtility.OpenActiveCamoStageDetailsOverlay(menu, controller, "CamoPersonalizationDetails", element, true)
 			return true
@@ -136,13 +136,13 @@ CoD.WeaponVariantListWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 		end
 	end, function(element, menu, controller)
 		if IsMouseOrKeyboard(controller) and CoD.ModelUtility.IsSelfModelValueNonEmptyString(element, controller, "ref") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0xB1A784560EDFEA7, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "ui_contextual_1")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"menu/details", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "ui_contextual_1")
 			return true
 		else
 			return false
 		end
 	end, false)
-	SignatureWeaponList:AddContextualMenuAction(f1_arg0, f1_arg1, 0xB1A784560EDFEA7, function(f15_arg0, f15_arg1, f15_arg2, f15_arg3)
+	SignatureWeaponList:AddContextualMenuAction(f1_arg0, f1_arg1, @"menu/details", function(f15_arg0, f15_arg1, f15_arg2, f15_arg3)
 		if CoD.ModelUtility.IsSelfModelValueNonEmptyString(f15_arg0, f15_arg2, "ref") then
 			return function(f16_arg0, f16_arg1, f16_arg2, f16_arg3)
 				CoD.WeaponOptionsUtility.OpenActiveCamoStageDetailsOverlay(f16_arg1, f16_arg2, "CamoPersonalizationDetails", f16_arg0, true)
@@ -156,11 +156,11 @@ CoD.WeaponVariantListWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	WeaponVariantHeader:setRGB(0.66, 0.63, 0.52)
 	WeaponVariantHeader:setTTF("notosans_bold")
 	WeaponVariantHeader:setLetterSpacing(3)
-	WeaponVariantHeader:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	WeaponVariantHeader:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	WeaponVariantHeader:linkToElementModel(self, "baseWeaponName", true, function(model)
 		local f17_local0 = model:get()
 		if f17_local0 ~= nil then
-			WeaponVariantHeader:setText(ConvertToUpperString(LocalizeIntoString(0xA2F52A674AD0E03, f17_local0)))
+			WeaponVariantHeader:setText(ConvertToUpperString(LocalizeIntoString(@"hash_4A2F52A674AD0E03", f17_local0)))
 		end
 	end)
 	self:addElement(WeaponVariantHeader)

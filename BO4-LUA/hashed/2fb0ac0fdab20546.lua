@@ -19,10 +19,10 @@ LUI.createMenu.ChooseSpecialistMidMatch = function(f1_arg0, f1_arg1)
 	self.StartMenuOptionsBackground = StartMenuOptionsBackground
 	local specialistRespawnDesc = LUI.UIText.new(0.5, 0.5, -281.5, 281.5, 0, 0, 256, 289)
 	specialistRespawnDesc:setZoom(10)
-	specialistRespawnDesc:setText(LocalizeToUpperString(0xAC6339F7CCE11C4))
+	specialistRespawnDesc:setText(LocalizeToUpperString(@"hash_4AC6339F7CCE11C4"))
 	specialistRespawnDesc:setTTF("ttmussels_demibold")
-	specialistRespawnDesc:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	specialistRespawnDesc:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	specialistRespawnDesc:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	specialistRespawnDesc:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(specialistRespawnDesc)
 	self.specialistRespawnDesc = specialistRespawnDesc
 	local Characters = LUI.UIList.new(f1_local1, f1_arg0, 2, 0, nil, false, false, false, false)
@@ -36,7 +36,7 @@ LUI.createMenu.ChooseSpecialistMidMatch = function(f1_arg0, f1_arg1)
 	})
 	local SignatureEquipment = Characters
 	local SignatureAbility = Characters.subscribeToModel
-	local ChangeClassButton = Engine[0x4DF5CFBC1771947](f1_arg0)
+	local ChangeClassButton = Engine[@"getmodelforcontroller"](f1_arg0)
 	SignatureAbility(SignatureEquipment, ChangeClassButton["PositionEditLoadout.SelectedCharacterIndex"], function(f3_arg0)
 		f1_local1:updateElementState(Characters, {
 			name = "model_validation",
@@ -84,7 +84,7 @@ LUI.createMenu.ChooseSpecialistMidMatch = function(f1_arg0, f1_arg1)
 	end)
 	SignatureEquipment = Characters
 	SignatureAbility = Characters.subscribeToModel
-	ChangeClassButton = Engine[0x8DF2E5447F384B9]()
+	ChangeClassButton = Engine[@"getglobalmodel"]()
 	SignatureAbility(SignatureEquipment, ChangeClassButton["hudItems.specialistSwitchIsLethal"], function(f8_arg0)
 		f1_local1:updateElementState(Characters, {
 			name = "model_validation",
@@ -96,14 +96,14 @@ LUI.createMenu.ChooseSpecialistMidMatch = function(f1_arg0, f1_arg1)
 	end, false)
 	SignatureEquipment = Characters
 	SignatureAbility = Characters.subscribeToModel
-	ChangeClassButton = Engine[0x4DF5CFBC1771947](f1_arg0)
-	SignatureAbility(SignatureEquipment, ChangeClassButton["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x534C7B2375D2D47]], function(f9_arg0)
+	ChangeClassButton = Engine[@"getmodelforcontroller"](f1_arg0)
+	SignatureAbility(SignatureEquipment, ChangeClassButton["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_player_dead"]], function(f9_arg0)
 		f1_local1:updateElementState(Characters, {
 			name = "model_validation",
 			menu = f1_local1,
 			controller = f1_arg0,
 			modelValue = f9_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x534C7B2375D2D47],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_player_dead"],
 		})
 	end, false)
 	Characters:setLeftRight(0.5, 0.5, -594, 594)
@@ -112,7 +112,7 @@ LUI.createMenu.ChooseSpecialistMidMatch = function(f1_arg0, f1_arg1)
 	Characters:setHorizontalCount(7)
 	Characters:setVerticalCount(2)
 	Characters:setBalanceGridRows(true)
-	Characters:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	Characters:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	Characters:setDataSource("PositionDraftCharacters")
 	Characters:registerEventHandler("lose_list_focus", function(element, event)
 		local f10_local0 = nil
@@ -126,10 +126,10 @@ LUI.createMenu.ChooseSpecialistMidMatch = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f11_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f11_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(Characters, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(Characters, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if IsInDefaultState(element) then
 			CoD.PlayerRoleUtility.InGameChangeSpecialist(element, controller)
 			PlaySoundAlias("uin_start_char_select")
@@ -138,7 +138,7 @@ LUI.createMenu.ChooseSpecialistMidMatch = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if IsInDefaultState(element) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false
@@ -158,8 +158,8 @@ LUI.createMenu.ChooseSpecialistMidMatch = function(f1_arg0, f1_arg1)
 	self.SignatureEquipment = SignatureEquipment
 	ChangeClassButton = CoD.DirectorGenericButton.new(f1_local1, f1_arg0, 0.5, 0.5, -125, 125, 1, 1, -356, -264)
 	ChangeClassButton:setScale(0.8, 0.8)
-	ChangeClassButton.DirectorSelectButtonMiniInternal.MiddleText:setText(LocalizeToUpperString(0x83E3BA6F8C2DB04))
-	ChangeClassButton.DirectorSelectButtonMiniInternal.MiddleTextFocus:setText(LocalizeToUpperString(0x83E3BA6F8C2DB04))
+	ChangeClassButton.DirectorSelectButtonMiniInternal.MiddleText:setText(LocalizeToUpperString(@"hash_783E3BA6F8C2DB04"))
+	ChangeClassButton.DirectorSelectButtonMiniInternal.MiddleTextFocus:setText(LocalizeToUpperString(@"hash_783E3BA6F8C2DB04"))
 	ChangeClassButton:registerEventHandler("gain_focus", function(element, event)
 		local f14_local0 = nil
 		if element.gainFocus then
@@ -167,14 +167,14 @@ LUI.createMenu.ChooseSpecialistMidMatch = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f14_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f14_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(ChangeClassButton, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(ChangeClassButton, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		CoD.StartMenuUtility.ShowClassSelectSlideout(menu, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 		return false
 	end, false)
 	self:addElement(ChangeClassButton)

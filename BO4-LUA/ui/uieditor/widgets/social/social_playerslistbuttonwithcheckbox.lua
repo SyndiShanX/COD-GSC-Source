@@ -50,7 +50,7 @@ CoD.Social_PlayersListButtonWithCheckbox.new = function(f1_arg0, f1_arg1, f1_arg
 	end)
 	local f1_local2 = ButtonInternal
 	local NineSliceShaderImage = ButtonInternal.subscribeToModel
-	local f1_local4 = Engine[0x8DF2E5447F384B9]()
+	local f1_local4 = Engine[@"getglobalmodel"]()
 	NineSliceShaderImage(f1_local2, f1_local4["socialRoot.leaderboardsPlayerListActive"], function(f6_arg0)
 		f1_arg0:updateElementState(ButtonInternal, {
 			name = "model_validation",
@@ -71,7 +71,7 @@ CoD.Social_PlayersListButtonWithCheckbox.new = function(f1_arg0, f1_arg1, f1_arg
 	end)
 	f1_local2 = ButtonInternal
 	NineSliceShaderImage = ButtonInternal.subscribeToModel
-	f1_local4 = Engine[0x8DF2E5447F384B9]()
+	f1_local4 = Engine[@"getglobalmodel"]()
 	NineSliceShaderImage(f1_local2, f1_local4["socialRoot.playersListFull"], function(f8_arg0)
 		f1_arg0:updateElementState(ButtonInternal, {
 			name = "model_validation",
@@ -83,7 +83,7 @@ CoD.Social_PlayersListButtonWithCheckbox.new = function(f1_arg0, f1_arg1, f1_arg
 	end, false)
 	f1_local2 = ButtonInternal
 	NineSliceShaderImage = ButtonInternal.subscribeToModel
-	f1_local4 = Engine[0x8DF2E5447F384B9]()
+	f1_local4 = Engine[@"getglobalmodel"]()
 	NineSliceShaderImage(f1_local2, f1_local4["socialRoot.showPlayersList"], function(f9_arg0)
 		f1_arg0:updateElementState(ButtonInternal, {
 			name = "model_validation",
@@ -104,7 +104,7 @@ CoD.Social_PlayersListButtonWithCheckbox.new = function(f1_arg0, f1_arg1, f1_arg
 	end)
 	f1_local2 = ButtonInternal
 	NineSliceShaderImage = ButtonInternal.subscribeToModel
-	f1_local4 = Engine[0x8DF2E5447F384B9]()
+	f1_local4 = Engine[@"getglobalmodel"]()
 	NineSliceShaderImage(f1_local2, f1_local4["lobbyRoot.lobbyNav"], function(f11_arg0)
 		f1_arg0:updateElementState(ButtonInternal, {
 			name = "model_validation",
@@ -164,7 +164,7 @@ CoD.Social_PlayersListButtonWithCheckbox.new = function(f1_arg0, f1_arg1, f1_arg
 		{
 			stateName = "Empty",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "xuid", Engine[0x9073FBE2D48C156]("0"))
+				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "xuid", Engine[@"stringtoxuiddecimal"]("0"))
 			end,
 		},
 	})
@@ -178,9 +178,9 @@ CoD.Social_PlayersListButtonWithCheckbox.new = function(f1_arg0, f1_arg1, f1_arg
 		})
 	end)
 	self:linkToElementModel(self, "checked", true, function(model, f20_arg1)
-		CoD.Menu.UpdateButtonShownState(f20_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f20_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if IsPC() and CoD.ModelUtility.IsSelfModelValueTrue(self, controller, "checked") and not IsCurrentMenu(menu, "Leaderboards_PlayersList") then
 			CoD.SocialUtility.ToggleInviteCheckbox(controller, self)
 			return true
@@ -197,16 +197,16 @@ CoD.Social_PlayersListButtonWithCheckbox.new = function(f1_arg0, f1_arg1, f1_arg
 		end
 	end, function(element, menu, controller)
 		if IsPC() and CoD.ModelUtility.IsSelfModelValueTrue(self, controller, "checked") and not IsCurrentMenu(menu, "Leaderboards_PlayersList") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 			return false
 		elseif IsPC() and not IsCurrentMenu(menu, "Leaderboards_PlayersList") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 			return false
 		elseif IsPC() and CoD.ModelUtility.IsSelfModelValueTrue(self, controller, "checked") and IsCurrentMenu(menu, "Leaderboards_PlayersList") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 			return false
 		elseif IsPC() and IsCurrentMenu(menu, "Leaderboards_PlayersList") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 			return false
 		else
 			return false

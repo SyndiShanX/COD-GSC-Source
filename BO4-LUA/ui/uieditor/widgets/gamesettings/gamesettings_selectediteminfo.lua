@@ -46,16 +46,16 @@ CoD.GameSettings_SelectedItemInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	SpecialistCornerL:setAlpha(0.2)
 	SpecialistCornerL:setZRot(90)
 	SpecialistCornerL:setScale(0.5, 0.5)
-	SpecialistCornerL:setImage(RegisterImage(0x8DC834094E7A02C))
-	SpecialistCornerL:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	SpecialistCornerL:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_window_corner"))
+	SpecialistCornerL:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	SpecialistCornerL:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(SpecialistCornerL)
 	self.SpecialistCornerL = SpecialistCornerL
 	local SpecialistCornerL2 = LUI.UIImage.new(0.5, 0.5, 847, 871, 0, 0, 1006, 1030)
 	SpecialistCornerL2:setAlpha(0.2)
 	SpecialistCornerL2:setScale(0.5, 0.5)
-	SpecialistCornerL2:setImage(RegisterImage(0x8DC834094E7A02C))
-	SpecialistCornerL2:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	SpecialistCornerL2:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_window_corner"))
+	SpecialistCornerL2:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	SpecialistCornerL2:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(SpecialistCornerL2)
 	self.SpecialistCornerL2 = SpecialistCornerL2
@@ -63,8 +63,8 @@ CoD.GameSettings_SelectedItemInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	SpecialistCornerL3:setAlpha(0.2)
 	SpecialistCornerL3:setYRot(180)
 	SpecialistCornerL3:setScale(0.5, 0.5)
-	SpecialistCornerL3:setImage(RegisterImage(0x8DC834094E7A02C))
-	SpecialistCornerL3:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	SpecialistCornerL3:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_window_corner"))
+	SpecialistCornerL3:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	SpecialistCornerL3:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(SpecialistCornerL3)
 	self.SpecialistCornerL3 = SpecialistCornerL3
@@ -72,8 +72,8 @@ CoD.GameSettings_SelectedItemInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	SpecialistCornerR:setAlpha(0.2)
 	SpecialistCornerR:setZRot(180)
 	SpecialistCornerR:setScale(0.5, 0.5)
-	SpecialistCornerR:setImage(RegisterImage(0x8DC834094E7A02C))
-	SpecialistCornerR:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	SpecialistCornerR:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_window_corner"))
+	SpecialistCornerR:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	SpecialistCornerR:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(SpecialistCornerR)
 	self.SpecialistCornerR = SpecialistCornerR
@@ -127,7 +127,7 @@ CoD.GameSettings_SelectedItemInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	})
 	local f1_local19 = self
 	local f1_local20 = self.subscribeToModel
-	local f1_local21 = Engine[0x8DF2E5447F384B9]()
+	local f1_local21 = Engine[@"getglobalmodel"]()
 	f1_local20(f1_local19, f1_local21["GametypeSettings.showLargePreview"], function(f6_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -139,7 +139,7 @@ CoD.GameSettings_SelectedItemInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	end, false)
 	f1_local19 = self
 	f1_local20 = self.subscribeToModel
-	f1_local21 = Engine[0x8DF2E5447F384B9]()
+	f1_local21 = Engine[@"getglobalmodel"]()
 	f1_local20(f1_local19, f1_local21["GametypeSettings.showSmallPreview"], function(f7_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

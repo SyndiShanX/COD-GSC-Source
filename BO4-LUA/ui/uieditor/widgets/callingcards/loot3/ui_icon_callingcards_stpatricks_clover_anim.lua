@@ -8,71 +8,71 @@ CoD.ui_icon_callingcards_stpatricks_clover_anim.new = function(f1_arg0, f1_arg1,
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local clover = LUI.UIImage.new(0, 0, 0, 56, 0, 0, 56, 112)
-	clover:setImage(RegisterImage(0x256ABD08EB0C2C4))
+	clover:setImage(RegisterImage(@"uie_st_patricks_frame_02_clover1"))
 	self:addElement(clover)
 	self.clover = clover
 	local clover2 = LUI.UIImage.new(0, 0, 28, 84, 0, 0, 0, 56)
-	clover2:setImage(RegisterImage(0x256AED08EB0C7DD))
+	clover2:setImage(RegisterImage(@"uie_st_patricks_frame_02_clover2"))
 	self:addElement(clover2)
 	self.clover2 = clover2
 	local Image2 = LUI.UIImage.new(0, 0, 126, 161, 0, 0, 18, 53)
-	Image2:setImage(RegisterImage(0x256ABD08EB0C2C4))
+	Image2:setImage(RegisterImage(@"uie_st_patricks_frame_02_clover1"))
 	self:addElement(Image2)
 	self.Image2 = Image2
 	local Image = LUI.UIImage.new(0, 0, 65, 121, 0, 0, 57, 113)
-	Image:setImage(RegisterImage(0x256AED08EB0C7DD))
+	Image:setImage(RegisterImage(@"uie_st_patricks_frame_02_clover2"))
 	self:addElement(Image)
 	self.Image = Image
 	local Image3 = LUI.UIImage.new(0, 0, 144.5, 179.5, 0, 0, 90, 125)
-	Image3:setImage(RegisterImage(0x256ABD08EB0C2C4))
+	Image3:setImage(RegisterImage(@"uie_st_patricks_frame_02_clover1"))
 	self:addElement(Image3)
 	self.Image3 = Image3
 	local Image4 = LUI.UIImage.new(0, 0, 143.5, 199.5, 0, 0, 121, 177)
-	Image4:setImage(RegisterImage(0x256AED08EB0C7DD))
+	Image4:setImage(RegisterImage(@"uie_st_patricks_frame_02_clover2"))
 	self:addElement(Image4)
 	self.Image4 = Image4
 	local Image5 = LUI.UIImage.new(0, 0, 181.5, 237.5, 0, 0, 65, 121)
-	Image5:setImage(RegisterImage(0x256AED08EB0C7DD))
+	Image5:setImage(RegisterImage(@"uie_st_patricks_frame_02_clover2"))
 	self:addElement(Image5)
 	self.Image5 = Image5
 	local Image6 = LUI.UIImage.new(0, 0, 219.5, 275.5, 0, 0, 110, 166)
-	Image6:setImage(RegisterImage(0x256AED08EB0C7DD))
+	Image6:setImage(RegisterImage(@"uie_st_patricks_frame_02_clover2"))
 	self:addElement(Image6)
 	self.Image6 = Image6
 	local Image7 = LUI.UIImage.new(0, 0, 250.5, 296.5, 0, 0, 69.5, 115.5)
-	Image7:setImage(RegisterImage(0x256AED08EB0C7DD))
+	Image7:setImage(RegisterImage(@"uie_st_patricks_frame_02_clover2"))
 	self:addElement(Image7)
 	self.Image7 = Image7
 	local Image8 = LUI.UIImage.new(0, 0, 292.5, 338.5, 0, 0, 75, 121)
-	Image8:setImage(RegisterImage(0x256AED08EB0C7DD))
+	Image8:setImage(RegisterImage(@"uie_st_patricks_frame_02_clover2"))
 	self:addElement(Image8)
 	self.Image8 = Image8
 	local Image10 = LUI.UIImage.new(0, 0, 280, 322, 0, 0, 130, 172)
-	Image10:setImage(RegisterImage(0x256AED08EB0C7DD))
+	Image10:setImage(RegisterImage(@"uie_st_patricks_frame_02_clover2"))
 	self:addElement(Image10)
 	self.Image10 = Image10
 	local Image9 = LUI.UIImage.new(0, 0, 322, 370, 0, 0, 115.5, 163.5)
-	Image9:setImage(RegisterImage(0x256ABD08EB0C2C4))
+	Image9:setImage(RegisterImage(@"uie_st_patricks_frame_02_clover1"))
 	self:addElement(Image9)
 	self.Image9 = Image9
 	local Image12 = LUI.UIImage.new(0, 0, 362, 384, 0, 0, 147.5, 169.5)
-	Image12:setImage(RegisterImage(0x256ABD08EB0C2C4))
+	Image12:setImage(RegisterImage(@"uie_st_patricks_frame_02_clover1"))
 	self:addElement(Image12)
 	self.Image12 = Image12
 	local Image11 = LUI.UIImage.new(0, 0, 334, 367, 0, 0, 172, 205)
-	Image11:setImage(RegisterImage(0x256AED08EB0C7DD))
+	Image11:setImage(RegisterImage(@"uie_st_patricks_frame_02_clover2"))
 	self:addElement(Image11)
 	self.Image11 = Image11
 	local Image13 = LUI.UIImage.new(0, 0, 381, 407, 0, 0, 179, 205)
-	Image13:setImage(RegisterImage(0x256ABD08EB0C2C4))
+	Image13:setImage(RegisterImage(@"uie_st_patricks_frame_02_clover1"))
 	self:addElement(Image13)
 	self.Image13 = Image13
 	local Image14 = LUI.UIImage.new(0, 0, 414, 439, 0, 0, 176, 201)
-	Image14:setImage(RegisterImage(0x256ABD08EB0C2C4))
+	Image14:setImage(RegisterImage(@"uie_st_patricks_frame_02_clover1"))
 	self:addElement(Image14)
 	self.Image14 = Image14
 	local Image15 = LUI.UIImage.new(0, 0, 428, 461, 0, 0, 190, 223)
-	Image15:setImage(RegisterImage(0x256AED08EB0C7DD))
+	Image15:setImage(RegisterImage(@"uie_st_patricks_frame_02_clover2"))
 	self:addElement(Image15)
 	self.Image15 = Image15
 	if PostLoadFunc then

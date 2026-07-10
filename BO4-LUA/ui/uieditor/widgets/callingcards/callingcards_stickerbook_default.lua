@@ -18,7 +18,7 @@ CoD.CallingCards_Stickerbook_Default.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	CallingCardGrid:setHorizontalCount(3)
 	CallingCardGrid:setVerticalCount(7)
 	CallingCardGrid:setSpacing(15)
-	CallingCardGrid:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	CallingCardGrid:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	CallingCardGrid:setVerticalCounter(CoD.verticalCounter)
 	CallingCardGrid:setDataSource("CallingCardsDefault")
 	CallingCardGrid:registerEventHandler("list_item_gain_focus", function(element, event)
@@ -35,10 +35,10 @@ CoD.CallingCards_Stickerbook_Default.new = function(f1_arg0, f1_arg1, f1_arg2, f
 		elseif element.super.gainFocus then
 			f3_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f3_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(CallingCardGrid, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(CallingCardGrid, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if not IsElementInState(element, "Locked") then
 			CallingCards_SetPlayerBackground(menu, element, controller)
 			PlaySoundSetSound(self, "action")
@@ -47,7 +47,7 @@ CoD.CallingCards_Stickerbook_Default.new = function(f1_arg0, f1_arg1, f1_arg2, f
 		end
 	end, function(element, menu, controller)
 		if not IsElementInState(element, "Locked") then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false
@@ -78,7 +78,7 @@ CoD.CallingCards_Stickerbook_Default.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	})
 	local f1_local3 = CallingCardProfiler
 	local f1_local4 = CallingCardProfiler.subscribeToModel
-	local f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local4(f1_local3, f1_local5["hudItems.callingCardProfilingType"], function(f9_arg0)
 		f1_arg0:updateElementState(CallingCardProfiler, {
 			name = "model_validation",

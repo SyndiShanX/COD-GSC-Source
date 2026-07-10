@@ -9,8 +9,8 @@ CoD.ScoreboardPlayerWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local BGBlue = LUI.UIImage.new(0.5, 0.5, -43, 43, 0.5, 0.5, -30, 30)
 	BGBlue:setAlpha(0)
-	BGBlue:setImage(RegisterImage(0xED0AEB8D8F30C1D))
-	BGBlue:setMaterial(LUI.UIImage.GetCachedMaterial(0xF755127C95CF5B6))
+	BGBlue:setImage(RegisterImage(@"hash_2ED0AEB8D8F30C1D"))
+	BGBlue:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_F755127C95CF5B6"))
 	BGBlue:setShaderVector(0, 1, 0, 0, 0)
 	BGBlue:subscribeToGlobalModel(f1_arg1, "Factions", "alliesFactionColor", function(model)
 		local f2_local0 = model:get()
@@ -22,8 +22,8 @@ CoD.ScoreboardPlayerWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self.BGBlue = BGBlue
 	local BGRed = LUI.UIImage.new(0.5, 0.5, -43, 43, 0.5, 0.5, -30, 30)
 	BGRed:setAlpha(0)
-	BGRed:setImage(RegisterImage(0xED0AEB8D8F30C1D))
-	BGRed:setMaterial(LUI.UIImage.GetCachedMaterial(0xF755127C95CF5B6))
+	BGRed:setImage(RegisterImage(@"hash_2ED0AEB8D8F30C1D"))
+	BGRed:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_F755127C95CF5B6"))
 	BGRed:setShaderVector(0, 1, 0, 0, 0)
 	BGRed:subscribeToGlobalModel(f1_arg1, "Factions", "axisFactionColor", function(model)
 		local f3_local0 = model:get()
@@ -35,7 +35,7 @@ CoD.ScoreboardPlayerWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self.BGRed = BGRed
 	local BGBueSelected = LUI.UIImage.new(0.5, 0.5, -43, 43, 0.5, 0.5, -30, 30)
 	BGBueSelected:setAlpha(0)
-	BGBueSelected:setImage(RegisterImage(0x73562CFCEF8AD77))
+	BGBueSelected:setImage(RegisterImage(@"hash_773562CFCEF8AD77"))
 	BGBueSelected:subscribeToGlobalModel(f1_arg1, "Factions", "alliesFactionColor", function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
@@ -46,8 +46,8 @@ CoD.ScoreboardPlayerWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self.BGBueSelected = BGBueSelected
 	local BGBueOverlay = LUI.UIImage.new(0.5, 0.5, -43, 43, 0.5, 0.5, -30, 30)
 	BGBueOverlay:setAlpha(0)
-	BGBueOverlay:setImage(RegisterImage(0x73562CFCEF8AD77))
-	BGBueOverlay:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	BGBueOverlay:setImage(RegisterImage(@"hash_773562CFCEF8AD77"))
+	BGBueOverlay:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	BGBueOverlay:subscribeToGlobalModel(f1_arg1, "Factions", "alliesFactionColor", function(model)
 		local f5_local0 = model:get()
 		if f5_local0 ~= nil then
@@ -58,7 +58,7 @@ CoD.ScoreboardPlayerWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self.BGBueOverlay = BGBueOverlay
 	local BGRedSelected = LUI.UIImage.new(0.5, 0.5, -43, 43, 0.5, 0.5, -30, 30)
 	BGRedSelected:setAlpha(0)
-	BGRedSelected:setImage(RegisterImage(0x73562CFCEF8AD77))
+	BGRedSelected:setImage(RegisterImage(@"hash_773562CFCEF8AD77"))
 	BGRedSelected:subscribeToGlobalModel(f1_arg1, "Factions", "axisFactionColor", function(model)
 		local f6_local0 = model:get()
 		if f6_local0 ~= nil then
@@ -69,8 +69,8 @@ CoD.ScoreboardPlayerWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self.BGRedSelected = BGRedSelected
 	local BGRedOverlay = LUI.UIImage.new(0.5, 0.5, -43, 43, 0.5, 0.5, -30, 30)
 	BGRedOverlay:setAlpha(0)
-	BGRedOverlay:setImage(RegisterImage(0x73562CFCEF8AD77))
-	BGRedOverlay:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	BGRedOverlay:setImage(RegisterImage(@"hash_773562CFCEF8AD77"))
+	BGRedOverlay:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	BGRedOverlay:subscribeToGlobalModel(f1_arg1, "Factions", "axisFactionColor", function(model)
 		local f7_local0 = model:get()
 		if f7_local0 ~= nil then
@@ -80,7 +80,7 @@ CoD.ScoreboardPlayerWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self:addElement(BGRedOverlay)
 	self.BGRedOverlay = BGRedOverlay
 	local PlayerIcon = LUI.UIImage.new(0, 0, -5, 93, 0, 0, -16.5, 69.5)
-	PlayerIcon:setMaterial(LUI.UIImage.GetCachedMaterial(0xE992BD5A540E2D))
+	PlayerIcon:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_delta_normal"))
 	PlayerIcon:setShaderVector(0, 0.05, 0.93, 0, 0)
 	PlayerIcon:setShaderVector(1, 0, 0, 0, 0)
 	PlayerIcon:setShaderVector(2, 0.19, 0.89, 0, 0)
@@ -116,13 +116,13 @@ CoD.ScoreboardPlayerWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 		{
 			stateName = "CodcasterTeam1",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "team", Enum[0x13A4717E5AC547][0x2A34B055ADD98AB]) and IsCodCaster(f1_arg1)
+				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "team", Enum[@"team_t"][@"team_allies"]) and IsCodCaster(f1_arg1)
 			end,
 		},
 		{
 			stateName = "CodcasterTeam2",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "team", Enum[0x13A4717E5AC547][0x3F83D7CE4BD7B68]) and IsCodCaster(f1_arg1)
+				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "team", Enum[@"team_t"][@"team_axis"]) and IsCodCaster(f1_arg1)
 			end,
 		},
 	})
@@ -137,7 +137,7 @@ CoD.ScoreboardPlayerWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	end)
 	local f1_local8 = self
 	local f1_local9 = self.subscribeToModel
-	local f1_local10 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local10 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local9(f1_local8, f1_local10["factions.isCoDCaster"], function(f14_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

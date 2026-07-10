@@ -23,7 +23,7 @@ CoD.AARRewardsTab.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 	RewardsList:setWidgetType(CoD.AARWeaponReward)
 	RewardsList:setHorizontalCount(4)
 	RewardsList:setSpacing(30)
-	RewardsList:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	RewardsList:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	RewardsList:setDataSource("AARRewards")
 	RewardsList:subscribeToGlobalModel(f1_arg1, "PerController", "AAR.rewards.newPage", function(model)
 		CoD.AARUtility.UpdateRewardListView(f1_arg1, RewardsList)
@@ -41,7 +41,7 @@ CoD.AARRewardsTab.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 	})
 	local f1_local4 = CommonSecondaryTabBar
 	local f1_local5 = CommonSecondaryTabBar.subscribeToModel
-	local f1_local6 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local6 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local5(f1_local4, f1_local6["AAR.rewards.multiPage"], function(f4_arg0)
 		f1_arg0:updateElementState(CommonSecondaryTabBar, {
 			name = "model_validation",
@@ -77,7 +77,7 @@ CoD.AARRewardsTab.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 	})
 	f1_local4 = self
 	f1_local5 = self.subscribeToModel
-	f1_local6 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local6 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local5(f1_local4, f1_local6["AAR.activeTab"], function(f8_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -89,7 +89,7 @@ CoD.AARRewardsTab.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 	end, false)
 	f1_local4 = self
 	f1_local5 = self.subscribeToModel
-	f1_local6 = Engine[0x8DF2E5447F384B9]()
+	f1_local6 = Engine[@"getglobalmodel"]()
 	f1_local5(f1_local4, f1_local6["lobbyRoot.lobbyNav"], function(f9_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -140,7 +140,7 @@ CoD.AARRewardsTab.__clipsPerState = {
 			f12_arg0:__resetProperties()
 			f12_arg0:setupElementClipCounter(3)
 			local f12_local0 = function(f13_arg0)
-				f12_arg0.AarMpBacking:beginAnimation(150, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f12_arg0.AarMpBacking:beginAnimation(150, Enum[@"luitween"][@"luitween_ease_in"])
 				f12_arg0.AarMpBacking:setAlpha(1)
 				f12_arg0.AarMpBacking:registerEventHandler("interrupted_keyframe", f12_arg0.clipInterrupted)
 				f12_arg0.AarMpBacking:registerEventHandler("transition_complete_keyframe", f12_arg0.clipFinished)
@@ -153,7 +153,7 @@ CoD.AARRewardsTab.__clipsPerState = {
 			f12_local0(f12_arg0.AarMpBacking)
 			local f12_local1 = function(f14_arg0)
 				local f14_local0 = function(f15_arg0)
-					f15_arg0:beginAnimation(150, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f15_arg0:beginAnimation(150, Enum[@"luitween"][@"luitween_ease_out"])
 					f15_arg0:setAlpha(1)
 					f15_arg0:registerEventHandler("transition_complete_keyframe", f12_arg0.clipFinished)
 				end
@@ -184,7 +184,7 @@ CoD.AARRewardsTab.__clipsPerState = {
 			f18_arg0:__resetProperties()
 			f18_arg0:setupElementClipCounter(3)
 			local f18_local0 = function(f19_arg0)
-				f18_arg0.AarMpBacking:beginAnimation(150, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f18_arg0.AarMpBacking:beginAnimation(150, Enum[@"luitween"][@"luitween_ease_in"])
 				f18_arg0.AarMpBacking:setAlpha(1)
 				f18_arg0.AarMpBacking:registerEventHandler("interrupted_keyframe", f18_arg0.clipInterrupted)
 				f18_arg0.AarMpBacking:registerEventHandler("transition_complete_keyframe", f18_arg0.clipFinished)
@@ -194,7 +194,7 @@ CoD.AARRewardsTab.__clipsPerState = {
 			f18_local0(f18_arg0.AarMpBacking)
 			local f18_local1 = function(f20_arg0)
 				local f20_local0 = function(f21_arg0)
-					f21_arg0:beginAnimation(149, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f21_arg0:beginAnimation(149, Enum[@"luitween"][@"luitween_ease_out"])
 					f21_arg0:setAlpha(1)
 					f21_arg0:registerEventHandler("transition_complete_keyframe", f18_arg0.clipFinished)
 				end

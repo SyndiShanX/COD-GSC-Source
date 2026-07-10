@@ -9,10 +9,10 @@ CoD.ArenaDailyBonusLabel.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local DailyBonusLabel = LUI.UIText.new(0, 0, 0, 133, 1, 1, -16, 0)
 	DailyBonusLabel:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
-	DailyBonusLabel:setText(LocalizeToUpperString(0x3A39A667C596A46))
+	DailyBonusLabel:setText(LocalizeToUpperString(@"hash_23A39A667C596A46"))
 	DailyBonusLabel:setTTF("ttmussels_regular")
-	DailyBonusLabel:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	DailyBonusLabel:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	DailyBonusLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	DailyBonusLabel:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	self:addElement(DailyBonusLabel)
 	self.DailyBonusLabel = DailyBonusLabel
 	self:mergeStateConditions({

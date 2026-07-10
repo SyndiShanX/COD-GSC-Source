@@ -7,11 +7,11 @@ CoD.PC_Korea_ContentDescriptors_Icons.new = function(f1_arg0, f1_arg1, f1_arg2, 
 	self.id = "PC_Korea_ContentDescriptors_Icons"
 	self.soundSet = "default"
 	local KoreaViolenceIcon = LUI.UIImage.new(0, 0, 98, 183, 0, 0, 10, 111)
-	KoreaViolenceIcon:setImage(RegisterImage(0x6FA664A00191357))
+	KoreaViolenceIcon:setImage(RegisterImage(@"uie_korea_violence_icon"))
 	self:addElement(KoreaViolenceIcon)
 	self.KoreaViolenceIcon = KoreaViolenceIcon
 	local KoreaRating18Logo01 = LUI.UIImage.new(0, 0, 5, 90, 0, 0, 10, 111)
-	KoreaRating18Logo01:setImage(RegisterImage(0x259DCD3DF915ECE))
+	KoreaRating18Logo01:setImage(RegisterImage(@"uie_korea_ratinglogo_18"))
 	self:addElement(KoreaRating18Logo01)
 	self.KoreaRating18Logo01 = KoreaRating18Logo01
 	if PostLoadFunc then

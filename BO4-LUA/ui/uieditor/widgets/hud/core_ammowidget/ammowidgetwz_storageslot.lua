@@ -8,8 +8,8 @@ CoD.AmmoWidgetWZ_StorageSlot.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Icon = LUI.UIImage.new(0, 0, 8, 64, 0, 0, 5, 61)
-	Icon:setImage(RegisterImage(0xFC6DC76D7FCC7A8))
-	Icon:setMaterial(LUI.UIImage.GetCachedMaterial(0xE8F55203998700A))
+	Icon:setImage(RegisterImage(@"ui_icon_inventory_p8_backpack_military"))
+	Icon:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_feather_blend"))
 	self:addElement(Icon)
 	self.Icon = Icon
 	self:mergeStateConditions({
@@ -22,7 +22,7 @@ CoD.AmmoWidgetWZ_StorageSlot.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	})
 	local f1_local2 = self
 	local f1_local3 = self.subscribeToModel
-	local f1_local4 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local3(f1_local2, f1_local4["hudItems.hasBackpack"], function(f3_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

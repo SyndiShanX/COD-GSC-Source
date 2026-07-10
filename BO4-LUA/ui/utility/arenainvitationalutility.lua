@@ -1,16 +1,16 @@
 CoD.ArenaInvitationalUtility = {}
 CoD.ArenaInvitationalUtility.GameStateColor = {
-	[Enum[0x53BC79BF1DC288C][0xCD55F9EF35B7CE2]] = {
+	[Enum[@"hash_53BC79BF1DC288C"][@"hash_1CD55F9EF35B7CE2"]] = {
 		r = 1,
 		g = 1,
 		b = 1,
 	},
-	[Enum[0x53BC79BF1DC288C][0xD65C385BCE45950]] = {
+	[Enum[@"hash_53BC79BF1DC288C"][@"hash_4D65C385BCE45950"]] = {
 		r = 0,
 		g = 1,
 		b = 0,
 	},
-	[Enum[0x53BC79BF1DC288C][0xB87D2053AB9602C]] = {
+	[Enum[@"hash_53BC79BF1DC288C"][@"hash_5B87D2053AB9602C"]] = {
 		r = 1,
 		g = 0,
 		b = 0,
@@ -31,9 +31,9 @@ end
 CoD.ArenaInvitationalUtility.GetRoundName = function(f2_arg0)
 	local f2_local0 = ""
 	if CoD.ArenaInvitationalUtility.GetIsRound(f2_arg0) then
-		f2_local0 = Engine[0xF9F1239CFD921FE](0x81DD74C4D0ED43C, f2_arg0)
+		f2_local0 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_381DD74C4D0ED43C", f2_arg0)
 	elseif CoD.ArenaInvitationalUtility.GetIsChallenger(f2_arg0) then
-		f2_local0 = Engine[0xF9F1239CFD921FE](0xABBE17CDB539A05)
+		f2_local0 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_2ABBE17CDB539A05")
 	end
 	return f2_local0
 end
@@ -52,13 +52,13 @@ CoD.ArenaInvitationalUtility.GetRoundSeriesAndGameCount = function(f3_arg0, f3_a
 	if f3_local0 == nil then
 		return
 	end
-	local f3_local6 = f3_local0[0xE4C4CCD9A9777BA]
-	local f3_local1 = f3_local0[0x59DF2BAFFBFC38]
-	local f3_local2 = Engine[0xE00B2F29271C60B](f3_local0[0x5BADF6732342CB6])
+	local f3_local6 = f3_local0[@"bestof"]
+	local f3_local1 = f3_local0[@"objective"]
+	local f3_local2 = Engine[@"hash_2E00B2F29271C60B"](f3_local0[@"hash_65BADF6732342CB6"])
 	local f3_local3 = f3_local2.serieslist
 	local f3_local4 = {}
 	for f3_local9, f3_local10 in ipairs(f3_local3) do
-		table.insert(f3_local4, f3_local10[0x792C1F90C3A5C7F])
+		table.insert(f3_local4, f3_local10[@"gametype"])
 	end
 	return f3_local4, f3_local6, f3_local1
 end
@@ -70,10 +70,10 @@ CoD.ArenaInvitationalUtility.GetRoundIsComplete = function(f4_arg0, f4_arg1, f4_
 		local f4_local7 = 0
 		for f4_local8 = 1, f4_arg2, 1 do
 			local f4_local5 = f4_arg0[(f4_local9 - 1) * f4_arg2 + f4_local8 - 1].state
-			if f4_local5 == Enum[0x53BC79BF1DC288C][0xD65C385BCE45950] then
+			if f4_local5 == Enum[@"hash_53BC79BF1DC288C"][@"hash_4D65C385BCE45950"] then
 				f4_local6 = f4_local6 + 1
 			end
-			if f4_local5 == Enum[0x53BC79BF1DC288C][0xB87D2053AB9602C] then
+			if f4_local5 == Enum[@"hash_53BC79BF1DC288C"][@"hash_5B87D2053AB9602C"] then
 				f4_local7 = f4_local7 + 1
 			end
 		end
@@ -97,13 +97,13 @@ CoD.ArenaInvitationalUtility.GetRoundIsComplete = function(f4_arg0, f4_arg1, f4_
 end
 CoD.ArenaInvitationalUtility.GetChallengerRoundIsComplete = function(f5_arg0, f5_arg1, f5_arg2)
 	local f5_local0, f5_local1, f5_local2 = CoD.ArenaInvitationalUtility.GetRoundSeriesAndGameCount(f5_arg0, CoD.ArenaInvitationalUtility.RoundPool.Challenger)
-	local f5_local3, f5_local4 = CoD.ArenaInvitationalUtility.GetRoundIsComplete(Engine[0x5A6CB7A68FB519D](f5_arg1, f5_arg2), f5_local0, f5_local1, f5_local2)
+	local f5_local3, f5_local4 = CoD.ArenaInvitationalUtility.GetRoundIsComplete(Engine[@"hash_75A6CB7A68FB519D"](f5_arg1, f5_arg2), f5_local0, f5_local1, f5_local2)
 	return f5_local3, f5_local4
 end
 CoD.ArenaInvitationalUtility.GetCurrentRound = function(f6_arg0, f6_arg1, f6_arg2)
 	local f6_local0 = false
 	for f6_local1 = 1, #f6_arg2.roundlist, 1 do
-		local f6_local4 = Engine[0xE18D7CD5CC634C4](f6_arg0, f6_arg1, f6_local1)
+		local f6_local4 = Engine[@"hash_5E18D7CD5CC634C4"](f6_arg0, f6_arg1, f6_local1)
 		local f6_local5, f6_local6, f6_local7 = CoD.ArenaInvitationalUtility.GetRoundSeriesAndGameCount(f6_arg2, f6_local1)
 		local f6_local8, f6_local9 = CoD.ArenaInvitationalUtility.GetRoundIsComplete(f6_local4, f6_local5, f6_local6, f6_local7)
 		if not f6_local8 then
@@ -125,9 +125,9 @@ CoD.ArenaInvitationalUtility.GetCurrentRound = function(f6_arg0, f6_arg1, f6_arg
 end
 CoD.ArenaInvitationalUtility.GetRoundGameStates = function(f7_arg0, f7_arg1, f7_arg2)
 	if CoD.ArenaInvitationalUtility.GetIsChallenger(f7_arg2) then
-		return Engine[0x5A6CB7A68FB519D](f7_arg0, f7_arg1)
+		return Engine[@"hash_75A6CB7A68FB519D"](f7_arg0, f7_arg1)
 	elseif CoD.ArenaInvitationalUtility.GetIsRound(f7_arg2) then
-		return Engine[0xE18D7CD5CC634C4](f7_arg0, f7_arg1, f7_arg2)
+		return Engine[@"hash_5E18D7CD5CC634C4"](f7_arg0, f7_arg1, f7_arg2)
 	else
 		return nil
 	end
@@ -196,7 +196,7 @@ CoD.ArenaInvitationalUtility.PopulateRound = function(f12_arg0, f12_arg1, f12_ar
 end
 DataSources.InvitationalDetails = {
 	PopulateWidget = function(f15_arg0, f15_arg1, f15_arg2, f15_arg3)
-		local f15_local0 = Engine[0xA798E4552F5E872](Engine[0x8DF2E5447F384B9](), "InvitationalDetails")
+		local f15_local0 = Engine[@"createmodel"](Engine[@"getglobalmodel"](), "InvitationalDetails")
 		DataSources.InvitationalRounds = ListHelper_SetupDataSource("InvitationalRounds", function(f16_arg0)
 			local f16_local0 = {}
 			for f16_local1 = 1, #f15_arg3.roundlist, 1 do
@@ -229,7 +229,7 @@ DataSources.InvitationalDetails = {
 		DataSources.InvitationalChallenger.prepare(f15_arg1, f15_arg0, f15_arg0.filter)
 	end,
 	getModel = function(f18_arg0)
-		local f18_local0 = Engine[0xA798E4552F5E872](Engine[0x8DF2E5447F384B9](), "InvitationalDetails")
+		local f18_local0 = Engine[@"createmodel"](Engine[@"getglobalmodel"](), "InvitationalDetails")
 		local f18_local1 = f18_local0:create("rounds")
 		f18_local1:set("InvitationalRounds")
 		f18_local1 = f18_local0:create("challenger")
@@ -271,13 +271,13 @@ DataSources.InvitationalStats = {
 					})
 					return f20_local0
 				end, true)
-				local f19_local1 = Engine[0xA798E4552F5E872](Engine[0x8DF2E5447F384B9](), "InvitationalStats")
+				local f19_local1 = Engine[@"createmodel"](Engine[@"getglobalmodel"](), "InvitationalStats")
 				DataSources.InvitationalStatsRound.prepare(f19_arg1, f19_arg0, f19_arg0.filter)
 			end
 		end
 	end,
 	getModel = function(f21_arg0)
-		local f21_local0 = Engine[0xA798E4552F5E872](Engine[0x8DF2E5447F384B9](), "InvitationalStats")
+		local f21_local0 = Engine[@"createmodel"](Engine[@"getglobalmodel"](), "InvitationalStats")
 		local f21_local1 = f21_local0:create("round")
 		f21_local1:set("InvitationalStatsRound")
 		return f21_local0

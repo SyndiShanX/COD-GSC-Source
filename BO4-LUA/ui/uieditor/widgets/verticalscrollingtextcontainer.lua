@@ -8,11 +8,11 @@ CoD.verticalScrollingTextContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local text = LUI.UIText.new(0, 1, 0, 0, 0, 0, 0, 21)
-	text:setText(Engine[0xF9F1239CFD921FE](0x93E719493E9E18F))
+	text:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	text:setTTF("dinnext_regular")
-	text:setMaterial(LUI.UIImage.GetCachedMaterial(0x71E049B161CD00A))
-	text:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	text:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	text:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_171E049B161CD00A"))
+	text:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	text:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(text)
 	self.text = text
 	self:mergeStateConditions({

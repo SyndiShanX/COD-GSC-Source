@@ -34,7 +34,7 @@ CoD.StartMenu_Options_PC_Voice_Voice.new = function(f3_arg0, f3_arg1, f3_arg2, f
 	voiceOptionsList:setWidgetType(CoD.OptionDropdown)
 	voiceOptionsList:setVerticalCount(10)
 	voiceOptionsList:setSpacing(0)
-	voiceOptionsList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	voiceOptionsList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	voiceOptionsList:setDataSource("OptionVoiceVoice")
 	self:addElement(voiceOptionsList)
 	self.voiceOptionsList = voiceOptionsList
@@ -44,13 +44,13 @@ CoD.StartMenu_Options_PC_Voice_Voice.new = function(f3_arg0, f3_arg1, f3_arg2, f
 	optionInfo:linkToElementModel(voiceOptionsList, "description", true, function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
-			optionInfo.description:setText(Engine[0xF9F1239CFD921FE](f4_local0))
+			optionInfo.description:setText(Engine[@"hash_4F9F1239CFD921FE"](f4_local0))
 		end
 	end)
 	optionInfo:linkToElementModel(voiceOptionsList, "label", true, function(model)
 		local f5_local0 = model:get()
 		if f5_local0 ~= nil then
-			optionInfo.title.itemName:setText(Engine[0xF9F1239CFD921FE](f5_local0))
+			optionInfo.title.itemName:setText(Engine[@"hash_4F9F1239CFD921FE"](f5_local0))
 		end
 	end)
 	voiceOptionsList.id = "voiceOptionsList"

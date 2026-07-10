@@ -7,7 +7,7 @@ CoD.ThrustMeterChevronThin.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self.id = "ThrustMeterChevronThin"
 	self.soundSet = "default"
 	local leftChevron1 = LUI.UIImage.new(0, 1, 0, 0, 1, 1, -9, -3)
-	leftChevron1:setImage(RegisterImage(0xFCD786C55017617))
+	leftChevron1:setImage(RegisterImage(@"hash_3FCD786C55017617"))
 	self:addElement(leftChevron1)
 	self.leftChevron1 = leftChevron1
 	if PostLoadFunc then

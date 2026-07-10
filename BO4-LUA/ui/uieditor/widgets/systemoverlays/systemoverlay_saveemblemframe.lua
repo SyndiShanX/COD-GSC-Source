@@ -9,7 +9,7 @@ CoD.systemOverlay_SaveEmblemFrame.__defaultWidth = 1920
 CoD.systemOverlay_SaveEmblemFrame.__defaultHeight = 456
 CoD.systemOverlay_SaveEmblemFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
 	local self = LUI.UIElement.new(f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
-	CoD.CraftUtility.SetSlotCustomizationType(f1_arg1, Enum[0x63E5ADF9D95FC86][0x979B4C08E9D67B2])
+	CoD.CraftUtility.SetSlotCustomizationType(f1_arg1, Enum[@"customizationtype"][@"customization_type_emblem"])
 	self:setClass(CoD.systemOverlay_SaveEmblemFrame)
 	self.id = "systemOverlay_SaveEmblemFrame"
 	self.soundSet = "default"
@@ -31,7 +31,7 @@ CoD.systemOverlay_SaveEmblemFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	OptionList:setWidgetType(CoD.EmblemOptionsButton)
 	OptionList:setVerticalCount(3)
 	OptionList:setSpacing(10)
-	OptionList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	OptionList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	OptionList:linkToElementModel(self, "listDatasource", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -39,7 +39,7 @@ CoD.systemOverlay_SaveEmblemFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 		end
 	end)
 	OptionList:linkToElementModel(OptionList, "disabled", true, function(model, f3_arg1)
-		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 	end)
 	OptionList:registerEventHandler("ui_keyboard_input", function(element, event)
 		local f4_local0 = nil
@@ -56,10 +56,10 @@ CoD.systemOverlay_SaveEmblemFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 		elseif element.super.gainFocus then
 			f5_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f5_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(OptionList, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(OptionList, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		if not IsDisabled(element, controller) then
 			ProcessListAction(self, element, controller, menu)
 			return true
@@ -67,7 +67,7 @@ CoD.systemOverlay_SaveEmblemFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 		end
 	end, function(element, menu, controller)
 		if not IsDisabled(element, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false
@@ -141,8 +141,8 @@ CoD.systemOverlay_SaveEmblemFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	title:setRGB(ColorSet.T8__BEIGE__HEADER.r, ColorSet.T8__BEIGE__HEADER.g, ColorSet.T8__BEIGE__HEADER.b)
 	title:setTTF("ttmussels_demibold")
 	title:setLetterSpacing(6)
-	title:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	title:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	title:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	title:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	title:linkToElementModel(self, "title", true, function(model)
 		local f15_local0 = model:get()
 		if f15_local0 ~= nil then

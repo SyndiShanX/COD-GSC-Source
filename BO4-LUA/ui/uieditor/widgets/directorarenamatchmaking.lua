@@ -55,7 +55,7 @@ CoD.directorArenaMatchmaking.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 			condition = function(menu, element, event)
 				local f5_local0 = CoD.LobbyUtility.MapVoteInState(LuaEnum.MAP_VOTE_STATE.LOCKEDIN)
 				if f5_local0 then
-					f5_local0 = CoD.ModelUtility.IsGlobalModelValueEqualToEnum("MapVote.lobbyMapVoteType", Enum[0xF116421015E781B][0x658B6B1B964D38A])
+					f5_local0 = CoD.ModelUtility.IsGlobalModelValueEqualToEnum("MapVote.lobbyMapVoteType", Enum[@"lobbymapvote"][@"lobby_mapvote_next"])
 					if f5_local0 then
 						f5_local0 = AlwaysFalse()
 					end
@@ -68,7 +68,7 @@ CoD.directorArenaMatchmaking.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 			condition = function(menu, element, event)
 				local f6_local0 = CoD.LobbyUtility.MapVoteInState(LuaEnum.MAP_VOTE_STATE.LOCKEDIN)
 				if f6_local0 then
-					f6_local0 = CoD.ModelUtility.IsGlobalModelValueEqualToEnum("MapVote.lobbyMapVoteType", Enum[0xF116421015E781B][0xD8A67C2C1AF1036])
+					f6_local0 = CoD.ModelUtility.IsGlobalModelValueEqualToEnum("MapVote.lobbyMapVoteType", Enum[@"lobbymapvote"][@"lobby_mapvote_previous"])
 					if f6_local0 then
 						f6_local0 = AlwaysFalse()
 					end
@@ -81,7 +81,7 @@ CoD.directorArenaMatchmaking.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 			condition = function(menu, element, event)
 				local f7_local0 = CoD.LobbyUtility.MapVoteInState(LuaEnum.MAP_VOTE_STATE.LOCKEDIN)
 				if f7_local0 then
-					f7_local0 = CoD.ModelUtility.IsGlobalModelValueEqualToEnum("MapVote.lobbyMapVoteType", Enum[0xF116421015E781B][0x74A46A6237E75F4])
+					f7_local0 = CoD.ModelUtility.IsGlobalModelValueEqualToEnum("MapVote.lobbyMapVoteType", Enum[@"lobbymapvote"][@"lobby_mapvote_random"])
 					if f7_local0 then
 						f7_local0 = AlwaysFalse()
 					end
@@ -105,7 +105,7 @@ CoD.directorArenaMatchmaking.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	})
 	local overheadNameContainer = MapVotePC
 	local DirectorReadyButton = MapVotePC.subscribeToModel
-	local DirectorPreGameButton = Engine[0x8DF2E5447F384B9]()
+	local DirectorPreGameButton = Engine[@"getglobalmodel"]()
 	DirectorReadyButton(overheadNameContainer, DirectorPreGameButton["lobbyRoot.mapVote"], function(f9_arg0)
 		f1_arg0:updateElementState(MapVotePC, {
 			name = "model_validation",
@@ -117,7 +117,7 @@ CoD.directorArenaMatchmaking.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	end, false)
 	overheadNameContainer = MapVotePC
 	DirectorReadyButton = MapVotePC.subscribeToModel
-	DirectorPreGameButton = Engine[0x8DF2E5447F384B9]()
+	DirectorPreGameButton = Engine[@"getglobalmodel"]()
 	DirectorReadyButton(overheadNameContainer, DirectorPreGameButton["lobbyRoot.lobbyNav"], function(f10_arg0)
 		f1_arg0:updateElementState(MapVotePC, {
 			name = "model_validation",
@@ -129,7 +129,7 @@ CoD.directorArenaMatchmaking.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	end, false)
 	overheadNameContainer = MapVotePC
 	DirectorReadyButton = MapVotePC.subscribeToModel
-	DirectorPreGameButton = Engine[0x8DF2E5447F384B9]()
+	DirectorPreGameButton = Engine[@"getglobalmodel"]()
 	DirectorReadyButton(overheadNameContainer, DirectorPreGameButton["MapVote.lobbyMapVoteType"], function(f11_arg0)
 		f1_arg0:updateElementState(MapVotePC, {
 			name = "model_validation",
@@ -141,7 +141,7 @@ CoD.directorArenaMatchmaking.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	end, false)
 	overheadNameContainer = MapVotePC
 	DirectorReadyButton = MapVotePC.subscribeToModel
-	DirectorPreGameButton = Engine[0x8DF2E5447F384B9]()
+	DirectorPreGameButton = Engine[@"getglobalmodel"]()
 	DirectorReadyButton(overheadNameContainer, DirectorPreGameButton["lobbyRoot.publicLobby.stage"], function(f12_arg0)
 		f1_arg0:updateElementState(MapVotePC, {
 			name = "model_validation",
@@ -155,10 +155,10 @@ CoD.directorArenaMatchmaking.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	self.MapVotePC = MapVotePC
 	DirectorReadyButton = CoD.DirectorReadyButton.new(f1_arg0, f1_arg1, 0.5, 0.5, 470, 896, 1, 1, -188, -108)
 	DirectorReadyButton:setAlpha(0)
-	DirectorReadyButton.DirectorSelectButtonMiniInternal.MiddleText:setText(LocalizeToUpperString(0x7A9F166E7248D86))
-	DirectorReadyButton.DirectorSelectButtonMiniInternal.MiddleTextFocus:setText(LocalizeToUpperString(0x7A9F166E7248D86))
-	DirectorReadyButton.PlayText:setText(LocalizeToUpperString(0xE6F6113B8B75F3E))
-	DirectorReadyButton:subscribeToGlobalModel(f1_arg1, "PerController", "ButtonBits." .. Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], function(model)
+	DirectorReadyButton.DirectorSelectButtonMiniInternal.MiddleText:setText(LocalizeToUpperString(@"menu/ready_up"))
+	DirectorReadyButton.DirectorSelectButtonMiniInternal.MiddleTextFocus:setText(LocalizeToUpperString(@"menu/ready_up"))
+	DirectorReadyButton.PlayText:setText(LocalizeToUpperString(@"menu/ready"))
+	DirectorReadyButton:subscribeToGlobalModel(f1_arg1, "PerController", "ButtonBits." .. Enum[@"luibutton"][@"lui_key_xba_pscross"], function(model)
 		DirectorReadyButton:setModel(model, f1_arg1)
 	end)
 	self:addElement(DirectorReadyButton)
@@ -176,8 +176,8 @@ CoD.directorArenaMatchmaking.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 		},
 	})
 	DirectorPreGameButton:setAlpha(0)
-	DirectorPreGameButton.DirectorCustomStartButton.MiddleText:setText(LocalizeToUpperString(0x29C903C6DF90D6F))
-	DirectorPreGameButton.DirectorCustomStartButton.MiddleTextFocus:setText(LocalizeToUpperString(0x29C903C6DF90D6F))
+	DirectorPreGameButton.DirectorCustomStartButton.MiddleText:setText(LocalizeToUpperString(@"menu/black_market"))
+	DirectorPreGameButton.DirectorCustomStartButton.MiddleTextFocus:setText(LocalizeToUpperString(@"menu/black_market"))
 	DirectorPreGameButton:registerEventHandler("gain_focus", function(element, event)
 		local f15_local0 = nil
 		if element.gainFocus then
@@ -185,14 +185,14 @@ CoD.directorArenaMatchmaking.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 		elseif element.super.gainFocus then
 			f15_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f15_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(DirectorPreGameButton, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(DirectorPreGameButton, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		OpenQuarterMaster(self, element, controller, "", menu)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x29C903C6DF90D6F, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/black_market", nil, nil)
 		return true
 	end, false)
 	self:addElement(DirectorPreGameButton)

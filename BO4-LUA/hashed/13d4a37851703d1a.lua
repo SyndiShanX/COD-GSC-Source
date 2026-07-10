@@ -28,7 +28,7 @@ CoD.ClanOptionsWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	self.buttons = buttons
 	local featureOverlayButtonMouseOnly = nil
 	featureOverlayButtonMouseOnly = CoD.featureOverlay_Button_MouseOnly.new(f1_arg0, f1_arg1, 1, 1, -525, -365, 1, 1, -60, 0)
-	featureOverlayButtonMouseOnly.featureOverlayButtonContainer.Title:setText(Engine[0xF9F1239CFD921FE](0x78D439E1B360368))
+	featureOverlayButtonMouseOnly.featureOverlayButtonContainer.Title:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_778D439E1B360368"))
 	featureOverlayButtonMouseOnly:registerEventHandler("gain_focus", function(element, event)
 		local f2_local0 = nil
 		if element.gainFocus then
@@ -36,14 +36,14 @@ CoD.ClanOptionsWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 		elseif element.super.gainFocus then
 			f2_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f2_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(featureOverlayButtonMouseOnly, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(featureOverlayButtonMouseOnly, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		GoBack(self, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 		return false
 	end, false)
 	self:addElement(featureOverlayButtonMouseOnly)
@@ -52,7 +52,7 @@ CoD.ClanOptionsWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	CurrentClassName:setRGB(ColorSet.T8__BEIGE__HEADER.r, ColorSet.T8__BEIGE__HEADER.g, ColorSet.T8__BEIGE__HEADER.b)
 	CurrentClassName:setText(LocalizeToUpperString(0x0))
 	CurrentClassName:setTTF("notosans_bold")
-	CurrentClassName:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	CurrentClassName:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(CurrentClassName)
 	self.CurrentClassName = CurrentClassName
 	local TitleSeparator = LUI.UIImage.new(1, 1, -462.5, -82.5, 0, 0, 175, 176)
@@ -65,7 +65,7 @@ CoD.ClanOptionsWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	ClassOptionsList:setWidgetType(CoD.CommonListButtonGeneric)
 	ClassOptionsList:setVerticalCount(4)
 	ClassOptionsList:setSpacing(20)
-	ClassOptionsList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	ClassOptionsList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	ClassOptionsList:setDataSource("ClanAdminOptionsButtonList")
 	ClassOptionsList:registerEventHandler("list_item_gain_focus", function(element, event)
 		return nil
@@ -77,23 +77,23 @@ CoD.ClanOptionsWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 		elseif element.super.gainFocus then
 			f6_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
 		return f6_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(ClassOptionsList, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(ClassOptionsList, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		ProcessListAction(self, element, controller, menu)
 		PlaySoundAlias("uin_toggle_generic")
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 		return true
 	end, false)
 	self:addElement(ClassOptionsList)
 	self.ClassOptionsList = ClassOptionsList
 	local ClassOptionDesc = LUI.UIText.new(1, 1, -459.5, -49.5, 0, 0, 200.5, 219.5)
 	ClassOptionDesc:setTTF("dinnext_regular")
-	ClassOptionDesc:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	ClassOptionDesc:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	ClassOptionDesc:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	ClassOptionDesc:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(ClassOptionDesc)
 	self.ClassOptionDesc = ClassOptionDesc
 	local PCSmallCloseButton = nil
@@ -106,21 +106,21 @@ CoD.ClanOptionsWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 		elseif element.super.gainFocus then
 			f9_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_none"])
 		return f9_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(PCSmallCloseButton, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "MOUSE1", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(PCSmallCloseButton, f1_arg1, Enum[@"luibutton"][@"lui_key_none"], "MOUSE1", function(element, menu, controller, model)
 		GoBack(self, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "MOUSE1")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "MOUSE1")
 		return false
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(PCSmallCloseButton, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(PCSmallCloseButton, f1_arg1, Enum[@"luibutton"][@"lui_key_none"], "ui_confirm", function(element, menu, controller, model)
 		GoBack(self, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x0, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "ui_confirm")
 		return false
 	end, false)
 	self:addElement(PCSmallCloseButton)
@@ -128,7 +128,7 @@ CoD.ClanOptionsWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	self.ClassOptionDesc:linkToElementModel(self, "hintText", true, function(model)
 		local f14_local0 = model:get()
 		if f14_local0 ~= nil then
-			ClassOptionDesc:setText(Engine[0xF9F1239CFD921FE](f14_local0))
+			ClassOptionDesc:setText(Engine[@"hash_4F9F1239CFD921FE"](f14_local0))
 		end
 	end)
 	self:mergeStateConditions({

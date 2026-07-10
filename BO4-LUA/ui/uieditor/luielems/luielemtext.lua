@@ -10,7 +10,7 @@ local PostLoadFunc = function(self, controller)
 	self.blue = 1
 	if f2_local0.alpha then
 		self:subscribeToModel(f2_local0.alpha, function(model)
-			local f3_local0 = Engine[0x614D394F6F9A18D](model)
+			local f3_local0 = Engine[@"getmodelvalue"](model)
 			if f3_local0 then
 				self.alpha = f3_local0
 				self.Text:beginAnimation(f2_local0.fadeOverTime:get() * 100)
@@ -20,7 +20,7 @@ local PostLoadFunc = function(self, controller)
 	end
 	if f2_local0.height then
 		self:subscribeToModel(f2_local0.height, function(model)
-			local f4_local0 = Engine[0x614D394F6F9A18D](model)
+			local f4_local0 = Engine[@"getmodelvalue"](model)
 			if f4_local0 then
 				self.Text:setHeight(CoD.setTextSizeFromHeightEnum(f4_local0))
 			end
@@ -28,7 +28,7 @@ local PostLoadFunc = function(self, controller)
 	end
 	if f2_local0.red then
 		self:subscribeToModel(f2_local0.red, function(model)
-			local f5_local0 = Engine[0x614D394F6F9A18D](model)
+			local f5_local0 = Engine[@"getmodelvalue"](model)
 			if f5_local0 then
 				self.red = f5_local0
 				f0_local0(self)
@@ -37,7 +37,7 @@ local PostLoadFunc = function(self, controller)
 	end
 	if f2_local0.green then
 		self:subscribeToModel(f2_local0.green, function(model)
-			local f6_local0 = Engine[0x614D394F6F9A18D](model)
+			local f6_local0 = Engine[@"getmodelvalue"](model)
 			if f6_local0 then
 				self.green = f6_local0
 				f0_local0(self)
@@ -46,7 +46,7 @@ local PostLoadFunc = function(self, controller)
 	end
 	if f2_local0.blue then
 		self:subscribeToModel(f2_local0.blue, function(model)
-			local f7_local0 = Engine[0x614D394F6F9A18D](model)
+			local f7_local0 = Engine[@"getmodelvalue"](model)
 			if f7_local0 then
 				self.blue = f7_local0
 				f0_local0(self)
@@ -55,14 +55,14 @@ local PostLoadFunc = function(self, controller)
 	end
 	if f2_local0.horizontal_alignment then
 		self:subscribeToModel(f2_local0.horizontal_alignment, function(model)
-			local f8_local0 = Engine[0x614D394F6F9A18D](model)
+			local f8_local0 = Engine[@"getmodelvalue"](model)
 			self.Text:setAlignment(f8_local0)
 			if f8_local0 == 1 then
-				self.Text:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+				self.Text:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 			elseif f8_local0 == 2 then
-				self.Text:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+				self.Text:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 			elseif f8_local0 == 3 then
-				self.Text:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
+				self.Text:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
 			end
 		end)
 	end
@@ -80,8 +80,8 @@ LUI.createMenu.LUIelemText = function(f9_arg0, f9_arg1)
 	self.ignoreCursor = true
 	local Text = LUI.UIText.new(0, 1, 30, 30, 0, 0, 30, 67)
 	Text:setTTF("default")
-	Text:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	Text:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Text:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	Text:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	Text:linkToElementModel(self, "x", true, function(model)
 		local f10_local0 = model:get()
 		if f10_local0 ~= nil then
@@ -97,7 +97,7 @@ LUI.createMenu.LUIelemText = function(f9_arg0, f9_arg1)
 	Text:linkToElementModel(self, "text", true, function(model)
 		local f12_local0 = model:get()
 		if f12_local0 ~= nil then
-			Text:setText(Engine[0xF9F1239CFD921FE](f12_local0))
+			Text:setText(Engine[@"hash_4F9F1239CFD921FE"](f12_local0))
 		end
 	end)
 	self:addElement(Text)

@@ -26,8 +26,8 @@ CoD.SpecialistOutfitEntry_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	local LockedIcon = LUI.UIImage.new(0.5, 0.5, -64, 64, 0.5, 0.5, -64, 64)
 	LockedIcon:setAlpha(0)
 	LockedIcon:setScale(0.25, 0.25)
-	LockedIcon:setImage(RegisterImage(0xE1E7C490B2BA4FB))
-	LockedIcon:setMaterial(LUI.UIImage.GetCachedMaterial(0xF755127C95CF5B6))
+	LockedIcon:setImage(RegisterImage(@"uie_ui_icon_global_lock"))
+	LockedIcon:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_F755127C95CF5B6"))
 	LockedIcon:setShaderVector(0, 4, 0, 0, 0)
 	self:addElement(LockedIcon)
 	self.LockedIcon = LockedIcon
@@ -62,7 +62,7 @@ CoD.SpecialistOutfitEntry_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 		})
 	end)
 	EquippedMarkerTick:setZoom(4)
-	EquippedMarkerTick.image:setImage(RegisterImage(0x9A8B26C9B001758))
+	EquippedMarkerTick.image:setImage(RegisterImage(@"uie_ui_menu_cac_equipped_marker_tick"))
 	EquippedMarkerTick:linkToElementModel(self, nil, false, function(model)
 		EquippedMarkerTick:setModel(model, f1_arg1)
 	end)
@@ -92,7 +92,7 @@ CoD.SpecialistOutfitEntry_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	end)
 	local f1_local8 = CommonButtonOutline
 	f1_local7 = CommonButtonOutline.subscribeToModel
-	local f1_local9 = Engine[0x8DF2E5447F384B9]()
+	local f1_local9 = Engine[@"getglobalmodel"]()
 	f1_local7(f1_local8, f1_local9["lobbyRoot.lobbyNav"], function(f9_arg0)
 		f1_arg0:updateElementState(CommonButtonOutline, {
 			name = "model_validation",
@@ -261,7 +261,7 @@ CoD.SpecialistOutfitEntry_Internal.__clipsPerState = {
 			f29_arg0:setupElementClipCounter(1)
 			local f29_local0 = function(f30_arg0)
 				local f30_local0 = function(f31_arg0)
-					f31_arg0:beginAnimation(200, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f31_arg0:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_out"])
 					f31_arg0:setAlpha(0)
 					f31_arg0:registerEventHandler("transition_complete_keyframe", f29_arg0.clipFinished)
 				end

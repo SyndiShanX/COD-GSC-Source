@@ -16,15 +16,15 @@ CoD.WarzoneMapKeyItemWithMarker.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self:addElement(ControllerDependentTextBox)
 	self.ControllerDependentTextBox = ControllerDependentTextBox
 	local Image = LUI.UIImage.new(0, 0, 0, 36, 0, 0, 2, 38)
-	Image:setMaterial(LUI.UIImage.GetCachedMaterial(0x67D1E3A3D2D1BF))
+	Image:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_saturation_normal"))
 	Image:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(Image)
 	self.Image = Image
 	local Action = LUI.UIText.new(0, 0, 46, 222, 0, 0, 6.5, 33.5)
-	Action:setText(Engine[0xF9F1239CFD921FE](0x93E719493E9E18F))
+	Action:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	Action:setTTF("ttmussels_regular")
-	Action:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Action:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	Action:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Action:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	self:addElement(Action)
 	self.Action = Action
 	local WarzonePlayerMarker = CoD.WarzonePlayerMarker.new(f1_arg0, f1_arg1, 0, 0, 222, 254, 0, 0, 4, 36)
@@ -62,7 +62,7 @@ CoD.WarzoneMapKeyItemWithMarker.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	end)
 	local f1_local5 = self
 	local f1_local6 = self.subscribeToModel
-	local f1_local7 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local6(f1_local5, f1_local7.LastInput, function(f7_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -84,7 +84,7 @@ CoD.WarzoneMapKeyItemWithMarker.__resetProperties = function(f8_arg0)
 	f8_arg0.Action:completeAnimation()
 	f8_arg0.WarzonePlayerMarker:completeAnimation()
 	f8_arg0.Image:setAlpha(1)
-	f8_arg0.Image:setMaterial(LUI.UIImage.GetCachedMaterial(0x67D1E3A3D2D1BF))
+	f8_arg0.Image:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_saturation_normal"))
 	f8_arg0.Image:setShaderVector(0, 1, 0, 0, 0)
 	f8_arg0.ControllerDependentTextBox:setLeftRight(0, 0, 0, 0)
 	f8_arg0.ControllerDependentTextBox:setTopBottom(0, 0, 19, 41)
@@ -129,7 +129,7 @@ CoD.WarzoneMapKeyItemWithMarker.__clipsPerState = {
 			f11_arg0:setupElementClipCounter(3)
 			f11_arg0.Image:completeAnimation()
 			f11_arg0.Image:setAlpha(0.15)
-			f11_arg0.Image:setMaterial(LUI.UIImage.GetCachedMaterial(0x67D1E3A3D2D1BF))
+			f11_arg0.Image:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_saturation_normal"))
 			f11_arg0.Image:setShaderVector(0, 0, 0, 0, 0)
 			f11_arg0.clipFinished(f11_arg0.Image)
 			f11_arg0.Action:completeAnimation()

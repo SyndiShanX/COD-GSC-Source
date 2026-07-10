@@ -13,7 +13,7 @@ CoD.LobbyProcessQueueDebug.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	List:setTopBottom(0, 0, 0, 658)
 	List:setWidgetType(CoD.LobbyProcessQueueDebugItem)
 	List:setVerticalCount(30)
-	List:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	List:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	List:setDataSource("LobbyProcessQueueInfo")
 	self:addElement(List)
 	self.List = List

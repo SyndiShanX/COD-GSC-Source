@@ -26,7 +26,7 @@ CoD.vhud_attack_helicopter_minigun_reticle.new = function(f1_arg0, f1_arg1, f1_a
 	})
 	local msCenterDiamondSideL = msCenterDiamondT
 	local msCenterDiamondB = msCenterDiamondT.subscribeToModel
-	local msCenterDiamondSideR = Engine[0x8DF2E5447F384B9]()
+	local msCenterDiamondSideR = Engine[@"getglobalmodel"]()
 	msCenterDiamondB(msCenterDiamondSideL, msCenterDiamondSideR["lobbyRoot.lobbyNav"], function(f3_arg0)
 		f1_arg0:updateElementState(msCenterDiamondT, {
 			name = "model_validation",
@@ -60,8 +60,8 @@ CoD.vhud_attack_helicopter_minigun_reticle.new = function(f1_arg0, f1_arg1, f1_a
 			modelName = "vehicleType",
 		})
 	end, false)
-	msCenterDiamondT.state1Image:setImage(RegisterImage(0x3C917B68C1D560E))
-	msCenterDiamondT.state1Image:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	msCenterDiamondT.state1Image:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_mothership_centerdiamondtop"))
+	msCenterDiamondT.state1Image:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	msCenterDiamondT.state2Image:setRGB(ColorSet.EnemyOrange.r, ColorSet.EnemyOrange.g, ColorSet.EnemyOrange.b)
 	self:addElement(msCenterDiamondT)
 	self.msCenterDiamondT = msCenterDiamondT
@@ -83,7 +83,7 @@ CoD.vhud_attack_helicopter_minigun_reticle.new = function(f1_arg0, f1_arg1, f1_a
 	})
 	msCenterDiamondSideR = msCenterDiamondB
 	msCenterDiamondSideL = msCenterDiamondB.subscribeToModel
-	local f1_local5 = Engine[0x8DF2E5447F384B9]()
+	local f1_local5 = Engine[@"getglobalmodel"]()
 	msCenterDiamondSideL(msCenterDiamondSideR, f1_local5["lobbyRoot.lobbyNav"], function(f7_arg0)
 		f1_arg0:updateElementState(msCenterDiamondB, {
 			name = "model_validation",
@@ -118,8 +118,8 @@ CoD.vhud_attack_helicopter_minigun_reticle.new = function(f1_arg0, f1_arg1, f1_a
 		})
 	end, false)
 	msCenterDiamondB:setZRot(180)
-	msCenterDiamondB.state1Image:setImage(RegisterImage(0x3C917B68C1D560E))
-	msCenterDiamondB.state1Image:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	msCenterDiamondB.state1Image:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_mothership_centerdiamondtop"))
+	msCenterDiamondB.state1Image:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	msCenterDiamondB.state2Image:setRGB(ColorSet.EnemyOrange.r, ColorSet.EnemyOrange.g, ColorSet.EnemyOrange.b)
 	self:addElement(msCenterDiamondB)
 	self.msCenterDiamondB = msCenterDiamondB
@@ -141,7 +141,7 @@ CoD.vhud_attack_helicopter_minigun_reticle.new = function(f1_arg0, f1_arg1, f1_a
 	})
 	f1_local5 = msCenterDiamondSideL
 	msCenterDiamondSideR = msCenterDiamondSideL.subscribeToModel
-	local f1_local6 = Engine[0x8DF2E5447F384B9]()
+	local f1_local6 = Engine[@"getglobalmodel"]()
 	msCenterDiamondSideR(f1_local5, f1_local6["lobbyRoot.lobbyNav"], function(f11_arg0)
 		f1_arg0:updateElementState(msCenterDiamondSideL, {
 			name = "model_validation",
@@ -175,8 +175,8 @@ CoD.vhud_attack_helicopter_minigun_reticle.new = function(f1_arg0, f1_arg1, f1_a
 			modelName = "vehicleType",
 		})
 	end, false)
-	msCenterDiamondSideL.state1Image:setImage(RegisterImage(0x75D443C057C1AB4))
-	msCenterDiamondSideL.state1Image:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	msCenterDiamondSideL.state1Image:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_mothership_centerdiamondside"))
+	msCenterDiamondSideL.state1Image:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	msCenterDiamondSideL.state2Image:setRGB(ColorSet.EnemyOrange.r, ColorSet.EnemyOrange.g, ColorSet.EnemyOrange.b)
 	self:addElement(msCenterDiamondSideL)
 	self.msCenterDiamondSideL = msCenterDiamondSideL
@@ -198,7 +198,7 @@ CoD.vhud_attack_helicopter_minigun_reticle.new = function(f1_arg0, f1_arg1, f1_a
 	})
 	f1_local6 = msCenterDiamondSideR
 	f1_local5 = msCenterDiamondSideR.subscribeToModel
-	local f1_local7 = Engine[0x8DF2E5447F384B9]()
+	local f1_local7 = Engine[@"getglobalmodel"]()
 	f1_local5(f1_local6, f1_local7["lobbyRoot.lobbyNav"], function(f15_arg0)
 		f1_arg0:updateElementState(msCenterDiamondSideR, {
 			name = "model_validation",
@@ -233,8 +233,8 @@ CoD.vhud_attack_helicopter_minigun_reticle.new = function(f1_arg0, f1_arg1, f1_a
 		})
 	end, false)
 	msCenterDiamondSideR:setZRot(180)
-	msCenterDiamondSideR.state1Image:setImage(RegisterImage(0x75D443C057C1AB4))
-	msCenterDiamondSideR.state1Image:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	msCenterDiamondSideR.state1Image:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_mothership_centerdiamondside"))
+	msCenterDiamondSideR.state1Image:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	msCenterDiamondSideR.state2Image:setRGB(ColorSet.EnemyOrange.r, ColorSet.EnemyOrange.g, ColorSet.EnemyOrange.b)
 	self:addElement(msCenterDiamondSideR)
 	self.msCenterDiamondSideR = msCenterDiamondSideR

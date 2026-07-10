@@ -37,8 +37,8 @@ CoD.PC_MOTD_Buttons.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	OptionText:setRGB(0.78, 0.74, 0.67)
 	OptionText:setAlpha(0.9)
 	OptionText:setTTF("ttmussels_regular")
-	OptionText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	OptionText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	OptionText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	OptionText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	OptionText:linkToElementModel(self, "displayText", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -64,11 +64,11 @@ CoD.PC_MOTD_Buttons.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 			modelName = "disabled",
 		})
 	end)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], "ui_confirm", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
 		ProcessListAction(self, self, controller, menu)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, "ui_confirm")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
 		return false
 	end, false)
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)

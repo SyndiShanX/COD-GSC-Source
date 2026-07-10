@@ -12,12 +12,12 @@ CoD.PCSocialMenu_PlayerListItem_PlayerInfos_MuteButton.new = function(f1_arg0, f
 	self:addElement(BG)
 	self.BG = BG
 	local MuteIcon = LUI.UIImage.new(0.15, 0.85, 0, 0, 0.09, 0.79, 0, 0)
-	MuteIcon:setImage(RegisterImage(0xE5EA97D7E050A9A))
+	MuteIcon:setImage(RegisterImage(@"uie_mute_icon"))
 	self:addElement(MuteIcon)
 	self.MuteIcon = MuteIcon
 	local NineSliceShaderImage = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	NineSliceShaderImage:setImage(RegisterImage(0xD21D1B533ED3AEA))
-	NineSliceShaderImage:setMaterial(LUI.UIImage.GetCachedMaterial(0x44484DDFAF5C093))
+	NineSliceShaderImage:setImage(RegisterImage(@"uie_borderbutton2_9s"))
+	NineSliceShaderImage:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_normal"))
 	NineSliceShaderImage:setShaderVector(0, 0, 0, 0, 0)
 	NineSliceShaderImage:setupNineSliceShader(14, 14)
 	self:addElement(NineSliceShaderImage)

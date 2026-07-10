@@ -19,8 +19,8 @@ CoD.FileshareSelectorItemWide.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self.Button = Button
 	local NoiseTiledBacking = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	NoiseTiledBacking:setAlpha(0)
-	NoiseTiledBacking:setImage(RegisterImage(0x34839E8065B1E53))
-	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	NoiseTiledBacking:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	NoiseTiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	NoiseTiledBacking:setupNineSliceShader(196, 88)
 	self:addElement(NoiseTiledBacking)
@@ -33,7 +33,7 @@ CoD.FileshareSelectorItemWide.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	local alertTriangle = LUI.UIImage.new(0, 0, 147.5, 179.5, 0, 0, 77, 109)
 	alertTriangle:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	alertTriangle:setAlpha(0)
-	alertTriangle:setImage(RegisterImage(0x1F10DEAAEFC50A4))
+	alertTriangle:setImage(RegisterImage(@"warning_triangle"))
 	self:addElement(alertTriangle)
 	self.alertTriangle = alertTriangle
 	self:mergeStateConditions({

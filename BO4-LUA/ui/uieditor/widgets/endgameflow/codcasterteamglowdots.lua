@@ -9,8 +9,8 @@ CoD.CODCasterTeamGlowDots.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local GlowDotsCODCaster = LUI.UIImage.new(0, 0, 0, 10, 0, 0, 0, 146)
 	GlowDotsCODCaster:setAlpha(0)
-	GlowDotsCODCaster:setImage(RegisterImage(0xED10A9493081AC0))
-	GlowDotsCODCaster:setMaterial(LUI.UIImage.GetCachedMaterial(0xF755127C95CF5B6))
+	GlowDotsCODCaster:setImage(RegisterImage(@"hash_3ED10A9493081AC0"))
+	GlowDotsCODCaster:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_F755127C95CF5B6"))
 	GlowDotsCODCaster:setShaderVector(0, 1.5, 0, 0, 0)
 	GlowDotsCODCaster:subscribeToGlobalModel(f1_arg1, "DeadSpectate", "playerIndex", function(model)
 		local f2_local0 = model:get()
@@ -23,8 +23,8 @@ CoD.CODCasterTeamGlowDots.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	local GlowDotsDefault = LUI.UIImage.new(0, 0, 0, 10, 0, 0, 0, 146)
 	GlowDotsDefault:setRGB(1, 0.68, 0)
 	GlowDotsDefault:setAlpha(0)
-	GlowDotsDefault:setImage(RegisterImage(0xED10A9493081AC0))
-	GlowDotsDefault:setMaterial(LUI.UIImage.GetCachedMaterial(0xF755127C95CF5B6))
+	GlowDotsDefault:setImage(RegisterImage(@"hash_3ED10A9493081AC0"))
+	GlowDotsDefault:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_F755127C95CF5B6"))
 	GlowDotsDefault:setShaderVector(0, 1.5, 0, 0, 0)
 	self:addElement(GlowDotsDefault)
 	self.GlowDotsDefault = GlowDotsDefault
@@ -38,7 +38,7 @@ CoD.CODCasterTeamGlowDots.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	})
 	local f1_local3 = self
 	local f1_local4 = self.subscribeToModel
-	local f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local4(f1_local3, f1_local5["factions.isCoDCaster"], function(f4_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

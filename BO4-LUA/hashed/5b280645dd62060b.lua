@@ -18,8 +18,8 @@ CoD.SpawnSelectKillcamFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.LayoutElements = LayoutElements
 	local LayoutLines = LUI.UIImage.new(0, 0, 0, 1888, 0, 0, 0, 48)
 	LayoutLines:setAlpha(0)
-	LayoutLines:setImage(RegisterImage(0x16D3BA67D51FFAA))
-	LayoutLines:setMaterial(LUI.UIImage.GetCachedMaterial(0xE992BD5A540E2D))
+	LayoutLines:setImage(RegisterImage(@"uie_ui_hud_selectspawn_layout_lines"))
+	LayoutLines:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_delta_normal"))
 	LayoutLines:setShaderVector(0, 0, 1, 0, 0)
 	LayoutLines:setShaderVector(1, 0, 0, 0, 0)
 	LayoutLines:setShaderVector(2, 0, 1, 0, 0)
@@ -32,14 +32,14 @@ CoD.SpawnSelectKillcamFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	Ready:setText(CoD.BaseUtility.AlreadyLocalized("RDY"))
 	Ready:setTTF("0arame_mono_stencil")
 	Ready:setLetterSpacing(2)
-	Ready:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Ready:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Ready:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Ready:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(Ready)
 	self.Ready = Ready
 	local LayoutStripe = LUI.UIImage.new(0, 0, 75, 1821, 0, 0, 776, 832)
 	LayoutStripe:setAlpha(0)
-	LayoutStripe:setImage(RegisterImage(0xE4F4A25FB519F6))
-	LayoutStripe:setMaterial(LUI.UIImage.GetCachedMaterial(0xE992BD5A540E2D))
+	LayoutStripe:setImage(RegisterImage(@"uie_ui_hud_selectspawn_layout_stripe"))
+	LayoutStripe:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_delta_normal"))
 	LayoutStripe:setShaderVector(0, 0, 1, 0, 0)
 	LayoutStripe:setShaderVector(1, 0, 0, 0, 0)
 	LayoutStripe:setShaderVector(2, 0, 1, 0, 0)
@@ -52,30 +52,30 @@ CoD.SpawnSelectKillcamFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	System:setText(CoD.BaseUtility.AlreadyLocalized("SYS: 003A"))
 	System:setTTF("0arame_mono_stencil")
 	System:setLetterSpacing(2)
-	System:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	System:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	System:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	System:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(System)
 	self.System = System
 	local Online = LUI.UIText.new(0, 0, 195.5, 249.5, 0, 0, 360, 370)
 	Online:setRGB(0.35, 0.52, 0.62)
-	Online:setText(Engine[0xF9F1239CFD921FE](0x8E783C525F2FA8))
+	Online:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/online"))
 	Online:setTTF("0arame_mono_stencil")
 	Online:setLetterSpacing(2)
-	Online:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Online:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Online:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Online:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(Online)
 	self.Online = Online
 	local BarRight = LUI.UIImage.new(0, 0, 1700, 1758, 0, 0, 328, 356)
-	BarRight:setImage(RegisterImage(0x1A7EE226176D9CB))
+	BarRight:setImage(RegisterImage(@"uie_ui_hud_selectspawn_layout_boxside"))
 	self:addElement(BarRight)
 	self.BarRight = BarRight
 	local BarLeft = LUI.UIImage.new(0, 0, 128, 186, 0, 0, 328, 356)
-	BarLeft:setImage(RegisterImage(0x1A7EE226176D9CB))
+	BarLeft:setImage(RegisterImage(@"uie_ui_hud_selectspawn_layout_boxside"))
 	self:addElement(BarLeft)
 	self.BarLeft = BarLeft
 	local RedDot = LUI.UIImage.new(0, 0, 1725, 1749, 0, 0, 94, 118)
 	RedDot:setAlpha(0.3)
-	RedDot:setImage(RegisterImage(0xC66A732DA072CFD))
+	RedDot:setImage(RegisterImage(@"uie_ui_hud_selectspawn_layout_reddot"))
 	self:addElement(RedDot)
 	self.RedDot = RedDot
 	local layoutRight = CoD.SpawnSelectKillcamFrameLayoutRight.new(f1_arg0, f1_arg1, 0, 0, 1792, 1882, 0, 0, -40.5, 884.5)
@@ -90,31 +90,31 @@ CoD.SpawnSelectKillcamFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	MapName:setAlpha(0.8)
 	MapName:setText(ToUpper(GetMapName()))
 	MapName:setTTF("dinnext_regular")
-	MapName:setMaterial(LUI.UIImage.GetCachedMaterial(0x90D57B1E92D39D7))
+	MapName:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_90D57B1E92D39D7"))
 	MapName:setShaderVector(0, 0.3, 0, 0, 0)
 	MapName:setShaderVector(1, 0, 0, 0, 0)
 	MapName:setShaderVector(2, 0.9, 0.8, 0.7, 0.5)
 	MapName:setLetterSpacing(6)
-	MapName:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	MapName:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	MapName:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	MapName:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(MapName)
 	self.MapName = MapName
 	local MapLocation = LUI.UIText.new(0, 0, 348.5, 548.5, 0, 0, 765.5, 775.5)
 	MapLocation:setAlpha(0)
-	MapLocation:setText(Engine[0xF9F1239CFD921FE](0x93E719493E9E18F))
+	MapLocation:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	MapLocation:setTTF("dinnext_regular")
 	MapLocation:setLetterSpacing(2)
-	MapLocation:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	MapLocation:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	MapLocation:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	MapLocation:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(MapLocation)
 	self.MapLocation = MapLocation
 	local Operation = LUI.UIText.new(0, 0, 348.5, 548.5, 0, 0, 756.5, 766.5)
 	Operation:setAlpha(0)
-	Operation:setText(Engine[0xF9F1239CFD921FE](0x93E719493E9E18F))
+	Operation:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	Operation:setTTF("dinnext_regular")
 	Operation:setLetterSpacing(2)
-	Operation:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Operation:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Operation:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Operation:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(Operation)
 	self.Operation = Operation
 	self:mergeStateConditions({
@@ -146,7 +146,7 @@ CoD.SpawnSelectKillcamFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	})
 	local f1_local16 = self
 	local f1_local17 = self.subscribeToModel
-	local f1_local18 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local18 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local17(f1_local16, f1_local18["hudItems.showSpawnSelect"], function(f5_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -158,7 +158,7 @@ CoD.SpawnSelectKillcamFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	end, false)
 	f1_local16 = self
 	f1_local17 = self.subscribeToModel
-	f1_local18 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local18 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local17(f1_local16, f1_local18["hudItems.killcamActive"], function(f6_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -209,7 +209,7 @@ CoD.SpawnSelectKillcamFrame.__resetProperties = function(f10_arg0)
 	f10_arg0.layoutLeft:completeAnimation()
 	f10_arg0.Layout:completeAnimation()
 	f10_arg0.LayoutStripe:setAlpha(0)
-	f10_arg0.LayoutStripe:setMaterial(LUI.UIImage.GetCachedMaterial(0xE992BD5A540E2D))
+	f10_arg0.LayoutStripe:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_delta_normal"))
 	f10_arg0.LayoutStripe:setShaderVector(0, 0, 1, 0, 0)
 	f10_arg0.LayoutStripe:setShaderVector(1, 0, 0, 0, 0)
 	f10_arg0.LayoutStripe:setShaderVector(2, 0, 1, 0, 0)
@@ -221,7 +221,7 @@ CoD.SpawnSelectKillcamFrame.__resetProperties = function(f10_arg0)
 	f10_arg0.BarLeft:setAlpha(1)
 	f10_arg0.Ready:setAlpha(1)
 	f10_arg0.LayoutLines:setAlpha(0)
-	f10_arg0.LayoutLines:setMaterial(LUI.UIImage.GetCachedMaterial(0xE992BD5A540E2D))
+	f10_arg0.LayoutLines:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_delta_normal"))
 	f10_arg0.LayoutLines:setShaderVector(0, 0, 1, 0, 0)
 	f10_arg0.LayoutLines:setShaderVector(1, 0, 0, 0, 0)
 	f10_arg0.LayoutLines:setShaderVector(2, 0, 1, 0, 0)
@@ -347,7 +347,7 @@ CoD.SpawnSelectKillcamFrame.__clipsPerState = {
 								local f35_local0 = function(f36_arg0)
 									local f36_local0 = function(f37_arg0)
 										local f37_local0 = function(f38_arg0)
-											f38_arg0:beginAnimation(800, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+											f38_arg0:beginAnimation(800, Enum[@"luitween"][@"luitween_ease_in"])
 											f38_arg0:setAlpha(0)
 											f38_arg0:setShaderVector(0, 0.5, 0.5, 0, 0)
 											f38_arg0:setShaderVector(1, 0, 0, 0, 0)
@@ -358,7 +358,7 @@ CoD.SpawnSelectKillcamFrame.__clipsPerState = {
 										f37_arg0:setShaderVector(1, 0.38, 0.38, 0, 0)
 										f37_arg0:registerEventHandler("transition_complete_keyframe", f37_local0)
 									end
-									f36_arg0:beginAnimation(800, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+									f36_arg0:beginAnimation(800, Enum[@"luitween"][@"luitween_ease_out"])
 									f36_arg0:setAlpha(0.1)
 									f36_arg0:setShaderVector(0, 0, 1, 0, 0)
 									f36_arg0:setShaderVector(1, 0.5, 0.5, 0, 0)
@@ -367,7 +367,7 @@ CoD.SpawnSelectKillcamFrame.__clipsPerState = {
 								f35_arg0:beginAnimation(1000)
 								f35_arg0:registerEventHandler("transition_complete_keyframe", f35_local0)
 							end
-							f34_arg0:beginAnimation(799, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+							f34_arg0:beginAnimation(799, Enum[@"luitween"][@"luitween_ease_in"])
 							f34_arg0:setAlpha(0)
 							f34_arg0:setShaderVector(0, 0.5, 0.5, 0, 0)
 							f34_arg0:setShaderVector(1, 0, 0, 0, 0)
@@ -378,7 +378,7 @@ CoD.SpawnSelectKillcamFrame.__clipsPerState = {
 						f33_arg0:setShaderVector(1, 0.37, 0.37, 0, 0)
 						f33_arg0:registerEventHandler("transition_complete_keyframe", f33_local0)
 					end
-					f32_arg0:beginAnimation(799, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f32_arg0:beginAnimation(799, Enum[@"luitween"][@"luitween_ease_out"])
 					f32_arg0:setAlpha(0.1)
 					f32_arg0:setShaderVector(0, 0, 1, 0, 0)
 					f32_arg0:setShaderVector(1, 0.5, 0.5, 0, 0)
@@ -391,7 +391,7 @@ CoD.SpawnSelectKillcamFrame.__clipsPerState = {
 			end
 			f11_arg0.LayoutStripe:completeAnimation()
 			f11_arg0.LayoutStripe:setAlpha(1)
-			f11_arg0.LayoutStripe:setMaterial(LUI.UIImage.GetCachedMaterial(0xE992BD5A540E2D))
+			f11_arg0.LayoutStripe:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_delta_normal"))
 			f11_arg0.LayoutStripe:setShaderVector(0, 0.5, 0.5, 0, 0)
 			f11_arg0.LayoutStripe:setShaderVector(1, 0, 0, 0, 0)
 			f11_arg0.LayoutStripe:setShaderVector(2, 0, 1, 0, 0)
@@ -559,11 +559,11 @@ CoD.SpawnSelectKillcamFrame.__clipsPerState = {
 							f65_arg0:beginAnimation(1200)
 							f65_arg0:registerEventHandler("transition_complete_keyframe", f65_local0)
 						end
-						f64_arg0:beginAnimation(99, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+						f64_arg0:beginAnimation(99, Enum[@"luitween"][@"luitween_ease_both"])
 						f64_arg0:setAlpha(0.1)
 						f64_arg0:registerEventHandler("transition_complete_keyframe", f64_local0)
 					end
-					f63_arg0:beginAnimation(100, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f63_arg0:beginAnimation(100, Enum[@"luitween"][@"luitween_ease_both"])
 					f63_arg0:setAlpha(1)
 					f63_arg0:registerEventHandler("transition_complete_keyframe", f63_local0)
 				end
@@ -612,27 +612,27 @@ CoD.SpawnSelectKillcamFrame.__clipsPerState = {
 						local f82_local0 = function(f83_arg0)
 							local f83_local0 = function(f84_arg0)
 								local f84_local0 = function(f85_arg0)
-									f85_arg0:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+									f85_arg0:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 									f85_arg0:setAlpha(0.5)
 									f85_arg0:registerEventHandler("transition_complete_keyframe", f11_arg0.clipFinished)
 								end
-								f84_arg0:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+								f84_arg0:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 								f84_arg0:setAlpha(0.3)
 								f84_arg0:registerEventHandler("transition_complete_keyframe", f84_local0)
 							end
-							f83_arg0:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+							f83_arg0:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 							f83_arg0:setAlpha(0.5)
 							f83_arg0:registerEventHandler("transition_complete_keyframe", f83_local0)
 						end
-						f82_arg0:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+						f82_arg0:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 						f82_arg0:setAlpha(0.3)
 						f82_arg0:registerEventHandler("transition_complete_keyframe", f82_local0)
 					end
-					f81_arg0:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f81_arg0:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 					f81_arg0:setAlpha(0.5)
 					f81_arg0:registerEventHandler("transition_complete_keyframe", f81_local0)
 				end
-				f11_arg0.MapName:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f11_arg0.MapName:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_both"])
 				f11_arg0.MapName:setAlpha(0.3)
 				f11_arg0.MapName:registerEventHandler("interrupted_keyframe", f11_arg0.clipInterrupted)
 				f11_arg0.MapName:registerEventHandler("transition_complete_keyframe", f80_local0)
@@ -699,7 +699,7 @@ CoD.SpawnSelectKillcamFrame.__clipsPerState = {
 						f97_arg0:setAlpha(0)
 						f97_arg0:registerEventHandler("transition_complete_keyframe", f97_local0)
 					end
-					f96_arg0:beginAnimation(89, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f96_arg0:beginAnimation(89, Enum[@"luitween"][@"luitween_ease_in"])
 					f96_arg0:setShaderVector(0, 0, 1, 0, 0)
 					f96_arg0:registerEventHandler("transition_complete_keyframe", f96_local0)
 				end
@@ -709,7 +709,7 @@ CoD.SpawnSelectKillcamFrame.__clipsPerState = {
 			end
 			f86_arg0.LayoutLines:completeAnimation()
 			f86_arg0.LayoutLines:setAlpha(1)
-			f86_arg0.LayoutLines:setMaterial(LUI.UIImage.GetCachedMaterial(0xE992BD5A540E2D))
+			f86_arg0.LayoutLines:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_delta_normal"))
 			f86_arg0.LayoutLines:setShaderVector(0, 0.5, 0.5, 0, 0)
 			f86_arg0.LayoutLines:setShaderVector(1, 0, 0, 0, 0)
 			f86_arg0.LayoutLines:setShaderVector(2, 0, 1, 0, 0)
@@ -718,7 +718,7 @@ CoD.SpawnSelectKillcamFrame.__clipsPerState = {
 			f86_local2(f86_arg0.LayoutLines)
 			local f86_local3 = function(f99_arg0)
 				local f99_local0 = function(f100_arg0)
-					f100_arg0:beginAnimation(50, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f100_arg0:beginAnimation(50, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_both"])
 					f100_arg0:setAlpha(1)
 					f100_arg0:registerEventHandler("transition_complete_keyframe", f86_arg0.clipFinished)
 				end
@@ -740,7 +740,7 @@ CoD.SpawnSelectKillcamFrame.__clipsPerState = {
 						f103_arg0:setAlpha(0)
 						f103_arg0:registerEventHandler("transition_complete_keyframe", f103_local0)
 					end
-					f102_arg0:beginAnimation(89, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f102_arg0:beginAnimation(89, Enum[@"luitween"][@"luitween_ease_in"])
 					f102_arg0:setShaderVector(0, 0, 1, 0, 0)
 					f102_arg0:registerEventHandler("transition_complete_keyframe", f102_local0)
 				end
@@ -750,7 +750,7 @@ CoD.SpawnSelectKillcamFrame.__clipsPerState = {
 			end
 			f86_arg0.LayoutStripe:completeAnimation()
 			f86_arg0.LayoutStripe:setAlpha(0.2)
-			f86_arg0.LayoutStripe:setMaterial(LUI.UIImage.GetCachedMaterial(0xE992BD5A540E2D))
+			f86_arg0.LayoutStripe:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_delta_normal"))
 			f86_arg0.LayoutStripe:setShaderVector(0, 0.5, 0.5, 0, 0)
 			f86_arg0.LayoutStripe:setShaderVector(1, 0, 0, 0, 0)
 			f86_arg0.LayoutStripe:setShaderVector(2, 0, 1, 0, 0)
@@ -759,7 +759,7 @@ CoD.SpawnSelectKillcamFrame.__clipsPerState = {
 			f86_local4(f86_arg0.LayoutStripe)
 			local f86_local5 = function(f105_arg0)
 				local f105_local0 = function(f106_arg0)
-					f106_arg0:beginAnimation(60, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f106_arg0:beginAnimation(60, Enum[@"luitween"][@"luitween_bounce"] | Enum[@"luitween"][@"luitween_ease_both"])
 					f106_arg0:setAlpha(1)
 					f106_arg0:registerEventHandler("transition_complete_keyframe", f86_arg0.clipFinished)
 				end
@@ -771,7 +771,7 @@ CoD.SpawnSelectKillcamFrame.__clipsPerState = {
 			f86_arg0.System:setAlpha(0)
 			f86_local5(f86_arg0.System)
 			local f86_local6 = function(f107_arg0)
-				f107_arg0:beginAnimation(120, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f107_arg0:beginAnimation(120, Enum[@"luitween"][@"luitween_ease_in"])
 				f107_arg0:setAlpha(1)
 				f107_arg0:registerEventHandler("transition_complete_keyframe", f86_arg0.clipFinished)
 			end
@@ -781,7 +781,7 @@ CoD.SpawnSelectKillcamFrame.__clipsPerState = {
 			f86_arg0.Online:registerEventHandler("transition_complete_keyframe", f86_local6)
 			local f86_local7 = function(f108_arg0)
 				local f108_local0 = function(f109_arg0)
-					f109_arg0:beginAnimation(60, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f109_arg0:beginAnimation(60, Enum[@"luitween"][@"luitween_ease_in"])
 					f109_arg0:setLeftRight(0, 0, 1700, 1758)
 					f109_arg0:setAlpha(1)
 					f109_arg0:registerEventHandler("transition_complete_keyframe", f86_arg0.clipFinished)
@@ -796,7 +796,7 @@ CoD.SpawnSelectKillcamFrame.__clipsPerState = {
 			f86_local7(f86_arg0.BarRight)
 			local f86_local8 = function(f110_arg0)
 				local f110_local0 = function(f111_arg0)
-					f111_arg0:beginAnimation(60, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f111_arg0:beginAnimation(60, Enum[@"luitween"][@"luitween_ease_in"])
 					f111_arg0:setLeftRight(0, 0, 128, 186)
 					f111_arg0:setAlpha(1)
 					f111_arg0:registerEventHandler("transition_complete_keyframe", f86_arg0.clipFinished)
@@ -874,7 +874,7 @@ CoD.SpawnSelectKillcamFrame.__clipsPerState = {
 						f122_arg0:beginAnimation(1300)
 						f122_arg0:registerEventHandler("transition_complete_keyframe", f122_local0)
 					end
-					f121_arg0:beginAnimation(600, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f121_arg0:beginAnimation(600, Enum[@"luitween"][@"luitween_ease_in"])
 					f121_arg0:setShaderVector(0, 0, 1, 0, 0)
 					f121_arg0:registerEventHandler("transition_complete_keyframe", f121_local0)
 				end
@@ -884,7 +884,7 @@ CoD.SpawnSelectKillcamFrame.__clipsPerState = {
 			end
 			f119_arg0.LayoutLines:completeAnimation()
 			f119_arg0.LayoutLines:setAlpha(1)
-			f119_arg0.LayoutLines:setMaterial(LUI.UIImage.GetCachedMaterial(0xE992BD5A540E2D))
+			f119_arg0.LayoutLines:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_delta_normal"))
 			f119_arg0.LayoutLines:setShaderVector(0, 0.5, 0.5, 0, 0)
 			f119_arg0.LayoutLines:setShaderVector(1, 0, 0, 0, 0)
 			f119_arg0.LayoutLines:setShaderVector(2, 0, 1, 0, 0)
@@ -915,7 +915,7 @@ CoD.SpawnSelectKillcamFrame.__clipsPerState = {
 						f128_arg0:beginAnimation(1300)
 						f128_arg0:registerEventHandler("transition_complete_keyframe", f128_local0)
 					end
-					f127_arg0:beginAnimation(600, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f127_arg0:beginAnimation(600, Enum[@"luitween"][@"luitween_ease_in"])
 					f127_arg0:setShaderVector(0, 0, 1, 0, 0)
 					f127_arg0:registerEventHandler("transition_complete_keyframe", f127_local0)
 				end
@@ -925,7 +925,7 @@ CoD.SpawnSelectKillcamFrame.__clipsPerState = {
 			end
 			f119_arg0.LayoutStripe:completeAnimation()
 			f119_arg0.LayoutStripe:setAlpha(1)
-			f119_arg0.LayoutStripe:setMaterial(LUI.UIImage.GetCachedMaterial(0xE992BD5A540E2D))
+			f119_arg0.LayoutStripe:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_delta_normal"))
 			f119_arg0.LayoutStripe:setShaderVector(0, 0.5, 0.5, 0, 0)
 			f119_arg0.LayoutStripe:setShaderVector(1, 0, 0, 0, 0)
 			f119_arg0.LayoutStripe:setShaderVector(2, 0, 1, 0, 0)
@@ -947,7 +947,7 @@ CoD.SpawnSelectKillcamFrame.__clipsPerState = {
 			f119_local3(f119_arg0.System)
 			local f119_local4 = function(f132_arg0)
 				local f132_local0 = function(f133_arg0)
-					f133_arg0:beginAnimation(299, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f133_arg0:beginAnimation(299, Enum[@"luitween"][@"luitween_ease_in"])
 					f133_arg0:setLeftRight(0, 0, 1674, 1732)
 					f133_arg0:setAlpha(1)
 					f133_arg0:registerEventHandler("transition_complete_keyframe", f119_arg0.clipFinished)
@@ -962,7 +962,7 @@ CoD.SpawnSelectKillcamFrame.__clipsPerState = {
 			f119_local4(f119_arg0.BarRight)
 			local f119_local5 = function(f134_arg0)
 				local f134_local0 = function(f135_arg0)
-					f135_arg0:beginAnimation(299, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f135_arg0:beginAnimation(299, Enum[@"luitween"][@"luitween_ease_in"])
 					f135_arg0:setLeftRight(0, 0, 131, 189)
 					f135_arg0:setAlpha(1)
 					f135_arg0:registerEventHandler("transition_complete_keyframe", f119_arg0.clipFinished)

@@ -11,7 +11,7 @@ CoD.AmmoWidgetWZArmorShardUnavailable_PC.new = function(f1_arg0, f1_arg1, f1_arg
 	Inactive:setRGB(0.88, 0.07, 0.07)
 	Inactive:setAlpha(0.25)
 	Inactive:setScale(1.4, 1.4)
-	Inactive:setImage(RegisterImage(0x8440A4FA2F1A6DC))
+	Inactive:setImage(RegisterImage(@"hash_38440A4FA2F1A6DC"))
 	self:addElement(Inactive)
 	self.Inactive = Inactive
 	self:mergeStateConditions({

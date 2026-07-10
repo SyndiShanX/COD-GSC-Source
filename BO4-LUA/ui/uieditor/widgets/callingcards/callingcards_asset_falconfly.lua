@@ -9,44 +9,44 @@ CoD.CallingCards_Asset_falconfly.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local backwing = LUI.UIImage.new(0, 0, 255.5, 439.5, 0, 0, 0, 112)
 	backwing:setScale(1, 1.06)
-	backwing:setImage(RegisterImage(0x58F855F43B55CAB))
+	backwing:setImage(RegisterImage(@"uie_ui_icon_callingcards_zm_zombie_hunter_08_bird_backwing"))
 	self:addElement(backwing)
 	self.backwing = backwing
 	local bottomtalon1 = LUI.UIImage.new(0, 0, 302, 422, 0, 0, 178, 242)
 	bottomtalon1:setAlpha(0)
-	bottomtalon1:setImage(RegisterImage(0x6B14BE6E7DCF2AF))
+	bottomtalon1:setImage(RegisterImage(@"uie_ui_icon_callingcards_zm_zombie_hunter_08_bird_bottomtalon1"))
 	self:addElement(bottomtalon1)
 	self.bottomtalon1 = bottomtalon1
 	local bottomtalon2 = LUI.UIImage.new(0, 0, 302, 422, 0, 0, 178, 242)
-	bottomtalon2:setImage(RegisterImage(0x6B14CE6E7DCF462))
+	bottomtalon2:setImage(RegisterImage(@"uie_ui_icon_callingcards_zm_zombie_hunter_08_bird_bottomtalon2"))
 	self:addElement(bottomtalon2)
 	self.bottomtalon2 = bottomtalon2
 	local birdbody = LUI.UIImage.new(0, 0, 0, 400, 0, 0, 78, 238)
-	birdbody:setImage(RegisterImage(0x6749BC76716472F))
+	birdbody:setImage(RegisterImage(@"uie_ui_icon_callingcards_zm_zombie_hunter_08_bird_body"))
 	self:addElement(birdbody)
 	self.birdbody = birdbody
 	local bottomtalon3 = LUI.UIImage.new(0, 0, 302, 422, 0, 0, 178, 242)
 	bottomtalon3:setAlpha(0)
-	bottomtalon3:setImage(RegisterImage(0x6B14DE6E7DCF615))
+	bottomtalon3:setImage(RegisterImage(@"uie_ui_icon_callingcards_zm_zombie_hunter_08_bird_bottomtalon3"))
 	self:addElement(bottomtalon3)
 	self.bottomtalon3 = bottomtalon3
 	local toptalon1 = LUI.UIImage.new(0, 0, 302, 422, 0, 0, 178, 242)
 	toptalon1:setAlpha(0)
-	toptalon1:setImage(RegisterImage(0x23C74088A7D1315))
+	toptalon1:setImage(RegisterImage(@"uie_ui_icon_callingcards_zm_zombie_hunter_08_bird_toptalon1"))
 	self:addElement(toptalon1)
 	self.toptalon1 = toptalon1
 	local toptalon2 = LUI.UIImage.new(0, 0, 302, 422, 0, 0, 178, 242)
-	toptalon2:setImage(RegisterImage(0x23C71088A7D0DFC))
+	toptalon2:setImage(RegisterImage(@"uie_ui_icon_callingcards_zm_zombie_hunter_08_bird_toptalon2"))
 	self:addElement(toptalon2)
 	self.toptalon2 = toptalon2
 	local toptalon3 = LUI.UIImage.new(0, 0, 302, 422, 0, 0, 178, 242)
 	toptalon3:setAlpha(0)
-	toptalon3:setImage(RegisterImage(0x23C72088A7D0FAF))
+	toptalon3:setImage(RegisterImage(@"uie_ui_icon_callingcards_zm_zombie_hunter_08_bird_toptalon3"))
 	self:addElement(toptalon3)
 	self.toptalon3 = toptalon3
 	local topwing = LUI.UIImage.new(0, 0, 18, 314, 0, 0, 2.5, 146.5)
 	topwing:setScale(1, 1.03)
-	topwing:setImage(RegisterImage(0x9CF20DBAC9FC585))
+	topwing:setImage(RegisterImage(@"uie_ui_icon_callingcards_zm_zombie_hunter_08_bird_topwing"))
 	self:addElement(topwing)
 	self.topwing = topwing
 	if PostLoadFunc then

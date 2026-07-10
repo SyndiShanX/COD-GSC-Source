@@ -8,8 +8,8 @@ CoD.CodCaster_Settings_CategoryTabs_BG.new = function(f1_arg0, f1_arg1, f1_arg2,
 	self.soundSet = "default"
 	local NoiseTiledBacking = LUI.UIImage.new(0.5, 0.5, -525, 525, 0.5, 0.5, -18.5, 18.5)
 	NoiseTiledBacking:setAlpha(0.5)
-	NoiseTiledBacking:setImage(RegisterImage(0x34839E8065B1E53))
-	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	NoiseTiledBacking:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	NoiseTiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	NoiseTiledBacking:setupNineSliceShader(196, 88)
 	self:addElement(NoiseTiledBacking)
@@ -21,7 +21,7 @@ CoD.CodCaster_Settings_CategoryTabs_BG.new = function(f1_arg0, f1_arg1, f1_arg2,
 	self.TabBackingTint = TabBackingTint
 	local TabBottomLine = LUI.UIImage.new(0.5, 0.5, -410, 410, 0, 0, 34, 38)
 	TabBottomLine:setAlpha(0.08)
-	TabBottomLine:setImage(RegisterImage(0x5526CF3733E24C4))
+	TabBottomLine:setImage(RegisterImage(@"uie_ui_menu_common_tab_line_bottom"))
 	self:addElement(TabBottomLine)
 	self.TabBottomLine = TabBottomLine
 	if PostLoadFunc then

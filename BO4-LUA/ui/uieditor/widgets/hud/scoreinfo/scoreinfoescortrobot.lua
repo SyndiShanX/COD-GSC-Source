@@ -17,7 +17,7 @@ CoD.ScoreInfoEscortRobot.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	self:addElement(RobotObjective)
 	self.RobotObjective = RobotObjective
 	local MovingImage = LUI.UIImage.new(0, 0, 28, 44, 1, 1, -27, -11)
-	MovingImage:setImage(RegisterImage(0xA6EF6D2C1A5DF0E))
+	MovingImage:setImage(RegisterImage(@"hash_6A6EF6D2C1A5DF0E"))
 	self:addElement(MovingImage)
 	self.MovingImage = MovingImage
 	self:mergeStateConditions({
@@ -30,7 +30,7 @@ CoD.ScoreInfoEscortRobot.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	})
 	local f1_local4 = self
 	local f1_local5 = self.subscribeToModel
-	local f1_local6 = Engine[0x8DF2E5447F384B9]()
+	local f1_local6 = Engine[@"getglobalmodel"]()
 	f1_local5(f1_local4, f1_local6["Escort.robotMoving"], function(f3_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

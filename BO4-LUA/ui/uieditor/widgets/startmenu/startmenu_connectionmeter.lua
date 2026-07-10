@@ -21,10 +21,10 @@ CoD.StartMenu_ConnectionMeter.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self:addElement(bg0)
 	self.bg0 = bg0
 	local PingLabel = LUI.UIText.new(0, 0, 185, 273, 0, 0, 10.5, 30.5)
-	PingLabel:setText(Engine[0xF9F1239CFD921FE](0xC82D7F8B4BBEF0A))
+	PingLabel:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_C82D7F8B4BBEF0A"))
 	PingLabel:setTTF("default")
-	PingLabel:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	PingLabel:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	PingLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	PingLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(PingLabel)
 	self.PingLabel = PingLabel
 	local bg10 = LUI.UIImage.new(0, 0, 562.5, 738.5, 0, 0, 2, 113)
@@ -38,15 +38,15 @@ CoD.StartMenu_ConnectionMeter.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self:addElement(bg00)
 	self.bg00 = bg00
 	local TextBox0 = LUI.UIText.new(0, 0, 569.5, 657.5, 0, 0, 10.5, 30.5)
-	TextBox0:setText(Engine[0xF9F1239CFD921FE](0x670B328A0A31250))
+	TextBox0:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_7670B328A0A31250"))
 	TextBox0:setTTF("default")
-	TextBox0:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	TextBox0:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	TextBox0:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	TextBox0:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(TextBox0)
 	self.TextBox0 = TextBox0
 	local PingTextBox = LUI.UIText.new(0, 0, 288.5, 339.5, 0, 0, 69, 99)
 	PingTextBox:setTTF("default")
-	PingTextBox:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
+	PingTextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
 	PingTextBox:subscribeToGlobalModel(f1_arg1, "NetStatsInfo", "NETSTATS_LATENCY", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -57,7 +57,7 @@ CoD.StartMenu_ConnectionMeter.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self.PingTextBox = PingTextBox
 	local PingTextBox0 = LUI.UIText.new(0, 0, 678, 729, 0, 0, 69, 99)
 	PingTextBox0:setTTF("default")
-	PingTextBox0:setAlignment(Enum[0x7A5123B654282D2][0x830CFD395E6AA0A])
+	PingTextBox0:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
 	PingTextBox0:subscribeToGlobalModel(f1_arg1, "NetStatsInfo", "NETSTATS_PACKETLOSS", function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then

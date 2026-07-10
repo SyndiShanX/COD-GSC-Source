@@ -1,16 +1,16 @@
 require("x64:ea9b3d743198d18")
-CoD[0x8482E5A4D7D79F3] = InheritFrom(LUI.UIElement)
-CoD[0x8482E5A4D7D79F3].__defaultWidth = 960
-CoD[0x8482E5A4D7D79F3].__defaultHeight = 240
-CoD[0x8482E5A4D7D79F3].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+CoD[@"hash_8482E5A4D7D79F3"] = InheritFrom(LUI.UIElement)
+CoD[@"hash_8482E5A4D7D79F3"].__defaultWidth = 960
+CoD[@"hash_8482E5A4D7D79F3"].__defaultHeight = 240
+CoD[@"hash_8482E5A4D7D79F3"].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
 	local self = LUI.UIElement.new(f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
-	self:setClass(CoD[0x8482E5A4D7D79F3])
+	self:setClass(CoD[@"hash_8482E5A4D7D79F3"])
 	self.id = "CallingCards_Dark_Ops_Master"
 	self.soundSet = "default"
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Background = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	Background:setImage(RegisterImage(0xF22A188DCC284BD))
+	Background:setImage(RegisterImage(@"uie_dragon_background"))
 	self:addElement(Background)
 	self.Background = Background
 	local dragon01 = CoD.CallingCards_Asset_dragon.new(f1_arg0, f1_arg1, 0, 0, 171, 395, 0, 0, -54, 154)
@@ -18,36 +18,36 @@ CoD[0x8482E5A4D7D79F3].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	self:addElement(dragon01)
 	self.dragon01 = dragon01
 	local pillar = LUI.UIImage.new(0, 0, 25, 312, 0, 0, -34, 243)
-	pillar:setImage(RegisterImage(0x6DD750FA7162F43))
+	pillar:setImage(RegisterImage(@"uie_front_pillar"))
 	self:addElement(pillar)
 	self.pillar = pillar
 	local soldier = LUI.UIImage.new(0, 0, 502, 915, 0, 0, 0, 240)
-	soldier:setImage(RegisterImage(0x3A1A67DA8F5A967))
+	soldier:setImage(RegisterImage(@"uie_soldier"))
 	self:addElement(soldier)
 	self.soldier = soldier
 	local soldierGun = LUI.UIImage.new(0, 0, 545, 960, 0, 0, 0, 240)
-	soldierGun:setImage(RegisterImage(0x39FFDB6B3794DC2))
+	soldierGun:setImage(RegisterImage(@"uie_soldier_gun"))
 	self:addElement(soldierGun)
 	self.soldierGun = soldierGun
 	local soldierGlow = LUI.UIImage.new(0, 0, 502, 916, 0, 0, 0, 240)
-	soldierGlow:setImage(RegisterImage(0x11E4373241FF189))
-	soldierGlow:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	soldierGlow:setImage(RegisterImage(@"uie_soldier_glow"))
+	soldierGlow:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(soldierGlow)
 	self.soldierGlow = soldierGlow
 	local dragon02 = LUI.UIImage.new(0, 0, 395, 456, 0, 0, 125.5, 173.5)
-	dragon02:setImage(RegisterImage(0x76C75C966E92FA7))
+	dragon02:setImage(RegisterImage(@"uie_dragon_02"))
 	self:addElement(dragon02)
 	self.dragon02 = dragon02
 	local firespot = LUI.UIImage.new(0, 0, 68.5, 186.5, 0, 0, 122.5, 240.5)
-	firespot:setImage(RegisterImage(0xDD88A92D094B9B0))
-	firespot:setMaterial(LUI.UIImage.GetCachedMaterial(0x9227A50BA2B8D21))
+	firespot:setImage(RegisterImage(@"uie_firespots"))
+	firespot:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_flipbook_add"))
 	firespot:setShaderVector(0, 0, 3, 0, 0)
 	firespot:setShaderVector(1, 6, 0, 0, 0)
 	self:addElement(firespot)
 	self.firespot = firespot
 	local firespot2 = LUI.UIImage.new(0, 0, 473, 576, 0, 0, -66, 37)
-	firespot2:setImage(RegisterImage(0xDD88A92D094B9B0))
-	firespot2:setMaterial(LUI.UIImage.GetCachedMaterial(0x9227A50BA2B8D21))
+	firespot2:setImage(RegisterImage(@"uie_firespots"))
+	firespot2:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_flipbook_add"))
 	firespot2:setShaderVector(0, 0, 3, 0, 0)
 	firespot2:setShaderVector(1, 6, 0, 0, 0)
 	self:addElement(firespot2)
@@ -58,7 +58,7 @@ CoD[0x8482E5A4D7D79F3].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	end
 	return self
 end
-CoD[0x8482E5A4D7D79F3].__resetProperties = function(f2_arg0)
+CoD[@"hash_8482E5A4D7D79F3"].__resetProperties = function(f2_arg0)
 	f2_arg0.dragon01:completeAnimation()
 	f2_arg0.soldierGlow:completeAnimation()
 	f2_arg0.dragon02:completeAnimation()
@@ -68,7 +68,7 @@ CoD[0x8482E5A4D7D79F3].__resetProperties = function(f2_arg0)
 	f2_arg0.dragon02:setTopBottom(0, 0, 125.5, 173.5)
 	f2_arg0.soldierGun:setTopBottom(0, 0, 0, 240)
 end
-CoD[0x8482E5A4D7D79F3].__clipsPerState = {
+CoD[@"hash_8482E5A4D7D79F3"].__clipsPerState = {
 	DefaultState = {
 		DefaultClip = function(f3_arg0, f3_arg1)
 			f3_arg0:__resetProperties()
@@ -171,6 +171,6 @@ CoD[0x8482E5A4D7D79F3].__clipsPerState = {
 		end,
 	},
 }
-CoD[0x8482E5A4D7D79F3].__onClose = function(f20_arg0)
+CoD[@"hash_8482E5A4D7D79F3"].__onClose = function(f20_arg0)
 	f20_arg0.dragon01:close()
 end

@@ -14,7 +14,7 @@ CoD.KillcamKilledByEquipment.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	EquipmentGroups:setWidgetType(CoD.KillcamKilledByEquipmentList)
 	EquipmentGroups:setVerticalCount(5)
 	EquipmentGroups:setSpacing(5)
-	EquipmentGroups:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	EquipmentGroups:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	EquipmentGroups:setDataSource("KillcamEquipment")
 	self:addElement(EquipmentGroups)
 	self.EquipmentGroups = EquipmentGroups

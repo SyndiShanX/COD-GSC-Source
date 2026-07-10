@@ -8,8 +8,8 @@ CoD.SpectreLockLineArrows.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	self.soundSet = "default"
 	local Arrows = LUI.UIImage.new(0, 0, 0, 16, 0, 0, 8, 24)
 	Arrows:setRGB(1, 0.01, 0)
-	Arrows:setImage(RegisterImage(0xA00921BA335191F))
-	Arrows:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Arrows:setImage(RegisterImage(@"hash_4A00921BA335191F"))
+	Arrows:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Arrows)
 	self.Arrows = Arrows
 	if PostLoadFunc then

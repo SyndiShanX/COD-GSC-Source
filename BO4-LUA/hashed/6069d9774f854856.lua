@@ -20,8 +20,8 @@ CoD.WeaponPersonalizationOptionsContainer.new = function(f1_arg0, f1_arg1, f1_ar
 	self.PersonalizeSlotContainer = PersonalizeSlotContainer
 	local Linker2 = LUI.UIImage.new(0.5, 0.5, -737.5, -733.5, 0, 0, 0, 269)
 	Linker2:setAlpha(0.05)
-	Linker2:setImage(RegisterImage(0xC49B0C8991A541F))
-	Linker2:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	Linker2:setImage(RegisterImage(@"hash_C49B0C8991A541F"))
+	Linker2:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	Linker2:setShaderVector(0, 0, 0, 0, 0)
 	Linker2:setupNineSliceShader(4, 8)
 	self:addElement(Linker2)
@@ -39,8 +39,8 @@ CoD.WeaponPersonalizationOptionsContainer.new = function(f1_arg0, f1_arg1, f1_ar
 	self.CamoOptions = CamoOptions
 	local Linker = LUI.UIImage.new(0.5, 0.5, -443.5, -439.5, 0, 0, 0, 269)
 	Linker:setAlpha(0.05)
-	Linker:setImage(RegisterImage(0xC49B0C8991A541F))
-	Linker:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	Linker:setImage(RegisterImage(@"hash_C49B0C8991A541F"))
+	Linker:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	Linker:setShaderVector(0, 0, 0, 0, 0)
 	Linker:setupNineSliceShader(4, 8)
 	self:addElement(Linker)
@@ -91,7 +91,7 @@ CoD.WeaponPersonalizationOptionsContainer.new = function(f1_arg0, f1_arg1, f1_ar
 	end, false)
 	f1_local6 = self
 	f1_local7 = self.subscribeToModel
-	f1_local8 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local8 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local7(f1_local6, f1_local8["WeaponPersonalization.listUpdate"], function(f8_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

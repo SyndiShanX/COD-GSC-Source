@@ -40,10 +40,10 @@ CoD.SupplyChainDetails_ButtonPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	self.VerticalListSpacer = VerticalListSpacer
 	local togglePreviewLabel = LUI.UIText.new(0, 0, 95, 143, 0.5, 0.5, -7, 11)
 	togglePreviewLabel:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
-	togglePreviewLabel:setText(Engine[0xF9F1239CFD921FE](0x32E3CA70AD7D0D0))
+	togglePreviewLabel:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/toggle_preview"))
 	togglePreviewLabel:setTTF("dinnext_regular")
 	togglePreviewLabel:setLetterSpacing(2)
-	togglePreviewLabel:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	togglePreviewLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	self:addElement(togglePreviewLabel)
 	self.togglePreviewLabel = togglePreviewLabel
 	LUI.OverrideFunction_CallOriginalFirst(self, "setState", function(element, controller, f3_arg2, f3_arg3, f3_arg4)

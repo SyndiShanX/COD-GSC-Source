@@ -17,7 +17,7 @@ CoD.ReservesSpecialContractProgressBar.new = function(f1_arg0, f1_arg1, f1_arg2,
 	self.ProgressBarBacking = ProgressBarBacking
 	local Progress = LUI.UIImage.new(0, 1, 11, -67, -0.08, 0.42, 5, 5)
 	Progress:setRGB(1, 0.73, 0)
-	Progress:setMaterial(LUI.UIImage.GetCachedMaterial(0x316E67E1DF2198E))
+	Progress:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_normal"))
 	Progress:setShaderVector(0, 1, 0, 0, 0)
 	Progress:setShaderVector(1, 0, 0, 0, 0)
 	Progress:setShaderVector(2, 1, 0, 0, 0)
@@ -27,7 +27,7 @@ CoD.ReservesSpecialContractProgressBar.new = function(f1_arg0, f1_arg1, f1_arg2,
 	self.Progress = Progress
 	local ProgressGlow = LUI.UIImage.new(0, 1, 11, -67, -0.13, 0.47, 5, 5)
 	ProgressGlow:setRGB(1, 0.73, 0)
-	ProgressGlow:setMaterial(LUI.UIImage.GetCachedMaterial(0x910274CA3518744))
+	ProgressGlow:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe"))
 	ProgressGlow:setShaderVector(0, 1, 0, 0, 0)
 	ProgressGlow:setShaderVector(1, 0, 0, 0, 0)
 	ProgressGlow:setShaderVector(2, 1, 0, 0, 0)
@@ -37,8 +37,8 @@ CoD.ReservesSpecialContractProgressBar.new = function(f1_arg0, f1_arg1, f1_arg2,
 	self.ProgressGlow = ProgressGlow
 	local TiledShaderImage = LUI.UIImage.new(0, 1, 10, -66, 0.28, 0.61, 1, 1)
 	TiledShaderImage:setRGB(0, 0, 0)
-	TiledShaderImage:setImage(RegisterImage(0x4B6FFA90272070E))
-	TiledShaderImage:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	TiledShaderImage:setImage(RegisterImage(@"uie_ui_menu_store_repeat_dot_pattern"))
+	TiledShaderImage:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	TiledShaderImage:setShaderVector(0, 0, 0, 0, 0)
 	TiledShaderImage:setupNineSliceShader(24, 24)
 	self:addElement(TiledShaderImage)
@@ -47,8 +47,8 @@ CoD.ReservesSpecialContractProgressBar.new = function(f1_arg0, f1_arg1, f1_arg2,
 	ProgressFraction:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	ProgressFraction:setText("")
 	ProgressFraction:setTTF("ttmussels_demibold")
-	ProgressFraction:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	ProgressFraction:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	ProgressFraction:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	ProgressFraction:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	self:addElement(ProgressFraction)
 	self.ProgressFraction = ProgressFraction
 	if PostLoadFunc then

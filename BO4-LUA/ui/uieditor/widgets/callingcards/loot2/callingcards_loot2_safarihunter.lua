@@ -1,52 +1,52 @@
-CoD[0x83DDFC8553ACB78] = InheritFrom(LUI.UIElement)
-CoD[0x83DDFC8553ACB78].__defaultWidth = 960
-CoD[0x83DDFC8553ACB78].__defaultHeight = 240
-CoD[0x83DDFC8553ACB78].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+CoD[@"hash_683DDFC8553ACB78"] = InheritFrom(LUI.UIElement)
+CoD[@"hash_683DDFC8553ACB78"].__defaultWidth = 960
+CoD[@"hash_683DDFC8553ACB78"].__defaultHeight = 240
+CoD[@"hash_683DDFC8553ACB78"].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
 	local self = LUI.UIElement.new(f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
-	self:setClass(CoD[0x83DDFC8553ACB78])
+	self:setClass(CoD[@"hash_683DDFC8553ACB78"])
 	self.id = "callingcards_loot2_safarihunter"
 	self.soundSet = "none"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local background = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	background:setImage(RegisterImage(0xE0F6A7CCB7B6062))
+	background:setImage(RegisterImage(@"uie_ui_menu_callingcards_safarihunter_bg"))
 	self:addElement(background)
 	self.background = background
 	local lion03 = LUI.UIImage.new(0, 0, 333, 533, 0, 0, 90, 218)
-	lion03:setImage(RegisterImage(0x7579DCE1C2B55B8))
+	lion03:setImage(RegisterImage(@"uie_ui_menu_callingcards_safarihunter_lion3"))
 	self:addElement(lion03)
 	self.lion03 = lion03
 	local lion02 = LUI.UIImage.new(0, 0, 160, 368, 0, 0, 64, 192)
-	lion02:setImage(RegisterImage(0x7579ECE1C2B576B))
+	lion02:setImage(RegisterImage(@"uie_ui_menu_callingcards_safarihunter_lion2"))
 	self:addElement(lion02)
 	self.lion02 = lion02
 	local lion01 = LUI.UIImage.new(0, 0, 94, 286, 0, 0, 75, 203)
-	lion01:setImage(RegisterImage(0x7579FCE1C2B591E))
+	lion01:setImage(RegisterImage(@"uie_ui_menu_callingcards_safarihunter_lion1"))
 	self:addElement(lion01)
 	self.lion01 = lion01
 	local lionfront = LUI.UIImage.new(0, 0, 168, 488, 0, 0, 62, 246)
-	lionfront:setImage(RegisterImage(0x3EC644CA88D5EFA))
+	lionfront:setImage(RegisterImage(@"uie_ui_menu_callingcards_safarihunter_lionfront"))
 	self:addElement(lionfront)
 	self.lionfront = lionfront
 	local splash03 = LUI.UIImage.new(0, 0, 272, 960, 0, 0, 48, 240)
-	splash03:setImage(RegisterImage(0x7FCBA5601192910))
-	splash03:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	splash03:setImage(RegisterImage(@"uie_ui_menu_callingcards_safarihunter_splash2"))
+	splash03:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(splash03)
 	self.splash03 = splash03
 	local splash01 = LUI.UIImage.new(0, 0, 57, 561, 0, 0, 112, 240)
-	splash01:setImage(RegisterImage(0x7FCBD5601192E29))
+	splash01:setImage(RegisterImage(@"uie_ui_menu_callingcards_safarihunter_splash1"))
 	self:addElement(splash01)
 	self.splash01 = splash01
 	local bull = LUI.UIImage.new(0, 0, 522, 986, 0, 0, 0, 240)
-	bull:setImage(RegisterImage(0xDEAD761652DD3E4))
+	bull:setImage(RegisterImage(@"uie_ui_menu_callingcards_safarihunter_bull"))
 	self:addElement(bull)
 	self.bull = bull
 	local splash02 = LUI.UIImage.new(0, 0, 272, 960, 0, 0, 48, 240)
-	splash02:setImage(RegisterImage(0x7FCBA5601192910))
-	splash02:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	splash02:setImage(RegisterImage(@"uie_ui_menu_callingcards_safarihunter_splash2"))
+	splash02:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(splash02)
 	self.splash02 = splash02
 	local grass = LUI.UIImage.new(0, 0, 0, 400, 0, 0, 0, 240)
-	grass:setImage(RegisterImage(0xC774B1F2B49E3A1))
+	grass:setImage(RegisterImage(@"uie_ui_menu_callingcards_safarihunter_grass"))
 	self:addElement(grass)
 	self.grass = grass
 	if PostLoadFunc then
@@ -54,7 +54,7 @@ CoD[0x83DDFC8553ACB78].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	end
 	return self
 end
-CoD[0x83DDFC8553ACB78].__resetProperties = function(f2_arg0)
+CoD[@"hash_683DDFC8553ACB78"].__resetProperties = function(f2_arg0)
 	f2_arg0.bull:completeAnimation()
 	f2_arg0.splash02:completeAnimation()
 	f2_arg0.lion01:completeAnimation()
@@ -89,7 +89,7 @@ CoD[0x83DDFC8553ACB78].__resetProperties = function(f2_arg0)
 	f2_arg0.splash03:setAlpha(1)
 	f2_arg0.splash03:setScale(1, 1)
 end
-CoD[0x83DDFC8553ACB78].__clipsPerState = {
+CoD[@"hash_683DDFC8553ACB78"].__clipsPerState = {
 	DefaultState = {
 		DefaultClip = function(f3_arg0, f3_arg1)
 			f3_arg0:__resetProperties()
@@ -212,11 +212,11 @@ CoD[0x83DDFC8553ACB78].__clipsPerState = {
 			f3_local5(f3_arg0.splash01)
 			local f3_local6 = function(f17_arg0)
 				local f17_local0 = function(f18_arg0)
-					f18_arg0:beginAnimation(1000, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f18_arg0:beginAnimation(1000, Enum[@"luitween"][@"luitween_ease_in"])
 					f18_arg0:setLeftRight(0, 0, 502, 966)
 					f18_arg0:registerEventHandler("transition_complete_keyframe", f3_arg0.clipFinished)
 				end
-				f3_arg0.bull:beginAnimation(2000, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f3_arg0.bull:beginAnimation(2000, Enum[@"luitween"][@"luitween_ease_out"])
 				f3_arg0.bull:setLeftRight(0, 0, 469, 933)
 				f3_arg0.bull:registerEventHandler("interrupted_keyframe", f3_arg0.clipInterrupted)
 				f3_arg0.bull:registerEventHandler("transition_complete_keyframe", f17_local0)

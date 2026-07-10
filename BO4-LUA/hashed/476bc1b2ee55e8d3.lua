@@ -12,20 +12,20 @@ CoD.HUD_ZM_Trial_Round_Failed.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Reason = LUI.UIText.new(0.5, 0.5, -960, 960, 0, 0, 188, 221)
 	Reason:setTTF("skorzhen")
-	Reason:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	Reason:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Reason:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	Reason:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	Reason:subscribeToGlobalModel(f1_arg1, "ZMHudGlobal", "trials.failureReason", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			Reason:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			Reason:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	self:addElement(Reason)
 	self.Reason = Reason
 	local RoundReached = LUI.UIText.new(0, 0, 0, 1920, 0, 0, 50, 83)
 	RoundReached:setTTF("skorzhen")
-	RoundReached:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	RoundReached:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	RoundReached:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	RoundReached:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	RoundReached:subscribeToGlobalModel(f1_arg1, "ZMHudGlobal", "trials.roundNumber", function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -36,10 +36,10 @@ CoD.HUD_ZM_Trial_Round_Failed.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self.RoundReached = RoundReached
 	local Failed = LUI.UIText.new(0.5, 0.5, -960, 960, 0, 0, -50, 40)
 	Failed:setRGB(ColorSet.ResistanceHigh.r, ColorSet.ResistanceHigh.g, ColorSet.ResistanceHigh.b)
-	Failed:setText(Engine[0xF9F1239CFD921FE](0xD9D6E119FDD76AE))
+	Failed:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_3D9D6E119FDD76AE"))
 	Failed:setTTF("skorzhen")
-	Failed:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	Failed:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Failed:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	Failed:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(Failed)
 	self.Failed = Failed
 	local Strikes = CoD.Hud_ZM_Trial_Strikes.new(f1_arg0, f1_arg1, 0.5, 0.5, -112, 112, 0, 0, 88, 168)
@@ -53,36 +53,36 @@ CoD.HUD_ZM_Trial_Round_Failed.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 		{
 			stateName = "HiddenCopy",
 			condition = function(menu, element, event)
-				local f5_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xB8E9B69F4B87954])
+				local f5_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_demo_all_game_hud_hidden"])
 				if not f5_local0 then
-					f5_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xD3ABF9A2753CE40])
+					f5_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_demo_camera_mode_moviecam"])
 					if not f5_local0 then
-						f5_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x59333FC97F7870])
+						f5_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_emp_active"])
 						if not f5_local0 then
-							f5_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x1CDCB451655ABCF])
+							f5_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_final_killcam"])
 							if not f5_local0 then
-								f5_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x69C28E2FCA82769])
+								f5_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_hud_hardcore"])
 								if not f5_local0 then
-									if Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xADC477DDE486DD7]) then
-										f5_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x23CD9BAB9B9F4C8])
+									if Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_hud_visible"]) then
+										f5_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_in_guided_missile"])
 										if not f5_local0 then
-											f5_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2])
+											f5_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_in_killcam"])
 											if not f5_local0 then
-												f5_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x7B52A87BC9AA4C7])
+												f5_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_in_remote_killstreak_static"])
 												if not f5_local0 then
-													f5_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x9BF57CE75A8755E])
+													f5_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"hash_29BF57CE75A8755E"])
 													if not f5_local0 then
-														f5_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x6668F0686232679])
+														f5_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_in_vehicle"])
 														if not f5_local0 then
-															f5_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x3AEEAA452536E6E])
+															f5_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_is_flash_banged"])
 															if not f5_local0 then
-																f5_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xD298E43D0B6FEF2])
+																f5_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_is_scoped"])
 																if not f5_local0 then
-																	f5_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F])
+																	f5_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_play_of_the_match"])
 																	if not f5_local0 then
-																		f5_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x4828BED794DA0A5])
+																		f5_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_round_end_killcam"])
 																		if not f5_local0 then
-																			f5_local0 = Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6])
+																			f5_local0 = Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_ui_active"])
 																		end
 																	end
 																end
@@ -112,199 +112,199 @@ CoD.HUD_ZM_Trial_Round_Failed.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	})
 	local HudZMTrialShame2 = Strikes
 	local HudZMTrialShame1 = Strikes.subscribeToModel
-	local HudZMTrialShame3 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	HudZMTrialShame1(HudZMTrialShame2, HudZMTrialShame3["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xB8E9B69F4B87954]], function(f7_arg0)
+	local HudZMTrialShame3 = Engine[@"getmodelforcontroller"](f1_arg1)
+	HudZMTrialShame1(HudZMTrialShame2, HudZMTrialShame3["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_demo_all_game_hud_hidden"]], function(f7_arg0)
 		f1_arg0:updateElementState(Strikes, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f7_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xB8E9B69F4B87954],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_demo_all_game_hud_hidden"],
 		})
 	end, false)
 	HudZMTrialShame2 = Strikes
 	HudZMTrialShame1 = Strikes.subscribeToModel
-	HudZMTrialShame3 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	HudZMTrialShame1(HudZMTrialShame2, HudZMTrialShame3["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xD3ABF9A2753CE40]], function(f8_arg0)
+	HudZMTrialShame3 = Engine[@"getmodelforcontroller"](f1_arg1)
+	HudZMTrialShame1(HudZMTrialShame2, HudZMTrialShame3["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_demo_camera_mode_moviecam"]], function(f8_arg0)
 		f1_arg0:updateElementState(Strikes, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f8_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xD3ABF9A2753CE40],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_demo_camera_mode_moviecam"],
 		})
 	end, false)
 	HudZMTrialShame2 = Strikes
 	HudZMTrialShame1 = Strikes.subscribeToModel
-	HudZMTrialShame3 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	HudZMTrialShame1(HudZMTrialShame2, HudZMTrialShame3["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x59333FC97F7870]], function(f9_arg0)
+	HudZMTrialShame3 = Engine[@"getmodelforcontroller"](f1_arg1)
+	HudZMTrialShame1(HudZMTrialShame2, HudZMTrialShame3["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_emp_active"]], function(f9_arg0)
 		f1_arg0:updateElementState(Strikes, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f9_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x59333FC97F7870],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_emp_active"],
 		})
 	end, false)
 	HudZMTrialShame2 = Strikes
 	HudZMTrialShame1 = Strikes.subscribeToModel
-	HudZMTrialShame3 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	HudZMTrialShame1(HudZMTrialShame2, HudZMTrialShame3["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x1CDCB451655ABCF]], function(f10_arg0)
+	HudZMTrialShame3 = Engine[@"getmodelforcontroller"](f1_arg1)
+	HudZMTrialShame1(HudZMTrialShame2, HudZMTrialShame3["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_final_killcam"]], function(f10_arg0)
 		f1_arg0:updateElementState(Strikes, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f10_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x1CDCB451655ABCF],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_final_killcam"],
 		})
 	end, false)
 	HudZMTrialShame2 = Strikes
 	HudZMTrialShame1 = Strikes.subscribeToModel
-	HudZMTrialShame3 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	HudZMTrialShame1(HudZMTrialShame2, HudZMTrialShame3["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x69C28E2FCA82769]], function(f11_arg0)
+	HudZMTrialShame3 = Engine[@"getmodelforcontroller"](f1_arg1)
+	HudZMTrialShame1(HudZMTrialShame2, HudZMTrialShame3["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_hud_hardcore"]], function(f11_arg0)
 		f1_arg0:updateElementState(Strikes, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f11_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x69C28E2FCA82769],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_hud_hardcore"],
 		})
 	end, false)
 	HudZMTrialShame2 = Strikes
 	HudZMTrialShame1 = Strikes.subscribeToModel
-	HudZMTrialShame3 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	HudZMTrialShame1(HudZMTrialShame2, HudZMTrialShame3["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xADC477DDE486DD7]], function(f12_arg0)
+	HudZMTrialShame3 = Engine[@"getmodelforcontroller"](f1_arg1)
+	HudZMTrialShame1(HudZMTrialShame2, HudZMTrialShame3["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_hud_visible"]], function(f12_arg0)
 		f1_arg0:updateElementState(Strikes, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f12_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xADC477DDE486DD7],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_hud_visible"],
 		})
 	end, false)
 	HudZMTrialShame2 = Strikes
 	HudZMTrialShame1 = Strikes.subscribeToModel
-	HudZMTrialShame3 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	HudZMTrialShame1(HudZMTrialShame2, HudZMTrialShame3["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x23CD9BAB9B9F4C8]], function(f13_arg0)
+	HudZMTrialShame3 = Engine[@"getmodelforcontroller"](f1_arg1)
+	HudZMTrialShame1(HudZMTrialShame2, HudZMTrialShame3["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_guided_missile"]], function(f13_arg0)
 		f1_arg0:updateElementState(Strikes, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f13_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x23CD9BAB9B9F4C8],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_guided_missile"],
 		})
 	end, false)
 	HudZMTrialShame2 = Strikes
 	HudZMTrialShame1 = Strikes.subscribeToModel
-	HudZMTrialShame3 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	HudZMTrialShame1(HudZMTrialShame2, HudZMTrialShame3["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2]], function(f14_arg0)
+	HudZMTrialShame3 = Engine[@"getmodelforcontroller"](f1_arg1)
+	HudZMTrialShame1(HudZMTrialShame2, HudZMTrialShame3["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"]], function(f14_arg0)
 		f1_arg0:updateElementState(Strikes, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f14_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x8A5E996D4528DA2],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_killcam"],
 		})
 	end, false)
 	HudZMTrialShame2 = Strikes
 	HudZMTrialShame1 = Strikes.subscribeToModel
-	HudZMTrialShame3 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	HudZMTrialShame1(HudZMTrialShame2, HudZMTrialShame3["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x7B52A87BC9AA4C7]], function(f15_arg0)
+	HudZMTrialShame3 = Engine[@"getmodelforcontroller"](f1_arg1)
+	HudZMTrialShame1(HudZMTrialShame2, HudZMTrialShame3["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_remote_killstreak_static"]], function(f15_arg0)
 		f1_arg0:updateElementState(Strikes, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f15_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x7B52A87BC9AA4C7],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_remote_killstreak_static"],
 		})
 	end, false)
 	HudZMTrialShame2 = Strikes
 	HudZMTrialShame1 = Strikes.subscribeToModel
-	HudZMTrialShame3 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	HudZMTrialShame1(HudZMTrialShame2, HudZMTrialShame3["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x9BF57CE75A8755E]], function(f16_arg0)
+	HudZMTrialShame3 = Engine[@"getmodelforcontroller"](f1_arg1)
+	HudZMTrialShame1(HudZMTrialShame2, HudZMTrialShame3["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"hash_29BF57CE75A8755E"]], function(f16_arg0)
 		f1_arg0:updateElementState(Strikes, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f16_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x9BF57CE75A8755E],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"hash_29BF57CE75A8755E"],
 		})
 	end, false)
 	HudZMTrialShame2 = Strikes
 	HudZMTrialShame1 = Strikes.subscribeToModel
-	HudZMTrialShame3 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	HudZMTrialShame1(HudZMTrialShame2, HudZMTrialShame3["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x6668F0686232679]], function(f17_arg0)
+	HudZMTrialShame3 = Engine[@"getmodelforcontroller"](f1_arg1)
+	HudZMTrialShame1(HudZMTrialShame2, HudZMTrialShame3["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_vehicle"]], function(f17_arg0)
 		f1_arg0:updateElementState(Strikes, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f17_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x6668F0686232679],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_in_vehicle"],
 		})
 	end, false)
 	HudZMTrialShame2 = Strikes
 	HudZMTrialShame1 = Strikes.subscribeToModel
-	HudZMTrialShame3 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	HudZMTrialShame1(HudZMTrialShame2, HudZMTrialShame3["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x3AEEAA452536E6E]], function(f18_arg0)
+	HudZMTrialShame3 = Engine[@"getmodelforcontroller"](f1_arg1)
+	HudZMTrialShame1(HudZMTrialShame2, HudZMTrialShame3["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_is_flash_banged"]], function(f18_arg0)
 		f1_arg0:updateElementState(Strikes, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f18_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x3AEEAA452536E6E],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_is_flash_banged"],
 		})
 	end, false)
 	HudZMTrialShame2 = Strikes
 	HudZMTrialShame1 = Strikes.subscribeToModel
-	HudZMTrialShame3 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	HudZMTrialShame1(HudZMTrialShame2, HudZMTrialShame3["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xD298E43D0B6FEF2]], function(f19_arg0)
+	HudZMTrialShame3 = Engine[@"getmodelforcontroller"](f1_arg1)
+	HudZMTrialShame1(HudZMTrialShame2, HudZMTrialShame3["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_is_scoped"]], function(f19_arg0)
 		f1_arg0:updateElementState(Strikes, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f19_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xD298E43D0B6FEF2],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_is_scoped"],
 		})
 	end, false)
 	HudZMTrialShame2 = Strikes
 	HudZMTrialShame1 = Strikes.subscribeToModel
-	HudZMTrialShame3 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	HudZMTrialShame1(HudZMTrialShame2, HudZMTrialShame3["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F]], function(f20_arg0)
+	HudZMTrialShame3 = Engine[@"getmodelforcontroller"](f1_arg1)
+	HudZMTrialShame1(HudZMTrialShame2, HudZMTrialShame3["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_play_of_the_match"]], function(f20_arg0)
 		f1_arg0:updateElementState(Strikes, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f20_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x24E603C16FCC38F],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_play_of_the_match"],
 		})
 	end, false)
 	HudZMTrialShame2 = Strikes
 	HudZMTrialShame1 = Strikes.subscribeToModel
-	HudZMTrialShame3 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	HudZMTrialShame1(HudZMTrialShame2, HudZMTrialShame3["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x4828BED794DA0A5]], function(f21_arg0)
+	HudZMTrialShame3 = Engine[@"getmodelforcontroller"](f1_arg1)
+	HudZMTrialShame1(HudZMTrialShame2, HudZMTrialShame3["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_round_end_killcam"]], function(f21_arg0)
 		f1_arg0:updateElementState(Strikes, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f21_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x4828BED794DA0A5],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_round_end_killcam"],
 		})
 	end, false)
 	HudZMTrialShame2 = Strikes
 	HudZMTrialShame1 = Strikes.subscribeToModel
-	HudZMTrialShame3 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	HudZMTrialShame1(HudZMTrialShame2, HudZMTrialShame3["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6]], function(f22_arg0)
+	HudZMTrialShame3 = Engine[@"getmodelforcontroller"](f1_arg1)
+	HudZMTrialShame1(HudZMTrialShame2, HudZMTrialShame3["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_ui_active"]], function(f22_arg0)
 		f1_arg0:updateElementState(Strikes, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f22_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0xA69E34E231CE8B6],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_ui_active"],
 		})
 	end, false)
 	HudZMTrialShame2 = Strikes
 	HudZMTrialShame1 = Strikes.subscribeToModel
-	HudZMTrialShame3 = Engine[0x8DF2E5447F384B9]()
+	HudZMTrialShame3 = Engine[@"getglobalmodel"]()
 	HudZMTrialShame1(HudZMTrialShame2, HudZMTrialShame3["ZMHudGlobal.trials.strikes"], function(f23_arg0)
 		f1_arg0:updateElementState(Strikes, {
 			name = "model_validation",
@@ -318,7 +318,7 @@ CoD.HUD_ZM_Trial_Round_Failed.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self.Strikes = Strikes
 	HudZMTrialShame1 = CoD.Hud_ZM_Trial_Shame.new(f1_arg0, f1_arg1, 0.5, 0.5, -446, -244, 0, 0, 252, 491)
 	HudZMTrialShame1.Portrait.Portrait.__Portrait_Portrait_Image = function()
-		HudZMTrialShame1.Portrait.Portrait:setImage(RegisterImage(CoD.ZombieUtility.GetShamedPlayerPortrait(f1_arg1, 1, 0x9FC2657D07FF186)))
+		HudZMTrialShame1.Portrait.Portrait:setImage(RegisterImage(CoD.ZombieUtility.GetShamedPlayerPortrait(f1_arg1, 1, @"ui_icon_hero_portrait_draft_stanton")))
 	end
 	HudZMTrialShame1.Portrait.Portrait.__Portrait_Portrait_Image()
 	HudZMTrialShame1.Gamertag.__Gamertag_String_Reference = function()
@@ -329,7 +329,7 @@ CoD.HUD_ZM_Trial_Round_Failed.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self.HudZMTrialShame1 = HudZMTrialShame1
 	HudZMTrialShame2 = CoD.Hud_ZM_Trial_Shame.new(f1_arg0, f1_arg1, 0.5, 0.5, -216, -14, 0, 0, 252, 491)
 	HudZMTrialShame2.Portrait.Portrait.__Portrait_Portrait_Image = function()
-		HudZMTrialShame2.Portrait.Portrait:setImage(RegisterImage(CoD.ZombieUtility.GetShamedPlayerPortrait(f1_arg1, 2, 0x8F112735FED33E7)))
+		HudZMTrialShame2.Portrait.Portrait:setImage(RegisterImage(CoD.ZombieUtility.GetShamedPlayerPortrait(f1_arg1, 2, @"ui_icon_hero_portrait_draft_bruno")))
 	end
 	HudZMTrialShame2.Portrait.Portrait.__Portrait_Portrait_Image()
 	HudZMTrialShame2.Gamertag.__Gamertag_String_Reference = function()
@@ -340,7 +340,7 @@ CoD.HUD_ZM_Trial_Round_Failed.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self.HudZMTrialShame2 = HudZMTrialShame2
 	HudZMTrialShame3 = CoD.Hud_ZM_Trial_Shame.new(f1_arg0, f1_arg1, 0.5, 0.5, 14, 216, 0, 0, 252, 491)
 	HudZMTrialShame3.Portrait.Portrait.__Portrait_Portrait_Image = function()
-		HudZMTrialShame3.Portrait.Portrait:setImage(RegisterImage(CoD.ZombieUtility.GetShamedPlayerPortrait(f1_arg1, 3, 0x526D66BA63113DF)))
+		HudZMTrialShame3.Portrait.Portrait:setImage(RegisterImage(CoD.ZombieUtility.GetShamedPlayerPortrait(f1_arg1, 3, @"ui_icon_hero_portrait_draft_diego")))
 	end
 	HudZMTrialShame3.Portrait.Portrait.__Portrait_Portrait_Image()
 	HudZMTrialShame3.Gamertag.__Gamertag_String_Reference = function()
@@ -351,7 +351,7 @@ CoD.HUD_ZM_Trial_Round_Failed.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self.HudZMTrialShame3 = HudZMTrialShame3
 	local HudZMTrialShame4 = CoD.Hud_ZM_Trial_Shame.new(f1_arg0, f1_arg1, 0.5, 0.5, 244, 446, 0, 0, 252, 491)
 	HudZMTrialShame4.Portrait.Portrait.__Portrait_Portrait_Image = function()
-		HudZMTrialShame4.Portrait.Portrait:setImage(RegisterImage(CoD.ZombieUtility.GetShamedPlayerPortrait(f1_arg1, 4, 0x51B136080630067)))
+		HudZMTrialShame4.Portrait.Portrait:setImage(RegisterImage(CoD.ZombieUtility.GetShamedPlayerPortrait(f1_arg1, 4, @"ui_icon_hero_portrait_draft_scarlett")))
 	end
 	HudZMTrialShame4.Portrait.Portrait.__Portrait_Portrait_Image()
 	HudZMTrialShame4.Gamertag.__Gamertag_String_Reference = function()
@@ -365,44 +365,44 @@ CoD.HUD_ZM_Trial_Round_Failed.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self:addElement(DescriptionDivider)
 	self.DescriptionDivider = DescriptionDivider
 	local CornerL = LUI.UIImage.new(0, 0, 658, 673, 0, 0, 31, 46)
-	CornerL:setImage(RegisterImage(0x1EC82771A88A0E6))
+	CornerL:setImage(RegisterImage(@"hash_61EC82771A88A0E6"))
 	self:addElement(CornerL)
 	self.CornerL = CornerL
 	local CornerR = LUI.UIImage.new(0, 0, 1247, 1262, 0, 0, 31, 46)
-	CornerR:setImage(RegisterImage(0x1EC82771A88A0E6))
+	CornerR:setImage(RegisterImage(@"hash_61EC82771A88A0E6"))
 	self:addElement(CornerR)
 	self.CornerR = CornerR
 	local f1_local12 = HudZMTrialShame1
 	local f1_local13 = HudZMTrialShame1.subscribeToModel
-	local f1_local14 = Engine[0x8DF2E5447F384B9]()
+	local f1_local14 = Engine[@"getglobalmodel"]()
 	f1_local13(f1_local12, f1_local14["ZMHudGlobal.trials.failurePlayer"], HudZMTrialShame1.Portrait.Portrait.__Portrait_Portrait_Image)
 	f1_local12 = HudZMTrialShame1
 	f1_local13 = HudZMTrialShame1.subscribeToModel
-	f1_local14 = Engine[0x8DF2E5447F384B9]()
+	f1_local14 = Engine[@"getglobalmodel"]()
 	f1_local13(f1_local12, f1_local14["ZMHudGlobal.trials.failurePlayer"], HudZMTrialShame1.Gamertag.__Gamertag_String_Reference)
 	f1_local12 = HudZMTrialShame2
 	f1_local13 = HudZMTrialShame2.subscribeToModel
-	f1_local14 = Engine[0x8DF2E5447F384B9]()
+	f1_local14 = Engine[@"getglobalmodel"]()
 	f1_local13(f1_local12, f1_local14["ZMHudGlobal.trials.failurePlayer"], HudZMTrialShame2.Portrait.Portrait.__Portrait_Portrait_Image)
 	f1_local12 = HudZMTrialShame2
 	f1_local13 = HudZMTrialShame2.subscribeToModel
-	f1_local14 = Engine[0x8DF2E5447F384B9]()
+	f1_local14 = Engine[@"getglobalmodel"]()
 	f1_local13(f1_local12, f1_local14["ZMHudGlobal.trials.failurePlayer"], HudZMTrialShame2.Gamertag.__Gamertag_String_Reference)
 	f1_local12 = HudZMTrialShame3
 	f1_local13 = HudZMTrialShame3.subscribeToModel
-	f1_local14 = Engine[0x8DF2E5447F384B9]()
+	f1_local14 = Engine[@"getglobalmodel"]()
 	f1_local13(f1_local12, f1_local14["ZMHudGlobal.trials.failurePlayer"], HudZMTrialShame3.Portrait.Portrait.__Portrait_Portrait_Image)
 	f1_local12 = HudZMTrialShame3
 	f1_local13 = HudZMTrialShame3.subscribeToModel
-	f1_local14 = Engine[0x8DF2E5447F384B9]()
+	f1_local14 = Engine[@"getglobalmodel"]()
 	f1_local13(f1_local12, f1_local14["ZMHudGlobal.trials.failurePlayer"], HudZMTrialShame3.Gamertag.__Gamertag_String_Reference)
 	f1_local12 = HudZMTrialShame4
 	f1_local13 = HudZMTrialShame4.subscribeToModel
-	f1_local14 = Engine[0x8DF2E5447F384B9]()
+	f1_local14 = Engine[@"getglobalmodel"]()
 	f1_local13(f1_local12, f1_local14["ZMHudGlobal.trials.failurePlayer"], HudZMTrialShame4.Portrait.Portrait.__Portrait_Portrait_Image)
 	f1_local12 = HudZMTrialShame4
 	f1_local13 = HudZMTrialShame4.subscribeToModel
-	f1_local14 = Engine[0x8DF2E5447F384B9]()
+	f1_local14 = Engine[@"getglobalmodel"]()
 	f1_local13(f1_local12, f1_local14["ZMHudGlobal.trials.failurePlayer"], HudZMTrialShame4.Gamertag.__Gamertag_String_Reference)
 	self:mergeStateConditions({
 		{
@@ -486,7 +486,7 @@ CoD.HUD_ZM_Trial_Round_Failed.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	})
 	f1_local12 = self
 	f1_local13 = self.subscribeToModel
-	f1_local14 = Engine[0x8DF2E5447F384B9]()
+	f1_local14 = Engine[@"getglobalmodel"]()
 	f1_local13(f1_local12, f1_local14["ZMHudGlobal.trials.showScoreboard"], function(f44_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -498,7 +498,7 @@ CoD.HUD_ZM_Trial_Round_Failed.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	end, false)
 	f1_local12 = self
 	f1_local13 = self.subscribeToModel
-	f1_local14 = Engine[0x8DF2E5447F384B9]()
+	f1_local14 = Engine[@"getglobalmodel"]()
 	f1_local13(f1_local12, f1_local14["ZMHudGlobal.trials.gameState"], function(f45_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -510,7 +510,7 @@ CoD.HUD_ZM_Trial_Round_Failed.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	end, false)
 	f1_local12 = self
 	f1_local13 = self.subscribeToModel
-	f1_local14 = Engine[0x8DF2E5447F384B9]()
+	f1_local14 = Engine[@"getglobalmodel"]()
 	f1_local13(f1_local12, f1_local14["ZMHudGlobal.trials.failurePlayer"], function(f46_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -545,7 +545,7 @@ CoD.HUD_ZM_Trial_Round_Failed.__resetProperties = function(f47_arg0)
 	f47_arg0.Strikes:setTopBottom(0, 0, 88, 168)
 	f47_arg0.Strikes:setAlpha(1)
 	f47_arg0.Failed:setAlpha(1)
-	f47_arg0.Failed:setText(Engine[0xF9F1239CFD921FE](0xD9D6E119FDD76AE))
+	f47_arg0.Failed:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_3D9D6E119FDD76AE"))
 	f47_arg0.Reason:setTopBottom(0, 0, 188, 221)
 	f47_arg0.Reason:setAlpha(1)
 	f47_arg0.HudZMTrialShame3:setLeftRight(0.5, 0.5, 14, 216)
@@ -786,7 +786,7 @@ CoD.HUD_ZM_Trial_Round_Failed.__clipsPerState = {
 			f56_arg0.Reason:setTopBottom(0, 0, 240, 273)
 			f56_arg0.clipFinished(f56_arg0.Reason)
 			f56_arg0.Failed:completeAnimation()
-			f56_arg0.Failed:setText(Engine[0xF9F1239CFD921FE](0x22EF41D702EE72D))
+			f56_arg0.Failed:setText(Engine[@"hash_4F9F1239CFD921FE"](@"zombie/game_over"))
 			f56_arg0.clipFinished(f56_arg0.Failed)
 			f56_arg0.Strikes:completeAnimation()
 			f56_arg0.Strikes:setTopBottom(0, 0, 140, 220)
@@ -817,7 +817,7 @@ CoD.HUD_ZM_Trial_Round_Failed.__clipsPerState = {
 			f57_arg0.Reason:setTopBottom(0, 0, 240, 273)
 			f57_arg0.clipFinished(f57_arg0.Reason)
 			f57_arg0.Failed:completeAnimation()
-			f57_arg0.Failed:setText(Engine[0xF9F1239CFD921FE](0x22EF41D702EE72D))
+			f57_arg0.Failed:setText(Engine[@"hash_4F9F1239CFD921FE"](@"zombie/game_over"))
 			f57_arg0.clipFinished(f57_arg0.Failed)
 			f57_arg0.Strikes:completeAnimation()
 			f57_arg0.Strikes:setTopBottom(0, 0, 140, 220)
@@ -844,7 +844,7 @@ CoD.HUD_ZM_Trial_Round_Failed.__clipsPerState = {
 			f58_arg0.Reason:setTopBottom(0, 0, 240, 273)
 			f58_arg0.clipFinished(f58_arg0.Reason)
 			f58_arg0.Failed:completeAnimation()
-			f58_arg0.Failed:setText(Engine[0xF9F1239CFD921FE](0x22EF41D702EE72D))
+			f58_arg0.Failed:setText(Engine[@"hash_4F9F1239CFD921FE"](@"zombie/game_over"))
 			f58_arg0.clipFinished(f58_arg0.Failed)
 			f58_arg0.Strikes:completeAnimation()
 			f58_arg0.Strikes:setTopBottom(0, 0, 140, 220)
@@ -876,7 +876,7 @@ CoD.HUD_ZM_Trial_Round_Failed.__clipsPerState = {
 			f59_arg0.Reason:setTopBottom(0, 0, 240, 273)
 			f59_arg0.clipFinished(f59_arg0.Reason)
 			f59_arg0.Failed:completeAnimation()
-			f59_arg0.Failed:setText(Engine[0xF9F1239CFD921FE](0x22EF41D702EE72D))
+			f59_arg0.Failed:setText(Engine[@"hash_4F9F1239CFD921FE"](@"zombie/game_over"))
 			f59_arg0.clipFinished(f59_arg0.Failed)
 			f59_arg0.Strikes:completeAnimation()
 			f59_arg0.Strikes:setTopBottom(0, 0, 140, 220)
@@ -909,7 +909,7 @@ CoD.HUD_ZM_Trial_Round_Failed.__clipsPerState = {
 			f60_arg0.Reason:setTopBottom(0, 0, 240, 273)
 			f60_arg0.clipFinished(f60_arg0.Reason)
 			f60_arg0.Failed:completeAnimation()
-			f60_arg0.Failed:setText(Engine[0xF9F1239CFD921FE](0x22EF41D702EE72D))
+			f60_arg0.Failed:setText(Engine[@"hash_4F9F1239CFD921FE"](@"zombie/game_over"))
 			f60_arg0.clipFinished(f60_arg0.Failed)
 			f60_arg0.Strikes:completeAnimation()
 			f60_arg0.Strikes:setTopBottom(0, 0, 140, 220)

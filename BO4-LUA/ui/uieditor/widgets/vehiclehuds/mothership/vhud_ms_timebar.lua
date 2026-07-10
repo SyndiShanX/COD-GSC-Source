@@ -8,18 +8,18 @@ CoD.vhud_ms_Timebar.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	self.soundSet = "default"
 	local FuelFull = LUI.UIImage.new(0, 0, 27, 275, 0, 0, 0, 12)
 	FuelFull:setRGB(0.52, 0.52, 0.52)
-	FuelFull:setImage(RegisterImage(0x4B2ED2240F57296))
+	FuelFull:setImage(RegisterImage(@"uie_ui_hud_vehicle_fuel_amount"))
 	self:addElement(FuelFull)
 	self.FuelFull = FuelFull
 	local Frame0 = LUI.UIImage.new(0, 0, 8.5, 284.5, 0, 0, 0, 18)
 	Frame0:setAlpha(0.3)
-	Frame0:setImage(RegisterImage(0xA32C97CDA46D9FA))
-	Frame0:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Frame0:setImage(RegisterImage(@"hash_7A32C97CDA46D9FA"))
+	Frame0:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Frame0)
 	self.Frame0 = Frame0
 	local FuelBar = LUI.UIImage.new(0, 0, 27, 275, 0, 0, 0, 12)
-	FuelBar:setImage(RegisterImage(0x4B2ED2240F57296))
-	FuelBar:setMaterial(LUI.UIImage.GetCachedMaterial(0x910274CA3518744))
+	FuelBar:setImage(RegisterImage(@"uie_ui_hud_vehicle_fuel_amount"))
+	FuelBar:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe"))
 	FuelBar:setShaderVector(1, 0, 0, 0, 0)
 	FuelBar:setShaderVector(2, 1, 0, 0, 0)
 	FuelBar:setShaderVector(3, 0, 0, 0, 0)
@@ -33,7 +33,7 @@ CoD.vhud_ms_Timebar.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	self:addElement(FuelBar)
 	self.FuelBar = FuelBar
 	local FuelText = LUI.UIImage.new(0, 0, 272, 292, 0, 0, -6.5, -0.5)
-	FuelText:setImage(RegisterImage(0x187164A3FDCB271))
+	FuelText:setImage(RegisterImage(@"hash_1187164A3FDCB271"))
 	self:addElement(FuelText)
 	self.FuelText = FuelText
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)

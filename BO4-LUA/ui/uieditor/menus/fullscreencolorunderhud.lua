@@ -5,13 +5,13 @@ local f0_local0 = function(f1_arg0)
 	end
 end
 local PostLoadFunc = function(f2_arg0)
-	local f2_local0 = f2_arg0:getModel(Engine[0xA5B9C0111291A8B](), "fadeOverTime")
-	local f2_local1 = f2_arg0:getModel(Engine[0xA5B9C0111291A8B](), "red")
-	local f2_local2 = f2_arg0:getModel(Engine[0xA5B9C0111291A8B](), "green")
-	local f2_local3 = f2_arg0:getModel(Engine[0xA5B9C0111291A8B](), "blue")
+	local f2_local0 = f2_arg0:getModel(Engine[@"getprimarycontroller"](), "fadeOverTime")
+	local f2_local1 = f2_arg0:getModel(Engine[@"getprimarycontroller"](), "red")
+	local f2_local2 = f2_arg0:getModel(Engine[@"getprimarycontroller"](), "green")
+	local f2_local3 = f2_arg0:getModel(Engine[@"getprimarycontroller"](), "blue")
 	if f2_local1 then
 		f2_arg0:subscribeToModel(f2_local1, function(model)
-			local f3_local0 = Engine[0x614D394F6F9A18D](model)
+			local f3_local0 = Engine[@"getmodelvalue"](model)
 			if f3_local0 then
 				f2_arg0.red = f3_local0
 				f0_local0(f2_arg0)
@@ -20,7 +20,7 @@ local PostLoadFunc = function(f2_arg0)
 	end
 	if f2_local2 then
 		f2_arg0:subscribeToModel(f2_local2, function(model)
-			local f4_local0 = Engine[0x614D394F6F9A18D](model)
+			local f4_local0 = Engine[@"getmodelvalue"](model)
 			if f4_local0 then
 				f2_arg0.green = f4_local0
 				f0_local0(f2_arg0)
@@ -29,7 +29,7 @@ local PostLoadFunc = function(f2_arg0)
 	end
 	if f2_local3 then
 		f2_arg0:subscribeToModel(f2_local3, function(model)
-			local f5_local0 = Engine[0x614D394F6F9A18D](model)
+			local f5_local0 = Engine[@"getmodelvalue"](model)
 			if f5_local0 then
 				f2_arg0.blue = f5_local0
 				f0_local0(f2_arg0)
@@ -38,16 +38,16 @@ local PostLoadFunc = function(f2_arg0)
 	end
 	if f2_local0 then
 		f2_arg0:subscribeToModel(f2_local0, function(model)
-			local f6_local0 = Engine[0x614D394F6F9A18D](model)
-			local f6_local1 = f2_arg0:getModel(Engine[0xA5B9C0111291A8B](), "startAlpha")
-			local f6_local2 = f2_arg0:getModel(Engine[0xA5B9C0111291A8B](), "endAlpha")
+			local f6_local0 = Engine[@"getmodelvalue"](model)
+			local f6_local1 = f2_arg0:getModel(Engine[@"getprimarycontroller"](), "startAlpha")
+			local f6_local2 = f2_arg0:getModel(Engine[@"getprimarycontroller"](), "endAlpha")
 			local f6_local3 = 0
 			local f6_local4 = 0
 			if f6_local1 then
-				f6_local3 = Engine[0x614D394F6F9A18D](f6_local1)
+				f6_local3 = Engine[@"getmodelvalue"](f6_local1)
 			end
 			if f6_local2 then
-				f6_local4 = Engine[0x614D394F6F9A18D](f6_local2)
+				f6_local4 = Engine[@"getmodelvalue"](f6_local2)
 			end
 			if f6_local0 then
 				if f6_local4 == 0 then
@@ -84,7 +84,7 @@ LUI.createMenu.FullScreenColorUnderHUD = function(f8_arg0, f8_arg1)
 	self.ignoreCursor = true
 	self.anyChildUsesUpdateState = true
 	local Fullscreen = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	Fullscreen:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	Fullscreen:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	Fullscreen:setShaderVector(0, 0, 0.8, 0, 0)
 	self:addElement(Fullscreen)
 	self.Fullscreen = Fullscreen
@@ -99,7 +99,7 @@ LUI.createMenu.FullScreenColorUnderHUD = function(f8_arg0, f8_arg1)
 	})
 	local f8_local4 = InGameTalkersWidget
 	local f8_local5 = InGameTalkersWidget.subscribeToModel
-	local f8_local6 = Engine[0x8DF2E5447F384B9]()
+	local f8_local6 = Engine[@"getglobalmodel"]()
 	f8_local5(f8_local4, f8_local6["lobbyRoot.lobbyNav"], function(f10_arg0)
 		f8_local1:updateElementState(InGameTalkersWidget, {
 			name = "model_validation",

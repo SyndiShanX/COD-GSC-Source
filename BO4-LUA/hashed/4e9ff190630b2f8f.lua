@@ -10,12 +10,12 @@ CoD.ArchivesVoDDescription.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	local Title = LUI.UIText.new(0, 1, 0, 0, 0, 0, 0, 36)
 	Title:setRGB(0.92, 0.89, 0.72)
 	Title:setTTF("ttmussels_regular")
-	Title:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Title:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Title:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Title:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	Title:linkToElementModel(self, "title", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			Title:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			Title:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	self:addElement(Title)
@@ -23,12 +23,12 @@ CoD.ArchivesVoDDescription.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	local Desc = LUI.UIText.new(0, 1, 0, 0, 0, 0, 46, 70)
 	Desc:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	Desc:setTTF("ttmussels_regular")
-	Desc:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	Desc:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	Desc:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Desc:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	Desc:linkToElementModel(self, "desc", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
-			Desc:setText(Engine[0xF9F1239CFD921FE](f3_local0))
+			Desc:setText(Engine[@"hash_4F9F1239CFD921FE"](f3_local0))
 		end
 	end)
 	self:addElement(Desc)

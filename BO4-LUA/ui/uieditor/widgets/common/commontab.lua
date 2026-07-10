@@ -11,15 +11,15 @@ CoD.CommonTab.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local ZMTabBackingGlowRed = LUI.UIImage.new(0, 1, -111, 111, 0, 1, -111, 111)
 	ZMTabBackingGlowRed:setAlpha(0)
-	ZMTabBackingGlowRed:setImage(RegisterImage(0x4E64BF345836DCC))
-	ZMTabBackingGlowRed:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	ZMTabBackingGlowRed:setImage(RegisterImage(@"uie_ui_menu_common_tab_glowred"))
+	ZMTabBackingGlowRed:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	ZMTabBackingGlowRed:setShaderVector(0, 1.36, 0, 0, 0)
 	self:addElement(ZMTabBackingGlowRed)
 	self.ZMTabBackingGlowRed = ZMTabBackingGlowRed
 	local ZMTabBackingRed = LUI.UIImage.new(0, 1, -67, 67, 0, 1, -32, 32)
 	ZMTabBackingRed:setAlpha(0)
-	ZMTabBackingRed:setImage(RegisterImage(0x4188F6C6CDE87B1))
-	ZMTabBackingRed:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	ZMTabBackingRed:setImage(RegisterImage(@"uie_ui_menu_common_tab_backing_red"))
+	ZMTabBackingRed:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	ZMTabBackingRed:setShaderVector(0, 0.9, 0, 0, 0)
 	self:addElement(ZMTabBackingRed)
 	self.ZMTabBackingRed = ZMTabBackingRed
@@ -33,12 +33,12 @@ CoD.CommonTab.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 	ZMTextFocus:setAlpha(0)
 	ZMTextFocus:setTTF("notosans_regular")
 	ZMTextFocus:setLetterSpacing(3)
-	ZMTextFocus:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	ZMTextFocus:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	ZMTextFocus:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	ZMTextFocus:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	ZMTextFocus:linkToElementModel(self, "tabName", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			ZMTextFocus:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			ZMTextFocus:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	self:addElement(ZMTextFocus)
@@ -48,8 +48,8 @@ CoD.CommonTab.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 	ZMText:setAlpha(0)
 	ZMText:setTTF("notosans_regular")
 	ZMText:setLetterSpacing(3)
-	ZMText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	ZMText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	ZMText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	ZMText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	ZMText:linkToElementModel(self, "tabName", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -60,25 +60,25 @@ CoD.CommonTab.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 	self.ZMText = ZMText
 	local ZMTabEndRight = LUI.UIImage.new(1, 1, -8, 0, 0, 0, 0, 35)
 	ZMTabEndRight:setAlpha(0)
-	ZMTabEndRight:setImage(RegisterImage(0xB48CD982934DAD0))
+	ZMTabEndRight:setImage(RegisterImage(@"uie_ui_menu_common_tab_end_right"))
 	self:addElement(ZMTabEndRight)
 	self.ZMTabEndRight = ZMTabEndRight
 	local ZMTabEndLeft = LUI.UIImage.new(0, 0, 0, 8, 0, 0, 0, 35)
 	ZMTabEndLeft:setAlpha(0)
-	ZMTabEndLeft:setImage(RegisterImage(0x9A262142D19A9F))
+	ZMTabEndLeft:setImage(RegisterImage(@"uie_ui_menu_common_tab_end_left"))
 	self:addElement(ZMTabEndLeft)
 	self.ZMTabEndLeft = ZMTabEndLeft
 	local TabBackingGlow = LUI.UIImage.new(0, 1, -117, 117, 0, 1, -111, 111)
 	TabBackingGlow:setAlpha(0)
-	TabBackingGlow:setImage(RegisterImage(0x223AD1B40A93955))
-	TabBackingGlow:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	TabBackingGlow:setImage(RegisterImage(@"uie_ui_menu_common_tab_glow"))
+	TabBackingGlow:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	TabBackingGlow:setShaderVector(0, 1.36, 0, 0, 0)
 	self:addElement(TabBackingGlow)
 	self.TabBackingGlow = TabBackingGlow
 	local TabBacking = LUI.UIImage.new(0, 1, -66, 66, 0, 1, -30, 30)
 	TabBacking:setAlpha(0)
-	TabBacking:setImage(RegisterImage(0x3F09D20CA138B49))
-	TabBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	TabBacking:setImage(RegisterImage(@"uie_ui_menu_common_tab_backing"))
+	TabBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	TabBacking:setShaderVector(0, 0.9, 0, 0, 0)
 	self:addElement(TabBacking)
 	self.TabBacking = TabBacking
@@ -87,8 +87,8 @@ CoD.CommonTab.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 	TabTitle:setAlpha(0)
 	TabTitle:setTTF("ttmussels_demibold")
 	TabTitle:setLetterSpacing(3)
-	TabTitle:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	TabTitle:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	TabTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	TabTitle:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	TabTitle:linkToElementModel(self, "tabName", true, function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
@@ -102,8 +102,8 @@ CoD.CommonTab.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 	TabTitleFocus:setAlpha(0)
 	TabTitleFocus:setTTF("ttmussels_demibold")
 	TabTitleFocus:setLetterSpacing(3)
-	TabTitleFocus:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	TabTitleFocus:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	TabTitleFocus:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	TabTitleFocus:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	TabTitleFocus:linkToElementModel(self, "tabName", true, function(model)
 		local f5_local0 = model:get()
 		if f5_local0 ~= nil then
@@ -114,12 +114,12 @@ CoD.CommonTab.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 	self.TabTitleFocus = TabTitleFocus
 	local TabEndLeft = LUI.UIImage.new(0, 0, 9, 17, 0, 0, 0, 35)
 	TabEndLeft:setAlpha(0)
-	TabEndLeft:setImage(RegisterImage(0x9A262142D19A9F))
+	TabEndLeft:setImage(RegisterImage(@"uie_ui_menu_common_tab_end_left"))
 	self:addElement(TabEndLeft)
 	self.TabEndLeft = TabEndLeft
 	local TabEndRight = LUI.UIImage.new(0, 0, 217, 225, 0, 0, 0, 35)
 	TabEndRight:setAlpha(0)
-	TabEndRight:setImage(RegisterImage(0xB48CD982934DAD0))
+	TabEndRight:setImage(RegisterImage(@"uie_ui_menu_common_tab_end_right"))
 	self:addElement(TabEndRight)
 	self.TabEndRight = TabEndRight
 	local newIcon = CoD.NewBreadcrumbCount.new(f1_arg0, f1_arg1, 0, 0, 203, 221, 0.5, 0.5, -26, -8)
@@ -173,7 +173,7 @@ CoD.CommonTab.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg
 	end)
 	local f1_local15 = self
 	local f1_local16 = self.subscribeToModel
-	local f1_local17 = Engine[0x8DF2E5447F384B9]()
+	local f1_local17 = Engine[@"getglobalmodel"]()
 	f1_local16(f1_local15, f1_local17["lobbyRoot.lobbyNav"], function(f12_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

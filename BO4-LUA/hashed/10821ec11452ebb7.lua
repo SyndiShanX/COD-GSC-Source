@@ -9,10 +9,10 @@ CoD.WarzoneUseTimerBeingRevived.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local BeingRevivedText = LUI.UIText.new(0, 1, 0, 0, 0, 1, 0, 0)
-	BeingRevivedText:setText(Engine[0xF9F1239CFD921FE](0x632C924F3D7483F))
+	BeingRevivedText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"warzone/being_revived"))
 	BeingRevivedText:setTTF("ttmussels_regular")
-	BeingRevivedText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	BeingRevivedText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	BeingRevivedText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	BeingRevivedText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	BeingRevivedText:setBackingType(1)
 	BeingRevivedText:setBackingWidget(CoD.WarzoneUseTimerRevivePlayerBG, f1_arg0, f1_arg1)
 	BeingRevivedText:setBackingXPadding(43)

@@ -32,7 +32,7 @@ CoD.vhud_gunship_buttonPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	end)
 	local CombatTrainingGameTimer = CycleWeaponPrompt
 	local ExitPrompt = CycleWeaponPrompt.subscribeToModel
-	local KBMCyclePrompt = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local KBMCyclePrompt = Engine[@"getmodelforcontroller"](f1_arg1)
 	ExitPrompt(CombatTrainingGameTimer, KBMCyclePrompt["factions.isCoDCaster"], function(f4_arg0)
 		f1_arg0:updateElementState(CycleWeaponPrompt, {
 			name = "model_validation",
@@ -85,7 +85,7 @@ CoD.vhud_gunship_buttonPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	CycleWeaponPrompt:linkToElementModel(self, "text", true, function(model)
 		local f10_local0 = model:get()
 		if f10_local0 ~= nil then
-			CycleWeaponPrompt.prompt:setText(Engine[0xF9F1239CFD921FE](f10_local0))
+			CycleWeaponPrompt.prompt:setText(Engine[@"hash_4F9F1239CFD921FE"](f10_local0))
 		end
 	end)
 	self:addElement(CycleWeaponPrompt)
@@ -110,7 +110,7 @@ CoD.vhud_gunship_buttonPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	end)
 	KBMCyclePrompt = ExitPrompt
 	CombatTrainingGameTimer = ExitPrompt.subscribeToModel
-	local KBMCycleActionName = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local KBMCycleActionName = Engine[@"getmodelforcontroller"](f1_arg1)
 	CombatTrainingGameTimer(KBMCyclePrompt, KBMCycleActionName["factions.isCoDCaster"], function(f13_arg0)
 		f1_arg0:updateElementState(ExitPrompt, {
 			name = "model_validation",
@@ -163,7 +163,7 @@ CoD.vhud_gunship_buttonPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	ExitPrompt:linkToElementModel(self, "text", true, function(model)
 		local f19_local0 = model:get()
 		if f19_local0 ~= nil then
-			ExitPrompt.prompt:setText(Engine[0xF9F1239CFD921FE](f19_local0))
+			ExitPrompt.prompt:setText(Engine[@"hash_4F9F1239CFD921FE"](f19_local0))
 		end
 	end)
 	self:addElement(ExitPrompt)
@@ -191,11 +191,11 @@ CoD.vhud_gunship_buttonPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	KBMCycleActionName = nil
 	KBMCycleActionName = LUI.UIText.new(0.5, 0.5, -365, -65, 1, 1, -78, -62)
 	KBMCycleActionName:setAlpha(0)
-	KBMCycleActionName:setText(Engine[0xF9F1239CFD921FE](0xCD7EB3F7D80E6F7))
+	KBMCycleActionName:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_1CD7EB3F7D80E6F7"))
 	KBMCycleActionName:setTTF("ttmussels_regular")
-	KBMCycleActionName:setMaterial(LUI.UIImage.GetCachedMaterial(0x71E049B161CD00A))
+	KBMCycleActionName:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_171E049B161CD00A"))
 	KBMCycleActionName:setLetterSpacing(0.5)
-	KBMCycleActionName:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	KBMCycleActionName:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
 	self:addElement(KBMCycleActionName)
 	self.KBMCycleActionName = KBMCycleActionName
 	local KBMExitPrompt = nil
@@ -208,12 +208,12 @@ CoD.vhud_gunship_buttonPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	local KBMExitActionName = nil
 	KBMExitActionName = LUI.UIText.new(0.5, 0.5, 65, 365, 1, 1, -78, -62)
 	KBMExitActionName:setAlpha(0)
-	KBMExitActionName:setText(Engine[0xF9F1239CFD921FE](0xC7D903A026627FC))
+	KBMExitActionName:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_4C7D903A026627FC"))
 	KBMExitActionName:setTTF("ttmussels_regular")
-	KBMExitActionName:setMaterial(LUI.UIImage.GetCachedMaterial(0x71E049B161CD00A))
+	KBMExitActionName:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_171E049B161CD00A"))
 	KBMExitActionName:setLetterSpacing(0.5)
-	KBMExitActionName:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	KBMExitActionName:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	KBMExitActionName:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	KBMExitActionName:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(KBMExitActionName)
 	self.KBMExitActionName = KBMExitActionName
 	local HeroAbilityHoldStringPC = nil
@@ -267,7 +267,7 @@ CoD.vhud_gunship_buttonPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	end)
 	local f1_local9 = self
 	local f1_local10 = self.subscribeToModel
-	local f1_local11 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local11 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local10(f1_local9, f1_local11.LastInput, function(f28_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

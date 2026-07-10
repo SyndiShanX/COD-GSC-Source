@@ -32,11 +32,11 @@ CoD.PC_StartMenu_Options_FTEDescBacking.new = function(f1_arg0, f1_arg1, f1_arg2
 	self.strokeRight = strokeRight
 	local GradientLineL = LUI.UIImage.new(0, 0, -600, 0, 0.5, 0.5, -0.5, 0.5)
 	GradientLineL:setZRot(180)
-	GradientLineL:setImage(RegisterImage(0x61F4A521D2954B6))
+	GradientLineL:setImage(RegisterImage(@"hash_61F4A521D2954B6"))
 	self:addElement(GradientLineL)
 	self.GradientLineL = GradientLineL
 	local GradientLineR = LUI.UIImage.new(1, 1, 0, 600, 0.5, 0.5, -0.5, 0.5)
-	GradientLineR:setImage(RegisterImage(0x61F4A521D2954B6))
+	GradientLineR:setImage(RegisterImage(@"hash_61F4A521D2954B6"))
 	self:addElement(GradientLineR)
 	self.GradientLineR = GradientLineR
 	if PostLoadFunc then

@@ -28,14 +28,14 @@ CoD.SpecialistHeadquartersSpecialist.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	local EquippedMarkerBG = LUI.UIImage.new(0, 0, 113, 157, 0, 0, 24, 68)
 	EquippedMarkerBG:setAlpha(0)
 	EquippedMarkerBG:setZoom(4)
-	EquippedMarkerBG:setImage(RegisterImage(0x7AF532D84DE505A))
-	EquippedMarkerBG:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	EquippedMarkerBG:setImage(RegisterImage(@"uie_ui_menu_cac_equipped_marker_bg"))
+	EquippedMarkerBG:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(EquippedMarkerBG)
 	self.EquippedMarkerBG = EquippedMarkerBG
 	local EquippedMarkerTick = LUI.UIImage.new(0, 0, 113, 157, 0, 0, 24, 68)
 	EquippedMarkerTick:setAlpha(0)
 	EquippedMarkerTick:setZoom(4)
-	EquippedMarkerTick:setImage(RegisterImage(0x9A8B26C9B001758))
+	EquippedMarkerTick:setImage(RegisterImage(@"uie_ui_menu_cac_equipped_marker_tick"))
 	self:addElement(EquippedMarkerTick)
 	self.EquippedMarkerTick = EquippedMarkerTick
 	self:mergeStateConditions({

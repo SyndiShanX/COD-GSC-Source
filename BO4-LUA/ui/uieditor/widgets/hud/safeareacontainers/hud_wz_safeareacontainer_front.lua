@@ -30,20 +30,20 @@ CoD.Hud_WZ_SafeAreaContainer_Front.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 		{
 			stateName = "Visible",
 			condition = function(menu, element, event)
-				return Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x6FFF566DCC09BBD])
+				return Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_spectating_client"])
 			end,
 		},
 	})
 	local VoipContainerEnemiesOnly = InGameTalkersWidget
 	local VoipContainerAll = InGameTalkersWidget.subscribeToModel
-	local WarzoneGameStatusIndicatorDisplay = Engine[0x4DF5CFBC1771947](f1_arg1)
-	VoipContainerAll(VoipContainerEnemiesOnly, WarzoneGameStatusIndicatorDisplay["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x6FFF566DCC09BBD]], function(f3_arg0)
+	local WarzoneGameStatusIndicatorDisplay = Engine[@"getmodelforcontroller"](f1_arg1)
+	VoipContainerAll(VoipContainerEnemiesOnly, WarzoneGameStatusIndicatorDisplay["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_spectating_client"]], function(f3_arg0)
 		f1_arg0:updateElementState(InGameTalkersWidget, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f3_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x6FFF566DCC09BBD],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_spectating_client"],
 		})
 	end, false)
 	self:addElement(InGameTalkersWidget)
@@ -53,25 +53,25 @@ CoD.Hud_WZ_SafeAreaContainer_Front.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 		{
 			stateName = "HudStart",
 			condition = function(menu, element, event)
-				return IsGametypeSettingsValue("wzHardcore", 1) and not Engine[0xDD333420C49E6D0](f1_arg1, Enum[0x7F032C2EF103A1A][0x6FFF566DCC09BBD])
+				return IsGametypeSettingsValue("wzHardcore", 1) and not Engine[@"isvisibilitybitset"](f1_arg1, Enum[@"uivisibilitybit"][@"bit_spectating_client"])
 			end,
 		},
 	})
 	WarzoneGameStatusIndicatorDisplay = VoipContainerAll
 	VoipContainerEnemiesOnly = VoipContainerAll.subscribeToModel
-	local f1_local8 = Engine[0x4DF5CFBC1771947](f1_arg1)
-	VoipContainerEnemiesOnly(WarzoneGameStatusIndicatorDisplay, f1_local8["UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x6FFF566DCC09BBD]], function(f5_arg0)
+	local f1_local8 = Engine[@"getmodelforcontroller"](f1_arg1)
+	VoipContainerEnemiesOnly(WarzoneGameStatusIndicatorDisplay, f1_local8["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_spectating_client"]], function(f5_arg0)
 		f1_arg0:updateElementState(VoipContainerAll, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f5_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[0x7F032C2EF103A1A][0x6FFF566DCC09BBD],
+			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_spectating_client"],
 		})
 	end, false)
 	WarzoneGameStatusIndicatorDisplay = VoipContainerAll
 	VoipContainerEnemiesOnly = VoipContainerAll.subscribeToModel
-	f1_local8 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local8 = Engine[@"getmodelforcontroller"](f1_arg1)
 	VoipContainerEnemiesOnly(WarzoneGameStatusIndicatorDisplay, f1_local8["factions.isCoDCaster"], function(f6_arg0)
 		f1_arg0:updateElementState(VoipContainerAll, {
 			name = "model_validation",
@@ -106,7 +106,7 @@ CoD.Hud_WZ_SafeAreaContainer_Front.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	})
 	f1_local8 = VoipContainerEnemiesOnly
 	WarzoneGameStatusIndicatorDisplay = VoipContainerEnemiesOnly.subscribeToModel
-	local f1_local9 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local9 = Engine[@"getmodelforcontroller"](f1_arg1)
 	WarzoneGameStatusIndicatorDisplay(f1_local8, f1_local9["factions.isCoDCaster"], function(f9_arg0)
 		f1_arg0:updateElementState(VoipContainerEnemiesOnly, {
 			name = "model_validation",
@@ -172,7 +172,7 @@ CoD.Hud_WZ_SafeAreaContainer_Front.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	})
 	f1_local9 = self
 	f1_local8 = self.subscribeToModel
-	local f1_local10 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local10 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local8(f1_local9, f1_local10["factions.isCoDCaster"], function(f17_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -196,7 +196,7 @@ CoD.Hud_WZ_SafeAreaContainer_Front.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	end, false)
 	f1_local9 = self
 	f1_local8 = self.subscribeToModel
-	f1_local10 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local10 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local8(f1_local9, f1_local10["hudItems.showSpawnSelect"], function(f19_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -208,9 +208,9 @@ CoD.Hud_WZ_SafeAreaContainer_Front.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	end, false)
 	self:subscribeToGlobalModel(f1_arg1, "PerController", "scriptNotify", function(model)
 		local f20_local0 = self
-		if CoD.ModelUtility.IsParamModelEqualToHashString(model, 0xB0B843215635D02) then
+		if CoD.ModelUtility.IsParamModelEqualToHashString(model, @"create_prematch_timer") then
 			CreatePrematchTimer_Minimize(self, f1_arg0, f1_arg1, model, 5000)
-		elseif CoD.ModelUtility.IsParamModelEqualToHashString(model, 0xA9F7ECDA8E925F6) then
+		elseif CoD.ModelUtility.IsParamModelEqualToHashString(model, @"hash_2A9F7ECDA8E925F6") then
 			CreateHoldingPenNotification(self, f1_arg0, f1_arg1, model, 5000)
 		end
 	end)

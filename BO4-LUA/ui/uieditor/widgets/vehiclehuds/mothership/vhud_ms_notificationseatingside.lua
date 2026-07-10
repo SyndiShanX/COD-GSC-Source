@@ -8,13 +8,13 @@ CoD.vhud_ms_NotificationSeatingSide.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local msSeatingBoxL = LUI.UIImage.new(0.5, 0.5, -24, 4, 0, 0, 4, 18)
-	msSeatingBoxL:setImage(RegisterImage(0xB6EC1426EF9B0F3))
-	msSeatingBoxL:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	msSeatingBoxL:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_mothership_damagepassenger"))
+	msSeatingBoxL:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(msSeatingBoxL)
 	self.msSeatingBoxL = msSeatingBoxL
 	local Image0 = LUI.UIImage.new(1, 1, -22, 0, 0.5, 0.5, -11, 11)
-	Image0:setImage(RegisterImage(0x595FE88BD044D30))
-	Image0:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	Image0:setImage(RegisterImage(@"uie_t7_cp_hud_vehicle_mothership_seatingarrow"))
+	Image0:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 	self:addElement(Image0)
 	self.Image0 = Image0
 	if PostLoadFunc then

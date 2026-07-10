@@ -22,7 +22,7 @@ CoD.FileshareCategoryContentList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	contentList:setHorizontalCount(3)
 	contentList:setVerticalCount(4)
 	contentList:setSpacing(15)
-	contentList:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	contentList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	contentList:setVerticalCounter(CoD.verticalCounter)
 	contentList:setDataSource("FilesharePublishedList")
 	contentList:registerEventHandler("menu_loaded", function(element, event)
@@ -50,8 +50,8 @@ CoD.FileshareCategoryContentList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 		if not ListElementHasElements(self.contentList) then
 			SetLoseFocusToElement(self, "contentList", f1_arg1)
 		else
-			CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-			CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x22361E23588705A])
+			CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+			CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_start"])
 		end
 		return f3_local0
 	end)
@@ -74,7 +74,7 @@ CoD.FileshareCategoryContentList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	contentList:registerEventHandler("list_item_lose_focus", function(element, event)
 		return nil
 	end)
-	f1_arg0:AddButtonCallbackFunction(contentList, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(contentList, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if not IsDemoPlaying() then
 			ProcessListAction(self, element, controller, menu)
 			return true
@@ -85,16 +85,16 @@ CoD.FileshareCategoryContentList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 		end
 	end, function(element, menu, controller)
 		if not IsDemoPlaying() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 			return true
 		elseif IsDemoPlaying() then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x8ADA48E694BFE2C, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/delete", nil, nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(contentList, f1_arg1, Enum[0x3DD78803F918E9D][0x22361E23588705A], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(contentList, f1_arg1, Enum[@"luibutton"][@"lui_key_start"], nil, function(element, menu, controller, model)
 		if FileshareCanShowOptionsMenu(controller) then
 			PreserveThumbnails(controller, true)
 			OpenPopup(self, "FileshareOptions", controller)
@@ -103,7 +103,7 @@ CoD.FileshareCategoryContentList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 		end
 	end, function(element, menu, controller)
 		if FileshareCanShowOptionsMenu(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x22361E23588705A], 0x8E7772DFD9BBDEB, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_start"], @"menu/options", nil, nil)
 			return true
 		else
 			return false
@@ -134,10 +134,10 @@ CoD.FileshareCategoryContentList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	self.FileshareSpinner = FileshareSpinner
 	local EmptyText = LUI.UIText.new(0.5, 0.5, -331, 331, 0.5, 0.5, -18.5, 18.5)
 	EmptyText:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
-	EmptyText:setText(Engine[0xF9F1239CFD921FE](0x9E740AD10EEAD80))
+	EmptyText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/not_available"))
 	EmptyText:setTTF("ttmussels_regular")
-	EmptyText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	EmptyText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	EmptyText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	EmptyText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(EmptyText)
 	self.EmptyText = EmptyText
 	SelectedFilmInformation:linkToElementModel(contentList, nil, false, function(model)
@@ -167,7 +167,7 @@ CoD.FileshareCategoryContentList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	})
 	local f1_local5 = self
 	local f1_local6 = self.subscribeToModel
-	local f1_local7 = Engine[0x8DF2E5447F384B9]()
+	local f1_local7 = Engine[@"getglobalmodel"]()
 	f1_local6(f1_local5, f1_local7["fileshareRoot.ready"], function(f16_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -179,7 +179,7 @@ CoD.FileshareCategoryContentList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	end, false)
 	f1_local5 = self
 	f1_local6 = self.subscribeToModel
-	f1_local7 = Engine[0x8DF2E5447F384B9]()
+	f1_local7 = Engine[@"getglobalmodel"]()
 	f1_local6(f1_local5, f1_local7["fileshareRoot.dirty"], function(f17_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

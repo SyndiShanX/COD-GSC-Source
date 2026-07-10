@@ -44,29 +44,29 @@ LUI.createMenu.MPSpecialistHUB = function(f1_arg0, f1_arg1)
 	self.CommonInformationFrame = CommonInformationFrame
 	local TiledPlusGrid = LUI.UIImage.new(0, 0, -135, 1920, 0, 0, 0, 1080)
 	TiledPlusGrid:setAlpha(0.05)
-	TiledPlusGrid:setImage(RegisterImage(0x6E37BAE22631294))
-	TiledPlusGrid:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	TiledPlusGrid:setImage(RegisterImage(@"uie_ui_hud_vehicle_hellstorm_repeat_plusgrid"))
+	TiledPlusGrid:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	TiledPlusGrid:setShaderVector(0, 0, 0, 0, 0)
 	TiledPlusGrid:setupNineSliceShader(220, 220)
 	self:addElement(TiledPlusGrid)
 	self.TiledPlusGrid = TiledPlusGrid
 	local SocialFrame = CoD.GenericMenuFrame.new(f1_local1, f1_arg0, 0, 1, 0, 0, 0, 1, 0, 0)
 	SocialFrame.CommonHeader.BGSceneBlur:setAlpha(1)
-	SocialFrame.CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(0x3CB558214901699))
+	SocialFrame.CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(@"hash_13CB558214901699"))
 	SocialFrame:subscribeToGlobalModel(f1_arg0, "LobbyRoot", "lobbyTitle", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			SocialFrame.CommonHeader.subtitle.subtitle:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			SocialFrame.CommonHeader.subtitle.subtitle:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	self:addElement(SocialFrame)
 	self.SocialFrame = SocialFrame
 	local equipment = CoD.HubEquipmentItem.new(f1_local1, f1_arg0, 0.5, 0.5, 582, 782, 0, 0, 391, 737)
-	equipment.categoryHeader:setText(LocalizeToUpperString(0x759164343B5C489))
+	equipment.categoryHeader:setText(LocalizeToUpperString(@"weapon/special_issue"))
 	self:addElement(equipment)
 	self.equipment = equipment
 	local weapon = CoD.HubEquipmentItem.new(f1_local1, f1_arg0, 0.5, 0.5, 356.5, 556.5, 0, 0, 391, 737)
-	weapon.categoryHeader:setText(LocalizeToUpperString(0x71489612B1BCA6F))
+	weapon.categoryHeader:setText(LocalizeToUpperString(@"menu/weapon"))
 	self:addElement(weapon)
 	self.weapon = weapon
 	local specialists = LUI.UIList.new(f1_local1, f1_arg0, 12, 0, nil, false, false, false, false)
@@ -76,16 +76,16 @@ LUI.createMenu.MPSpecialistHUB = function(f1_arg0, f1_arg1)
 	specialists:setHorizontalCount(4)
 	specialists:setVerticalCount(3)
 	specialists:setSpacing(12)
-	specialists:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	specialists:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
 	specialists:setDataSource("PositionLoadoutList")
 	specialists:linkToElementModel(specialists, "characterIndex", true, function(model, f3_arg1)
-		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 	end)
 	local SpecialistCornerTL = specialists
 	local SpecialistCornerTR = specialists.subscribeToModel
-	local SpecialistCornerBR = Engine[0x8DF2E5447F384B9]()
+	local SpecialistCornerBR = Engine[@"getglobalmodel"]()
 	SpecialistCornerTR(SpecialistCornerTL, SpecialistCornerBR.currentShowcasedCharacterIndex, function(f4_arg0, f4_arg1)
-		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 	end, false)
 	specialists:registerEventHandler("gain_focus", function(element, event)
 		local f5_local0 = nil
@@ -94,17 +94,17 @@ LUI.createMenu.MPSpecialistHUB = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f5_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[0x3DD78803F918E9D][0xC083113BC81F23F])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
 		return f5_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(specialists, f1_arg0, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(specialists, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		local f6_local0 = OpenOverlay
 		local f6_local1 = self
 		local f6_local2 = "MPSpecialistHUBInspect"
 		local f6_local3 = controller
 		local f6_local4 = {
-			_sessionMode = Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5],
+			_sessionMode = Enum[@"emodes"][@"mode_multiplayer"],
 		}
 		local f6_local5 = element:getModel()
 		f6_local4._selectIndex = f6_local5.characterIndex:get()
@@ -112,10 +112,10 @@ LUI.createMenu.MPSpecialistHUB = function(f1_arg0, f1_arg1)
 		f6_local0(f6_local1, f6_local2, f6_local3, f6_local4)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0xD0BB36CD318F55F, nil, nil)
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 		return true
 	end, false)
-	f1_local1:AddButtonCallbackFunction(specialists, f1_arg0, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], "ui_contextual_1", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(specialists, f1_arg0, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], "ui_contextual_1", function(element, menu, controller, model)
 		if not CoD.PlayerRoleUtility.IsSelectedShowcaseCharacter(element, controller) then
 			CoD.PlayerRoleUtility.SetAsSelectedShowcaseCharacter(element, controller)
 			UpdateSelfElementState(menu, self.showcaseCheckbox, controller)
@@ -125,7 +125,7 @@ LUI.createMenu.MPSpecialistHUB = function(f1_arg0, f1_arg1)
 		end
 	end, function(element, menu, controller)
 		if not CoD.PlayerRoleUtility.IsSelectedShowcaseCharacter(element, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xC083113BC81F23F], 0x0, nil, "ui_contextual_1")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"hash_0", nil, "ui_contextual_1")
 			return false
 		else
 			return false
@@ -137,16 +137,16 @@ LUI.createMenu.MPSpecialistHUB = function(f1_arg0, f1_arg1)
 	SpecialistCornerTR:setAlpha(0.25)
 	SpecialistCornerTR:setZRot(-90)
 	SpecialistCornerTR:setScale(0.5, 0.5)
-	SpecialistCornerTR:setImage(RegisterImage(0x8DC834094E7A02C))
-	SpecialistCornerTR:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	SpecialistCornerTR:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_window_corner"))
+	SpecialistCornerTR:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	SpecialistCornerTR:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(SpecialistCornerTR)
 	self.SpecialistCornerTR = SpecialistCornerTR
 	SpecialistCornerTL = LUI.UIImage.new(0.5, 0.5, -634, -610, 0, 0, 205, 229)
 	SpecialistCornerTL:setAlpha(0.2)
 	SpecialistCornerTL:setScale(0.5, 0.5)
-	SpecialistCornerTL:setImage(RegisterImage(0x8DC834094E7A02C))
-	SpecialistCornerTL:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	SpecialistCornerTL:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_window_corner"))
+	SpecialistCornerTL:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	SpecialistCornerTL:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(SpecialistCornerTL)
 	self.SpecialistCornerTL = SpecialistCornerTL
@@ -154,8 +154,8 @@ LUI.createMenu.MPSpecialistHUB = function(f1_arg0, f1_arg1)
 	SpecialistCornerBR:setAlpha(0.2)
 	SpecialistCornerBR:setZRot(180)
 	SpecialistCornerBR:setScale(0.5, 0.5)
-	SpecialistCornerBR:setImage(RegisterImage(0x8DC834094E7A02C))
-	SpecialistCornerBR:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	SpecialistCornerBR:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_window_corner"))
+	SpecialistCornerBR:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	SpecialistCornerBR:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(SpecialistCornerBR)
 	self.SpecialistCornerBR = SpecialistCornerBR
@@ -163,8 +163,8 @@ LUI.createMenu.MPSpecialistHUB = function(f1_arg0, f1_arg1)
 	SpecialistCornerBL:setAlpha(0.2)
 	SpecialistCornerBL:setZRot(90)
 	SpecialistCornerBL:setScale(0.5, 0.5)
-	SpecialistCornerBL:setImage(RegisterImage(0x8DC834094E7A02C))
-	SpecialistCornerBL:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	SpecialistCornerBL:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_window_corner"))
+	SpecialistCornerBL:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	SpecialistCornerBL:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(SpecialistCornerBL)
 	self.SpecialistCornerBL = SpecialistCornerBL
@@ -183,7 +183,7 @@ LUI.createMenu.MPSpecialistHUB = function(f1_arg0, f1_arg1)
 	end)
 	local f1_local17 = showcaseCheckbox
 	local CommonSearchingBar = showcaseCheckbox.subscribeToModel
-	local f1_local19 = Engine[0x4DF5CFBC1771947](f1_arg0)
+	local f1_local19 = Engine[@"getmodelforcontroller"](f1_arg0)
 	CommonSearchingBar(f1_local17, f1_local19.LastInput, function(f12_arg0)
 		f1_local1:updateElementState(showcaseCheckbox, {
 			name = "model_validation",
@@ -204,7 +204,7 @@ LUI.createMenu.MPSpecialistHUB = function(f1_arg0, f1_arg1)
 	end)
 	f1_local17 = showcaseCheckbox
 	CommonSearchingBar = showcaseCheckbox.subscribeToModel
-	f1_local19 = Engine[0x8DF2E5447F384B9]()
+	f1_local19 = Engine[@"getglobalmodel"]()
 	CommonSearchingBar(f1_local17, f1_local19.currentShowcasedCharacterIndex, function(f14_arg0)
 		f1_local1:updateElementState(showcaseCheckbox, {
 			name = "model_validation",
@@ -214,7 +214,7 @@ LUI.createMenu.MPSpecialistHUB = function(f1_arg0, f1_arg1)
 			modelName = "currentShowcasedCharacterIndex",
 		})
 	end, false)
-	showcaseCheckbox.label:setText(Engine[0xF9F1239CFD921FE](0xE14BE8E7A50BA2))
+	showcaseCheckbox.label:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/showcase_character"))
 	self:addElement(showcaseCheckbox)
 	self.showcaseCheckbox = showcaseCheckbox
 	CommonSearchingBar = CoD.CommonSearchingBar.new(f1_local1, f1_arg0, 0, 0, 893, 1015, 0, 0, 787, 809)
@@ -224,7 +224,7 @@ LUI.createMenu.MPSpecialistHUB = function(f1_arg0, f1_arg1)
 	CommonInformationFrame:linkToElementModel(specialists, "jobTitle", true, function(model)
 		local f15_local0 = model:get()
 		if f15_local0 ~= nil then
-			CommonInformationFrame.altHeader:setText(Engine[0xF9F1239CFD921FE](f15_local0))
+			CommonInformationFrame.altHeader:setText(Engine[@"hash_4F9F1239CFD921FE"](f15_local0))
 		end
 	end)
 	CommonInformationFrame:linkToElementModel(specialists, "name", true, function(model)
@@ -236,7 +236,7 @@ LUI.createMenu.MPSpecialistHUB = function(f1_arg0, f1_arg1)
 	CommonInformationFrame:linkToElementModel(specialists, "detailedDesc", true, function(model)
 		local f17_local0 = model:get()
 		if f17_local0 ~= nil then
-			CommonInformationFrame.description:setText(Engine[0xF9F1239CFD921FE](f17_local0))
+			CommonInformationFrame.description:setText(Engine[@"hash_4F9F1239CFD921FE"](f17_local0))
 		end
 	end)
 	equipment:linkToElementModel(specialists, "equipment.image", true, function(model)
@@ -290,11 +290,11 @@ LUI.createMenu.MPSpecialistHUB = function(f1_arg0, f1_arg1)
 	showcaseCheckbox:linkToElementModel(specialists, nil, false, function(model)
 		showcaseCheckbox:setModel(model, f1_arg0)
 	end)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], "ESCAPE", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], "ESCAPE", function(element, menu, controller, model)
 		GoBack(self, controller)
 		return true
 	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x805EFA15E9E7E5A], 0x70A9FDC87CD3D48, nil, "ESCAPE")
+		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, "ESCAPE")
 		return true
 	end, false)
 	LUI.OverrideFunction_CallOriginalFirst(self, "close", function(element)
@@ -394,7 +394,7 @@ CoD.MPSpecialistHUB.__clipsPerState = {
 			f31_arg0.weapon:registerEventHandler("interrupted_keyframe", f31_arg0.clipInterrupted)
 			f31_arg0.weapon:registerEventHandler("transition_complete_keyframe", f31_local4)
 			local f31_local5 = function(f37_arg0)
-				f37_arg0:beginAnimation(150, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f37_arg0:beginAnimation(150, Enum[@"luitween"][@"luitween_ease_both"])
 				f37_arg0:setAlpha(1)
 				f37_arg0:registerEventHandler("transition_complete_keyframe", f31_arg0.clipFinished)
 			end
@@ -403,7 +403,7 @@ CoD.MPSpecialistHUB.__clipsPerState = {
 			f31_arg0.specialists:registerEventHandler("interrupted_keyframe", f31_arg0.clipInterrupted)
 			f31_arg0.specialists:registerEventHandler("transition_complete_keyframe", f31_local5)
 			local f31_local6 = function(f38_arg0)
-				f38_arg0:beginAnimation(150, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f38_arg0:beginAnimation(150, Enum[@"luitween"][@"luitween_ease_out"])
 				f38_arg0:setAlpha(1)
 				f38_arg0:registerEventHandler("transition_complete_keyframe", f31_arg0.clipFinished)
 			end
@@ -412,7 +412,7 @@ CoD.MPSpecialistHUB.__clipsPerState = {
 			f31_arg0.showcaseCheckbox:registerEventHandler("interrupted_keyframe", f31_arg0.clipInterrupted)
 			f31_arg0.showcaseCheckbox:registerEventHandler("transition_complete_keyframe", f31_local6)
 			local f31_local7 = function(f39_arg0)
-				f39_arg0:beginAnimation(150, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f39_arg0:beginAnimation(150, Enum[@"luitween"][@"luitween_ease_both"])
 				f39_arg0:setAlpha(0.5)
 				f39_arg0:registerEventHandler("transition_complete_keyframe", f31_arg0.clipFinished)
 			end

@@ -12,7 +12,7 @@ CoD.StartMenu_Inventory_CurrentWeaponPC.new = function(f1_arg0, f1_arg1, f1_arg2
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Blur = LUI.UIImage.new(0, 0, 0, 450, 0, 0, 0, 214)
-	Blur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	Blur:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_E2354BE557C4C7A"))
 	Blur:setShaderVector(0, 0, 0, 0, 0)
 	self:addElement(Blur)
 	self.Blur = Blur
@@ -24,8 +24,8 @@ CoD.StartMenu_Inventory_CurrentWeaponPC.new = function(f1_arg0, f1_arg1, f1_arg2
 	local GridTiled = LUI.UIImage.new(0, 0, 0, 450, 0, 0, 21, 214)
 	GridTiled:setAlpha(0.55)
 	GridTiled:setScale(1, 1)
-	GridTiled:setImage(RegisterImage(0xCA386792563DE8))
-	GridTiled:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	GridTiled:setImage(RegisterImage(@"uie_ui_menu_store_bg_grid"))
+	GridTiled:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	GridTiled:setShaderVector(0, 0, 0, 0, 0)
 	GridTiled:setupNineSliceShader(64, 64)
 	self:addElement(GridTiled)
@@ -44,37 +44,37 @@ CoD.StartMenu_Inventory_CurrentWeaponPC.new = function(f1_arg0, f1_arg1, f1_arg2
 		end
 	end)
 	CurrentWeaponVignette:linkToElementModel(CurrentWeaponVignette, "id", true, function(model, f4_arg1)
-		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x4D2505E19049444])
+		CoD.Menu.UpdateButtonShownState(f4_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"hash_64D2505E19049444"])
 	end)
 	CurrentWeaponVignette:appendEventHandler("input_source_changed", function(f5_arg0, f5_arg1)
 		f5_arg1.menu = f5_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f5_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x4D2505E19049444])
-		CoD.Menu.UpdateButtonShownState(f5_arg0, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
+		CoD.Menu.UpdateButtonShownState(f5_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"hash_64D2505E19049444"])
+		CoD.Menu.UpdateButtonShownState(f5_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"])
 	end)
 	local HeaderWeapon2 = CurrentWeaponVignette
 	local HeaderWeapon = CurrentWeaponVignette.subscribeToModel
-	local GamepadText = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local GamepadText = Engine[@"getmodelforcontroller"](f1_arg1)
 	HeaderWeapon(HeaderWeapon2, GamepadText.LastInput, function(f6_arg0, f6_arg1)
-		CoD.Menu.UpdateButtonShownState(f6_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x4D2505E19049444])
-		CoD.Menu.UpdateButtonShownState(f6_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
+		CoD.Menu.UpdateButtonShownState(f6_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"hash_64D2505E19049444"])
+		CoD.Menu.UpdateButtonShownState(f6_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"])
 	end, false)
 	HeaderWeapon2 = CurrentWeaponVignette
 	HeaderWeapon = CurrentWeaponVignette.subscribeToModel
 	GamepadText = DataSources.WarzoneInventory.getModel(f1_arg1)
 	HeaderWeapon(HeaderWeapon2, GamepadText.currentWeaponIndex, function(f7_arg0, f7_arg1)
-		CoD.Menu.UpdateButtonShownState(f7_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
+		CoD.Menu.UpdateButtonShownState(f7_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"])
 	end, false)
 	HeaderWeapon2 = CurrentWeaponVignette
 	HeaderWeapon = CurrentWeaponVignette.subscribeToModel
 	GamepadText = DataSources.WarzoneInventory.getModel(f1_arg1)
 	HeaderWeapon(HeaderWeapon2, GamepadText["weapon0.hasAttachments"], function(f8_arg0, f8_arg1)
-		CoD.Menu.UpdateButtonShownState(f8_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
+		CoD.Menu.UpdateButtonShownState(f8_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"])
 	end, false)
 	HeaderWeapon2 = CurrentWeaponVignette
 	HeaderWeapon = CurrentWeaponVignette.subscribeToModel
 	GamepadText = DataSources.WarzoneInventory.getModel(f1_arg1)
 	HeaderWeapon(HeaderWeapon2, GamepadText["weapon1.hasAttachments"], function(f9_arg0, f9_arg1)
-		CoD.Menu.UpdateButtonShownState(f9_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
+		CoD.Menu.UpdateButtonShownState(f9_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"])
 	end, false)
 	CurrentWeaponVignette:registerEventHandler("gain_focus", function(element, event)
 		local f10_local0 = nil
@@ -85,11 +85,11 @@ CoD.StartMenu_Inventory_CurrentWeaponPC.new = function(f1_arg0, f1_arg1, f1_arg2
 		end
 		CoD.WZUtility.SetElementModelToCurrentWeaponModel(f1_arg1, element)
 		CoD.WZUtility.UpdateWZInventoryTooltipOnElementPC(f1_arg1, element)
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x4D2505E19049444])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"hash_64D2505E19049444"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"])
 		return f10_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(CurrentWeaponVignette, f1_arg1, Enum[0x3DD78803F918E9D][0x4D2505E19049444], "MOUSE2", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(CurrentWeaponVignette, f1_arg1, Enum[@"luibutton"][@"hash_64D2505E19049444"], "MOUSE2", function(element, menu, controller, model)
 		if not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and IsMouseOrKeyboard(controller) then
 			CoD.WZUtility.SendInventoryDropNotify(controller, element)
 			return true
@@ -97,13 +97,13 @@ CoD.StartMenu_Inventory_CurrentWeaponPC.new = function(f1_arg0, f1_arg1, f1_arg2
 		end
 	end, function(element, menu, controller)
 		if not CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, controller, "id", CoD.WZUtility.InventoryItem.INVENTORY_ITEM_NONE) and CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and IsMouseOrKeyboard(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x4D2505E19049444], 0xFFD03BF8361AC75, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "MOUSE2")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"hash_64D2505E19049444"], @"warzone/drop", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "MOUSE2")
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(CurrentWeaponVignette, f1_arg1, Enum[0x3DD78803F918E9D][0xA86619565BE54DB], "MOUSE3", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(CurrentWeaponVignette, f1_arg1, Enum[@"luibutton"][@"lui_key_pckey_2"], "MOUSE3", function(element, menu, controller, model)
 		if CoD.ModelUtility.IsGlobalDataSourceModelValueEqualTo(controller, "WarzoneInventory", "currentWeaponIndex", 0) and CoD.ModelUtility.IsGlobalDataSourceModelValueEqualTo(controller, "WarzoneInventory", "weapon0.hasAttachments", 1) and CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and IsMouseOrKeyboard(controller) then
 			CoD.WZUtility.SendInventoryDropCurrentWeaponAndDetachNotify(controller)
 			return true
@@ -114,10 +114,10 @@ CoD.StartMenu_Inventory_CurrentWeaponPC.new = function(f1_arg0, f1_arg1, f1_arg2
 		end
 	end, function(element, menu, controller)
 		if CoD.ModelUtility.IsGlobalDataSourceModelValueEqualTo(controller, "WarzoneInventory", "currentWeaponIndex", 0) and CoD.ModelUtility.IsGlobalDataSourceModelValueEqualTo(controller, "WarzoneInventory", "weapon0.hasAttachments", 1) and CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and IsMouseOrKeyboard(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xA86619565BE54DB], 0x94D6AF2F50BEFEF, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "MOUSE3")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_pckey_2"], @"hash_294D6AF2F50BEFEF", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "MOUSE3")
 			return true
 		elseif CoD.ModelUtility.IsGlobalDataSourceModelValueEqualTo(controller, "WarzoneInventory", "currentWeaponIndex", 1) and CoD.ModelUtility.IsGlobalDataSourceModelValueEqualTo(controller, "WarzoneInventory", "weapon1.hasAttachments", 1) and CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and IsMouseOrKeyboard(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0xA86619565BE54DB], 0x94D6AF2F50BEFEF, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "MOUSE3")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_pckey_2"], @"hash_294D6AF2F50BEFEF", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "MOUSE3")
 			return true
 		else
 			return false
@@ -157,7 +157,7 @@ CoD.StartMenu_Inventory_CurrentWeaponPC.new = function(f1_arg0, f1_arg1, f1_arg2
 	HeaderWeapon2 = HeaderWeapon.subscribeToModel
 	SwitchWeaponImage = DataSources.WarzoneInventory.getModel(f1_arg1)
 	HeaderWeapon2(GamepadText, SwitchWeaponImage["weapon0.hasAttachments"], function(f18_arg0, f18_arg1)
-		CoD.Menu.UpdateButtonShownState(f18_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(f18_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_none"])
 	end, false)
 	HeaderWeapon:registerEventHandler("gain_focus", function(element, event)
 		local f19_local0 = nil
@@ -166,11 +166,11 @@ CoD.StartMenu_Inventory_CurrentWeaponPC.new = function(f1_arg0, f1_arg1, f1_arg2
 		elseif element.super.gainFocus then
 			f19_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_none"])
 		return f19_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(HeaderWeapon, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(HeaderWeapon, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if IsInDefaultState(element) then
 			CoD.WZUtility.SwitchToWeaponInSlot(controller, 0)
 			return true
@@ -178,13 +178,13 @@ CoD.StartMenu_Inventory_CurrentWeaponPC.new = function(f1_arg0, f1_arg1, f1_arg2
 		end
 	end, function(element, menu, controller)
 		if IsInDefaultState(element) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, nil)
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(HeaderWeapon, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "ui_remove", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(HeaderWeapon, f1_arg1, Enum[@"luibutton"][@"lui_key_none"], "ui_remove", function(element, menu, controller, model)
 		if not CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) then
 			CoD.WZUtility.SendInventoryDropWeaponInSlotNotify(controller, 0)
 			return true
@@ -192,13 +192,13 @@ CoD.StartMenu_Inventory_CurrentWeaponPC.new = function(f1_arg0, f1_arg1, f1_arg2
 		end
 	end, function(element, menu, controller)
 		if not CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0xFFD03BF8361AC75, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "ui_remove")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"warzone/drop", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "ui_remove")
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(HeaderWeapon, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "F", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(HeaderWeapon, f1_arg1, Enum[@"luibutton"][@"lui_key_none"], "F", function(element, menu, controller, model)
 		if not CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and CoD.ModelUtility.IsGlobalDataSourceModelValueEqualTo(controller, "WarzoneInventory", "weapon0.hasAttachments", 1) then
 			CoD.WZUtility.SendInventoryDropWeaponInSlotAndDetachNotify(controller, 0)
 			return true
@@ -206,13 +206,13 @@ CoD.StartMenu_Inventory_CurrentWeaponPC.new = function(f1_arg0, f1_arg1, f1_arg2
 		end
 	end, function(element, menu, controller)
 		if not CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and CoD.ModelUtility.IsGlobalDataSourceModelValueEqualTo(controller, "WarzoneInventory", "weapon0.hasAttachments", 1) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x94D6AF2F50BEFEF, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "F")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_294D6AF2F50BEFEF", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "F")
 			return true
 		else
 			return false
 		end
 	end, false)
-	HeaderWeapon:AddContextualMenuAction(f1_arg0, f1_arg1, 0xFFD03BF8361AC75, function(f26_arg0, f26_arg1, f26_arg2, f26_arg3)
+	HeaderWeapon:AddContextualMenuAction(f1_arg0, f1_arg1, @"warzone/drop", function(f26_arg0, f26_arg1, f26_arg2, f26_arg3)
 		if not CoD.WZUtility.ScoreboardVisibilitySetAndPC(f26_arg2) then
 			return function(f27_arg0, f27_arg1, f27_arg2, f27_arg3)
 				CoD.WZUtility.SendInventoryDropWeaponInSlotNotify(f27_arg2, 0)
@@ -220,7 +220,7 @@ CoD.StartMenu_Inventory_CurrentWeaponPC.new = function(f1_arg0, f1_arg1, f1_arg2
 		else
 		end
 	end)
-	HeaderWeapon:AddContextualMenuAction(f1_arg0, f1_arg1, 0x94D6AF2F50BEFEF, function(f28_arg0, f28_arg1, f28_arg2, f28_arg3)
+	HeaderWeapon:AddContextualMenuAction(f1_arg0, f1_arg1, @"hash_294D6AF2F50BEFEF", function(f28_arg0, f28_arg1, f28_arg2, f28_arg3)
 		if not CoD.WZUtility.ScoreboardVisibilitySetAndPC(f28_arg2) and CoD.ModelUtility.IsGlobalDataSourceModelValueEqualTo(f28_arg2, "WarzoneInventory", "weapon0.hasAttachments", 1) then
 			return function(f29_arg0, f29_arg1, f29_arg2, f29_arg3)
 				CoD.WZUtility.SendInventoryDropWeaponInSlotAndDetachNotify(f29_arg2, 0)
@@ -251,13 +251,13 @@ CoD.StartMenu_Inventory_CurrentWeaponPC.new = function(f1_arg0, f1_arg1, f1_arg2
 			modelName = "currentWeaponIndex",
 		})
 	end, false)
-	HeaderWeapon2.HeaderWeapon:setText(Engine[0xF9F1239CFD921FE](0x7D3125BD606CC1))
-	HeaderWeapon2.HeaderWeaponAsian:setText(Engine[0xF9F1239CFD921FE](0x7D3125BD606CC1))
+	HeaderWeapon2.HeaderWeapon:setText(Engine[@"hash_4F9F1239CFD921FE"](@"warzone/weapon_2"))
+	HeaderWeapon2.HeaderWeaponAsian:setText(Engine[@"hash_4F9F1239CFD921FE"](@"warzone/weapon_2"))
 	SwitchWeaponImage = HeaderWeapon2
 	GamepadText = HeaderWeapon2.subscribeToModel
 	f1_local9 = DataSources.WarzoneInventory.getModel(f1_arg1)
 	GamepadText(SwitchWeaponImage, f1_local9["weapon1.hasAttachments"], function(f32_arg0, f32_arg1)
-		CoD.Menu.UpdateButtonShownState(f32_arg1, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(f32_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_none"])
 	end, false)
 	HeaderWeapon2:registerEventHandler("gain_focus", function(element, event)
 		local f33_local0 = nil
@@ -266,11 +266,11 @@ CoD.StartMenu_Inventory_CurrentWeaponPC.new = function(f1_arg0, f1_arg1, f1_arg2
 		elseif element.super.gainFocus then
 			f33_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F])
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_none"])
 		return f33_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(HeaderWeapon2, f1_arg1, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(HeaderWeapon2, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
 		if IsInDefaultState(element) then
 			CoD.WZUtility.SwitchToWeaponInSlot(controller, 1)
 			return true
@@ -278,13 +278,13 @@ CoD.StartMenu_Inventory_CurrentWeaponPC.new = function(f1_arg0, f1_arg1, f1_arg2
 		end
 	end, function(element, menu, controller)
 		if IsInDefaultState(element) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x755DA1E2E7C263F], 0x0, nil, nil)
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, nil)
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(HeaderWeapon2, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "ui_remove", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(HeaderWeapon2, f1_arg1, Enum[@"luibutton"][@"lui_key_none"], "ui_remove", function(element, menu, controller, model)
 		if not CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) then
 			CoD.WZUtility.SendInventoryDropWeaponInSlotNotify(controller, 1)
 			return true
@@ -292,13 +292,13 @@ CoD.StartMenu_Inventory_CurrentWeaponPC.new = function(f1_arg0, f1_arg1, f1_arg2
 		end
 	end, function(element, menu, controller)
 		if not CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0xFFD03BF8361AC75, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "ui_remove")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"warzone/drop", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "ui_remove")
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(HeaderWeapon2, f1_arg1, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], "F", function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(HeaderWeapon2, f1_arg1, Enum[@"luibutton"][@"lui_key_none"], "F", function(element, menu, controller, model)
 		if not CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and CoD.ModelUtility.IsGlobalDataSourceModelValueEqualTo(controller, "WarzoneInventory", "weapon1.hasAttachments", 1) then
 			CoD.WZUtility.SendInventoryDropWeaponInSlotAndDetachNotify(controller, 1)
 			return true
@@ -306,13 +306,13 @@ CoD.StartMenu_Inventory_CurrentWeaponPC.new = function(f1_arg0, f1_arg1, f1_arg2
 		end
 	end, function(element, menu, controller)
 		if not CoD.WZUtility.ScoreboardVisibilitySetAndPC(controller) and CoD.ModelUtility.IsGlobalDataSourceModelValueEqualTo(controller, "WarzoneInventory", "weapon1.hasAttachments", 1) then
-			CoD.Menu.SetButtonLabel(menu, Enum[0x3DD78803F918E9D][0x865DD2DB1EFE9F8], 0x94D6AF2F50BEFEF, Enum[0xBEBDBAEEB3ECCCA][0xB6372335C630AD3], "F")
+			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_294D6AF2F50BEFEF", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "F")
 			return true
 		else
 			return false
 		end
 	end, false)
-	HeaderWeapon2:AddContextualMenuAction(f1_arg0, f1_arg1, 0xFFD03BF8361AC75, function(f40_arg0, f40_arg1, f40_arg2, f40_arg3)
+	HeaderWeapon2:AddContextualMenuAction(f1_arg0, f1_arg1, @"warzone/drop", function(f40_arg0, f40_arg1, f40_arg2, f40_arg3)
 		if not CoD.WZUtility.ScoreboardVisibilitySetAndPC(f40_arg2) then
 			return function(f41_arg0, f41_arg1, f41_arg2, f41_arg3)
 				CoD.WZUtility.SendInventoryDropWeaponInSlotNotify(f41_arg2, 1)
@@ -320,7 +320,7 @@ CoD.StartMenu_Inventory_CurrentWeaponPC.new = function(f1_arg0, f1_arg1, f1_arg2
 		else
 		end
 	end)
-	HeaderWeapon2:AddContextualMenuAction(f1_arg0, f1_arg1, 0x94D6AF2F50BEFEF, function(f42_arg0, f42_arg1, f42_arg2, f42_arg3)
+	HeaderWeapon2:AddContextualMenuAction(f1_arg0, f1_arg1, @"hash_294D6AF2F50BEFEF", function(f42_arg0, f42_arg1, f42_arg2, f42_arg3)
 		if not CoD.WZUtility.ScoreboardVisibilitySetAndPC(f42_arg2) and CoD.ModelUtility.IsGlobalDataSourceModelValueEqualTo(f42_arg2, "WarzoneInventory", "weapon1.hasAttachments", 1) then
 			return function(f43_arg0, f43_arg1, f43_arg2, f43_arg3)
 				CoD.WZUtility.SendInventoryDropWeaponInSlotAndDetachNotify(f43_arg2, 1)
@@ -333,11 +333,11 @@ CoD.StartMenu_Inventory_CurrentWeaponPC.new = function(f1_arg0, f1_arg1, f1_arg2
 	GamepadText = LUI.UIText.new(0, 0, 0, 450, 0, 0, 0, 21)
 	GamepadText:setRGB(0.55, 0.54, 0.49)
 	GamepadText:setAlpha(0)
-	GamepadText:setText(LocalizeToUpperString(0x23D1BB78E8AA44))
+	GamepadText:setText(LocalizeToUpperString(@"menu/switch_weapon"))
 	GamepadText:setTTF("ttmussels_regular")
 	GamepadText:setLetterSpacing(4)
-	GamepadText:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	GamepadText:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	GamepadText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	GamepadText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	self:addElement(GamepadText)
 	self.GamepadText = GamepadText
 	SwitchWeaponImage = LUI.UIImage.new(0, 0, 423, 444, 0, 0, 0, 21)
@@ -407,7 +407,7 @@ CoD.StartMenu_Inventory_CurrentWeaponPC.new = function(f1_arg0, f1_arg1, f1_arg2
 	end)
 	local f1_local10 = self
 	f1_local9 = self.subscribeToModel
-	local f1_local11 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local11 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local9(f1_local10, f1_local11.LastInput, function(f52_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

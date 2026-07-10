@@ -13,7 +13,7 @@ LUI.createMenu.multi_stage_target_lockon = function(f1_arg0, f1_arg1)
 	local Reticle = LUI.UIImage.new(0.5, 0.5, -40, 40, 0.5, 0.5, -40, 40)
 	Reticle:setRGB(ColorSet.EnemyOrange_Bright.r, ColorSet.EnemyOrange_Bright.g, ColorSet.EnemyOrange_Bright.b)
 	Reticle:setAlpha(0)
-	Reticle:setImage(RegisterImage(0xE8313F066891D81))
+	Reticle:setImage(RegisterImage(@"uie_ui_hud_vehicle_hellstorm_enemyindicator"))
 	self:addElement(Reticle)
 	self.Reticle = Reticle
 	self:mergeStateConditions({

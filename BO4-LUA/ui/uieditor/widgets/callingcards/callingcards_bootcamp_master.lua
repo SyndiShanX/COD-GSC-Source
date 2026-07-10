@@ -1,50 +1,50 @@
-CoD[0x7B1519A3669E105] = InheritFrom(LUI.UIElement)
-CoD[0x7B1519A3669E105].__defaultWidth = 960
-CoD[0x7B1519A3669E105].__defaultHeight = 240
-CoD[0x7B1519A3669E105].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+CoD[@"hash_67B1519A3669E105"] = InheritFrom(LUI.UIElement)
+CoD[@"hash_67B1519A3669E105"].__defaultWidth = 960
+CoD[@"hash_67B1519A3669E105"].__defaultHeight = 240
+CoD[@"hash_67B1519A3669E105"].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
 	local self = LUI.UIElement.new(f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
-	self:setClass(CoD[0x7B1519A3669E105])
+	self:setClass(CoD[@"hash_67B1519A3669E105"])
 	self.id = "CallingCards_Bootcamp_Master"
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local background = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	background:setImage(RegisterImage(0x432FE212E6B9A35))
-	background:setMaterial(LUI.UIImage.GetCachedMaterial(0x73D72BCD14C2AAD))
+	background:setImage(RegisterImage(@"uie_ui_icon_callingcards_bootcamp_master_background"))
+	background:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_tile_scroll_normal"))
 	background:setShaderVector(0, 1, 1, 0, 0)
 	background:setShaderVector(1, 0.03, 0, 0, 0)
 	self:addElement(background)
 	self.background = background
 	local city = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	city:setImage(RegisterImage(0x6262430A4D3138A))
-	city:setMaterial(LUI.UIImage.GetCachedMaterial(0x73D72BCD14C2AAD))
+	city:setImage(RegisterImage(@"uie_ui_icon_callingcards_bootcamp_master_city"))
+	city:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_tile_scroll_normal"))
 	city:setShaderVector(0, 1, 1, 0, 0)
 	city:setShaderVector(1, -0, 0, 0, 0)
 	self:addElement(city)
 	self.city = city
 	local wings = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	wings:setImage(RegisterImage(0x4F759B96504DA03))
+	wings:setImage(RegisterImage(@"uie_ui_icon_callingcards_bootcamp_master_wings"))
 	self:addElement(wings)
 	self.wings = wings
 	local bathand = LUI.UIImage.new(0, 0, 629.5, 893.5, 0, 0, 38.5, 142.5)
-	bathand:setImage(RegisterImage(0x787193DC548BD71))
+	bathand:setImage(RegisterImage(@"uie_ui_icon_callingcards_bootcamp_master_bathand"))
 	self:addElement(bathand)
 	self.bathand = bathand
 	local moon = LUI.UIImage.new(0, 0, 172.5, 292.5, 0, 0, 9.5, 129.5)
 	moon:setRGB(0.98, 1, 0.4)
 	moon:setAlpha(0.95)
-	moon:setImage(RegisterImage(0x8E87EBECD1BBAA8))
+	moon:setImage(RegisterImage(@"uie_ui_icon_callingcards_bootcamp_master_moon"))
 	self:addElement(moon)
 	self.moon = moon
 	local dude = LUI.UIImage.new(0, 0, 660.5, 900.5, 0, 0, 0, 240)
-	dude:setImage(RegisterImage(0x520B4077359542D))
+	dude:setImage(RegisterImage(@"uie_ui_icon_callingcards_bootcamp_master_dude"))
 	self:addElement(dude)
 	self.dude = dude
 	local lightening = LUI.UIImage.new(0, 0, 0, 320, 0, 0, 0, 240)
-	lightening:setImage(RegisterImage(0x75CBD3E15B934E0))
+	lightening:setImage(RegisterImage(@"uie_ui_icon_callingcards_bootcamp_master_lightening"))
 	self:addElement(lightening)
 	self.lightening = lightening
 	local dudeLighting = LUI.UIImage.new(0, 0, 661.5, 901.5, 0, 0, 0, 240)
-	dudeLighting:setImage(RegisterImage(0xF953706D85C6A5A))
+	dudeLighting:setImage(RegisterImage(@"uie_ui_icon_callingcards_bootcamp_master_dude_light"))
 	self:addElement(dudeLighting)
 	self.dudeLighting = dudeLighting
 	if PostLoadFunc then
@@ -52,7 +52,7 @@ CoD[0x7B1519A3669E105].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	end
 	return self
 end
-CoD[0x7B1519A3669E105].__resetProperties = function(f2_arg0)
+CoD[@"hash_67B1519A3669E105"].__resetProperties = function(f2_arg0)
 	f2_arg0.wings:completeAnimation()
 	f2_arg0.bathand:completeAnimation()
 	f2_arg0.dudeLighting:completeAnimation()
@@ -63,9 +63,9 @@ CoD[0x7B1519A3669E105].__resetProperties = function(f2_arg0)
 	f2_arg0.bathand:setZRot(0)
 	f2_arg0.dudeLighting:setAlpha(1)
 	f2_arg0.lightening:setAlpha(1)
-	f2_arg0.lightening:setMaterial(LUI.UIImage.GetCachedMaterial(0x6B34AA3F39208EF))
+	f2_arg0.lightening:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_normal"))
 end
-CoD[0x7B1519A3669E105].__clipsPerState = {
+CoD[@"hash_67B1519A3669E105"].__clipsPerState = {
 	DefaultState = {
 		DefaultClip = function(f3_arg0, f3_arg1)
 			f3_arg0:__resetProperties()
@@ -214,7 +214,7 @@ CoD[0x7B1519A3669E105].__clipsPerState = {
 			end
 			f3_arg0.lightening:beginAnimation(1000)
 			f3_arg0.lightening:setAlpha(0)
-			f3_arg0.lightening:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+			f3_arg0.lightening:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
 			f3_arg0.lightening:registerEventHandler("interrupted_keyframe", f3_arg0.clipInterrupted)
 			f3_arg0.lightening:registerEventHandler("transition_complete_keyframe", f3_local2)
 			local f3_local3 = function(f30_arg0)

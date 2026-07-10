@@ -10,16 +10,16 @@ CoD.WeaponLevelWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	local LevelLabel = LUI.UIText.new(0, 0, 4.5, 204.5, 0, 0, 21.5, 42.5)
 	LevelLabel:setRGB(ColorSet.GroupName.r, ColorSet.GroupName.g, ColorSet.GroupName.b)
 	LevelLabel:setTTF("0arame_mono_stencil")
-	LevelLabel:setMaterial(LUI.UIImage.GetCachedMaterial(0x90D57B1E92D39D7))
+	LevelLabel:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_90D57B1E92D39D7"))
 	LevelLabel:setShaderVector(0, 0.7, 0, 0, 0)
 	LevelLabel:setShaderVector(1, 0, 0, 0, 0)
 	LevelLabel:setShaderVector(2, 0, 0, 0, 0.5)
-	LevelLabel:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	LevelLabel:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	LevelLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	LevelLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	LevelLabel:linkToElementModel(self, "itemIndex", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			LevelLabel:setText(LocalizeIntoString(0xDD5565F2B354F84, CoD.CACUtility.GetCurrentWeaponLevel(f1_arg0, f1_arg1, f2_local0)))
+			LevelLabel:setText(LocalizeIntoString(@"hash_7DD5565F2B354F84", CoD.CACUtility.GetCurrentWeaponLevel(f1_arg0, f1_arg1, f2_local0)))
 		end
 	end)
 	self:addElement(LevelLabel)
@@ -27,13 +27,13 @@ CoD.WeaponLevelWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	local PrestigeStar1 = LUI.UIImage.new(0, 0, 3, 14, 0, 0, 26.5, 37.5)
 	PrestigeStar1:setRGB(ColorSet.GroupName.r, ColorSet.GroupName.g, ColorSet.GroupName.b)
 	PrestigeStar1:setAlpha(0)
-	PrestigeStar1:setImage(RegisterImage(0xB94BBEF24882247))
+	PrestigeStar1:setImage(RegisterImage(@"menu_mp_weapon_lvl_star"))
 	self:addElement(PrestigeStar1)
 	self.PrestigeStar1 = PrestigeStar1
 	local PrestigeStar2 = LUI.UIImage.new(0, 0, 15.5, 26.5, 0, 0, 26.5, 37.5)
 	PrestigeStar2:setRGB(ColorSet.GroupName.r, ColorSet.GroupName.g, ColorSet.GroupName.b)
 	PrestigeStar2:setAlpha(0)
-	PrestigeStar2:setImage(RegisterImage(0xB94BBEF24882247))
+	PrestigeStar2:setImage(RegisterImage(@"menu_mp_weapon_lvl_star"))
 	self:addElement(PrestigeStar2)
 	self.PrestigeStar2 = PrestigeStar2
 	self:mergeStateConditions({

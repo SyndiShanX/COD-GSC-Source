@@ -58,16 +58,16 @@ CoD.TabbedScoreboardRowInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self:addElement(StatBoxFFA)
 	self.StatBoxFFA = StatBoxFFA
 	local TintPlayerName = LUI.UIImage.new(0.5, 0.5, -195, 107, 0, 0, 3, 61)
-	TintPlayerName:setImage(RegisterImage(0x9716328BAC3658F))
+	TintPlayerName:setImage(RegisterImage(@"uie_ui_menu_mp_scoreboard_list_name_bg"))
 	self:addElement(TintPlayerName)
 	self.TintPlayerName = TintPlayerName
 	local PlayerNameBotStripe = LUI.UIImage.new(0, 0, 165.5, 471.5, 0, 0, 58, 68)
 	PlayerNameBotStripe:setAlpha(0.5)
-	PlayerNameBotStripe:setImage(RegisterImage(0x25491BD9124F9AD))
+	PlayerNameBotStripe:setImage(RegisterImage(@"uie_ui_menu_mp_scoreboard_list_name_stripe"))
 	self:addElement(PlayerNameBotStripe)
 	self.PlayerNameBotStripe = PlayerNameBotStripe
 	local LevelBG = LUI.UIImage.new(0.5, 0.5, -327, -283, 0, 0, 3, 61)
-	LevelBG:setImage(RegisterImage(0xBF90F4B4EC33404))
+	LevelBG:setImage(RegisterImage(@"hash_2BF90F4B4EC33404"))
 	self:addElement(LevelBG)
 	self.LevelBG = LevelBG
 	local selfPlayerBotStripe = CoD.TabbedScoreboardRowSelected.new(f1_arg0, f1_arg1, 0, 0, 36, 720, 0, 0, 4, 64)
@@ -88,11 +88,11 @@ CoD.TabbedScoreboardRowInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self:addElement(PlayerIcon)
 	self.PlayerIcon = PlayerIcon
 	local BarBotPlayer = LUI.UIImage.new(0.5, 0.5, -284.5, -194.5, 0, 0, 58.5, 68.5)
-	BarBotPlayer:setImage(RegisterImage(0x488233EAD062891))
+	BarBotPlayer:setImage(RegisterImage(@"hash_1488233EAD062891"))
 	self:addElement(BarBotPlayer)
 	self.BarBotPlayer = BarBotPlayer
 	local BotBarRank = LUI.UIImage.new(0.5, 0.5, -328.5, -280.5, 0, 0, 58.5, 68.5)
-	BotBarRank:setImage(RegisterImage(0xB6282F6D5AC2104))
+	BotBarRank:setImage(RegisterImage(@"hash_7B6282F6D5AC2104"))
 	self:addElement(BotBarRank)
 	self.BotBarRank = BotBarRank
 	local uieBorder = CoD.uie_Border.new(f1_arg0, f1_arg1, 0, 0, 36, 720, 0, 0, 4, 60)
@@ -103,8 +103,8 @@ CoD.TabbedScoreboardRowInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	playerPing = LUI.UIText.new(0, 0, 171, 249, 0, 0, 42, 57)
 	playerPing:setAlpha(0.75)
 	playerPing:setTTF("notosans_regular")
-	playerPing:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	playerPing:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	playerPing:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	playerPing:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	playerPing:linkToElementModel(self, "ping", true, function(model)
 		local f11_local0 = model:get()
 		if f11_local0 ~= nil then
@@ -117,8 +117,8 @@ CoD.TabbedScoreboardRowInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	playerPingAsianLanguage = LUI.UIText.new(0, 0, 171, 249, 0, 0, 47, 57)
 	playerPingAsianLanguage:setAlpha(0.75)
 	playerPingAsianLanguage:setTTF("notosans_regular")
-	playerPingAsianLanguage:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	playerPingAsianLanguage:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	playerPingAsianLanguage:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	playerPingAsianLanguage:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	playerPingAsianLanguage:linkToElementModel(self, "ping", true, function(model)
 		local f12_local0 = model:get()
 		if f12_local0 ~= nil then
@@ -130,8 +130,8 @@ CoD.TabbedScoreboardRowInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	local ClanAndGamerName = LUI.UIText.new(0, 0, 170, 470, 0, 0, 20, 46)
 	ClanAndGamerName:setAlpha(0.8)
 	ClanAndGamerName:setTTF("notosans_regular")
-	ClanAndGamerName:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	ClanAndGamerName:setAlignment(Enum[0x7A5123B654282D2][0xE821F0ECFF8D1C7])
+	ClanAndGamerName:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	ClanAndGamerName:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
 	ClanAndGamerName:linkToElementModel(self, "scoreboard.playerName", true, function(model)
 		local f13_local0 = model:get()
 		if f13_local0 ~= nil then
@@ -188,7 +188,7 @@ CoD.TabbedScoreboardRowInternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	end)
 	local f1_local22 = self
 	local f1_local23 = self.subscribeToModel
-	local f1_local24 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local24 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local23(f1_local22, f1_local24["deadSpectator.playerIndex"], function(f18_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -275,7 +275,7 @@ CoD.TabbedScoreboardRowInternal.__clipsPerState = {
 			f24_arg0:__resetProperties()
 			f24_arg0:setupElementClipCounter(5)
 			local f24_local0 = function(f25_arg0)
-				f24_arg0.selfPlayerBotStripe:beginAnimation(200, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+				f24_arg0.selfPlayerBotStripe:beginAnimation(200, Enum[@"luitween"][@"luitween_ease_in"])
 				f24_arg0.selfPlayerBotStripe:setAlpha(0)
 				f24_arg0.selfPlayerBotStripe:registerEventHandler("interrupted_keyframe", f24_arg0.clipInterrupted)
 				f24_arg0.selfPlayerBotStripe:registerEventHandler("transition_complete_keyframe", f24_arg0.clipFinished)

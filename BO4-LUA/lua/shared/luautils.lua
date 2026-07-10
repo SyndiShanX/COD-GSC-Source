@@ -7,7 +7,7 @@ local f0_local0 = {}
 local f0_local1 = {}
 f0_local0.GetMapsTable = function()
 	if not f0_local0.mapsTable then
-		f0_local0.mapsTable = Engine[0xF21A889CC4B74F9]()
+		f0_local0.mapsTable = Engine[@"getgdtmapstable"]()
 	end
 	return f0_local0.mapsTable
 end
@@ -19,16 +19,16 @@ f0_local0.IsNil = function(f2_arg0)
 	end
 end
 f0_local0.MessageDialogForceSubscriptionFire = function(f3_arg0)
-	local f3_local0 = Engine[0x40E824FE270E174](Engine[0x8DF2E5447F384B9](), "messageDialog")
+	local f3_local0 = Engine[@"getmodel"](Engine[@"getglobalmodel"](), "messageDialog")
 	if f3_local0 == nil then
 		return
 	else
-		local f3_local1 = Engine[0xA798E4552F5E872](f3_local0, "messagePending")
-		local f3_local2 = Engine[0x614D394F6F9A18D](f3_local1)
+		local f3_local1 = Engine[@"createmodel"](f3_local0, "messagePending")
+		local f3_local2 = Engine[@"getmodelvalue"](f3_local1)
 		if not f3_arg0 and f3_local2 == 0 then
 			return
 		else
-			Engine[0x83C9B5DE1D9371](f3_local1, f3_local2 + 1)
+			Engine[@"setmodelvalue"](f3_local1, f3_local2 + 1)
 		end
 	end
 end
@@ -37,93 +37,93 @@ f0_local0.ShowMessageDialog = function(f4_arg0, f4_arg1, f4_arg2, f4_arg3)
 		error("Invalid message dialog message")
 		return
 	end
-	local f4_local0 = Engine[0x40E824FE270E174](Engine[0x8DF2E5447F384B9](), "messageDialog")
+	local f4_local0 = Engine[@"getmodel"](Engine[@"getglobalmodel"](), "messageDialog")
 	if f4_local0 == nil then
 		return
 	end
-	local f4_local1 = Engine[0xA798E4552F5E872](f4_local0, "messagePending")
-	local f4_local2 = Engine[0xA798E4552F5E872](f4_local0, "messageType")
-	local f4_local3 = Engine[0xA798E4552F5E872](f4_local0, "message")
-	local f4_local4 = Engine[0xA798E4552F5E872](f4_local0, "controller")
-	local f4_local5 = Engine[0xA798E4552F5E872](f4_local0, "anyControllerAllowed")
+	local f4_local1 = Engine[@"createmodel"](f4_local0, "messagePending")
+	local f4_local2 = Engine[@"createmodel"](f4_local0, "messageType")
+	local f4_local3 = Engine[@"createmodel"](f4_local0, "message")
+	local f4_local4 = Engine[@"createmodel"](f4_local0, "controller")
+	local f4_local5 = Engine[@"createmodel"](f4_local0, "anyControllerAllowed")
 	if f4_local1 == nil or f4_local2 == nil or f4_local3 == nil or f4_local4 == nil or f4_local5 == nil then
 		return
 	end
-	local f4_local6 = Engine[0x614D394F6F9A18D](f4_local1) + 1
-	Engine[0x83C9B5DE1D9371](f4_local4, 0)
-	Engine[0x83C9B5DE1D9371](f4_local5, true)
+	local f4_local6 = Engine[@"getmodelvalue"](f4_local1) + 1
+	Engine[@"setmodelvalue"](f4_local4, 0)
+	Engine[@"setmodelvalue"](f4_local5, true)
 	local f4_local7 = false
 	if f4_arg3 ~= nil then
 		local f4_local8 = f4_arg3
 		if type(f4_arg3) == "xhash" then
-			f4_local8 = Engine[0xF9F1239CFD921FE](f4_arg3)
+			f4_local8 = Engine[@"hash_4F9F1239CFD921FE"](f4_arg3)
 		end
-		f4_local7 = Engine[0x83C9B5DE1D9371](Engine[0xA798E4552F5E872](f4_local0, "messageTitle"), f4_local8)
+		f4_local7 = Engine[@"setmodelvalue"](Engine[@"createmodel"](f4_local0, "messageTitle"), f4_local8)
 	end
-	Engine[0x83C9B5DE1D9371](f4_local2, f4_arg1)
+	Engine[@"setmodelvalue"](f4_local2, f4_arg1)
 	if f4_arg2 ~= nil then
 		local f4_local8 = f4_arg2
 		if type(f4_arg2) == "xhash" then
-			f4_local8 = Engine[0xF9F1239CFD921FE](f4_arg2)
+			f4_local8 = Engine[@"hash_4F9F1239CFD921FE"](f4_arg2)
 		end
 		if f4_arg3 == "" and not f4_local7 and f4_local6 > 1 then
 			f4_local8 = f4_local3:get() .. "\n" .. f4_local8
 		end
-		Engine[0x83C9B5DE1D9371](f4_local3, f4_local8)
+		Engine[@"setmodelvalue"](f4_local3, f4_local8)
 	end
-	Engine[0x83C9B5DE1D9371](f4_local1, f4_local6)
+	Engine[@"setmodelvalue"](f4_local1, f4_local6)
 end
 f0_local0.UI_ShowInfoMessageDialog = function(f5_arg0, f5_arg1, f5_arg2)
 	if f5_arg1 ~= nil then
 		if type(f5_arg1) == "xhash" then
-			local f5_local0 = Engine[0xF9F1239CFD921FE](f5_arg1)
-			Engine[0x8C5711DAACC99F4](Enum[0x7A63DCD561B0FA8][0x1725ABF82092BD8], "Info Message Dialog: (" .. f5_local0 .. ") - " .. f5_local0 .. ".\n")
+			local f5_local0 = Engine[@"hash_4F9F1239CFD921FE"](f5_arg1)
+			Engine[@"printinfo"](Enum[@"consolelabel_e"][@"con_label_default"], "Info Message Dialog: (" .. f5_local0 .. ") - " .. f5_local0 .. ".\n")
 		else
-			Engine[0x8C5711DAACC99F4](Enum[0x7A63DCD561B0FA8][0x1725ABF82092BD8], "Info Message Dialog: (" .. f5_arg1 .. ") - " .. f5_arg1 .. ".\n")
+			Engine[@"printinfo"](Enum[@"consolelabel_e"][@"con_label_default"], "Info Message Dialog: (" .. f5_arg1 .. ") - " .. f5_arg1 .. ".\n")
 		end
 	end
-	f0_local0.ShowMessageDialog(f5_arg0, Enum[0xEE23F7D18EF525C][0x296CBAC6039D717], f5_arg1, f5_arg2)
+	f0_local0.ShowMessageDialog(f5_arg0, Enum[@"messagedialogtype"][@"message_dialog_type_info"], f5_arg1, f5_arg2)
 end
 f0_local0.UI_ShowWarningMessageDialog = function(f6_arg0, f6_arg1, f6_arg2)
 	if f6_arg1 ~= nil then
 		if type(f6_arg1) == "xhash" then
-			local f6_local0 = Engine[0xF9F1239CFD921FE](f6_arg1)
-			Engine[0x5DF86CF48135674](Enum[0x7A63DCD561B0FA8][0x1725ABF82092BD8], "Warning Message Dialog: (" .. f6_local0 .. ") - " .. f6_local0 .. ".\n")
+			local f6_local0 = Engine[@"hash_4F9F1239CFD921FE"](f6_arg1)
+			Engine[@"printwarning"](Enum[@"consolelabel_e"][@"con_label_default"], "Warning Message Dialog: (" .. f6_local0 .. ") - " .. f6_local0 .. ".\n")
 		else
-			Engine[0x5DF86CF48135674](Enum[0x7A63DCD561B0FA8][0x1725ABF82092BD8], "Warning Message Dialog: (" .. f6_arg1 .. ") - " .. f6_arg1 .. ".\n")
+			Engine[@"printwarning"](Enum[@"consolelabel_e"][@"con_label_default"], "Warning Message Dialog: (" .. f6_arg1 .. ") - " .. f6_arg1 .. ".\n")
 		end
 	end
-	f0_local0.ShowMessageDialog(f6_arg0, Enum[0xEE23F7D18EF525C][0x8D00D07404A3DE5], f6_arg1, f6_arg2)
+	f0_local0.ShowMessageDialog(f6_arg0, Enum[@"messagedialogtype"][@"message_dialog_type_warning"], f6_arg1, f6_arg2)
 end
 f0_local0.UI_ShowErrorMessageDialog = function(f7_arg0, f7_arg1, f7_arg2)
 	if f7_arg1 ~= nil then
 		if type(f7_arg1) == "xhash" then
-			local f7_local0 = Engine[0xF9F1239CFD921FE](f7_arg1)
-			Engine[0x458FE92FEB39D4E](Enum[0x7A63DCD561B0FA8][0x1725ABF82092BD8], "Error Message Dialog: (" .. f7_local0 .. ") - " .. f7_local0 .. ".\n")
+			local f7_local0 = Engine[@"hash_4F9F1239CFD921FE"](f7_arg1)
+			Engine[@"printerror"](Enum[@"consolelabel_e"][@"con_label_default"], "Error Message Dialog: (" .. f7_local0 .. ") - " .. f7_local0 .. ".\n")
 		else
-			Engine[0x458FE92FEB39D4E](Enum[0x7A63DCD561B0FA8][0x1725ABF82092BD8], "Error Message Dialog: (" .. f7_arg1 .. ") - " .. f7_arg1 .. ".\n")
+			Engine[@"printerror"](Enum[@"consolelabel_e"][@"con_label_default"], "Error Message Dialog: (" .. f7_arg1 .. ") - " .. f7_arg1 .. ".\n")
 		end
 	end
 	if f7_arg1 ~= "" then
-		f0_local0.ShowMessageDialog(f7_arg0, Enum[0xEE23F7D18EF525C][0x8BCCDF5038F1B0B], f7_arg1, f7_arg2)
+		f0_local0.ShowMessageDialog(f7_arg0, Enum[@"messagedialogtype"][@"message_dialog_type_error"], f7_arg1, f7_arg2)
 	end
 end
 f0_local0.UI_SetSignedInGamertagModel = function(f8_arg0)
-	Engine[0x83C9B5DE1D9371](Engine[0xA798E4552F5E872](Engine[0x8DF2E5447F384B9](), "durango.signedInGamertag", true), f8_arg0)
+	Engine[@"setmodelvalue"](Engine[@"createmodel"](Engine[@"getglobalmodel"](), "durango.signedInGamertag", true), f8_arg0)
 end
 f0_local0.UI_ClearErrorMessageDialog = function()
-	local f9_local0 = Engine[0x40E824FE270E174](Engine[0x8DF2E5447F384B9](), "messageDialog")
+	local f9_local0 = Engine[@"getmodel"](Engine[@"getglobalmodel"](), "messageDialog")
 	if f9_local0 ~= nil then
-		local f9_local1 = Engine[0x40E824FE270E174](f9_local0, "messagePending")
-		if f9_local1 ~= nil and Engine[0x614D394F6F9A18D](f9_local1) > 0 then
-			Engine[0x83C9B5DE1D9371](f9_local1, 0)
+		local f9_local1 = Engine[@"getmodel"](f9_local0, "messagePending")
+		if f9_local1 ~= nil and Engine[@"getmodelvalue"](f9_local1) > 0 then
+			Engine[@"setmodelvalue"](f9_local1, 0)
 		end
-		local f9_local2 = Engine[0x40E824FE270E174](f9_local0, "messageTitle")
+		local f9_local2 = Engine[@"getmodel"](f9_local0, "messageTitle")
 		if f9_local2 ~= nil then
-			Engine[0x83C9B5DE1D9371](f9_local2, "")
+			Engine[@"setmodelvalue"](f9_local2, "")
 		end
 	end
-	Engine[0x4DC6ECADB3DAA44]()
+	Engine[@"clearerror"]()
 end
 f0_local0.IsDOATarget = function(f10_arg0)
 	return false
@@ -159,49 +159,49 @@ f0_local0.ValueToHex = function(f16_arg0)
 	return string.format("0x%x", f16_arg0)
 end
 f0_local0.LobbyProcessQueueEmpty = function()
-	local f17_local0 = Engine[0x40E824FE270E174](Engine[0x8DF2E5447F384B9](), "lobbyRoot")
+	local f17_local0 = Engine[@"getmodel"](Engine[@"getglobalmodel"](), "lobbyRoot")
 	if not f17_local0 then
 		return true
 	else
-		local f17_local1 = Engine[0x40E824FE270E174](f17_local0, "queueEmpty")
+		local f17_local1 = Engine[@"getmodel"](f17_local0, "queueEmpty")
 		if not f17_local1 then
 			return true
 		else
-			return Engine[0x614D394F6F9A18D](f17_local1)
+			return Engine[@"getmodelvalue"](f17_local1)
 		end
 	end
 end
 f0_local0.ForceLobbyButtonUpdate = function()
-	Engine[0x6A489878620F3BC](Engine[0xA798E4552F5E872](Engine[0x8DF2E5447F384B9](), "lobbyRoot.lobbyButtonUpdate"))
+	Engine[@"forcenotifymodelsubscriptions"](Engine[@"createmodel"](Engine[@"getglobalmodel"](), "lobbyRoot.lobbyButtonUpdate"))
 end
 f0_local0.IsGamescomBuild = function()
-	if Dvar[0xF52444CC548D39F]:get() then
+	if Dvar[@"ui_execdemo_gamescom"]:get() then
 		return true
-	elseif Dvar[0x4AEFFF49B0FCC12]:get() then
+	elseif Dvar[@"ui_execdemo_gamescom_host"]:get() then
 		return true
 	else
 		return false
 	end
 end
 f0_local0.IsBetaBuild = function()
-	if Dvar[0x42A6A3568FF9F81]:get() then
+	if Dvar[@"ui_execdemo_beta"]:get() then
 		return true
 	else
 		return false
 	end
 end
 f0_local0.AllClientsSpectating = function()
-	local f21_local0 = Engine[0x755D55B3813D249](Enum[0x7CA2DE5266A94BF][0x98EA1BB7164D103], Enum[0xBF54BE1BB3D618B][0x92676CF5B6FCD43])
+	local f21_local0 = Engine[@"lobbygetsessionclients"](Enum[@"lobbymodule"][@"lobby_module_host"], Enum[@"lobbytype"][@"lobby_type_game"])
 	for f21_local4, f21_local5 in pairs(f21_local0.sessionClients) do
-		if f21_local5.team ~= Enum[0x13A4717E5AC547][0xE4DDAC9C5C45556] then
+		if f21_local5.team ~= Enum[@"team_t"][@"team_spectator"] then
 			return false
 		end
 	end
 	return true
 end
 f0_local0.LobbyMainModeData = {
-	[Enum[0x89C1455C5032969][0x7E41449995CD57E]] = {
-		eMode = Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5],
+	[Enum[@"lobbymainmode"][@"lobby_mainmode_mp"]] = {
+		eMode = Enum[@"emodes"][@"mode_multiplayer"],
 		OnlineCustomMenu = LuaEnum.UI.DIRECTOR_ONLINE_MP_CUSTOM,
 		OnlineTrainingMenu = LuaEnum.UI.DIRECTOR_ONLINE_MP_TRAINING,
 		OnlineArenaMenuPregame = LuaEnum.UI.DIRECTOR_ONLINE_MP_ARENA_PREGAME,
@@ -214,8 +214,8 @@ f0_local0.LobbyMainModeData = {
 		LanMenu = LuaEnum.UI.DIRECTOR_LAN_MP,
 		TrainingMenu = LuaEnum.UI.DIRECTOR_LAN_MP_TRAINING,
 	},
-	[Enum[0x89C1455C5032969][0x79D01499920B292]] = {
-		eMode = Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A],
+	[Enum[@"lobbymainmode"][@"lobby_mainmode_zm"]] = {
+		eMode = Enum[@"emodes"][@"mode_zombies"],
 		OnlineCustomMenu = LuaEnum.UI.DIRECTOR_ONLINE_ZM_CUSTOM,
 		PregameMenu = LuaEnum.UI.DIRECTOR_ONLINE_ZM_PREGAME,
 		PrivateMenu = LuaEnum.UI.DIRECTOR_ONLINE_ZM_PRIVATE,
@@ -223,8 +223,8 @@ f0_local0.LobbyMainModeData = {
 		QuickPlaylistTarget = LuaEnum.UI.DIRECTOR_ONLINE_ZM_PREGAME,
 		LanMenu = LuaEnum.UI.DIRECTOR_LAN_ZM,
 	},
-	[Enum[0x89C1455C5032969][0x78C124999125C42]] = {
-		eMode = Enum[0x9C0C2196D8313A0][0xBF1DCC8138A9D39],
+	[Enum[@"lobbymainmode"][@"lobby_mainmode_wz"]] = {
+		eMode = Enum[@"emodes"][@"mode_warzone"],
 		OnlineCustomMenu = LuaEnum.UI.DIRECTOR_ONLINE_WZ_CUSTOM,
 		PregameMenu = LuaEnum.UI.DIRECTOR_ONLINE_WZ_PUBLIC,
 		PublicMenu = LuaEnum.UI.DIRECTOR_ONLINE_WZ_PUBLIC,
@@ -233,14 +233,14 @@ f0_local0.LobbyMainModeData = {
 	},
 }
 f0_local0.EModeData = {
-	[Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5]] = {
-		assetName = 0x9E82E6A2962DD60,
+	[Enum[@"emodes"][@"mode_multiplayer"]] = {
+		assetName = @"sessionmode_mp",
 	},
-	[Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A]] = {
-		assetName = 0x9CA2B6A2949DAB8,
+	[Enum[@"emodes"][@"mode_zombies"]] = {
+		assetName = @"sessionmode_zm",
 	},
-	[Enum[0x9C0C2196D8313A0][0xBF1DCC8138A9D39]] = {
-		assetName = 0x9D4406A295252EC,
+	[Enum[@"emodes"][@"mode_warzone"]] = {
+		assetName = @"sessionmode_wz",
 	},
 }
 f0_local0.ShouldShowWarzone = function()
@@ -253,7 +253,7 @@ end
 f0_local0.ShouldShowZombies = function()
 	local f23_local0 = LuaUtils.ZombiesModeAvailable()
 	if f23_local0 then
-		if not Dvar[0x75D40FD034432A4]:exists() or tonumber(Dvar[0x75D40FD034432A4]:get()) <= 0 then
+		if not Dvar[@"hash_475D40FD034432A4"]:exists() or tonumber(Dvar[@"hash_475D40FD034432A4"]:get()) <= 0 then
 			f23_local0 = not LuaUtils.OnlineOnlyDemo()
 		else
 			f23_local0 = true
@@ -265,16 +265,16 @@ f0_local0.ShouldShowMultiplayer = function()
 	return LuaUtils.MultiplayerModeAvailable()
 end
 for f0_local5, f0_local6 in pairs(f0_local0.EModeData) do
-	local f0_local7 = Engine[0xE00B2F29271C60B](f0_local6.assetName)
+	local f0_local7 = Engine[@"hash_2E00B2F29271C60B"](f0_local6.assetName)
 	if f0_local7 ~= nil then
-		f0_local6.Abbreviation = f0_local7[0x89A29113F5105C1]
-		f0_local6.DefaultGameType = f0_local7[0xA64CB8DCAF6BBDC]
-		f0_local6.DefaultMap = f0_local7[0xCBD34C8AF30CC98]
-		f0_local6.PresenceIcon = 0xC4CF58835C4A472
-		f0_local6.DisplayName = f0_local7[0x55F116BF695C8F6]
-		f0_local6.SelectDescription = f0_local7[0x51DF77834F55EE1]
-		f0_local6.DefaultArenaGameType = f0_local7[0xF431A55A6F5F2CB]
-		f0_local6.DefaultArenaMap = f0_local7[0x7B49743C623CFB5]
+		f0_local6.Abbreviation = f0_local7[@"abbreviation"]
+		f0_local6.DefaultGameType = f0_local7[@"defaultgametype"]
+		f0_local6.DefaultMap = f0_local7[@"defaultmap"]
+		f0_local6.PresenceIcon = @"ui_icon_gamemode_logo_orange"
+		f0_local6.DisplayName = f0_local7[@"displayname"]
+		f0_local6.SelectDescription = f0_local7[@"selectdescription"]
+		f0_local6.DefaultArenaGameType = f0_local7[@"hash_5F431A55A6F5F2CB"]
+		f0_local6.DefaultArenaMap = f0_local7[@"hash_17B49743C623CFB5"]
 	end
 end
 f0_local0.GetEModeForLobbyMainMode = function(f25_arg0)
@@ -290,11 +290,11 @@ f0_local0.GetEModeForLobbyMainMode = function(f25_arg0)
 	f25_local1 = nil
 end
 f0_local0.GetDisplayNameForEMode = function(f26_arg0)
-	if f26_arg0 == Enum[0x9C0C2196D8313A0][0xBF1DCC8138A9D39] and not f0_local0.ShouldShowWarzone() then
+	if f26_arg0 == Enum[@"emodes"][@"mode_warzone"] and not f0_local0.ShouldShowWarzone() then
 		return 0x0
-	elseif f26_arg0 == Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A] and not f0_local0.ShouldShowZombies() then
+	elseif f26_arg0 == Enum[@"emodes"][@"mode_zombies"] and not f0_local0.ShouldShowZombies() then
 		return 0x0
-	elseif f26_arg0 == Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5] and not f0_local0.ShouldShowMultiplayer() then
+	elseif f26_arg0 == Enum[@"emodes"][@"mode_multiplayer"] and not f0_local0.ShouldShowMultiplayer() then
 		return 0x0
 	elseif f26_arg0 then
 		local f26_local0 = f0_local0.EModeData[f26_arg0]
@@ -303,11 +303,11 @@ f0_local0.GetDisplayNameForEMode = function(f26_arg0)
 	return f26_local0 and f26_local1 or 0x0
 end
 f0_local0.GetSelectDescriptionForEMode = function(f27_arg0)
-	if f27_arg0 == Enum[0x9C0C2196D8313A0][0xBF1DCC8138A9D39] and not f0_local0.ShouldShowWarzone() then
+	if f27_arg0 == Enum[@"emodes"][@"mode_warzone"] and not f0_local0.ShouldShowWarzone() then
 		return 0x0
-	elseif f27_arg0 == Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A] and not f0_local0.ShouldShowZombies() then
+	elseif f27_arg0 == Enum[@"emodes"][@"mode_zombies"] and not f0_local0.ShouldShowZombies() then
 		return 0x0
-	elseif f27_arg0 == Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5] and not f0_local0.ShouldShowMultiplayer() then
+	elseif f27_arg0 == Enum[@"emodes"][@"mode_multiplayer"] and not f0_local0.ShouldShowMultiplayer() then
 		return 0x0
 	elseif f27_arg0 then
 		local f27_local0 = f0_local0.EModeData[f27_arg0]
@@ -316,7 +316,7 @@ f0_local0.GetSelectDescriptionForEMode = function(f27_arg0)
 	return f27_local0 and f27_local1 or 0x0
 end
 f0_local0.GetPresenceImageForEMode = function(f28_arg0)
-	if f28_arg0 == Enum[0x9C0C2196D8313A0][0xBF1DCC8138A9D39] and not f0_local0.ShouldShowWarzone() then
+	if f28_arg0 == Enum[@"emodes"][@"mode_warzone"] and not f0_local0.ShouldShowWarzone() then
 		return 0x0
 	elseif f28_arg0 then
 		local f28_local0 = f0_local0.EModeData[f28_arg0]
@@ -329,9 +329,9 @@ f0_local0.GetDisplayNameForLobbyMainMode = function(f29_arg0)
 	return f0_local0.GetDisplayNameForEMode(f29_local0 and f29_local0.eMode)
 end
 f0_local0.GetDefaultMap = function(f30_arg0)
-	local f30_local0 = f0_local0.LobbyMainModeData[f30_arg0[0xEB7DDC7F079D51B]]
+	local f30_local0 = f0_local0.LobbyMainModeData[f30_arg0[@"mainmode"]]
 	local f30_local1 = f30_local0 and f30_local0.eMode
-	if f30_arg0[0xF7AE5746E79F2CE] == Enum[0xF7AE5746E79F2CE][0x7B5630CD29180CB] then
+	if f30_arg0[@"egamemodes"] == Enum[@"egamemodes"][@"hash_27B5630CD29180CB"] then
 		if f30_local1 then
 			local f30_local2 = f0_local0.EModeData[f30_local1]
 			local f30_local3 = f0_local0.EModeData[f30_local1].DefaultArenaMap
@@ -344,9 +344,9 @@ f0_local0.GetDefaultMap = function(f30_arg0)
 	return f30_local4 and f30_local5 or ""
 end
 f0_local0.GetDefaultGameType = function(f31_arg0)
-	local f31_local0 = f0_local0.LobbyMainModeData[f31_arg0[0xEB7DDC7F079D51B]]
+	local f31_local0 = f0_local0.LobbyMainModeData[f31_arg0[@"mainmode"]]
 	local f31_local1 = f31_local0 and f31_local0.eMode
-	if f31_arg0[0xF7AE5746E79F2CE] == Enum[0xF7AE5746E79F2CE][0x7B5630CD29180CB] or f31_arg0[0xF7AE5746E79F2CE] == Enum[0xF7AE5746E79F2CE][0x58ECA70A244C08F] then
+	if f31_arg0[@"egamemodes"] == Enum[@"egamemodes"][@"hash_27B5630CD29180CB"] or f31_arg0[@"egamemodes"] == Enum[@"egamemodes"][@"mode_game_league"] then
 		if f31_local1 then
 			local f31_local2 = f0_local0.EModeData[f31_local1]
 			local f31_local3 = f0_local0.EModeData[f31_local1].DefaultArenaGameType
@@ -381,7 +381,7 @@ f0_local0.SkuMatch = function(f33_arg0, f33_arg1, f33_arg2)
 	return true
 end
 f0_local0.GetSkuName = function()
-	local f34_local0 = Dvar[0x46B5D9C4A7CE4C0]:get()
+	local f34_local0 = Dvar[@"loc_availablelanguages"]:get()
 	local f34_local1 = {}
 	if LuaDefine.isPS4 then
 		for f34_local5 in string.gmatch(f34_local0, "([^_]+)") do
@@ -402,7 +402,7 @@ f0_local0.GetSkuName = function()
 	return nil
 end
 f0_local0.IsSkuOfflineOnly = function()
-	if not Dvar[0x624D67C5B31ACC9]:exists() or Dvar[0x624D67C5B31ACC9]:get() == "0" then
+	if not Dvar[@"hash_2624D67C5B31ACC9"]:exists() or Dvar[@"hash_2624D67C5B31ACC9"]:get() == "0" then
 		return false
 	else
 		local f35_local0 = LuaUtils.GetSkuName()
@@ -421,18 +421,18 @@ f0_local0.IsSkuOfflineOnly = function()
 	end
 end
 f0_local0.GetOnlinePlaylists = function()
-	if f0_local1.onlinePlaylistChecksum == nil or f0_local1.onlinePlaylistChecksum ~= Engine[0x4E58F1E46816B6]() then
-		f0_local1.onlinePlaylistChecksum = Engine[0x4E58F1E46816B6]()
-		f0_local1.onlinePlaylists = Engine[0x37A1CA9E92F5696]()
+	if f0_local1.onlinePlaylistChecksum == nil or f0_local1.onlinePlaylistChecksum ~= Engine[@"getplaylistchecksum"]() then
+		f0_local1.onlinePlaylistChecksum = Engine[@"getplaylistchecksum"]()
+		f0_local1.onlinePlaylists = Engine[@"getplaylists"]()
 	end
 	return f0_local1.onlinePlaylists
 end
 f0_local0.ReloadOnlinePlaylists = function()
-	f0_local1.onlinePlaylistChecksum = Engine[0x4E58F1E46816B6]()
-	f0_local1.onlinePlaylists = Engine[0x37A1CA9E92F5696]()
+	f0_local1.onlinePlaylistChecksum = Engine[@"getplaylistchecksum"]()
+	f0_local1.onlinePlaylists = Engine[@"getplaylists"]()
 end
 f0_local0.GetOfflinePlaylists = function()
-	return Engine[0x37A1CA9E92F5696]("playlists_offline")
+	return Engine[@"getplaylists"]("playlists_offline")
 end
 f0_local0.IsArenaMode = function()
 	local f39_local0 = LuaUtils.IsArenaPublicGame()
@@ -442,17 +442,17 @@ f0_local0.IsArenaMode = function()
 	return f39_local0
 end
 f0_local0.IsArenaPublicGame = function()
-	return Engine[0x994291BF56E485B](Enum[0xF7AE5746E79F2CE][0x58ECA70A244C08F])
+	return Engine[@"gamemodeismode"](Enum[@"egamemodes"][@"mode_game_league"])
 end
 f0_local0.IsArenaCustomGame = function()
-	return Engine[0x994291BF56E485B](Enum[0xF7AE5746E79F2CE][0x7B5630CD29180CB])
+	return Engine[@"gamemodeismode"](Enum[@"egamemodes"][@"hash_27B5630CD29180CB"])
 end
 f0_local0.GetArenaPlaylistInfo = function()
 	local f42_local0 = {}
 	local f42_local1 = LuaUtils.GetOnlinePlaylists()
 	local f42_local2 = {}
 	for f42_local11, f42_local12 in ipairs(f42_local1) do
-		if f42_local12.nameHash == 0x5D8D7B6A4C553C8 or f42_local12.nameHash == 0x98A15D908A3089F then
+		if f42_local12.nameHash == @"arena" or f42_local12.nameHash == @"hash_298A15D908A3089F" then
 			for f42_local9, f42_local10 in pairs(f42_local12.entries) do
 				table.insert(f42_local2, f42_local10)
 			end
@@ -473,7 +473,7 @@ f0_local0.GetArenaPowerRating = function(f44_arg0)
 end
 f0_local0.GetLeaguePlayTierTable = function()
 	if not f0_local0.LeaguePlayTierList then
-		f0_local0.LeaguePlayTierList = Engine[0xE00B2F29271C60B](0x5FB9081FBDA10BD)
+		f0_local0.LeaguePlayTierList = Engine[@"hash_2E00B2F29271C60B"](@"arena_league_play_rank_list_default")
 	end
 	return f0_local0.LeaguePlayTierList
 end
@@ -482,7 +482,7 @@ f0_local0.GetLeaguePlacementTierForPosition = function(f46_arg0)
 		local f46_local0 = f0_local0.GetLeaguePlayTierTable()
 		if f46_local0 then
 			for f46_local4, f46_local5 in ipairs(f46_local0.tierlist) do
-				if f46_arg0 <= f46_local5[0x8A3024830754A20] then
+				if f46_arg0 <= f46_local5[@"placement"] then
 					return f46_local4
 				end
 			end
@@ -493,7 +493,7 @@ end
 f0_local0.GetPositionForLeaguePlacementTier = function(f47_arg0)
 	local f47_local0 = f0_local0.GetLeaguePlayTierTable()
 	if f47_local0 and f47_arg0 <= #f47_local0.tierlist then
-		return f47_local0.tierlist[f47_arg0][0x8A3024830754A20]
+		return f47_local0.tierlist[f47_arg0][@"placement"]
 	else
 		return nil
 	end
@@ -501,7 +501,7 @@ end
 f0_local0.GetRubiesForLeaguePlacementTier = function(f48_arg0)
 	local f48_local0 = f0_local0.GetLeaguePlayTierTable()
 	if f48_local0 and f48_arg0 <= #f48_local0.tierlist then
-		return f48_local0.tierlist[f48_arg0][0x4CC5373745DAE62]
+		return f48_local0.tierlist[f48_arg0][@"hash_44CC5373745DAE62"]
 	else
 		return 0
 	end
@@ -511,8 +511,8 @@ f0_local0.GetRubiesForPosition = function(f49_arg0)
 		local f49_local0 = f0_local0.GetLeaguePlayTierTable()
 		if f49_local0 then
 			for f49_local4, f49_local5 in ipairs(f49_local0.tierlist) do
-				if f49_arg0 <= f49_local5[0x8A3024830754A20] then
-					return f49_local5[0x4CC5373745DAE62]
+				if f49_arg0 <= f49_local5[@"placement"] then
+					return f49_local5[@"hash_44CC5373745DAE62"]
 				end
 			end
 		end
@@ -521,194 +521,194 @@ f0_local0.GetRubiesForPosition = function(f49_arg0)
 end
 f0_local0.LobbyIsLocked = function()
 	if f0_local0.IsArenaMode() then
-		local f50_local0 = Engine[0x40E824FE270E174](Engine[0x40E824FE270E174](Engine[0x8DF2E5447F384B9](), "lobbyRoot"), "lobbyLockedIn")
+		local f50_local0 = Engine[@"getmodel"](Engine[@"getmodel"](Engine[@"getglobalmodel"](), "lobbyRoot"), "lobbyLockedIn")
 		if f50_local0 then
-			return Engine[0x614D394F6F9A18D](f50_local0)
+			return Engine[@"getmodelvalue"](f50_local0)
 		end
 	end
 	return false
 end
 f0_local0.UnlockLobby = function()
-	Engine[0x83C9B5DE1D9371](Engine[0xA798E4552F5E872](Engine[0x40E824FE270E174](Engine[0x8DF2E5447F384B9](), "lobbyRoot"), "lobbyLockedIn"), false)
+	Engine[@"setmodelvalue"](Engine[@"createmodel"](Engine[@"getmodel"](Engine[@"getglobalmodel"](), "lobbyRoot"), "lobbyLockedIn"), false)
 end
 f0_local0.GetBanMessageForFeature = function(f52_arg0, f52_arg1, f52_arg2)
-	local f52_local0 = Engine[0x54689B3A7B3899E](f52_arg0)
-	local f52_local1 = Engine[0xF9F1239CFD921FE](0x3B1ABD297FF1711)
+	local f52_local0 = Engine[@"getgamertagforcontroller"](f52_arg0)
+	local f52_local1 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_3B1ABD297FF1711")
 	if f52_arg1 == LuaEnum.FEATURE_BAN.LIVE_MP then
-		local f52_local2 = Engine[0xF9F1239CFD921FE]
+		local f52_local2 = Engine[@"hash_4F9F1239CFD921FE"]
 		local f52_local3
 		if f52_arg2 == true then
-			f52_local3 = 0xC3D51874550E4CF
+			f52_local3 = @"hash_7C3D51874550E4CF"
 			if not f52_local3 then
 			else
 				return f52_local2(f52_local3, f52_local0, f52_local1)
 			end
 		end
-		f52_local3 = 0xEBAE48C17D1FCB
+		f52_local3 = @"exe/cod_online_temp_ban_player"
 	elseif f52_arg1 == LuaEnum.FEATURE_BAN.LIVE_ZM then
-		local f52_local2 = Engine[0xF9F1239CFD921FE]
+		local f52_local2 = Engine[@"hash_4F9F1239CFD921FE"]
 		local f52_local3
 		if f52_arg2 == true then
-			f52_local3 = 0xC3D51874550E4CF
+			f52_local3 = @"hash_7C3D51874550E4CF"
 			if not f52_local3 then
 			else
 				return f52_local2(f52_local3, f52_local0, f52_local1)
 			end
 		end
-		f52_local3 = 0xEBAE48C17D1FCB
+		f52_local3 = @"exe/cod_online_temp_ban_player"
 	elseif f52_arg1 == LuaEnum.FEATURE_BAN.LIVE_CP then
-		local f52_local2 = Engine[0xF9F1239CFD921FE]
+		local f52_local2 = Engine[@"hash_4F9F1239CFD921FE"]
 		local f52_local3
 		if f52_arg2 == true then
-			f52_local3 = 0xC3D51874550E4CF
+			f52_local3 = @"hash_7C3D51874550E4CF"
 			if not f52_local3 then
 			else
 				return f52_local2(f52_local3, f52_local0, f52_local1)
 			end
 		end
-		f52_local3 = 0xEBAE48C17D1FCB
+		f52_local3 = @"exe/cod_online_temp_ban_player"
 	elseif f52_arg1 == LuaEnum.FEATURE_BAN.LIVE_WZ then
-		local f52_local2 = Engine[0xF9F1239CFD921FE]
+		local f52_local2 = Engine[@"hash_4F9F1239CFD921FE"]
 		local f52_local3
 		if f52_arg2 == true then
-			f52_local3 = 0xC3D51874550E4CF
+			f52_local3 = @"hash_7C3D51874550E4CF"
 			if not f52_local3 then
 			else
 				return f52_local2(f52_local3, f52_local0, f52_local1)
 			end
 		end
-		f52_local3 = 0xEBAE48C17D1FCB
+		f52_local3 = @"exe/cod_online_temp_ban_player"
 	elseif f52_arg1 == LuaEnum.FEATURE_BAN.LEADERBOARD_WRITE_MP then
-		local f52_local2 = Engine[0xF9F1239CFD921FE]
+		local f52_local2 = Engine[@"hash_4F9F1239CFD921FE"]
 		local f52_local3
 		if f52_arg2 == true then
-			f52_local3 = 0xB21A4EAF3F42E24
+			f52_local3 = @"hash_1B21A4EAF3F42E24"
 			if not f52_local3 then
 			else
 				return f52_local2(f52_local3, f52_local0, f52_local1)
 			end
 		end
-		f52_local3 = 0x581D0E7448BC8F4
+		f52_local3 = @"hash_5581D0E7448BC8F4"
 	elseif f52_arg1 == LuaEnum.FEATURE_BAN.LEADERBOARD_WRITE_ZM then
-		local f52_local2 = Engine[0xF9F1239CFD921FE]
+		local f52_local2 = Engine[@"hash_4F9F1239CFD921FE"]
 		local f52_local3
 		if f52_arg2 == true then
-			f52_local3 = 0xB21A4EAF3F42E24
+			f52_local3 = @"hash_1B21A4EAF3F42E24"
 			if not f52_local3 then
 			else
 				return f52_local2(f52_local3, f52_local0, f52_local1)
 			end
 		end
-		f52_local3 = 0x581D0E7448BC8F4
+		f52_local3 = @"hash_5581D0E7448BC8F4"
 	elseif f52_arg1 == LuaEnum.FEATURE_BAN.LEADERBOARD_WRITE_CP then
-		local f52_local2 = Engine[0xF9F1239CFD921FE]
+		local f52_local2 = Engine[@"hash_4F9F1239CFD921FE"]
 		local f52_local3
 		if f52_arg2 == true then
-			f52_local3 = 0xB21A4EAF3F42E24
+			f52_local3 = @"hash_1B21A4EAF3F42E24"
 			if not f52_local3 then
 			else
 				return f52_local2(f52_local3, f52_local0, f52_local1)
 			end
 		end
-		f52_local3 = 0x581D0E7448BC8F4
+		f52_local3 = @"hash_5581D0E7448BC8F4"
 	else
 		if f52_arg1 == LuaEnum.FEATURE_BAN.HOSTING then
 		elseif f52_arg1 == LuaEnum.FEATURE_BAN.MP_HOSTING then
 		elseif f52_arg1 == LuaEnum.FEATURE_BAN.ZM_HOSTING then
 		elseif f52_arg1 == LuaEnum.FEATURE_BAN.CP_HOSTING then
 		elseif f52_arg1 == LuaEnum.FEATURE_BAN.MP_SPLIT_SCREEN then
-			local f52_local2 = Engine[0xF9F1239CFD921FE]
+			local f52_local2 = Engine[@"hash_4F9F1239CFD921FE"]
 			local f52_local3
 			if f52_arg2 == true then
-				f52_local3 = 0xB21A4EAF3F42E24
+				f52_local3 = @"hash_1B21A4EAF3F42E24"
 				if not f52_local3 then
 				else
 					return f52_local2(f52_local3, f52_local0, f52_local1)
 				end
 			end
-			f52_local3 = 0x581D0E7448BC8F4
+			f52_local3 = @"hash_5581D0E7448BC8F4"
 		elseif f52_arg1 == LuaEnum.FEATURE_BAN.ZM_SPLIT_SCREEN then
-			local f52_local2 = Engine[0xF9F1239CFD921FE]
+			local f52_local2 = Engine[@"hash_4F9F1239CFD921FE"]
 			local f52_local3
 			if f52_arg2 == true then
-				f52_local3 = 0xB21A4EAF3F42E24
+				f52_local3 = @"hash_1B21A4EAF3F42E24"
 				if not f52_local3 then
 				else
 					return f52_local2(f52_local3, f52_local0, f52_local1)
 				end
 			end
-			f52_local3 = 0x581D0E7448BC8F4
+			f52_local3 = @"hash_5581D0E7448BC8F4"
 		elseif f52_arg1 == LuaEnum.FEATURE_BAN.CP_SPLIT_SCREEN then
-			local f52_local2 = Engine[0xF9F1239CFD921FE]
+			local f52_local2 = Engine[@"hash_4F9F1239CFD921FE"]
 			local f52_local3
 			if f52_arg2 == true then
-				f52_local3 = 0xB21A4EAF3F42E24
+				f52_local3 = @"hash_1B21A4EAF3F42E24"
 				if not f52_local3 then
 				else
 					return f52_local2(f52_local3, f52_local0, f52_local1)
 				end
 			end
-			f52_local3 = 0x581D0E7448BC8F4
+			f52_local3 = @"hash_5581D0E7448BC8F4"
 		elseif f52_arg1 == LuaEnum.FEATURE_BAN.ARENA_GAMEPLAY then
-			local f52_local2 = Engine[0xF9F1239CFD921FE]
+			local f52_local2 = Engine[@"hash_4F9F1239CFD921FE"]
 			local f52_local3
 			if f52_arg2 == true then
-				f52_local3 = 0xB21A4EAF3F42E24
+				f52_local3 = @"hash_1B21A4EAF3F42E24"
 				if not f52_local3 then
 				else
 					return f52_local2(f52_local3, f52_local0, f52_local1)
 				end
 			end
-			f52_local3 = 0x581D0E7448BC8F4
+			f52_local3 = @"hash_5581D0E7448BC8F4"
 		elseif f52_arg1 == LuaEnum.FEATURE_BAN.USER_GENERATED_CONTENT then
-			local f52_local2 = Engine[0xF9F1239CFD921FE]
+			local f52_local2 = Engine[@"hash_4F9F1239CFD921FE"]
 			local f52_local3
 			if f52_arg2 == true then
-				f52_local3 = 0xB21A4EAF3F42E24
+				f52_local3 = @"hash_1B21A4EAF3F42E24"
 				if not f52_local3 then
 				else
 					return f52_local2(f52_local3, f52_local0, f52_local1)
 				end
 			end
-			f52_local3 = 0x581D0E7448BC8F4
+			f52_local3 = @"hash_5581D0E7448BC8F4"
 		elseif f52_arg1 == LuaEnum.FEATURE_BAN.PRESTIGE then
-			local f52_local2 = Engine[0xF9F1239CFD921FE]
+			local f52_local2 = Engine[@"hash_4F9F1239CFD921FE"]
 			local f52_local3
 			if f52_arg2 == true then
-				f52_local3 = 0xB21A4EAF3F42E24
+				f52_local3 = @"hash_1B21A4EAF3F42E24"
 				if not f52_local3 then
 				else
 					return f52_local2(f52_local3, f52_local0, f52_local1)
 				end
 			end
-			f52_local3 = 0x581D0E7448BC8F4
+			f52_local3 = @"hash_5581D0E7448BC8F4"
 		elseif f52_arg1 == LuaEnum.FEATURE_BAN.WZ_DUOQUAD then
-			local f52_local2 = Engine[0xF9F1239CFD921FE]
+			local f52_local2 = Engine[@"hash_4F9F1239CFD921FE"]
 			local f52_local3
 			if f52_arg2 == true then
-				f52_local3 = 0xB21A4EAF3F42E24
+				f52_local3 = @"hash_1B21A4EAF3F42E24"
 				if not f52_local3 then
 				else
 					return f52_local2(f52_local3, f52_local0, f52_local1)
 				end
 			end
-			f52_local3 = 0x581D0E7448BC8F4
+			f52_local3 = @"hash_5581D0E7448BC8F4"
 		else
-			return Engine[0xF9F1239CFD921FE](0x632F97C36A01BD6)
+			return Engine[@"hash_4F9F1239CFD921FE"](@"hash_6632F97C36A01BD6")
 		end
 	end
 end
 f0_local0.SafeComError = function(f53_arg0, f53_arg1)
 	local f53_local0 = nil
 	if type(f53_arg1) == "xhash" then
-		f53_local0 = Engine[0xF9F1239CFD921FE](f53_arg1)
+		f53_local0 = Engine[@"hash_4F9F1239CFD921FE"](f53_arg1)
 	else
 		f53_local0 = f53_arg1
 	end
-	if not Engine[0x1B09567078C4A6F]() then
-		Engine[0xBC42C678E40DBE8](f53_arg0, f53_local0)
+	if not Engine[@"isincomerror"]() then
+		Engine[@"comerror"](f53_arg0, f53_local0)
 	end
-	Engine[0x458FE92FEB39D4E](Enum[0x7A63DCD561B0FA8][0x1725ABF82092BD8], "**DOUBLE COM_ERROR** prevented: LuaUtils.SafeComError(" .. tostring(f53_arg0) .. ", " .. f53_arg1 .. ") - " .. f53_local0 .. ".\n")
+	Engine[@"printerror"](Enum[@"consolelabel_e"][@"con_label_default"], "**DOUBLE COM_ERROR** prevented: LuaUtils.SafeComError(" .. tostring(f53_arg0) .. ", " .. f53_arg1 .. ") - " .. f53_local0 .. ".\n")
 end
 f0_local0.GetPlaylistIDForSelectedCPMission = function(f54_arg0)
 	local f54_local0 = LuaUtils.GetMapsTable()
@@ -737,11 +737,11 @@ f0_local0.GetBSPNameFromAsset = function(f55_arg0)
 	end
 end
 f0_local0.IsGameModeParagonCapable = function(f56_arg0)
-	if f56_arg0 == Enum[0x9C0C2196D8313A0][0xBF1DCC8138A9D39] then
-		return Engine[0x9E5BE3B4BBA4E0E]("live_supports_paragon_wz")
+	if f56_arg0 == Enum[@"emodes"][@"mode_warzone"] then
+		return Engine[@"getdvarbool"]("live_supports_paragon_wz")
 	else
 		local f56_local0
-		if f56_arg0 ~= Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5] and f56_arg0 ~= Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A] then
+		if f56_arg0 ~= Enum[@"emodes"][@"mode_multiplayer"] and f56_arg0 ~= Enum[@"emodes"][@"mode_zombies"] then
 			f56_local0 = false
 		else
 			f56_local0 = true
@@ -894,11 +894,11 @@ f0_local0.SecondsToTimeRemainingString = function(f73_arg0)
 		f73_local3 = "0" .. f73_local3
 	end
 	if f73_local0 > 7 then
-		return Engine[0xF9F1239CFD921FE](0xBB5B34BDC891135, f73_local0)
+		return Engine[@"hash_4F9F1239CFD921FE"](@"hash_1BB5B34BDC891135", f73_local0)
 	elseif f73_local0 > 0 then
-		return Engine[0xF9F1239CFD921FE](0xF15651DBC75A77F, f73_local0, f73_local1, f73_local2, f73_local3)
+		return Engine[@"hash_4F9F1239CFD921FE"](@"hash_4F15651DBC75A77F", f73_local0, f73_local1, f73_local2, f73_local3)
 	else
-		return Engine[0xF9F1239CFD921FE](0x432FE3538638B68, f73_local1, f73_local2, f73_local3)
+		return Engine[@"hash_4F9F1239CFD921FE"](@"hash_5432FE3538638B68", f73_local1, f73_local2, f73_local3)
 	end
 end
 f0_local0.UpdateContract = function(f74_arg0, f74_arg1)
@@ -925,28 +925,28 @@ f0_local0.BMContracts = {
 	specialContractIndex = 3,
 }
 f0_local0.CycleContracts = function()
-	local f76_local0 = Engine[0xA798E4552F5E872](Engine[0x8DF2E5447F384B9](), "contractWeeklyAIndex")
-	local f76_local1 = Engine[0xA798E4552F5E872](Engine[0x8DF2E5447F384B9](), "contractWeeklyBIndex")
-	local f76_local2 = Engine[0xA798E4552F5E872](Engine[0x8DF2E5447F384B9](), "contractDailyIndex")
-	local f76_local3 = Engine[0xA798E4552F5E872](Engine[0x8DF2E5447F384B9](), "contractWeeklyRemaining")
-	local f76_local4 = Engine[0xA798E4552F5E872](Engine[0x8DF2E5447F384B9](), "contractDailyRemaining")
-	if not Engine[0x9E5BE3B4BBA4E0E]("contracts_enabled_mp") then
+	local f76_local0 = Engine[@"createmodel"](Engine[@"getglobalmodel"](), "contractWeeklyAIndex")
+	local f76_local1 = Engine[@"createmodel"](Engine[@"getglobalmodel"](), "contractWeeklyBIndex")
+	local f76_local2 = Engine[@"createmodel"](Engine[@"getglobalmodel"](), "contractDailyIndex")
+	local f76_local3 = Engine[@"createmodel"](Engine[@"getglobalmodel"](), "contractWeeklyRemaining")
+	local f76_local4 = Engine[@"createmodel"](Engine[@"getglobalmodel"](), "contractDailyRemaining")
+	if not Engine[@"getdvarbool"]("contracts_enabled_mp") then
 		return
 	end
-	local f76_local5 = Engine[0xBD7BC359E582086]()
-	if not Engine[0xE89628E21B49660]() or f76_local5 == nil or f76_local5[f0_local0.BMContracts.weeklyContractIndex1 + 1] == nil or f76_local5[f0_local0.BMContracts.weeklyContractIndex2 + 1] == nil or f76_local5[f0_local0.BMContracts.dailyContractIndex + 1] == nil then
+	local f76_local5 = Engine[@"getcontracts"]()
+	if not Engine[@"sessionmode_isonlinegame"]() or f76_local5 == nil or f76_local5[f0_local0.BMContracts.weeklyContractIndex1 + 1] == nil or f76_local5[f0_local0.BMContracts.weeklyContractIndex2 + 1] == nil or f76_local5[f0_local0.BMContracts.dailyContractIndex + 1] == nil then
 		return
-	elseif not Engine[0x9E5BE3B4BBA4E0E]("contracts_disable_schedule") then
-		for f76_local6 = 0, Engine[0xB686A0A723E6442]() - 1, 1 do
+	elseif not Engine[@"getdvarbool"]("contracts_disable_schedule") then
+		for f76_local6 = 0, Engine[@"getmaxcontrollercount"]() - 1, 1 do
 			local f76_local9 = false
-			if Engine[0xC7D35487C7E276D](f76_local6) then
-				local f76_local10 = Engine[0x8BF970606552F4C](f76_local6, Enum[0xBBD4F9E70101BA8][0xFDE358A242AFA2C])
+			if Engine[@"arestatsfetched"](f76_local6) then
+				local f76_local10 = Engine[@"storagegetbuffer"](f76_local6, Enum[@"storagefiletype"][@"storage_mp_stats_online"])
 				if f76_local10 ~= nil then
 					for f76_local14, f76_local15 in pairs(f0_local0.BMContracts) do
 						if f76_local5[f76_local15 + 1] ~= nil and LuaUtils.UpdateContract(f76_local10.contracts[f76_local15], f76_local5[f76_local15 + 1]) == true then
 							f76_local9 = true
-							Engine[0x8C5711DAACC99F4](Enum[0x7A63DCD561B0FA8][0x1725ABF82092BD8], "Updated contract slot " .. f76_local15 .. " to " .. f76_local5[f76_local15 + 1].id .. " " .. f76_local5[f76_local15 + 1].name .. " for controller " .. f76_local6 .. "\n")
-							Engine[0x8C5711DAACC99F4](Enum[0x7A63DCD561B0FA8][0x1725ABF82092BD8], "New slot index in stats: " .. f76_local10.contracts[f76_local15].index:get() .. "\n")
+							Engine[@"printinfo"](Enum[@"consolelabel_e"][@"con_label_default"], "Updated contract slot " .. f76_local15 .. " to " .. f76_local5[f76_local15 + 1].id .. " " .. f76_local5[f76_local15 + 1].name .. " for controller " .. f76_local6 .. "\n")
+							Engine[@"printinfo"](Enum[@"consolelabel_e"][@"con_label_default"], "New slot index in stats: " .. f76_local10.contracts[f76_local15].index:get() .. "\n")
 							if f76_local15 == LuaUtils.BMContracts.dailyContractIndex then
 								f76_local10.ui_seen_daily_congrats:set(0)
 							else
@@ -957,35 +957,35 @@ f0_local0.CycleContracts = function()
 				end
 			end
 			if f76_local9 == true then
-				Engine[0x28A466EF7723621](f76_local6, Enum[0xBBD4F9E70101BA8][0xFDE358A242AFA2C])
+				Engine[@"storagewrite"](f76_local6, Enum[@"storagefiletype"][@"storage_mp_stats_online"])
 			end
 		end
 	end
-	Engine[0x83C9B5DE1D9371](f76_local0, f76_local5[f0_local0.BMContracts.weeklyContractIndex1 + 1].id)
-	Engine[0x83C9B5DE1D9371](f76_local1, f76_local5[f0_local0.BMContracts.weeklyContractIndex2 + 1].id)
-	Engine[0x83C9B5DE1D9371](f76_local2, f76_local5[f0_local0.BMContracts.dailyContractIndex + 1].id)
-	Engine[0x83C9B5DE1D9371](f76_local3, LuaUtils.SecondsToTimeRemainingString(f76_local5.timeRemainingWeekly))
-	Engine[0x83C9B5DE1D9371](f76_local4, LuaUtils.SecondsToTimeRemainingString(f76_local5.timeRemainingDaily))
+	Engine[@"setmodelvalue"](f76_local0, f76_local5[f0_local0.BMContracts.weeklyContractIndex1 + 1].id)
+	Engine[@"setmodelvalue"](f76_local1, f76_local5[f0_local0.BMContracts.weeklyContractIndex2 + 1].id)
+	Engine[@"setmodelvalue"](f76_local2, f76_local5[f0_local0.BMContracts.dailyContractIndex + 1].id)
+	Engine[@"setmodelvalue"](f76_local3, LuaUtils.SecondsToTimeRemainingString(f76_local5.timeRemainingWeekly))
+	Engine[@"setmodelvalue"](f76_local4, LuaUtils.SecondsToTimeRemainingString(f76_local5.timeRemainingDaily))
 end
 f0_local0.GetCurrentFactionDvars = function()
-	return Engine[0x22EAAB59AA27E9B](0x341DE25CB0D6F66) or 0, Engine[0x22EAAB59AA27E9B](0x7067C5D4FE9075E) or 0, Engine[0x9E5BE3B4BBA4E0E](0x6C8247D6D84D328)
+	return Engine[@"getdvarint"](@"hash_5341DE25CB0D6F66") or 0, Engine[@"getdvarint"](@"hash_47067C5D4FE9075E") or 0, Engine[@"getdvarbool"](@"hash_66C8247D6D84D328")
 end
 f0_local0.GetCallingsBundle = function()
 	if f0_local0.callingsBundle == nil then
-		f0_local0.callingsBundle = Engine[0xE00B2F29271C60B](0x258EFC12235EFC9)
+		f0_local0.callingsBundle = Engine[@"hash_2E00B2F29271C60B"](@"t8_callings_settings")
 	end
 	return f0_local0.callingsBundle
 end
 f0_local0.GetCallingsStats = function(f79_arg0)
-	local f79_local0 = Engine[0xA6C26EBACD7322D](f79_arg0)
+	local f79_local0 = Engine[@"getplayerstats"](f79_arg0)
 	if f79_local0 then
-		return f79_local0[0xAE679FEF1E88988]
+		return f79_local0[@"playercalling"]
 	else
 		return nil
 	end
 end
 f0_local0.StorageWriteZMProgression = function(f80_arg0)
-	Engine[0x28A466EF7723621](f80_arg0, Enum[0xBBD4F9E70101BA8][0xA57D6164B91A8FC])
+	Engine[@"storagewrite"](f80_arg0, Enum[@"storagefiletype"][@"hash_A57D6164B91A8FC"])
 end
 f0_local0.UpdateFactionCallings = function(f81_arg0)
 	local f81_local0 = f0_local0.GetCallingsStats(f81_arg0)
@@ -993,21 +993,21 @@ f0_local0.UpdateFactionCallings = function(f81_arg0)
 		return
 	end
 	local f81_local1 = function(f82_arg0, f82_arg1, f82_arg2)
-		f82_arg0[0xB9514BB20FEC5FF]:set(f82_arg1 - 1)
-		f82_arg0[0xA5AB6FB11258EBF]:set(f82_arg2 - 1)
-		f82_arg0[0xBF1EBBFA7B16C64]:set(0)
-		f82_arg0[0xE608064D306991F]:set(Engine[0x786FFC9E621CAB7]())
+		f82_arg0[@"currentseason"]:set(f82_arg1 - 1)
+		f82_arg0[@"hash_3A5AB6FB11258EBF"]:set(f82_arg2 - 1)
+		f82_arg0[@"hash_5BF1EBBFA7B16C64"]:set(0)
+		f82_arg0[@"hash_2E608064D306991F"]:set(Engine[@"hash_2786FFC9E621CAB7"]())
 	end
 	local f81_local2 = function(f83_arg0, f83_arg1, f83_arg2)
-		if f83_arg0[0xD8EAF5A5A9F1CC1]:get() == 0 then
+		if f83_arg0[@"hash_7D8EAF5A5A9F1CC1"]:get() == 0 then
 			return true
-		elseif f83_arg1 - 1 ~= f83_arg0[0x5DB84305A85FAEA]:get() or f83_arg2 - 1 ~= f83_arg0[0x4D468697915DFAA]:get() then
+		elseif f83_arg1 - 1 ~= f83_arg0[@"hash_65DB84305A85FAEA"]:get() or f83_arg2 - 1 ~= f83_arg0[@"hash_4D468697915DFAA"]:get() then
 			return true
 		else
-			local f83_local0 = f83_arg0[0xE608064D306991F]:get()
+			local f83_local0 = f83_arg0[@"hash_2E608064D306991F"]:get()
 			if f83_local0 == "0" then
 				return true
-			elseif Engine[0x786FFC9E621CAB7]() - Engine[0x90B6BCE69A8E08B](f83_local0) > Engine[0x90B6BCE69A8E08B](tostring(604800)) then
+			elseif Engine[@"hash_2786FFC9E621CAB7"]() - Engine[@"hash_690B6BCE69A8E08B"](f83_local0) > Engine[@"hash_690B6BCE69A8E08B"](tostring(604800)) then
 				return true
 			else
 				return false
@@ -1019,45 +1019,45 @@ f0_local0.UpdateFactionCallings = function(f81_arg0)
 		if f81_local2(f81_local0, f81_local3, f81_local4) then
 			f81_local1(f81_local0, f81_local3, f81_local4)
 		end
-		f81_local0[0xD8EAF5A5A9F1CC1]:set(1)
+		f81_local0[@"hash_7D8EAF5A5A9F1CC1"]:set(1)
 	else
-		f81_local0[0xBF1EBBFA7B16C64]:set(0)
-		f81_local0[0xD8EAF5A5A9F1CC1]:set(0)
+		f81_local0[@"hash_5BF1EBBFA7B16C64"]:set(0)
+		f81_local0[@"hash_7D8EAF5A5A9F1CC1"]:set(0)
 	end
-	f81_local0[0x5DB84305A85FAEA]:set(f81_local3 - 1)
-	f81_local0[0x4D468697915DFAA]:set(f81_local4 - 1)
+	f81_local0[@"hash_65DB84305A85FAEA"]:set(f81_local3 - 1)
+	f81_local0[@"hash_4D468697915DFAA"]:set(f81_local4 - 1)
 	f0_local0.StorageWriteZMProgression(f81_arg0)
 end
 f0_local0.UpdateAllCallings = function()
-	if Engine[0xA63E42B2FB6EC02]() ~= Enum[0xC84D3E505F1444][0xE99F41098B71960] or Engine[0x3EAC408F958FF05]() ~= Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A] then
+	if Engine[@"getlobbynetworkmode"]() ~= Enum[@"lobbynetworkmode"][@"lobby_networkmode_live"] or Engine[@"currentsessionmode"]() ~= Enum[@"emodes"][@"mode_zombies"] then
 		return
 	end
-	for f84_local0 = 0, Engine[0xB686A0A723E6442]() - 1, 1 do
-		if Engine[0xC7D35487C7E276D](f84_local0) then
-			if Engine[0x9E5BE3B4BBA4E0E](0x1DA02CA40639DE5) then
+	for f84_local0 = 0, Engine[@"getmaxcontrollercount"]() - 1, 1 do
+		if Engine[@"arestatsfetched"](f84_local0) then
+			if Engine[@"getdvarbool"](@"hash_11DA02CA40639DE5") then
 				f0_local0.UpdateFactionCallings(f84_local0)
 			end
-			if Engine[0x9E5BE3B4BBA4E0E](0x7FF853067D7C38C) then
+			if Engine[@"getdvarbool"](@"hash_27FF853067D7C38C") then
 				f0_local0.UpdateDailyCalling(f84_local0)
 			end
 		end
 	end
 end
 f0_local0.UploadAllLocalStatsBuffers = function()
-	if Engine[0xA63E42B2FB6EC02]() ~= Enum[0xC84D3E505F1444][0xE99F41098B71960] then
+	if Engine[@"getlobbynetworkmode"]() ~= Enum[@"lobbynetworkmode"][@"lobby_networkmode_live"] then
 		return
 	end
-	for f85_local0 = 0, Engine[0xB686A0A723E6442]() - 1, 1 do
-		if Engine[0xC7D35487C7E276D](f85_local0) then
+	for f85_local0 = 0, Engine[@"getmaxcontrollercount"]() - 1, 1 do
+		if Engine[@"arestatsfetched"](f85_local0) then
 			f0_local0.UploadLocalStatsBuffer(f85_local0)
 		end
 	end
 end
 f0_local0.UploadLocalStatsBuffer = function(f86_arg0)
-	if Engine[0x3EAC408F958FF05]() == Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A] then
-		Engine[0x28A466EF7723621](f86_arg0, Enum[0xBBD4F9E70101BA8][0xA57D6164B91A8FC])
-	elseif Engine[0x3EAC408F958FF05]() == Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5] then
-		Engine[0x28A466EF7723621](f86_arg0, Enum[0xBBD4F9E70101BA8][0xD5A7695E03A7A90])
+	if Engine[@"currentsessionmode"]() == Enum[@"emodes"][@"mode_zombies"] then
+		Engine[@"storagewrite"](f86_arg0, Enum[@"storagefiletype"][@"hash_A57D6164B91A8FC"])
+	elseif Engine[@"currentsessionmode"]() == Enum[@"emodes"][@"mode_multiplayer"] then
+		Engine[@"storagewrite"](f86_arg0, Enum[@"storagefiletype"][@"hash_5D5A7695E03A7A90"])
 	end
 end
 f0_local0.UpdateDailyCallingDvar = function()
@@ -1068,67 +1068,67 @@ f0_local0.UpdateDailyCallingDvar = function()
 		return
 	end
 	local f87_local1 = #f87_local0.dailyschedule - 1
-	local f87_local2 = Engine[0x786FFC9E621CAB7]()
-	local f87_local3 = Engine[0x90B6BCE69A8E08B](tostring(f87_local0[0x21C303DA786A89C]))
+	local f87_local2 = Engine[@"hash_2786FFC9E621CAB7"]()
+	local f87_local3 = Engine[@"hash_690B6BCE69A8E08B"](tostring(f87_local0[@"callingstarttime"]))
 	if f87_local2 < f87_local3 then
-		Engine[0xB177D654FFB67BE]("zm_active_daily_calling", 0)
+		Engine[@"setdvar"]("zm_active_daily_calling", 0)
 		return
 	end
-	local f87_local4 = (f87_local2 - f87_local3) / Engine[0x90B6BCE69A8E08B](tostring(86400))
-	Engine[0x83C9B5DE1D9371](Engine[0xA798E4552F5E872](Engine[0xA798E4552F5E872](Engine[0x8DF2E5447F384B9](), "AutoEvents"), "zm_daily_callings_timer"), f0_local0.SecondsToTimeRemainingString(Engine[0x8377C456E1E2B0B](Engine[0x6E2B2377DE5A745](f87_local3 + (f87_local4 + Engine[0x90B6BCE69A8E08B]("1")) * Engine[0x90B6BCE69A8E08B](tostring(86400)))) + 1))
-	f87_local4 = tonumber(Engine[0x6E2B2377DE5A745](f87_local4)) % f87_local1
-	local f87_local5 = Engine[0x22EAAB59AA27E9B](0xEF2B14C3BFEF02A)
+	local f87_local4 = (f87_local2 - f87_local3) / Engine[@"hash_690B6BCE69A8E08B"](tostring(86400))
+	Engine[@"setmodelvalue"](Engine[@"createmodel"](Engine[@"createmodel"](Engine[@"getglobalmodel"](), "AutoEvents"), "zm_daily_callings_timer"), f0_local0.SecondsToTimeRemainingString(Engine[@"getsecondsremainingserver"](Engine[@"int64asstring"](f87_local3 + (f87_local4 + Engine[@"hash_690B6BCE69A8E08B"]("1")) * Engine[@"hash_690B6BCE69A8E08B"](tostring(86400)))) + 1))
+	f87_local4 = tonumber(Engine[@"int64asstring"](f87_local4)) % f87_local1
+	local f87_local5 = Engine[@"getdvarint"](@"zm_active_daily_calling")
 	local f87_local6 = f87_local4 + 1
-	Engine[0xB177D654FFB67BE]("zm_active_daily_calling", f87_local6)
+	Engine[@"setdvar"]("zm_active_daily_calling", f87_local6)
 	if f87_local5 and f87_local5 ~= f87_local6 then
-		local f87_local7 = Engine[0xA798E4552F5E872](Engine[0xA798E4552F5E872](Engine[0x8DF2E5447F384B9](), "AutoEvents"), "cycled")
-		if not Engine[0x83C9B5DE1D9371](f87_local7, 1) then
-			Engine[0x6A489878620F3BC](f87_local7)
+		local f87_local7 = Engine[@"createmodel"](Engine[@"createmodel"](Engine[@"getglobalmodel"](), "AutoEvents"), "cycled")
+		if not Engine[@"setmodelvalue"](f87_local7, 1) then
+			Engine[@"forcenotifymodelsubscriptions"](f87_local7)
 		end
 	end
 end
 f0_local0.UpdateDailyCalling = function(f88_arg0)
 	f0_local0.UpdateDailyCallingDvar()
-	local f88_local0 = Engine[0x8BF970606552F4C](f88_arg0, Enum[0xBBD4F9E70101BA8][0xA57D6164B91A8FC])
+	local f88_local0 = Engine[@"storagegetbuffer"](f88_arg0, Enum[@"storagefiletype"][@"hash_A57D6164B91A8FC"])
 	if f88_local0 == nil then
 		return
 	end
-	local f88_local1 = f88_local0[0x8E3320CCF4091E5]
+	local f88_local1 = f88_local0[@"hash_18E3320CCF4091E5"]
 	if f88_local1 == nil then
 		return
 	end
-	local f88_local2 = Engine[0x22EAAB59AA27E9B](0xEF2B14C3BFEF02A)
+	local f88_local2 = Engine[@"getdvarint"](@"zm_active_daily_calling")
 	if f88_local2 == nil or f88_local2 == 0 then
 		return
 	end
-	local f88_local3 = Engine[0x786FFC9E621CAB7]()
+	local f88_local3 = Engine[@"hash_2786FFC9E621CAB7"]()
 	local f88_local4 = function()
-		local f89_local0 = f88_local1[0xAD32B22445C4828]:get()
+		local f89_local0 = f88_local1[@"calling_timestamp"]:get()
 		if f89_local0 == "0" then
 			return true
 		else
-			return f88_local3 - Engine[0x90B6BCE69A8E08B](f89_local0) > Engine[0x90B6BCE69A8E08B](tostring(86400))
+			return f88_local3 - Engine[@"hash_690B6BCE69A8E08B"](f89_local0) > Engine[@"hash_690B6BCE69A8E08B"](tostring(86400))
 		end
 	end
-	if f88_local2 ~= f88_local1[0x87F0FCE798B3A4B]:get() or f88_local4() then
-		f88_local1[0x9909144862249C6]:set(0)
-		f88_local1[0x87F0FCE798B3A4B]:set(f88_local2)
-		f88_local1[0xAD32B22445C4828]:set(f88_local3)
-		Engine[0x28A466EF7723621](f88_arg0, Enum[0xBBD4F9E70101BA8][0xA57D6164B91A8FC])
+	if f88_local2 ~= f88_local1[@"hash_487F0FCE798B3A4B"]:get() or f88_local4() then
+		f88_local1[@"progress"]:set(0)
+		f88_local1[@"hash_487F0FCE798B3A4B"]:set(f88_local2)
+		f88_local1[@"calling_timestamp"]:set(f88_local3)
+		Engine[@"storagewrite"](f88_arg0, Enum[@"storagefiletype"][@"hash_A57D6164B91A8FC"])
 	end
 end
 f0_local0.RefreshDoubleXPMask = function()
-	for f90_local0 = 0, Engine[0xB686A0A723E6442]() - 1, 1 do
-		Engine[0x564BF7F86779F65](f90_local0)
+	for f90_local0 = 0, Engine[@"getmaxcontrollercount"]() - 1, 1 do
+		Engine[@"refreshdoublexpmask"](f90_local0)
 	end
 end
 f0_local0.SaveAfterMatchContractStats = function()
-	if not Engine[0x9E5BE3B4BBA4E0E]("contracts_enabled_mp") then
+	if not Engine[@"getdvarbool"]("contracts_enabled_mp") then
 		return
 	end
-	for f91_local0 = 0, Engine[0xB686A0A723E6442]() - 1, 1 do
-		if Engine[0xC7D35487C7E276D](f91_local0) then
-			local f91_local3 = Engine[0x8BF970606552F4C](f91_local0, Enum[0xBBD4F9E70101BA8][0xFDE358A242AFA2C])
+	for f91_local0 = 0, Engine[@"getmaxcontrollercount"]() - 1, 1 do
+		if Engine[@"arestatsfetched"](f91_local0) then
+			local f91_local3 = Engine[@"storagegetbuffer"](f91_local0, Enum[@"storagefiletype"][@"storage_mp_stats_online"])
 			if f91_local3 and f91_local3.contracts and f91_local3.contractsAAR then
 				for f91_local7, f91_local8 in pairs(f0_local0.BMContracts) do
 					f0_local0.SetAARContractStats(f91_local3.contracts[f91_local8], f91_local3.contractsAAR[f91_local8])
@@ -1138,75 +1138,75 @@ f0_local0.SaveAfterMatchContractStats = function()
 	end
 end
 f0_local0.GetBlackjackHeroIndex = function(f92_arg0)
-	for f92_local3, f92_local4 in ipairs(Engine[0xA5B5E7CABA5C3AB](f92_arg0)) do
+	for f92_local3, f92_local4 in ipairs(Engine[@"getherolist"](f92_arg0)) do
 		if CoDShared.IsLootHero(f92_local4) then
 			return f92_local4.bodyIndex
 		end
 	end
 end
 f0_local0.ResetToLastSelectedSpecialistIfNeeded = function(f93_arg0)
-	if Dvar[0x9E317343EDF4396]:get() then
+	if Dvar[@"ui_enableallheroes"]:get() then
 		return
 	end
 	local f93_local0 = "gamedata/tables/common/consumables.csv"
 	local f93_local1 = 0
 	local f93_local2 = 1
-	if Engine[0xC7D35487C7E276D](f93_arg0) then
-		local f93_local3 = Engine[0x8BF970606552F4C](f93_arg0, Enum[0xBBD4F9E70101BA8][0xFDE358A242AFA2C])
-		local f93_local4 = Engine[0x2DCF0973239E909](f93_local0, f93_local1, f93_local2, "blackjack")
+	if Engine[@"arestatsfetched"](f93_arg0) then
+		local f93_local3 = Engine[@"storagegetbuffer"](f93_arg0, Enum[@"storagefiletype"][@"storage_mp_stats_online"])
+		local f93_local4 = Engine[@"tablelookup"](f93_local0, f93_local1, f93_local2, "blackjack")
 		if f93_local4 == nil or f93_local4 == "" then
 			return
 		elseif f93_local3.consumables[f93_local4].awarded:get() <= f93_local3.consumables[f93_local4].consumed:get() then
-			local f93_local5 = f0_local0.GetBlackjackHeroIndex(Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5])
-			local f93_local6 = Engine[0x8BF970606552F4C](f93_arg0, Enum[0xBBD4F9E70101BA8][0x6C886CEB6BF4BCA])
+			local f93_local5 = f0_local0.GetBlackjackHeroIndex(Enum[@"emodes"][@"mode_multiplayer"])
+			local f93_local6 = Engine[@"storagegetbuffer"](f93_arg0, Enum[@"storagefiletype"][@"storage_mp_loadouts"])
 			for f93_local10, f93_local11 in pairs({
-				[Enum[0x6A5F22B388F8B9E][0xF9EE7A8E21CAD9B]] = "lastSelectedCharacterIndex",
+				[Enum[@"cactype"][@"cac_type_mp_public"]] = "lastSelectedCharacterIndex",
 			}) do
-				if Engine[0x693626824CE62F2](f93_arg0, Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5], f93_local10) == f93_local5 then
-					Engine[0x5BD54CABF917CBF](f93_arg0, Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5], f93_local10, f93_local6[f93_local11]:get())
+				if Engine[@"getequippedheroforcactype"](f93_arg0, Enum[@"emodes"][@"mode_multiplayer"], f93_local10) == f93_local5 then
+					Engine[@"setheroforcactype"](f93_arg0, Enum[@"emodes"][@"mode_multiplayer"], f93_local10, f93_local6[f93_local11]:get())
 				end
 			end
 		end
 	end
 end
 f0_local0.ResetToLastSelectedSpecialistIfNeededAfterMatch = function()
-	if Engine[0x3EAC408F958FF05]() ~= Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5] or not Engine[0x8BF601ABD141DF9]() then
+	if Engine[@"currentsessionmode"]() ~= Enum[@"emodes"][@"mode_multiplayer"] or not Engine[@"sessionmode_ispubliconlinegame"]() then
 		return
 	end
-	for f94_local0 = 0, Engine[0xB686A0A723E6442]() - 1, 1 do
+	for f94_local0 = 0, Engine[@"getmaxcontrollercount"]() - 1, 1 do
 		f0_local0.ResetToLastSelectedSpecialistIfNeeded(f94_local0)
 	end
 end
 f0_local0.SetLastSelectedSpecialist = function(f95_arg0, f95_arg1)
-	if Engine[0x3EAC408F958FF05]() == Enum[0x9C0C2196D8313A0][0xBF1DCC8138A9D39] then
-		local f95_local0 = Engine[0x8BF970606552F4C](f95_arg0, Enum[0xBBD4F9E70101BA8][0xDF87425733853AE])
+	if Engine[@"currentsessionmode"]() == Enum[@"emodes"][@"mode_warzone"] then
+		local f95_local0 = Engine[@"storagegetbuffer"](f95_arg0, Enum[@"storagefiletype"][@"storage_wz_loadouts"])
 		if f95_local0 then
-			f95_local0[0x766CE60E25569A3][0x8A76647E94009C3][0xDF5E6BB54765F4C]:set(f95_arg1)
+			f95_local0[@"cacloadouts"][@"charactercontext"][@"characterindex"]:set(f95_arg1)
 		end
 	end
 end
 f0_local2 = {
-	[Enum[0x50236A3452F3A49][0x9571467DC6166AD]] = {
-		[Enum[0x50236A3452F3A49][0x9571467DC6166AD]] = true,
-		[Enum[0x50236A3452F3A49][0x31FC575F7E84E5C]] = true,
-		[Enum[0x50236A3452F3A49][0x28476FFCBABCB0]] = true,
+	[Enum[@"xonline_nat_type"][@"xonline_nat_open"]] = {
+		[Enum[@"xonline_nat_type"][@"xonline_nat_open"]] = true,
+		[Enum[@"xonline_nat_type"][@"xonline_nat_moderate"]] = true,
+		[Enum[@"xonline_nat_type"][@"xonline_nat_strict"]] = true,
 	},
-	[Enum[0x50236A3452F3A49][0x31FC575F7E84E5C]] = {
-		[Enum[0x50236A3452F3A49][0x9571467DC6166AD]] = true,
-		[Enum[0x50236A3452F3A49][0x31FC575F7E84E5C]] = true,
-		[Enum[0x50236A3452F3A49][0x28476FFCBABCB0]] = false,
+	[Enum[@"xonline_nat_type"][@"xonline_nat_moderate"]] = {
+		[Enum[@"xonline_nat_type"][@"xonline_nat_open"]] = true,
+		[Enum[@"xonline_nat_type"][@"xonline_nat_moderate"]] = true,
+		[Enum[@"xonline_nat_type"][@"xonline_nat_strict"]] = false,
 	},
-	[Enum[0x50236A3452F3A49][0x28476FFCBABCB0]] = {
-		[Enum[0x50236A3452F3A49][0x9571467DC6166AD]] = true,
-		[Enum[0x50236A3452F3A49][0x31FC575F7E84E5C]] = false,
-		[Enum[0x50236A3452F3A49][0x28476FFCBABCB0]] = false,
+	[Enum[@"xonline_nat_type"][@"xonline_nat_strict"]] = {
+		[Enum[@"xonline_nat_type"][@"xonline_nat_open"]] = true,
+		[Enum[@"xonline_nat_type"][@"xonline_nat_moderate"]] = false,
+		[Enum[@"xonline_nat_type"][@"xonline_nat_strict"]] = false,
 	},
 }
 f0_local0.IsCompatibleNatConnection = function(f96_arg0, f96_arg1)
 	if f96_arg1 == nil then
-		f96_arg1 = Engine[0xD83EDB9C9B5C88E]()
+		f96_arg1 = Engine[@"getnattype"]()
 	end
-	if f96_arg1 == Enum[0x50236A3452F3A49][0x13C8D4EF221C85D] or f96_arg0 == Enum[0x50236A3452F3A49][0x13C8D4EF221C85D] then
+	if f96_arg1 == Enum[@"xonline_nat_type"][@"xonline_nat_unknown"] or f96_arg0 == Enum[@"xonline_nat_type"][@"xonline_nat_unknown"] then
 		return true
 	else
 		return f0_local2[f96_arg1][f96_arg0]
@@ -1284,10 +1284,10 @@ f0_local0.RequirePaidSubscriptionForOnlinePlay = function()
 	if LuaDefine.isPC then
 		return true
 	else
-		local f103_local0, f103_local1 = Engine[0x40EC85343E0181F]()
-		if (f103_local0 == Enum[0x48909109238341F][0xCBD4CF0639724C3]) or f103_local0 == Enum[0x48909109238341F][0x1E6B724DD50351E] then
+		local f103_local0, f103_local1 = Engine[@"hash_540EC85343E0181F"]()
+		if (f103_local0 == Enum[@"hash_548909109238341F"][@"hash_4CBD4CF0639724C3"]) or f103_local0 == Enum[@"hash_548909109238341F"][@"hash_61E6B724DD50351E"] then
 			return false
-		elseif Engine[0xCB675CA7856DA25]() then
+		elseif Engine[@"hash_5CB675CA7856DA25"]() then
 			return f0_local0.TrialRequirePaidSubscription()
 		else
 			return true
@@ -1297,7 +1297,7 @@ end
 f0_local0.PlayStationPlusUpsell = function(f104_arg0)
 	if LuaDefine.isPS4 then
 		if f0_local0.RequirePaidSubscriptionForOnlinePlay() then
-			return Engine[0x53581D3A02EE9FF](f104_arg0)
+			return Engine[@"displayupsellandcontentwarnings"](f104_arg0)
 		else
 			return true
 		end
@@ -1306,7 +1306,7 @@ f0_local0.PlayStationPlusUpsell = function(f104_arg0)
 	end
 end
 f0_local0.OnlineOnlyDemo = function()
-	if Dvar[0x9E838B67E5E49C2]:exists() and Dvar[0x9E838B67E5E49C2]:get() == 0 then
+	if Dvar[@"offline_gate"]:exists() and Dvar[@"offline_gate"]:get() == 0 then
 		return true
 	elseif not LobbyData.GetLobbyMenuByName(LuaEnum.UI.DIRECTOR_LAN) then
 		return true
@@ -1315,7 +1315,7 @@ f0_local0.OnlineOnlyDemo = function()
 	end
 end
 f0_local0.OfflineOnlyDemo = function()
-	if Dvar[0x34A7795843D3848]:exists() and Dvar[0x34A7795843D3848]:get() == 0 then
+	if Dvar[@"online_gate"]:exists() and Dvar[@"online_gate"]:get() == 0 then
 		return true
 	elseif not LobbyData.GetLobbyMenuByName(LuaEnum.UI.DIRECTOR_ONLINE) then
 		return true
@@ -1324,7 +1324,7 @@ f0_local0.OfflineOnlyDemo = function()
 	end
 end
 f0_local0.SkipDirectorOnlineMenu = function()
-	return Dvar[0xEBDE517125BAF38]:get()
+	return Dvar[@"hash_7EBDE517125BAF38"]:get()
 end
 f0_local0.OnlineModeAvailable = function()
 	if f0_local1.onlineAvailable == nil then
@@ -1339,29 +1339,29 @@ f0_local0.LanModeAvailable = function()
 	return f0_local1.lanAvailable
 end
 f0_local0.MultiplayerModeAvailable = function()
-	if Dvar[0x639D4DB415CDB92]:exists() and Dvar[0x639D4DB415CDB92]:get() == 0 then
+	if Dvar[@"mp_gate"]:exists() and Dvar[@"mp_gate"]:get() == 0 then
 		return false
 	elseif f0_local1.mpAvailable == nil then
 		f0_local1.mpAvailable = nil ~= LobbyData.GetLobbyMenuByName(LuaEnum.UI.DIRECTOR_ONLINE_MP_PREGAME)
 	end
-	if Engine[0x7D47312EBA41751]() or Engine[0xCB675CA7856DA25]() then
+	if Engine[@"hash_77D47312EBA41751"]() or Engine[@"hash_5CB675CA7856DA25"]() then
 		return false
 	end
 	return f0_local1.mpAvailable
 end
 f0_local0.ZombiesModeAvailable = function()
-	if Dvar[0xD9394548AC1DBA]:exists() and Dvar[0xD9394548AC1DBA]:get() == 0 then
+	if Dvar[@"zm_gate"]:exists() and Dvar[@"zm_gate"]:get() == 0 then
 		return false
 	elseif f0_local1.zmAvailable == nil then
 		f0_local1.zmAvailable = nil ~= LobbyData.GetLobbyMenuByName(LuaEnum.UI.DIRECTOR_ONLINE_ZM_PREGAME)
 	end
-	if Engine[0x7D47312EBA41751]() or Engine[0xCB675CA7856DA25]() or Engine[0x5405A6484A88367]() then
+	if Engine[@"hash_77D47312EBA41751"]() or Engine[@"hash_5CB675CA7856DA25"]() or Engine[@"hash_45405A6484A88367"]() then
 		return false
 	end
 	return f0_local1.zmAvailable
 end
 f0_local0.WarzoneModeAvailable = function()
-	if Dvar[0xFA38645FB7CFB66]:exists() and Dvar[0xFA38645FB7CFB66]:get() == 0 then
+	if Dvar[@"wz_gate"]:exists() and Dvar[@"wz_gate"]:get() == 0 then
 		return false
 	elseif f0_local1.wzAvailable == nil then
 		f0_local1.wzAvailable = nil ~= LobbyData.GetLobbyMenuByName(LuaEnum.UI.DIRECTOR_ONLINE_WZ_PUBLIC)
@@ -1369,40 +1369,40 @@ f0_local0.WarzoneModeAvailable = function()
 	return f0_local1.wzAvailable
 end
 f0_local0.CampaignModeAvailable = function()
-	if Dvar[0xB9D57065A7090D0]:exists() and Dvar[0xB9D57065A7090D0]:get() == 0 then
+	if Dvar[@"ct_gate"]:exists() and Dvar[@"ct_gate"]:get() == 0 then
 		return false
 	elseif f0_local1.cpAvailable == nil then
 		f0_local1.cpAvailable = nil ~= LobbyData.GetLobbyMenuByName(LuaEnum.UI.DIRECTOR_ONLINE_CP_PREGAME)
 	end
-	if Engine[0x7D47312EBA41751]() or Engine[0xCB675CA7856DA25]() then
+	if Engine[@"hash_77D47312EBA41751"]() or Engine[@"hash_5CB675CA7856DA25"]() then
 		return false
 	end
 	return f0_local1.cpAvailable
 end
 f0_local0.GameModeAvailable = function(f114_arg0)
-	if f114_arg0 == Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5] then
+	if f114_arg0 == Enum[@"emodes"][@"mode_multiplayer"] then
 		return f0_local0.MultiplayerModeAvailable()
-	elseif f114_arg0 == Enum[0x9C0C2196D8313A0][0x3723205FAE52C4A] then
+	elseif f114_arg0 == Enum[@"emodes"][@"mode_zombies"] then
 		return f0_local0.ZombiesModeAvailable()
-	elseif f114_arg0 == Enum[0x9C0C2196D8313A0][0xBF1DCC8138A9D39] then
+	elseif f114_arg0 == Enum[@"emodes"][@"mode_warzone"] then
 		return f0_local0.WarzoneModeAvailable()
-	elseif f114_arg0 == Enum[0x9C0C2196D8313A0][0x60063C67132EB69] then
+	elseif f114_arg0 == Enum[@"emodes"][@"mode_campaign"] then
 		return f0_local0.CampaignModeAvailable()
-	elseif f114_arg0 == Enum[0x9C0C2196D8313A0][0xB22E0240605CFFE] then
+	elseif f114_arg0 == Enum[@"emodes"][@"mode_invalid"] then
 		return true
 	else
 		return false
 	end
 end
 f0_local0.MPArenaDisabled = function()
-	if Dvar[0xC1B99856528FDF9]:exists() and Dvar[0xC1B99856528FDF9]:get() == 0 then
+	if Dvar[@"hash_1C1B99856528FDF9"]:exists() and Dvar[@"hash_1C1B99856528FDF9"]:get() == 0 then
 		return true
 	elseif not LobbyData.GetLobbyMenuByName(LuaEnum.UI.DIRECTOR_ONLINE_MP_ARENA_PREGAME) then
 		return true
 	end
-	local f115_local0 = Engine[0x7D47312EBA41751]()
+	local f115_local0 = Engine[@"hash_77D47312EBA41751"]()
 	if not f115_local0 then
-		f115_local0 = Engine[0xCB675CA7856DA25]()
+		f115_local0 = Engine[@"hash_5CB675CA7856DA25"]()
 	end
 	return f115_local0
 end
@@ -1410,53 +1410,53 @@ f0_local0.ArenaModeAvailable = function()
 	return not f0_local0.MPArenaDisabled()
 end
 f0_local0.MatchmakingTest = function()
-	if Dvar[0x4984E142BD2D354]:exists() and Dvar[0x4984E142BD2D354]:get() > 0 then
-		return Dvar[0x4984E142BD2D354]:get()
+	if Dvar[@"hash_4984E142BD2D354"]:exists() and Dvar[@"hash_4984E142BD2D354"]:get() > 0 then
+		return Dvar[@"hash_4984E142BD2D354"]:get()
 	else
 		return 0
 	end
 end
 f0_local0.GetMinPlayersToStart = function()
-	return Dvar[0x500E4DB2F10F5EE]:get()
+	return Dvar[@"party_minplayers"]:get()
 end
 f0_local0.IsRoleUnlocked = function(f119_arg0, f119_arg1, f119_arg2)
-	local f119_local0 = Engine[0xB678B832BC9DC0](f119_arg1, f119_arg2)
+	local f119_local0 = Engine[@"getpositionrolebundleinfo"](f119_arg1, f119_arg2)
 	if not f119_local0 then
 		return false
-	elseif f119_local0[0x562938AF86028A0] ~= nil then
-		return Engine[0xB521CB398C92692](f119_arg0, f119_local0[0x562938AF86028A0])
+	elseif f119_local0[@"entitlement"] ~= nil then
+		return Engine[@"hasentitlement"](f119_arg0, f119_local0[@"entitlement"])
 	end
-	local f119_local1 = f119_local0[0xA01F4246639318C]
+	local f119_local1 = f119_local0[@"hash_7A01F4246639318C"]
 	if f119_local1 and CoDShared.IsIntDvarNonZero(f119_local1) then
 		return true
-	elseif f119_local0[0x5E9D6D3424C0E7E] ~= nil then
-		local f119_local2 = Engine[0x8FF94BB44442412](f119_local0[0x5E9D6D3424C0E7E], f119_arg1)
-		if f119_local2 > CoDShared.EmptyItemIndex and not Engine[0x191C1637A229078](f119_arg0, f119_local2, f119_arg1) then
+	elseif f119_local0[@"unlockableitementry"] ~= nil then
+		local f119_local2 = Engine[@"hash_68FF94BB44442412"](f119_local0[@"unlockableitementry"], f119_arg1)
+		if f119_local2 > CoDShared.EmptyItemIndex and not Engine[@"isitemlocked"](f119_arg0, f119_local2, f119_arg1) then
 			return true
-		elseif f119_local0[0x1D6157DBA773DA3] ~= nil and f119_local0[0x1D6157DBA773DA3] ~= 0x0 then
-			local f119_local3 = CoDShared.LootIndexInfoLookup(f119_local0[0x1D6157DBA773DA3])
+		elseif f119_local0[@"hash_41D6157DBA773DA3"] ~= nil and f119_local0[@"hash_41D6157DBA773DA3"] ~= 0x0 then
+			local f119_local3 = CoDShared.LootIndexInfoLookup(f119_local0[@"hash_41D6157DBA773DA3"])
 			if f119_local3 then
 				return CoDShared.IsLootItemOwnedByName(f119_arg0, f119_local3.nameHash)
 			end
 		end
 	end
-	if f119_local0[0xD48E06E94FE4AFA] == 1 then
+	if f119_local0[@"hash_5D48E06E94FE4AFA"] == 1 then
 		return true
-	elseif Dvar[0x818EB2F0EDA28E5]:get() then
+	elseif Dvar[@"allitemsunlocked"]:get() then
 		return true
-	elseif f119_arg1 == Enum[0x9C0C2196D8313A0][0xBF1DCC8138A9D39] and (not CoDShared.IsIntDvarNonZero(0xA5FD7D94CFC9DFD) or f119_local0[0xE69216C2DA7060A] ~= Enum[0x9C0C2196D8313A0][0x83EBA96F36BC4E5]) then
-		if Engine[0x8BF970606552F4C](f119_arg0, Enum[0xBBD4F9E70101BA8][0xD1A0F784B3C95A0]) == nil then
+	elseif f119_arg1 == Enum[@"emodes"][@"mode_warzone"] and (not CoDShared.IsIntDvarNonZero(@"hash_4A5FD7D94CFC9DFD") or f119_local0[@"modecategory"] ~= Enum[@"emodes"][@"mode_multiplayer"]) then
+		if Engine[@"storagegetbuffer"](f119_arg0, Enum[@"storagefiletype"][@"storage_wz_stats_online"]) == nil then
 			return false
-		elseif Engine[0x8BF970606552F4C](f119_arg0, Enum[0xBBD4F9E70101BA8][0x9E0698F1D820882]) == nil then
+		elseif Engine[@"storagegetbuffer"](f119_arg0, Enum[@"storagefiletype"][@"storage_common_settings"]) == nil then
 			return false
 		end
-		local f119_local4 = Engine[0x8BF970606552F4C](f119_arg0, Enum[0xBBD4F9E70101BA8][0xAB0E693244221BC])
+		local f119_local4 = Engine[@"storagegetbuffer"](f119_arg0, Enum[@"storagefiletype"][@"hash_1AB0E693244221BC"])
 		if not f119_local4 then
 			return false
 		end
-		local f119_local5 = Engine[0x82C5756563934AE](f119_arg1, f119_arg2)
-		if f119_local5 and f119_local4[0x147738D5CEE9199][f119_local5] then
-			return f119_local4[0x147738D5CEE9199][f119_local5][0xA55E1714AECC27C]:get() == 1
+		local f119_local5 = Engine[@"hash_682C5756563934AE"](f119_arg1, f119_arg2)
+		if f119_local5 and f119_local4[@"characters"][f119_local5] then
+			return f119_local4[@"characters"][f119_local5][@"unlocked"]:get() == 1
 		end
 		return false
 	end
@@ -1464,8 +1464,8 @@ f0_local0.IsRoleUnlocked = function(f119_arg0, f119_arg1, f119_arg2)
 end
 f0_local0.ConnectingToDemonwareMaxWaitTime = function()
 	local f120_local0 = LuaDefine.CONNECTINGDW_MAX_WAIT_TIME
-	if Dvar[0x3B4D9D51B4DD6DA]:exists() then
-		f120_local0 = f120_local0 + Dvar[0x3B4D9D51B4DD6DA]:get() * 1000
+	if Dvar[@"hash_3B4D9D51B4DD6DA"]:exists() then
+		f120_local0 = f120_local0 + Dvar[@"hash_3B4D9D51B4DD6DA"]:get() * 1000
 	end
 	return f120_local0
 end
@@ -1476,13 +1476,13 @@ f0_local0.GetArenaSeasonAsset = function()
 	return f0_local0.ArenaSeasonAsset
 end
 f0_local0.GetArenaSeasonElapsedSeconds = function()
-	local f122_local0 = Engine[0x783588166FFFE1E]()
-	if Engine[0xEDCFC612B39E0C0]("arena_day_overwrite") > 0 then
-		f122_local0 = Engine[0xEDCFC612B39E0C0]("arena_day_overwrite") * f0_local0.SecondsInDay
+	local f122_local0 = Engine[@"hash_1783588166FFFE1E"]()
+	if Engine[@"getdvarfloat"]("arena_day_overwrite") > 0 then
+		f122_local0 = Engine[@"getdvarfloat"]("arena_day_overwrite") * f0_local0.SecondsInDay
 		if f0_local0.ArenaDayOverwriteFixedTime == -1 then
-			f0_local0.ArenaDayOverwriteFixedTime = Engine[0xEFF639FB8A1BE0A]()
+			f0_local0.ArenaDayOverwriteFixedTime = Engine[@"seconds"]()
 		else
-			f122_local0 = f122_local0 + Engine[0xEFF639FB8A1BE0A]() - f0_local0.ArenaDayOverwriteFixedTime
+			f122_local0 = f122_local0 + Engine[@"seconds"]() - f0_local0.ArenaDayOverwriteFixedTime
 		end
 	end
 	return f122_local0
@@ -1490,7 +1490,7 @@ end
 f0_local0.GetArenaEventStartAndDuration = function(f123_arg0, f123_arg1, f123_arg2, f123_arg3)
 	local f123_local0 = f123_arg2.startOffset
 	local f123_local1 = f123_arg0.eventlist[f123_arg1].endOffset
-	if f123_arg2.eventType == Enum[0xC0EA92D04BC003B][0xA9E0B7849B16CD2] or f123_arg2.eventType == Enum[0xC0EA92D04BC003B][0x185075D2D3D8497] then
+	if f123_arg2.eventType == Enum[@"hash_6C0EA92D04BC003B"][@"hash_4A9E0B7849B16CD2"] or f123_arg2.eventType == Enum[@"hash_6C0EA92D04BC003B"][@"hash_4185075D2D3D8497"] then
 		f123_local1 = f123_arg3
 		if f123_arg1 < #f123_arg0.eventlist then
 			f123_local1 = f123_arg0.eventlist[f123_arg1 + 1].startOffset - 1
@@ -1539,12 +1539,12 @@ f0_local0.GetArenaEventEntryAndUpcoming = function(f125_arg0)
 end
 f0_local0.GetArenaSeason = function()
 	local f126_local0, f126_local1 = nil
-	if Engine[0xA63E42B2FB6EC02]() ~= Enum[0xC84D3E505F1444][0xBAA8EC6F3E77255] then
+	if Engine[@"getlobbynetworkmode"]() ~= Enum[@"lobbynetworkmode"][@"lobby_networkmode_lan"] then
 		if f0_local0.ArenaSeasonAsset == nil or f0_local0.ArenaSeasonAsset.seasonlist.nSeasons <= 0 then
-			f0_local0.ArenaSeasonAsset = Engine[0x349A8E5848A2FAC]()
+			f0_local0.ArenaSeasonAsset = Engine[@"hash_2349A8E5848A2FAC"]()
 		end
 		local f126_local2 = f0_local0.ArenaSeasonAsset
-		local f126_local3 = Engine[0x5A1049D8CEE36C2]()
+		local f126_local3 = Engine[@"getcurrentarenaseason"]()
 		if f126_local2 ~= nil and f126_local3 >= 0 then
 			local f126_local4 = f126_local2.seasonlist[f126_local3]
 			if f126_local4 ~= nil then
@@ -1553,7 +1553,7 @@ f0_local0.GetArenaSeason = function()
 			end
 		end
 	end
-	if Engine[0xEDCFC612B39E0C0]("arena_day_overwrite") > 0 then
+	if Engine[@"getdvarfloat"]("arena_day_overwrite") > 0 then
 		f126_local1 = 0
 	end
 	return f126_local0, f126_local1
@@ -1561,7 +1561,7 @@ end
 f0_local0.GetEventStartAndDuration = function(f127_arg0, f127_arg1, f127_arg2, f127_arg3)
 	local f127_local0 = f127_arg2.startOffset
 	local f127_local1 = f127_arg0.eventlist[f127_arg1].endOffset
-	if f127_arg2.eventType == Enum[0xC0EA92D04BC003B][0xA9E0B7849B16CD2] or f127_arg2.eventType == Enum[0xC0EA92D04BC003B][0x185075D2D3D8497] then
+	if f127_arg2.eventType == Enum[@"hash_6C0EA92D04BC003B"][@"hash_4A9E0B7849B16CD2"] or f127_arg2.eventType == Enum[@"hash_6C0EA92D04BC003B"][@"hash_4185075D2D3D8497"] then
 		f127_local1 = f127_arg3
 		if f127_arg1 < #f127_arg0.eventlist then
 			f127_local1 = f127_arg0.eventlist[f127_arg1 + 1].startOffset - 1
@@ -1598,14 +1598,14 @@ f0_local0.GetEventEntryAndEndSeconds = function(f128_arg0, f128_arg1)
 	return f128_local0, f128_local1
 end
 f0_local0.GetArenaEventEntryPlaylistByName = function(f129_arg0)
-	if f129_arg0 and f129_arg0.eventType == Enum[0xC0EA92D04BC003B][0xC32571741C5B730] then
-		return Engine[0xC68B4B9A2458BCB](0x7F03AFD7C3F6764)
+	if f129_arg0 and f129_arg0.eventType == Enum[@"hash_6C0EA92D04BC003B"][@"hash_5C32571741C5B730"] then
+		return Engine[@"hash_4C68B4B9A2458BCB"](@"hash_77F03AFD7C3F6764")
 	else
-		return Engine[0xC68B4B9A2458BCB](0xF0917768CA87F27)
+		return Engine[@"hash_4C68B4B9A2458BCB"](@"hash_7F0917768CA87F27")
 	end
 end
 f0_local0.GetArenaSkillBucketFromEvent = function(f130_arg0)
-	return LuaUtils.ArenaSeasonAsset.skillBuckets[0xC80DD3D83847EEA]
+	return LuaUtils.ArenaSeasonAsset.skillBuckets[@"hash_3C80DD3D83847EEA"]
 end
 f0_local0.GetEventEntryAndUpcoming = function(f131_arg0)
 	local f131_local0, f131_local1 = f0_local0.GetEventEntryAndEndSeconds(f131_arg0)
@@ -1636,16 +1636,16 @@ end
 f0_local0.GetCurrentEventData = function()
 	local f136_local0 = f0_local0.GetCurrentEventEntry()
 	if f136_local0.event ~= nil then
-		return Engine[0xE00B2F29271C60B](f136_local0.event)
+		return Engine[@"hash_2E00B2F29271C60B"](f136_local0.event)
 	else
 		return nil
 	end
 end
 f0_local0.SetQuickplayPlaylistID = function(f137_arg0)
-	if Engine[0x3ADF2C70B61E0EF](f137_arg0) then
-		Engine[0xF26F6999FA03BB9](f137_arg0)
+	if Engine[@"hash_23ADF2C70B61E0EF"](f137_arg0) then
+		Engine[@"hash_F26F6999FA03BB9"](f137_arg0)
 	else
-		Engine[0xF26F6999FA03BB9](LuaDefine.INVALID_PLAYLIST_ID)
+		Engine[@"hash_F26F6999FA03BB9"](LuaDefine.INVALID_PLAYLIST_ID)
 	end
 end
 LuaUtils = LuaReadOnlyTables.ReadOnlyTable(f0_local0)

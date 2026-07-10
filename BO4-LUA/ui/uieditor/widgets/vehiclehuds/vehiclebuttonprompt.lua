@@ -10,8 +10,8 @@ CoD.VehicleButtonPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	local label = LUI.UIText.new(0, 0, 53, 200, 0, 0, 16, 30)
 	label:setTTF("ttmussels_regular")
 	label:setLetterSpacing(2)
-	label:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	label:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	label:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	label:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	label:linkToElementModel(self, "text", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -27,8 +27,8 @@ CoD.VehicleButtonPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	self.label = label
 	local BindLabel = LUI.UIText.new(0, 0, 10, 40, 0, 0, 9, 39)
 	BindLabel:setTTF("ttmussels_regular")
-	BindLabel:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
-	BindLabel:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	BindLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	BindLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	BindLabel:linkToElementModel(self, "bind", true, function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
@@ -92,7 +92,7 @@ CoD.VehicleButtonPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	end)
 	local f1_local3 = self
 	local f1_local4 = self.subscribeToModel
-	local f1_local5 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	local f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
 	f1_local4(f1_local3, f1_local5.LastInput, function(f10_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

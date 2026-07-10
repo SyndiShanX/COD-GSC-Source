@@ -13,12 +13,12 @@ CoD.AbilityCallout_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.Background = Background
 	local AbilityName = LUI.UIText.new(0, 0, 50, 296, 0, 0, 4.5, 37.5)
 	AbilityName:setTTF("default")
-	AbilityName:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	AbilityName:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	AbilityName:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	AbilityName:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	AbilityName:linkToElementModel(self, "abilityName", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
-			AbilityName:setText(Engine[0xF9F1239CFD921FE](f2_local0))
+			AbilityName:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
 	self:addElement(AbilityName)
@@ -35,8 +35,8 @@ CoD.AbilityCallout_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	local NameAndTag = LUI.UIText.new(0, 0, 50, 296, 0, 0, 38, 71)
 	NameAndTag:setRGB(0.7, 0.7, 0.7)
 	NameAndTag:setTTF("default")
-	NameAndTag:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
-	NameAndTag:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	NameAndTag:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	NameAndTag:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
 	NameAndTag:linkToElementModel(self, "clientNum", true, function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
