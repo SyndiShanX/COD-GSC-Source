@@ -1,0 +1,191 @@
+CoD.CallingCards_Asset_AstroMonkey = InheritFrom(LUI.UIElement)
+CoD.CallingCards_Asset_AstroMonkey.__defaultWidth = 368
+CoD.CallingCards_Asset_AstroMonkey.__defaultHeight = 393
+CoD.CallingCards_Asset_AstroMonkey.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+	local self = LUI.UIElement.new(f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+	self:setClass(CoD.CallingCards_Asset_AstroMonkey)
+	self.id = "CallingCards_Asset_AstroMonkey"
+	self.soundSet = "default"
+	f1_arg0:addElementToPendingUpdateStateList(self)
+	local monkey = LUI.UIImage.new(0, 0, 0, 368, 0, 0, 0.5, 392.5)
+	monkey:setImage(RegisterImage(0x55643812B6C42DE))
+	self:addElement(monkey)
+	self.monkey = monkey
+	local teethShine = LUI.UIImage.new(0, 0, 168, 216, 0, 0, 97.5, 145.5)
+	teethShine:setImage(RegisterImage(0xEF5336586531263))
+	teethShine:setMaterial(LUI.UIImage.GetCachedMaterial(0xE992BD5A540E2D))
+	teethShine:setShaderVector(0, -0.12, 0.11, 0, 0)
+	teethShine:setShaderVector(1, 0.03, 0.03, 0, 0)
+	teethShine:setShaderVector(2, 0, 1, 0, 0)
+	teethShine:setShaderVector(3, 0, 0, 0, 0)
+	teethShine:setShaderVector(4, 0, 0, 0, 0)
+	self:addElement(teethShine)
+	self.teethShine = teethShine
+	local monkeyShines = LUI.UIImage.new(0, 0, 0, 368, 0, 0, 0, 392)
+	monkeyShines:setAlpha(0.4)
+	monkeyShines:setImage(RegisterImage(0xA5972EDA70D35BE))
+	monkeyShines:setMaterial(LUI.UIImage.GetCachedMaterial(0xE992BD5A540E2D))
+	monkeyShines:setShaderVector(0, 0.2, 0.24, 0, 0)
+	monkeyShines:setShaderVector(1, 0.03, 0.03, 0, 0)
+	monkeyShines:setShaderVector(2, 0, 1, 0, 0)
+	monkeyShines:setShaderVector(3, 0, 0, 0, 0)
+	monkeyShines:setShaderVector(4, 0, 0, 0, 0)
+	self:addElement(monkeyShines)
+	self.monkeyShines = monkeyShines
+	local monkeyShines2 = LUI.UIImage.new(0, 0, 0, 368, 0, 0, 0, 392)
+	monkeyShines2:setAlpha(0.65)
+	monkeyShines2:setImage(RegisterImage(0xA5972EDA70D35BE))
+	monkeyShines2:setMaterial(LUI.UIImage.GetCachedMaterial(0xE992BD5A540E2D))
+	monkeyShines2:setShaderVector(0, 0.83, 0.91, 0, 0)
+	monkeyShines2:setShaderVector(1, 0.03, 0.03, 0, 0)
+	monkeyShines2:setShaderVector(2, 0, 1, 0, 0)
+	monkeyShines2:setShaderVector(3, 0, 0, 0, 0)
+	monkeyShines2:setShaderVector(4, 0, 0, 0, 0)
+	self:addElement(monkeyShines2)
+	self.monkeyShines2 = monkeyShines2
+	if PostLoadFunc then
+		PostLoadFunc(self, f1_arg1, f1_arg0)
+	end
+	return self
+end
+CoD.CallingCards_Asset_AstroMonkey.__resetProperties = function(f2_arg0)
+	f2_arg0.monkeyShines:completeAnimation()
+	f2_arg0.teethShine:completeAnimation()
+	f2_arg0.monkeyShines2:completeAnimation()
+	f2_arg0.monkeyShines:setAlpha(0.4)
+	f2_arg0.monkeyShines:setShaderVector(0, 0.2, 0.24, 0, 0)
+	f2_arg0.monkeyShines:setShaderVector(1, 0.03, 0.03, 0, 0)
+	f2_arg0.monkeyShines:setShaderVector(2, 0, 1, 0, 0)
+	f2_arg0.monkeyShines:setShaderVector(3, 0, 0, 0, 0)
+	f2_arg0.monkeyShines:setShaderVector(4, 0, 0, 0, 0)
+	f2_arg0.teethShine:setAlpha(1)
+	f2_arg0.teethShine:setShaderVector(0, -0.12, 0.11, 0, 0)
+	f2_arg0.teethShine:setShaderVector(1, 0.03, 0.03, 0, 0)
+	f2_arg0.teethShine:setShaderVector(2, 0, 1, 0, 0)
+	f2_arg0.teethShine:setShaderVector(3, 0, 0, 0, 0)
+	f2_arg0.teethShine:setShaderVector(4, 0, 0, 0, 0)
+	f2_arg0.monkeyShines2:setAlpha(0.65)
+	f2_arg0.monkeyShines2:setShaderVector(0, 0.83, 0.91, 0, 0)
+	f2_arg0.monkeyShines2:setShaderVector(1, 0.03, 0.03, 0, 0)
+	f2_arg0.monkeyShines2:setShaderVector(2, 0, 1, 0, 0)
+	f2_arg0.monkeyShines2:setShaderVector(3, 0, 0, 0, 0)
+	f2_arg0.monkeyShines2:setShaderVector(4, 0, 0, 0, 0)
+end
+CoD.CallingCards_Asset_AstroMonkey.__clipsPerState = {
+	DefaultState = {
+		DefaultClip = function(f3_arg0, f3_arg1)
+			f3_arg0:__resetProperties()
+			f3_arg0:setupElementClipCounter(3)
+			local f3_local0 = function(f4_arg0)
+				local f4_local0 = function(f5_arg0)
+					local f5_local0 = function(f6_arg0)
+						local f6_local0 = function(f7_arg0)
+							local f7_local0 = function(f8_arg0)
+								local f8_local0 = function(f9_arg0)
+									local f9_local0 = function(f10_arg0)
+										f10_arg0:beginAnimation(1970)
+										f10_arg0:registerEventHandler("transition_complete_keyframe", f3_arg0.clipFinished)
+									end
+									f9_arg0:beginAnimation(19)
+									f9_arg0:registerEventHandler("transition_complete_keyframe", f9_local0)
+								end
+								f8_arg0:beginAnimation(510)
+								f8_arg0:setShaderVector(0, 0.72, 0.95, 0, 0)
+								f8_arg0:registerEventHandler("transition_complete_keyframe", f8_local0)
+							end
+							f7_arg0:beginAnimation(500)
+							f7_arg0:setShaderVector(0, 0.48, 0.75, 0, 0)
+							f7_arg0:registerEventHandler("transition_complete_keyframe", f7_local0)
+						end
+						f6_arg0:beginAnimation(1000)
+						f6_arg0:setShaderVector(0, 0.23, 0.56, 0, 0)
+						f6_arg0:registerEventHandler("transition_complete_keyframe", f6_local0)
+					end
+					f5_arg0:beginAnimation(19)
+					f5_arg0:registerEventHandler("transition_complete_keyframe", f5_local0)
+				end
+				f3_arg0.teethShine:beginAnimation(990)
+				f3_arg0.teethShine:registerEventHandler("interrupted_keyframe", f3_arg0.clipInterrupted)
+				f3_arg0.teethShine:registerEventHandler("transition_complete_keyframe", f4_local0)
+			end
+			f3_arg0.teethShine:completeAnimation()
+			f3_arg0.teethShine:setAlpha(1)
+			f3_arg0.teethShine:setShaderVector(0, -0.12, 0.11, 0, 0)
+			f3_arg0.teethShine:setShaderVector(1, 0.03, 0.03, 0, 0)
+			f3_arg0.teethShine:setShaderVector(2, 0, 1, 0, 0)
+			f3_arg0.teethShine:setShaderVector(3, 0, 0, 0, 0)
+			f3_arg0.teethShine:setShaderVector(4, 0, 0, 0, 0)
+			f3_local0(f3_arg0.teethShine)
+			local f3_local1 = function(f11_arg0)
+				local f11_local0 = function(f12_arg0)
+					local f12_local0 = function(f13_arg0)
+						local f13_local0 = function(f14_arg0)
+							local f14_local0 = function(f15_arg0)
+								f15_arg0:beginAnimation(980)
+								f15_arg0:registerEventHandler("transition_complete_keyframe", f3_arg0.clipFinished)
+							end
+							f14_arg0:beginAnimation(9)
+							f14_arg0:registerEventHandler("transition_complete_keyframe", f14_local0)
+						end
+						f13_arg0:beginAnimation(1500)
+						f13_arg0:setShaderVector(0, 0.86, 0.98, 0, 0)
+						f13_arg0:registerEventHandler("transition_complete_keyframe", f13_local0)
+					end
+					f12_arg0:beginAnimation(500)
+					f12_arg0:setShaderVector(0, 0.61, 0.73, 0, 0)
+					f12_arg0:registerEventHandler("transition_complete_keyframe", f12_local0)
+				end
+				f3_arg0.monkeyShines:beginAnimation(2010)
+				f3_arg0.monkeyShines:setShaderVector(0, 0.52, 0.64, 0, 0)
+				f3_arg0.monkeyShines:registerEventHandler("interrupted_keyframe", f3_arg0.clipInterrupted)
+				f3_arg0.monkeyShines:registerEventHandler("transition_complete_keyframe", f11_local0)
+			end
+			f3_arg0.monkeyShines:completeAnimation()
+			f3_arg0.monkeyShines:setAlpha(0.4)
+			f3_arg0.monkeyShines:setShaderVector(0, 0.2, 0.24, 0, 0)
+			f3_arg0.monkeyShines:setShaderVector(1, 0.03, 0.03, 0, 0)
+			f3_arg0.monkeyShines:setShaderVector(2, 0, 1, 0, 0)
+			f3_arg0.monkeyShines:setShaderVector(3, 0, 0, 0, 0)
+			f3_arg0.monkeyShines:setShaderVector(4, 0, 0, 0, 0)
+			f3_local1(f3_arg0.monkeyShines)
+			local f3_local2 = function(f16_arg0)
+				local f16_local0 = function(f17_arg0)
+					local f17_local0 = function(f18_arg0)
+						local f18_local0 = function(f19_arg0)
+							local f19_local0 = function(f20_arg0)
+								local f20_local0 = function(f21_arg0)
+									f21_arg0:beginAnimation(2490)
+									f21_arg0:registerEventHandler("transition_complete_keyframe", f3_arg0.clipFinished)
+								end
+								f20_arg0:beginAnimation(19)
+								f20_arg0:setAlpha(0)
+								f20_arg0:registerEventHandler("transition_complete_keyframe", f20_local0)
+							end
+							f19_arg0:beginAnimation(1000)
+							f19_arg0:setAlpha(0.01)
+							f19_arg0:setShaderVector(0, 0.83, 0.91, 0, 0)
+							f19_arg0:registerEventHandler("transition_complete_keyframe", f19_local0)
+						end
+						f18_arg0:beginAnimation(1010)
+						f18_arg0:setShaderVector(0, 0.51, 0.58, 0, 0)
+						f18_arg0:registerEventHandler("transition_complete_keyframe", f18_local0)
+					end
+					f17_arg0:beginAnimation(9)
+					f17_arg0:registerEventHandler("transition_complete_keyframe", f17_local0)
+				end
+				f3_arg0.monkeyShines2:beginAnimation(470)
+				f3_arg0.monkeyShines2:registerEventHandler("interrupted_keyframe", f3_arg0.clipInterrupted)
+				f3_arg0.monkeyShines2:registerEventHandler("transition_complete_keyframe", f16_local0)
+			end
+			f3_arg0.monkeyShines2:completeAnimation()
+			f3_arg0.monkeyShines2:setAlpha(0.5)
+			f3_arg0.monkeyShines2:setShaderVector(0, 0.08, 0.19, 0, 0)
+			f3_arg0.monkeyShines2:setShaderVector(1, 0.03, 0.03, 0, 0)
+			f3_arg0.monkeyShines2:setShaderVector(2, 0, 1, 0, 0)
+			f3_arg0.monkeyShines2:setShaderVector(3, 0, 0, 0, 0)
+			f3_arg0.monkeyShines2:setShaderVector(4, 0, 0, 0, 0)
+			f3_local2(f3_arg0.monkeyShines2)
+			f3_arg0.nextClip = "DefaultClip"
+		end,
+	},
+}

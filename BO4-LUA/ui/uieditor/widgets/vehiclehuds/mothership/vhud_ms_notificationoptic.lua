@@ -1,0 +1,91 @@
+CoD.vhud_ms_NotificationOptic = InheritFrom(LUI.UIElement)
+CoD.vhud_ms_NotificationOptic.__defaultWidth = 121
+CoD.vhud_ms_NotificationOptic.__defaultHeight = 45
+CoD.vhud_ms_NotificationOptic.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+	local self = LUI.UIElement.new(f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+	self:setClass(CoD.vhud_ms_NotificationOptic)
+	self.id = "vhud_ms_NotificationOptic"
+	self.soundSet = "default"
+	f1_arg0:addElementToPendingUpdateStateList(self)
+	local GlowOrangeOver = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
+	GlowOrangeOver:setRGB(0, 0.87, 1)
+	GlowOrangeOver:setAlpha(0.4)
+	GlowOrangeOver:setImage(RegisterImage(0x5BE416E17DAB33B))
+	GlowOrangeOver:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	self:addElement(GlowOrangeOver)
+	self.GlowOrangeOver = GlowOrangeOver
+	local NotificationAltBox0 = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
+	NotificationAltBox0:setRGB(0.74, 0.94, 0.99)
+	NotificationAltBox0:setAlpha(0.08)
+	NotificationAltBox0:setYRot(-20)
+	NotificationAltBox0:setImage(RegisterImage(0x9F6EF5CEE521AB6))
+	self:addElement(NotificationAltBox0)
+	self.NotificationAltBox0 = NotificationAltBox0
+	local NotificationAltBox00 = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
+	NotificationAltBox00:setRGB(0.74, 0.94, 0.99)
+	NotificationAltBox00:setImage(RegisterImage(0x9F6EF5CEE521AB6))
+	self:addElement(NotificationAltBox00)
+	self.NotificationAltBox00 = NotificationAltBox00
+	local OPTIC = LUI.UIText.new(0, 1, 0, 0, 0.5, 0.5, -12, 12)
+	OPTIC:setText(Engine[0xF9F1239CFD921FE](0x1A822F92C3A86BD))
+	OPTIC:setTTF("default")
+	OPTIC:setRFTMaterial(LUI.UIImage.GetCachedMaterial(0xD756CD9A5F1F1B4))
+	OPTIC:setShaderVector(0, 0, 1, 0, 0)
+	OPTIC:setShaderVector(1, 0, 0, 0, 0)
+	OPTIC:setShaderVector(2, 0, 0, 0, 0)
+	OPTIC:setShaderVector(3, 0, 0, 0, 0)
+	OPTIC:setShaderVector(4, 0, 0, 0, 0)
+	OPTIC:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	OPTIC:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	LUI.OverrideFunction_CallOriginalFirst(OPTIC, "setText", function(element, controller)
+		ScaleWidgetToLabelCenteredWithMinimum(self, element, 25, 81)
+	end)
+	self:addElement(OPTIC)
+	self.OPTIC = OPTIC
+	local arrowUp = LUI.UIImage.new(0.5, 0.5, -5, 6, 0.5, 0.5, -21, -14)
+	arrowUp:setAlpha(0)
+	arrowUp:setImage(RegisterImage(0x53866FDE741ED56))
+	arrowUp:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	self:addElement(arrowUp)
+	self.arrowUp = arrowUp
+	if PostLoadFunc then
+		PostLoadFunc(self, f1_arg1, f1_arg0)
+	end
+	return self
+end
+CoD.vhud_ms_NotificationOptic.__resetProperties = function(f3_arg0)
+	f3_arg0.GlowOrangeOver:completeAnimation()
+	f3_arg0.arrowUp:completeAnimation()
+	f3_arg0.GlowOrangeOver:setRGB(0, 0.87, 1)
+	f3_arg0.GlowOrangeOver:setAlpha(0.4)
+	f3_arg0.GlowOrangeOver:setScale(1, 1)
+	f3_arg0.arrowUp:setAlpha(0)
+end
+CoD.vhud_ms_NotificationOptic.__clipsPerState = {
+	DefaultState = {
+		DefaultClip = function(f4_arg0, f4_arg1)
+			f4_arg0:__resetProperties()
+			f4_arg0:setupElementClipCounter(1)
+			f4_arg0.GlowOrangeOver:completeAnimation()
+			f4_arg0.GlowOrangeOver:setAlpha(0)
+			f4_arg0.clipFinished(f4_arg0.GlowOrangeOver)
+		end,
+		StartUp = function(f5_arg0, f5_arg1)
+			f5_arg0:__resetProperties()
+			f5_arg0:setupElementClipCounter(0)
+		end,
+	},
+	Active = {
+		DefaultClip = function(f6_arg0, f6_arg1)
+			f6_arg0:__resetProperties()
+			f6_arg0:setupElementClipCounter(2)
+			f6_arg0.GlowOrangeOver:completeAnimation()
+			f6_arg0.GlowOrangeOver:setRGB(0.42, 0.93, 1)
+			f6_arg0.GlowOrangeOver:setScale(1.2, 1.2)
+			f6_arg0.clipFinished(f6_arg0.GlowOrangeOver)
+			f6_arg0.arrowUp:completeAnimation()
+			f6_arg0.arrowUp:setAlpha(0.6)
+			f6_arg0.clipFinished(f6_arg0.arrowUp)
+		end,
+	},
+}

@@ -1,0 +1,580 @@
+require("x64:93a575a7ca17e04")
+CoD.SwipeTak5_CharacterPortrait = InheritFrom(LUI.UIElement)
+CoD.SwipeTak5_CharacterPortrait.__defaultWidth = 102
+CoD.SwipeTak5_CharacterPortrait.__defaultHeight = 147
+CoD.SwipeTak5_CharacterPortrait.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+	local self = LUI.UIElement.new(f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+	self:setClass(CoD.SwipeTak5_CharacterPortrait)
+	self.id = "SwipeTak5_CharacterPortrait"
+	self.soundSet = "none"
+	self.anyChildUsesUpdateState = true
+	f1_arg0:addElementToPendingUpdateStateList(self)
+	local bg = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
+	bg:setRGB(0.16, 0.16, 0.16)
+	bg:setAlpha(0.8)
+	self:addElement(bg)
+	self.bg = bg
+	local TiledBacking = LUI.UIImage.new(0, 0, 0, 102, 0, 0, 0, 147)
+	TiledBacking:setAlpha(0.4)
+	TiledBacking:setImage(RegisterImage(0x5CAABAA447A4FA5))
+	TiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	TiledBacking:setShaderVector(0, 0, 0, 0, 0)
+	TiledBacking:setupNineSliceShader(100, 72)
+	self:addElement(TiledBacking)
+	self.TiledBacking = TiledBacking
+	local TiledBackingAdd = LUI.UIImage.new(0, 0, 0, 102, 0, 0, 0, 147)
+	TiledBackingAdd:setAlpha(0.2)
+	TiledBackingAdd:setImage(RegisterImage(0x5CAABAA447A4FA5))
+	TiledBackingAdd:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	TiledBackingAdd:setShaderVector(0, 0, 0, 0, 0)
+	TiledBackingAdd:setupNineSliceShader(100, 72)
+	self:addElement(TiledBackingAdd)
+	self.TiledBackingAdd = TiledBackingAdd
+	local HealthBg = LUI.UIImage.new(0, 0, 0, 102, 0, 0, 105, 147)
+	HealthBg:setRGB(0.13, 0.13, 0.13)
+	HealthBg:setAlpha(0.8)
+	self:addElement(HealthBg)
+	self.HealthBg = HealthBg
+	local PlayerBgGrid = LUI.UIImage.new(0, 0, -3, 105, 0, 0, -2.5, 129.5)
+	PlayerBgGrid:setImage(RegisterImage(0x9DC7A683B054FFE))
+	PlayerBgGrid:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	PlayerBgGrid:setShaderVector(0, 1, 0, 0, 0)
+	self:addElement(PlayerBgGrid)
+	self.PlayerBgGrid = PlayerBgGrid
+	local HealthBar = CoD.HealthBar.new(f1_arg0, f1_arg1, 0, 0, -10, 118, 0, 0, 103, 120)
+	HealthBar:setRGB(0.92, 0.92, 0.92)
+	HealthBar:setScale(0.7, 0.7)
+	HealthBar:linkToElementModel(self, "health", false, function(model)
+		HealthBar:setModel(model, f1_arg1)
+	end)
+	HealthBar.HealthFill.__Health_Bar_Color = function(f3_arg0)
+		local f3_local0 = f3_arg0:get()
+		if f3_local0 ~= nil then
+			HealthBar.HealthFill:setRGB(CoD.HUDUtility.GetFriendlyOrEnemyHealthBarColorByTeamId(f1_arg1, f3_local0))
+		end
+	end
+	HealthBar:linkToElementModel(self, "team", true, HealthBar.HealthFill.__Health_Bar_Color)
+	HealthBar.HealthFill.__Health_Bar_Color_FullPath = function()
+		local f4_local0 = self:getModel()
+		if f4_local0 then
+			f4_local0 = self:getModel()
+			f4_local0 = f4_local0.team
+		end
+		if f4_local0 then
+			HealthBar.HealthFill.__Health_Bar_Color(f4_local0)
+		end
+	end
+	self:addElement(HealthBar)
+	self.HealthBar = HealthBar
+	local HealthValue = LUI.UIText.new(0, 0, 21.5, 81.5, 0, 0, 117.5, 132.5)
+	HealthValue:setScale(0.7, 0.7)
+	HealthValue:setTTF("0arame_mono_stencil")
+	HealthValue:setLetterSpacing(2)
+	HealthValue:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	HealthValue:setAlignment(Enum[0x7A5123B654282D2][0x70510683C22104B])
+	HealthValue:linkToElementModel(self, "health.healthValue", true, function(model)
+		local f5_local0 = model:get()
+		if f5_local0 ~= nil then
+			HealthValue:setText(CoD.BaseUtility.AlreadyLocalized(f5_local0))
+		end
+	end)
+	self:addElement(HealthValue)
+	self.HealthValue = HealthValue
+	local ClanAndGamerName = LUI.UIText.new(0, 0, 1, 101, 0, 0, 132, 150)
+	ClanAndGamerName:setScale(0.45, 0.45)
+	ClanAndGamerName:setTTF("notosans_regular")
+	ClanAndGamerName:setMaterial(LUI.UIImage.GetCachedMaterial(0xAE166D9BA8C6907))
+	ClanAndGamerName:setShaderVector(0, 0.15, 0, 0, 0)
+	ClanAndGamerName:setShaderVector(1, 0.05, 0, 0, 0)
+	ClanAndGamerName:setShaderVector(2, 1, 0, 0, 0)
+	ClanAndGamerName:setAlignment(Engine[0x7F8853DC3581AA4](Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041]))
+	ClanAndGamerName:linkToElementModel(self, "clientNum", true, function(model)
+		local f6_local0 = model:get()
+		if f6_local0 ~= nil then
+			ClanAndGamerName:setText(CoD.BaseUtility.AlreadyLocalized(GetClientNameAndClanTag(f1_arg1, f6_local0)))
+		end
+	end)
+	self:addElement(ClanAndGamerName)
+	self.ClanAndGamerName = ClanAndGamerName
+	local PlayerImage = LUI.UIImage.new(0, 0, 0, 102, 0, 0, -2, 107)
+	PlayerImage:setAlpha(0.9)
+	PlayerImage:setMaterial(LUI.UIImage.GetCachedMaterial(0xA02C44161370F6D))
+	PlayerImage:setShaderVector(0, 0.5, 0.5, 0, 0)
+	PlayerImage:setShaderVector(1, 1, 1, 0, 0)
+	PlayerImage:setShaderVector(2, 0, 0, 0, 0)
+	PlayerImage:linkToElementModel(self, "characterIndex", true, function(model)
+		local f7_local0 = model:get()
+		if f7_local0 ~= nil then
+			PlayerImage:setImage(RegisterImage(GetPositionDraftIconByIndex(f7_local0)))
+		end
+	end)
+	self:addElement(PlayerImage)
+	self.PlayerImage = PlayerImage
+	local DeadStipe = LUI.UIImage.new(0, 0, -1, 103, 0, 0, -1, 131)
+	DeadStipe:setRGB(0.79, 0, 0)
+	DeadStipe:setImage(RegisterImage(0x35F2A87257C4668))
+	DeadStipe:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	DeadStipe:setShaderVector(0, 1, 0, 0, 0)
+	self:addElement(DeadStipe)
+	self.DeadStipe = DeadStipe
+	local DeadStipeAdd = LUI.UIImage.new(0, 0, -1, 103, 0, 0, -1, 131)
+	DeadStipeAdd:setRGB(0.79, 0, 0)
+	DeadStipeAdd:setAlpha(0)
+	DeadStipeAdd:setImage(RegisterImage(0x35F2A87257C4668))
+	DeadStipeAdd:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	DeadStipeAdd:setShaderVector(0, 1, 0, 0, 0)
+	self:addElement(DeadStipeAdd)
+	self.DeadStipeAdd = DeadStipeAdd
+	local FrameTop = LUI.UIImage.new(0, 0, -2.5, 105.5, 0, 0, -2, 14)
+	FrameTop:setImage(RegisterImage(0x7722C79022535EA))
+	FrameTop:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	FrameTop:setShaderVector(0, 0, 0, 0, 0)
+	FrameTop:setupNineSliceShader(6, 8)
+	self:addElement(FrameTop)
+	self.FrameTop = FrameTop
+	local FrameBot = LUI.UIImage.new(0, 0, -2.5, 105.5, 0, 0, 20.5, 148.5)
+	FrameBot:setImage(RegisterImage(0x31697F38A66BF80))
+	FrameBot:setMaterial(LUI.UIImage.GetCachedMaterial(0x44484DDFAF5C093))
+	FrameBot:setShaderVector(0, 0, 0, 0, 0)
+	FrameBot:setupNineSliceShader(6, 64)
+	self:addElement(FrameBot)
+	self.FrameBot = FrameBot
+	local FrameEmpty = LUI.UIImage.new(0, 0, -3, 105, 0, 0, -2, 150)
+	FrameEmpty:setImage(RegisterImage(0xEDBCC4C2BFA3899))
+	FrameEmpty:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	self:addElement(FrameEmpty)
+	self.FrameEmpty = FrameEmpty
+	local FrameEmptyX = LUI.UIImage.new(0, 0, -2.5, 105.5, 0, 0, -2, 130)
+	FrameEmptyX:setImage(RegisterImage(0xE2EEDF188DF80EB))
+	FrameEmptyX:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	self:addElement(FrameEmptyX)
+	self.FrameEmptyX = FrameEmptyX
+	local ScorePip = LUI.UIImage.new(0, 0, 3, 13, 0, 0, 3, 13)
+	ScorePip:setImage(RegisterImage(0x4FCFCDE5B5BEF0))
+	ScorePip:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	ScorePip:setShaderVector(0, 2, 0, 0, 0)
+	self:addElement(ScorePip)
+	self.ScorePip = ScorePip
+	local OperatorIndicator = LUI.UIImage.new(0, 0, -17, 31, 0, 0, -15, 29)
+	OperatorIndicator:setAlpha(0)
+	OperatorIndicator:setImage(RegisterImage(0xF9A0F7935A578B0))
+	OperatorIndicator:setMaterial(LUI.UIImage.GetCachedMaterial(0xF755127C95CF5B6))
+	OperatorIndicator:setShaderVector(0, 1, 0, 0, 0)
+	self:addElement(OperatorIndicator)
+	self.OperatorIndicator = OperatorIndicator
+	local RepeatLine = LUI.UIImage.new(0, 0, 0, 102, 0, 0, 127, 131)
+	RepeatLine:setImage(RegisterImage(0x84B43D5B04D263A))
+	RepeatLine:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	RepeatLine:setShaderVector(0, 0, 0, 0, 0)
+	RepeatLine:setupNineSliceShader(8, 4)
+	self:addElement(RepeatLine)
+	self.RepeatLine = RepeatLine
+	local RepeatDotline = LUI.UIImage.new(0, 0, 0, 102, 0, 0, 127, 131)
+	RepeatDotline:setAlpha(0)
+	RepeatDotline:setImage(RegisterImage(0xF5E8F1B8586D9C5))
+	RepeatDotline:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	RepeatDotline:setShaderVector(0, 0, 0, 0, 0)
+	RepeatDotline:setupNineSliceShader(8, 4)
+	self:addElement(RepeatDotline)
+	self.RepeatDotline = RepeatDotline
+	local CornerPips = LUI.UIImage.new(0, 0, 75, 97, 0, 0, 3, 9)
+	CornerPips:setAlpha(0.5)
+	CornerPips:setImage(RegisterImage(0xC634D26DA220F63))
+	CornerPips:setMaterial(LUI.UIImage.GetCachedMaterial(0x1CC85D0A86303B0))
+	CornerPips:setShaderVector(0, 2, 0, 0, 0)
+	self:addElement(CornerPips)
+	self.CornerPips = CornerPips
+	local skull = LUI.UIImage.new(0, 0, 1, 101, 0, 0, 1, 129)
+	skull:setAlpha(0)
+	skull:setImage(RegisterImage(0xDC97E3627F1ACB1))
+	self:addElement(skull)
+	self.skull = skull
+	local f1_local22 = HealthBar
+	local f1_local23 = HealthBar.subscribeToModel
+	local f1_local24 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local23(f1_local22, f1_local24["factions.playerFactionTeamEnum"], HealthBar.HealthFill.__Health_Bar_Color_FullPath)
+	f1_local22 = HealthBar
+	f1_local23 = HealthBar.subscribeToModel
+	f1_local24 = Engine[0x4DF5CFBC1771947](f1_arg1)
+	f1_local23(f1_local22, f1_local24["profile.colorblindMode"], HealthBar.HealthFill.__Health_Bar_Color_FullPath)
+	self:mergeStateConditions({
+		{
+			stateName = "InvalidClient",
+			condition = function(menu, element, event)
+				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "clientNum", -1)
+			end,
+		},
+		{
+			stateName = "Dead",
+			condition = function(menu, element, event)
+				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "health.healthValue", 0)
+			end,
+		},
+		{
+			stateName = "Self",
+			condition = function(menu, element, event)
+				return true
+			end,
+		},
+	})
+	self:linkToElementModel(self, "clientNum", true, function(model)
+		f1_arg0:updateElementState(self, {
+			name = "model_validation",
+			menu = f1_arg0,
+			controller = f1_arg1,
+			modelValue = model:get(),
+			modelName = "clientNum",
+		})
+	end)
+	self:linkToElementModel(self, "health.healthValue", true, function(model)
+		f1_arg0:updateElementState(self, {
+			name = "model_validation",
+			menu = f1_arg0,
+			controller = f1_arg1,
+			modelValue = model:get(),
+			modelName = "health.healthValue",
+		})
+	end)
+	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)
+	if PostLoadFunc then
+		PostLoadFunc(self, f1_arg1, f1_arg0)
+	end
+	f1_local23 = self
+	CoD.HUDUtility.UpdateClientHealth(self, f1_arg1)
+	return self
+end
+CoD.SwipeTak5_CharacterPortrait.__resetProperties = function(f13_arg0)
+	f13_arg0.OperatorIndicator:completeAnimation()
+	f13_arg0.FrameEmptyX:completeAnimation()
+	f13_arg0.FrameEmpty:completeAnimation()
+	f13_arg0.ScorePip:completeAnimation()
+	f13_arg0.DeadStipe:completeAnimation()
+	f13_arg0.PlayerBgGrid:completeAnimation()
+	f13_arg0.CornerPips:completeAnimation()
+	f13_arg0.bg:completeAnimation()
+	f13_arg0.HealthBar:completeAnimation()
+	f13_arg0.HealthValue:completeAnimation()
+	f13_arg0.ClanAndGamerName:completeAnimation()
+	f13_arg0.RepeatLine:completeAnimation()
+	f13_arg0.FrameBot:completeAnimation()
+	f13_arg0.FrameTop:completeAnimation()
+	f13_arg0.HealthBg:completeAnimation()
+	f13_arg0.RepeatDotline:completeAnimation()
+	f13_arg0.TiledBackingAdd:completeAnimation()
+	f13_arg0.PlayerImage:completeAnimation()
+	f13_arg0.DeadStipeAdd:completeAnimation()
+	f13_arg0.skull:completeAnimation()
+	f13_arg0.OperatorIndicator:setAlpha(0)
+	f13_arg0.OperatorIndicator:setShaderVector(0, 1, 0, 0, 0)
+	f13_arg0.FrameEmptyX:setAlpha(1)
+	f13_arg0.FrameEmpty:setAlpha(1)
+	f13_arg0.ScorePip:setAlpha(1)
+	f13_arg0.DeadStipe:setRGB(0.79, 0, 0)
+	f13_arg0.DeadStipe:setAlpha(1)
+	f13_arg0.DeadStipe:setShaderVector(0, 1, 0, 0, 0)
+	f13_arg0.PlayerBgGrid:setAlpha(1)
+	f13_arg0.PlayerBgGrid:setShaderVector(0, 1, 0, 0, 0)
+	f13_arg0.CornerPips:setAlpha(0.5)
+	f13_arg0.bg:setAlpha(0.8)
+	f13_arg0.HealthBar:setAlpha(1)
+	f13_arg0.HealthValue:setAlpha(1)
+	f13_arg0.ClanAndGamerName:setAlpha(1)
+	f13_arg0.RepeatLine:setAlpha(1)
+	f13_arg0.FrameBot:setAlpha(1)
+	f13_arg0.FrameTop:setAlpha(1)
+	f13_arg0.HealthBg:setAlpha(0.8)
+	f13_arg0.RepeatDotline:setAlpha(0)
+	f13_arg0.TiledBackingAdd:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+	f13_arg0.PlayerImage:setAlpha(0.9)
+	f13_arg0.DeadStipeAdd:setAlpha(0)
+	f13_arg0.DeadStipeAdd:setShaderVector(0, 1, 0, 0, 0)
+	f13_arg0.skull:setAlpha(0)
+end
+CoD.SwipeTak5_CharacterPortrait.__clipsPerState = {
+	DefaultState = {
+		DefaultClip = function(f14_arg0, f14_arg1)
+			f14_arg0:__resetProperties()
+			f14_arg0:setupElementClipCounter(8)
+			f14_arg0.bg:completeAnimation()
+			f14_arg0.bg:setAlpha(0.5)
+			f14_arg0.clipFinished(f14_arg0.bg)
+			f14_arg0.PlayerBgGrid:completeAnimation()
+			f14_arg0.PlayerBgGrid:setShaderVector(0, 1, 0, 0, 0)
+			f14_arg0.clipFinished(f14_arg0.PlayerBgGrid)
+			f14_arg0.DeadStipe:completeAnimation()
+			f14_arg0.DeadStipe:setAlpha(0)
+			f14_arg0.clipFinished(f14_arg0.DeadStipe)
+			f14_arg0.FrameEmpty:completeAnimation()
+			f14_arg0.FrameEmpty:setAlpha(0)
+			f14_arg0.clipFinished(f14_arg0.FrameEmpty)
+			f14_arg0.FrameEmptyX:completeAnimation()
+			f14_arg0.FrameEmptyX:setAlpha(0)
+			f14_arg0.clipFinished(f14_arg0.FrameEmptyX)
+			local f14_local0 = function(f15_arg0)
+				local f15_local0 = function(f16_arg0)
+					local f16_local0 = function(f17_arg0)
+						f17_arg0:beginAnimation(600)
+						f17_arg0:registerEventHandler("transition_complete_keyframe", f14_arg0.clipFinished)
+					end
+					f16_arg0:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f16_arg0:setAlpha(0.2)
+					f16_arg0:registerEventHandler("transition_complete_keyframe", f16_local0)
+				end
+				f14_arg0.ScorePip:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f14_arg0.ScorePip:setAlpha(0.4)
+				f14_arg0.ScorePip:registerEventHandler("interrupted_keyframe", f14_arg0.clipInterrupted)
+				f14_arg0.ScorePip:registerEventHandler("transition_complete_keyframe", f15_local0)
+			end
+			f14_arg0.ScorePip:completeAnimation()
+			f14_arg0.ScorePip:setAlpha(0.2)
+			f14_local0(f14_arg0.ScorePip)
+			f14_arg0.OperatorIndicator:completeAnimation()
+			f14_arg0.OperatorIndicator:setAlpha(0)
+			f14_arg0.clipFinished(f14_arg0.OperatorIndicator)
+			local f14_local1 = function(f18_arg0)
+				local f18_local0 = function(f19_arg0)
+					local f19_local0 = function(f20_arg0)
+						f20_arg0:beginAnimation(600)
+						f20_arg0:registerEventHandler("transition_complete_keyframe", f14_arg0.clipFinished)
+					end
+					f19_arg0:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f19_arg0:setAlpha(0.5)
+					f19_arg0:registerEventHandler("transition_complete_keyframe", f19_local0)
+				end
+				f14_arg0.CornerPips:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f14_arg0.CornerPips:setAlpha(1)
+				f14_arg0.CornerPips:registerEventHandler("interrupted_keyframe", f14_arg0.clipInterrupted)
+				f14_arg0.CornerPips:registerEventHandler("transition_complete_keyframe", f18_local0)
+			end
+			f14_arg0.CornerPips:completeAnimation()
+			f14_arg0.CornerPips:setAlpha(0.5)
+			f14_local1(f14_arg0.CornerPips)
+			f14_arg0.nextClip = "DefaultClip"
+		end,
+	},
+	InvalidClient = {
+		DefaultClip = function(f21_arg0, f21_arg1)
+			f21_arg0:__resetProperties()
+			f21_arg0:setupElementClipCounter(18)
+			f21_arg0.bg:completeAnimation()
+			f21_arg0.bg:setAlpha(0.5)
+			f21_arg0.clipFinished(f21_arg0.bg)
+			f21_arg0.TiledBackingAdd:completeAnimation()
+			f21_arg0.TiledBackingAdd:setMaterial(LUI.UIImage.GetCachedMaterial(0x7C9C02F608D0A75))
+			f21_arg0.clipFinished(f21_arg0.TiledBackingAdd)
+			f21_arg0.HealthBg:completeAnimation()
+			f21_arg0.HealthBg:setAlpha(0)
+			f21_arg0.clipFinished(f21_arg0.HealthBg)
+			f21_arg0.PlayerBgGrid:completeAnimation()
+			f21_arg0.PlayerBgGrid:setAlpha(0.5)
+			f21_arg0.clipFinished(f21_arg0.PlayerBgGrid)
+			f21_arg0.HealthBar:completeAnimation()
+			f21_arg0.HealthBar:setAlpha(0)
+			f21_arg0.clipFinished(f21_arg0.HealthBar)
+			f21_arg0.HealthValue:completeAnimation()
+			f21_arg0.HealthValue:setAlpha(0)
+			f21_arg0.clipFinished(f21_arg0.HealthValue)
+			f21_arg0.ClanAndGamerName:completeAnimation()
+			f21_arg0.ClanAndGamerName:setAlpha(0)
+			f21_arg0.clipFinished(f21_arg0.ClanAndGamerName)
+			f21_arg0.PlayerImage:completeAnimation()
+			f21_arg0.PlayerImage:setAlpha(0)
+			f21_arg0.clipFinished(f21_arg0.PlayerImage)
+			f21_arg0.DeadStipe:completeAnimation()
+			f21_arg0.DeadStipe:setAlpha(0)
+			f21_arg0.clipFinished(f21_arg0.DeadStipe)
+			f21_arg0.FrameTop:completeAnimation()
+			f21_arg0.FrameTop:setAlpha(0)
+			f21_arg0.clipFinished(f21_arg0.FrameTop)
+			f21_arg0.FrameBot:completeAnimation()
+			f21_arg0.FrameBot:setAlpha(0)
+			f21_arg0.clipFinished(f21_arg0.FrameBot)
+			f21_arg0.FrameEmpty:completeAnimation()
+			f21_arg0.FrameEmpty:setAlpha(0.4)
+			f21_arg0.clipFinished(f21_arg0.FrameEmpty)
+			f21_arg0.FrameEmptyX:completeAnimation()
+			f21_arg0.FrameEmptyX:setAlpha(0.1)
+			f21_arg0.clipFinished(f21_arg0.FrameEmptyX)
+			f21_arg0.ScorePip:completeAnimation()
+			f21_arg0.ScorePip:setAlpha(0)
+			f21_arg0.clipFinished(f21_arg0.ScorePip)
+			f21_arg0.OperatorIndicator:completeAnimation()
+			f21_arg0.OperatorIndicator:setAlpha(0)
+			f21_arg0.clipFinished(f21_arg0.OperatorIndicator)
+			f21_arg0.RepeatLine:completeAnimation()
+			f21_arg0.RepeatLine:setAlpha(0)
+			f21_arg0.clipFinished(f21_arg0.RepeatLine)
+			f21_arg0.RepeatDotline:completeAnimation()
+			f21_arg0.RepeatDotline:setAlpha(0.5)
+			f21_arg0.clipFinished(f21_arg0.RepeatDotline)
+			f21_arg0.CornerPips:completeAnimation()
+			f21_arg0.CornerPips:setAlpha(0.2)
+			f21_arg0.clipFinished(f21_arg0.CornerPips)
+		end,
+	},
+	Dead = {
+		DefaultClip = function(f22_arg0, f22_arg1)
+			f22_arg0:__resetProperties()
+			f22_arg0:setupElementClipCounter(14)
+			f22_arg0.bg:completeAnimation()
+			f22_arg0.bg:setAlpha(0.5)
+			f22_arg0.clipFinished(f22_arg0.bg)
+			f22_arg0.HealthBg:completeAnimation()
+			f22_arg0.HealthBg:setAlpha(0)
+			f22_arg0.clipFinished(f22_arg0.HealthBg)
+			f22_arg0.PlayerBgGrid:completeAnimation()
+			f22_arg0.PlayerBgGrid:setAlpha(0.5)
+			f22_arg0.clipFinished(f22_arg0.PlayerBgGrid)
+			f22_arg0.HealthBar:completeAnimation()
+			f22_arg0.HealthBar:setAlpha(0)
+			f22_arg0.clipFinished(f22_arg0.HealthBar)
+			f22_arg0.HealthValue:completeAnimation()
+			f22_arg0.HealthValue:setAlpha(0)
+			f22_arg0.clipFinished(f22_arg0.HealthValue)
+			f22_arg0.ClanAndGamerName:completeAnimation()
+			f22_arg0.ClanAndGamerName:setAlpha(0.2)
+			f22_arg0.clipFinished(f22_arg0.ClanAndGamerName)
+			f22_arg0.PlayerImage:completeAnimation()
+			f22_arg0.PlayerImage:setAlpha(0)
+			f22_arg0.clipFinished(f22_arg0.PlayerImage)
+			f22_arg0.DeadStipe:completeAnimation()
+			f22_arg0.DeadStipe:setRGB(0.79, 0, 0)
+			f22_arg0.DeadStipe:setAlpha(1)
+			f22_arg0.DeadStipe:setShaderVector(0, 1.5, 0, 0, 0)
+			f22_arg0.clipFinished(f22_arg0.DeadStipe)
+			local f22_local0 = function(f23_arg0)
+				local f23_local0 = function(f24_arg0)
+					local f24_local0 = function(f25_arg0)
+						f25_arg0:beginAnimation(750, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+						f25_arg0:setAlpha(0.6)
+						f25_arg0:setShaderVector(0, 1, 0, 0, 0)
+						f25_arg0:registerEventHandler("transition_complete_keyframe", f22_arg0.clipFinished)
+					end
+					f24_arg0:beginAnimation(250)
+					f24_arg0:registerEventHandler("transition_complete_keyframe", f24_local0)
+				end
+				f22_arg0.DeadStipeAdd:beginAnimation(750, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f22_arg0.DeadStipeAdd:setAlpha(1)
+				f22_arg0.DeadStipeAdd:setShaderVector(0, 2, 0, 0, 0)
+				f22_arg0.DeadStipeAdd:registerEventHandler("interrupted_keyframe", f22_arg0.clipInterrupted)
+				f22_arg0.DeadStipeAdd:registerEventHandler("transition_complete_keyframe", f23_local0)
+			end
+			f22_arg0.DeadStipeAdd:completeAnimation()
+			f22_arg0.DeadStipeAdd:setAlpha(0.6)
+			f22_arg0.DeadStipeAdd:setShaderVector(0, 1, 0, 0, 0)
+			f22_local0(f22_arg0.DeadStipeAdd)
+			f22_arg0.FrameEmpty:completeAnimation()
+			f22_arg0.FrameEmpty:setAlpha(0)
+			f22_arg0.clipFinished(f22_arg0.FrameEmpty)
+			f22_arg0.FrameEmptyX:completeAnimation()
+			f22_arg0.FrameEmptyX:setAlpha(0)
+			f22_arg0.clipFinished(f22_arg0.FrameEmptyX)
+			f22_arg0.ScorePip:completeAnimation()
+			f22_arg0.ScorePip:setAlpha(0)
+			f22_arg0.clipFinished(f22_arg0.ScorePip)
+			f22_arg0.OperatorIndicator:completeAnimation()
+			f22_arg0.OperatorIndicator:setAlpha(0)
+			f22_arg0.clipFinished(f22_arg0.OperatorIndicator)
+			local f22_local1 = function(f26_arg0)
+				local f26_local0 = function(f27_arg0)
+					local f27_local0 = function(f28_arg0)
+						f28_arg0:beginAnimation(750)
+						f28_arg0:setAlpha(0)
+						f28_arg0:registerEventHandler("transition_complete_keyframe", f22_arg0.clipFinished)
+					end
+					f27_arg0:beginAnimation(250)
+					f27_arg0:registerEventHandler("transition_complete_keyframe", f27_local0)
+				end
+				f22_arg0.skull:beginAnimation(750, Enum[0xF50FFF429AB1890][0x5D2D9CF90AB1735] | Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f22_arg0.skull:setAlpha(0.9)
+				f22_arg0.skull:registerEventHandler("interrupted_keyframe", f22_arg0.clipInterrupted)
+				f22_arg0.skull:registerEventHandler("transition_complete_keyframe", f26_local0)
+			end
+			f22_arg0.skull:completeAnimation()
+			f22_arg0.skull:setAlpha(0)
+			f22_local1(f22_arg0.skull)
+			f22_arg0.nextClip = "DefaultClip"
+		end,
+	},
+	Self = {
+		DefaultClip = function(f29_arg0, f29_arg1)
+			f29_arg0:__resetProperties()
+			f29_arg0:setupElementClipCounter(8)
+			f29_arg0.bg:completeAnimation()
+			f29_arg0.bg:setAlpha(0.5)
+			f29_arg0.clipFinished(f29_arg0.bg)
+			f29_arg0.PlayerBgGrid:completeAnimation()
+			f29_arg0.PlayerBgGrid:setShaderVector(0, 1, 0, 0, 0)
+			f29_arg0.clipFinished(f29_arg0.PlayerBgGrid)
+			f29_arg0.DeadStipe:completeAnimation()
+			f29_arg0.DeadStipe:setAlpha(0)
+			f29_arg0.clipFinished(f29_arg0.DeadStipe)
+			f29_arg0.FrameEmpty:completeAnimation()
+			f29_arg0.FrameEmpty:setAlpha(0)
+			f29_arg0.clipFinished(f29_arg0.FrameEmpty)
+			f29_arg0.FrameEmptyX:completeAnimation()
+			f29_arg0.FrameEmptyX:setAlpha(0)
+			f29_arg0.clipFinished(f29_arg0.FrameEmptyX)
+			local f29_local0 = function(f30_arg0)
+				local f30_local0 = function(f31_arg0)
+					local f31_local0 = function(f32_arg0)
+						f32_arg0:beginAnimation(600)
+						f32_arg0:registerEventHandler("transition_complete_keyframe", f29_arg0.clipFinished)
+					end
+					f31_arg0:beginAnimation(200)
+					f31_arg0:setAlpha(0.2)
+					f31_arg0:registerEventHandler("transition_complete_keyframe", f31_local0)
+				end
+				f29_arg0.ScorePip:beginAnimation(200)
+				f29_arg0.ScorePip:setAlpha(0.4)
+				f29_arg0.ScorePip:registerEventHandler("interrupted_keyframe", f29_arg0.clipInterrupted)
+				f29_arg0.ScorePip:registerEventHandler("transition_complete_keyframe", f30_local0)
+			end
+			f29_arg0.ScorePip:completeAnimation()
+			f29_arg0.ScorePip:setAlpha(0.2)
+			f29_local0(f29_arg0.ScorePip)
+			local f29_local1 = function(f33_arg0)
+				local f33_local0 = function(f34_arg0)
+					local f34_local0 = function(f35_arg0)
+						f35_arg0:beginAnimation(600)
+						f35_arg0:registerEventHandler("transition_complete_keyframe", f29_arg0.clipFinished)
+					end
+					f34_arg0:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f34_arg0:setAlpha(0.8)
+					f34_arg0:setShaderVector(0, 1, 0, 0, 0)
+					f34_arg0:registerEventHandler("transition_complete_keyframe", f34_local0)
+				end
+				f29_arg0.OperatorIndicator:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f29_arg0.OperatorIndicator:setAlpha(1)
+				f29_arg0.OperatorIndicator:setShaderVector(0, 2, 0, 0, 0)
+				f29_arg0.OperatorIndicator:registerEventHandler("interrupted_keyframe", f29_arg0.clipInterrupted)
+				f29_arg0.OperatorIndicator:registerEventHandler("transition_complete_keyframe", f33_local0)
+			end
+			f29_arg0.OperatorIndicator:completeAnimation()
+			f29_arg0.OperatorIndicator:setAlpha(0.8)
+			f29_arg0.OperatorIndicator:setShaderVector(0, 1, 0, 0, 0)
+			f29_local1(f29_arg0.OperatorIndicator)
+			local f29_local2 = function(f36_arg0)
+				local f36_local0 = function(f37_arg0)
+					f37_arg0:beginAnimation(200)
+					f37_arg0:setAlpha(0.5)
+					f37_arg0:registerEventHandler("transition_complete_keyframe", f29_arg0.clipFinished)
+				end
+				f29_arg0.CornerPips:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+				f29_arg0.CornerPips:setAlpha(1)
+				f29_arg0.CornerPips:registerEventHandler("interrupted_keyframe", f29_arg0.clipInterrupted)
+				f29_arg0.CornerPips:registerEventHandler("transition_complete_keyframe", f36_local0)
+			end
+			f29_arg0.CornerPips:completeAnimation()
+			f29_arg0.CornerPips:setAlpha(0.5)
+			f29_local2(f29_arg0.CornerPips)
+			f29_arg0.nextClip = "DefaultClip"
+		end,
+	},
+}
+CoD.SwipeTak5_CharacterPortrait.__onClose = function(f38_arg0)
+	f38_arg0.HealthBar:close()
+	f38_arg0.HealthValue:close()
+	f38_arg0.ClanAndGamerName:close()
+	f38_arg0.PlayerImage:close()
+end

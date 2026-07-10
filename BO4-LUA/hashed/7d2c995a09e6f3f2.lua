@@ -1,0 +1,17 @@
+CoD.ui_icon_callingcards_assassin_attackerhand = InheritFrom(LUI.UIElement)
+CoD.ui_icon_callingcards_assassin_attackerhand.__defaultWidth = 10
+CoD.ui_icon_callingcards_assassin_attackerhand.__defaultHeight = 10
+CoD.ui_icon_callingcards_assassin_attackerhand.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+	local self = LUI.UIElement.new(f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+	self:setClass(CoD.ui_icon_callingcards_assassin_attackerhand)
+	self.id = "ui_icon_callingcards_assassin_attackerhand"
+	self.soundSet = "default"
+	local hand = LUI.UIImage.new(0, 0, -217, 23, 0, 0, -68, 36)
+	hand:setImage(RegisterImage(0xCBEF29DD42F9D3))
+	self:addElement(hand)
+	self.hand = hand
+	if PostLoadFunc then
+		PostLoadFunc(self, f1_arg1, f1_arg0)
+	end
+	return self
+end

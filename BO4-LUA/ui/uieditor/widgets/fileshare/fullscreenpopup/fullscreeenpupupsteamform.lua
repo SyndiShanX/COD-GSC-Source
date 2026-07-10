@@ -1,0 +1,198 @@
+require("x64:9ad32182a469b46")
+CoD.FullscreeenPupupSteamForm = InheritFrom(LUI.UIElement)
+CoD.FullscreeenPupupSteamForm.__defaultWidth = 1920
+CoD.FullscreeenPupupSteamForm.__defaultHeight = 1080
+CoD.FullscreeenPupupSteamForm.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+	local self = LUI.UIElement.new(f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+	self:setClass(CoD.FullscreeenPupupSteamForm)
+	self.id = "FullscreeenPupupSteamForm"
+	self.soundSet = "default"
+	f1_arg0:addElementToPendingUpdateStateList(self)
+	local Background = LUI.UIImage.new(0, 0, 0, 1920, 0, 0, 0, 1080)
+	Background:setRGB(0, 0, 0)
+	Background:setAlpha(0.9)
+	self:addElement(Background)
+	self.Background = Background
+	local RedLine = LUI.UIImage.new(0, 0, 0, 1920, 0, 0, 310, 318)
+	RedLine:setRGB(1, 0.6, 0)
+	RedLine:setAlpha(0.82)
+	self:addElement(RedLine)
+	self.RedLine = RedLine
+	local BodyBackground = LUI.UIImage.new(0, 0, 0, 1920, 0, 0, 314, 845)
+	BodyBackground:setRGB(0.1, 0.1, 0.1)
+	self:addElement(BodyBackground)
+	self.BodyBackground = BodyBackground
+	local PromptBackground = LUI.UIImage.new(0, 0, 0, 1920, 0, 0, 845, 917)
+	PromptBackground:setRGB(0.24, 0.24, 0.24)
+	self:addElement(PromptBackground)
+	self.PromptBackground = PromptBackground
+	local DialogSpinner0 = CoD.DialogSpinner.new(f1_arg0, f1_arg1, 0, 0, 804, 996, 0, 0, 540, 732)
+	self:addElement(DialogSpinner0)
+	self.DialogSpinner0 = DialogSpinner0
+	local Title = LUI.UIText.new(0, 0, 690, 990, 0, 0, 365, 437)
+	Title:setText(Engine[0xF9F1239CFD921FE](0x93E719493E9E18F))
+	Title:setTTF("default")
+	Title:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	self:addElement(Title)
+	self.Title = Title
+	local Subtitle = LUI.UIText.new(0, 0, 690, 1538, 0, 0, 435, 473)
+	Subtitle:setText(Engine[0xF9F1239CFD921FE](0x93E719493E9E18F))
+	Subtitle:setTTF("default")
+	Subtitle:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	Subtitle:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	self:addElement(Subtitle)
+	self.Subtitle = Subtitle
+	local WorkingTitle = LUI.UIText.new(0, 0, 690, 990, 0, 0, 365, 437)
+	WorkingTitle:setText(Engine[0xF9F1239CFD921FE](0x93E719493E9E18F))
+	WorkingTitle:setTTF("default")
+	WorkingTitle:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	self:addElement(WorkingTitle)
+	self.WorkingTitle = WorkingTitle
+	local DoneTitle = LUI.UIText.new(0, 0, 690, 990, 0, 0, 365, 437)
+	DoneTitle:setText(Engine[0xF9F1239CFD921FE](0x93E719493E9E18F))
+	DoneTitle:setTTF("default")
+	DoneTitle:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	self:addElement(DoneTitle)
+	self.DoneTitle = DoneTitle
+	local ErrorTitle = LUI.UIText.new(0, 0, 690, 990, 0, 0, 365, 437)
+	ErrorTitle:setAlpha(0)
+	ErrorTitle:setText(Engine[0xF9F1239CFD921FE](0x127999393F1681))
+	ErrorTitle:setTTF("default")
+	ErrorTitle:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	self:addElement(ErrorTitle)
+	self.ErrorTitle = ErrorTitle
+	local ErrorSubtitle = LUI.UIText.new(0, 0, 690, 1538, 0, 0, 435, 473)
+	ErrorSubtitle:setText(Engine[0xF9F1239CFD921FE](0x93E719493E9E18F))
+	ErrorSubtitle:setTTF("default")
+	ErrorSubtitle:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	ErrorSubtitle:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	self:addElement(ErrorSubtitle)
+	self.ErrorSubtitle = ErrorSubtitle
+	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)
+	if PostLoadFunc then
+		PostLoadFunc(self, f1_arg1, f1_arg0)
+	end
+	return self
+end
+CoD.FullscreeenPupupSteamForm.__resetProperties = function(f2_arg0)
+	f2_arg0.WorkingTitle:completeAnimation()
+	f2_arg0.DialogSpinner0:completeAnimation()
+	f2_arg0.DoneTitle:completeAnimation()
+	f2_arg0.ErrorSubtitle:completeAnimation()
+	f2_arg0.Title:completeAnimation()
+	f2_arg0.Subtitle:completeAnimation()
+	f2_arg0.ErrorTitle:completeAnimation()
+	f2_arg0.WorkingTitle:setAlpha(1)
+	f2_arg0.DialogSpinner0:setAlpha(1)
+	f2_arg0.DoneTitle:setAlpha(1)
+	f2_arg0.ErrorSubtitle:setAlpha(1)
+	f2_arg0.Title:setAlpha(1)
+	f2_arg0.Subtitle:setAlpha(1)
+	f2_arg0.Subtitle:setText(Engine[0xF9F1239CFD921FE](0x93E719493E9E18F))
+	f2_arg0.ErrorTitle:setAlpha(0)
+end
+CoD.FullscreeenPupupSteamForm.__clipsPerState = {
+	DefaultState = {
+		DefaultClip = function(f3_arg0, f3_arg1)
+			f3_arg0:__resetProperties()
+			f3_arg0:setupElementClipCounter(4)
+			f3_arg0.DialogSpinner0:completeAnimation()
+			f3_arg0.DialogSpinner0:setAlpha(0)
+			f3_arg0.clipFinished(f3_arg0.DialogSpinner0)
+			f3_arg0.WorkingTitle:completeAnimation()
+			f3_arg0.WorkingTitle:setAlpha(0)
+			f3_arg0.clipFinished(f3_arg0.WorkingTitle)
+			f3_arg0.DoneTitle:completeAnimation()
+			f3_arg0.DoneTitle:setAlpha(0)
+			f3_arg0.clipFinished(f3_arg0.DoneTitle)
+			f3_arg0.ErrorSubtitle:completeAnimation()
+			f3_arg0.ErrorSubtitle:setAlpha(0)
+			f3_arg0.clipFinished(f3_arg0.ErrorSubtitle)
+		end,
+	},
+	WorkingState = {
+		DefaultClip = function(f4_arg0, f4_arg1)
+			f4_arg0:__resetProperties()
+			f4_arg0:setupElementClipCounter(4)
+			f4_arg0.Title:completeAnimation()
+			f4_arg0.Title:setAlpha(0)
+			f4_arg0.clipFinished(f4_arg0.Title)
+			f4_arg0.Subtitle:completeAnimation()
+			f4_arg0.Subtitle:setText(Engine[0xF9F1239CFD921FE](0x11A5E60064F7C24))
+			f4_arg0.clipFinished(f4_arg0.Subtitle)
+			f4_arg0.DoneTitle:completeAnimation()
+			f4_arg0.DoneTitle:setAlpha(0)
+			f4_arg0.clipFinished(f4_arg0.DoneTitle)
+			f4_arg0.ErrorSubtitle:completeAnimation()
+			f4_arg0.ErrorSubtitle:setAlpha(0)
+			f4_arg0.clipFinished(f4_arg0.ErrorSubtitle)
+		end,
+	},
+	ErrorState = {
+		DefaultClip = function(f5_arg0, f5_arg1)
+			f5_arg0:__resetProperties()
+			f5_arg0:setupElementClipCounter(6)
+			f5_arg0.DialogSpinner0:completeAnimation()
+			f5_arg0.DialogSpinner0:setAlpha(0)
+			f5_arg0.clipFinished(f5_arg0.DialogSpinner0)
+			f5_arg0.Title:completeAnimation()
+			f5_arg0.Title:setAlpha(0)
+			f5_arg0.clipFinished(f5_arg0.Title)
+			f5_arg0.Subtitle:completeAnimation()
+			f5_arg0.Subtitle:setAlpha(0)
+			f5_arg0.Subtitle:setText("")
+			f5_arg0.clipFinished(f5_arg0.Subtitle)
+			f5_arg0.WorkingTitle:completeAnimation()
+			f5_arg0.WorkingTitle:setAlpha(0)
+			f5_arg0.clipFinished(f5_arg0.WorkingTitle)
+			f5_arg0.DoneTitle:completeAnimation()
+			f5_arg0.DoneTitle:setAlpha(0)
+			f5_arg0.clipFinished(f5_arg0.DoneTitle)
+			f5_arg0.ErrorTitle:completeAnimation()
+			f5_arg0.ErrorTitle:setAlpha(1)
+			f5_arg0.clipFinished(f5_arg0.ErrorTitle)
+		end,
+	},
+	CustomState = {
+		DefaultClip = function(f6_arg0, f6_arg1)
+			f6_arg0:__resetProperties()
+			f6_arg0:setupElementClipCounter(4)
+			f6_arg0.DialogSpinner0:completeAnimation()
+			f6_arg0.DialogSpinner0:setAlpha(0)
+			f6_arg0.clipFinished(f6_arg0.DialogSpinner0)
+			f6_arg0.WorkingTitle:completeAnimation()
+			f6_arg0.WorkingTitle:setAlpha(0)
+			f6_arg0.clipFinished(f6_arg0.WorkingTitle)
+			f6_arg0.DoneTitle:completeAnimation()
+			f6_arg0.DoneTitle:setAlpha(0)
+			f6_arg0.clipFinished(f6_arg0.DoneTitle)
+			f6_arg0.ErrorSubtitle:completeAnimation()
+			f6_arg0.ErrorSubtitle:setAlpha(0)
+			f6_arg0.clipFinished(f6_arg0.ErrorSubtitle)
+		end,
+	},
+	DoneState = {
+		DefaultClip = function(f7_arg0, f7_arg1)
+			f7_arg0:__resetProperties()
+			f7_arg0:setupElementClipCounter(5)
+			f7_arg0.DialogSpinner0:completeAnimation()
+			f7_arg0.DialogSpinner0:setAlpha(0)
+			f7_arg0.clipFinished(f7_arg0.DialogSpinner0)
+			f7_arg0.Title:completeAnimation()
+			f7_arg0.Title:setAlpha(0)
+			f7_arg0.clipFinished(f7_arg0.Title)
+			f7_arg0.Subtitle:completeAnimation()
+			f7_arg0.Subtitle:setAlpha(0)
+			f7_arg0.clipFinished(f7_arg0.Subtitle)
+			f7_arg0.WorkingTitle:completeAnimation()
+			f7_arg0.WorkingTitle:setAlpha(0)
+			f7_arg0.clipFinished(f7_arg0.WorkingTitle)
+			f7_arg0.ErrorSubtitle:completeAnimation()
+			f7_arg0.ErrorSubtitle:setAlpha(0)
+			f7_arg0.clipFinished(f7_arg0.ErrorSubtitle)
+		end,
+	},
+}
+CoD.FullscreeenPupupSteamForm.__onClose = function(f8_arg0)
+	f8_arg0.DialogSpinner0:close()
+end

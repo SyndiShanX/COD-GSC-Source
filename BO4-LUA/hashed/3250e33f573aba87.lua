@@ -1,0 +1,17 @@
+CoD.ui_icon_callingcards_assassin_bentarm = InheritFrom(LUI.UIElement)
+CoD.ui_icon_callingcards_assassin_bentarm.__defaultWidth = 10
+CoD.ui_icon_callingcards_assassin_bentarm.__defaultHeight = 10
+CoD.ui_icon_callingcards_assassin_bentarm.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+	local self = LUI.UIElement.new(f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+	self:setClass(CoD.ui_icon_callingcards_assassin_bentarm)
+	self.id = "ui_icon_callingcards_assassin_bentarm"
+	self.soundSet = "default"
+	local bentarm = LUI.UIImage.new(0, 0, -28, 196, 0, 0, -166, 130)
+	bentarm:setImage(RegisterImage(0xF7A9BB3478DF769))
+	self:addElement(bentarm)
+	self.bentarm = bentarm
+	if PostLoadFunc then
+		PostLoadFunc(self, f1_arg1, f1_arg0)
+	end
+	return self
+end

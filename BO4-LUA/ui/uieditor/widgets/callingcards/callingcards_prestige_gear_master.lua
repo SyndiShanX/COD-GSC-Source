@@ -1,0 +1,202 @@
+require("x64:653186714d512a3")
+CoD[0x8CE52C91EA9361B] = InheritFrom(LUI.UIElement)
+CoD[0x8CE52C91EA9361B].__defaultWidth = 960
+CoD[0x8CE52C91EA9361B].__defaultHeight = 240
+CoD[0x8CE52C91EA9361B].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+	local self = LUI.UIElement.new(f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+	self:setClass(CoD[0x8CE52C91EA9361B])
+	self.id = "CallingCards_Prestige_Gear_Master"
+	self.soundSet = "default"
+	f1_arg0:addElementToPendingUpdateStateList(self)
+	local background = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
+	background:setImage(RegisterImage(0x34AE856139B7CCB))
+	self:addElement(background)
+	self.background = background
+	local windsaill = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
+	windsaill:setAlpha(0.75)
+	windsaill:setImage(RegisterImage(0x982B01BE80B5EF0))
+	self:addElement(windsaill)
+	self.windsaill = windsaill
+	local glows = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
+	glows:setImage(RegisterImage(0x767DE28A9E7391B))
+	glows:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	self:addElement(glows)
+	self.glows = glows
+	local skeletons2 = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
+	skeletons2:setAlpha(0.5)
+	skeletons2:setImage(RegisterImage(0x842948F62005FF9))
+	skeletons2:setMaterial(LUI.UIImage.GetCachedMaterial(0x73D72BCD14C2AAD))
+	skeletons2:setShaderVector(0, 1, 1, 0, 0)
+	skeletons2:setShaderVector(1, 0.03, 0, 0, 0)
+	self:addElement(skeletons2)
+	self.skeletons2 = skeletons2
+	local skeletons = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
+	skeletons:setAlpha(0.5)
+	skeletons:setImage(RegisterImage(0x43FB084BE500991))
+	skeletons:setMaterial(LUI.UIImage.GetCachedMaterial(0xD8EA9FE9B0BCF75))
+	skeletons:setShaderVector(0, 1, 1, 0, 0)
+	skeletons:setShaderVector(1, 0.03, 0, 0, 0)
+	self:addElement(skeletons)
+	self.skeletons = skeletons
+	local foregroundRopes = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
+	foregroundRopes:setImage(RegisterImage(0xA144AD09F1356A0))
+	self:addElement(foregroundRopes)
+	self.foregroundRopes = foregroundRopes
+	local Captain = LUI.UIImage.new(0, 0, 697, 960, 0, 0, 0, 245)
+	Captain:setAlpha(0.9)
+	Captain:setImage(RegisterImage(0x53783C234AC1C71))
+	self:addElement(Captain)
+	self.Captain = Captain
+	local captainArm = CoD.CallingCards_Asset_pirate_arm.new(f1_arg0, f1_arg1, 0, 0, 518, 1402, 0, 0, 104, 297)
+	captainArm:setScale(1.5, 1.5)
+	self:addElement(captainArm)
+	self.captainArm = captainArm
+	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)
+	if PostLoadFunc then
+		PostLoadFunc(self, f1_arg1, f1_arg0)
+	end
+	return self
+end
+CoD[0x8CE52C91EA9361B].__resetProperties = function(f2_arg0)
+	f2_arg0.windsaill:completeAnimation()
+	f2_arg0.skeletons:completeAnimation()
+	f2_arg0.captainArm:completeAnimation()
+	f2_arg0.skeletons2:completeAnimation()
+	f2_arg0.windsaill:setLeftRight(0, 0, 0, 960)
+	f2_arg0.windsaill:setTopBottom(0, 0, 0, 240)
+	f2_arg0.windsaill:setScale(1, 1)
+	f2_arg0.skeletons:setTopBottom(0, 0, 0, 240)
+	f2_arg0.skeletons:setRGB(1, 1, 1)
+	f2_arg0.skeletons:setAlpha(0.5)
+	f2_arg0.skeletons:setMaterial(LUI.UIImage.GetCachedMaterial(0xD8EA9FE9B0BCF75))
+	f2_arg0.skeletons:setShaderVector(0, 1, 1, 0, 0)
+	f2_arg0.skeletons:setShaderVector(1, 0.03, 0, 0, 0)
+	f2_arg0.captainArm:setLeftRight(0, 0, 518, 1402)
+	f2_arg0.captainArm:setTopBottom(0, 0, 104, 297)
+	f2_arg0.captainArm:setZRot(0)
+	f2_arg0.skeletons2:setTopBottom(0, 0, 0, 240)
+	f2_arg0.skeletons2:setRGB(1, 1, 1)
+	f2_arg0.skeletons2:setAlpha(0.5)
+	f2_arg0.skeletons2:setShaderVector(0, 1, 1, 0, 0)
+	f2_arg0.skeletons2:setShaderVector(1, 0.03, 0, 0, 0)
+end
+CoD[0x8CE52C91EA9361B].__clipsPerState = {
+	DefaultState = {
+		DefaultClip = function(f3_arg0, f3_arg1)
+			f3_arg0:__resetProperties()
+			f3_arg0:setupElementClipCounter(4)
+			local f3_local0 = function(f4_arg0)
+				local f4_local0 = function(f5_arg0)
+					local f5_local0 = function(f6_arg0)
+						f6_arg0:beginAnimation(1000)
+						f6_arg0:registerEventHandler("transition_complete_keyframe", f3_arg0.clipFinished)
+					end
+					f5_arg0:beginAnimation(1060)
+					f5_arg0:setScale(1.1, 1.1)
+					f5_arg0:registerEventHandler("transition_complete_keyframe", f5_local0)
+				end
+				f3_arg0.windsaill:beginAnimation(940)
+				f3_arg0.windsaill:setLeftRight(0, 0, 35, 1006)
+				f3_arg0.windsaill:setTopBottom(0, 0, -10, 256)
+				f3_arg0.windsaill:setScale(1.05, 1.05)
+				f3_arg0.windsaill:registerEventHandler("interrupted_keyframe", f3_arg0.clipInterrupted)
+				f3_arg0.windsaill:registerEventHandler("transition_complete_keyframe", f4_local0)
+			end
+			f3_arg0.windsaill:completeAnimation()
+			f3_arg0.windsaill:setLeftRight(0, 0, 46, 1006)
+			f3_arg0.windsaill:setTopBottom(0, 0, 5, 245)
+			f3_arg0.windsaill:setScale(1.1, 1.1)
+			f3_local0(f3_arg0.windsaill)
+			local f3_local1 = function(f7_arg0)
+				local f7_local0 = function(f8_arg0)
+					local f8_local0 = function(f9_arg0)
+						local f9_local0 = function(f10_arg0)
+							local f10_local0 = function(f11_arg0)
+								f11_arg0:beginAnimation(710)
+								f11_arg0:registerEventHandler("transition_complete_keyframe", f3_arg0.clipFinished)
+							end
+							f10_arg0:beginAnimation(789)
+							f10_arg0:setTopBottom(0, 0, 0, 240)
+							f10_arg0:registerEventHandler("transition_complete_keyframe", f10_local0)
+						end
+						f9_arg0:beginAnimation(560)
+						f9_arg0:setTopBottom(0, 0, -2, 245)
+						f9_arg0:registerEventHandler("transition_complete_keyframe", f9_local0)
+					end
+					f8_arg0:beginAnimation(199)
+					f8_arg0:setTopBottom(0, 0, -0.53, 241.31)
+					f8_arg0:registerEventHandler("transition_complete_keyframe", f8_local0)
+				end
+				f3_arg0.skeletons2:beginAnimation(740)
+				f3_arg0.skeletons2:registerEventHandler("interrupted_keyframe", f3_arg0.clipInterrupted)
+				f3_arg0.skeletons2:registerEventHandler("transition_complete_keyframe", f7_local0)
+			end
+			f3_arg0.skeletons2:completeAnimation()
+			f3_arg0.skeletons2:setTopBottom(0, 0, 0, 240)
+			f3_arg0.skeletons2:setRGB(1, 1, 1)
+			f3_arg0.skeletons2:setAlpha(0.25)
+			f3_arg0.skeletons2:setShaderVector(0, 1, 1, 0, 0)
+			f3_arg0.skeletons2:setShaderVector(1, 0.03, 0, 0, 0)
+			f3_local1(f3_arg0.skeletons2)
+			local f3_local2 = function(f12_arg0)
+				local f12_local0 = function(f13_arg0)
+					f13_arg0:beginAnimation(1500)
+					f13_arg0:setTopBottom(0, 0, -3, 240)
+					f13_arg0:setAlpha(0.5)
+					f13_arg0:registerEventHandler("transition_complete_keyframe", f3_arg0.clipFinished)
+				end
+				f3_arg0.skeletons:beginAnimation(1500)
+				f3_arg0.skeletons:setTopBottom(0, 0, 0, 240)
+				f3_arg0.skeletons:setAlpha(1)
+				f3_arg0.skeletons:registerEventHandler("interrupted_keyframe", f3_arg0.clipInterrupted)
+				f3_arg0.skeletons:registerEventHandler("transition_complete_keyframe", f12_local0)
+			end
+			f3_arg0.skeletons:completeAnimation()
+			f3_arg0.skeletons:setTopBottom(0, 0, -2, 240)
+			f3_arg0.skeletons:setRGB(0.75, 1, 0.85)
+			f3_arg0.skeletons:setAlpha(0.5)
+			f3_arg0.skeletons:setMaterial(LUI.UIImage.GetCachedMaterial(0x73D72BCD14C2AAD))
+			f3_arg0.skeletons:setShaderVector(0, 1, 1, 0, 0)
+			f3_arg0.skeletons:setShaderVector(1, 0.03, 0, 0, 0)
+			f3_local2(f3_arg0.skeletons)
+			local f3_local3 = function(f14_arg0)
+				local f14_local0 = function(f15_arg0)
+					local f15_local0 = function(f16_arg0)
+						local f16_local0 = function(f17_arg0)
+							local f17_local0 = function(f18_arg0)
+								f18_arg0:beginAnimation(500)
+								f18_arg0:setTopBottom(0, 0, 87, 280)
+								f18_arg0:setZRot(9)
+								f18_arg0:registerEventHandler("transition_complete_keyframe", f3_arg0.clipFinished)
+							end
+							f17_arg0:beginAnimation(500)
+							f17_arg0:setTopBottom(0, 0, 123.5, 316.5)
+							f17_arg0:setZRot(-12)
+							f17_arg0:registerEventHandler("transition_complete_keyframe", f17_local0)
+						end
+						f16_arg0:beginAnimation(1000)
+						f16_arg0:registerEventHandler("transition_complete_keyframe", f16_local0)
+					end
+					f15_arg0:beginAnimation(510)
+					f15_arg0:setTopBottom(0, 0, 87, 280)
+					f15_arg0:setZRot(9)
+					f15_arg0:registerEventHandler("transition_complete_keyframe", f15_local0)
+				end
+				f3_arg0.captainArm:beginAnimation(490)
+				f3_arg0.captainArm:setTopBottom(0, 0, 123.5, 316.5)
+				f3_arg0.captainArm:setZRot(-12)
+				f3_arg0.captainArm:registerEventHandler("interrupted_keyframe", f3_arg0.clipInterrupted)
+				f3_arg0.captainArm:registerEventHandler("transition_complete_keyframe", f14_local0)
+			end
+			f3_arg0.captainArm:completeAnimation()
+			f3_arg0.captainArm:setLeftRight(0, 0, 542, 1426)
+			f3_arg0.captainArm:setTopBottom(0, 0, 87, 280)
+			f3_arg0.captainArm:setZRot(9)
+			f3_local3(f3_arg0.captainArm)
+			f3_arg0.nextClip = "DefaultClip"
+		end,
+	},
+}
+CoD[0x8CE52C91EA9361B].__onClose = function(f19_arg0)
+	f19_arg0.captainArm:close()
+end

@@ -1,0 +1,112 @@
+CoD.PC_BnetStore_GiftButton_Texts = InheritFrom(LUI.UIElement)
+CoD.PC_BnetStore_GiftButton_Texts.__defaultWidth = 450
+CoD.PC_BnetStore_GiftButton_Texts.__defaultHeight = 24
+CoD.PC_BnetStore_GiftButton_Texts.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+	local self = LUI.UIHorizontalList.new(f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9, 15, false)
+	self:setAlignment(LUI.Alignment.Center)
+	self:setClass(CoD.PC_BnetStore_GiftButton_Texts)
+	self.id = "PC_BnetStore_GiftButton_Texts"
+	self.soundSet = "default"
+	f1_arg0:addElementToPendingUpdateStateList(self)
+	local ButtonTitle = LUI.UIText.new(0, 0, 134.5, 184.5, 0.5, 0.5, -12, 12)
+	ButtonTitle:setRGB(1, 0.75, 0.09)
+	ButtonTitle:setText(Engine[0xF9F1239CFD921FE](0xCAF60F095239BED))
+	ButtonTitle:setTTF("ttmussels_regular")
+	ButtonTitle:setLetterSpacing(2)
+	ButtonTitle:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	self:addElement(ButtonTitle)
+	self.ButtonTitle = ButtonTitle
+	local GiftSalePrice = LUI.UIText.new(0, 0, 199.5, 250.5, 0.5, 0.5, -12, 12)
+	GiftSalePrice:setRGB(0.6, 0.76, 0.23)
+	GiftSalePrice:setText("")
+	GiftSalePrice:setTTF("ttmussels_regular")
+	GiftSalePrice:setMaterial(LUI.UIImage.GetCachedMaterial(0x90D57B1E92D39D7))
+	GiftSalePrice:setShaderVector(0, 25, 0, 0, 0)
+	GiftSalePrice:setShaderVector(1, 0, 0, 0, 0)
+	GiftSalePrice:setShaderVector(2, 0.16, 0.6, 0.07, 0.4)
+	GiftSalePrice:setLetterSpacing(2)
+	GiftSalePrice:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	self:addElement(GiftSalePrice)
+	self.GiftSalePrice = GiftSalePrice
+	local GiftPrice = LUI.UIText.new(0, 0, 264.5, 315.5, 0.5, 0.5, -12, 12)
+	GiftPrice:setRGB(1, 0.87, 0.51)
+	GiftPrice:setText("")
+	GiftPrice:setTTF("ttmussels_regular")
+	GiftPrice:setLetterSpacing(2)
+	GiftPrice:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	GiftPrice:setBackingType(2)
+	GiftPrice:setBackingAlpha(0)
+	GiftPrice:setBackingXPadding(2)
+	GiftPrice:setBackingImage(RegisterImage(0x543EE2663FE7871))
+	GiftPrice:setBackingMaterial(LUI.UIImage.GetCachedMaterial(0xE992BD5A540E2D))
+	GiftPrice:setBackingShaderVector(0, 0, 1, 0, 0)
+	GiftPrice:setBackingShaderVector(1, 0, 0, 0, 0)
+	GiftPrice:setBackingShaderVector(2, 0.46, 0.52, 0, 0)
+	GiftPrice:setBackingShaderVector(3, 0, 0, 0, 0)
+	GiftPrice:setBackingShaderVector(4, 0, 0, 0, 0)
+	self:addElement(GiftPrice)
+	self.GiftPrice = GiftPrice
+	if PostLoadFunc then
+		PostLoadFunc(self, f1_arg1, f1_arg0)
+	end
+	return self
+end
+CoD.PC_BnetStore_GiftButton_Texts.__resetProperties = function(f2_arg0)
+	f2_arg0.GiftSalePrice:completeAnimation()
+	f2_arg0.ButtonTitle:completeAnimation()
+	f2_arg0.GiftPrice:completeAnimation()
+	f2_arg0.GiftSalePrice:setLeftRight(0, 0, 199.5, 250.5)
+	f2_arg0.GiftSalePrice:setRGB(0.6, 0.76, 0.23)
+	f2_arg0.GiftSalePrice:setAlpha(1)
+	f2_arg0.ButtonTitle:setRGB(1, 0.75, 0.09)
+	f2_arg0.GiftPrice:setLeftRight(0, 0, 264.5, 315.5)
+	f2_arg0.GiftPrice:setTopBottom(0.5, 0.5, -12, 12)
+	f2_arg0.GiftPrice:setRGB(1, 0.87, 0.51)
+	f2_arg0.GiftPrice:setAlpha(1)
+	f2_arg0.GiftPrice:setLetterSpacing(2)
+	f2_arg0.GiftPrice:setBackingAlpha(0)
+end
+CoD.PC_BnetStore_GiftButton_Texts.__clipsPerState = {
+	DefaultState = {
+		DefaultClip = function(f3_arg0, f3_arg1)
+			f3_arg0:__resetProperties()
+			f3_arg0:setupElementClipCounter(1)
+			f3_arg0.GiftSalePrice:completeAnimation()
+			f3_arg0.GiftSalePrice:setLeftRight(0, 0, 199.5, 199.5)
+			f3_arg0.GiftSalePrice:setAlpha(0)
+			f3_arg0.clipFinished(f3_arg0.GiftSalePrice)
+		end,
+		Disabled = function(f4_arg0, f4_arg1)
+			f4_arg0:__resetProperties()
+			f4_arg0:setupElementClipCounter(2)
+			f4_arg0.ButtonTitle:completeAnimation()
+			f4_arg0.ButtonTitle:setRGB(1, 1, 1)
+			f4_arg0.clipFinished(f4_arg0.ButtonTitle)
+			f4_arg0.GiftPrice:completeAnimation()
+			f4_arg0.GiftPrice:setLeftRight(0, 0, 239.5, 239.5)
+			f4_arg0.GiftPrice:setAlpha(0)
+			f4_arg0.clipFinished(f4_arg0.GiftPrice)
+		end,
+	},
+	InSale = {
+		DefaultClip = function(f5_arg0, f5_arg1)
+			f5_arg0:__resetProperties()
+			f5_arg0:setupElementClipCounter(3)
+			f5_arg0.ButtonTitle:completeAnimation()
+			f5_arg0.ButtonTitle:setRGB(0.85, 0.85, 0.85)
+			f5_arg0.clipFinished(f5_arg0.ButtonTitle)
+			f5_arg0.GiftSalePrice:completeAnimation()
+			f5_arg0.GiftSalePrice:setRGB(0.6, 0.76, 0.23)
+			f5_arg0.GiftSalePrice:setAlpha(1)
+			f5_arg0.clipFinished(f5_arg0.GiftSalePrice)
+			f5_arg0.GiftPrice:completeAnimation()
+			f5_arg0.GiftPrice:setLeftRight(0, 0, 264.5, 264.5)
+			f5_arg0.GiftPrice:setTopBottom(0.5, 0.5, -7.5, 11.5)
+			f5_arg0.GiftPrice:setRGB(1, 1, 1)
+			f5_arg0.GiftPrice:setAlpha(0.15)
+			f5_arg0.GiftPrice:setLetterSpacing(1)
+			f5_arg0.GiftPrice:setBackingAlpha(1)
+			f5_arg0.clipFinished(f5_arg0.GiftPrice)
+		end,
+	},
+}

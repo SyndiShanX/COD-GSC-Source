@@ -1,0 +1,198 @@
+require("x64:2675595fa323085")
+CoD.ZMLoadoutPreviewLockedOverlay = InheritFrom(LUI.UIElement)
+CoD.ZMLoadoutPreviewLockedOverlay.__defaultWidth = 272
+CoD.ZMLoadoutPreviewLockedOverlay.__defaultHeight = 379
+CoD.ZMLoadoutPreviewLockedOverlay.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+	local self = LUI.UIElement.new(f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+	self:setClass(CoD.ZMLoadoutPreviewLockedOverlay)
+	self.id = "ZMLoadoutPreviewLockedOverlay"
+	self.soundSet = "default"
+	self.onlyChildrenFocusable = true
+	f1_arg0:addElementToPendingUpdateStateList(self)
+	local BackingBlack = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
+	BackingBlack:setRGB(0, 0, 0)
+	self:addElement(BackingBlack)
+	self.BackingBlack = BackingBlack
+	local BackingWhite = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
+	BackingWhite:setRGB(0.59, 0.59, 0.59)
+	BackingWhite:setAlpha(0.1)
+	self:addElement(BackingWhite)
+	self.BackingWhite = BackingWhite
+	local NoiseTiledBacking = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
+	NoiseTiledBacking:setRGB(0.65, 0.65, 0.65)
+	NoiseTiledBacking:setAlpha(0.9)
+	NoiseTiledBacking:setImage(RegisterImage(0x34839E8065B1E53))
+	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	NoiseTiledBacking:setShaderVector(0, 0, 0, 0, 0)
+	NoiseTiledBacking:setupNineSliceShader(196, 88)
+	self:addElement(NoiseTiledBacking)
+	self.NoiseTiledBacking = NoiseTiledBacking
+	local TiledBacking = LUI.UIImage.new(0, 1, 0, 0, 0, 0, 29.5, 379.5)
+	TiledBacking:setAlpha(0.95)
+	TiledBacking:setImage(RegisterImage(0x34839E8065B1E53))
+	TiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	TiledBacking:setShaderVector(0, 0, 0, 0, 0)
+	TiledBacking:setupNineSliceShader(196, 88)
+	self:addElement(TiledBacking)
+	self.TiledBacking = TiledBacking
+	local BlackfadeBlurB = LUI.UIImage.new(0, 1, -5, 5, 0, 1, -5, 5)
+	BlackfadeBlurB:setRGB(0, 0, 0)
+	BlackfadeBlurB:setAlpha(0)
+	BlackfadeBlurB:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	BlackfadeBlurB:setShaderVector(0, 0, 0, 0, 0)
+	self:addElement(BlackfadeBlurB)
+	self.BlackfadeBlurB = BlackfadeBlurB
+	local BlackfadeBlurF = LUI.UIImage.new(0, 1, -5, 5, 0, 1, -5, 5)
+	BlackfadeBlurF:setRGB(0, 0, 0)
+	BlackfadeBlurF:setAlpha(0)
+	self:addElement(BlackfadeBlurF)
+	self.BlackfadeBlurF = BlackfadeBlurF
+	local DescriptionTint2 = LUI.UIImage.new(0, 1, 0, 0, 0, 0, 192.5, 378.5)
+	DescriptionTint2:setRGB(0.39, 0.39, 0.39)
+	DescriptionTint2:setAlpha(0.04)
+	DescriptionTint2:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	self:addElement(DescriptionTint2)
+	self.DescriptionTint2 = DescriptionTint2
+	local UnlockDescription = LUI.UIText.new(0.5, 0.5, -130.5, 130.5, 0, 0, 111, 132)
+	UnlockDescription:setRGB(0.96, 0.93, 0.84)
+	UnlockDescription.__String_Reference = function()
+		UnlockDescription:setText(ConvertToUpperString(CoD.ZMLoadoutUtility.GetUnlockDescriptionForFeature(self, f1_arg1, 0x0)))
+	end
+	UnlockDescription.__String_Reference()
+	UnlockDescription:setTTF("ttmussels_regular")
+	UnlockDescription:setLetterSpacing(10)
+	UnlockDescription:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	UnlockDescription:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	UnlockDescription:setBackingType(2)
+	UnlockDescription:setBackingColor(0.39, 0.39, 0.39)
+	UnlockDescription:setBackingAlpha(0.07)
+	UnlockDescription:setBackingXPadding(10)
+	UnlockDescription:setBackingYPadding(2)
+	self:addElement(UnlockDescription)
+	self.UnlockDescription = UnlockDescription
+	local LockImage = LUI.UIImage.new(0, 0, 104, 168, 0, 0, 26, 90)
+	LockImage:setImage(RegisterImage(0xE1E7C490B2BA4FB))
+	self:addElement(LockImage)
+	self.LockImage = LockImage
+	local LayoutTopBar = LUI.UIImage.new(0, 1, 0, 0, 0, 0, 0, 20)
+	LayoutTopBar:setAlpha(0.5)
+	LayoutTopBar:setImage(RegisterImage(0x1426C1694668EB3))
+	LayoutTopBar:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	LayoutTopBar:setShaderVector(0, 0, 0, 0, 0)
+	LayoutTopBar:setupNineSliceShader(6, 6)
+	self:addElement(LayoutTopBar)
+	self.LayoutTopBar = LayoutTopBar
+	local LayoutBotStripe = LUI.UIImage.new(0, 1, 0, 0, 1, 1, -28, 0)
+	LayoutBotStripe:setAlpha(0.4)
+	LayoutBotStripe:setImage(RegisterImage(0x36E1590316DA74B))
+	LayoutBotStripe:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	self:addElement(LayoutBotStripe)
+	self.LayoutBotStripe = LayoutBotStripe
+	local RankIcon = LUI.UIImage.new(0, 0, 26, 246, 0, 0, 177.5, 397.5)
+	RankIcon.__Image = function()
+		RankIcon:setImage(RegisterImage(CoD.ZMLoadoutUtility.GetUnlockRankIconLargeForFeature(self, 0x21793BE97AC0B5A)))
+	end
+	RankIcon.__Image()
+	self:addElement(RankIcon)
+	self.RankIcon = RankIcon
+	local blockPCNavigationEmptyFocusable = nil
+	blockPCNavigationEmptyFocusable = CoD.emptyFocusable.new(f1_arg0, f1_arg1, 0, 1, 0, 0, 0, 1, 0, 0)
+	self:addElement(blockPCNavigationEmptyFocusable)
+	self.blockPCNavigationEmptyFocusable = blockPCNavigationEmptyFocusable
+	UnlockDescription:linkToElementModel(self, nil, true, UnlockDescription.__String_Reference)
+	RankIcon:linkToElementModel(self, nil, true, RankIcon.__Image)
+	if CoD.isPC then
+		blockPCNavigationEmptyFocusable.id = "blockPCNavigationEmptyFocusable"
+	end
+	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)
+	if PostLoadFunc then
+		PostLoadFunc(self, f1_arg1, f1_arg0)
+	end
+	return self
+end
+CoD.ZMLoadoutPreviewLockedOverlay.__resetProperties = function(f4_arg0)
+	f4_arg0.BlackfadeBlurB:completeAnimation()
+	f4_arg0.BlackfadeBlurF:completeAnimation()
+	f4_arg0.UnlockDescription:completeAnimation()
+	f4_arg0.LockImage:completeAnimation()
+	f4_arg0.LayoutBotStripe:completeAnimation()
+	f4_arg0.LayoutTopBar:completeAnimation()
+	f4_arg0.DescriptionTint2:completeAnimation()
+	f4_arg0.TiledBacking:completeAnimation()
+	f4_arg0.NoiseTiledBacking:completeAnimation()
+	f4_arg0.BackingWhite:completeAnimation()
+	f4_arg0.RankIcon:completeAnimation()
+	f4_arg0.BackingBlack:completeAnimation()
+	f4_arg0.blockPCNavigationEmptyFocusable:completeAnimation()
+	f4_arg0.BlackfadeBlurB:setAlpha(0)
+	f4_arg0.BlackfadeBlurF:setAlpha(0)
+	f4_arg0.UnlockDescription:setAlpha(1)
+	f4_arg0.LockImage:setAlpha(1)
+	f4_arg0.LayoutBotStripe:setAlpha(0.4)
+	f4_arg0.LayoutTopBar:setAlpha(0.5)
+	f4_arg0.DescriptionTint2:setAlpha(0.04)
+	f4_arg0.TiledBacking:setAlpha(0.95)
+	f4_arg0.NoiseTiledBacking:setAlpha(0.9)
+	f4_arg0.BackingWhite:setAlpha(0.1)
+	f4_arg0.RankIcon:setAlpha(1)
+	f4_arg0.BackingBlack:setAlpha(1)
+	f4_arg0.blockPCNavigationEmptyFocusable:setAlpha(1)
+end
+CoD.ZMLoadoutPreviewLockedOverlay.__clipsPerState = {
+	DefaultState = {
+		DefaultClip = function(f5_arg0, f5_arg1)
+			f5_arg0:__resetProperties()
+			f5_arg0:setupElementClipCounter(13)
+			f5_arg0.BackingBlack:completeAnimation()
+			f5_arg0.BackingBlack:setAlpha(0)
+			f5_arg0.clipFinished(f5_arg0.BackingBlack)
+			f5_arg0.BackingWhite:completeAnimation()
+			f5_arg0.BackingWhite:setAlpha(0)
+			f5_arg0.clipFinished(f5_arg0.BackingWhite)
+			f5_arg0.NoiseTiledBacking:completeAnimation()
+			f5_arg0.NoiseTiledBacking:setAlpha(0)
+			f5_arg0.clipFinished(f5_arg0.NoiseTiledBacking)
+			f5_arg0.TiledBacking:completeAnimation()
+			f5_arg0.TiledBacking:setAlpha(0)
+			f5_arg0.clipFinished(f5_arg0.TiledBacking)
+			f5_arg0.BlackfadeBlurB:completeAnimation()
+			f5_arg0.BlackfadeBlurB:setAlpha(0)
+			f5_arg0.clipFinished(f5_arg0.BlackfadeBlurB)
+			f5_arg0.BlackfadeBlurF:completeAnimation()
+			f5_arg0.BlackfadeBlurF:setAlpha(0)
+			f5_arg0.clipFinished(f5_arg0.BlackfadeBlurF)
+			f5_arg0.DescriptionTint2:completeAnimation()
+			f5_arg0.DescriptionTint2:setAlpha(0)
+			f5_arg0.clipFinished(f5_arg0.DescriptionTint2)
+			f5_arg0.UnlockDescription:completeAnimation()
+			f5_arg0.UnlockDescription:setAlpha(0)
+			f5_arg0.clipFinished(f5_arg0.UnlockDescription)
+			f5_arg0.LockImage:completeAnimation()
+			f5_arg0.LockImage:setAlpha(0)
+			f5_arg0.clipFinished(f5_arg0.LockImage)
+			f5_arg0.LayoutTopBar:completeAnimation()
+			f5_arg0.LayoutTopBar:setAlpha(0)
+			f5_arg0.clipFinished(f5_arg0.LayoutTopBar)
+			f5_arg0.LayoutBotStripe:completeAnimation()
+			f5_arg0.LayoutBotStripe:setAlpha(0)
+			f5_arg0.clipFinished(f5_arg0.LayoutBotStripe)
+			f5_arg0.RankIcon:completeAnimation()
+			f5_arg0.RankIcon:setAlpha(0)
+			f5_arg0.clipFinished(f5_arg0.RankIcon)
+			f5_arg0.blockPCNavigationEmptyFocusable:completeAnimation()
+			f5_arg0.blockPCNavigationEmptyFocusable:setAlpha(0)
+			f5_arg0.clipFinished(f5_arg0.blockPCNavigationEmptyFocusable)
+		end,
+	},
+	Visible = {
+		DefaultClip = function(f6_arg0, f6_arg1)
+			f6_arg0:__resetProperties()
+			f6_arg0:setupElementClipCounter(0)
+		end,
+	},
+}
+CoD.ZMLoadoutPreviewLockedOverlay.__onClose = function(f7_arg0)
+	f7_arg0.UnlockDescription:close()
+	f7_arg0.RankIcon:close()
+	f7_arg0.blockPCNavigationEmptyFocusable:close()
+end

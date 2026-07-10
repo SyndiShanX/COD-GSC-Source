@@ -1,0 +1,391 @@
+require("x64:c7393046816f760")
+require("x64:c9a3c9eb5d5ac59")
+require("x64:7589d159b20010b")
+require("x64:9454efb1a15a291")
+require("x64:8819c673a5c0a5c")
+require("x64:7c03458f023327")
+CoD.VHUDHawkReticle = InheritFrom(LUI.UIElement)
+CoD.VHUDHawkReticle.__defaultWidth = 1920
+CoD.VHUDHawkReticle.__defaultHeight = 1080
+CoD.VHUDHawkReticle.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+	local self = LUI.UIElement.new(f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+	self:setClass(CoD.VHUDHawkReticle)
+	self.id = "VHUDHawkReticle"
+	self.soundSet = "none"
+	self.anyChildUsesUpdateState = true
+	f1_arg0:addElementToPendingUpdateStateList(self)
+	local f1_local1 = nil
+	self.vignette02 = LUI.UIElement.createFake()
+	local f1_local2 = nil
+	self.TiledShaderImage = LUI.UIElement.createFake()
+	local f1_local3 = nil
+	self.vhudhawkbuttonall = LUI.UIElement.createFake()
+	local reticle105OuterTL = LUI.UIImage.new(0, 0, 354, 544, 0, 0, 213.5, 346.5)
+	reticle105OuterTL:setAlpha(0.2)
+	reticle105OuterTL:setImage(RegisterImage(0x566E0B014A6CDAC))
+	reticle105OuterTL:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	self:addElement(reticle105OuterTL)
+	self.reticle105OuterTL = reticle105OuterTL
+	local reticle105OuterBL = LUI.UIImage.new(0, 0, 354, 544, 1, 1, -326.5, -193.5)
+	reticle105OuterBL:setAlpha(0.2)
+	reticle105OuterBL:setXRot(180)
+	reticle105OuterBL:setImage(RegisterImage(0x566E0B014A6CDAC))
+	reticle105OuterBL:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	self:addElement(reticle105OuterBL)
+	self.reticle105OuterBL = reticle105OuterBL
+	local reticle105OuterBR = LUI.UIImage.new(1, 1, -544, -354, 1, 1, -326.5, -193.5)
+	reticle105OuterBR:setAlpha(0.2)
+	reticle105OuterBR:setXRot(180)
+	reticle105OuterBR:setYRot(180)
+	reticle105OuterBR:setImage(RegisterImage(0x566E0B014A6CDAC))
+	reticle105OuterBR:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	self:addElement(reticle105OuterBR)
+	self.reticle105OuterBR = reticle105OuterBR
+	local reticle105OuterTR = LUI.UIImage.new(1, 1, -543, -353, 0, 0, 213.5, 346.5)
+	reticle105OuterTR:setAlpha(0.2)
+	reticle105OuterTR:setYRot(180)
+	reticle105OuterTR:setImage(RegisterImage(0x566E0B014A6CDAC))
+	reticle105OuterTR:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	self:addElement(reticle105OuterTR)
+	self.reticle105OuterTR = reticle105OuterTR
+	local layoutPlusGrid = CoD.vhud_layoutPlusGridLarge.new(f1_arg0, f1_arg1, 0.5, 0.5, -441.5, 441.5, 0.5, 0.5, -321.5, 345.5)
+	self:addElement(layoutPlusGrid)
+	self.layoutPlusGrid = layoutPlusGrid
+	local Health = CoD.VHUDHawkHealth.new(f1_arg0, f1_arg1, 1, 1, -353, 0, 1, 1, -205, 0)
+	Health:linkToElementModel(self, nil, false, function(model)
+		Health:setModel(model, f1_arg1)
+	end)
+	self:addElement(Health)
+	self.Health = Health
+	local FrameSquare = CoD.VHUDHawkFramesquare.new(f1_arg0, f1_arg1, 0.5, 0.5, -960, 960, 0.5, 0.5, -540, 540)
+	FrameSquare:setScale(0.8, 0.8)
+	self:addElement(FrameSquare)
+	self.FrameSquare = FrameSquare
+	local HUDVehiclePrompt4 = nil
+	HUDVehiclePrompt4 = CoD.HUD_VehiclePrompt.new(f1_arg0, f1_arg1, 0.5, 0.5, -102, -2, 1, 1, -113.5, -48.5)
+	HUDVehiclePrompt4:mergeStateConditions({
+		{
+			stateName = "Visible",
+			condition = function(menu, element, event)
+				return AlwaysTrue()
+			end,
+		},
+	})
+	HUDVehiclePrompt4.label:setText(LocalizeToUpperString(0x577B757C1CA9678))
+	HUDVehiclePrompt4.HUDVehiclePromptContainer.KBMText:setText(CoD.BaseUtility.AlreadyLocalized("[{+vehiclemoveup}]"))
+	HUDVehiclePrompt4.HUDVehiclePromptContainer.KBMText:setAlignment(Enum[0x7A5123B654282D2][0x6ED4298C93DC5ED])
+	self:addElement(HUDVehiclePrompt4)
+	self.HUDVehiclePrompt4 = HUDVehiclePrompt4
+	local HUDVehiclePrompt5 = nil
+	HUDVehiclePrompt5 = CoD.HUD_VehiclePrompt.new(f1_arg0, f1_arg1, 0.5, 0.5, 2, 102, 1, 1, -113.5, -48.5)
+	HUDVehiclePrompt5:mergeStateConditions({
+		{
+			stateName = "Visible",
+			condition = function(menu, element, event)
+				return AlwaysTrue()
+			end,
+		},
+	})
+	HUDVehiclePrompt5.label:setText(LocalizeToUpperString(0x9F6A908F9B269AD))
+	HUDVehiclePrompt5.HUDVehiclePromptContainer.KBMText:setText(CoD.BaseUtility.AlreadyLocalized("[{+vehiclemovedown}]"))
+	HUDVehiclePrompt5.HUDVehiclePromptContainer.KBMText:setAlignment(Enum[0x7A5123B654282D2][0x6ED4298C93DC5ED])
+	self:addElement(HUDVehiclePrompt5)
+	self.HUDVehiclePrompt5 = HUDVehiclePrompt5
+	local FuiLayoutTL = LUI.UIImage.new(0, 0, 120, 40, 0, 0, 120, 24)
+	FuiLayoutTL:setAlpha(0.15)
+	FuiLayoutTL:setXRot(180)
+	FuiLayoutTL:setYRot(180)
+	FuiLayoutTL:setImage(RegisterImage(0x5338AA8246DD618))
+	FuiLayoutTL:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	self:addElement(FuiLayoutTL)
+	self.FuiLayoutTL = FuiLayoutTL
+	local FuiLayoutTR = LUI.UIImage.new(1, 1, -133, -53, 0, 0, 120, 24)
+	FuiLayoutTR:setAlpha(0.15)
+	FuiLayoutTR:setXRot(180)
+	FuiLayoutTR:setYRot(180)
+	FuiLayoutTR:setImage(RegisterImage(0x5338AA8246DD618))
+	FuiLayoutTR:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	self:addElement(FuiLayoutTR)
+	self.FuiLayoutTR = FuiLayoutTR
+	local StripeL = LUI.UIImage.new(0, 0, 134, 354, 0, 0, 34.5, 44.5)
+	StripeL:setAlpha(0.05)
+	StripeL:setImage(RegisterImage(0x5AFE39B9B2E68FE))
+	StripeL:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	self:addElement(StripeL)
+	self.StripeL = StripeL
+	local StripeR = LUI.UIImage.new(1, 1, -353, -133, 0, 0, 34.5, 44.5)
+	StripeR:setAlpha(0.05)
+	StripeR:setImage(RegisterImage(0x5AFE39B9B2E68FE))
+	StripeR:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	self:addElement(StripeR)
+	self.StripeR = StripeR
+	local CommonSearchingBar = CoD.CommonSearchingBar.new(f1_arg0, f1_arg1, 0, 0, 376, 498, 0, 0, 224.5, 246.5)
+	self:addElement(CommonSearchingBar)
+	self.CommonSearchingBar = CommonSearchingBar
+	local SquareOthers = CoD.AARLevelCommonBoxes.new(f1_arg0, f1_arg1, 0, 0, 1368.5, 1416.5, 0, 0, 853, 866)
+	SquareOthers:setAlpha(0.5)
+	self:addElement(SquareOthers)
+	self.SquareOthers = SquareOthers
+	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)
+	if PostLoadFunc then
+		PostLoadFunc(self, f1_arg1, f1_arg0)
+	end
+	return self
+end
+CoD.VHUDHawkReticle.__resetProperties = function(f5_arg0)
+	f5_arg0.FuiLayoutTR:completeAnimation()
+	f5_arg0.FuiLayoutTL:completeAnimation()
+	f5_arg0.StripeL:completeAnimation()
+	f5_arg0.StripeR:completeAnimation()
+	f5_arg0.reticle105OuterTR:completeAnimation()
+	f5_arg0.reticle105OuterBR:completeAnimation()
+	f5_arg0.reticle105OuterBL:completeAnimation()
+	f5_arg0.reticle105OuterTL:completeAnimation()
+	f5_arg0.layoutPlusGrid:completeAnimation()
+	f5_arg0.FrameSquare:completeAnimation()
+	f5_arg0.FuiLayoutTR:setAlpha(0.15)
+	f5_arg0.FuiLayoutTL:setAlpha(0.15)
+	f5_arg0.StripeL:setAlpha(0.05)
+	f5_arg0.StripeR:setAlpha(0.05)
+	f5_arg0.reticle105OuterTR:setLeftRight(1, 1, -543, -353)
+	f5_arg0.reticle105OuterTR:setTopBottom(0, 0, 213.5, 346.5)
+	f5_arg0.reticle105OuterTR:setAlpha(0.2)
+	f5_arg0.reticle105OuterBR:setLeftRight(1, 1, -544, -354)
+	f5_arg0.reticle105OuterBR:setTopBottom(1, 1, -326.5, -193.5)
+	f5_arg0.reticle105OuterBR:setAlpha(0.2)
+	f5_arg0.reticle105OuterBL:setLeftRight(0, 0, 354, 544)
+	f5_arg0.reticle105OuterBL:setTopBottom(1, 1, -326.5, -193.5)
+	f5_arg0.reticle105OuterBL:setAlpha(0.2)
+	f5_arg0.reticle105OuterTL:setLeftRight(0, 0, 354, 544)
+	f5_arg0.reticle105OuterTL:setTopBottom(0, 0, 213.5, 346.5)
+	f5_arg0.reticle105OuterTL:setAlpha(0.2)
+	f5_arg0.layoutPlusGrid:setAlpha(1)
+	f5_arg0.FrameSquare:setAlpha(1)
+end
+CoD.VHUDHawkReticle.__clipsPerState = {
+	DefaultState = {
+		DefaultClip = function(f6_arg0, f6_arg1)
+			f6_arg0:__resetProperties()
+			f6_arg0:setupElementClipCounter(10)
+			local f6_local0 = function(f7_arg0)
+				local f7_local0 = function(f8_arg0)
+					local f8_local0 = function(f9_arg0)
+						f9_arg0:beginAnimation(19)
+						f9_arg0:setLeftRight(0, 0, 354, 544)
+						f9_arg0:setTopBottom(0, 0, 213.5, 346.5)
+						f9_arg0:setAlpha(0.2)
+						f9_arg0:registerEventHandler("transition_complete_keyframe", f6_arg0.clipFinished)
+					end
+					f8_arg0:beginAnimation(80)
+					f8_arg0:setLeftRight(0, 0, 358, 548)
+					f8_arg0:setTopBottom(0, 0, 216.5, 349.5)
+					f8_arg0:setAlpha(0.3)
+					f8_arg0:registerEventHandler("transition_complete_keyframe", f8_local0)
+				end
+				f6_arg0.reticle105OuterTL:beginAnimation(100)
+				f6_arg0.reticle105OuterTL:registerEventHandler("interrupted_keyframe", f6_arg0.clipInterrupted)
+				f6_arg0.reticle105OuterTL:registerEventHandler("transition_complete_keyframe", f7_local0)
+			end
+			f6_arg0.reticle105OuterTL:completeAnimation()
+			f6_arg0.reticle105OuterTL:setLeftRight(0, 0, 314, 504)
+			f6_arg0.reticle105OuterTL:setTopBottom(0, 0, 183.5, 316.5)
+			f6_arg0.reticle105OuterTL:setAlpha(0)
+			f6_local0(f6_arg0.reticle105OuterTL)
+			local f6_local1 = function(f10_arg0)
+				local f10_local0 = function(f11_arg0)
+					local f11_local0 = function(f12_arg0)
+						f12_arg0:beginAnimation(19)
+						f12_arg0:setLeftRight(0, 0, 354, 544)
+						f12_arg0:setTopBottom(1, 1, -326.5, -193.5)
+						f12_arg0:setAlpha(0.2)
+						f12_arg0:registerEventHandler("transition_complete_keyframe", f6_arg0.clipFinished)
+					end
+					f11_arg0:beginAnimation(80)
+					f11_arg0:setLeftRight(0, 0, 358, 548)
+					f11_arg0:setTopBottom(1, 1, -329.5, -196.5)
+					f11_arg0:setAlpha(0.3)
+					f11_arg0:registerEventHandler("transition_complete_keyframe", f11_local0)
+				end
+				f6_arg0.reticle105OuterBL:beginAnimation(100)
+				f6_arg0.reticle105OuterBL:registerEventHandler("interrupted_keyframe", f6_arg0.clipInterrupted)
+				f6_arg0.reticle105OuterBL:registerEventHandler("transition_complete_keyframe", f10_local0)
+			end
+			f6_arg0.reticle105OuterBL:completeAnimation()
+			f6_arg0.reticle105OuterBL:setLeftRight(0, 0, 314, 504)
+			f6_arg0.reticle105OuterBL:setTopBottom(1, 1, -296.5, -163.5)
+			f6_arg0.reticle105OuterBL:setAlpha(0)
+			f6_local1(f6_arg0.reticle105OuterBL)
+			local f6_local2 = function(f13_arg0)
+				local f13_local0 = function(f14_arg0)
+					local f14_local0 = function(f15_arg0)
+						f15_arg0:beginAnimation(19)
+						f15_arg0:setLeftRight(1, 1, -544, -354)
+						f15_arg0:setTopBottom(1, 1, -326.5, -193.5)
+						f15_arg0:setAlpha(0.2)
+						f15_arg0:registerEventHandler("transition_complete_keyframe", f6_arg0.clipFinished)
+					end
+					f14_arg0:beginAnimation(80)
+					f14_arg0:setLeftRight(1, 1, -548, -358)
+					f14_arg0:setTopBottom(1, 1, -329.5, -196.5)
+					f14_arg0:setAlpha(0.3)
+					f14_arg0:registerEventHandler("transition_complete_keyframe", f14_local0)
+				end
+				f6_arg0.reticle105OuterBR:beginAnimation(100)
+				f6_arg0.reticle105OuterBR:registerEventHandler("interrupted_keyframe", f6_arg0.clipInterrupted)
+				f6_arg0.reticle105OuterBR:registerEventHandler("transition_complete_keyframe", f13_local0)
+			end
+			f6_arg0.reticle105OuterBR:completeAnimation()
+			f6_arg0.reticle105OuterBR:setLeftRight(1, 1, -504, -314)
+			f6_arg0.reticle105OuterBR:setTopBottom(1, 1, -296.5, -163.5)
+			f6_arg0.reticle105OuterBR:setAlpha(0)
+			f6_local2(f6_arg0.reticle105OuterBR)
+			local f6_local3 = function(f16_arg0)
+				local f16_local0 = function(f17_arg0)
+					local f17_local0 = function(f18_arg0)
+						f18_arg0:beginAnimation(19)
+						f18_arg0:setLeftRight(1, 1, -543, -353)
+						f18_arg0:setTopBottom(0, 0, 213.5, 346.5)
+						f18_arg0:setAlpha(0.2)
+						f18_arg0:registerEventHandler("transition_complete_keyframe", f6_arg0.clipFinished)
+					end
+					f17_arg0:beginAnimation(80)
+					f17_arg0:setLeftRight(1, 1, -547, -357)
+					f17_arg0:setTopBottom(0, 0, 216.5, 349.5)
+					f17_arg0:setAlpha(0.3)
+					f17_arg0:registerEventHandler("transition_complete_keyframe", f17_local0)
+				end
+				f6_arg0.reticle105OuterTR:beginAnimation(100)
+				f6_arg0.reticle105OuterTR:registerEventHandler("interrupted_keyframe", f6_arg0.clipInterrupted)
+				f6_arg0.reticle105OuterTR:registerEventHandler("transition_complete_keyframe", f16_local0)
+			end
+			f6_arg0.reticle105OuterTR:completeAnimation()
+			f6_arg0.reticle105OuterTR:setLeftRight(1, 1, -503, -313)
+			f6_arg0.reticle105OuterTR:setTopBottom(0, 0, 183.5, 316.5)
+			f6_arg0.reticle105OuterTR:setAlpha(0)
+			f6_local3(f6_arg0.reticle105OuterTR)
+			local f6_local4 = function(f19_arg0)
+				local f19_local0 = function(f20_arg0)
+					local f20_local0 = function(f21_arg0)
+						f21_arg0:beginAnimation(80)
+						f21_arg0:setAlpha(0.8)
+						f21_arg0:registerEventHandler("transition_complete_keyframe", f6_arg0.clipFinished)
+					end
+					f20_arg0:beginAnimation(149)
+					f20_arg0:setAlpha(1)
+					f20_arg0:registerEventHandler("transition_complete_keyframe", f20_local0)
+				end
+				f6_arg0.layoutPlusGrid:beginAnimation(170)
+				f6_arg0.layoutPlusGrid:registerEventHandler("interrupted_keyframe", f6_arg0.clipInterrupted)
+				f6_arg0.layoutPlusGrid:registerEventHandler("transition_complete_keyframe", f19_local0)
+			end
+			f6_arg0.layoutPlusGrid:completeAnimation()
+			f6_arg0.layoutPlusGrid:setAlpha(0)
+			f6_local4(f6_arg0.layoutPlusGrid)
+			local f6_local5 = function(f22_arg0)
+				local f22_local0 = function(f23_arg0)
+					local f23_local0 = function(f24_arg0)
+						local f24_local0 = function(f25_arg0)
+							f25_arg0:beginAnimation(149)
+							f25_arg0:setAlpha(1)
+							f25_arg0:registerEventHandler("transition_complete_keyframe", f6_arg0.clipFinished)
+						end
+						f24_arg0:beginAnimation(50)
+						f24_arg0:setAlpha(0)
+						f24_arg0:registerEventHandler("transition_complete_keyframe", f24_local0)
+					end
+					f23_arg0:beginAnimation(120)
+					f23_arg0:setAlpha(1)
+					f23_arg0:registerEventHandler("transition_complete_keyframe", f23_local0)
+				end
+				f6_arg0.FrameSquare:beginAnimation(100)
+				f6_arg0.FrameSquare:registerEventHandler("interrupted_keyframe", f6_arg0.clipInterrupted)
+				f6_arg0.FrameSquare:registerEventHandler("transition_complete_keyframe", f22_local0)
+			end
+			f6_arg0.FrameSquare:completeAnimation()
+			f6_arg0.FrameSquare:setAlpha(0)
+			f6_local5(f6_arg0.FrameSquare)
+			local f6_local6 = function(f26_arg0)
+				local f26_local0 = function(f27_arg0)
+					local f27_local0 = function(f28_arg0)
+						f28_arg0:beginAnimation(49)
+						f28_arg0:setAlpha(0.1)
+						f28_arg0:registerEventHandler("transition_complete_keyframe", f6_arg0.clipFinished)
+					end
+					f27_arg0:beginAnimation(100)
+					f27_arg0:setAlpha(0.2)
+					f27_arg0:registerEventHandler("transition_complete_keyframe", f27_local0)
+				end
+				f6_arg0.FuiLayoutTL:beginAnimation(170)
+				f6_arg0.FuiLayoutTL:registerEventHandler("interrupted_keyframe", f6_arg0.clipInterrupted)
+				f6_arg0.FuiLayoutTL:registerEventHandler("transition_complete_keyframe", f26_local0)
+			end
+			f6_arg0.FuiLayoutTL:completeAnimation()
+			f6_arg0.FuiLayoutTL:setAlpha(0)
+			f6_local6(f6_arg0.FuiLayoutTL)
+			local f6_local7 = function(f29_arg0)
+				local f29_local0 = function(f30_arg0)
+					local f30_local0 = function(f31_arg0)
+						f31_arg0:beginAnimation(49)
+						f31_arg0:setAlpha(0.1)
+						f31_arg0:registerEventHandler("transition_complete_keyframe", f6_arg0.clipFinished)
+					end
+					f30_arg0:beginAnimation(100)
+					f30_arg0:setAlpha(0.2)
+					f30_arg0:registerEventHandler("transition_complete_keyframe", f30_local0)
+				end
+				f6_arg0.FuiLayoutTR:beginAnimation(170)
+				f6_arg0.FuiLayoutTR:registerEventHandler("interrupted_keyframe", f6_arg0.clipInterrupted)
+				f6_arg0.FuiLayoutTR:registerEventHandler("transition_complete_keyframe", f29_local0)
+			end
+			f6_arg0.FuiLayoutTR:completeAnimation()
+			f6_arg0.FuiLayoutTR:setAlpha(0)
+			f6_local7(f6_arg0.FuiLayoutTR)
+			local f6_local8 = function(f32_arg0)
+				local f32_local0 = function(f33_arg0)
+					local f33_local0 = function(f34_arg0)
+						f34_arg0:beginAnimation(49)
+						f34_arg0:setAlpha(0.05)
+						f34_arg0:registerEventHandler("transition_complete_keyframe", f6_arg0.clipFinished)
+					end
+					f33_arg0:beginAnimation(100)
+					f33_arg0:setAlpha(0.1)
+					f33_arg0:registerEventHandler("transition_complete_keyframe", f33_local0)
+				end
+				f6_arg0.StripeL:beginAnimation(170)
+				f6_arg0.StripeL:registerEventHandler("interrupted_keyframe", f6_arg0.clipInterrupted)
+				f6_arg0.StripeL:registerEventHandler("transition_complete_keyframe", f32_local0)
+			end
+			f6_arg0.StripeL:completeAnimation()
+			f6_arg0.StripeL:setAlpha(0)
+			f6_local8(f6_arg0.StripeL)
+			local f6_local9 = function(f35_arg0)
+				local f35_local0 = function(f36_arg0)
+					local f36_local0 = function(f37_arg0)
+						f37_arg0:beginAnimation(49)
+						f37_arg0:setAlpha(0.05)
+						f37_arg0:registerEventHandler("transition_complete_keyframe", f6_arg0.clipFinished)
+					end
+					f36_arg0:beginAnimation(100)
+					f36_arg0:setAlpha(0.1)
+					f36_arg0:registerEventHandler("transition_complete_keyframe", f36_local0)
+				end
+				f6_arg0.StripeR:beginAnimation(170)
+				f6_arg0.StripeR:registerEventHandler("interrupted_keyframe", f6_arg0.clipInterrupted)
+				f6_arg0.StripeR:registerEventHandler("transition_complete_keyframe", f35_local0)
+			end
+			f6_arg0.StripeR:completeAnimation()
+			f6_arg0.StripeR:setAlpha(0)
+			f6_local9(f6_arg0.StripeR)
+		end,
+	},
+}
+CoD.VHUDHawkReticle.__onClose = function(f38_arg0)
+	f38_arg0.vhudhawkbuttonall:close()
+	f38_arg0.layoutPlusGrid:close()
+	f38_arg0.Health:close()
+	f38_arg0.FrameSquare:close()
+	f38_arg0.HUDVehiclePrompt4:close()
+	f38_arg0.HUDVehiclePrompt5:close()
+	f38_arg0.CommonSearchingBar:close()
+	f38_arg0.SquareOthers:close()
+end

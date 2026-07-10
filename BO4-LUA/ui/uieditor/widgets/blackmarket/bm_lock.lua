@@ -1,0 +1,39 @@
+CoD.BM_Lock = InheritFrom(LUI.UIElement)
+CoD.BM_Lock.__defaultWidth = 48
+CoD.BM_Lock.__defaultHeight = 48
+CoD.BM_Lock.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+	local self = LUI.UIElement.new(f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+	self:setClass(CoD.BM_Lock)
+	self.id = "BM_Lock"
+	self.soundSet = "FrontendMain"
+	f1_arg0:addElementToPendingUpdateStateList(self)
+	local lockedIcon0 = LUI.UIImage.new(-0.62, 1, 0, 0, -0.62, 1, 3, 3)
+	lockedIcon0:setImage(RegisterImage(0x410BF8B0F9878A4))
+	self:addElement(lockedIcon0)
+	self.lockedIcon0 = lockedIcon0
+	local lockedIcon = LUI.UIImage.new(-0.62, 1, 0, 0, -0.62, 1, 3, 3)
+	lockedIcon:setAlpha(0.47)
+	lockedIcon:setImage(RegisterImage(0x410BF8B0F9878A4))
+	lockedIcon:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	self:addElement(lockedIcon)
+	self.lockedIcon = lockedIcon
+	if PostLoadFunc then
+		PostLoadFunc(self, f1_arg1, f1_arg0)
+	end
+	return self
+end
+CoD.BM_Lock.__resetProperties = function(f2_arg0)
+	f2_arg0.lockedIcon:completeAnimation()
+	f2_arg0.lockedIcon:setAlpha(0.47)
+end
+CoD.BM_Lock.__clipsPerState = {
+	DefaultState = {
+		DefaultClip = function(f3_arg0, f3_arg1)
+			f3_arg0:__resetProperties()
+			f3_arg0:setupElementClipCounter(1)
+			f3_arg0.lockedIcon:completeAnimation()
+			f3_arg0.lockedIcon:setAlpha(0)
+			f3_arg0.clipFinished(f3_arg0.lockedIcon)
+		end,
+	},
+}

@@ -1,0 +1,27 @@
+require("x64:f478c5965b881bd")
+CoD.InspectionEmblemWidget = InheritFrom(LUI.UIElement)
+CoD.InspectionEmblemWidget.__defaultWidth = 348
+CoD.InspectionEmblemWidget.__defaultHeight = 348
+CoD.InspectionEmblemWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+	local self = LUI.UIElement.new(f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+	self:setClass(CoD.InspectionEmblemWidget)
+	self.id = "InspectionEmblemWidget"
+	self.soundSet = "ModeSelection"
+	local EmblemAdd = CoD.InspectionEmblemInternalWidget.new(f1_arg0, f1_arg1, 0, 0, 0, 348, 0, 0, 0, 348)
+	EmblemAdd:linkToElementModel(self, "xuid", true, function(model)
+		local f2_local0 = model:get()
+		if f2_local0 ~= nil then
+			EmblemAdd.emblem:setupPlayerEmblemByXUID(f2_local0)
+		end
+	end)
+	self:addElement(EmblemAdd)
+	self.EmblemAdd = EmblemAdd
+	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)
+	if PostLoadFunc then
+		PostLoadFunc(self, f1_arg1, f1_arg0)
+	end
+	return self
+end
+CoD.InspectionEmblemWidget.__onClose = function(f3_arg0)
+	f3_arg0.EmblemAdd:close()
+end

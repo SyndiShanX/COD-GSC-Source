@@ -1,0 +1,241 @@
+CoD.PC_MultiItemPickup_Scrollbar = InheritFrom(LUI.UIElement)
+CoD.PC_MultiItemPickup_Scrollbar.__defaultWidth = 15
+CoD.PC_MultiItemPickup_Scrollbar.__defaultHeight = 290
+CoD.PC_MultiItemPickup_Scrollbar.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+	local self = LUI.UIElement.new(f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+	self:setClass(CoD.PC_MultiItemPickup_Scrollbar)
+	self.id = "PC_MultiItemPickup_Scrollbar"
+	self.soundSet = "none"
+	f1_arg0:addElementToPendingUpdateStateList(self)
+	local topArrow = LUI.UIImage.new(0, 0, 0, 15, 0, 0, 0, 15)
+	topArrow:setRGB(0.55, 0.54, 0.49)
+	topArrow:setAlpha(0)
+	topArrow:setImage(RegisterImage(0x50F3B2B4549D1B9))
+	self:addElement(topArrow)
+	self.topArrow = topArrow
+	local bottomArrow = LUI.UIImage.new(0, 0, 0, 15, 1, 1, -15, 0)
+	bottomArrow:setRGB(0.55, 0.54, 0.49)
+	bottomArrow:setAlpha(0)
+	bottomArrow:setImage(RegisterImage(0x1EED26FD6433420))
+	self:addElement(bottomArrow)
+	self.bottomArrow = bottomArrow
+	local sliderBorder = LUI.UIImage.new(0, 0, 0, 15, 0, 1, 6, -6)
+	sliderBorder:setRGB(0.04, 0.04, 0.04)
+	sliderBorder:setAlpha(0.7)
+	self:addElement(sliderBorder)
+	self.sliderBorder = sliderBorder
+	local slider = LUI.UIImage.new(0, 0, 0, 15, 0, 1, 6, -6)
+	slider:setRGB(0.55, 0.54, 0.49)
+	slider:setAlpha(0.7)
+	self:addElement(slider)
+	self.slider = slider
+	if PostLoadFunc then
+		PostLoadFunc(self, f1_arg1, f1_arg0)
+	end
+	return self
+end
+CoD.PC_MultiItemPickup_Scrollbar.__resetProperties = function(f2_arg0)
+	f2_arg0.slider:completeAnimation()
+	f2_arg0.topArrow:completeAnimation()
+	f2_arg0.bottomArrow:completeAnimation()
+	f2_arg0.slider:setAlpha(0.7)
+	f2_arg0.topArrow:setAlpha(0)
+	f2_arg0.bottomArrow:setAlpha(0)
+end
+CoD.PC_MultiItemPickup_Scrollbar.__clipsPerState = {
+	DefaultState = {
+		DefaultClip = function(f3_arg0, f3_arg1)
+			f3_arg0:__resetProperties()
+			f3_arg0:setupElementClipCounter(0)
+		end,
+		Focus = function(f4_arg0, f4_arg1)
+			f4_arg0:__resetProperties()
+			f4_arg0:setupElementClipCounter(1)
+			f4_arg0.slider:completeAnimation()
+			f4_arg0.slider:setAlpha(1)
+			f4_arg0.clipFinished(f4_arg0.slider)
+		end,
+		GainFocus = function(f5_arg0, f5_arg1)
+			f5_arg0:__resetProperties()
+			f5_arg0:setupElementClipCounter(1)
+			local f5_local0 = function(f6_arg0)
+				f5_arg0.slider:beginAnimation(150)
+				f5_arg0.slider:setAlpha(1)
+				f5_arg0.slider:registerEventHandler("interrupted_keyframe", f5_arg0.clipInterrupted)
+				f5_arg0.slider:registerEventHandler("transition_complete_keyframe", f5_arg0.clipFinished)
+			end
+			f5_arg0.slider:completeAnimation()
+			f5_arg0.slider:setAlpha(0.7)
+			f5_local0(f5_arg0.slider)
+		end,
+		LoseFocus = function(f7_arg0, f7_arg1)
+			f7_arg0:__resetProperties()
+			f7_arg0:setupElementClipCounter(1)
+			local f7_local0 = function(f8_arg0)
+				f7_arg0.slider:beginAnimation(150)
+				f7_arg0.slider:setAlpha(0.7)
+				f7_arg0.slider:registerEventHandler("interrupted_keyframe", f7_arg0.clipInterrupted)
+				f7_arg0.slider:registerEventHandler("transition_complete_keyframe", f7_arg0.clipFinished)
+			end
+			f7_arg0.slider:completeAnimation()
+			f7_arg0.slider:setAlpha(1)
+			f7_local0(f7_arg0.slider)
+		end,
+	},
+	AtTop = {
+		DefaultClip = function(f9_arg0, f9_arg1)
+			f9_arg0:__resetProperties()
+			f9_arg0:setupElementClipCounter(1)
+			f9_arg0.topArrow:completeAnimation()
+			f9_arg0.topArrow:setAlpha(0)
+			f9_arg0.clipFinished(f9_arg0.topArrow)
+		end,
+		Focus = function(f10_arg0, f10_arg1)
+			f10_arg0:__resetProperties()
+			f10_arg0:setupElementClipCounter(1)
+			f10_arg0.slider:completeAnimation()
+			f10_arg0.slider:setAlpha(1)
+			f10_arg0.clipFinished(f10_arg0.slider)
+		end,
+		GainFocus = function(f11_arg0, f11_arg1)
+			f11_arg0:__resetProperties()
+			f11_arg0:setupElementClipCounter(2)
+			f11_arg0.topArrow:completeAnimation()
+			f11_arg0.topArrow:setAlpha(0)
+			f11_arg0.clipFinished(f11_arg0.topArrow)
+			local f11_local0 = function(f12_arg0)
+				f11_arg0.slider:beginAnimation(150)
+				f11_arg0.slider:setAlpha(1)
+				f11_arg0.slider:registerEventHandler("interrupted_keyframe", f11_arg0.clipInterrupted)
+				f11_arg0.slider:registerEventHandler("transition_complete_keyframe", f11_arg0.clipFinished)
+			end
+			f11_arg0.slider:completeAnimation()
+			f11_arg0.slider:setAlpha(0.7)
+			f11_local0(f11_arg0.slider)
+		end,
+		LoseFocus = function(f13_arg0, f13_arg1)
+			f13_arg0:__resetProperties()
+			f13_arg0:setupElementClipCounter(2)
+			f13_arg0.topArrow:completeAnimation()
+			f13_arg0.topArrow:setAlpha(0)
+			f13_arg0.clipFinished(f13_arg0.topArrow)
+			local f13_local0 = function(f14_arg0)
+				f13_arg0.slider:beginAnimation(150)
+				f13_arg0.slider:setAlpha(0.7)
+				f13_arg0.slider:registerEventHandler("interrupted_keyframe", f13_arg0.clipInterrupted)
+				f13_arg0.slider:registerEventHandler("transition_complete_keyframe", f13_arg0.clipFinished)
+			end
+			f13_arg0.slider:completeAnimation()
+			f13_arg0.slider:setAlpha(1)
+			f13_local0(f13_arg0.slider)
+		end,
+	},
+	AtTopAndBottom = {
+		DefaultClip = function(f15_arg0, f15_arg1)
+			f15_arg0:__resetProperties()
+			f15_arg0:setupElementClipCounter(3)
+			f15_arg0.topArrow:completeAnimation()
+			f15_arg0.topArrow:setAlpha(0)
+			f15_arg0.clipFinished(f15_arg0.topArrow)
+			f15_arg0.bottomArrow:completeAnimation()
+			f15_arg0.bottomArrow:setAlpha(0)
+			f15_arg0.clipFinished(f15_arg0.bottomArrow)
+			f15_arg0.slider:completeAnimation()
+			f15_arg0.slider:setAlpha(0)
+			f15_arg0.clipFinished(f15_arg0.slider)
+		end,
+		Focus = function(f16_arg0, f16_arg1)
+			f16_arg0:__resetProperties()
+			f16_arg0:setupElementClipCounter(1)
+			f16_arg0.slider:completeAnimation()
+			f16_arg0.slider:setAlpha(1)
+			f16_arg0.clipFinished(f16_arg0.slider)
+		end,
+		GainFocus = function(f17_arg0, f17_arg1)
+			f17_arg0:__resetProperties()
+			f17_arg0:setupElementClipCounter(3)
+			f17_arg0.topArrow:completeAnimation()
+			f17_arg0.topArrow:setAlpha(0)
+			f17_arg0.clipFinished(f17_arg0.topArrow)
+			f17_arg0.bottomArrow:completeAnimation()
+			f17_arg0.bottomArrow:setAlpha(0)
+			f17_arg0.clipFinished(f17_arg0.bottomArrow)
+			local f17_local0 = function(f18_arg0)
+				f17_arg0.slider:beginAnimation(150)
+				f17_arg0.slider:setAlpha(1)
+				f17_arg0.slider:registerEventHandler("interrupted_keyframe", f17_arg0.clipInterrupted)
+				f17_arg0.slider:registerEventHandler("transition_complete_keyframe", f17_arg0.clipFinished)
+			end
+			f17_arg0.slider:completeAnimation()
+			f17_arg0.slider:setAlpha(0)
+			f17_local0(f17_arg0.slider)
+		end,
+		LoseFocus = function(f19_arg0, f19_arg1)
+			f19_arg0:__resetProperties()
+			f19_arg0:setupElementClipCounter(3)
+			f19_arg0.topArrow:completeAnimation()
+			f19_arg0.topArrow:setAlpha(0)
+			f19_arg0.clipFinished(f19_arg0.topArrow)
+			f19_arg0.bottomArrow:completeAnimation()
+			f19_arg0.bottomArrow:setAlpha(0)
+			f19_arg0.clipFinished(f19_arg0.bottomArrow)
+			local f19_local0 = function(f20_arg0)
+				f19_arg0.slider:beginAnimation(150)
+				f19_arg0.slider:setAlpha(0)
+				f19_arg0.slider:registerEventHandler("interrupted_keyframe", f19_arg0.clipInterrupted)
+				f19_arg0.slider:registerEventHandler("transition_complete_keyframe", f19_arg0.clipFinished)
+			end
+			f19_arg0.slider:completeAnimation()
+			f19_arg0.slider:setAlpha(1)
+			f19_local0(f19_arg0.slider)
+		end,
+	},
+	AtBottom = {
+		DefaultClip = function(f21_arg0, f21_arg1)
+			f21_arg0:__resetProperties()
+			f21_arg0:setupElementClipCounter(1)
+			f21_arg0.bottomArrow:completeAnimation()
+			f21_arg0.bottomArrow:setAlpha(0)
+			f21_arg0.clipFinished(f21_arg0.bottomArrow)
+		end,
+		Focus = function(f22_arg0, f22_arg1)
+			f22_arg0:__resetProperties()
+			f22_arg0:setupElementClipCounter(1)
+			f22_arg0.slider:completeAnimation()
+			f22_arg0.slider:setAlpha(1)
+			f22_arg0.clipFinished(f22_arg0.slider)
+		end,
+		GainFocus = function(f23_arg0, f23_arg1)
+			f23_arg0:__resetProperties()
+			f23_arg0:setupElementClipCounter(2)
+			f23_arg0.bottomArrow:completeAnimation()
+			f23_arg0.bottomArrow:setAlpha(0)
+			f23_arg0.clipFinished(f23_arg0.bottomArrow)
+			local f23_local0 = function(f24_arg0)
+				f23_arg0.slider:beginAnimation(150)
+				f23_arg0.slider:setAlpha(1)
+				f23_arg0.slider:registerEventHandler("interrupted_keyframe", f23_arg0.clipInterrupted)
+				f23_arg0.slider:registerEventHandler("transition_complete_keyframe", f23_arg0.clipFinished)
+			end
+			f23_arg0.slider:completeAnimation()
+			f23_arg0.slider:setAlpha(0.7)
+			f23_local0(f23_arg0.slider)
+		end,
+		LoseFocus = function(f25_arg0, f25_arg1)
+			f25_arg0:__resetProperties()
+			f25_arg0:setupElementClipCounter(2)
+			f25_arg0.bottomArrow:completeAnimation()
+			f25_arg0.bottomArrow:setAlpha(0)
+			f25_arg0.clipFinished(f25_arg0.bottomArrow)
+			local f25_local0 = function(f26_arg0)
+				f25_arg0.slider:beginAnimation(150)
+				f25_arg0.slider:setAlpha(0.7)
+				f25_arg0.slider:registerEventHandler("interrupted_keyframe", f25_arg0.clipInterrupted)
+				f25_arg0.slider:registerEventHandler("transition_complete_keyframe", f25_arg0.clipFinished)
+			end
+			f25_arg0.slider:completeAnimation()
+			f25_arg0.slider:setAlpha(1)
+			f25_local0(f25_arg0.slider)
+		end,
+	},
+}

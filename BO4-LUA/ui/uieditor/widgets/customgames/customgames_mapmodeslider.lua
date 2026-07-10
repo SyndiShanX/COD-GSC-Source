@@ -1,0 +1,555 @@
+require("x64:e38247e77bdfbff")
+require("x64:6e37b4dc09c830f")
+require("x64:a9255c570c68aa8")
+CoD.CustomGames_MapModeSlider = InheritFrom(LUI.UIElement)
+CoD.CustomGames_MapModeSlider.__defaultWidth = 400
+CoD.CustomGames_MapModeSlider.__defaultHeight = 50
+CoD.CustomGames_MapModeSlider.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+	local self = LUI.UIElement.new(f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+	self:setClass(CoD.CustomGames_MapModeSlider)
+	self.id = "CustomGames_MapModeSlider"
+	self.soundSet = "ChooseDecal"
+	self.anyChildUsesUpdateState = true
+	f1_arg0:addElementToPendingUpdateStateList(self)
+	local ButtonBG = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
+	ButtonBG:setRGB(0.38, 0.38, 0.38)
+	ButtonBG:setAlpha(0.8)
+	ButtonBG:setImage(RegisterImage(0xE3211044E61E1BB))
+	self:addElement(ButtonBG)
+	self.ButtonBG = ButtonBG
+	local SelectorOverlay = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
+	SelectorOverlay:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
+	SelectorOverlay:setAlpha(0)
+	self:addElement(SelectorOverlay)
+	self.SelectorOverlay = SelectorOverlay
+	local MapModeLabel = LUI.UIText.new(0, 0, 16, 341, 0, 0, 14.5, 35.5)
+	MapModeLabel:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
+	MapModeLabel:setTTF("ttmussels_regular")
+	MapModeLabel:setAlignment(Enum[0x7A5123B654282D2][0x58C8A85F2048829])
+	MapModeLabel:setAlignment(Enum[0x7A5123B654282D2][0x6ED4298C93DC5ED])
+	MapModeLabel:linkToElementModel(self, "name", true, function(model)
+		local f2_local0 = model:get()
+		if f2_local0 ~= nil then
+			MapModeLabel:setText(f2_local0)
+		end
+	end)
+	self:addElement(MapModeLabel)
+	self.MapModeLabel = MapModeLabel
+	local OfficialGameIcon = CoD.CustomGames_OfficialBadgeIcon.new(f1_arg0, f1_arg1, 1, 1, -46, -4, 0, 0, 4, 46)
+	OfficialGameIcon:mergeStateConditions({
+		{
+			stateName = "IsOfficial",
+			condition = function(menu, element, event)
+				return CoD.ModelUtility.IsSelfModelValueTrue(element, f1_arg1, "isOfficial")
+			end,
+		},
+	})
+	OfficialGameIcon:linkToElementModel(OfficialGameIcon, "isOfficial", true, function(model)
+		f1_arg0:updateElementState(OfficialGameIcon, {
+			name = "model_validation",
+			menu = f1_arg0,
+			controller = f1_arg1,
+			modelValue = model:get(),
+			modelName = "isOfficial",
+		})
+	end)
+	OfficialGameIcon:linkToElementModel(self, nil, false, function(model)
+		OfficialGameIcon:setModel(model, f1_arg1)
+	end)
+	self:addElement(OfficialGameIcon)
+	self.OfficialGameIcon = OfficialGameIcon
+	local CurrentSelectedIndicator = CoD.StartMenu_Options_CustomSettingsIndicator.new(f1_arg0, f1_arg1, 0, 0, 2, 5, 0, 0, 2, 48)
+	CurrentSelectedIndicator:mergeStateConditions({
+		{
+			stateName = "Visible",
+			condition = function(menu, element, event)
+				return AlwaysTrue()
+			end,
+		},
+	})
+	CurrentSelectedIndicator:linkToElementModel(self, nil, false, function(model)
+		CurrentSelectedIndicator:setModel(model, f1_arg1)
+	end)
+	self:addElement(CurrentSelectedIndicator)
+	self.CurrentSelectedIndicator = CurrentSelectedIndicator
+	local TopBarFocus = LUI.UIImage.new(0, 0, -28.5, 26.5, 0.5, 0.5, -3, 3)
+	TopBarFocus:setAlpha(0)
+	TopBarFocus:setZRot(-90)
+	TopBarFocus:setImage(RegisterImage(0x7E8B272A3927DAB))
+	TopBarFocus:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	self:addElement(TopBarFocus)
+	self.TopBarFocus = TopBarFocus
+	local ItemFrameAdd = LUI.UIImage.new(0, 0, -3.5, 403.5, 0, 0, -1, 51)
+	ItemFrameAdd:setAlpha(0)
+	ItemFrameAdd:setImage(RegisterImage(0xC2AE59F4FA74812))
+	ItemFrameAdd:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	ItemFrameAdd:setShaderVector(0, 0, 0, 0, 0)
+	ItemFrameAdd:setupNineSliceShader(12, 164)
+	self:addElement(ItemFrameAdd)
+	self.ItemFrameAdd = ItemFrameAdd
+	local FrameSelected = LUI.UIImage.new(0, 0, -3.5, 403.5, 0, 0, -3.5, 53.5)
+	FrameSelected:setAlpha(0)
+	FrameSelected:setImage(RegisterImage(0xCB07CCC28498CB2))
+	FrameSelected:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	FrameSelected:setShaderVector(0, 0, 0, 0, 0)
+	FrameSelected:setupNineSliceShader(8, 8)
+	self:addElement(FrameSelected)
+	self.FrameSelected = FrameSelected
+	local ItemFrame = LUI.UIImage.new(0, 0, -3.5, 403.5, 0, 0, -1, 51)
+	ItemFrame:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
+	ItemFrame:setAlpha(0.5)
+	ItemFrame:setImage(RegisterImage(0xD0077E26B9C8D34))
+	ItemFrame:setMaterial(LUI.UIImage.GetCachedMaterial(0x44484DDFAF5C093))
+	ItemFrame:setShaderVector(0, 0, 0, 0, 0)
+	ItemFrame:setupNineSliceShader(12, 164)
+	self:addElement(ItemFrame)
+	self.ItemFrame = ItemFrame
+	local Frame = CoD.StartMenuOptionsMainFrame.new(f1_arg0, f1_arg1, 0, 0, -1, 401, 0, 0, -1, 51)
+	Frame:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
+	Frame:setAlpha(0.06)
+	self:addElement(Frame)
+	self.Frame = Frame
+	self:mergeStateConditions({
+		{
+			stateName = "Selected",
+			condition = function(menu, element, event)
+				return CoD.DirectorUtility.IsElementMapOrGameTypeSelected(element, f1_arg1)
+			end,
+		},
+	})
+	local f1_local11 = self
+	local f1_local12 = self.subscribeToModel
+	local f1_local13 = DataSources.MapVote.getModel(f1_arg1)
+	f1_local12(f1_local11, f1_local13.mapVoteGameModeNext, function(f9_arg0)
+		f1_arg0:updateElementState(self, {
+			name = "model_validation",
+			menu = f1_arg0,
+			controller = f1_arg1,
+			modelValue = f9_arg0:get(),
+			modelName = "mapVoteGameModeNext",
+		})
+	end, false)
+	f1_local11 = self
+	f1_local12 = self.subscribeToModel
+	f1_local13 = DataSources.MapVote.getModel(f1_arg1)
+	f1_local12(f1_local11, f1_local13.mapVoteMapNext, function(f10_arg0)
+		f1_arg0:updateElementState(self, {
+			name = "model_validation",
+			menu = f1_arg0,
+			controller = f1_arg1,
+			modelValue = f10_arg0:get(),
+			modelName = "mapVoteMapNext",
+		})
+	end, false)
+	self:linkToElementModel(self, "id", true, function(model)
+		f1_arg0:updateElementState(self, {
+			name = "model_validation",
+			menu = f1_arg0,
+			controller = f1_arg1,
+			modelValue = model:get(),
+			modelName = "id",
+		})
+	end)
+	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)
+	if PostLoadFunc then
+		PostLoadFunc(self, f1_arg1, f1_arg0)
+	end
+	return self
+end
+CoD.CustomGames_MapModeSlider.__resetProperties = function(f12_arg0)
+	f12_arg0.CurrentSelectedIndicator:completeAnimation()
+	f12_arg0.TopBarFocus:completeAnimation()
+	f12_arg0.ButtonBG:completeAnimation()
+	f12_arg0.SelectorOverlay:completeAnimation()
+	f12_arg0.MapModeLabel:completeAnimation()
+	f12_arg0.FrameSelected:completeAnimation()
+	f12_arg0.ItemFrameAdd:completeAnimation()
+	f12_arg0.CurrentSelectedIndicator:setAlpha(1)
+	f12_arg0.TopBarFocus:setAlpha(0)
+	f12_arg0.ButtonBG:setRGB(0.38, 0.38, 0.38)
+	f12_arg0.ButtonBG:setAlpha(0.8)
+	f12_arg0.SelectorOverlay:setAlpha(0)
+	f12_arg0.MapModeLabel:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
+	f12_arg0.FrameSelected:setAlpha(0)
+	f12_arg0.ItemFrameAdd:setAlpha(0)
+end
+CoD.CustomGames_MapModeSlider.__clipsPerState = {
+	DefaultState = {
+		DefaultClip = function(f13_arg0, f13_arg1)
+			f13_arg0:__resetProperties()
+			f13_arg0:setupElementClipCounter(1)
+			f13_arg0.CurrentSelectedIndicator:completeAnimation()
+			f13_arg0.CurrentSelectedIndicator:setAlpha(0)
+			f13_arg0.clipFinished(f13_arg0.CurrentSelectedIndicator)
+		end,
+		Focus = function(f14_arg0, f14_arg1)
+			f14_arg0:__resetProperties()
+			f14_arg0:setupElementClipCounter(7)
+			f14_arg0.ButtonBG:completeAnimation()
+			f14_arg0.ButtonBG:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
+			f14_arg0.ButtonBG:setAlpha(0.4)
+			f14_arg0.clipFinished(f14_arg0.ButtonBG)
+			f14_arg0.SelectorOverlay:completeAnimation()
+			f14_arg0.SelectorOverlay:setAlpha(0.02)
+			f14_arg0.clipFinished(f14_arg0.SelectorOverlay)
+			f14_arg0.MapModeLabel:completeAnimation()
+			f14_arg0.MapModeLabel:setRGB(0.92, 0.89, 0.72)
+			f14_arg0.clipFinished(f14_arg0.MapModeLabel)
+			f14_arg0.CurrentSelectedIndicator:completeAnimation()
+			f14_arg0.CurrentSelectedIndicator:setAlpha(0)
+			f14_arg0.clipFinished(f14_arg0.CurrentSelectedIndicator)
+			f14_arg0.TopBarFocus:completeAnimation()
+			f14_arg0.TopBarFocus:setAlpha(1)
+			f14_arg0.clipFinished(f14_arg0.TopBarFocus)
+			f14_arg0.ItemFrameAdd:completeAnimation()
+			f14_arg0.ItemFrameAdd:setAlpha(1)
+			f14_arg0.clipFinished(f14_arg0.ItemFrameAdd)
+			f14_arg0.FrameSelected:completeAnimation()
+			f14_arg0.FrameSelected:setAlpha(1)
+			f14_arg0.clipFinished(f14_arg0.FrameSelected)
+		end,
+		GainFocus = function(f15_arg0, f15_arg1)
+			f15_arg0:__resetProperties()
+			f15_arg0:setupElementClipCounter(7)
+			local f15_local0 = function(f16_arg0)
+				f15_arg0.ButtonBG:beginAnimation(150)
+				f15_arg0.ButtonBG:setAlpha(0.4)
+				f15_arg0.ButtonBG:registerEventHandler("interrupted_keyframe", f15_arg0.clipInterrupted)
+				f15_arg0.ButtonBG:registerEventHandler("transition_complete_keyframe", f15_arg0.clipFinished)
+			end
+			f15_arg0.ButtonBG:completeAnimation()
+			f15_arg0.ButtonBG:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
+			f15_arg0.ButtonBG:setAlpha(0.8)
+			f15_local0(f15_arg0.ButtonBG)
+			local f15_local1 = function(f17_arg0)
+				f15_arg0.SelectorOverlay:beginAnimation(150)
+				f15_arg0.SelectorOverlay:setAlpha(0.02)
+				f15_arg0.SelectorOverlay:registerEventHandler("interrupted_keyframe", f15_arg0.clipInterrupted)
+				f15_arg0.SelectorOverlay:registerEventHandler("transition_complete_keyframe", f15_arg0.clipFinished)
+			end
+			f15_arg0.SelectorOverlay:completeAnimation()
+			f15_arg0.SelectorOverlay:setAlpha(0)
+			f15_local1(f15_arg0.SelectorOverlay)
+			f15_arg0.MapModeLabel:completeAnimation()
+			f15_arg0.MapModeLabel:setRGB(0.92, 0.89, 0.72)
+			f15_arg0.clipFinished(f15_arg0.MapModeLabel)
+			f15_arg0.CurrentSelectedIndicator:completeAnimation()
+			f15_arg0.CurrentSelectedIndicator:setAlpha(0)
+			f15_arg0.clipFinished(f15_arg0.CurrentSelectedIndicator)
+			local f15_local2 = function(f18_arg0)
+				f15_arg0.TopBarFocus:beginAnimation(150)
+				f15_arg0.TopBarFocus:setAlpha(1)
+				f15_arg0.TopBarFocus:registerEventHandler("interrupted_keyframe", f15_arg0.clipInterrupted)
+				f15_arg0.TopBarFocus:registerEventHandler("transition_complete_keyframe", f15_arg0.clipFinished)
+			end
+			f15_arg0.TopBarFocus:completeAnimation()
+			f15_arg0.TopBarFocus:setAlpha(0)
+			f15_local2(f15_arg0.TopBarFocus)
+			local f15_local3 = function(f19_arg0)
+				f15_arg0.ItemFrameAdd:beginAnimation(150)
+				f15_arg0.ItemFrameAdd:setAlpha(1)
+				f15_arg0.ItemFrameAdd:registerEventHandler("interrupted_keyframe", f15_arg0.clipInterrupted)
+				f15_arg0.ItemFrameAdd:registerEventHandler("transition_complete_keyframe", f15_arg0.clipFinished)
+			end
+			f15_arg0.ItemFrameAdd:completeAnimation()
+			f15_arg0.ItemFrameAdd:setAlpha(0)
+			f15_local3(f15_arg0.ItemFrameAdd)
+			local f15_local4 = function(f20_arg0)
+				f15_arg0.FrameSelected:beginAnimation(150)
+				f15_arg0.FrameSelected:setAlpha(1)
+				f15_arg0.FrameSelected:registerEventHandler("interrupted_keyframe", f15_arg0.clipInterrupted)
+				f15_arg0.FrameSelected:registerEventHandler("transition_complete_keyframe", f15_arg0.clipFinished)
+			end
+			f15_arg0.FrameSelected:completeAnimation()
+			f15_arg0.FrameSelected:setAlpha(0)
+			f15_local4(f15_arg0.FrameSelected)
+		end,
+		LoseFocus = function(f21_arg0, f21_arg1)
+			f21_arg0:__resetProperties()
+			f21_arg0:setupElementClipCounter(7)
+			local f21_local0 = function(f22_arg0)
+				f21_arg0.ButtonBG:beginAnimation(150)
+				f21_arg0.ButtonBG:setRGB(0.38, 0.38, 0.38)
+				f21_arg0.ButtonBG:registerEventHandler("interrupted_keyframe", f21_arg0.clipInterrupted)
+				f21_arg0.ButtonBG:registerEventHandler("transition_complete_keyframe", f21_arg0.clipFinished)
+			end
+			f21_arg0.ButtonBG:completeAnimation()
+			f21_arg0.ButtonBG:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
+			f21_arg0.ButtonBG:setAlpha(0.4)
+			f21_local0(f21_arg0.ButtonBG)
+			local f21_local1 = function(f23_arg0)
+				f21_arg0.SelectorOverlay:beginAnimation(150)
+				f21_arg0.SelectorOverlay:setAlpha(0)
+				f21_arg0.SelectorOverlay:registerEventHandler("interrupted_keyframe", f21_arg0.clipInterrupted)
+				f21_arg0.SelectorOverlay:registerEventHandler("transition_complete_keyframe", f21_arg0.clipFinished)
+			end
+			f21_arg0.SelectorOverlay:completeAnimation()
+			f21_arg0.SelectorOverlay:setAlpha(0.02)
+			f21_local1(f21_arg0.SelectorOverlay)
+			f21_arg0.MapModeLabel:completeAnimation()
+			f21_arg0.MapModeLabel:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
+			f21_arg0.clipFinished(f21_arg0.MapModeLabel)
+			f21_arg0.CurrentSelectedIndicator:completeAnimation()
+			f21_arg0.CurrentSelectedIndicator:setAlpha(0)
+			f21_arg0.clipFinished(f21_arg0.CurrentSelectedIndicator)
+			local f21_local2 = function(f24_arg0)
+				f21_arg0.TopBarFocus:beginAnimation(150)
+				f21_arg0.TopBarFocus:setAlpha(0)
+				f21_arg0.TopBarFocus:registerEventHandler("interrupted_keyframe", f21_arg0.clipInterrupted)
+				f21_arg0.TopBarFocus:registerEventHandler("transition_complete_keyframe", f21_arg0.clipFinished)
+			end
+			f21_arg0.TopBarFocus:completeAnimation()
+			f21_arg0.TopBarFocus:setAlpha(1)
+			f21_local2(f21_arg0.TopBarFocus)
+			local f21_local3 = function(f25_arg0)
+				f21_arg0.ItemFrameAdd:beginAnimation(150)
+				f21_arg0.ItemFrameAdd:setAlpha(0)
+				f21_arg0.ItemFrameAdd:registerEventHandler("interrupted_keyframe", f21_arg0.clipInterrupted)
+				f21_arg0.ItemFrameAdd:registerEventHandler("transition_complete_keyframe", f21_arg0.clipFinished)
+			end
+			f21_arg0.ItemFrameAdd:completeAnimation()
+			f21_arg0.ItemFrameAdd:setAlpha(1)
+			f21_local3(f21_arg0.ItemFrameAdd)
+			local f21_local4 = function(f26_arg0)
+				f21_arg0.FrameSelected:beginAnimation(150)
+				f21_arg0.FrameSelected:setAlpha(0)
+				f21_arg0.FrameSelected:registerEventHandler("interrupted_keyframe", f21_arg0.clipInterrupted)
+				f21_arg0.FrameSelected:registerEventHandler("transition_complete_keyframe", f21_arg0.clipFinished)
+			end
+			f21_arg0.FrameSelected:completeAnimation()
+			f21_arg0.FrameSelected:setAlpha(1)
+			f21_local4(f21_arg0.FrameSelected)
+		end,
+		Active = function(f27_arg0, f27_arg1)
+			f27_arg0:__resetProperties()
+			f27_arg0:setupElementClipCounter(5)
+			f27_arg0.MapModeLabel:completeAnimation()
+			f27_arg0.MapModeLabel:setRGB(0.92, 0.89, 0.72)
+			f27_arg0.clipFinished(f27_arg0.MapModeLabel)
+			f27_arg0.CurrentSelectedIndicator:completeAnimation()
+			f27_arg0.CurrentSelectedIndicator:setAlpha(0)
+			f27_arg0.clipFinished(f27_arg0.CurrentSelectedIndicator)
+			f27_arg0.TopBarFocus:completeAnimation()
+			f27_arg0.TopBarFocus:setAlpha(1)
+			f27_arg0.clipFinished(f27_arg0.TopBarFocus)
+			f27_arg0.ItemFrameAdd:completeAnimation()
+			f27_arg0.ItemFrameAdd:setAlpha(1)
+			f27_arg0.clipFinished(f27_arg0.ItemFrameAdd)
+			f27_arg0.FrameSelected:completeAnimation()
+			f27_arg0.FrameSelected:setAlpha(1)
+			f27_arg0.clipFinished(f27_arg0.FrameSelected)
+		end,
+		ActiveAndFocus = function(f28_arg0, f28_arg1)
+			f28_arg0:__resetProperties()
+			f28_arg0:setupElementClipCounter(7)
+			f28_arg0.ButtonBG:completeAnimation()
+			f28_arg0.ButtonBG:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
+			f28_arg0.ButtonBG:setAlpha(0.4)
+			f28_arg0.clipFinished(f28_arg0.ButtonBG)
+			f28_arg0.SelectorOverlay:completeAnimation()
+			f28_arg0.SelectorOverlay:setAlpha(0.02)
+			f28_arg0.clipFinished(f28_arg0.SelectorOverlay)
+			f28_arg0.MapModeLabel:completeAnimation()
+			f28_arg0.MapModeLabel:setRGB(0.92, 0.89, 0.72)
+			f28_arg0.clipFinished(f28_arg0.MapModeLabel)
+			f28_arg0.CurrentSelectedIndicator:completeAnimation()
+			f28_arg0.CurrentSelectedIndicator:setAlpha(0)
+			f28_arg0.clipFinished(f28_arg0.CurrentSelectedIndicator)
+			f28_arg0.TopBarFocus:completeAnimation()
+			f28_arg0.TopBarFocus:setAlpha(1)
+			f28_arg0.clipFinished(f28_arg0.TopBarFocus)
+			f28_arg0.ItemFrameAdd:completeAnimation()
+			f28_arg0.ItemFrameAdd:setAlpha(1)
+			f28_arg0.clipFinished(f28_arg0.ItemFrameAdd)
+			f28_arg0.FrameSelected:completeAnimation()
+			f28_arg0.FrameSelected:setAlpha(1)
+			f28_arg0.clipFinished(f28_arg0.FrameSelected)
+		end,
+	},
+	Selected = {
+		DefaultClip = function(f29_arg0, f29_arg1)
+			f29_arg0:__resetProperties()
+			f29_arg0:setupElementClipCounter(0)
+		end,
+		Focus = function(f30_arg0, f30_arg1)
+			f30_arg0:__resetProperties()
+			f30_arg0:setupElementClipCounter(6)
+			f30_arg0.ButtonBG:completeAnimation()
+			f30_arg0.ButtonBG:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
+			f30_arg0.ButtonBG:setAlpha(0.4)
+			f30_arg0.clipFinished(f30_arg0.ButtonBG)
+			f30_arg0.SelectorOverlay:completeAnimation()
+			f30_arg0.SelectorOverlay:setAlpha(0.02)
+			f30_arg0.clipFinished(f30_arg0.SelectorOverlay)
+			f30_arg0.MapModeLabel:completeAnimation()
+			f30_arg0.MapModeLabel:setRGB(0.92, 0.89, 0.72)
+			f30_arg0.clipFinished(f30_arg0.MapModeLabel)
+			f30_arg0.TopBarFocus:completeAnimation()
+			f30_arg0.TopBarFocus:setAlpha(1)
+			f30_arg0.clipFinished(f30_arg0.TopBarFocus)
+			f30_arg0.ItemFrameAdd:completeAnimation()
+			f30_arg0.ItemFrameAdd:setAlpha(1)
+			f30_arg0.clipFinished(f30_arg0.ItemFrameAdd)
+			f30_arg0.FrameSelected:completeAnimation()
+			f30_arg0.FrameSelected:setAlpha(1)
+			f30_arg0.clipFinished(f30_arg0.FrameSelected)
+		end,
+		GainFocus = function(f31_arg0, f31_arg1)
+			f31_arg0:__resetProperties()
+			f31_arg0:setupElementClipCounter(6)
+			local f31_local0 = function(f32_arg0)
+				f31_arg0.ButtonBG:beginAnimation(150)
+				f31_arg0.ButtonBG:setAlpha(0.4)
+				f31_arg0.ButtonBG:registerEventHandler("interrupted_keyframe", f31_arg0.clipInterrupted)
+				f31_arg0.ButtonBG:registerEventHandler("transition_complete_keyframe", f31_arg0.clipFinished)
+			end
+			f31_arg0.ButtonBG:completeAnimation()
+			f31_arg0.ButtonBG:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
+			f31_arg0.ButtonBG:setAlpha(0.8)
+			f31_local0(f31_arg0.ButtonBG)
+			local f31_local1 = function(f33_arg0)
+				f31_arg0.SelectorOverlay:beginAnimation(150)
+				f31_arg0.SelectorOverlay:setAlpha(0.02)
+				f31_arg0.SelectorOverlay:registerEventHandler("interrupted_keyframe", f31_arg0.clipInterrupted)
+				f31_arg0.SelectorOverlay:registerEventHandler("transition_complete_keyframe", f31_arg0.clipFinished)
+			end
+			f31_arg0.SelectorOverlay:completeAnimation()
+			f31_arg0.SelectorOverlay:setAlpha(0)
+			f31_local1(f31_arg0.SelectorOverlay)
+			f31_arg0.MapModeLabel:completeAnimation()
+			f31_arg0.MapModeLabel:setRGB(0.92, 0.89, 0.72)
+			f31_arg0.clipFinished(f31_arg0.MapModeLabel)
+			local f31_local2 = function(f34_arg0)
+				f31_arg0.TopBarFocus:beginAnimation(150)
+				f31_arg0.TopBarFocus:setAlpha(1)
+				f31_arg0.TopBarFocus:registerEventHandler("interrupted_keyframe", f31_arg0.clipInterrupted)
+				f31_arg0.TopBarFocus:registerEventHandler("transition_complete_keyframe", f31_arg0.clipFinished)
+			end
+			f31_arg0.TopBarFocus:completeAnimation()
+			f31_arg0.TopBarFocus:setAlpha(0)
+			f31_local2(f31_arg0.TopBarFocus)
+			local f31_local3 = function(f35_arg0)
+				f31_arg0.ItemFrameAdd:beginAnimation(150)
+				f31_arg0.ItemFrameAdd:setAlpha(1)
+				f31_arg0.ItemFrameAdd:registerEventHandler("interrupted_keyframe", f31_arg0.clipInterrupted)
+				f31_arg0.ItemFrameAdd:registerEventHandler("transition_complete_keyframe", f31_arg0.clipFinished)
+			end
+			f31_arg0.ItemFrameAdd:completeAnimation()
+			f31_arg0.ItemFrameAdd:setAlpha(0)
+			f31_local3(f31_arg0.ItemFrameAdd)
+			local f31_local4 = function(f36_arg0)
+				f31_arg0.FrameSelected:beginAnimation(150)
+				f31_arg0.FrameSelected:setAlpha(1)
+				f31_arg0.FrameSelected:registerEventHandler("interrupted_keyframe", f31_arg0.clipInterrupted)
+				f31_arg0.FrameSelected:registerEventHandler("transition_complete_keyframe", f31_arg0.clipFinished)
+			end
+			f31_arg0.FrameSelected:completeAnimation()
+			f31_arg0.FrameSelected:setAlpha(0)
+			f31_local4(f31_arg0.FrameSelected)
+		end,
+		LoseFocus = function(f37_arg0, f37_arg1)
+			f37_arg0:__resetProperties()
+			f37_arg0:setupElementClipCounter(6)
+			local f37_local0 = function(f38_arg0)
+				f37_arg0.ButtonBG:beginAnimation(150)
+				f37_arg0.ButtonBG:setRGB(0.38, 0.38, 0.38)
+				f37_arg0.ButtonBG:registerEventHandler("interrupted_keyframe", f37_arg0.clipInterrupted)
+				f37_arg0.ButtonBG:registerEventHandler("transition_complete_keyframe", f37_arg0.clipFinished)
+			end
+			f37_arg0.ButtonBG:completeAnimation()
+			f37_arg0.ButtonBG:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
+			f37_arg0.ButtonBG:setAlpha(0.4)
+			f37_local0(f37_arg0.ButtonBG)
+			local f37_local1 = function(f39_arg0)
+				f37_arg0.SelectorOverlay:beginAnimation(150)
+				f37_arg0.SelectorOverlay:setAlpha(0)
+				f37_arg0.SelectorOverlay:registerEventHandler("interrupted_keyframe", f37_arg0.clipInterrupted)
+				f37_arg0.SelectorOverlay:registerEventHandler("transition_complete_keyframe", f37_arg0.clipFinished)
+			end
+			f37_arg0.SelectorOverlay:completeAnimation()
+			f37_arg0.SelectorOverlay:setAlpha(0.02)
+			f37_local1(f37_arg0.SelectorOverlay)
+			f37_arg0.MapModeLabel:completeAnimation()
+			f37_arg0.MapModeLabel:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
+			f37_arg0.clipFinished(f37_arg0.MapModeLabel)
+			local f37_local2 = function(f40_arg0)
+				f37_arg0.TopBarFocus:beginAnimation(150)
+				f37_arg0.TopBarFocus:setAlpha(0)
+				f37_arg0.TopBarFocus:registerEventHandler("interrupted_keyframe", f37_arg0.clipInterrupted)
+				f37_arg0.TopBarFocus:registerEventHandler("transition_complete_keyframe", f37_arg0.clipFinished)
+			end
+			f37_arg0.TopBarFocus:completeAnimation()
+			f37_arg0.TopBarFocus:setAlpha(1)
+			f37_local2(f37_arg0.TopBarFocus)
+			local f37_local3 = function(f41_arg0)
+				f37_arg0.ItemFrameAdd:beginAnimation(150)
+				f37_arg0.ItemFrameAdd:setAlpha(0)
+				f37_arg0.ItemFrameAdd:registerEventHandler("interrupted_keyframe", f37_arg0.clipInterrupted)
+				f37_arg0.ItemFrameAdd:registerEventHandler("transition_complete_keyframe", f37_arg0.clipFinished)
+			end
+			f37_arg0.ItemFrameAdd:completeAnimation()
+			f37_arg0.ItemFrameAdd:setAlpha(1)
+			f37_local3(f37_arg0.ItemFrameAdd)
+			local f37_local4 = function(f42_arg0)
+				f37_arg0.FrameSelected:beginAnimation(150)
+				f37_arg0.FrameSelected:setAlpha(0)
+				f37_arg0.FrameSelected:registerEventHandler("interrupted_keyframe", f37_arg0.clipInterrupted)
+				f37_arg0.FrameSelected:registerEventHandler("transition_complete_keyframe", f37_arg0.clipFinished)
+			end
+			f37_arg0.FrameSelected:completeAnimation()
+			f37_arg0.FrameSelected:setAlpha(1)
+			f37_local4(f37_arg0.FrameSelected)
+		end,
+		Active = function(f43_arg0, f43_arg1)
+			f43_arg0:__resetProperties()
+			f43_arg0:setupElementClipCounter(4)
+			f43_arg0.MapModeLabel:completeAnimation()
+			f43_arg0.MapModeLabel:setRGB(0.92, 0.89, 0.72)
+			f43_arg0.clipFinished(f43_arg0.MapModeLabel)
+			f43_arg0.TopBarFocus:completeAnimation()
+			f43_arg0.TopBarFocus:setAlpha(1)
+			f43_arg0.clipFinished(f43_arg0.TopBarFocus)
+			f43_arg0.ItemFrameAdd:completeAnimation()
+			f43_arg0.ItemFrameAdd:setAlpha(1)
+			f43_arg0.clipFinished(f43_arg0.ItemFrameAdd)
+			f43_arg0.FrameSelected:completeAnimation()
+			f43_arg0.FrameSelected:setAlpha(1)
+			f43_arg0.clipFinished(f43_arg0.FrameSelected)
+		end,
+		ActiveAndFocus = function(f44_arg0, f44_arg1)
+			f44_arg0:__resetProperties()
+			f44_arg0:setupElementClipCounter(6)
+			f44_arg0.ButtonBG:completeAnimation()
+			f44_arg0.ButtonBG:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
+			f44_arg0.ButtonBG:setAlpha(0.4)
+			f44_arg0.clipFinished(f44_arg0.ButtonBG)
+			f44_arg0.SelectorOverlay:completeAnimation()
+			f44_arg0.SelectorOverlay:setAlpha(0.02)
+			f44_arg0.clipFinished(f44_arg0.SelectorOverlay)
+			f44_arg0.MapModeLabel:completeAnimation()
+			f44_arg0.MapModeLabel:setRGB(0.92, 0.89, 0.72)
+			f44_arg0.clipFinished(f44_arg0.MapModeLabel)
+			f44_arg0.TopBarFocus:completeAnimation()
+			f44_arg0.TopBarFocus:setAlpha(1)
+			f44_arg0.clipFinished(f44_arg0.TopBarFocus)
+			f44_arg0.ItemFrameAdd:completeAnimation()
+			f44_arg0.ItemFrameAdd:setAlpha(1)
+			f44_arg0.clipFinished(f44_arg0.ItemFrameAdd)
+			f44_arg0.FrameSelected:completeAnimation()
+			f44_arg0.FrameSelected:setAlpha(1)
+			f44_arg0.clipFinished(f44_arg0.FrameSelected)
+		end,
+	},
+}
+if not CoD.isPC then
+	CoD.CustomGames_MapModeSlider.__clipsPerState.DefaultState.Active = nil
+	CoD.CustomGames_MapModeSlider.__clipsPerState.DefaultState.ActiveAndFocus = nil
+	CoD.CustomGames_MapModeSlider.__clipsPerState.Selected.Active = nil
+	CoD.CustomGames_MapModeSlider.__clipsPerState.Selected.ActiveAndFocus = nil
+end
+CoD.CustomGames_MapModeSlider.__onClose = function(f45_arg0)
+	f45_arg0.MapModeLabel:close()
+	f45_arg0.OfficialGameIcon:close()
+	f45_arg0.CurrentSelectedIndicator:close()
+	f45_arg0.Frame:close()
+end

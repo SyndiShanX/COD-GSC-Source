@@ -1,0 +1,128 @@
+CoD.FE_Menu_LeftGraphics = InheritFrom(LUI.UIElement)
+CoD.FE_Menu_LeftGraphics.__defaultWidth = 78
+CoD.FE_Menu_LeftGraphics.__defaultHeight = 925
+CoD.FE_Menu_LeftGraphics.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+	local self = LUI.UIElement.new(f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+	self:setClass(CoD.FE_Menu_LeftGraphics)
+	self.id = "FE_Menu_LeftGraphics"
+	self.soundSet = "default"
+	f1_arg0:addElementToPendingUpdateStateList(self)
+	local Pixel200 = LUI.UIImage.new(0, 0, 13, 67, 0, 0, 847, 853)
+	Pixel200:setYRot(-180)
+	Pixel200:setImage(RegisterImage(0xFAFDD3A12CFCCB6))
+	Pixel200:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	self:addElement(Pixel200)
+	self.Pixel200 = Pixel200
+	local Pixel2001 = LUI.UIImage.new(0, 0, 13, 67, 0, 0, 66, 72)
+	Pixel2001:setYRot(-180)
+	Pixel2001:setImage(RegisterImage(0xFAFDD3A12CFCCB6))
+	Pixel2001:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	self:addElement(Pixel2001)
+	self.Pixel2001 = Pixel2001
+	local LineSide = LUI.UIImage.new(0, 0, 50, 53, 0, 0, 48, 874)
+	LineSide:setZRot(180)
+	LineSide:setImage(RegisterImage(0x17BA7D5EBC23097))
+	LineSide:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	self:addElement(LineSide)
+	self.LineSide = LineSide
+	if PostLoadFunc then
+		PostLoadFunc(self, f1_arg1, f1_arg0)
+	end
+	return self
+end
+CoD.FE_Menu_LeftGraphics.__resetProperties = function(f2_arg0)
+	f2_arg0.Pixel2001:completeAnimation()
+	f2_arg0.Pixel200:completeAnimation()
+	f2_arg0.LineSide:completeAnimation()
+	f2_arg0.Pixel2001:setLeftRight(0, 0, 13, 67)
+	f2_arg0.Pixel2001:setTopBottom(0, 0, 66, 72)
+	f2_arg0.Pixel2001:setAlpha(1)
+	f2_arg0.Pixel200:setLeftRight(0, 0, 13, 67)
+	f2_arg0.Pixel200:setTopBottom(0, 0, 847, 853)
+	f2_arg0.Pixel200:setAlpha(1)
+	f2_arg0.LineSide:setLeftRight(0, 0, 50, 53)
+	f2_arg0.LineSide:setTopBottom(0, 0, 48, 874)
+	f2_arg0.LineSide:setAlpha(1)
+end
+CoD.FE_Menu_LeftGraphics.__clipsPerState = {
+	DefaultState = {
+		DefaultClip = function(f3_arg0, f3_arg1)
+			f3_arg0:__resetProperties()
+			f3_arg0:setupElementClipCounter(3)
+			local f3_local0 = function(f4_arg0)
+				f4_arg0:beginAnimation(450)
+				f4_arg0:setTopBottom(0, 0, 847, 853)
+				f4_arg0:setAlpha(1)
+				f4_arg0:registerEventHandler("transition_complete_keyframe", f3_arg0.clipFinished)
+			end
+			f3_arg0.Pixel200:beginAnimation(200)
+			f3_arg0.Pixel200:setLeftRight(0, 0, 13, 67)
+			f3_arg0.Pixel200:setTopBottom(0, 0, -67, -61)
+			f3_arg0.Pixel200:setAlpha(0)
+			f3_arg0.Pixel200:registerEventHandler("interrupted_keyframe", f3_arg0.clipInterrupted)
+			f3_arg0.Pixel200:registerEventHandler("transition_complete_keyframe", f3_local0)
+			local f3_local1 = function(f5_arg0)
+				f5_arg0:beginAnimation(130)
+				f5_arg0:setTopBottom(0, 0, 66, 72)
+				f5_arg0:setAlpha(1)
+				f5_arg0:registerEventHandler("transition_complete_keyframe", f3_arg0.clipFinished)
+			end
+			f3_arg0.Pixel2001:beginAnimation(160)
+			f3_arg0.Pixel2001:setLeftRight(0, 0, 13, 67)
+			f3_arg0.Pixel2001:setTopBottom(0, 0, -54, -48)
+			f3_arg0.Pixel2001:setAlpha(0)
+			f3_arg0.Pixel2001:registerEventHandler("interrupted_keyframe", f3_arg0.clipInterrupted)
+			f3_arg0.Pixel2001:registerEventHandler("transition_complete_keyframe", f3_local1)
+			local f3_local2 = function(f6_arg0)
+				f6_arg0:beginAnimation(380)
+				f6_arg0:setTopBottom(0, 0, 48, 874)
+				f6_arg0:registerEventHandler("transition_complete_keyframe", f3_arg0.clipFinished)
+			end
+			f3_arg0.LineSide:beginAnimation(230)
+			f3_arg0.LineSide:setLeftRight(0, 0, 50, 53)
+			f3_arg0.LineSide:setTopBottom(0, 0, 48, 54)
+			f3_arg0.LineSide:setAlpha(1)
+			f3_arg0.LineSide:registerEventHandler("interrupted_keyframe", f3_arg0.clipInterrupted)
+			f3_arg0.LineSide:registerEventHandler("transition_complete_keyframe", f3_local2)
+		end,
+		Intro = function(f7_arg0, f7_arg1)
+			f7_arg0:__resetProperties()
+			f7_arg0:setupElementClipCounter(3)
+			local f7_local0 = function(f8_arg0)
+				f8_arg0:beginAnimation(450)
+				f8_arg0:setTopBottom(0, 0, 847, 853)
+				f8_arg0:setAlpha(1)
+				f8_arg0:registerEventHandler("transition_complete_keyframe", f7_arg0.clipFinished)
+			end
+			f7_arg0.Pixel200:beginAnimation(200)
+			f7_arg0.Pixel200:setLeftRight(0, 0, 13, 67)
+			f7_arg0.Pixel200:setTopBottom(0, 0, -67, -61)
+			f7_arg0.Pixel200:setAlpha(0)
+			f7_arg0.Pixel200:registerEventHandler("interrupted_keyframe", f7_arg0.clipInterrupted)
+			f7_arg0.Pixel200:registerEventHandler("transition_complete_keyframe", f7_local0)
+			local f7_local1 = function(f9_arg0)
+				f7_arg0.Pixel2001:beginAnimation(290)
+				f7_arg0.Pixel2001:setTopBottom(0, 0, 66, 72)
+				f7_arg0.Pixel2001:setAlpha(1)
+				f7_arg0.Pixel2001:registerEventHandler("interrupted_keyframe", f7_arg0.clipInterrupted)
+				f7_arg0.Pixel2001:registerEventHandler("transition_complete_keyframe", f7_arg0.clipFinished)
+			end
+			f7_arg0.Pixel2001:completeAnimation()
+			f7_arg0.Pixel2001:setLeftRight(0, 0, 13, 67)
+			f7_arg0.Pixel2001:setTopBottom(0, 0, -54, -48)
+			f7_arg0.Pixel2001:setAlpha(0)
+			f7_local1(f7_arg0.Pixel2001)
+			local f7_local2 = function(f10_arg0)
+				f10_arg0:beginAnimation(380)
+				f10_arg0:setTopBottom(0, 0, 48, 874)
+				f10_arg0:registerEventHandler("transition_complete_keyframe", f7_arg0.clipFinished)
+			end
+			f7_arg0.LineSide:beginAnimation(230)
+			f7_arg0.LineSide:setLeftRight(0, 0, 50, 53)
+			f7_arg0.LineSide:setTopBottom(0, 0, 48, 54)
+			f7_arg0.LineSide:setAlpha(1)
+			f7_arg0.LineSide:registerEventHandler("interrupted_keyframe", f7_arg0.clipInterrupted)
+			f7_arg0.LineSide:registerEventHandler("transition_complete_keyframe", f7_local2)
+		end,
+	},
+}

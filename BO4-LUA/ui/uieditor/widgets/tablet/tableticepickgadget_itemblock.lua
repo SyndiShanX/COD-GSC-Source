@@ -1,0 +1,603 @@
+require("x64:c9a3c9eb5d5ac59")
+require("x64:44ed4407955456a")
+CoD.TabletIcePickGadget_ItemBlock = InheritFrom(LUI.UIElement)
+CoD.TabletIcePickGadget_ItemBlock.__defaultWidth = 144
+CoD.TabletIcePickGadget_ItemBlock.__defaultHeight = 144
+CoD.TabletIcePickGadget_ItemBlock.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+	local self = LUI.UIElement.new(f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+	self:setClass(CoD.TabletIcePickGadget_ItemBlock)
+	self.id = "TabletIcePickGadget_ItemBlock"
+	self.soundSet = "default"
+	self.anyChildUsesUpdateState = true
+	f1_arg0:addElementToPendingUpdateStateList(self)
+	local AARPerformBg = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
+	AARPerformBg:setAlpha(0.4)
+	AARPerformBg:setImage(RegisterImage(0xF95A1671A1AB874))
+	AARPerformBg:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	AARPerformBg:setShaderVector(0, 0, 0, 0, 0)
+	AARPerformBg:setupNineSliceShader(172, 136)
+	self:addElement(AARPerformBg)
+	self.AARPerformBg = AARPerformBg
+	local Progress = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
+	Progress:setRGB(0.22, 0.77, 1)
+	Progress:setAlpha(0.6)
+	Progress:setImage(RegisterImage(0x83C3A03D42E5F7A))
+	Progress:setMaterial(LUI.UIImage.GetCachedMaterial(0x2EEB1ECF1F211F5))
+	Progress:setShaderVector(1, 0, 0, 0, 0)
+	Progress:setShaderVector(2, 0, 1, 0, 0)
+	Progress:setShaderVector(3, 0, 0, 0, 0)
+	Progress:setShaderVector(4, 0, 0, 0, 0)
+	Progress:subscribeToGlobalModel(f1_arg1, "IcePickInfo", "currentHackProgress", function(model)
+		local f2_local0 = model:get()
+		if f2_local0 ~= nil then
+			Progress:beginAnimation(0.1)
+			Progress:setShaderVector(0, CoD.BaseUtility.AnimateWidgetOnChangeVector(0.1, CoD.GetVectorComponentFromString(f2_local0, 1), CoD.GetVectorComponentFromString(f2_local0, 2), CoD.GetVectorComponentFromString(f2_local0, 3), CoD.GetVectorComponentFromString(f2_local0, 4)))
+		end
+	end)
+	self:addElement(Progress)
+	self.Progress = Progress
+	local Progress2 = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
+	Progress2:setRGB(0.22, 0.77, 1)
+	Progress2:setAlpha(0)
+	Progress2:setMaterial(LUI.UIImage.GetCachedMaterial(0x2EEB1ECF1F211F5))
+	Progress2:setShaderVector(1, 0, 0, 0, 0)
+	Progress2:setShaderVector(2, 0, 1, 0, 0)
+	Progress2:setShaderVector(3, 0, 0, 0, 0)
+	Progress2:setShaderVector(4, 0, 0, 0, 0)
+	Progress2:subscribeToGlobalModel(f1_arg1, "IcePickInfo", "currentHackProgress", function(model)
+		local f3_local0 = model:get()
+		if f3_local0 ~= nil then
+			Progress2:beginAnimation(0.1)
+			Progress2:setShaderVector(0, CoD.BaseUtility.AnimateWidgetOnChangeVector(0.1, CoD.GetVectorComponentFromString(f3_local0, 1), CoD.GetVectorComponentFromString(f3_local0, 2), CoD.GetVectorComponentFromString(f3_local0, 3), CoD.GetVectorComponentFromString(f3_local0, 4)))
+		end
+	end)
+	self:addElement(Progress2)
+	self.Progress2 = Progress2
+	local Icon = CoD.TabletIcePickGadget_ItemIcon.new(f1_arg0, f1_arg1, 0.5, 0.5, -72, 72, 0.5, 0.5, -72, 72)
+	Icon:linkToElementModel(self, nil, false, function(model)
+		Icon:setModel(model, f1_arg1)
+	end)
+	self:addElement(Icon)
+	self.Icon = Icon
+	local BadManners = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
+	BadManners:setAlpha(0)
+	BadManners:setImage(RegisterImage(0xBFBBD66A247B98))
+	BadManners:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	self:addElement(BadManners)
+	self.BadManners = BadManners
+	local BadMannersAdd = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
+	BadMannersAdd:setAlpha(0)
+	BadMannersAdd:setImage(RegisterImage(0xBFBBD66A247B98))
+	BadMannersAdd:setMaterial(LUI.UIImage.GetCachedMaterial(0x4E6CE42E0799F57))
+	self:addElement(BadMannersAdd)
+	self.BadMannersAdd = BadMannersAdd
+	local Frame = LUI.UIImage.new(0, 1, -2, 2, 0, 1, -2, 2)
+	Frame:setImage(RegisterImage(0xC34D24BE5D33502))
+	Frame:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	Frame:setShaderVector(0, 0, 0, 0, 0)
+	Frame:setupNineSliceShader(64, 38)
+	self:addElement(Frame)
+	self.Frame = Frame
+	local FrameAdd = LUI.UIImage.new(0, 1, -2, 2, 0, 1, -2, 2)
+	FrameAdd:setAlpha(0)
+	FrameAdd:setImage(RegisterImage(0xC34D24BE5D33502))
+	FrameAdd:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD777557404A7B3))
+	FrameAdd:setShaderVector(0, 0, 0, 0, 0)
+	FrameAdd:setupNineSliceShader(64, 38)
+	self:addElement(FrameAdd)
+	self.FrameAdd = FrameAdd
+	local CommonSearchingBar = CoD.CommonSearchingBar.new(f1_arg0, f1_arg1, 1, 1, -122, 0, 0, 0, 1, 23)
+	CommonSearchingBar:setRGB(0.02, 0.59, 0.99)
+	self:addElement(CommonSearchingBar)
+	self.CommonSearchingBar = CommonSearchingBar
+	local Skull01 = LUI.UIImage.new(0.5, 0.5, -48, 48, 0.5, 0.5, -40, 40)
+	Skull01:setAlpha(0)
+	Skull01:setImage(RegisterImage(0x9F13B2D5831F182))
+	self:addElement(Skull01)
+	self.Skull01 = Skull01
+	local Skull01Scanline = LUI.UIImage.new(0.5, 0.5, -48, 48, 0.5, 0.5, -40, 40)
+	Skull01Scanline:setAlpha(0)
+	Skull01Scanline:setImage(RegisterImage(0x9F13B2D5831F182))
+	Skull01Scanline:setMaterial(LUI.UIImage.GetCachedMaterial(0x92F09074FB20E6D))
+	Skull01Scanline:setShaderVector(0, 2, 0, 0, 0)
+	Skull01Scanline:setShaderVector(1, 1, 0, 0, 0)
+	Skull01Scanline:setShaderVector(2, 0.03, 0, 0, 0)
+	self:addElement(Skull01Scanline)
+	self.Skull01Scanline = Skull01Scanline
+	local Skull02 = LUI.UIImage.new(0.5, 0.5, -48, 48, 0.5, 0.5, -40, 40)
+	Skull02:setAlpha(0)
+	Skull02:setImage(RegisterImage(0x9F13A2D5831EFCF))
+	self:addElement(Skull02)
+	self.Skull02 = Skull02
+	local Skull02Scanline = LUI.UIImage.new(0.5, 0.5, -48, 48, 0.5, 0.5, -40, 40)
+	Skull02Scanline:setAlpha(0)
+	Skull02Scanline:setImage(RegisterImage(0x9F13A2D5831EFCF))
+	Skull02Scanline:setMaterial(LUI.UIImage.GetCachedMaterial(0x92F09074FB20E6D))
+	Skull02Scanline:setShaderVector(0, 2, 0, 0, 0)
+	Skull02Scanline:setShaderVector(1, 2, 0, 0, 0)
+	Skull02Scanline:setShaderVector(2, 0.02, 0, 0, 0)
+	self:addElement(Skull02Scanline)
+	self.Skull02Scanline = Skull02Scanline
+	self:mergeStateConditions({
+		{
+			stateName = "Hacking",
+			condition = function(menu, element, event)
+				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "hackStatus", CoD.HUDUtility.IcePickHackableStatuses.HACKING)
+			end,
+		},
+		{
+			stateName = "Hacked",
+			condition = function(menu, element, event)
+				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "hackStatus", CoD.HUDUtility.IcePickHackableStatuses.HACKED)
+			end,
+		},
+		{
+			stateName = "Destroyed",
+			condition = function(menu, element, event)
+				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "hackStatus", CoD.HUDUtility.IcePickHackableStatuses.DESTROYED)
+			end,
+		},
+	})
+	self:linkToElementModel(self, "hackStatus", true, function(model)
+		f1_arg0:updateElementState(self, {
+			name = "model_validation",
+			menu = f1_arg0,
+			controller = f1_arg1,
+			modelValue = model:get(),
+			modelName = "hackStatus",
+		})
+	end)
+	LUI.OverrideFunction_CallOriginalFirst(self, "setState", function(element, controller, f9_arg2, f9_arg3, f9_arg4)
+		if IsSelfInState(self, "Hacking") then
+			CoD.HUDUtility.SetIcePickCurrentHackingFlavorText(self, controller)
+		end
+	end)
+	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)
+	if PostLoadFunc then
+		PostLoadFunc(self, f1_arg1, f1_arg0)
+	end
+	return self
+end
+CoD.TabletIcePickGadget_ItemBlock.__resetProperties = function(f10_arg0)
+	f10_arg0.Progress:completeAnimation()
+	f10_arg0.Progress2:completeAnimation()
+	f10_arg0.CommonSearchingBar:completeAnimation()
+	f10_arg0.Frame:completeAnimation()
+	f10_arg0.FrameAdd:completeAnimation()
+	f10_arg0.Icon:completeAnimation()
+	f10_arg0.Skull01:completeAnimation()
+	f10_arg0.Skull02:completeAnimation()
+	f10_arg0.Skull01Scanline:completeAnimation()
+	f10_arg0.Skull02Scanline:completeAnimation()
+	f10_arg0.BadMannersAdd:completeAnimation()
+	f10_arg0.BadManners:completeAnimation()
+	f10_arg0.Progress:setRGB(0.22, 0.77, 1)
+	f10_arg0.Progress:setAlpha(0.6)
+	f10_arg0.Progress2:setAlpha(0)
+	f10_arg0.CommonSearchingBar:setAlpha(1)
+	f10_arg0.Frame:setAlpha(1)
+	f10_arg0.FrameAdd:setAlpha(0)
+	f10_arg0.Icon:setAlpha(1)
+	f10_arg0.Icon.SpecialistImage:setRGB(0.22, 0.77, 1)
+	f10_arg0.Icon.NonSpecialistImage:setRGB(0.22, 0.77, 1)
+	f10_arg0.Skull01:setAlpha(0)
+	f10_arg0.Skull01:setScale(1, 1)
+	f10_arg0.Skull02:setAlpha(0)
+	f10_arg0.Skull01Scanline:setAlpha(0)
+	f10_arg0.Skull01Scanline:setScale(1, 1)
+	f10_arg0.Skull02Scanline:setAlpha(0)
+	f10_arg0.BadMannersAdd:setRGB(1, 1, 1)
+	f10_arg0.BadMannersAdd:setAlpha(0)
+	f10_arg0.BadManners:setRGB(1, 1, 1)
+	f10_arg0.BadManners:setAlpha(0)
+	f10_arg0.BadManners:setScale(1, 1)
+end
+CoD.TabletIcePickGadget_ItemBlock.__clipsPerState = {
+	DefaultState = {
+		DefaultClip = function(f11_arg0, f11_arg1)
+			f11_arg0:__resetProperties()
+			f11_arg0:setupElementClipCounter(5)
+			f11_arg0.Progress:completeAnimation()
+			f11_arg0.Progress:setAlpha(0)
+			f11_arg0.clipFinished(f11_arg0.Progress)
+			f11_arg0.Progress2:completeAnimation()
+			f11_arg0.Progress2:setAlpha(0)
+			f11_arg0.clipFinished(f11_arg0.Progress2)
+			local f11_local0 = function(f12_arg0)
+				f11_arg0.Frame:beginAnimation(150)
+				f11_arg0.Frame:setAlpha(1)
+				f11_arg0.Frame:registerEventHandler("interrupted_keyframe", f11_arg0.clipInterrupted)
+				f11_arg0.Frame:registerEventHandler("transition_complete_keyframe", f11_arg0.clipFinished)
+			end
+			f11_arg0.Frame:completeAnimation()
+			f11_arg0.Frame:setAlpha(0)
+			f11_local0(f11_arg0.Frame)
+			local f11_local1 = function(f13_arg0)
+				local f13_local0 = function(f14_arg0)
+					f14_arg0:beginAnimation(99)
+					f14_arg0:setAlpha(0)
+					f14_arg0:registerEventHandler("transition_complete_keyframe", f11_arg0.clipFinished)
+				end
+				f11_arg0.FrameAdd:beginAnimation(150)
+				f11_arg0.FrameAdd:setAlpha(0.5)
+				f11_arg0.FrameAdd:registerEventHandler("interrupted_keyframe", f11_arg0.clipInterrupted)
+				f11_arg0.FrameAdd:registerEventHandler("transition_complete_keyframe", f13_local0)
+			end
+			f11_arg0.FrameAdd:completeAnimation()
+			f11_arg0.FrameAdd:setAlpha(0)
+			f11_local1(f11_arg0.FrameAdd)
+			local f11_local2 = function(f15_arg0)
+				local f15_local0 = function(f16_arg0)
+					f16_arg0:beginAnimation(150, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f16_arg0:setAlpha(1)
+					f16_arg0:registerEventHandler("transition_complete_keyframe", f11_arg0.clipFinished)
+				end
+				f11_arg0.CommonSearchingBar:beginAnimation(150)
+				f11_arg0.CommonSearchingBar:registerEventHandler("interrupted_keyframe", f11_arg0.clipInterrupted)
+				f11_arg0.CommonSearchingBar:registerEventHandler("transition_complete_keyframe", f15_local0)
+			end
+			f11_arg0.CommonSearchingBar:completeAnimation()
+			f11_arg0.CommonSearchingBar:setAlpha(0)
+			f11_local2(f11_arg0.CommonSearchingBar)
+		end,
+	},
+	Hacking = {
+		DefaultClip = function(f17_arg0, f17_arg1)
+			f17_arg0:__resetProperties()
+			f17_arg0:setupElementClipCounter(3)
+			f17_arg0.Progress:completeAnimation()
+			f17_arg0.Progress:setRGB(0.22, 0.77, 1)
+			f17_arg0.clipFinished(f17_arg0.Progress)
+			f17_arg0.Progress2:completeAnimation()
+			f17_arg0.Progress2:setAlpha(0.2)
+			f17_arg0.clipFinished(f17_arg0.Progress2)
+			local f17_local0 = function(f18_arg0)
+				local f18_local0 = function(f19_arg0)
+					local f19_local0 = function(f20_arg0)
+						f20_arg0:beginAnimation(250)
+						f20_arg0:setAlpha(0.5)
+						f20_arg0:registerEventHandler("transition_complete_keyframe", f17_arg0.clipFinished)
+					end
+					f19_arg0:beginAnimation(199)
+					f19_arg0:registerEventHandler("transition_complete_keyframe", f19_local0)
+				end
+				f17_arg0.FrameAdd:beginAnimation(250, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+				f17_arg0.FrameAdd:setAlpha(1)
+				f17_arg0.FrameAdd:registerEventHandler("interrupted_keyframe", f17_arg0.clipInterrupted)
+				f17_arg0.FrameAdd:registerEventHandler("transition_complete_keyframe", f18_local0)
+			end
+			f17_arg0.FrameAdd:completeAnimation()
+			f17_arg0.FrameAdd:setAlpha(0)
+			f17_local0(f17_arg0.FrameAdd)
+		end,
+	},
+	Hacked = {
+		DefaultClip = function(f21_arg0, f21_arg1)
+			f21_arg0:__resetProperties()
+			f21_arg0:setupElementClipCounter(9)
+			f21_arg0.Progress:completeAnimation()
+			f21_arg0.Progress:setAlpha(0)
+			f21_arg0.clipFinished(f21_arg0.Progress)
+			f21_arg0.Progress2:completeAnimation()
+			f21_arg0.Progress2:setAlpha(0)
+			f21_arg0.clipFinished(f21_arg0.Progress2)
+			local f21_local0 = function(f22_arg0)
+				local f22_local0 = function(f23_arg0)
+					f23_arg0:beginAnimation(300)
+					f23_arg0.SpecialistImage:beginAnimation(300)
+					f23_arg0.NonSpecialistImage:beginAnimation(300)
+					f23_arg0.SpecialistImage:setRGB(0.12, 0.12, 0.12)
+					f23_arg0.NonSpecialistImage:setRGB(0.12, 0.12, 0.12)
+					f23_arg0:registerEventHandler("transition_complete_keyframe", f21_arg0.clipFinished)
+				end
+				f21_arg0.Icon:beginAnimation(100)
+				f21_arg0.Icon:registerEventHandler("interrupted_keyframe", f21_arg0.clipInterrupted)
+				f21_arg0.Icon:registerEventHandler("transition_complete_keyframe", f22_local0)
+			end
+			f21_arg0.Icon:completeAnimation()
+			f21_arg0.Icon.SpecialistImage:completeAnimation()
+			f21_arg0.Icon.NonSpecialistImage:completeAnimation()
+			f21_arg0.Icon.SpecialistImage:setRGB(0.22, 0.77, 1)
+			f21_arg0.Icon.NonSpecialistImage:setRGB(0.22, 0.77, 1)
+			f21_local0(f21_arg0.Icon)
+			local f21_local1 = function(f24_arg0)
+				local f24_local0 = function(f25_arg0)
+					local f25_local0 = function(f26_arg0)
+						f26_arg0:beginAnimation(100)
+						f26_arg0:setAlpha(0.4)
+						f26_arg0:registerEventHandler("transition_complete_keyframe", f21_arg0.clipFinished)
+					end
+					f25_arg0:beginAnimation(100)
+					f25_arg0:registerEventHandler("transition_complete_keyframe", f25_local0)
+				end
+				f21_arg0.Frame:beginAnimation(100)
+				f21_arg0.Frame:registerEventHandler("interrupted_keyframe", f21_arg0.clipInterrupted)
+				f21_arg0.Frame:registerEventHandler("transition_complete_keyframe", f24_local0)
+			end
+			f21_arg0.Frame:completeAnimation()
+			f21_arg0.Frame:setAlpha(1)
+			f21_local1(f21_arg0.Frame)
+			local f21_local2 = function(f27_arg0)
+				f21_arg0.FrameAdd:beginAnimation(100)
+				f21_arg0.FrameAdd:setAlpha(0)
+				f21_arg0.FrameAdd:registerEventHandler("interrupted_keyframe", f21_arg0.clipInterrupted)
+				f21_arg0.FrameAdd:registerEventHandler("transition_complete_keyframe", f21_arg0.clipFinished)
+			end
+			f21_arg0.FrameAdd:completeAnimation()
+			f21_arg0.FrameAdd:setAlpha(0.5)
+			f21_local2(f21_arg0.FrameAdd)
+			local f21_local3 = function(f28_arg0)
+				local f28_local0 = function(f29_arg0)
+					local f29_local0 = function(f30_arg0)
+						local f30_local0 = function(f31_arg0)
+							local f31_local0 = function(f32_arg0)
+								local f32_local0 = function(f33_arg0)
+									local f33_local0 = function(f34_arg0)
+										local f34_local0 = function(f35_arg0)
+											f35_arg0:beginAnimation(20)
+											f35_arg0:setAlpha(0)
+											f35_arg0:registerEventHandler("transition_complete_keyframe", f21_arg0.clipFinished)
+										end
+										f34_arg0:beginAnimation(19)
+										f34_arg0:setAlpha(1)
+										f34_arg0:registerEventHandler("transition_complete_keyframe", f34_local0)
+									end
+									f33_arg0:beginAnimation(20)
+									f33_arg0:setAlpha(0)
+									f33_arg0:registerEventHandler("transition_complete_keyframe", f33_local0)
+								end
+								f32_arg0:beginAnimation(20)
+								f32_arg0:setAlpha(1)
+								f32_arg0:registerEventHandler("transition_complete_keyframe", f32_local0)
+							end
+							f31_arg0:beginAnimation(19)
+							f31_arg0:setAlpha(0)
+							f31_arg0:registerEventHandler("transition_complete_keyframe", f31_local0)
+						end
+						f30_arg0:beginAnimation(140, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+						f30_arg0:setAlpha(1)
+						f30_arg0:registerEventHandler("transition_complete_keyframe", f30_local0)
+					end
+					f29_arg0:beginAnimation(160, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f29_arg0:setAlpha(0.53)
+					f29_arg0:setScale(1, 1)
+					f29_arg0:registerEventHandler("transition_complete_keyframe", f29_local0)
+				end
+				f21_arg0.Skull01:beginAnimation(100)
+				f21_arg0.Skull01:registerEventHandler("interrupted_keyframe", f21_arg0.clipInterrupted)
+				f21_arg0.Skull01:registerEventHandler("transition_complete_keyframe", f28_local0)
+			end
+			f21_arg0.Skull01:completeAnimation()
+			f21_arg0.Skull01:setAlpha(0)
+			f21_arg0.Skull01:setScale(0, 0)
+			f21_local3(f21_arg0.Skull01)
+			local f21_local4 = function(f36_arg0)
+				local f36_local0 = function(f37_arg0)
+					local f37_local0 = function(f38_arg0)
+						local f38_local0 = function(f39_arg0)
+							local f39_local0 = function(f40_arg0)
+								local f40_local0 = function(f41_arg0)
+									local f41_local0 = function(f42_arg0)
+										local f42_local0 = function(f43_arg0)
+											f43_arg0:beginAnimation(20)
+											f43_arg0:setAlpha(0)
+											f43_arg0:registerEventHandler("transition_complete_keyframe", f21_arg0.clipFinished)
+										end
+										f42_arg0:beginAnimation(19)
+										f42_arg0:setAlpha(0.6)
+										f42_arg0:registerEventHandler("transition_complete_keyframe", f42_local0)
+									end
+									f41_arg0:beginAnimation(20)
+									f41_arg0:setAlpha(0)
+									f41_arg0:registerEventHandler("transition_complete_keyframe", f41_local0)
+								end
+								f40_arg0:beginAnimation(20)
+								f40_arg0:setAlpha(0.6)
+								f40_arg0:registerEventHandler("transition_complete_keyframe", f40_local0)
+							end
+							f39_arg0:beginAnimation(19)
+							f39_arg0:setAlpha(0)
+							f39_arg0:registerEventHandler("transition_complete_keyframe", f39_local0)
+						end
+						f38_arg0:beginAnimation(140, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+						f38_arg0:setAlpha(0.6)
+						f38_arg0:registerEventHandler("transition_complete_keyframe", f38_local0)
+					end
+					f37_arg0:beginAnimation(160, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+					f37_arg0:setAlpha(0.32)
+					f37_arg0:setScale(1, 1)
+					f37_arg0:registerEventHandler("transition_complete_keyframe", f37_local0)
+				end
+				f21_arg0.Skull01Scanline:beginAnimation(100)
+				f21_arg0.Skull01Scanline:registerEventHandler("interrupted_keyframe", f21_arg0.clipInterrupted)
+				f21_arg0.Skull01Scanline:registerEventHandler("transition_complete_keyframe", f36_local0)
+			end
+			f21_arg0.Skull01Scanline:completeAnimation()
+			f21_arg0.Skull01Scanline:setAlpha(0)
+			f21_arg0.Skull01Scanline:setScale(0, 0)
+			f21_local4(f21_arg0.Skull01Scanline)
+			local f21_local5 = function(f44_arg0)
+				local f44_local0 = function(f45_arg0)
+					local f45_local0 = function(f46_arg0)
+						local f46_local0 = function(f47_arg0)
+							local f47_local0 = function(f48_arg0)
+								local f48_local0 = function(f49_arg0)
+									local f49_local0 = function(f50_arg0)
+										f50_arg0:beginAnimation(500, Enum[0xF50FFF429AB1890][0x6F6186B702830BC])
+										f50_arg0:setAlpha(0.5)
+										f50_arg0:registerEventHandler("transition_complete_keyframe", f21_arg0.clipFinished)
+									end
+									f49_arg0:beginAnimation(20)
+									f49_arg0:setAlpha(1)
+									f49_arg0:registerEventHandler("transition_complete_keyframe", f49_local0)
+								end
+								f48_arg0:beginAnimation(19)
+								f48_arg0:setAlpha(0)
+								f48_arg0:registerEventHandler("transition_complete_keyframe", f48_local0)
+							end
+							f47_arg0:beginAnimation(20)
+							f47_arg0:setAlpha(1)
+							f47_arg0:registerEventHandler("transition_complete_keyframe", f47_local0)
+						end
+						f46_arg0:beginAnimation(20)
+						f46_arg0:setAlpha(0)
+						f46_arg0:registerEventHandler("transition_complete_keyframe", f46_local0)
+					end
+					f45_arg0:beginAnimation(19)
+					f45_arg0:setAlpha(1)
+					f45_arg0:registerEventHandler("transition_complete_keyframe", f45_local0)
+				end
+				f21_arg0.Skull02:beginAnimation(400)
+				f21_arg0.Skull02:registerEventHandler("interrupted_keyframe", f21_arg0.clipInterrupted)
+				f21_arg0.Skull02:registerEventHandler("transition_complete_keyframe", f44_local0)
+			end
+			f21_arg0.Skull02:completeAnimation()
+			f21_arg0.Skull02:setAlpha(0)
+			f21_local5(f21_arg0.Skull02)
+			local f21_local6 = function(f51_arg0)
+				local f51_local0 = function(f52_arg0)
+					local f52_local0 = function(f53_arg0)
+						local f53_local0 = function(f54_arg0)
+							local f54_local0 = function(f55_arg0)
+								local f55_local0 = function(f56_arg0)
+									local f56_local0 = function(f57_arg0)
+										f57_arg0:beginAnimation(20)
+										f57_arg0:setAlpha(0.6)
+										f57_arg0:registerEventHandler("transition_complete_keyframe", f21_arg0.clipFinished)
+									end
+									f56_arg0:beginAnimation(19)
+									f56_arg0:setAlpha(0)
+									f56_arg0:registerEventHandler("transition_complete_keyframe", f56_local0)
+								end
+								f55_arg0:beginAnimation(20)
+								f55_arg0:setAlpha(0.6)
+								f55_arg0:registerEventHandler("transition_complete_keyframe", f55_local0)
+							end
+							f54_arg0:beginAnimation(20)
+							f54_arg0:setAlpha(0)
+							f54_arg0:registerEventHandler("transition_complete_keyframe", f54_local0)
+						end
+						f53_arg0:beginAnimation(19)
+						f53_arg0:setAlpha(0.6)
+						f53_arg0:registerEventHandler("transition_complete_keyframe", f53_local0)
+					end
+					f52_arg0:beginAnimation(300)
+					f52_arg0:registerEventHandler("transition_complete_keyframe", f52_local0)
+				end
+				f21_arg0.Skull02Scanline:beginAnimation(100)
+				f21_arg0.Skull02Scanline:registerEventHandler("interrupted_keyframe", f21_arg0.clipInterrupted)
+				f21_arg0.Skull02Scanline:registerEventHandler("transition_complete_keyframe", f51_local0)
+			end
+			f21_arg0.Skull02Scanline:completeAnimation()
+			f21_arg0.Skull02Scanline:setAlpha(0)
+			f21_local6(f21_arg0.Skull02Scanline)
+		end,
+	},
+	Destroyed = {
+		DefaultClip = function(f58_arg0, f58_arg1)
+			f58_arg0:__resetProperties()
+			f58_arg0:setupElementClipCounter(8)
+			f58_arg0.Progress:completeAnimation()
+			f58_arg0.Progress:setAlpha(0)
+			f58_arg0.clipFinished(f58_arg0.Progress)
+			f58_arg0.Progress2:completeAnimation()
+			f58_arg0.Progress2:setAlpha(0)
+			f58_arg0.clipFinished(f58_arg0.Progress2)
+			local f58_local0 = function(f59_arg0)
+				local f59_local0 = function(f60_arg0)
+					f60_arg0:beginAnimation(300)
+					f60_arg0.SpecialistImage:beginAnimation(300)
+					f60_arg0.NonSpecialistImage:beginAnimation(300)
+					f60_arg0:setAlpha(0.1)
+					f60_arg0.SpecialistImage:setRGB(0.12, 0.12, 0.12)
+					f60_arg0.NonSpecialistImage:setRGB(0.12, 0.12, 0.12)
+					f60_arg0:registerEventHandler("transition_complete_keyframe", f58_arg0.clipFinished)
+				end
+				f58_arg0.Icon:beginAnimation(200)
+				f58_arg0.Icon:registerEventHandler("interrupted_keyframe", f58_arg0.clipInterrupted)
+				f58_arg0.Icon:registerEventHandler("transition_complete_keyframe", f59_local0)
+			end
+			f58_arg0.Icon:completeAnimation()
+			f58_arg0.Icon.SpecialistImage:completeAnimation()
+			f58_arg0.Icon.NonSpecialistImage:completeAnimation()
+			f58_arg0.Icon:setAlpha(1)
+			f58_arg0.Icon.SpecialistImage:setRGB(0.22, 0.77, 1)
+			f58_arg0.Icon.NonSpecialistImage:setRGB(0.22, 0.77, 1)
+			f58_local0(f58_arg0.Icon)
+			local f58_local1 = function(f61_arg0)
+				local f61_local0 = function(f62_arg0)
+					local f62_local0 = function(f63_arg0)
+						f63_arg0:beginAnimation(99)
+						f63_arg0:setAlpha(0.2)
+						f63_arg0:registerEventHandler("transition_complete_keyframe", f58_arg0.clipFinished)
+					end
+					f62_arg0:beginAnimation(100)
+					f62_arg0:registerEventHandler("transition_complete_keyframe", f62_local0)
+				end
+				f58_arg0.BadManners:beginAnimation(200)
+				f58_arg0.BadManners:setScale(1, 1)
+				f58_arg0.BadManners:registerEventHandler("interrupted_keyframe", f58_arg0.clipInterrupted)
+				f58_arg0.BadManners:registerEventHandler("transition_complete_keyframe", f61_local0)
+			end
+			f58_arg0.BadManners:completeAnimation()
+			f58_arg0.BadManners:setRGB(0.02, 0.59, 0.99)
+			f58_arg0.BadManners:setAlpha(1)
+			f58_arg0.BadManners:setScale(0, 0)
+			f58_local1(f58_arg0.BadManners)
+			local f58_local2 = function(f64_arg0)
+				local f64_local0 = function(f65_arg0)
+					local f65_local0 = function(f66_arg0)
+						f66_arg0:beginAnimation(99)
+						f66_arg0:setAlpha(0)
+						f66_arg0:registerEventHandler("transition_complete_keyframe", f58_arg0.clipFinished)
+					end
+					f65_arg0:beginAnimation(100)
+					f65_arg0:setAlpha(1)
+					f65_arg0:registerEventHandler("transition_complete_keyframe", f65_local0)
+				end
+				f58_arg0.BadMannersAdd:beginAnimation(200)
+				f58_arg0.BadMannersAdd:registerEventHandler("interrupted_keyframe", f58_arg0.clipInterrupted)
+				f58_arg0.BadMannersAdd:registerEventHandler("transition_complete_keyframe", f64_local0)
+			end
+			f58_arg0.BadMannersAdd:completeAnimation()
+			f58_arg0.BadMannersAdd:setRGB(0.49, 0.85, 1)
+			f58_arg0.BadMannersAdd:setAlpha(0)
+			f58_local2(f58_arg0.BadMannersAdd)
+			local f58_local3 = function(f67_arg0)
+				local f67_local0 = function(f68_arg0)
+					f68_arg0:beginAnimation(200)
+					f68_arg0:setAlpha(0.2)
+					f68_arg0:registerEventHandler("transition_complete_keyframe", f58_arg0.clipFinished)
+				end
+				f58_arg0.Frame:beginAnimation(200)
+				f58_arg0.Frame:registerEventHandler("interrupted_keyframe", f58_arg0.clipInterrupted)
+				f58_arg0.Frame:registerEventHandler("transition_complete_keyframe", f67_local0)
+			end
+			f58_arg0.Frame:completeAnimation()
+			f58_arg0.Frame:setAlpha(1)
+			f58_local3(f58_arg0.Frame)
+			f58_arg0.FrameAdd:completeAnimation()
+			f58_arg0.FrameAdd:setAlpha(0)
+			f58_arg0.clipFinished(f58_arg0.FrameAdd)
+			local f58_local4 = function(f69_arg0)
+				local f69_local0 = function(f70_arg0)
+					f70_arg0:beginAnimation(200)
+					f70_arg0:setAlpha(0)
+					f70_arg0:registerEventHandler("transition_complete_keyframe", f58_arg0.clipFinished)
+				end
+				f58_arg0.CommonSearchingBar:beginAnimation(200)
+				f58_arg0.CommonSearchingBar:registerEventHandler("interrupted_keyframe", f58_arg0.clipInterrupted)
+				f58_arg0.CommonSearchingBar:registerEventHandler("transition_complete_keyframe", f69_local0)
+			end
+			f58_arg0.CommonSearchingBar:completeAnimation()
+			f58_arg0.CommonSearchingBar:setAlpha(1)
+			f58_local4(f58_arg0.CommonSearchingBar)
+		end,
+	},
+}
+CoD.TabletIcePickGadget_ItemBlock.__onClose = function(f71_arg0)
+	f71_arg0.Progress:close()
+	f71_arg0.Progress2:close()
+	f71_arg0.Icon:close()
+	f71_arg0.CommonSearchingBar:close()
+end

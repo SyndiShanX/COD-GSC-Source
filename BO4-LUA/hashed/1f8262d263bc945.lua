@@ -1,0 +1,223 @@
+CoD.SpawnSelectKillcamFrameLayoutRight = InheritFrom(LUI.UIElement)
+CoD.SpawnSelectKillcamFrameLayoutRight.__defaultWidth = 90
+CoD.SpawnSelectKillcamFrameLayoutRight.__defaultHeight = 925
+CoD.SpawnSelectKillcamFrameLayoutRight.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+	local self = LUI.UIElement.new(f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+	self:setClass(CoD.SpawnSelectKillcamFrameLayoutRight)
+	self.id = "SpawnSelectKillcamFrameLayoutRight"
+	self.soundSet = "default"
+	f1_arg0:addElementToPendingUpdateStateList(self)
+	local elementBotRight = LUI.UIImage.new(0, 0, 42, 56, 0, 0, 745.5, 777.5)
+	elementBotRight:setAlpha(0.05)
+	elementBotRight:setImage(RegisterImage(0x5A611D4B0D9997B))
+	self:addElement(elementBotRight)
+	self.elementBotRight = elementBotRight
+	local elementTopRight = LUI.UIImage.new(0, 0, 42, 56, 0, 0, 95.5, 127.5)
+	elementTopRight:setAlpha(0.05)
+	elementTopRight:setImage(RegisterImage(0x5A611D4B0D9997B))
+	self:addElement(elementTopRight)
+	self.elementTopRight = elementTopRight
+	local elementMidRight = LUI.UIImage.new(0, 0, 0, 12, 0, 0, 425.5, 437.5)
+	elementMidRight:setAlpha(0.05)
+	elementMidRight:setImage(RegisterImage(0x8819286035AA7EB))
+	self:addElement(elementMidRight)
+	self.elementMidRight = elementMidRight
+	local elementMidBoxes = LUI.UIImage.new(0, 0, 31.5, 89.5, 0, 0, 418.5, 446.5)
+	elementMidBoxes:setAlpha(0.05)
+	elementMidBoxes:setImage(RegisterImage(0x8819386035AA99E))
+	self:addElement(elementMidBoxes)
+	self.elementMidBoxes = elementMidBoxes
+	local RulerRight = LUI.UIImage.new(0, 0, 2, 42, 0, 0, 86.5, 770.5)
+	RulerRight:setImage(RegisterImage(0xA36EC4B5F194195))
+	RulerRight:setMaterial(LUI.UIImage.GetCachedMaterial(0xE992BD5A540E2D))
+	RulerRight:setShaderVector(0, 0, 1, 0, 0)
+	RulerRight:setShaderVector(1, 0, 0, 0, 0)
+	RulerRight:setShaderVector(2, 0, 1, 0, 0)
+	RulerRight:setShaderVector(3, 0, 0, 0, 0)
+	RulerRight:setShaderVector(4, 0, 0, 0, 0)
+	self:addElement(RulerRight)
+	self.RulerRight = RulerRight
+	if PostLoadFunc then
+		PostLoadFunc(self, f1_arg1, f1_arg0)
+	end
+	return self
+end
+CoD.SpawnSelectKillcamFrameLayoutRight.__resetProperties = function(f2_arg0)
+	f2_arg0.elementMidRight:completeAnimation()
+	f2_arg0.elementMidBoxes:completeAnimation()
+	f2_arg0.elementTopRight:completeAnimation()
+	f2_arg0.elementBotRight:completeAnimation()
+	f2_arg0.RulerRight:completeAnimation()
+	f2_arg0.elementMidRight:setLeftRight(0, 0, 0, 12)
+	f2_arg0.elementMidRight:setTopBottom(0, 0, 425.5, 437.5)
+	f2_arg0.elementMidRight:setAlpha(0.05)
+	f2_arg0.elementMidBoxes:setLeftRight(0, 0, 31.5, 89.5)
+	f2_arg0.elementMidBoxes:setTopBottom(0, 0, 418.5, 446.5)
+	f2_arg0.elementMidBoxes:setAlpha(0.05)
+	f2_arg0.elementTopRight:setTopBottom(0, 0, 95.5, 127.5)
+	f2_arg0.elementTopRight:setAlpha(0.05)
+	f2_arg0.elementBotRight:setLeftRight(0, 0, 42, 56)
+	f2_arg0.elementBotRight:setTopBottom(0, 0, 745.5, 777.5)
+	f2_arg0.elementBotRight:setAlpha(0.05)
+	f2_arg0.RulerRight:setMaterial(LUI.UIImage.GetCachedMaterial(0xE992BD5A540E2D))
+	f2_arg0.RulerRight:setShaderVector(0, 0, 1, 0, 0)
+	f2_arg0.RulerRight:setShaderVector(1, 0, 0, 0, 0)
+	f2_arg0.RulerRight:setShaderVector(2, 0, 1, 0, 0)
+	f2_arg0.RulerRight:setShaderVector(3, 0, 0, 0, 0)
+	f2_arg0.RulerRight:setShaderVector(4, 0, 0, 0, 0)
+end
+CoD.SpawnSelectKillcamFrameLayoutRight.__clipsPerState = {
+	DefaultState = {
+		DefaultClip = function(f3_arg0, f3_arg1)
+			f3_arg0:__resetProperties()
+			f3_arg0:setupElementClipCounter(0)
+		end,
+		Intro = function(f4_arg0, f4_arg1)
+			f4_arg0:__resetProperties()
+			f4_arg0:setupElementClipCounter(5)
+			local f4_local0 = function(f5_arg0)
+				local f5_local0 = function(f6_arg0)
+					local f6_local0 = function(f7_arg0)
+						f7_arg0:beginAnimation(100)
+						f7_arg0:setAlpha(0.05)
+						f7_arg0:registerEventHandler("transition_complete_keyframe", f4_arg0.clipFinished)
+					end
+					f6_arg0:beginAnimation(299, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f6_arg0:setTopBottom(0, 0, 745.5, 777.5)
+					f6_arg0:setAlpha(0.3)
+					f6_arg0:registerEventHandler("transition_complete_keyframe", f6_local0)
+				end
+				f4_arg0.elementBotRight:beginAnimation(1100)
+				f4_arg0.elementBotRight:registerEventHandler("interrupted_keyframe", f4_arg0.clipInterrupted)
+				f4_arg0.elementBotRight:registerEventHandler("transition_complete_keyframe", f5_local0)
+			end
+			f4_arg0.elementBotRight:completeAnimation()
+			f4_arg0.elementBotRight:setLeftRight(0, 0, 42, 56)
+			f4_arg0.elementBotRight:setTopBottom(0, 0, 1140.5, 1172.5)
+			f4_arg0.elementBotRight:setAlpha(0)
+			f4_local0(f4_arg0.elementBotRight)
+			local f4_local1 = function(f8_arg0)
+				local f8_local0 = function(f9_arg0)
+					local f9_local0 = function(f10_arg0)
+						f10_arg0:beginAnimation(100)
+						f10_arg0:setAlpha(0.05)
+						f10_arg0:registerEventHandler("transition_complete_keyframe", f4_arg0.clipFinished)
+					end
+					f9_arg0:beginAnimation(299, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+					f9_arg0:setTopBottom(0, 0, 95.5, 127.5)
+					f9_arg0:setAlpha(0.3)
+					f9_arg0:registerEventHandler("transition_complete_keyframe", f9_local0)
+				end
+				f4_arg0.elementTopRight:beginAnimation(1100)
+				f4_arg0.elementTopRight:registerEventHandler("interrupted_keyframe", f4_arg0.clipInterrupted)
+				f4_arg0.elementTopRight:registerEventHandler("transition_complete_keyframe", f8_local0)
+			end
+			f4_arg0.elementTopRight:completeAnimation()
+			f4_arg0.elementTopRight:setTopBottom(0, 0, -159.5, -127.5)
+			f4_arg0.elementTopRight:setAlpha(0)
+			f4_local1(f4_arg0.elementTopRight)
+			local f4_local2 = function(f11_arg0)
+				local f11_local0 = function(f12_arg0)
+					local f12_local0 = function(f13_arg0)
+						local f13_local0 = function(f14_arg0)
+							local f14_local0 = function(f15_arg0)
+								local f15_local0 = function(f16_arg0)
+									local f16_local0 = function(f17_arg0)
+										local f17_local0 = function(f18_arg0)
+											local f18_local0 = function(f19_arg0)
+												local f19_local0 = function(f20_arg0)
+													local f20_local0 = function(f21_arg0)
+														local f21_local0 = function(f22_arg0)
+															f22_arg0:beginAnimation(99)
+															f22_arg0:setAlpha(0.05)
+															f22_arg0:registerEventHandler("transition_complete_keyframe", f4_arg0.clipFinished)
+														end
+														f21_arg0:beginAnimation(200)
+														f21_arg0:registerEventHandler("transition_complete_keyframe", f21_local0)
+													end
+													f20_arg0:beginAnimation(9)
+													f20_arg0:setLeftRight(0, 0, 0, 12)
+													f20_arg0:setAlpha(0.25)
+													f20_arg0:registerEventHandler("transition_complete_keyframe", f20_local0)
+												end
+												f19_arg0:beginAnimation(90)
+												f19_arg0:registerEventHandler("transition_complete_keyframe", f19_local0)
+											end
+											f18_arg0:beginAnimation(9)
+											f18_arg0:setLeftRight(0, 0, -12, 0)
+											f18_arg0:setAlpha(0.2)
+											f18_arg0:registerEventHandler("transition_complete_keyframe", f18_local0)
+										end
+										f17_arg0:beginAnimation(90)
+										f17_arg0:registerEventHandler("transition_complete_keyframe", f17_local0)
+									end
+									f16_arg0:beginAnimation(9, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+									f16_arg0:setLeftRight(0, 0, -24, -12)
+									f16_arg0:setAlpha(0.15)
+									f16_arg0:registerEventHandler("transition_complete_keyframe", f16_local0)
+								end
+								f15_arg0:beginAnimation(89)
+								f15_arg0:registerEventHandler("transition_complete_keyframe", f15_local0)
+							end
+							f14_arg0:beginAnimation(9)
+							f14_arg0:registerEventHandler("transition_complete_keyframe", f14_local0)
+						end
+						f13_arg0:beginAnimation(90)
+						f13_arg0:setLeftRight(0, 0, -36, -24)
+						f13_arg0:setAlpha(0.1)
+						f13_arg0:registerEventHandler("transition_complete_keyframe", f13_local0)
+					end
+					f12_arg0:beginAnimation(90)
+					f12_arg0:setLeftRight(0, 0, -230, -218)
+					f12_arg0:registerEventHandler("transition_complete_keyframe", f12_local0)
+				end
+				f4_arg0.elementMidRight:beginAnimation(1010)
+				f4_arg0.elementMidRight:registerEventHandler("interrupted_keyframe", f4_arg0.clipInterrupted)
+				f4_arg0.elementMidRight:registerEventHandler("transition_complete_keyframe", f11_local0)
+			end
+			f4_arg0.elementMidRight:completeAnimation()
+			f4_arg0.elementMidRight:setLeftRight(0, 0, -424, -412)
+			f4_arg0.elementMidRight:setTopBottom(0, 0, 425.5, 437.5)
+			f4_arg0.elementMidRight:setAlpha(0)
+			f4_local2(f4_arg0.elementMidRight)
+			local f4_local3 = function(f23_arg0)
+				local f23_local0 = function(f24_arg0)
+					local f24_local0 = function(f25_arg0)
+						f25_arg0:beginAnimation(99)
+						f25_arg0:setAlpha(0.05)
+						f25_arg0:registerEventHandler("transition_complete_keyframe", f4_arg0.clipFinished)
+					end
+					f24_arg0:beginAnimation(200, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f24_arg0:setAlpha(0.3)
+					f24_arg0:registerEventHandler("transition_complete_keyframe", f24_local0)
+				end
+				f4_arg0.elementMidBoxes:beginAnimation(1500)
+				f4_arg0.elementMidBoxes:registerEventHandler("interrupted_keyframe", f4_arg0.clipInterrupted)
+				f4_arg0.elementMidBoxes:registerEventHandler("transition_complete_keyframe", f23_local0)
+			end
+			f4_arg0.elementMidBoxes:completeAnimation()
+			f4_arg0.elementMidBoxes:setLeftRight(0, 0, 31.5, 89.5)
+			f4_arg0.elementMidBoxes:setTopBottom(0, 0, 418.5, 446.5)
+			f4_arg0.elementMidBoxes:setAlpha(0)
+			f4_local3(f4_arg0.elementMidBoxes)
+			local f4_local4 = function(f26_arg0)
+				local f26_local0 = function(f27_arg0)
+					f27_arg0:beginAnimation(399, Enum[0xF50FFF429AB1890][0x5193EA7825DC097])
+					f27_arg0:setShaderVector(2, 0, 1, 0, 0)
+					f27_arg0:registerEventHandler("transition_complete_keyframe", f4_arg0.clipFinished)
+				end
+				f4_arg0.RulerRight:beginAnimation(900)
+				f4_arg0.RulerRight:registerEventHandler("interrupted_keyframe", f4_arg0.clipInterrupted)
+				f4_arg0.RulerRight:registerEventHandler("transition_complete_keyframe", f26_local0)
+			end
+			f4_arg0.RulerRight:completeAnimation()
+			f4_arg0.RulerRight:setMaterial(LUI.UIImage.GetCachedMaterial(0xE992BD5A540E2D))
+			f4_arg0.RulerRight:setShaderVector(0, 0, 1, 0, 0)
+			f4_arg0.RulerRight:setShaderVector(1, 0, 0, 0, 0)
+			f4_arg0.RulerRight:setShaderVector(2, 0.5, 0.5, 0, 0)
+			f4_arg0.RulerRight:setShaderVector(3, 0, 0, 0, 0)
+			f4_arg0.RulerRight:setShaderVector(4, 0, 0, 0, 0)
+			f4_local4(f4_arg0.RulerRight)
+		end,
+	},
+}

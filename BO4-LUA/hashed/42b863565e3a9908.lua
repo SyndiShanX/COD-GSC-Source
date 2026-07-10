@@ -1,0 +1,471 @@
+CoD.WZObituarySquadKilled = InheritFrom(LUI.UIElement)
+CoD.WZObituarySquadKilled.__defaultWidth = 503
+CoD.WZObituarySquadKilled.__defaultHeight = 48
+CoD.WZObituarySquadKilled.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+	local self = LUI.UIElement.new(f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+	self:setUseCylinderMapping(false)
+	self:setClass(CoD.WZObituarySquadKilled)
+	self.id = "WZObituarySquadKilled"
+	self.soundSet = "default"
+	f1_arg0:addElementToPendingUpdateStateList(self)
+	local SquadEliminatedBlur = LUI.UIImage.new(0, 0, 0, 503, 0, 0, 0, 48)
+	SquadEliminatedBlur:setAlpha(0.5)
+	SquadEliminatedBlur:setImage(RegisterImage(0x6E3E83412B13039))
+	SquadEliminatedBlur:setMaterial(LUI.UIImage.GetCachedMaterial(0xE2354BE557C4C7A))
+	SquadEliminatedBlur:setShaderVector(0, 0, 0, 0, 0)
+	self:addElement(SquadEliminatedBlur)
+	self.SquadEliminatedBlur = SquadEliminatedBlur
+	local SquadEliminatedBacking = LUI.UIImage.new(0, 0, 0, 503, 0, 0, 0, 48)
+	SquadEliminatedBacking:setRGB(0, 0, 0)
+	SquadEliminatedBacking:setAlpha(0.6)
+	SquadEliminatedBacking:setImage(RegisterImage(0x6E3E83412B13039))
+	self:addElement(SquadEliminatedBacking)
+	self.SquadEliminatedBacking = SquadEliminatedBacking
+	local BGDotPatternLarge = LUI.UIImage.new(0, 0, 0, 503, 0, 0, 0.5, 48.5)
+	BGDotPatternLarge:setRGB(0, 0, 0)
+	BGDotPatternLarge:setAlpha(0.2)
+	BGDotPatternLarge:setImage(RegisterImage(0xFC21A8215EA012B))
+	BGDotPatternLarge:setMaterial(LUI.UIImage.GetCachedMaterial(0x6CBE95C250C6D15))
+	BGDotPatternLarge:setShaderVector(0, 0, 0, 0, 0)
+	BGDotPatternLarge:setupNineSliceShader(4, 4)
+	self:addElement(BGDotPatternLarge)
+	self.BGDotPatternLarge = BGDotPatternLarge
+	local Text = LUI.UIText.new(0.5, 0.5, -244, 242, 0.5, 0.5, -13, 21)
+	Text:setRGB(0.91, 0, 0)
+	Text:setText(Engine[0xF9F1239CFD921FE](0x3B9B19F4DBB3F9E))
+	Text:setTTF("default")
+	Text:setAlignment(Enum[0x7A5123B654282D2][0xFEEB12BCB0D7041])
+	Text:setAlignment(Enum[0x7A5123B654282D2][0xF41D595A2B0EDF3])
+	self:addElement(Text)
+	self.Text = Text
+	local GradientLine = LUI.UIImage.new(0, 0, -6.5, 510.5, 0, 0, 39, 55)
+	GradientLine:setRGB(0.91, 0, 0)
+	GradientLine:setImage(RegisterImage(0xED0B63C61449483))
+	self:addElement(GradientLine)
+	self.GradientLine = GradientLine
+	local BracketL = LUI.UIImage.new(0, 0, -5.5, 10.5, 0, 0, -6, 54)
+	BracketL:setRGB(0, 0, 0)
+	BracketL:setImage(RegisterImage(0xE1F751C91ABC7F8))
+	self:addElement(BracketL)
+	self.BracketL = BracketL
+	local BracketR = LUI.UIImage.new(0, 0, 493, 509, 0, 0, -6, 54)
+	BracketR:setRGB(0, 0, 0)
+	BracketR:setZRot(180)
+	BracketR:setImage(RegisterImage(0xE1F751C91ABC7F8))
+	self:addElement(BracketR)
+	self.BracketR = BracketR
+	local PipL = LUI.UIImage.new(0, 0, -6, 4, 0, 0, 20, 28)
+	PipL:setRGB(0.91, 0, 0)
+	PipL:setZRot(90)
+	PipL:setImage(RegisterImage(0x9D1B20838FA39D4))
+	self:addElement(PipL)
+	self.PipL = PipL
+	local PipR = LUI.UIImage.new(0, 0, 499, 509, 0, 0, 20, 28)
+	PipR:setRGB(0.91, 0, 0)
+	PipR:setZRot(270)
+	PipR:setImage(RegisterImage(0x9D1B20838FA39D4))
+	self:addElement(PipR)
+	self.PipR = PipR
+	self:mergeStateConditions({
+		{
+			stateName = "Visible",
+			condition = function(menu, element, event)
+				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "style", 4) and IsGametypeSettingsValue("wzShowSquadWipeUI", 1)
+			end,
+		},
+	})
+	self:linkToElementModel(self, "style", true, function(model)
+		f1_arg0:updateElementState(self, {
+			name = "model_validation",
+			menu = f1_arg0,
+			controller = f1_arg1,
+			modelValue = model:get(),
+			modelName = "style",
+		})
+	end)
+	self:linkToElementModel(self, "style", true, function(model)
+		if CoD.ModelUtility.IsSelfModelValueEqualTo(self, f1_arg1, "style", 4) then
+			PlayClip(self, "DefaultClip", f1_arg1)
+		end
+	end)
+	if PostLoadFunc then
+		PostLoadFunc(self, f1_arg1, f1_arg0)
+	end
+	return self
+end
+CoD.WZObituarySquadKilled.__resetProperties = function(f5_arg0)
+	f5_arg0.Text:completeAnimation()
+	f5_arg0.PipR:completeAnimation()
+	f5_arg0.PipL:completeAnimation()
+	f5_arg0.BracketR:completeAnimation()
+	f5_arg0.BracketL:completeAnimation()
+	f5_arg0.GradientLine:completeAnimation()
+	f5_arg0.BGDotPatternLarge:completeAnimation()
+	f5_arg0.SquadEliminatedBacking:completeAnimation()
+	f5_arg0.SquadEliminatedBlur:completeAnimation()
+	f5_arg0.Text:setAlpha(1)
+	f5_arg0.PipR:setLeftRight(0, 0, 499, 509)
+	f5_arg0.PipR:setAlpha(1)
+	f5_arg0.PipL:setLeftRight(0, 0, -6, 4)
+	f5_arg0.PipL:setAlpha(1)
+	f5_arg0.BracketR:setLeftRight(0, 0, 493, 509)
+	f5_arg0.BracketR:setTopBottom(0, 0, -6, 54)
+	f5_arg0.BracketR:setAlpha(1)
+	f5_arg0.BracketL:setLeftRight(0, 0, -5.5, 10.5)
+	f5_arg0.BracketL:setTopBottom(0, 0, -6, 54)
+	f5_arg0.BracketL:setAlpha(1)
+	f5_arg0.GradientLine:setLeftRight(0, 0, -6.5, 510.5)
+	f5_arg0.GradientLine:setAlpha(1)
+	f5_arg0.BGDotPatternLarge:setLeftRight(0, 0, 0, 503)
+	f5_arg0.BGDotPatternLarge:setAlpha(0.2)
+	f5_arg0.SquadEliminatedBacking:setLeftRight(0, 0, 0, 503)
+	f5_arg0.SquadEliminatedBacking:setAlpha(0.6)
+	f5_arg0.SquadEliminatedBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6B34AA3F39208EF))
+	f5_arg0.SquadEliminatedBlur:setLeftRight(0, 0, 0, 503)
+	f5_arg0.SquadEliminatedBlur:setAlpha(0.5)
+end
+CoD.WZObituarySquadKilled.__clipsPerState = {
+	DefaultState = {
+		DefaultClip = function(f6_arg0, f6_arg1)
+			f6_arg0:__resetProperties()
+			f6_arg0:setupElementClipCounter(9)
+			f6_arg0.SquadEliminatedBlur:completeAnimation()
+			f6_arg0.SquadEliminatedBlur:setAlpha(0)
+			f6_arg0.clipFinished(f6_arg0.SquadEliminatedBlur)
+			f6_arg0.SquadEliminatedBacking:completeAnimation()
+			f6_arg0.SquadEliminatedBacking:setAlpha(0)
+			f6_arg0.clipFinished(f6_arg0.SquadEliminatedBacking)
+			f6_arg0.BGDotPatternLarge:completeAnimation()
+			f6_arg0.BGDotPatternLarge:setAlpha(0)
+			f6_arg0.clipFinished(f6_arg0.BGDotPatternLarge)
+			f6_arg0.Text:completeAnimation()
+			f6_arg0.Text:setAlpha(0)
+			f6_arg0.clipFinished(f6_arg0.Text)
+			f6_arg0.GradientLine:completeAnimation()
+			f6_arg0.GradientLine:setAlpha(0)
+			f6_arg0.clipFinished(f6_arg0.GradientLine)
+			f6_arg0.BracketL:completeAnimation()
+			f6_arg0.BracketL:setAlpha(0)
+			f6_arg0.clipFinished(f6_arg0.BracketL)
+			f6_arg0.BracketR:completeAnimation()
+			f6_arg0.BracketR:setAlpha(0)
+			f6_arg0.clipFinished(f6_arg0.BracketR)
+			f6_arg0.PipL:completeAnimation()
+			f6_arg0.PipL:setAlpha(0)
+			f6_arg0.clipFinished(f6_arg0.PipL)
+			f6_arg0.PipR:completeAnimation()
+			f6_arg0.PipR:setAlpha(0)
+			f6_arg0.clipFinished(f6_arg0.PipR)
+		end,
+	},
+	Visible = {
+		DefaultClip = function(f7_arg0, f7_arg1)
+			f7_arg0:__resetProperties()
+			f7_arg0:setupElementClipCounter(9)
+			local f7_local0 = function(f8_arg0)
+				local f8_local0 = function(f9_arg0)
+					local f9_local0 = function(f10_arg0)
+						local f10_local0 = function(f11_arg0)
+							local f11_local0 = function(f12_arg0)
+								local f12_local0 = function(f13_arg0)
+									f13_arg0:beginAnimation(160)
+									f13_arg0:setLeftRight(0, 0, 251.5, 251.5)
+									f13_arg0:setAlpha(0.5)
+									f13_arg0:registerEventHandler("transition_complete_keyframe", f7_arg0.clipFinished)
+								end
+								f12_arg0:beginAnimation(169)
+								f12_arg0:setLeftRight(0, 0, 247.5, 255.5)
+								f12_arg0:setAlpha(0.72)
+								f12_arg0:registerEventHandler("transition_complete_keyframe", f12_local0)
+							end
+							f11_arg0:beginAnimation(1610)
+							f11_arg0:registerEventHandler("transition_complete_keyframe", f11_local0)
+						end
+						f10_arg0:beginAnimation(209, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+						f10_arg0:setLeftRight(0, 0, 0, 503)
+						f10_arg0:setAlpha(1)
+						f10_arg0:registerEventHandler("transition_complete_keyframe", f10_local0)
+					end
+					f9_arg0:beginAnimation(179)
+					f9_arg0:setLeftRight(0, 0, 247.5, 255.5)
+					f9_arg0:setAlpha(0.72)
+					f9_arg0:registerEventHandler("transition_complete_keyframe", f9_local0)
+				end
+				f7_arg0.SquadEliminatedBlur:beginAnimation(200)
+				f7_arg0.SquadEliminatedBlur:registerEventHandler("interrupted_keyframe", f7_arg0.clipInterrupted)
+				f7_arg0.SquadEliminatedBlur:registerEventHandler("transition_complete_keyframe", f8_local0)
+			end
+			f7_arg0.SquadEliminatedBlur:completeAnimation()
+			f7_arg0.SquadEliminatedBlur:setLeftRight(0, 0, 251.5, 251.5)
+			f7_arg0.SquadEliminatedBlur:setAlpha(0.5)
+			f7_local0(f7_arg0.SquadEliminatedBlur)
+			local f7_local1 = function(f14_arg0)
+				local f14_local0 = function(f15_arg0)
+					local f15_local0 = function(f16_arg0)
+						local f16_local0 = function(f17_arg0)
+							local f17_local0 = function(f18_arg0)
+								local f18_local0 = function(f19_arg0)
+									f19_arg0:beginAnimation(160)
+									f19_arg0:registerEventHandler("transition_complete_keyframe", f7_arg0.clipFinished)
+								end
+								f18_arg0:beginAnimation(169)
+								f18_arg0:setLeftRight(0, 0, 248, 255)
+								f18_arg0:setAlpha(0)
+								f18_arg0:registerEventHandler("transition_complete_keyframe", f18_local0)
+							end
+							f17_arg0:beginAnimation(1610)
+							f17_arg0:registerEventHandler("transition_complete_keyframe", f17_local0)
+						end
+						f16_arg0:beginAnimation(209, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+						f16_arg0:setLeftRight(0, 0, 0, 503)
+						f16_arg0:setAlpha(0.6)
+						f16_arg0:registerEventHandler("transition_complete_keyframe", f16_local0)
+					end
+					f15_arg0:beginAnimation(179)
+					f15_arg0:registerEventHandler("transition_complete_keyframe", f15_local0)
+				end
+				f7_arg0.SquadEliminatedBacking:beginAnimation(200)
+				f7_arg0.SquadEliminatedBacking:registerEventHandler("interrupted_keyframe", f7_arg0.clipInterrupted)
+				f7_arg0.SquadEliminatedBacking:registerEventHandler("transition_complete_keyframe", f14_local0)
+			end
+			f7_arg0.SquadEliminatedBacking:completeAnimation()
+			f7_arg0.SquadEliminatedBacking:setLeftRight(0, 0, 248, 255)
+			f7_arg0.SquadEliminatedBacking:setAlpha(0)
+			f7_arg0.SquadEliminatedBacking:setMaterial(LUI.UIImage.GetCachedMaterial(0x6B34AA3F39208EF))
+			f7_local1(f7_arg0.SquadEliminatedBacking)
+			local f7_local2 = function(f20_arg0)
+				local f20_local0 = function(f21_arg0)
+					local f21_local0 = function(f22_arg0)
+						local f22_local0 = function(f23_arg0)
+							local f23_local0 = function(f24_arg0)
+								local f24_local0 = function(f25_arg0)
+									f25_arg0:beginAnimation(160)
+									f25_arg0:registerEventHandler("transition_complete_keyframe", f7_arg0.clipFinished)
+								end
+								f24_arg0:beginAnimation(169)
+								f24_arg0:setLeftRight(0, 0, 251.5, 251.5)
+								f24_arg0:registerEventHandler("transition_complete_keyframe", f24_local0)
+							end
+							f23_arg0:beginAnimation(1610)
+							f23_arg0:registerEventHandler("transition_complete_keyframe", f23_local0)
+						end
+						f22_arg0:beginAnimation(209, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+						f22_arg0:setLeftRight(0, 0, 0, 503)
+						f22_arg0:registerEventHandler("transition_complete_keyframe", f22_local0)
+					end
+					f21_arg0:beginAnimation(179)
+					f21_arg0:registerEventHandler("transition_complete_keyframe", f21_local0)
+				end
+				f7_arg0.BGDotPatternLarge:beginAnimation(200)
+				f7_arg0.BGDotPatternLarge:registerEventHandler("interrupted_keyframe", f7_arg0.clipInterrupted)
+				f7_arg0.BGDotPatternLarge:registerEventHandler("transition_complete_keyframe", f20_local0)
+			end
+			f7_arg0.BGDotPatternLarge:completeAnimation()
+			f7_arg0.BGDotPatternLarge:setLeftRight(0, 0, 251.5, 251.5)
+			f7_arg0.BGDotPatternLarge:setAlpha(0.2)
+			f7_local2(f7_arg0.BGDotPatternLarge)
+			local f7_local3 = function(f26_arg0)
+				local f26_local0 = function(f27_arg0)
+					local f27_local0 = function(f28_arg0)
+						local f28_local0 = function(f29_arg0)
+							local f29_local0 = function(f30_arg0)
+								local f30_local0 = function(f31_arg0)
+									f31_arg0:beginAnimation(260)
+									f31_arg0:registerEventHandler("transition_complete_keyframe", f7_arg0.clipFinished)
+								end
+								f30_arg0:beginAnimation(69)
+								f30_arg0:setAlpha(0)
+								f30_arg0:registerEventHandler("transition_complete_keyframe", f30_local0)
+							end
+							f29_arg0:beginAnimation(1610)
+							f29_arg0:registerEventHandler("transition_complete_keyframe", f29_local0)
+						end
+						f28_arg0:beginAnimation(89)
+						f28_arg0:setAlpha(1)
+						f28_arg0:registerEventHandler("transition_complete_keyframe", f28_local0)
+					end
+					f27_arg0:beginAnimation(300)
+					f27_arg0:registerEventHandler("transition_complete_keyframe", f27_local0)
+				end
+				f7_arg0.Text:beginAnimation(200)
+				f7_arg0.Text:registerEventHandler("interrupted_keyframe", f7_arg0.clipInterrupted)
+				f7_arg0.Text:registerEventHandler("transition_complete_keyframe", f26_local0)
+			end
+			f7_arg0.Text:completeAnimation()
+			f7_arg0.Text:setAlpha(0)
+			f7_local3(f7_arg0.Text)
+			local f7_local4 = function(f32_arg0)
+				local f32_local0 = function(f33_arg0)
+					local f33_local0 = function(f34_arg0)
+						local f34_local0 = function(f35_arg0)
+							local f35_local0 = function(f36_arg0)
+								local f36_local0 = function(f37_arg0)
+									f37_arg0:beginAnimation(160)
+									f37_arg0:registerEventHandler("transition_complete_keyframe", f7_arg0.clipFinished)
+								end
+								f36_arg0:beginAnimation(169)
+								f36_arg0:setLeftRight(0, 0, 252, 252)
+								f36_arg0:registerEventHandler("transition_complete_keyframe", f36_local0)
+							end
+							f35_arg0:beginAnimation(1610)
+							f35_arg0:registerEventHandler("transition_complete_keyframe", f35_local0)
+						end
+						f34_arg0:beginAnimation(209, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+						f34_arg0:setLeftRight(0, 0, -3.5, 507.5)
+						f34_arg0:registerEventHandler("transition_complete_keyframe", f34_local0)
+					end
+					f33_arg0:beginAnimation(179)
+					f33_arg0:registerEventHandler("transition_complete_keyframe", f33_local0)
+				end
+				f7_arg0.GradientLine:beginAnimation(200)
+				f7_arg0.GradientLine:registerEventHandler("interrupted_keyframe", f7_arg0.clipInterrupted)
+				f7_arg0.GradientLine:registerEventHandler("transition_complete_keyframe", f32_local0)
+			end
+			f7_arg0.GradientLine:completeAnimation()
+			f7_arg0.GradientLine:setLeftRight(0, 0, 252, 252)
+			f7_arg0.GradientLine:setAlpha(1)
+			f7_local4(f7_arg0.GradientLine)
+			local f7_local5 = function(f38_arg0)
+				local f38_local0 = function(f39_arg0)
+					local f39_local0 = function(f40_arg0)
+						local f40_local0 = function(f41_arg0)
+							local f41_local0 = function(f42_arg0)
+								local f42_local0 = function(f43_arg0)
+									f43_arg0:beginAnimation(160)
+									f43_arg0:setTopBottom(0, 0, 24, 24)
+									f43_arg0:registerEventHandler("transition_complete_keyframe", f7_arg0.clipFinished)
+								end
+								f42_arg0:beginAnimation(169)
+								f42_arg0:setLeftRight(0, 0, 240.5, 256.5)
+								f42_arg0:registerEventHandler("transition_complete_keyframe", f42_local0)
+							end
+							f41_arg0:beginAnimation(1610)
+							f41_arg0:setTopBottom(0, 0, -3, 51)
+							f41_arg0:registerEventHandler("transition_complete_keyframe", f41_local0)
+						end
+						f40_arg0:beginAnimation(209, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+						f40_arg0:setLeftRight(0, 0, -5.5, 10.5)
+						f40_arg0:setTopBottom(0, 0, -5.65, 53.66)
+						f40_arg0:registerEventHandler("transition_complete_keyframe", f40_local0)
+					end
+					f39_arg0:beginAnimation(179)
+					f39_arg0:setTopBottom(0, 0, -6, 54)
+					f39_arg0:setAlpha(1)
+					f39_arg0:registerEventHandler("transition_complete_keyframe", f39_local0)
+				end
+				f7_arg0.BracketL:beginAnimation(200)
+				f7_arg0.BracketL:registerEventHandler("interrupted_keyframe", f7_arg0.clipInterrupted)
+				f7_arg0.BracketL:registerEventHandler("transition_complete_keyframe", f38_local0)
+			end
+			f7_arg0.BracketL:completeAnimation()
+			f7_arg0.BracketL:setLeftRight(0, 0, 240.5, 256.5)
+			f7_arg0.BracketL:setTopBottom(0, 0, 24, 24)
+			f7_arg0.BracketL:setAlpha(0)
+			f7_local5(f7_arg0.BracketL)
+			local f7_local6 = function(f44_arg0)
+				local f44_local0 = function(f45_arg0)
+					local f45_local0 = function(f46_arg0)
+						local f46_local0 = function(f47_arg0)
+							local f47_local0 = function(f48_arg0)
+								local f48_local0 = function(f49_arg0)
+									f49_arg0:beginAnimation(160)
+									f49_arg0:setTopBottom(0, 0, 24, 24)
+									f49_arg0:registerEventHandler("transition_complete_keyframe", f7_arg0.clipFinished)
+								end
+								f48_arg0:beginAnimation(169)
+								f48_arg0:setLeftRight(0, 0, 246, 262)
+								f48_arg0:setTopBottom(0, 0, -3, 51)
+								f48_arg0:registerEventHandler("transition_complete_keyframe", f48_local0)
+							end
+							f47_arg0:beginAnimation(1610)
+							f47_arg0:setTopBottom(0, 0, -3.26, 51.25)
+							f47_arg0:registerEventHandler("transition_complete_keyframe", f47_local0)
+						end
+						f46_arg0:beginAnimation(209, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+						f46_arg0:setLeftRight(0, 0, 492.5, 508.5)
+						f46_arg0:setTopBottom(0, 0, -5.68, 53.69)
+						f46_arg0:registerEventHandler("transition_complete_keyframe", f46_local0)
+					end
+					f45_arg0:beginAnimation(179)
+					f45_arg0:setTopBottom(0, 0, -6, 54)
+					f45_arg0:setAlpha(1)
+					f45_arg0:registerEventHandler("transition_complete_keyframe", f45_local0)
+				end
+				f7_arg0.BracketR:beginAnimation(200)
+				f7_arg0.BracketR:registerEventHandler("interrupted_keyframe", f7_arg0.clipInterrupted)
+				f7_arg0.BracketR:registerEventHandler("transition_complete_keyframe", f44_local0)
+			end
+			f7_arg0.BracketR:completeAnimation()
+			f7_arg0.BracketR:setLeftRight(0, 0, 246, 262)
+			f7_arg0.BracketR:setTopBottom(0, 0, 24, 24)
+			f7_arg0.BracketR:setAlpha(0)
+			f7_local6(f7_arg0.BracketR)
+			local f7_local7 = function(f50_arg0)
+				local f50_local0 = function(f51_arg0)
+					local f51_local0 = function(f52_arg0)
+						local f52_local0 = function(f53_arg0)
+							local f53_local0 = function(f54_arg0)
+								local f54_local0 = function(f55_arg0)
+									f55_arg0:beginAnimation(160)
+									f55_arg0:setAlpha(0)
+									f55_arg0:registerEventHandler("transition_complete_keyframe", f7_arg0.clipFinished)
+								end
+								f54_arg0:beginAnimation(169)
+								f54_arg0:setLeftRight(0, 0, 240, 250)
+								f54_arg0:registerEventHandler("transition_complete_keyframe", f54_local0)
+							end
+							f53_arg0:beginAnimation(1610)
+							f53_arg0:registerEventHandler("transition_complete_keyframe", f53_local0)
+						end
+						f52_arg0:beginAnimation(209, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+						f52_arg0:setLeftRight(0, 0, -6, 4)
+						f52_arg0:registerEventHandler("transition_complete_keyframe", f52_local0)
+					end
+					f51_arg0:beginAnimation(179)
+					f51_arg0:setAlpha(1)
+					f51_arg0:registerEventHandler("transition_complete_keyframe", f51_local0)
+				end
+				f7_arg0.PipL:beginAnimation(200)
+				f7_arg0.PipL:registerEventHandler("interrupted_keyframe", f7_arg0.clipInterrupted)
+				f7_arg0.PipL:registerEventHandler("transition_complete_keyframe", f50_local0)
+			end
+			f7_arg0.PipL:completeAnimation()
+			f7_arg0.PipL:setLeftRight(0, 0, 240, 250)
+			f7_arg0.PipL:setAlpha(0)
+			f7_local7(f7_arg0.PipL)
+			local f7_local8 = function(f56_arg0)
+				local f56_local0 = function(f57_arg0)
+					local f57_local0 = function(f58_arg0)
+						local f58_local0 = function(f59_arg0)
+							local f59_local0 = function(f60_arg0)
+								local f60_local0 = function(f61_arg0)
+									f61_arg0:beginAnimation(160)
+									f61_arg0:setAlpha(0)
+									f61_arg0:registerEventHandler("transition_complete_keyframe", f7_arg0.clipFinished)
+								end
+								f60_arg0:beginAnimation(169)
+								f60_arg0:setLeftRight(0, 0, 252, 262)
+								f60_arg0:registerEventHandler("transition_complete_keyframe", f60_local0)
+							end
+							f59_arg0:beginAnimation(1610)
+							f59_arg0:registerEventHandler("transition_complete_keyframe", f59_local0)
+						end
+						f58_arg0:beginAnimation(209, Enum[0xF50FFF429AB1890][0x53CEB9A0427197])
+						f58_arg0:setLeftRight(0, 0, 499, 509)
+						f58_arg0:registerEventHandler("transition_complete_keyframe", f58_local0)
+					end
+					f57_arg0:beginAnimation(179)
+					f57_arg0:setAlpha(1)
+					f57_arg0:registerEventHandler("transition_complete_keyframe", f57_local0)
+				end
+				f7_arg0.PipR:beginAnimation(200)
+				f7_arg0.PipR:registerEventHandler("interrupted_keyframe", f7_arg0.clipInterrupted)
+				f7_arg0.PipR:registerEventHandler("transition_complete_keyframe", f56_local0)
+			end
+			f7_arg0.PipR:completeAnimation()
+			f7_arg0.PipR:setLeftRight(0, 0, 252, 262)
+			f7_arg0.PipR:setAlpha(0)
+			f7_local8(f7_arg0.PipR)
+		end,
+	},
+}

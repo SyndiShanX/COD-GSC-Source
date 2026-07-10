@@ -1,0 +1,215 @@
+require("x64:6021906931854d6")
+CoD[0xE9560377C67385F] = InheritFrom(LUI.UIElement)
+CoD[0xE9560377C67385F].__defaultWidth = 960
+CoD[0xE9560377C67385F].__defaultHeight = 240
+CoD[0xE9560377C67385F].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+	local self = LUI.UIElement.new(f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+	self:setClass(CoD[0xE9560377C67385F])
+	self.id = "CallingCards_zm_Survivalist"
+	self.soundSet = "default"
+	self.anyChildUsesUpdateState = true
+	f1_arg0:addElementToPendingUpdateStateList(self)
+	local background = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
+	background:setImage(RegisterImage(0x18DCBF42CBAF395))
+	self:addElement(background)
+	self.background = background
+	local backwebs = LUI.UIImage.new(0, 0, 6.5, 182.5, 0, 0, 0, 176)
+	backwebs:setImage(RegisterImage(0x199B2EC94CA9246))
+	backwebs:setMaterial(LUI.UIImage.GetCachedMaterial(0xF755127C95CF5B6))
+	backwebs:setShaderVector(0, 1.59, 0, 0, 0)
+	self:addElement(backwebs)
+	self.backwebs = backwebs
+	local spiderbody = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
+	spiderbody:setImage(RegisterImage(0xA4BEFBDD3D8022C))
+	self:addElement(spiderbody)
+	self.spiderbody = spiderbody
+	local spiderLeg4 = CoD.CallingCards_Asset_spiderleg_animated.new(f1_arg0, f1_arg1, 0, 0, 17, 577, 0, 0, -6.5, 233.5)
+	spiderLeg4:setScale(0.75, 0.75)
+	self:addElement(spiderLeg4)
+	self.spiderLeg4 = spiderLeg4
+	local spiderLeg3 = CoD.CallingCards_Asset_spiderleg_animated.new(f1_arg0, f1_arg1, 0, 0, 59, 619, 0, 0, 17, 257)
+	spiderLeg3:setScale(0.8, 0.8)
+	self:addElement(spiderLeg3)
+	self.spiderLeg3 = spiderLeg3
+	local spiderLeg2 = CoD.CallingCards_Asset_spiderleg_animated.new(f1_arg0, f1_arg1, 0, 0, 80, 640, 0, 0, 17, 257)
+	spiderLeg2:setScale(0.9, 0.9)
+	self:addElement(spiderLeg2)
+	self.spiderLeg2 = spiderLeg2
+	local spiderLeg = CoD.CallingCards_Asset_spiderleg_animated.new(f1_arg0, f1_arg1, 0, 0, 153, 713, 0, 0, 30, 270)
+	self:addElement(spiderLeg)
+	self.spiderLeg = spiderLeg
+	local jawhorn = LUI.UIImage.new(0, 0, 384, 440, 0, 0, 113.5, 225.5)
+	jawhorn:setImage(RegisterImage(0xB63B983D38F526E))
+	self:addElement(jawhorn)
+	self.jawhorn = jawhorn
+	local dude = LUI.UIImage.new(0, 0, 407, 911, 0, 0, 0, 240)
+	dude:setImage(RegisterImage(0x9701C279EFADC8D))
+	dude:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD526D3FD71F281))
+	dude:setShaderVector(0, 0, 3, 0, 0)
+	dude:setShaderVector(1, 3.9, 0, 0, 0)
+	self:addElement(dude)
+	self.dude = dude
+	local dudeCovered = LUI.UIImage.new(0, 0, 553.5, 865.5, 0, 0, 0, 240)
+	dudeCovered:setImage(RegisterImage(0x7068ABAF4D4F91C))
+	self:addElement(dudeCovered)
+	self.dudeCovered = dudeCovered
+	local venom = LUI.UIImage.new(0, 0, 482, 512, 0, 0, 159, 255)
+	venom:setImage(RegisterImage(0x8B0A7587D1E34B))
+	venom:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD526D3FD71F281))
+	venom:setShaderVector(0, 0, 4, 0, 0)
+	venom:setShaderVector(1, 8, 0, 0, 0)
+	self:addElement(venom)
+	self.venom = venom
+	local teeth = LUI.UIImage.new(0, 0, 472, 512, 0, 0, 126, 174)
+	teeth:setImage(RegisterImage(0x7C0C75882E391C6))
+	self:addElement(teeth)
+	self.teeth = teeth
+	local frontrocks = LUI.UIImage.new(0, 0, 0, 376, 0, 0, 80, 240)
+	frontrocks:setImage(RegisterImage(0xF76C03DE934112D))
+	self:addElement(frontrocks)
+	self.frontrocks = frontrocks
+	local frontWebs = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
+	frontWebs:setImage(RegisterImage(0xC92A66217354BDE))
+	frontWebs:setMaterial(LUI.UIImage.GetCachedMaterial(0xF755127C95CF5B6))
+	frontWebs:setShaderVector(0, 1.61, 0, 0, 0)
+	self:addElement(frontWebs)
+	self.frontWebs = frontWebs
+	local grimaceFace = LUI.UIImage.new(0, 0, 593, 705, 0, 0, -1, 95)
+	grimaceFace:setImage(RegisterImage(0x6CC8E27AF979B2C))
+	grimaceFace:setMaterial(LUI.UIImage.GetCachedMaterial(0xFD526D3FD71F281))
+	grimaceFace:setShaderVector(0, 0, 4, 0, 0)
+	grimaceFace:setShaderVector(1, 1, 0, 0, 0)
+	self:addElement(grimaceFace)
+	self.grimaceFace = grimaceFace
+	local cropper = LUI.UIImage.new(0, 0, -32, 992, 0, 0, -392, 632)
+	cropper:setAlpha(0)
+	cropper:setImage(RegisterImage(0x7EEE1693E39382A))
+	self:addElement(cropper)
+	self.cropper = cropper
+	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)
+	if PostLoadFunc then
+		PostLoadFunc(self, f1_arg1, f1_arg0)
+	end
+	return self
+end
+CoD[0xE9560377C67385F].__resetProperties = function(f2_arg0)
+	f2_arg0.spiderLeg:completeAnimation()
+	f2_arg0.frontWebs:completeAnimation()
+	f2_arg0.backwebs:completeAnimation()
+	f2_arg0.spiderLeg3:completeAnimation()
+	f2_arg0.cropper:completeAnimation()
+	f2_arg0.spiderLeg2:completeAnimation()
+	f2_arg0.spiderLeg4:completeAnimation()
+	f2_arg0.spiderLeg:setLeftRight(0, 0, 153, 713)
+	f2_arg0.spiderLeg:setTopBottom(0, 0, 30, 270)
+	f2_arg0.frontWebs:setLeftRight(0, 0, 0, 960)
+	f2_arg0.frontWebs:setTopBottom(0, 0, 0, 240)
+	f2_arg0.frontWebs:setScale(1, 1)
+	f2_arg0.backwebs:setScale(1, 1)
+	f2_arg0.spiderLeg3:setLeftRight(0, 0, 59, 619)
+	f2_arg0.spiderLeg3:setTopBottom(0, 0, 17, 257)
+	f2_arg0.cropper:setAlpha(0)
+	f2_arg0.spiderLeg2:setLeftRight(0, 0, 80, 640)
+	f2_arg0.spiderLeg2:setTopBottom(0, 0, 17, 257)
+	f2_arg0.spiderLeg2:setScale(0.9, 0.9)
+end
+CoD[0xE9560377C67385F].__clipsPerState = {
+	DefaultState = {
+		DefaultClip = function(f3_arg0, f3_arg1)
+			f3_arg0:__resetProperties()
+			f3_arg0:setupElementClipCounter(7)
+			local f3_local0 = function(f4_arg0)
+				local f4_local0 = function(f5_arg0)
+					local f5_local0 = function(f6_arg0)
+						local f6_local0 = function(f7_arg0)
+							f7_arg0:beginAnimation(610)
+							f7_arg0:setScale(1, 1)
+							f7_arg0:registerEventHandler("transition_complete_keyframe", f3_arg0.clipFinished)
+						end
+						f6_arg0:beginAnimation(659)
+						f6_arg0:setScale(1, 1.04)
+						f6_arg0:registerEventHandler("transition_complete_keyframe", f6_local0)
+					end
+					f5_arg0:beginAnimation(650)
+					f5_arg0:setScale(1, 1)
+					f5_arg0:registerEventHandler("transition_complete_keyframe", f5_local0)
+				end
+				f3_arg0.backwebs:beginAnimation(1000)
+				f3_arg0.backwebs:setScale(1, 1.04)
+				f3_arg0.backwebs:registerEventHandler("interrupted_keyframe", f3_arg0.clipInterrupted)
+				f3_arg0.backwebs:registerEventHandler("transition_complete_keyframe", f4_local0)
+			end
+			f3_arg0.backwebs:completeAnimation()
+			f3_arg0.backwebs:setScale(1, 1)
+			f3_local0(f3_arg0.backwebs)
+			f3_arg0.spiderLeg4:beginAnimation(860)
+			f3_arg0.spiderLeg4:registerEventHandler("interrupted_keyframe", f3_arg0.clipInterrupted)
+			f3_arg0.spiderLeg4:registerEventHandler("transition_complete_keyframe", function(element, event)
+				element:playClip("DefaultClip")
+				f3_arg0.clipFinished(element, event)
+			end)
+			local f3_local1 = function(f9_arg0)
+				f3_arg0.spiderLeg3:beginAnimation(640)
+				f3_arg0.spiderLeg3:registerEventHandler("interrupted_keyframe", f3_arg0.clipInterrupted)
+				f3_arg0.spiderLeg3:registerEventHandler("transition_complete_keyframe", function(element, event)
+					element:playClip("DefaultClip")
+					f3_arg0.clipFinished(element, event)
+				end)
+			end
+			f3_arg0.spiderLeg3:completeAnimation()
+			f3_arg0.spiderLeg3:setLeftRight(0, 0, 36, 596)
+			f3_arg0.spiderLeg3:setTopBottom(0, 0, 9, 249)
+			f3_local1(f3_arg0.spiderLeg3)
+			f3_arg0.spiderLeg2:beginAnimation(300)
+			f3_arg0.spiderLeg2:setLeftRight(0, 0, 80, 640)
+			f3_arg0.spiderLeg2:setTopBottom(0, 0, 17, 257)
+			f3_arg0.spiderLeg2:setScale(0.9, 0.9)
+			f3_arg0.spiderLeg2:registerEventHandler("interrupted_keyframe", f3_arg0.clipInterrupted)
+			f3_arg0.spiderLeg2:registerEventHandler("transition_complete_keyframe", function(element, event)
+				element:playClip("DefaultClip")
+				f3_arg0.clipFinished(element, event)
+			end)
+			f3_arg0.spiderLeg:completeAnimation()
+			f3_arg0.spiderLeg:setLeftRight(0, 0, 124, 684)
+			f3_arg0.spiderLeg:setTopBottom(0, 0, 34, 274)
+			f3_arg0.spiderLeg:playClip("DefaultClip")
+			f3_arg0.clipFinished(f3_arg0.spiderLeg)
+			local f3_local2 = function(f12_arg0)
+				local f12_local0 = function(f13_arg0)
+					local f13_local0 = function(f14_arg0)
+						local f14_local0 = function(f15_arg0)
+							f15_arg0:beginAnimation(620)
+							f15_arg0:setScale(1, 1)
+							f15_arg0:registerEventHandler("transition_complete_keyframe", f3_arg0.clipFinished)
+						end
+						f14_arg0:beginAnimation(650)
+						f14_arg0:setScale(0.98, 1.01)
+						f14_arg0:registerEventHandler("transition_complete_keyframe", f14_local0)
+					end
+					f13_arg0:beginAnimation(650)
+					f13_arg0:setScale(1, 1)
+					f13_arg0:registerEventHandler("transition_complete_keyframe", f13_local0)
+				end
+				f3_arg0.frontWebs:beginAnimation(1000)
+				f3_arg0.frontWebs:setScale(0.98, 1.01)
+				f3_arg0.frontWebs:registerEventHandler("interrupted_keyframe", f3_arg0.clipInterrupted)
+				f3_arg0.frontWebs:registerEventHandler("transition_complete_keyframe", f12_local0)
+			end
+			f3_arg0.frontWebs:completeAnimation()
+			f3_arg0.frontWebs:setLeftRight(0, 0, 3, 963)
+			f3_arg0.frontWebs:setTopBottom(0, 0, 3, 243)
+			f3_arg0.frontWebs:setScale(1, 1)
+			f3_local2(f3_arg0.frontWebs)
+			f3_arg0.cropper:completeAnimation()
+			f3_arg0.cropper:setAlpha(1)
+			f3_arg0.clipFinished(f3_arg0.cropper)
+			f3_arg0.nextClip = "DefaultClip"
+		end,
+	},
+}
+CoD[0xE9560377C67385F].__onClose = function(f16_arg0)
+	f16_arg0.spiderLeg4:close()
+	f16_arg0.spiderLeg3:close()
+	f16_arg0.spiderLeg2:close()
+	f16_arg0.spiderLeg:close()
+end
