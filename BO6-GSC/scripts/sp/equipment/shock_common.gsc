@@ -1,0 +1,88 @@
+/*************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: scripts\sp\equipment\shock_common.gsc
+*************************************************/
+
+#using scripts\anim\face;
+#using scripts\asm\asm;
+#using scripts\common\ai;
+#using scripts\engine\utility;
+#namespace shock_common;
+
+function function_55d3e12aa448c6e5(offhand) {
+  if(isDefined(level.g_effect) && !isDefined(level.g_effect["G\xbf\x91 1\f\xdcgpC({7\xe1\x94\xfb\xe3"])) {
+    level.g_effect["\x1fJ\v\x19\xb6\xc6\xb4\xdb\xd8W\x18\xe0\xb0*"] = loadfxasset("%\xd1\x05}\xca\xff\xab\a\xfap\xfd\xfb\xdc7\x1a\xf5Jf\xd0\xb6\x8dTA\x1fA\xb3.n\xbbuN'>j\xa1o\xdd\xa5\xcf\xa8\x13x\xe9\xe8,h#~(%\x12");
+    level.g_effect["\xfe}\xb3R \x84\xf4\x03E\xd2:*`\x94"] = loadfxasset("F\x1a\x06\xef\xe4\xba\xbe\xf1\xe7\xa8f\x14\xbc\xa7\x16\xcah14\x02L\xc8{l\"A\x1f|NAArC^\xe0O\xff\xbb\xceV4\xe7a\x1a");
+    level.g_effect["\xc4\xbd\xb6\x986\xb2t\xeb\vc\x1d\xb4v+"] = loadfxasset("m\xfcC\xa8\xca\xf4\xe9\xfe\xf0\xbd\xefUB\xca\x92\xce\xd2\x88\xe1\xf1\xd0=\x97\xed\xdb\xb3a-\x82\xb0^\xdb^'^\x83\xc1\x19<\xeeb\xf4-\x97");
+    level.g_effect[">\x95\xb6h\xf8S\f\xce\x13=\xceP\xc2\xd4\xebm"] = loadfxasset("\xd9\xf9\x97\x84\\\xf5w0\x13\xb3}\xb52\x85\xe6\x01\x95\x18\xddQ\x82v\x03\xd8\f\xfbw9I\xf0\x1b\xd0\x81\x19A\xc3u\x82\x8cf)\xaa\xa0B>\xb6|\"\"");
+    level.g_effect["gIT\xa7\x1ee\xb3\x91\x13\xbb\x97\xb2\xa5^\x9e|"] = loadfxasset("G\x12\xfe\xed=i\x9b\xfdq\xbcC\xbe{\xad\x03\xb6\xb5j0\xa7#\xd0\a\xce\xfa? c^\xa6\xc9\xe4B\x9b\x05\x1f\x8d\xe5,cV\x8f\a\xcb\x7f\xfc\xa8i\xda");
+    level.g_effect["G\xbf\x91 1\f\xdcgpC({7\xe1\x94\xfb\xe3"] = loadfxasset("\x17\x84\xd3\xf4\xa8\x06Uzop\x18\xe9\xc8\xdd\x8f=&\x97\xfb\x8f@\x02 \x0f\xcf@\xc7y\xb9\x90U\xa9|g\xdb\x96\xb4\xe3c\xe9\xff\x87\\[\x04'|\xb8\xe44");
+  }
+}
+
+function scheduleshock(startdelay, timeout, var_49a8742457993a88) {
+  self notify("\xe4\xf2\xdb\xba\xcdL\xcf\xeeUo\x9e\xfe\xbe\xb9\x1d\xec");
+  self endon("\xe4\xf2\xdb\xba\xcdL\xcf\xeeUo\x9e\xfe\xbe\xb9\x1d\xec");
+  assert(isint(timeout));
+  self endon("\x1e\xfd\xd1\xa2\a");
+
+  if(isDefined(self.ridingvehicle)) {
+    return;
+  }
+
+  if(gettime() < timeout && isalive(self)) {
+    thread function_cde037227289584f();
+  }
+
+  while(ai::function_ee346cd5492bbf05(self)) {
+    waitframe();
+  }
+
+  thread shockendnotify(timeout);
+  self._blackboard.var_143d502a1a78eb20 = gettime();
+  self._blackboard.shockedendtime = timeout;
+
+  if(startdelay > 0) {
+    wait startdelay;
+  }
+
+  if(isDefined(self.shockcallback)) {
+    self[[self.shockcallback]]();
+  }
+
+  if(gettime() < timeout && isalive(self)) {
+    thread function_1e79e515ebf80ffb();
+  }
+}
+
+function private shockendnotify(timeout) {
+  self notify("\xfc\x01\x9f\x1f?\xdb\x02\xfa:H\xd5\x94W7\x99\xba");
+  self endon("\xfc\x01\x9f\x1f?\xdb\x02\xfa:H\xd5\x94W7\x99\xba");
+  assert(isint(timeout));
+  assert(gettime() < timeout);
+  self endon("\x1e\xfd\xd1\xa2\a");
+  self endon("\xf98\xa0\x95\xf6\xdey\xa4\xe3?\xd9\xb70\xf8\xda");
+  wait(timeout - gettime()) / 1000;
+  self notify("@n\xab\x13\b\xf7\x9a\xc5?~L");
+}
+
+function private function_cde037227289584f() {
+  self notify("\\\xdfs\t\xd1\xbf\xd4m\xc2\x93q%Q\nd\xa6");
+  self endon("\\\xdfs\t\xd1\xbf\xd4m\xc2\x93q%Q\nd\xa6");
+  self endon("\xd3\xad\x11\xca%\xf7@\xabk_L\xff\x19");
+
+  if(!self isscriptable()) {
+    return;
+  }
+
+  self setscriptablepartstate("T\x93\xbeP\xff\"\x03\xd1\xafs\xcc\xd3\xea", "\t\xf8\x13\x92\xf9\xce6\xbb\xb7");
+  utility::waittill_any("\x1e\xfd\xd1\xa2\a", "@n\xab\x13\b\xf7\x9a\xc5?~L", "\xf98\xa0\x95\xf6\xdey\xa4\xe3?\xd9\xb70\xf8\xda");
+  self setscriptablepartstate("T\x93\xbeP\xff\"\x03\xd1\xafs\xcc\xd3\xea", "\xf8\x88m");
+}
+
+function private function_1e79e515ebf80ffb() {
+  self notify("\xf5\x1d\"+\x82\xf0\xdeKk\xce$\xa23*\xdf\xcc");
+  self endon("\xf5\x1d\"+\x82\xf0\xdeKk\xce$\xa23*\xdf\xcc");
+  thread face::saygenericdialogue("\xc2AW\xd5\v\xcc3\x1eu");
+  asm::asm_setstate("w#\xc2\xde\x11A\x10\xbdp\xfc\xc6\xcf\xbb-k\"Eg\xf4\xd55\xd8e");
+}
