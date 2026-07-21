@@ -1,0 +1,31 @@
+/***************************************************
+ * Decompiled by ATE47 and Edited by SyndiShanX
+ * Script: mp\maps\mp_m_drainage\mp_m_drainage.gsc
+***************************************************/
+
+main() {
+  _encstr_8F093950FA5203DB0B93705988BEA0DB3A033A3863A1537623BA6F437EAFA9ABB54A38212AC9892B0FD9E04F4FC796494A522868A2DC33E8FFEB7E::main();
+  _encstr_A9A838CB7EDAE097F3779F13132E51F870D2F880220F08D8CA6B7B035312AC1077AF39781D959890B2F7793D87BA6088D787E611F2D4A2B40BFF::main();
+  _encstr_8AF4339B6C4ED2C13A6E976B07BCAD0B83DC79D61CF5B6D791390B4B378576ACBCD61CD75BF51927C24BB9169D56BE331EB8D9CDC6::main();
+  _encstr_93E139E28EA5D238C3C8E6D7E890ED9A791E7D9DEF572A4FA9A8D7CFF0B1DF82AFB93299D92FF2AAD168F3F7A069AFDA9BC4BCCBB3E51A8E3990CF::main();
+  scripts\mp\load::main();
+  level.outofboundstriggers = getEntArray("_encstr_8A720C48B3AB7729A26778B853CB", "_encstr_B2CE0BA1D0FB19FDC54613D9BF");
+  scripts\mp\compass::setupminimap("_encstr_B1751A4FB868B8DA376E09BD5F19F17D13D18F377823E102750F0FB7", "_encstr_8A4B24D87B46D82CCD47CA93AFB1DED683B0B9E6EBDA58E0BEB6E07DADEB8C930BB4DC5876B2");
+  scripts\cp_mp\utility\game_utility::registerarenamap();
+  level.requiresminstartspawns = 0;
+  setDvar("_encstr_83920A488F414D730D6721C8", 8);
+  game["_encstr_991C0AB9ED5B57161FE89B83"] = "_encstr_9A8507BA4040188D08";
+  game["_encstr_B6A70A23CA6659DC91CAE4DC"] = "_encstr_8E8405EA382B2A";
+  game["_encstr_B89F0E58C61B5A599BEBDBAB3A33A5D1"] = "_encstr_8A65065739262C37";
+  game["_encstr_AF030C58B33923F7B2630D1C7C5B"] = "_encstr_924D09EBE0478F23A1B0E4";
+  level.music_style = "_encstr_AD130C5BD24623B1B2D7AC169B47";
+  setDvar("_encstr_82BC0B6CF3A5694AD1CB999527", 5000);
+  thread playerzombiejumpmaxholdwarning();
+}
+
+playerzombiejumpmaxholdwarning() {
+  if(scripts\mp\utility\game::getgametype() == "_encstr_A9B606B0C956B916") {
+    level waittill("_encstr_8C7513227310552215EF8367D7B0AB9E40591D6B68");
+    scripts\engine\utility::exploder("_encstr_93990C86279AE53BB8013945F8DE");
+  }
+}

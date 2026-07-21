@@ -1,0 +1,9 @@
+/**********************************************************
+ * Decompiled by ATE47 and Edited by SyndiShanX
+ * Script: cp\maps\cp_so_estate\cp_so_estate_precache.gsc
+**********************************************************/
+
+main() {
+  scripts\vehicle\decho::main("_encstr_9BC6258B2FD80371E69838D0B21601A7D1DFF039AA29FCDBDBAB096F60A7608F6F08F1DFCFE398", "_encstr_B87511C5AFC221EDB723981807A9D94F695247", "_encstr_A1892A9BCA88E8EBC4A1C5EF5BA078C811CF41B76071B05F12E81F4103F372E20C0AB8804F57B23B7BC02127");
+  scripts\vehicle\mindia8::main("_encstr_A38024ECAC0DC1D75BB41BEB585A93D75B5A37C8961607AFDE072BDCAF13C21B5B7D77B6D7C3", "_encstr_88520840BAB5F918BF78", "_encstr_8F871B9BD8E4B4388EEBCE590D96D81B95BE2DBBE0D75B2DCD8CA51683");
+}

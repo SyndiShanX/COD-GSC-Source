@@ -1,0 +1,112 @@
+/***********************************************
+ * Decompiled by ATE47 and Edited by SyndiShanX
+ * Script: sp\maps\marines\marines_fx.gsc
+***********************************************/
+
+main() {
+  level._effect["vfx_marine_interior_dust_motes_med"] = loadfx("vfx/iw8/level/marines/vfx_marine_interior_dust_motes_med.vfx");
+  level._effect["vfx_bodyfall_dust_lrg"] = loadfx("vfx/iw8/level/marines/vfx_bodyfall_dust_lrg.vfx");
+  level._effect["vfx_dust_puff_sml"] = loadfx("vfx/iw8/level/marines/vfx_dust_puff_sml.vfx");
+  level._effect["vfx_dust_windy_ledge"] = loadfx("vfx/iw8/level/marines/vfx_dust_windy_ledge.vfx");
+  level._effect["vfx_dust_windy_ground"] = loadfx("vfx/iw8/level/marines/vfx_dust_windy_ground.vfx");
+  level._effect["vfx_stpburg_interior_dust_motes_med"] = loadfx("vfx/iw8/level/stpetersburg/vfx_stpburg_interior_dust_motes_med.vfx");
+  level._effect["vfx_hospital_fire"] = loadfx("vfx/iw8/level/marines/vfx_hospital_fire.vfx");
+  level._effect["vfx_vehicle_treadfx_dust_02"] = loadfx("vfx/iw8/veh/scriptables/vfx_vehicle_treadfx_dust_02.vfx");
+  level._effect["vfx_vehicle_treadfx_dust"] = loadfx("vfx/iw8/level/marines/vfx_vehicle_treadfx_dust.vfx");
+  level._effect["vfx_chain_link_gate_collapse"] = loadfx("vfx/iw8/prop/scriptables/vfx_chain_link_gate_collapse.vfx");
+  level._effect["vfx_ceiling_drips_splash_ch"] = loadfx("vfx/iw8/prop/scriptables/vfx_ceiling_drips_splash_ch.vfx");
+  level._effect["vfx_ceiling_drips_splash_ch"] = loadfx("vfx/iw8/prop/scriptables/vfx_ceiling_drips_splash_ch.vfx");
+  level._effect["vfx_ceiling_drips_splash_ch"] = loadfx("vfx/iw8/prop/scriptables/vfx_ceiling_drips_splash_ch.vfx");
+  level._effect["vfx_chain_link_gate_collapse"] = loadfx("vfx/iw8/prop/scriptables/vfx_chain_link_gate_collapse.vfx");
+  level._effect["vfx_chain_link_gate_collapse"] = loadfx("vfx/iw8/prop/scriptables/vfx_chain_link_gate_collapse.vfx");
+  level._effect["vfx_water_drips_splash_ch"] = loadfx("vfx/iw8_mp/gen_amb/vfx_water_drips_splash_ch.vfx");
+  level._effect["vfx_hospital_ceiling_drip"] = loadfx("vfx/iw8/prop/scriptables/vfx_hospital_ceiling_drip.vfx");
+  level._effect["vfx_chain_link_gate_collapse"] = loadfx("vfx/iw8/prop/scriptables/vfx_chain_link_gate_collapse.vfx");
+  level._effect["vfx_chain_link_gate_collapse"] = loadfx("vfx/iw8/prop/scriptables/vfx_chain_link_gate_collapse.vfx");
+  level._effect["vfx_cabinet_dust"] = loadfx("vfx/iw8/level/marines/vfx_cabinet_dust.vfx");
+  level._effect["vfx_dust_motes_med_thick"] = loadfx("vfx/iw8/level/marines/vfx_dust_motes_med_thick.vfx");
+  level._effect["vfx_dust_windy_lrg"] = loadfx("vfx/iw8/level/marines/vfx_dust_windy_lrg.vfx");
+  level._effect["vfx_blood_hit_01"] = loadfx("vfx/iw8/level/marines/vfx_blood_hit_01.vfx");
+  level._effect["vfx_periph_smoke_column_lrg"] = loadfx("vfx/iw8/level/marines/vfx_periph_smoke_column_lrg.vfx");
+  level._effect["vfx_hospital_burst_pipe_jet_body_lrg_"] = loadfx("vfx/iw8/prop/scriptables/vfx_hospital_burst_pipe_jet_body_lrg_.vfx");
+  level._effect["vfx_hospital_burst_pipe_jet_body_med_"] = loadfx("vfx/iw8/prop/scriptables/vfx_hospital_burst_pipe_jet_body_med_.vfx");
+  level._effect["vfx_falling_dust"] = loadfx("vfx/iw8/level/marines/vfx_falling_dust.vfx");
+  level._effect["vfx_hospital_pipe_water_mist"] = loadfx("vfx/iw8/prop/scriptables/vfx_hospital_pipe_water_mist.vfx");
+  level._effect["vfx_hospital_water_pipe_drip"] = loadfx("vfx/iw8/prop/scriptables/vfx_hospital_water_pipe_drip.vfx");
+  level._effect["vfx_hospital_water_puddle_splash"] = loadfx("vfx/iw8/prop/scriptables/vfx_hospital_water_puddle_splash.vfx");
+  level._effect["vfx_hospital_pipe_water_mist"] = loadfx("vfx/iw8/prop/scriptables/vfx_hospital_pipe_water_mist.vfx");
+  level._effect["vfx_explo_tank_rpg"] = loadfx("vfx/iw8/level/marines/vfx_explo_tank_rpg.vfx");
+  level._effect["vfx_tank_death_fire"] = loadfx("vfx/iw8/level/marines/vfx_tank_death_fire.vfx");
+  level._effect["vfx_explo_rpg"] = loadfx("vfx/core/expl/vfx_projectile_exp.vfx");
+  level._effect["vfx_ceiling_falling_dust_debris"] = loadfx("vfx/iw8/level/marines/vfx_ceiling_falling_dust_debris.vfx");
+  level._effect["vfx_aa_distance"] = loadfx("vfx/iw8/level/marines/vfx_aa_distance.vfx");
+  level._effect["vfx_marines_sunflare"] = loadfx("vfx/iw8/level/marines/vfx_marines_sunflare.vfx");
+  level._effect["vfx_smoke_column_distance"] = loadfx("vfx/iw8/level/marines/vfx_smoke_column_distance.vfx");
+  level._effect["ied_explosion_distance"] = loadfx("vfx/iw8/level/marines/ied_explosion_distance.vfx");
+  level._effect["vfx_gun_flashes_indoors"] = loadfx("vfx/iw8/level/marines/vfx_gun_flashes_indoors.vfx");
+  level._effect["vfx_hammer_door_hit"] = loadfx("vfx/iw8/level/marines/vfx_hammer_door_hit.vfx");
+  level._effect["vfx_glass_door_flash"] = loadfx("vfx/iw8/level/marines/vfx_glass_door_flash.vfx");
+  level._effect["vfx_wolfroom_door_breach"] = loadfx("vfx/iw8/level/marines/vfx_wolfroom_door_breach.vfx");
+  level._effect["vfx_vehicle_treadfx_dust"] = loadfx("vfx/iw8/level/marines/vfx_vehicle_treadfx_dust.vfx");
+  level._effect["vfx_ied_explosion_no_rocks"] = loadfx("vfx/iw8/level/marines/vfx_ied_explosion_no_rocks.vfx");
+  level._effect["ied_explosion"] = loadfx("vfx/iw8/level/highway/ied_explosion.vfx");
+  level._effect["vfx_glass_window_flash"] = loadfx("vfx/iw8/level/marines/vfx_glass_window_flash.vfx");
+  level._effect["vfx_ee_manmade_wood_planks_break"] = loadfx("vfx/iw8/level/marines/vfx_ee_manmade_wood_planks_break.vfx");
+  level._effect["vfx_pothole_dirt"] = loadfx("vfx/iw8/level/marines/vfx_pothole_dirt.vfx");
+  level._effect["vfx_car_smolder_lite"] = loadfx("vfx/iw8/level/marines/vfx_car_smolder_lite.vfx");
+  level._effect["vfx_ied_impact_wave"] = loadfx("vfx/iw8/level/marines/vfx_ied_impact_wave.vfx");
+  level._effect["vfx_impact_dust_wall"] = loadfx("vfx/iw8/level/marines/vfx_impact_dust_wall.vfx");
+  level._effect["spawn_on_test"] = loadfx("vfx/iw8/level/marines/spawn_on_test.vfx");
+  level._effect["vfx_ied_linger_debris_runner"] = loadfx("vfx/iw8/level/marines/vfx_ied_linger_debris_runner.vfx");
+  level._effect["vfx_double_door_breach"] = loadfx("vfx/iw8/level/marines/vfx_double_door_breach.vfx");
+  level._effect["vfx_car_smolder"] = loadfx("vfx/iw8/level/marines/vfx_car_smolder.vfx");
+  level._effect["vfx_cockroaches_slow"] = loadfx("vfx/iw8/level/marines/vfx_cockroaches_slow.vfx");
+  level._effect["vfx_car_fire_light"] = loadfx("vfx/iw8/level/marines/vfx_car_fire_light.vfx");
+  level._effect["vfx_lobby_breach"] = loadfx("vfx/iw8/level/marines/vfx_lobby_breach.vfx");
+  level._effect["vfx_constant_motes"] = loadfx("vfx/iw8/level/marines/vfx_constant_motes.vfx");
+  level._effect["vfx_ied_linger"] = loadfx("vfx/iw8/level/marines/vfx_ied_linger.vfx");
+  level._effect["vfx_door_metal_kick"] = loadfx("vfx/iw8/level/marines/vfx_door_metal_kick.vfx");
+  level._effect["vfx_birds_curve"] = loadfx("vfx/iw8/level/marines/vfx_birds_curve.vfx");
+  level._effect["vfx_moths_1"] = loadfx("vfx/iw8/level/gen_amb/vfx_moths_1.vfx");
+  level._effect["vfx_fire_sml"] = loadfx("vfx/iw8/level/marines/vfx_fire_sml.vfx");
+  level._effect["vfx_car_bomb_fire"] = loadfx("vfx/iw8/level/marines/vfx_car_bomb_fire.vfx");
+  level._effect["vfx_car_fire_1"] = loadfx("vfx/iw8/level/marines/vfx_car_fire_1.vfx");
+  level._effect["vfx_electrical_sparks_1"] = loadfx("vfx/iw8/level/marines/vfx_electrical_sparks_1.vfx");
+  level._effect["vfx_estate_birds_burst_01_ch"] = loadfx("vfx/iw8/level/estate/vfx_estate_birds_burst_01_ch.vfx");
+  level._effect["vfx_leaves_blowing_ground"] = loadfx("vfx/iw8/level/marines/vfx_leaves_blowing_ground.vfx");
+  level._effect["vfx_ied_dirt_bubble_tendril"] = loadfx("vfx/iw8/level/marines/vfx_ied_dirt_bubble_tendril.vfx");
+  level._effect["vfx_trash_drift"] = loadfx("vfx/iw8/level/marines/vfx_trash_drift.vfx");
+  level._effect["vfx_trash_drift_1"] = loadfx("vfx/iw8/level/gen_amb/vfx_trash_drift_1.vfx");
+  level._effect["vfx_periph_smoke_column"] = loadfx("vfx/iw8/level/marines/vfx_periph_smoke_column.vfx");
+  level._effect["vfx_grass_blowing"] = loadfx("vfx/iw8/level/marines/vfx_grass_blowing.vfx");
+  level._effect["vfx_leaves_blowing"] = loadfx("vfx/iw8/level/marines/vfx_leaves_blowing.vfx");
+  level._effect["vfx_dust_windy"] = loadfx("vfx/iw8/level/marines/vfx_dust_windy.vfx");
+  level._effect["vfx_ied_smolder"] = loadfx("vfx/iw8/level/marines/vfx_ied_smolder.vfx");
+  level._effect["vfx_ied_dirt_bubble"] = loadfx("vfx/iw8/level/marines/vfx_ied_dirt_bubble.vfx");
+  level._effect["building_explosion_gulag"] = loadfx("vfx/core/expl/building_explosion_gulag.vfx");
+
+  if(!getdvarint("LLQQOPKTKM")) {
+    scripts\sp\maps\marines\gen\marines_fx.gsc::main();
+    scripts\sp\maps\marines\gen\marines_sound.gsc::main();
+    level._effect["ied_explosion"] = loadfx("vfx/iw8/level/highway/ied_explosion.vfx");
+    level._effect["vfx_emb_office_crash_dustpush1"] = loadfx("vfx/iw8/level/embassy/vfx_emb_office_crash_dustpush1.vfx");
+    level._effect["contrail"] = loadfx("vfx/iw8_mp/killstreak/vfx_ac130_contrail.vfx");
+    level._effect["background_aa_tracer_fx"] = loadfx("vfx/iw8/level/marines/vfx_bg_tracer_single");
+    level._effect["temp_tankDeath"] = loadfx("vfx/iw8/level/lab/vfx_temp_lrg_veh_death.vfx");
+    level._effect["vfx_marines_truck_exhaust"] = loadfx("vfx/iw8/veh/scriptables/vfx_marines_truck_exhaust.vfx");
+    level._effect["vfx_muzzle_flash_ar_no_cull"] = loadfx("vfx/iw8/level/highway/muzzle_flash_ar_no_cull.vfx");
+    level._effect["vfx_muz_wheelmg_w"] = loadfx("vfx/iw8_mp/muzflash/vfx_muz_wheelmg_w.vfx");
+    level._effect["vfx_tracer_lmg_wheelson_w"] = loadfx("vfx/iw8/weap/_tracer/vfx_tracer_lmg_wheelson_w.vfx");
+    level._effect["vfx_lab_pipe_explosion"] = loadfx("vfx/iw8/level/lab/vfx_lab_pipe_explosion");
+    level._effect["vfx_triage_blood_pool_1"] = loadfx("vfx/iw8/level/embassy/anims/vfx_triage_blood_pool_1.vfx");
+    level._effect["vfx_triage_bullet_impact"] = loadfx("vfx/iw8/level/embassy/anims/vfx_triage_bullet_impact.vfx");
+    level._effect["vfx_triage_blood_pool_2"] = loadfx("vfx/iw8/level/embassy/anims/vfx_triage_blood_pool_2.vfx");
+    level._effect["vfx_triage_drag_blood_smears"] = loadfx("vfx/iw8/level/embassy/anims/vfx_triage_drag_blood_smears.vfx");
+    level._effect["vfx_drn_smoke_area_linger_01"] = loadfx("vfx/iw8/level/drone/vfx_drn_smoke_area_linger_01.vfx");
+    level._effect["murderhole_bulletimpact"] = loadfx("vfx/iw8/prototype/murderhole_bulletimpact.vfx");
+    level._effect["murderhole_rpg_impact"] = loadfx("vfx/iw8/prototype/murderhole_rpg_impact.vfx");
+    level._effect["murderhole_scope_glint"] = loadfx("vfx/iw8/weap/_sniper/vfx_sniper_glint_base.vfx");
+    level._effect["vfx_estate_smoke_grenade"] = loadfx("vfx/iw8/level/estate/vfx_estate_smoke_grenade.vfx");
+    level._effect["vfx_stango_smk_gren_left"] = loadfx("vfx/iw8/level/highway/vfx_stango_smk_gren_left.vfx");
+  }
+}

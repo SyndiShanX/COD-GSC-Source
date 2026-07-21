@@ -1,0 +1,148 @@
+/***********************************************************
+ * Decompiled by ATE47 and Edited by SyndiShanX
+ * Script: mp\gametypes\br_payload_path_mp_wz_island_0.gsc
+***********************************************************/
+
+toggle_farah_lights(var_0, var_1, var_2) {
+  if(level.mapname != "_encstr_B6AC0D5B0EAFEED3F5B4CDB1587319") {
+    return;
+  }
+  if(!isDefined(level.hudglobalkillcountmax)) {
+    return;
+  }
+  if(!isDefined(level.hudglobalkillcountmax.paths))
+    level.hudglobalkillcountmax.paths = [];
+
+  var_3 = spawnStruct();
+  var_3.nodes = [];
+  var_3.origin = (-11182.4, 20693.5, 1982.11);
+  var_3.script_index = var_0;
+  var_3.initchallengeandeventglobals = var_2;
+  var_3.nodes[0] = var_3;
+  var_4 = var_3.nodes.size;
+  var_5 = spawnStruct();
+  var_5.nodes = [];
+  var_5.origin = (-11182.4, 20693.5, 1982.11);
+  var_5.script_index = var_0 + 1;
+  var_5.initchallengeandeventglobals = var_2 + 1;
+  var_5.nodes[0] = var_5;
+  var_4 = var_5.nodes.size;
+  var_3.nodes[var_4] = spawnStruct();
+  var_3.nodes[var_4].origin = (-11175, 19598.8, 1998.25);
+  var_4 = var_3.nodes.size;
+  var_3.nodes[var_4] = spawnStruct();
+  var_3.nodes[var_4].origin = (-11170.8, 19091.5, 1995.75);
+  var_4 = var_3.nodes.size;
+  var_3.nodes[var_4] = spawnStruct();
+  var_3.nodes[var_4].origin = (-11169.7, 18566.2, 1990.99);
+  var_4 = var_3.nodes.size;
+  var_3.nodes[var_4] = spawnStruct();
+  var_3.nodes[var_4].origin = (-11168.3, 18043.9, 1997.95);
+  var_4 = var_3.nodes.size;
+  var_3.nodes[var_4] = spawnStruct();
+  var_3.nodes[var_4].origin = (-11166.9, 17538.4, 1998.9);
+  var_4 = var_3.nodes.size;
+  var_3.nodes[var_4] = spawnStruct();
+  var_3.nodes[var_4].origin = (-11165.6, 17019.5, 1998.73);
+  var_4 = var_3.nodes.size;
+  var_3.nodes[var_4] = spawnStruct();
+  var_3.nodes[var_4].origin = (-11164.2, 16495.9, 1997.87);
+  var_4 = var_3.nodes.size;
+  var_3.nodes[var_4] = spawnStruct();
+  var_3.nodes[var_4].origin = (-11162.9, 15974.3, 2002.11);
+  var_4 = var_3.nodes.size;
+  var_3.nodes[var_4] = spawnStruct();
+  var_3.nodes[var_4].origin = (-11162.4, 15450.6, 1997.65);
+  var_4 = var_3.nodes.size;
+  var_3.nodes[var_4] = spawnStruct();
+  var_3.nodes[var_4].origin = (-11163, 14941, 1998.12);
+  var_4 = var_3.nodes.size;
+  var_3.nodes[var_4] = spawnStruct();
+  var_3.nodes[var_4].origin = (-11164.1, 14411.6, 1997.65);
+  var_4 = var_3.nodes.size;
+  var_3.nodes[var_4] = spawnStruct();
+  var_3.nodes[var_4].origin = (-11035.7, 13924.8, 1997.74);
+  var_4 = var_3.nodes.size;
+  var_3.nodes[var_4] = spawnStruct();
+  var_3.nodes[var_4].origin = (-10797.6, 13696.3, 1998.46);
+  var_4 = var_3.nodes.size;
+  var_3.nodes[var_4] = spawnStruct();
+  var_3.nodes[var_4].origin = (-10288.7, 13560.4, 1998.13);
+  var_4 = var_3.nodes.size;
+  var_3.nodes[var_4] = spawnStruct();
+  var_3.nodes[var_4].origin = (-9768.55, 13556.4, 1997.21);
+  var_4 = var_3.nodes.size;
+  var_3.nodes[var_4] = spawnStruct();
+  var_3.nodes[var_4].origin = (-9262.33, 13572, 1995.96);
+  var_4 = var_3.nodes.size;
+  var_3.nodes[var_4] = spawnStruct();
+  var_3.nodes[var_4].origin = (-8975.9, 13752.1, 1999.9);
+  var_4 = var_3.nodes.size;
+  var_3.nodes[var_4] = spawnStruct();
+  var_3.nodes[var_4].origin = (-8899.46, 14000.6, 1997.82);
+  var_4 = var_3.nodes.size;
+  var_3.nodes[var_4] = spawnStruct();
+  var_3.nodes[var_4].origin = (-8806.24, 14512.8, 1998.17);
+  var_4 = var_3.nodes.size;
+  var_3.nodes[var_4] = spawnStruct();
+  var_3.nodes[var_4].origin = (-8701.37, 15008.2, 2000.1);
+  var_4 = var_3.nodes.size;
+  var_3.nodes[var_4] = spawnStruct();
+  var_3.nodes[var_4].origin = (-8585.19, 15504.2, 1998.67);
+  var_4 = var_3.nodes.size;
+  var_3.nodes[var_4] = spawnStruct();
+  var_3.nodes[var_4].origin = (-8472.58, 16000.1, 1998.19);
+  var_4 = var_3.nodes.size;
+  var_3.nodes[var_4] = spawnStruct();
+  var_3.nodes[var_4].origin = (-8411.46, 16501.2, 1997.57);
+  var_4 = var_3.nodes.size;
+  var_3.nodes[var_4] = spawnStruct();
+  var_3.nodes[var_4].origin = (-8335.94, 17007.7, 1997.59);
+  var_4 = var_3.nodes.size;
+  var_3.nodes[var_4] = spawnStruct();
+  var_3.nodes[var_4].origin = (-8189.68, 17502.9, 1997.78);
+  var_4 = var_3.nodes.size;
+  var_3.nodes[var_4] = spawnStruct();
+  var_3.nodes[var_4].origin = (-7995.32, 17975.6, 1997.71);
+  var_4 = var_3.nodes.size;
+  var_3.nodes[var_4] = spawnStruct();
+  var_3.nodes[var_4].origin = (-7795.86, 18437.5, 1997.64);
+  var_4 = var_3.nodes.size;
+  var_3.nodes[var_4] = spawnStruct();
+  var_3.nodes[var_4].origin = (-7604.59, 18909.5, 1999.75);
+  var_4 = var_3.nodes.size;
+  var_3.nodes[var_4] = spawnStruct();
+  var_3.nodes[var_4].origin = (-7567.51, 19412.7, 1998.97);
+  var_4 = 0;
+  var_5.nodes[var_4] = spawnStruct();
+  var_5.nodes[var_4].origin = (-7602.72, 20425, 1999.27);
+  var_4 = var_5.nodes.size;
+  var_5.nodes[var_4] = spawnStruct();
+  var_5.nodes[var_4].origin = (-7825.91, 20741.9, 1999.22);
+  var_4 = var_5.nodes.size;
+  var_5.nodes[var_4] = spawnStruct();
+  var_5.nodes[var_4].origin = (-8064.82, 20834, 1998.69);
+  var_4 = var_5.nodes.size;
+  var_5.nodes[var_4] = spawnStruct();
+  var_5.nodes[var_4].origin = (-8591.72, 20807.4, 2000.18);
+  var_4 = var_5.nodes.size;
+  var_5.nodes[var_4] = spawnStruct();
+  var_5.nodes[var_4].origin = (-9111.44, 20803.7, 1998.79);
+  var_4 = var_5.nodes.size;
+  var_5.nodes[var_4] = spawnStruct();
+  var_5.nodes[var_4].origin = (-9573.42, 20996.9, 2000.97);
+  var_4 = var_5.nodes.size;
+  var_5.nodes[var_4] = spawnStruct();
+  var_5.nodes[var_4].origin = (-10066.1, 21104.9, 1998.91);
+  var_4 = var_5.nodes.size;
+  var_5.nodes[var_4] = spawnStruct();
+  var_5.nodes[var_4].origin = (-10579.4, 21134, 1999.57);
+  var_4 = var_5.nodes.size;
+  var_5.nodes[var_4] = spawnStruct();
+  var_5.nodes[var_4].origin = (-11083.6, 21104.4, 1998.49);
+  var_4 = var_5.nodes.size;
+  var_5.nodes[var_4] = spawnStruct();
+  var_5.nodes[var_4].origin = (-11191.5, 20873.6, 1998.73);
+  level.hudglobalkillcountmax.paths[level.hudglobalkillcountmax.paths.size] = var_3;
+  level.hudglobalkillcountmax.paths[level.hudglobalkillcountmax.paths.size] = var_5;
+}

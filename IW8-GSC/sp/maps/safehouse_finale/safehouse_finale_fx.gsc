@@ -1,0 +1,114 @@
+/************************************************************
+ * Decompiled by ATE47 and Edited by SyndiShanX
+ * Script: sp\maps\safehouse_finale\safehouse_finale_fx.gsc
+************************************************************/
+
+main() {
+  level._effect["vfx_safehouse_sparks_ground_02"] = loadfx("vfx/iw8/level/safehouse/vfx_safehouse_sparks_ground_02.vfx");
+  level._effect["vfx_truck_tire_dust_static"] = loadfx("vfx/iw8/level/safehouse/vfx_truck_tire_dust_static.vfx");
+  level._effect["vfx_veh_headlight_pindia_right_nolight"] = loadfx("vfx/iw8/level/safehouse/vfx_veh_headlight_pindia_right_nolight.vfx");
+  level._effect["vfx_veh_headlight_pindia_left_nolight"] = loadfx("vfx/iw8/level/safehouse/vfx_veh_headlight_pindia_left_nolight.vfx");
+  level._effect["vfx_safehouse_end_embers"] = loadfx("vfx/iw8/level/safehouse/vfx_safehouse_end_embers.vfx");
+  level._effect["vfx_safehouse_end_amb_smk_sml"] = loadfx("vfx/iw8/level/safehouse/vfx_safehouse_end_amb_smk_sml.vfx");
+  level._effect["vfx_safehouse_oil_fire_sml"] = loadfx("vfx/iw8/level/safehouse/vfx_safehouse_oil_fire_sml.vfx");
+  level._effect["vfx_pic_destruction_decal"] = loadfx("vfx/iw8/level/piccadilly/vfx_pic_destruction_decal.vfx");
+  level._effect["vfx_safehouse_end_amb_smk"] = loadfx("vfx/iw8/level/safehouse/vfx_safehouse_end_amb_smk.vfx");
+  level._effect["vfx_safehouse_end_heli_smk"] = loadfx("vfx/iw8/level/safehouse/vfx_safehouse_end_heli_smk.vfx");
+  level._effect["vfx_safehouse_stadium_flare_end"] = loadfx("vfx/iw8/level/safehouse/vfx_safehouse_stadium_flare_end.vfx");
+  level._effect["vfx_safehouse_interior_dust_motes_light"] = loadfx("vfx/iw8/level/safehouse/vfx_safehouse_interior_dust_motes_light.vfx");
+  level._effect["vfx_safehouse_finale_drone_contrails"] = loadfx("vfx/iw8/level/safehouse/vfx_safehouse_finale_drone_contrails.vfx");
+  level._effect["vfx_shf_bunker_fire_sparks_twirl_med01"] = loadfx("vfx/iw8/level/safehouse/vfx_shf_bunker_fire_sparks_twirl_med01.vfx");
+  level._effect["vfx_tank_death_exp_plume"] = loadfx("vfx/iw8/veh/bromeo/vfx_tank_death_exp_plume.vfx");
+  level._effect["vfx_safehouse_finale_tank_death_exp"] = loadfx("vfx/iw8/level/safehouse/vfx_safehouse_finale_tank_death_exp.vfx");
+  level._effect["vfx_safehouse_ally_drone_impact"] = loadfx("vfx/iw8/level/safehouse/vfx_safehouse_ally_drone_impact.vfx");
+  level._effect["vfx_safehouse_camcentr_embers_sml"] = loadfx("vfx/iw8/level/safehouse/vfx_safehouse_camcentr_embers_sml.vfx");
+  level._effect["vfx_safehouse_finale_bunker_dust_linger"] = loadfx("vfx/iw8/level/safehouse/vfx_safehouse_finale_bunker_dust_linger.vfx");
+  level._effect["vfx_safehouse_finale_tarmac_smk_lrg"] = loadfx("vfx/iw8/level/safehouse/vfx_safehouse_finale_tarmac_smk_lrg.vfx");
+  level._effect["vfx_safehouse_finale_birds"] = loadfx("vfx/iw8/level/safehouse/vfx_safehouse_finale_birds.vfx");
+  level._effect["vfx_safehouse_finale_vindia_fire"] = loadfx("vfx/iw8/level/safehouse/vfx_safehouse_finale_vindia_fire.vfx");
+  level._effect["vfx_safehouse_finale_drone_amb_dust"] = loadfx("vfx/iw8/level/safehouse/vfx_safehouse_finale_drone_amb_dust.vfx");
+  level._effect["vfx_safehouse_finale_cam_motes"] = loadfx("vfx/iw8/level/safehouse/vfx_safehouse_finale_cam_motes.vfx");
+  level._effect["vfx_safehouse_finale_dust_house"] = loadfx("vfx/iw8/level/safehouse/vfx_safehouse_finale_dust_house.vfx");
+  level._effect["vfx_safehouse_finale_dust_motes_med"] = loadfx("vfx/iw8/level/safehouse/vfx_safehouse_finale_dust_motes_med.vfx");
+  level._effect["vfx_safehouse_finale_periph_dust"] = loadfx("vfx/iw8/level/safehouse/vfx_safehouse_finale_periph_dust.vfx");
+  level._effect["vfx_safehouse_finale_hanger_am_sparks"] = loadfx("vfx/iw8/level/safehouse/vfx_safehouse_finale_hanger_am_sparks.vfx");
+  level._effect["vfx_safehouse_chopstrike_smk01"] = loadfx("vfx/iw8/level/safehouse/vfx_safehouse_chopstrike_smk01.vfx");
+  level._effect["vfx_veh_headlight_umike_left_container"] = loadfx("vfx/iw8/level/safehouse/vfx_veh_headlight_umike_left_container.vfx");
+  level._effect["vfx_veh_headlight_umike_right_container"] = loadfx("vfx/iw8/level/safehouse/vfx_veh_headlight_umike_right_container.vfx");
+  level._effect["vfx_veh_taillight_umike_right_container"] = loadfx("vfx/iw8/level/safehouse/vfx_veh_taillight_umike_right_container.vfx");
+  level._effect["vfx_veh_taillight_umike_left_container"] = loadfx("vfx/iw8/level/safehouse/vfx_veh_taillight_umike_left_container.vfx");
+  level._effect["vfx_safehouse_stadium_flare"] = loadfx("vfx/iw8/level/safehouse/vfx_safehouse_stadium_flare.vfx");
+  level._effect["vfx_light_mounted_flare"] = loadfx("vfx/iw8/light/vfx_light_mounted_flare.vfx");
+  level._effect["vfx_muz_minigun_chopper_w"] = loadfx("vfx/iw8_mp/muzflash/vfx_muz_minigun_chopper_w.vfx");
+  level._effect["vfx_safehouse_finale_apc_collision"] = loadfx("vfx/iw8/level/safehouse/vfx_safehouse_finale_apc_collision.vfx");
+  level._effect["vfx_safehouse_finale_drone_wingtip_red_lit"] = loadfx("vfx/iw8/level/safehouse/vfx_safehouse_finale_drone_wingtip_red_lit.vfx");
+  level._effect["vfx_safehouse_finale_drone_heat_dist"] = loadfx("vfx/iw8/level/safehouse/vfx_safehouse_finale_drone_heat_dist.vfx");
+  level._effect["vfx_truck_tire_dust"] = loadfx("vfx/iw8/level/safehouse/vfx_truck_tire_dust.vfx");
+  level._effect["vfx_hit_damage_dust"] = loadfx("vfx/iw8/level/safehouse/vfx_hit_damage_dust.vfx");
+  level._effect["vfx_safehouse_finale_windfield"] = loadfx("vfx/iw8/level/safehouse/vfx_safehouse_finale_windfield.vfx");
+  level._effect["vfx_safehouse_sparks_lrg"] = loadfx("vfx/iw8/level/safehouse/vfx_safehouse_sparks_lrg.vfx");
+  level._effect["vfx_safehouse_camcentr_embers"] = loadfx("vfx/iw8/level/safehouse/vfx_safehouse_camcentr_embers.vfx");
+  level._effect["vfx_safehouse_sparks_ground_01"] = loadfx("vfx/iw8/level/safehouse/vfx_safehouse_sparks_ground_01.vfx");
+  level._effect["vfx_moths_2"] = loadfx("vfx/iw8_mp/gen_amb/vfx_moths_2.vfx");
+  level._effect["vfx_safehouse_blowing_sand_openings_01"] = loadfx("vfx/iw8/level/safehouse/vfx_safehouse_blowing_sand_openings_01.vfx");
+  level._effect["vfx_safehouse_red_light_bright"] = loadfx("vfx/iw8/level/safehouse/vfx_safehouse_red_light_bright.vfx");
+  level._effect["vfx_safehouse_flash_red"] = loadfx("vfx/iw8/level/safehouse/vfx_safehouse_flash_red.vfx");
+  level._effect["vfx_safehouse_flare_distant"] = loadfx("vfx/iw8/level/safehouse/vfx_safehouse_flare_distant.vfx");
+  level._effect["vfx_safehouse_finale_dust_slow"] = loadfx("vfx/iw8/level/safehouse/vfx_safehouse_finale_dust_slow.vfx");
+  level._effect["vfx_safehouse_pole_flare"] = loadfx("vfx/iw8/level/safehouse/vfx_safehouse_pole_flare.vfx");
+  level._effect["vfx_safehouse_finale_fire_med"] = loadfx("vfx/iw8/level/safehouse/vfx_safehouse_finale_fire_med.vfx");
+  level._effect["vfx_safehouse_finale_fire_sml"] = loadfx("vfx/iw8/level/safehouse/vfx_safehouse_finale_fire_sml.vfx");
+  level._effect["vfx_safehouse_heli_fuel_fire"] = loadfx("vfx/iw8/level/safehouse/vfx_safehouse_heli_fuel_fire.vfx");
+  level._effect["vfx_safehouse_heli_fuel_explo_02"] = loadfx("vfx/iw8/level/safehouse/vfx_safehouse_heli_fuel_explo_02.vfx");
+  level._effect["vfx_safehouse_heli_fuel_explo_01"] = loadfx("vfx/iw8/level/safehouse/vfx_safehouse_heli_fuel_explo_01.vfx");
+  level._effect["vfx_dust_motes_med"] = loadfx("vfx/iw8/level/gen_amb/vfx_dust_motes_med.vfx");
+  level._effect["vfx_safehouse_fire_lrg_car_02"] = loadfx("vfx/iw8/level/safehouse/vfx_safehouse_fire_lrg_car_02.vfx");
+  level._effect["vfx_safehouse_fire_glow_sml_01"] = loadfx("vfx/iw8/level/safehouse/vfx_safehouse_fire_glow_sml_01.vfx");
+  level._effect["vfx_safehouse_fire_omni_lrg"] = loadfx("vfx/iw8/level/safehouse/vfx_safehouse_fire_omni_lrg.vfx");
+  level._effect["vfx_safehouse_fire_omni_sml"] = loadfx("vfx/iw8/level/safehouse/vfx_safehouse_fire_omni_sml.vfx");
+  level._effect["vfx_safehouse_fire_omni_01"] = loadfx("vfx/iw8/level/safehouse/vfx_safehouse_fire_omni_01.vfx");
+  level._effect["vfx_safehouse_fire_glow_01"] = loadfx("vfx/iw8/level/safehouse/vfx_safehouse_fire_glow_01.vfx");
+  level._effect["vfx_pic_carb2_am_fire_med_car_02_vert"] = loadfx("vfx/iw8/level/piccadilly/vfx_pic_carb2_am_fire_med_car_02_vert.vfx");
+  level._effect["vfx_pic_carb2_am_sparks_twirl_med01"] = loadfx("vfx/iw8/level/piccadilly/vfx_pic_carb2_am_sparks_twirl_med01.vfx");
+  level._effect["vfx_pic_carb2_am_sparks_drift_lrg01"] = loadfx("vfx/iw8/level/piccadilly/vfx_pic_carb2_am_sparks_drift_lrg01.vfx");
+  level._effect["vfx_pic_carb2_am_smk_car_lrg01"] = loadfx("vfx/iw8/level/piccadilly/vfx_pic_carb2_am_smk_car_lrg01.vfx");
+  level._effect["vfx_pic_carb2_am_smk_ground02s"] = loadfx("vfx/iw8/level/piccadilly/vfx_pic_carb2_am_smk_ground02s.vfx");
+  level._effect["vfx_pic_carb2_am_smk_skylayer"] = loadfx("vfx/iw8/level/piccadilly/vfx_pic_carb2_am_smk_skylayer.vfx");
+  level._effect["vfx_pic_carb2_am_smk_ground01"] = loadfx("vfx/iw8/level/piccadilly/vfx_pic_carb2_am_smk_ground01.vfx");
+  level._effect["vfx_pic_carb2_am_fire_med_sticker_01"] = loadfx("vfx/iw8/level/piccadilly/vfx_pic_carb2_am_fire_med_sticker_01.vfx");
+  level._effect["vfx_pic_carb2_am_camcentr_dist_harsh1"] = loadfx("vfx/iw8/level/piccadilly/vfx_pic_carb2_am_camcentr_dist_harsh1.vfx");
+  level._effect["vfx_pic_carb2_am_fire_sml_car_02"] = loadfx("vfx/iw8/level/piccadilly/vfx_pic_carb2_am_fire_sml_car_02.vfx");
+  level._effect["vfx_pic_carb2_am_fire_arm_01"] = loadfx("vfx/iw8/level/piccadilly/vfx_pic_carb2_am_fire_arm_01.vfx");
+  level._effect["vfx_pic_carb2_am_fire_car_wheel_01"] = loadfx("vfx/iw8/level/piccadilly/vfx_pic_carb2_am_fire_car_wheel_01.vfx");
+  level._effect["vfx_pic_carb2_am_fire_sml_car_01"] = loadfx("vfx/iw8/level/piccadilly/vfx_pic_carb2_am_fire_sml_car_01.vfx");
+  level._effect["vfx_pic_carb2_am_fire_xsml_grnd_01"] = loadfx("vfx/iw8/level/piccadilly/vfx_pic_carb2_am_fire_xsml_grnd_01.vfx");
+  level._effect["vfx_pic_carb2_am_fire_med_shroud_01"] = loadfx("vfx/iw8/level/piccadilly/vfx_pic_carb2_am_fire_med_shroud_01.vfx");
+  level._effect["vfx_pic_carb2_am_fire_med_car_01"] = loadfx("vfx/iw8/level/piccadilly/vfx_pic_carb2_am_fire_med_car_01.vfx");
+  level._effect["vfx_pic_carb2_am_fire_lrg_car_01"] = loadfx("vfx/iw8/level/piccadilly/vfx_pic_carb2_am_fire_lrg_car_01.vfx");
+  level._effect["vfx_pic_carb2_am_fire_lrg_grnd_01"] = loadfx("vfx/iw8/level/piccadilly/vfx_pic_carb2_am_fire_lrg_grnd_01.vfx");
+  level._effect["vfx_pic_carb2_am_fire_med_grnd_01"] = loadfx("vfx/iw8/level/piccadilly/vfx_pic_carb2_am_fire_med_grnd_01.vfx");
+  level._effect["vfx_pic_carb2_am_fire_sml_grnd_01"] = loadfx("vfx/iw8/level/piccadilly/vfx_pic_carb2_am_fire_sml_grnd_01.vfx");
+  level._effect["vfx_hit_damage_spark"] = loadfx("vfx/iw8/level/safehouse/vfx_hit_damage_spark.vfx");
+  level._effect["vfx_fire_pool_burn_mid"] = loadfx("vfx/iw8/level/safehouse/vfx_fire_pool_burn_mid.vfx");
+  level._effect["vfx_fire_pool_burn_wall"] = loadfx("vfx/iw8/level/safehouse/vfx_fire_pool_burn_wall.vfx");
+  level._effect["vfx_safehouse_finale_bunker_explosion"] = loadfx("vfx/iw8/level/safehouse/vfx_safehouse_finale_bunker_explosion.vfx");
+  level._effect["vfx_safehouse_finale_bunker_explosion_2"] = loadfx("vfx/iw8/level/safehouse/vfx_safehouse_finale_bunker_explosion_2.vfx");
+  level._effect["vfx_safehouse_lingering_smoke"] = loadfx("vfx/iw8/level/safehouse/vfx_safehouse_lingering_smoke.vfx");
+  level._effect["vfx_spr_blowing_sand_flat"] = loadfx("vfx/iw8_mp/level/spear/vfx_spr_blowing_sand_flat.vfx");
+  level._effect["vfx_rc_plane_rotor"] = loadfx("vfx/iw8_mp/killstreak/vfx_rc_plane_rotor.vfx");
+  level._effect["vfx_rc_plane_light_plr"] = loadfx("vfx/iw8_mp/killstreak/vfx_rc_plane_light_plr.vfx");
+  level._effect["vfx_flash_mortar"] = loadfx("vfx/test/norris/vfx_flash_mortar.vfx");
+  level._effect["vfx_pipe_bomb_explo"] = loadfx("vfx/iw8/level/safehouse/vfx_pipe_bomb_explo.vfx");
+  level._effect["vfx_drone_impact"] = loadfx("vfx/iw8/level/safehouse/vfx_safehouse_drone_impact.vfx");
+  level._effect["vfx_hellcannon_fire"] = loadfx("vfx/test/norris/vfx_hell_cannon_fire.vfx");
+  level._effect["vfx_hellcannon_trail"] = loadfx("vfx/iw8/level/safehouse/vfx_safehouse_hellcannon_trail.vfx");
+  level._effect["vfx_muzzle_flash_ar_no_cull"] = loadfx("vfx/iw8/level/highway/muzzle_flash_ar_no_cull.vfx");
+  level._effect["blima_light_cockpit_blue"] = loadfx("vfx/misc/aircraft_light_cockpit_blue");
+  level._effect["blima_light_white_blink_lit"] = loadfx("vfx/core/vehicles/aircraft_light_white_blink_lit");
+  level._effect["blima_light_wingtip_green_lit"] = loadfx("vfx/core/vehicles/aircraft_light_wingtip_green_lit");
+
+  if(!getdvarint("LLQQOPKTKM")) {
+    scripts\sp\maps\safehouse_finale\gen\safehouse_finale_fx.gsc::main();
+    scripts\sp\maps\safehouse_finale\gen\safehouse_finale_sound.gsc::main();
+  }
+}

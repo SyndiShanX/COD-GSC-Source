@@ -1,0 +1,176 @@
+/************************************************
+ * Decompiled by ATE47 and Edited by SyndiShanX
+ * Script: asm\soldier_lw_br\parachutespawn.gsc
+************************************************/
+
+_encstr_9B5F1C16756A6188C55369984B270381429B371F4E233353BA0FE083FF22(var_0, var_1, var_2) {
+  var_3 = randomint(360);
+  var_4 = getdvarint("_encstr_AA0C1F485FA2260DE369071B719B53CB19E718E0EB4D7FE1FA0B888ED6328B9353", 1000);
+  self._encstr_A5890CE26B97CB31A067D3270B95 = getdvarint("_encstr_886C1EE66CC9AF3193AF0B5A7D382CC9B08D1A5DA3591139DB07849596EC86D1", 12000);
+  var_5 = (cos(var_3) * var_4, sin(var_3) * var_4, self._encstr_A5890CE26B97CB31A067D3270B95);
+  self setOrigin(self.origin + var_5, 1);
+  var_6 = vectortoangles(self._encstr_B4870E037398EAC1D071419268301E23 - self.origin);
+  self setplayerangles((0, var_6[1], 0));
+  thread _encstr_9A051C18729D41A007EA3096C2C7AB3986CB58880AB283DBA3EF2097AD2B();
+}
+
+_encstr_9A051C18729D41A007EA3096C2C7AB3986CB58880AB283DBA3EF2097AD2B() {
+  self endon("_encstr_AD75063D571AE108");
+  thread _encstr_9350231EC71B2163EF9B39D8F30909D9CB71AE1B3583C9C753B218C86A9FFF73CB1D278DB0();
+  _encstr_A7E32492187CF1CFD5E2E01DCECF088BDDF21008687B7DF9F84B898F3AC3833646E1C47311BF();
+  _encstr_AB0A1DDCBD1B912DB2277D31E4FA83859CB01B86AEA3CAAF3B563A3816E834();
+  _encstr_BA561DB9BD1B8C4BAC9C7D2627AFE02CE4858D34ABE82BD7CD5BBC46A5D9AC();
+  _encstr_A7941BCDDE63C896ACE4F51339FA38C2C9B08D1A578EB2BE37E00BEE73();
+  _encstr_A7DA1C0F1F89FAD198E37106DB71F0625E9BC79BC32D52AFF869B28D90A8();
+  _encstr_9AE81AB09744A9F34A8AA036620109F1A247A8E047F4C1E7D237214D();
+}
+
+_encstr_A7E32492187CF1CFD5E2E01DCECF088BDDF21008687B7DF9F84B898F3AC3833646E1C47311BF() {
+  self allowedstances("_encstr_A5AD069B231F0BAF");
+  self._encstr_BDEB121236DB2270B380BF4F70A93EAA8DC5DDCF = self.ignoreme;
+  self.ignoreme = 1;
+  self._encstr_8EE11338E4AC6C0DD58EB2FA4B769BB74EAC2CC663 = self.ignoreall;
+  self.ignoreall = 1;
+  self.scripted_mode = 1;
+  self.playing_skit = 1;
+  self.do_immediate_ragdoll = 1;
+  self asmsetstate(self.asmname, "_encstr_92AD135177A2F71B686D0B3FD9974B0D72B089E92B");
+  self._blackboard._id_121D3 = "_encstr_AFB7098753307D72BFD1B3";
+  self show();
+}
+
+_encstr_AB0A1DDCBD1B912DB2277D31E4FA83859CB01B86AEA3CAAF3B563A3816E834() {
+  self endon("_encstr_AD75063D571AE108");
+  var_0 = (self.origin - self._encstr_B4870E037398EAC1D071419268301E23) / 5;
+  self._encstr_AAF611B28138C992AB73431F3F433A0968482B = min(1500, self._encstr_A5890CE26B97CB31A067D3270B95 - 50);
+  self.skydive_dest = self._encstr_B4870E037398EAC1D071419268301E23 + (var_0[0], var_0[1], self._encstr_AAF611B28138C992AB73431F3F433A0968482B);
+}
+
+_encstr_BA561DB9BD1B8C4BAC9C7D2627AFE02CE4858D34ABE82BD7CD5BBC46A5D9AC() {
+  self endon("_encstr_AD75063D571AE108");
+  self.anchor = spawn("_encstr_AD050EE61B93A50E8ED7DB39D29D96B9", self.origin);
+  self.anchor.angles = (self.angles[0], self.angles[1], 0);
+  self linkTo(self.anchor);
+  var_0 = (self._encstr_A5890CE26B97CB31A067D3270B95 - self._encstr_AAF611B28138C992AB73431F3F433A0968482B) * 12 / 10500;
+  var_1 = max(var_0 + randomfloatrange(-2, 2), 5 + randomfloat(2));
+  self.anchor moveTo(self.skydive_dest, var_1);
+  wait(var_1 - 5);
+}
+
+_encstr_A7941BCDDE63C896ACE4F51339FA38C2C9B08D1A578EB2BE37E00BEE73() {
+  var_0 = spawn("_encstr_82DC0DC6CB18BB5744B8C3978DEFB0", self gettagorigin("_encstr_8EEC09159F6238030BFA23"));
+  var_0.angles = self gettagangles("_encstr_8EEC09159F6238030BFA23");
+  var_0 setModel("_encstr_A51527ED035F8A9F2BA0AF1BE8A39932C1A53367E0BB22FAF1987367683A6F1A99BD3A9E56E1BA3FB8");
+  var_0 linkTo(self, "_encstr_8EEC09159F6238030BFA23", (0, 0, 0), (0, 0, 0));
+  self.chute = var_0;
+  var_0 thread _encstr_9B03250FF848DCACE5CB56EBC557F0E2AA5F33A8FD4BEFD138E0E9C02238607272CB73C7CAA032(self);
+}
+
+_encstr_A7DA1C0F1F89FAD198E37106DB71F0625E9BC79BC32D52AFF869B28D90A8() {
+  self.chute scriptmodelplayanim("_encstr_A9CD1BB9464E7DC6DE5BAF8316E42C3643EA3AACEB835736366CDE278C");
+  self._blackboard._id_121D3 = "_encstr_B6200C1308902F6F20507333FDCC";
+  self asmsetstate(self.asmname, "_encstr_972411902370BE67DB5BBB52E625B732589721");
+  thread _encstr_B4772567EF6558C3E74B8E1173370738BA79CF299DCBE8AF0BD2E079ABB73CC055C45DA3227728();
+}
+
+_encstr_9AE81AB09744A9F34A8AA036620109F1A247A8E047F4C1E7D237214D() {
+  thread _encstr_92C51ADCEDB1465A59E4EB4C93EB0EC2930B8D43571DACFAAD7BCE59();
+  thread _encstr_ADE322BB2263FD809FB20775DA491037B37A31406BFBA5F9B4BC1963F9EDF88DEBE2C948();
+}
+
+_encstr_ADE322BB2263FD809FB20775DA491037B37A31406BFBA5F9B4BC1963F9EDF88DEBE2C948() {
+  self endon("_encstr_AD75063D571AE108");
+  wait 1.5;
+  self.chute scriptmodelplayanim("_encstr_B80617528480F1E085B5CF430B2DE3C77B639C5FF9E47B729F");
+}
+
+_encstr_92C51ADCEDB1465A59E4EB4C93EB0EC2930B8D43571DACFAAD7BCE59() {
+  self endon("_encstr_AD75063D571AE108");
+  var_0 = max(self._encstr_AAF611B28138C992AB73431F3F433A0968482B * 6 / 1500, 5.0);
+  self.anchor moveTo(self._encstr_B4870E037398EAC1D071419268301E23, var_0, var_0 / 2, var_0 / 2);
+  wait(var_0 - 1.5);
+  self._blackboard._id_121D3 = "_encstr_8820081976CAE1084E87";
+  self.chute scriptmodelplayanim("_encstr_8D412686271B87595F9FD998977AD137628BFD05719365C128C7B8388786284D7975FF18177A1549");
+  wait 3.4;
+  self.chute delete();
+  self.chute notify("_encstr_AD2413BBFAF6AF2651C7638128C383D3A14A5C9F9D");
+  thread _encstr_99D81F73DF601FAFBD5BE90263988316C8AB1BE07308E7AFD510D23A886DDF0D88();
+}
+
+_encstr_99D81F73DF601FAFBD5BE90263988316C8AB1BE07308E7AFD510D23A886DDF0D88() {
+  self endon("_encstr_AD75063D571AE108");
+  self.anchor.origin = self._encstr_B4870E037398EAC1D071419268301E23;
+  self unlink();
+  self setplayerangles((0, self.anchor.angles[1], 0));
+
+  if(isDefined(self.anchor))
+    self.anchor delete();
+
+  self allowedstances("_encstr_922406F1A6FD5E05", "_encstr_A5AD069B231F0BAF", "_encstr_B13D076BED70539F23");
+  self.playing_skit = undefined;
+  self.ignoreall = self._encstr_8EE11338E4AC6C0DD58EB2FA4B769BB74EAC2CC663;
+  self._encstr_8EE11338E4AC6C0DD58EB2FA4B769BB74EAC2CC663 = undefined;
+  self.ignoreme = self._encstr_BDEB121236DB2270B380BF4F70A93EAA8DC5DDCF;
+  self._encstr_BDEB121236DB2270B380BF4F70A93EAA8DC5DDCF = undefined;
+  self.scripted_mode = 0;
+  self._encstr_ACE90F9CE316DB988E3050781D8BB2D5C7 = 0;
+  self.hasplayedvignetteanim = 1;
+  self notify("_encstr_B6EB0DE209913FB39807A3A03B78BF");
+  wait 0.1;
+  self.do_immediate_ragdoll = undefined;
+  self._blackboard._id_121D3 = "_encstr_8267056410C669";
+}
+
+_encstr_9A4C2C3388B0AB6CFBB8D13A80B7E277AB67ABD01D1B17B9BF686BD2F03DDF0F40DC205FBB201B3E7340C2FA7071(var_0) {
+  self._encstr_B4870E037398EAC1D071419268301E23 = getgroundposition(var_0 + (0, 0, 128), 64);
+  self._encstr_ACE90F9CE316DB988E3050781D8BB2D5C7 = 1;
+}
+
+_encstr_991B2DAB6058439403504992381F8A0F33DF033885A38FD117F0836A98A547E7E8B498A71348B3A6EB688B83D0973B(var_0) {
+  self._encstr_B4870E037398EAC1D071419268301E23 = getgroundposition(var_0.origin + (0, 0, 128), 64);
+  self._encstr_ACE90F9CE316DB988E3050781D8BB2D5C7 = 1;
+}
+
+_encstr_85BA205B10B17FC7F16E0F2A06DEE704CFA832A25003321FE95B2D349563338E57E8(var_0, var_1, var_2, var_3) {
+  if(getdvarint("_encstr_B80419FA96CDD9527BC1C7EFA9530953433E84F3851BD188219883", 0) == 0)
+    return 0;
+
+  return istrue(self._encstr_ACE90F9CE316DB988E3050781D8BB2D5C7);
+}
+
+_encstr_9350231EC71B2163EF9B39D8F30909D9CB71AE1B3583C9C753B218C86A9FFF73CB1D278DB0() {
+  self endon("_encstr_AD2413BBFAF6AF2651C7638128C383D3A14A5C9F9D");
+  self waittill("_encstr_AD75063D571AE108");
+
+  if(isDefined(self.anchor))
+    self.anchor delete();
+}
+
+_encstr_960D25AE4028880B6760676313C917718836C791D0A0AB7143F2B158681B18B02DCA5F24A0BDFD(var_0, var_1, var_2, var_3) {
+  return isDefined(self._blackboard._id_121D3) && self._blackboard._id_121D3 == var_3;
+}
+
+_encstr_B4772567EF6558C3E74B8E1173370738BA79CF299DCBE8AF0BD2E079ABB73CC055C45DA3227728() {
+  self endon("_encstr_AD75063D571AE108");
+  wait 3.5;
+  self asmfireevent(self.asmname, "_encstr_B4BA07CC5ADCB4CDD0");
+}
+
+_encstr_9B03250FF848DCACE5CB56EBC557F0E2AA5F33A8FD4BEFD138E0E9C02238607272CB73C7CAA032(var_0) {
+  self endon("_encstr_AD75063D571AE108");
+  var_0 waittill("_encstr_AD75063D571AE108");
+  self unlink();
+  self movez(100, 2);
+  wait 2;
+  self delete();
+}
+
+_encstr_8B8C23620D086C0993086128AAA16B4BAE9B2670A049F2F79B593AD9109D784DF3B9894BC8(var_0, var_1, var_2) {
+  self endon(var_1 + "_encstr_A3DB0AF5332DDCD237D0AC8C");
+  var_3 = scripts\asm\asm::asm_getanim(var_0, var_1);
+  self aisetanim(var_1, var_3);
+  var_4 = scripts\asm\asm::asm_donotetracks(var_0, var_1, scripts\asm\asm::asm_getnotehandler(var_0, var_1));
+
+  if(var_4 == "_encstr_B6B30A278FC7F078673A0B11")
+    var_4 = scripts\asm\asm::asm_donotetracks(var_0, var_1, scripts\asm\asm::asm_getnotehandler(var_0, var_1));
+}

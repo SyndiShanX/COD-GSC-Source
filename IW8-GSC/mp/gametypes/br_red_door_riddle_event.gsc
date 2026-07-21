@@ -1,0 +1,123 @@
+/*****************************************************
+ * Decompiled by ATE47 and Edited by SyndiShanX
+ * Script: mp\gametypes\br_red_door_riddle_event.gsc
+*****************************************************/
+
+init() {
+  if(getdvarint("_encstr_B863160AB9408FEAFE7F67374DA7D0E77B23CA14B1087452", 0) == 0) {
+    return;
+  }
+  level._id_12AAF = spawnStruct();
+  level._id_12AAF._id_138B0 = ["_encstr_8EC518036120AAFAE896AA7309A13E1381ED8FC31F48D79F2293", "_encstr_88CD18397BF72AC393D7AE5D0BA905CBAB9E5F3A833F1B2FC999", "_encstr_8AD318A7A036FE407998EF40BE37B04B0A9AE54BF3163DE8CB3F", "_encstr_93DD184687F53139DAEBDCD1C6BE37D5D64C2B93DCFA99EB26C0", "_encstr_87E31846877D899CDAD76E1DC67DDCABB6262B27DCD786FAC481", "_encstr_8FEB186C4087FB5055970F9CCE4FBAFB8028F7BA32CF1267A212", "_encstr_9AF618919B6726805557E7119331A875779209DBB30F44B17A10", "_encstr_97FD18C83CEB26E4ADEBB9A36CF5375DAD895939DC7DE6BE9803", "_encstr_A5071832E1F5984ED6BE9B8E6CD7CDBA6B132B39DCEB07BE4C06", "_encstr_910D18F948F9381E97E97B833287D8488DAA734DEB51BAF08E37", "_encstr_AB1B198C1911763B4116334B79B0936B289505026769EA7A60C3FF", "_encstr_8211195A6311150B4D0938CC19B950433D32129AA8F7AB11D8BF37", "_encstr_BD0B1981309150068FC143AB2A6F3050B5821B25C349026E1F5F33", "_encstr_990319911E7F301EFA4FDFA9C7A168C0151E39EB6A975276F1DE51", "_encstr_883B19915AB969B343DF303CEFC918837862CD8BB72969BA3E1BE1", "_encstr_B235199401096E3349EE3B5371888B63209D0D0A6F61E21678CB07", "_encstr_A12919D87B29C54BBF4FAE254B4FF0A30D425810A371DB0B9FC917", "_encstr_A322196D50B9D29325AEEF691AA6C2DB53AE016EAFA72B6BAFDE09", "_encstr_955E19723A98B3A228F7232CA791ED5739D1FA9BA3703608E15378", "_encstr_A55319313BC78620F5F74771F35108D5D772E97B136F672201F1C9", "_encstr_915119D20857F6D2A53FFBAB78DF36FB13F085C3C3D0AB6FCF6B92", "_encstr_B85719B598714533150FF0C0D70F88D3FA86BDC63229AD93FF4EF2", "_encstr_A5401982CA684352B867939C37019DC7A9616A6B33C04A1A51A3E8", "_encstr_AD4619BCE0FE553ECFD79F0BFA0840F5A070CDFB4F17E666D99BD2", "_encstr_812D1941D08FC0EE0A9F0F1977F138B045AEE91BBA271A85410E81", "_encstr_AA38194CD9D1B6FB81D6730B39F0D32BE855C5C227296A2EA0033F", "_encstr_871C1923C37D2639ADFA6E1D36FA37EA5BC42B9C37FA198DBE4C60"];
+  level._id_12AAF._id_138AF = [];
+  level._id_12AAF._id_138AF[1] = [12, 1, 25];
+  level._id_12AAF._id_138AF[2] = [20, 8, 5];
+  level._id_12AAF._id_138AF[3] = [11, 9, 14, 7];
+  level._id_12AAF._id_138AF[4] = [20, 15];
+  level._id_12AAF._id_138AF[5] = [6, 9, 14, 1, 12];
+  level._id_12AAF._id_138AF[6] = [18, 5, 19, 20];
+  level._id_12AAF._id_138AF[7] = [1, 2, 15, 22, 5];
+  level._id_12AAF._id_138AF[8] = [20, 8, 5];
+  level._id_12AAF._id_138AF[9] = [2, 15, 14, 5, 19];
+  level._id_12AAF._id_138AF[10] = [15, 6];
+  level._id_12AAF._id_138AF[11] = [19, 9, 24];
+  level._id_12AAF._id_138AF[12] = [6, 5, 5, 20];
+  level._id_12AAF._id_138AF[13] = [4, 5, 16, 20, 8];
+  level._id_12AAF._id_12D38 = [];
+  level._id_12AAF._id_12D37 = (-17065, -1628, -259);
+  level thread amped_victim_starttime();
+}
+
+supersbyextraweapon() {
+  level._id_12AAF = spawnStruct();
+  level._id_12AAF.safesetalpha = ["_encstr_974E278C3CD71339C27D9DCC16B17D8DF6DC1D39F6D87DB957AD89954EB9F5B2D9966EC659930B1D59", "_encstr_B8AD27614B599E20D96929018E831146F2ABC9D5FF92C808E5FDF179727BD98CCAA3530753DBAD4803", "_encstr_AC6327A86BD7C9656AA1DC540662F7515F9BB0904F8C2665F3D546EDDA1BAF98B10BF881D757BB2D8B", "_encstr_8BD9275742B12A638F87AFB3E3A6F9638828CB5A58C0CF9ADD8BB3B7ED5621D4E01307E97180AD52B5", "_encstr_9A0F2668D3B9159A66EE678D11E69F49F8300BCE42E349166565891DC2934F7B832F212EB250052B", "_encstr_BE9E21C5E80135A3899FE0E04FA35E6F6A154556858A87E8654FF0E07BEB9693523FB7"];
+  level._id_12AAF._id_12D38 = [];
+}
+
+amped_victim_starttime() {
+  level waittill("_encstr_A6411333A22528F70BDF89DFF3624DA0C7BF58088F");
+  var_0 = easepower("_encstr_B6AA14984EAFC84B273A7DB5DBAB9B19FACAB3B29B1D", level._id_12AAF._id_12D37);
+  var_0.keepinmap = 1;
+  scripts\engine\scriptable::scriptable_addusedcallback(::adrenaline_crate_spawn);
+}
+
+adrenaline_crate_spawn(var_0, var_1, var_2, var_3, var_4) {
+  if(!isDefined(var_0.type) || var_0.type != "_encstr_B6AA14984EAFC84B273A7DB5DBAB9B19FACAB3B29B1D") {
+    return;
+  }
+  var_5 = var_3 getcurrentweapon();
+  var_6 = 1;
+  var_6 = var_6 &(isDefined(var_5.basename) && var_5.basename == "_encstr_935D114BDD83D7AD59FA3A276C58B9CA7DB638");
+  var_7 = istrue(var_3._id_12AB0);
+  var_8 = var_6 && !var_7 && istrue(var_3.show_charge);
+
+  if(var_8) {
+    var_3 scripts\cp\vehicles\vehicle_compass_cp::_id_120A4("_encstr_A2CE1EB1B737D19CDBC6F59C7BF65BD707BAF4D31B95BED87BB683362B8EB28C");
+    var_9 = getdvarint("_encstr_92F61D98139B51F28E4873C2E6C88DA047660190F19FD4A0C1A2BB686773CD", 5000);
+    var_10 = int(var_9 / 100);
+    var_3 _encstr_9186249B6C39B438E8CD5EB6C1E5CE85B6953AF283599B9789C9AF83D8BAE69159E41776DC8D::_id_12627(var_10);
+    var_3 playsoundtoplayer("_encstr_8F401B8E53C61BCB408763B8AF95289FCFEBB793E0BFB79B531D556BD5", var_3);
+    var_3 thread scripts\mp\hud_message::showsplash("_encstr_99A4208939BE39CA46D732EDB7937D8DB7B9D1E4BD63FAC9DBDEB5BE9B1CC6C2DCA1", 99);
+    var_3._id_12AB0 = 1;
+    var_3.show_charge = undefined;
+  } else
+    var_3 playsoundtoplayer("_encstr_B2331A9215092A3BC9293B92F69197E2D08B071637A8F667E143234A", var_3);
+
+  if(var_1 == "_encstr_AD9206472F550A8C" && var_2 == "_encstr_8E8607AB603B6E4341")
+    var_0 setscriptablepartstate("_encstr_AD9206472F550A8C", "_encstr_95E405AEDCCA91");
+}
+
+_id_13871(var_0, var_1) {
+  if(!isDefined(level._id_12AAF)) {
+    return;
+  }
+  if(istrue(level._id_12AAF._id_12D38[var_0])) {
+    return;
+  }
+  level._id_12AAF._id_12D38[var_0] = 1;
+
+  if(getdvarint("_encstr_8CDA1C676F9E51C2087E53DE33F02CAAF8A513FFDB4D0A9DB0810E65C968", 0))
+    thread _id_1273A(var_0, var_1);
+  else
+    thread _id_12761(var_0, var_1);
+}
+
+_id_1273A(var_0, var_1) {
+  level endon("_encstr_9B1D0BC7932875276230426AA1");
+  var_2 = randomint(level._id_12AAF.safesetalpha.size);
+  var_3 = isDefined(var_2);
+
+  if(!var_3) {
+    return;
+  }
+  wait 4;
+  var_4 = "_encstr_8AF51E230FEBC4C9B6EBB17BE6D1EB9B83590BB65927AF5B95B99B0BB395F506";
+  playsoundatpos(var_1, var_4);
+  wait 2.5;
+  var_5 = level._id_12AAF.safesetalpha[var_2];
+  playsoundatpos(var_1, var_5);
+  level._id_12AAF._id_12D38[var_0] = 0;
+}
+
+_id_12761(var_0, var_1) {
+  level endon("_encstr_9B1D0BC7932875276230426AA1");
+  var_2 = level._id_12AAF._id_138AF[var_0];
+  var_3 = isDefined(var_2);
+
+  if(!var_3) {
+    return;
+  }
+  for(var_4 = 0; var_4 < 4; var_4++) {
+    wait 4;
+    var_5 = "_encstr_8AF51E230FEBC4C9B6EBB17BE6D1EB9B83590BB65927AF5B95B99B0BB395F506";
+    playsoundatpos(var_1, var_5);
+
+    foreach(var_7 in var_2) {
+      wait 2.5;
+      var_8 = level._id_12AAF._id_138B0[var_7];
+      playsoundatpos(var_1, var_8);
+    }
+  }
+
+  level._id_12AAF._id_12D38[var_0] = 0;
+}

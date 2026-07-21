@@ -1,0 +1,12 @@
+/***********************************************
+ * Decompiled by ATE47 and Edited by SyndiShanX
+ * Script: cp\cp_rank.gsc
+***********************************************/
+
+main() {
+  var_0[0] = "_encstr_87DB1F5A6FF26A1759DA7F619FB29BE907CB3025FCEF6FE8F91054535BF9D1A9FB";
+  var_0[1] = "_encstr_BDDB1FFA4DA12B87E530C74B38724B8AEBBC68A51DA3E79EA9E797FF714F867E73";
+  var_0[2] = "_encstr_82DB1F4EC7A8B3C05D2FA7A123CF10631BDB8F1B08E0F72EA6CDBC7DE3FEDA41CB";
+  var_0[3] = "_encstr_92DB1F8A4079E3AFC36FE8298B1F1CE9DB5897C54B7BA0C2D7E9C7635BCFF6F8AC";
+  return var_0;
+}

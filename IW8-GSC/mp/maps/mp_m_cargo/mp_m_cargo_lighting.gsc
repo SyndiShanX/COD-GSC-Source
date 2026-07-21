@@ -1,0 +1,34 @@
+/******************************************************
+ * Decompiled by ATE47 and Edited by SyndiShanX
+ * Script: mp\maps\mp_m_cargo\mp_m_cargo_lighting.gsc
+******************************************************/
+
+main() {
+  thread lighting_setup_dvars();
+}
+
+lighting_setup_dvars() {
+  setDvar("_encstr_88060B49BC98F12F2F63C13907", 1500);
+  setDvar("_encstr_BE360B89A215A69A0AD229B47A", 6);
+  setDvar("_encstr_91070B6BA23D9140AB28DFA4C4", 8);
+  setDvar("_encstr_83920A488F414D730D6721C8", 8);
+  setDvar("_encstr_AB840B539C2A6905C9C43D2815", 1);
+  setDvar("_encstr_BEF80B3DEB91A709E3A5D7AF1D", 1);
+  thread _id_14051();
+}
+
+_id_14051() {
+  setDvar("_encstr_84D20BC8A9B7B51394314358D9", 0.5);
+  setDvar("_encstr_994D0BE8B1B5B26797B05B5AD6", 2);
+  setDvar("_encstr_B4F00B9C51C42D9CC43982265A", 2);
+  setDvar("_encstr_9A400AEB2390F1FD098F0AC5", 0);
+  setDvar("_encstr_B6B020078D09C06067CB8B1183672DB0520DB5FF206E23B82780E038DB175E4BB577", 1);
+  setDvar("_encstr_838A290EED417740C56308B847F3D9A169130886041A3108A7A3E8E8A33D73F3E23F611798418391910730", 4);
+}
+
+_id_11E8D() {
+  setDvar("_encstr_84D20BC8A9B7B51394314358D9", 0.18);
+  setDvar("_encstr_994D0BE8B1B5B26797B05B5AD6", 2);
+  setDvar("_encstr_B4F00B9C51C42D9CC43982265A", 3);
+  setDvar("_encstr_9A400AEB2390F1FD098F0AC5", 1);
+}

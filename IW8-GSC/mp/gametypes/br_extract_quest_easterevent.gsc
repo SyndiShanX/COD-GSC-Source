@@ -1,0 +1,412 @@
+/*********************************************************
+ * Decompiled by ATE47 and Edited by SyndiShanX
+ * Script: mp\gametypes\br_extract_quest_easterevent.gsc
+*********************************************************/
+
+init() {
+  var_0 = _encstr_A6352770DA7223FB2B7390B9689EC1FB1D02C0B883CF4F585B9A50AF45DF0B6949EB78B0DAB5AFEB27::registerquestcategory("_encstr_92E51D89DDBDE0F7F37F3D01677B3D8041F6B3A6071118ADFA0B131D9FC205", 1);
+
+  if(!var_0) {
+    return;
+  }
+  _encstr_A6352770DA7223FB2B7390B9689EC1FB1D02C0B883CF4F585B9A50AF45DF0B6949EB78B0DAB5AFEB27::_id_12B3D("_encstr_92E51D89DDBDE0F7F37F3D01677B3D8041F6B3A6071118ADFA0B131D9FC205", ::overtimebuiltintomatchtimer);
+  _encstr_A6352770DA7223FB2B7390B9689EC1FB1D02C0B883CF4F585B9A50AF45DF0B6949EB78B0DAB5AFEB27::registerremovequestinstance("_encstr_92E51D89DDBDE0F7F37F3D01677B3D8041F6B3A6071118ADFA0B131D9FC205", ::overridefieldupgrade1);
+  _encstr_A6352770DA7223FB2B7390B9689EC1FB1D02C0B883CF4F585B9A50AF45DF0B6949EB78B0DAB5AFEB27::registerquestlocale("_encstr_91E524318DEA95074E2D731DCA0F3A9CC2363AFA592C6E472B9CCAB3ACCD8EBED8F66C166395");
+  _encstr_A6352770DA7223FB2B7390B9689EC1FB1D02C0B883CF4F585B9A50AF45DF0B6949EB78B0DAB5AFEB27::registercreatequestlocale("_encstr_91E524318DEA95074E2D731DCA0F3A9CC2363AFA592C6E472B9CCAB3ACCD8EBED8F66C166395", ::outofboundstimebr);
+  _encstr_A6352770DA7223FB2B7390B9689EC1FB1D02C0B883CF4F585B9A50AF45DF0B6949EB78B0DAB5AFEB27::registercheckiflocaleisavailable("_encstr_91E524318DEA95074E2D731DCA0F3A9CC2363AFA592C6E472B9CCAB3ACCD8EBED8F66C166395", ::outline_ents);
+  _encstr_A6352770DA7223FB2B7390B9689EC1FB1D02C0B883CF4F585B9A50AF45DF0B6949EB78B0DAB5AFEB27::registerremovequestinstance("_encstr_91E524318DEA95074E2D731DCA0F3A9CC2363AFA592C6E472B9CCAB3ACCD8EBED8F66C166395", ::outputfunc);
+  _encstr_A6352770DA7223FB2B7390B9689EC1FB1D02C0B883CF4F585B9A50AF45DF0B6949EB78B0DAB5AFEB27::registerquestcircletick("_encstr_91E524318DEA95074E2D731DCA0F3A9CC2363AFA592C6E472B9CCAB3ACCD8EBED8F66C166395", ::outline_grenade_box);
+  _encstr_A6352770DA7223FB2B7390B9689EC1FB1D02C0B883CF4F585B9A50AF45DF0B6949EB78B0DAB5AFEB27::_id_12B2D("_encstr_91E524318DEA95074E2D731DCA0F3A9CC2363AFA592C6E472B9CCAB3ACCD8EBED8F66C166395", ::outofboundstriggersspawned);
+  _encstr_A6352770DA7223FB2B7390B9689EC1FB1D02C0B883CF4F585B9A50AF45DF0B6949EB78B0DAB5AFEB27::_id_12B30("_encstr_91E524318DEA95074E2D731DCA0F3A9CC2363AFA592C6E472B9CCAB3ACCD8EBED8F66C166395", ::outofboundswatcher);
+  _encstr_A6352770DA7223FB2B7390B9689EC1FB1D02C0B883CF4F585B9A50AF45DF0B6949EB78B0DAB5AFEB27::getquestdata("_encstr_91E524318DEA95074E2D731DCA0F3A9CC2363AFA592C6E472B9CCAB3ACCD8EBED8F66C166395").nextid = 0;
+  _encstr_A6352770DA7223FB2B7390B9689EC1FB1D02C0B883CF4F585B9A50AF45DF0B6949EB78B0DAB5AFEB27::_id_1297C("_encstr_92E51D89DDBDE0F7F37F3D01677B3D8041F6B3A6071118ADFA0B131D9FC205", 1);
+  _encstr_A6352770DA7223FB2B7390B9689EC1FB1D02C0B883CF4F585B9A50AF45DF0B6949EB78B0DAB5AFEB27::_id_12B31("_encstr_92E51D89DDBDE0F7F37F3D01677B3D8041F6B3A6071118ADFA0B131D9FC205", ::optional_params);
+
+  if(!istrue(level.br_plunder_enabled)) {
+    _encstr_9186249B6C39B438E8CD5EB6C1E5CE85B6953AF283599B9789C9AF83D8BAE69159E41776DC8D::thermite_linktostuck();
+    _encstr_9186249B6C39B438E8CD5EB6C1E5CE85B6953AF283599B9789C9AF83D8BAE69159E41776DC8D::thermite_watchglstuck();
+    level._effect["_encstr_A77412B358622F2289451AD6264959CB68A84F67"] = loadfx("_encstr_AC5632E3B071B5DF9B7337026EA8DF6EF3300B3AE02B0D6B51BB2F3A06CE8FF73D49A323D0D1150F2EAD0A3F1F1667FE9D104ACB");
+    _encstr_9186249B6C39B438E8CD5EB6C1E5CE85B6953AF283599B9789C9AF83D8BAE69159E41776DC8D::_id_1278E();
+    _encstr_9186249B6C39B438E8CD5EB6C1E5CE85B6953AF283599B9789C9AF83D8BAE69159E41776DC8D::thermite_watchstucktoterrain();
+  }
+
+  if(!_encstr_9186249B6C39B438E8CD5EB6C1E5CE85B6953AF283599B9789C9AF83D8BAE69159E41776DC8D::updateplayerspawninputtype())
+    scripts\engine\scriptable::scriptable_addusedcallback(_encstr_9186249B6C39B438E8CD5EB6C1E5CE85B6953AF283599B9789C9AF83D8BAE69159E41776DC8D::plundersiteused);
+
+  var_1 = getDvar("_encstr_910E10D753B2D116EBE9F921D26FD528CAAD", "_encstr_B40101") == "_encstr_BE180419DAE9" || getDvar("_encstr_910E10D753B2D116EBE9F921D26FD528CAAD", "_encstr_B40101") == "_encstr_8AE1099A0B999F2D28AF15" || getDvar("_encstr_910E10D753B2D116EBE9F921D26FD528CAAD", "_encstr_B40101") == "_encstr_9B1F05BE4B9B52";
+  level.outro_enemy_spawning = scripts\engine\utility::ter_op(var_1, "_encstr_9B62228A0D88354FCD16135BB9A6FBE168A114024388BBC776C8BB42C67FD323E871BD8A", "_encstr_82051D5B3350BFC763E1A74DB1A2053F7DC13BAAB36A2C2F47F3A078F7A0EA");
+  level.outro_dialogue_logic = scripts\engine\utility::ter_op(var_1, "_encstr_B2A9286ECDD19F17A967636588FF3499F043DCDB027733D643D1F3F908E9E0138A91E1A2203B757808F3", "_encstr_818723B35AA5BA58BB91FB9BEF187BF66163B34A307F23A14FABEB37796D1777077039495A");
+
+  if(!isDefined(level._id_127C7.data["_encstr_B4AB16DF8A20F26AC6994BF781FB4359081715A320F8AD93"]._id_1287B)) {
+    level._id_127C7.data["_encstr_B4AB16DF8A20F26AC6994BF781FB4359081715A320F8AD93"]._id_1287B = level._id_127C7.data["_encstr_B4AB16DF8A20F26AC6994BF781FB4359081715A320F8AD93"]._id_14068;
+    level._id_127C7.data["_encstr_B4AB16DF8A20F26AC6994BF781FB4359081715A320F8AD93"]._id_14068 = ::originalloc;
+  }
+
+  if(!isDefined(level._id_127C7.data["_encstr_B4F91169D8BC587FE20B7123436A3F1844BE77"]._id_1287B)) {
+    level._id_127C7.data["_encstr_B4F91169D8BC587FE20B7123436A3F1844BE77"]._id_1287B = level._id_127C7.data["_encstr_B4F91169D8BC587FE20B7123436A3F1844BE77"]._id_14068;
+    level._id_127C7.data["_encstr_B4F91169D8BC587FE20B7123436A3F1844BE77"]._id_14068 = ::originalloc;
+  }
+
+  game["_encstr_B2DA070A5F8BAB87AF"]["_encstr_8285175B4BB9DC96DB37BE2B3CA3E4B036E8D7161B8D56381D"] = "_encstr_8E761160A2A1B3721BE1B938C163FB13538AC8";
+  game["_encstr_B2DA070A5F8BAB87AF"]["_encstr_81C6180D78C823DAF09D47A7D9253369E063091213B0FBD2D6BF"] = "_encstr_B29F1631AAE36DC0162BA9875D7C80BE7FC34BB9F2272610";
+}
+
+originalloc(var_0, var_1, var_2) {
+  var_1.warningbits = var_0.index;
+  var_1 notify("_encstr_A2F40CB9FFAADB511D6268E3CCD4");
+
+  if(var_2 > 0 && istrue(level.br_plunder_enabled) && (getDvar("_encstr_910E10D753B2D116EBE9F921D26FD528CAAD", "_encstr_B40101") == "_encstr_BE180419DAE9" || getDvar("_encstr_910E10D753B2D116EBE9F921D26FD528CAAD", "_encstr_B40101") == "_encstr_8AE1099A0B999F2D28AF15" || getDvar("_encstr_910E10D753B2D116EBE9F921D26FD528CAAD", "_encstr_B40101") == "_encstr_9B1F05BE4B9B52"))
+    [[level._id_127C7.data["_encstr_B4AB16DF8A20F26AC6994BF781FB4359081715A320F8AD93"]._id_1287B]](var_0, var_1, var_2);
+}
+
+overridefieldupgrade1() {
+  _encstr_A6352770DA7223FB2B7390B9689EC1FB1D02C0B883CF4F585B9A50AF45DF0B6949EB78B0DAB5AFEB27::releaseteamonquest(self.team);
+  _encstr_A6352770DA7223FB2B7390B9689EC1FB1D02C0B883CF4F585B9A50AF45DF0B6949EB78B0DAB5AFEB27::uiobjectivehidefromteam(self.team);
+  overwatch_tank_backup(0, undefined);
+
+  if(isDefined(self.get_track_controller_struct))
+    self.get_track_controller_struct _id_13F71();
+
+  self._id_1393B thread ow_current_scrambler_count();
+}
+
+outputfunc() {
+  foreach(var_1 in self.subscribedinstances)
+  var_1 thread _encstr_A6352770DA7223FB2B7390B9689EC1FB1D02C0B883CF4F585B9A50AF45DF0B6949EB78B0DAB5AFEB27::removequestinstance();
+
+  _encstr_A6352770DA7223FB2B7390B9689EC1FB1D02C0B883CF4F585B9A50AF45DF0B6949EB78B0DAB5AFEB27::lastdropedtime();
+  self.soldier_agent_lwfn8 thread _id_12C02();
+}
+
+overtimebuiltintomatchtimer() {
+  var_0 = rocket_missile(self);
+  var_1 = _encstr_A6352770DA7223FB2B7390B9689EC1FB1D02C0B883CF4F585B9A50AF45DF0B6949EB78B0DAB5AFEB27::play_train_speaker_vo("_encstr_92E51D89DDBDE0F7F37F3D01677B3D8041F6B3A6071118ADFA0B131D9FC205", var_0);
+
+  if(!isDefined(var_1))
+    return 0;
+
+  self._id_12C4A = var_1;
+  return 1;
+}
+
+outofboundstimebr(var_0) {
+  _encstr_A6352770DA7223FB2B7390B9689EC1FB1D02C0B883CF4F585B9A50AF45DF0B6949EB78B0DAB5AFEB27::getquestdata("_encstr_91E524318DEA95074E2D731DCA0F3A9CC2363AFA592C6E472B9CCAB3ACCD8EBED8F66C166395").nextid++;
+  var_1 = _encstr_A6352770DA7223FB2B7390B9689EC1FB1D02C0B883CF4F585B9A50AF45DF0B6949EB78B0DAB5AFEB27::createlocaleinstance("_encstr_91E524318DEA95074E2D731DCA0F3A9CC2363AFA592C6E472B9CCAB3ACCD8EBED8F66C166395", "_encstr_92E51D89DDBDE0F7F37F3D01677B3D8041F6B3A6071118ADFA0B131D9FC205", "_encstr_8FF20EC00983100336E4834F3AAA9D78" + _encstr_A6352770DA7223FB2B7390B9689EC1FB1D02C0B883CF4F585B9A50AF45DF0B6949EB78B0DAB5AFEB27::getquestdata("_encstr_91E524318DEA95074E2D731DCA0F3A9CC2363AFA592C6E472B9CCAB3ACCD8EBED8F66C166395").nextid);
+
+  if(!isDefined(var_0)) {
+    var_1.curorigin = (0, 0, 0);
+    var_1.enabled = 0;
+    return var_1;
+  }
+
+  var_2 = "_encstr_B43F0E4671B87173BD8FD73315553AA4";
+
+  if(scripts\cp_mp\utility\game_utility::getmapname() == "_encstr_AFFF0BE590A158DFF3D1238507" || scripts\cp_mp\utility\game_utility::turretlightsonstate())
+    var_2 = "_encstr_8B1613E94F28D44B25F5F38BFB0D73CB91236778C9";
+
+  var_1.playerlist = scripts\mp\utility\teams::getteamdata(self.team, "_encstr_9775086022BE1B413B8B");
+  var_1.soldier_agent_lwfn1 = spawn("_encstr_82DC0DC6CB18BB5744B8C3978DEFB0", var_0.origin);
+  var_1.soldier_agent_lwfn1 setModel(level.outro_dialogue_logic);
+  var_3 = var_1.playerlist[0];
+  var_1.soldier_agent_lwfn1 setotherent(var_3);
+  var_1.soldier_agent_lwfn1 setscriptablepartstate(level.outro_enemy_spawning, var_2);
+  var_1.soldier_agent_lwfn1.playermaxheath = 1;
+  var_1.soldier_agent_lwfn8 = var_1.soldier_agent_lwfn1 getlinkedscriptableinstance();
+  var_1.soldier_agent_lwfn8.audio_shf_kill_hangar_lights = "_encstr_930B07BB1B6B3854FF";
+  var_1.soldier_agent_lwfn8.audio_jugg_spawn = "_encstr_B43F0E4671B87173BD8FD73315553AA4";
+  var_1.soldier_agent_lwfn8.load_relics_from_playlistdvars = "_encstr_95DF070DD22319CA9B";
+  var_1.soldier_agent_lwfn8.little_bird_onexitheavydamagestate = "_encstr_95DF070DD22319CA9B";
+  var_1.soldier_agent_lwfn8._id_1296D = 0;
+  var_1.soldier_agent_lwfn8.playerplunderbankdepositcallback = 1;
+  var_1._id_11985 = var_0;
+  var_1 _encstr_A6352770DA7223FB2B7390B9689EC1FB1D02C0B883CF4F585B9A50AF45DF0B6949EB78B0DAB5AFEB27::init_tape_machine_animations("_encstr_85952BDB33375AE07E886BD7D891B8022BD8A3D9ABF7B23686A87B6358C9635BEBE0ED41B71D5A4529C83763C8", "_encstr_AF5A081BBAC993AC73A3", var_0.origin);
+  var_1.lastcircletick = -1;
+  var_1.curorigin = var_0.origin;
+  _encstr_A6352770DA7223FB2B7390B9689EC1FB1D02C0B883CF4F585B9A50AF45DF0B6949EB78B0DAB5AFEB27::addquestinstance("_encstr_91E524318DEA95074E2D731DCA0F3A9CC2363AFA592C6E472B9CCAB3ACCD8EBED8F66C166395", var_1);
+  return var_1;
+}
+
+outofboundstriggersplanetrace(var_0) {
+  var_1 = spawnStruct();
+  var_1.origin = var_0;
+  var_2 = _encstr_8F4D2A4057AAF8318B1A2801B25657A1EDE7C09883557357D242681D883B85694BDB11407FED0BA9FE2F7616::rocket_missile(var_1);
+  var_3 = _encstr_A6352770DA7223FB2B7390B9689EC1FB1D02C0B883CF4F585B9A50AF45DF0B6949EB78B0DAB5AFEB27::play_train_speaker_vo("_encstr_92E51D89DDBDE0F7F37F3D01677B3D8041F6B3A6071118ADFA0B131D9FC205", var_2);
+  return isDefined(var_3);
+}
+
+_id_12C02() {
+  if(getDvar("_encstr_910E10D753B2D116EBE9F921D26FD528CAAD", "_encstr_B40101") != "_encstr_BE180419DAE9" && getDvar("_encstr_910E10D753B2D116EBE9F921D26FD528CAAD", "_encstr_B40101") != "_encstr_8AE1099A0B999F2D28AF15" && getDvar("_encstr_910E10D753B2D116EBE9F921D26FD528CAAD", "_encstr_B40101") != "_encstr_9B1F05BE4B9B52")
+    self setscriptablepartstate(level.outro_enemy_spawning, "_encstr_95DF070DD22319CA9B");
+
+  if(isDefined(self.heli))
+    self waittill("_encstr_9B7A0AF45D2962A7702893C3");
+
+  self getscriptablelinkedentity() delete();
+}
+
+outline_ents(var_0) {}
+
+outline_grenade_box(var_0, var_1) {
+  if(!isDefined(self.soldier_agent_lwfn1)) {
+    return;
+  }
+  var_2 = gettime();
+
+  if(self.lastcircletick == var_2) {
+    return;
+  }
+  self.lastcircletick = var_2;
+  var_3 = distance2d(self.curorigin, var_0);
+
+  if(var_3 > var_1) {
+    foreach(var_5 in self.subscribedinstances) {
+      _encstr_A6352770DA7223FB2B7390B9689EC1FB1D02C0B883CF4F585B9A50AF45DF0B6949EB78B0DAB5AFEB27::displayteamsplash(var_5.team, "_encstr_9395361640A7FB3018910B3309A87D1FB523839E8B7741215F1B454205EF0B909B3739512F0A392B0A5B221A39F0C1E8C3335E8F2DC51273");
+      level thread _encstr_958123CD8DE42DE0D1B95EDA075E9DC26B56D1F2E0956E7989C9EBC1AE261B2D1BC576DC36::dmztut_luicallback("_encstr_875718B6D2DC6E96EDCD7DBD26A6FA6CD2278DD8B2F5CCB09636", var_5.team, 1);
+      var_5.result = "_encstr_A78F076CA54E1B1B56";
+    }
+
+    _encstr_A6352770DA7223FB2B7390B9689EC1FB1D02C0B883CF4F585B9A50AF45DF0B6949EB78B0DAB5AFEB27::removequestinstance();
+  }
+}
+
+outofboundstriggersspawned(var_0) {
+  originalsubtype(var_0);
+}
+
+outofboundswatcher(var_0) {
+  if(var_0.team == self.subscribedinstances[0].team)
+    overridepointsneeded(var_0);
+}
+
+overwatchent() {
+  objective_showtoplayersinmask(self.objectiveiconid);
+  objective_removeallfrommask(self.objectiveiconid);
+
+  foreach(var_1 in self.subscribedinstances) {
+    foreach(var_3 in scripts\mp\utility\teams::getteamdata(var_1.team, "_encstr_9775086022BE1B413B8B")) {
+      if(!var_3 _encstr_958123CD8DE42DE0D1B95EDA075E9DC26B56D1F2E0956E7989C9EBC1AE261B2D1BC576DC36::isplayeringulag())
+        objective_addclienttomask(self.objectiveiconid, var_3);
+    }
+  }
+}
+
+originalsubtype(var_0) {
+  objective_removeclientfrommask(self.objectiveiconid, var_0);
+}
+
+overridepointsneeded(var_0) {
+  objective_addclienttomask(self.objectiveiconid, var_0);
+}
+
+ow_current_scrambler_count() {
+  self endon("_encstr_A2BD0839CAB6B7CE5919");
+  waittillframeend;
+  overwatchent();
+}
+
+overwatch_tank_backup(var_0, var_1) {
+  var_2 = 0;
+  var_3 = -1;
+
+  if(var_0) {
+    var_2 = var_1 getentitynumber();
+    var_3 = self.overwatch_soldiers_05_bombers;
+  }
+
+  foreach(var_5 in scripts\mp\utility\teams::getteamdata(self.team, "_encstr_9775086022BE1B413B8B")) {
+    var_5 _encstr_A6352770DA7223FB2B7390B9689EC1FB1D02C0B883CF4F585B9A50AF45DF0B6949EB78B0DAB5AFEB27::uiobjectivesetparameter(var_2);
+    var_5 _encstr_A6352770DA7223FB2B7390B9689EC1FB1D02C0B883CF4F585B9A50AF45DF0B6949EB78B0DAB5AFEB27::_id_13EFD(var_3);
+    var_6 = isDefined(var_1) && var_5 == var_1;
+    var_7 = var_0 && var_6;
+    var_5 setclientomnvar("_encstr_BEDE16A3D8587362F9D9716B9F2B289376715A3B66AE371F", var_7);
+  }
+}
+
+takequestitem(var_0) {
+  var_1 = _encstr_A6352770DA7223FB2B7390B9689EC1FB1D02C0B883CF4F585B9A50AF45DF0B6949EB78B0DAB5AFEB27::register_vehicle_spawners(self.team);
+
+  if(isDefined(var_1) && var_1.size > 0) {
+    foreach(var_3 in var_1)
+    var_3.tracknonoobplayerlocation _encstr_A6352770DA7223FB2B7390B9689EC1FB1D02C0B883CF4F585B9A50AF45DF0B6949EB78B0DAB5AFEB27::removequestinstance();
+  }
+
+  var_5 = _encstr_A6352770DA7223FB2B7390B9689EC1FB1D02C0B883CF4F585B9A50AF45DF0B6949EB78B0DAB5AFEB27::createquestinstance("_encstr_92E51D89DDBDE0F7F37F3D01677B3D8041F6B3A6071118ADFA0B131D9FC205", self.team, var_0.index, var_0);
+  var_5 _encstr_A6352770DA7223FB2B7390B9689EC1FB1D02C0B883CF4F585B9A50AF45DF0B6949EB78B0DAB5AFEB27::registerteamonquest(self.team, self);
+  var_5.team = self.team;
+  var_5.tablet = var_0;
+  var_5.overwatch_soldiers_05_bombers = var_0.overwatch_soldiers_05_bombers;
+  var_6 = getdvarint("_encstr_9A872E9B38B0A98A93175EDA132F571AE06313F7D333BBC2E2EB79555B33C3C70A4F9B8D5DD3CF982D0597D45730E518", 240);
+  var_5 _encstr_A6352770DA7223FB2B7390B9689EC1FB1D02C0B883CF4F585B9A50AF45DF0B6949EB78B0DAB5AFEB27::_id_1297D(var_6, 4);
+  var_7 = rocket_missile(var_0);
+  var_8 = var_5 _encstr_A6352770DA7223FB2B7390B9689EC1FB1D02C0B883CF4F585B9A50AF45DF0B6949EB78B0DAB5AFEB27::requestquestlocale("_encstr_91E524318DEA95074E2D731DCA0F3A9CC2363AFA592C6E472B9CCAB3ACCD8EBED8F66C166395", var_7, 1);
+
+  if(!var_8.enabled) {
+    var_5.result = "_encstr_A6270A37B7BED87B8D2C36AC";
+    var_5 _encstr_A6352770DA7223FB2B7390B9689EC1FB1D02C0B883CF4F585B9A50AF45DF0B6949EB78B0DAB5AFEB27::releaseteamonquest(self.team);
+    return;
+  }
+
+  var_8 overwatchent();
+  _encstr_A6352770DA7223FB2B7390B9689EC1FB1D02C0B883CF4F585B9A50AF45DF0B6949EB78B0DAB5AFEB27::uiobjectiveshowtoteam("_encstr_92E51D89DDBDE0F7F37F3D01677B3D8041F6B3A6071118ADFA0B131D9FC205", self.team);
+  _encstr_A6352770DA7223FB2B7390B9689EC1FB1D02C0B883CF4F585B9A50AF45DF0B6949EB78B0DAB5AFEB27::addquestinstance("_encstr_92E51D89DDBDE0F7F37F3D01677B3D8041F6B3A6071118ADFA0B131D9FC205", var_5);
+  _encstr_A6352770DA7223FB2B7390B9689EC1FB1D02C0B883CF4F585B9A50AF45DF0B6949EB78B0DAB5AFEB27::_id_13879("_encstr_92E51D89DDBDE0F7F37F3D01677B3D8041F6B3A6071118ADFA0B131D9FC205", self, self.team);
+
+  if(!level.br_plunder_enabled) {
+    foreach(var_10 in scripts\mp\utility\teams::getteamdata(self.team, "_encstr_9775086022BE1B413B8B"))
+    var_10.plundercount = 0;
+  }
+
+  var_12 = spawnStruct();
+  var_12.excludedplayers = [];
+  var_12.excludedplayers[0] = self;
+  var_12._id_127D5 = _encstr_A6352770DA7223FB2B7390B9689EC1FB1D02C0B883CF4F585B9A50AF45DF0B6949EB78B0DAB5AFEB27::rewardmodifier("_encstr_92E51D89DDBDE0F7F37F3D01677B3D8041F6B3A6071118ADFA0B131D9FC205", _encstr_A6352770DA7223FB2B7390B9689EC1FB1D02C0B883CF4F585B9A50AF45DF0B6949EB78B0DAB5AFEB27::ringing(self.team));
+  _encstr_A6352770DA7223FB2B7390B9689EC1FB1D02C0B883CF4F585B9A50AF45DF0B6949EB78B0DAB5AFEB27::displayteamsplash(self.team, "_encstr_A9E7320118172BFC3BF0B09207C3FB773B5B113A0FBED3E9F7F3B227D18FC0748382F8F1202741DD497B496A88ADFA086B5F9023", var_12);
+  _encstr_A6352770DA7223FB2B7390B9689EC1FB1D02C0B883CF4F585B9A50AF45DF0B6949EB78B0DAB5AFEB27::displayplayersplash(self, "_encstr_A21B3B264EEB1363EACA07394BCDE8EBCA0F8E4E586CD1AF175D2BCD1DEBCD3AC24E1DBE8E85138D598E7D332DCD91ACE47D950B373AAC3956EC56CDE8", var_12);
+  _encstr_A6352770DA7223FB2B7390B9689EC1FB1D02C0B883CF4F585B9A50AF45DF0B6949EB78B0DAB5AFEB27::lookforvehicles(var_5.team, self, 6, _encstr_A6352770DA7223FB2B7390B9689EC1FB1D02C0B883CF4F585B9A50AF45DF0B6949EB78B0DAB5AFEB27::getquestindex("_encstr_92E51D89DDBDE0F7F37F3D01677B3D8041F6B3A6071118ADFA0B131D9FC205"));
+  level thread _encstr_958123CD8DE42DE0D1B95EDA075E9DC26B56D1F2E0956E7989C9EBC1AE261B2D1BC576DC36::dmztut_luicallback("_encstr_8285175B4BB9DC96DB37BE2B3CA3E4B036E8D7161B8D56381D", var_5.team, 1);
+  _id_1328B(var_8, var_0.overwatch_soldiers_05_bombers);
+  var_5.get_track_controller_struct = self;
+
+  foreach(var_10 in level.players) {
+    if(var_10 != self)
+      var_8.soldier_agent_lwfn8 disablescriptablepartplayeruse(level.outro_enemy_spawning, var_10);
+  }
+
+  var_5 overwatch_tank_backup(1, self);
+  var_5 thread _id_14507(self);
+  var_5 thread _id_144B6(self);
+}
+
+_id_1328B(var_0, var_1) {
+  self.overheatreductiontime = 1;
+  self.override_minimap_hide = var_0.soldier_agent_lwfn8.index;
+  self.override_supply_drop_vfx = "_encstr_845B1F61B25C48807B3F8D898F3257E8E10D2B19D8AC784F22FBFFB1F7AA91E894";
+  self.overridefieldupgrade2 = var_1;
+}
+
+_id_13F71() {
+  self.overheatreductiontime = undefined;
+  self.override_minimap_hide = undefined;
+  self.override_supply_drop_vfx = undefined;
+  self.overridefieldupgrade2 = undefined;
+}
+
+order_path_data(var_0) {
+  if(self hasweapon(var_0.weapon)) {
+    var_1 = getcompleteweaponname("_encstr_A7660DA5EE0EAFCCD237D1DC7D6B1C");
+    var_2 = scripts\cp_mp\utility\inventory_utility::iscurrentweapon(var_0.weapon);
+    scripts\cp_mp\utility\inventory_utility::_takeweapon(var_0.weapon);
+    scripts\cp_mp\utility\inventory_utility::_giveweapon(var_1, undefined, undefined, 1);
+
+    if(var_2)
+      scripts\cp_mp\utility\inventory_utility::_switchtoweaponimmediate(var_1);
+  }
+}
+
+operatorsfxalias(var_0) {
+  if(!isDefined(self.overridecountdownmusic))
+    return 0;
+
+  return self.overridecountdownmusic == var_0;
+}
+
+_id_14508(var_0) {
+  self endon("_encstr_A2BD0839CAB6B7CE5919");
+
+  for(;;) {
+    var_0 waittill("_encstr_8A390E27D0D170F2D5A0CE0497ED4A2D");
+
+    if(isDefined(var_0) && !var_0 hasweapon(self.weapon)) {
+      var_1 = _encstr_8331245636CB3BEB9417AAA00397416342DF4DDB4A12D7F86A3B21400FF318B33BC2E86C62AA::test_ai_anim();
+      var_2 = _encstr_8331245636CB3BEB9417AAA00397416342DF4DDB4A12D7F86A3B21400FF318B33BC2E86C62AA::getitemdroporiginandangles(var_1, var_0.origin, var_0.angles, var_0);
+      var_3 = _encstr_8331245636CB3BEB9417AAA00397416342DF4DDB4A12D7F86A3B21400FF318B33BC2E86C62AA::spawnpickup("_encstr_845B1F61B25C48807B3F8D898F3257E8E10D2B19D8AC784F22FBFFB1F7AA91E894", var_2);
+      var_3._id_12C4A = self._id_1393B._id_11985;
+      level thread _encstr_958123CD8DE42DE0D1B95EDA075E9DC26B56D1F2E0956E7989C9EBC1AE261B2D1BC576DC36::dmztut_luicallback("_encstr_839A23C49CFAC4C65DCA0727D2E6E87D951E1DC9C26C1DEB8BAECAE6E8F599C29636572759", var_0.team, 1, 1);
+      _encstr_A6352770DA7223FB2B7390B9689EC1FB1D02C0B883CF4F585B9A50AF45DF0B6949EB78B0DAB5AFEB27::displayteamsplash(var_0.team, "_encstr_87302FFA93706BFD403B8872DB600357854A134359364B794833957BC9C1CFF73B209BCBA180C72E9B298D62F3D0D703DD");
+      var_0 _id_13F71();
+      self.result = "_encstr_BD79059C51C351";
+      thread _encstr_A6352770DA7223FB2B7390B9689EC1FB1D02C0B883CF4F585B9A50AF45DF0B6949EB78B0DAB5AFEB27::removequestinstance();
+      return;
+    }
+  }
+}
+
+_id_14507(var_0) {
+  self endon("_encstr_A2BD0839CAB6B7CE5919");
+  var_1 = var_0.team;
+
+  for(;;) {
+    var_0 waittill("_encstr_AADC14E3520A5B881935437E4138429108A5F8C020C5");
+    level thread _encstr_958123CD8DE42DE0D1B95EDA075E9DC26B56D1F2E0956E7989C9EBC1AE261B2D1BC576DC36::dmztut_luicallback("_encstr_839A23C49CFAC4C65DCA0727D2E6E87D951E1DC9C26C1DEB8BAECAE6E8F599C29636572759", var_1, 1, 1);
+    _encstr_A6352770DA7223FB2B7390B9689EC1FB1D02C0B883CF4F585B9A50AF45DF0B6949EB78B0DAB5AFEB27::displayteamsplash(var_1, "_encstr_87302FFA93706BFD403B8872DB600357854A134359364B794833957BC9C1CFF73B209BCBA180C72E9B298D62F3D0D703DD");
+
+    if(isDefined(var_0))
+      var_0 _id_13F71();
+
+    self.result = "_encstr_BD79059C51C351";
+    thread _encstr_A6352770DA7223FB2B7390B9689EC1FB1D02C0B883CF4F585B9A50AF45DF0B6949EB78B0DAB5AFEB27::removequestinstance();
+    return;
+  }
+}
+
+_id_144B6(var_0) {
+  self endon("_encstr_A2BD0839CAB6B7CE5919");
+
+  for(;;) {
+    var_0 waittill("_encstr_A2F40CB9FFAADB511D6268E3CCD4");
+
+    if(var_0.warningbits == self._id_1393B.soldier_agent_lwfn8.index) {
+      var_1 = "_encstr_A7B812EA407547CA4833868447A895AB9059F2A1" + self.overwatch_soldiers_05_bombers;
+      var_2 = _encstr_A6352770DA7223FB2B7390B9689EC1FB1D02C0B883CF4F585B9A50AF45DF0B6949EB78B0DAB5AFEB27::riotshield_init_cp(self.overwatch_soldiers_05_bombers);
+
+      foreach(var_4 in scripts\mp\utility\teams::getteamdata(self.team, "_encstr_9775086022BE1B413B8B")) {
+        var_4 scripts\cp\vehicles\vehicle_compass_cp::_id_120A4(var_1);
+
+        if(var_2 > 0)
+          var_4 thread scripts\mp\hud_message::showsplash("_encstr_BE3F1CF542F9801093EA79601273D9C801BF736BE85D73F087339029DB73", var_2);
+      }
+
+      self._id_1393B.soldier_agent_lwfn8._id_1296D = 1;
+      logtrophysuccesful(var_0);
+      var_6 = _encstr_A6352770DA7223FB2B7390B9689EC1FB1D02C0B883CF4F585B9A50AF45DF0B6949EB78B0DAB5AFEB27::getquestindex("_encstr_92E51D89DDBDE0F7F37F3D01677B3D8041F6B3A6071118ADFA0B131D9FC205");
+      _encstr_A6352770DA7223FB2B7390B9689EC1FB1D02C0B883CF4F585B9A50AF45DF0B6949EB78B0DAB5AFEB27::lookforvehicles(self.team, var_0, 8, var_6);
+      level thread _encstr_958123CD8DE42DE0D1B95EDA075E9DC26B56D1F2E0956E7989C9EBC1AE261B2D1BC576DC36::dmztut_luicallback("_encstr_81C6180D78C823DAF09D47A7D9253369E063091213B0FBD2D6BF", self.team, 1, 1);
+      self._id_12D2E = self._id_1393B.soldier_agent_lwfn1.origin;
+      self._id_12D2B = self._id_1393B.soldier_agent_lwfn1.angles;
+      self.result = "_encstr_88E30897BDF1B71F7823";
+      thread _encstr_A6352770DA7223FB2B7390B9689EC1FB1D02C0B883CF4F585B9A50AF45DF0B6949EB78B0DAB5AFEB27::removequestinstance();
+      return;
+    }
+  }
+}
+
+logtrophysuccesful(var_0) {
+  level endon("_encstr_9B1D0BC7932875276230426AA1");
+  var_1 = self.team;
+  var_2 = spawnStruct();
+  var_3 = _encstr_A6352770DA7223FB2B7390B9689EC1FB1D02C0B883CF4F585B9A50AF45DF0B6949EB78B0DAB5AFEB27::ringing(var_0.team);
+  var_4 = _encstr_A6352770DA7223FB2B7390B9689EC1FB1D02C0B883CF4F585B9A50AF45DF0B6949EB78B0DAB5AFEB27::getquestindex("_encstr_92E51D89DDBDE0F7F37F3D01677B3D8041F6B3A6071118ADFA0B131D9FC205");
+  var_5 = _encstr_A6352770DA7223FB2B7390B9689EC1FB1D02C0B883CF4F585B9A50AF45DF0B6949EB78B0DAB5AFEB27::rewardtovalue(_encstr_A6352770DA7223FB2B7390B9689EC1FB1D02C0B883CF4F585B9A50AF45DF0B6949EB78B0DAB5AFEB27::rewardtotype("_encstr_92E51D89DDBDE0F7F37F3D01677B3D8041F6B3A6071118ADFA0B131D9FC205"));
+  var_6 = _encstr_A6352770DA7223FB2B7390B9689EC1FB1D02C0B883CF4F585B9A50AF45DF0B6949EB78B0DAB5AFEB27::riotshield_init_cp(self.overwatch_soldiers_05_bombers);
+  var_2._id_121B5 = _encstr_A6352770DA7223FB2B7390B9689EC1FB1D02C0B883CF4F585B9A50AF45DF0B6949EB78B0DAB5AFEB27::_id_121B9(var_4, var_3, var_5, var_6);
+  waitframe();
+  _encstr_A6352770DA7223FB2B7390B9689EC1FB1D02C0B883CF4F585B9A50AF45DF0B6949EB78B0DAB5AFEB27::displayteamsplash(var_1, "_encstr_A3CC30B3A8D62282A3FD4AC2D3AD3BD73960630BD8898CF9C38D17BA452782BF40889BDFC821EF823BA65B37AE0B8B7D88D0", var_2);
+}
+
+rocket_missile(var_0) {
+  var_1 = spawnStruct();
+  var_1._id_12FA3 = "_encstr_8B7F149D563A4A9B581BD12D3B560959B15A83588CB9";
+  var_1._id_12F9F = (var_0.origin[0], var_0.origin[1], 0);
+  var_1._id_12FA6 = 30000;
+  var_1._id_12FA7 = 0;
+  var_1._id_12FA4 = getdvarint("_encstr_92F326CD8DE4EB8993FA8936AB2B1C39B473A3AC8747272C36D1F52D322B2C8D53C2874A0BDCD9B2", 20000);
+  var_1._id_12FA5 = getdvarint("_encstr_921726A397D391C29E8F22BA4305C3C33853738A7309EB6FFAE3379019878FF1584AC84FB678AA57", 15000);
+  var_1._id_12FA1 = 1;
+  var_1._id_12C4A = var_0._id_12C4A;
+  return var_1;
+}
+
+optional_params() {
+  _encstr_A6352770DA7223FB2B7390B9689EC1FB1D02C0B883CF4F585B9A50AF45DF0B6949EB78B0DAB5AFEB27::displayteamsplash(self.team, "_encstr_8FA735757B4186D8B59FC39B848650505AFBC1DDCF6A5579E9F369B3EB4F88F3B217457F77831F4B02CF310E5759F8B5EA23D3A5EF4AE5");
+  level thread _encstr_958123CD8DE42DE0D1B95EDA075E9DC26B56D1F2E0956E7989C9EBC1AE261B2D1BC576DC36::dmztut_luicallback("_encstr_9B9511AD2D379B4BBDE6BE9D95B9FACC2CB48D", self.team, 1);
+}

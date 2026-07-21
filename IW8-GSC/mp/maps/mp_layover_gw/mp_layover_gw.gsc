@@ -1,0 +1,34 @@
+/***************************************************
+ * Decompiled by ATE47 and Edited by SyndiShanX
+ * Script: mp\maps\mp_layover_gw\mp_layover_gw.gsc
+***************************************************/
+
+main() {
+  _start_spawn_modules::keypad_check_levelinput();
+  _encstr_A39A39FFD7C234188B1A3AA870CE5BB71147B71B0317C21A67985BE36330F11F8A5BB91184A2AA78900FE0595F2068B38AA1500BBB68118A61BB22::main();
+  _encstr_A6913866832BC809F3C382680BDDFB01FB3BC0D108F71073982A402003E9979B2ED77DD83F875BC785D220685B3F7556776FE8C7DA0BC88FAA9A::main();
+  _encstr_868C33B8AF5230F953D29049EA1E3BF9B877D2F04B27E893ABFD3445423167635FE7B0E943B1825703672E401FEBCF8960528010D7::main();
+  _encstr_9AB939B936E4A5C1E89BE5DA83CBD6C2C1B979DA38FA632CF2F667CA9CEBECEEBCB507FA360BBCDE3BACC9BE3BDDD7C6A5D9A13A5ADCB38B9D376C::main();
+  scripts\mp\load::main();
+  scripts\cp_mp\utility\game_utility::registerlargemap();
+
+  if(scripts\mp\utility\game::getgametype() == "_encstr_B81904B04E6B" || scripts\mp\utility\game::unset_relic_landlocked()) {
+    if(!isDefined(level.localeid))
+      setDvar("_encstr_A1940DCB06FBCFB577B88A52A01367", 10);
+
+    _encstr_A2D91D6EC6C9B4C1D137CB5B38E59DC26BCA3ABC1C59DCE50B9C5BE29D6E1B::arm_initoutofbounds();
+  } else {
+    level.outofboundstriggers = getEntArray("_encstr_8A720C48B3AB7729A26778B853CB", "_encstr_B2CE0BA1D0FB19FDC54613D9BF");
+    level.kill_border_triggers = getEntArray("_encstr_BEB1142FC808E479552002BF1D5D31A493A067973063", "_encstr_B2CE0BA1D0FB19FDC54613D9BF");
+  }
+
+  setDvar("_encstr_A7341BF848750358B597CF3FC543279965B24AEF507891A0884BC32748", 1);
+  level.music_style = "_encstr_824D0F570306FBDD206071C73B18EF73D5";
+  level.outofboundstriggers = getEntArray("_encstr_8A720C48B3AB7729A26778B853CB", "_encstr_B2CE0BA1D0FB19FDC54613D9BF");
+  scripts\mp\compass::setupminimap("_encstr_9A521AA925234BDACAC36F9F2BA0F99A9A075A694BD775C5DBAF9018");
+  setDvar("_encstr_83920A488F414D730D6721C8", 8);
+  game["_encstr_991C0AB9ED5B57161FE89B83"] = "_encstr_9A8507BA4040188D08";
+  game["_encstr_B6A70A23CA6659DC91CAE4DC"] = "_encstr_8E8405EA382B2A";
+  game["_encstr_B89F0E58C61B5A599BEBDBAB3A33A5D1"] = "_encstr_8A65065739262C37";
+  game["_encstr_AF030C58B33923F7B2630D1C7C5B"] = "_encstr_924D09EBE0478F23A1B0E4";
+}

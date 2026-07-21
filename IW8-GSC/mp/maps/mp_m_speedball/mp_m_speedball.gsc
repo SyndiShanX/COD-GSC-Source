@@ -1,0 +1,50 @@
+/*****************************************************
+ * Decompiled by ATE47 and Edited by SyndiShanX
+ * Script: mp\maps\mp_m_speedball\mp_m_speedball.gsc
+*****************************************************/
+
+main() {
+  _start_rooftop_raid_exfil::keypad_check_levelinput();
+  _encstr_AD023BE61B93A50E8EDCCBB6E0BCD6851CCDE56B077DD6EBCD0795CA46C4C2B1B179DA38FAB67DDCC156AC46260BB1C6EB38C995D858B13495C576E66C::main();
+  _encstr_A7F53A2F6B5A831B73EF2E5D8236E071C8387593730F2AE953705795F8E04168616897B74B7F221AE695F97B1A4A91FD11E91911B0CF7BA5322C689B::main();
+  _encstr_8DC035EAC206F3EB3BD31E318B503DF70BCF8737E87FD20953F823EFF216129228459F3769A0E91E8033FDE8F2EAE5C83044C8A5BA5FEF::main();
+  _encstr_AFEB3B835EA34FFA0940261A40E7F5279B3E57056FAE87C9EF708A9288552EEBB0886D901030078AD120B2FA80AB25A30E81E13F137B671597529A8360::main();
+  scripts\mp\load::main();
+  level.outofboundstriggers = getEntArray("_encstr_8A720C48B3AB7729A26778B853CB", "_encstr_B2CE0BA1D0FB19FDC54613D9BF");
+  scripts\mp\compass::setupminimap("_encstr_A7971B6E050A39F9A30739D037D8764B83A1D1F89A33EBA19C6BC0D02B", "_encstr_8F732586B0783B42F6A1D7F38F96EA7D80D93A0A2ED8C18BD8BB8B4FC350D3B8802177D6016884");
+  scripts\cp_mp\utility\game_utility::registerarenamap();
+  level.requiresminstartspawns = 0;
+  setDvar("_encstr_83920A488F414D730D6721C8", 8);
+  setDvar("_encstr_8AB10B4909EADB6F7B507E783C", 0.01);
+  setDvar("_encstr_B8E20B275451130545274DA6D3", 500);
+  game["_encstr_991C0AB9ED5B57161FE89B83"] = "_encstr_9A8507BA4040188D08";
+  game["_encstr_B6A70A23CA6659DC91CAE4DC"] = "_encstr_8E8405EA382B2A";
+  game["_encstr_B89F0E58C61B5A599BEBDBAB3A33A5D1"] = "_encstr_924D09EBE0478F23A1B0E4";
+  game["_encstr_AF030C58B33923F7B2630D1C7C5B"] = "_encstr_924D09EBE0478F23A1B0E4";
+  level thread signallightsthink();
+
+  if(0)
+    _encstr_B4F71FAB1EBA80F79317BF33330EB4184D77B36242151897EB0B0B33BBC68CC01B::main();
+}
+
+signallightsthink() {
+  wait 2.0;
+  var_0 = getscriptablearray("_encstr_813239D28E93813FA30EB09CD26E17DB7E8C6C676EA7282B5FA306F222EDD0A3439961BA247A7862647EB9F02438587FA6AAB236F728512ACFC9F1", "_encstr_AC110A7F14873B5B3D073009");
+
+  if(var_0.size == 0) {
+    return;
+  }
+  foreach(var_2 in var_0)
+  var_2 setscriptablepartstate("_encstr_8FA906CC80677438", "_encstr_84F80A905797E001114265FD");
+
+  if(!scripts\mp\flags::gameflag("_encstr_BA9F0EC13959DA2C47D8437D91EDB92B"))
+    level scripts\mp\flags::gameflagwait("_encstr_BA9F0EC13959DA2C47D8437D91EDB92B");
+
+  foreach(var_2 in var_0)
+  var_2 setscriptablepartstate("_encstr_8FA906CC80677438", "_encstr_A2B70C8D2D3BA11DF53BC92BB2DC");
+
+  wait 3;
+
+  foreach(var_2 in var_0)
+  var_2 setscriptablepartstate("_encstr_8FA906CC80677438", "_encstr_84F80A905797E001114265FD");
+}
